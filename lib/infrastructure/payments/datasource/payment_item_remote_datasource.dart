@@ -107,6 +107,7 @@ class PaymentItemRemoteDataSource {
     required String transactionCurrency,
     required String paymentDate,
     required String zzAdvice,
+    required bool isMarketPlace,
   }) async {
     final queryData = paymentItemQuery.deleteCustomerPaymentQuery();
     final request = {
@@ -119,6 +120,7 @@ class PaymentItemRemoteDataSource {
       'transactionCurrency': transactionCurrency,
       'valueDate': paymentDate,
       'zzAdvice': zzAdvice,
+      if (isMarketPlace) 'isMarketPlace': isMarketPlace,
     };
     final res = await httpService.request(
       method: 'POST',

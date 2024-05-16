@@ -385,7 +385,7 @@ void main() {
       await tester.pump();
       verify(
         () => mockPaymentSummaryDetailsBloc.add(
-          const PaymentSummaryDetailsEvent.deleteAdvice(),
+          const PaymentSummaryDetailsEvent.deleteAdvice(isMarketPlace: true),
         ),
       ).called(1);
     });

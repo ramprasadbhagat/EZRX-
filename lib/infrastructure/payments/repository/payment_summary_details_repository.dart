@@ -147,6 +147,7 @@ class PaymentSummaryDetailsRepository extends IPaymentSummaryDetailsRepository {
     required CustomerCodeInfo customerCodeInfo,
     required ShipToInfo shipToInfo,
     required PaymentSummaryDetails paymentSummaryDetails,
+    required bool isMarketPlace,
   }) async {
     if (config.appFlavor == Flavor.mock) {
       try {
@@ -170,6 +171,7 @@ class PaymentSummaryDetailsRepository extends IPaymentSummaryDetailsRepository {
             paymentSummaryDetails.transactionCurrency.getOrDefaultValue(''),
         paymentDate: paymentSummaryDetails.paymentDate.apiDateWithDashString,
         zzAdvice: paymentSummaryDetails.zzAdvice.getOrCrash(),
+        isMarketPlace: isMarketPlace,
       );
 
       return isDeleted

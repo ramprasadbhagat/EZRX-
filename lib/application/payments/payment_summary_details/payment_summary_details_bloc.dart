@@ -263,7 +263,7 @@ class PaymentSummaryDetailsBloc
           ),
         );
       },
-      deleteAdvice: (_) async {
+      deleteAdvice: (e) async {
         emit(
           state.copyWith(
             isDeletingPayment: true,
@@ -276,6 +276,7 @@ class PaymentSummaryDetailsBloc
           customerCodeInfo: state.customerCodeInfo,
           shipToInfo: state.shipToInfo,
           paymentSummaryDetails: state.details,
+          isMarketPlace: e.isMarketPlace,
         );
 
         failureOrSuccess.fold(

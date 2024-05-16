@@ -316,6 +316,7 @@ void main() {
             paymentSummaryDetails: paymentSummaryDetails,
             salesOrganization: fakeVNSalesOrganisation,
             shipToInfo: ShipToInfo.empty(),
+            isMarketPlace: false,
           );
 
           expect(result.isRight(), true);
@@ -335,6 +336,7 @@ void main() {
             paymentSummaryDetails: paymentSummaryDetails,
             salesOrganization: fakeVNSalesOrganisation,
             shipToInfo: ShipToInfo.empty(),
+            isMarketPlace: true,
           );
 
           expect(result.isLeft(), true);
@@ -360,6 +362,7 @@ void main() {
                   paymentSummaryDetails.paymentDate.apiDateWithDashString,
               zzAdvice: paymentSummaryDetails.zzAdvice.getOrCrash(),
               shipToCode: ShipToInfo.empty().shipToCustomerCode,
+              isMarketPlace: false,
             ),
           ).thenThrow(MockException());
           final result = await repository.deletePaymentAdvice(
@@ -367,6 +370,7 @@ void main() {
             paymentSummaryDetails: paymentSummaryDetails,
             salesOrganization: fakeVNSalesOrganisation,
             shipToInfo: ShipToInfo.empty(),
+            isMarketPlace: false,
           );
 
           expect(result.isLeft(), true);
@@ -392,6 +396,7 @@ void main() {
                   paymentSummaryDetails.paymentDate.apiDateWithDashString,
               zzAdvice: paymentSummaryDetails.zzAdvice.getOrCrash(),
               shipToCode: ShipToInfo.empty().shipToCustomerCode,
+              isMarketPlace: true,
             ),
           ).thenAnswer(
             (_) async => false,
@@ -401,6 +406,7 @@ void main() {
             paymentSummaryDetails: paymentSummaryDetails,
             salesOrganization: fakeVNSalesOrganisation,
             shipToInfo: ShipToInfo.empty(),
+            isMarketPlace: true,
           );
 
           expect(result.isLeft(), true);
@@ -426,6 +432,7 @@ void main() {
                   paymentSummaryDetails.paymentDate.apiDateWithDashString,
               zzAdvice: paymentSummaryDetails.zzAdvice.getOrCrash(),
               shipToCode: ShipToInfo.empty().shipToCustomerCode,
+              isMarketPlace: false,
             ),
           ).thenAnswer(
             (_) async => true,
@@ -435,6 +442,7 @@ void main() {
             paymentSummaryDetails: paymentSummaryDetails,
             salesOrganization: fakeVNSalesOrganisation,
             shipToInfo: ShipToInfo.empty(),
+            isMarketPlace: false,
           );
 
           expect(result.isRight(), true);

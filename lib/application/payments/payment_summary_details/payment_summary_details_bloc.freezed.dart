@@ -27,7 +27,7 @@ mixin _$PaymentSummaryDetailsEvent {
     required TResult Function() fetchBankInstruction,
     required TResult Function(bool isMarketPlace) fetchAdvice,
     required TResult Function() saveAdvice,
-    required TResult Function() deleteAdvice,
+    required TResult Function(bool isMarketPlace) deleteAdvice,
     required TResult Function() cancelAdvice,
     required TResult Function() viewSavedAdvice,
   }) =>
@@ -46,7 +46,7 @@ mixin _$PaymentSummaryDetailsEvent {
     TResult? Function()? fetchBankInstruction,
     TResult? Function(bool isMarketPlace)? fetchAdvice,
     TResult? Function()? saveAdvice,
-    TResult? Function()? deleteAdvice,
+    TResult? Function(bool isMarketPlace)? deleteAdvice,
     TResult? Function()? cancelAdvice,
     TResult? Function()? viewSavedAdvice,
   }) =>
@@ -65,7 +65,7 @@ mixin _$PaymentSummaryDetailsEvent {
     TResult Function()? fetchBankInstruction,
     TResult Function(bool isMarketPlace)? fetchAdvice,
     TResult Function()? saveAdvice,
-    TResult Function()? deleteAdvice,
+    TResult Function(bool isMarketPlace)? deleteAdvice,
     TResult Function()? cancelAdvice,
     TResult Function()? viewSavedAdvice,
     required TResult orElse(),
@@ -285,7 +285,7 @@ class _$InitializedImpl implements _Initialized {
     required TResult Function() fetchBankInstruction,
     required TResult Function(bool isMarketPlace) fetchAdvice,
     required TResult Function() saveAdvice,
-    required TResult Function() deleteAdvice,
+    required TResult Function(bool isMarketPlace) deleteAdvice,
     required TResult Function() cancelAdvice,
     required TResult Function() viewSavedAdvice,
   }) {
@@ -307,7 +307,7 @@ class _$InitializedImpl implements _Initialized {
     TResult? Function()? fetchBankInstruction,
     TResult? Function(bool isMarketPlace)? fetchAdvice,
     TResult? Function()? saveAdvice,
-    TResult? Function()? deleteAdvice,
+    TResult? Function(bool isMarketPlace)? deleteAdvice,
     TResult? Function()? cancelAdvice,
     TResult? Function()? viewSavedAdvice,
   }) {
@@ -330,7 +330,7 @@ class _$InitializedImpl implements _Initialized {
     TResult Function()? fetchBankInstruction,
     TResult Function(bool isMarketPlace)? fetchAdvice,
     TResult Function()? saveAdvice,
-    TResult Function()? deleteAdvice,
+    TResult Function(bool isMarketPlace)? deleteAdvice,
     TResult Function()? cancelAdvice,
     TResult Function()? viewSavedAdvice,
     required TResult orElse(),
@@ -515,7 +515,7 @@ class _$FetchPaymentSummaryDetailsEventImpl
     required TResult Function() fetchBankInstruction,
     required TResult Function(bool isMarketPlace) fetchAdvice,
     required TResult Function() saveAdvice,
-    required TResult Function() deleteAdvice,
+    required TResult Function(bool isMarketPlace) deleteAdvice,
     required TResult Function() cancelAdvice,
     required TResult Function() viewSavedAdvice,
   }) {
@@ -537,7 +537,7 @@ class _$FetchPaymentSummaryDetailsEventImpl
     TResult? Function()? fetchBankInstruction,
     TResult? Function(bool isMarketPlace)? fetchAdvice,
     TResult? Function()? saveAdvice,
-    TResult? Function()? deleteAdvice,
+    TResult? Function(bool isMarketPlace)? deleteAdvice,
     TResult? Function()? cancelAdvice,
     TResult? Function()? viewSavedAdvice,
   }) {
@@ -559,7 +559,7 @@ class _$FetchPaymentSummaryDetailsEventImpl
     TResult Function()? fetchBankInstruction,
     TResult Function(bool isMarketPlace)? fetchAdvice,
     TResult Function()? saveAdvice,
-    TResult Function()? deleteAdvice,
+    TResult Function(bool isMarketPlace)? deleteAdvice,
     TResult Function()? cancelAdvice,
     TResult Function()? viewSavedAdvice,
     required TResult orElse(),
@@ -724,7 +724,7 @@ class _$FetchPaymentSummaryListEventImpl
     required TResult Function() fetchBankInstruction,
     required TResult Function(bool isMarketPlace) fetchAdvice,
     required TResult Function() saveAdvice,
-    required TResult Function() deleteAdvice,
+    required TResult Function(bool isMarketPlace) deleteAdvice,
     required TResult Function() cancelAdvice,
     required TResult Function() viewSavedAdvice,
   }) {
@@ -746,7 +746,7 @@ class _$FetchPaymentSummaryListEventImpl
     TResult? Function()? fetchBankInstruction,
     TResult? Function(bool isMarketPlace)? fetchAdvice,
     TResult? Function()? saveAdvice,
-    TResult? Function()? deleteAdvice,
+    TResult? Function(bool isMarketPlace)? deleteAdvice,
     TResult? Function()? cancelAdvice,
     TResult? Function()? viewSavedAdvice,
   }) {
@@ -768,7 +768,7 @@ class _$FetchPaymentSummaryListEventImpl
     TResult Function()? fetchBankInstruction,
     TResult Function(bool isMarketPlace)? fetchAdvice,
     TResult Function()? saveAdvice,
-    TResult Function()? deleteAdvice,
+    TResult Function(bool isMarketPlace)? deleteAdvice,
     TResult Function()? cancelAdvice,
     TResult Function()? viewSavedAdvice,
     required TResult orElse(),
@@ -899,7 +899,7 @@ class _$FetchBankInstructionImpl implements _FetchBankInstruction {
     required TResult Function() fetchBankInstruction,
     required TResult Function(bool isMarketPlace) fetchAdvice,
     required TResult Function() saveAdvice,
-    required TResult Function() deleteAdvice,
+    required TResult Function(bool isMarketPlace) deleteAdvice,
     required TResult Function() cancelAdvice,
     required TResult Function() viewSavedAdvice,
   }) {
@@ -921,7 +921,7 @@ class _$FetchBankInstructionImpl implements _FetchBankInstruction {
     TResult? Function()? fetchBankInstruction,
     TResult? Function(bool isMarketPlace)? fetchAdvice,
     TResult? Function()? saveAdvice,
-    TResult? Function()? deleteAdvice,
+    TResult? Function(bool isMarketPlace)? deleteAdvice,
     TResult? Function()? cancelAdvice,
     TResult? Function()? viewSavedAdvice,
   }) {
@@ -943,7 +943,7 @@ class _$FetchBankInstructionImpl implements _FetchBankInstruction {
     TResult Function()? fetchBankInstruction,
     TResult Function(bool isMarketPlace)? fetchAdvice,
     TResult Function()? saveAdvice,
-    TResult Function()? deleteAdvice,
+    TResult Function(bool isMarketPlace)? deleteAdvice,
     TResult Function()? cancelAdvice,
     TResult Function()? viewSavedAdvice,
     required TResult orElse(),
@@ -1091,7 +1091,7 @@ class _$FetchAdviceImpl implements _FetchAdvice {
     required TResult Function() fetchBankInstruction,
     required TResult Function(bool isMarketPlace) fetchAdvice,
     required TResult Function() saveAdvice,
-    required TResult Function() deleteAdvice,
+    required TResult Function(bool isMarketPlace) deleteAdvice,
     required TResult Function() cancelAdvice,
     required TResult Function() viewSavedAdvice,
   }) {
@@ -1113,7 +1113,7 @@ class _$FetchAdviceImpl implements _FetchAdvice {
     TResult? Function()? fetchBankInstruction,
     TResult? Function(bool isMarketPlace)? fetchAdvice,
     TResult? Function()? saveAdvice,
-    TResult? Function()? deleteAdvice,
+    TResult? Function(bool isMarketPlace)? deleteAdvice,
     TResult? Function()? cancelAdvice,
     TResult? Function()? viewSavedAdvice,
   }) {
@@ -1135,7 +1135,7 @@ class _$FetchAdviceImpl implements _FetchAdvice {
     TResult Function()? fetchBankInstruction,
     TResult Function(bool isMarketPlace)? fetchAdvice,
     TResult Function()? saveAdvice,
-    TResult Function()? deleteAdvice,
+    TResult Function(bool isMarketPlace)? deleteAdvice,
     TResult Function()? cancelAdvice,
     TResult Function()? viewSavedAdvice,
     required TResult orElse(),
@@ -1262,7 +1262,7 @@ class _$SaveAdviceImpl implements _SaveAdvice {
     required TResult Function() fetchBankInstruction,
     required TResult Function(bool isMarketPlace) fetchAdvice,
     required TResult Function() saveAdvice,
-    required TResult Function() deleteAdvice,
+    required TResult Function(bool isMarketPlace) deleteAdvice,
     required TResult Function() cancelAdvice,
     required TResult Function() viewSavedAdvice,
   }) {
@@ -1284,7 +1284,7 @@ class _$SaveAdviceImpl implements _SaveAdvice {
     TResult? Function()? fetchBankInstruction,
     TResult? Function(bool isMarketPlace)? fetchAdvice,
     TResult? Function()? saveAdvice,
-    TResult? Function()? deleteAdvice,
+    TResult? Function(bool isMarketPlace)? deleteAdvice,
     TResult? Function()? cancelAdvice,
     TResult? Function()? viewSavedAdvice,
   }) {
@@ -1306,7 +1306,7 @@ class _$SaveAdviceImpl implements _SaveAdvice {
     TResult Function()? fetchBankInstruction,
     TResult Function(bool isMarketPlace)? fetchAdvice,
     TResult Function()? saveAdvice,
-    TResult Function()? deleteAdvice,
+    TResult Function(bool isMarketPlace)? deleteAdvice,
     TResult Function()? cancelAdvice,
     TResult Function()? viewSavedAdvice,
     required TResult orElse(),
@@ -1385,6 +1385,8 @@ abstract class _$$DeleteAdviceImplCopyWith<$Res> {
   factory _$$DeleteAdviceImplCopyWith(
           _$DeleteAdviceImpl value, $Res Function(_$DeleteAdviceImpl) then) =
       __$$DeleteAdviceImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({bool isMarketPlace});
 }
 
 /// @nodoc
@@ -1394,26 +1396,51 @@ class __$$DeleteAdviceImplCopyWithImpl<$Res>
   __$$DeleteAdviceImplCopyWithImpl(
       _$DeleteAdviceImpl _value, $Res Function(_$DeleteAdviceImpl) _then)
       : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? isMarketPlace = null,
+  }) {
+    return _then(_$DeleteAdviceImpl(
+      isMarketPlace: null == isMarketPlace
+          ? _value.isMarketPlace
+          : isMarketPlace // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$DeleteAdviceImpl implements _DeleteAdvice {
-  const _$DeleteAdviceImpl();
+  const _$DeleteAdviceImpl({required this.isMarketPlace});
+
+  @override
+  final bool isMarketPlace;
 
   @override
   String toString() {
-    return 'PaymentSummaryDetailsEvent.deleteAdvice()';
+    return 'PaymentSummaryDetailsEvent.deleteAdvice(isMarketPlace: $isMarketPlace)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$DeleteAdviceImpl);
+        (other.runtimeType == runtimeType &&
+            other is _$DeleteAdviceImpl &&
+            (identical(other.isMarketPlace, isMarketPlace) ||
+                other.isMarketPlace == isMarketPlace));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, isMarketPlace);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$DeleteAdviceImplCopyWith<_$DeleteAdviceImpl> get copyWith =>
+      __$$DeleteAdviceImplCopyWithImpl<_$DeleteAdviceImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -1427,11 +1454,11 @@ class _$DeleteAdviceImpl implements _DeleteAdvice {
     required TResult Function() fetchBankInstruction,
     required TResult Function(bool isMarketPlace) fetchAdvice,
     required TResult Function() saveAdvice,
-    required TResult Function() deleteAdvice,
+    required TResult Function(bool isMarketPlace) deleteAdvice,
     required TResult Function() cancelAdvice,
     required TResult Function() viewSavedAdvice,
   }) {
-    return deleteAdvice();
+    return deleteAdvice(isMarketPlace);
   }
 
   @override
@@ -1449,11 +1476,11 @@ class _$DeleteAdviceImpl implements _DeleteAdvice {
     TResult? Function()? fetchBankInstruction,
     TResult? Function(bool isMarketPlace)? fetchAdvice,
     TResult? Function()? saveAdvice,
-    TResult? Function()? deleteAdvice,
+    TResult? Function(bool isMarketPlace)? deleteAdvice,
     TResult? Function()? cancelAdvice,
     TResult? Function()? viewSavedAdvice,
   }) {
-    return deleteAdvice?.call();
+    return deleteAdvice?.call(isMarketPlace);
   }
 
   @override
@@ -1471,13 +1498,13 @@ class _$DeleteAdviceImpl implements _DeleteAdvice {
     TResult Function()? fetchBankInstruction,
     TResult Function(bool isMarketPlace)? fetchAdvice,
     TResult Function()? saveAdvice,
-    TResult Function()? deleteAdvice,
+    TResult Function(bool isMarketPlace)? deleteAdvice,
     TResult Function()? cancelAdvice,
     TResult Function()? viewSavedAdvice,
     required TResult orElse(),
   }) {
     if (deleteAdvice != null) {
-      return deleteAdvice();
+      return deleteAdvice(isMarketPlace);
     }
     return orElse();
   }
@@ -1542,7 +1569,13 @@ class _$DeleteAdviceImpl implements _DeleteAdvice {
 }
 
 abstract class _DeleteAdvice implements PaymentSummaryDetailsEvent {
-  const factory _DeleteAdvice() = _$DeleteAdviceImpl;
+  const factory _DeleteAdvice({required final bool isMarketPlace}) =
+      _$DeleteAdviceImpl;
+
+  bool get isMarketPlace;
+  @JsonKey(ignore: true)
+  _$$DeleteAdviceImplCopyWith<_$DeleteAdviceImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -1592,7 +1625,7 @@ class _$CancelAdviceImpl implements _CancelAdvice {
     required TResult Function() fetchBankInstruction,
     required TResult Function(bool isMarketPlace) fetchAdvice,
     required TResult Function() saveAdvice,
-    required TResult Function() deleteAdvice,
+    required TResult Function(bool isMarketPlace) deleteAdvice,
     required TResult Function() cancelAdvice,
     required TResult Function() viewSavedAdvice,
   }) {
@@ -1614,7 +1647,7 @@ class _$CancelAdviceImpl implements _CancelAdvice {
     TResult? Function()? fetchBankInstruction,
     TResult? Function(bool isMarketPlace)? fetchAdvice,
     TResult? Function()? saveAdvice,
-    TResult? Function()? deleteAdvice,
+    TResult? Function(bool isMarketPlace)? deleteAdvice,
     TResult? Function()? cancelAdvice,
     TResult? Function()? viewSavedAdvice,
   }) {
@@ -1636,7 +1669,7 @@ class _$CancelAdviceImpl implements _CancelAdvice {
     TResult Function()? fetchBankInstruction,
     TResult Function(bool isMarketPlace)? fetchAdvice,
     TResult Function()? saveAdvice,
-    TResult Function()? deleteAdvice,
+    TResult Function(bool isMarketPlace)? deleteAdvice,
     TResult Function()? cancelAdvice,
     TResult Function()? viewSavedAdvice,
     required TResult orElse(),
@@ -1757,7 +1790,7 @@ class _$ViewSavedAdviceImpl implements _ViewSavedAdvice {
     required TResult Function() fetchBankInstruction,
     required TResult Function(bool isMarketPlace) fetchAdvice,
     required TResult Function() saveAdvice,
-    required TResult Function() deleteAdvice,
+    required TResult Function(bool isMarketPlace) deleteAdvice,
     required TResult Function() cancelAdvice,
     required TResult Function() viewSavedAdvice,
   }) {
@@ -1779,7 +1812,7 @@ class _$ViewSavedAdviceImpl implements _ViewSavedAdvice {
     TResult? Function()? fetchBankInstruction,
     TResult? Function(bool isMarketPlace)? fetchAdvice,
     TResult? Function()? saveAdvice,
-    TResult? Function()? deleteAdvice,
+    TResult? Function(bool isMarketPlace)? deleteAdvice,
     TResult? Function()? cancelAdvice,
     TResult? Function()? viewSavedAdvice,
   }) {
@@ -1801,7 +1834,7 @@ class _$ViewSavedAdviceImpl implements _ViewSavedAdvice {
     TResult Function()? fetchBankInstruction,
     TResult Function(bool isMarketPlace)? fetchAdvice,
     TResult Function()? saveAdvice,
-    TResult Function()? deleteAdvice,
+    TResult Function(bool isMarketPlace)? deleteAdvice,
     TResult Function()? cancelAdvice,
     TResult Function()? viewSavedAdvice,
     required TResult orElse(),

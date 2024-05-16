@@ -246,7 +246,9 @@ class _DeleteCancelAdviceButtons extends StatelessWidget {
                 onPressed: () {
                   if (isDelete && !state.isDeletingPayment) {
                     context.read<PaymentSummaryDetailsBloc>().add(
-                          const PaymentSummaryDetailsEvent.deleteAdvice(),
+                          PaymentSummaryDetailsEvent.deleteAdvice(
+                            isMarketPlace: context.isMPPayment,
+                          ),
                         );
                   } else if (!isDelete && !state.isCancelingAdvice) {
                     context.read<PaymentSummaryDetailsBloc>().add(

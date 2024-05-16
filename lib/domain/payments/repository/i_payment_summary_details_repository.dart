@@ -28,6 +28,7 @@ abstract class IPaymentSummaryDetailsRepository {
     required CustomerCodeInfo customerCodeInfo,
     required ShipToInfo shipToInfo,
     required PaymentSummaryDetails paymentSummaryDetails,
+    required bool isMarketPlace,
   });
 
   Future<Either<ApiFailure, String>> cancelPaymentAdvice({

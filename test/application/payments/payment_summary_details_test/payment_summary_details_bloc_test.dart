@@ -844,13 +844,14 @@ void main() {
             salesOrganization: fakeSalesOrganisation,
             shipToInfo: fakeShipToInfo,
             paymentSummaryDetails: details,
+            isMarketPlace: false,
           ),
         ).thenAnswer(
           (invocation) async => const Left(ApiFailure.other('mock-error')),
         );
       },
       act: (PaymentSummaryDetailsBloc bloc) => bloc.add(
-        const PaymentSummaryDetailsEvent.deleteAdvice(),
+        const PaymentSummaryDetailsEvent.deleteAdvice(isMarketPlace: false),
       ),
       expect: () => [
         PaymentSummaryDetailsState.initial().copyWith(
@@ -895,13 +896,14 @@ void main() {
             salesOrganization: fakeSalesOrganisation,
             shipToInfo: fakeShipToInfo,
             paymentSummaryDetails: details,
+            isMarketPlace: true,
           ),
         ).thenAnswer(
           (invocation) async => const Right(true),
         );
       },
       act: (PaymentSummaryDetailsBloc bloc) => bloc.add(
-        const PaymentSummaryDetailsEvent.deleteAdvice(),
+        const PaymentSummaryDetailsEvent.deleteAdvice(isMarketPlace: true),
       ),
       expect: () => [
         PaymentSummaryDetailsState.initial().copyWith(
