@@ -147,6 +147,7 @@ enum PriceStyle {
   cartMaterialUnitPrice,
   tenderPrice,
   tenderViewOrderByItemPrice,
+  tenderCartPrice,
 }
 
 Color _priceTextColor(PriceStyle type) {
@@ -159,6 +160,7 @@ Color _priceTextColor(PriceStyle type) {
     case PriceStyle.govtMaterialListPrice:
     case PriceStyle.tenderViewOrderByItemPrice:
     case PriceStyle.tenderPrice:
+    case PriceStyle.tenderCartPrice:
       return ZPColors.primary;
 
     case PriceStyle.summaryPrice:
@@ -243,6 +245,11 @@ TextStyle _priceStyle(BuildContext context, PriceStyle type) {
     case PriceStyle.tenderPrice:
       priceTextStyle = Theme.of(context).textTheme.labelMedium!.copyWith(
             fontWeight: FontWeight.bold,
+          );
+      break;
+    case PriceStyle.tenderCartPrice:
+      priceTextStyle = Theme.of(context).textTheme.labelSmall!.copyWith(
+            color: ZPColors.primary,
           );
       break;
     case PriceStyle.grandTotalPrice:
@@ -370,6 +377,10 @@ TextStyle _currencyCodeTextStyle(BuildContext context, PriceStyle type) {
           );
     case PriceStyle.tenderPrice:
       return Theme.of(context).textTheme.labelSmall!;
+    case PriceStyle.tenderCartPrice:
+      return Theme.of(context).textTheme.labelSmall!.copyWith(
+            color: ZPColors.primary,
+          );
     case PriceStyle.tenderViewOrderByItemPrice:
       return Theme.of(context).textTheme.titleMedium!.copyWith(
             fontWeight: FontWeight.bold,

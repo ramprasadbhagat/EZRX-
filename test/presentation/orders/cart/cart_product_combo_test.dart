@@ -3,6 +3,7 @@ import 'package:ezrxmobile/application/account/customer_license_bloc/customer_li
 import 'package:ezrxmobile/application/order/combo_deal/combo_deal_list_bloc.dart';
 import 'package:ezrxmobile/application/order/combo_deal/combo_deal_material_detail_bloc.dart';
 import 'package:ezrxmobile/application/order/order_eligibility/order_eligibility_bloc.dart';
+import 'package:ezrxmobile/application/order/tender_contract/tender_contract_list_bloc.dart';
 import 'package:ezrxmobile/domain/order/entities/combo_deal.dart';
 import 'package:ezrxmobile/domain/order/entities/combo_deal_material.dart';
 import 'package:ezrxmobile/domain/order/entities/combo_deal_qty_tier.dart';
@@ -97,6 +98,10 @@ class ComboDealListBlocMock
     extends MockBloc<ComboDealListEvent, ComboDealListState>
     implements ComboDealListBloc {}
 
+class TenderContractListBlocMock
+    extends MockBloc<TenderContractListEvent, TenderContractListState>
+    implements TenderContractListBloc {}
+
 class ComboDealMaterialDetailBlocMock
     extends MockBloc<ComboDealMaterialDetailEvent, ComboDealMaterialDetailState>
     implements ComboDealMaterialDetailBloc {}
@@ -110,6 +115,7 @@ void main() {
   late SalesOrgBloc salesOrgBloc;
   late CustomerCodeBloc customerCodeBloc;
   late OrderEligibilityBloc orderEligibilityBloc;
+  late TenderContractListBloc tenderContractListBlocMock;
 
   late OrderDocumentTypeBloc orderDocumentTypeBlocMock;
 
@@ -148,6 +154,7 @@ void main() {
     comboDealListBlocMock = ComboDealListBlocMock();
     customerLicenseBlocMock = CustomerLicenseBlocMock();
     comboDealMaterialDetailBlocMock = ComboDealMaterialDetailBlocMock();
+    tenderContractListBlocMock = TenderContractListBlocMock();
 
     mockPriceList = {};
     mockPriceList.putIfAbsent(
@@ -235,6 +242,8 @@ void main() {
           .thenReturn(ComboDealListState.initial());
       when(() => comboDealMaterialDetailBlocMock.state)
           .thenReturn(ComboDealMaterialDetailState.initial());
+      when(() => tenderContractListBlocMock.state)
+          .thenReturn(TenderContractListState.initial());
     },
   );
   group(
@@ -337,6 +346,9 @@ void main() {
             ),
             BlocProvider<ComboDealMaterialDetailBloc>(
               create: (context) => comboDealMaterialDetailBlocMock,
+            ),
+            BlocProvider<TenderContractListBloc>(
+              create: (context) => tenderContractListBlocMock,
             ),
           ],
           child: const CartPage(),

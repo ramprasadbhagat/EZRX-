@@ -68,6 +68,12 @@ class OrderEligibilityState with _$OrderEligibilityState {
       if (!cartItems.containMPMaterial) {
         return 'Please ensure that the order value satisfies the minimum order value of $displayMinOrderAmount}';
       }
+      if (cartItems.containInvalidTenderContractMaterial) {
+        return 'Tender Contract is no longer available for one or few item(s). Please remove to continue.';
+      }
+      if (cartItems.isMaxQtyExceedsForAnyTender) {
+        return 'One or few item(s) order qty exceed the maximum available tender quantity.';
+      }
 
       if (!mpSubtotalMOVEligible && !zpSubtotalMOVEligible) {
         return 'Please ensure that minimum order value is at least $displayMinOrderAmount for ZP subtotal & $displayMPMinOrderAmount for MP subtotal.';
@@ -303,7 +309,9 @@ class OrderEligibilityState with _$OrderEligibilityState {
       isNotAvailableToCheckoutForID ||
       !isMinOrderValuePassed ||
       askUserToAddCommercialMaterial ||
-      isGimmickMaterialNotAllowed;
+      isGimmickMaterialNotAllowed ||
+      hasInvalidTenderMaterial ||
+      isMaxQtyExceedsForAnyTender;
 
   List<bool> get activeErrorsList => [
         displayMovWarning,
@@ -311,6 +319,8 @@ class OrderEligibilityState with _$OrderEligibilityState {
         isNotAvailableToCheckoutForID,
         askUserToAddCommercialMaterial,
         isGimmickMaterialNotAllowed,
+        hasInvalidTenderMaterial,
+        isMaxQtyExceedsForAnyTender,
       ].where((condition) => condition).toList();
 
   bool get hasMultipleErrors => activeErrorsList.length > 1;
@@ -328,6 +338,12 @@ class OrderEligibilityState with _$OrderEligibilityState {
   bool get isGimmickMaterialPresentInCart =>
       cartItems.isNotEmpty &&
       cartItems.any((element) => element.isGimmickMaterial);
+
+  bool get hasInvalidTenderMaterial =>
+      cartItems.isNotEmpty && cartItems.containInvalidTenderContractMaterial;
+
+  bool get isMaxQtyExceedsForAnyTender =>
+      cartItems.isNotEmpty && cartItems.isMaxQtyExceedsForAnyTender;
 
   bool get isGimmickMaterialNotAllowed =>
       (!configs.enableGimmickMaterial && isGimmickMaterialPresentInCart) ||

@@ -3,6 +3,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/customer_license_bloc/customer_license_bloc.dart';
 import 'package:ezrxmobile/application/order/additional_bonus/bonus_material_bloc.dart';
 import 'package:ezrxmobile/application/order/order_eligibility/order_eligibility_bloc.dart';
+import 'package:ezrxmobile/application/order/tender_contract/tender_contract_list_bloc.dart';
 import 'package:ezrxmobile/domain/order/entities/bundle.dart';
 import 'package:ezrxmobile/domain/order/entities/bundle_info.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
@@ -37,10 +38,10 @@ import 'package:ezrxmobile/presentation/orders/cart/cart_page.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 
 import '../../../common_mock_data/customer_code_mock.dart';
+import '../../../common_mock_data/mock_bloc.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_sg_sales_org_config.dart';
 import '../../../common_mock_data/sales_organsiation_mock.dart';
 import '../../../utils/widget_utils.dart';
-import '../../order_history/order_history_details_widget_test.dart';
 
 class CartBlocMock extends MockBloc<CartEvent, CartState> implements CartBloc {}
 
@@ -98,6 +99,7 @@ void main() {
   late CustomerCodeBloc customerCodeBloc;
   late OrderEligibilityBloc orderEligibilityBloc;
   late CustomerLicenseBloc customerLicenseBlocMock;
+  late TenderContractListBloc tenderContractListBlocMock;
 
   late OrderDocumentTypeBloc orderDocumentTypeBlocMock;
 
@@ -133,6 +135,7 @@ void main() {
     authBlocMock = AuthBlocMock();
     announcementBlocMock = AnnouncementBlocMock();
     bonusMaterialBlocMock = BonusMaterialBlocMock();
+    tenderContractListBlocMock = TenderContractListBlocMock();
 
     mockPriceList = {};
     mockPriceList.putIfAbsent(
@@ -194,6 +197,8 @@ void main() {
       when(() => orderEligibilityBloc.state).thenReturn(
         OrderEligibilityState.initial(),
       );
+      when(() => tenderContractListBlocMock.state)
+          .thenReturn(TenderContractListState.initial());
       when(() => priceOverrideBloc.state)
           .thenReturn(PriceOverrideState.initial());
       when(() => additionalDetailsBlocMock.state)
@@ -235,6 +240,9 @@ void main() {
             ),
             BlocProvider<PriceOverrideBloc>(
               create: (context) => priceOverrideBloc,
+            ),
+            BlocProvider<TenderContractListBloc>(
+              create: (context) => tenderContractListBlocMock,
             ),
             BlocProvider<OrderSummaryBloc>(
               create: (context) => orderSummaryBlocMock,

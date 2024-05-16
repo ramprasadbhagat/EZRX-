@@ -7,6 +7,7 @@ import 'package:ezrxmobile/domain/order/entities/discount_info.dart';
 import 'package:ezrxmobile/domain/order/entities/price_combo_deal.dart';
 import 'package:ezrxmobile/domain/order/entities/price_tier.dart';
 import 'package:ezrxmobile/domain/order/entities/submit_material_item_bonus.dart';
+import 'package:ezrxmobile/domain/order/entities/submit_tender_contract_info.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/submit_material_item_bonus_dto.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
@@ -107,6 +108,17 @@ class PriceAggregate with _$PriceAggregate {
   bool get isMaxQtyExceedsForId =>
       maximumQty != 0 && maximumQty < quantity && stockQuantity >= quantity;
 
+  bool get isMaxQtyExceedsForTender =>
+      salesOrgConfig.salesOrg.isTenderEligible &&
+      (tenderContract.isNotEmpty &&
+          (tenderContract.remainingTenderQuantity != 0 &&
+              tenderContract.remainingTenderQuantity < quantity));
+
+  bool get isTenderContractInvalid =>
+      salesOrgConfig.salesOrg.isTenderEligible &&
+      (tenderContract.contractNumber.isValid() &&
+          tenderContract.tenderOrderReason.isEmpty);
+
   bool get showErrorMessageForID =>
       salesOrgConfig.salesOrg.isID &&
       (_isStockQtyExceedsForId || isMaxQtyExceedsForId);
@@ -151,6 +163,19 @@ class PriceAggregate with _$PriceAggregate {
       promoType: materialInfo.promoType,
       principalData: materialInfo.principalData,
       isCounterOffer: materialInfo.counterOfferDetails.hasCounterOffer,
+      contract: salesOrgConfig.salesOrg.isTenderEligible &&
+              !tenderContract.tenderOrderReason.isEmpty
+          ? SubmitTenderContract(
+              contractLineItemNumber:
+                  tenderContract.contractItemNumber.getOrDefaultValue(''),
+              contractNumber: tenderContract.contractNumber,
+              contractPONumber:
+                  tenderContract.contractReference.getOrDefaultValue(''),
+              contractPrice: tenderContract.tenderPrice.tenderPrice,
+              contractUnitOfMeasurement: tenderContract.pricingUnit,
+              currency: salesOrgConfig.currency.code,
+            )
+          : SubmitTenderContract.empty(),
     );
   }
 

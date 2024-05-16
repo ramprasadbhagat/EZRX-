@@ -3,6 +3,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/customer_license_bloc/customer_license_bloc.dart';
 import 'package:ezrxmobile/application/order/additional_bonus/bonus_material_bloc.dart';
 import 'package:ezrxmobile/application/order/order_eligibility/order_eligibility_bloc.dart';
+import 'package:ezrxmobile/application/order/tender_contract/tender_contract_list_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/role.dart';
 import 'package:ezrxmobile/domain/order/entities/bonus_sample_item.dart';
 import 'package:ezrxmobile/domain/order/entities/request_counter_offer_details.dart';
@@ -41,13 +42,13 @@ import 'package:ezrxmobile/presentation/orders/cart/cart_page.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 
 import '../../../common_mock_data/customer_code_mock.dart';
+import '../../../common_mock_data/mock_bloc.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_kh_sales_org_config.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_sg_sales_org_config.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_id_sales_org_config.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_my_sales_org_config.dart';
 import '../../../common_mock_data/sales_organsiation_mock.dart';
 import '../../../utils/widget_utils.dart';
-import '../../order_history/order_history_details_widget_test.dart';
 
 class CartBlocMock extends MockBloc<CartEvent, CartState> implements CartBloc {}
 
@@ -100,6 +101,7 @@ void main() {
   late AdditionalDetailsBloc additionalDetailsBlocMock;
   late BonusMaterialBloc bonusMaterialBlocMock;
   late CustomerLicenseBloc customerLicenseBlocMock;
+  late TenderContractListBloc tenderContractListBlocMock;
   late List<Price> mockMaterialPriceLocal;
 
   setUpAll(() async {
@@ -128,6 +130,7 @@ void main() {
       announcementBlocMock = AnnouncementBlocMock();
       bonusMaterialBlocMock = BonusMaterialBlocMock();
       customerLicenseBlocMock = CustomerLicenseBlocMock();
+      tenderContractListBlocMock = TenderContractListBlocMock();
 
       mockMaterialPriceLocal =
           await MaterialPriceLocalDataSource().getPriceList();
@@ -183,6 +186,8 @@ void main() {
       when(() => authBlocMock.state).thenReturn(const AuthState.initial());
       when(() => bonusMaterialBlocMock.state)
           .thenReturn(BonusMaterialState.initial());
+      when(() => tenderContractListBlocMock.state)
+          .thenReturn(TenderContractListState.initial());
     },
   );
   group(
@@ -221,6 +226,9 @@ void main() {
             BlocProvider<AuthBloc>(create: (context) => authBlocMock),
             BlocProvider<AnnouncementBloc>(
               create: (context) => announcementBlocMock,
+            ),
+            BlocProvider<TenderContractListBloc>(
+              create: (context) => tenderContractListBlocMock,
             ),
           ],
           child: const CartPage(),

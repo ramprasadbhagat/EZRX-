@@ -195,6 +195,12 @@ extension PriceAggregateExtension on List<PriceAggregate> {
 
   bool get containMPMaterial => any((e) => e.materialInfo.isMarketPlace);
 
+  bool get containInvalidTenderContractMaterial =>
+      any((e) => e.isTenderContractInvalid);
+
+  bool get isMaxQtyExceedsForAnyTender =>
+      any((e) => e.isMaxQtyExceedsForTender);
+
   double get totalMaterialsPrice => where(
         (item) =>
             !item.materialInfo.type.typeBundle &&
@@ -300,4 +306,10 @@ extension PriceAggregateExtension on List<PriceAggregate> {
   List<String> get tenderReasons => map(
         (e) => e.tenderContract.tenderOrderReason.displayTenderContractReason,
       ).toSet().toList();
+
+  PriceAggregate getFirstCartProductWithNumber(MaterialNumber materialNumber) =>
+      firstWhere(
+        (e) => e.materialInfo.materialNumber == materialNumber,
+        orElse: () => PriceAggregate.empty(),
+      );
 }

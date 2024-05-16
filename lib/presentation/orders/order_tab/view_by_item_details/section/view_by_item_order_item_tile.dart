@@ -59,13 +59,21 @@ class ViewByItemOrderItemTile extends StatelessWidget {
       isCovidItem: orderHistoryItem.isCovid,
       showOfferTag: orderHistoryItem.isOfferItem,
       showBundleTag: orderHistoryItem.isBundle,
-      footerWidget: QuantityAndPriceWithTax.order(
-        quantity: orderHistoryItem.qty,
-        taxPercentage: orderHistoryItem.taxPercentage,
-        netPrice: orderHistoryItem.itemTotalNetPrice(
-          eligibilityState.salesOrgConfigs.displayItemTaxBreakdown,
-          eligibilityState.salesOrg.isID,
-        ),
+      footerWidget: Column(
+        children: [
+          QuantityAndPriceWithTax.order(
+            quantity: orderHistoryItem.qty,
+            taxPercentage: orderHistoryItem.taxPercentage,
+            netPrice: orderHistoryItem.itemTotalNetPrice(
+              eligibilityState.salesOrgConfigs.displayItemTaxBreakdown,
+              eligibilityState.salesOrg.isID,
+            ),
+          ),
+          if (!orderHistoryItem.tenderOrderReason.isEmpty)
+            TenderContractSection(
+              tenderContract: orderHistoryItem.orderItemTenderContract,
+            ),
+        ],
       ),
     );
   }

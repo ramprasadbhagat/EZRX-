@@ -20,7 +20,7 @@ mixin _$OrderHistoryDetailsBonusAggregate {
       throw _privateConstructorUsedError;
   List<OrderHistoryDetailsOrderItemDetails> get details =>
       throw _privateConstructorUsedError;
-  OrderHistoryDetailsOrderItemTenderContractDetails get tenderContractDetails =>
+  OrderHistoryDetailsTenderContract get tenderContractDetails =>
       throw _privateConstructorUsedError;
   List<OrderHistoryDetailsOrderItem> get bonusList =>
       throw _privateConstructorUsedError;
@@ -41,12 +41,11 @@ abstract class $OrderHistoryDetailsBonusAggregateCopyWith<$Res> {
   $Res call(
       {OrderHistoryDetailsOrderItem orderItem,
       List<OrderHistoryDetailsOrderItemDetails> details,
-      OrderHistoryDetailsOrderItemTenderContractDetails tenderContractDetails,
+      OrderHistoryDetailsTenderContract tenderContractDetails,
       List<OrderHistoryDetailsOrderItem> bonusList});
 
   $OrderHistoryDetailsOrderItemCopyWith<$Res> get orderItem;
-  $OrderHistoryDetailsOrderItemTenderContractDetailsCopyWith<$Res>
-      get tenderContractDetails;
+  $OrderHistoryDetailsTenderContractCopyWith<$Res> get tenderContractDetails;
 }
 
 /// @nodoc
@@ -80,7 +79,7 @@ class _$OrderHistoryDetailsBonusAggregateCopyWithImpl<$Res,
       tenderContractDetails: null == tenderContractDetails
           ? _value.tenderContractDetails
           : tenderContractDetails // ignore: cast_nullable_to_non_nullable
-              as OrderHistoryDetailsOrderItemTenderContractDetails,
+              as OrderHistoryDetailsTenderContract,
       bonusList: null == bonusList
           ? _value.bonusList
           : bonusList // ignore: cast_nullable_to_non_nullable
@@ -99,9 +98,8 @@ class _$OrderHistoryDetailsBonusAggregateCopyWithImpl<$Res,
 
   @override
   @pragma('vm:prefer-inline')
-  $OrderHistoryDetailsOrderItemTenderContractDetailsCopyWith<$Res>
-      get tenderContractDetails {
-    return $OrderHistoryDetailsOrderItemTenderContractDetailsCopyWith<$Res>(
+  $OrderHistoryDetailsTenderContractCopyWith<$Res> get tenderContractDetails {
+    return $OrderHistoryDetailsTenderContractCopyWith<$Res>(
         _value.tenderContractDetails, (value) {
       return _then(_value.copyWith(tenderContractDetails: value) as $Val);
     });
@@ -120,14 +118,13 @@ abstract class _$$OrderHistoryDetailsOrderItemImplCopyWith<$Res>
   $Res call(
       {OrderHistoryDetailsOrderItem orderItem,
       List<OrderHistoryDetailsOrderItemDetails> details,
-      OrderHistoryDetailsOrderItemTenderContractDetails tenderContractDetails,
+      OrderHistoryDetailsTenderContract tenderContractDetails,
       List<OrderHistoryDetailsOrderItem> bonusList});
 
   @override
   $OrderHistoryDetailsOrderItemCopyWith<$Res> get orderItem;
   @override
-  $OrderHistoryDetailsOrderItemTenderContractDetailsCopyWith<$Res>
-      get tenderContractDetails;
+  $OrderHistoryDetailsTenderContractCopyWith<$Res> get tenderContractDetails;
 }
 
 /// @nodoc
@@ -160,7 +157,7 @@ class __$$OrderHistoryDetailsOrderItemImplCopyWithImpl<$Res>
       tenderContractDetails: null == tenderContractDetails
           ? _value.tenderContractDetails
           : tenderContractDetails // ignore: cast_nullable_to_non_nullable
-              as OrderHistoryDetailsOrderItemTenderContractDetails,
+              as OrderHistoryDetailsTenderContract,
       bonusList: null == bonusList
           ? _value._bonusList
           : bonusList // ignore: cast_nullable_to_non_nullable
@@ -192,7 +189,7 @@ class _$OrderHistoryDetailsOrderItemImpl extends _OrderHistoryDetailsOrderItem {
   }
 
   @override
-  final OrderHistoryDetailsOrderItemTenderContractDetails tenderContractDetails;
+  final OrderHistoryDetailsTenderContract tenderContractDetails;
   final List<OrderHistoryDetailsOrderItem> _bonusList;
   @override
   List<OrderHistoryDetailsOrderItem> get bonusList {
@@ -240,12 +237,11 @@ class _$OrderHistoryDetailsOrderItemImpl extends _OrderHistoryDetailsOrderItem {
 abstract class _OrderHistoryDetailsOrderItem
     extends OrderHistoryDetailsBonusAggregate {
   factory _OrderHistoryDetailsOrderItem(
-          {required final OrderHistoryDetailsOrderItem orderItem,
-          required final List<OrderHistoryDetailsOrderItemDetails> details,
-          required final OrderHistoryDetailsOrderItemTenderContractDetails
-              tenderContractDetails,
-          required final List<OrderHistoryDetailsOrderItem> bonusList}) =
-      _$OrderHistoryDetailsOrderItemImpl;
+      {required final OrderHistoryDetailsOrderItem orderItem,
+      required final List<OrderHistoryDetailsOrderItemDetails> details,
+      required final OrderHistoryDetailsTenderContract tenderContractDetails,
+      required final List<OrderHistoryDetailsOrderItem>
+          bonusList}) = _$OrderHistoryDetailsOrderItemImpl;
   _OrderHistoryDetailsOrderItem._() : super._();
 
   @override
@@ -253,7 +249,7 @@ abstract class _OrderHistoryDetailsOrderItem
   @override
   List<OrderHistoryDetailsOrderItemDetails> get details;
   @override
-  OrderHistoryDetailsOrderItemTenderContractDetails get tenderContractDetails;
+  OrderHistoryDetailsTenderContract get tenderContractDetails;
   @override
   List<OrderHistoryDetailsOrderItem> get bonusList;
   @override

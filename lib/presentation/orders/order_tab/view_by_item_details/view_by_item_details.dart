@@ -9,6 +9,7 @@ import 'package:ezrxmobile/presentation/core/license_expired_banner.dart';
 import 'package:ezrxmobile/infrastructure/core/common/clevertap_helper.dart';
 import 'package:ezrxmobile/presentation/core/market_place/market_place_seller_with_logo.dart';
 import 'package:ezrxmobile/presentation/orders/cart/add_to_cart/add_to_cart_error_section.dart';
+import 'package:ezrxmobile/presentation/core/tender_contract_section.dart';
 import 'package:ezrxmobile/presentation/orders/widgets/edi_user_banner.dart';
 import 'package:ezrxmobile/presentation/payments/extension.dart';
 import 'package:flutter/material.dart';

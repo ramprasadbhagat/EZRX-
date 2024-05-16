@@ -6,18 +6,34 @@ part of 'order_history_details_order_items_tender_contract_details_dto.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_OrderHistoryDetailsOrderItemTenderContractDetailsDto
-    _$$_OrderHistoryDetailsOrderItemTenderContractDetailsDtoFromJson(
+_$OrderHistoryDetailsTenderContractDtoImpl
+    _$$OrderHistoryDetailsTenderContractDtoImplFromJson(
             Map<String, dynamic> json) =>
-        _$_OrderHistoryDetailsOrderItemTenderContractDetailsDto(
-          tenderContractNumber: json['ContractNumber'] as String? ?? '',
-          tenderContractReference: json['ContractReference'] as String? ?? '',
+        _$OrderHistoryDetailsTenderContractDtoImpl(
+          contractNumber: json['ContractNumber'] as String? ?? '',
+          contractReference: json['ContractReference'] as String? ?? '',
+          price: json['Price'] as String? ?? '',
+          priceUnit: (json['PriceUnit'] as num?)?.toInt() ?? 0,
+          contractQuantity: (json['ContractQuantity'] as num?)?.toInt() ?? 0,
+          remainingQuantity: (json['RemainingQuantity'] as num?)?.toInt() ?? 0,
+          expiryDate: json['ExpiryDate'] as String? ?? '',
+          orderReason: json['OrderReason'] as String? ?? '',
+          visaNumber: json['VisaNumber'] as String? ?? '',
+          announcementLetterNumber:
+              json['AnnouncementLetterNumber'] as String? ?? '',
         );
 
-Map<String, dynamic>
-    _$$_OrderHistoryDetailsOrderItemTenderContractDetailsDtoToJson(
-            _$_OrderHistoryDetailsOrderItemTenderContractDetailsDto instance) =>
-        <String, dynamic>{
-          'ContractNumber': instance.tenderContractNumber,
-          'ContractReference': instance.tenderContractReference,
-        };
+Map<String, dynamic> _$$OrderHistoryDetailsTenderContractDtoImplToJson(
+        _$OrderHistoryDetailsTenderContractDtoImpl instance) =>
+    <String, dynamic>{
+      'ContractNumber': instance.contractNumber,
+      'ContractReference': instance.contractReference,
+      'Price': instance.price,
+      'PriceUnit': instance.priceUnit,
+      'ContractQuantity': instance.contractQuantity,
+      'RemainingQuantity': instance.remainingQuantity,
+      'ExpiryDate': instance.expiryDate,
+      'OrderReason': instance.orderReason,
+      'VisaNumber': instance.visaNumber,
+      'AnnouncementLetterNumber': instance.announcementLetterNumber,
+    };

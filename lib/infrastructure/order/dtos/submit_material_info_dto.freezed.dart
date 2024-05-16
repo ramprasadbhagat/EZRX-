@@ -12,7 +12,7 @@ part of 'submit_material_info_dto.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 SubmitMaterialInfoDto _$SubmitMaterialInfoDtoFromJson(
     Map<String, dynamic> json) {
@@ -35,7 +35,7 @@ mixin _$SubmitMaterialInfoDto {
   @JsonKey(
       name: 'override',
       toJson: overrideTojson,
-      readValue: materialItemOverrideread,
+      readValue: materialItemReadValue,
       includeIfNull: false)
   MaterialItemOverrideDto get materialItemOverride =>
       throw _privateConstructorUsedError;
@@ -65,6 +65,12 @@ mixin _$SubmitMaterialInfoDto {
   String get batch => throw _privateConstructorUsedError;
   @JsonKey(name: 'isCounterOffer', defaultValue: false)
   bool get isCounterOffer => throw _privateConstructorUsedError;
+  @JsonKey(
+      name: 'contract',
+      readValue: materialItemReadValue,
+      toJson: overridecontractJson,
+      includeIfNull: false)
+  SubmitTenderContractDto get contract => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -88,7 +94,7 @@ abstract class $SubmitMaterialInfoDtoCopyWith<$Res> {
       @JsonKey(
           name: 'override',
           toJson: overrideTojson,
-          readValue: materialItemOverrideread,
+          readValue: materialItemReadValue,
           includeIfNull: false)
       MaterialItemOverrideDto materialItemOverride,
       @JsonKey(name: 'ProductType', defaultValue: '') String productType,
@@ -105,10 +111,16 @@ abstract class $SubmitMaterialInfoDtoCopyWith<$Res> {
           toJson: overrideBatchJson,
           includeIfNull: false)
       String batch,
-      @JsonKey(name: 'isCounterOffer', defaultValue: false)
-      bool isCounterOffer});
+      @JsonKey(name: 'isCounterOffer', defaultValue: false) bool isCounterOffer,
+      @JsonKey(
+          name: 'contract',
+          readValue: materialItemReadValue,
+          toJson: overridecontractJson,
+          includeIfNull: false)
+      SubmitTenderContractDto contract});
 
   $MaterialItemOverrideDtoCopyWith<$Res> get materialItemOverride;
+  $SubmitTenderContractDtoCopyWith<$Res> get contract;
 }
 
 /// @nodoc
@@ -141,6 +153,7 @@ class _$SubmitMaterialInfoDtoCopyWithImpl<$Res,
     Object? principalName = null,
     Object? batch = null,
     Object? isCounterOffer = null,
+    Object? contract = null,
   }) {
     return _then(_value.copyWith(
       materialNumber: null == materialNumber
@@ -207,6 +220,10 @@ class _$SubmitMaterialInfoDtoCopyWithImpl<$Res,
           ? _value.isCounterOffer
           : isCounterOffer // ignore: cast_nullable_to_non_nullable
               as bool,
+      contract: null == contract
+          ? _value.contract
+          : contract // ignore: cast_nullable_to_non_nullable
+              as SubmitTenderContractDto,
     ) as $Val);
   }
 
@@ -218,14 +235,23 @@ class _$SubmitMaterialInfoDtoCopyWithImpl<$Res,
       return _then(_value.copyWith(materialItemOverride: value) as $Val);
     });
   }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $SubmitTenderContractDtoCopyWith<$Res> get contract {
+    return $SubmitTenderContractDtoCopyWith<$Res>(_value.contract, (value) {
+      return _then(_value.copyWith(contract: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
-abstract class _$$_SubmitMaterialInfoDtoCopyWith<$Res>
+abstract class _$$SubmitMaterialInfoDtoImplCopyWith<$Res>
     implements $SubmitMaterialInfoDtoCopyWith<$Res> {
-  factory _$$_SubmitMaterialInfoDtoCopyWith(_$_SubmitMaterialInfoDto value,
-          $Res Function(_$_SubmitMaterialInfoDto) then) =
-      __$$_SubmitMaterialInfoDtoCopyWithImpl<$Res>;
+  factory _$$SubmitMaterialInfoDtoImplCopyWith(
+          _$SubmitMaterialInfoDtoImpl value,
+          $Res Function(_$SubmitMaterialInfoDtoImpl) then) =
+      __$$SubmitMaterialInfoDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -238,7 +264,7 @@ abstract class _$$_SubmitMaterialInfoDtoCopyWith<$Res>
       @JsonKey(
           name: 'override',
           toJson: overrideTojson,
-          readValue: materialItemOverrideread,
+          readValue: materialItemReadValue,
           includeIfNull: false)
       MaterialItemOverrideDto materialItemOverride,
       @JsonKey(name: 'ProductType', defaultValue: '') String productType,
@@ -255,19 +281,27 @@ abstract class _$$_SubmitMaterialInfoDtoCopyWith<$Res>
           toJson: overrideBatchJson,
           includeIfNull: false)
       String batch,
-      @JsonKey(name: 'isCounterOffer', defaultValue: false)
-      bool isCounterOffer});
+      @JsonKey(name: 'isCounterOffer', defaultValue: false) bool isCounterOffer,
+      @JsonKey(
+          name: 'contract',
+          readValue: materialItemReadValue,
+          toJson: overridecontractJson,
+          includeIfNull: false)
+      SubmitTenderContractDto contract});
 
   @override
   $MaterialItemOverrideDtoCopyWith<$Res> get materialItemOverride;
+  @override
+  $SubmitTenderContractDtoCopyWith<$Res> get contract;
 }
 
 /// @nodoc
-class __$$_SubmitMaterialInfoDtoCopyWithImpl<$Res>
-    extends _$SubmitMaterialInfoDtoCopyWithImpl<$Res, _$_SubmitMaterialInfoDto>
-    implements _$$_SubmitMaterialInfoDtoCopyWith<$Res> {
-  __$$_SubmitMaterialInfoDtoCopyWithImpl(_$_SubmitMaterialInfoDto _value,
-      $Res Function(_$_SubmitMaterialInfoDto) _then)
+class __$$SubmitMaterialInfoDtoImplCopyWithImpl<$Res>
+    extends _$SubmitMaterialInfoDtoCopyWithImpl<$Res,
+        _$SubmitMaterialInfoDtoImpl>
+    implements _$$SubmitMaterialInfoDtoImplCopyWith<$Res> {
+  __$$SubmitMaterialInfoDtoImplCopyWithImpl(_$SubmitMaterialInfoDtoImpl _value,
+      $Res Function(_$SubmitMaterialInfoDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -289,8 +323,9 @@ class __$$_SubmitMaterialInfoDtoCopyWithImpl<$Res>
     Object? principalName = null,
     Object? batch = null,
     Object? isCounterOffer = null,
+    Object? contract = null,
   }) {
-    return _then(_$_SubmitMaterialInfoDto(
+    return _then(_$SubmitMaterialInfoDtoImpl(
       materialNumber: null == materialNumber
           ? _value.materialNumber
           : materialNumber // ignore: cast_nullable_to_non_nullable
@@ -355,14 +390,18 @@ class __$$_SubmitMaterialInfoDtoCopyWithImpl<$Res>
           ? _value.isCounterOffer
           : isCounterOffer // ignore: cast_nullable_to_non_nullable
               as bool,
+      contract: null == contract
+          ? _value.contract
+          : contract // ignore: cast_nullable_to_non_nullable
+              as SubmitTenderContractDto,
     ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$_SubmitMaterialInfoDto extends _SubmitMaterialInfoDto {
-  const _$_SubmitMaterialInfoDto(
+class _$SubmitMaterialInfoDtoImpl extends _SubmitMaterialInfoDto {
+  const _$SubmitMaterialInfoDtoImpl(
       {@JsonKey(name: 'materialNumber', defaultValue: '')
       required this.materialNumber,
       @JsonKey(name: 'qty', defaultValue: 0) required this.qty,
@@ -373,7 +412,7 @@ class _$_SubmitMaterialInfoDto extends _SubmitMaterialInfoDto {
       @JsonKey(
           name: 'override',
           toJson: overrideTojson,
-          readValue: materialItemOverrideread,
+          readValue: materialItemReadValue,
           includeIfNull: false)
       required this.materialItemOverride,
       @JsonKey(name: 'ProductType', defaultValue: '') required this.productType,
@@ -394,12 +433,18 @@ class _$_SubmitMaterialInfoDto extends _SubmitMaterialInfoDto {
           includeIfNull: false)
       required this.batch,
       @JsonKey(name: 'isCounterOffer', defaultValue: false)
-      required this.isCounterOffer})
+      required this.isCounterOffer,
+      @JsonKey(
+          name: 'contract',
+          readValue: materialItemReadValue,
+          toJson: overridecontractJson,
+          includeIfNull: false)
+      required this.contract})
       : _bonuses = bonuses,
         super._();
 
-  factory _$_SubmitMaterialInfoDto.fromJson(Map<String, dynamic> json) =>
-      _$$_SubmitMaterialInfoDtoFromJson(json);
+  factory _$SubmitMaterialInfoDtoImpl.fromJson(Map<String, dynamic> json) =>
+      _$$SubmitMaterialInfoDtoImplFromJson(json);
 
   @override
   @JsonKey(name: 'materialNumber', defaultValue: '')
@@ -426,7 +471,7 @@ class _$_SubmitMaterialInfoDto extends _SubmitMaterialInfoDto {
   @JsonKey(
       name: 'override',
       toJson: overrideTojson,
-      readValue: materialItemOverrideread,
+      readValue: materialItemReadValue,
       includeIfNull: false)
   final MaterialItemOverrideDto materialItemOverride;
   @override
@@ -465,17 +510,24 @@ class _$_SubmitMaterialInfoDto extends _SubmitMaterialInfoDto {
   @override
   @JsonKey(name: 'isCounterOffer', defaultValue: false)
   final bool isCounterOffer;
+  @override
+  @JsonKey(
+      name: 'contract',
+      readValue: materialItemReadValue,
+      toJson: overridecontractJson,
+      includeIfNull: false)
+  final SubmitTenderContractDto contract;
 
   @override
   String toString() {
-    return 'SubmitMaterialInfoDto(materialNumber: $materialNumber, qty: $qty, bonuses: $bonuses, comment: $comment, parentId: $parentId, materialItemOverride: $materialItemOverride, productType: $productType, price: $price, tax: $tax, mrp: $mrp, promoStatus: $promoStatus, promoType: $promoType, principalCode: $principalCode, principalName: $principalName, batch: $batch, isCounterOffer: $isCounterOffer)';
+    return 'SubmitMaterialInfoDto(materialNumber: $materialNumber, qty: $qty, bonuses: $bonuses, comment: $comment, parentId: $parentId, materialItemOverride: $materialItemOverride, productType: $productType, price: $price, tax: $tax, mrp: $mrp, promoStatus: $promoStatus, promoType: $promoType, principalCode: $principalCode, principalName: $principalName, batch: $batch, isCounterOffer: $isCounterOffer, contract: $contract)';
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_SubmitMaterialInfoDto &&
+            other is _$SubmitMaterialInfoDtoImpl &&
             (identical(other.materialNumber, materialNumber) ||
                 other.materialNumber == materialNumber) &&
             (identical(other.qty, qty) || other.qty == qty) &&
@@ -500,7 +552,9 @@ class _$_SubmitMaterialInfoDto extends _SubmitMaterialInfoDto {
                 other.principalName == principalName) &&
             (identical(other.batch, batch) || other.batch == batch) &&
             (identical(other.isCounterOffer, isCounterOffer) ||
-                other.isCounterOffer == isCounterOffer));
+                other.isCounterOffer == isCounterOffer) &&
+            (identical(other.contract, contract) ||
+                other.contract == contract));
   }
 
   @JsonKey(ignore: true)
@@ -522,18 +576,19 @@ class _$_SubmitMaterialInfoDto extends _SubmitMaterialInfoDto {
       principalCode,
       principalName,
       batch,
-      isCounterOffer);
+      isCounterOffer,
+      contract);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_SubmitMaterialInfoDtoCopyWith<_$_SubmitMaterialInfoDto> get copyWith =>
-      __$$_SubmitMaterialInfoDtoCopyWithImpl<_$_SubmitMaterialInfoDto>(
-          this, _$identity);
+  _$$SubmitMaterialInfoDtoImplCopyWith<_$SubmitMaterialInfoDtoImpl>
+      get copyWith => __$$SubmitMaterialInfoDtoImplCopyWithImpl<
+          _$SubmitMaterialInfoDtoImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_SubmitMaterialInfoDtoToJson(
+    return _$$SubmitMaterialInfoDtoImplToJson(
       this,
     );
   }
@@ -552,7 +607,7 @@ abstract class _SubmitMaterialInfoDto extends SubmitMaterialInfoDto {
       @JsonKey(
           name: 'override',
           toJson: overrideTojson,
-          readValue: materialItemOverrideread,
+          readValue: materialItemReadValue,
           includeIfNull: false)
       required final MaterialItemOverrideDto materialItemOverride,
       @JsonKey(name: 'ProductType', defaultValue: '')
@@ -575,11 +630,18 @@ abstract class _SubmitMaterialInfoDto extends SubmitMaterialInfoDto {
           includeIfNull: false)
       required final String batch,
       @JsonKey(name: 'isCounterOffer', defaultValue: false)
-      required final bool isCounterOffer}) = _$_SubmitMaterialInfoDto;
+      required final bool isCounterOffer,
+      @JsonKey(
+          name: 'contract',
+          readValue: materialItemReadValue,
+          toJson: overridecontractJson,
+          includeIfNull: false)
+      required final SubmitTenderContractDto
+          contract}) = _$SubmitMaterialInfoDtoImpl;
   const _SubmitMaterialInfoDto._() : super._();
 
   factory _SubmitMaterialInfoDto.fromJson(Map<String, dynamic> json) =
-      _$_SubmitMaterialInfoDto.fromJson;
+      _$SubmitMaterialInfoDtoImpl.fromJson;
 
   @override
   @JsonKey(name: 'materialNumber', defaultValue: '')
@@ -600,7 +662,7 @@ abstract class _SubmitMaterialInfoDto extends SubmitMaterialInfoDto {
   @JsonKey(
       name: 'override',
       toJson: overrideTojson,
-      readValue: materialItemOverrideread,
+      readValue: materialItemReadValue,
       includeIfNull: false)
   MaterialItemOverrideDto get materialItemOverride;
   @override
@@ -640,7 +702,14 @@ abstract class _SubmitMaterialInfoDto extends SubmitMaterialInfoDto {
   @JsonKey(name: 'isCounterOffer', defaultValue: false)
   bool get isCounterOffer;
   @override
+  @JsonKey(
+      name: 'contract',
+      readValue: materialItemReadValue,
+      toJson: overridecontractJson,
+      includeIfNull: false)
+  SubmitTenderContractDto get contract;
+  @override
   @JsonKey(ignore: true)
-  _$$_SubmitMaterialInfoDtoCopyWith<_$_SubmitMaterialInfoDto> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$SubmitMaterialInfoDtoImplCopyWith<_$SubmitMaterialInfoDtoImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }

@@ -5,7 +5,7 @@ import 'package:ezrxmobile/domain/order/entities/bonus_sample_item.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_order_items.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_order_items_details.dart';
-import 'package:ezrxmobile/domain/order/entities/order_history_details_order_items_tender_contract_details.dart';
+import 'package:ezrxmobile/domain/order/entities/order_history_details_tender_contract.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:ezrxmobile/domain/order/entities/tender_contract.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
@@ -20,8 +20,7 @@ class OrderHistoryDetailsBonusAggregate
   factory OrderHistoryDetailsBonusAggregate({
     required OrderHistoryDetailsOrderItem orderItem,
     required List<OrderHistoryDetailsOrderItemDetails> details,
-    required OrderHistoryDetailsOrderItemTenderContractDetails
-        tenderContractDetails,
+    required OrderHistoryDetailsTenderContract tenderContractDetails,
     required List<OrderHistoryDetailsOrderItem> bonusList,
   }) = _OrderHistoryDetailsOrderItem;
 
@@ -29,8 +28,7 @@ class OrderHistoryDetailsBonusAggregate
       OrderHistoryDetailsBonusAggregate(
         orderItem: OrderHistoryDetailsOrderItem.empty(),
         details: <OrderHistoryDetailsOrderItemDetails>[],
-        tenderContractDetails:
-            OrderHistoryDetailsOrderItemTenderContractDetails.empty(),
+        tenderContractDetails: OrderHistoryDetailsTenderContract.empty(),
         bonusList: <OrderHistoryDetailsOrderItem>[],
       );
 
@@ -54,11 +52,9 @@ class OrderHistoryDetailsBonusAggregate
             )
             .toList(),
         tenderContract: TenderContract.empty().copyWith(
-          contractNumber: TenderContractNumber.tenderContractNumber(
-            tenderContractDetails.tenderContractNumber,
-          ),
+          contractNumber: tenderContractDetails.contractNumber,
           contractReference: StringValue(
-            tenderContractDetails.tenderContractReference,
+            tenderContractDetails.contractReference,
           ),
         ),
       );

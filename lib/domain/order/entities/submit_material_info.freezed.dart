@@ -32,6 +32,7 @@ mixin _$SubmitMaterialInfo {
   bool get promoStatus => throw _privateConstructorUsedError;
   PrincipalData get principalData => throw _privateConstructorUsedError;
   bool get isCounterOffer => throw _privateConstructorUsedError;
+  SubmitTenderContract get contract => throw _privateConstructorUsedError;
 
   ///Todo: consider to delete it
   StringValue get batch => throw _privateConstructorUsedError;
@@ -47,25 +48,28 @@ abstract class $SubmitMaterialInfoCopyWith<$Res> {
           SubmitMaterialInfo value, $Res Function(SubmitMaterialInfo) then) =
       _$SubmitMaterialInfoCopyWithImpl<$Res, SubmitMaterialInfo>;
   @useResult
-  $Res call(
-      {MaterialNumber materialNumber,
-      int quantity,
-      List<SubmitMaterialItemBonus> bonuses,
-      String productType,
-      String parentID,
-      String comment,
-      MaterialItemOverride materialItemOverride,
-      double price,
-      double tax,
-      double mrp,
-      String promoType,
-      bool promoStatus,
-      PrincipalData principalData,
-      bool isCounterOffer,
-      StringValue batch});
+  $Res call({
+    MaterialNumber materialNumber,
+    int quantity,
+    List<SubmitMaterialItemBonus> bonuses,
+    String productType,
+    String parentID,
+    String comment,
+    MaterialItemOverride materialItemOverride,
+    double price,
+    double tax,
+    double mrp,
+    String promoType,
+    bool promoStatus,
+    PrincipalData principalData,
+    bool isCounterOffer,
+    StringValue batch,
+    SubmitTenderContract contract,
+  });
 
   $MaterialItemOverrideCopyWith<$Res> get materialItemOverride;
   $PrincipalDataCopyWith<$Res> get principalData;
+  $SubmitTenderContractCopyWith<$Res> get contract;
 }
 
 /// @nodoc
@@ -95,6 +99,7 @@ class _$SubmitMaterialInfoCopyWithImpl<$Res, $Val extends SubmitMaterialInfo>
     Object? promoStatus = null,
     Object? principalData = null,
     Object? isCounterOffer = null,
+    Object? contract = null,
     Object? batch = null,
   }) {
     return _then(_value.copyWith(
@@ -154,6 +159,10 @@ class _$SubmitMaterialInfoCopyWithImpl<$Res, $Val extends SubmitMaterialInfo>
           ? _value.isCounterOffer
           : isCounterOffer // ignore: cast_nullable_to_non_nullable
               as bool,
+      contract: null == contract
+          ? _value.contract
+          : contract // ignore: cast_nullable_to_non_nullable
+              as SubmitTenderContract,
       batch: null == batch
           ? _value.batch
           : batch // ignore: cast_nullable_to_non_nullable
@@ -175,6 +184,14 @@ class _$SubmitMaterialInfoCopyWithImpl<$Res, $Val extends SubmitMaterialInfo>
   $PrincipalDataCopyWith<$Res> get principalData {
     return $PrincipalDataCopyWith<$Res>(_value.principalData, (value) {
       return _then(_value.copyWith(principalData: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $SubmitTenderContractCopyWith<$Res> get contract {
+    return $SubmitTenderContractCopyWith<$Res>(_value.contract, (value) {
+      return _then(_value.copyWith(contract: value) as $Val);
     });
   }
 }
@@ -202,12 +219,15 @@ abstract class _$$SubmitMaterialInfoImplCopyWith<$Res>
       bool promoStatus,
       PrincipalData principalData,
       bool isCounterOffer,
-      StringValue batch});
+      StringValue batch,
+      SubmitTenderContract contract});
 
   @override
   $MaterialItemOverrideCopyWith<$Res> get materialItemOverride;
   @override
   $PrincipalDataCopyWith<$Res> get principalData;
+  @override
+  $SubmitTenderContractCopyWith<$Res> get contract;
 }
 
 /// @nodoc
@@ -235,6 +255,7 @@ class __$$SubmitMaterialInfoImplCopyWithImpl<$Res>
     Object? promoStatus = null,
     Object? principalData = null,
     Object? isCounterOffer = null,
+    Object? contract = null,
     Object? batch = null,
   }) {
     return _then(_$SubmitMaterialInfoImpl(
@@ -294,6 +315,10 @@ class __$$SubmitMaterialInfoImplCopyWithImpl<$Res>
           ? _value.isCounterOffer
           : isCounterOffer // ignore: cast_nullable_to_non_nullable
               as bool,
+      contract: null == contract
+          ? _value.contract
+          : contract // ignore: cast_nullable_to_non_nullable
+              as SubmitTenderContract,
       batch: null == batch
           ? _value.batch
           : batch // ignore: cast_nullable_to_non_nullable
@@ -320,6 +345,7 @@ class _$SubmitMaterialInfoImpl extends _SubmitMaterialInfo {
       required this.promoStatus,
       required this.principalData,
       required this.isCounterOffer,
+      required this.contract,
       required this.batch})
       : _bonuses = bonuses,
         super._();
@@ -358,6 +384,8 @@ class _$SubmitMaterialInfoImpl extends _SubmitMaterialInfo {
   final PrincipalData principalData;
   @override
   final bool isCounterOffer;
+  @override
+  final SubmitTenderContract contract;
 
   ///Todo: consider to delete it
   @override
@@ -365,7 +393,7 @@ class _$SubmitMaterialInfoImpl extends _SubmitMaterialInfo {
 
   @override
   String toString() {
-    return 'SubmitMaterialInfo(materialNumber: $materialNumber, quantity: $quantity, bonuses: $bonuses, productType: $productType, parentID: $parentID, comment: $comment, materialItemOverride: $materialItemOverride, price: $price, tax: $tax, mrp: $mrp, promoType: $promoType, promoStatus: $promoStatus, principalData: $principalData, isCounterOffer: $isCounterOffer, batch: $batch)';
+    return 'SubmitMaterialInfo(materialNumber: $materialNumber, quantity: $quantity, bonuses: $bonuses, productType: $productType, parentID: $parentID, comment: $comment, materialItemOverride: $materialItemOverride, price: $price, tax: $tax, mrp: $mrp, promoType: $promoType, promoStatus: $promoStatus, principalData: $principalData, isCounterOffer: $isCounterOffer, contract: $contract, batch: $batch)';
   }
 
   @override
@@ -396,6 +424,8 @@ class _$SubmitMaterialInfoImpl extends _SubmitMaterialInfo {
                 other.principalData == principalData) &&
             (identical(other.isCounterOffer, isCounterOffer) ||
                 other.isCounterOffer == isCounterOffer) &&
+            (identical(other.contract, contract) ||
+                other.contract == contract) &&
             (identical(other.batch, batch) || other.batch == batch));
   }
 
@@ -416,6 +446,7 @@ class _$SubmitMaterialInfoImpl extends _SubmitMaterialInfo {
       promoStatus,
       principalData,
       isCounterOffer,
+      contract,
       batch);
 
   @JsonKey(ignore: true)
@@ -442,6 +473,7 @@ abstract class _SubmitMaterialInfo extends SubmitMaterialInfo {
       required final bool promoStatus,
       required final PrincipalData principalData,
       required final bool isCounterOffer,
+      required final SubmitTenderContract contract,
       required final StringValue batch}) = _$SubmitMaterialInfoImpl;
   const _SubmitMaterialInfo._() : super._();
 
@@ -473,6 +505,8 @@ abstract class _SubmitMaterialInfo extends SubmitMaterialInfo {
   PrincipalData get principalData;
   @override
   bool get isCounterOffer;
+  @override
+  SubmitTenderContract get contract;
   @override
 
   ///Todo: consider to delete it

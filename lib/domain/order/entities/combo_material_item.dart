@@ -6,6 +6,7 @@ import 'package:ezrxmobile/domain/order/entities/material_item_override.dart';
 import 'package:ezrxmobile/domain/order/entities/price_combo_deal.dart';
 import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
 import 'package:ezrxmobile/domain/order/entities/submit_material_info.dart';
+import 'package:ezrxmobile/domain/order/entities/submit_tender_contract_info.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/domain/utils/num_utils.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -148,6 +149,7 @@ class ComboMaterialItem with _$ComboMaterialItem {
       promoType: materialInfo.promoType,
       principalData: materialInfo.principalData,
       isCounterOffer: false,
+      contract: SubmitTenderContract.empty(),
     );
   }
 }

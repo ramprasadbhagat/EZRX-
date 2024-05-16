@@ -12,7 +12,7 @@ part of 'order_history_item.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$OrderHistoryItem {
@@ -349,11 +349,11 @@ class _$OrderHistoryItemCopyWithImpl<$Res, $Val extends OrderHistoryItem>
 }
 
 /// @nodoc
-abstract class _$$_OrderHistoryItemCopyWith<$Res>
+abstract class _$$OrderHistoryItemImplCopyWith<$Res>
     implements $OrderHistoryItemCopyWith<$Res> {
-  factory _$$_OrderHistoryItemCopyWith(
-          _$_OrderHistoryItem value, $Res Function(_$_OrderHistoryItem) then) =
-      __$$_OrderHistoryItemCopyWithImpl<$Res>;
+  factory _$$OrderHistoryItemImplCopyWith(_$OrderHistoryItemImpl value,
+          $Res Function(_$OrderHistoryItemImpl) then) =
+      __$$OrderHistoryItemImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -404,11 +404,11 @@ abstract class _$$_OrderHistoryItemCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_OrderHistoryItemCopyWithImpl<$Res>
-    extends _$OrderHistoryItemCopyWithImpl<$Res, _$_OrderHistoryItem>
-    implements _$$_OrderHistoryItemCopyWith<$Res> {
-  __$$_OrderHistoryItemCopyWithImpl(
-      _$_OrderHistoryItem _value, $Res Function(_$_OrderHistoryItem) _then)
+class __$$OrderHistoryItemImplCopyWithImpl<$Res>
+    extends _$OrderHistoryItemCopyWithImpl<$Res, _$OrderHistoryItemImpl>
+    implements _$$OrderHistoryItemImplCopyWith<$Res> {
+  __$$OrderHistoryItemImplCopyWithImpl(_$OrderHistoryItemImpl _value,
+      $Res Function(_$OrderHistoryItemImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -454,7 +454,7 @@ class __$$_OrderHistoryItemCopyWithImpl<$Res>
     Object? tenderOrderReason = null,
     Object? isCovid = null,
   }) {
-    return _then(_$_OrderHistoryItem(
+    return _then(_$OrderHistoryItemImpl(
       materialNumber: null == materialNumber
           ? _value.materialNumber
           : materialNumber // ignore: cast_nullable_to_non_nullable
@@ -617,8 +617,8 @@ class __$$_OrderHistoryItemCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_OrderHistoryItem extends _OrderHistoryItem {
-  _$_OrderHistoryItem(
+class _$OrderHistoryItemImpl extends _OrderHistoryItem {
+  _$OrderHistoryItemImpl(
       {required this.materialNumber,
       required this.materialDescription,
       required this.qty,
@@ -753,10 +753,10 @@ class _$_OrderHistoryItem extends _OrderHistoryItem {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_OrderHistoryItem &&
+            other is _$OrderHistoryItemImpl &&
             (identical(other.materialNumber, materialNumber) ||
                 other.materialNumber == materialNumber) &&
             (identical(other.materialDescription, materialDescription) ||
@@ -880,8 +880,9 @@ class _$_OrderHistoryItem extends _OrderHistoryItem {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_OrderHistoryItemCopyWith<_$_OrderHistoryItem> get copyWith =>
-      __$$_OrderHistoryItemCopyWithImpl<_$_OrderHistoryItem>(this, _$identity);
+  _$$OrderHistoryItemImplCopyWith<_$OrderHistoryItemImpl> get copyWith =>
+      __$$OrderHistoryItemImplCopyWithImpl<_$OrderHistoryItemImpl>(
+          this, _$identity);
 }
 
 abstract class _OrderHistoryItem extends OrderHistoryItem {
@@ -924,7 +925,7 @@ abstract class _OrderHistoryItem extends OrderHistoryItem {
       required final int tenderPriceUnit,
       required final TenderPrice tenderPrice,
       required final TenderContractReason tenderOrderReason,
-      required final bool isCovid}) = _$_OrderHistoryItem;
+      required final bool isCovid}) = _$OrderHistoryItemImpl;
   _OrderHistoryItem._() : super._();
 
   @override
@@ -1007,6 +1008,6 @@ abstract class _OrderHistoryItem extends OrderHistoryItem {
   bool get isCovid;
   @override
   @JsonKey(ignore: true)
-  _$$_OrderHistoryItemCopyWith<_$_OrderHistoryItem> get copyWith =>
+  _$$OrderHistoryItemImplCopyWith<_$OrderHistoryItemImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

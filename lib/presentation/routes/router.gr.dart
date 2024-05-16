@@ -496,6 +496,7 @@ class AppRouter extends _i77.RootStackRouter {
         child: _i46.ProductDetailsPage(
           key: args.key,
           materialInfo: args.materialInfo,
+          isEditTender: args.isEditTender,
           banner: args.banner,
         ),
       );
@@ -2056,6 +2057,7 @@ class ProductDetailsPageRoute
   ProductDetailsPageRoute({
     _i78.Key? key,
     required _i81.MaterialInfo materialInfo,
+    bool isEditTender = false,
     _i82.EZReachBanner? banner,
   }) : super(
           ProductDetailsPageRoute.name,
@@ -2063,6 +2065,7 @@ class ProductDetailsPageRoute
           args: ProductDetailsPageRouteArgs(
             key: key,
             materialInfo: materialInfo,
+            isEditTender: isEditTender,
             banner: banner,
           ),
         );
@@ -2074,6 +2077,7 @@ class ProductDetailsPageRouteArgs {
   const ProductDetailsPageRouteArgs({
     this.key,
     required this.materialInfo,
+    this.isEditTender = false,
     this.banner,
   });
 
@@ -2081,11 +2085,13 @@ class ProductDetailsPageRouteArgs {
 
   final _i81.MaterialInfo materialInfo;
 
+  final bool isEditTender;
+
   final _i82.EZReachBanner? banner;
 
   @override
   String toString() {
-    return 'ProductDetailsPageRouteArgs{key: $key, materialInfo: $materialInfo, banner: $banner}';
+    return 'ProductDetailsPageRouteArgs{key: $key, materialInfo: $materialInfo, isEditTender: $isEditTender, banner: $banner}';
   }
 }
 

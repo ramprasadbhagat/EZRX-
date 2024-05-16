@@ -28,6 +28,8 @@ mixin _$TenderContractDetailEvent {
     required TResult Function(int qty) updateQty,
     required TResult Function(TenderContract tenderContract) select,
     required TResult Function(bool enable) toggleSwitch,
+    required TResult Function(TenderContract tenderContract)
+        setDefaultValueForEdit,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -42,6 +44,7 @@ mixin _$TenderContractDetailEvent {
     TResult? Function(int qty)? updateQty,
     TResult? Function(TenderContract tenderContract)? select,
     TResult? Function(bool enable)? toggleSwitch,
+    TResult? Function(TenderContract tenderContract)? setDefaultValueForEdit,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -56,6 +59,7 @@ mixin _$TenderContractDetailEvent {
     TResult Function(int qty)? updateQty,
     TResult Function(TenderContract tenderContract)? select,
     TResult Function(bool enable)? toggleSwitch,
+    TResult Function(TenderContract tenderContract)? setDefaultValueForEdit,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -66,6 +70,8 @@ mixin _$TenderContractDetailEvent {
     required TResult Function(_UpdateQty value) updateQty,
     required TResult Function(_Select value) select,
     required TResult Function(_ToggleSwitch value) toggleSwitch,
+    required TResult Function(_SetDefaultValueForEdit value)
+        setDefaultValueForEdit,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -75,6 +81,7 @@ mixin _$TenderContractDetailEvent {
     TResult? Function(_UpdateQty value)? updateQty,
     TResult? Function(_Select value)? select,
     TResult? Function(_ToggleSwitch value)? toggleSwitch,
+    TResult? Function(_SetDefaultValueForEdit value)? setDefaultValueForEdit,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -84,6 +91,7 @@ mixin _$TenderContractDetailEvent {
     TResult Function(_UpdateQty value)? updateQty,
     TResult Function(_Select value)? select,
     TResult Function(_ToggleSwitch value)? toggleSwitch,
+    TResult Function(_SetDefaultValueForEdit value)? setDefaultValueForEdit,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -156,6 +164,8 @@ class _$InitializedImpl implements _Initialized {
     required TResult Function(int qty) updateQty,
     required TResult Function(TenderContract tenderContract) select,
     required TResult Function(bool enable) toggleSwitch,
+    required TResult Function(TenderContract tenderContract)
+        setDefaultValueForEdit,
   }) {
     return initialized();
   }
@@ -173,6 +183,7 @@ class _$InitializedImpl implements _Initialized {
     TResult? Function(int qty)? updateQty,
     TResult? Function(TenderContract tenderContract)? select,
     TResult? Function(bool enable)? toggleSwitch,
+    TResult? Function(TenderContract tenderContract)? setDefaultValueForEdit,
   }) {
     return initialized?.call();
   }
@@ -190,6 +201,7 @@ class _$InitializedImpl implements _Initialized {
     TResult Function(int qty)? updateQty,
     TResult Function(TenderContract tenderContract)? select,
     TResult Function(bool enable)? toggleSwitch,
+    TResult Function(TenderContract tenderContract)? setDefaultValueForEdit,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -206,6 +218,8 @@ class _$InitializedImpl implements _Initialized {
     required TResult Function(_UpdateQty value) updateQty,
     required TResult Function(_Select value) select,
     required TResult Function(_ToggleSwitch value) toggleSwitch,
+    required TResult Function(_SetDefaultValueForEdit value)
+        setDefaultValueForEdit,
   }) {
     return initialized(this);
   }
@@ -218,6 +232,7 @@ class _$InitializedImpl implements _Initialized {
     TResult? Function(_UpdateQty value)? updateQty,
     TResult? Function(_Select value)? select,
     TResult? Function(_ToggleSwitch value)? toggleSwitch,
+    TResult? Function(_SetDefaultValueForEdit value)? setDefaultValueForEdit,
   }) {
     return initialized?.call(this);
   }
@@ -230,6 +245,7 @@ class _$InitializedImpl implements _Initialized {
     TResult Function(_UpdateQty value)? updateQty,
     TResult Function(_Select value)? select,
     TResult Function(_ToggleSwitch value)? toggleSwitch,
+    TResult Function(_SetDefaultValueForEdit value)? setDefaultValueForEdit,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -382,6 +398,8 @@ class _$FetchImpl implements _Fetch {
     required TResult Function(int qty) updateQty,
     required TResult Function(TenderContract tenderContract) select,
     required TResult Function(bool enable) toggleSwitch,
+    required TResult Function(TenderContract tenderContract)
+        setDefaultValueForEdit,
   }) {
     return fetch(
         salesOrganisation, customerCodeInfo, shipToInfo, materialNumber);
@@ -400,6 +418,7 @@ class _$FetchImpl implements _Fetch {
     TResult? Function(int qty)? updateQty,
     TResult? Function(TenderContract tenderContract)? select,
     TResult? Function(bool enable)? toggleSwitch,
+    TResult? Function(TenderContract tenderContract)? setDefaultValueForEdit,
   }) {
     return fetch?.call(
         salesOrganisation, customerCodeInfo, shipToInfo, materialNumber);
@@ -418,6 +437,7 @@ class _$FetchImpl implements _Fetch {
     TResult Function(int qty)? updateQty,
     TResult Function(TenderContract tenderContract)? select,
     TResult Function(bool enable)? toggleSwitch,
+    TResult Function(TenderContract tenderContract)? setDefaultValueForEdit,
     required TResult orElse(),
   }) {
     if (fetch != null) {
@@ -435,6 +455,8 @@ class _$FetchImpl implements _Fetch {
     required TResult Function(_UpdateQty value) updateQty,
     required TResult Function(_Select value) select,
     required TResult Function(_ToggleSwitch value) toggleSwitch,
+    required TResult Function(_SetDefaultValueForEdit value)
+        setDefaultValueForEdit,
   }) {
     return fetch(this);
   }
@@ -447,6 +469,7 @@ class _$FetchImpl implements _Fetch {
     TResult? Function(_UpdateQty value)? updateQty,
     TResult? Function(_Select value)? select,
     TResult? Function(_ToggleSwitch value)? toggleSwitch,
+    TResult? Function(_SetDefaultValueForEdit value)? setDefaultValueForEdit,
   }) {
     return fetch?.call(this);
   }
@@ -459,6 +482,7 @@ class _$FetchImpl implements _Fetch {
     TResult Function(_UpdateQty value)? updateQty,
     TResult Function(_Select value)? select,
     TResult Function(_ToggleSwitch value)? toggleSwitch,
+    TResult Function(_SetDefaultValueForEdit value)? setDefaultValueForEdit,
     required TResult orElse(),
   }) {
     if (fetch != null) {
@@ -558,6 +582,8 @@ class _$UpdateQtyImpl implements _UpdateQty {
     required TResult Function(int qty) updateQty,
     required TResult Function(TenderContract tenderContract) select,
     required TResult Function(bool enable) toggleSwitch,
+    required TResult Function(TenderContract tenderContract)
+        setDefaultValueForEdit,
   }) {
     return updateQty(qty);
   }
@@ -575,6 +601,7 @@ class _$UpdateQtyImpl implements _UpdateQty {
     TResult? Function(int qty)? updateQty,
     TResult? Function(TenderContract tenderContract)? select,
     TResult? Function(bool enable)? toggleSwitch,
+    TResult? Function(TenderContract tenderContract)? setDefaultValueForEdit,
   }) {
     return updateQty?.call(qty);
   }
@@ -592,6 +619,7 @@ class _$UpdateQtyImpl implements _UpdateQty {
     TResult Function(int qty)? updateQty,
     TResult Function(TenderContract tenderContract)? select,
     TResult Function(bool enable)? toggleSwitch,
+    TResult Function(TenderContract tenderContract)? setDefaultValueForEdit,
     required TResult orElse(),
   }) {
     if (updateQty != null) {
@@ -608,6 +636,8 @@ class _$UpdateQtyImpl implements _UpdateQty {
     required TResult Function(_UpdateQty value) updateQty,
     required TResult Function(_Select value) select,
     required TResult Function(_ToggleSwitch value) toggleSwitch,
+    required TResult Function(_SetDefaultValueForEdit value)
+        setDefaultValueForEdit,
   }) {
     return updateQty(this);
   }
@@ -620,6 +650,7 @@ class _$UpdateQtyImpl implements _UpdateQty {
     TResult? Function(_UpdateQty value)? updateQty,
     TResult? Function(_Select value)? select,
     TResult? Function(_ToggleSwitch value)? toggleSwitch,
+    TResult? Function(_SetDefaultValueForEdit value)? setDefaultValueForEdit,
   }) {
     return updateQty?.call(this);
   }
@@ -632,6 +663,7 @@ class _$UpdateQtyImpl implements _UpdateQty {
     TResult Function(_UpdateQty value)? updateQty,
     TResult Function(_Select value)? select,
     TResult Function(_ToggleSwitch value)? toggleSwitch,
+    TResult Function(_SetDefaultValueForEdit value)? setDefaultValueForEdit,
     required TResult orElse(),
   }) {
     if (updateQty != null) {
@@ -735,6 +767,8 @@ class _$SelectImpl implements _Select {
     required TResult Function(int qty) updateQty,
     required TResult Function(TenderContract tenderContract) select,
     required TResult Function(bool enable) toggleSwitch,
+    required TResult Function(TenderContract tenderContract)
+        setDefaultValueForEdit,
   }) {
     return select(tenderContract);
   }
@@ -752,6 +786,7 @@ class _$SelectImpl implements _Select {
     TResult? Function(int qty)? updateQty,
     TResult? Function(TenderContract tenderContract)? select,
     TResult? Function(bool enable)? toggleSwitch,
+    TResult? Function(TenderContract tenderContract)? setDefaultValueForEdit,
   }) {
     return select?.call(tenderContract);
   }
@@ -769,6 +804,7 @@ class _$SelectImpl implements _Select {
     TResult Function(int qty)? updateQty,
     TResult Function(TenderContract tenderContract)? select,
     TResult Function(bool enable)? toggleSwitch,
+    TResult Function(TenderContract tenderContract)? setDefaultValueForEdit,
     required TResult orElse(),
   }) {
     if (select != null) {
@@ -785,6 +821,8 @@ class _$SelectImpl implements _Select {
     required TResult Function(_UpdateQty value) updateQty,
     required TResult Function(_Select value) select,
     required TResult Function(_ToggleSwitch value) toggleSwitch,
+    required TResult Function(_SetDefaultValueForEdit value)
+        setDefaultValueForEdit,
   }) {
     return select(this);
   }
@@ -797,6 +835,7 @@ class _$SelectImpl implements _Select {
     TResult? Function(_UpdateQty value)? updateQty,
     TResult? Function(_Select value)? select,
     TResult? Function(_ToggleSwitch value)? toggleSwitch,
+    TResult? Function(_SetDefaultValueForEdit value)? setDefaultValueForEdit,
   }) {
     return select?.call(this);
   }
@@ -809,6 +848,7 @@ class _$SelectImpl implements _Select {
     TResult Function(_UpdateQty value)? updateQty,
     TResult Function(_Select value)? select,
     TResult Function(_ToggleSwitch value)? toggleSwitch,
+    TResult Function(_SetDefaultValueForEdit value)? setDefaultValueForEdit,
     required TResult orElse(),
   }) {
     if (select != null) {
@@ -902,6 +942,8 @@ class _$ToggleSwitchImpl implements _ToggleSwitch {
     required TResult Function(int qty) updateQty,
     required TResult Function(TenderContract tenderContract) select,
     required TResult Function(bool enable) toggleSwitch,
+    required TResult Function(TenderContract tenderContract)
+        setDefaultValueForEdit,
   }) {
     return toggleSwitch(enable);
   }
@@ -919,6 +961,7 @@ class _$ToggleSwitchImpl implements _ToggleSwitch {
     TResult? Function(int qty)? updateQty,
     TResult? Function(TenderContract tenderContract)? select,
     TResult? Function(bool enable)? toggleSwitch,
+    TResult? Function(TenderContract tenderContract)? setDefaultValueForEdit,
   }) {
     return toggleSwitch?.call(enable);
   }
@@ -936,6 +979,7 @@ class _$ToggleSwitchImpl implements _ToggleSwitch {
     TResult Function(int qty)? updateQty,
     TResult Function(TenderContract tenderContract)? select,
     TResult Function(bool enable)? toggleSwitch,
+    TResult Function(TenderContract tenderContract)? setDefaultValueForEdit,
     required TResult orElse(),
   }) {
     if (toggleSwitch != null) {
@@ -952,6 +996,8 @@ class _$ToggleSwitchImpl implements _ToggleSwitch {
     required TResult Function(_UpdateQty value) updateQty,
     required TResult Function(_Select value) select,
     required TResult Function(_ToggleSwitch value) toggleSwitch,
+    required TResult Function(_SetDefaultValueForEdit value)
+        setDefaultValueForEdit,
   }) {
     return toggleSwitch(this);
   }
@@ -964,6 +1010,7 @@ class _$ToggleSwitchImpl implements _ToggleSwitch {
     TResult? Function(_UpdateQty value)? updateQty,
     TResult? Function(_Select value)? select,
     TResult? Function(_ToggleSwitch value)? toggleSwitch,
+    TResult? Function(_SetDefaultValueForEdit value)? setDefaultValueForEdit,
   }) {
     return toggleSwitch?.call(this);
   }
@@ -976,6 +1023,7 @@ class _$ToggleSwitchImpl implements _ToggleSwitch {
     TResult Function(_UpdateQty value)? updateQty,
     TResult Function(_Select value)? select,
     TResult Function(_ToggleSwitch value)? toggleSwitch,
+    TResult Function(_SetDefaultValueForEdit value)? setDefaultValueForEdit,
     required TResult orElse(),
   }) {
     if (toggleSwitch != null) {
@@ -993,6 +1041,197 @@ abstract class _ToggleSwitch implements TenderContractDetailEvent {
   @JsonKey(ignore: true)
   _$$ToggleSwitchImplCopyWith<_$ToggleSwitchImpl> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$SetDefaultValueForEditImplCopyWith<$Res> {
+  factory _$$SetDefaultValueForEditImplCopyWith(
+          _$SetDefaultValueForEditImpl value,
+          $Res Function(_$SetDefaultValueForEditImpl) then) =
+      __$$SetDefaultValueForEditImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({TenderContract tenderContract});
+
+  $TenderContractCopyWith<$Res> get tenderContract;
+}
+
+/// @nodoc
+class __$$SetDefaultValueForEditImplCopyWithImpl<$Res>
+    extends _$TenderContractDetailEventCopyWithImpl<$Res,
+        _$SetDefaultValueForEditImpl>
+    implements _$$SetDefaultValueForEditImplCopyWith<$Res> {
+  __$$SetDefaultValueForEditImplCopyWithImpl(
+      _$SetDefaultValueForEditImpl _value,
+      $Res Function(_$SetDefaultValueForEditImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? tenderContract = null,
+  }) {
+    return _then(_$SetDefaultValueForEditImpl(
+      tenderContract: null == tenderContract
+          ? _value.tenderContract
+          : tenderContract // ignore: cast_nullable_to_non_nullable
+              as TenderContract,
+    ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $TenderContractCopyWith<$Res> get tenderContract {
+    return $TenderContractCopyWith<$Res>(_value.tenderContract, (value) {
+      return _then(_value.copyWith(tenderContract: value));
+    });
+  }
+}
+
+/// @nodoc
+
+class _$SetDefaultValueForEditImpl implements _SetDefaultValueForEdit {
+  const _$SetDefaultValueForEditImpl({required this.tenderContract});
+
+  @override
+  final TenderContract tenderContract;
+
+  @override
+  String toString() {
+    return 'TenderContractDetailEvent.setDefaultValueForEdit(tenderContract: $tenderContract)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$SetDefaultValueForEditImpl &&
+            (identical(other.tenderContract, tenderContract) ||
+                other.tenderContract == tenderContract));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, tenderContract);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$SetDefaultValueForEditImplCopyWith<_$SetDefaultValueForEditImpl>
+      get copyWith => __$$SetDefaultValueForEditImplCopyWithImpl<
+          _$SetDefaultValueForEditImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initialized,
+    required TResult Function(
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            MaterialNumber materialNumber)
+        fetch,
+    required TResult Function(int qty) updateQty,
+    required TResult Function(TenderContract tenderContract) select,
+    required TResult Function(bool enable) toggleSwitch,
+    required TResult Function(TenderContract tenderContract)
+        setDefaultValueForEdit,
+  }) {
+    return setDefaultValueForEdit(tenderContract);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initialized,
+    TResult? Function(
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            MaterialNumber materialNumber)?
+        fetch,
+    TResult? Function(int qty)? updateQty,
+    TResult? Function(TenderContract tenderContract)? select,
+    TResult? Function(bool enable)? toggleSwitch,
+    TResult? Function(TenderContract tenderContract)? setDefaultValueForEdit,
+  }) {
+    return setDefaultValueForEdit?.call(tenderContract);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initialized,
+    TResult Function(
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            MaterialNumber materialNumber)?
+        fetch,
+    TResult Function(int qty)? updateQty,
+    TResult Function(TenderContract tenderContract)? select,
+    TResult Function(bool enable)? toggleSwitch,
+    TResult Function(TenderContract tenderContract)? setDefaultValueForEdit,
+    required TResult orElse(),
+  }) {
+    if (setDefaultValueForEdit != null) {
+      return setDefaultValueForEdit(tenderContract);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initialized value) initialized,
+    required TResult Function(_Fetch value) fetch,
+    required TResult Function(_UpdateQty value) updateQty,
+    required TResult Function(_Select value) select,
+    required TResult Function(_ToggleSwitch value) toggleSwitch,
+    required TResult Function(_SetDefaultValueForEdit value)
+        setDefaultValueForEdit,
+  }) {
+    return setDefaultValueForEdit(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_UpdateQty value)? updateQty,
+    TResult? Function(_Select value)? select,
+    TResult? Function(_ToggleSwitch value)? toggleSwitch,
+    TResult? Function(_SetDefaultValueForEdit value)? setDefaultValueForEdit,
+  }) {
+    return setDefaultValueForEdit?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_Fetch value)? fetch,
+    TResult Function(_UpdateQty value)? updateQty,
+    TResult Function(_Select value)? select,
+    TResult Function(_ToggleSwitch value)? toggleSwitch,
+    TResult Function(_SetDefaultValueForEdit value)? setDefaultValueForEdit,
+    required TResult orElse(),
+  }) {
+    if (setDefaultValueForEdit != null) {
+      return setDefaultValueForEdit(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _SetDefaultValueForEdit implements TenderContractDetailEvent {
+  const factory _SetDefaultValueForEdit(
+          {required final TenderContract tenderContract}) =
+      _$SetDefaultValueForEditImpl;
+
+  TenderContract get tenderContract;
+  @JsonKey(ignore: true)
+  _$$SetDefaultValueForEditImplCopyWith<_$SetDefaultValueForEditImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc

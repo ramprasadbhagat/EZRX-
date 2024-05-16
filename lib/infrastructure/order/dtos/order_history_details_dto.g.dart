@@ -47,7 +47,7 @@ _$OrderHistoryDetailsDtoImpl _$$OrderHistoryDetailsDtoImplFromJson(
           (poDocumentOverride(json, 'PODocuments') as List<dynamic>)
               .map((e) => PoDocumentsDto.fromJson(e as Map<String, dynamic>))
               .toList(),
-      itemCount: json['ItmCount'] as int? ?? 0,
+      itemCount: (json['ItmCount'] as num?)?.toInt() ?? 0,
       isMarketPlace:
           mappingIsMarketPlace(json, 'isMarketPlace') as bool? ?? false,
     );

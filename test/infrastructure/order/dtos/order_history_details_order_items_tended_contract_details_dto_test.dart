@@ -1,3 +1,4 @@
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/order_history_details_order_items_tender_contract_details_dto.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -14,26 +15,26 @@ void main() {
     });
     test('Test toDomain', () {
       final configs =
-          OrderHistoryDetailsOrderItemTenderContractDetailsDto.fromJson(data)
-              .toDomain();
+          OrderHistoryDetailsTenderContractDto.fromJson(data).toDomain();
 
-      expect(configs.tenderContractNumber, '7615757');
+      expect(
+        configs.contractNumber,
+        TenderContractNumber.tenderContractNumber('7615757'),
+      );
     });
 
     test('Test fromDomain', () {
-      final configsDto =
-          OrderHistoryDetailsOrderItemTenderContractDetailsDto.fromDomain(
-        OrderHistoryDetailsOrderItemTenderContractDetailsDto.fromJson(
+      final configsDto = OrderHistoryDetailsTenderContractDto.fromDomain(
+        OrderHistoryDetailsTenderContractDto.fromJson(
           data,
         ).toDomain(),
       );
-      expect(configsDto.tenderContractNumber, '7615757');
+      expect(configsDto.contractNumber, '7615757');
     });
 
     test('Test tojson', () {
-      final configsDto =
-          OrderHistoryDetailsOrderItemTenderContractDetailsDto.fromDomain(
-        OrderHistoryDetailsOrderItemTenderContractDetailsDto.fromJson(
+      final configsDto = OrderHistoryDetailsTenderContractDto.fromDomain(
+        OrderHistoryDetailsTenderContractDto.fromJson(
           data,
         ).toDomain(),
       ).toJson();

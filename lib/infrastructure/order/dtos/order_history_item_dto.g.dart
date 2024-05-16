@@ -6,12 +6,12 @@ part of 'order_history_item_dto.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_OrderHistoryItemDto _$$_OrderHistoryItemDtoFromJson(
+_$OrderHistoryItemDtoImpl _$$OrderHistoryItemDtoImplFromJson(
         Map<String, dynamic> json) =>
-    _$_OrderHistoryItemDto(
+    _$OrderHistoryItemDtoImpl(
       materialNumber: json['MaterialCode'] as String? ?? '',
       materialDescription: json['MaterialDescription'] as String? ?? '',
-      qty: json['Qty'] as int? ?? 0,
+      qty: (json['Qty'] as num?)?.toInt() ?? 0,
       unitPrice: (json['UnitPrice'] as num?)?.toDouble() ?? 0.0,
       originPrice: (json['mrp'] as num?)?.toDouble() ?? 0.0,
       totalPrice: (json['TotalPrice'] as num?)?.toDouble() ?? 0.0,
@@ -49,13 +49,13 @@ _$_OrderHistoryItemDto _$$_OrderHistoryItemDtoFromJson(
       tenderContractNumber: json['TenderContractNumber'] as String? ?? '',
       tenderContractReference: json['TenderContractReference'] as String? ?? '',
       tenderOrderReason: json['TenderOrderReason'] as String? ?? '',
-      tenderPriceUnit: json['TenderPriceUnit'] as int? ?? 0,
+      tenderPriceUnit: (json['TenderPriceUnit'] as num?)?.toInt() ?? 0,
       tenderPrice: json['TenderPrice'] as String? ?? '',
       isCovid: json['isCovid'] as bool? ?? false,
     );
 
-Map<String, dynamic> _$$_OrderHistoryItemDtoToJson(
-        _$_OrderHistoryItemDto instance) =>
+Map<String, dynamic> _$$OrderHistoryItemDtoImplToJson(
+        _$OrderHistoryItemDtoImpl instance) =>
     <String, dynamic>{
       'MaterialCode': instance.materialNumber,
       'MaterialDescription': instance.materialDescription,

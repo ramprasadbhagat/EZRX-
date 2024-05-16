@@ -18,4 +18,7 @@ class TenderContractDetailEvent with _$TenderContractDetailEvent {
   const factory TenderContractDetailEvent.toggleSwitch({
     required bool enable,
   }) = _ToggleSwitch;
+  const factory TenderContractDetailEvent.setDefaultValueForEdit({
+    required TenderContract tenderContract,
+  }) = _SetDefaultValueForEdit;
 }

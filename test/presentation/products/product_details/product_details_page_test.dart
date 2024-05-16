@@ -3105,6 +3105,17 @@ void main() {
               salesOrganisation: fakeVNSalesOrganisation,
             ),
           );
+          final expectedState = [
+            TenderContractDetailState.initial().copyWith(isFetching: true),
+            TenderContractDetailState.initial().copyWith(
+              tenderContractList: tenderContractList,
+              tenderContractEnable: true,
+            ),
+          ];
+          whenListen(
+            tenderContractDetailBlocMock,
+            Stream.fromIterable(expectedState),
+          );
           await tester.pumpWidget(getScopedWidget());
           await tester.pump();
           verify(

@@ -10,6 +10,7 @@ import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dar
 import 'package:ezrxmobile/presentation/core/price_component.dart';
 import 'package:ezrxmobile/presentation/core/responsive.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
+import 'package:ezrxmobile/presentation/orders/cart/item/cart_product_tile_widgets/cart_product_tender_contract_section.dart';
 import 'package:ezrxmobile/presentation/orders/cart/widget/item_tax.dart';
 import 'package:ezrxmobile/presentation/core/pre_order_label.dart';
 import 'package:ezrxmobile/presentation/products/widgets/offer_label.dart';
@@ -37,6 +38,10 @@ class CheckoutMaterialItem extends StatelessWidget {
             cartItem: cartItem,
           ),
           _QuantityAndPrice(cartItem: cartItem),
+          CartProductTenderContractSection(
+            cartItem: cartItem,
+            isEditButtonRequired: false,
+          ),
         ],
       ),
     );

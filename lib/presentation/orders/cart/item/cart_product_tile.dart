@@ -16,6 +16,7 @@ import 'package:ezrxmobile/presentation/core/error_text_with_icon.dart';
 import 'package:ezrxmobile/presentation/core/govt_list_price_component.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
+import 'package:ezrxmobile/presentation/orders/cart/item/cart_product_tile_widgets/cart_product_tender_contract_section.dart';
 import 'package:ezrxmobile/presentation/orders/cart/override/request_counter_offer_bottom_sheet.dart';
 import 'package:ezrxmobile/presentation/orders/cart/widget/item_tax.dart';
 import 'package:ezrxmobile/presentation/core/pre_order_label.dart';
@@ -92,6 +93,9 @@ class CartProductTile extends StatelessWidget {
             ),
             _ItemSubTotalSection(
               cartProduct: cartItem,
+            ),
+            CartProductTenderContractSection(
+              cartItem: cartItem,
             ),
             if (!isInvalidCartItem && cartItem.bonusPriceOverrideEligible) ...[
               const Divider(
@@ -348,6 +352,16 @@ class _MaterialDetails extends StatelessWidget {
               valueText: cartItem.isMaxQtyExceedsForId
                   ? '${context.tr('Maximum order qty')}: ${cartItem.maximumQty}'
                   : '${context.tr('Remaining stock')}: ${cartItem.stockQuantity}',
+            ),
+          if (cartItem.isMaxQtyExceedsForTender)
+            ErrorTextWithIcon(
+              valueText: context.tr(
+                'Maximum tender qty: {maxQty}',
+                namedArgs: {
+                  'maxQty': cartItem.tenderContract.remainingTenderQuantity
+                      .toString(),
+                },
+              ),
             ),
         ],
       ),

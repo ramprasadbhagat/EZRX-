@@ -1,6 +1,7 @@
 import 'package:ezrxmobile/application/account/customer_license_bloc/customer_license_bloc.dart';
 import 'package:ezrxmobile/application/order/additional_bonus/bonus_material_bloc.dart';
 import 'package:ezrxmobile/application/order/order_eligibility/order_eligibility_bloc.dart';
+import 'package:ezrxmobile/application/order/tender_contract/tender_contract_list_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/role.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/order/entities/bonus_sample_item.dart';
@@ -59,6 +60,7 @@ void main() {
   late SalesOrgBloc salesOrgBloc;
   late CustomerCodeBloc customerCodeBloc;
   late OrderEligibilityBloc orderEligibilityBloc;
+  late TenderContractListBloc tenderContractListBlocMock;
 
   late OrderDocumentTypeBloc orderDocumentTypeBlocMock;
 
@@ -94,6 +96,7 @@ void main() {
     authBlocMock = AuthBlocMock();
     announcementBlocMock = AnnouncementBlocMock();
     bonusMaterialBlocMock = BonusMaterialBlocMock();
+    tenderContractListBlocMock = TenderContractListBlocMock();
 
     mockPriceList = {};
     mockPriceList.putIfAbsent(
@@ -170,6 +173,8 @@ void main() {
       when(() => authBlocMock.state).thenReturn(const AuthState.initial());
       when(() => bonusMaterialBlocMock.state)
           .thenReturn(BonusMaterialState.initial());
+      when(() => tenderContractListBlocMock.state)
+          .thenReturn(TenderContractListState.initial());
     },
   );
   group(
@@ -216,6 +221,9 @@ void main() {
             ),
             BlocProvider<BonusMaterialBloc>(
               create: (context) => bonusMaterialBlocMock,
+            ),
+            BlocProvider<TenderContractListBloc>(
+              create: (context) => tenderContractListBlocMock,
             ),
           ],
           child: const CartPage(),

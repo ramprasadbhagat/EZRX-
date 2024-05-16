@@ -1,6 +1,7 @@
 // ignore_for_file: unused_local_variable
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/application/account/customer_license_bloc/customer_license_bloc.dart';
+import 'package:ezrxmobile/application/order/tender_contract/tender_contract_list_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/utils/string_utils.dart';
 import 'package:ezrxmobile/infrastructure/core/common/tracking_events.dart';
@@ -93,6 +94,7 @@ void main() {
   late List<PriceAggregate> mockCartItemDiscountBundles;
   late MaterialListBloc materialListBlocMock;
   late TenderContractBloc tenderContractBlocMock;
+  late TenderContractListBloc tenderContractListBlocMock;
   late CustomerLicenseBloc customerLicenseBlocMock;
   late OrderDocumentTypeBloc orderDocumentTypeBlocMock;
   late DiscountOverrideBloc discountOverrideBlocMock;
@@ -166,6 +168,7 @@ void main() {
       materialPriceBloc = MaterialPriceBlocMock();
       eligibilityBloc = EligibilityBlocMock();
       tenderContractBlocMock = TenderContractBlocMock();
+      tenderContractListBlocMock = TenderContractListBlocMock();
       orderDocumentTypeBlocMock = OrderDocumentTypeBlocMock();
       discountOverrideBlocMock = DiscountOverrideBlocMock();
       orderEligibilityBlocMock = OrderEligibilityBlocMock();
@@ -477,6 +480,8 @@ void main() {
       );
       when(() => tenderContractBlocMock.state)
           .thenReturn(TenderContractState.initial());
+      when(() => tenderContractListBlocMock.state)
+          .thenReturn(TenderContractListState.initial());
       when(() => orderDocumentTypeBlocMock.state).thenReturn(
         OrderDocumentTypeState.initial().copyWith(
           selectedOrderType: OrderDocumentType.empty().copyWith(
@@ -535,6 +540,9 @@ void main() {
             BlocProvider<EligibilityBloc>(create: (context) => eligibilityBloc),
             BlocProvider<TenderContractBloc>(
               create: (context) => tenderContractBlocMock,
+            ),
+            BlocProvider<TenderContractListBloc>(
+              create: (context) => tenderContractListBlocMock,
             ),
             BlocProvider<OrderDocumentTypeBloc>(
               create: (context) => orderDocumentTypeBlocMock,

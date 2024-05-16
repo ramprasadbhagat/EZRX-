@@ -7,9 +7,10 @@ import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/material_query_info.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_order_items_details.dart';
-import 'package:ezrxmobile/domain/order/entities/order_history_details_order_items_tender_contract_details.dart';
+import 'package:ezrxmobile/domain/order/entities/order_history_details_tender_contract.dart';
 import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
+import 'package:ezrxmobile/domain/order/entities/tender_contract.dart';
 import 'package:ezrxmobile/domain/order/entities/view_by_order_group.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -37,8 +38,7 @@ class OrderHistoryDetailsOrderItem with _$OrderHistoryDetailsOrderItem {
     required LineNumber lineNumber,
     required bool isTenderContractMaterial,
     required List<OrderHistoryDetailsOrderItemDetails> details,
-    required OrderHistoryDetailsOrderItemTenderContractDetails
-        tenderContractDetails,
+    required OrderHistoryDetailsTenderContract tenderContractDetails,
     required PrincipalData principalData,
     required ProductImages productImages,
     required String governmentMaterialCode,
@@ -72,8 +72,7 @@ class OrderHistoryDetailsOrderItem with _$OrderHistoryDetailsOrderItem {
         lineNumber: LineNumber(''),
         isTenderContractMaterial: false,
         details: <OrderHistoryDetailsOrderItemDetails>[],
-        tenderContractDetails:
-            OrderHistoryDetailsOrderItemTenderContractDetails.empty(),
+        tenderContractDetails: OrderHistoryDetailsTenderContract.empty(),
         principalData: PrincipalData.empty(),
         productImages: ProductImages.empty(),
         governmentMaterialCode: '',
@@ -208,6 +207,16 @@ class OrderHistoryDetailsOrderItem with _$OrderHistoryDetailsOrderItem {
   String get itemOriginPrice => !priceAggregate.price.isValid
       ? 'Price Not Available'
       : originPrice.toString();
+
+  TenderContract get orderItemTenderContract => TenderContract.empty().copyWith(
+        tenderOrderReason: tenderContractDetails.orderReason,
+        contractNumber: tenderContractDetails.contractNumber,
+        contractReference: StringValue(
+          tenderContractDetails.contractReference,
+        ),
+        pricingUnit: tenderContractDetails.priceUnit,
+        tenderPrice: TenderPrice(tenderContractDetails.price),
+      );
 }
 
 extension ViewByOrderDetailsListExtension

@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/application/account/customer_license_bloc/customer_license_bloc.dart';
+import 'package:ezrxmobile/application/order/tender_contract/tender_contract_list_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:ezrxmobile/config.dart';
@@ -62,6 +63,7 @@ void main() {
   late List<PriceAggregate> cartItems;
   late OrderEligibilityBloc orderEligibilityBloc;
   late CustomerLicenseBloc customerLicenseBlocMock;
+  late TenderContractListBloc tenderContractListBlocMock;
   final cartPageFinder = find.byKey(WidgetKeys.cartPage);
 
   setUpAll(() async {
@@ -102,6 +104,7 @@ void main() {
         orderSummaryBlocMock = OrderSummaryBlocMock();
         authBlocMock = AuthBlocMock();
         announcementBlocMock = AnnouncementBlocMock();
+        tenderContractListBlocMock = TenderContractListBlocMock();
 
         mockPriceList = {};
         mockPriceList.putIfAbsent(
@@ -156,6 +159,8 @@ void main() {
         when(() => announcementBlocMock.state)
             .thenReturn(AnnouncementState.initial());
         when(() => authBlocMock.state).thenReturn(const AuthState.initial());
+        when(() => tenderContractListBlocMock.state)
+            .thenReturn(TenderContractListState.initial());
       },
     );
 
@@ -190,6 +195,9 @@ void main() {
           ),
           BlocProvider<CustomerLicenseBloc>(
             create: (context) => customerLicenseBlocMock,
+          ),
+          BlocProvider<TenderContractListBloc>(
+            create: (context) => tenderContractListBlocMock,
           ),
         ],
         child: child,

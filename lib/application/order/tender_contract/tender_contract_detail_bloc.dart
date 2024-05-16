@@ -85,6 +85,14 @@ class TenderContractDetailBloc
           ),
         );
       },
+      setDefaultValueForEdit: (e) {
+        emit(
+          state.copyWith(
+            tenderContractEnable: true,
+            selectedTenderContract: e.tenderContract,
+          ),
+        );
+      },
     );
   }
 }

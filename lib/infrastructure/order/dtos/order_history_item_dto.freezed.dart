@@ -12,7 +12,7 @@ part of 'order_history_item_dto.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 OrderHistoryItemDto _$OrderHistoryItemDtoFromJson(Map<String, dynamic> json) {
   return _OrderHistoryItemDto.fromJson(json);
@@ -381,11 +381,11 @@ class _$OrderHistoryItemDtoCopyWithImpl<$Res, $Val extends OrderHistoryItemDto>
 }
 
 /// @nodoc
-abstract class _$$_OrderHistoryItemDtoCopyWith<$Res>
+abstract class _$$OrderHistoryItemDtoImplCopyWith<$Res>
     implements $OrderHistoryItemDtoCopyWith<$Res> {
-  factory _$$_OrderHistoryItemDtoCopyWith(_$_OrderHistoryItemDto value,
-          $Res Function(_$_OrderHistoryItemDto) then) =
-      __$$_OrderHistoryItemDtoCopyWithImpl<$Res>;
+  factory _$$OrderHistoryItemDtoImplCopyWith(_$OrderHistoryItemDtoImpl value,
+          $Res Function(_$OrderHistoryItemDtoImpl) then) =
+      __$$OrderHistoryItemDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -443,11 +443,11 @@ abstract class _$$_OrderHistoryItemDtoCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_OrderHistoryItemDtoCopyWithImpl<$Res>
-    extends _$OrderHistoryItemDtoCopyWithImpl<$Res, _$_OrderHistoryItemDto>
-    implements _$$_OrderHistoryItemDtoCopyWith<$Res> {
-  __$$_OrderHistoryItemDtoCopyWithImpl(_$_OrderHistoryItemDto _value,
-      $Res Function(_$_OrderHistoryItemDto) _then)
+class __$$OrderHistoryItemDtoImplCopyWithImpl<$Res>
+    extends _$OrderHistoryItemDtoCopyWithImpl<$Res, _$OrderHistoryItemDtoImpl>
+    implements _$$OrderHistoryItemDtoImplCopyWith<$Res> {
+  __$$OrderHistoryItemDtoImplCopyWithImpl(_$OrderHistoryItemDtoImpl _value,
+      $Res Function(_$OrderHistoryItemDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -493,7 +493,7 @@ class __$$_OrderHistoryItemDtoCopyWithImpl<$Res>
     Object? tenderPrice = null,
     Object? isCovid = null,
   }) {
-    return _then(_$_OrderHistoryItemDto(
+    return _then(_$OrderHistoryItemDtoImpl(
       materialNumber: null == materialNumber
           ? _value.materialNumber
           : materialNumber // ignore: cast_nullable_to_non_nullable
@@ -656,8 +656,8 @@ class __$$_OrderHistoryItemDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_OrderHistoryItemDto extends _OrderHistoryItemDto {
-  const _$_OrderHistoryItemDto(
+class _$OrderHistoryItemDtoImpl extends _OrderHistoryItemDto {
+  const _$OrderHistoryItemDtoImpl(
       {@JsonKey(name: 'MaterialCode', defaultValue: '')
       required this.materialNumber,
       @JsonKey(name: 'MaterialDescription', defaultValue: '')
@@ -720,8 +720,8 @@ class _$_OrderHistoryItemDto extends _OrderHistoryItemDto {
       : _orderHistoryItemPoAttachments = orderHistoryItemPoAttachments,
         super._();
 
-  factory _$_OrderHistoryItemDto.fromJson(Map<String, dynamic> json) =>
-      _$$_OrderHistoryItemDtoFromJson(json);
+  factory _$OrderHistoryItemDtoImpl.fromJson(Map<String, dynamic> json) =>
+      _$$OrderHistoryItemDtoImplFromJson(json);
 
   @override
   @JsonKey(name: 'MaterialCode', defaultValue: '')
@@ -854,10 +854,10 @@ class _$_OrderHistoryItemDto extends _OrderHistoryItemDto {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_OrderHistoryItemDto &&
+            other is _$OrderHistoryItemDtoImpl &&
             (identical(other.materialNumber, materialNumber) ||
                 other.materialNumber == materialNumber) &&
             (identical(other.materialDescription, materialDescription) ||
@@ -982,13 +982,13 @@ class _$_OrderHistoryItemDto extends _OrderHistoryItemDto {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_OrderHistoryItemDtoCopyWith<_$_OrderHistoryItemDto> get copyWith =>
-      __$$_OrderHistoryItemDtoCopyWithImpl<_$_OrderHistoryItemDto>(
+  _$$OrderHistoryItemDtoImplCopyWith<_$OrderHistoryItemDtoImpl> get copyWith =>
+      __$$OrderHistoryItemDtoImplCopyWithImpl<_$OrderHistoryItemDtoImpl>(
           this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_OrderHistoryItemDtoToJson(
+    return _$$OrderHistoryItemDtoImplToJson(
       this,
     );
   }
@@ -1068,11 +1068,11 @@ abstract class _OrderHistoryItemDto extends OrderHistoryItemDto {
       @JsonKey(name: 'TenderPrice', defaultValue: '')
       required final String tenderPrice,
       @JsonKey(name: 'isCovid', defaultValue: false)
-      required final bool isCovid}) = _$_OrderHistoryItemDto;
+      required final bool isCovid}) = _$OrderHistoryItemDtoImpl;
   const _OrderHistoryItemDto._() : super._();
 
   factory _OrderHistoryItemDto.fromJson(Map<String, dynamic> json) =
-      _$_OrderHistoryItemDto.fromJson;
+      _$OrderHistoryItemDtoImpl.fromJson;
 
   @override
   @JsonKey(name: 'MaterialCode', defaultValue: '')
@@ -1193,6 +1193,6 @@ abstract class _OrderHistoryItemDto extends OrderHistoryItemDto {
   bool get isCovid;
   @override
   @JsonKey(ignore: true)
-  _$$_OrderHistoryItemDtoCopyWith<_$_OrderHistoryItemDto> get copyWith =>
+  _$$OrderHistoryItemDtoImplCopyWith<_$OrderHistoryItemDtoImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

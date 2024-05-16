@@ -19,6 +19,7 @@ import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:ezrxmobile/domain/order/entities/product_meta_data.dart';
 import 'package:ezrxmobile/domain/order/entities/request_counter_offer_details.dart';
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
+import 'package:ezrxmobile/domain/order/entities/tender_contract.dart';
 import 'package:ezrxmobile/domain/order/repository/i_cart_repository.dart';
 import 'package:ezrxmobile/domain/order/repository/i_product_details_repository.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
@@ -425,6 +426,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
               previousCartProducts: state.cartProducts,
               currentCartProducts: cartProductList,
               salesOrganisationConfigs: state.config,
+              isUpserting: true,
             );
 
             emit(
@@ -1081,6 +1083,35 @@ class CartBloc extends Bloc<CartEvent, CartState> {
           },
         );
       },
+      updateTenderContract: (e) async {
+        emit(
+          state.copyWith(
+            isTenderContractLoading: true,
+          ),
+        );
+
+        final cartProductList = state.cartProducts.map((cartProduct) {
+          final originalTenderContract =
+              e.tenderContractList[cartProduct.materialInfo.materialNumber] ??
+                  [];
+
+          return cartProduct.copyWith(
+            tenderContract: originalTenderContract.firstWhere(
+              (element) =>
+                  cartProduct.tenderContract.contractNumber ==
+                  element.contractNumber,
+              orElse: () => TenderContract.empty(),
+            ),
+          );
+        }).toList();
+
+        emit(
+          state.copyWith(
+            isTenderContractLoading: false,
+            cartProducts: cartProductList,
+          ),
+        );
+      },
     );
   }
 
@@ -1088,6 +1119,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
     required List<PriceAggregate> previousCartProducts,
     required List<PriceAggregate> currentCartProducts,
     required SalesOrganisationConfigs salesOrganisationConfigs,
+    bool isUpserting = false,
   }) {
     return currentCartProducts.map((cartProduct) {
       final priceAggregate = previousCartProducts.firstWhere(
@@ -1102,12 +1134,16 @@ class CartBloc extends Bloc<CartEvent, CartState> {
           (previous) => current.materialNumber == previous.materialNumber,
         );
       }).toList();
+      final tenderContract = isUpserting
+          ? cartProduct.tenderContract
+          : priceAggregate.tenderContract;
 
       return cartProduct.copyWith(
         price: priceAggregate.price,
         bundle: cartProduct.bundle.copyWith(materials: bundleMaterial),
         salesOrgConfig: salesOrganisationConfigs,
         stockInfoList: priceAggregate.stockInfoList,
+        tenderContract: tenderContract,
         exceedQuantity: priceAggregate.exceedQuantity
             ? priceAggregate.materialInfo.materialQtyConfirmZDP5Rule(
                 priceAggregate.price.zdp5MaxQuota.intValue,

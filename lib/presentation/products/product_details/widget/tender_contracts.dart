@@ -1,6 +1,8 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
+import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/tender_contract/tender_contract_detail_bloc.dart';
+import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
 import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
@@ -12,9 +14,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class TenderContracts extends StatefulWidget {
   final MaterialInfo materialInfo;
+  final bool isEditTenderContract;
   const TenderContracts({
     super.key,
     required this.materialInfo,
+    required this.isEditTenderContract,
   });
 
   @override
@@ -25,26 +29,34 @@ class _TenderContractsState extends State<TenderContracts> {
   @override
   void initState() {
     final eligibilityState = context.read<EligibilityBloc>().state;
-    context.read<TenderContractDetailBloc>()
-      ..add(
-        TenderContractDetailEvent.fetch(
-          salesOrganisation: eligibilityState.salesOrganisation,
-          customerCodeInfo: eligibilityState.customerCodeInfo,
-          shipToInfo: eligibilityState.shipToInfo,
-          materialNumber: widget.materialInfo.materialNumber,
-        ),
-      )
-      ..add(
-        TenderContractDetailEvent.toggleSwitch(
-          enable: widget.materialInfo.hasMandatoryTenderContract,
-        ),
-      );
+    context.read<TenderContractDetailBloc>().add(
+          TenderContractDetailEvent.fetch(
+            salesOrganisation: eligibilityState.salesOrganisation,
+            customerCodeInfo: eligibilityState.customerCodeInfo,
+            shipToInfo: eligibilityState.shipToInfo,
+            materialNumber: widget.materialInfo.materialNumber,
+          ),
+        );
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<TenderContractDetailBloc, TenderContractDetailState>(
+    return BlocConsumer<TenderContractDetailBloc, TenderContractDetailState>(
+      listenWhen: (previous, current) =>
+          previous.tenderContractList != current.tenderContractList &&
+          !current.isFetching,
+      listener: (context, state) {
+        _setDefaultTenderValue(
+          context: context,
+          isEditTenderContract: widget.isEditTenderContract,
+          materialInfo: widget.materialInfo,
+        );
+      },
+      buildWhen: (previous, current) =>
+          previous.tenderContractList != current.tenderContractList ||
+          previous.selectedTenderContract != current.selectedTenderContract ||
+          previous.tenderContractEnable != current.tenderContractEnable,
       builder: (context, state) {
         if (state.tenderContractList.isEmpty) {
           return const SizedBox.shrink();
@@ -276,6 +288,34 @@ class _TenderContractsState extends State<TenderContracts> {
           ],
         );
       },
+    );
+  }
+}
+
+void _setDefaultTenderValue({
+  required BuildContext context,
+  required bool isEditTenderContract,
+  required MaterialInfo materialInfo,
+}) {
+  final tenderContractDetailBloc = context.read<TenderContractDetailBloc>();
+  if (!isEditTenderContract) {
+    tenderContractDetailBloc.add(
+      TenderContractDetailEvent.toggleSwitch(
+        enable: materialInfo.hasMandatoryTenderContract,
+      ),
+    );
+  } else {
+    tenderContractDetailBloc.add(
+      TenderContractDetailEvent.setDefaultValueForEdit(
+        tenderContract: context
+            .read<CartBloc>()
+            .state
+            .cartProducts
+            .getFirstCartProductWithNumber(
+              materialInfo.materialNumber,
+            )
+            .tenderContract,
+      ),
     );
   }
 }

@@ -135,36 +135,44 @@ class _MaterialItem extends StatelessWidget {
               ),
             )
           : const SizedBox.shrink(),
-      footerWidget: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      footerWidget: Column(
         children: [
-          Text(
-            '${'Qty'.tr()}: ${orderItem.qty}',
-            key: WidgetKeys.cartItemProductQty,
-            style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                  color: ZPColors.black,
-                ),
-          ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.end,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              PriceComponent(
-                key: WidgetKeys.orderSuccessItemTotalPrice,
-                salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
-                price: orderItem.itemNetPrice(
-                  eligibilityState.salesOrgConfigs.displayItemTaxBreakdown,
-                  isIDMarket,
-                ),
+              Text(
+                '${'Qty'.tr()}: ${orderItem.qty}',
+                key: WidgetKeys.cartItemProductQty,
+                style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                      color: ZPColors.black,
+                    ),
               ),
-              if (orderItem.showItemTax)
-                Padding(
-                  padding: const EdgeInsets.only(top: 2),
-                  child: ItemTax(
-                    cartItem: orderItem.priceAggregate,
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  PriceComponent(
+                    key: WidgetKeys.orderSuccessItemTotalPrice,
+                    salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
+                    price: orderItem.itemNetPrice(
+                      eligibilityState.salesOrgConfigs.displayItemTaxBreakdown,
+                      isIDMarket,
+                    ),
                   ),
-                ),
+                  if (orderItem.showItemTax)
+                    Padding(
+                      padding: const EdgeInsets.only(top: 2),
+                      child: ItemTax(
+                        cartItem: orderItem.priceAggregate,
+                      ),
+                    ),
+                ],
+              ),
             ],
           ),
+          if (!orderItem.tenderContractDetails.orderReason.isEmpty)
+            TenderContractSection(
+              tenderContract: orderItem.orderItemTenderContract,
+            ),
         ],
       ),
     );

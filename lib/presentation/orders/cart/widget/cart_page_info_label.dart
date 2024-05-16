@@ -46,9 +46,23 @@ class _CartPageInfoLabel extends StatelessWidget {
                       _ErrorText(
                         text: context.tr(
                           'Gimmick material {gimmikMaterialCode} is not allowed',
-                           namedArgs: {
+                          namedArgs: {
                             'gimmikMaterialCode': state.gimmickMaterialCode,
                           },
+                        ),
+                        showLeadingIcon: state.hasMultipleErrors,
+                      ),
+                    if (state.hasInvalidTenderMaterial)
+                      _ErrorText(
+                        text: context.tr(
+                          'Tender Contract is no longer available for one or few item(s). Please remove to continue.',
+                        ),
+                        showLeadingIcon: state.hasMultipleErrors,
+                      ),
+                    if (state.isMaxQtyExceedsForAnyTender)
+                      _ErrorText(
+                        text: context.tr(
+                          'One or few item(s) order qty exceed the maximum available tender quantity.',
                         ),
                         showLeadingIcon: state.hasMultipleErrors,
                       ),

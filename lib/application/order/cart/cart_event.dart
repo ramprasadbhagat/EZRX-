@@ -84,4 +84,8 @@ class CartEvent with _$CartEvent {
 
   const factory CartEvent.fetchGrandTotalPriceForIdMarket() =
       _FetchGrandTotalPriceForIdMarket;
+
+ const factory CartEvent.updateTenderContract({
+    required Map<MaterialNumber, List<TenderContract>> tenderContractList,
+  }) = _UpdateTenderContract;
 }

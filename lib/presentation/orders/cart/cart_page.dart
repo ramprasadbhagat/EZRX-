@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:collection/collection.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/application/order/tender_contract/tender_contract_list_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
@@ -162,13 +163,43 @@ class _CartPageState extends State<CartPage> {
         ),
         BlocListener<CartBloc, CartState>(
           listenWhen: (previous, current) =>
+              previous.isFetching != current.isFetching &&
+                  !current.isFetching ||
+              previous.isUpserting != current.isUpserting &&
+                  !current.isUpserting ||
+              previous.isFetchingCartProductDetail !=
+                      current.isFetchingCartProductDetail &&
+                  !current.isFetchingCartProductDetail,
+          listener: (context, state) {
+            final eligibilityState = context.read<EligibilityBloc>().state;
+            if (eligibilityState.salesOrg.isTenderEligible &&
+                state.cartProducts.hasTenderContract) {
+              context.read<TenderContractListBloc>().add(
+                    TenderContractListEvent.fetch(
+                      salesOrganisation: eligibilityState.salesOrganisation,
+                      customerCodeInfo: eligibilityState.customerCodeInfo,
+                      shipToInfo: eligibilityState.shipToInfo,
+                      materialNumbers: state.cartProducts
+                          .where(
+                            (element) =>
+                                element.materialInfo.hasValidTenderContract,
+                          )
+                          .map((e) => e.materialInfo.materialNumber)
+                          .toList(),
+                    ),
+                  );
+            }
+          },
+        ),
+        BlocListener<CartBloc, CartState>(
+          listenWhen: (previous, current) =>
               previous.isUpdatingStock != current.isUpdatingStock &&
               !current.isUpdatingStock,
           listener: (context, state) {
+            final eligibilityState = context.read<EligibilityBloc>().state;
             context.read<MaterialPriceBloc>().add(
                   MaterialPriceEvent.fetchPriceCartProduct(
-                    comboDealEligible:
-                        context.read<EligibilityBloc>().state.comboDealEligible,
+                    comboDealEligible: eligibilityState.comboDealEligible,
                     products: state.cartProducts
                         .where(
                           (element) => element.materialInfo.type.typeMaterial,
@@ -205,6 +236,17 @@ class _CartPageState extends State<CartPage> {
             }
           },
         ),
+        BlocListener<TenderContractListBloc, TenderContractListState>(
+          listenWhen: (previous, current) =>
+              previous.isFetching != current.isFetching && !current.isFetching,
+          listener: (context, state) {
+            context.read<CartBloc>().add(
+                  CartEvent.updateTenderContract(
+                    tenderContractList: state.tenderContracts,
+                  ),
+                );
+          },
+        ),
         BlocListener<CartBloc, CartState>(
           listenWhen: (previous, current) =>
               previous.subTotalHidePriceMaterial !=
@@ -212,6 +254,9 @@ class _CartPageState extends State<CartPage> {
                   !current.isFetchingCartProductDetail ||
               previous.isMappingPrice != current.isMappingPrice &&
                   !current.isMappingPrice ||
+              previous.isTenderContractLoading !=
+                      current.isTenderContractLoading &&
+                  !current.isTenderContractLoading ||
               (previous.isUpserting != current.isUpserting ||
                   previous.isClearing != current.isClearing ||
                   previous.isUpdatingStock != current.isUpdatingStock),

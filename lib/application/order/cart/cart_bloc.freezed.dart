@@ -61,6 +61,9 @@ mixin _$CartEvent {
             List<PriceAggregate> updatedCartItems)
         updateProductDetermination,
     required TResult Function() fetchGrandTotalPriceForIdMarket,
+    required TResult Function(
+            Map<MaterialNumber, List<TenderContract>> tenderContractList)
+        updateTenderContract,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -103,6 +106,9 @@ mixin _$CartEvent {
             List<PriceAggregate> updatedCartItems)?
         updateProductDetermination,
     TResult? Function()? fetchGrandTotalPriceForIdMarket,
+    TResult? Function(
+            Map<MaterialNumber, List<TenderContract>> tenderContractList)?
+        updateTenderContract,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -145,6 +151,9 @@ mixin _$CartEvent {
             List<PriceAggregate> updatedCartItems)?
         updateProductDetermination,
     TResult Function()? fetchGrandTotalPriceForIdMarket,
+    TResult Function(
+            Map<MaterialNumber, List<TenderContract>> tenderContractList)?
+        updateTenderContract,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -179,6 +188,7 @@ mixin _$CartEvent {
         updateProductDetermination,
     required TResult Function(_FetchGrandTotalPriceForIdMarket value)
         fetchGrandTotalPriceForIdMarket,
+    required TResult Function(_UpdateTenderContract value) updateTenderContract,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -208,6 +218,7 @@ mixin _$CartEvent {
         updateProductDetermination,
     TResult? Function(_FetchGrandTotalPriceForIdMarket value)?
         fetchGrandTotalPriceForIdMarket,
+    TResult? Function(_UpdateTenderContract value)? updateTenderContract,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -236,6 +247,7 @@ mixin _$CartEvent {
         updateProductDetermination,
     TResult Function(_FetchGrandTotalPriceForIdMarket value)?
         fetchGrandTotalPriceForIdMarket,
+    TResult Function(_UpdateTenderContract value)? updateTenderContract,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -460,6 +472,9 @@ class _$InitializedImpl implements _Initialized {
             List<PriceAggregate> updatedCartItems)
         updateProductDetermination,
     required TResult Function() fetchGrandTotalPriceForIdMarket,
+    required TResult Function(
+            Map<MaterialNumber, List<TenderContract>> tenderContractList)
+        updateTenderContract,
   }) {
     return initialized(salesOrganisationConfigs, salesOrganisation,
         customerCodeInfo, shipToInfo, user);
@@ -506,6 +521,9 @@ class _$InitializedImpl implements _Initialized {
             List<PriceAggregate> updatedCartItems)?
         updateProductDetermination,
     TResult? Function()? fetchGrandTotalPriceForIdMarket,
+    TResult? Function(
+            Map<MaterialNumber, List<TenderContract>> tenderContractList)?
+        updateTenderContract,
   }) {
     return initialized?.call(salesOrganisationConfigs, salesOrganisation,
         customerCodeInfo, shipToInfo, user);
@@ -552,6 +570,9 @@ class _$InitializedImpl implements _Initialized {
             List<PriceAggregate> updatedCartItems)?
         updateProductDetermination,
     TResult Function()? fetchGrandTotalPriceForIdMarket,
+    TResult Function(
+            Map<MaterialNumber, List<TenderContract>> tenderContractList)?
+        updateTenderContract,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -593,6 +614,7 @@ class _$InitializedImpl implements _Initialized {
         updateProductDetermination,
     required TResult Function(_FetchGrandTotalPriceForIdMarket value)
         fetchGrandTotalPriceForIdMarket,
+    required TResult Function(_UpdateTenderContract value) updateTenderContract,
   }) {
     return initialized(this);
   }
@@ -625,6 +647,7 @@ class _$InitializedImpl implements _Initialized {
         updateProductDetermination,
     TResult? Function(_FetchGrandTotalPriceForIdMarket value)?
         fetchGrandTotalPriceForIdMarket,
+    TResult? Function(_UpdateTenderContract value)? updateTenderContract,
   }) {
     return initialized?.call(this);
   }
@@ -656,6 +679,7 @@ class _$InitializedImpl implements _Initialized {
         updateProductDetermination,
     TResult Function(_FetchGrandTotalPriceForIdMarket value)?
         fetchGrandTotalPriceForIdMarket,
+    TResult Function(_UpdateTenderContract value)? updateTenderContract,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -820,6 +844,9 @@ class _$VerifyMaterialDealBonusImpl implements _VerifyMaterialDealBonus {
             List<PriceAggregate> updatedCartItems)
         updateProductDetermination,
     required TResult Function() fetchGrandTotalPriceForIdMarket,
+    required TResult Function(
+            Map<MaterialNumber, List<TenderContract>> tenderContractList)
+        updateTenderContract,
   }) {
     return verifyMaterialDealBonus(item, items);
   }
@@ -865,6 +892,9 @@ class _$VerifyMaterialDealBonusImpl implements _VerifyMaterialDealBonus {
             List<PriceAggregate> updatedCartItems)?
         updateProductDetermination,
     TResult? Function()? fetchGrandTotalPriceForIdMarket,
+    TResult? Function(
+            Map<MaterialNumber, List<TenderContract>> tenderContractList)?
+        updateTenderContract,
   }) {
     return verifyMaterialDealBonus?.call(item, items);
   }
@@ -910,6 +940,9 @@ class _$VerifyMaterialDealBonusImpl implements _VerifyMaterialDealBonus {
             List<PriceAggregate> updatedCartItems)?
         updateProductDetermination,
     TResult Function()? fetchGrandTotalPriceForIdMarket,
+    TResult Function(
+            Map<MaterialNumber, List<TenderContract>> tenderContractList)?
+        updateTenderContract,
     required TResult orElse(),
   }) {
     if (verifyMaterialDealBonus != null) {
@@ -950,6 +983,7 @@ class _$VerifyMaterialDealBonusImpl implements _VerifyMaterialDealBonus {
         updateProductDetermination,
     required TResult Function(_FetchGrandTotalPriceForIdMarket value)
         fetchGrandTotalPriceForIdMarket,
+    required TResult Function(_UpdateTenderContract value) updateTenderContract,
   }) {
     return verifyMaterialDealBonus(this);
   }
@@ -982,6 +1016,7 @@ class _$VerifyMaterialDealBonusImpl implements _VerifyMaterialDealBonus {
         updateProductDetermination,
     TResult? Function(_FetchGrandTotalPriceForIdMarket value)?
         fetchGrandTotalPriceForIdMarket,
+    TResult? Function(_UpdateTenderContract value)? updateTenderContract,
   }) {
     return verifyMaterialDealBonus?.call(this);
   }
@@ -1013,6 +1048,7 @@ class _$VerifyMaterialDealBonusImpl implements _VerifyMaterialDealBonus {
         updateProductDetermination,
     TResult Function(_FetchGrandTotalPriceForIdMarket value)?
         fetchGrandTotalPriceForIdMarket,
+    TResult Function(_UpdateTenderContract value)? updateTenderContract,
     required TResult orElse(),
   }) {
     if (verifyMaterialDealBonus != null) {
@@ -1190,6 +1226,9 @@ class _$AddBonusToCartItemImpl implements _AddBonusToCartItem {
             List<PriceAggregate> updatedCartItems)
         updateProductDetermination,
     required TResult Function() fetchGrandTotalPriceForIdMarket,
+    required TResult Function(
+            Map<MaterialNumber, List<TenderContract>> tenderContractList)
+        updateTenderContract,
   }) {
     return addBonusToCartItem(bonusMaterial, bonusItemId, counterOfferDetails);
   }
@@ -1235,6 +1274,9 @@ class _$AddBonusToCartItemImpl implements _AddBonusToCartItem {
             List<PriceAggregate> updatedCartItems)?
         updateProductDetermination,
     TResult? Function()? fetchGrandTotalPriceForIdMarket,
+    TResult? Function(
+            Map<MaterialNumber, List<TenderContract>> tenderContractList)?
+        updateTenderContract,
   }) {
     return addBonusToCartItem?.call(
         bonusMaterial, bonusItemId, counterOfferDetails);
@@ -1281,6 +1323,9 @@ class _$AddBonusToCartItemImpl implements _AddBonusToCartItem {
             List<PriceAggregate> updatedCartItems)?
         updateProductDetermination,
     TResult Function()? fetchGrandTotalPriceForIdMarket,
+    TResult Function(
+            Map<MaterialNumber, List<TenderContract>> tenderContractList)?
+        updateTenderContract,
     required TResult orElse(),
   }) {
     if (addBonusToCartItem != null) {
@@ -1322,6 +1367,7 @@ class _$AddBonusToCartItemImpl implements _AddBonusToCartItem {
         updateProductDetermination,
     required TResult Function(_FetchGrandTotalPriceForIdMarket value)
         fetchGrandTotalPriceForIdMarket,
+    required TResult Function(_UpdateTenderContract value) updateTenderContract,
   }) {
     return addBonusToCartItem(this);
   }
@@ -1354,6 +1400,7 @@ class _$AddBonusToCartItemImpl implements _AddBonusToCartItem {
         updateProductDetermination,
     TResult? Function(_FetchGrandTotalPriceForIdMarket value)?
         fetchGrandTotalPriceForIdMarket,
+    TResult? Function(_UpdateTenderContract value)? updateTenderContract,
   }) {
     return addBonusToCartItem?.call(this);
   }
@@ -1385,6 +1432,7 @@ class _$AddBonusToCartItemImpl implements _AddBonusToCartItem {
         updateProductDetermination,
     TResult Function(_FetchGrandTotalPriceForIdMarket value)?
         fetchGrandTotalPriceForIdMarket,
+    TResult Function(_UpdateTenderContract value)? updateTenderContract,
     required TResult orElse(),
   }) {
     if (addBonusToCartItem != null) {
@@ -1494,6 +1542,9 @@ class _$RemoveSampleBonusFromCartConfigImpl
             List<PriceAggregate> updatedCartItems)
         updateProductDetermination,
     required TResult Function() fetchGrandTotalPriceForIdMarket,
+    required TResult Function(
+            Map<MaterialNumber, List<TenderContract>> tenderContractList)
+        updateTenderContract,
   }) {
     return removeSampleBonusFromCartConfig();
   }
@@ -1539,6 +1590,9 @@ class _$RemoveSampleBonusFromCartConfigImpl
             List<PriceAggregate> updatedCartItems)?
         updateProductDetermination,
     TResult? Function()? fetchGrandTotalPriceForIdMarket,
+    TResult? Function(
+            Map<MaterialNumber, List<TenderContract>> tenderContractList)?
+        updateTenderContract,
   }) {
     return removeSampleBonusFromCartConfig?.call();
   }
@@ -1584,6 +1638,9 @@ class _$RemoveSampleBonusFromCartConfigImpl
             List<PriceAggregate> updatedCartItems)?
         updateProductDetermination,
     TResult Function()? fetchGrandTotalPriceForIdMarket,
+    TResult Function(
+            Map<MaterialNumber, List<TenderContract>> tenderContractList)?
+        updateTenderContract,
     required TResult orElse(),
   }) {
     if (removeSampleBonusFromCartConfig != null) {
@@ -1624,6 +1681,7 @@ class _$RemoveSampleBonusFromCartConfigImpl
         updateProductDetermination,
     required TResult Function(_FetchGrandTotalPriceForIdMarket value)
         fetchGrandTotalPriceForIdMarket,
+    required TResult Function(_UpdateTenderContract value) updateTenderContract,
   }) {
     return removeSampleBonusFromCartConfig(this);
   }
@@ -1656,6 +1714,7 @@ class _$RemoveSampleBonusFromCartConfigImpl
         updateProductDetermination,
     TResult? Function(_FetchGrandTotalPriceForIdMarket value)?
         fetchGrandTotalPriceForIdMarket,
+    TResult? Function(_UpdateTenderContract value)? updateTenderContract,
   }) {
     return removeSampleBonusFromCartConfig?.call(this);
   }
@@ -1687,6 +1746,7 @@ class _$RemoveSampleBonusFromCartConfigImpl
         updateProductDetermination,
     TResult Function(_FetchGrandTotalPriceForIdMarket value)?
         fetchGrandTotalPriceForIdMarket,
+    TResult Function(_UpdateTenderContract value)? updateTenderContract,
     required TResult orElse(),
   }) {
     if (removeSampleBonusFromCartConfig != null) {
@@ -1782,6 +1842,9 @@ class _$ClearCartImpl implements _ClearCart {
             List<PriceAggregate> updatedCartItems)
         updateProductDetermination,
     required TResult Function() fetchGrandTotalPriceForIdMarket,
+    required TResult Function(
+            Map<MaterialNumber, List<TenderContract>> tenderContractList)
+        updateTenderContract,
   }) {
     return clearCart();
   }
@@ -1827,6 +1890,9 @@ class _$ClearCartImpl implements _ClearCart {
             List<PriceAggregate> updatedCartItems)?
         updateProductDetermination,
     TResult? Function()? fetchGrandTotalPriceForIdMarket,
+    TResult? Function(
+            Map<MaterialNumber, List<TenderContract>> tenderContractList)?
+        updateTenderContract,
   }) {
     return clearCart?.call();
   }
@@ -1872,6 +1938,9 @@ class _$ClearCartImpl implements _ClearCart {
             List<PriceAggregate> updatedCartItems)?
         updateProductDetermination,
     TResult Function()? fetchGrandTotalPriceForIdMarket,
+    TResult Function(
+            Map<MaterialNumber, List<TenderContract>> tenderContractList)?
+        updateTenderContract,
     required TResult orElse(),
   }) {
     if (clearCart != null) {
@@ -1912,6 +1981,7 @@ class _$ClearCartImpl implements _ClearCart {
         updateProductDetermination,
     required TResult Function(_FetchGrandTotalPriceForIdMarket value)
         fetchGrandTotalPriceForIdMarket,
+    required TResult Function(_UpdateTenderContract value) updateTenderContract,
   }) {
     return clearCart(this);
   }
@@ -1944,6 +2014,7 @@ class _$ClearCartImpl implements _ClearCart {
         updateProductDetermination,
     TResult? Function(_FetchGrandTotalPriceForIdMarket value)?
         fetchGrandTotalPriceForIdMarket,
+    TResult? Function(_UpdateTenderContract value)? updateTenderContract,
   }) {
     return clearCart?.call(this);
   }
@@ -1975,6 +2046,7 @@ class _$ClearCartImpl implements _ClearCart {
         updateProductDetermination,
     TResult Function(_FetchGrandTotalPriceForIdMarket value)?
         fetchGrandTotalPriceForIdMarket,
+    TResult Function(_UpdateTenderContract value)? updateTenderContract,
     required TResult orElse(),
   }) {
     if (clearCart != null) {
@@ -2072,6 +2144,9 @@ class _$FetchProductsAddedToCartImpl implements _FetchProductsAddedToCart {
             List<PriceAggregate> updatedCartItems)
         updateProductDetermination,
     required TResult Function() fetchGrandTotalPriceForIdMarket,
+    required TResult Function(
+            Map<MaterialNumber, List<TenderContract>> tenderContractList)
+        updateTenderContract,
   }) {
     return fetchProductsAddedToCart();
   }
@@ -2117,6 +2192,9 @@ class _$FetchProductsAddedToCartImpl implements _FetchProductsAddedToCart {
             List<PriceAggregate> updatedCartItems)?
         updateProductDetermination,
     TResult? Function()? fetchGrandTotalPriceForIdMarket,
+    TResult? Function(
+            Map<MaterialNumber, List<TenderContract>> tenderContractList)?
+        updateTenderContract,
   }) {
     return fetchProductsAddedToCart?.call();
   }
@@ -2162,6 +2240,9 @@ class _$FetchProductsAddedToCartImpl implements _FetchProductsAddedToCart {
             List<PriceAggregate> updatedCartItems)?
         updateProductDetermination,
     TResult Function()? fetchGrandTotalPriceForIdMarket,
+    TResult Function(
+            Map<MaterialNumber, List<TenderContract>> tenderContractList)?
+        updateTenderContract,
     required TResult orElse(),
   }) {
     if (fetchProductsAddedToCart != null) {
@@ -2202,6 +2283,7 @@ class _$FetchProductsAddedToCartImpl implements _FetchProductsAddedToCart {
         updateProductDetermination,
     required TResult Function(_FetchGrandTotalPriceForIdMarket value)
         fetchGrandTotalPriceForIdMarket,
+    required TResult Function(_UpdateTenderContract value) updateTenderContract,
   }) {
     return fetchProductsAddedToCart(this);
   }
@@ -2234,6 +2316,7 @@ class _$FetchProductsAddedToCartImpl implements _FetchProductsAddedToCart {
         updateProductDetermination,
     TResult? Function(_FetchGrandTotalPriceForIdMarket value)?
         fetchGrandTotalPriceForIdMarket,
+    TResult? Function(_UpdateTenderContract value)? updateTenderContract,
   }) {
     return fetchProductsAddedToCart?.call(this);
   }
@@ -2265,6 +2348,7 @@ class _$FetchProductsAddedToCartImpl implements _FetchProductsAddedToCart {
         updateProductDetermination,
     TResult Function(_FetchGrandTotalPriceForIdMarket value)?
         fetchGrandTotalPriceForIdMarket,
+    TResult Function(_UpdateTenderContract value)? updateTenderContract,
     required TResult orElse(),
   }) {
     if (fetchProductsAddedToCart != null) {
@@ -2417,6 +2501,9 @@ class _$UpsertCartImpl implements _UpsertCart {
             List<PriceAggregate> updatedCartItems)
         updateProductDetermination,
     required TResult Function() fetchGrandTotalPriceForIdMarket,
+    required TResult Function(
+            Map<MaterialNumber, List<TenderContract>> tenderContractList)
+        updateTenderContract,
   }) {
     return upsertCart(priceAggregate, banner);
   }
@@ -2462,6 +2549,9 @@ class _$UpsertCartImpl implements _UpsertCart {
             List<PriceAggregate> updatedCartItems)?
         updateProductDetermination,
     TResult? Function()? fetchGrandTotalPriceForIdMarket,
+    TResult? Function(
+            Map<MaterialNumber, List<TenderContract>> tenderContractList)?
+        updateTenderContract,
   }) {
     return upsertCart?.call(priceAggregate, banner);
   }
@@ -2507,6 +2597,9 @@ class _$UpsertCartImpl implements _UpsertCart {
             List<PriceAggregate> updatedCartItems)?
         updateProductDetermination,
     TResult Function()? fetchGrandTotalPriceForIdMarket,
+    TResult Function(
+            Map<MaterialNumber, List<TenderContract>> tenderContractList)?
+        updateTenderContract,
     required TResult orElse(),
   }) {
     if (upsertCart != null) {
@@ -2547,6 +2640,7 @@ class _$UpsertCartImpl implements _UpsertCart {
         updateProductDetermination,
     required TResult Function(_FetchGrandTotalPriceForIdMarket value)
         fetchGrandTotalPriceForIdMarket,
+    required TResult Function(_UpdateTenderContract value) updateTenderContract,
   }) {
     return upsertCart(this);
   }
@@ -2579,6 +2673,7 @@ class _$UpsertCartImpl implements _UpsertCart {
         updateProductDetermination,
     TResult? Function(_FetchGrandTotalPriceForIdMarket value)?
         fetchGrandTotalPriceForIdMarket,
+    TResult? Function(_UpdateTenderContract value)? updateTenderContract,
   }) {
     return upsertCart?.call(this);
   }
@@ -2610,6 +2705,7 @@ class _$UpsertCartImpl implements _UpsertCart {
         updateProductDetermination,
     TResult Function(_FetchGrandTotalPriceForIdMarket value)?
         fetchGrandTotalPriceForIdMarket,
+    TResult Function(_UpdateTenderContract value)? updateTenderContract,
     required TResult orElse(),
   }) {
     if (upsertCart != null) {
@@ -2772,6 +2868,9 @@ class _$addHistoryItemsToCartImpl implements _addHistoryItemsToCart {
             List<PriceAggregate> updatedCartItems)
         updateProductDetermination,
     required TResult Function() fetchGrandTotalPriceForIdMarket,
+    required TResult Function(
+            Map<MaterialNumber, List<TenderContract>> tenderContractList)
+        updateTenderContract,
   }) {
     return addHistoryItemsToCart(items, counterOfferDetails);
   }
@@ -2817,6 +2916,9 @@ class _$addHistoryItemsToCartImpl implements _addHistoryItemsToCart {
             List<PriceAggregate> updatedCartItems)?
         updateProductDetermination,
     TResult? Function()? fetchGrandTotalPriceForIdMarket,
+    TResult? Function(
+            Map<MaterialNumber, List<TenderContract>> tenderContractList)?
+        updateTenderContract,
   }) {
     return addHistoryItemsToCart?.call(items, counterOfferDetails);
   }
@@ -2862,6 +2964,9 @@ class _$addHistoryItemsToCartImpl implements _addHistoryItemsToCart {
             List<PriceAggregate> updatedCartItems)?
         updateProductDetermination,
     TResult Function()? fetchGrandTotalPriceForIdMarket,
+    TResult Function(
+            Map<MaterialNumber, List<TenderContract>> tenderContractList)?
+        updateTenderContract,
     required TResult orElse(),
   }) {
     if (addHistoryItemsToCart != null) {
@@ -2902,6 +3007,7 @@ class _$addHistoryItemsToCartImpl implements _addHistoryItemsToCart {
         updateProductDetermination,
     required TResult Function(_FetchGrandTotalPriceForIdMarket value)
         fetchGrandTotalPriceForIdMarket,
+    required TResult Function(_UpdateTenderContract value) updateTenderContract,
   }) {
     return addHistoryItemsToCart(this);
   }
@@ -2934,6 +3040,7 @@ class _$addHistoryItemsToCartImpl implements _addHistoryItemsToCart {
         updateProductDetermination,
     TResult? Function(_FetchGrandTotalPriceForIdMarket value)?
         fetchGrandTotalPriceForIdMarket,
+    TResult? Function(_UpdateTenderContract value)? updateTenderContract,
   }) {
     return addHistoryItemsToCart?.call(this);
   }
@@ -2965,6 +3072,7 @@ class _$addHistoryItemsToCartImpl implements _addHistoryItemsToCart {
         updateProductDetermination,
     TResult Function(_FetchGrandTotalPriceForIdMarket value)?
         fetchGrandTotalPriceForIdMarket,
+    TResult Function(_UpdateTenderContract value)? updateTenderContract,
     required TResult orElse(),
   }) {
     if (addHistoryItemsToCart != null) {
@@ -3127,6 +3235,9 @@ class _$UpsertCartItemsImpl implements _UpsertCartItems {
             List<PriceAggregate> updatedCartItems)
         updateProductDetermination,
     required TResult Function() fetchGrandTotalPriceForIdMarket,
+    required TResult Function(
+            Map<MaterialNumber, List<TenderContract>> tenderContractList)
+        updateTenderContract,
   }) {
     return upsertCartItems(priceAggregate, banner);
   }
@@ -3172,6 +3283,9 @@ class _$UpsertCartItemsImpl implements _UpsertCartItems {
             List<PriceAggregate> updatedCartItems)?
         updateProductDetermination,
     TResult? Function()? fetchGrandTotalPriceForIdMarket,
+    TResult? Function(
+            Map<MaterialNumber, List<TenderContract>> tenderContractList)?
+        updateTenderContract,
   }) {
     return upsertCartItems?.call(priceAggregate, banner);
   }
@@ -3217,6 +3331,9 @@ class _$UpsertCartItemsImpl implements _UpsertCartItems {
             List<PriceAggregate> updatedCartItems)?
         updateProductDetermination,
     TResult Function()? fetchGrandTotalPriceForIdMarket,
+    TResult Function(
+            Map<MaterialNumber, List<TenderContract>> tenderContractList)?
+        updateTenderContract,
     required TResult orElse(),
   }) {
     if (upsertCartItems != null) {
@@ -3257,6 +3374,7 @@ class _$UpsertCartItemsImpl implements _UpsertCartItems {
         updateProductDetermination,
     required TResult Function(_FetchGrandTotalPriceForIdMarket value)
         fetchGrandTotalPriceForIdMarket,
+    required TResult Function(_UpdateTenderContract value) updateTenderContract,
   }) {
     return upsertCartItems(this);
   }
@@ -3289,6 +3407,7 @@ class _$UpsertCartItemsImpl implements _UpsertCartItems {
         updateProductDetermination,
     TResult? Function(_FetchGrandTotalPriceForIdMarket value)?
         fetchGrandTotalPriceForIdMarket,
+    TResult? Function(_UpdateTenderContract value)? updateTenderContract,
   }) {
     return upsertCartItems?.call(this);
   }
@@ -3320,6 +3439,7 @@ class _$UpsertCartItemsImpl implements _UpsertCartItems {
         updateProductDetermination,
     TResult Function(_FetchGrandTotalPriceForIdMarket value)?
         fetchGrandTotalPriceForIdMarket,
+    TResult Function(_UpdateTenderContract value)? updateTenderContract,
     required TResult orElse(),
   }) {
     if (upsertCartItems != null) {
@@ -3462,6 +3582,9 @@ class _$GetDetailsProductsAddedToCartImpl
             List<PriceAggregate> updatedCartItems)
         updateProductDetermination,
     required TResult Function() fetchGrandTotalPriceForIdMarket,
+    required TResult Function(
+            Map<MaterialNumber, List<TenderContract>> tenderContractList)
+        updateTenderContract,
   }) {
     return getDetailsProductsAddedToCart(cartProducts);
   }
@@ -3507,6 +3630,9 @@ class _$GetDetailsProductsAddedToCartImpl
             List<PriceAggregate> updatedCartItems)?
         updateProductDetermination,
     TResult? Function()? fetchGrandTotalPriceForIdMarket,
+    TResult? Function(
+            Map<MaterialNumber, List<TenderContract>> tenderContractList)?
+        updateTenderContract,
   }) {
     return getDetailsProductsAddedToCart?.call(cartProducts);
   }
@@ -3552,6 +3678,9 @@ class _$GetDetailsProductsAddedToCartImpl
             List<PriceAggregate> updatedCartItems)?
         updateProductDetermination,
     TResult Function()? fetchGrandTotalPriceForIdMarket,
+    TResult Function(
+            Map<MaterialNumber, List<TenderContract>> tenderContractList)?
+        updateTenderContract,
     required TResult orElse(),
   }) {
     if (getDetailsProductsAddedToCart != null) {
@@ -3592,6 +3721,7 @@ class _$GetDetailsProductsAddedToCartImpl
         updateProductDetermination,
     required TResult Function(_FetchGrandTotalPriceForIdMarket value)
         fetchGrandTotalPriceForIdMarket,
+    required TResult Function(_UpdateTenderContract value) updateTenderContract,
   }) {
     return getDetailsProductsAddedToCart(this);
   }
@@ -3624,6 +3754,7 @@ class _$GetDetailsProductsAddedToCartImpl
         updateProductDetermination,
     TResult? Function(_FetchGrandTotalPriceForIdMarket value)?
         fetchGrandTotalPriceForIdMarket,
+    TResult? Function(_UpdateTenderContract value)? updateTenderContract,
   }) {
     return getDetailsProductsAddedToCart?.call(this);
   }
@@ -3655,6 +3786,7 @@ class _$GetDetailsProductsAddedToCartImpl
         updateProductDetermination,
     TResult Function(_FetchGrandTotalPriceForIdMarket value)?
         fetchGrandTotalPriceForIdMarket,
+    TResult Function(_UpdateTenderContract value)? updateTenderContract,
     required TResult orElse(),
   }) {
     if (getDetailsProductsAddedToCart != null) {
@@ -3793,6 +3925,9 @@ class _$UpdatePriceProductImpl implements _UpdatePriceProduct {
             List<PriceAggregate> updatedCartItems)
         updateProductDetermination,
     required TResult Function() fetchGrandTotalPriceForIdMarket,
+    required TResult Function(
+            Map<MaterialNumber, List<TenderContract>> tenderContractList)
+        updateTenderContract,
   }) {
     return updatePriceProduct(priceProducts);
   }
@@ -3838,6 +3973,9 @@ class _$UpdatePriceProductImpl implements _UpdatePriceProduct {
             List<PriceAggregate> updatedCartItems)?
         updateProductDetermination,
     TResult? Function()? fetchGrandTotalPriceForIdMarket,
+    TResult? Function(
+            Map<MaterialNumber, List<TenderContract>> tenderContractList)?
+        updateTenderContract,
   }) {
     return updatePriceProduct?.call(priceProducts);
   }
@@ -3883,6 +4021,9 @@ class _$UpdatePriceProductImpl implements _UpdatePriceProduct {
             List<PriceAggregate> updatedCartItems)?
         updateProductDetermination,
     TResult Function()? fetchGrandTotalPriceForIdMarket,
+    TResult Function(
+            Map<MaterialNumber, List<TenderContract>> tenderContractList)?
+        updateTenderContract,
     required TResult orElse(),
   }) {
     if (updatePriceProduct != null) {
@@ -3923,6 +4064,7 @@ class _$UpdatePriceProductImpl implements _UpdatePriceProduct {
         updateProductDetermination,
     required TResult Function(_FetchGrandTotalPriceForIdMarket value)
         fetchGrandTotalPriceForIdMarket,
+    required TResult Function(_UpdateTenderContract value) updateTenderContract,
   }) {
     return updatePriceProduct(this);
   }
@@ -3955,6 +4097,7 @@ class _$UpdatePriceProductImpl implements _UpdatePriceProduct {
         updateProductDetermination,
     TResult? Function(_FetchGrandTotalPriceForIdMarket value)?
         fetchGrandTotalPriceForIdMarket,
+    TResult? Function(_UpdateTenderContract value)? updateTenderContract,
   }) {
     return updatePriceProduct?.call(this);
   }
@@ -3986,6 +4129,7 @@ class _$UpdatePriceProductImpl implements _UpdatePriceProduct {
         updateProductDetermination,
     TResult Function(_FetchGrandTotalPriceForIdMarket value)?
         fetchGrandTotalPriceForIdMarket,
+    TResult Function(_UpdateTenderContract value)? updateTenderContract,
     required TResult orElse(),
   }) {
     if (updatePriceProduct != null) {
@@ -4087,6 +4231,9 @@ class _$UpdateProductStockImpl implements _UpdateProductStock {
             List<PriceAggregate> updatedCartItems)
         updateProductDetermination,
     required TResult Function() fetchGrandTotalPriceForIdMarket,
+    required TResult Function(
+            Map<MaterialNumber, List<TenderContract>> tenderContractList)
+        updateTenderContract,
   }) {
     return updateProductStock();
   }
@@ -4132,6 +4279,9 @@ class _$UpdateProductStockImpl implements _UpdateProductStock {
             List<PriceAggregate> updatedCartItems)?
         updateProductDetermination,
     TResult? Function()? fetchGrandTotalPriceForIdMarket,
+    TResult? Function(
+            Map<MaterialNumber, List<TenderContract>> tenderContractList)?
+        updateTenderContract,
   }) {
     return updateProductStock?.call();
   }
@@ -4177,6 +4327,9 @@ class _$UpdateProductStockImpl implements _UpdateProductStock {
             List<PriceAggregate> updatedCartItems)?
         updateProductDetermination,
     TResult Function()? fetchGrandTotalPriceForIdMarket,
+    TResult Function(
+            Map<MaterialNumber, List<TenderContract>> tenderContractList)?
+        updateTenderContract,
     required TResult orElse(),
   }) {
     if (updateProductStock != null) {
@@ -4217,6 +4370,7 @@ class _$UpdateProductStockImpl implements _UpdateProductStock {
         updateProductDetermination,
     required TResult Function(_FetchGrandTotalPriceForIdMarket value)
         fetchGrandTotalPriceForIdMarket,
+    required TResult Function(_UpdateTenderContract value) updateTenderContract,
   }) {
     return updateProductStock(this);
   }
@@ -4249,6 +4403,7 @@ class _$UpdateProductStockImpl implements _UpdateProductStock {
         updateProductDetermination,
     TResult? Function(_FetchGrandTotalPriceForIdMarket value)?
         fetchGrandTotalPriceForIdMarket,
+    TResult? Function(_UpdateTenderContract value)? updateTenderContract,
   }) {
     return updateProductStock?.call(this);
   }
@@ -4280,6 +4435,7 @@ class _$UpdateProductStockImpl implements _UpdateProductStock {
         updateProductDetermination,
     TResult Function(_FetchGrandTotalPriceForIdMarket value)?
         fetchGrandTotalPriceForIdMarket,
+    TResult Function(_UpdateTenderContract value)? updateTenderContract,
     required TResult orElse(),
   }) {
     if (updateProductStock != null) {
@@ -4412,6 +4568,9 @@ class _$RemoveInvalidProductsImpl implements _RemoveInvalidProducts {
             List<PriceAggregate> updatedCartItems)
         updateProductDetermination,
     required TResult Function() fetchGrandTotalPriceForIdMarket,
+    required TResult Function(
+            Map<MaterialNumber, List<TenderContract>> tenderContractList)
+        updateTenderContract,
   }) {
     return removeInvalidProducts(invalidCartItems);
   }
@@ -4457,6 +4616,9 @@ class _$RemoveInvalidProductsImpl implements _RemoveInvalidProducts {
             List<PriceAggregate> updatedCartItems)?
         updateProductDetermination,
     TResult? Function()? fetchGrandTotalPriceForIdMarket,
+    TResult? Function(
+            Map<MaterialNumber, List<TenderContract>> tenderContractList)?
+        updateTenderContract,
   }) {
     return removeInvalidProducts?.call(invalidCartItems);
   }
@@ -4502,6 +4664,9 @@ class _$RemoveInvalidProductsImpl implements _RemoveInvalidProducts {
             List<PriceAggregate> updatedCartItems)?
         updateProductDetermination,
     TResult Function()? fetchGrandTotalPriceForIdMarket,
+    TResult Function(
+            Map<MaterialNumber, List<TenderContract>> tenderContractList)?
+        updateTenderContract,
     required TResult orElse(),
   }) {
     if (removeInvalidProducts != null) {
@@ -4542,6 +4707,7 @@ class _$RemoveInvalidProductsImpl implements _RemoveInvalidProducts {
         updateProductDetermination,
     required TResult Function(_FetchGrandTotalPriceForIdMarket value)
         fetchGrandTotalPriceForIdMarket,
+    required TResult Function(_UpdateTenderContract value) updateTenderContract,
   }) {
     return removeInvalidProducts(this);
   }
@@ -4574,6 +4740,7 @@ class _$RemoveInvalidProductsImpl implements _RemoveInvalidProducts {
         updateProductDetermination,
     TResult? Function(_FetchGrandTotalPriceForIdMarket value)?
         fetchGrandTotalPriceForIdMarket,
+    TResult? Function(_UpdateTenderContract value)? updateTenderContract,
   }) {
     return removeInvalidProducts?.call(this);
   }
@@ -4605,6 +4772,7 @@ class _$RemoveInvalidProductsImpl implements _RemoveInvalidProducts {
         updateProductDetermination,
     TResult Function(_FetchGrandTotalPriceForIdMarket value)?
         fetchGrandTotalPriceForIdMarket,
+    TResult Function(_UpdateTenderContract value)? updateTenderContract,
     required TResult orElse(),
   }) {
     if (removeInvalidProducts != null) {
@@ -4757,6 +4925,9 @@ class _$UpsertCartItemsWithComboOffersImpl
             List<PriceAggregate> updatedCartItems)
         updateProductDetermination,
     required TResult Function() fetchGrandTotalPriceForIdMarket,
+    required TResult Function(
+            Map<MaterialNumber, List<TenderContract>> tenderContractList)
+        updateTenderContract,
   }) {
     return upsertCartItemsWithComboOffers(priceAggregates, isDeleteCombo);
   }
@@ -4802,6 +4973,9 @@ class _$UpsertCartItemsWithComboOffersImpl
             List<PriceAggregate> updatedCartItems)?
         updateProductDetermination,
     TResult? Function()? fetchGrandTotalPriceForIdMarket,
+    TResult? Function(
+            Map<MaterialNumber, List<TenderContract>> tenderContractList)?
+        updateTenderContract,
   }) {
     return upsertCartItemsWithComboOffers?.call(priceAggregates, isDeleteCombo);
   }
@@ -4847,6 +5021,9 @@ class _$UpsertCartItemsWithComboOffersImpl
             List<PriceAggregate> updatedCartItems)?
         updateProductDetermination,
     TResult Function()? fetchGrandTotalPriceForIdMarket,
+    TResult Function(
+            Map<MaterialNumber, List<TenderContract>> tenderContractList)?
+        updateTenderContract,
     required TResult orElse(),
   }) {
     if (upsertCartItemsWithComboOffers != null) {
@@ -4887,6 +5064,7 @@ class _$UpsertCartItemsWithComboOffersImpl
         updateProductDetermination,
     required TResult Function(_FetchGrandTotalPriceForIdMarket value)
         fetchGrandTotalPriceForIdMarket,
+    required TResult Function(_UpdateTenderContract value) updateTenderContract,
   }) {
     return upsertCartItemsWithComboOffers(this);
   }
@@ -4919,6 +5097,7 @@ class _$UpsertCartItemsWithComboOffersImpl
         updateProductDetermination,
     TResult? Function(_FetchGrandTotalPriceForIdMarket value)?
         fetchGrandTotalPriceForIdMarket,
+    TResult? Function(_UpdateTenderContract value)? updateTenderContract,
   }) {
     return upsertCartItemsWithComboOffers?.call(this);
   }
@@ -4950,6 +5129,7 @@ class _$UpsertCartItemsWithComboOffersImpl
         updateProductDetermination,
     TResult Function(_FetchGrandTotalPriceForIdMarket value)?
         fetchGrandTotalPriceForIdMarket,
+    TResult Function(_UpdateTenderContract value)? updateTenderContract,
     required TResult orElse(),
   }) {
     if (upsertCartItemsWithComboOffers != null) {
@@ -5098,6 +5278,9 @@ class _$UpdateCartProductWithCounterOfferImpl
             List<PriceAggregate> updatedCartItems)
         updateProductDetermination,
     required TResult Function() fetchGrandTotalPriceForIdMarket,
+    required TResult Function(
+            Map<MaterialNumber, List<TenderContract>> tenderContractList)
+        updateTenderContract,
   }) {
     return updateCartProductWithCounterOffer(overriddenProductPrice);
   }
@@ -5143,6 +5326,9 @@ class _$UpdateCartProductWithCounterOfferImpl
             List<PriceAggregate> updatedCartItems)?
         updateProductDetermination,
     TResult? Function()? fetchGrandTotalPriceForIdMarket,
+    TResult? Function(
+            Map<MaterialNumber, List<TenderContract>> tenderContractList)?
+        updateTenderContract,
   }) {
     return updateCartProductWithCounterOffer?.call(overriddenProductPrice);
   }
@@ -5188,6 +5374,9 @@ class _$UpdateCartProductWithCounterOfferImpl
             List<PriceAggregate> updatedCartItems)?
         updateProductDetermination,
     TResult Function()? fetchGrandTotalPriceForIdMarket,
+    TResult Function(
+            Map<MaterialNumber, List<TenderContract>> tenderContractList)?
+        updateTenderContract,
     required TResult orElse(),
   }) {
     if (updateCartProductWithCounterOffer != null) {
@@ -5228,6 +5417,7 @@ class _$UpdateCartProductWithCounterOfferImpl
         updateProductDetermination,
     required TResult Function(_FetchGrandTotalPriceForIdMarket value)
         fetchGrandTotalPriceForIdMarket,
+    required TResult Function(_UpdateTenderContract value) updateTenderContract,
   }) {
     return updateCartProductWithCounterOffer(this);
   }
@@ -5260,6 +5450,7 @@ class _$UpdateCartProductWithCounterOfferImpl
         updateProductDetermination,
     TResult? Function(_FetchGrandTotalPriceForIdMarket value)?
         fetchGrandTotalPriceForIdMarket,
+    TResult? Function(_UpdateTenderContract value)? updateTenderContract,
   }) {
     return updateCartProductWithCounterOffer?.call(this);
   }
@@ -5291,6 +5482,7 @@ class _$UpdateCartProductWithCounterOfferImpl
         updateProductDetermination,
     TResult Function(_FetchGrandTotalPriceForIdMarket value)?
         fetchGrandTotalPriceForIdMarket,
+    TResult Function(_UpdateTenderContract value)? updateTenderContract,
     required TResult orElse(),
   }) {
     if (updateCartProductWithCounterOffer != null) {
@@ -5396,6 +5588,9 @@ class _$UpdatePriceForIdMarketImpl implements _UpdatePriceForIdMarket {
             List<PriceAggregate> updatedCartItems)
         updateProductDetermination,
     required TResult Function() fetchGrandTotalPriceForIdMarket,
+    required TResult Function(
+            Map<MaterialNumber, List<TenderContract>> tenderContractList)
+        updateTenderContract,
   }) {
     return updatePriceForIdMarket();
   }
@@ -5441,6 +5636,9 @@ class _$UpdatePriceForIdMarketImpl implements _UpdatePriceForIdMarket {
             List<PriceAggregate> updatedCartItems)?
         updateProductDetermination,
     TResult? Function()? fetchGrandTotalPriceForIdMarket,
+    TResult? Function(
+            Map<MaterialNumber, List<TenderContract>> tenderContractList)?
+        updateTenderContract,
   }) {
     return updatePriceForIdMarket?.call();
   }
@@ -5486,6 +5684,9 @@ class _$UpdatePriceForIdMarketImpl implements _UpdatePriceForIdMarket {
             List<PriceAggregate> updatedCartItems)?
         updateProductDetermination,
     TResult Function()? fetchGrandTotalPriceForIdMarket,
+    TResult Function(
+            Map<MaterialNumber, List<TenderContract>> tenderContractList)?
+        updateTenderContract,
     required TResult orElse(),
   }) {
     if (updatePriceForIdMarket != null) {
@@ -5526,6 +5727,7 @@ class _$UpdatePriceForIdMarketImpl implements _UpdatePriceForIdMarket {
         updateProductDetermination,
     required TResult Function(_FetchGrandTotalPriceForIdMarket value)
         fetchGrandTotalPriceForIdMarket,
+    required TResult Function(_UpdateTenderContract value) updateTenderContract,
   }) {
     return updatePriceForIdMarket(this);
   }
@@ -5558,6 +5760,7 @@ class _$UpdatePriceForIdMarketImpl implements _UpdatePriceForIdMarket {
         updateProductDetermination,
     TResult? Function(_FetchGrandTotalPriceForIdMarket value)?
         fetchGrandTotalPriceForIdMarket,
+    TResult? Function(_UpdateTenderContract value)? updateTenderContract,
   }) {
     return updatePriceForIdMarket?.call(this);
   }
@@ -5589,6 +5792,7 @@ class _$UpdatePriceForIdMarketImpl implements _UpdatePriceForIdMarket {
         updateProductDetermination,
     TResult Function(_FetchGrandTotalPriceForIdMarket value)?
         fetchGrandTotalPriceForIdMarket,
+    TResult Function(_UpdateTenderContract value)? updateTenderContract,
     required TResult orElse(),
   }) {
     if (updatePriceForIdMarket != null) {
@@ -5744,6 +5948,9 @@ class _$UpdateProductDeterminationImpl implements _UpdateProductDetermination {
             List<PriceAggregate> updatedCartItems)
         updateProductDetermination,
     required TResult Function() fetchGrandTotalPriceForIdMarket,
+    required TResult Function(
+            Map<MaterialNumber, List<TenderContract>> tenderContractList)
+        updateTenderContract,
   }) {
     return updateProductDetermination(
         productDeterminationList, updatedCartItems);
@@ -5790,6 +5997,9 @@ class _$UpdateProductDeterminationImpl implements _UpdateProductDetermination {
             List<PriceAggregate> updatedCartItems)?
         updateProductDetermination,
     TResult? Function()? fetchGrandTotalPriceForIdMarket,
+    TResult? Function(
+            Map<MaterialNumber, List<TenderContract>> tenderContractList)?
+        updateTenderContract,
   }) {
     return updateProductDetermination?.call(
         productDeterminationList, updatedCartItems);
@@ -5836,6 +6046,9 @@ class _$UpdateProductDeterminationImpl implements _UpdateProductDetermination {
             List<PriceAggregate> updatedCartItems)?
         updateProductDetermination,
     TResult Function()? fetchGrandTotalPriceForIdMarket,
+    TResult Function(
+            Map<MaterialNumber, List<TenderContract>> tenderContractList)?
+        updateTenderContract,
     required TResult orElse(),
   }) {
     if (updateProductDetermination != null) {
@@ -5877,6 +6090,7 @@ class _$UpdateProductDeterminationImpl implements _UpdateProductDetermination {
         updateProductDetermination,
     required TResult Function(_FetchGrandTotalPriceForIdMarket value)
         fetchGrandTotalPriceForIdMarket,
+    required TResult Function(_UpdateTenderContract value) updateTenderContract,
   }) {
     return updateProductDetermination(this);
   }
@@ -5909,6 +6123,7 @@ class _$UpdateProductDeterminationImpl implements _UpdateProductDetermination {
         updateProductDetermination,
     TResult? Function(_FetchGrandTotalPriceForIdMarket value)?
         fetchGrandTotalPriceForIdMarket,
+    TResult? Function(_UpdateTenderContract value)? updateTenderContract,
   }) {
     return updateProductDetermination?.call(this);
   }
@@ -5940,6 +6155,7 @@ class _$UpdateProductDeterminationImpl implements _UpdateProductDetermination {
         updateProductDetermination,
     TResult Function(_FetchGrandTotalPriceForIdMarket value)?
         fetchGrandTotalPriceForIdMarket,
+    TResult Function(_UpdateTenderContract value)? updateTenderContract,
     required TResult orElse(),
   }) {
     if (updateProductDetermination != null) {
@@ -6047,6 +6263,9 @@ class _$FetchGrandTotalPriceForIdMarketImpl
             List<PriceAggregate> updatedCartItems)
         updateProductDetermination,
     required TResult Function() fetchGrandTotalPriceForIdMarket,
+    required TResult Function(
+            Map<MaterialNumber, List<TenderContract>> tenderContractList)
+        updateTenderContract,
   }) {
     return fetchGrandTotalPriceForIdMarket();
   }
@@ -6092,6 +6311,9 @@ class _$FetchGrandTotalPriceForIdMarketImpl
             List<PriceAggregate> updatedCartItems)?
         updateProductDetermination,
     TResult? Function()? fetchGrandTotalPriceForIdMarket,
+    TResult? Function(
+            Map<MaterialNumber, List<TenderContract>> tenderContractList)?
+        updateTenderContract,
   }) {
     return fetchGrandTotalPriceForIdMarket?.call();
   }
@@ -6137,6 +6359,9 @@ class _$FetchGrandTotalPriceForIdMarketImpl
             List<PriceAggregate> updatedCartItems)?
         updateProductDetermination,
     TResult Function()? fetchGrandTotalPriceForIdMarket,
+    TResult Function(
+            Map<MaterialNumber, List<TenderContract>> tenderContractList)?
+        updateTenderContract,
     required TResult orElse(),
   }) {
     if (fetchGrandTotalPriceForIdMarket != null) {
@@ -6177,6 +6402,7 @@ class _$FetchGrandTotalPriceForIdMarketImpl
         updateProductDetermination,
     required TResult Function(_FetchGrandTotalPriceForIdMarket value)
         fetchGrandTotalPriceForIdMarket,
+    required TResult Function(_UpdateTenderContract value) updateTenderContract,
   }) {
     return fetchGrandTotalPriceForIdMarket(this);
   }
@@ -6209,6 +6435,7 @@ class _$FetchGrandTotalPriceForIdMarketImpl
         updateProductDetermination,
     TResult? Function(_FetchGrandTotalPriceForIdMarket value)?
         fetchGrandTotalPriceForIdMarket,
+    TResult? Function(_UpdateTenderContract value)? updateTenderContract,
   }) {
     return fetchGrandTotalPriceForIdMarket?.call(this);
   }
@@ -6240,6 +6467,7 @@ class _$FetchGrandTotalPriceForIdMarketImpl
         updateProductDetermination,
     TResult Function(_FetchGrandTotalPriceForIdMarket value)?
         fetchGrandTotalPriceForIdMarket,
+    TResult Function(_UpdateTenderContract value)? updateTenderContract,
     required TResult orElse(),
   }) {
     if (fetchGrandTotalPriceForIdMarket != null) {
@@ -6252,6 +6480,351 @@ class _$FetchGrandTotalPriceForIdMarketImpl
 abstract class _FetchGrandTotalPriceForIdMarket implements CartEvent {
   const factory _FetchGrandTotalPriceForIdMarket() =
       _$FetchGrandTotalPriceForIdMarketImpl;
+}
+
+/// @nodoc
+abstract class _$$UpdateTenderContractImplCopyWith<$Res> {
+  factory _$$UpdateTenderContractImplCopyWith(_$UpdateTenderContractImpl value,
+          $Res Function(_$UpdateTenderContractImpl) then) =
+      __$$UpdateTenderContractImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({Map<MaterialNumber, List<TenderContract>> tenderContractList});
+}
+
+/// @nodoc
+class __$$UpdateTenderContractImplCopyWithImpl<$Res>
+    extends _$CartEventCopyWithImpl<$Res, _$UpdateTenderContractImpl>
+    implements _$$UpdateTenderContractImplCopyWith<$Res> {
+  __$$UpdateTenderContractImplCopyWithImpl(_$UpdateTenderContractImpl _value,
+      $Res Function(_$UpdateTenderContractImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? tenderContractList = null,
+  }) {
+    return _then(_$UpdateTenderContractImpl(
+      tenderContractList: null == tenderContractList
+          ? _value._tenderContractList
+          : tenderContractList // ignore: cast_nullable_to_non_nullable
+              as Map<MaterialNumber, List<TenderContract>>,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$UpdateTenderContractImpl implements _UpdateTenderContract {
+  const _$UpdateTenderContractImpl(
+      {required final Map<MaterialNumber, List<TenderContract>>
+          tenderContractList})
+      : _tenderContractList = tenderContractList;
+
+  final Map<MaterialNumber, List<TenderContract>> _tenderContractList;
+  @override
+  Map<MaterialNumber, List<TenderContract>> get tenderContractList {
+    if (_tenderContractList is EqualUnmodifiableMapView)
+      return _tenderContractList;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(_tenderContractList);
+  }
+
+  @override
+  String toString() {
+    return 'CartEvent.updateTenderContract(tenderContractList: $tenderContractList)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$UpdateTenderContractImpl &&
+            const DeepCollectionEquality()
+                .equals(other._tenderContractList, _tenderContractList));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(_tenderContractList));
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$UpdateTenderContractImplCopyWith<_$UpdateTenderContractImpl>
+      get copyWith =>
+          __$$UpdateTenderContractImplCopyWithImpl<_$UpdateTenderContractImpl>(
+              this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user)
+        initialized,
+    required TResult Function(PriceAggregate item, List<PriceAggregate> items)
+        verifyMaterialDealBonus,
+    required TResult Function(
+            MaterialInfo bonusMaterial,
+            StringValue bonusItemId,
+            RequestCounterOfferDetails counterOfferDetails)
+        addBonusToCartItem,
+    required TResult Function() removeSampleBonusFromCartConfig,
+    required TResult Function() clearCart,
+    required TResult Function() fetchProductsAddedToCart,
+    required TResult Function(
+            PriceAggregate priceAggregate, EZReachBanner? banner)
+        upsertCart,
+    required TResult Function(List<MaterialInfo> items,
+            RequestCounterOfferDetails counterOfferDetails)
+        addHistoryItemsToCart,
+    required TResult Function(
+            PriceAggregate priceAggregate, EZReachBanner? banner)
+        upsertCartItems,
+    required TResult Function(List<PriceAggregate> cartProducts)
+        getDetailsProductsAddedToCart,
+    required TResult Function(Map<MaterialNumber, Price> priceProducts)
+        updatePriceProduct,
+    required TResult Function() updateProductStock,
+    required TResult Function(List<MaterialInfo> invalidCartItems)
+        removeInvalidProducts,
+    required TResult Function(
+            List<PriceAggregate> priceAggregates, bool isDeleteCombo)
+        upsertCartItemsWithComboOffers,
+    required TResult Function(Price overriddenProductPrice)
+        updateCartProductWithCounterOffer,
+    required TResult Function() updatePriceForIdMarket,
+    required TResult Function(List<AplProduct> productDeterminationList,
+            List<PriceAggregate> updatedCartItems)
+        updateProductDetermination,
+    required TResult Function() fetchGrandTotalPriceForIdMarket,
+    required TResult Function(
+            Map<MaterialNumber, List<TenderContract>> tenderContractList)
+        updateTenderContract,
+  }) {
+    return updateTenderContract(tenderContractList);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user)?
+        initialized,
+    TResult? Function(PriceAggregate item, List<PriceAggregate> items)?
+        verifyMaterialDealBonus,
+    TResult? Function(MaterialInfo bonusMaterial, StringValue bonusItemId,
+            RequestCounterOfferDetails counterOfferDetails)?
+        addBonusToCartItem,
+    TResult? Function()? removeSampleBonusFromCartConfig,
+    TResult? Function()? clearCart,
+    TResult? Function()? fetchProductsAddedToCart,
+    TResult? Function(PriceAggregate priceAggregate, EZReachBanner? banner)?
+        upsertCart,
+    TResult? Function(List<MaterialInfo> items,
+            RequestCounterOfferDetails counterOfferDetails)?
+        addHistoryItemsToCart,
+    TResult? Function(PriceAggregate priceAggregate, EZReachBanner? banner)?
+        upsertCartItems,
+    TResult? Function(List<PriceAggregate> cartProducts)?
+        getDetailsProductsAddedToCart,
+    TResult? Function(Map<MaterialNumber, Price> priceProducts)?
+        updatePriceProduct,
+    TResult? Function()? updateProductStock,
+    TResult? Function(List<MaterialInfo> invalidCartItems)?
+        removeInvalidProducts,
+    TResult? Function(List<PriceAggregate> priceAggregates, bool isDeleteCombo)?
+        upsertCartItemsWithComboOffers,
+    TResult? Function(Price overriddenProductPrice)?
+        updateCartProductWithCounterOffer,
+    TResult? Function()? updatePriceForIdMarket,
+    TResult? Function(List<AplProduct> productDeterminationList,
+            List<PriceAggregate> updatedCartItems)?
+        updateProductDetermination,
+    TResult? Function()? fetchGrandTotalPriceForIdMarket,
+    TResult? Function(
+            Map<MaterialNumber, List<TenderContract>> tenderContractList)?
+        updateTenderContract,
+  }) {
+    return updateTenderContract?.call(tenderContractList);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            SalesOrganisation salesOrganisation,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user)?
+        initialized,
+    TResult Function(PriceAggregate item, List<PriceAggregate> items)?
+        verifyMaterialDealBonus,
+    TResult Function(MaterialInfo bonusMaterial, StringValue bonusItemId,
+            RequestCounterOfferDetails counterOfferDetails)?
+        addBonusToCartItem,
+    TResult Function()? removeSampleBonusFromCartConfig,
+    TResult Function()? clearCart,
+    TResult Function()? fetchProductsAddedToCart,
+    TResult Function(PriceAggregate priceAggregate, EZReachBanner? banner)?
+        upsertCart,
+    TResult Function(List<MaterialInfo> items,
+            RequestCounterOfferDetails counterOfferDetails)?
+        addHistoryItemsToCart,
+    TResult Function(PriceAggregate priceAggregate, EZReachBanner? banner)?
+        upsertCartItems,
+    TResult Function(List<PriceAggregate> cartProducts)?
+        getDetailsProductsAddedToCart,
+    TResult Function(Map<MaterialNumber, Price> priceProducts)?
+        updatePriceProduct,
+    TResult Function()? updateProductStock,
+    TResult Function(List<MaterialInfo> invalidCartItems)?
+        removeInvalidProducts,
+    TResult Function(List<PriceAggregate> priceAggregates, bool isDeleteCombo)?
+        upsertCartItemsWithComboOffers,
+    TResult Function(Price overriddenProductPrice)?
+        updateCartProductWithCounterOffer,
+    TResult Function()? updatePriceForIdMarket,
+    TResult Function(List<AplProduct> productDeterminationList,
+            List<PriceAggregate> updatedCartItems)?
+        updateProductDetermination,
+    TResult Function()? fetchGrandTotalPriceForIdMarket,
+    TResult Function(
+            Map<MaterialNumber, List<TenderContract>> tenderContractList)?
+        updateTenderContract,
+    required TResult orElse(),
+  }) {
+    if (updateTenderContract != null) {
+      return updateTenderContract(tenderContractList);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initialized value) initialized,
+    required TResult Function(_VerifyMaterialDealBonus value)
+        verifyMaterialDealBonus,
+    required TResult Function(_AddBonusToCartItem value) addBonusToCartItem,
+    required TResult Function(_RemoveSampleBonusFromCartConfig value)
+        removeSampleBonusFromCartConfig,
+    required TResult Function(_ClearCart value) clearCart,
+    required TResult Function(_FetchProductsAddedToCart value)
+        fetchProductsAddedToCart,
+    required TResult Function(_UpsertCart value) upsertCart,
+    required TResult Function(_addHistoryItemsToCart value)
+        addHistoryItemsToCart,
+    required TResult Function(_UpsertCartItems value) upsertCartItems,
+    required TResult Function(_GetDetailsProductsAddedToCart value)
+        getDetailsProductsAddedToCart,
+    required TResult Function(_UpdatePriceProduct value) updatePriceProduct,
+    required TResult Function(_UpdateProductStock value) updateProductStock,
+    required TResult Function(_RemoveInvalidProducts value)
+        removeInvalidProducts,
+    required TResult Function(_UpsertCartItemsWithComboOffers value)
+        upsertCartItemsWithComboOffers,
+    required TResult Function(_UpdateCartProductWithCounterOffer value)
+        updateCartProductWithCounterOffer,
+    required TResult Function(_UpdatePriceForIdMarket value)
+        updatePriceForIdMarket,
+    required TResult Function(_UpdateProductDetermination value)
+        updateProductDetermination,
+    required TResult Function(_FetchGrandTotalPriceForIdMarket value)
+        fetchGrandTotalPriceForIdMarket,
+    required TResult Function(_UpdateTenderContract value) updateTenderContract,
+  }) {
+    return updateTenderContract(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_VerifyMaterialDealBonus value)? verifyMaterialDealBonus,
+    TResult? Function(_AddBonusToCartItem value)? addBonusToCartItem,
+    TResult? Function(_RemoveSampleBonusFromCartConfig value)?
+        removeSampleBonusFromCartConfig,
+    TResult? Function(_ClearCart value)? clearCart,
+    TResult? Function(_FetchProductsAddedToCart value)?
+        fetchProductsAddedToCart,
+    TResult? Function(_UpsertCart value)? upsertCart,
+    TResult? Function(_addHistoryItemsToCart value)? addHistoryItemsToCart,
+    TResult? Function(_UpsertCartItems value)? upsertCartItems,
+    TResult? Function(_GetDetailsProductsAddedToCart value)?
+        getDetailsProductsAddedToCart,
+    TResult? Function(_UpdatePriceProduct value)? updatePriceProduct,
+    TResult? Function(_UpdateProductStock value)? updateProductStock,
+    TResult? Function(_RemoveInvalidProducts value)? removeInvalidProducts,
+    TResult? Function(_UpsertCartItemsWithComboOffers value)?
+        upsertCartItemsWithComboOffers,
+    TResult? Function(_UpdateCartProductWithCounterOffer value)?
+        updateCartProductWithCounterOffer,
+    TResult? Function(_UpdatePriceForIdMarket value)? updatePriceForIdMarket,
+    TResult? Function(_UpdateProductDetermination value)?
+        updateProductDetermination,
+    TResult? Function(_FetchGrandTotalPriceForIdMarket value)?
+        fetchGrandTotalPriceForIdMarket,
+    TResult? Function(_UpdateTenderContract value)? updateTenderContract,
+  }) {
+    return updateTenderContract?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_VerifyMaterialDealBonus value)? verifyMaterialDealBonus,
+    TResult Function(_AddBonusToCartItem value)? addBonusToCartItem,
+    TResult Function(_RemoveSampleBonusFromCartConfig value)?
+        removeSampleBonusFromCartConfig,
+    TResult Function(_ClearCart value)? clearCart,
+    TResult Function(_FetchProductsAddedToCart value)? fetchProductsAddedToCart,
+    TResult Function(_UpsertCart value)? upsertCart,
+    TResult Function(_addHistoryItemsToCart value)? addHistoryItemsToCart,
+    TResult Function(_UpsertCartItems value)? upsertCartItems,
+    TResult Function(_GetDetailsProductsAddedToCart value)?
+        getDetailsProductsAddedToCart,
+    TResult Function(_UpdatePriceProduct value)? updatePriceProduct,
+    TResult Function(_UpdateProductStock value)? updateProductStock,
+    TResult Function(_RemoveInvalidProducts value)? removeInvalidProducts,
+    TResult Function(_UpsertCartItemsWithComboOffers value)?
+        upsertCartItemsWithComboOffers,
+    TResult Function(_UpdateCartProductWithCounterOffer value)?
+        updateCartProductWithCounterOffer,
+    TResult Function(_UpdatePriceForIdMarket value)? updatePriceForIdMarket,
+    TResult Function(_UpdateProductDetermination value)?
+        updateProductDetermination,
+    TResult Function(_FetchGrandTotalPriceForIdMarket value)?
+        fetchGrandTotalPriceForIdMarket,
+    TResult Function(_UpdateTenderContract value)? updateTenderContract,
+    required TResult orElse(),
+  }) {
+    if (updateTenderContract != null) {
+      return updateTenderContract(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _UpdateTenderContract implements CartEvent {
+  const factory _UpdateTenderContract(
+      {required final Map<MaterialNumber, List<TenderContract>>
+          tenderContractList}) = _$UpdateTenderContractImpl;
+
+  Map<MaterialNumber, List<TenderContract>> get tenderContractList;
+  @JsonKey(ignore: true)
+  _$$UpdateTenderContractImplCopyWith<_$UpdateTenderContractImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -6271,6 +6844,7 @@ mixin _$CartState {
   bool get isBuyAgain => throw _privateConstructorUsedError;
   bool get isAplProductLoading => throw _privateConstructorUsedError;
   bool get isDeleteCombo => throw _privateConstructorUsedError;
+  bool get isTenderContractLoading => throw _privateConstructorUsedError;
   bool get isUpdateProductDetermination => throw _privateConstructorUsedError;
   SalesOrganisation get salesOrganisation => throw _privateConstructorUsedError;
   CustomerCodeInfo get customerCodeInfo => throw _privateConstructorUsedError;
@@ -6307,6 +6881,7 @@ abstract class $CartStateCopyWith<$Res> {
       bool isBuyAgain,
       bool isAplProductLoading,
       bool isDeleteCombo,
+      bool isTenderContractLoading,
       bool isUpdateProductDetermination,
       SalesOrganisation salesOrganisation,
       CustomerCodeInfo customerCodeInfo,
@@ -6351,6 +6926,7 @@ class _$CartStateCopyWithImpl<$Res, $Val extends CartState>
     Object? isBuyAgain = null,
     Object? isAplProductLoading = null,
     Object? isDeleteCombo = null,
+    Object? isTenderContractLoading = null,
     Object? isUpdateProductDetermination = null,
     Object? salesOrganisation = null,
     Object? customerCodeInfo = null,
@@ -6413,6 +6989,10 @@ class _$CartStateCopyWithImpl<$Res, $Val extends CartState>
       isDeleteCombo: null == isDeleteCombo
           ? _value.isDeleteCombo
           : isDeleteCombo // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isTenderContractLoading: null == isTenderContractLoading
+          ? _value.isTenderContractLoading
+          : isTenderContractLoading // ignore: cast_nullable_to_non_nullable
               as bool,
       isUpdateProductDetermination: null == isUpdateProductDetermination
           ? _value.isUpdateProductDetermination
@@ -6525,6 +7105,7 @@ abstract class _$$CartStateImplCopyWith<$Res>
       bool isBuyAgain,
       bool isAplProductLoading,
       bool isDeleteCombo,
+      bool isTenderContractLoading,
       bool isUpdateProductDetermination,
       SalesOrganisation salesOrganisation,
       CustomerCodeInfo customerCodeInfo,
@@ -6573,6 +7154,7 @@ class __$$CartStateImplCopyWithImpl<$Res>
     Object? isBuyAgain = null,
     Object? isAplProductLoading = null,
     Object? isDeleteCombo = null,
+    Object? isTenderContractLoading = null,
     Object? isUpdateProductDetermination = null,
     Object? salesOrganisation = null,
     Object? customerCodeInfo = null,
@@ -6636,6 +7218,10 @@ class __$$CartStateImplCopyWithImpl<$Res>
           ? _value.isDeleteCombo
           : isDeleteCombo // ignore: cast_nullable_to_non_nullable
               as bool,
+      isTenderContractLoading: null == isTenderContractLoading
+          ? _value.isTenderContractLoading
+          : isTenderContractLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
       isUpdateProductDetermination: null == isUpdateProductDetermination
           ? _value.isUpdateProductDetermination
           : isUpdateProductDetermination // ignore: cast_nullable_to_non_nullable
@@ -6694,6 +7280,7 @@ class _$CartStateImpl extends _CartState {
       required this.isBuyAgain,
       required this.isAplProductLoading,
       required this.isDeleteCombo,
+      required this.isTenderContractLoading,
       required this.isUpdateProductDetermination,
       required this.salesOrganisation,
       required this.customerCodeInfo,
@@ -6741,6 +7328,8 @@ class _$CartStateImpl extends _CartState {
   @override
   final bool isDeleteCombo;
   @override
+  final bool isTenderContractLoading;
+  @override
   final bool isUpdateProductDetermination;
   @override
   final SalesOrganisation salesOrganisation;
@@ -6774,7 +7363,7 @@ class _$CartStateImpl extends _CartState {
 
   @override
   String toString() {
-    return 'CartState(cartProducts: $cartProducts, apiFailureOrSuccessOption: $apiFailureOrSuccessOption, updateFailureOrSuccessOption: $updateFailureOrSuccessOption, isFetching: $isFetching, isClearing: $isClearing, isFetchingBonus: $isFetchingBonus, isFetchingCartProductDetail: $isFetchingCartProductDetail, isUpserting: $isUpserting, isMappingPrice: $isMappingPrice, isUpdatingStock: $isUpdatingStock, isBuyAgain: $isBuyAgain, isAplProductLoading: $isAplProductLoading, isDeleteCombo: $isDeleteCombo, isUpdateProductDetermination: $isUpdateProductDetermination, salesOrganisation: $salesOrganisation, customerCodeInfo: $customerCodeInfo, shipToInfo: $shipToInfo, config: $config, user: $user, additionInfo: $additionInfo, upsertBonusItemInProgressHashCode: $upsertBonusItemInProgressHashCode, aplSimulatorOrder: $aplSimulatorOrder)';
+    return 'CartState(cartProducts: $cartProducts, apiFailureOrSuccessOption: $apiFailureOrSuccessOption, updateFailureOrSuccessOption: $updateFailureOrSuccessOption, isFetching: $isFetching, isClearing: $isClearing, isFetchingBonus: $isFetchingBonus, isFetchingCartProductDetail: $isFetchingCartProductDetail, isUpserting: $isUpserting, isMappingPrice: $isMappingPrice, isUpdatingStock: $isUpdatingStock, isBuyAgain: $isBuyAgain, isAplProductLoading: $isAplProductLoading, isDeleteCombo: $isDeleteCombo, isTenderContractLoading: $isTenderContractLoading, isUpdateProductDetermination: $isUpdateProductDetermination, salesOrganisation: $salesOrganisation, customerCodeInfo: $customerCodeInfo, shipToInfo: $shipToInfo, config: $config, user: $user, additionInfo: $additionInfo, upsertBonusItemInProgressHashCode: $upsertBonusItemInProgressHashCode, aplSimulatorOrder: $aplSimulatorOrder)';
   }
 
   @override
@@ -6810,6 +7399,8 @@ class _$CartStateImpl extends _CartState {
                 other.isAplProductLoading == isAplProductLoading) &&
             (identical(other.isDeleteCombo, isDeleteCombo) ||
                 other.isDeleteCombo == isDeleteCombo) &&
+            (identical(other.isTenderContractLoading, isTenderContractLoading) ||
+                other.isTenderContractLoading == isTenderContractLoading) &&
             (identical(other.isUpdateProductDetermination, isUpdateProductDetermination) ||
                 other.isUpdateProductDetermination ==
                     isUpdateProductDetermination) &&
@@ -6826,8 +7417,7 @@ class _$CartStateImpl extends _CartState {
             const DeepCollectionEquality().equals(
                 other._upsertBonusItemInProgressHashCode,
                 _upsertBonusItemInProgressHashCode) &&
-            (identical(other.aplSimulatorOrder, aplSimulatorOrder) ||
-                other.aplSimulatorOrder == aplSimulatorOrder));
+            (identical(other.aplSimulatorOrder, aplSimulatorOrder) || other.aplSimulatorOrder == aplSimulatorOrder));
   }
 
   @override
@@ -6846,6 +7436,7 @@ class _$CartStateImpl extends _CartState {
         isBuyAgain,
         isAplProductLoading,
         isDeleteCombo,
+        isTenderContractLoading,
         isUpdateProductDetermination,
         salesOrganisation,
         customerCodeInfo,
@@ -6881,6 +7472,7 @@ abstract class _CartState extends CartState {
       required final bool isBuyAgain,
       required final bool isAplProductLoading,
       required final bool isDeleteCombo,
+      required final bool isTenderContractLoading,
       required final bool isUpdateProductDetermination,
       required final SalesOrganisation salesOrganisation,
       required final CustomerCodeInfo customerCodeInfo,
@@ -6918,6 +7510,8 @@ abstract class _CartState extends CartState {
   bool get isAplProductLoading;
   @override
   bool get isDeleteCombo;
+  @override
+  bool get isTenderContractLoading;
   @override
   bool get isUpdateProductDetermination;
   @override

@@ -63,10 +63,12 @@ part 'widget/stock_quantity.dart';
 
 class ProductDetailsPage extends StatefulWidget {
   final MaterialInfo materialInfo;
+  final bool isEditTender;
   final EZReachBanner? banner;
   const ProductDetailsPage({
     Key? key,
     required this.materialInfo,
+    this.isEditTender = false,
     this.banner,
   }) : super(key: key);
 
@@ -200,12 +202,16 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
               const LicenseExpiredBanner(),
               const EdiUserBanner(),
               const _ProductImageSection(),
-              const _BodyContent(),
+              _BodyContent(
+                isEditTender: widget.isEditTender,
+              ),
               _SimilarProducts(),
             ],
           ),
           bottomNavigationBar: _Footer(
             banner: widget.banner,
+            isEditTender: widget.isEditTender,
+            quantity: widget.materialInfo.quantity.intValue,
           ),
         ),
       ),
@@ -230,7 +236,11 @@ class _SimilarProducts extends StatelessWidget {
 }
 
 class _BodyContent extends StatelessWidget {
-  const _BodyContent({Key? key}) : super(key: key);
+  final bool isEditTender;
+  const _BodyContent({
+    Key? key,
+    this.isEditTender = false,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -341,6 +351,7 @@ class _BodyContent extends StatelessWidget {
                 eligibilityState.salesOrg.isTenderEligible)
               TenderContracts(
                 materialInfo: materialInfo,
+                isEditTenderContract: isEditTender,
               ),
             ComboOffersProduct(materialNumber: materialInfo.materialNumber),
             AvailableOffer(materialNumber: materialInfo.materialNumber),
@@ -468,9 +479,13 @@ class _Description extends StatelessWidget {
 
 class _Footer extends StatefulWidget {
   final EZReachBanner? banner;
+  final bool isEditTender;
+  final int quantity;
   const _Footer({
     Key? key,
     this.banner,
+    this.isEditTender = false,
+    this.quantity = 0,
   }) : super(key: key);
 
   @override
@@ -482,8 +497,11 @@ class _FooterState extends State<_Footer> {
   @override
   void initState() {
     const defaultQty = 1;
-    _quantityEditingController =
-        TextEditingController(text: defaultQty.toString());
+    _quantityEditingController = TextEditingController(
+      text: widget.isEditTender
+          ? widget.quantity.toString()
+          : defaultQty.toString(),
+    );
     context
         .read<ProductDetailBloc>()
         .add(ProductDetailEvent.updateQty(qty: defaultQty));
@@ -963,6 +981,7 @@ void _addToCart({
           quantityText: quantityText,
           banner: banner,
           tenderContractState: tenderContractDetailState,
+          isEditTender: isTenderEligible,
         );
       }
     }
@@ -987,6 +1006,7 @@ void upsertCart({
   required TenderContractDetailState tenderContractState,
   required String quantityText,
   EZReachBanner? banner,
+  bool isEditTender = false,
 }) {
   final materialNumber =
       state.productDetailAggregate.materialInfo.materialNumber;
@@ -1000,12 +1020,16 @@ void upsertCart({
             price: price,
             salesOrgConfig:
                 context.read<EligibilityBloc>().state.salesOrgConfigs,
-            quantity: stateCart.getQuantityOfProduct(
-                  productNumber: materialNumber,
-                ) +
-                int.parse(
-                  quantityText,
-                ),
+            quantity: isEditTender
+                ? int.parse(
+                    quantityText,
+                  )
+                : stateCart.getQuantityOfProduct(
+                      productNumber: materialNumber,
+                    ) +
+                    int.parse(
+                      quantityText,
+                    ),
             bonusSampleItems: context.read<CartBloc>().state.productBonusList(
                   materialNumber,
                 ),

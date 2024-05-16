@@ -6,8 +6,9 @@ part of 'tender_contract_dto.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_TenderContractDto _$$_TenderContractDtoFromJson(Map<String, dynamic> json) =>
-    _$_TenderContractDto(
+_$TenderContractDtoImpl _$$TenderContractDtoImplFromJson(
+        Map<String, dynamic> json) =>
+    _$TenderContractDtoImpl(
       contractNumber: json['contractNumber'] as String,
       contractItemNumber: json['contractItemNumber'] as String,
       contractReference: json['contractReference'] as String,
@@ -16,17 +17,17 @@ _$_TenderContractDto _$$_TenderContractDtoFromJson(Map<String, dynamic> json) =>
       salesDistrict: json['salesDistrict'] as String,
       tenderPackageDescription: json['tenderPackageDescription'] as String,
       tenderPrice: json['tenderPrice'] as String,
-      pricingUnit: json['pricingUnit'] as int,
-      remainingTenderQuantity: json['remainingTenderQuantity'] as int,
-      contractQuantity: json['contractQuantity'] as int,
+      pricingUnit: (json['pricingUnit'] as num).toInt(),
+      remainingTenderQuantity: (json['remainingTenderQuantity'] as num).toInt(),
+      contractQuantity: (json['contractQuantity'] as num).toInt(),
       contractExpiryDate: json['contractExpiryDate'] as String,
       announcementLetterNumber: json['announcementLetterNumber'] as String,
       isNearToExpire: json['isNearToExpire'] as bool,
       contractPaymentTerm: json['contractPaymentTerm'] as String,
     );
 
-Map<String, dynamic> _$$_TenderContractDtoToJson(
-        _$_TenderContractDto instance) =>
+Map<String, dynamic> _$$TenderContractDtoImplToJson(
+        _$TenderContractDtoImpl instance) =>
     <String, dynamic>{
       'contractNumber': instance.contractNumber,
       'contractItemNumber': instance.contractItemNumber,

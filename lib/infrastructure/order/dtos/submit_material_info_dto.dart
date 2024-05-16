@@ -5,6 +5,7 @@ import 'package:ezrxmobile/domain/order/entities/submit_material_info.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/material_item_override_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/submit_material_item_bonus_dto.dart';
+import 'package:ezrxmobile/infrastructure/order/dtos/submit_tender_contract_dto.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'submit_material_info_dto.freezed.dart';
@@ -17,31 +18,48 @@ class SubmitMaterialInfoDto with _$SubmitMaterialInfoDto {
 
   const factory SubmitMaterialInfoDto({
     @JsonKey(name: 'materialNumber', defaultValue: '')
-        required String materialNumber,
+    required String materialNumber,
     @JsonKey(name: 'qty', defaultValue: 0) required int qty,
     @JsonKey(name: 'bonuses', defaultValue: <SubmitMaterialItemBonusDto>[])
-        required List<SubmitMaterialItemBonusDto> bonuses,
+    required List<SubmitMaterialItemBonusDto> bonuses,
     @JsonKey(name: 'Comment', defaultValue: '') required String comment,
     @JsonKey(name: 'ParentID', defaultValue: '') required String parentId,
-    @JsonKey(name: 'override', toJson: overrideTojson, readValue: materialItemOverrideread, includeIfNull: false)
-        required MaterialItemOverrideDto materialItemOverride,
+    @JsonKey(
+      name: 'override',
+      toJson: overrideTojson,
+      readValue: materialItemReadValue,
+      includeIfNull: false,
+    )
+    required MaterialItemOverrideDto materialItemOverride,
     @JsonKey(name: 'ProductType', defaultValue: '') required String productType,
     @JsonKey(name: 'price', defaultValue: 0) required double price,
     @JsonKey(name: 'tax', defaultValue: 0) required double tax,
     @JsonKey(name: 'Mrp', defaultValue: 0) required double mrp,
     @JsonKey(name: 'PromoStatus', defaultValue: false)
-        required bool promoStatus,
+    required bool promoStatus,
     @JsonKey(name: 'PromoType', defaultValue: '') required String promoType,
     @JsonKey(name: 'PrincipalCode', defaultValue: '')
-        required String principalCode,
+    required String principalCode,
     @JsonKey(name: 'PrincipalName', defaultValue: '')
-        required String principalName,
+    required String principalName,
 
     ///Todo: consider to delete it
-    @JsonKey(name: 'batch', defaultValue: '', toJson: overrideBatchJson, includeIfNull: false)
-        required String batch,
+    @JsonKey(
+      name: 'batch',
+      defaultValue: '',
+      toJson: overrideBatchJson,
+      includeIfNull: false,
+    )
+    required String batch,
     @JsonKey(name: 'isCounterOffer', defaultValue: false)
-        required bool isCounterOffer,
+    required bool isCounterOffer,
+    @JsonKey(
+      name: 'contract',
+      readValue: materialItemReadValue,
+      toJson: overridecontractJson,
+      includeIfNull: false,
+    )
+    required SubmitTenderContractDto contract,
   }) = _SubmitMaterialInfoDto;
 
   SubmitMaterialInfo toDomain() {
@@ -64,6 +82,7 @@ class SubmitMaterialInfoDto with _$SubmitMaterialInfoDto {
         principalCode: PrincipalCode(principalCode),
       ),
       isCounterOffer: isCounterOffer,
+      contract: contract.toDomain(),
     );
   }
 
@@ -95,6 +114,7 @@ class SubmitMaterialInfoDto with _$SubmitMaterialInfoDto {
       principalName:
           submitMaterialInfo.principalData.principalName.getOrDefaultValue(''),
       isCounterOffer: submitMaterialInfo.isCounterOffer,
+      contract: SubmitTenderContractDto.fromDomain(submitMaterialInfo.contract),
     );
   }
 
@@ -102,7 +122,7 @@ class SubmitMaterialInfoDto with _$SubmitMaterialInfoDto {
       _$SubmitMaterialInfoDtoFromJson(json);
 }
 
-Map materialItemOverrideread(Map json, String key) => json[key] ?? {};
+Map materialItemReadValue(Map json, String key) => json[key] ?? {};
 
 dynamic overrideTojson(MaterialItemOverrideDto value) {
   if (value.percentageOverride.isEmpty &&
@@ -120,4 +140,14 @@ String? overrideBatchJson(String batch) {
   }
 
   return batch;
+}
+
+SubmitTenderContractDto? overridecontractJson(
+  SubmitTenderContractDto contract,
+) {
+  if (contract == SubmitTenderContractDto.empty) {
+    return null;
+  }
+
+  return contract;
 }

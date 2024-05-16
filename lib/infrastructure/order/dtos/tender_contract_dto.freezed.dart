@@ -12,7 +12,7 @@ part of 'tender_contract_dto.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 TenderContractDto _$TenderContractDtoFromJson(Map<String, dynamic> json) {
   return _TenderContractDto.fromJson(json);
@@ -178,11 +178,11 @@ class _$TenderContractDtoCopyWithImpl<$Res, $Val extends TenderContractDto>
 }
 
 /// @nodoc
-abstract class _$$_TenderContractDtoCopyWith<$Res>
+abstract class _$$TenderContractDtoImplCopyWith<$Res>
     implements $TenderContractDtoCopyWith<$Res> {
-  factory _$$_TenderContractDtoCopyWith(_$_TenderContractDto value,
-          $Res Function(_$_TenderContractDto) then) =
-      __$$_TenderContractDtoCopyWithImpl<$Res>;
+  factory _$$TenderContractDtoImplCopyWith(_$TenderContractDtoImpl value,
+          $Res Function(_$TenderContractDtoImpl) then) =
+      __$$TenderContractDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -206,11 +206,11 @@ abstract class _$$_TenderContractDtoCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_TenderContractDtoCopyWithImpl<$Res>
-    extends _$TenderContractDtoCopyWithImpl<$Res, _$_TenderContractDto>
-    implements _$$_TenderContractDtoCopyWith<$Res> {
-  __$$_TenderContractDtoCopyWithImpl(
-      _$_TenderContractDto _value, $Res Function(_$_TenderContractDto) _then)
+class __$$TenderContractDtoImplCopyWithImpl<$Res>
+    extends _$TenderContractDtoCopyWithImpl<$Res, _$TenderContractDtoImpl>
+    implements _$$TenderContractDtoImplCopyWith<$Res> {
+  __$$TenderContractDtoImplCopyWithImpl(_$TenderContractDtoImpl _value,
+      $Res Function(_$TenderContractDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -232,7 +232,7 @@ class __$$_TenderContractDtoCopyWithImpl<$Res>
     Object? isNearToExpire = null,
     Object? contractPaymentTerm = null,
   }) {
-    return _then(_$_TenderContractDto(
+    return _then(_$TenderContractDtoImpl(
       contractNumber: null == contractNumber
           ? _value.contractNumber
           : contractNumber // ignore: cast_nullable_to_non_nullable
@@ -299,8 +299,8 @@ class __$$_TenderContractDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_TenderContractDto extends _TenderContractDto {
-  const _$_TenderContractDto(
+class _$TenderContractDtoImpl extends _TenderContractDto {
+  const _$TenderContractDtoImpl(
       {@JsonKey(name: 'contractNumber') required this.contractNumber,
       @JsonKey(name: 'contractItemNumber') required this.contractItemNumber,
       @JsonKey(name: 'contractReference') required this.contractReference,
@@ -321,8 +321,8 @@ class _$_TenderContractDto extends _TenderContractDto {
       @JsonKey(name: 'contractPaymentTerm') required this.contractPaymentTerm})
       : super._();
 
-  factory _$_TenderContractDto.fromJson(Map<String, dynamic> json) =>
-      _$$_TenderContractDtoFromJson(json);
+  factory _$TenderContractDtoImpl.fromJson(Map<String, dynamic> json) =>
+      _$$TenderContractDtoImplFromJson(json);
 
   @override
   @JsonKey(name: 'contractNumber')
@@ -376,10 +376,10 @@ class _$_TenderContractDto extends _TenderContractDto {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_TenderContractDto &&
+            other is _$TenderContractDtoImpl &&
             (identical(other.contractNumber, contractNumber) ||
                 other.contractNumber == contractNumber) &&
             (identical(other.contractItemNumber, contractItemNumber) ||
@@ -438,13 +438,13 @@ class _$_TenderContractDto extends _TenderContractDto {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_TenderContractDtoCopyWith<_$_TenderContractDto> get copyWith =>
-      __$$_TenderContractDtoCopyWithImpl<_$_TenderContractDto>(
+  _$$TenderContractDtoImplCopyWith<_$TenderContractDtoImpl> get copyWith =>
+      __$$TenderContractDtoImplCopyWithImpl<_$TenderContractDtoImpl>(
           this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_TenderContractDtoToJson(
+    return _$$TenderContractDtoImplToJson(
       this,
     );
   }
@@ -474,11 +474,11 @@ abstract class _TenderContractDto extends TenderContractDto {
       required final String announcementLetterNumber,
       @JsonKey(name: 'isNearToExpire') required final bool isNearToExpire,
       @JsonKey(name: 'contractPaymentTerm')
-      required final String contractPaymentTerm}) = _$_TenderContractDto;
+      required final String contractPaymentTerm}) = _$TenderContractDtoImpl;
   const _TenderContractDto._() : super._();
 
   factory _TenderContractDto.fromJson(Map<String, dynamic> json) =
-      _$_TenderContractDto.fromJson;
+      _$TenderContractDtoImpl.fromJson;
 
   @override
   @JsonKey(name: 'contractNumber')
@@ -527,6 +527,6 @@ abstract class _TenderContractDto extends TenderContractDto {
   String get contractPaymentTerm;
   @override
   @JsonKey(ignore: true)
-  _$$_TenderContractDtoCopyWith<_$_TenderContractDto> get copyWith =>
+  _$$TenderContractDtoImplCopyWith<_$TenderContractDtoImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

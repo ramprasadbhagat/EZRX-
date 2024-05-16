@@ -1,5 +1,5 @@
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
-import 'package:ezrxmobile/domain/order/entities/order_history_details_order_items_tender_contract_details.dart';
+import 'package:ezrxmobile/domain/order/entities/order_history_details_tender_contract.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -53,14 +53,12 @@ class TenderContract with _$TenderContract {
       );
 
   factory TenderContract.fromOrderHistory(
-    OrderHistoryDetailsOrderItemTenderContractDetails tenderContact,
+    OrderHistoryDetailsTenderContract tenderContact,
   ) =>
       TenderContract.empty().copyWith(
-        contractNumber: TenderContractNumber.tenderContractNumber(
-          tenderContact.tenderContractNumber,
-        ),
+        contractNumber: tenderContact.contractNumber,
         contractReference: StringValue(
-          tenderContact.tenderContractReference,
+          tenderContact.contractReference,
         ),
       );
 

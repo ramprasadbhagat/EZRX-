@@ -6,6 +6,7 @@ import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
 import 'package:ezrxmobile/infrastructure/core/common/tracking_events.dart';
 import 'package:ezrxmobile/infrastructure/core/common/tracking_properties.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
+import 'package:ezrxmobile/presentation/core/tender_contract_section.dart';
 import 'package:ezrxmobile/presentation/orders/order_tab/widgets/order_item_price.dart';
 import 'package:ezrxmobile/presentation/core/quantity_and_price_with_tax.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
@@ -145,16 +146,24 @@ class _OrderItemTile extends StatelessWidget {
             color: ZPColors.darkGray,
           ),
       subtitle: '',
-      footerWidget: QuantityAndPriceWithTax.order(
-        quantity: orderItem.qty,
-        quantityDescription: isIDMarket
-            ? '${orderItem.pickedQuantity} ${context.tr('of')} ${orderItem.qty} ${context.tr('stocks fulfilled')}'
-            : '',
-        netPrice: orderItem.itemNetPrice(
-          salesOrgConfig.displayItemTaxBreakdown,
-          isIDMarket,
-        ),
-        taxPercentage: orderItem.taxPercentage,
+      footerWidget: Column(
+        children: [
+          QuantityAndPriceWithTax.order(
+            quantity: orderItem.qty,
+            quantityDescription: isIDMarket
+                ? '${orderItem.pickedQuantity} ${context.tr('of')} ${orderItem.qty} ${context.tr('stocks fulfilled')}'
+                : '',
+            netPrice: orderItem.itemNetPrice(
+              salesOrgConfig.displayItemTaxBreakdown,
+              isIDMarket,
+            ),
+            taxPercentage: orderItem.taxPercentage,
+          ),
+          if (!orderItem.orderItemTenderContract.tenderOrderReason.isEmpty)
+            TenderContractSection(
+              tenderContract: orderItem.orderItemTenderContract,
+            ),
+        ],
       ),
     );
   }

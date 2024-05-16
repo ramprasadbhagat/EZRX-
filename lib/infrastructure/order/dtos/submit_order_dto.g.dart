@@ -6,8 +6,8 @@ part of 'submit_order_dto.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_SubmitOrderDto _$$_SubmitOrderDtoFromJson(Map<String, dynamic> json) =>
-    _$_SubmitOrderDto(
+_$SubmitOrderDtoImpl _$$SubmitOrderDtoImplFromJson(Map<String, dynamic> json) =>
+    _$SubmitOrderDtoImpl(
       userName: json['username'] as String? ?? '',
       companyName: json['companyName'] as String? ?? '',
       customer: SubmitOrderCustomerDto.fromJson(
@@ -37,7 +37,8 @@ _$_SubmitOrderDto _$$_SubmitOrderDtoFromJson(Map<String, dynamic> json) =>
           [],
     );
 
-Map<String, dynamic> _$$_SubmitOrderDtoToJson(_$_SubmitOrderDto instance) =>
+Map<String, dynamic> _$$SubmitOrderDtoImplToJson(
+        _$SubmitOrderDtoImpl instance) =>
     <String, dynamic>{
       'username': instance.userName,
       'companyName': instance.companyName,
