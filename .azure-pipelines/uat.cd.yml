@@ -72,6 +72,7 @@ stages:
 
     - task: Bash@3
       displayName: 'Upload IPA to Firebase'
+      continueOnError: true
       inputs:
         targetType: 'inline'
         script: |
@@ -176,13 +177,14 @@ stages:
 
     - task: Bash@3
       displayName: 'Upload AAB to Firebase'
+      continueOnError: true
       inputs:
         targetType: 'inline'
         script: |
           firebase appdistribution:distribute *.aab \
           --app "$(FIREBASE_UAT_ANDROID_APP_ID)" \
           --token "$(FIREBASE_CI_TOKEN)" \
-          --groups "$(FIREBASE_UAT_TESTER_GROUP)"
+          --groups "$(FIREBASE_UAT_TESTER_GROUP)" \
           --release-notes "eZRx+ UAT Android"
         workingDirectory: 'build/app/outputs/bundle/uatRelease'
 
