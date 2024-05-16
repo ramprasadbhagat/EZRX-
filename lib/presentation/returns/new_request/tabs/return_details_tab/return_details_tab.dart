@@ -13,6 +13,7 @@ import 'package:ezrxmobile/presentation/core/info_label.dart';
 import 'package:ezrxmobile/presentation/core/market_place/market_place_seller_with_logo.dart';
 import 'package:ezrxmobile/presentation/core/outside_return_policy_tag.dart';
 import 'package:ezrxmobile/presentation/core/product_image.dart';
+import 'package:ezrxmobile/presentation/core/regexes.dart';
 import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
 import 'package:ezrxmobile/presentation/core/switch_widget.dart';
 import 'package:ezrxmobile/presentation/core/text_field_with_label.dart';
@@ -31,6 +32,7 @@ import 'package:ezrxmobile/presentation/returns/new_request/widgets/material_qua
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 

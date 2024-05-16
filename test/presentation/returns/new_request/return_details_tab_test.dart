@@ -1007,7 +1007,8 @@ void main() {
     });
 
     testWidgets(' => bonus comment check test', (WidgetTester tester) async {
-      final remarks = Remarks('bonus comment');
+      const remarksText = ' bonus comment';
+      final remarks = Remarks(remarksText);
       whenListen(
         newRequestBlocMock,
         Stream.fromIterable([
@@ -1027,7 +1028,7 @@ void main() {
               InvoiceDetails.empty().copyWith(
                 returnItemDetailsList: [
                   fakeReturnItemDetails.copyWith(
-                    remarks: Remarks('fake-remarks'),
+                    remarks: remarks,
                   ),
                 ],
               ),
@@ -1050,16 +1051,23 @@ void main() {
       );
       await tester.enterText(
         bonusReturnCommentField.first,
-        remarks.getValue(),
+        '$remarksText@',
       );
       await tester.pumpAndSettle();
       verify(
         () => newRequestBlocMock.add(
           NewRequestEvent.additionInfoChanged(
-            additionInfo: fakeReturnItemDetails.copyWith(remarks: remarks),
+            additionInfo: fakeReturnItemDetails.copyWith(
+              remarks: Remarks(remarksText),
+            ),
           ),
         ),
       ).called(1);
+      await tester.testTextInput.receiveAction(TextInputAction.done);
+      await tester.pumpAndSettle();
+      final textField =
+          bonusReturnCommentField.evaluate().first.widget as TextFormField;
+      expect(textField.controller!.text, equals(remarks.getValue()));
     });
 
     testWidgets(' => Material info section check', (WidgetTester tester) async {
