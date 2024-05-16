@@ -85,7 +85,9 @@ class _PaymentSummarySection extends StatelessWidget {
                                 _handleOpenWebview(state, context);
                               } else {
                                 context.router.pushAndPopUntil(
-                                  const PaymentCompletedPageRoute(),
+                                  PaymentCompletedPageRoute(
+                                    isMarketPlace: context.isMPPayment,
+                                  ),
                                   predicate: (Route route) =>
                                       route.settings.name ==
                                       PaymentPageRoute.name,
@@ -171,7 +173,7 @@ class _PaymentSummarySection extends StatelessWidget {
             );
         unawaited(
           context.router.pushAndPopUntil(
-            const PaymentCompletedPageRoute(),
+            PaymentCompletedPageRoute(isMarketPlace: context.isMPPayment),
             predicate: (Route route) =>
                 route.settings.name == PaymentPageRoute.name,
           ),

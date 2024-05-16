@@ -66,6 +66,7 @@ void main() {
       find.byKey(WidgetKeys.confirmBottomSheetConfirmButton);
   final confirmBottomSheetCancelButton =
       find.byKey(WidgetKeys.confirmBottomSheetCancelButton);
+  final isMarketPlaceVariant = ValueVariant<bool>({true, false});
 
   setUpAll(() async {
     TestWidgetsFlutterBinding.ensureInitialized();
@@ -793,49 +794,58 @@ void main() {
         expect(find.byKey(WidgetKeys.pdfView), findsOneWidget);
       });
 
-      testWidgets('On Tap Pay Now Button And Get Url', (tester) async {
-        final fakeUrl = Uri.parse('fake-url');
-        when(() => autoRouterMock.pushNamed<Uri>('payments/payments_webview'))
-            .thenAnswer((invocation) => Future.value(fakeUrl));
-        when(
-          () => autoRouterMock.pushAndPopUntil(
-            const PaymentCompletedPageRoute(),
-            predicate: any(named: 'predicate'),
-          ),
-        ).thenAnswer((invocation) => Future.value());
-
-        await tester.pumpWidget(getWidget());
-        await tester.pump();
-        final buttonFinder = find.byKey(WidgetKeys.payButton);
-        await tester.tap(buttonFinder);
-        await tester.pumpAndSettle();
-        verify(() => autoRouterMock.pushNamed<Uri>('payments/payments_webview'))
-            .called(1);
-        verify(
-          () => trackMixpanelEvent(
-            TrackingEvents.successfulPayment,
-            props: {
-              TrackingProps.paymentAmount: 0,
-              TrackingProps.paymentMethod: '',
-              TrackingProps.paymentDocumentCount: 0,
-              TrackingProps.paymentAdviceId: '',
-            },
-          ),
-        ).called(1);
-        verify(
-          () => newPaymentBlocMock.add(
-            NewPaymentEvent.updatePaymentGateway(
-              paymentUrl: fakeUrl,
+      testWidgets(
+        'On Tap Pay Now Button And Get Url',
+        (tester) async {
+          final fakeUrl = Uri.parse('fake-url');
+          when(() => autoRouterMock.pushNamed<Uri>('payments/payments_webview'))
+              .thenAnswer((invocation) => Future.value(fakeUrl));
+          when(
+            () => autoRouterMock.pushAndPopUntil(
+              PaymentCompletedPageRoute(
+                isMarketPlace: isMarketPlaceVariant.currentValue!,
+              ),
+              predicate: any(named: 'predicate'),
             ),
-          ),
-        ).called(1);
-        verify(
-          () => autoRouterMock.pushAndPopUntil(
-            const PaymentCompletedPageRoute(),
-            predicate: any(named: 'predicate'),
-          ),
-        ).called(1);
-      });
+          ).thenAnswer((invocation) => Future.value());
+
+          await tester.pumpWidget(getWidget());
+          await tester.pump();
+          final buttonFinder = find.byKey(WidgetKeys.payButton);
+          await tester.tap(buttonFinder);
+          await tester.pumpAndSettle();
+          verify(
+            () => autoRouterMock.pushNamed<Uri>('payments/payments_webview'),
+          ).called(1);
+          verify(
+            () => trackMixpanelEvent(
+              TrackingEvents.successfulPayment,
+              props: {
+                TrackingProps.paymentAmount: 0,
+                TrackingProps.paymentMethod: '',
+                TrackingProps.paymentDocumentCount: 0,
+                TrackingProps.paymentAdviceId: '',
+              },
+            ),
+          ).called(1);
+          verify(
+            () => newPaymentBlocMock.add(
+              NewPaymentEvent.updatePaymentGateway(
+                paymentUrl: fakeUrl,
+              ),
+            ),
+          ).called(1);
+          verify(
+            () => autoRouterMock.pushAndPopUntil(
+              PaymentCompletedPageRoute(
+                isMarketPlace: isMarketPlaceVariant.currentValue!,
+              ),
+              predicate: any(named: 'predicate'),
+            ),
+          ).called(1);
+        },
+        variant: isMarketPlaceVariant,
+      );
 
       testWidgets('On Tap Pay Now Button But Cannot Get Url', (tester) async {
         when(() => autoRouterMock.pushNamed<Uri>('payments/payments_webview'))

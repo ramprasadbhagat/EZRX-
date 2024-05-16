@@ -6,7 +6,7 @@ class _PaymentCompletedPleaseNote extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 12),
+      padding: const EdgeInsets.symmetric(horizontal: 20),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -27,6 +27,7 @@ class _PaymentCompletedPleaseNote extends StatelessWidget {
               ),
             ),
           ),
+          const SizedBox(height: 4),
           BulletWidget(
             content: RichText(
               text: TextSpan(
@@ -37,14 +38,20 @@ class _PaymentCompletedPleaseNote extends StatelessWidget {
                     ),
                 children: [
                   TextSpan(
-                    text: context.tr('Payment summary'),
-                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                    text: context.tr(
+                      context.isMPPayment
+                          ? 'MP Payment summary'
+                          : 'Payment summary',
+                    ),
+                    style: Theme.of(context).textTheme.labelMedium?.copyWith(
                           color: ZPColors.extraDarkGreen,
                         ),
-                    //TODO: Use context.isMPPayment for this in later ticket for this screen
                     recognizer: TapGestureRecognizer()
-                      ..onTap = () => context.router
-                          .push(PaymentSummaryPageRoute(isMarketPlace: false)),
+                      ..onTap = () => context.router.push(
+                            PaymentSummaryPageRoute(
+                              isMarketPlace: context.isMPPayment,
+                            ),
+                          ),
                   ),
                   TextSpan(
                     text: '" ${context.tr('page')}.',
@@ -56,11 +63,14 @@ class _PaymentCompletedPleaseNote extends StatelessWidget {
               ),
             ),
           ),
+          const SizedBox(height: 4),
           BulletWidget(
             content: RichText(
               text: TextSpan(
                 text: context.tr(
-                  'If you encountered an error with the payment, delete the system-generated payment advice in the eZRx payment summary section and regenerate a new payment advice by repeating the payment process.',
+                  context.isMPPayment
+                      ? 'If payment request fails, you may choose to retry payment or delete the failed payment advice then generate a new payment advice.'
+                      : 'If you encountered an error with the payment, delete the system-generated payment advice in the eZRx payment summary section and regenerate a new payment advice by repeating the payment process.',
                 ),
                 style: Theme.of(context).textTheme.titleMedium?.copyWith(
                       color: ZPColors.extraLightGrey4,
@@ -68,6 +78,7 @@ class _PaymentCompletedPleaseNote extends StatelessWidget {
               ),
             ),
           ),
+          const SizedBox(height: 4),
           BulletWidget(
             content: RichText(
               text: TextSpan(

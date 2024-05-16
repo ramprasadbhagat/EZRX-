@@ -9,13 +9,19 @@ class _PaymentCompletedMessage extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 20.0),
       child: Column(
         children: [
-          Icon(
-            Icons.check_circle,
-            color: ZPColors.green,
-            size: MediaQuery.of(context).size.width * 0.2,
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 8),
+            child: SvgPicture.asset(
+              SvgImage.orderCreated,
+              fit: BoxFit.fitHeight,
+            ),
           ),
           Text(
-            '${context.tr('Our payment processor is coordinating with the bank to process your payment request for payment advice ')} #${context.read<NewPaymentBloc>().state.paymentInvoiceInfoPdf.zzAdvice}.',
+            context.isMPPayment
+                ? '${context.tr('Thank you')} ${context.read<EligibilityBloc>().state.user.fullName.toTitleCase}! ${context.tr(
+                    'Our payment processor is coordinating with the bank to process your Marketplace payment request.',
+                  )}'
+                : '${context.tr('Our payment processor is coordinating with the bank to process your payment request for payment advice ')} #${context.read<NewPaymentBloc>().state.paymentInvoiceInfoPdf.zzAdvice}.',
             style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                   color: ZPColors.darkerGrey,
                 ),
@@ -24,7 +30,7 @@ class _PaymentCompletedMessage extends StatelessWidget {
             height: 8.0,
           ),
           Text(
-            '${context.tr('We’ll send a payment advice copy to')} ${context.read<EligibilityBloc>().state.user.email.getOrDefaultValue('')} ${context.tr('shortly')}.',
+            '${context.tr('We’ll send a payment advice copy to')} ${context.read<EligibilityBloc>().state.user.email.maskedValue} ${context.tr('shortly')}.',
             style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                   color: ZPColors.darkerGrey,
                 ),

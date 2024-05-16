@@ -1,10 +1,8 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:easy_localization/easy_localization.dart';
-import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
-import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/payments/new_payment/new_payment_bloc.dart';
-import 'package:ezrxmobile/application/payments/payment_summary/payment_summary_bloc.dart';
+import 'package:ezrxmobile/domain/account/entities/full_name.dart';
+import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/bullet_widget.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
@@ -23,9 +21,7 @@ void main() {
   late AppRouter autoRouterMock;
   late NewPaymentBloc newPaymentBlocMock;
   late EligibilityBloc eligibilityBlocMock;
-  late CustomerCodeBloc customerCodeBlocMock;
-  late SalesOrgBloc salesOrgBlocMock;
-  late ZPPaymentSummaryBloc paymentSummaryBlocMock;
+  final isMarketPlaceVariant = ValueVariant<bool>({true, false});
 
   setUpAll(() async {
     TestWidgetsFlutterBinding.ensureInitialized();
@@ -33,54 +29,35 @@ void main() {
     registerFallbackValue(
       const PageRouteInfo(PaymentPageRoute.name, path: 'payments'),
     );
-
     autoRouterMock = locator<AppRouter>();
     registerFallbackValue((Route route) {
       return route.settings.name == PaymentPageRoute.name;
     });
-
     newPaymentBlocMock = NewPaymentBlocMock();
     eligibilityBlocMock = EligibilityBlocMock();
-    customerCodeBlocMock = CustomerCodeBlocMock();
-    salesOrgBlocMock = SalesOrgBlocMock();
-    paymentSummaryBlocMock = ZPPaymentSummaryBlocMock();
   });
 
   setUp(() {
     when(() => newPaymentBlocMock.state).thenReturn(NewPaymentState.initial());
     when(() => eligibilityBlocMock.state)
         .thenReturn(EligibilityState.initial());
-    when(() => customerCodeBlocMock.state)
-        .thenReturn(CustomerCodeState.initial());
-    when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial());
-    when(() => paymentSummaryBlocMock.state)
-        .thenReturn(PaymentSummaryState.initial());
   });
 
-  Widget getWidget() {
+  Widget getWidget({bool isMarketPlace = false}) {
     return WidgetUtils.getScopedWidget(
       autoRouterMock: autoRouterMock,
       useMediaQuery: true,
       usingLocalization: true,
       routeName: PaymentAdviceCreatedPageRoute.name,
       providers: [
-        BlocProvider<SalesOrgBloc>(
-          create: (context) => salesOrgBlocMock,
-        ),
         BlocProvider<NewPaymentBloc>(
           create: (context) => newPaymentBlocMock,
-        ),
-        BlocProvider<CustomerCodeBloc>(
-          create: (context) => customerCodeBlocMock,
         ),
         BlocProvider<EligibilityBloc>(
           create: (context) => eligibilityBlocMock,
         ),
-        BlocProvider<ZPPaymentSummaryBloc>(
-          create: (context) => paymentSummaryBlocMock,
-        ),
       ],
-      child: const PaymentCompletedPage(),
+      child: PaymentCompletedPage(isMarketPlace: isMarketPlace),
     );
   }
 
@@ -88,10 +65,7 @@ void main() {
     testWidgets('Test AppBar', (tester) async {
       await tester.pumpWidget(getWidget());
       await tester.pump();
-      expect(
-        find.text('Payment request submitted'.tr()),
-        findsOneWidget,
-      );
+      expect(find.text('Payment request submitted'), findsOneWidget);
       final paymentAdviceCreatedPageBack =
           find.byKey(WidgetKeys.paymentAdviceCreatedPageBack);
       expect(paymentAdviceCreatedPageBack, findsOneWidget);
@@ -99,68 +73,181 @@ void main() {
       await tester.pumpAndSettle();
       expect(find.byType(PaymentCompletedPage), findsNothing);
     });
-    testWidgets('Test Body Content', (tester) async {
-      await tester.pumpWidget(getWidget());
-      await tester.pump();
-      expect(
-        find.byIcon(Icons.check_circle),
-        findsOneWidget,
-      );
-      final bodyText = find.textContaining(
-        'Our payment processor is coordinating with the bank to process your payment request for payment advice ',
-      );
-      expect(bodyText, findsOneWidget);
-      final bodyText2 = find.textContaining(
-        'We’ll send a payment advice copy to',
-      );
-      expect(bodyText2, findsOneWidget);
-      final pleaseNote = find.text(
-        'Please note',
-      );
-      expect(pleaseNote, findsOneWidget);
-      final bulletWidget = find.byType(
-        BulletWidget,
-      );
-      expect(bulletWidget, findsNWidgets(4));
-      final finder = find.byWidgetPredicate(
-        (widget) =>
-            widget is RichText && tapTextSpan(widget, 'Payment summary'),
-      );
-      await tester.pumpAndSettle();
-      expect(finder, findsWidgets);
-    });
-    testWidgets('Test Account Summary Button', (tester) async {
-      await tester.pumpWidget(getWidget());
-      await tester.pump();
-      final accountSummaryButton = find.byKey(
-        WidgetKeys.accountSummaryButton,
-      );
-      expect(accountSummaryButton, findsOneWidget);
-      await tester.tap(accountSummaryButton);
-      await tester.pumpAndSettle();
-      expect(
-        autoRouterMock.current.path,
-        'payments/invoice_credit',
-      );
-    });
-    testWidgets('Test payment Summary Button', (tester) async {
-      await tester.pumpWidget(getWidget());
-      await tester.pump();
-      final accountSummaryButton = find.byKey(
-        WidgetKeys.paymentSummaryRouteButton,
-      );
-      expect(accountSummaryButton, findsOneWidget);
-      await tester.tap(accountSummaryButton);
-      await tester.pumpAndSettle();
-      expect(
-        autoRouterMock.current.path,
-        PaymentSummaryPageRoute(isMarketPlace: false).path,
-      );
-    });
+    testWidgets(
+      'Test Body Content',
+      (tester) async {
+        final isMarketPlace = isMarketPlaceVariant.currentValue!;
+        final fakeEmail = EmailAddress('vmnguyen@zuelligpharma.com');
+        const fakeName = FullName(firstName: 'Tom', lastName: 'Nguyen');
+        const fakePaymentID = 'fake-id';
+        when(() => newPaymentBlocMock.state).thenReturn(
+          NewPaymentState.initial()
+              .copyWith
+              .paymentInvoiceInfoPdf(zzAdvice: fakePaymentID),
+        );
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial()
+              .copyWith
+              .user(email: fakeEmail, fullName: fakeName),
+        );
+        await tester.pumpWidget(getWidget(isMarketPlace: isMarketPlace));
+        await tester.pump();
+        expect(
+          find.text(
+            isMarketPlace
+                ? 'Thank you ${fakeName.toTitleCase}! Our payment processor is coordinating with the bank to process your Marketplace payment request.'
+                : 'Our payment processor is coordinating with the bank to process your payment request for payment advice  #$fakePaymentID.',
+          ),
+          findsOneWidget,
+        );
+        expect(
+          find.text(
+            'We’ll send a payment advice copy to ${fakeEmail.maskedValue} shortly.',
+          ),
+          findsOneWidget,
+        );
+        expect(find.text('Please note'), findsOneWidget);
+
+        final bulletWidget = find.byType(BulletWidget);
+        expect(bulletWidget, findsNWidgets(4));
+        expect(
+          find.descendant(
+            of: bulletWidget,
+            matching: find.text(
+              'There may be situations where payments fail during the payment process, or it may take longer time. Please make sure to check the payment status of your payment request.',
+              findRichText: true,
+            ),
+          ),
+          findsOne,
+        );
+        expect(
+          find.descendant(
+            of: bulletWidget,
+            matching: find.text(
+              isMarketPlace
+                  ? 'If payment request fails, you may choose to retry payment or delete the failed payment advice then generate a new payment advice.'
+                  : 'If you encountered an error with the payment, delete the system-generated payment advice in the eZRx payment summary section and regenerate a new payment advice by repeating the payment process.',
+              findRichText: true,
+            ),
+          ),
+          findsOne,
+        );
+        expect(
+          find.descendant(
+            of: bulletWidget,
+            matching: find.text(
+              'Please note that system-generated payment advice(s) will be automatically deleted if payment is not received within 30 days.',
+              findRichText: true,
+            ),
+          ),
+          findsOne,
+        );
+        expect(
+          find.descendant(
+            of: bulletWidget,
+            matching: find.text(
+              'You can check your payment status from the. "${isMarketPlace ? 'MP Payment summary' : 'Payment summary'}" page.',
+              findRichText: true,
+            ),
+          ),
+          findsOne,
+        );
+        final finder = find.byWidgetPredicate(
+          (widget) =>
+              widget is RichText &&
+              _tapTextSpan(
+                widget,
+                isMarketPlace ? 'MP Payment summary' : 'Payment summary',
+              ),
+        );
+        expect(finder, findsWidgets);
+        await tester.pumpAndSettle();
+        expect(
+          autoRouterMock.currentPath,
+          PaymentSummaryPageRoute(isMarketPlace: isMarketPlace).path,
+        );
+        expect(
+          (autoRouterMock.current.args as PaymentSummaryPageRouteArgs)
+              .isMarketPlace,
+          isMarketPlace,
+        );
+      },
+      variant: isMarketPlaceVariant,
+    );
+
+    testWidgets(
+      'Test Account Summary Button',
+      (tester) async {
+        final isMarketPlace = isMarketPlaceVariant.currentValue!;
+        await tester.pumpWidget(getWidget(isMarketPlace: isMarketPlace));
+        await tester.pump();
+        final accountSummaryButton = find.byKey(
+          WidgetKeys.accountSummaryButton,
+        );
+        expect(accountSummaryButton, findsOneWidget);
+        expect(
+          find.descendant(
+            of: accountSummaryButton,
+            matching: find.text(
+              isMarketPlace ? 'MP Account summary' : 'Account summary',
+            ),
+          ),
+          findsOne,
+        );
+        await tester.tap(accountSummaryButton);
+        await tester.pumpAndSettle();
+        expect(
+          autoRouterMock.current.path,
+          AccountSummaryRoute(isMarketPlace: isMarketPlace).path,
+        );
+        expect(
+          (autoRouterMock.current.args as AccountSummaryRouteArgs)
+              .isMarketPlace,
+          isMarketPlace,
+        );
+      },
+      variant: isMarketPlaceVariant,
+    );
+
+    testWidgets(
+      'Test payment Summary Button',
+      (tester) async {
+        final isMarketPlace = isMarketPlaceVariant.currentValue!;
+        await tester.pumpWidget(getWidget(isMarketPlace: isMarketPlace));
+        await tester.pump();
+        final accountSummaryButton = find.byKey(
+          WidgetKeys.paymentSummaryRouteButton,
+        );
+        expect(accountSummaryButton, findsOneWidget);
+        expect(
+          find.descendant(
+            of: accountSummaryButton,
+            matching: find.text(
+              isMarketPlace ? 'MP Payment summary' : 'Payment summary',
+            ),
+          ),
+          findsOne,
+        );
+        await tester.tap(accountSummaryButton);
+        await tester.pumpAndSettle();
+        expect(
+          autoRouterMock.current.path,
+          PaymentSummaryPageRoute(
+            isMarketPlace: isMarketPlace,
+          ).path,
+        );
+        expect(
+          (autoRouterMock.current.args as PaymentSummaryPageRouteArgs)
+              .isMarketPlace,
+          isMarketPlace,
+        );
+      },
+      variant: isMarketPlaceVariant,
+    );
   });
 }
 
-bool findTextAndTap(InlineSpan visitor, String text) {
+bool _findTextAndTap(InlineSpan visitor, String text) {
   if (visitor is TextSpan && visitor.text == text) {
     if (visitor.recognizer is TapGestureRecognizer) {
       (visitor.recognizer as TapGestureRecognizer).onTap?.call();
@@ -172,9 +259,9 @@ bool findTextAndTap(InlineSpan visitor, String text) {
   return true;
 }
 
-bool tapTextSpan(RichText richText, String text) {
+bool _tapTextSpan(RichText richText, String text) {
   final isTapped = !richText.text.visitChildren(
-    (visitor) => findTextAndTap(visitor, text),
+    (visitor) => _findTextAndTap(visitor, text),
   );
 
   return isTapped;

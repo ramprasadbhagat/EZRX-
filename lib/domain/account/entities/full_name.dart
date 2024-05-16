@@ -26,13 +26,12 @@ class FullName with _$FullName {
     return '${firstName[0].toUpperCase()}${lastName[0].toUpperCase()}';
   }
 
-  String get displayFullName => '$firstName $lastName';
+  String get displayFullName => '$firstName $lastName'.trim();
 
   String get toTitleCase {
     if (displayFullName.isEmpty) return '';
 
     return displayFullName
-        .trim()
         .split(' ')
         .map(
           (word) =>

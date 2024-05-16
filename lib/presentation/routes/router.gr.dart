@@ -444,9 +444,13 @@ class AppRouter extends _i77.RootStackRouter {
       );
     },
     PaymentCompletedPageRoute.name: (routeData) {
+      final args = routeData.argsAs<PaymentCompletedPageRouteArgs>();
       return _i77.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const _i40.PaymentCompletedPage(),
+        child: _i40.PaymentCompletedPage(
+          key: args.key,
+          isMarketPlace: args.isMarketPlace,
+        ),
       );
     },
     AdminPoAttachmentPageRoute.name: (routeData) {
@@ -1939,14 +1943,37 @@ class PaymentAdviceCreatedPageRouteArgs {
 
 /// generated route for
 /// [_i40.PaymentCompletedPage]
-class PaymentCompletedPageRoute extends _i77.PageRouteInfo<void> {
-  const PaymentCompletedPageRoute()
-      : super(
+class PaymentCompletedPageRoute
+    extends _i77.PageRouteInfo<PaymentCompletedPageRouteArgs> {
+  PaymentCompletedPageRoute({
+    _i78.Key? key,
+    required bool isMarketPlace,
+  }) : super(
           PaymentCompletedPageRoute.name,
           path: 'payments/payment_completed',
+          args: PaymentCompletedPageRouteArgs(
+            key: key,
+            isMarketPlace: isMarketPlace,
+          ),
         );
 
   static const String name = 'PaymentCompletedPageRoute';
+}
+
+class PaymentCompletedPageRouteArgs {
+  const PaymentCompletedPageRouteArgs({
+    this.key,
+    required this.isMarketPlace,
+  });
+
+  final _i78.Key? key;
+
+  final bool isMarketPlace;
+
+  @override
+  String toString() {
+    return 'PaymentCompletedPageRouteArgs{key: $key, isMarketPlace: $isMarketPlace}';
+  }
 }
 
 /// generated route for
