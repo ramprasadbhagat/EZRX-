@@ -26,7 +26,7 @@ class StockInfo with _$StockInfo {
   const factory StockInfo({
     required MaterialNumber materialNumber,
     required DateTimeStringValue expiryDate,
-    required BatchNumber batch,
+    required StringValue batch,
     required MaterialInStock inStock,
     required String salesDistrict,
     required int stockQuantity,
@@ -35,7 +35,7 @@ class StockInfo with _$StockInfo {
   factory StockInfo.empty() => StockInfo(
         materialNumber: MaterialNumber(''),
         expiryDate: DateTimeStringValue(''),
-        batch: BatchNumber(''),
+        batch: StringValue(''),
         inStock: MaterialInStock(''),
         salesDistrict: '',
         stockQuantity: 0,
@@ -43,7 +43,7 @@ class StockInfo with _$StockInfo {
 
   // If product is marketplace, batch number always be NA
   String displayBatchNumber({required bool isMarketPlace}) =>
-      (isMarketPlace ? BatchNumber('') : batch).displayLabel;
+      (isMarketPlace ? StringValue('') : batch).displayNAIfEmpty;
 
   String displayExpiryDate({
     required bool isMarketPlace,

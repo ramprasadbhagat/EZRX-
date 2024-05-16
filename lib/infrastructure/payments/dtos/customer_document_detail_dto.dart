@@ -109,7 +109,7 @@ class CustomerDocumentDetailDto with _$CustomerDocumentDetailDto {
       grossAmount: grossAmount,
       netAmount: netAmount,
       taxAmount: taxAmount,
-      batchNumber: BatchNumber(batchNumber),
+      batchNumber: StringValue(batchNumber),
       expiryDate: DateTimeStringValue(expiryDate),
       principalData: PrincipalData(
         principalName: PrincipalName(principalName),

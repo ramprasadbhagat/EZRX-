@@ -742,19 +742,6 @@ class ComboDealCategoryType extends ValueObject<String> {
   const ComboDealCategoryType._(this.value);
 }
 
-class BatchNumber extends ValueObject<String> {
-  @override
-  final Either<ValueFailure<String>, String> value;
-
-  factory BatchNumber(String input) {
-    return BatchNumber._(validateStringNotEmpty(input));
-  }
-
-  String get displayLabel => naIfEmpty(value.getOrElse(() => ''));
-
-  const BatchNumber._(this.value);
-}
-
 class ZDP5Info extends ValueObject<String> {
   @override
   final Either<ValueFailure<String>, String> value;

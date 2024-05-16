@@ -12,7 +12,7 @@ part of 'customer_document_detail.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$CustomerDocumentDetail {
@@ -29,7 +29,7 @@ mixin _$CustomerDocumentDetail {
   double get grossAmount => throw _privateConstructorUsedError;
   double get netAmount => throw _privateConstructorUsedError;
   double get taxAmount => throw _privateConstructorUsedError;
-  BatchNumber get batchNumber => throw _privateConstructorUsedError;
+  StringValue get batchNumber => throw _privateConstructorUsedError;
   DateTimeStringValue get expiryDate => throw _privateConstructorUsedError;
   PrincipalData get principalData => throw _privateConstructorUsedError;
   ProductImages get productImages => throw _privateConstructorUsedError;
@@ -59,7 +59,7 @@ abstract class $CustomerDocumentDetailCopyWith<$Res> {
       double grossAmount,
       double netAmount,
       double taxAmount,
-      BatchNumber batchNumber,
+      StringValue batchNumber,
       DateTimeStringValue expiryDate,
       PrincipalData principalData,
       ProductImages productImages});
@@ -156,7 +156,7 @@ class _$CustomerDocumentDetailCopyWithImpl<$Res,
       batchNumber: null == batchNumber
           ? _value.batchNumber
           : batchNumber // ignore: cast_nullable_to_non_nullable
-              as BatchNumber,
+              as StringValue,
       expiryDate: null == expiryDate
           ? _value.expiryDate
           : expiryDate // ignore: cast_nullable_to_non_nullable
@@ -190,11 +190,12 @@ class _$CustomerDocumentDetailCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_CustomerDocumentDetailCopyWith<$Res>
+abstract class _$$CustomerDocumentDetailImplCopyWith<$Res>
     implements $CustomerDocumentDetailCopyWith<$Res> {
-  factory _$$_CustomerDocumentDetailCopyWith(_$_CustomerDocumentDetail value,
-          $Res Function(_$_CustomerDocumentDetail) then) =
-      __$$_CustomerDocumentDetailCopyWithImpl<$Res>;
+  factory _$$CustomerDocumentDetailImplCopyWith(
+          _$CustomerDocumentDetailImpl value,
+          $Res Function(_$CustomerDocumentDetailImpl) then) =
+      __$$CustomerDocumentDetailImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -211,7 +212,7 @@ abstract class _$$_CustomerDocumentDetailCopyWith<$Res>
       double grossAmount,
       double netAmount,
       double taxAmount,
-      BatchNumber batchNumber,
+      StringValue batchNumber,
       DateTimeStringValue expiryDate,
       PrincipalData principalData,
       ProductImages productImages});
@@ -223,12 +224,13 @@ abstract class _$$_CustomerDocumentDetailCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_CustomerDocumentDetailCopyWithImpl<$Res>
+class __$$CustomerDocumentDetailImplCopyWithImpl<$Res>
     extends _$CustomerDocumentDetailCopyWithImpl<$Res,
-        _$_CustomerDocumentDetail>
-    implements _$$_CustomerDocumentDetailCopyWith<$Res> {
-  __$$_CustomerDocumentDetailCopyWithImpl(_$_CustomerDocumentDetail _value,
-      $Res Function(_$_CustomerDocumentDetail) _then)
+        _$CustomerDocumentDetailImpl>
+    implements _$$CustomerDocumentDetailImplCopyWith<$Res> {
+  __$$CustomerDocumentDetailImplCopyWithImpl(
+      _$CustomerDocumentDetailImpl _value,
+      $Res Function(_$CustomerDocumentDetailImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -252,7 +254,7 @@ class __$$_CustomerDocumentDetailCopyWithImpl<$Res>
     Object? principalData = null,
     Object? productImages = null,
   }) {
-    return _then(_$_CustomerDocumentDetail(
+    return _then(_$CustomerDocumentDetailImpl(
       billingDocumentItem: null == billingDocumentItem
           ? _value.billingDocumentItem
           : billingDocumentItem // ignore: cast_nullable_to_non_nullable
@@ -308,7 +310,7 @@ class __$$_CustomerDocumentDetailCopyWithImpl<$Res>
       batchNumber: null == batchNumber
           ? _value.batchNumber
           : batchNumber // ignore: cast_nullable_to_non_nullable
-              as BatchNumber,
+              as StringValue,
       expiryDate: null == expiryDate
           ? _value.expiryDate
           : expiryDate // ignore: cast_nullable_to_non_nullable
@@ -327,8 +329,8 @@ class __$$_CustomerDocumentDetailCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_CustomerDocumentDetail extends _CustomerDocumentDetail {
-  const _$_CustomerDocumentDetail(
+class _$CustomerDocumentDetailImpl extends _CustomerDocumentDetail {
+  const _$CustomerDocumentDetailImpl(
       {required this.billingDocumentItem,
       required this.salesDocumentItemType,
       required this.materialNumber,
@@ -375,7 +377,7 @@ class _$_CustomerDocumentDetail extends _CustomerDocumentDetail {
   @override
   final double taxAmount;
   @override
-  final BatchNumber batchNumber;
+  final StringValue batchNumber;
   @override
   final DateTimeStringValue expiryDate;
   @override
@@ -389,10 +391,10 @@ class _$_CustomerDocumentDetail extends _CustomerDocumentDetail {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_CustomerDocumentDetail &&
+            other is _$CustomerDocumentDetailImpl &&
             (identical(other.billingDocumentItem, billingDocumentItem) ||
                 other.billingDocumentItem == billingDocumentItem) &&
             (identical(other.salesDocumentItemType, salesDocumentItemType) ||
@@ -457,30 +459,31 @@ class _$_CustomerDocumentDetail extends _CustomerDocumentDetail {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_CustomerDocumentDetailCopyWith<_$_CustomerDocumentDetail> get copyWith =>
-      __$$_CustomerDocumentDetailCopyWithImpl<_$_CustomerDocumentDetail>(
-          this, _$identity);
+  _$$CustomerDocumentDetailImplCopyWith<_$CustomerDocumentDetailImpl>
+      get copyWith => __$$CustomerDocumentDetailImplCopyWithImpl<
+          _$CustomerDocumentDetailImpl>(this, _$identity);
 }
 
 abstract class _CustomerDocumentDetail extends CustomerDocumentDetail {
   const factory _CustomerDocumentDetail(
-      {required final String billingDocumentItem,
-      required final StringValue salesDocumentItemType,
-      required final MaterialNumber materialNumber,
-      required final String billingDocumentItemText,
-      required final IntegerValue billingQuantity,
-      required final String billingQuantityUnit,
-      required final String salesMeasureISOUnit,
-      required final String referenceSDDocument,
-      required final String referenceSDDocumentItem,
-      required final String referenceSDDocumentCategory,
-      required final double grossAmount,
-      required final double netAmount,
-      required final double taxAmount,
-      required final BatchNumber batchNumber,
-      required final DateTimeStringValue expiryDate,
-      required final PrincipalData principalData,
-      required final ProductImages productImages}) = _$_CustomerDocumentDetail;
+          {required final String billingDocumentItem,
+          required final StringValue salesDocumentItemType,
+          required final MaterialNumber materialNumber,
+          required final String billingDocumentItemText,
+          required final IntegerValue billingQuantity,
+          required final String billingQuantityUnit,
+          required final String salesMeasureISOUnit,
+          required final String referenceSDDocument,
+          required final String referenceSDDocumentItem,
+          required final String referenceSDDocumentCategory,
+          required final double grossAmount,
+          required final double netAmount,
+          required final double taxAmount,
+          required final StringValue batchNumber,
+          required final DateTimeStringValue expiryDate,
+          required final PrincipalData principalData,
+          required final ProductImages productImages}) =
+      _$CustomerDocumentDetailImpl;
   const _CustomerDocumentDetail._() : super._();
 
   @override
@@ -510,7 +513,7 @@ abstract class _CustomerDocumentDetail extends CustomerDocumentDetail {
   @override
   double get taxAmount;
   @override
-  BatchNumber get batchNumber;
+  StringValue get batchNumber;
   @override
   DateTimeStringValue get expiryDate;
   @override
@@ -519,6 +522,6 @@ abstract class _CustomerDocumentDetail extends CustomerDocumentDetail {
   ProductImages get productImages;
   @override
   @JsonKey(ignore: true)
-  _$$_CustomerDocumentDetailCopyWith<_$_CustomerDocumentDetail> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$CustomerDocumentDetailImplCopyWith<_$CustomerDocumentDetailImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }

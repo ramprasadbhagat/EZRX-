@@ -209,20 +209,9 @@ class ViewByOrdersDetailRobot extends CommonRobot {
       of: _verifyingItem,
       matching: find.byKey(WidgetKeys.cartItemBundleRate),
     );
-    expect(
-      find.descendant(
-        of: rateWidget,
-        matching: find.textContaining(qty.toString()),
-      ),
-      findsOneWidget,
-    );
-    expect(
-      find.descendant(
-        of: rateWidget,
-        matching: find.textContaining(rate, findRichText: true),
-      ),
-      findsOneWidget,
-    );
+    final rateText = tester.widget<Text>(rateWidget).data;
+    expect(rateText, contains(qty.toString()));
+    expect(rateText, contains(rate));
   }
 
   void verifyBundleTotalPrice(String price) {

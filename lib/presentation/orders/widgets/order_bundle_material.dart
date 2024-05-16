@@ -5,8 +5,9 @@ import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
 import 'package:ezrxmobile/infrastructure/core/common/tracking_events.dart';
 import 'package:ezrxmobile/infrastructure/core/common/tracking_properties.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
-import 'package:ezrxmobile/presentation/core/pre_order_label.dart';
+import 'package:ezrxmobile/presentation/orders/widgets/order_history_stock_info.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
+import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:ezrxmobile/presentation/utils/router_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -60,79 +61,76 @@ class BundleItemMaterial extends StatelessWidget {
         orderItem.materialNumber.displayMatNo,
       ),
       onTap: () => _goToViewByItemDetail(context),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
-        child: Row(
+      child: CustomCard(
+        showShadow: false,
+        backgroundColor: ZPColors.tenderUnselectBg,
+        margin: const EdgeInsets.only(top: 8),
+        padding: const EdgeInsets.all(8),
+        child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            CustomCard(
-              showShadow: false,
-              showBorder: true,
-              child: ProductImage(
-                width: 70,
-                height: 70,
-                fit: BoxFit.fitHeight,
-                materialNumber: orderItem.materialNumber,
-              ),
+          children: [
+            StatusLabel(
+              status: StatusType(orderItem.sAPStatus.displayOrderStatus),
             ),
-            const SizedBox(width: 5),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  StatusLabel(
-                    status: StatusType(
-                      orderItem.sAPStatus.displayOrderStatus,
-                    ),
+            const SizedBox(height: 8),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                CustomCard(
+                  showShadow: false,
+                  showBorder: true,
+                  clipBehavior: Clip.hardEdge,
+                  child: ProductImage(
+                    width: 72,
+                    height: 72,
+                    fit: BoxFit.fill,
+                    materialNumber: orderItem.materialNumber,
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Flexible(
-                        child: Text(
-                          orderItem.combinationCode(
-                            showGMCPart: configs.enableGMC,
-                          ),
-                          style: Theme.of(context).textTheme.bodySmall,
+                ),
+                const SizedBox(width: 8),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Text(
+                        orderItem.combinationCode(
+                          showGMCPart: configs.enableGMC,
                         ),
+                        style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                              color: ZPColors.neutralsBlack,
+                            ),
                       ),
-                      PreOrderLabel(
-                        stockInfo:
-                            orderItem.reOrderMaterialInfo.productStockInfo,
+                      const SizedBox(height: 1),
+                      Text(
+                        orderItem.materialDescription,
+                        style: Theme.of(context)
+                            .textTheme
+                            .labelMedium
+                            ?.copyWith(color: ZPColors.neutralsBlack),
                       ),
-                    ],
-                  ),
-                  Text(
-                    orderItem.materialDescription,
-                    maxLines: 2,
-                    style: Theme.of(context).textTheme.labelMedium,
-                  ),
-                  if (configs.batchNumDisplay)
-                    Text(
-                      '${'Batch'.tr()}: ${orderItem.batch.displayDashIfEmpty} (${context.tr('Expires')}: ${orderItem.expiryDate.dateOrDashString})',
-                      maxLines: 1,
-                      style: Theme.of(context).textTheme.bodySmall,
-                    ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Expanded(
-                        child: Text(
-                          orderItem.principalData.principalName.name,
-                          maxLines: 1,
-                          style: Theme.of(context).textTheme.bodySmall,
-                          overflow: TextOverflow.ellipsis,
-                        ),
+                      OrderHistoryStockInfo.viewByOrder(
+                        item: orderItem,
+                        eligibilityState: context.read<EligibilityBloc>().state,
                       ),
                       Text(
+                        orderItem.principalData.principalName.name,
+                        style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                              fontSize: 10.0,
+                              color: ZPColors.neutralsGrey1,
+                            ),
+                      ),
+                      const SizedBox(height: 1),
+                      Text(
                         '${context.tr('Qty')}: ${orderItem.qty}',
-                        style: Theme.of(context).textTheme.bodySmall,
-                        key: WidgetKeys.cartItemProductQty,
+                        style: Theme.of(context)
+                            .textTheme
+                            .bodySmall
+                            ?.copyWith(color: ZPColors.neutralsDarkBlack),
                       ),
                     ],
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           ],
         ),

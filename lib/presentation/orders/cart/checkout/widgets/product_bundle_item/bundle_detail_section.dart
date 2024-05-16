@@ -23,7 +23,7 @@ class _BundleDetailsSection extends StatelessWidget {
                 color: ZPColors.neutralsBlack,
               ),
         ),
-        const SizedBox(height: 4),
+  
         RichText(
           key: WidgetKeys.cartItemBundleName,
           text: TextSpan(

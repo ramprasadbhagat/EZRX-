@@ -1,4 +1,5 @@
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/combo_deal.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/material_item_override.dart';
@@ -132,7 +133,7 @@ class ComboMaterialItem with _$ComboMaterialItem {
 
   SubmitMaterialInfo toSubmitMaterialInfo() {
     return SubmitMaterialInfo(
-      batch: BatchNumber(''),
+      batch: StringValue(''),
       bonuses: [],
       comment: materialInfo.remarks,
       materialNumber: materialInfo.materialNumber,

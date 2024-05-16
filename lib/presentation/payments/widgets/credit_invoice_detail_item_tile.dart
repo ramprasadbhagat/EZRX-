@@ -55,7 +55,7 @@ class CreditInvoiceDetailItemTile extends StatelessWidget {
     final salesConfig = context.read<EligibilityBloc>().state.salesOrgConfigs;
     final displayedBatch = context.isMPPayment
         ? 'NA'
-        : customerDocumentDetail.batchNumber.displayLabel;
+        : customerDocumentDetail.batchNumber.displayNAIfEmpty;
     final displayedExpiryDate = context.isMPPayment
         ? 'NA'
         : customerDocumentDetail.expiryDate.dateOrNaString;

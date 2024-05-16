@@ -149,7 +149,7 @@ void main() {
 
   final materialStockInfo = StockInfo.empty();
   final materialExpiryDate = materialStockInfo.expiryDate.dateOrNaString;
-  final materialBatch = materialStockInfo.batch.displayLabel;
+  final materialBatch = materialStockInfo.batch.displayNAIfEmpty;
   final oosPreOrderMaterialStockInfo = StockInfo.empty();
 
   Future<void> pumpAppWithLogin(

@@ -26,7 +26,7 @@ class CustomerDocumentDetail with _$CustomerDocumentDetail {
     required double grossAmount,
     required double netAmount,
     required double taxAmount,
-    required BatchNumber batchNumber,
+    required StringValue batchNumber,
     required DateTimeStringValue expiryDate,
     required PrincipalData principalData,
     required ProductImages productImages,
@@ -46,7 +46,7 @@ class CustomerDocumentDetail with _$CustomerDocumentDetail {
         grossAmount: 0.0,
         netAmount: 0.0,
         taxAmount: 0.0,
-        batchNumber: BatchNumber(''),
+        batchNumber: StringValue(''),
         expiryDate: DateTimeStringValue(''),
         principalData: PrincipalData(
           principalName: PrincipalName(''),

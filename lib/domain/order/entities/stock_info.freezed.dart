@@ -12,7 +12,7 @@ part of 'stock_info.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$MaterialStockInfo {
@@ -63,22 +63,22 @@ class _$MaterialStockInfoCopyWithImpl<$Res, $Val extends MaterialStockInfo>
 }
 
 /// @nodoc
-abstract class _$$_MaterialStockInfoCopyWith<$Res>
+abstract class _$$MaterialStockInfoImplCopyWith<$Res>
     implements $MaterialStockInfoCopyWith<$Res> {
-  factory _$$_MaterialStockInfoCopyWith(_$_MaterialStockInfo value,
-          $Res Function(_$_MaterialStockInfo) then) =
-      __$$_MaterialStockInfoCopyWithImpl<$Res>;
+  factory _$$MaterialStockInfoImplCopyWith(_$MaterialStockInfoImpl value,
+          $Res Function(_$MaterialStockInfoImpl) then) =
+      __$$MaterialStockInfoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({MaterialNumber materialNumber, List<StockInfo> stockInfos});
 }
 
 /// @nodoc
-class __$$_MaterialStockInfoCopyWithImpl<$Res>
-    extends _$MaterialStockInfoCopyWithImpl<$Res, _$_MaterialStockInfo>
-    implements _$$_MaterialStockInfoCopyWith<$Res> {
-  __$$_MaterialStockInfoCopyWithImpl(
-      _$_MaterialStockInfo _value, $Res Function(_$_MaterialStockInfo) _then)
+class __$$MaterialStockInfoImplCopyWithImpl<$Res>
+    extends _$MaterialStockInfoCopyWithImpl<$Res, _$MaterialStockInfoImpl>
+    implements _$$MaterialStockInfoImplCopyWith<$Res> {
+  __$$MaterialStockInfoImplCopyWithImpl(_$MaterialStockInfoImpl _value,
+      $Res Function(_$MaterialStockInfoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -87,7 +87,7 @@ class __$$_MaterialStockInfoCopyWithImpl<$Res>
     Object? materialNumber = null,
     Object? stockInfos = null,
   }) {
-    return _then(_$_MaterialStockInfo(
+    return _then(_$MaterialStockInfoImpl(
       materialNumber: null == materialNumber
           ? _value.materialNumber
           : materialNumber // ignore: cast_nullable_to_non_nullable
@@ -102,8 +102,8 @@ class __$$_MaterialStockInfoCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_MaterialStockInfo extends _MaterialStockInfo {
-  const _$_MaterialStockInfo(
+class _$MaterialStockInfoImpl extends _MaterialStockInfo {
+  const _$MaterialStockInfoImpl(
       {required this.materialNumber, required final List<StockInfo> stockInfos})
       : _stockInfos = stockInfos,
         super._();
@@ -124,10 +124,10 @@ class _$_MaterialStockInfo extends _MaterialStockInfo {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_MaterialStockInfo &&
+            other is _$MaterialStockInfoImpl &&
             (identical(other.materialNumber, materialNumber) ||
                 other.materialNumber == materialNumber) &&
             const DeepCollectionEquality()
@@ -141,15 +141,15 @@ class _$_MaterialStockInfo extends _MaterialStockInfo {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_MaterialStockInfoCopyWith<_$_MaterialStockInfo> get copyWith =>
-      __$$_MaterialStockInfoCopyWithImpl<_$_MaterialStockInfo>(
+  _$$MaterialStockInfoImplCopyWith<_$MaterialStockInfoImpl> get copyWith =>
+      __$$MaterialStockInfoImplCopyWithImpl<_$MaterialStockInfoImpl>(
           this, _$identity);
 }
 
 abstract class _MaterialStockInfo extends MaterialStockInfo {
   const factory _MaterialStockInfo(
       {required final MaterialNumber materialNumber,
-      required final List<StockInfo> stockInfos}) = _$_MaterialStockInfo;
+      required final List<StockInfo> stockInfos}) = _$MaterialStockInfoImpl;
   const _MaterialStockInfo._() : super._();
 
   @override
@@ -158,7 +158,7 @@ abstract class _MaterialStockInfo extends MaterialStockInfo {
   List<StockInfo> get stockInfos;
   @override
   @JsonKey(ignore: true)
-  _$$_MaterialStockInfoCopyWith<_$_MaterialStockInfo> get copyWith =>
+  _$$MaterialStockInfoImplCopyWith<_$MaterialStockInfoImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -166,7 +166,7 @@ abstract class _MaterialStockInfo extends MaterialStockInfo {
 mixin _$StockInfo {
   MaterialNumber get materialNumber => throw _privateConstructorUsedError;
   DateTimeStringValue get expiryDate => throw _privateConstructorUsedError;
-  BatchNumber get batch => throw _privateConstructorUsedError;
+  StringValue get batch => throw _privateConstructorUsedError;
   MaterialInStock get inStock => throw _privateConstructorUsedError;
   String get salesDistrict => throw _privateConstructorUsedError;
   int get stockQuantity => throw _privateConstructorUsedError;
@@ -184,7 +184,7 @@ abstract class $StockInfoCopyWith<$Res> {
   $Res call(
       {MaterialNumber materialNumber,
       DateTimeStringValue expiryDate,
-      BatchNumber batch,
+      StringValue batch,
       MaterialInStock inStock,
       String salesDistrict,
       int stockQuantity});
@@ -222,7 +222,7 @@ class _$StockInfoCopyWithImpl<$Res, $Val extends StockInfo>
       batch: null == batch
           ? _value.batch
           : batch // ignore: cast_nullable_to_non_nullable
-              as BatchNumber,
+              as StringValue,
       inStock: null == inStock
           ? _value.inStock
           : inStock // ignore: cast_nullable_to_non_nullable
@@ -240,27 +240,28 @@ class _$StockInfoCopyWithImpl<$Res, $Val extends StockInfo>
 }
 
 /// @nodoc
-abstract class _$$_StockInfoCopyWith<$Res> implements $StockInfoCopyWith<$Res> {
-  factory _$$_StockInfoCopyWith(
-          _$_StockInfo value, $Res Function(_$_StockInfo) then) =
-      __$$_StockInfoCopyWithImpl<$Res>;
+abstract class _$$StockInfoImplCopyWith<$Res>
+    implements $StockInfoCopyWith<$Res> {
+  factory _$$StockInfoImplCopyWith(
+          _$StockInfoImpl value, $Res Function(_$StockInfoImpl) then) =
+      __$$StockInfoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
       {MaterialNumber materialNumber,
       DateTimeStringValue expiryDate,
-      BatchNumber batch,
+      StringValue batch,
       MaterialInStock inStock,
       String salesDistrict,
       int stockQuantity});
 }
 
 /// @nodoc
-class __$$_StockInfoCopyWithImpl<$Res>
-    extends _$StockInfoCopyWithImpl<$Res, _$_StockInfo>
-    implements _$$_StockInfoCopyWith<$Res> {
-  __$$_StockInfoCopyWithImpl(
-      _$_StockInfo _value, $Res Function(_$_StockInfo) _then)
+class __$$StockInfoImplCopyWithImpl<$Res>
+    extends _$StockInfoCopyWithImpl<$Res, _$StockInfoImpl>
+    implements _$$StockInfoImplCopyWith<$Res> {
+  __$$StockInfoImplCopyWithImpl(
+      _$StockInfoImpl _value, $Res Function(_$StockInfoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -273,7 +274,7 @@ class __$$_StockInfoCopyWithImpl<$Res>
     Object? salesDistrict = null,
     Object? stockQuantity = null,
   }) {
-    return _then(_$_StockInfo(
+    return _then(_$StockInfoImpl(
       materialNumber: null == materialNumber
           ? _value.materialNumber
           : materialNumber // ignore: cast_nullable_to_non_nullable
@@ -285,7 +286,7 @@ class __$$_StockInfoCopyWithImpl<$Res>
       batch: null == batch
           ? _value.batch
           : batch // ignore: cast_nullable_to_non_nullable
-              as BatchNumber,
+              as StringValue,
       inStock: null == inStock
           ? _value.inStock
           : inStock // ignore: cast_nullable_to_non_nullable
@@ -304,8 +305,8 @@ class __$$_StockInfoCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_StockInfo extends _StockInfo {
-  const _$_StockInfo(
+class _$StockInfoImpl extends _StockInfo {
+  const _$StockInfoImpl(
       {required this.materialNumber,
       required this.expiryDate,
       required this.batch,
@@ -319,7 +320,7 @@ class _$_StockInfo extends _StockInfo {
   @override
   final DateTimeStringValue expiryDate;
   @override
-  final BatchNumber batch;
+  final StringValue batch;
   @override
   final MaterialInStock inStock;
   @override
@@ -333,10 +334,10 @@ class _$_StockInfo extends _StockInfo {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_StockInfo &&
+            other is _$StockInfoImpl &&
             (identical(other.materialNumber, materialNumber) ||
                 other.materialNumber == materialNumber) &&
             (identical(other.expiryDate, expiryDate) ||
@@ -356,18 +357,18 @@ class _$_StockInfo extends _StockInfo {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_StockInfoCopyWith<_$_StockInfo> get copyWith =>
-      __$$_StockInfoCopyWithImpl<_$_StockInfo>(this, _$identity);
+  _$$StockInfoImplCopyWith<_$StockInfoImpl> get copyWith =>
+      __$$StockInfoImplCopyWithImpl<_$StockInfoImpl>(this, _$identity);
 }
 
 abstract class _StockInfo extends StockInfo {
   const factory _StockInfo(
       {required final MaterialNumber materialNumber,
       required final DateTimeStringValue expiryDate,
-      required final BatchNumber batch,
+      required final StringValue batch,
       required final MaterialInStock inStock,
       required final String salesDistrict,
-      required final int stockQuantity}) = _$_StockInfo;
+      required final int stockQuantity}) = _$StockInfoImpl;
   const _StockInfo._() : super._();
 
   @override
@@ -375,7 +376,7 @@ abstract class _StockInfo extends StockInfo {
   @override
   DateTimeStringValue get expiryDate;
   @override
-  BatchNumber get batch;
+  StringValue get batch;
   @override
   MaterialInStock get inStock;
   @override
@@ -384,6 +385,6 @@ abstract class _StockInfo extends StockInfo {
   int get stockQuantity;
   @override
   @JsonKey(ignore: true)
-  _$$_StockInfoCopyWith<_$_StockInfo> get copyWith =>
+  _$$StockInfoImplCopyWith<_$StockInfoImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -1,6 +1,5 @@
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
-import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
@@ -19,7 +18,7 @@ void main() {
 
     test('displayBatchNumber When isMarketPlace = false', () {
       final validBatchItem =
-          item.copyWith(batch: BatchNumber('fake-batch_number'));
+          item.copyWith(batch: StringValue('fake-batch_number'));
       expect(
         validBatchItem.displayBatchNumber(isMarketPlace: false),
         'fake-batch_number',

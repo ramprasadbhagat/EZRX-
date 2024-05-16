@@ -184,7 +184,7 @@ void main() {
   final bonusMaterialStockInfo = StockInfo.empty();
   final oosPreOrderMaterialStockInfo = StockInfo.empty();
   final materialExpiryDate = materialStockInfo.expiryDate.dateOrNaString;
-  final materialBatchNumber = materialStockInfo.batch.displayLabel;
+  final materialBatchNumber = materialStockInfo.batch.displayNAIfEmpty;
   final bundleStockInfoList = [
     StockInfo.empty().copyWith(
       materialNumber: MaterialNumber('23007425'),

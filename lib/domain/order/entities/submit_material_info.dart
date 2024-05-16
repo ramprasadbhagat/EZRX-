@@ -1,3 +1,4 @@
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/material_item_override.dart';
 import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
 import 'package:ezrxmobile/domain/order/entities/submit_material_item_bonus.dart';
@@ -26,7 +27,7 @@ class SubmitMaterialInfo with _$SubmitMaterialInfo {
     required bool isCounterOffer,
 
     ///Todo: consider to delete it
-    required BatchNumber batch,
+    required StringValue batch,
   }) = _SubmitMaterialInfo;
 
   factory SubmitMaterialInfo.empty() => SubmitMaterialInfo(
@@ -36,7 +37,7 @@ class SubmitMaterialInfo with _$SubmitMaterialInfo {
         comment: '',
         productType: '',
         parentID: '',
-        batch: BatchNumber(''),
+        batch: StringValue(''),
         materialItemOverride: MaterialItemOverride.empty(),
         price: 0,
         tax: 0,

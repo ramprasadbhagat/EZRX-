@@ -1,6 +1,6 @@
 import 'package:ezrxmobile/application/order/view_by_order_details/view_by_order_details_bloc.dart';
-import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
+import 'package:ezrxmobile/domain/utils/string_utils.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:flutter/material.dart';
@@ -25,58 +25,56 @@ class OrderBundleItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return CustomCard(
       key: WidgetKeys.cartItemBundleTile(
         viewByOrdersGroup.parentId.getOrDefaultValue(''),
       ),
-      children: [
-        CustomCard(
-          showShadow: false,
-          margin: const EdgeInsets.symmetric(vertical: 10),
-          padding: const EdgeInsets.symmetric(vertical: 8),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              ProductTag.bundleOffer(),
-              Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 16,
-                  vertical: 5,
+      margin: const EdgeInsets.symmetric(vertical: 10),
+      padding: const EdgeInsets.symmetric(vertical: 8),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          ProductTag.bundleOffer(),
+          Padding(
+            padding: const EdgeInsets.symmetric(
+              horizontal: 16,
+              vertical: 8,
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Text(
+                  viewByOrdersGroup.parentId.displayMatNo,
+                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                        color: ZPColors.neutralsBlack,
+                      ),
                 ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      viewByOrdersGroup.parentId.displayMatNo,
-                      style: Theme.of(context).textTheme.bodySmall,
-                    ),
-                    !context
-                            .read<ViewByOrderDetailsBloc>()
-                            .state
-                            .isLoadingBundleDetail
-                        ? Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                viewByOrdersGroup
-                                    .bundleMaterial.bundle.bundleName.name,
-                                style: Theme.of(context).textTheme.labelMedium,
-                              ),
-                              _BundleInformation(
-                                key: WidgetKeys.orderHistoryBundleInformation,
-                                viewByOrdersGroup: viewByOrdersGroup,
-                              ),
-                            ],
-                          )
-                        : LoadingShimmer.tile(
-                            line: 3,
+                const SizedBox(height: 4),
+                !context
+                        .read<ViewByOrderDetailsBloc>()
+                        .state
+                        .isLoadingBundleDetail
+                    ? Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            viewByOrdersGroup
+                                .bundleMaterial.bundle.bundleName.name,
+                            style: Theme.of(context)
+                                .textTheme
+                                .labelMedium
+                                ?.copyWith(
+                                  color: ZPColors.neutralsBlack,
+                                ),
                           ),
-                  ],
-                ),
-              ),
-              const SizedBox(height: 5),
-              Column(
-                children: viewByOrdersGroup.viewByOrderItem
+                          _BundleInformation(
+                            key: WidgetKeys.orderHistoryBundleInformation,
+                            viewByOrdersGroup: viewByOrdersGroup,
+                          ),
+                        ],
+                      )
+                    : LoadingShimmer.tile(line: 3),
+                ...viewByOrdersGroup.viewByOrderItem
                     .map(
                       (orderHistoryDetailsOrderItem) => BundleItemMaterial(
                         orderItem: orderHistoryDetailsOrderItem,
@@ -84,15 +82,12 @@ class OrderBundleItem extends StatelessWidget {
                       ),
                     )
                     .toList(),
-              ),
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                const SizedBox(height: 10),
+                Wrap(
+                  alignment: WrapAlignment.spaceBetween,
                   children: [
                     Text(
-                      '${context.tr('Total qty')}: ${viewByOrdersGroup.totalMaterialCount}',
+                      '${context.tr('Total qty')}: ${viewByOrdersGroup.bundleMaterial.bundle.totalQty}',
                       key: WidgetKeys.cartItemBundleQty,
                       style: Theme.of(context).textTheme.titleSmall?.copyWith(
                             color: ZPColors.neutralsBlack,
@@ -102,27 +97,23 @@ class OrderBundleItem extends StatelessWidget {
                       key: WidgetKeys.cartItemBundleTotalPrice,
                       salesOrgConfig:
                           context.read<EligibilityBloc>().state.salesOrgConfigs,
-                      price: viewByOrdersGroup.totalPrice.toString(),
+                      price: viewByOrdersGroup.bundleMaterial.bundle.totalPrice
+                          .toString(),
                     ),
                   ],
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
-        ),
-        const Divider(
-          height: 20,
-          thickness: 0.4,
-          indent: 0,
-          endIndent: 0,
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
 
 class _BundleInformation extends StatelessWidget {
   final ViewByOrdersGroup viewByOrdersGroup;
+
   const _BundleInformation({
     Key? key,
     required this.viewByOrdersGroup,
@@ -130,51 +121,45 @@ class _BundleInformation extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (viewByOrdersGroup.bundleMaterial == MaterialInfo.empty()) {
-      return const SizedBox.shrink();
-    }
-
     final salesOrgConfigs =
         context.read<EligibilityBloc>().state.salesOrgConfigs;
+    final currentOffer =
+        viewByOrdersGroup.bundleMaterial.bundle.currentBundleInfo;
 
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        Row(
+        Wrap(
+          crossAxisAlignment: WrapCrossAlignment.center,
           children: [
+            if (viewByOrdersGroup.bundleMaterial.bundle.showStrikeThroughPrice)
+              Padding(
+                padding: const EdgeInsets.only(right: 4),
+                child: PriceComponent(
+                  salesOrgConfig: salesOrgConfigs,
+                  price: viewByOrdersGroup
+                      .bundleMaterial.bundle.minimumQuantityBundleMaterial.rate
+                      .toString(),
+                  trailingText: context.tr('per item'),
+                  type: PriceStyle.bundleListPriceStrikeThrough,
+                ),
+              ),
             PriceComponent(
               salesOrgConfig: salesOrgConfigs,
-              price: viewByOrdersGroup.bundleOffer.rate.toString(),
-              type: PriceStyle.bundleActiveOfferPrice,
-              trailingText: context.tr('per item '),
+              price: currentOffer.rate.toString(),
+              type: PriceStyle.bundleCartPrice,
+              trailingText: context.tr('per item'),
+              key: WidgetKeys.addBundleRate,
             ),
-            if (viewByOrdersGroup.bundleMaterial.bundle.showStrikeThroughPrice)
-              PriceComponent(
-                salesOrgConfig: salesOrgConfigs,
-                price: viewByOrdersGroup
-                    .bundleMaterial.bundle.minimumQuantityBundleMaterial.rate
-                    .toString(),
-                type: PriceStyle.bundleListPriceStrikeThrough,
-                trailingText: context.tr('per item'),
-              ),
           ],
         ),
-        Row(
+        Text(
+          '${context.tr('Purchase')} ${currentOffer.quantity} ${context.tr('or more for')} ${StringUtils.formatPrice(salesOrgConfigs, currentOffer.rate)} ${context.tr('per item')}',
           key: WidgetKeys.cartItemBundleRate,
-          children: [
-            Text(
-              '${context.tr('Purchase')} ${viewByOrdersGroup.bundleOffer.quantity} ${context.tr('or more for')} ',
-              style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                    color: ZPColors.darkGray,
-                    fontStyle: FontStyle.italic,
-                  ),
-            ),
-            PriceComponent(
-              salesOrgConfig: salesOrgConfigs,
-              price: viewByOrdersGroup.bundleOffer.rate.toString(),
-              type: PriceStyle.bundleFinalPrice,
-              trailingText: context.tr('per item'),
-            ),
-          ],
+          style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                color: ZPColors.neutralsGrey1,
+                fontStyle: FontStyle.italic,
+              ),
         ),
       ],
     );

@@ -136,7 +136,7 @@ void main() {
     ),
   );
   final materialExpiryDate = materialStockInfo.expiryDate.dateOrNaString;
-  final materialBatch = materialStockInfo.batch.displayLabel;
+  final materialBatch = materialStockInfo.batch.displayNAIfEmpty;
 
   Future<void> pumpAppWithHomeScreen(
     WidgetTester tester, {

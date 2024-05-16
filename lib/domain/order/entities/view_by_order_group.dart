@@ -1,6 +1,5 @@
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/bundle.dart';
-import 'package:ezrxmobile/domain/order/entities/bundle_info.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_order_items.dart';
@@ -33,23 +32,9 @@ class ViewByOrdersGroup with _$ViewByOrdersGroup {
         (element) => element.material.bundle != Bundle.empty(),
         orElse: () => OrderHistoryDetailsOrderItem.empty(),
       )
-      .material;
-
-  int get totalMaterialCount => viewByOrderItem.fold(
-        0,
-        (previousValue, element) => previousValue + element.qty,
+      .material
+      .copyWith
+      .bundle(
+        materials: viewByOrderItem.map((e) => e.reOrderMaterialInfo).toList(),
       );
-
-  double get totalPrice => viewByOrderItem.fold(
-        0,
-        (previousValue, element) => previousValue + element.totalPrice,
-      );
-
-  BundleInfo get bundleOffer =>
-      bundleMaterial.bundle.bundleInformation.isNotEmpty
-          ? bundleMaterial.bundle.sortedBundleInformation.reversed.firstWhere(
-              (element) => element.quantity <= totalMaterialCount,
-              orElse: () => bundleMaterial.bundle.sortedBundleInformation.first,
-            )
-          : BundleInfo.empty();
 }

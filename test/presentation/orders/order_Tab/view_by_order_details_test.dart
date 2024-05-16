@@ -59,6 +59,7 @@ import 'package:ezrxmobile/presentation/orders/order_tab/widgets/order_item_pric
 import 'package:ezrxmobile/presentation/core/quantity_and_price_with_tax.dart';
 import 'package:ezrxmobile/presentation/orders/widgets/order_bundle_item.dart';
 import 'package:ezrxmobile/presentation/orders/widgets/order_bundle_material.dart';
+import 'package:ezrxmobile/presentation/orders/widgets/order_history_stock_info.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -2338,6 +2339,49 @@ void main() {
           .text
           .toPlainText();
       expect(batchExpiryDate, contains('Batch: NA (Expires: NA)'));
+    });
+
+    testWidgets('Marketplace bundle displayed with batch & exp as NA',
+        (tester) async {
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrgConfigs: fakeMYSalesOrgConfigs.copyWith(
+            batchNumDisplay: true,
+          ),
+        ),
+      );
+      when(() => viewByOrderDetailsBlocMock.state).thenReturn(
+        ViewByOrderDetailsState.initial().copyWith.orderHistoryDetails(
+          orderHistoryDetailsOrderItem: [
+            OrderHistoryDetailsOrderItem.empty().copyWith(
+              materialNumber: MaterialNumber('fake-bundle'),
+              productType: MaterialInfoType.bundle(),
+              isMarketPlace: true,
+            ),
+          ],
+        ),
+      );
+
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pumpAndSettle();
+      final orderHistoryBundleItemMaterial =
+          find.byKey(WidgetKeys.orderHistoryBundleItemMaterial('fake-bundle'));
+      await tester.dragUntilVisible(
+        orderHistoryBundleItemMaterial,
+        find.byKey(WidgetKeys.scrollList),
+        const Offset(0, -200),
+      );
+      expect(orderHistoryBundleItemMaterial, findsOneWidget);
+      expect(
+        find.descendant(
+          of: find.descendant(
+            of: orderHistoryBundleItemMaterial,
+            matching: find.byType(OrderHistoryStockInfo),
+          ),
+          matching: find.text('Batch: NA - Expires: NA'),
+        ),
+        findsOne,
+      );
     });
 
     testWidgets(

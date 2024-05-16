@@ -108,7 +108,7 @@ class BundleDetailRobot extends CommonRobot {
     for (final stockInfo in stockInfoList) {
       final materialNumber = stockInfo.materialNumber.displayMatNo;
       final expiryDate = stockInfo.expiryDate.dateOrNaString;
-      final batchNumber = stockInfo.batch.displayLabel;
+      final batchNumber = stockInfo.batch.displayNAIfEmpty;
       final itemTile = find.byKey(
         WidgetKeys.bundleMaterialDetails(materialNumber),
       );

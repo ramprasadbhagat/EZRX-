@@ -159,7 +159,7 @@ void main() {
           find.descendant(
             of: find.byType(CommonTileItem),
             matching: find.textContaining(
-              'Batch: ${e.batchNumber.displayLabel} - Expires: ${e.expiryDate.dateString}',
+              'Batch: ${e.batchNumber.displayNAIfEmpty} - Expires: ${e.expiryDate.dateString}',
               findRichText: true,
             ),
           ),

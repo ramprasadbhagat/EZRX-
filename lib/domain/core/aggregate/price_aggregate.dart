@@ -133,7 +133,7 @@ class PriceAggregate with _$PriceAggregate {
   SubmitMaterialInfo toSubmitMaterialInfo() {
     return SubmitMaterialInfo(
       batch:
-          salesOrgConfig.enableBatchNumber ? stockInfo.batch : BatchNumber(''),
+          salesOrgConfig.enableBatchNumber ? stockInfo.batch : StringValue(''),
       bonuses: bonuses,
       comment: materialInfo.remarks,
       materialNumber: materialInfo.materialNumber,

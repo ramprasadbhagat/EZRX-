@@ -1,3 +1,4 @@
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/material_item_override.dart';
 import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
 import 'package:ezrxmobile/domain/order/entities/submit_material_info.dart';
@@ -49,7 +50,7 @@ class SubmitMaterialInfoDto with _$SubmitMaterialInfoDto {
       quantity: qty,
       bonuses: bonuses.map((e) => e.toDomain()).toList(),
       comment: comment,
-      batch: BatchNumber(batch),
+      batch: StringValue(batch),
       materialItemOverride: MaterialItemOverride.empty(),
       parentID: parentId,
       productType: '',

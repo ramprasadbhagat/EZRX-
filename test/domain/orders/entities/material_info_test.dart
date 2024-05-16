@@ -1,7 +1,6 @@
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
-import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
@@ -26,7 +25,7 @@ void main() {
 
     test('bundleStockInfoValid When Batch Number Valid', () {
       final stockInfo =
-          StockInfo.empty().copyWith(batch: BatchNumber('fake-batch-number'));
+          StockInfo.empty().copyWith(batch: StringValue('fake-batch-number'));
       final validStockItem = item.copyWith(
         stockInfos: [stockInfo],
       );

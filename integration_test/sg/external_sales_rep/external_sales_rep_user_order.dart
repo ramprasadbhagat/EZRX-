@@ -160,7 +160,7 @@ void main() {
   final bonusMaterialStockInfo = StockInfo.empty();
   final oosPreOrderMaterialStockInfo = StockInfo.empty();
   final materialExpiryDate = materialStockInfo.expiryDate.dateOrNaString;
-  final materialBatchNumber = materialStockInfo.batch.displayLabel;
+  final materialBatchNumber = materialStockInfo.batch.displayNAIfEmpty;
 
   // TODO we do not have bundle data for extsales rep so the test is done with rootadmin
   // const bundleShortNumber = '9880081';

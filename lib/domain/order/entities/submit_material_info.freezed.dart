@@ -12,7 +12,7 @@ part of 'submit_material_info.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$SubmitMaterialInfo {
@@ -34,7 +34,7 @@ mixin _$SubmitMaterialInfo {
   bool get isCounterOffer => throw _privateConstructorUsedError;
 
   ///Todo: consider to delete it
-  BatchNumber get batch => throw _privateConstructorUsedError;
+  StringValue get batch => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $SubmitMaterialInfoCopyWith<SubmitMaterialInfo> get copyWith =>
@@ -62,7 +62,7 @@ abstract class $SubmitMaterialInfoCopyWith<$Res> {
       bool promoStatus,
       PrincipalData principalData,
       bool isCounterOffer,
-      BatchNumber batch});
+      StringValue batch});
 
   $MaterialItemOverrideCopyWith<$Res> get materialItemOverride;
   $PrincipalDataCopyWith<$Res> get principalData;
@@ -157,7 +157,7 @@ class _$SubmitMaterialInfoCopyWithImpl<$Res, $Val extends SubmitMaterialInfo>
       batch: null == batch
           ? _value.batch
           : batch // ignore: cast_nullable_to_non_nullable
-              as BatchNumber,
+              as StringValue,
     ) as $Val);
   }
 
@@ -180,11 +180,11 @@ class _$SubmitMaterialInfoCopyWithImpl<$Res, $Val extends SubmitMaterialInfo>
 }
 
 /// @nodoc
-abstract class _$$_SubmitMaterialInfoCopyWith<$Res>
+abstract class _$$SubmitMaterialInfoImplCopyWith<$Res>
     implements $SubmitMaterialInfoCopyWith<$Res> {
-  factory _$$_SubmitMaterialInfoCopyWith(_$_SubmitMaterialInfo value,
-          $Res Function(_$_SubmitMaterialInfo) then) =
-      __$$_SubmitMaterialInfoCopyWithImpl<$Res>;
+  factory _$$SubmitMaterialInfoImplCopyWith(_$SubmitMaterialInfoImpl value,
+          $Res Function(_$SubmitMaterialInfoImpl) then) =
+      __$$SubmitMaterialInfoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -202,7 +202,7 @@ abstract class _$$_SubmitMaterialInfoCopyWith<$Res>
       bool promoStatus,
       PrincipalData principalData,
       bool isCounterOffer,
-      BatchNumber batch});
+      StringValue batch});
 
   @override
   $MaterialItemOverrideCopyWith<$Res> get materialItemOverride;
@@ -211,11 +211,11 @@ abstract class _$$_SubmitMaterialInfoCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_SubmitMaterialInfoCopyWithImpl<$Res>
-    extends _$SubmitMaterialInfoCopyWithImpl<$Res, _$_SubmitMaterialInfo>
-    implements _$$_SubmitMaterialInfoCopyWith<$Res> {
-  __$$_SubmitMaterialInfoCopyWithImpl(
-      _$_SubmitMaterialInfo _value, $Res Function(_$_SubmitMaterialInfo) _then)
+class __$$SubmitMaterialInfoImplCopyWithImpl<$Res>
+    extends _$SubmitMaterialInfoCopyWithImpl<$Res, _$SubmitMaterialInfoImpl>
+    implements _$$SubmitMaterialInfoImplCopyWith<$Res> {
+  __$$SubmitMaterialInfoImplCopyWithImpl(_$SubmitMaterialInfoImpl _value,
+      $Res Function(_$SubmitMaterialInfoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -237,7 +237,7 @@ class __$$_SubmitMaterialInfoCopyWithImpl<$Res>
     Object? isCounterOffer = null,
     Object? batch = null,
   }) {
-    return _then(_$_SubmitMaterialInfo(
+    return _then(_$SubmitMaterialInfoImpl(
       materialNumber: null == materialNumber
           ? _value.materialNumber
           : materialNumber // ignore: cast_nullable_to_non_nullable
@@ -297,15 +297,15 @@ class __$$_SubmitMaterialInfoCopyWithImpl<$Res>
       batch: null == batch
           ? _value.batch
           : batch // ignore: cast_nullable_to_non_nullable
-              as BatchNumber,
+              as StringValue,
     ));
   }
 }
 
 /// @nodoc
 
-class _$_SubmitMaterialInfo extends _SubmitMaterialInfo {
-  const _$_SubmitMaterialInfo(
+class _$SubmitMaterialInfoImpl extends _SubmitMaterialInfo {
+  const _$SubmitMaterialInfoImpl(
       {required this.materialNumber,
       required this.quantity,
       required final List<SubmitMaterialItemBonus> bonuses,
@@ -361,7 +361,7 @@ class _$_SubmitMaterialInfo extends _SubmitMaterialInfo {
 
   ///Todo: consider to delete it
   @override
-  final BatchNumber batch;
+  final StringValue batch;
 
   @override
   String toString() {
@@ -369,10 +369,10 @@ class _$_SubmitMaterialInfo extends _SubmitMaterialInfo {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_SubmitMaterialInfo &&
+            other is _$SubmitMaterialInfoImpl &&
             (identical(other.materialNumber, materialNumber) ||
                 other.materialNumber == materialNumber) &&
             (identical(other.quantity, quantity) ||
@@ -421,8 +421,8 @@ class _$_SubmitMaterialInfo extends _SubmitMaterialInfo {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_SubmitMaterialInfoCopyWith<_$_SubmitMaterialInfo> get copyWith =>
-      __$$_SubmitMaterialInfoCopyWithImpl<_$_SubmitMaterialInfo>(
+  _$$SubmitMaterialInfoImplCopyWith<_$SubmitMaterialInfoImpl> get copyWith =>
+      __$$SubmitMaterialInfoImplCopyWithImpl<_$SubmitMaterialInfoImpl>(
           this, _$identity);
 }
 
@@ -442,7 +442,7 @@ abstract class _SubmitMaterialInfo extends SubmitMaterialInfo {
       required final bool promoStatus,
       required final PrincipalData principalData,
       required final bool isCounterOffer,
-      required final BatchNumber batch}) = _$_SubmitMaterialInfo;
+      required final StringValue batch}) = _$SubmitMaterialInfoImpl;
   const _SubmitMaterialInfo._() : super._();
 
   @override
@@ -476,9 +476,9 @@ abstract class _SubmitMaterialInfo extends SubmitMaterialInfo {
   @override
 
   ///Todo: consider to delete it
-  BatchNumber get batch;
+  StringValue get batch;
   @override
   @JsonKey(ignore: true)
-  _$$_SubmitMaterialInfoCopyWith<_$_SubmitMaterialInfo> get copyWith =>
+  _$$SubmitMaterialInfoImplCopyWith<_$SubmitMaterialInfoImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

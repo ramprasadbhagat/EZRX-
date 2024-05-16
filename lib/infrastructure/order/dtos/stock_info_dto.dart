@@ -59,7 +59,7 @@ class StockInfoDto with _$StockInfoDto {
   StockInfo toDomain() {
     return StockInfo(
       materialNumber: MaterialNumber(materialNumber),
-      batch: BatchNumber(batch),
+      batch: StringValue(batch),
       expiryDate: DateTimeStringValue(expiryDate),
       inStock: MaterialInStock(inStock),
       salesDistrict: salesDistrict,

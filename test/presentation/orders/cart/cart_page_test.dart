@@ -427,7 +427,7 @@ void main() {
           inStock: MaterialInStock('Yes'),
           expiryDate: DateTimeStringValue('NA'),
           salesDistrict: '',
-          batch: BatchNumber('fake-batch'),
+          batch: StringValue('fake-batch'),
         ),
       ];
       // mockCartItemWithBatch = CartItem(
@@ -1101,7 +1101,7 @@ void main() {
                 ),
                 stockInfoList: <StockInfo>[
                   StockInfo.empty().copyWith(
-                    batch: BatchNumber('ABCD'),
+                    batch: StringValue('ABCD'),
                     inStock: MaterialInStock('No'),
                   ),
                 ],

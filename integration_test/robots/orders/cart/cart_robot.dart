@@ -870,7 +870,7 @@ class CartRobot {
         (tester.widget<RichText>(stockWidget).text as TextSpan).toPlainText();
     final texts = <String>[];
     if (isBatchNumberVisible) {
-      texts.add('${'Batch'.tr()}: ${stockInfo.batch.displayLabel}');
+      texts.add('${'Batch'.tr()}: ${stockInfo.batch.displayNAIfEmpty}');
     }
     if (isExpiryDateVisible) {
       texts.add('${'Expires'.tr()}: ${stockInfo.expiryDate.dateOrNaString}');
@@ -899,7 +899,7 @@ class CartRobot {
         (tester.widget<RichText>(stockWidget).text as TextSpan).toPlainText();
     final texts = <String>[];
     if (isBatchNumberVisible) {
-      texts.add('${'Batch'.tr()}: ${stockInfo.batch.displayLabel}');
+      texts.add('${'Batch'.tr()}: ${stockInfo.batch.displayNAIfEmpty}');
     }
     if (isExpiryDateVisible) {
       texts.add('${'Expires'.tr()}: ${stockInfo.expiryDate.dateOrNaString}');
@@ -928,7 +928,7 @@ class CartRobot {
         (tester.widget<RichText>(stockWidget).text as TextSpan).toPlainText();
     final texts = <String>[];
     if (isBatchNumberVisible) {
-      texts.add('${'Batch'.tr()}: ${stockInfo.batch.displayLabel}');
+      texts.add('${'Batch'.tr()}: ${stockInfo.batch.displayNAIfEmpty}');
     }
     if (isExpiryDateVisible) {
       texts.add('${'Expires'.tr()}: ${stockInfo.expiryDate.dateOrNaString}');

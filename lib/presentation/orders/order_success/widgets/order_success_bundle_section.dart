@@ -92,7 +92,9 @@ class _BundleTile extends StatelessWidget {
                       ),
                     PriceComponent(
                       salesOrgConfig: configs,
-                      price: viewByOrdersGroup.bundleOffer.rate.toString(),
+                      price: viewByOrdersGroup
+                          .bundleMaterial.bundle.currentBundleInfo.rate
+                          .toString(),
                       type: PriceStyle.bundleCartPrice,
                       trailingText: context.tr('per item'),
                       key: WidgetKeys.addBundleRate,
@@ -101,7 +103,7 @@ class _BundleTile extends StatelessWidget {
                 ),
                 const SizedBox(height: 4),
                 Text(
-                  '${context.tr('Purchase')} ${viewByOrdersGroup.bundleOffer.quantity} ${context.tr('or more for')} ${StringUtils.formatPrice(configs, viewByOrdersGroup.bundleOffer.rate)} ${context.tr('per item')}',
+                  '${context.tr('Purchase')} ${viewByOrdersGroup.bundleMaterial.bundle.currentBundleInfo.quantity} ${context.tr('or more for')} ${StringUtils.formatPrice(configs, viewByOrdersGroup.bundleMaterial.bundle.currentBundleInfo.rate)} ${context.tr('per item')}',
                   key: WidgetKeys.cartItemBundleRate,
                   style: Theme.of(context).textTheme.bodySmall?.copyWith(
                         color: ZPColors.neutralsGrey1,
@@ -118,7 +120,7 @@ class _BundleTile extends StatelessWidget {
                   alignment: WrapAlignment.spaceBetween,
                   children: [
                     Text(
-                      '${context.tr('Total qty')}: ${viewByOrdersGroup.totalMaterialCount}',
+                      '${context.tr('Total qty')}: ${viewByOrdersGroup.bundleMaterial.bundle.totalQty}',
                       key: WidgetKeys.cartItemBundleQty,
                       style: Theme.of(context).textTheme.titleSmall?.copyWith(
                             color: ZPColors.neutralsBlack,
@@ -127,7 +129,8 @@ class _BundleTile extends StatelessWidget {
                     PriceComponent(
                       key: WidgetKeys.cartItemBundleTotalPrice,
                       salesOrgConfig: configs,
-                      price: viewByOrdersGroup.totalPrice.toString(),
+                      price: viewByOrdersGroup.bundleMaterial.bundle.totalPrice
+                          .toString(),
                     ),
                   ],
                 ),

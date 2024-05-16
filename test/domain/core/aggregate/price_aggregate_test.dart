@@ -69,7 +69,7 @@ void main() {
   );
 
   final priceTiers = [
-     PriceTierItem.empty().copyWith(
+    PriceTierItem.empty().copyWith(
       rate: 20,
       quantity: 10,
     ),
@@ -147,7 +147,7 @@ void main() {
         salesOrgConfig: fakeMYSalesOrgConfigs,
       );
       final submitMaterialInfo = customPriceAggregate.toSubmitMaterialInfo();
-      expect(submitMaterialInfo.batch, BatchNumber(''));
+      expect(submitMaterialInfo.batch, StringValue(''));
       expect(submitMaterialInfo.bonuses, <MaterialItemBonus>[]);
       expect(submitMaterialInfo.comment, '');
       expect(
@@ -2401,7 +2401,7 @@ void main() {
 
     test('Stock Info Valid When Batch Number Valid', () {
       final stockInfo =
-          StockInfo.empty().copyWith(batch: BatchNumber('fake-batch-number'));
+          StockInfo.empty().copyWith(batch: StringValue('fake-batch-number'));
       final validStockItem = item.copyWith(
         stockInfoList: [stockInfo],
       );
