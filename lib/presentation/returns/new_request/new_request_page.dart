@@ -180,7 +180,8 @@ class NewRequestPage extends StatelessWidget {
                                 message:
                                     'Please select at least one material to proceed.'
                                         .tr(),
-                                visible: step == 1 && state.showErrorMessages,
+                                visible:
+                                    step == 1 && state.showErrorMessages && state.selectedItems.isEmpty,
                               ),
                               _AttentionWidget(
                                 key: WidgetKeys.invalidSelectedReturnItemError,

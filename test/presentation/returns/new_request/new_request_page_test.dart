@@ -175,6 +175,28 @@ void main() {
     }
 
     testWidgets(
+        ' => showing invalidSelectedReturnItemError  return items are from the different principals',
+        (WidgetTester tester) async {
+      when(() => newRequestBlocMock.state).thenReturn(
+        NewRequestState.initial().copyWith(
+          showErrorMessages: true,
+        ),
+      );
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pumpAndSettle();
+      final cannotMoveToNextStep = find.byKey(WidgetKeys.cannotMoveToNextStep);
+      expect(cannotMoveToNextStep, findsOne);
+      expect(
+        find.descendant(
+          of: cannotMoveToNextStep,
+          matching:
+              find.text('Please select at least one material to proceed.'),
+        ),
+        findsOne,
+      );
+    });
+
+    testWidgets(
         ' => showing invalidSelectedReturnItemError when return items are from the different principals',
         (WidgetTester tester) async {
       when(() => newRequestBlocMock.state).thenReturn(
@@ -195,7 +217,16 @@ void main() {
 
       await tester.pumpWidget(getScopedWidget());
       await tester.pumpAndSettle();
-
+      final cannotMoveToNextStep = find.byKey(WidgetKeys.cannotMoveToNextStep);
+      expect(cannotMoveToNextStep, findsOne);
+      expect(
+        find.descendant(
+          of: cannotMoveToNextStep,
+          matching:
+              find.text('Please select at least one material to proceed.'),
+        ),
+        findsNothing,
+      );
       final invalidSelectedReturnItemError =
           find.byKey(WidgetKeys.invalidSelectedReturnItemError);
       expect(invalidSelectedReturnItemError, findsOneWidget);
@@ -220,7 +251,16 @@ void main() {
 
       await tester.pumpWidget(getScopedWidget());
       await tester.pumpAndSettle();
-
+      final cannotMoveToNextStep = find.byKey(WidgetKeys.cannotMoveToNextStep);
+      expect(cannotMoveToNextStep, findsOne);
+      expect(
+        find.descendant(
+          of: cannotMoveToNextStep,
+          matching:
+              find.text('Please select at least one material to proceed.'),
+        ),
+        findsNothing,
+      );
       final invalidSelectedReturnItemError =
           find.byKey(WidgetKeys.invalidSelectedReturnItemError);
       expect(invalidSelectedReturnItemError, findsOneWidget);
