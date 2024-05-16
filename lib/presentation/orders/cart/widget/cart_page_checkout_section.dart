@@ -136,6 +136,20 @@ class _CartPageCheckoutButton extends StatelessWidget {
     );
   }
 
+  Future _showAgreeToSmallOrderFeeModal({
+    required BuildContext context,
+  }) {
+    return showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      enableDrag: false,
+      isDismissible: false,
+      useSafeArea: true,
+      clipBehavior: Clip.hardEdge,
+      builder: (_) => const SmallOrderFeeModal(),
+    );
+  }
+
   void _showPreOrderModal({required BuildContext context}) {
     final cartState = context.read<CartBloc>().state;
     showModalBottomSheet(
@@ -155,7 +169,7 @@ class _CartPageCheckoutButton extends StatelessWidget {
     );
   }
 
-  void _onCheckOutPressed(BuildContext context) {
+  Future<void> _onCheckOutPressed(BuildContext context) async {
     final orderEligibilityState = context.read<OrderEligibilityBloc>().state;
     final cartState = context.read<CartBloc>().state;
 
@@ -168,12 +182,18 @@ class _CartPageCheckoutButton extends StatelessWidget {
           TrackingProps.totalQty: cartState.totalCartCount,
         },
       );
+      if (cartState.showSmallOrderFeeBottomSheet) {
+        final agreeToSmallOrderFee =
+            await _showAgreeToSmallOrderFeeModal(context: context);
+        if (agreeToSmallOrderFee == null || !context.mounted) return;
+      }
+
       final preOrderItemExist = cartState.cartProducts.preOrderItems.isNotEmpty;
       if (preOrderItemExist) {
         _showPreOrderModal(context: context);
       } else {
         _callApiForId(context, cartState);
-        context.router.pushNamed('orders/cart/checkout');
+        await context.router.pushNamed('orders/cart/checkout');
       }
     } else {
       trackMixpanelEvent(
@@ -186,9 +206,11 @@ class _CartPageCheckoutButton extends StatelessWidget {
         },
       );
     }
-    context.read<OrderEligibilityBloc>().add(
-          const OrderEligibilityEvent.validateOrderEligibility(),
-        );
+    if (context.mounted) {
+      context.read<OrderEligibilityBloc>().add(
+            const OrderEligibilityEvent.validateOrderEligibility(),
+          );
+    }
   }
 
   void _callApiForId(BuildContext context, CartState cartState) {

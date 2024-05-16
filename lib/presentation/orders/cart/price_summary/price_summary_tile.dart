@@ -75,6 +75,7 @@ class PriceSummaryTile extends StatelessWidget {
     showModalBottomSheet(
       context: context,
       enableDrag: false,
+      isScrollControlled: true,
       useSafeArea: true,
       builder: (_) => Padding(
         key: WidgetKeys.priceSummarySheet,

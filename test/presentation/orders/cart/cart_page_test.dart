@@ -2360,7 +2360,6 @@ void main() {
           aplSimulatorOrder.grandTotal.toString(),
         );
       });
-
       testWidgets(
           'Test invalid banner when cart consist combo suspended and disable combo deal on saleorg',
           (tester) async {

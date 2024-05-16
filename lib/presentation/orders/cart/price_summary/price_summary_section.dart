@@ -230,16 +230,31 @@ class _SmallOrderFee extends StatelessWidget {
             ),
           ],
         ),
-        Text(
-          '${context.tr('Applies to orders less than')} ${StringUtils.formatPrice(
-            eligibilityState.salesOrgConfigs,
-            eligibilityState.salesOrg.smallOrderThreshold,
-          )}',
-          style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                color: ZPColors.neutralsBlack,
-                fontSize: 10,
+        if (cartState.aplSimulatorOrder.smallOrderFee > 0)
+          Container(
+            padding: const EdgeInsets.all(8),
+            margin: const EdgeInsets.symmetric(vertical: 8),
+            decoration: BoxDecoration(
+              color: ZPColors.blueAccent,
+              borderRadius: BorderRadius.circular(8),
+            ),
+            child: Text(
+              context.tr(
+                'A small order fee applies to orders with ZP in-stock items that are under the minimum order value of {smallOrderFee} for ZP subtotal.',
+                namedArgs: {
+                  'smallOrderFee': StringUtils.priceComponentDisplayPrice(
+                    eligibilityState.salesOrgConfigs,
+                    eligibilityState.salesOrg.smallOrderThreshold,
+                    false,
+                  ),
+                },
               ),
-        ),
+              style: Theme.of(context)
+                  .textTheme
+                  .bodySmall
+                  ?.copyWith(color: ZPColors.infoTextBlueColor),
+            ),
+          ),
       ],
     );
   }

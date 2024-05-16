@@ -542,4 +542,8 @@ class CartState with _$CartState {
         )
         .promotionValue;
   }
+
+  bool get showSmallOrderFeeBottomSheet =>
+      salesOrganisation.salesOrg.showSmallOrderFee &&
+      aplSimulatorOrder.smallOrderFee > 0;
 }

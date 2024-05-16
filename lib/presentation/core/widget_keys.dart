@@ -71,7 +71,8 @@ class WidgetKeys {
   static const Key billToCustomerCode = Key('billToCustomerCode');
   static const Key billToAddress = Key('billToAddress');
   static const Key tenderTag = Key('tenderTag');
-  static const Key orderItemPriceStrikeThrough = Key('orderItemPriceStrikeThrough');
+  static const Key orderItemPriceStrikeThrough =
+      Key('orderItemPriceStrikeThrough');
 
   //============================================================
   //  PRE-ORDER-MODAL
@@ -591,6 +592,11 @@ class WidgetKeys {
   static const Key counterOfferPriceButtonKey =
       Key('counterOfferPriceButtonKey');
   static const Key preOrderModel = Key('preOrderModel');
+  static const Key smallOrderFeeModal = Key('smallOrderFeeModal');
+  static const Key smallOrderFeeModalCancelButton =
+      Key('smallOrderFeeModalCancelButton');
+  static const Key smallOrderFeeModalAgreeButton =
+      Key('smallOrderFeeModalAgreeButton');
   static const Key preOrderModalItemList = Key('preOrderModalItemList');
   static const Key preOrderModalItemFinalPrice =
       Key('preOrderModalItemFinalPrice');
