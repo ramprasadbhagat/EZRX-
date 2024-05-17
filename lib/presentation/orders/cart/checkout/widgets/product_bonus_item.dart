@@ -107,7 +107,9 @@ class _ProductDetails extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
+          Wrap(
+            crossAxisAlignment: WrapCrossAlignment.center,
+            runSpacing: 4,
             children: [
               Text(
                 bonusItem.materialNumber.displayMatNo,
@@ -116,7 +118,7 @@ class _ProductDetails extends StatelessWidget {
                     ),
               ),
               const SizedBox(
-                width: 8,
+                width: 4,
               ),
               if (eligibilityState.salesOrg.showBonus) const BonusTag(),
               if (!bonusItem.stockInfo.inStock.isMaterialInStock)

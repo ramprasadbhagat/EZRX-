@@ -12,25 +12,25 @@ class _MaterialDetails extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
+          Wrap(
+            crossAxisAlignment: WrapCrossAlignment.center,
+            runSpacing: 4,
             children: [
-              Flexible(
-                child: Text(
-                  cartItem.materialInfo.combinationCode(
-                    showGMCPart: eligibilityState.salesOrgConfigs.enableGMC,
-                  ),
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
-                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                        color: ZPColors.darkGray,
-                      ),
+              Text(
+                cartItem.materialInfo.combinationCode(
+                  showGMCPart: eligibilityState.salesOrgConfigs.enableGMC,
                 ),
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+                style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                      color: ZPColors.darkGray,
+                    ),
               ),
               if (eligibilityState.salesOrg.showBonus &&
                   cartItem.materialInfo.type.typeDealOrOverrideBonus)
-                const BonusTag(margin: EdgeInsets.only(left: 5)),
+                const BonusTag(margin: EdgeInsets.only(left: 4)),
               const SizedBox(
-                width: 8,
+                width: 4,
               ),
               if (!eligibilityState.salesOrgConfigs.hideStockDisplay)
                 StatusLabel(

@@ -49,6 +49,7 @@ void main() {
           quantity: '0',
           isQuantityBelowImage: false,
           statusWidget: const SizedBox.shrink(),
+          headerText: '',
           topHeaderWidget: const SizedBox(key: fakeTopHeaderWidget),
           footerWidget: const SizedBox.shrink(),
         ),

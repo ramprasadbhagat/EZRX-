@@ -68,6 +68,7 @@ class CommonTileItem extends StatelessWidget {
       margin: margin ?? const EdgeInsets.only(bottom: 12),
       padding: padding ?? const EdgeInsets.only(bottom: 0),
       child: ListTile(
+        contentPadding: const EdgeInsets.symmetric(horizontal: 8),
         onTap: onTap,
         title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -90,22 +91,23 @@ class CommonTileItem extends StatelessWidget {
                   isCovidItem: isCovidItem,
                   showOfferTag: showOfferTag,
                   showBundleTag: showBundleTag,
+                  isBonusAndStatusTagAvailable: labelTrailing != null,
                 ),
                 Expanded(
                   child: Padding(
-                    padding: const EdgeInsets.fromLTRB(5, 8, 10, 0),
+                    padding: const EdgeInsets.fromLTRB(5, 8, 5, 0),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Row(
+                        Wrap(
+                          crossAxisAlignment: WrapCrossAlignment.center,
+                          runSpacing: 4,
                           children: [
                             if (labelLeading != null) labelLeading!,
-                            Flexible(
-                              child: Text(
-                                label,
-                                key: WidgetKeys.commonTileItemLabel,
-                                style: Theme.of(context).textTheme.bodySmall,
-                              ),
+                            Text(
+                              label,
+                              key: WidgetKeys.commonTileItemLabel,
+                              style: Theme.of(context).textTheme.bodySmall,
                             ),
                             if (statusTag != null &&
                                 statusTag!
@@ -285,16 +287,21 @@ class _ImageBox extends StatelessWidget {
     required this.isCovidItem,
     required this.showOfferTag,
     required this.showBundleTag,
+    required this.isBonusAndStatusTagAvailable,
   });
   final bool isQuantityBelowImage;
   final bool isCovidItem;
   final bool showOfferTag;
   final bool showBundleTag;
+  final bool isBonusAndStatusTagAvailable;
   final String quantity;
   final MaterialNumber materialNumber;
 
   @override
   Widget build(BuildContext context) {
+    final defaultHeight = MediaQuery.of(context).size.height * 0.08;
+    final defaultWidth = MediaQuery.of(context).size.height * 0.08;
+
     return isQuantityBelowImage
         ? Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -310,8 +317,8 @@ class _ImageBox extends StatelessWidget {
                       key: WidgetKeys.commonTileItemImage,
                       fit: BoxFit.fitHeight,
                       materialNumber: materialNumber,
-                      width: 80,
-                      height: 80,
+                      width: isBonusAndStatusTagAvailable ? defaultWidth : 80,
+                      height: isBonusAndStatusTagAvailable ? defaultHeight : 80,
                     ),
                     if (showOfferTag) ProductTag.onOfferIcon(),
                     if (isCovidItem)
@@ -344,8 +351,8 @@ class _ImageBox extends StatelessWidget {
                 ProductImage(
                   materialNumber: materialNumber,
                   fit: BoxFit.fitHeight,
-                  width: 80,
-                  height: 80,
+                  width: isBonusAndStatusTagAvailable ? defaultWidth : 80,
+                  height: isBonusAndStatusTagAvailable ? defaultHeight : 80,
                 ),
                 if (showOfferTag) ProductTag.onOfferIcon(),
                 if (showBundleTag) ProductTag.bundleOfferIcon(),

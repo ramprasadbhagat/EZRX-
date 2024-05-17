@@ -134,7 +134,7 @@ class _MaterialItem extends StatelessWidget {
                     .outOfStockProductStatus.displayStatusTextColor,
               ),
             )
-          : const SizedBox.shrink(),
+          : null,
       footerWidget: Column(
         children: [
           Row(

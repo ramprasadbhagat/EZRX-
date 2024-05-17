@@ -5,6 +5,9 @@ class _ImageSection extends StatelessWidget {
   const _ImageSection({required this.cartProduct, Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    final defaultHeight = MediaQuery.of(context).size.height * 0.08;
+    final defaultWidth = MediaQuery.of(context).size.height * 0.08;
+
     return Stack(
       children: [
         CustomCard(
@@ -14,8 +17,8 @@ class _ImageSection extends StatelessWidget {
           margin: EdgeInsets.zero,
           child: ProductImage(
             materialNumber: cartProduct.getMaterialNumber,
-            height: 80,
-            width: 80,
+            height: defaultHeight,
+            width: defaultWidth,
           ),
         ),
         if (!cartProduct.materialInfo.type.typeDealOrOverrideBonus)

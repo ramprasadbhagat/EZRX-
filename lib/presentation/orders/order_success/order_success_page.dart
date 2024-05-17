@@ -54,7 +54,7 @@ part 'package:ezrxmobile/presentation/orders/order_success/widgets/order_success
 part 'package:ezrxmobile/presentation/orders/order_success/widgets/order_success_header.dart';
 part 'package:ezrxmobile/presentation/orders/order_success/widgets/order_success_message.dart';
 
-const _horizontalPadding = 20.0;
+const _horizontalPadding = 12.0;
 const _verticalPadding = 12.0;
 
 class OrderSuccessPage extends StatelessWidget {
