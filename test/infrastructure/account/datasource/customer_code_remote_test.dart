@@ -2,11 +2,13 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:ezrxmobile/config.dart';
+import 'package:ezrxmobile/domain/account/entities/customer_code_config.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_information.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/customer_code_query_mutation.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/customer_code_remote.dart';
+import 'package:ezrxmobile/infrastructure/account/dtos/customer_code_config_dto.dart';
 import 'package:ezrxmobile/infrastructure/account/dtos/customer_code_search_dto.dart';
 import 'package:ezrxmobile/infrastructure/core/firebase/remote_config.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
@@ -16,6 +18,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http_mock_adapter/http_mock_adapter.dart';
 import 'package:mocktail/mocktail.dart';
+
+import '../../../common_mock_data/customer_code_mock.dart';
 
 class RemoteConfigServiceMock extends Mock implements RemoteConfigService {}
 
@@ -43,7 +47,7 @@ void main() {
     matcher: const UrlRequestMatcher(),
   );
   final service = HttpService.mockDio(dio);
-
+  final headers = {'Content-Type': 'application/json; charset=utf-8'};
   setUpAll(
     () {
       WidgetsFlutterBinding.ensureInitialized();
@@ -240,6 +244,110 @@ void main() {
             res['data']['customerInformationSalesRep']['SoldToInformation']
                 .length,
           );
+        },
+      );
+
+      test(
+        '=> getCustomerCodeConfig',
+        () async {
+          final res = json.decode(
+            await rootBundle.loadString(
+              'assets/json/customerCodeConfig.json',
+            ),
+          );
+
+          dioAdapter.onPost(
+            '/api/license',
+            (server) => server.reply(
+              200,
+              res,
+              delay: const Duration(seconds: 1),
+            ),
+            headers: headers,
+            data: jsonEncode({
+              'query': remoteDataSource.customerCodeQueryMutation
+                  .getCustomerCodeConfig(),
+              'variables': variables,
+            }),
+          );
+
+          final result = await remoteDataSource.getCustomerCodeConfig(
+            customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
+          );
+          expect(
+            result,
+            CustomerCodeConfigDto.fromJson(res['data']['customerConfig'])
+                .toDomain,
+          );
+        },
+      );
+
+      test(
+        '=> Server exception',
+        () async {
+          dioAdapter.onPost(
+            '/api/license',
+            (server) => server.reply(
+              200,
+              {
+                'data': {},
+                'errors': [
+                  {'message': 'fake-error'},
+                ],
+              },
+              delay: const Duration(seconds: 1),
+            ),
+            headers: headers,
+            data: jsonEncode({
+              'query': remoteDataSource.customerCodeQueryMutation
+                  .getCustomerCodeConfig(),
+              'variables': variables,
+            }),
+          );
+
+          await remoteDataSource
+              .getCustomerCodeConfig(
+            customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
+          )
+              .onError((error, _) async {
+            expect(error, isA<ServerException>());
+            return Future.value(CustomerCodeConfig.empty());
+          });
+        },
+      );
+
+      test(
+        '=> Status code != 200',
+        () async {
+          final res = json.decode(
+            await rootBundle.loadString(
+              'assets/json/customerCodeConfig.json',
+            ),
+          );
+
+          dioAdapter.onPost(
+            '/api/license',
+            (server) => server.reply(
+              201,
+              res,
+              delay: const Duration(seconds: 1),
+            ),
+            headers: headers,
+            data: jsonEncode({
+              'query': remoteDataSource.customerCodeQueryMutation
+                  .getCustomerCodeConfig(),
+              'variables': variables,
+            }),
+          );
+
+          await remoteDataSource
+              .getCustomerCodeConfig(
+            customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
+          )
+              .onError((error, _) async {
+            expect(error, isA<ServerException>());
+            return Future.value(CustomerCodeConfig.empty());
+          });
         },
       );
     },

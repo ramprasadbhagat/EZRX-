@@ -1,6 +1,7 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
+import 'package:ezrxmobile/domain/account/entities/customer_code_config.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_information.dart';
 import 'package:ezrxmobile/domain/account/entities/role.dart';
@@ -17,6 +18,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:ezrxmobile/config.dart';
+
+import '../../../common_mock_data/customer_code_mock.dart';
 
 class CustomerCodeMockRepo extends Mock implements CustomerCodeRepository {}
 
@@ -58,6 +61,8 @@ void main() {
   );
 
   const fakePageSize = 24;
+  const apiFailure = ApiFailure.other('fake-error');
+  late CustomerCodeConfig customerCodeConfig;
 
   setUpAll(() async {
     WidgetsFlutterBinding.ensureInitialized();
@@ -65,6 +70,8 @@ void main() {
     customerMockData =
         await CustomerCodeLocalDataSource().getCustomerCodeList();
     config = Config()..appFlavor = Flavor.mock;
+    customerCodeConfig =
+        await CustomerCodeLocalDataSource().getCustomerCodeConfig();
   });
 
   group('Customer Code Bloc', () {
@@ -802,6 +809,68 @@ void main() {
           customerCodeList: [],
           apiFailureOrSuccessOption: none(),
           canLoadMore: false,
+        ),
+      ],
+    );
+
+    blocTest<CustomerCodeBloc, CustomerCodeState>(
+      'Customer Code config Fetch fail',
+      build: () => CustomerCodeBloc(
+        customerCodeRepository: customerCodeMockRepo,
+        config: config,
+      ),
+      setUp: () {
+        when(
+          () => customerCodeMockRepo.getCustomerCodeConfig(
+            customerCodeInfo: fakeCustomerCodeInfo,
+          ),
+        ).thenAnswer(
+          (invocation) async => const Left(apiFailure),
+        );
+      },
+      act: (CustomerCodeBloc bloc) {
+        bloc.add(
+          CustomerCodeEvent.fetchCustomerCodeConfig(
+            customerCodeInfo: fakeCustomerCodeInfo,
+          ),
+        );
+      },
+      expect: () => [
+        CustomerCodeState.initial(),
+        CustomerCodeState.initial().copyWith(
+          configFailureOrSuccessOption: optionOf(const Left(apiFailure)),
+        ),
+      ],
+    );
+
+    blocTest<CustomerCodeBloc, CustomerCodeState>(
+      'Customer Code Fetch Success',
+      build: () => CustomerCodeBloc(
+        customerCodeRepository: customerCodeMockRepo,
+        config: config,
+      ),
+      setUp: () {
+        when(
+          () => customerCodeMockRepo.getCustomerCodeConfig(
+            customerCodeInfo: fakeCustomerCodeInfo,
+          ),
+        ).thenAnswer(
+          (invocation) async => Right(
+            customerCodeConfig,
+          ),
+        );
+      },
+      act: (CustomerCodeBloc bloc) {
+        bloc.add(
+          CustomerCodeEvent.fetchCustomerCodeConfig(
+            customerCodeInfo: fakeCustomerCodeInfo,
+          ),
+        );
+      },
+      expect: () => [
+        CustomerCodeState.initial(),
+        CustomerCodeState.initial().copyWith(
+          customerCodeConfig: customerCodeConfig,
         ),
       ],
     );

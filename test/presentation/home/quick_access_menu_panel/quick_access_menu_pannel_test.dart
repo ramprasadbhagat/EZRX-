@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:ezrxmobile/domain/account/entities/customer_code_config.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/package_info/package_info.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
@@ -230,7 +231,6 @@ void main() {
     });
 
     group('Test homeQuickAccessReturnMenu', () {
-    
       testWidgets(
         ' -> Show returnTile when Disable Returns for Customers is ON and Disable Returns for SalesRep is OFF for SalesRep User',
         (WidgetTester tester) async {
@@ -245,12 +245,28 @@ void main() {
 
           await getWidget(tester);
           await tester.pumpAndSettle();
-          final returnTile =
-              find.byKey(WidgetKeys.homeQuickAccessReturnsMenu);
+          final returnTile = find.byKey(WidgetKeys.homeQuickAccessReturnsMenu);
           expect(returnTile, findsOneWidget);
         },
       );
-    });
 
+      testWidgets(
+        ' -> Show returnTile when Disable Returns for Customers Customer Code Config is ON',
+        (WidgetTester tester) async {
+          when(() => eligibilityBlocMock.state).thenReturn(
+            EligibilityState.initial().copyWith(
+              customerCodeConfig: CustomerCodeConfig.empty().copyWith(
+                disableReturns: true,
+              ),
+            ),
+          );
+
+          await getWidget(tester);
+          await tester.pumpAndSettle();
+          final returnTile = find.byKey(WidgetKeys.homeQuickAccessReturnsMenu);
+          expect(returnTile, findsNothing);
+        },
+      );
+    });
   });
 }

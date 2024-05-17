@@ -1,4 +1,5 @@
 import 'package:ezrxmobile/config.dart';
+import 'package:ezrxmobile/domain/account/entities/customer_code_config.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_information.dart';
 import 'package:ezrxmobile/domain/account/entities/role.dart';
@@ -18,6 +19,7 @@ import 'package:ezrxmobile/infrastructure/core/local_storage/device_storage.dart
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
+import '../../../common_mock_data/customer_code_mock.dart';
 import '../../../common_mock_data/mock_other.dart';
 
 class CustomerCodeLocalDataSourceMock extends Mock
@@ -46,8 +48,10 @@ void main() {
   late CustomerCodeRemoteDataSource customerCodeRemoteDataSourceMock;
   late DeviceStorage deviceStorage;
   const fakeMarket = 'fake-market';
+  late CustomerCodeConfig customerCodeConfig;
 
   setUpAll(() async {
+    TestWidgetsFlutterBinding.ensureInitialized();
     configMock = ConfigMock();
     accountSelectorStorageMock = AccountSelectorStorageMock();
     customerCodeLocalDataSourceMock = CustomerCodeLocalDataSourceMock();
@@ -84,6 +88,8 @@ void main() {
       deviceStorage: deviceStorage,
     );
 
+    customerCodeConfig =
+        await CustomerCodeLocalDataSource().getCustomerCodeConfig();
     registerFallbackValue(AccountSelectorStorageDto.empty());
     when(() => deviceStorage.currentMarket()).thenReturn(fakeMarket);
   });
@@ -607,6 +613,84 @@ void main() {
         offset: offset,
         user: mockSalesRepUser,
         pageSize: pageSize,
+      );
+
+      expect(result.isLeft(), true);
+    });
+
+    test('Get Customer Code Config from local data source successful',
+        () async {
+      when(() => configMock.appFlavor).thenReturn(Flavor.mock);
+
+      when(
+        () => customerCodeLocalDataSourceMock.getCustomerCodeConfig(),
+      ).thenAnswer(
+        (invocation) async => customerCodeConfig,
+      );
+
+      final result = await customerCodeRepository.getCustomerCodeConfig(
+        customerCodeInfo: fakeCustomerCodeInfo,
+      );
+
+      expect(result.isRight(), true);
+      expect(
+        result.getOrElse(() => CustomerCodeConfig.empty()),
+        customerCodeConfig,
+      );
+    });
+
+    test('Get Customer Code Config from local data source fail', () async {
+      when(() => configMock.appFlavor).thenReturn(Flavor.mock);
+
+      when(
+        () => customerCodeLocalDataSourceMock.getCustomerCodeConfig(),
+      ).thenThrow(
+        (invocation) async => MockException(),
+      );
+
+      final result = await customerCodeRepository.getCustomerCodeConfig(
+        customerCodeInfo: fakeCustomerCodeInfo,
+      );
+
+      expect(result.isLeft(), true);
+    });
+
+    test('Get Customer Code Config from Remote data source successful ',
+        () async {
+      when(() => configMock.appFlavor).thenReturn(Flavor.uat);
+
+      when(
+        () => customerCodeRemoteDataSourceMock.getCustomerCodeConfig(
+          customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
+        ),
+      ).thenAnswer(
+        (invocation) async => customerCodeConfig,
+      );
+
+      final result = await customerCodeRepository.getCustomerCodeConfig(
+        customerCodeInfo: fakeCustomerCodeInfo,
+      );
+
+      expect(result.isRight(), true);
+      expect(
+        result.getOrElse(() => CustomerCodeConfig.empty()),
+        customerCodeConfig,
+      );
+    });
+
+    test('Get Customer Code Config from local data source fail', () async {
+      when(() => configMock.appFlavor).thenReturn(Flavor.uat);
+
+      when(
+        () => customerCodeRemoteDataSourceMock.getCustomerCodeConfig(
+          customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
+        ),
+      ).thenThrow(
+        (invocation) async => MockException(),
+      );
+
+      final result = await customerCodeRepository.getCustomerCodeConfig(
+        customerCodeInfo: fakeCustomerCodeInfo,
       );
 
       expect(result.isLeft(), true);

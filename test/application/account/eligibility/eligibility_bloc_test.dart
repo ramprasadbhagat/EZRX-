@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/domain/account/entities/account_selector.dart';
+import 'package:ezrxmobile/domain/account/entities/customer_code_config.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_information.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/customer_code_local.dart';
@@ -1132,6 +1133,18 @@ void main() {
   });
 
   group('Return', () {
+    test(
+      'Return disable for any user with customer config code return disable true',
+      () {
+        final eligibilityState = EligibilityState.initial().copyWith(
+          customerCodeConfig: CustomerCodeConfig.empty().copyWith(
+            disableReturns: true,
+          ),
+        );
+
+        expect(eligibilityState.isReturnsEnable, false);
+      },
+    );
     test(
       'Return disable for any user with disableReturns',
       () {

@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/ez_point/ez_point_bloc.dart';
+import 'package:ezrxmobile/domain/account/entities/customer_code_config.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/package_info/package_info.dart';
 import 'package:ezrxmobile/application/account/notification_settings/notification_settings_bloc.dart';
@@ -158,6 +159,32 @@ void main() {
   /////////////////////////////////////////////////////////////////////////////
 
   group('More Tab Test', () {
+    testWidgets(
+      ' -> Hide returnsTile when customer config disableReturn true',
+      (WidgetTester tester) async {
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            customerCodeConfig: CustomerCodeConfig.empty().copyWith(
+              disableReturns: true,
+            ),
+          ),
+        );
+
+        await getWidget(tester);
+        await tester.pump();
+        expect(returnsTile, findsNothing);
+      },
+    );
+
+    testWidgets(
+      ' -> Hide returnsTile when customer config disableReturn false',
+      (WidgetTester tester) async {
+        await getWidget(tester);
+        await tester.pump();
+        expect(returnsTile, findsOne);
+      },
+    );
+
     testWidgets(
       ' -> Hide returnsTile when disableReturn true',
       (WidgetTester tester) async {

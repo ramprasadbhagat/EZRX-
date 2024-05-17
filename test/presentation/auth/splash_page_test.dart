@@ -67,6 +67,7 @@ import 'package:ezrxmobile/application/returns/return_request_type_code/return_r
 import 'package:ezrxmobile/application/returns/usage_code/usage_code_bloc.dart';
 import 'package:ezrxmobile/application/returns/user_restriction/user_restriction_list_bloc.dart';
 import 'package:ezrxmobile/config.dart';
+import 'package:ezrxmobile/domain/account/entities/customer_code_config.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/full_name.dart';
 import 'package:ezrxmobile/domain/account/entities/role.dart';
@@ -87,6 +88,7 @@ import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/order_document_type.dart';
 import 'package:ezrxmobile/domain/order/entities/payment_customer_information.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
+import 'package:ezrxmobile/infrastructure/account/datasource/customer_code_local.dart';
 import 'package:ezrxmobile/infrastructure/core/chatbot/chatbot_service.dart';
 import 'package:ezrxmobile/infrastructure/core/firebase/push_notification.dart';
 import 'package:ezrxmobile/infrastructure/core/firebase/remote_config.dart';
@@ -181,6 +183,7 @@ void main() {
   late ArticlesInfoFilterBloc articlesInfoFilterBlocMock;
   late CustomerLicenseBloc customerLicenseBlocMock;
   late AnnouncementFilterBloc announcementFilterBlocMock;
+  late CustomerCodeConfig customerCodeConfig;
   final fakeSalesOrganisation =
       SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2601'));
 
@@ -232,6 +235,8 @@ void main() {
     locator.registerLazySingleton(
       () => Upgrader(),
     );
+    customerCodeConfig =
+        await CustomerCodeLocalDataSource().getCustomerCodeConfig();
   });
 
   group('Splash Screen', () {
@@ -1244,6 +1249,92 @@ void main() {
             salesOrganisation: fakeTWSalesOrganisation,
             salesOrganisationConfigs: fakeTWSalesOrgConfigs,
             shipToInfo: fakeShipToInfo,
+          ),
+        ),
+      ).called(1);
+    });
+
+    testWidgets(
+        'On Eligibility bloc customer code to change fetch new customer config',
+        (tester) async {
+      final expectedStates = [
+        EligibilityState.initial(),
+        EligibilityState.initial().copyWith(
+          shipToInfo: fakeShipToInfo,
+          customerCodeInfo: fakeCustomerCodeInfo,
+        ),
+      ];
+      whenListen(eligibilityBlocMock, Stream.fromIterable(expectedStates));
+
+      await getWidget(tester);
+      await tester.pump();
+      verify(
+        () => customerCodeBlocMock.add(
+          CustomerCodeEvent.fetchCustomerCodeConfig(
+            customerCodeInfo: fakeCustomerCodeInfo,
+          ),
+        ),
+      ).called(1);
+    });
+
+    testWidgets('On customer config fetch update eligibility bloc',
+        (tester) async {
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          user: fakeUser,
+          salesOrganisation: fakeSalesOrganisation,
+          salesOrgConfigs: fakeSalesOrganisationConfigs,
+        ),
+      );
+      final expectedStates = [
+        CustomerCodeState.initial(),
+        CustomerCodeState.initial().copyWith(
+          customerCodeConfig: customerCodeConfig,
+        ),
+      ];
+      whenListen(customerCodeBlocMock, Stream.fromIterable(expectedStates));
+
+      await getWidget(tester);
+      await tester.pump();
+      verify(
+        () => eligibilityBlocMock.add(
+          EligibilityEvent.updatedCustomerCodeConfig(
+            customerCodeConfig: customerCodeConfig,
+          ),
+        ),
+      ).called(1);
+    });
+
+    testWidgets('On customer config fetch error', (tester) async {
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          user: fakeUser,
+          salesOrganisation: fakeSalesOrganisation,
+          salesOrgConfigs: fakeSalesOrganisationConfigs,
+        ),
+      );
+      final expectedStates = [
+        CustomerCodeState.initial(),
+        CustomerCodeState.initial().copyWith(
+          configFailureOrSuccessOption:
+              optionOf(Left(FailureHandler.handleFailure('Fake-error'))),
+        ),
+      ];
+      whenListen(customerCodeBlocMock, Stream.fromIterable(expectedStates));
+
+      await getWidget(tester);
+      await tester.pumpAndSettle();
+      expect(
+        find.descendant(
+          of: find.byKey(WidgetKeys.customSnackBar),
+          matching: find.textContaining('Fake-error'),
+        ),
+        findsOneWidget,
+      );
+      verify(
+        () => eligibilityBlocMock.add(
+          EligibilityEvent.updatedCustomerCodeConfig(
+            customerCodeConfig: CustomerCodeConfig.empty(),
           ),
         ),
       ).called(1);
