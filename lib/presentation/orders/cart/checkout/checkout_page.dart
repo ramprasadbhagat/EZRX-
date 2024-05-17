@@ -37,7 +37,7 @@ import 'package:ezrxmobile/presentation/orders/cart/checkout/widgets/product_bun
 import 'package:ezrxmobile/presentation/orders/cart/checkout/widgets/product_material_item/checkout_material_item.dart';
 import 'package:ezrxmobile/presentation/orders/cart/item/cart_product_combo.dart';
 import 'package:ezrxmobile/presentation/orders/cart/price_summary/price_summary_tile.dart';
-import 'package:ezrxmobile/presentation/orders/cart/widget/market_place_delivery_info.dart';
+import 'package:ezrxmobile/presentation/orders/cart/widget/market_place_delivery_tile.dart';
 import 'package:ezrxmobile/presentation/orders/widgets/price_not_available_message.dart';
 import 'package:ezrxmobile/presentation/products/widgets/stock_info.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
@@ -130,8 +130,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
                     ),
                     if (cartState.cartProducts.containMPMaterial)
                       SliverToBoxAdapter(
-                        child: MarketPlaceDeliveryInfo.checkout(
-                          context,
+                        child: MarketPlaceDeliveryExpansionTile(
                           sellers: cartState
                               .cartProducts.mpMaterialOnly.manufacturers,
                         ),

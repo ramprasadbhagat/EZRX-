@@ -707,6 +707,8 @@ class WidgetKeys {
   static const Key cartComboItemProductDiscountedPrice =
       Key('cartComboItemProductDiscountedPrice');
   static const Key cartItemComboTotalPrice = Key('cartItemComboTotalPrice');
+  static const Key marketplaceDeliveryInfoSheet =
+      Key('marketplaceDeliveryInfoSheet');
 
   //============================================================
   //  Checkout Page Keys

@@ -78,8 +78,7 @@ class _CartPageCartScrollList extends StatelessWidget {
                                           showToolTip: true,
                                         ),
                                       ),
-                                      MarketPlaceDeliveryInfo.cart(
-                                        context,
+                                      MarketPlaceDeliveryTile(
                                         sellers: mpMaterials.manufacturers,
                                       ),
                                     ],

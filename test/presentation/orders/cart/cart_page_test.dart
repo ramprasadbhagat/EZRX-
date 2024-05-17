@@ -7,8 +7,9 @@ import 'package:ezrxmobile/domain/utils/string_utils.dart';
 import 'package:ezrxmobile/infrastructure/core/common/tracking_events.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/info_label.dart';
+import 'package:ezrxmobile/presentation/core/market_place/market_place_seller_title.dart';
 import 'package:ezrxmobile/presentation/core/no_record.dart';
-import 'package:ezrxmobile/presentation/orders/cart/widget/market_place_delivery_info.dart';
+import 'package:ezrxmobile/presentation/orders/cart/widget/market_place_delivery_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:auto_route/auto_route.dart';
@@ -3813,6 +3814,7 @@ void main() {
             );
 
         testWidgets('MP and ZP section visible', (tester) async {
+          await tester.binding.setSurfaceSize(const Size(600, 900));
           when(() => cartBloc.state).thenReturn(
             CartState.initial().copyWith(cartProducts: cartItems),
           );
@@ -3836,13 +3838,60 @@ void main() {
             ),
             findsOneWidget,
           );
+          final mpDeliveryTile = find.descendant(
+            of: mpSection,
+            matching: find.byType(MarketPlaceDeliveryTile),
+          );
+          await scroll(tester, mpDeliveryTile);
+          await tester.pumpAndSettle();
+          expect(mpDeliveryTile, findsOne);
+          await tester.tap(mpDeliveryTile);
+          await tester.pumpAndSettle();
+          final bottomSheet =
+              find.byKey(WidgetKeys.marketplaceDeliveryInfoSheet);
+          expect(bottomSheet, findsOne);
           expect(
             find.descendant(
-              of: mpSection,
-              matching: find.byType(MarketPlaceDeliveryInfo),
+              of: bottomSheet,
+              matching: find.textContaining(
+                'Marketplace item(s) delivery',
+                findRichText: true,
+              ),
             ),
             findsOne,
           );
+          expect(
+            find.descendant(
+              of: bottomSheet,
+              matching: find.text(
+                'The delivery times for Marketplace items are based on sellers\' response times and may exceed the usual delivery times for ZP orders. Sellers will dispatch the items to the ZP warehouse, and we will handle the delivery to you.',
+              ),
+            ),
+            findsOne,
+          );
+          expect(
+            find.descendant(
+              of: bottomSheet,
+              matching: find.text('Delivery by'),
+            ),
+            findsOne,
+          );
+          expect(
+            find.descendant(
+              of: bottomSheet,
+              matching: find.byType(MarketPlaceSellerTitle),
+            ),
+            findsNWidgets(cartItems.mpMaterialOnly.manufacturers.length),
+          );
+          final closeButton = find.descendant(
+            of: bottomSheet,
+            matching: find.byKey(WidgetKeys.closeButton),
+          );
+          expect(closeButton, findsOne);
+          await tester.tap(closeButton);
+          await tester.pumpAndSettle();
+          expect(bottomSheet, findsNothing);
+
           final lastMPItem = find.descendant(
             of: mpSection,
             matching: find.byKey(WidgetKeys.cartItemTile(mpItems.length - 1)),

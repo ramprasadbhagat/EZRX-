@@ -49,7 +49,7 @@ import 'package:ezrxmobile/presentation/core/market_place/market_place_logo.dart
 import 'package:ezrxmobile/presentation/core/status_label.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/orders/cart/widget/item_tax.dart';
-import 'package:ezrxmobile/presentation/orders/cart/widget/market_place_delivery_info.dart';
+import 'package:ezrxmobile/presentation/orders/cart/widget/market_place_delivery_tile.dart';
 import 'package:ezrxmobile/presentation/orders/order_success/order_success_page.dart';
 import 'package:ezrxmobile/presentation/orders/order_success/widgets/order_success_attachment_section.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
@@ -1649,7 +1649,8 @@ void main() {
         await tester.pumpWidget(getWidget());
         await tester.pumpAndSettle();
 
-        final marketplaceDeliveryInfo = find.byType(MarketPlaceDeliveryInfo);
+        final marketplaceDeliveryInfo =
+            find.byType(MarketPlaceDeliveryExpansionTile);
         await tester.dragUntilVisible(
           marketplaceDeliveryInfo,
           scrollList,

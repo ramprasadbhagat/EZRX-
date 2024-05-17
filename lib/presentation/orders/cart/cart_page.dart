@@ -39,7 +39,7 @@ import 'package:ezrxmobile/presentation/orders/cart/item/cart_product_tile.dart'
 import 'package:ezrxmobile/presentation/orders/cart/item/cart_product_tile_bonus.dart';
 import 'package:ezrxmobile/presentation/orders/cart/pre_order_modal/pre_order_modal.dart';
 import 'package:ezrxmobile/presentation/orders/cart/price_summary/price_summary_tile.dart';
-import 'package:ezrxmobile/presentation/orders/cart/widget/market_place_delivery_info.dart';
+import 'package:ezrxmobile/presentation/orders/cart/widget/market_place_delivery_tile.dart';
 import 'package:ezrxmobile/presentation/orders/widgets/edi_user_banner.dart';
 import 'package:ezrxmobile/presentation/orders/widgets/price_not_available_message.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';

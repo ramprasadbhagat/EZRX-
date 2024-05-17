@@ -56,7 +56,7 @@ import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/orders/cart/checkout/checkout_page.dart';
 import 'package:ezrxmobile/presentation/orders/cart/checkout/widgets/po_upload_attachment_section.dart';
 import 'package:ezrxmobile/presentation/orders/cart/checkout/widgets/product_bundle_item/checkout_bundle_item.dart';
-import 'package:ezrxmobile/presentation/orders/cart/widget/market_place_delivery_info.dart';
+import 'package:ezrxmobile/presentation/orders/cart/widget/market_place_delivery_tile.dart';
 import 'package:ezrxmobile/presentation/products/widgets/stock_info.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
@@ -2989,7 +2989,7 @@ void main() {
       final scrollListFinder = find.byKey(WidgetKeys.checkoutScrollList);
       expect(scrollListFinder, findsOneWidget);
       await tester.dragUntilVisible(
-        find.byType(MarketPlaceDeliveryInfo),
+        find.byType(MarketPlaceDeliveryExpansionTile),
         scrollListFinder,
         const Offset(0.0, -500.0),
       );
