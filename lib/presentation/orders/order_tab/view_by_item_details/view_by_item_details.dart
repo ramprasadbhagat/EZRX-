@@ -2,15 +2,20 @@ import 'package:auto_route/auto_route.dart';
 import 'package:collection/collection.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/order/additional_details/additional_details_bloc.dart';
+import 'package:ezrxmobile/application/order/view_by_item/view_by_item_bloc.dart';
 import 'package:ezrxmobile/domain/order/entities/delivery_info_data.dart';
 import 'package:ezrxmobile/infrastructure/core/common/tracking_events.dart';
 import 'package:ezrxmobile/infrastructure/core/common/tracking_properties.dart';
 import 'package:ezrxmobile/presentation/core/license_expired_banner.dart';
 import 'package:ezrxmobile/infrastructure/core/common/clevertap_helper.dart';
 import 'package:ezrxmobile/presentation/core/market_place/market_place_seller_with_logo.dart';
+import 'package:ezrxmobile/presentation/core/quantity_and_price_with_tax.dart';
 import 'package:ezrxmobile/presentation/orders/cart/add_to_cart/add_to_cart_error_section.dart';
 import 'package:ezrxmobile/presentation/core/tender_contract_section.dart';
+import 'package:ezrxmobile/presentation/orders/order_tab/widgets/order_item_common_tile.dart';
+import 'package:ezrxmobile/presentation/orders/order_tab/widgets/order_item_price.dart';
 import 'package:ezrxmobile/presentation/orders/widgets/edi_user_banner.dart';
+import 'package:ezrxmobile/presentation/orders/widgets/order_history_stock_info.dart';
 import 'package:ezrxmobile/presentation/payments/extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -40,7 +45,6 @@ import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
 import 'package:ezrxmobile/presentation/core/address_info_section.dart';
 import 'package:ezrxmobile/presentation/core/balance_text_row.dart';
-import 'package:ezrxmobile/presentation/core/common_tile_item.dart';
 import 'package:ezrxmobile/presentation/core/custom_app_bar.dart';
 import 'package:ezrxmobile/presentation/core/custom_expansion_tile.dart'
     as custom;
@@ -53,9 +57,7 @@ import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
 import 'package:ezrxmobile/presentation/core/status_label.dart';
 import 'package:ezrxmobile/presentation/core/status_tracker.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
-import 'package:ezrxmobile/presentation/orders/order_tab/widgets/order_item_price.dart';
 import 'package:ezrxmobile/presentation/orders/order_tab/widgets/order_status_section.dart';
-import 'package:ezrxmobile/presentation/core/quantity_and_price_with_tax.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:ezrxmobile/presentation/utils/router_utils.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
@@ -155,7 +157,9 @@ class ViewByItemDetailsPage extends StatelessWidget {
                           child: AddressInfoSection.order(),
                         ),
                         const Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 20),
+                          padding: EdgeInsets.symmetric(
+                            horizontal: 20,
+                          ),
                           child: PayerInformation(
                             expanded: false,
                           ),

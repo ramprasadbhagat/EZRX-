@@ -171,6 +171,7 @@ class OrderHistoryDetailsOrderItemDto with _$OrderHistoryDetailsOrderItemDto {
       hidePrice: hidePrice,
       isMarketPlace: isMarketPlace,
       isCovid: isCovid,
+      invoiceNumber: StringValue(''),
     );
   }
 

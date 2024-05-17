@@ -52,6 +52,7 @@ class OrderHistoryDetailsOrderItem with _$OrderHistoryDetailsOrderItem {
     required bool hidePrice,
     required bool isMarketPlace,
     required bool isCovid,
+    required StringValue invoiceNumber,
   }) = _OrderHistoryDetailsOrderItem;
 
   factory OrderHistoryDetailsOrderItem.empty() => OrderHistoryDetailsOrderItem(
@@ -86,6 +87,7 @@ class OrderHistoryDetailsOrderItem with _$OrderHistoryDetailsOrderItem {
         hidePrice: false,
         isMarketPlace: false,
         isCovid: false,
+        invoiceNumber: StringValue(''),
       );
 
   MaterialQueryInfo get queryInfo => MaterialQueryInfo.fromOrderHistoryDetails(
@@ -216,6 +218,9 @@ class OrderHistoryDetailsOrderItem with _$OrderHistoryDetailsOrderItem {
         ),
         pricingUnit: tenderContractDetails.priceUnit,
         tenderPrice: TenderPrice(tenderContractDetails.price),
+      );
+  StringValue gethashId({required OrderNumber orderNumber}) => StringValue(
+        '${orderNumber.value.getOrElse(() => '')}${lineNumber.value.getOrElse(() => '')}',
       );
 }
 

@@ -3,90 +3,132 @@ part of 'package:ezrxmobile/presentation/orders/order_tab/view_by_item_details/v
 class ViewByItemOrderItemTile extends StatelessWidget {
   final OrderHistoryItem orderHistoryItem;
 
-  const ViewByItemOrderItemTile({Key? key, required this.orderHistoryItem})
-      : super(key: key);
+  const ViewByItemOrderItemTile({
+    Key? key,
+    required this.orderHistoryItem,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final eligibilityState = context.read<EligibilityBloc>().state;
-    final headerText = _batchExpiryDateText(context);
 
-    return CommonTileItem(
-      subtitle: '',
+    return OrderItemCommonTile(
+      batchExpiryDate: OrderHistoryStockInfo.viewByItem(
+        eligibilityState: eligibilityState,
+        item: orderHistoryItem,
+      ),
       label: orderHistoryItem.combinationCode(
         showGMCPart: eligibilityState.salesOrgConfigs.enableGMC,
       ),
-      title: orderHistoryItem.materialDescription,
-      priceComponent: orderHistoryItem.isBonusMaterial
-          ? null
-          : Row(
-              children: [
-                if (eligibilityState.salesOrgConfigs.enableListPrice &&
-                    orderHistoryItem.showMaterialListPrice)
-                  PriceComponent(
-                    key: WidgetKeys.materialListPriceStrikeThrough,
-                    salesOrgConfig: eligibilityState.salesOrgConfigs,
-                    price: orderHistoryItem.getListPrice.toString(),
-                    type: PriceStyle.materialListPriceStrikeThrough,
-                  ),
-                OrderItemPrice(
-                  unitPrice: orderHistoryItem.itemUnitPrice(
-                    eligibilityState.salesOrg.isID,
-                  ),
-                  originPrice: orderHistoryItem.originPrice.toString(),
-                  showPreviousPrice: false,
-                  hidePrice: orderHistoryItem.hidePrice,
-                ),
-              ],
-            ),
+      priceComponentSubtitle: _PriceComponentSubtitle(
+        orderHistoryItem: orderHistoryItem,
+      ),
+      footerWidget: QuantityAndPriceWithTax.order(
+        quantity: orderHistoryItem.qty,
+        taxPercentage: orderHistoryItem.taxPercentage,
+        netPrice: orderHistoryItem.itemTotalNetPrice(
+          eligibilityState.salesOrgConfigs.displayItemTaxBreakdown,
+          eligibilityState.salesOrg.isID,
+        ),
+        isTopAlignment: true,
+      ),
       statusWidget: StatusLabel(
         key: WidgetKeys.orderItemStatusKey,
-        status: StatusType(orderHistoryItem.status.displayOrderStatus),
+        status: StatusType(
+          orderHistoryItem.status.displayOrderStatus,
+        ),
       ),
-      quantity: '',
-      isQuantityBelowImage: true,
-      isQuantityRequired: false,
+      quantity: orderHistoryItem.qty.toString(),
       materialNumber: orderHistoryItem.materialNumber,
-      statusTag:
-          eligibilityState.salesOrg.isID ? null : orderHistoryItem.productTag,
-      headerText: eligibilityState.salesOrgConfigs.batchNumDisplay &&
-              headerText.isNotEmpty
-          ? headerText
-          : '',
-      headerTextStyle: Theme.of(context).textTheme.bodySmall!.copyWith(
-            color: ZPColors.neutralsGrey1,
-          ),
+      materialDescription: orderHistoryItem.materialDescription,
+      orderNumber: orderHistoryItem.orderNumber,
+      invoiceNumber: _InvoiceNumberSubtitle(
+        invoiceData: orderHistoryItem.invoiceNumber,
+      ),
+      tenderContractSection: !orderHistoryItem.tenderOrderReason.isEmpty
+          ? TenderContractSection(
+              tenderContract: orderHistoryItem.orderItemTenderContract,
+            )
+          : const SizedBox.shrink(),
+      statusTag: eligibilityState.salesOrg.isID
+          ? StatusType('')
+          : orderHistoryItem.productTag,
       isCovidItem: orderHistoryItem.isCovid,
       showOfferTag: orderHistoryItem.isOfferItem,
       showBundleTag: orderHistoryItem.isBundle,
-      footerWidget: Column(
-        children: [
-          QuantityAndPriceWithTax.order(
-            quantity: orderHistoryItem.qty,
-            taxPercentage: orderHistoryItem.taxPercentage,
-            netPrice: orderHistoryItem.itemTotalNetPrice(
-              eligibilityState.salesOrgConfigs.displayItemTaxBreakdown,
-              eligibilityState.salesOrg.isID,
-            ),
-          ),
-          if (!orderHistoryItem.tenderOrderReason.isEmpty)
-            TenderContractSection(
-              tenderContract: orderHistoryItem.orderItemTenderContract,
-            ),
-        ],
-      ),
     );
   }
+}
 
-  String _batchExpiryDateText(BuildContext context) {
-    if (orderHistoryItem.isMarketPlace) {
-      return '${context.tr('Batch')}: NA (${context.tr('Expires')}: NA)';
+class _PriceComponentSubtitle extends StatelessWidget {
+  const _PriceComponentSubtitle({
+    Key? key,
+    required this.orderHistoryItem,
+  }) : super(key: key);
+
+  final OrderHistoryItem orderHistoryItem;
+
+  @override
+  Widget build(BuildContext context) {
+    final eligibilityState = context.read<EligibilityBloc>().state;
+    if (!orderHistoryItem.isBonusMaterial) {
+      return Wrap(
+        children: [
+          if (eligibilityState.salesOrgConfigs.enableListPrice &&
+              orderHistoryItem.showMaterialListPrice)
+            PriceComponent(
+              key: WidgetKeys.materialListPriceStrikeThrough,
+              salesOrgConfig: eligibilityState.salesOrgConfigs,
+              price: orderHistoryItem.getListPrice.toString(),
+              type: PriceStyle.materialListPriceStrikeThrough,
+            ),
+          OrderItemPrice(
+            unitPrice: orderHistoryItem.itemUnitPrice(
+              eligibilityState.salesOrgConfigs.salesOrg.isID,
+            ),
+            originPrice: orderHistoryItem.originPrice.toString(),
+            showPreviousPrice: false,
+            hidePrice: orderHistoryItem.hidePrice,
+          ),
+        ],
+      );
     }
 
-    if (orderHistoryItem.batchNumHasData) {
-      return '${context.tr('Batch')}: ${orderHistoryItem.batch.displayDashIfEmpty}\n(${context.tr('Expires')}: ${orderHistoryItem.expiryDate.dateOrDashString})';
-    }
+    return const SizedBox.shrink();
+  }
+}
 
-    return '';
+class _InvoiceNumberSubtitle extends StatelessWidget {
+  final StringValue invoiceData;
+  const _InvoiceNumberSubtitle({Key? key, required this.invoiceData})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<ViewByItemsBloc, ViewByItemsState>(
+      buildWhen: (previous, current) =>
+          previous.isFetchingInvoices != current.isFetchingInvoices,
+      builder: (context, state) {
+        if (!state.isFetchingInvoices && !invoiceData.isNotEmpty) {
+          return const SizedBox.shrink();
+        }
+
+        return Flexible(
+          child: LoadingShimmer.withChild(
+            enabled: state.isFetchingInvoices,
+            child: Padding(
+              padding: const EdgeInsets.all(5.0),
+              child: Text(
+                ' | ${context.tr('Invoice')} #${invoiceData.getOrDefaultValue('')}',
+                style: Theme.of(context)
+                    .textTheme
+                    .titleSmall!
+                    .copyWith(textBaseline: TextBaseline.alphabetic),
+              ),
+            ),
+          ),
+        );
+      },
+    );
   }
 }

@@ -164,6 +164,7 @@ Color _priceTextColor(PriceStyle type) {
       return ZPColors.primary;
 
     case PriceStyle.summaryPrice:
+      return ZPColors.darkerGrey;
     case PriceStyle.totalPrice:
     case PriceStyle.credits:
     case PriceStyle.grandTotalPrice:
@@ -386,6 +387,11 @@ TextStyle _currencyCodeTextStyle(BuildContext context, PriceStyle type) {
             fontWeight: FontWeight.bold,
             color: ZPColors.primary,
           );
+    case PriceStyle.summaryPrice:
+      return Theme.of(context)
+          .textTheme
+          .titleSmall!
+          .copyWith(color: ZPColors.darkerGrey);
     case PriceStyle.returnBonusPrice:
     case PriceStyle.bundleCartPrice:
     default:

@@ -17,6 +17,7 @@ class ViewByOrderDetailsState with _$ViewByOrderDetailsState {
     required List<ProductDetailAggregate> productDetailAggregateList,
     required ShipToInfo shipToInfo,
     required bool isLoadingBundleDetail,
+    required bool isFetchingInvoices,
   }) = _ViewByOrderDetailsState;
 
   factory ViewByOrderDetailsState.initial() => ViewByOrderDetailsState(
@@ -29,6 +30,7 @@ class ViewByOrderDetailsState with _$ViewByOrderDetailsState {
         isLoadingTenderContract: {},
         materials: {},
         isExpanded: false,
+        isFetchingInvoices: false,
         productDetailAggregateList: <ProductDetailAggregate>[],
         shipToInfo: ShipToInfo.empty(),
         isLoadingBundleDetail: false,

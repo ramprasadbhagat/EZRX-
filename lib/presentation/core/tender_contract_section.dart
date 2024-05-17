@@ -27,28 +27,25 @@ class TenderContractSection extends StatelessWidget {
         iconColor: ZPColors.black,
         backgroundColor: ZPColors.tenderUnselectBg,
         collapsedBackgroundColor: ZPColors.tenderUnselectBg,
-        title: Row(
+        tilePadding: const EdgeInsets.symmetric(horizontal: 10),
+        title: Wrap(
           children: [
-            Expanded(
-              child: Text(
-                key: WidgetKeys.tenderOrderReason,
-                '${tenderContract.tenderOrderReason.displayTenderContractReason} - ${context.tr('Contract Tender')}',
-                style: Theme.of(context)
-                    .textTheme
-                    .titleMedium!
-                    .copyWith(fontWeight: FontWeight.bold),
-              ),
+            Text(
+              key: WidgetKeys.tenderOrderReason,
+              '${tenderContract.tenderOrderReason.displayTenderContractReason} - ${context.tr('Contract Tender')}',
+              style: Theme.of(context)
+                  .textTheme
+                  .titleMedium!
+                  .copyWith(fontWeight: FontWeight.bold),
             ),
-            const SizedBox(width: 5),
-            Expanded(
-              child: Text(
-                key: WidgetKeys.tenderContractNumber,
-                tenderContract.contractNumber.getValue(),
-                style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                      fontWeight: FontWeight.w400,
-                      color: ZPColors.darkerGrey,
-                    ),
-              ),
+            const SizedBox(width: 4),
+            Text(
+              key: WidgetKeys.tenderContractNumber,
+              tenderContract.contractNumber.getValue(),
+              style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                    fontWeight: FontWeight.w400,
+                    color: ZPColors.darkerGrey,
+                  ),
             ),
           ],
         ),

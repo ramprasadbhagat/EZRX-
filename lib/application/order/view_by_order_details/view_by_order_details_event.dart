@@ -22,4 +22,7 @@ class ViewByOrderDetailsEvent with _$ViewByOrderDetailsEvent {
   const factory ViewByOrderDetailsEvent.expandAttachments() =
       _ExpandAttachments;
   const factory ViewByOrderDetailsEvent.updateBundle() = _UpdateBundle;
+  const factory ViewByOrderDetailsEvent.fetchOrdersInvoiceData({
+    required OrderHistoryDetails orderHistoryDetails,
+  }) = _FetchOrdersInvoiceData;
 }

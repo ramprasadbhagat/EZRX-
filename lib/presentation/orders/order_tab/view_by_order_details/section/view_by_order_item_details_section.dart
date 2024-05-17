@@ -1,24 +1,26 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/order/view_by_item_details/view_by_item_details_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_order_details/view_by_order_details_bloc.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_order_items.dart';
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
 import 'package:ezrxmobile/infrastructure/core/common/tracking_events.dart';
 import 'package:ezrxmobile/infrastructure/core/common/tracking_properties.dart';
+import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
-import 'package:ezrxmobile/presentation/core/tender_contract_section.dart';
-import 'package:ezrxmobile/presentation/orders/order_tab/widgets/order_item_price.dart';
 import 'package:ezrxmobile/presentation/core/quantity_and_price_with_tax.dart';
+import 'package:ezrxmobile/presentation/core/status_label.dart';
+import 'package:ezrxmobile/presentation/core/tender_contract_section.dart';
+import 'package:ezrxmobile/presentation/orders/order_tab/widgets/order_item_common_tile.dart';
+import 'package:ezrxmobile/presentation/orders/order_tab/widgets/order_item_price.dart';
+import 'package:ezrxmobile/presentation/orders/widgets/order_history_stock_info.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
-import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:ezrxmobile/presentation/utils/router_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
-import 'package:ezrxmobile/presentation/core/status_label.dart';
-import 'package:ezrxmobile/domain/core/value/value_objects.dart';
-import 'package:ezrxmobile/presentation/core/common_tile_item.dart';
 import 'package:ezrxmobile/domain/order/entities/view_by_order_group.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 
@@ -85,26 +87,41 @@ class _OrderItemTile extends StatelessWidget {
     final eligibilityState = context.read<EligibilityBloc>().state;
     final salesOrgConfig = eligibilityState.salesOrgConfigs;
     final isIDMarket = eligibilityState.salesOrganisation.salesOrg.isID;
-    final isMarketPlace = orderItem.isMarketPlace;
-    final headerText = _batchExpiryDateText(context, isMarketPlace);
+    final orderHistoryDetails =
+        context.read<ViewByOrderDetailsBloc>().state.orderHistoryDetails;
 
-    return CommonTileItem(
-      padding: const EdgeInsets.symmetric(vertical: 10),
+    return OrderItemCommonTile(
       onTap: () => _goToViewByItemDetail(
         context,
-        orderItem,
+        orderHistoryDetails.orderNumber,
+        orderItem.lineNumber,
       ),
       key: WidgetKeys.viewByOrderDetailItem(
         orderItem.materialNumber.displayMatNo,
         orderItem.isBonus,
       ),
+      orderNumber: orderHistoryDetails.orderNumber,
+      invoiceNumber: _InvoiceNumberSubtitle(
+        materialNumber: orderItem.materialNumber,
+        lineNumber: orderItem.lineNumber,
+      ),
+      batchExpiryDate: OrderHistoryStockInfo.viewByOrder(
+        eligibilityState: eligibilityState,
+        item: orderItem,
+      ),
       label: orderItem.combinationCode(
         showGMCPart: salesOrgConfig.enableGMC,
       ),
-      title: orderItem.materialDescription,
-      priceComponent: orderItem.isBonus
-          ? null
-          : Row(
+      tenderContractSection:
+          orderItem.orderItemTenderContract.tenderOrderReason.isEmpty
+              ? const SizedBox.shrink()
+              : TenderContractSection(
+                  tenderContract: orderItem.orderItemTenderContract,
+                ),
+      materialDescription: orderItem.materialDescription,
+      priceComponentSubtitle: orderItem.isBonus
+          ? const SizedBox.shrink()
+          : Wrap(
               children: [
                 if (salesOrgConfig.enableListPrice &&
                     orderItem.showMaterialListPrice)
@@ -125,7 +142,7 @@ class _OrderItemTile extends StatelessWidget {
               ],
             ),
       statusWidget: isIDMarket
-          ? null
+          ? const SizedBox.shrink()
           : StatusLabel(
               status: StatusType(
                 orderItem.sAPStatus.displaySAPOrderStatus,
@@ -133,56 +150,28 @@ class _OrderItemTile extends StatelessWidget {
             ),
       quantity: '',
       materialNumber: orderItem.materialNumber,
-      isQuantityBelowImage: true,
-      isQuantityRequired: false,
       isCovidItem: orderItem.isCovid,
       showOfferTag: orderItem.showOfferTag,
-      statusTag:
-          salesOrgConfig.salesOrg.isID ? null : orderItem.orderDetailBonusTag,
-      headerText: salesOrgConfig.batchNumDisplay && headerText.isNotEmpty
-          ? headerText
-          : '',
-      headerTextStyle: Theme.of(context).textTheme.bodyMedium?.copyWith(
-            color: ZPColors.darkGray,
-          ),
-      subtitle: '',
-      footerWidget: Column(
-        children: [
-          QuantityAndPriceWithTax.order(
-            quantity: orderItem.qty,
-            quantityDescription: isIDMarket
-                ? '${orderItem.pickedQuantity} ${context.tr('of')} ${orderItem.qty} ${context.tr('stocks fulfilled')}'
-                : '',
-            netPrice: orderItem.itemNetPrice(
-              salesOrgConfig.displayItemTaxBreakdown,
-              isIDMarket,
-            ),
-            taxPercentage: orderItem.taxPercentage,
-          ),
-          if (!orderItem.orderItemTenderContract.tenderOrderReason.isEmpty)
-            TenderContractSection(
-              tenderContract: orderItem.orderItemTenderContract,
-            ),
-        ],
+      statusTag: isIDMarket ? StatusType('') : orderItem.orderDetailBonusTag,
+      footerWidget: QuantityAndPriceWithTax.order(
+        quantity: orderItem.qty,
+        quantityDescription: isIDMarket
+            ? '${orderItem.pickedQuantity} ${context.tr('of')} ${orderItem.qty} ${context.tr('stocks fulfilled')}'
+            : '',
+        netPrice: orderItem.itemNetPrice(
+          salesOrgConfig.displayItemTaxBreakdown,
+          isIDMarket,
+        ),
+        taxPercentage: orderItem.taxPercentage,
+        isTopAlignment: true,
       ),
     );
   }
 
-  String _batchExpiryDateText(BuildContext context, bool isMarketPlace) {
-    if (isMarketPlace) {
-      return '${context.tr('Batch')}: NA (${context.tr('Expires')}: NA)';
-    }
-
-    if (orderItem.batchNumHasData) {
-      return '${context.tr('Batch')}: ${orderItem.batch.displayDashIfEmpty}\n(${context.tr('Expires')}: ${orderItem.expiryDate.dateOrDashString})';
-    }
-
-    return '';
-  }
-
   Future _goToViewByItemDetail(
     BuildContext context,
-    OrderHistoryDetailsOrderItem orderItem,
+    OrderNumber orderNumber,
+    LineNumber lineNumber,
   ) async {
     trackMixpanelEvent(
       TrackingEvents.orderDetailViewed,
@@ -193,17 +182,59 @@ class _OrderItemTile extends StatelessWidget {
       },
     );
 
-    final orderHistoryDetails =
-        context.read<ViewByOrderDetailsBloc>().state.orderHistoryDetails;
     context.read<ViewByItemDetailsBloc>().add(
           ViewByItemDetailsEvent.fetchOrderHistoryDetails(
-            orderNumber: orderHistoryDetails.orderNumber,
-            lineNumber: orderItem.lineNumber,
+            orderNumber: orderNumber,
+            lineNumber: lineNumber,
           ),
         );
 
     await context.router.push(
       const ViewByItemDetailsPageRoute(),
+    );
+  }
+}
+
+class _InvoiceNumberSubtitle extends StatelessWidget {
+  final MaterialNumber materialNumber;
+  final LineNumber lineNumber;
+  const _InvoiceNumberSubtitle({
+    Key? key,
+    required this.materialNumber,
+    required this.lineNumber,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<ViewByOrderDetailsBloc, ViewByOrderDetailsState>(
+      buildWhen: (previous, current) =>
+          previous.isFetchingInvoices != current.isFetchingInvoices,
+      builder: (context, state) {
+        final invoiceNumber = state.orderHistoryDetails.getInvoiceNumber(
+          materialNumber: materialNumber,
+          lineNumber: lineNumber,
+        );
+
+        if (!state.isFetchingInvoices && !invoiceNumber.isNotEmpty) {
+          return const SizedBox.shrink();
+        }
+
+        return Flexible(
+          child: LoadingShimmer.withChild(
+            enabled: state.isFetchingInvoices,
+            child: Padding(
+              padding: const EdgeInsets.all(5.0),
+              child: Text(
+                '| ${context.tr('Invoice')} #${invoiceNumber.getValue()}',
+                style: Theme.of(context)
+                    .textTheme
+                    .titleSmall!
+                    .copyWith(textBaseline: TextBaseline.alphabetic),
+              ),
+            ),
+          ),
+        );
+      },
     );
   }
 }

@@ -147,6 +147,12 @@ void main() {
           expiryDate: DateTimeStringValue('2023-10-04'),
           invoiceNumber: StringValue('123456'),
           telephoneNumber: fakePhoneNumber,
+          tenderContractNumber:
+              TenderContractNumber.tenderContractNumber('0040026522'),
+          tenderOrderReason: TenderContractReason('730'),
+          tenderPrice: TenderPrice('11832000'),
+          tenderContractReference:
+              TenderContractNumber.tenderContractReference('HCM-01234'),
         );
 
     customerLicense =
@@ -676,7 +682,7 @@ void main() {
       await tester.pumpWidget(getScopedWidget());
       await tester.pumpAndSettle();
       final expectedDelivery = find.textContaining(
-        '${'Batch'.tr()}: ${fakeOrderHistoryItem.batch.displayDashIfEmpty}\n(${'Expires'.tr()}: ${fakeOrderHistoryItem.expiryDate.dateOrDashString})',
+        '${'Batch'.tr()}: ${fakeOrderHistoryItem.batch.displayDashIfEmpty} - ${'Expires'.tr()}: ${fakeOrderHistoryItem.expiryDate.dateOrDashString}',
       );
       expect(expectedDelivery, findsNothing);
     });
@@ -703,7 +709,7 @@ void main() {
         const Offset(0, -300),
       );
       final expectedDelivery = find.textContaining(
-        '${'Batch'.tr()}: ${fakeOrderHistoryItem.batch.displayDashIfEmpty}\n(${'Expires'.tr()}: ${fakeOrderHistoryItem.expiryDate.dateOrDashString})',
+        '${'Batch'.tr()}: ${fakeOrderHistoryItem.batch.displayDashIfEmpty} - ${'Expires'.tr()}: ${fakeOrderHistoryItem.expiryDate.dateOrDashString}',
         findRichText: true,
       );
       expect(expectedDelivery, findsOneWidget);
@@ -2121,6 +2127,39 @@ void main() {
       expect(find.byKey(WidgetKeys.payerInformation), findsNothing);
     });
 
+    testWidgets(
+        'Display counter offer requested for PnG materials with price not available',
+        (tester) async {
+      await tester.binding.setSurfaceSize(const Size(480, 900));
+
+      final pnGMaterial =
+          mockViewByItemsOrderHistory.orderHistoryItems.last.copyWith(
+        originPrice: 80.00,
+        isCounterOffer: true,
+      );
+      when(() => viewByItemDetailsBlocMock.state).thenReturn(
+        ViewByItemDetailsState.initial().copyWith(
+          isLoading: false,
+          orderHistoryItem: pnGMaterial,
+          orderHistory: OrderHistory.empty().copyWith(
+            orderHistoryItems: [pnGMaterial],
+          ),
+        ),
+      );
+
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pumpAndSettle();
+      final priceNotAvailableFinder = find.text(
+        'Price Not Available',
+        findRichText: true,
+      );
+      expect(priceNotAvailableFinder, findsNWidgets(2));
+
+      // final requestedCounterOfferKey =
+      //     find.text('Requested counter offer'.tr());
+      // expect(requestedCounterOfferKey, findsOneWidget);
+    });
+
     testWidgets('Show Payment Term when disable payment term display is false',
         (tester) async {
       when(() => eligibilityBlocMock.state).thenAnswer(
@@ -2226,11 +2265,8 @@ void main() {
         find.descendant(of: detail, matching: find.text(sellerName)),
         findsNothing,
       );
-      final batchExpiryDate = tester
-          .widget<RichText>(find.byKey(WidgetKeys.commonTileItemHeader))
-          .text
-          .toPlainText();
-      expect(batchExpiryDate, contains('Batch: NA (Expires: NA)'));
+      final batchExpiryDate = find.textContaining('Batch: NA - Expires: NA');
+      expect(batchExpiryDate, findsOneWidget);
     });
 
     testWidgets(
@@ -2372,5 +2408,99 @@ void main() {
         expect(licenseExpiredBannerSubTitle, findsNothing);
       },
     );
+
+    testWidgets('Display tender information when collapsed', (tester) async {
+      final fakeTenderOrderReason = TenderContractReason('730');
+      final fakeTenderContractNumber =
+          TenderContractNumber.tenderContractNumber('0040026522');
+      final orderHistoryList = mockViewByItemsOrderHistory.copyWith(
+        orderHistoryItems: [
+          fakeOrderHistoryItem,
+        ],
+      );
+      when(() => viewByItemDetailsBlocMock.state).thenReturn(
+        ViewByItemDetailsState.initial()
+            .copyWith(orderHistory: orderHistoryList),
+      );
+
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pumpAndSettle();
+
+      await tester.dragUntilVisible(
+        find.byType(OtherItemDetailsSection),
+        find.byKey(WidgetKeys.scrollList),
+        const Offset(0, -300),
+      );
+      final historyTile = find.byKey(WidgetKeys.genericKey(key: '0'));
+      expect(historyTile, findsOneWidget);
+      expect(
+        find.descendant(
+          of: historyTile,
+          matching: find.byType(ExpansionTile),
+        ),
+        findsOneWidget,
+      );
+
+      expect(
+        find.descendant(
+          of: historyTile,
+          matching: find.byWidgetPredicate(
+            (widget) =>
+                widget.key == WidgetKeys.tenderOrderReason &&
+                widget is Text &&
+                widget.data!.contains(
+                  '${fakeTenderOrderReason.getOrCrash()} - Contract Tender',
+                ),
+          ),
+        ),
+        findsOneWidget,
+      );
+
+      expect(
+        find.descendant(
+          of: historyTile,
+          matching: find.byWidgetPredicate(
+            (widget) =>
+                widget.key == WidgetKeys.tenderContractNumber &&
+                widget is Text &&
+                widget.data == fakeTenderContractNumber.getOrCrash(),
+          ),
+        ),
+        findsOneWidget,
+      );
+    });
+
+    testWidgets(
+        'Do not display tender information when Tender Order Reason is empty',
+        (tester) async {
+      final orderHistoryList = mockViewByItemsOrderHistory.copyWith(
+        orderHistoryItems: [
+          mockViewByItemsOrderHistory.orderHistoryItems
+              .firstWhere((item) => item.tenderOrderReason.isEmpty),
+        ],
+      );
+      when(() => viewByItemDetailsBlocMock.state).thenReturn(
+        ViewByItemDetailsState.initial()
+            .copyWith(orderHistory: orderHistoryList),
+      );
+
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pump();
+
+      await tester.dragUntilVisible(
+        find.byType(OtherItemDetailsSection),
+        find.byKey(WidgetKeys.scrollList),
+        const Offset(0, -300),
+      );
+      final historyTile = find.byKey(WidgetKeys.genericKey(key: '0'));
+      expect(historyTile, findsOneWidget);
+      expect(
+        find.descendant(
+          of: historyTile,
+          matching: find.byType(ExpansionTile),
+        ),
+        findsNothing,
+      );
+    });
   });
 }

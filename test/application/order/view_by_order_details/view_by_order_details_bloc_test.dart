@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:ezrxmobile/infrastructure/order/repository/view_by_item_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:bloc_test/bloc_test.dart';
@@ -26,6 +27,8 @@ class ViewByOrderDetailsRepositoryMock extends Mock
 class ProductDetailsRepositoryMock extends Mock
     implements ProductDetailRepository {}
 
+class ViewByItemRepositoryMock extends Mock implements ViewByItemRepository {}
+
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   late ViewByOrderDetailsRepository viewByOrderDetailsRepositoryMock;
@@ -38,12 +41,15 @@ void main() {
   late Map<MaterialQueryInfo, PriceAggregate> fakeMaterials;
   late Map<MaterialQueryInfo, bool> fakeIsLoadingTenderContract;
   late MaterialQueryInfo fakeQueryInfo;
+  late ViewByItemRepository viewByItemRepositoryMock;
+  const fakeError = ApiFailure.other('fake-error');
   group(
     'ViewByOrderDetailsBloc Test',
     () {
       setUp(() async {
         viewByOrderDetailsRepositoryMock = ViewByOrderDetailsRepositoryMock();
         productDetailRepositoryMock = ProductDetailsRepositoryMock();
+        viewByItemRepositoryMock = ViewByItemRepositoryMock();
         orderHistoryDetailsMock =
             await ViewByOrderDetailsLocalDataSource().getOrderHistoryDetails();
         orderHistoryDetailsMock = orderHistoryDetailsMock.copyWith(
@@ -81,6 +87,7 @@ void main() {
         build: () => ViewByOrderDetailsBloc(
           viewByOrderDetailsRepository: viewByOrderDetailsRepositoryMock,
           productDetailRepository: productDetailRepositoryMock,
+          viewByItemRepository: viewByItemRepositoryMock,
         ),
         act: (bloc) => bloc.add(
           ViewByOrderDetailsEvent.initialized(
@@ -107,6 +114,7 @@ void main() {
         build: () => ViewByOrderDetailsBloc(
           viewByOrderDetailsRepository: viewByOrderDetailsRepositoryMock,
           productDetailRepository: productDetailRepositoryMock,
+          viewByItemRepository: viewByItemRepositoryMock,
         ),
         seed: () => ViewByOrderDetailsState.initial().copyWith(
           user: fakeClient,
@@ -124,6 +132,13 @@ void main() {
               shipToInfo: fakeShipToInfo,
             ),
           ).thenAnswer((invocation) async => Right(orderHistoryDetailsMock));
+          when(
+            () => (viewByItemRepositoryMock.getOrdersInvoiceData(
+              orderNumbers: [orderHistoryDetailsMock.orderNumber],
+            )),
+          ).thenAnswer(
+            (invocation) async => const Left(fakeError),
+          );
         },
         act: (bloc) => bloc.add(
           ViewByOrderDetailsEvent.fetch(
@@ -148,6 +163,29 @@ void main() {
             materials: fakeMaterials,
             isLoadingTenderContract: fakeIsLoadingTenderContract,
           ),
+          ViewByOrderDetailsState.initial().copyWith(
+            user: fakeClient,
+            customerCodeInfo: fakeCustomerCodeInfo,
+            salesOrganisation: fakeMYSalesOrganisation,
+            shipToInfo: fakeShipToInfo,
+            orderHistoryDetails: orderHistoryDetailsMock,
+            materials: fakeMaterials,
+            isLoadingTenderContract: fakeIsLoadingTenderContract,
+            isFetchingInvoices: true,
+          ),
+          ViewByOrderDetailsState.initial().copyWith(
+            user: fakeClient,
+            customerCodeInfo: fakeCustomerCodeInfo,
+            salesOrganisation: fakeMYSalesOrganisation,
+            shipToInfo: fakeShipToInfo,
+            orderHistoryDetails: orderHistoryDetailsMock,
+            failureOrSuccessOption: optionOf(
+              const Left(fakeError),
+            ),
+            materials: fakeMaterials,
+            isLoadingTenderContract: fakeIsLoadingTenderContract,
+            isFetchingInvoices: false,
+          ),
         ],
       );
 
@@ -156,6 +194,7 @@ void main() {
         build: () => ViewByOrderDetailsBloc(
           viewByOrderDetailsRepository: viewByOrderDetailsRepositoryMock,
           productDetailRepository: productDetailRepositoryMock,
+          viewByItemRepository: viewByItemRepositoryMock,
         ),
         seed: () => ViewByOrderDetailsState.initial().copyWith(
           user: fakeClient,
@@ -209,6 +248,7 @@ void main() {
         build: () => ViewByOrderDetailsBloc(
           viewByOrderDetailsRepository: viewByOrderDetailsRepositoryMock,
           productDetailRepository: productDetailRepositoryMock,
+          viewByItemRepository: viewByItemRepositoryMock,
         ),
         seed: () => ViewByOrderDetailsState.initial().copyWith(
           user: fakeClient,
@@ -237,6 +277,7 @@ void main() {
         build: () => ViewByOrderDetailsBloc(
           viewByOrderDetailsRepository: viewByOrderDetailsRepositoryMock,
           productDetailRepository: productDetailRepositoryMock,
+          viewByItemRepository: viewByItemRepositoryMock,
         ),
         act: (bloc) => bloc.add(
           ViewByOrderDetailsEvent.updateMaterialTenderContract(
@@ -294,6 +335,7 @@ void main() {
         build: () => ViewByOrderDetailsBloc(
           viewByOrderDetailsRepository: viewByOrderDetailsRepositoryMock,
           productDetailRepository: productDetailRepositoryMock,
+          viewByItemRepository: viewByItemRepositoryMock,
         ),
         act: (bloc) => bloc.add(
           const ViewByOrderDetailsEvent.expandAttachments(),
@@ -309,6 +351,7 @@ void main() {
         final bloc = ViewByOrderDetailsBloc(
           viewByOrderDetailsRepository: viewByOrderDetailsRepositoryMock,
           productDetailRepository: productDetailRepositoryMock,
+          viewByItemRepository: viewByItemRepositoryMock,
         );
         bloc.emit(
           ViewByOrderDetailsState.initial()
@@ -323,6 +366,7 @@ void main() {
         final bloc = ViewByOrderDetailsBloc(
           viewByOrderDetailsRepository: viewByOrderDetailsRepositoryMock,
           productDetailRepository: productDetailRepositoryMock,
+          viewByItemRepository: viewByItemRepositoryMock,
         );
         bloc.emit(
           ViewByOrderDetailsState.initial().copyWith(
@@ -348,6 +392,7 @@ void main() {
         final bloc = ViewByOrderDetailsBloc(
           viewByOrderDetailsRepository: viewByOrderDetailsRepositoryMock,
           productDetailRepository: productDetailRepositoryMock,
+          viewByItemRepository: viewByItemRepositoryMock,
         );
         bloc.emit(
           ViewByOrderDetailsState.initial().copyWith(
@@ -379,6 +424,7 @@ void main() {
         final bloc = ViewByOrderDetailsBloc(
           viewByOrderDetailsRepository: viewByOrderDetailsRepositoryMock,
           productDetailRepository: productDetailRepositoryMock,
+          viewByItemRepository: viewByItemRepositoryMock,
         );
         bloc.emit(
           ViewByOrderDetailsState.initial().copyWith(
@@ -395,6 +441,7 @@ void main() {
         final bloc = ViewByOrderDetailsBloc(
           viewByOrderDetailsRepository: viewByOrderDetailsRepositoryMock,
           productDetailRepository: productDetailRepositoryMock,
+          viewByItemRepository: viewByItemRepositoryMock,
         );
         bloc.emit(
           ViewByOrderDetailsState.initial().copyWith(

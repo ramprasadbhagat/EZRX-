@@ -17,9 +17,9 @@ class OrderHistoryDetailsPaymentTerm with _$OrderHistoryDetailsPaymentTerm {
 
   String get displayPaymentTerm {
     if (!paymentTermCode.isValid() && !paymentTermDescription.isValid()) {
-    return 'NA';
+      return 'NA';
     }
-    
-    return '${paymentTermCode.getValue().trim()}${paymentTermDescription.isValid() ? ' - $paymentTermDescription' : ''}';
-}
+
+    return '${paymentTermCode.getValue().trim()}${paymentTermDescription.isValid() ? ' - ${paymentTermDescription.displayPaymentTermDescription}' : ''}';
+  }
 }

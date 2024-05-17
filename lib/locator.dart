@@ -1201,6 +1201,7 @@ void setupLocator() {
     () => ViewByOrderDetailsBloc(
       viewByOrderDetailsRepository: locator<ViewByOrderDetailsRepository>(),
       productDetailRepository: locator<ProductDetailRepository>(),
+      viewByItemRepository: locator<ViewByItemRepository>(),
     ),
   );
 

@@ -316,6 +316,8 @@ class StatusType extends ValueObject<String> {
 
   String get statusLabel => getOrderSAPStatus(value.getOrElse(() => ''));
 
+  bool get isStatusTagValid => value.getOrElse(() => '').isNotEmpty;
+
   const StatusType._(this.value);
 }
 

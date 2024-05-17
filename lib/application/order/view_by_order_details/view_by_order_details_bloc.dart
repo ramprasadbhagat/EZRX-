@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
+import 'package:ezrxmobile/domain/order/repository/i_view_by_item_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
@@ -26,10 +27,11 @@ class ViewByOrderDetailsBloc
     extends Bloc<ViewByOrderDetailsEvent, ViewByOrderDetailsState> {
   final IViewByOrderDetailsRepository viewByOrderDetailsRepository;
   final IProductDetailRepository productDetailRepository;
-
+  final IViewByItemRepository viewByItemRepository;
   ViewByOrderDetailsBloc({
     required this.viewByOrderDetailsRepository,
     required this.productDetailRepository,
+    required this.viewByItemRepository,
   }) : super(ViewByOrderDetailsState.initial()) {
     on<ViewByOrderDetailsEvent>(_onEvent);
   }
@@ -88,6 +90,11 @@ class ViewByOrderDetailsBloc
                     if (item.orderItem.isTenderContractMaterial)
                       item.orderItem.queryInfo: true,
                 },
+              ),
+            );
+            add(
+              _FetchOrdersInvoiceData(
+                orderHistoryDetails: orderHistoryDetails,
               ),
             );
             add(const _UpdateBundle());
@@ -178,6 +185,44 @@ class ViewByOrderDetailsBloc
                   .toList(),
             ),
           ),
+        );
+      },
+      fetchOrdersInvoiceData: (_FetchOrdersInvoiceData e) async {
+        if (e.orderHistoryDetails.orderHistoryDetailsOrderItem.isEmpty) return;
+
+        emit(
+          state.copyWith(
+            isFetchingInvoices: true,
+            failureOrSuccessOption: none(),
+          ),
+        );
+
+        final failureOrSuccess =
+            await viewByItemRepository.getOrdersInvoiceData(
+          orderNumbers: [e.orderHistoryDetails.orderNumber],
+        );
+
+        failureOrSuccess.fold(
+          (failure) {
+            emit(
+              state.copyWith(
+                failureOrSuccessOption: optionOf(failureOrSuccess),
+                isFetchingInvoices: false,
+              ),
+            );
+          },
+          (invoiceDataMap) {
+            emit(
+              state.copyWith(
+                orderHistoryDetails:
+                    state.orderHistoryDetails.copyWithInvoiceNumber(
+                  invoiceDataMap: invoiceDataMap,
+                ),
+                failureOrSuccessOption: none(),
+                isFetchingInvoices: false,
+              ),
+            );
+          },
         );
       },
     );

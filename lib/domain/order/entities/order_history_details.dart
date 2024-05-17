@@ -3,6 +3,7 @@ import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.da
 import 'package:ezrxmobile/domain/core/aggregate/bonus_aggregate.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/order/entities/invoice_data.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/material_query_info.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_payment_term.dart';
@@ -183,6 +184,33 @@ class OrderHistoryDetails with _$OrderHistoryDetails {
 
   bool get isCovidMaterialAvailable =>
       orderHistoryDetailsOrderItem.any((element) => element.isCovid);
+
+  OrderHistoryDetails copyWithInvoiceNumber({
+    required Map<StringValue, InvoiceData> invoiceDataMap,
+  }) =>
+      copyWith(
+        orderHistoryDetailsOrderItem: orderHistoryDetailsOrderItem.map((e) {
+          final hashId = e.gethashId(orderNumber: orderNumber);
+
+          return e.copyWith(
+            invoiceNumber:
+                invoiceDataMap[hashId]?.invoiceNumber ?? e.invoiceNumber,
+          );
+        }).toList(),
+      );
+
+  StringValue getInvoiceNumber({
+    required MaterialNumber materialNumber,
+    required LineNumber lineNumber,
+  }) =>
+      orderHistoryDetailsOrderItem
+          .firstWhere(
+            (item) =>
+                item.materialNumber == materialNumber &&
+                item.lineNumber == lineNumber,
+            orElse: () => OrderHistoryDetailsOrderItem.empty(),
+          )
+          .invoiceNumber;
 }
 
 extension ViewByOrderListExtension on List<OrderHistoryDetails> {

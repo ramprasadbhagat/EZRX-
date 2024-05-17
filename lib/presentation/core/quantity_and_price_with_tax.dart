@@ -13,7 +13,7 @@ class QuantityAndPriceWithTax extends StatelessWidget {
   final String netPrice;
   final double taxPercentage;
   final double? taxValue;
-
+  final bool isTopAligned;
   const QuantityAndPriceWithTax._({
     Key? key,
     required this.quantity,
@@ -21,19 +21,23 @@ class QuantityAndPriceWithTax extends StatelessWidget {
     required this.taxPercentage,
     required this.netPrice,
     this.taxValue,
+    this.isTopAligned = false,
   }) : super(key: key);
 
   factory QuantityAndPriceWithTax.order({
-  required int quantity,
-  String quantityDescription = '',
-  required String netPrice,
-  required double taxPercentage,
-  }) => QuantityAndPriceWithTax._(
-    quantity: quantity,
-    quantityDescription: quantityDescription,
-    netPrice: netPrice,
-    taxPercentage: taxPercentage,
-  );
+    required int quantity,
+    String quantityDescription = '',
+    required String netPrice,
+    required double taxPercentage,
+    bool isTopAlignment = false,
+  }) =>
+      QuantityAndPriceWithTax._(
+        quantity: quantity,
+        quantityDescription: quantityDescription,
+        netPrice: netPrice,
+        taxPercentage: taxPercentage,
+        isTopAligned: isTopAlignment,
+      );
 
   factory QuantityAndPriceWithTax.invoice({
     required int quantity,
@@ -46,7 +50,6 @@ class QuantityAndPriceWithTax extends StatelessWidget {
         netPrice: netPrice,
         taxValue: taxValue,
         taxPercentage: taxPercentage,
-
       );
 
   @override
@@ -57,8 +60,11 @@ class QuantityAndPriceWithTax extends StatelessWidget {
 
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      crossAxisAlignment:
+          isTopAligned ? CrossAxisAlignment.start : CrossAxisAlignment.center,
       children: [
         Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
               '${context.tr('Qty')}: $quantity',

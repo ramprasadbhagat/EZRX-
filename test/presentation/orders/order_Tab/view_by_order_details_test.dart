@@ -33,6 +33,7 @@ import 'package:ezrxmobile/domain/order/entities/order_history_details.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_order_items.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_payment_term.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_po_documents.dart';
+import 'package:ezrxmobile/domain/order/entities/order_history_details_tender_contract.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_item.dart';
 import 'package:ezrxmobile/domain/order/entities/payment_customer_information.dart';
 import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
@@ -118,8 +119,11 @@ void main() {
         await CustomerCodeLocalDataSource().getCustomerCodeList();
     locator.registerLazySingleton<MixpanelService>(() => MixpanelServiceMock());
     viewByOrder = await ViewByOrderLocalDataSource().getViewByOrders();
-    fakeOrderHistoryItem =
-        viewByOrder.orderHeaders.first.orderHistoryDetailsOrderItem.first;
+    fakeOrderHistoryItem = viewByOrder
+        .orderHeaders.first.orderHistoryDetailsOrderItem.first
+        .copyWith(
+      expiryDate: DateTimeStringValue('2023-10-04'),
+    );
     customerLicense =
         await CustomerLicenseLocalDataSource().getCustomerLicense();
     viewByOrderWithCounterOffer = viewByOrder.copyWith(
@@ -895,6 +899,7 @@ void main() {
         ),
       );
       final fakeBatch = StringValue('fake-batch');
+
       final expectedStates = [
         ViewByOrderDetailsState.initial().copyWith(
           orderHistoryDetails: OrderHistoryDetails.empty().copyWith(
@@ -916,7 +921,7 @@ void main() {
       await tester.fling(find.byType(ListView), const Offset(0, -10000), 100);
       await tester.pumpAndSettle();
       final expectedDelivery = find.textContaining(
-        '${'Batch'.tr()}: ${fakeBatch.displayDashIfEmpty}\n(${'Expires'.tr()}: ${fakeOrderHistoryItem.expiryDate.dateOrDashString})',
+        '${'Batch'.tr()}: ${fakeBatch.displayDashIfEmpty} - ${'Expires'.tr()}: ${fakeOrderHistoryItem.expiryDate.dateOrDashString}',
         findRichText: true,
       );
       expect(expectedDelivery, findsOneWidget);
@@ -2334,11 +2339,11 @@ void main() {
         findsNothing,
       );
       await tester.pumpAndSettle();
-      final batchExpiryDate = tester
-          .widget<RichText>(find.byKey(WidgetKeys.commonTileItemHeader))
-          .text
-          .toPlainText();
-      expect(batchExpiryDate, contains('Batch: NA (Expires: NA)'));
+      final batchExpiryDate = find.textContaining(
+        'Batch: NA - Expires: NA',
+        findRichText: true,
+      );
+      expect(batchExpiryDate, findsOneWidget);
     });
 
     testWidgets('Marketplace bundle displayed with batch & exp as NA',
@@ -2559,7 +2564,8 @@ void main() {
       await tester.pumpWidget(getScopedWidget());
       await tester.pump();
 
-      final buyAgainButton = find.byKey(WidgetKeys.viewByOrderBuyAgainButtonKey);
+      final buyAgainButton =
+          find.byKey(WidgetKeys.viewByOrderBuyAgainButtonKey);
       expect(buyAgainButton, findsOneWidget);
       final addToCartErrorSection =
           find.byKey(WidgetKeys.addToCartErrorSection);
@@ -2598,13 +2604,228 @@ void main() {
       await tester.pumpWidget(getScopedWidget());
       await tester.pump();
 
-      final buyAgainButton = find.byKey(WidgetKeys.viewByOrderBuyAgainButtonKey);
+      final buyAgainButton =
+          find.byKey(WidgetKeys.viewByOrderBuyAgainButtonKey);
       expect(buyAgainButton, findsOneWidget);
       final addToCartErrorSection =
           find.byKey(WidgetKeys.addToCartErrorSection);
       await tester.tap(buyAgainButton);
       await tester.pump(const Duration(seconds: 2));
       expect(addToCartErrorSection, findsOneWidget);
+    });
+
+    testWidgets('Display tender information when collapsed', (tester) async {
+      final fakeTenderOrderReason = TenderContractReason('730');
+      final fakeTenderContractNumber =
+          TenderContractNumber.tenderContractNumber('0040026522');
+      final fakeTenderContractReference =
+          TenderContractNumber.tenderContractReference('HCM-01234');
+      final fakeTenderPrice = TenderPrice('11832000');
+
+      when(() => viewByOrderDetailsBlocMock.state).thenReturn(
+        ViewByOrderDetailsState.initial().copyWith(
+          orderHistoryDetails: OrderHistoryDetails.empty().copyWith(
+            orderHistoryDetailsOrderItem: [
+              fakeOrderHistoryItem.copyWith(
+                tenderContractDetails:
+                    OrderHistoryDetailsTenderContract.empty().copyWith(
+                  contractNumber: fakeTenderContractNumber,
+                  contractReference: fakeTenderContractReference.getValue(),
+                  price: fakeTenderPrice.getValue(),
+                  orderReason: fakeTenderOrderReason,
+                ),
+              ),
+            ],
+          ),
+        ),
+      );
+
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pumpAndSettle();
+      final detail = find.byType(OrderItemDetailsSection);
+      await tester.dragUntilVisible(
+        find.byType(OrderItemDetailsSection),
+        find.byKey(WidgetKeys.scrollList),
+        const Offset(0, -550),
+      );
+
+      expect(detail, findsOneWidget);
+      expect(
+        find.descendant(
+          of: detail,
+          matching: find.byKey(WidgetKeys.tenderExpandableSection),
+        ),
+        findsOneWidget,
+      );
+
+      expect(
+        find.descendant(
+          of: detail,
+          matching: find.byWidgetPredicate(
+            (widget) =>
+                widget.key == WidgetKeys.tenderOrderReason &&
+                widget is Text &&
+                widget.data!.contains(
+                  '${fakeTenderOrderReason.getOrCrash()} - Contract Tender',
+                ),
+          ),
+        ),
+        findsOneWidget,
+      );
+
+      expect(
+        find.descendant(
+          of: detail,
+          matching: find.byWidgetPredicate(
+            (widget) =>
+                widget.key == WidgetKeys.tenderContractNumber &&
+                widget is Text &&
+                widget.data == fakeTenderContractNumber.getOrCrash(),
+          ),
+        ),
+        findsOneWidget,
+      );
+    });
+
+    testWidgets(
+        'Do not display tender information when Tender Order Reason is empty',
+        (tester) async {
+      final fakeTenderOrderReason = TenderContractReason('');
+      final fakeTenderContractNumber =
+          TenderContractNumber.tenderContractNumber('');
+      final fakeTenderContractReference =
+          TenderContractNumber.tenderContractReference('');
+      final fakeTenderPrice = TenderPrice('');
+
+      when(() => viewByOrderDetailsBlocMock.state).thenReturn(
+        ViewByOrderDetailsState.initial().copyWith(
+          orderHistoryDetails: OrderHistoryDetails.empty().copyWith(
+            orderHistoryDetailsOrderItem: [
+              fakeOrderHistoryItem,
+            ],
+          ),
+        ),
+      );
+      when(() => mockViewByItemDetailsBloc.state).thenReturn(
+        ViewByItemDetailsState.initial().copyWith(
+          orderHistory: OrderHistory.empty().copyWith(
+            orderHistoryItems: [
+              OrderHistoryItem.empty().copyWith(
+                qty: 10,
+                materialNumber: MaterialNumber('000000000021247719'),
+                unitPrice: 17.2,
+                totalPrice: 516,
+                tenderContractNumber: fakeTenderContractNumber,
+                tenderOrderReason: fakeTenderOrderReason,
+                tenderPrice: fakeTenderPrice,
+                tenderContractReference: fakeTenderContractReference,
+              ),
+            ],
+          ),
+        ),
+      );
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pumpAndSettle();
+      final detail = find.byType(OrderItemDetailsSection);
+      await tester.dragUntilVisible(
+        find.byType(OrderItemDetailsSection),
+        find.byKey(WidgetKeys.scrollList),
+        const Offset(0, -550),
+      );
+
+      expect(detail, findsOneWidget);
+      expect(
+        find.descendant(
+          of: detail,
+          matching: find.byKey(WidgetKeys.tenderExpandableSection),
+        ),
+        findsNothing,
+      );
+    });
+
+    testWidgets('Invoice Number Loading', (tester) async {
+      final orderHistoryDetails = OrderHistoryDetails.empty().copyWith(
+        orderHistoryDetailsOrderItem: [
+          viewByOrder.orderHeaders.first.orderHistoryDetailsOrderItem.first
+              .copyWith(invoiceNumber: StringValue('fake-Invoice')),
+        ],
+      );
+      when(() => viewByOrderDetailsBlocMock.state).thenReturn(
+        ViewByOrderDetailsState.initial().copyWith(
+          isFetchingInvoices: true,
+          orderHistoryDetails: orderHistoryDetails,
+        ),
+      );
+      final expectedState = [
+        ViewByOrderDetailsState.initial().copyWith(
+          isFetchingInvoices: true,
+          orderHistoryDetails: orderHistoryDetails,
+        ),
+      ];
+      whenListen(
+        viewByOrderDetailsBlocMock,
+        Stream.fromIterable(expectedState),
+      );
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pump();
+      final detail = find.byType(OrderItemDetailsSection);
+      await tester.dragUntilVisible(
+        find.byType(OrderItemDetailsSection),
+        find.byKey(WidgetKeys.scrollList),
+        const Offset(0, -550),
+      );
+
+      expect(detail, findsOneWidget);
+      expect(
+        find.descendant(
+          of: detail,
+          matching: find.byType(LoadingShimmer),
+        ),
+        findsOneWidget,
+      );
+    });
+
+    testWidgets('Invoice Number Loaded', (tester) async {
+      final fakeInvoice = StringValue('fake-Invoice');
+      final orderHistoryDetails = OrderHistoryDetails.empty().copyWith(
+        orderHistoryDetailsOrderItem: [
+          viewByOrder.orderHeaders.first.orderHistoryDetailsOrderItem.first
+              .copyWith(invoiceNumber: fakeInvoice),
+        ],
+      );
+      when(() => viewByOrderDetailsBlocMock.state).thenReturn(
+        ViewByOrderDetailsState.initial().copyWith(
+          isFetchingInvoices: false,
+          orderHistoryDetails: orderHistoryDetails,
+        ),
+      );
+      final expectedState = [
+        ViewByOrderDetailsState.initial().copyWith(
+          isFetchingInvoices: false,
+          orderHistoryDetails: orderHistoryDetails,
+        ),
+      ];
+      whenListen(
+        viewByOrderDetailsBlocMock,
+        Stream.fromIterable(expectedState),
+      );
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pump();
+      final detail = find.byType(OrderItemDetailsSection);
+      await tester.dragUntilVisible(
+        find.byType(OrderItemDetailsSection),
+        find.byKey(WidgetKeys.scrollList),
+        const Offset(0, -550),
+      );
+
+      expect(detail, findsOneWidget);
+      expect(
+        find.descendant(
+          of: detail,
+          matching: find.textContaining('Invoice #${fakeInvoice.getOrCrash()}'),
+        ),
+        findsOneWidget,
+      );
     });
   });
 }

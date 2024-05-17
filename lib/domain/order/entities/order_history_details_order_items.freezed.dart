@@ -50,6 +50,7 @@ mixin _$OrderHistoryDetailsOrderItem {
   bool get hidePrice => throw _privateConstructorUsedError;
   bool get isMarketPlace => throw _privateConstructorUsedError;
   bool get isCovid => throw _privateConstructorUsedError;
+  StringValue get invoiceNumber => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $OrderHistoryDetailsOrderItemCopyWith<OrderHistoryDetailsOrderItem>
@@ -95,7 +96,8 @@ abstract class $OrderHistoryDetailsOrderItemCopyWith<$Res> {
       bool isCounterOffer,
       bool hidePrice,
       bool isMarketPlace,
-      bool isCovid});
+      bool isCovid,
+      StringValue invoiceNumber});
 
   $OrderHistoryDetailsTenderContractCopyWith<$Res> get tenderContractDetails;
   $PrincipalDataCopyWith<$Res> get principalData;
@@ -150,6 +152,7 @@ class _$OrderHistoryDetailsOrderItemCopyWithImpl<$Res,
     Object? hidePrice = null,
     Object? isMarketPlace = null,
     Object? isCovid = null,
+    Object? invoiceNumber = null,
   }) {
     return _then(_value.copyWith(
       type: null == type
@@ -276,6 +279,10 @@ class _$OrderHistoryDetailsOrderItemCopyWithImpl<$Res,
           ? _value.isCovid
           : isCovid // ignore: cast_nullable_to_non_nullable
               as bool,
+      invoiceNumber: null == invoiceNumber
+          ? _value.invoiceNumber
+          : invoiceNumber // ignore: cast_nullable_to_non_nullable
+              as StringValue,
     ) as $Val);
   }
 
@@ -369,7 +376,8 @@ abstract class _$$OrderHistoryDetailsOrderItemImplCopyWith<$Res>
       bool isCounterOffer,
       bool hidePrice,
       bool isMarketPlace,
-      bool isCovid});
+      bool isCovid,
+      StringValue invoiceNumber});
 
   @override
   $OrderHistoryDetailsTenderContractCopyWith<$Res> get tenderContractDetails;
@@ -429,6 +437,7 @@ class __$$OrderHistoryDetailsOrderItemImplCopyWithImpl<$Res>
     Object? hidePrice = null,
     Object? isMarketPlace = null,
     Object? isCovid = null,
+    Object? invoiceNumber = null,
   }) {
     return _then(_$OrderHistoryDetailsOrderItemImpl(
       type: null == type
@@ -555,6 +564,10 @@ class __$$OrderHistoryDetailsOrderItemImplCopyWithImpl<$Res>
           ? _value.isCovid
           : isCovid // ignore: cast_nullable_to_non_nullable
               as bool,
+      invoiceNumber: null == invoiceNumber
+          ? _value.invoiceNumber
+          : invoiceNumber // ignore: cast_nullable_to_non_nullable
+              as StringValue,
     ));
   }
 }
@@ -593,7 +606,8 @@ class _$OrderHistoryDetailsOrderItemImpl extends _OrderHistoryDetailsOrderItem {
       required this.isCounterOffer,
       required this.hidePrice,
       required this.isMarketPlace,
-      required this.isCovid})
+      required this.isCovid,
+      required this.invoiceNumber})
       : _details = details,
         super._();
 
@@ -665,10 +679,12 @@ class _$OrderHistoryDetailsOrderItemImpl extends _OrderHistoryDetailsOrderItem {
   final bool isMarketPlace;
   @override
   final bool isCovid;
+  @override
+  final StringValue invoiceNumber;
 
   @override
   String toString() {
-    return 'OrderHistoryDetailsOrderItem(type: $type, materialNumber: $materialNumber, materialDescription: $materialDescription, qty: $qty, unitPrice: $unitPrice, originPrice: $originPrice, totalPrice: $totalPrice, tax: $tax, sAPStatus: $sAPStatus, plannedDeliveryDate: $plannedDeliveryDate, pickedQuantity: $pickedQuantity, batch: $batch, expiryDate: $expiryDate, lineReferenceNotes: $lineReferenceNotes, lineNumber: $lineNumber, isTenderContractMaterial: $isTenderContractMaterial, details: $details, tenderContractDetails: $tenderContractDetails, principalData: $principalData, productImages: $productImages, governmentMaterialCode: $governmentMaterialCode, materialStockInfo: $materialStockInfo, priceAggregate: $priceAggregate, productType: $productType, parentId: $parentId, material: $material, promoStatus: $promoStatus, isCounterOffer: $isCounterOffer, hidePrice: $hidePrice, isMarketPlace: $isMarketPlace, isCovid: $isCovid)';
+    return 'OrderHistoryDetailsOrderItem(type: $type, materialNumber: $materialNumber, materialDescription: $materialDescription, qty: $qty, unitPrice: $unitPrice, originPrice: $originPrice, totalPrice: $totalPrice, tax: $tax, sAPStatus: $sAPStatus, plannedDeliveryDate: $plannedDeliveryDate, pickedQuantity: $pickedQuantity, batch: $batch, expiryDate: $expiryDate, lineReferenceNotes: $lineReferenceNotes, lineNumber: $lineNumber, isTenderContractMaterial: $isTenderContractMaterial, details: $details, tenderContractDetails: $tenderContractDetails, principalData: $principalData, productImages: $productImages, governmentMaterialCode: $governmentMaterialCode, materialStockInfo: $materialStockInfo, priceAggregate: $priceAggregate, productType: $productType, parentId: $parentId, material: $material, promoStatus: $promoStatus, isCounterOffer: $isCounterOffer, hidePrice: $hidePrice, isMarketPlace: $isMarketPlace, isCovid: $isCovid, invoiceNumber: $invoiceNumber)';
   }
 
   @override
@@ -732,7 +748,9 @@ class _$OrderHistoryDetailsOrderItemImpl extends _OrderHistoryDetailsOrderItem {
                 other.hidePrice == hidePrice) &&
             (identical(other.isMarketPlace, isMarketPlace) ||
                 other.isMarketPlace == isMarketPlace) &&
-            (identical(other.isCovid, isCovid) || other.isCovid == isCovid));
+            (identical(other.isCovid, isCovid) || other.isCovid == isCovid) &&
+            (identical(other.invoiceNumber, invoiceNumber) ||
+                other.invoiceNumber == invoiceNumber));
   }
 
   @override
@@ -768,7 +786,8 @@ class _$OrderHistoryDetailsOrderItemImpl extends _OrderHistoryDetailsOrderItem {
         isCounterOffer,
         hidePrice,
         isMarketPlace,
-        isCovid
+        isCovid,
+        invoiceNumber
       ]);
 
   @JsonKey(ignore: true)
@@ -813,7 +832,9 @@ abstract class _OrderHistoryDetailsOrderItem
       required final bool isCounterOffer,
       required final bool hidePrice,
       required final bool isMarketPlace,
-      required final bool isCovid}) = _$OrderHistoryDetailsOrderItemImpl;
+      required final bool isCovid,
+      required final StringValue
+          invoiceNumber}) = _$OrderHistoryDetailsOrderItemImpl;
   _OrderHistoryDetailsOrderItem._() : super._();
 
   @override
@@ -878,6 +899,8 @@ abstract class _OrderHistoryDetailsOrderItem
   bool get isMarketPlace;
   @override
   bool get isCovid;
+  @override
+  StringValue get invoiceNumber;
   @override
   @JsonKey(ignore: true)
   _$$OrderHistoryDetailsOrderItemImplCopyWith<
