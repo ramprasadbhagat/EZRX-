@@ -14,7 +14,7 @@ parameters:
       - sg
       - ph
       - tw
-      - vn
+      - vn  
       - mm
       - th
       - kh
@@ -35,6 +35,9 @@ parameters:
     type: boolean
     default: false  
 
+  - name: schedule
+    type: string 
+    default: disable
 
   - name: max_test_time 
     displayName: Max Test Time
@@ -412,9 +415,22 @@ stages:
             targetType: 'inline'       
             script: |
               w3m -dump .azure-pipelines/template.html
-
-- stage: MSTeamsNotificationStage
+              
+- stage:
+  displayName: Run Unit Test
+  condition: ${{ eq(parameters.schedule, 'enable') }}
   dependsOn: [AndroidUATRegressionJob]
+  jobs:
+  - job: unitTest
+    displayName: Run Unit Test
+    steps:
+    - bash: flutter test --coverage
+      displayName: Run Flutter Test
+
+    - bash: genhtml coverage/lcov.info -o coverage/html
+      displayName: Generate HTML File
+        
+- stage: MSTeamsNotificationStage
   displayName: MSTeams Notification Stage
   condition: succeeded()  
   jobs:
@@ -471,6 +487,12 @@ stages:
 
           cat .azure-pipelines/template.html
 
+    - task: LakshayKaushik.PublishHTMLReports.publishhtmlreport.publishhtmlreport@1
+      displayName: Push Report To Azure DevOps Pipeline
+      inputs:
+        htmlType: 'genericHTML'
+        htmlPath: '$(System.DefaultWorkingDirectory)/coverage/html'           
+        
     - task: Bash@3
       displayName: Push Notification
       inputs:
@@ -482,13 +504,18 @@ stages:
         MICROSOFT_TEAMS_BUILD_CHANNEL: '$(MICROSOFT_TEAMS_BUILD_CHANNEL)'
 
 - stage: MSTeamsFailedNotificationStage
-  dependsOn: [AndroidUATRegressionJob]
   displayName: MSTeams Failed Notification Stage
   condition: failed()
   jobs:
   - job: MSTeamsFailedNotificationUatJob
     displayName: MSTeams Failed Notification 
     steps:  
+    - task: LakshayKaushik.PublishHTMLReports.publishhtmlreport.publishhtmlreport@1
+      displayName: Push Report To Azure DevOps Pipeline
+      inputs:
+        htmlType: 'genericHTML'
+        htmlPath: '$(System.DefaultWorkingDirectory)/.azure-pipelines/template.html'   
+
     - task: Bash@3
       displayName: Push Notification When Failed
       inputs:
