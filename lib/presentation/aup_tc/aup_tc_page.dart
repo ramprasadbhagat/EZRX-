@@ -39,9 +39,7 @@ class AupTCPage extends StatelessWidget {
       child: BlocProvider(
         create: (context) => locator<AupTcBloc>()..add(AupTcEvent.show(user)),
         child: BlocBuilder<AupTcBloc, AupTcState>(
-          buildWhen: (previous, current) =>
-              previous.tncFile != current.tncFile ||
-              previous.privacyFile != current.privacyFile,
+          buildWhen: (previous, current) => previous.user != current.user,
           builder: (context, state) {
             return Scaffold(
               appBar: AppBar(
@@ -119,7 +117,7 @@ class AupTCPage extends StatelessWidget {
                       Expanded(
                         child: _ConsentBox(
                           key: WidgetKeys.tncContentBox,
-                          url: state.tncFile,
+                          url: state.user.tncFile,
                         ),
                       ),
                       const SizedBox(
@@ -128,7 +126,9 @@ class AupTCPage extends StatelessWidget {
                       Expanded(
                         child: _ConsentBox(
                           key: WidgetKeys.privacyContentBox,
-                          url: state.privacyFile,
+                          url: isMarketPlace
+                              ? state.user.marketPlacePrivacyPolicyFile
+                              : state.user.privacyPolicyFile,
                         ),
                       ),
                       const SizedBox(

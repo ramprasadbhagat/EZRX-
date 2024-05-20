@@ -162,29 +162,6 @@ class Config {
       'http://zpregistration.zuelligpharma.com/Registration/Index';
 
   //============================================================
-  //  Privacy Policy
-  //============================================================
-
-  String get getPrivacyPolicyFile {
-    return 'assets/html/eZRxPrivacyPolicy.html';
-  }
-
-  String get staticPrivacyPolicyFile {
-    return 'assets/html/ezrx-privacy_policy_st.html';
-  }
-
-  //============================================================
-  //  Term and Condition
-  //============================================================
-  String get getTnCFile {
-    return 'assets/html/eZRxTermsOfUse.html';
-  }
-
-  String get staticTermsOfUseFile {
-    return 'assets/html/ezrx-terms_of_use_st.html';
-  }
-
-  //============================================================
   //  Firebase
   //
   //============================================================

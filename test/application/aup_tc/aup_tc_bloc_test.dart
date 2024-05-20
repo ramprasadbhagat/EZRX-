@@ -76,8 +76,7 @@ void main() {
         },
         expect: () => [
           AupTcState(
-            privacyFile: config.getPrivacyPolicyFile,
-            tncFile: config.getTnCFile,
+            user: user.copyWith(acceptPrivacyPolicy: false),
             tncConsent: false,
             privacyConsent: false,
           ),
@@ -99,8 +98,7 @@ void main() {
         },
         expect: () => [
           AupTcState(
-            privacyFile: config.getPrivacyPolicyFile,
-            tncFile: config.getTnCFile,
+            user: user.copyWith(acceptPrivacyPolicy: true),
             tncConsent: false,
             privacyConsent: false,
           ),
@@ -123,8 +121,7 @@ void main() {
         },
         expect: () => [
           AupTcState(
-            privacyFile: config.getPrivacyPolicyFile,
-            tncFile: config.getTnCFile,
+            user: user.copyWith(acceptPrivacyPolicy: false),
             tncConsent: false,
             privacyConsent: false,
           ),
@@ -147,8 +144,7 @@ void main() {
         },
         expect: () => [
           AupTcState(
-            privacyFile: config.getPrivacyPolicyFile,
-            tncFile: config.getTnCFile,
+            user: user.copyWith(acceptPrivacyPolicy: false),
             tncConsent: false,
             privacyConsent: false,
           ),
@@ -171,8 +167,7 @@ void main() {
         },
         expect: () => [
           AupTcState(
-            privacyFile: config.getPrivacyPolicyFile,
-            tncFile: config.getTnCFile,
+            user: user.copyWith(acceptPrivacyPolicy: false),
             tncConsent: false,
             privacyConsent: false,
           ),
@@ -195,8 +190,7 @@ void main() {
         },
         expect: () => [
           AupTcState(
-            privacyFile: config.getPrivacyPolicyFile,
-            tncFile: config.getTnCFile,
+            user: user.copyWith(acceptPrivacyPolicy: false),
             tncConsent: false,
             privacyConsent: false,
           ),
@@ -219,8 +213,7 @@ void main() {
         },
         expect: () => [
           AupTcState(
-            privacyFile: config.getPrivacyPolicyFile,
-            tncFile: config.getTnCFile,
+            user: user.copyWith(acceptPrivacyPolicy: false),
             tncConsent: false,
             privacyConsent: false,
           ),
@@ -231,8 +224,7 @@ void main() {
         '''Loged in and userbloc state is Not empty, tncConsent - true
         ''',
         seed: () => AupTcState(
-          privacyFile: config.getPrivacyPolicyFile,
-          tncFile: config.getTnCFile,
+          user: user,
           tncConsent: false,
           privacyConsent: false,
         ),
@@ -247,8 +239,7 @@ void main() {
         },
         expect: () => [
           AupTcState(
-            privacyFile: config.getPrivacyPolicyFile,
-            tncFile: config.getTnCFile,
+            user: user,
             tncConsent: true,
             privacyConsent: false,
           ),
@@ -259,8 +250,7 @@ void main() {
         '''Loged in and userbloc state is Not empty, acceptPrivacyPolicy - true
         ''',
         seed: () => AupTcState(
-          privacyFile: config.getPrivacyPolicyFile,
-          tncFile: config.getTnCFile,
+          user: user,
           tncConsent: false,
           privacyConsent: false,
         ),
@@ -275,8 +265,7 @@ void main() {
         },
         expect: () => [
           AupTcState(
-            privacyFile: config.getPrivacyPolicyFile,
-            tncFile: config.getTnCFile,
+            user: user,
             tncConsent: false,
             privacyConsent: true,
           ),

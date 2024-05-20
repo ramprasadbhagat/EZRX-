@@ -5,15 +5,13 @@ class AupTcState with _$AupTcState {
   const AupTcState._();
 
   const factory AupTcState({
-    required String tncFile,
-    required String privacyFile,
+    required User user,
     required bool tncConsent,
     required bool privacyConsent,
   }) = _AupTcState;
 
-  factory AupTcState.initial() => const AupTcState(
-        tncFile: '',
-        privacyFile: '',
+  factory AupTcState.initial() => AupTcState(
+        user: User.empty(),
         tncConsent: false,
         privacyConsent: false,
       );

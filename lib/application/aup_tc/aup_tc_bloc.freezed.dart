@@ -12,7 +12,7 @@ part of 'aup_tc_bloc.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$AupTcEvent {
@@ -81,9 +81,10 @@ class _$AupTcEventCopyWithImpl<$Res, $Val extends AupTcEvent>
 }
 
 /// @nodoc
-abstract class _$$_ShowCopyWith<$Res> {
-  factory _$$_ShowCopyWith(_$_Show value, $Res Function(_$_Show) then) =
-      __$$_ShowCopyWithImpl<$Res>;
+abstract class _$$ShowImplCopyWith<$Res> {
+  factory _$$ShowImplCopyWith(
+          _$ShowImpl value, $Res Function(_$ShowImpl) then) =
+      __$$ShowImplCopyWithImpl<$Res>;
   @useResult
   $Res call({User user});
 
@@ -91,10 +92,10 @@ abstract class _$$_ShowCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_ShowCopyWithImpl<$Res>
-    extends _$AupTcEventCopyWithImpl<$Res, _$_Show>
-    implements _$$_ShowCopyWith<$Res> {
-  __$$_ShowCopyWithImpl(_$_Show _value, $Res Function(_$_Show) _then)
+class __$$ShowImplCopyWithImpl<$Res>
+    extends _$AupTcEventCopyWithImpl<$Res, _$ShowImpl>
+    implements _$$ShowImplCopyWith<$Res> {
+  __$$ShowImplCopyWithImpl(_$ShowImpl _value, $Res Function(_$ShowImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -102,7 +103,7 @@ class __$$_ShowCopyWithImpl<$Res>
   $Res call({
     Object? user = null,
   }) {
-    return _then(_$_Show(
+    return _then(_$ShowImpl(
       null == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
@@ -121,8 +122,8 @@ class __$$_ShowCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_Show implements _Show {
-  const _$_Show(this.user);
+class _$ShowImpl implements _Show {
+  const _$ShowImpl(this.user);
 
   @override
   final User user;
@@ -133,10 +134,10 @@ class _$_Show implements _Show {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Show &&
+            other is _$ShowImpl &&
             (identical(other.user, user) || other.user == user));
   }
 
@@ -146,8 +147,8 @@ class _$_Show implements _Show {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ShowCopyWith<_$_Show> get copyWith =>
-      __$$_ShowCopyWithImpl<_$_Show>(this, _$identity);
+  _$$ShowImplCopyWith<_$ShowImpl> get copyWith =>
+      __$$ShowImplCopyWithImpl<_$ShowImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -219,28 +220,29 @@ class _$_Show implements _Show {
 }
 
 abstract class _Show implements AupTcEvent {
-  const factory _Show(final User user) = _$_Show;
+  const factory _Show(final User user) = _$ShowImpl;
 
   User get user;
   @JsonKey(ignore: true)
-  _$$_ShowCopyWith<_$_Show> get copyWith => throw _privateConstructorUsedError;
+  _$$ShowImplCopyWith<_$ShowImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_TermsOfUseConsentCopyWith<$Res> {
-  factory _$$_TermsOfUseConsentCopyWith(_$_TermsOfUseConsent value,
-          $Res Function(_$_TermsOfUseConsent) then) =
-      __$$_TermsOfUseConsentCopyWithImpl<$Res>;
+abstract class _$$TermsOfUseConsentImplCopyWith<$Res> {
+  factory _$$TermsOfUseConsentImplCopyWith(_$TermsOfUseConsentImpl value,
+          $Res Function(_$TermsOfUseConsentImpl) then) =
+      __$$TermsOfUseConsentImplCopyWithImpl<$Res>;
   @useResult
   $Res call({bool newValue});
 }
 
 /// @nodoc
-class __$$_TermsOfUseConsentCopyWithImpl<$Res>
-    extends _$AupTcEventCopyWithImpl<$Res, _$_TermsOfUseConsent>
-    implements _$$_TermsOfUseConsentCopyWith<$Res> {
-  __$$_TermsOfUseConsentCopyWithImpl(
-      _$_TermsOfUseConsent _value, $Res Function(_$_TermsOfUseConsent) _then)
+class __$$TermsOfUseConsentImplCopyWithImpl<$Res>
+    extends _$AupTcEventCopyWithImpl<$Res, _$TermsOfUseConsentImpl>
+    implements _$$TermsOfUseConsentImplCopyWith<$Res> {
+  __$$TermsOfUseConsentImplCopyWithImpl(_$TermsOfUseConsentImpl _value,
+      $Res Function(_$TermsOfUseConsentImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -248,7 +250,7 @@ class __$$_TermsOfUseConsentCopyWithImpl<$Res>
   $Res call({
     Object? newValue = null,
   }) {
-    return _then(_$_TermsOfUseConsent(
+    return _then(_$TermsOfUseConsentImpl(
       newValue: null == newValue
           ? _value.newValue
           : newValue // ignore: cast_nullable_to_non_nullable
@@ -259,8 +261,8 @@ class __$$_TermsOfUseConsentCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_TermsOfUseConsent implements _TermsOfUseConsent {
-  const _$_TermsOfUseConsent({required this.newValue});
+class _$TermsOfUseConsentImpl implements _TermsOfUseConsent {
+  const _$TermsOfUseConsentImpl({required this.newValue});
 
   @override
   final bool newValue;
@@ -271,10 +273,10 @@ class _$_TermsOfUseConsent implements _TermsOfUseConsent {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_TermsOfUseConsent &&
+            other is _$TermsOfUseConsentImpl &&
             (identical(other.newValue, newValue) ||
                 other.newValue == newValue));
   }
@@ -285,8 +287,8 @@ class _$_TermsOfUseConsent implements _TermsOfUseConsent {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_TermsOfUseConsentCopyWith<_$_TermsOfUseConsent> get copyWith =>
-      __$$_TermsOfUseConsentCopyWithImpl<_$_TermsOfUseConsent>(
+  _$$TermsOfUseConsentImplCopyWith<_$TermsOfUseConsentImpl> get copyWith =>
+      __$$TermsOfUseConsentImplCopyWithImpl<_$TermsOfUseConsentImpl>(
           this, _$identity);
 
   @override
@@ -360,29 +362,29 @@ class _$_TermsOfUseConsent implements _TermsOfUseConsent {
 
 abstract class _TermsOfUseConsent implements AupTcEvent {
   const factory _TermsOfUseConsent({required final bool newValue}) =
-      _$_TermsOfUseConsent;
+      _$TermsOfUseConsentImpl;
 
   bool get newValue;
   @JsonKey(ignore: true)
-  _$$_TermsOfUseConsentCopyWith<_$_TermsOfUseConsent> get copyWith =>
+  _$$TermsOfUseConsentImplCopyWith<_$TermsOfUseConsentImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_PrivacyPolicyConsentCopyWith<$Res> {
-  factory _$$_PrivacyPolicyConsentCopyWith(_$_PrivacyPolicyConsent value,
-          $Res Function(_$_PrivacyPolicyConsent) then) =
-      __$$_PrivacyPolicyConsentCopyWithImpl<$Res>;
+abstract class _$$PrivacyPolicyConsentImplCopyWith<$Res> {
+  factory _$$PrivacyPolicyConsentImplCopyWith(_$PrivacyPolicyConsentImpl value,
+          $Res Function(_$PrivacyPolicyConsentImpl) then) =
+      __$$PrivacyPolicyConsentImplCopyWithImpl<$Res>;
   @useResult
   $Res call({bool newValue});
 }
 
 /// @nodoc
-class __$$_PrivacyPolicyConsentCopyWithImpl<$Res>
-    extends _$AupTcEventCopyWithImpl<$Res, _$_PrivacyPolicyConsent>
-    implements _$$_PrivacyPolicyConsentCopyWith<$Res> {
-  __$$_PrivacyPolicyConsentCopyWithImpl(_$_PrivacyPolicyConsent _value,
-      $Res Function(_$_PrivacyPolicyConsent) _then)
+class __$$PrivacyPolicyConsentImplCopyWithImpl<$Res>
+    extends _$AupTcEventCopyWithImpl<$Res, _$PrivacyPolicyConsentImpl>
+    implements _$$PrivacyPolicyConsentImplCopyWith<$Res> {
+  __$$PrivacyPolicyConsentImplCopyWithImpl(_$PrivacyPolicyConsentImpl _value,
+      $Res Function(_$PrivacyPolicyConsentImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -390,7 +392,7 @@ class __$$_PrivacyPolicyConsentCopyWithImpl<$Res>
   $Res call({
     Object? newValue = null,
   }) {
-    return _then(_$_PrivacyPolicyConsent(
+    return _then(_$PrivacyPolicyConsentImpl(
       newValue: null == newValue
           ? _value.newValue
           : newValue // ignore: cast_nullable_to_non_nullable
@@ -401,8 +403,8 @@ class __$$_PrivacyPolicyConsentCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_PrivacyPolicyConsent implements _PrivacyPolicyConsent {
-  const _$_PrivacyPolicyConsent({required this.newValue});
+class _$PrivacyPolicyConsentImpl implements _PrivacyPolicyConsent {
+  const _$PrivacyPolicyConsentImpl({required this.newValue});
 
   @override
   final bool newValue;
@@ -413,10 +415,10 @@ class _$_PrivacyPolicyConsent implements _PrivacyPolicyConsent {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_PrivacyPolicyConsent &&
+            other is _$PrivacyPolicyConsentImpl &&
             (identical(other.newValue, newValue) ||
                 other.newValue == newValue));
   }
@@ -427,9 +429,10 @@ class _$_PrivacyPolicyConsent implements _PrivacyPolicyConsent {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_PrivacyPolicyConsentCopyWith<_$_PrivacyPolicyConsent> get copyWith =>
-      __$$_PrivacyPolicyConsentCopyWithImpl<_$_PrivacyPolicyConsent>(
-          this, _$identity);
+  _$$PrivacyPolicyConsentImplCopyWith<_$PrivacyPolicyConsentImpl>
+      get copyWith =>
+          __$$PrivacyPolicyConsentImplCopyWithImpl<_$PrivacyPolicyConsentImpl>(
+              this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -502,18 +505,17 @@ class _$_PrivacyPolicyConsent implements _PrivacyPolicyConsent {
 
 abstract class _PrivacyPolicyConsent implements AupTcEvent {
   const factory _PrivacyPolicyConsent({required final bool newValue}) =
-      _$_PrivacyPolicyConsent;
+      _$PrivacyPolicyConsentImpl;
 
   bool get newValue;
   @JsonKey(ignore: true)
-  _$$_PrivacyPolicyConsentCopyWith<_$_PrivacyPolicyConsent> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$PrivacyPolicyConsentImplCopyWith<_$PrivacyPolicyConsentImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 mixin _$AupTcState {
-  String get tncFile => throw _privateConstructorUsedError;
-  String get privacyFile => throw _privateConstructorUsedError;
+  User get user => throw _privateConstructorUsedError;
   bool get tncConsent => throw _privateConstructorUsedError;
   bool get privacyConsent => throw _privateConstructorUsedError;
 
@@ -528,11 +530,9 @@ abstract class $AupTcStateCopyWith<$Res> {
           AupTcState value, $Res Function(AupTcState) then) =
       _$AupTcStateCopyWithImpl<$Res, AupTcState>;
   @useResult
-  $Res call(
-      {String tncFile,
-      String privacyFile,
-      bool tncConsent,
-      bool privacyConsent});
+  $Res call({User user, bool tncConsent, bool privacyConsent});
+
+  $UserCopyWith<$Res> get user;
 }
 
 /// @nodoc
@@ -548,20 +548,15 @@ class _$AupTcStateCopyWithImpl<$Res, $Val extends AupTcState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? tncFile = null,
-    Object? privacyFile = null,
+    Object? user = null,
     Object? tncConsent = null,
     Object? privacyConsent = null,
   }) {
     return _then(_value.copyWith(
-      tncFile: null == tncFile
-          ? _value.tncFile
-          : tncFile // ignore: cast_nullable_to_non_nullable
-              as String,
-      privacyFile: null == privacyFile
-          ? _value.privacyFile
-          : privacyFile // ignore: cast_nullable_to_non_nullable
-              as String,
+      user: null == user
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as User,
       tncConsent: null == tncConsent
           ? _value.tncConsent
           : tncConsent // ignore: cast_nullable_to_non_nullable
@@ -572,48 +567,50 @@ class _$AupTcStateCopyWithImpl<$Res, $Val extends AupTcState>
               as bool,
     ) as $Val);
   }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $UserCopyWith<$Res> get user {
+    return $UserCopyWith<$Res>(_value.user, (value) {
+      return _then(_value.copyWith(user: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
-abstract class _$$_AupTcStateCopyWith<$Res>
+abstract class _$$AupTcStateImplCopyWith<$Res>
     implements $AupTcStateCopyWith<$Res> {
-  factory _$$_AupTcStateCopyWith(
-          _$_AupTcState value, $Res Function(_$_AupTcState) then) =
-      __$$_AupTcStateCopyWithImpl<$Res>;
+  factory _$$AupTcStateImplCopyWith(
+          _$AupTcStateImpl value, $Res Function(_$AupTcStateImpl) then) =
+      __$$AupTcStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {String tncFile,
-      String privacyFile,
-      bool tncConsent,
-      bool privacyConsent});
+  $Res call({User user, bool tncConsent, bool privacyConsent});
+
+  @override
+  $UserCopyWith<$Res> get user;
 }
 
 /// @nodoc
-class __$$_AupTcStateCopyWithImpl<$Res>
-    extends _$AupTcStateCopyWithImpl<$Res, _$_AupTcState>
-    implements _$$_AupTcStateCopyWith<$Res> {
-  __$$_AupTcStateCopyWithImpl(
-      _$_AupTcState _value, $Res Function(_$_AupTcState) _then)
+class __$$AupTcStateImplCopyWithImpl<$Res>
+    extends _$AupTcStateCopyWithImpl<$Res, _$AupTcStateImpl>
+    implements _$$AupTcStateImplCopyWith<$Res> {
+  __$$AupTcStateImplCopyWithImpl(
+      _$AupTcStateImpl _value, $Res Function(_$AupTcStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? tncFile = null,
-    Object? privacyFile = null,
+    Object? user = null,
     Object? tncConsent = null,
     Object? privacyConsent = null,
   }) {
-    return _then(_$_AupTcState(
-      tncFile: null == tncFile
-          ? _value.tncFile
-          : tncFile // ignore: cast_nullable_to_non_nullable
-              as String,
-      privacyFile: null == privacyFile
-          ? _value.privacyFile
-          : privacyFile // ignore: cast_nullable_to_non_nullable
-              as String,
+    return _then(_$AupTcStateImpl(
+      user: null == user
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as User,
       tncConsent: null == tncConsent
           ? _value.tncConsent
           : tncConsent // ignore: cast_nullable_to_non_nullable
@@ -628,18 +625,15 @@ class __$$_AupTcStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_AupTcState extends _AupTcState {
-  const _$_AupTcState(
-      {required this.tncFile,
-      required this.privacyFile,
+class _$AupTcStateImpl extends _AupTcState {
+  const _$AupTcStateImpl(
+      {required this.user,
       required this.tncConsent,
       required this.privacyConsent})
       : super._();
 
   @override
-  final String tncFile;
-  @override
-  final String privacyFile;
+  final User user;
   @override
   final bool tncConsent;
   @override
@@ -647,17 +641,15 @@ class _$_AupTcState extends _AupTcState {
 
   @override
   String toString() {
-    return 'AupTcState(tncFile: $tncFile, privacyFile: $privacyFile, tncConsent: $tncConsent, privacyConsent: $privacyConsent)';
+    return 'AupTcState(user: $user, tncConsent: $tncConsent, privacyConsent: $privacyConsent)';
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_AupTcState &&
-            (identical(other.tncFile, tncFile) || other.tncFile == tncFile) &&
-            (identical(other.privacyFile, privacyFile) ||
-                other.privacyFile == privacyFile) &&
+            other is _$AupTcStateImpl &&
+            (identical(other.user, user) || other.user == user) &&
             (identical(other.tncConsent, tncConsent) ||
                 other.tncConsent == tncConsent) &&
             (identical(other.privacyConsent, privacyConsent) ||
@@ -665,34 +657,31 @@ class _$_AupTcState extends _AupTcState {
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, tncFile, privacyFile, tncConsent, privacyConsent);
+  int get hashCode =>
+      Object.hash(runtimeType, user, tncConsent, privacyConsent);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_AupTcStateCopyWith<_$_AupTcState> get copyWith =>
-      __$$_AupTcStateCopyWithImpl<_$_AupTcState>(this, _$identity);
+  _$$AupTcStateImplCopyWith<_$AupTcStateImpl> get copyWith =>
+      __$$AupTcStateImplCopyWithImpl<_$AupTcStateImpl>(this, _$identity);
 }
 
 abstract class _AupTcState extends AupTcState {
   const factory _AupTcState(
-      {required final String tncFile,
-      required final String privacyFile,
+      {required final User user,
       required final bool tncConsent,
-      required final bool privacyConsent}) = _$_AupTcState;
+      required final bool privacyConsent}) = _$AupTcStateImpl;
   const _AupTcState._() : super._();
 
   @override
-  String get tncFile;
-  @override
-  String get privacyFile;
+  User get user;
   @override
   bool get tncConsent;
   @override
   bool get privacyConsent;
   @override
   @JsonKey(ignore: true)
-  _$$_AupTcStateCopyWith<_$_AupTcState> get copyWith =>
+  _$$AupTcStateImplCopyWith<_$AupTcStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

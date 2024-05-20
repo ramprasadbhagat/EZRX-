@@ -153,6 +153,9 @@ class User with _$User {
     return 'assets/html/eZRxTermsOfUseStatic.html';
   }
 
+  String get marketPlacePrivacyPolicyFile =>
+      'assets/html/eZRxMarketPlacePrivacyPolicy.html';
+
   String get privacyPolicyFile {
     if (_supportedMarketsForStaticFiles.contains(_userCountry)) {
       return userPreferredLanguageCode == _userCountryLanguage
@@ -173,10 +176,12 @@ class User with _$User {
     return 'assets/html/eZRxPrivacyPolicyStatic.html';
   }
 
-  String get _userCountry => userSalesOrganisations.first.salesOrg.country;
+  String get _userCountry =>
+      userSalesOrganisations.firstOrNull?.salesOrg.country ?? '';
 
   String get _userCountryLanguage =>
-      userSalesOrganisations.first.salesOrg.languageCode.toUpperCase();
+      userSalesOrganisations.firstOrNull?.salesOrg.languageCode.toUpperCase() ??
+      '';
 
   bool get isCustomerWithPaymentsDisable =>
       role.type.isCustomer && disablePaymentAccess;
