@@ -123,7 +123,7 @@ class ViewByItemDetailsPage extends StatelessWidget {
               previous.orderHistoryItem != current.orderHistoryItem ||
               previous.orderHistoryStatuses != current.orderHistoryStatuses,
           builder: (context, state) {
-            return state.isLoading
+            return state.isDetailsLoading
                 ? LoadingShimmer.logo(
                     key: WidgetKeys.loaderImage,
                   )

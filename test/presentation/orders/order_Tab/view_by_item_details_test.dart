@@ -301,7 +301,7 @@ void main() {
     testWidgets('loaderImage  test ', (tester) async {
       when(() => viewByItemDetailsBlocMock.state).thenReturn(
         ViewByItemDetailsState.initial().copyWith(
-          isLoading: true,
+          isDetailsLoading: true,
         ),
       );
 
