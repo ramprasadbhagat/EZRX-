@@ -49,46 +49,36 @@ class CartProductTenderContractSection extends StatelessWidget {
                   iconColor: ZPColors.black,
                   backgroundColor: ZPColors.tenderUnselectBg,
                   collapsedBackgroundColor: ZPColors.tenderUnselectBg,
-                  title: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      RichText(
-                        text: TextSpan(
-                          text:
-                              '${cartItem.tenderContract.tenderOrderReason.displayTenderContractReason} - ',
+                  title: RichText(
+                    text: TextSpan(
+                      text:
+                          '${cartItem.tenderContract.tenderOrderReason.displayTenderContractReason} - ',
+                      style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                            color: ZPColors.neutralsBlack,
+                          ),
+                      children: [
+                        TextSpan(
+                          text: '${context.tr(
+                            cartItem.tenderContract.tenderOrderReason
+                                .tenderContractReasonTitle,
+                          )} ',
                           style:
                               Theme.of(context).textTheme.labelSmall?.copyWith(
                                     color: ZPColors.neutralsBlack,
                                   ),
-                          children: [
-                            TextSpan(
-                              text: '${context.tr(
-                                cartItem.tenderContract.tenderOrderReason
-                                    .tenderContractReasonTitle,
-                              )} ',
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .labelSmall
-                                  ?.copyWith(
-                                    color: ZPColors.neutralsBlack,
-                                  ),
-                            ),
-                            TextSpan(
-                              text: context.tr(
-                                cartItem.tenderContract.contractNumber
-                                    .displayTenderContractNumber,
-                              ),
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodyMedium
-                                  ?.copyWith(
-                                    color: ZPColors.neutralsBlack,
-                                  ),
-                            ),
-                          ],
                         ),
-                      ),
-                    ],
+                        TextSpan(
+                          text: context.tr(
+                            cartItem.tenderContract.contractNumber
+                                .displayTenderContractNumber,
+                          ),
+                          style:
+                              Theme.of(context).textTheme.bodyMedium?.copyWith(
+                                    color: ZPColors.neutralsBlack,
+                                  ),
+                        ),
+                      ],
+                    ),
                   ),
                   children: [
                     Padding(
