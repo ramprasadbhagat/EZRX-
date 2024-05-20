@@ -431,8 +431,8 @@ stages:
       displayName: Generate HTML File
         
 - stage: MSTeamsNotificationStage
-  displayName: MSTeams Notification Stage
-  condition: succeeded()  
+  displayName: MSTeams Succeeded Notification Stage
+  condition: not(or(failed(), canceled()))
   jobs:
   - job: MSTeamsNotificationUatJob
     displayName: MSTeamsNotificationUatJob
