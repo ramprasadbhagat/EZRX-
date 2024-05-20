@@ -485,13 +485,7 @@ stages:
           sed -E -i "s|branch_name|$branch_name|g" ./.azure-pipelines/template.html                  
           sed -E -i "s|build_time|$build_time|g" ./.azure-pipelines/template.html                  
 
-          cat .azure-pipelines/template.html
-
-    - task: LakshayKaushik.PublishHTMLReports.publishhtmlreport.publishhtmlreport@1
-      displayName: Push Report To Azure DevOps Pipeline
-      inputs:
-        htmlType: 'genericHTML'
-        htmlPath: '$(System.DefaultWorkingDirectory)/coverage/html'           
+          cat .azure-pipelines/template.html         
         
     - task: Bash@3
       displayName: Push Notification
@@ -502,6 +496,12 @@ stages:
           curl -X POST -H "Content-Type: application/json" -d "{\"text\":\"$html\"}" $MICROSOFT_TEAMS_BUILD_CHANNEL
       env:
         MICROSOFT_TEAMS_BUILD_CHANNEL: '$(MICROSOFT_TEAMS_BUILD_CHANNEL)'
+        
+    - task: LakshayKaushik.PublishHTMLReports.publishhtmlreport.publishhtmlreport@1
+      displayName: Push Report To Azure DevOps Pipeline
+      inputs:
+        htmlType: 'genericHTML'
+        htmlPath: '$(System.DefaultWorkingDirectory)/.azure-pipelines/template.html'          
 
 - stage: MSTeamsFailedNotificationStage
   displayName: MSTeams Failed Notification Stage
