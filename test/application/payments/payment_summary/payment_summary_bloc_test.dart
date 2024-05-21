@@ -23,7 +23,7 @@ void main() {
   late PaymentSummaryFilter paymentSummaryFilter;
   late Config config;
   const offSet = 0;
-  const pageSize = 24;
+
   setUpAll(() async {
     WidgetsFlutterBinding.ensureInitialized();
     paymentSummaryMockRepository = PaymentSummaryRepositoryMock();
@@ -53,7 +53,7 @@ void main() {
             salesOrganization: mockSalesOrganisation,
             filter: paymentSummaryFilter,
             offset: offSet,
-            pageSize: pageSize,
+            pageSize: config.pageSize,
             isMarketPlace: false,
           ),
         ).thenAnswer(
@@ -96,7 +96,7 @@ void main() {
             salesOrganization: mockSalesOrganisation,
             filter: paymentSummaryFilter,
             offset: offSet,
-            pageSize: pageSize,
+            pageSize: config.pageSize,
             isMarketPlace: true,
           ),
         ).thenAnswer(
@@ -139,7 +139,7 @@ void main() {
             salesOrganization: mockSalesOrganisation,
             offset: offSet,
             filter: paymentSummaryFilter,
-            pageSize: pageSize,
+            pageSize: config.pageSize,
             isMarketPlace: false,
           ),
         ).thenAnswer(
@@ -182,7 +182,7 @@ void main() {
             salesOrganization: mockSalesOrganisation,
             filter: paymentSummaryFilter,
             offset: offSet,
-            pageSize: pageSize,
+            pageSize: config.pageSize,
             isMarketPlace: false,
           ),
         ).thenAnswer(
@@ -225,7 +225,7 @@ void main() {
             salesOrganization: mockSalesOrganisation,
             filter: paymentSummaryFilter,
             offset: offSet,
-            pageSize: pageSize,
+            pageSize: config.pageSize,
             isMarketPlace: false,
           ),
         ).thenAnswer(
@@ -268,7 +268,7 @@ void main() {
             salesOrganization: mockSalesOrganisation,
             filter: paymentSummaryFilter,
             offset: offSet,
-            pageSize: pageSize,
+            pageSize: config.pageSize,
             isMarketPlace: false,
           ),
         ).thenAnswer(
@@ -311,7 +311,7 @@ void main() {
             salesOrganization: mockSalesOrganisation,
             filter: paymentSummaryFilter,
             offset: offSet,
-            pageSize: pageSize,
+            pageSize: config.pageSize,
             isMarketPlace: false,
           ),
         ).thenAnswer(

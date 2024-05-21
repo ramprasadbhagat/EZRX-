@@ -49,6 +49,7 @@ void main() {
   late StockInfoLocalDataSource stockInfoLocalDataSource;
   late StockInfoRemoteDataSource stockInfoRemoteDataSource;
   late DeviceStorage deviceStorage;
+  const pageSize = 24;
   final fakeMaterialFilter = MaterialFilter.empty().copyWith(
     countryListSelected: [
       MaterialFilterCountry.empty().copyWith(name: 'Hong Kong', code: 'HK'),
@@ -291,7 +292,7 @@ void main() {
         final result = await materialListRepository.getComboDealMaterials(
           customerCodeInfo: fakeCustomerCodeInfo,
           offset: 0,
-          pageSize: 24,
+          pageSize: pageSize,
           salesOrganisation: fakeTWSalesOrganisation,
           shipToInfo: fakeShipToInfo,
           user: fakeExternalSalesRepUser,
@@ -314,7 +315,7 @@ void main() {
         final result = await materialListRepository.getComboDealMaterials(
           customerCodeInfo: fakeCustomerCodeInfo,
           offset: 0,
-          pageSize: 24,
+          pageSize: pageSize,
           salesOrganisation: fakeTWSalesOrganisation,
           shipToInfo: fakeShipToInfo,
           user: fakeExternalSalesRepUser,

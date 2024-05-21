@@ -59,7 +59,7 @@ void main() {
             user: mockUser,
             searchKey: SearchKey(''),
             offset: 0,
-            pageSize: 24,
+            pageSize: config.pageSize,
           ),
         ).thenAnswer(
           (invocation) async => Right(mockReturnItemList),
@@ -127,7 +127,7 @@ void main() {
             user: mockUser,
             searchKey: SearchKey(''),
             offset: 0,
-            pageSize: 24,
+            pageSize: config.pageSize,
           ),
         ).thenAnswer(
           (invocation) async => const Left(ApiFailure.other('Fake-Error')),
@@ -182,7 +182,7 @@ void main() {
             user: mockUser,
             searchKey: SearchKey(''),
             offset: 0,
-            pageSize: 24,
+            pageSize: config.pageSize,
           ),
         ).thenAnswer(
           (invocation) async => const Left(ApiFailure.other('Fake-Error')),

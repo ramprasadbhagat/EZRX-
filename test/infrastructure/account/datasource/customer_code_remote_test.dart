@@ -210,7 +210,7 @@ void main() {
               'salesOrganisation': '2203',
               'searchKey': mockCustomerCode,
               'filterBlockCustomer': false,
-              'first': 24,
+              'first': 10,
               'after': 0,
             },
           };
@@ -233,7 +233,7 @@ void main() {
           final result = await remoteDataSource.getSalesRepCustomerCodeList(
             request: CustomerCodeSearchDto(
               salesOrg: '2203',
-              first: 24,
+              first: 10,
               filterBlockCustomer: hideCustomer,
               after: 0,
               searchKey: mockCustomerCode,

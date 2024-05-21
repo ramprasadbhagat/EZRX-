@@ -139,7 +139,6 @@ void main() {
                 creditAndInvoiceItemList,
               ),
             ),
-            canLoadMore: false,
           ),
         ],
       );
@@ -178,7 +177,6 @@ void main() {
                 creditAndInvoiceItemList,
               ),
             ),
-            canLoadMore: false,
           ),
         ],
       );
@@ -255,7 +253,8 @@ void main() {
             isMarketPlace: false,
           ),
         ).thenAnswer(
-          (invocation) async => Right(creditAndInvoiceItemList),
+          (invocation) async =>
+              Right(creditAndInvoiceItemList.take(9).toList()),
         );
       },
       act: (AllInvoicesBloc bloc) => bloc.add(
@@ -264,7 +263,7 @@ void main() {
       expect: () {
         final newList = [
           ...creditAndInvoiceItemList,
-          ...creditAndInvoiceItemList,
+          ...creditAndInvoiceItemList.take(9).toList(),
         ];
         return [
           AllInvoicesState.initial().copyWith(
@@ -301,7 +300,9 @@ void main() {
             pageSize: config.pageSize,
             isMarketPlace: false,
           ),
-        ).thenAnswer((_) async => Right(creditAndInvoiceItemList));
+        ).thenAnswer(
+          (_) async => Right(creditAndInvoiceItemList.take(9).toList()),
+        );
       },
       act: (AllInvoicesBloc bloc) => bloc.add(
         const AllInvoicesEvent.loadMore(),
@@ -309,7 +310,7 @@ void main() {
       expect: () {
         final newList = [
           ...creditAndInvoiceItemList,
-          ...creditAndInvoiceItemList,
+          ...creditAndInvoiceItemList.take(9).toList(),
         ];
         return [
           AllInvoicesState.initial().copyWith(

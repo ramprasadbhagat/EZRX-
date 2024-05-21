@@ -22,7 +22,7 @@ void main() {
   late Config config;
   final faqState = FaqState.initial();
   final salesOrg = fakeMYSalesOrg;
-  const pageSize = 24;
+
   setUpAll(() async {
     config = Config()..appFlavor = Flavor.mock;
     WidgetsFlutterBinding.ensureInitialized();
@@ -41,7 +41,7 @@ void main() {
         when(
           () => repository.getFAQList(
             salesOrg: salesOrg,
-            pageSize: pageSize,
+            pageSize: config.pageSize,
             after: '',
           ),
         ).thenAnswer(
@@ -61,9 +61,7 @@ void main() {
           faqInfo: FAQInfo.empty(),
         ),
         faqState.copyWith(
-          isFetching: false,
           faqInfo: faqInfo,
-          canLoadMore: false,
           selectedCategory: FAQCategory('All'),
           apiFailureOrSuccessOption: optionOf(Right(faqInfo)),
         ),
@@ -83,7 +81,7 @@ void main() {
         when(
           () => repository.getFAQList(
             salesOrg: salesOrg,
-            pageSize: pageSize,
+            pageSize: config.pageSize,
             after: '',
           ),
         ).thenAnswer(
@@ -100,12 +98,8 @@ void main() {
       expect: () => [
         faqState.copyWith(
           isFetching: true,
-          faqInfo: FAQInfo.empty(),
-          apiFailureOrSuccessOption: none(),
         ),
         faqState.copyWith(
-          faqInfo: FAQInfo.empty(),
-          isFetching: false,
           apiFailureOrSuccessOption:
               optionOf(const Left(ApiFailure.other('fake-error'))),
         ),
@@ -121,7 +115,7 @@ void main() {
         when(
           () => repository.getFAQList(
             salesOrg: salesOrg,
-            pageSize: pageSize,
+            pageSize: config.pageSize,
             after: '',
           ),
         ).thenAnswer(
@@ -138,7 +132,6 @@ void main() {
       expect: () => [
         faqState.copyWith(
           isFetching: true,
-          apiFailureOrSuccessOption: none(),
         ),
         faqState.copyWith(
           apiFailureOrSuccessOption: optionOf(
@@ -146,8 +139,6 @@ void main() {
               faqInfo,
             ),
           ),
-          isFetching: false,
-          canLoadMore: false,
           faqInfo: faqInfo,
         ),
       ],
@@ -162,7 +153,7 @@ void main() {
         when(
           () => repository.getFAQList(
             salesOrg: salesOrg,
-            pageSize: pageSize,
+            pageSize: config.pageSize,
             after: '',
           ),
         ).thenAnswer(
@@ -179,12 +170,10 @@ void main() {
       expect: () => [
         faqState.copyWith(
           isFetching: true,
-          apiFailureOrSuccessOption: none(),
         ),
         faqState.copyWith(
           apiFailureOrSuccessOption:
               optionOf(const Left(ApiFailure.other('fake-error'))),
-          isFetching: false,
         ),
       ],
     );

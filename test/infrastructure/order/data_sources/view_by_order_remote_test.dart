@@ -24,6 +24,7 @@ void main() {
   const fakeMarket = 'fake-market';
   final fakeEnableMarketPlaceMarkets = [fakeMarket];
   final fakeConfigValue = fakeEnableMarketPlaceMarkets.contains(fakeMarket);
+  const pageSize = 10;
 
   final dio = Dio(
     BaseOptions(
@@ -54,7 +55,7 @@ void main() {
       test('Get View By Order Items', () async {
         final variables = {
           'soldTo': 'fake-soldTo',
-          'first': 24,
+          'first': pageSize,
           'after': 0,
           'language': 'fake-language',
           'orderBy': 'datetime',
@@ -92,7 +93,7 @@ void main() {
           language: 'fake-language',
           filterQuery: {},
           offset: 0,
-          pageSize: 24,
+          pageSize: pageSize,
           orderBy: 'datetime',
           sort: 'desc',
           isDetailsPage: false,

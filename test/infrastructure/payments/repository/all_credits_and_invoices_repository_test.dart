@@ -35,6 +35,7 @@ void main() {
   late AllCreditsAndInvoicesRemoteDataSource
       allCreditsAndInvoicesRemoteDataSourceMock;
   late AllCreditsAndInvoicesRepository allCreditsAndInvoicesRepository;
+  const pageSize = 10;
   final fakeError = MockException(message: 'fake-exception');
   const fakeFromDate = '2023-05-01';
   const fakeToDate = '2023-05-28';
@@ -216,7 +217,7 @@ void main() {
             customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
             salesOrg: fakeSalesOrganisation.salesOrg.getOrCrash(),
             offset: 0,
-            pageSize: 24,
+            pageSize: pageSize,
             filterMap: filterFullSummary,
             isMarketPlace: false,
           ),
@@ -228,7 +229,7 @@ void main() {
           customerCodeInfo: fakeCustomerCodeInfo,
           salesOrganisation: fakeSalesOrganisation,
           filter: FullSummaryFilter.defaultFilter(),
-          pageSize: 24,
+          pageSize: pageSize,
           offset: 0,
           isMarketPlace: false,
         );
@@ -242,7 +243,7 @@ void main() {
             customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
             salesOrg: fakeSalesOrganisation.salesOrg.getOrCrash(),
             offset: 0,
-            pageSize: 24,
+            pageSize: pageSize,
             filterMap: filterFullSummary,
             isMarketPlace: false,
           ),
@@ -252,7 +253,7 @@ void main() {
           customerCodeInfo: fakeCustomerCodeInfo,
           salesOrganisation: fakeSalesOrganisation,
           filter: FullSummaryFilter.defaultFilter(),
-          pageSize: 24,
+          pageSize: pageSize,
           offset: 0,
           isMarketPlace: false,
         );

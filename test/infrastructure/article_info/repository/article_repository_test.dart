@@ -32,11 +32,9 @@ void main() {
 
   final fakeUser = User.empty();
 
-  const pageSize = 24;
-
   setUpAll(() async {
+    mockConfig = Config()..appFlavor = Flavor.mock;
     WidgetsFlutterBinding.ensureInitialized();
-    mockConfig = MockConfig();
     mockSalesOrg = MockSalesOrg();
     localDataSource = ArticleInfoLocalDataSourceMock();
     remoteDataSource = ArticleInfoRemoteDataSourceMock();
@@ -51,7 +49,7 @@ void main() {
   });
   group('Article Info Repository should - ', () {
     test(' get article Info successfully locally ', () async {
-      when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
+      mockConfig.appFlavor = Flavor.mock;
 
       when(
         () => localDataSource.getArticles(),
@@ -60,7 +58,7 @@ void main() {
       final result = await repository.getArticles(
         user: fakeUser,
         salesOrg: mockSalesOrg,
-        pageSize: pageSize,
+        pageSize: mockConfig.pageSize,
         after: '',
       );
       expect(
@@ -69,7 +67,7 @@ void main() {
       );
     });
     test(' get article Info fail locally ', () async {
-      when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
+      mockConfig.appFlavor = Flavor.mock;
 
       when(
         () => localDataSource.getArticles(),
@@ -80,7 +78,7 @@ void main() {
       final result = await repository.getArticles(
         user: fakeUser,
         salesOrg: mockSalesOrg,
-        pageSize: pageSize,
+        pageSize: mockConfig.pageSize,
         after: '',
       );
       expect(
@@ -89,12 +87,7 @@ void main() {
       );
     });
     test(' get article Info successfully Remote ', () async {
-      when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
-
-      when(() => mockConfig.articleTemplate)
-          .thenReturn('4A583EF3-A105-4A00-BC98-EC96A9967966');
-      when(() => mockConfig.announcementApiUrlPath)
-          .thenReturn('/api/announcement');
+      mockConfig.appFlavor = Flavor.uat;
       when(() => mockSalesOrg.articleVariablePath)
           .thenReturn(('51B88D33-B26E-475D-90FC-BEFD9FF0A348'));
       when(() => mockSalesOrg.languageCodeForHelpAndSupport)
@@ -103,10 +96,10 @@ void main() {
 
       when(
         () => remoteDataSource.getArticleInfo(
-          announcementUrlPath: '/api/announcement',
+          announcementUrlPath: mockConfig.announcementApiUrlPath,
+          template: mockConfig.articleTemplate,
           variablePath: '51B88D33-B26E-475D-90FC-BEFD9FF0A348',
-          template: '4A583EF3-A105-4A00-BC98-EC96A9967966',
-          pageSize: 24,
+          pageSize: mockConfig.pageSize,
           after: '',
           lang: 'zh-TW',
         ),
@@ -114,7 +107,7 @@ void main() {
       final result = await repository.getArticles(
         user: fakeUser,
         salesOrg: mockSalesOrg,
-        pageSize: pageSize,
+        pageSize: mockConfig.pageSize,
         after: '',
       );
       expect(
@@ -123,21 +116,15 @@ void main() {
       );
     });
     test(' get article Info successfully Remote for ID market', () async {
-      when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
-      when(() => mockConfig.announcementApiUrlPath)
-          .thenReturn('/api/announcement');
-      when(() => mockConfig.idMarketArticleTemplate1)
-          .thenReturn('4A583EF3-A105-4A00-BC98-EC96A9967955');
-      when(() => mockConfig.idMarketArticleTemplate2)
-          .thenReturn('4A583EF3-A105-4A00-BC98-EC96A9967954');
+      mockConfig.appFlavor = Flavor.uat;
 
       when(
         () => remoteDataSource.getArticleInfoIdMarket(
-          announcementUrlPath: '/api/announcement',
+          announcementUrlPath: mockConfig.announcementApiUrlPath,
+          template1: mockConfig.idMarketArticleTemplate1,
+          template2: mockConfig.idMarketArticleTemplate2,
+          pageSize: mockConfig.pageSize,
           variablePath: fakeIDSalesOrg.articleVariablePath,
-          template1: '4A583EF3-A105-4A00-BC98-EC96A9967955',
-          template2: '4A583EF3-A105-4A00-BC98-EC96A9967954',
-          pageSize: 24,
           after: '',
           lang: fakeIDSalesOrg.languageCodeForHelpAndSupport,
         ),
@@ -145,7 +132,7 @@ void main() {
       final result = await repository.getArticles(
         user: fakeUser,
         salesOrg: fakeIDSalesOrg,
-        pageSize: pageSize,
+        pageSize: mockConfig.pageSize,
         after: '',
       );
       expect(
@@ -158,14 +145,14 @@ void main() {
       );
     });
     test(' get article Info fail Remote ', () async {
-      when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
+      mockConfig.appFlavor = Flavor.uat;
 
       when(
         () => remoteDataSource.getArticleInfo(
-          announcementUrlPath: '/api/announcement',
+          announcementUrlPath: mockConfig.announcementApiUrlPath,
           variablePath: '51B88D33-B26E-475D-90FC-BEFD9FF0A348',
-          template: '4A583EF3-A105-4A00-BC98-EC96A9967966',
-          pageSize: 24,
+          template: mockConfig.articleTemplate,
+          pageSize: mockConfig.pageSize,
           after: '',
           lang: fakeUser.preferredLanguage.languageCode,
         ),
@@ -175,7 +162,7 @@ void main() {
       final result = await repository.getArticles(
         user: fakeUser,
         salesOrg: fakeMYSalesOrg,
-        pageSize: pageSize,
+        pageSize: mockConfig.pageSize,
         after: '',
       );
       expect(

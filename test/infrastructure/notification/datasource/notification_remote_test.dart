@@ -27,6 +27,7 @@ void main() {
   const fakeMarket = 'fake-market';
   final fakeEnableMarketPlaceMarkets = [fakeMarket];
   final fakeConfigValue = fakeEnableMarketPlaceMarkets.contains(fakeMarket);
+  const pageSize = 10;
   locator.registerSingleton<Config>(Config()..appFlavor = Flavor.uat);
 
   final dio = Dio(
@@ -68,14 +69,14 @@ void main() {
               .getNotificationQuery(fakeConfigValue),
           'variables': {
             'page': 1,
-            'perPage': 24,
+            'perPage': pageSize,
           },
         }),
       );
 
       final result = await remoteDataSource.getNotification(
         page: 1,
-        perPage: 24,
+        perPage: pageSize,
         market: fakeMarket,
       );
 
@@ -105,14 +106,14 @@ void main() {
           ),
           'variables': {
             'page': 1,
-            'perPage': 24,
+            'perPage': pageSize,
           },
         }),
       );
 
       final result = await remoteDataSource.getNotification(
         page: 1,
-        perPage: 24,
+        perPage: pageSize,
         market: fakeMarket,
       );
 
@@ -192,7 +193,7 @@ void main() {
               .getNotificationQuery(fakeConfigValue),
           'variables': {
             'page': 1,
-            'perPage': 24,
+            'perPage': pageSize,
           },
         }),
       );
@@ -200,7 +201,7 @@ void main() {
       await remoteDataSource
           .getNotification(
         page: 1,
-        perPage: 24,
+        perPage: pageSize,
         market: fakeMarket,
       )
           .onError((error, _) async {
@@ -228,7 +229,7 @@ void main() {
               .getNotificationQuery(fakeConfigValue),
           'variables': {
             'page': 1,
-            'perPage': 24,
+            'perPage': pageSize,
           },
         }),
       );
@@ -236,7 +237,7 @@ void main() {
       await remoteDataSource
           .getNotification(
         page: 1,
-        perPage: 24,
+        perPage: pageSize,
         market: fakeMarket,
       )
           .onError((error, _) async {

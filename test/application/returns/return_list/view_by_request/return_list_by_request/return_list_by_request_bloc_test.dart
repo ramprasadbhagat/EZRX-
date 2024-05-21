@@ -29,7 +29,6 @@ void main() {
   final mockAppliedFilter = ReturnFilter.empty()
       .copyWith(returnDateFrom: DateTimeStringValue('20233108'));
   final mockSearchKey = SearchKey('searchKey');
-  const pageSize = 24;
   final mockReturnItemList = <ReturnItem>[
     ReturnItem.empty().copyWith(
       requestId: '01',
@@ -87,7 +86,7 @@ void main() {
             appliedFilter: mockAppliedFilter,
             customerCode: mockCustomerCodeInfo,
             offset: 0,
-            pageSize: pageSize,
+            pageSize: config.pageSize,
             salesOrg: mockSalesOrg,
             searchKey: mockSearchKey,
             shipToInfo: mockShipInfo,
@@ -122,7 +121,6 @@ void main() {
           customerCodeInfo: mockCustomerCodeInfo,
           user: mockUser,
           failureOrSuccessOption: none(),
-          isFetching: false,
           returnItemList: mockReturnItemList,
           canLoadMore: false,
           appliedFilter: mockAppliedFilter,
@@ -152,7 +150,7 @@ void main() {
             appliedFilter: mockAppliedFilter,
             customerCode: mockCustomerCodeInfo,
             offset: 0,
-            pageSize: pageSize,
+            pageSize: config.pageSize,
             salesOrg: mockSalesOrg,
             searchKey: mockSearchKey,
             shipToInfo: mockShipInfo,
@@ -176,7 +174,6 @@ void main() {
           shipInfo: mockShipInfo,
           customerCodeInfo: mockCustomerCodeInfo,
           user: mockUser,
-          failureOrSuccessOption: none(),
           isFetching: true,
           appliedFilter: mockAppliedFilter,
           searchKey: mockSearchKey,
@@ -191,7 +188,6 @@ void main() {
               ApiFailure.other('api-failure'),
             ),
           ),
-          isFetching: false,
           appliedFilter: mockAppliedFilter,
           searchKey: mockSearchKey,
         ),
@@ -219,7 +215,7 @@ void main() {
             appliedFilter: ReturnFilter.empty(),
             customerCode: mockCustomerCodeInfo,
             offset: 0,
-            pageSize: pageSize,
+            pageSize: config.pageSize,
             salesOrg: mockSalesOrg,
             searchKey: SearchKey(''),
             shipToInfo: mockShipInfo,
@@ -240,7 +236,6 @@ void main() {
           shipInfo: mockShipInfo,
           customerCodeInfo: mockCustomerCodeInfo,
           user: mockUser,
-          failureOrSuccessOption: none(),
           isFetching: true,
         ),
         ReturnListByRequestState.initial().copyWith(
@@ -248,8 +243,6 @@ void main() {
           shipInfo: mockShipInfo,
           customerCodeInfo: mockCustomerCodeInfo,
           user: mockUser,
-          failureOrSuccessOption: none(),
-          isFetching: false,
           returnItemList: mockReturnItemList,
           canLoadMore: false,
         ),
@@ -277,7 +270,7 @@ void main() {
             appliedFilter: ReturnFilter.empty(),
             customerCode: mockCustomerCodeInfo,
             offset: 0,
-            pageSize: pageSize,
+            pageSize: config.pageSize,
             salesOrg: mockSalesOrg,
             searchKey: SearchKey(''),
             shipToInfo: mockShipInfo,
@@ -298,7 +291,6 @@ void main() {
           shipInfo: mockShipInfo,
           customerCodeInfo: mockCustomerCodeInfo,
           user: mockUser,
-          failureOrSuccessOption: none(),
           isFetching: true,
         ),
         ReturnListByRequestState.initial().copyWith(
@@ -311,7 +303,6 @@ void main() {
               ApiFailure.other('api-failure'),
             ),
           ),
-          isFetching: false,
         ),
       ],
       verify: (ReturnListByRequestBloc bloc) => [
@@ -330,8 +321,8 @@ void main() {
           () => returnListRepositoryMock.fetchReturnListByRequest(
             appliedFilter: mockAppliedFilter,
             customerCode: mockCustomerCodeInfo,
-            offset: 24,
-            pageSize: pageSize,
+            offset: config.pageSize,
+            pageSize: config.pageSize,
             salesOrg: mockSalesOrg,
             searchKey: mockSearchKey,
             shipToInfo: mockShipInfo,
@@ -339,7 +330,10 @@ void main() {
           ),
         ).thenAnswer(
           (invocation) async => Right(
-            List.generate(24, (index) => mockReturnItemList.first),
+            List.generate(
+              config.pageSize,
+              (index) => mockReturnItemList.first,
+            ),
           ),
         );
       },
@@ -350,7 +344,8 @@ void main() {
         user: mockUser,
         appliedFilter: mockAppliedFilter,
         searchKey: mockSearchKey,
-        returnItemList: List.generate(24, (index) => mockReturnItemList.first),
+        returnItemList:
+            List.generate(config.pageSize, (index) => mockReturnItemList.first),
       ),
       act: (ReturnListByRequestBloc bloc) => bloc.add(
         const ReturnListByRequestEvent.loadMore(),
@@ -361,9 +356,10 @@ void main() {
           shipInfo: mockShipInfo,
           customerCodeInfo: mockCustomerCodeInfo,
           user: mockUser,
-          failureOrSuccessOption: none(),
-          returnItemList:
-              List.generate(24, (index) => mockReturnItemList.first),
+          returnItemList: List.generate(
+            config.pageSize,
+            (index) => mockReturnItemList.first,
+          ),
           isFetching: true,
           appliedFilter: mockAppliedFilter,
           searchKey: mockSearchKey,
@@ -373,17 +369,16 @@ void main() {
           shipInfo: mockShipInfo,
           customerCodeInfo: mockCustomerCodeInfo,
           user: mockUser,
-          failureOrSuccessOption: none(),
-          isFetching: false,
-          returnItemList:
-              List.generate(48, (index) => mockReturnItemList.first),
-          canLoadMore: true,
+          returnItemList: List.generate(
+            config.pageSize * 2,
+            (index) => mockReturnItemList.first,
+          ),
           appliedFilter: mockAppliedFilter,
           searchKey: mockSearchKey,
         ),
       ],
       verify: (ReturnListByRequestBloc bloc) => [
-        expect(bloc.state.returnItemList.length, 48),
+        expect(bloc.state.returnItemList.length, config.pageSize * 2),
       ],
     );
 
@@ -398,8 +393,8 @@ void main() {
           () => returnListRepositoryMock.fetchReturnListByRequest(
             appliedFilter: mockAppliedFilter,
             customerCode: mockCustomerCodeInfo,
-            offset: 24,
-            pageSize: pageSize,
+            offset: config.pageSize,
+            pageSize: config.pageSize,
             salesOrg: mockSalesOrg,
             searchKey: mockSearchKey,
             shipToInfo: mockShipInfo,
@@ -418,7 +413,8 @@ void main() {
         user: mockUser,
         appliedFilter: mockAppliedFilter,
         searchKey: mockSearchKey,
-        returnItemList: List.generate(24, (index) => mockReturnItemList.first),
+        returnItemList:
+            List.generate(config.pageSize, (index) => mockReturnItemList.first),
       ),
       act: (ReturnListByRequestBloc bloc) => bloc.add(
         const ReturnListByRequestEvent.loadMore(),
@@ -429,8 +425,10 @@ void main() {
           shipInfo: mockShipInfo,
           customerCodeInfo: mockCustomerCodeInfo,
           user: mockUser,
-          returnItemList:
-              List.generate(24, (index) => mockReturnItemList.first),
+          returnItemList: List.generate(
+            config.pageSize,
+            (index) => mockReturnItemList.first,
+          ),
           failureOrSuccessOption: none(),
           appliedFilter: mockAppliedFilter,
           searchKey: mockSearchKey,
@@ -446,15 +444,16 @@ void main() {
               ApiFailure.other('api-failure'),
             ),
           ),
-          returnItemList:
-              List.generate(24, (index) => mockReturnItemList.first),
+          returnItemList: List.generate(
+            config.pageSize,
+            (index) => mockReturnItemList.first,
+          ),
           appliedFilter: mockAppliedFilter,
           searchKey: mockSearchKey,
-          isFetching: false,
         ),
       ],
       verify: (ReturnListByRequestBloc bloc) => [
-        expect(bloc.state.returnItemList.length, 24),
+        expect(bloc.state.returnItemList.length, config.pageSize),
       ],
     );
 

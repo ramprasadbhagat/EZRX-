@@ -25,6 +25,7 @@ void main() {
   const fakeMarket = 'fake-market';
   final fakeEnableMarketPlaceMarkets = [fakeMarket];
   final fakeConfigValue = fakeEnableMarketPlaceMarkets.contains(fakeMarket);
+  const pageSize = 24;
   locator.registerSingleton<Config>(Config()..appFlavor = Flavor.uat);
 
   final dio = Dio(
@@ -55,7 +56,7 @@ void main() {
       'request': {
         'After': 0,
         'Customer': 'fake-customer-code',
-        'First': 24,
+        'First': pageSize,
         'Language': 'fake-language',
         'OrderByName': '',
         'SalesOrg': 'fake-sales-org',
@@ -100,7 +101,7 @@ void main() {
       language: 'fake-language',
       customerCode: 'fake-customer-code',
       offset: 0,
-      pageSize: 24,
+      pageSize: pageSize,
       salesOrgCode: 'fake-sales-org',
       shipToCode: 'fake-shipto-code',
       searchKey: '',
@@ -127,7 +128,7 @@ void main() {
       'request': {
         'After': 0,
         'Customer': 'fake-customer-code',
-        'First': 24,
+        'First': pageSize,
         'Language': 'fake-language',
         'OrderByName': '',
         'SalesOrg': 'fake-sales-org',
@@ -169,7 +170,7 @@ void main() {
       language: 'fake-language',
       customerCode: 'fake-customer-code',
       offset: 0,
-      pageSize: 24,
+      pageSize: pageSize,
       salesOrgCode: 'fake-sales-org',
       shipToCode: 'fake-shipto-code',
       searchKey: '',
@@ -241,7 +242,7 @@ void main() {
       final variables = {
         'After': 0,
         'Customer': 'fake-customer-code',
-        'First': 24,
+        'First': pageSize,
         'Language': 'fake-language',
         'SalesOrg': 'fake-sales-org',
         'ShipTo': 'fake-shipto-code',
@@ -271,7 +272,7 @@ void main() {
       final result = await remoteDataSource.getComboDealMaterialsPrincipalCode(
         customerCode: 'fake-customer-code',
         offset: 0,
-        pageSize: 24,
+        pageSize: pageSize,
         principalCodeList: ['fake-principal-code'],
         salesOrgCode: 'fake-sales-org',
         shipToCode: 'fake-shipto-code',
@@ -291,7 +292,7 @@ void main() {
       final variables = {
         'After': 0,
         'Customer': 'fake-customer-code',
-        'First': 24,
+        'First': pageSize,
         'Language': 'fake-language',
         'SalesOrg': 'fake-sales-org',
         'ShipTo': 'fake-shipto-code',
@@ -330,7 +331,7 @@ void main() {
           .getComboDealMaterialsPrincipalCode(
         customerCode: 'fake-customer-code',
         offset: 0,
-        pageSize: 24,
+        pageSize: pageSize,
         principalCodeList: ['fake-principal-code'],
         salesOrgCode: 'fake-sales-org',
         shipToCode: 'fake-shipto-code',

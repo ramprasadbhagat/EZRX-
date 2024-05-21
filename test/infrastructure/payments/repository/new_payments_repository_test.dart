@@ -79,7 +79,7 @@ void main() {
   const fakeDebitCreditType = 'debit';
   const fakeOrderBy = 'netDueDate';
   const offset = 0;
-  const pageSize = 24;
+  const pageSize = 10;
   final fakeFilterList = <Map<String, String>>[
     {
       'field': 'accountingDocument',

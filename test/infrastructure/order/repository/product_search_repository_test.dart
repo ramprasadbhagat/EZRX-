@@ -49,6 +49,7 @@ void main() async {
   final fakeMaterialResponse =
       await ProductSearchLocalDataSource().getSearchedProductList();
   const fakeMarket = 'fake-market';
+  const pageSize = 24;
 
   setUp(() async {
     mockConfig = MockConfig();
@@ -157,7 +158,7 @@ void main() async {
             gimmickMaterial: fakeMYSalesOrgConfigs.enableGimmickMaterial,
             language: fakeClientUser.settings.languagePreference.languageCode,
             offset: 0,
-            pageSize: 24,
+            pageSize: pageSize,
             salesOrgCode: fakeSalesOrganisation.salesOrg.getOrDefaultValue(''),
             searchKey: '',
             shipToCode: fakeShipToInfo.shipToCustomerCode,
@@ -189,7 +190,7 @@ void main() async {
             gimmickMaterial: fakeMYSalesOrgConfigs.enableGimmickMaterial,
             language: fakeClientUser.settings.languagePreference.languageCode,
             offset: 0,
-            pageSize: 24,
+            pageSize: pageSize,
             salesOrgCode: fakeSalesOrganisation.salesOrg.getOrDefaultValue(''),
             searchKey: '',
             shipToCode: fakeShipToInfo.shipToCustomerCode,
@@ -224,7 +225,7 @@ void main() async {
             gimmickMaterial: fakeMYSalesOrgConfigs.enableGimmickMaterial,
             language: fakeClientUser.settings.languagePreference.languageCode,
             offset: 0,
-            pageSize: 24,
+            pageSize: pageSize,
             salesOrgCode: fakeSalesOrganisation.salesOrg.getOrDefaultValue(''),
             searchKey: '',
             shipToCode: fakeShipToInfo.shipToCustomerCode,

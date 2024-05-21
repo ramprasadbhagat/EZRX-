@@ -112,7 +112,6 @@ void main() {
   setUpAll(() async {
     locator.registerFactory(() => mockCustomerCodeBloc);
     locator.registerLazySingleton<MixpanelService>(() => MixpanelServiceMock());
-
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.mock);
     locator.registerLazySingleton(() => AppRouter());
     locator.registerFactory(() => mockBannerBloc);

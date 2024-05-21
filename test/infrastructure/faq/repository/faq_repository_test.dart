@@ -30,7 +30,7 @@ void main() {
   late FAQInfoRepository repository;
   late FAQInfo faqMockList;
 
-  const pageSize = 24;
+  const pageSize = 10;
 
   setUpAll(() async {
     mockConfig = MockConfig();
@@ -96,7 +96,7 @@ void main() {
           announcementUrlPath: '/api/announcement',
           variablePath: mockSalesOrg.faqVariablePath,
           template: '4A583EF3-A105-4A00-BC98-EC96A9967966',
-          pageSize: 24,
+          pageSize: pageSize,
           after: '',
           lang: mockSalesOrg.languageCodeForHelpAndSupport,
         ),
@@ -119,7 +119,7 @@ void main() {
           announcementUrlPath: '/api/announcement',
           variablePath: '51B88D33-B26E-475D-90FC-BEFD9FF0A348',
           template: '4A583EF3-A105-4A00-BC98-EC96A9967966',
-          pageSize: 24,
+          pageSize: pageSize,
           after: '',
           lang: 'EN',
         ),

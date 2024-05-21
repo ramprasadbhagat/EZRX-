@@ -9,6 +9,7 @@ import 'package:ezrxmobile/application/order/material_list/material_list_bloc.da
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
 import 'package:ezrxmobile/application/order/product_detail/details/product_detail_bloc.dart';
 import 'package:ezrxmobile/application/product_image/product_image_bloc.dart';
+import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
@@ -78,7 +79,6 @@ void main() {
   late ProductImageBloc productImageBlocMock;
   late ProductDetailBloc productDetailBlocMock;
   late CartBloc cartBloc;
-
   late List<MaterialInfo> fakeMaterialList;
   late AppRouter autoRouterMock;
 
@@ -90,7 +90,6 @@ void main() {
     locator.registerLazySingleton<MixpanelService>(() => MixpanelServiceMock());
     locator
         .registerLazySingleton<ClevertapService>(() => ClevertapServiceMock());
-
     autoRouterMock = locator<MockAppRouter>();
     eligibilityBlocMock = EligibilityBlocMock();
     materialListBlocMock = MaterialListBlocMock();
@@ -99,7 +98,7 @@ void main() {
     productImageBlocMock = ProductImageBlocMock();
     productDetailBlocMock = ProductDetailBlocMock();
     cartBloc = CartBlocMock();
-
+    locator.registerSingleton<Config>(Config()..appFlavor = Flavor.mock);
     fakeMaterialList =
         (await MaterialListLocalDataSource().getProductList()).products;
   });

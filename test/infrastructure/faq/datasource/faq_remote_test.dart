@@ -22,6 +22,8 @@ void main() {
   late FAQInfoRemoteDataSource remoteDataSource;
   locator.registerSingleton<Config>(Config()..appFlavor = Flavor.uat);
 
+  const pageSize = 10;
+
   final dio = Dio(
     BaseOptions(
       baseUrl: 'https://uat-my.ezrx.com',
@@ -32,7 +34,7 @@ void main() {
   final variableData = {
     'template': '4A583EF3-A105-4A00-BC98-EC96A9967966',
     'path': '51B88D33-B26E-475D-90FC-BEFD9FF0A348',
-    'pageSize': 24,
+    'pageSize': pageSize,
     'lang': 'EN',
     'after': '',
   };
@@ -68,7 +70,7 @@ void main() {
         announcementUrlPath: '/api/announcement',
         variablePath: '51B88D33-B26E-475D-90FC-BEFD9FF0A348',
         template: '4A583EF3-A105-4A00-BC98-EC96A9967966',
-        pageSize: 24,
+        pageSize: pageSize,
         after: '',
         lang: 'EN',
       );
@@ -98,7 +100,7 @@ void main() {
         announcementUrlPath: '/api/announcement',
         variablePath: '51B88D33-B26E-475D-90FC-BEFD9FF0A348',
         template: '4A583EF3-A105-4A00-BC98-EC96A9967966',
-        pageSize: 24,
+        pageSize: pageSize,
         after: '',
         lang: 'EN',
       )
@@ -133,7 +135,7 @@ void main() {
         announcementUrlPath: '/api/announcement',
         variablePath: '51B88D33-B26E-475D-90FC-BEFD9FF0A348',
         template: '4A583EF3-A105-4A00-BC98-EC96A9967966',
-        pageSize: 24,
+        pageSize: pageSize,
         after: '',
         lang: 'EN',
       )
@@ -164,7 +166,7 @@ void main() {
         announcementUrlPath: '/api/announcement',
         variablePath: '51B88D33-B26E-475D-90FC-BEFD9FF0A348',
         template: '4A583EF3-A105-4A00-BC98-EC96A9967966',
-        pageSize: 24,
+        pageSize: pageSize,
         after: '',
         lang: 'EN',
       )

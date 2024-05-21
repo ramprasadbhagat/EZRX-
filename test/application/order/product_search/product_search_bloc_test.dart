@@ -56,11 +56,17 @@ void main() {
         await ProductSearchLocalDataSource().getSearchedProductList();
     fakeResponse1 = MaterialResponse(
       count: 50,
-      products: List.generate(24, (index) => materialResponse.products[0]),
+      products: List.generate(
+        config.productTabPageSize,
+        (index) => materialResponse.products[0],
+      ),
     );
     fakeResponse2 = MaterialResponse(
       count: 50,
-      products: List.generate(24, (index) => materialResponse.products[1]),
+      products: List.generate(
+        config.productTabPageSize,
+        (index) => materialResponse.products[1],
+      ),
     );
   });
 
@@ -374,7 +380,7 @@ void main() {
               shipToInfo: shipToInfo,
               searchKey: searchKey,
               pageSize: config.pageSize,
-              offset: 24,
+              offset: config.productTabPageSize,
               materialFilter: MaterialFilter.empty(),
               user: fakeClientUser,
             ),
@@ -472,7 +478,7 @@ void main() {
               shipToInfo: shipToInfo,
               searchKey: searchKey,
               pageSize: config.pageSize,
-              offset: 24,
+              offset: config.productTabPageSize,
               materialFilter: MaterialFilter.empty(),
               user: fakeClientUser,
             ),

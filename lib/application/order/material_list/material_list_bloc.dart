@@ -85,7 +85,7 @@ class MaterialListBloc extends Bloc<MaterialListEvent, MaterialListState> {
           salesOrgConfig: state.configs,
           customerCodeInfo: state.customerCodeInfo,
           shipToInfo: state.shipToInfo,
-          pageSize: config.pageSize,
+          pageSize: config.productTabPageSize,
           offset: 0,
           selectedMaterialFilter: e.selectedMaterialFilter,
           user: state.user,
@@ -105,7 +105,8 @@ class MaterialListBloc extends Bloc<MaterialListEvent, MaterialListState> {
                 materialList: productResponse.products,
                 apiFailureOrSuccessOption: optionOf(failureOrSuccess),
                 isFetching: false,
-                canLoadMore: productResponse.products.length >= config.pageSize,
+                canLoadMore: productResponse.products.length >=
+                    config.productTabPageSize,
                 nextPageIndex: 1,
               ),
             );
@@ -134,7 +135,7 @@ class MaterialListBloc extends Bloc<MaterialListEvent, MaterialListState> {
         salesOrgConfig: state.configs,
         customerCodeInfo: state.customerCodeInfo,
         shipToInfo: state.shipToInfo,
-        pageSize: config.pageSize,
+        pageSize: config.productTabPageSize,
         offset: state.materialList.length,
         selectedMaterialFilter: state.selectedMaterialFilter,
         user: state.user,
@@ -155,7 +156,8 @@ class MaterialListBloc extends Bloc<MaterialListEvent, MaterialListState> {
               materialList: productList,
               apiFailureOrSuccessOption: none(),
               isFetching: false,
-              canLoadMore: moreProduct.products.length >= config.pageSize,
+              canLoadMore:
+                  moreProduct.products.length >= config.productTabPageSize,
               nextPageIndex: state.nextPageIndex + 1,
             ),
           );

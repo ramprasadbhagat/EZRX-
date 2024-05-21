@@ -90,7 +90,7 @@ void main() {
             salesOrgConfig: fakeSGSalesOrgConfigs,
             customerCodeInfo: fakeCustomerCodeInfo,
             shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
-            pageSize: config.pageSize,
+            pageSize: config.productTabPageSize,
             offset: 0,
             selectedMaterialFilter: mockSelectedMaterialFilter,
             user: fakeClientUser,
@@ -151,7 +151,7 @@ void main() {
             customerCodeInfo: fakeCustomerCodeInfo,
             shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
             user: fakeClientUser,
-            pageSize: config.pageSize,
+            pageSize: config.productTabPageSize,
             offset: 0,
             selectedMaterialFilter: mockSelectedMaterialFilter,
           ),
@@ -186,8 +186,8 @@ void main() {
             materialCount: materialResponseMock.count,
             materialList: materialResponseMock.products,
             apiFailureOrSuccessOption: optionOf(Right(materialResponseMock)),
-            canLoadMore:
-                materialResponseMock.products.length >= config.pageSize,
+            canLoadMore: materialResponseMock.products.length >=
+                config.productTabPageSize,
             nextPageIndex: 1,
             selectedMaterialFilter: updatedSelectedMaterialFilter,
           ),
@@ -195,8 +195,8 @@ void main() {
             materialCount: materialResponseMock.count,
             materialList: materialResponseMock.products,
             apiFailureOrSuccessOption: none(),
-            canLoadMore:
-                materialResponseMock.products.length >= config.pageSize,
+            canLoadMore: materialResponseMock.products.length >=
+                config.productTabPageSize,
             nextPageIndex: 1,
             selectedMaterialFilter: updatedSelectedMaterialFilter,
           ),
@@ -205,8 +205,8 @@ void main() {
             materialList: materialResponseMock.products,
             apiFailureOrSuccessOption:
                 optionOf(const Left(ApiFailure.other('fake-error'))),
-            canLoadMore:
-                materialResponseMock.products.length >= config.pageSize,
+            canLoadMore: materialResponseMock.products.length >=
+                config.productTabPageSize,
             nextPageIndex: 1,
             selectedMaterialFilter: updatedSelectedMaterialFilter,
           ),
@@ -229,7 +229,7 @@ void main() {
             salesOrgConfig: fakeSGSalesOrgConfigs,
             customerCodeInfo: fakeCustomerCodeInfo,
             shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
-            pageSize: config.pageSize,
+            pageSize: config.productTabPageSize,
             offset: 0,
             selectedMaterialFilter: mockSelectedMaterialFilter,
             user: fakeClientUser,
@@ -306,7 +306,7 @@ void main() {
             salesOrgConfig: fakeSGSalesOrgConfigs,
             customerCodeInfo: fakeCustomerCodeInfo,
             shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
-            pageSize: config.pageSize,
+            pageSize: config.productTabPageSize,
             offset: materialState.materialList.length,
             selectedMaterialFilter: mockSelectedMaterialFilter,
             user: fakeClientUser,
@@ -338,13 +338,13 @@ void main() {
           materialState.copyWith(
             materialCount: materialResponseMock.count,
             materialList: productList,
-            canLoadMore: productList.length >= config.pageSize,
+            canLoadMore: productList.length >= config.productTabPageSize,
             nextPageIndex: materialState.nextPageIndex + 1,
           ),
           materialState.copyWith(
             materialCount: materialResponseMock.count,
             materialList: productList,
-            canLoadMore: productList.length >= config.pageSize,
+            canLoadMore: productList.length >= config.productTabPageSize,
             nextPageIndex: materialState.nextPageIndex + 1,
             apiFailureOrSuccessOption:
                 optionOf(const Left(ApiFailure.other('fake-error'))),
@@ -367,7 +367,7 @@ void main() {
             salesOrgConfig: fakeSGSalesOrgConfigs,
             customerCodeInfo: fakeCustomerCodeInfo,
             shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
-            pageSize: config.pageSize,
+            pageSize: config.productTabPageSize,
             offset: materialState.materialList.length,
             selectedMaterialFilter: mockSelectedMaterialFilter,
             user: fakeClientUser,
@@ -397,10 +397,10 @@ void main() {
       'can not Load more',
       seed: () => materialState.copyWith(
         materialList: List.generate(
-          24,
+          config.productTabPageSize,
           (index) => materialResponseMock.products.first,
         ),
-        materialCount: 24,
+        materialCount: config.productTabPageSize,
         nextPageIndex: 1,
       ),
       build: () => MaterialListBloc(
@@ -415,8 +415,8 @@ void main() {
             salesOrgConfig: fakeSGSalesOrgConfigs,
             customerCodeInfo: fakeCustomerCodeInfo,
             shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
-            pageSize: config.pageSize,
-            offset: 24,
+            pageSize: config.productTabPageSize,
+            offset: config.productTabPageSize,
             selectedMaterialFilter: mockSelectedMaterialFilter,
             user: fakeClientUser,
           ),
@@ -428,7 +428,7 @@ void main() {
             ),
           ),
         );
- 
+
         when(
           () => materialListMockRepository.getStockInfoList(
             materials: materialResponseMock.products.skip(20).toList(),
@@ -444,9 +444,9 @@ void main() {
         return [
           materialState.copyWith(
             isFetching: true,
-            materialCount: 24,
+            materialCount: config.productTabPageSize,
             materialList: List.generate(
-              24,
+              config.productTabPageSize,
               (index) => materialResponseMock.products.first,
             ),
             nextPageIndex: 1,
@@ -455,7 +455,7 @@ void main() {
             materialCount: 44,
             materialList: [
               ...List.generate(
-                24,
+                config.productTabPageSize,
                 (index) => materialResponseMock.products.first,
               ),
               ...materialResponseMock.products.skip(20).toList(),

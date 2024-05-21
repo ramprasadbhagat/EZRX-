@@ -37,10 +37,8 @@ void main() {
 
   final fakeUser = User.empty();
 
-  const pageSize = 24;
-
   setUpAll(() {
-    mockConfig = MockConfig();
+    mockConfig = Config()..appFlavor = Flavor.mock;
     mockSalesOrg = MockSalesOrg();
     mockAnnouncementArticleInfo = MockAnnouncementArticleInfo();
     localDataSource = AnnouncementInfoLocalDataSourceMock();
@@ -54,7 +52,7 @@ void main() {
   });
   group('Announcement Info Repository should - ', () {
     test(' get announcement Info successfully locally ', () async {
-      when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
+      mockConfig.appFlavor = Flavor.mock;
 
       when(
         () => localDataSource.getAnnouncementInfo(),
@@ -63,7 +61,7 @@ void main() {
       final result = await repository.getAnnouncement(
         user: fakeUser,
         salesOrg: mockSalesOrg,
-        pageSize: pageSize,
+        pageSize: mockConfig.pageSize,
         after: '',
       );
       expect(
@@ -72,8 +70,7 @@ void main() {
       );
     });
     test(' get announcement Info fail locally ', () async {
-      when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
-
+      mockConfig.appFlavor = Flavor.mock;
       when(
         () => localDataSource.getAnnouncementInfo(),
       ).thenThrow(
@@ -83,7 +80,7 @@ void main() {
       final result = await repository.getAnnouncement(
         user: fakeUser,
         salesOrg: mockSalesOrg,
-        pageSize: pageSize,
+        pageSize: mockConfig.pageSize,
         after: '',
       );
       expect(
@@ -92,26 +89,20 @@ void main() {
       );
     });
     test(' get announcement Info successfully Remote ', () async {
-      when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
+      mockConfig.appFlavor = Flavor.uat;
 
-      when(() => mockConfig.announcementTemplate)
-          .thenReturn('4A583EF3-A105-4A00-BC98-EC96A9967966');
-      when(() => mockConfig.announcementApiUrlPath)
-          .thenReturn('/api/announcement');
       when(() => mockSalesOrg.announcementVariablePath)
           .thenReturn(('51B88D33-B26E-475D-90FC-BEFD9FF0A348'));
       when(() => mockSalesOrg.languageCodeForHelpAndSupport)
           .thenReturn(('zh-TW'));
-      when(() => mockConfig.announcementVnTemplate)
-          .thenReturn('fake-vn-template');
 
       when(
         () => remoteDataSource.getAnnouncementInfo(
-          announcementUrlPath: '/api/announcement',
+          announcementUrlPath: mockConfig.announcementApiUrlPath,
+          template: mockConfig.announcementTemplate,
+          vnTemplate: mockConfig.announcementVnTemplate,
+          pageSize: mockConfig.pageSize,
           variablePath: '51B88D33-B26E-475D-90FC-BEFD9FF0A348',
-          template: '4A583EF3-A105-4A00-BC98-EC96A9967966',
-          vnTemplate: 'fake-vn-template',
-          pageSize: 24,
           after: '',
           lang: 'zh-TW',
         ),
@@ -119,7 +110,7 @@ void main() {
       final result = await repository.getAnnouncement(
         user: fakeUser,
         salesOrg: mockSalesOrg,
-        pageSize: pageSize,
+        pageSize: mockConfig.pageSize,
         after: '',
       );
       expect(
@@ -128,15 +119,18 @@ void main() {
       );
     });
     test(' get announcement Info fail Remote ', () async {
-      when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
-
+      mockConfig.appFlavor = Flavor.uat;
+      when(() => mockSalesOrg.announcementVariablePath)
+          .thenReturn(('51B88D33-B26E-475D-90FC-BEFD9FF0A348'));
+      when(() => mockSalesOrg.languageCodeForHelpAndSupport)
+          .thenReturn(('zh-TW'));
       when(
         () => remoteDataSource.getAnnouncementInfo(
-          announcementUrlPath: '/api/announcement',
+          announcementUrlPath: mockConfig.announcementApiUrlPath,
+          template: mockConfig.announcementTemplate,
+          vnTemplate: mockConfig.announcementVnTemplate,
+          pageSize: mockConfig.pageSize,
           variablePath: '51B88D33-B26E-475D-90FC-BEFD9FF0A348',
-          template: '4A583EF3-A105-4A00-BC98-EC96A9967966',
-          vnTemplate: 'fake-vn-template',
-          pageSize: 24,
           after: '',
           lang: 'zh-TW',
         ),
@@ -146,7 +140,7 @@ void main() {
       final result = await repository.getAnnouncement(
         user: fakeUser,
         salesOrg: mockSalesOrg,
-        pageSize: pageSize,
+        pageSize: mockConfig.pageSize,
         after: '',
       );
       expect(
@@ -158,8 +152,7 @@ void main() {
 
   group('Announcement Info Details Repository should - ', () {
     test(' get announcement Info details successfully locally ', () async {
-      when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
-
+      mockConfig.appFlavor = Flavor.mock;
       when(
         () => localDataSource.getAnnouncementInfoDetails(),
       ).thenAnswer((invocation) async => AnnouncementInfoDetails.empty());
@@ -174,7 +167,7 @@ void main() {
       );
     });
     test(' get announcement Info details fail locally ', () async {
-      when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
+      mockConfig.appFlavor = Flavor.mock;
 
       when(
         () => localDataSource.getAnnouncementInfoDetails(),
@@ -192,12 +185,7 @@ void main() {
       );
     });
     test(' get announcement Info details successfully Remote ', () async {
-      when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
-
-      when(() => mockConfig.announcementTemplate)
-          .thenReturn('4A583EF3-A105-4A00-BC98-EC96A9967966');
-      when(() => mockConfig.announcementApiUrlPath)
-          .thenReturn('/api/announcement');
+      mockConfig.appFlavor = Flavor.uat;
       when(() => mockSalesOrg.announcementVariablePath)
           .thenReturn(('51B88D33-B26E-475D-90FC-BEFD9FF0A348'));
       when(() => mockSalesOrg.announcementLocale)
@@ -208,7 +196,7 @@ void main() {
 
       when(
         () => remoteDataSource.getAnnouncementInfoDetails(
-          announcementUrlPath: '/api/announcement',
+          announcementUrlPath: mockConfig.announcementApiUrlPath,
           lang: fakeMYSalesOrg.announcementLocale.languageCode,
           announcementId: 'fake_id',
         ),
@@ -223,11 +211,10 @@ void main() {
       );
     });
     test(' get announcement Info details fail Remote ', () async {
-      when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
-
+      mockConfig.appFlavor = Flavor.uat;
       when(
         () => remoteDataSource.getAnnouncementInfoDetails(
-          announcementUrlPath: '/api/announcement',
+          announcementUrlPath: mockConfig.announcementApiUrlPath,
           lang: 'EN',
           announcementId: 'fake_id',
         ),

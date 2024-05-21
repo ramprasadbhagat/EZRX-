@@ -51,7 +51,6 @@ void main() {
         materialNumber: fakeMaterialListData.products.first.materialNumber,
         materialDescription:
             fakeMaterialListData.products.first.materialDescription,
-        itemId: StringValue(''),
         principalData: fakeMaterialListData.products.first.principalData,
       ),
     ];
@@ -126,7 +125,6 @@ void main() {
         ),
         BonusMaterialState.initial().copyWith(
           bonusItemList: fakeMaterialListData.products,
-          failureOrSuccessOption: none(),
           searchKey: SearchKey('fake-searchKey'),
         ),
       ],
@@ -241,7 +239,6 @@ void main() {
           failureOrSuccessOption: optionOf(Right(fakeMaterialListData)),
         ),
         BonusMaterialState.initial().copyWith(
-          canLoadMore: false,
           bonusItemList: [
             ...fakeMaterialListData.products,
             ...fakeMaterialListData.products,
@@ -250,7 +247,6 @@ void main() {
         ),
         BonusMaterialState.initial().copyWith(
           isUpdatingStock: true,
-          canLoadMore: false,
           bonusItemList: [
             ...fakeMaterialListData.products,
             ...fakeMaterialListData.products,
@@ -258,12 +254,10 @@ void main() {
           failureOrSuccessOption: optionOf(Right(fakeMaterialListData)),
         ),
         BonusMaterialState.initial().copyWith(
-          canLoadMore: false,
           bonusItemList: [
             ...fakeMaterialListData.products,
             ...fakeMaterialListData.products,
           ],
-          failureOrSuccessOption: none(),
         ),
       ],
     );

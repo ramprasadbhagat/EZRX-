@@ -139,7 +139,6 @@ void main() {
   final customerCodeRepositoryMock = CustomerCodeRepositoryMock();
   final config = Config()..appFlavor = Flavor.mock;
   late CustomerInformation customerMockData;
-  const fakePageSize = 24;
 
   setUpAll(() async {
     customerMockData =
@@ -297,7 +296,7 @@ void main() {
             hideCustomer: false,
             offset: 0,
             user: fakeUser,
-            pageSize: fakePageSize,
+            pageSize: config.pageSize,
           ),
         ).thenAnswer(
           (invocation) async => Right(customerMockData),
@@ -312,7 +311,7 @@ void main() {
             hideCustomer: false,
             offset: 0,
             user: fakeUser,
-            pageSize: fakePageSize,
+            pageSize: config.pageSize,
           ),
         ).thenAnswer(
           (invocation) async => Right(
@@ -372,7 +371,7 @@ void main() {
           hideCustomer: false,
           offset: 0,
           user: fakeUser,
-          pageSize: fakePageSize,
+          pageSize: config.pageSize,
         ),
       ).thenAnswer(
         (invocation) async => Right(customerMockData),
@@ -433,7 +432,7 @@ void main() {
           hideCustomer: false,
           offset: 0,
           user: fakeUser,
-          pageSize: fakePageSize,
+          pageSize: config.pageSize,
         ),
       ).thenAnswer(
         (invocation) async => Right(customerMockData),
@@ -496,7 +495,7 @@ void main() {
           hideCustomer: false,
           offset: 0,
           user: fakeUser,
-          pageSize: fakePageSize,
+          pageSize: config.pageSize,
         ),
       ).thenAnswer(
         (invocation) async => Right(customerMockData),

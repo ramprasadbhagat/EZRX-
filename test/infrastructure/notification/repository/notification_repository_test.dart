@@ -26,6 +26,7 @@ void main() {
   late DeviceStorage deviceStorage;
   final notificationMockList = Notifications.empty();
   const fakeMarket = 'fake-market';
+  const pageSize = 10;
   setUpAll(() {
     mockConfig = MockConfig();
     localDataSource = NotificationLocalDataSourceMock();
@@ -49,7 +50,7 @@ void main() {
 
       final result = await repository.getNotification(
         page: 1,
-        perPage: 24,
+        perPage: pageSize,
       );
       expect(
         result.isRight(),
@@ -67,7 +68,7 @@ void main() {
 
       final result = await repository.getNotification(
         page: 1,
-        perPage: 24,
+        perPage: pageSize,
       );
       expect(
         result.isLeft(),
@@ -80,14 +81,14 @@ void main() {
       when(
         () => remoteDataSource.getNotification(
           page: 1,
-          perPage: 24,
+          perPage: pageSize,
           market: fakeMarket,
         ),
       ).thenAnswer((invocation) async => notificationMockList);
 
       final result = await repository.getNotification(
         page: 1,
-        perPage: 24,
+        perPage: pageSize,
       );
       expect(
         result.isRight(),
@@ -100,7 +101,7 @@ void main() {
       when(
         () => remoteDataSource.getNotification(
           page: 1,
-          perPage: 24,
+          perPage: pageSize,
           market: fakeMarket,
         ),
       ).thenThrow(
@@ -109,7 +110,7 @@ void main() {
 
       final result = await repository.getNotification(
         page: 1,
-        perPage: 24,
+        perPage: pageSize,
       );
       expect(
         result.isLeft(),

@@ -60,7 +60,6 @@ void main() {
     customerInfos: fakeMultipleSalesOrgCustomerInfos,
   );
 
-  const fakePageSize = 24;
   const apiFailure = ApiFailure.other('fake-error');
   late CustomerCodeConfig customerCodeConfig;
 
@@ -120,7 +119,7 @@ void main() {
             hideCustomer: false,
             offset: 0,
             user: fakeUser,
-            pageSize: fakePageSize,
+            pageSize: config.pageSize,
           ),
         ).thenAnswer(
           (invocation) async => const Left(
@@ -180,7 +179,7 @@ void main() {
             hideCustomer: false,
             offset: 0,
             user: fakeUser,
-            pageSize: fakePageSize,
+            pageSize: config.pageSize,
           ),
         ).thenAnswer(
           (invocation) async => Right(
@@ -255,7 +254,7 @@ void main() {
             hideCustomer: false,
             offset: 0,
             user: fakeUser,
-            pageSize: fakePageSize,
+            pageSize: config.pageSize,
           ),
         ).thenAnswer(
           (invocation) async => Right(
@@ -333,7 +332,7 @@ void main() {
             hideCustomer: false,
             offset: 0,
             user: fakeUser,
-            pageSize: fakePageSize,
+            pageSize: config.pageSize,
           ),
         ).thenAnswer(
           (invocation) async => Right(
@@ -400,7 +399,7 @@ void main() {
             hideCustomer: true,
             offset: 0,
             user: fakeUser,
-            pageSize: fakePageSize,
+            pageSize: config.pageSize,
           ),
         ).thenAnswer(
           (invocation) async => Right(
@@ -460,7 +459,7 @@ void main() {
             hideCustomer: false,
             offset: 0,
             user: fakeUser,
-            pageSize: fakePageSize,
+            pageSize: config.pageSize,
           ),
         ).thenAnswer(
           (invocation) async => const Left(
@@ -523,7 +522,7 @@ void main() {
             hideCustomer: false,
             offset: 0,
             user: fakeUser,
-            pageSize: fakePageSize,
+            pageSize: config.pageSize,
           ),
         ).thenAnswer(
           (invocation) async => Right(
@@ -591,7 +590,7 @@ void main() {
             hideCustomer: false,
             offset: 0,
             user: fakeUser,
-            pageSize: fakePageSize,
+            pageSize: config.pageSize,
           ),
         ).thenAnswer(
           (invocation) async => const Left(
@@ -654,7 +653,7 @@ void main() {
             hideCustomer: false,
             offset: 0,
             user: fakeUser,
-            pageSize: fakePageSize,
+            pageSize: config.pageSize,
           ),
         ).thenAnswer(
           (invocation) async => const Left(
@@ -724,7 +723,7 @@ void main() {
             hideCustomer: false,
             offset: 0,
             user: fakeUser,
-            pageSize: fakePageSize,
+            pageSize: config.pageSize,
           ),
         ).thenAnswer(
           (invocation) async => Right(
@@ -789,7 +788,7 @@ void main() {
             hideCustomer: false,
             offset: 0,
             user: fakeUser,
-            pageSize: fakePageSize,
+            pageSize: config.pageSize,
           ),
         ).thenAnswer(
           (invocation) async => Right(CustomerInformation.empty()),
