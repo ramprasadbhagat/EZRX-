@@ -163,12 +163,17 @@ class _ProductDetails extends StatelessWidget {
             key: WidgetKeys.cartItemProductUnitPrice,
             children: [
               if (cartItem.displayCutOffListPrice)
-                PriceComponent(
-                  key: WidgetKeys.materialListPriceStrikeThrough,
-                  salesOrgConfig:
-                      context.read<EligibilityBloc>().state.salesOrgConfigs,
-                  price: cartItem.display(PriceType.listPrice),
-                  type: PriceStyle.counterOfferPrice,
+                Padding(
+                  padding: const EdgeInsets.only(
+                    right: 4,
+                  ),
+                  child: PriceComponent(
+                    key: WidgetKeys.materialListPriceStrikeThrough,
+                    salesOrgConfig:
+                        context.read<EligibilityBloc>().state.salesOrgConfigs,
+                    price: cartItem.display(PriceType.listPrice),
+                    type: PriceStyle.counterOfferPrice,
+                  ),
                 ),
               _DisplayMaterialDetails(
                 child: PriceComponent(

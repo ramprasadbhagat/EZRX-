@@ -626,6 +626,8 @@ class WidgetKeys {
   static const Key counterOfferListPriceWidget =
       Key('counterOfferListPriceWidget');
   static const Key counterOfferPriceWidget = Key('counterOfferPriceWidget');
+  static const Key counterOfferListPriceWithoutStrikeWidget =
+      Key('counterOfferListPriceWithoutStrikeWidget');
   static const Key cartPageAppBarTitle = Key('cartPageAppBarTitle');
   static const Key priceNotAvailableMessageWidget =
       Key('priceNotAvailableMessageWidget');

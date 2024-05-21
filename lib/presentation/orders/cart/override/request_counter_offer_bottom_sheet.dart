@@ -104,22 +104,38 @@ class RequestCounterOfferBottomSheet extends StatelessWidget {
                 const SizedBox(
                   height: 5,
                 ),
+                if (cartItem.isListPriceNotAvailableForProduct ||
+                    !state.item.showMaterialListPrice)
+                  PriceComponent(
+                    key: WidgetKeys.counterOfferListPriceWithoutStrikeWidget,
+                    title: '${context.tr('List price')} : ',
+                    salesOrgConfig:
+                        context.read<EligibilityBloc>().state.salesOrgConfigs,
+                    price: cartItem.display(PriceType.listPrice),
+                    priceLabelStyle:
+                        Theme.of(context).textTheme.bodySmall?.copyWith(
+                              color: ZPColors.darkGray,
+                              fontSize: 14,
+                            ),
+                    type: PriceStyle.counterOfferListPrice,
+                  ),
                 ListPriceStrikeThroughComponent(
                   key: WidgetKeys.counterOfferListPriceWidget,
                   priceAggregate: state.item,
                   title: '${context.tr('List price')} : ',
                 ),
-                PriceComponent(
-                  key: WidgetKeys.counterOfferPriceWidget,
-                  title: '${context.tr('Offer price')} : ',
-                  salesOrgConfig:
-                      context.read<EligibilityBloc>().state.salesOrgConfigs,
-                  price: cartItem.display(PriceType.finalPrice),
-                  priceLabelStyle:
-                      Theme.of(context).textTheme.bodySmall?.copyWith(
-                            color: ZPColors.darkGray,
-                          ),
-                ),
+                if (state.item.showMaterialListPrice)
+                  PriceComponent(
+                    key: WidgetKeys.counterOfferPriceWidget,
+                    title: '${context.tr('Offer price')} : ',
+                    salesOrgConfig:
+                        context.read<EligibilityBloc>().state.salesOrgConfigs,
+                    price: cartItem.display(PriceType.finalPrice),
+                    priceLabelStyle:
+                        Theme.of(context).textTheme.bodySmall?.copyWith(
+                              color: ZPColors.darkGray,
+                            ),
+                  ),
                 if (isPriceOverrideEnable)
                   _CounterOfferPriceTextField(
                     isDiscountOverrideEnable: isDiscountOverrideEnable,

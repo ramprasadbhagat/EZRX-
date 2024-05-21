@@ -39,6 +39,7 @@ import 'package:ezrxmobile/application/order/order_eligibility/order_eligibility
 import 'package:ezrxmobile/infrastructure/order/datasource/cart/cart_local_datasource.dart';
 import 'package:ezrxmobile/presentation/orders/cart/override/request_counter_offer_bottom_sheet.dart';
 
+import '../../../common_mock_data/sales_org_config_mock/fake_sg_sales_org_config.dart';
 import '../../../utils/widget_utils.dart';
 import '../../../common_mock_data/user_mock.dart';
 import '../../../common_mock_data/mock_bloc.dart';
@@ -1280,13 +1281,13 @@ void main() {
 
       final counterOfferPriceWidgetFinder =
           find.byKey(WidgetKeys.counterOfferPriceWidget);
-      expect(counterOfferPriceWidgetFinder, findsOneWidget);
+      expect(counterOfferPriceWidgetFinder, findsNothing);
 
       final counterOfferPriceTextFinder = find.text(
         '${'Offer price'.tr()} : Price Not Available',
         findRichText: true,
       );
-      expect(counterOfferPriceTextFinder, findsOneWidget);
+      expect(counterOfferPriceTextFinder, findsNothing);
     });
 
     testWidgets('Check list price for counter offer bottom sheet.',
@@ -1329,6 +1330,87 @@ void main() {
         find.descendant(
           of: listPriceStrikeThroughComponent,
           matching: find.text('List price : VND 20.00', findRichText: true),
+        ),
+        findsOneWidget,
+      );
+    });
+
+    testWidgets('Hide Offer price for price Not Available product',
+        (tester) async {
+      final cartItem = cartItems.first.copyWith(
+        materialInfo: cartItems.first.materialInfo.copyWith(
+          isFOCMaterial: true,
+        ),
+        salesOrgConfig: fakeSGSalesOrgConfigs,
+      );
+      when(() => priceOverrideBloc.state).thenReturn(
+        PriceOverrideState.initial().copyWith(
+          item: cartItem,
+        ),
+      );
+      when(() => eligibilityBloc.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrgConfigs: fakeSGSalesOrgConfigs,
+        ),
+      );
+      await tester.pumpWidget(
+        getWidget(
+          child: Scaffold(
+            body: RequestCounterOfferBottomSheet(
+              cartItem: cartItem,
+            ),
+          ),
+        ),
+      );
+      await tester.pump();
+
+      final counterOfferBottomSheetFinder =
+          find.byKey(WidgetKeys.counterOfferBottomSheet);
+      expect(counterOfferBottomSheetFinder, findsOneWidget);
+
+      final counterOfferPriceWidgetFinder =
+          find.byKey(WidgetKeys.counterOfferPriceWidget);
+      expect(counterOfferPriceWidgetFinder, findsNothing);
+    });
+
+    testWidgets(
+        'Show List price without strike for price Not Available product',
+        (tester) async {
+      final cartItem = cartItems.first.copyWith(
+        materialInfo: cartItems.first.materialInfo.copyWith(
+          isFOCMaterial: true,
+        ),
+        salesOrgConfig: fakeSGSalesOrgConfigs,
+      );
+      when(() => priceOverrideBloc.state).thenReturn(
+        PriceOverrideState.initial().copyWith(
+          item: cartItem,
+        ),
+      );
+      when(() => eligibilityBloc.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrgConfigs: fakeSGSalesOrgConfigs,
+        ),
+      );
+      await tester.pumpWidget(
+        getWidget(
+          child: Scaffold(
+            body: RequestCounterOfferBottomSheet(
+              cartItem: cartItem,
+            ),
+          ),
+        ),
+      );
+      await tester.pump();
+
+      final counterOfferListPriceWithoutStrikeFinder =
+          find.byKey(WidgetKeys.counterOfferListPriceWithoutStrikeWidget);
+      expect(counterOfferListPriceWithoutStrikeFinder, findsOneWidget);
+      expect(
+        find.descendant(
+          of: counterOfferListPriceWithoutStrikeFinder,
+          matching:
+              find.text('List price : Price Not Available', findRichText: true),
         ),
         findsOneWidget,
       );

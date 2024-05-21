@@ -148,6 +148,7 @@ enum PriceStyle {
   tenderPrice,
   tenderViewOrderByItemPrice,
   tenderCartPrice,
+  counterOfferListPrice,
 }
 
 Color _priceTextColor(PriceStyle type) {
@@ -191,6 +192,8 @@ Color _priceTextColor(PriceStyle type) {
     case PriceStyle.bundleListPriceStrikeThrough:
     case PriceStyle.cartMaterialUnitPrice:
       return ZPColors.neutralsGrey1;
+    case PriceStyle.counterOfferListPrice:
+      return ZPColors.darkGray;
     default:
       return ZPColors.black;
   }
@@ -277,6 +280,12 @@ TextStyle _priceStyle(BuildContext context, PriceStyle type) {
       break;
     case PriceStyle.cartMaterialUnitPrice:
       priceTextStyle = Theme.of(context).textTheme.bodyLarge!;
+      break;
+    case PriceStyle.counterOfferListPrice:
+      priceTextStyle = Theme.of(context).textTheme.bodySmall!.copyWith(
+            color: ZPColors.darkGray,
+            fontSize: 14,
+          );
       break;
     default:
       break;
@@ -392,6 +401,11 @@ TextStyle _currencyCodeTextStyle(BuildContext context, PriceStyle type) {
           .textTheme
           .titleSmall!
           .copyWith(color: ZPColors.darkerGrey);
+    case PriceStyle.counterOfferListPrice:
+      return Theme.of(context).textTheme.bodySmall!.copyWith(
+            color: ZPColors.darkGray,
+            fontSize: 14,
+          );
     case PriceStyle.returnBonusPrice:
     case PriceStyle.bundleCartPrice:
     default:

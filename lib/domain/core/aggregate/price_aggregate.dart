@@ -424,10 +424,10 @@ class PriceAggregate with _$PriceAggregate {
         (priceType == PriceType.finalPrice ||
             priceType == PriceType.finalPriceTotal);
 
-    if (invalidPrice ||
-        price.finalPrice.isUnavailable ||
-        (!price.isValid && !applyCounterOfferOnFinalPrice) ||
-        !price.isValidMaterial) return 'Price Not Available';
+    if (_displayPriceNotAvailable ||
+        (!price.isValid && !applyCounterOfferOnFinalPrice)) {
+      return 'Price Not Available';
+    }
 
     double result;
     switch (priceType) {
@@ -949,6 +949,12 @@ class PriceAggregate with _$PriceAggregate {
 
   bool get bonusPriceOverrideEligible =>
       !materialInfo.isMarketPlace && !is26SeriesMaterial && !isCovid;
+
+  bool get isListPriceNotAvailableForProduct =>
+      _displayPriceNotAvailable || !price.isValid;
+
+  bool get _displayPriceNotAvailable =>
+      invalidPrice || price.finalPrice.isUnavailable || !price.isValidMaterial;
 }
 
 enum PriceType {
