@@ -6,7 +6,6 @@ import 'package:ezrxmobile/application/order/payment_customer_information/paymen
 import 'package:ezrxmobile/domain/account/entities/customer_license.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
-import 'package:ezrxmobile/domain/order/entities/delivery_info_data.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_basic_info.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/customer_license_local.dart';
 import 'package:ezrxmobile/infrastructure/core/clevertap/clevertap_service.dart';
@@ -1015,16 +1014,6 @@ void main() {
         await tester.pumpAndSettle();
 
         verify(
-          () => additionalDetailsBlocMock.add(
-            AdditionalDetailsEvent.initiateFromHistory(
-              data: DeliveryInfoData.empty().copyWith(
-                mobileNumber: fakePhoneNumber,
-              ),
-            ),
-          ),
-        ).called(1);
-
-        verify(
           () => cartBlocMock.add(
             CartEvent.addHistoryItemsToCart(
               items: [fakeItem],
@@ -1032,7 +1021,6 @@ void main() {
             ),
           ),
         ).called(1);
-        expect(autoRouterMock.current.path, 'orders/cart');
       });
 
       testWidgets(

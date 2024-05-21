@@ -45,8 +45,9 @@ bool materialBundleTypeIsPercent(String bundleType) {
   return bundleType == '%';
 }
 
-bool materialTaxClassificationIsNoTax(String taxClassification) {
-  return isEqualsIgnoreCase(taxClassification, 'noTax');
+bool materialEligibleForTaxExclusion(String taxClassification) {
+  return isEqualsIgnoreCase(taxClassification, 'noTax') ||
+      isEqualsIgnoreCase(taxClassification, 'Exempt');
 }
 // Need to revisit once Tax Exempt User story is ready
 // bool materialTaxClassificationIsExempt(String taxClassification) {

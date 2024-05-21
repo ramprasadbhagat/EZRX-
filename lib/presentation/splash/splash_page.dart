@@ -321,7 +321,7 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
               },
               (either) => either.fold(
                 (failure) {
-                  ErrorUtils.handleApiFailure(context, failure);
+                  ErrorUtils.handleCartApiFailure(context, failure);
                 },
                 (_) {},
               ),
@@ -1080,11 +1080,11 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                   ..add(
                     const CustomerCodeEvent.fetch(),
                   );
-                  context.read<CustomerCodeBloc>().add(
+                context.read<CustomerCodeBloc>().add(
                       CustomerCodeEvent.fetchCustomerCodeConfig(
                         customerCodeInfo: eligibilityState.customerCodeInfo,
                       ),
-                  );
+                    );
                 // context.read<HomePageBloc>().add(const HomePageEvent.refresh());
               }
             }

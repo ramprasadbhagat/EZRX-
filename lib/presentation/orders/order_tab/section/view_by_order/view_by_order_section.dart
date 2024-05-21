@@ -7,6 +7,7 @@ import 'package:ezrxmobile/application/order/material_price/material_price_bloc.
 import 'package:ezrxmobile/application/order/re_order_permission/re_order_permission_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_order/view_by_order_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_order_details/view_by_order_details_bloc.dart';
+import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/delivery_info_data.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details.dart';

@@ -28,4 +28,11 @@ class ErrorUtils {
       context.read<AuthBloc>().add(const AuthEvent.logout());
     }
   }
+
+  static void handleCartApiFailure(BuildContext context, ApiFailure failure) {
+    if (failure == const ApiFailure.addAnimalHealthWithNormalProductToCart()) {
+      return;
+    }
+    handleApiFailure(context, failure);
+  }
 }

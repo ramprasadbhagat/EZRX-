@@ -31,6 +31,8 @@ class FailureHandler {
       return error.map(
         cartHasDifferentAddress: (_) =>
             const ApiFailure.cartHasDifferentAddress(),
+        addAnimalHealthWithNormalProductToCart: (_) =>
+            const ApiFailure.addAnimalHealthWithNormalProductToCart(),
       );
     } else {
       switch (error.runtimeType) {

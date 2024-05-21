@@ -6,4 +6,7 @@ part 'cart_exception.freezed.dart';
 class CartException with _$CartException {
   const factory CartException.cartHasDifferentAddress() =
       _CartHasDifferentAddress;
+
+  const factory CartException.addAnimalHealthWithNormalProductToCart() =
+      _AddAnimalHealthWithNormalProductToCart;
 }

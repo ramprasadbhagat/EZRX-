@@ -713,8 +713,16 @@ class _FooterState extends State<_Footer> {
                                   }
                                 },
                                 (either) => either.fold(
-                                  (failure) =>
-                                      _trackAddToCartFailure(context, failure),
+                                  (failure) {
+                                    _trackAddToCartFailure(context, failure);
+                                    _handleCartFailure(
+                                      context,
+                                      failure,
+                                      quantityText:
+                                          _quantityEditingController.text,
+                                      banner: widget.banner,
+                                    );
+                                  },
                                   (_) {},
                                 ),
                               );
@@ -899,6 +907,21 @@ void _trackAddToCartFailure(BuildContext context, ApiFailure failure) =>
             RouterUtils.buildRouteTrackingName(context.router.currentPath),
       },
     );
+
+void _handleCartFailure(
+  BuildContext context,
+  ApiFailure failure, {
+  required EZReachBanner? banner,
+  required String quantityText,
+}) {
+  if (failure == const ApiFailure.addAnimalHealthWithNormalProductToCart()) {
+    _showAnimalHealthWarningPage(
+      context: context,
+      banner: banner,
+      quantityText: quantityText,
+    );
+  }
+}
 
 void _addToCart({
   required BuildContext context,
@@ -1193,6 +1216,44 @@ void _showTenderContractWarningPage({
         context: context,
         price: price,
         state: context.read<ProductDetailBloc>().state,
+        stateCart: context.read<CartBloc>().state,
+        tenderContractState: context.read<TenderContractDetailBloc>().state,
+        quantityText: quantityText,
+        banner: banner,
+      );
+    }
+  });
+}
+
+void _showAnimalHealthWarningPage({
+  required BuildContext context,
+  required String quantityText,
+  EZReachBanner? banner,
+}) {
+  final productDetailState = context.read<ProductDetailBloc>().state;
+
+  final price = context.read<MaterialPriceBloc>().state.materialPrice[
+          productDetailState
+              .productDetailAggregate.materialInfo.materialNumber] ??
+      Price.empty();
+
+  showModalBottomSheet(
+    context: context,
+    isScrollControlled: true,
+    enableDrag: false,
+    isDismissible: false,
+    clipBehavior: Clip.antiAliasWithSaveLayer,
+    builder: (_) {
+      return AddToCartErrorSection.forAnimalHealth(
+        context: context,
+      );
+    },
+  ).then((value) {
+    if (value != null) {
+      upsertCart(
+        context: context,
+        price: price,
+        state: productDetailState,
         stateCart: context.read<CartBloc>().state,
         tenderContractState: context.read<TenderContractDetailBloc>().state,
         quantityText: quantityText,

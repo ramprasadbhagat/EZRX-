@@ -480,10 +480,6 @@ void main() {
         find.byKey(WidgetKeys.viewByOrderBuyAgainButtonKey),
         findsOneWidget,
       );
-      expect(
-        find.byKey(WidgetKeys.customSnackBarMessage),
-        findsOneWidget,
-      );
 
       verify(
         () => reOrderPermissionBlocMock.add(

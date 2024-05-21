@@ -215,15 +215,19 @@ class CartRemoteDataSource {
   //Note* 'no cart found' error message is received when the cart is empty hence
   //we do not show any error message to the user.
   void _exceptionChecker({required Response<dynamic> res}) {
-    if (res.data['errors'] != null &&
-        res.data['errors'].isNotEmpty &&
-        res.data['errors'][0]['message'] ==
-            'shipToAddress changed from existing cart. Delete the cart and then add new item') {
-      throw const CartException.cartHasDifferentAddress();
-    } else if (res.data['errors'] != null &&
-        res.data['errors'].isNotEmpty &&
-        res.data['errors'][0]['message'] != 'no cart found') {
-      throw ServerException(message: res.data['errors'][0]['message']);
+    if (res.data['errors'] != null && res.data['errors'].isNotEmpty) {
+      final message = res.data['errors'][0]['message'].toString().toLowerCase();
+      switch (message) {
+        case 'shiptoaddress changed from existing cart. delete the cart and then add new item':
+          throw const CartException.cartHasDifferentAddress();
+        case 'no cart found':
+          return;
+        case "can't add normal product with animal health product":
+        case "can't add animal health product with normal product":
+          throw const CartException.addAnimalHealthWithNormalProductToCart();
+        default:
+          throw ServerException(message: res.data['errors'][0]['message']);
+      }
     } else if (res.statusCode != 200) {
       throw ServerException(
         code: res.statusCode ?? 0,

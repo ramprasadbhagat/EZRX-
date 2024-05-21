@@ -28,10 +28,20 @@ class BuyAgainButton extends StatelessWidget {
               );
 
           state.apiFailureOrSuccessOption.fold(
-            () {},
+            () {
+              context.read<AdditionalDetailsBloc>().add(
+                    AdditionalDetailsEvent.initiateFromHistory(
+                      data: DeliveryInfoData.empty().copyWith(
+                        mobileNumber: viewByOrderHistoryItem.telephoneNumber,
+                      ),
+                    ),
+                  );
+
+              context.router.push(const CartPageRoute());
+            },
             (either) => either.fold(
               (failure) {
-                ErrorUtils.handleApiFailure(context, failure);
+                _handleCartFailure(context, failure);
               },
               (_) {},
             ),
@@ -60,15 +70,6 @@ class BuyAgainButton extends StatelessWidget {
                         counterOfferDetails: RequestCounterOfferDetails.empty(),
                       ),
                     );
-                context.read<AdditionalDetailsBloc>().add(
-                      AdditionalDetailsEvent.initiateFromHistory(
-                        data: DeliveryInfoData.empty().copyWith(
-                          mobileNumber: viewByOrderHistoryItem.telephoneNumber,
-                        ),
-                      ),
-                    );
-
-                context.router.push(const CartPageRoute());
               },
               (either) => either.fold(
                 (failure) {
@@ -122,7 +123,7 @@ class BuyAgainButton extends StatelessWidget {
     final cartState = context.read<CartBloc>().state;
     final cartProducts = cartState.cartProducts;
 
-     if (cartProducts.isEmpty) {
+    if (cartProducts.isEmpty) {
       _buyAgain(context);
 
       return;
@@ -136,7 +137,7 @@ class BuyAgainButton extends StatelessWidget {
     if ((isCovidMaterialAvailable && !containFocMaterialInCartProduct) ||
         (!isCovidMaterialAvailable && containFocMaterialInCartProduct)) {
       _showDetailsPage(context);
-      
+
       return;
     }
 
@@ -177,6 +178,33 @@ class BuyAgainButton extends StatelessWidget {
             orderNumberWillUpsert: viewByOrderHistoryItem.orderNumber,
           ),
         );
+  }
+
+  void _handleCartFailure(BuildContext context, ApiFailure failure) {
+    if (failure == const ApiFailure.addAnimalHealthWithNormalProductToCart()) {
+      showModalBottomSheet(
+        context: context,
+        isScrollControlled: true,
+        enableDrag: false,
+        isDismissible: false,
+        clipBehavior: Clip.antiAliasWithSaveLayer,
+        builder: (_) {
+          return AddToCartErrorSection.forAnimalHealth(
+            context: context,
+          );
+        },
+      ).then((value) {
+        if (value != null) {
+          context.read<ReOrderPermissionBloc>().add(
+                ReOrderPermissionEvent.fetchOrder(
+                  orderHistoryDetailsOrderItems:
+                      viewByOrderHistoryItem.orderHistoryDetailsOrderItem,
+                  orderNumberWillUpsert: viewByOrderHistoryItem.orderNumber,
+                ),
+              );
+        }
+      });
+    }
   }
 
   void _trackBuyAgainEvent(

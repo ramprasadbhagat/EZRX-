@@ -30,6 +30,18 @@ class AddToCartErrorSection extends StatelessWidget {
             ),
       );
 
+  factory AddToCartErrorSection.forAnimalHealth({
+    required BuildContext context,
+  }) =>
+      AddToCartErrorSection(
+        contentText: context.tr(
+          'Animal health materials cannot be ordered with regular materials. By proceeding, your existing cart will be cleared.',
+        ),
+        onProceed: () => context.read<CartBloc>().add(
+              const CartEvent.clearCart(),
+            ),
+      );
+
   factory AddToCartErrorSection.forCovid({
     required BuildContext context,
     required bool cartContainsFocProduct,

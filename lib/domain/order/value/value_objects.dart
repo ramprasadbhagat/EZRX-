@@ -291,7 +291,7 @@ class MaterialTaxClassification extends ValueObject<String> {
   // as Full Tax and Special Scheme
 
   bool get isNoTax {
-    return materialTaxClassificationIsNoTax(value.getOrElse(() => ''));
+    return materialEligibleForTaxExclusion(value.getOrElse(() => ''));
   }
 
   // Need to revisit once Tax Exempt User story is ready

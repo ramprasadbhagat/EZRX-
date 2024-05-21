@@ -3,6 +3,7 @@ import 'package:collection/collection.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/order/additional_details/additional_details_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_item/view_by_item_bloc.dart';
+import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/order/entities/delivery_info_data.dart';
 import 'package:ezrxmobile/infrastructure/core/common/tracking_events.dart';
 import 'package:ezrxmobile/infrastructure/core/common/tracking_properties.dart';

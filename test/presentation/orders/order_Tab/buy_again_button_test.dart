@@ -4,7 +4,6 @@ import 'package:ezrxmobile/application/order/additional_details/additional_detai
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
 import 'package:ezrxmobile/application/order/re_order_permission/re_order_permission_bloc.dart';
-import 'package:ezrxmobile/domain/order/entities/delivery_info_data.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details.dart';
 import 'package:ezrxmobile/domain/order/entities/request_counter_offer_details.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
@@ -100,6 +99,10 @@ void main() {
         () => autoRouterMock.currentPath,
       ).thenAnswer((invocation) => 'orders/cart');
 
+      when(
+        () => autoRouterMock.push(const CartPageRoute()),
+      ).thenAnswer((invocation) => Future.value());
+
       whenListen(
         cartBlocMock,
         Stream.fromIterable([
@@ -152,10 +155,6 @@ void main() {
 
     testWidgets('Pass phone number to the Checkout page when reorder is valid',
         (tester) async {
-      when(
-        () => autoRouterMock.push(const CartPageRoute()),
-      ).thenAnswer((invocation) => Future.value());
-
       whenListen(
         reOrderPermissionBlocMock,
         Stream.fromIterable([
@@ -181,20 +180,6 @@ void main() {
             counterOfferDetails: RequestCounterOfferDetails.empty(),
           ),
         ),
-      ).called(1);
-
-      verify(
-        () => additionalDetailsBlocMock.add(
-          AdditionalDetailsEvent.initiateFromHistory(
-            data: DeliveryInfoData.empty().copyWith(
-              mobileNumber: fakePhoneNumber,
-            ),
-          ),
-        ),
-      ).called(1);
-
-      verify(
-        () => autoRouterMock.push(const CartPageRoute()),
       ).called(1);
     });
   });

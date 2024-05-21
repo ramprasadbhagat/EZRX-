@@ -75,6 +75,8 @@ class ApiFailure with _$ApiFailure {
   const factory ApiFailure.attachmentDownloadError() = _AttachmentDownloadError;
   const factory ApiFailure.openDownloadedFileError(String message) =
       _OpenDownloadedFileError;
+  const factory ApiFailure.addAnimalHealthWithNormalProductToCart() =
+      _AddAnimalHealthWithNormalProductToCart;
 }
 
 extension ApiFailureExt on ApiFailure {
@@ -164,6 +166,7 @@ extension ApiFailureExt on ApiFailure {
           'Error while fetching announcement article tag list!',
         ),
         attachmentDownloadError: (_) => const TRObject('File download failed'),
+        addAnimalHealthWithNormalProductToCart: (_) => const TRObject(''),
         marketplaceTnCAcceptanceError: (_) => const TRObject(
           'Unable to update acceptance status',
         ),
