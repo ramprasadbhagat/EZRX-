@@ -61,6 +61,14 @@ parameters:
       - 'Samsung Galaxy S23-13.0'
       - 'Samsung Galaxy S21 Plus-11.0'
       - 'OnePlus 9-11.0'   
+
+  - name: agentpool 
+    type: string
+    displayName: Agent Pool 
+    default: dnd-azdevops-flutter44
+    values:
+      - dnd-azdevops-flutter44
+      - dnd-azdevops-flutter33
       
 pool:   
   name: dnd-azdevops-flutter44
@@ -172,9 +180,8 @@ stages:
         cancelTimeoutInMinutes: 5
         displayName: ${{ testFile.Key }}
         pool:   
-          name: dnd-azdevops-flutter33 
+          name: ${{ parameters.agentpool }}
         steps:
-
         - task: DownloadBuildArtifacts@1
           inputs:
             buildType: 'current'
@@ -326,6 +333,7 @@ stages:
                 cmd="curl -X GET "https://api-cloud.browserstack.com/app-automate/flutter-integration-tests/v2/android/builds/${result_build_id}" -u $BROWSERSTACK_CREDENTIALS "
                 buildStatus=`$cmd | sed -En 's/.*"status":"([^"]*).*/\1/p'`
                 sessionId=`$cmd | sed -En 's/.*"id":"([^"]*).*/\1/p'`
+                echo "Build URL https://app-automate.browserstack.com/dashboard/v2/builds/${result_build_id}"
                 echo "The Current status of the run is : " $buildStatus
                 echo "The Session Id of the run is : " $sessionId
                 monitorTime=$(( SECONDS - buildMonitorStart ))
