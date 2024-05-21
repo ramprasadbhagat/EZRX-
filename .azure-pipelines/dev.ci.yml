@@ -167,6 +167,11 @@ jobs:
   steps:
   - bash: flutter test test/presentation/home
 
+- job: TestPresentationIntro
+  displayName: Test presentation -> intro
+  steps:
+  - bash: flutter test test/presentation/intro
+
 - job: TestPresentationMore
   displayName: Test presentation -> more
   steps:
