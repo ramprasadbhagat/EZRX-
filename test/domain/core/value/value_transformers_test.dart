@@ -451,4 +451,10 @@ void main() {
       expect(resultForInProgress, false);
     },
   );
+
+  test('Should get text Failed when status is FAILED', () {
+    const apiStatus = 'FAILED';
+    final statusText = getStatusText(apiStatus);
+    expect(statusText, 'Failed');
+  });
 }

@@ -779,8 +779,9 @@ String getStatusText(String apiStatus) {
     case 'canceled':
       return 'Cancelled';
     case 'success':
-    case 'failed':
       return 'Successful';
+    case 'failed':
+      return 'Failed';
     case 'expired':
       return 'Expired';
     case 'waiting':
