@@ -206,9 +206,10 @@ class OrderHistoryDetailsOrderItem with _$OrderHistoryDetailsOrderItem {
   bool get hasInValidPrice =>
       !type.isMaterialTypeBonus && (hidePrice || unitPrice == 0);
 
-  String get itemOriginPrice => !priceAggregate.price.isValid
-      ? 'Price Not Available'
-      : originPrice.toString();
+  String get itemOriginPrice =>
+      !priceAggregate.price.isValid || priceAggregate.listPrice == 0
+          ? 'Price Not Available'
+          : originPrice.toString();
 
   TenderContract get orderItemTenderContract => TenderContract.empty().copyWith(
         tenderOrderReason: tenderContractDetails.orderReason,

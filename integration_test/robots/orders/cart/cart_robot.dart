@@ -981,4 +981,17 @@ class CartRobot {
       findsOneWidget,
     );
   }
+
+  void verifyMaterialCutOffPrice(String materialNumber, String price) {
+    expect(
+      find.descendant(
+        of: _materialItem(materialNumber),
+        matching: find.descendant(
+          of: find.byKey(WidgetKeys.cartItemCutOffListPrice),
+          matching: find.text(price, findRichText: true),
+        ),
+      ),
+      findsOneWidget,
+    );
+  }
 }

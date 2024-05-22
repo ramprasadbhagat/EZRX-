@@ -350,4 +350,18 @@ class OrderSuccessRobot extends CommonRobot {
   Future<void> verifyOrderSuccessDetail() async {
     await tester.pumpUntilVisible(find.byKey(WidgetKeys.orderSuccessDetail));
   }
+
+  void verifyMaterialCutOffPrice(String price) {
+    final label = find.descendant(
+      of: _verifyingItem,
+      matching: find.byKey(WidgetKeys.orderItemPriceStrikeThrough),
+    );
+    expect(
+      find.descendant(
+        of: label,
+        matching: find.text(price, findRichText: true),
+      ),
+      findsOneWidget,
+    );
+  }
 }

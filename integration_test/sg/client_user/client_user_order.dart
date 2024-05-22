@@ -205,6 +205,8 @@ void main() {
   final covidMaterialTotalPrice = covidMaterialUnitPrice;
   const cartTotalPriceForCovidMaterial = 0.0;
   const twentySixSeriesMaterialNumber = '26031206';
+  const materialWithListPriceZero = '21026761';
+  final materialPriceWithListPriceZero = 'Price Not Available'.tr();
 
   var loginRequired = true;
 
@@ -2689,6 +2691,45 @@ void main() {
       await oosPreOrderRobot.tapContinueButton();
       checkoutRobot.verifyPage();
     });
+
+    testWidgets(
+        'EZRX-T2095 | Verify cutoff List Price should be Price Not Available if material has List Price zero and counter offer applied',
+        (tester) async {
+      const newUnitPrice = 10;
+
+      //init app
+      await pumpAppWithHomeScreen(tester);
+      await browseProductFromEmptyCart();
+
+      await productSuggestionRobot
+          .searchWithKeyboardAction(materialWithListPriceZero);
+      await productSuggestionRobot.tapSearchResult(materialWithListPriceZero);
+      await productDetailRobot.tapAddToCart();
+      await productDetailRobot.tapCartButton();
+      await cartRobot.verifyMaterial(materialWithListPriceZero);
+      cartRobot.verifyMaterialUnitPrice(
+        materialWithListPriceZero,
+        materialPriceWithListPriceZero,
+      );
+      cartRobot.verifyMaterialCounterOfferButton(materialWithListPriceZero);
+      await cartRobot.tapMaterialCounterOfferButton(materialWithListPriceZero);
+      requestCounterOfferRobot.verifySheet(isVisible: true);
+
+      await cartRobot.tapMaterialCounterOfferButton(materialWithListPriceZero);
+      await requestCounterOfferRobot.enterPrice(newUnitPrice.toString());
+      await requestCounterOfferRobot.tapConfirmButton();
+      requestCounterOfferRobot.verifySheet(isVisible: false);
+      cartRobot.verifyMaterialUnitPrice(
+        materialWithListPriceZero,
+        newUnitPrice.priceDisplay(currency),
+      );
+
+      //verify cutoff List Price is Price Not Available
+      cartRobot.verifyMaterialCutOffPrice(
+        materialWithListPriceZero,
+        materialPriceWithListPriceZero,
+      );
+    });
   });
 
   group('Checkout -', () {
@@ -3035,6 +3076,59 @@ void main() {
       );
       checkoutRobot.verifyStickyTotalQty(2);
     });
+
+    testWidgets(
+        'EZRX-T2096 | Verify cutoff List Price should be Price Not Available if material has List Price zero and counter offer applied',
+        (tester) async {
+      const newUnitPrice = 500;
+
+      //init app
+      await pumpAppWithHomeScreen(tester);
+      await browseProductFromEmptyCart();
+
+      await productSuggestionRobot
+          .searchWithKeyboardAction(materialWithListPriceZero);
+      await productSuggestionRobot.tapSearchResult(materialWithListPriceZero);
+      await productDetailRobot.tapAddToCart();
+      await productDetailRobot.tapCartButton();
+      await cartRobot.verifyMaterial(materialWithListPriceZero);
+      cartRobot.verifyMaterialUnitPrice(
+        materialWithListPriceZero,
+        materialPriceWithListPriceZero,
+      );
+      cartRobot.verifyMaterialCounterOfferButton(materialWithListPriceZero);
+      await cartRobot.tapMaterialCounterOfferButton(materialWithListPriceZero);
+      requestCounterOfferRobot.verifySheet(isVisible: true);
+
+      await cartRobot.tapMaterialCounterOfferButton(materialWithListPriceZero);
+      await requestCounterOfferRobot.enterPrice(newUnitPrice.toString());
+      await requestCounterOfferRobot.tapConfirmButton();
+      requestCounterOfferRobot.verifySheet(isVisible: false);
+      cartRobot.verifyMaterialUnitPrice(
+        materialWithListPriceZero,
+        newUnitPrice.priceDisplay(currency),
+      );
+      cartRobot.verifyMaterialCutOffPrice(
+        materialWithListPriceZero,
+        materialPriceWithListPriceZero,
+      );
+      await cartRobot.tapCheckoutButton();
+      await checkoutRobot.verifyMaterial(materialWithListPriceZero);
+      checkoutRobot.verifyMaterialUnitPrice(
+        materialWithListPriceZero,
+        newUnitPrice.priceDisplay(currency),
+      );
+      checkoutRobot.verifyMaterialCounterOfferLabel(
+        materialWithListPriceZero,
+        isVisible: true,
+      );
+
+      //verify cutoff List Price is Price Not Available
+      checkoutRobot.verifyMaterialCutOffPrice(
+        materialWithListPriceZero,
+        materialPriceWithListPriceZero,
+      );
+    });
   });
 
   group('Order success -', () {
@@ -3221,6 +3315,45 @@ void main() {
       //TODO: Please do uncomment when these feature get ready
 
       // orderSuccessRobot.verifyCovidMaterialLabel();
+    });
+
+    testWidgets(
+        'EZRX-T2109 | Verify cutoff List Price should be Price Not Available if material has List Price zero and counter offer applied in order submitted',
+        (tester) async {
+      const newUnitPrice = 500;
+
+      //init app
+      await pumpAppWithHomeScreen(tester);
+      await browseProductFromEmptyCart();
+      await productSuggestionRobot
+          .searchWithKeyboardAction(materialWithListPriceZero);
+      await productSuggestionRobot.tapSearchResult(materialWithListPriceZero);
+      await productDetailRobot.tapAddToCart();
+      await productDetailRobot.tapCartButton();
+      cartRobot.verifyMaterialCounterOfferButton(materialWithListPriceZero);
+      await cartRobot.tapMaterialCounterOfferButton(materialWithListPriceZero);
+      requestCounterOfferRobot.verifySheet(isVisible: true);
+      await cartRobot.tapMaterialCounterOfferButton(materialWithListPriceZero);
+      await requestCounterOfferRobot.enterPrice(newUnitPrice.toString());
+      await requestCounterOfferRobot.tapConfirmButton();
+      requestCounterOfferRobot.verifySheet(isVisible: false);
+      cartRobot.verifyMaterialCutOffPrice(
+        materialWithListPriceZero,
+        materialPriceWithListPriceZero,
+      );
+      await cartRobot.tapCheckoutButton();
+      await checkoutRobot.verifyMaterial(materialWithListPriceZero);
+      checkoutRobot.verifyMaterialCutOffPrice(
+        materialWithListPriceZero,
+        materialPriceWithListPriceZero,
+      );
+      await checkoutRobot.tapPlaceOrderButton();
+      await orderSuccessRobot.dismissSnackbar();
+      await orderSuccessRobot.startVerifyMaterial(index: 0);
+
+      //verify cutoff List Price is Price Not Available
+      orderSuccessRobot
+          .verifyMaterialCutOffPrice(materialPriceWithListPriceZero);
     });
   });
 

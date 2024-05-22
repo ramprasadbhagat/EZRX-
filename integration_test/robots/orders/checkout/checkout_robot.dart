@@ -745,4 +745,17 @@ class CheckoutRobot {
       findsOneWidget,
     );
   }
+
+  void verifyMaterialCutOffPrice(String materialNumber, String price) {
+    expect(
+      find.descendant(
+        of: _material(materialNumber),
+        matching: find.descendant(
+          of: find.byKey(WidgetKeys.materialListPriceStrikeThrough),
+          matching: find.text(price, findRichText: true),
+        ),
+      ),
+      findsOneWidget,
+    );
+  }
 }

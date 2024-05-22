@@ -1249,6 +1249,40 @@ void main() {
           expect(itemPriceWithTaxFinder, findsOneWidget);
         },
       );
+
+      testWidgets(
+          'Show cutoff List price as Price Not Available when list price is zero and counter offer price is applied',
+          (tester) async {
+        final cartItems = cartItem.copyWith(
+          quantity: 2,
+          price: Price.empty().copyWith(
+            isPriceOverride: true,
+            finalPrice: MaterialPrice(10.00),
+          ),
+          materialInfo: MaterialInfo.empty().copyWith(
+            type: MaterialInfoType('material'),
+            hidePrice: false,
+          ),
+        );
+        when(() => cartBloc.state).thenReturn(
+          CartState.initial().copyWith(
+            cartProducts: [cartItems],
+          ),
+        );
+
+        await tester.pumpWidget(getWidget());
+        await tester.pump();
+
+        final cartItemCutOffListPriceKey =
+            find.byKey(WidgetKeys.cartItemCutOffListPrice);
+        expect(cartItemCutOffListPriceKey, findsOneWidget);
+
+        final priceNotAvailableFinder = find.descendant(
+          of: cartItemCutOffListPriceKey,
+          matching: find.text('Price Not Available', findRichText: true),
+        );
+        expect(priceNotAvailableFinder, findsOneWidget);
+      });
     },
   );
 }

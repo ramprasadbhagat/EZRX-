@@ -425,8 +425,12 @@ class PriceAggregate with _$PriceAggregate {
         (priceType == PriceType.finalPrice ||
             priceType == PriceType.finalPriceTotal);
 
+    final showListPriceAsPriceNotAvailable =
+        listPrice == 0 && priceType == PriceType.listPrice;
+
     if (_displayPriceNotAvailable ||
-        (!price.isValid && !applyCounterOfferOnFinalPrice)) {
+        (!price.isValid && !applyCounterOfferOnFinalPrice) ||
+        showListPriceAsPriceNotAvailable) {
       return 'Price Not Available';
     }
 
