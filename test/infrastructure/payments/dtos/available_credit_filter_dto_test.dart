@@ -11,6 +11,7 @@ void main() {
         amountValueTo: RangeValue('100'),
         documentDateFrom: DateTimeStringValue('20221011'),
         documentDateTo: DateTimeStringValue('20231011'),
+        filterOption: FilterOption.documentDate(),
       );
       final availableCreditFilterDto =
           AvailableCreditFilterDto.fromDomain(availableCreditFilter);

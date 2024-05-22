@@ -5,9 +5,15 @@ import 'package:ezrxmobile/application/payments/new_payment/outstanding_invoices
 import 'package:ezrxmobile/application/payments/new_payment/outstanding_invoices/outstanding_invoices_bloc.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/payments/entities/outstanding_invoice_filter.dart';
-import 'package:ezrxmobile/presentation/core/custom_numeric_text_field.dart';
-import 'package:ezrxmobile/presentation/core/value_range_error.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
+import 'package:ezrxmobile/presentation/payments/widgets/amount_from_filter.dart';
+import 'package:ezrxmobile/presentation/payments/widgets/amount_to_filter.dart';
+import 'package:ezrxmobile/presentation/payments/widgets/from_document_date_filter.dart';
+import 'package:ezrxmobile/presentation/payments/widgets/from_due_date_filter.dart';
+import 'package:ezrxmobile/presentation/payments/widgets/radio_filter_section.dart';
+import 'package:ezrxmobile/presentation/payments/widgets/status_selector_filter.dart';
+import 'package:ezrxmobile/presentation/payments/widgets/to_document_date_filter.dart';
+import 'package:ezrxmobile/presentation/payments/widgets/to_due_date_filter.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -61,114 +67,211 @@ class _PaymentFilter extends StatelessWidget {
     return BlocBuilder<OutstandingInvoiceFilterBloc,
         OutstandingInvoiceFilterState>(
       buildWhen: (previous, current) =>
-          previous.showErrorMessage != current.showErrorMessage,
+          previous.showErrorMessage != current.showErrorMessage ||
+          previous.filter.filterOption != current.filter.filterOption,
       builder: (context, state) {
-        final salesOrgConfig =
+         final salesOrgConfig =
             context.read<EligibilityBloc>().state.salesOrgConfigs;
-
+            
         return ListTile(
           title: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                context.tr('Document date'),
-                style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                      color: ZPColors.neutralsBlack,
-                    ),
-              ),
-              const SizedBox(
-                height: 16,
-              ),
-              Row(
-                children: [
-                  const _FromDateFilter(
-                    isDue: false,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8),
-                    child: Text(
-                      '-',
-                      style: Theme.of(context).textTheme.titleSmall,
-                    ),
-                  ),
-                  const _ToDateFilter(
-                    isDue: false,
-                  ),
-                ],
-              ),
-              const SizedBox(
-                height: 24,
-              ),
-              Text(
-                context.tr('Due Date'),
-                style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                      color: ZPColors.neutralsBlack,
-                    ),
-              ),
-              const SizedBox(
-                height: 16,
-              ),
-              Row(
-                children: [
-                  const _FromDateFilter(
-                    isDue: true,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8),
-                    child: Text(
-                      '-',
-                      style: Theme.of(context).textTheme.titleSmall,
-                    ),
-                  ),
-                  const _ToDateFilter(
-                    isDue: true,
-                  ),
-                ],
-              ),
-              const SizedBox(
-                height: 24,
-              ),
-              Text(
-                '${context.tr('Amount range')} (${salesOrgConfig.currency.code})',
-                style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                      color: ZPColors.neutralsBlack,
-                    ),
-              ),
-              const SizedBox(
-                height: 16,
-              ),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const _AmountValueFromFilter(),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8),
-                    child: Text(
-                      '-',
-                      style: Theme.of(context).textTheme.titleSmall,
-                    ),
-                  ),
-                  const _AmountValueToFilter(),
-                ],
-              ),
-              (!state.filter.isOutstandingInvoiceAmountValueRangeValid)
-                  ? ValueRangeError(
-                      label: '${(context.tr('Invalid Amount range'))}!',
-                      isValid: state
-                          .filter.isOutstandingInvoiceAmountValueRangeValid,
-                    )
-                  : const SizedBox.shrink(),
-              const SizedBox(
-                height: 24,
-              ),
-              Padding(
+              RadioFilterSection(
+                radioValue: FilterOption.documentDate(),
+                selectedValue: state.filter.filterOption,
+                title: 'Document date',
                 padding: const EdgeInsets.only(bottom: 16.0),
-                child: Text(
-                  context.tr('Status'),
-                  style: Theme.of(context).textTheme.labelSmall,
+                filterWidet: Row(
+                  children: [
+                    BlocBuilder<OutstandingInvoiceFilterBloc,
+                        OutstandingInvoiceFilterState>(
+                      buildWhen: (previous, current) =>
+                          previous.filter.getDocumentDateFilterDateRange !=
+                          current.filter.getDocumentDateFilterDateRange,
+                      builder: (context, state) => FromDocumentDateFilter(
+                        documentDateFilterDateRange:
+                            state.filter.getDocumentDateFilterDateRange,
+                        documentDateFrom:
+                            state.filter.documentDateFrom.dateString,
+                        onDocumentDateChanged:
+                            (DateTimeRange documentDateRange) => context
+                                .read<OutstandingInvoiceFilterBloc>()
+                                .add(
+                                  OutstandingInvoiceFilterEvent.setDocumentDate(
+                                    documentDateRange: documentDateRange,
+                                  ),
+                                ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8),
+                      child: Text(
+                        '-',
+                        style: Theme.of(context).textTheme.titleSmall,
+                      ),
+                    ),
+                    BlocBuilder<OutstandingInvoiceFilterBloc,
+                        OutstandingInvoiceFilterState>(
+                      buildWhen: (previous, current) =>
+                          previous.filter.getDocumentDateFilterDateRange !=
+                          current.filter.getDocumentDateFilterDateRange,
+                      builder: (context, state) => ToDocumentDateFilter(
+                        documentDateFilterDateRange:
+                            state.filter.getDocumentDateFilterDateRange,
+                        documentDateTo: state.filter.documentDateTo.dateString,
+                        onDocumentDateChanged:
+                            (DateTimeRange documentDateRange) => context
+                                .read<OutstandingInvoiceFilterBloc>()
+                                .add(
+                                  OutstandingInvoiceFilterEvent.setDocumentDate(
+                                    documentDateRange: documentDateRange,
+                                  ),
+                                ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
-              const _StatusesSelector(),
+              RadioFilterSection(
+                radioValue: FilterOption.dueDate(),
+                selectedValue: state.filter.filterOption,
+                title: 'Due Date',
+                filterWidet: Row(
+                  children: [
+                    BlocBuilder<OutstandingInvoiceFilterBloc,
+                        OutstandingInvoiceFilterState>(
+                      buildWhen: (previous, current) =>
+                          previous.filter.getDueDateFilterDateRange !=
+                          current.filter.getDueDateFilterDateRange,
+                      builder: (context, state) => FromDueDateFilter(
+                        dueDateFilterDateRange:
+                            state.filter.getDueDateFilterDateRange,
+                        dueDateFrom: state.filter.dueDateFrom.dateString,
+                        onDueDateChanged: (DateTimeRange dueDateRange) =>
+                            context.read<OutstandingInvoiceFilterBloc>().add(
+                                  OutstandingInvoiceFilterEvent.setDueDate(
+                                    dueDateRange: dueDateRange,
+                                  ),
+                                ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8),
+                      child: Text(
+                        '-',
+                        style: Theme.of(context).textTheme.titleSmall,
+                      ),
+                    ),
+                    BlocBuilder<OutstandingInvoiceFilterBloc,
+                        OutstandingInvoiceFilterState>(
+                      buildWhen: (previous, current) =>
+                          previous.filter.getDueDateFilterDateRange !=
+                          current.filter.getDueDateFilterDateRange,
+                      builder: (context, state) => ToDueDateFilter(
+                        dueDateFilterDateRange:
+                            state.filter.getDueDateFilterDateRange,
+                        dueDateTo: state.filter.dueDateTo.dateString,
+                        onDueDateChanged: (DateTimeRange dueDateRange) =>
+                            context.read<OutstandingInvoiceFilterBloc>().add(
+                                  OutstandingInvoiceFilterEvent.setDueDate(
+                                    dueDateRange: dueDateRange,
+                                  ),
+                                ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              RadioFilterSection(
+                radioValue: FilterOption.amountRange(),
+                selectedValue: state.filter.filterOption,
+                title: 'Amount range',
+                showErrorMessage:
+                    !state.filter.isOutstandingInvoiceAmountValueRangeValid,
+                filterWidet: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    BlocBuilder<OutstandingInvoiceFilterBloc,
+                        OutstandingInvoiceFilterState>(
+                      buildWhen: (previous, current) =>
+                          previous.filter.amountValueFrom !=
+                          current.filter.amountValueFrom,
+                      builder: (context, state) => AmountFromFilter(
+                        amountFrom:
+                            state.filter.amountValueFrom.apiParameterValue,
+                        onAmountFromChanged: (value) =>
+                            context.read<OutstandingInvoiceFilterBloc>().add(
+                                  OutstandingInvoiceFilterEvent.setAmountFrom(
+                                    amountFrom: value,
+                                  ),
+                                ),
+                                 decoration: InputDecoration(
+                          labelText:
+                              '${context.tr('From')} (${salesOrgConfig.currency.code})',
+                          labelStyle:
+                              Theme.of(context).textTheme.titleSmall?.copyWith(
+                                    color: ZPColors.darkGray,
+                                  ),
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8),
+                      child: Text(
+                        '-',
+                        style: Theme.of(context).textTheme.titleSmall,
+                      ),
+                    ),
+                    BlocBuilder<OutstandingInvoiceFilterBloc,
+                        OutstandingInvoiceFilterState>(
+                      buildWhen: (previous, current) =>
+                          previous.filter.amountValueTo !=
+                          current.filter.amountValueTo,
+                      builder: (context, state) => AmountToFilter(
+                        amountTo: state.filter.amountValueTo.apiParameterValue,
+                        onAmountToChanged: (value) =>
+                            context.read<OutstandingInvoiceFilterBloc>().add(
+                                  OutstandingInvoiceFilterEvent.setAmountTo(
+                                    amountTo: value,
+                                  ),
+                                ),
+                                 decoration: InputDecoration(
+                          labelText:
+                              '${context.tr('To')} (${salesOrgConfig.currency.code})',
+                          labelStyle:
+                              Theme.of(context).textTheme.titleSmall?.copyWith(
+                                    color: ZPColors.darkGray,
+                                  ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              RadioFilterSection(
+                radioValue: FilterOption.status(),
+                selectedValue: state.filter.filterOption,
+                title: 'Status',
+                filterWidet: BlocBuilder<OutstandingInvoiceFilterBloc,
+                    OutstandingInvoiceFilterState>(
+                  buildWhen: (previous, current) =>
+                      previous.filter.outstandingInvoiceStatus !=
+                      current.filter.outstandingInvoiceStatus,
+                  builder: (context, state) => StatusSelectorFilter<StatusType>(
+                    statusesDisplay: state.statusList,
+                    filteredStatuses: [state.filter.outstandingInvoiceStatus],
+                    onStatusSelected: (status, value) =>
+                        context.read<OutstandingInvoiceFilterBloc>().add(
+                              OutstandingInvoiceFilterEvent
+                                  .setOutstandingInvoiceStatus(
+                                status: status,
+                                value: value,
+                              ),
+                            ),
+                  ),
+                ),
+              ),
               const SizedBox(
                 height: 40,
               ),
@@ -186,280 +289,6 @@ class _PaymentFilter extends StatelessWidget {
               ),
             ],
           ),
-        );
-      },
-    );
-  }
-}
-
-class _FromDateFilter extends StatelessWidget {
-  const _FromDateFilter({
-    Key? key,
-    required this.isDue,
-  }) : super(key: key);
-
-  final bool isDue;
-
-  @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<OutstandingInvoiceFilterBloc,
-        OutstandingInvoiceFilterState>(
-      buildWhen: (previous, current) => isDue
-          ? previous.filter.getDueDateFilterDateRange !=
-              current.filter.getDueDateFilterDateRange
-          : previous.filter.getDocumentDateFilterDateRange !=
-              current.filter.getDocumentDateFilterDateRange,
-      builder: (context, state) {
-        return Expanded(
-          child: TextFormField(
-            key: isDue
-                ? WidgetKeys.fromDueDateField
-                : WidgetKeys.fromDocumentDateField,
-            onTap: () async {
-              final outstandingInvoiceFilterBloc =
-                  context.read<OutstandingInvoiceFilterBloc>();
-              final dateRange = await showDateRangePicker(
-                context: context,
-                firstDate: DateTime(1900),
-                lastDate: isDue
-                    ? DateTime.now().add(const Duration(days: 365))
-                    : DateTime.now(),
-                initialDateRange: isDue
-                    ? state.filter.getDueDateFilterDateRange
-                    : state.filter.getDocumentDateFilterDateRange,
-              );
-              if (dateRange == null) return;
-              outstandingInvoiceFilterBloc.add(
-                isDue
-                    ? OutstandingInvoiceFilterEvent.setDueDate(
-                        dueDateRange: dateRange,
-                      )
-                    : OutstandingInvoiceFilterEvent.setDocumentDate(
-                        documentDateRange: dateRange,
-                      ),
-              );
-            },
-            readOnly: true,
-            controller: TextEditingController(
-              text: isDue
-                  ? state.filter.dueDateFrom.dateString
-                  : state.filter.documentDateFrom.dateString,
-            ),
-            decoration: InputDecoration(
-              hintText: context.tr('Date from'),
-              hintStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
-                    color: ZPColors.darkGray,
-                  ),
-              suffixIcon: const Padding(
-                padding: EdgeInsets.only(right: 8.0),
-                child: Icon(
-                  Icons.calendar_month,
-                  size: 20,
-                ),
-              ),
-              suffixIconConstraints: const BoxConstraints(maxWidth: 25),
-              focusedBorder:
-                  Theme.of(context).inputDecorationTheme.disabledBorder,
-            ),
-          ),
-        );
-      },
-    );
-  }
-}
-
-class _ToDateFilter extends StatelessWidget {
-  const _ToDateFilter({
-    Key? key,
-    required this.isDue,
-  }) : super(key: key);
-  final bool isDue;
-
-  @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<OutstandingInvoiceFilterBloc,
-        OutstandingInvoiceFilterState>(
-      buildWhen: (previous, current) => isDue
-          ? previous.filter.getDueDateFilterDateRange !=
-              current.filter.getDueDateFilterDateRange
-          : previous.filter.getDocumentDateFilterDateRange !=
-              current.filter.getDocumentDateFilterDateRange,
-      builder: (context, state) {
-        return Expanded(
-          child: TextFormField(
-            key: isDue
-                ? WidgetKeys.toDueDateField
-                : WidgetKeys.toDocumentDateField,
-            onTap: () async {
-              final outstandingInvoiceFilterBloc =
-                  context.read<OutstandingInvoiceFilterBloc>();
-              final dateRange = await showDateRangePicker(
-                context: context,
-                firstDate: DateTime(1900),
-                lastDate: isDue
-                    ? DateTime.now().add(const Duration(days: 365))
-                    : DateTime.now(),
-                initialDateRange: isDue
-                    ? state.filter.getDueDateFilterDateRange
-                    : state.filter.getDocumentDateFilterDateRange,
-              );
-              if (dateRange == null) return;
-              outstandingInvoiceFilterBloc.add(
-                isDue
-                    ? OutstandingInvoiceFilterEvent.setDueDate(
-                        dueDateRange: dateRange,
-                      )
-                    : OutstandingInvoiceFilterEvent.setDocumentDate(
-                        documentDateRange: dateRange,
-                      ),
-              );
-            },
-            readOnly: true,
-            controller: TextEditingController(
-              text: isDue
-                  ? state.filter.dueDateTo.dateString
-                  : state.filter.documentDateTo.dateString,
-            ),
-            decoration: InputDecoration(
-              hintText: context.tr('Date to'),
-              hintStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
-                    color: ZPColors.darkGray,
-                  ),
-              suffixIcon: const Padding(
-                padding: EdgeInsets.only(right: 8.0),
-                child: Icon(
-                  Icons.calendar_month,
-                  size: 20,
-                ),
-              ),
-              suffixIconConstraints: const BoxConstraints(maxWidth: 25),
-              focusedBorder:
-                  Theme.of(context).inputDecorationTheme.disabledBorder,
-            ),
-          ),
-        );
-      },
-    );
-  }
-}
-
-class _AmountValueFromFilter extends StatelessWidget {
-  const _AmountValueFromFilter({Key? key}) : super(key: key);
-  @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<OutstandingInvoiceFilterBloc,
-        OutstandingInvoiceFilterState>(
-      buildWhen: (previous, current) =>
-          previous.filter.amountValueFrom != current.filter.amountValueFrom,
-      builder: (
-        context,
-        state,
-      ) {
-        final salesOrgConfig =
-            context.read<EligibilityBloc>().state.salesOrgConfigs;
-
-        return Expanded(
-          child: CustomNumericTextField.decimalNumber(
-            fieldKey: WidgetKeys.amountValueFrom,
-            initValue: state.filter.amountValueFrom.apiParameterValue,
-            onChanged: (value) =>
-                context.read<OutstandingInvoiceFilterBloc>().add(
-                      OutstandingInvoiceFilterEvent.setAmountFrom(
-                        amountFrom: value.isNotEmpty ? value : '',
-                      ),
-                    ),
-            decoration: InputDecoration(
-              labelText:
-                  '${context.tr('From')} (${salesOrgConfig.currency.code})',
-              labelStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
-                    color: ZPColors.darkGray,
-                  ),
-            ),
-          ),
-        );
-      },
-    );
-  }
-}
-
-class _AmountValueToFilter extends StatelessWidget {
-  const _AmountValueToFilter({Key? key}) : super(key: key);
-  @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<OutstandingInvoiceFilterBloc,
-        OutstandingInvoiceFilterState>(
-      buildWhen: (previous, current) =>
-          previous.filter.amountValueTo != current.filter.amountValueTo,
-      builder: (
-        context,
-        state,
-      ) {
-        final salesOrgConfig =
-            context.read<EligibilityBloc>().state.salesOrgConfigs;
-
-        return Expanded(
-          child: CustomNumericTextField.decimalNumber(
-            fieldKey: WidgetKeys.amountValueTo,
-            initValue: state.filter.amountValueTo.apiParameterValue,
-            onChanged: (value) =>
-                context.read<OutstandingInvoiceFilterBloc>().add(
-                      OutstandingInvoiceFilterEvent.setAmountTo(
-                        amountTo: value.isNotEmpty ? value : '',
-                      ),
-                    ),
-            decoration: InputDecoration(
-              labelText:
-                  '${context.tr('To')} (${salesOrgConfig.currency.code})',
-              labelStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
-                    color: ZPColors.darkGray,
-                  ),
-            ),
-          ),
-        );
-      },
-    );
-  }
-}
-
-class _StatusesSelector extends StatelessWidget {
-  const _StatusesSelector({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<OutstandingInvoiceFilterBloc,
-        OutstandingInvoiceFilterState>(
-      buildWhen: (previous, current) =>
-          previous.filter.outstandingInvoiceStatus !=
-          current.filter.outstandingInvoiceStatus,
-      builder: (
-        context,
-        state,
-      ) {
-        return Column(
-          children: state.statusList.map((StatusType status) {
-            return CheckboxListTile(
-              key: WidgetKeys.genericKey(key: status.displayPaymentStatus),
-              contentPadding: EdgeInsets.zero,
-              title: Text(
-                context.tr(status.displayPaymentStatus),
-                style: Theme.of(context).textTheme.titleSmall,
-              ),
-              controlAffinity: ListTileControlAffinity.leading,
-              dense: true,
-              visualDensity: VisualDensity.compact,
-              onChanged: (bool? value) {
-                context.read<OutstandingInvoiceFilterBloc>().add(
-                      OutstandingInvoiceFilterEvent.setOutstandingInvoiceStatus(
-                        status: status,
-                        value: value ?? false,
-                      ),
-                    );
-              },
-              value: status == state.filter.outstandingInvoiceStatus,
-            );
-          }).toList(),
         );
       },
     );

@@ -15,6 +15,7 @@ class AllCreditsFilter with _$AllCreditsFilter {
     required RangeValue amountValueTo,
     required List<String> filterStatuses,
     required SearchKey searchKey,
+    required FilterOption filterOption,
   }) = _AllCreditsFilter;
 
   factory AllCreditsFilter.empty() => AllCreditsFilter(
@@ -28,6 +29,7 @@ class AllCreditsFilter with _$AllCreditsFilter {
         amountValueTo: RangeValue(''),
         filterStatuses: <String>[],
         searchKey: SearchKey(''),
+        filterOption: FilterOption(''),
       );
 
   factory AllCreditsFilter.defaultFilter() => AllCreditsFilter(
@@ -45,6 +47,7 @@ class AllCreditsFilter with _$AllCreditsFilter {
         amountValueTo: RangeValue(''),
         filterStatuses: <String>[],
         searchKey: SearchKey(''),
+        filterOption: FilterOption.documentDate(),
       );
 
   DateTimeRange get getDocumentDateFilterDateRange => DateTimeRange(

@@ -60,7 +60,8 @@ void main() {
       },
       expect: () => [
         AllInvoicesFilterState.initial().copyWith(
-          filter: allInvoicesFilter.copyWith(
+          filter: AllInvoicesFilter.empty().copyWith(
+            filterOption: FilterOption.dueDate(),
             dueDateTo: DateTimeStringValue(
               getDateStringByDateTime(fakeToDate),
             ),
@@ -84,7 +85,8 @@ void main() {
       },
       expect: () => [
         AllInvoicesFilterState.initial().copyWith(
-          filter: allInvoicesFilter.copyWith(
+          filter: AllInvoicesFilter.empty().copyWith(
+            filterOption: FilterOption.documentDate(),
             documentDateTo: DateTimeStringValue(
               getDateStringByDateTime(fakeToDate),
             ),
@@ -105,8 +107,10 @@ void main() {
           bloc.add(const AllInvoicesFilterEvent.amountValueToChanged('1000')),
       expect: () => [
         AllInvoicesFilterState.initial().copyWith(
-          filter: allInvoicesFilter.copyWith(
+          filter: AllInvoicesFilter.empty().copyWith(
             amountValueTo: RangeValue('1000'),
+            amountValueFrom: allInvoicesFilter.amountValueFrom,
+            filterOption: FilterOption.amountRange(),
           ),
           showErrorMessages: false,
         ),
@@ -123,8 +127,10 @@ void main() {
           bloc.add(const AllInvoicesFilterEvent.amountValueFromChanged('100')),
       expect: () => [
         AllInvoicesFilterState.initial().copyWith(
-          filter: allInvoicesFilter.copyWith(
+          filter: AllInvoicesFilter.empty().copyWith(
             amountValueFrom: RangeValue('100'),
+            amountValueTo: allInvoicesFilter.amountValueTo,
+            filterOption: FilterOption.amountRange(),
           ),
           showErrorMessages: false,
         ),
@@ -154,13 +160,8 @@ void main() {
       },
       expect: () => [
         AllInvoicesFilterState.initial().copyWith(
-          filter: allInvoicesFilter.copyWith(
-            dueDateTo: DateTimeStringValue(
-              getDateStringByDateTime(fakeToDate),
-            ),
-            dueDateFrom: DateTimeStringValue(
-              getDateStringByDateTime(fakeFromDate),
-            ),
+          filter: AllInvoicesFilter.empty().copyWith(
+            filterOption: FilterOption.status(),
             filterStatuses: ['Cleared'],
           ),
         ),

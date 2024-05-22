@@ -14,6 +14,8 @@ class AvailableCreditFilter with _$AvailableCreditFilter {
     required DateTimeStringValue documentDateTo,
     required RangeValue amountValueFrom,
     required RangeValue amountValueTo,
+        required FilterOption filterOption,
+
   }) = _AvailableCreditFilter;
 
    factory AvailableCreditFilter.empty() => AvailableCreditFilter(
@@ -25,6 +27,7 @@ class AvailableCreditFilter with _$AvailableCreditFilter {
         ),
         amountValueFrom: RangeValue(''),
         amountValueTo: RangeValue(''),
+        filterOption: FilterOption(''),
       );
 
   factory AvailableCreditFilter.defaultFilter() => AvailableCreditFilter(
@@ -40,6 +43,7 @@ class AvailableCreditFilter with _$AvailableCreditFilter {
         ),
         amountValueFrom: RangeValue(''),
         amountValueTo: RangeValue(''),
+        filterOption: FilterOption.documentDate(),
       );
 
   DateTimeRange get getDocumentDateFilterDateRange => DateTimeRange(

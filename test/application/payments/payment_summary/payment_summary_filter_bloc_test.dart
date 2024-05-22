@@ -92,7 +92,9 @@ void main() {
           .add(const PaymentSummaryFilterEvent.amountValueToChanged('1000')),
       expect: () => [
         PaymentSummaryFilterState.initial().copyWith(
-          filter: paymentSummaryFilter.copyWith(
+          filter: PaymentSummaryFilter.empty().copyWith(
+            filterOption: FilterOption.amountRange(),
+            amountValueFrom: paymentSummaryFilter.amountValueFrom,
             amountValueTo: RangeValue('1000'),
           ),
           showErrorMessages: false,
@@ -111,7 +113,9 @@ void main() {
           .add(const PaymentSummaryFilterEvent.amountValueFromChanged('100')),
       expect: () => [
         PaymentSummaryFilterState.initial().copyWith(
-          filter: paymentSummaryFilter.copyWith(
+          filter: PaymentSummaryFilter.empty().copyWith(
+            filterOption: FilterOption.amountRange(),
+            amountValueTo: paymentSummaryFilter.amountValueTo,
             amountValueFrom: RangeValue('100'),
           ),
           showErrorMessages: false,
@@ -142,13 +146,8 @@ void main() {
       },
       expect: () => [
         PaymentSummaryFilterState.initial().copyWith(
-          filter: paymentSummaryFilter.copyWith(
-            createdDateTo: DateTimeStringValue(
-              getDateStringByDateTime(fakeToDate),
-            ),
-            createdDateFrom: DateTimeStringValue(
-              getDateStringByDateTime(fakeFromDate),
-            ),
+          filter: PaymentSummaryFilter.empty().copyWith(
+            filterOption: FilterOption.status(),
             filterStatuses: [FilterStatus('In Progress')],
           ),
         ),

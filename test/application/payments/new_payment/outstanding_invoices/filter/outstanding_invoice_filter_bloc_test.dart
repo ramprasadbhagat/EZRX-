@@ -86,7 +86,8 @@ void main() {
       },
       expect: () => [
         OutstandingInvoiceFilterState.initial().copyWith(
-          filter: outstandingInvoiceFilter.copyWith(
+          filter: OutstandingInvoiceFilter.empty().copyWith(
+            filterOption: FilterOption.dueDate(),
             dueDateFrom: DateTimeStringValue(
               getDateStringByDateTime(dateTimeRange.start),
             ),
@@ -110,7 +111,9 @@ void main() {
       },
       expect: () => [
         OutstandingInvoiceFilterState.initial().copyWith(
-          filter: outstandingInvoiceFilter.copyWith(
+          filter: OutstandingInvoiceFilter.empty().copyWith(
+            filterOption: FilterOption.amountRange(),
+            amountValueTo: outstandingInvoiceFilter.amountValueTo,
             amountValueFrom:
                 RangeValue(getDateStringByDateTime(dateTimeRange.start)),
           ),
@@ -129,7 +132,9 @@ void main() {
       },
       expect: () => [
         OutstandingInvoiceFilterState.initial().copyWith(
-          filter: outstandingInvoiceFilter.copyWith(
+          filter: OutstandingInvoiceFilter.empty().copyWith(
+            filterOption: FilterOption.amountRange(),
+            amountValueFrom: outstandingInvoiceFilter.amountValueFrom,
             amountValueTo:
                 RangeValue(getDateStringByDateTime(dateTimeRange.end)),
           ),
@@ -150,7 +155,8 @@ void main() {
       },
       expect: () => [
         OutstandingInvoiceFilterState.initial().copyWith(
-          filter: outstandingInvoiceFilter.copyWith(
+          filter: OutstandingInvoiceFilter.empty().copyWith(
+            filterOption: FilterOption.status(),
             outstandingInvoiceStatus: selectedState,
           ),
         ),

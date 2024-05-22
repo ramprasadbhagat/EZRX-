@@ -60,7 +60,8 @@ void main() {
       },
       expect: () => [
         AllCreditsFilterState.initial().copyWith(
-          filter: allCreditsFilter.copyWith(
+          filter: AllCreditsFilter.empty().copyWith(
+            filterOption: FilterOption.documentDate(),
             documentDateTo: DateTimeStringValue(
               getDateStringByDateTime(fakeToDate),
             ),
@@ -81,8 +82,10 @@ void main() {
           bloc.add(const AllCreditsFilterEvent.amountValueToChanged('1000')),
       expect: () => [
         AllCreditsFilterState.initial().copyWith(
-          filter: allCreditsFilter.copyWith(
+          filter: AllCreditsFilter.empty().copyWith(
             amountValueTo: RangeValue('1000'),
+            amountValueFrom: allCreditsFilter.amountValueFrom,
+            filterOption: FilterOption.amountRange(),
           ),
           showErrorMessages: false,
         ),
@@ -99,8 +102,10 @@ void main() {
           bloc.add(const AllCreditsFilterEvent.amountValueFromChanged('100')),
       expect: () => [
         AllCreditsFilterState.initial().copyWith(
-          filter: allCreditsFilter.copyWith(
+          filter: AllCreditsFilter.empty().copyWith(
             amountValueFrom: RangeValue('100'),
+            amountValueTo: allCreditsFilter.amountValueTo,
+            filterOption: FilterOption.amountRange(),
           ),
           showErrorMessages: false,
         ),
@@ -130,13 +135,8 @@ void main() {
       },
       expect: () => [
         AllCreditsFilterState.initial().copyWith(
-          filter: allCreditsFilter.copyWith(
-            documentDateTo: DateTimeStringValue(
-              getDateStringByDateTime(fakeToDate),
-            ),
-            documentDateFrom: DateTimeStringValue(
-              getDateStringByDateTime(fakeFromDate),
-            ),
+          filter: AllCreditsFilter.empty().copyWith(
+            filterOption: FilterOption.status(),
             filterStatuses: ['Cleared'],
           ),
         ),

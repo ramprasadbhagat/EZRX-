@@ -25,7 +25,8 @@ class AvailableCreditFilterBloc
       ),
       setDocumentDate: (e) async => emit(
         state.copyWith(
-          filter: state.filter.copyWith(
+          filter: AvailableCreditFilter.empty().copyWith(
+            filterOption: FilterOption.documentDate(),
             documentDateFrom: DateTimeStringValue(
               getDateStringByDateTime(e.documentDateRange.start),
             ),
@@ -37,15 +38,19 @@ class AvailableCreditFilterBloc
       ),
       setAmountFrom: (e) async => emit(
         state.copyWith(
-          filter: state.filter.copyWith(
+          filter: AvailableCreditFilter.empty().copyWith(
+            filterOption: FilterOption.amountRange(),
             amountValueFrom: RangeValue(e.amountFrom),
+            amountValueTo: state.filter.amountValueTo,
           ),
         ),
       ),
       setAmountTo: (e) async => emit(
         state.copyWith(
-          filter: state.filter.copyWith(
+          filter: AvailableCreditFilter.empty().copyWith(
+            filterOption: FilterOption.amountRange(),
             amountValueTo: RangeValue(e.amountTo),
+            amountValueFrom: state.filter.amountValueFrom,
           ),
         ),
       ),

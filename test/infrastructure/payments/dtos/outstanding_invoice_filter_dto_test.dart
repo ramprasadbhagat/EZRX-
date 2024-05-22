@@ -14,6 +14,7 @@ void main() {
         dueDateFrom: DateTimeStringValue('20221011'),
         dueDateTo: DateTimeStringValue('20231011'),
         outstandingInvoiceStatus: StatusType('Pending'),
+        filterOption: FilterOption.documentDate(),
       );
       final outstandingInvoiceFilterDto =
           OutstandingInvoiceFilterDto.fromDomain(outstandingInvoiceFilter);

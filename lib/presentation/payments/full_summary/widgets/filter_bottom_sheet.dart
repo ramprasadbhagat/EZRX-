@@ -2,10 +2,17 @@ import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/payments/full_summary/filter/full_summary_filter_bloc.dart';
 import 'package:ezrxmobile/application/payments/full_summary/full_summary_bloc.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/payments/entities/full_summary_filter.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/payments/extension.dart';
+import 'package:ezrxmobile/presentation/payments/widgets/from_document_date_filter.dart';
+import 'package:ezrxmobile/presentation/payments/widgets/from_due_date_filter.dart';
 import 'package:ezrxmobile/presentation/payments/widgets/payment_module.dart';
+import 'package:ezrxmobile/presentation/payments/widgets/radio_filter_section.dart';
+import 'package:ezrxmobile/presentation/payments/widgets/status_selector_filter.dart';
+import 'package:ezrxmobile/presentation/payments/widgets/to_document_date_filter.dart';
+import 'package:ezrxmobile/presentation/payments/widgets/to_due_date_filter.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -24,7 +31,8 @@ class FullSummaryFilterBottomSheet extends StatelessWidget {
       isMarketPlace: isMarketPlace,
       child: BlocBuilder<FullSummaryFilterBloc, FullSummaryFilterState>(
         buildWhen: (previous, current) =>
-            previous.showErrorMessages != current.showErrorMessages,
+            previous.showErrorMessages != current.showErrorMessages ||
+            previous.filter.filterOption != current.filter.filterOption,
         builder: (context, state) => SafeArea(
           child: Column(
             mainAxisSize: MainAxisSize.min,
@@ -62,18 +70,36 @@ class FullSummaryFilterBottomSheet extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      Padding(
+                      RadioFilterSection(
+                        radioValue: FilterOption.documentDate(),
+                        selectedValue: state.filter.filterOption,
+                        title: 'Document date',
                         padding: const EdgeInsets.only(bottom: 16.0),
-                        child: Text(
-                          context.tr('Document date'),
-                          style: Theme.of(context).textTheme.labelSmall,
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(bottom: 24.0),
-                        child: Row(
+                        filterWidet: Row(
                           children: [
-                            const _FromDocumentDateFilter(),
+                            BlocBuilder<FullSummaryFilterBloc,
+                                FullSummaryFilterState>(
+                              buildWhen: (previous, current) =>
+                                  previous
+                                      .filter.getDocumentDateFilterDateRange !=
+                                  current.filter.getDocumentDateFilterDateRange,
+                              builder: (context, state) =>
+                                  FromDocumentDateFilter(
+                                documentDateFilterDateRange:
+                                    state.filter.getDocumentDateFilterDateRange,
+                                documentDateFrom:
+                                    state.filter.documentDateFrom.dateString,
+                                onDocumentDateChanged:
+                                    (DateTimeRange documentDateRange) => context
+                                        .read<FullSummaryFilterBloc>()
+                                        .add(
+                                          FullSummaryFilterEvent
+                                              .setDocumentDate(
+                                            documentDateRange,
+                                          ),
+                                        ),
+                              ),
+                            ),
                             Padding(
                               padding:
                                   const EdgeInsets.symmetric(horizontal: 8),
@@ -82,38 +108,109 @@ class FullSummaryFilterBottomSheet extends StatelessWidget {
                                 style: Theme.of(context).textTheme.titleSmall,
                               ),
                             ),
-                            const _ToDocumentDateFilter(),
+                            BlocBuilder<FullSummaryFilterBloc,
+                                FullSummaryFilterState>(
+                              buildWhen: (previous, current) =>
+                                  previous
+                                      .filter.getDocumentDateFilterDateRange !=
+                                  current.filter.getDocumentDateFilterDateRange,
+                              builder: (context, state) => ToDocumentDateFilter(
+                                documentDateFilterDateRange:
+                                    state.filter.getDocumentDateFilterDateRange,
+                                documentDateTo:
+                                    state.filter.documentDateTo.dateString,
+                                onDocumentDateChanged:
+                                    (DateTimeRange documentDateRange) => context
+                                        .read<FullSummaryFilterBloc>()
+                                        .add(
+                                          FullSummaryFilterEvent
+                                              .setDocumentDate(
+                                            documentDateRange,
+                                          ),
+                                        ),
+                              ),
+                            ),
                           ],
                         ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(bottom: 16.0),
-                        child: Text(
-                          context.tr('Due Date'),
-                          style: Theme.of(context).textTheme.labelSmall,
-                        ),
-                      ),
-                      Row(
-                        children: [
-                          const _FromDueDateFilter(),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 8),
-                            child: Text(
-                              '-',
-                              style: Theme.of(context).textTheme.titleSmall,
+                      RadioFilterSection(
+                        radioValue: FilterOption.dueDate(),
+                        selectedValue: state.filter.filterOption,
+                        title: 'Due Date',
+                        filterWidet: Row(
+                          children: [
+                            BlocBuilder<FullSummaryFilterBloc,
+                                FullSummaryFilterState>(
+                              buildWhen: (previous, current) =>
+                                  previous.filter.getDueDateFilterDateRange !=
+                                  current.filter.getDueDateFilterDateRange,
+                              builder: (context, state) => FromDueDateFilter(
+                                dueDateFilterDateRange:
+                                    state.filter.getDueDateFilterDateRange,
+                                dueDateFrom:
+                                    state.filter.dueDateFrom.dateString,
+                                onDueDateChanged:
+                                    (DateTimeRange dueDateRange) => context
+                                        .read<FullSummaryFilterBloc>()
+                                        .add(
+                                          FullSummaryFilterEvent.setDueDate(
+                                            dueDateRange,
+                                          ),
+                                        ),
+                              ),
                             ),
-                          ),
-                          const _ToDueDateFilter(),
-                        ],
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(bottom: 16.0, top: 24.0),
-                        child: Text(
-                          context.tr('Status'),
-                          style: Theme.of(context).textTheme.labelSmall,
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 8),
+                              child: Text(
+                                '-',
+                                style: Theme.of(context).textTheme.titleSmall,
+                              ),
+                            ),
+                            BlocBuilder<FullSummaryFilterBloc,
+                                FullSummaryFilterState>(
+                              buildWhen: (previous, current) =>
+                                  previous.filter.getDueDateFilterDateRange !=
+                                  current.filter.getDueDateFilterDateRange,
+                              builder: (context, state) => ToDueDateFilter(
+                                dueDateFilterDateRange:
+                                    state.filter.getDueDateFilterDateRange,
+                                dueDateTo: state.filter.dueDateTo.dateString,
+                                onDueDateChanged:
+                                    (DateTimeRange dueDateRange) => context
+                                        .read<FullSummaryFilterBloc>()
+                                        .add(
+                                          FullSummaryFilterEvent.setDueDate(
+                                            dueDateRange,
+                                          ),
+                                        ),
+                              ),
+                            ),
+                          ],
                         ),
                       ),
-                      const _StatusesSelector(),
+                      RadioFilterSection(
+                        radioValue: FilterOption.status(),
+                        selectedValue: state.filter.filterOption,
+                        title: 'Status',
+                        filterWidet: BlocBuilder<FullSummaryFilterBloc,
+                            FullSummaryFilterState>(
+                          buildWhen: (previous, current) =>
+                              previous.filter.filterStatuses !=
+                              current.filter.filterStatuses,
+                          builder: (context, state) => StatusSelectorFilter<String>(
+                            statusesDisplay: state.statuses,
+                            filteredStatuses: state.filter.filterStatuses,
+                            onStatusSelected: (status, value) =>
+                                context.read<FullSummaryFilterBloc>().add(
+                                      FullSummaryFilterEvent.statusChanged(
+                                        status,
+                                        value,
+                                      ),
+                                    ),
+                          ),
+                        ),
+                      ),
                       const SizedBox(height: 40),
                       const Row(
                         children: [
@@ -127,271 +224,6 @@ class FullSummaryFilterBottomSheet extends StatelessWidget {
                 ),
               ),
             ],
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class _StatusesSelector extends StatelessWidget {
-  const _StatusesSelector({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<FullSummaryFilterBloc, FullSummaryFilterState>(
-      buildWhen: (previous, current) =>
-          previous.filter.filterStatuses != current.filter.filterStatuses,
-      builder: (
-        context,
-        state,
-      ) {
-        return Column(
-          children: state.statuses.map((String status) {
-            final value = state.filter.filterStatuses.contains(status);
-
-            return CheckboxListTile(
-              key: WidgetKeys.statusFilter(status, value),
-              contentPadding: EdgeInsets.zero,
-              title: Text(
-                context.tr(status),
-                style: Theme.of(context).textTheme.titleSmall,
-              ),
-              controlAffinity: ListTileControlAffinity.leading,
-              dense: true,
-              visualDensity: const VisualDensity(horizontal: -4, vertical: -4),
-              onChanged: (bool? value) {
-                context.read<FullSummaryFilterBloc>().add(
-                      FullSummaryFilterEvent.statusChanged(
-                        status,
-                        value ?? false,
-                      ),
-                    );
-              },
-              value: value,
-            );
-          }).toList(),
-        );
-      },
-    );
-  }
-}
-
-class _FromDocumentDateFilter extends StatelessWidget {
-  const _FromDocumentDateFilter({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<FullSummaryFilterBloc, FullSummaryFilterState>(
-      buildWhen: (previous, current) =>
-          previous.filter.getDocumentDateFilterDateRange !=
-          current.filter.getDocumentDateFilterDateRange,
-      builder: (context, state) => Expanded(
-        child: TextFormField(
-          autocorrect: false,
-          key: WidgetKeys.fromDocumentDateField,
-          onTap: () async {
-            final returnApproverFilterBloc =
-                context.read<FullSummaryFilterBloc>();
-            final documentDateRange = await showDateRangePicker(
-              context: context,
-              firstDate: DateTime(1900),
-              lastDate: DateTime.now(),
-              initialDateRange: state.filter.getDocumentDateFilterDateRange,
-            );
-            if (documentDateRange == null) return;
-            returnApproverFilterBloc.add(
-              FullSummaryFilterEvent.setDocumentDate(
-                documentDateRange,
-              ),
-            );
-          },
-          readOnly: true,
-          controller: TextEditingController(
-            text: state.filter.documentDateFrom.dateString,
-          ),
-          decoration: InputDecoration(
-            hintText: context.tr('Date from'),
-            hintStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
-                  color: ZPColors.darkGray,
-                ),
-            suffixIcon: const Padding(
-              padding: EdgeInsets.only(right: 8.0),
-              child: Icon(
-                Icons.calendar_month,
-                size: 20,
-              ),
-            ),
-            suffixIconConstraints: const BoxConstraints(maxWidth: 25),
-            focusedBorder:
-                Theme.of(context).inputDecorationTheme.disabledBorder,
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class _ToDocumentDateFilter extends StatelessWidget {
-  const _ToDocumentDateFilter({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<FullSummaryFilterBloc, FullSummaryFilterState>(
-      buildWhen: (previous, current) =>
-          previous.filter.getDocumentDateFilterDateRange !=
-          current.filter.getDocumentDateFilterDateRange,
-      builder: (context, state) => Expanded(
-        child: TextFormField(
-          autocorrect: false,
-          key: WidgetKeys.toDocumentDateField,
-          onTap: () async {
-            final returnApproverFilterBloc =
-                context.read<FullSummaryFilterBloc>();
-            final documentDateRange = await showDateRangePicker(
-              context: context,
-              firstDate: DateTime(1900),
-              lastDate: DateTime.now(),
-              initialDateRange: state.filter.getDocumentDateFilterDateRange,
-            );
-            if (documentDateRange == null) return;
-            returnApproverFilterBloc.add(
-              FullSummaryFilterEvent.setDocumentDate(
-                documentDateRange,
-              ),
-            );
-          },
-          readOnly: true,
-          controller: TextEditingController(
-            text: state.filter.documentDateTo.dateString,
-          ),
-          decoration: InputDecoration(
-            hintText: context.tr('Date to'),
-            hintStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
-                  color: ZPColors.darkGray,
-                ),
-            suffixIcon: const Padding(
-              padding: EdgeInsets.only(right: 8.0),
-              child: Icon(
-                Icons.calendar_month,
-                size: 20,
-              ),
-            ),
-            suffixIconConstraints: const BoxConstraints(maxWidth: 25),
-            focusedBorder:
-                Theme.of(context).inputDecorationTheme.disabledBorder,
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class _FromDueDateFilter extends StatelessWidget {
-  const _FromDueDateFilter({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<FullSummaryFilterBloc, FullSummaryFilterState>(
-      buildWhen: (previous, current) =>
-          previous.filter.getDueDateFilterDateRange !=
-          current.filter.getDueDateFilterDateRange,
-      builder: (context, state) => Expanded(
-        child: TextFormField(
-          autocorrect: false,
-          key: WidgetKeys.fromDueDateField,
-          onTap: () async {
-            final returnApproverFilterBloc =
-                context.read<FullSummaryFilterBloc>();
-            final dueDateRange = await showDateRangePicker(
-              context: context,
-              firstDate: DateTime(1900),
-              lastDate: DateTime.now().add(const Duration(days: 365 * 10)),
-              initialDateRange: state.filter.getDueDateFilterDateRange,
-            );
-            if (dueDateRange == null) return;
-            returnApproverFilterBloc.add(
-              FullSummaryFilterEvent.setDueDate(
-                dueDateRange,
-              ),
-            );
-          },
-          readOnly: true,
-          controller: TextEditingController(
-            text: state.filter.dueDateFrom.dateString,
-          ),
-          decoration: InputDecoration(
-            hintText: context.tr('Date from'),
-            hintStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
-                  color: ZPColors.darkGray,
-                ),
-            suffixIcon: const Padding(
-              padding: EdgeInsets.only(right: 8.0),
-              child: Icon(
-                Icons.calendar_month,
-                size: 20,
-              ),
-            ),
-            suffixIconConstraints: const BoxConstraints(maxWidth: 25),
-            focusedBorder:
-                Theme.of(context).inputDecorationTheme.disabledBorder,
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class _ToDueDateFilter extends StatelessWidget {
-  const _ToDueDateFilter({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<FullSummaryFilterBloc, FullSummaryFilterState>(
-      buildWhen: (previous, current) =>
-          previous.filter.getDueDateFilterDateRange !=
-          current.filter.getDueDateFilterDateRange,
-      builder: (context, state) => Expanded(
-        child: TextFormField(
-          autocorrect: false,
-          key: WidgetKeys.toDueDateField,
-          onTap: () async {
-            final returnApproverFilterBloc =
-                context.read<FullSummaryFilterBloc>();
-            final dueDateRange = await showDateRangePicker(
-              context: context,
-              firstDate: DateTime(1900),
-              lastDate: DateTime.now().add(const Duration(days: 365 * 10)),
-              initialDateRange: state.filter.getDueDateFilterDateRange,
-            );
-            if (dueDateRange == null) return;
-            returnApproverFilterBloc.add(
-              FullSummaryFilterEvent.setDueDate(
-                dueDateRange,
-              ),
-            );
-          },
-          readOnly: true,
-          controller: TextEditingController(
-            text: state.filter.dueDateTo.dateString,
-          ),
-          decoration: InputDecoration(
-            hintText: context.tr('Date to'),
-            hintStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
-                  color: ZPColors.darkGray,
-                ),
-            suffixIcon: const Padding(
-              padding: EdgeInsets.only(right: 8.0),
-              child: Icon(
-                Icons.calendar_month,
-                size: 20,
-              ),
-            ),
-            suffixIconConstraints: const BoxConstraints(maxWidth: 25),
-            focusedBorder:
-                Theme.of(context).inputDecorationTheme.disabledBorder,
           ),
         ),
       ),

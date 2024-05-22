@@ -10,14 +10,13 @@ class _PaymentSummaryFilterBottomSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final salesOrgConfig =
-        context.read<EligibilityBloc>().state.salesOrgConfigs;
 
     return PaymentModule(
       isMarketPlace: isMarketPlace,
       child: BlocBuilder<PaymentSummaryFilterBloc, PaymentSummaryFilterState>(
         buildWhen: (previous, current) =>
-            previous.showErrorMessages != current.showErrorMessages,
+            previous.showErrorMessages != current.showErrorMessages ||
+            previous.filter.filterOption != current.filter.filterOption,
         builder: (context, state) => CustomBottomSheet(
           sheetKey: WidgetKeys.paymentSummaryFilter,
           headerText: 'Filter',
@@ -28,70 +27,137 @@ class _PaymentSummaryFilterBottomSheet extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                Padding(
+                RadioFilterSection(
+                  radioValue: FilterOption.documentDate(),
+                  selectedValue: state.filter.filterOption,
+                  title: 'Created date',
                   padding: const EdgeInsets.only(bottom: 16.0),
-                  child: Text(
-                    context.tr('Created date'),
-                    style: Theme.of(context).textTheme.labelMedium!.copyWith(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w600,
+                  filterWidet: Row(
+                    children: [
+                      BlocBuilder<PaymentSummaryFilterBloc,
+                          PaymentSummaryFilterState>(
+                        buildWhen: (previous, current) =>
+                            previous.filter.getCreatedDateFilterDateRange !=
+                            current.filter.getCreatedDateFilterDateRange,
+                        builder: (context, state) => FromDocumentDateFilter(
+                          documentDateFilterDateRange:
+                              state.filter.getCreatedDateFilterDateRange,
+                          documentDateFrom:
+                              state.filter.createdDateFrom.dateString,
+                          onDocumentDateChanged:
+                              (DateTimeRange documentDateRange) => context
+                                  .read<PaymentSummaryFilterBloc>()
+                                  .add(
+                                    PaymentSummaryFilterEvent.setCreatedDate(
+                                      documentDateRange,
+                                    ),
+                                  ),
                         ),
-                  ),
-                ),
-                Row(
-                  children: [
-                    const _PaymentSummaryFromCreatedDateFilter(),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 8),
-                      child: Text(
-                        '-',
-                        style: Theme.of(context).textTheme.titleSmall,
                       ),
-                    ),
-                    const _PaymentSummaryToCreatedDateFilter(),
-                  ],
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 24.0, bottom: 16.0),
-                  child: Text(
-                    '${context.tr('Amount range')} (${salesOrgConfig.currency.code})',
-                    style: Theme.of(context).textTheme.labelMedium!.copyWith(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w600,
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 8),
+                        child: Text(
+                          '-',
+                          style: Theme.of(context).textTheme.titleSmall,
                         ),
-                  ),
-                ),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const _PaymentSummaryAmountValueFromFilter(),
-                    Padding(
-                      padding: const EdgeInsets.all(8),
-                      child: Text(
-                        '-',
-                        style: Theme.of(context).textTheme.titleSmall,
                       ),
-                    ),
-                    const _PaymentSummaryAmountValueToFilter(),
-                  ],
-                ),
-                if (state.showErrorMessages &&
-                    !state.filter.isAmountValueRangeValid)
-                  ValueRangeError(
-                    label: context.tr('Invalid Amount range!'),
-                    isValid: state.filter.isAmountValueRangeValid,
-                  ),
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 16.0, top: 24.0),
-                  child: Text(
-                    context.tr('Status'),
-                    style: Theme.of(context).textTheme.labelMedium!.copyWith(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w600,
+                      BlocBuilder<PaymentSummaryFilterBloc,
+                          PaymentSummaryFilterState>(
+                        buildWhen: (previous, current) =>
+                            previous.filter.getCreatedDateFilterDateRange !=
+                            current.filter.getCreatedDateFilterDateRange,
+                        builder: (context, state) => ToDocumentDateFilter(
+                          documentDateFilterDateRange:
+                              state.filter.getCreatedDateFilterDateRange,
+                          documentDateTo: state.filter.createdDateTo.dateString,
+                          onDocumentDateChanged:
+                              (DateTimeRange documentDateRange) => context
+                                  .read<PaymentSummaryFilterBloc>()
+                                  .add(
+                                    PaymentSummaryFilterEvent.setCreatedDate(
+                                      documentDateRange,
+                                    ),
+                                  ),
                         ),
+                      ),
+                    ],
                   ),
                 ),
-                const _PaymentSummaryStatusesSelector(),
+                RadioFilterSection(
+                  radioValue: FilterOption.amountRange(),
+                  selectedValue: state.filter.filterOption,
+                  title: 'Amount range',
+                  showErrorMessage: state.showErrorMessages &&
+                      !state.filter.isAmountValueRangeValid,
+                  filterWidet: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      BlocBuilder<PaymentSummaryFilterBloc,
+                          PaymentSummaryFilterState>(
+                        buildWhen: (previous, current) =>
+                            previous.filter.amountValueFrom !=
+                            current.filter.amountValueFrom,
+                        builder: (context, state) => AmountFromFilter(
+                          amountFrom:
+                              state.filter.amountValueFrom.apiParameterValue,
+                          onAmountFromChanged: (value) =>
+                              context.read<PaymentSummaryFilterBloc>().add(
+                                    PaymentSummaryFilterEvent
+                                        .amountValueFromChanged(
+                                      value,
+                                    ),
+                                  ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8),
+                        child: Text(
+                          '-',
+                          style: Theme.of(context).textTheme.titleSmall,
+                        ),
+                      ),
+                      BlocBuilder<PaymentSummaryFilterBloc,
+                          PaymentSummaryFilterState>(
+                        buildWhen: (previous, current) =>
+                            previous.filter.amountValueTo !=
+                            current.filter.amountValueTo,
+                        builder: (context, state) => AmountToFilter(
+                          amountTo:
+                              state.filter.amountValueTo.apiParameterValue,
+                          onAmountToChanged: (value) => context
+                              .read<PaymentSummaryFilterBloc>()
+                              .add(
+                                PaymentSummaryFilterEvent.amountValueToChanged(
+                                  value,
+                                ),
+                              ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                RadioFilterSection(
+                  radioValue: FilterOption.status(),
+                  selectedValue: state.filter.filterOption,
+                  title: 'Status',
+                  filterWidet: BlocBuilder<PaymentSummaryFilterBloc,
+                      PaymentSummaryFilterState>(
+                    buildWhen: (previous, current) =>
+                        previous.filter.filterStatuses !=
+                        current.filter.filterStatuses,
+                    builder: (context, state) =>
+                        StatusSelectorFilter<FilterStatus>(
+                      statusesDisplay: state.statuses,
+                      filteredStatuses: state.filter.filterStatuses,
+                      onStatusSelected: (status, value) =>
+                          context.read<PaymentSummaryFilterBloc>().add(
+                                PaymentSummaryFilterEvent.statusChanged(
+                                  status,
+                                ),
+                              ),
+                    ),
+                  ),
+                ),
                 const SizedBox(
                   height: 40,
                 ),

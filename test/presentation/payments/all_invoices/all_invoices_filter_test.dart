@@ -1,6 +1,7 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
+import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/payments/all_invoices/all_invoices_bloc.dart';
 import 'package:ezrxmobile/application/payments/all_invoices/filter/all_invoices_filter_bloc.dart';
@@ -25,6 +26,8 @@ void main() {
   late ZPAllInvoicesBloc allInvoicesBlocMock;
   late SalesOrgBloc salesOrgBlocMock;
   late AllInvoicesFilterBloc allInvoicesFilterBlocMock;
+  late EligibilityBloc eligibilityBlocMock;
+
   late AppRouter autoRouterMock;
   final locator = GetIt.instance;
   final fakeToDate = DateTime.parse(
@@ -52,6 +55,8 @@ void main() {
     salesOrgBlocMock = SalesOrgBlocMock();
     when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial());
     customerCodeBlocMock = CustomerCodeBlocMock();
+    eligibilityBlocMock = EligibilityBlocMock();
+
     when(() => customerCodeBlocMock.state)
         .thenReturn(CustomerCodeState.initial());
     allInvoicesBlocMock = ZPAllInvoicesBlocMock();
@@ -60,6 +65,8 @@ void main() {
     allInvoicesFilterBlocMock = AllInvoicesFilterBlocMock();
     when(() => allInvoicesFilterBlocMock.state)
         .thenReturn(AllInvoicesFilterState.initial());
+    when(() => eligibilityBlocMock.state)
+        .thenReturn(EligibilityState.initial());
   });
 
   Future getWidget(tester) async {
@@ -82,6 +89,9 @@ void main() {
           ),
           BlocProvider<AllInvoicesFilterBloc>(
             create: (context) => allInvoicesFilterBlocMock,
+          ),
+          BlocProvider<EligibilityBloc>(
+            create: (context) => eligibilityBlocMock,
           ),
         ],
         child: const Scaffold(

@@ -51,7 +51,8 @@ class PaymentSummaryFilterBloc
       statusChanged: (_StatusChanged e) {
         emit(
           state.copyWith(
-            filter: state.filter.copyWith(
+            filter: PaymentSummaryFilter.empty().copyWith(
+              filterOption: FilterOption.status(),
               filterStatuses: <FilterStatus>[
                 e.filterStatus,
               ],
@@ -61,7 +62,8 @@ class PaymentSummaryFilterBloc
       },
       setCreatedDate: (_SetCreatedDate e) async => emit(
         state.copyWith(
-          filter: state.filter.copyWith(
+          filter: PaymentSummaryFilter.empty().copyWith(
+            filterOption: FilterOption.documentDate(),
             createdDateFrom: DateTimeStringValue(
               getDateStringByDateTime(e.dateRange.start),
             ),
@@ -74,15 +76,19 @@ class PaymentSummaryFilterBloc
       ),
       amountValueFromChanged: (_AmountValueFromChanged e) async => emit(
         state.copyWith(
-          filter: state.filter.copyWith(
+          filter: PaymentSummaryFilter.empty().copyWith(
+            filterOption: FilterOption.amountRange(),
             amountValueFrom: RangeValue(e.amountValueFrom),
+            amountValueTo: state.filter.amountValueTo,
           ),
           showErrorMessages: false,
         ),
       ),
       amountValueToChanged: (_AmountValueToChanged e) async => emit(
         state.copyWith(
-          filter: state.filter.copyWith(
+          filter: PaymentSummaryFilter.empty().copyWith(
+            filterOption: FilterOption.amountRange(),
+            amountValueFrom: state.filter.amountValueFrom,
             amountValueTo: RangeValue(e.amountValueTo),
           ),
           showErrorMessages: false,

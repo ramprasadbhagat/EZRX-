@@ -1,7 +1,12 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:collection/collection.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/presentation/core/market_place/market_place_logo.dart';
+import 'package:ezrxmobile/presentation/payments/widgets/amount_from_filter.dart';
+import 'package:ezrxmobile/presentation/payments/widgets/amount_to_filter.dart';
+import 'package:ezrxmobile/presentation/payments/widgets/from_document_date_filter.dart';
+import 'package:ezrxmobile/presentation/payments/widgets/radio_filter_section.dart';
+import 'package:ezrxmobile/presentation/payments/widgets/status_selector_filter.dart';
+import 'package:ezrxmobile/presentation/payments/widgets/to_document_date_filter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
@@ -25,14 +30,12 @@ import 'package:ezrxmobile/presentation/core/custom_app_bar.dart';
 import 'package:ezrxmobile/presentation/core/custom_badge.dart';
 import 'package:ezrxmobile/presentation/core/custom_bottom_sheet.dart';
 import 'package:ezrxmobile/presentation/core/custom_card.dart';
-import 'package:ezrxmobile/presentation/core/custom_numeric_text_field.dart';
 import 'package:ezrxmobile/presentation/core/custom_search_bar.dart';
 import 'package:ezrxmobile/presentation/core/no_record.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
 import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
 import 'package:ezrxmobile/presentation/core/status_label.dart';
-import 'package:ezrxmobile/presentation/core/value_range_error.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/payments/extension.dart';
 import 'package:ezrxmobile/presentation/payments/widgets/new_payment_button.dart';
@@ -41,9 +44,7 @@ import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 
 part 'package:ezrxmobile/presentation/payments/payment_summary/widgets/payment_in_progress_label.dart';
-part 'package:ezrxmobile/presentation/payments/payment_summary/widgets/payment_summary_amount_value_range.dart';
 part 'package:ezrxmobile/presentation/payments/payment_summary/widgets/payment_summary_apply_button.dart';
-part 'package:ezrxmobile/presentation/payments/payment_summary/widgets/payment_summary_created_date_range.dart';
 part 'package:ezrxmobile/presentation/payments/payment_summary/widgets/payment_summary_download_button.dart';
 part 'package:ezrxmobile/presentation/payments/payment_summary/widgets/payment_summary_filter_bottom_sheet.dart';
 part 'package:ezrxmobile/presentation/payments/payment_summary/widgets/payment_summary_filter_icon.dart';
@@ -51,7 +52,6 @@ part 'package:ezrxmobile/presentation/payments/payment_summary/widgets/payment_s
 part 'package:ezrxmobile/presentation/payments/payment_summary/widgets/payment_summary_group_list.dart';
 part 'package:ezrxmobile/presentation/payments/payment_summary/widgets/payment_summary_reset_button.dart';
 part 'package:ezrxmobile/presentation/payments/payment_summary/widgets/payment_summary_search_bar.dart';
-part 'package:ezrxmobile/presentation/payments/payment_summary/widgets/payment_summary_statuses_selector.dart';
 
 class PaymentSummaryPage extends StatefulWidget {
   final bool isMarketPlace;

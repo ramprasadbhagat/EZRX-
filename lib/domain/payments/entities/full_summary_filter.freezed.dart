@@ -12,7 +12,7 @@ part of 'full_summary_filter.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$FullSummaryFilter {
@@ -23,6 +23,7 @@ mixin _$FullSummaryFilter {
   DateTimeStringValue get documentDateTo => throw _privateConstructorUsedError;
   List<String> get filterStatuses => throw _privateConstructorUsedError;
   SearchKey get searchKey => throw _privateConstructorUsedError;
+  FilterOption get filterOption => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $FullSummaryFilterCopyWith<FullSummaryFilter> get copyWith =>
@@ -41,7 +42,8 @@ abstract class $FullSummaryFilterCopyWith<$Res> {
       DateTimeStringValue documentDateFrom,
       DateTimeStringValue documentDateTo,
       List<String> filterStatuses,
-      SearchKey searchKey});
+      SearchKey searchKey,
+      FilterOption filterOption});
 }
 
 /// @nodoc
@@ -63,6 +65,7 @@ class _$FullSummaryFilterCopyWithImpl<$Res, $Val extends FullSummaryFilter>
     Object? documentDateTo = null,
     Object? filterStatuses = null,
     Object? searchKey = null,
+    Object? filterOption = null,
   }) {
     return _then(_value.copyWith(
       dueDateFrom: null == dueDateFrom
@@ -89,16 +92,20 @@ class _$FullSummaryFilterCopyWithImpl<$Res, $Val extends FullSummaryFilter>
           ? _value.searchKey
           : searchKey // ignore: cast_nullable_to_non_nullable
               as SearchKey,
+      filterOption: null == filterOption
+          ? _value.filterOption
+          : filterOption // ignore: cast_nullable_to_non_nullable
+              as FilterOption,
     ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$$_FullSummaryFilterCopyWith<$Res>
+abstract class _$$FullSummaryFilterImplCopyWith<$Res>
     implements $FullSummaryFilterCopyWith<$Res> {
-  factory _$$_FullSummaryFilterCopyWith(_$_FullSummaryFilter value,
-          $Res Function(_$_FullSummaryFilter) then) =
-      __$$_FullSummaryFilterCopyWithImpl<$Res>;
+  factory _$$FullSummaryFilterImplCopyWith(_$FullSummaryFilterImpl value,
+          $Res Function(_$FullSummaryFilterImpl) then) =
+      __$$FullSummaryFilterImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -107,15 +114,16 @@ abstract class _$$_FullSummaryFilterCopyWith<$Res>
       DateTimeStringValue documentDateFrom,
       DateTimeStringValue documentDateTo,
       List<String> filterStatuses,
-      SearchKey searchKey});
+      SearchKey searchKey,
+      FilterOption filterOption});
 }
 
 /// @nodoc
-class __$$_FullSummaryFilterCopyWithImpl<$Res>
-    extends _$FullSummaryFilterCopyWithImpl<$Res, _$_FullSummaryFilter>
-    implements _$$_FullSummaryFilterCopyWith<$Res> {
-  __$$_FullSummaryFilterCopyWithImpl(
-      _$_FullSummaryFilter _value, $Res Function(_$_FullSummaryFilter) _then)
+class __$$FullSummaryFilterImplCopyWithImpl<$Res>
+    extends _$FullSummaryFilterCopyWithImpl<$Res, _$FullSummaryFilterImpl>
+    implements _$$FullSummaryFilterImplCopyWith<$Res> {
+  __$$FullSummaryFilterImplCopyWithImpl(_$FullSummaryFilterImpl _value,
+      $Res Function(_$FullSummaryFilterImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -127,8 +135,9 @@ class __$$_FullSummaryFilterCopyWithImpl<$Res>
     Object? documentDateTo = null,
     Object? filterStatuses = null,
     Object? searchKey = null,
+    Object? filterOption = null,
   }) {
-    return _then(_$_FullSummaryFilter(
+    return _then(_$FullSummaryFilterImpl(
       dueDateFrom: null == dueDateFrom
           ? _value.dueDateFrom
           : dueDateFrom // ignore: cast_nullable_to_non_nullable
@@ -153,20 +162,25 @@ class __$$_FullSummaryFilterCopyWithImpl<$Res>
           ? _value.searchKey
           : searchKey // ignore: cast_nullable_to_non_nullable
               as SearchKey,
+      filterOption: null == filterOption
+          ? _value.filterOption
+          : filterOption // ignore: cast_nullable_to_non_nullable
+              as FilterOption,
     ));
   }
 }
 
 /// @nodoc
 
-class _$_FullSummaryFilter extends _FullSummaryFilter {
-  _$_FullSummaryFilter(
+class _$FullSummaryFilterImpl extends _FullSummaryFilter {
+  _$FullSummaryFilterImpl(
       {required this.dueDateFrom,
       required this.dueDateTo,
       required this.documentDateFrom,
       required this.documentDateTo,
       required final List<String> filterStatuses,
-      required this.searchKey})
+      required this.searchKey,
+      required this.filterOption})
       : _filterStatuses = filterStatuses,
         super._();
 
@@ -188,17 +202,19 @@ class _$_FullSummaryFilter extends _FullSummaryFilter {
 
   @override
   final SearchKey searchKey;
+  @override
+  final FilterOption filterOption;
 
   @override
   String toString() {
-    return 'FullSummaryFilter(dueDateFrom: $dueDateFrom, dueDateTo: $dueDateTo, documentDateFrom: $documentDateFrom, documentDateTo: $documentDateTo, filterStatuses: $filterStatuses, searchKey: $searchKey)';
+    return 'FullSummaryFilter(dueDateFrom: $dueDateFrom, dueDateTo: $dueDateTo, documentDateFrom: $documentDateFrom, documentDateTo: $documentDateTo, filterStatuses: $filterStatuses, searchKey: $searchKey, filterOption: $filterOption)';
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_FullSummaryFilter &&
+            other is _$FullSummaryFilterImpl &&
             (identical(other.dueDateFrom, dueDateFrom) ||
                 other.dueDateFrom == dueDateFrom) &&
             (identical(other.dueDateTo, dueDateTo) ||
@@ -210,7 +226,9 @@ class _$_FullSummaryFilter extends _FullSummaryFilter {
             const DeepCollectionEquality()
                 .equals(other._filterStatuses, _filterStatuses) &&
             (identical(other.searchKey, searchKey) ||
-                other.searchKey == searchKey));
+                other.searchKey == searchKey) &&
+            (identical(other.filterOption, filterOption) ||
+                other.filterOption == filterOption));
   }
 
   @override
@@ -221,13 +239,14 @@ class _$_FullSummaryFilter extends _FullSummaryFilter {
       documentDateFrom,
       documentDateTo,
       const DeepCollectionEquality().hash(_filterStatuses),
-      searchKey);
+      searchKey,
+      filterOption);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_FullSummaryFilterCopyWith<_$_FullSummaryFilter> get copyWith =>
-      __$$_FullSummaryFilterCopyWithImpl<_$_FullSummaryFilter>(
+  _$$FullSummaryFilterImplCopyWith<_$FullSummaryFilterImpl> get copyWith =>
+      __$$FullSummaryFilterImplCopyWithImpl<_$FullSummaryFilterImpl>(
           this, _$identity);
 }
 
@@ -238,7 +257,8 @@ abstract class _FullSummaryFilter extends FullSummaryFilter {
       required final DateTimeStringValue documentDateFrom,
       required final DateTimeStringValue documentDateTo,
       required final List<String> filterStatuses,
-      required final SearchKey searchKey}) = _$_FullSummaryFilter;
+      required final SearchKey searchKey,
+      required final FilterOption filterOption}) = _$FullSummaryFilterImpl;
   _FullSummaryFilter._() : super._();
 
   @override
@@ -254,7 +274,9 @@ abstract class _FullSummaryFilter extends FullSummaryFilter {
   @override
   SearchKey get searchKey;
   @override
+  FilterOption get filterOption;
+  @override
   @JsonKey(ignore: true)
-  _$$_FullSummaryFilterCopyWith<_$_FullSummaryFilter> get copyWith =>
+  _$$FullSummaryFilterImplCopyWith<_$FullSummaryFilterImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

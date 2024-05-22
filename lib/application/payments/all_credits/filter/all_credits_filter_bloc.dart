@@ -43,7 +43,8 @@ class AllCreditsFilterBloc
       statusChanged: (_StatusChanged e) {
         emit(
           state.copyWith(
-            filter: state.filter.copyWith(
+            filter: AllCreditsFilter.empty().copyWith(
+              filterOption: FilterOption.status(),
               filterStatuses: e.selected ? [e.filterStatus] : [],
             ),
           ),
@@ -51,7 +52,8 @@ class AllCreditsFilterBloc
       },
       setDocumentDate: (_SetDocumentDate e) async => emit(
         state.copyWith(
-          filter: state.filter.copyWith(
+          filter: AllCreditsFilter.empty().copyWith(
+            filterOption: FilterOption.documentDate(),
             documentDateFrom: DateTimeStringValue(
               getDateStringByDateTime(e.dateRange.start),
             ),
@@ -64,15 +66,19 @@ class AllCreditsFilterBloc
       ),
       amountValueFromChanged: (_AmountValueFromChanged e) async => emit(
         state.copyWith(
-          filter: state.filter.copyWith(
+          filter: AllCreditsFilter.empty().copyWith(
+            filterOption: FilterOption.amountRange(),
             amountValueFrom: RangeValue(e.amountValueFrom),
+            amountValueTo: state.filter.amountValueTo,
           ),
           showErrorMessages: false,
         ),
       ),
       amountValueToChanged: (_AmountValueToChanged e) async => emit(
         state.copyWith(
-          filter: state.filter.copyWith(
+          filter: AllCreditsFilter.empty().copyWith(
+            filterOption: FilterOption.amountRange(),
+            amountValueFrom: state.filter.amountValueFrom,
             amountValueTo: RangeValue(e.amountValueTo),
           ),
           showErrorMessages: false,

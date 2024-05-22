@@ -546,3 +546,21 @@ class MaterialOriginFilter extends ValueObject<int> {
   String get titleViewByOrder =>
       getViewByOrderHistoryTitle(value.getOrElse(() => -1));
 }
+
+class FilterOption extends ValueObject<String> {
+  @override
+  final Either<ValueFailure<String>, String> value;
+
+  factory FilterOption(String input) =>
+      FilterOption._(validateStringNotEmpty(input));
+
+  factory FilterOption.documentDate() => FilterOption('documentDate');
+
+  factory FilterOption.dueDate() => FilterOption('dueDate');
+
+  factory FilterOption.amountRange() => FilterOption('amountRange');
+
+  factory FilterOption.status() => FilterOption('status');
+
+  const FilterOption._(this.value);
+}

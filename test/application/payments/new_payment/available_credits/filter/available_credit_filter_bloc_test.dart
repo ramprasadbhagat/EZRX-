@@ -60,8 +60,11 @@ void main() {
         ),
         expect: () => [
           AvailableCreditFilterState.initial().copyWith(
-            filter: AvailableCreditFilter.defaultFilter().copyWith(
+            filter: AvailableCreditFilter.empty().copyWith(
               amountValueFrom: RangeValue('10'),
+              amountValueTo:
+                  AvailableCreditFilterState.initial().filter.amountValueTo,
+              filterOption: FilterOption.amountRange(),
             ),
           ),
         ],
@@ -74,8 +77,11 @@ void main() {
             .add(const AvailableCreditFilterEvent.setAmountTo(amountTo: '100')),
         expect: () => [
           AvailableCreditFilterState.initial().copyWith(
-            filter: AvailableCreditFilter.defaultFilter().copyWith(
+            filter: AvailableCreditFilter.empty().copyWith(
               amountValueTo: RangeValue('100'),
+              amountValueFrom:
+                  AvailableCreditFilterState.initial().filter.amountValueFrom,
+              filterOption: FilterOption.amountRange(),
             ),
           ),
         ],

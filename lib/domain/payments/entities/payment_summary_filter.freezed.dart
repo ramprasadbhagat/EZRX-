@@ -22,6 +22,7 @@ mixin _$PaymentSummaryFilter {
   RangeValue get amountValueTo => throw _privateConstructorUsedError;
   List<FilterStatus> get filterStatuses => throw _privateConstructorUsedError;
   SearchKey get searchKey => throw _privateConstructorUsedError;
+  FilterOption get filterOption => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $PaymentSummaryFilterCopyWith<PaymentSummaryFilter> get copyWith =>
@@ -40,7 +41,8 @@ abstract class $PaymentSummaryFilterCopyWith<$Res> {
       RangeValue amountValueFrom,
       RangeValue amountValueTo,
       List<FilterStatus> filterStatuses,
-      SearchKey searchKey});
+      SearchKey searchKey,
+      FilterOption filterOption});
 }
 
 /// @nodoc
@@ -63,6 +65,7 @@ class _$PaymentSummaryFilterCopyWithImpl<$Res,
     Object? amountValueTo = null,
     Object? filterStatuses = null,
     Object? searchKey = null,
+    Object? filterOption = null,
   }) {
     return _then(_value.copyWith(
       createdDateFrom: null == createdDateFrom
@@ -89,6 +92,10 @@ class _$PaymentSummaryFilterCopyWithImpl<$Res,
           ? _value.searchKey
           : searchKey // ignore: cast_nullable_to_non_nullable
               as SearchKey,
+      filterOption: null == filterOption
+          ? _value.filterOption
+          : filterOption // ignore: cast_nullable_to_non_nullable
+              as FilterOption,
     ) as $Val);
   }
 }
@@ -107,7 +114,8 @@ abstract class _$$PaymentSummaryFilterImplCopyWith<$Res>
       RangeValue amountValueFrom,
       RangeValue amountValueTo,
       List<FilterStatus> filterStatuses,
-      SearchKey searchKey});
+      SearchKey searchKey,
+      FilterOption filterOption});
 }
 
 /// @nodoc
@@ -127,6 +135,7 @@ class __$$PaymentSummaryFilterImplCopyWithImpl<$Res>
     Object? amountValueTo = null,
     Object? filterStatuses = null,
     Object? searchKey = null,
+    Object? filterOption = null,
   }) {
     return _then(_$PaymentSummaryFilterImpl(
       createdDateFrom: null == createdDateFrom
@@ -153,6 +162,10 @@ class __$$PaymentSummaryFilterImplCopyWithImpl<$Res>
           ? _value.searchKey
           : searchKey // ignore: cast_nullable_to_non_nullable
               as SearchKey,
+      filterOption: null == filterOption
+          ? _value.filterOption
+          : filterOption // ignore: cast_nullable_to_non_nullable
+              as FilterOption,
     ));
   }
 }
@@ -166,7 +179,8 @@ class _$PaymentSummaryFilterImpl extends _PaymentSummaryFilter {
       required this.amountValueFrom,
       required this.amountValueTo,
       required final List<FilterStatus> filterStatuses,
-      required this.searchKey})
+      required this.searchKey,
+      required this.filterOption})
       : _filterStatuses = filterStatuses,
         super._();
 
@@ -188,10 +202,12 @@ class _$PaymentSummaryFilterImpl extends _PaymentSummaryFilter {
 
   @override
   final SearchKey searchKey;
+  @override
+  final FilterOption filterOption;
 
   @override
   String toString() {
-    return 'PaymentSummaryFilter(createdDateFrom: $createdDateFrom, createdDateTo: $createdDateTo, amountValueFrom: $amountValueFrom, amountValueTo: $amountValueTo, filterStatuses: $filterStatuses, searchKey: $searchKey)';
+    return 'PaymentSummaryFilter(createdDateFrom: $createdDateFrom, createdDateTo: $createdDateTo, amountValueFrom: $amountValueFrom, amountValueTo: $amountValueTo, filterStatuses: $filterStatuses, searchKey: $searchKey, filterOption: $filterOption)';
   }
 
   @override
@@ -210,7 +226,9 @@ class _$PaymentSummaryFilterImpl extends _PaymentSummaryFilter {
             const DeepCollectionEquality()
                 .equals(other._filterStatuses, _filterStatuses) &&
             (identical(other.searchKey, searchKey) ||
-                other.searchKey == searchKey));
+                other.searchKey == searchKey) &&
+            (identical(other.filterOption, filterOption) ||
+                other.filterOption == filterOption));
   }
 
   @override
@@ -221,7 +239,8 @@ class _$PaymentSummaryFilterImpl extends _PaymentSummaryFilter {
       amountValueFrom,
       amountValueTo,
       const DeepCollectionEquality().hash(_filterStatuses),
-      searchKey);
+      searchKey,
+      filterOption);
 
   @JsonKey(ignore: true)
   @override
@@ -239,7 +258,8 @@ abstract class _PaymentSummaryFilter extends PaymentSummaryFilter {
       required final RangeValue amountValueFrom,
       required final RangeValue amountValueTo,
       required final List<FilterStatus> filterStatuses,
-      required final SearchKey searchKey}) = _$PaymentSummaryFilterImpl;
+      required final SearchKey searchKey,
+      required final FilterOption filterOption}) = _$PaymentSummaryFilterImpl;
   _PaymentSummaryFilter._() : super._();
 
   @override
@@ -254,6 +274,8 @@ abstract class _PaymentSummaryFilter extends PaymentSummaryFilter {
   List<FilterStatus> get filterStatuses;
   @override
   SearchKey get searchKey;
+  @override
+  FilterOption get filterOption;
   @override
   @JsonKey(ignore: true)
   _$$PaymentSummaryFilterImplCopyWith<_$PaymentSummaryFilterImpl>

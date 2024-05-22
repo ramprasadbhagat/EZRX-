@@ -1001,9 +1001,7 @@ void main() {
       verify(
         () => paymentSummaryBloc.add(
           PaymentSummaryEvent.fetch(
-            appliedFilter: PaymentSummaryFilter.defaultFilter().copyWith(
-              createdDateFrom: DateTimeStringValue(''),
-              createdDateTo: DateTimeStringValue(''),
+            appliedFilter: PaymentSummaryFilter.empty().copyWith(
               searchKey: SearchKey.searchFilter('fake-keyword'),
             ),
           ),

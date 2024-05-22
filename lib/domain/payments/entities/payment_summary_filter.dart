@@ -15,6 +15,7 @@ class PaymentSummaryFilter with _$PaymentSummaryFilter {
     required RangeValue amountValueTo,
     required List<FilterStatus> filterStatuses,
     required SearchKey searchKey,
+    required FilterOption filterOption,
   }) = _PaymentSummaryFilter;
 
   factory PaymentSummaryFilter.empty() => PaymentSummaryFilter(
@@ -28,6 +29,7 @@ class PaymentSummaryFilter with _$PaymentSummaryFilter {
         amountValueTo: RangeValue(''),
         filterStatuses: <FilterStatus>[],
         searchKey: SearchKey(''),
+        filterOption: FilterOption(''),
       );
 
   factory PaymentSummaryFilter.defaultFilter() => PaymentSummaryFilter(
@@ -45,6 +47,7 @@ class PaymentSummaryFilter with _$PaymentSummaryFilter {
         amountValueTo: RangeValue(''),
         filterStatuses: <FilterStatus>[],
         searchKey: SearchKey(''),
+        filterOption: FilterOption.documentDate(),
       );
 
   PaymentSummaryFilter get excludeSearch => copyWith(

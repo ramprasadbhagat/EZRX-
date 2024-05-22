@@ -13,13 +13,12 @@ class ValueRangeError extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      alignment: Alignment.centerLeft,
+    return Padding(
       padding: const EdgeInsets.only(
         top: 8.0,
       ),
       child: Text(
-        isValid ? '' : label.tr(),
+        isValid ? '' : label,
         style: Theme.of(context).textTheme.titleSmall?.apply(
               color: ZPColors.error,
             ),

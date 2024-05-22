@@ -223,12 +223,7 @@ void main() {
         ),
       );
 
-      final appliedFilterWithSearch =
-          AvailableCreditFilter.defaultFilter().copyWith(
-        documentDateFrom: DateTimeStringValue(''),
-        documentDateTo: DateTimeStringValue(''),
-      );
-
+      final appliedFilterWithSearch = AvailableCreditFilter.empty();
       verify(
         () => mixpanelServiceMock.trackEvent(
           eventName: TrackingEvents.documentNumberSearched,

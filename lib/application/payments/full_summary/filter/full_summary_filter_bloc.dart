@@ -41,7 +41,8 @@ class FullSummaryFilterBloc
       statusChanged: (_StatusChanged e) {
         emit(
           state.copyWith(
-            filter: state.filter.copyWith(
+            filter: FullSummaryFilter.empty().copyWith(
+              filterOption: FilterOption.status(),
               filterStatuses: e.selected ? [e.filterStatus] : [],
             ),
           ),
@@ -49,7 +50,8 @@ class FullSummaryFilterBloc
       },
       setDueDate: (_SetDueDate e) async => emit(
         state.copyWith(
-          filter: state.filter.copyWith(
+          filter: FullSummaryFilter.empty().copyWith(
+            filterOption: FilterOption.dueDate(),
             dueDateFrom: DateTimeStringValue(
               getDateStringByDateTime(e.dateRange.start),
             ),
@@ -62,7 +64,8 @@ class FullSummaryFilterBloc
       ),
       setDocumentDate: (_SetDocumentDate e) async => emit(
         state.copyWith(
-          filter: state.filter.copyWith(
+          filter: FullSummaryFilter.empty().copyWith(
+            filterOption: FilterOption.documentDate(),
             documentDateFrom: DateTimeStringValue(
               getDateStringByDateTime(e.dateRange.start),
             ),

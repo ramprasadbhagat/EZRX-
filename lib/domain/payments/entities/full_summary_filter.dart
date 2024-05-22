@@ -15,6 +15,7 @@ class FullSummaryFilter with _$FullSummaryFilter {
     required DateTimeStringValue documentDateTo,
     required List<String> filterStatuses,
     required SearchKey searchKey,
+    required FilterOption filterOption,
   }) = _FullSummaryFilter;
 
   factory FullSummaryFilter.empty() => FullSummaryFilter(
@@ -28,6 +29,7 @@ class FullSummaryFilter with _$FullSummaryFilter {
         ),
         filterStatuses: <String>[],
         searchKey: SearchKey(''),
+        filterOption: FilterOption(''),
       );
 
   factory FullSummaryFilter.defaultFilter() => FullSummaryFilter(
@@ -45,6 +47,7 @@ class FullSummaryFilter with _$FullSummaryFilter {
         ),
         filterStatuses: <String>[],
         searchKey: SearchKey(''),
+        filterOption: FilterOption.documentDate(),
       );
 
   FullSummaryFilter get excludeSearch => copyWith(

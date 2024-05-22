@@ -12,7 +12,7 @@ part of 'all_credits_filter.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$AllCreditsFilter {
@@ -23,6 +23,7 @@ mixin _$AllCreditsFilter {
   RangeValue get amountValueTo => throw _privateConstructorUsedError;
   List<String> get filterStatuses => throw _privateConstructorUsedError;
   SearchKey get searchKey => throw _privateConstructorUsedError;
+  FilterOption get filterOption => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $AllCreditsFilterCopyWith<AllCreditsFilter> get copyWith =>
@@ -41,7 +42,8 @@ abstract class $AllCreditsFilterCopyWith<$Res> {
       RangeValue amountValueFrom,
       RangeValue amountValueTo,
       List<String> filterStatuses,
-      SearchKey searchKey});
+      SearchKey searchKey,
+      FilterOption filterOption});
 }
 
 /// @nodoc
@@ -63,6 +65,7 @@ class _$AllCreditsFilterCopyWithImpl<$Res, $Val extends AllCreditsFilter>
     Object? amountValueTo = null,
     Object? filterStatuses = null,
     Object? searchKey = null,
+    Object? filterOption = null,
   }) {
     return _then(_value.copyWith(
       documentDateFrom: null == documentDateFrom
@@ -89,16 +92,20 @@ class _$AllCreditsFilterCopyWithImpl<$Res, $Val extends AllCreditsFilter>
           ? _value.searchKey
           : searchKey // ignore: cast_nullable_to_non_nullable
               as SearchKey,
+      filterOption: null == filterOption
+          ? _value.filterOption
+          : filterOption // ignore: cast_nullable_to_non_nullable
+              as FilterOption,
     ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$$_AllCreditsFilterCopyWith<$Res>
+abstract class _$$AllCreditsFilterImplCopyWith<$Res>
     implements $AllCreditsFilterCopyWith<$Res> {
-  factory _$$_AllCreditsFilterCopyWith(
-          _$_AllCreditsFilter value, $Res Function(_$_AllCreditsFilter) then) =
-      __$$_AllCreditsFilterCopyWithImpl<$Res>;
+  factory _$$AllCreditsFilterImplCopyWith(_$AllCreditsFilterImpl value,
+          $Res Function(_$AllCreditsFilterImpl) then) =
+      __$$AllCreditsFilterImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -107,15 +114,16 @@ abstract class _$$_AllCreditsFilterCopyWith<$Res>
       RangeValue amountValueFrom,
       RangeValue amountValueTo,
       List<String> filterStatuses,
-      SearchKey searchKey});
+      SearchKey searchKey,
+      FilterOption filterOption});
 }
 
 /// @nodoc
-class __$$_AllCreditsFilterCopyWithImpl<$Res>
-    extends _$AllCreditsFilterCopyWithImpl<$Res, _$_AllCreditsFilter>
-    implements _$$_AllCreditsFilterCopyWith<$Res> {
-  __$$_AllCreditsFilterCopyWithImpl(
-      _$_AllCreditsFilter _value, $Res Function(_$_AllCreditsFilter) _then)
+class __$$AllCreditsFilterImplCopyWithImpl<$Res>
+    extends _$AllCreditsFilterCopyWithImpl<$Res, _$AllCreditsFilterImpl>
+    implements _$$AllCreditsFilterImplCopyWith<$Res> {
+  __$$AllCreditsFilterImplCopyWithImpl(_$AllCreditsFilterImpl _value,
+      $Res Function(_$AllCreditsFilterImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -127,8 +135,9 @@ class __$$_AllCreditsFilterCopyWithImpl<$Res>
     Object? amountValueTo = null,
     Object? filterStatuses = null,
     Object? searchKey = null,
+    Object? filterOption = null,
   }) {
-    return _then(_$_AllCreditsFilter(
+    return _then(_$AllCreditsFilterImpl(
       documentDateFrom: null == documentDateFrom
           ? _value.documentDateFrom
           : documentDateFrom // ignore: cast_nullable_to_non_nullable
@@ -153,20 +162,25 @@ class __$$_AllCreditsFilterCopyWithImpl<$Res>
           ? _value.searchKey
           : searchKey // ignore: cast_nullable_to_non_nullable
               as SearchKey,
+      filterOption: null == filterOption
+          ? _value.filterOption
+          : filterOption // ignore: cast_nullable_to_non_nullable
+              as FilterOption,
     ));
   }
 }
 
 /// @nodoc
 
-class _$_AllCreditsFilter extends _AllCreditsFilter {
-  _$_AllCreditsFilter(
+class _$AllCreditsFilterImpl extends _AllCreditsFilter {
+  _$AllCreditsFilterImpl(
       {required this.documentDateFrom,
       required this.documentDateTo,
       required this.amountValueFrom,
       required this.amountValueTo,
       required final List<String> filterStatuses,
-      required this.searchKey})
+      required this.searchKey,
+      required this.filterOption})
       : _filterStatuses = filterStatuses,
         super._();
 
@@ -188,17 +202,19 @@ class _$_AllCreditsFilter extends _AllCreditsFilter {
 
   @override
   final SearchKey searchKey;
+  @override
+  final FilterOption filterOption;
 
   @override
   String toString() {
-    return 'AllCreditsFilter(documentDateFrom: $documentDateFrom, documentDateTo: $documentDateTo, amountValueFrom: $amountValueFrom, amountValueTo: $amountValueTo, filterStatuses: $filterStatuses, searchKey: $searchKey)';
+    return 'AllCreditsFilter(documentDateFrom: $documentDateFrom, documentDateTo: $documentDateTo, amountValueFrom: $amountValueFrom, amountValueTo: $amountValueTo, filterStatuses: $filterStatuses, searchKey: $searchKey, filterOption: $filterOption)';
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_AllCreditsFilter &&
+            other is _$AllCreditsFilterImpl &&
             (identical(other.documentDateFrom, documentDateFrom) ||
                 other.documentDateFrom == documentDateFrom) &&
             (identical(other.documentDateTo, documentDateTo) ||
@@ -210,7 +226,9 @@ class _$_AllCreditsFilter extends _AllCreditsFilter {
             const DeepCollectionEquality()
                 .equals(other._filterStatuses, _filterStatuses) &&
             (identical(other.searchKey, searchKey) ||
-                other.searchKey == searchKey));
+                other.searchKey == searchKey) &&
+            (identical(other.filterOption, filterOption) ||
+                other.filterOption == filterOption));
   }
 
   @override
@@ -221,13 +239,15 @@ class _$_AllCreditsFilter extends _AllCreditsFilter {
       amountValueFrom,
       amountValueTo,
       const DeepCollectionEquality().hash(_filterStatuses),
-      searchKey);
+      searchKey,
+      filterOption);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_AllCreditsFilterCopyWith<_$_AllCreditsFilter> get copyWith =>
-      __$$_AllCreditsFilterCopyWithImpl<_$_AllCreditsFilter>(this, _$identity);
+  _$$AllCreditsFilterImplCopyWith<_$AllCreditsFilterImpl> get copyWith =>
+      __$$AllCreditsFilterImplCopyWithImpl<_$AllCreditsFilterImpl>(
+          this, _$identity);
 }
 
 abstract class _AllCreditsFilter extends AllCreditsFilter {
@@ -237,7 +257,8 @@ abstract class _AllCreditsFilter extends AllCreditsFilter {
       required final RangeValue amountValueFrom,
       required final RangeValue amountValueTo,
       required final List<String> filterStatuses,
-      required final SearchKey searchKey}) = _$_AllCreditsFilter;
+      required final SearchKey searchKey,
+      required final FilterOption filterOption}) = _$AllCreditsFilterImpl;
   _AllCreditsFilter._() : super._();
 
   @override
@@ -253,7 +274,9 @@ abstract class _AllCreditsFilter extends AllCreditsFilter {
   @override
   SearchKey get searchKey;
   @override
+  FilterOption get filterOption;
+  @override
   @JsonKey(ignore: true)
-  _$$_AllCreditsFilterCopyWith<_$_AllCreditsFilter> get copyWith =>
+  _$$AllCreditsFilterImplCopyWith<_$AllCreditsFilterImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

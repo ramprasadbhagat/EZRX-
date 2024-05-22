@@ -8,9 +8,7 @@ import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   const fakeStatus = 'fake-status';
-  final fakeFullSummaryFilter = FullSummaryFilter.defaultFilter().copyWith(
-    filterStatuses: [fakeStatus],
-  );
+  final fakeFullSummaryFilter = FullSummaryFilter.defaultFilter();
   final fakeDateRange = DateTimeRange(
     start: DateTime.now().subtract(const Duration(days: 7)),
     end: DateTime.now(),
@@ -66,7 +64,10 @@ void main() {
         ),
         expect: () => [
           FullSummaryFilterState.initial().copyWith(
-            filter: fakeFullSummaryFilter,
+            filter: FullSummaryFilter.empty().copyWith(
+              filterStatuses: [fakeStatus],
+              filterOption: FilterOption.status(),
+            ),
           ),
         ],
       );
@@ -82,7 +83,8 @@ void main() {
         ),
         expect: () => [
           FullSummaryFilterState.initial().copyWith(
-            filter: fakeFullSummaryFilter.copyWith(
+            filter: FullSummaryFilter.empty().copyWith(
+              filterOption: FilterOption.dueDate(),
               dueDateFrom: DateTimeStringValue(
                 getDateStringByDateTime(fakeDateRange.start),
               ),
@@ -106,7 +108,8 @@ void main() {
         ),
         expect: () => [
           FullSummaryFilterState.initial().copyWith(
-            filter: fakeFullSummaryFilter.copyWith(
+            filter: FullSummaryFilter.empty().copyWith(
+              filterOption: FilterOption.documentDate(),
               documentDateFrom: DateTimeStringValue(
                 getDateStringByDateTime(fakeDateRange.start),
               ),

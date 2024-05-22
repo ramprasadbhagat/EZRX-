@@ -43,7 +43,8 @@ class AllInvoicesFilterBloc
       statusChanged: (_StatusChanged e) {
         emit(
           state.copyWith(
-            filter: state.filter.copyWith(
+            filter: AllInvoicesFilter.empty().copyWith(
+              filterOption: FilterOption.status(),
               filterStatuses: e.selected ? [e.filterStatus] : [],
             ),
           ),
@@ -51,7 +52,8 @@ class AllInvoicesFilterBloc
       },
       setDueDate: (_SetDueDate e) async => emit(
         state.copyWith(
-          filter: state.filter.copyWith(
+          filter: AllInvoicesFilter.empty().copyWith(
+            filterOption: FilterOption.dueDate(),
             dueDateFrom: DateTimeStringValue(
               getDateStringByDateTime(e.dateRange.start),
             ),
@@ -64,7 +66,8 @@ class AllInvoicesFilterBloc
       ),
       setDocumentDate: (_SetDocumentDate e) async => emit(
         state.copyWith(
-          filter: state.filter.copyWith(
+          filter: AllInvoicesFilter.empty().copyWith(
+            filterOption: FilterOption.documentDate(),
             documentDateFrom: DateTimeStringValue(
               getDateStringByDateTime(e.dateRange.start),
             ),
@@ -77,15 +80,19 @@ class AllInvoicesFilterBloc
       ),
       amountValueFromChanged: (_AmountValueFromChanged e) async => emit(
         state.copyWith(
-          filter: state.filter.copyWith(
+          filter: AllInvoicesFilter.empty().copyWith(
+            filterOption: FilterOption.amountRange(),
             amountValueFrom: RangeValue(e.amountValueFrom),
+            amountValueTo: state.filter.amountValueTo,
           ),
           showErrorMessages: false,
         ),
       ),
       amountValueToChanged: (_AmountValueToChanged e) async => emit(
         state.copyWith(
-          filter: state.filter.copyWith(
+          filter: AllInvoicesFilter.empty().copyWith(
+            filterOption: FilterOption.amountRange(),
+            amountValueFrom: state.filter.amountValueFrom,
             amountValueTo: RangeValue(e.amountValueTo),
           ),
           showErrorMessages: false,

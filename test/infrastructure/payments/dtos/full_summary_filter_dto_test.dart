@@ -25,6 +25,7 @@ void main() {
           documentDateTo: fakeDocumentDateTo,
           filterStatuses: fakeFilterStatuses,
           searchKey: SearchKey(fakeSearchKey),
+          filterOption: FilterOption(''),
         ),
       );
 
@@ -63,6 +64,7 @@ void main() {
           documentDateTo: fakeDocumentDateTo,
           filterStatuses: fakeFilterStatuses,
           searchKey: SearchKey(fakeSearchKey),
+          filterOption: FilterOption(''),
         ),
       );
 

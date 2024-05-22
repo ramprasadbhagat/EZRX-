@@ -12,7 +12,7 @@ part of 'outstanding_invoice_filter.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$OutstandingInvoiceFilter {
@@ -24,6 +24,7 @@ mixin _$OutstandingInvoiceFilter {
   RangeValue get amountValueFrom => throw _privateConstructorUsedError;
   RangeValue get amountValueTo => throw _privateConstructorUsedError;
   StatusType get outstandingInvoiceStatus => throw _privateConstructorUsedError;
+  FilterOption get filterOption => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $OutstandingInvoiceFilterCopyWith<OutstandingInvoiceFilter> get copyWith =>
@@ -43,7 +44,8 @@ abstract class $OutstandingInvoiceFilterCopyWith<$Res> {
       DateTimeStringValue dueDateTo,
       RangeValue amountValueFrom,
       RangeValue amountValueTo,
-      StatusType outstandingInvoiceStatus});
+      StatusType outstandingInvoiceStatus,
+      FilterOption filterOption});
 }
 
 /// @nodoc
@@ -67,6 +69,7 @@ class _$OutstandingInvoiceFilterCopyWithImpl<$Res,
     Object? amountValueFrom = null,
     Object? amountValueTo = null,
     Object? outstandingInvoiceStatus = null,
+    Object? filterOption = null,
   }) {
     return _then(_value.copyWith(
       documentDateFrom: null == documentDateFrom
@@ -97,17 +100,21 @@ class _$OutstandingInvoiceFilterCopyWithImpl<$Res,
           ? _value.outstandingInvoiceStatus
           : outstandingInvoiceStatus // ignore: cast_nullable_to_non_nullable
               as StatusType,
+      filterOption: null == filterOption
+          ? _value.filterOption
+          : filterOption // ignore: cast_nullable_to_non_nullable
+              as FilterOption,
     ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$$_OutstandingInvoiceFilterCopyWith<$Res>
+abstract class _$$OutstandingInvoiceFilterImplCopyWith<$Res>
     implements $OutstandingInvoiceFilterCopyWith<$Res> {
-  factory _$$_OutstandingInvoiceFilterCopyWith(
-          _$_OutstandingInvoiceFilter value,
-          $Res Function(_$_OutstandingInvoiceFilter) then) =
-      __$$_OutstandingInvoiceFilterCopyWithImpl<$Res>;
+  factory _$$OutstandingInvoiceFilterImplCopyWith(
+          _$OutstandingInvoiceFilterImpl value,
+          $Res Function(_$OutstandingInvoiceFilterImpl) then) =
+      __$$OutstandingInvoiceFilterImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -117,16 +124,18 @@ abstract class _$$_OutstandingInvoiceFilterCopyWith<$Res>
       DateTimeStringValue dueDateTo,
       RangeValue amountValueFrom,
       RangeValue amountValueTo,
-      StatusType outstandingInvoiceStatus});
+      StatusType outstandingInvoiceStatus,
+      FilterOption filterOption});
 }
 
 /// @nodoc
-class __$$_OutstandingInvoiceFilterCopyWithImpl<$Res>
+class __$$OutstandingInvoiceFilterImplCopyWithImpl<$Res>
     extends _$OutstandingInvoiceFilterCopyWithImpl<$Res,
-        _$_OutstandingInvoiceFilter>
-    implements _$$_OutstandingInvoiceFilterCopyWith<$Res> {
-  __$$_OutstandingInvoiceFilterCopyWithImpl(_$_OutstandingInvoiceFilter _value,
-      $Res Function(_$_OutstandingInvoiceFilter) _then)
+        _$OutstandingInvoiceFilterImpl>
+    implements _$$OutstandingInvoiceFilterImplCopyWith<$Res> {
+  __$$OutstandingInvoiceFilterImplCopyWithImpl(
+      _$OutstandingInvoiceFilterImpl _value,
+      $Res Function(_$OutstandingInvoiceFilterImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -139,8 +148,9 @@ class __$$_OutstandingInvoiceFilterCopyWithImpl<$Res>
     Object? amountValueFrom = null,
     Object? amountValueTo = null,
     Object? outstandingInvoiceStatus = null,
+    Object? filterOption = null,
   }) {
-    return _then(_$_OutstandingInvoiceFilter(
+    return _then(_$OutstandingInvoiceFilterImpl(
       documentDateFrom: null == documentDateFrom
           ? _value.documentDateFrom
           : documentDateFrom // ignore: cast_nullable_to_non_nullable
@@ -169,21 +179,26 @@ class __$$_OutstandingInvoiceFilterCopyWithImpl<$Res>
           ? _value.outstandingInvoiceStatus
           : outstandingInvoiceStatus // ignore: cast_nullable_to_non_nullable
               as StatusType,
+      filterOption: null == filterOption
+          ? _value.filterOption
+          : filterOption // ignore: cast_nullable_to_non_nullable
+              as FilterOption,
     ));
   }
 }
 
 /// @nodoc
 
-class _$_OutstandingInvoiceFilter extends _OutstandingInvoiceFilter {
-  _$_OutstandingInvoiceFilter(
+class _$OutstandingInvoiceFilterImpl extends _OutstandingInvoiceFilter {
+  _$OutstandingInvoiceFilterImpl(
       {required this.documentDateFrom,
       required this.documentDateTo,
       required this.dueDateFrom,
       required this.dueDateTo,
       required this.amountValueFrom,
       required this.amountValueTo,
-      required this.outstandingInvoiceStatus})
+      required this.outstandingInvoiceStatus,
+      required this.filterOption})
       : super._();
 
   @override
@@ -200,17 +215,19 @@ class _$_OutstandingInvoiceFilter extends _OutstandingInvoiceFilter {
   final RangeValue amountValueTo;
   @override
   final StatusType outstandingInvoiceStatus;
+  @override
+  final FilterOption filterOption;
 
   @override
   String toString() {
-    return 'OutstandingInvoiceFilter(documentDateFrom: $documentDateFrom, documentDateTo: $documentDateTo, dueDateFrom: $dueDateFrom, dueDateTo: $dueDateTo, amountValueFrom: $amountValueFrom, amountValueTo: $amountValueTo, outstandingInvoiceStatus: $outstandingInvoiceStatus)';
+    return 'OutstandingInvoiceFilter(documentDateFrom: $documentDateFrom, documentDateTo: $documentDateTo, dueDateFrom: $dueDateFrom, dueDateTo: $dueDateTo, amountValueFrom: $amountValueFrom, amountValueTo: $amountValueTo, outstandingInvoiceStatus: $outstandingInvoiceStatus, filterOption: $filterOption)';
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_OutstandingInvoiceFilter &&
+            other is _$OutstandingInvoiceFilterImpl &&
             (identical(other.documentDateFrom, documentDateFrom) ||
                 other.documentDateFrom == documentDateFrom) &&
             (identical(other.documentDateTo, documentDateTo) ||
@@ -225,7 +242,9 @@ class _$_OutstandingInvoiceFilter extends _OutstandingInvoiceFilter {
                 other.amountValueTo == amountValueTo) &&
             (identical(
                     other.outstandingInvoiceStatus, outstandingInvoiceStatus) ||
-                other.outstandingInvoiceStatus == outstandingInvoiceStatus));
+                other.outstandingInvoiceStatus == outstandingInvoiceStatus) &&
+            (identical(other.filterOption, filterOption) ||
+                other.filterOption == filterOption));
   }
 
   @override
@@ -237,14 +256,15 @@ class _$_OutstandingInvoiceFilter extends _OutstandingInvoiceFilter {
       dueDateTo,
       amountValueFrom,
       amountValueTo,
-      outstandingInvoiceStatus);
+      outstandingInvoiceStatus,
+      filterOption);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_OutstandingInvoiceFilterCopyWith<_$_OutstandingInvoiceFilter>
-      get copyWith => __$$_OutstandingInvoiceFilterCopyWithImpl<
-          _$_OutstandingInvoiceFilter>(this, _$identity);
+  _$$OutstandingInvoiceFilterImplCopyWith<_$OutstandingInvoiceFilterImpl>
+      get copyWith => __$$OutstandingInvoiceFilterImplCopyWithImpl<
+          _$OutstandingInvoiceFilterImpl>(this, _$identity);
 }
 
 abstract class _OutstandingInvoiceFilter extends OutstandingInvoiceFilter {
@@ -255,8 +275,9 @@ abstract class _OutstandingInvoiceFilter extends OutstandingInvoiceFilter {
           required final DateTimeStringValue dueDateTo,
           required final RangeValue amountValueFrom,
           required final RangeValue amountValueTo,
-          required final StatusType outstandingInvoiceStatus}) =
-      _$_OutstandingInvoiceFilter;
+          required final StatusType outstandingInvoiceStatus,
+          required final FilterOption filterOption}) =
+      _$OutstandingInvoiceFilterImpl;
   _OutstandingInvoiceFilter._() : super._();
 
   @override
@@ -274,7 +295,9 @@ abstract class _OutstandingInvoiceFilter extends OutstandingInvoiceFilter {
   @override
   StatusType get outstandingInvoiceStatus;
   @override
+  FilterOption get filterOption;
+  @override
   @JsonKey(ignore: true)
-  _$$_OutstandingInvoiceFilterCopyWith<_$_OutstandingInvoiceFilter>
+  _$$OutstandingInvoiceFilterImplCopyWith<_$OutstandingInvoiceFilterImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

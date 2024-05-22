@@ -12,7 +12,7 @@ part of 'available_credit_filter.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$AvailableCreditFilter {
@@ -21,6 +21,7 @@ mixin _$AvailableCreditFilter {
   DateTimeStringValue get documentDateTo => throw _privateConstructorUsedError;
   RangeValue get amountValueFrom => throw _privateConstructorUsedError;
   RangeValue get amountValueTo => throw _privateConstructorUsedError;
+  FilterOption get filterOption => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $AvailableCreditFilterCopyWith<AvailableCreditFilter> get copyWith =>
@@ -37,7 +38,8 @@ abstract class $AvailableCreditFilterCopyWith<$Res> {
       {DateTimeStringValue documentDateFrom,
       DateTimeStringValue documentDateTo,
       RangeValue amountValueFrom,
-      RangeValue amountValueTo});
+      RangeValue amountValueTo,
+      FilterOption filterOption});
 }
 
 /// @nodoc
@@ -58,6 +60,7 @@ class _$AvailableCreditFilterCopyWithImpl<$Res,
     Object? documentDateTo = null,
     Object? amountValueFrom = null,
     Object? amountValueTo = null,
+    Object? filterOption = null,
   }) {
     return _then(_value.copyWith(
       documentDateFrom: null == documentDateFrom
@@ -76,31 +79,38 @@ class _$AvailableCreditFilterCopyWithImpl<$Res,
           ? _value.amountValueTo
           : amountValueTo // ignore: cast_nullable_to_non_nullable
               as RangeValue,
+      filterOption: null == filterOption
+          ? _value.filterOption
+          : filterOption // ignore: cast_nullable_to_non_nullable
+              as FilterOption,
     ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$$_AvailableCreditFilterCopyWith<$Res>
+abstract class _$$AvailableCreditFilterImplCopyWith<$Res>
     implements $AvailableCreditFilterCopyWith<$Res> {
-  factory _$$_AvailableCreditFilterCopyWith(_$_AvailableCreditFilter value,
-          $Res Function(_$_AvailableCreditFilter) then) =
-      __$$_AvailableCreditFilterCopyWithImpl<$Res>;
+  factory _$$AvailableCreditFilterImplCopyWith(
+          _$AvailableCreditFilterImpl value,
+          $Res Function(_$AvailableCreditFilterImpl) then) =
+      __$$AvailableCreditFilterImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
       {DateTimeStringValue documentDateFrom,
       DateTimeStringValue documentDateTo,
       RangeValue amountValueFrom,
-      RangeValue amountValueTo});
+      RangeValue amountValueTo,
+      FilterOption filterOption});
 }
 
 /// @nodoc
-class __$$_AvailableCreditFilterCopyWithImpl<$Res>
-    extends _$AvailableCreditFilterCopyWithImpl<$Res, _$_AvailableCreditFilter>
-    implements _$$_AvailableCreditFilterCopyWith<$Res> {
-  __$$_AvailableCreditFilterCopyWithImpl(_$_AvailableCreditFilter _value,
-      $Res Function(_$_AvailableCreditFilter) _then)
+class __$$AvailableCreditFilterImplCopyWithImpl<$Res>
+    extends _$AvailableCreditFilterCopyWithImpl<$Res,
+        _$AvailableCreditFilterImpl>
+    implements _$$AvailableCreditFilterImplCopyWith<$Res> {
+  __$$AvailableCreditFilterImplCopyWithImpl(_$AvailableCreditFilterImpl _value,
+      $Res Function(_$AvailableCreditFilterImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -110,8 +120,9 @@ class __$$_AvailableCreditFilterCopyWithImpl<$Res>
     Object? documentDateTo = null,
     Object? amountValueFrom = null,
     Object? amountValueTo = null,
+    Object? filterOption = null,
   }) {
-    return _then(_$_AvailableCreditFilter(
+    return _then(_$AvailableCreditFilterImpl(
       documentDateFrom: null == documentDateFrom
           ? _value.documentDateFrom
           : documentDateFrom // ignore: cast_nullable_to_non_nullable
@@ -128,18 +139,23 @@ class __$$_AvailableCreditFilterCopyWithImpl<$Res>
           ? _value.amountValueTo
           : amountValueTo // ignore: cast_nullable_to_non_nullable
               as RangeValue,
+      filterOption: null == filterOption
+          ? _value.filterOption
+          : filterOption // ignore: cast_nullable_to_non_nullable
+              as FilterOption,
     ));
   }
 }
 
 /// @nodoc
 
-class _$_AvailableCreditFilter extends _AvailableCreditFilter {
-  _$_AvailableCreditFilter(
+class _$AvailableCreditFilterImpl extends _AvailableCreditFilter {
+  _$AvailableCreditFilterImpl(
       {required this.documentDateFrom,
       required this.documentDateTo,
       required this.amountValueFrom,
-      required this.amountValueTo})
+      required this.amountValueTo,
+      required this.filterOption})
       : super._();
 
   @override
@@ -150,17 +166,19 @@ class _$_AvailableCreditFilter extends _AvailableCreditFilter {
   final RangeValue amountValueFrom;
   @override
   final RangeValue amountValueTo;
+  @override
+  final FilterOption filterOption;
 
   @override
   String toString() {
-    return 'AvailableCreditFilter(documentDateFrom: $documentDateFrom, documentDateTo: $documentDateTo, amountValueFrom: $amountValueFrom, amountValueTo: $amountValueTo)';
+    return 'AvailableCreditFilter(documentDateFrom: $documentDateFrom, documentDateTo: $documentDateTo, amountValueFrom: $amountValueFrom, amountValueTo: $amountValueTo, filterOption: $filterOption)';
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_AvailableCreditFilter &&
+            other is _$AvailableCreditFilterImpl &&
             (identical(other.documentDateFrom, documentDateFrom) ||
                 other.documentDateFrom == documentDateFrom) &&
             (identical(other.documentDateTo, documentDateTo) ||
@@ -168,19 +186,21 @@ class _$_AvailableCreditFilter extends _AvailableCreditFilter {
             (identical(other.amountValueFrom, amountValueFrom) ||
                 other.amountValueFrom == amountValueFrom) &&
             (identical(other.amountValueTo, amountValueTo) ||
-                other.amountValueTo == amountValueTo));
+                other.amountValueTo == amountValueTo) &&
+            (identical(other.filterOption, filterOption) ||
+                other.filterOption == filterOption));
   }
 
   @override
   int get hashCode => Object.hash(runtimeType, documentDateFrom, documentDateTo,
-      amountValueFrom, amountValueTo);
+      amountValueFrom, amountValueTo, filterOption);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_AvailableCreditFilterCopyWith<_$_AvailableCreditFilter> get copyWith =>
-      __$$_AvailableCreditFilterCopyWithImpl<_$_AvailableCreditFilter>(
-          this, _$identity);
+  _$$AvailableCreditFilterImplCopyWith<_$AvailableCreditFilterImpl>
+      get copyWith => __$$AvailableCreditFilterImplCopyWithImpl<
+          _$AvailableCreditFilterImpl>(this, _$identity);
 }
 
 abstract class _AvailableCreditFilter extends AvailableCreditFilter {
@@ -188,7 +208,8 @@ abstract class _AvailableCreditFilter extends AvailableCreditFilter {
       {required final DateTimeStringValue documentDateFrom,
       required final DateTimeStringValue documentDateTo,
       required final RangeValue amountValueFrom,
-      required final RangeValue amountValueTo}) = _$_AvailableCreditFilter;
+      required final RangeValue amountValueTo,
+      required final FilterOption filterOption}) = _$AvailableCreditFilterImpl;
   _AvailableCreditFilter._() : super._();
 
   @override
@@ -200,7 +221,9 @@ abstract class _AvailableCreditFilter extends AvailableCreditFilter {
   @override
   RangeValue get amountValueTo;
   @override
+  FilterOption get filterOption;
+  @override
   @JsonKey(ignore: true)
-  _$$_AvailableCreditFilterCopyWith<_$_AvailableCreditFilter> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$AvailableCreditFilterImplCopyWith<_$AvailableCreditFilterImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }

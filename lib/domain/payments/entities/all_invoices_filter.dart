@@ -17,6 +17,7 @@ class AllInvoicesFilter with _$AllInvoicesFilter {
     required RangeValue amountValueTo,
     required List<String> filterStatuses,
     required SearchKey searchKey,
+    required FilterOption filterOption,
   }) = _AllInvoicesFilter;
 
   factory AllInvoicesFilter.empty() => AllInvoicesFilter(
@@ -32,6 +33,7 @@ class AllInvoicesFilter with _$AllInvoicesFilter {
         amountValueTo: RangeValue(''),
         filterStatuses: <String>[],
         searchKey: SearchKey(''),
+        filterOption: FilterOption(''),
       );
 
   factory AllInvoicesFilter.defaultFilter() => AllInvoicesFilter(
@@ -51,6 +53,7 @@ class AllInvoicesFilter with _$AllInvoicesFilter {
         amountValueTo: RangeValue(''),
         filterStatuses: <String>[],
         searchKey: SearchKey(''),
+        filterOption: FilterOption.documentDate(),
       );
 
   AllInvoicesFilter get excludeSearch => copyWith(

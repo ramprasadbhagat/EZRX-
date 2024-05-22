@@ -56,6 +56,7 @@ void main() {
     documentDateTo: DateTimeStringValue('20231011'),
     filterStatuses: ['Pending'],
     searchKey: SearchKey('fake-search-key'),
+    filterOption: FilterOption.documentDate(),
   );
   final allInvoicesFilter = AllInvoicesFilter(
     amountValueFrom: RangeValue('0'),
@@ -66,6 +67,7 @@ void main() {
     dueDateTo: DateTimeStringValue('20231011'),
     filterStatuses: ['Pending'],
     searchKey: SearchKey('fake-search-key'),
+    filterOption: FilterOption.documentDate(),
   );
   final fullSummaryFilter = FullSummaryFilter(
     documentDateFrom: DateTimeStringValue('20221011'),
@@ -74,6 +76,7 @@ void main() {
     dueDateTo: DateTimeStringValue('20231011'),
     filterStatuses: ['Open'],
     searchKey: SearchKey('fake-search-key'),
+    filterOption: FilterOption.documentDate(),
   );
   late NewPaymentBlocMock newPaymentBlocMock;
 
@@ -389,7 +392,7 @@ void main() {
     });
 
     testWidgets('=> Test search Account summary invoice', (tester) async {
-      final allInvoicesFilter = AllInvoicesFilter.defaultFilter().copyWith(
+      final allInvoicesFilter = AllInvoicesFilter.empty().copyWith(
         searchKey: SearchKey('12345'),
       );
       when(() => allInvoicesBlocMock.state).thenReturn(
@@ -405,8 +408,7 @@ void main() {
         Duration(milliseconds: locator<Config>().autoSearchTimeout),
       );
 
-      final appliedFilterWithSearch =
-          AllInvoicesFilter.defaultFilter().copyWith(
+      final appliedFilterWithSearch = AllInvoicesFilter.empty().copyWith(
         documentDateFrom: DateTimeStringValue(''),
         documentDateTo: DateTimeStringValue(''),
       );
@@ -436,9 +438,7 @@ void main() {
       verify(
         () => allInvoicesBlocMock.add(
           AllInvoicesEvent.fetch(
-            appliedFilter: allInvoicesFilter.copyWith(
-              searchKey: SearchKey.searchFilter(''),
-            ),
+            appliedFilter: AllInvoicesFilter.defaultFilter(),
           ),
         ),
       ).called(1);
@@ -465,7 +465,7 @@ void main() {
       expect(accountSummarySearchBar, findsOneWidget);
     });
     testWidgets('=> Test search Account summary credit', (tester) async {
-      final allCreditsFilter = AllCreditsFilter.defaultFilter().copyWith(
+      final allCreditsFilter = AllCreditsFilter.empty().copyWith(
         searchKey: SearchKey('12345'),
       );
       when(() => allCreditsBlocMock.state).thenReturn(
@@ -485,10 +485,7 @@ void main() {
         Duration(milliseconds: locator<Config>().autoSearchTimeout),
       );
 
-      final appliedFilterWithSearch = AllCreditsFilter.defaultFilter().copyWith(
-        documentDateFrom: DateTimeStringValue(''),
-        documentDateTo: DateTimeStringValue(''),
-      );
+      final appliedFilterWithSearch = AllCreditsFilter.empty();
 
       verify(
         () => allCreditsBlocMock.add(
@@ -515,9 +512,7 @@ void main() {
       verify(
         () => allCreditsBlocMock.add(
           AllCreditsEvent.fetch(
-            appliedFilter: allCreditsFilter.copyWith(
-              searchKey: SearchKey.searchFilter(''),
-            ),
+            appliedFilter: AllCreditsFilter.defaultFilter(),
           ),
         ),
       ).called(1);
@@ -569,11 +564,7 @@ void main() {
       await tester.testTextInput.receiveAction(TextInputAction.done);
       await tester.pumpAndSettle();
 
-      final appliedFilterWithSearch =
-          FullSummaryFilter.defaultFilter().copyWith(
-        documentDateFrom: DateTimeStringValue(''),
-        documentDateTo: DateTimeStringValue(''),
-      );
+      final appliedFilterWithSearch = FullSummaryFilter.empty();
       verify(
         () => fullSummaryBlocMock.add(
           FullSummaryEvent.fetch(
@@ -613,7 +604,8 @@ void main() {
           isLoading: true,
         ),
         FullSummaryState.initial().copyWith(
-          appliedFilter: FullSummaryFilter.defaultFilter().copyWith(
+          appliedFilter: FullSummaryFilter.empty().copyWith(
+            filterOption: FilterOption.status(),
             filterStatuses: ['fake-status'],
           ),
         ),
@@ -633,7 +625,8 @@ void main() {
       verify(
         () => fullSummaryFilterBlocMock.add(
           FullSummaryFilterEvent.openFilterBottomSheet(
-            appliedFilter: FullSummaryFilter.defaultFilter().copyWith(
+            appliedFilter: FullSummaryFilter.empty().copyWith(
+              filterOption: FilterOption.status(),
               filterStatuses: ['fake-status'],
             ),
           ),

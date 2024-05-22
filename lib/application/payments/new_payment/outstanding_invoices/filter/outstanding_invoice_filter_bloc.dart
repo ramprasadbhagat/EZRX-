@@ -26,7 +26,8 @@ class OutstandingInvoiceFilterBloc
       ),
       setDocumentDate: (e) async => emit(
         state.copyWith(
-          filter: state.filter.copyWith(
+          filter: OutstandingInvoiceFilter.empty().copyWith(
+            filterOption: FilterOption.documentDate(),
             documentDateFrom: DateTimeStringValue(
               getDateStringByDateTime(e.documentDateRange.start),
             ),
@@ -38,7 +39,8 @@ class OutstandingInvoiceFilterBloc
       ),
       setDueDate: (e) async => emit(
         state.copyWith(
-          filter: state.filter.copyWith(
+          filter: OutstandingInvoiceFilter.empty().copyWith(
+            filterOption: FilterOption.dueDate(),
             dueDateFrom: DateTimeStringValue(
               getDateStringByDateTime(e.dueDateRange.start),
             ),
@@ -50,14 +52,18 @@ class OutstandingInvoiceFilterBloc
       ),
       setAmountFrom: (e) async => emit(
         state.copyWith(
-          filter: state.filter.copyWith(
+          filter: OutstandingInvoiceFilter.empty().copyWith(
+            filterOption: FilterOption.amountRange(),
             amountValueFrom: RangeValue(e.amountFrom),
+            amountValueTo: state.filter.amountValueTo,
           ),
         ),
       ),
       setAmountTo: (e) async => emit(
         state.copyWith(
-          filter: state.filter.copyWith(
+          filter: OutstandingInvoiceFilter.empty().copyWith(
+            filterOption: FilterOption.amountRange(),
+            amountValueFrom: state.filter.amountValueFrom,
             amountValueTo: RangeValue(e.amountTo),
           ),
         ),
@@ -66,8 +72,10 @@ class OutstandingInvoiceFilterBloc
         final selectedStatus = e.value ? e.status : StatusType('');
         emit(
           state.copyWith(
-            filter:
-                state.filter.copyWith(outstandingInvoiceStatus: selectedStatus),
+            filter: OutstandingInvoiceFilter.empty().copyWith(
+              outstandingInvoiceStatus: selectedStatus,
+              filterOption: FilterOption.status(),
+            ),
           ),
         );
       },
