@@ -8,6 +8,7 @@ import 'package:ezrxmobile/application/order/re_order_permission/re_order_permis
 import 'package:ezrxmobile/application/order/view_by_order/view_by_order_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_order_details/view_by_order_details_bloc.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
+import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/delivery_info_data.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details.dart';
@@ -29,6 +30,7 @@ import 'package:ezrxmobile/presentation/core/no_record.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
 import 'package:ezrxmobile/presentation/core/queue_number_info_icon.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
+import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
 import 'package:ezrxmobile/presentation/core/status_label.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/orders/cart/add_to_cart/add_to_cart_error_section.dart';

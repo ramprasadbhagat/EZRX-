@@ -173,7 +173,7 @@ class _ViewByOrderItemTile extends StatelessWidget {
                 ),
               ),
             ),
-            if (!orderHistoryItem.tenderOrderReason.isEmpty)
+            if (orderHistoryItem.tenderOrderReason.isNotEmpty)
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 12),
                 child: TenderContractSection(

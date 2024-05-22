@@ -13,6 +13,7 @@ import 'package:ezrxmobile/domain/order/entities/order_history.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_order_items.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_item.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
+import 'package:ezrxmobile/domain/order/entities/tender_contract.dart';
 import 'package:ezrxmobile/domain/order/repository/i_re_order_permission_repository.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -83,7 +84,15 @@ class ReOrderPermissionBloc
                       validMaterialNumbers.contains(item.materialNumber) &&
                       item.type.isMaterialTypeComm,
                 )
-                .map((item) => item.reOrderMaterialInfo)
+                .map(
+                  (item) => PriceAggregate.empty().copyWith(
+                    materialInfo: item.reOrderMaterialInfo,
+                    tenderContract: item.tenderContractDetails.contractNumber
+                            .isContractNumberEmpty
+                        ? TenderContract.empty()
+                        : item.orderItemTenderContract,
+                  ),
+                )
                 .toList();
 
             emit(
@@ -108,6 +117,7 @@ class ReOrderPermissionBloc
             ? e.orderHistoryDetail.getParentMaterial(e.item)
             : e.item;
         final validOrderItem = reOrderItem.reOrderMaterialInfo;
+        final tenderContract = reOrderItem.orderItemTenderContract;
 
         final failureOrSuccess =
             await reOrderPermissionRepository.getReorderPermission(
@@ -136,7 +146,10 @@ class ReOrderPermissionBloc
                 validOrderItems: [
                   if (validMaterialNumbers
                       .contains(validOrderItem.materialNumber))
-                    validOrderItem,
+                    PriceAggregate.empty().copyWith(
+                      materialInfo: validOrderItem,
+                      tenderContract: tenderContract,
+                    ),
                 ],
                 failureOrSuccessOption: none(),
               ),

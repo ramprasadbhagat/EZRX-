@@ -12,7 +12,7 @@ part of 're_order_permission_bloc.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$ReOrderPermissionEvent {
@@ -125,10 +125,10 @@ class _$ReOrderPermissionEventCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_InitializedCopyWith<$Res> {
-  factory _$$_InitializedCopyWith(
-          _$_Initialized value, $Res Function(_$_Initialized) then) =
-      __$$_InitializedCopyWithImpl<$Res>;
+abstract class _$$InitializedImplCopyWith<$Res> {
+  factory _$$InitializedImplCopyWith(
+          _$InitializedImpl value, $Res Function(_$InitializedImpl) then) =
+      __$$InitializedImplCopyWithImpl<$Res>;
   @useResult
   $Res call(
       {CustomerCodeInfo customerCodeInfo,
@@ -145,11 +145,11 @@ abstract class _$$_InitializedCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_InitializedCopyWithImpl<$Res>
-    extends _$ReOrderPermissionEventCopyWithImpl<$Res, _$_Initialized>
-    implements _$$_InitializedCopyWith<$Res> {
-  __$$_InitializedCopyWithImpl(
-      _$_Initialized _value, $Res Function(_$_Initialized) _then)
+class __$$InitializedImplCopyWithImpl<$Res>
+    extends _$ReOrderPermissionEventCopyWithImpl<$Res, _$InitializedImpl>
+    implements _$$InitializedImplCopyWith<$Res> {
+  __$$InitializedImplCopyWithImpl(
+      _$InitializedImpl _value, $Res Function(_$InitializedImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -161,7 +161,7 @@ class __$$_InitializedCopyWithImpl<$Res>
     Object? salesOrganisationConfigs = null,
     Object? user = null,
   }) {
-    return _then(_$_Initialized(
+    return _then(_$InitializedImpl(
       customerCodeInfo: null == customerCodeInfo
           ? _value.customerCodeInfo
           : customerCodeInfo // ignore: cast_nullable_to_non_nullable
@@ -229,8 +229,8 @@ class __$$_InitializedCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_Initialized implements _Initialized {
-  const _$_Initialized(
+class _$InitializedImpl implements _Initialized {
+  const _$InitializedImpl(
       {required this.customerCodeInfo,
       required this.shipToInfo,
       required this.salesOrganisation,
@@ -254,10 +254,10 @@ class _$_Initialized implements _Initialized {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Initialized &&
+            other is _$InitializedImpl &&
             (identical(other.customerCodeInfo, customerCodeInfo) ||
                 other.customerCodeInfo == customerCodeInfo) &&
             (identical(other.shipToInfo, shipToInfo) ||
@@ -277,8 +277,8 @@ class _$_Initialized implements _Initialized {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_InitializedCopyWith<_$_Initialized> get copyWith =>
-      __$$_InitializedCopyWithImpl<_$_Initialized>(this, _$identity);
+  _$$InitializedImplCopyWith<_$InitializedImpl> get copyWith =>
+      __$$InitializedImplCopyWithImpl<_$InitializedImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -401,7 +401,7 @@ abstract class _Initialized implements ReOrderPermissionEvent {
       required final ShipToInfo shipToInfo,
       required final SalesOrganisation salesOrganisation,
       required final SalesOrganisationConfigs salesOrganisationConfigs,
-      required final User user}) = _$_Initialized;
+      required final User user}) = _$InitializedImpl;
 
   CustomerCodeInfo get customerCodeInfo;
   ShipToInfo get shipToInfo;
@@ -409,15 +409,15 @@ abstract class _Initialized implements ReOrderPermissionEvent {
   SalesOrganisationConfigs get salesOrganisationConfigs;
   User get user;
   @JsonKey(ignore: true)
-  _$$_InitializedCopyWith<_$_Initialized> get copyWith =>
+  _$$InitializedImplCopyWith<_$InitializedImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_FetchOrderCopyWith<$Res> {
-  factory _$$_FetchOrderCopyWith(
-          _$_FetchOrder value, $Res Function(_$_FetchOrder) then) =
-      __$$_FetchOrderCopyWithImpl<$Res>;
+abstract class _$$FetchOrderImplCopyWith<$Res> {
+  factory _$$FetchOrderImplCopyWith(
+          _$FetchOrderImpl value, $Res Function(_$FetchOrderImpl) then) =
+      __$$FetchOrderImplCopyWithImpl<$Res>;
   @useResult
   $Res call(
       {List<OrderHistoryDetailsOrderItem> orderHistoryDetailsOrderItems,
@@ -425,11 +425,11 @@ abstract class _$$_FetchOrderCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_FetchOrderCopyWithImpl<$Res>
-    extends _$ReOrderPermissionEventCopyWithImpl<$Res, _$_FetchOrder>
-    implements _$$_FetchOrderCopyWith<$Res> {
-  __$$_FetchOrderCopyWithImpl(
-      _$_FetchOrder _value, $Res Function(_$_FetchOrder) _then)
+class __$$FetchOrderImplCopyWithImpl<$Res>
+    extends _$ReOrderPermissionEventCopyWithImpl<$Res, _$FetchOrderImpl>
+    implements _$$FetchOrderImplCopyWith<$Res> {
+  __$$FetchOrderImplCopyWithImpl(
+      _$FetchOrderImpl _value, $Res Function(_$FetchOrderImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -438,7 +438,7 @@ class __$$_FetchOrderCopyWithImpl<$Res>
     Object? orderHistoryDetailsOrderItems = null,
     Object? orderNumberWillUpsert = null,
   }) {
-    return _then(_$_FetchOrder(
+    return _then(_$FetchOrderImpl(
       orderHistoryDetailsOrderItems: null == orderHistoryDetailsOrderItems
           ? _value._orderHistoryDetailsOrderItems
           : orderHistoryDetailsOrderItems // ignore: cast_nullable_to_non_nullable
@@ -453,8 +453,8 @@ class __$$_FetchOrderCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_FetchOrder implements _FetchOrder {
-  const _$_FetchOrder(
+class _$FetchOrderImpl implements _FetchOrder {
+  const _$FetchOrderImpl(
       {required final List<OrderHistoryDetailsOrderItem>
           orderHistoryDetailsOrderItems,
       required this.orderNumberWillUpsert})
@@ -478,10 +478,10 @@ class _$_FetchOrder implements _FetchOrder {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_FetchOrder &&
+            other is _$FetchOrderImpl &&
             const DeepCollectionEquality().equals(
                 other._orderHistoryDetailsOrderItems,
                 _orderHistoryDetailsOrderItems) &&
@@ -498,8 +498,8 @@ class _$_FetchOrder implements _FetchOrder {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_FetchOrderCopyWith<_$_FetchOrder> get copyWith =>
-      __$$_FetchOrderCopyWithImpl<_$_FetchOrder>(this, _$identity);
+  _$$FetchOrderImplCopyWith<_$FetchOrderImpl> get copyWith =>
+      __$$FetchOrderImplCopyWithImpl<_$FetchOrderImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -618,20 +618,20 @@ abstract class _FetchOrder implements ReOrderPermissionEvent {
   const factory _FetchOrder(
       {required final List<OrderHistoryDetailsOrderItem>
           orderHistoryDetailsOrderItems,
-      required final OrderNumber orderNumberWillUpsert}) = _$_FetchOrder;
+      required final OrderNumber orderNumberWillUpsert}) = _$FetchOrderImpl;
 
   List<OrderHistoryDetailsOrderItem> get orderHistoryDetailsOrderItems;
   OrderNumber get orderNumberWillUpsert;
   @JsonKey(ignore: true)
-  _$$_FetchOrderCopyWith<_$_FetchOrder> get copyWith =>
+  _$$FetchOrderImplCopyWith<_$FetchOrderImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_FetchItemCopyWith<$Res> {
-  factory _$$_FetchItemCopyWith(
-          _$_FetchItem value, $Res Function(_$_FetchItem) then) =
-      __$$_FetchItemCopyWithImpl<$Res>;
+abstract class _$$FetchItemImplCopyWith<$Res> {
+  factory _$$FetchItemImplCopyWith(
+          _$FetchItemImpl value, $Res Function(_$FetchItemImpl) then) =
+      __$$FetchItemImplCopyWithImpl<$Res>;
   @useResult
   $Res call({OrderHistory orderHistoryDetail, OrderHistoryItem item});
 
@@ -640,11 +640,11 @@ abstract class _$$_FetchItemCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_FetchItemCopyWithImpl<$Res>
-    extends _$ReOrderPermissionEventCopyWithImpl<$Res, _$_FetchItem>
-    implements _$$_FetchItemCopyWith<$Res> {
-  __$$_FetchItemCopyWithImpl(
-      _$_FetchItem _value, $Res Function(_$_FetchItem) _then)
+class __$$FetchItemImplCopyWithImpl<$Res>
+    extends _$ReOrderPermissionEventCopyWithImpl<$Res, _$FetchItemImpl>
+    implements _$$FetchItemImplCopyWith<$Res> {
+  __$$FetchItemImplCopyWithImpl(
+      _$FetchItemImpl _value, $Res Function(_$FetchItemImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -653,7 +653,7 @@ class __$$_FetchItemCopyWithImpl<$Res>
     Object? orderHistoryDetail = null,
     Object? item = null,
   }) {
-    return _then(_$_FetchItem(
+    return _then(_$FetchItemImpl(
       orderHistoryDetail: null == orderHistoryDetail
           ? _value.orderHistoryDetail
           : orderHistoryDetail // ignore: cast_nullable_to_non_nullable
@@ -684,8 +684,8 @@ class __$$_FetchItemCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_FetchItem implements _FetchItem {
-  const _$_FetchItem({required this.orderHistoryDetail, required this.item});
+class _$FetchItemImpl implements _FetchItem {
+  const _$FetchItemImpl({required this.orderHistoryDetail, required this.item});
 
   @override
   final OrderHistory orderHistoryDetail;
@@ -698,10 +698,10 @@ class _$_FetchItem implements _FetchItem {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_FetchItem &&
+            other is _$FetchItemImpl &&
             (identical(other.orderHistoryDetail, orderHistoryDetail) ||
                 other.orderHistoryDetail == orderHistoryDetail) &&
             (identical(other.item, item) || other.item == item));
@@ -713,8 +713,8 @@ class _$_FetchItem implements _FetchItem {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_FetchItemCopyWith<_$_FetchItem> get copyWith =>
-      __$$_FetchItemCopyWithImpl<_$_FetchItem>(this, _$identity);
+  _$$FetchItemImplCopyWith<_$FetchItemImpl> get copyWith =>
+      __$$FetchItemImplCopyWithImpl<_$FetchItemImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -831,33 +831,33 @@ class _$_FetchItem implements _FetchItem {
 abstract class _FetchItem implements ReOrderPermissionEvent {
   const factory _FetchItem(
       {required final OrderHistory orderHistoryDetail,
-      required final OrderHistoryItem item}) = _$_FetchItem;
+      required final OrderHistoryItem item}) = _$FetchItemImpl;
 
   OrderHistory get orderHistoryDetail;
   OrderHistoryItem get item;
   @JsonKey(ignore: true)
-  _$$_FetchItemCopyWith<_$_FetchItem> get copyWith =>
+  _$$FetchItemImplCopyWith<_$FetchItemImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_ResetOrderNumberWillUpsertCopyWith<$Res> {
-  factory _$$_ResetOrderNumberWillUpsertCopyWith(
-          _$_ResetOrderNumberWillUpsert value,
-          $Res Function(_$_ResetOrderNumberWillUpsert) then) =
-      __$$_ResetOrderNumberWillUpsertCopyWithImpl<$Res>;
+abstract class _$$ResetOrderNumberWillUpsertImplCopyWith<$Res> {
+  factory _$$ResetOrderNumberWillUpsertImplCopyWith(
+          _$ResetOrderNumberWillUpsertImpl value,
+          $Res Function(_$ResetOrderNumberWillUpsertImpl) then) =
+      __$$ResetOrderNumberWillUpsertImplCopyWithImpl<$Res>;
   @useResult
   $Res call({OrderNumber orderNumberWillUpsert});
 }
 
 /// @nodoc
-class __$$_ResetOrderNumberWillUpsertCopyWithImpl<$Res>
+class __$$ResetOrderNumberWillUpsertImplCopyWithImpl<$Res>
     extends _$ReOrderPermissionEventCopyWithImpl<$Res,
-        _$_ResetOrderNumberWillUpsert>
-    implements _$$_ResetOrderNumberWillUpsertCopyWith<$Res> {
-  __$$_ResetOrderNumberWillUpsertCopyWithImpl(
-      _$_ResetOrderNumberWillUpsert _value,
-      $Res Function(_$_ResetOrderNumberWillUpsert) _then)
+        _$ResetOrderNumberWillUpsertImpl>
+    implements _$$ResetOrderNumberWillUpsertImplCopyWith<$Res> {
+  __$$ResetOrderNumberWillUpsertImplCopyWithImpl(
+      _$ResetOrderNumberWillUpsertImpl _value,
+      $Res Function(_$ResetOrderNumberWillUpsertImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -865,7 +865,7 @@ class __$$_ResetOrderNumberWillUpsertCopyWithImpl<$Res>
   $Res call({
     Object? orderNumberWillUpsert = null,
   }) {
-    return _then(_$_ResetOrderNumberWillUpsert(
+    return _then(_$ResetOrderNumberWillUpsertImpl(
       orderNumberWillUpsert: null == orderNumberWillUpsert
           ? _value.orderNumberWillUpsert
           : orderNumberWillUpsert // ignore: cast_nullable_to_non_nullable
@@ -876,8 +876,8 @@ class __$$_ResetOrderNumberWillUpsertCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_ResetOrderNumberWillUpsert implements _ResetOrderNumberWillUpsert {
-  const _$_ResetOrderNumberWillUpsert({required this.orderNumberWillUpsert});
+class _$ResetOrderNumberWillUpsertImpl implements _ResetOrderNumberWillUpsert {
+  const _$ResetOrderNumberWillUpsertImpl({required this.orderNumberWillUpsert});
 
   @override
   final OrderNumber orderNumberWillUpsert;
@@ -888,10 +888,10 @@ class _$_ResetOrderNumberWillUpsert implements _ResetOrderNumberWillUpsert {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ResetOrderNumberWillUpsert &&
+            other is _$ResetOrderNumberWillUpsertImpl &&
             (identical(other.orderNumberWillUpsert, orderNumberWillUpsert) ||
                 other.orderNumberWillUpsert == orderNumberWillUpsert));
   }
@@ -902,9 +902,9 @@ class _$_ResetOrderNumberWillUpsert implements _ResetOrderNumberWillUpsert {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ResetOrderNumberWillUpsertCopyWith<_$_ResetOrderNumberWillUpsert>
-      get copyWith => __$$_ResetOrderNumberWillUpsertCopyWithImpl<
-          _$_ResetOrderNumberWillUpsert>(this, _$identity);
+  _$$ResetOrderNumberWillUpsertImplCopyWith<_$ResetOrderNumberWillUpsertImpl>
+      get copyWith => __$$ResetOrderNumberWillUpsertImplCopyWithImpl<
+          _$ResetOrderNumberWillUpsertImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -1021,17 +1021,18 @@ class _$_ResetOrderNumberWillUpsert implements _ResetOrderNumberWillUpsert {
 abstract class _ResetOrderNumberWillUpsert implements ReOrderPermissionEvent {
   const factory _ResetOrderNumberWillUpsert(
           {required final OrderNumber orderNumberWillUpsert}) =
-      _$_ResetOrderNumberWillUpsert;
+      _$ResetOrderNumberWillUpsertImpl;
 
   OrderNumber get orderNumberWillUpsert;
   @JsonKey(ignore: true)
-  _$$_ResetOrderNumberWillUpsertCopyWith<_$_ResetOrderNumberWillUpsert>
+  _$$ResetOrderNumberWillUpsertImplCopyWith<_$ResetOrderNumberWillUpsertImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 mixin _$ReOrderPermissionState {
-  List<MaterialInfo> get validOrderItems => throw _privateConstructorUsedError;
+  List<PriceAggregate> get validOrderItems =>
+      throw _privateConstructorUsedError;
   bool get isFetching => throw _privateConstructorUsedError;
   Option<Either<ApiFailure, dynamic>> get failureOrSuccessOption =>
       throw _privateConstructorUsedError;
@@ -1055,7 +1056,7 @@ abstract class $ReOrderPermissionStateCopyWith<$Res> {
       _$ReOrderPermissionStateCopyWithImpl<$Res, ReOrderPermissionState>;
   @useResult
   $Res call(
-      {List<MaterialInfo> validOrderItems,
+      {List<PriceAggregate> validOrderItems,
       bool isFetching,
       Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
       OrderNumber orderNumberWillUpsert,
@@ -1100,7 +1101,7 @@ class _$ReOrderPermissionStateCopyWithImpl<$Res,
       validOrderItems: null == validOrderItems
           ? _value.validOrderItems
           : validOrderItems // ignore: cast_nullable_to_non_nullable
-              as List<MaterialInfo>,
+              as List<PriceAggregate>,
       isFetching: null == isFetching
           ? _value.isFetching
           : isFetching // ignore: cast_nullable_to_non_nullable
@@ -1179,15 +1180,16 @@ class _$ReOrderPermissionStateCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_ReOrderPermissionStateCopyWith<$Res>
+abstract class _$$ReOrderPermissionStateImplCopyWith<$Res>
     implements $ReOrderPermissionStateCopyWith<$Res> {
-  factory _$$_ReOrderPermissionStateCopyWith(_$_ReOrderPermissionState value,
-          $Res Function(_$_ReOrderPermissionState) then) =
-      __$$_ReOrderPermissionStateCopyWithImpl<$Res>;
+  factory _$$ReOrderPermissionStateImplCopyWith(
+          _$ReOrderPermissionStateImpl value,
+          $Res Function(_$ReOrderPermissionStateImpl) then) =
+      __$$ReOrderPermissionStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
-      {List<MaterialInfo> validOrderItems,
+      {List<PriceAggregate> validOrderItems,
       bool isFetching,
       Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
       OrderNumber orderNumberWillUpsert,
@@ -1210,12 +1212,13 @@ abstract class _$$_ReOrderPermissionStateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_ReOrderPermissionStateCopyWithImpl<$Res>
+class __$$ReOrderPermissionStateImplCopyWithImpl<$Res>
     extends _$ReOrderPermissionStateCopyWithImpl<$Res,
-        _$_ReOrderPermissionState>
-    implements _$$_ReOrderPermissionStateCopyWith<$Res> {
-  __$$_ReOrderPermissionStateCopyWithImpl(_$_ReOrderPermissionState _value,
-      $Res Function(_$_ReOrderPermissionState) _then)
+        _$ReOrderPermissionStateImpl>
+    implements _$$ReOrderPermissionStateImplCopyWith<$Res> {
+  __$$ReOrderPermissionStateImplCopyWithImpl(
+      _$ReOrderPermissionStateImpl _value,
+      $Res Function(_$ReOrderPermissionStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1231,11 +1234,11 @@ class __$$_ReOrderPermissionStateCopyWithImpl<$Res>
     Object? salesOrganisationConfigs = null,
     Object? user = null,
   }) {
-    return _then(_$_ReOrderPermissionState(
+    return _then(_$ReOrderPermissionStateImpl(
       validOrderItems: null == validOrderItems
           ? _value._validOrderItems
           : validOrderItems // ignore: cast_nullable_to_non_nullable
-              as List<MaterialInfo>,
+              as List<PriceAggregate>,
       isFetching: null == isFetching
           ? _value.isFetching
           : isFetching // ignore: cast_nullable_to_non_nullable
@@ -1274,9 +1277,9 @@ class __$$_ReOrderPermissionStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_ReOrderPermissionState extends _ReOrderPermissionState {
-  const _$_ReOrderPermissionState(
-      {required final List<MaterialInfo> validOrderItems,
+class _$ReOrderPermissionStateImpl extends _ReOrderPermissionState {
+  const _$ReOrderPermissionStateImpl(
+      {required final List<PriceAggregate> validOrderItems,
       required this.isFetching,
       required this.failureOrSuccessOption,
       required this.orderNumberWillUpsert,
@@ -1288,9 +1291,9 @@ class _$_ReOrderPermissionState extends _ReOrderPermissionState {
       : _validOrderItems = validOrderItems,
         super._();
 
-  final List<MaterialInfo> _validOrderItems;
+  final List<PriceAggregate> _validOrderItems;
   @override
-  List<MaterialInfo> get validOrderItems {
+  List<PriceAggregate> get validOrderItems {
     if (_validOrderItems is EqualUnmodifiableListView) return _validOrderItems;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_validOrderItems);
@@ -1319,10 +1322,10 @@ class _$_ReOrderPermissionState extends _ReOrderPermissionState {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ReOrderPermissionState &&
+            other is _$ReOrderPermissionStateImpl &&
             const DeepCollectionEquality()
                 .equals(other._validOrderItems, _validOrderItems) &&
             (identical(other.isFetching, isFetching) ||
@@ -1359,14 +1362,14 @@ class _$_ReOrderPermissionState extends _ReOrderPermissionState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ReOrderPermissionStateCopyWith<_$_ReOrderPermissionState> get copyWith =>
-      __$$_ReOrderPermissionStateCopyWithImpl<_$_ReOrderPermissionState>(
-          this, _$identity);
+  _$$ReOrderPermissionStateImplCopyWith<_$ReOrderPermissionStateImpl>
+      get copyWith => __$$ReOrderPermissionStateImplCopyWithImpl<
+          _$ReOrderPermissionStateImpl>(this, _$identity);
 }
 
 abstract class _ReOrderPermissionState extends ReOrderPermissionState {
   const factory _ReOrderPermissionState(
-      {required final List<MaterialInfo> validOrderItems,
+      {required final List<PriceAggregate> validOrderItems,
       required final bool isFetching,
       required final Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
       required final OrderNumber orderNumberWillUpsert,
@@ -1374,11 +1377,11 @@ abstract class _ReOrderPermissionState extends ReOrderPermissionState {
       required final ShipToInfo shipToInfo,
       required final SalesOrganisation salesOrganisation,
       required final SalesOrganisationConfigs salesOrganisationConfigs,
-      required final User user}) = _$_ReOrderPermissionState;
+      required final User user}) = _$ReOrderPermissionStateImpl;
   const _ReOrderPermissionState._() : super._();
 
   @override
-  List<MaterialInfo> get validOrderItems;
+  List<PriceAggregate> get validOrderItems;
   @override
   bool get isFetching;
   @override
@@ -1397,6 +1400,6 @@ abstract class _ReOrderPermissionState extends ReOrderPermissionState {
   User get user;
   @override
   @JsonKey(ignore: true)
-  _$$_ReOrderPermissionStateCopyWith<_$_ReOrderPermissionState> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$ReOrderPermissionStateImplCopyWith<_$ReOrderPermissionStateImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }

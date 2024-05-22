@@ -1133,6 +1133,8 @@ fragment ezrxItemsFields on Item {
   taxes
   isSampleMaterial
   hidePrice
+  TenderContractNumber
+  tenderOrderReason
   hasValidTenderContract
   hasMandatoryTenderContract
   isFOCMaterial

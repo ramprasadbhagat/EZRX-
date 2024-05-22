@@ -185,6 +185,21 @@ class OrderHistoryDetails with _$OrderHistoryDetails {
   bool get isCovidMaterialAvailable =>
       orderHistoryDetailsOrderItem.any((element) => element.isCovid);
 
+  TenderContractReason get getTenderReason => orderHistoryDetailsOrderItem
+      .firstWhere(
+        (element) => element.tenderContractDetails.orderReason.isNotEmpty,
+        orElse: () => OrderHistoryDetailsOrderItem.empty(),
+      )
+      .tenderContractDetails
+      .orderReason;
+
+  bool get isTenderContractAvailable => orderHistoryDetailsOrderItem.any(
+        (element) =>
+            !element
+                .tenderContractDetails.contractNumber.isContractNumberEmpty &&
+            element.tenderContractDetails.orderReason.isNotEmpty,
+      );
+
   OrderHistoryDetails copyWithInvoiceNumber({
     required Map<StringValue, InvoiceData> invoiceDataMap,
   }) =>

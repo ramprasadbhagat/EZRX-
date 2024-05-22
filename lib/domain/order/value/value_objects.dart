@@ -480,6 +480,10 @@ class TenderContractNumber extends ValueObject<String> {
     return naIfEmpty(value.getOrElse(() => '-'));
   }
 
+  bool get isContractNumberEmpty {
+    return value.getOrElse(() => '').isEmpty;
+  }
+
   String get displayTenderContractNumberInCart {
     return getTenderContractNumber(value.getOrElse(() => ''));
   }
@@ -515,7 +519,9 @@ class TenderContractReason extends ValueObject<String> {
     return contractIs730(value.getOrElse(() => ''));
   }
 
-  bool get isEmpty => value.getOrElse(() => '') == '';
+  bool get isEmpty => value.getOrElse(() => '').isEmpty;
+
+  bool get isNotEmpty => value.getOrElse(() => '').isNotEmpty;
 
   String get displayTenderContractReason {
     return naIfEmpty(removeLeadingZero(value.getOrElse(() => '-')));

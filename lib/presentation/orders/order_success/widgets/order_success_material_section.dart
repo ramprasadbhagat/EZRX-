@@ -169,7 +169,7 @@ class _MaterialItem extends StatelessWidget {
               ),
             ],
           ),
-          if (!orderItem.tenderContractDetails.orderReason.isEmpty)
+          if (orderItem.tenderContractDetails.orderReason.isNotEmpty)
             TenderContractSection(
               tenderContract: orderItem.orderItemTenderContract,
             ),

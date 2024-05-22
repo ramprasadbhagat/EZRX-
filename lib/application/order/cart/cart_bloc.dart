@@ -474,6 +474,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
           language: state.user.preferredLanguage,
           counterOfferDetails: e.counterOfferDetails,
           itemId: '',
+          tenderContractDetails: e.tenderContractList,
         );
 
         failureOrSuccess.fold(

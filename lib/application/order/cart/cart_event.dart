@@ -45,6 +45,7 @@ class CartEvent with _$CartEvent {
   const factory CartEvent.addHistoryItemsToCart({
     required List<MaterialInfo> items,
     required RequestCounterOfferDetails counterOfferDetails,
+    required Map<MaterialNumber, TenderContract> tenderContractList,
   }) = _addHistoryItemsToCart;
 
   const factory CartEvent.upsertCartItems({
@@ -85,7 +86,7 @@ class CartEvent with _$CartEvent {
   const factory CartEvent.fetchGrandTotalPriceForIdMarket() =
       _FetchGrandTotalPriceForIdMarket;
 
- const factory CartEvent.updateTenderContract({
+  const factory CartEvent.updateTenderContract({
     required Map<MaterialNumber, List<TenderContract>> tenderContractList,
   }) = _UpdateTenderContract;
 }

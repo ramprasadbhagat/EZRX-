@@ -39,4 +39,17 @@ class OrderHistory with _$OrderHistory {
 
   bool get isCovidMaterialAvailable =>
       orderHistoryItems.any((element) => element.isCovid);
+
+  bool get isTenderContractAvailable => orderHistoryItems.any(
+        (element) =>
+            !element.tenderContractNumber.isContractNumberEmpty &&
+            element.tenderOrderReason.isNotEmpty,
+      );
+
+  TenderContractReason get getTenderReason => orderHistoryItems
+      .firstWhere(
+        (element) => element.tenderOrderReason.isNotEmpty,
+        orElse: () => OrderHistoryItem.empty(),
+      )
+      .tenderOrderReason;
 }

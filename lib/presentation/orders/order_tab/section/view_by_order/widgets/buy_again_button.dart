@@ -68,6 +68,8 @@ class BuyAgainButton extends StatelessWidget {
                           context.read<MaterialPriceBloc>().state.materialPrice,
                         ),
                         counterOfferDetails: RequestCounterOfferDetails.empty(),
+                        tenderContractList:
+                            reOrderState.availableTenderContract,
                       ),
                     );
               },
@@ -122,9 +124,29 @@ class BuyAgainButton extends StatelessWidget {
   void _reOrder(BuildContext context) {
     final cartState = context.read<CartBloc>().state;
     final cartProducts = cartState.cartProducts;
+    final isTenderEligible =
+        context.read<EligibilityBloc>().state.salesOrg.isTenderEligible;
 
     if (cartProducts.isEmpty) {
       _buyAgain(context);
+
+      return;
+    }
+
+    final tenderContractValidationMsg = _checkValidTenderContractAndReturnMsg(
+      context: context,
+      orderHistory: viewByOrderHistoryItem,
+    );
+    if (isTenderEligible && tenderContractValidationMsg.isNotEmpty) {
+      CustomSnackBar(
+        icon: const Icon(
+          Icons.info,
+          color: ZPColors.error,
+        ),
+        backgroundColor: ZPColors.errorSnackBarColor,
+        key: WidgetKeys.viewByOrderBuyAgainTenderErrorSnackBar,
+        messageText: tenderContractValidationMsg,
+      ).show(context);
 
       return;
     }
@@ -142,6 +164,45 @@ class BuyAgainButton extends StatelessWidget {
     }
 
     _buyAgain(context);
+  }
+
+  String _checkValidTenderContractAndReturnMsg({
+    required BuildContext context,
+    required OrderHistoryDetails orderHistory,
+  }) {
+    final cartProducts = context.read<CartBloc>().state.cartProducts;
+    final tenderOrderReason = orderHistory.getTenderReason;
+    final containsTenderContract = orderHistory.isTenderContractAvailable;
+
+    if (!containsTenderContract && !cartProducts.hasTenderContract) {
+      return '';
+    } else if (!containsTenderContract && cartProducts.hasTenderContract) {
+      return context.tr(
+        'Other materials cannot be ordered while materials from the {reason} tender contract are in your cart. By proceeding, your current cart will be cleared.',
+        namedArgs: {'reason': cartProducts.tenderReasons.join(', ')},
+      );
+    } else {
+      if (containsTenderContract &&
+          (cartProducts.hasNonTenderContractMaterials ||
+              (!cartProducts.hasTenderContractWithReason730 &&
+                  tenderOrderReason.is730))) {
+        return context.tr(
+          'Materials from the {reason} tender contract cannot be added to your cart if you have other materials in your cart. By proceeding, your current cart will be cleared.',
+          namedArgs: {
+            'reason': tenderOrderReason.displayTenderContractReason,
+          },
+        );
+      } else if (containsTenderContract &&
+          (cartProducts.hasTenderContractWithReason730 &&
+              !tenderOrderReason.is730)) {
+        return context.tr(
+          'Other materials cannot be ordered while materials from the {reason} tender contract are in your cart. By proceeding, your current cart will be cleared.',
+          namedArgs: {'reason': '730'},
+        );
+      }
+
+      return '';
+    }
   }
 
   void _showDetailsPage(BuildContext context) {

@@ -42,7 +42,7 @@ class ViewByItemOrderItemTile extends StatelessWidget {
       quantity: orderHistoryItem.qty.toString(),
       materialNumber: orderHistoryItem.materialNumber,
       materialDescription: orderHistoryItem.materialDescription,
-      tenderContractSection: !orderHistoryItem.tenderOrderReason.isEmpty
+      tenderContractSection: orderHistoryItem.tenderOrderReason.isNotEmpty
           ? TenderContractSection(
               tenderContract: orderHistoryItem.orderItemTenderContract,
             )

@@ -712,6 +712,7 @@ void main() {
         language: Language.english(),
         materialInfo: productList,
         salesOrganisationConfig: fakeMYSalesOrgConfigs,
+        tenderContractDetails: {},
       );
       expect(result.isRight(), true);
     });
@@ -759,6 +760,7 @@ void main() {
         language: Language.english(),
         materialInfo: productList,
         salesOrganisationConfig: fakeMYSalesOrgConfigs,
+        tenderContractDetails: {},
       );
       expect(result.isLeft(), true);
     });
@@ -781,6 +783,7 @@ void main() {
         language: fakeClientUser.settings.languagePreference,
         materialInfo: fakeCartProducts.materialInfos,
         salesOrganisationConfig: fakeMYSalesOrgConfigs,
+        tenderContractDetails: {},
       );
       expect(result, Right(fakeCartProducts));
     });
@@ -803,6 +806,7 @@ void main() {
         language: fakeClientUser.settings.languagePreference,
         materialInfo: fakeCartProducts.materialInfos,
         salesOrganisationConfig: fakeMYSalesOrgConfigs,
+        tenderContractDetails: {},
       );
 
       expect(result, Left(FailureHandler.handleFailure(fakeException)));

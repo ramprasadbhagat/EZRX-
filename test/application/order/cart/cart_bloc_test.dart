@@ -2224,6 +2224,7 @@ void main() {
               itemId: '',
               materialInfo: [priceAggregates.first.materialInfo],
               salesOrganisationConfig: fakeMYSalesOrgConfigs,
+              tenderContractDetails: {},
             ),
           ).thenAnswer(
             (invocation) async => Left(fakeError),
@@ -2233,6 +2234,7 @@ void main() {
           CartEvent.addHistoryItemsToCart(
             items: [priceAggregates.first.materialInfo],
             counterOfferDetails: RequestCounterOfferDetails.empty(),
+            tenderContractList: {},
           ),
         ),
         expect: () => [
@@ -2284,6 +2286,7 @@ void main() {
               itemId: '',
               materialInfo: [priceAggregates.first.materialInfo],
               salesOrganisationConfig: fakeMYSalesOrgConfigs,
+              tenderContractDetails: {},
             ),
           ).thenAnswer(
             (invocation) async =>
@@ -2294,6 +2297,7 @@ void main() {
           CartEvent.addHistoryItemsToCart(
             items: [priceAggregates.first.materialInfo],
             counterOfferDetails: RequestCounterOfferDetails.empty(),
+            tenderContractList: {},
           ),
         ),
         expect: () => [

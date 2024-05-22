@@ -1005,7 +1005,12 @@ void main() {
             ReOrderPermissionState.initial().copyWith(isFetching: true),
             ReOrderPermissionState.initial().copyWith(
               isFetching: false,
-              validOrderItems: [fakeItem],
+              validOrderItems: [
+                PriceAggregate.empty().copyWith(
+                  materialInfo: fakeItem,
+                  tenderContract: fakeOrderHistoryItem.orderItemTenderContract,
+                ),
+              ],
             ),
           ]),
         );
@@ -1018,6 +1023,10 @@ void main() {
             CartEvent.addHistoryItemsToCart(
               items: [fakeItem],
               counterOfferDetails: RequestCounterOfferDetails.empty(),
+              tenderContractList: {
+                fakeItem.materialNumber:
+                    fakeOrderHistoryItem.orderItemTenderContract,
+              },
             ),
           ),
         ).called(1);

@@ -427,6 +427,7 @@ void main() {
           CartEvent.addHistoryItemsToCart(
             items: [],
             counterOfferDetails: RequestCounterOfferDetails.empty(),
+            tenderContractList: {},
           ),
         ),
       ).called(1);

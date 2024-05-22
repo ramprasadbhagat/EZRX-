@@ -26,6 +26,8 @@
   taxes
   isSampleMaterial
   hidePrice
+   TenderContractNumber
+  tenderOrderReason
   hasValidTenderContract
   hasMandatoryTenderContract
   isFOCMaterial

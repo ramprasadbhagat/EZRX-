@@ -1484,6 +1484,8 @@ class WidgetKeys {
       const Key('viewByItemsOrderDetailsShowMoreAttachments');
   static Key viewByItemDetailBuyAgainButton =
       const Key('viewByItemDetailBuyAgainButton');
+  static Key viewByItemDetailBuyAgainTenderErrorSnackBar =
+      const Key('viewByItemDetailBuyAgainTenderErrorSnackBar');
   static Key canNotReOrderThisOrderToast =
       const Key('canNotReOrderThisOrderToast');
   static Key viewByItemDetailExpandButton =
@@ -1509,6 +1511,8 @@ class WidgetKeys {
   static Key viewByOrdersQtyLabelKey = const Key('viewByOrdersItemQtyLabelKey');
   static Key viewByOrderBuyAgainButtonKey =
       const Key('viewByOrderBuyAgainButtonKey');
+  static Key viewByOrderBuyAgainTenderErrorSnackBar =
+      const Key('viewByOrderBuyAgainTenderErrorSnackBar');
   static Key viewByOrderSubtotalKey = const Key('viewByOrderSubtotalKey');
   static Key viewByOrderTaxKey = const Key('viewByOrderTaxKey');
   static Key viewByOrderGrandTotalKey = const Key('viewByOrderGrandTotalKey');

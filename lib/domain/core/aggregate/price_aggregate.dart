@@ -116,8 +116,9 @@ class PriceAggregate with _$PriceAggregate {
 
   bool get isTenderContractInvalid =>
       salesOrgConfig.salesOrg.isTenderEligible &&
-      (tenderContract.contractNumber.isValid() &&
-          tenderContract.tenderOrderReason.isEmpty);
+      (tenderContract.isNotEmpty &&
+          (!tenderContract.contractNumber.isContractNumberEmpty &&
+              tenderContract.tenderOrderReason.isEmpty));
 
   bool get showErrorMessageForID =>
       salesOrgConfig.salesOrg.isID &&
@@ -164,7 +165,7 @@ class PriceAggregate with _$PriceAggregate {
       principalData: materialInfo.principalData,
       isCounterOffer: materialInfo.counterOfferDetails.hasCounterOffer,
       contract: salesOrgConfig.salesOrg.isTenderEligible &&
-              !tenderContract.tenderOrderReason.isEmpty
+              tenderContract.tenderOrderReason.isNotEmpty
           ? SubmitTenderContract(
               contractLineItemNumber:
                   tenderContract.contractItemNumber.getOrDefaultValue(''),

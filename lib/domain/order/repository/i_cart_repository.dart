@@ -12,6 +12,7 @@ import 'package:ezrxmobile/domain/order/entities/cart.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/request_counter_offer_details.dart';
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
+import 'package:ezrxmobile/domain/order/entities/tender_contract.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 
 abstract class ICartRepository {
@@ -70,6 +71,7 @@ abstract class ICartRepository {
     required Language language,
     required String itemId,
     required RequestCounterOfferDetails counterOfferDetails,
+    required Map<MaterialNumber, TenderContract> tenderContractDetails,
   });
 
   //TODO: evaluate which methods can be removed with combo offers

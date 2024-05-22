@@ -15,6 +15,7 @@ import 'package:ezrxmobile/domain/order/entities/cart_product_request.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/request_counter_offer_details.dart';
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
+import 'package:ezrxmobile/domain/order/entities/tender_contract.dart';
 import 'package:ezrxmobile/domain/order/repository/i_cart_repository.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/device_storage.dart';
@@ -522,6 +523,7 @@ class CartRepository implements ICartRepository {
     required Language language,
     required String itemId,
     required RequestCounterOfferDetails counterOfferDetails,
+    required Map<MaterialNumber, TenderContract> tenderContractDetails,
   }) async {
     if (config.appFlavor == Flavor.mock) {
       try {
@@ -538,6 +540,11 @@ class CartRepository implements ICartRepository {
       final productList = await cartRemoteDataSource.upsertCartItems(
         market: deviceStorage.currentMarket(),
         requestParams: materialInfo.map((materialInfo) {
+          final tenderContractNumber =
+              tenderContractDetails[materialInfo.materialNumber]
+                      ?.contractNumber
+                      .getOrDefaultValue('') ??
+                  '';
           // For Reordering we are using [convertToMaterialRequest] it has all
           // the cases covered for materials, bundles, bonuses and combo's,
           // for bundles we are using this one because the [ParentID] and the
@@ -551,7 +558,7 @@ class CartRepository implements ICartRepository {
             itemId: itemId,
             quantity: materialInfo.quantity.intValue,
             counterOfferDetails: counterOfferDetails,
-            tenderContractNumber: '',
+            tenderContractNumber: tenderContractNumber,
           );
 
           return CartProductRequestDto.fromDomain(upsertCartRequest).toMap();

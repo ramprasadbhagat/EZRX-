@@ -12,7 +12,7 @@ part of 'order_history.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$OrderHistory {
@@ -78,11 +78,11 @@ class _$OrderHistoryCopyWithImpl<$Res, $Val extends OrderHistory>
 }
 
 /// @nodoc
-abstract class _$$_OrderHistoryCopyWith<$Res>
+abstract class _$$OrderHistoryImplCopyWith<$Res>
     implements $OrderHistoryCopyWith<$Res> {
-  factory _$$_OrderHistoryCopyWith(
-          _$_OrderHistory value, $Res Function(_$_OrderHistory) then) =
-      __$$_OrderHistoryCopyWithImpl<$Res>;
+  factory _$$OrderHistoryImplCopyWith(
+          _$OrderHistoryImpl value, $Res Function(_$OrderHistoryImpl) then) =
+      __$$OrderHistoryImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -94,11 +94,11 @@ abstract class _$$_OrderHistoryCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_OrderHistoryCopyWithImpl<$Res>
-    extends _$OrderHistoryCopyWithImpl<$Res, _$_OrderHistory>
-    implements _$$_OrderHistoryCopyWith<$Res> {
-  __$$_OrderHistoryCopyWithImpl(
-      _$_OrderHistory _value, $Res Function(_$_OrderHistory) _then)
+class __$$OrderHistoryImplCopyWithImpl<$Res>
+    extends _$OrderHistoryCopyWithImpl<$Res, _$OrderHistoryImpl>
+    implements _$$OrderHistoryImplCopyWith<$Res> {
+  __$$OrderHistoryImplCopyWithImpl(
+      _$OrderHistoryImpl _value, $Res Function(_$OrderHistoryImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -107,7 +107,7 @@ class __$$_OrderHistoryCopyWithImpl<$Res>
     Object? orderBasicInformation = null,
     Object? orderHistoryItems = null,
   }) {
-    return _then(_$_OrderHistory(
+    return _then(_$OrderHistoryImpl(
       orderBasicInformation: null == orderBasicInformation
           ? _value.orderBasicInformation
           : orderBasicInformation // ignore: cast_nullable_to_non_nullable
@@ -122,8 +122,8 @@ class __$$_OrderHistoryCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_OrderHistory extends _OrderHistory {
-  _$_OrderHistory(
+class _$OrderHistoryImpl extends _OrderHistory {
+  _$OrderHistoryImpl(
       {required this.orderBasicInformation,
       required final List<OrderHistoryItem> orderHistoryItems})
       : _orderHistoryItems = orderHistoryItems,
@@ -146,10 +146,10 @@ class _$_OrderHistory extends _OrderHistory {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_OrderHistory &&
+            other is _$OrderHistoryImpl &&
             (identical(other.orderBasicInformation, orderBasicInformation) ||
                 other.orderBasicInformation == orderBasicInformation) &&
             const DeepCollectionEquality()
@@ -163,15 +163,15 @@ class _$_OrderHistory extends _OrderHistory {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_OrderHistoryCopyWith<_$_OrderHistory> get copyWith =>
-      __$$_OrderHistoryCopyWithImpl<_$_OrderHistory>(this, _$identity);
+  _$$OrderHistoryImplCopyWith<_$OrderHistoryImpl> get copyWith =>
+      __$$OrderHistoryImplCopyWithImpl<_$OrderHistoryImpl>(this, _$identity);
 }
 
 abstract class _OrderHistory extends OrderHistory {
   factory _OrderHistory(
           {required final OrderHistoryBasicInfo orderBasicInformation,
           required final List<OrderHistoryItem> orderHistoryItems}) =
-      _$_OrderHistory;
+      _$OrderHistoryImpl;
   _OrderHistory._() : super._();
 
   @override
@@ -180,6 +180,6 @@ abstract class _OrderHistory extends OrderHistory {
   List<OrderHistoryItem> get orderHistoryItems;
   @override
   @JsonKey(ignore: true)
-  _$$_OrderHistoryCopyWith<_$_OrderHistory> get copyWith =>
+  _$$OrderHistoryImplCopyWith<_$OrderHistoryImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

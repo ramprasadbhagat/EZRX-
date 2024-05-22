@@ -168,6 +168,8 @@ class _CartPageState extends State<CartPage> {
                   !current.isFetching ||
               previous.isUpserting != current.isUpserting &&
                   !current.isUpserting ||
+              previous.isBuyAgain != current.isBuyAgain &&
+                  !current.isBuyAgain ||
               previous.isFetchingCartProductDetail !=
                       current.isFetchingCartProductDetail &&
                   !current.isFetchingCartProductDetail,

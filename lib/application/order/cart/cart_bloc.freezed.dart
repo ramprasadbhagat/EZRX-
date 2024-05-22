@@ -38,8 +38,10 @@ mixin _$CartEvent {
     required TResult Function(
             PriceAggregate priceAggregate, EZReachBanner? banner)
         upsertCart,
-    required TResult Function(List<MaterialInfo> items,
-            RequestCounterOfferDetails counterOfferDetails)
+    required TResult Function(
+            List<MaterialInfo> items,
+            RequestCounterOfferDetails counterOfferDetails,
+            Map<MaterialNumber, TenderContract> tenderContractList)
         addHistoryItemsToCart,
     required TResult Function(
             PriceAggregate priceAggregate, EZReachBanner? banner)
@@ -85,8 +87,10 @@ mixin _$CartEvent {
     TResult? Function()? fetchProductsAddedToCart,
     TResult? Function(PriceAggregate priceAggregate, EZReachBanner? banner)?
         upsertCart,
-    TResult? Function(List<MaterialInfo> items,
-            RequestCounterOfferDetails counterOfferDetails)?
+    TResult? Function(
+            List<MaterialInfo> items,
+            RequestCounterOfferDetails counterOfferDetails,
+            Map<MaterialNumber, TenderContract> tenderContractList)?
         addHistoryItemsToCart,
     TResult? Function(PriceAggregate priceAggregate, EZReachBanner? banner)?
         upsertCartItems,
@@ -130,8 +134,10 @@ mixin _$CartEvent {
     TResult Function()? fetchProductsAddedToCart,
     TResult Function(PriceAggregate priceAggregate, EZReachBanner? banner)?
         upsertCart,
-    TResult Function(List<MaterialInfo> items,
-            RequestCounterOfferDetails counterOfferDetails)?
+    TResult Function(
+            List<MaterialInfo> items,
+            RequestCounterOfferDetails counterOfferDetails,
+            Map<MaterialNumber, TenderContract> tenderContractList)?
         addHistoryItemsToCart,
     TResult Function(PriceAggregate priceAggregate, EZReachBanner? banner)?
         upsertCartItems,
@@ -449,8 +455,10 @@ class _$InitializedImpl implements _Initialized {
     required TResult Function(
             PriceAggregate priceAggregate, EZReachBanner? banner)
         upsertCart,
-    required TResult Function(List<MaterialInfo> items,
-            RequestCounterOfferDetails counterOfferDetails)
+    required TResult Function(
+            List<MaterialInfo> items,
+            RequestCounterOfferDetails counterOfferDetails,
+            Map<MaterialNumber, TenderContract> tenderContractList)
         addHistoryItemsToCart,
     required TResult Function(
             PriceAggregate priceAggregate, EZReachBanner? banner)
@@ -500,8 +508,10 @@ class _$InitializedImpl implements _Initialized {
     TResult? Function()? fetchProductsAddedToCart,
     TResult? Function(PriceAggregate priceAggregate, EZReachBanner? banner)?
         upsertCart,
-    TResult? Function(List<MaterialInfo> items,
-            RequestCounterOfferDetails counterOfferDetails)?
+    TResult? Function(
+            List<MaterialInfo> items,
+            RequestCounterOfferDetails counterOfferDetails,
+            Map<MaterialNumber, TenderContract> tenderContractList)?
         addHistoryItemsToCart,
     TResult? Function(PriceAggregate priceAggregate, EZReachBanner? banner)?
         upsertCartItems,
@@ -549,8 +559,10 @@ class _$InitializedImpl implements _Initialized {
     TResult Function()? fetchProductsAddedToCart,
     TResult Function(PriceAggregate priceAggregate, EZReachBanner? banner)?
         upsertCart,
-    TResult Function(List<MaterialInfo> items,
-            RequestCounterOfferDetails counterOfferDetails)?
+    TResult Function(
+            List<MaterialInfo> items,
+            RequestCounterOfferDetails counterOfferDetails,
+            Map<MaterialNumber, TenderContract> tenderContractList)?
         addHistoryItemsToCart,
     TResult Function(PriceAggregate priceAggregate, EZReachBanner? banner)?
         upsertCartItems,
@@ -821,8 +833,10 @@ class _$VerifyMaterialDealBonusImpl implements _VerifyMaterialDealBonus {
     required TResult Function(
             PriceAggregate priceAggregate, EZReachBanner? banner)
         upsertCart,
-    required TResult Function(List<MaterialInfo> items,
-            RequestCounterOfferDetails counterOfferDetails)
+    required TResult Function(
+            List<MaterialInfo> items,
+            RequestCounterOfferDetails counterOfferDetails,
+            Map<MaterialNumber, TenderContract> tenderContractList)
         addHistoryItemsToCart,
     required TResult Function(
             PriceAggregate priceAggregate, EZReachBanner? banner)
@@ -871,8 +885,10 @@ class _$VerifyMaterialDealBonusImpl implements _VerifyMaterialDealBonus {
     TResult? Function()? fetchProductsAddedToCart,
     TResult? Function(PriceAggregate priceAggregate, EZReachBanner? banner)?
         upsertCart,
-    TResult? Function(List<MaterialInfo> items,
-            RequestCounterOfferDetails counterOfferDetails)?
+    TResult? Function(
+            List<MaterialInfo> items,
+            RequestCounterOfferDetails counterOfferDetails,
+            Map<MaterialNumber, TenderContract> tenderContractList)?
         addHistoryItemsToCart,
     TResult? Function(PriceAggregate priceAggregate, EZReachBanner? banner)?
         upsertCartItems,
@@ -919,8 +935,10 @@ class _$VerifyMaterialDealBonusImpl implements _VerifyMaterialDealBonus {
     TResult Function()? fetchProductsAddedToCart,
     TResult Function(PriceAggregate priceAggregate, EZReachBanner? banner)?
         upsertCart,
-    TResult Function(List<MaterialInfo> items,
-            RequestCounterOfferDetails counterOfferDetails)?
+    TResult Function(
+            List<MaterialInfo> items,
+            RequestCounterOfferDetails counterOfferDetails,
+            Map<MaterialNumber, TenderContract> tenderContractList)?
         addHistoryItemsToCart,
     TResult Function(PriceAggregate priceAggregate, EZReachBanner? banner)?
         upsertCartItems,
@@ -1203,8 +1221,10 @@ class _$AddBonusToCartItemImpl implements _AddBonusToCartItem {
     required TResult Function(
             PriceAggregate priceAggregate, EZReachBanner? banner)
         upsertCart,
-    required TResult Function(List<MaterialInfo> items,
-            RequestCounterOfferDetails counterOfferDetails)
+    required TResult Function(
+            List<MaterialInfo> items,
+            RequestCounterOfferDetails counterOfferDetails,
+            Map<MaterialNumber, TenderContract> tenderContractList)
         addHistoryItemsToCart,
     required TResult Function(
             PriceAggregate priceAggregate, EZReachBanner? banner)
@@ -1253,8 +1273,10 @@ class _$AddBonusToCartItemImpl implements _AddBonusToCartItem {
     TResult? Function()? fetchProductsAddedToCart,
     TResult? Function(PriceAggregate priceAggregate, EZReachBanner? banner)?
         upsertCart,
-    TResult? Function(List<MaterialInfo> items,
-            RequestCounterOfferDetails counterOfferDetails)?
+    TResult? Function(
+            List<MaterialInfo> items,
+            RequestCounterOfferDetails counterOfferDetails,
+            Map<MaterialNumber, TenderContract> tenderContractList)?
         addHistoryItemsToCart,
     TResult? Function(PriceAggregate priceAggregate, EZReachBanner? banner)?
         upsertCartItems,
@@ -1302,8 +1324,10 @@ class _$AddBonusToCartItemImpl implements _AddBonusToCartItem {
     TResult Function()? fetchProductsAddedToCart,
     TResult Function(PriceAggregate priceAggregate, EZReachBanner? banner)?
         upsertCart,
-    TResult Function(List<MaterialInfo> items,
-            RequestCounterOfferDetails counterOfferDetails)?
+    TResult Function(
+            List<MaterialInfo> items,
+            RequestCounterOfferDetails counterOfferDetails,
+            Map<MaterialNumber, TenderContract> tenderContractList)?
         addHistoryItemsToCart,
     TResult Function(PriceAggregate priceAggregate, EZReachBanner? banner)?
         upsertCartItems,
@@ -1519,8 +1543,10 @@ class _$RemoveSampleBonusFromCartConfigImpl
     required TResult Function(
             PriceAggregate priceAggregate, EZReachBanner? banner)
         upsertCart,
-    required TResult Function(List<MaterialInfo> items,
-            RequestCounterOfferDetails counterOfferDetails)
+    required TResult Function(
+            List<MaterialInfo> items,
+            RequestCounterOfferDetails counterOfferDetails,
+            Map<MaterialNumber, TenderContract> tenderContractList)
         addHistoryItemsToCart,
     required TResult Function(
             PriceAggregate priceAggregate, EZReachBanner? banner)
@@ -1569,8 +1595,10 @@ class _$RemoveSampleBonusFromCartConfigImpl
     TResult? Function()? fetchProductsAddedToCart,
     TResult? Function(PriceAggregate priceAggregate, EZReachBanner? banner)?
         upsertCart,
-    TResult? Function(List<MaterialInfo> items,
-            RequestCounterOfferDetails counterOfferDetails)?
+    TResult? Function(
+            List<MaterialInfo> items,
+            RequestCounterOfferDetails counterOfferDetails,
+            Map<MaterialNumber, TenderContract> tenderContractList)?
         addHistoryItemsToCart,
     TResult? Function(PriceAggregate priceAggregate, EZReachBanner? banner)?
         upsertCartItems,
@@ -1617,8 +1645,10 @@ class _$RemoveSampleBonusFromCartConfigImpl
     TResult Function()? fetchProductsAddedToCart,
     TResult Function(PriceAggregate priceAggregate, EZReachBanner? banner)?
         upsertCart,
-    TResult Function(List<MaterialInfo> items,
-            RequestCounterOfferDetails counterOfferDetails)?
+    TResult Function(
+            List<MaterialInfo> items,
+            RequestCounterOfferDetails counterOfferDetails,
+            Map<MaterialNumber, TenderContract> tenderContractList)?
         addHistoryItemsToCart,
     TResult Function(PriceAggregate priceAggregate, EZReachBanner? banner)?
         upsertCartItems,
@@ -1819,8 +1849,10 @@ class _$ClearCartImpl implements _ClearCart {
     required TResult Function(
             PriceAggregate priceAggregate, EZReachBanner? banner)
         upsertCart,
-    required TResult Function(List<MaterialInfo> items,
-            RequestCounterOfferDetails counterOfferDetails)
+    required TResult Function(
+            List<MaterialInfo> items,
+            RequestCounterOfferDetails counterOfferDetails,
+            Map<MaterialNumber, TenderContract> tenderContractList)
         addHistoryItemsToCart,
     required TResult Function(
             PriceAggregate priceAggregate, EZReachBanner? banner)
@@ -1869,8 +1901,10 @@ class _$ClearCartImpl implements _ClearCart {
     TResult? Function()? fetchProductsAddedToCart,
     TResult? Function(PriceAggregate priceAggregate, EZReachBanner? banner)?
         upsertCart,
-    TResult? Function(List<MaterialInfo> items,
-            RequestCounterOfferDetails counterOfferDetails)?
+    TResult? Function(
+            List<MaterialInfo> items,
+            RequestCounterOfferDetails counterOfferDetails,
+            Map<MaterialNumber, TenderContract> tenderContractList)?
         addHistoryItemsToCart,
     TResult? Function(PriceAggregate priceAggregate, EZReachBanner? banner)?
         upsertCartItems,
@@ -1917,8 +1951,10 @@ class _$ClearCartImpl implements _ClearCart {
     TResult Function()? fetchProductsAddedToCart,
     TResult Function(PriceAggregate priceAggregate, EZReachBanner? banner)?
         upsertCart,
-    TResult Function(List<MaterialInfo> items,
-            RequestCounterOfferDetails counterOfferDetails)?
+    TResult Function(
+            List<MaterialInfo> items,
+            RequestCounterOfferDetails counterOfferDetails,
+            Map<MaterialNumber, TenderContract> tenderContractList)?
         addHistoryItemsToCart,
     TResult Function(PriceAggregate priceAggregate, EZReachBanner? banner)?
         upsertCartItems,
@@ -2121,8 +2157,10 @@ class _$FetchProductsAddedToCartImpl implements _FetchProductsAddedToCart {
     required TResult Function(
             PriceAggregate priceAggregate, EZReachBanner? banner)
         upsertCart,
-    required TResult Function(List<MaterialInfo> items,
-            RequestCounterOfferDetails counterOfferDetails)
+    required TResult Function(
+            List<MaterialInfo> items,
+            RequestCounterOfferDetails counterOfferDetails,
+            Map<MaterialNumber, TenderContract> tenderContractList)
         addHistoryItemsToCart,
     required TResult Function(
             PriceAggregate priceAggregate, EZReachBanner? banner)
@@ -2171,8 +2209,10 @@ class _$FetchProductsAddedToCartImpl implements _FetchProductsAddedToCart {
     TResult? Function()? fetchProductsAddedToCart,
     TResult? Function(PriceAggregate priceAggregate, EZReachBanner? banner)?
         upsertCart,
-    TResult? Function(List<MaterialInfo> items,
-            RequestCounterOfferDetails counterOfferDetails)?
+    TResult? Function(
+            List<MaterialInfo> items,
+            RequestCounterOfferDetails counterOfferDetails,
+            Map<MaterialNumber, TenderContract> tenderContractList)?
         addHistoryItemsToCart,
     TResult? Function(PriceAggregate priceAggregate, EZReachBanner? banner)?
         upsertCartItems,
@@ -2219,8 +2259,10 @@ class _$FetchProductsAddedToCartImpl implements _FetchProductsAddedToCart {
     TResult Function()? fetchProductsAddedToCart,
     TResult Function(PriceAggregate priceAggregate, EZReachBanner? banner)?
         upsertCart,
-    TResult Function(List<MaterialInfo> items,
-            RequestCounterOfferDetails counterOfferDetails)?
+    TResult Function(
+            List<MaterialInfo> items,
+            RequestCounterOfferDetails counterOfferDetails,
+            Map<MaterialNumber, TenderContract> tenderContractList)?
         addHistoryItemsToCart,
     TResult Function(PriceAggregate priceAggregate, EZReachBanner? banner)?
         upsertCartItems,
@@ -2478,8 +2520,10 @@ class _$UpsertCartImpl implements _UpsertCart {
     required TResult Function(
             PriceAggregate priceAggregate, EZReachBanner? banner)
         upsertCart,
-    required TResult Function(List<MaterialInfo> items,
-            RequestCounterOfferDetails counterOfferDetails)
+    required TResult Function(
+            List<MaterialInfo> items,
+            RequestCounterOfferDetails counterOfferDetails,
+            Map<MaterialNumber, TenderContract> tenderContractList)
         addHistoryItemsToCart,
     required TResult Function(
             PriceAggregate priceAggregate, EZReachBanner? banner)
@@ -2528,8 +2572,10 @@ class _$UpsertCartImpl implements _UpsertCart {
     TResult? Function()? fetchProductsAddedToCart,
     TResult? Function(PriceAggregate priceAggregate, EZReachBanner? banner)?
         upsertCart,
-    TResult? Function(List<MaterialInfo> items,
-            RequestCounterOfferDetails counterOfferDetails)?
+    TResult? Function(
+            List<MaterialInfo> items,
+            RequestCounterOfferDetails counterOfferDetails,
+            Map<MaterialNumber, TenderContract> tenderContractList)?
         addHistoryItemsToCart,
     TResult? Function(PriceAggregate priceAggregate, EZReachBanner? banner)?
         upsertCartItems,
@@ -2576,8 +2622,10 @@ class _$UpsertCartImpl implements _UpsertCart {
     TResult Function()? fetchProductsAddedToCart,
     TResult Function(PriceAggregate priceAggregate, EZReachBanner? banner)?
         upsertCart,
-    TResult Function(List<MaterialInfo> items,
-            RequestCounterOfferDetails counterOfferDetails)?
+    TResult Function(
+            List<MaterialInfo> items,
+            RequestCounterOfferDetails counterOfferDetails,
+            Map<MaterialNumber, TenderContract> tenderContractList)?
         addHistoryItemsToCart,
     TResult Function(PriceAggregate priceAggregate, EZReachBanner? banner)?
         upsertCartItems,
@@ -2736,7 +2784,8 @@ abstract class _$$addHistoryItemsToCartImplCopyWith<$Res> {
   @useResult
   $Res call(
       {List<MaterialInfo> items,
-      RequestCounterOfferDetails counterOfferDetails});
+      RequestCounterOfferDetails counterOfferDetails,
+      Map<MaterialNumber, TenderContract> tenderContractList});
 
   $RequestCounterOfferDetailsCopyWith<$Res> get counterOfferDetails;
 }
@@ -2754,6 +2803,7 @@ class __$$addHistoryItemsToCartImplCopyWithImpl<$Res>
   $Res call({
     Object? items = null,
     Object? counterOfferDetails = null,
+    Object? tenderContractList = null,
   }) {
     return _then(_$addHistoryItemsToCartImpl(
       items: null == items
@@ -2764,6 +2814,10 @@ class __$$addHistoryItemsToCartImplCopyWithImpl<$Res>
           ? _value.counterOfferDetails
           : counterOfferDetails // ignore: cast_nullable_to_non_nullable
               as RequestCounterOfferDetails,
+      tenderContractList: null == tenderContractList
+          ? _value._tenderContractList
+          : tenderContractList // ignore: cast_nullable_to_non_nullable
+              as Map<MaterialNumber, TenderContract>,
     ));
   }
 
@@ -2782,8 +2836,10 @@ class __$$addHistoryItemsToCartImplCopyWithImpl<$Res>
 class _$addHistoryItemsToCartImpl implements _addHistoryItemsToCart {
   const _$addHistoryItemsToCartImpl(
       {required final List<MaterialInfo> items,
-      required this.counterOfferDetails})
-      : _items = items;
+      required this.counterOfferDetails,
+      required final Map<MaterialNumber, TenderContract> tenderContractList})
+      : _items = items,
+        _tenderContractList = tenderContractList;
 
   final List<MaterialInfo> _items;
   @override
@@ -2795,10 +2851,18 @@ class _$addHistoryItemsToCartImpl implements _addHistoryItemsToCart {
 
   @override
   final RequestCounterOfferDetails counterOfferDetails;
+  final Map<MaterialNumber, TenderContract> _tenderContractList;
+  @override
+  Map<MaterialNumber, TenderContract> get tenderContractList {
+    if (_tenderContractList is EqualUnmodifiableMapView)
+      return _tenderContractList;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(_tenderContractList);
+  }
 
   @override
   String toString() {
-    return 'CartEvent.addHistoryItemsToCart(items: $items, counterOfferDetails: $counterOfferDetails)';
+    return 'CartEvent.addHistoryItemsToCart(items: $items, counterOfferDetails: $counterOfferDetails, tenderContractList: $tenderContractList)';
   }
 
   @override
@@ -2808,12 +2872,17 @@ class _$addHistoryItemsToCartImpl implements _addHistoryItemsToCart {
             other is _$addHistoryItemsToCartImpl &&
             const DeepCollectionEquality().equals(other._items, _items) &&
             (identical(other.counterOfferDetails, counterOfferDetails) ||
-                other.counterOfferDetails == counterOfferDetails));
+                other.counterOfferDetails == counterOfferDetails) &&
+            const DeepCollectionEquality()
+                .equals(other._tenderContractList, _tenderContractList));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType,
-      const DeepCollectionEquality().hash(_items), counterOfferDetails);
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(_items),
+      counterOfferDetails,
+      const DeepCollectionEquality().hash(_tenderContractList));
 
   @JsonKey(ignore: true)
   @override
@@ -2845,8 +2914,10 @@ class _$addHistoryItemsToCartImpl implements _addHistoryItemsToCart {
     required TResult Function(
             PriceAggregate priceAggregate, EZReachBanner? banner)
         upsertCart,
-    required TResult Function(List<MaterialInfo> items,
-            RequestCounterOfferDetails counterOfferDetails)
+    required TResult Function(
+            List<MaterialInfo> items,
+            RequestCounterOfferDetails counterOfferDetails,
+            Map<MaterialNumber, TenderContract> tenderContractList)
         addHistoryItemsToCart,
     required TResult Function(
             PriceAggregate priceAggregate, EZReachBanner? banner)
@@ -2872,7 +2943,8 @@ class _$addHistoryItemsToCartImpl implements _addHistoryItemsToCart {
             Map<MaterialNumber, List<TenderContract>> tenderContractList)
         updateTenderContract,
   }) {
-    return addHistoryItemsToCart(items, counterOfferDetails);
+    return addHistoryItemsToCart(
+        items, counterOfferDetails, tenderContractList);
   }
 
   @override
@@ -2895,8 +2967,10 @@ class _$addHistoryItemsToCartImpl implements _addHistoryItemsToCart {
     TResult? Function()? fetchProductsAddedToCart,
     TResult? Function(PriceAggregate priceAggregate, EZReachBanner? banner)?
         upsertCart,
-    TResult? Function(List<MaterialInfo> items,
-            RequestCounterOfferDetails counterOfferDetails)?
+    TResult? Function(
+            List<MaterialInfo> items,
+            RequestCounterOfferDetails counterOfferDetails,
+            Map<MaterialNumber, TenderContract> tenderContractList)?
         addHistoryItemsToCart,
     TResult? Function(PriceAggregate priceAggregate, EZReachBanner? banner)?
         upsertCartItems,
@@ -2920,7 +2994,8 @@ class _$addHistoryItemsToCartImpl implements _addHistoryItemsToCart {
             Map<MaterialNumber, List<TenderContract>> tenderContractList)?
         updateTenderContract,
   }) {
-    return addHistoryItemsToCart?.call(items, counterOfferDetails);
+    return addHistoryItemsToCart?.call(
+        items, counterOfferDetails, tenderContractList);
   }
 
   @override
@@ -2943,8 +3018,10 @@ class _$addHistoryItemsToCartImpl implements _addHistoryItemsToCart {
     TResult Function()? fetchProductsAddedToCart,
     TResult Function(PriceAggregate priceAggregate, EZReachBanner? banner)?
         upsertCart,
-    TResult Function(List<MaterialInfo> items,
-            RequestCounterOfferDetails counterOfferDetails)?
+    TResult Function(
+            List<MaterialInfo> items,
+            RequestCounterOfferDetails counterOfferDetails,
+            Map<MaterialNumber, TenderContract> tenderContractList)?
         addHistoryItemsToCart,
     TResult Function(PriceAggregate priceAggregate, EZReachBanner? banner)?
         upsertCartItems,
@@ -2970,7 +3047,8 @@ class _$addHistoryItemsToCartImpl implements _addHistoryItemsToCart {
     required TResult orElse(),
   }) {
     if (addHistoryItemsToCart != null) {
-      return addHistoryItemsToCart(items, counterOfferDetails);
+      return addHistoryItemsToCart(
+          items, counterOfferDetails, tenderContractList);
     }
     return orElse();
   }
@@ -3084,12 +3162,14 @@ class _$addHistoryItemsToCartImpl implements _addHistoryItemsToCart {
 
 abstract class _addHistoryItemsToCart implements CartEvent {
   const factory _addHistoryItemsToCart(
-          {required final List<MaterialInfo> items,
-          required final RequestCounterOfferDetails counterOfferDetails}) =
-      _$addHistoryItemsToCartImpl;
+      {required final List<MaterialInfo> items,
+      required final RequestCounterOfferDetails counterOfferDetails,
+      required final Map<MaterialNumber, TenderContract>
+          tenderContractList}) = _$addHistoryItemsToCartImpl;
 
   List<MaterialInfo> get items;
   RequestCounterOfferDetails get counterOfferDetails;
+  Map<MaterialNumber, TenderContract> get tenderContractList;
   @JsonKey(ignore: true)
   _$$addHistoryItemsToCartImplCopyWith<_$addHistoryItemsToCartImpl>
       get copyWith => throw _privateConstructorUsedError;
@@ -3212,8 +3292,10 @@ class _$UpsertCartItemsImpl implements _UpsertCartItems {
     required TResult Function(
             PriceAggregate priceAggregate, EZReachBanner? banner)
         upsertCart,
-    required TResult Function(List<MaterialInfo> items,
-            RequestCounterOfferDetails counterOfferDetails)
+    required TResult Function(
+            List<MaterialInfo> items,
+            RequestCounterOfferDetails counterOfferDetails,
+            Map<MaterialNumber, TenderContract> tenderContractList)
         addHistoryItemsToCart,
     required TResult Function(
             PriceAggregate priceAggregate, EZReachBanner? banner)
@@ -3262,8 +3344,10 @@ class _$UpsertCartItemsImpl implements _UpsertCartItems {
     TResult? Function()? fetchProductsAddedToCart,
     TResult? Function(PriceAggregate priceAggregate, EZReachBanner? banner)?
         upsertCart,
-    TResult? Function(List<MaterialInfo> items,
-            RequestCounterOfferDetails counterOfferDetails)?
+    TResult? Function(
+            List<MaterialInfo> items,
+            RequestCounterOfferDetails counterOfferDetails,
+            Map<MaterialNumber, TenderContract> tenderContractList)?
         addHistoryItemsToCart,
     TResult? Function(PriceAggregate priceAggregate, EZReachBanner? banner)?
         upsertCartItems,
@@ -3310,8 +3394,10 @@ class _$UpsertCartItemsImpl implements _UpsertCartItems {
     TResult Function()? fetchProductsAddedToCart,
     TResult Function(PriceAggregate priceAggregate, EZReachBanner? banner)?
         upsertCart,
-    TResult Function(List<MaterialInfo> items,
-            RequestCounterOfferDetails counterOfferDetails)?
+    TResult Function(
+            List<MaterialInfo> items,
+            RequestCounterOfferDetails counterOfferDetails,
+            Map<MaterialNumber, TenderContract> tenderContractList)?
         addHistoryItemsToCart,
     TResult Function(PriceAggregate priceAggregate, EZReachBanner? banner)?
         upsertCartItems,
@@ -3559,8 +3645,10 @@ class _$GetDetailsProductsAddedToCartImpl
     required TResult Function(
             PriceAggregate priceAggregate, EZReachBanner? banner)
         upsertCart,
-    required TResult Function(List<MaterialInfo> items,
-            RequestCounterOfferDetails counterOfferDetails)
+    required TResult Function(
+            List<MaterialInfo> items,
+            RequestCounterOfferDetails counterOfferDetails,
+            Map<MaterialNumber, TenderContract> tenderContractList)
         addHistoryItemsToCart,
     required TResult Function(
             PriceAggregate priceAggregate, EZReachBanner? banner)
@@ -3609,8 +3697,10 @@ class _$GetDetailsProductsAddedToCartImpl
     TResult? Function()? fetchProductsAddedToCart,
     TResult? Function(PriceAggregate priceAggregate, EZReachBanner? banner)?
         upsertCart,
-    TResult? Function(List<MaterialInfo> items,
-            RequestCounterOfferDetails counterOfferDetails)?
+    TResult? Function(
+            List<MaterialInfo> items,
+            RequestCounterOfferDetails counterOfferDetails,
+            Map<MaterialNumber, TenderContract> tenderContractList)?
         addHistoryItemsToCart,
     TResult? Function(PriceAggregate priceAggregate, EZReachBanner? banner)?
         upsertCartItems,
@@ -3657,8 +3747,10 @@ class _$GetDetailsProductsAddedToCartImpl
     TResult Function()? fetchProductsAddedToCart,
     TResult Function(PriceAggregate priceAggregate, EZReachBanner? banner)?
         upsertCart,
-    TResult Function(List<MaterialInfo> items,
-            RequestCounterOfferDetails counterOfferDetails)?
+    TResult Function(
+            List<MaterialInfo> items,
+            RequestCounterOfferDetails counterOfferDetails,
+            Map<MaterialNumber, TenderContract> tenderContractList)?
         addHistoryItemsToCart,
     TResult Function(PriceAggregate priceAggregate, EZReachBanner? banner)?
         upsertCartItems,
@@ -3902,8 +3994,10 @@ class _$UpdatePriceProductImpl implements _UpdatePriceProduct {
     required TResult Function(
             PriceAggregate priceAggregate, EZReachBanner? banner)
         upsertCart,
-    required TResult Function(List<MaterialInfo> items,
-            RequestCounterOfferDetails counterOfferDetails)
+    required TResult Function(
+            List<MaterialInfo> items,
+            RequestCounterOfferDetails counterOfferDetails,
+            Map<MaterialNumber, TenderContract> tenderContractList)
         addHistoryItemsToCart,
     required TResult Function(
             PriceAggregate priceAggregate, EZReachBanner? banner)
@@ -3952,8 +4046,10 @@ class _$UpdatePriceProductImpl implements _UpdatePriceProduct {
     TResult? Function()? fetchProductsAddedToCart,
     TResult? Function(PriceAggregate priceAggregate, EZReachBanner? banner)?
         upsertCart,
-    TResult? Function(List<MaterialInfo> items,
-            RequestCounterOfferDetails counterOfferDetails)?
+    TResult? Function(
+            List<MaterialInfo> items,
+            RequestCounterOfferDetails counterOfferDetails,
+            Map<MaterialNumber, TenderContract> tenderContractList)?
         addHistoryItemsToCart,
     TResult? Function(PriceAggregate priceAggregate, EZReachBanner? banner)?
         upsertCartItems,
@@ -4000,8 +4096,10 @@ class _$UpdatePriceProductImpl implements _UpdatePriceProduct {
     TResult Function()? fetchProductsAddedToCart,
     TResult Function(PriceAggregate priceAggregate, EZReachBanner? banner)?
         upsertCart,
-    TResult Function(List<MaterialInfo> items,
-            RequestCounterOfferDetails counterOfferDetails)?
+    TResult Function(
+            List<MaterialInfo> items,
+            RequestCounterOfferDetails counterOfferDetails,
+            Map<MaterialNumber, TenderContract> tenderContractList)?
         addHistoryItemsToCart,
     TResult Function(PriceAggregate priceAggregate, EZReachBanner? banner)?
         upsertCartItems,
@@ -4208,8 +4306,10 @@ class _$UpdateProductStockImpl implements _UpdateProductStock {
     required TResult Function(
             PriceAggregate priceAggregate, EZReachBanner? banner)
         upsertCart,
-    required TResult Function(List<MaterialInfo> items,
-            RequestCounterOfferDetails counterOfferDetails)
+    required TResult Function(
+            List<MaterialInfo> items,
+            RequestCounterOfferDetails counterOfferDetails,
+            Map<MaterialNumber, TenderContract> tenderContractList)
         addHistoryItemsToCart,
     required TResult Function(
             PriceAggregate priceAggregate, EZReachBanner? banner)
@@ -4258,8 +4358,10 @@ class _$UpdateProductStockImpl implements _UpdateProductStock {
     TResult? Function()? fetchProductsAddedToCart,
     TResult? Function(PriceAggregate priceAggregate, EZReachBanner? banner)?
         upsertCart,
-    TResult? Function(List<MaterialInfo> items,
-            RequestCounterOfferDetails counterOfferDetails)?
+    TResult? Function(
+            List<MaterialInfo> items,
+            RequestCounterOfferDetails counterOfferDetails,
+            Map<MaterialNumber, TenderContract> tenderContractList)?
         addHistoryItemsToCart,
     TResult? Function(PriceAggregate priceAggregate, EZReachBanner? banner)?
         upsertCartItems,
@@ -4306,8 +4408,10 @@ class _$UpdateProductStockImpl implements _UpdateProductStock {
     TResult Function()? fetchProductsAddedToCart,
     TResult Function(PriceAggregate priceAggregate, EZReachBanner? banner)?
         upsertCart,
-    TResult Function(List<MaterialInfo> items,
-            RequestCounterOfferDetails counterOfferDetails)?
+    TResult Function(
+            List<MaterialInfo> items,
+            RequestCounterOfferDetails counterOfferDetails,
+            Map<MaterialNumber, TenderContract> tenderContractList)?
         addHistoryItemsToCart,
     TResult Function(PriceAggregate priceAggregate, EZReachBanner? banner)?
         upsertCartItems,
@@ -4545,8 +4649,10 @@ class _$RemoveInvalidProductsImpl implements _RemoveInvalidProducts {
     required TResult Function(
             PriceAggregate priceAggregate, EZReachBanner? banner)
         upsertCart,
-    required TResult Function(List<MaterialInfo> items,
-            RequestCounterOfferDetails counterOfferDetails)
+    required TResult Function(
+            List<MaterialInfo> items,
+            RequestCounterOfferDetails counterOfferDetails,
+            Map<MaterialNumber, TenderContract> tenderContractList)
         addHistoryItemsToCart,
     required TResult Function(
             PriceAggregate priceAggregate, EZReachBanner? banner)
@@ -4595,8 +4701,10 @@ class _$RemoveInvalidProductsImpl implements _RemoveInvalidProducts {
     TResult? Function()? fetchProductsAddedToCart,
     TResult? Function(PriceAggregate priceAggregate, EZReachBanner? banner)?
         upsertCart,
-    TResult? Function(List<MaterialInfo> items,
-            RequestCounterOfferDetails counterOfferDetails)?
+    TResult? Function(
+            List<MaterialInfo> items,
+            RequestCounterOfferDetails counterOfferDetails,
+            Map<MaterialNumber, TenderContract> tenderContractList)?
         addHistoryItemsToCart,
     TResult? Function(PriceAggregate priceAggregate, EZReachBanner? banner)?
         upsertCartItems,
@@ -4643,8 +4751,10 @@ class _$RemoveInvalidProductsImpl implements _RemoveInvalidProducts {
     TResult Function()? fetchProductsAddedToCart,
     TResult Function(PriceAggregate priceAggregate, EZReachBanner? banner)?
         upsertCart,
-    TResult Function(List<MaterialInfo> items,
-            RequestCounterOfferDetails counterOfferDetails)?
+    TResult Function(
+            List<MaterialInfo> items,
+            RequestCounterOfferDetails counterOfferDetails,
+            Map<MaterialNumber, TenderContract> tenderContractList)?
         addHistoryItemsToCart,
     TResult Function(PriceAggregate priceAggregate, EZReachBanner? banner)?
         upsertCartItems,
@@ -4902,8 +5012,10 @@ class _$UpsertCartItemsWithComboOffersImpl
     required TResult Function(
             PriceAggregate priceAggregate, EZReachBanner? banner)
         upsertCart,
-    required TResult Function(List<MaterialInfo> items,
-            RequestCounterOfferDetails counterOfferDetails)
+    required TResult Function(
+            List<MaterialInfo> items,
+            RequestCounterOfferDetails counterOfferDetails,
+            Map<MaterialNumber, TenderContract> tenderContractList)
         addHistoryItemsToCart,
     required TResult Function(
             PriceAggregate priceAggregate, EZReachBanner? banner)
@@ -4952,8 +5064,10 @@ class _$UpsertCartItemsWithComboOffersImpl
     TResult? Function()? fetchProductsAddedToCart,
     TResult? Function(PriceAggregate priceAggregate, EZReachBanner? banner)?
         upsertCart,
-    TResult? Function(List<MaterialInfo> items,
-            RequestCounterOfferDetails counterOfferDetails)?
+    TResult? Function(
+            List<MaterialInfo> items,
+            RequestCounterOfferDetails counterOfferDetails,
+            Map<MaterialNumber, TenderContract> tenderContractList)?
         addHistoryItemsToCart,
     TResult? Function(PriceAggregate priceAggregate, EZReachBanner? banner)?
         upsertCartItems,
@@ -5000,8 +5114,10 @@ class _$UpsertCartItemsWithComboOffersImpl
     TResult Function()? fetchProductsAddedToCart,
     TResult Function(PriceAggregate priceAggregate, EZReachBanner? banner)?
         upsertCart,
-    TResult Function(List<MaterialInfo> items,
-            RequestCounterOfferDetails counterOfferDetails)?
+    TResult Function(
+            List<MaterialInfo> items,
+            RequestCounterOfferDetails counterOfferDetails,
+            Map<MaterialNumber, TenderContract> tenderContractList)?
         addHistoryItemsToCart,
     TResult Function(PriceAggregate priceAggregate, EZReachBanner? banner)?
         upsertCartItems,
@@ -5255,8 +5371,10 @@ class _$UpdateCartProductWithCounterOfferImpl
     required TResult Function(
             PriceAggregate priceAggregate, EZReachBanner? banner)
         upsertCart,
-    required TResult Function(List<MaterialInfo> items,
-            RequestCounterOfferDetails counterOfferDetails)
+    required TResult Function(
+            List<MaterialInfo> items,
+            RequestCounterOfferDetails counterOfferDetails,
+            Map<MaterialNumber, TenderContract> tenderContractList)
         addHistoryItemsToCart,
     required TResult Function(
             PriceAggregate priceAggregate, EZReachBanner? banner)
@@ -5305,8 +5423,10 @@ class _$UpdateCartProductWithCounterOfferImpl
     TResult? Function()? fetchProductsAddedToCart,
     TResult? Function(PriceAggregate priceAggregate, EZReachBanner? banner)?
         upsertCart,
-    TResult? Function(List<MaterialInfo> items,
-            RequestCounterOfferDetails counterOfferDetails)?
+    TResult? Function(
+            List<MaterialInfo> items,
+            RequestCounterOfferDetails counterOfferDetails,
+            Map<MaterialNumber, TenderContract> tenderContractList)?
         addHistoryItemsToCart,
     TResult? Function(PriceAggregate priceAggregate, EZReachBanner? banner)?
         upsertCartItems,
@@ -5353,8 +5473,10 @@ class _$UpdateCartProductWithCounterOfferImpl
     TResult Function()? fetchProductsAddedToCart,
     TResult Function(PriceAggregate priceAggregate, EZReachBanner? banner)?
         upsertCart,
-    TResult Function(List<MaterialInfo> items,
-            RequestCounterOfferDetails counterOfferDetails)?
+    TResult Function(
+            List<MaterialInfo> items,
+            RequestCounterOfferDetails counterOfferDetails,
+            Map<MaterialNumber, TenderContract> tenderContractList)?
         addHistoryItemsToCart,
     TResult Function(PriceAggregate priceAggregate, EZReachBanner? banner)?
         upsertCartItems,
@@ -5565,8 +5687,10 @@ class _$UpdatePriceForIdMarketImpl implements _UpdatePriceForIdMarket {
     required TResult Function(
             PriceAggregate priceAggregate, EZReachBanner? banner)
         upsertCart,
-    required TResult Function(List<MaterialInfo> items,
-            RequestCounterOfferDetails counterOfferDetails)
+    required TResult Function(
+            List<MaterialInfo> items,
+            RequestCounterOfferDetails counterOfferDetails,
+            Map<MaterialNumber, TenderContract> tenderContractList)
         addHistoryItemsToCart,
     required TResult Function(
             PriceAggregate priceAggregate, EZReachBanner? banner)
@@ -5615,8 +5739,10 @@ class _$UpdatePriceForIdMarketImpl implements _UpdatePriceForIdMarket {
     TResult? Function()? fetchProductsAddedToCart,
     TResult? Function(PriceAggregate priceAggregate, EZReachBanner? banner)?
         upsertCart,
-    TResult? Function(List<MaterialInfo> items,
-            RequestCounterOfferDetails counterOfferDetails)?
+    TResult? Function(
+            List<MaterialInfo> items,
+            RequestCounterOfferDetails counterOfferDetails,
+            Map<MaterialNumber, TenderContract> tenderContractList)?
         addHistoryItemsToCart,
     TResult? Function(PriceAggregate priceAggregate, EZReachBanner? banner)?
         upsertCartItems,
@@ -5663,8 +5789,10 @@ class _$UpdatePriceForIdMarketImpl implements _UpdatePriceForIdMarket {
     TResult Function()? fetchProductsAddedToCart,
     TResult Function(PriceAggregate priceAggregate, EZReachBanner? banner)?
         upsertCart,
-    TResult Function(List<MaterialInfo> items,
-            RequestCounterOfferDetails counterOfferDetails)?
+    TResult Function(
+            List<MaterialInfo> items,
+            RequestCounterOfferDetails counterOfferDetails,
+            Map<MaterialNumber, TenderContract> tenderContractList)?
         addHistoryItemsToCart,
     TResult Function(PriceAggregate priceAggregate, EZReachBanner? banner)?
         upsertCartItems,
@@ -5925,8 +6053,10 @@ class _$UpdateProductDeterminationImpl implements _UpdateProductDetermination {
     required TResult Function(
             PriceAggregate priceAggregate, EZReachBanner? banner)
         upsertCart,
-    required TResult Function(List<MaterialInfo> items,
-            RequestCounterOfferDetails counterOfferDetails)
+    required TResult Function(
+            List<MaterialInfo> items,
+            RequestCounterOfferDetails counterOfferDetails,
+            Map<MaterialNumber, TenderContract> tenderContractList)
         addHistoryItemsToCart,
     required TResult Function(
             PriceAggregate priceAggregate, EZReachBanner? banner)
@@ -5976,8 +6106,10 @@ class _$UpdateProductDeterminationImpl implements _UpdateProductDetermination {
     TResult? Function()? fetchProductsAddedToCart,
     TResult? Function(PriceAggregate priceAggregate, EZReachBanner? banner)?
         upsertCart,
-    TResult? Function(List<MaterialInfo> items,
-            RequestCounterOfferDetails counterOfferDetails)?
+    TResult? Function(
+            List<MaterialInfo> items,
+            RequestCounterOfferDetails counterOfferDetails,
+            Map<MaterialNumber, TenderContract> tenderContractList)?
         addHistoryItemsToCart,
     TResult? Function(PriceAggregate priceAggregate, EZReachBanner? banner)?
         upsertCartItems,
@@ -6025,8 +6157,10 @@ class _$UpdateProductDeterminationImpl implements _UpdateProductDetermination {
     TResult Function()? fetchProductsAddedToCart,
     TResult Function(PriceAggregate priceAggregate, EZReachBanner? banner)?
         upsertCart,
-    TResult Function(List<MaterialInfo> items,
-            RequestCounterOfferDetails counterOfferDetails)?
+    TResult Function(
+            List<MaterialInfo> items,
+            RequestCounterOfferDetails counterOfferDetails,
+            Map<MaterialNumber, TenderContract> tenderContractList)?
         addHistoryItemsToCart,
     TResult Function(PriceAggregate priceAggregate, EZReachBanner? banner)?
         upsertCartItems,
@@ -6240,8 +6374,10 @@ class _$FetchGrandTotalPriceForIdMarketImpl
     required TResult Function(
             PriceAggregate priceAggregate, EZReachBanner? banner)
         upsertCart,
-    required TResult Function(List<MaterialInfo> items,
-            RequestCounterOfferDetails counterOfferDetails)
+    required TResult Function(
+            List<MaterialInfo> items,
+            RequestCounterOfferDetails counterOfferDetails,
+            Map<MaterialNumber, TenderContract> tenderContractList)
         addHistoryItemsToCart,
     required TResult Function(
             PriceAggregate priceAggregate, EZReachBanner? banner)
@@ -6290,8 +6426,10 @@ class _$FetchGrandTotalPriceForIdMarketImpl
     TResult? Function()? fetchProductsAddedToCart,
     TResult? Function(PriceAggregate priceAggregate, EZReachBanner? banner)?
         upsertCart,
-    TResult? Function(List<MaterialInfo> items,
-            RequestCounterOfferDetails counterOfferDetails)?
+    TResult? Function(
+            List<MaterialInfo> items,
+            RequestCounterOfferDetails counterOfferDetails,
+            Map<MaterialNumber, TenderContract> tenderContractList)?
         addHistoryItemsToCart,
     TResult? Function(PriceAggregate priceAggregate, EZReachBanner? banner)?
         upsertCartItems,
@@ -6338,8 +6476,10 @@ class _$FetchGrandTotalPriceForIdMarketImpl
     TResult Function()? fetchProductsAddedToCart,
     TResult Function(PriceAggregate priceAggregate, EZReachBanner? banner)?
         upsertCart,
-    TResult Function(List<MaterialInfo> items,
-            RequestCounterOfferDetails counterOfferDetails)?
+    TResult Function(
+            List<MaterialInfo> items,
+            RequestCounterOfferDetails counterOfferDetails,
+            Map<MaterialNumber, TenderContract> tenderContractList)?
         addHistoryItemsToCart,
     TResult Function(PriceAggregate priceAggregate, EZReachBanner? banner)?
         upsertCartItems,
@@ -6579,8 +6719,10 @@ class _$UpdateTenderContractImpl implements _UpdateTenderContract {
     required TResult Function(
             PriceAggregate priceAggregate, EZReachBanner? banner)
         upsertCart,
-    required TResult Function(List<MaterialInfo> items,
-            RequestCounterOfferDetails counterOfferDetails)
+    required TResult Function(
+            List<MaterialInfo> items,
+            RequestCounterOfferDetails counterOfferDetails,
+            Map<MaterialNumber, TenderContract> tenderContractList)
         addHistoryItemsToCart,
     required TResult Function(
             PriceAggregate priceAggregate, EZReachBanner? banner)
@@ -6629,8 +6771,10 @@ class _$UpdateTenderContractImpl implements _UpdateTenderContract {
     TResult? Function()? fetchProductsAddedToCart,
     TResult? Function(PriceAggregate priceAggregate, EZReachBanner? banner)?
         upsertCart,
-    TResult? Function(List<MaterialInfo> items,
-            RequestCounterOfferDetails counterOfferDetails)?
+    TResult? Function(
+            List<MaterialInfo> items,
+            RequestCounterOfferDetails counterOfferDetails,
+            Map<MaterialNumber, TenderContract> tenderContractList)?
         addHistoryItemsToCart,
     TResult? Function(PriceAggregate priceAggregate, EZReachBanner? banner)?
         upsertCartItems,
@@ -6677,8 +6821,10 @@ class _$UpdateTenderContractImpl implements _UpdateTenderContract {
     TResult Function()? fetchProductsAddedToCart,
     TResult Function(PriceAggregate priceAggregate, EZReachBanner? banner)?
         upsertCart,
-    TResult Function(List<MaterialInfo> items,
-            RequestCounterOfferDetails counterOfferDetails)?
+    TResult Function(
+            List<MaterialInfo> items,
+            RequestCounterOfferDetails counterOfferDetails,
+            Map<MaterialNumber, TenderContract> tenderContractList)?
         addHistoryItemsToCart,
     TResult Function(PriceAggregate priceAggregate, EZReachBanner? banner)?
         upsertCartItems,

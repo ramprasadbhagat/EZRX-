@@ -490,7 +490,7 @@ void main() {
       final orderHistoryList = orderHistory.copyWith(
         orderHistoryItems: [
           orderHistory.orderHistoryItems
-              .firstWhere((e) => !e.tenderOrderReason.isEmpty)
+              .firstWhere((e) => e.tenderOrderReason.isNotEmpty)
               .copyWith(
                 tenderContractNumber: fakeTenderContractNumber,
                 tenderOrderReason: fakeTenderOrderReason,
@@ -555,7 +555,7 @@ void main() {
       final orderHistoryList = orderHistory.copyWith(
         orderHistoryItems: [
           orderHistory.orderHistoryItems
-              .firstWhere((e) => !e.tenderOrderReason.isEmpty)
+              .firstWhere((e) => e.tenderOrderReason.isNotEmpty)
               .copyWith(
                 tenderContractNumber: fakeTenderContractNumber,
                 tenderOrderReason: fakeTenderOrderReason,

@@ -1,6 +1,7 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/application/order/re_order_permission/re_order_permission_bloc.dart';
+import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_order_items.dart';
@@ -97,7 +98,7 @@ void main() {
                 .toList(),
             salesOrganisation: fakeMYSalesOrganisation,
             shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
-            user: fakeSalesRepUser, 
+            user: fakeSalesRepUser,
             salesOrganisationConfigs: fakeMYSalesOrgConfigs,
           ),
         ).thenAnswer(
@@ -118,7 +119,11 @@ void main() {
         initializedState.copyWith(
           orderNumberWillUpsert: fakeViewByOrder.orderHeaders.first.orderNumber,
           validOrderItems: mockValidOrderHistoryDetailsOrderItems
-              .map((e) => e.reOrderMaterialInfo)
+              .map(
+                (e) => PriceAggregate.empty().copyWith(
+                  materialInfo: e.reOrderMaterialInfo,
+                ),
+              )
               .toList(),
         ),
       ],
@@ -266,7 +271,12 @@ void main() {
         ),
         initializedState.copyWith(
           isFetching: false,
-          validOrderItems: [fakeOrderHistoryItem.reOrderMaterialInfo],
+          validOrderItems: [
+            PriceAggregate.empty().copyWith(
+              materialInfo: fakeOrderHistoryItem.reOrderMaterialInfo,
+              tenderContract: fakeOrderHistoryItem.orderItemTenderContract,
+            ),
+          ],
         ),
       ],
     );
@@ -325,12 +335,15 @@ void main() {
         initializedState.copyWith(
           isFetching: false,
           validOrderItems: [
-            fakeOrderHistoryItem
-                .copyWith(
-                  isBonusMaterial: true,
-                  lineNumber: LineNumber('12'),
-                )
-                .reOrderMaterialInfo,
+            PriceAggregate.empty().copyWith(
+              materialInfo: fakeOrderHistoryItem
+                  .copyWith(
+                    isBonusMaterial: true,
+                    lineNumber: LineNumber('12'),
+                  )
+                  .reOrderMaterialInfo,
+              tenderContract: fakeOrderHistoryItem.orderItemTenderContract,
+            ),
           ],
         ),
       ],

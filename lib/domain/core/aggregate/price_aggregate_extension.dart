@@ -275,7 +275,7 @@ extension PriceAggregateExtension on List<PriceAggregate> {
 
   bool get hasTenderContract => any(
         (element) =>
-            !element.tenderContract.tenderOrderReason.isEmpty &&
+            element.tenderContract.tenderOrderReason.isNotEmpty &&
             element.tenderContract.contractNumber.isValid(),
       );
   bool get hasTenderContractWithReason730 => any(

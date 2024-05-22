@@ -5,7 +5,7 @@ class ReOrderPermissionState with _$ReOrderPermissionState {
   const ReOrderPermissionState._();
 
   const factory ReOrderPermissionState({
-    required List<MaterialInfo> validOrderItems,
+    required List<PriceAggregate> validOrderItems,
     required bool isFetching,
     required Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
     required OrderNumber orderNumberWillUpsert,
@@ -18,7 +18,7 @@ class ReOrderPermissionState with _$ReOrderPermissionState {
 
   factory ReOrderPermissionState.initial() => ReOrderPermissionState(
         orderNumberWillUpsert: OrderNumber(''),
-        validOrderItems: <MaterialInfo>[],
+        validOrderItems: <PriceAggregate>[],
         isFetching: false,
         failureOrSuccessOption: none(),
         customerCodeInfo: CustomerCodeInfo.empty(),
@@ -28,10 +28,13 @@ class ReOrderPermissionState with _$ReOrderPermissionState {
         user: User.empty(),
       );
 
+  List<MaterialInfo> get materialInfoList =>
+      validOrderItems.map((e) => e.materialInfo).toList();
+
   List<MaterialInfo> availableProducts(
     Map<MaterialNumber, Price> materialPrice,
   ) {
-    final bonusMaterials = validOrderItems
+    final bonusMaterials = materialInfoList
         .map(
           (e) => PriceAggregate.empty()
               .copyWith(
@@ -44,6 +47,12 @@ class ReOrderPermissionState with _$ReOrderPermissionState {
         .expand((bonusList) => bonusList)
         .toList();
 
-    return [...validOrderItems, ...bonusMaterials];
+    return [...materialInfoList, ...bonusMaterials];
   }
+
+  Map<MaterialNumber, TenderContract> get availableTenderContract =>
+      <MaterialNumber, TenderContract>{
+        for (final item in validOrderItems)
+          item.materialInfo.materialNumber: item.tenderContract,
+      };
 }
