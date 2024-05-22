@@ -484,7 +484,7 @@ void main() {
         ),
       ),
       expect: () => [
-        const DeepLinkingState.redirectPaymentHome(),
+        const DeepLinkingState.redirectZPPaymentHome(),
       ],
     );
     blocTest<DeepLinkingBloc, DeepLinkingState>(

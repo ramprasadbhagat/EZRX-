@@ -889,7 +889,10 @@ bool isZPInvoiceDetailLink(String path) =>
 bool isMPInvoiceDetailLink(String path) =>
     path == '/marketplace-payments/account-summary/invoice-details';
 
-bool isMyAccountPaymentLink(String path) => path == '/my-account/payments';
+bool isZPMyAccountPaymentLink(String path) => path == '/my-account/payments';
+
+bool isMPMyAccountPaymentLink(String path) =>
+    path == '/my-account/marketplace-payments';
 
 bool isContactUsLink(String path) => path == '/contact-us';
 

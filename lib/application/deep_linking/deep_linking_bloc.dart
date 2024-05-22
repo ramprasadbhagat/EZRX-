@@ -217,8 +217,10 @@ class DeepLinkingBloc extends Bloc<DeepLinkingEvent, DeepLinkingState> {
                   ),
                 ),
               );
-            } else if (link.isMyAccountPayment) {
-              emit(const DeepLinkingState.redirectPaymentHome());
+            } else if (link.isZPMyAccountPayment) {
+              emit(const DeepLinkingState.redirectZPPaymentHome());
+            } else if (link.isMPMyAccountPayment) {
+              emit(const DeepLinkingState.redirectMPPaymentHome());
             } else if (link.isFaq) {
               emit(const DeepLinkingState.redirectFAQ());
             } else if (link.isAboutUs) {

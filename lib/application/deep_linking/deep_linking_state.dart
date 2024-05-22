@@ -28,7 +28,10 @@ class DeepLinkingState with _$DeepLinkingState {
     required PaymentSummaryDetails paymentIdentifierInfo,
     required bool isMarketPlace,
   }) = _RedirectPaymentDetail;
-  const factory DeepLinkingState.redirectPaymentHome() = _RedirectPaymentHome;
+  const factory DeepLinkingState.redirectZPPaymentHome() =
+      _RedirectZPPaymentHome;
+  const factory DeepLinkingState.redirectMPPaymentHome() =
+      _RedirectMPPaymentHome;
   const factory DeepLinkingState.redirectInvoiceDetail({
     required String invoiceNumber,
     required bool isMarketPlace,

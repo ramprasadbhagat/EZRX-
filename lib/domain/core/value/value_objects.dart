@@ -507,7 +507,9 @@ class EzrxLink extends ValueObject<String> {
 
   bool get isMPInvoiceDetail => isMPInvoiceDetailLink(uri.path);
 
-  bool get isMyAccountPayment => isMyAccountPaymentLink(uri.path);
+  bool get isZPMyAccountPayment => isZPMyAccountPaymentLink(uri.path);
+
+  bool get isMPMyAccountPayment => isMPMyAccountPaymentLink(uri.path);
 
   bool get isContactUs => isContactUsLink(uri.path);
 

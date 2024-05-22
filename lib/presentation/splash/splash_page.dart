@@ -973,9 +973,17 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                   noAccessSnackbar.show(context);
                 }
               },
-              redirectPaymentHome: () {
+              redirectZPPaymentHome: () {
                 if (eligibilityState.isPaymentEnabled) {
                   context.router.push(PaymentPageRoute(isMarketPlace: false));
+                } else {
+                  noAccessSnackbar.show(context);
+                }
+              },
+              redirectMPPaymentHome: () {
+                if (eligibilityState.isPaymentEnabled &&
+                    eligibilityState.marketPlacePaymentEligible) {
+                  context.router.push(PaymentPageRoute(isMarketPlace: true));
                 } else {
                   noAccessSnackbar.show(context);
                 }

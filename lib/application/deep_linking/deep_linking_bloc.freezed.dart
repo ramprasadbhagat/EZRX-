@@ -573,7 +573,8 @@ mixin _$DeepLinkingState {
     required TResult Function(
             PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)
         redirectPaymentDetail,
-    required TResult Function() redirectPaymentHome,
+    required TResult Function() redirectZPPaymentHome,
+    required TResult Function() redirectMPPaymentHome,
     required TResult Function(String invoiceNumber, bool isMarketPlace)
         redirectInvoiceDetail,
     required TResult Function() redirectFAQ,
@@ -599,7 +600,8 @@ mixin _$DeepLinkingState {
     TResult? Function(
             PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)?
         redirectPaymentDetail,
-    TResult? Function()? redirectPaymentHome,
+    TResult? Function()? redirectZPPaymentHome,
+    TResult? Function()? redirectMPPaymentHome,
     TResult? Function(String invoiceNumber, bool isMarketPlace)?
         redirectInvoiceDetail,
     TResult? Function()? redirectFAQ,
@@ -625,7 +627,8 @@ mixin _$DeepLinkingState {
     TResult Function(
             PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)?
         redirectPaymentDetail,
-    TResult Function()? redirectPaymentHome,
+    TResult Function()? redirectZPPaymentHome,
+    TResult Function()? redirectMPPaymentHome,
     TResult Function(String invoiceNumber, bool isMarketPlace)?
         redirectInvoiceDetail,
     TResult Function()? redirectFAQ,
@@ -651,7 +654,10 @@ mixin _$DeepLinkingState {
     required TResult Function(_RedirectReturnDetail value) redirectReturnDetail,
     required TResult Function(_RedirectPaymentDetail value)
         redirectPaymentDetail,
-    required TResult Function(_RedirectPaymentHome value) redirectPaymentHome,
+    required TResult Function(_RedirectZPPaymentHome value)
+        redirectZPPaymentHome,
+    required TResult Function(_RedirectMPPaymentHome value)
+        redirectMPPaymentHome,
     required TResult Function(_RedirectInvoiceDetail value)
         redirectInvoiceDetail,
     required TResult Function(_RedirectFAQ value) redirectFAQ,
@@ -674,7 +680,8 @@ mixin _$DeepLinkingState {
     TResult? Function(_RedirectOrderDetail value)? redirectOrderDetail,
     TResult? Function(_RedirectReturnDetail value)? redirectReturnDetail,
     TResult? Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
-    TResult? Function(_RedirectPaymentHome value)? redirectPaymentHome,
+    TResult? Function(_RedirectZPPaymentHome value)? redirectZPPaymentHome,
+    TResult? Function(_RedirectMPPaymentHome value)? redirectMPPaymentHome,
     TResult? Function(_RedirectInvoiceDetail value)? redirectInvoiceDetail,
     TResult? Function(_RedirectFAQ value)? redirectFAQ,
     TResult? Function(_RedirectAboutUs value)? redirectAboutUs,
@@ -695,7 +702,8 @@ mixin _$DeepLinkingState {
     TResult Function(_RedirectOrderDetail value)? redirectOrderDetail,
     TResult Function(_RedirectReturnDetail value)? redirectReturnDetail,
     TResult Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
-    TResult Function(_RedirectPaymentHome value)? redirectPaymentHome,
+    TResult Function(_RedirectZPPaymentHome value)? redirectZPPaymentHome,
+    TResult Function(_RedirectMPPaymentHome value)? redirectMPPaymentHome,
     TResult Function(_RedirectInvoiceDetail value)? redirectInvoiceDetail,
     TResult Function(_RedirectFAQ value)? redirectFAQ,
     TResult Function(_RedirectAboutUs value)? redirectAboutUs,
@@ -778,7 +786,8 @@ class _$InitialImpl implements _Initial {
     required TResult Function(
             PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)
         redirectPaymentDetail,
-    required TResult Function() redirectPaymentHome,
+    required TResult Function() redirectZPPaymentHome,
+    required TResult Function() redirectMPPaymentHome,
     required TResult Function(String invoiceNumber, bool isMarketPlace)
         redirectInvoiceDetail,
     required TResult Function() redirectFAQ,
@@ -807,7 +816,8 @@ class _$InitialImpl implements _Initial {
     TResult? Function(
             PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)?
         redirectPaymentDetail,
-    TResult? Function()? redirectPaymentHome,
+    TResult? Function()? redirectZPPaymentHome,
+    TResult? Function()? redirectMPPaymentHome,
     TResult? Function(String invoiceNumber, bool isMarketPlace)?
         redirectInvoiceDetail,
     TResult? Function()? redirectFAQ,
@@ -836,7 +846,8 @@ class _$InitialImpl implements _Initial {
     TResult Function(
             PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)?
         redirectPaymentDetail,
-    TResult Function()? redirectPaymentHome,
+    TResult Function()? redirectZPPaymentHome,
+    TResult Function()? redirectMPPaymentHome,
     TResult Function(String invoiceNumber, bool isMarketPlace)?
         redirectInvoiceDetail,
     TResult Function()? redirectFAQ,
@@ -868,7 +879,10 @@ class _$InitialImpl implements _Initial {
     required TResult Function(_RedirectReturnDetail value) redirectReturnDetail,
     required TResult Function(_RedirectPaymentDetail value)
         redirectPaymentDetail,
-    required TResult Function(_RedirectPaymentHome value) redirectPaymentHome,
+    required TResult Function(_RedirectZPPaymentHome value)
+        redirectZPPaymentHome,
+    required TResult Function(_RedirectMPPaymentHome value)
+        redirectMPPaymentHome,
     required TResult Function(_RedirectInvoiceDetail value)
         redirectInvoiceDetail,
     required TResult Function(_RedirectFAQ value) redirectFAQ,
@@ -894,7 +908,8 @@ class _$InitialImpl implements _Initial {
     TResult? Function(_RedirectOrderDetail value)? redirectOrderDetail,
     TResult? Function(_RedirectReturnDetail value)? redirectReturnDetail,
     TResult? Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
-    TResult? Function(_RedirectPaymentHome value)? redirectPaymentHome,
+    TResult? Function(_RedirectZPPaymentHome value)? redirectZPPaymentHome,
+    TResult? Function(_RedirectMPPaymentHome value)? redirectMPPaymentHome,
     TResult? Function(_RedirectInvoiceDetail value)? redirectInvoiceDetail,
     TResult? Function(_RedirectFAQ value)? redirectFAQ,
     TResult? Function(_RedirectAboutUs value)? redirectAboutUs,
@@ -918,7 +933,8 @@ class _$InitialImpl implements _Initial {
     TResult Function(_RedirectOrderDetail value)? redirectOrderDetail,
     TResult Function(_RedirectReturnDetail value)? redirectReturnDetail,
     TResult Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
-    TResult Function(_RedirectPaymentHome value)? redirectPaymentHome,
+    TResult Function(_RedirectZPPaymentHome value)? redirectZPPaymentHome,
+    TResult Function(_RedirectMPPaymentHome value)? redirectMPPaymentHome,
     TResult Function(_RedirectInvoiceDetail value)? redirectInvoiceDetail,
     TResult Function(_RedirectFAQ value)? redirectFAQ,
     TResult Function(_RedirectAboutUs value)? redirectAboutUs,
@@ -1039,7 +1055,8 @@ class _$LinkPendingImpl implements _LinkPending {
     required TResult Function(
             PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)
         redirectPaymentDetail,
-    required TResult Function() redirectPaymentHome,
+    required TResult Function() redirectZPPaymentHome,
+    required TResult Function() redirectMPPaymentHome,
     required TResult Function(String invoiceNumber, bool isMarketPlace)
         redirectInvoiceDetail,
     required TResult Function() redirectFAQ,
@@ -1068,7 +1085,8 @@ class _$LinkPendingImpl implements _LinkPending {
     TResult? Function(
             PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)?
         redirectPaymentDetail,
-    TResult? Function()? redirectPaymentHome,
+    TResult? Function()? redirectZPPaymentHome,
+    TResult? Function()? redirectMPPaymentHome,
     TResult? Function(String invoiceNumber, bool isMarketPlace)?
         redirectInvoiceDetail,
     TResult? Function()? redirectFAQ,
@@ -1097,7 +1115,8 @@ class _$LinkPendingImpl implements _LinkPending {
     TResult Function(
             PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)?
         redirectPaymentDetail,
-    TResult Function()? redirectPaymentHome,
+    TResult Function()? redirectZPPaymentHome,
+    TResult Function()? redirectMPPaymentHome,
     TResult Function(String invoiceNumber, bool isMarketPlace)?
         redirectInvoiceDetail,
     TResult Function()? redirectFAQ,
@@ -1129,7 +1148,10 @@ class _$LinkPendingImpl implements _LinkPending {
     required TResult Function(_RedirectReturnDetail value) redirectReturnDetail,
     required TResult Function(_RedirectPaymentDetail value)
         redirectPaymentDetail,
-    required TResult Function(_RedirectPaymentHome value) redirectPaymentHome,
+    required TResult Function(_RedirectZPPaymentHome value)
+        redirectZPPaymentHome,
+    required TResult Function(_RedirectMPPaymentHome value)
+        redirectMPPaymentHome,
     required TResult Function(_RedirectInvoiceDetail value)
         redirectInvoiceDetail,
     required TResult Function(_RedirectFAQ value) redirectFAQ,
@@ -1155,7 +1177,8 @@ class _$LinkPendingImpl implements _LinkPending {
     TResult? Function(_RedirectOrderDetail value)? redirectOrderDetail,
     TResult? Function(_RedirectReturnDetail value)? redirectReturnDetail,
     TResult? Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
-    TResult? Function(_RedirectPaymentHome value)? redirectPaymentHome,
+    TResult? Function(_RedirectZPPaymentHome value)? redirectZPPaymentHome,
+    TResult? Function(_RedirectMPPaymentHome value)? redirectMPPaymentHome,
     TResult? Function(_RedirectInvoiceDetail value)? redirectInvoiceDetail,
     TResult? Function(_RedirectFAQ value)? redirectFAQ,
     TResult? Function(_RedirectAboutUs value)? redirectAboutUs,
@@ -1179,7 +1202,8 @@ class _$LinkPendingImpl implements _LinkPending {
     TResult Function(_RedirectOrderDetail value)? redirectOrderDetail,
     TResult Function(_RedirectReturnDetail value)? redirectReturnDetail,
     TResult Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
-    TResult Function(_RedirectPaymentHome value)? redirectPaymentHome,
+    TResult Function(_RedirectZPPaymentHome value)? redirectZPPaymentHome,
+    TResult Function(_RedirectMPPaymentHome value)? redirectMPPaymentHome,
     TResult Function(_RedirectInvoiceDetail value)? redirectInvoiceDetail,
     TResult Function(_RedirectFAQ value)? redirectFAQ,
     TResult Function(_RedirectAboutUs value)? redirectAboutUs,
@@ -1310,7 +1334,8 @@ class _$RedirectBundleDetailImpl implements _RedirectBundleDetail {
     required TResult Function(
             PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)
         redirectPaymentDetail,
-    required TResult Function() redirectPaymentHome,
+    required TResult Function() redirectZPPaymentHome,
+    required TResult Function() redirectMPPaymentHome,
     required TResult Function(String invoiceNumber, bool isMarketPlace)
         redirectInvoiceDetail,
     required TResult Function() redirectFAQ,
@@ -1339,7 +1364,8 @@ class _$RedirectBundleDetailImpl implements _RedirectBundleDetail {
     TResult? Function(
             PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)?
         redirectPaymentDetail,
-    TResult? Function()? redirectPaymentHome,
+    TResult? Function()? redirectZPPaymentHome,
+    TResult? Function()? redirectMPPaymentHome,
     TResult? Function(String invoiceNumber, bool isMarketPlace)?
         redirectInvoiceDetail,
     TResult? Function()? redirectFAQ,
@@ -1368,7 +1394,8 @@ class _$RedirectBundleDetailImpl implements _RedirectBundleDetail {
     TResult Function(
             PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)?
         redirectPaymentDetail,
-    TResult Function()? redirectPaymentHome,
+    TResult Function()? redirectZPPaymentHome,
+    TResult Function()? redirectMPPaymentHome,
     TResult Function(String invoiceNumber, bool isMarketPlace)?
         redirectInvoiceDetail,
     TResult Function()? redirectFAQ,
@@ -1400,7 +1427,10 @@ class _$RedirectBundleDetailImpl implements _RedirectBundleDetail {
     required TResult Function(_RedirectReturnDetail value) redirectReturnDetail,
     required TResult Function(_RedirectPaymentDetail value)
         redirectPaymentDetail,
-    required TResult Function(_RedirectPaymentHome value) redirectPaymentHome,
+    required TResult Function(_RedirectZPPaymentHome value)
+        redirectZPPaymentHome,
+    required TResult Function(_RedirectMPPaymentHome value)
+        redirectMPPaymentHome,
     required TResult Function(_RedirectInvoiceDetail value)
         redirectInvoiceDetail,
     required TResult Function(_RedirectFAQ value) redirectFAQ,
@@ -1426,7 +1456,8 @@ class _$RedirectBundleDetailImpl implements _RedirectBundleDetail {
     TResult? Function(_RedirectOrderDetail value)? redirectOrderDetail,
     TResult? Function(_RedirectReturnDetail value)? redirectReturnDetail,
     TResult? Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
-    TResult? Function(_RedirectPaymentHome value)? redirectPaymentHome,
+    TResult? Function(_RedirectZPPaymentHome value)? redirectZPPaymentHome,
+    TResult? Function(_RedirectMPPaymentHome value)? redirectMPPaymentHome,
     TResult? Function(_RedirectInvoiceDetail value)? redirectInvoiceDetail,
     TResult? Function(_RedirectFAQ value)? redirectFAQ,
     TResult? Function(_RedirectAboutUs value)? redirectAboutUs,
@@ -1450,7 +1481,8 @@ class _$RedirectBundleDetailImpl implements _RedirectBundleDetail {
     TResult Function(_RedirectOrderDetail value)? redirectOrderDetail,
     TResult Function(_RedirectReturnDetail value)? redirectReturnDetail,
     TResult Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
-    TResult Function(_RedirectPaymentHome value)? redirectPaymentHome,
+    TResult Function(_RedirectZPPaymentHome value)? redirectZPPaymentHome,
+    TResult Function(_RedirectMPPaymentHome value)? redirectMPPaymentHome,
     TResult Function(_RedirectInvoiceDetail value)? redirectInvoiceDetail,
     TResult Function(_RedirectFAQ value)? redirectFAQ,
     TResult Function(_RedirectAboutUs value)? redirectAboutUs,
@@ -1581,7 +1613,8 @@ class _$RedirectProductDetailImpl implements _RedirectProductDetail {
     required TResult Function(
             PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)
         redirectPaymentDetail,
-    required TResult Function() redirectPaymentHome,
+    required TResult Function() redirectZPPaymentHome,
+    required TResult Function() redirectMPPaymentHome,
     required TResult Function(String invoiceNumber, bool isMarketPlace)
         redirectInvoiceDetail,
     required TResult Function() redirectFAQ,
@@ -1610,7 +1643,8 @@ class _$RedirectProductDetailImpl implements _RedirectProductDetail {
     TResult? Function(
             PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)?
         redirectPaymentDetail,
-    TResult? Function()? redirectPaymentHome,
+    TResult? Function()? redirectZPPaymentHome,
+    TResult? Function()? redirectMPPaymentHome,
     TResult? Function(String invoiceNumber, bool isMarketPlace)?
         redirectInvoiceDetail,
     TResult? Function()? redirectFAQ,
@@ -1639,7 +1673,8 @@ class _$RedirectProductDetailImpl implements _RedirectProductDetail {
     TResult Function(
             PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)?
         redirectPaymentDetail,
-    TResult Function()? redirectPaymentHome,
+    TResult Function()? redirectZPPaymentHome,
+    TResult Function()? redirectMPPaymentHome,
     TResult Function(String invoiceNumber, bool isMarketPlace)?
         redirectInvoiceDetail,
     TResult Function()? redirectFAQ,
@@ -1671,7 +1706,10 @@ class _$RedirectProductDetailImpl implements _RedirectProductDetail {
     required TResult Function(_RedirectReturnDetail value) redirectReturnDetail,
     required TResult Function(_RedirectPaymentDetail value)
         redirectPaymentDetail,
-    required TResult Function(_RedirectPaymentHome value) redirectPaymentHome,
+    required TResult Function(_RedirectZPPaymentHome value)
+        redirectZPPaymentHome,
+    required TResult Function(_RedirectMPPaymentHome value)
+        redirectMPPaymentHome,
     required TResult Function(_RedirectInvoiceDetail value)
         redirectInvoiceDetail,
     required TResult Function(_RedirectFAQ value) redirectFAQ,
@@ -1697,7 +1735,8 @@ class _$RedirectProductDetailImpl implements _RedirectProductDetail {
     TResult? Function(_RedirectOrderDetail value)? redirectOrderDetail,
     TResult? Function(_RedirectReturnDetail value)? redirectReturnDetail,
     TResult? Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
-    TResult? Function(_RedirectPaymentHome value)? redirectPaymentHome,
+    TResult? Function(_RedirectZPPaymentHome value)? redirectZPPaymentHome,
+    TResult? Function(_RedirectMPPaymentHome value)? redirectMPPaymentHome,
     TResult? Function(_RedirectInvoiceDetail value)? redirectInvoiceDetail,
     TResult? Function(_RedirectFAQ value)? redirectFAQ,
     TResult? Function(_RedirectAboutUs value)? redirectAboutUs,
@@ -1721,7 +1760,8 @@ class _$RedirectProductDetailImpl implements _RedirectProductDetail {
     TResult Function(_RedirectOrderDetail value)? redirectOrderDetail,
     TResult Function(_RedirectReturnDetail value)? redirectReturnDetail,
     TResult Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
-    TResult Function(_RedirectPaymentHome value)? redirectPaymentHome,
+    TResult Function(_RedirectZPPaymentHome value)? redirectZPPaymentHome,
+    TResult Function(_RedirectMPPaymentHome value)? redirectMPPaymentHome,
     TResult Function(_RedirectInvoiceDetail value)? redirectInvoiceDetail,
     TResult Function(_RedirectFAQ value)? redirectFAQ,
     TResult Function(_RedirectAboutUs value)? redirectAboutUs,
@@ -1832,7 +1872,8 @@ class _$RedirectProductSuggestionImpl implements _RedirectProductSuggestion {
     required TResult Function(
             PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)
         redirectPaymentDetail,
-    required TResult Function() redirectPaymentHome,
+    required TResult Function() redirectZPPaymentHome,
+    required TResult Function() redirectMPPaymentHome,
     required TResult Function(String invoiceNumber, bool isMarketPlace)
         redirectInvoiceDetail,
     required TResult Function() redirectFAQ,
@@ -1861,7 +1902,8 @@ class _$RedirectProductSuggestionImpl implements _RedirectProductSuggestion {
     TResult? Function(
             PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)?
         redirectPaymentDetail,
-    TResult? Function()? redirectPaymentHome,
+    TResult? Function()? redirectZPPaymentHome,
+    TResult? Function()? redirectMPPaymentHome,
     TResult? Function(String invoiceNumber, bool isMarketPlace)?
         redirectInvoiceDetail,
     TResult? Function()? redirectFAQ,
@@ -1890,7 +1932,8 @@ class _$RedirectProductSuggestionImpl implements _RedirectProductSuggestion {
     TResult Function(
             PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)?
         redirectPaymentDetail,
-    TResult Function()? redirectPaymentHome,
+    TResult Function()? redirectZPPaymentHome,
+    TResult Function()? redirectMPPaymentHome,
     TResult Function(String invoiceNumber, bool isMarketPlace)?
         redirectInvoiceDetail,
     TResult Function()? redirectFAQ,
@@ -1922,7 +1965,10 @@ class _$RedirectProductSuggestionImpl implements _RedirectProductSuggestion {
     required TResult Function(_RedirectReturnDetail value) redirectReturnDetail,
     required TResult Function(_RedirectPaymentDetail value)
         redirectPaymentDetail,
-    required TResult Function(_RedirectPaymentHome value) redirectPaymentHome,
+    required TResult Function(_RedirectZPPaymentHome value)
+        redirectZPPaymentHome,
+    required TResult Function(_RedirectMPPaymentHome value)
+        redirectMPPaymentHome,
     required TResult Function(_RedirectInvoiceDetail value)
         redirectInvoiceDetail,
     required TResult Function(_RedirectFAQ value) redirectFAQ,
@@ -1948,7 +1994,8 @@ class _$RedirectProductSuggestionImpl implements _RedirectProductSuggestion {
     TResult? Function(_RedirectOrderDetail value)? redirectOrderDetail,
     TResult? Function(_RedirectReturnDetail value)? redirectReturnDetail,
     TResult? Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
-    TResult? Function(_RedirectPaymentHome value)? redirectPaymentHome,
+    TResult? Function(_RedirectZPPaymentHome value)? redirectZPPaymentHome,
+    TResult? Function(_RedirectMPPaymentHome value)? redirectMPPaymentHome,
     TResult? Function(_RedirectInvoiceDetail value)? redirectInvoiceDetail,
     TResult? Function(_RedirectFAQ value)? redirectFAQ,
     TResult? Function(_RedirectAboutUs value)? redirectAboutUs,
@@ -1972,7 +2019,8 @@ class _$RedirectProductSuggestionImpl implements _RedirectProductSuggestion {
     TResult Function(_RedirectOrderDetail value)? redirectOrderDetail,
     TResult Function(_RedirectReturnDetail value)? redirectReturnDetail,
     TResult Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
-    TResult Function(_RedirectPaymentHome value)? redirectPaymentHome,
+    TResult Function(_RedirectZPPaymentHome value)? redirectZPPaymentHome,
+    TResult Function(_RedirectMPPaymentHome value)? redirectMPPaymentHome,
     TResult Function(_RedirectInvoiceDetail value)? redirectInvoiceDetail,
     TResult Function(_RedirectFAQ value)? redirectFAQ,
     TResult Function(_RedirectAboutUs value)? redirectAboutUs,
@@ -2079,7 +2127,8 @@ class _$RedirectOrderDetailImpl implements _RedirectOrderDetail {
     required TResult Function(
             PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)
         redirectPaymentDetail,
-    required TResult Function() redirectPaymentHome,
+    required TResult Function() redirectZPPaymentHome,
+    required TResult Function() redirectMPPaymentHome,
     required TResult Function(String invoiceNumber, bool isMarketPlace)
         redirectInvoiceDetail,
     required TResult Function() redirectFAQ,
@@ -2108,7 +2157,8 @@ class _$RedirectOrderDetailImpl implements _RedirectOrderDetail {
     TResult? Function(
             PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)?
         redirectPaymentDetail,
-    TResult? Function()? redirectPaymentHome,
+    TResult? Function()? redirectZPPaymentHome,
+    TResult? Function()? redirectMPPaymentHome,
     TResult? Function(String invoiceNumber, bool isMarketPlace)?
         redirectInvoiceDetail,
     TResult? Function()? redirectFAQ,
@@ -2137,7 +2187,8 @@ class _$RedirectOrderDetailImpl implements _RedirectOrderDetail {
     TResult Function(
             PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)?
         redirectPaymentDetail,
-    TResult Function()? redirectPaymentHome,
+    TResult Function()? redirectZPPaymentHome,
+    TResult Function()? redirectMPPaymentHome,
     TResult Function(String invoiceNumber, bool isMarketPlace)?
         redirectInvoiceDetail,
     TResult Function()? redirectFAQ,
@@ -2169,7 +2220,10 @@ class _$RedirectOrderDetailImpl implements _RedirectOrderDetail {
     required TResult Function(_RedirectReturnDetail value) redirectReturnDetail,
     required TResult Function(_RedirectPaymentDetail value)
         redirectPaymentDetail,
-    required TResult Function(_RedirectPaymentHome value) redirectPaymentHome,
+    required TResult Function(_RedirectZPPaymentHome value)
+        redirectZPPaymentHome,
+    required TResult Function(_RedirectMPPaymentHome value)
+        redirectMPPaymentHome,
     required TResult Function(_RedirectInvoiceDetail value)
         redirectInvoiceDetail,
     required TResult Function(_RedirectFAQ value) redirectFAQ,
@@ -2195,7 +2249,8 @@ class _$RedirectOrderDetailImpl implements _RedirectOrderDetail {
     TResult? Function(_RedirectOrderDetail value)? redirectOrderDetail,
     TResult? Function(_RedirectReturnDetail value)? redirectReturnDetail,
     TResult? Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
-    TResult? Function(_RedirectPaymentHome value)? redirectPaymentHome,
+    TResult? Function(_RedirectZPPaymentHome value)? redirectZPPaymentHome,
+    TResult? Function(_RedirectMPPaymentHome value)? redirectMPPaymentHome,
     TResult? Function(_RedirectInvoiceDetail value)? redirectInvoiceDetail,
     TResult? Function(_RedirectFAQ value)? redirectFAQ,
     TResult? Function(_RedirectAboutUs value)? redirectAboutUs,
@@ -2219,7 +2274,8 @@ class _$RedirectOrderDetailImpl implements _RedirectOrderDetail {
     TResult Function(_RedirectOrderDetail value)? redirectOrderDetail,
     TResult Function(_RedirectReturnDetail value)? redirectReturnDetail,
     TResult Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
-    TResult Function(_RedirectPaymentHome value)? redirectPaymentHome,
+    TResult Function(_RedirectZPPaymentHome value)? redirectZPPaymentHome,
+    TResult Function(_RedirectMPPaymentHome value)? redirectMPPaymentHome,
     TResult Function(_RedirectInvoiceDetail value)? redirectInvoiceDetail,
     TResult Function(_RedirectFAQ value)? redirectFAQ,
     TResult Function(_RedirectAboutUs value)? redirectAboutUs,
@@ -2337,7 +2393,8 @@ class _$RedirectReturnDetailImpl implements _RedirectReturnDetail {
     required TResult Function(
             PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)
         redirectPaymentDetail,
-    required TResult Function() redirectPaymentHome,
+    required TResult Function() redirectZPPaymentHome,
+    required TResult Function() redirectMPPaymentHome,
     required TResult Function(String invoiceNumber, bool isMarketPlace)
         redirectInvoiceDetail,
     required TResult Function() redirectFAQ,
@@ -2366,7 +2423,8 @@ class _$RedirectReturnDetailImpl implements _RedirectReturnDetail {
     TResult? Function(
             PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)?
         redirectPaymentDetail,
-    TResult? Function()? redirectPaymentHome,
+    TResult? Function()? redirectZPPaymentHome,
+    TResult? Function()? redirectMPPaymentHome,
     TResult? Function(String invoiceNumber, bool isMarketPlace)?
         redirectInvoiceDetail,
     TResult? Function()? redirectFAQ,
@@ -2395,7 +2453,8 @@ class _$RedirectReturnDetailImpl implements _RedirectReturnDetail {
     TResult Function(
             PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)?
         redirectPaymentDetail,
-    TResult Function()? redirectPaymentHome,
+    TResult Function()? redirectZPPaymentHome,
+    TResult Function()? redirectMPPaymentHome,
     TResult Function(String invoiceNumber, bool isMarketPlace)?
         redirectInvoiceDetail,
     TResult Function()? redirectFAQ,
@@ -2427,7 +2486,10 @@ class _$RedirectReturnDetailImpl implements _RedirectReturnDetail {
     required TResult Function(_RedirectReturnDetail value) redirectReturnDetail,
     required TResult Function(_RedirectPaymentDetail value)
         redirectPaymentDetail,
-    required TResult Function(_RedirectPaymentHome value) redirectPaymentHome,
+    required TResult Function(_RedirectZPPaymentHome value)
+        redirectZPPaymentHome,
+    required TResult Function(_RedirectMPPaymentHome value)
+        redirectMPPaymentHome,
     required TResult Function(_RedirectInvoiceDetail value)
         redirectInvoiceDetail,
     required TResult Function(_RedirectFAQ value) redirectFAQ,
@@ -2453,7 +2515,8 @@ class _$RedirectReturnDetailImpl implements _RedirectReturnDetail {
     TResult? Function(_RedirectOrderDetail value)? redirectOrderDetail,
     TResult? Function(_RedirectReturnDetail value)? redirectReturnDetail,
     TResult? Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
-    TResult? Function(_RedirectPaymentHome value)? redirectPaymentHome,
+    TResult? Function(_RedirectZPPaymentHome value)? redirectZPPaymentHome,
+    TResult? Function(_RedirectMPPaymentHome value)? redirectMPPaymentHome,
     TResult? Function(_RedirectInvoiceDetail value)? redirectInvoiceDetail,
     TResult? Function(_RedirectFAQ value)? redirectFAQ,
     TResult? Function(_RedirectAboutUs value)? redirectAboutUs,
@@ -2477,7 +2540,8 @@ class _$RedirectReturnDetailImpl implements _RedirectReturnDetail {
     TResult Function(_RedirectOrderDetail value)? redirectOrderDetail,
     TResult Function(_RedirectReturnDetail value)? redirectReturnDetail,
     TResult Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
-    TResult Function(_RedirectPaymentHome value)? redirectPaymentHome,
+    TResult Function(_RedirectZPPaymentHome value)? redirectZPPaymentHome,
+    TResult Function(_RedirectMPPaymentHome value)? redirectMPPaymentHome,
     TResult Function(_RedirectInvoiceDetail value)? redirectInvoiceDetail,
     TResult Function(_RedirectFAQ value)? redirectFAQ,
     TResult Function(_RedirectAboutUs value)? redirectAboutUs,
@@ -2607,7 +2671,8 @@ class _$RedirectPaymentDetailImpl implements _RedirectPaymentDetail {
     required TResult Function(
             PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)
         redirectPaymentDetail,
-    required TResult Function() redirectPaymentHome,
+    required TResult Function() redirectZPPaymentHome,
+    required TResult Function() redirectMPPaymentHome,
     required TResult Function(String invoiceNumber, bool isMarketPlace)
         redirectInvoiceDetail,
     required TResult Function() redirectFAQ,
@@ -2636,7 +2701,8 @@ class _$RedirectPaymentDetailImpl implements _RedirectPaymentDetail {
     TResult? Function(
             PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)?
         redirectPaymentDetail,
-    TResult? Function()? redirectPaymentHome,
+    TResult? Function()? redirectZPPaymentHome,
+    TResult? Function()? redirectMPPaymentHome,
     TResult? Function(String invoiceNumber, bool isMarketPlace)?
         redirectInvoiceDetail,
     TResult? Function()? redirectFAQ,
@@ -2665,7 +2731,8 @@ class _$RedirectPaymentDetailImpl implements _RedirectPaymentDetail {
     TResult Function(
             PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)?
         redirectPaymentDetail,
-    TResult Function()? redirectPaymentHome,
+    TResult Function()? redirectZPPaymentHome,
+    TResult Function()? redirectMPPaymentHome,
     TResult Function(String invoiceNumber, bool isMarketPlace)?
         redirectInvoiceDetail,
     TResult Function()? redirectFAQ,
@@ -2697,7 +2764,10 @@ class _$RedirectPaymentDetailImpl implements _RedirectPaymentDetail {
     required TResult Function(_RedirectReturnDetail value) redirectReturnDetail,
     required TResult Function(_RedirectPaymentDetail value)
         redirectPaymentDetail,
-    required TResult Function(_RedirectPaymentHome value) redirectPaymentHome,
+    required TResult Function(_RedirectZPPaymentHome value)
+        redirectZPPaymentHome,
+    required TResult Function(_RedirectMPPaymentHome value)
+        redirectMPPaymentHome,
     required TResult Function(_RedirectInvoiceDetail value)
         redirectInvoiceDetail,
     required TResult Function(_RedirectFAQ value) redirectFAQ,
@@ -2723,7 +2793,8 @@ class _$RedirectPaymentDetailImpl implements _RedirectPaymentDetail {
     TResult? Function(_RedirectOrderDetail value)? redirectOrderDetail,
     TResult? Function(_RedirectReturnDetail value)? redirectReturnDetail,
     TResult? Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
-    TResult? Function(_RedirectPaymentHome value)? redirectPaymentHome,
+    TResult? Function(_RedirectZPPaymentHome value)? redirectZPPaymentHome,
+    TResult? Function(_RedirectMPPaymentHome value)? redirectMPPaymentHome,
     TResult? Function(_RedirectInvoiceDetail value)? redirectInvoiceDetail,
     TResult? Function(_RedirectFAQ value)? redirectFAQ,
     TResult? Function(_RedirectAboutUs value)? redirectAboutUs,
@@ -2747,7 +2818,8 @@ class _$RedirectPaymentDetailImpl implements _RedirectPaymentDetail {
     TResult Function(_RedirectOrderDetail value)? redirectOrderDetail,
     TResult Function(_RedirectReturnDetail value)? redirectReturnDetail,
     TResult Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
-    TResult Function(_RedirectPaymentHome value)? redirectPaymentHome,
+    TResult Function(_RedirectZPPaymentHome value)? redirectZPPaymentHome,
+    TResult Function(_RedirectMPPaymentHome value)? redirectMPPaymentHome,
     TResult Function(_RedirectInvoiceDetail value)? redirectInvoiceDetail,
     TResult Function(_RedirectFAQ value)? redirectFAQ,
     TResult Function(_RedirectAboutUs value)? redirectAboutUs,
@@ -2777,36 +2849,37 @@ abstract class _RedirectPaymentDetail implements DeepLinkingState {
 }
 
 /// @nodoc
-abstract class _$$RedirectPaymentHomeImplCopyWith<$Res> {
-  factory _$$RedirectPaymentHomeImplCopyWith(_$RedirectPaymentHomeImpl value,
-          $Res Function(_$RedirectPaymentHomeImpl) then) =
-      __$$RedirectPaymentHomeImplCopyWithImpl<$Res>;
+abstract class _$$RedirectZPPaymentHomeImplCopyWith<$Res> {
+  factory _$$RedirectZPPaymentHomeImplCopyWith(
+          _$RedirectZPPaymentHomeImpl value,
+          $Res Function(_$RedirectZPPaymentHomeImpl) then) =
+      __$$RedirectZPPaymentHomeImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$RedirectPaymentHomeImplCopyWithImpl<$Res>
-    extends _$DeepLinkingStateCopyWithImpl<$Res, _$RedirectPaymentHomeImpl>
-    implements _$$RedirectPaymentHomeImplCopyWith<$Res> {
-  __$$RedirectPaymentHomeImplCopyWithImpl(_$RedirectPaymentHomeImpl _value,
-      $Res Function(_$RedirectPaymentHomeImpl) _then)
+class __$$RedirectZPPaymentHomeImplCopyWithImpl<$Res>
+    extends _$DeepLinkingStateCopyWithImpl<$Res, _$RedirectZPPaymentHomeImpl>
+    implements _$$RedirectZPPaymentHomeImplCopyWith<$Res> {
+  __$$RedirectZPPaymentHomeImplCopyWithImpl(_$RedirectZPPaymentHomeImpl _value,
+      $Res Function(_$RedirectZPPaymentHomeImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$RedirectPaymentHomeImpl implements _RedirectPaymentHome {
-  const _$RedirectPaymentHomeImpl();
+class _$RedirectZPPaymentHomeImpl implements _RedirectZPPaymentHome {
+  const _$RedirectZPPaymentHomeImpl();
 
   @override
   String toString() {
-    return 'DeepLinkingState.redirectPaymentHome()';
+    return 'DeepLinkingState.redirectZPPaymentHome()';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$RedirectPaymentHomeImpl);
+            other is _$RedirectZPPaymentHomeImpl);
   }
 
   @override
@@ -2829,7 +2902,8 @@ class _$RedirectPaymentHomeImpl implements _RedirectPaymentHome {
     required TResult Function(
             PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)
         redirectPaymentDetail,
-    required TResult Function() redirectPaymentHome,
+    required TResult Function() redirectZPPaymentHome,
+    required TResult Function() redirectMPPaymentHome,
     required TResult Function(String invoiceNumber, bool isMarketPlace)
         redirectInvoiceDetail,
     required TResult Function() redirectFAQ,
@@ -2840,7 +2914,7 @@ class _$RedirectPaymentHomeImpl implements _RedirectPaymentHome {
     required TResult Function(ResetPasswordCred resetPasswordCred)
         redirectResetPassword,
   }) {
-    return redirectPaymentHome();
+    return redirectZPPaymentHome();
   }
 
   @override
@@ -2858,7 +2932,8 @@ class _$RedirectPaymentHomeImpl implements _RedirectPaymentHome {
     TResult? Function(
             PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)?
         redirectPaymentDetail,
-    TResult? Function()? redirectPaymentHome,
+    TResult? Function()? redirectZPPaymentHome,
+    TResult? Function()? redirectMPPaymentHome,
     TResult? Function(String invoiceNumber, bool isMarketPlace)?
         redirectInvoiceDetail,
     TResult? Function()? redirectFAQ,
@@ -2869,7 +2944,7 @@ class _$RedirectPaymentHomeImpl implements _RedirectPaymentHome {
     TResult? Function(ResetPasswordCred resetPasswordCred)?
         redirectResetPassword,
   }) {
-    return redirectPaymentHome?.call();
+    return redirectZPPaymentHome?.call();
   }
 
   @override
@@ -2887,7 +2962,8 @@ class _$RedirectPaymentHomeImpl implements _RedirectPaymentHome {
     TResult Function(
             PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)?
         redirectPaymentDetail,
-    TResult Function()? redirectPaymentHome,
+    TResult Function()? redirectZPPaymentHome,
+    TResult Function()? redirectMPPaymentHome,
     TResult Function(String invoiceNumber, bool isMarketPlace)?
         redirectInvoiceDetail,
     TResult Function()? redirectFAQ,
@@ -2899,8 +2975,8 @@ class _$RedirectPaymentHomeImpl implements _RedirectPaymentHome {
         redirectResetPassword,
     required TResult orElse(),
   }) {
-    if (redirectPaymentHome != null) {
-      return redirectPaymentHome();
+    if (redirectZPPaymentHome != null) {
+      return redirectZPPaymentHome();
     }
     return orElse();
   }
@@ -2919,7 +2995,10 @@ class _$RedirectPaymentHomeImpl implements _RedirectPaymentHome {
     required TResult Function(_RedirectReturnDetail value) redirectReturnDetail,
     required TResult Function(_RedirectPaymentDetail value)
         redirectPaymentDetail,
-    required TResult Function(_RedirectPaymentHome value) redirectPaymentHome,
+    required TResult Function(_RedirectZPPaymentHome value)
+        redirectZPPaymentHome,
+    required TResult Function(_RedirectMPPaymentHome value)
+        redirectMPPaymentHome,
     required TResult Function(_RedirectInvoiceDetail value)
         redirectInvoiceDetail,
     required TResult Function(_RedirectFAQ value) redirectFAQ,
@@ -2930,7 +3009,7 @@ class _$RedirectPaymentHomeImpl implements _RedirectPaymentHome {
     required TResult Function(_RedirectResetPassword value)
         redirectResetPassword,
   }) {
-    return redirectPaymentHome(this);
+    return redirectZPPaymentHome(this);
   }
 
   @override
@@ -2945,7 +3024,8 @@ class _$RedirectPaymentHomeImpl implements _RedirectPaymentHome {
     TResult? Function(_RedirectOrderDetail value)? redirectOrderDetail,
     TResult? Function(_RedirectReturnDetail value)? redirectReturnDetail,
     TResult? Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
-    TResult? Function(_RedirectPaymentHome value)? redirectPaymentHome,
+    TResult? Function(_RedirectZPPaymentHome value)? redirectZPPaymentHome,
+    TResult? Function(_RedirectMPPaymentHome value)? redirectMPPaymentHome,
     TResult? Function(_RedirectInvoiceDetail value)? redirectInvoiceDetail,
     TResult? Function(_RedirectFAQ value)? redirectFAQ,
     TResult? Function(_RedirectAboutUs value)? redirectAboutUs,
@@ -2954,7 +3034,7 @@ class _$RedirectPaymentHomeImpl implements _RedirectPaymentHome {
     TResult? Function(_Error value)? error,
     TResult? Function(_RedirectResetPassword value)? redirectResetPassword,
   }) {
-    return redirectPaymentHome?.call(this);
+    return redirectZPPaymentHome?.call(this);
   }
 
   @override
@@ -2969,7 +3049,8 @@ class _$RedirectPaymentHomeImpl implements _RedirectPaymentHome {
     TResult Function(_RedirectOrderDetail value)? redirectOrderDetail,
     TResult Function(_RedirectReturnDetail value)? redirectReturnDetail,
     TResult Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
-    TResult Function(_RedirectPaymentHome value)? redirectPaymentHome,
+    TResult Function(_RedirectZPPaymentHome value)? redirectZPPaymentHome,
+    TResult Function(_RedirectMPPaymentHome value)? redirectMPPaymentHome,
     TResult Function(_RedirectInvoiceDetail value)? redirectInvoiceDetail,
     TResult Function(_RedirectFAQ value)? redirectFAQ,
     TResult Function(_RedirectAboutUs value)? redirectAboutUs,
@@ -2979,15 +3060,238 @@ class _$RedirectPaymentHomeImpl implements _RedirectPaymentHome {
     TResult Function(_RedirectResetPassword value)? redirectResetPassword,
     required TResult orElse(),
   }) {
-    if (redirectPaymentHome != null) {
-      return redirectPaymentHome(this);
+    if (redirectZPPaymentHome != null) {
+      return redirectZPPaymentHome(this);
     }
     return orElse();
   }
 }
 
-abstract class _RedirectPaymentHome implements DeepLinkingState {
-  const factory _RedirectPaymentHome() = _$RedirectPaymentHomeImpl;
+abstract class _RedirectZPPaymentHome implements DeepLinkingState {
+  const factory _RedirectZPPaymentHome() = _$RedirectZPPaymentHomeImpl;
+}
+
+/// @nodoc
+abstract class _$$RedirectMPPaymentHomeImplCopyWith<$Res> {
+  factory _$$RedirectMPPaymentHomeImplCopyWith(
+          _$RedirectMPPaymentHomeImpl value,
+          $Res Function(_$RedirectMPPaymentHomeImpl) then) =
+      __$$RedirectMPPaymentHomeImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$RedirectMPPaymentHomeImplCopyWithImpl<$Res>
+    extends _$DeepLinkingStateCopyWithImpl<$Res, _$RedirectMPPaymentHomeImpl>
+    implements _$$RedirectMPPaymentHomeImplCopyWith<$Res> {
+  __$$RedirectMPPaymentHomeImplCopyWithImpl(_$RedirectMPPaymentHomeImpl _value,
+      $Res Function(_$RedirectMPPaymentHomeImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$RedirectMPPaymentHomeImpl implements _RedirectMPPaymentHome {
+  const _$RedirectMPPaymentHomeImpl();
+
+  @override
+  String toString() {
+    return 'DeepLinkingState.redirectMPPaymentHome()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$RedirectMPPaymentHomeImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function(EzrxLink link, EZReachBanner? banner) linkPending,
+    required TResult Function(
+            MaterialNumber materialNumber, EZReachBanner? banner)
+        redirectBundleDetail,
+    required TResult Function(
+            MaterialNumber materialNumber, EZReachBanner? banner)
+        redirectProductDetail,
+    required TResult Function(SearchKey searchKey) redirectProductSuggestion,
+    required TResult Function(OrderNumber orderNumber) redirectOrderDetail,
+    required TResult Function(ReturnRequestsId returnId) redirectReturnDetail,
+    required TResult Function(
+            PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)
+        redirectPaymentDetail,
+    required TResult Function() redirectZPPaymentHome,
+    required TResult Function() redirectMPPaymentHome,
+    required TResult Function(String invoiceNumber, bool isMarketPlace)
+        redirectInvoiceDetail,
+    required TResult Function() redirectFAQ,
+    required TResult Function() redirectAboutUs,
+    required TResult Function(AppMarket market) redirectContactUs,
+    required TResult Function() redirectUserGuide,
+    required TResult Function(ApiFailure failure) error,
+    required TResult Function(ResetPasswordCred resetPasswordCred)
+        redirectResetPassword,
+  }) {
+    return redirectMPPaymentHome();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function(EzrxLink link, EZReachBanner? banner)? linkPending,
+    TResult? Function(MaterialNumber materialNumber, EZReachBanner? banner)?
+        redirectBundleDetail,
+    TResult? Function(MaterialNumber materialNumber, EZReachBanner? banner)?
+        redirectProductDetail,
+    TResult? Function(SearchKey searchKey)? redirectProductSuggestion,
+    TResult? Function(OrderNumber orderNumber)? redirectOrderDetail,
+    TResult? Function(ReturnRequestsId returnId)? redirectReturnDetail,
+    TResult? Function(
+            PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)?
+        redirectPaymentDetail,
+    TResult? Function()? redirectZPPaymentHome,
+    TResult? Function()? redirectMPPaymentHome,
+    TResult? Function(String invoiceNumber, bool isMarketPlace)?
+        redirectInvoiceDetail,
+    TResult? Function()? redirectFAQ,
+    TResult? Function()? redirectAboutUs,
+    TResult? Function(AppMarket market)? redirectContactUs,
+    TResult? Function()? redirectUserGuide,
+    TResult? Function(ApiFailure failure)? error,
+    TResult? Function(ResetPasswordCred resetPasswordCred)?
+        redirectResetPassword,
+  }) {
+    return redirectMPPaymentHome?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function(EzrxLink link, EZReachBanner? banner)? linkPending,
+    TResult Function(MaterialNumber materialNumber, EZReachBanner? banner)?
+        redirectBundleDetail,
+    TResult Function(MaterialNumber materialNumber, EZReachBanner? banner)?
+        redirectProductDetail,
+    TResult Function(SearchKey searchKey)? redirectProductSuggestion,
+    TResult Function(OrderNumber orderNumber)? redirectOrderDetail,
+    TResult Function(ReturnRequestsId returnId)? redirectReturnDetail,
+    TResult Function(
+            PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)?
+        redirectPaymentDetail,
+    TResult Function()? redirectZPPaymentHome,
+    TResult Function()? redirectMPPaymentHome,
+    TResult Function(String invoiceNumber, bool isMarketPlace)?
+        redirectInvoiceDetail,
+    TResult Function()? redirectFAQ,
+    TResult Function()? redirectAboutUs,
+    TResult Function(AppMarket market)? redirectContactUs,
+    TResult Function()? redirectUserGuide,
+    TResult Function(ApiFailure failure)? error,
+    TResult Function(ResetPasswordCred resetPasswordCred)?
+        redirectResetPassword,
+    required TResult orElse(),
+  }) {
+    if (redirectMPPaymentHome != null) {
+      return redirectMPPaymentHome();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_LinkPending value) linkPending,
+    required TResult Function(_RedirectBundleDetail value) redirectBundleDetail,
+    required TResult Function(_RedirectProductDetail value)
+        redirectProductDetail,
+    required TResult Function(_RedirectProductSuggestion value)
+        redirectProductSuggestion,
+    required TResult Function(_RedirectOrderDetail value) redirectOrderDetail,
+    required TResult Function(_RedirectReturnDetail value) redirectReturnDetail,
+    required TResult Function(_RedirectPaymentDetail value)
+        redirectPaymentDetail,
+    required TResult Function(_RedirectZPPaymentHome value)
+        redirectZPPaymentHome,
+    required TResult Function(_RedirectMPPaymentHome value)
+        redirectMPPaymentHome,
+    required TResult Function(_RedirectInvoiceDetail value)
+        redirectInvoiceDetail,
+    required TResult Function(_RedirectFAQ value) redirectFAQ,
+    required TResult Function(_RedirectAboutUs value) redirectAboutUs,
+    required TResult Function(_RedirectContactUs value) redirectContactUs,
+    required TResult Function(_RedirectUserGuide value) redirectUserGuide,
+    required TResult Function(_Error value) error,
+    required TResult Function(_RedirectResetPassword value)
+        redirectResetPassword,
+  }) {
+    return redirectMPPaymentHome(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(_LinkPending value)? linkPending,
+    TResult? Function(_RedirectBundleDetail value)? redirectBundleDetail,
+    TResult? Function(_RedirectProductDetail value)? redirectProductDetail,
+    TResult? Function(_RedirectProductSuggestion value)?
+        redirectProductSuggestion,
+    TResult? Function(_RedirectOrderDetail value)? redirectOrderDetail,
+    TResult? Function(_RedirectReturnDetail value)? redirectReturnDetail,
+    TResult? Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
+    TResult? Function(_RedirectZPPaymentHome value)? redirectZPPaymentHome,
+    TResult? Function(_RedirectMPPaymentHome value)? redirectMPPaymentHome,
+    TResult? Function(_RedirectInvoiceDetail value)? redirectInvoiceDetail,
+    TResult? Function(_RedirectFAQ value)? redirectFAQ,
+    TResult? Function(_RedirectAboutUs value)? redirectAboutUs,
+    TResult? Function(_RedirectContactUs value)? redirectContactUs,
+    TResult? Function(_RedirectUserGuide value)? redirectUserGuide,
+    TResult? Function(_Error value)? error,
+    TResult? Function(_RedirectResetPassword value)? redirectResetPassword,
+  }) {
+    return redirectMPPaymentHome?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_LinkPending value)? linkPending,
+    TResult Function(_RedirectBundleDetail value)? redirectBundleDetail,
+    TResult Function(_RedirectProductDetail value)? redirectProductDetail,
+    TResult Function(_RedirectProductSuggestion value)?
+        redirectProductSuggestion,
+    TResult Function(_RedirectOrderDetail value)? redirectOrderDetail,
+    TResult Function(_RedirectReturnDetail value)? redirectReturnDetail,
+    TResult Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
+    TResult Function(_RedirectZPPaymentHome value)? redirectZPPaymentHome,
+    TResult Function(_RedirectMPPaymentHome value)? redirectMPPaymentHome,
+    TResult Function(_RedirectInvoiceDetail value)? redirectInvoiceDetail,
+    TResult Function(_RedirectFAQ value)? redirectFAQ,
+    TResult Function(_RedirectAboutUs value)? redirectAboutUs,
+    TResult Function(_RedirectContactUs value)? redirectContactUs,
+    TResult Function(_RedirectUserGuide value)? redirectUserGuide,
+    TResult Function(_Error value)? error,
+    TResult Function(_RedirectResetPassword value)? redirectResetPassword,
+    required TResult orElse(),
+  }) {
+    if (redirectMPPaymentHome != null) {
+      return redirectMPPaymentHome(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _RedirectMPPaymentHome implements DeepLinkingState {
+  const factory _RedirectMPPaymentHome() = _$RedirectMPPaymentHomeImpl;
 }
 
 /// @nodoc
@@ -3081,7 +3385,8 @@ class _$RedirectInvoiceDetailImpl implements _RedirectInvoiceDetail {
     required TResult Function(
             PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)
         redirectPaymentDetail,
-    required TResult Function() redirectPaymentHome,
+    required TResult Function() redirectZPPaymentHome,
+    required TResult Function() redirectMPPaymentHome,
     required TResult Function(String invoiceNumber, bool isMarketPlace)
         redirectInvoiceDetail,
     required TResult Function() redirectFAQ,
@@ -3110,7 +3415,8 @@ class _$RedirectInvoiceDetailImpl implements _RedirectInvoiceDetail {
     TResult? Function(
             PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)?
         redirectPaymentDetail,
-    TResult? Function()? redirectPaymentHome,
+    TResult? Function()? redirectZPPaymentHome,
+    TResult? Function()? redirectMPPaymentHome,
     TResult? Function(String invoiceNumber, bool isMarketPlace)?
         redirectInvoiceDetail,
     TResult? Function()? redirectFAQ,
@@ -3139,7 +3445,8 @@ class _$RedirectInvoiceDetailImpl implements _RedirectInvoiceDetail {
     TResult Function(
             PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)?
         redirectPaymentDetail,
-    TResult Function()? redirectPaymentHome,
+    TResult Function()? redirectZPPaymentHome,
+    TResult Function()? redirectMPPaymentHome,
     TResult Function(String invoiceNumber, bool isMarketPlace)?
         redirectInvoiceDetail,
     TResult Function()? redirectFAQ,
@@ -3171,7 +3478,10 @@ class _$RedirectInvoiceDetailImpl implements _RedirectInvoiceDetail {
     required TResult Function(_RedirectReturnDetail value) redirectReturnDetail,
     required TResult Function(_RedirectPaymentDetail value)
         redirectPaymentDetail,
-    required TResult Function(_RedirectPaymentHome value) redirectPaymentHome,
+    required TResult Function(_RedirectZPPaymentHome value)
+        redirectZPPaymentHome,
+    required TResult Function(_RedirectMPPaymentHome value)
+        redirectMPPaymentHome,
     required TResult Function(_RedirectInvoiceDetail value)
         redirectInvoiceDetail,
     required TResult Function(_RedirectFAQ value) redirectFAQ,
@@ -3197,7 +3507,8 @@ class _$RedirectInvoiceDetailImpl implements _RedirectInvoiceDetail {
     TResult? Function(_RedirectOrderDetail value)? redirectOrderDetail,
     TResult? Function(_RedirectReturnDetail value)? redirectReturnDetail,
     TResult? Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
-    TResult? Function(_RedirectPaymentHome value)? redirectPaymentHome,
+    TResult? Function(_RedirectZPPaymentHome value)? redirectZPPaymentHome,
+    TResult? Function(_RedirectMPPaymentHome value)? redirectMPPaymentHome,
     TResult? Function(_RedirectInvoiceDetail value)? redirectInvoiceDetail,
     TResult? Function(_RedirectFAQ value)? redirectFAQ,
     TResult? Function(_RedirectAboutUs value)? redirectAboutUs,
@@ -3221,7 +3532,8 @@ class _$RedirectInvoiceDetailImpl implements _RedirectInvoiceDetail {
     TResult Function(_RedirectOrderDetail value)? redirectOrderDetail,
     TResult Function(_RedirectReturnDetail value)? redirectReturnDetail,
     TResult Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
-    TResult Function(_RedirectPaymentHome value)? redirectPaymentHome,
+    TResult Function(_RedirectZPPaymentHome value)? redirectZPPaymentHome,
+    TResult Function(_RedirectMPPaymentHome value)? redirectMPPaymentHome,
     TResult Function(_RedirectInvoiceDetail value)? redirectInvoiceDetail,
     TResult Function(_RedirectFAQ value)? redirectFAQ,
     TResult Function(_RedirectAboutUs value)? redirectAboutUs,
@@ -3302,7 +3614,8 @@ class _$RedirectFAQImpl implements _RedirectFAQ {
     required TResult Function(
             PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)
         redirectPaymentDetail,
-    required TResult Function() redirectPaymentHome,
+    required TResult Function() redirectZPPaymentHome,
+    required TResult Function() redirectMPPaymentHome,
     required TResult Function(String invoiceNumber, bool isMarketPlace)
         redirectInvoiceDetail,
     required TResult Function() redirectFAQ,
@@ -3331,7 +3644,8 @@ class _$RedirectFAQImpl implements _RedirectFAQ {
     TResult? Function(
             PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)?
         redirectPaymentDetail,
-    TResult? Function()? redirectPaymentHome,
+    TResult? Function()? redirectZPPaymentHome,
+    TResult? Function()? redirectMPPaymentHome,
     TResult? Function(String invoiceNumber, bool isMarketPlace)?
         redirectInvoiceDetail,
     TResult? Function()? redirectFAQ,
@@ -3360,7 +3674,8 @@ class _$RedirectFAQImpl implements _RedirectFAQ {
     TResult Function(
             PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)?
         redirectPaymentDetail,
-    TResult Function()? redirectPaymentHome,
+    TResult Function()? redirectZPPaymentHome,
+    TResult Function()? redirectMPPaymentHome,
     TResult Function(String invoiceNumber, bool isMarketPlace)?
         redirectInvoiceDetail,
     TResult Function()? redirectFAQ,
@@ -3392,7 +3707,10 @@ class _$RedirectFAQImpl implements _RedirectFAQ {
     required TResult Function(_RedirectReturnDetail value) redirectReturnDetail,
     required TResult Function(_RedirectPaymentDetail value)
         redirectPaymentDetail,
-    required TResult Function(_RedirectPaymentHome value) redirectPaymentHome,
+    required TResult Function(_RedirectZPPaymentHome value)
+        redirectZPPaymentHome,
+    required TResult Function(_RedirectMPPaymentHome value)
+        redirectMPPaymentHome,
     required TResult Function(_RedirectInvoiceDetail value)
         redirectInvoiceDetail,
     required TResult Function(_RedirectFAQ value) redirectFAQ,
@@ -3418,7 +3736,8 @@ class _$RedirectFAQImpl implements _RedirectFAQ {
     TResult? Function(_RedirectOrderDetail value)? redirectOrderDetail,
     TResult? Function(_RedirectReturnDetail value)? redirectReturnDetail,
     TResult? Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
-    TResult? Function(_RedirectPaymentHome value)? redirectPaymentHome,
+    TResult? Function(_RedirectZPPaymentHome value)? redirectZPPaymentHome,
+    TResult? Function(_RedirectMPPaymentHome value)? redirectMPPaymentHome,
     TResult? Function(_RedirectInvoiceDetail value)? redirectInvoiceDetail,
     TResult? Function(_RedirectFAQ value)? redirectFAQ,
     TResult? Function(_RedirectAboutUs value)? redirectAboutUs,
@@ -3442,7 +3761,8 @@ class _$RedirectFAQImpl implements _RedirectFAQ {
     TResult Function(_RedirectOrderDetail value)? redirectOrderDetail,
     TResult Function(_RedirectReturnDetail value)? redirectReturnDetail,
     TResult Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
-    TResult Function(_RedirectPaymentHome value)? redirectPaymentHome,
+    TResult Function(_RedirectZPPaymentHome value)? redirectZPPaymentHome,
+    TResult Function(_RedirectMPPaymentHome value)? redirectMPPaymentHome,
     TResult Function(_RedirectInvoiceDetail value)? redirectInvoiceDetail,
     TResult Function(_RedirectFAQ value)? redirectFAQ,
     TResult Function(_RedirectAboutUs value)? redirectAboutUs,
@@ -3515,7 +3835,8 @@ class _$RedirectAboutUsImpl implements _RedirectAboutUs {
     required TResult Function(
             PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)
         redirectPaymentDetail,
-    required TResult Function() redirectPaymentHome,
+    required TResult Function() redirectZPPaymentHome,
+    required TResult Function() redirectMPPaymentHome,
     required TResult Function(String invoiceNumber, bool isMarketPlace)
         redirectInvoiceDetail,
     required TResult Function() redirectFAQ,
@@ -3544,7 +3865,8 @@ class _$RedirectAboutUsImpl implements _RedirectAboutUs {
     TResult? Function(
             PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)?
         redirectPaymentDetail,
-    TResult? Function()? redirectPaymentHome,
+    TResult? Function()? redirectZPPaymentHome,
+    TResult? Function()? redirectMPPaymentHome,
     TResult? Function(String invoiceNumber, bool isMarketPlace)?
         redirectInvoiceDetail,
     TResult? Function()? redirectFAQ,
@@ -3573,7 +3895,8 @@ class _$RedirectAboutUsImpl implements _RedirectAboutUs {
     TResult Function(
             PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)?
         redirectPaymentDetail,
-    TResult Function()? redirectPaymentHome,
+    TResult Function()? redirectZPPaymentHome,
+    TResult Function()? redirectMPPaymentHome,
     TResult Function(String invoiceNumber, bool isMarketPlace)?
         redirectInvoiceDetail,
     TResult Function()? redirectFAQ,
@@ -3605,7 +3928,10 @@ class _$RedirectAboutUsImpl implements _RedirectAboutUs {
     required TResult Function(_RedirectReturnDetail value) redirectReturnDetail,
     required TResult Function(_RedirectPaymentDetail value)
         redirectPaymentDetail,
-    required TResult Function(_RedirectPaymentHome value) redirectPaymentHome,
+    required TResult Function(_RedirectZPPaymentHome value)
+        redirectZPPaymentHome,
+    required TResult Function(_RedirectMPPaymentHome value)
+        redirectMPPaymentHome,
     required TResult Function(_RedirectInvoiceDetail value)
         redirectInvoiceDetail,
     required TResult Function(_RedirectFAQ value) redirectFAQ,
@@ -3631,7 +3957,8 @@ class _$RedirectAboutUsImpl implements _RedirectAboutUs {
     TResult? Function(_RedirectOrderDetail value)? redirectOrderDetail,
     TResult? Function(_RedirectReturnDetail value)? redirectReturnDetail,
     TResult? Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
-    TResult? Function(_RedirectPaymentHome value)? redirectPaymentHome,
+    TResult? Function(_RedirectZPPaymentHome value)? redirectZPPaymentHome,
+    TResult? Function(_RedirectMPPaymentHome value)? redirectMPPaymentHome,
     TResult? Function(_RedirectInvoiceDetail value)? redirectInvoiceDetail,
     TResult? Function(_RedirectFAQ value)? redirectFAQ,
     TResult? Function(_RedirectAboutUs value)? redirectAboutUs,
@@ -3655,7 +3982,8 @@ class _$RedirectAboutUsImpl implements _RedirectAboutUs {
     TResult Function(_RedirectOrderDetail value)? redirectOrderDetail,
     TResult Function(_RedirectReturnDetail value)? redirectReturnDetail,
     TResult Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
-    TResult Function(_RedirectPaymentHome value)? redirectPaymentHome,
+    TResult Function(_RedirectZPPaymentHome value)? redirectZPPaymentHome,
+    TResult Function(_RedirectMPPaymentHome value)? redirectMPPaymentHome,
     TResult Function(_RedirectInvoiceDetail value)? redirectInvoiceDetail,
     TResult Function(_RedirectFAQ value)? redirectFAQ,
     TResult Function(_RedirectAboutUs value)? redirectAboutUs,
@@ -3755,7 +4083,8 @@ class _$RedirectContactUsImpl implements _RedirectContactUs {
     required TResult Function(
             PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)
         redirectPaymentDetail,
-    required TResult Function() redirectPaymentHome,
+    required TResult Function() redirectZPPaymentHome,
+    required TResult Function() redirectMPPaymentHome,
     required TResult Function(String invoiceNumber, bool isMarketPlace)
         redirectInvoiceDetail,
     required TResult Function() redirectFAQ,
@@ -3784,7 +4113,8 @@ class _$RedirectContactUsImpl implements _RedirectContactUs {
     TResult? Function(
             PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)?
         redirectPaymentDetail,
-    TResult? Function()? redirectPaymentHome,
+    TResult? Function()? redirectZPPaymentHome,
+    TResult? Function()? redirectMPPaymentHome,
     TResult? Function(String invoiceNumber, bool isMarketPlace)?
         redirectInvoiceDetail,
     TResult? Function()? redirectFAQ,
@@ -3813,7 +4143,8 @@ class _$RedirectContactUsImpl implements _RedirectContactUs {
     TResult Function(
             PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)?
         redirectPaymentDetail,
-    TResult Function()? redirectPaymentHome,
+    TResult Function()? redirectZPPaymentHome,
+    TResult Function()? redirectMPPaymentHome,
     TResult Function(String invoiceNumber, bool isMarketPlace)?
         redirectInvoiceDetail,
     TResult Function()? redirectFAQ,
@@ -3845,7 +4176,10 @@ class _$RedirectContactUsImpl implements _RedirectContactUs {
     required TResult Function(_RedirectReturnDetail value) redirectReturnDetail,
     required TResult Function(_RedirectPaymentDetail value)
         redirectPaymentDetail,
-    required TResult Function(_RedirectPaymentHome value) redirectPaymentHome,
+    required TResult Function(_RedirectZPPaymentHome value)
+        redirectZPPaymentHome,
+    required TResult Function(_RedirectMPPaymentHome value)
+        redirectMPPaymentHome,
     required TResult Function(_RedirectInvoiceDetail value)
         redirectInvoiceDetail,
     required TResult Function(_RedirectFAQ value) redirectFAQ,
@@ -3871,7 +4205,8 @@ class _$RedirectContactUsImpl implements _RedirectContactUs {
     TResult? Function(_RedirectOrderDetail value)? redirectOrderDetail,
     TResult? Function(_RedirectReturnDetail value)? redirectReturnDetail,
     TResult? Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
-    TResult? Function(_RedirectPaymentHome value)? redirectPaymentHome,
+    TResult? Function(_RedirectZPPaymentHome value)? redirectZPPaymentHome,
+    TResult? Function(_RedirectMPPaymentHome value)? redirectMPPaymentHome,
     TResult? Function(_RedirectInvoiceDetail value)? redirectInvoiceDetail,
     TResult? Function(_RedirectFAQ value)? redirectFAQ,
     TResult? Function(_RedirectAboutUs value)? redirectAboutUs,
@@ -3895,7 +4230,8 @@ class _$RedirectContactUsImpl implements _RedirectContactUs {
     TResult Function(_RedirectOrderDetail value)? redirectOrderDetail,
     TResult Function(_RedirectReturnDetail value)? redirectReturnDetail,
     TResult Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
-    TResult Function(_RedirectPaymentHome value)? redirectPaymentHome,
+    TResult Function(_RedirectZPPaymentHome value)? redirectZPPaymentHome,
+    TResult Function(_RedirectMPPaymentHome value)? redirectMPPaymentHome,
     TResult Function(_RedirectInvoiceDetail value)? redirectInvoiceDetail,
     TResult Function(_RedirectFAQ value)? redirectFAQ,
     TResult Function(_RedirectAboutUs value)? redirectAboutUs,
@@ -3974,7 +4310,8 @@ class _$RedirectUserGuideImpl implements _RedirectUserGuide {
     required TResult Function(
             PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)
         redirectPaymentDetail,
-    required TResult Function() redirectPaymentHome,
+    required TResult Function() redirectZPPaymentHome,
+    required TResult Function() redirectMPPaymentHome,
     required TResult Function(String invoiceNumber, bool isMarketPlace)
         redirectInvoiceDetail,
     required TResult Function() redirectFAQ,
@@ -4003,7 +4340,8 @@ class _$RedirectUserGuideImpl implements _RedirectUserGuide {
     TResult? Function(
             PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)?
         redirectPaymentDetail,
-    TResult? Function()? redirectPaymentHome,
+    TResult? Function()? redirectZPPaymentHome,
+    TResult? Function()? redirectMPPaymentHome,
     TResult? Function(String invoiceNumber, bool isMarketPlace)?
         redirectInvoiceDetail,
     TResult? Function()? redirectFAQ,
@@ -4032,7 +4370,8 @@ class _$RedirectUserGuideImpl implements _RedirectUserGuide {
     TResult Function(
             PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)?
         redirectPaymentDetail,
-    TResult Function()? redirectPaymentHome,
+    TResult Function()? redirectZPPaymentHome,
+    TResult Function()? redirectMPPaymentHome,
     TResult Function(String invoiceNumber, bool isMarketPlace)?
         redirectInvoiceDetail,
     TResult Function()? redirectFAQ,
@@ -4064,7 +4403,10 @@ class _$RedirectUserGuideImpl implements _RedirectUserGuide {
     required TResult Function(_RedirectReturnDetail value) redirectReturnDetail,
     required TResult Function(_RedirectPaymentDetail value)
         redirectPaymentDetail,
-    required TResult Function(_RedirectPaymentHome value) redirectPaymentHome,
+    required TResult Function(_RedirectZPPaymentHome value)
+        redirectZPPaymentHome,
+    required TResult Function(_RedirectMPPaymentHome value)
+        redirectMPPaymentHome,
     required TResult Function(_RedirectInvoiceDetail value)
         redirectInvoiceDetail,
     required TResult Function(_RedirectFAQ value) redirectFAQ,
@@ -4090,7 +4432,8 @@ class _$RedirectUserGuideImpl implements _RedirectUserGuide {
     TResult? Function(_RedirectOrderDetail value)? redirectOrderDetail,
     TResult? Function(_RedirectReturnDetail value)? redirectReturnDetail,
     TResult? Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
-    TResult? Function(_RedirectPaymentHome value)? redirectPaymentHome,
+    TResult? Function(_RedirectZPPaymentHome value)? redirectZPPaymentHome,
+    TResult? Function(_RedirectMPPaymentHome value)? redirectMPPaymentHome,
     TResult? Function(_RedirectInvoiceDetail value)? redirectInvoiceDetail,
     TResult? Function(_RedirectFAQ value)? redirectFAQ,
     TResult? Function(_RedirectAboutUs value)? redirectAboutUs,
@@ -4114,7 +4457,8 @@ class _$RedirectUserGuideImpl implements _RedirectUserGuide {
     TResult Function(_RedirectOrderDetail value)? redirectOrderDetail,
     TResult Function(_RedirectReturnDetail value)? redirectReturnDetail,
     TResult Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
-    TResult Function(_RedirectPaymentHome value)? redirectPaymentHome,
+    TResult Function(_RedirectZPPaymentHome value)? redirectZPPaymentHome,
+    TResult Function(_RedirectMPPaymentHome value)? redirectMPPaymentHome,
     TResult Function(_RedirectInvoiceDetail value)? redirectInvoiceDetail,
     TResult Function(_RedirectFAQ value)? redirectFAQ,
     TResult Function(_RedirectAboutUs value)? redirectAboutUs,
@@ -4223,7 +4567,8 @@ class _$ErrorImpl implements _Error {
     required TResult Function(
             PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)
         redirectPaymentDetail,
-    required TResult Function() redirectPaymentHome,
+    required TResult Function() redirectZPPaymentHome,
+    required TResult Function() redirectMPPaymentHome,
     required TResult Function(String invoiceNumber, bool isMarketPlace)
         redirectInvoiceDetail,
     required TResult Function() redirectFAQ,
@@ -4252,7 +4597,8 @@ class _$ErrorImpl implements _Error {
     TResult? Function(
             PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)?
         redirectPaymentDetail,
-    TResult? Function()? redirectPaymentHome,
+    TResult? Function()? redirectZPPaymentHome,
+    TResult? Function()? redirectMPPaymentHome,
     TResult? Function(String invoiceNumber, bool isMarketPlace)?
         redirectInvoiceDetail,
     TResult? Function()? redirectFAQ,
@@ -4281,7 +4627,8 @@ class _$ErrorImpl implements _Error {
     TResult Function(
             PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)?
         redirectPaymentDetail,
-    TResult Function()? redirectPaymentHome,
+    TResult Function()? redirectZPPaymentHome,
+    TResult Function()? redirectMPPaymentHome,
     TResult Function(String invoiceNumber, bool isMarketPlace)?
         redirectInvoiceDetail,
     TResult Function()? redirectFAQ,
@@ -4313,7 +4660,10 @@ class _$ErrorImpl implements _Error {
     required TResult Function(_RedirectReturnDetail value) redirectReturnDetail,
     required TResult Function(_RedirectPaymentDetail value)
         redirectPaymentDetail,
-    required TResult Function(_RedirectPaymentHome value) redirectPaymentHome,
+    required TResult Function(_RedirectZPPaymentHome value)
+        redirectZPPaymentHome,
+    required TResult Function(_RedirectMPPaymentHome value)
+        redirectMPPaymentHome,
     required TResult Function(_RedirectInvoiceDetail value)
         redirectInvoiceDetail,
     required TResult Function(_RedirectFAQ value) redirectFAQ,
@@ -4339,7 +4689,8 @@ class _$ErrorImpl implements _Error {
     TResult? Function(_RedirectOrderDetail value)? redirectOrderDetail,
     TResult? Function(_RedirectReturnDetail value)? redirectReturnDetail,
     TResult? Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
-    TResult? Function(_RedirectPaymentHome value)? redirectPaymentHome,
+    TResult? Function(_RedirectZPPaymentHome value)? redirectZPPaymentHome,
+    TResult? Function(_RedirectMPPaymentHome value)? redirectMPPaymentHome,
     TResult? Function(_RedirectInvoiceDetail value)? redirectInvoiceDetail,
     TResult? Function(_RedirectFAQ value)? redirectFAQ,
     TResult? Function(_RedirectAboutUs value)? redirectAboutUs,
@@ -4363,7 +4714,8 @@ class _$ErrorImpl implements _Error {
     TResult Function(_RedirectOrderDetail value)? redirectOrderDetail,
     TResult Function(_RedirectReturnDetail value)? redirectReturnDetail,
     TResult Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
-    TResult Function(_RedirectPaymentHome value)? redirectPaymentHome,
+    TResult Function(_RedirectZPPaymentHome value)? redirectZPPaymentHome,
+    TResult Function(_RedirectMPPaymentHome value)? redirectMPPaymentHome,
     TResult Function(_RedirectInvoiceDetail value)? redirectInvoiceDetail,
     TResult Function(_RedirectFAQ value)? redirectFAQ,
     TResult Function(_RedirectAboutUs value)? redirectAboutUs,
@@ -4480,7 +4832,8 @@ class _$RedirectResetPasswordImpl implements _RedirectResetPassword {
     required TResult Function(
             PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)
         redirectPaymentDetail,
-    required TResult Function() redirectPaymentHome,
+    required TResult Function() redirectZPPaymentHome,
+    required TResult Function() redirectMPPaymentHome,
     required TResult Function(String invoiceNumber, bool isMarketPlace)
         redirectInvoiceDetail,
     required TResult Function() redirectFAQ,
@@ -4509,7 +4862,8 @@ class _$RedirectResetPasswordImpl implements _RedirectResetPassword {
     TResult? Function(
             PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)?
         redirectPaymentDetail,
-    TResult? Function()? redirectPaymentHome,
+    TResult? Function()? redirectZPPaymentHome,
+    TResult? Function()? redirectMPPaymentHome,
     TResult? Function(String invoiceNumber, bool isMarketPlace)?
         redirectInvoiceDetail,
     TResult? Function()? redirectFAQ,
@@ -4538,7 +4892,8 @@ class _$RedirectResetPasswordImpl implements _RedirectResetPassword {
     TResult Function(
             PaymentSummaryDetails paymentIdentifierInfo, bool isMarketPlace)?
         redirectPaymentDetail,
-    TResult Function()? redirectPaymentHome,
+    TResult Function()? redirectZPPaymentHome,
+    TResult Function()? redirectMPPaymentHome,
     TResult Function(String invoiceNumber, bool isMarketPlace)?
         redirectInvoiceDetail,
     TResult Function()? redirectFAQ,
@@ -4570,7 +4925,10 @@ class _$RedirectResetPasswordImpl implements _RedirectResetPassword {
     required TResult Function(_RedirectReturnDetail value) redirectReturnDetail,
     required TResult Function(_RedirectPaymentDetail value)
         redirectPaymentDetail,
-    required TResult Function(_RedirectPaymentHome value) redirectPaymentHome,
+    required TResult Function(_RedirectZPPaymentHome value)
+        redirectZPPaymentHome,
+    required TResult Function(_RedirectMPPaymentHome value)
+        redirectMPPaymentHome,
     required TResult Function(_RedirectInvoiceDetail value)
         redirectInvoiceDetail,
     required TResult Function(_RedirectFAQ value) redirectFAQ,
@@ -4596,7 +4954,8 @@ class _$RedirectResetPasswordImpl implements _RedirectResetPassword {
     TResult? Function(_RedirectOrderDetail value)? redirectOrderDetail,
     TResult? Function(_RedirectReturnDetail value)? redirectReturnDetail,
     TResult? Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
-    TResult? Function(_RedirectPaymentHome value)? redirectPaymentHome,
+    TResult? Function(_RedirectZPPaymentHome value)? redirectZPPaymentHome,
+    TResult? Function(_RedirectMPPaymentHome value)? redirectMPPaymentHome,
     TResult? Function(_RedirectInvoiceDetail value)? redirectInvoiceDetail,
     TResult? Function(_RedirectFAQ value)? redirectFAQ,
     TResult? Function(_RedirectAboutUs value)? redirectAboutUs,
@@ -4620,7 +4979,8 @@ class _$RedirectResetPasswordImpl implements _RedirectResetPassword {
     TResult Function(_RedirectOrderDetail value)? redirectOrderDetail,
     TResult Function(_RedirectReturnDetail value)? redirectReturnDetail,
     TResult Function(_RedirectPaymentDetail value)? redirectPaymentDetail,
-    TResult Function(_RedirectPaymentHome value)? redirectPaymentHome,
+    TResult Function(_RedirectZPPaymentHome value)? redirectZPPaymentHome,
+    TResult Function(_RedirectMPPaymentHome value)? redirectMPPaymentHome,
     TResult Function(_RedirectInvoiceDetail value)? redirectInvoiceDetail,
     TResult Function(_RedirectFAQ value)? redirectFAQ,
     TResult Function(_RedirectAboutUs value)? redirectAboutUs,
