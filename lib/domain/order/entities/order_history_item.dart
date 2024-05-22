@@ -199,6 +199,11 @@ class OrderHistoryItem with _$OrderHistoryItem {
         pricingUnit: tenderPriceUnit,
         tenderPrice: tenderPrice,
       );
+
+  String get sellerName =>
+      _isDisplaySellerName ? principalData.principalName.name : '';
+
+  bool get _isDisplaySellerName => isMarketPlace && isBundle;
 }
 
 extension ViewByItemListExtension on List<OrderHistoryItem> {

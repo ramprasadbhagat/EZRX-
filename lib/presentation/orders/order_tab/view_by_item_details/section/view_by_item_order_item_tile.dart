@@ -17,6 +17,7 @@ class ViewByItemOrderItemTile extends StatelessWidget {
         eligibilityState: eligibilityState,
         item: orderHistoryItem,
       ),
+      sellerName: orderHistoryItem.sellerName,
       label: orderHistoryItem.combinationCode(
         showGMCPart: eligibilityState.salesOrgConfigs.enableGMC,
       ),
@@ -41,10 +42,6 @@ class ViewByItemOrderItemTile extends StatelessWidget {
       quantity: orderHistoryItem.qty.toString(),
       materialNumber: orderHistoryItem.materialNumber,
       materialDescription: orderHistoryItem.materialDescription,
-      orderNumber: orderHistoryItem.orderNumber,
-      invoiceNumber: _InvoiceNumberSubtitle(
-        invoiceData: orderHistoryItem.invoiceNumber,
-      ),
       tenderContractSection: !orderHistoryItem.tenderOrderReason.isEmpty
           ? TenderContractSection(
               tenderContract: orderHistoryItem.orderItemTenderContract,
@@ -95,40 +92,5 @@ class _PriceComponentSubtitle extends StatelessWidget {
     }
 
     return const SizedBox.shrink();
-  }
-}
-
-class _InvoiceNumberSubtitle extends StatelessWidget {
-  final StringValue invoiceData;
-  const _InvoiceNumberSubtitle({Key? key, required this.invoiceData})
-      : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<ViewByItemsBloc, ViewByItemsState>(
-      buildWhen: (previous, current) =>
-          previous.isFetchingInvoices != current.isFetchingInvoices,
-      builder: (context, state) {
-        if (!state.isFetchingInvoices && !invoiceData.isNotEmpty) {
-          return const SizedBox.shrink();
-        }
-
-        return Flexible(
-          child: LoadingShimmer.withChild(
-            enabled: state.isFetchingInvoices,
-            child: Padding(
-              padding: const EdgeInsets.all(5.0),
-              child: Text(
-                ' | ${context.tr('Invoice')} #${invoiceData.getOrDefaultValue('')}',
-                style: Theme.of(context)
-                    .textTheme
-                    .titleSmall!
-                    .copyWith(textBaseline: TextBaseline.alphabetic),
-              ),
-            ),
-          ),
-        );
-      },
-    );
   }
 }

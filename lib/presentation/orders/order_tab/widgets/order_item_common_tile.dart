@@ -1,4 +1,3 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/presentation/core/covid_tag.dart';
@@ -23,11 +22,10 @@ class OrderItemCommonTile extends StatelessWidget {
   final bool isCovidItem;
   final bool showBundleTag;
   final String materialDescription;
-  final OrderNumber orderNumber;
   final Widget tenderContractSection;
   final Widget batchExpiryDate;
+  final String sellerName;
   final StatusType statusTag;
-  final Widget invoiceNumber;
   const OrderItemCommonTile({
     Key? key,
     this.onTap,
@@ -41,9 +39,8 @@ class OrderItemCommonTile extends StatelessWidget {
     required this.materialNumber,
     this.isCovidItem = false,
     this.showBundleTag = false,
+    this.sellerName = '',
     required this.materialDescription,
-    required this.orderNumber,
-    required this.invoiceNumber,
     required this.tenderContractSection,
     required this.batchExpiryDate,
     required this.statusTag,
@@ -106,10 +103,20 @@ class OrderItemCommonTile extends StatelessWidget {
                               materialDescription,
                               key: WidgetKeys.commonTileItemTitle,
                               style: Theme.of(context).textTheme.labelMedium,
-                              overflow: TextOverflow.ellipsis,
                             ),
                           ),
                           batchExpiryDate,
+                          if (sellerName.isNotEmpty)
+                            Text(
+                              sellerName,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodySmall
+                                  ?.copyWith(
+                                    color: ZPColors.neutralsGrey1,
+                                    fontSize: 10,
+                                  ),
+                            ),
                           priceComponentSubtitle,
                         ],
                       ),
@@ -118,22 +125,7 @@ class OrderItemCommonTile extends StatelessWidget {
                 ],
               ),
             ),
-            Padding(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 12.0, vertical: 10),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Flexible(
-                    child: Text(
-                      '${context.tr('Order')} #${orderNumber.getValue()}',
-                      style: Theme.of(context).textTheme.titleSmall,
-                    ),
-                  ),
-                  invoiceNumber,
-                ],
-              ),
-            ),
+            const SizedBox(height: 5),
             const Divider(
               endIndent: 0,
               indent: 0,

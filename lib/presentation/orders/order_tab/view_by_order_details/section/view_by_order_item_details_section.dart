@@ -8,7 +8,6 @@ import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
 import 'package:ezrxmobile/infrastructure/core/common/tracking_events.dart';
 import 'package:ezrxmobile/infrastructure/core/common/tracking_properties.dart';
-import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
 import 'package:ezrxmobile/presentation/core/quantity_and_price_with_tax.dart';
 import 'package:ezrxmobile/presentation/core/status_label.dart';
@@ -100,11 +99,6 @@ class _OrderItemTile extends StatelessWidget {
         orderItem.materialNumber.displayMatNo,
         orderItem.isBonus,
       ),
-      orderNumber: orderHistoryDetails.orderNumber,
-      invoiceNumber: _InvoiceNumberSubtitle(
-        materialNumber: orderItem.materialNumber,
-        lineNumber: orderItem.lineNumber,
-      ),
       batchExpiryDate: OrderHistoryStockInfo.viewByOrder(
         eligibilityState: eligibilityState,
         item: orderItem,
@@ -191,50 +185,6 @@ class _OrderItemTile extends StatelessWidget {
 
     await context.router.push(
       const ViewByItemDetailsPageRoute(),
-    );
-  }
-}
-
-class _InvoiceNumberSubtitle extends StatelessWidget {
-  final MaterialNumber materialNumber;
-  final LineNumber lineNumber;
-  const _InvoiceNumberSubtitle({
-    Key? key,
-    required this.materialNumber,
-    required this.lineNumber,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<ViewByOrderDetailsBloc, ViewByOrderDetailsState>(
-      buildWhen: (previous, current) =>
-          previous.isFetchingInvoices != current.isFetchingInvoices,
-      builder: (context, state) {
-        final invoiceNumber = state.orderHistoryDetails.getInvoiceNumber(
-          materialNumber: materialNumber,
-          lineNumber: lineNumber,
-        );
-
-        if (!state.isFetchingInvoices && !invoiceNumber.isNotEmpty) {
-          return const SizedBox.shrink();
-        }
-
-        return Flexible(
-          child: LoadingShimmer.withChild(
-            enabled: state.isFetchingInvoices,
-            child: Padding(
-              padding: const EdgeInsets.all(5.0),
-              child: Text(
-                '| ${context.tr('Invoice')} #${invoiceNumber.getValue()}',
-                style: Theme.of(context)
-                    .textTheme
-                    .titleSmall!
-                    .copyWith(textBaseline: TextBaseline.alphabetic),
-              ),
-            ),
-          ),
-        );
-      },
     );
   }
 }
