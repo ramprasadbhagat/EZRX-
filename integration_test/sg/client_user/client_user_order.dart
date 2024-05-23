@@ -2723,11 +2723,36 @@ void main() {
         materialWithListPriceZero,
         newUnitPrice.priceDisplay(currency),
       );
-
+      
       //verify cutoff List Price is Price Not Available
       cartRobot.verifyMaterialCutOffPrice(
         materialWithListPriceZero,
         materialPriceWithListPriceZero,
+      );
+    });
+
+    testWidgets(
+        'EZRX-T2097 | Verify Bonus override and counter offer not visible for covid material for customer who has attribute kattr7 = ZEV',
+        (tester) async {
+      await pumpAppWithHomeScreen(tester, shipToCode: otherShipToCode);
+      await browseProductFromEmptyCart();
+      await productSuggestionRobot
+          .searchWithKeyboardAction(covidMaterialNumber);
+      await productSuggestionRobot.tapSearchResult(covidMaterialNumber);
+      await covidDetailRobot.tapAddToCart();
+      covidDetailRobot.verifyCartButtonQty(1);
+      covidDetailRobot.verifyAddToCartSuccessMessage();
+      await covidDetailRobot.dismissSnackbar();
+      await covidDetailRobot.tapCartButton();
+      cartRobot.verifyPage();
+      await cartRobot.verifyCovidMaterial(covidMaterialNumber);
+      cartRobot.verifyMaterialBonusSampleButton(
+        covidMaterialNumber,
+        isVisible: false,
+      );
+      cartRobot.verifyMaterialCounterOfferButton(
+        covidMaterialNumber,
+        isVisible: false,
       );
     });
   });
@@ -3849,6 +3874,115 @@ void main() {
         cartRobot.verifyPage();
         await cartRobot.verifyMaterial(materialNumber);
         cartRobot.verifyMaterialQty(materialNumber, qty);
+      });
+
+      testWidgets(
+          'EZRX-T2098 | Verify commercial item can not be buy again when cart contain covid item for customer who has attribute kattr7 = ZEV',
+          (tester) async {
+        //init app
+        await pumpAppWithHomeScreen(tester, shipToCode: otherShipToCode);
+
+        //checkout and place order with normal material
+        await checkoutWithMaterial(materialNumber, 1000);
+        await checkoutRobot.tapPlaceOrderButton();
+        orderSuccessRobot.verifyPage();
+        await orderSuccessRobot.verifyOrderSubmittedMessage();
+        await orderSuccessRobot.dismissSnackbar();
+        orderSuccessRobot.verifyOrderId();
+        orderSuccessRobot.verifyOrderDate();
+        await orderSuccessRobot.verifyOrderSummarySection();
+        await orderSuccessRobot.tapCloseButton();
+
+        await commonRobot.navigateToScreen(NavigationTab.orders);
+        await ordersRootRobot.switchToViewByOrders();
+        await commonRobot.pullToRefresh();
+        await commonRobot.navigateToScreen(NavigationTab.products);
+
+        //then adding covid material to cart
+        await productRobot.openSearchProductScreen();
+        await productSuggestionRobot
+            .searchWithKeyboardAction(covidMaterialNumber);
+        await productSuggestionRobot.tapSearchResult(covidMaterialNumber);
+        await covidDetailRobot.tapAddToCart();
+        await covidDetailRobot.dismissSnackbar();
+        await covidDetailRobot.tapBackButton();
+        await productRobot.tapToBackScreen();
+
+        await commonRobot.navigateToScreen(NavigationTab.orders);
+
+        //try to buy again normal material
+        await ordersRootRobot.switchToViewByOrders();
+        await viewByOrdersRobot.tapFirstBuyAgainButton();
+
+        //verify dialog
+        covidDetailRobot.verifyProceedNotToAddToCartDialog();
+        covidDetailRobot
+            .verifyCommercialMaterialCannotBeAddedWithCovidErrorTextInDialog();
+
+        //Tap cancel
+        await covidDetailRobot.tapCancelCovidMaterialAddToCartButton();
+
+        //Continue proceed with normal material and verify normal material added to cart
+        await viewByOrdersRobot.tapFirstBuyAgainButton();
+        covidDetailRobot.verifyProceedNotToAddToCartDialog();
+        await covidDetailRobot.tapProceedCovidMaterialAddToCartButton();
+        await commonRobot.dismissSnackbar(dismissAll: true);
+        cartRobot.verifyPage();
+        await cartRobot.verifyMaterial(materialNumber);
+      });
+
+      testWidgets(
+          'EZRX-T2099 | Verify covid item can not be buy again when cart contain commercial item for customer who has attribute kattr7 = ZEV',
+          (tester) async {
+        //init app
+        await pumpAppWithHomeScreen(tester, shipToCode: otherShipToCode);
+
+        //checkout and place order with covid material
+        await checkoutWithMaterial(covidMaterialNumber, 1);
+        await checkoutRobot.tapPlaceOrderButton();
+        orderSuccessRobot.verifyPage();
+        await orderSuccessRobot.verifyOrderSubmittedMessage();
+        await orderSuccessRobot.dismissSnackbar();
+        orderSuccessRobot.verifyOrderId();
+        orderSuccessRobot.verifyOrderDate();
+        await orderSuccessRobot.verifyOrderSummarySection();
+        await orderSuccessRobot.tapCloseButton();
+
+        await commonRobot.navigateToScreen(NavigationTab.orders);
+        await ordersRootRobot.switchToViewByOrders();
+        await commonRobot.pullToRefresh();
+        await commonRobot.navigateToScreen(NavigationTab.products);
+
+        //then adding normal material to cart
+        await productRobot.openSearchProductScreen();
+        await productSuggestionRobot.searchWithKeyboardAction(materialNumber);
+        await productSuggestionRobot.tapSearchResult(materialNumber);
+        await covidDetailRobot.tapAddToCart();
+        await covidDetailRobot.dismissSnackbar();
+        await covidDetailRobot.tapBackButton();
+        await productRobot.tapToBackScreen();
+
+        await commonRobot.navigateToScreen(NavigationTab.orders);
+
+        //try to buy again covid material
+        await ordersRootRobot.switchToViewByOrders();
+        await viewByOrdersRobot.tapFirstBuyAgainButton();
+
+        //verify dialog
+        covidDetailRobot.verifyProceedNotToAddToCartDialog();
+        covidDetailRobot
+            .verifyCovidCannotBeAddedWithCommercialMaterialErrorTextInDialog();
+
+        //Tap cancel
+        await covidDetailRobot.tapCancelCovidMaterialAddToCartButton();
+
+        //Continue proceed with covid material and verify covid material added to cart
+        await viewByOrdersRobot.tapFirstBuyAgainButton();
+        covidDetailRobot.verifyProceedNotToAddToCartDialog();
+        await covidDetailRobot.tapProceedCovidMaterialAddToCartButton();
+        await commonRobot.dismissSnackbar(dismissAll: true);
+        cartRobot.verifyPage();
+        await cartRobot.verifyMaterial(covidMaterialNumber);
       });
     });
 
