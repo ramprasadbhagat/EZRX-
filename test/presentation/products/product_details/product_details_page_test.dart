@@ -57,6 +57,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
 import '../../../common_mock_data/customer_code_mock.dart';
+import '../../../common_mock_data/mock_bloc.dart';
 import '../../../common_mock_data/mock_other.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_id_sales_org_config.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_kh_sales_org_config.dart';
@@ -66,51 +67,6 @@ import '../../../common_mock_data/sales_org_config_mock/fake_vn_sales_org_config
 import '../../../common_mock_data/sales_organsiation_mock.dart';
 import '../../../common_mock_data/user_mock.dart';
 import '../../../utils/widget_utils.dart';
-
-class EligibilityBlocMock extends MockBloc<EligibilityEvent, EligibilityState>
-    implements EligibilityBloc {}
-
-class MaterialListMockBloc
-    extends MockBloc<MaterialListEvent, MaterialListState>
-    implements MaterialListBloc {}
-
-class UserBlocMock extends MockBloc<UserEvent, UserState> implements UserBloc {}
-
-class ProductDetailsMockBloc
-    extends MockBloc<ProductDetailEvent, ProductDetailState>
-    implements ProductDetailBloc {}
-
-class CustomerLicenseBlocMock
-    extends MockBloc<CustomerLicenseEvent, CustomerLicenseState>
-    implements CustomerLicenseBloc {}
-
-class ComboDealMaterialDetailBlocMock
-    extends MockBloc<ComboDealMaterialDetailEvent, ComboDealMaterialDetailState>
-    implements ComboDealMaterialDetailBloc {}
-
-class CartMockBloc extends MockBloc<CartEvent, CartState> implements CartBloc {}
-
-class ProductImageMockBloc
-    extends MockBloc<ProductImageEvent, ProductImageState>
-    implements ProductImageBloc {}
-
-class MaterialPriceMockBloc
-    extends MockBloc<MaterialPriceEvent, MaterialPriceState>
-    implements MaterialPriceBloc {}
-
-class ComboDealListMockBloc
-    extends MockBloc<ComboDealListEvent, ComboDealListState>
-    implements ComboDealListBloc {}
-
-class TenderContractDetailBlocMock
-    extends MockBloc<TenderContractDetailEvent, TenderContractDetailState>
-    implements TenderContractDetailBloc {}
-
-class MockAppRouter extends Mock implements AppRouter {}
-
-class MockMixPanelService extends Mock implements MixpanelService {}
-
-class MaterialPageXMock extends Mock implements MaterialPageX {}
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
@@ -177,7 +133,7 @@ void main() {
       stringMatch: 'orders/material_details',
       key: ValueKey('ProductDetailsPageRoute'),
     ),
-    router: MockAppRouter(),
+    router: AutoRouteMock(),
     pendingChildren: [],
   );
 
@@ -201,7 +157,7 @@ void main() {
     registerFallbackValue(SalesOrganisation.empty());
     registerFallbackValue(ShipToInfo.empty());
 
-    locator.registerLazySingleton<MixpanelService>(() => MockMixPanelService());
+    locator.registerLazySingleton<MixpanelService>(() => MixpanelServiceMock());
     locator.registerSingleton<ClevertapService>(ClevertapServiceMock());
     locator.registerFactory<ProductDetailBloc>(() => productDetailMockBloc);
     locator.registerFactory<TenderContractDetailBloc>(
@@ -252,16 +208,16 @@ void main() {
     'Product Details Page',
     () {
       setUp(() {
-        materialListMockBloc = MaterialListMockBloc();
+        materialListMockBloc = MaterialListBlocMock();
         tenderContractDetailBlocMock = TenderContractDetailBlocMock();
-        productDetailMockBloc = ProductDetailsMockBloc();
-        mockProductImageBloc = ProductImageMockBloc();
-        materialPriceMockBloc = MaterialPriceMockBloc();
-        comboDealListMockBloc = ComboDealListMockBloc();
+        productDetailMockBloc = ProductDetailBlocMock();
+        mockProductImageBloc = ProductImageBlocMock();
+        materialPriceMockBloc = MaterialPriceBlocMock();
+        comboDealListMockBloc = ComboDealListBlocMock();
         comboDealMaterialDetailBlocMock = ComboDealMaterialDetailBlocMock();
-        cartMockBloc = CartMockBloc();
+        cartMockBloc = CartBlocMock();
         eligibilityBlocMock = EligibilityBlocMock();
-        autoRouterMock = MockAppRouter();
+        autoRouterMock = AutoRouteMock();
         customerLicenseBlocMock = CustomerLicenseBlocMock();
         userBlocMock = UserBlocMock();
 

@@ -1,11 +1,5 @@
-import 'package:bloc_test/bloc_test.dart';
-import 'package:easy_localization/easy_localization.dart';
-import 'package:easy_localization_loader/easy_localization_loader.dart';
-import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/customer_license_bloc/customer_license_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
-import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
-import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/combo_deal/combo_deal_list_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
@@ -17,6 +11,7 @@ import 'package:ezrxmobile/domain/order/entities/combo_deal.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
+import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/products/product_details/product_details_page.dart';
 import 'package:ezrxmobile/presentation/products/product_details/widget/combo_offers_product.dart';
 import 'package:ezrxmobile/presentation/products/widgets/combo_offer_label.dart';
@@ -25,68 +20,23 @@ import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
 
+import '../../common_mock_data/mock_bloc.dart';
 import '../../utils/widget_utils.dart';
-
-class UserBlocMock extends MockBloc<UserEvent, UserState> implements UserBloc {}
-
-class CustomerCodeBlocMock
-    extends MockBloc<CustomerCodeEvent, CustomerCodeState>
-    implements CustomerCodeBloc {}
-
-class ProductDetailMockBloc
-    extends MockBloc<ProductDetailEvent, ProductDetailState>
-    implements ProductDetailBloc {}
-
-class SalesOrgMockBloc extends MockBloc<SalesOrgEvent, SalesOrgState>
-    implements SalesOrgBloc {}
-
-class CartMocBloc extends MockBloc<CartEvent, CartState> implements CartBloc {}
-
-class MaterialPriceBlocMock
-    extends MockBloc<MaterialPriceEvent, MaterialPriceState>
-    implements MaterialPriceBloc {}
-
-class CustomerLicenseBlocMock
-    extends MockBloc<CustomerLicenseEvent, CustomerLicenseState>
-    implements CustomerLicenseBloc {}
-
-class ProductImageMockBloc
-    extends MockBloc<ProductImageEvent, ProductImageState>
-    implements ProductImageBloc {}
-
-class TenderContractDetailBlocMock
-    extends MockBloc<TenderContractDetailEvent, TenderContractDetailState>
-    implements TenderContractDetailBloc {}
-
-class EligibilityBlocMock extends MockBloc<EligibilityEvent, EligibilityState>
-    implements EligibilityBloc {}
-
-class ComboDealListMockBloc
-    extends MockBloc<ComboDealListEvent, ComboDealListState>
-    implements ComboDealListBloc {}
-
-class AutoRouterMock extends Mock implements AppRouter {}
-
-final locator = GetIt.instance;
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   WidgetsFlutterBinding.ensureInitialized();
-  late UserBloc userBlocMock;
   late AppRouter autoRouterMock;
-  late CustomerCodeBloc customerCodeBlocMock;
-  final mockSalesOrgBloc = SalesOrgMockBloc();
   late EligibilityBloc eligibilityBlocMock;
   late ProductDetailBloc productDetailBloc;
-  final mockCartBloc = CartMocBloc();
+  final mockCartBloc = CartBlocMock();
   late CustomerLicenseBloc customerLicenseBlocMock;
   late MaterialPriceBloc materialPriceBlocMock;
-  final mockProductImageBloc = ProductImageMockBloc();
+  final mockProductImageBloc = ProductImageBlocMock();
   late Map<MaterialNumber, Price> mockPriceList;
-  final comboDealListMockBloc = ComboDealListMockBloc();
+  final comboDealListMockBloc = ComboDealListBlocMock();
   late TenderContractDetailBloc tenderContractDetailBloc;
 
   setUpAll(() async {
@@ -95,28 +45,21 @@ void main() {
     locator.registerFactory<TenderContractDetailBloc>(
       () => tenderContractDetailBloc,
     );
-    // locator.registerFactory<ProductDetailEvent>(() => productDetailBloc);
   });
   group('ProductDetail page', () {
     setUp(() {
-      userBlocMock = UserBlocMock();
       tenderContractDetailBloc = TenderContractDetailBlocMock();
       autoRouterMock = locator<AppRouter>();
-      productDetailBloc = ProductDetailMockBloc();
-      customerCodeBlocMock = CustomerCodeBlocMock();
+      productDetailBloc = ProductDetailBlocMock();
       materialPriceBlocMock = MaterialPriceBlocMock();
       eligibilityBlocMock = EligibilityBlocMock();
       customerLicenseBlocMock = CustomerLicenseBlocMock();
-      when(() => mockSalesOrgBloc.state).thenReturn(SalesOrgState.initial());
       when(() => eligibilityBlocMock.state)
           .thenReturn(EligibilityState.initial());
       when(() => productDetailBloc.state)
           .thenReturn(ProductDetailState.initial());
       when(() => tenderContractDetailBloc.state)
           .thenReturn(TenderContractDetailState.initial());
-      when(() => userBlocMock.state).thenReturn(UserState.initial());
-      when(() => customerCodeBlocMock.state)
-          .thenReturn(CustomerCodeState.initial());
       when(() => mockCartBloc.state).thenReturn(CartState.initial());
       when(() => materialPriceBlocMock.state)
           .thenReturn(MaterialPriceState.initial());
@@ -136,48 +79,32 @@ void main() {
       );
     });
     Widget getScopedWidget() {
-      return EasyLocalization(
-        supportedLocales: const [
-          Locale('en'),
-        ],
-        path: 'assets/langs/langs.csv',
-        startLocale: const Locale('en'),
-        fallbackLocale: const Locale('en'),
-        saveLocale: true,
-        useOnlyLangCode: true,
-        assetLoader: CsvAssetLoader(),
-        child: WidgetUtils.getScopedWidget(
-          autoRouterMock: autoRouterMock,
-          usingLocalization: true,
-          providers: [
-            BlocProvider<UserBloc>(create: (context) => userBlocMock),
-            BlocProvider<SalesOrgBloc>(create: (context) => mockSalesOrgBloc),
-            BlocProvider<ProductDetailBloc>(
-              create: (context) => productDetailBloc,
-            ),
-            BlocProvider<CustomerCodeBloc>(
-              create: (context) => customerCodeBlocMock,
-            ),
-            BlocProvider<CartBloc>(create: (context) => mockCartBloc),
-            BlocProvider<MaterialPriceBloc>(
-              create: ((context) => materialPriceBlocMock),
-            ),
-            BlocProvider<ProductImageBloc>(
-              create: (context) => mockProductImageBloc,
-            ),
-            BlocProvider<EligibilityBloc>(
-              create: (context) => eligibilityBlocMock,
-            ),
-            BlocProvider<ComboDealListBloc>(
-              create: (context) => comboDealListMockBloc,
-            ),
-            BlocProvider<CustomerLicenseBloc>(
-              create: (context) => customerLicenseBlocMock,
-            ),
-          ],
-          child: Scaffold(
-            body: ProductDetailsPage(materialInfo: MaterialInfo.empty()),
+      return WidgetUtils.getScopedWidget(
+        autoRouterMock: autoRouterMock,
+        usingLocalization: true,
+        providers: [
+          BlocProvider<ProductDetailBloc>(
+            create: (context) => productDetailBloc,
           ),
+          BlocProvider<CartBloc>(create: (context) => mockCartBloc),
+          BlocProvider<MaterialPriceBloc>(
+            create: ((context) => materialPriceBlocMock),
+          ),
+          BlocProvider<ProductImageBloc>(
+            create: (context) => mockProductImageBloc,
+          ),
+          BlocProvider<EligibilityBloc>(
+            create: (context) => eligibilityBlocMock,
+          ),
+          BlocProvider<ComboDealListBloc>(
+            create: (context) => comboDealListMockBloc,
+          ),
+          BlocProvider<CustomerLicenseBloc>(
+            create: (context) => customerLicenseBlocMock,
+          ),
+        ],
+        child: Scaffold(
+          body: ProductDetailsPage(materialInfo: MaterialInfo.empty()),
         ),
       );
     }
@@ -205,6 +132,19 @@ void main() {
           (tester.widget(addToCartButton) as ElevatedButton).enabled,
           false,
         );
+      },
+    );
+
+    testWidgets(
+      ' Product details page offer tag hide when loading material detail',
+      (tester) async {
+        when(() => productDetailBloc.state).thenReturn(
+          ProductDetailState.initial().copyWith(isDetailFetching: true),
+        );
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pump();
+
+        expect(find.byType(OfferLabel), findsNothing);
       },
     );
 

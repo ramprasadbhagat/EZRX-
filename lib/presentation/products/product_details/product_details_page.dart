@@ -288,9 +288,10 @@ class _BodyContent extends StatelessWidget {
           key: WidgetKeys.bodyContentProductDetail,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            OfferLabel(
-              materialInfo: materialInfo,
-            ),
+            if (!state.isDetailFetching)
+              OfferLabel(
+                materialInfo: materialInfo,
+              ),
             ComboOfferLabel(
               materialInfo: materialInfo,
               iconSize: 20,

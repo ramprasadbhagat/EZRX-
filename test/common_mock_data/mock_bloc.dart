@@ -38,6 +38,7 @@ import 'package:ezrxmobile/application/order/product_search/product_search_bloc.
 import 'package:ezrxmobile/application/order/re_order_permission/re_order_permission_bloc.dart';
 import 'package:ezrxmobile/application/order/scan_material_info/scan_material_info_bloc.dart';
 import 'package:ezrxmobile/application/order/tender_contract/tender_contract_bloc.dart';
+import 'package:ezrxmobile/application/order/tender_contract/tender_contract_detail_bloc.dart';
 import 'package:ezrxmobile/application/order/tender_contract/tender_contract_list_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_item/view_by_item_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_item/view_by_item_filter/view_by_item_filter_bloc.dart';
@@ -281,6 +282,10 @@ class TenderContractBlocMock
 class TenderContractListBlocMock
     extends MockBloc<TenderContractListEvent, TenderContractListState>
     implements TenderContractListBloc {}
+
+class TenderContractDetailBlocMock
+    extends MockBloc<TenderContractDetailEvent, TenderContractDetailState>
+    implements TenderContractDetailBloc {}
 
 //////////////////////////////////////////////////////////////////////////
 
