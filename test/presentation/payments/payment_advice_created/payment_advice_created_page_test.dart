@@ -13,8 +13,8 @@ import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/payments/entities/create_virtual_account.dart';
-import 'package:ezrxmobile/domain/payments/entities/customer_payment_info.dart';
 import 'package:ezrxmobile/domain/payments/entities/new_payment_method.dart';
+import 'package:ezrxmobile/domain/payments/entities/payment_info.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_invoice_info_pdf.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_item.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_method_option.dart';
@@ -776,7 +776,7 @@ void main() {
         when(() => newPaymentBlocMock.state).thenReturn(
           NewPaymentState.initial().copyWith(
             paymentInvoiceInfoPdf: fakePaymentInvoiceInfoPdf,
-            customerPaymentInfo: CustomerPaymentInfo.empty().copyWith(
+            paymentInfo: PaymentInfo.empty().copyWith(
               createdDate: DateTimeStringValue('2023-10-12'),
               adviceExpiry: AdviceExpiryValue('30 days'),
             ),
@@ -981,8 +981,8 @@ void main() {
           ),
           NewPaymentState.initial().copyWith(
             isLoading: false,
-            customerPaymentInfo:
-                CustomerPaymentInfo.empty().copyWith(zzAdvice: 'fake-zzadvice'),
+            paymentInfo:
+                PaymentInfo.empty().copyWith(zzAdvice: 'fake-zzadvice'),
           ),
         ];
 

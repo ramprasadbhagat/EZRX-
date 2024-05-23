@@ -11,10 +11,8 @@ import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/payments/entities/available_credit_filter.dart';
 import 'package:ezrxmobile/domain/payments/entities/create_virtual_account.dart';
 import 'package:ezrxmobile/domain/payments/entities/customer_open_item.dart';
-import 'package:ezrxmobile/domain/payments/entities/customer_payment_filter.dart';
 import 'package:ezrxmobile/domain/payments/entities/principal_cutoffs.dart';
 import 'package:ezrxmobile/domain/payments/entities/outstanding_invoice_filter.dart';
-import 'package:ezrxmobile/domain/payments/entities/customer_payment_info.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_info.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_invoice_info_pdf.dart';
 import 'package:ezrxmobile/domain/payments/entities/new_payment_method.dart';
@@ -51,13 +49,6 @@ abstract class INewPaymentRepository {
     required bool isMarketPlace,
   });
 
-  Future<Either<ApiFailure, CustomerPaymentInfo>> getCustomerPayment({
-    required SalesOrganisation salesOrganisation,
-    required CustomerCodeInfo customerCodeInfo,
-    required CustomerPaymentFilter filter,
-    required bool isMarketPlace,
-  });
-
   Future<Either<ApiFailure, Unit>> updatePaymentGateway({
     required SalesOrganisation salesOrganisation,
     required Uri uri,
@@ -67,7 +58,7 @@ abstract class INewPaymentRepository {
     required SalesOrganisation salesOrganisation,
     required CustomerCodeInfo customerCodeInfo,
     required User user,
-    required CustomerPaymentInfo paymentInfo,
+    required PaymentInfo paymentInfo,
     required bool isMarketPlace,
   });
 

@@ -6,17 +6,15 @@ import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
 import 'package:ezrxmobile/domain/payments/entities/create_virtual_account.dart';
 import 'package:ezrxmobile/domain/payments/entities/customer_open_item.dart';
-import 'package:ezrxmobile/domain/payments/entities/customer_payment_info.dart';
 import 'package:ezrxmobile/domain/payments/entities/principal_cutoffs.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_info.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_invoice_info_pdf.dart';
 import 'package:ezrxmobile/domain/payments/entities/new_payment_method.dart';
+import 'package:ezrxmobile/domain/payments/error/payment_exception.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 import 'package:ezrxmobile/infrastructure/payments/datasource/new_payment_query.dart';
 import 'package:ezrxmobile/infrastructure/payments/dtos/create_virtual_account_dto.dart';
 import 'package:ezrxmobile/infrastructure/payments/dtos/customer_open_item_dto.dart';
-import 'package:ezrxmobile/infrastructure/payments/dtos/customer_payment_dto.dart';
-import 'package:ezrxmobile/infrastructure/payments/dtos/customer_payment_filter_dto.dart';
 import 'package:ezrxmobile/infrastructure/payments/dtos/principal_cutoffs_dto.dart';
 import 'package:ezrxmobile/infrastructure/payments/dtos/payment_info_dto.dart';
 import 'package:ezrxmobile/infrastructure/payments/dtos/payment_invoice_info_pdf_dto.dart';
@@ -84,6 +82,7 @@ class NewPaymentRemoteDataSource {
     required String userName,
     required String shipToCode,
     required bool isMarketPlace,
+    required String baseUrl,
   }) async {
     final res = await httpService.request(
       method: 'POST',
@@ -111,44 +110,15 @@ class NewPaymentRemoteDataSource {
     );
     _exceptionChecker(property: 'addCustomerPayment', res: res);
 
-    return PaymentInfoDto.fromJson(res.data['data']['addCustomerPayment'])
-        .toDomain();
-  }
+    final paymentInfo =
+        PaymentInfoDto.fromJson(res.data['data']['addCustomerPayment'])
+            .toDomain(baseUrl: baseUrl);
 
-  Future<CustomerPaymentInfo> getCustomerPayment({
-    required String customerCode,
-    required String salesOrg,
-    required CustomerPaymentFilterDto filter,
-    required String baseUrl,
-    required bool isMarketPlace,
-  }) async {
-    final res = await httpService.request(
-      method: 'POST',
-      url: '${config.urlConstants}ezpay',
-      data: jsonEncode(
-        {
-          'query': newPaymentQuery.getCustomerPaymentQuery(),
-          'variables': {
-            'request': {
-              'customerCode': customerCode,
-              'salesOrg': salesOrg,
-              'filterBy': filter.toMapList,
-              'orderBy': [],
-              if (isMarketPlace) 'isMarketPlace': isMarketPlace,
-            },
-          },
-        },
-      ),
-    );
-    _exceptionChecker(property: 'customerPayment', res: res);
+    if (paymentInfo.zzHtmcs.isEmpty) {
+      throw const PaymentException.missingzzHtmcs();
+    }
 
-    final customerPaymentDto =
-        CustomerPaymentDto.fromJson(res.data['data']['customerPayment']);
-
-    return customerPaymentDto.customerPaymentResponse.isNotEmpty
-        ? customerPaymentDto.customerPaymentResponse.first
-            .toDomain(baseUrl: baseUrl)
-        : CustomerPaymentInfo.empty();
+    return paymentInfo;
   }
 
   Future<void> updatePaymentGateway({

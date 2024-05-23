@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/application/payments/payment_summary/payment_summary_bloc.dart';
+import 'package:ezrxmobile/domain/payments/entities/payment_info.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -22,7 +23,6 @@ import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
 import 'package:ezrxmobile/domain/payments/entities/new_payment_method.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
-import 'package:ezrxmobile/domain/payments/entities/customer_payment_info.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_summary_details.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/payments/new_payment/new_payment_bloc.dart';
@@ -242,7 +242,7 @@ void main() {
         NewPaymentState.initial().copyWith(
           selectedPaymentMethod: paymentMethodValueQr,
           salesOrganisation: fakeSGSalesOrganisation,
-          customerPaymentInfo: CustomerPaymentInfo.empty().copyWith(
+          paymentInfo: PaymentInfo.empty().copyWith(
             zzAdvice: 'fake-zzadvice',
           ),
         ),
@@ -432,7 +432,7 @@ void main() {
         NewPaymentState.initial().copyWith(
           selectedPaymentMethod: paymentMethodValueBank,
           salesOrganisation: fakeSGSalesOrganisation,
-          customerPaymentInfo: CustomerPaymentInfo.empty().copyWith(
+          paymentInfo: PaymentInfo.empty().copyWith(
             zzAdvice: 'fake-zzadvice',
           ),
           paymentInvoiceInfoPdf:
@@ -539,7 +539,7 @@ void main() {
           paymentInvoiceInfoPdf: PaymentInvoiceInfoPdf.empty().copyWith(
             zzAdvice: 'fake-zzadvice',
           ),
-          customerPaymentInfo: CustomerPaymentInfo.empty().copyWith(
+          paymentInfo: PaymentInfo.empty().copyWith(
             createdDate: DateTimeStringValue('02/02/2024'),
             adviceExpiry: AdviceExpiryValue('fake-advice-Expiry'),
           ),
@@ -559,7 +559,7 @@ void main() {
                 ApiFailure.other('Fake-Error'),
               ),
             ),
-            customerPaymentInfo: CustomerPaymentInfo.empty().copyWith(
+            paymentInfo: PaymentInfo.empty().copyWith(
               createdDate: DateTimeStringValue('02/02/2024'),
               adviceExpiry: AdviceExpiryValue('fake-advice-Expiry'),
             ),
@@ -603,7 +603,7 @@ void main() {
           paymentInvoiceInfoPdf: PaymentInvoiceInfoPdf.empty().copyWith(
             zzAdvice: 'fake-zzadvice',
           ),
-          customerPaymentInfo: CustomerPaymentInfo.empty().copyWith(
+          paymentInfo: PaymentInfo.empty().copyWith(
             createdDate: DateTimeStringValue('02/02/2024'),
             adviceExpiry: AdviceExpiryValue('fake-advice-Expiry'),
           ),
@@ -623,7 +623,7 @@ void main() {
                 ApiFailure.other('Fake-Error'),
               ),
             ),
-            customerPaymentInfo: CustomerPaymentInfo.empty().copyWith(
+            paymentInfo: PaymentInfo.empty().copyWith(
               createdDate: DateTimeStringValue('02/02/2024'),
               adviceExpiry: AdviceExpiryValue('fake-advice-Expiry'),
             ),

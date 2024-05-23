@@ -7,7 +7,7 @@ import 'package:ezrxmobile/domain/core/attachment_files/entities/attachment_file
 import 'package:ezrxmobile/domain/core/device/repository/i_device_repository.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/payments/entities/bank_instruction.dart';
-import 'package:ezrxmobile/domain/payments/entities/customer_payment_info.dart';
+import 'package:ezrxmobile/domain/payments/entities/payment_info.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_invoice_info_pdf.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_summary_details.dart';
 import 'package:ezrxmobile/domain/payments/repository/i_bank_instruction_repository.dart';
@@ -232,7 +232,7 @@ class PaymentSummaryDetailsBloc
       },
       fetchAdvice: (event) async {
         emit(state.copyWith(isFetchingAdvice: true));
-        final customerPaymentInfo = CustomerPaymentInfo.empty().copyWith(
+        final paymentInfo = PaymentInfo.empty().copyWith(
           paymentBatchAdditionalInfo:
               state.details.paymentBatchAdditionalInfo.getOrDefaultValue(''),
           paymentID: state.details.paymentID.getOrDefaultValue(''),
@@ -245,7 +245,7 @@ class PaymentSummaryDetailsBloc
           customerCodeInfo: state.customerCodeInfo,
           salesOrganisation: state.salesOrganization,
           user: state.user,
-          paymentInfo: customerPaymentInfo,
+          paymentInfo: paymentInfo,
           isMarketPlace: event.isMarketPlace,
         );
         failureOrSuccess.fold(

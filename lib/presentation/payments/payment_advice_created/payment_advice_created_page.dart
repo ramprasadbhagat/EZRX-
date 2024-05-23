@@ -69,14 +69,21 @@ class PaymentAdviceCreatedPage extends StatelessWidget {
   static const paymentErrorMessage =
       'Unable to generate payment advice as at least one of the selected invoices/credit notes have already been selected for another Payment Advice. Please check your payment summary or select other invoices/credit notes for this payment.';
 
-  Future<bool?> _showConfirmBottomSheet(BuildContext context) {
+  Future<bool?> _showConfirmBottomSheet(
+    BuildContext context,
+    ApiFailure failure,
+  ) async {
+    final errorMessage = failure == const ApiFailure.missingzzHtmcs()
+        ? failure.failureMessage.message
+        : paymentErrorMessage;
+
     return showModalBottomSheet<bool>(
       context: context,
       enableDrag: false,
       builder: (_) => ConfirmBottomSheet(
         key: WidgetKeys.confirmBottomSheet,
         title: 'Invoice/credit already in use',
-        content: paymentErrorMessage,
+        content: errorMessage,
         cancelButtonText: 'Back',
         confirmButtonText:
             context.isMPPayment ? 'MP Payment summary' : 'Payment summary',
@@ -231,7 +238,8 @@ class PaymentAdviceCreatedPage extends StatelessWidget {
                               state.allSelectedItems.length,
                         },
                       );
-                      final confirmed = await _showConfirmBottomSheet(context);
+                      final confirmed =
+                          await _showConfirmBottomSheet(context, failure);
                       if (context.mounted) {
                         if (confirmed ?? false) {
                           unawaited(
@@ -338,4 +346,3 @@ class _PaymentAdviceWaiting extends StatelessWidget {
     );
   }
 }
-

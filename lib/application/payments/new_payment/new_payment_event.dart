@@ -33,10 +33,6 @@ class NewPaymentEvent with _$NewPaymentEvent {
 
   const factory NewPaymentEvent.pay() = _Pay;
 
-  const factory NewPaymentEvent.getCustomerPayment({
-    required PaymentInfo paymentInfo,
-  }) = _GetCustomerPayment;
-
   const factory NewPaymentEvent.updatePaymentGateway({
     required Uri paymentUrl,
   }) = _UpdatePaymentGateway;

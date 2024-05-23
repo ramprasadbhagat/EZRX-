@@ -11,8 +11,6 @@ import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/payments/entities/available_credit_filter.dart';
 import 'package:ezrxmobile/domain/payments/entities/create_virtual_account.dart';
 import 'package:ezrxmobile/domain/payments/entities/customer_open_item.dart';
-import 'package:ezrxmobile/domain/payments/entities/customer_payment_filter.dart';
-import 'package:ezrxmobile/domain/payments/entities/customer_payment_info.dart';
 import 'package:ezrxmobile/domain/payments/entities/new_payment_method.dart';
 import 'package:ezrxmobile/domain/payments/entities/outstanding_invoice_filter.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_info.dart';
@@ -28,7 +26,6 @@ import 'package:ezrxmobile/infrastructure/order/dtos/payment_status_dto.dart';
 import 'package:ezrxmobile/infrastructure/payments/datasource/new_payment_local.dart';
 import 'package:ezrxmobile/infrastructure/payments/datasource/new_payment_remote.dart';
 import 'package:ezrxmobile/infrastructure/payments/dtos/customer_invoice_dto.dart';
-import 'package:ezrxmobile/infrastructure/payments/dtos/customer_payment_filter_dto.dart';
 import 'package:ezrxmobile/infrastructure/payments/repository/new_payment_repository.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -59,7 +56,7 @@ void main() {
   late NewPaymentRemoteDataSource newPaymentRemoteDataSource;
   late FileSystemHelper fileSystemHelper;
   late DeviceInfo deviceInfo;
-  late CustomerPaymentInfo customerPaymentInfo;
+  late PaymentInfo paymentInfo;
   late CreateVirtualAccount createVirtualAccount;
   late PrincipalCutoffs principalCutoffs;
   late DeviceStorage deviceStorage;
@@ -69,7 +66,6 @@ void main() {
       documentReferenceID: StringValue('fake-id'),
     ),
   ];
-  final paymentInfo = PaymentInfo.empty();
   final customerOpenItems = [
     CustomerOpenItem.empty().copyWith(
       amountInTransactionCurrency: 5,
@@ -108,7 +104,7 @@ void main() {
       deviceInfo: deviceInfo,
       deviceStorage: deviceStorage,
     );
-    customerPaymentInfo = await NewPaymentLocalDataSource().getCustomerPayment(
+    paymentInfo = await NewPaymentLocalDataSource().pay(
       salesOrg: fakeSalesOrg,
       baseUrl: domain,
     );
@@ -252,6 +248,7 @@ void main() {
         when(
           () => newPaymentLocalDataSource.pay(
             salesOrg: fakeSalesOrg,
+            baseUrl: domain,
           ),
         ).thenAnswer((invocation) async => paymentInfo);
 
@@ -288,6 +285,7 @@ void main() {
         when(
           () => newPaymentLocalDataSource.pay(
             salesOrg: fakeSalesOrg,
+            baseUrl: domain,
           ),
         ).thenThrow((invocation) => MockException());
 
@@ -433,7 +431,7 @@ void main() {
         final result = await nawPaymentsRepository.getPaymentInvoiceInfoPdf(
           customerCodeInfo: fakeCustomerCodeInfo,
           user: User.empty().copyWith(username: Username(fakeUserName)),
-          paymentInfo: CustomerPaymentInfo.empty().copyWith(
+          paymentInfo: PaymentInfo.empty().copyWith(
             paymentID: '123',
             accountingDocExternalReference: '123',
             paymentBatchAdditionalInfo: '123',
@@ -457,7 +455,7 @@ void main() {
         final result = await nawPaymentsRepository.getPaymentInvoiceInfoPdf(
           customerCodeInfo: fakeCustomerCodeInfo,
           user: User.empty().copyWith(username: Username(fakeUserName)),
-          paymentInfo: CustomerPaymentInfo.empty().copyWith(
+          paymentInfo: PaymentInfo.empty().copyWith(
             paymentID: '123',
             accountingDocExternalReference: '123',
             paymentBatchAdditionalInfo: '123',
@@ -701,6 +699,7 @@ void main() {
             userName: fakeUserName,
             shipToCode: fakeShipToInfo.shipToCustomerCode,
             isMarketPlace: true,
+            baseUrl: domain,
           ),
         ).thenAnswer((invocation) async => paymentInfo);
 
@@ -737,6 +736,7 @@ void main() {
             userName: fakeUserName,
             shipToCode: fakeShipToInfo.shipToCustomerCode,
             isMarketPlace: false,
+            baseUrl: domain,
           ),
         ).thenThrow((invocation) => MockException());
 
@@ -803,7 +803,7 @@ void main() {
         final result = await nawPaymentsRepository.getPaymentInvoiceInfoPdf(
           customerCodeInfo: fakeCustomerCodeInfo,
           user: User.empty().copyWith(username: Username(fakeUserName)),
-          paymentInfo: CustomerPaymentInfo.empty().copyWith(
+          paymentInfo: PaymentInfo.empty().copyWith(
             paymentID: '123',
             zzAdvice: '092323EZ34245',
             accountingDocExternalReference: '123',
@@ -837,7 +837,7 @@ void main() {
         final result = await nawPaymentsRepository.getPaymentInvoiceInfoPdf(
           customerCodeInfo: fakeCustomerCodeInfo,
           user: User.empty().copyWith(username: Username(fakeUserName)),
-          paymentInfo: CustomerPaymentInfo.empty().copyWith(
+          paymentInfo: PaymentInfo.empty().copyWith(
             paymentID: '123',
             accountingDocExternalReference: '123',
             paymentBatchAdditionalInfo: '123',
@@ -906,99 +906,6 @@ void main() {
 
         final result = await nawPaymentsRepository.saveFile(
           pdfData: buffer,
-        );
-        expect(
-          result.isLeft(),
-          true,
-        );
-      });
-
-      test('Fetch Customer Payment success- local', () async {
-        when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
-        when(
-          () => newPaymentLocalDataSource.getCustomerPayment(
-            salesOrg: fakeSalesOrg,
-            baseUrl: domain,
-          ),
-        ).thenAnswer((invocation) async => customerPaymentInfo);
-
-        final result = await nawPaymentsRepository.getCustomerPayment(
-          customerCodeInfo: fakeCustomerCodeInfo,
-          salesOrganisation: fakeSalesOrganisation,
-          filter: CustomerPaymentFilter.empty(),
-          isMarketPlace: false,
-        );
-        expect(
-          result.isRight(),
-          true,
-        );
-      });
-      test('Fetch Customer Payment failure- local', () async {
-        when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
-        when(
-          () => newPaymentLocalDataSource.getCustomerPayment(
-            salesOrg: fakeSalesOrg,
-            baseUrl: domain,
-          ),
-        ).thenThrow((invocation) => MockException());
-
-        final result = await nawPaymentsRepository.getCustomerPayment(
-          customerCodeInfo: fakeCustomerCodeInfo,
-          salesOrganisation: fakeSalesOrganisation,
-          filter: CustomerPaymentFilter.empty(),
-          isMarketPlace: true,
-        );
-        expect(
-          result.isLeft(),
-          true,
-        );
-      });
-
-      test('Fetch Customer Payment success- UaT', () async {
-        when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
-        when(
-          () => newPaymentRemoteDataSource.getCustomerPayment(
-            salesOrg: fakeSalesOrg.getOrCrash(),
-            customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
-            filter: CustomerPaymentFilterDto.fromDomain(
-              CustomerPaymentFilter.empty(),
-            ),
-            baseUrl: domain,
-            isMarketPlace: false,
-          ),
-        ).thenAnswer((invocation) async => customerPaymentInfo);
-
-        final result = await nawPaymentsRepository.getCustomerPayment(
-          customerCodeInfo: fakeCustomerCodeInfo,
-          salesOrganisation: fakeSalesOrganisation,
-          filter: CustomerPaymentFilter.empty(),
-          isMarketPlace: false,
-        );
-        expect(
-          result.isRight(),
-          true,
-        );
-      });
-
-      test('Fetch Customer Payment failure- UaT', () async {
-        when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
-        when(
-          () => newPaymentRemoteDataSource.getCustomerPayment(
-            salesOrg: fakeSalesOrg.getOrCrash(),
-            customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
-            filter: CustomerPaymentFilterDto.fromDomain(
-              CustomerPaymentFilter.empty(),
-            ),
-            baseUrl: domain,
-            isMarketPlace: true,
-          ),
-        ).thenThrow((invocation) => MockException());
-
-        final result = await nawPaymentsRepository.getCustomerPayment(
-          customerCodeInfo: fakeCustomerCodeInfo,
-          salesOrganisation: fakeSalesOrganisation,
-          filter: CustomerPaymentFilter.empty(),
-          isMarketPlace: true,
         );
         expect(
           result.isLeft(),

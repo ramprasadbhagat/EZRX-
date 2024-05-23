@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:ezrxmobile/domain/account/error/cart_exception.dart';
+import 'package:ezrxmobile/domain/payments/error/payment_exception.dart';
 import 'package:universal_io/io.dart';
 
 import 'package:ezrxmobile/domain/account/error/price_override_exception.dart';
@@ -33,6 +34,10 @@ class FailureHandler {
             const ApiFailure.cartHasDifferentAddress(),
         addAnimalHealthWithNormalProductToCart: (_) =>
             const ApiFailure.addAnimalHealthWithNormalProductToCart(),
+      );
+    } else if (error is PaymentException) {
+      return error.map(
+        missingzzHtmcs: (_) => const ApiFailure.missingzzHtmcs(),
       );
     } else {
       switch (error.runtimeType) {

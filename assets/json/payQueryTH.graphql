@@ -2,6 +2,13 @@ mutation addCustomerPayment($input: addCustomerPaymentInput!) {
     addCustomerPayment(input: $input) {
       paymentID
       paymentBatchAdditionalInfo
+      valueDate
+      transactionCurrency
+      accountingDocExternalReference
+      zCcpPaymentQRCode
+      zzAdvice
+      zzHtmcs
+      adviceExpiry
    }
 }
 

@@ -44,45 +44,15 @@ class NewPaymentQuery {
       addCustomerPayment(input: \$input) {
       paymentID
       paymentBatchAdditionalInfo
-    }
-  }
-    ''';
-  }
-
-  String getCustomerPaymentQuery() {
-    return '''
-  query customerPayment(\$request: customerPaymentRequest!) {
-  customerPayment(request: \$request) {
-    total
-    showing
-    totalPaymentInProgress
-    resultPaymentInProgress
-    customerPaymentResponse {
-      paymentID
       valueDate
-      paymentAmount
       transactionCurrency
-      paymentDocument
-      invoiceProcessingStatus
       accountingDocExternalReference
-      paymentMethod
-      extensibilityCustomField {
-        paymentBatchAdditionalInfo {
-          businessContext
-          label
-          technicalName
-        }
-      }
       zCcpPaymentQRCode
-      paymentBatchAdditionalInfo
       zzAdvice
       zzHtmcs
       adviceExpiry
-      createdDate
-      status
     }
   }
-}
     ''';
   }
 

@@ -1,9 +1,9 @@
-import 'package:ezrxmobile/domain/payments/entities/customer_payment_info.dart';
+import 'package:ezrxmobile/domain/payments/entities/payment_info.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   test('Payment Info', () {
-    final paymentStatus = CustomerPaymentInfo.empty().copyWith(
+    final paymentStatus = PaymentInfo.empty().copyWith(
       zzHtmcs: 'fake-zzHtmcs',
       paymentBatchAdditionalInfo: 'fake-Batch-Additional-Info',
       accountingDocExternalReference: 'fake-accountDoc',

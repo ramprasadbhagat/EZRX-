@@ -5,7 +5,7 @@ import 'package:ezrxmobile/domain/core/attachment_files/entities/attachment_file
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/payments/entities/bank_instruction.dart';
-import 'package:ezrxmobile/domain/payments/entities/customer_payment_info.dart';
+import 'package:ezrxmobile/domain/payments/entities/payment_info.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_invoice_info_pdf.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_item.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_summary_details.dart';
@@ -48,7 +48,7 @@ void main() {
   late PaymentSummaryDetails details;
   late List<PaymentItem> paymentList;
   late BankInstruction bankInstruction;
-  late CustomerPaymentInfo customerPaymentInfo;
+  late PaymentInfo paymentInfo;
   late CreatePaymentInvoicePdf createPaymentInvoice;
   late Uint8List fakeRawFile;
 
@@ -64,7 +64,7 @@ void main() {
     bankInstruction = await BankInstructionLocalDataSource()
         .getBankInstruction(details.bankIdentification);
     fakeRawFile = Uint8List.fromList([1, 2, 3, 4, 5]);
-    customerPaymentInfo = CustomerPaymentInfo.empty().copyWith(
+    paymentInfo = PaymentInfo.empty().copyWith(
       paymentBatchAdditionalInfo: details.paymentBatchAdditionalInfo.getValue(),
       paymentID: details.paymentID.getValue(),
       accountingDocExternalReference: details.accountingDocExternalReference,
@@ -112,7 +112,7 @@ void main() {
             customerCodeInfo: fakeCustomerCodeInfo,
             salesOrganisation: fakeIDSalesOrganisation,
             user: fakeClientUser,
-            paymentInfo: customerPaymentInfo,
+            paymentInfo: paymentInfo,
             isMarketPlace: false,
           ),
         ).thenAnswer(
@@ -186,7 +186,7 @@ void main() {
             customerCodeInfo: fakeCustomerCodeInfo,
             salesOrganisation: fakeSalesOrganisation,
             user: fakeClientUser,
-            paymentInfo: customerPaymentInfo,
+            paymentInfo: paymentInfo,
             isMarketPlace: true,
           ),
         ).thenAnswer(
@@ -252,7 +252,7 @@ void main() {
             customerCodeInfo: fakeCustomerCodeInfo,
             salesOrganisation: fakeSalesOrganisation,
             user: fakeClientUser,
-            paymentInfo: customerPaymentInfo,
+            paymentInfo: paymentInfo,
             isMarketPlace: true,
           ),
         ).thenAnswer(
@@ -349,7 +349,7 @@ void main() {
             customerCodeInfo: fakeCustomerCodeInfo,
             salesOrganisation: fakeMYSalesOrganisation,
             user: fakeClientUser,
-            paymentInfo: customerPaymentInfo.copyWith(
+            paymentInfo: paymentInfo.copyWith(
               paymentBatchAdditionalInfo: '',
             ),
             isMarketPlace: true,
@@ -454,7 +454,7 @@ void main() {
             customerCodeInfo: fakeCustomerCodeInfo,
             salesOrganisation: fakeSalesOrganisation,
             user: fakeClientUser,
-            paymentInfo: CustomerPaymentInfo.empty(),
+            paymentInfo: PaymentInfo.empty(),
             isMarketPlace: false,
           ),
         ).thenAnswer(
@@ -510,7 +510,7 @@ void main() {
             customerCodeInfo: fakeCustomerCodeInfo,
             salesOrganisation: fakeSalesOrganisation,
             user: fakeClientUser,
-            paymentInfo: customerPaymentInfo,
+            paymentInfo: paymentInfo,
             isMarketPlace: true,
           ),
         ).thenAnswer(
@@ -638,7 +638,7 @@ void main() {
             customerCodeInfo: fakeCustomerCodeInfo,
             salesOrganisation: fakeSalesOrganisation,
             user: fakeClientUser,
-            paymentInfo: customerPaymentInfo,
+            paymentInfo: paymentInfo,
             isMarketPlace: false,
           ),
         ).thenAnswer(

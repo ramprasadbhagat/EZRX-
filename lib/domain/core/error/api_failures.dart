@@ -77,6 +77,7 @@ class ApiFailure with _$ApiFailure {
       _OpenDownloadedFileError;
   const factory ApiFailure.addAnimalHealthWithNormalProductToCart() =
       _AddAnimalHealthWithNormalProductToCart;
+  const factory ApiFailure.missingzzHtmcs() = _MissingzzHtmcs;
 }
 
 extension ApiFailureExt on ApiFailure {
@@ -172,6 +173,9 @@ extension ApiFailureExt on ApiFailure {
         ),
         openDownloadedFileError: (openFileError) =>
             TRObject(openFileError.message),
+        missingzzHtmcs: (_MissingzzHtmcs value) => const TRObject(
+          'Missing zzHtmcs parameter',
+        ),
       );
   String get nonTranslatedFailureMessage {
     var fullMessage = failureMessage.message;

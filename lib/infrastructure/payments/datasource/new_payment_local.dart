@@ -3,14 +3,12 @@ import 'dart:convert';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/payments/entities/create_virtual_account.dart';
 import 'package:ezrxmobile/domain/payments/entities/customer_open_item.dart';
-import 'package:ezrxmobile/domain/payments/entities/customer_payment_info.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_info.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_invoice_info_pdf.dart';
 import 'package:ezrxmobile/domain/payments/entities/new_payment_method.dart';
 import 'package:ezrxmobile/domain/payments/entities/principal_cutoffs.dart';
 import 'package:ezrxmobile/infrastructure/payments/dtos/create_virtual_account_dto.dart';
 import 'package:ezrxmobile/infrastructure/payments/dtos/customer_open_item_dto.dart';
-import 'package:ezrxmobile/infrastructure/payments/dtos/customer_payment_dto.dart';
 import 'package:ezrxmobile/infrastructure/payments/dtos/payment_info_dto.dart';
 import 'package:ezrxmobile/infrastructure/payments/dtos/payment_method_dto.dart';
 import 'package:ezrxmobile/infrastructure/payments/dtos/payment_invoice_info_pdf_dto.dart';
@@ -36,7 +34,10 @@ class NewPaymentLocalDataSource {
     return result;
   }
 
-  Future<PaymentInfo> pay({required SalesOrg salesOrg}) async {
+  Future<PaymentInfo> pay({
+    required SalesOrg salesOrg,
+    required String baseUrl,
+  }) async {
     final data = json.decode(
       await rootBundle.loadString(
         salesOrg.paymentInfoResponsePath,
@@ -44,7 +45,7 @@ class NewPaymentLocalDataSource {
     );
 
     return PaymentInfoDto.fromJson(data['data']['addCustomerPayment'])
-        .toDomain();
+        .toDomain(baseUrl: baseUrl);
   }
 
   Future<void> updatePaymentGateway() async {
@@ -78,22 +79,6 @@ class NewPaymentLocalDataSource {
     return List.from(finalData)
         .map((e) => PaymentMethodDto.fromJson(e).toDomain())
         .toList();
-  }
-
-  Future<CustomerPaymentInfo> getCustomerPayment({
-    required SalesOrg salesOrg,
-    required String baseUrl,
-  }) async {
-    final data = json.decode(
-      await rootBundle.loadString(
-        salesOrg.customerPaymentResponsePath,
-      ),
-    );
-
-    return CustomerPaymentDto.fromJson(data['data']['customerPayment'])
-        .customerPaymentResponse
-        .first
-        .toDomain(baseUrl: baseUrl);
   }
 
   Future<CreateVirtualAccount> createVirtualAccount() async {

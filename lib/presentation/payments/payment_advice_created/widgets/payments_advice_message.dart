@@ -25,7 +25,7 @@ class _PaymentBankInAdviceMessage extends StatelessWidget {
             height: 8.0,
           ),
           Text(
-            '${context.tr('Your payment advice')} #${state.customerPaymentInfo.zzAdvice} ${context.tr('has been generated')}.',
+            '${context.tr('Your payment advice')} #${state.paymentInfo.zzAdvice} ${context.tr('has been generated')}.',
             style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                   color: ZPColors.darkerGrey,
                 ),
@@ -88,7 +88,7 @@ class _PaymentGatewayAdviceMessage extends StatelessWidget {
               ),
             ),
           Text(
-            '${context.tr('Your payment advice')} #${state.customerPaymentInfo.zzAdvice} ${context.tr('has been generated')}. ${scanQRText.isNotEmpty ? scanQRText : ''}',
+            '${context.tr('Your payment advice')} #${state.paymentInfo.zzAdvice} ${context.tr('has been generated')}. ${scanQRText.isNotEmpty ? scanQRText : ''}',
             style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                   color: ZPColors.darkerGrey,
                 ),

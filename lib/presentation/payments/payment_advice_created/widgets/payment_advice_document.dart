@@ -95,8 +95,8 @@ class _PDFAdviceSection extends StatelessWidget {
               shipToInfo: eligibilityState.shipToInfo,
               paymentInvoiceInfoPdf: newPaymentState.paymentInvoiceInfoPdf,
               salesOrganisation: eligibilityState.salesOrganisation,
-              createdDate: newPaymentState.customerPaymentInfo.createdDate,
-              adviceExpiry: newPaymentState.customerPaymentInfo.adviceExpiry,
+              createdDate: newPaymentState.paymentInfo.createdDate,
+              adviceExpiry: newPaymentState.paymentInfo.adviceExpiry,
             );
 
             if (eligibilityState.salesOrganisation.salesOrg.isSg) {

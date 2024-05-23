@@ -157,7 +157,7 @@ class _WebviewBodyState extends State<_WebviewBody> {
       ),
       initialUrlRequest: URLRequest(
         url: Uri.dataFromString(
-          _newPaymentState.customerPaymentInfo.zzHtmcs,
+          _newPaymentState.paymentInfo.zzHtmcs,
           mimeType: 'text/html',
         ),
       ),
@@ -198,7 +198,7 @@ class _WebviewBodyState extends State<_WebviewBody> {
           TrackingProps.market:
               _newPaymentState.salesOrganisation.salesOrg.country,
           TrackingProps.paymentGatewayzzHtmcs:
-              _newPaymentState.customerPaymentInfo.zzHtmcs,
+              _newPaymentState.paymentInfo.zzHtmcs,
           TrackingProps.username:
               _newPaymentState.user.fullName.displayFullName,
           TrackingProps.paymentAdviceId:

@@ -10,8 +10,6 @@ import 'package:ezrxmobile/domain/core/device/repository/i_device_repository.dar
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/payments/entities/create_virtual_account.dart';
 import 'package:ezrxmobile/domain/payments/entities/customer_open_item.dart';
-import 'package:ezrxmobile/domain/payments/entities/customer_payment_filter.dart';
-import 'package:ezrxmobile/domain/payments/entities/customer_payment_info.dart';
 import 'package:ezrxmobile/domain/payments/entities/principal_cutoffs.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_info.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_invoice_info_pdf.dart';
@@ -174,7 +172,13 @@ class NewPaymentBloc extends Bloc<NewPaymentEvent, NewPaymentState> {
             );
           },
           (paymentInfo) {
-            add(_GetCustomerPayment(paymentInfo: paymentInfo));
+            emit(
+              state.copyWith(
+                paymentInfo: paymentInfo,
+                failureOrSuccessOption: none(),
+                isLoading: false,
+              ),
+            );
           },
         );
       },
@@ -198,7 +202,7 @@ class NewPaymentBloc extends Bloc<NewPaymentEvent, NewPaymentState> {
           customerCodeInfo: state.customerCodeInfo,
           salesOrganisation: state.salesOrganisation,
           user: state.user,
-          paymentInfo: state.customerPaymentInfo,
+          paymentInfo: state.paymentInfo,
           isMarketPlace: state.isMarketPlace,
         );
 
@@ -270,37 +274,6 @@ class NewPaymentBloc extends Bloc<NewPaymentEvent, NewPaymentState> {
               options: <PaymentMethodOption>[],
             ),
           ),
-        );
-      },
-      getCustomerPayment: (_GetCustomerPayment e) async {
-        final failureOrSuccess = await newPaymentRepository.getCustomerPayment(
-          salesOrganisation: state.salesOrganisation,
-          customerCodeInfo: state.customerCodeInfo,
-          filter: CustomerPaymentFilter.empty().copyWith(
-            paymentBatchAdditionalInfo:
-                e.paymentInfo.paymentBatchAdditionalInfo,
-          ),
-          isMarketPlace: state.isMarketPlace,
-        );
-
-        failureOrSuccess.fold(
-          (failure) {
-            emit(
-              state.copyWith(
-                failureOrSuccessOption: optionOf(failureOrSuccess),
-                isLoading: false,
-              ),
-            );
-          },
-          (customerPaymentInfo) {
-            emit(
-              state.copyWith(
-                customerPaymentInfo: customerPaymentInfo,
-                failureOrSuccessOption: none(),
-                isLoading: false,
-              ),
-            );
-          },
         );
       },
       updatePaymentMethodOptionSelected:

@@ -11,12 +11,10 @@ import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/attachment_files/entities/attachment_file_buffer.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/payments/entities/customer_open_item.dart';
-import 'package:ezrxmobile/domain/payments/entities/customer_payment_filter.dart';
 import 'package:ezrxmobile/domain/payments/entities/new_payment_method.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_info.dart';
 import 'package:ezrxmobile/domain/payments/value/value_object.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
-import 'package:ezrxmobile/domain/payments/entities/customer_payment_info.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_invoice_info_pdf.dart';
 import 'package:ezrxmobile/infrastructure/core/device/repository/device_repository.dart';
 import 'package:ezrxmobile/infrastructure/payments/repository/new_payment_repository.dart';
@@ -32,7 +30,7 @@ void main() {
   late NewPaymentRepository newPaymentRepository;
   late DeviceRepository deviceRepository;
   late CustomerOpenItem customerOpenItem;
-  late CustomerPaymentInfo fakePaymentInfo;
+  late PaymentInfo fakePaymentInfo;
   late List<CustomerOpenItem> fakeCustomerOpenItemSelected;
   late List<CustomerOpenItem> fakeCreditSelected;
   late List<NewPaymentMethod> fakePaymentMethodValues;
@@ -45,7 +43,7 @@ void main() {
     );
   });
   setUp(() {
-    fakePaymentInfo = CustomerPaymentInfo.empty();
+    fakePaymentInfo = PaymentInfo.empty();
     fakeCustomerOpenItemSelected = <CustomerOpenItem>[
       CustomerOpenItem.empty().copyWith(
         status: StatusType('Overdue'),
@@ -397,18 +395,6 @@ void main() {
               PaymentInfo.empty(),
             ),
           );
-          when(
-            () => newPaymentRepository.getCustomerPayment(
-              salesOrganisation: SalesOrganisation.empty(),
-              customerCodeInfo: CustomerCodeInfo.empty(),
-              filter: CustomerPaymentFilter.empty(),
-              isMarketPlace: true,
-            ),
-          ).thenAnswer(
-            (invocation) async => Right(
-              fakePaymentInfo,
-            ),
-          );
         },
         act: (NewPaymentBloc bloc) => bloc.add(const NewPaymentEvent.pay()),
         expect: () => [
@@ -420,7 +406,7 @@ void main() {
             isMarketPlace: true,
           ),
           NewPaymentState.initial().copyWith(
-            customerPaymentInfo: fakePaymentInfo,
+            paymentInfo: fakePaymentInfo,
             selectedInvoices: fakeCustomerOpenItemSelected,
             paymentMethods: fakePaymentMethodValues,
             selectedPaymentMethod: fakePaymentMethodValues.first,
@@ -461,18 +447,6 @@ void main() {
               PaymentInfo.empty(),
             ),
           );
-          when(
-            () => newPaymentRepository.getCustomerPayment(
-              salesOrganisation: SalesOrganisation.empty(),
-              customerCodeInfo: CustomerCodeInfo.empty(),
-              filter: CustomerPaymentFilter.empty(),
-              isMarketPlace: false,
-            ),
-          ).thenAnswer(
-            (invocation) async => Right(
-              fakePaymentInfo,
-            ),
-          );
         },
         act: (NewPaymentBloc bloc) => bloc.add(const NewPaymentEvent.pay()),
         expect: () => [
@@ -484,7 +458,7 @@ void main() {
             selectedPaymentMethod: fakePaymentMethodValues.first,
           ),
           NewPaymentState.initial().copyWith(
-            customerPaymentInfo: fakePaymentInfo,
+            paymentInfo: fakePaymentInfo,
             selectedInvoices: fakeCustomerOpenItemSelected,
             paymentMethods: fakePaymentMethodValues,
             selectedCredits: fakeCreditSelected,
@@ -679,7 +653,7 @@ void main() {
         ),
         seed: () => NewPaymentState.initial().copyWith(
           isLoading: false,
-          customerPaymentInfo: fakePaymentInfo,
+          paymentInfo: fakePaymentInfo,
           isMarketPlace: true,
         ),
         setUp: () {
@@ -723,7 +697,7 @@ void main() {
         ),
         seed: () => NewPaymentState.initial().copyWith(
           isLoading: false,
-          customerPaymentInfo: fakePaymentInfo,
+          paymentInfo: fakePaymentInfo,
         ),
         setUp: () {
           when(

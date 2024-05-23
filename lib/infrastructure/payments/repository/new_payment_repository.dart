@@ -13,10 +13,8 @@ import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/payments/entities/available_credit_filter.dart';
 import 'package:ezrxmobile/domain/payments/entities/create_virtual_account.dart';
 import 'package:ezrxmobile/domain/payments/entities/customer_open_item.dart';
-import 'package:ezrxmobile/domain/payments/entities/customer_payment_filter.dart';
 import 'package:ezrxmobile/domain/payments/entities/principal_cutoffs.dart';
 import 'package:ezrxmobile/domain/payments/entities/outstanding_invoice_filter.dart';
-import 'package:ezrxmobile/domain/payments/entities/customer_payment_info.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_info.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_invoice_info_pdf.dart';
 import 'package:ezrxmobile/domain/payments/entities/new_payment_method.dart';
@@ -31,7 +29,6 @@ import 'package:ezrxmobile/infrastructure/payments/datasource/new_payment_local.
 import 'package:ezrxmobile/infrastructure/payments/datasource/new_payment_remote.dart';
 import 'package:ezrxmobile/infrastructure/payments/dtos/available_credit_filter_dto.dart';
 import 'package:ezrxmobile/infrastructure/payments/dtos/customer_invoice_dto.dart';
-import 'package:ezrxmobile/infrastructure/payments/dtos/customer_payment_filter_dto.dart';
 import 'package:ezrxmobile/infrastructure/payments/dtos/outstanding_invoice_filter_dto.dart';
 import 'package:flutter/foundation.dart';
 
@@ -167,10 +164,14 @@ class NewPaymentRepository extends INewPaymentRepository {
     required ShipToInfo shipToInfo,
     required bool isMarketPlace,
   }) async {
+    final baseUrl = config.baseUrl(
+      marketDomain: AppMarket(deviceStorage.currentMarket()).marketDomain,
+    );
     if (config.appFlavor == Flavor.mock) {
       try {
         final response = await localDataSource.pay(
           salesOrg: salesOrganisation.salesOrg,
+          baseUrl: baseUrl,
         );
 
         return Right(response);
@@ -199,6 +200,7 @@ class NewPaymentRepository extends INewPaymentRepository {
         userName: user.username.getValue(),
         shipToCode: shipToInfo.shipToCustomerCode,
         isMarketPlace: isMarketPlace,
+        baseUrl: baseUrl,
       );
 
       return Right(response);
@@ -249,7 +251,7 @@ class NewPaymentRepository extends INewPaymentRepository {
     required SalesOrganisation salesOrganisation,
     required CustomerCodeInfo customerCodeInfo,
     required User user,
-    required CustomerPaymentInfo paymentInfo,
+    required PaymentInfo paymentInfo,
     required bool isMarketPlace,
   }) async {
     if (config.appFlavor == Flavor.mock) {
@@ -328,47 +330,6 @@ class NewPaymentRepository extends INewPaymentRepository {
       return Right(attachmentBuffer);
     } catch (e) {
       return Left(FailureHandler.handleFailure(e));
-    }
-  }
-
-  @override
-  Future<Either<ApiFailure, CustomerPaymentInfo>> getCustomerPayment({
-    required SalesOrganisation salesOrganisation,
-    required CustomerCodeInfo customerCodeInfo,
-    required CustomerPaymentFilter filter,
-    required bool isMarketPlace,
-  }) async {
-    final baseUrl = config.baseUrl(
-      marketDomain: AppMarket(deviceStorage.currentMarket()).marketDomain,
-    );
-    if (config.appFlavor == Flavor.mock) {
-      try {
-        final response = await localDataSource.getCustomerPayment(
-          salesOrg: salesOrganisation.salesOrg,
-          baseUrl: baseUrl,
-        );
-
-        return Right(response);
-      } catch (e) {
-        return Left(
-          FailureHandler.handleFailure(e),
-        );
-      }
-    }
-    try {
-      final response = await remoteDataSource.getCustomerPayment(
-        salesOrg: salesOrganisation.salesOrg.getOrCrash(),
-        customerCode: customerCodeInfo.customerCodeSoldTo,
-        filter: CustomerPaymentFilterDto.fromDomain(filter),
-        baseUrl: baseUrl,
-        isMarketPlace: isMarketPlace,
-      );
-
-      return Right(response);
-    } catch (e) {
-      return Left(
-        FailureHandler.handleFailure(e),
-      );
     }
   }
 

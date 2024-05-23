@@ -7,6 +7,7 @@ import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
 import 'package:ezrxmobile/domain/payments/entities/new_payment_method.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_info.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_invoice_info_pdf.dart';
+import 'package:ezrxmobile/domain/payments/error/payment_exception.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 import 'package:ezrxmobile/infrastructure/payments/datasource/new_payment_query.dart';
 import 'package:ezrxmobile/infrastructure/payments/datasource/new_payment_remote.dart';
@@ -40,6 +41,7 @@ void main() {
   const fakeCustomerCode = 'fake-customer-code';
   const fakeSalesOrg = 'fake-salesOrg';
   const fakeShipToCode = 'fake-shipToCode';
+  const fakeBaseUrl = 'fake-baseurl';
 
   setUpAll(
     () {
@@ -94,11 +96,14 @@ void main() {
           userName: 'rootadmin',
           shipToCode: fakeShipToCode,
           isMarketPlace: false,
+          baseUrl: fakeBaseUrl,
         );
 
         expect(
           result,
-          PaymentInfoDto.fromJson(res['data']['addCustomerPayment']).toDomain(),
+          PaymentInfoDto.fromJson(res['data']['addCustomerPayment']).toDomain(
+            baseUrl: fakeBaseUrl,
+          ),
         );
       });
 
@@ -141,11 +146,13 @@ void main() {
           userName: 'rootadmin',
           shipToCode: fakeShipToCode,
           isMarketPlace: true,
+          baseUrl: fakeBaseUrl,
         );
 
         expect(
           result,
-          PaymentInfoDto.fromJson(res['data']['addCustomerPayment']).toDomain(),
+          PaymentInfoDto.fromJson(res['data']['addCustomerPayment'])
+              .toDomain(baseUrl: fakeBaseUrl),
         );
       });
 
@@ -184,6 +191,7 @@ void main() {
           userName: 'rootadmin',
           shipToCode: fakeShipToCode,
           isMarketPlace: false,
+          baseUrl: fakeBaseUrl,
         )
             .onError((error, _) async {
           expect(error, isA<ServerException>());
@@ -231,9 +239,57 @@ void main() {
           userName: 'rootadmin',
           shipToCode: fakeShipToCode,
           isMarketPlace: false,
+          baseUrl: fakeBaseUrl,
         )
             .onError((error, _) async {
           expect(error, isA<ServerException>());
+          return Future.value(PaymentInfoMock());
+        });
+      });
+
+      test('pay with error missing zzhtmcs on response', () async {
+        final res = json.decode(
+          await rootBundle.loadString('assets/json/payResponseVNEmptyzzHtmcs.json'),
+        );
+
+        final data = jsonEncode({
+          'query': newPaymentRemoteDataSource.newPaymentQuery.payQuery(),
+          'variables': {
+            'input': {
+              'customerCode': 'fake-customer-code',
+              'customerInvoice': [],
+              'paymentMethod': 'Payment Gateway',
+              'salesOrg': 'fake-salesOrg',
+              'transactionCurrency': 'VND',
+              'userName': 'rootadmin',
+            },
+          },
+        });
+
+        dioAdapter.onPost(
+          '/api/ezpay',
+          (server) => server.reply(
+            200,
+            res,
+          ),
+          headers: {'Content-Type': 'application/json; charset=utf-8'},
+          data: data,
+        );
+
+        await newPaymentRemoteDataSource
+            .pay(
+          customerCode: fakeCustomerCode,
+          salesOrg: fakeSalesOrg,
+          paymentMethod: 'Payment Gateway',
+          transactionCurrency: 'VND',
+          customerInvoices: [],
+          userName: 'rootadmin',
+          shipToCode: fakeShipToCode,
+          isMarketPlace: false,
+          baseUrl: fakeBaseUrl,
+        )
+            .onError((error, _) async {
+          expect(error, isA<PaymentException>());
           return Future.value(PaymentInfoMock());
         });
       });
