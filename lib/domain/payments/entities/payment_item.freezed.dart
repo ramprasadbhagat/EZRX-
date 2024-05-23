@@ -12,7 +12,7 @@ part of 'payment_item.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$PaymentItem {
@@ -25,8 +25,7 @@ mixin _$PaymentItem {
   double get paymentAmountInDisplayCrcy => throw _privateConstructorUsedError;
   String get postingKeyName => throw _privateConstructorUsedError;
   String get documentReferenceID => throw _privateConstructorUsedError;
-  AmountDocumentType get accountingDocumentType =>
-      throw _privateConstructorUsedError;
+  DebitCreditCode get debitCreditCode => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $PaymentItemCopyWith<PaymentItem> get copyWith =>
@@ -49,7 +48,7 @@ abstract class $PaymentItemCopyWith<$Res> {
       double paymentAmountInDisplayCrcy,
       String postingKeyName,
       String documentReferenceID,
-      AmountDocumentType accountingDocumentType});
+      DebitCreditCode debitCreditCode});
 }
 
 /// @nodoc
@@ -74,7 +73,7 @@ class _$PaymentItemCopyWithImpl<$Res, $Val extends PaymentItem>
     Object? paymentAmountInDisplayCrcy = null,
     Object? postingKeyName = null,
     Object? documentReferenceID = null,
-    Object? accountingDocumentType = null,
+    Object? debitCreditCode = null,
   }) {
     return _then(_value.copyWith(
       searchKey: null == searchKey
@@ -113,20 +112,20 @@ class _$PaymentItemCopyWithImpl<$Res, $Val extends PaymentItem>
           ? _value.documentReferenceID
           : documentReferenceID // ignore: cast_nullable_to_non_nullable
               as String,
-      accountingDocumentType: null == accountingDocumentType
-          ? _value.accountingDocumentType
-          : accountingDocumentType // ignore: cast_nullable_to_non_nullable
-              as AmountDocumentType,
+      debitCreditCode: null == debitCreditCode
+          ? _value.debitCreditCode
+          : debitCreditCode // ignore: cast_nullable_to_non_nullable
+              as DebitCreditCode,
     ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$$_PaymentItemCopyWith<$Res>
+abstract class _$$PaymentItemImplCopyWith<$Res>
     implements $PaymentItemCopyWith<$Res> {
-  factory _$$_PaymentItemCopyWith(
-          _$_PaymentItem value, $Res Function(_$_PaymentItem) then) =
-      __$$_PaymentItemCopyWithImpl<$Res>;
+  factory _$$PaymentItemImplCopyWith(
+          _$PaymentItemImpl value, $Res Function(_$PaymentItemImpl) then) =
+      __$$PaymentItemImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -139,15 +138,15 @@ abstract class _$$_PaymentItemCopyWith<$Res>
       double paymentAmountInDisplayCrcy,
       String postingKeyName,
       String documentReferenceID,
-      AmountDocumentType accountingDocumentType});
+      DebitCreditCode debitCreditCode});
 }
 
 /// @nodoc
-class __$$_PaymentItemCopyWithImpl<$Res>
-    extends _$PaymentItemCopyWithImpl<$Res, _$_PaymentItem>
-    implements _$$_PaymentItemCopyWith<$Res> {
-  __$$_PaymentItemCopyWithImpl(
-      _$_PaymentItem _value, $Res Function(_$_PaymentItem) _then)
+class __$$PaymentItemImplCopyWithImpl<$Res>
+    extends _$PaymentItemCopyWithImpl<$Res, _$PaymentItemImpl>
+    implements _$$PaymentItemImplCopyWith<$Res> {
+  __$$PaymentItemImplCopyWithImpl(
+      _$PaymentItemImpl _value, $Res Function(_$PaymentItemImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -162,9 +161,9 @@ class __$$_PaymentItemCopyWithImpl<$Res>
     Object? paymentAmountInDisplayCrcy = null,
     Object? postingKeyName = null,
     Object? documentReferenceID = null,
-    Object? accountingDocumentType = null,
+    Object? debitCreditCode = null,
   }) {
-    return _then(_$_PaymentItem(
+    return _then(_$PaymentItemImpl(
       searchKey: null == searchKey
           ? _value.searchKey
           : searchKey // ignore: cast_nullable_to_non_nullable
@@ -201,18 +200,18 @@ class __$$_PaymentItemCopyWithImpl<$Res>
           ? _value.documentReferenceID
           : documentReferenceID // ignore: cast_nullable_to_non_nullable
               as String,
-      accountingDocumentType: null == accountingDocumentType
-          ? _value.accountingDocumentType
-          : accountingDocumentType // ignore: cast_nullable_to_non_nullable
-              as AmountDocumentType,
+      debitCreditCode: null == debitCreditCode
+          ? _value.debitCreditCode
+          : debitCreditCode // ignore: cast_nullable_to_non_nullable
+              as DebitCreditCode,
     ));
   }
 }
 
 /// @nodoc
 
-class _$_PaymentItem extends _PaymentItem {
-  const _$_PaymentItem(
+class _$PaymentItemImpl extends _PaymentItem {
+  const _$PaymentItemImpl(
       {required this.searchKey,
       required this.accountingDocumentItem,
       required this.netDueDate,
@@ -222,7 +221,7 @@ class _$_PaymentItem extends _PaymentItem {
       required this.paymentAmountInDisplayCrcy,
       required this.postingKeyName,
       required this.documentReferenceID,
-      required this.accountingDocumentType})
+      required this.debitCreditCode})
       : super._();
 
   @override
@@ -244,18 +243,18 @@ class _$_PaymentItem extends _PaymentItem {
   @override
   final String documentReferenceID;
   @override
-  final AmountDocumentType accountingDocumentType;
+  final DebitCreditCode debitCreditCode;
 
   @override
   String toString() {
-    return 'PaymentItem(searchKey: $searchKey, accountingDocumentItem: $accountingDocumentItem, netDueDate: $netDueDate, postingDate: $postingDate, documentDate: $documentDate, transactionCurrency: $transactionCurrency, paymentAmountInDisplayCrcy: $paymentAmountInDisplayCrcy, postingKeyName: $postingKeyName, documentReferenceID: $documentReferenceID, accountingDocumentType: $accountingDocumentType)';
+    return 'PaymentItem(searchKey: $searchKey, accountingDocumentItem: $accountingDocumentItem, netDueDate: $netDueDate, postingDate: $postingDate, documentDate: $documentDate, transactionCurrency: $transactionCurrency, paymentAmountInDisplayCrcy: $paymentAmountInDisplayCrcy, postingKeyName: $postingKeyName, documentReferenceID: $documentReferenceID, debitCreditCode: $debitCreditCode)';
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_PaymentItem &&
+            other is _$PaymentItemImpl &&
             (identical(other.searchKey, searchKey) ||
                 other.searchKey == searchKey) &&
             (identical(other.accountingDocumentItem, accountingDocumentItem) ||
@@ -276,8 +275,8 @@ class _$_PaymentItem extends _PaymentItem {
                 other.postingKeyName == postingKeyName) &&
             (identical(other.documentReferenceID, documentReferenceID) ||
                 other.documentReferenceID == documentReferenceID) &&
-            (identical(other.accountingDocumentType, accountingDocumentType) ||
-                other.accountingDocumentType == accountingDocumentType));
+            (identical(other.debitCreditCode, debitCreditCode) ||
+                other.debitCreditCode == debitCreditCode));
   }
 
   @override
@@ -292,28 +291,27 @@ class _$_PaymentItem extends _PaymentItem {
       paymentAmountInDisplayCrcy,
       postingKeyName,
       documentReferenceID,
-      accountingDocumentType);
+      debitCreditCode);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_PaymentItemCopyWith<_$_PaymentItem> get copyWith =>
-      __$$_PaymentItemCopyWithImpl<_$_PaymentItem>(this, _$identity);
+  _$$PaymentItemImplCopyWith<_$PaymentItemImpl> get copyWith =>
+      __$$PaymentItemImplCopyWithImpl<_$PaymentItemImpl>(this, _$identity);
 }
 
 abstract class _PaymentItem extends PaymentItem {
   const factory _PaymentItem(
-          {required final String searchKey,
-          required final String accountingDocumentItem,
-          required final DateTimeStringValue netDueDate,
-          required final DateTimeStringValue postingDate,
-          required final DateTimeStringValue documentDate,
-          required final String transactionCurrency,
-          required final double paymentAmountInDisplayCrcy,
-          required final String postingKeyName,
-          required final String documentReferenceID,
-          required final AmountDocumentType accountingDocumentType}) =
-      _$_PaymentItem;
+      {required final String searchKey,
+      required final String accountingDocumentItem,
+      required final DateTimeStringValue netDueDate,
+      required final DateTimeStringValue postingDate,
+      required final DateTimeStringValue documentDate,
+      required final String transactionCurrency,
+      required final double paymentAmountInDisplayCrcy,
+      required final String postingKeyName,
+      required final String documentReferenceID,
+      required final DebitCreditCode debitCreditCode}) = _$PaymentItemImpl;
   const _PaymentItem._() : super._();
 
   @override
@@ -335,9 +333,9 @@ abstract class _PaymentItem extends PaymentItem {
   @override
   String get documentReferenceID;
   @override
-  AmountDocumentType get accountingDocumentType;
+  DebitCreditCode get debitCreditCode;
   @override
   @JsonKey(ignore: true)
-  _$$_PaymentItemCopyWith<_$_PaymentItem> get copyWith =>
+  _$$PaymentItemImplCopyWith<_$PaymentItemImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

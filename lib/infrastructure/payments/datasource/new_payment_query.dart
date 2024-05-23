@@ -126,6 +126,7 @@ class NewPaymentQuery {
           transactionCurrency
           paymentAmountInDisplayCrcy
           documentReferenceID
+          debitCreditCode
         }
         salesDistrict
         footer

@@ -18,7 +18,7 @@ class PaymentItem with _$PaymentItem {
     required double paymentAmountInDisplayCrcy,
     required String postingKeyName,
     required String documentReferenceID,
-    required AmountDocumentType accountingDocumentType,
+    required DebitCreditCode debitCreditCode,
   }) = _PaymentItem;
 
   factory PaymentItem.empty() => PaymentItem(
@@ -31,28 +31,24 @@ class PaymentItem with _$PaymentItem {
         paymentAmountInDisplayCrcy: 0.0,
         postingKeyName: '',
         documentReferenceID: '',
-        accountingDocumentType: AmountDocumentType(''),
+        debitCreditCode: DebitCreditCode(''),
       );
 }
 
 extension PaymentItemListExtension on List<PaymentItem> {
   double get invoiceTotal {
     return List<PaymentItem>.from(this)
-        .where((element) => element.accountingDocumentType.isInvoice)
+        .where((element) => element.debitCreditCode.isDedit)
         .map((item) => item.paymentAmountInDisplayCrcy)
         .fold(0.0, (result, amount) => result + amount);
   }
 
   double get creditTotal {
     return List<PaymentItem>.from(this)
-        .where((element) => element.accountingDocumentType.isCredit)
+        .where((element) => element.debitCreditCode.isCredit)
         .map((item) => item.paymentAmountInDisplayCrcy)
         .fold(0.0, (result, amount) => result + amount);
   }
 
-  double get totalInInvoice => List<PaymentItem>.from(this).fold(
-        0,
-        (previousValue, element) =>
-            previousValue + element.paymentAmountInDisplayCrcy,
-      );
+  double get totalInInvoice => invoiceTotal - creditTotal;
 }

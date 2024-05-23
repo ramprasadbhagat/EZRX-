@@ -41,8 +41,27 @@
            "documentDate": "2012-09-26T00:00:00Z",
            "transactionCurrency": "PHP",
            "paymentAmountInDisplayCrcy": 3.29,
-           "documentReferenceID": "1209-10-12IV0593"
-         }
+           "documentReferenceID": "1209-10-12IV0593",
+           "debitCreditCode": "S"
+         },
+         {
+          "postingKeyName": "Invoice",
+          "accountingDocument": "1550000045",
+          "documentDate": "2024-05-21T00:00:00Z",
+          "transactionCurrency": "PHP",
+          "paymentAmountInDisplayCrcy": 5000,
+          "documentReferenceID": "0810237257",
+          "debitCreditCode": "S"
+        },
+        {
+          "postingKeyName": "Credit memo",
+          "accountingDocument": "4550000029",
+          "documentDate": "2024-05-23T00:00:00Z",
+          "transactionCurrency": "PHP",
+          "paymentAmountInDisplayCrcy": 32,
+          "documentReferenceID": "0810232262",
+          "debitCreditCode": "H"
+        }
        ],
        "salesDistrict": "",
        "footer": null,

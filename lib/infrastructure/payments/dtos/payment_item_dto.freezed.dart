@@ -12,7 +12,7 @@ part of 'payment_item_dto.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 PaymentItemDto _$PaymentItemDtoFromJson(Map<String, dynamic> json) {
   return _PaymentItemDto.fromJson(json);
@@ -38,8 +38,8 @@ mixin _$PaymentItemDto {
   String get postingKeyName => throw _privateConstructorUsedError;
   @JsonKey(name: 'documentReferenceID', defaultValue: '')
   String get documentReferenceID => throw _privateConstructorUsedError;
-  @JsonKey(name: 'accountingDocumentType', defaultValue: '')
-  String get accountingDocumentType => throw _privateConstructorUsedError;
+  @JsonKey(name: 'debitCreditCode', defaultValue: '')
+  String get debitCreditCode => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -68,8 +68,8 @@ abstract class $PaymentItemDtoCopyWith<$Res> {
       @JsonKey(name: 'postingKeyName', defaultValue: '') String postingKeyName,
       @JsonKey(name: 'documentReferenceID', defaultValue: '')
       String documentReferenceID,
-      @JsonKey(name: 'accountingDocumentType', defaultValue: '')
-      String accountingDocumentType});
+      @JsonKey(name: 'debitCreditCode', defaultValue: '')
+      String debitCreditCode});
 }
 
 /// @nodoc
@@ -94,7 +94,7 @@ class _$PaymentItemDtoCopyWithImpl<$Res, $Val extends PaymentItemDto>
     Object? paymentAmountInDisplayCrcy = null,
     Object? postingKeyName = null,
     Object? documentReferenceID = null,
-    Object? accountingDocumentType = null,
+    Object? debitCreditCode = null,
   }) {
     return _then(_value.copyWith(
       accountingDocument: null == accountingDocument
@@ -133,20 +133,20 @@ class _$PaymentItemDtoCopyWithImpl<$Res, $Val extends PaymentItemDto>
           ? _value.documentReferenceID
           : documentReferenceID // ignore: cast_nullable_to_non_nullable
               as String,
-      accountingDocumentType: null == accountingDocumentType
-          ? _value.accountingDocumentType
-          : accountingDocumentType // ignore: cast_nullable_to_non_nullable
+      debitCreditCode: null == debitCreditCode
+          ? _value.debitCreditCode
+          : debitCreditCode // ignore: cast_nullable_to_non_nullable
               as String,
     ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$$_PaymentItemDtoCopyWith<$Res>
+abstract class _$$PaymentItemDtoImplCopyWith<$Res>
     implements $PaymentItemDtoCopyWith<$Res> {
-  factory _$$_PaymentItemDtoCopyWith(
-          _$_PaymentItemDto value, $Res Function(_$_PaymentItemDto) then) =
-      __$$_PaymentItemDtoCopyWithImpl<$Res>;
+  factory _$$PaymentItemDtoImplCopyWith(_$PaymentItemDtoImpl value,
+          $Res Function(_$PaymentItemDtoImpl) then) =
+      __$$PaymentItemDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -164,16 +164,16 @@ abstract class _$$_PaymentItemDtoCopyWith<$Res>
       @JsonKey(name: 'postingKeyName', defaultValue: '') String postingKeyName,
       @JsonKey(name: 'documentReferenceID', defaultValue: '')
       String documentReferenceID,
-      @JsonKey(name: 'accountingDocumentType', defaultValue: '')
-      String accountingDocumentType});
+      @JsonKey(name: 'debitCreditCode', defaultValue: '')
+      String debitCreditCode});
 }
 
 /// @nodoc
-class __$$_PaymentItemDtoCopyWithImpl<$Res>
-    extends _$PaymentItemDtoCopyWithImpl<$Res, _$_PaymentItemDto>
-    implements _$$_PaymentItemDtoCopyWith<$Res> {
-  __$$_PaymentItemDtoCopyWithImpl(
-      _$_PaymentItemDto _value, $Res Function(_$_PaymentItemDto) _then)
+class __$$PaymentItemDtoImplCopyWithImpl<$Res>
+    extends _$PaymentItemDtoCopyWithImpl<$Res, _$PaymentItemDtoImpl>
+    implements _$$PaymentItemDtoImplCopyWith<$Res> {
+  __$$PaymentItemDtoImplCopyWithImpl(
+      _$PaymentItemDtoImpl _value, $Res Function(_$PaymentItemDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -188,9 +188,9 @@ class __$$_PaymentItemDtoCopyWithImpl<$Res>
     Object? paymentAmountInDisplayCrcy = null,
     Object? postingKeyName = null,
     Object? documentReferenceID = null,
-    Object? accountingDocumentType = null,
+    Object? debitCreditCode = null,
   }) {
-    return _then(_$_PaymentItemDto(
+    return _then(_$PaymentItemDtoImpl(
       accountingDocument: null == accountingDocument
           ? _value.accountingDocument
           : accountingDocument // ignore: cast_nullable_to_non_nullable
@@ -227,9 +227,9 @@ class __$$_PaymentItemDtoCopyWithImpl<$Res>
           ? _value.documentReferenceID
           : documentReferenceID // ignore: cast_nullable_to_non_nullable
               as String,
-      accountingDocumentType: null == accountingDocumentType
-          ? _value.accountingDocumentType
-          : accountingDocumentType // ignore: cast_nullable_to_non_nullable
+      debitCreditCode: null == debitCreditCode
+          ? _value.debitCreditCode
+          : debitCreditCode // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
@@ -237,8 +237,8 @@ class __$$_PaymentItemDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_PaymentItemDto extends _PaymentItemDto {
-  const _$_PaymentItemDto(
+class _$PaymentItemDtoImpl extends _PaymentItemDto {
+  const _$PaymentItemDtoImpl(
       {@JsonKey(name: 'accountingDocument', defaultValue: '')
       required this.accountingDocument,
       @JsonKey(name: 'accountingDocumentItem', defaultValue: '')
@@ -255,12 +255,12 @@ class _$_PaymentItemDto extends _PaymentItemDto {
       required this.postingKeyName,
       @JsonKey(name: 'documentReferenceID', defaultValue: '')
       required this.documentReferenceID,
-      @JsonKey(name: 'accountingDocumentType', defaultValue: '')
-      required this.accountingDocumentType})
+      @JsonKey(name: 'debitCreditCode', defaultValue: '')
+      required this.debitCreditCode})
       : super._();
 
-  factory _$_PaymentItemDto.fromJson(Map<String, dynamic> json) =>
-      _$$_PaymentItemDtoFromJson(json);
+  factory _$PaymentItemDtoImpl.fromJson(Map<String, dynamic> json) =>
+      _$$PaymentItemDtoImplFromJson(json);
 
   @override
   @JsonKey(name: 'accountingDocument', defaultValue: '')
@@ -290,19 +290,19 @@ class _$_PaymentItemDto extends _PaymentItemDto {
   @JsonKey(name: 'documentReferenceID', defaultValue: '')
   final String documentReferenceID;
   @override
-  @JsonKey(name: 'accountingDocumentType', defaultValue: '')
-  final String accountingDocumentType;
+  @JsonKey(name: 'debitCreditCode', defaultValue: '')
+  final String debitCreditCode;
 
   @override
   String toString() {
-    return 'PaymentItemDto(accountingDocument: $accountingDocument, accountingDocumentItem: $accountingDocumentItem, netDueDate: $netDueDate, postingDate: $postingDate, documentDate: $documentDate, transactionCurrency: $transactionCurrency, paymentAmountInDisplayCrcy: $paymentAmountInDisplayCrcy, postingKeyName: $postingKeyName, documentReferenceID: $documentReferenceID, accountingDocumentType: $accountingDocumentType)';
+    return 'PaymentItemDto(accountingDocument: $accountingDocument, accountingDocumentItem: $accountingDocumentItem, netDueDate: $netDueDate, postingDate: $postingDate, documentDate: $documentDate, transactionCurrency: $transactionCurrency, paymentAmountInDisplayCrcy: $paymentAmountInDisplayCrcy, postingKeyName: $postingKeyName, documentReferenceID: $documentReferenceID, debitCreditCode: $debitCreditCode)';
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_PaymentItemDto &&
+            other is _$PaymentItemDtoImpl &&
             (identical(other.accountingDocument, accountingDocument) ||
                 other.accountingDocument == accountingDocument) &&
             (identical(other.accountingDocumentItem, accountingDocumentItem) ||
@@ -323,8 +323,8 @@ class _$_PaymentItemDto extends _PaymentItemDto {
                 other.postingKeyName == postingKeyName) &&
             (identical(other.documentReferenceID, documentReferenceID) ||
                 other.documentReferenceID == documentReferenceID) &&
-            (identical(other.accountingDocumentType, accountingDocumentType) ||
-                other.accountingDocumentType == accountingDocumentType));
+            (identical(other.debitCreditCode, debitCreditCode) ||
+                other.debitCreditCode == debitCreditCode));
   }
 
   @JsonKey(ignore: true)
@@ -340,17 +340,18 @@ class _$_PaymentItemDto extends _PaymentItemDto {
       paymentAmountInDisplayCrcy,
       postingKeyName,
       documentReferenceID,
-      accountingDocumentType);
+      debitCreditCode);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_PaymentItemDtoCopyWith<_$_PaymentItemDto> get copyWith =>
-      __$$_PaymentItemDtoCopyWithImpl<_$_PaymentItemDto>(this, _$identity);
+  _$$PaymentItemDtoImplCopyWith<_$PaymentItemDtoImpl> get copyWith =>
+      __$$PaymentItemDtoImplCopyWithImpl<_$PaymentItemDtoImpl>(
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_PaymentItemDtoToJson(
+    return _$$PaymentItemDtoImplToJson(
       this,
     );
   }
@@ -376,12 +377,12 @@ abstract class _PaymentItemDto extends PaymentItemDto {
       required final String postingKeyName,
       @JsonKey(name: 'documentReferenceID', defaultValue: '')
       required final String documentReferenceID,
-      @JsonKey(name: 'accountingDocumentType', defaultValue: '')
-      required final String accountingDocumentType}) = _$_PaymentItemDto;
+      @JsonKey(name: 'debitCreditCode', defaultValue: '')
+      required final String debitCreditCode}) = _$PaymentItemDtoImpl;
   const _PaymentItemDto._() : super._();
 
   factory _PaymentItemDto.fromJson(Map<String, dynamic> json) =
-      _$_PaymentItemDto.fromJson;
+      _$PaymentItemDtoImpl.fromJson;
 
   @override
   @JsonKey(name: 'accountingDocument', defaultValue: '')
@@ -411,10 +412,10 @@ abstract class _PaymentItemDto extends PaymentItemDto {
   @JsonKey(name: 'documentReferenceID', defaultValue: '')
   String get documentReferenceID;
   @override
-  @JsonKey(name: 'accountingDocumentType', defaultValue: '')
-  String get accountingDocumentType;
+  @JsonKey(name: 'debitCreditCode', defaultValue: '')
+  String get debitCreditCode;
   @override
   @JsonKey(ignore: true)
-  _$$_PaymentItemDtoCopyWith<_$_PaymentItemDto> get copyWith =>
+  _$$PaymentItemDtoImplCopyWith<_$PaymentItemDtoImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

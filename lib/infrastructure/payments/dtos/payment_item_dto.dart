@@ -27,8 +27,8 @@ class PaymentItemDto with _$PaymentItemDto {
         required String postingKeyName,
     @JsonKey(name: 'documentReferenceID', defaultValue: '')
         required String documentReferenceID,
-    @JsonKey(name: 'accountingDocumentType', defaultValue: '')
-        required String accountingDocumentType,
+    @JsonKey(name: 'debitCreditCode', defaultValue: '')
+        required String debitCreditCode,
   }) = _PaymentItemDto;
 
   PaymentItem toDomain() {
@@ -41,7 +41,7 @@ class PaymentItemDto with _$PaymentItemDto {
       paymentAmountInDisplayCrcy:
           double.parse(paymentAmountInDisplayCrcy.toString()),
       postingKeyName: postingKeyName,
-      accountingDocumentType: AmountDocumentType(accountingDocumentType),
+      debitCreditCode: DebitCreditCode(debitCreditCode),
       documentReferenceID: documentReferenceID,
       transactionCurrency: transactionCurrency,
     );

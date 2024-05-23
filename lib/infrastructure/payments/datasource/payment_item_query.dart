@@ -12,7 +12,7 @@ class PaymentItemQuery {
     paymentAmountInDisplayCrcy
     postingKeyName
     documentReferenceID
-    accountingDocumentType
+    debitCreditCode
   }
 } 
     ''';
