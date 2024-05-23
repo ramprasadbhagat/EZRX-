@@ -20,7 +20,7 @@ class OrderHistoryDetailsTenderContractDto
     required int contractQuantity,
     @JsonKey(name: 'RemainingQuantity', defaultValue: 0)
     required int remainingQuantity,
-    @JsonKey(name: 'isTenderExpired', defaultValue: false)
+    @JsonKey(name: 'isTenderExpire', defaultValue: false)
     required bool isTenderExpired,
     @JsonKey(name: 'ExpiryDate', defaultValue: '') required String expiryDate,
     @JsonKey(name: 'OrderReason', defaultValue: '') required String orderReason,

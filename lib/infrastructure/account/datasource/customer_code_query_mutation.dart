@@ -44,6 +44,7 @@ query customerInformationSearch(
       city2
       status
       ${enableMarketplace ? 'isMarketPlace' : ''}
+      division
       shipTo {
         defaultShipToAddress
         shipToCustomerCode
@@ -106,6 +107,7 @@ query customerInformationSearch(
             salesDeals
             paymentTerm
             paymentTermDescription
+            division
             shipTo {
               defaultShipToAddress
               shipToCustomerCode

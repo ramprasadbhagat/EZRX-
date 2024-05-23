@@ -33,7 +33,7 @@ mixin _$OrderHistoryDetailsTenderContractDto {
   int get contractQuantity => throw _privateConstructorUsedError;
   @JsonKey(name: 'RemainingQuantity', defaultValue: 0)
   int get remainingQuantity => throw _privateConstructorUsedError;
-  @JsonKey(name: 'isTenderExpired', defaultValue: false)
+  @JsonKey(name: 'isTenderExpire', defaultValue: false)
   bool get isTenderExpired => throw _privateConstructorUsedError;
   @JsonKey(name: 'ExpiryDate', defaultValue: '')
   String get expiryDate => throw _privateConstructorUsedError;
@@ -68,7 +68,7 @@ abstract class $OrderHistoryDetailsTenderContractDtoCopyWith<$Res> {
       @JsonKey(name: 'ContractQuantity', defaultValue: 0) int contractQuantity,
       @JsonKey(name: 'RemainingQuantity', defaultValue: 0)
       int remainingQuantity,
-      @JsonKey(name: 'isTenderExpired', defaultValue: false)
+      @JsonKey(name: 'isTenderExpire', defaultValue: false)
       bool isTenderExpired,
       @JsonKey(name: 'ExpiryDate', defaultValue: '') String expiryDate,
       @JsonKey(name: 'OrderReason', defaultValue: '') String orderReason,
@@ -170,7 +170,7 @@ abstract class _$$OrderHistoryDetailsTenderContractDtoImplCopyWith<$Res>
       @JsonKey(name: 'ContractQuantity', defaultValue: 0) int contractQuantity,
       @JsonKey(name: 'RemainingQuantity', defaultValue: 0)
       int remainingQuantity,
-      @JsonKey(name: 'isTenderExpired', defaultValue: false)
+      @JsonKey(name: 'isTenderExpire', defaultValue: false)
       bool isTenderExpired,
       @JsonKey(name: 'ExpiryDate', defaultValue: '') String expiryDate,
       @JsonKey(name: 'OrderReason', defaultValue: '') String orderReason,
@@ -268,7 +268,7 @@ class _$OrderHistoryDetailsTenderContractDtoImpl
       required this.contractQuantity,
       @JsonKey(name: 'RemainingQuantity', defaultValue: 0)
       required this.remainingQuantity,
-      @JsonKey(name: 'isTenderExpired', defaultValue: false)
+      @JsonKey(name: 'isTenderExpire', defaultValue: false)
       required this.isTenderExpired,
       @JsonKey(name: 'ExpiryDate', defaultValue: '') required this.expiryDate,
       @JsonKey(name: 'OrderReason', defaultValue: '') required this.orderReason,
@@ -300,7 +300,7 @@ class _$OrderHistoryDetailsTenderContractDtoImpl
   @JsonKey(name: 'RemainingQuantity', defaultValue: 0)
   final int remainingQuantity;
   @override
-  @JsonKey(name: 'isTenderExpired', defaultValue: false)
+  @JsonKey(name: 'isTenderExpire', defaultValue: false)
   final bool isTenderExpired;
   @override
   @JsonKey(name: 'ExpiryDate', defaultValue: '')
@@ -394,7 +394,7 @@ abstract class _OrderHistoryDetailsTenderContractDto
       required final int contractQuantity,
       @JsonKey(name: 'RemainingQuantity', defaultValue: 0)
       required final int remainingQuantity,
-      @JsonKey(name: 'isTenderExpired', defaultValue: false)
+      @JsonKey(name: 'isTenderExpire', defaultValue: false)
       required final bool isTenderExpired,
       @JsonKey(name: 'ExpiryDate', defaultValue: '')
       required final String expiryDate,
@@ -430,7 +430,7 @@ abstract class _OrderHistoryDetailsTenderContractDto
   @JsonKey(name: 'RemainingQuantity', defaultValue: 0)
   int get remainingQuantity;
   @override
-  @JsonKey(name: 'isTenderExpired', defaultValue: false)
+  @JsonKey(name: 'isTenderExpire', defaultValue: false)
   bool get isTenderExpired;
   @override
   @JsonKey(name: 'ExpiryDate', defaultValue: '')

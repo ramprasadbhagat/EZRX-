@@ -97,7 +97,7 @@ mixin _$OrderHistoryItemDto {
   int get tenderPriceUnit => throw _privateConstructorUsedError;
   @JsonKey(name: 'TenderPrice', defaultValue: '')
   String get tenderPrice => throw _privateConstructorUsedError;
-  @JsonKey(name: 'isTenderExpired', defaultValue: false)
+  @JsonKey(name: 'isTenderExpire', defaultValue: false)
   bool get isTenderExpired => throw _privateConstructorUsedError;
   @JsonKey(name: 'isCovid', defaultValue: false)
   bool get isCovid => throw _privateConstructorUsedError;
@@ -165,7 +165,7 @@ abstract class $OrderHistoryItemDtoCopyWith<$Res> {
       String tenderOrderReason,
       @JsonKey(name: 'TenderPriceUnit', defaultValue: 0) int tenderPriceUnit,
       @JsonKey(name: 'TenderPrice', defaultValue: '') String tenderPrice,
-      @JsonKey(name: 'isTenderExpired', defaultValue: false)
+      @JsonKey(name: 'isTenderExpire', defaultValue: false)
       bool isTenderExpired,
       @JsonKey(name: 'isCovid', defaultValue: false) bool isCovid});
 }
@@ -448,7 +448,7 @@ abstract class _$$OrderHistoryItemDtoImplCopyWith<$Res>
       String tenderOrderReason,
       @JsonKey(name: 'TenderPriceUnit', defaultValue: 0) int tenderPriceUnit,
       @JsonKey(name: 'TenderPrice', defaultValue: '') String tenderPrice,
-      @JsonKey(name: 'isTenderExpired', defaultValue: false)
+      @JsonKey(name: 'isTenderExpire', defaultValue: false)
       bool isTenderExpired,
       @JsonKey(name: 'isCovid', defaultValue: false) bool isCovid});
 }
@@ -732,7 +732,7 @@ class _$OrderHistoryItemDtoImpl extends _OrderHistoryItemDto {
       @JsonKey(name: 'TenderPriceUnit', defaultValue: 0)
       required this.tenderPriceUnit,
       @JsonKey(name: 'TenderPrice', defaultValue: '') required this.tenderPrice,
-      @JsonKey(name: 'isTenderExpired', defaultValue: false)
+      @JsonKey(name: 'isTenderExpire', defaultValue: false)
       required this.isTenderExpired,
       @JsonKey(name: 'isCovid', defaultValue: false) required this.isCovid})
       : _orderHistoryItemPoAttachments = orderHistoryItemPoAttachments,
@@ -863,7 +863,7 @@ class _$OrderHistoryItemDtoImpl extends _OrderHistoryItemDto {
   @JsonKey(name: 'TenderPrice', defaultValue: '')
   final String tenderPrice;
   @override
-  @JsonKey(name: 'isTenderExpired', defaultValue: false)
+  @JsonKey(name: 'isTenderExpire', defaultValue: false)
   final bool isTenderExpired;
   @override
   @JsonKey(name: 'isCovid', defaultValue: false)
@@ -1091,7 +1091,7 @@ abstract class _OrderHistoryItemDto extends OrderHistoryItemDto {
       required final int tenderPriceUnit,
       @JsonKey(name: 'TenderPrice', defaultValue: '')
       required final String tenderPrice,
-      @JsonKey(name: 'isTenderExpired', defaultValue: false)
+      @JsonKey(name: 'isTenderExpire', defaultValue: false)
       required final bool isTenderExpired,
       @JsonKey(name: 'isCovid', defaultValue: false)
       required final bool isCovid}) = _$OrderHistoryItemDtoImpl;
@@ -1215,7 +1215,7 @@ abstract class _OrderHistoryItemDto extends OrderHistoryItemDto {
   @JsonKey(name: 'TenderPrice', defaultValue: '')
   String get tenderPrice;
   @override
-  @JsonKey(name: 'isTenderExpired', defaultValue: false)
+  @JsonKey(name: 'isTenderExpire', defaultValue: false)
   bool get isTenderExpired;
   @override
   @JsonKey(name: 'isCovid', defaultValue: false)

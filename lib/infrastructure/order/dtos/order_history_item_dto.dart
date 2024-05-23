@@ -73,7 +73,7 @@ class OrderHistoryItemDto with _$OrderHistoryItemDto {
     @JsonKey(name: 'TenderPriceUnit', defaultValue: 0)
     required int tenderPriceUnit,
     @JsonKey(name: 'TenderPrice', defaultValue: '') required String tenderPrice,
-    @JsonKey(name: 'isTenderExpired', defaultValue: false)
+    @JsonKey(name: 'isTenderExpire', defaultValue: false)
     required bool isTenderExpired,
     @JsonKey(name: 'isCovid', defaultValue: false) required bool isCovid,
   }) = _OrderHistoryItemDto;
