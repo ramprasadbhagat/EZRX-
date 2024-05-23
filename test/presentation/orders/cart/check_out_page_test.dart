@@ -425,12 +425,27 @@ void main() {
     testWidgets(
       '=> test OrderSummaryBloc Listener when isSubmitting is false',
       (tester) async {
+        when(() => eligibilityBloc.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrgConfigs: fakeMYSalesOrgConfigs,
+            salesOrganisation: fakeMYSalesOrganisation,
+            customerCodeInfo: fakeCustomerCodeInfo,
+          ),
+        );
+
         when(() => cartBloc.state).thenReturn(
           CartState.initial().copyWith(
             cartProducts: fakeCartProduct,
             salesOrganisation: fakeMYSalesOrganisation,
           ),
         );
+
+        when(
+          () => autoRouterMock.pushAndPopUntil(
+            const OrderSuccessPageRoute(),
+            predicate: (any(named: 'predicate')),
+          ),
+        ).thenAnswer((invocation) => Future.value());
 
         final expectedState = [
           OrderSummaryState.initial().copyWith(
@@ -465,8 +480,23 @@ void main() {
             const PoAttachmentEvent.initialized(),
           ),
         ).called(1);
-        verify(() => autoRouterMock..pushNamed('orders/order_confirmation'))
-            .called(1);
+
+        verify(
+          () => additionalDetailsBlocMock.add(
+            AdditionalDetailsEvent.initialized(
+              config: fakeMYSalesOrgConfigs,
+              customerCodeInfo: fakeCustomerCodeInfo,
+            ),
+          ),
+        ).called(1);
+
+        verify(
+          () => autoRouterMock
+            ..pushAndPopUntil(
+              const OrderSuccessPageRoute(),
+              predicate: (any(named: 'predicate')),
+            ),
+        ).called(1);
       },
     );
     testWidgets(

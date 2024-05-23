@@ -107,7 +107,25 @@ class _CheckoutFooterSection extends StatelessWidget {
                           context.read<PoAttachmentBloc>().add(
                                 const PoAttachmentEvent.initialized(),
                               );
-                          context.router.pushNamed('orders/order_confirmation');
+                          context.read<AdditionalDetailsBloc>().add(
+                                AdditionalDetailsEvent.initialized(
+                                  config: context
+                                      .read<EligibilityBloc>()
+                                      .state
+                                      .salesOrgConfigs,
+                                  customerCodeInfo: context
+                                      .read<EligibilityBloc>()
+                                      .state
+                                      .customerCodeInfo,
+                                ),
+                              );
+
+                          context.router.pushAndPopUntil(
+                            const OrderSuccessPageRoute(),
+                            predicate: (Route route) =>
+                                route.settings.name ==
+                                HomeNavigationTabbarRoute.name,
+                          );
                         }
                       },
                       (either) => either.fold(
