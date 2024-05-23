@@ -158,7 +158,7 @@ class PriceAggregate with _$PriceAggregate {
       parentID: materialInfo.type.typeBundle
           ? bundle.bundleCode
           : materialInfo.parentID,
-      mrp: price.getListPrice + individualItemTax,
+      mrp: price.getListPrice,
       tax: salesOrgConfig.salesOrg.isID ? materialInfo.tax : individualItemTax,
       promoStatus: promoStatus,
       promoType: materialInfo.promoType,

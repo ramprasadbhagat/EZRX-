@@ -178,7 +178,7 @@ void main() {
 
       expect(
         submitMaterialInfo.mrp,
-        finalPrice + (finalPrice * fakeTHSalesOrgConfigs.vatValue) / 100,
+        finalPrice,
       );
       expect(
         submitMaterialInfo.tax,
