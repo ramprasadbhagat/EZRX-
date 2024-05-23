@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:ezrxmobile/config.dart';
+import 'package:ezrxmobile/domain/account/error/cart_exception.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
@@ -350,6 +351,91 @@ void main() async {
             result,
             Cart.empty(),
           );
+        },
+      );
+
+      test(
+        "Cart Remote data source success fail status 200 and error as Can't add Normal Product With Animal Health Product",
+        () async {
+          dioAdapter.onPost(
+            '/api/cart',
+            (server) => server.reply(
+              200,
+              {
+                'data': {
+                  'upsertCartItems': {'EzRxItems': []},
+                },
+                'errors': [
+                  {
+                    'message':
+                        "Can't add Normal Product With Animal Health Product",
+                  },
+                ],
+              },
+              delay: const Duration(seconds: 1),
+            ),
+            headers: {'Content-Type': 'application/json; charset=utf-8'},
+            data: jsonEncode({
+              'query': remoteDataSource.cartQueryMutation
+                  .upsertCartItems(fakeConfigValue),
+              'variables': {
+                'itemInput': [{}],
+              },
+            }),
+          );
+
+          await remoteDataSource.upsertCartItems(
+            requestParams: [{}],
+            market: fakeMarket,
+          ).onError((error, _) {
+            expect(
+              error,
+              const CartException.addAnimalHealthWithNormalProductToCart(),
+            );
+            return Future.value(<PriceAggregate>[]);
+          });
+        },
+      );
+
+      test(
+        "Cart Remote data source success fail status 200 and error as Can't add animal health product with normal product",
+        () async {
+          dioAdapter.onPost(
+            '/api/cart',
+            (server) => server.reply(
+              200,
+              {
+                'data': {
+                  'upsertCartItems': {'EzRxItems': []},
+                },
+                'errors': [
+                  {
+                    'message':
+                        "Can't add animal health product with normal product",
+                  },
+                ],
+              },
+              delay: const Duration(seconds: 1),
+            ),
+            headers: {'Content-Type': 'application/json; charset=utf-8'},
+            data: jsonEncode({
+              'query': remoteDataSource.cartQueryMutation
+                  .upsertCartItems(fakeConfigValue),
+              'variables': {
+                'itemInput': [{}],
+              },
+            }),
+          );
+          await remoteDataSource.upsertCartItems(
+            requestParams: [{}],
+            market: fakeMarket,
+          ).onError((error, _) {
+            expect(
+              error,
+              const CartException.addAnimalHealthWithNormalProductToCart(),
+            );
+            return Future.value(<PriceAggregate>[]);
+          });
         },
       );
     },

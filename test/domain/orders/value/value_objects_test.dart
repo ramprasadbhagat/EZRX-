@@ -96,6 +96,13 @@ void main() {
       expect(result, true);
     });
 
+    test('should return true when there is Exempt', () {
+      const input = 'Exempt';
+      final valObj = MaterialTaxClassification(input);
+      final result = valObj.isNoTax;
+      expect(result, true);
+    });
+
     test('should return false when there is fake Tax', () {
       const input = 'fake-Tax';
       final valObj = MaterialTaxClassification(input);

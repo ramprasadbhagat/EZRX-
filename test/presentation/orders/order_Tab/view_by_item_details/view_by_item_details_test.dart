@@ -6,6 +6,7 @@ import 'package:ezrxmobile/application/order/payment_customer_information/paymen
 import 'package:ezrxmobile/domain/account/entities/customer_license.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
+import 'package:ezrxmobile/domain/order/entities/delivery_info_data.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_basic_info.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/customer_license_local.dart';
 import 'package:ezrxmobile/infrastructure/core/clevertap/clevertap_service.dart';
@@ -16,6 +17,7 @@ import 'package:ezrxmobile/presentation/core/market_place/market_place_seller_ti
 import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
 import 'package:ezrxmobile/domain/order/entities/payment_customer_information.dart';
 import 'package:ezrxmobile/presentation/core/status_tracker.dart';
+import 'package:ezrxmobile/presentation/orders/cart/add_to_cart/add_to_cart_error_section.dart';
 import 'package:flutter/material.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:ezrxmobile/locator.dart';
@@ -67,19 +69,19 @@ import 'package:ezrxmobile/presentation/orders/order_tab/view_by_item_details/vi
 import 'package:ezrxmobile/domain/order/entities/payment_term.dart'
     as payment_term;
 
-import '../../../common_mock_data/customer_code_mock.dart';
-import '../../../common_mock_data/mock_bloc.dart';
-import '../../../common_mock_data/mock_other.dart';
-import '../../../common_mock_data/sales_org_config_mock/fake_id_sales_org_config.dart';
-import '../../../common_mock_data/sales_org_config_mock/fake_kh_sales_org_config.dart';
-import '../../../common_mock_data/sales_org_config_mock/fake_my_sales_org_config.dart';
-import '../../../common_mock_data/sales_org_config_mock/fake_sg_sales_org_config.dart';
-import '../../../common_mock_data/sales_org_config_mock/fake_th_sales_org_config.dart';
-import '../../../common_mock_data/sales_org_config_mock/fake_tw_sales_org_config.dart';
-import '../../../common_mock_data/sales_org_config_mock/fake_vn_sales_org_config.dart';
-import '../../../common_mock_data/sales_organsiation_mock.dart';
-import '../../../common_mock_data/user_mock.dart';
-import '../../../utils/widget_utils.dart';
+import '../../../../common_mock_data/customer_code_mock.dart';
+import '../../../../common_mock_data/mock_bloc.dart';
+import '../../../../common_mock_data/mock_other.dart';
+import '../../../../common_mock_data/sales_org_config_mock/fake_id_sales_org_config.dart';
+import '../../../../common_mock_data/sales_org_config_mock/fake_kh_sales_org_config.dart';
+import '../../../../common_mock_data/sales_org_config_mock/fake_my_sales_org_config.dart';
+import '../../../../common_mock_data/sales_org_config_mock/fake_sg_sales_org_config.dart';
+import '../../../../common_mock_data/sales_org_config_mock/fake_th_sales_org_config.dart';
+import '../../../../common_mock_data/sales_org_config_mock/fake_tw_sales_org_config.dart';
+import '../../../../common_mock_data/sales_org_config_mock/fake_vn_sales_org_config.dart';
+import '../../../../common_mock_data/sales_organsiation_mock.dart';
+import '../../../../common_mock_data/user_mock.dart';
+import '../../../../utils/widget_utils.dart';
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
@@ -2499,5 +2501,70 @@ void main() {
         findsNothing,
       );
     });
+    testWidgets(
+      ' -> Navigate to cart page when re-order success',
+      (WidgetTester tester) async {
+        when(() => viewByItemDetailsBlocMock.state).thenReturn(
+          ViewByItemDetailsState.initial().copyWith(
+            orderHistoryItem: fakeOrderHistoryItem,
+          ),
+        );
+        whenListen(
+          cartBlocMock,
+          Stream.fromIterable([
+            CartState.initial().copyWith(
+              isBuyAgain: true,
+            ),
+            CartState.initial(),
+          ]),
+        );
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pumpAndSettle();
+        verify(
+          () => additionalDetailsBlocMock.add(
+            AdditionalDetailsEvent.initiateFromHistory(
+              data: DeliveryInfoData.empty().copyWith(
+                mobileNumber: fakeOrderHistoryItem.telephoneNumber,
+              ),
+            ),
+          ),
+        ).called(1);
+        expect(autoRouterMock.current.name, CartPageRoute.name);
+      },
+    );
+
+    testWidgets(
+      ' -> show bottomsheet when re-order animal health item with normal product in cart',
+      (WidgetTester tester) async {
+        when(() => viewByItemDetailsBlocMock.state).thenReturn(
+          ViewByItemDetailsState.initial().copyWith(
+            orderHistoryItem: fakeOrderHistoryItem,
+          ),
+        );
+        whenListen(
+          cartBlocMock,
+          Stream.fromIterable([
+            CartState.initial().copyWith(
+              isBuyAgain: true,
+            ),
+            CartState.initial().copyWith(
+              apiFailureOrSuccessOption: optionOf(
+                const Left(ApiFailure.addAnimalHealthWithNormalProductToCart()),
+              ),
+            ),
+          ]),
+        );
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pumpAndSettle();
+        expect(find.byType(AddToCartErrorSection), findsOneWidget);
+        expect(
+          find.text(
+            'Animal health materials cannot be ordered with regular materials. By proceeding, your existing cart will be cleared.'
+                .tr(),
+          ),
+          findsOneWidget,
+        );
+      },
+    );
   });
 }
