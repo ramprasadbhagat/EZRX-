@@ -25,6 +25,7 @@ class TenderContract with _$TenderContract {
     required TenderContractNumber announcementLetterNumber,
     required bool isNearToExpire,
     required StringValue contractPaymentTerm,
+    required bool isTenderExpired,
   }) = _TenderContract;
 
   factory TenderContract.empty() => TenderContract(
@@ -43,6 +44,7 @@ class TenderContract with _$TenderContract {
         announcementLetterNumber:
             TenderContractNumber.announcementLetterNumber(''),
         isNearToExpire: false,
+        isTenderExpired: false,
         contractPaymentTerm: StringValue(''),
       );
 

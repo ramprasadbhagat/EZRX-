@@ -27,6 +27,7 @@ mixin _$OrderHistoryDetailsTenderContract {
   String get visaNumber => throw _privateConstructorUsedError;
   String get salesDistrict => throw _privateConstructorUsedError;
   String get announcementLetterNumber => throw _privateConstructorUsedError;
+  bool get isTenderExpired => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $OrderHistoryDetailsTenderContractCopyWith<OrderHistoryDetailsTenderContract>
@@ -52,7 +53,8 @@ abstract class $OrderHistoryDetailsTenderContractCopyWith<$Res> {
       String contractReference,
       String visaNumber,
       String salesDistrict,
-      String announcementLetterNumber});
+      String announcementLetterNumber,
+      bool isTenderExpired});
 }
 
 /// @nodoc
@@ -80,6 +82,7 @@ class _$OrderHistoryDetailsTenderContractCopyWithImpl<$Res,
     Object? visaNumber = null,
     Object? salesDistrict = null,
     Object? announcementLetterNumber = null,
+    Object? isTenderExpired = null,
   }) {
     return _then(_value.copyWith(
       contractNumber: null == contractNumber
@@ -126,6 +129,10 @@ class _$OrderHistoryDetailsTenderContractCopyWithImpl<$Res,
           ? _value.announcementLetterNumber
           : announcementLetterNumber // ignore: cast_nullable_to_non_nullable
               as String,
+      isTenderExpired: null == isTenderExpired
+          ? _value.isTenderExpired
+          : isTenderExpired // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -150,7 +157,8 @@ abstract class _$$OrderHistoryDetailsTenderContractImplCopyWith<$Res>
       String contractReference,
       String visaNumber,
       String salesDistrict,
-      String announcementLetterNumber});
+      String announcementLetterNumber,
+      bool isTenderExpired});
 }
 
 /// @nodoc
@@ -177,6 +185,7 @@ class __$$OrderHistoryDetailsTenderContractImplCopyWithImpl<$Res>
     Object? visaNumber = null,
     Object? salesDistrict = null,
     Object? announcementLetterNumber = null,
+    Object? isTenderExpired = null,
   }) {
     return _then(_$OrderHistoryDetailsTenderContractImpl(
       contractNumber: null == contractNumber
@@ -223,6 +232,10 @@ class __$$OrderHistoryDetailsTenderContractImplCopyWithImpl<$Res>
           ? _value.announcementLetterNumber
           : announcementLetterNumber // ignore: cast_nullable_to_non_nullable
               as String,
+      isTenderExpired: null == isTenderExpired
+          ? _value.isTenderExpired
+          : isTenderExpired // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -242,7 +255,8 @@ class _$OrderHistoryDetailsTenderContractImpl
       required this.contractReference,
       required this.visaNumber,
       required this.salesDistrict,
-      required this.announcementLetterNumber})
+      required this.announcementLetterNumber,
+      required this.isTenderExpired})
       : super._();
 
   @override
@@ -267,10 +281,12 @@ class _$OrderHistoryDetailsTenderContractImpl
   final String salesDistrict;
   @override
   final String announcementLetterNumber;
+  @override
+  final bool isTenderExpired;
 
   @override
   String toString() {
-    return 'OrderHistoryDetailsTenderContract(contractNumber: $contractNumber, orderReason: $orderReason, price: $price, priceUnit: $priceUnit, contractQuantity: $contractQuantity, remainingQuantity: $remainingQuantity, expiryDate: $expiryDate, contractReference: $contractReference, visaNumber: $visaNumber, salesDistrict: $salesDistrict, announcementLetterNumber: $announcementLetterNumber)';
+    return 'OrderHistoryDetailsTenderContract(contractNumber: $contractNumber, orderReason: $orderReason, price: $price, priceUnit: $priceUnit, contractQuantity: $contractQuantity, remainingQuantity: $remainingQuantity, expiryDate: $expiryDate, contractReference: $contractReference, visaNumber: $visaNumber, salesDistrict: $salesDistrict, announcementLetterNumber: $announcementLetterNumber, isTenderExpired: $isTenderExpired)';
   }
 
   @override
@@ -299,7 +315,9 @@ class _$OrderHistoryDetailsTenderContractImpl
                 other.salesDistrict == salesDistrict) &&
             (identical(
                     other.announcementLetterNumber, announcementLetterNumber) ||
-                other.announcementLetterNumber == announcementLetterNumber));
+                other.announcementLetterNumber == announcementLetterNumber) &&
+            (identical(other.isTenderExpired, isTenderExpired) ||
+                other.isTenderExpired == isTenderExpired));
   }
 
   @override
@@ -315,7 +333,8 @@ class _$OrderHistoryDetailsTenderContractImpl
       contractReference,
       visaNumber,
       salesDistrict,
-      announcementLetterNumber);
+      announcementLetterNumber,
+      isTenderExpired);
 
   @JsonKey(ignore: true)
   @override
@@ -339,7 +358,8 @@ abstract class _OrderHistoryDetailsTenderContract
           required final String contractReference,
           required final String visaNumber,
           required final String salesDistrict,
-          required final String announcementLetterNumber}) =
+          required final String announcementLetterNumber,
+          required final bool isTenderExpired}) =
       _$OrderHistoryDetailsTenderContractImpl;
   _OrderHistoryDetailsTenderContract._() : super._();
 
@@ -365,6 +385,8 @@ abstract class _OrderHistoryDetailsTenderContract
   String get salesDistrict;
   @override
   String get announcementLetterNumber;
+  @override
+  bool get isTenderExpired;
   @override
   @JsonKey(ignore: true)
   _$$OrderHistoryDetailsTenderContractImplCopyWith<

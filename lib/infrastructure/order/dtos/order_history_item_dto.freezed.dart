@@ -97,6 +97,8 @@ mixin _$OrderHistoryItemDto {
   int get tenderPriceUnit => throw _privateConstructorUsedError;
   @JsonKey(name: 'TenderPrice', defaultValue: '')
   String get tenderPrice => throw _privateConstructorUsedError;
+  @JsonKey(name: 'isTenderExpired', defaultValue: false)
+  bool get isTenderExpired => throw _privateConstructorUsedError;
   @JsonKey(name: 'isCovid', defaultValue: false)
   bool get isCovid => throw _privateConstructorUsedError;
 
@@ -163,6 +165,8 @@ abstract class $OrderHistoryItemDtoCopyWith<$Res> {
       String tenderOrderReason,
       @JsonKey(name: 'TenderPriceUnit', defaultValue: 0) int tenderPriceUnit,
       @JsonKey(name: 'TenderPrice', defaultValue: '') String tenderPrice,
+      @JsonKey(name: 'isTenderExpired', defaultValue: false)
+      bool isTenderExpired,
       @JsonKey(name: 'isCovid', defaultValue: false) bool isCovid});
 }
 
@@ -217,6 +221,7 @@ class _$OrderHistoryItemDtoCopyWithImpl<$Res, $Val extends OrderHistoryItemDto>
     Object? tenderOrderReason = null,
     Object? tenderPriceUnit = null,
     Object? tenderPrice = null,
+    Object? isTenderExpired = null,
     Object? isCovid = null,
   }) {
     return _then(_value.copyWith(
@@ -372,6 +377,10 @@ class _$OrderHistoryItemDtoCopyWithImpl<$Res, $Val extends OrderHistoryItemDto>
           ? _value.tenderPrice
           : tenderPrice // ignore: cast_nullable_to_non_nullable
               as String,
+      isTenderExpired: null == isTenderExpired
+          ? _value.isTenderExpired
+          : isTenderExpired // ignore: cast_nullable_to_non_nullable
+              as bool,
       isCovid: null == isCovid
           ? _value.isCovid
           : isCovid // ignore: cast_nullable_to_non_nullable
@@ -439,6 +448,8 @@ abstract class _$$OrderHistoryItemDtoImplCopyWith<$Res>
       String tenderOrderReason,
       @JsonKey(name: 'TenderPriceUnit', defaultValue: 0) int tenderPriceUnit,
       @JsonKey(name: 'TenderPrice', defaultValue: '') String tenderPrice,
+      @JsonKey(name: 'isTenderExpired', defaultValue: false)
+      bool isTenderExpired,
       @JsonKey(name: 'isCovid', defaultValue: false) bool isCovid});
 }
 
@@ -491,6 +502,7 @@ class __$$OrderHistoryItemDtoImplCopyWithImpl<$Res>
     Object? tenderOrderReason = null,
     Object? tenderPriceUnit = null,
     Object? tenderPrice = null,
+    Object? isTenderExpired = null,
     Object? isCovid = null,
   }) {
     return _then(_$OrderHistoryItemDtoImpl(
@@ -646,6 +658,10 @@ class __$$OrderHistoryItemDtoImplCopyWithImpl<$Res>
           ? _value.tenderPrice
           : tenderPrice // ignore: cast_nullable_to_non_nullable
               as String,
+      isTenderExpired: null == isTenderExpired
+          ? _value.isTenderExpired
+          : isTenderExpired // ignore: cast_nullable_to_non_nullable
+              as bool,
       isCovid: null == isCovid
           ? _value.isCovid
           : isCovid // ignore: cast_nullable_to_non_nullable
@@ -716,6 +732,8 @@ class _$OrderHistoryItemDtoImpl extends _OrderHistoryItemDto {
       @JsonKey(name: 'TenderPriceUnit', defaultValue: 0)
       required this.tenderPriceUnit,
       @JsonKey(name: 'TenderPrice', defaultValue: '') required this.tenderPrice,
+      @JsonKey(name: 'isTenderExpired', defaultValue: false)
+      required this.isTenderExpired,
       @JsonKey(name: 'isCovid', defaultValue: false) required this.isCovid})
       : _orderHistoryItemPoAttachments = orderHistoryItemPoAttachments,
         super._();
@@ -845,12 +863,15 @@ class _$OrderHistoryItemDtoImpl extends _OrderHistoryItemDto {
   @JsonKey(name: 'TenderPrice', defaultValue: '')
   final String tenderPrice;
   @override
+  @JsonKey(name: 'isTenderExpired', defaultValue: false)
+  final bool isTenderExpired;
+  @override
   @JsonKey(name: 'isCovid', defaultValue: false)
   final bool isCovid;
 
   @override
   String toString() {
-    return 'OrderHistoryItemDto(materialNumber: $materialNumber, materialDescription: $materialDescription, qty: $qty, unitPrice: $unitPrice, originPrice: $originPrice, totalPrice: $totalPrice, status: $status, deliveryDate: $deliveryDate, orderNumber: $orderNumber, createdDate: $createdDate, orderBy: $orderBy, orderType: $orderType, batch: $batch, isBonusMaterial: $isBonusMaterial, telephoneNumber: $telephoneNumber, invoiceNumber: $invoiceNumber, pOReference: $pOReference, manufactureName: $manufactureName, governmentMaterialCode: $governmentMaterialCode, expiryDate: $expiryDate, requestedDeliveryDate: $requestedDeliveryDate, specialInstruction: $specialInstruction, tax: $tax, eZRXNumber: $eZRXNumber, orderHistoryItemPoAttachments: $orderHistoryItemPoAttachments, promoStatus: $promoStatus, isCounterOffer: $isCounterOffer, isBundle: $isBundle, lineNumber: $lineNumber, principalCode: $principalCode, hidePrice: $hidePrice, referenceNotes: $referenceNotes, isMarketPlace: $isMarketPlace, tenderContractNumber: $tenderContractNumber, tenderContractReference: $tenderContractReference, tenderOrderReason: $tenderOrderReason, tenderPriceUnit: $tenderPriceUnit, tenderPrice: $tenderPrice, isCovid: $isCovid)';
+    return 'OrderHistoryItemDto(materialNumber: $materialNumber, materialDescription: $materialDescription, qty: $qty, unitPrice: $unitPrice, originPrice: $originPrice, totalPrice: $totalPrice, status: $status, deliveryDate: $deliveryDate, orderNumber: $orderNumber, createdDate: $createdDate, orderBy: $orderBy, orderType: $orderType, batch: $batch, isBonusMaterial: $isBonusMaterial, telephoneNumber: $telephoneNumber, invoiceNumber: $invoiceNumber, pOReference: $pOReference, manufactureName: $manufactureName, governmentMaterialCode: $governmentMaterialCode, expiryDate: $expiryDate, requestedDeliveryDate: $requestedDeliveryDate, specialInstruction: $specialInstruction, tax: $tax, eZRXNumber: $eZRXNumber, orderHistoryItemPoAttachments: $orderHistoryItemPoAttachments, promoStatus: $promoStatus, isCounterOffer: $isCounterOffer, isBundle: $isBundle, lineNumber: $lineNumber, principalCode: $principalCode, hidePrice: $hidePrice, referenceNotes: $referenceNotes, isMarketPlace: $isMarketPlace, tenderContractNumber: $tenderContractNumber, tenderContractReference: $tenderContractReference, tenderOrderReason: $tenderOrderReason, tenderPriceUnit: $tenderPriceUnit, tenderPrice: $tenderPrice, isTenderExpired: $isTenderExpired, isCovid: $isCovid)';
   }
 
   @override
@@ -931,6 +952,8 @@ class _$OrderHistoryItemDtoImpl extends _OrderHistoryItemDto {
                 other.tenderPriceUnit == tenderPriceUnit) &&
             (identical(other.tenderPrice, tenderPrice) ||
                 other.tenderPrice == tenderPrice) &&
+            (identical(other.isTenderExpired, isTenderExpired) ||
+                other.isTenderExpired == isTenderExpired) &&
             (identical(other.isCovid, isCovid) || other.isCovid == isCovid));
   }
 
@@ -976,6 +999,7 @@ class _$OrderHistoryItemDtoImpl extends _OrderHistoryItemDto {
         tenderOrderReason,
         tenderPriceUnit,
         tenderPrice,
+        isTenderExpired,
         isCovid
       ]);
 
@@ -1067,6 +1091,8 @@ abstract class _OrderHistoryItemDto extends OrderHistoryItemDto {
       required final int tenderPriceUnit,
       @JsonKey(name: 'TenderPrice', defaultValue: '')
       required final String tenderPrice,
+      @JsonKey(name: 'isTenderExpired', defaultValue: false)
+      required final bool isTenderExpired,
       @JsonKey(name: 'isCovid', defaultValue: false)
       required final bool isCovid}) = _$OrderHistoryItemDtoImpl;
   const _OrderHistoryItemDto._() : super._();
@@ -1188,6 +1214,9 @@ abstract class _OrderHistoryItemDto extends OrderHistoryItemDto {
   @override
   @JsonKey(name: 'TenderPrice', defaultValue: '')
   String get tenderPrice;
+  @override
+  @JsonKey(name: 'isTenderExpired', defaultValue: false)
+  bool get isTenderExpired;
   @override
   @JsonKey(name: 'isCovid', defaultValue: false)
   bool get isCovid;

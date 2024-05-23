@@ -155,6 +155,7 @@ class OrderHistoryDetailsOrderItemDto with _$OrderHistoryDetailsOrderItemDto {
         announcementLetterNumber:
             tenderContractDetails.announcementLetterNumber,
         salesDistrict: '',
+        isTenderExpired: tenderContractDetails.isTenderExpired,
       ),
       principalData: PrincipalData.empty().copyWith(
         principalName: PrincipalName(principalName),

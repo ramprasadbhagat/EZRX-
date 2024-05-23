@@ -20,6 +20,8 @@ class OrderHistoryDetailsTenderContractDto
     required int contractQuantity,
     @JsonKey(name: 'RemainingQuantity', defaultValue: 0)
     required int remainingQuantity,
+    @JsonKey(name: 'isTenderExpired', defaultValue: false)
+    required bool isTenderExpired,
     @JsonKey(name: 'ExpiryDate', defaultValue: '') required String expiryDate,
     @JsonKey(name: 'OrderReason', defaultValue: '') required String orderReason,
     @JsonKey(name: 'VisaNumber', defaultValue: '') required String visaNumber,
@@ -41,6 +43,7 @@ class OrderHistoryDetailsTenderContractDto
       contractReference: tenderContractDetails.contractReference,
       visaNumber: tenderContractDetails.visaNumber,
       announcementLetterNumber: tenderContractDetails.announcementLetterNumber,
+      isTenderExpired: tenderContractDetails.isTenderExpired,
     );
   }
 
@@ -57,6 +60,7 @@ class OrderHistoryDetailsTenderContractDto
       visaNumber: visaNumber,
       announcementLetterNumber: announcementLetterNumber,
       salesDistrict: '',
+      isTenderExpired: isTenderExpired,
     );
   }
 

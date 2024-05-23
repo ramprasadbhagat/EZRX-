@@ -195,9 +195,15 @@ class OrderHistoryDetails with _$OrderHistoryDetails {
 
   bool get isTenderContractAvailable => orderHistoryDetailsOrderItem.any(
         (element) =>
-            !element
-                .tenderContractDetails.contractNumber.isContractNumberEmpty &&
+            element.tenderContractDetails.contractNumber
+                .isContractNumberNotEmpty &&
             element.tenderContractDetails.orderReason.isNotEmpty,
+      );
+  bool get isNotValidTenderContract => orderHistoryDetailsOrderItem.any(
+        (element) =>
+            element.tenderContractDetails.contractNumber
+                .isContractNumberNotEmpty &&
+            element.tenderContractDetails.isTenderExpired,
       );
 
   OrderHistoryDetails copyWithInvoiceNumber({

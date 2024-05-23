@@ -49,6 +49,7 @@
                     "warehouseStorageCondition": "AC",
                     "BonusMaterials": null,
                     "is26SeriesMaterial":false,
+                    "isTenderExpired": false,
                     "TenderContractNumber": "0040026800",
                     "tenderOrderReason": "715",
                     "isCovid" : false
@@ -104,6 +105,7 @@
                     "Comment": null,
                     "BonusMaterials": null,
                     "is26SeriesMaterial":false,
+                    "isTenderExpired": true,
                     "TenderContractNumber": "0040026800",
                     "tenderOrderReason": "715",
                     "isCovid" : false
@@ -166,6 +168,7 @@
                     "IsGimmick": false,
                     "BonusMaterials": null,
                     "is26SeriesMaterial":true,
+                    "isTenderExpired": false,
                     "TenderContractNumber": "0040026800",
                     "tenderOrderReason": "715",
                     "isCovid" : false

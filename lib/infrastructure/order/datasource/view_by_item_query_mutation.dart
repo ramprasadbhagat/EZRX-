@@ -89,6 +89,7 @@ class ViewByItemQueryMutation {
         ItemRegistrationNumber
         TelephoneNumber
         HidePrice
+        isTenderExpire
         TenderContractNumber
         TenderOrderReason
         TenderPrice

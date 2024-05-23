@@ -95,6 +95,8 @@ class CartProductDto with _$CartProductDto {
     @JsonKey(name: 'hasMandatoryTenderContract', defaultValue: false)
     required bool hasMandatoryTenderContract,
     @JsonKey(name: 'isCovid', defaultValue: false) required bool isCovid,
+    @JsonKey(name: 'isTenderExpired', defaultValue: false)
+    required bool isTenderExpired,
   }) = _CartProductDto;
   factory CartProductDto.fromDomain(
     PriceAggregate cartItemDetails,
@@ -161,6 +163,7 @@ class CartProductDto with _$CartProductDto {
           cartItemDetails.tenderContract.contractNumber.getOrCrash(),
       tenderOrderReason:
           cartItemDetails.tenderContract.tenderOrderReason.getOrCrash(),
+      isTenderExpired: cartItemDetails.tenderContract.isTenderExpired,
       isCovid: cartItemDetails.isCovid,
     );
   }
@@ -235,6 +238,7 @@ class CartProductDto with _$CartProductDto {
         tenderOrderReason: TenderContractReason(tenderOrderReason),
         contractNumber:
             TenderContractNumber.tenderContractItemNumber(tenderContractNumber),
+        isTenderExpired: isTenderExpired,
       ),
       isCovid: isCovid,
     );

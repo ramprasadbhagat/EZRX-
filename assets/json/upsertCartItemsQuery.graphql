@@ -26,11 +26,12 @@
   taxes
   isSampleMaterial
   hidePrice
-   TenderContractNumber
+  TenderContractNumber
   tenderOrderReason
   hasValidTenderContract
   hasMandatoryTenderContract
   isFOCMaterial
+  isTenderExpired
   isFavourite
   productCount
   productAddedAt
@@ -160,6 +161,7 @@ fragment ComboMaterialsFields on Item {
   hasValidTenderContract
   hasMandatoryTenderContract
   isFOCMaterial
+  isTenderExpired
   isFavourite
   productCount
   productAddedAt

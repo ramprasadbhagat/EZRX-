@@ -57,6 +57,7 @@ class OrderHistoryItem with _$OrderHistoryItem {
     required TenderPrice tenderPrice,
     required TenderContractReason tenderOrderReason,
     required bool isCovid,
+    required bool isTenderExpired,
   }) = _OrderHistoryItem;
 
   factory OrderHistoryItem.empty() => OrderHistoryItem(
@@ -99,6 +100,7 @@ class OrderHistoryItem with _$OrderHistoryItem {
         tenderPriceUnit: 0,
         tenderPrice: TenderPrice('0'),
         tenderOrderReason: TenderContractReason(''),
+        isTenderExpired: false,
         isCovid: false,
       );
 
@@ -198,6 +200,7 @@ class OrderHistoryItem with _$OrderHistoryItem {
         ),
         pricingUnit: tenderPriceUnit,
         tenderPrice: tenderPrice,
+        isTenderExpired: isTenderExpired,
       );
 
   String get sellerName =>

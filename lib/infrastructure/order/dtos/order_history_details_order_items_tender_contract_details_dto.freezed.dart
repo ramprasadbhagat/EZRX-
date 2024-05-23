@@ -33,6 +33,8 @@ mixin _$OrderHistoryDetailsTenderContractDto {
   int get contractQuantity => throw _privateConstructorUsedError;
   @JsonKey(name: 'RemainingQuantity', defaultValue: 0)
   int get remainingQuantity => throw _privateConstructorUsedError;
+  @JsonKey(name: 'isTenderExpired', defaultValue: false)
+  bool get isTenderExpired => throw _privateConstructorUsedError;
   @JsonKey(name: 'ExpiryDate', defaultValue: '')
   String get expiryDate => throw _privateConstructorUsedError;
   @JsonKey(name: 'OrderReason', defaultValue: '')
@@ -66,6 +68,8 @@ abstract class $OrderHistoryDetailsTenderContractDtoCopyWith<$Res> {
       @JsonKey(name: 'ContractQuantity', defaultValue: 0) int contractQuantity,
       @JsonKey(name: 'RemainingQuantity', defaultValue: 0)
       int remainingQuantity,
+      @JsonKey(name: 'isTenderExpired', defaultValue: false)
+      bool isTenderExpired,
       @JsonKey(name: 'ExpiryDate', defaultValue: '') String expiryDate,
       @JsonKey(name: 'OrderReason', defaultValue: '') String orderReason,
       @JsonKey(name: 'VisaNumber', defaultValue: '') String visaNumber,
@@ -93,6 +97,7 @@ class _$OrderHistoryDetailsTenderContractDtoCopyWithImpl<$Res,
     Object? priceUnit = null,
     Object? contractQuantity = null,
     Object? remainingQuantity = null,
+    Object? isTenderExpired = null,
     Object? expiryDate = null,
     Object? orderReason = null,
     Object? visaNumber = null,
@@ -123,6 +128,10 @@ class _$OrderHistoryDetailsTenderContractDtoCopyWithImpl<$Res,
           ? _value.remainingQuantity
           : remainingQuantity // ignore: cast_nullable_to_non_nullable
               as int,
+      isTenderExpired: null == isTenderExpired
+          ? _value.isTenderExpired
+          : isTenderExpired // ignore: cast_nullable_to_non_nullable
+              as bool,
       expiryDate: null == expiryDate
           ? _value.expiryDate
           : expiryDate // ignore: cast_nullable_to_non_nullable
@@ -161,6 +170,8 @@ abstract class _$$OrderHistoryDetailsTenderContractDtoImplCopyWith<$Res>
       @JsonKey(name: 'ContractQuantity', defaultValue: 0) int contractQuantity,
       @JsonKey(name: 'RemainingQuantity', defaultValue: 0)
       int remainingQuantity,
+      @JsonKey(name: 'isTenderExpired', defaultValue: false)
+      bool isTenderExpired,
       @JsonKey(name: 'ExpiryDate', defaultValue: '') String expiryDate,
       @JsonKey(name: 'OrderReason', defaultValue: '') String orderReason,
       @JsonKey(name: 'VisaNumber', defaultValue: '') String visaNumber,
@@ -187,6 +198,7 @@ class __$$OrderHistoryDetailsTenderContractDtoImplCopyWithImpl<$Res>
     Object? priceUnit = null,
     Object? contractQuantity = null,
     Object? remainingQuantity = null,
+    Object? isTenderExpired = null,
     Object? expiryDate = null,
     Object? orderReason = null,
     Object? visaNumber = null,
@@ -217,6 +229,10 @@ class __$$OrderHistoryDetailsTenderContractDtoImplCopyWithImpl<$Res>
           ? _value.remainingQuantity
           : remainingQuantity // ignore: cast_nullable_to_non_nullable
               as int,
+      isTenderExpired: null == isTenderExpired
+          ? _value.isTenderExpired
+          : isTenderExpired // ignore: cast_nullable_to_non_nullable
+              as bool,
       expiryDate: null == expiryDate
           ? _value.expiryDate
           : expiryDate // ignore: cast_nullable_to_non_nullable
@@ -252,6 +268,8 @@ class _$OrderHistoryDetailsTenderContractDtoImpl
       required this.contractQuantity,
       @JsonKey(name: 'RemainingQuantity', defaultValue: 0)
       required this.remainingQuantity,
+      @JsonKey(name: 'isTenderExpired', defaultValue: false)
+      required this.isTenderExpired,
       @JsonKey(name: 'ExpiryDate', defaultValue: '') required this.expiryDate,
       @JsonKey(name: 'OrderReason', defaultValue: '') required this.orderReason,
       @JsonKey(name: 'VisaNumber', defaultValue: '') required this.visaNumber,
@@ -282,6 +300,9 @@ class _$OrderHistoryDetailsTenderContractDtoImpl
   @JsonKey(name: 'RemainingQuantity', defaultValue: 0)
   final int remainingQuantity;
   @override
+  @JsonKey(name: 'isTenderExpired', defaultValue: false)
+  final bool isTenderExpired;
+  @override
   @JsonKey(name: 'ExpiryDate', defaultValue: '')
   final String expiryDate;
   @override
@@ -296,7 +317,7 @@ class _$OrderHistoryDetailsTenderContractDtoImpl
 
   @override
   String toString() {
-    return 'OrderHistoryDetailsTenderContractDto(contractNumber: $contractNumber, contractReference: $contractReference, price: $price, priceUnit: $priceUnit, contractQuantity: $contractQuantity, remainingQuantity: $remainingQuantity, expiryDate: $expiryDate, orderReason: $orderReason, visaNumber: $visaNumber, announcementLetterNumber: $announcementLetterNumber)';
+    return 'OrderHistoryDetailsTenderContractDto(contractNumber: $contractNumber, contractReference: $contractReference, price: $price, priceUnit: $priceUnit, contractQuantity: $contractQuantity, remainingQuantity: $remainingQuantity, isTenderExpired: $isTenderExpired, expiryDate: $expiryDate, orderReason: $orderReason, visaNumber: $visaNumber, announcementLetterNumber: $announcementLetterNumber)';
   }
 
   @override
@@ -315,6 +336,8 @@ class _$OrderHistoryDetailsTenderContractDtoImpl
                 other.contractQuantity == contractQuantity) &&
             (identical(other.remainingQuantity, remainingQuantity) ||
                 other.remainingQuantity == remainingQuantity) &&
+            (identical(other.isTenderExpired, isTenderExpired) ||
+                other.isTenderExpired == isTenderExpired) &&
             (identical(other.expiryDate, expiryDate) ||
                 other.expiryDate == expiryDate) &&
             (identical(other.orderReason, orderReason) ||
@@ -336,6 +359,7 @@ class _$OrderHistoryDetailsTenderContractDtoImpl
       priceUnit,
       contractQuantity,
       remainingQuantity,
+      isTenderExpired,
       expiryDate,
       orderReason,
       visaNumber,
@@ -370,6 +394,8 @@ abstract class _OrderHistoryDetailsTenderContractDto
       required final int contractQuantity,
       @JsonKey(name: 'RemainingQuantity', defaultValue: 0)
       required final int remainingQuantity,
+      @JsonKey(name: 'isTenderExpired', defaultValue: false)
+      required final bool isTenderExpired,
       @JsonKey(name: 'ExpiryDate', defaultValue: '')
       required final String expiryDate,
       @JsonKey(name: 'OrderReason', defaultValue: '')
@@ -403,6 +429,9 @@ abstract class _OrderHistoryDetailsTenderContractDto
   @override
   @JsonKey(name: 'RemainingQuantity', defaultValue: 0)
   int get remainingQuantity;
+  @override
+  @JsonKey(name: 'isTenderExpired', defaultValue: false)
+  bool get isTenderExpired;
   @override
   @JsonKey(name: 'ExpiryDate', defaultValue: '')
   String get expiryDate;

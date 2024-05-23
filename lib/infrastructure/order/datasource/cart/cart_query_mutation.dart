@@ -172,6 +172,7 @@ class CartQueryMutation {
       hasValidTenderContract
       hasMandatoryTenderContract
       isFOCMaterial
+      isTenderExpired
       isFavourite
       productCount
       productAddedAt
@@ -190,6 +191,7 @@ class CartQueryMutation {
       tenderOrderReason
       TenderContractNumber
       is26SeriesMaterial
+      isTenderExpired
       isCovid
       BonusMaterials {
         principalCode
@@ -570,6 +572,7 @@ class CartQueryMutation {
         EzRxItems {
           TenderContractNumber
           tenderOrderReason
+          isTenderExpired
           IsGimmick
           Type
           ProductID
@@ -1135,6 +1138,7 @@ fragment ezrxItemsFields on Item {
   hidePrice
   TenderContractNumber
   tenderOrderReason
+  isTenderExpired
   hasValidTenderContract
   hasMandatoryTenderContract
   isFOCMaterial

@@ -72,6 +72,7 @@ class TenderContractDto with _$TenderContractDto {
         announcementLetterNumber,
       ),
       isNearToExpire: isNearToExpire,
+      isTenderExpired: false,
       contractPaymentTerm: StringValue(contractPaymentTerm),
     );
   }

@@ -130,7 +130,22 @@ class _BuyAgainButton extends StatelessWidget {
     final cartProducts = cartState.cartProducts;
     final isTenderEligible =
         context.read<EligibilityBloc>().state.salesOrg.isTenderEligible;
+    if (isTenderEligible &&
+        viewByItemDetailState.orderHistory.isNotValidTenderContract) {
+      CustomSnackBar(
+        icon: const Icon(
+          Icons.info,
+          color: ZPColors.error,
+        ),
+        backgroundColor: ZPColors.errorSnackBarColor,
+        key: WidgetKeys.viewByOrderBuyAgainTenderErrorSnackBar,
+        messageText: context.tr(
+          'Tender Contract is no longer available and could not be added to cart',
+        ),
+      ).show(context);
 
+      return;
+    }
     if (cartProducts.isEmpty) {
       _buyAgain(context);
 

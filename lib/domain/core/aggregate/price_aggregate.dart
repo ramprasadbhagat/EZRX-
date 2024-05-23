@@ -117,8 +117,8 @@ class PriceAggregate with _$PriceAggregate {
   bool get isTenderContractInvalid =>
       salesOrgConfig.salesOrg.isTenderEligible &&
       (tenderContract.isNotEmpty &&
-          (!tenderContract.contractNumber.isContractNumberEmpty &&
-              tenderContract.tenderOrderReason.isEmpty));
+          (tenderContract.contractNumber.isContractNumberNotEmpty &&
+              tenderContract.isTenderExpired));
 
   bool get showErrorMessageForID =>
       salesOrgConfig.salesOrg.isID &&

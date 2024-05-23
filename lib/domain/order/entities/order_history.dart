@@ -42,8 +42,13 @@ class OrderHistory with _$OrderHistory {
 
   bool get isTenderContractAvailable => orderHistoryItems.any(
         (element) =>
-            !element.tenderContractNumber.isContractNumberEmpty &&
+            element.tenderContractNumber.isContractNumberNotEmpty &&
             element.tenderOrderReason.isNotEmpty,
+      );
+  bool get isNotValidTenderContract => orderHistoryItems.any(
+        (element) =>
+            element.tenderContractNumber.isContractNumberNotEmpty &&
+            element.isTenderExpired,
       );
 
   TenderContractReason get getTenderReason => orderHistoryItems

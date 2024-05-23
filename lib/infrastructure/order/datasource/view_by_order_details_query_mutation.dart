@@ -131,6 +131,7 @@ class ViewByOrderDetailsQueryMutation {
         IsTenderContractMaterial
         TenderContractDetails {
           ContractNumber
+          isTenderExpire
           OrderReason
           Price
           PriceUnit

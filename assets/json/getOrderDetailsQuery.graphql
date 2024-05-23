@@ -90,6 +90,7 @@ query orderHistoryQuery($soldTo: String!, $language: String, $searchKey: String,
         IsTenderContractMaterial
         TenderContractDetails {
           ContractNumber
+          isTenderExpire
           OrderReason
           Price
           PriceUnit

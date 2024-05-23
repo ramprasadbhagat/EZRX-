@@ -484,6 +484,10 @@ class TenderContractNumber extends ValueObject<String> {
     return value.getOrElse(() => '').isEmpty;
   }
 
+  bool get isContractNumberNotEmpty {
+    return value.getOrElse(() => '').isNotEmpty;
+  }
+
   String get displayTenderContractNumberInCart {
     return getTenderContractNumber(value.getOrElse(() => ''));
   }

@@ -71,6 +71,7 @@ query orderHistoryFetchByItems($soldTo: String!, $fromDate: String, $toDate: Str
         HidePrice
         TenderContractNumber
         TenderOrderReason
+        isTenderExpire
         TenderPrice
         TenderPriceUnit
         TenderContractReference

@@ -63,6 +63,7 @@
               "promotype": "",
               "promoStatus": false,
               "referenceNotes": "Test Delivery Info",
+              "isTenderExpire" : false,
               "isCovid" : false
             },
             {
@@ -114,6 +115,7 @@
               "promotype": "",
               "promoStatus": false,
               "referenceNotes": "Test Delivery Info",
+              "isTenderExpire" : false,
               "isCovid" : false
             },
             {
@@ -165,6 +167,7 @@
               "promotype": "",
               "promoStatus": true,
               "referenceNotes": "",
+              "isTenderExpire" : true,
               "isCovid" : false
             },
             {
@@ -216,6 +219,7 @@
               "promotype": "",
               "promoStatus": true,
               "referenceNotes": "",
+              "isTenderExpire" : true,
               "isCovid" : false
             },
             {
@@ -267,6 +271,7 @@
               "promotype": "",
               "promoStatus": false,
               "referenceNotes": "Test Delivery Info",
+              "isTenderExpire" : false,
               "isCovid" : false
            }
           ]

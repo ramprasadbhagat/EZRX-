@@ -212,12 +212,42 @@
             {
               "MaterialCode": "000000000023046018",
               "MaterialDescription": "FOSAMAXTABS10MG30'S",
-              "DefaultMaterialDescription": ""
+              "DefaultMaterialDescription": "",
+              "IsTenderContractMaterial": true,
+              "TenderContractDetails": {
+                "ContractNumber": "0040026559",
+                "isTenderExpire": false,
+                "OrderReason": "735",
+                "Price": "1930500",
+                "PriceUnit": 100,
+                "ContractQuantity": 50,
+                "RemainingQuantity": 33,
+                "ExpiryDate": "20251231",
+                "ContractReference": "HNO-012345",
+                "VisaNumber": "",
+                "SalesDistrict": "HNO",
+                "AnnouncementLetterNumber": "eZRx_normal contract"
+              }
             },
             {
               "MaterialCode": "000000000023046031",
               "MaterialDescription": "PROPECIA FP LPTABS1MG28'S",
-              "DefaultMaterialDescription": ""
+              "DefaultMaterialDescription": "",
+              "IsTenderContractMaterial": true,
+              "TenderContractDetails": {
+                "ContractNumber": "0040026559",
+                "isTenderExpire": false,
+                "OrderReason": "735",
+                "Price": "1930500",
+                "PriceUnit": 100,
+                "ContractQuantity": 50,
+                "RemainingQuantity": 33,
+                "ExpiryDate": "20251231",
+                "ContractReference": "HNO-012345",
+                "VisaNumber": "",
+                "SalesDistrict": "HNO",
+                "AnnouncementLetterNumber": "eZRx_normal contract"
+              }
             }
           ]
         },

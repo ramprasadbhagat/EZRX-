@@ -21,6 +21,7 @@ class OrderHistoryDetailsTenderContract
     required String visaNumber,
     required String salesDistrict,
     required String announcementLetterNumber,
+    required bool isTenderExpired,
   }) = _OrderHistoryDetailsTenderContract;
 
   factory OrderHistoryDetailsTenderContract.empty() =>
@@ -36,5 +37,6 @@ class OrderHistoryDetailsTenderContract
         visaNumber: '',
         salesDistrict: '',
         announcementLetterNumber: '',
+        isTenderExpired: false,
       );
 }

@@ -33,6 +33,7 @@
       hasValidTenderContract
       hasMandatoryTenderContract
       isFOCMaterial
+      isTenderExpired: false,
       isFavourite
       productCount
       productAddedAt

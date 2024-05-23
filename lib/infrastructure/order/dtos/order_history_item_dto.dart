@@ -73,6 +73,8 @@ class OrderHistoryItemDto with _$OrderHistoryItemDto {
     @JsonKey(name: 'TenderPriceUnit', defaultValue: 0)
     required int tenderPriceUnit,
     @JsonKey(name: 'TenderPrice', defaultValue: '') required String tenderPrice,
+    @JsonKey(name: 'isTenderExpired', defaultValue: false)
+    required bool isTenderExpired,
     @JsonKey(name: 'isCovid', defaultValue: false) required bool isCovid,
   }) = _OrderHistoryItemDto;
 
@@ -125,6 +127,7 @@ class OrderHistoryItemDto with _$OrderHistoryItemDto {
       tenderPrice: orderHistoryItem.tenderPrice.getOrDefaultValue(''),
       tenderOrderReason:
           orderHistoryItem.tenderOrderReason.getOrDefaultValue(''),
+      isTenderExpired: orderHistoryItem.isTenderExpired,
       isCovid: orderHistoryItem.isCovid,
     );
   }
@@ -174,6 +177,7 @@ class OrderHistoryItemDto with _$OrderHistoryItemDto {
       tenderPriceUnit: tenderPriceUnit,
       tenderPrice: TenderPrice(tenderPrice),
       tenderOrderReason: TenderContractReason(tenderOrderReason),
+      isTenderExpired: isTenderExpired,
       isCovid: isCovid,
     );
   }
