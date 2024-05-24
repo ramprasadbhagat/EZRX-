@@ -23,6 +23,7 @@ class _LicenseTile extends StatelessWidget {
               Expanded(
                 child: Text(
                   '${customerLicense.licenseType.displayNAIfEmpty} - ${customerLicense.licenseDescription.displayNAIfEmpty}',
+                  key: WidgetKeys.profileLicenseName,
                   style: Theme.of(context).textTheme.labelSmall,
                   overflow: TextOverflow.visible,
                 ),

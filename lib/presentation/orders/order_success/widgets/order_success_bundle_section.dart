@@ -103,7 +103,7 @@ class _BundleTile extends StatelessWidget {
                 ),
                 const SizedBox(height: 4),
                 Text(
-                  '${context.tr('Purchase')} ${viewByOrdersGroup.bundleMaterial.bundle.currentBundleInfo.quantity} ${context.tr('or more for')} ${StringUtils.formatPrice(configs, viewByOrdersGroup.bundleMaterial.bundle.currentBundleInfo.rate)} ${context.tr('per item')}',
+                  '${context.tr('Purchase')} ${viewByOrdersGroup.bundleMaterial.bundle.currentBundleInfo.quantity} ${context.tr('or more for')} ${StringUtils.displayPrice(configs, viewByOrdersGroup.bundleMaterial.bundle.currentBundleInfo.rate)} ${context.tr('per item')}',
                   key: WidgetKeys.cartItemBundleRate,
                   style: Theme.of(context).textTheme.bodySmall?.copyWith(
                         color: ZPColors.neutralsGrey1,

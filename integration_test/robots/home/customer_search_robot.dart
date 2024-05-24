@@ -22,8 +22,11 @@ class CustomerSearchRobot {
   bool get isCustomerSearchPageVisible =>
       customerSearchPage.evaluate().isNotEmpty;
 
-  Future<void> waitForCustomerCodePageToLoad() async {
-    await tester.pumpUntilVisible(customerSearchPage);
+  Future<void> waitForCustomerCodePageToLoad({int maxIteration = 8}) async {
+    await tester.pumpUntilVisible(
+      customerSearchPage,
+      maxIteration: maxIteration,
+    );
   }
 
   Future<void> selectCustomerSearch(String shipToCode) async {

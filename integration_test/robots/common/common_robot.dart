@@ -155,7 +155,7 @@ class CommonRobot {
 
   Future<void> tapCustomerCodeSelector() async {
     await tester.tap(customerCodeSelector);
-    await tester.pumpAndSettle();
+    await tester.pumpAndSettle(Durations.long2);
   }
 
   Future<void> changeDeliveryAddress(
@@ -174,7 +174,7 @@ class CommonRobot {
       await searchWithKeyboardAction(shipToCode);
       await tester
           .tap(find.byKey(WidgetKeys.shipToAddressOption(shipToCode)).first);
-      await tester.pumpAndSettle();
+      await tester.pumpAndSettle(const Duration(seconds: 1));
       final changeAddressButton = find.descendant(
         of: find.byKey(WidgetKeys.confirmButton),
         matching: find.text('Change address'.tr()),
@@ -248,7 +248,7 @@ class CommonRobot {
 
   Future<void> tapClearSearch() async {
     await tester.tap(find.byKey(WidgetKeys.clearIconKey));
-    await tester.pumpAndSettle();
+    await tester.pumpAndSettle(Durations.long2);
   }
 
   Future<void> waitAutoSearchDuration() async {
@@ -312,8 +312,8 @@ class CommonRobot {
       maxIteration: 3,
     );
     if (closeAlertDialog.evaluate().isNotEmpty) {
-      await tester.tap(closeAlertDialog);
-      await tester.pumpAndSettle();
+      await tester.tap(closeAlertDialog.first);
+      await tester.pumpAndSettle(const Duration(seconds: 1));
     }
   }
 

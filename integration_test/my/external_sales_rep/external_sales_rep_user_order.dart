@@ -2,7 +2,6 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
-import 'package:ezrxmobile/locator.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 
@@ -14,7 +13,6 @@ import '../../robots/common/extension.dart';
 import '../../robots/home/customer_search_robot.dart';
 import '../../robots/home/home_robot.dart';
 import '../../robots/login_robot.dart';
-import '../../robots/more/login_on_behalf_robot.dart';
 import '../../robots/more/more_robot.dart';
 import '../../robots/more/profile_robot.dart';
 import '../../robots/notification/notification_robot.dart';
@@ -41,8 +39,8 @@ import '../../robots/products/product_robot.dart';
 import '../../robots/products/product_suggestion_robot.dart';
 import '../../robots/returns/returns_by_items/returns_by_items_detail_robot.dart';
 import '../../robots/returns/returns_root_robot.dart';
-import '../../core/infrastructure/infra_core/zephyr_service/zephyr_service.dart';
-import '../../core/infrastructure/zephyr/repository/zephyr_repository.dart';
+// import '../../core/infrastructure/infra_core/zephyr_service/zephyr_service.dart';
+// import '../../core/infrastructure/zephyr/repository/zephyr_repository.dart';
 
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
@@ -52,7 +50,6 @@ void main() {
   late HomeRobot homeRobot;
   late CustomerSearchRobot customerSearchRobot;
   late MoreRobot moreRobot;
-  late LoginOnBehalfRobot loginOnBehalfRobot;
   late NotificationRobot notificationRobot;
   late ProfileRobot profileRobot;
 
@@ -93,7 +90,6 @@ void main() {
     profileRobot = ProfileRobot(tester);
     moreRobot = MoreRobot(tester);
     notificationRobot = NotificationRobot(tester);
-    loginOnBehalfRobot = LoginOnBehalfRobot(tester);
 
     announcementArticleRootRobot = AnnouncementArticleRootRobot(tester);
 
@@ -125,10 +121,11 @@ void main() {
     paymentDetailRobot = PaymentSummaryDetailRobot(tester);
   }
 
-  const username = 'myrootadmin';
+  const username = 'myexternalsalesrep';
   const password = 'St@ysafe01';
   const shipToCode = '0070149863';
-  const proxyUserName = 'testextsalesrep';
+  const userFirstName = 'MYExternalSR';
+  const userLastName = 'User92';
   const marketMalaysia = 'Malaysia';
   const customerCode = '0030082707';
   const shipToAddress = 'RSD HOSPITALS SDN BHD (SJMC)';
@@ -140,7 +137,8 @@ void main() {
   const minOrderAmount = 300.0;
   const materialNumber = '21041821';
   const materialName = '190 NIQUITIN MINT LOZENGES2MG';
-  final materialStockInfo = StockInfo.empty();
+  final materialStockInfo =
+      StockInfo.empty().copyWith(expiryDate: DateTimeStringValue('2027-12-30'));
   const materialPrincipalName = 'GLAXOSMITHKLINE CONSUMER';
   const materialCountryOfOrigin = 'NA';
   const materialUnitMeasurement = 'EA';
@@ -149,11 +147,12 @@ void main() {
 
   const materialUnitPrice = 39.6;
   const pAndGMaterialPrincipalName = 'PROCTER AND GAMBLE';
-  const pAndGMaterialNumber = '21247723';
+  const pAndGMaterialNumber = '21247738';
   // const merckMaterialNumber = '23072025';
   // const merckMaterialUnitPrice = 62.00;
-  const pAndGMaterialName = 'SANGOBION COMPLETE 100S';
-  const pAndGMaterialNumberAsBonus = '21247738';
+  const pAndGMaterialName = 'ILIADIN CHILDREN DROP 0.025% 10ML';
+  const pAndGMaterialBonusNumber = '21247723';
+  const pAndGBonusMaterialName = 'SANGOBION COMPLETE 100S';
 
   const multiImageMaterialNumber = '21041786';
   const otherInfoMaterialNumber = '21041777';
@@ -186,9 +185,6 @@ void main() {
   const poReference = 'Auto-test-po-reference';
   const deliveryInstruction = 'Auto-test-delivery-instruction';
 
-  var loginRequired = true;
-  var proxyLoginRequired = true;
-
   final bundleStockInfoList = [
     StockInfo.empty().copyWith(materialNumber: MaterialNumber('23046003')),
     StockInfo.empty().copyWith(
@@ -208,56 +204,17 @@ void main() {
   }) async {
     initializeRobot(tester);
     await runAppForTesting(tester);
-    if (loginRequired) {
+    if (loginRobot.isLoginPage) {
       await loginRobot.loginToHomeScreen(username, password, marketMalaysia);
-      await customerSearchRobot.selectCustomerSearch(shipToCode);
-      loginRequired = false;
-      await commonRobot.dismissSnackbar(dismissAll: true);
-      await commonRobot.closeAnnouncementAlertDialog();
-    } else {
-      await commonRobot.dismissSnackbar(dismissAll: true);
-      await commonRobot.changeDeliveryAddress(
-        shipToCode,
-      );
-      await commonRobot.closeAnnouncementAlertDialog();
-    }
-  }
-
-  Future<void> pumpAppWithLoginOnBehalf(
-    WidgetTester tester, {
-    String behalfName = proxyUserName,
-  }) async {
-    initializeRobot(tester);
-    await runAppForTesting(tester);
-    if (loginRequired) {
-      await loginRobot.loginToHomeScreen(username, password, marketMalaysia);
-      await customerSearchRobot.selectCustomerSearch(shipToCode);
-      loginRequired = false;
-      await commonRobot.dismissSnackbar(dismissAll: true);
-      await commonRobot.closeAnnouncementAlertDialog();
-    }
-    await commonRobot.dismissSnackbar(dismissAll: true);
-    if (proxyLoginRequired) {
-      await tester.pumpAndSettle(const Duration(seconds: 1));
-      await commonRobot.navigateToScreen(NavigationTab.more);
-      await moreRobot.verifyLoginOnBehalfTile();
-      await moreRobot.tapLoginOnBehalfTile();
-      await loginOnBehalfRobot.enterUserNameField(behalfName);
-      await loginOnBehalfRobot.tapLoginButton();
       await customerSearchRobot.waitForCustomerCodePageToLoad();
-      await commonRobot.dismissSnackbar(dismissAll: true);
       await customerSearchRobot.selectCustomerSearch(shipToCode);
       await commonRobot.dismissSnackbar(dismissAll: true);
-      moreRobot.verifyProfileName(behalfName, behalfName);
-      await commonRobot.navigateToScreen(NavigationTab.home);
-      proxyLoginRequired = false;
+      await commonRobot.closeAnnouncementAlertDialog();
     } else {
-      await tester.pumpAndSettle(const Duration(seconds: 1));
+      await commonRobot.dismissSnackbar(dismissAll: true);
       await commonRobot.changeDeliveryAddress(
         shipToCode,
       );
-      await commonRobot.dismissSnackbar(dismissAll: true);
-      await tester.pumpAndSettle();
       await commonRobot.closeAnnouncementAlertDialog();
     }
   }
@@ -301,57 +258,11 @@ void main() {
     await bundleDetailRobot.tapCartButton();
   }
 
-  group('Authentication with login on behalf - ', () {
-    testWidgets(
-        'EZRX-T575 | Verify login on behalf mandatory fields for external sales rep',
-        (tester) async {
-      const emptyString = '';
-      //init app
-      await pumpAppWithLogin(tester);
-
-      await commonRobot.navigateToScreen(NavigationTab.more);
-      await moreRobot.verifyLoginOnBehalfTile();
-      await moreRobot.tapLoginOnBehalfTile();
-      await loginOnBehalfRobot.enterUserNameField(emptyString);
-      await loginOnBehalfRobot.tapLoginButton();
-      //error text field validation
-      loginOnBehalfRobot.verifyErrorMessageUsernameCannotBeEmpty();
-    });
-
-    testWidgets(
-        'EZRX-T574 | Verify login on behalf Unsuccessfully for external sales rep',
-        (tester) async {
-      const inCorrectUsername = 'abc';
-      const usernameNotFoundMessage = 'Username not found';
-      //init app
-      await pumpAppWithLogin(tester);
-
-      await commonRobot.navigateToScreen(NavigationTab.more);
-      await moreRobot.verifyLoginOnBehalfTile();
-      await moreRobot.tapLoginOnBehalfTile();
-      await loginOnBehalfRobot.enterUserNameField(inCorrectUsername);
-      await loginOnBehalfRobot.tapLoginButton();
-      //snackbar error
-      await commonRobot.verifyCustomSnackBar(message: usernameNotFoundMessage);
-      loginOnBehalfRobot.verifySheet();
-    });
-
-    testWidgets(
-        'EZRX-T573 | Verify login on behalf Successfully for external sales rep',
-        (tester) async {
-      //init app
-      await pumpAppWithLoginOnBehalf(tester);
-      await commonRobot.navigateToScreen(NavigationTab.home);
-      //verify home page
-      homeRobot.verify();
-    });
-  });
-
   group('Notification Tab -', () {
     testWidgets('EZRX-T95 | Verify Notification Tab with Default Values',
         (tester) async {
       //init app
-      await pumpAppWithLoginOnBehalf(tester);
+      await pumpAppWithLogin(tester);
       await commonRobot.navigateToScreen(NavigationTab.notifications);
 
       //verify
@@ -366,7 +277,7 @@ void main() {
         'EZRX-T96 | Verify at least one notification item if list not empty',
         (tester) async {
       //init app
-      await pumpAppWithLoginOnBehalf(tester);
+      await pumpAppWithLogin(tester);
       await commonRobot.navigateToScreen(NavigationTab.notifications);
 
       //verify
@@ -396,7 +307,7 @@ void main() {
     testWidgets('EZRX-T128 | Pull to Refresh Feature - verify item visible',
         (tester) async {
       //init app
-      await pumpAppWithLoginOnBehalf(tester);
+      await pumpAppWithLogin(tester);
       await commonRobot.navigateToScreen(NavigationTab.notifications);
 
       //verify
@@ -416,7 +327,7 @@ void main() {
         'EZRX-T17 | Access Homepage after logging in and having existing ShipTo',
         (tester) async {
       //init app
-      await pumpAppWithLoginOnBehalf(tester);
+      await pumpAppWithLogin(tester);
 
       //verify homepage
       homeRobot.verify();
@@ -432,7 +343,7 @@ void main() {
         'EZRX-T18 | Verify select ShipTo in Homepage incase existing items in cart',
         (tester) async {
       //init app
-      await pumpAppWithLoginOnBehalf(tester);
+      await pumpAppWithLogin(tester);
 
       //home page
       homeRobot.verify();
@@ -479,7 +390,7 @@ void main() {
     testWidgets('EZRX-T19 | Verify select other ShipTo in Homepage',
         (tester) async {
       //init app
-      await pumpAppWithLoginOnBehalf(tester);
+      await pumpAppWithLogin(tester);
 
       // select customer code
       await commonRobot.changeDeliveryAddress(otherShipToCode);
@@ -496,7 +407,7 @@ void main() {
       const subShipToName = 'petaling';
 
       //init app
-      await pumpAppWithLoginOnBehalf(tester);
+      await pumpAppWithLogin(tester);
 
       // select customer code
       commonRobot.verifyCustomerCodeSelector();
@@ -524,7 +435,7 @@ void main() {
         'EZRX-T21 | Verify Search ShipTo with invalid keyword in Homepage',
         (tester) async {
       //init app
-      await pumpAppWithLoginOnBehalf(tester);
+      await pumpAppWithLogin(tester);
 
       // select customer code
       commonRobot.verifyCustomerCodeSelector();
@@ -544,7 +455,7 @@ void main() {
         'EZRX-T28 | Verify Search by inputting valid keyword contains Product name',
         (tester) async {
       //init app
-      await pumpAppWithLoginOnBehalf(tester);
+      await pumpAppWithLogin(tester);
 
       // search for valid products
       homeRobot.findSearchProductField();
@@ -557,7 +468,7 @@ void main() {
     testWidgets('EZRX-T26 | Verify Tap & slide Banner in Homepage',
         (tester) async {
       //init app
-      await pumpAppWithLoginOnBehalf(tester);
+      await pumpAppWithLogin(tester);
 
       if (homeRobot.isBannerEmpty) {
         homeRobot.verifyHomeBanner(isVisible: false);
@@ -584,7 +495,7 @@ void main() {
     testWidgets('EZRX-T43 | Verify display Product detail in Homepage',
         (tester) async {
       //init app
-      await pumpAppWithLoginOnBehalf(tester);
+      await pumpAppWithLogin(tester);
 
       //Product information
       homeRobot.findProductImage();
@@ -599,7 +510,7 @@ void main() {
         'EZRX-T49 | Verify Search ShipTo with keyword contains Customer code/ShipTo code in Homepage',
         (tester) async {
       //init app
-      await pumpAppWithLoginOnBehalf(tester);
+      await pumpAppWithLogin(tester);
 
       //change address
       await commonRobot.changeDeliveryAddress(shipToCode);
@@ -610,7 +521,7 @@ void main() {
         'EZRX-T22 | Verify click on Orders action in Top navigation menu',
         (tester) async {
       //init app
-      await pumpAppWithLoginOnBehalf(tester);
+      await pumpAppWithLogin(tester);
 
       //tap on home quick access order
       homeRobot.findQuickAccessOrders();
@@ -624,7 +535,7 @@ void main() {
         'EZRX-T23 | Verify click on Returns action in Top navigation menu',
         (tester) async {
       //init app
-      await pumpAppWithLoginOnBehalf(tester);
+      await pumpAppWithLogin(tester);
 
       //tap on home quick access return
       homeRobot.findQuickAccessReturns();
@@ -637,7 +548,7 @@ void main() {
     testWidgets('EZRX-T44 | Verify display Product on offer in Homepage',
         (tester) async {
       //init app
-      await pumpAppWithLoginOnBehalf(tester);
+      await pumpAppWithLogin(tester);
 
       //tap on products on offer
       homeRobot.findProductsOnOffer();
@@ -650,7 +561,7 @@ void main() {
     testWidgets('EZRX-T45 | Verify display Bundles in Homepage',
         (tester) async {
       //init app
-      await pumpAppWithLoginOnBehalf(tester);
+      await pumpAppWithLogin(tester);
 
       //tap on bundle
       await homeRobot.findBundles();
@@ -663,7 +574,7 @@ void main() {
     testWidgets('EZRX-T47 | Verify display Browse products in Homepage',
         (tester) async {
       //init app
-      await pumpAppWithLoginOnBehalf(tester);
+      await pumpAppWithLogin(tester);
 
       //tap on browse products
       await homeRobot.findBrowseProductsIcon();
@@ -676,7 +587,7 @@ void main() {
     testWidgets('EZRX-T48 | Verify display Announcements in Homepage',
         (tester) async {
       //init app
-      await pumpAppWithLoginOnBehalf(tester);
+      await pumpAppWithLogin(tester);
       //tap on browse products
       await homeRobot.findAnnouncementsIcon();
       await homeRobot.tapAnnouncementsIcon();
@@ -688,7 +599,7 @@ void main() {
     testWidgets('EZRX-T46 | Verify display Recently ordered in Homepage',
         (tester) async {
       //init app
-      await pumpAppWithLoginOnBehalf(tester);
+      await pumpAppWithLogin(tester);
 
       //tap on recently ordered
       await homeRobot.findRecentlyOrderIcon();
@@ -702,7 +613,7 @@ void main() {
         'EZRX-T50 | Verify display Product detail in Product on offer in Homepage',
         (tester) async {
       //init app
-      await pumpAppWithLoginOnBehalf(tester);
+      await pumpAppWithLogin(tester);
 
       //move to products on offer
       homeRobot.findProductsOnOffer();
@@ -718,7 +629,7 @@ void main() {
     testWidgets('EZRX-T51 | Verify click on Product in Product on offer',
         (tester) async {
       //init app
-      await pumpAppWithLoginOnBehalf(tester);
+      await pumpAppWithLogin(tester);
 
       //move to Bundles
       homeRobot.findProductsOnOffer();
@@ -734,7 +645,7 @@ void main() {
         'EZRX-T52 | Verify display Product detail in Bundles in Homepage',
         (tester) async {
       //init app
-      await pumpAppWithLoginOnBehalf(tester);
+      await pumpAppWithLogin(tester);
 
       // Move to bundle
       await homeRobot.findBundles();
@@ -755,7 +666,7 @@ void main() {
     testWidgets('EZRX-T53 | Verify click on Bundle in Bundle deals',
         (tester) async {
       //init app
-      await pumpAppWithLoginOnBehalf(tester);
+      await pumpAppWithLogin(tester);
 
       //move to products on offer
       await homeRobot.findBundles();
@@ -768,7 +679,7 @@ void main() {
     testWidgets('EZRX-T54 | Verify slide Item in Recently Ordered in Homepage',
         (tester) async {
       //init app
-      await pumpAppWithLoginOnBehalf(tester);
+      await pumpAppWithLogin(tester);
 
       //move to recently ordered
       await homeRobot.findRecentlyOrderIcon();
@@ -783,7 +694,7 @@ void main() {
     testWidgets('EZRX-T55 | Verify click on Item in Recently Ordered',
         (tester) async {
       //init app
-      await pumpAppWithLoginOnBehalf(tester);
+      await pumpAppWithLogin(tester);
 
       //move to recently ordered
       await homeRobot.findRecentlyOrderIcon();
@@ -798,7 +709,7 @@ void main() {
     testWidgets('EZRX-T56 | Verify slide Product in Browse Product in Homepage',
         (tester) async {
       //init app
-      await pumpAppWithLoginOnBehalf(tester);
+      await pumpAppWithLogin(tester);
 
       //move to browse product
       await homeRobot.findBrowseProductsIcon();
@@ -816,7 +727,7 @@ void main() {
     testWidgets('EZRX-T57 | Verify click on Product in Browse Product',
         (tester) async {
       //init app
-      await pumpAppWithLoginOnBehalf(tester);
+      await pumpAppWithLogin(tester);
 
       //move to browse product
       await homeRobot.findBrowseProductsIcon();
@@ -836,7 +747,7 @@ void main() {
         (tester) async {
       //init app
       //init app
-      await pumpAppWithLoginOnBehalf(tester);
+      await pumpAppWithLogin(tester);
 
       await commonRobot.navigateToScreen(NavigationTab.products);
       productRobot.verifyPageVisible();
@@ -869,7 +780,7 @@ void main() {
       const offerCheckbox = 'Items with offers';
 
       //init app
-      await pumpAppWithLoginOnBehalf(tester);
+      await pumpAppWithLogin(tester);
       await productRobot.navigateToScreen(NavigationTab.products);
       await productRobot.openFilterProductScreen();
 
@@ -897,7 +808,7 @@ void main() {
       const bundleCheckbox = 'Bundle offers';
 
       //init app
-      await pumpAppWithLoginOnBehalf(tester);
+      await pumpAppWithLogin(tester);
       await productRobot.navigateToScreen(NavigationTab.products);
       await productRobot.openFilterProductScreen();
 
@@ -923,7 +834,7 @@ void main() {
     testWidgets('EZRX-T39 | Verify Filter by Country of origin',
         (tester) async {
       //init app
-      await pumpAppWithLoginOnBehalf(tester);
+      await pumpAppWithLogin(tester);
 
       await commonRobot.navigateToScreen(NavigationTab.products);
       productRobot.verifyMaterial();
@@ -946,7 +857,7 @@ void main() {
 
     testWidgets('EZRX-T38 | Verify Filter by Manufacturer', (tester) async {
       //init app
-      await pumpAppWithLoginOnBehalf(tester);
+      await pumpAppWithLogin(tester);
 
       await commonRobot.navigateToScreen(NavigationTab.products);
       productRobot.verifyMaterial();
@@ -969,7 +880,7 @@ void main() {
 
     testWidgets('EZRX-T35 | Verify display by Sort by Z-A', (tester) async {
       //init app
-      await pumpAppWithLoginOnBehalf(tester);
+      await pumpAppWithLogin(tester);
 
       await productRobot.navigateToScreen(NavigationTab.products);
       productRobot.verifyMaterial();
@@ -992,7 +903,7 @@ void main() {
     testWidgets('EZRX-T40 | Verify combine filter with Sort conditions',
         (tester) async {
       //init app
-      await pumpAppWithLoginOnBehalf(tester);
+      await pumpAppWithLogin(tester);
 
       await commonRobot.navigateToScreen(NavigationTab.products);
       productRobot.verifyMaterial();
@@ -1019,7 +930,7 @@ void main() {
     testWidgets('EZRX-T218 | Verify reset button in Product filter',
         (tester) async {
       //init app
-      await pumpAppWithLoginOnBehalf(tester);
+      await pumpAppWithLogin(tester);
 
       await commonRobot.navigateToScreen(NavigationTab.products);
 
@@ -1046,7 +957,7 @@ void main() {
 
     testWidgets('EZRX-T34 | Verify filter by favorite', (tester) async {
       //init app
-      await pumpAppWithLoginOnBehalf(tester);
+      await pumpAppWithLogin(tester);
 
       await productRobot.navigateToScreen(NavigationTab.products);
       productRobot.verifyMaterial();
@@ -1068,7 +979,7 @@ void main() {
         (tester) async {
       const index = 0;
       //init app
-      await pumpAppWithLoginOnBehalf(tester);
+      await pumpAppWithLogin(tester);
       await productRobot.navigateToScreen(NavigationTab.products);
 
       await productRobot.setProductFavoriteStatus(index, true);
@@ -1083,7 +994,7 @@ void main() {
     testWidgets('EZRX-T677 | Verify P&G Material for MY External sales rep',
         (tester) async {
       //init app
-      await pumpAppWithLoginOnBehalf(tester);
+      await pumpAppWithLogin(tester);
 
       await commonRobot.navigateToScreen(NavigationTab.products);
       productRobot.verifyMaterial();
@@ -1112,7 +1023,7 @@ void main() {
         'EZRX-T31 | Verify search by material number/material description (happy/unhappy case)',
         (tester) async {
       //init app
-      await pumpAppWithLoginOnBehalf(tester);
+      await pumpAppWithLogin(tester);
 
       await productRobot.navigateToScreen(NavigationTab.products);
       productRobot.verifySearchBarVisible();
@@ -1134,17 +1045,17 @@ void main() {
 
       await productSuggestionRobot.autoSearch(materialName);
       productSuggestionRobot.verifySuggestProductsSearch(materialName);
+      await productSuggestionRobot.tapClearSearch();
       await productSuggestionRobot.autoSearch(invalidSearchKey);
       productSuggestionRobot.verifyNoSuggestedProduct();
       productSuggestionRobot.verifyNoRecordFound();
       await productSuggestionRobot.tapClearSearch();
-      productSuggestionRobot.verifyNoRecordFound(isVisible: false);
     });
 
     testWidgets('EZRX-T32 | Verify search and navigate to material detail',
         (tester) async {
       //init app
-      await pumpAppWithLoginOnBehalf(tester);
+      await pumpAppWithLogin(tester);
 
       await productRobot.navigateToScreen(NavigationTab.products);
       productRobot.verifySearchBarVisible();
@@ -1157,7 +1068,7 @@ void main() {
     testWidgets('EZRX-T33 | Verify search and navigate to bundle detail',
         (tester) async {
       //init app
-      await pumpAppWithLoginOnBehalf(tester);
+      await pumpAppWithLogin(tester);
 
       await productRobot.navigateToScreen(NavigationTab.products);
       productRobot.verifySearchBarVisible();
@@ -1170,7 +1081,7 @@ void main() {
     testWidgets('EZRX-T34 | Verify Save search history + clear search history',
         (tester) async {
       //init app
-      await pumpAppWithLoginOnBehalf(tester);
+      await pumpAppWithLogin(tester);
 
       await productRobot.navigateToScreen(NavigationTab.products);
       productRobot.verifySearchBarVisible();
@@ -1203,7 +1114,7 @@ void main() {
     testWidgets('EZRX-T62 | Verify material detail with basic information',
         (tester) async {
       //init app
-      await pumpAppWithLoginOnBehalf(tester);
+      await pumpAppWithLogin(tester);
 
       await commonRobot.navigateToScreen(NavigationTab.products);
       await productRobot.openSearchProductScreen();
@@ -1242,7 +1153,7 @@ void main() {
     testWidgets('EZRX-T64 | Verify display image when having multiple images',
         (tester) async {
       //init app
-      await pumpAppWithLoginOnBehalf(tester);
+      await pumpAppWithLogin(tester);
 
       await commonRobot.navigateToScreen(NavigationTab.products);
       await productRobot.openSearchProductScreen();
@@ -1258,7 +1169,7 @@ void main() {
     testWidgets('EZRX-T65| Verify available offers in the material detail',
         (tester) async {
       //init app
-      await pumpAppWithLoginOnBehalf(tester);
+      await pumpAppWithLogin(tester);
 
       await commonRobot.navigateToScreen(NavigationTab.products);
       await productRobot.openSearchProductScreen();
@@ -1279,18 +1190,18 @@ void main() {
         'EZRX-T678| Verify available bonus offers P&G material having no price offer',
         (tester) async {
       //init app
-      await pumpAppWithLoginOnBehalf(tester);
+      await pumpAppWithLogin(tester);
 
       await commonRobot.navigateToScreen(NavigationTab.products);
       await productRobot.openSearchProductScreen();
-      await productRobot.searchWithKeyboardAction(pAndGMaterialNumber);
-      await productSuggestionRobot.tapSearchResult(pAndGMaterialNumber);
+      await productRobot.searchWithKeyboardAction(pAndGMaterialBonusNumber);
+      await productSuggestionRobot.tapSearchResult(pAndGMaterialBonusNumber);
       final productName =
           productDetailRobot.getMaterialDetailsMaterialDescription();
       productDetailRobot.verifyOnOfferLabel();
       await productDetailRobot.openAvailableOffers();
       productDetailRobot.verifyNameProductOffer(productName);
-      productDetailRobot.verifyCodeProductOffer(pAndGMaterialNumber);
+      productDetailRobot.verifyCodeProductOffer(pAndGMaterialBonusNumber);
       productDetailRobot.verifyProductPriceOfferTitle(
         isVisible: false,
       );
@@ -1300,7 +1211,7 @@ void main() {
 
       await productDetailRobot.openMaterialInformation();
 
-      productDetailRobot.verifyMateriaNumberDisplayed(pAndGMaterialNumber);
+      productDetailRobot.verifyMateriaNumberDisplayed(pAndGMaterialBonusNumber);
       productDetailRobot
           .verifyManufacturerDisplayed(pAndGMaterialPrincipalName);
     });
@@ -1308,7 +1219,7 @@ void main() {
     testWidgets('EZRX-T66 | Verify Related products in the material detail',
         (tester) async {
       //init app
-      await pumpAppWithLoginOnBehalf(tester);
+      await pumpAppWithLogin(tester);
 
       await commonRobot.navigateToScreen(NavigationTab.products);
       await productRobot.openSearchProductScreen();
@@ -1324,7 +1235,7 @@ void main() {
     testWidgets('EZRX-T67 | Verify other information in material detail',
         (tester) async {
       //init app
-      await pumpAppWithLoginOnBehalf(tester);
+      await pumpAppWithLogin(tester);
 
       await productRobot.navigateToScreen(NavigationTab.products);
       await productRobot.openSearchProductScreen();
@@ -1342,7 +1253,7 @@ void main() {
         (tester) async {
       const maximumQty = 99999;
       //init app
-      await pumpAppWithLoginOnBehalf(tester);
+      await pumpAppWithLogin(tester);
 
       await browseProductFromEmptyCart();
       await productSuggestionRobot.searchWithKeyboardAction(materialNumber);
@@ -1361,7 +1272,7 @@ void main() {
 
     testWidgets('EZRX-T68 | Verify suspended banner ', (tester) async {
       //init app
-      await pumpAppWithLoginOnBehalf(tester);
+      await pumpAppWithLogin(tester);
 
       await browseProductFromEmptyCart();
       await productSuggestionRobot
@@ -1380,7 +1291,7 @@ void main() {
     testWidgets('EZRX-T215 | Verify favorite in material detail',
         (tester) async {
       //init app
-      await pumpAppWithLoginOnBehalf(tester);
+      await pumpAppWithLogin(tester);
 
       await productRobot.navigateToScreen(NavigationTab.products);
       productRobot.verifyMaterial();
@@ -1405,7 +1316,7 @@ void main() {
   group('Bundle detail -', () {
     testWidgets('EZRX-T212 | Verify bundles detail page', (tester) async {
       //init app
-      await pumpAppWithLoginOnBehalf(tester);
+      await pumpAppWithLogin(tester);
 
       await productRobot.navigateToScreen(NavigationTab.products);
       await productRobot.openSearchProductScreen();
@@ -1426,7 +1337,7 @@ void main() {
       var qty2 = bundleTier1Qty - qty1;
 
       //init app
-      await pumpAppWithLoginOnBehalf(tester);
+      await pumpAppWithLogin(tester);
 
       await browseProductFromEmptyCart();
       await productSuggestionRobot.searchWithKeyboardAction(bundleShortNumber);
@@ -1477,7 +1388,7 @@ void main() {
 
     testWidgets('EZRX-T213 | Verify favorite in bundle detail', (tester) async {
       //init app
-      await pumpAppWithLoginOnBehalf(tester);
+      await pumpAppWithLogin(tester);
 
       await productRobot.navigateToScreen(NavigationTab.products);
       await productRobot.openSearchProductScreen();
@@ -1504,7 +1415,7 @@ void main() {
       testWidgets('EZRX-T69 | Verify display list of order (with/without data)',
           (tester) async {
         //init app
-        await pumpAppWithLoginOnBehalf(tester);
+        await pumpAppWithLogin(tester);
         await commonRobot.navigateToScreen(NavigationTab.orders);
 
         //verify
@@ -1541,13 +1452,11 @@ void main() {
           'EZRX-T75 | Verify search by material number/material description/order number',
           (tester) async {
         //init app
-        await pumpAppWithLoginOnBehalf(tester);
+        await pumpAppWithLogin(tester);
         await commonRobot.navigateToScreen(NavigationTab.orders);
 
         //verify
         ordersRootRobot.verifyViewByItemsPage();
-        await commonRobot.searchWithKeyboardAction(invalidLengthSearchKey);
-        await commonRobot.verifyAndDismissInvalidLengthSearchMessageSnackbar();
         final productName = viewByItemsRobot.getFirstProductName();
         await commonRobot.searchWithKeyboardAction(productName);
         viewByItemsRobot.verifyOrdersWithProductName(productName);
@@ -1559,7 +1468,7 @@ void main() {
         viewByItemsRobot.verifyOrdersWithProductCode(materialNumber);
         await commonRobot.pullToRefresh();
 
-        const orderCode = '200324436';
+        const orderCode = '0200371817';
         await commonRobot.autoSearch(invalidLengthSearchKey);
         await commonRobot.waitAutoSearchDuration();
         await commonRobot.verifyAndDismissInvalidLengthSearchMessageSnackbar(
@@ -1580,7 +1489,7 @@ void main() {
           'EZRX-T81 | Verify Filter by date when having result found in View by items tab',
           (tester) async {
         //init app
-        await pumpAppWithLoginOnBehalf(tester);
+        await pumpAppWithLogin(tester);
         await commonRobot.navigateToScreen(NavigationTab.orders);
 
         //verify
@@ -1617,17 +1526,12 @@ void main() {
         const statusFilter = 'Order created';
 
         //init app
-        await pumpAppWithLoginOnBehalf(tester);
+        await pumpAppWithLogin(tester);
         await commonRobot.navigateToScreen(NavigationTab.orders);
 
         //verify
         ordersRootRobot.verifyViewByItemsPage();
         await ordersRootRobot.tapFilterButton();
-        await viewByItemsFilterRobot.tapFromDateField();
-        await commonRobot.setDateRangePickerValue(
-          fromDate: fromDate,
-          toDate: toDate,
-        );
         await viewByItemsFilterRobot.tapStatusCheckbox(statusFilter);
         viewByItemsFilterRobot.verifyStatusFilterValue(statusFilter, true);
         await viewByItemsFilterRobot.tapStatusCheckbox(statusFilter);
@@ -1635,11 +1539,7 @@ void main() {
         await viewByItemsFilterRobot.tapStatusCheckbox(statusFilter);
         viewByItemsFilterRobot.verifyStatusFilterValue(statusFilter, true);
         await viewByItemsFilterRobot.tapApplyButton();
-        ordersRootRobot.verifyFilterApplied(2);
-        viewByItemsRobot.verifyOrderGroupInDateRange(
-          fromDate: fromDate,
-          toDate: toDate,
-        );
+        ordersRootRobot.verifyFilterApplied(1);
         viewByItemsRobot.verifyOrderGroups();
         viewByItemsRobot.verifyOrderItems();
 
@@ -1655,11 +1555,10 @@ void main() {
       testWidgets(
           'EZRX-T87 | Verify view by item detail with default components',
           (tester) async {
-        const orderId = '0200276381';
-        const materialManufacturerName = 'MERCK SHARP & DOHME (I.A)';
+        const orderId = '0200371817';
 
         //init app
-        await pumpAppWithLoginOnBehalf(tester);
+        await pumpAppWithLogin(tester);
         await commonRobot.navigateToScreen(NavigationTab.orders);
 
         //verify
@@ -1676,7 +1575,7 @@ void main() {
         viewByItemsDetailRobot.verifyStatusTracker();
         viewByItemsDetailRobot.verifyAddress();
         await viewByItemsDetailRobot
-            .verifyManufacturerName(materialManufacturerName);
+            .verifyManufacturerName(materialPrincipalName);
         await viewByItemsDetailRobot.verifyItemComponent();
       });
 
@@ -1685,7 +1584,7 @@ void main() {
         const qty = 1000;
 
         //init app
-        await pumpAppWithLoginOnBehalf(tester);
+        await pumpAppWithLogin(tester);
         await checkoutWithMaterial(
           materialNumber,
           qty,
@@ -1724,7 +1623,7 @@ void main() {
         const bonusQty = qty ~/ bonusMaterialNumberTierQty;
 
         //init app
-        await pumpAppWithLoginOnBehalf(tester);
+        await pumpAppWithLogin(tester);
         await checkoutWithMaterial(
           bonusMaterialNumber,
           qty,
@@ -1782,9 +1681,9 @@ void main() {
         final totalPrice = 'Price Not Available'.tr();
 
         //init app
-        await pumpAppWithLoginOnBehalf(tester);
+        await pumpAppWithLogin(tester);
         await checkoutWithMaterial(
-          pAndGMaterialNumber,
+          pAndGMaterialBonusNumber,
           qty,
         );
         await checkoutRobot.verifyPoReferenceField(isVisible: true);
@@ -1798,8 +1697,8 @@ void main() {
         await orderSuccessRobot.verifyGrandTotal(0.priceDisplay(currency));
         await orderSuccessRobot.verifyOrderItemTotalQty(2);
         await orderSuccessRobot.startVerifyMaterial(index: 0);
-        orderSuccessRobot.verifyMaterialNumber(pAndGMaterialNumber);
-        orderSuccessRobot.verifyMateriaDescription(pAndGMaterialName);
+        orderSuccessRobot.verifyMaterialNumber(pAndGMaterialBonusNumber);
+        orderSuccessRobot.verifyMateriaDescription(pAndGBonusMaterialName);
         orderSuccessRobot.verifyItemQty(qty);
         orderSuccessRobot.verifyMaterialOnOfferTag();
         orderSuccessRobot.verifyMaterialUnitPrice(
@@ -1807,8 +1706,8 @@ void main() {
         );
         orderSuccessRobot.verifyMaterialTotalPrice(totalPrice);
         await orderSuccessRobot.startVerifyMaterial(index: 1);
-        orderSuccessRobot.verifyMaterialNumber(pAndGMaterialNumber);
-        orderSuccessRobot.verifyMateriaDescription(pAndGMaterialName);
+        orderSuccessRobot.verifyMaterialNumber(pAndGMaterialBonusNumber);
+        orderSuccessRobot.verifyMateriaDescription(pAndGBonusMaterialName);
         orderSuccessRobot.verifyItemQty(bonusQty);
         orderSuccessRobot.verifyMaterialBonusTag();
         await orderSuccessRobot.tapCloseButton();
@@ -1823,7 +1722,7 @@ void main() {
             .verifyManufacturerName(pAndGMaterialPrincipalName);
         await viewByItemsDetailRobot.verifyItemComponent();
         viewByItemsDetailRobot.verifyOfferTag();
-        viewByItemsDetailRobot.verifyMaterialNumber(pAndGMaterialNumber);
+        viewByItemsDetailRobot.verifyMaterialNumber(pAndGMaterialBonusNumber);
         viewByItemsDetailRobot.verifyQty(qty);
         await viewByItemsDetailRobot.verifyOtherItemsComponent();
         await viewByItemsDetailRobot.startVerifyOtherItem(0);
@@ -1839,7 +1738,7 @@ void main() {
         await viewByItemsDetailRobot.verifyItemComponent();
         viewByItemsDetailRobot.verifyBonusLabel();
         viewByItemsDetailRobot.verifyFreePrice();
-        viewByItemsDetailRobot.verifyMaterialNumber(pAndGMaterialNumber);
+        viewByItemsDetailRobot.verifyMaterialNumber(pAndGMaterialBonusNumber);
         viewByItemsDetailRobot.verifyQty(bonusQty);
         await viewByItemsDetailRobot.verifyOtherItemsComponent();
         await viewByItemsDetailRobot.startVerifyOtherItem(0);
@@ -1862,7 +1761,7 @@ void main() {
         const bundleMaterialQty2 = bundleTier1Qty - bundleMaterialQty1;
 
         //init app
-        await pumpAppWithLoginOnBehalf(tester);
+        await pumpAppWithLogin(tester);
         await addBundleToCart({
           bundleMaterialNumber1: bundleMaterialQty1,
           bundleMaterialNumber2: bundleMaterialQty2,
@@ -1898,7 +1797,7 @@ void main() {
       testWidgets('EZRX-T71 | Verify display list of order (with/without data)',
           (tester) async {
         //init app
-        await pumpAppWithLoginOnBehalf(tester);
+        await pumpAppWithLogin(tester);
         await commonRobot.navigateToScreen(NavigationTab.orders);
         await ordersRootRobot.switchToViewByOrders();
 
@@ -1921,7 +1820,7 @@ void main() {
 
       testWidgets('EZRX-T78 | Verify search by order number', (tester) async {
         //init app
-        await pumpAppWithLoginOnBehalf(tester);
+        await pumpAppWithLogin(tester);
         await commonRobot.navigateToScreen(NavigationTab.orders);
         await ordersRootRobot.switchToViewByOrders();
         await commonRobot.pullToRefresh();
@@ -1962,7 +1861,7 @@ void main() {
 
       testWidgets('EZRX-T83 | Verify filter by date', (tester) async {
         //init app
-        await pumpAppWithLoginOnBehalf(tester);
+        await pumpAppWithLogin(tester);
         await commonRobot.navigateToScreen(NavigationTab.orders);
         await ordersRootRobot.switchToViewByOrders();
 
@@ -1990,7 +1889,7 @@ void main() {
         final toDate = DateTime.now().subtract(const Duration(days: 99));
 
         //init app
-        await pumpAppWithLoginOnBehalf(tester);
+        await pumpAppWithLogin(tester);
         await commonRobot.navigateToScreen(NavigationTab.orders);
         await ordersRootRobot.switchToViewByOrders();
 
@@ -2026,7 +1925,7 @@ void main() {
       testWidgets('EZRX-T72 | Verify click on Buy again', (tester) async {
         const qty = 1000;
         //init app
-        await pumpAppWithLoginOnBehalf(tester);
+        await pumpAppWithLogin(tester);
         await checkoutWithMaterial(
           materialNumber,
           qty,
@@ -2053,7 +1952,7 @@ void main() {
         final price = (materialUnitPrice * qty).priceDisplay(currency);
 
         //init app
-        await pumpAppWithLoginOnBehalf(tester);
+        await pumpAppWithLogin(tester);
         await checkoutWithMaterial(
           materialNumber,
           qty,
@@ -2094,7 +1993,7 @@ void main() {
         const orderQty = 1000;
         const cartQty = 10;
         //init app
-        await pumpAppWithLoginOnBehalf(tester);
+        await pumpAppWithLogin(tester);
 
         //setup data
         await checkoutWithMaterial(
@@ -2133,7 +2032,7 @@ void main() {
         const qty = 1000;
         const bonusQty = qty ~/ bonusMaterialNumberTierQty;
         //init app
-        await pumpAppWithLoginOnBehalf(tester);
+        await pumpAppWithLogin(tester);
 
         //setup data
         await checkoutWithMaterial(
@@ -2204,7 +2103,7 @@ void main() {
         const bundleTotalPrice = bundleTotalQty * bundleTier1UnitPrice;
 
         //init app
-        await pumpAppWithLoginOnBehalf(tester);
+        await pumpAppWithLogin(tester);
         await addBundleToCart({
           bundleMaterialNumber1: bundleMaterialQty1,
           bundleMaterialNumber2: bundleMaterialQty2,
@@ -2270,7 +2169,7 @@ void main() {
     testWidgets('EZRX-T98 | Verify material in cart + change material qty',
         (tester) async {
       //init app
-      await pumpAppWithLoginOnBehalf(tester);
+      await pumpAppWithLogin(tester);
 
       await browseProductFromEmptyCart();
       await productSuggestionRobot.searchWithKeyboardAction(materialNumber);
@@ -2343,7 +2242,7 @@ void main() {
       var totalPrice = totalQty * bundleTier2UnitPrice;
 
       //init app
-      await pumpAppWithLoginOnBehalf(tester);
+      await pumpAppWithLogin(tester);
       await addBundleToCart({
         bundleMaterialNumber1: materialQty1,
         bundleMaterialNumber2: materialQty2,
@@ -2519,7 +2418,7 @@ void main() {
       const totalPrice = materialQty * materialUnitPrice + bundleTotalPrice;
 
       //init app
-      await pumpAppWithLoginOnBehalf(tester);
+      await pumpAppWithLogin(tester);
       await addBundleToCart({
         bundleMaterialNumber1: bundleMaterialQty1,
         bundleMaterialNumber2: bundleMaterialQty2,
@@ -2584,7 +2483,7 @@ void main() {
     testWidgets('EZRX-T101 | Verify material on offer with bonus in cart',
         (tester) async {
       //init app
-      await pumpAppWithLoginOnBehalf(tester);
+      await pumpAppWithLogin(tester);
       await browseProductFromEmptyCart();
 
       //verify
@@ -2667,7 +2566,7 @@ void main() {
 
     testWidgets('EZRX-T108 | Verify remove item in cart', (tester) async {
       //init app
-      await pumpAppWithLoginOnBehalf(tester);
+      await pumpAppWithLogin(tester);
       await browseProductFromEmptyCart();
 
       //verify
@@ -2700,7 +2599,7 @@ void main() {
 
     testWidgets('EZRX-T113 | Verify clear cart', (tester) async {
       //init app
-      await pumpAppWithLoginOnBehalf(tester);
+      await pumpAppWithLogin(tester);
       await browseProductFromEmptyCart();
 
       //verify
@@ -2730,7 +2629,7 @@ void main() {
       const materialIndex = 0;
 
       //init app
-      await pumpAppWithLoginOnBehalf(tester);
+      await pumpAppWithLogin(tester);
       await browseProductFromEmptyCart();
 
       //verify display
@@ -2808,7 +2707,7 @@ void main() {
       const remark = 'AUTO-TEST';
 
       //init app
-      await pumpAppWithLoginOnBehalf(tester);
+      await pumpAppWithLogin(tester);
       await browseProductFromEmptyCart();
 
       //verify
@@ -2866,7 +2765,7 @@ void main() {
     testWidgets('EZRX-T114 | Verify address information in cart',
         (tester) async {
       //init app
-      await pumpAppWithLoginOnBehalf(tester);
+      await pumpAppWithLogin(tester);
       await browseProductFromEmptyCart();
 
       //verify
@@ -2887,7 +2786,7 @@ void main() {
 
     testWidgets('EZRX-T97 | Verify price summary in cart', (tester) async {
       //init app
-      await pumpAppWithLoginOnBehalf(tester);
+      await pumpAppWithLogin(tester);
       await browseProductFromEmptyCart();
       await productSuggestionRobot.searchWithKeyboardAction(materialNumber);
       await productSuggestionRobot.tapSearchResult(materialNumber);
@@ -2913,7 +2812,7 @@ void main() {
       final validTotalPrice = lowPriceMaterialUnitPrice * validQty;
 
       //init app
-      await pumpAppWithLoginOnBehalf(tester);
+      await pumpAppWithLogin(tester);
       await browseProductFromEmptyCart();
 
       //verify
@@ -2958,7 +2857,7 @@ void main() {
       const qty = 100;
 
       //init app
-      await pumpAppWithLoginOnBehalf(tester);
+      await pumpAppWithLogin(tester);
       await browseProductFromEmptyCart();
 
       //verify
@@ -3000,7 +2899,7 @@ void main() {
       final validTotalPrice = 'Price Not Available'.tr();
 
       //init app
-      await pumpAppWithLoginOnBehalf(tester);
+      await pumpAppWithLogin(tester);
       await browseProductFromEmptyCart();
 
       //verify
@@ -3046,8 +2945,7 @@ void main() {
       //bonus override
       const materialIndex = 0;
       await cartRobot.tapMaterialBonusSampleButton(pAndGMaterialNumber);
-      await bonusSampleRobot
-          .searchWithKeyboardAction(pAndGMaterialNumberAsBonus);
+      await bonusSampleRobot.searchWithKeyboardAction(pAndGMaterialBonusNumber);
 
       await bonusSampleRobot.enterBonusSampleQty(materialIndex, validQty);
       await bonusSampleRobot.tapSubmitButton(materialIndex);
@@ -3057,11 +2955,11 @@ void main() {
       bonusSampleRobot.verifySheet(isVisible: false);
       await cartRobot.verifyBonusMaterial(
         pAndGMaterialNumber,
-        pAndGMaterialNumberAsBonus,
+        pAndGMaterialBonusNumber,
       );
       await cartRobot.verifyBonusMaterialQty(
         pAndGMaterialNumber,
-        pAndGMaterialNumberAsBonus,
+        pAndGMaterialBonusNumber,
         validQty,
       );
     });
@@ -3074,7 +2972,7 @@ void main() {
       const remark = 'AUTO-test';
 
       //init app
-      await pumpAppWithLoginOnBehalf(tester);
+      await pumpAppWithLogin(tester);
       await browseProductFromEmptyCart();
 
       //verify
@@ -3141,7 +3039,7 @@ void main() {
       const qty = 1000;
       const totalPrice = materialUnitPrice * qty;
       //init app
-      await pumpAppWithLoginOnBehalf(tester);
+      await pumpAppWithLogin(tester);
       await checkoutWithMaterial(
         materialNumber,
         qty,
@@ -3185,7 +3083,7 @@ void main() {
       const qty = 1000;
       const totalPrice = materialUnitPrice * qty;
       //init app
-      await pumpAppWithLoginOnBehalf(tester);
+      await pumpAppWithLogin(tester);
       await browseProductFromEmptyCart();
       await productSuggestionRobot.searchWithKeyboardAction(materialNumber);
       await productSuggestionRobot.tapSearchResult(materialNumber);
@@ -3236,13 +3134,13 @@ void main() {
       checkoutRobot.verifyPlaceOrderButton();
     });
 
-// TODO we do not have data for testextsalesrep user so commented that
+// TODO we do not have data for myexternalsalesrep user so commented that
     // testWidgets('EZRX-T116 | Verify display checkout with default components',
     //     (tester) async {
     //   const qty = 1;
     //   const totalPrice = merckMaterialUnitPrice * qty;
     //   //init app
-    //   await pumpAppWithLoginOnBehalf(tester, behalfName: 'nadzhar');
+    //   await pumpAppWithLogin(tester, behalfName: 'nadzhar');
     //   await browseProductFromEmptyCart();
 
     //   //verify
@@ -3311,7 +3209,7 @@ void main() {
       const emptyDeliveryInstruction = 'NA';
 
       //init app
-      await pumpAppWithLoginOnBehalf(tester);
+      await pumpAppWithLogin(tester);
       await checkoutWithMaterial(
         materialNumber,
         1000,
@@ -3341,7 +3239,7 @@ void main() {
       const newTotalPrice = (newUnitPrice * qty);
 
       //init app
-      await pumpAppWithLoginOnBehalf(tester);
+      await pumpAppWithLogin(tester);
       await checkoutWithMaterial(
         materialNumber,
         qty,
@@ -3417,7 +3315,7 @@ void main() {
       const bundleTotalPrice = bundleTotalQty * bundleTier1UnitPrice;
 
       //init app
-      await pumpAppWithLoginOnBehalf(tester);
+      await pumpAppWithLogin(tester);
       await addBundleToCart({
         bundleMaterialNumber1: bundleMaterialQty1,
         bundleMaterialNumber2: bundleMaterialQty2,
@@ -3511,7 +3409,7 @@ void main() {
           (bonusMaterialNumberUnitPrice * qty).priceDisplay(currency);
 
       //init app
-      await pumpAppWithLoginOnBehalf(tester);
+      await pumpAppWithLogin(tester);
       await checkoutWithMaterial(
         bonusMaterialNumber,
         qty,
@@ -3574,9 +3472,9 @@ void main() {
       final priceNotAvailable = 'Price Not Available'.tr();
 
       //init app
-      await pumpAppWithLoginOnBehalf(tester);
+      await pumpAppWithLogin(tester);
       await checkoutWithMaterial(
-        pAndGMaterialNumber,
+        pAndGMaterialBonusNumber,
         qty,
       );
 
@@ -3584,41 +3482,41 @@ void main() {
       await checkoutRobot.verifyPoReferenceField(isVisible: true);
       await checkoutRobot.verifyDeliveryInstructionField(isVisible: true);
       await checkoutRobot.verifyYoursItemLabel(2);
-      await checkoutRobot.verifyMaterial(pAndGMaterialNumber);
+      await checkoutRobot.verifyMaterial(pAndGMaterialBonusNumber);
       checkoutRobot.verifyMaterialUnitPrice(
-        pAndGMaterialNumber,
+        pAndGMaterialBonusNumber,
         priceNotAvailable,
       );
       checkoutRobot.verifyMaterialTotalPrice(
-        pAndGMaterialNumber,
+        pAndGMaterialBonusNumber,
         priceNotAvailable,
       );
-      checkoutRobot.verifyMaterialQty(pAndGMaterialNumber, qty);
+      checkoutRobot.verifyMaterialQty(pAndGMaterialBonusNumber, qty);
       await checkoutRobot.verifyBonusMaterial(
-        pAndGMaterialNumber,
-        pAndGMaterialNumber,
+        pAndGMaterialBonusNumber,
+        pAndGMaterialBonusNumber,
       );
       checkoutRobot.verifyBonusMaterialDescription(
-        pAndGMaterialNumber,
-        pAndGMaterialNumber,
-        pAndGMaterialName,
+        pAndGMaterialBonusNumber,
+        pAndGMaterialBonusNumber,
+        pAndGBonusMaterialName,
       );
       checkoutRobot.verifyBonusMaterialImage(
-        pAndGMaterialNumber,
-        pAndGMaterialNumber,
+        pAndGMaterialBonusNumber,
+        pAndGMaterialBonusNumber,
       );
       checkoutRobot.verifyBonusMaterialQty(
-        pAndGMaterialNumber,
-        pAndGMaterialNumber,
+        pAndGMaterialBonusNumber,
+        pAndGMaterialBonusNumber,
         pAndGMaterialQty,
       );
       checkoutRobot.verifyBonusMaterialTag(
-        pAndGMaterialNumber,
-        pAndGMaterialNumber,
+        pAndGMaterialBonusNumber,
+        pAndGMaterialBonusNumber,
       );
       checkoutRobot.verifyBonusMaterialFreeLabel(
-        pAndGMaterialNumber,
-        pAndGMaterialNumber,
+        pAndGMaterialBonusNumber,
+        pAndGMaterialBonusNumber,
       );
       await checkoutRobot.verifySubTotalLabel(totalPrice);
       await checkoutRobot.verifyGrandTotalLabel(totalPrice);
@@ -3633,7 +3531,7 @@ void main() {
         'EZRX-T123 | Verify display order submitted with default components + close page',
         (tester) async {
       //init app
-      await pumpAppWithLoginOnBehalf(tester);
+      await pumpAppWithLogin(tester);
       await checkoutWithMaterial(
         materialNumber,
         1000,
@@ -3658,11 +3556,8 @@ void main() {
     testWidgets('EZRX-T125 | Verify display material in order submitted',
         (tester) async {
       const qty = 1000;
-      const materialNumber = '23046018';
-      const materialUnitPrice = 250.00;
-      const materialName = "FOSAMAXTABS10MG30'S";
       //init app
-      await pumpAppWithLoginOnBehalf(tester);
+      await pumpAppWithLogin(tester);
       await checkoutWithMaterial(
         materialNumber,
         qty,
@@ -3676,7 +3571,7 @@ void main() {
           .verifySubTotal((materialUnitPrice * qty).priceDisplay(currency));
       await orderSuccessRobot
           .verifyGrandTotal((materialUnitPrice * qty).priceDisplay(currency));
-      await orderSuccessRobot.verifyOrderItemTotalQty(1);
+      await orderSuccessRobot.verifyOrderItemTotalQty(2);
       await orderSuccessRobot.startVerifyMaterial(index: 0);
       orderSuccessRobot.verifyMaterialNumber(materialNumber);
       orderSuccessRobot.verifyMateriaDescription(materialName);
@@ -3697,7 +3592,7 @@ void main() {
           (bonusMaterialNumberUnitPrice * qty).priceDisplay(currency);
 
       //init app
-      await pumpAppWithLoginOnBehalf(tester);
+      await pumpAppWithLogin(tester);
       await checkoutWithMaterial(
         bonusMaterialNumber,
         qty,
@@ -3737,11 +3632,10 @@ void main() {
     testWidgets('EZRX-T125 | Verify display P&G material in order submitted',
         (tester) async {
       const qty = 1000;
-      const bonusQty = 399;
       final totalPrice = 'Price Not Available'.tr();
 
       //init app
-      await pumpAppWithLoginOnBehalf(tester);
+      await pumpAppWithLogin(tester);
       await checkoutWithMaterial(
         pAndGMaterialNumber,
         qty,
@@ -3755,21 +3649,15 @@ void main() {
       await orderSuccessRobot.verifyOrderSummarySection();
       await orderSuccessRobot.verifySubTotal(0.priceDisplay(currency));
       await orderSuccessRobot.verifyGrandTotal(0.priceDisplay(currency));
-      await orderSuccessRobot.verifyOrderItemTotalQty(2);
+      await orderSuccessRobot.verifyOrderItemTotalQty(1);
       await orderSuccessRobot.startVerifyMaterial(index: 0);
       orderSuccessRobot.verifyMaterialNumber(pAndGMaterialNumber);
       orderSuccessRobot.verifyMateriaDescription(pAndGMaterialName);
       orderSuccessRobot.verifyItemQty(qty);
-      orderSuccessRobot.verifyMaterialOnOfferTag();
       orderSuccessRobot.verifyMaterialUnitPrice(
         totalPrice,
       );
       orderSuccessRobot.verifyMaterialTotalPrice(totalPrice);
-      await orderSuccessRobot.startVerifyMaterial(index: 1);
-      orderSuccessRobot.verifyMaterialNumber(pAndGMaterialNumber);
-      orderSuccessRobot.verifyMateriaDescription(pAndGMaterialName);
-      orderSuccessRobot.verifyItemQty(bonusQty);
-      orderSuccessRobot.verifyMaterialBonusTag();
     });
 
     testWidgets('EZRX-T125 | Verify display bundle in order submitted',
@@ -3781,7 +3669,7 @@ void main() {
           (bundleTotalQty * bundleTier1UnitPrice).priceDisplay(currency);
 
       //init app
-      await pumpAppWithLoginOnBehalf(tester);
+      await pumpAppWithLogin(tester);
       await addBundleToCart({
         bundleMaterialNumber1: bundleMaterialQty1,
         bundleMaterialNumber2: bundleMaterialQty2,
@@ -3821,10 +3709,10 @@ void main() {
   group('Profile -', () {
     void verifyAllComponentsVisible() {
       profileRobot.verifyAccountAndBusinessDetailsVisible(
-        firstName: proxyUserName,
-        lastName: proxyUserName,
-        email: 'mdas@zuelligpharma.com',
-        username: proxyUserName,
+        firstName: userFirstName,
+        lastName: userLastName,
+        email: 'jhchoo@zuelligpharma.com',
+        username: username,
         mobilePhone: 'NA',
         language: 'English',
       );
@@ -3834,7 +3722,7 @@ void main() {
 
     testWidgets('EZRX-T176 | Verify Profile Page', (tester) async {
       //init app
-      await pumpAppWithLoginOnBehalf(tester);
+      await pumpAppWithLogin(tester);
       await commonRobot.dismissSnackbar(
         dismissAll: true,
       );
@@ -3848,7 +3736,7 @@ void main() {
 
     testWidgets('EZRX-T177 | Verify Refresh Profile Page', (tester) async {
       //init app
-      await pumpAppWithLoginOnBehalf(tester);
+      await pumpAppWithLogin(tester);
       await commonRobot.dismissSnackbar(
         dismissAll: true,
       );
@@ -3875,8 +3763,8 @@ void main() {
     });
   });
 
-  tearDown(() async {
-    locator<ZephyrService>().setNameAndStatus();
-    await locator<ZephyrRepository>().zephyrUpdate(id: CycleKeyId.myClient);
-  });
+  // tearDown(() async {
+  //   locator<ZephyrService>().setNameAndStatus();
+  //   await locator<ZephyrRepository>().zephyrUpdate(id: CycleKeyId.myClient);
+  // });
 }
