@@ -178,12 +178,15 @@ class MaterialListRepository implements IMaterialListRepository {
       }
     } else {
       try {
+        final materialList = materials
+            .where((element) => element.isValidMaterial)
+            .map((e) => e.materialNumber.getValue())
+            .toList();
+        if (materialList.isEmpty) return const Right([]);
+
         final stockInfoList =
             await stockInfoRemoteDataSource.getMaterialStockInfoList(
-          materialNumbers: materials
-              .where((element) => element.type.typeMaterial)
-              .map((e) => e.materialNumber.getOrCrash())
-              .toList(),
+          materialNumbers: materialList,
           salesOrg: salesOrganisation.salesOrg.getOrCrash(),
           selectedCustomerCode: customerCodeInfo.customerCodeSoldTo,
         );

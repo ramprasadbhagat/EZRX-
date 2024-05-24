@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/stock_info_local.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:ezrxmobile/config.dart';
@@ -186,15 +187,6 @@ void main() {
             materialCount: materialResponseMock.count,
             materialList: materialResponseMock.products,
             apiFailureOrSuccessOption: optionOf(Right(materialResponseMock)),
-            canLoadMore: materialResponseMock.products.length >=
-                config.productTabPageSize,
-            nextPageIndex: 1,
-            selectedMaterialFilter: updatedSelectedMaterialFilter,
-          ),
-          materialState.copyWith(
-            materialCount: materialResponseMock.count,
-            materialList: materialResponseMock.products,
-            apiFailureOrSuccessOption: none(),
             canLoadMore: materialResponseMock.products.length >=
                 config.productTabPageSize,
             nextPageIndex: 1,
@@ -462,6 +454,20 @@ void main() {
             ],
             canLoadMore: false,
             nextPageIndex: 2,
+          ),
+          materialState.copyWith(
+            materialCount: 44,
+            materialList: [
+              ...List.generate(
+                config.productTabPageSize,
+                (index) => materialResponseMock.products.first,
+              ),
+              ...materialResponseMock.products.skip(20).toList(),
+            ],
+            canLoadMore: false,
+            nextPageIndex: 2,
+            apiFailureOrSuccessOption:
+                optionOf(const Left(ApiFailure.poorConnection())),
           ),
         ];
       },
@@ -755,10 +761,6 @@ void main() {
       ),
       expect: () => [
         materialState.copyWith(
-          materialList: materialResponseMock.products,
-          apiFailureOrSuccessOption: none(),
-        ),
-        materialState.copyWith(
           materialList: materialResponseMock.products.map((material) {
             final stockInfo = stockInfoList.firstWhere(
               (e) => e.materialNumber == material.materialNumber,
@@ -781,12 +783,106 @@ void main() {
         favouriteRepository: favouriteMockRepository,
         config: config,
       ),
+      seed: () => materialState.copyWith(
+        materialList: [],
+        apiFailureOrSuccessOption: none(),
+      ),
+      setUp: () {
+        when(
+          () => materialListMockRepository.getStockInfoList(
+            materials: [],
+            customerCodeInfo: fakeCustomerCodeInfo,
+            salesOrganisation: fakeSGSalesOrganisation,
+          ),
+        ).thenAnswer((_) async => const Right(<MaterialStockInfo>[]));
+      },
       act: (MaterialListBloc bloc) => bloc.add(
         MaterialListEvent.fetchStock(
           materials: [],
         ),
       ),
-      expect: () => [],
+      expect: () => [
+        materialState.copyWith(
+          apiFailureOrSuccessOption:
+              optionOf(const Right(<MaterialStockInfo>[])),
+        ),
+      ],
+    );
+
+    //Please note: As of now we are not fetching the stock info for bundle materials
+    //so no state emit for bundle stock
+    blocTest(
+      'Get stock info as empty if we have bundles',
+      build: () => MaterialListBloc(
+        materialListRepository: materialListMockRepository,
+        favouriteRepository: favouriteMockRepository,
+        config: config,
+      ),
+      seed: () => materialState.copyWith(
+        materialList: [
+          MaterialInfo.empty().copyWith(
+            materialNumber: MaterialNumber('fake-bundle-code'),
+            type: MaterialInfoType.bundle(),
+            data: [
+              MaterialData.empty().copyWith(
+                materialNumber: MaterialNumber('fake-material-number'),
+              ),
+            ],
+          ),
+        ],
+        apiFailureOrSuccessOption: none(),
+      ),
+      setUp: () {
+        when(
+          () => materialListMockRepository.getStockInfoList(
+            materials: [
+              MaterialInfo.empty().copyWith(
+                materialNumber: MaterialNumber('fake-bundle-code'),
+                type: MaterialInfoType.bundle(),
+                data: [
+                  MaterialData.empty().copyWith(
+                    materialNumber: MaterialNumber('fake-material-number'),
+                  ),
+                ],
+              ),
+            ],
+            customerCodeInfo: fakeCustomerCodeInfo,
+            salesOrganisation: fakeSGSalesOrganisation,
+          ),
+        ).thenAnswer((_) async => const Right(<MaterialStockInfo>[]));
+      },
+      act: (MaterialListBloc bloc) => bloc.add(
+        MaterialListEvent.fetchStock(
+          materials: [
+            MaterialInfo.empty().copyWith(
+              materialNumber: MaterialNumber('fake-bundle-code'),
+              type: MaterialInfoType.bundle(),
+              data: [
+                MaterialData.empty().copyWith(
+                  materialNumber: MaterialNumber('fake-material-number'),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+      expect: () => [
+        materialState.copyWith(
+          materialList: [
+            MaterialInfo.empty().copyWith(
+              materialNumber: MaterialNumber('fake-bundle-code'),
+              type: MaterialInfoType.bundle(),
+              data: [
+                MaterialData.empty().copyWith(
+                  materialNumber: MaterialNumber('fake-material-number'),
+                ),
+              ],
+            ),
+          ],
+          apiFailureOrSuccessOption:
+              optionOf(const Right(<MaterialStockInfo>[])),
+        ),
+      ],
     );
   });
 }

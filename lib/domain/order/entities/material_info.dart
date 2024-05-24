@@ -195,6 +195,8 @@ class MaterialInfo with _$MaterialInfo {
   bool displayOOSPreorderTag(bool hideStockDisplay) {
     return !hideStockDisplay && !inStock && stockInfos.isNotEmpty;
   }
+
+  bool get isValidMaterial => type.typeMaterial && materialNumber.isValid();
 }
 
 @freezed

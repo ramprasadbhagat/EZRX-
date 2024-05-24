@@ -171,12 +171,6 @@ class MaterialListBloc extends Bloc<MaterialListEvent, MaterialListState> {
       );
     });
     on<_FetchStock>((e, emit) async {
-      if (e.materials.isEmpty) return;
-      emit(
-        state.copyWith(
-          apiFailureOrSuccessOption: none(),
-        ),
-      );
       final failureOrSuccess = await materialListRepository.getStockInfoList(
         materials: e.materials,
         customerCodeInfo: state.customerCodeInfo,
