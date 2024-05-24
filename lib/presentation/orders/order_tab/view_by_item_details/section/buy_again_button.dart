@@ -140,7 +140,7 @@ class _BuyAgainButton extends StatelessWidget {
         backgroundColor: ZPColors.errorSnackBarColor,
         key: WidgetKeys.viewByOrderBuyAgainTenderErrorSnackBar,
         messageText: context.tr(
-          'Tender Contract is no longer available and could not be added to cart',
+          'Tender Contract is no longer available and could not be added to cart.',
         ),
       ).show(context);
 
