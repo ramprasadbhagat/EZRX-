@@ -11,63 +11,20 @@ class _ReturnItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CustomCard(
-      key: WidgetKeys.returnSuccessfulItemKey,
-      showBorder: true,
-      showShadow: false,
-      clipBehavior: Clip.antiAlias,
-      padding: const EdgeInsets.all(16),
-      margin: const EdgeInsets.symmetric(vertical: 12.0),
-      child: Column(
+    return ReturnListItemCard.summaryItem(
+      data: returnMaterial,
+      detailData: returnItemDetail,
+      bottomWidget: _ReturnExpandableSection(
         children: [
-          if (returnMaterial.displayOutSidePolicy(
-            context
-                .read<EligibilityBloc>()
+          _ExpandableMaterialDetails(materialDetail: returnMaterial),
+          _ExpandableReturnDetail(returnItemDetail: returnItemDetail),
+          _ExpandableBonusItems(
+            bonusItems: context
+                .read<NewRequestBloc>()
                 .state
-                .salesOrgConfigs
-                .allowReturnsOutsidePolicy,
-          ))
-            const OutsideReturnPolicyTag(),
-          if (!returnMaterial.isMarketPlace)
-            _ReturnMaterialExpAndStatus(returnMaterial: returnMaterial),
-          const SizedBox(height: 8.0),
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              CustomCard(
-                showShadow: false,
-                showBorder: true,
-                child: ProductImage(
-                  width: MediaQuery.of(context).size.height * 0.1,
-                  height: MediaQuery.of(context).size.height * 0.1,
-                  fit: BoxFit.fitHeight,
-                  materialNumber: returnMaterial.materialNumber,
+                .getBonusItemsWithBalanceQuantity(
+                  returnMaterial,
                 ),
-              ),
-              Expanded(
-                child: MaterialInfoWidget(
-                  data: returnMaterial,
-                ),
-              ),
-            ],
-          ),
-          MaterialQuantityAndPrice(
-            quantity: returnItemDetail.returnQuantity.getIntValue,
-            totalPrice: returnItemDetail.returnValue,
-          ),
-          _ReturnExpandableSection(
-            children: [
-              _ExpandableMaterialDetails(materialDetail: returnMaterial),
-              _ExpandableReturnDetail(returnItemDetail: returnItemDetail),
-              _ExpandableBonusItems(
-                bonusItems: context
-                    .read<NewRequestBloc>()
-                    .state
-                    .getBonusItemsWithBalanceQuantity(
-                      returnMaterial,
-                    ),
-              ),
-            ],
           ),
         ],
       ),

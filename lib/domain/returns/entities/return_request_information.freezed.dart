@@ -22,7 +22,7 @@ mixin _$ReturnRequestInformation {
   String get rejectReason => throw _privateConstructorUsedError;
   String get returnTypeDesc => throw _privateConstructorUsedError;
   ReturnType get returnType => throw _privateConstructorUsedError;
-  String get returnQuantity => throw _privateConstructorUsedError;
+  int get returnQuantity => throw _privateConstructorUsedError;
   double get unitPrice => throw _privateConstructorUsedError;
   double get totalPrice => throw _privateConstructorUsedError;
   String get returnOrderDesc => throw _privateConstructorUsedError;
@@ -71,7 +71,7 @@ abstract class $ReturnRequestInformationCopyWith<$Res> {
       String rejectReason,
       String returnTypeDesc,
       ReturnType returnType,
-      String returnQuantity,
+      int returnQuantity,
       double unitPrice,
       double totalPrice,
       String returnOrderDesc,
@@ -176,7 +176,7 @@ class _$ReturnRequestInformationCopyWithImpl<$Res,
       returnQuantity: null == returnQuantity
           ? _value.returnQuantity
           : returnQuantity // ignore: cast_nullable_to_non_nullable
-              as String,
+              as int,
       unitPrice: null == unitPrice
           ? _value.unitPrice
           : unitPrice // ignore: cast_nullable_to_non_nullable
@@ -301,7 +301,7 @@ abstract class _$$ReturnRequestInformationImplCopyWith<$Res>
       String rejectReason,
       String returnTypeDesc,
       ReturnType returnType,
-      String returnQuantity,
+      int returnQuantity,
       double unitPrice,
       double totalPrice,
       String returnOrderDesc,
@@ -405,7 +405,7 @@ class __$$ReturnRequestInformationImplCopyWithImpl<$Res>
       returnQuantity: null == returnQuantity
           ? _value.returnQuantity
           : returnQuantity // ignore: cast_nullable_to_non_nullable
-              as String,
+              as int,
       unitPrice: null == unitPrice
           ? _value.unitPrice
           : unitPrice // ignore: cast_nullable_to_non_nullable
@@ -571,7 +571,7 @@ class _$ReturnRequestInformationImpl extends _ReturnRequestInformation {
   @override
   final ReturnType returnType;
   @override
-  final String returnQuantity;
+  final int returnQuantity;
   @override
   final double unitPrice;
   @override
@@ -783,7 +783,7 @@ abstract class _ReturnRequestInformation extends ReturnRequestInformation {
       required final String rejectReason,
       required final String returnTypeDesc,
       required final ReturnType returnType,
-      required final String returnQuantity,
+      required final int returnQuantity,
       required final double unitPrice,
       required final double totalPrice,
       required final String returnOrderDesc,
@@ -825,7 +825,7 @@ abstract class _ReturnRequestInformation extends ReturnRequestInformation {
   @override
   ReturnType get returnType;
   @override
-  String get returnQuantity;
+  int get returnQuantity;
   @override
   double get unitPrice;
   @override

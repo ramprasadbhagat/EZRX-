@@ -19,7 +19,6 @@ import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/return_list_local.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/bonus_tag.dart';
-import 'package:ezrxmobile/presentation/core/common_tile_item.dart';
 import 'package:ezrxmobile/presentation/core/market_place/market_place_logo.dart';
 import 'package:ezrxmobile/presentation/core/status_label.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
@@ -259,7 +258,7 @@ void main() {
             find.text('Invoice #${fakeReturnItemList.first.invoiceID}'),
             findsOneWidget,
           );
-          final findReturnItemTile = find.byKey(WidgetKeys.returnItemTile);
+          final findReturnItemTile = find.byKey(WidgetKeys.returnItemKey);
           expect(
             findReturnItemTile,
             findsOneWidget,
@@ -292,7 +291,7 @@ void main() {
           );
           await tester.pumpWidget(getWUT());
           await tester.pump();
-          final cardFinder = find.byType(CommonTileItem);
+          final cardFinder = find.byKey(WidgetKeys.returnItemKey);
           expect(cardFinder, findsNWidgets(2));
           expect(
             find.descendant(
@@ -323,7 +322,7 @@ void main() {
           );
           await tester.pumpWidget(getWUT());
           await tester.pump();
-          final cardFinder = find.byType(CommonTileItem);
+          final cardFinder = find.byKey(WidgetKeys.returnItemKey);
           expect(cardFinder, findsNWidgets(2));
           expect(
             find.descendant(
@@ -385,10 +384,10 @@ void main() {
           );
           await tester.pumpWidget(getWUT());
           await tester.pump();
-          final cardFinder = find.byType(CommonTileItem);
+          final cardFinder = find.byKey(WidgetKeys.returnItemKey);
           final customerName = find.text('fake-customerName');
           expect(cardFinder, findsOneWidget);
-          expect(customerName, findsOneWidget);
+          expect(customerName, findsNothing);
         },
       );
 

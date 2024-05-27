@@ -81,7 +81,7 @@ class ReturnRequestInformationDto with _$ReturnRequestInformationDto {
       expiryDate: DateTimeStringValue(expiryDate),
       comment: StringValue(comment),
       rejectReason: rejectReason,
-      returnQuantity: returnQuantity,
+      returnQuantity: int.tryParse(returnQuantity) ?? 1,
       unitPrice: double.parse(unitPrice),
       totalPrice: double.parse(totalPrice),
       materialNumber: MaterialNumber(materialNumber),

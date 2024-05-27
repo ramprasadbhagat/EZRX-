@@ -6,14 +6,12 @@ import 'package:ezrxmobile/domain/returns/entities/return_request_information.da
 import 'package:ezrxmobile/domain/utils/string_utils.dart';
 import 'package:ezrxmobile/presentation/core/balance_text_row.dart';
 import 'package:ezrxmobile/presentation/core/bonus_tag.dart';
-import 'package:ezrxmobile/presentation/core/common_tile_item.dart';
 import 'package:ezrxmobile/presentation/core/custom_card.dart';
 import 'package:ezrxmobile/presentation/core/outside_return_policy_tag.dart';
-import 'package:ezrxmobile/presentation/core/price_component.dart';
 import 'package:ezrxmobile/presentation/core/status_label.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
+import 'package:ezrxmobile/presentation/returns/new_request/widgets/return_list_item_card.dart';
 import 'package:ezrxmobile/presentation/returns/widgets/return_detail_attachment_tile.dart';
-import 'package:ezrxmobile/presentation/returns/widgets/return_override_info_icon.dart';
 import 'package:ezrxmobile/presentation/returns/widgets/return_summary_item_price.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
@@ -43,7 +41,7 @@ class ReturnItemCard extends StatelessWidget {
       return CustomCard(
         key: WidgetKeys.returnItemDetailOnlyBonusMaterial(
           returnRequestInformation.materialNumber.displayMatNo,
-          returnRequestInformation.returnQuantity,
+          returnRequestInformation.returnQuantity.toString(),
           StringUtils.displayPrice(
             salesOrgConfigs,
             returnRequestInformation.totalPrice,
@@ -60,78 +58,17 @@ class ReturnItemCard extends StatelessWidget {
       );
     }
 
-    return CommonTileItem(
-      key: WidgetKeys.returnItemDetailMaterial(
-        returnRequestInformation.materialNumber.displayMatNo,
-        returnRequestInformation.returnQuantity,
-        StringUtils.displayPrice(
-          salesOrgConfigs,
-          returnRequestInformation.totalPrice,
+    return ReturnListItemCard.detailItem(
+      data: returnRequestInformation,
+      bottomWidget: _ExpandableDetailSection(
+        isExpanded: false,
+        isExpandable: true,
+        expandWidget: _ReturnItemExpandSection(
+          key: WidgetKeys.returnItemDetailBonusItem,
+          returnRequestInformation: returnRequestInformation,
+          downloadingAttachments: downloadingAttachments,
+          downloadAttachment: downloadAttachment,
         ),
-      ),
-      materialNumber: returnRequestInformation.materialNumber,
-      label: returnRequestInformation.materialNumber.displayMatNo,
-      title: returnRequestInformation.materialDescription,
-      subtitle: '',
-      isQuantityRequired: false,
-      headerText:
-          '${context.tr('Batch')} ${returnRequestInformation.displayBatch} (${context.tr('Expires')} ${returnRequestInformation.displayExpiryDate})',
-      quantity: returnRequestInformation.returnQuantity.toString(),
-      isQuantityBelowImage: false,
-      priceComponent: ReturnSummaryItemPrice(
-        requestInformation: returnRequestInformation,
-      ),
-      statusWidget: StatusLabel(
-        status: StatusType(
-          returnRequestInformation.status.displayStatus,
-        ),
-      ),
-      topHeaderWidget: returnRequestInformation.displayOutSidePolicy(
-        salesOrgConfigs.allowReturnsOutsidePolicy,
-      )
-          ? const OutsideReturnPolicyTag()
-          : null,
-      footerWidget: Column(
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Row(
-                children: [
-                  Text(
-                    '${context.tr('Qty:')} ${returnRequestInformation.returnQuantity.toString()}',
-                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                          color: ZPColors.black,
-                        ),
-                  ),
-                  if (returnRequestInformation.isApprovedQuantityOverride)
-                    ReturnOverrideInfoIcon.quantity(
-                      context: context,
-                      initialQuantity: returnRequestInformation.initialQuantity,
-                    ),
-                ],
-              ),
-              PriceComponent(
-                salesOrgConfig: salesOrgConfigs,
-                price: returnRequestInformation.totalPrice.toString(),
-                priceLabelStyle: Theme.of(context)
-                    .textTheme
-                    .labelSmall
-                    ?.copyWith(color: ZPColors.primary),
-              ),
-            ],
-          ),
-          _ExpandableDetailSection(
-            isExpanded: false,
-            isExpandable: true,
-            expandWidget: _ReturnItemExpandSection(
-              key: WidgetKeys.returnItemDetailBonusItem,
-              returnRequestInformation: returnRequestInformation,
-              downloadingAttachments: downloadingAttachments,
-              downloadAttachment: downloadAttachment,
-            ),
-          ),
-        ],
       ),
     );
   }

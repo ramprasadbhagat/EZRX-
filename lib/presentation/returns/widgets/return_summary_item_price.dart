@@ -2,7 +2,6 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_request_information.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
-import 'package:ezrxmobile/presentation/returns/widgets/return_override_info_icon.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -38,12 +37,6 @@ class ReturnSummaryItemPrice extends StatelessWidget {
               price: requestInformation.calculatedUnitPrice.toString(),
               type: PriceStyle.bonusPrice,
             ),
-            if (requestInformation.isApprovedCounterOffer)
-              ReturnOverrideInfoIcon.price(
-                context: context,
-                price: requestInformation.userOverrideValue.toString(),
-                displaySubContent: requestInformation.isApproverOverride,
-              ),
           ],
         ),
         if (requestInformation.isCounterOfferRequested)

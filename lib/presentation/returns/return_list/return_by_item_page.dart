@@ -1,6 +1,5 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_list/view_by_item/return_list_by_item_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_summary_details/return_summary_details_bloc.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
@@ -11,14 +10,10 @@ import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
 import 'package:ezrxmobile/infrastructure/core/common/tracking_events.dart';
 import 'package:ezrxmobile/infrastructure/core/common/tracking_properties.dart';
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
-import 'package:ezrxmobile/presentation/core/bonus_tag.dart';
-import 'package:ezrxmobile/presentation/core/common_tile_item.dart';
-import 'package:ezrxmobile/presentation/core/market_place/market_place_logo.dart';
 import 'package:ezrxmobile/presentation/core/no_record.dart';
-import 'package:ezrxmobile/presentation/core/outside_return_policy_tag.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
-import 'package:ezrxmobile/presentation/core/status_label.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
+import 'package:ezrxmobile/presentation/returns/new_request/widgets/return_list_item_card.dart';
 import 'package:ezrxmobile/presentation/returns/return_list/widgets/new_request_button.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
@@ -119,9 +114,6 @@ class _ReturnItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final user = context.read<EligibilityBloc>().state.user;
-    final salesOrg = context.read<EligibilityBloc>().state.salesOrg;
-
     return Column(
       children: [
         if (showDivider)
@@ -147,95 +139,30 @@ class _ReturnItem extends StatelessWidget {
                         ),
                   ),
                 ),
-              CommonTileItem(
-                key: WidgetKeys.returnItemTile,
-                onTap: () {
-                  trackMixpanelEvent(
-                    TrackingEvents.returnRequestViewed,
-                    props: {
-                      TrackingProps.subTabFrom:
-                          RouterUtils.buildRouteTrackingName(
-                        context.routeData.path,
-                      ),
-                    },
-                  );
-                  context.read<ReturnSummaryDetailsBloc>().add(
-                        ReturnSummaryDetailsEvent.fetch(
-                          returnId: ReturnRequestsId(requestId: data.requestId),
+              Padding(
+                padding: const EdgeInsets.only(bottom: 24),
+                child: ReturnListItemCard.listItem(
+                  data: data,
+                  onTap: () {
+                    trackMixpanelEvent(
+                      TrackingEvents.returnRequestViewed,
+                      props: {
+                        TrackingProps.subTabFrom:
+                            RouterUtils.buildRouteTrackingName(
+                          context.routeData.path,
                         ),
-                      );
-                  context.router.push(
-                    const ReturnRequestSummaryByItemDetailsRoute(),
-                  );
-                },
-                labelLeading: data.isMarketPlace
-                    ? Padding(
-                        padding: const EdgeInsets.only(right: 4),
-                        child: MarketPlaceLogo.small(),
-                      )
-                    : null,
-                label: data.materialNumber.displayMatNo,
-                labelTrailing: data.prsfd.isBonus && !salesOrg.isID
-                    ? const BonusTag(
-                        key: WidgetKeys.returnItemTileBonusTag,
-                        margin: EdgeInsets.symmetric(horizontal: 4),
-                      )
-                    : null,
-                title: data.materialName,
-                subtitle:
-                    'Batch: ${data.displayBatch} - Expires: ${data.displayExpiryDate}',
-                headerText: 'Return #${data.requestId}',
-                materialNumber: data.materialNumber,
-                quantity: data.itemQty.getOrDefaultValue('0'),
-                isQuantityBelowImage: true,
-                statusWidget: StatusLabel(
-                  key: WidgetKeys.returnItemTileStatus,
-                  status: StatusType(
-                    data.status.displayStatus,
-                  ),
-                ),
-                footerWidget: Column(
-                  key: WidgetKeys.returnInvoiceId,
-                  children: <Widget>[
-                    const Divider(
-                      indent: 0,
-                      endIndent: 0,
-                      height: 10,
-                      thickness: 0.8,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 8, bottom: 10),
-                      child: Text(
-                        '${context.tr('Invoice')} #${data.invoiceID}',
-                        style: Theme.of(context).textTheme.bodySmall,
-                      ),
-                    ),
-                  ],
-                ),
-                topHeaderWidget: Column(
-                  children: [
-                    if (data.displayOutSidePolicy(
-                      context
-                          .read<EligibilityBloc>()
-                          .state
-                          .salesOrgConfigs
-                          .allowReturnsOutsidePolicy,
-                    ))
-                      const OutsideReturnPolicyTag(),
-                    if (data.customerName.isNotEmpty &&
-                        user.role.type.isSalesRepRole)
-                      Container(
-                        alignment: Alignment.centerLeft,
-                        padding: const EdgeInsets.symmetric(vertical: 8),
-                        child: Text(
-                          data.customerName,
-                          style: Theme.of(context)
-                              .textTheme
-                              .labelSmall
-                              ?.copyWith(color: ZPColors.neutralsGrey1),
-                        ),
-                      ),
-                  ],
+                      },
+                    );
+                    context.read<ReturnSummaryDetailsBloc>().add(
+                          ReturnSummaryDetailsEvent.fetch(
+                            returnId:
+                                ReturnRequestsId(requestId: data.requestId),
+                          ),
+                        );
+                    context.router.push(
+                      const ReturnRequestSummaryByItemDetailsRoute(),
+                    );
+                  },
                 ),
               ),
             ],

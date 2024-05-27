@@ -15,7 +15,7 @@ class ReturnRequestInformation with _$ReturnRequestInformation {
     required String rejectReason,
     required String returnTypeDesc,
     required ReturnType returnType,
-    required String returnQuantity,
+    required int returnQuantity,
     required double unitPrice,
     required double totalPrice,
     required String returnOrderDesc,
@@ -67,7 +67,7 @@ class ReturnRequestInformation with _$ReturnRequestInformation {
         rejectReason: '',
         returnType: ReturnType(''),
         returnTypeDesc: '',
-        returnQuantity: '',
+        returnQuantity: 1,
         status: StatusType(''),
         statusReason: StatusReason(''),
         totalPrice: 0.0,
@@ -85,7 +85,9 @@ class ReturnRequestInformation with _$ReturnRequestInformation {
       return overrideValue;
     }
 
-    return double.parse((totalPrice / int.parse(returnQuantity)).toString());
+    return double.parse(
+      (totalPrice / returnQuantity).toString(),
+    );
   }
 
   String get displayNAIfBapiStatusIsNotSuccess =>

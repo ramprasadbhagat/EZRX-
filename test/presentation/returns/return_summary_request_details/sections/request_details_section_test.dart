@@ -21,7 +21,6 @@ import 'package:ezrxmobile/domain/returns/entities/return_request_information.da
 import 'package:ezrxmobile/domain/returns/entities/return_request_information_header.dart';
 import 'package:ezrxmobile/domain/returns/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/return_details_by_request_local.dart';
-import 'package:ezrxmobile/presentation/core/common_tile_item.dart';
 import 'package:ezrxmobile/presentation/core/custom_card.dart';
 import 'package:ezrxmobile/presentation/core/status_label.dart';
 import 'package:ezrxmobile/presentation/core/status_tracker.dart';
@@ -228,7 +227,7 @@ void main() {
           isLoading: false,
           requestInformation: [
             ReturnRequestInformation.empty()
-                .copyWith(returnQuantity: '1', status: StatusType('PENDING')),
+                .copyWith(returnQuantity: 1, status: StatusType('PENDING')),
           ],
           requestInformationHeader:
               ReturnRequestInformationHeader.empty().copyWith(
@@ -276,7 +275,7 @@ void main() {
           requestInformation: [
             ReturnRequestInformation.empty().copyWith(
               remarks: fakeComment,
-              returnQuantity: '1',
+              returnQuantity: 1,
             ),
           ],
         ),
@@ -447,7 +446,7 @@ void main() {
           ReturnDetailsByRequestState.initial().copyWith(
             isLoading: false,
             requestInformation: [
-              ReturnRequestInformation.empty().copyWith(returnQuantity: '1'),
+              ReturnRequestInformation.empty().copyWith(returnQuantity: 1),
             ],
             requestInformationHeader:
                 ReturnRequestInformationHeader.empty().copyWith(
@@ -641,6 +640,11 @@ void main() {
       await tester.pumpWidget(getWUT());
       await tester.pumpAndSettle();
       final itemSummaryPriceFinder = find.byType(ReturnSummaryItemPrice);
+      await tester.dragUntilVisible(
+        itemSummaryPriceFinder,
+        find.byKey(WidgetKeys.returnRequestDetailScrollList),
+        const Offset(0.0, -500.0),
+      );
       expect(itemSummaryPriceFinder, findsOneWidget);
       final itemPriceFinder = find.text('MYR 11.00', findRichText: true);
       final itemPriceInfoIconFinder =
@@ -729,7 +733,7 @@ void main() {
         ReturnDetailsByRequestState.initial().copyWith(
           requestInformation: [
             ReturnRequestInformation.empty().copyWith(
-              returnQuantity: '2',
+              returnQuantity: 2,
             ),
           ],
           requestInformationHeader:
@@ -817,7 +821,7 @@ void main() {
         await tester.pumpWidget(getWUT());
         await tester.pump();
         expect(find.byType(ReturnItemCard), findsOneWidget);
-        expect(find.byType(CommonTileItem), findsOneWidget);
+        expect(find.byKey(WidgetKeys.returnItemKey), findsOneWidget);
         final showDetailButtonFinder =
             find.byKey(WidgetKeys.returnDetailShowDetailButton);
         expect(showDetailButtonFinder, findsOneWidget);
@@ -876,7 +880,7 @@ void main() {
         await tester.pumpWidget(getWUT());
         await tester.pump();
         expect(find.byType(ReturnItemCard), findsOneWidget);
-        expect(find.byType(CommonTileItem), findsOneWidget);
+        expect(find.byKey(WidgetKeys.returnItemKey), findsOneWidget);
         final showDetailButtonFinder =
             find.byKey(WidgetKeys.returnDetailShowDetailButton);
         expect(showDetailButtonFinder, findsOneWidget);

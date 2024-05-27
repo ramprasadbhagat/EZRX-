@@ -14,7 +14,7 @@ void main() {
       );
       final requestInformation = ReturnRequestInformation.empty().copyWith(
         totalPrice: 200,
-        returnQuantity: '2',
+        returnQuantity: 2,
       );
       expect(requestInformationWithCounterOffer.calculatedUnitPrice, 150);
       expect(requestInformation.calculatedUnitPrice, 100);

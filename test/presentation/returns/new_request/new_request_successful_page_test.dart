@@ -11,6 +11,7 @@ import 'package:ezrxmobile/presentation/core/market_place/market_place_seller_ti
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/returns/new_request/new_request_success/new_request_successful_page.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -192,8 +193,10 @@ void main() {
       await tester.pumpAndSettle();
 
       final returnRequestID = find.text('Return #fake-Id', findRichText: true);
-      expect(returnRequestID, findsOneWidget);
-      await tester.tap(returnRequestID);
+      _tapTextSpan(
+        tester.widget<RichText>(returnRequestID),
+        '#fake-Id',
+      );
       verify(
         () => returnDetailsByRequestBlocMock.add(
           const ReturnDetailsByRequestEvent.fetch(
@@ -394,7 +397,7 @@ void main() {
         );
         await tester.pumpWidget(getScopedWidget());
         await tester.pump();
-        final cardFinder = find.byKey(WidgetKeys.returnSuccessfulItemKey);
+        final cardFinder = find.byKey(WidgetKeys.returnItemKey);
         expect(cardFinder, findsNWidgets(fakeListMaterial.items.length));
         expect(
           find.descendant(
@@ -422,7 +425,7 @@ void main() {
         );
         await tester.pumpWidget(getScopedWidget());
         await tester.pump();
-        final cardFinder = find.byKey(WidgetKeys.returnSuccessfulItemKey);
+        final cardFinder = find.byKey(WidgetKeys.returnItemKey);
         expect(cardFinder, findsNWidgets(fakeListMaterial.items.length));
         expect(
           find.descendant(
@@ -442,6 +445,14 @@ void main() {
           selectedItems: [
             fakeReturnMaterial.copyWith(
               isMarketPlace: true,
+            ),
+          ],
+          invoiceDetails: [
+            InvoiceDetails.empty().copyWith(
+              returnItemDetailsList: [
+                ReturnItemDetails.empty()
+                    .copyWith(returnQuantity: ReturnQuantity('1')),
+              ],
             ),
           ],
         ),
@@ -562,4 +573,24 @@ void main() {
       variant: salesOrgVariant,
     );
   });
+}
+
+bool _findTextAndTap(InlineSpan visitor, String text) {
+  if (visitor is TextSpan && visitor.text == text) {
+    if (visitor.recognizer is TapGestureRecognizer) {
+      (visitor.recognizer as TapGestureRecognizer).onTap?.call();
+    }
+
+    return false;
+  }
+
+  return true;
+}
+
+bool _tapTextSpan(RichText richText, String text) {
+  final isTapped = !richText.text.visitChildren(
+    (visitor) => _findTextAndTap(visitor, text),
+  );
+
+  return isTapped;
 }

@@ -15,11 +15,9 @@ import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_request_information.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_request_information_header.dart';
-import 'package:ezrxmobile/domain/utils/string_utils.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/return_summary_details_local.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
-import 'package:ezrxmobile/presentation/core/common_tile_item.dart';
 import 'package:ezrxmobile/presentation/core/market_place/market_place_rectangle_logo.dart';
 import 'package:ezrxmobile/presentation/core/market_place/market_place_seller_title.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
@@ -255,7 +253,7 @@ void main() {
           await tester.pumpWidget(getScopedWidget());
           await tester.pump();
           expect(find.byType(ReturnItemCard), findsOneWidget);
-          expect(find.byType(CommonTileItem), findsOneWidget);
+          expect(find.byKey(WidgetKeys.returnItemKey), findsOneWidget);
           final showDetailButtonFinder =
               find.byKey(WidgetKeys.returnDetailShowDetailButton);
           expect(showDetailButtonFinder, findsOneWidget);
@@ -312,7 +310,7 @@ void main() {
           await tester.pumpWidget(getScopedWidget());
           await tester.pump();
           expect(find.byType(ReturnItemCard), findsOneWidget);
-          expect(find.byType(CommonTileItem), findsOneWidget);
+          expect(find.byKey(WidgetKeys.returnItemKey), findsOneWidget);
           final showDetailButtonFinder =
               find.byKey(WidgetKeys.returnDetailShowDetailButton);
           expect(showDetailButtonFinder, findsOneWidget);
@@ -851,7 +849,7 @@ void main() {
                 bonusInformation: [
                   ReturnRequestInformation.empty().copyWith(
                     totalPrice: 200,
-                    returnQuantity: '1',
+                    returnQuantity: 1,
                   ),
                 ],
               ),
@@ -1225,28 +1223,12 @@ void main() {
           ),
           findsOne,
         );
-        final returnTile = find.byKey(
-          WidgetKeys.returnItemDetailMaterial(
-            marketplaceReturn.materialNumber.displayMatNo,
-            marketplaceReturn.returnQuantity,
-            StringUtils.displayPrice(
-              fakeMYSalesOrgConfigs,
-              marketplaceReturn.totalPrice,
-            ),
-          ),
-        );
+        final returnTile = find.byKey(WidgetKeys.returnItemKey);
         await tester.scrollUntilVisible(returnTile, 200);
         await tester.pump();
-        final batchAndExpString = tester
-            .widget<RichText>(
-              find.descendant(
-                of: returnTile,
-                matching: find.byKey(WidgetKeys.commonTileItemHeader),
-              ),
-            )
-            .text
-            .toPlainText();
-        expect(batchAndExpString, contains('Batch NA (Expires NA)'));
+        final batchAndExpString =
+            find.text('${'Batch'.tr()}: NA - ${'Expires'.tr()}: NA');
+        expect(batchAndExpString, findsOneWidget);
         await tester.tap(find.byKey(WidgetKeys.returnDetailShowDetailButton));
         await tester.pump();
         expect(

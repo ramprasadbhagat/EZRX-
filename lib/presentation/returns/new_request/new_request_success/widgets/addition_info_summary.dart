@@ -21,33 +21,39 @@ class _AdditionInfoSummary extends StatelessWidget {
             children: [
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  RichText(
-                    text: TextSpan(
-                      text: '${context.tr('Return')} ',
-                      style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                            color: ZPColors.white,
+                  Expanded(
+                    child: RichText(
+                      text: TextSpan(
+                        text: '${context.tr('Return')} ',
+                        style:
+                            Theme.of(context).textTheme.labelMedium?.copyWith(
+                                  color: ZPColors.white,
+                                ),
+                        children: [
+                          TextSpan(
+                            text: '#${state.returnRequestId}',
+                            style: Theme.of(context)
+                                .textTheme
+                                .labelMedium
+                                ?.copyWith(
+                                  color: ZPColors.white,
+                                ),
+                            recognizer: TapGestureRecognizer()
+                              ..onTap = () {
+                                context.read<ReturnDetailsByRequestBloc>().add(
+                                      ReturnDetailsByRequestEvent.fetch(
+                                        returnId: state.returnRequestId,
+                                      ),
+                                    );
+                                context.router.push(
+                                  const ReturnRequestDetailsRoute(),
+                                );
+                              },
                           ),
-                      children: [
-                        TextSpan(
-                          text: '#${state.returnRequestId}',
-                          style:
-                              Theme.of(context).textTheme.labelMedium?.copyWith(
-                                    color: ZPColors.white,
-                                  ),
-                          recognizer: TapGestureRecognizer()
-                            ..onTap = () {
-                              context.read<ReturnDetailsByRequestBloc>().add(
-                                    ReturnDetailsByRequestEvent.fetch(
-                                      returnId: state.returnRequestId,
-                                    ),
-                                  );
-                              context.router.push(
-                                const ReturnRequestDetailsRoute(),
-                              );
-                            },
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                   StatusLabel(

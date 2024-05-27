@@ -41,11 +41,9 @@ class ReturnOverrideInfoIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return IconButton(
+    return InkWell(
       key: WidgetKeys.returnSummaryInfoIcon(header),
-      padding: EdgeInsets.zero,
-      constraints: const BoxConstraints(),
-      onPressed: () {
+      onTap: () {
         showModalBottomSheet(
           context: context,
           enableDrag: false,
@@ -60,9 +58,34 @@ class ReturnOverrideInfoIcon extends StatelessWidget {
           },
         );
       },
-      icon: const Icon(
-        Icons.info,
-        size: 18,
+      child: Container(
+        padding: const EdgeInsets.symmetric(vertical: 2, horizontal: 6),
+        decoration: BoxDecoration(
+          color: ZPColors.nextDiscountBG,
+          borderRadius: BorderRadius.circular(12),
+        ),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const Padding(
+              padding: EdgeInsets.only(right: 4.0),
+              child: Icon(
+                Icons.update,
+                size: 14,
+                color: ZPColors.nextTextBg,
+              ),
+            ),
+            Flexible(
+              child: Text(
+                context.tr('Approver updated'),
+                style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                      color: ZPColors.nextTextBg,
+                      fontSize: 10,
+                    ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

@@ -192,7 +192,7 @@ class WidgetKeys {
   static const Key eZPointTile = Key('eZPointTile');
   static const Key returnsTile = Key('returnsTile');
   static const Key returnReviewItemKey = Key('returnReviewItemKey');
-  static const Key returnSuccessfulItemKey = Key('returnReviewItemKey');
+  static const Key returnItemKey = Key('returnItemKey');
   static const Key orderTile = Key('orderTile');
   static const Key securityTile = Key('securityTile');
   static const Key notificationTile = Key('notificationTile');
