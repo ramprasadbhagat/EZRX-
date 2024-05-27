@@ -257,13 +257,20 @@ class CartState with _$CartState {
       totalMaterialsPriceWithTax +
       totalComboPriceWithTax;
 
-  //This getter is used for displaying grandTotal value in
-  //cart, checkout page and for Order Submission
-  double get grandTotalHidePriceMaterial => _isID
+  //This getter is used for submit order API
+  double get grandTotalForSubmission => _isID
       ? aplSimulatorOrder.grandTotal
       : totalBundlePriceWithTax +
           totalComboPriceWithTax +
           totalMaterialsPriceHidePriceWithTax;
+
+  //This getter is used for displaying grandTotal value in cart, checkout page
+  double grandTotalDisplayed({double smallOrderFee = 0}) => _isID
+      ? aplSimulatorOrder.grandTotal
+      : totalBundlePriceWithTax +
+          totalComboPriceWithTax +
+          totalMaterialsPriceHidePriceWithTax +
+          smallOrderFee;
 
   //This getter is used for displaying subtotal value in
   // cart and for Order Submission
@@ -280,17 +287,6 @@ class CartState with _$CartState {
   double get checkoutSubTotalHidePriceMaterial => _isID
       ? aplSimulatorOrder.totalPriceWithoutTax
       : subTotalHidePriceMaterial;
-
-  bool get isOOSOrderPresent =>
-      cartProducts.any((element) => element.isAnyOOSItemPresentInCart);
-
-  bool get isBundleQuantitySatisfies => cartProducts
-      .where((element) => element.materialInfo.type.typeBundle)
-      .map((e) => e.bundle)
-      .every(
-        (element) =>
-            element.totalQty >= element.minimumQuantityBundleMaterial.quantity,
-      );
 
   double get materialLevelFinalPriceWithTaxForFullTax => cartProducts
       .where(
@@ -330,11 +326,6 @@ class CartState with _$CartState {
 
     return taxPercent;
   }
-
-  bool isEligibleForCheckout(bool isOOSOrderEligibleToProceed) =>
-      ((isOOSOrderPresent && isOOSOrderEligibleToProceed) ||
-          !isOOSOrderPresent) &&
-      isBundleQuantitySatisfies;
 
   bool get priceUnderLoadingShimmer =>
       isUpserting || isUpdatingStock || isMappingPrice;

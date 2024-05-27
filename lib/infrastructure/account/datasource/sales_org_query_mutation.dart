@@ -104,7 +104,11 @@ class SalesOrgQueryMutation {
     displaySubtotalTaxBreakdown
     enableComboDeals
     comboDealsUserRole
-    ${enableMarketPlace ? 'enableMarketPlace \n mpMinOrderAmount' : ''}
+    enableSmallOrderFee 
+    smallOrderFeeUserRoles 
+    smallOrderFee 
+    movThreshold
+    ${enableMarketPlace ? 'enableMarketPlace \nmpMinOrderAmount \nenableMPSmallOrderFee \nmpSmallOrderFeeUserRoles \nmpSmallOrderFee \nmpMovThreshold' : ''}
     ${enableAccountStatementQuery ? 'statementOfAccountEnabled' : ''}
   }
 }

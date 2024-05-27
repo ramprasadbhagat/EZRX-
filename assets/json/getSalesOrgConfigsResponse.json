@@ -83,7 +83,22 @@
             "mpMinOrderAmount": "0.0",
             "statementOfAccountEnabled": false,
             "enableComboDeals": true,
-            "comboDealsUserRole": 1
+            "comboDealsUserRole": 1,
+            "enableSmallOrderFee": true,
+            "smallOrderFeeUserRoles": [ 
+               "Client User",
+               "Client Admin",
+               "External Sales Rep"
+            ],
+            "smallOrderFee": 20.56,
+            "movThreshold": 300.50,
+            "enableMPSmallOrderFee": true,
+            "mpSmallOrderFeeUserRoles": [
+               "Client User",
+               "Client Admin"
+            ],
+            "mpSmallOrderFee": 10,
+            "mpMovThreshold": 200
          }
       ]
    }

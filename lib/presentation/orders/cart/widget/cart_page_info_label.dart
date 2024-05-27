@@ -66,6 +66,16 @@ class _CartPageInfoLabel extends StatelessWidget {
                         ),
                         showLeadingIcon: state.hasMultipleErrors,
                       ),
+                    if (state.displayAtLeastOneItemInStockWarning)
+                      _ErrorText(
+                        text: context.tr(
+                          context
+                              .read<EligibilityBloc>()
+                              .state
+                              .atLeastOneStockItemInStockMessage,
+                        ),
+                        showLeadingIcon: state.hasMultipleErrors,
+                      ),
                   ],
                 ),
               )

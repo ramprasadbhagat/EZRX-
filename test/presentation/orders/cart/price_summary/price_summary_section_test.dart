@@ -1,5 +1,5 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:bloc_test/bloc_test.dart';
+import 'package:ezrxmobile/application/order/order_eligibility/order_eligibility_bloc.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/order/entities/apl_simulator_order.dart';
 import 'package:ezrxmobile/domain/order/entities/combo_material_item.dart';
@@ -20,18 +20,13 @@ import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 
+import '../../../../common_mock_data/mock_bloc.dart';
+import '../../../../common_mock_data/mock_other.dart';
 import '../../../../common_mock_data/sales_org_config_mock/fake_id_sales_org_config.dart';
 import '../../../../common_mock_data/sales_org_config_mock/fake_kh_sales_org_config.dart';
 import '../../../../common_mock_data/sales_org_config_mock/fake_my_sales_org_config.dart';
 import '../../../../common_mock_data/sales_organsiation_mock.dart';
 import '../../../../utils/widget_utils.dart';
-
-class EligibilityBlocMock extends MockBloc<EligibilityEvent, EligibilityState>
-    implements EligibilityBloc {}
-
-class CartBlocMock extends MockBloc<CartEvent, CartState> implements CartBloc {}
-
-class MockAppRouter extends Mock implements AppRouter {}
 
 class MaterialPageXMock extends Mock implements MaterialPageX {}
 
@@ -40,6 +35,7 @@ class CartStateMock extends Mock implements CartState {}
 void main() {
   late EligibilityBloc eligibilityBloc;
   late CartBloc cartBloc;
+  late OrderEligibilityBloc orderEligibilityBloc;
   late AppRouter autoRouter;
   const listPrice = 123.0;
   const finalPrice = 99.32;
@@ -63,7 +59,7 @@ void main() {
   setUpAll(() async {
     WidgetsFlutterBinding.ensureInitialized();
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.mock);
-    locator.registerFactory<AppRouter>(() => MockAppRouter());
+    locator.registerFactory<AppRouter>(() => AutoRouteMock());
     autoRouter = locator<AppRouter>();
     mockCartBundleItems = await CartLocalDataSource().upsertCartItems();
     cartItemMock =
@@ -89,14 +85,17 @@ void main() {
     () {
       cartBloc = CartBlocMock();
       eligibilityBloc = EligibilityBlocMock();
+      orderEligibilityBloc = OrderEligibilityBlocMock();
       cartStateMock = CartStateMock();
       when(() => cartBloc.state).thenReturn(CartState.initial());
+      when(() => orderEligibilityBloc.state)
+          .thenReturn(OrderEligibilityState.initial());
       when(() => eligibilityBloc.state).thenReturn(EligibilityState.initial());
       when(() => autoRouter.current).thenReturn(fakeRouteData(''));
       when(() => cartStateMock.cartProducts).thenReturn([]);
       when(() => cartStateMock.checkoutSubTotalHidePriceMaterial).thenReturn(0);
       when(() => cartStateMock.subTotalHidePriceMaterial).thenReturn(0);
-      when(() => cartStateMock.grandTotalHidePriceMaterial).thenReturn(0);
+      when(() => cartStateMock.grandTotalDisplayed()).thenReturn(0);
       when(() => cartStateMock.checkoutTotalSaving).thenReturn(0);
       when(() => cartStateMock.cartTotalSaving).thenReturn(0);
       when(() => cartStateMock.salesOrganisation)
@@ -111,6 +110,9 @@ void main() {
       providers: [
         BlocProvider<EligibilityBloc>(create: (context) => eligibilityBloc),
         BlocProvider<CartBloc>(create: (context) => cartBloc),
+        BlocProvider<OrderEligibilityBloc>(
+          create: (context) => orderEligibilityBloc,
+        ),
       ],
       child: PriceSummarySection(cartState: state),
     );

@@ -21,8 +21,6 @@ class _CheckoutFooterSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final eligibilityState = context.read<EligibilityBloc>().state;
-
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
@@ -51,24 +49,22 @@ class _CheckoutFooterSection extends StatelessWidget {
                   previous.focusTo != current.focusTo,
               listener: (context, state) {
                 if (state.isValidated) {
+                  final cartState = context.read<CartBloc>().state;
+                  final orderEligibilityState =
+                      context.read<OrderEligibilityBloc>().state;
                   context.read<OrderSummaryBloc>().add(
                         OrderSummaryEvent.submitOrder(
-                          cartProducts:
-                              context.read<CartBloc>().state.cartProducts,
-                          grandTotal: context
-                              .read<CartBloc>()
-                              .state
-                              .grandTotalHidePriceMaterial,
-                          orderValue: context
-                              .read<CartBloc>()
-                              .state
-                              .checkoutSubTotalHidePriceMaterial,
-                          smallOrderFee: context
-                              .read<CartBloc>()
-                              .state
-                              .aplSimulatorOrder
-                              .smallOrderFee,
-                          totalTax: context.read<CartBloc>().state.totalTax,
+                          cartProducts: cartState.cartProducts,
+                          grandTotal: cartState.grandTotalForSubmission,
+                          orderValue:
+                              cartState.checkoutSubTotalHidePriceMaterial,
+                          aplSmallOrderFee:
+                              cartState.aplSimulatorOrder.smallOrderFee,
+                          mpSmallOrderFee:
+                              orderEligibilityState.mpSmallOrderFee,
+                          zpSmallOrderFee:
+                              orderEligibilityState.zpSmallOrderFee,
+                          totalTax: cartState.totalTax,
                           data: context
                               .read<AdditionalDetailsBloc>()
                               .state
@@ -156,14 +152,7 @@ class _CheckoutFooterSection extends StatelessWidget {
                           child: ElevatedButton(
                             key: WidgetKeys.checkoutButton,
                             onPressed: state.isSubmitting ||
-                                    cartState.isCartDetailsFetching ||
-                                    !context
-                                        .read<CartBloc>()
-                                        .state
-                                        .isEligibleForCheckout(
-                                          !eligibilityState
-                                              .doNotAllowOutOfStockMaterials,
-                                        )
+                                    cartState.isCartDetailsFetching
                                 ? null
                                 : () {
                                     FocusScope.of(context)

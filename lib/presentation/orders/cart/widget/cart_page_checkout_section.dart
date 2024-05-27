@@ -163,8 +163,7 @@ class _CartPageCheckoutButton extends StatelessWidget {
     ).then(
       (value) {
         if (value == null) return;
-        _callApiForId(context, cartState);
-        context.router.pushNamed('orders/cart/checkout');
+        _navigateToCheckout(context, cartState);
       },
     );
   }
@@ -178,11 +177,12 @@ class _CartPageCheckoutButton extends StatelessWidget {
       trackMixpanelEvent(
         TrackingEvents.checkoutSuccess,
         props: {
-          TrackingProps.grandTotal: cartState.grandTotalHidePriceMaterial,
+          TrackingProps.grandTotal: cartState.grandTotalForSubmission,
           TrackingProps.totalQty: cartState.totalCartCount,
         },
       );
-      if (cartState.showSmallOrderFeeBottomSheet) {
+      if (cartState.showSmallOrderFeeBottomSheet ||
+          orderEligibilityState.smallOrderFee > 0) {
         final agreeToSmallOrderFee =
             await _showAgreeToSmallOrderFeeModal(context: context);
         if (agreeToSmallOrderFee == null || !context.mounted) return;
@@ -192,14 +192,13 @@ class _CartPageCheckoutButton extends StatelessWidget {
       if (preOrderItemExist) {
         _showPreOrderModal(context: context);
       } else {
-        _callApiForId(context, cartState);
-        await context.router.pushNamed('orders/cart/checkout');
+        _navigateToCheckout(context, cartState);
       }
     } else {
       trackMixpanelEvent(
         TrackingEvents.checkoutFailure,
         props: {
-          TrackingProps.grandTotal: cartState.grandTotalHidePriceMaterial,
+          TrackingProps.grandTotal: cartState.grandTotalForSubmission,
           TrackingProps.totalQty: cartState.totalCartCount,
           TrackingProps.errorMessage:
               orderEligibilityState.orderEligibleTrackingErrorMessage,
@@ -213,11 +212,12 @@ class _CartPageCheckoutButton extends StatelessWidget {
     }
   }
 
-  void _callApiForId(BuildContext context, CartState cartState) {
+  void _navigateToCheckout(BuildContext context, CartState cartState) {
     if (cartState.salesOrganisation.salesOrg.isID) {
       context.read<CartBloc>().add(
             const CartEvent.updatePriceForIdMarket(),
           );
     }
+    context.router.pushNamed('orders/cart/checkout');
   }
 }

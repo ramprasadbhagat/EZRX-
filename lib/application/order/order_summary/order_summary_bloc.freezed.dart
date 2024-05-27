@@ -30,7 +30,9 @@ mixin _$OrderSummaryEvent {
             List<PriceAggregate> cartProducts,
             double grandTotal,
             double orderValue,
-            double smallOrderFee,
+            double aplSmallOrderFee,
+            double zpSmallOrderFee,
+            double mpSmallOrderFee,
             double totalTax,
             DeliveryInfoData data)
         submitOrder,
@@ -56,7 +58,9 @@ mixin _$OrderSummaryEvent {
             List<PriceAggregate> cartProducts,
             double grandTotal,
             double orderValue,
-            double smallOrderFee,
+            double aplSmallOrderFee,
+            double zpSmallOrderFee,
+            double mpSmallOrderFee,
             double totalTax,
             DeliveryInfoData data)?
         submitOrder,
@@ -82,7 +86,9 @@ mixin _$OrderSummaryEvent {
             List<PriceAggregate> cartProducts,
             double grandTotal,
             double orderValue,
-            double smallOrderFee,
+            double aplSmallOrderFee,
+            double zpSmallOrderFee,
+            double mpSmallOrderFee,
             double totalTax,
             DeliveryInfoData data)?
         submitOrder,
@@ -335,7 +341,9 @@ class _$_Initialized implements _Initialized {
             List<PriceAggregate> cartProducts,
             double grandTotal,
             double orderValue,
-            double smallOrderFee,
+            double aplSmallOrderFee,
+            double zpSmallOrderFee,
+            double mpSmallOrderFee,
             double totalTax,
             DeliveryInfoData data)
         submitOrder,
@@ -365,7 +373,9 @@ class _$_Initialized implements _Initialized {
             List<PriceAggregate> cartProducts,
             double grandTotal,
             double orderValue,
-            double smallOrderFee,
+            double aplSmallOrderFee,
+            double zpSmallOrderFee,
+            double mpSmallOrderFee,
             double totalTax,
             DeliveryInfoData data)?
         submitOrder,
@@ -395,7 +405,9 @@ class _$_Initialized implements _Initialized {
             List<PriceAggregate> cartProducts,
             double grandTotal,
             double orderValue,
-            double smallOrderFee,
+            double aplSmallOrderFee,
+            double zpSmallOrderFee,
+            double mpSmallOrderFee,
             double totalTax,
             DeliveryInfoData data)?
         submitOrder,
@@ -487,7 +499,9 @@ abstract class _$$_SubmitOrderCopyWith<$Res> {
       {List<PriceAggregate> cartProducts,
       double grandTotal,
       double orderValue,
-      double smallOrderFee,
+      double aplSmallOrderFee,
+      double zpSmallOrderFee,
+      double mpSmallOrderFee,
       double totalTax,
       DeliveryInfoData data});
 
@@ -508,7 +522,9 @@ class __$$_SubmitOrderCopyWithImpl<$Res>
     Object? cartProducts = null,
     Object? grandTotal = null,
     Object? orderValue = null,
-    Object? smallOrderFee = null,
+    Object? aplSmallOrderFee = null,
+    Object? zpSmallOrderFee = null,
+    Object? mpSmallOrderFee = null,
     Object? totalTax = null,
     Object? data = null,
   }) {
@@ -525,9 +541,17 @@ class __$$_SubmitOrderCopyWithImpl<$Res>
           ? _value.orderValue
           : orderValue // ignore: cast_nullable_to_non_nullable
               as double,
-      smallOrderFee: null == smallOrderFee
-          ? _value.smallOrderFee
-          : smallOrderFee // ignore: cast_nullable_to_non_nullable
+      aplSmallOrderFee: null == aplSmallOrderFee
+          ? _value.aplSmallOrderFee
+          : aplSmallOrderFee // ignore: cast_nullable_to_non_nullable
+              as double,
+      zpSmallOrderFee: null == zpSmallOrderFee
+          ? _value.zpSmallOrderFee
+          : zpSmallOrderFee // ignore: cast_nullable_to_non_nullable
+              as double,
+      mpSmallOrderFee: null == mpSmallOrderFee
+          ? _value.mpSmallOrderFee
+          : mpSmallOrderFee // ignore: cast_nullable_to_non_nullable
               as double,
       totalTax: null == totalTax
           ? _value.totalTax
@@ -556,7 +580,9 @@ class _$_SubmitOrder implements _SubmitOrder {
       {required final List<PriceAggregate> cartProducts,
       required this.grandTotal,
       required this.orderValue,
-      required this.smallOrderFee,
+      required this.aplSmallOrderFee,
+      required this.zpSmallOrderFee,
+      required this.mpSmallOrderFee,
       required this.totalTax,
       required this.data})
       : _cartProducts = cartProducts;
@@ -574,7 +600,11 @@ class _$_SubmitOrder implements _SubmitOrder {
   @override
   final double orderValue;
   @override
-  final double smallOrderFee;
+  final double aplSmallOrderFee;
+  @override
+  final double zpSmallOrderFee;
+  @override
+  final double mpSmallOrderFee;
   @override
   final double totalTax;
   @override
@@ -582,7 +612,7 @@ class _$_SubmitOrder implements _SubmitOrder {
 
   @override
   String toString() {
-    return 'OrderSummaryEvent.submitOrder(cartProducts: $cartProducts, grandTotal: $grandTotal, orderValue: $orderValue, smallOrderFee: $smallOrderFee, totalTax: $totalTax, data: $data)';
+    return 'OrderSummaryEvent.submitOrder(cartProducts: $cartProducts, grandTotal: $grandTotal, orderValue: $orderValue, aplSmallOrderFee: $aplSmallOrderFee, zpSmallOrderFee: $zpSmallOrderFee, mpSmallOrderFee: $mpSmallOrderFee, totalTax: $totalTax, data: $data)';
   }
 
   @override
@@ -596,8 +626,12 @@ class _$_SubmitOrder implements _SubmitOrder {
                 other.grandTotal == grandTotal) &&
             (identical(other.orderValue, orderValue) ||
                 other.orderValue == orderValue) &&
-            (identical(other.smallOrderFee, smallOrderFee) ||
-                other.smallOrderFee == smallOrderFee) &&
+            (identical(other.aplSmallOrderFee, aplSmallOrderFee) ||
+                other.aplSmallOrderFee == aplSmallOrderFee) &&
+            (identical(other.zpSmallOrderFee, zpSmallOrderFee) ||
+                other.zpSmallOrderFee == zpSmallOrderFee) &&
+            (identical(other.mpSmallOrderFee, mpSmallOrderFee) ||
+                other.mpSmallOrderFee == mpSmallOrderFee) &&
             (identical(other.totalTax, totalTax) ||
                 other.totalTax == totalTax) &&
             (identical(other.data, data) || other.data == data));
@@ -609,7 +643,9 @@ class _$_SubmitOrder implements _SubmitOrder {
       const DeepCollectionEquality().hash(_cartProducts),
       grandTotal,
       orderValue,
-      smallOrderFee,
+      aplSmallOrderFee,
+      zpSmallOrderFee,
+      mpSmallOrderFee,
       totalTax,
       data);
 
@@ -634,7 +670,9 @@ class _$_SubmitOrder implements _SubmitOrder {
             List<PriceAggregate> cartProducts,
             double grandTotal,
             double orderValue,
-            double smallOrderFee,
+            double aplSmallOrderFee,
+            double zpSmallOrderFee,
+            double mpSmallOrderFee,
             double totalTax,
             DeliveryInfoData data)
         submitOrder,
@@ -645,8 +683,8 @@ class _$_SubmitOrder implements _SubmitOrder {
         confirmedOrderStockInfo,
     required TResult Function(bool isExpanded) updateIsExpanded,
   }) {
-    return submitOrder(
-        cartProducts, grandTotal, orderValue, smallOrderFee, totalTax, data);
+    return submitOrder(cartProducts, grandTotal, orderValue, aplSmallOrderFee,
+        zpSmallOrderFee, mpSmallOrderFee, totalTax, data);
   }
 
   @override
@@ -664,7 +702,9 @@ class _$_SubmitOrder implements _SubmitOrder {
             List<PriceAggregate> cartProducts,
             double grandTotal,
             double orderValue,
-            double smallOrderFee,
+            double aplSmallOrderFee,
+            double zpSmallOrderFee,
+            double mpSmallOrderFee,
             double totalTax,
             DeliveryInfoData data)?
         submitOrder,
@@ -675,8 +715,8 @@ class _$_SubmitOrder implements _SubmitOrder {
         confirmedOrderStockInfo,
     TResult? Function(bool isExpanded)? updateIsExpanded,
   }) {
-    return submitOrder?.call(
-        cartProducts, grandTotal, orderValue, smallOrderFee, totalTax, data);
+    return submitOrder?.call(cartProducts, grandTotal, orderValue,
+        aplSmallOrderFee, zpSmallOrderFee, mpSmallOrderFee, totalTax, data);
   }
 
   @override
@@ -694,7 +734,9 @@ class _$_SubmitOrder implements _SubmitOrder {
             List<PriceAggregate> cartProducts,
             double grandTotal,
             double orderValue,
-            double smallOrderFee,
+            double aplSmallOrderFee,
+            double zpSmallOrderFee,
+            double mpSmallOrderFee,
             double totalTax,
             DeliveryInfoData data)?
         submitOrder,
@@ -707,8 +749,8 @@ class _$_SubmitOrder implements _SubmitOrder {
     required TResult orElse(),
   }) {
     if (submitOrder != null) {
-      return submitOrder(
-          cartProducts, grandTotal, orderValue, smallOrderFee, totalTax, data);
+      return submitOrder(cartProducts, grandTotal, orderValue, aplSmallOrderFee,
+          zpSmallOrderFee, mpSmallOrderFee, totalTax, data);
     }
     return orElse();
   }
@@ -761,14 +803,18 @@ abstract class _SubmitOrder implements OrderSummaryEvent {
       {required final List<PriceAggregate> cartProducts,
       required final double grandTotal,
       required final double orderValue,
-      required final double smallOrderFee,
+      required final double aplSmallOrderFee,
+      required final double zpSmallOrderFee,
+      required final double mpSmallOrderFee,
       required final double totalTax,
       required final DeliveryInfoData data}) = _$_SubmitOrder;
 
   List<PriceAggregate> get cartProducts;
   double get grandTotal;
   double get orderValue;
-  double get smallOrderFee;
+  double get aplSmallOrderFee;
+  double get zpSmallOrderFee;
+  double get mpSmallOrderFee;
   double get totalTax;
   DeliveryInfoData get data;
   @JsonKey(ignore: true)
@@ -863,7 +909,9 @@ class _$_OrderConfirmationDetail implements _OrderConfirmationDetail {
             List<PriceAggregate> cartProducts,
             double grandTotal,
             double orderValue,
-            double smallOrderFee,
+            double aplSmallOrderFee,
+            double zpSmallOrderFee,
+            double mpSmallOrderFee,
             double totalTax,
             DeliveryInfoData data)
         submitOrder,
@@ -892,7 +940,9 @@ class _$_OrderConfirmationDetail implements _OrderConfirmationDetail {
             List<PriceAggregate> cartProducts,
             double grandTotal,
             double orderValue,
-            double smallOrderFee,
+            double aplSmallOrderFee,
+            double zpSmallOrderFee,
+            double mpSmallOrderFee,
             double totalTax,
             DeliveryInfoData data)?
         submitOrder,
@@ -921,7 +971,9 @@ class _$_OrderConfirmationDetail implements _OrderConfirmationDetail {
             List<PriceAggregate> cartProducts,
             double grandTotal,
             double orderValue,
-            double smallOrderFee,
+            double aplSmallOrderFee,
+            double zpSmallOrderFee,
+            double mpSmallOrderFee,
             double totalTax,
             DeliveryInfoData data)?
         submitOrder,
@@ -1102,7 +1154,9 @@ class _$_ConfirmedOrderStockInfo implements _ConfirmedOrderStockInfo {
             List<PriceAggregate> cartProducts,
             double grandTotal,
             double orderValue,
-            double smallOrderFee,
+            double aplSmallOrderFee,
+            double zpSmallOrderFee,
+            double mpSmallOrderFee,
             double totalTax,
             DeliveryInfoData data)
         submitOrder,
@@ -1131,7 +1185,9 @@ class _$_ConfirmedOrderStockInfo implements _ConfirmedOrderStockInfo {
             List<PriceAggregate> cartProducts,
             double grandTotal,
             double orderValue,
-            double smallOrderFee,
+            double aplSmallOrderFee,
+            double zpSmallOrderFee,
+            double mpSmallOrderFee,
             double totalTax,
             DeliveryInfoData data)?
         submitOrder,
@@ -1161,7 +1217,9 @@ class _$_ConfirmedOrderStockInfo implements _ConfirmedOrderStockInfo {
             List<PriceAggregate> cartProducts,
             double grandTotal,
             double orderValue,
-            double smallOrderFee,
+            double aplSmallOrderFee,
+            double zpSmallOrderFee,
+            double mpSmallOrderFee,
             double totalTax,
             DeliveryInfoData data)?
         submitOrder,
@@ -1312,7 +1370,9 @@ class _$_updateIsExpanded implements _updateIsExpanded {
             List<PriceAggregate> cartProducts,
             double grandTotal,
             double orderValue,
-            double smallOrderFee,
+            double aplSmallOrderFee,
+            double zpSmallOrderFee,
+            double mpSmallOrderFee,
             double totalTax,
             DeliveryInfoData data)
         submitOrder,
@@ -1341,7 +1401,9 @@ class _$_updateIsExpanded implements _updateIsExpanded {
             List<PriceAggregate> cartProducts,
             double grandTotal,
             double orderValue,
-            double smallOrderFee,
+            double aplSmallOrderFee,
+            double zpSmallOrderFee,
+            double mpSmallOrderFee,
             double totalTax,
             DeliveryInfoData data)?
         submitOrder,
@@ -1370,7 +1432,9 @@ class _$_updateIsExpanded implements _updateIsExpanded {
             List<PriceAggregate> cartProducts,
             double grandTotal,
             double orderValue,
-            double smallOrderFee,
+            double aplSmallOrderFee,
+            double zpSmallOrderFee,
+            double mpSmallOrderFee,
             double totalTax,
             DeliveryInfoData data)?
         submitOrder,

@@ -48,6 +48,8 @@ class SmallOrderFeeModal extends StatelessWidget {
               padding: const EdgeInsets.only(top: 16, bottom: 24),
               child: PriceSummarySection(
                 cartState: context.read<CartBloc>().state,
+                titleStyle: Theme.of(context).textTheme.labelMedium,
+                titleSpacing: 10,
               ),
             ),
             Row(
@@ -68,7 +70,7 @@ class SmallOrderFeeModal extends StatelessWidget {
                     key: WidgetKeys.smallOrderFeeModalAgreeButton,
                     onPressed: () => context.router.pop(true),
                     child: Text(
-                      'Agree'.tr(),
+                      context.tr('Agree'),
                       style: const TextStyle(color: ZPColors.white),
                     ),
                   ),

@@ -2,8 +2,10 @@ import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
+import 'package:ezrxmobile/application/order/order_eligibility/order_eligibility_bloc.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/utils/string_utils.dart';
+import 'package:ezrxmobile/presentation/core/info_label.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
 import 'package:ezrxmobile/presentation/core/responsive.dart';
@@ -14,6 +16,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 part 'package:ezrxmobile/presentation/orders/cart/price_summary/price_summary_section.dart';
+part 'package:ezrxmobile/presentation/orders/cart/price_summary/price_summary_small_order_fee.dart';
 
 class PriceSummaryTile extends StatelessWidget {
   final CartState cartState;
@@ -50,7 +53,14 @@ class PriceSummaryTile extends StatelessWidget {
                   key: WidgetKeys.priceSummaryGrandTotal,
                   salesOrgConfig:
                       context.read<EligibilityBloc>().state.salesOrgConfigs,
-                  price: cartState.grandTotalHidePriceMaterial.toString(),
+                  price: cartState
+                      .grandTotalDisplayed(
+                        smallOrderFee: context
+                            .read<OrderEligibilityBloc>()
+                            .state
+                            .smallOrderFee,
+                      )
+                      .toString(),
                   title: '${context.tr('Grand total')}: ',
                   priceLabelStyle:
                       Theme.of(context).textTheme.titleSmall?.copyWith(

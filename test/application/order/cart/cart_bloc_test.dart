@@ -4083,7 +4083,7 @@ void main() {
             cartProducts: [priceAggregates.first.copyWith(price: prices.first)],
           );
           expect(
-            cartBlocState.grandTotalHidePriceMaterial,
+            cartBlocState.grandTotalForSubmission,
             273.6,
           );
         },
@@ -4137,18 +4137,6 @@ void main() {
               materialNumber: bundleItem.bundle.materials.first.materialNumber,
             ),
             10,
-          );
-        },
-      );
-      test(
-        'Testing CartBloc state isBundleQuantitySatisfies',
-        () {
-          final cartBlocState = CartState.initial().copyWith(
-            cartProducts: [bundleItem],
-          );
-          expect(
-            cartBlocState.isBundleQuantitySatisfies,
-            true,
           );
         },
       );
@@ -4326,21 +4314,6 @@ void main() {
       );
 
       test(
-        'Testing CartBloc state showDialog isOOSOrderPresent ',
-        () {
-          final cartBlocState = CartState.initial().copyWith(
-            cartProducts: [
-              priceAggregates.first,
-            ],
-          );
-          expect(
-            cartBlocState.isOOSOrderPresent,
-            true,
-          );
-        },
-      );
-
-      test(
         'Testing CartBloc state showDialog updatedCartProduct ',
         () {
           final cartBlocState = CartState.initial().copyWith(
@@ -4366,56 +4339,6 @@ void main() {
         },
       );
 
-      test(
-        'Testing CartBloc state showDialog isEligibleForCheckout bundle',
-        () {
-          final cartBlocState = CartState.initial().copyWith(
-            cartProducts: [
-              bundleItem.copyWith(
-                bundle: bundleItem.bundle.copyWith(
-                  materials: bundleItem.bundle.materials
-                      .map((e) => e.copyWith(quantity: MaterialQty(5)))
-                      .toList(),
-                ),
-              ),
-            ],
-          );
-          expect(
-            cartBlocState.isEligibleForCheckout(true),
-            true,
-          );
-        },
-      );
-
-      test(
-        'Testing CartBloc state showDialog isEligibleForCheckout bundle in stock',
-        () {
-          final cartBlocState = CartState.initial().copyWith(
-            cartProducts: [
-              bundleItem.copyWith(
-                bundle: bundleItem.bundle.copyWith(
-                  materials: bundleItem.bundle.materials
-                      .map(
-                        (e) => e.copyWith(
-                          quantity: MaterialQty(5),
-                          stockInfos: [
-                            StockInfo.empty().copyWith(
-                              inStock: MaterialInStock('Yes'),
-                            ),
-                          ],
-                        ),
-                      )
-                      .toList(),
-                ),
-              ),
-            ],
-          );
-          expect(
-            cartBlocState.isEligibleForCheckout(true),
-            true,
-          );
-        },
-      );
       test(
         'Testing CartBloc state showDialog totalTaxPercent',
         () {
@@ -4637,7 +4560,7 @@ void main() {
             ],
           );
           expect(
-            cartBlocState.grandTotalHidePriceMaterial,
+            cartBlocState.grandTotalForSubmission,
             273.6,
           );
         },

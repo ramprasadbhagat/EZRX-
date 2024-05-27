@@ -233,6 +233,11 @@ extension PriceAggregateExtension on List<PriceAggregate> {
             previousValue + element.comboSubTotalExclTax,
       );
 
+  // Used for validating small order fee
+  // Small order fee will be applied if subtotal of all in-stock items in cart < SAP MOV
+  double get subtotalWithInStockOnly =>
+      fold<double>(0, (sum, e) => sum + e.totalPriceWithInStockOnly);
+
   List<PriceAggregate> get sortToDisplay => toList()
     ..sort(
       (a, b) => b.materialInfo.type.sortPriority

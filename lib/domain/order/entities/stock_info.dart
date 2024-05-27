@@ -66,3 +66,7 @@ class StockInfo with _$StockInfo {
   bool get displayPreOrderLabel =>
       this != StockInfo.empty() && !inStock.isMaterialInStock;
 }
+
+extension StockInfoListExtension on List<StockInfo> {
+  bool get inStock => any((e) => e.inStock.isMaterialInStock);
+}

@@ -130,44 +130,6 @@ void main() {
       expect(modifiedState.isBundleQuantitySatisfies, false);
     });
 
-    test(' => getTotalQuantityOfProductBundle should return correct value', () {
-      final modifiedState = initializedState.copyWith(
-        cartItems: [
-          fakeCartItem.copyWith(
-            materialInfo: MaterialInfo.empty().copyWith(
-              type: MaterialInfoType('bundle'),
-            ),
-            bundle: Bundle.empty().copyWith(
-              bundleCode: 'test-code',
-              materials: [
-                MaterialInfo.empty().copyWith(
-                  quantity: MaterialQty(1),
-                ),
-              ],
-            ),
-            stockInfoList: [StockInfo.empty()],
-          ),
-        ],
-        showErrorMessage: true,
-      );
-
-      // getTotalQuantityOfProductBundle return value
-      expect(
-        modifiedState.getTotalQuantityOfProductBundle(
-          bundleCode: 'test-code',
-        ),
-        1,
-      );
-
-      // getTotalQuantityOfProductBundle return value
-      expect(
-        modifiedState.getTotalQuantityOfProductBundle(
-          bundleCode: 'wrong-test-code',
-        ),
-        0,
-      );
-    });
-
     test(' => isOOSOrderAllowedToSubmit should return correct value', () {
       // isOOSOrderAllowedToSubmit is false
       expect(

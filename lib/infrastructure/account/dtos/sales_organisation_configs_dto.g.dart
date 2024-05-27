@@ -91,6 +91,21 @@ _$_SalesOrganisationConfigsDto _$$_SalesOrganisationConfigsDtoFromJson(
               .fromJson(json['mpMinOrderAmount'] as String),
       statementOfAccountEnabled:
           json['statementOfAccountEnabled'] as bool? ?? false,
+      enableSmallOrderFee: json['enableSmallOrderFee'] as bool? ?? false,
+      smallOrderFeeUserRoles: (json['smallOrderFeeUserRoles'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          [],
+      smallOrderFee: (json['smallOrderFee'] as num?)?.toDouble() ?? 0.0,
+      movThreshold: (json['movThreshold'] as num?)?.toDouble() ?? 0.0,
+      enableMPSmallOrderFee: json['enableMPSmallOrderFee'] as bool? ?? false,
+      mpSmallOrderFeeUserRoles:
+          (json['mpSmallOrderFeeUserRoles'] as List<dynamic>?)
+                  ?.map((e) => e as String)
+                  .toList() ??
+              [],
+      mpSmallOrderFee: (json['mpSmallOrderFee'] as num?)?.toDouble() ?? 0.0,
+      mpMovThreshold: (json['mpMovThreshold'] as num?)?.toDouble() ?? 0.0,
     );
 
 Map<String, dynamic> _$$_SalesOrganisationConfigsDtoToJson(
@@ -163,4 +178,12 @@ Map<String, dynamic> _$$_SalesOrganisationConfigsDtoToJson(
       'mpMinOrderAmount':
           const StringToDoubleConverter().toJson(instance.mpMinOrderAmount),
       'statementOfAccountEnabled': instance.statementOfAccountEnabled,
+      'enableSmallOrderFee': instance.enableSmallOrderFee,
+      'smallOrderFeeUserRoles': instance.smallOrderFeeUserRoles,
+      'smallOrderFee': instance.smallOrderFee,
+      'movThreshold': instance.movThreshold,
+      'enableMPSmallOrderFee': instance.enableMPSmallOrderFee,
+      'mpSmallOrderFeeUserRoles': instance.mpSmallOrderFeeUserRoles,
+      'mpSmallOrderFee': instance.mpSmallOrderFee,
+      'mpMovThreshold': instance.mpMovThreshold,
     };

@@ -1,3 +1,4 @@
+import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_po_documents.dart';
 import 'package:ezrxmobile/domain/order/entities/submit_material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/submit_order_customer.dart';
@@ -30,6 +31,7 @@ class SubmitOrder with _$SubmitOrder {
     required String language,
     required String paymentMethod,
     required String purchaseOrderType,
+    required SmallOrderFeeDetail smallOrderFeeDetail,
   }) = _SubmitOrderCustomer;
 
   factory SubmitOrder.empty() => SubmitOrder(
@@ -53,5 +55,25 @@ class SubmitOrder with _$SubmitOrder {
         orderValue: 0,
         totalTax: 0,
         purchaseOrderType: '',
+        smallOrderFeeDetail: SmallOrderFeeDetail.empty(),
       );
+}
+
+@freezed
+class SmallOrderFeeDetail with _$SmallOrderFeeDetail {
+  const SmallOrderFeeDetail._();
+
+  const factory SmallOrderFeeDetail({
+    required double zpSmallOrderFee,
+    required double mpSmallOrderFee,
+    required Currency currency,
+  }) = _SmallOrderFeeDetail;
+
+  factory SmallOrderFeeDetail.empty() => SmallOrderFeeDetail(
+        zpSmallOrderFee: 0.0,
+        mpSmallOrderFee: 0.0,
+        currency: Currency(''),
+      );
+
+  bool get isValid => zpSmallOrderFee > 0 || mpSmallOrderFee > 0;
 }

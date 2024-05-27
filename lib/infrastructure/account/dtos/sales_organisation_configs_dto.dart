@@ -133,6 +133,22 @@ class SalesOrganisationConfigsDto with _$SalesOrganisationConfigsDto {
     required double mpMinOrderAmount,
     @JsonKey(name: 'statementOfAccountEnabled', defaultValue: false)
     required bool statementOfAccountEnabled,
+    @JsonKey(name: 'enableSmallOrderFee', defaultValue: false)
+    required bool enableSmallOrderFee,
+    @JsonKey(name: 'smallOrderFeeUserRoles', defaultValue: <String>[])
+    required List<String> smallOrderFeeUserRoles,
+    @JsonKey(name: 'smallOrderFee', defaultValue: 0.0)
+    required double smallOrderFee,
+    @JsonKey(name: 'movThreshold', defaultValue: 0.0)
+    required double movThreshold,
+    @JsonKey(name: 'enableMPSmallOrderFee', defaultValue: false)
+    required bool enableMPSmallOrderFee,
+    @JsonKey(name: 'mpSmallOrderFeeUserRoles', defaultValue: <String>[])
+    required List<String> mpSmallOrderFeeUserRoles,
+    @JsonKey(name: 'mpSmallOrderFee', defaultValue: 0.0)
+    required double mpSmallOrderFee,
+    @JsonKey(name: 'mpMovThreshold', defaultValue: 0.0)
+    required double mpMovThreshold,
   }) = _SalesOrganisationConfigsDto;
 
   factory SalesOrganisationConfigsDto.fromDomain(
@@ -205,12 +221,22 @@ class SalesOrganisationConfigsDto with _$SalesOrganisationConfigsDto {
       enableMarketPlace: configs.enableMarketPlace,
       mpMinOrderAmount: configs.mpMinOrderAmount,
       statementOfAccountEnabled: configs.statementOfAccountEnabled,
+      enableSmallOrderFee: configs.enableSmallOrderFee,
+      smallOrderFeeUserRoles: configs.smallOrderFeeUserRoles,
+      smallOrderFee: configs.smallOrderFee,
+      movThreshold: configs.sapMinOrderAmount,
+      enableMPSmallOrderFee: configs.enableMPSmallOrderFee,
+      mpSmallOrderFeeUserRoles: configs.mpSmallOrderFeeUserRoles,
+      mpSmallOrderFee: configs.mpSmallOrderFee,
+      mpMovThreshold: configs.mpSAPMinOrderAmount,
     );
   }
 
-  SalesOrganisationConfigs toDomain({List<String> enablePromotionBlacklist = const []}) {
+  SalesOrganisationConfigs toDomain({
+    List<String> enablePromotionBlacklist = const [],
+  }) {
     final saleOrg = SalesOrg(salesOrg);
-    
+
     return SalesOrganisationConfigs(
       salesOrg: saleOrg,
       enableIRN: enableIRN,
@@ -277,6 +303,14 @@ class SalesOrganisationConfigsDto with _$SalesOrganisationConfigsDto {
       mpMinOrderAmount: mpMinOrderAmount,
       statementOfAccountEnabled: statementOfAccountEnabled,
       disablePromotion: enablePromotionBlacklist.contains(saleOrg.country),
+      enableSmallOrderFee: enableSmallOrderFee,
+      smallOrderFeeUserRoles: smallOrderFeeUserRoles,
+      smallOrderFee: smallOrderFee,
+      sapMinOrderAmount: movThreshold,
+      enableMPSmallOrderFee: enableMPSmallOrderFee,
+      mpSmallOrderFeeUserRoles: mpSmallOrderFeeUserRoles,
+      mpSAPMinOrderAmount: mpMovThreshold,
+      mpSmallOrderFee: mpSmallOrderFee,
     );
   }
 

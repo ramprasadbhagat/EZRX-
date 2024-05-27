@@ -2,25 +2,33 @@ part of 'package:ezrxmobile/presentation/orders/cart/price_summary/price_summary
 
 class PriceSummarySection extends StatelessWidget {
   final CartState cartState;
+  final TextStyle? titleStyle;
+  final double? titleSpacing;
 
-  const PriceSummarySection({Key? key, required this.cartState})
-      : super(key: key);
+  const PriceSummarySection({
+    Key? key,
+    required this.cartState,
+    this.titleSpacing,
+    this.titleStyle,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final salesOrgConfig =
         context.read<EligibilityBloc>().state.salesOrgConfigs;
+    final orderEligibilityState = context.read<OrderEligibilityBloc>().state;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
           context.tr('Order summary'),
-          style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                color: ZPColors.neutralsBlack,
-              ),
+          style: titleStyle ??
+              Theme.of(context).textTheme.labelLarge?.copyWith(
+                    color: ZPColors.neutralsBlack,
+                  ),
         ),
-        const SizedBox(height: 24.0),
+        SizedBox(height: titleSpacing ?? 24.0),
         if (cartState.cartProducts.containMPMaterial) ...[
           Row(
             key: WidgetKeys.checkoutSummaryZPSubTotal,
@@ -96,7 +104,9 @@ class PriceSummarySection extends StatelessWidget {
         if (salesOrgConfig.displaySubtotalTaxBreakdown)
           _TaxWidget(cartState: cartState),
         if (cartState.salesOrganisation.salesOrg.showSmallOrderFee)
-          _SmallOrderFee(cartState: cartState),
+          _AplSmallOrderFee(cartState: cartState)
+        else if (orderEligibilityState.smallOrderFeeApplied)
+          _SmallOrderFee(orderEligibilityState: orderEligibilityState),
         const SizedBox(height: 4.0),
         const Divider(
           thickness: 1,
@@ -119,7 +129,11 @@ class PriceSummarySection extends StatelessWidget {
               priceComponent: PriceComponent(
                 key: WidgetKeys.checkoutSummaryGrandTotalPrice,
                 salesOrgConfig: salesOrgConfig,
-                price: cartState.grandTotalHidePriceMaterial.toString(),
+                price: cartState
+                    .grandTotalDisplayed(
+                      smallOrderFee: orderEligibilityState.smallOrderFee,
+                    )
+                    .toString(),
                 type: PriceStyle.totalPrice,
               ),
             ),
@@ -192,68 +206,6 @@ class _TaxWidget extends StatelessWidget {
                   color: ZPColors.neutralsBlack,
                   fontSize: 10,
                 ),
-          ),
-      ],
-    );
-  }
-}
-
-class _SmallOrderFee extends StatelessWidget {
-  const _SmallOrderFee({Key? key, required this.cartState}) : super(key: key);
-  final CartState cartState;
-
-  @override
-  Widget build(BuildContext context) {
-    final eligibilityState = context.read<EligibilityBloc>().state;
-
-    return Column(
-      key: WidgetKeys.checkoutSummarySmallOrderFee,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const SizedBox(height: 8.0),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              context.tr('Small order fee'),
-              style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                    color: ZPColors.neutralsBlack,
-                  ),
-            ),
-            _DisplayPrice(
-              priceComponent: PriceComponent(
-                key: WidgetKeys.checkoutSummarySmallOrderFeePrice,
-                salesOrgConfig: eligibilityState.salesOrgConfigs,
-                price: cartState.aplSimulatorOrder.smallOrderFee.toString(),
-                type: PriceStyle.summaryPrice,
-              ),
-            ),
-          ],
-        ),
-        if (cartState.aplSimulatorOrder.smallOrderFee > 0)
-          Container(
-            padding: const EdgeInsets.all(8),
-            margin: const EdgeInsets.symmetric(vertical: 8),
-            decoration: BoxDecoration(
-              color: ZPColors.blueAccent,
-              borderRadius: BorderRadius.circular(8),
-            ),
-            child: Text(
-              context.tr(
-                'A small order fee applies to orders with ZP in-stock items that are under the minimum order value of {smallOrderFee} for ZP subtotal.',
-                namedArgs: {
-                  'smallOrderFee': StringUtils.priceComponentDisplayPrice(
-                    eligibilityState.salesOrgConfigs,
-                    eligibilityState.salesOrg.smallOrderThreshold,
-                    false,
-                  ),
-                },
-              ),
-              style: Theme.of(context)
-                  .textTheme
-                  .bodySmall
-                  ?.copyWith(color: ZPColors.infoTextBlueColor),
-            ),
           ),
       ],
     );

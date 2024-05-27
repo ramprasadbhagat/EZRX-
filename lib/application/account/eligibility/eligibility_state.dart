@@ -305,6 +305,10 @@ class EligibilityState with _$EligibilityState {
             : salesOrgConfigs.addOosMaterials.oosTag,
       );
 
+  //============================================================
+  // MARKETPLACE
+  //
+  //============================================================
   bool get marketPlacePaymentEligible =>
       user.acceptMPTC.isAccept && customerCodeInfo.isMarketPlace;
 
@@ -331,6 +335,16 @@ class EligibilityState with _$EligibilityState {
     return true;
   }
 
+  String get productManufacturerFilterTitle =>
+      marketPlaceEligible ? 'Manufacturers & Sellers' : 'Manufacturer';
+
+  String get atLeastOneStockItemInStockMessage => marketPlaceEligible
+      ? 'To proceed, at least one (1) ZP or MP item must be in stock.'
+      : 'To proceed, at least one (1) item must be in stock.';
+
+  //============================================================
+  //============================================================
+
   bool get customerBlockOrSuspended {
     if (salesOrg.isID) return shipToInfo.customerBlock.isCustomerBlocked;
 
@@ -338,9 +352,6 @@ class EligibilityState with _$EligibilityState {
   }
 
   bool get isEDI => customerCodeInfo.status.isEDI;
-
-  String get productManufacturerFilterTitle =>
-      marketPlaceEligible ? 'Manufacturers & Sellers' : 'Manufacturer';
 
   // Used in listenWhen for BlocListener for sections in home page to refresh the data
   // when pulling to refresh or selecting a new shipTo

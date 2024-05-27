@@ -77,6 +77,14 @@ class SalesOrganisationConfigs with _$SalesOrganisationConfigs {
     required double mpMinOrderAmount,
     required bool statementOfAccountEnabled,
     required bool disablePromotion,
+    required bool enableSmallOrderFee,
+    required List<String> smallOrderFeeUserRoles,
+    required double smallOrderFee,
+    required double sapMinOrderAmount,
+    required bool enableMPSmallOrderFee,
+    required List<String> mpSmallOrderFeeUserRoles,
+    required double mpSmallOrderFee,
+    required double mpSAPMinOrderAmount,
   }) = _SalesOrganisationConfigs;
 
   //ignore:long-method
@@ -146,6 +154,14 @@ class SalesOrganisationConfigs with _$SalesOrganisationConfigs {
         mpMinOrderAmount: 0.0,
         statementOfAccountEnabled: false,
         disablePromotion: false,
+        enableSmallOrderFee: false,
+        smallOrderFeeUserRoles: <String>[],
+        smallOrderFee: 0.0,
+        sapMinOrderAmount: 0.0,
+        enableMPSmallOrderFee: false,
+        mpSmallOrderFeeUserRoles: <String>[],
+        mpSmallOrderFee: 0.0,
+        mpSAPMinOrderAmount: 0.0,
       );
 
   bool get shouldDisplayVATInPercentage =>

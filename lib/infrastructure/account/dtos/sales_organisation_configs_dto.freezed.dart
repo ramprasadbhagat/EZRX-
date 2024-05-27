@@ -153,6 +153,23 @@ mixin _$SalesOrganisationConfigsDto {
   double get mpMinOrderAmount => throw _privateConstructorUsedError;
   @JsonKey(name: 'statementOfAccountEnabled', defaultValue: false)
   bool get statementOfAccountEnabled => throw _privateConstructorUsedError;
+  @JsonKey(name: 'enableSmallOrderFee', defaultValue: false)
+  bool get enableSmallOrderFee => throw _privateConstructorUsedError;
+  @JsonKey(name: 'smallOrderFeeUserRoles', defaultValue: <String>[])
+  List<String> get smallOrderFeeUserRoles => throw _privateConstructorUsedError;
+  @JsonKey(name: 'smallOrderFee', defaultValue: 0.0)
+  double get smallOrderFee => throw _privateConstructorUsedError;
+  @JsonKey(name: 'movThreshold', defaultValue: 0.0)
+  double get movThreshold => throw _privateConstructorUsedError;
+  @JsonKey(name: 'enableMPSmallOrderFee', defaultValue: false)
+  bool get enableMPSmallOrderFee => throw _privateConstructorUsedError;
+  @JsonKey(name: 'mpSmallOrderFeeUserRoles', defaultValue: <String>[])
+  List<String> get mpSmallOrderFeeUserRoles =>
+      throw _privateConstructorUsedError;
+  @JsonKey(name: 'mpSmallOrderFee', defaultValue: 0.0)
+  double get mpSmallOrderFee => throw _privateConstructorUsedError;
+  @JsonKey(name: 'mpMovThreshold', defaultValue: 0.0)
+  double get mpMovThreshold => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -280,7 +297,21 @@ abstract class $SalesOrganisationConfigsDtoCopyWith<$Res> {
       @JsonKey(name: 'mpMinOrderAmount', defaultValue: 0.0)
       double mpMinOrderAmount,
       @JsonKey(name: 'statementOfAccountEnabled', defaultValue: false)
-      bool statementOfAccountEnabled});
+      bool statementOfAccountEnabled,
+      @JsonKey(name: 'enableSmallOrderFee', defaultValue: false)
+      bool enableSmallOrderFee,
+      @JsonKey(name: 'smallOrderFeeUserRoles', defaultValue: <String>[])
+      List<String> smallOrderFeeUserRoles,
+      @JsonKey(name: 'smallOrderFee', defaultValue: 0.0) double smallOrderFee,
+      @JsonKey(name: 'movThreshold', defaultValue: 0.0) double movThreshold,
+      @JsonKey(name: 'enableMPSmallOrderFee', defaultValue: false)
+      bool enableMPSmallOrderFee,
+      @JsonKey(name: 'mpSmallOrderFeeUserRoles', defaultValue: <String>[])
+      List<String> mpSmallOrderFeeUserRoles,
+      @JsonKey(name: 'mpSmallOrderFee', defaultValue: 0.0)
+      double mpSmallOrderFee,
+      @JsonKey(name: 'mpMovThreshold', defaultValue: 0.0)
+      double mpMovThreshold});
 }
 
 /// @nodoc
@@ -361,6 +392,14 @@ class _$SalesOrganisationConfigsDtoCopyWithImpl<$Res,
     Object? enableMarketPlace = null,
     Object? mpMinOrderAmount = null,
     Object? statementOfAccountEnabled = null,
+    Object? enableSmallOrderFee = null,
+    Object? smallOrderFeeUserRoles = null,
+    Object? smallOrderFee = null,
+    Object? movThreshold = null,
+    Object? enableMPSmallOrderFee = null,
+    Object? mpSmallOrderFeeUserRoles = null,
+    Object? mpSmallOrderFee = null,
+    Object? mpMovThreshold = null,
   }) {
     return _then(_value.copyWith(
       disableProcessingStatus: null == disableProcessingStatus
@@ -619,6 +658,38 @@ class _$SalesOrganisationConfigsDtoCopyWithImpl<$Res,
           ? _value.statementOfAccountEnabled
           : statementOfAccountEnabled // ignore: cast_nullable_to_non_nullable
               as bool,
+      enableSmallOrderFee: null == enableSmallOrderFee
+          ? _value.enableSmallOrderFee
+          : enableSmallOrderFee // ignore: cast_nullable_to_non_nullable
+              as bool,
+      smallOrderFeeUserRoles: null == smallOrderFeeUserRoles
+          ? _value.smallOrderFeeUserRoles
+          : smallOrderFeeUserRoles // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      smallOrderFee: null == smallOrderFee
+          ? _value.smallOrderFee
+          : smallOrderFee // ignore: cast_nullable_to_non_nullable
+              as double,
+      movThreshold: null == movThreshold
+          ? _value.movThreshold
+          : movThreshold // ignore: cast_nullable_to_non_nullable
+              as double,
+      enableMPSmallOrderFee: null == enableMPSmallOrderFee
+          ? _value.enableMPSmallOrderFee
+          : enableMPSmallOrderFee // ignore: cast_nullable_to_non_nullable
+              as bool,
+      mpSmallOrderFeeUserRoles: null == mpSmallOrderFeeUserRoles
+          ? _value.mpSmallOrderFeeUserRoles
+          : mpSmallOrderFeeUserRoles // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      mpSmallOrderFee: null == mpSmallOrderFee
+          ? _value.mpSmallOrderFee
+          : mpSmallOrderFee // ignore: cast_nullable_to_non_nullable
+              as double,
+      mpMovThreshold: null == mpMovThreshold
+          ? _value.mpMovThreshold
+          : mpMovThreshold // ignore: cast_nullable_to_non_nullable
+              as double,
     ) as $Val);
   }
 }
@@ -744,7 +815,21 @@ abstract class _$$_SalesOrganisationConfigsDtoCopyWith<$Res>
       @JsonKey(name: 'mpMinOrderAmount', defaultValue: 0.0)
       double mpMinOrderAmount,
       @JsonKey(name: 'statementOfAccountEnabled', defaultValue: false)
-      bool statementOfAccountEnabled});
+      bool statementOfAccountEnabled,
+      @JsonKey(name: 'enableSmallOrderFee', defaultValue: false)
+      bool enableSmallOrderFee,
+      @JsonKey(name: 'smallOrderFeeUserRoles', defaultValue: <String>[])
+      List<String> smallOrderFeeUserRoles,
+      @JsonKey(name: 'smallOrderFee', defaultValue: 0.0) double smallOrderFee,
+      @JsonKey(name: 'movThreshold', defaultValue: 0.0) double movThreshold,
+      @JsonKey(name: 'enableMPSmallOrderFee', defaultValue: false)
+      bool enableMPSmallOrderFee,
+      @JsonKey(name: 'mpSmallOrderFeeUserRoles', defaultValue: <String>[])
+      List<String> mpSmallOrderFeeUserRoles,
+      @JsonKey(name: 'mpSmallOrderFee', defaultValue: 0.0)
+      double mpSmallOrderFee,
+      @JsonKey(name: 'mpMovThreshold', defaultValue: 0.0)
+      double mpMovThreshold});
 }
 
 /// @nodoc
@@ -824,6 +909,14 @@ class __$$_SalesOrganisationConfigsDtoCopyWithImpl<$Res>
     Object? enableMarketPlace = null,
     Object? mpMinOrderAmount = null,
     Object? statementOfAccountEnabled = null,
+    Object? enableSmallOrderFee = null,
+    Object? smallOrderFeeUserRoles = null,
+    Object? smallOrderFee = null,
+    Object? movThreshold = null,
+    Object? enableMPSmallOrderFee = null,
+    Object? mpSmallOrderFeeUserRoles = null,
+    Object? mpSmallOrderFee = null,
+    Object? mpMovThreshold = null,
   }) {
     return _then(_$_SalesOrganisationConfigsDto(
       disableProcessingStatus: null == disableProcessingStatus
@@ -1082,6 +1175,38 @@ class __$$_SalesOrganisationConfigsDtoCopyWithImpl<$Res>
           ? _value.statementOfAccountEnabled
           : statementOfAccountEnabled // ignore: cast_nullable_to_non_nullable
               as bool,
+      enableSmallOrderFee: null == enableSmallOrderFee
+          ? _value.enableSmallOrderFee
+          : enableSmallOrderFee // ignore: cast_nullable_to_non_nullable
+              as bool,
+      smallOrderFeeUserRoles: null == smallOrderFeeUserRoles
+          ? _value._smallOrderFeeUserRoles
+          : smallOrderFeeUserRoles // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      smallOrderFee: null == smallOrderFee
+          ? _value.smallOrderFee
+          : smallOrderFee // ignore: cast_nullable_to_non_nullable
+              as double,
+      movThreshold: null == movThreshold
+          ? _value.movThreshold
+          : movThreshold // ignore: cast_nullable_to_non_nullable
+              as double,
+      enableMPSmallOrderFee: null == enableMPSmallOrderFee
+          ? _value.enableMPSmallOrderFee
+          : enableMPSmallOrderFee // ignore: cast_nullable_to_non_nullable
+              as bool,
+      mpSmallOrderFeeUserRoles: null == mpSmallOrderFeeUserRoles
+          ? _value._mpSmallOrderFeeUserRoles
+          : mpSmallOrderFeeUserRoles // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      mpSmallOrderFee: null == mpSmallOrderFee
+          ? _value.mpSmallOrderFee
+          : mpSmallOrderFee // ignore: cast_nullable_to_non_nullable
+              as double,
+      mpMovThreshold: null == mpMovThreshold
+          ? _value.mpMovThreshold
+          : mpMovThreshold // ignore: cast_nullable_to_non_nullable
+              as double,
     ));
   }
 }
@@ -1212,8 +1337,26 @@ class _$_SalesOrganisationConfigsDto extends _SalesOrganisationConfigsDto {
       @JsonKey(name: 'mpMinOrderAmount', defaultValue: 0.0)
       required this.mpMinOrderAmount,
       @JsonKey(name: 'statementOfAccountEnabled', defaultValue: false)
-      required this.statementOfAccountEnabled})
+      required this.statementOfAccountEnabled,
+      @JsonKey(name: 'enableSmallOrderFee', defaultValue: false)
+      required this.enableSmallOrderFee,
+      @JsonKey(name: 'smallOrderFeeUserRoles', defaultValue: <String>[])
+      required final List<String> smallOrderFeeUserRoles,
+      @JsonKey(name: 'smallOrderFee', defaultValue: 0.0)
+      required this.smallOrderFee,
+      @JsonKey(name: 'movThreshold', defaultValue: 0.0)
+      required this.movThreshold,
+      @JsonKey(name: 'enableMPSmallOrderFee', defaultValue: false)
+      required this.enableMPSmallOrderFee,
+      @JsonKey(name: 'mpSmallOrderFeeUserRoles', defaultValue: <String>[])
+      required final List<String> mpSmallOrderFeeUserRoles,
+      @JsonKey(name: 'mpSmallOrderFee', defaultValue: 0.0)
+      required this.mpSmallOrderFee,
+      @JsonKey(name: 'mpMovThreshold', defaultValue: 0.0)
+      required this.mpMovThreshold})
       : _principalList = principalList,
+        _smallOrderFeeUserRoles = smallOrderFeeUserRoles,
+        _mpSmallOrderFeeUserRoles = mpSmallOrderFeeUserRoles,
         super._();
 
   factory _$_SalesOrganisationConfigsDto.fromJson(Map<String, dynamic> json) =>
@@ -1420,10 +1563,48 @@ class _$_SalesOrganisationConfigsDto extends _SalesOrganisationConfigsDto {
   @override
   @JsonKey(name: 'statementOfAccountEnabled', defaultValue: false)
   final bool statementOfAccountEnabled;
+  @override
+  @JsonKey(name: 'enableSmallOrderFee', defaultValue: false)
+  final bool enableSmallOrderFee;
+  final List<String> _smallOrderFeeUserRoles;
+  @override
+  @JsonKey(name: 'smallOrderFeeUserRoles', defaultValue: <String>[])
+  List<String> get smallOrderFeeUserRoles {
+    if (_smallOrderFeeUserRoles is EqualUnmodifiableListView)
+      return _smallOrderFeeUserRoles;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_smallOrderFeeUserRoles);
+  }
+
+  @override
+  @JsonKey(name: 'smallOrderFee', defaultValue: 0.0)
+  final double smallOrderFee;
+  @override
+  @JsonKey(name: 'movThreshold', defaultValue: 0.0)
+  final double movThreshold;
+  @override
+  @JsonKey(name: 'enableMPSmallOrderFee', defaultValue: false)
+  final bool enableMPSmallOrderFee;
+  final List<String> _mpSmallOrderFeeUserRoles;
+  @override
+  @JsonKey(name: 'mpSmallOrderFeeUserRoles', defaultValue: <String>[])
+  List<String> get mpSmallOrderFeeUserRoles {
+    if (_mpSmallOrderFeeUserRoles is EqualUnmodifiableListView)
+      return _mpSmallOrderFeeUserRoles;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_mpSmallOrderFeeUserRoles);
+  }
+
+  @override
+  @JsonKey(name: 'mpSmallOrderFee', defaultValue: 0.0)
+  final double mpSmallOrderFee;
+  @override
+  @JsonKey(name: 'mpMovThreshold', defaultValue: 0.0)
+  final double mpMovThreshold;
 
   @override
   String toString() {
-    return 'SalesOrganisationConfigsDto(disableProcessingStatus: $disableProcessingStatus, currency: $currency, hideCustomer: $hideCustomer, enableGimmickMaterial: $enableGimmickMaterial, disablePrincipals: $disablePrincipals, principalList: $principalList, disableOrderType: $disableOrderType, enableBatchNumber: $enableBatchNumber, disableBundles: $disableBundles, enableZDP5: $enableZDP5, enableTaxClassification: $enableTaxClassification, enableVat: $enableVat, vatValue: $vatValue, materialWithoutPrice: $materialWithoutPrice, enableSpecialInstructions: $enableSpecialInstructions, enableReferenceNote: $enableReferenceNote, enableCollectiveNumber: $enableCollectiveNumber, enableMobileNumber: $enableMobileNumber, enableFutureDeliveryDay: $enableFutureDeliveryDay, enablePOAttachmentRequired: $enablePOAttachmentRequired, enablePaymentTerms: $enablePaymentTerms, futureDeliveryDay: $futureDeliveryDay, enableGMC: $enableGMC, enableListPrice: $enableListPrice, enableDefaultMD: $enableDefaultMD, priceOverride: $priceOverride, disablePaymentTermsDisplay: $disablePaymentTermsDisplay, disableDeliveryDate: $disableDeliveryDate, enableBillTo: $enableBillTo, showPOAttachment: $showPOAttachment, expiryDateDisplay: $expiryDateDisplay, hideStockDisplay: $hideStockDisplay, addOosMaterials: $addOosMaterials, oosValue: $oosValue, enableRemarks: $enableRemarks, enableOHPrice: $enableOHPrice, poNumberRequired: $poNumberRequired, enableIRN: $enableIRN, enableTaxDisplay: $enableTaxDisplay, enableTaxAtTotalLevelOnly: $enableTaxAtTotalLevelOnly, netPriceOverride: $netPriceOverride, batchNumDisplay: $batchNumDisplay, displayOrderDiscount: $displayOrderDiscount, minOrderAmount: $minOrderAmount, salesOrg: $salesOrg, enableZDP8Override: $enableZDP8Override, disableReturnsAccessSR: $disableReturnsAccessSR, disableReturnsAccess: $disableReturnsAccess, disableOverrideFieldCustomer: $disableOverrideFieldCustomer, disableOverrideFieldSR: $disableOverrideFieldSR, enableGreenDelivery: $enableGreenDelivery, greenDeliveryDelayInDays: $greenDeliveryDelayInDays, enableComboDeals: $enableComboDeals, greenDeliveryUserRole: $greenDeliveryUserRole, comboDealsUserRole: $comboDealsUserRole, enableGMN: $enableGMN, displayItemTaxBreakdown: $displayItemTaxBreakdown, displaySubtotalTaxBreakdown: $displaySubtotalTaxBreakdown, disablePayment: $disablePayment, hideCredit: $hideCredit, allowReturnsOutsidePolicy: $allowReturnsOutsidePolicy, enableMarketPlace: $enableMarketPlace, mpMinOrderAmount: $mpMinOrderAmount, statementOfAccountEnabled: $statementOfAccountEnabled)';
+    return 'SalesOrganisationConfigsDto(disableProcessingStatus: $disableProcessingStatus, currency: $currency, hideCustomer: $hideCustomer, enableGimmickMaterial: $enableGimmickMaterial, disablePrincipals: $disablePrincipals, principalList: $principalList, disableOrderType: $disableOrderType, enableBatchNumber: $enableBatchNumber, disableBundles: $disableBundles, enableZDP5: $enableZDP5, enableTaxClassification: $enableTaxClassification, enableVat: $enableVat, vatValue: $vatValue, materialWithoutPrice: $materialWithoutPrice, enableSpecialInstructions: $enableSpecialInstructions, enableReferenceNote: $enableReferenceNote, enableCollectiveNumber: $enableCollectiveNumber, enableMobileNumber: $enableMobileNumber, enableFutureDeliveryDay: $enableFutureDeliveryDay, enablePOAttachmentRequired: $enablePOAttachmentRequired, enablePaymentTerms: $enablePaymentTerms, futureDeliveryDay: $futureDeliveryDay, enableGMC: $enableGMC, enableListPrice: $enableListPrice, enableDefaultMD: $enableDefaultMD, priceOverride: $priceOverride, disablePaymentTermsDisplay: $disablePaymentTermsDisplay, disableDeliveryDate: $disableDeliveryDate, enableBillTo: $enableBillTo, showPOAttachment: $showPOAttachment, expiryDateDisplay: $expiryDateDisplay, hideStockDisplay: $hideStockDisplay, addOosMaterials: $addOosMaterials, oosValue: $oosValue, enableRemarks: $enableRemarks, enableOHPrice: $enableOHPrice, poNumberRequired: $poNumberRequired, enableIRN: $enableIRN, enableTaxDisplay: $enableTaxDisplay, enableTaxAtTotalLevelOnly: $enableTaxAtTotalLevelOnly, netPriceOverride: $netPriceOverride, batchNumDisplay: $batchNumDisplay, displayOrderDiscount: $displayOrderDiscount, minOrderAmount: $minOrderAmount, salesOrg: $salesOrg, enableZDP8Override: $enableZDP8Override, disableReturnsAccessSR: $disableReturnsAccessSR, disableReturnsAccess: $disableReturnsAccess, disableOverrideFieldCustomer: $disableOverrideFieldCustomer, disableOverrideFieldSR: $disableOverrideFieldSR, enableGreenDelivery: $enableGreenDelivery, greenDeliveryDelayInDays: $greenDeliveryDelayInDays, enableComboDeals: $enableComboDeals, greenDeliveryUserRole: $greenDeliveryUserRole, comboDealsUserRole: $comboDealsUserRole, enableGMN: $enableGMN, displayItemTaxBreakdown: $displayItemTaxBreakdown, displaySubtotalTaxBreakdown: $displaySubtotalTaxBreakdown, disablePayment: $disablePayment, hideCredit: $hideCredit, allowReturnsOutsidePolicy: $allowReturnsOutsidePolicy, enableMarketPlace: $enableMarketPlace, mpMinOrderAmount: $mpMinOrderAmount, statementOfAccountEnabled: $statementOfAccountEnabled, enableSmallOrderFee: $enableSmallOrderFee, smallOrderFeeUserRoles: $smallOrderFeeUserRoles, smallOrderFee: $smallOrderFee, movThreshold: $movThreshold, enableMPSmallOrderFee: $enableMPSmallOrderFee, mpSmallOrderFeeUserRoles: $mpSmallOrderFeeUserRoles, mpSmallOrderFee: $mpSmallOrderFee, mpMovThreshold: $mpMovThreshold)';
   }
 
   @override
@@ -1522,7 +1703,15 @@ class _$_SalesOrganisationConfigsDto extends _SalesOrganisationConfigsDto {
             (identical(other.allowReturnsOutsidePolicy, allowReturnsOutsidePolicy) || other.allowReturnsOutsidePolicy == allowReturnsOutsidePolicy) &&
             (identical(other.enableMarketPlace, enableMarketPlace) || other.enableMarketPlace == enableMarketPlace) &&
             (identical(other.mpMinOrderAmount, mpMinOrderAmount) || other.mpMinOrderAmount == mpMinOrderAmount) &&
-            (identical(other.statementOfAccountEnabled, statementOfAccountEnabled) || other.statementOfAccountEnabled == statementOfAccountEnabled));
+            (identical(other.statementOfAccountEnabled, statementOfAccountEnabled) || other.statementOfAccountEnabled == statementOfAccountEnabled) &&
+            (identical(other.enableSmallOrderFee, enableSmallOrderFee) || other.enableSmallOrderFee == enableSmallOrderFee) &&
+            const DeepCollectionEquality().equals(other._smallOrderFeeUserRoles, _smallOrderFeeUserRoles) &&
+            (identical(other.smallOrderFee, smallOrderFee) || other.smallOrderFee == smallOrderFee) &&
+            (identical(other.movThreshold, movThreshold) || other.movThreshold == movThreshold) &&
+            (identical(other.enableMPSmallOrderFee, enableMPSmallOrderFee) || other.enableMPSmallOrderFee == enableMPSmallOrderFee) &&
+            const DeepCollectionEquality().equals(other._mpSmallOrderFeeUserRoles, _mpSmallOrderFeeUserRoles) &&
+            (identical(other.mpSmallOrderFee, mpSmallOrderFee) || other.mpSmallOrderFee == mpSmallOrderFee) &&
+            (identical(other.mpMovThreshold, mpMovThreshold) || other.mpMovThreshold == mpMovThreshold));
   }
 
   @JsonKey(ignore: true)
@@ -1592,7 +1781,15 @@ class _$_SalesOrganisationConfigsDto extends _SalesOrganisationConfigsDto {
         allowReturnsOutsidePolicy,
         enableMarketPlace,
         mpMinOrderAmount,
-        statementOfAccountEnabled
+        statementOfAccountEnabled,
+        enableSmallOrderFee,
+        const DeepCollectionEquality().hash(_smallOrderFeeUserRoles),
+        smallOrderFee,
+        movThreshold,
+        enableMPSmallOrderFee,
+        const DeepCollectionEquality().hash(_mpSmallOrderFeeUserRoles),
+        mpSmallOrderFee,
+        mpMovThreshold
       ]);
 
   @JsonKey(ignore: true)
@@ -1740,8 +1937,23 @@ abstract class _SalesOrganisationConfigsDto
       @JsonKey(name: 'mpMinOrderAmount', defaultValue: 0.0)
       required final double mpMinOrderAmount,
       @JsonKey(name: 'statementOfAccountEnabled', defaultValue: false)
-      required final bool
-          statementOfAccountEnabled}) = _$_SalesOrganisationConfigsDto;
+      required final bool statementOfAccountEnabled,
+      @JsonKey(name: 'enableSmallOrderFee', defaultValue: false)
+      required final bool enableSmallOrderFee,
+      @JsonKey(name: 'smallOrderFeeUserRoles', defaultValue: <String>[])
+      required final List<String> smallOrderFeeUserRoles,
+      @JsonKey(name: 'smallOrderFee', defaultValue: 0.0)
+      required final double smallOrderFee,
+      @JsonKey(name: 'movThreshold', defaultValue: 0.0)
+      required final double movThreshold,
+      @JsonKey(name: 'enableMPSmallOrderFee', defaultValue: false)
+      required final bool enableMPSmallOrderFee,
+      @JsonKey(name: 'mpSmallOrderFeeUserRoles', defaultValue: <String>[])
+      required final List<String> mpSmallOrderFeeUserRoles,
+      @JsonKey(name: 'mpSmallOrderFee', defaultValue: 0.0)
+      required final double mpSmallOrderFee,
+      @JsonKey(name: 'mpMovThreshold', defaultValue: 0.0)
+      required final double mpMovThreshold}) = _$_SalesOrganisationConfigsDto;
   const _SalesOrganisationConfigsDto._() : super._();
 
   factory _SalesOrganisationConfigsDto.fromJson(Map<String, dynamic> json) =
@@ -1942,6 +2154,30 @@ abstract class _SalesOrganisationConfigsDto
   @override
   @JsonKey(name: 'statementOfAccountEnabled', defaultValue: false)
   bool get statementOfAccountEnabled;
+  @override
+  @JsonKey(name: 'enableSmallOrderFee', defaultValue: false)
+  bool get enableSmallOrderFee;
+  @override
+  @JsonKey(name: 'smallOrderFeeUserRoles', defaultValue: <String>[])
+  List<String> get smallOrderFeeUserRoles;
+  @override
+  @JsonKey(name: 'smallOrderFee', defaultValue: 0.0)
+  double get smallOrderFee;
+  @override
+  @JsonKey(name: 'movThreshold', defaultValue: 0.0)
+  double get movThreshold;
+  @override
+  @JsonKey(name: 'enableMPSmallOrderFee', defaultValue: false)
+  bool get enableMPSmallOrderFee;
+  @override
+  @JsonKey(name: 'mpSmallOrderFeeUserRoles', defaultValue: <String>[])
+  List<String> get mpSmallOrderFeeUserRoles;
+  @override
+  @JsonKey(name: 'mpSmallOrderFee', defaultValue: 0.0)
+  double get mpSmallOrderFee;
+  @override
+  @JsonKey(name: 'mpMovThreshold', defaultValue: 0.0)
+  double get mpMovThreshold;
   @override
   @JsonKey(ignore: true)
   _$$_SalesOrganisationConfigsDtoCopyWith<_$_SalesOrganisationConfigsDto>

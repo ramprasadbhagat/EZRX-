@@ -337,6 +337,9 @@ class RoleType extends ValueObject<String> {
   bool get canAccessMarketPlace =>
       isRootAdmin || isZPAdmin || isClientUser || isClientAdmin;
 
+  String get smallOrderFeeRole =>
+      transformToSmallOrderFeeRole(value.getOrElse(() => ''));
+
   const RoleType._(this.value);
 }
 

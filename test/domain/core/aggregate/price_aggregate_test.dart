@@ -1582,31 +1582,6 @@ void main() {
     });
 
     test(
-      'PriceAggregate getTotalQuantityOfBundleProduct',
-      () {
-        final customPriceAggregate = emptyPriceAggregate.copyWith(
-          bundle: emptyBundle.copyWith(
-            bundleCode: '123',
-            materials: [
-              MaterialInfo.empty().copyWith(
-                materialNumber: MaterialNumber('fake-material-1'),
-                quantity: MaterialQty(1),
-              ),
-              MaterialInfo.empty().copyWith(
-                materialNumber: MaterialNumber('fake-material-2'),
-                quantity: MaterialQty(1),
-              ),
-            ],
-          ),
-        );
-        expect(
-          customPriceAggregate.getTotalQuantityOfBundleProduct,
-          2,
-        );
-      },
-    );
-
-    test(
       'PriceAggregate isBundleMinimumQuantitySatisfies = true',
       () {
         final customPriceAggregate = emptyPriceAggregate.copyWith(

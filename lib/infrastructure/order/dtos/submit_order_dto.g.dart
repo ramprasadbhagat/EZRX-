@@ -35,28 +35,67 @@ _$SubmitOrderDtoImpl _$$SubmitOrderDtoImplFromJson(Map<String, dynamic> json) =>
               ?.map((e) => PoDocumentsDto.fromJson(e as Map<String, dynamic>))
               .toList() ??
           [],
+      smallOrderFeeDetail: json['movDetails'] == null
+          ? null
+          : SmallOrderFeeDetailDto.fromJson(
+              json['movDetails'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$SubmitOrderDtoImplToJson(
-        _$SubmitOrderDtoImpl instance) =>
-    <String, dynamic>{
-      'username': instance.userName,
-      'companyName': instance.companyName,
-      'customer': instance.customer.toJson(),
-      'POReference': instance.poReference,
-      'materials': instance.materials.map((e) => e.toJson()).toList(),
-      'PODate': instance.poDate,
-      'RequestedDeliveryDate': instance.requestedDeliveryDate,
-      'SpecialInstructions': instance.specialInstructions,
-      'orderValue': instance.orderValue,
-      'totalTax': instance.totalTax,
-      'Telephone': instance.telephone,
-      'referenceNotes': instance.referenceNotes,
-      'paymentTerms': instance.paymentTerms,
-      'CollectiveNumber': instance.collectiveNumber,
-      'blockOrder': instance.blockOrder,
-      'language': instance.language,
-      'paymentMethod': instance.paymentMethod,
-      'PurchaseOrderType': instance.purchaseOrderType,
-      'poDocuments': instance.poDocuments.map((e) => e.toJson()).toList(),
-    };
+    _$SubmitOrderDtoImpl instance) {
+  final val = <String, dynamic>{
+    'username': instance.userName,
+    'companyName': instance.companyName,
+    'customer': instance.customer.toJson(),
+    'POReference': instance.poReference,
+    'materials': instance.materials.map((e) => e.toJson()).toList(),
+    'PODate': instance.poDate,
+    'RequestedDeliveryDate': instance.requestedDeliveryDate,
+    'SpecialInstructions': instance.specialInstructions,
+    'orderValue': instance.orderValue,
+    'totalTax': instance.totalTax,
+    'Telephone': instance.telephone,
+    'referenceNotes': instance.referenceNotes,
+    'paymentTerms': instance.paymentTerms,
+    'CollectiveNumber': instance.collectiveNumber,
+    'blockOrder': instance.blockOrder,
+    'language': instance.language,
+    'paymentMethod': instance.paymentMethod,
+    'PurchaseOrderType': instance.purchaseOrderType,
+    'poDocuments': instance.poDocuments.map((e) => e.toJson()).toList(),
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('movDetails', instance.smallOrderFeeDetail?.toJson());
+  return val;
+}
+
+_$SmallOrderFeeDetailDtoImpl _$$SmallOrderFeeDetailDtoImplFromJson(
+        Map<String, dynamic> json) =>
+    _$SmallOrderFeeDetailDtoImpl(
+      smallOrderFee: json['smallOrderFee'] as String? ?? '',
+      mpSmallOrderFee: json['mpSmallOrderFee'] as String? ?? '',
+      currency: json['currency'] as String? ?? '',
+    );
+
+Map<String, dynamic> _$$SmallOrderFeeDetailDtoImplToJson(
+    _$SmallOrderFeeDetailDtoImpl instance) {
+  final val = <String, dynamic>{
+    'smallOrderFee': instance.smallOrderFee,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('mpSmallOrderFee', instance.mpSmallOrderFee);
+  val['currency'] = instance.currency;
+  return val;
+}

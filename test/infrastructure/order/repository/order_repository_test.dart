@@ -310,7 +310,9 @@ void main() {
       configs: fakePHSalesOrgConfigs,
       orderValue: 100.0,
       totalTax: 100,
-      smallOrderFee: 12500.0,
+      aplSmallOrderFee: 12500.0,
+      mpSmallOrderFee: 0,
+      zpSmallOrderFee: 0,
     );
     expect(
       result,
@@ -403,7 +405,9 @@ void main() {
         configs: fakePHSalesOrgConfigs,
         orderValue: 100.0,
         totalTax: 100,
-        smallOrderFee: 12500.0,
+        aplSmallOrderFee: 12500.0,
+        mpSmallOrderFee: 0,
+        zpSmallOrderFee: 0,
       );
       expect(
         result,
@@ -461,7 +465,9 @@ void main() {
       configs: fakePHSalesOrgConfigs,
       orderValue: 100.0,
       totalTax: 100,
-      smallOrderFee: 12500.0,
+      aplSmallOrderFee: 12500.0,
+      mpSmallOrderFee: 0,
+      zpSmallOrderFee: 0,
     );
     expect(
       result,
@@ -489,7 +495,9 @@ void main() {
         configs: fakePHSalesOrgConfigs,
         orderValue: 100.0,
         totalTax: 100,
-        smallOrderFee: 12500.0,
+        aplSmallOrderFee: 12500.0,
+        mpSmallOrderFee: 0,
+        zpSmallOrderFee: 0,
       );
       expect(
         result,
@@ -528,7 +536,9 @@ void main() {
         configs: fakePHSalesOrgConfigs,
         orderValue: 100.0,
         totalTax: 100,
-        smallOrderFee: 12500.0,
+        aplSmallOrderFee: 12500.0,
+        mpSmallOrderFee: 0,
+        zpSmallOrderFee: 0,
       );
       expect(
         result,
@@ -565,7 +575,9 @@ void main() {
         configs: fakePHSalesOrgConfigs,
         orderValue: 100.0,
         totalTax: 100,
-        smallOrderFee: 12500.0,
+        aplSmallOrderFee: 12500.0,
+        mpSmallOrderFee: 0,
+        zpSmallOrderFee: 0,
       );
       expect(
         result,
@@ -607,7 +619,9 @@ void main() {
         configs: fakePHSalesOrgConfigs,
         orderValue: 100.0,
         totalTax: 100,
-        smallOrderFee: 12500.0,
+        aplSmallOrderFee: 12500.0,
+        mpSmallOrderFee: 0,
+        zpSmallOrderFee: 0,
       );
       expect(
         result,
@@ -663,7 +677,9 @@ void main() {
         configs: fakeSGSalesOrgConfigs,
         orderValue: 100.0,
         totalTax: 100,
-        smallOrderFee: 12500.0,
+        aplSmallOrderFee: 12500.0,
+        mpSmallOrderFee: 0,
+        zpSmallOrderFee: 0,
       );
       expect(
         result,
@@ -723,7 +739,9 @@ void main() {
         configs: fakePHSalesOrgConfigs,
         orderValue: 100.0,
         totalTax: 100,
-        smallOrderFee: 12500.0,
+        aplSmallOrderFee: 12500.0,
+        mpSmallOrderFee: 0,
+        zpSmallOrderFee: 0,
       );
       expect(
         result,
@@ -779,7 +797,9 @@ void main() {
         configs: fakePHSalesOrgConfigs,
         orderValue: 100.0,
         totalTax: 100,
-        smallOrderFee: 12500.0,
+        aplSmallOrderFee: 12500.0,
+        mpSmallOrderFee: 0,
+        zpSmallOrderFee: 0,
       );
       expect(
         result,
@@ -854,7 +874,9 @@ void main() {
           configs: fakePHSalesOrgConfigs,
           orderValue: 100.0,
           totalTax: 100,
-          smallOrderFee: 12500.0,
+          aplSmallOrderFee: 12500.0,
+          mpSmallOrderFee: 0,
+          zpSmallOrderFee: 0,
         );
         expect(
           result,
@@ -895,7 +917,9 @@ void main() {
         configs: fakePHSalesOrgConfigs,
         orderValue: 100.0,
         totalTax: 100,
-        smallOrderFee: 12500.0,
+        aplSmallOrderFee: 12500.0,
+        mpSmallOrderFee: 0,
+        zpSmallOrderFee: 0,
       );
       expect(
         result,
@@ -1006,7 +1030,7 @@ void main() {
         cartProducts: cartMaterialsCombo,
         grandTotal: 210.0,
         orderValue: 210.0,
-        smallOrderFee: 12500.0,
+        aplSmallOrderFee: 12500.0,
         totalTax: 0.0,
         customerCodeInfo: fakeCustomerCodeInfo,
         salesOrganisation: fakeSalesOrganisation,
@@ -1014,6 +1038,8 @@ void main() {
         orderDocumentType: OrderDocumentType.empty()
             .copyWith(documentType: DocumentType('ZPOR'), orderReason: ''),
         configs: fakePHSalesOrgConfigs,
+        mpSmallOrderFee: 0,
+        zpSmallOrderFee: 0,
       );
       expect(
         result,
@@ -1067,7 +1093,9 @@ void main() {
           configs: fakeIDSalesOrgConfigs,
           orderValue: 100.0,
           totalTax: 100,
-          smallOrderFee: 12500.0,
+          aplSmallOrderFee: 12500.0,
+          mpSmallOrderFee: 0,
+          zpSmallOrderFee: 0,
         );
 
         expect(result, Right(submitOrderResponseMock));
@@ -1118,12 +1146,66 @@ void main() {
         configs: fakePHSalesOrgConfigs,
         orderValue: 310000.00,
         totalTax: 100,
-        smallOrderFee: 12500.0,
+        aplSmallOrderFee: 12500.0,
+        mpSmallOrderFee: 0,
+        zpSmallOrderFee: 0,
       );
 
       expect(result, Right(submitOrderResponseMock));
     },
   );
+
+  test(
+      'submit order should contain deliveryFee as null string in ID market when order valye is >=300000.00',
+      () async {
+    when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
+    final submitOrderMockIDMarket = submitOrderMock.copyWith(
+      orderValue: 310000.00,
+      customer: submitOrderMock.customer.copyWith(
+        salesOrganisation:
+            fakeIDSalesOrganisation.salesOrg.getOrDefaultValue(''),
+      ),
+    );
+
+    when(() => mockConfig.orderEncryptionSecret).thenReturn(fakeSecretKey);
+    when(
+      () => encryption.encryptionData(
+        data: SubmitOrderDto.fromDomain(
+          submitOrderMockIDMarket,
+        ).toJson()
+          ..addAll({'deliveryFee': 'null'}),
+        secretKey: fakeSecretKey,
+      ),
+    ).thenReturn(orderEncryptionMock);
+    when(
+      () => orderRemoteDataSource.submitOrder(
+        orderEncryption: orderEncryptionMock,
+        enableMarketPlace: fakeConfigValue,
+      ),
+    ).thenAnswer(
+      (invocation) async => submitOrderResponseMock,
+    );
+
+    final result = await orderRepository.submitOrder(
+      shipToInfo: mockShipToInfo,
+      user: fakeClientUser,
+      cartProducts: cartMaterials,
+      grandTotal: 100.0,
+      customerCodeInfo: fakeCustomerCodeInfo,
+      salesOrganisation: fakeIDSalesOrganisation,
+      data: deliveryInfoData,
+      orderDocumentType: OrderDocumentType.empty()
+          .copyWith(documentType: DocumentType('ZPOR'), orderReason: ''),
+      configs: fakePHSalesOrgConfigs,
+      orderValue: 310000.00,
+      totalTax: 100,
+      aplSmallOrderFee: 12500.0,
+      mpSmallOrderFee: 0,
+      zpSmallOrderFee: 0,
+    );
+
+    expect(result, Right(submitOrderResponseMock));
+  });
 
   group('OrderRepository => getOrderHistoryDetails', () {
     test('Locally success', () async {

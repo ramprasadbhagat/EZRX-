@@ -15,7 +15,9 @@ class OrderSummaryEvent with _$OrderSummaryEvent {
     required List<PriceAggregate> cartProducts,
     required double grandTotal,
     required double orderValue,
-    required double smallOrderFee,
+    required double aplSmallOrderFee,
+    required double zpSmallOrderFee,
+    required double mpSmallOrderFee,
     required double totalTax,
     required DeliveryInfoData data,
   }) = _SubmitOrder;

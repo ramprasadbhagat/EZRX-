@@ -59,6 +59,9 @@ mixin _$SubmitOrderDto {
   String get purchaseOrderType => throw _privateConstructorUsedError;
   @JsonKey(name: 'poDocuments', defaultValue: <PoDocumentsDto>[])
   List<PoDocumentsDto> get poDocuments => throw _privateConstructorUsedError;
+  @JsonKey(name: 'movDetails', includeIfNull: false)
+  SmallOrderFeeDetailDto? get smallOrderFeeDetail =>
+      throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -98,9 +101,12 @@ abstract class $SubmitOrderDtoCopyWith<$Res> {
       @JsonKey(name: 'PurchaseOrderType', defaultValue: '')
       String purchaseOrderType,
       @JsonKey(name: 'poDocuments', defaultValue: <PoDocumentsDto>[])
-      List<PoDocumentsDto> poDocuments});
+      List<PoDocumentsDto> poDocuments,
+      @JsonKey(name: 'movDetails', includeIfNull: false)
+      SmallOrderFeeDetailDto? smallOrderFeeDetail});
 
   $SubmitOrderCustomerDtoCopyWith<$Res> get customer;
+  $SmallOrderFeeDetailDtoCopyWith<$Res>? get smallOrderFeeDetail;
 }
 
 /// @nodoc
@@ -135,6 +141,7 @@ class _$SubmitOrderDtoCopyWithImpl<$Res, $Val extends SubmitOrderDto>
     Object? paymentMethod = null,
     Object? purchaseOrderType = null,
     Object? poDocuments = null,
+    Object? smallOrderFeeDetail = freezed,
   }) {
     return _then(_value.copyWith(
       userName: null == userName
@@ -213,6 +220,10 @@ class _$SubmitOrderDtoCopyWithImpl<$Res, $Val extends SubmitOrderDto>
           ? _value.poDocuments
           : poDocuments // ignore: cast_nullable_to_non_nullable
               as List<PoDocumentsDto>,
+      smallOrderFeeDetail: freezed == smallOrderFeeDetail
+          ? _value.smallOrderFeeDetail
+          : smallOrderFeeDetail // ignore: cast_nullable_to_non_nullable
+              as SmallOrderFeeDetailDto?,
     ) as $Val);
   }
 
@@ -221,6 +232,19 @@ class _$SubmitOrderDtoCopyWithImpl<$Res, $Val extends SubmitOrderDto>
   $SubmitOrderCustomerDtoCopyWith<$Res> get customer {
     return $SubmitOrderCustomerDtoCopyWith<$Res>(_value.customer, (value) {
       return _then(_value.copyWith(customer: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $SmallOrderFeeDetailDtoCopyWith<$Res>? get smallOrderFeeDetail {
+    if (_value.smallOrderFeeDetail == null) {
+      return null;
+    }
+
+    return $SmallOrderFeeDetailDtoCopyWith<$Res>(_value.smallOrderFeeDetail!,
+        (value) {
+      return _then(_value.copyWith(smallOrderFeeDetail: value) as $Val);
     });
   }
 }
@@ -259,10 +283,14 @@ abstract class _$$SubmitOrderDtoImplCopyWith<$Res>
       @JsonKey(name: 'PurchaseOrderType', defaultValue: '')
       String purchaseOrderType,
       @JsonKey(name: 'poDocuments', defaultValue: <PoDocumentsDto>[])
-      List<PoDocumentsDto> poDocuments});
+      List<PoDocumentsDto> poDocuments,
+      @JsonKey(name: 'movDetails', includeIfNull: false)
+      SmallOrderFeeDetailDto? smallOrderFeeDetail});
 
   @override
   $SubmitOrderCustomerDtoCopyWith<$Res> get customer;
+  @override
+  $SmallOrderFeeDetailDtoCopyWith<$Res>? get smallOrderFeeDetail;
 }
 
 /// @nodoc
@@ -295,6 +323,7 @@ class __$$SubmitOrderDtoImplCopyWithImpl<$Res>
     Object? paymentMethod = null,
     Object? purchaseOrderType = null,
     Object? poDocuments = null,
+    Object? smallOrderFeeDetail = freezed,
   }) {
     return _then(_$SubmitOrderDtoImpl(
       userName: null == userName
@@ -373,6 +402,10 @@ class __$$SubmitOrderDtoImplCopyWithImpl<$Res>
           ? _value._poDocuments
           : poDocuments // ignore: cast_nullable_to_non_nullable
               as List<PoDocumentsDto>,
+      smallOrderFeeDetail: freezed == smallOrderFeeDetail
+          ? _value.smallOrderFeeDetail
+          : smallOrderFeeDetail // ignore: cast_nullable_to_non_nullable
+              as SmallOrderFeeDetailDto?,
     ));
   }
 }
@@ -409,7 +442,9 @@ class _$SubmitOrderDtoImpl extends _SubmitOrderDto {
       @JsonKey(name: 'PurchaseOrderType', defaultValue: '')
       required this.purchaseOrderType,
       @JsonKey(name: 'poDocuments', defaultValue: <PoDocumentsDto>[])
-      required final List<PoDocumentsDto> poDocuments})
+      required final List<PoDocumentsDto> poDocuments,
+      @JsonKey(name: 'movDetails', includeIfNull: false)
+      this.smallOrderFeeDetail})
       : _materials = materials,
         _poDocuments = poDocuments,
         super._();
@@ -487,8 +522,12 @@ class _$SubmitOrderDtoImpl extends _SubmitOrderDto {
   }
 
   @override
+  @JsonKey(name: 'movDetails', includeIfNull: false)
+  final SmallOrderFeeDetailDto? smallOrderFeeDetail;
+
+  @override
   String toString() {
-    return 'SubmitOrderDto(userName: $userName, companyName: $companyName, customer: $customer, poReference: $poReference, materials: $materials, poDate: $poDate, requestedDeliveryDate: $requestedDeliveryDate, specialInstructions: $specialInstructions, orderValue: $orderValue, totalTax: $totalTax, telephone: $telephone, referenceNotes: $referenceNotes, paymentTerms: $paymentTerms, collectiveNumber: $collectiveNumber, blockOrder: $blockOrder, language: $language, paymentMethod: $paymentMethod, purchaseOrderType: $purchaseOrderType, poDocuments: $poDocuments)';
+    return 'SubmitOrderDto(userName: $userName, companyName: $companyName, customer: $customer, poReference: $poReference, materials: $materials, poDate: $poDate, requestedDeliveryDate: $requestedDeliveryDate, specialInstructions: $specialInstructions, orderValue: $orderValue, totalTax: $totalTax, telephone: $telephone, referenceNotes: $referenceNotes, paymentTerms: $paymentTerms, collectiveNumber: $collectiveNumber, blockOrder: $blockOrder, language: $language, paymentMethod: $paymentMethod, purchaseOrderType: $purchaseOrderType, poDocuments: $poDocuments, smallOrderFeeDetail: $smallOrderFeeDetail)';
   }
 
   @override
@@ -532,7 +571,9 @@ class _$SubmitOrderDtoImpl extends _SubmitOrderDto {
             (identical(other.purchaseOrderType, purchaseOrderType) ||
                 other.purchaseOrderType == purchaseOrderType) &&
             const DeepCollectionEquality()
-                .equals(other._poDocuments, _poDocuments));
+                .equals(other._poDocuments, _poDocuments) &&
+            (identical(other.smallOrderFeeDetail, smallOrderFeeDetail) ||
+                other.smallOrderFeeDetail == smallOrderFeeDetail));
   }
 
   @JsonKey(ignore: true)
@@ -557,7 +598,8 @@ class _$SubmitOrderDtoImpl extends _SubmitOrderDto {
         language,
         paymentMethod,
         purchaseOrderType,
-        const DeepCollectionEquality().hash(_poDocuments)
+        const DeepCollectionEquality().hash(_poDocuments),
+        smallOrderFeeDetail
       ]);
 
   @JsonKey(ignore: true)
@@ -612,7 +654,10 @@ abstract class _SubmitOrderDto extends SubmitOrderDto {
       @JsonKey(name: 'PurchaseOrderType', defaultValue: '')
       required final String purchaseOrderType,
       @JsonKey(name: 'poDocuments', defaultValue: <PoDocumentsDto>[])
-      required final List<PoDocumentsDto> poDocuments}) = _$SubmitOrderDtoImpl;
+      required final List<PoDocumentsDto> poDocuments,
+      @JsonKey(name: 'movDetails', includeIfNull: false)
+      final SmallOrderFeeDetailDto?
+          smallOrderFeeDetail}) = _$SubmitOrderDtoImpl;
   const _SubmitOrderDto._() : super._();
 
   factory _SubmitOrderDto.fromJson(Map<String, dynamic> json) =
@@ -676,7 +721,218 @@ abstract class _SubmitOrderDto extends SubmitOrderDto {
   @JsonKey(name: 'poDocuments', defaultValue: <PoDocumentsDto>[])
   List<PoDocumentsDto> get poDocuments;
   @override
+  @JsonKey(name: 'movDetails', includeIfNull: false)
+  SmallOrderFeeDetailDto? get smallOrderFeeDetail;
+  @override
   @JsonKey(ignore: true)
   _$$SubmitOrderDtoImplCopyWith<_$SubmitOrderDtoImpl> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+SmallOrderFeeDetailDto _$SmallOrderFeeDetailDtoFromJson(
+    Map<String, dynamic> json) {
+  return _SmallOrderFeeDetailDto.fromJson(json);
+}
+
+/// @nodoc
+mixin _$SmallOrderFeeDetailDto {
+  @JsonKey(name: 'smallOrderFee', defaultValue: '')
+  String get smallOrderFee => throw _privateConstructorUsedError;
+  @JsonKey(name: 'mpSmallOrderFee', defaultValue: '', includeIfNull: false)
+  String? get mpSmallOrderFee => throw _privateConstructorUsedError;
+  @JsonKey(name: 'currency', defaultValue: '')
+  String get currency => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $SmallOrderFeeDetailDtoCopyWith<SmallOrderFeeDetailDto> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $SmallOrderFeeDetailDtoCopyWith<$Res> {
+  factory $SmallOrderFeeDetailDtoCopyWith(SmallOrderFeeDetailDto value,
+          $Res Function(SmallOrderFeeDetailDto) then) =
+      _$SmallOrderFeeDetailDtoCopyWithImpl<$Res, SmallOrderFeeDetailDto>;
+  @useResult
+  $Res call(
+      {@JsonKey(name: 'smallOrderFee', defaultValue: '') String smallOrderFee,
+      @JsonKey(name: 'mpSmallOrderFee', defaultValue: '', includeIfNull: false)
+      String? mpSmallOrderFee,
+      @JsonKey(name: 'currency', defaultValue: '') String currency});
+}
+
+/// @nodoc
+class _$SmallOrderFeeDetailDtoCopyWithImpl<$Res,
+        $Val extends SmallOrderFeeDetailDto>
+    implements $SmallOrderFeeDetailDtoCopyWith<$Res> {
+  _$SmallOrderFeeDetailDtoCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? smallOrderFee = null,
+    Object? mpSmallOrderFee = freezed,
+    Object? currency = null,
+  }) {
+    return _then(_value.copyWith(
+      smallOrderFee: null == smallOrderFee
+          ? _value.smallOrderFee
+          : smallOrderFee // ignore: cast_nullable_to_non_nullable
+              as String,
+      mpSmallOrderFee: freezed == mpSmallOrderFee
+          ? _value.mpSmallOrderFee
+          : mpSmallOrderFee // ignore: cast_nullable_to_non_nullable
+              as String?,
+      currency: null == currency
+          ? _value.currency
+          : currency // ignore: cast_nullable_to_non_nullable
+              as String,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$SmallOrderFeeDetailDtoImplCopyWith<$Res>
+    implements $SmallOrderFeeDetailDtoCopyWith<$Res> {
+  factory _$$SmallOrderFeeDetailDtoImplCopyWith(
+          _$SmallOrderFeeDetailDtoImpl value,
+          $Res Function(_$SmallOrderFeeDetailDtoImpl) then) =
+      __$$SmallOrderFeeDetailDtoImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {@JsonKey(name: 'smallOrderFee', defaultValue: '') String smallOrderFee,
+      @JsonKey(name: 'mpSmallOrderFee', defaultValue: '', includeIfNull: false)
+      String? mpSmallOrderFee,
+      @JsonKey(name: 'currency', defaultValue: '') String currency});
+}
+
+/// @nodoc
+class __$$SmallOrderFeeDetailDtoImplCopyWithImpl<$Res>
+    extends _$SmallOrderFeeDetailDtoCopyWithImpl<$Res,
+        _$SmallOrderFeeDetailDtoImpl>
+    implements _$$SmallOrderFeeDetailDtoImplCopyWith<$Res> {
+  __$$SmallOrderFeeDetailDtoImplCopyWithImpl(
+      _$SmallOrderFeeDetailDtoImpl _value,
+      $Res Function(_$SmallOrderFeeDetailDtoImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? smallOrderFee = null,
+    Object? mpSmallOrderFee = freezed,
+    Object? currency = null,
+  }) {
+    return _then(_$SmallOrderFeeDetailDtoImpl(
+      smallOrderFee: null == smallOrderFee
+          ? _value.smallOrderFee
+          : smallOrderFee // ignore: cast_nullable_to_non_nullable
+              as String,
+      mpSmallOrderFee: freezed == mpSmallOrderFee
+          ? _value.mpSmallOrderFee
+          : mpSmallOrderFee // ignore: cast_nullable_to_non_nullable
+              as String?,
+      currency: null == currency
+          ? _value.currency
+          : currency // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$SmallOrderFeeDetailDtoImpl extends _SmallOrderFeeDetailDto {
+  const _$SmallOrderFeeDetailDtoImpl(
+      {@JsonKey(name: 'smallOrderFee', defaultValue: '')
+      required this.smallOrderFee,
+      @JsonKey(name: 'mpSmallOrderFee', defaultValue: '', includeIfNull: false)
+      this.mpSmallOrderFee,
+      @JsonKey(name: 'currency', defaultValue: '') required this.currency})
+      : super._();
+
+  factory _$SmallOrderFeeDetailDtoImpl.fromJson(Map<String, dynamic> json) =>
+      _$$SmallOrderFeeDetailDtoImplFromJson(json);
+
+  @override
+  @JsonKey(name: 'smallOrderFee', defaultValue: '')
+  final String smallOrderFee;
+  @override
+  @JsonKey(name: 'mpSmallOrderFee', defaultValue: '', includeIfNull: false)
+  final String? mpSmallOrderFee;
+  @override
+  @JsonKey(name: 'currency', defaultValue: '')
+  final String currency;
+
+  @override
+  String toString() {
+    return 'SmallOrderFeeDetailDto(smallOrderFee: $smallOrderFee, mpSmallOrderFee: $mpSmallOrderFee, currency: $currency)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$SmallOrderFeeDetailDtoImpl &&
+            (identical(other.smallOrderFee, smallOrderFee) ||
+                other.smallOrderFee == smallOrderFee) &&
+            (identical(other.mpSmallOrderFee, mpSmallOrderFee) ||
+                other.mpSmallOrderFee == mpSmallOrderFee) &&
+            (identical(other.currency, currency) ||
+                other.currency == currency));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, smallOrderFee, mpSmallOrderFee, currency);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$SmallOrderFeeDetailDtoImplCopyWith<_$SmallOrderFeeDetailDtoImpl>
+      get copyWith => __$$SmallOrderFeeDetailDtoImplCopyWithImpl<
+          _$SmallOrderFeeDetailDtoImpl>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$SmallOrderFeeDetailDtoImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _SmallOrderFeeDetailDto extends SmallOrderFeeDetailDto {
+  const factory _SmallOrderFeeDetailDto(
+      {@JsonKey(name: 'smallOrderFee', defaultValue: '')
+      required final String smallOrderFee,
+      @JsonKey(name: 'mpSmallOrderFee', defaultValue: '', includeIfNull: false)
+      final String? mpSmallOrderFee,
+      @JsonKey(name: 'currency', defaultValue: '')
+      required final String currency}) = _$SmallOrderFeeDetailDtoImpl;
+  const _SmallOrderFeeDetailDto._() : super._();
+
+  factory _SmallOrderFeeDetailDto.fromJson(Map<String, dynamic> json) =
+      _$SmallOrderFeeDetailDtoImpl.fromJson;
+
+  @override
+  @JsonKey(name: 'smallOrderFee', defaultValue: '')
+  String get smallOrderFee;
+  @override
+  @JsonKey(name: 'mpSmallOrderFee', defaultValue: '', includeIfNull: false)
+  String? get mpSmallOrderFee;
+  @override
+  @JsonKey(name: 'currency', defaultValue: '')
+  String get currency;
+  @override
+  @JsonKey(ignore: true)
+  _$$SmallOrderFeeDetailDtoImplCopyWith<_$SmallOrderFeeDetailDtoImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }

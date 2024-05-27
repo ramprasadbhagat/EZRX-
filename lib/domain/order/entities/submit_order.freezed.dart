@@ -12,7 +12,7 @@ part of 'submit_order.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$SubmitOrder {
@@ -36,6 +36,8 @@ mixin _$SubmitOrder {
   String get language => throw _privateConstructorUsedError;
   String get paymentMethod => throw _privateConstructorUsedError;
   String get purchaseOrderType => throw _privateConstructorUsedError;
+  SmallOrderFeeDetail get smallOrderFeeDetail =>
+      throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $SubmitOrderCopyWith<SubmitOrder> get copyWith =>
@@ -68,9 +70,11 @@ abstract class $SubmitOrderCopyWith<$Res> {
       List<PoDocuments> poDocuments,
       String language,
       String paymentMethod,
-      String purchaseOrderType});
+      String purchaseOrderType,
+      SmallOrderFeeDetail smallOrderFeeDetail});
 
   $SubmitOrderCustomerCopyWith<$Res> get customer;
+  $SmallOrderFeeDetailCopyWith<$Res> get smallOrderFeeDetail;
 }
 
 /// @nodoc
@@ -106,6 +110,7 @@ class _$SubmitOrderCopyWithImpl<$Res, $Val extends SubmitOrder>
     Object? language = null,
     Object? paymentMethod = null,
     Object? purchaseOrderType = null,
+    Object? smallOrderFeeDetail = null,
   }) {
     return _then(_value.copyWith(
       userName: null == userName
@@ -188,6 +193,10 @@ class _$SubmitOrderCopyWithImpl<$Res, $Val extends SubmitOrder>
           ? _value.purchaseOrderType
           : purchaseOrderType // ignore: cast_nullable_to_non_nullable
               as String,
+      smallOrderFeeDetail: null == smallOrderFeeDetail
+          ? _value.smallOrderFeeDetail
+          : smallOrderFeeDetail // ignore: cast_nullable_to_non_nullable
+              as SmallOrderFeeDetail,
     ) as $Val);
   }
 
@@ -198,14 +207,23 @@ class _$SubmitOrderCopyWithImpl<$Res, $Val extends SubmitOrder>
       return _then(_value.copyWith(customer: value) as $Val);
     });
   }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $SmallOrderFeeDetailCopyWith<$Res> get smallOrderFeeDetail {
+    return $SmallOrderFeeDetailCopyWith<$Res>(_value.smallOrderFeeDetail,
+        (value) {
+      return _then(_value.copyWith(smallOrderFeeDetail: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
-abstract class _$$_SubmitOrderCustomerCopyWith<$Res>
+abstract class _$$SubmitOrderCustomerImplCopyWith<$Res>
     implements $SubmitOrderCopyWith<$Res> {
-  factory _$$_SubmitOrderCustomerCopyWith(_$_SubmitOrderCustomer value,
-          $Res Function(_$_SubmitOrderCustomer) then) =
-      __$$_SubmitOrderCustomerCopyWithImpl<$Res>;
+  factory _$$SubmitOrderCustomerImplCopyWith(_$SubmitOrderCustomerImpl value,
+          $Res Function(_$SubmitOrderCustomerImpl) then) =
+      __$$SubmitOrderCustomerImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -228,18 +246,21 @@ abstract class _$$_SubmitOrderCustomerCopyWith<$Res>
       List<PoDocuments> poDocuments,
       String language,
       String paymentMethod,
-      String purchaseOrderType});
+      String purchaseOrderType,
+      SmallOrderFeeDetail smallOrderFeeDetail});
 
   @override
   $SubmitOrderCustomerCopyWith<$Res> get customer;
+  @override
+  $SmallOrderFeeDetailCopyWith<$Res> get smallOrderFeeDetail;
 }
 
 /// @nodoc
-class __$$_SubmitOrderCustomerCopyWithImpl<$Res>
-    extends _$SubmitOrderCopyWithImpl<$Res, _$_SubmitOrderCustomer>
-    implements _$$_SubmitOrderCustomerCopyWith<$Res> {
-  __$$_SubmitOrderCustomerCopyWithImpl(_$_SubmitOrderCustomer _value,
-      $Res Function(_$_SubmitOrderCustomer) _then)
+class __$$SubmitOrderCustomerImplCopyWithImpl<$Res>
+    extends _$SubmitOrderCopyWithImpl<$Res, _$SubmitOrderCustomerImpl>
+    implements _$$SubmitOrderCustomerImplCopyWith<$Res> {
+  __$$SubmitOrderCustomerImplCopyWithImpl(_$SubmitOrderCustomerImpl _value,
+      $Res Function(_$SubmitOrderCustomerImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -265,8 +286,9 @@ class __$$_SubmitOrderCustomerCopyWithImpl<$Res>
     Object? language = null,
     Object? paymentMethod = null,
     Object? purchaseOrderType = null,
+    Object? smallOrderFeeDetail = null,
   }) {
-    return _then(_$_SubmitOrderCustomer(
+    return _then(_$SubmitOrderCustomerImpl(
       userName: null == userName
           ? _value.userName
           : userName // ignore: cast_nullable_to_non_nullable
@@ -347,14 +369,18 @@ class __$$_SubmitOrderCustomerCopyWithImpl<$Res>
           ? _value.purchaseOrderType
           : purchaseOrderType // ignore: cast_nullable_to_non_nullable
               as String,
+      smallOrderFeeDetail: null == smallOrderFeeDetail
+          ? _value.smallOrderFeeDetail
+          : smallOrderFeeDetail // ignore: cast_nullable_to_non_nullable
+              as SmallOrderFeeDetail,
     ));
   }
 }
 
 /// @nodoc
 
-class _$_SubmitOrderCustomer extends _SubmitOrderCustomer {
-  const _$_SubmitOrderCustomer(
+class _$SubmitOrderCustomerImpl extends _SubmitOrderCustomer {
+  const _$SubmitOrderCustomerImpl(
       {required this.userName,
       required this.companyName,
       required this.customer,
@@ -374,7 +400,8 @@ class _$_SubmitOrderCustomer extends _SubmitOrderCustomer {
       required final List<PoDocuments> poDocuments,
       required this.language,
       required this.paymentMethod,
-      required this.purchaseOrderType})
+      required this.purchaseOrderType,
+      required this.smallOrderFeeDetail})
       : _products = products,
         _poDocuments = poDocuments,
         super._();
@@ -431,17 +458,19 @@ class _$_SubmitOrderCustomer extends _SubmitOrderCustomer {
   final String paymentMethod;
   @override
   final String purchaseOrderType;
+  @override
+  final SmallOrderFeeDetail smallOrderFeeDetail;
 
   @override
   String toString() {
-    return 'SubmitOrder(userName: $userName, companyName: $companyName, customer: $customer, poReference: $poReference, products: $products, poDate: $poDate, requestedDeliveryDate: $requestedDeliveryDate, specialInstructions: $specialInstructions, orderValue: $orderValue, totalTax: $totalTax, telephone: $telephone, referenceNotes: $referenceNotes, paymentTerms: $paymentTerms, collectiveNumber: $collectiveNumber, orderType: $orderType, blockOrder: $blockOrder, poDocuments: $poDocuments, language: $language, paymentMethod: $paymentMethod, purchaseOrderType: $purchaseOrderType)';
+    return 'SubmitOrder(userName: $userName, companyName: $companyName, customer: $customer, poReference: $poReference, products: $products, poDate: $poDate, requestedDeliveryDate: $requestedDeliveryDate, specialInstructions: $specialInstructions, orderValue: $orderValue, totalTax: $totalTax, telephone: $telephone, referenceNotes: $referenceNotes, paymentTerms: $paymentTerms, collectiveNumber: $collectiveNumber, orderType: $orderType, blockOrder: $blockOrder, poDocuments: $poDocuments, language: $language, paymentMethod: $paymentMethod, purchaseOrderType: $purchaseOrderType, smallOrderFeeDetail: $smallOrderFeeDetail)';
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_SubmitOrderCustomer &&
+            other is _$SubmitOrderCustomerImpl &&
             (identical(other.userName, userName) ||
                 other.userName == userName) &&
             (identical(other.companyName, companyName) ||
@@ -479,7 +508,9 @@ class _$_SubmitOrderCustomer extends _SubmitOrderCustomer {
             (identical(other.paymentMethod, paymentMethod) ||
                 other.paymentMethod == paymentMethod) &&
             (identical(other.purchaseOrderType, purchaseOrderType) ||
-                other.purchaseOrderType == purchaseOrderType));
+                other.purchaseOrderType == purchaseOrderType) &&
+            (identical(other.smallOrderFeeDetail, smallOrderFeeDetail) ||
+                other.smallOrderFeeDetail == smallOrderFeeDetail));
   }
 
   @override
@@ -504,39 +535,42 @@ class _$_SubmitOrderCustomer extends _SubmitOrderCustomer {
         const DeepCollectionEquality().hash(_poDocuments),
         language,
         paymentMethod,
-        purchaseOrderType
+        purchaseOrderType,
+        smallOrderFeeDetail
       ]);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_SubmitOrderCustomerCopyWith<_$_SubmitOrderCustomer> get copyWith =>
-      __$$_SubmitOrderCustomerCopyWithImpl<_$_SubmitOrderCustomer>(
+  _$$SubmitOrderCustomerImplCopyWith<_$SubmitOrderCustomerImpl> get copyWith =>
+      __$$SubmitOrderCustomerImplCopyWithImpl<_$SubmitOrderCustomerImpl>(
           this, _$identity);
 }
 
 abstract class _SubmitOrderCustomer extends SubmitOrder {
   const factory _SubmitOrderCustomer(
-      {required final String userName,
-      required final CompanyName companyName,
-      required final SubmitOrderCustomer customer,
-      required final String poReference,
-      required final List<SubmitMaterialInfo> products,
-      required final String poDate,
-      required final String requestedDeliveryDate,
-      required final String specialInstructions,
-      required final double orderValue,
-      required final double totalTax,
-      required final String telephone,
-      required final String referenceNotes,
-      required final String paymentTerms,
-      required final String collectiveNumber,
-      required final String orderType,
-      required final bool blockOrder,
-      required final List<PoDocuments> poDocuments,
-      required final String language,
-      required final String paymentMethod,
-      required final String purchaseOrderType}) = _$_SubmitOrderCustomer;
+          {required final String userName,
+          required final CompanyName companyName,
+          required final SubmitOrderCustomer customer,
+          required final String poReference,
+          required final List<SubmitMaterialInfo> products,
+          required final String poDate,
+          required final String requestedDeliveryDate,
+          required final String specialInstructions,
+          required final double orderValue,
+          required final double totalTax,
+          required final String telephone,
+          required final String referenceNotes,
+          required final String paymentTerms,
+          required final String collectiveNumber,
+          required final String orderType,
+          required final bool blockOrder,
+          required final List<PoDocuments> poDocuments,
+          required final String language,
+          required final String paymentMethod,
+          required final String purchaseOrderType,
+          required final SmallOrderFeeDetail smallOrderFeeDetail}) =
+      _$SubmitOrderCustomerImpl;
   const _SubmitOrderCustomer._() : super._();
 
   @override
@@ -580,7 +614,173 @@ abstract class _SubmitOrderCustomer extends SubmitOrder {
   @override
   String get purchaseOrderType;
   @override
+  SmallOrderFeeDetail get smallOrderFeeDetail;
+  @override
   @JsonKey(ignore: true)
-  _$$_SubmitOrderCustomerCopyWith<_$_SubmitOrderCustomer> get copyWith =>
+  _$$SubmitOrderCustomerImplCopyWith<_$SubmitOrderCustomerImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+mixin _$SmallOrderFeeDetail {
+  double get zpSmallOrderFee => throw _privateConstructorUsedError;
+  double get mpSmallOrderFee => throw _privateConstructorUsedError;
+  Currency get currency => throw _privateConstructorUsedError;
+
+  @JsonKey(ignore: true)
+  $SmallOrderFeeDetailCopyWith<SmallOrderFeeDetail> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $SmallOrderFeeDetailCopyWith<$Res> {
+  factory $SmallOrderFeeDetailCopyWith(
+          SmallOrderFeeDetail value, $Res Function(SmallOrderFeeDetail) then) =
+      _$SmallOrderFeeDetailCopyWithImpl<$Res, SmallOrderFeeDetail>;
+  @useResult
+  $Res call(
+      {double zpSmallOrderFee, double mpSmallOrderFee, Currency currency});
+}
+
+/// @nodoc
+class _$SmallOrderFeeDetailCopyWithImpl<$Res, $Val extends SmallOrderFeeDetail>
+    implements $SmallOrderFeeDetailCopyWith<$Res> {
+  _$SmallOrderFeeDetailCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? zpSmallOrderFee = null,
+    Object? mpSmallOrderFee = null,
+    Object? currency = null,
+  }) {
+    return _then(_value.copyWith(
+      zpSmallOrderFee: null == zpSmallOrderFee
+          ? _value.zpSmallOrderFee
+          : zpSmallOrderFee // ignore: cast_nullable_to_non_nullable
+              as double,
+      mpSmallOrderFee: null == mpSmallOrderFee
+          ? _value.mpSmallOrderFee
+          : mpSmallOrderFee // ignore: cast_nullable_to_non_nullable
+              as double,
+      currency: null == currency
+          ? _value.currency
+          : currency // ignore: cast_nullable_to_non_nullable
+              as Currency,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$SmallOrderFeeDetailImplCopyWith<$Res>
+    implements $SmallOrderFeeDetailCopyWith<$Res> {
+  factory _$$SmallOrderFeeDetailImplCopyWith(_$SmallOrderFeeDetailImpl value,
+          $Res Function(_$SmallOrderFeeDetailImpl) then) =
+      __$$SmallOrderFeeDetailImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {double zpSmallOrderFee, double mpSmallOrderFee, Currency currency});
+}
+
+/// @nodoc
+class __$$SmallOrderFeeDetailImplCopyWithImpl<$Res>
+    extends _$SmallOrderFeeDetailCopyWithImpl<$Res, _$SmallOrderFeeDetailImpl>
+    implements _$$SmallOrderFeeDetailImplCopyWith<$Res> {
+  __$$SmallOrderFeeDetailImplCopyWithImpl(_$SmallOrderFeeDetailImpl _value,
+      $Res Function(_$SmallOrderFeeDetailImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? zpSmallOrderFee = null,
+    Object? mpSmallOrderFee = null,
+    Object? currency = null,
+  }) {
+    return _then(_$SmallOrderFeeDetailImpl(
+      zpSmallOrderFee: null == zpSmallOrderFee
+          ? _value.zpSmallOrderFee
+          : zpSmallOrderFee // ignore: cast_nullable_to_non_nullable
+              as double,
+      mpSmallOrderFee: null == mpSmallOrderFee
+          ? _value.mpSmallOrderFee
+          : mpSmallOrderFee // ignore: cast_nullable_to_non_nullable
+              as double,
+      currency: null == currency
+          ? _value.currency
+          : currency // ignore: cast_nullable_to_non_nullable
+              as Currency,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$SmallOrderFeeDetailImpl extends _SmallOrderFeeDetail {
+  const _$SmallOrderFeeDetailImpl(
+      {required this.zpSmallOrderFee,
+      required this.mpSmallOrderFee,
+      required this.currency})
+      : super._();
+
+  @override
+  final double zpSmallOrderFee;
+  @override
+  final double mpSmallOrderFee;
+  @override
+  final Currency currency;
+
+  @override
+  String toString() {
+    return 'SmallOrderFeeDetail(zpSmallOrderFee: $zpSmallOrderFee, mpSmallOrderFee: $mpSmallOrderFee, currency: $currency)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$SmallOrderFeeDetailImpl &&
+            (identical(other.zpSmallOrderFee, zpSmallOrderFee) ||
+                other.zpSmallOrderFee == zpSmallOrderFee) &&
+            (identical(other.mpSmallOrderFee, mpSmallOrderFee) ||
+                other.mpSmallOrderFee == mpSmallOrderFee) &&
+            (identical(other.currency, currency) ||
+                other.currency == currency));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, zpSmallOrderFee, mpSmallOrderFee, currency);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$SmallOrderFeeDetailImplCopyWith<_$SmallOrderFeeDetailImpl> get copyWith =>
+      __$$SmallOrderFeeDetailImplCopyWithImpl<_$SmallOrderFeeDetailImpl>(
+          this, _$identity);
+}
+
+abstract class _SmallOrderFeeDetail extends SmallOrderFeeDetail {
+  const factory _SmallOrderFeeDetail(
+      {required final double zpSmallOrderFee,
+      required final double mpSmallOrderFee,
+      required final Currency currency}) = _$SmallOrderFeeDetailImpl;
+  const _SmallOrderFeeDetail._() : super._();
+
+  @override
+  double get zpSmallOrderFee;
+  @override
+  double get mpSmallOrderFee;
+  @override
+  Currency get currency;
+  @override
+  @JsonKey(ignore: true)
+  _$$SmallOrderFeeDetailImplCopyWith<_$SmallOrderFeeDetailImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -330,6 +330,22 @@ String roleOrderType(String roleType) {
   }
 }
 
+String transformToSmallOrderFeeRole(String roleType) {
+  switch (roleType) {
+    case 'root_admin':
+      return 'Root Admin';
+    case 'client_admin':
+      return 'Client Admin';
+    case 'client_user':
+    case 'user':
+      return 'Client User';
+    case 'external_sales_rep':
+      return 'External Sales Rep';
+    default:
+      return '';
+  }
+}
+
 bool isZero(int value) => value == 0;
 
 String currencySymbol(String currency) {

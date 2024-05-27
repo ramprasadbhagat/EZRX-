@@ -381,7 +381,9 @@ void main() {
               grandTotal: 234.5,
               orderValue: 234.5,
               totalTax: 0.0,
-              smallOrderFee: 12500.0,
+              aplSmallOrderFee: 12500.0,
+              mpSmallOrderFee: 0,
+              zpSmallOrderFee: 0,
               data: DeliveryInfoData.empty()
                   .copyWith(contactPerson: ContactPerson('fakeInput')),
             ),

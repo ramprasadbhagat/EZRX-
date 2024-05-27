@@ -760,54 +760,54 @@ class PriceAggregate with _$PriceAggregate {
       salesOrgConfig.addOosMaterials.getOrDefaultValue(false) &&
       !salesOrgConfig.hideStockDisplay;
 
-  StatusType productTag(bool isUserValidToProcess) =>
-      !stockInfoList.any((e) => e.inStock.isMaterialInStock)
-          ? isUserValidToProcess
-              ? StatusType(salesOrgConfig.addOosMaterials.oosMaterialTag)
-              : StatusType(salesOrgConfig.addOosMaterials.oosTag)
-          : StatusType('');
-
-  bool get inStock =>
-      stockInfoList.any((element) => element.inStock.isMaterialInStock);
-
   StockInfo get productStockInfo => stockInfoList.firstWhere(
         (element) => element.materialNumber.isValid(),
         orElse: () => StockInfo.empty(),
       );
 
-  bool get isOOSProduct =>
-      !inStock && !salesOrgConfig.addOosMaterials.getOrDefaultValue(true);
+  bool get inStock => stockInfoList.inStock;
 
   // getter to check if there is any item present in cart which is out of stock
-  bool get isAnyOOSItemPresentInCart {
+  bool get containOOSItem {
     if (materialInfo.type.typeBundle) {
-      return anyBundleOos;
+      return bundle.materials.any((e) => !e.stockInfos.inStock);
     } else if (materialInfo.type.typeCombo) {
-      return anyComboOos;
+      return comboMaterials.any((e) => !e.materialInfo.stockInfos.inStock);
     } else {
-      return anyMaterialOos;
+      return !inStock;
     }
   }
 
-  bool get anyBundleOos {
-    return bundle.materials.any(
-      (material) => isMaterialOutOfStock(material.stockInfos),
-    );
+  bool get containAllOOSItem {
+    if (materialInfo.type.typeBundle) {
+      return bundle.materials.every((e) => !e.stockInfos.inStock);
+    } else if (materialInfo.type.typeCombo) {
+      return comboMaterials.every((e) => !e.materialInfo.stockInfos.inStock);
+    } else {
+      return !inStock;
+    }
   }
 
-  bool get anyComboOos {
-    return comboMaterials.any(
-      (material) => isMaterialOutOfStock(material.materialInfo.stockInfos),
-    );
-  }
+  double get totalPriceWithInStockOnly {
+    final type = materialInfo.type;
+    if (type.typeBundle) {
+      final currentRate = bundle.currentBundleInfo.rate;
+      final totalInStockQty = bundle.materials
+          .where((e) => e.stockInfos.inStock)
+          .fold<double>(0, (sum, e) => sum + e.quantity.intValue);
 
-  bool get anyMaterialOos {
-    return isMaterialOutOfStock(stockInfoList);
-  }
+      return totalInStockQty * currentRate;
+    }
 
-  bool isMaterialOutOfStock(List<StockInfo> stockInfos) {
-    return stockInfos.isEmpty ||
-        stockInfos.any((stock) => !stock.inStock.isMaterialInStock);
+    if (type.typeCombo) {
+      return copyWith(
+        comboMaterials: comboMaterials
+            .where((e) => e.materialInfo.stockInfos.inStock)
+            .toList(),
+      ).comboSubTotalExclTax;
+    }
+
+    return inStock ? finalPriceTotal : 0;
   }
 
   List<BonusSampleItem> getNewlyAddedItems(List<BonusSampleItem> oldBonusList) {
@@ -862,14 +862,7 @@ class PriceAggregate with _$PriceAggregate {
   bool get tireItemPriceDisplay =>
       (price.tiers.isNotEmpty && materialInfo.quantity.intValue >= 1);
 
-  int get getTotalQuantityOfBundleProduct => bundle.materials.fold(
-        0,
-        (previousValue, element) => (previousValue) + element.quantity.intValue,
-      );
-
-  bool get isBundleMinimumQuantitySatisfies =>
-      getTotalQuantityOfBundleProduct >=
-      bundle.minimumQuantityBundleMaterial.quantity;
+  bool get isBundleMinimumQuantitySatisfies => bundle.miniumQtySatisfied;
 
   bool get checkListPrice {
     final regex = RegExp(r'[a-zA-Z]');

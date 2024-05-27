@@ -75,7 +75,9 @@ class OrderRepository implements IOrderRepository {
     required List<PriceAggregate> cartProducts,
     required double grandTotal,
     required double orderValue,
-    required double smallOrderFee,
+    required double aplSmallOrderFee,
+    required double zpSmallOrderFee,
+    required double mpSmallOrderFee,
     required double totalTax,
     required CustomerCodeInfo customerCodeInfo,
     required SalesOrganisation salesOrganisation,
@@ -90,6 +92,8 @@ class OrderRepository implements IOrderRepository {
       cartProducts: cartProducts,
       orderValue: orderValue,
       totalTax: totalTax,
+      mpSmallOrderFee: mpSmallOrderFee,
+      zpSmallOrderFee: zpSmallOrderFee,
       customerCodeInfo: customerCodeInfo,
       salesOrganisation: salesOrganisation,
       configs: configs,
@@ -117,7 +121,7 @@ class OrderRepository implements IOrderRepository {
         if (orderValue >= salesOrganisation.salesOrg.smallOrderThreshold) {
           submitOrderData.addAll({'deliveryFee': 'null'});
         } else {
-          submitOrderData.addAll({'deliveryFee': smallOrderFee.toString()});
+          submitOrderData.addAll({'deliveryFee': aplSmallOrderFee.toString()});
         }
       }
       if (submitOrder.orderType.isNotEmpty) {
@@ -350,11 +354,13 @@ class OrderRepository implements IOrderRepository {
     required List<PriceAggregate> cartProducts,
     required double orderValue,
     required double totalTax,
+    required double zpSmallOrderFee,
+    required double mpSmallOrderFee,
     required CustomerCodeInfo customerCodeInfo,
     required SalesOrganisation salesOrganisation,
     required SalesOrganisationConfigs configs,
   }) {
-    return SubmitOrder.empty().copyWith(
+    return SubmitOrder(
       userName: data.contactPerson.getValue().isNotEmpty
           ? data.contactPerson.getValue()
           : user.username.getOrDefaultValue(''),
@@ -386,6 +392,11 @@ class OrderRepository implements IOrderRepository {
         salesOrg: salesOrganisation.salesOrg,
       ),
       purchaseOrderType: user.role.type.purchaseOrderType,
+      smallOrderFeeDetail: SmallOrderFeeDetail(
+        zpSmallOrderFee: zpSmallOrderFee,
+        mpSmallOrderFee: mpSmallOrderFee,
+        currency: configs.currency,
+      ),
     );
   }
 }
