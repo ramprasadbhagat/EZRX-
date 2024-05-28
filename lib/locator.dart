@@ -3109,6 +3109,7 @@ void setupLocator() {
   locator.registerFactory(
     () => ReOrderPermissionBloc(
       reOrderPermissionRepository: locator<ReOrderPermissionRepository>(),
+      materialPriceRepository: locator<MaterialPriceRepository>(),
     ),
   );
 

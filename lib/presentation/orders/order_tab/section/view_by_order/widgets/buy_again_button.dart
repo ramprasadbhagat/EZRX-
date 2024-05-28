@@ -64,9 +64,7 @@ class BuyAgainButton extends StatelessWidget {
               () {
                 context.read<CartBloc>().add(
                       CartEvent.addHistoryItemsToCart(
-                        items: reOrderState.availableProducts(
-                          context.read<MaterialPriceBloc>().state.materialPrice,
-                        ),
+                        items: reOrderState.validOrderItems,
                         counterOfferDetails: RequestCounterOfferDetails.empty(),
                         tenderContractList:
                             reOrderState.availableTenderContract,

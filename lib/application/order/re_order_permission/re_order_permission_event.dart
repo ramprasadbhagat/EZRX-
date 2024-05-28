@@ -16,8 +16,10 @@ class ReOrderPermissionEvent with _$ReOrderPermissionEvent {
   const factory ReOrderPermissionEvent.fetchItem({
     required OrderHistory orderHistoryDetail,
     required OrderHistoryItem item,
-
   }) = _FetchItem;
+  const factory ReOrderPermissionEvent.fetchPrice({
+    required List<PriceAggregate> reorderItems,
+  }) = _FetchPrice;
   const factory ReOrderPermissionEvent.resetOrderNumberWillUpsert({
     required OrderNumber orderNumberWillUpsert,
   }) = _ResetOrderNumberWillUpsert;

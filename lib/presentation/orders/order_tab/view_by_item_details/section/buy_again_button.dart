@@ -51,12 +51,7 @@ class _BuyAgainButton extends StatelessWidget {
                 () {
                   context.read<CartBloc>().add(
                         CartEvent.addHistoryItemsToCart(
-                          items: state.availableProducts(
-                            context
-                                .read<MaterialPriceBloc>()
-                                .state
-                                .materialPrice,
-                          ),
+                          items: state.validOrderItems,
                           counterOfferDetails:
                               RequestCounterOfferDetails.empty(),
                           tenderContractList: state.availableTenderContract,
@@ -277,12 +272,8 @@ class _BuyAgainButton extends StatelessWidget {
       if (value != null) {
         context.read<CartBloc>().add(
               CartEvent.addHistoryItemsToCart(
-                items: context
-                    .read<ReOrderPermissionBloc>()
-                    .state
-                    .availableProducts(
-                      context.read<MaterialPriceBloc>().state.materialPrice,
-                    ),
+                items:
+                    context.read<ReOrderPermissionBloc>().state.validOrderItems,
                 counterOfferDetails: RequestCounterOfferDetails.empty(),
                 tenderContractList: {},
               ),

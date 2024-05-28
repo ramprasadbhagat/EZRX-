@@ -457,20 +457,41 @@ class CartBloc extends Bloc<CartEvent, CartState> {
           salesOrganisation: state.salesOrganisation,
           salesOrganisationConfig: state.config,
           shipToInfo: state.shipToInfo,
-          materialInfo: e.items.map((e) {
-            final currentQtyInCart = (e.type.typeMaterial
-                ? state.getQuantityOfProduct(
-                    productNumber: e.materialNumber,
-                  )
-                : state.getQuantityOfBundle(
-                    bundleCode: e.parentID,
-                    materialNumber: e.materialNumber,
-                  ));
+          materialInfo: e.items
+              .map((item) {
+                final material = item.materialInfo;
+                final addedQty = material.quantity.intValue;
 
-            return e.copyWith(
-              quantity: MaterialQty(e.quantity.intValue + currentQtyInCart),
-            );
-          }).toList(),
+                if (material.type.typeBundle) {
+                  final cartQty = state.getQuantityOfBundle(
+                    bundleCode: material.parentID,
+                    materialNumber: material.materialNumber,
+                  );
+
+                  return [
+                    material.copyWith(
+                      quantity: MaterialQty(cartQty + addedQty),
+                    ),
+                  ];
+                }
+
+                final cartQty = state.getQuantityOfProduct(
+                  productNumber: material.materialNumber,
+                );
+                final newPriceAggregate = item.copyWith(
+                  quantity: cartQty + addedQty,
+                  materialInfo: material.copyWith(
+                    quantity: MaterialQty(cartQty + addedQty),
+                  ),
+                );
+
+                return [
+                  newPriceAggregate.materialInfo,
+                  ...newPriceAggregate.dealBonusList,
+                ];
+              })
+              .flattened
+              .toList(),
           language: state.user.preferredLanguage,
           counterOfferDetails: e.counterOfferDetails,
           itemId: '',

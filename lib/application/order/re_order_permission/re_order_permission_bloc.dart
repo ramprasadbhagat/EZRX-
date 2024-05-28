@@ -8,12 +8,12 @@ import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
-import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_order_items.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_item.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:ezrxmobile/domain/order/entities/tender_contract.dart';
+import 'package:ezrxmobile/domain/order/repository/i_material_price_repository.dart';
 import 'package:ezrxmobile/domain/order/repository/i_re_order_permission_repository.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -26,9 +26,11 @@ part 're_order_permission_state.dart';
 class ReOrderPermissionBloc
     extends Bloc<ReOrderPermissionEvent, ReOrderPermissionState> {
   final IReOrderPermissionRepository reOrderPermissionRepository;
+  final IMaterialPriceRepository materialPriceRepository;
 
   ReOrderPermissionBloc({
     required this.reOrderPermissionRepository,
+    required this.materialPriceRepository,
   }) : super(ReOrderPermissionState.initial()) {
     on<ReOrderPermissionEvent>(_onEvent);
   }
@@ -95,11 +97,9 @@ class ReOrderPermissionBloc
                 )
                 .toList();
 
-            emit(
-              state.copyWith(
-                isFetching: false,
-                validOrderItems: validOrderItem,
-                failureOrSuccessOption: none(),
+            add(
+              ReOrderPermissionEvent.fetchPrice(
+                reorderItems: validOrderItem,
               ),
             );
           },
@@ -140,21 +140,54 @@ class ReOrderPermissionBloc
             final validMaterialNumbers =
                 reOrderPermission.validMaterials.map((e) => e.materialNumber);
 
-            emit(
-              state.copyWith(
-                isFetching: false,
-                validOrderItems: [
-                  if (validMaterialNumbers
-                      .contains(validOrderItem.materialNumber))
+            add(
+              ReOrderPermissionEvent.fetchPrice(
+                reorderItems: [
+                  if (validMaterialNumbers.contains(reOrderItem.materialNumber))
                     PriceAggregate.empty().copyWith(
                       materialInfo: validOrderItem,
                       tenderContract: tenderContract,
                     ),
                 ],
-                failureOrSuccessOption: none(),
               ),
             );
           },
+        );
+      },
+      fetchPrice: (e) async {
+        final failureOrSuccess = await materialPriceRepository.getMaterialPrice(
+          customerCodeInfo: state.customerCodeInfo,
+          salesOrganisation: state.salesOrganisation,
+          salesConfigs: state.salesOrganisationConfigs,
+          shipToInfo: state.shipToInfo,
+          //Only fetch price for type material to be able to determine correct bonus offer
+          materialNumberList: e.reorderItems
+              .where((e) => e.materialInfo.type.typeMaterial)
+              .map((e) => e.getMaterialNumber)
+              .toList(),
+          comboDealEligible: false,
+        );
+
+        failureOrSuccess.fold(
+          (_) => emit(
+            state.copyWith(
+              isFetching: false,
+              failureOrSuccessOption: optionOf(failureOrSuccess),
+            ),
+          ),
+          (priceMap) => emit(
+            state.copyWith(
+              isFetching: false,
+              failureOrSuccessOption: none(),
+              validOrderItems: e.reorderItems
+                  .map(
+                    (e) => e.copyWith(
+                      price: priceMap[e.getMaterialNumber] ?? Price.empty(),
+                    ),
+                  )
+                  .toList(),
+            ),
+          ),
         );
       },
       resetOrderNumberWillUpsert: (e) async => emit(

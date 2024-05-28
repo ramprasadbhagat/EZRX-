@@ -32,6 +32,7 @@ mixin _$ReOrderPermissionEvent {
     required TResult Function(
             OrderHistory orderHistoryDetail, OrderHistoryItem item)
         fetchItem,
+    required TResult Function(List<PriceAggregate> reorderItems) fetchPrice,
     required TResult Function(OrderNumber orderNumberWillUpsert)
         resetOrderNumberWillUpsert,
   }) =>
@@ -51,6 +52,7 @@ mixin _$ReOrderPermissionEvent {
         fetchOrder,
     TResult? Function(OrderHistory orderHistoryDetail, OrderHistoryItem item)?
         fetchItem,
+    TResult? Function(List<PriceAggregate> reorderItems)? fetchPrice,
     TResult? Function(OrderNumber orderNumberWillUpsert)?
         resetOrderNumberWillUpsert,
   }) =>
@@ -70,6 +72,7 @@ mixin _$ReOrderPermissionEvent {
         fetchOrder,
     TResult Function(OrderHistory orderHistoryDetail, OrderHistoryItem item)?
         fetchItem,
+    TResult Function(List<PriceAggregate> reorderItems)? fetchPrice,
     TResult Function(OrderNumber orderNumberWillUpsert)?
         resetOrderNumberWillUpsert,
     required TResult orElse(),
@@ -80,6 +83,7 @@ mixin _$ReOrderPermissionEvent {
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_FetchOrder value) fetchOrder,
     required TResult Function(_FetchItem value) fetchItem,
+    required TResult Function(_FetchPrice value) fetchPrice,
     required TResult Function(_ResetOrderNumberWillUpsert value)
         resetOrderNumberWillUpsert,
   }) =>
@@ -89,6 +93,7 @@ mixin _$ReOrderPermissionEvent {
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_FetchOrder value)? fetchOrder,
     TResult? Function(_FetchItem value)? fetchItem,
+    TResult? Function(_FetchPrice value)? fetchPrice,
     TResult? Function(_ResetOrderNumberWillUpsert value)?
         resetOrderNumberWillUpsert,
   }) =>
@@ -98,6 +103,7 @@ mixin _$ReOrderPermissionEvent {
     TResult Function(_Initialized value)? initialized,
     TResult Function(_FetchOrder value)? fetchOrder,
     TResult Function(_FetchItem value)? fetchItem,
+    TResult Function(_FetchPrice value)? fetchPrice,
     TResult Function(_ResetOrderNumberWillUpsert value)?
         resetOrderNumberWillUpsert,
     required TResult orElse(),
@@ -297,6 +303,7 @@ class _$InitializedImpl implements _Initialized {
     required TResult Function(
             OrderHistory orderHistoryDetail, OrderHistoryItem item)
         fetchItem,
+    required TResult Function(List<PriceAggregate> reorderItems) fetchPrice,
     required TResult Function(OrderNumber orderNumberWillUpsert)
         resetOrderNumberWillUpsert,
   }) {
@@ -320,6 +327,7 @@ class _$InitializedImpl implements _Initialized {
         fetchOrder,
     TResult? Function(OrderHistory orderHistoryDetail, OrderHistoryItem item)?
         fetchItem,
+    TResult? Function(List<PriceAggregate> reorderItems)? fetchPrice,
     TResult? Function(OrderNumber orderNumberWillUpsert)?
         resetOrderNumberWillUpsert,
   }) {
@@ -343,6 +351,7 @@ class _$InitializedImpl implements _Initialized {
         fetchOrder,
     TResult Function(OrderHistory orderHistoryDetail, OrderHistoryItem item)?
         fetchItem,
+    TResult Function(List<PriceAggregate> reorderItems)? fetchPrice,
     TResult Function(OrderNumber orderNumberWillUpsert)?
         resetOrderNumberWillUpsert,
     required TResult orElse(),
@@ -360,6 +369,7 @@ class _$InitializedImpl implements _Initialized {
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_FetchOrder value) fetchOrder,
     required TResult Function(_FetchItem value) fetchItem,
+    required TResult Function(_FetchPrice value) fetchPrice,
     required TResult Function(_ResetOrderNumberWillUpsert value)
         resetOrderNumberWillUpsert,
   }) {
@@ -372,6 +382,7 @@ class _$InitializedImpl implements _Initialized {
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_FetchOrder value)? fetchOrder,
     TResult? Function(_FetchItem value)? fetchItem,
+    TResult? Function(_FetchPrice value)? fetchPrice,
     TResult? Function(_ResetOrderNumberWillUpsert value)?
         resetOrderNumberWillUpsert,
   }) {
@@ -384,6 +395,7 @@ class _$InitializedImpl implements _Initialized {
     TResult Function(_Initialized value)? initialized,
     TResult Function(_FetchOrder value)? fetchOrder,
     TResult Function(_FetchItem value)? fetchItem,
+    TResult Function(_FetchPrice value)? fetchPrice,
     TResult Function(_ResetOrderNumberWillUpsert value)?
         resetOrderNumberWillUpsert,
     required TResult orElse(),
@@ -518,6 +530,7 @@ class _$FetchOrderImpl implements _FetchOrder {
     required TResult Function(
             OrderHistory orderHistoryDetail, OrderHistoryItem item)
         fetchItem,
+    required TResult Function(List<PriceAggregate> reorderItems) fetchPrice,
     required TResult Function(OrderNumber orderNumberWillUpsert)
         resetOrderNumberWillUpsert,
   }) {
@@ -540,6 +553,7 @@ class _$FetchOrderImpl implements _FetchOrder {
         fetchOrder,
     TResult? Function(OrderHistory orderHistoryDetail, OrderHistoryItem item)?
         fetchItem,
+    TResult? Function(List<PriceAggregate> reorderItems)? fetchPrice,
     TResult? Function(OrderNumber orderNumberWillUpsert)?
         resetOrderNumberWillUpsert,
   }) {
@@ -563,6 +577,7 @@ class _$FetchOrderImpl implements _FetchOrder {
         fetchOrder,
     TResult Function(OrderHistory orderHistoryDetail, OrderHistoryItem item)?
         fetchItem,
+    TResult Function(List<PriceAggregate> reorderItems)? fetchPrice,
     TResult Function(OrderNumber orderNumberWillUpsert)?
         resetOrderNumberWillUpsert,
     required TResult orElse(),
@@ -579,6 +594,7 @@ class _$FetchOrderImpl implements _FetchOrder {
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_FetchOrder value) fetchOrder,
     required TResult Function(_FetchItem value) fetchItem,
+    required TResult Function(_FetchPrice value) fetchPrice,
     required TResult Function(_ResetOrderNumberWillUpsert value)
         resetOrderNumberWillUpsert,
   }) {
@@ -591,6 +607,7 @@ class _$FetchOrderImpl implements _FetchOrder {
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_FetchOrder value)? fetchOrder,
     TResult? Function(_FetchItem value)? fetchItem,
+    TResult? Function(_FetchPrice value)? fetchPrice,
     TResult? Function(_ResetOrderNumberWillUpsert value)?
         resetOrderNumberWillUpsert,
   }) {
@@ -603,6 +620,7 @@ class _$FetchOrderImpl implements _FetchOrder {
     TResult Function(_Initialized value)? initialized,
     TResult Function(_FetchOrder value)? fetchOrder,
     TResult Function(_FetchItem value)? fetchItem,
+    TResult Function(_FetchPrice value)? fetchPrice,
     TResult Function(_ResetOrderNumberWillUpsert value)?
         resetOrderNumberWillUpsert,
     required TResult orElse(),
@@ -733,6 +751,7 @@ class _$FetchItemImpl implements _FetchItem {
     required TResult Function(
             OrderHistory orderHistoryDetail, OrderHistoryItem item)
         fetchItem,
+    required TResult Function(List<PriceAggregate> reorderItems) fetchPrice,
     required TResult Function(OrderNumber orderNumberWillUpsert)
         resetOrderNumberWillUpsert,
   }) {
@@ -755,6 +774,7 @@ class _$FetchItemImpl implements _FetchItem {
         fetchOrder,
     TResult? Function(OrderHistory orderHistoryDetail, OrderHistoryItem item)?
         fetchItem,
+    TResult? Function(List<PriceAggregate> reorderItems)? fetchPrice,
     TResult? Function(OrderNumber orderNumberWillUpsert)?
         resetOrderNumberWillUpsert,
   }) {
@@ -777,6 +797,7 @@ class _$FetchItemImpl implements _FetchItem {
         fetchOrder,
     TResult Function(OrderHistory orderHistoryDetail, OrderHistoryItem item)?
         fetchItem,
+    TResult Function(List<PriceAggregate> reorderItems)? fetchPrice,
     TResult Function(OrderNumber orderNumberWillUpsert)?
         resetOrderNumberWillUpsert,
     required TResult orElse(),
@@ -793,6 +814,7 @@ class _$FetchItemImpl implements _FetchItem {
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_FetchOrder value) fetchOrder,
     required TResult Function(_FetchItem value) fetchItem,
+    required TResult Function(_FetchPrice value) fetchPrice,
     required TResult Function(_ResetOrderNumberWillUpsert value)
         resetOrderNumberWillUpsert,
   }) {
@@ -805,6 +827,7 @@ class _$FetchItemImpl implements _FetchItem {
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_FetchOrder value)? fetchOrder,
     TResult? Function(_FetchItem value)? fetchItem,
+    TResult? Function(_FetchPrice value)? fetchPrice,
     TResult? Function(_ResetOrderNumberWillUpsert value)?
         resetOrderNumberWillUpsert,
   }) {
@@ -817,6 +840,7 @@ class _$FetchItemImpl implements _FetchItem {
     TResult Function(_Initialized value)? initialized,
     TResult Function(_FetchOrder value)? fetchOrder,
     TResult Function(_FetchItem value)? fetchItem,
+    TResult Function(_FetchPrice value)? fetchPrice,
     TResult Function(_ResetOrderNumberWillUpsert value)?
         resetOrderNumberWillUpsert,
     required TResult orElse(),
@@ -837,6 +861,203 @@ abstract class _FetchItem implements ReOrderPermissionEvent {
   OrderHistoryItem get item;
   @JsonKey(ignore: true)
   _$$FetchItemImplCopyWith<_$FetchItemImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$FetchPriceImplCopyWith<$Res> {
+  factory _$$FetchPriceImplCopyWith(
+          _$FetchPriceImpl value, $Res Function(_$FetchPriceImpl) then) =
+      __$$FetchPriceImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({List<PriceAggregate> reorderItems});
+}
+
+/// @nodoc
+class __$$FetchPriceImplCopyWithImpl<$Res>
+    extends _$ReOrderPermissionEventCopyWithImpl<$Res, _$FetchPriceImpl>
+    implements _$$FetchPriceImplCopyWith<$Res> {
+  __$$FetchPriceImplCopyWithImpl(
+      _$FetchPriceImpl _value, $Res Function(_$FetchPriceImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? reorderItems = null,
+  }) {
+    return _then(_$FetchPriceImpl(
+      reorderItems: null == reorderItems
+          ? _value._reorderItems
+          : reorderItems // ignore: cast_nullable_to_non_nullable
+              as List<PriceAggregate>,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$FetchPriceImpl implements _FetchPrice {
+  const _$FetchPriceImpl({required final List<PriceAggregate> reorderItems})
+      : _reorderItems = reorderItems;
+
+  final List<PriceAggregate> _reorderItems;
+  @override
+  List<PriceAggregate> get reorderItems {
+    if (_reorderItems is EqualUnmodifiableListView) return _reorderItems;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_reorderItems);
+  }
+
+  @override
+  String toString() {
+    return 'ReOrderPermissionEvent.fetchPrice(reorderItems: $reorderItems)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$FetchPriceImpl &&
+            const DeepCollectionEquality()
+                .equals(other._reorderItems, _reorderItems));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(_reorderItems));
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$FetchPriceImplCopyWith<_$FetchPriceImpl> get copyWith =>
+      __$$FetchPriceImplCopyWithImpl<_$FetchPriceImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            User user)
+        initialized,
+    required TResult Function(
+            List<OrderHistoryDetailsOrderItem> orderHistoryDetailsOrderItems,
+            OrderNumber orderNumberWillUpsert)
+        fetchOrder,
+    required TResult Function(
+            OrderHistory orderHistoryDetail, OrderHistoryItem item)
+        fetchItem,
+    required TResult Function(List<PriceAggregate> reorderItems) fetchPrice,
+    required TResult Function(OrderNumber orderNumberWillUpsert)
+        resetOrderNumberWillUpsert,
+  }) {
+    return fetchPrice(reorderItems);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            User user)?
+        initialized,
+    TResult? Function(
+            List<OrderHistoryDetailsOrderItem> orderHistoryDetailsOrderItems,
+            OrderNumber orderNumberWillUpsert)?
+        fetchOrder,
+    TResult? Function(OrderHistory orderHistoryDetail, OrderHistoryItem item)?
+        fetchItem,
+    TResult? Function(List<PriceAggregate> reorderItems)? fetchPrice,
+    TResult? Function(OrderNumber orderNumberWillUpsert)?
+        resetOrderNumberWillUpsert,
+  }) {
+    return fetchPrice?.call(reorderItems);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrganisationConfigs,
+            User user)?
+        initialized,
+    TResult Function(
+            List<OrderHistoryDetailsOrderItem> orderHistoryDetailsOrderItems,
+            OrderNumber orderNumberWillUpsert)?
+        fetchOrder,
+    TResult Function(OrderHistory orderHistoryDetail, OrderHistoryItem item)?
+        fetchItem,
+    TResult Function(List<PriceAggregate> reorderItems)? fetchPrice,
+    TResult Function(OrderNumber orderNumberWillUpsert)?
+        resetOrderNumberWillUpsert,
+    required TResult orElse(),
+  }) {
+    if (fetchPrice != null) {
+      return fetchPrice(reorderItems);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initialized value) initialized,
+    required TResult Function(_FetchOrder value) fetchOrder,
+    required TResult Function(_FetchItem value) fetchItem,
+    required TResult Function(_FetchPrice value) fetchPrice,
+    required TResult Function(_ResetOrderNumberWillUpsert value)
+        resetOrderNumberWillUpsert,
+  }) {
+    return fetchPrice(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_FetchOrder value)? fetchOrder,
+    TResult? Function(_FetchItem value)? fetchItem,
+    TResult? Function(_FetchPrice value)? fetchPrice,
+    TResult? Function(_ResetOrderNumberWillUpsert value)?
+        resetOrderNumberWillUpsert,
+  }) {
+    return fetchPrice?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_FetchOrder value)? fetchOrder,
+    TResult Function(_FetchItem value)? fetchItem,
+    TResult Function(_FetchPrice value)? fetchPrice,
+    TResult Function(_ResetOrderNumberWillUpsert value)?
+        resetOrderNumberWillUpsert,
+    required TResult orElse(),
+  }) {
+    if (fetchPrice != null) {
+      return fetchPrice(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _FetchPrice implements ReOrderPermissionEvent {
+  const factory _FetchPrice(
+      {required final List<PriceAggregate> reorderItems}) = _$FetchPriceImpl;
+
+  List<PriceAggregate> get reorderItems;
+  @JsonKey(ignore: true)
+  _$$FetchPriceImplCopyWith<_$FetchPriceImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -923,6 +1144,7 @@ class _$ResetOrderNumberWillUpsertImpl implements _ResetOrderNumberWillUpsert {
     required TResult Function(
             OrderHistory orderHistoryDetail, OrderHistoryItem item)
         fetchItem,
+    required TResult Function(List<PriceAggregate> reorderItems) fetchPrice,
     required TResult Function(OrderNumber orderNumberWillUpsert)
         resetOrderNumberWillUpsert,
   }) {
@@ -945,6 +1167,7 @@ class _$ResetOrderNumberWillUpsertImpl implements _ResetOrderNumberWillUpsert {
         fetchOrder,
     TResult? Function(OrderHistory orderHistoryDetail, OrderHistoryItem item)?
         fetchItem,
+    TResult? Function(List<PriceAggregate> reorderItems)? fetchPrice,
     TResult? Function(OrderNumber orderNumberWillUpsert)?
         resetOrderNumberWillUpsert,
   }) {
@@ -967,6 +1190,7 @@ class _$ResetOrderNumberWillUpsertImpl implements _ResetOrderNumberWillUpsert {
         fetchOrder,
     TResult Function(OrderHistory orderHistoryDetail, OrderHistoryItem item)?
         fetchItem,
+    TResult Function(List<PriceAggregate> reorderItems)? fetchPrice,
     TResult Function(OrderNumber orderNumberWillUpsert)?
         resetOrderNumberWillUpsert,
     required TResult orElse(),
@@ -983,6 +1207,7 @@ class _$ResetOrderNumberWillUpsertImpl implements _ResetOrderNumberWillUpsert {
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_FetchOrder value) fetchOrder,
     required TResult Function(_FetchItem value) fetchItem,
+    required TResult Function(_FetchPrice value) fetchPrice,
     required TResult Function(_ResetOrderNumberWillUpsert value)
         resetOrderNumberWillUpsert,
   }) {
@@ -995,6 +1220,7 @@ class _$ResetOrderNumberWillUpsertImpl implements _ResetOrderNumberWillUpsert {
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_FetchOrder value)? fetchOrder,
     TResult? Function(_FetchItem value)? fetchItem,
+    TResult? Function(_FetchPrice value)? fetchPrice,
     TResult? Function(_ResetOrderNumberWillUpsert value)?
         resetOrderNumberWillUpsert,
   }) {
@@ -1007,6 +1233,7 @@ class _$ResetOrderNumberWillUpsertImpl implements _ResetOrderNumberWillUpsert {
     TResult Function(_Initialized value)? initialized,
     TResult Function(_FetchOrder value)? fetchOrder,
     TResult Function(_FetchItem value)? fetchItem,
+    TResult Function(_FetchPrice value)? fetchPrice,
     TResult Function(_ResetOrderNumberWillUpsert value)?
         resetOrderNumberWillUpsert,
     required TResult orElse(),

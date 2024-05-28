@@ -996,6 +996,10 @@ void main() {
         final fakeItem = MaterialInfo.empty().copyWith(
           quantity: MaterialQty(fakeOrderHistoryItem.qty),
         );
+        final fakePriceAggregate = PriceAggregate.empty().copyWith(
+          materialInfo: fakeItem,
+          tenderContract: fakeOrderHistoryItem.orderItemTenderContract,
+        );
         when(() => viewByItemDetailsBlocMock.state).thenReturn(
           ViewByItemDetailsState.initial().copyWith(
             orderHistoryItem: fakeOrderHistoryItem,
@@ -1007,12 +1011,7 @@ void main() {
             ReOrderPermissionState.initial().copyWith(isFetching: true),
             ReOrderPermissionState.initial().copyWith(
               isFetching: false,
-              validOrderItems: [
-                PriceAggregate.empty().copyWith(
-                  materialInfo: fakeItem,
-                  tenderContract: fakeOrderHistoryItem.orderItemTenderContract,
-                ),
-              ],
+              validOrderItems: [fakePriceAggregate],
             ),
           ]),
         );
@@ -1023,7 +1022,7 @@ void main() {
         verify(
           () => cartBlocMock.add(
             CartEvent.addHistoryItemsToCart(
-              items: [fakeItem],
+              items: [fakePriceAggregate],
               counterOfferDetails: RequestCounterOfferDetails.empty(),
               tenderContractList: {
                 fakeItem.materialNumber:

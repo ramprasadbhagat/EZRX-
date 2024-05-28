@@ -2232,7 +2232,7 @@ void main() {
         },
         act: (bloc) => bloc.add(
           CartEvent.addHistoryItemsToCart(
-            items: [priceAggregates.first.materialInfo],
+            items: [priceAggregates.first],
             counterOfferDetails: RequestCounterOfferDetails.empty(),
             tenderContractList: {},
           ),
@@ -2295,7 +2295,7 @@ void main() {
         },
         act: (bloc) => bloc.add(
           CartEvent.addHistoryItemsToCart(
-            items: [priceAggregates.first.materialInfo],
+            items: [priceAggregates.first],
             counterOfferDetails: RequestCounterOfferDetails.empty(),
             tenderContractList: {},
           ),
@@ -2326,6 +2326,77 @@ void main() {
           CartState.initial().copyWith(
             apiFailureOrSuccessOption: optionOf(Left(fakeError)),
             cartProducts: [priceAggregates.first.copyWith(quantity: 2)],
+            salesOrganisation: fakeMYSalesOrganisation,
+            config: fakeMYSalesOrgConfigs,
+            shipToInfo: shipToInfo,
+            customerCodeInfo: fakeCustomerCodeInfo,
+          ),
+        ],
+      );
+
+      blocTest<CartBloc, CartState>(
+        'Add material with offer when cart already has material with offer',
+        build: () => CartBloc(cartRepositoryMock, productDetailRepository),
+        seed: () => CartState.initial().copyWith(
+          salesOrganisation: fakeMYSalesOrganisation,
+          config: fakeMYSalesOrgConfigs,
+          shipToInfo: shipToInfo,
+          customerCodeInfo: fakeCustomerCodeInfo,
+          cartProducts: [cartProducts.cartProducts.first],
+        ),
+        setUp: () {
+          final priceAggregate = cartProducts.cartProducts.first;
+          final newQty = priceAggregate.materialInfo.quantity.intValue * 2;
+          when(
+            () => cartRepositoryMock.addHistoryItemsToCart(
+              salesOrganisation: fakeMYSalesOrganisation,
+              shipToInfo: shipToInfo,
+              customerCodeInfo: fakeCustomerCodeInfo,
+              language: fakeClientUser.preferredLanguage,
+              counterOfferDetails: RequestCounterOfferDetails.empty(),
+              itemId: '',
+              materialInfo: [
+                priceAggregate.materialInfo
+                    .copyWith(quantity: MaterialQty(newQty)),
+                ...priceAggregate
+                    .copyWith(
+                      quantity: newQty,
+                      materialInfo: priceAggregate.materialInfo
+                          .copyWith(quantity: MaterialQty(newQty)),
+                      price: Price.empty()
+                          .copyWith(bonuses: [PriceBonus(items: priceBonus)]),
+                    )
+                    .dealBonusList,
+              ],
+              salesOrganisationConfig: fakeMYSalesOrgConfigs,
+              tenderContractDetails: {},
+            ),
+          ).thenAnswer((_) async => Left(fakeError));
+        },
+        act: (bloc) => bloc.add(
+          CartEvent.addHistoryItemsToCart(
+            items: [
+              cartProducts.cartProducts.first.copyWith(
+                price: Price.empty()
+                    .copyWith(bonuses: [PriceBonus(items: priceBonus)]),
+              ),
+            ],
+            counterOfferDetails: RequestCounterOfferDetails.empty(),
+            tenderContractList: {},
+          ),
+        ),
+        expect: () => [
+          CartState.initial().copyWith(
+            isBuyAgain: true,
+            salesOrganisation: fakeMYSalesOrganisation,
+            config: fakeMYSalesOrgConfigs,
+            shipToInfo: shipToInfo,
+            customerCodeInfo: fakeCustomerCodeInfo,
+            cartProducts: [cartProducts.cartProducts.first],
+          ),
+          CartState.initial().copyWith(
+            apiFailureOrSuccessOption: optionOf(Left(fakeError)),
+            cartProducts: [cartProducts.cartProducts.first],
             salesOrganisation: fakeMYSalesOrganisation,
             config: fakeMYSalesOrgConfigs,
             shipToInfo: shipToInfo,

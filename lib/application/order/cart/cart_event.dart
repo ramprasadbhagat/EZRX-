@@ -43,7 +43,7 @@ class CartEvent with _$CartEvent {
   }) = _UpsertCart;
 
   const factory CartEvent.addHistoryItemsToCart({
-    required List<MaterialInfo> items,
+    required List<PriceAggregate> items,
     required RequestCounterOfferDetails counterOfferDetails,
     required Map<MaterialNumber, TenderContract> tenderContractList,
   }) = _addHistoryItemsToCart;

@@ -28,28 +28,6 @@ class ReOrderPermissionState with _$ReOrderPermissionState {
         user: User.empty(),
       );
 
-  List<MaterialInfo> get materialInfoList =>
-      validOrderItems.map((e) => e.materialInfo).toList();
-
-  List<MaterialInfo> availableProducts(
-    Map<MaterialNumber, Price> materialPrice,
-  ) {
-    final bonusMaterials = materialInfoList
-        .map(
-          (e) => PriceAggregate.empty()
-              .copyWith(
-                materialInfo: e,
-                price: materialPrice[e.materialNumber] ?? Price.empty(),
-                quantity: e.quantity.intValue,
-              )
-              .dealBonusList,
-        )
-        .expand((bonusList) => bonusList)
-        .toList();
-
-    return [...materialInfoList, ...bonusMaterials];
-  }
-
   Map<MaterialNumber, TenderContract> get availableTenderContract =>
       <MaterialNumber, TenderContract>{
         for (final item in validOrderItems)
