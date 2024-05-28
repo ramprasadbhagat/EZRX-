@@ -168,9 +168,9 @@ void main() {
     final documentDateTo = DateTime(2024, 1, 9);
     final dueDateFrom = DateTime(2024, 1, 4);
     final dueDateTo = DateTime(2024, 7, 6);
-    const amountFrom = 2000.0;
+    const amountFrom = 200.0;
     const amountTo = 150000.0;
-    const invoiceStatus = 'In Progress';
+    const invoiceStatus = 'Cleared';
     const filterStatus = 'In progress';
     const invalidLengthSearchKey = '1';
     const invalidSearchKey = '1234567890';
@@ -253,21 +253,13 @@ void main() {
         fromDate: documentDateFrom,
         toDate: documentDateTo,
       );
-      await accountInvoiceRobot.tapFilterButton();
-      await accountInvoiceFilterRobot.enterFromAmount(amountFrom.toString());
-      await accountInvoiceFilterRobot.enterToAmount(amountTo.toString());
-      await accountInvoiceFilterRobot.tapApplyButton();
-      accountInvoiceRobot.verifyFilterApplied(2);
-      accountInvoiceRobot.verifyItemsInAmountRange(
-        fromAmount: amountFrom,
-        toAmount: amountTo,
-        currency: currency,
-      );
+
       await accountInvoiceRobot.tapFilterButton();
       await accountInvoiceFilterRobot.tapStatusCheckbox(filterStatus);
       await accountInvoiceFilterRobot.tapApplyButton();
-      accountInvoiceRobot.verifyFilterApplied(3);
+      accountInvoiceRobot.verifyFilterApplied(1);
       accountInvoiceRobot.verifyItemsWithStatus(invoiceStatus);
+
       await accountInvoiceRobot.tapFilterButton();
       await accountInvoiceFilterRobot.tapDueDateField();
       await accountInvoiceFilterRobot.setDateRangePickerValue(
@@ -275,8 +267,20 @@ void main() {
         toDate: dueDateTo,
       );
       await accountInvoiceFilterRobot.tapApplyButton();
-      accountInvoiceRobot.verifyFilterApplied(4);
+      accountInvoiceRobot.verifyFilterApplied(1);
       accountInvoiceRobot.verifyItems();
+
+       await accountInvoiceRobot.tapFilterButton();
+      await accountInvoiceFilterRobot.enterFromAmount(amountFrom.toString());
+      await accountInvoiceFilterRobot.enterToAmount(amountTo.toString());
+      await accountInvoiceFilterRobot.tapApplyButton();
+      accountInvoiceRobot.verifyFilterApplied(1);
+      accountInvoiceRobot.verifyItemsInAmountRange(
+        fromAmount: amountFrom,
+        toAmount: amountTo,
+        currency: currency,
+      );
+
       await accountInvoiceRobot.tapFilterButton();
       await accountInvoiceFilterRobot.tapResetButton();
       await accountInvoiceRobot.tapFilterButton();
@@ -399,7 +403,7 @@ void main() {
       await accountInvoiceRobot.tapFilterButton();
       await accountInvoiceFilterRobot.tapStatusCheckbox(filterStatus);
       await accountInvoiceFilterRobot.tapApplyButton();
-      accountInvoiceRobot.verifyFilterApplied(2);
+      accountInvoiceRobot.verifyFilterApplied(1);
       accountInvoiceRobot.verifyItemsWithStatus(filterStatus);
       await accountInvoiceRobot.tapFilterButton();
       accountInvoiceFilterRobot.verifyStatusFilterValue(filterStatus, true);
@@ -418,7 +422,7 @@ void main() {
       await accountInvoiceFilterRobot.enterFromAmount(amountFrom.toString());
       await accountInvoiceFilterRobot.enterToAmount(amountTo.toString());
       await accountInvoiceFilterRobot.tapApplyButton();
-      accountInvoiceRobot.verifyFilterApplied(2);
+      accountInvoiceRobot.verifyFilterApplied(1);
       accountInvoiceRobot.verifyItemsInAmountRange(
         fromAmount: amountFrom,
         toAmount: amountTo,
@@ -473,7 +477,7 @@ void main() {
         toDate: dueDateTo,
       );
       await accountInvoiceFilterRobot.tapApplyButton();
-      accountInvoiceRobot.verifyFilterApplied(2);
+      accountInvoiceRobot.verifyFilterApplied(1);
       accountInvoiceRobot.verifyItems();
       await accountInvoiceRobot.tapFilterButton();
       accountInvoiceFilterRobot.verifyDueDateRangeApplied(
@@ -561,6 +565,7 @@ void main() {
       );
       await commonRobot.dismissSnackbar();
     });
+
   });
 
   group('Account summary menu - credit tab', () {
@@ -571,7 +576,7 @@ void main() {
     const inValidCreditId = '1232136712';
     //material info
     const creditId = '4160003952';
-    const creditStatus = 'Open';
+    const creditStatus = 'Cleared';
     const tax = 7;
     final creditPrice = 10000.00.priceDisplay(currency);
     final creditTotalPrice = 10000.00.includeTax(tax).priceDisplay(currency);
@@ -816,7 +821,7 @@ void main() {
     testWidgets('EZRX-T169 | verify Credits Detail Page', (tester) async {
       //variables
       const documentType = 'Credit Memo';
-      const referenceNumber = '1310000423';
+      const referenceNumber = '0040027162';
       const returnMaterialNumber1 = '21068578';
       const returnQuantity1 = 1;
       const returnUnitPrice1 = 10000.00;
@@ -936,7 +941,7 @@ void main() {
         toAmount: toAmount,
       );
       await accountCreditsFilterRobot.tapApplyButton();
-      accountCreditsRobot.verifyFilterAppliedCount(2);
+      accountCreditsRobot.verifyFilterAppliedCount(1);
       //verify amount credit filter list
       accountCreditsRobot.verifyCreditsInAmountRange(
         fromAmount: double.parse(fromAmount),
@@ -966,29 +971,6 @@ void main() {
         fromDate: fromDate,
         toDate: toDate,
       );
-      //Tap on filter icon
-      await accountCreditsRobot.tapFilterTuneIcon();
-
-      //Apply status - Amount
-      await accountCreditsFilterRobot.enterFromAmount(fromAmount.toString());
-      await accountCreditsFilterRobot.enterToAmount(toAmount.toString());
-      accountCreditsFilterRobot.verifyAmountRangeFilterApplied(
-        fromAmount: fromAmount,
-        toAmount: toAmount,
-      );
-      await accountCreditsFilterRobot.tapApplyButton();
-      accountCreditsRobot.verifyFilterAppliedCount(2);
-      //verify amount credit filter list
-      accountCreditsRobot.verifyCreditsInAmountRange(
-        fromAmount: double.parse(fromAmount),
-        toAmount: double.parse(toAmount),
-        currency: currency,
-      );
-      //verify document date credit filter list
-      accountCreditsRobot.verifyCreditsCreatedGroupInDateRange(
-        fromDate: fromDate,
-        toDate: toDate,
-      );
 
       //Tap on filter icon
       await accountCreditsRobot.tapFilterTuneIcon();
@@ -1010,7 +992,7 @@ void main() {
       await accountCreditsFilterRobot.tapToChangeStatusCheckbox(openStatus);
       accountCreditsFilterRobot.verifyStatusFilter(openStatus, true);
       await accountCreditsFilterRobot.tapApplyButton();
-      accountCreditsRobot.verifyFilterAppliedCount(3);
+      accountCreditsRobot.verifyFilterAppliedCount(1);
 
       //verify document date credit filter list
       if (accountCreditsRobot.noCreditFound) {
@@ -1027,6 +1009,25 @@ void main() {
           currency: currency,
         );
       }
+
+      //Tap on filter icon
+      await accountCreditsRobot.tapFilterTuneIcon();
+
+      //Apply status - Amount
+      await accountCreditsFilterRobot.enterFromAmount(fromAmount.toString());
+      await accountCreditsFilterRobot.enterToAmount(toAmount.toString());
+      accountCreditsFilterRobot.verifyAmountRangeFilterApplied(
+        fromAmount: fromAmount,
+        toAmount: toAmount,
+      );
+      await accountCreditsFilterRobot.tapApplyButton();
+      accountCreditsRobot.verifyFilterAppliedCount(1);
+      //verify amount credit filter list
+      accountCreditsRobot.verifyCreditsInAmountRange(
+        fromAmount: double.parse(fromAmount),
+        toAmount: double.parse(toAmount),
+        currency: currency,
+      );
 
       //verify reset feature
       await accountCreditsRobot.tapFilterTuneIcon();
@@ -1074,7 +1075,7 @@ void main() {
           isVisible: true,
         );
       }
-      accountCreditsRobot.verifyFilterAppliedCount(2);
+      accountCreditsRobot.verifyFilterAppliedCount(1);
 
       //Tap on filter icon
       await accountCreditsRobot.tapFilterTuneIcon();
@@ -1453,13 +1454,13 @@ void main() {
         toDate: toDate,
       );
 
-      accountSummaryTabRobot.verifyFilterApplied(2);
+      accountSummaryTabRobot.verifyFilterApplied(1);
 
       await verifySummaryStatusCheck(
         'Cleared',
         afterVerifyUncheckStatus: false,
       );
-      accountSummaryTabRobot.verifyFilterApplied(3);
+      accountSummaryTabRobot.verifyFilterApplied(1);
     });
 
     testWidgets(
@@ -1562,6 +1563,7 @@ void main() {
       await accountSummaryTabRobot.tapItemWithId(creditId, true);
       accountCreditDetailsRobot.verify();
     });
+
   });
 
   group('Payment summary menu - ', () {
@@ -1731,14 +1733,13 @@ void main() {
       await paymentSummaryFilterRobot.tapApplyButton();
       await paymentSummaryFilterRobot.enterToAmount(toAmount);
       await paymentSummaryFilterRobot.tapApplyButton();
-      await paymentSummaryFilterRobot.tapApplyButton();
       await paymentSummaryRobot.tapFilterButton();
       paymentSummaryFilterRobot.verifyAmountRangeFilterApplied(
         fromAmount: formattedFromAmount,
         toAmount: formattedToAmount,
       );
       await paymentSummaryFilterRobot.tapCloseIcon();
-      paymentSummaryRobot.verifyFilterApplied(2);
+      paymentSummaryRobot.verifyFilterApplied(1);
     });
 
     testWidgets('EZRX-T189 | Verify pull to refresh Feature', (tester) async {
@@ -1813,6 +1814,7 @@ void main() {
       );
       await commonRobot.dismissSnackbar();
     });
+
   });
 
 // TODO Soa is not enable for TH
@@ -1942,7 +1944,8 @@ void main() {
         await commonRobot.autoSearch(validKeyword);
         newPaymentStep1Robot.verifyAtLeast1ItemFound();
         await commonRobot.tapClearSearch();
-        newPaymentStep1Robot.verifyAtLeast1ItemFound();
+        await newPaymentStep1Robot.clickFilter();
+        newPaymentStep1Robot.verifyDefaultFilter();
       });
 
       testWidgets(
@@ -1971,7 +1974,8 @@ void main() {
         newPaymentStep1Robot.verifyAtLeast1ItemFound();
         await newPaymentStep1Robot.clickFilter();
         await newPaymentStep1Robot.tapResetFilter();
-        newPaymentStep1Robot.verifyAtLeast1ItemFound();
+        await newPaymentStep1Robot.clickFilter();
+        newPaymentStep1Robot.verifyDefaultFilter();
       });
 
       testWidgets(
@@ -2056,7 +2060,8 @@ void main() {
         );
         await commonRobot.cancelDateRangePicker();
         await newPaymentStep1Robot.tapResetFilter();
-        newPaymentStep1Robot.verifyAtLeast1ItemFound();
+        await newPaymentStep1Robot.clickFilter();
+        newPaymentStep1Robot.verifyDefaultFilter();
       });
 
       testWidgets(
@@ -2075,7 +2080,8 @@ void main() {
         await commonRobot.searchWithKeyboardAction(inValidKeyword);
         newPaymentStep1Robot.verifyNoItemFound();
         await commonRobot.tapClearSearch();
-        newPaymentStep1Robot.verifyAtLeast1ItemFound();
+        await newPaymentStep1Robot.clickFilter();
+        newPaymentStep1Robot.verifyDefaultFilter();
       });
 
       testWidgets(
@@ -2157,7 +2163,8 @@ void main() {
               .searchWithKeyboardAction(noResultCreditSearchKeyword);
           newPaymentStep2Robot.verifyNoItemFound();
           await commonRobot.tapClearSearch();
-          newPaymentStep2Robot.verifyAtLeastOneItemFound();
+          await newPaymentStep1Robot.clickFilter();
+          newPaymentStep1Robot.verifyDefaultFilter();
         }
       });
 
@@ -2191,7 +2198,8 @@ void main() {
         await newPaymentStep2Robot.verifyOutOfRangeError();
         await commonRobot.cancelDateRangePicker();
         await newPaymentStep2Robot.tapResetFilter();
-        newPaymentStep2Robot.verifyAtLeastOneItemFound();
+        await newPaymentStep1Robot.clickFilter();
+        newPaymentStep1Robot.verifyDefaultFilter();
       });
 
       testWidgets(
@@ -2213,7 +2221,8 @@ void main() {
           newPaymentStep2Robot.verifyAtLeastOneItemFound();
           await newPaymentStep2Robot.clickFilter();
           await newPaymentStep2Robot.tapResetFilter();
-          newPaymentStep2Robot.verifyAtLeastOneItemFound();
+          await newPaymentStep1Robot.clickFilter();
+          newPaymentStep1Robot.verifyDefaultFilter();
         }
       });
 

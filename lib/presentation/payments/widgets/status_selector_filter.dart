@@ -29,16 +29,12 @@ class StatusSelectorFilter<T> extends StatelessWidget {
     return status.toString();
   }
 
-  Key _getStatusKey({required T status, required bool value}) {
+  Key _getStatusKey({required T status}) {
     if (status is FilterStatus) {
       return WidgetKeys.paymentSummaryFilterStatus(_getStatusDisplay(status));
     }
 
-    if (status is StatusType) {
-      return WidgetKeys.genericKey(key: status.displayPaymentStatus);
-    }
-
-    return WidgetKeys.statusFilter(_getStatusDisplay(status), value);
+    return WidgetKeys.genericKey(key: _getStatusDisplay(status));
   }
 
   @override
@@ -48,7 +44,7 @@ class StatusSelectorFilter<T> extends StatelessWidget {
         final value = filteredStatuses.contains(status);
 
         return CheckboxListTile(
-          key: _getStatusKey(status: status, value: value),
+          key: _getStatusKey(status: status),
           contentPadding: EdgeInsets.zero,
           title: Text(
             context.tr(_getStatusDisplay(status)),

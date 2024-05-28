@@ -94,13 +94,22 @@ class AccountCreditsFilterRobot {
 
   void verifyStatusFilter(String name, bool value) {
     expect(
-      find.byKey(WidgetKeys.accountCreditsItemStatus(name, value)),
+      find.byWidgetPredicate(
+        (widget) =>
+            widget is CheckboxListTile &&
+            widget.key == WidgetKeys.genericKey(key: name) &&
+            widget.value == value,
+      ),
       findsOneWidget,
     );
   }
 
   Future<void> tapToChangeStatusCheckbox(String name) async {
-    await _tester.tap(find.widgetWithText(CheckboxListTile, name));
+    await _tester.tap(find.byWidgetPredicate(
+        (widget) =>
+            widget is CheckboxListTile &&
+            widget.key == WidgetKeys.genericKey(key: name),
+      ),);
     await _tester.pump();
   }
 

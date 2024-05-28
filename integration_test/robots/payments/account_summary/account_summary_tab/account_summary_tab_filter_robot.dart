@@ -53,7 +53,12 @@ class AccountSummaryTabFilterRobot {
 
   void verifyStatusFilterValue(String name, bool value) {
     expect(
-      find.byKey(WidgetKeys.statusFilter(name, value)),
+      find.byWidgetPredicate(
+        (widget) =>
+            widget is CheckboxListTile &&
+            widget.key == WidgetKeys.genericKey(key: name) &&
+            widget.value == value,
+      ),
       findsOneWidget,
     );
   }

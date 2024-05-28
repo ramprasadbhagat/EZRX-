@@ -1,4 +1,3 @@
-import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -170,7 +169,7 @@ class PaymentSummaryFilterRobot {
     await tester.tap(
       find.byWidgetPredicate(
         (widget) =>
-            widget is RadioListTile &&
+            widget is CheckboxListTile &&
             widget.key == WidgetKeys.paymentSummaryFilterStatus(name),
       ),
     );
@@ -181,9 +180,9 @@ class PaymentSummaryFilterRobot {
     expect(
       find.byWidgetPredicate(
         (widget) =>
-            widget is RadioListTile &&
+            widget is CheckboxListTile &&
             widget.key == WidgetKeys.paymentSummaryFilterStatus(name) &&
-            widget.groupValue == FilterStatus(name),
+            widget.value == true,
       ),
       findsOneWidget,
     );
