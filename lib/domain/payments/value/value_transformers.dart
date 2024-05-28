@@ -64,4 +64,4 @@ bool checkIsCreditByCode(String debitCreditCode) =>
 
 String getReferenceListString(String referenceId) => referenceId.isNotEmpty
     ? referenceId.split(',').map((e) => '#${e.trim()}').join(', ')
-    : '-';
+    : naIfEmpty('');

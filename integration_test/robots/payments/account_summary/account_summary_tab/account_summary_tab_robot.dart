@@ -73,7 +73,6 @@ class AccountSummaryTabRobot extends CommonRobot {
     );
     await tester.pumpAndSettle();
   }
-  
 
   void verifyNoRecordFound() {
     final widget = find.descendant(
@@ -170,8 +169,8 @@ class AccountSummaryTabRobot extends CommonRobot {
         of: _summaryExpandableSection.at(index),
         matching: find.text(
           isHidden
-              ? 'Show reference details'.tr()
-              : 'Hide reference details'.tr(),
+              ? 'Show Debit/Credit Ref. Number(s)'.tr()
+              : 'Hide Debit/Credit Ref. Number(s)'.tr(),
         ),
       ),
       findsOneWidget,

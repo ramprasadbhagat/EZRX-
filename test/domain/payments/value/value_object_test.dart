@@ -91,7 +91,7 @@ void main() {
 
     test(
       'get reference list string when data is empty',
-      () => expect(ReferenceId('').referenceListString, '-'),
+      () => expect(ReferenceId('').referenceListString, 'NA'),
     );
   });
 }

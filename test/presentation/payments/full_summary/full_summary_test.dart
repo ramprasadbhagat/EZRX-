@@ -283,8 +283,24 @@ void main() {
         referenceList,
         findsNothing,
       );
+      final hideReferenceList = find.descendant(
+        of: itemCard,
+        matching: find.text('Show Debit/Credit Ref. Number(s)'),
+      );
+      expect(
+        hideReferenceList,
+        findsOneWidget,
+      );
       await tester.tap(expandButton);
       await tester.pumpAndSettle();
+      final showReferenceList = find.descendant(
+        of: itemCard,
+        matching: find.text('Hide Debit/Credit Ref. Number(s)'),
+      );
+      expect(
+        showReferenceList,
+        findsOneWidget,
+      );
       expect(
         referenceList,
         findsOneWidget,
@@ -408,8 +424,24 @@ void main() {
         referenceList,
         findsNothing,
       );
+      final hideReferenceList = find.descendant(
+        of: itemCard,
+        matching: find.text('Show Debit/Credit Ref. Number(s)'),
+      );
+      expect(
+        hideReferenceList,
+        findsOneWidget,
+      );
       await tester.tap(expandButton);
       await tester.pumpAndSettle();
+      final showReferenceList = find.descendant(
+        of: itemCard,
+        matching: find.text('Hide Debit/Credit Ref. Number(s)'),
+      );
+      expect(
+        showReferenceList,
+        findsOneWidget,
+      );
       expect(
         referenceList,
         findsOneWidget,

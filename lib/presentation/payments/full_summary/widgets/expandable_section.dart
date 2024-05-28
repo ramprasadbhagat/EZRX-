@@ -32,8 +32,8 @@ class _ExpandableSectionState extends State<_ExpandableSection> {
               children: [
                 Text(
                   _isExpanded
-                      ? context.tr('Hide reference details')
-                      : context.tr('Show reference details'),
+                      ? context.tr('Hide Debit/Credit Ref. Number(s)')
+                      : context.tr('Show Debit/Credit Ref. Number(s)'),
                   style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                         color: ZPColors.extraDarkGreen,
                         fontWeight: FontWeight.w600,
