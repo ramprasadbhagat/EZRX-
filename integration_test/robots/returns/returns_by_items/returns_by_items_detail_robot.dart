@@ -239,6 +239,13 @@ class ReturnsByItemsDetailRobot extends CommonRobot {
     );
   }
 
+  void verifyMaterialReturnType(String returnType) {
+    expect(
+      find.byKey(WidgetKeys.balanceTextRow('Return type'.tr(), returnType)),
+      findsWidgets,
+    );
+  }
+
   void verifyMaterialReturnComments(String comment) {
     expect(
       find.byKey(WidgetKeys.balanceTextRow('Comments'.tr(), comment)),

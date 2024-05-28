@@ -51,6 +51,12 @@ abstract class ReturnsFilterRobot {
     await tester.enterText(toAmountFilter, text);
     await tester.testTextInput.receiveAction(TextInputAction.done);
     await tester.pump(Durations.long2);
+    await tapToAmount();
+  }
+
+  Future<void> tapToAmount() async {
+    await tester.tap(toAmountFilter);
+    await tester.pumpAndSettle();
   }
 
   void verifyAmountRangeFilterApplied({

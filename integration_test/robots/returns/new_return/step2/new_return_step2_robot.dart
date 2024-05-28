@@ -96,6 +96,24 @@ class NewReturnStep2Robot {
     }
   }
 
+  Future<void> selectReturnType(String returnType, String uuid) async {
+    final materialReturnType = find.byKey(WidgetKeys.selectByRadio(returnType));
+    await _dragTo(materialReturnType);
+    if (!_hasBonusSection(uuid)) {
+      await tester.tap(materialReturnType.first);
+      await tester.pumpAndSettle();
+      return;
+    } else {
+      await tester.tap(materialReturnType.first);
+      await tester.pumpAndSettle();
+      await _dragTo(materialReturnType.last);
+      await tester.tap(materialReturnType.last);
+      await tester.pumpAndSettle();
+      await _dragTo(materialReturnType.first);
+      return;
+    }
+  }
+
   Future<void> enterBonusReturnQuantityWithCommercialItem(
     String returnQuantity,
     String uuid,
@@ -203,6 +221,16 @@ class NewReturnStep2Robot {
     expect(
       find.text('Please ensure all required fields are filled.'.tr()),
       findsOneWidget,
+    );
+  }
+
+  void verifyReturnCounterOfferField({
+    bool isVisible = true,
+    required String uuid,
+  }) {
+    expect(
+      find.byKey(WidgetKeys.requestCounterOfferTextField(uuid)),
+      isVisible ? findsAtLeastNWidgets(1) : findsNothing,
     );
   }
 }

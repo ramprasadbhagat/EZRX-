@@ -40,7 +40,7 @@ updateSalesorgconfigMutationReq=$(curl --location 'https://uat-th.ezrx.com/api/l
       "enableAnalytics": false,
       "enablePartialPayment": false,
       "enableUnreferencedReturn": false,
-      "disableReturnsAccess": true,
+      "disableReturnsAccess": false,
       "disablePayment": false,
       "disableReturnsAccessSR": true,
       "enableMobileNumber": false,
