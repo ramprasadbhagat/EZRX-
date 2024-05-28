@@ -154,7 +154,7 @@ class _BundleInformation extends StatelessWidget {
           ],
         ),
         Text(
-          '${context.tr('Purchase')} ${currentOffer.quantity} ${context.tr('or more for')} ${StringUtils.formatPrice(salesOrgConfigs, currentOffer.rate)} ${context.tr('per item')}',
+          '${context.tr('Purchase')} ${currentOffer.quantity} ${context.tr('or more for')} ${StringUtils.displayPrice(salesOrgConfigs, currentOffer.rate)} ${context.tr('per item')}',
           key: WidgetKeys.cartItemBundleRate,
           style: Theme.of(context).textTheme.bodySmall?.copyWith(
                 color: ZPColors.neutralsGrey1,

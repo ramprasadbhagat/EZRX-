@@ -451,6 +451,8 @@ class WidgetKeys {
   static const Key returnItemTileStatus = Key('returnItemTileStatus');
   static const Key returnItemTileBonusTag = Key('returnItemTileBonusTag');
   static const Key returnInvoiceId = Key('returnInvoiceId');
+  static const Key returnRequestId = Key('returnRequestId');
+  static const Key returnBatchAndExpires = Key('returnBatchAndExpires');
 
   //============================================================
   //  Returns by items detail

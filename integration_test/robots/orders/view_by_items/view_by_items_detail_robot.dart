@@ -1,7 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/presentation/core/address_info_section.dart';
 import 'package:ezrxmobile/presentation/core/balance_text_row.dart';
-import 'package:ezrxmobile/presentation/core/common_tile_item.dart';
 import 'package:ezrxmobile/presentation/core/product_image.dart';
 import 'package:ezrxmobile/presentation/core/status_tracker.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
@@ -23,7 +22,7 @@ class ViewByItemsDetailRobot extends CommonRobot {
   final otherItemDetailSection = find.byType(OtherItemDetailsSection);
   final otherItem =
       find.byKey(WidgetKeys.viewByItemDetailOtherItemExpandSection);
-  final orderItem = find.byType(CommonTileItem);
+  final orderItem = find.byType(ViewByItemOrderItemTile);
   final offerTag = find.byKey(WidgetKeys.offerTag);
   final bundleTag = find.byKey(WidgetKeys.bundleTag);
   final bonusTag = find.byKey(WidgetKeys.commonTileItemStatusLabel);

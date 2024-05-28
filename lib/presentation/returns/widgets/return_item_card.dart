@@ -59,6 +59,14 @@ class ReturnItemCard extends StatelessWidget {
     }
 
     return ReturnListItemCard.detailItem(
+      key: WidgetKeys.returnItemDetailMaterial(
+        returnRequestInformation.materialNumber.displayMatNo,
+        returnRequestInformation.returnQuantity.toString(),
+        StringUtils.displayPrice(
+          salesOrgConfigs,
+          returnRequestInformation.totalPrice,
+        ),
+      ),
       data: returnRequestInformation,
       bottomWidget: _ExpandableDetailSection(
         isExpanded: false,

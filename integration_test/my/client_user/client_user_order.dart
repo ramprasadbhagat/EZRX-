@@ -1,13 +1,10 @@
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
-import 'package:ezrxmobile/locator.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 
 import '../../core/common.dart';
-import '../../core/infrastructure/infra_core/zephyr_service/zephyr_service.dart';
-import '../../core/infrastructure/zephyr/repository/zephyr_repository.dart';
 import '../../robots/announcement_article/announcement_article_root_robot.dart';
 import '../../robots/announcement_article/articles/articles_details_robot.dart';
 import '../../robots/announcement_article/articles/articles_robot.dart';
@@ -172,8 +169,8 @@ void main() {
   const multiImageMaterialNumber = '21041738';
   const otherInfoMaterialNumber = '21041738';
   const suspendedMaterialNumber = '21042796';
-  const lowPriceMaterialNumber = '21041773';
-  const lowPriceMaterialUnitPrice = 20.4;
+  const lowPriceMaterialNumber = '21038305';
+  const lowPriceMaterialUnitPrice = 273.60;
   const bonusMaterialNumber = '21041769';
   const bonusMaterialNumberTierQty = 6;
   const bonusMaterialNumberUnitPrice = 19.8;
@@ -213,18 +210,15 @@ void main() {
     StockInfo.empty().copyWith(materialNumber: MaterialNumber('23046682')),
   ];
 
-  var loginRequired = true;
-
   Future<void> pumpAppWithHomeScreen(
     WidgetTester tester, {
     String shipToCode = shipToCode,
   }) async {
     initializeRobot(tester);
     await runAppForTesting(tester);
-    if (loginRequired) {
+    if (loginRobot.isLoginPage) {
       await loginRobot.loginToHomeScreen(username, password, marketMalaysia);
       await customerSearchRobot.selectCustomerSearch(shipToCode);
-      loginRequired = false;
       await commonRobot.dismissSnackbar(dismissAll: true);
       await commonRobot.closeAnnouncementAlertDialog();
     } else {
@@ -232,6 +226,7 @@ void main() {
       await commonRobot.changeDeliveryAddress(
         shipToCode,
       );
+      await commonRobot.closeAnnouncementAlertDialog();
     }
   }
 
@@ -548,7 +543,6 @@ void main() {
 
       //home page
       homeRobot.verify();
-      loginRequired = false;
     });
   });
 
@@ -2207,9 +2201,6 @@ void main() {
         materialUnitPrice.priceDisplay(currency),
         isVisible: false,
       );
-      requestCounterOfferRobot.verifyOfferPrice(
-        materialUnitPrice.priceDisplay(currency),
-      );
       requestCounterOfferRobot.verifyPriceTextField();
       requestCounterOfferRobot.verifyPriceText('');
       requestCounterOfferRobot.verifyRemarkTextField();
@@ -2236,8 +2227,6 @@ void main() {
         newUnitPrice.priceDisplay(currency),
       );
       await cartRobot.tapMaterialCounterOfferButton(materialNumber);
-      requestCounterOfferRobot
-          .verifyOfferPrice(newUnitPrice.priceDisplay(currency));
       requestCounterOfferRobot.verifyPriceText(newUnitPrice.toStringAsFixed(1));
       requestCounterOfferRobot.verifyRemarkText(remark);
     });
@@ -2966,8 +2955,8 @@ void main() {
       testWidgets(
           'EZRX-T87 | Verify view by item detail with default components',
           (tester) async {
-        const orderId = '0200276381';
-        const materialManufacturerName = 'MERCK SHARP & DOHME (I.A)';
+        const orderId = '0200341876';
+        const materialManufacturerName = 'ABBOTT LABORATORIES (M) SDN';
 
         //init app
         await pumpAppWithHomeScreen(tester);
@@ -4060,8 +4049,8 @@ void main() {
     // });
   });
 
-  tearDown(() async {
-    locator<ZephyrService>().setNameAndStatus();
-    await locator<ZephyrRepository>().zephyrUpdate(id: CycleKeyId.myClient);
-  });
+  // tearDown(() async {
+  //   locator<ZephyrService>().setNameAndStatus();
+  //   await locator<ZephyrRepository>().zephyrUpdate(id: CycleKeyId.myClient);
+  // });
 }

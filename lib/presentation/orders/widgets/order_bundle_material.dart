@@ -122,6 +122,7 @@ class BundleItemMaterial extends StatelessWidget {
                       const SizedBox(height: 1),
                       Text(
                         '${context.tr('Qty')}: ${orderItem.qty}',
+                        key: WidgetKeys.cartItemProductQty,
                         style: Theme.of(context)
                             .textTheme
                             .bodySmall

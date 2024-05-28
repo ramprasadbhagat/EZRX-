@@ -22,7 +22,7 @@ class ReturnsByItemsRobot {
       find.byKey(WidgetKeys.returnByItemsNewRequestButton);
   late final returnIdLabel = find.descendant(
     of: item,
-    matching: find.byKey(WidgetKeys.commonTileItemHeader),
+    matching: find.byKey(WidgetKeys.returnRequestId),
   );
 
   void verifySearchBarVisible() {
@@ -115,7 +115,7 @@ class ReturnsByItemsRobot {
     expect(
       find.descendant(
         of: item,
-        matching: find.byKey(WidgetKeys.commonTileItemSubTitle),
+        matching: find.byKey(WidgetKeys.returnBatchAndExpires),
       ),
       findsNWidgets(itemCount),
     );
@@ -166,9 +166,9 @@ class ReturnsByItemsRobot {
     expect(
       find.byWidgetPredicate(
         (widget) =>
-            widget is RichText &&
-            widget.key == WidgetKeys.commonTileItemHeader &&
-            widget.text.toPlainText().contains(searchKey),
+            widget is Text &&
+            widget.key == WidgetKeys.returnRequestId &&
+            (widget.data?.contains(searchKey) ?? false),
       ),
       findsAtLeastNWidgets(1),
     );
@@ -237,11 +237,11 @@ class ReturnsByItemsRobot {
   }
 
   String getReturnIdText({required int index}) =>
-      tester.widget<RichText>(returnIdLabel.at(index)).text.toPlainText();
+      tester.widget<Text>(returnIdLabel.at(index)).data?.split('#').last ?? '';
 
   void verifyReturnIdTextVisible(String text, {required int index}) {
     expect(
-      tester.widget<RichText>(returnIdLabel.at(index)).text.toPlainText(),
+      getReturnIdText(index: index),
       text,
     );
   }
@@ -249,8 +249,7 @@ class ReturnsByItemsRobot {
   void verifyReturnIdTextNotVisible(String text, {required int index}) {
     expect(
       returnIdLabel.evaluate().length - 1 < index ||
-          tester.widget<RichText>(returnIdLabel.at(index)).text.toPlainText() !=
-              text,
+          getReturnIdText(index: index) != text,
       true,
     );
   }

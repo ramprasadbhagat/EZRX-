@@ -37,7 +37,8 @@ class ReturnListItemCard extends StatelessWidget {
     this.invoiceId,
     this.showApproverUpdated = false,
     this.showUnitPrice = false,
-  });
+    Key? key,
+  }) : super(key: key);
 
   factory ReturnListItemCard.listItem({
     required ReturnItem data,
@@ -65,12 +66,14 @@ class ReturnListItemCard extends StatelessWidget {
   factory ReturnListItemCard.detailItem({
     required ReturnRequestInformation data,
     required Widget bottomWidget,
+    Key? key,
   }) =>
       ReturnListItemCard._(
         data: data,
         bottomWidget: bottomWidget,
         showApproverUpdated: true,
         showUnitPrice: true,
+        key: key,
       );
 
   factory ReturnListItemCard.summaryItem({
@@ -192,6 +195,7 @@ class ReturnListItemCard extends StatelessWidget {
                                     .textTheme
                                     .bodySmall
                                     ?.copyWith(color: ZPColors.neutralsGrey1),
+                                key: WidgetKeys.returnBatchAndExpires,
                               ),
                               if (showUnitPrice)
                                 ReturnSummaryItemPrice(
@@ -209,6 +213,7 @@ class ReturnListItemCard extends StatelessWidget {
                         Text(
                           '${context.tr('Return')} #$returnId',
                           style: Theme.of(context).textTheme.bodySmall,
+                          key: WidgetKeys.returnRequestId,
                         ),
                         Text(
                           ' | ',
@@ -247,6 +252,7 @@ class ReturnListItemCard extends StatelessWidget {
                             Text(
                               '${context.tr('Qty')}: ${data.returnQuantity}',
                               style: Theme.of(context).textTheme.bodyLarge,
+                              key: WidgetKeys.commonTileItemQty,
                             ),
                             if (data.isApprovedQuantityOverride &&
                                 showApproverUpdated)

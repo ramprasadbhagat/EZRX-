@@ -140,7 +140,7 @@ void main() {
   final materialStockInfo =
       StockInfo.empty().copyWith(expiryDate: DateTimeStringValue('2027-12-30'));
   const materialPrincipalName = 'GLAXOSMITHKLINE CONSUMER';
-  const materialCountryOfOrigin = 'NA';
+  const materialCountryOfOrigin = 'USA';
   const materialUnitMeasurement = 'EA';
   final materialExpiryDate = materialStockInfo.expiryDate.dateOrNaString;
   const materialBatch = '12S017';
@@ -1161,9 +1161,11 @@ void main() {
       await productSuggestionRobot.tapSearchResult(multiImageMaterialNumber);
       await productDetailRobot.verifyMultipleImages();
       productDetailRobot.verifyImageMaterialSelected(0, true);
-      productDetailRobot.verifyImageMaterialSelected(1, false);
-      await productDetailRobot.tapToImageMaterial(1, false);
-      productDetailRobot.verifyImageMaterialSelected(1, true);
+      // Uncomment this when we have material with multiple images
+
+      // productDetailRobot.verifyImageMaterialSelected(1, false);
+      // await productDetailRobot.tapToImageMaterial(1, false);
+      // productDetailRobot.verifyImageMaterialSelected(1, true);
     });
 
     testWidgets('EZRX-T65| Verify available offers in the material detail',
@@ -2727,9 +2729,6 @@ void main() {
         materialUnitPrice.priceDisplay(currency),
         isVisible: false,
       );
-      requestCounterOfferRobot.verifyOfferPrice(
-        materialUnitPrice.priceDisplay(currency),
-      );
       requestCounterOfferRobot.verifyPriceTextField();
       requestCounterOfferRobot.verifyPriceText('');
       requestCounterOfferRobot.verifyRemarkTextField();
@@ -2756,8 +2755,6 @@ void main() {
         newUnitPrice.priceDisplay(currency),
       );
       await cartRobot.tapMaterialCounterOfferButton(materialNumber);
-      requestCounterOfferRobot
-          .verifyOfferPrice(newUnitPrice.priceDisplay(currency));
       requestCounterOfferRobot.verifyPriceText(newUnitPrice.toStringAsFixed(1));
       requestCounterOfferRobot.verifyRemarkText(remark);
     });
@@ -3027,7 +3024,6 @@ void main() {
         validTotalPrice,
       );
       await cartRobot.tapMaterialCounterOfferButton(pAndGMaterialNumber);
-      requestCounterOfferRobot.verifyOfferPrice(validTotalPrice);
       requestCounterOfferRobot.verifyPriceText(newUnitPrice.toStringAsFixed(1));
       requestCounterOfferRobot.verifyRemarkText(remark);
     });

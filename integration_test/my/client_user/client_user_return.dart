@@ -1,11 +1,8 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:ezrxmobile/locator.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 
 import '../../core/common.dart';
-import '../../core/infrastructure/infra_core/zephyr_service/zephyr_service.dart';
-import '../../core/infrastructure/zephyr/repository/zephyr_repository.dart';
 import '../../robots/common/common_robot.dart';
 import '../../robots/common/enum.dart';
 import '../../robots/common/extension.dart';
@@ -96,12 +93,12 @@ void main() {
   //
   const exceedReturnQuantity = '100';
   const validReturnQuantity = '1';
-  final fromDateToNextForStep2 = DateTime(2023, 10, 15);
-  final toDateToNextForStep2 = DateTime(2023, 10, 31);
+  final fromDateToNextForStep2 = DateTime(2023, 12, 6);
+  final toDateToNextForStep2 = DateTime(2023, 12, 6);
   final reason = 'Wrong Bill-To'.tr();
-  const materialId = '21038305';
-  const materialTitle = "0.9% SODIUM CHLORIDEBP100ML1X72'S";
-  const materialUUID = '1100001315000010';
+  const materialId = '21041773';
+  const materialTitle = '190 BIOTENE D/MOUTHT/PASTE FM ORI 4.5OZ';
+  const materialUUID = '1100001338000020';
 
   //Return detail data
   const returnRequestStatus = 'Pending Review';
@@ -126,18 +123,15 @@ void main() {
     newReturnStep3Robot = NewReturnStep3Robot(tester);
   }
 
-  var loginRequired = true;
-
   Future<void> pumpAppWithHomeScreen(
     WidgetTester tester, {
     String shipToCode = shipToCode,
   }) async {
     initializeRobot(tester);
     await runAppForTesting(tester);
-    if (loginRequired) {
+    if (loginRobot.isLoginPage) {
       await loginRobot.loginToHomeScreen(username, password, marketMalaysia);
       await customerSearchRobot.selectCustomerSearch(shipToCode);
-      loginRequired = false;
       await commonRobot.dismissSnackbar(dismissAll: true);
       await commonRobot.closeAnnouncementAlertDialog();
     } else {
@@ -145,6 +139,7 @@ void main() {
       await commonRobot.changeDeliveryAddress(
         shipToCode,
       );
+      await commonRobot.closeAnnouncementAlertDialog();
     }
   }
 
@@ -1091,6 +1086,7 @@ void main() {
         materialTitle,
       );
     });
+
     testWidgets(
         'EZRX-T559 | Verify return step 2 of 3 Fill in return detail when include bonusn',
         (tester) async {
@@ -1141,8 +1137,8 @@ void main() {
     });
   });
 
-  tearDown(() async {
-    locator<ZephyrService>().setNameAndStatus();
-    await locator<ZephyrRepository>().zephyrUpdate(id: CycleKeyId.myClient);
-  });
+  // tearDown(() async {
+  //   locator<ZephyrService>().setNameAndStatus();
+  //   await locator<ZephyrRepository>().zephyrUpdate(id: CycleKeyId.myClient);
+  // });
 }
