@@ -8,7 +8,7 @@ query customerInformationSearch(
   \$first: Int!
   \$after: Int!
   \$filterBlockCustomer: Boolean
-
+  
 ) {
   customerInformationSearch(
     searchKey: \$searchKey

@@ -72,7 +72,9 @@ bool checkReturn(String val) =>
     isEqualsIgnoreCase(val, 'ReturnRequestCreatedForApprover') ||
     isEqualsIgnoreCase(val, 'ReturnRequestCreated');
 
-bool checkOrder(String val) => isEqualsIgnoreCase(val, 'OrderCreated');
+bool checkOrder(String val) =>
+    isEqualsIgnoreCase(val, 'OrderCreated') ||
+    isEqualsIgnoreCase(val, 'OrderCancelled');
 
 bool checkPayment(String val) =>
     isEqualsIgnoreCase(val, 'PaymentAdviceCreated');
