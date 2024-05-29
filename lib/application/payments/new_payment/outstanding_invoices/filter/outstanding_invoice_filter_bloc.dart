@@ -57,6 +57,7 @@ class OutstandingInvoiceFilterBloc
             amountValueFrom: RangeValue(e.amountFrom),
             amountValueTo: state.filter.amountValueTo,
           ),
+          showErrorMessage: false,
         ),
       ),
       setAmountTo: (e) async => emit(
@@ -66,6 +67,7 @@ class OutstandingInvoiceFilterBloc
             amountValueFrom: state.filter.amountValueFrom,
             amountValueTo: RangeValue(e.amountTo),
           ),
+          showErrorMessage: false,
         ),
       ),
       setOutstandingInvoiceStatus: (e) {

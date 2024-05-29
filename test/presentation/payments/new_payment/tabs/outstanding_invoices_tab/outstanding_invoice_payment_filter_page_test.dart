@@ -1,24 +1,14 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
-import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
-import 'package:ezrxmobile/application/account/user/user_bloc.dart';
-import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
-import 'package:ezrxmobile/application/auth/auth_bloc.dart';
-import 'package:ezrxmobile/application/payments/account_summary/account_summary_bloc.dart';
-import 'package:ezrxmobile/application/payments/new_payment/available_credits/available_credits_bloc.dart';
-import 'package:ezrxmobile/application/payments/new_payment/available_credits/filter/available_credit_filter_bloc.dart';
-import 'package:ezrxmobile/application/payments/new_payment/new_payment_bloc.dart';
 import 'package:ezrxmobile/application/payments/new_payment/outstanding_invoices/filter/outstanding_invoice_filter_bloc.dart';
 import 'package:ezrxmobile/application/payments/new_payment/outstanding_invoices/outstanding_invoices_bloc.dart';
 import 'package:ezrxmobile/config.dart';
-import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
-import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/value/value_transformers.dart';
 import 'package:ezrxmobile/domain/payments/entities/outstanding_invoice_filter.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
+import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/value_range_error.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/payments/new_payment/tabs/outstanding_invoices_tab/outstanding_invoice_payment_filter_page.dart';
@@ -26,43 +16,26 @@ import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:get_it/get_it.dart';
+
 import 'package:mocktail/mocktail.dart';
 
+import '../../../../../common_mock_data/sales_org_config_mock/fake_my_sales_org_config.dart';
 import '../../../../../utils/widget_utils.dart';
 import '../../../../../common_mock_data/mock_bloc.dart';
 
 void main() {
-  late AccountSummaryBloc accountSummaryBlocMock;
   late OutstandingInvoicesBloc outstandingInvoicesBlocMock;
   late OutstandingInvoiceFilterBloc outstandingInvoiceFilterBlocMock;
-  late AvailableCreditsBloc availableCreditsBlocMock;
-  late AvailableCreditFilterBloc availableCreditFilterBlocMock;
-  late NewPaymentBloc newPaymentBlocMock;
-  late CustomerCodeBloc customerCodeBlocMock;
-  late UserBloc userBlocMock;
-  late SalesOrgBloc salesOrgBlocMock;
   late AppRouter autoRouterMock;
-  final locator = GetIt.instance;
-  late AuthBloc authBlocMock;
-  late AnnouncementBloc announcementBlocMock;
   late EligibilityBloc eligibilityBlocMock;
 
-  final salesOrg = SalesOrganisationConfigs.empty().copyWith(
-    currency: Currency('myr'),
-  );
-
   final fakeToDate = DateTime.parse(
-    DateFormat('yyyyMMdd').format(
-      DateTime.now(),
-    ),
+    DateFormat('yyyyMMdd').format(DateTime.now()),
   );
 
   final fakeFromDate = DateTime.parse(
     DateFormat('yyyyMMdd').format(
-      DateTime.now().subtract(
-        const Duration(days: 28),
-      ),
+      DateTime.now().subtract(const Duration(days: 28)),
     ),
   );
 
@@ -77,42 +50,14 @@ void main() {
   });
 
   setUp(() async {
-    accountSummaryBlocMock = ZPAccountSummaryBlocMock();
     outstandingInvoicesBlocMock = OutstandingInvoicesBlocMock();
     outstandingInvoiceFilterBlocMock = OutstandingInvoiceFilterBlocMock();
-    availableCreditsBlocMock = AvailableCreditsBlocMock();
-    availableCreditFilterBlocMock = AvailableCreditFilterBlocMock();
-    newPaymentBlocMock = NewPaymentBlocMock();
-    customerCodeBlocMock = CustomerCodeBlocMock();
-    userBlocMock = UserBlocMock();
-    salesOrgBlocMock = SalesOrgBlocMock();
-    authBlocMock = AuthBlocMock();
-    announcementBlocMock = AnnouncementBlocMock();
     eligibilityBlocMock = EligibilityBlocMock();
 
-    when(() => accountSummaryBlocMock.state)
-        .thenReturn(AccountSummaryState.initial());
     when(() => outstandingInvoicesBlocMock.state)
         .thenReturn(OutstandingInvoicesState.initial());
     when(() => outstandingInvoiceFilterBlocMock.state)
         .thenReturn(OutstandingInvoiceFilterState.initial());
-    when(() => availableCreditsBlocMock.state)
-        .thenReturn(AvailableCreditsState.initial());
-    when(() => availableCreditFilterBlocMock.state)
-        .thenReturn(AvailableCreditFilterState.initial());
-    when(() => newPaymentBlocMock.state).thenReturn(NewPaymentState.initial());
-    when(() => customerCodeBlocMock.state)
-        .thenReturn(CustomerCodeState.initial());
-    when(() => userBlocMock.state).thenReturn(UserState.initial());
-    when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial());
-    when(() => authBlocMock.state).thenReturn(const AuthState.initial());
-    when(() => announcementBlocMock.state)
-        .thenReturn(AnnouncementState.initial());
-    when(() => outstandingInvoicesBlocMock.state)
-        .thenReturn(OutstandingInvoicesState.initial());
-    when(() => availableCreditsBlocMock.state)
-        .thenReturn(AvailableCreditsState.initial());
-    when(() => newPaymentBlocMock.state).thenReturn(NewPaymentState.initial());
     when(() => eligibilityBlocMock.state)
         .thenReturn(EligibilityState.initial());
   });
@@ -123,36 +68,11 @@ void main() {
       usingLocalization: true,
       routeName: NewPaymentPageRoute.name,
       providers: [
-        BlocProvider<AccountSummaryBloc>(
-          create: (context) => accountSummaryBlocMock,
-        ),
         BlocProvider<OutstandingInvoicesBloc>(
           create: (context) => outstandingInvoicesBlocMock,
         ),
         BlocProvider<OutstandingInvoiceFilterBloc>(
           create: (context) => outstandingInvoiceFilterBlocMock,
-        ),
-        BlocProvider<AvailableCreditsBloc>(
-          create: (context) => availableCreditsBlocMock,
-        ),
-        BlocProvider<AvailableCreditFilterBloc>(
-          create: (context) => availableCreditFilterBlocMock,
-        ),
-        BlocProvider<NewPaymentBloc>(
-          create: (context) => newPaymentBlocMock,
-        ),
-        BlocProvider<CustomerCodeBloc>(
-          create: (context) => customerCodeBlocMock,
-        ),
-        BlocProvider<UserBloc>(
-          create: (context) => userBlocMock,
-        ),
-        BlocProvider<SalesOrgBloc>(
-          create: (context) => salesOrgBlocMock,
-        ),
-        BlocProvider<AuthBloc>(create: (context) => authBlocMock),
-        BlocProvider<AnnouncementBloc>(
-          create: (context) => announcementBlocMock,
         ),
         BlocProvider<EligibilityBloc>(
           create: (context) => eligibilityBlocMock,
@@ -184,7 +104,7 @@ void main() {
     testWidgets('Invoice filter', (tester) async {
       when(() => eligibilityBlocMock.state).thenReturn(
         EligibilityState.initial().copyWith(
-          salesOrgConfigs: salesOrg,
+          salesOrgConfigs: fakeMYSalesOrgConfigs,
         ),
       );
 
@@ -225,7 +145,7 @@ void main() {
       (tester) async {
         when(() => eligibilityBlocMock.state).thenReturn(
           EligibilityState.initial().copyWith(
-            salesOrgConfigs: salesOrg,
+            salesOrgConfigs: fakeMYSalesOrgConfigs,
           ),
         );
         final expectedStates = [
@@ -274,7 +194,7 @@ void main() {
       (tester) async {
         when(() => eligibilityBlocMock.state).thenReturn(
           EligibilityState.initial().copyWith(
-            salesOrgConfigs: salesOrg,
+            salesOrgConfigs: fakeMYSalesOrgConfigs,
           ),
         );
         final expectedStates = [
@@ -323,7 +243,7 @@ void main() {
       (tester) async {
         when(() => eligibilityBlocMock.state).thenReturn(
           EligibilityState.initial().copyWith(
-            salesOrgConfigs: salesOrg,
+            salesOrgConfigs: fakeMYSalesOrgConfigs,
           ),
         );
         final expectedStates = [
@@ -371,7 +291,7 @@ void main() {
       (tester) async {
         when(() => eligibilityBlocMock.state).thenReturn(
           EligibilityState.initial().copyWith(
-            salesOrgConfigs: salesOrg,
+            salesOrgConfigs: fakeMYSalesOrgConfigs,
           ),
         );
         final expectedStates = [
@@ -417,7 +337,7 @@ void main() {
     testWidgets('Edit amount filter test', (tester) async {
       when(() => eligibilityBlocMock.state).thenReturn(
         EligibilityState.initial().copyWith(
-          salesOrgConfigs: salesOrg,
+          salesOrgConfigs: fakeMYSalesOrgConfigs,
         ),
       );
 
@@ -460,7 +380,7 @@ void main() {
     testWidgets('Status filter test', (tester) async {
       when(() => eligibilityBlocMock.state).thenReturn(
         EligibilityState.initial().copyWith(
-          salesOrgConfigs: salesOrg,
+          salesOrgConfigs: fakeMYSalesOrgConfigs,
         ),
       );
 
@@ -489,7 +409,7 @@ void main() {
     testWidgets('amount filter Invalid Amount range', (tester) async {
       when(() => eligibilityBlocMock.state).thenReturn(
         EligibilityState.initial().copyWith(
-          salesOrgConfigs: salesOrg,
+          salesOrgConfigs: fakeMYSalesOrgConfigs,
         ),
       );
 
@@ -499,6 +419,7 @@ void main() {
             amountValueFrom: RangeValue('100'),
             amountValueTo: RangeValue('10'),
           ),
+          showErrorMessage: true,
         ),
       );
 
@@ -516,6 +437,37 @@ void main() {
           matching: find.text('Invalid Amount range!'),
         ),
         findsOneWidget,
+      );
+    });
+
+    testWidgets(
+        'amount filter should hide error message when showErrorMessage is false',
+        (tester) async {
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrgConfigs: fakeMYSalesOrgConfigs,
+        ),
+      );
+
+      when(() => outstandingInvoiceFilterBlocMock.state).thenReturn(
+        OutstandingInvoiceFilterState.initial().copyWith(
+          filter: OutstandingInvoiceFilter.defaultFilter().copyWith(
+            amountValueFrom: RangeValue('100'),
+            amountValueTo: RangeValue('10'),
+          ),
+          showErrorMessage: false,
+        ),
+      );
+
+      await tester.pumpWidget(getWidget());
+      await tester.pumpAndSettle();
+      expect(find.byKey(WidgetKeys.amountValueFrom), findsOneWidget);
+      expect(
+        find.descendant(
+          of: find.byType(ValueRangeError),
+          matching: find.text('Invalid Amount range!'),
+        ),
+        findsNothing,
       );
     });
   });

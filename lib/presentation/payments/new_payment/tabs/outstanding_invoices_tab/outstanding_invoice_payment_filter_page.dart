@@ -70,9 +70,9 @@ class _PaymentFilter extends StatelessWidget {
           previous.showErrorMessage != current.showErrorMessage ||
           previous.filter.filterOption != current.filter.filterOption,
       builder: (context, state) {
-         final salesOrgConfig =
+        final salesOrgConfig =
             context.read<EligibilityBloc>().state.salesOrgConfigs;
-            
+
         return ListTile(
           title: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -187,7 +187,7 @@ class _PaymentFilter extends StatelessWidget {
                 radioValue: FilterOption.amountRange(),
                 selectedValue: state.filter.filterOption,
                 title: 'Amount range',
-                showErrorMessage:
+                showErrorMessage: state.showErrorMessage &&
                     !state.filter.isOutstandingInvoiceAmountValueRangeValid,
                 filterWidet: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -206,7 +206,7 @@ class _PaymentFilter extends StatelessWidget {
                                     amountFrom: value,
                                   ),
                                 ),
-                                 decoration: InputDecoration(
+                        decoration: InputDecoration(
                           labelText:
                               '${context.tr('From')} (${salesOrgConfig.currency.code})',
                           labelStyle:
@@ -236,7 +236,7 @@ class _PaymentFilter extends StatelessWidget {
                                     amountTo: value,
                                   ),
                                 ),
-                                 decoration: InputDecoration(
+                        decoration: InputDecoration(
                           labelText:
                               '${context.tr('To')} (${salesOrgConfig.currency.code})',
                           labelStyle:
