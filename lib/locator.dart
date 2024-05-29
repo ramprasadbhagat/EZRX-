@@ -204,6 +204,7 @@ import 'package:ezrxmobile/infrastructure/core/common/device_info.dart';
 import 'package:ezrxmobile/infrastructure/core/common/file_path_helper.dart';
 import 'package:ezrxmobile/infrastructure/core/common/file_picker.dart';
 import 'package:ezrxmobile/infrastructure/core/common/permission_service.dart';
+import 'package:ezrxmobile/infrastructure/core/common/take_picture_service.dart';
 import 'package:ezrxmobile/infrastructure/core/crypto/encryption.dart';
 import 'package:ezrxmobile/infrastructure/core/datadog/datadog_service.dart';
 import 'package:ezrxmobile/infrastructure/core/device/repository/device_repository.dart';
@@ -1443,6 +1444,10 @@ void setupLocator() {
   );
 
   locator.registerLazySingleton(
+    () => TakePictureService(),
+  );
+
+  locator.registerLazySingleton(
     () => PoDocumentLocalDataSource(),
   );
   locator.registerLazySingleton(() => PoDocumentQuery());
@@ -1464,6 +1469,7 @@ void setupLocator() {
       deviceInfo: locator<DeviceInfo>(),
       filePickerService: locator<FilePickerService>(),
       fileSystemHelper: locator<FileSystemHelper>(),
+      takePictureService: locator<TakePictureService>(),
     ),
   );
 

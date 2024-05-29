@@ -1,17 +1,18 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/order/additional_details/additional_details_bloc.dart';
 import 'package:ezrxmobile/application/order/po_attachment/po_attachment_bloc.dart';
+import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_po_documents.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
+import 'package:ezrxmobile/presentation/widgets/open_setting_bottomsheet.dart';
+import 'package:ezrxmobile/presentation/widgets/select_attachment_bottomsheet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class PoAttachmentUpload extends StatelessWidget {
   const PoAttachmentUpload({Key? key}) : super(key: key);
@@ -25,7 +26,19 @@ class PoAttachmentUpload extends StatelessWidget {
         state.failureOrSuccessOption.fold(
           () => {},
           (either) => either.fold(
-            (failure) => ErrorUtils.handleApiFailure(context, failure),
+            (failure) {
+              if (failure == const ApiFailure.cameraPermissionFailed(true)) {
+                showModalBottomSheet(
+                  context: context,
+                  isScrollControlled: true,
+                  enableDrag: false,
+                  isDismissible: true,
+                  builder: (_) => const OpenSettingBottomSheet(),
+                );
+              } else {
+                ErrorUtils.handleApiFailure(context, failure);
+              }
+            },
             (_) {
               context.read<AdditionalDetailsBloc>().add(
                     AdditionalDetailsEvent.addPoDocument(
@@ -72,24 +85,45 @@ class _PoUploadButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return OutlinedButton(
-      key: WidgetKeys.uploadAttachmentKey,
-      style: OutlinedButton.styleFrom(
-        minimumSize: const Size(double.maxFinite, 45),
-      ),
-      onPressed: () async {
-        if (context.read<PoAttachmentBloc>().state.isFetching ||
-            context.read<AdditionalDetailsBloc>().state.isLoading) return;
-        await showPlatformDialog(
-          context: context,
-          barrierDismissible: true,
-          useRootNavigator: true,
-          builder: (BuildContext context) {
-            return const _PoUploadOptionPicker();
+    return BlocBuilder<PoAttachmentBloc, PoAttachmentState>(
+      buildWhen: (previous, current) =>
+          previous.isFetching != current.isFetching,
+      builder: (context, state) {
+        return OutlinedButton(
+          key: WidgetKeys.uploadAttachmentKey,
+          style: OutlinedButton.styleFrom(
+            minimumSize: const Size(double.maxFinite, 45),
+          ),
+          onPressed: () {
+            if (context.read<PoAttachmentBloc>().state.isFetching ||
+                context.read<AdditionalDetailsBloc>().state.isLoading) return;
+            showModalBottomSheet(
+              context: context,
+              isScrollControlled: true,
+              enableDrag: false,
+              isDismissible: false,
+              builder: (_) => SelectAttachmentBottomsheet(
+                onUploadOptionSelected: (option) =>
+                    context.read<PoAttachmentBloc>().add(
+                          PoAttachmentEvent.uploadFile(
+                            uploadedPODocument: context
+                                .read<AdditionalDetailsBloc>()
+                                .state
+                                .deliveryInfoData
+                                .poDocuments,
+                            uploadOptionType: option,
+                            user: context.read<EligibilityBloc>().state.user,
+                          ),
+                        ),
+              ),
+            );
           },
+          child: LoadingShimmer.withChild(
+            enabled: state.isFetching,
+            child: const Text('Upload attachment').tr(),
+          ),
         );
       },
-      child: const Text('Upload attachment').tr(),
     );
   }
 }
@@ -117,87 +151,6 @@ class _UploadErrorMessage extends StatelessWidget {
               );
       },
     );
-  }
-}
-
-class _PoUploadOptionPicker extends StatefulWidget {
-  const _PoUploadOptionPicker({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  State<_PoUploadOptionPicker> createState() => _PoUploadOptionPickerState();
-}
-
-class _PoUploadOptionPickerState extends State<_PoUploadOptionPicker> {
-  @override
-  Widget build(BuildContext context) {
-    return PlatformAlertDialog(
-      key: WidgetKeys.poAttachmentUploadDialog,
-      title: Text(
-        'Upload attachment'.tr(),
-      ),
-      content: Text(
-        'Choose a photo or a file'.tr(),
-      ),
-      actions: [
-        PlatformDialogAction(
-          key: WidgetKeys.poAttachmentPhotoUploadButton,
-          child: Column(
-            children: [
-              const Icon(
-                Icons.image,
-                color: ZPColors.kPrimaryColor,
-              ),
-              Text('Photos'.tr()),
-            ],
-          ),
-          onPressed: () => uploadFile(
-            uploadOptionType: UploadOptionType.gallery,
-          ),
-          cupertino: (_, __) => CupertinoDialogActionData(
-            textStyle: const TextStyle(
-              color: ZPColors.kPrimaryColor,
-            ),
-          ),
-        ),
-        PlatformDialogAction(
-          key: WidgetKeys.poAttachmentFileUploadButton,
-          child: Column(
-            children: [
-              const Icon(
-                Icons.folder,
-                color: ZPColors.kPrimaryColor,
-              ),
-              Text('Files'.tr()),
-            ],
-          ),
-          onPressed: () => uploadFile(
-            uploadOptionType: UploadOptionType.file,
-          ),
-          cupertino: (_, __) => CupertinoDialogActionData(
-            textStyle: const TextStyle(color: ZPColors.kPrimaryColor),
-          ),
-        ),
-      ],
-    );
-  }
-
-  void uploadFile({
-    required UploadOptionType uploadOptionType,
-  }) {
-    context.read<PoAttachmentBloc>().add(
-          PoAttachmentEvent.uploadFile(
-            uploadedPODocument: context
-                .read<AdditionalDetailsBloc>()
-                .state
-                .deliveryInfoData
-                .poDocuments,
-            uploadOptionType: uploadOptionType,
-            user: context.read<EligibilityBloc>().state.user,
-          ),
-        );
-    context.router.pop();
   }
 }
 

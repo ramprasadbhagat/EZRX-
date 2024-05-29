@@ -2,7 +2,7 @@ import 'dart:io';
 import 'dart:math';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
-import 'package:ezrxmobile/application/order/po_attachment/po_attachment_bloc.dart';
+import 'package:ezrxmobile/application/core/upload_option_type.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/attachment_files/entities/attachment_file_buffer.dart';
@@ -13,6 +13,7 @@ import 'package:ezrxmobile/infrastructure/core/common/device_info.dart';
 import 'package:ezrxmobile/infrastructure/core/common/file_picker.dart';
 import 'package:ezrxmobile/infrastructure/core/common/permission_service.dart';
 import 'package:ezrxmobile/infrastructure/core/common/file_path_helper.dart';
+import 'package:ezrxmobile/infrastructure/core/common/take_picture_service.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/po_document_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/po_document_remote.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/po_attachment_repository.dart';
@@ -43,6 +44,8 @@ class FilePickerServiceMock extends Mock implements FilePickerService {}
 
 class PermissionServiceMock extends Mock implements PermissionService {}
 
+class TakePictureServiceMock extends Mock implements TakePictureService {}
+
 void main() {
   late PoAttachmentRepository poAttachmentRepository;
   late Config mockConfig;
@@ -52,6 +55,7 @@ void main() {
   late FilePickerService filePickerServiceMock;
   late PermissionService permissionServiceMock;
   late FileSystemHelperMock fileSystemHelperMock;
+  late TakePictureService takePictureServiceMock;
 
   const fakeFileName = 'fake-name';
   const fakeUrl = 'fake-url';
@@ -78,6 +82,7 @@ void main() {
     filePickerServiceMock = FilePickerServiceMock();
     permissionServiceMock = PermissionServiceMock();
     fileSystemHelperMock = FileSystemHelperMock();
+    takePictureServiceMock = TakePictureServiceMock();
     poAttachmentRepository = PoAttachmentRepository(
       config: mockConfig,
       localDataSource: poDocumentLocalDataSourceMock,
@@ -86,6 +91,7 @@ void main() {
       filePickerService: filePickerServiceMock,
       permissionService: permissionServiceMock,
       fileSystemHelper: fileSystemHelperMock,
+      takePictureService: takePictureServiceMock,
     );
   });
 

@@ -73,6 +73,8 @@ class WidgetKeys {
   static const Key tenderTag = Key('tenderTag');
   static const Key orderItemPriceStrikeThrough =
       Key('orderItemPriceStrikeThrough');
+  static const Key dontAllowAlertDialog = Key('dontAllowAlertDialog');
+  static const Key allowAlertDialog = Key('allowAlertDialog');
 
   //============================================================
   //  PRE-ORDER-MODAL
@@ -726,11 +728,10 @@ class WidgetKeys {
   static const Key uploadAttachmentKey = Key('uploadAttachment');
   static const Key attachmentsTileKey = Key('attachmentsTile');
   static const Key selectDate = Key('selectDate');
-  static const Key poAttachmentFileUploadButton =
-      Key('poAttachmentFileUploadButton');
-  static const Key poAttachmentPhotoUploadButton =
-      Key('poAttachmentPhotoUploadButton');
-  static const Key poAttachmentUploadDialog = Key('poAttachmentUploadDialog');
+  static Key poAttachmentOption(String option) =>
+      Key('poAttachmentOption$option');
+  static const Key poAttachmentUploadBottomsheet =
+      Key('poAttachmentUploadBottomsheet');
   static const Key checkoutScrollList = Key('checkoutScrollList');
   static const Key checkoutDeliveryArrowButton =
       Key('checkoutDeliveryArrowButton');

@@ -95,7 +95,7 @@
 		<true/>
 	</dict>
 	<key>NSCameraUsageDescription</key>
-	<string>App wants to access camera to scan the barcode</string>
+	<string>App wants to access camera to scan the barcode and take document picture</string>
 	<key>NSFaceIDUsageDescription</key>
 	<string>App wants to access faceid to secure account access for logged in user.</string>
 	<key>NSMicrophoneUsageDescription</key>

@@ -60,7 +60,7 @@ class ApiFailure with _$ApiFailure {
   const factory ApiFailure.languageChangeFail() = _LanguageChangeFail;
   const factory ApiFailure.scannedProductNotFound(String productNumber) =
       _ScannedProductNotFound;
-  const factory ApiFailure.cameraPermissionFailed() = _CameraPermissionFailed;
+  const factory ApiFailure.cameraPermissionFailed(bool permanentlyDenied) = _CameraPermissionFailed;
   const factory ApiFailure.userNameNotFound() = _UserNameNotFound;
   const factory ApiFailure.uploadedFileSizeExceed() = _UploadedFileSizeExceed;
   const factory ApiFailure.paymentAdviceDeleteFailed(String adviceNumber) =

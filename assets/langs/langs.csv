@@ -1524,3 +1524,10 @@ Tender Contract is no longer available and could not be added to cart.,Tender Co
 Approver updated,Approver updated,ผู้ดูแลอนุมัติอัปเดต,審核者更新,လက်မှတ်သမスカイသူ ပြင်ဆင်ခဲ့ပါသည်,Người phê duyệt đã cập nhật,បានធ្វើបច្ចុប្បន្នភាពអ្នកអនុម័ត,Pemberi Persetujuan Diperbarui,승인자가 업데이트됨
 Show Debit/Credit Ref. Number(s),Show Debit/Credit Ref. Number(s),แสดงหมายเลขอ้างอิงเดบิต/เครดิต,顯示借貸參考號碼,ငွေထုတ်/ငွေလက်ခံ အပ်နှံချက်နံပါတ်(များ) ပြပါ,Hiển thị Số tham chiếu Ghi nợ/Tín dụng,បង្ហាញលេខយោងឥណពន្ធ/ឥណទាន,Tampilkan Nomor Referensi Debit/Kredit,직불/신용 참조 번호 표시
 Hide Debit/Credit Ref. Number(s),Hide Debit/Credit Ref. Number(s),ซ่อนหมายเลขอ้างอิงเดบิต/เครดิต,隱藏借貸參考號碼,ငွေထုတ်/ငွေလက်ခံ အပ်နှံချက်နံပါတ်(များ) ပုန်းထားပါ,Ẩn Số tham chiếu Ghi nợ/Tín dụng,លាក់លេខយោងឥណពន្ធ/ឥណទាន,Sembunyikan Nomor Referensi Debit/Kredit,직불/신용 참조 번호 숨기기
+Take photo,Take photo,ถ่ายรูป,拍照,ဓီဂိုလာမယူသည်,Chụp ảnh,បង្កើតរូបភាព,Ambil foto,사진 찍기
+Open gallery,Open gallery,เปิดแกลเลอรี,開啟相簿,ဖွင့််ခဏ်္ဍာထည့်,Mở thư viện ảnh,បើកបង្ហាញទិន្នន័យ,Buka galeri,갤러리 열기
+Browse files,Browse files,เรียกดูไฟล์,瀏覽檔案,ဖွင့််ခဏ်္ဍာအစီရှိ,Duyệt tập tin,ចូលមើលឯកសាត់,Telusuri file,파일 찾아보기
+eZRX+ would like to access our camera,eZRX+ would like to access our camera,eZRX+ ต้องการเข้าถึงกล้องของเรา,eZRX+ 想要訪問我們的相機,eZRX+ အလိုအတွက်ဆုဖွယ့်ခဲ့ဘူးလိုက်္ခဏာခ,eZRX+ muốn truy cập camera của chúng tôi,eZRX+ ចង់បើក្រឡញ្ចការដែលយើមួយ,eZRX+ ingin mengakses kamera kami,eZRX+가 우리의 카메라에 접근하게 되었습니다
+This allows you to take pictures and scan codes,This allows you to take pictures and scan codes,นี่ได้ให้คุณสามารถถ่ายรูปและสแกนโค้ดได้,这样可以让你拍照并扫描码,ဒီအချိန်သည့်အချိနများလည့််ချိနများအထက်အဒေါက်ဖြစ်စေချိန,Điều này cho phép bạn chụp ảnh và quét mã,អ្នកអាចបង្កើនមេធ្យោសនិងអាចចុងក្រឡើងកូដបាន,Ini memungkinkan Anda untuk mengambil foto dan menindai kode,이것은 사진을 찍고 코드를 스캔할 수 있는 기능을 제공합니다
+"Don't allow","Don't allow",ไม่อนุญาต,不允許,အထည့်မည်မျိုးချိ,Không cho phép,មិនទាន់,Tidak diizinkan,허용하지 않기
+Allow,Allow,อนุญาต,允許,ချိမျိုးချိ,Cho phép,ទាន់,Diizinkan,허용하기

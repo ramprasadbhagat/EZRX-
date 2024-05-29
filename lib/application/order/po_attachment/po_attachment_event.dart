@@ -20,5 +20,3 @@ class PoAttachmentEvent with _$PoAttachmentEvent {
     required PoDocuments file,
   }) = _DeleteFile;
 }
-
-enum UploadOptionType { file, gallery }

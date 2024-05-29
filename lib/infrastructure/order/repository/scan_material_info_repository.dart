@@ -138,7 +138,11 @@ class ScanMaterialInfoRepository implements IScanMaterialInfoRepository {
 
         return permissionStatus.isGranted
             ? Right(permissionStatus)
-            : const Left(ApiFailure.cameraPermissionFailed());
+            : Left(
+                ApiFailure.cameraPermissionFailed(
+                  permissionStatus == PermissionStatus.permanentlyDenied,
+                ),
+              );
       }
       final isIos = defaultTargetPlatform == TargetPlatform.iOS;
       final permissionStatus =

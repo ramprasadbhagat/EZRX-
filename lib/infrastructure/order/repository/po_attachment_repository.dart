@@ -2,7 +2,7 @@ import 'dart:io';
 import 'dart:math';
 
 import 'package:dartz/dartz.dart';
-import 'package:ezrxmobile/application/order/po_attachment/po_attachment_bloc.dart';
+import 'package:ezrxmobile/application/core/upload_option_type.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
@@ -13,6 +13,7 @@ import 'package:ezrxmobile/infrastructure/core/common/device_info.dart';
 import 'package:ezrxmobile/infrastructure/core/common/file_picker.dart';
 import 'package:ezrxmobile/infrastructure/core/common/permission_service.dart';
 import 'package:ezrxmobile/infrastructure/core/common/file_path_helper.dart';
+import 'package:ezrxmobile/infrastructure/core/common/take_picture_service.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/po_document_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/po_document_remote.dart';
 import 'package:ezrxmobile/locator.dart';
@@ -33,6 +34,7 @@ class PoAttachmentRepository implements IpoAttachmentRepository {
   final PermissionService permissionService;
   final FilePickerService filePickerService;
   final FileSystemHelper fileSystemHelper;
+  final TakePictureService takePictureService;
 
   PoAttachmentRepository({
     required this.config,
@@ -42,6 +44,7 @@ class PoAttachmentRepository implements IpoAttachmentRepository {
     required this.permissionService,
     required this.filePickerService,
     required this.fileSystemHelper,
+    required this.takePictureService,
   });
 
   @override
@@ -184,27 +187,44 @@ class PoAttachmentRepository implements IpoAttachmentRepository {
     required UploadOptionType uploadOptionType,
   }) async {
     try {
-      if (await deviceInfo.checkIfDeviceIsAndroidWithSDK33()) {
-        return const Right(PermissionStatus.granted);
+      switch (uploadOptionType) {
+        case UploadOptionType.takePhoto:
+          final permissionStatus =
+              await permissionService.requestCameraPermission();
+
+          return permissionStatus == PermissionStatus.granted ||
+                  permissionStatus == PermissionStatus.limited
+              ? Right(permissionStatus)
+              : Left(
+                  ApiFailure.cameraPermissionFailed(
+                    permissionStatus == PermissionStatus.permanentlyDenied,
+                  ),
+                );
+
+        case UploadOptionType.gallery:
+        case UploadOptionType.file:
+          if (await deviceInfo.checkIfDeviceIsAndroidWithSDK33()) {
+            return const Right(PermissionStatus.granted);
+          }
+
+          final isIos = defaultTargetPlatform == TargetPlatform.iOS;
+          if (isIos && uploadOptionType == UploadOptionType.file) {
+            return const Right(PermissionStatus.granted);
+          }
+
+          final permissionStatus = isIos
+              ? await permissionService.requestPhotoPermission()
+              : await permissionService.requestStoragePermission();
+
+          return permissionStatus == PermissionStatus.granted ||
+                  permissionStatus == PermissionStatus.limited
+              ? Right(permissionStatus)
+              : Left(
+                  isIos
+                      ? const ApiFailure.photoPermissionFailed()
+                      : const ApiFailure.storagePermissionFailed(),
+                );
       }
-
-      final isIos = defaultTargetPlatform == TargetPlatform.iOS;
-      if (isIos && uploadOptionType == UploadOptionType.file) {
-        return const Right(PermissionStatus.granted);
-      }
-
-      final permissionStatus = isIos
-          ? await permissionService.requestPhotoPermission()
-          : await permissionService.requestStoragePermission();
-
-      return permissionStatus == PermissionStatus.granted ||
-              permissionStatus == PermissionStatus.limited
-          ? Right(permissionStatus)
-          : Left(
-              isIos
-                  ? const ApiFailure.photoPermissionFailed()
-                  : const ApiFailure.storagePermissionFailed(),
-            );
     } catch (e) {
       return Left(
         FailureHandler.handleFailure(e),
@@ -217,32 +237,51 @@ class PoAttachmentRepository implements IpoAttachmentRepository {
     required UploadOptionType uploadOptionType,
   }) async {
     try {
-      final result = await filePickerService.pickFiles(
-        allowMultiple: true,
-        fileType: uploadOptionType == UploadOptionType.file
-            ? FileType.custom
-            : FileType.image,
-        allowedExtensions: uploadOptionType == UploadOptionType.file
-            ? locator<Config>().allowedExtensions
-            : null,
-      );
-      final files = List<PlatformFile>.from(result?.files ?? [])
-        ..removeWhere((element) => (element.path ?? '').isEmpty);
+      if (uploadOptionType == UploadOptionType.takePhoto) {
+        final result = await takePictureService.takePicture();
+        final renamedFiles = result.map(
+          (imagePath) {
+            final image = File(imagePath);
+            final name = image.path.split('/').last;
 
-      final renamedFiles = files
-          .map(
-            (element) => PlatformFile(
-              path: element.path,
-              name: element.name,
-              size: element.size,
-              bytes: element.bytes,
-              readStream: element.readStream,
-              identifier: element.identifier,
-            ),
-          )
-          .toList();
+            return PlatformFile(
+              name: name,
+              size: image.lengthSync(),
+              path: image.path,
+              bytes: image.readAsBytesSync(),
+            );
+          },
+        ).toList();
 
-      return right(renamedFiles);
+        return right(renamedFiles);
+      } else {
+        final result = await filePickerService.pickFiles(
+          allowMultiple: true,
+          fileType: uploadOptionType == UploadOptionType.file
+              ? FileType.custom
+              : FileType.image,
+          allowedExtensions: uploadOptionType == UploadOptionType.file
+              ? locator<Config>().allowedExtensions
+              : null,
+        );
+        final files = List<PlatformFile>.from(result?.files ?? [])
+          ..removeWhere((element) => (element.path ?? '').isEmpty);
+
+        final renamedFiles = files
+            .map(
+              (element) => PlatformFile(
+                path: element.path,
+                name: element.name,
+                size: element.size,
+                bytes: element.bytes,
+                readStream: element.readStream,
+                identifier: element.identifier,
+              ),
+            )
+            .toList();
+
+        return right(renamedFiles);
+      }
     } catch (e) {
       return const Left(
         ApiFailure.invalidFileFormat(),

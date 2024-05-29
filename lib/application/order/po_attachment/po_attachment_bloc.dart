@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:ezrxmobile/application/core/upload_option_type.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:dartz/dartz.dart';

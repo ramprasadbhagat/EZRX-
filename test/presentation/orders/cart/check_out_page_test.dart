@@ -4,6 +4,7 @@ import 'package:dartz/dartz.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/customer_license_bloc/customer_license_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
+import 'package:ezrxmobile/application/core/upload_option_type.dart';
 import 'package:ezrxmobile/application/order/additional_details/additional_details_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/price_override/price_override_bloc.dart';
@@ -1658,14 +1659,16 @@ void main() {
             find.byKey(WidgetKeys.uploadAttachmentKey);
         expect(uploadAttachmentKeyKey, findsOneWidget);
         await tester.tap(uploadAttachmentKeyKey);
-        await tester.pump();
-        final poAttachmentUploadDialogKey =
-            find.byKey(WidgetKeys.poAttachmentUploadDialog);
-        expect(poAttachmentUploadDialogKey, findsOneWidget);
-        final poAttachmentPhotoUploadButtonKey =
-            find.byKey(WidgetKeys.poAttachmentPhotoUploadButton);
-        expect(poAttachmentPhotoUploadButtonKey, findsOneWidget);
-        await tester.tap(poAttachmentPhotoUploadButtonKey);
+        await tester.pumpAndSettle();
+
+        final poAttachmentUploadBottomsheetKey =
+            find.byKey(WidgetKeys.poAttachmentUploadBottomsheet);
+        expect(poAttachmentUploadBottomsheetKey, findsOneWidget);
+        final poAttachmentOptionGalleryKey = find.byKey(
+          WidgetKeys.poAttachmentOption(UploadOptionType.gallery.name),
+        );
+        expect(poAttachmentOptionGalleryKey, findsOneWidget);
+        await tester.tap(poAttachmentOptionGalleryKey);
         await tester.pump();
         verify(
           () => poAttachmentBloc.add(
@@ -1681,10 +1684,12 @@ void main() {
             ),
           ),
         ).called(1);
-        final poAttachmentFileUploadButtonKey =
-            find.byKey(WidgetKeys.poAttachmentFileUploadButton);
-        expect(poAttachmentFileUploadButtonKey, findsOneWidget);
-        await tester.tap(poAttachmentFileUploadButtonKey);
+
+        final poAttachmentOptionBrowserFileKey = find.byKey(
+          WidgetKeys.poAttachmentOption(UploadOptionType.file.name),
+        );
+        expect(poAttachmentOptionBrowserFileKey, findsOneWidget);
+        await tester.tap(poAttachmentOptionBrowserFileKey);
         await tester.pump();
         verify(
           () => poAttachmentBloc.add(
@@ -1696,6 +1701,27 @@ void main() {
                 ),
               ],
               uploadOptionType: UploadOptionType.file,
+              user: fakeClientUser,
+            ),
+          ),
+        ).called(1);
+
+        final poAttachmentOptionTakePhotoKey = find.byKey(
+          WidgetKeys.poAttachmentOption(UploadOptionType.takePhoto.name),
+        );
+        expect(poAttachmentOptionTakePhotoKey, findsOneWidget);
+        await tester.tap(poAttachmentOptionTakePhotoKey);
+        await tester.pump();
+        verify(
+          () => poAttachmentBloc.add(
+            PoAttachmentEvent.uploadFile(
+              uploadedPODocument: [
+                PoDocuments.empty().copyWith(
+                  name: 'fake_file',
+                  url: 'fake_url',
+                ),
+              ],
+              uploadOptionType: UploadOptionType.takePhoto,
               user: fakeClientUser,
             ),
           ),
@@ -1810,7 +1836,7 @@ void main() {
           OrderSummaryState.initial().copyWith(
             isSubmitting: true,
           ),
-        );
+        );  
 
         when(() => eligibilityBloc.state).thenReturn(
           EligibilityState.initial().copyWith(
