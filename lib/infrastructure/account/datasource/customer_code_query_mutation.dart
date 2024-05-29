@@ -8,7 +8,7 @@ query customerInformationSearch(
   \$first: Int!
   \$after: Int!
   \$filterBlockCustomer: Boolean
-  \$customerCodeString: String
+
 ) {
   customerInformationSearch(
     searchKey: \$searchKey
@@ -16,7 +16,6 @@ query customerInformationSearch(
     first: \$first
     after: \$after
     filterBlockCustomer: \$filterBlockCustomer
-    customerCodeString: \$customerCodeString
   ) {
     shipToCount
     SoldToInformation {

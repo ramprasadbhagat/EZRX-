@@ -1,11 +1,10 @@
-query customerInformationSearch($salesOrganisation: String!, $searchKey: String!, $first: Int!, $after: Int!, $filterBlockCustomer: Boolean, $customerCodeString: String) {
+query customerInformationSearch($salesOrganisation: String!, $searchKey: String!, $first: Int!, $after: Int!, $filterBlockCustomer: Boolean) {
   customerInformationSearch(
     searchKey: $searchKey
     salesOrganisation: $salesOrganisation
     first: $first
     after: $after
     filterBlockCustomer: $filterBlockCustomer
-    customerCodeString: $customerCodeString
   ) {
     shipToCount
     SoldToInformation {
