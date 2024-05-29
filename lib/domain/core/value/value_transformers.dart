@@ -361,7 +361,6 @@ Color getStatusLabelColor(String statusType) {
     'in progress': ZPColors.invoiceStatusOrange,
     // 'In Progress': ZPColors.lightGray,
     'pending': ZPColors.lightRed,
-    'rejected': ZPColors.darkGray,
     'out of stock': ZPColors.lightGray,
     'expired': ZPColors.lightGray,
   };
