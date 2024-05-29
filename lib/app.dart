@@ -555,9 +555,14 @@ class App extends StatelessWidget {
             locator<DatadogService>().navigationObserver,
           ],
         ),
-        builder: (context, child) => GestureDetector(
-          onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
-          child: child,
+        builder: (context, child) => MediaQuery(
+          data: MediaQuery.of(context).copyWith(
+            textScaler: TextScaler.noScaling,
+          ),
+          child: GestureDetector(
+            onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+            child: child,
+          ),
         ),
         routeInformationParser: router.defaultRouteParser(),
       ),
