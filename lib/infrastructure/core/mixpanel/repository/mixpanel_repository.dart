@@ -26,7 +26,7 @@ class MixpanelRepository extends IMixpanelRepository {
       salesOrg: salesOrg.getOrDefaultValue(''),
       customerCode: customerCodeInfo.customerCodeSoldTo,
       shipToAddress: shipToInfo.shipToCustomerCode,
-      userRole: user.role.type.getOrDefaultValue(''),
+      userRole: user.role.name,
       currency: salesOrgConfigs.currency.getOrDefaultValue('').toUpperCase(),
       market: salesOrg.country,
     );
