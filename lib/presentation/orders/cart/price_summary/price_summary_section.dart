@@ -106,7 +106,7 @@ class PriceSummarySection extends StatelessWidget {
         if (cartState.salesOrganisation.salesOrg.showSmallOrderFee)
           _AplSmallOrderFee(cartState: cartState)
         else if (orderEligibilityState.smallOrderFeeApplied)
-          _SmallOrderFee(orderEligibilityState: orderEligibilityState),
+          SmallOrderFee(orderEligibilityState: orderEligibilityState),
         const SizedBox(height: 4.0),
         const Divider(
           thickness: 1,

@@ -38,7 +38,8 @@ class _OrderSuccessMessage extends StatelessWidget {
                 10.0,
               ),
             ),
-            horizontalTitleGap: 0,
+            horizontalTitleGap: 8,
+            titleAlignment: ListTileTitleAlignment.titleHeight,
             leading: const Icon(
               Icons.info,
               color: ZPColors.skyBlueColor,

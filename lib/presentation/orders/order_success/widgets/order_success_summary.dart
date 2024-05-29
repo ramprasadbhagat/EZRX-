@@ -11,6 +11,7 @@ class _OrderSuccessSummary extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final eligibilityState = context.read<EligibilityBloc>().state;
+    final orderEligibilityState = context.read<OrderEligibilityBloc>().state;
 
     return ListTile(
       key: WidgetKeys.orderSuccessOrderSummarySection,
@@ -109,34 +110,8 @@ class _OrderSuccessSummary extends StatelessWidget {
                 ],
               ),
             ),
-          if (eligibilityState.salesOrg.showSmallOrderFee) ...[
-            Padding(
-              padding: const EdgeInsets.only(top: 8),
-              child: Row(
-                key: WidgetKeys.orderSummarySmallFee,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    '${context.tr('Small order fee')}:',
-                    style: Theme.of(context).textTheme.titleSmall,
-                  ),
-                  PriceComponent(
-                    salesOrgConfig: eligibilityState.salesOrgConfigs,
-                    price: orderHistoryDetailList.smallOrderFee.toString(),
-                  ),
-                ],
-              ),
-            ),
-            Text(
-              '${context.tr('Applies to orders less than')} ${StringUtils.displayPrice(
-                eligibilityState.salesOrgConfigs,
-                eligibilityState.salesOrg.smallOrderThreshold,
-              )}',
-              style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                    fontSize: 10,
-                  ),
-            ),
-          ],
+          if (orderEligibilityState.smallOrderFeeApplied)
+            SmallOrderFee(orderEligibilityState: orderEligibilityState),
           if (eligibilityState.salesOrg.showManualFee)
             Padding(
               padding: const EdgeInsets.only(top: 8),
