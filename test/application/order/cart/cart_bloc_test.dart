@@ -4996,6 +4996,40 @@ void main() {
           expect(cartBlocState.isCounterOfferProductResetRequired, false);
         },
       );
+
+      test(
+        'Testing CartBloc showSmallOrderFeeBottomSheet is true ',
+        () {
+          final cartBlocState = CartState.initial().copyWith(
+            salesOrganisation: fakeIDSalesOrganisation,
+            aplSimulatorOrder:
+                AplSimulatorOrder.empty().copyWith(smallOrderFee: 2000),
+          );
+          expect(cartBlocState.showSmallOrderFeeBottomSheet, true);
+        },
+      );
+
+      test(
+        'Testing CartBloc showSmallOrderFeeBottomSheet is false when salesOrg.showSmallOrderFee is false',
+        () {
+          final cartBlocState = CartState.initial().copyWith(
+            salesOrganisation: fakeMYSalesOrganisation,
+            aplSimulatorOrder:
+                AplSimulatorOrder.empty().copyWith(smallOrderFee: 2000),
+          );
+          expect(cartBlocState.showSmallOrderFeeBottomSheet, false);
+        },
+      );
+
+      test(
+        'Testing CartBloc showSmallOrderFeeBottomSheet is false when aplSimulatorOrder.smallOrderFee = 0',
+        () {
+          final cartBlocState = CartState.initial().copyWith(
+            salesOrganisation: fakeIDSalesOrganisation,
+          );
+          expect(cartBlocState.showSmallOrderFeeBottomSheet, false);
+        },
+      );
     },
   );
 }

@@ -17,6 +17,7 @@ import '../../robots/more/profile_robot.dart';
 import '../../robots/orders/cart/cart_delivery_address_robot.dart';
 import '../../robots/orders/cart/cart_robot.dart';
 import '../../robots/orders/cart/oos_pre_order_robot.dart';
+import '../../robots/orders/cart/small_order_fee_robot.dart';
 import '../../robots/orders/checkout/checkout_robot.dart';
 import '../../robots/orders/checkout/order_price_summary_robot.dart';
 import '../../robots/orders/checkout/order_success_robot.dart';
@@ -58,6 +59,7 @@ void main() {
   late ViewByOrdersRobot viewByOrdersRobot;
   late ViewByOrdersFilterRobot viewByOrdersFilterRobot;
   late CustomerSearchRobot customerSearchRobot;
+  late SmallOrderFeeRobot smallOrderFeeRobot;
 
   void initializeRobot(WidgetTester tester) {
     commonRobot = CommonRobot(tester);
@@ -84,6 +86,7 @@ void main() {
     viewByOrdersRobot = ViewByOrdersRobot(tester);
     viewByOrdersFilterRobot = ViewByOrdersFilterRobot(tester);
     viewByOrdersDetailRobot = ViewByOrdersDetailRobot(tester);
+    smallOrderFeeRobot = SmallOrderFeeRobot(tester);
   }
 
   const marketMalaysia = 'Indonesia';
@@ -192,6 +195,9 @@ void main() {
     await cartRobot.changeMaterialQty(materialNumber, qty);
     await updateAndVerifySmallOrderFee();
     await cartRobot.tapCheckoutButton();
+    if (smallOrderFee > 0) {
+      await smallOrderFeeRobot.tapAgreeButton();
+    }
     if (isPreOrder) {
       await oosPreOrderRobot.tapContinueButton();
     }
@@ -845,7 +851,7 @@ void main() {
 
     testWidgets('EZRX-T115 | Verify checkout cart when having pre-order items',
         (tester) async {
-      const qty = 1;
+      const qty = 2;
       //init app
       await pumpAppWithHomeScreen(tester);
       await browseProductFromEmptyCart();
@@ -885,6 +891,38 @@ void main() {
         cartRobot.verifyPage();
         cartRobot.verifyNoRecordFound();
       }
+    });
+
+    testWidgets(
+        'EZRX-T2058 | Verify cart when small order fee in the order on Cart detail',
+        (tester) async {
+      //init app
+      await pumpAppWithHomeScreen(tester);
+      await browseProductFromEmptyCart();
+
+      //verify
+      await productSuggestionRobot.searchWithKeyboardAction(oosMaterialNumber);
+      await productSuggestionRobot.tapSearchResult(oosMaterialNumber);
+
+      await productDetailRobot.tapAddToCart();
+      await productDetailRobot.dismissSnackbar();
+      await productDetailRobot.tapCartButton();
+      cartRobot.verifyPage();
+      await cartRobot.tapCheckoutButton();
+      smallOrderFeeRobot.verifySheet(isVisible: true);
+      smallOrderFeeRobot.verifyCancelButton();
+      smallOrderFeeRobot.verifyAgreeButton();
+      smallOrderFeeRobot.verifyBottomSheetContent();
+      await smallOrderFeeRobot.tapCancelButton();
+      cartRobot.verifyPage();
+      smallOrderFeeRobot.verifySheet(isVisible: false);
+      await cartRobot.tapCheckoutButton();
+      smallOrderFeeRobot.verifySheet(isVisible: true);
+      await smallOrderFeeRobot.tapAgreeButton();
+      if (productDetailRobot.isOosPreOrderMaterial) {
+        await oosPreOrderRobot.tapContinueButton();
+      }
+      checkoutRobot.verifyPage();
     });
 
     testWidgets(

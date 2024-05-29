@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:ezrxmobile/application/order/order_eligibility/order_eligibility_bloc.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/order/entities/apl_simulator_order.dart';
 import 'package:ezrxmobile/domain/order/entities/combo_material_item.dart';
@@ -780,6 +781,64 @@ void main() {
             ),
           ),
           findsOneWidget,
+        );
+      });
+    });
+
+    group('Test small order fee', () {
+      testWidgets(
+          'Show warning block if small order fee is greater than 0 in ID market',
+          (tester) async {
+        final cartState = CartState.initial().copyWith(
+          cartProducts: [item],
+          salesOrganisation: fakeIDSalesOrganisation,
+          aplSimulatorOrder:
+              AplSimulatorOrder.empty().copyWith(smallOrderFee: 2000),
+        );
+
+        when(() => cartBloc.state).thenReturn(cartState);
+        when(() => eligibilityBloc.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrganisation: fakeIDSalesOrganisation,
+            salesOrgConfigs: fakeIDSalesOrgConfigs,
+          ),
+        );
+
+        await tester.pumpWidget(getWidget(cartState));
+        await tester.pumpAndSettle();
+        expect(
+          find.text(
+            'A small order fee applies to orders with ZP in-stock items that are under the minimum order value of {smallOrderFee} for ZP subtotal.'
+                .tr(namedArgs: {'smallOrderFee': 'IDR 300,000'}),
+          ),
+          findsOneWidget,
+        );
+      });
+
+      testWidgets(
+          'Hide warning block if small order fee is equal to 0 in ID market',
+          (tester) async {
+        final cartState = CartState.initial().copyWith(
+          cartProducts: [item],
+          salesOrganisation: fakeIDSalesOrganisation,
+        );
+
+        when(() => cartBloc.state).thenReturn(cartState);
+        when(() => eligibilityBloc.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrganisation: fakeIDSalesOrganisation,
+            salesOrgConfigs: fakeIDSalesOrgConfigs,
+          ),
+        );
+
+        await tester.pumpWidget(getWidget(cartState));
+        await tester.pumpAndSettle();
+        expect(
+          find.text(
+            'A small order fee applies to orders with ZP in-stock items that are under the minimum order value of {smallOrderFee} for ZP subtotal.'
+                .tr(namedArgs: {'smallOrderFee': 'IDR 300,000'}),
+          ),
+          findsNothing,
         );
       });
     });

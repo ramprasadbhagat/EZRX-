@@ -4133,6 +4133,61 @@ void main() {
             expect(ediBannerSubTitle, findsNothing);
           },
         );
+
+        testWidgets(
+          ' -> show small order fee bottom sheet when in ID market when small order fee greater than 0, then click cancel',
+          (WidgetTester tester) async {
+            when(() => cartBloc.state).thenReturn(
+              CartState.initial().copyWith(
+                cartProducts: [
+                  PriceAggregate.empty(),
+                ],
+                aplSimulatorOrder:
+                    AplSimulatorOrder.empty().copyWith(smallOrderFee: 2000),
+                salesOrganisation: fakeIDSalesOrganisation,
+              ),
+            );
+            when(() => autoRouterMock.push(const SmallOrderFeePageRoute()))
+                .thenAnswer((invocation) => Future.value());
+            await tester.pumpWidget(getWidget());
+            await tester.pump();
+            await tester.tap(find.byKey(WidgetKeys.checkoutButton));
+            await tester.pumpAndSettle();
+            verify(() => autoRouterMock.push(const SmallOrderFeePageRoute()))
+                .called(1);
+            verifyNever(() => autoRouterMock.pushNamed('orders/cart/checkout'));
+          },
+        );
+
+        testWidgets(
+          ' -> click checkout then show small order fee modal, click agree to checkout page',
+          (WidgetTester tester) async {
+            when(() => autoRouterMock.pushNamed('orders/cart/checkout'))
+                .thenAnswer((invocation) => Future.value());
+            when(() => autoRouterMock.push(const SmallOrderFeePageRoute()))
+                .thenAnswer((invocation) => Future.value(true));
+            when(() => cartBloc.state).thenReturn(
+              CartState.initial().copyWith(
+                cartProducts: [
+                  PriceAggregate.empty(),
+                ],
+                aplSimulatorOrder:
+                    AplSimulatorOrder.empty().copyWith(smallOrderFee: 2000),
+                salesOrganisation: fakeIDSalesOrganisation,
+              ),
+            );
+
+            await tester.pumpWidget(getWidget());
+            await tester.pump();
+            await tester.tap(find.byKey(WidgetKeys.checkoutButton));
+            await tester.pumpAndSettle();
+            verify(() => autoRouterMock.push(const SmallOrderFeePageRoute()))
+                .called(1);
+
+            verify(() => autoRouterMock.pushNamed('orders/cart/checkout'))
+                .called(1);
+          },
+        );
       });
     },
   );

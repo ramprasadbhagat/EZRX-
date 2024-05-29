@@ -7,8 +7,8 @@ import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class SmallOrderFeeModal extends StatelessWidget {
-  const SmallOrderFeeModal({super.key});
+class SmallOrderFeePage extends StatelessWidget {
+  const SmallOrderFeePage({super.key});
 
   @override
   Widget build(BuildContext context) {

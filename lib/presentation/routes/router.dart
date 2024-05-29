@@ -16,6 +16,7 @@ import 'package:ezrxmobile/presentation/notification/notification_tab.dart';
 import 'package:ezrxmobile/presentation/more/section/about_us/about_us_page.dart';
 import 'package:ezrxmobile/presentation/account/admin_po_attachment/admin_po_attachment_page.dart';
 import 'package:ezrxmobile/presentation/orders/cart/checkout/checkout_page.dart';
+import 'package:ezrxmobile/presentation/orders/cart/small_order_fee_modal/small_order_fee_modal.dart';
 import 'package:ezrxmobile/presentation/orders/order_success/order_success_page.dart';
 import 'package:ezrxmobile/presentation/account/change_password/change_password_page.dart';
 import 'package:ezrxmobile/presentation/account/contact_us/contact_us_page.dart';
@@ -76,6 +77,7 @@ import 'package:ezrxmobile/presentation/home/announcement_section/announcement_a
 import 'package:ezrxmobile/presentation/home/announcement_section/announcement_articles_tab/announcements/announcements_tab.dart';
 import 'package:ezrxmobile/presentation/home/announcement_section/announcement_articles_tab/articles/article_details.dart';
 import 'package:ezrxmobile/presentation/home/announcement_section/announcement_articles_tab/articles/articles_tab.dart';
+import 'package:flutter/material.dart';
 
 //ignore: unused-code
 @MaterialAutoRouter(
@@ -399,9 +401,27 @@ import 'package:ezrxmobile/presentation/home/announcement_section/announcement_a
       page: ComboDetailPage,
       path: 'combo_detail',
     ),
+    CustomRoute(
+      path: 'small_order_fee',
+      page: SmallOrderFeePage,
+      customRouteBuilder: modalSheetBuilder,
+      barrierDismissible: false,
+    ),
   ],
 )
 class $AppRouter {}
+
+Route<T> modalSheetBuilder<T>(
+  BuildContext context,
+  Widget child,
+  CustomPage<T> page,
+) {
+  return ModalBottomSheetRoute(
+    settings: page,
+    builder: (context) => child,
+    isScrollControlled: true,
+  );
+}
 
 // const authRouter = AutoRoute(
 //   name: 'AuthRouter',

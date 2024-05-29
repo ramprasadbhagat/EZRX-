@@ -139,15 +139,7 @@ class _CartPageCheckoutButton extends StatelessWidget {
   Future _showAgreeToSmallOrderFeeModal({
     required BuildContext context,
   }) {
-    return showModalBottomSheet(
-      context: context,
-      isScrollControlled: true,
-      enableDrag: false,
-      isDismissible: false,
-      useSafeArea: true,
-      clipBehavior: Clip.hardEdge,
-      builder: (_) => const SmallOrderFeeModal(),
-    );
+    return context.router.push(const SmallOrderFeePageRoute());
   }
 
   void _showPreOrderModal({required BuildContext context}) {

@@ -71,14 +71,15 @@ class SmallOrderFeeSection extends StatelessWidget {
             ),
           ],
         ),
-        InfoLabel(
-          textValue: message,
-          margin: const EdgeInsets.symmetric(vertical: 5),
-          padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 8),
-          mainColor: ZPColors.blueAccent,
-          textStyle: Theme.of(context).textTheme.bodySmall,
-          textColor: ZPColors.infoTextBlueColor,
-        ),
+        if (value > 0)
+          InfoLabel(
+            textValue: message,
+            margin: const EdgeInsets.symmetric(vertical: 5),
+            padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 8),
+            mainColor: ZPColors.blueAccent,
+            textStyle: Theme.of(context).textTheme.bodySmall,
+            textColor: ZPColors.infoTextBlueColor,
+          ),
       ],
     );
   }

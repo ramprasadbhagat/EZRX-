@@ -32,7 +32,7 @@ class _BottomSection extends StatelessWidget {
                   key: WidgetKeys.preOrderModalContinueButton,
                   onPressed: () => context.router.pop(true),
                   child: Text(
-                    'Continue'.tr(),
+                    context.tr('Continue'),
                     style: const TextStyle(color: ZPColors.white),
                   ),
                 ),
