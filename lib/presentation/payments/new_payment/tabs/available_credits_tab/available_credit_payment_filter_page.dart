@@ -133,7 +133,7 @@ class _PaymentFilter extends StatelessWidget {
                 radioValue: FilterOption.amountRange(),
                 selectedValue: state.filter.filterOption,
                 title: 'Amount range',
-                showErrorMessage:
+                showErrorMessage: state.showErrorMessage &&
                     !state.filter.isAvailableCreditAmountValueRangeValid,
                 filterWidet: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,

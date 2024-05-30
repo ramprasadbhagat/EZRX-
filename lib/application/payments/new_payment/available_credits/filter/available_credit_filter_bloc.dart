@@ -43,6 +43,7 @@ class AvailableCreditFilterBloc
             amountValueFrom: RangeValue(e.amountFrom),
             amountValueTo: state.filter.amountValueTo,
           ),
+          showErrorMessage: false,
         ),
       ),
       setAmountTo: (e) async => emit(
@@ -52,6 +53,7 @@ class AvailableCreditFilterBloc
             amountValueTo: RangeValue(e.amountTo),
             amountValueFrom: state.filter.amountValueFrom,
           ),
+          showErrorMessage: false,
         ),
       ),
       setValidationFailure: (_) async => emit(
