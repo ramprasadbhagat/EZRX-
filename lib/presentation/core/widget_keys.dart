@@ -597,10 +597,6 @@ class WidgetKeys {
       Key('counterOfferPriceButtonKey');
   static const Key preOrderModel = Key('preOrderModel');
   static const Key smallOrderFeeModal = Key('smallOrderFeeModal');
-  static const Key smallOrderFeeModalCancelButton =
-      Key('smallOrderFeeModalCancelButton');
-  static const Key smallOrderFeeModalAgreeButton =
-      Key('smallOrderFeeModalAgreeButton');
   static const Key preOrderModalItemList = Key('preOrderModalItemList');
   static const Key preOrderModalItemFinalPrice =
       Key('preOrderModalItemFinalPrice');

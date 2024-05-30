@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'dart:convert';
+import 'package:collection/collection.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/cart/cart_local_datasource.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ezrxmobile/domain/utils/num_utils.dart';
@@ -78,6 +79,12 @@ void main() {
       quantity: 5,
     ),
   ];
+  late final List<PriceAggregate> fakePriceAggregateList;
+
+  setUpAll(() async {
+    fakePriceAggregateList =
+        (await CartLocalDataSource().getAddedToCartProductList()).cartProducts;
+  });
   group('Price Aggregate Test', () {
     test('should return correct price aggregate object', () {
       final priceAggregate = PriceAggregate(
@@ -1342,6 +1349,242 @@ void main() {
     });
   });
 
+  group('Price Aggregate stock test -', () {
+    late final material = fakePriceAggregateList
+        .firstWhere((e) => e.materialInfo.type.typeMaterial);
+    late final bundle = fakePriceAggregateList
+        .firstWhere((e) => e.materialInfo.type.typeBundle);
+    late final combo =
+        fakePriceAggregateList.firstWhere((e) => e.materialInfo.type.typeCombo);
+
+    List<StockInfo> stock(MaterialNumber materialNumber, bool inStock) => [
+          StockInfo.empty().copyWith(
+            materialNumber: materialNumber,
+            inStock: MaterialInStock(inStock ? 'Yes' : 'No'),
+          ),
+        ];
+
+    group('containOOSItem getter -', () {
+      test('Type material', () {
+        expect(
+          material
+              .copyWith(stockInfoList: stock(material.getMaterialNumber, false))
+              .containOOSItem,
+          true,
+        );
+
+        expect(
+          material
+              .copyWith(stockInfoList: stock(material.getMaterialNumber, true))
+              .containOOSItem,
+          false,
+        );
+      });
+
+      test('Type Bundle', () {
+        final bundleMaterialsWithOneOOO = bundle.bundle.materials
+            .mapIndexed(
+              (index, e) => e.copyWith(
+                stockInfos: stock(e.materialNumber, index == 0),
+              ),
+            )
+            .toList();
+
+        expect(
+          bundle.copyWith
+              .bundle(materials: bundleMaterialsWithOneOOO)
+              .containOOSItem,
+          true,
+        );
+
+        final bundleMaterialsWithNoOOO = bundle.bundle.materials
+            .mapIndexed(
+              (index, e) => e.copyWith(
+                stockInfos: stock(e.materialNumber, true),
+              ),
+            )
+            .toList();
+
+        expect(
+          bundle.copyWith
+              .bundle(materials: bundleMaterialsWithNoOOO)
+              .containOOSItem,
+          false,
+        );
+      });
+
+      test('Type combo', () {
+        final comboMaterialsWithOneOOO = combo.comboMaterials
+            .mapIndexed(
+              (index, e) => e.copyWith.materialInfo(
+                stockInfos: stock(e.materialInfo.materialNumber, index == 0),
+              ),
+            )
+            .toList();
+
+        expect(
+          combo
+              .copyWith(comboMaterials: comboMaterialsWithOneOOO)
+              .containOOSItem,
+          true,
+        );
+
+        final comboMaterialsWithNoOOO = combo.comboMaterials
+            .mapIndexed(
+              (index, e) => e.copyWith.materialInfo(
+                stockInfos: stock(e.materialInfo.materialNumber, true),
+              ),
+            )
+            .toList();
+
+        expect(
+          combo
+              .copyWith(comboMaterials: comboMaterialsWithNoOOO)
+              .containOOSItem,
+          false,
+        );
+      });
+    });
+
+    group('containAllOOSItem getter -', () {
+      test('Type material', () {
+        expect(
+          material
+              .copyWith(stockInfoList: stock(material.getMaterialNumber, false))
+              .containAllOOSItem,
+          true,
+        );
+
+        expect(
+          material
+              .copyWith(stockInfoList: stock(material.getMaterialNumber, true))
+              .containAllOOSItem,
+          false,
+        );
+      });
+
+      test('Type Bundle', () {
+        final bundleMaterialsWithAllOOO = bundle.bundle.materials
+            .mapIndexed(
+              (index, e) => e.copyWith(
+                stockInfos: stock(e.materialNumber, false),
+              ),
+            )
+            .toList();
+
+        expect(
+          bundle.copyWith
+              .bundle(materials: bundleMaterialsWithAllOOO)
+              .containAllOOSItem,
+          true,
+        );
+
+        final bundleMaterialsWithNoOOO = bundle.bundle.materials
+            .mapIndexed(
+              (index, e) => e.copyWith(
+                stockInfos: stock(e.materialNumber, true),
+              ),
+            )
+            .toList();
+
+        expect(
+          bundle.copyWith
+              .bundle(materials: bundleMaterialsWithNoOOO)
+              .containAllOOSItem,
+          false,
+        );
+      });
+
+      test('Type combo', () {
+        final comboMaterialsWithAllOOO = combo.comboMaterials
+            .mapIndexed(
+              (index, e) => e.copyWith.materialInfo(
+                stockInfos: stock(e.materialInfo.materialNumber, false),
+              ),
+            )
+            .toList();
+
+        expect(
+          combo
+              .copyWith(comboMaterials: comboMaterialsWithAllOOO)
+              .containAllOOSItem,
+          true,
+        );
+
+        final comboMaterialsWithNoOOO = combo.comboMaterials
+            .mapIndexed(
+              (index, e) => e.copyWith.materialInfo(
+                stockInfos: stock(e.materialInfo.materialNumber, true),
+              ),
+            )
+            .toList();
+
+        expect(
+          combo
+              .copyWith(comboMaterials: comboMaterialsWithNoOOO)
+              .containAllOOSItem,
+          false,
+        );
+      });
+    });
+
+    group('totalPriceWithInStockOnly getter -', () {
+      test('Type material', () {
+        expect(
+          material
+              .copyWith(stockInfoList: stock(material.getMaterialNumber, false))
+              .totalPriceWithInStockOnly,
+          0,
+        );
+
+        expect(
+          material
+              .copyWith(stockInfoList: stock(material.getMaterialNumber, true))
+              .totalPriceWithInStockOnly,
+          material.finalPriceTotal,
+        );
+      });
+
+      test('Type Bundle', () {
+        final rate = bundle.bundle.currentBundleInfo.rate;
+        final bundleMaterialsWithFirstItemOOS = bundle.bundle.materials
+            .mapIndexed(
+              (index, e) =>
+                  e.copyWith(stockInfos: stock(e.materialNumber, index != 0)),
+            )
+            .toList();
+        final inStockQty = bundle.bundle.totalQty -
+            bundleMaterialsWithFirstItemOOS.first.quantity.intValue;
+
+        expect(
+          bundle.copyWith
+              .bundle(materials: bundleMaterialsWithFirstItemOOS)
+              .totalPriceWithInStockOnly,
+          inStockQty * rate,
+        );
+      });
+
+      test('Type Combo', () {
+        final comboMaterialsWithFirstItemOOS = combo.comboMaterials
+            .mapIndexed(
+              (index, e) => e.copyWith.materialInfo(
+                stockInfos: stock(e.materialInfo.materialNumber, index != 0),
+              ),
+            )
+            .toList();
+
+        expect(
+          combo
+              .copyWith(comboMaterials: comboMaterialsWithFirstItemOOS)
+              .totalPriceWithInStockOnly,
+          comboMaterialsWithFirstItemOOS
+              .skip(1)
+              .fold<double>(0, (sum, e) => sum + e.discountedSubTotal),
+        );
+      });
+    });
+  });
+
   group('Combo Deal K1', () {
     final fakeMaterialNumber = MaterialNumber('fake-material');
     final fakeMaterialDeal = ComboDealMaterial.empty().copyWith(
@@ -2315,41 +2558,43 @@ void main() {
   });
 
   group('Price Aggregate List Test -', () {
-    late final List<PriceAggregate> items;
-
-    setUpAll(() async {
-      items = (await CartLocalDataSource().getAddedToCartProductList())
-          .cartProducts;
-    });
     test('Sort to display in cart page & checkout page', () {
-      final materials =
-          items.where((e) => e.materialInfo.type.typeMaterial).toList();
-      final bundles =
-          items.where((e) => e.materialInfo.type.typeBundle).toList();
-      final combos = items.where((e) => e.materialInfo.type.typeCombo).toList();
+      final materials = fakePriceAggregateList
+          .where((e) => e.materialInfo.type.typeMaterial)
+          .toList();
+      final bundles = fakePriceAggregateList
+          .where((e) => e.materialInfo.type.typeBundle)
+          .toList();
+      final combos = fakePriceAggregateList
+          .where((e) => e.materialInfo.type.typeCombo)
+          .toList();
 
       expect(
-        items.sortToDisplay,
+        fakePriceAggregateList.sortToDisplay,
         <PriceAggregate>[...combos, ...bundles, ...materials],
       );
     });
 
     test('showManufacturerName', () {
       //Return true if is first index
-      expect(items.showManufacturerName(0), true);
+      expect(fakePriceAggregateList.showManufacturerName(0), true);
 
       //Return true if index manufacturer is different from previous index's
       expect(
         [
-          items.first,
-          items.first.copyWith.materialInfo
+          fakePriceAggregateList.first,
+          fakePriceAggregateList.first.copyWith.materialInfo
               .principalData(principalName: PrincipalName('test')),
         ].showManufacturerName(1),
         true,
       );
 
       //Return false if index manufacturer is the same from previous index's
-      expect([items.first, items.first].showManufacturerName(1), false);
+      expect(
+        [fakePriceAggregateList.first, fakePriceAggregateList.first]
+            .showManufacturerName(1),
+        false,
+      );
     });
   });
 

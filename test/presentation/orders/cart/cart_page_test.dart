@@ -3690,6 +3690,227 @@ void main() {
         );
       });
 
+      group('Small order fee -', () {
+        late final oosMaterial = mockCartItemWithAllType
+            .firstWhere((e) => e.materialInfo.type.typeMaterial)
+            .copyWith(
+              bonusSampleItems: [],
+              salesOrgConfig: fakeMYSalesOrgConfigs,
+              stockInfoList: [],
+            );
+        late final inStockMaterial = oosMaterial.copyWith(
+          stockInfoList: [
+            StockInfo.empty().copyWith(inStock: MaterialInStock('Yes')),
+          ],
+        );
+        late final smallOrderAppliedState =
+            OrderEligibilityState.initial().copyWith(
+          user: fakeClientUser,
+          cartItems: [inStockMaterial],
+          configs: fakeMYSalesOrgConfigsWithSmallOrderFee,
+        );
+
+        group('Agree small order fee bottom sheet', () {
+          final bottomSheet = find.byKey(WidgetKeys.smallOrderFeeModal);
+
+          testWidgets('Visible when small order fee is applied',
+              (tester) async {
+            when(() => autoRouterMock.push(const SmallOrderFeePageRoute()))
+                .thenAnswer((invocation) => Future.value());
+            when(() => cartBloc.state).thenReturn(
+              CartState.initial().copyWith(cartProducts: [inStockMaterial]),
+            );
+            when(() => orderEligibilityBlocMock.state)
+                .thenReturn(smallOrderAppliedState);
+
+            await tester.pumpWidget(getWidget());
+            await tester.pumpAndSettle();
+            await tester.tap(find.byKey(WidgetKeys.checkoutButton));
+            await tester.pumpAndSettle();
+
+            verify(
+              () => autoRouterMock.push(const SmallOrderFeePageRoute()),
+            ).called(1);
+          });
+
+          testWidgets(
+              'Should dismiss and show pre-order when tap on agree button and cart has OOS items',
+              (tester) async {
+            when(() => autoRouterMock.push(const SmallOrderFeePageRoute()))
+                .thenAnswer((invocation) => Future.value(true));
+            when(() => cartBloc.state).thenReturn(
+              CartState.initial().copyWith(cartProducts: [oosMaterial]),
+            );
+            when(() => orderEligibilityBlocMock.state)
+                .thenReturn(smallOrderAppliedState);
+
+            await tester.pumpWidget(getWidget());
+            await tester.pumpAndSettle();
+            await tester.tap(find.byKey(WidgetKeys.checkoutButton));
+            await tester.pumpAndSettle();
+            verify(
+              () => autoRouterMock.push(const SmallOrderFeePageRoute()),
+            ).called(1);
+            expect(find.byKey(WidgetKeys.preOrderModel), findsOneWidget);
+          });
+
+          testWidgets(
+              'Should dismiss and go checkout when tap on agree button and cart has no OOS items',
+              (tester) async {
+            when(() => autoRouterMock.push(const SmallOrderFeePageRoute()))
+                .thenAnswer((invocation) => Future.value(true));
+            when(() => autoRouterMock.pushNamed('orders/cart/checkout'))
+                .thenAnswer((_) => Future.value(true));
+            when(() => cartBloc.state).thenReturn(
+              CartState.initial().copyWith(cartProducts: [inStockMaterial]),
+            );
+            when(() => orderEligibilityBlocMock.state)
+                .thenReturn(smallOrderAppliedState);
+
+            await tester.pumpWidget(getWidget());
+            await tester.pumpAndSettle();
+            await tester.tap(find.byKey(WidgetKeys.checkoutButton));
+            await tester.pumpAndSettle();
+            verify(
+              () => autoRouterMock.push(const SmallOrderFeePageRoute()),
+            ).called(1);
+            verify(() => autoRouterMock..pushNamed('orders/cart/checkout'))
+                .called(1);
+          });
+        });
+
+        group('Small order fee validation -', () {
+          testWidgets(
+              'Warning message not visible when cart contains at least 1 in-stock',
+              (tester) async {
+            when(() => cartBloc.state).thenReturn(
+              CartState.initial()
+                  .copyWith(cartProducts: [oosMaterial, inStockMaterial]),
+            );
+            when(() => orderEligibilityBlocMock.state).thenReturn(
+              smallOrderAppliedState
+                  .copyWith(cartItems: [oosMaterial, inStockMaterial]),
+            );
+
+            await tester.pumpWidget(getWidget());
+            await tester.pumpAndSettle();
+            expect(
+              find.text(
+                'To proceed, at least one (1) item must be in stock.',
+              ),
+              findsNothing,
+            );
+          });
+
+          testWidgets('Warning message visible when cart contains all OOS',
+              (tester) async {
+            when(() => cartBloc.state).thenReturn(
+              CartState.initial().copyWith(cartProducts: [oosMaterial]),
+            );
+            when(() => orderEligibilityBlocMock.state).thenReturn(
+              smallOrderAppliedState.copyWith(cartItems: [oosMaterial]),
+            );
+
+            await tester.pumpWidget(getWidget());
+            await tester.pumpAndSettle();
+            expect(
+              find.text(
+                'To proceed, at least one (1) item must be in stock.',
+              ),
+              findsOneWidget,
+            );
+          });
+
+          testWidgets(
+              'Warning message for both MP and ZP visible when cart contains all OOS',
+              (tester) async {
+            when(() => eligibilityBloc.state).thenReturn(
+              EligibilityState.initial().copyWith(
+                user: fakeClientUserAccessMarketPlace,
+                salesOrgConfigs: fakeMYSalesOrgConfigs,
+                customerCodeInfo: fakeMarketPlaceCustomerCode,
+              ),
+            );
+            when(() => cartBloc.state).thenReturn(
+              CartState.initial().copyWith(cartProducts: [oosMaterial]),
+            );
+            when(() => orderEligibilityBlocMock.state).thenReturn(
+              smallOrderAppliedState.copyWith(cartItems: [oosMaterial]),
+            );
+
+            await tester.pumpWidget(getWidget());
+            await tester.pumpAndSettle();
+            expect(
+              find.text(
+                'To proceed, at least one (1) ZP or MP item must be in stock.',
+              ),
+              findsOneWidget,
+            );
+          });
+        });
+
+        group('APL small order fee in ID market', () {
+          testWidgets(
+            ' -> show small order fee bottom sheet when small order fee greater than 0, then click cancel',
+            (WidgetTester tester) async {
+              when(() => cartBloc.state).thenReturn(
+                CartState.initial().copyWith(
+                  cartProducts: [
+                    PriceAggregate.empty(),
+                  ],
+                  aplSimulatorOrder:
+                      AplSimulatorOrder.empty().copyWith(smallOrderFee: 2000),
+                  salesOrganisation: fakeIDSalesOrganisation,
+                ),
+              );
+              when(() => autoRouterMock.push(const SmallOrderFeePageRoute()))
+                  .thenAnswer((invocation) => Future.value());
+              await tester.pumpWidget(getWidget());
+              await tester.pump();
+              await tester.tap(find.byKey(WidgetKeys.checkoutButton));
+              await tester.pumpAndSettle();
+              verify(
+                () => autoRouterMock.push(const SmallOrderFeePageRoute()),
+              ).called(1);
+              verifyNever(
+                () => autoRouterMock.pushNamed('orders/cart/checkout'),
+              );
+            },
+          );
+
+          testWidgets(
+            ' -> click checkout then show small order fee modal, click agree to checkout page',
+            (WidgetTester tester) async {
+              when(() => autoRouterMock.pushNamed('orders/cart/checkout'))
+                  .thenAnswer((invocation) => Future.value());
+              when(() => autoRouterMock.push(const SmallOrderFeePageRoute()))
+                  .thenAnswer((invocation) => Future.value(true));
+              when(() => cartBloc.state).thenReturn(
+                CartState.initial().copyWith(
+                  cartProducts: [
+                    PriceAggregate.empty(),
+                  ],
+                  aplSimulatorOrder:
+                      AplSimulatorOrder.empty().copyWith(smallOrderFee: 2000),
+                  salesOrganisation: fakeIDSalesOrganisation,
+                ),
+              );
+
+              await tester.pumpWidget(getWidget());
+              await tester.pump();
+              await tester.tap(find.byKey(WidgetKeys.checkoutButton));
+              await tester.pumpAndSettle();
+              verify(
+                () => autoRouterMock.push(const SmallOrderFeePageRoute()),
+              ).called(1);
+
+              verify(() => autoRouterMock.pushNamed('orders/cart/checkout'))
+                  .called(1);
+            },
+          );
+        });
+      });
+
       group('Marketplace MOV validation -', () {
         testWidgets('When both zp MOV and mp MOV is not eligible',
             (tester) async {
@@ -4131,61 +4352,6 @@ void main() {
             expect(ediBanner, findsNothing);
             expect(ediBannerTitle, findsNothing);
             expect(ediBannerSubTitle, findsNothing);
-          },
-        );
-
-        testWidgets(
-          ' -> show small order fee bottom sheet when in ID market when small order fee greater than 0, then click cancel',
-          (WidgetTester tester) async {
-            when(() => cartBloc.state).thenReturn(
-              CartState.initial().copyWith(
-                cartProducts: [
-                  PriceAggregate.empty(),
-                ],
-                aplSimulatorOrder:
-                    AplSimulatorOrder.empty().copyWith(smallOrderFee: 2000),
-                salesOrganisation: fakeIDSalesOrganisation,
-              ),
-            );
-            when(() => autoRouterMock.push(const SmallOrderFeePageRoute()))
-                .thenAnswer((invocation) => Future.value());
-            await tester.pumpWidget(getWidget());
-            await tester.pump();
-            await tester.tap(find.byKey(WidgetKeys.checkoutButton));
-            await tester.pumpAndSettle();
-            verify(() => autoRouterMock.push(const SmallOrderFeePageRoute()))
-                .called(1);
-            verifyNever(() => autoRouterMock.pushNamed('orders/cart/checkout'));
-          },
-        );
-
-        testWidgets(
-          ' -> click checkout then show small order fee modal, click agree to checkout page',
-          (WidgetTester tester) async {
-            when(() => autoRouterMock.pushNamed('orders/cart/checkout'))
-                .thenAnswer((invocation) => Future.value());
-            when(() => autoRouterMock.push(const SmallOrderFeePageRoute()))
-                .thenAnswer((invocation) => Future.value(true));
-            when(() => cartBloc.state).thenReturn(
-              CartState.initial().copyWith(
-                cartProducts: [
-                  PriceAggregate.empty(),
-                ],
-                aplSimulatorOrder:
-                    AplSimulatorOrder.empty().copyWith(smallOrderFee: 2000),
-                salesOrganisation: fakeIDSalesOrganisation,
-              ),
-            );
-
-            await tester.pumpWidget(getWidget());
-            await tester.pump();
-            await tester.tap(find.byKey(WidgetKeys.checkoutButton));
-            await tester.pumpAndSettle();
-            verify(() => autoRouterMock.push(const SmallOrderFeePageRoute()))
-                .called(1);
-
-            verify(() => autoRouterMock.pushNamed('orders/cart/checkout'))
-                .called(1);
           },
         );
       });

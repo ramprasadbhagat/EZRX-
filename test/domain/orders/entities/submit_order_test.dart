@@ -13,4 +13,20 @@ void main() {
       );
     });
   });
+
+  group('SmallOrderFeeDetail test -', () {
+    test('isValid getter', () {
+      expect(SmallOrderFeeDetail.empty().isValid, false);
+
+      expect(
+        SmallOrderFeeDetail.empty().copyWith(zpSmallOrderFee: 10).isValid,
+        true,
+      );
+
+      expect(
+        SmallOrderFeeDetail.empty().copyWith(mpSmallOrderFee: 10).isValid,
+        true,
+      );
+    });
+  });
 }

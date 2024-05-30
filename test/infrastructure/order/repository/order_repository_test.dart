@@ -1103,57 +1103,103 @@ void main() {
     );
   });
   test(
-    'submit order should contain deliveryFee as null string in ID market when order valye is >=300000.00',
-    () async {
-      when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
-      final submitOrderMockIDMarket = submitOrderMock.copyWith(
-        orderValue: 310000.00,
-        customer: submitOrderMock.customer.copyWith(
-          salesOrganisation:
-              fakeIDSalesOrganisation.salesOrg.getOrDefaultValue(''),
-        ),
-      );
+      'submit order should contain deliveryFee as null string in ID market when order valye is >=300000.00',
+      () async {
+    when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
+    final submitOrderMockIDMarket = submitOrderMock.copyWith(
+      orderValue: 310000.00,
+      customer: submitOrderMock.customer.copyWith(
+        salesOrganisation:
+            fakeIDSalesOrganisation.salesOrg.getOrDefaultValue(''),
+      ),
+    );
 
-      when(() => mockConfig.orderEncryptionSecret).thenReturn(fakeSecretKey);
-      when(
-        () => encryption.encryptionData(
-          data: SubmitOrderDto.fromDomain(
-            submitOrderMockIDMarket,
-          ).toJson()
-            ..addAll({'deliveryFee': 'null'}),
-          secretKey: fakeSecretKey,
-        ),
-      ).thenReturn(orderEncryptionMock);
-      when(
-        () => orderRemoteDataSource.submitOrder(
-          orderEncryption: orderEncryptionMock,
-          enableMarketPlace: fakeConfigValue,
-        ),
-      ).thenAnswer(
-        (invocation) async => submitOrderResponseMock,
-      );
+    when(() => mockConfig.orderEncryptionSecret).thenReturn(fakeSecretKey);
+    when(
+      () => encryption.encryptionData(
+        data: SubmitOrderDto.fromDomain(
+          submitOrderMockIDMarket,
+        ).toJson()
+          ..addAll({'deliveryFee': 'null'}),
+        secretKey: fakeSecretKey,
+      ),
+    ).thenReturn(orderEncryptionMock);
+    when(
+      () => orderRemoteDataSource.submitOrder(
+        orderEncryption: orderEncryptionMock,
+        enableMarketPlace: fakeConfigValue,
+      ),
+    ).thenAnswer(
+      (invocation) async => submitOrderResponseMock,
+    );
 
-      final result = await orderRepository.submitOrder(
-        shipToInfo: mockShipToInfo,
-        user: fakeClientUser,
-        cartProducts: cartMaterials,
-        grandTotal: 100.0,
-        customerCodeInfo: fakeCustomerCodeInfo,
-        salesOrganisation: fakeIDSalesOrganisation,
-        data: deliveryInfoData,
-        orderDocumentType: OrderDocumentType.empty()
-            .copyWith(documentType: DocumentType('ZPOR'), orderReason: ''),
-        configs: fakePHSalesOrgConfigs,
-        orderValue: 310000.00,
-        totalTax: 100,
-        aplSmallOrderFee: 12500.0,
-        mpSmallOrderFee: 0,
-        zpSmallOrderFee: 0,
-      );
+    final result = await orderRepository.submitOrder(
+      shipToInfo: mockShipToInfo,
+      user: fakeClientUser,
+      cartProducts: cartMaterials,
+      grandTotal: 100.0,
+      customerCodeInfo: fakeCustomerCodeInfo,
+      salesOrganisation: fakeIDSalesOrganisation,
+      data: deliveryInfoData,
+      orderDocumentType: OrderDocumentType.empty()
+          .copyWith(documentType: DocumentType('ZPOR'), orderReason: ''),
+      configs: fakePHSalesOrgConfigs,
+      orderValue: 310000.00,
+      totalTax: 100,
+      aplSmallOrderFee: 12500.0,
+      mpSmallOrderFee: 0,
+      zpSmallOrderFee: 0,
+    );
 
-      expect(result, Right(submitOrderResponseMock));
-    },
-  );
+    expect(result, Right(submitOrderResponseMock));
+  });
+
+  test(
+      'submit order should send small order fee detail when having small order fee applied',
+      () async {
+    when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
+    final submitOrderWithSmallOrderFee = submitOrderMock.copyWith(
+      smallOrderFeeDetail: SmallOrderFeeDetail(
+        mpSmallOrderFee: 200,
+        zpSmallOrderFee: 100,
+        currency: fakePHSalesOrgConfigs.currency,
+      ),
+    );
+    when(() => mockConfig.orderEncryptionSecret).thenReturn(fakeSecretKey);
+
+    when(
+      () => encryption.encryptionData(
+        data: SubmitOrderDto.fromDomain(submitOrderWithSmallOrderFee).toJson(),
+        secretKey: fakeSecretKey,
+      ),
+    ).thenReturn(orderEncryptionMock);
+    when(
+      () => orderRemoteDataSource.submitOrder(
+        orderEncryption: orderEncryptionMock,
+        enableMarketPlace: fakeConfigValue,
+      ),
+    ).thenAnswer((_) async => submitOrderResponseMock);
+
+    final result = await orderRepository.submitOrder(
+      shipToInfo: mockShipToInfo,
+      user: fakeClientUser,
+      cartProducts: cartMaterials,
+      grandTotal: 100.0,
+      customerCodeInfo: fakeCustomerCodeInfo,
+      salesOrganisation: fakeSalesOrganisation,
+      data: deliveryInfoData,
+      orderDocumentType: OrderDocumentType.empty()
+          .copyWith(documentType: DocumentType('ZPOR'), orderReason: ''),
+      configs: fakePHSalesOrgConfigs,
+      orderValue: 100.0,
+      totalTax: 100,
+      aplSmallOrderFee: 12500.0,
+      mpSmallOrderFee: 200,
+      zpSmallOrderFee: 100,
+    );
+
+    expect(result, Right(submitOrderResponseMock));
+  });
 
   test(
       'submit order should contain deliveryFee as null string in ID market when order valye is >=300000.00',

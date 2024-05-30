@@ -69,3 +69,14 @@ final fakeMYSalesOrgConfigs = SalesOrganisationConfigs.empty().copyWith(
   mpMinOrderAmount: 0.0,
   statementOfAccountEnabled: true,
 );
+
+final fakeMYSalesOrgConfigsWithSmallOrderFee = fakeMYSalesOrgConfigs.copyWith(
+  sapMinOrderAmount: 300,
+  enableSmallOrderFee: true,
+  smallOrderFeeUserRoles: ['Client User'],
+  smallOrderFee: 23,
+  mpSAPMinOrderAmount: 300,
+  enableMPSmallOrderFee: true,
+  mpSmallOrderFeeUserRoles: ['Client User'],
+  mpSmallOrderFee: 23,
+);

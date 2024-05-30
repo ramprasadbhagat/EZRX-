@@ -4160,6 +4160,27 @@ void main() {
         },
       );
 
+      test('grandTotalDisplayed getter', () {
+        const smallOrderFee = 13.5;
+        expect(
+          CartState.initial()
+              .copyWith(
+                salesOrganisation: fakeIDSalesOrganisation,
+                aplSimulatorOrder:
+                    AplSimulatorOrder.empty().copyWith(grandTotal: 999),
+              )
+              .grandTotalDisplayed(smallOrderFee: smallOrderFee),
+          999,
+        );
+
+        expect(
+          CartState.initial().copyWith(
+            cartProducts: [priceAggregates.first.copyWith(price: prices.first)],
+          ).grandTotalDisplayed(smallOrderFee: smallOrderFee),
+          273.6 + smallOrderFee,
+        );
+      });
+
       test(
         'Testing CartBloc state subTotal',
         () {

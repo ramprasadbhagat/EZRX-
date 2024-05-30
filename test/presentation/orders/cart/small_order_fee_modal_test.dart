@@ -84,11 +84,11 @@ void main() async {
           findsOneWidget,
         );
         expect(
-          find.byKey(WidgetKeys.smallOrderFeeModalCancelButton),
+          find.byKey(WidgetKeys.cancelButton),
           findsOneWidget,
         );
         expect(
-          find.byKey(WidgetKeys.smallOrderFeeModalAgreeButton),
+          find.byKey(WidgetKeys.confirmButton),
           findsOneWidget,
         );
       },
@@ -101,7 +101,7 @@ void main() async {
             .thenAnswer((invocation) => Future.value(false));
         await tester.pumpWidget(getScopedWidget());
         await tester.pump();
-        await tester.tap(find.byKey(WidgetKeys.smallOrderFeeModalCancelButton));
+        await tester.tap(find.byKey(WidgetKeys.cancelButton));
         verify(() => autoRouterMock.pop()).called(1);
       },
     );
@@ -113,7 +113,7 @@ void main() async {
             .thenAnswer((invocation) => Future.value(false));
         await tester.pumpWidget(getScopedWidget());
         await tester.pump();
-        await tester.tap(find.byKey(WidgetKeys.smallOrderFeeModalAgreeButton));
+        await tester.tap(find.byKey(WidgetKeys.confirmButton));
         verify(() => autoRouterMock.pop(true)).called(1);
       },
     );

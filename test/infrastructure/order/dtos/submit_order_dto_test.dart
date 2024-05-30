@@ -1,3 +1,4 @@
+import 'package:ezrxmobile/domain/order/entities/submit_order.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/submit_order_dto.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -36,6 +37,58 @@ void main() {
       ).toJson();
       expect(configsDto['companyName'], 'test-name');
       expect(configsDto['PurchaseOrderType'], fakePurchaseOrderType);
+    });
+
+    test(
+      'fromDomain should remove smallOrderFieldDetail when small order fee is 0',
+      () {
+        expect(
+          SubmitOrderDto.fromDomain(SubmitOrder.empty()).smallOrderFeeDetail,
+          null,
+        );
+
+        final smallOrderFeeDetail = SmallOrderFeeDetail.empty()
+            .copyWith(mpSmallOrderFee: 10, zpSmallOrderFee: 0);
+        expect(
+          SubmitOrderDto.fromDomain(
+            SubmitOrder.empty()
+                .copyWith(smallOrderFeeDetail: smallOrderFeeDetail),
+          ).smallOrderFeeDetail,
+          SmallOrderFeeDetailDto.fromDomain(smallOrderFeeDetail),
+        );
+      },
+    );
+  });
+
+  group('SmallOrderFeeDetailDto', () {
+    test('Should remove mpSmallOrderFee field when value is 0', () {
+      expect(
+        SmallOrderFeeDetailDto.fromDomain(SmallOrderFeeDetail.empty())
+            .mpSmallOrderFee,
+        null,
+      );
+
+      expect(
+        SmallOrderFeeDetailDto.fromDomain(
+          SmallOrderFeeDetail.empty().copyWith(mpSmallOrderFee: 100.5),
+        ).mpSmallOrderFee,
+        '100.5',
+      );
+    });
+
+    test('Should keep smallOrderFee field when value is 0', () {
+      expect(
+        SmallOrderFeeDetailDto.fromDomain(SmallOrderFeeDetail.empty())
+            .smallOrderFee,
+        '0.0',
+      );
+
+      expect(
+        SmallOrderFeeDetailDto.fromDomain(
+          SmallOrderFeeDetail.empty().copyWith(zpSmallOrderFee: 100.5),
+        ).smallOrderFee,
+        '100.5',
+      );
     });
   });
 }

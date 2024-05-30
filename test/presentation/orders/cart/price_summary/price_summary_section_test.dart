@@ -5,6 +5,7 @@ import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/order/entities/apl_simulator_order.dart';
 import 'package:ezrxmobile/domain/order/entities/combo_material_item.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
+import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/domain/utils/num_utils.dart';
 import 'package:ezrxmobile/domain/utils/string_utils.dart';
@@ -21,12 +22,14 @@ import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 
+import '../../../../common_mock_data/customer_code_mock.dart';
 import '../../../../common_mock_data/mock_bloc.dart';
 import '../../../../common_mock_data/mock_other.dart';
 import '../../../../common_mock_data/sales_org_config_mock/fake_id_sales_org_config.dart';
 import '../../../../common_mock_data/sales_org_config_mock/fake_kh_sales_org_config.dart';
 import '../../../../common_mock_data/sales_org_config_mock/fake_my_sales_org_config.dart';
 import '../../../../common_mock_data/sales_organsiation_mock.dart';
+import '../../../../common_mock_data/user_mock.dart';
 import '../../../../utils/widget_utils.dart';
 
 class MaterialPageXMock extends Mock implements MaterialPageX {}
@@ -56,6 +59,16 @@ void main() {
   late List<PriceAggregate> cartItemMock;
   late List<ComboMaterialItem> fakeComboMaterialItems;
   late CartState cartStateMock;
+  late final inStockMaterial = cartItemMock
+      .firstWhere(
+    (e) => e.materialInfo.type.typeMaterial && !e.materialInfo.isMarketPlace,
+  )
+      .copyWith(
+    stockInfoList: [
+      StockInfo.empty().copyWith(inStock: MaterialInStock('Yes')),
+    ],
+    bonusSampleItems: [],
+  );
 
   setUpAll(() async {
     WidgetsFlutterBinding.ensureInitialized();
@@ -733,6 +746,7 @@ void main() {
           findsOneWidget,
         );
       });
+
       testWidgets(
           'Test Total Tax when displayItemTaxBreakdown is disabled and displaySubtotalTaxBreakdown is enabled',
           (tester) async {
@@ -783,9 +797,150 @@ void main() {
           findsOneWidget,
         );
       });
+
+      testWidgets('- When small order fee is applied', (tester) async {
+        when(
+          () => cartStateMock.grandTotalDisplayed(
+            smallOrderFee: fakeMYSalesOrgConfigsWithSmallOrderFee.smallOrderFee,
+          ),
+        ).thenReturn(900);
+        when(() => eligibilityBloc.state).thenReturn(
+          EligibilityState.initial()
+              .copyWith(salesOrgConfigs: fakeMYSalesOrgConfigs),
+        );
+        when(() => orderEligibilityBloc.state).thenReturn(
+          OrderEligibilityState.initial().copyWith(
+            configs: fakeMYSalesOrgConfigsWithSmallOrderFee,
+            user: fakeClientUser,
+            cartItems: [inStockMaterial],
+          ),
+        );
+
+        await tester.pumpWidget(getWidget(cartStateMock));
+        await tester.pumpAndSettle();
+
+        expect(
+          find.descendant(
+            of: find.byKey(WidgetKeys.checkoutSummaryGrandTotal),
+            matching: find.textContaining(900.toString(), findRichText: true),
+          ),
+          findsOneWidget,
+        );
+      });
     });
 
-    group('Test small order fee', () {
+    group('Small order fee -', () {
+      testWidgets('Not visible when small order fee is not applied',
+          (tester) async {
+        when(() => orderEligibilityBloc.state).thenReturn(
+          OrderEligibilityState.initial().copyWith(
+            configs: fakeMYSalesOrgConfigs,
+          ),
+        );
+
+        await tester.pumpWidget(getWidget(cartStateMock));
+        await tester.pumpAndSettle();
+
+        expect(
+          find.byKey(WidgetKeys.checkoutSummarySmallOrderFee),
+          findsNothing,
+        );
+      });
+
+      testWidgets('Visible when small order fee is applied', (tester) async {
+        final smallOrderFee =
+            fakeMYSalesOrgConfigsWithSmallOrderFee.smallOrderFee;
+        when(
+          () => cartStateMock.grandTotalDisplayed(
+            smallOrderFee: smallOrderFee,
+          ),
+        ).thenReturn(900);
+        when(() => eligibilityBloc.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrgConfigs: fakeMYSalesOrgConfigsWithSmallOrderFee,
+          ),
+        );
+        when(() => orderEligibilityBloc.state).thenReturn(
+          OrderEligibilityState.initial().copyWith(
+            configs: fakeMYSalesOrgConfigsWithSmallOrderFee,
+            user: fakeClientUser,
+            cartItems: [inStockMaterial],
+          ),
+        );
+
+        await tester.pumpWidget(getWidget(cartStateMock));
+        await tester.pumpAndSettle();
+
+        expect(
+          find.descendant(
+            of: find.byKey(WidgetKeys.checkoutSummarySmallOrderFee),
+            matching: find.text(
+              'MYR ${smallOrderFee.toStringAsFixed(2)}',
+              findRichText: true,
+            ),
+          ),
+          findsOneWidget,
+        );
+
+        expect(
+          find.text(
+            'A small order fee applies to orders with ZP in-stock items that are under the minimum order value of MYR ${fakeMYSalesOrgConfigsWithSmallOrderFee.sapMinOrderAmount.toStringAsFixed(2)} for ZP subtotal.',
+            findRichText: true,
+          ),
+          findsOneWidget,
+        );
+      });
+
+      testWidgets(
+          'Visible with message for marketplace when small order fee is applied',
+          (tester) async {
+        final smallOrderFee =
+            fakeMYSalesOrgConfigsWithSmallOrderFee.smallOrderFee +
+                fakeMYSalesOrgConfigsWithSmallOrderFee.mpSmallOrderFee;
+        when(
+          () => cartStateMock.grandTotalDisplayed(smallOrderFee: smallOrderFee),
+        ).thenReturn(900);
+        when(() => eligibilityBloc.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            user: fakeClientUserAccessMarketPlace,
+            salesOrgConfigs: fakeMYSalesOrgConfigs,
+            customerCodeInfo: fakeMarketPlaceCustomerCode,
+          ),
+        );
+        when(() => orderEligibilityBloc.state).thenReturn(
+          OrderEligibilityState.initial().copyWith(
+            configs: fakeMYSalesOrgConfigsWithSmallOrderFee,
+            user: fakeClientUser,
+            cartItems: [
+              inStockMaterial,
+              inStockMaterial.copyWith.materialInfo(isMarketPlace: true),
+            ],
+          ),
+        );
+
+        await tester.pumpWidget(getWidget(cartStateMock));
+        await tester.pumpAndSettle();
+
+        expect(
+          find.descendant(
+            of: find.byKey(WidgetKeys.checkoutSummarySmallOrderFee),
+            matching: find.text(
+              'MYR ${smallOrderFee.toStringAsFixed(2)}',
+              findRichText: true,
+            ),
+          ),
+          findsOneWidget,
+        );
+
+        expect(
+          find.text(
+            'A small order fee applies to orders with ZP and MP in-stock items separately that are under the minimum order value of MYR ${fakeMYSalesOrgConfigsWithSmallOrderFee.sapMinOrderAmount.toStringAsFixed(2)} ZP subtotal & MYR ${fakeMYSalesOrgConfigsWithSmallOrderFee.mpSAPMinOrderAmount.toStringAsFixed(2)} for MP subtotal.',
+            findRichText: true,
+          ),
+          findsOneWidget,
+        );
+      });
+
       testWidgets(
           'Show warning block if small order fee is greater than 0 in ID market',
           (tester) async {

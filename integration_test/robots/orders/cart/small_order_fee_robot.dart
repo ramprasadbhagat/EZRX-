@@ -8,9 +8,9 @@ class SmallOrderFeeRobot {
 
   SmallOrderFeeRobot(this.tester);
 
-  final cancelButton = find.byKey(WidgetKeys.smallOrderFeeModalCancelButton);
-  final agreeButton = find.byKey(WidgetKeys.smallOrderFeeModalAgreeButton);
   final bottomSheet = find.byKey(WidgetKeys.smallOrderFeeModal);
+  final cancelButton = find.byKey(WidgetKeys.cancelButton);
+  final agreeButton = find.byKey(WidgetKeys.confirmButton);
 
   bool get isSheetVisible => bottomSheet.evaluate().isNotEmpty;
 
@@ -19,20 +19,26 @@ class SmallOrderFeeRobot {
   }
 
   void verifyCancelButton() {
-    expect(cancelButton, findsOneWidget);
+    expect(
+      find.descendant(of: bottomSheet, matching: cancelButton),
+      findsOneWidget,
+    );
   }
 
   Future<void> tapCancelButton() async {
-    await tester.tap(cancelButton);
+    await tester.tap(find.descendant(of: bottomSheet, matching: cancelButton));
     await tester.pumpAndSettle();
   }
 
   void verifyAgreeButton() {
-    expect(agreeButton, findsOneWidget);
+    expect(
+      find.descendant(of: bottomSheet, matching: agreeButton),
+      findsOneWidget,
+    );
   }
 
   Future<void> tapAgreeButton() async {
-    await tester.tap(agreeButton);
+    await tester.tap(find.descendant(of: bottomSheet, matching: agreeButton));
     await tester.pumpAndSettle();
   }
 

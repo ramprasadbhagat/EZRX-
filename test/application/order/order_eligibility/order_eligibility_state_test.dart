@@ -1,3 +1,4 @@
+import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ezrxmobile/domain/order/entities/bundle.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
@@ -23,13 +24,17 @@ void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   late OrderEligibilityState initializedState;
   late PriceAggregate fakeCartItem;
-  late PriceAggregate fakeMarketPlaceCartItem;
+  late PriceAggregate fakeMPCartItem;
   late List<PriceAggregate> mockMaterialsCartItems;
+  late List<PriceAggregate> fakeCart;
   group('Test OrderEligibilityState', () {
     setUp(
       () async {
-        fakeCartItem = (await CartLocalDataSource().upsertCartItems())[0];
-        fakeMarketPlaceCartItem =
+        fakeCart = (await CartLocalDataSource().getAddedToCartProductList())
+            .cartProducts;
+        fakeCartItem =
+            fakeCart.firstWhere((e) => e.materialInfo.type.typeMaterial);
+        fakeMPCartItem =
             fakeCartItem.copyWith.materialInfo(isMarketPlace: true);
         initializedState = OrderEligibilityState.initial().copyWith(
           user: fakeExternalSalesRepUser,
@@ -114,17 +119,12 @@ void main() {
       expect(initializedState.isBundleQuantitySatisfies, true);
 
       // isBundleQuantitySatisfies is false
-      final bundleMaterials = fakeCartItem.bundle.materials
+      final bundle = fakeCart.firstWhere((e) => e.materialInfo.type.typeBundle);
+      final bundleMaterials = bundle.bundle.materials
           .map((e) => e.copyWith(quantity: MaterialQty(0)))
           .toList();
       final modifiedState = initializedState.copyWith(
-        cartItems: [
-          fakeCartItem.copyWith(
-            bundle: fakeCartItem.bundle.copyWith(
-              materials: bundleMaterials,
-            ),
-          ),
-        ],
+        cartItems: [bundle.copyWith.bundle(materials: bundleMaterials)],
         showErrorMessage: true,
       );
       expect(modifiedState.isBundleQuantitySatisfies, false);
@@ -375,7 +375,7 @@ void main() {
         //return true when there is no zp material
         expect(
           OrderEligibilityState.initial().copyWith(
-            cartItems: [fakeMarketPlaceCartItem],
+            cartItems: [fakeMPCartItem],
           ).zpSubtotalMOVEligible,
           true,
         );
@@ -419,7 +419,7 @@ void main() {
           OrderEligibilityState.initial()
               .copyWith(
                 configs: fakeMYSalesOrgConfigs,
-                cartItems: [fakeMarketPlaceCartItem],
+                cartItems: [fakeMPCartItem],
                 mpSubtotal: fakeMYSalesOrgConfigs.mpMinOrderAmount,
               )
               .mpSubtotalMOVEligible,
@@ -431,7 +431,7 @@ void main() {
           OrderEligibilityState.initial()
               .copyWith(
                 configs: fakeMYSalesOrgConfigs,
-                cartItems: [fakeMarketPlaceCartItem],
+                cartItems: [fakeMPCartItem],
                 mpSubtotal: fakeMYSalesOrgConfigs.mpMinOrderAmount - 1,
               )
               .mpSubtotalMOVEligible,
@@ -442,7 +442,7 @@ void main() {
       group('isTotalGreaterThanMinOrderAmount getter -', () {
         test('when contains marketplace material', () {
           final stateWithMPMaterial = OrderEligibilityState.initial().copyWith(
-            cartItems: [fakeMarketPlaceCartItem, fakeCartItem],
+            cartItems: [fakeMPCartItem, fakeCartItem],
             configs: fakeMYSalesOrgConfigs,
           );
           //return false when not satisfied zp MOV
@@ -532,6 +532,189 @@ void main() {
             true,
           );
         });
+      });
+    });
+
+    group('Small order fee validation -', () {
+      final inStock = [
+        StockInfo.empty().copyWith(inStock: MaterialInStock('Yes')),
+      ];
+      late final zpSmallOrderFeeEnableState =
+          OrderEligibilityState.initial().copyWith(
+        user: fakeClientUser,
+        cartItems: [fakeCartItem],
+        configs: fakeMYSalesOrgConfigsWithSmallOrderFee,
+      );
+
+      late final mpSmallOrderFeeEnableState =
+          OrderEligibilityState.initial().copyWith(
+        user: fakeClientUser,
+        cartItems: [fakeMPCartItem],
+        configs: fakeMYSalesOrgConfigsWithSmallOrderFee,
+      );
+      test('zpSmallOrderFeeEnable getter', () {
+        expect(OrderEligibilityState.initial().zpSmallOrderFeeEnable, false);
+
+        expect(
+          OrderEligibilityState.initial().copyWith(
+            cartItems: [fakeCartItem],
+          ).zpSmallOrderFeeEnable,
+          false,
+        );
+
+        expect(
+          OrderEligibilityState.initial().copyWith(
+            cartItems: [fakeCartItem],
+            configs: fakeMYSalesOrgConfigs.copyWith(enableSmallOrderFee: true),
+          ).zpSmallOrderFeeEnable,
+          false,
+        );
+
+        expect(
+          OrderEligibilityState.initial().copyWith(
+            cartItems: [fakeCartItem],
+            configs: fakeMYSalesOrgConfigs.copyWith(
+              enableSmallOrderFee: true,
+              smallOrderFeeUserRoles: ['Client User'],
+            ),
+          ).zpSmallOrderFeeEnable,
+          false,
+        );
+
+        expect(zpSmallOrderFeeEnableState.zpSmallOrderFeeEnable, true);
+      });
+
+      test('mpSmallOrderFeeEnable getter', () {
+        expect(OrderEligibilityState.initial().mpSmallOrderFeeEnable, false);
+
+        expect(
+          OrderEligibilityState.initial().copyWith(
+            cartItems: [fakeMPCartItem],
+          ).mpSmallOrderFeeEnable,
+          false,
+        );
+
+        expect(
+          OrderEligibilityState.initial().copyWith(
+            cartItems: [fakeMPCartItem],
+            configs:
+                fakeMYSalesOrgConfigs.copyWith(enableMPSmallOrderFee: true),
+          ).mpSmallOrderFeeEnable,
+          false,
+        );
+
+        expect(
+          OrderEligibilityState.initial().copyWith(
+            cartItems: [fakeMPCartItem],
+            configs: fakeMYSalesOrgConfigs.copyWith(
+              enableMPSmallOrderFee: true,
+              mpSmallOrderFeeUserRoles: ['Client User'],
+            ),
+          ).mpSmallOrderFeeEnable,
+          false,
+        );
+
+        expect(mpSmallOrderFeeEnableState.mpSmallOrderFeeEnable, true);
+      });
+
+      test('displayAtLeastOneZPItemInStockWarning getter', () {
+        expect(
+          zpSmallOrderFeeEnableState.displayAtLeastOneZPItemInStockWarning,
+          true,
+        );
+
+        expect(
+          OrderEligibilityState.initial().displayAtLeastOneZPItemInStockWarning,
+          false,
+        );
+
+        expect(
+          zpSmallOrderFeeEnableState.copyWith(
+            cartItems: [fakeCartItem.copyWith(stockInfoList: inStock)],
+          ).displayAtLeastOneZPItemInStockWarning,
+          false,
+        );
+      });
+
+      test('displayAtLeastOneMPItemInStockWarning getter', () {
+        expect(
+          mpSmallOrderFeeEnableState.displayAtLeastOneMPItemInStockWarning,
+          true,
+        );
+
+        expect(
+          OrderEligibilityState.initial().displayAtLeastOneMPItemInStockWarning,
+          false,
+        );
+
+        expect(
+          mpSmallOrderFeeEnableState.copyWith(
+            cartItems: [fakeMPCartItem.copyWith(stockInfoList: inStock)],
+          ).displayAtLeastOneMPItemInStockWarning,
+          false,
+        );
+      });
+
+      test('zpSmallOrderFeeApplied getter', () {
+        expect(OrderEligibilityState.initial().zpSmallOrderFeeApplied, false);
+
+        expect(zpSmallOrderFeeEnableState.zpSmallOrderFeeApplied, false);
+
+        expect(
+          zpSmallOrderFeeEnableState.copyWith(
+            cartItems: [
+              fakeCartItem.copyWith(
+                stockInfoList: inStock,
+                price: Price.empty().copyWith(
+                  finalPrice: MaterialPrice(
+                    fakeMYSalesOrgConfigsWithSmallOrderFee.sapMinOrderAmount,
+                  ),
+                ),
+              ),
+            ],
+          ).zpSmallOrderFeeApplied,
+          false,
+        );
+
+        expect(
+          zpSmallOrderFeeEnableState.copyWith(
+            cartItems: [
+              fakeCartItem.copyWith(stockInfoList: inStock, quantity: 0),
+            ],
+          ).zpSmallOrderFeeApplied,
+          true,
+        );
+      });
+
+      test('mpSmallOrderFeeApplied getter', () {
+        expect(OrderEligibilityState.initial().mpSmallOrderFeeApplied, false);
+
+        expect(mpSmallOrderFeeEnableState.mpSmallOrderFeeApplied, false);
+
+        expect(
+          mpSmallOrderFeeEnableState.copyWith(
+            cartItems: [
+              fakeMPCartItem.copyWith(
+                stockInfoList: inStock,
+                price: Price.empty().copyWith(
+                  finalPrice: MaterialPrice(
+                    fakeMYSalesOrgConfigsWithSmallOrderFee.mpSAPMinOrderAmount,
+                  ),
+                ),
+              ),
+            ],
+          ).mpSmallOrderFeeApplied,
+          false,
+        );
+
+        expect(
+          mpSmallOrderFeeEnableState.copyWith(
+            cartItems: [
+              fakeMPCartItem.copyWith(stockInfoList: inStock, quantity: 0),
+            ],
+          ).mpSmallOrderFeeApplied,
+          true,
+        );
       });
     });
   });

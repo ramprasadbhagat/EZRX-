@@ -431,6 +431,20 @@ void main() {
 
       expect(RoleType('internal_sales_rep').canAccessMarketPlace, false);
     });
+
+    test('Convert to value returned from SmallOrderFeeUserRoles', () {
+      final roleMap = {
+        'client_admin': 'Client Admin',
+        'client_user': 'Client User',
+        'user': 'Client User',
+        'external_sales_rep': 'External Sales Rep',
+        'fake-role': '',
+      };
+
+      for (final role in roleMap.entries) {
+        expect(RoleType(role.key).smallOrderFeeRole, role.value);
+      }
+    });
   });
 
   group('Currency value object', () {

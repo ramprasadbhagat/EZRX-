@@ -56,7 +56,7 @@ class SmallOrderFeePage extends StatelessWidget {
               children: [
                 Expanded(
                   child: OutlinedButton(
-                    key: WidgetKeys.smallOrderFeeModalCancelButton,
+                    key: WidgetKeys.cancelButton,
                     onPressed: () => context.router.pop(),
                     child: Text(
                       context.tr('Cancel'),
@@ -67,7 +67,7 @@ class SmallOrderFeePage extends StatelessWidget {
                 const SizedBox(width: 16),
                 Expanded(
                   child: ElevatedButton(
-                    key: WidgetKeys.smallOrderFeeModalAgreeButton,
+                    key: WidgetKeys.confirmButton,
                     onPressed: () => context.router.pop(true),
                     child: Text(
                       context.tr('Agree'),
