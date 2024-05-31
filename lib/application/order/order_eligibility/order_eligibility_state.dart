@@ -390,6 +390,7 @@ class OrderEligibilityState with _$OrderEligibilityState {
   bool get zpSmallOrderFeeApplied {
     if (!zpSmallOrderFeeEnable) return false;
     if (displayAtLeastOneZPItemInStockWarning) return false;
+    if (cartItems.zpMaterialOnly.isMOVExclusion) return false;
 
     return cartItems.zpMaterialOnly.subtotalWithInStockOnly <
         configs.sapMinOrderAmount;

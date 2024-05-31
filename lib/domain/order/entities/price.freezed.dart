@@ -12,7 +12,7 @@ part of 'price.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$Price {
@@ -42,6 +42,7 @@ mixin _$Price {
   Zdp8OverrideValue get zdp8Override => throw _privateConstructorUsedError;
   PriceOverrideValue get priceOverride => throw _privateConstructorUsedError;
   PriceComboDeal get comboDeal => throw _privateConstructorUsedError;
+  bool get isMOVExclusion => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $PriceCopyWith<Price> get copyWith => throw _privateConstructorUsedError;
@@ -77,7 +78,8 @@ abstract class $PriceCopyWith<$Res> {
       bool isDiscountOverride,
       Zdp8OverrideValue zdp8Override,
       PriceOverrideValue priceOverride,
-      PriceComboDeal comboDeal});
+      PriceComboDeal comboDeal,
+      bool isMOVExclusion});
 
   $PriceComboDealCopyWith<$Res> get comboDeal;
 }
@@ -120,6 +122,7 @@ class _$PriceCopyWithImpl<$Res, $Val extends Price>
     Object? zdp8Override = null,
     Object? priceOverride = null,
     Object? comboDeal = null,
+    Object? isMOVExclusion = null,
   }) {
     return _then(_value.copyWith(
       materialNumber: null == materialNumber
@@ -222,6 +225,10 @@ class _$PriceCopyWithImpl<$Res, $Val extends Price>
           ? _value.comboDeal
           : comboDeal // ignore: cast_nullable_to_non_nullable
               as PriceComboDeal,
+      isMOVExclusion: null == isMOVExclusion
+          ? _value.isMOVExclusion
+          : isMOVExclusion // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 
@@ -235,9 +242,10 @@ class _$PriceCopyWithImpl<$Res, $Val extends Price>
 }
 
 /// @nodoc
-abstract class _$$_PriceCopyWith<$Res> implements $PriceCopyWith<$Res> {
-  factory _$$_PriceCopyWith(_$_Price value, $Res Function(_$_Price) then) =
-      __$$_PriceCopyWithImpl<$Res>;
+abstract class _$$PriceImplCopyWith<$Res> implements $PriceCopyWith<$Res> {
+  factory _$$PriceImplCopyWith(
+          _$PriceImpl value, $Res Function(_$PriceImpl) then) =
+      __$$PriceImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -265,16 +273,19 @@ abstract class _$$_PriceCopyWith<$Res> implements $PriceCopyWith<$Res> {
       bool isDiscountOverride,
       Zdp8OverrideValue zdp8Override,
       PriceOverrideValue priceOverride,
-      PriceComboDeal comboDeal});
+      PriceComboDeal comboDeal,
+      bool isMOVExclusion});
 
   @override
   $PriceComboDealCopyWith<$Res> get comboDeal;
 }
 
 /// @nodoc
-class __$$_PriceCopyWithImpl<$Res> extends _$PriceCopyWithImpl<$Res, _$_Price>
-    implements _$$_PriceCopyWith<$Res> {
-  __$$_PriceCopyWithImpl(_$_Price _value, $Res Function(_$_Price) _then)
+class __$$PriceImplCopyWithImpl<$Res>
+    extends _$PriceCopyWithImpl<$Res, _$PriceImpl>
+    implements _$$PriceImplCopyWith<$Res> {
+  __$$PriceImplCopyWithImpl(
+      _$PriceImpl _value, $Res Function(_$PriceImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -305,8 +316,9 @@ class __$$_PriceCopyWithImpl<$Res> extends _$PriceCopyWithImpl<$Res, _$_Price>
     Object? zdp8Override = null,
     Object? priceOverride = null,
     Object? comboDeal = null,
+    Object? isMOVExclusion = null,
   }) {
-    return _then(_$_Price(
+    return _then(_$PriceImpl(
       materialNumber: null == materialNumber
           ? _value.materialNumber
           : materialNumber // ignore: cast_nullable_to_non_nullable
@@ -407,14 +419,18 @@ class __$$_PriceCopyWithImpl<$Res> extends _$PriceCopyWithImpl<$Res, _$_Price>
           ? _value.comboDeal
           : comboDeal // ignore: cast_nullable_to_non_nullable
               as PriceComboDeal,
+      isMOVExclusion: null == isMOVExclusion
+          ? _value.isMOVExclusion
+          : isMOVExclusion // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
 
 /// @nodoc
 
-class _$_Price extends _Price {
-  const _$_Price(
+class _$PriceImpl extends _Price {
+  const _$PriceImpl(
       {required this.materialNumber,
       required this.materialCode,
       required this.lastPrice,
@@ -439,7 +455,8 @@ class _$_Price extends _Price {
       this.isDiscountOverride = false,
       required this.zdp8Override,
       required this.priceOverride,
-      required this.comboDeal})
+      required this.comboDeal,
+      required this.isMOVExclusion})
       : _rules = rules,
         _tiers = tiers,
         _bonuses = bonuses,
@@ -539,17 +556,19 @@ class _$_Price extends _Price {
   final PriceOverrideValue priceOverride;
   @override
   final PriceComboDeal comboDeal;
+  @override
+  final bool isMOVExclusion;
 
   @override
   String toString() {
-    return 'Price(materialNumber: $materialNumber, materialCode: $materialCode, lastPrice: $lastPrice, finalPrice: $finalPrice, finalTotalPrice: $finalTotalPrice, rules: $rules, tiers: $tiers, bonuses: $bonuses, bundles: $bundles, isValid: $isValid, additionalBonusEligible: $additionalBonusEligible, zmgDiscount: $zmgDiscount, zdp5MaxQuota: $zdp5MaxQuota, zdp5RemainingQuota: $zdp5RemainingQuota, exceedQty: $exceedQty, overrideRulePresent: $overrideRulePresent, overridenRules: $overridenRules, overridenRuleTier: $overridenRuleTier, isValidMaterial: $isValidMaterial, isFOC: $isFOC, isPriceOverride: $isPriceOverride, isDiscountOverride: $isDiscountOverride, zdp8Override: $zdp8Override, priceOverride: $priceOverride, comboDeal: $comboDeal)';
+    return 'Price(materialNumber: $materialNumber, materialCode: $materialCode, lastPrice: $lastPrice, finalPrice: $finalPrice, finalTotalPrice: $finalTotalPrice, rules: $rules, tiers: $tiers, bonuses: $bonuses, bundles: $bundles, isValid: $isValid, additionalBonusEligible: $additionalBonusEligible, zmgDiscount: $zmgDiscount, zdp5MaxQuota: $zdp5MaxQuota, zdp5RemainingQuota: $zdp5RemainingQuota, exceedQty: $exceedQty, overrideRulePresent: $overrideRulePresent, overridenRules: $overridenRules, overridenRuleTier: $overridenRuleTier, isValidMaterial: $isValidMaterial, isFOC: $isFOC, isPriceOverride: $isPriceOverride, isDiscountOverride: $isDiscountOverride, zdp8Override: $zdp8Override, priceOverride: $priceOverride, comboDeal: $comboDeal, isMOVExclusion: $isMOVExclusion)';
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Price &&
+            other is _$PriceImpl &&
             (identical(other.materialNumber, materialNumber) ||
                 other.materialNumber == materialNumber) &&
             (identical(other.materialCode, materialCode) ||
@@ -594,7 +613,9 @@ class _$_Price extends _Price {
             (identical(other.priceOverride, priceOverride) ||
                 other.priceOverride == priceOverride) &&
             (identical(other.comboDeal, comboDeal) ||
-                other.comboDeal == comboDeal));
+                other.comboDeal == comboDeal) &&
+            (identical(other.isMOVExclusion, isMOVExclusion) ||
+                other.isMOVExclusion == isMOVExclusion));
   }
 
   @override
@@ -624,14 +645,15 @@ class _$_Price extends _Price {
         isDiscountOverride,
         zdp8Override,
         priceOverride,
-        comboDeal
+        comboDeal,
+        isMOVExclusion
       ]);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_PriceCopyWith<_$_Price> get copyWith =>
-      __$$_PriceCopyWithImpl<_$_Price>(this, _$identity);
+  _$$PriceImplCopyWith<_$PriceImpl> get copyWith =>
+      __$$PriceImplCopyWithImpl<_$PriceImpl>(this, _$identity);
 }
 
 abstract class _Price extends Price {
@@ -660,7 +682,8 @@ abstract class _Price extends Price {
       final bool isDiscountOverride,
       required final Zdp8OverrideValue zdp8Override,
       required final PriceOverrideValue priceOverride,
-      required final PriceComboDeal comboDeal}) = _$_Price;
+      required final PriceComboDeal comboDeal,
+      required final bool isMOVExclusion}) = _$PriceImpl;
   const _Price._() : super._();
 
   @override
@@ -714,7 +737,9 @@ abstract class _Price extends Price {
   @override
   PriceComboDeal get comboDeal;
   @override
+  bool get isMOVExclusion;
+  @override
   @JsonKey(ignore: true)
-  _$$_PriceCopyWith<_$_Price> get copyWith =>
+  _$$PriceImplCopyWith<_$PriceImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

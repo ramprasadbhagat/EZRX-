@@ -7,6 +7,7 @@
           "ListPrice": 273.6,
           "FinalIndividualPrice": 273.6,
           "FinalTotalPrice": 0,
+          "IsMOVExclusion": false,
           "PriceRules": [
             {
               "Type": "MYR",

@@ -22,6 +22,7 @@ query price(
             ListPrice
             FinalIndividualPrice
             FinalTotalPrice
+            IsMOVExclusion
             PriceRules {
               Type
               Rate

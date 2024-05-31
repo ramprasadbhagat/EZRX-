@@ -40,6 +40,7 @@ class Price with _$Price {
     required Zdp8OverrideValue zdp8Override,
     required PriceOverrideValue priceOverride,
     required PriceComboDeal comboDeal,
+    required bool isMOVExclusion,
   }) = _Price;
 
   factory Price.empty() => Price(
@@ -64,6 +65,7 @@ class Price with _$Price {
         zdp8Override: Zdp8OverrideValue(0),
         priceOverride: PriceOverrideValue(0),
         comboDeal: PriceComboDeal.empty(),
+        isMOVExclusion: false,
       );
 
   bool get isTireDiscountEligible => tiers.isNotEmpty;

@@ -12,7 +12,7 @@ part of 'price_dto.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 PriceDto _$PriceDtoFromJson(Map<String, dynamic> json) {
   return _PriceDto.fromJson(json);
@@ -67,6 +67,8 @@ mixin _$PriceDto {
   PriceComboDealDto get comboDeal => throw _privateConstructorUsedError;
   @JsonKey(name: 'isDiscountOverride', defaultValue: false)
   bool get isDiscountOverride => throw _privateConstructorUsedError;
+  @JsonKey(name: 'isMOVExclusion', defaultValue: false)
+  bool get isMOVExclusion => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -116,7 +118,9 @@ abstract class $PriceDtoCopyWith<$Res> {
       @JsonKey(name: 'priceOverride', defaultValue: 0) double priceOverride,
       @JsonKey(name: 'comboDeals') PriceComboDealDto comboDeal,
       @JsonKey(name: 'isDiscountOverride', defaultValue: false)
-      bool isDiscountOverride});
+      bool isDiscountOverride,
+      @JsonKey(name: 'isMOVExclusion', defaultValue: false)
+      bool isMOVExclusion});
 
   $PriceComboDealDtoCopyWith<$Res> get comboDeal;
 }
@@ -157,6 +161,7 @@ class _$PriceDtoCopyWithImpl<$Res, $Val extends PriceDto>
     Object? priceOverride = null,
     Object? comboDeal = null,
     Object? isDiscountOverride = null,
+    Object? isMOVExclusion = null,
   }) {
     return _then(_value.copyWith(
       materialNumber: null == materialNumber
@@ -251,6 +256,10 @@ class _$PriceDtoCopyWithImpl<$Res, $Val extends PriceDto>
           ? _value.isDiscountOverride
           : isDiscountOverride // ignore: cast_nullable_to_non_nullable
               as bool,
+      isMOVExclusion: null == isMOVExclusion
+          ? _value.isMOVExclusion
+          : isMOVExclusion // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 
@@ -264,10 +273,11 @@ class _$PriceDtoCopyWithImpl<$Res, $Val extends PriceDto>
 }
 
 /// @nodoc
-abstract class _$$_PriceDtoCopyWith<$Res> implements $PriceDtoCopyWith<$Res> {
-  factory _$$_PriceDtoCopyWith(
-          _$_PriceDto value, $Res Function(_$_PriceDto) then) =
-      __$$_PriceDtoCopyWithImpl<$Res>;
+abstract class _$$PriceDtoImplCopyWith<$Res>
+    implements $PriceDtoCopyWith<$Res> {
+  factory _$$PriceDtoImplCopyWith(
+          _$PriceDtoImpl value, $Res Function(_$PriceDtoImpl) then) =
+      __$$PriceDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -307,18 +317,20 @@ abstract class _$$_PriceDtoCopyWith<$Res> implements $PriceDtoCopyWith<$Res> {
       @JsonKey(name: 'priceOverride', defaultValue: 0) double priceOverride,
       @JsonKey(name: 'comboDeals') PriceComboDealDto comboDeal,
       @JsonKey(name: 'isDiscountOverride', defaultValue: false)
-      bool isDiscountOverride});
+      bool isDiscountOverride,
+      @JsonKey(name: 'isMOVExclusion', defaultValue: false)
+      bool isMOVExclusion});
 
   @override
   $PriceComboDealDtoCopyWith<$Res> get comboDeal;
 }
 
 /// @nodoc
-class __$$_PriceDtoCopyWithImpl<$Res>
-    extends _$PriceDtoCopyWithImpl<$Res, _$_PriceDto>
-    implements _$$_PriceDtoCopyWith<$Res> {
-  __$$_PriceDtoCopyWithImpl(
-      _$_PriceDto _value, $Res Function(_$_PriceDto) _then)
+class __$$PriceDtoImplCopyWithImpl<$Res>
+    extends _$PriceDtoCopyWithImpl<$Res, _$PriceDtoImpl>
+    implements _$$PriceDtoImplCopyWith<$Res> {
+  __$$PriceDtoImplCopyWithImpl(
+      _$PriceDtoImpl _value, $Res Function(_$PriceDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -347,8 +359,9 @@ class __$$_PriceDtoCopyWithImpl<$Res>
     Object? priceOverride = null,
     Object? comboDeal = null,
     Object? isDiscountOverride = null,
+    Object? isMOVExclusion = null,
   }) {
-    return _then(_$_PriceDto(
+    return _then(_$PriceDtoImpl(
       materialNumber: null == materialNumber
           ? _value.materialNumber
           : materialNumber // ignore: cast_nullable_to_non_nullable
@@ -441,14 +454,18 @@ class __$$_PriceDtoCopyWithImpl<$Res>
           ? _value.isDiscountOverride
           : isDiscountOverride // ignore: cast_nullable_to_non_nullable
               as bool,
+      isMOVExclusion: null == isMOVExclusion
+          ? _value.isMOVExclusion
+          : isMOVExclusion // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$_PriceDto extends _PriceDto {
-  const _$_PriceDto(
+class _$PriceDtoImpl extends _PriceDto {
+  const _$PriceDtoImpl(
       {@JsonKey(name: 'materialNumber', defaultValue: '')
       required this.materialNumber,
       @JsonKey(name: 'oldMaterialCode', defaultValue: '')
@@ -491,7 +508,9 @@ class _$_PriceDto extends _PriceDto {
       required this.priceOverride,
       @JsonKey(name: 'comboDeals') this.comboDeal = PriceComboDealDto.empty,
       @JsonKey(name: 'isDiscountOverride', defaultValue: false)
-      required this.isDiscountOverride})
+      required this.isDiscountOverride,
+      @JsonKey(name: 'isMOVExclusion', defaultValue: false)
+      required this.isMOVExclusion})
       : _rules = rules,
         _bonuses = bonuses,
         _tiers = tiers,
@@ -500,8 +519,8 @@ class _$_PriceDto extends _PriceDto {
         _overridenRuleTier = overridenRuleTier,
         super._();
 
-  factory _$_PriceDto.fromJson(Map<String, dynamic> json) =>
-      _$$_PriceDtoFromJson(json);
+  factory _$PriceDtoImpl.fromJson(Map<String, dynamic> json) =>
+      _$$PriceDtoImplFromJson(json);
 
   @override
   @JsonKey(name: 'materialNumber', defaultValue: '')
@@ -609,17 +628,20 @@ class _$_PriceDto extends _PriceDto {
   @override
   @JsonKey(name: 'isDiscountOverride', defaultValue: false)
   final bool isDiscountOverride;
+  @override
+  @JsonKey(name: 'isMOVExclusion', defaultValue: false)
+  final bool isMOVExclusion;
 
   @override
   String toString() {
-    return 'PriceDto(materialNumber: $materialNumber, oldMaterialCode: $oldMaterialCode, listPrice: $listPrice, finalIndividualPrice: $finalIndividualPrice, finalTotalPrice: $finalTotalPrice, rules: $rules, bonuses: $bonuses, tiers: $tiers, bundles: $bundles, isValid: $isValid, additionalBonusEligible: $additionalBonusEligible, zmgDiscount: $zmgDiscount, zdp5MaxQuota: $zdp5MaxQuota, zdp5RemainingQuota: $zdp5RemainingQuota, exceedQty: $exceedQty, overrideRulePresent: $overrideRulePresent, overridenRules: $overridenRules, overridenRuleTier: $overridenRuleTier, isPriceOverride: $isPriceOverride, zdp8Override: $zdp8Override, priceOverride: $priceOverride, comboDeal: $comboDeal, isDiscountOverride: $isDiscountOverride)';
+    return 'PriceDto(materialNumber: $materialNumber, oldMaterialCode: $oldMaterialCode, listPrice: $listPrice, finalIndividualPrice: $finalIndividualPrice, finalTotalPrice: $finalTotalPrice, rules: $rules, bonuses: $bonuses, tiers: $tiers, bundles: $bundles, isValid: $isValid, additionalBonusEligible: $additionalBonusEligible, zmgDiscount: $zmgDiscount, zdp5MaxQuota: $zdp5MaxQuota, zdp5RemainingQuota: $zdp5RemainingQuota, exceedQty: $exceedQty, overrideRulePresent: $overrideRulePresent, overridenRules: $overridenRules, overridenRuleTier: $overridenRuleTier, isPriceOverride: $isPriceOverride, zdp8Override: $zdp8Override, priceOverride: $priceOverride, comboDeal: $comboDeal, isDiscountOverride: $isDiscountOverride, isMOVExclusion: $isMOVExclusion)';
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_PriceDto &&
+            other is _$PriceDtoImpl &&
             (identical(other.materialNumber, materialNumber) ||
                 other.materialNumber == materialNumber) &&
             (identical(other.oldMaterialCode, oldMaterialCode) ||
@@ -661,7 +683,9 @@ class _$_PriceDto extends _PriceDto {
             (identical(other.comboDeal, comboDeal) ||
                 other.comboDeal == comboDeal) &&
             (identical(other.isDiscountOverride, isDiscountOverride) ||
-                other.isDiscountOverride == isDiscountOverride));
+                other.isDiscountOverride == isDiscountOverride) &&
+            (identical(other.isMOVExclusion, isMOVExclusion) ||
+                other.isMOVExclusion == isMOVExclusion));
   }
 
   @JsonKey(ignore: true)
@@ -690,18 +714,19 @@ class _$_PriceDto extends _PriceDto {
         zdp8Override,
         priceOverride,
         comboDeal,
-        isDiscountOverride
+        isDiscountOverride,
+        isMOVExclusion
       ]);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_PriceDtoCopyWith<_$_PriceDto> get copyWith =>
-      __$$_PriceDtoCopyWithImpl<_$_PriceDto>(this, _$identity);
+  _$$PriceDtoImplCopyWith<_$PriceDtoImpl> get copyWith =>
+      __$$PriceDtoImplCopyWithImpl<_$PriceDtoImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_PriceDtoToJson(
+    return _$$PriceDtoImplToJson(
       this,
     );
   }
@@ -753,10 +778,13 @@ abstract class _PriceDto extends PriceDto {
       required final double priceOverride,
       @JsonKey(name: 'comboDeals') final PriceComboDealDto comboDeal,
       @JsonKey(name: 'isDiscountOverride', defaultValue: false)
-      required final bool isDiscountOverride}) = _$_PriceDto;
+      required final bool isDiscountOverride,
+      @JsonKey(name: 'isMOVExclusion', defaultValue: false)
+      required final bool isMOVExclusion}) = _$PriceDtoImpl;
   const _PriceDto._() : super._();
 
-  factory _PriceDto.fromJson(Map<String, dynamic> json) = _$_PriceDto.fromJson;
+  factory _PriceDto.fromJson(Map<String, dynamic> json) =
+      _$PriceDtoImpl.fromJson;
 
   @override
   @JsonKey(name: 'materialNumber', defaultValue: '')
@@ -828,7 +856,10 @@ abstract class _PriceDto extends PriceDto {
   @JsonKey(name: 'isDiscountOverride', defaultValue: false)
   bool get isDiscountOverride;
   @override
+  @JsonKey(name: 'isMOVExclusion', defaultValue: false)
+  bool get isMOVExclusion;
+  @override
   @JsonKey(ignore: true)
-  _$$_PriceDtoCopyWith<_$_PriceDto> get copyWith =>
+  _$$PriceDtoImplCopyWith<_$PriceDtoImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

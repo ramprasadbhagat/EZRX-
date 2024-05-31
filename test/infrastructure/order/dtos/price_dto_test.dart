@@ -33,6 +33,7 @@ void main() {
         overridenRules: [],
         overridenRuleTier: [],
         isDiscountOverride: false,
+        isMOVExclusion: false,
       );
     });
     test('Test get overridequery', () {

@@ -195,6 +195,8 @@ extension PriceAggregateExtension on List<PriceAggregate> {
 
   bool get containMPMaterial => any((e) => e.materialInfo.isMarketPlace);
 
+  bool get isMOVExclusion => any((e) => e.price.isMOVExclusion);
+
   bool get containInvalidTenderContractMaterial =>
       any((e) => e.isTenderContractInvalid);
 

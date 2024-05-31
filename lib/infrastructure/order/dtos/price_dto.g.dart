@@ -6,7 +6,8 @@ part of 'price_dto.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_PriceDto _$$_PriceDtoFromJson(Map<String, dynamic> json) => _$_PriceDto(
+_$PriceDtoImpl _$$PriceDtoImplFromJson(Map<String, dynamic> json) =>
+    _$PriceDtoImpl(
       materialNumber: json['materialNumber'] as String? ?? '',
       oldMaterialCode: json['oldMaterialCode'] as String? ?? '',
       listPrice: (json['listPrice'] as num?)?.toDouble() ?? 0,
@@ -54,9 +55,10 @@ _$_PriceDto _$$_PriceDtoFromJson(Map<String, dynamic> json) => _$_PriceDto(
           : PriceComboDealDto.fromJson(
               json['comboDeals'] as Map<String, dynamic>),
       isDiscountOverride: json['isDiscountOverride'] as bool? ?? false,
+      isMOVExclusion: json['isMOVExclusion'] as bool? ?? false,
     );
 
-Map<String, dynamic> _$$_PriceDtoToJson(_$_PriceDto instance) =>
+Map<String, dynamic> _$$PriceDtoImplToJson(_$PriceDtoImpl instance) =>
     <String, dynamic>{
       'materialNumber': instance.materialNumber,
       'oldMaterialCode': instance.oldMaterialCode,
@@ -82,4 +84,5 @@ Map<String, dynamic> _$$_PriceDtoToJson(_$_PriceDto instance) =>
       'priceOverride': instance.priceOverride,
       'comboDeals': instance.comboDeal.toJson(),
       'isDiscountOverride': instance.isDiscountOverride,
+      'isMOVExclusion': instance.isMOVExclusion,
     };
