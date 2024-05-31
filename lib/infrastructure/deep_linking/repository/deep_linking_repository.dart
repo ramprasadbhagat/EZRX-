@@ -108,14 +108,18 @@ class DeepLinkingRepository implements IDeepLinkingRepository {
     final paymentID = StringValue(
       utf8.decode((link.queryParameters['paymentID'] ?? '').codeUnits),
     );
+    final zzAdvice = StringValue(link.queryParameters['zzAdvice'] ?? '');
     final isValidLink = _validDomain(link) &&
-        (paymentBatchAdditionalInfo.isValid() || paymentID.isValid());
+        (paymentBatchAdditionalInfo.isValid() ||
+            paymentID.isValid() ||
+            zzAdvice.isValid());
 
     return isValidLink
         ? Right(
             PaymentSummaryDetails.empty().copyWith(
               paymentBatchAdditionalInfo: paymentBatchAdditionalInfo,
               paymentID: paymentID,
+              zzAdvice: zzAdvice,
             ),
           )
         : const Left(ApiFailure.paymentDetailRoute());

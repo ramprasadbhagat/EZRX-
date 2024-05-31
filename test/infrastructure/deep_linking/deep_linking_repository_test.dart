@@ -307,6 +307,35 @@ void main() {
         const Left(ApiFailure.paymentDetailRoute()),
       );
     });
+
+    test('=> Success when link contains zzAdvice', () {
+      const zzAdvice = '09EZ240002356801';
+      final link = Uri.parse(
+        '$domain/marketplace-payments/payment-summary/invoice-details?zzAdvice=$zzAdvice',
+      );
+
+      when(
+        () => deviceStorage.currentMarket(),
+      ).thenAnswer((_) => fakeMYSalesOrg.country.toLowerCase());
+
+      when(
+        () => mockConfig.baseUrl(
+          marketDomain: fakeMYSalesOrg.country.toLowerCase(),
+        ),
+      ).thenAnswer((_) => domain);
+
+      final result = repository.extractPaymentIdentifierInfo(
+        link: link,
+      );
+
+      expect(
+        result,
+        Right(
+          PaymentSummaryDetails.empty()
+              .copyWith(zzAdvice: StringValue(zzAdvice)),
+        ),
+      );
+    });
   });
 
   group('Extract reset password credentials', () {
