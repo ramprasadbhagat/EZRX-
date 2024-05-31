@@ -1,6 +1,7 @@
 // ignore_for_file: unused_local_variable
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/application/account/customer_license_bloc/customer_license_bloc.dart';
+import 'package:ezrxmobile/application/order/po_attachment/po_attachment_bloc.dart';
 import 'package:ezrxmobile/application/order/tender_contract/tender_contract_list_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/utils/string_utils.dart';
@@ -110,6 +111,8 @@ void main() {
   late OrderSummaryBloc orderSummaryBlocMock;
   late AdditionalDetailsBloc additionalDetailsBlocMock;
   late ComboDealListBloc comboDealListBlocMock;
+  late PoAttachmentBloc poAttachmentBlocMock;
+
   late List<StockInfo> batchStockInfoMock;
   late List<PriceAggregate> mockCartItems;
   late List<PriceAggregate> mockCartBundleItems;
@@ -181,6 +184,7 @@ void main() {
       productImageBloc = ProductImageBlocMock();
       customerLicenseBlocMock = CustomerLicenseBlocMock();
       paymentCustomerInformationMock = PaymentCustomerInformationBlocMock();
+      poAttachmentBlocMock = PoAttachmentBlocMock();
 
       mockPriceList = {};
       mockPriceList.putIfAbsent(
@@ -511,6 +515,8 @@ void main() {
       when(() => paymentCustomerInformationMock.state).thenReturn(
         PaymentCustomerInformationState.initial(),
       );
+      when(() => poAttachmentBlocMock.state)
+          .thenReturn(PoAttachmentState.initial());
     },
   );
 
@@ -572,6 +578,9 @@ void main() {
             ),
             BlocProvider<CustomerLicenseBloc>(
               create: (context) => customerLicenseBlocMock,
+            ),
+            BlocProvider<PoAttachmentBloc>(
+              create: (context) => poAttachmentBlocMock,
             ),
           ],
           child: const CartPage(),
@@ -739,7 +748,7 @@ void main() {
       });
 
       testWidgets(
-          'Display snackbar and clear additional info bloc when clear cart',
+          'Display snackbar and clear additional info and po attachment bloc when clear cart',
           (tester) async {
         final currentState = CartState.initial().copyWith(
           cartProducts: [],
@@ -777,6 +786,11 @@ void main() {
               config: fakeMYSalesOrgConfigs,
               customerCodeInfo: fakeCustomerCodeInfo,
             ),
+          ),
+        ).called(1);
+        verify(
+          () => poAttachmentBlocMock.add(
+            const PoAttachmentEvent.initialized(),
           ),
         ).called(1);
       });

@@ -33,6 +33,7 @@ import 'package:ezrxmobile/application/order/order_document_type/order_document_
 import 'package:ezrxmobile/application/order/order_summary/order_summary_bloc.dart';
 import 'package:ezrxmobile/application/order/payment_customer_information/payment_customer_information_bloc.dart';
 import 'package:ezrxmobile/application/order/payment_term/payment_term_bloc.dart';
+import 'package:ezrxmobile/application/order/po_attachment/po_attachment_bloc.dart';
 import 'package:ezrxmobile/application/order/product_detail/details/product_detail_bloc.dart';
 import 'package:ezrxmobile/application/order/product_search/product_search_bloc.dart';
 import 'package:ezrxmobile/application/order/re_order_permission/re_order_permission_bloc.dart';
@@ -183,6 +184,8 @@ void main() {
   late ArticlesInfoFilterBloc articlesInfoFilterBlocMock;
   late CustomerLicenseBloc customerLicenseBlocMock;
   late AnnouncementFilterBloc announcementFilterBlocMock;
+  late PoAttachmentBloc poAttachmentBlocMock;
+
   late CustomerCodeConfig customerCodeConfig;
   final fakeSalesOrganisation =
       SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2601'));
@@ -304,6 +307,8 @@ void main() {
       customerLicenseBlocMock = CustomerLicenseBlocMock();
       announcementFilterBlocMock = AnnouncementFilterBlocMock();
       resetPasswordBlocMock = ResetPasswordBlocMock();
+      poAttachmentBlocMock = PoAttachmentBlocMock();
+
       when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial());
       when(() => fullSummaryBlocMock.state)
           .thenReturn(FullSummaryState.initial());
@@ -425,6 +430,8 @@ void main() {
           .thenReturn(CustomerLicenseState.initial());
       when(() => announcementFilterBlocMock.state)
           .thenReturn(AnnouncementFilterState.initial());
+      when(() => poAttachmentBlocMock.state)
+          .thenReturn(PoAttachmentState.initial());
     });
 
     Future getWidget(tester) async {
@@ -611,6 +618,9 @@ void main() {
             ),
             BlocProvider<AnnouncementFilterBloc>(
               create: (context) => announcementFilterBlocMock,
+            ),
+            BlocProvider<PoAttachmentBloc>(
+              create: (context) => poAttachmentBlocMock,
             ),
           ],
           child: const SplashPage(),

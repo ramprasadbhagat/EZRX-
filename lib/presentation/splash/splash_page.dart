@@ -16,6 +16,7 @@ import 'package:ezrxmobile/application/order/additional_details/additional_detai
 import 'package:ezrxmobile/application/order/cart/price_override/price_override_bloc.dart';
 import 'package:ezrxmobile/application/order/combo_deal/combo_deal_material_detail_bloc.dart';
 import 'package:ezrxmobile/application/order/order_summary/order_summary_bloc.dart';
+import 'package:ezrxmobile/application/order/po_attachment/po_attachment_bloc.dart';
 import 'package:ezrxmobile/application/order/re_order_permission/re_order_permission_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_item/view_by_item_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_item/view_by_item_filter/view_by_item_filter_bloc.dart';
@@ -612,6 +613,10 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                       config: state.salesOrgConfigs,
                       customerCodeInfo: state.customerCodeInfo,
                     ),
+                  );
+
+              context.read<PoAttachmentBloc>().add(
+                    const PoAttachmentEvent.initialized(),
                   );
 
               context.read<ComboDealMaterialDetailBloc>().add(

@@ -5,6 +5,7 @@ import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart
 import 'package:ezrxmobile/application/order/additional_details/additional_details_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
+import 'package:ezrxmobile/application/order/po_attachment/po_attachment_bloc.dart';
 import 'package:ezrxmobile/application/order/re_order_permission/re_order_permission_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_item_details/view_by_item_details_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_order/view_by_order_bloc.dart';
@@ -39,6 +40,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
 import '../../../../../common_mock_data/customer_code_mock.dart';
+import '../../../../../common_mock_data/mock_bloc.dart';
 import '../../../../../common_mock_data/sales_org_config_mock/fake_sg_sales_org_config.dart';
 import '../../../../../common_mock_data/sales_org_config_mock/fake_my_sales_org_config.dart';
 import '../../../../../common_mock_data/sales_organsiation_mock.dart';
@@ -92,6 +94,7 @@ void main() {
   late ViewByItemDetailsBloc mockViewByItemDetailsBloc;
   late MaterialPriceBloc materialPriceBlocMock;
   late AdditionalDetailsBloc additionalDetailsBlocMock;
+  late PoAttachmentBloc poAttachmentBlocMock;
 
   setUpAll(() async {
     locator.registerLazySingleton(() => AppRouter());
@@ -104,6 +107,7 @@ void main() {
     cartBlocMock = CartBlocMock();
     materialPriceBlocMock = MaterialPriceBlocMock();
     additionalDetailsBlocMock = AdditionalDetailsBlocMock();
+    poAttachmentBlocMock = PoAttachmentBlocMock();
   });
 
   setUp(() {
@@ -144,6 +148,8 @@ void main() {
     when(() => additionalDetailsBlocMock.state).thenReturn(
       AdditionalDetailsState.initial(),
     );
+    when(() => poAttachmentBlocMock.state)
+        .thenReturn(PoAttachmentState.initial());
   });
 
   //////////////////Finder////////////////////////////////////////////////////
@@ -180,6 +186,9 @@ void main() {
         ),
         BlocProvider<AdditionalDetailsBloc>(
           create: (context) => additionalDetailsBlocMock,
+        ),
+        BlocProvider<PoAttachmentBloc>(
+          create: (context) => poAttachmentBlocMock,
         ),
       ],
       child: const Material(
@@ -405,6 +414,7 @@ void main() {
             ),
             CartState.initial().copyWith(
               isBuyAgain: false,
+              cartProducts: [],
             ),
           ],
         ),

@@ -5,6 +5,7 @@ import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart
 import 'package:ezrxmobile/application/order/additional_details/additional_details_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
+import 'package:ezrxmobile/application/order/po_attachment/po_attachment_bloc.dart';
 import 'package:ezrxmobile/application/order/re_order_permission/re_order_permission_bloc.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/order/entities/delivery_info_data.dart';
@@ -46,6 +47,8 @@ void main() {
   late AdditionalDetailsBloc additionalDetailsBlocMock;
   late MaterialPriceBloc materialPriceBlocMock;
   late CartBlocMock cartBlocMock;
+  late PoAttachmentBloc poAttachmentBlocMock;
+
   late MixpanelService mixpanelService;
   late ClevertapService clevertapService;
   final fakePhoneNumber = PhoneNumber('0987378484');
@@ -65,6 +68,7 @@ void main() {
     autoRouterMock = locator<AutoRouteMock>();
 
     eligibilityBlocMock = EligibilityBlocMock();
+    poAttachmentBlocMock = PoAttachmentBlocMock();
   });
   group('Order History Details Page', () {
     setUp(() async {
@@ -80,6 +84,8 @@ void main() {
       when(() => materialPriceBlocMock.state).thenReturn(
         MaterialPriceState.initial(),
       );
+      when(() => poAttachmentBlocMock.state)
+          .thenReturn(PoAttachmentState.initial());
     });
 
     Widget getScopedWidget(OrderHistoryDetails viewByOrderHistoryItem) {
@@ -102,6 +108,9 @@ void main() {
           ),
           BlocProvider<MaterialPriceBloc>(
             create: (context) => materialPriceBlocMock,
+          ),
+          BlocProvider<PoAttachmentBloc>(
+            create: (context) => poAttachmentBlocMock,
           ),
         ],
         child: Material(
@@ -217,6 +226,12 @@ void main() {
           ),
         ),
       ).called(1);
+
+      verify(
+        () => poAttachmentBlocMock.add(
+          const PoAttachmentEvent.initialized(),
+        ),
+      ).called(2);
 
       verify(() => autoRouterMock.push(const CartPageRoute())).called(1);
     });

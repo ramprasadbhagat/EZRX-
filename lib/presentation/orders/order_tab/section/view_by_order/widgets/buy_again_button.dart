@@ -29,6 +29,9 @@ class BuyAgainButton extends StatelessWidget {
 
           state.apiFailureOrSuccessOption.fold(
             () {
+              context.read<PoAttachmentBloc>().add(
+                    const PoAttachmentEvent.initialized(),
+                  );
               context.read<AdditionalDetailsBloc>().add(
                     AdditionalDetailsEvent.initiateFromHistory(
                       data: DeliveryInfoData.empty().copyWith(

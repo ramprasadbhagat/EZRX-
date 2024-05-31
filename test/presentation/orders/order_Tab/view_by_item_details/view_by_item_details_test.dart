@@ -2528,6 +2528,11 @@ void main() {
             ),
           ),
         ).called(1);
+        verify(
+          () => poAttachmentBlocMock.add(
+            const PoAttachmentEvent.initialized(),
+          ),
+        ).called(1);
         expect(autoRouterMock.current.name, CartPageRoute.name);
       },
     );
