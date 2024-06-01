@@ -116,6 +116,16 @@ class ReturnRequestInformation with _$ReturnRequestInformation {
       )
       .overrideValue;
 
+  // [approverOverrideValue] get overridden value from [priceOverrideTrail]
+  // done by approver end when return status is approved and approver has
+  // updated the value.
+  double get approverOverrideValue => priceOverrideTrail
+      .firstWhere(
+        (element) => status.isApprovedStatus && element.overrideRole.isApprover,
+        orElse: () => PriceOverrideTrail.empty(),
+      )
+      .overrideValue;
+
   bool get isUnapprovedCounterOffer =>
       !status.isApprovedStatus && isCounterOfferRequested;
 
@@ -133,6 +143,9 @@ class ReturnRequestInformation with _$ReturnRequestInformation {
   String get displayBatch => isMarketPlace ? 'NA' : batch;
 
   String get displayExpiryDate => isMarketPlace ? 'NA' : expiryDate.dateString;
+
+  double get priceOverrideValue =>
+      isApproverOverride ? approverOverrideValue : userOverrideValue;
 }
 
 @freezed

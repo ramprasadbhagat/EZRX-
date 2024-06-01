@@ -105,11 +105,23 @@ class _ReturnBonusItemSection extends StatelessWidget {
                       child: Row(
                         key: WidgetKeys.bonusPriceComponent,
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Expanded(
-                            child: ReturnSummaryItemPrice(
-                              requestInformation: bonusItem,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                ReturnSummaryItemPrice(
+                                  requestInformation: bonusItem,
+                                ),
+                                if (bonusItem.isApprovedCounterOffer)
+                                  ReturnOverrideInfoIcon.price(
+                                    context: context,
+                                    price:
+                                        bonusItem.priceOverrideValue.toString(),
+                                    displaySubContent:
+                                        bonusItem.isApproverOverride,
+                                  ),
+                              ],
                             ),
                           ),
                           Text(

@@ -1046,5 +1046,111 @@ void main() {
       },
       variant: statusVariants,
     );
+
+    testWidgets(
+      '=> show approver updated icon for bonus when overrideValue is greater than 0 and status is Approved ',
+      (tester) async {
+        final status = StatusType('APPROVED');
+        await tester.binding.setSurfaceSize(const Size(480, 900));
+        when(() => mockReturnDetailsByRequestBloc.state).thenReturn(
+          ReturnDetailsByRequestState.initial().copyWith(
+            requestInformation: [
+              requestInformation.returnRequestInformationList.first.copyWith(
+                prsfd: Prsfd('B'),
+                status: status,
+                bonusInformation: [
+                  requestInformation.returnRequestInformationList.first
+                      .copyWith(
+                    prsfd: Prsfd('B'),
+                    status: status,
+                  ),
+                ],
+              ),
+            ],
+          ),
+        );
+        await tester.pumpWidget(getWUT());
+        await tester.pump();
+        await tester.fling(
+          find.byKey(WidgetKeys.returnRequestDetailScrollList),
+          const Offset(0.0, -1000.0),
+          1000.0,
+        );
+        await tester.pumpAndSettle();
+
+        expect(find.text('Approver updated'), findsOneWidget);
+      },
+    );
+
+    testWidgets(
+      '=> Do not show approver updated icon for bonus when overrideValue is 0 and status is Approved ',
+      (tester) async {
+        final status = StatusType('APPROVED');
+        await tester.binding.setSurfaceSize(const Size(480, 900));
+        when(() => mockReturnDetailsByRequestBloc.state).thenReturn(
+          ReturnDetailsByRequestState.initial().copyWith(
+            requestInformation: [
+              requestInformation.returnRequestInformationList.first.copyWith(
+                prsfd: Prsfd('B'),
+                status: status,
+                overrideValue: 0,
+                bonusInformation: [
+                  requestInformation.returnRequestInformationList.first
+                      .copyWith(
+                    prsfd: Prsfd('B'),
+                    status: status,
+                  ),
+                ],
+              ),
+            ],
+          ),
+        );
+        await tester.pumpWidget(getWUT());
+        await tester.pump();
+        await tester.fling(
+          find.byKey(WidgetKeys.returnRequestDetailScrollList),
+          const Offset(0.0, -1000.0),
+          1000.0,
+        );
+        await tester.pumpAndSettle();
+
+        expect(find.text('Approver updated'), findsNothing);
+      },
+    );
+
+    testWidgets(
+      '=> Do not show approver updated icon for bonus when overrideValue is greater than 0 and status is not Approved ',
+      (tester) async {
+        final status = StatusType('rejected');
+        await tester.binding.setSurfaceSize(const Size(480, 900));
+        when(() => mockReturnDetailsByRequestBloc.state).thenReturn(
+          ReturnDetailsByRequestState.initial().copyWith(
+            requestInformation: [
+              requestInformation.returnRequestInformationList.first.copyWith(
+                prsfd: Prsfd('B'),
+                status: status,
+                bonusInformation: [
+                  requestInformation.returnRequestInformationList.first
+                      .copyWith(
+                    prsfd: Prsfd('B'),
+                    status: status,
+                  ),
+                ],
+              ),
+            ],
+          ),
+        );
+        await tester.pumpWidget(getWUT());
+        await tester.pump();
+        await tester.fling(
+          find.byKey(WidgetKeys.returnRequestDetailScrollList),
+          const Offset(0.0, -1000.0),
+          1000.0,
+        );
+        await tester.pumpAndSettle();
+
+        expect(find.text('Approver updated'), findsNothing);
+      },
+    );
   });
 }

@@ -189,7 +189,21 @@
                             "purchaseNumberC": "",
                             "ppaHeld": false,
                             "outsidePolicy": false,
-                            "invoiceDate": "20230530"
+                            "invoiceDate": "20230530",
+                            "priceOverrideTrail": [
+                                {
+                                    "overrideBy": "thlnguyen",
+                                    "overrideTimeStamp": "1717126303",
+                                    "overriderRole": "USEROVR",
+                                    "overrideValue": "150.5"
+                                },
+                                {
+                                    "overrideBy": "Nguyen, Mai l FPT",
+                                    "overrideTimeStamp": "1717126484",
+                                    "overriderRole": "Approver",
+                                    "overrideValue": "100"
+                                }
+                            ]
                         }
                     ]
                 }

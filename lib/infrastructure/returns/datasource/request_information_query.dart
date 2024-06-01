@@ -90,6 +90,10 @@ class RequestInformationQuery {
       statusReason
       outsidePolicy
       invoiceDate
+      priceOverrideTrail {
+          overriderRole
+          overrideValue
+      }
       }
     }
   }
