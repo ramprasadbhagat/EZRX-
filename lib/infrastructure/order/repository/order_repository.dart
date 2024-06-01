@@ -184,6 +184,13 @@ class OrderRepository implements IOrderRepository {
           shipTo: shipToInfo.shipToCustomerCode,
           market: deviceStorage.currentMarket(),
         );
+        for (final orderHistoryDetails in orderHistoryDetailsList) {
+          await _trackOrderSuccess(
+            orderHistoryDetails,
+            salesOrganisation.salesOrg.isID,
+          );
+        }
+        await materialBannerStorage.clear();
 
         return Right(
           orderHistoryDetailsList

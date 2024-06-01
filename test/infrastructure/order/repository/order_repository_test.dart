@@ -5,10 +5,14 @@ import 'package:ezrxmobile/domain/order/entities/bonus_sample_item.dart';
 import 'package:ezrxmobile/domain/order/entities/combo_material_item.dart';
 import 'package:ezrxmobile/infrastructure/banner/dtos/ez_reach_banner_dto.dart';
 import 'package:ezrxmobile/infrastructure/core/clevertap/clevertap_service.dart';
+import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
+import 'package:ezrxmobile/infrastructure/core/common/tracking_events.dart';
+import 'package:ezrxmobile/infrastructure/core/common/tracking_properties.dart';
 import 'package:ezrxmobile/infrastructure/core/firebase/remote_config.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/device_storage.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/material_banner_storage.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
+import 'package:ezrxmobile/locator.dart';
 import 'package:flutter/material.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:mocktail/mocktail.dart';
@@ -129,6 +133,7 @@ void main() {
     stockInfoRemoteDataSource = StockInfoRemoteDataSourceMock();
     stockInfoLocalDataSource = StockInfoLocalDataSourceMock();
     mixpanelService = MixpanelServiceMock();
+    locator.registerLazySingleton<MixpanelService>(() => mixpanelService);
     clevertapService = ClevertapServiceMock();
     encryption = EncryptionMock();
     orderEncryptionMock = OrderEncryption(
@@ -1381,6 +1386,27 @@ void main() {
       when(() => deviceStorage.currentMarket())
           .thenReturn(fakeMarketPlaceMarket);
       when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
+      for (final orderHistoryDetail in orderHistoryList) {
+        for (final item in orderHistoryDetail.orderHistoryDetailsOrderItem) {
+          when(
+            () => materialBannerStorageMock.get(
+              materialNumber: item.productType.typeBundle
+                  ? '${MaterialNumber(item.parentId).displayMatNo}_${item.materialNumber.displayMatNo}'
+                  : item.materialNumber.displayMatNo,
+            ),
+          ).thenAnswer(
+            (invocation) async => EZReachBannerDto.fromDomain(
+              EZReachBanner.empty(),
+            ),
+          );
+        }
+      }
+
+      when(
+        () => materialBannerStorageMock.clear(),
+      ).thenAnswer(
+        (invocation) => Future.value(),
+      );
 
       when(
         () => viewByOrderDetailsRemoteDataSource.getOrderHistoryDetailsList(
@@ -1401,6 +1427,26 @@ void main() {
         orderResponse: submitOrderResponseMock,
         shipToInfo: fakeShipToInfo,
       );
+      for (final item in orderHistoryList) {
+        verify(
+          () => trackMixpanelEvent(
+            TrackingEvents.placeOrderSuccessOriginal,
+            props: {
+              if (item.processingStatus.isInQueue)
+                TrackingProps.queueNumber:
+                    item.orderNumber.getOrDefaultValue(''),
+              TrackingProps.orderNumber: item.trackingOrderId,
+              TrackingProps.grandTotal: item.totalValue,
+              TrackingProps.totalQty: item.orderItemsCount,
+              TrackingProps.requestDeliveryDate:
+                  item.requestedDeliveryDate.dateOrNaString,
+              TrackingProps.lineNumber:
+                  item.orderHistoryDetailsOrderItem.length,
+            },
+          ),
+        ).called(1);
+      }
+
       expect(
         result.getOrElse(() => <OrderHistoryDetails>[]),
         equals(orderHistoryList),
