@@ -61,6 +61,7 @@ import 'package:ezrxmobile/application/product_image/product_image_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/returns/approver_actions/filter/return_approver_filter_bloc.dart';
 import 'package:ezrxmobile/application/returns/approver_actions/return_approver_bloc.dart';
+import 'package:ezrxmobile/application/returns/new_request/return_items/filter/return_items_filter_bloc.dart';
 import 'package:ezrxmobile/application/returns/new_request/return_items/return_items_bloc.dart';
 import 'package:ezrxmobile/application/returns/policy_configuration/policy_configuration_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_list/view_by_item/return_list_by_item_bloc.dart';
@@ -446,6 +447,10 @@ class ReturnSummaryDetailsBlocMock
 class ViewByItemReturnFilterBlocMock
     extends MockBloc<ViewByItemReturnFilterEvent, ViewByItemReturnFilterState>
     implements ViewByItemReturnFilterBloc {}
+
+class ReturnItemsFilterBlocMock
+    extends MockBloc<ReturnItemsFilterEvent, ReturnItemsFilterState>
+    implements ReturnItemsFilterBloc {}
 
 /////////////////////////////////////////////////////////////////////////////
 

@@ -13,6 +13,7 @@ import 'package:ezrxmobile/domain/returns/entities/return_items_filter.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_material.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_material_list.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/return_request_local.dart';
+import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/market_place/market_place_logo.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/returns/new_request/tabs/return_items_tab/return_items_filter_bottom_sheet.dart';
@@ -21,32 +22,14 @@ import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
 
+import '../../../../../common_mock_data/mock_bloc.dart';
 import '../../../../../common_mock_data/sales_org_config_mock/fake_my_sales_org_config.dart';
 import '../../../../../common_mock_data/sales_org_config_mock/fake_sg_sales_org_config.dart';
 import '../../../../../common_mock_data/sales_org_config_mock/fake_th_sales_org_config.dart';
 import '../../../../../utils/widget_utils.dart';
 
-class ReturnItemsBlocMock extends MockBloc<ReturnItemsEvent, ReturnItemsState>
-    implements ReturnItemsBloc {}
-
-class NewRequestBlocMock extends MockBloc<NewRequestEvent, NewRequestState>
-    implements NewRequestBloc {}
-
-class ProductImageBlocMock
-    extends MockBloc<ProductImageEvent, ProductImageState>
-    implements ProductImageBloc {}
-
-class EligibilityBlocMock extends MockBloc<EligibilityEvent, EligibilityState>
-    implements EligibilityBloc {}
-
-class ReturnItemsFilterBlocMock
-    extends MockBloc<ReturnItemsFilterEvent, ReturnItemsFilterState>
-    implements ReturnItemsFilterBloc {}
-
-final locator = GetIt.instance;
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   late AppRouter autoRouterMock;
@@ -67,7 +50,7 @@ void main() {
     config = locator<Config>();
     autoRouterMock = locator<AppRouter>();
     returnItemsBlocMock = ReturnItemsBlocMock();
-    newRequestBlocMock = NewRequestBlocMock();
+    newRequestBlocMock = NewRequestMockBloc();
     productImageBlocMock = ProductImageBlocMock();
     eligibilityBlocMock = EligibilityBlocMock();
     returnItemsFilterBlocMock = ReturnItemsFilterBlocMock();
@@ -315,7 +298,7 @@ void main() {
       verify(
         () => returnItemsBlocMock.add(
           ReturnItemsEvent.fetch(
-            appliedFilter: ReturnItemsFilter.resetInvoiceDateFilter(),
+            appliedFilter: ReturnItemsFilter.init(),
             searchKey: SearchKey.search(''),
           ),
         ),
@@ -352,7 +335,7 @@ void main() {
       verify(
         () => returnItemsBlocMock.add(
           ReturnItemsEvent.fetch(
-            appliedFilter: ReturnItemsFilter.resetInvoiceDateFilter(),
+            appliedFilter: ReturnItemsFilter.init(),
             searchKey: SearchKey.searchFilter(''),
           ),
         ),

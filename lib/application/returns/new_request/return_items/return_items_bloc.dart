@@ -38,10 +38,11 @@ class ReturnItemsBloc extends Bloc<ReturnItemsEvent, ReturnItemsState> {
     on<_Fetch>(
       (event, emit) async {
         if (event.searchKey == state.searchKey &&
-            event.searchKey.isValid() &&
+            event.searchKey.validateNotEmpty &&
             event.appliedFilter == state.appliedFilter) {
           return;
         }
+        if (!event.searchKey.isValid()) return;
 
         emit(
           state.copyWith(

@@ -12,14 +12,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
+import '../../../../../common_mock_data/mock_bloc.dart';
 import '../../../../../utils/widget_utils.dart';
-
-class ReturnItemsBlocMock extends MockBloc<ReturnItemsEvent, ReturnItemsState>
-    implements ReturnItemsBloc {}
-
-class ReturnItemsFilterBlocMock
-    extends MockBloc<ReturnItemsFilterEvent, ReturnItemsFilterState>
-    implements ReturnItemsFilterBloc {}
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
@@ -113,7 +107,7 @@ void main() {
       verify(
         () => returnItemsBlocMock.add(
           ReturnItemsEvent.fetch(
-            appliedFilter: ReturnItemsFilter.resetInvoiceDateFilter(),
+            appliedFilter: ReturnItemsFilter.init(),
             searchKey: SearchKey.search(''),
           ),
         ),

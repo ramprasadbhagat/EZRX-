@@ -20,21 +20,6 @@ class ReturnItemsFilter with _$ReturnItemsFilter {
         invoiceDateTo: DateTimeStringValue(''),
       );
 
-  factory ReturnItemsFilter.resetInvoiceDateFilter() => ReturnItemsFilter(
-        invoiceDateFrom: DateTimeStringValue(
-          getDateStringByDateTime(
-            DateTime(
-              DateTime.now().year - 2,
-              DateTime.now().month,
-              DateTime.now().day,
-            ),
-          ),
-        ),
-        invoiceDateTo: DateTimeStringValue(
-          getDateStringByDateTime(DateTime.now()),
-        ),
-      );
-
   factory ReturnItemsFilter.init() => ReturnItemsFilter(
         invoiceDateFrom: DateTimeStringValue(
           getDateStringByDateTime(
