@@ -6,7 +6,6 @@ import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/auth/reset_password/reset_password_bloc.dart';
 import 'package:ezrxmobile/config.dart';
-import 'package:ezrxmobile/domain/auth/entities/reset_password.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/presentation/account/change_password/change_password_page.dart';
@@ -213,7 +212,7 @@ void main() {
         'Test Change Password Submit failure',
         (tester) async {
           final expectedState = [
-            ResetPasswordState.initial(),
+            ResetPasswordState.initial().copyWith(isSubmitting: true),
             ResetPasswordState.initial().copyWith(
               passwordResetFailureOrSuccessOption: optionOf(
                 const Left(
@@ -233,14 +232,8 @@ void main() {
         'Test Change Password Submit success',
         (tester) async {
           final expectedState = [
+            ResetPasswordState.initial().copyWith(isSubmitting: true),
             ResetPasswordState.initial(),
-            ResetPasswordState.initial().copyWith(
-              passwordResetFailureOrSuccessOption: optionOf(
-                Right(
-                  ResetPassword.empty(),
-                ),
-              ),
-            ),
           ];
           whenListen(mockResetPasswordBloc, Stream.fromIterable(expectedState));
           await tester.pumpWidget(getScopedWidget());

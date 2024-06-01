@@ -9,21 +9,21 @@ class _ChangePasswordForm extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocConsumer<ResetPasswordBloc, ResetPasswordState>(
       listenWhen: (previous, current) =>
-          previous.passwordResetFailureOrSuccessOption !=
-          current.passwordResetFailureOrSuccessOption,
+          previous.isSubmitting != current.isSubmitting &&
+          !current.isSubmitting,
       listener: (context, state) => {
         state.passwordResetFailureOrSuccessOption.fold(
-          () {},
+          () {
+            Navigator.of(context).pop();
+            CustomSnackBar(
+              messageText: context.tr('Password changed successfully'),
+            ).show(context);
+          },
           (either) => either.fold(
             (failure) {
               ErrorUtils.handleApiFailure(context, failure);
             },
-            (_) {
-              Navigator.of(context).pop();
-              CustomSnackBar(
-                messageText: context.tr('Password changed successfully'),
-              ).show(context);
-            },
+            (_) {},
           ),
         ),
       },

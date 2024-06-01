@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:bloc_test/bloc_test.dart';
+import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
@@ -7,6 +8,7 @@ import 'package:ezrxmobile/application/auth/reset_password/reset_password_bloc.d
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/auth/entities/reset_password_cred.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
+import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/presentation/auth/reset_password/reset_password_page.dart';
 import 'package:ezrxmobile/presentation/core/password_validation.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
@@ -276,5 +278,50 @@ void main() {
         ),
       ).called(1);
     });
+
+    testWidgets(
+      'Test reset Password Submit failure',
+      (tester) async {
+        final expectedState = [
+          ResetPasswordState.initial().copyWith(isSubmitting: true),
+          ResetPasswordState.initial().copyWith(
+            passwordResetFailureOrSuccessOption: optionOf(
+              const Left(
+                ApiFailure.other('mock-error'),
+              ),
+            ),
+          ),
+        ];
+        whenListen(resetPasswordBlocMock, Stream.fromIterable(expectedState));
+        await tester.pumpWidget(getWidget());
+        await tester.pumpAndSettle();
+        expect(find.byKey(WidgetKeys.customSnackBar), findsOneWidget);
+      },
+    );
+
+    testWidgets(
+      'Test reset Password Submit success',
+      (tester) async {
+        final expectedState = [
+          ResetPasswordState.initial().copyWith(isSubmitting: true),
+          ResetPasswordState.initial(),
+        ];
+        when(
+          () => autoRouterMock.push(
+            const ResetPasswordSuccessRoute(),
+          ),
+        ).thenAnswer(
+          (_) => Future.value(),
+        );
+        whenListen(resetPasswordBlocMock, Stream.fromIterable(expectedState));
+        await tester.pumpWidget(getWidget());
+        await tester.pumpAndSettle();
+        verify(
+          () => autoRouterMock.push(
+            const ResetPasswordSuccessRoute(),
+          ),
+        ).called(1);
+      },
+    );
   });
 }

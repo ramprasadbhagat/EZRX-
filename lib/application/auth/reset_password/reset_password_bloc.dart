@@ -125,11 +125,13 @@ class ResetPasswordBloc extends Bloc<ResetPasswordEvent, ResetPasswordState> {
               ),
             );
           },
-          (success) => emit(ResetPasswordState.initial()),
+          (success) => add(const _Clear()),
         );
       },
       clear: (e) async => emit(
-        ResetPasswordState.initial(),
+        ResetPasswordState.initial().copyWith(
+          user: state.user,
+        ),
       ),
       resetPassword: (e) async {
         final isFormValidated =
@@ -164,7 +166,7 @@ class ResetPasswordBloc extends Bloc<ResetPasswordEvent, ResetPasswordState> {
               ),
             );
           },
-          (resetPassword) => emit(ResetPasswordState.initial()),
+          (resetPassword) => add(const _Clear()),
         );
       },
       initialize: (_Initialize e) async => emit(

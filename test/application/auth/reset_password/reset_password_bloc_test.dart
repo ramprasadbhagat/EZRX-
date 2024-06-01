@@ -260,7 +260,9 @@ void main() {
       ),
       expect: () => [
         validResetPasswordState.copyWith(isSubmitting: true),
-        ResetPasswordState.initial(),
+        ResetPasswordState.initial().copyWith(
+          user: validResetPasswordState.user,
+        ),
       ],
     );
 
@@ -391,7 +393,11 @@ void main() {
       act: (ResetPasswordBloc bloc) => bloc.add(
         const ResetPasswordEvent.clear(),
       ),
-      expect: () => [ResetPasswordState.initial()],
+      expect: () => [
+        ResetPasswordState.initial().copyWith(
+          user: validResetPasswordState.user,
+        ),
+      ],
     );
   });
 }

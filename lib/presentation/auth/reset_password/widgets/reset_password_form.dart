@@ -9,14 +9,14 @@ class _ResetPasswordForm extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocConsumer<ResetPasswordBloc, ResetPasswordState>(
       listenWhen: (previous, current) =>
-          previous.passwordResetFailureOrSuccessOption !=
-          current.passwordResetFailureOrSuccessOption,
+          previous.isSubmitting != current.isSubmitting &&
+          !current.isSubmitting,
       listener: (context, state) => {
         state.passwordResetFailureOrSuccessOption.fold(
-          () {},
+          () => context.router.push(const ResetPasswordSuccessRoute()),
           (either) => either.fold(
             (failure) => ErrorUtils.handleApiFailure(context, failure),
-            (_) => context.router.push(const ResetPasswordSuccessRoute()),
+            (_) {},
           ),
         ),
       },
