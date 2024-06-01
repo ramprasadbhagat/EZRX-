@@ -2308,7 +2308,6 @@ void main() {
       checkoutRobot.verifyEmptyPoReferenceMessage(isVisible: true);
       await checkoutRobot.enterPoReference(poReference);
 
-      checkoutRobot.verifyEmptyPoReferenceNoteErrorMessage(isVisible: true);
       await checkoutRobot.enterReferenceNote(poReferenceNote);
 
       checkoutRobot.verifyEmptyContactPersonErrorMessage(isVisible: true);
@@ -2357,7 +2356,6 @@ void main() {
       checkoutRobot.verifyEmptyPoReferenceMessage(isVisible: true);
       await checkoutRobot.enterPoReference(poReference);
 
-      checkoutRobot.verifyEmptyPoReferenceNoteErrorMessage(isVisible: true);
       await checkoutRobot.enterReferenceNote(poReferenceNote);
 
       checkoutRobot.verifyEmptyContactPersonErrorMessage(isVisible: true);

@@ -57,7 +57,7 @@ class _DeliveryInfo extends StatelessWidget {
                 _TextFormField(
                   labelText: 'Reference note',
                   keyText: 'referenceNoteKey',
-                  hintText: 'Enter reference note',
+                  hintText: 'Enter reference note (Optional)',
                   label: DeliveryInfoLabel.referenceNote,
                   deliveryInfoData: state.deliveryInfoData,
                   focusNode: focusNodes[DeliveryInfoLabel.referenceNote] ??
@@ -297,20 +297,7 @@ class _TextFormFieldState extends State<_TextFormField> {
               ),
               (_) => null,
             );
-      case DeliveryInfoLabel.referenceNote:
-        return context
-            .read<AdditionalDetailsBloc>()
-            .state
-            .deliveryInfoData
-            .referenceNote
-            .value
-            .fold(
-              (f) => f.maybeMap(
-                empty: (_) => context.tr('Reference note is a required field'),
-                orElse: () => null,
-              ),
-              (_) => null,
-            );
+
       default:
         return null;
     }

@@ -107,16 +107,6 @@ class CheckoutRobot {
     await tester.pumpAndSettle();
   }
 
-  void verifyEmptyPoReferenceNoteErrorMessage({required bool isVisible}) {
-    expect(
-      find.descendant(
-        of: referenceNoteField,
-        matching: find.text('Reference note is a required field'.tr()),
-      ),
-      isVisible ? findsOneWidget : findsNothing,
-    );
-  }
-
   void verifyEmptyContactPersonErrorMessage({required bool isVisible}) {
     expect(
       find.descendant(

@@ -1424,7 +1424,7 @@ void main() {
           (tester.widget(customerReferenceNoteKey) as TextFormField)
               .validator
               ?.call('ReferenceNote field'),
-          'Reference note is a required field',
+          null,
         );
       },
     );
@@ -1836,7 +1836,7 @@ void main() {
           OrderSummaryState.initial().copyWith(
             isSubmitting: true,
           ),
-        );  
+        );
 
         when(() => eligibilityBloc.state).thenReturn(
           EligibilityState.initial().copyWith(

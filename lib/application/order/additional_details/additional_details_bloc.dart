@@ -108,9 +108,6 @@ class AdditionalDetailsBloc
         ? state.deliveryInfoData.poReference.isValid()
         : true;
 
-    final isReferenceNoteValid = state.config.enableReferenceNote
-        ? state.deliveryInfoData.referenceNote.isValid()
-        : true;
     final isContactPersonValid = state.config.enableMobileNumber
         ? state.deliveryInfoData.contactPerson.isValid()
         : true;
@@ -126,7 +123,6 @@ class AdditionalDetailsBloc
             : true;
 
     final isFormValid = isCustomerPoReferenceValid &&
-        isReferenceNoteValid &&
         isContactPersonValid &&
         isContactNumberValid &&
         isPoUploadAttachment &&
@@ -139,15 +135,13 @@ class AdditionalDetailsBloc
         showErrorMessages: !isFormValid,
         focusTo: !isCustomerPoReferenceValid
             ? DeliveryInfoLabel.poReference
-            : !isReferenceNoteValid
-                ? DeliveryInfoLabel.referenceNote
-                : !isContactPersonValid
-                    ? DeliveryInfoLabel.contactPerson
-                    : !isContactNumberValid
-                        ? DeliveryInfoLabel.mobileNumber
-                        : !isPaymentTermValid
-                            ? DeliveryInfoLabel.paymentTerm
-                            : null,
+            : !isContactPersonValid
+                ? DeliveryInfoLabel.contactPerson
+                : !isContactNumberValid
+                    ? DeliveryInfoLabel.mobileNumber
+                    : !isPaymentTermValid
+                        ? DeliveryInfoLabel.paymentTerm
+                        : null,
       ),
     );
   }
