@@ -100,7 +100,7 @@ Customer sold to ID,Customer sold to ID,รหัสร้านค้า,客戶
 Date Filter,Date Filter,ตัวกรองวันที่,日期篩選,ရက်စွဲဖြင့်စစ်ထုတ်ရန်,Lọc theo ngày,តម្រងតាមកាលបរិច្ឆេទ,Filter tanggal,Date Filter
 days. Please update your password before it expires,days. Please update your password before it expires,วัน กรุณาเปลี่ยนรหัสผ่านของคุณก่อนวันหมดอายุ,過期，請更新您的密碼,ရက်အတွင်းကုန်ဆုံးပါမည်။ သင်၏စကားဝှက်ကို သက်တမ်း မကုန်မှီ ကျေးဇူးပြု၍ မွမ်းမံပါ,ngày. vui lòng cập nhật mật khẩu trước khi hết hạn.,រាល់ថ្ងៃ សូមធ្វើបច្ចុប្បន្នភាព (ផ្លាស់ប្តូរ)​លេខសម្ងាត់របស់អ្នកមុនពេលវាផុតកំណត់,hari -hari Harap perbarui kata sandi Anda sebelum kedaluwarsa,days. Please update your password before it expires
 Deals :,Deals :,Deals :,搭贈/價格條件 :,Deals :,Chính sách bán hàng :,"ការផ្តល់ជូនពិសេស : ",Penawaran:,Deals :
-Delivered,Delivered,การจัดส่งสำเร็จ,已配達,ပေးပို့ပြီးသည်,Đã giao hàng,បានចែកចាយរួចរាល់,Pesanan Tiba di Tujuan,배송 완료
+Delivered,Delivered,ส่งสำเร็จแล้ว,已送達,ပို့ဆောင်ပြီး,Đã giao hàng,បានដឹកជញ្ជូន,Pesanan Tiba di Tujuan,배송 완료
 Delivered - partial rejection,Delivered - partial rejection,จัดส่งแล้ว - ปฏิเสธบางส่วน,取消-部分拒絕,ပေးပို့သည် - တစ်စိတ်တစ်ပိုင်း ငြင်းပယ်ခြင်း,Đã giao - một phần,បានដឹកជញ្ចូន-ការច្រានចោលជាផ្នែក,Disampaikan - penolakan sebagian,Delivered - partial rejection
 Delivered - rejected upon delivery,Delivered - rejected upon delivery,จัดส่งแล้ว - ปฏิเสธการจัดส่ง,取消訂單,ပေးပို့သည် - ပေးပို့ချိန်တွင် ငြင်းပယ်ခြင်း,Đã giao - trả hàng tại chỗ,បានដឹកជញ្ចូន-បានច្រានចោលនៅពេលដឹកជញ្ជូន,Dikirim - ditolak saat pengiriman,Delivered - rejected upon delivery
 Discount,Discount,ส่วนลด,折扣,လျှော့စျေး,Chiết khấu,បញ្ចុះតម្,Diskon,Discount
@@ -218,7 +218,7 @@ Order Type,Order Type,ประเภทคำสั่งซื้อ,訂單類
 Order Value:,Order Value:,ยอดสั่งซื้อ,訂單金額:,ကုန်ပစ္စည်း အမှာစာ တန်ဖိုး,Giá trị đơn hàng:,តម្លៃនៃការបញ្ជាទិញ:,Nilai pesanan:,Order Value:
 Ordered By,Ordered By,Ordered By,訂購人,Ordered By,Phụ trách đặt hàng: đặt hàng bởi,បញ្ជាទិញដោយ,Dipesan oleh,Ordered By
 Orders,Orders,สั่งซื้อสินค้า,訂單,အမှာစာများ,Đơn đặt hàng,ការបញ្ជាទិញ,Pesanan,Orders
-Out for delivery,Out for delivery,สินค้าถูกส่งออกจากคลังสินค้า,配送中,ပေးပို့ရန်ထွက်လာသည်,Đơn hàng đang đi giao,នៅតាមផ្លូវ,Pesanan dikirimkan,배송 중
+Out for delivery,Out for delivery,กำลังจัดส่ง,配送中,ပို့ဆောင်လျှင်,Đang giao hàng,កំពុងដឹកជញ្ជូន,Pesanan dikirimkan,배송 중
 Out for redelivery,Out for redelivery,อยู่ระหว่างขนส่งอีกครั้ง,配送中,ပြန်လည်ပေးပို့ခြင်းအတွက် ထွက်လာပါပြီ။,Giao lại,ដឹកចេញសារឡើងវិញហើយ,Keluar untuk pengiriman kembali,Out for redelivery
 out of,out of,out of,第,ထဲက,Hết,អស់ពី,dari,out of
 Outstanding,Outstanding,ค้างชำระ,Outstanding,Outstanding,Chưa thanh toán,Outstanding,Luar biasa,Outstanding
@@ -1531,3 +1531,11 @@ This allows you to take pictures and scan codes,This allows you to take pictures
 "Don't allow","Don't allow",ไม่อนุญาต,不允許,အထည့်မည်မျိုးချိ,Không cho phép,មិនទាន់,Tidak diizinkan,허용하지 않기
 Allow,Allow,อนุญาต,允許,ချိမျိုးချိ,Cho phép,ទាន់,Diizinkan,허용하기
 Registration number,Registration number,หมายเลขทะเบียน,註冊號碼,မှတ်ပုံတင်နံပါတ်,Số đăng ký,លេខចុះឈ្មោះ,Nomor Registrasi,등록 번호
+Arrival at customer site,Arrival at customer site,มาถึงสถานที่ลูกค้า,到達客戶地點,သည်သူဌေးကြီးရောက်ရှိ,Đến nơi khách hàng,មកដល់កន្លែងរបស់អតិថិជន,Tiba di lokasi pelanggan,고객 현장 도착
+Partial RUD,Partial RUD,การส่งคืนบางส่วน,部分退貨,ပစိတ်တပ်ဆိုင်း,RUD một phần,RUD ផ្នែកមួយ,RUD Sebagian,부분적 RUD
+Full RUD,Full RUD,การส่งคืนทั้งหมด,全數退貨,ပြီးလ पूर्ण,RUD đầy đủ,RUD ពេញមួយ,RUD Lengkap,전체 RUD
+Redelivery,Redelivery,การส่งคืนใหม่,重新配送,ပুনःပို့ဆောင်ခြင်း,Giao hàng lại,ដឹកជញ្ជូនឡើងវិញ,Pengiriman Ulang,재배송
+POD,POD,หลักฐานการส่ง,收貨單,POD,POD,សំបុត្រទទួលបាន,POD,POD
+Goods Handover,Goods Handover,การโอนมอบสินค้า,貨物交接,စာချုပ်လက်ခံ,Bàn giao hàng hóa,បញ្ជូនទំនិញ,Serah Terima Barang,물품 인수
+2nd Redelivery,2nd Redelivery,การส่งคืนครั้งที่สอง,第二次重新配送,ဒုတိယအကြိမ် ပို့ဆောင်ခြင်း,Giao hàng lần 2,ដឹកជញ្ជូនឡើងវិញទី២,Pengiriman Ulang Kedua,2차 재배송
+3rd Redelivery,3rd Redelivery,การส่งคืนครั้งที่สาม,第三次重新配送,တတိယအကြိမ် ပို့ဆောင်ခြင်း,Giao hàng lần 3,ដឹកជញ្ជូនឡើងវិញទី៣,Pengiriman Ulang Ketiga,3차 재배송
