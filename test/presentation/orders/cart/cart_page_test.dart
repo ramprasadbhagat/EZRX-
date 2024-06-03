@@ -4,6 +4,7 @@ import 'package:ezrxmobile/application/account/customer_license_bloc/customer_li
 import 'package:ezrxmobile/application/order/po_attachment/po_attachment_bloc.dart';
 import 'package:ezrxmobile/application/order/tender_contract/tender_contract_list_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
+import 'package:ezrxmobile/domain/order/entities/tender_contract.dart';
 import 'package:ezrxmobile/domain/utils/string_utils.dart';
 import 'package:ezrxmobile/infrastructure/core/common/tracking_events.dart';
 import 'package:ezrxmobile/locator.dart';
@@ -3400,6 +3401,11 @@ void main() {
       testWidgets(
           'MOV check if cart does not contains any product with principal code 100822 for SG market',
           (tester) async {
+        final cartProduct = [
+          mockCartItems.first.copyWith(
+            tenderContract: TenderContract.empty(),
+          ),
+        ];
         when(() => autoRouterMock.pushNamed('orders/cart/checkout'))
             .thenAnswer((invocation) => Future(() => checkoutPageRouteData));
 
@@ -3410,7 +3416,7 @@ void main() {
         );
         when(() => orderEligibilityBlocMock.state).thenReturn(
           OrderEligibilityState.initial().copyWith(
-            cartItems: [mockCartItems.first],
+            cartItems: cartProduct,
             salesOrg: fakeSGSalesOrganisation,
             configs: fakeSGSalesOrgConfigs,
             subTotal: 10,
@@ -3421,7 +3427,7 @@ void main() {
 
         when(() => cartBloc.state).thenReturn(
           CartState.initial().copyWith(
-            cartProducts: [mockCartItems.first],
+            cartProducts: cartProduct,
           ),
         );
 
@@ -3928,13 +3934,18 @@ void main() {
       group('Marketplace MOV validation -', () {
         testWidgets('When both zp MOV and mp MOV is not eligible',
             (tester) async {
+          final cartProducts = mockCartItemWithAllType
+              .where(
+                (element) => element.tenderContract == TenderContract.empty(),
+              )
+              .toList();
           final salesOrgConfig = fakeMYSalesOrgConfigs;
           when(() => cartBloc.state).thenReturn(
-            CartState.initial().copyWith(cartProducts: mockCartItemWithAllType),
+            CartState.initial().copyWith(cartProducts: cartProducts),
           );
           when(() => orderEligibilityBlocMock.state).thenReturn(
             OrderEligibilityState.initial().copyWith(
-              cartItems: mockCartItemWithAllType,
+              cartItems: cartProducts,
               configs: salesOrgConfig,
               mpSubtotal: salesOrgConfig.mpMinOrderAmount - 1,
               zpSubtotal: salesOrgConfig.minOrderAmount - 1,
@@ -3955,13 +3966,18 @@ void main() {
 
         testWidgets('When zp MOV is eligible and mp MOV is not eligible',
             (tester) async {
+          final cartProducts = mockCartItemWithAllType
+              .where(
+                (element) => element.tenderContract == TenderContract.empty(),
+              )
+              .toList();
           final salesOrgConfig = fakeMYSalesOrgConfigs;
           when(() => cartBloc.state).thenReturn(
-            CartState.initial().copyWith(cartProducts: mockCartItemWithAllType),
+            CartState.initial().copyWith(cartProducts: cartProducts),
           );
           when(() => orderEligibilityBlocMock.state).thenReturn(
             OrderEligibilityState.initial().copyWith(
-              cartItems: mockCartItemWithAllType,
+              cartItems: cartProducts,
               configs: salesOrgConfig,
               mpSubtotal: salesOrgConfig.mpMinOrderAmount - 1,
               zpSubtotal: salesOrgConfig.minOrderAmount,
@@ -4005,13 +4021,18 @@ void main() {
 
         testWidgets('When zp MOV is not eligible and mp MOV is eligible',
             (tester) async {
+          final cartProducts = mockCartItemWithAllType
+              .where(
+                (element) => element.tenderContract == TenderContract.empty(),
+              )
+              .toList();
           final salesOrgConfig = fakeMYSalesOrgConfigs;
           when(() => cartBloc.state).thenReturn(
-            CartState.initial().copyWith(cartProducts: mockCartItemWithAllType),
+            CartState.initial().copyWith(cartProducts: cartProducts),
           );
           when(() => orderEligibilityBlocMock.state).thenReturn(
             OrderEligibilityState.initial().copyWith(
-              cartItems: mockCartItemWithAllType,
+              cartItems: cartProducts,
               configs: salesOrgConfig,
               mpSubtotal: salesOrgConfig.mpMinOrderAmount,
               zpSubtotal: salesOrgConfig.minOrderAmount - 1,

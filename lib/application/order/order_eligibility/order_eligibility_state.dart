@@ -294,6 +294,9 @@ class OrderEligibilityState with _$OrderEligibilityState {
     if (_isCartItemsContainsFOCMaterial) {
       return true;
     }
+    if (cartItems.hasTenderContract) {
+      return true;
+    }
 
     return !isAccountSuspended ? isTotalGreaterThanMinOrderAmount : false;
   }
