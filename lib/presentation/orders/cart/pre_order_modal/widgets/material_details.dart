@@ -19,6 +19,7 @@ class _MaterialDetails extends StatelessWidget {
               Text(
                 cartItem.materialInfo.combinationCode(
                   showGMCPart: eligibilityState.salesOrgConfigs.enableGMC,
+                  showIRNPart: eligibilityState.salesOrgConfigs.enableIRN,
                 ),
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,

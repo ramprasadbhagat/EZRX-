@@ -62,6 +62,7 @@
         materialDescription
         productCount
         Type
+        itemRegistrationNumber
       }
       TenderContractNumber
       tenderOrderReason

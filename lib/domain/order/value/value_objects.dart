@@ -887,3 +887,22 @@ class ScaleBasis extends ValueObject<String> {
 
   const ScaleBasis._(this.value);
 }
+
+class ItemRegistrationNumber extends ValueObject<String> {
+  @override
+  final Either<ValueFailure<String>, String> value;
+
+  factory ItemRegistrationNumber(String input) =>
+      ItemRegistrationNumber._(validateStringNotEmpty(input));
+
+  String get displayDashIfEmpty => dashIfEmpty((value.getOrElse(() => '')));    
+
+  bool get isNotEmpty => value.getOrElse(() => '').isNotEmpty;
+
+  bool get isValueIsNotRequired =>
+      checkIfValueIsNotRequired(value.getOrElse(() => ''));
+
+  bool get isValidIRN => isNotEmpty && !isValueIsNotRequired;
+
+  const ItemRegistrationNumber._(this.value);
+}

@@ -67,7 +67,7 @@ class ProductDetailDto with _$ProductDetailDto {
         hidePrice: hidePrice,
         isFavourite: isFavourite,
         itemBrand: itemBrand,
-        itemRegistrationNumber: itemRegistrationNumber,
+        itemRegistrationNumber: ItemRegistrationNumber(itemRegistrationNumber),
         materialDescription: materialDescription,
         materialNumber: MaterialNumber(materialNumber),
         principalData: PrincipalData(

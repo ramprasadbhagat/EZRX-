@@ -37,6 +37,7 @@ class MaterialsWithMetaQuery {
               GenericMaterialName
               Manufactured
               GovernmentMaterialCode
+              ItemRegistrationNumber
               ${enableMarketplace ? 'isMarketPlace' : ''}
             }
             DataTotalCount

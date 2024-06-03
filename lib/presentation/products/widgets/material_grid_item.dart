@@ -131,6 +131,7 @@ class MaterialGridItem extends StatelessWidget {
                                 .state
                                 .salesOrgConfigs
                                 .enableGMC,
+                            showIRNPart: false,
                           ),
                           overflow: TextOverflow.ellipsis,
                           style:
@@ -139,6 +140,21 @@ class MaterialGridItem extends StatelessWidget {
                                   ),
                           key: WidgetKeys.materialNumberText,
                         ),
+                        if (context
+                                .read<EligibilityBloc>()
+                                .state
+                                .salesOrgConfigs
+                                .enableIRN &&
+                            materialInfo.getIRN.isValidIRN)
+                          Text(
+                            materialInfo.getIRN.getValue(),
+                            overflow: TextOverflow.ellipsis,
+                            style:
+                                Theme.of(context).textTheme.bodySmall?.copyWith(
+                                      color: ZPColors.darkGray,
+                                    ),
+                            key: WidgetKeys.itemRegistrationNumber,
+                          ),
                         Expanded(
                           child: Align(
                             alignment: Alignment.centerLeft,

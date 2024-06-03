@@ -47,6 +47,7 @@ import '../../../common_mock_data/sales_org_config_mock/fake_kh_sales_org_config
 import '../../../common_mock_data/sales_org_config_mock/fake_sg_sales_org_config.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_id_sales_org_config.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_my_sales_org_config.dart';
+import '../../../common_mock_data/sales_org_config_mock/fake_th_sales_org_config.dart';
 import '../../../common_mock_data/sales_organsiation_mock.dart';
 import '../../../utils/widget_utils.dart';
 
@@ -1282,6 +1283,70 @@ void main() {
           matching: find.text('Price Not Available', findRichText: true),
         );
         expect(priceNotAvailableFinder, findsOneWidget);
+      });
+
+      testWidgets('Show IRN when enableIRN is true',
+          (tester) async {
+        const iRNNumber = '12C 234/11';
+
+        final cartItems = cartItem.copyWith(
+          materialInfo: MaterialInfo.empty().copyWith(
+            type: MaterialInfoType('material'),
+            itemRegistrationNumber: ItemRegistrationNumber(iRNNumber),
+          ),
+        );
+
+        when(() => cartBloc.state).thenReturn(
+          CartState.initial().copyWith(
+            cartProducts: [cartItems],
+          ),
+        );
+
+        when(() => eligibilityBloc.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrganisation: fakeTHSalesOrganisation,
+            salesOrgConfigs: fakeTHSalesOrgConfigs.copyWith(
+              enableIRN: true,
+            ),
+          ),
+        );
+
+        await tester.pumpWidget(getWidget());
+        await tester.pump();
+
+        expect(find.textContaining(iRNNumber), findsOneWidget);
+      });
+
+      testWidgets('Do not show IRN when enableIRN is false',
+          (tester) async {
+        const iRNNumber = '12C 234/11';
+
+        final cartItems = cartItem.copyWith(
+          materialInfo: MaterialInfo.empty().copyWith(
+            type: MaterialInfoType('material'),
+            itemRegistrationNumber: ItemRegistrationNumber(iRNNumber),
+          ),
+        );
+
+        when(() => cartBloc.state).thenReturn(
+          CartState.initial().copyWith(
+            cartProducts: [cartItems],
+          ),
+        );
+
+        when(() => eligibilityBloc.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrganisation: fakeTHSalesOrganisation,
+            salesOrgConfigs: fakeTHSalesOrgConfigs.copyWith(
+              enableIRN: false,
+            ),
+          ),
+        );
+
+        await tester.pumpWidget(getWidget());
+        await tester.pump();
+
+        expect(find.textContaining(iRNNumber), findsNothing);
       });
     },
   );

@@ -1730,6 +1730,76 @@ void main() {
           expect(find.byKey(WidgetKeys.marketplaceSellerIcon), findsNothing);
         },
       );
+
+      testWidgets(
+        'Show IRN when enableIRN is true',
+        (tester) async {
+          const iRNNumber = '12C 234/11';
+
+          when(() => orderSummaryBlocMock.state).thenReturn(
+            OrderSummaryState.initial().copyWith(
+              orderHistoryDetailsList: [
+                OrderHistoryDetails.empty().copyWith(
+                  orderHistoryDetailsOrderItem: [
+                    fakeMaterialItem.copyWith(
+                      itemRegistrationNumber: ItemRegistrationNumber(iRNNumber),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          );
+
+          when(() => eligibilityBlocMock.state).thenReturn(
+            EligibilityState.initial().copyWith(
+              salesOrganisation: fakeTHSalesOrganisation,
+              salesOrgConfigs: fakeTHSalesOrgConfigs.copyWith(
+                enableIRN: true,
+              ),
+            ),
+          );
+
+          await tester.pumpWidget(getWidget());
+          await tester.pump();
+
+          expect(find.textContaining(iRNNumber), findsOneWidget);
+        },
+      );
+
+      testWidgets(
+        'Do not show IRN when enableIRN is false',
+        (tester) async {
+          const iRNNumber = '12C 234/11';
+
+          when(() => orderSummaryBlocMock.state).thenReturn(
+            OrderSummaryState.initial().copyWith(
+              orderHistoryDetailsList: [
+                OrderHistoryDetails.empty().copyWith(
+                  orderHistoryDetailsOrderItem: [
+                    fakeMaterialItem.copyWith(
+                      itemRegistrationNumber: ItemRegistrationNumber(iRNNumber),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          );
+
+          when(() => eligibilityBlocMock.state).thenReturn(
+            EligibilityState.initial().copyWith(
+              salesOrganisation: fakeTHSalesOrganisation,
+              salesOrgConfigs: fakeTHSalesOrgConfigs.copyWith(
+                enableIRN: false,
+              ),
+            ),
+          );
+
+          await tester.pumpWidget(getWidget());
+          await tester.pump();
+
+          expect(find.textContaining(iRNNumber), findsNothing);
+        },
+      );
     });
 
     group('List price strike through -', () {

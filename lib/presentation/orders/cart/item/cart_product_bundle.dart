@@ -285,6 +285,11 @@ class _MaterialDetails extends StatelessWidget {
                       .state
                       .salesOrgConfigs
                       .enableGMC,
+                  showIRNPart: context
+                      .read<EligibilityBloc>()
+                      .state
+                      .salesOrgConfigs
+                      .enableIRN,
                 ),
                 key: WidgetKeys.cartItemProductMaterialNumber,
                 style: Theme.of(context).textTheme.bodySmall?.copyWith(

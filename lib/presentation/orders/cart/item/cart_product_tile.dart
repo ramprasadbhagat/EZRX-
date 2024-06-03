@@ -265,6 +265,7 @@ class _MaterialDetails extends StatelessWidget {
                 child: Text(
                   cartItem.materialInfo.combinationCode(
                     showGMCPart: eligibilityState.salesOrgConfigs.enableGMC,
+                    showIRNPart: eligibilityState.salesOrgConfigs.enableIRN,
                   ),
                   key: WidgetKeys.cartItemProductMaterialNumber,
                   maxLines: 2,

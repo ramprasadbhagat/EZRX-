@@ -910,6 +910,7 @@ class PriceAggregate with _$PriceAggregate {
             materialNumber: e.materialNumber,
             materialDescription: e.materialDescription,
             principalData: e.principalData,
+            itemRegistrationNumber: e.itemRegistrationNumber,
           ),
           salesOrgConfig: salesOrgConfig,
           stockInfoList: [e.stockInfo],

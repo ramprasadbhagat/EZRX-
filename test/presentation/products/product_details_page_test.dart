@@ -23,6 +23,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
 import '../../common_mock_data/mock_bloc.dart';
+import '../../common_mock_data/sales_org_config_mock/fake_th_sales_org_config.dart';
+import '../../common_mock_data/sales_organsiation_mock.dart';
 import '../../utils/widget_utils.dart';
 
 void main() {
@@ -223,6 +225,68 @@ void main() {
           offerLabel,
           findsOneWidget,
         );
+      },
+    );
+
+    testWidgets(
+      'Show IRN when enableIRN is true',
+      (tester) async {
+        const iRNNumber = '12C 234/11';
+
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrganisation: fakeTHSalesOrganisation,
+            salesOrgConfigs: fakeTHSalesOrgConfigs.copyWith(
+              enableIRN: true,
+            ),
+          ),
+        );
+
+        when(() => productDetailBloc.state).thenReturn(
+          ProductDetailState.initial().copyWith(
+            productDetailAggregate: ProductDetailAggregate.empty().copyWith(
+              materialInfo: MaterialInfo.empty().copyWith(
+                materialNumber: MaterialNumber('fake-material'),
+                itemRegistrationNumber: ItemRegistrationNumber(iRNNumber),
+              ),
+            ),
+          ),
+        );
+
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pump();
+        expect(find.textContaining(iRNNumber), findsOneWidget);
+      },
+    );
+
+    testWidgets(
+      'Do not show IRN when enableIRN is false',
+      (tester) async {
+        const iRNNumber = '12C 234/11';
+
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrganisation: fakeTHSalesOrganisation,
+            salesOrgConfigs: fakeTHSalesOrgConfigs.copyWith(
+              enableIRN: false,
+            ),
+          ),
+        );
+
+        when(() => productDetailBloc.state).thenReturn(
+          ProductDetailState.initial().copyWith(
+            productDetailAggregate: ProductDetailAggregate.empty().copyWith(
+              materialInfo: MaterialInfo.empty().copyWith(
+                materialNumber: MaterialNumber('fake-material'),
+                itemRegistrationNumber: ItemRegistrationNumber(iRNNumber),
+              ),
+            ),
+          ),
+        );
+
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pump();
+        expect(find.textContaining(iRNNumber), findsNothing);
       },
     );
   });

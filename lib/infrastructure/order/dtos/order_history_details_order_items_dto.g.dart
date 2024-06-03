@@ -41,6 +41,8 @@ _$OrderHistoryDetailsOrderItemDtoImpl
           principalCode: json['PrincipalCode'] as String? ?? '',
           governmentMaterialCode:
               json['GovernmentMaterialCode'] as String? ?? '',
+          itemRegistrationNumber:
+              json['ItemRegistrationNumber'] as String? ?? '',
           productType: _getProductType(json, 'ProductType') as String,
           promosStatus: json['promoStatus'] as bool? ?? false,
           isCounterOffer: json['isCounterOffer'] as bool? ?? false,
@@ -75,6 +77,7 @@ Map<String, dynamic> _$$OrderHistoryDetailsOrderItemDtoImplToJson(
       'PrincipalName': instance.principalName,
       'PrincipalCode': instance.principalCode,
       'GovernmentMaterialCode': instance.governmentMaterialCode,
+      'ItemRegistrationNumber': instance.itemRegistrationNumber,
       'ProductType': instance.productType,
       'promoStatus': instance.promosStatus,
       'isCounterOffer': instance.isCounterOffer,

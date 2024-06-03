@@ -168,7 +168,9 @@ class _MaterialDetails extends StatelessWidget {
             runSpacing: 4,
             children: [
               Text(
-                bonusItem.materialNumber.displayMatNo,
+                bonusItem.combinationCode(
+                  showIRNPart: eligibilityState.salesOrgConfigs.enableIRN,
+                ),
                 style: Theme.of(context).textTheme.bodySmall?.copyWith(
                       color: ZPColors.darkGray,
                     ),

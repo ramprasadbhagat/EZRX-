@@ -25,7 +25,7 @@ _$MaterialDtoImpl _$$MaterialDtoImplFromJson(Map<String, dynamic> json) =>
       defaultMaterialDescription:
           json['defaultMaterialDescription'] as String? ?? '',
       isFOCMaterial: json['isFOCMaterial'] as bool? ?? false,
-      quantity: _validateQantity(json, 'quantity') as int? ?? 0,
+      quantity: (_validateQantity(json, 'quantity') as num?)?.toInt() ?? 0,
       remarks: json['remarks'] as String? ?? '',
       genericMaterialName: json['genericMaterialName'] as String? ?? '',
       ean: json['ean'] as String? ?? '',
@@ -40,8 +40,8 @@ _$MaterialDtoImpl _$$MaterialDtoImplFromJson(Map<String, dynamic> json) =>
       isFavourite: json['isFavourite'] as bool? ?? false,
       type: json['type'] as String? ?? 'material',
       hidePrice: json['hidePrice'] as bool? ?? false,
-      dataTotalCount: json['dataTotalCount'] as int? ?? 0,
-      dataTotalHidden: json['dataTotalHidden'] as int? ?? 0,
+      dataTotalCount: (json['dataTotalCount'] as num?)?.toInt() ?? 0,
+      dataTotalHidden: (json['dataTotalHidden'] as num?)?.toInt() ?? 0,
       isGimmick: json['isGimmick'] as bool? ?? false,
       data: (json['data'] as List<dynamic>?)
               ?.map((e) => MaterialDataDto.fromJson(e as Map<String, dynamic>))
@@ -106,6 +106,7 @@ _$MaterialDataDtoImpl _$$MaterialDataDtoImplFromJson(
           json['defaultMaterialDescription'] as String? ?? '',
       genericMaterialName: json['genericMaterialName'] as String? ?? '',
       governmentMaterialCode: json['governmentMaterialCode'] as String? ?? '',
+      itemRegistrationNumber: json['itemRegistrationNumber'] as String? ?? '',
       isMarketPlace:
           mappingIsMarketPlace(json, 'isMarketPlace') as bool? ?? false,
     );
@@ -119,13 +120,14 @@ Map<String, dynamic> _$$MaterialDataDtoImplToJson(
       'defaultMaterialDescription': instance.defaultMaterialDescription,
       'genericMaterialName': instance.genericMaterialName,
       'governmentMaterialCode': instance.governmentMaterialCode,
+      'itemRegistrationNumber': instance.itemRegistrationNumber,
       'isMarketPlace': instance.isMarketPlace,
     };
 
 _$MaterialResponseDtoImpl _$$MaterialResponseDtoImplFromJson(
         Map<String, dynamic> json) =>
     _$MaterialResponseDtoImpl(
-      count: json['count'] as int? ?? 0,
+      count: (json['count'] as num?)?.toInt() ?? 0,
       products: (json['products'] as List<dynamic>?)
               ?.map((e) => MaterialDto.fromJson(e as Map<String, dynamic>))
               .toList() ??

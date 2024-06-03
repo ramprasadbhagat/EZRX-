@@ -6,11 +6,11 @@ part of 'bonus_sample_item_dto.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_BonusSampleItemDto _$$_BonusSampleItemDtoFromJson(
+_$BonusSampleItemDtoImpl _$$BonusSampleItemDtoImplFromJson(
         Map<String, dynamic> json) =>
-    _$_BonusSampleItemDto(
+    _$BonusSampleItemDtoImpl(
       materialNumber: json['materialNumber'] as String? ?? '',
-      qty: json['productCount'] as int? ?? 0,
+      qty: (json['productCount'] as num?)?.toInt() ?? 0,
       principalName: json['principalName'] as String? ?? '',
       materialDescription: json['materialDescription'] as String? ?? '',
       defaultMaterialDescription:
@@ -18,10 +18,11 @@ _$_BonusSampleItemDto _$$_BonusSampleItemDtoFromJson(
       principalCode: json['principalCode'] as String? ?? '',
       itemId: json['itemId'] as String? ?? '',
       type: json['type'] as String? ?? '',
+      itemRegistrationNumber: json['itemRegistrationNumber'] as String? ?? '',
     );
 
-Map<String, dynamic> _$$_BonusSampleItemDtoToJson(
-        _$_BonusSampleItemDto instance) =>
+Map<String, dynamic> _$$BonusSampleItemDtoImplToJson(
+        _$BonusSampleItemDtoImpl instance) =>
     <String, dynamic>{
       'materialNumber': instance.materialNumber,
       'productCount': instance.qty,
@@ -31,4 +32,5 @@ Map<String, dynamic> _$$_BonusSampleItemDtoToJson(
       'principalCode': instance.principalCode,
       'itemId': instance.itemId,
       'type': instance.type,
+      'itemRegistrationNumber': instance.itemRegistrationNumber,
     };

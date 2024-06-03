@@ -60,6 +60,11 @@ class BonusMaterialTile extends StatelessWidget {
                         .state
                         .salesOrgConfigs
                         .enableGMC,
+                    showIRNPart: context
+                        .read<EligibilityBloc>()
+                        .state
+                        .salesOrgConfigs
+                        .enableIRN,
                   ),
                   key: WidgetKeys.bonusSampleSheetItemMaterialNumber,
                   style: Theme.of(context).textTheme.bodySmall,

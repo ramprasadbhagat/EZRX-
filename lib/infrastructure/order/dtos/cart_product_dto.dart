@@ -104,7 +104,7 @@ class CartProductDto with _$CartProductDto {
     return CartProductDto(
       genericMaterialName: cartItemDetails.materialInfo.genericMaterialName,
       itemRegistrationNumber:
-          cartItemDetails.materialInfo.itemRegistrationNumber,
+          cartItemDetails.materialInfo.getIRN.getValue(),
       materialDescription: cartItemDetails.materialInfo.materialDescription,
       materialNumber: cartItemDetails.materialInfo.materialNumber.getOrCrash(),
       parentID: cartItemDetails.materialInfo.parentID,
@@ -170,7 +170,7 @@ class CartProductDto with _$CartProductDto {
   MaterialInfo get toMaterialInfo {
     return MaterialInfo.empty().copyWith(
       genericMaterialName: genericMaterialName,
-      itemRegistrationNumber: itemRegistrationNumber,
+      itemRegistrationNumber: ItemRegistrationNumber(itemRegistrationNumber),
       materialDescription: materialDescription,
       materialNumber: MaterialNumber(productID),
       parentID: parentID,

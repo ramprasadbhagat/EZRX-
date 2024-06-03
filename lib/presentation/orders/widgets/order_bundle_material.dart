@@ -95,6 +95,7 @@ class BundleItemMaterial extends StatelessWidget {
                       Text(
                         orderItem.combinationCode(
                           showGMCPart: configs.enableGMC,
+                          showIRNPart: configs.enableIRN,
                         ),
                         style: Theme.of(context).textTheme.bodySmall?.copyWith(
                               color: ZPColors.neutralsBlack,

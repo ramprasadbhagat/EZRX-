@@ -142,6 +142,7 @@ class _PreOrderBundleMaterialTile extends StatelessWidget {
                   Text(
                     bundleMaterial.combinationCode(
                       showGMCPart: salesOrgConfig.enableGMC,
+                      showIRNPart: salesOrgConfig.enableIRN,
                     ),
                     key: WidgetKeys.cartItemProductMaterialNumber,
                     style: Theme.of(context).textTheme.bodySmall?.copyWith(

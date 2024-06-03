@@ -73,6 +73,8 @@ mixin _$OrderHistoryDetailsOrderItemDto {
   String get principalCode => throw _privateConstructorUsedError;
   @JsonKey(name: 'GovernmentMaterialCode', defaultValue: '')
   String get governmentMaterialCode => throw _privateConstructorUsedError;
+  @JsonKey(name: 'ItemRegistrationNumber', defaultValue: '')
+  String get itemRegistrationNumber => throw _privateConstructorUsedError;
   @JsonKey(name: 'ProductType', readValue: _getProductType)
   String get productType => throw _privateConstructorUsedError;
   @JsonKey(name: 'promoStatus', defaultValue: false)
@@ -137,6 +139,8 @@ abstract class $OrderHistoryDetailsOrderItemDtoCopyWith<$Res> {
       @JsonKey(name: 'PrincipalCode', defaultValue: '') String principalCode,
       @JsonKey(name: 'GovernmentMaterialCode', defaultValue: '')
       String governmentMaterialCode,
+      @JsonKey(name: 'ItemRegistrationNumber', defaultValue: '')
+      String itemRegistrationNumber,
       @JsonKey(name: 'ProductType', readValue: _getProductType)
       String productType,
       @JsonKey(name: 'promoStatus', defaultValue: false) bool promosStatus,
@@ -185,6 +189,7 @@ class _$OrderHistoryDetailsOrderItemDtoCopyWithImpl<$Res,
     Object? principalName = null,
     Object? principalCode = null,
     Object? governmentMaterialCode = null,
+    Object? itemRegistrationNumber = null,
     Object? productType = null,
     Object? promosStatus = null,
     Object? isCounterOffer = null,
@@ -281,6 +286,10 @@ class _$OrderHistoryDetailsOrderItemDtoCopyWithImpl<$Res,
           ? _value.governmentMaterialCode
           : governmentMaterialCode // ignore: cast_nullable_to_non_nullable
               as String,
+      itemRegistrationNumber: null == itemRegistrationNumber
+          ? _value.itemRegistrationNumber
+          : itemRegistrationNumber // ignore: cast_nullable_to_non_nullable
+              as String,
       productType: null == productType
           ? _value.productType
           : productType // ignore: cast_nullable_to_non_nullable
@@ -365,6 +374,8 @@ abstract class _$$OrderHistoryDetailsOrderItemDtoImplCopyWith<$Res>
       @JsonKey(name: 'PrincipalCode', defaultValue: '') String principalCode,
       @JsonKey(name: 'GovernmentMaterialCode', defaultValue: '')
       String governmentMaterialCode,
+      @JsonKey(name: 'ItemRegistrationNumber', defaultValue: '')
+      String itemRegistrationNumber,
       @JsonKey(name: 'ProductType', readValue: _getProductType)
       String productType,
       @JsonKey(name: 'promoStatus', defaultValue: false) bool promosStatus,
@@ -413,6 +424,7 @@ class __$$OrderHistoryDetailsOrderItemDtoImplCopyWithImpl<$Res>
     Object? principalName = null,
     Object? principalCode = null,
     Object? governmentMaterialCode = null,
+    Object? itemRegistrationNumber = null,
     Object? productType = null,
     Object? promosStatus = null,
     Object? isCounterOffer = null,
@@ -509,6 +521,10 @@ class __$$OrderHistoryDetailsOrderItemDtoImplCopyWithImpl<$Res>
           ? _value.governmentMaterialCode
           : governmentMaterialCode // ignore: cast_nullable_to_non_nullable
               as String,
+      itemRegistrationNumber: null == itemRegistrationNumber
+          ? _value.itemRegistrationNumber
+          : itemRegistrationNumber // ignore: cast_nullable_to_non_nullable
+              as String,
       productType: null == productType
           ? _value.productType
           : productType // ignore: cast_nullable_to_non_nullable
@@ -575,13 +591,17 @@ class _$OrderHistoryDetailsOrderItemDtoImpl
           name: 'TenderContractDetails',
           readValue: orderHistoryDetailsOrderItemTenderContractDetailsOverride)
       required this.tenderContractDetails,
-      @JsonKey(name: 'PrincipalName', defaultValue: '')
+      @JsonKey(
+          name: 'PrincipalName', defaultValue: '')
       required this.principalName,
       @JsonKey(
           name: 'PrincipalCode', defaultValue: '')
       required this.principalCode,
-      @JsonKey(name: 'GovernmentMaterialCode', defaultValue: '')
+      @JsonKey(
+          name: 'GovernmentMaterialCode', defaultValue: '')
       required this.governmentMaterialCode,
+      @JsonKey(name: 'ItemRegistrationNumber', defaultValue: '')
+      required this.itemRegistrationNumber,
       @JsonKey(name: 'ProductType', readValue: _getProductType)
       required this.productType,
       @JsonKey(name: 'promoStatus', defaultValue: false)
@@ -678,6 +698,9 @@ class _$OrderHistoryDetailsOrderItemDtoImpl
   @JsonKey(name: 'GovernmentMaterialCode', defaultValue: '')
   final String governmentMaterialCode;
   @override
+  @JsonKey(name: 'ItemRegistrationNumber', defaultValue: '')
+  final String itemRegistrationNumber;
+  @override
   @JsonKey(name: 'ProductType', readValue: _getProductType)
   final String productType;
   @override
@@ -698,7 +721,7 @@ class _$OrderHistoryDetailsOrderItemDtoImpl
 
   @override
   String toString() {
-    return 'OrderHistoryDetailsOrderItemDto(type: $type, materialNumber: $materialNumber, materialDescription: $materialDescription, qty: $qty, unitPrice: $unitPrice, originPrice: $originPrice, totalPrice: $totalPrice, tax: $tax, sAPStatus: $sAPStatus, plannedDeliveryDate: $plannedDeliveryDate, pickedQuantity: $pickedQuantity, batch: $batch, expiryDate: $expiryDate, lineReferenceNotes: $lineReferenceNotes, lineNumber: $lineNumber, isTenderContractMaterial: $isTenderContractMaterial, parentId: $parentId, details: $details, tenderContractDetails: $tenderContractDetails, principalName: $principalName, principalCode: $principalCode, governmentMaterialCode: $governmentMaterialCode, productType: $productType, promosStatus: $promosStatus, isCounterOffer: $isCounterOffer, hidePrice: $hidePrice, isMarketPlace: $isMarketPlace, isCovid: $isCovid)';
+    return 'OrderHistoryDetailsOrderItemDto(type: $type, materialNumber: $materialNumber, materialDescription: $materialDescription, qty: $qty, unitPrice: $unitPrice, originPrice: $originPrice, totalPrice: $totalPrice, tax: $tax, sAPStatus: $sAPStatus, plannedDeliveryDate: $plannedDeliveryDate, pickedQuantity: $pickedQuantity, batch: $batch, expiryDate: $expiryDate, lineReferenceNotes: $lineReferenceNotes, lineNumber: $lineNumber, isTenderContractMaterial: $isTenderContractMaterial, parentId: $parentId, details: $details, tenderContractDetails: $tenderContractDetails, principalName: $principalName, principalCode: $principalCode, governmentMaterialCode: $governmentMaterialCode, itemRegistrationNumber: $itemRegistrationNumber, productType: $productType, promosStatus: $promosStatus, isCounterOffer: $isCounterOffer, hidePrice: $hidePrice, isMarketPlace: $isMarketPlace, isCovid: $isCovid)';
   }
 
   @override
@@ -746,6 +769,8 @@ class _$OrderHistoryDetailsOrderItemDtoImpl
                 other.principalCode == principalCode) &&
             (identical(other.governmentMaterialCode, governmentMaterialCode) ||
                 other.governmentMaterialCode == governmentMaterialCode) &&
+            (identical(other.itemRegistrationNumber, itemRegistrationNumber) ||
+                other.itemRegistrationNumber == itemRegistrationNumber) &&
             (identical(other.productType, productType) ||
                 other.productType == productType) &&
             (identical(other.promosStatus, promosStatus) ||
@@ -785,6 +810,7 @@ class _$OrderHistoryDetailsOrderItemDtoImpl
         principalName,
         principalCode,
         governmentMaterialCode,
+        itemRegistrationNumber,
         productType,
         promosStatus,
         isCounterOffer,
@@ -858,6 +884,8 @@ abstract class _OrderHistoryDetailsOrderItemDto
       required final String principalCode,
       @JsonKey(name: 'GovernmentMaterialCode', defaultValue: '')
       required final String governmentMaterialCode,
+      @JsonKey(name: 'ItemRegistrationNumber', defaultValue: '')
+      required final String itemRegistrationNumber,
       @JsonKey(name: 'ProductType', readValue: _getProductType)
       required final String productType,
       @JsonKey(name: 'promoStatus', defaultValue: false)
@@ -947,6 +975,9 @@ abstract class _OrderHistoryDetailsOrderItemDto
   @override
   @JsonKey(name: 'GovernmentMaterialCode', defaultValue: '')
   String get governmentMaterialCode;
+  @override
+  @JsonKey(name: 'ItemRegistrationNumber', defaultValue: '')
+  String get itemRegistrationNumber;
   @override
   @JsonKey(name: 'ProductType', readValue: _getProductType)
   String get productType;

@@ -40,7 +40,8 @@ mixin _$MaterialInfo {
   String get therapeuticClass => throw _privateConstructorUsedError;
   MaterialTaxClassification get taxClassification =>
       throw _privateConstructorUsedError;
-  String get itemRegistrationNumber => throw _privateConstructorUsedError;
+  ItemRegistrationNumber get itemRegistrationNumber =>
+      throw _privateConstructorUsedError;
   String get genericMaterialName => throw _privateConstructorUsedError;
   String get remarks => throw _privateConstructorUsedError;
   bool get promoStatus => throw _privateConstructorUsedError;
@@ -98,7 +99,7 @@ abstract class $MaterialInfoCopyWith<$Res> {
       String parentID,
       String therapeuticClass,
       MaterialTaxClassification taxClassification,
-      String itemRegistrationNumber,
+      ItemRegistrationNumber itemRegistrationNumber,
       String genericMaterialName,
       String remarks,
       bool promoStatus,
@@ -279,7 +280,7 @@ class _$MaterialInfoCopyWithImpl<$Res, $Val extends MaterialInfo>
       itemRegistrationNumber: null == itemRegistrationNumber
           ? _value.itemRegistrationNumber
           : itemRegistrationNumber // ignore: cast_nullable_to_non_nullable
-              as String,
+              as ItemRegistrationNumber,
       genericMaterialName: null == genericMaterialName
           ? _value.genericMaterialName
           : genericMaterialName // ignore: cast_nullable_to_non_nullable
@@ -433,7 +434,7 @@ abstract class _$$MaterialInfoImplCopyWith<$Res>
       String parentID,
       String therapeuticClass,
       MaterialTaxClassification taxClassification,
-      String itemRegistrationNumber,
+      ItemRegistrationNumber itemRegistrationNumber,
       String genericMaterialName,
       String remarks,
       bool promoStatus,
@@ -617,7 +618,7 @@ class __$$MaterialInfoImplCopyWithImpl<$Res>
       itemRegistrationNumber: null == itemRegistrationNumber
           ? _value.itemRegistrationNumber
           : itemRegistrationNumber // ignore: cast_nullable_to_non_nullable
-              as String,
+              as ItemRegistrationNumber,
       genericMaterialName: null == genericMaterialName
           ? _value.genericMaterialName
           : genericMaterialName // ignore: cast_nullable_to_non_nullable
@@ -809,7 +810,7 @@ class _$MaterialInfoImpl extends _MaterialInfo {
   @override
   final MaterialTaxClassification taxClassification;
   @override
-  final String itemRegistrationNumber;
+  final ItemRegistrationNumber itemRegistrationNumber;
   @override
   final String genericMaterialName;
   @override
@@ -1028,7 +1029,7 @@ abstract class _MaterialInfo extends MaterialInfo {
       required final String parentID,
       required final String therapeuticClass,
       required final MaterialTaxClassification taxClassification,
-      required final String itemRegistrationNumber,
+      required final ItemRegistrationNumber itemRegistrationNumber,
       required final String genericMaterialName,
       required final String remarks,
       required final bool promoStatus,
@@ -1097,7 +1098,7 @@ abstract class _MaterialInfo extends MaterialInfo {
   @override
   MaterialTaxClassification get taxClassification;
   @override
-  String get itemRegistrationNumber;
+  ItemRegistrationNumber get itemRegistrationNumber;
   @override
   String get genericMaterialName;
   @override
@@ -1150,6 +1151,8 @@ mixin _$MaterialData {
   String get defaultMaterialDescription => throw _privateConstructorUsedError;
   String get genericMaterialName => throw _privateConstructorUsedError;
   StringValue get governmentMaterialCode => throw _privateConstructorUsedError;
+  ItemRegistrationNumber get itemRegistrationNumber =>
+      throw _privateConstructorUsedError;
   bool get isMarketPlace => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -1170,6 +1173,7 @@ abstract class $MaterialDataCopyWith<$Res> {
       String defaultMaterialDescription,
       String genericMaterialName,
       StringValue governmentMaterialCode,
+      ItemRegistrationNumber itemRegistrationNumber,
       bool isMarketPlace});
 }
 
@@ -1192,6 +1196,7 @@ class _$MaterialDataCopyWithImpl<$Res, $Val extends MaterialData>
     Object? defaultMaterialDescription = null,
     Object? genericMaterialName = null,
     Object? governmentMaterialCode = null,
+    Object? itemRegistrationNumber = null,
     Object? isMarketPlace = null,
   }) {
     return _then(_value.copyWith(
@@ -1219,6 +1224,10 @@ class _$MaterialDataCopyWithImpl<$Res, $Val extends MaterialData>
           ? _value.governmentMaterialCode
           : governmentMaterialCode // ignore: cast_nullable_to_non_nullable
               as StringValue,
+      itemRegistrationNumber: null == itemRegistrationNumber
+          ? _value.itemRegistrationNumber
+          : itemRegistrationNumber // ignore: cast_nullable_to_non_nullable
+              as ItemRegistrationNumber,
       isMarketPlace: null == isMarketPlace
           ? _value.isMarketPlace
           : isMarketPlace // ignore: cast_nullable_to_non_nullable
@@ -1242,6 +1251,7 @@ abstract class _$$MaterialDataImplCopyWith<$Res>
       String defaultMaterialDescription,
       String genericMaterialName,
       StringValue governmentMaterialCode,
+      ItemRegistrationNumber itemRegistrationNumber,
       bool isMarketPlace});
 }
 
@@ -1262,6 +1272,7 @@ class __$$MaterialDataImplCopyWithImpl<$Res>
     Object? defaultMaterialDescription = null,
     Object? genericMaterialName = null,
     Object? governmentMaterialCode = null,
+    Object? itemRegistrationNumber = null,
     Object? isMarketPlace = null,
   }) {
     return _then(_$MaterialDataImpl(
@@ -1289,6 +1300,10 @@ class __$$MaterialDataImplCopyWithImpl<$Res>
           ? _value.governmentMaterialCode
           : governmentMaterialCode // ignore: cast_nullable_to_non_nullable
               as StringValue,
+      itemRegistrationNumber: null == itemRegistrationNumber
+          ? _value.itemRegistrationNumber
+          : itemRegistrationNumber // ignore: cast_nullable_to_non_nullable
+              as ItemRegistrationNumber,
       isMarketPlace: null == isMarketPlace
           ? _value.isMarketPlace
           : isMarketPlace // ignore: cast_nullable_to_non_nullable
@@ -1307,6 +1322,7 @@ class _$MaterialDataImpl extends _MaterialData {
       required this.defaultMaterialDescription,
       required this.genericMaterialName,
       required this.governmentMaterialCode,
+      required this.itemRegistrationNumber,
       required this.isMarketPlace})
       : super._();
 
@@ -1323,11 +1339,13 @@ class _$MaterialDataImpl extends _MaterialData {
   @override
   final StringValue governmentMaterialCode;
   @override
+  final ItemRegistrationNumber itemRegistrationNumber;
+  @override
   final bool isMarketPlace;
 
   @override
   String toString() {
-    return 'MaterialData(materialNumber: $materialNumber, manufactured: $manufactured, materialDescription: $materialDescription, defaultMaterialDescription: $defaultMaterialDescription, genericMaterialName: $genericMaterialName, governmentMaterialCode: $governmentMaterialCode, isMarketPlace: $isMarketPlace)';
+    return 'MaterialData(materialNumber: $materialNumber, manufactured: $manufactured, materialDescription: $materialDescription, defaultMaterialDescription: $defaultMaterialDescription, genericMaterialName: $genericMaterialName, governmentMaterialCode: $governmentMaterialCode, itemRegistrationNumber: $itemRegistrationNumber, isMarketPlace: $isMarketPlace)';
   }
 
   @override
@@ -1349,6 +1367,8 @@ class _$MaterialDataImpl extends _MaterialData {
                 other.genericMaterialName == genericMaterialName) &&
             (identical(other.governmentMaterialCode, governmentMaterialCode) ||
                 other.governmentMaterialCode == governmentMaterialCode) &&
+            (identical(other.itemRegistrationNumber, itemRegistrationNumber) ||
+                other.itemRegistrationNumber == itemRegistrationNumber) &&
             (identical(other.isMarketPlace, isMarketPlace) ||
                 other.isMarketPlace == isMarketPlace));
   }
@@ -1362,6 +1382,7 @@ class _$MaterialDataImpl extends _MaterialData {
       defaultMaterialDescription,
       genericMaterialName,
       governmentMaterialCode,
+      itemRegistrationNumber,
       isMarketPlace);
 
   @JsonKey(ignore: true)
@@ -1379,6 +1400,7 @@ abstract class _MaterialData extends MaterialData {
       required final String defaultMaterialDescription,
       required final String genericMaterialName,
       required final StringValue governmentMaterialCode,
+      required final ItemRegistrationNumber itemRegistrationNumber,
       required final bool isMarketPlace}) = _$MaterialDataImpl;
   _MaterialData._() : super._();
 
@@ -1394,6 +1416,8 @@ abstract class _MaterialData extends MaterialData {
   String get genericMaterialName;
   @override
   StringValue get governmentMaterialCode;
+  @override
+  ItemRegistrationNumber get itemRegistrationNumber;
   @override
   bool get isMarketPlace;
   @override

@@ -19,6 +19,7 @@ class BonusSampleItem with _$BonusSampleItem {
     required PrincipalData principalData,
     required MaterialInfoType type,
     required StockInfo stockInfo,
+    required ItemRegistrationNumber itemRegistrationNumber,
   }) = _BonusSampleItem;
 
   factory BonusSampleItem.empty() => BonusSampleItem(
@@ -29,5 +30,12 @@ class BonusSampleItem with _$BonusSampleItem {
         principalData: PrincipalData.empty(),
         type: MaterialInfoType(''),
         stockInfo: StockInfo.empty(),
+        itemRegistrationNumber: ItemRegistrationNumber(''),
       );
+
+  String combinationCode({required bool showIRNPart}) => <String>[
+        materialNumber.displayMatNo,
+        if (showIRNPart && itemRegistrationNumber.isValidIRN)
+          itemRegistrationNumber.getValue(),
+      ].join(' | ');
 }

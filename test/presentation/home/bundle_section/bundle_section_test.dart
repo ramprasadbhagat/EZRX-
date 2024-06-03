@@ -63,7 +63,8 @@ void main() {
     defaultMaterialDescription: 'defaultMaterialDescription',
     genericMaterialName: '1234567',
     governmentMaterialCode: StringValue('1234567'),
-    isMarketPlace: false,
+    isMarketPlace: false, 
+    itemRegistrationNumber: ItemRegistrationNumber(''),
   );
 
   setUpAll(() async {

@@ -73,6 +73,7 @@ class _ViewByOrderItemTile extends StatelessWidget {
                                 child: Text(
                                   orderHistoryItem.combinationCode(
                                     showGMCPart: salesOrgConfigs.enableGMC,
+                                    showIRNPart: salesOrgConfigs.enableIRN,
                                   ),
                                   key: WidgetKeys.viewOrderByItemTileLabel,
                                   style: Theme.of(context).textTheme.titleSmall,

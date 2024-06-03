@@ -68,6 +68,7 @@ class WidgetKeys {
   static const Key payerInformation = Key('payerInformation');
   static const Key orderItemUnitPrice = Key('orderItemUnitPrice');
   static const Key governmentNumber = Key('governmentNumber');
+  static const Key itemRegistrationNumber = Key('itemRegistrationNumber');
   static const Key billToCustomerCode = Key('billToCustomerCode');
   static const Key billToAddress = Key('billToAddress');
   static const Key tenderTag = Key('tenderTag');

@@ -58,6 +58,7 @@ class OrderHistoryItem with _$OrderHistoryItem {
     required TenderContractReason tenderOrderReason,
     required bool isCovid,
     required bool isTenderExpired,
+    required ItemRegistrationNumber itemRegistrationNumber,
   }) = _OrderHistoryItem;
 
   factory OrderHistoryItem.empty() => OrderHistoryItem(
@@ -76,6 +77,7 @@ class OrderHistoryItem with _$OrderHistoryItem {
         invoiceNumber: StringValue(''),
         isBonusMaterial: false,
         governmentMaterialCode: '',
+        itemRegistrationNumber: ItemRegistrationNumber(''),
         pOReference: POReference(''),
         telephoneNumber: PhoneNumber(''),
         productImages: ProductImages.empty(),
@@ -181,10 +183,16 @@ class OrderHistoryItem with _$OrderHistoryItem {
 
   bool get batchNumHasData => batch.isValid() || expiryDate.isNotEmpty;
 
-  String combinationCode({required bool showGMCPart}) => <String>[
+  String combinationCode({
+    required bool showGMCPart,
+    required bool showIRNPart,
+  }) =>
+      <String>[
         materialNumber.displayMatNo,
         if (showGMCPart && governmentMaterialCode.isNotEmpty)
           governmentMaterialCode,
+        if (showIRNPart && itemRegistrationNumber.isValidIRN)
+          itemRegistrationNumber.getValue(),
       ].join(' | ');
 
   double get taxPercentage =>

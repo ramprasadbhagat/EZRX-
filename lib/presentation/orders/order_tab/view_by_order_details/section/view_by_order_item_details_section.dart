@@ -105,6 +105,7 @@ class _OrderItemTile extends StatelessWidget {
       ),
       label: orderItem.combinationCode(
         showGMCPart: salesOrgConfig.enableGMC,
+        showIRNPart: salesOrgConfig.enableIRN,
       ),
       tenderContractSection:
           orderItem.orderItemTenderContract.tenderOrderReason.isEmpty

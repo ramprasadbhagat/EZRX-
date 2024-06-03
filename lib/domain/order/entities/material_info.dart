@@ -40,7 +40,7 @@ class MaterialInfo with _$MaterialInfo {
     required String parentID,
     required String therapeuticClass,
     required MaterialTaxClassification taxClassification,
-    required String itemRegistrationNumber,
+    required ItemRegistrationNumber itemRegistrationNumber,
     required String genericMaterialName,
     required String remarks,
     required bool promoStatus,
@@ -74,7 +74,7 @@ class MaterialInfo with _$MaterialInfo {
           principalCode: PrincipalCode(''),
         ),
         taxClassification: MaterialTaxClassification(''),
-        itemRegistrationNumber: '',
+        itemRegistrationNumber: ItemRegistrationNumber(''),
         unitOfMeasurement: StringValue(''),
         materialGroup2: MaterialGroup.two(''),
         materialGroup4: MaterialGroup.four(''),
@@ -182,9 +182,12 @@ class MaterialInfo with _$MaterialInfo {
           ? data.first.governmentMaterialCode
           : governmentMaterialCode;
 
-  String combinationCode({required bool showGMCPart}) => <String>[
+  String combinationCode(
+          {required bool showGMCPart, required bool showIRNPart,}) =>
+      <String>[
         materialNumber.displayMatNo,
         if (showGMCPart && getGMC.isNotEmpty) getGMC.getValue(),
+        if (showIRNPart && getIRN.isValidIRN) getIRN.getValue(),
       ].join(' | ');
 
   StockInfo get bundleStockInfoValid => stockInfos.firstWhere(
@@ -197,6 +200,11 @@ class MaterialInfo with _$MaterialInfo {
   }
 
   bool get isValidMaterial => type.typeMaterial && materialNumber.isValid();
+
+  ItemRegistrationNumber get getIRN =>
+      data.isNotEmpty && data.first.itemRegistrationNumber.isNotEmpty
+          ? data.first.itemRegistrationNumber
+          : itemRegistrationNumber;
 }
 
 @freezed
@@ -209,6 +217,7 @@ class MaterialData with _$MaterialData {
     required String defaultMaterialDescription,
     required String genericMaterialName,
     required StringValue governmentMaterialCode,
+    required ItemRegistrationNumber itemRegistrationNumber,
     required bool isMarketPlace,
   }) = _MaterialData;
 
@@ -219,6 +228,7 @@ class MaterialData with _$MaterialData {
         defaultMaterialDescription: '',
         genericMaterialName: '',
         governmentMaterialCode: StringValue(''),
+        itemRegistrationNumber: ItemRegistrationNumber(''),
         isMarketPlace: false,
       );
 
@@ -233,6 +243,7 @@ class MaterialData with _$MaterialData {
         genericMaterialName: genericMaterialName,
         productImages: ProductImages.empty(),
         governmentMaterialCode: governmentMaterialCode,
+        itemRegistrationNumber: itemRegistrationNumber,
         isMarketPlace: isMarketPlace,
       );
 }

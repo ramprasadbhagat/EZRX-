@@ -183,6 +183,7 @@ class _BundleMaterialTile extends StatelessWidget {
                       child: Text(
                         orderItem.combinationCode(
                           showGMCPart: configs.enableGMC,
+                          showIRNPart: configs.enableIRN,
                         ),
                         style: Theme.of(context).textTheme.bodySmall?.copyWith(
                               color: ZPColors.neutralsBlack,

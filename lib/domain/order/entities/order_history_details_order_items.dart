@@ -53,6 +53,7 @@ class OrderHistoryDetailsOrderItem with _$OrderHistoryDetailsOrderItem {
     required bool isMarketPlace,
     required bool isCovid,
     required StringValue invoiceNumber,
+    required ItemRegistrationNumber itemRegistrationNumber,
   }) = _OrderHistoryDetailsOrderItem;
 
   factory OrderHistoryDetailsOrderItem.empty() => OrderHistoryDetailsOrderItem(
@@ -77,6 +78,7 @@ class OrderHistoryDetailsOrderItem with _$OrderHistoryDetailsOrderItem {
         principalData: PrincipalData.empty(),
         productImages: ProductImages.empty(),
         governmentMaterialCode: '',
+        itemRegistrationNumber: ItemRegistrationNumber(''),
         materialStockInfo: MaterialStockInfo.empty(),
         priceAggregate: PriceAggregate.empty(),
         productType: MaterialInfoType(''),
@@ -194,10 +196,15 @@ class OrderHistoryDetailsOrderItem with _$OrderHistoryDetailsOrderItem {
 
   double get getListPrice => originPrice - tax;
 
-  String combinationCode({required bool showGMCPart}) => <String>[
+  String combinationCode({
+    required bool showGMCPart,
+    required bool showIRNPart,
+  }) =>
+      <String>[
         materialNumber.displayMatNo,
         if (showGMCPart && governmentMaterialCode.isNotEmpty)
           governmentMaterialCode,
+        if (showIRNPart && itemRegistrationNumber.isValidIRN) itemRegistrationNumber.getValue(),
       ].join(' | ');
 
   bool get showItemTax =>

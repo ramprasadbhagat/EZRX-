@@ -271,3 +271,6 @@ String getTenderOrderReasonTitle(String status) {
       return 'Non-Contract Tender';
   }
 }
+
+bool checkIfValueIsNotRequired(String value) =>
+    isEqualsIgnoreCase(value, 'NOT REQUIRED');

@@ -99,6 +99,20 @@ class _MaterialInfoDialog extends StatelessWidget {
                 ),
           ),
           const SizedBox(height: 7),
+          if (eligibilityState.salesOrgConfigs.enableIRN) ...[
+            BalanceTextRow(
+              keyText: context.tr('Registration number'),
+              valueText: materialInfo.getIRN.displayDashIfEmpty,
+              valueFlex: 1,
+              keyTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
+                    color: ZPColors.black,
+                  ),
+              valueTextStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
+                    color: ZPColors.darkGray,
+                  ),
+            ),
+            const SizedBox(height: 7),
+          ],
           if (eligibilityState.salesOrgConfigs.enableGMC) ...[
             BalanceTextRow(
               keyText: context.tr('Govt material number'),

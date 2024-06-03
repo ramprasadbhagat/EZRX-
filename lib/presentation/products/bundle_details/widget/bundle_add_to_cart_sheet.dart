@@ -173,6 +173,7 @@ class _BundleMaterialListTileState extends State<_BundleMaterialListTile> {
                     child: Text(
                       widget.materialInfo.combinationCode(
                         showGMCPart: eligibilityState.salesOrgConfigs.enableGMC,
+                        showIRNPart: eligibilityState.salesOrgConfigs.enableIRN,
                       ),
                       style: Theme.of(context).textTheme.bodySmall,
                     ),

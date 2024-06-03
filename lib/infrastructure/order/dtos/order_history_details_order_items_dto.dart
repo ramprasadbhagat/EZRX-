@@ -62,6 +62,8 @@ class OrderHistoryDetailsOrderItemDto with _$OrderHistoryDetailsOrderItemDto {
     required String principalCode,
     @JsonKey(name: 'GovernmentMaterialCode', defaultValue: '')
     required String governmentMaterialCode,
+    @JsonKey(name: 'ItemRegistrationNumber', defaultValue: '')
+    required String itemRegistrationNumber,
     @JsonKey(name: 'ProductType', readValue: _getProductType)
     required String productType,
     @JsonKey(name: 'promoStatus', defaultValue: false)
@@ -111,6 +113,9 @@ class OrderHistoryDetailsOrderItemDto with _$OrderHistoryDetailsOrderItemDto {
           .getOrDefaultValue(''),
       governmentMaterialCode:
           orderHistoryDetailsOrderItem.governmentMaterialCode,
+      itemRegistrationNumber: orderHistoryDetailsOrderItem
+          .itemRegistrationNumber
+          .getOrDefaultValue(''),
       productType: orderHistoryDetailsOrderItem.productType.getValue(),
       promosStatus: orderHistoryDetailsOrderItem.promoStatus,
       isCounterOffer: orderHistoryDetailsOrderItem.isCounterOffer,
@@ -163,6 +168,7 @@ class OrderHistoryDetailsOrderItemDto with _$OrderHistoryDetailsOrderItemDto {
       ),
       productImages: ProductImages.empty(),
       governmentMaterialCode: governmentMaterialCode,
+      itemRegistrationNumber: ItemRegistrationNumber(itemRegistrationNumber),
       materialStockInfo: MaterialStockInfo.empty(),
       priceAggregate: PriceAggregate.empty(),
       productType: MaterialInfoType(productType),

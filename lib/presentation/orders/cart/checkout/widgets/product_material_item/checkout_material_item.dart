@@ -135,6 +135,11 @@ class _ProductDetails extends StatelessWidget {
                         .state
                         .salesOrgConfigs
                         .enableGMC,
+                    showIRNPart: context
+                        .read<EligibilityBloc>()
+                        .state
+                        .salesOrgConfigs
+                        .enableIRN,
                   ),
                   key: WidgetKeys.cartItemProductMaterialNumber,
                   maxLines: 2,

@@ -202,6 +202,7 @@ class CartQueryMutation {
         productCount
         ItemId
         Type
+        itemRegistrationNumber
       }
     }
     MarketplaceItems {
@@ -632,6 +633,7 @@ class CartQueryMutation {
             defaultMaterialDescription
             productCount
             Type
+            itemRegistrationNumber
           }
           BundleDetails {
             BundleName
@@ -1170,6 +1172,7 @@ fragment ezrxItemsFields on Item {
     ProductID
     ItemId
     Type
+    itemRegistrationNumber
   }
   Type
   BundleDetails {

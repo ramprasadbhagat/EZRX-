@@ -53,6 +53,7 @@
     materialDescription
     productCount
     ProductID
+    itemRegistrationNumber
   }
   Type
   ComboDeals {

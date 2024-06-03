@@ -313,6 +313,7 @@ class _BodyContent extends StatelessWidget {
                         child: Text(
                           materialInfo.combinationCode(
                             showGMCPart: config.enableGMC,
+                            showIRNPart: config.enableIRN,
                           ),
                           key: WidgetKeys.materialDetailsMaterialNumber,
                           style: Theme.of(context)

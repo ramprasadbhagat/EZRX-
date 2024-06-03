@@ -28,6 +28,8 @@ class BonusSampleItemDto with _$BonusSampleItemDto {
     required String principalCode,
     @JsonKey(name: 'itemId', defaultValue: '') required String itemId,
     @JsonKey(name: 'type', defaultValue: '') required String type,
+    @JsonKey(name: 'itemRegistrationNumber', defaultValue: '')
+    required String itemRegistrationNumber,
   }) = _BonusSampleItemDto;
 
   BonusSampleItem toDomain() {
@@ -44,6 +46,7 @@ class BonusSampleItemDto with _$BonusSampleItemDto {
       itemId: StringValue(itemId),
       type: MaterialInfoType(type),
       stockInfo: StockInfo.empty(),
+      itemRegistrationNumber: ItemRegistrationNumber(itemRegistrationNumber),
     );
   }
 
@@ -57,6 +60,8 @@ class BonusSampleItemDto with _$BonusSampleItemDto {
       itemId: bonus.itemId.getOrCrash(),
       type: bonus.type.getOrCrash(),
       defaultMaterialDescription: '',
+      itemRegistrationNumber:
+          bonus.itemRegistrationNumber.getOrDefaultValue(''),
     );
   }
 

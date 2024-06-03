@@ -2742,5 +2742,73 @@ void main() {
         findsNothing,
       );
     });
+
+    testWidgets('Show IRN when enableIRN is true',
+        (tester) async {
+      const iRNNumber = '12C 234/11';
+
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrganisation: fakeTHSalesOrganisation,
+          salesOrgConfigs: fakeTHSalesOrgConfigs.copyWith(
+            enableIRN: true,
+          ),
+        ),
+      );
+
+      when(() => viewByOrderDetailsBlocMock.state).thenReturn(
+        ViewByOrderDetailsState.initial().copyWith(
+          orderHistoryDetails: OrderHistoryDetails.empty().copyWith(
+            orderHistoryDetailsOrderItem: [
+              fakeOrderHistoryItem.copyWith(
+                itemRegistrationNumber: ItemRegistrationNumber(iRNNumber),
+              ),
+            ],
+          ),
+        ),
+      );
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pumpAndSettle();
+      final orderHeaderSection = find.byType(OrderHeaderSection);
+      expect(orderHeaderSection, findsOneWidget);
+      await tester.drag(orderHeaderSection, const Offset(0, -500));
+      await tester.pumpAndSettle();
+
+      expect(find.textContaining(iRNNumber), findsOneWidget);
+    });
+
+    testWidgets('Do not show IRN when enableIRN is false',
+        (tester) async {
+      const iRNNumber = '12C 234/11';
+
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrganisation: fakeTHSalesOrganisation,
+          salesOrgConfigs: fakeTHSalesOrgConfigs.copyWith(
+            enableIRN: false,
+          ),
+        ),
+      );
+
+      when(() => viewByOrderDetailsBlocMock.state).thenReturn(
+        ViewByOrderDetailsState.initial().copyWith(
+          orderHistoryDetails: OrderHistoryDetails.empty().copyWith(
+            orderHistoryDetailsOrderItem: [
+              fakeOrderHistoryItem.copyWith(
+                itemRegistrationNumber: ItemRegistrationNumber(iRNNumber),
+              ),
+            ],
+          ),
+        ),
+      );
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pumpAndSettle();
+      final orderHeaderSection = find.byType(OrderHeaderSection);
+      expect(orderHeaderSection, findsOneWidget);
+      await tester.drag(orderHeaderSection, const Offset(0, -500));
+      await tester.pumpAndSettle();
+
+      expect(find.textContaining(iRNNumber), findsNothing);
+    });
   });
 }

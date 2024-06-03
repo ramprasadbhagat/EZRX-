@@ -45,6 +45,7 @@ class _ProductTile extends StatelessWidget {
                                   .state
                                   .salesOrgConfigs
                                   .enableGMC,
+                              showIRNPart: false,
                             ),
                             style: Theme.of(context)
                                 .textTheme

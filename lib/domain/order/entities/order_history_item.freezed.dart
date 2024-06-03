@@ -62,6 +62,8 @@ mixin _$OrderHistoryItem {
       throw _privateConstructorUsedError;
   bool get isCovid => throw _privateConstructorUsedError;
   bool get isTenderExpired => throw _privateConstructorUsedError;
+  ItemRegistrationNumber get itemRegistrationNumber =>
+      throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $OrderHistoryItemCopyWith<OrderHistoryItem> get copyWith =>
@@ -114,7 +116,8 @@ abstract class $OrderHistoryItemCopyWith<$Res> {
       TenderPrice tenderPrice,
       TenderContractReason tenderOrderReason,
       bool isCovid,
-      bool isTenderExpired});
+      bool isTenderExpired,
+      ItemRegistrationNumber itemRegistrationNumber});
 
   $ProductImagesCopyWith<$Res> get productImages;
   $PrincipalDataCopyWith<$Res> get principalData;
@@ -173,6 +176,7 @@ class _$OrderHistoryItemCopyWithImpl<$Res, $Val extends OrderHistoryItem>
     Object? tenderOrderReason = null,
     Object? isCovid = null,
     Object? isTenderExpired = null,
+    Object? itemRegistrationNumber = null,
   }) {
     return _then(_value.copyWith(
       materialNumber: null == materialNumber
@@ -335,6 +339,10 @@ class _$OrderHistoryItemCopyWithImpl<$Res, $Val extends OrderHistoryItem>
           ? _value.isTenderExpired
           : isTenderExpired // ignore: cast_nullable_to_non_nullable
               as bool,
+      itemRegistrationNumber: null == itemRegistrationNumber
+          ? _value.itemRegistrationNumber
+          : itemRegistrationNumber // ignore: cast_nullable_to_non_nullable
+              as ItemRegistrationNumber,
     ) as $Val);
   }
 
@@ -403,7 +411,8 @@ abstract class _$$OrderHistoryItemImplCopyWith<$Res>
       TenderPrice tenderPrice,
       TenderContractReason tenderOrderReason,
       bool isCovid,
-      bool isTenderExpired});
+      bool isTenderExpired,
+      ItemRegistrationNumber itemRegistrationNumber});
 
   @override
   $ProductImagesCopyWith<$Res> get productImages;
@@ -462,6 +471,7 @@ class __$$OrderHistoryItemImplCopyWithImpl<$Res>
     Object? tenderOrderReason = null,
     Object? isCovid = null,
     Object? isTenderExpired = null,
+    Object? itemRegistrationNumber = null,
   }) {
     return _then(_$OrderHistoryItemImpl(
       materialNumber: null == materialNumber
@@ -624,6 +634,10 @@ class __$$OrderHistoryItemImplCopyWithImpl<$Res>
           ? _value.isTenderExpired
           : isTenderExpired // ignore: cast_nullable_to_non_nullable
               as bool,
+      itemRegistrationNumber: null == itemRegistrationNumber
+          ? _value.itemRegistrationNumber
+          : itemRegistrationNumber // ignore: cast_nullable_to_non_nullable
+              as ItemRegistrationNumber,
     ));
   }
 }
@@ -671,7 +685,8 @@ class _$OrderHistoryItemImpl extends _OrderHistoryItem {
       required this.tenderPrice,
       required this.tenderOrderReason,
       required this.isCovid,
-      required this.isTenderExpired})
+      required this.isTenderExpired,
+      required this.itemRegistrationNumber})
       : _orderHistoryItemPoAttachments = orderHistoryItemPoAttachments,
         super._();
 
@@ -762,10 +777,12 @@ class _$OrderHistoryItemImpl extends _OrderHistoryItem {
   final bool isCovid;
   @override
   final bool isTenderExpired;
+  @override
+  final ItemRegistrationNumber itemRegistrationNumber;
 
   @override
   String toString() {
-    return 'OrderHistoryItem(materialNumber: $materialNumber, materialDescription: $materialDescription, qty: $qty, unitPrice: $unitPrice, originPrice: $originPrice, totalPrice: $totalPrice, status: $status, deliveryDate: $deliveryDate, orderNumber: $orderNumber, createdDate: $createdDate, batch: $batch, orderBy: $orderBy, orderType: $orderType, expiryDate: $expiryDate, pOReference: $pOReference, invoiceNumber: $invoiceNumber, isBonusMaterial: $isBonusMaterial, telephoneNumber: $telephoneNumber, productImages: $productImages, requestedDeliveryDate: $requestedDeliveryDate, specialInstructions: $specialInstructions, tax: $tax, orderHistoryItemPoAttachments: $orderHistoryItemPoAttachments, ezrxNumber: $ezrxNumber, isBundle: $isBundle, promoStatus: $promoStatus, isCounterOffer: $isCounterOffer, lineNumber: $lineNumber, principalData: $principalData, governmentMaterialCode: $governmentMaterialCode, hidePrice: $hidePrice, referenceNotes: $referenceNotes, isMarketPlace: $isMarketPlace, tenderContractNumber: $tenderContractNumber, tenderContractReference: $tenderContractReference, tenderPriceUnit: $tenderPriceUnit, tenderPrice: $tenderPrice, tenderOrderReason: $tenderOrderReason, isCovid: $isCovid, isTenderExpired: $isTenderExpired)';
+    return 'OrderHistoryItem(materialNumber: $materialNumber, materialDescription: $materialDescription, qty: $qty, unitPrice: $unitPrice, originPrice: $originPrice, totalPrice: $totalPrice, status: $status, deliveryDate: $deliveryDate, orderNumber: $orderNumber, createdDate: $createdDate, batch: $batch, orderBy: $orderBy, orderType: $orderType, expiryDate: $expiryDate, pOReference: $pOReference, invoiceNumber: $invoiceNumber, isBonusMaterial: $isBonusMaterial, telephoneNumber: $telephoneNumber, productImages: $productImages, requestedDeliveryDate: $requestedDeliveryDate, specialInstructions: $specialInstructions, tax: $tax, orderHistoryItemPoAttachments: $orderHistoryItemPoAttachments, ezrxNumber: $ezrxNumber, isBundle: $isBundle, promoStatus: $promoStatus, isCounterOffer: $isCounterOffer, lineNumber: $lineNumber, principalData: $principalData, governmentMaterialCode: $governmentMaterialCode, hidePrice: $hidePrice, referenceNotes: $referenceNotes, isMarketPlace: $isMarketPlace, tenderContractNumber: $tenderContractNumber, tenderContractReference: $tenderContractReference, tenderPriceUnit: $tenderPriceUnit, tenderPrice: $tenderPrice, tenderOrderReason: $tenderOrderReason, isCovid: $isCovid, isTenderExpired: $isTenderExpired, itemRegistrationNumber: $itemRegistrationNumber)';
   }
 
   @override
@@ -848,7 +865,9 @@ class _$OrderHistoryItemImpl extends _OrderHistoryItem {
                 other.tenderOrderReason == tenderOrderReason) &&
             (identical(other.isCovid, isCovid) || other.isCovid == isCovid) &&
             (identical(other.isTenderExpired, isTenderExpired) ||
-                other.isTenderExpired == isTenderExpired));
+                other.isTenderExpired == isTenderExpired) &&
+            (identical(other.itemRegistrationNumber, itemRegistrationNumber) ||
+                other.itemRegistrationNumber == itemRegistrationNumber));
   }
 
   @override
@@ -893,7 +912,8 @@ class _$OrderHistoryItemImpl extends _OrderHistoryItem {
         tenderPrice,
         tenderOrderReason,
         isCovid,
-        isTenderExpired
+        isTenderExpired,
+        itemRegistrationNumber
       ]);
 
   @JsonKey(ignore: true)
@@ -906,46 +926,48 @@ class _$OrderHistoryItemImpl extends _OrderHistoryItem {
 
 abstract class _OrderHistoryItem extends OrderHistoryItem {
   factory _OrderHistoryItem(
-      {required final MaterialNumber materialNumber,
-      required final String materialDescription,
-      required final int qty,
-      required final double unitPrice,
-      required final double originPrice,
-      required final double totalPrice,
-      required final OrderStepValue status,
-      required final DateTimeStringValue deliveryDate,
-      required final OrderNumber orderNumber,
-      required final DateTimeStringValue createdDate,
-      required final StringValue batch,
-      required final StringValue orderBy,
-      required final DocumentType orderType,
-      required final DateTimeStringValue expiryDate,
-      required final POReference pOReference,
-      required final StringValue invoiceNumber,
-      required final bool isBonusMaterial,
-      required final PhoneNumber telephoneNumber,
-      required final ProductImages productImages,
-      required final DateTimeStringValue requestedDeliveryDate,
-      required final SpecialInstructions specialInstructions,
-      required final double tax,
-      required final List<PoDocuments> orderHistoryItemPoAttachments,
-      required final StringValue ezrxNumber,
-      required final bool isBundle,
-      required final bool promoStatus,
-      required final bool isCounterOffer,
-      required final LineNumber lineNumber,
-      required final PrincipalData principalData,
-      required final String governmentMaterialCode,
-      required final bool hidePrice,
-      required final StringValue referenceNotes,
-      required final bool isMarketPlace,
-      required final TenderContractNumber tenderContractNumber,
-      required final TenderContractNumber tenderContractReference,
-      required final int tenderPriceUnit,
-      required final TenderPrice tenderPrice,
-      required final TenderContractReason tenderOrderReason,
-      required final bool isCovid,
-      required final bool isTenderExpired}) = _$OrderHistoryItemImpl;
+          {required final MaterialNumber materialNumber,
+          required final String materialDescription,
+          required final int qty,
+          required final double unitPrice,
+          required final double originPrice,
+          required final double totalPrice,
+          required final OrderStepValue status,
+          required final DateTimeStringValue deliveryDate,
+          required final OrderNumber orderNumber,
+          required final DateTimeStringValue createdDate,
+          required final StringValue batch,
+          required final StringValue orderBy,
+          required final DocumentType orderType,
+          required final DateTimeStringValue expiryDate,
+          required final POReference pOReference,
+          required final StringValue invoiceNumber,
+          required final bool isBonusMaterial,
+          required final PhoneNumber telephoneNumber,
+          required final ProductImages productImages,
+          required final DateTimeStringValue requestedDeliveryDate,
+          required final SpecialInstructions specialInstructions,
+          required final double tax,
+          required final List<PoDocuments> orderHistoryItemPoAttachments,
+          required final StringValue ezrxNumber,
+          required final bool isBundle,
+          required final bool promoStatus,
+          required final bool isCounterOffer,
+          required final LineNumber lineNumber,
+          required final PrincipalData principalData,
+          required final String governmentMaterialCode,
+          required final bool hidePrice,
+          required final StringValue referenceNotes,
+          required final bool isMarketPlace,
+          required final TenderContractNumber tenderContractNumber,
+          required final TenderContractNumber tenderContractReference,
+          required final int tenderPriceUnit,
+          required final TenderPrice tenderPrice,
+          required final TenderContractReason tenderOrderReason,
+          required final bool isCovid,
+          required final bool isTenderExpired,
+          required final ItemRegistrationNumber itemRegistrationNumber}) =
+      _$OrderHistoryItemImpl;
   _OrderHistoryItem._() : super._();
 
   @override
@@ -1028,6 +1050,8 @@ abstract class _OrderHistoryItem extends OrderHistoryItem {
   bool get isCovid;
   @override
   bool get isTenderExpired;
+  @override
+  ItemRegistrationNumber get itemRegistrationNumber;
   @override
   @JsonKey(ignore: true)
   _$$OrderHistoryItemImplCopyWith<_$OrderHistoryItemImpl> get copyWith =>

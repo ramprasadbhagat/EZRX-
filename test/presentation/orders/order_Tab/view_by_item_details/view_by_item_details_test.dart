@@ -2570,5 +2570,79 @@ void main() {
         );
       },
     );
+
+    testWidgets('Show IRN when enableIRN is true',
+        (tester) async {
+      const iRNNumber = '12C 234/11';
+
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrganisation: fakeTHSalesOrganisation,
+          salesOrgConfigs: fakeTHSalesOrgConfigs.copyWith(
+            enableIRN: true,
+          ),
+        ),
+      );
+
+      when(() => viewByItemDetailsBlocMock.state).thenReturn(
+        ViewByItemDetailsState.initial().copyWith(
+          orderHistoryItem: fakeOrderHistoryItem.copyWith(
+            itemRegistrationNumber: ItemRegistrationNumber(iRNNumber),
+          ),
+          orderHistory: OrderHistory.empty().copyWith(
+            orderHistoryItems: [
+              fakeOrderHistoryItem.copyWith(
+                itemRegistrationNumber: ItemRegistrationNumber(iRNNumber),
+              ),
+            ],
+          ),
+        ),
+      );
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pumpAndSettle();
+      await tester.dragUntilVisible(
+        find.byType(ItemDetailsSection),
+        find.byKey(WidgetKeys.scrollList),
+        const Offset(0, -300),
+      );
+      expect(find.textContaining(iRNNumber), findsOneWidget);
+    });
+
+    testWidgets('Do not show IRN when enableIRN is false',
+        (tester) async {
+      const iRNNumber = '12C 234/11';
+
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrganisation: fakeTHSalesOrganisation,
+          salesOrgConfigs: fakeTHSalesOrgConfigs.copyWith(
+            enableIRN: false,
+          ),
+        ),
+      );
+
+      when(() => viewByItemDetailsBlocMock.state).thenReturn(
+        ViewByItemDetailsState.initial().copyWith(
+          orderHistoryItem: fakeOrderHistoryItem.copyWith(
+            itemRegistrationNumber: ItemRegistrationNumber(iRNNumber),
+          ),
+          orderHistory: OrderHistory.empty().copyWith(
+            orderHistoryItems: [
+              fakeOrderHistoryItem.copyWith(
+                itemRegistrationNumber: ItemRegistrationNumber(iRNNumber),
+              ),
+            ],
+          ),
+        ),
+      );
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pumpAndSettle();
+      await tester.dragUntilVisible(
+        find.byType(ItemDetailsSection),
+        find.byKey(WidgetKeys.scrollList),
+        const Offset(0, -300),
+      );
+      expect(find.textContaining(iRNNumber), findsNothing);
+    });
   });
 }

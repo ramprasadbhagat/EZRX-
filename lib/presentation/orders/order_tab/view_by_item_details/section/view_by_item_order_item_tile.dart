@@ -20,6 +20,7 @@ class ViewByItemOrderItemTile extends StatelessWidget {
       sellerName: orderHistoryItem.sellerName,
       label: orderHistoryItem.combinationCode(
         showGMCPart: eligibilityState.salesOrgConfigs.enableGMC,
+        showIRNPart: eligibilityState.salesOrgConfigs.enableIRN,
       ),
       priceComponentSubtitle: _PriceComponentSubtitle(
         orderHistoryItem: orderHistoryItem,

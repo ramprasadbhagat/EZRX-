@@ -83,6 +83,7 @@ class _MaterialItem extends StatelessWidget {
       materialNumber: orderItem.materialNumber,
       label: orderItem.combinationCode(
         showGMCPart: eligibilityState.salesOrgConfigs.enableGMC,
+        showIRNPart: eligibilityState.salesOrgConfigs.enableIRN,
       ),
       subtitle: '',
       priceComponent: !orderItem.isBonus

@@ -28,6 +28,7 @@ import 'package:mocktail/mocktail.dart';
 
 import '../../../common_mock_data/sales_org_config_mock/fake_id_sales_org_config.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_my_sales_org_config.dart';
+import '../../../common_mock_data/sales_org_config_mock/fake_th_sales_org_config.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_vn_sales_org_config.dart';
 import '../../../common_mock_data/sales_organsiation_mock.dart';
 import '../../../utils/widget_utils.dart';
@@ -289,6 +290,62 @@ void main() {
           ),
           findsOneWidget,
         );
+      },
+    );
+
+    testWidgets(
+      'Show IRN when enableIRN is true',
+      (tester) async {
+        const iRNNumber = '12C 234/11';
+
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrganisation: fakeTHSalesOrganisation,
+            salesOrgConfigs: fakeTHSalesOrgConfigs.copyWith(
+              enableIRN: true,
+            ),
+          ),
+        );
+        await tester.pumpWidget(
+          getScopedWidget(
+            materialInfo: MaterialInfo.empty().copyWith(
+              itemRegistrationNumber: ItemRegistrationNumber(iRNNumber),
+            ),
+          ),
+        );
+        await tester.pump();
+
+        expect(find.byKey(WidgetKeys.itemRegistrationNumber), findsOneWidget);
+
+        expect(find.text(iRNNumber), findsOneWidget);
+      },
+    );
+
+    testWidgets(
+      'Do not show IRN when enableIRN is false',
+      (tester) async {
+        const iRNNumber = '12C 234/11';
+
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrganisation: fakeTHSalesOrganisation,
+            salesOrgConfigs: fakeTHSalesOrgConfigs.copyWith(
+              enableIRN: false,
+            ),
+          ),
+        );
+        await tester.pumpWidget(
+          getScopedWidget(
+            materialInfo: MaterialInfo.empty().copyWith(
+              itemRegistrationNumber: ItemRegistrationNumber(iRNNumber),
+            ),
+          ),
+        );
+        await tester.pump();
+
+        expect(find.byKey(WidgetKeys.itemRegistrationNumber), findsNothing);
+
+        expect(find.text(iRNNumber), findsNothing);
       },
     );
     group('MarketPlace', () {

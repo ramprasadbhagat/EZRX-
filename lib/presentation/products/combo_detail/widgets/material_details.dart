@@ -51,6 +51,11 @@ class _MaterialDetails extends StatelessWidget {
                       .state
                       .salesOrgConfigs
                       .enableGMC,
+                  showIRNPart: context
+                      .read<EligibilityBloc>()
+                      .state
+                      .salesOrgConfigs
+                      .enableIRN,
                 ),
                 maxLines: 2,
                 key: WidgetKeys.materialDetailsMaterialNumber,

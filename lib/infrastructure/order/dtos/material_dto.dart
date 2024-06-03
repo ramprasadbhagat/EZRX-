@@ -113,7 +113,8 @@ class MaterialDto with _$MaterialDto {
       principalCode:
           materialInfo.principalData.principalCode.getOrDefaultValue(''),
       taxClassification: materialInfo.taxClassification.getOrDefaultValue(''),
-      itemRegistrationNumber: materialInfo.itemRegistrationNumber,
+      itemRegistrationNumber:
+          materialInfo.itemRegistrationNumber.getOrDefaultValue(''),
       unitOfMeasurement: materialInfo.unitOfMeasurement.getOrDefaultValue(''),
       materialGroup2: materialInfo.materialGroup2.getOrDefaultValue(''),
       materialGroup4: materialInfo.materialGroup4.getOrDefaultValue(''),
@@ -156,7 +157,7 @@ class MaterialDto with _$MaterialDto {
         principalCode: PrincipalCode(principalCode),
       ),
       taxClassification: MaterialTaxClassification(taxClassification),
-      itemRegistrationNumber: itemRegistrationNumber,
+      itemRegistrationNumber: ItemRegistrationNumber(itemRegistrationNumber),
       unitOfMeasurement: StringValue(unitOfMeasurement),
       materialGroup2: MaterialGroup.two(materialGroup2),
       materialGroup4: MaterialGroup.four(materialGroup4),
@@ -235,6 +236,8 @@ class MaterialDataDto with _$MaterialDataDto {
     required String genericMaterialName,
     @JsonKey(name: 'governmentMaterialCode', defaultValue: '')
     required String governmentMaterialCode,
+    @JsonKey(name: 'itemRegistrationNumber', defaultValue: '')
+    required String itemRegistrationNumber,
     @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
     required bool isMarketPlace,
   }) = _MaterialDataDto;
@@ -249,6 +252,7 @@ class MaterialDataDto with _$MaterialDataDto {
         defaultMaterialDescription: defaultMaterialDescription,
         genericMaterialName: genericMaterialName,
         governmentMaterialCode: StringValue(governmentMaterialCode),
+        itemRegistrationNumber: ItemRegistrationNumber(itemRegistrationNumber),
         isMarketPlace: isMarketPlace,
       );
 
@@ -262,6 +266,8 @@ class MaterialDataDto with _$MaterialDataDto {
         genericMaterialName: materialData.genericMaterialName,
         governmentMaterialCode:
             materialData.governmentMaterialCode.getOrDefaultValue(''),
+        itemRegistrationNumber:
+            materialData.itemRegistrationNumber.getOrDefaultValue(''),
         isMarketPlace: materialData.isMarketPlace,
       );
 

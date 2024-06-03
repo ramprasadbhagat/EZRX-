@@ -42,6 +42,8 @@ class OrderHistoryItemDto with _$OrderHistoryItemDto {
     required String manufactureName,
     @JsonKey(name: 'GovernmentMaterialCode', defaultValue: '')
     required String governmentMaterialCode,
+    @JsonKey(name: 'ItemRegistrationNumber', defaultValue: '')
+    required String itemRegistrationNumber,
     @JsonKey(name: 'ExpiryDate', defaultValue: '') required String expiryDate,
     @JsonKey(name: 'RequestedDeliveryDate', defaultValue: '')
     required String requestedDeliveryDate,
@@ -116,6 +118,8 @@ class OrderHistoryItemDto with _$OrderHistoryItemDto {
       manufactureName:
           orderHistoryItem.principalData.principalName.getOrDefaultValue(''),
       governmentMaterialCode: orderHistoryItem.governmentMaterialCode,
+      itemRegistrationNumber:
+          orderHistoryItem.itemRegistrationNumber.getOrDefaultValue(''),
       hidePrice: orderHistoryItem.hidePrice,
       referenceNotes: orderHistoryItem.referenceNotes.getOrDefaultValue(''),
       isMarketPlace: orderHistoryItem.isMarketPlace,
@@ -167,6 +171,7 @@ class OrderHistoryItemDto with _$OrderHistoryItemDto {
         principalCode: PrincipalCode(principalCode),
       ),
       governmentMaterialCode: governmentMaterialCode,
+      itemRegistrationNumber: ItemRegistrationNumber(itemRegistrationNumber),
       hidePrice: hidePrice,
       referenceNotes: StringValue(referenceNotes),
       isMarketPlace: isMarketPlace,

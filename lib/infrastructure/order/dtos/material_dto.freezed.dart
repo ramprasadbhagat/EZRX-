@@ -1178,6 +1178,8 @@ mixin _$MaterialDataDto {
   String get genericMaterialName => throw _privateConstructorUsedError;
   @JsonKey(name: 'governmentMaterialCode', defaultValue: '')
   String get governmentMaterialCode => throw _privateConstructorUsedError;
+  @JsonKey(name: 'itemRegistrationNumber', defaultValue: '')
+  String get itemRegistrationNumber => throw _privateConstructorUsedError;
   @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
   bool get isMarketPlace => throw _privateConstructorUsedError;
 
@@ -1206,6 +1208,8 @@ abstract class $MaterialDataDtoCopyWith<$Res> {
       String genericMaterialName,
       @JsonKey(name: 'governmentMaterialCode', defaultValue: '')
       String governmentMaterialCode,
+      @JsonKey(name: 'itemRegistrationNumber', defaultValue: '')
+      String itemRegistrationNumber,
       @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
       bool isMarketPlace});
 }
@@ -1229,6 +1233,7 @@ class _$MaterialDataDtoCopyWithImpl<$Res, $Val extends MaterialDataDto>
     Object? defaultMaterialDescription = null,
     Object? genericMaterialName = null,
     Object? governmentMaterialCode = null,
+    Object? itemRegistrationNumber = null,
     Object? isMarketPlace = null,
   }) {
     return _then(_value.copyWith(
@@ -1255,6 +1260,10 @@ class _$MaterialDataDtoCopyWithImpl<$Res, $Val extends MaterialDataDto>
       governmentMaterialCode: null == governmentMaterialCode
           ? _value.governmentMaterialCode
           : governmentMaterialCode // ignore: cast_nullable_to_non_nullable
+              as String,
+      itemRegistrationNumber: null == itemRegistrationNumber
+          ? _value.itemRegistrationNumber
+          : itemRegistrationNumber // ignore: cast_nullable_to_non_nullable
               as String,
       isMarketPlace: null == isMarketPlace
           ? _value.isMarketPlace
@@ -1285,6 +1294,8 @@ abstract class _$$MaterialDataDtoImplCopyWith<$Res>
       String genericMaterialName,
       @JsonKey(name: 'governmentMaterialCode', defaultValue: '')
       String governmentMaterialCode,
+      @JsonKey(name: 'itemRegistrationNumber', defaultValue: '')
+      String itemRegistrationNumber,
       @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
       bool isMarketPlace});
 }
@@ -1306,6 +1317,7 @@ class __$$MaterialDataDtoImplCopyWithImpl<$Res>
     Object? defaultMaterialDescription = null,
     Object? genericMaterialName = null,
     Object? governmentMaterialCode = null,
+    Object? itemRegistrationNumber = null,
     Object? isMarketPlace = null,
   }) {
     return _then(_$MaterialDataDtoImpl(
@@ -1333,6 +1345,10 @@ class __$$MaterialDataDtoImplCopyWithImpl<$Res>
           ? _value.governmentMaterialCode
           : governmentMaterialCode // ignore: cast_nullable_to_non_nullable
               as String,
+      itemRegistrationNumber: null == itemRegistrationNumber
+          ? _value.itemRegistrationNumber
+          : itemRegistrationNumber // ignore: cast_nullable_to_non_nullable
+              as String,
       isMarketPlace: null == isMarketPlace
           ? _value.isMarketPlace
           : isMarketPlace // ignore: cast_nullable_to_non_nullable
@@ -1358,6 +1374,8 @@ class _$MaterialDataDtoImpl extends _MaterialDataDto {
       required this.genericMaterialName,
       @JsonKey(name: 'governmentMaterialCode', defaultValue: '')
       required this.governmentMaterialCode,
+      @JsonKey(name: 'itemRegistrationNumber', defaultValue: '')
+      required this.itemRegistrationNumber,
       @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
       required this.isMarketPlace})
       : super._();
@@ -1384,12 +1402,15 @@ class _$MaterialDataDtoImpl extends _MaterialDataDto {
   @JsonKey(name: 'governmentMaterialCode', defaultValue: '')
   final String governmentMaterialCode;
   @override
+  @JsonKey(name: 'itemRegistrationNumber', defaultValue: '')
+  final String itemRegistrationNumber;
+  @override
   @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
   final bool isMarketPlace;
 
   @override
   String toString() {
-    return 'MaterialDataDto(code: $code, manufactured: $manufactured, materialDescription: $materialDescription, defaultMaterialDescription: $defaultMaterialDescription, genericMaterialName: $genericMaterialName, governmentMaterialCode: $governmentMaterialCode, isMarketPlace: $isMarketPlace)';
+    return 'MaterialDataDto(code: $code, manufactured: $manufactured, materialDescription: $materialDescription, defaultMaterialDescription: $defaultMaterialDescription, genericMaterialName: $genericMaterialName, governmentMaterialCode: $governmentMaterialCode, itemRegistrationNumber: $itemRegistrationNumber, isMarketPlace: $isMarketPlace)';
   }
 
   @override
@@ -1410,6 +1431,8 @@ class _$MaterialDataDtoImpl extends _MaterialDataDto {
                 other.genericMaterialName == genericMaterialName) &&
             (identical(other.governmentMaterialCode, governmentMaterialCode) ||
                 other.governmentMaterialCode == governmentMaterialCode) &&
+            (identical(other.itemRegistrationNumber, itemRegistrationNumber) ||
+                other.itemRegistrationNumber == itemRegistrationNumber) &&
             (identical(other.isMarketPlace, isMarketPlace) ||
                 other.isMarketPlace == isMarketPlace));
   }
@@ -1424,6 +1447,7 @@ class _$MaterialDataDtoImpl extends _MaterialDataDto {
       defaultMaterialDescription,
       genericMaterialName,
       governmentMaterialCode,
+      itemRegistrationNumber,
       isMarketPlace);
 
   @JsonKey(ignore: true)
@@ -1456,6 +1480,8 @@ abstract class _MaterialDataDto extends MaterialDataDto {
       required final String genericMaterialName,
       @JsonKey(name: 'governmentMaterialCode', defaultValue: '')
       required final String governmentMaterialCode,
+      @JsonKey(name: 'itemRegistrationNumber', defaultValue: '')
+      required final String itemRegistrationNumber,
       @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
       required final bool isMarketPlace}) = _$MaterialDataDtoImpl;
   _MaterialDataDto._() : super._();
@@ -1481,6 +1507,9 @@ abstract class _MaterialDataDto extends MaterialDataDto {
   @override
   @JsonKey(name: 'governmentMaterialCode', defaultValue: '')
   String get governmentMaterialCode;
+  @override
+  @JsonKey(name: 'itemRegistrationNumber', defaultValue: '')
+  String get itemRegistrationNumber;
   @override
   @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
   bool get isMarketPlace;
