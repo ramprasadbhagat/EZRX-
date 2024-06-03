@@ -444,5 +444,47 @@ void main() {
         ),
       ).called(1);
     });
+
+    testWidgets(
+        '=> varify item description when material description in empty and defaultMaterialDescription has value',
+        (tester) async {
+      when(() => returnItemsBlocMock.state).thenReturn(
+        ReturnItemsState.initial().copyWith(
+          items: [
+            fakeReturnMaterial.copyWith(
+              materialDescription: '',
+            ),
+          ],
+        ),
+      );
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pumpAndSettle();
+
+      expect(find.byKey(WidgetKeys.newReturnItem), findsOneWidget);
+      expect(
+        (tester.widget(find.byKey(WidgetKeys.itemTitleKey)) as Text).data,
+        fakeReturnMaterial.defaultMaterialDescription,
+      );
+    });
+
+    testWidgets(
+        '=> varify item description when material description in not empty',
+        (tester) async {
+      when(() => returnItemsBlocMock.state).thenReturn(
+        ReturnItemsState.initial().copyWith(
+          items: [
+            fakeReturnMaterial,
+          ],
+        ),
+      );
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pumpAndSettle();
+
+      expect(find.byKey(WidgetKeys.newReturnItem), findsOneWidget);
+      expect(
+        (tester.widget(find.byKey(WidgetKeys.itemTitleKey)) as Text).data,
+        fakeReturnMaterial.materialDescription,
+      );
+    });
   });
 }

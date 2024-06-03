@@ -6,13 +6,16 @@ part of 'return_material_dto.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_ReturnMaterialDto _$$_ReturnMaterialDtoFromJson(Map<String, dynamic> json) =>
-    _$_ReturnMaterialDto(
+_$ReturnMaterialDtoImpl _$$ReturnMaterialDtoImplFromJson(
+        Map<String, dynamic> json) =>
+    _$ReturnMaterialDtoImpl(
       balanceQuantity: json['balanceQuantity'] as String? ?? '',
       unitPrice: json['unitPrice'] as String? ?? '',
       totalPrice: json['totalPrice'] as String? ?? '',
       materialNumber: json['material'] as String? ?? '',
       materialDescription: json['materialDescription'] as String? ?? '',
+      defaultMaterialDescription:
+          json['DefaultMaterialDescription'] as String? ?? '',
       itemNumber: json['itemNumber'] as String? ?? '',
       batch: json['batch'] as String? ?? '',
       eligibleForReturn: json['eligibleForReturn'] as bool? ?? false,
@@ -32,14 +35,15 @@ _$_ReturnMaterialDto _$$_ReturnMaterialDtoFromJson(Map<String, dynamic> json) =>
           mappingIsMarketPlace(json, 'isMarketPlace') as bool? ?? false,
     );
 
-Map<String, dynamic> _$$_ReturnMaterialDtoToJson(
-        _$_ReturnMaterialDto instance) =>
+Map<String, dynamic> _$$ReturnMaterialDtoImplToJson(
+        _$ReturnMaterialDtoImpl instance) =>
     <String, dynamic>{
       'balanceQuantity': instance.balanceQuantity,
       'unitPrice': instance.unitPrice,
       'totalPrice': instance.totalPrice,
       'material': instance.materialNumber,
       'materialDescription': instance.materialDescription,
+      'DefaultMaterialDescription': instance.defaultMaterialDescription,
       'itemNumber': instance.itemNumber,
       'batch': instance.batch,
       'eligibleForReturn': instance.eligibleForReturn,

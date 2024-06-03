@@ -12,7 +12,7 @@ part of 'return_material_dto.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 ReturnMaterialDto _$ReturnMaterialDtoFromJson(Map<String, dynamic> json) {
   return _ReturnMaterialDto.fromJson(json);
@@ -30,6 +30,8 @@ mixin _$ReturnMaterialDto {
   String get materialNumber => throw _privateConstructorUsedError;
   @JsonKey(name: 'materialDescription', defaultValue: '')
   String get materialDescription => throw _privateConstructorUsedError;
+  @JsonKey(name: 'DefaultMaterialDescription', defaultValue: '')
+  String get defaultMaterialDescription => throw _privateConstructorUsedError;
   @JsonKey(name: 'itemNumber', defaultValue: '')
   String get itemNumber => throw _privateConstructorUsedError;
   @JsonKey(name: 'batch', defaultValue: '')
@@ -75,6 +77,8 @@ abstract class $ReturnMaterialDtoCopyWith<$Res> {
       @JsonKey(name: 'material', defaultValue: '') String materialNumber,
       @JsonKey(name: 'materialDescription', defaultValue: '')
       String materialDescription,
+      @JsonKey(name: 'DefaultMaterialDescription', defaultValue: '')
+      String defaultMaterialDescription,
       @JsonKey(name: 'itemNumber', defaultValue: '') String itemNumber,
       @JsonKey(name: 'batch', defaultValue: '') String batch,
       @JsonKey(name: 'eligibleForReturn', defaultValue: false)
@@ -111,6 +115,7 @@ class _$ReturnMaterialDtoCopyWithImpl<$Res, $Val extends ReturnMaterialDto>
     Object? totalPrice = null,
     Object? materialNumber = null,
     Object? materialDescription = null,
+    Object? defaultMaterialDescription = null,
     Object? itemNumber = null,
     Object? batch = null,
     Object? eligibleForReturn = null,
@@ -144,6 +149,10 @@ class _$ReturnMaterialDtoCopyWithImpl<$Res, $Val extends ReturnMaterialDto>
       materialDescription: null == materialDescription
           ? _value.materialDescription
           : materialDescription // ignore: cast_nullable_to_non_nullable
+              as String,
+      defaultMaterialDescription: null == defaultMaterialDescription
+          ? _value.defaultMaterialDescription
+          : defaultMaterialDescription // ignore: cast_nullable_to_non_nullable
               as String,
       itemNumber: null == itemNumber
           ? _value.itemNumber
@@ -198,11 +207,11 @@ class _$ReturnMaterialDtoCopyWithImpl<$Res, $Val extends ReturnMaterialDto>
 }
 
 /// @nodoc
-abstract class _$$_ReturnMaterialDtoCopyWith<$Res>
+abstract class _$$ReturnMaterialDtoImplCopyWith<$Res>
     implements $ReturnMaterialDtoCopyWith<$Res> {
-  factory _$$_ReturnMaterialDtoCopyWith(_$_ReturnMaterialDto value,
-          $Res Function(_$_ReturnMaterialDto) then) =
-      __$$_ReturnMaterialDtoCopyWithImpl<$Res>;
+  factory _$$ReturnMaterialDtoImplCopyWith(_$ReturnMaterialDtoImpl value,
+          $Res Function(_$ReturnMaterialDtoImpl) then) =
+      __$$ReturnMaterialDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -213,6 +222,8 @@ abstract class _$$_ReturnMaterialDtoCopyWith<$Res>
       @JsonKey(name: 'material', defaultValue: '') String materialNumber,
       @JsonKey(name: 'materialDescription', defaultValue: '')
       String materialDescription,
+      @JsonKey(name: 'DefaultMaterialDescription', defaultValue: '')
+      String defaultMaterialDescription,
       @JsonKey(name: 'itemNumber', defaultValue: '') String itemNumber,
       @JsonKey(name: 'batch', defaultValue: '') String batch,
       @JsonKey(name: 'eligibleForReturn', defaultValue: false)
@@ -232,11 +243,11 @@ abstract class _$$_ReturnMaterialDtoCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_ReturnMaterialDtoCopyWithImpl<$Res>
-    extends _$ReturnMaterialDtoCopyWithImpl<$Res, _$_ReturnMaterialDto>
-    implements _$$_ReturnMaterialDtoCopyWith<$Res> {
-  __$$_ReturnMaterialDtoCopyWithImpl(
-      _$_ReturnMaterialDto _value, $Res Function(_$_ReturnMaterialDto) _then)
+class __$$ReturnMaterialDtoImplCopyWithImpl<$Res>
+    extends _$ReturnMaterialDtoCopyWithImpl<$Res, _$ReturnMaterialDtoImpl>
+    implements _$$ReturnMaterialDtoImplCopyWith<$Res> {
+  __$$ReturnMaterialDtoImplCopyWithImpl(_$ReturnMaterialDtoImpl _value,
+      $Res Function(_$ReturnMaterialDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -247,6 +258,7 @@ class __$$_ReturnMaterialDtoCopyWithImpl<$Res>
     Object? totalPrice = null,
     Object? materialNumber = null,
     Object? materialDescription = null,
+    Object? defaultMaterialDescription = null,
     Object? itemNumber = null,
     Object? batch = null,
     Object? eligibleForReturn = null,
@@ -260,7 +272,7 @@ class __$$_ReturnMaterialDtoCopyWithImpl<$Res>
     Object? targetQuantity = null,
     Object? isMarketPlace = null,
   }) {
-    return _then(_$_ReturnMaterialDto(
+    return _then(_$ReturnMaterialDtoImpl(
       balanceQuantity: null == balanceQuantity
           ? _value.balanceQuantity
           : balanceQuantity // ignore: cast_nullable_to_non_nullable
@@ -280,6 +292,10 @@ class __$$_ReturnMaterialDtoCopyWithImpl<$Res>
       materialDescription: null == materialDescription
           ? _value.materialDescription
           : materialDescription // ignore: cast_nullable_to_non_nullable
+              as String,
+      defaultMaterialDescription: null == defaultMaterialDescription
+          ? _value.defaultMaterialDescription
+          : defaultMaterialDescription // ignore: cast_nullable_to_non_nullable
               as String,
       itemNumber: null == itemNumber
           ? _value.itemNumber
@@ -335,8 +351,8 @@ class __$$_ReturnMaterialDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_ReturnMaterialDto extends _ReturnMaterialDto {
-  const _$_ReturnMaterialDto(
+class _$ReturnMaterialDtoImpl extends _ReturnMaterialDto {
+  const _$ReturnMaterialDtoImpl(
       {@JsonKey(name: 'balanceQuantity', defaultValue: '')
       required this.balanceQuantity,
       @JsonKey(name: 'unitPrice', defaultValue: '') required this.unitPrice,
@@ -344,6 +360,8 @@ class _$_ReturnMaterialDto extends _ReturnMaterialDto {
       @JsonKey(name: 'material', defaultValue: '') required this.materialNumber,
       @JsonKey(name: 'materialDescription', defaultValue: '')
       required this.materialDescription,
+      @JsonKey(name: 'DefaultMaterialDescription', defaultValue: '')
+      required this.defaultMaterialDescription,
       @JsonKey(name: 'itemNumber', defaultValue: '') required this.itemNumber,
       @JsonKey(name: 'batch', defaultValue: '') required this.batch,
       @JsonKey(name: 'eligibleForReturn', defaultValue: false)
@@ -367,8 +385,8 @@ class _$_ReturnMaterialDto extends _ReturnMaterialDto {
       : _bonusItems = bonusItems,
         super._();
 
-  factory _$_ReturnMaterialDto.fromJson(Map<String, dynamic> json) =>
-      _$$_ReturnMaterialDtoFromJson(json);
+  factory _$ReturnMaterialDtoImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ReturnMaterialDtoImplFromJson(json);
 
   @override
   @JsonKey(name: 'balanceQuantity', defaultValue: '')
@@ -385,6 +403,9 @@ class _$_ReturnMaterialDto extends _ReturnMaterialDto {
   @override
   @JsonKey(name: 'materialDescription', defaultValue: '')
   final String materialDescription;
+  @override
+  @JsonKey(name: 'DefaultMaterialDescription', defaultValue: '')
+  final String defaultMaterialDescription;
   @override
   @JsonKey(name: 'itemNumber', defaultValue: '')
   final String itemNumber;
@@ -430,14 +451,14 @@ class _$_ReturnMaterialDto extends _ReturnMaterialDto {
 
   @override
   String toString() {
-    return 'ReturnMaterialDto(balanceQuantity: $balanceQuantity, unitPrice: $unitPrice, totalPrice: $totalPrice, materialNumber: $materialNumber, materialDescription: $materialDescription, itemNumber: $itemNumber, batch: $batch, eligibleForReturn: $eligibleForReturn, assignmentNumber: $assignmentNumber, principalCode: $principalCode, principalName: $principalName, expiryDate: $expiryDate, priceDate: $priceDate, bonusItems: $bonusItems, outsidePolicy: $outsidePolicy, targetQuantity: $targetQuantity, isMarketPlace: $isMarketPlace)';
+    return 'ReturnMaterialDto(balanceQuantity: $balanceQuantity, unitPrice: $unitPrice, totalPrice: $totalPrice, materialNumber: $materialNumber, materialDescription: $materialDescription, defaultMaterialDescription: $defaultMaterialDescription, itemNumber: $itemNumber, batch: $batch, eligibleForReturn: $eligibleForReturn, assignmentNumber: $assignmentNumber, principalCode: $principalCode, principalName: $principalName, expiryDate: $expiryDate, priceDate: $priceDate, bonusItems: $bonusItems, outsidePolicy: $outsidePolicy, targetQuantity: $targetQuantity, isMarketPlace: $isMarketPlace)';
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ReturnMaterialDto &&
+            other is _$ReturnMaterialDtoImpl &&
             (identical(other.balanceQuantity, balanceQuantity) ||
                 other.balanceQuantity == balanceQuantity) &&
             (identical(other.unitPrice, unitPrice) ||
@@ -448,6 +469,10 @@ class _$_ReturnMaterialDto extends _ReturnMaterialDto {
                 other.materialNumber == materialNumber) &&
             (identical(other.materialDescription, materialDescription) ||
                 other.materialDescription == materialDescription) &&
+            (identical(other.defaultMaterialDescription,
+                    defaultMaterialDescription) ||
+                other.defaultMaterialDescription ==
+                    defaultMaterialDescription) &&
             (identical(other.itemNumber, itemNumber) ||
                 other.itemNumber == itemNumber) &&
             (identical(other.batch, batch) || other.batch == batch) &&
@@ -482,6 +507,7 @@ class _$_ReturnMaterialDto extends _ReturnMaterialDto {
       totalPrice,
       materialNumber,
       materialDescription,
+      defaultMaterialDescription,
       itemNumber,
       batch,
       eligibleForReturn,
@@ -498,13 +524,13 @@ class _$_ReturnMaterialDto extends _ReturnMaterialDto {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ReturnMaterialDtoCopyWith<_$_ReturnMaterialDto> get copyWith =>
-      __$$_ReturnMaterialDtoCopyWithImpl<_$_ReturnMaterialDto>(
+  _$$ReturnMaterialDtoImplCopyWith<_$ReturnMaterialDtoImpl> get copyWith =>
+      __$$ReturnMaterialDtoImplCopyWithImpl<_$ReturnMaterialDtoImpl>(
           this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_ReturnMaterialDtoToJson(
+    return _$$ReturnMaterialDtoImplToJson(
       this,
     );
   }
@@ -522,6 +548,8 @@ abstract class _ReturnMaterialDto extends ReturnMaterialDto {
       required final String materialNumber,
       @JsonKey(name: 'materialDescription', defaultValue: '')
       required final String materialDescription,
+      @JsonKey(name: 'DefaultMaterialDescription', defaultValue: '')
+      required final String defaultMaterialDescription,
       @JsonKey(name: 'itemNumber', defaultValue: '')
       required final String itemNumber,
       @JsonKey(name: 'batch', defaultValue: '') required final String batch,
@@ -544,11 +572,11 @@ abstract class _ReturnMaterialDto extends ReturnMaterialDto {
       @JsonKey(name: 'targetQuantity', defaultValue: '')
       required final String targetQuantity,
       @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
-      required final bool isMarketPlace}) = _$_ReturnMaterialDto;
+      required final bool isMarketPlace}) = _$ReturnMaterialDtoImpl;
   const _ReturnMaterialDto._() : super._();
 
   factory _ReturnMaterialDto.fromJson(Map<String, dynamic> json) =
-      _$_ReturnMaterialDto.fromJson;
+      _$ReturnMaterialDtoImpl.fromJson;
 
   @override
   @JsonKey(name: 'balanceQuantity', defaultValue: '')
@@ -565,6 +593,9 @@ abstract class _ReturnMaterialDto extends ReturnMaterialDto {
   @override
   @JsonKey(name: 'materialDescription', defaultValue: '')
   String get materialDescription;
+  @override
+  @JsonKey(name: 'DefaultMaterialDescription', defaultValue: '')
+  String get defaultMaterialDescription;
   @override
   @JsonKey(name: 'itemNumber', defaultValue: '')
   String get itemNumber;
@@ -603,6 +634,6 @@ abstract class _ReturnMaterialDto extends ReturnMaterialDto {
   bool get isMarketPlace;
   @override
   @JsonKey(ignore: true)
-  _$$_ReturnMaterialDtoCopyWith<_$_ReturnMaterialDto> get copyWith =>
+  _$$ReturnMaterialDtoImplCopyWith<_$ReturnMaterialDtoImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

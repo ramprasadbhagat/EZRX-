@@ -42,7 +42,7 @@ class MaterialInfoWidget extends StatelessWidget {
             ],
           ),
           Text(
-            data.materialDescription,
+            data.displayMaterialDescription,
             style: Theme.of(context).textTheme.labelMedium,
             maxLines: 2,
             overflow: TextOverflow.ellipsis,

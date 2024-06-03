@@ -13,32 +13,34 @@ class ReturnMaterialDto with _$ReturnMaterialDto {
 
   const factory ReturnMaterialDto({
     @JsonKey(name: 'balanceQuantity', defaultValue: '')
-        required String balanceQuantity,
+    required String balanceQuantity,
     @JsonKey(name: 'unitPrice', defaultValue: '') required String unitPrice,
     @JsonKey(name: 'totalPrice', defaultValue: '') required String totalPrice,
     @JsonKey(name: 'material', defaultValue: '') required String materialNumber,
     @JsonKey(name: 'materialDescription', defaultValue: '')
-        required String materialDescription,
+    required String materialDescription,
+    @JsonKey(name: 'DefaultMaterialDescription', defaultValue: '')
+    required String defaultMaterialDescription,
     @JsonKey(name: 'itemNumber', defaultValue: '') required String itemNumber,
     @JsonKey(name: 'batch', defaultValue: '') required String batch,
     @JsonKey(name: 'eligibleForReturn', defaultValue: false)
-        required bool eligibleForReturn,
+    required bool eligibleForReturn,
     @JsonKey(name: 'assignmentNumber', defaultValue: '')
-        required String assignmentNumber,
+    required String assignmentNumber,
     @JsonKey(name: 'principalCode', defaultValue: '')
-        required String principalCode,
+    required String principalCode,
     @JsonKey(name: 'principalName', defaultValue: '')
-        required String principalName,
+    required String principalName,
     @JsonKey(name: 'expiryDate', defaultValue: '') required String expiryDate,
     @JsonKey(name: 'priceDate', defaultValue: '') required String priceDate,
     @JsonKey(name: 'bonusItem', defaultValue: <ReturnMaterialDto>[])
-        required List<ReturnMaterialDto> bonusItems,
+    required List<ReturnMaterialDto> bonusItems,
     @JsonKey(name: 'outsidePolicy', defaultValue: false)
-        required bool outsidePolicy,
+    required bool outsidePolicy,
     @JsonKey(name: 'targetQuantity', defaultValue: '')
-        required String targetQuantity,
+    required String targetQuantity,
     @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
-        required bool isMarketPlace,
+    required bool isMarketPlace,
   }) = _ReturnMaterialDto;
 
   factory ReturnMaterialDto.fromDomain(
@@ -50,6 +52,7 @@ class ReturnMaterialDto with _$ReturnMaterialDto {
       totalPrice: data.totalPrice.apiParameterValue,
       materialNumber: data.materialNumber.getOrCrash(),
       materialDescription: data.materialDescription,
+      defaultMaterialDescription: data.defaultMaterialDescription,
       batch: data.batch,
       eligibleForReturn: data.eligibleForReturn,
       itemNumber: data.itemNumber,
@@ -75,6 +78,7 @@ class ReturnMaterialDto with _$ReturnMaterialDto {
       totalPrice: RangeValue(totalPrice),
       materialNumber: MaterialNumber(materialNumber),
       materialDescription: materialDescription,
+      defaultMaterialDescription: defaultMaterialDescription,
       batch: batch,
       eligibleForReturn: eligibleForReturn,
       itemNumber: itemNumber,

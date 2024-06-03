@@ -57,7 +57,7 @@ class BonusMaterialInfo extends StatelessWidget {
             ],
           ),
           Text(
-            data.materialDescription,
+            data.displayMaterialDescription,
             style: Theme.of(context).textTheme.labelMedium,
           ),
           Wrap(

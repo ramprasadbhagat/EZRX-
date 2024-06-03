@@ -12,7 +12,7 @@ part of 'return_material.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$ReturnMaterial {
@@ -22,6 +22,7 @@ mixin _$ReturnMaterial {
   RangeValue get totalPrice => throw _privateConstructorUsedError;
   MaterialNumber get materialNumber => throw _privateConstructorUsedError;
   String get materialDescription => throw _privateConstructorUsedError;
+  String get defaultMaterialDescription => throw _privateConstructorUsedError;
   String get itemNumber => throw _privateConstructorUsedError;
   String get batch => throw _privateConstructorUsedError;
   bool get eligibleForReturn => throw _privateConstructorUsedError;
@@ -52,6 +53,7 @@ abstract class $ReturnMaterialCopyWith<$Res> {
       RangeValue totalPrice,
       MaterialNumber materialNumber,
       String materialDescription,
+      String defaultMaterialDescription,
       String itemNumber,
       String batch,
       bool eligibleForReturn,
@@ -84,6 +86,7 @@ class _$ReturnMaterialCopyWithImpl<$Res, $Val extends ReturnMaterial>
     Object? totalPrice = null,
     Object? materialNumber = null,
     Object? materialDescription = null,
+    Object? defaultMaterialDescription = null,
     Object? itemNumber = null,
     Object? batch = null,
     Object? eligibleForReturn = null,
@@ -120,6 +123,10 @@ class _$ReturnMaterialCopyWithImpl<$Res, $Val extends ReturnMaterial>
       materialDescription: null == materialDescription
           ? _value.materialDescription
           : materialDescription // ignore: cast_nullable_to_non_nullable
+              as String,
+      defaultMaterialDescription: null == defaultMaterialDescription
+          ? _value.defaultMaterialDescription
+          : defaultMaterialDescription // ignore: cast_nullable_to_non_nullable
               as String,
       itemNumber: null == itemNumber
           ? _value.itemNumber
@@ -170,11 +177,11 @@ class _$ReturnMaterialCopyWithImpl<$Res, $Val extends ReturnMaterial>
 }
 
 /// @nodoc
-abstract class _$$_ReturnMaterialCopyWith<$Res>
+abstract class _$$ReturnMaterialImplCopyWith<$Res>
     implements $ReturnMaterialCopyWith<$Res> {
-  factory _$$_ReturnMaterialCopyWith(
-          _$_ReturnMaterial value, $Res Function(_$_ReturnMaterial) then) =
-      __$$_ReturnMaterialCopyWithImpl<$Res>;
+  factory _$$ReturnMaterialImplCopyWith(_$ReturnMaterialImpl value,
+          $Res Function(_$ReturnMaterialImpl) then) =
+      __$$ReturnMaterialImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -184,6 +191,7 @@ abstract class _$$_ReturnMaterialCopyWith<$Res>
       RangeValue totalPrice,
       MaterialNumber materialNumber,
       String materialDescription,
+      String defaultMaterialDescription,
       String itemNumber,
       String batch,
       bool eligibleForReturn,
@@ -198,11 +206,11 @@ abstract class _$$_ReturnMaterialCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_ReturnMaterialCopyWithImpl<$Res>
-    extends _$ReturnMaterialCopyWithImpl<$Res, _$_ReturnMaterial>
-    implements _$$_ReturnMaterialCopyWith<$Res> {
-  __$$_ReturnMaterialCopyWithImpl(
-      _$_ReturnMaterial _value, $Res Function(_$_ReturnMaterial) _then)
+class __$$ReturnMaterialImplCopyWithImpl<$Res>
+    extends _$ReturnMaterialCopyWithImpl<$Res, _$ReturnMaterialImpl>
+    implements _$$ReturnMaterialImplCopyWith<$Res> {
+  __$$ReturnMaterialImplCopyWithImpl(
+      _$ReturnMaterialImpl _value, $Res Function(_$ReturnMaterialImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -214,6 +222,7 @@ class __$$_ReturnMaterialCopyWithImpl<$Res>
     Object? totalPrice = null,
     Object? materialNumber = null,
     Object? materialDescription = null,
+    Object? defaultMaterialDescription = null,
     Object? itemNumber = null,
     Object? batch = null,
     Object? eligibleForReturn = null,
@@ -226,7 +235,7 @@ class __$$_ReturnMaterialCopyWithImpl<$Res>
     Object? bonusItems = null,
     Object? isMarketPlace = null,
   }) {
-    return _then(_$_ReturnMaterial(
+    return _then(_$ReturnMaterialImpl(
       balanceQuantity: null == balanceQuantity
           ? _value.balanceQuantity
           : balanceQuantity // ignore: cast_nullable_to_non_nullable
@@ -250,6 +259,10 @@ class __$$_ReturnMaterialCopyWithImpl<$Res>
       materialDescription: null == materialDescription
           ? _value.materialDescription
           : materialDescription // ignore: cast_nullable_to_non_nullable
+              as String,
+      defaultMaterialDescription: null == defaultMaterialDescription
+          ? _value.defaultMaterialDescription
+          : defaultMaterialDescription // ignore: cast_nullable_to_non_nullable
               as String,
       itemNumber: null == itemNumber
           ? _value.itemNumber
@@ -301,14 +314,15 @@ class __$$_ReturnMaterialCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_ReturnMaterial extends _ReturnMaterial {
-  const _$_ReturnMaterial(
+class _$ReturnMaterialImpl extends _ReturnMaterial {
+  const _$ReturnMaterialImpl(
       {required this.balanceQuantity,
       required this.targetQuantity,
       required this.unitPrice,
       required this.totalPrice,
       required this.materialNumber,
       required this.materialDescription,
+      required this.defaultMaterialDescription,
       required this.itemNumber,
       required this.batch,
       required this.eligibleForReturn,
@@ -335,6 +349,8 @@ class _$_ReturnMaterial extends _ReturnMaterial {
   final MaterialNumber materialNumber;
   @override
   final String materialDescription;
+  @override
+  final String defaultMaterialDescription;
   @override
   final String itemNumber;
   @override
@@ -366,14 +382,14 @@ class _$_ReturnMaterial extends _ReturnMaterial {
 
   @override
   String toString() {
-    return 'ReturnMaterial(balanceQuantity: $balanceQuantity, targetQuantity: $targetQuantity, unitPrice: $unitPrice, totalPrice: $totalPrice, materialNumber: $materialNumber, materialDescription: $materialDescription, itemNumber: $itemNumber, batch: $batch, eligibleForReturn: $eligibleForReturn, assignmentNumber: $assignmentNumber, principalCode: $principalCode, principalName: $principalName, expiryDate: $expiryDate, priceDate: $priceDate, outsidePolicy: $outsidePolicy, bonusItems: $bonusItems, isMarketPlace: $isMarketPlace)';
+    return 'ReturnMaterial(balanceQuantity: $balanceQuantity, targetQuantity: $targetQuantity, unitPrice: $unitPrice, totalPrice: $totalPrice, materialNumber: $materialNumber, materialDescription: $materialDescription, defaultMaterialDescription: $defaultMaterialDescription, itemNumber: $itemNumber, batch: $batch, eligibleForReturn: $eligibleForReturn, assignmentNumber: $assignmentNumber, principalCode: $principalCode, principalName: $principalName, expiryDate: $expiryDate, priceDate: $priceDate, outsidePolicy: $outsidePolicy, bonusItems: $bonusItems, isMarketPlace: $isMarketPlace)';
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ReturnMaterial &&
+            other is _$ReturnMaterialImpl &&
             (identical(other.balanceQuantity, balanceQuantity) ||
                 other.balanceQuantity == balanceQuantity) &&
             (identical(other.targetQuantity, targetQuantity) ||
@@ -386,6 +402,10 @@ class _$_ReturnMaterial extends _ReturnMaterial {
                 other.materialNumber == materialNumber) &&
             (identical(other.materialDescription, materialDescription) ||
                 other.materialDescription == materialDescription) &&
+            (identical(other.defaultMaterialDescription,
+                    defaultMaterialDescription) ||
+                other.defaultMaterialDescription ==
+                    defaultMaterialDescription) &&
             (identical(other.itemNumber, itemNumber) ||
                 other.itemNumber == itemNumber) &&
             (identical(other.batch, batch) || other.batch == batch) &&
@@ -418,6 +438,7 @@ class _$_ReturnMaterial extends _ReturnMaterial {
       totalPrice,
       materialNumber,
       materialDescription,
+      defaultMaterialDescription,
       itemNumber,
       batch,
       eligibleForReturn,
@@ -433,8 +454,9 @@ class _$_ReturnMaterial extends _ReturnMaterial {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ReturnMaterialCopyWith<_$_ReturnMaterial> get copyWith =>
-      __$$_ReturnMaterialCopyWithImpl<_$_ReturnMaterial>(this, _$identity);
+  _$$ReturnMaterialImplCopyWith<_$ReturnMaterialImpl> get copyWith =>
+      __$$ReturnMaterialImplCopyWithImpl<_$ReturnMaterialImpl>(
+          this, _$identity);
 }
 
 abstract class _ReturnMaterial extends ReturnMaterial {
@@ -445,6 +467,7 @@ abstract class _ReturnMaterial extends ReturnMaterial {
       required final RangeValue totalPrice,
       required final MaterialNumber materialNumber,
       required final String materialDescription,
+      required final String defaultMaterialDescription,
       required final String itemNumber,
       required final String batch,
       required final bool eligibleForReturn,
@@ -455,7 +478,7 @@ abstract class _ReturnMaterial extends ReturnMaterial {
       required final DateTimeStringValue priceDate,
       required final bool outsidePolicy,
       required final List<ReturnMaterial> bonusItems,
-      required final bool isMarketPlace}) = _$_ReturnMaterial;
+      required final bool isMarketPlace}) = _$ReturnMaterialImpl;
   const _ReturnMaterial._() : super._();
 
   @override
@@ -470,6 +493,8 @@ abstract class _ReturnMaterial extends ReturnMaterial {
   MaterialNumber get materialNumber;
   @override
   String get materialDescription;
+  @override
+  String get defaultMaterialDescription;
   @override
   String get itemNumber;
   @override
@@ -494,6 +519,6 @@ abstract class _ReturnMaterial extends ReturnMaterial {
   bool get isMarketPlace;
   @override
   @JsonKey(ignore: true)
-  _$$_ReturnMaterialCopyWith<_$_ReturnMaterial> get copyWith =>
+  _$$ReturnMaterialImplCopyWith<_$ReturnMaterialImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

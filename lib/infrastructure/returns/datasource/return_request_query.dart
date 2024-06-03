@@ -6,6 +6,7 @@ class ReturnRequestQuery {
           assignmentNumber
           material
           materialDescription
+          DefaultMaterialDescription
           balanceQuantity
           targetQuantity
           batch
@@ -23,6 +24,7 @@ class ReturnRequestQuery {
             assignmentNumber
             material
             materialDescription
+            DefaultMaterialDescription
             balanceQuantity
             eligibleForReturn
             batch

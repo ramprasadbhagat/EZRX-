@@ -19,6 +19,7 @@ class ReturnMaterial with _$ReturnMaterial {
     required RangeValue totalPrice,
     required MaterialNumber materialNumber,
     required String materialDescription,
+    required String defaultMaterialDescription,
     required String itemNumber,
     required String batch,
     required bool eligibleForReturn,
@@ -39,6 +40,7 @@ class ReturnMaterial with _$ReturnMaterial {
         totalPrice: RangeValue(''),
         materialNumber: MaterialNumber(''),
         materialDescription: '',
+        defaultMaterialDescription: '',
         itemNumber: '',
         batch: '',
         eligibleForReturn: false,
@@ -70,6 +72,10 @@ class ReturnMaterial with _$ReturnMaterial {
       isMarketPlace ? 'Seller name' : 'Principal name';
 
   String get displayBatch => isMarketPlace ? 'NA' : batch;
+
+  String get displayMaterialDescription => materialDescription.isEmpty
+      ? defaultMaterialDescription
+      : materialDescription;
 
   String get displayExpiryDate => isMarketPlace ? 'NA' : expiryDate.dateString;
 
