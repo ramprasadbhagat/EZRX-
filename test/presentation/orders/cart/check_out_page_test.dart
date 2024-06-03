@@ -3125,5 +3125,32 @@ void main() {
         findsOne,
       );
     });
+
+    testWidgets('check Reference Note character limit',
+        (WidgetTester tester) async {
+      when(() => eligibilityBloc.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrgConfigs: fakeTHSalesOrgConfigs,
+          salesOrganisation: fakeTHSalesOrganisation,
+        ),
+      );
+
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pump();
+
+      final referenceNoteKeyFinder =
+          find.byKey(WidgetKeys.genericKey(key: 'referenceNoteKey'));
+      expect(referenceNoteKeyFinder, findsOneWidget);
+
+      await tester.enterText(referenceNoteKeyFinder, 'a' * 132);
+      await tester.testTextInput.receiveAction(TextInputAction.done);
+      await tester.pumpAndSettle();
+      expect(find.text('a' * 132), findsOneWidget);
+
+      await tester.enterText(referenceNoteKeyFinder, 'a' * 133);
+      await tester.testTextInput.receiveAction(TextInputAction.done);
+      await tester.pumpAndSettle();
+      expect(find.text('a' * 133), findsNothing);
+    });
   });
 }

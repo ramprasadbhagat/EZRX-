@@ -58,6 +58,7 @@ class _DeliveryInfo extends StatelessWidget {
                   labelText: 'Reference note',
                   keyText: 'referenceNoteKey',
                   hintText: 'Enter reference note (Optional)',
+                  maxLength: 132,
                   label: DeliveryInfoLabel.referenceNote,
                   deliveryInfoData: state.deliveryInfoData,
                   focusNode: focusNodes[DeliveryInfoLabel.referenceNote] ??
