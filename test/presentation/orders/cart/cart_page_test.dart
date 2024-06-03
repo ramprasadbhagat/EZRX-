@@ -4390,6 +4390,64 @@ void main() {
           },
         );
       });
+
+      group('Tender Contract MOV validation For VN Market - ', () {
+        testWidgets(
+            'When tender contract add to cart, then no MOV validation on checkout',
+            (tester) async {
+          final salesOrgConfig = fakeVNSalesOrgConfigs;
+          //the first element of mockCartItems is Tender Contract material
+          when(() => cartBloc.state).thenReturn(
+            CartState.initial().copyWith(cartProducts: [mockCartItems.first]),
+          );
+          when(() => orderEligibilityBlocMock.state).thenReturn(
+            OrderEligibilityState.initial().copyWith(
+              cartItems: [mockCartItems.first],
+              configs: salesOrgConfig,
+              mpSubtotal: salesOrgConfig.mpMinOrderAmount - 1,
+              zpSubtotal: salesOrgConfig.minOrderAmount - 1,
+              showErrorMessage: true,
+            ),
+          );
+          await tester.binding.setSurfaceSize(const Size(600, 900));
+          await tester.pumpWidget(getWidget());
+          await tester.pumpAndSettle();
+
+          final classicMOVErrorMessage =
+              'Please ensure that the order value satisfies the minimum order value of ${StringUtils.displayPrice(salesOrgConfig, salesOrgConfig.minOrderAmount)}';
+          expect(find.text(classicMOVErrorMessage), findsNothing);
+        });
+
+        testWidgets(
+            'When non tender contract add to cart, then MOV validation on checkout',
+            (tester) async {
+          final salesOrgConfig = fakeVNSalesOrgConfigs;
+          //overriding the first element of mockCartItems as non-Tender Contract material
+          final cartProducts = [
+            mockCartItemWithAllType.firstWhere(
+              (element) => element.tenderContract == TenderContract.empty(),
+              orElse: () => PriceAggregate.empty(),
+            ),
+          ];
+          when(() => cartBloc.state).thenReturn(
+            CartState.initial().copyWith(cartProducts: cartProducts),
+          );
+          when(() => orderEligibilityBlocMock.state).thenReturn(
+            OrderEligibilityState.initial().copyWith(
+              cartItems: cartProducts,
+              configs: salesOrgConfig,
+              showErrorMessage: true,
+            ),
+          );
+          await tester.binding.setSurfaceSize(const Size(600, 900));
+          await tester.pumpWidget(getWidget());
+          await tester.pumpAndSettle();
+
+          final classicMOVErrorMessage =
+              'Please ensure that the order value satisfies the minimum order value of ${StringUtils.displayPrice(salesOrgConfig, salesOrgConfig.minOrderAmount)}';
+          expect(find.text(classicMOVErrorMessage), findsOneWidget);
+        });
+      });
     },
   );
 }
