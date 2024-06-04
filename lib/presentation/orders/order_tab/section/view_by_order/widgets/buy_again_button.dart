@@ -125,8 +125,11 @@ class BuyAgainButton extends StatelessWidget {
   void _reOrder(BuildContext context) {
     final cartState = context.read<CartBloc>().state;
     final cartProducts = cartState.cartProducts;
-    final isTenderEligible =
-        context.read<EligibilityBloc>().state.salesOrg.isTenderEligible;
+    final isTenderEligible = context
+        .read<EligibilityBloc>()
+        .state
+        .salesOrgConfigs
+        .enableTenderOrders;
     if (isTenderEligible && viewByOrderHistoryItem.isNotValidTenderContract) {
       CustomSnackBar(
         icon: const Icon(

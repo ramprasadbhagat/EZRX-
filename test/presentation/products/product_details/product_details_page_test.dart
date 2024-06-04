@@ -3059,6 +3059,7 @@ void main() {
           when(() => eligibilityBlocMock.state).thenReturn(
             EligibilityState.initial().copyWith(
               salesOrganisation: fakeVNSalesOrganisation,
+              salesOrgConfigs: fakeVNSalesOrgConfigs,
             ),
           );
           final expectedState = [

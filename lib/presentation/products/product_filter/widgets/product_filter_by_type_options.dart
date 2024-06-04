@@ -31,7 +31,7 @@ class _ProductFilterByTypeOptions extends StatelessWidget {
                   ),
               title: 'Favourites',
             ),
-            if (eligibilityState.salesOrg.isTenderEligible)
+            if (eligibilityState.salesOrgConfigs.enableTenderOrders)
               _ListTileThemeWidget(
                 value: state.materialFilter.isTender,
                 onChanged: (value) => context.read<MaterialFilterBloc>().add(

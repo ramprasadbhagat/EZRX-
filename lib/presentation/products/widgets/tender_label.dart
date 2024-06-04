@@ -14,7 +14,11 @@ class TenderLabel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return context.read<EligibilityBloc>().state.salesOrg.isTenderEligible &&
+    return context
+                .read<EligibilityBloc>()
+                .state
+                .salesOrgConfigs
+                .enableTenderOrders &&
             materialInfo.hasValidTenderContract
         ? ProductTag.tenderTag()
         : const SizedBox.shrink();

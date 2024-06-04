@@ -57,6 +57,7 @@ class SalesOrganisationConfigs with _$SalesOrganisationConfigs {
     required bool enableOHPrice,
     required PoNumberRequired poNumberRequired,
     required bool enableTaxDisplay,
+    required bool enableTenderOrders,
     required bool netPriceOverride,
     required bool displayOrderDiscount,
     required double minOrderAmount,
@@ -162,6 +163,7 @@ class SalesOrganisationConfigs with _$SalesOrganisationConfigs {
         mpSmallOrderFeeUserRoles: <String>[],
         mpSmallOrderFee: 0.0,
         mpSAPMinOrderAmount: 0.0,
+        enableTenderOrders: false,
       );
 
   bool get shouldDisplayVATInPercentage =>

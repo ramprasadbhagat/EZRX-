@@ -63,6 +63,7 @@ mixin _$SalesOrganisationConfigs {
   bool get enableOHPrice => throw _privateConstructorUsedError;
   PoNumberRequired get poNumberRequired => throw _privateConstructorUsedError;
   bool get enableTaxDisplay => throw _privateConstructorUsedError;
+  bool get enableTenderOrders => throw _privateConstructorUsedError;
   bool get netPriceOverride => throw _privateConstructorUsedError;
   bool get displayOrderDiscount => throw _privateConstructorUsedError;
   double get minOrderAmount => throw _privateConstructorUsedError;
@@ -151,6 +152,7 @@ abstract class $SalesOrganisationConfigsCopyWith<$Res> {
       bool enableOHPrice,
       PoNumberRequired poNumberRequired,
       bool enableTaxDisplay,
+      bool enableTenderOrders,
       bool netPriceOverride,
       bool displayOrderDiscount,
       double minOrderAmount,
@@ -240,6 +242,7 @@ class _$SalesOrganisationConfigsCopyWithImpl<$Res,
     Object? enableOHPrice = null,
     Object? poNumberRequired = null,
     Object? enableTaxDisplay = null,
+    Object? enableTenderOrders = null,
     Object? netPriceOverride = null,
     Object? displayOrderDiscount = null,
     Object? minOrderAmount = null,
@@ -450,6 +453,10 @@ class _$SalesOrganisationConfigsCopyWithImpl<$Res,
           ? _value.enableTaxDisplay
           : enableTaxDisplay // ignore: cast_nullable_to_non_nullable
               as bool,
+      enableTenderOrders: null == enableTenderOrders
+          ? _value.enableTenderOrders
+          : enableTenderOrders // ignore: cast_nullable_to_non_nullable
+              as bool,
       netPriceOverride: null == netPriceOverride
           ? _value.netPriceOverride
           : netPriceOverride // ignore: cast_nullable_to_non_nullable
@@ -621,6 +628,7 @@ abstract class _$$SalesOrganisationConfigsImplCopyWith<$Res>
       bool enableOHPrice,
       PoNumberRequired poNumberRequired,
       bool enableTaxDisplay,
+      bool enableTenderOrders,
       bool netPriceOverride,
       bool displayOrderDiscount,
       double minOrderAmount,
@@ -709,6 +717,7 @@ class __$$SalesOrganisationConfigsImplCopyWithImpl<$Res>
     Object? enableOHPrice = null,
     Object? poNumberRequired = null,
     Object? enableTaxDisplay = null,
+    Object? enableTenderOrders = null,
     Object? netPriceOverride = null,
     Object? displayOrderDiscount = null,
     Object? minOrderAmount = null,
@@ -919,6 +928,10 @@ class __$$SalesOrganisationConfigsImplCopyWithImpl<$Res>
           ? _value.enableTaxDisplay
           : enableTaxDisplay // ignore: cast_nullable_to_non_nullable
               as bool,
+      enableTenderOrders: null == enableTenderOrders
+          ? _value.enableTenderOrders
+          : enableTenderOrders // ignore: cast_nullable_to_non_nullable
+              as bool,
       netPriceOverride: null == netPriceOverride
           ? _value.netPriceOverride
           : netPriceOverride // ignore: cast_nullable_to_non_nullable
@@ -1084,6 +1097,7 @@ class _$SalesOrganisationConfigsImpl extends _SalesOrganisationConfigs {
       required this.enableOHPrice,
       required this.poNumberRequired,
       required this.enableTaxDisplay,
+      required this.enableTenderOrders,
       required this.netPriceOverride,
       required this.displayOrderDiscount,
       required this.minOrderAmount,
@@ -1214,6 +1228,8 @@ class _$SalesOrganisationConfigsImpl extends _SalesOrganisationConfigs {
   @override
   final bool enableTaxDisplay;
   @override
+  final bool enableTenderOrders;
+  @override
   final bool netPriceOverride;
   @override
   final bool displayOrderDiscount;
@@ -1286,7 +1302,7 @@ class _$SalesOrganisationConfigsImpl extends _SalesOrganisationConfigs {
 
   @override
   String toString() {
-    return 'SalesOrganisationConfigs(enableIRN: $enableIRN, enableDefaultMD: $enableDefaultMD, disableProcessingStatus: $disableProcessingStatus, currency: $currency, hideCustomer: $hideCustomer, enableGimmickMaterial: $enableGimmickMaterial, disablePrincipals: $disablePrincipals, principalList: $principalList, disableOrderType: $disableOrderType, enableBatchNumber: $enableBatchNumber, disableBundles: $disableBundles, enableZDP5: $enableZDP5, enableVat: $enableVat, enableTaxAtTotalLevelOnly: $enableTaxAtTotalLevelOnly, enablePOAttachmentRequired: $enablePOAttachmentRequired, enableTaxClassification: $enableTaxClassification, vatValue: $vatValue, materialWithoutPrice: $materialWithoutPrice, enableSpecialInstructions: $enableSpecialInstructions, enableReferenceNote: $enableReferenceNote, enableCollectiveNumber: $enableCollectiveNumber, enableMobileNumber: $enableMobileNumber, enableFutureDeliveryDay: $enableFutureDeliveryDay, enablePaymentTerms: $enablePaymentTerms, futureDeliveryDay: $futureDeliveryDay, enableGMC: $enableGMC, enableListPrice: $enableListPrice, priceOverride: $priceOverride, disablePaymentTermsDisplay: $disablePaymentTermsDisplay, disablePayment: $disablePayment, disableDeliveryDate: $disableDeliveryDate, enableBillTo: $enableBillTo, enableGreenDelivery: $enableGreenDelivery, greenDeliveryDelayInDays: $greenDeliveryDelayInDays, greenDeliveryUserRole: $greenDeliveryUserRole, showPOAttachment: $showPOAttachment, hideStockDisplay: $hideStockDisplay, expiryDateDisplay: $expiryDateDisplay, batchNumDisplay: $batchNumDisplay, addOosMaterials: $addOosMaterials, oosValue: $oosValue, enableRemarks: $enableRemarks, enableOHPrice: $enableOHPrice, poNumberRequired: $poNumberRequired, enableTaxDisplay: $enableTaxDisplay, netPriceOverride: $netPriceOverride, displayOrderDiscount: $displayOrderDiscount, minOrderAmount: $minOrderAmount, salesOrg: $salesOrg, enableZDP8Override: $enableZDP8Override, disableReturnsAccessSR: $disableReturnsAccessSR, disableReturnsAccess: $disableReturnsAccess, enableComboDeals: $enableComboDeals, comboDealsUserRole: $comboDealsUserRole, enableGMN: $enableGMN, displayItemTaxBreakdown: $displayItemTaxBreakdown, displaySubtotalTaxBreakdown: $displaySubtotalTaxBreakdown, disableOverrideFieldCustomer: $disableOverrideFieldCustomer, disableOverrideFieldSR: $disableOverrideFieldSR, hideCredit: $hideCredit, allowReturnsOutsidePolicy: $allowReturnsOutsidePolicy, enableMarketPlace: $enableMarketPlace, mpMinOrderAmount: $mpMinOrderAmount, statementOfAccountEnabled: $statementOfAccountEnabled, disablePromotion: $disablePromotion, enableSmallOrderFee: $enableSmallOrderFee, smallOrderFeeUserRoles: $smallOrderFeeUserRoles, smallOrderFee: $smallOrderFee, sapMinOrderAmount: $sapMinOrderAmount, enableMPSmallOrderFee: $enableMPSmallOrderFee, mpSmallOrderFeeUserRoles: $mpSmallOrderFeeUserRoles, mpSmallOrderFee: $mpSmallOrderFee, mpSAPMinOrderAmount: $mpSAPMinOrderAmount)';
+    return 'SalesOrganisationConfigs(enableIRN: $enableIRN, enableDefaultMD: $enableDefaultMD, disableProcessingStatus: $disableProcessingStatus, currency: $currency, hideCustomer: $hideCustomer, enableGimmickMaterial: $enableGimmickMaterial, disablePrincipals: $disablePrincipals, principalList: $principalList, disableOrderType: $disableOrderType, enableBatchNumber: $enableBatchNumber, disableBundles: $disableBundles, enableZDP5: $enableZDP5, enableVat: $enableVat, enableTaxAtTotalLevelOnly: $enableTaxAtTotalLevelOnly, enablePOAttachmentRequired: $enablePOAttachmentRequired, enableTaxClassification: $enableTaxClassification, vatValue: $vatValue, materialWithoutPrice: $materialWithoutPrice, enableSpecialInstructions: $enableSpecialInstructions, enableReferenceNote: $enableReferenceNote, enableCollectiveNumber: $enableCollectiveNumber, enableMobileNumber: $enableMobileNumber, enableFutureDeliveryDay: $enableFutureDeliveryDay, enablePaymentTerms: $enablePaymentTerms, futureDeliveryDay: $futureDeliveryDay, enableGMC: $enableGMC, enableListPrice: $enableListPrice, priceOverride: $priceOverride, disablePaymentTermsDisplay: $disablePaymentTermsDisplay, disablePayment: $disablePayment, disableDeliveryDate: $disableDeliveryDate, enableBillTo: $enableBillTo, enableGreenDelivery: $enableGreenDelivery, greenDeliveryDelayInDays: $greenDeliveryDelayInDays, greenDeliveryUserRole: $greenDeliveryUserRole, showPOAttachment: $showPOAttachment, hideStockDisplay: $hideStockDisplay, expiryDateDisplay: $expiryDateDisplay, batchNumDisplay: $batchNumDisplay, addOosMaterials: $addOosMaterials, oosValue: $oosValue, enableRemarks: $enableRemarks, enableOHPrice: $enableOHPrice, poNumberRequired: $poNumberRequired, enableTaxDisplay: $enableTaxDisplay, enableTenderOrders: $enableTenderOrders, netPriceOverride: $netPriceOverride, displayOrderDiscount: $displayOrderDiscount, minOrderAmount: $minOrderAmount, salesOrg: $salesOrg, enableZDP8Override: $enableZDP8Override, disableReturnsAccessSR: $disableReturnsAccessSR, disableReturnsAccess: $disableReturnsAccess, enableComboDeals: $enableComboDeals, comboDealsUserRole: $comboDealsUserRole, enableGMN: $enableGMN, displayItemTaxBreakdown: $displayItemTaxBreakdown, displaySubtotalTaxBreakdown: $displaySubtotalTaxBreakdown, disableOverrideFieldCustomer: $disableOverrideFieldCustomer, disableOverrideFieldSR: $disableOverrideFieldSR, hideCredit: $hideCredit, allowReturnsOutsidePolicy: $allowReturnsOutsidePolicy, enableMarketPlace: $enableMarketPlace, mpMinOrderAmount: $mpMinOrderAmount, statementOfAccountEnabled: $statementOfAccountEnabled, disablePromotion: $disablePromotion, enableSmallOrderFee: $enableSmallOrderFee, smallOrderFeeUserRoles: $smallOrderFeeUserRoles, smallOrderFee: $smallOrderFee, sapMinOrderAmount: $sapMinOrderAmount, enableMPSmallOrderFee: $enableMPSmallOrderFee, mpSmallOrderFeeUserRoles: $mpSmallOrderFeeUserRoles, mpSmallOrderFee: $mpSmallOrderFee, mpSAPMinOrderAmount: $mpSAPMinOrderAmount)';
   }
 
   @override
@@ -1367,6 +1383,7 @@ class _$SalesOrganisationConfigsImpl extends _SalesOrganisationConfigs {
             (identical(other.enableOHPrice, enableOHPrice) || other.enableOHPrice == enableOHPrice) &&
             (identical(other.poNumberRequired, poNumberRequired) || other.poNumberRequired == poNumberRequired) &&
             (identical(other.enableTaxDisplay, enableTaxDisplay) || other.enableTaxDisplay == enableTaxDisplay) &&
+            (identical(other.enableTenderOrders, enableTenderOrders) || other.enableTenderOrders == enableTenderOrders) &&
             (identical(other.netPriceOverride, netPriceOverride) || other.netPriceOverride == netPriceOverride) &&
             (identical(other.displayOrderDiscount, displayOrderDiscount) || other.displayOrderDiscount == displayOrderDiscount) &&
             (identical(other.minOrderAmount, minOrderAmount) || other.minOrderAmount == minOrderAmount) &&
@@ -1445,6 +1462,7 @@ class _$SalesOrganisationConfigsImpl extends _SalesOrganisationConfigs {
         enableOHPrice,
         poNumberRequired,
         enableTaxDisplay,
+        enableTenderOrders,
         netPriceOverride,
         displayOrderDiscount,
         minOrderAmount,
@@ -1530,6 +1548,7 @@ abstract class _SalesOrganisationConfigs extends SalesOrganisationConfigs {
           required final bool enableOHPrice,
           required final PoNumberRequired poNumberRequired,
           required final bool enableTaxDisplay,
+          required final bool enableTenderOrders,
           required final bool netPriceOverride,
           required final bool displayOrderDiscount,
           required final double minOrderAmount,
@@ -1651,6 +1670,8 @@ abstract class _SalesOrganisationConfigs extends SalesOrganisationConfigs {
   PoNumberRequired get poNumberRequired;
   @override
   bool get enableTaxDisplay;
+  @override
+  bool get enableTenderOrders;
   @override
   bool get netPriceOverride;
   @override

@@ -254,16 +254,6 @@ void main() {
         expect(result, '25256DFD-D111-43F1-B29A-2FABB6B45E42');
       },
     );
-
-    test(
-      'Tender eligible for VN',
-      () {
-        const input = '3050';
-        final salesOrg = SalesOrg(input);
-        final result = salesOrg.isTenderEligible;
-        expect(result, true);
-      },
-    );
   });
 
   group('RoleType value object', () {

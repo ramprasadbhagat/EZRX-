@@ -12,7 +12,7 @@ part of 'sales_organisation_configs_dto.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 SalesOrganisationConfigsDto _$SalesOrganisationConfigsDtoFromJson(
     Map<String, dynamic> json) {
@@ -101,6 +101,8 @@ mixin _$SalesOrganisationConfigsDto {
   bool get enableIRN => throw _privateConstructorUsedError;
   @JsonKey(name: 'enableTaxDisplay', defaultValue: false)
   bool get enableTaxDisplay => throw _privateConstructorUsedError;
+  @JsonKey(name: 'enableTenderOrders', defaultValue: false)
+  bool get enableTenderOrders => throw _privateConstructorUsedError;
   @JsonKey(name: 'enableTaxAtTotalLevelOnly', defaultValue: false)
   bool get enableTaxAtTotalLevelOnly => throw _privateConstructorUsedError;
   @JsonKey(name: 'netPriceOverride', defaultValue: false)
@@ -250,6 +252,8 @@ abstract class $SalesOrganisationConfigsDtoCopyWith<$Res> {
       @JsonKey(name: 'enableIRN', defaultValue: false) bool enableIRN,
       @JsonKey(name: 'enableTaxDisplay', defaultValue: false)
       bool enableTaxDisplay,
+      @JsonKey(name: 'enableTenderOrders', defaultValue: false)
+      bool enableTenderOrders,
       @JsonKey(name: 'enableTaxAtTotalLevelOnly', defaultValue: false)
       bool enableTaxAtTotalLevelOnly,
       @JsonKey(name: 'netPriceOverride', defaultValue: false)
@@ -367,6 +371,7 @@ class _$SalesOrganisationConfigsDtoCopyWithImpl<$Res,
     Object? poNumberRequired = null,
     Object? enableIRN = null,
     Object? enableTaxDisplay = null,
+    Object? enableTenderOrders = null,
     Object? enableTaxAtTotalLevelOnly = null,
     Object? netPriceOverride = null,
     Object? batchNumDisplay = null,
@@ -558,6 +563,10 @@ class _$SalesOrganisationConfigsDtoCopyWithImpl<$Res,
           ? _value.enableTaxDisplay
           : enableTaxDisplay // ignore: cast_nullable_to_non_nullable
               as bool,
+      enableTenderOrders: null == enableTenderOrders
+          ? _value.enableTenderOrders
+          : enableTenderOrders // ignore: cast_nullable_to_non_nullable
+              as bool,
       enableTaxAtTotalLevelOnly: null == enableTaxAtTotalLevelOnly
           ? _value.enableTaxAtTotalLevelOnly
           : enableTaxAtTotalLevelOnly // ignore: cast_nullable_to_non_nullable
@@ -695,12 +704,12 @@ class _$SalesOrganisationConfigsDtoCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_SalesOrganisationConfigsDtoCopyWith<$Res>
+abstract class _$$SalesOrganisationConfigsDtoImplCopyWith<$Res>
     implements $SalesOrganisationConfigsDtoCopyWith<$Res> {
-  factory _$$_SalesOrganisationConfigsDtoCopyWith(
-          _$_SalesOrganisationConfigsDto value,
-          $Res Function(_$_SalesOrganisationConfigsDto) then) =
-      __$$_SalesOrganisationConfigsDtoCopyWithImpl<$Res>;
+  factory _$$SalesOrganisationConfigsDtoImplCopyWith(
+          _$SalesOrganisationConfigsDtoImpl value,
+          $Res Function(_$SalesOrganisationConfigsDtoImpl) then) =
+      __$$SalesOrganisationConfigsDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -768,6 +777,8 @@ abstract class _$$_SalesOrganisationConfigsDtoCopyWith<$Res>
       @JsonKey(name: 'enableIRN', defaultValue: false) bool enableIRN,
       @JsonKey(name: 'enableTaxDisplay', defaultValue: false)
       bool enableTaxDisplay,
+      @JsonKey(name: 'enableTenderOrders', defaultValue: false)
+      bool enableTenderOrders,
       @JsonKey(name: 'enableTaxAtTotalLevelOnly', defaultValue: false)
       bool enableTaxAtTotalLevelOnly,
       @JsonKey(name: 'netPriceOverride', defaultValue: false)
@@ -833,13 +844,13 @@ abstract class _$$_SalesOrganisationConfigsDtoCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_SalesOrganisationConfigsDtoCopyWithImpl<$Res>
+class __$$SalesOrganisationConfigsDtoImplCopyWithImpl<$Res>
     extends _$SalesOrganisationConfigsDtoCopyWithImpl<$Res,
-        _$_SalesOrganisationConfigsDto>
-    implements _$$_SalesOrganisationConfigsDtoCopyWith<$Res> {
-  __$$_SalesOrganisationConfigsDtoCopyWithImpl(
-      _$_SalesOrganisationConfigsDto _value,
-      $Res Function(_$_SalesOrganisationConfigsDto) _then)
+        _$SalesOrganisationConfigsDtoImpl>
+    implements _$$SalesOrganisationConfigsDtoImplCopyWith<$Res> {
+  __$$SalesOrganisationConfigsDtoImplCopyWithImpl(
+      _$SalesOrganisationConfigsDtoImpl _value,
+      $Res Function(_$SalesOrganisationConfigsDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -884,6 +895,7 @@ class __$$_SalesOrganisationConfigsDtoCopyWithImpl<$Res>
     Object? poNumberRequired = null,
     Object? enableIRN = null,
     Object? enableTaxDisplay = null,
+    Object? enableTenderOrders = null,
     Object? enableTaxAtTotalLevelOnly = null,
     Object? netPriceOverride = null,
     Object? batchNumDisplay = null,
@@ -918,7 +930,7 @@ class __$$_SalesOrganisationConfigsDtoCopyWithImpl<$Res>
     Object? mpSmallOrderFee = null,
     Object? mpMovThreshold = null,
   }) {
-    return _then(_$_SalesOrganisationConfigsDto(
+    return _then(_$SalesOrganisationConfigsDtoImpl(
       disableProcessingStatus: null == disableProcessingStatus
           ? _value.disableProcessingStatus
           : disableProcessingStatus // ignore: cast_nullable_to_non_nullable
@@ -1075,6 +1087,10 @@ class __$$_SalesOrganisationConfigsDtoCopyWithImpl<$Res>
           ? _value.enableTaxDisplay
           : enableTaxDisplay // ignore: cast_nullable_to_non_nullable
               as bool,
+      enableTenderOrders: null == enableTenderOrders
+          ? _value.enableTenderOrders
+          : enableTenderOrders // ignore: cast_nullable_to_non_nullable
+              as bool,
       enableTaxAtTotalLevelOnly: null == enableTaxAtTotalLevelOnly
           ? _value.enableTaxAtTotalLevelOnly
           : enableTaxAtTotalLevelOnly // ignore: cast_nullable_to_non_nullable
@@ -1213,8 +1229,8 @@ class __$$_SalesOrganisationConfigsDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_SalesOrganisationConfigsDto extends _SalesOrganisationConfigsDto {
-  const _$_SalesOrganisationConfigsDto(
+class _$SalesOrganisationConfigsDtoImpl extends _SalesOrganisationConfigsDto {
+  const _$SalesOrganisationConfigsDtoImpl(
       {@JsonKey(name: 'disableProcessingStatus')
       required this.disableProcessingStatus,
       @JsonKey(name: 'currency') required this.currency,
@@ -1288,6 +1304,8 @@ class _$_SalesOrganisationConfigsDto extends _SalesOrganisationConfigsDto {
       @JsonKey(name: 'enableIRN', defaultValue: false) required this.enableIRN,
       @JsonKey(name: 'enableTaxDisplay', defaultValue: false)
       required this.enableTaxDisplay,
+      @JsonKey(name: 'enableTenderOrders', defaultValue: false)
+      required this.enableTenderOrders,
       @JsonKey(name: 'enableTaxAtTotalLevelOnly', defaultValue: false)
       required this.enableTaxAtTotalLevelOnly,
       @JsonKey(name: 'netPriceOverride', defaultValue: false)
@@ -1359,8 +1377,9 @@ class _$_SalesOrganisationConfigsDto extends _SalesOrganisationConfigsDto {
         _mpSmallOrderFeeUserRoles = mpSmallOrderFeeUserRoles,
         super._();
 
-  factory _$_SalesOrganisationConfigsDto.fromJson(Map<String, dynamic> json) =>
-      _$$_SalesOrganisationConfigsDtoFromJson(json);
+  factory _$SalesOrganisationConfigsDtoImpl.fromJson(
+          Map<String, dynamic> json) =>
+      _$$SalesOrganisationConfigsDtoImplFromJson(json);
 
   @override
   @JsonKey(name: 'disableProcessingStatus')
@@ -1487,6 +1506,9 @@ class _$_SalesOrganisationConfigsDto extends _SalesOrganisationConfigsDto {
   @JsonKey(name: 'enableTaxDisplay', defaultValue: false)
   final bool enableTaxDisplay;
   @override
+  @JsonKey(name: 'enableTenderOrders', defaultValue: false)
+  final bool enableTenderOrders;
+  @override
   @JsonKey(name: 'enableTaxAtTotalLevelOnly', defaultValue: false)
   final bool enableTaxAtTotalLevelOnly;
   @override
@@ -1604,14 +1626,14 @@ class _$_SalesOrganisationConfigsDto extends _SalesOrganisationConfigsDto {
 
   @override
   String toString() {
-    return 'SalesOrganisationConfigsDto(disableProcessingStatus: $disableProcessingStatus, currency: $currency, hideCustomer: $hideCustomer, enableGimmickMaterial: $enableGimmickMaterial, disablePrincipals: $disablePrincipals, principalList: $principalList, disableOrderType: $disableOrderType, enableBatchNumber: $enableBatchNumber, disableBundles: $disableBundles, enableZDP5: $enableZDP5, enableTaxClassification: $enableTaxClassification, enableVat: $enableVat, vatValue: $vatValue, materialWithoutPrice: $materialWithoutPrice, enableSpecialInstructions: $enableSpecialInstructions, enableReferenceNote: $enableReferenceNote, enableCollectiveNumber: $enableCollectiveNumber, enableMobileNumber: $enableMobileNumber, enableFutureDeliveryDay: $enableFutureDeliveryDay, enablePOAttachmentRequired: $enablePOAttachmentRequired, enablePaymentTerms: $enablePaymentTerms, futureDeliveryDay: $futureDeliveryDay, enableGMC: $enableGMC, enableListPrice: $enableListPrice, enableDefaultMD: $enableDefaultMD, priceOverride: $priceOverride, disablePaymentTermsDisplay: $disablePaymentTermsDisplay, disableDeliveryDate: $disableDeliveryDate, enableBillTo: $enableBillTo, showPOAttachment: $showPOAttachment, expiryDateDisplay: $expiryDateDisplay, hideStockDisplay: $hideStockDisplay, addOosMaterials: $addOosMaterials, oosValue: $oosValue, enableRemarks: $enableRemarks, enableOHPrice: $enableOHPrice, poNumberRequired: $poNumberRequired, enableIRN: $enableIRN, enableTaxDisplay: $enableTaxDisplay, enableTaxAtTotalLevelOnly: $enableTaxAtTotalLevelOnly, netPriceOverride: $netPriceOverride, batchNumDisplay: $batchNumDisplay, displayOrderDiscount: $displayOrderDiscount, minOrderAmount: $minOrderAmount, salesOrg: $salesOrg, enableZDP8Override: $enableZDP8Override, disableReturnsAccessSR: $disableReturnsAccessSR, disableReturnsAccess: $disableReturnsAccess, disableOverrideFieldCustomer: $disableOverrideFieldCustomer, disableOverrideFieldSR: $disableOverrideFieldSR, enableGreenDelivery: $enableGreenDelivery, greenDeliveryDelayInDays: $greenDeliveryDelayInDays, enableComboDeals: $enableComboDeals, greenDeliveryUserRole: $greenDeliveryUserRole, comboDealsUserRole: $comboDealsUserRole, enableGMN: $enableGMN, displayItemTaxBreakdown: $displayItemTaxBreakdown, displaySubtotalTaxBreakdown: $displaySubtotalTaxBreakdown, disablePayment: $disablePayment, hideCredit: $hideCredit, allowReturnsOutsidePolicy: $allowReturnsOutsidePolicy, enableMarketPlace: $enableMarketPlace, mpMinOrderAmount: $mpMinOrderAmount, statementOfAccountEnabled: $statementOfAccountEnabled, enableSmallOrderFee: $enableSmallOrderFee, smallOrderFeeUserRoles: $smallOrderFeeUserRoles, smallOrderFee: $smallOrderFee, movThreshold: $movThreshold, enableMPSmallOrderFee: $enableMPSmallOrderFee, mpSmallOrderFeeUserRoles: $mpSmallOrderFeeUserRoles, mpSmallOrderFee: $mpSmallOrderFee, mpMovThreshold: $mpMovThreshold)';
+    return 'SalesOrganisationConfigsDto(disableProcessingStatus: $disableProcessingStatus, currency: $currency, hideCustomer: $hideCustomer, enableGimmickMaterial: $enableGimmickMaterial, disablePrincipals: $disablePrincipals, principalList: $principalList, disableOrderType: $disableOrderType, enableBatchNumber: $enableBatchNumber, disableBundles: $disableBundles, enableZDP5: $enableZDP5, enableTaxClassification: $enableTaxClassification, enableVat: $enableVat, vatValue: $vatValue, materialWithoutPrice: $materialWithoutPrice, enableSpecialInstructions: $enableSpecialInstructions, enableReferenceNote: $enableReferenceNote, enableCollectiveNumber: $enableCollectiveNumber, enableMobileNumber: $enableMobileNumber, enableFutureDeliveryDay: $enableFutureDeliveryDay, enablePOAttachmentRequired: $enablePOAttachmentRequired, enablePaymentTerms: $enablePaymentTerms, futureDeliveryDay: $futureDeliveryDay, enableGMC: $enableGMC, enableListPrice: $enableListPrice, enableDefaultMD: $enableDefaultMD, priceOverride: $priceOverride, disablePaymentTermsDisplay: $disablePaymentTermsDisplay, disableDeliveryDate: $disableDeliveryDate, enableBillTo: $enableBillTo, showPOAttachment: $showPOAttachment, expiryDateDisplay: $expiryDateDisplay, hideStockDisplay: $hideStockDisplay, addOosMaterials: $addOosMaterials, oosValue: $oosValue, enableRemarks: $enableRemarks, enableOHPrice: $enableOHPrice, poNumberRequired: $poNumberRequired, enableIRN: $enableIRN, enableTaxDisplay: $enableTaxDisplay, enableTenderOrders: $enableTenderOrders, enableTaxAtTotalLevelOnly: $enableTaxAtTotalLevelOnly, netPriceOverride: $netPriceOverride, batchNumDisplay: $batchNumDisplay, displayOrderDiscount: $displayOrderDiscount, minOrderAmount: $minOrderAmount, salesOrg: $salesOrg, enableZDP8Override: $enableZDP8Override, disableReturnsAccessSR: $disableReturnsAccessSR, disableReturnsAccess: $disableReturnsAccess, disableOverrideFieldCustomer: $disableOverrideFieldCustomer, disableOverrideFieldSR: $disableOverrideFieldSR, enableGreenDelivery: $enableGreenDelivery, greenDeliveryDelayInDays: $greenDeliveryDelayInDays, enableComboDeals: $enableComboDeals, greenDeliveryUserRole: $greenDeliveryUserRole, comboDealsUserRole: $comboDealsUserRole, enableGMN: $enableGMN, displayItemTaxBreakdown: $displayItemTaxBreakdown, displaySubtotalTaxBreakdown: $displaySubtotalTaxBreakdown, disablePayment: $disablePayment, hideCredit: $hideCredit, allowReturnsOutsidePolicy: $allowReturnsOutsidePolicy, enableMarketPlace: $enableMarketPlace, mpMinOrderAmount: $mpMinOrderAmount, statementOfAccountEnabled: $statementOfAccountEnabled, enableSmallOrderFee: $enableSmallOrderFee, smallOrderFeeUserRoles: $smallOrderFeeUserRoles, smallOrderFee: $smallOrderFee, movThreshold: $movThreshold, enableMPSmallOrderFee: $enableMPSmallOrderFee, mpSmallOrderFeeUserRoles: $mpSmallOrderFeeUserRoles, mpSmallOrderFee: $mpSmallOrderFee, mpMovThreshold: $mpMovThreshold)';
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_SalesOrganisationConfigsDto &&
+            other is _$SalesOrganisationConfigsDtoImpl &&
             (identical(other.disableProcessingStatus, disableProcessingStatus) ||
                 other.disableProcessingStatus == disableProcessingStatus) &&
             (identical(other.currency, currency) ||
@@ -1679,6 +1701,7 @@ class _$_SalesOrganisationConfigsDto extends _SalesOrganisationConfigsDto {
             (identical(other.poNumberRequired, poNumberRequired) || other.poNumberRequired == poNumberRequired) &&
             (identical(other.enableIRN, enableIRN) || other.enableIRN == enableIRN) &&
             (identical(other.enableTaxDisplay, enableTaxDisplay) || other.enableTaxDisplay == enableTaxDisplay) &&
+            (identical(other.enableTenderOrders, enableTenderOrders) || other.enableTenderOrders == enableTenderOrders) &&
             (identical(other.enableTaxAtTotalLevelOnly, enableTaxAtTotalLevelOnly) || other.enableTaxAtTotalLevelOnly == enableTaxAtTotalLevelOnly) &&
             (identical(other.netPriceOverride, netPriceOverride) || other.netPriceOverride == netPriceOverride) &&
             (identical(other.batchNumDisplay, batchNumDisplay) || other.batchNumDisplay == batchNumDisplay) &&
@@ -1757,6 +1780,7 @@ class _$_SalesOrganisationConfigsDto extends _SalesOrganisationConfigsDto {
         poNumberRequired,
         enableIRN,
         enableTaxDisplay,
+        enableTenderOrders,
         enableTaxAtTotalLevelOnly,
         netPriceOverride,
         batchNumDisplay,
@@ -1795,13 +1819,13 @@ class _$_SalesOrganisationConfigsDto extends _SalesOrganisationConfigsDto {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_SalesOrganisationConfigsDtoCopyWith<_$_SalesOrganisationConfigsDto>
-      get copyWith => __$$_SalesOrganisationConfigsDtoCopyWithImpl<
-          _$_SalesOrganisationConfigsDto>(this, _$identity);
+  _$$SalesOrganisationConfigsDtoImplCopyWith<_$SalesOrganisationConfigsDtoImpl>
+      get copyWith => __$$SalesOrganisationConfigsDtoImplCopyWithImpl<
+          _$SalesOrganisationConfigsDtoImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_SalesOrganisationConfigsDtoToJson(
+    return _$$SalesOrganisationConfigsDtoImplToJson(
       this,
     );
   }
@@ -1886,6 +1910,8 @@ abstract class _SalesOrganisationConfigsDto
       required final bool enableIRN,
       @JsonKey(name: 'enableTaxDisplay', defaultValue: false)
       required final bool enableTaxDisplay,
+      @JsonKey(name: 'enableTenderOrders', defaultValue: false)
+      required final bool enableTenderOrders,
       @JsonKey(name: 'enableTaxAtTotalLevelOnly', defaultValue: false)
       required final bool enableTaxAtTotalLevelOnly,
       @JsonKey(name: 'netPriceOverride', defaultValue: false)
@@ -1953,11 +1979,12 @@ abstract class _SalesOrganisationConfigsDto
       @JsonKey(name: 'mpSmallOrderFee', defaultValue: 0.0)
       required final double mpSmallOrderFee,
       @JsonKey(name: 'mpMovThreshold', defaultValue: 0.0)
-      required final double mpMovThreshold}) = _$_SalesOrganisationConfigsDto;
+      required final double
+          mpMovThreshold}) = _$SalesOrganisationConfigsDtoImpl;
   const _SalesOrganisationConfigsDto._() : super._();
 
   factory _SalesOrganisationConfigsDto.fromJson(Map<String, dynamic> json) =
-      _$_SalesOrganisationConfigsDto.fromJson;
+      _$SalesOrganisationConfigsDtoImpl.fromJson;
 
   @override
   @JsonKey(name: 'disableProcessingStatus')
@@ -2078,6 +2105,9 @@ abstract class _SalesOrganisationConfigsDto
   @JsonKey(name: 'enableTaxDisplay', defaultValue: false)
   bool get enableTaxDisplay;
   @override
+  @JsonKey(name: 'enableTenderOrders', defaultValue: false)
+  bool get enableTenderOrders;
+  @override
   @JsonKey(name: 'enableTaxAtTotalLevelOnly', defaultValue: false)
   bool get enableTaxAtTotalLevelOnly;
   @override
@@ -2180,6 +2210,6 @@ abstract class _SalesOrganisationConfigsDto
   double get mpMovThreshold;
   @override
   @JsonKey(ignore: true)
-  _$$_SalesOrganisationConfigsDtoCopyWith<_$_SalesOrganisationConfigsDto>
+  _$$SalesOrganisationConfigsDtoImplCopyWith<_$SalesOrganisationConfigsDtoImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

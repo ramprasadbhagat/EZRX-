@@ -908,6 +908,7 @@ class WidgetKeys {
       Key('materialDetailsImageCounter');
   static const Key materialDetailsMaterialNumber =
       Key('materialDetailsMaterialNumber');
+  static const Key materialExpiresSoonTag = Key('materialExpiresSoonTag');
   static const Key materialDetailsMaterialDescription =
       Key('materialDetailsMaterialDescription');
   static const Key materialDetailsMaterialDescriptionInMandarin =

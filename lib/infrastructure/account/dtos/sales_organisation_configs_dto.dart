@@ -84,6 +84,8 @@ class SalesOrganisationConfigsDto with _$SalesOrganisationConfigsDto {
     @JsonKey(name: 'enableIRN', defaultValue: false) required bool enableIRN,
     @JsonKey(name: 'enableTaxDisplay', defaultValue: false)
     required bool enableTaxDisplay,
+    @JsonKey(name: 'enableTenderOrders', defaultValue: false)
+    required bool enableTenderOrders,
     @JsonKey(name: 'enableTaxAtTotalLevelOnly', defaultValue: false)
     required bool enableTaxAtTotalLevelOnly,
     @JsonKey(name: 'netPriceOverride', defaultValue: false)
@@ -229,6 +231,7 @@ class SalesOrganisationConfigsDto with _$SalesOrganisationConfigsDto {
       mpSmallOrderFeeUserRoles: configs.mpSmallOrderFeeUserRoles,
       mpSmallOrderFee: configs.mpSmallOrderFee,
       mpMovThreshold: configs.mpSAPMinOrderAmount,
+      enableTenderOrders: configs.enableTenderOrders,
     );
   }
 
@@ -311,6 +314,7 @@ class SalesOrganisationConfigsDto with _$SalesOrganisationConfigsDto {
       mpSmallOrderFeeUserRoles: mpSmallOrderFeeUserRoles,
       mpSAPMinOrderAmount: mpMovThreshold,
       mpSmallOrderFee: mpSmallOrderFee,
+      enableTenderOrders: enableTenderOrders,
     );
   }
 

@@ -15,8 +15,8 @@ class _BuyAgainButton extends StatelessWidget {
         state.apiFailureOrSuccessOption.fold(
           () {
             context.read<PoAttachmentBloc>().add(
-                    const PoAttachmentEvent.initialized(),
-                  );
+                  const PoAttachmentEvent.initialized(),
+                );
             context.read<AdditionalDetailsBloc>().add(
                   AdditionalDetailsEvent.initiateFromHistory(
                     data: DeliveryInfoData.empty().copyWith(
@@ -126,8 +126,11 @@ class _BuyAgainButton extends StatelessWidget {
     final viewByItemDetailState = context.read<ViewByItemDetailsBloc>().state;
     final cartState = context.read<CartBloc>().state;
     final cartProducts = cartState.cartProducts;
-    final isTenderEligible =
-        context.read<EligibilityBloc>().state.salesOrg.isTenderEligible;
+    final isTenderEligible = context
+        .read<EligibilityBloc>()
+        .state
+        .salesOrgConfigs
+        .enableTenderOrders;
     if (isTenderEligible &&
         viewByItemDetailState.orderHistory.isNotValidTenderContract) {
       CustomSnackBar(

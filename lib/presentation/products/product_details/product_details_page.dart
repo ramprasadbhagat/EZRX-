@@ -350,7 +350,7 @@ class _BodyContent extends StatelessWidget {
               thickness: 0.5,
             ),
             if (materialInfo.hasValidTenderContract &&
-                eligibilityState.salesOrg.isTenderEligible)
+                eligibilityState.salesOrgConfigs.enableTenderOrders)
               TenderContracts(
                 materialInfo: materialInfo,
                 isEditTenderContract: isEditTender,
@@ -516,7 +516,11 @@ class _FooterState extends State<_Footer> {
       context
           .read<ProductDetailBloc>()
           .add(ProductDetailEvent.updateQty(qty: qty));
-      if (context.read<EligibilityBloc>().state.salesOrg.isTenderEligible) {
+      if (context
+          .read<EligibilityBloc>()
+          .state
+          .salesOrgConfigs
+          .enableTenderOrders) {
         context.read<TenderContractDetailBloc>().add(
               TenderContractDetailEvent.updateQty(
                 qty: qty,
@@ -556,8 +560,8 @@ class _FooterState extends State<_Footer> {
         : true);
     final validQty = !eligibilityState.salesOrg.isID ||
         !productDetailState.eligibleForStockError;
-    final tenderExceedQty =
-        tenderState.isExceedQty && eligibilityState.salesOrg.isTenderEligible;
+    final tenderExceedQty = tenderState.isExceedQty &&
+        eligibilityState.salesOrgConfigs.enableTenderOrders;
 
     return !materialInfo.isSuspended &&
         (materialInfo.isFOCMaterial
@@ -793,7 +797,7 @@ class _FooterState extends State<_Footer> {
                       ),
                     ],
                     if (tenderState.isExceedQty &&
-                        eligibilityState.salesOrg.isTenderEligible)
+                        eligibilityState.salesOrgConfigs.enableTenderOrders)
                       ErrorTextWithIcon(
                         valueText: context.tr(
                           'Maximum tender qty: {maxQty}',
@@ -937,7 +941,7 @@ void _addToCart({
       context.read<TenderContractDetailBloc>().state;
   final cartProducts = cartState.cartProducts;
   final isTenderEligible =
-      context.read<EligibilityBloc>().state.salesOrg.isTenderEligible;
+      context.read<EligibilityBloc>().state.salesOrgConfigs.enableTenderOrders;
 
   if (isTenderEligible && tenderContractDetailState.isInsufficientQuantity) {
     CustomSnackBar(

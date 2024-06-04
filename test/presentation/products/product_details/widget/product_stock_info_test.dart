@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/order/product_detail/details/product_detail_bloc.dart';
+import 'package:ezrxmobile/application/order/tender_contract/tender_contract_detail_bloc.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/locator.dart';
@@ -24,10 +25,15 @@ class ProductDetailsMockBloc
 class EligibilityBlocMock extends MockBloc<EligibilityEvent, EligibilityState>
     implements EligibilityBloc {}
 
+class TenderContractDetailBlocMock
+    extends MockBloc<TenderContractDetailEvent, TenderContractDetailState>
+    implements TenderContractDetailBloc {}
+
 void main() {
   late AppRouter autoRouterMock;
   late ProductDetailBloc productDetailMockBloc;
   late EligibilityBloc eligibilityBlocMock;
+  late TenderContractDetailBloc tenderContractDetailBloc;
 
   setUpAll(() async {
     locator.registerLazySingleton(() => AppRouter());
@@ -36,10 +42,14 @@ void main() {
     autoRouterMock = locator<AppRouter>();
     productDetailMockBloc = ProductDetailsMockBloc();
     eligibilityBlocMock = EligibilityBlocMock();
+    tenderContractDetailBloc = TenderContractDetailBlocMock();
     when(() => productDetailMockBloc.state)
         .thenReturn(ProductDetailState.initial());
     when(() => eligibilityBlocMock.state).thenReturn(
       EligibilityState.initial(),
+    );
+    when(() => tenderContractDetailBloc.state).thenReturn(
+      TenderContractDetailState.initial(),
     );
   });
 
@@ -53,6 +63,9 @@ void main() {
         ),
         BlocProvider<EligibilityBloc>(
           create: ((context) => eligibilityBlocMock),
+        ),
+        BlocProvider<TenderContractDetailBloc>(
+          create: ((context) => tenderContractDetailBloc),
         ),
       ],
       child: Material(

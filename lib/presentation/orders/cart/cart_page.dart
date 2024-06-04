@@ -175,7 +175,7 @@ class _CartPageState extends State<CartPage> {
                   !current.isFetchingCartProductDetail,
           listener: (context, state) {
             final eligibilityState = context.read<EligibilityBloc>().state;
-            if (eligibilityState.salesOrg.isTenderEligible &&
+            if (eligibilityState.salesOrgConfigs.enableTenderOrders &&
                 state.cartProducts.hasTenderContract) {
               context.read<TenderContractListBloc>().add(
                     TenderContractListEvent.fetch(

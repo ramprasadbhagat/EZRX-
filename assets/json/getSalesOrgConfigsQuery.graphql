@@ -13,6 +13,7 @@ query salesOrgConfigs($request: SalesOrgConfigRequest) {
     enableRemarks
     enableListPrice
     enableTaxDisplay
+    enableTenderOrders
     addOosMaterials
     oosValue
     enablePartialPayment

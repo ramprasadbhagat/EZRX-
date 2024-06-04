@@ -15,6 +15,7 @@
             "enableRemarks": true,
             "enableListPrice": true,
             "enableTaxDisplay": true,
+            "enableTenderOrders": true,
             "enableDefaultMD": true,
             "enableZDP5": false,
             "enableZDP8Override": true,

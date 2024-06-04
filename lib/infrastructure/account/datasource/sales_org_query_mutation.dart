@@ -24,6 +24,7 @@ class SalesOrgQueryMutation {
     enableRemarks
     enableListPrice
     enableTaxDisplay
+    enableTenderOrders
     addOosMaterials
     oosValue
     enablePartialPayment

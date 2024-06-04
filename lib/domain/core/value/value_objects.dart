@@ -194,6 +194,10 @@ class DateTimeStringValue extends ValueObject<String> {
 
   int get paymentAttentionExpiry => paymentAttentionExpiryInDays(dateTime);
 
+  bool get withinAYearFromNow => dateTimeOrNull != null
+      ? dateTimeOrNull!.difference(DateTime.now()).inDays <= 365
+      : false;
+
   const DateTimeStringValue._(this.value);
 }
 
@@ -211,7 +215,7 @@ class StringValue extends ValueObject<String> {
   bool get isNotEmpty => value.getOrElse(() => '').isNotEmpty;
 
   bool get isTrimmedValueNotEmpty =>
-      checkIfTrimmedValueNotEmpty(value.getOrElse(() => '')); 
+      checkIfTrimmedValueNotEmpty(value.getOrElse(() => ''));
 
   const StringValue._(this.value);
 }

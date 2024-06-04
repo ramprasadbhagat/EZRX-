@@ -6,9 +6,9 @@ part of 'sales_organisation_configs_dto.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_SalesOrganisationConfigsDto _$$_SalesOrganisationConfigsDtoFromJson(
+_$SalesOrganisationConfigsDtoImpl _$$SalesOrganisationConfigsDtoImplFromJson(
         Map<String, dynamic> json) =>
-    _$_SalesOrganisationConfigsDto(
+    _$SalesOrganisationConfigsDtoImpl(
       disableProcessingStatus: json['disableProcessingStatus'] as bool,
       currency: json['currency'] as String,
       hideCustomer: json['hideCustomer'] as bool? ?? false,
@@ -54,6 +54,7 @@ _$_SalesOrganisationConfigsDto _$$_SalesOrganisationConfigsDtoFromJson(
       poNumberRequired: json['ponRequired'] as bool? ?? false,
       enableIRN: json['enableIRN'] as bool? ?? false,
       enableTaxDisplay: json['enableTaxDisplay'] as bool? ?? false,
+      enableTenderOrders: json['enableTenderOrders'] as bool? ?? false,
       enableTaxAtTotalLevelOnly:
           json['enableTaxAtTotalLevelOnly'] as bool? ?? false,
       netPriceOverride: json['netPriceOverride'] as bool? ?? false,
@@ -108,8 +109,8 @@ _$_SalesOrganisationConfigsDto _$$_SalesOrganisationConfigsDtoFromJson(
       mpMovThreshold: (json['mpMovThreshold'] as num?)?.toDouble() ?? 0.0,
     );
 
-Map<String, dynamic> _$$_SalesOrganisationConfigsDtoToJson(
-        _$_SalesOrganisationConfigsDto instance) =>
+Map<String, dynamic> _$$SalesOrganisationConfigsDtoImplToJson(
+        _$SalesOrganisationConfigsDtoImpl instance) =>
     <String, dynamic>{
       'disableProcessingStatus': instance.disableProcessingStatus,
       'currency': instance.currency,
@@ -151,6 +152,7 @@ Map<String, dynamic> _$$_SalesOrganisationConfigsDtoToJson(
       'ponRequired': instance.poNumberRequired,
       'enableIRN': instance.enableIRN,
       'enableTaxDisplay': instance.enableTaxDisplay,
+      'enableTenderOrders': instance.enableTenderOrders,
       'enableTaxAtTotalLevelOnly': instance.enableTaxAtTotalLevelOnly,
       'netPriceOverride': instance.netPriceOverride,
       'batchNumDisplay': instance.batchNumDisplay,

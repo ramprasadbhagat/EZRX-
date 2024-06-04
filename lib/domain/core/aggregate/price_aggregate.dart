@@ -109,13 +109,13 @@ class PriceAggregate with _$PriceAggregate {
       maximumQty != 0 && maximumQty < quantity && stockQuantity >= quantity;
 
   bool get isMaxQtyExceedsForTender =>
-      salesOrgConfig.salesOrg.isTenderEligible &&
+      salesOrgConfig.enableTenderOrders &&
       (tenderContract.isNotEmpty &&
           (tenderContract.remainingTenderQuantity != 0 &&
               tenderContract.remainingTenderQuantity < quantity));
 
   bool get isTenderContractInvalid =>
-      salesOrgConfig.salesOrg.isTenderEligible &&
+      salesOrgConfig.enableTenderOrders &&
       (tenderContract.isNotEmpty &&
           (tenderContract.contractNumber.isContractNumberNotEmpty &&
               tenderContract.isTenderExpired));
@@ -164,7 +164,7 @@ class PriceAggregate with _$PriceAggregate {
       promoType: materialInfo.promoType,
       principalData: materialInfo.principalData,
       isCounterOffer: materialInfo.counterOfferDetails.hasCounterOffer,
-      contract: salesOrgConfig.salesOrg.isTenderEligible &&
+      contract: salesOrgConfig.enableTenderOrders &&
               tenderContract.tenderOrderReason.isNotEmpty
           ? SubmitTenderContract(
               contractLineItemNumber:

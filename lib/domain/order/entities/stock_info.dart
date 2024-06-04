@@ -65,6 +65,8 @@ class StockInfo with _$StockInfo {
 
   bool get displayPreOrderLabel =>
       this != StockInfo.empty() && !inStock.isMaterialInStock;
+
+  bool get isExpireSoon => expiryDate.withinAYearFromNow;
 }
 
 extension StockInfoListExtension on List<StockInfo> {

@@ -66,4 +66,5 @@ final fakeVNSalesOrgConfigs = SalesOrganisationConfigs.empty().copyWith(
   enableComboDeals: true,
   comboDealsUserRole: ComboDealUserRole(1),
   statementOfAccountEnabled: true,
+  enableTenderOrders: true,
 );

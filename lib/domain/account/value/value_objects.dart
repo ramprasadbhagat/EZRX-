@@ -210,8 +210,6 @@ class SalesOrg extends ValueObject<String> {
 
   bool get displayViewByOrderFilterByStatus => isID;
 
-  bool get isTenderEligible => isVN;
-
   const SalesOrg._(this.value);
 }
 
