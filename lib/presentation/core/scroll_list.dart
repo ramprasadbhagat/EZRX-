@@ -14,6 +14,7 @@ class ScrollList<T> extends StatefulWidget {
   final Widget header;
   final ScrollController controller;
   final Widget Function(BuildContext context, int index, T item) itemBuilder;
+  final bool dismissOnDrag;
   const ScrollList({
     Key? key,
     required this.isLoading,
@@ -24,6 +25,7 @@ class ScrollList<T> extends StatefulWidget {
     this.header = const SizedBox.shrink(),
     this.onRefresh,
     this.onLoadingMore,
+    this.dismissOnDrag = false,
   }) : super(key: key);
 
   @override
@@ -70,6 +72,9 @@ class _ScrollListState<T> extends State<ScrollList<T>> {
             child: CustomScrollView(
               key: WidgetKeys.scrollList,
               controller: _controller,
+              keyboardDismissBehavior: widget.dismissOnDrag
+                  ? ScrollViewKeyboardDismissBehavior.onDrag
+                  : ScrollViewKeyboardDismissBehavior.manual,
               physics: const AlwaysScrollableScrollPhysics(),
               slivers: [
                 SliverToBoxAdapter(

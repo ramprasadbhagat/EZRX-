@@ -763,7 +763,7 @@ class WidgetKeys {
   //============================================================
 
   static const Key materialListPageAppBar = Key('materialListPageAppBar');
-  static const Key materialListLoader = Key('LoaderImage');
+  static const Key materialListLoader = Key('materialListLoader');
   static const Key totalMaterialItemCount = Key('totalMaterialCount');
   static const Key materialListStockLabel = Key('stockLabel');
   static const Key materialListBundleCard = Key('bundleCard');

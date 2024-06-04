@@ -15,6 +15,10 @@ class ProductSearchEvent with _$ProductSearchEvent {
     required MaterialFilter materialFilter,
   }) = _SearchProduct;
 
+    const factory ProductSearchEvent.saveSearchHistory({
+    required SearchKey searchKey,
+  }) = _SaveSearchHistory;
+
   const factory ProductSearchEvent.loadMoreProductList() = _LoadMoreProductList;
 
   const factory ProductSearchEvent.clearSearch() = _ClearSearch;

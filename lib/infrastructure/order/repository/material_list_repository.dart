@@ -48,6 +48,7 @@ class MaterialListRepository implements IMaterialListRepository {
     required int offset,
     required MaterialFilter selectedMaterialFilter,
     required User user,
+    required SearchKey searchKey,
   }) async {
     if (config.appFlavor == Flavor.mock) {
       try {
@@ -84,7 +85,7 @@ class MaterialListRepository implements IMaterialListRepository {
         countryListCode: selectedMaterialFilter.countryListSelected
             .map((e) => e.code)
             .toList(),
-        searchKey: '',
+        searchKey: searchKey.searchValueOrEmpty,
         salesDeal: customerCodeInfo.salesDeals
             .map((e) => e.getOrDefaultValue(''))
             .toList(),

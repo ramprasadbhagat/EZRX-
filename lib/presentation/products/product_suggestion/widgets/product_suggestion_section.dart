@@ -37,6 +37,7 @@ class _ProductSuggestionSection extends StatelessWidget {
       builder: (context, state) => ScrollList<MaterialInfo>(
         key: WidgetKeys.productSearchSuggestion,
         controller: ScrollController(),
+        dismissOnDrag: true,
         onRefresh: () => context.read<ProductSearchBloc>().add(
               const ProductSearchEvent.clearSearch(),
             ),

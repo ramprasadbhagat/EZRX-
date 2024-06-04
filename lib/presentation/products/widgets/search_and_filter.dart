@@ -16,8 +16,29 @@ class SearchAndFilter extends StatelessWidget {
       padding: const EdgeInsets.only(left: 12.0, right: 12.0, top: 12.0),
       child: Row(
         children: [
-          const Expanded(
-            child: ProductSearchEntry(),
+          Expanded(
+            child: BlocBuilder<MaterialListBloc, MaterialListState>(
+              buildWhen: (previous, current) =>
+                  previous.searchKey != current.searchKey,
+              builder: (context, state) {
+                return ProductSearchEntry(
+                  initValue: state.searchKey.searchValueOrEmpty,
+                  onClear: () {
+                    context.read<MaterialListBloc>()
+                      ..add(
+                        const MaterialListEvent.updateSearchKey(
+                          searchKey: '',
+                        ),
+                      )
+                      ..add(
+                        MaterialListEvent.fetch(
+                          selectedMaterialFilter: state.selectedMaterialFilter,
+                        ),
+                      );
+                  },
+                );
+              },
+            ),
           ),
           const SizedBox(
             width: 0,

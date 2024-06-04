@@ -1,51 +1,104 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:ezrxmobile/application/order/material_filter/material_filter_bloc.dart';
-import 'package:ezrxmobile/infrastructure/core/common/tracking_events.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
+import 'package:ezrxmobile/presentation/products/widgets/scan_camera_button.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
+import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
-import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
-import 'package:ezrxmobile/application/order/scan_material_info/scan_material_info_bloc.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
-class ProductSearchEntry extends StatelessWidget {
-  const ProductSearchEntry({Key? key}) : super(key: key);
+class ProductSearchEntry extends StatefulWidget {
+  final String initValue;
+  final VoidCallback? onClear;
+  const ProductSearchEntry({this.initValue = '', this.onClear, Key? key})
+      : super(key: key);
+
+  @override
+  State<ProductSearchEntry> createState() => _ProductSearchEntryState();
+}
+
+class _ProductSearchEntryState extends State<ProductSearchEntry> {
+  final controller = TextEditingController();
+
+  @override
+  void initState() {
+    controller.text = widget.initValue;
+    super.initState();
+  }
+
+  @override
+  void didUpdateWidget(covariant ProductSearchEntry oldWidget) {
+    if (oldWidget.initValue != widget.initValue) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        controller.text = widget.initValue;
+      });
+    }
+    super.didUpdateWidget(oldWidget);
+  }
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
-    return TextFormField(
-      key: WidgetKeys.searchProductField,
-      autocorrect: false,
-      onTap: () {
-        FocusScope.of(context).requestFocus(FocusNode());
-        context.router.push(
-          ProductSuggestionPageRoute(parentRoute: context.routeData.path),
-        );
-      },
-      decoration: InputDecoration(
-        hintText: context.tr('Search by product name or code'),
-        prefixIcon: const Icon(
-          Icons.search,
-          size: 20,
-        ),
-        suffixIcon: IconButton(
-          splashRadius: 1,
-          key: WidgetKeys.productScanCameraKey,
-          icon: const Icon(
-            Icons.camera_alt_outlined,
-          ),
-          onPressed: () => {
-            trackMixpanelEvent(TrackingEvents.scanClicked),
-            context.router.pushNamed('orders/scan_material_info'),
-            context.read<ScanMaterialInfoBloc>().add(
-                  ScanMaterialInfoEvent.scanMaterialNumberFromCamera(
-                    materialFilter:
-                        context.read<MaterialFilterBloc>().state.materialFilter,
+    return Container(
+      decoration: BoxDecoration(
+        color: ZPColors.white,
+        borderRadius: BorderRadius.circular(8),
+        border: Border.all(width: 1, color: ZPColors.inputBorderColor),
+      ),
+      child: Row(
+        children: [
+          Expanded(
+            child: TextFormField(
+              key: WidgetKeys.searchProductField,
+              autocorrect: false,
+              controller: controller,
+              readOnly: true,
+              canRequestFocus: false,
+              onTap: () {
+                FocusScope.of(context).requestFocus(FocusNode());
+                context.router.push(
+                  ProductSuggestionPageRoute(
+                    parentRoute: context.routeData.path,
                   ),
+                );
+              },
+              decoration: InputDecoration(
+                hintText: context.tr('Search by product name or code'),
+                enabledBorder: InputBorder.none,
+                fillColor: ZPColors.transparent,
+                prefixIcon: const Icon(
+                  Icons.search,
+                  size: 20,
                 ),
-          },
-        ),
+                suffixIcon: ValueListenableBuilder<TextEditingValue>(
+                  valueListenable: controller,
+                  builder: (context, value, _) {
+                    return value.text.isNotEmpty
+                        ? IconButton(
+                            key: WidgetKeys.clearIconKey,
+                            icon: const Icon(
+                              Icons.cancel_rounded,
+                              size: 24,
+                              color: ZPColors.backgroundCloseButtonSnackBar,
+                            ),
+                            onPressed: widget.onClear != null
+                                ? () {
+                                    widget.onClear!();
+                                  }
+                                : null,
+                          )
+                        : const SizedBox.shrink();
+                  },
+                ),
+              ),
+            ),
+          ),
+          const ScanCameraButton(),
+        ],
       ),
     );
   }

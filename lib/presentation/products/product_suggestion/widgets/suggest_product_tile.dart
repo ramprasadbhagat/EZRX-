@@ -36,7 +36,7 @@ class _SuggestedProductTile extends StatelessWidget {
                 : context.router
                     .push(BundleDetailPageRoute(materialInfo: product));
           },
-          horizontalTitleGap: 0,
+          horizontalTitleGap: 8,
           leading: const Icon(
             Icons.search,
             color: ZPColors.unselectedLabelColor,

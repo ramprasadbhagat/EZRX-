@@ -105,16 +105,16 @@ void main() {
         ),
       ],
     );
-
-    group(' -> SearchProduct', () {
+   
+    group(' -> AutoSearchProduct', () {
       blocTest<ProductSearchBloc, ProductSearchState>(
         ' -> Search with different searchKey',
         seed: () => ProductSearchState.initial().copyWith(
-          searchKey: searchKey,
+          salesOrganization: fakeMYSalesOrganisation,
           configs: fakeMYSalesOrgConfigs,
           customerCodeInfo: customerCodeInfo,
-          salesOrganization: fakeMYSalesOrganisation,
           shipToInfo: shipToInfo,
+          searchKey: searchKey,
           user: fakeClientUser,
         ),
         build: () {
@@ -131,22 +131,28 @@ void main() {
               user: fakeClientUser,
             ),
           ).thenAnswer((_) async => Right(materialResponse));
+
+          when(
+            () => productSearchRepository.saveSearchHistory(
+              SearchKey('diff-search-key'),
+            ),
+          ).thenAnswer((_) async => const Right(null));
           return productSearchBloc;
         },
-        act: (bloc) => bloc
-          ..add(
-            ProductSearchEvent.searchProduct(
-              searchKey: SearchKey.search('diff-search-key'),
-              materialFilter: MaterialFilter.empty(),
-            ),
+        act: (bloc) => bloc.add(
+          ProductSearchEvent.searchProduct(
+            searchKey: SearchKey.search('diff-search-key'),
+            materialFilter: MaterialFilter.empty(),
           ),
+        ),
+        wait: const Duration(milliseconds: 1500),
         expect: () => [
           ProductSearchState.initial().copyWith(
+            salesOrganization: fakeMYSalesOrganisation,
             configs: fakeMYSalesOrgConfigs,
             customerCodeInfo: customerCodeInfo,
-            salesOrganization: fakeMYSalesOrganisation,
             shipToInfo: shipToInfo,
-            searchKey: SearchKey.search('diff-search-key'),
+            searchKey: SearchKey('diff-search-key'),
             suggestedProductList: <MaterialInfo>[],
             isSearching: true,
             canLoadMore: true,
@@ -154,9 +160,9 @@ void main() {
             user: fakeClientUser,
           ),
           ProductSearchState.initial().copyWith(
+            salesOrganization: fakeMYSalesOrganisation,
             configs: fakeMYSalesOrgConfigs,
             customerCodeInfo: customerCodeInfo,
-            salesOrganization: fakeMYSalesOrganisation,
             shipToInfo: shipToInfo,
             apiFailureOrSuccessOption: optionOf(Right(materialResponse)),
             suggestedProductList: materialResponse.products,
@@ -165,8 +171,21 @@ void main() {
             searchKey: SearchKey('diff-search-key'),
             user: fakeClientUser,
           ),
+          ProductSearchState.initial().copyWith(
+            salesOrganization: fakeMYSalesOrganisation,
+            configs: fakeMYSalesOrgConfigs,
+            customerCodeInfo: customerCodeInfo,
+            shipToInfo: shipToInfo,
+            apiFailureOrSuccessOption: none(),
+            suggestedProductList: materialResponse.products,
+            isSearching: false,
+            canLoadMore: true,
+            searchKey: SearchKey('diff-search-key'),
+            user: fakeClientUser,
+          ),
         ],
       );
+
       blocTest<ProductSearchBloc, ProductSearchState>(
         ' -> Emits correct states and responses',
         seed: () => ProductSearchState.initial().copyWith(
@@ -191,6 +210,12 @@ void main() {
               user: fakeClientUser,
             ),
           ).thenAnswer((_) async => Right(materialResponse));
+
+          when(
+            () => productSearchRepository.saveSearchHistory(
+              searchKey,
+            ),
+          ).thenAnswer((_) async => const Right(null));
           return productSearchBloc;
         },
         act: (bloc) => bloc.add(
@@ -199,6 +224,7 @@ void main() {
             materialFilter: MaterialFilter.empty(),
           ),
         ),
+        wait: const Duration(milliseconds: 1500),
         expect: () => [
           ProductSearchState.initial().copyWith(
             configs: fakeMYSalesOrgConfigs,
@@ -218,6 +244,18 @@ void main() {
             salesOrganization: fakeMYSalesOrganisation,
             shipToInfo: shipToInfo,
             apiFailureOrSuccessOption: optionOf(Right(materialResponse)),
+            suggestedProductList: materialResponse.products,
+            isSearching: false,
+            canLoadMore: true,
+            searchKey: searchKey,
+            user: fakeClientUser,
+          ),
+          ProductSearchState.initial().copyWith(
+            configs: fakeMYSalesOrgConfigs,
+            customerCodeInfo: customerCodeInfo,
+            salesOrganization: fakeMYSalesOrganisation,
+            shipToInfo: shipToInfo,
+            apiFailureOrSuccessOption: none(),
             suggestedProductList: materialResponse.products,
             isSearching: false,
             canLoadMore: true,
@@ -261,6 +299,7 @@ void main() {
             materialFilter: MaterialFilter.empty(),
           ),
         ),
+        wait: const Duration(milliseconds: 1500),
         expect: () => [
           ProductSearchState.initial().copyWith(
             salesOrganization: fakeMYSalesOrganisation,
@@ -288,68 +327,6 @@ void main() {
             ),
             suggestedProductList: <MaterialInfo>[],
             isSearching: false,
-            user: fakeClientUser,
-          ),
-        ],
-      );
-    });
-    group(' -> AutoSearchProduct', () {
-      blocTest<ProductSearchBloc, ProductSearchState>(
-        ' -> Search with different searchKey',
-        seed: () => ProductSearchState.initial().copyWith(
-          salesOrganization: fakeMYSalesOrganisation,
-          configs: fakeMYSalesOrgConfigs,
-          customerCodeInfo: customerCodeInfo,
-          shipToInfo: shipToInfo,
-          searchKey: searchKey,
-          user: fakeClientUser,
-        ),
-        build: () {
-          when(
-            () => productSearchRepository.searchProductList(
-              salesOrganization: fakeMYSalesOrganisation,
-              salesOrgConfig: fakeMYSalesOrgConfigs,
-              customerCodeInfo: customerCodeInfo,
-              shipToInfo: shipToInfo,
-              searchKey: SearchKey('diff-search-key'),
-              pageSize: config.pageSize,
-              offset: 0,
-              materialFilter: MaterialFilter.empty(),
-              user: fakeClientUser,
-            ),
-          ).thenAnswer((_) async => Right(materialResponse));
-          return productSearchBloc;
-        },
-        act: (bloc) => bloc.add(
-          ProductSearchEvent.searchProduct(
-            searchKey: SearchKey.search('diff-search-key'),
-            materialFilter: MaterialFilter.empty(),
-          ),
-        ),
-        wait: const Duration(milliseconds: 1500),
-        expect: () => [
-          ProductSearchState.initial().copyWith(
-            salesOrganization: fakeMYSalesOrganisation,
-            configs: fakeMYSalesOrgConfigs,
-            customerCodeInfo: customerCodeInfo,
-            shipToInfo: shipToInfo,
-            searchKey: SearchKey('diff-search-key'),
-            suggestedProductList: <MaterialInfo>[],
-            isSearching: true,
-            canLoadMore: true,
-            apiFailureOrSuccessOption: none(),
-            user: fakeClientUser,
-          ),
-          ProductSearchState.initial().copyWith(
-            salesOrganization: fakeMYSalesOrganisation,
-            configs: fakeMYSalesOrgConfigs,
-            customerCodeInfo: customerCodeInfo,
-            shipToInfo: shipToInfo,
-            apiFailureOrSuccessOption: optionOf(Right(materialResponse)),
-            suggestedProductList: materialResponse.products,
-            isSearching: false,
-            canLoadMore: true,
-            searchKey: SearchKey('diff-search-key'),
             user: fakeClientUser,
           ),
         ],

@@ -19,6 +19,7 @@ import 'package:ezrxmobile/presentation/core/scrollable_grid_view.dart';
 import 'package:ezrxmobile/presentation/core/product_tag.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/home/selector/customer_code_selector.dart';
+import 'package:ezrxmobile/presentation/home/widgets/product_loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/orders/cart/cart_button.dart';
 import 'package:ezrxmobile/presentation/orders/widgets/edi_user_banner.dart';
 import 'package:ezrxmobile/presentation/products/widgets/filter_value_list.dart';
@@ -29,7 +30,6 @@ import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:ezrxmobile/presentation/utils/router_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 
 part 'package:ezrxmobile/presentation/products/widgets/bundle_grid_item.dart';
 
@@ -81,8 +81,9 @@ class ProductsTab extends StatelessWidget {
                   ),
                   Expanded(
                     child: state.isFetching && state.materialList.isEmpty
-                        ? LoadingShimmer.logo(
-                            key: WidgetKeys.loaderImage,
+                        ? const ProductLoadingShimmer(
+                            gridView: true,
+                            key: WidgetKeys.materialListLoader,
                           )
                         : Padding(
                             padding:

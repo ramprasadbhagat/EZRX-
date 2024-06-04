@@ -1,3 +1,5 @@
+import 'package:ezrxmobile/presentation/core/custom_card.dart';
+import 'package:ezrxmobile/presentation/core/responsive.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
@@ -8,12 +10,14 @@ import 'package:shimmer/shimmer.dart';
 part 'with_child.dart';
 part 'tile.dart';
 part 'logo.dart';
+part 'material_loading_shimmer.dart';
 
 enum LoadingShimmerType {
   withChild,
   tile,
   logo,
   circular,
+  product,
 }
 
 class LoadingShimmer extends StatelessWidget {
@@ -65,6 +69,10 @@ class LoadingShimmer extends StatelessWidget {
   factory LoadingShimmer.circular() =>
       const LoadingShimmer._(type: LoadingShimmerType.circular);
 
+  factory LoadingShimmer.product() => const LoadingShimmer._(
+        type: LoadingShimmerType.product,
+      );
+
   @override
   Widget build(BuildContext context) {
     switch (type) {
@@ -86,6 +94,8 @@ class LoadingShimmer extends StatelessWidget {
           thirdRingColor: ZPColors.orange,
           size: 30,
         );
+      case LoadingShimmerType.product:
+        return const MaterialLoading();
     }
   }
 }

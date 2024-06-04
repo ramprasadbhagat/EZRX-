@@ -12,7 +12,7 @@ part of 'product_search_bloc.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$ProductSearchEvent {
@@ -28,6 +28,7 @@ mixin _$ProductSearchEvent {
     required TResult Function(
             SearchKey searchKey, MaterialFilter materialFilter)
         searchProduct,
+    required TResult Function(SearchKey searchKey) saveSearchHistory,
     required TResult Function() loadMoreProductList,
     required TResult Function() clearSearch,
     required TResult Function() clearProductSearchSuggestionHistory,
@@ -44,6 +45,7 @@ mixin _$ProductSearchEvent {
         initialized,
     TResult? Function(SearchKey searchKey, MaterialFilter materialFilter)?
         searchProduct,
+    TResult? Function(SearchKey searchKey)? saveSearchHistory,
     TResult? Function()? loadMoreProductList,
     TResult? Function()? clearSearch,
     TResult? Function()? clearProductSearchSuggestionHistory,
@@ -60,6 +62,7 @@ mixin _$ProductSearchEvent {
         initialized,
     TResult Function(SearchKey searchKey, MaterialFilter materialFilter)?
         searchProduct,
+    TResult Function(SearchKey searchKey)? saveSearchHistory,
     TResult Function()? loadMoreProductList,
     TResult Function()? clearSearch,
     TResult Function()? clearProductSearchSuggestionHistory,
@@ -70,6 +73,7 @@ mixin _$ProductSearchEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_SearchProduct value) searchProduct,
+    required TResult Function(_SaveSearchHistory value) saveSearchHistory,
     required TResult Function(_LoadMoreProductList value) loadMoreProductList,
     required TResult Function(_ClearSearch value) clearSearch,
     required TResult Function(_ClearProductSearchSuggestionHistory value)
@@ -80,6 +84,7 @@ mixin _$ProductSearchEvent {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_SearchProduct value)? searchProduct,
+    TResult? Function(_SaveSearchHistory value)? saveSearchHistory,
     TResult? Function(_LoadMoreProductList value)? loadMoreProductList,
     TResult? Function(_ClearSearch value)? clearSearch,
     TResult? Function(_ClearProductSearchSuggestionHistory value)?
@@ -90,6 +95,7 @@ mixin _$ProductSearchEvent {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
     TResult Function(_SearchProduct value)? searchProduct,
+    TResult Function(_SaveSearchHistory value)? saveSearchHistory,
     TResult Function(_LoadMoreProductList value)? loadMoreProductList,
     TResult Function(_ClearSearch value)? clearSearch,
     TResult Function(_ClearProductSearchSuggestionHistory value)?
@@ -118,10 +124,10 @@ class _$ProductSearchEventCopyWithImpl<$Res, $Val extends ProductSearchEvent>
 }
 
 /// @nodoc
-abstract class _$$_InitializedCopyWith<$Res> {
-  factory _$$_InitializedCopyWith(
-          _$_Initialized value, $Res Function(_$_Initialized) then) =
-      __$$_InitializedCopyWithImpl<$Res>;
+abstract class _$$InitializedImplCopyWith<$Res> {
+  factory _$$InitializedImplCopyWith(
+          _$InitializedImpl value, $Res Function(_$InitializedImpl) then) =
+      __$$InitializedImplCopyWithImpl<$Res>;
   @useResult
   $Res call(
       {SalesOrganisation salesOrganization,
@@ -138,11 +144,11 @@ abstract class _$$_InitializedCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_InitializedCopyWithImpl<$Res>
-    extends _$ProductSearchEventCopyWithImpl<$Res, _$_Initialized>
-    implements _$$_InitializedCopyWith<$Res> {
-  __$$_InitializedCopyWithImpl(
-      _$_Initialized _value, $Res Function(_$_Initialized) _then)
+class __$$InitializedImplCopyWithImpl<$Res>
+    extends _$ProductSearchEventCopyWithImpl<$Res, _$InitializedImpl>
+    implements _$$InitializedImplCopyWith<$Res> {
+  __$$InitializedImplCopyWithImpl(
+      _$InitializedImpl _value, $Res Function(_$InitializedImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -154,7 +160,7 @@ class __$$_InitializedCopyWithImpl<$Res>
     Object? shipToInfo = null,
     Object? user = null,
   }) {
-    return _then(_$_Initialized(
+    return _then(_$InitializedImpl(
       salesOrganization: null == salesOrganization
           ? _value.salesOrganization
           : salesOrganization // ignore: cast_nullable_to_non_nullable
@@ -221,8 +227,8 @@ class __$$_InitializedCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_Initialized implements _Initialized {
-  const _$_Initialized(
+class _$InitializedImpl implements _Initialized {
+  const _$InitializedImpl(
       {required this.salesOrganization,
       required this.configs,
       required this.customerCodeInfo,
@@ -246,10 +252,10 @@ class _$_Initialized implements _Initialized {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Initialized &&
+            other is _$InitializedImpl &&
             (identical(other.salesOrganization, salesOrganization) ||
                 other.salesOrganization == salesOrganization) &&
             (identical(other.configs, configs) || other.configs == configs) &&
@@ -267,8 +273,8 @@ class _$_Initialized implements _Initialized {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_InitializedCopyWith<_$_Initialized> get copyWith =>
-      __$$_InitializedCopyWithImpl<_$_Initialized>(this, _$identity);
+  _$$InitializedImplCopyWith<_$InitializedImpl> get copyWith =>
+      __$$InitializedImplCopyWithImpl<_$InitializedImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -283,6 +289,7 @@ class _$_Initialized implements _Initialized {
     required TResult Function(
             SearchKey searchKey, MaterialFilter materialFilter)
         searchProduct,
+    required TResult Function(SearchKey searchKey) saveSearchHistory,
     required TResult Function() loadMoreProductList,
     required TResult Function() clearSearch,
     required TResult Function() clearProductSearchSuggestionHistory,
@@ -303,6 +310,7 @@ class _$_Initialized implements _Initialized {
         initialized,
     TResult? Function(SearchKey searchKey, MaterialFilter materialFilter)?
         searchProduct,
+    TResult? Function(SearchKey searchKey)? saveSearchHistory,
     TResult? Function()? loadMoreProductList,
     TResult? Function()? clearSearch,
     TResult? Function()? clearProductSearchSuggestionHistory,
@@ -323,6 +331,7 @@ class _$_Initialized implements _Initialized {
         initialized,
     TResult Function(SearchKey searchKey, MaterialFilter materialFilter)?
         searchProduct,
+    TResult Function(SearchKey searchKey)? saveSearchHistory,
     TResult Function()? loadMoreProductList,
     TResult Function()? clearSearch,
     TResult Function()? clearProductSearchSuggestionHistory,
@@ -340,6 +349,7 @@ class _$_Initialized implements _Initialized {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_SearchProduct value) searchProduct,
+    required TResult Function(_SaveSearchHistory value) saveSearchHistory,
     required TResult Function(_LoadMoreProductList value) loadMoreProductList,
     required TResult Function(_ClearSearch value) clearSearch,
     required TResult Function(_ClearProductSearchSuggestionHistory value)
@@ -353,6 +363,7 @@ class _$_Initialized implements _Initialized {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_SearchProduct value)? searchProduct,
+    TResult? Function(_SaveSearchHistory value)? saveSearchHistory,
     TResult? Function(_LoadMoreProductList value)? loadMoreProductList,
     TResult? Function(_ClearSearch value)? clearSearch,
     TResult? Function(_ClearProductSearchSuggestionHistory value)?
@@ -366,6 +377,7 @@ class _$_Initialized implements _Initialized {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
     TResult Function(_SearchProduct value)? searchProduct,
+    TResult Function(_SaveSearchHistory value)? saveSearchHistory,
     TResult Function(_LoadMoreProductList value)? loadMoreProductList,
     TResult Function(_ClearSearch value)? clearSearch,
     TResult Function(_ClearProductSearchSuggestionHistory value)?
@@ -385,7 +397,7 @@ abstract class _Initialized implements ProductSearchEvent {
       required final SalesOrganisationConfigs configs,
       required final CustomerCodeInfo customerCodeInfo,
       required final ShipToInfo shipToInfo,
-      required final User user}) = _$_Initialized;
+      required final User user}) = _$InitializedImpl;
 
   SalesOrganisation get salesOrganization;
   SalesOrganisationConfigs get configs;
@@ -393,15 +405,15 @@ abstract class _Initialized implements ProductSearchEvent {
   ShipToInfo get shipToInfo;
   User get user;
   @JsonKey(ignore: true)
-  _$$_InitializedCopyWith<_$_Initialized> get copyWith =>
+  _$$InitializedImplCopyWith<_$InitializedImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_SearchProductCopyWith<$Res> {
-  factory _$$_SearchProductCopyWith(
-          _$_SearchProduct value, $Res Function(_$_SearchProduct) then) =
-      __$$_SearchProductCopyWithImpl<$Res>;
+abstract class _$$SearchProductImplCopyWith<$Res> {
+  factory _$$SearchProductImplCopyWith(
+          _$SearchProductImpl value, $Res Function(_$SearchProductImpl) then) =
+      __$$SearchProductImplCopyWithImpl<$Res>;
   @useResult
   $Res call({SearchKey searchKey, MaterialFilter materialFilter});
 
@@ -409,11 +421,11 @@ abstract class _$$_SearchProductCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_SearchProductCopyWithImpl<$Res>
-    extends _$ProductSearchEventCopyWithImpl<$Res, _$_SearchProduct>
-    implements _$$_SearchProductCopyWith<$Res> {
-  __$$_SearchProductCopyWithImpl(
-      _$_SearchProduct _value, $Res Function(_$_SearchProduct) _then)
+class __$$SearchProductImplCopyWithImpl<$Res>
+    extends _$ProductSearchEventCopyWithImpl<$Res, _$SearchProductImpl>
+    implements _$$SearchProductImplCopyWith<$Res> {
+  __$$SearchProductImplCopyWithImpl(
+      _$SearchProductImpl _value, $Res Function(_$SearchProductImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -422,7 +434,7 @@ class __$$_SearchProductCopyWithImpl<$Res>
     Object? searchKey = null,
     Object? materialFilter = null,
   }) {
-    return _then(_$_SearchProduct(
+    return _then(_$SearchProductImpl(
       searchKey: null == searchKey
           ? _value.searchKey
           : searchKey // ignore: cast_nullable_to_non_nullable
@@ -445,8 +457,8 @@ class __$$_SearchProductCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_SearchProduct implements _SearchProduct {
-  const _$_SearchProduct(
+class _$SearchProductImpl implements _SearchProduct {
+  const _$SearchProductImpl(
       {required this.searchKey, required this.materialFilter});
 
   @override
@@ -460,10 +472,10 @@ class _$_SearchProduct implements _SearchProduct {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_SearchProduct &&
+            other is _$SearchProductImpl &&
             (identical(other.searchKey, searchKey) ||
                 other.searchKey == searchKey) &&
             (identical(other.materialFilter, materialFilter) ||
@@ -476,8 +488,8 @@ class _$_SearchProduct implements _SearchProduct {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_SearchProductCopyWith<_$_SearchProduct> get copyWith =>
-      __$$_SearchProductCopyWithImpl<_$_SearchProduct>(this, _$identity);
+  _$$SearchProductImplCopyWith<_$SearchProductImpl> get copyWith =>
+      __$$SearchProductImplCopyWithImpl<_$SearchProductImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -492,6 +504,7 @@ class _$_SearchProduct implements _SearchProduct {
     required TResult Function(
             SearchKey searchKey, MaterialFilter materialFilter)
         searchProduct,
+    required TResult Function(SearchKey searchKey) saveSearchHistory,
     required TResult Function() loadMoreProductList,
     required TResult Function() clearSearch,
     required TResult Function() clearProductSearchSuggestionHistory,
@@ -511,6 +524,7 @@ class _$_SearchProduct implements _SearchProduct {
         initialized,
     TResult? Function(SearchKey searchKey, MaterialFilter materialFilter)?
         searchProduct,
+    TResult? Function(SearchKey searchKey)? saveSearchHistory,
     TResult? Function()? loadMoreProductList,
     TResult? Function()? clearSearch,
     TResult? Function()? clearProductSearchSuggestionHistory,
@@ -530,6 +544,7 @@ class _$_SearchProduct implements _SearchProduct {
         initialized,
     TResult Function(SearchKey searchKey, MaterialFilter materialFilter)?
         searchProduct,
+    TResult Function(SearchKey searchKey)? saveSearchHistory,
     TResult Function()? loadMoreProductList,
     TResult Function()? clearSearch,
     TResult Function()? clearProductSearchSuggestionHistory,
@@ -546,6 +561,7 @@ class _$_SearchProduct implements _SearchProduct {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_SearchProduct value) searchProduct,
+    required TResult Function(_SaveSearchHistory value) saveSearchHistory,
     required TResult Function(_LoadMoreProductList value) loadMoreProductList,
     required TResult Function(_ClearSearch value) clearSearch,
     required TResult Function(_ClearProductSearchSuggestionHistory value)
@@ -559,6 +575,7 @@ class _$_SearchProduct implements _SearchProduct {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_SearchProduct value)? searchProduct,
+    TResult? Function(_SaveSearchHistory value)? saveSearchHistory,
     TResult? Function(_LoadMoreProductList value)? loadMoreProductList,
     TResult? Function(_ClearSearch value)? clearSearch,
     TResult? Function(_ClearProductSearchSuggestionHistory value)?
@@ -572,6 +589,7 @@ class _$_SearchProduct implements _SearchProduct {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
     TResult Function(_SearchProduct value)? searchProduct,
+    TResult Function(_SaveSearchHistory value)? saveSearchHistory,
     TResult Function(_LoadMoreProductList value)? loadMoreProductList,
     TResult Function(_ClearSearch value)? clearSearch,
     TResult Function(_ClearProductSearchSuggestionHistory value)?
@@ -588,35 +606,220 @@ class _$_SearchProduct implements _SearchProduct {
 abstract class _SearchProduct implements ProductSearchEvent {
   const factory _SearchProduct(
       {required final SearchKey searchKey,
-      required final MaterialFilter materialFilter}) = _$_SearchProduct;
+      required final MaterialFilter materialFilter}) = _$SearchProductImpl;
 
   SearchKey get searchKey;
   MaterialFilter get materialFilter;
   @JsonKey(ignore: true)
-  _$$_SearchProductCopyWith<_$_SearchProduct> get copyWith =>
+  _$$SearchProductImplCopyWith<_$SearchProductImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_LoadMoreProductListCopyWith<$Res> {
-  factory _$$_LoadMoreProductListCopyWith(_$_LoadMoreProductList value,
-          $Res Function(_$_LoadMoreProductList) then) =
-      __$$_LoadMoreProductListCopyWithImpl<$Res>;
+abstract class _$$SaveSearchHistoryImplCopyWith<$Res> {
+  factory _$$SaveSearchHistoryImplCopyWith(_$SaveSearchHistoryImpl value,
+          $Res Function(_$SaveSearchHistoryImpl) then) =
+      __$$SaveSearchHistoryImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({SearchKey searchKey});
 }
 
 /// @nodoc
-class __$$_LoadMoreProductListCopyWithImpl<$Res>
-    extends _$ProductSearchEventCopyWithImpl<$Res, _$_LoadMoreProductList>
-    implements _$$_LoadMoreProductListCopyWith<$Res> {
-  __$$_LoadMoreProductListCopyWithImpl(_$_LoadMoreProductList _value,
-      $Res Function(_$_LoadMoreProductList) _then)
+class __$$SaveSearchHistoryImplCopyWithImpl<$Res>
+    extends _$ProductSearchEventCopyWithImpl<$Res, _$SaveSearchHistoryImpl>
+    implements _$$SaveSearchHistoryImplCopyWith<$Res> {
+  __$$SaveSearchHistoryImplCopyWithImpl(_$SaveSearchHistoryImpl _value,
+      $Res Function(_$SaveSearchHistoryImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? searchKey = null,
+  }) {
+    return _then(_$SaveSearchHistoryImpl(
+      searchKey: null == searchKey
+          ? _value.searchKey
+          : searchKey // ignore: cast_nullable_to_non_nullable
+              as SearchKey,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$SaveSearchHistoryImpl implements _SaveSearchHistory {
+  const _$SaveSearchHistoryImpl({required this.searchKey});
+
+  @override
+  final SearchKey searchKey;
+
+  @override
+  String toString() {
+    return 'ProductSearchEvent.saveSearchHistory(searchKey: $searchKey)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$SaveSearchHistoryImpl &&
+            (identical(other.searchKey, searchKey) ||
+                other.searchKey == searchKey));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, searchKey);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$SaveSearchHistoryImplCopyWith<_$SaveSearchHistoryImpl> get copyWith =>
+      __$$SaveSearchHistoryImplCopyWithImpl<_$SaveSearchHistoryImpl>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(
+            SalesOrganisation salesOrganization,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user)
+        initialized,
+    required TResult Function(
+            SearchKey searchKey, MaterialFilter materialFilter)
+        searchProduct,
+    required TResult Function(SearchKey searchKey) saveSearchHistory,
+    required TResult Function() loadMoreProductList,
+    required TResult Function() clearSearch,
+    required TResult Function() clearProductSearchSuggestionHistory,
+  }) {
+    return saveSearchHistory(searchKey);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(
+            SalesOrganisation salesOrganization,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user)?
+        initialized,
+    TResult? Function(SearchKey searchKey, MaterialFilter materialFilter)?
+        searchProduct,
+    TResult? Function(SearchKey searchKey)? saveSearchHistory,
+    TResult? Function()? loadMoreProductList,
+    TResult? Function()? clearSearch,
+    TResult? Function()? clearProductSearchSuggestionHistory,
+  }) {
+    return saveSearchHistory?.call(searchKey);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(
+            SalesOrganisation salesOrganization,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipToInfo,
+            User user)?
+        initialized,
+    TResult Function(SearchKey searchKey, MaterialFilter materialFilter)?
+        searchProduct,
+    TResult Function(SearchKey searchKey)? saveSearchHistory,
+    TResult Function()? loadMoreProductList,
+    TResult Function()? clearSearch,
+    TResult Function()? clearProductSearchSuggestionHistory,
+    required TResult orElse(),
+  }) {
+    if (saveSearchHistory != null) {
+      return saveSearchHistory(searchKey);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initialized value) initialized,
+    required TResult Function(_SearchProduct value) searchProduct,
+    required TResult Function(_SaveSearchHistory value) saveSearchHistory,
+    required TResult Function(_LoadMoreProductList value) loadMoreProductList,
+    required TResult Function(_ClearSearch value) clearSearch,
+    required TResult Function(_ClearProductSearchSuggestionHistory value)
+        clearProductSearchSuggestionHistory,
+  }) {
+    return saveSearchHistory(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_SearchProduct value)? searchProduct,
+    TResult? Function(_SaveSearchHistory value)? saveSearchHistory,
+    TResult? Function(_LoadMoreProductList value)? loadMoreProductList,
+    TResult? Function(_ClearSearch value)? clearSearch,
+    TResult? Function(_ClearProductSearchSuggestionHistory value)?
+        clearProductSearchSuggestionHistory,
+  }) {
+    return saveSearchHistory?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_SearchProduct value)? searchProduct,
+    TResult Function(_SaveSearchHistory value)? saveSearchHistory,
+    TResult Function(_LoadMoreProductList value)? loadMoreProductList,
+    TResult Function(_ClearSearch value)? clearSearch,
+    TResult Function(_ClearProductSearchSuggestionHistory value)?
+        clearProductSearchSuggestionHistory,
+    required TResult orElse(),
+  }) {
+    if (saveSearchHistory != null) {
+      return saveSearchHistory(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _SaveSearchHistory implements ProductSearchEvent {
+  const factory _SaveSearchHistory({required final SearchKey searchKey}) =
+      _$SaveSearchHistoryImpl;
+
+  SearchKey get searchKey;
+  @JsonKey(ignore: true)
+  _$$SaveSearchHistoryImplCopyWith<_$SaveSearchHistoryImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$LoadMoreProductListImplCopyWith<$Res> {
+  factory _$$LoadMoreProductListImplCopyWith(_$LoadMoreProductListImpl value,
+          $Res Function(_$LoadMoreProductListImpl) then) =
+      __$$LoadMoreProductListImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$LoadMoreProductListImplCopyWithImpl<$Res>
+    extends _$ProductSearchEventCopyWithImpl<$Res, _$LoadMoreProductListImpl>
+    implements _$$LoadMoreProductListImplCopyWith<$Res> {
+  __$$LoadMoreProductListImplCopyWithImpl(_$LoadMoreProductListImpl _value,
+      $Res Function(_$LoadMoreProductListImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_LoadMoreProductList implements _LoadMoreProductList {
-  const _$_LoadMoreProductList();
+class _$LoadMoreProductListImpl implements _LoadMoreProductList {
+  const _$LoadMoreProductListImpl();
 
   @override
   String toString() {
@@ -624,9 +827,10 @@ class _$_LoadMoreProductList implements _LoadMoreProductList {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_LoadMoreProductList);
+        (other.runtimeType == runtimeType &&
+            other is _$LoadMoreProductListImpl);
   }
 
   @override
@@ -645,6 +849,7 @@ class _$_LoadMoreProductList implements _LoadMoreProductList {
     required TResult Function(
             SearchKey searchKey, MaterialFilter materialFilter)
         searchProduct,
+    required TResult Function(SearchKey searchKey) saveSearchHistory,
     required TResult Function() loadMoreProductList,
     required TResult Function() clearSearch,
     required TResult Function() clearProductSearchSuggestionHistory,
@@ -664,6 +869,7 @@ class _$_LoadMoreProductList implements _LoadMoreProductList {
         initialized,
     TResult? Function(SearchKey searchKey, MaterialFilter materialFilter)?
         searchProduct,
+    TResult? Function(SearchKey searchKey)? saveSearchHistory,
     TResult? Function()? loadMoreProductList,
     TResult? Function()? clearSearch,
     TResult? Function()? clearProductSearchSuggestionHistory,
@@ -683,6 +889,7 @@ class _$_LoadMoreProductList implements _LoadMoreProductList {
         initialized,
     TResult Function(SearchKey searchKey, MaterialFilter materialFilter)?
         searchProduct,
+    TResult Function(SearchKey searchKey)? saveSearchHistory,
     TResult Function()? loadMoreProductList,
     TResult Function()? clearSearch,
     TResult Function()? clearProductSearchSuggestionHistory,
@@ -699,6 +906,7 @@ class _$_LoadMoreProductList implements _LoadMoreProductList {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_SearchProduct value) searchProduct,
+    required TResult Function(_SaveSearchHistory value) saveSearchHistory,
     required TResult Function(_LoadMoreProductList value) loadMoreProductList,
     required TResult Function(_ClearSearch value) clearSearch,
     required TResult Function(_ClearProductSearchSuggestionHistory value)
@@ -712,6 +920,7 @@ class _$_LoadMoreProductList implements _LoadMoreProductList {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_SearchProduct value)? searchProduct,
+    TResult? Function(_SaveSearchHistory value)? saveSearchHistory,
     TResult? Function(_LoadMoreProductList value)? loadMoreProductList,
     TResult? Function(_ClearSearch value)? clearSearch,
     TResult? Function(_ClearProductSearchSuggestionHistory value)?
@@ -725,6 +934,7 @@ class _$_LoadMoreProductList implements _LoadMoreProductList {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
     TResult Function(_SearchProduct value)? searchProduct,
+    TResult Function(_SaveSearchHistory value)? saveSearchHistory,
     TResult Function(_LoadMoreProductList value)? loadMoreProductList,
     TResult Function(_ClearSearch value)? clearSearch,
     TResult Function(_ClearProductSearchSuggestionHistory value)?
@@ -739,29 +949,29 @@ class _$_LoadMoreProductList implements _LoadMoreProductList {
 }
 
 abstract class _LoadMoreProductList implements ProductSearchEvent {
-  const factory _LoadMoreProductList() = _$_LoadMoreProductList;
+  const factory _LoadMoreProductList() = _$LoadMoreProductListImpl;
 }
 
 /// @nodoc
-abstract class _$$_ClearSearchCopyWith<$Res> {
-  factory _$$_ClearSearchCopyWith(
-          _$_ClearSearch value, $Res Function(_$_ClearSearch) then) =
-      __$$_ClearSearchCopyWithImpl<$Res>;
+abstract class _$$ClearSearchImplCopyWith<$Res> {
+  factory _$$ClearSearchImplCopyWith(
+          _$ClearSearchImpl value, $Res Function(_$ClearSearchImpl) then) =
+      __$$ClearSearchImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_ClearSearchCopyWithImpl<$Res>
-    extends _$ProductSearchEventCopyWithImpl<$Res, _$_ClearSearch>
-    implements _$$_ClearSearchCopyWith<$Res> {
-  __$$_ClearSearchCopyWithImpl(
-      _$_ClearSearch _value, $Res Function(_$_ClearSearch) _then)
+class __$$ClearSearchImplCopyWithImpl<$Res>
+    extends _$ProductSearchEventCopyWithImpl<$Res, _$ClearSearchImpl>
+    implements _$$ClearSearchImplCopyWith<$Res> {
+  __$$ClearSearchImplCopyWithImpl(
+      _$ClearSearchImpl _value, $Res Function(_$ClearSearchImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_ClearSearch implements _ClearSearch {
-  const _$_ClearSearch();
+class _$ClearSearchImpl implements _ClearSearch {
+  const _$ClearSearchImpl();
 
   @override
   String toString() {
@@ -769,9 +979,9 @@ class _$_ClearSearch implements _ClearSearch {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_ClearSearch);
+        (other.runtimeType == runtimeType && other is _$ClearSearchImpl);
   }
 
   @override
@@ -790,6 +1000,7 @@ class _$_ClearSearch implements _ClearSearch {
     required TResult Function(
             SearchKey searchKey, MaterialFilter materialFilter)
         searchProduct,
+    required TResult Function(SearchKey searchKey) saveSearchHistory,
     required TResult Function() loadMoreProductList,
     required TResult Function() clearSearch,
     required TResult Function() clearProductSearchSuggestionHistory,
@@ -809,6 +1020,7 @@ class _$_ClearSearch implements _ClearSearch {
         initialized,
     TResult? Function(SearchKey searchKey, MaterialFilter materialFilter)?
         searchProduct,
+    TResult? Function(SearchKey searchKey)? saveSearchHistory,
     TResult? Function()? loadMoreProductList,
     TResult? Function()? clearSearch,
     TResult? Function()? clearProductSearchSuggestionHistory,
@@ -828,6 +1040,7 @@ class _$_ClearSearch implements _ClearSearch {
         initialized,
     TResult Function(SearchKey searchKey, MaterialFilter materialFilter)?
         searchProduct,
+    TResult Function(SearchKey searchKey)? saveSearchHistory,
     TResult Function()? loadMoreProductList,
     TResult Function()? clearSearch,
     TResult Function()? clearProductSearchSuggestionHistory,
@@ -844,6 +1057,7 @@ class _$_ClearSearch implements _ClearSearch {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_SearchProduct value) searchProduct,
+    required TResult Function(_SaveSearchHistory value) saveSearchHistory,
     required TResult Function(_LoadMoreProductList value) loadMoreProductList,
     required TResult Function(_ClearSearch value) clearSearch,
     required TResult Function(_ClearProductSearchSuggestionHistory value)
@@ -857,6 +1071,7 @@ class _$_ClearSearch implements _ClearSearch {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_SearchProduct value)? searchProduct,
+    TResult? Function(_SaveSearchHistory value)? saveSearchHistory,
     TResult? Function(_LoadMoreProductList value)? loadMoreProductList,
     TResult? Function(_ClearSearch value)? clearSearch,
     TResult? Function(_ClearProductSearchSuggestionHistory value)?
@@ -870,6 +1085,7 @@ class _$_ClearSearch implements _ClearSearch {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
     TResult Function(_SearchProduct value)? searchProduct,
+    TResult Function(_SaveSearchHistory value)? saveSearchHistory,
     TResult Function(_LoadMoreProductList value)? loadMoreProductList,
     TResult Function(_ClearSearch value)? clearSearch,
     TResult Function(_ClearProductSearchSuggestionHistory value)?
@@ -884,33 +1100,33 @@ class _$_ClearSearch implements _ClearSearch {
 }
 
 abstract class _ClearSearch implements ProductSearchEvent {
-  const factory _ClearSearch() = _$_ClearSearch;
+  const factory _ClearSearch() = _$ClearSearchImpl;
 }
 
 /// @nodoc
-abstract class _$$_ClearProductSearchSuggestionHistoryCopyWith<$Res> {
-  factory _$$_ClearProductSearchSuggestionHistoryCopyWith(
-          _$_ClearProductSearchSuggestionHistory value,
-          $Res Function(_$_ClearProductSearchSuggestionHistory) then) =
-      __$$_ClearProductSearchSuggestionHistoryCopyWithImpl<$Res>;
+abstract class _$$ClearProductSearchSuggestionHistoryImplCopyWith<$Res> {
+  factory _$$ClearProductSearchSuggestionHistoryImplCopyWith(
+          _$ClearProductSearchSuggestionHistoryImpl value,
+          $Res Function(_$ClearProductSearchSuggestionHistoryImpl) then) =
+      __$$ClearProductSearchSuggestionHistoryImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_ClearProductSearchSuggestionHistoryCopyWithImpl<$Res>
+class __$$ClearProductSearchSuggestionHistoryImplCopyWithImpl<$Res>
     extends _$ProductSearchEventCopyWithImpl<$Res,
-        _$_ClearProductSearchSuggestionHistory>
-    implements _$$_ClearProductSearchSuggestionHistoryCopyWith<$Res> {
-  __$$_ClearProductSearchSuggestionHistoryCopyWithImpl(
-      _$_ClearProductSearchSuggestionHistory _value,
-      $Res Function(_$_ClearProductSearchSuggestionHistory) _then)
+        _$ClearProductSearchSuggestionHistoryImpl>
+    implements _$$ClearProductSearchSuggestionHistoryImplCopyWith<$Res> {
+  __$$ClearProductSearchSuggestionHistoryImplCopyWithImpl(
+      _$ClearProductSearchSuggestionHistoryImpl _value,
+      $Res Function(_$ClearProductSearchSuggestionHistoryImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_ClearProductSearchSuggestionHistory
+class _$ClearProductSearchSuggestionHistoryImpl
     implements _ClearProductSearchSuggestionHistory {
-  const _$_ClearProductSearchSuggestionHistory();
+  const _$ClearProductSearchSuggestionHistoryImpl();
 
   @override
   String toString() {
@@ -918,10 +1134,10 @@ class _$_ClearProductSearchSuggestionHistory
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ClearProductSearchSuggestionHistory);
+            other is _$ClearProductSearchSuggestionHistoryImpl);
   }
 
   @override
@@ -940,6 +1156,7 @@ class _$_ClearProductSearchSuggestionHistory
     required TResult Function(
             SearchKey searchKey, MaterialFilter materialFilter)
         searchProduct,
+    required TResult Function(SearchKey searchKey) saveSearchHistory,
     required TResult Function() loadMoreProductList,
     required TResult Function() clearSearch,
     required TResult Function() clearProductSearchSuggestionHistory,
@@ -959,6 +1176,7 @@ class _$_ClearProductSearchSuggestionHistory
         initialized,
     TResult? Function(SearchKey searchKey, MaterialFilter materialFilter)?
         searchProduct,
+    TResult? Function(SearchKey searchKey)? saveSearchHistory,
     TResult? Function()? loadMoreProductList,
     TResult? Function()? clearSearch,
     TResult? Function()? clearProductSearchSuggestionHistory,
@@ -978,6 +1196,7 @@ class _$_ClearProductSearchSuggestionHistory
         initialized,
     TResult Function(SearchKey searchKey, MaterialFilter materialFilter)?
         searchProduct,
+    TResult Function(SearchKey searchKey)? saveSearchHistory,
     TResult Function()? loadMoreProductList,
     TResult Function()? clearSearch,
     TResult Function()? clearProductSearchSuggestionHistory,
@@ -994,6 +1213,7 @@ class _$_ClearProductSearchSuggestionHistory
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_SearchProduct value) searchProduct,
+    required TResult Function(_SaveSearchHistory value) saveSearchHistory,
     required TResult Function(_LoadMoreProductList value) loadMoreProductList,
     required TResult Function(_ClearSearch value) clearSearch,
     required TResult Function(_ClearProductSearchSuggestionHistory value)
@@ -1007,6 +1227,7 @@ class _$_ClearProductSearchSuggestionHistory
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_SearchProduct value)? searchProduct,
+    TResult? Function(_SaveSearchHistory value)? saveSearchHistory,
     TResult? Function(_LoadMoreProductList value)? loadMoreProductList,
     TResult? Function(_ClearSearch value)? clearSearch,
     TResult? Function(_ClearProductSearchSuggestionHistory value)?
@@ -1020,6 +1241,7 @@ class _$_ClearProductSearchSuggestionHistory
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
     TResult Function(_SearchProduct value)? searchProduct,
+    TResult Function(_SaveSearchHistory value)? saveSearchHistory,
     TResult Function(_LoadMoreProductList value)? loadMoreProductList,
     TResult Function(_ClearSearch value)? clearSearch,
     TResult Function(_ClearProductSearchSuggestionHistory value)?
@@ -1036,7 +1258,7 @@ class _$_ClearProductSearchSuggestionHistory
 abstract class _ClearProductSearchSuggestionHistory
     implements ProductSearchEvent {
   const factory _ClearProductSearchSuggestionHistory() =
-      _$_ClearProductSearchSuggestionHistory;
+      _$ClearProductSearchSuggestionHistoryImpl;
 }
 
 /// @nodoc
@@ -1228,11 +1450,11 @@ class _$ProductSearchStateCopyWithImpl<$Res, $Val extends ProductSearchState>
 }
 
 /// @nodoc
-abstract class _$$_ProductSearchStateCopyWith<$Res>
+abstract class _$$ProductSearchStateImplCopyWith<$Res>
     implements $ProductSearchStateCopyWith<$Res> {
-  factory _$$_ProductSearchStateCopyWith(_$_ProductSearchState value,
-          $Res Function(_$_ProductSearchState) then) =
-      __$$_ProductSearchStateCopyWithImpl<$Res>;
+  factory _$$ProductSearchStateImplCopyWith(_$ProductSearchStateImpl value,
+          $Res Function(_$ProductSearchStateImpl) then) =
+      __$$ProductSearchStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -1266,11 +1488,11 @@ abstract class _$$_ProductSearchStateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_ProductSearchStateCopyWithImpl<$Res>
-    extends _$ProductSearchStateCopyWithImpl<$Res, _$_ProductSearchState>
-    implements _$$_ProductSearchStateCopyWith<$Res> {
-  __$$_ProductSearchStateCopyWithImpl(
-      _$_ProductSearchState _value, $Res Function(_$_ProductSearchState) _then)
+class __$$ProductSearchStateImplCopyWithImpl<$Res>
+    extends _$ProductSearchStateCopyWithImpl<$Res, _$ProductSearchStateImpl>
+    implements _$$ProductSearchStateImplCopyWith<$Res> {
+  __$$ProductSearchStateImplCopyWithImpl(_$ProductSearchStateImpl _value,
+      $Res Function(_$ProductSearchStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1289,7 +1511,7 @@ class __$$_ProductSearchStateCopyWithImpl<$Res>
     Object? materialFilter = null,
     Object? user = null,
   }) {
-    return _then(_$_ProductSearchState(
+    return _then(_$ProductSearchStateImpl(
       isSearching: null == isSearching
           ? _value.isSearching
           : isSearching // ignore: cast_nullable_to_non_nullable
@@ -1344,8 +1566,8 @@ class __$$_ProductSearchStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_ProductSearchState implements _ProductSearchState {
-  const _$_ProductSearchState(
+class _$ProductSearchStateImpl implements _ProductSearchState {
+  const _$ProductSearchStateImpl(
       {required this.isSearching,
       required final List<MaterialInfo> suggestedProductList,
       required this.canLoadMore,
@@ -1398,10 +1620,10 @@ class _$_ProductSearchState implements _ProductSearchState {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ProductSearchState &&
+            other is _$ProductSearchStateImpl &&
             (identical(other.isSearching, isSearching) ||
                 other.isSearching == isSearching) &&
             const DeepCollectionEquality()
@@ -1447,8 +1669,8 @@ class _$_ProductSearchState implements _ProductSearchState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ProductSearchStateCopyWith<_$_ProductSearchState> get copyWith =>
-      __$$_ProductSearchStateCopyWithImpl<_$_ProductSearchState>(
+  _$$ProductSearchStateImplCopyWith<_$ProductSearchStateImpl> get copyWith =>
+      __$$ProductSearchStateImplCopyWithImpl<_$ProductSearchStateImpl>(
           this, _$identity);
 }
 
@@ -1466,7 +1688,7 @@ abstract class _ProductSearchState implements ProductSearchState {
       required final CustomerCodeInfo customerCodeInfo,
       required final ShipToInfo shipToInfo,
       required final MaterialFilter materialFilter,
-      required final User user}) = _$_ProductSearchState;
+      required final User user}) = _$ProductSearchStateImpl;
 
   @override
   bool get isSearching;
@@ -1494,6 +1716,6 @@ abstract class _ProductSearchState implements ProductSearchState {
   User get user;
   @override
   @JsonKey(ignore: true)
-  _$$_ProductSearchStateCopyWith<_$_ProductSearchState> get copyWith =>
+  _$$ProductSearchStateImplCopyWith<_$ProductSearchStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

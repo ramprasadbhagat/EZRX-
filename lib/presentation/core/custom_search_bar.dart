@@ -24,6 +24,8 @@ class CustomSearchBar extends StatefulWidget {
     required this.customValidator,
     this.autofocus = false,
     this.searchSuffixIcon,
+    this.disableBorder = false,
+    this.backgroundColor,
   }) : super(key: key);
 
   final bool enabled;
@@ -37,6 +39,8 @@ class CustomSearchBar extends StatefulWidget {
   final bool Function(String) customValidator;
   final bool autofocus;
   final Widget? searchSuffixIcon;
+  final bool disableBorder;
+  final Color? backgroundColor;
 
   @override
   State<CustomSearchBar> createState() => _CustomSearchBarState();
@@ -44,24 +48,30 @@ class CustomSearchBar extends StatefulWidget {
 
 class _CustomSearchBarState extends State<CustomSearchBar> {
   Timer? _debounce;
+  final controller = TextEditingController();
+
+  @override
+  void initState() {
+    controller.text = widget.initialValue;
+    super.initState();
+  }
+
   @override
   void dispose() {
     _debounce?.cancel();
+    controller.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    var valueText = widget.initialValue;
-
     return TextFormField(
       key: WidgetKeys.searchBar,
       autocorrect: false,
       autofocus: widget.autofocus,
       enabled: widget.enabled,
-      initialValue: widget.initialValue,
+      controller: controller,
       onChanged: (value) {
-        valueText = value;
         if (_debounce?.isActive ?? false) _debounce?.cancel();
         _debounce = Timer(
           Duration(
@@ -75,7 +85,8 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
       inputFormatters: widget.inputFormatters,
       style: Theme.of(context).textTheme.titleMedium?.copyWith(height: 1.5),
       decoration: InputDecoration(
-        suffixIcon: widget.initialValue.isEmpty
+        fillColor: widget.backgroundColor,
+        suffixIcon: controller.text.isEmpty
             ? widget.searchSuffixIcon ??
                 IconButton(
                   key: WidgetKeys.searchIconKey,
@@ -88,16 +99,24 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
                       const VisualDensity(horizontal: -4, vertical: -4),
                   onPressed: () => _onSearch(
                     context,
-                    valueText,
+                    controller.text,
                   ),
                 )
             : IconButton(
                 key: WidgetKeys.clearIconKey,
                 icon: const Icon(
-                  Icons.clear,
+                  Icons.cancel_rounded,
+                  size: 24,
+                  color: ZPColors.backgroundCloseButtonSnackBar,
                 ),
-                onPressed: () => widget.onClear.call(),
+                onPressed: () {
+                  widget.onClear.call();
+                  controller.clear();
+                },
               ),
+        enabledBorder: widget.disableBorder ? InputBorder.none : null,
+        focusedBorder: widget.disableBorder ? InputBorder.none : null,
+        disabledBorder: widget.disableBorder ? InputBorder.none : null,
         hintText: context.tr(widget.hintText),
         hintStyle: Theme.of(context)
             .textTheme

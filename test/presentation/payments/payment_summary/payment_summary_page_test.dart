@@ -622,11 +622,11 @@ void main() {
       );
 
       expect(
-        find.byIcon(Icons.clear),
+        find.byIcon(Icons.cancel_rounded),
         findsOneWidget,
       );
 
-      await tester.tap(find.byIcon(Icons.clear));
+      await tester.tap(find.byIcon(Icons.cancel_rounded));
       await tester.pump(const Duration(seconds: 2));
 
       verify(

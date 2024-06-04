@@ -1,4 +1,6 @@
 import 'package:ezrxmobile/application/order/material_filter/material_filter_bloc.dart';
+import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
+import 'package:ezrxmobile/domain/order/entities/material_filter.dart';
 import 'package:ezrxmobile/infrastructure/core/common/clevertap_helper.dart';
 import 'package:ezrxmobile/infrastructure/core/common/tracking_events.dart';
 import 'package:ezrxmobile/infrastructure/core/common/tracking_properties.dart';
@@ -9,6 +11,7 @@ import 'package:ezrxmobile/presentation/core/market_place/market_place_logo.dart
 import 'package:ezrxmobile/presentation/core/no_record.dart';
 import 'package:ezrxmobile/presentation/core/scroll_list.dart';
 import 'package:ezrxmobile/presentation/products/clear_product_search_suggestion_history.dart';
+import 'package:ezrxmobile/presentation/products/widgets/scan_camera_button.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/utils/router_utils.dart';
 import 'package:flutter/material.dart';
@@ -18,7 +21,6 @@ import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:ezrxmobile/application/order/product_search/product_search_bloc.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
-import 'package:ezrxmobile/application/order/scan_material_info/scan_material_info_bloc.dart';
 import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
 part 'package:ezrxmobile/presentation/products/product_suggestion/widgets/history_tile.dart';
 part 'package:ezrxmobile/presentation/products/product_suggestion/widgets/suggest_product_tile.dart';
@@ -39,7 +41,10 @@ class ProductSuggestionPage extends StatelessWidget {
     return Scaffold(
       key: WidgetKeys.productSearchPage,
       appBar: AppBar(
-        title: _ProductSearchSection(parentRoute: parentRoute),
+        title: _ProductSearchSection(
+          parentRoute: parentRoute,
+          initSearchValue: context.read<ProductSearchBloc>().state.searchKey,
+        ),
         elevation: 0,
         titleSpacing: 0,
       ),

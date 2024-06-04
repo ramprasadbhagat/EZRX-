@@ -116,6 +116,7 @@ class ProductSearchBloc extends Bloc<ProductSearchEvent, ProductSearchState> {
                 isSearching: false,
               ),
             );
+            add(_SaveSearchHistory(searchKey: event.searchKey));
           },
         );
       },
@@ -202,5 +203,21 @@ class ProductSearchBloc extends Bloc<ProductSearchEvent, ProductSearchState> {
         );
       },
     );
+    on<_SaveSearchHistory>((event, emit) async {
+      final failureOrSuccess =
+          await productSearchRepository.saveSearchHistory(event.searchKey);
+      failureOrSuccess.fold(
+        (failure) => emit(
+          state.copyWith(
+            apiFailureOrSuccessOption: optionOf(failureOrSuccess),
+          ),
+        ),
+        (searchKeyList) => emit(
+          state.copyWith(
+            apiFailureOrSuccessOption: none(),
+          ),
+        ),
+      );
+    });
   }
 }

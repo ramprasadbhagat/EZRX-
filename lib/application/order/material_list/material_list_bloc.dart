@@ -89,6 +89,7 @@ class MaterialListBloc extends Bloc<MaterialListEvent, MaterialListState> {
           offset: 0,
           selectedMaterialFilter: e.selectedMaterialFilter,
           user: state.user,
+          searchKey: state.searchKey,
         );
         if (emit.isDone) return;
         failureOrSuccess.fold(
@@ -139,6 +140,7 @@ class MaterialListBloc extends Bloc<MaterialListEvent, MaterialListState> {
         offset: state.materialList.length,
         selectedMaterialFilter: state.selectedMaterialFilter,
         user: state.user,
+        searchKey: state.searchKey,
       );
       failureOrSuccess.fold(
         (failure) => emit(

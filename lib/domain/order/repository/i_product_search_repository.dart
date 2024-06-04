@@ -30,6 +30,9 @@ abstract class IProductSearchRepository {
   });
 
   Future<Either<ApiFailure, ProductSuggestionHistory>> getSearchKeys();
+
+  Future<Either<ApiFailure, void>> saveSearchHistory(SearchKey searchKey);
+
   Future<Either<ApiFailure, void>> clearSearchHistory();
 
   Future<Either<ApiFailure, MaterialInfo>> getScanProduct({

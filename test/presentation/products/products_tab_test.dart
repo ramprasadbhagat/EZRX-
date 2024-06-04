@@ -188,7 +188,7 @@ void main() {
           );
           await tester.pumpWidget(getScopedWidget());
           await tester.pump();
-          expect(find.byKey(WidgetKeys.loaderImage), findsOneWidget);
+          expect(find.byKey(WidgetKeys.materialListLoader), findsOneWidget);
           expect(find.byKey(WidgetKeys.scrollList), findsNothing);
         },
       );
@@ -211,7 +211,7 @@ void main() {
           await tester.pumpWidget(getScopedWidget());
           await tester.pump();
 
-          expect(find.byKey(WidgetKeys.loaderImage), findsNothing);
+          expect(find.byKey(WidgetKeys.materialListLoader), findsNothing);
           expect(find.byKey(WidgetKeys.scrollList), findsOneWidget);
         },
       );

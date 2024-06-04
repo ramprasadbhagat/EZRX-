@@ -1,8 +1,4 @@
-import 'package:ezrxmobile/presentation/core/custom_card.dart';
-import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
-import 'package:ezrxmobile/presentation/core/responsive.dart';
-import 'package:ezrxmobile/presentation/theme/colors.dart';
-import 'package:flutter/material.dart';
+part of 'loading_shimmer.dart';
 
 class MaterialLoading extends StatelessWidget {
   const MaterialLoading({
@@ -46,6 +42,7 @@ class MaterialLoading extends StatelessWidget {
                       child: LoadingShimmer.withChild(
                         child: Container(
                           width: double.infinity,
+                          margin: const EdgeInsets.only(right: 40),
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(8.0),
                             color: ZPColors.white,
@@ -57,7 +54,7 @@ class MaterialLoading extends StatelessWidget {
                       height: 4,
                     ),
                     Expanded(
-                      flex: 2,
+                      flex: 6,
                       child: LoadingShimmer.withChild(
                         child: Container(
                           width: double.infinity,
@@ -75,6 +72,7 @@ class MaterialLoading extends StatelessWidget {
                       child: LoadingShimmer.withChild(
                         child: Container(
                           width: double.infinity,
+                          margin: const EdgeInsets.only(right: 40),
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(8.0),
                             color: ZPColors.white,
@@ -86,9 +84,11 @@ class MaterialLoading extends StatelessWidget {
                       height: 4,
                     ),
                     Expanded(
+                      flex: 2,
                       child: LoadingShimmer.withChild(
                         child: Container(
                           width: double.infinity,
+                          margin: const EdgeInsets.only(right: 70),
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(5.0),
                             color: ZPColors.white,

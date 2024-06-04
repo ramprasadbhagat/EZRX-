@@ -1,17 +1,31 @@
-import 'package:ezrxmobile/presentation/core/loading_shimmer/material_loading_shimmer.dart';
+import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:flutter/material.dart';
 
 class ProductLoadingShimmer extends StatelessWidget {
-  const ProductLoadingShimmer({Key? key}) : super(key: key);
+  final bool gridView;
+  const ProductLoadingShimmer({this.gridView = false, Key? key})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      scrollDirection: Axis.horizontal,
-      children: List.generate(
-        4,
-        (index) => const MaterialLoading(),
-      ),
-    );
+    return gridView
+        ? Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10),
+            child: GridView.count(
+              crossAxisCount: 2,
+              childAspectRatio: 0.7,
+              children: List.generate(
+                10,
+                (index) => LoadingShimmer.product(),
+              ),
+            ),
+          )
+        : ListView(
+            scrollDirection: Axis.horizontal,
+            children: List.generate(
+              4,
+              (index) => LoadingShimmer.product(),
+            ),
+          );
   }
 }

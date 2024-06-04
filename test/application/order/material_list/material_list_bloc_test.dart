@@ -40,12 +40,15 @@ void main() {
   late List<MaterialStockInfo> stockInfoList;
   late List addToFavouritesList;
   late List removeFavouritesList;
+  final fakeSearchKey = SearchKey.searchFilter('');
+
   final materialState = MaterialListState.initial().copyWith(
     salesOrganisation: fakeSGSalesOrganisation,
     configs: fakeSGSalesOrgConfigs,
     customerCodeInfo: fakeCustomerCodeInfo,
     shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
     user: fakeClientUser,
+    searchKey: fakeSearchKey,
   );
   final updatedSelectedMaterialFilter =
       materialState.selectedMaterialFilter.copyWith(
@@ -95,6 +98,7 @@ void main() {
             offset: 0,
             selectedMaterialFilter: mockSelectedMaterialFilter,
             user: fakeClientUser,
+            searchKey: fakeSearchKey,
           ),
         ).thenAnswer(
           (invocation) async => const Left(
@@ -155,6 +159,7 @@ void main() {
             pageSize: config.productTabPageSize,
             offset: 0,
             selectedMaterialFilter: mockSelectedMaterialFilter,
+            searchKey: fakeSearchKey,
           ),
         ).thenAnswer(
           (invocation) async => Right(materialResponseMock),
@@ -225,6 +230,7 @@ void main() {
             offset: 0,
             selectedMaterialFilter: mockSelectedMaterialFilter,
             user: fakeClientUser,
+            searchKey: fakeSearchKey,
           ),
         ).thenAnswer(
           (invocation) async => const Left(
@@ -302,6 +308,7 @@ void main() {
             offset: materialState.materialList.length,
             selectedMaterialFilter: mockSelectedMaterialFilter,
             user: fakeClientUser,
+            searchKey: fakeSearchKey,
           ),
         ).thenAnswer(
           (invocation) async => Right(materialResponseMock),
@@ -363,6 +370,7 @@ void main() {
             offset: materialState.materialList.length,
             selectedMaterialFilter: mockSelectedMaterialFilter,
             user: fakeClientUser,
+            searchKey: fakeSearchKey,
           ),
         ).thenAnswer(
           (invocation) async => const Left(ApiFailure.other('fake-error')),
@@ -411,6 +419,7 @@ void main() {
             offset: config.productTabPageSize,
             selectedMaterialFilter: mockSelectedMaterialFilter,
             user: fakeClientUser,
+            searchKey: fakeSearchKey,
           ),
         ).thenAnswer(
           (invocation) async => Right(

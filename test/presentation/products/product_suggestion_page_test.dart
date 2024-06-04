@@ -2,6 +2,7 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/order/material_filter/material_filter_bloc.dart';
+import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
 import 'package:ezrxmobile/application/order/product_detail/details/product_detail_bloc.dart';
 import 'package:ezrxmobile/application/order/product_search/product_search_bloc.dart';
@@ -28,6 +29,7 @@ import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 
+import '../../common_mock_data/mock_bloc.dart';
 import '../../common_mock_data/mock_other.dart';
 import '../../utils/widget_utils.dart';
 
@@ -67,6 +69,7 @@ void main() {
   final locator = GetIt.instance;
   const fakeSearchText = 'fake-search-text';
   late List<MaterialInfo> materialSearchResults;
+  late MaterialListBloc materialListBlocMock;
 
   /////////////////////////key///////////////////////////////////
   final productSearchSuggestionSection =
@@ -94,6 +97,7 @@ void main() {
     scanMaterialInfoBlocMock = ScanMaterialInfoBlocMock();
     productSearchBlocMock = ProductSearchBlocMock();
     materialFilterBlocMock = MockMaterialFilterBloc();
+    materialListBlocMock = MaterialListBlocMock();
 
     when(() => productSearchBlocMock.state).thenReturn(
       ProductSearchState.initial().copyWith(
@@ -115,6 +119,8 @@ void main() {
     );
     when(() => materialFilterBlocMock.state)
         .thenReturn(MaterialFilterState.initial());
+    when(() => materialListBlocMock.state)
+        .thenReturn(MaterialListState.initial());
   });
 
   Widget getWidget() {
@@ -139,6 +145,9 @@ void main() {
         ),
         BlocProvider<MaterialFilterBloc>(
           create: (context) => materialFilterBlocMock,
+        ),
+        BlocProvider<MaterialListBloc>(
+          create: (context) => materialListBlocMock,
         ),
       ],
       child: const ProductSuggestionPage(parentRoute: ''),
@@ -298,6 +307,7 @@ void main() {
           expect(autoRouterMock.current.name, BundleDetailPageRoute.name);
         },
       );
+      
       testWidgets(
         'Test Product Search Section',
         (tester) async {
@@ -309,12 +319,35 @@ void main() {
           await tester.testTextInput.receiveAction(TextInputAction.done);
           verify(
             () => productSearchBlocMock.add(
-              ProductSearchEvent.searchProduct(
+              ProductSearchEvent.saveSearchHistory(
                 searchKey: SearchKey.search(fakeSearchText),
-                materialFilter: MaterialFilter.empty(),
               ),
             ),
           ).called(1);
+          verify(
+            () => materialListBlocMock.add(
+              const MaterialListEvent.updateSearchKey(
+                searchKey: fakeSearchText,
+              ),
+            ),
+          ).called(1);
+          verify(
+            () => materialListBlocMock.add(
+              MaterialListEvent.fetch(
+                selectedMaterialFilter: MaterialFilter.empty(),
+              ),
+            ),
+          ).called(1);
+        },
+      );
+
+      testWidgets(
+        'Test Product Search open scan camera',
+        (tester) async {
+          await tester.pumpWidget(getWidget());
+          await tester.pump();
+          final searchBarFinder = find.byKey(WidgetKeys.searchBar);
+          expect(searchBarFinder, findsOneWidget);
 
           final scanIconFinder = find.byKey(WidgetKeys.productScanCameraKey);
           expect(scanIconFinder, findsOneWidget);
@@ -447,7 +480,9 @@ void main() {
           final historyTileFinder =
               find.widgetWithIcon(ListTile, Icons.history);
           await tester.tap(historyTileFinder.first);
-          verify(
+          await tester.pump();
+
+         verify(
             () => productSearchBlocMock.add(
               ProductSearchEvent.searchProduct(
                 searchKey: SearchKey.search(

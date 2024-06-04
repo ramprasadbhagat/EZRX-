@@ -22,6 +22,7 @@ abstract class IMaterialListRepository {
     required int offset,
     required MaterialFilter selectedMaterialFilter,
     required User user,
+    required SearchKey searchKey,
   });
 
   Future<Either<ApiFailure, MaterialResponse>> getComboDealMaterials({

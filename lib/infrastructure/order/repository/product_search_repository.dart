@@ -61,15 +61,7 @@ class ProductSearchRepository implements IProductSearchRepository {
       }
     }
     try {
-      final getSearchKeyResponse = await getSearchKeys();
-      final storedKeys = getSearchKeyResponse.fold(
-        (failure) => ProductSuggestionHistory.empty(),
-        (success) => success,
-      );
-      final searchKeyList = ProductSuggestionHistoryDto.fromDomain(storedKeys)
-          .getModifiedList(searchKey);
-
-      await _putSearchKeys(searchKeyList);
+      await saveSearchHistory(searchKey);
 
       final materialList = await remoteDataSource.getSearchedMaterialList(
         customerCode: customerCode,
@@ -88,23 +80,6 @@ class ProductSearchRepository implements IProductSearchRepository {
       );
 
       return Right(materialList);
-    } catch (e) {
-      return Left(FailureHandler.handleFailure(e));
-    }
-  }
-
-  Future<Either<ApiFailure, Unit>> _putSearchKeys(
-    List<String> searchKeyList,
-  ) async {
-    try {
-      final updatedObject = ProductSuggestionHistory(
-        searchKeyList: searchKeyList.map((e) => SearchKey(e)).toList(),
-      );
-      await productSuggestionHistoryStorage.putSearchKey(
-        searchKeyList: ProductSuggestionHistoryDto.fromDomain(updatedObject),
-      );
-
-      return const Right(unit);
     } catch (e) {
       return Left(FailureHandler.handleFailure(e));
     }
@@ -178,6 +153,30 @@ class ProductSearchRepository implements IProductSearchRepository {
       }
 
       return Right(materialList.products.first);
+    } catch (e) {
+      return Left(FailureHandler.handleFailure(e));
+    }
+  }
+
+  @override
+  Future<Either<ApiFailure, Unit>> saveSearchHistory(SearchKey searchKey) async {
+    try {
+      final getSearchKeyResponse = await getSearchKeys();
+      final storedKeys = getSearchKeyResponse.fold(
+        (failure) => ProductSuggestionHistory.empty(),
+        (success) => success,
+      );
+      final searchKeyList = ProductSuggestionHistoryDto.fromDomain(storedKeys)
+          .getModifiedList(searchKey);
+
+      final updatedObject = ProductSuggestionHistory(
+        searchKeyList: searchKeyList.map((e) => SearchKey(e)).toList(),
+      );
+      await productSuggestionHistoryStorage.putSearchKey(
+        searchKeyList: ProductSuggestionHistoryDto.fromDomain(updatedObject),
+      );
+
+      return const Right(unit);
     } catch (e) {
       return Left(FailureHandler.handleFailure(e));
     }

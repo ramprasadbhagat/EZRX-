@@ -10,8 +10,8 @@ class _HistoryTile extends StatelessWidget {
       children: [
         ListTile(
           key: WidgetKeys.searchProductHistory,
-          horizontalTitleGap: 0,
-          onTap: () => context.read<ProductSearchBloc>().add(
+          horizontalTitleGap: 8,
+          onTap: ()  => context.read<ProductSearchBloc>().add(
                 ProductSearchEvent.searchProduct(
                   searchKey: SearchKey.search(
                     searchKey.searchValueOrEmpty,

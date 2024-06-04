@@ -79,6 +79,7 @@ void main() {
   const fakeMarket = 'fake-market';
   late MaterialResponse fakeMaterialResponse;
   late MaterialResponse fakeComboDealMaterialResponse;
+  final fakeSearchKey = SearchKey.searchFilter('ab');
 
   setUpAll(() async {
     mockConfig = MockConfig();
@@ -116,6 +117,7 @@ void main() {
           selectedMaterialFilter: fakeMaterialFilter,
           shipToInfo: fakeShipToInfo,
           user: fakeClientUser,
+          searchKey: fakeSearchKey,
         );
         expect(
           result.isLeft(),
@@ -138,6 +140,7 @@ void main() {
           selectedMaterialFilter: fakeMaterialFilter,
           shipToInfo: fakeShipToInfo,
           user: fakeClientUser,
+          searchKey: fakeSearchKey,
         );
         expect(
           result.isRight(),
@@ -216,6 +219,7 @@ void main() {
           selectedMaterialFilter: fakeMaterialFilter,
           shipToInfo: fakeShipToInfo,
           user: fakeClientUser,
+          searchKey: fakeSearchKey,
         );
         expect(
           result.isLeft(),
@@ -252,7 +256,7 @@ void main() {
                 .countryListSelected
                 .map((e) => e.code)
                 .toList(),
-            searchKey: '',
+            searchKey: fakeSearchKey.searchValueOrEmpty,
             salesDeal: [],
             isComboOffers: fakeMaterialFilterWithComboOffers.comboOffers,
             showSampleItem: false,
@@ -273,6 +277,7 @@ void main() {
           selectedMaterialFilter: fakeMaterialFilterWithComboOffers,
           shipToInfo: fakeShipToInfo,
           user: fakeClientUser,
+          searchKey: fakeSearchKey,
         );
         expect(
           result.isRight(),
