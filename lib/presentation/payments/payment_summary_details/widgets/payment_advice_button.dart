@@ -141,8 +141,7 @@ class _DeleteAdviceButton extends StatelessWidget {
             color: ZPColors.red,
           ),
         ),
-        child: SizedBox(
-          height: 20,
+        child: FittedBox(
           child: LoadingShimmer.withChild(
             enabled: state.isDeletingPayment,
             child: Text(
