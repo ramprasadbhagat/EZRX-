@@ -41,9 +41,15 @@ class ProductSuggestionPage extends StatelessWidget {
     return Scaffold(
       key: WidgetKeys.productSearchPage,
       appBar: AppBar(
-        title: _ProductSearchSection(
-          parentRoute: parentRoute,
-          initSearchValue: context.read<ProductSearchBloc>().state.searchKey,
+        title: BlocBuilder<ProductSearchBloc, ProductSearchState>(
+          buildWhen: (previous, current) =>
+              previous.searchKey != current.searchKey,
+          builder: (context, state) {
+            return _ProductSearchSection(
+              parentRoute: parentRoute,
+              initSearchValue: state.searchKey,
+            );
+          },
         ),
         elevation: 0,
         titleSpacing: 0,

@@ -16,10 +16,23 @@ class _ProductSearchSection extends StatefulWidget {
 
 class _ProductSearchSectionState extends State<_ProductSearchSection> {
   late ProductSearchBloc _productSearchBloc;
+  SearchKey _searchKey = SearchKey.searchFilter('');
   @override
   void initState() {
     super.initState();
     _productSearchBloc = context.read<ProductSearchBloc>();
+    _searchKey = widget.initSearchValue;
+  }
+
+  @override
+  void didUpdateWidget(_ProductSearchSection oldWidget) {
+    if (oldWidget.initSearchValue != widget.initSearchValue) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        _searchKey = widget.initSearchValue;
+        setState(() {});
+      });
+    }
+    super.didUpdateWidget(oldWidget);
   }
 
   @override
@@ -44,10 +57,10 @@ class _ProductSearchSectionState extends State<_ProductSearchSection> {
           Expanded(
             child: CustomSearchBar(
               key: WidgetKeys.genericKey(
-                key: widget.initSearchValue.searchValueOrEmpty,
+                key: _searchKey.searchValueOrEmpty,
               ),
               autofocus: true,
-              initialValue: widget.initSearchValue.searchValueOrEmpty,
+              initialValue: _searchKey.searchValueOrEmpty,
               enabled: true,
               onSearchChanged: (value) {
                 _trackSearchEvent(value);
@@ -68,7 +81,7 @@ class _ProductSearchSectionState extends State<_ProductSearchSection> {
                         searchKey: SearchKey.search(value),
                       ),
                     );
-                context.router.replaceNamed('main/products');
+                context.router.navigateNamed('main/products');
                 context.read<MaterialListBloc>()
                   ..add(
                     MaterialListEvent.updateSearchKey(
