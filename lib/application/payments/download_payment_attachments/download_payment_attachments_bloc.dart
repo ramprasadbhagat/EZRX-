@@ -1,4 +1,5 @@
 import 'package:ezrxmobile/domain/payments/entities/full_summary_filter.dart';
+
 import 'package:ezrxmobile/domain/payments/entities/payment_summary_filter.dart';
 import 'package:ezrxmobile/domain/payments/value/value_object.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -230,48 +231,6 @@ class DownloadPaymentAttachmentsBloc extends Bloc<
           final failureOrSuccess =
               await paymentAttachmentRepository.soaDownload(
             soaData: event.soaData,
-          );
-          failureOrSuccess.fold(
-            (failure) => emit(
-              state.copyWith(
-                isDownloadInProgress: false,
-                failureOrSuccessOption: optionOf(failureOrSuccess),
-              ),
-            ),
-            (_) => emit(
-              state.copyWith(
-                isDownloadInProgress: false,
-                failureOrSuccessOption: optionOf(failureOrSuccess),
-              ),
-            ),
-          );
-        },
-      );
-    });
-    on<_DownloadEInvoice>((event, emit) async {
-      emit(
-        state.copyWith(
-          isDownloadInProgress: true,
-          failureOrSuccessOption: none(),
-          fileUrl: DownloadPaymentAttachment(
-            url: event.eInvoice.url,
-          ),
-        ),
-      );
-      final failureOrSuccessPermission =
-          await paymentAttachmentRepository.downloadPermission();
-
-      await failureOrSuccessPermission.fold(
-        (failure) async => emit(
-          state.copyWith(
-            isDownloadInProgress: false,
-            failureOrSuccessOption: optionOf(failureOrSuccessPermission),
-          ),
-        ),
-        (_) async {
-          final failureOrSuccess =
-              await paymentAttachmentRepository.eCreditInvoiceDownload(
-            eCreditInvoiceUrl: event.eInvoice,
           );
           failureOrSuccess.fold(
             (failure) => emit(

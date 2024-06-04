@@ -12,7 +12,7 @@ part of 'download_e_invoice_bloc.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$DownloadEInvoiceEvent {
@@ -21,7 +21,9 @@ mixin _$DownloadEInvoiceEvent {
     required TResult Function() initialized,
     required TResult Function(CustomerCodeInfo customerCodeInfo,
             SalesOrg salesOrg, String invoiceNumber)
-        fetch,
+        fetchUrl,
+    required TResult Function() download,
+    required TResult Function() openFile,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -29,7 +31,9 @@ mixin _$DownloadEInvoiceEvent {
     TResult? Function()? initialized,
     TResult? Function(CustomerCodeInfo customerCodeInfo, SalesOrg salesOrg,
             String invoiceNumber)?
-        fetch,
+        fetchUrl,
+    TResult? Function()? download,
+    TResult? Function()? openFile,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -37,26 +41,34 @@ mixin _$DownloadEInvoiceEvent {
     TResult Function()? initialized,
     TResult Function(CustomerCodeInfo customerCodeInfo, SalesOrg salesOrg,
             String invoiceNumber)?
-        fetch,
+        fetchUrl,
+    TResult Function()? download,
+    TResult Function()? openFile,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_initialized value) initialized,
-    required TResult Function(_Fetch value) fetch,
+    required TResult Function(_FetchUrl value) fetchUrl,
+    required TResult Function(_Download value) download,
+    required TResult Function(_OpenFile value) openFile,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_initialized value)? initialized,
-    TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_FetchUrl value)? fetchUrl,
+    TResult? Function(_Download value)? download,
+    TResult? Function(_OpenFile value)? openFile,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_initialized value)? initialized,
-    TResult Function(_Fetch value)? fetch,
+    TResult Function(_FetchUrl value)? fetchUrl,
+    TResult Function(_Download value)? download,
+    TResult Function(_OpenFile value)? openFile,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -82,25 +94,25 @@ class _$DownloadEInvoiceEventCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_initializedCopyWith<$Res> {
-  factory _$$_initializedCopyWith(
-          _$_initialized value, $Res Function(_$_initialized) then) =
-      __$$_initializedCopyWithImpl<$Res>;
+abstract class _$$initializedImplCopyWith<$Res> {
+  factory _$$initializedImplCopyWith(
+          _$initializedImpl value, $Res Function(_$initializedImpl) then) =
+      __$$initializedImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_initializedCopyWithImpl<$Res>
-    extends _$DownloadEInvoiceEventCopyWithImpl<$Res, _$_initialized>
-    implements _$$_initializedCopyWith<$Res> {
-  __$$_initializedCopyWithImpl(
-      _$_initialized _value, $Res Function(_$_initialized) _then)
+class __$$initializedImplCopyWithImpl<$Res>
+    extends _$DownloadEInvoiceEventCopyWithImpl<$Res, _$initializedImpl>
+    implements _$$initializedImplCopyWith<$Res> {
+  __$$initializedImplCopyWithImpl(
+      _$initializedImpl _value, $Res Function(_$initializedImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_initialized implements _initialized {
-  const _$_initialized();
+class _$initializedImpl implements _initialized {
+  const _$initializedImpl();
 
   @override
   String toString() {
@@ -108,9 +120,9 @@ class _$_initialized implements _initialized {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_initialized);
+        (other.runtimeType == runtimeType && other is _$initializedImpl);
   }
 
   @override
@@ -122,7 +134,9 @@ class _$_initialized implements _initialized {
     required TResult Function() initialized,
     required TResult Function(CustomerCodeInfo customerCodeInfo,
             SalesOrg salesOrg, String invoiceNumber)
-        fetch,
+        fetchUrl,
+    required TResult Function() download,
+    required TResult Function() openFile,
   }) {
     return initialized();
   }
@@ -133,7 +147,9 @@ class _$_initialized implements _initialized {
     TResult? Function()? initialized,
     TResult? Function(CustomerCodeInfo customerCodeInfo, SalesOrg salesOrg,
             String invoiceNumber)?
-        fetch,
+        fetchUrl,
+    TResult? Function()? download,
+    TResult? Function()? openFile,
   }) {
     return initialized?.call();
   }
@@ -144,7 +160,9 @@ class _$_initialized implements _initialized {
     TResult Function()? initialized,
     TResult Function(CustomerCodeInfo customerCodeInfo, SalesOrg salesOrg,
             String invoiceNumber)?
-        fetch,
+        fetchUrl,
+    TResult Function()? download,
+    TResult Function()? openFile,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -157,7 +175,9 @@ class _$_initialized implements _initialized {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_initialized value) initialized,
-    required TResult Function(_Fetch value) fetch,
+    required TResult Function(_FetchUrl value) fetchUrl,
+    required TResult Function(_Download value) download,
+    required TResult Function(_OpenFile value) openFile,
   }) {
     return initialized(this);
   }
@@ -166,7 +186,9 @@ class _$_initialized implements _initialized {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_initialized value)? initialized,
-    TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_FetchUrl value)? fetchUrl,
+    TResult? Function(_Download value)? download,
+    TResult? Function(_OpenFile value)? openFile,
   }) {
     return initialized?.call(this);
   }
@@ -175,7 +197,9 @@ class _$_initialized implements _initialized {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_initialized value)? initialized,
-    TResult Function(_Fetch value)? fetch,
+    TResult Function(_FetchUrl value)? fetchUrl,
+    TResult Function(_Download value)? download,
+    TResult Function(_OpenFile value)? openFile,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -186,13 +210,14 @@ class _$_initialized implements _initialized {
 }
 
 abstract class _initialized implements DownloadEInvoiceEvent {
-  const factory _initialized() = _$_initialized;
+  const factory _initialized() = _$initializedImpl;
 }
 
 /// @nodoc
-abstract class _$$_FetchCopyWith<$Res> {
-  factory _$$_FetchCopyWith(_$_Fetch value, $Res Function(_$_Fetch) then) =
-      __$$_FetchCopyWithImpl<$Res>;
+abstract class _$$FetchUrlImplCopyWith<$Res> {
+  factory _$$FetchUrlImplCopyWith(
+          _$FetchUrlImpl value, $Res Function(_$FetchUrlImpl) then) =
+      __$$FetchUrlImplCopyWithImpl<$Res>;
   @useResult
   $Res call(
       {CustomerCodeInfo customerCodeInfo,
@@ -203,10 +228,11 @@ abstract class _$$_FetchCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_FetchCopyWithImpl<$Res>
-    extends _$DownloadEInvoiceEventCopyWithImpl<$Res, _$_Fetch>
-    implements _$$_FetchCopyWith<$Res> {
-  __$$_FetchCopyWithImpl(_$_Fetch _value, $Res Function(_$_Fetch) _then)
+class __$$FetchUrlImplCopyWithImpl<$Res>
+    extends _$DownloadEInvoiceEventCopyWithImpl<$Res, _$FetchUrlImpl>
+    implements _$$FetchUrlImplCopyWith<$Res> {
+  __$$FetchUrlImplCopyWithImpl(
+      _$FetchUrlImpl _value, $Res Function(_$FetchUrlImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -216,7 +242,7 @@ class __$$_FetchCopyWithImpl<$Res>
     Object? salesOrg = null,
     Object? invoiceNumber = null,
   }) {
-    return _then(_$_Fetch(
+    return _then(_$FetchUrlImpl(
       customerCodeInfo: null == customerCodeInfo
           ? _value.customerCodeInfo
           : customerCodeInfo // ignore: cast_nullable_to_non_nullable
@@ -243,8 +269,8 @@ class __$$_FetchCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_Fetch implements _Fetch {
-  const _$_Fetch(
+class _$FetchUrlImpl implements _FetchUrl {
+  const _$FetchUrlImpl(
       {required this.customerCodeInfo,
       required this.salesOrg,
       required this.invoiceNumber});
@@ -258,14 +284,14 @@ class _$_Fetch implements _Fetch {
 
   @override
   String toString() {
-    return 'DownloadEInvoiceEvent.fetch(customerCodeInfo: $customerCodeInfo, salesOrg: $salesOrg, invoiceNumber: $invoiceNumber)';
+    return 'DownloadEInvoiceEvent.fetchUrl(customerCodeInfo: $customerCodeInfo, salesOrg: $salesOrg, invoiceNumber: $invoiceNumber)';
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Fetch &&
+            other is _$FetchUrlImpl &&
             (identical(other.customerCodeInfo, customerCodeInfo) ||
                 other.customerCodeInfo == customerCodeInfo) &&
             (identical(other.salesOrg, salesOrg) ||
@@ -281,8 +307,8 @@ class _$_Fetch implements _Fetch {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_FetchCopyWith<_$_Fetch> get copyWith =>
-      __$$_FetchCopyWithImpl<_$_Fetch>(this, _$identity);
+  _$$FetchUrlImplCopyWith<_$FetchUrlImpl> get copyWith =>
+      __$$FetchUrlImplCopyWithImpl<_$FetchUrlImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -290,9 +316,11 @@ class _$_Fetch implements _Fetch {
     required TResult Function() initialized,
     required TResult Function(CustomerCodeInfo customerCodeInfo,
             SalesOrg salesOrg, String invoiceNumber)
-        fetch,
+        fetchUrl,
+    required TResult Function() download,
+    required TResult Function() openFile,
   }) {
-    return fetch(customerCodeInfo, salesOrg, invoiceNumber);
+    return fetchUrl(customerCodeInfo, salesOrg, invoiceNumber);
   }
 
   @override
@@ -301,9 +329,11 @@ class _$_Fetch implements _Fetch {
     TResult? Function()? initialized,
     TResult? Function(CustomerCodeInfo customerCodeInfo, SalesOrg salesOrg,
             String invoiceNumber)?
-        fetch,
+        fetchUrl,
+    TResult? Function()? download,
+    TResult? Function()? openFile,
   }) {
-    return fetch?.call(customerCodeInfo, salesOrg, invoiceNumber);
+    return fetchUrl?.call(customerCodeInfo, salesOrg, invoiceNumber);
   }
 
   @override
@@ -312,11 +342,13 @@ class _$_Fetch implements _Fetch {
     TResult Function()? initialized,
     TResult Function(CustomerCodeInfo customerCodeInfo, SalesOrg salesOrg,
             String invoiceNumber)?
-        fetch,
+        fetchUrl,
+    TResult Function()? download,
+    TResult Function()? openFile,
     required TResult orElse(),
   }) {
-    if (fetch != null) {
-      return fetch(customerCodeInfo, salesOrg, invoiceNumber);
+    if (fetchUrl != null) {
+      return fetchUrl(customerCodeInfo, salesOrg, invoiceNumber);
     }
     return orElse();
   }
@@ -325,54 +357,302 @@ class _$_Fetch implements _Fetch {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_initialized value) initialized,
-    required TResult Function(_Fetch value) fetch,
+    required TResult Function(_FetchUrl value) fetchUrl,
+    required TResult Function(_Download value) download,
+    required TResult Function(_OpenFile value) openFile,
   }) {
-    return fetch(this);
+    return fetchUrl(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_initialized value)? initialized,
-    TResult? Function(_Fetch value)? fetch,
+    TResult? Function(_FetchUrl value)? fetchUrl,
+    TResult? Function(_Download value)? download,
+    TResult? Function(_OpenFile value)? openFile,
   }) {
-    return fetch?.call(this);
+    return fetchUrl?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_initialized value)? initialized,
-    TResult Function(_Fetch value)? fetch,
+    TResult Function(_FetchUrl value)? fetchUrl,
+    TResult Function(_Download value)? download,
+    TResult Function(_OpenFile value)? openFile,
     required TResult orElse(),
   }) {
-    if (fetch != null) {
-      return fetch(this);
+    if (fetchUrl != null) {
+      return fetchUrl(this);
     }
     return orElse();
   }
 }
 
-abstract class _Fetch implements DownloadEInvoiceEvent {
-  const factory _Fetch(
+abstract class _FetchUrl implements DownloadEInvoiceEvent {
+  const factory _FetchUrl(
       {required final CustomerCodeInfo customerCodeInfo,
       required final SalesOrg salesOrg,
-      required final String invoiceNumber}) = _$_Fetch;
+      required final String invoiceNumber}) = _$FetchUrlImpl;
 
   CustomerCodeInfo get customerCodeInfo;
   SalesOrg get salesOrg;
   String get invoiceNumber;
   @JsonKey(ignore: true)
-  _$$_FetchCopyWith<_$_Fetch> get copyWith =>
+  _$$FetchUrlImplCopyWith<_$FetchUrlImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
+abstract class _$$DownloadImplCopyWith<$Res> {
+  factory _$$DownloadImplCopyWith(
+          _$DownloadImpl value, $Res Function(_$DownloadImpl) then) =
+      __$$DownloadImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$DownloadImplCopyWithImpl<$Res>
+    extends _$DownloadEInvoiceEventCopyWithImpl<$Res, _$DownloadImpl>
+    implements _$$DownloadImplCopyWith<$Res> {
+  __$$DownloadImplCopyWithImpl(
+      _$DownloadImpl _value, $Res Function(_$DownloadImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$DownloadImpl implements _Download {
+  const _$DownloadImpl();
+
+  @override
+  String toString() {
+    return 'DownloadEInvoiceEvent.download()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$DownloadImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initialized,
+    required TResult Function(CustomerCodeInfo customerCodeInfo,
+            SalesOrg salesOrg, String invoiceNumber)
+        fetchUrl,
+    required TResult Function() download,
+    required TResult Function() openFile,
+  }) {
+    return download();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initialized,
+    TResult? Function(CustomerCodeInfo customerCodeInfo, SalesOrg salesOrg,
+            String invoiceNumber)?
+        fetchUrl,
+    TResult? Function()? download,
+    TResult? Function()? openFile,
+  }) {
+    return download?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initialized,
+    TResult Function(CustomerCodeInfo customerCodeInfo, SalesOrg salesOrg,
+            String invoiceNumber)?
+        fetchUrl,
+    TResult Function()? download,
+    TResult Function()? openFile,
+    required TResult orElse(),
+  }) {
+    if (download != null) {
+      return download();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_initialized value) initialized,
+    required TResult Function(_FetchUrl value) fetchUrl,
+    required TResult Function(_Download value) download,
+    required TResult Function(_OpenFile value) openFile,
+  }) {
+    return download(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_initialized value)? initialized,
+    TResult? Function(_FetchUrl value)? fetchUrl,
+    TResult? Function(_Download value)? download,
+    TResult? Function(_OpenFile value)? openFile,
+  }) {
+    return download?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_initialized value)? initialized,
+    TResult Function(_FetchUrl value)? fetchUrl,
+    TResult Function(_Download value)? download,
+    TResult Function(_OpenFile value)? openFile,
+    required TResult orElse(),
+  }) {
+    if (download != null) {
+      return download(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _Download implements DownloadEInvoiceEvent {
+  const factory _Download() = _$DownloadImpl;
+}
+
+/// @nodoc
+abstract class _$$OpenFileImplCopyWith<$Res> {
+  factory _$$OpenFileImplCopyWith(
+          _$OpenFileImpl value, $Res Function(_$OpenFileImpl) then) =
+      __$$OpenFileImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$OpenFileImplCopyWithImpl<$Res>
+    extends _$DownloadEInvoiceEventCopyWithImpl<$Res, _$OpenFileImpl>
+    implements _$$OpenFileImplCopyWith<$Res> {
+  __$$OpenFileImplCopyWithImpl(
+      _$OpenFileImpl _value, $Res Function(_$OpenFileImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$OpenFileImpl implements _OpenFile {
+  const _$OpenFileImpl();
+
+  @override
+  String toString() {
+    return 'DownloadEInvoiceEvent.openFile()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$OpenFileImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initialized,
+    required TResult Function(CustomerCodeInfo customerCodeInfo,
+            SalesOrg salesOrg, String invoiceNumber)
+        fetchUrl,
+    required TResult Function() download,
+    required TResult Function() openFile,
+  }) {
+    return openFile();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initialized,
+    TResult? Function(CustomerCodeInfo customerCodeInfo, SalesOrg salesOrg,
+            String invoiceNumber)?
+        fetchUrl,
+    TResult? Function()? download,
+    TResult? Function()? openFile,
+  }) {
+    return openFile?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initialized,
+    TResult Function(CustomerCodeInfo customerCodeInfo, SalesOrg salesOrg,
+            String invoiceNumber)?
+        fetchUrl,
+    TResult Function()? download,
+    TResult Function()? openFile,
+    required TResult orElse(),
+  }) {
+    if (openFile != null) {
+      return openFile();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_initialized value) initialized,
+    required TResult Function(_FetchUrl value) fetchUrl,
+    required TResult Function(_Download value) download,
+    required TResult Function(_OpenFile value) openFile,
+  }) {
+    return openFile(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_initialized value)? initialized,
+    TResult? Function(_FetchUrl value)? fetchUrl,
+    TResult? Function(_Download value)? download,
+    TResult? Function(_OpenFile value)? openFile,
+  }) {
+    return openFile?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_initialized value)? initialized,
+    TResult Function(_FetchUrl value)? fetchUrl,
+    TResult Function(_Download value)? download,
+    TResult Function(_OpenFile value)? openFile,
+    required TResult orElse(),
+  }) {
+    if (openFile != null) {
+      return openFile(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _OpenFile implements DownloadEInvoiceEvent {
+  const factory _OpenFile() = _$OpenFileImpl;
+}
+
+/// @nodoc
 mixin _$DownloadEInvoiceState {
-  bool get isFetching => throw _privateConstructorUsedError;
+  bool get isDownloading => throw _privateConstructorUsedError;
   Option<Either<ApiFailure, dynamic>> get failureOrSuccessOption =>
       throw _privateConstructorUsedError;
-  DownloadPaymentAttachment get eInvoice => throw _privateConstructorUsedError;
+  DownloadPaymentAttachment get eInvoiceUrl =>
+      throw _privateConstructorUsedError;
+  AttachmentFileBuffer get eInvoice => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $DownloadEInvoiceStateCopyWith<DownloadEInvoiceState> get copyWith =>
@@ -386,11 +666,13 @@ abstract class $DownloadEInvoiceStateCopyWith<$Res> {
       _$DownloadEInvoiceStateCopyWithImpl<$Res, DownloadEInvoiceState>;
   @useResult
   $Res call(
-      {bool isFetching,
+      {bool isDownloading,
       Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
-      DownloadPaymentAttachment eInvoice});
+      DownloadPaymentAttachment eInvoiceUrl,
+      AttachmentFileBuffer eInvoice});
 
-  $DownloadPaymentAttachmentCopyWith<$Res> get eInvoice;
+  $DownloadPaymentAttachmentCopyWith<$Res> get eInvoiceUrl;
+  $AttachmentFileBufferCopyWith<$Res> get eInvoice;
 }
 
 /// @nodoc
@@ -407,146 +689,178 @@ class _$DownloadEInvoiceStateCopyWithImpl<$Res,
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? isFetching = null,
+    Object? isDownloading = null,
     Object? failureOrSuccessOption = null,
+    Object? eInvoiceUrl = null,
     Object? eInvoice = null,
   }) {
     return _then(_value.copyWith(
-      isFetching: null == isFetching
-          ? _value.isFetching
-          : isFetching // ignore: cast_nullable_to_non_nullable
+      isDownloading: null == isDownloading
+          ? _value.isDownloading
+          : isDownloading // ignore: cast_nullable_to_non_nullable
               as bool,
       failureOrSuccessOption: null == failureOrSuccessOption
           ? _value.failureOrSuccessOption
           : failureOrSuccessOption // ignore: cast_nullable_to_non_nullable
               as Option<Either<ApiFailure, dynamic>>,
+      eInvoiceUrl: null == eInvoiceUrl
+          ? _value.eInvoiceUrl
+          : eInvoiceUrl // ignore: cast_nullable_to_non_nullable
+              as DownloadPaymentAttachment,
       eInvoice: null == eInvoice
           ? _value.eInvoice
           : eInvoice // ignore: cast_nullable_to_non_nullable
-              as DownloadPaymentAttachment,
+              as AttachmentFileBuffer,
     ) as $Val);
   }
 
   @override
   @pragma('vm:prefer-inline')
-  $DownloadPaymentAttachmentCopyWith<$Res> get eInvoice {
-    return $DownloadPaymentAttachmentCopyWith<$Res>(_value.eInvoice, (value) {
+  $DownloadPaymentAttachmentCopyWith<$Res> get eInvoiceUrl {
+    return $DownloadPaymentAttachmentCopyWith<$Res>(_value.eInvoiceUrl,
+        (value) {
+      return _then(_value.copyWith(eInvoiceUrl: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $AttachmentFileBufferCopyWith<$Res> get eInvoice {
+    return $AttachmentFileBufferCopyWith<$Res>(_value.eInvoice, (value) {
       return _then(_value.copyWith(eInvoice: value) as $Val);
     });
   }
 }
 
 /// @nodoc
-abstract class _$$_DownloadEInvoiceStateCopyWith<$Res>
+abstract class _$$DownloadEInvoiceStateImplCopyWith<$Res>
     implements $DownloadEInvoiceStateCopyWith<$Res> {
-  factory _$$_DownloadEInvoiceStateCopyWith(_$_DownloadEInvoiceState value,
-          $Res Function(_$_DownloadEInvoiceState) then) =
-      __$$_DownloadEInvoiceStateCopyWithImpl<$Res>;
+  factory _$$DownloadEInvoiceStateImplCopyWith(
+          _$DownloadEInvoiceStateImpl value,
+          $Res Function(_$DownloadEInvoiceStateImpl) then) =
+      __$$DownloadEInvoiceStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
-      {bool isFetching,
+      {bool isDownloading,
       Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
-      DownloadPaymentAttachment eInvoice});
+      DownloadPaymentAttachment eInvoiceUrl,
+      AttachmentFileBuffer eInvoice});
 
   @override
-  $DownloadPaymentAttachmentCopyWith<$Res> get eInvoice;
+  $DownloadPaymentAttachmentCopyWith<$Res> get eInvoiceUrl;
+  @override
+  $AttachmentFileBufferCopyWith<$Res> get eInvoice;
 }
 
 /// @nodoc
-class __$$_DownloadEInvoiceStateCopyWithImpl<$Res>
-    extends _$DownloadEInvoiceStateCopyWithImpl<$Res, _$_DownloadEInvoiceState>
-    implements _$$_DownloadEInvoiceStateCopyWith<$Res> {
-  __$$_DownloadEInvoiceStateCopyWithImpl(_$_DownloadEInvoiceState _value,
-      $Res Function(_$_DownloadEInvoiceState) _then)
+class __$$DownloadEInvoiceStateImplCopyWithImpl<$Res>
+    extends _$DownloadEInvoiceStateCopyWithImpl<$Res,
+        _$DownloadEInvoiceStateImpl>
+    implements _$$DownloadEInvoiceStateImplCopyWith<$Res> {
+  __$$DownloadEInvoiceStateImplCopyWithImpl(_$DownloadEInvoiceStateImpl _value,
+      $Res Function(_$DownloadEInvoiceStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? isFetching = null,
+    Object? isDownloading = null,
     Object? failureOrSuccessOption = null,
+    Object? eInvoiceUrl = null,
     Object? eInvoice = null,
   }) {
-    return _then(_$_DownloadEInvoiceState(
-      isFetching: null == isFetching
-          ? _value.isFetching
-          : isFetching // ignore: cast_nullable_to_non_nullable
+    return _then(_$DownloadEInvoiceStateImpl(
+      isDownloading: null == isDownloading
+          ? _value.isDownloading
+          : isDownloading // ignore: cast_nullable_to_non_nullable
               as bool,
       failureOrSuccessOption: null == failureOrSuccessOption
           ? _value.failureOrSuccessOption
           : failureOrSuccessOption // ignore: cast_nullable_to_non_nullable
               as Option<Either<ApiFailure, dynamic>>,
+      eInvoiceUrl: null == eInvoiceUrl
+          ? _value.eInvoiceUrl
+          : eInvoiceUrl // ignore: cast_nullable_to_non_nullable
+              as DownloadPaymentAttachment,
       eInvoice: null == eInvoice
           ? _value.eInvoice
           : eInvoice // ignore: cast_nullable_to_non_nullable
-              as DownloadPaymentAttachment,
+              as AttachmentFileBuffer,
     ));
   }
 }
 
 /// @nodoc
 
-class _$_DownloadEInvoiceState extends _DownloadEInvoiceState {
-  const _$_DownloadEInvoiceState(
-      {required this.isFetching,
+class _$DownloadEInvoiceStateImpl extends _DownloadEInvoiceState {
+  const _$DownloadEInvoiceStateImpl(
+      {required this.isDownloading,
       required this.failureOrSuccessOption,
+      required this.eInvoiceUrl,
       required this.eInvoice})
       : super._();
 
   @override
-  final bool isFetching;
+  final bool isDownloading;
   @override
   final Option<Either<ApiFailure, dynamic>> failureOrSuccessOption;
   @override
-  final DownloadPaymentAttachment eInvoice;
+  final DownloadPaymentAttachment eInvoiceUrl;
+  @override
+  final AttachmentFileBuffer eInvoice;
 
   @override
   String toString() {
-    return 'DownloadEInvoiceState(isFetching: $isFetching, failureOrSuccessOption: $failureOrSuccessOption, eInvoice: $eInvoice)';
+    return 'DownloadEInvoiceState(isDownloading: $isDownloading, failureOrSuccessOption: $failureOrSuccessOption, eInvoiceUrl: $eInvoiceUrl, eInvoice: $eInvoice)';
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_DownloadEInvoiceState &&
-            (identical(other.isFetching, isFetching) ||
-                other.isFetching == isFetching) &&
+            other is _$DownloadEInvoiceStateImpl &&
+            (identical(other.isDownloading, isDownloading) ||
+                other.isDownloading == isDownloading) &&
             (identical(other.failureOrSuccessOption, failureOrSuccessOption) ||
                 other.failureOrSuccessOption == failureOrSuccessOption) &&
+            (identical(other.eInvoiceUrl, eInvoiceUrl) ||
+                other.eInvoiceUrl == eInvoiceUrl) &&
             (identical(other.eInvoice, eInvoice) ||
                 other.eInvoice == eInvoice));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, isFetching, failureOrSuccessOption, eInvoice);
+  int get hashCode => Object.hash(runtimeType, isDownloading,
+      failureOrSuccessOption, eInvoiceUrl, eInvoice);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_DownloadEInvoiceStateCopyWith<_$_DownloadEInvoiceState> get copyWith =>
-      __$$_DownloadEInvoiceStateCopyWithImpl<_$_DownloadEInvoiceState>(
-          this, _$identity);
+  _$$DownloadEInvoiceStateImplCopyWith<_$DownloadEInvoiceStateImpl>
+      get copyWith => __$$DownloadEInvoiceStateImplCopyWithImpl<
+          _$DownloadEInvoiceStateImpl>(this, _$identity);
 }
 
 abstract class _DownloadEInvoiceState extends DownloadEInvoiceState {
   const factory _DownloadEInvoiceState(
-      {required final bool isFetching,
+      {required final bool isDownloading,
       required final Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
-      required final DownloadPaymentAttachment
-          eInvoice}) = _$_DownloadEInvoiceState;
+      required final DownloadPaymentAttachment eInvoiceUrl,
+      required final AttachmentFileBuffer
+          eInvoice}) = _$DownloadEInvoiceStateImpl;
   const _DownloadEInvoiceState._() : super._();
 
   @override
-  bool get isFetching;
+  bool get isDownloading;
   @override
   Option<Either<ApiFailure, dynamic>> get failureOrSuccessOption;
   @override
-  DownloadPaymentAttachment get eInvoice;
+  DownloadPaymentAttachment get eInvoiceUrl;
+  @override
+  AttachmentFileBuffer get eInvoice;
   @override
   @JsonKey(ignore: true)
-  _$$_DownloadEInvoiceStateCopyWith<_$_DownloadEInvoiceState> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$DownloadEInvoiceStateImplCopyWith<_$DownloadEInvoiceStateImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }

@@ -3,7 +3,6 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/payments/credit_and_invoice_details/credit_and_invoice_details_bloc.dart';
 import 'package:ezrxmobile/application/payments/download_e_invoice/download_e_invoice_bloc.dart';
-import 'package:ezrxmobile/application/payments/download_payment_attachments/download_payment_attachments_bloc.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
@@ -11,6 +10,7 @@ import 'package:ezrxmobile/presentation/core/address_info_section.dart';
 import 'package:ezrxmobile/presentation/core/custom_app_bar.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/market_place/market_place_title_with_logo.dart';
+import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/payments/extension.dart';
 import 'package:ezrxmobile/presentation/payments/invoice_details/section/invoice_details_section.dart';
@@ -20,7 +20,6 @@ import 'package:ezrxmobile/presentation/payments/widgets/payment_module.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 part 'package:ezrxmobile/presentation/payments/invoice_details/widgets/order_item_count.dart';
 part 'package:ezrxmobile/presentation/payments/invoice_details/widgets/download_e_invoice_button.dart';
@@ -52,13 +51,11 @@ class InvoiceDetailsPage extends StatelessWidget {
                   .state
                   .customerBlockOrSuspended,
             ),
-            bottomNavigationBar: context
-                        .read<EligibilityBloc>()
-                        .state
-                        .salesOrg
-                        .showDownloadInvoiceButton &&
-                    !state.isLoading
-                ? const _DownloadEInvoiceButton()
+            bottomNavigationBar: !state.isLoading
+                ? _DownloadEInvoiceButton(
+                    invoiceNumber:
+                        state.basicInfo.searchKey.getOrDefaultValue(''),
+                  )
                 : const SizedBox.shrink(),
             body: AnnouncementBanner(
               currentPath: context.router.currentPath,

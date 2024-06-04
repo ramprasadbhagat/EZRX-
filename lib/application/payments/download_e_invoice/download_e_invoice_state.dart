@@ -4,15 +4,18 @@ part of 'download_e_invoice_bloc.dart';
 class DownloadEInvoiceState with _$DownloadEInvoiceState {
   const DownloadEInvoiceState._();
   const factory DownloadEInvoiceState({
-    required bool isFetching,
+    required bool isDownloading,
     required Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
-    required DownloadPaymentAttachment eInvoice,
+    required DownloadPaymentAttachment eInvoiceUrl,
+    required AttachmentFileBuffer eInvoice,
   }) = _DownloadEInvoiceState;
 
   factory DownloadEInvoiceState.initial() => DownloadEInvoiceState(
-        isFetching: false,
+        isDownloading: false,
         failureOrSuccessOption: none(),
-        eInvoice: DownloadPaymentAttachment.empty(),
+        eInvoiceUrl: DownloadPaymentAttachment.empty(),
+        eInvoice: AttachmentFileBuffer.empty(),
       );
-  bool get isEligibleForEInvoiceButton => isFetching && eInvoice.url.isEmpty;
+
+  bool get isDownloadSuccess => eInvoice != AttachmentFileBuffer.empty();
 }

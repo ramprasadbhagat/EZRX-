@@ -1,8 +1,10 @@
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
+import 'package:ezrxmobile/domain/core/attachment_files/entities/attachment_file_buffer.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/payments/entities/download_payment_attachments.dart';
+import 'package:ezrxmobile/domain/payments/repository/i_download_payment_attachment_repository.dart';
 import 'package:ezrxmobile/domain/payments/repository/i_e_invoice_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -13,9 +15,13 @@ part 'download_e_invoice_bloc.freezed.dart';
 
 class DownloadEInvoiceBloc
     extends Bloc<DownloadEInvoiceEvent, DownloadEInvoiceState> {
-  final IEInvoiceRepository repository;
-  DownloadEInvoiceBloc({required this.repository})
-      : super(DownloadEInvoiceState.initial()) {
+  final IEInvoiceRepository eInvoiceRepository;
+  final IDownloadPaymentAttachmentRepository
+      downloadPaymentAttachmentRepository;
+  DownloadEInvoiceBloc({
+    required this.eInvoiceRepository,
+    required this.downloadPaymentAttachmentRepository,
+  }) : super(DownloadEInvoiceState.initial()) {
     on<DownloadEInvoiceEvent>(_onEvent);
   }
 
@@ -25,32 +31,83 @@ class DownloadEInvoiceBloc
   ) async {
     await event.map(
       initialized: (_) async => emit(DownloadEInvoiceState.initial()),
-      fetch: (_Fetch e) async {
+      fetchUrl: (e) async {
         emit(
           state.copyWith(
-            isFetching: true,
             failureOrSuccessOption: none(),
           ),
         );
-        final failureOrSuccess = await repository.getEInvoice(
+        final failureOrSuccess = await eInvoiceRepository.getEInvoice(
           customerCodeInfo: e.customerCodeInfo,
           salesOrg: e.salesOrg,
           invoiceNumber: e.invoiceNumber,
         );
         failureOrSuccess.fold(
-          (failure) => emit(
+          (_) => emit(
             state.copyWith(
               failureOrSuccessOption: optionOf(failureOrSuccess),
-              isFetching: false,
             ),
           ),
-          (eInvoice) => emit(
+          (eInvoice) => emit(state.copyWith(eInvoiceUrl: eInvoice)),
+        );
+      },
+      download: (e) async {
+        emit(
+          state.copyWith(
+            isDownloading: true,
+            failureOrSuccessOption: none(),
+          ),
+        );
+        final failureOrSuccessPermission =
+            await downloadPaymentAttachmentRepository.downloadPermission();
+
+        await failureOrSuccessPermission.fold(
+          (_) async => emit(
             state.copyWith(
-              failureOrSuccessOption: none(),
-              isFetching: false,
-              eInvoice: eInvoice,
+              isDownloading: false,
+              failureOrSuccessOption: optionOf(failureOrSuccessPermission),
             ),
           ),
+          (_) async {
+            final failureOrSuccess = await downloadPaymentAttachmentRepository
+                .eCreditInvoiceDownload(
+              eCreditInvoiceUrl: state.eInvoiceUrl,
+            );
+            failureOrSuccess.fold(
+              (_) => emit(
+                state.copyWith(
+                  isDownloading: false,
+                  failureOrSuccessOption: optionOf(failureOrSuccess),
+                ),
+              ),
+              (eInvoice) => emit(
+                state.copyWith(
+                  isDownloading: false,
+                  failureOrSuccessOption: optionOf(failureOrSuccess),
+                  eInvoice: eInvoice,
+                ),
+              ),
+            );
+          },
+        );
+      },
+      openFile: (_) async {
+        emit(
+          state.copyWith(
+            failureOrSuccessOption: none(),
+          ),
+        );
+
+        final failureOrSuccess = await downloadPaymentAttachmentRepository
+            .viewSavedFile(savedFile: state.eInvoice);
+
+        failureOrSuccess.fold(
+          (_) => emit(
+            state.copyWith(
+              failureOrSuccessOption: optionOf(failureOrSuccess),
+            ),
+          ),
+          (_) {},
         );
       },
     );

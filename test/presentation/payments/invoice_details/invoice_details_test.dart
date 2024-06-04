@@ -10,7 +10,6 @@ import 'package:ezrxmobile/application/order/view_by_order/view_by_order_bloc.da
 import 'package:ezrxmobile/application/order/view_by_order_details/view_by_order_details_bloc.dart';
 import 'package:ezrxmobile/application/payments/credit_and_invoice_details/credit_and_invoice_details_bloc.dart';
 import 'package:ezrxmobile/application/payments/download_e_invoice/download_e_invoice_bloc.dart';
-import 'package:ezrxmobile/application/payments/download_payment_attachments/download_payment_attachments_bloc.dart';
 import 'package:ezrxmobile/application/product_image/product_image_bloc.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
@@ -19,7 +18,6 @@ import 'package:ezrxmobile/domain/order/entities/view_by_order.dart';
 import 'package:ezrxmobile/domain/order/entities/view_by_order_filter.dart';
 import 'package:ezrxmobile/domain/payments/entities/credit_and_invoice_item.dart';
 import 'package:ezrxmobile/domain/payments/entities/customer_document_detail.dart';
-import 'package:ezrxmobile/domain/payments/entities/download_payment_attachments.dart';
 import 'package:ezrxmobile/domain/utils/string_utils.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/market_place/market_place_seller_title.dart';
@@ -66,7 +64,6 @@ void main() {
   late ViewByOrderDetailsBlocMock viewByOrderDetailsBlocMock;
   late ViewByItemDetailsBlocMock viewByItemDetailsBlocMock;
   late DownloadEInvoiceBlocMock downloadEInvoiceBlocMock;
-  late DownloadPaymentAttachmentsBlocMock downloadPaymentAttachmentsBlocMock;
   late CreditAndInvoiceItem fakeInvoice;
   late List<CustomerDocumentDetail> fakeInvoiceDetail;
   final eligibilityStateVariant = ValueVariant<EligibilityState>(
@@ -130,7 +127,6 @@ void main() {
     viewByOrderDetailsBlocMock = ViewByOrderDetailsBlocMock();
     viewByItemDetailsBlocMock = ViewByItemDetailsBlocMock();
     downloadEInvoiceBlocMock = DownloadEInvoiceBlocMock();
-    downloadPaymentAttachmentsBlocMock = DownloadPaymentAttachmentsBlocMock();
 
     fakeInvoice =
         (await AllCreditsAndInvoicesLocalDataSource().getDocumentHeaderList())
@@ -163,8 +159,6 @@ void main() {
         .thenReturn(ViewByItemDetailsState.initial());
     when(() => downloadEInvoiceBlocMock.state)
         .thenReturn(DownloadEInvoiceState.initial());
-    when(() => downloadPaymentAttachmentsBlocMock.state)
-        .thenReturn(DownloadPaymentAttachmentsState.initial());
   });
 
   Future getWidget(tester, {bool isMarketPlace = false}) async {
@@ -198,9 +192,6 @@ void main() {
           BlocProvider<ViewByItemDetailsBloc>(
             create: (context) => viewByItemDetailsBlocMock,
           ),
-          BlocProvider<DownloadPaymentAttachmentsBloc>(
-            create: (context) => downloadPaymentAttachmentsBlocMock,
-          ),
         ],
         child: InvoiceDetailsPage(isMarketPlace: isMarketPlace),
       ),
@@ -216,15 +207,13 @@ void main() {
             basicInfo: fakeInvoice,
           ),
         );
+
         when(() => downloadEInvoiceBlocMock.state).thenReturn(
-          DownloadEInvoiceState.initial().copyWith(
-            eInvoice:
-                DownloadPaymentAttachment.empty().copyWith(url: 'fake_url'),
-          ),
+          DownloadEInvoiceState.initial().copyWith.eInvoiceUrl(url: 'fake-url'),
         );
         when(() => eligibilityBlocMock.state).thenReturn(
           EligibilityState.initial().copyWith(
-            salesOrganisation: fakeSGSalesOrganisation,
+            salesOrganisation: fakeMYSalesOrganisation,
             customerCodeInfo: fakeCustomerCodeInfo,
           ),
         );
@@ -235,14 +224,106 @@ void main() {
         final downloadEInvoiceButton =
             find.byKey(WidgetKeys.downloadEInvoiceButton);
         expect(downloadEInvoiceButton, findsOneWidget);
+        expect(
+          find.descendant(
+            of: downloadEInvoiceButton,
+            matching: find.text('Download e-invoice'),
+          ),
+          findsOne,
+        );
         await tester.tap(downloadEInvoiceButton);
         await tester.pumpAndSettle();
+        verify(
+          () => downloadEInvoiceBlocMock.add(
+            DownloadEInvoiceEvent.fetchUrl(
+              salesOrg: fakeMYSalesOrganisation.salesOrg,
+              customerCodeInfo: fakeCustomerCodeInfo,
+              invoiceNumber: fakeInvoice.searchKey.getOrDefaultValue(''),
+            ),
+          ),
+        ).called(1);
+        verify(
+          () => downloadEInvoiceBlocMock
+              .add(const DownloadEInvoiceEvent.download()),
+        );
       });
       testWidgets(' => download e-invoice button invisible', (tester) async {
         await getWidget(tester);
         await tester.pumpAndSettle();
 
         expect(find.byKey(WidgetKeys.downloadEInvoiceButton), findsNothing);
+      });
+
+      testWidgets(' => download e-invoice button downloading state',
+          (tester) async {
+        when(() => downloadEInvoiceBlocMock.state).thenReturn(
+          DownloadEInvoiceState.initial()
+              .copyWith
+              .eInvoiceUrl(url: 'fake-url')
+              .copyWith(isDownloading: true),
+        );
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrganisation: fakeMYSalesOrganisation,
+            customerCodeInfo: fakeCustomerCodeInfo,
+          ),
+        );
+
+        await getWidget(tester);
+        await tester.pump();
+
+        final downloadEInvoiceButton =
+            find.byKey(WidgetKeys.downloadEInvoiceButton);
+        expect(downloadEInvoiceButton, findsOneWidget);
+        expect(
+          find.descendant(
+            of: downloadEInvoiceButton,
+            matching: find.text('Downloading...'),
+          ),
+          findsOne,
+        );
+        await tester.tap(downloadEInvoiceButton);
+        await tester.pump();
+        verifyNever(
+          () => downloadEInvoiceBlocMock
+              .add(const DownloadEInvoiceEvent.openFile()),
+        );
+      });
+
+      testWidgets(' => open e-invoice button visible', (tester) async {
+        when(() => downloadEInvoiceBlocMock.state).thenReturn(
+          DownloadEInvoiceState.initial()
+              .copyWith
+              .eInvoiceUrl(url: 'fake-url')
+              .copyWith
+              .eInvoice(name: 'fake-name'),
+        );
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrganisation: fakeMYSalesOrganisation,
+            customerCodeInfo: fakeCustomerCodeInfo,
+          ),
+        );
+
+        await getWidget(tester);
+        await tester.pumpAndSettle();
+
+        final downloadEInvoiceButton =
+            find.byKey(WidgetKeys.downloadEInvoiceButton);
+        expect(downloadEInvoiceButton, findsOneWidget);
+        expect(
+          find.descendant(
+            of: downloadEInvoiceButton,
+            matching: find.text('Open e-invoice'),
+          ),
+          findsOne,
+        );
+        await tester.tap(downloadEInvoiceButton);
+        await tester.pumpAndSettle();
+        verify(
+          () => downloadEInvoiceBlocMock
+              .add(const DownloadEInvoiceEvent.openFile()),
+        ).called(1);
       });
     });
 

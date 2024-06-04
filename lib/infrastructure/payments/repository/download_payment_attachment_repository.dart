@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/config.dart';
+import 'package:ezrxmobile/domain/core/attachment_files/entities/attachment_file_buffer.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
 
@@ -28,6 +29,7 @@ import 'package:ezrxmobile/infrastructure/payments/dtos/all_credits_filter_dto.d
 import 'package:ezrxmobile/infrastructure/payments/dtos/full_summary_filter_dto.dart';
 import 'package:ezrxmobile/infrastructure/payments/dtos/payment_summary_filter_dto.dart';
 import 'package:flutter/foundation.dart';
+import 'package:open_file_safe/open_file_safe.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 import 'package:ezrxmobile/infrastructure/core/common/device_info.dart';
@@ -272,15 +274,13 @@ class DownloadPaymentAttachmentRepository
   }
 
   @override
-  Future<Either<ApiFailure, File>> eCreditInvoiceDownload({
+  Future<Either<ApiFailure, AttachmentFileBuffer>> eCreditInvoiceDownload({
     required DownloadPaymentAttachment eCreditInvoiceUrl,
   }) async {
     if (config.appFlavor == Flavor.mock) {
       try {
-        final localFile = await localDataSource.eInvoiceDownload();
-        final downloadedFile = await fileSystemHelper.getDownloadedFile(
-          localFile,
-        );
+        final downloadedFile = await localDataSource.eInvoiceDownload();
+        await fileSystemHelper.getDownloadedFile(downloadedFile);
 
         return Right(downloadedFile);
       } catch (e) {
@@ -288,12 +288,10 @@ class DownloadPaymentAttachmentRepository
       }
     }
     try {
-      final localFile = await remoteDataSource.eInvoiceDownload(
+      final downloadedFile = await remoteDataSource.eInvoiceDownload(
         eCreditInvoiceUrl.url,
       );
-      final downloadedFile = await fileSystemHelper.getDownloadedFile(
-        localFile,
-      );
+      await fileSystemHelper.getDownloadedFile(downloadedFile);
 
       return Right(downloadedFile);
     } catch (e) {
@@ -320,6 +318,22 @@ class DownloadPaymentAttachmentRepository
       );
 
       return Right(response);
+    } catch (e) {
+      return Left(FailureHandler.handleFailure(e));
+    }
+  }
+
+  @override
+  Future<Either<ApiFailure, Unit>> viewSavedFile({
+    required AttachmentFileBuffer savedFile,
+  }) async {
+    try {
+      final result = await fileSystemHelper.openFile(savedFile);
+      if (result.type != ResultType.done) {
+        return Left(ApiFailure.openDownloadedFileError(result.message));
+      }
+
+      return const Right(unit);
     } catch (e) {
       return Left(FailureHandler.handleFailure(e));
     }

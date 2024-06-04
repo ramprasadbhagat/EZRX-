@@ -33,8 +33,6 @@ mixin _$DownloadPaymentAttachmentEvent {
     required TResult Function(DownloadPaymentAttachment files)
         downloadPaymentAttachment,
     required TResult Function(SoaData soaData) downloadSOA,
-    required TResult Function(DownloadPaymentAttachment eInvoice)
-        downloadEInvoice,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -54,7 +52,6 @@ mixin _$DownloadPaymentAttachmentEvent {
     TResult? Function(DownloadPaymentAttachment files)?
         downloadPaymentAttachment,
     TResult? Function(SoaData soaData)? downloadSOA,
-    TResult? Function(DownloadPaymentAttachment eInvoice)? downloadEInvoice,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -74,7 +71,6 @@ mixin _$DownloadPaymentAttachmentEvent {
     TResult Function(DownloadPaymentAttachment files)?
         downloadPaymentAttachment,
     TResult Function(SoaData soaData)? downloadSOA,
-    TResult Function(DownloadPaymentAttachment eInvoice)? downloadEInvoice,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -89,7 +85,6 @@ mixin _$DownloadPaymentAttachmentEvent {
     required TResult Function(_DownloadPaymentAttachment value)
         downloadPaymentAttachment,
     required TResult Function(_DownloadSOA value) downloadSOA,
-    required TResult Function(_DownloadEInvoice value) downloadEInvoice,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -102,7 +97,6 @@ mixin _$DownloadPaymentAttachmentEvent {
     TResult? Function(_DownloadPaymentAttachment value)?
         downloadPaymentAttachment,
     TResult? Function(_DownloadSOA value)? downloadSOA,
-    TResult? Function(_DownloadEInvoice value)? downloadEInvoice,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -115,7 +109,6 @@ mixin _$DownloadPaymentAttachmentEvent {
     TResult Function(_DownloadPaymentAttachment value)?
         downloadPaymentAttachment,
     TResult Function(_DownloadSOA value)? downloadSOA,
-    TResult Function(_DownloadEInvoice value)? downloadEInvoice,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -253,8 +246,6 @@ class _$InitializedImpl implements _Initialized {
     required TResult Function(DownloadPaymentAttachment files)
         downloadPaymentAttachment,
     required TResult Function(SoaData soaData) downloadSOA,
-    required TResult Function(DownloadPaymentAttachment eInvoice)
-        downloadEInvoice,
   }) {
     return initialized(customerCodeInfo, salesOrganization);
   }
@@ -277,7 +268,6 @@ class _$InitializedImpl implements _Initialized {
     TResult? Function(DownloadPaymentAttachment files)?
         downloadPaymentAttachment,
     TResult? Function(SoaData soaData)? downloadSOA,
-    TResult? Function(DownloadPaymentAttachment eInvoice)? downloadEInvoice,
   }) {
     return initialized?.call(customerCodeInfo, salesOrganization);
   }
@@ -300,7 +290,6 @@ class _$InitializedImpl implements _Initialized {
     TResult Function(DownloadPaymentAttachment files)?
         downloadPaymentAttachment,
     TResult Function(SoaData soaData)? downloadSOA,
-    TResult Function(DownloadPaymentAttachment eInvoice)? downloadEInvoice,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -321,7 +310,6 @@ class _$InitializedImpl implements _Initialized {
     required TResult Function(_DownloadPaymentAttachment value)
         downloadPaymentAttachment,
     required TResult Function(_DownloadSOA value) downloadSOA,
-    required TResult Function(_DownloadEInvoice value) downloadEInvoice,
   }) {
     return initialized(this);
   }
@@ -337,7 +325,6 @@ class _$InitializedImpl implements _Initialized {
     TResult? Function(_DownloadPaymentAttachment value)?
         downloadPaymentAttachment,
     TResult? Function(_DownloadSOA value)? downloadSOA,
-    TResult? Function(_DownloadEInvoice value)? downloadEInvoice,
   }) {
     return initialized?.call(this);
   }
@@ -353,7 +340,6 @@ class _$InitializedImpl implements _Initialized {
     TResult Function(_DownloadPaymentAttachment value)?
         downloadPaymentAttachment,
     TResult Function(_DownloadSOA value)? downloadSOA,
-    TResult Function(_DownloadEInvoice value)? downloadEInvoice,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -477,8 +463,6 @@ class _$FetchAllInvoiceUrlImpl implements _FetchAllInvoiceUrl {
     required TResult Function(DownloadPaymentAttachment files)
         downloadPaymentAttachment,
     required TResult Function(SoaData soaData) downloadSOA,
-    required TResult Function(DownloadPaymentAttachment eInvoice)
-        downloadEInvoice,
   }) {
     return fetchAllInvoiceUrl(queryObject, isMarketPlace);
   }
@@ -501,7 +485,6 @@ class _$FetchAllInvoiceUrlImpl implements _FetchAllInvoiceUrl {
     TResult? Function(DownloadPaymentAttachment files)?
         downloadPaymentAttachment,
     TResult? Function(SoaData soaData)? downloadSOA,
-    TResult? Function(DownloadPaymentAttachment eInvoice)? downloadEInvoice,
   }) {
     return fetchAllInvoiceUrl?.call(queryObject, isMarketPlace);
   }
@@ -524,7 +507,6 @@ class _$FetchAllInvoiceUrlImpl implements _FetchAllInvoiceUrl {
     TResult Function(DownloadPaymentAttachment files)?
         downloadPaymentAttachment,
     TResult Function(SoaData soaData)? downloadSOA,
-    TResult Function(DownloadPaymentAttachment eInvoice)? downloadEInvoice,
     required TResult orElse(),
   }) {
     if (fetchAllInvoiceUrl != null) {
@@ -545,7 +527,6 @@ class _$FetchAllInvoiceUrlImpl implements _FetchAllInvoiceUrl {
     required TResult Function(_DownloadPaymentAttachment value)
         downloadPaymentAttachment,
     required TResult Function(_DownloadSOA value) downloadSOA,
-    required TResult Function(_DownloadEInvoice value) downloadEInvoice,
   }) {
     return fetchAllInvoiceUrl(this);
   }
@@ -561,7 +542,6 @@ class _$FetchAllInvoiceUrlImpl implements _FetchAllInvoiceUrl {
     TResult? Function(_DownloadPaymentAttachment value)?
         downloadPaymentAttachment,
     TResult? Function(_DownloadSOA value)? downloadSOA,
-    TResult? Function(_DownloadEInvoice value)? downloadEInvoice,
   }) {
     return fetchAllInvoiceUrl?.call(this);
   }
@@ -577,7 +557,6 @@ class _$FetchAllInvoiceUrlImpl implements _FetchAllInvoiceUrl {
     TResult Function(_DownloadPaymentAttachment value)?
         downloadPaymentAttachment,
     TResult Function(_DownloadSOA value)? downloadSOA,
-    TResult Function(_DownloadEInvoice value)? downloadEInvoice,
     required TResult orElse(),
   }) {
     if (fetchAllInvoiceUrl != null) {
@@ -701,8 +680,6 @@ class _$FetchAllCreditUrlImpl implements _FetchAllCreditUrl {
     required TResult Function(DownloadPaymentAttachment files)
         downloadPaymentAttachment,
     required TResult Function(SoaData soaData) downloadSOA,
-    required TResult Function(DownloadPaymentAttachment eInvoice)
-        downloadEInvoice,
   }) {
     return fetchAllCreditUrl(queryObject, isMarketPlace);
   }
@@ -725,7 +702,6 @@ class _$FetchAllCreditUrlImpl implements _FetchAllCreditUrl {
     TResult? Function(DownloadPaymentAttachment files)?
         downloadPaymentAttachment,
     TResult? Function(SoaData soaData)? downloadSOA,
-    TResult? Function(DownloadPaymentAttachment eInvoice)? downloadEInvoice,
   }) {
     return fetchAllCreditUrl?.call(queryObject, isMarketPlace);
   }
@@ -748,7 +724,6 @@ class _$FetchAllCreditUrlImpl implements _FetchAllCreditUrl {
     TResult Function(DownloadPaymentAttachment files)?
         downloadPaymentAttachment,
     TResult Function(SoaData soaData)? downloadSOA,
-    TResult Function(DownloadPaymentAttachment eInvoice)? downloadEInvoice,
     required TResult orElse(),
   }) {
     if (fetchAllCreditUrl != null) {
@@ -769,7 +744,6 @@ class _$FetchAllCreditUrlImpl implements _FetchAllCreditUrl {
     required TResult Function(_DownloadPaymentAttachment value)
         downloadPaymentAttachment,
     required TResult Function(_DownloadSOA value) downloadSOA,
-    required TResult Function(_DownloadEInvoice value) downloadEInvoice,
   }) {
     return fetchAllCreditUrl(this);
   }
@@ -785,7 +759,6 @@ class _$FetchAllCreditUrlImpl implements _FetchAllCreditUrl {
     TResult? Function(_DownloadPaymentAttachment value)?
         downloadPaymentAttachment,
     TResult? Function(_DownloadSOA value)? downloadSOA,
-    TResult? Function(_DownloadEInvoice value)? downloadEInvoice,
   }) {
     return fetchAllCreditUrl?.call(this);
   }
@@ -801,7 +774,6 @@ class _$FetchAllCreditUrlImpl implements _FetchAllCreditUrl {
     TResult Function(_DownloadPaymentAttachment value)?
         downloadPaymentAttachment,
     TResult Function(_DownloadSOA value)? downloadSOA,
-    TResult Function(_DownloadEInvoice value)? downloadEInvoice,
     required TResult orElse(),
   }) {
     if (fetchAllCreditUrl != null) {
@@ -925,8 +897,6 @@ class _$FetchFullSummaryUrlImpl implements _FetchFullSummaryUrl {
     required TResult Function(DownloadPaymentAttachment files)
         downloadPaymentAttachment,
     required TResult Function(SoaData soaData) downloadSOA,
-    required TResult Function(DownloadPaymentAttachment eInvoice)
-        downloadEInvoice,
   }) {
     return fetchFullSummaryUrl(queryObject, isMarketPlace);
   }
@@ -949,7 +919,6 @@ class _$FetchFullSummaryUrlImpl implements _FetchFullSummaryUrl {
     TResult? Function(DownloadPaymentAttachment files)?
         downloadPaymentAttachment,
     TResult? Function(SoaData soaData)? downloadSOA,
-    TResult? Function(DownloadPaymentAttachment eInvoice)? downloadEInvoice,
   }) {
     return fetchFullSummaryUrl?.call(queryObject, isMarketPlace);
   }
@@ -972,7 +941,6 @@ class _$FetchFullSummaryUrlImpl implements _FetchFullSummaryUrl {
     TResult Function(DownloadPaymentAttachment files)?
         downloadPaymentAttachment,
     TResult Function(SoaData soaData)? downloadSOA,
-    TResult Function(DownloadPaymentAttachment eInvoice)? downloadEInvoice,
     required TResult orElse(),
   }) {
     if (fetchFullSummaryUrl != null) {
@@ -993,7 +961,6 @@ class _$FetchFullSummaryUrlImpl implements _FetchFullSummaryUrl {
     required TResult Function(_DownloadPaymentAttachment value)
         downloadPaymentAttachment,
     required TResult Function(_DownloadSOA value) downloadSOA,
-    required TResult Function(_DownloadEInvoice value) downloadEInvoice,
   }) {
     return fetchFullSummaryUrl(this);
   }
@@ -1009,7 +976,6 @@ class _$FetchFullSummaryUrlImpl implements _FetchFullSummaryUrl {
     TResult? Function(_DownloadPaymentAttachment value)?
         downloadPaymentAttachment,
     TResult? Function(_DownloadSOA value)? downloadSOA,
-    TResult? Function(_DownloadEInvoice value)? downloadEInvoice,
   }) {
     return fetchFullSummaryUrl?.call(this);
   }
@@ -1025,7 +991,6 @@ class _$FetchFullSummaryUrlImpl implements _FetchFullSummaryUrl {
     TResult Function(_DownloadPaymentAttachment value)?
         downloadPaymentAttachment,
     TResult Function(_DownloadSOA value)? downloadSOA,
-    TResult Function(_DownloadEInvoice value)? downloadEInvoice,
     required TResult orElse(),
   }) {
     if (fetchFullSummaryUrl != null) {
@@ -1153,8 +1118,6 @@ class _$FetchPaymentSummaryUrlImpl implements _FetchPaymentSummaryUrl {
     required TResult Function(DownloadPaymentAttachment files)
         downloadPaymentAttachment,
     required TResult Function(SoaData soaData) downloadSOA,
-    required TResult Function(DownloadPaymentAttachment eInvoice)
-        downloadEInvoice,
   }) {
     return fetchPaymentSummaryUrl(paymentSummaryFilter, isMarketPlace);
   }
@@ -1177,7 +1140,6 @@ class _$FetchPaymentSummaryUrlImpl implements _FetchPaymentSummaryUrl {
     TResult? Function(DownloadPaymentAttachment files)?
         downloadPaymentAttachment,
     TResult? Function(SoaData soaData)? downloadSOA,
-    TResult? Function(DownloadPaymentAttachment eInvoice)? downloadEInvoice,
   }) {
     return fetchPaymentSummaryUrl?.call(paymentSummaryFilter, isMarketPlace);
   }
@@ -1200,7 +1162,6 @@ class _$FetchPaymentSummaryUrlImpl implements _FetchPaymentSummaryUrl {
     TResult Function(DownloadPaymentAttachment files)?
         downloadPaymentAttachment,
     TResult Function(SoaData soaData)? downloadSOA,
-    TResult Function(DownloadPaymentAttachment eInvoice)? downloadEInvoice,
     required TResult orElse(),
   }) {
     if (fetchPaymentSummaryUrl != null) {
@@ -1221,7 +1182,6 @@ class _$FetchPaymentSummaryUrlImpl implements _FetchPaymentSummaryUrl {
     required TResult Function(_DownloadPaymentAttachment value)
         downloadPaymentAttachment,
     required TResult Function(_DownloadSOA value) downloadSOA,
-    required TResult Function(_DownloadEInvoice value) downloadEInvoice,
   }) {
     return fetchPaymentSummaryUrl(this);
   }
@@ -1237,7 +1197,6 @@ class _$FetchPaymentSummaryUrlImpl implements _FetchPaymentSummaryUrl {
     TResult? Function(_DownloadPaymentAttachment value)?
         downloadPaymentAttachment,
     TResult? Function(_DownloadSOA value)? downloadSOA,
-    TResult? Function(_DownloadEInvoice value)? downloadEInvoice,
   }) {
     return fetchPaymentSummaryUrl?.call(this);
   }
@@ -1253,7 +1212,6 @@ class _$FetchPaymentSummaryUrlImpl implements _FetchPaymentSummaryUrl {
     TResult Function(_DownloadPaymentAttachment value)?
         downloadPaymentAttachment,
     TResult Function(_DownloadSOA value)? downloadSOA,
-    TResult Function(_DownloadEInvoice value)? downloadEInvoice,
     required TResult orElse(),
   }) {
     if (fetchPaymentSummaryUrl != null) {
@@ -1369,8 +1327,6 @@ class _$DownloadPaymentAttachmentImpl implements _DownloadPaymentAttachment {
     required TResult Function(DownloadPaymentAttachment files)
         downloadPaymentAttachment,
     required TResult Function(SoaData soaData) downloadSOA,
-    required TResult Function(DownloadPaymentAttachment eInvoice)
-        downloadEInvoice,
   }) {
     return downloadPaymentAttachment(files);
   }
@@ -1393,7 +1349,6 @@ class _$DownloadPaymentAttachmentImpl implements _DownloadPaymentAttachment {
     TResult? Function(DownloadPaymentAttachment files)?
         downloadPaymentAttachment,
     TResult? Function(SoaData soaData)? downloadSOA,
-    TResult? Function(DownloadPaymentAttachment eInvoice)? downloadEInvoice,
   }) {
     return downloadPaymentAttachment?.call(files);
   }
@@ -1416,7 +1371,6 @@ class _$DownloadPaymentAttachmentImpl implements _DownloadPaymentAttachment {
     TResult Function(DownloadPaymentAttachment files)?
         downloadPaymentAttachment,
     TResult Function(SoaData soaData)? downloadSOA,
-    TResult Function(DownloadPaymentAttachment eInvoice)? downloadEInvoice,
     required TResult orElse(),
   }) {
     if (downloadPaymentAttachment != null) {
@@ -1437,7 +1391,6 @@ class _$DownloadPaymentAttachmentImpl implements _DownloadPaymentAttachment {
     required TResult Function(_DownloadPaymentAttachment value)
         downloadPaymentAttachment,
     required TResult Function(_DownloadSOA value) downloadSOA,
-    required TResult Function(_DownloadEInvoice value) downloadEInvoice,
   }) {
     return downloadPaymentAttachment(this);
   }
@@ -1453,7 +1406,6 @@ class _$DownloadPaymentAttachmentImpl implements _DownloadPaymentAttachment {
     TResult? Function(_DownloadPaymentAttachment value)?
         downloadPaymentAttachment,
     TResult? Function(_DownloadSOA value)? downloadSOA,
-    TResult? Function(_DownloadEInvoice value)? downloadEInvoice,
   }) {
     return downloadPaymentAttachment?.call(this);
   }
@@ -1469,7 +1421,6 @@ class _$DownloadPaymentAttachmentImpl implements _DownloadPaymentAttachment {
     TResult Function(_DownloadPaymentAttachment value)?
         downloadPaymentAttachment,
     TResult Function(_DownloadSOA value)? downloadSOA,
-    TResult Function(_DownloadEInvoice value)? downloadEInvoice,
     required TResult orElse(),
   }) {
     if (downloadPaymentAttachment != null) {
@@ -1570,8 +1521,6 @@ class _$DownloadSOAImpl implements _DownloadSOA {
     required TResult Function(DownloadPaymentAttachment files)
         downloadPaymentAttachment,
     required TResult Function(SoaData soaData) downloadSOA,
-    required TResult Function(DownloadPaymentAttachment eInvoice)
-        downloadEInvoice,
   }) {
     return downloadSOA(soaData);
   }
@@ -1594,7 +1543,6 @@ class _$DownloadSOAImpl implements _DownloadSOA {
     TResult? Function(DownloadPaymentAttachment files)?
         downloadPaymentAttachment,
     TResult? Function(SoaData soaData)? downloadSOA,
-    TResult? Function(DownloadPaymentAttachment eInvoice)? downloadEInvoice,
   }) {
     return downloadSOA?.call(soaData);
   }
@@ -1617,7 +1565,6 @@ class _$DownloadSOAImpl implements _DownloadSOA {
     TResult Function(DownloadPaymentAttachment files)?
         downloadPaymentAttachment,
     TResult Function(SoaData soaData)? downloadSOA,
-    TResult Function(DownloadPaymentAttachment eInvoice)? downloadEInvoice,
     required TResult orElse(),
   }) {
     if (downloadSOA != null) {
@@ -1638,7 +1585,6 @@ class _$DownloadSOAImpl implements _DownloadSOA {
     required TResult Function(_DownloadPaymentAttachment value)
         downloadPaymentAttachment,
     required TResult Function(_DownloadSOA value) downloadSOA,
-    required TResult Function(_DownloadEInvoice value) downloadEInvoice,
   }) {
     return downloadSOA(this);
   }
@@ -1654,7 +1600,6 @@ class _$DownloadSOAImpl implements _DownloadSOA {
     TResult? Function(_DownloadPaymentAttachment value)?
         downloadPaymentAttachment,
     TResult? Function(_DownloadSOA value)? downloadSOA,
-    TResult? Function(_DownloadEInvoice value)? downloadEInvoice,
   }) {
     return downloadSOA?.call(this);
   }
@@ -1670,7 +1615,6 @@ class _$DownloadSOAImpl implements _DownloadSOA {
     TResult Function(_DownloadPaymentAttachment value)?
         downloadPaymentAttachment,
     TResult Function(_DownloadSOA value)? downloadSOA,
-    TResult Function(_DownloadEInvoice value)? downloadEInvoice,
     required TResult orElse(),
   }) {
     if (downloadSOA != null) {
@@ -1687,219 +1631,6 @@ abstract class _DownloadSOA implements DownloadPaymentAttachmentEvent {
   SoaData get soaData;
   @JsonKey(ignore: true)
   _$$DownloadSOAImplCopyWith<_$DownloadSOAImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$DownloadEInvoiceImplCopyWith<$Res> {
-  factory _$$DownloadEInvoiceImplCopyWith(_$DownloadEInvoiceImpl value,
-          $Res Function(_$DownloadEInvoiceImpl) then) =
-      __$$DownloadEInvoiceImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({DownloadPaymentAttachment eInvoice});
-
-  $DownloadPaymentAttachmentCopyWith<$Res> get eInvoice;
-}
-
-/// @nodoc
-class __$$DownloadEInvoiceImplCopyWithImpl<$Res>
-    extends _$DownloadPaymentAttachmentEventCopyWithImpl<$Res,
-        _$DownloadEInvoiceImpl>
-    implements _$$DownloadEInvoiceImplCopyWith<$Res> {
-  __$$DownloadEInvoiceImplCopyWithImpl(_$DownloadEInvoiceImpl _value,
-      $Res Function(_$DownloadEInvoiceImpl) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? eInvoice = null,
-  }) {
-    return _then(_$DownloadEInvoiceImpl(
-      eInvoice: null == eInvoice
-          ? _value.eInvoice
-          : eInvoice // ignore: cast_nullable_to_non_nullable
-              as DownloadPaymentAttachment,
-    ));
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $DownloadPaymentAttachmentCopyWith<$Res> get eInvoice {
-    return $DownloadPaymentAttachmentCopyWith<$Res>(_value.eInvoice, (value) {
-      return _then(_value.copyWith(eInvoice: value));
-    });
-  }
-}
-
-/// @nodoc
-
-class _$DownloadEInvoiceImpl implements _DownloadEInvoice {
-  const _$DownloadEInvoiceImpl({required this.eInvoice});
-
-  @override
-  final DownloadPaymentAttachment eInvoice;
-
-  @override
-  String toString() {
-    return 'DownloadPaymentAttachmentEvent.downloadEInvoice(eInvoice: $eInvoice)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$DownloadEInvoiceImpl &&
-            (identical(other.eInvoice, eInvoice) ||
-                other.eInvoice == eInvoice));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, eInvoice);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$DownloadEInvoiceImplCopyWith<_$DownloadEInvoiceImpl> get copyWith =>
-      __$$DownloadEInvoiceImplCopyWithImpl<_$DownloadEInvoiceImpl>(
-          this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(CustomerCodeInfo customerCodeInfo,
-            SalesOrganisation salesOrganization)
-        initialized,
-    required TResult Function(AllInvoicesFilter queryObject, bool isMarketPlace)
-        fetchAllInvoiceUrl,
-    required TResult Function(AllCreditsFilter queryObject, bool isMarketPlace)
-        fetchAllCreditUrl,
-    required TResult Function(FullSummaryFilter queryObject, bool isMarketPlace)
-        fetchFullSummaryUrl,
-    required TResult Function(
-            PaymentSummaryFilter paymentSummaryFilter, bool isMarketPlace)
-        fetchPaymentSummaryUrl,
-    required TResult Function(DownloadPaymentAttachment files)
-        downloadPaymentAttachment,
-    required TResult Function(SoaData soaData) downloadSOA,
-    required TResult Function(DownloadPaymentAttachment eInvoice)
-        downloadEInvoice,
-  }) {
-    return downloadEInvoice(eInvoice);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(CustomerCodeInfo customerCodeInfo,
-            SalesOrganisation salesOrganization)?
-        initialized,
-    TResult? Function(AllInvoicesFilter queryObject, bool isMarketPlace)?
-        fetchAllInvoiceUrl,
-    TResult? Function(AllCreditsFilter queryObject, bool isMarketPlace)?
-        fetchAllCreditUrl,
-    TResult? Function(FullSummaryFilter queryObject, bool isMarketPlace)?
-        fetchFullSummaryUrl,
-    TResult? Function(
-            PaymentSummaryFilter paymentSummaryFilter, bool isMarketPlace)?
-        fetchPaymentSummaryUrl,
-    TResult? Function(DownloadPaymentAttachment files)?
-        downloadPaymentAttachment,
-    TResult? Function(SoaData soaData)? downloadSOA,
-    TResult? Function(DownloadPaymentAttachment eInvoice)? downloadEInvoice,
-  }) {
-    return downloadEInvoice?.call(eInvoice);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(CustomerCodeInfo customerCodeInfo,
-            SalesOrganisation salesOrganization)?
-        initialized,
-    TResult Function(AllInvoicesFilter queryObject, bool isMarketPlace)?
-        fetchAllInvoiceUrl,
-    TResult Function(AllCreditsFilter queryObject, bool isMarketPlace)?
-        fetchAllCreditUrl,
-    TResult Function(FullSummaryFilter queryObject, bool isMarketPlace)?
-        fetchFullSummaryUrl,
-    TResult Function(
-            PaymentSummaryFilter paymentSummaryFilter, bool isMarketPlace)?
-        fetchPaymentSummaryUrl,
-    TResult Function(DownloadPaymentAttachment files)?
-        downloadPaymentAttachment,
-    TResult Function(SoaData soaData)? downloadSOA,
-    TResult Function(DownloadPaymentAttachment eInvoice)? downloadEInvoice,
-    required TResult orElse(),
-  }) {
-    if (downloadEInvoice != null) {
-      return downloadEInvoice(eInvoice);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initialized value) initialized,
-    required TResult Function(_FetchAllInvoiceUrl value) fetchAllInvoiceUrl,
-    required TResult Function(_FetchAllCreditUrl value) fetchAllCreditUrl,
-    required TResult Function(_FetchFullSummaryUrl value) fetchFullSummaryUrl,
-    required TResult Function(_FetchPaymentSummaryUrl value)
-        fetchPaymentSummaryUrl,
-    required TResult Function(_DownloadPaymentAttachment value)
-        downloadPaymentAttachment,
-    required TResult Function(_DownloadSOA value) downloadSOA,
-    required TResult Function(_DownloadEInvoice value) downloadEInvoice,
-  }) {
-    return downloadEInvoice(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initialized value)? initialized,
-    TResult? Function(_FetchAllInvoiceUrl value)? fetchAllInvoiceUrl,
-    TResult? Function(_FetchAllCreditUrl value)? fetchAllCreditUrl,
-    TResult? Function(_FetchFullSummaryUrl value)? fetchFullSummaryUrl,
-    TResult? Function(_FetchPaymentSummaryUrl value)? fetchPaymentSummaryUrl,
-    TResult? Function(_DownloadPaymentAttachment value)?
-        downloadPaymentAttachment,
-    TResult? Function(_DownloadSOA value)? downloadSOA,
-    TResult? Function(_DownloadEInvoice value)? downloadEInvoice,
-  }) {
-    return downloadEInvoice?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initialized value)? initialized,
-    TResult Function(_FetchAllInvoiceUrl value)? fetchAllInvoiceUrl,
-    TResult Function(_FetchAllCreditUrl value)? fetchAllCreditUrl,
-    TResult Function(_FetchFullSummaryUrl value)? fetchFullSummaryUrl,
-    TResult Function(_FetchPaymentSummaryUrl value)? fetchPaymentSummaryUrl,
-    TResult Function(_DownloadPaymentAttachment value)?
-        downloadPaymentAttachment,
-    TResult Function(_DownloadSOA value)? downloadSOA,
-    TResult Function(_DownloadEInvoice value)? downloadEInvoice,
-    required TResult orElse(),
-  }) {
-    if (downloadEInvoice != null) {
-      return downloadEInvoice(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _DownloadEInvoice implements DownloadPaymentAttachmentEvent {
-  const factory _DownloadEInvoice(
-          {required final DownloadPaymentAttachment eInvoice}) =
-      _$DownloadEInvoiceImpl;
-
-  DownloadPaymentAttachment get eInvoice;
-  @JsonKey(ignore: true)
-  _$$DownloadEInvoiceImplCopyWith<_$DownloadEInvoiceImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 

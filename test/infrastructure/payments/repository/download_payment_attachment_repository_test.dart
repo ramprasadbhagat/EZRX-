@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/core/attachment_files/entities/attachment_file_buffer.dart';
+import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
 import 'package:ezrxmobile/domain/payments/entities/all_credits_filter.dart';
@@ -22,6 +23,7 @@ import 'package:ezrxmobile/infrastructure/payments/repository/download_payment_a
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
+import 'package:open_file_safe/open_file_safe.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 import '../../../common_mock_data/customer_code_mock.dart';
@@ -702,7 +704,7 @@ void main() {
         );
         expect(
           result,
-          Right(fileMock),
+          Right(attachmentFileBuffer),
         );
       });
 
@@ -745,7 +747,7 @@ void main() {
         );
         expect(
           result,
-          Right(fileMock),
+          Right(attachmentFileBuffer),
         );
       });
 
@@ -859,6 +861,47 @@ void main() {
         result,
         Right(DownloadPaymentAttachment.empty()),
       );
+    });
+
+    group('View saved file -', () {
+      test('Success', () async {
+        when(
+          () => fileSystemHelper.openFile(attachmentFileBuffer),
+        ).thenAnswer((invocation) async => OpenResult());
+
+        final result = await downloadPaymentAttachmentRepository.viewSavedFile(
+          savedFile: attachmentFileBuffer,
+        );
+        expect(result, const Right(unit));
+      });
+
+      test('Failure with default failure type', () async {
+        when(
+          () => fileSystemHelper.openFile(attachmentFileBuffer),
+        ).thenAnswer(
+          (_) async =>
+              OpenResult(type: ResultType.error, message: 'fake-error'),
+        );
+
+        final result = await downloadPaymentAttachmentRepository.viewSavedFile(
+          savedFile: attachmentFileBuffer,
+        );
+        expect(
+          result,
+          const Left(ApiFailure.openDownloadedFileError('fake-error')),
+        );
+      });
+
+      test('Failure with exception', () async {
+        when(
+          () => fileSystemHelper.openFile(attachmentFileBuffer),
+        ).thenThrow(MockException(message: 'fake-error'));
+
+        final result = await downloadPaymentAttachmentRepository.viewSavedFile(
+          savedFile: attachmentFileBuffer,
+        );
+        expect(result, const Left(ApiFailure.other('fake-error')));
+      });
     });
   });
 }

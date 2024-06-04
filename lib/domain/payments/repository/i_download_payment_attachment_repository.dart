@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
+import 'package:ezrxmobile/domain/core/attachment_files/entities/attachment_file_buffer.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
@@ -51,7 +52,7 @@ abstract class IDownloadPaymentAttachmentRepository {
   Future<Either<ApiFailure, File>> soaDownload({
     required SoaData soaData,
   });
-  Future<Either<ApiFailure, File>> eCreditInvoiceDownload({
+  Future<Either<ApiFailure, AttachmentFileBuffer>> eCreditInvoiceDownload({
     required DownloadPaymentAttachment eCreditInvoiceUrl,
   });
 
@@ -59,5 +60,9 @@ abstract class IDownloadPaymentAttachmentRepository {
 
   Future<Either<ApiFailure, DownloadPaymentAttachment>> getECreditDownloadUrl({
     required String eCreditNumber,
+  });
+
+  Future<Either<ApiFailure, Unit>> viewSavedFile({
+    required AttachmentFileBuffer savedFile,
   });
 }

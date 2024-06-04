@@ -2020,7 +2020,9 @@ void setupLocator() {
   );
   locator.registerFactory(
     () => DownloadEInvoiceBloc(
-      repository: locator<EInvoiceRepository>(),
+      eInvoiceRepository: locator<EInvoiceRepository>(),
+      downloadPaymentAttachmentRepository:
+          locator<DownloadPaymentAttachmentRepository>(),
     ),
   );
 

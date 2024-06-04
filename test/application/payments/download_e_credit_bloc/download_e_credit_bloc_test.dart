@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/application/payments/download_e_credit/download_e_credit_bloc.dart';
-import 'package:universal_io/io.dart';
+import 'package:ezrxmobile/domain/core/attachment_files/entities/attachment_file_buffer.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -18,7 +18,7 @@ void main() {
   late DownloadPaymentAttachmentRepository downloadPaymentAttachmentRepository;
   late DownloadPaymentAttachment downloadPaymentAttachmentMockData;
   const fakeError = ApiFailure.other('fake-error');
-  final file = File('fake-url');
+  final file = AttachmentFileBuffer.empty().copyWith(name: 'fake-name');
 
   group('Download e-credit', () {
     setUpAll(() async {
