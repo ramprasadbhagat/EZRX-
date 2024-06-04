@@ -37,7 +37,7 @@ class ReturnReviewTab extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<NewRequestBloc, NewRequestState>(
       buildWhen: (previous, current) =>
-          previous.selectedItems != current.selectedItems,
+          previous.invoiceDetails != current.invoiceDetails,
       builder: (context, state) {
         return SingleChildScrollView(
           key: WidgetKeys.returnReviewTabBodyKey,
@@ -60,30 +60,31 @@ class ReturnReviewTab extends StatelessWidget {
                   height: 8,
                 ),
                 const SpecialInstructionsField(),
-                ...state.selectedItems
-                    .map(
-                      (item) => item.balanceQuantity.isGreaterThanZero
-                          ? _ReturnMaterialWidget(
-                              key: WidgetKeys.genericKey(
-                                key:
-                                    'selectedItem#${state.selectedItems.indexOf(item)}',
-                              ),
-                              item: item,
-                            )
-                          : Column(
-                              children: state
-                                  .getReturnBonusItemsOfMainItem(item)
-                                  .map(
-                                    (item) => BonusMaterialReturnWidget(
-                                      returnMaterial: item,
-                                      returnItemDetail:
-                                          state.getReturnItemDetails(item.uuid),
-                                    ),
-                                  )
-                                  .toList(),
-                            ),
-                    )
-                    .toList(),
+                ...state.selectedItems.map((item) {
+                  final bonusItems = state.getReturnBonusItemsOfMainItem(item);
+
+                  return item.balanceQuantity.isGreaterThanZero
+                      ? _ReturnMaterialWidget(
+                          key: WidgetKeys.genericKey(
+                            key:
+                                'selectedItem#${state.selectedItems.indexOf(item)}',
+                          ),
+                          item: item,
+                          bonusItems: bonusItems,
+                          itemDetail: state.getReturnItemDetails(item.uuid),
+                        )
+                      : Column(
+                          children: bonusItems
+                              .map(
+                                (item) => BonusMaterialReturnWidget(
+                                  returnMaterial: item,
+                                  returnItemDetail:
+                                      state.getReturnItemDetails(item.uuid),
+                                ),
+                              )
+                              .toList(),
+                        );
+                }).toList(),
               ],
             ),
           ),

@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
+import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/market_place/market_place_seller_title.dart';
 
-import 'package:get_it/get_it.dart';
 import 'package:flutter/material.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:bloc_test/bloc_test.dart';
@@ -17,7 +17,6 @@ import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/domain/returns/value/value_objects.dart';
-import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/domain/returns/entities/invoice_details.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_material.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_item_details.dart';
@@ -29,7 +28,6 @@ import 'package:ezrxmobile/application/returns/new_request/new_request_bloc.dart
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_request_attachment.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/usage_code_local.dart';
-import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/return_request_local.dart';
 import 'package:ezrxmobile/presentation/returns/new_request/widgets/expandable_info.dart';
 import 'package:ezrxmobile/presentation/returns/new_request/widgets/upload_file_list.dart';
@@ -46,15 +44,12 @@ import '../../../common_mock_data/mock_bloc.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_th_sales_org_config.dart';
 import '../../../utils/widget_utils.dart';
 
-final locator = GetIt.instance;
 const link = 'https://www.google.com/';
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   WidgetsFlutterBinding.ensureInitialized();
-  late UserBloc userBlocMock;
   late AppRouter autoRouterMock;
-  late CustomerCodeBloc customerCodeBlocMock;
   final salesOrgBlocMock = SalesOrgMockBloc();
   late EligibilityBloc eligibilityBlocMock;
   late NewRequestBloc newRequestBlocMock;
@@ -112,10 +107,8 @@ void main() {
   });
 
   setUp(() {
-    userBlocMock = UserBlocMock();
     autoRouterMock = locator<AppRouter>();
     newRequestBlocMock = NewRequestMockBloc();
-    customerCodeBlocMock = CustomerCodeBlocMock();
     returnRequestAttachmentBlocMock = ReturnRequestAttachmentBlocMock();
     productImageBlocMock = ProductImageBlocMock();
     eligibilityBlocMock = EligibilityBlocMock();
@@ -123,9 +116,6 @@ void main() {
     when(() => eligibilityBlocMock.state)
         .thenReturn(EligibilityState.initial());
     when(() => newRequestBlocMock.state).thenReturn(NewRequestState.initial());
-    when(() => userBlocMock.state).thenReturn(UserState.initial());
-    when(() => customerCodeBlocMock.state)
-        .thenReturn(CustomerCodeState.initial());
     when(() => usageCodeBlocMock.state).thenReturn(UsageCodeState.initial());
     when(() => returnRequestAttachmentBlocMock.state)
         .thenReturn(ReturnRequestAttachmentState.initial());
@@ -138,13 +128,9 @@ void main() {
       usingLocalization: true,
       useMediaQuery: useMediaQuery,
       providers: [
-        BlocProvider<UserBloc>(create: (context) => userBlocMock),
         BlocProvider<SalesOrgBloc>(create: (context) => salesOrgBlocMock),
         BlocProvider<NewRequestBloc>(
           create: (context) => newRequestBlocMock,
-        ),
-        BlocProvider<CustomerCodeBloc>(
-          create: (context) => customerCodeBlocMock,
         ),
         BlocProvider<UsageCodeBloc>(create: (context) => usageCodeBlocMock),
         BlocProvider<ReturnRequestAttachmentBloc>(
@@ -998,6 +984,45 @@ void main() {
           ),
           findsOneWidget,
         );
+      });
+
+      testWidgets('=> Should show bonus after inclued from step 2',
+          (tester) async {
+        final bonusItem = fakeReturnMaterialList.items[1];
+        final materialItem = fakeReturnMaterialList.items[0].copyWith(
+          bonusItems: [bonusItem],
+        );
+        final selectedItems = [materialItem];
+        final initialState = NewRequestState.initial().copyWith(
+          selectedItems: selectedItems,
+          invoiceDetails: [
+            InvoiceDetails.empty().copyWith(
+              returnItemDetailsList: [
+                materialItem.validatedItemDetails,
+              ],
+            ),
+          ],
+        );
+        final expectedState = initialState.copyWith(
+          invoiceDetails: [
+            InvoiceDetails.empty().copyWith(
+              returnItemDetailsList: [
+                materialItem.validatedItemDetails,
+                bonusItem.validatedItemDetails,
+              ],
+            ),
+          ],
+        );
+        when(() => newRequestBlocMock.state).thenReturn(initialState);
+        whenListen(
+          newRequestBlocMock,
+          Stream.fromIterable([initialState, expectedState]),
+        );
+
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pumpAndSettle();
+
+        expect(find.byType(BonusMaterialReturnInfo), findsOne);
       });
     });
     group('Return Review Tab test for only bonus returns', () {
