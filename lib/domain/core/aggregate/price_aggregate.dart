@@ -177,6 +177,7 @@ class PriceAggregate with _$PriceAggregate {
               currency: salesOrgConfig.currency.code,
             )
           : SubmitTenderContract.empty(),
+      salesDistrict: tenderContract.salesDistrict.getOrDefaultValue(''),
     );
   }
 

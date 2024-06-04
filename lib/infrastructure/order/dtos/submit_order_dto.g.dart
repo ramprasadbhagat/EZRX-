@@ -39,6 +39,7 @@ _$SubmitOrderDtoImpl _$$SubmitOrderDtoImplFromJson(Map<String, dynamic> json) =>
           ? null
           : SmallOrderFeeDetailDto.fromJson(
               json['movDetails'] as Map<String, dynamic>),
+      orderReason: json['orderReason'] as String? ?? '',
     );
 
 Map<String, dynamic> _$$SubmitOrderDtoImplToJson(
@@ -72,6 +73,7 @@ Map<String, dynamic> _$$SubmitOrderDtoImplToJson(
   }
 
   writeNotNull('movDetails', instance.smallOrderFeeDetail?.toJson());
+  val['orderReason'] = instance.orderReason;
   return val;
 }
 

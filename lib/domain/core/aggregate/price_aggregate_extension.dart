@@ -319,4 +319,11 @@ extension PriceAggregateExtension on List<PriceAggregate> {
         (e) => e.materialInfo.materialNumber == materialNumber,
         orElse: () => PriceAggregate.empty(),
       );
+
+  TenderContract get tenderContractSubmitted => lastWhere(
+        (e) =>
+            e.tenderContract.isNotEmpty &&
+            e.tenderContract.contractNumber.isContractNumberNotEmpty,
+        orElse: () => PriceAggregate.empty(),
+      ).tenderContract;
 }

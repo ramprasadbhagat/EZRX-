@@ -55,6 +55,8 @@ mixin _$SubmitMaterialInfoDto {
   String get principalCode => throw _privateConstructorUsedError;
   @JsonKey(name: 'PrincipalName', defaultValue: '')
   String get principalName => throw _privateConstructorUsedError;
+  @JsonKey(name: 'salesDistrict', defaultValue: '')
+  String get salesDistrict => throw _privateConstructorUsedError;
 
   ///Todo: consider to delete it
   @JsonKey(
@@ -105,6 +107,7 @@ abstract class $SubmitMaterialInfoDtoCopyWith<$Res> {
       @JsonKey(name: 'PromoType', defaultValue: '') String promoType,
       @JsonKey(name: 'PrincipalCode', defaultValue: '') String principalCode,
       @JsonKey(name: 'PrincipalName', defaultValue: '') String principalName,
+      @JsonKey(name: 'salesDistrict', defaultValue: '') String salesDistrict,
       @JsonKey(
           name: 'batch',
           defaultValue: '',
@@ -151,6 +154,7 @@ class _$SubmitMaterialInfoDtoCopyWithImpl<$Res,
     Object? promoType = null,
     Object? principalCode = null,
     Object? principalName = null,
+    Object? salesDistrict = null,
     Object? batch = null,
     Object? isCounterOffer = null,
     Object? contract = null,
@@ -211,6 +215,10 @@ class _$SubmitMaterialInfoDtoCopyWithImpl<$Res,
       principalName: null == principalName
           ? _value.principalName
           : principalName // ignore: cast_nullable_to_non_nullable
+              as String,
+      salesDistrict: null == salesDistrict
+          ? _value.salesDistrict
+          : salesDistrict // ignore: cast_nullable_to_non_nullable
               as String,
       batch: null == batch
           ? _value.batch
@@ -275,6 +283,7 @@ abstract class _$$SubmitMaterialInfoDtoImplCopyWith<$Res>
       @JsonKey(name: 'PromoType', defaultValue: '') String promoType,
       @JsonKey(name: 'PrincipalCode', defaultValue: '') String principalCode,
       @JsonKey(name: 'PrincipalName', defaultValue: '') String principalName,
+      @JsonKey(name: 'salesDistrict', defaultValue: '') String salesDistrict,
       @JsonKey(
           name: 'batch',
           defaultValue: '',
@@ -321,6 +330,7 @@ class __$$SubmitMaterialInfoDtoImplCopyWithImpl<$Res>
     Object? promoType = null,
     Object? principalCode = null,
     Object? principalName = null,
+    Object? salesDistrict = null,
     Object? batch = null,
     Object? isCounterOffer = null,
     Object? contract = null,
@@ -382,6 +392,10 @@ class __$$SubmitMaterialInfoDtoImplCopyWithImpl<$Res>
           ? _value.principalName
           : principalName // ignore: cast_nullable_to_non_nullable
               as String,
+      salesDistrict: null == salesDistrict
+          ? _value.salesDistrict
+          : salesDistrict // ignore: cast_nullable_to_non_nullable
+              as String,
       batch: null == batch
           ? _value.batch
           : batch // ignore: cast_nullable_to_non_nullable
@@ -426,6 +440,8 @@ class _$SubmitMaterialInfoDtoImpl extends _SubmitMaterialInfoDto {
       required this.principalCode,
       @JsonKey(name: 'PrincipalName', defaultValue: '')
       required this.principalName,
+      @JsonKey(name: 'salesDistrict', defaultValue: '')
+      required this.salesDistrict,
       @JsonKey(
           name: 'batch',
           defaultValue: '',
@@ -498,6 +514,9 @@ class _$SubmitMaterialInfoDtoImpl extends _SubmitMaterialInfoDto {
   @override
   @JsonKey(name: 'PrincipalName', defaultValue: '')
   final String principalName;
+  @override
+  @JsonKey(name: 'salesDistrict', defaultValue: '')
+  final String salesDistrict;
 
   ///Todo: consider to delete it
   @override
@@ -520,7 +539,7 @@ class _$SubmitMaterialInfoDtoImpl extends _SubmitMaterialInfoDto {
 
   @override
   String toString() {
-    return 'SubmitMaterialInfoDto(materialNumber: $materialNumber, qty: $qty, bonuses: $bonuses, comment: $comment, parentId: $parentId, materialItemOverride: $materialItemOverride, productType: $productType, price: $price, tax: $tax, mrp: $mrp, promoStatus: $promoStatus, promoType: $promoType, principalCode: $principalCode, principalName: $principalName, batch: $batch, isCounterOffer: $isCounterOffer, contract: $contract)';
+    return 'SubmitMaterialInfoDto(materialNumber: $materialNumber, qty: $qty, bonuses: $bonuses, comment: $comment, parentId: $parentId, materialItemOverride: $materialItemOverride, productType: $productType, price: $price, tax: $tax, mrp: $mrp, promoStatus: $promoStatus, promoType: $promoType, principalCode: $principalCode, principalName: $principalName, salesDistrict: $salesDistrict, batch: $batch, isCounterOffer: $isCounterOffer, contract: $contract)';
   }
 
   @override
@@ -550,6 +569,8 @@ class _$SubmitMaterialInfoDtoImpl extends _SubmitMaterialInfoDto {
                 other.principalCode == principalCode) &&
             (identical(other.principalName, principalName) ||
                 other.principalName == principalName) &&
+            (identical(other.salesDistrict, salesDistrict) ||
+                other.salesDistrict == salesDistrict) &&
             (identical(other.batch, batch) || other.batch == batch) &&
             (identical(other.isCounterOffer, isCounterOffer) ||
                 other.isCounterOffer == isCounterOffer) &&
@@ -575,6 +596,7 @@ class _$SubmitMaterialInfoDtoImpl extends _SubmitMaterialInfoDto {
       promoType,
       principalCode,
       principalName,
+      salesDistrict,
       batch,
       isCounterOffer,
       contract);
@@ -623,6 +645,8 @@ abstract class _SubmitMaterialInfoDto extends SubmitMaterialInfoDto {
       required final String principalCode,
       @JsonKey(name: 'PrincipalName', defaultValue: '')
       required final String principalName,
+      @JsonKey(name: 'salesDistrict', defaultValue: '')
+      required final String salesDistrict,
       @JsonKey(
           name: 'batch',
           defaultValue: '',
@@ -689,6 +713,9 @@ abstract class _SubmitMaterialInfoDto extends SubmitMaterialInfoDto {
   @override
   @JsonKey(name: 'PrincipalName', defaultValue: '')
   String get principalName;
+  @override
+  @JsonKey(name: 'salesDistrict', defaultValue: '')
+  String get salesDistrict;
   @override
 
   ///Todo: consider to delete it

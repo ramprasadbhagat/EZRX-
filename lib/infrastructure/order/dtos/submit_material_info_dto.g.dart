@@ -10,7 +10,7 @@ _$SubmitMaterialInfoDtoImpl _$$SubmitMaterialInfoDtoImplFromJson(
         Map<String, dynamic> json) =>
     _$SubmitMaterialInfoDtoImpl(
       materialNumber: json['materialNumber'] as String? ?? '',
-      qty: (json['qty'] as num?)?.toInt() ?? 0,
+      qty: json['qty'] as int? ?? 0,
       bonuses: (json['bonuses'] as List<dynamic>?)
               ?.map((e) => SubmitMaterialItemBonusDto.fromJson(
                   e as Map<String, dynamic>))
@@ -28,6 +28,7 @@ _$SubmitMaterialInfoDtoImpl _$$SubmitMaterialInfoDtoImplFromJson(
       promoType: json['PromoType'] as String? ?? '',
       principalCode: json['PrincipalCode'] as String? ?? '',
       principalName: json['PrincipalName'] as String? ?? '',
+      salesDistrict: json['salesDistrict'] as String? ?? '',
       batch: json['batch'] as String? ?? '',
       isCounterOffer: json['isCounterOffer'] as bool? ?? false,
       contract: SubmitTenderContractDto.fromJson(
@@ -59,6 +60,7 @@ Map<String, dynamic> _$$SubmitMaterialInfoDtoImplToJson(
   val['PromoType'] = instance.promoType;
   val['PrincipalCode'] = instance.principalCode;
   val['PrincipalName'] = instance.principalName;
+  val['salesDistrict'] = instance.salesDistrict;
   writeNotNull('batch', overrideBatchJson(instance.batch));
   val['isCounterOffer'] = instance.isCounterOffer;
   writeNotNull('contract', overridecontractJson(instance.contract));

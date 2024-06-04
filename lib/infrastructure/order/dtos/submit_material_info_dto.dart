@@ -42,6 +42,8 @@ class SubmitMaterialInfoDto with _$SubmitMaterialInfoDto {
     required String principalCode,
     @JsonKey(name: 'PrincipalName', defaultValue: '')
     required String principalName,
+    @JsonKey(name: 'salesDistrict', defaultValue: '')
+    required String salesDistrict,
 
     ///Todo: consider to delete it
     @JsonKey(
@@ -83,6 +85,7 @@ class SubmitMaterialInfoDto with _$SubmitMaterialInfoDto {
       ),
       isCounterOffer: isCounterOffer,
       contract: contract.toDomain(),
+      salesDistrict: salesDistrict,
     );
   }
 
@@ -115,6 +118,7 @@ class SubmitMaterialInfoDto with _$SubmitMaterialInfoDto {
           submitMaterialInfo.principalData.principalName.getOrDefaultValue(''),
       isCounterOffer: submitMaterialInfo.isCounterOffer,
       contract: SubmitTenderContractDto.fromDomain(submitMaterialInfo.contract),
+      salesDistrict: submitMaterialInfo.salesDistrict,
     );
   }
 

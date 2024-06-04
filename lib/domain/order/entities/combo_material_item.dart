@@ -150,6 +150,7 @@ class ComboMaterialItem with _$ComboMaterialItem {
       principalData: materialInfo.principalData,
       isCounterOffer: false,
       contract: SubmitTenderContract.empty(),
+      salesDistrict: '',
     );
   }
 }

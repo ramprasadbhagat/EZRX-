@@ -27,6 +27,7 @@ class SubmitMaterialInfo with _$SubmitMaterialInfo {
     required PrincipalData principalData,
     required bool isCounterOffer,
     required SubmitTenderContract contract,
+    required String salesDistrict,
 
     ///Todo: consider to delete it
     required StringValue batch,
@@ -49,5 +50,6 @@ class SubmitMaterialInfo with _$SubmitMaterialInfo {
         principalData: PrincipalData.empty(),
         isCounterOffer: false,
         contract: SubmitTenderContract.empty(),
+        salesDistrict: '',
       );
 }

@@ -31,6 +31,7 @@ class SubmitOrder with _$SubmitOrder {
     required String language,
     required String paymentMethod,
     required String purchaseOrderType,
+    required String orderReason,
     required SmallOrderFeeDetail smallOrderFeeDetail,
   }) = _SubmitOrderCustomer;
 
@@ -55,6 +56,7 @@ class SubmitOrder with _$SubmitOrder {
         orderValue: 0,
         totalTax: 0,
         purchaseOrderType: '',
+        orderReason: '',
         smallOrderFeeDetail: SmallOrderFeeDetail.empty(),
       );
 }

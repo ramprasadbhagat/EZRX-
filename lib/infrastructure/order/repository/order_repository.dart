@@ -379,7 +379,11 @@ class OrderRepository implements IOrderRepository {
       poDate: DateFormat('yyyy-MM-dd').format(DateTime.now()),
       telephone: data.mobileNumber.getOrDefaultValue(''),
       collectiveNumber: '',
-      paymentTerms: data.paymentTerm.getPaymentTerm,
+      paymentTerms:
+          cartProducts.tenderContractSubmitted.contractPaymentTerm.isNotEmpty
+              ? cartProducts.tenderContractSubmitted.contractPaymentTerm
+                  .getOrDefaultValue('')
+              : data.paymentTerm.getPaymentTerm,
       customer: _getSubmitOrderCustomer(
         customerCodeInfo: customerCodeInfo,
         salesOrganisation: salesOrganisation,
@@ -404,6 +408,8 @@ class OrderRepository implements IOrderRepository {
         mpSmallOrderFee: mpSmallOrderFee,
         currency: configs.currency,
       ),
+      orderReason: cartProducts.tenderContractSubmitted.tenderOrderReason
+          .getOrDefaultValue(''),
     );
   }
 }

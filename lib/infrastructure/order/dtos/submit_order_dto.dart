@@ -43,6 +43,7 @@ class SubmitOrderDto with _$SubmitOrderDto {
     required List<PoDocumentsDto> poDocuments,
     @JsonKey(name: 'movDetails', includeIfNull: false)
     SmallOrderFeeDetailDto? smallOrderFeeDetail,
+    @JsonKey(name: 'orderReason', defaultValue: '') required String orderReason,
   }) = _SubmitOrderDto;
 
   SubmitOrder toDomain() {
@@ -69,6 +70,7 @@ class SubmitOrderDto with _$SubmitOrderDto {
       purchaseOrderType: purchaseOrderType,
       smallOrderFeeDetail:
           smallOrderFeeDetail?.toDomain ?? SmallOrderFeeDetail.empty(),
+      orderReason: orderReason,
     );
   }
 
@@ -104,6 +106,7 @@ class SubmitOrderDto with _$SubmitOrderDto {
       smallOrderFeeDetail: submitOrder.smallOrderFeeDetail.isValid
           ? SmallOrderFeeDetailDto.fromDomain(submitOrder.smallOrderFeeDetail)
           : null,
+      orderReason: submitOrder.orderReason,
     );
   }
 

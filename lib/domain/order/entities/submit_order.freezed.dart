@@ -36,6 +36,7 @@ mixin _$SubmitOrder {
   String get language => throw _privateConstructorUsedError;
   String get paymentMethod => throw _privateConstructorUsedError;
   String get purchaseOrderType => throw _privateConstructorUsedError;
+  String get orderReason => throw _privateConstructorUsedError;
   SmallOrderFeeDetail get smallOrderFeeDetail =>
       throw _privateConstructorUsedError;
 
@@ -71,6 +72,7 @@ abstract class $SubmitOrderCopyWith<$Res> {
       String language,
       String paymentMethod,
       String purchaseOrderType,
+      String orderReason,
       SmallOrderFeeDetail smallOrderFeeDetail});
 
   $SubmitOrderCustomerCopyWith<$Res> get customer;
@@ -110,6 +112,7 @@ class _$SubmitOrderCopyWithImpl<$Res, $Val extends SubmitOrder>
     Object? language = null,
     Object? paymentMethod = null,
     Object? purchaseOrderType = null,
+    Object? orderReason = null,
     Object? smallOrderFeeDetail = null,
   }) {
     return _then(_value.copyWith(
@@ -193,6 +196,10 @@ class _$SubmitOrderCopyWithImpl<$Res, $Val extends SubmitOrder>
           ? _value.purchaseOrderType
           : purchaseOrderType // ignore: cast_nullable_to_non_nullable
               as String,
+      orderReason: null == orderReason
+          ? _value.orderReason
+          : orderReason // ignore: cast_nullable_to_non_nullable
+              as String,
       smallOrderFeeDetail: null == smallOrderFeeDetail
           ? _value.smallOrderFeeDetail
           : smallOrderFeeDetail // ignore: cast_nullable_to_non_nullable
@@ -247,6 +254,7 @@ abstract class _$$SubmitOrderCustomerImplCopyWith<$Res>
       String language,
       String paymentMethod,
       String purchaseOrderType,
+      String orderReason,
       SmallOrderFeeDetail smallOrderFeeDetail});
 
   @override
@@ -286,6 +294,7 @@ class __$$SubmitOrderCustomerImplCopyWithImpl<$Res>
     Object? language = null,
     Object? paymentMethod = null,
     Object? purchaseOrderType = null,
+    Object? orderReason = null,
     Object? smallOrderFeeDetail = null,
   }) {
     return _then(_$SubmitOrderCustomerImpl(
@@ -369,6 +378,10 @@ class __$$SubmitOrderCustomerImplCopyWithImpl<$Res>
           ? _value.purchaseOrderType
           : purchaseOrderType // ignore: cast_nullable_to_non_nullable
               as String,
+      orderReason: null == orderReason
+          ? _value.orderReason
+          : orderReason // ignore: cast_nullable_to_non_nullable
+              as String,
       smallOrderFeeDetail: null == smallOrderFeeDetail
           ? _value.smallOrderFeeDetail
           : smallOrderFeeDetail // ignore: cast_nullable_to_non_nullable
@@ -401,6 +414,7 @@ class _$SubmitOrderCustomerImpl extends _SubmitOrderCustomer {
       required this.language,
       required this.paymentMethod,
       required this.purchaseOrderType,
+      required this.orderReason,
       required this.smallOrderFeeDetail})
       : _products = products,
         _poDocuments = poDocuments,
@@ -459,11 +473,13 @@ class _$SubmitOrderCustomerImpl extends _SubmitOrderCustomer {
   @override
   final String purchaseOrderType;
   @override
+  final String orderReason;
+  @override
   final SmallOrderFeeDetail smallOrderFeeDetail;
 
   @override
   String toString() {
-    return 'SubmitOrder(userName: $userName, companyName: $companyName, customer: $customer, poReference: $poReference, products: $products, poDate: $poDate, requestedDeliveryDate: $requestedDeliveryDate, specialInstructions: $specialInstructions, orderValue: $orderValue, totalTax: $totalTax, telephone: $telephone, referenceNotes: $referenceNotes, paymentTerms: $paymentTerms, collectiveNumber: $collectiveNumber, orderType: $orderType, blockOrder: $blockOrder, poDocuments: $poDocuments, language: $language, paymentMethod: $paymentMethod, purchaseOrderType: $purchaseOrderType, smallOrderFeeDetail: $smallOrderFeeDetail)';
+    return 'SubmitOrder(userName: $userName, companyName: $companyName, customer: $customer, poReference: $poReference, products: $products, poDate: $poDate, requestedDeliveryDate: $requestedDeliveryDate, specialInstructions: $specialInstructions, orderValue: $orderValue, totalTax: $totalTax, telephone: $telephone, referenceNotes: $referenceNotes, paymentTerms: $paymentTerms, collectiveNumber: $collectiveNumber, orderType: $orderType, blockOrder: $blockOrder, poDocuments: $poDocuments, language: $language, paymentMethod: $paymentMethod, purchaseOrderType: $purchaseOrderType, orderReason: $orderReason, smallOrderFeeDetail: $smallOrderFeeDetail)';
   }
 
   @override
@@ -509,6 +525,8 @@ class _$SubmitOrderCustomerImpl extends _SubmitOrderCustomer {
                 other.paymentMethod == paymentMethod) &&
             (identical(other.purchaseOrderType, purchaseOrderType) ||
                 other.purchaseOrderType == purchaseOrderType) &&
+            (identical(other.orderReason, orderReason) ||
+                other.orderReason == orderReason) &&
             (identical(other.smallOrderFeeDetail, smallOrderFeeDetail) ||
                 other.smallOrderFeeDetail == smallOrderFeeDetail));
   }
@@ -536,6 +554,7 @@ class _$SubmitOrderCustomerImpl extends _SubmitOrderCustomer {
         language,
         paymentMethod,
         purchaseOrderType,
+        orderReason,
         smallOrderFeeDetail
       ]);
 
@@ -569,6 +588,7 @@ abstract class _SubmitOrderCustomer extends SubmitOrder {
           required final String language,
           required final String paymentMethod,
           required final String purchaseOrderType,
+          required final String orderReason,
           required final SmallOrderFeeDetail smallOrderFeeDetail}) =
       _$SubmitOrderCustomerImpl;
   const _SubmitOrderCustomer._() : super._();
@@ -613,6 +633,8 @@ abstract class _SubmitOrderCustomer extends SubmitOrder {
   String get paymentMethod;
   @override
   String get purchaseOrderType;
+  @override
+  String get orderReason;
   @override
   SmallOrderFeeDetail get smallOrderFeeDetail;
   @override
