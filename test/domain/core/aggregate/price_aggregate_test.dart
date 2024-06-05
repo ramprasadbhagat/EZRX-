@@ -1,7 +1,9 @@
 import 'dart:io';
 import 'dart:convert';
 import 'package:collection/collection.dart';
+import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/cart/cart_local_datasource.dart';
+import 'package:ezrxmobile/locator.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ezrxmobile/domain/utils/num_utils.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -1144,8 +1146,10 @@ void main() {
     );
 
     test(
-      'hasMinistryOfHealthPrincipalCode from PriceAggregate',
+      'hasMinistryOfHealthPrincipalCode from PriceAggregate in Production',
       () {
+        final config = Config()..appFlavor = Flavor.prod;
+        locator.registerSingleton(config);
         final customPriceAggregate = emptyPriceAggregate.copyWith(
           materialInfo: emptyMaterialInfo.copyWith(
             principalData: PrincipalData.empty().copyWith(
@@ -1158,6 +1162,28 @@ void main() {
               .materialInfo.principalData.principalCode.isMinistryOfHealth,
           true,
         );
+        locator.unregister(instance: config);
+      },
+    );
+
+    test(
+      'hasMinistryOfHealthPrincipalCode from PriceAggregate in Uat',
+      () {
+        final config = Config()..appFlavor = Flavor.uat;
+        locator.registerSingleton(config);
+        final customPriceAggregate = emptyPriceAggregate.copyWith(
+          materialInfo: emptyMaterialInfo.copyWith(
+            principalData: PrincipalData.empty().copyWith(
+              principalCode: PrincipalCode('100777'),
+            ),
+          ),
+        );
+        expect(
+          customPriceAggregate
+              .materialInfo.principalData.principalCode.isMinistryOfHealth,
+          true,
+        );
+        locator.unregister(instance: config);
       },
     );
 

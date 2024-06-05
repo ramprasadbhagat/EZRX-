@@ -326,4 +326,13 @@ extension PriceAggregateExtension on List<PriceAggregate> {
             e.tenderContract.contractNumber.isContractNumberNotEmpty,
         orElse: () => PriceAggregate.empty(),
       ).tenderContract;
+
+  bool get containCovidMaterial => any(
+        (element) => element.isCovid,
+      );
+
+  bool get containMinistryOfHealthMaterial => any(
+        (element) =>
+            element.materialInfo.principalData.principalCode.isMinistryOfHealth,
+      );
 }

@@ -121,6 +121,7 @@ void main() {
   late AplSimulatorOrder aplSimulatorOrder;
   late PaymentCustomerInformationBloc paymentCustomerInformationMock;
   late List<PriceAggregate> mockCartItemWithAllType;
+  late Config config;
   final routeData = RouteData(
     route: const RouteMatch(
       name: 'CartsPageRoute',
@@ -161,6 +162,7 @@ void main() {
         (await CartLocalDataSource().upsertCartItemsWithComboOffers())
             .comboMaterialItemList;
     aplSimulatorOrder = await CartLocalDataSource().aplGetTotalPrice();
+    config = locator<Config>();
   });
   setUp(
     () async {
@@ -3349,14 +3351,14 @@ void main() {
       });
 
       testWidgets(
-          'Skip MOV check if cart contains any product with principal code 100822 for SG market',
+          'Skip MOV check if cart contains any product with principal Ministry Of Health for SG market',
           (tester) async {
         when(() => autoRouterMock.pushNamed('orders/cart/checkout'))
             .thenAnswer((invocation) => Future(() => checkoutPageRouteData));
         final mockMinistryOfHealthCartItem = mockCartItems.first.copyWith(
           materialInfo: MaterialInfo.empty().copyWith(
             principalData: PrincipalData.empty().copyWith(
-              principalCode: PrincipalCode('100822'),
+              principalCode: PrincipalCode('100777'),
             ),
           ),
         );
@@ -3399,7 +3401,7 @@ void main() {
       });
 
       testWidgets(
-          'MOV check if cart does not contains any product with principal code 100822 for SG market',
+          'MOV check if cart does not contains any product with principal Ministry Of Health for SG market',
           (tester) async {
         final cartProduct = [
           mockCartItems.first.copyWith(

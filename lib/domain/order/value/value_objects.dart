@@ -895,7 +895,7 @@ class ItemRegistrationNumber extends ValueObject<String> {
   factory ItemRegistrationNumber(String input) =>
       ItemRegistrationNumber._(validateStringNotEmpty(input));
 
-  String get displayDashIfEmpty => dashIfEmpty((value.getOrElse(() => '')));    
+  String get displayDashIfEmpty => dashIfEmpty((value.getOrElse(() => '')));
 
   bool get isNotEmpty => value.getOrElse(() => '').isNotEmpty;
 

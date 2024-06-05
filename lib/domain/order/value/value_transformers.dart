@@ -1,7 +1,9 @@
+import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/core/value/value_transformers.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_step.dart';
 import 'package:ezrxmobile/domain/order/entities/price_bonus.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
+import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/svg_image.dart';
 import 'package:flutter/material.dart';
 
@@ -58,7 +60,7 @@ bool havingPrincipalCodeForAllMaterial(String principalCode) =>
     principalCode == '0000000000';
 
 bool havingMinistryOfHealthPrincipalCode(String principalCode) =>
-    principalCode == '100822';
+    principalCode == locator<Config>().ministryOfHealthPrincipalCode;
 
 bool havingSubmitPrincipalForSalesRep(String principalCode) =>
     principalCode == '100225' || principalCode == '101252';

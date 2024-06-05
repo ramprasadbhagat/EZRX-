@@ -1,5 +1,6 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:ezrxmobile/application/order/order_eligibility/order_eligibility_bloc.dart';
+import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
@@ -9,6 +10,7 @@ import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/cart/cart_local_datasource.dart';
+import 'package:ezrxmobile/locator.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import '../../../common_mock_data/customer_code_mock.dart';
@@ -26,6 +28,10 @@ void main() {
   group(
     'Test Order Eligibility Bloc',
     () {
+      setUpAll(() {
+        final config = Config()..appFlavor = Flavor.uat;
+        locator.registerSingleton(config);
+      });
       setUp(
         () async {
           fakeCartItem = (await CartLocalDataSource().upsertCartItems())[0];

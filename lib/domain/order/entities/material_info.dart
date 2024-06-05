@@ -182,8 +182,10 @@ class MaterialInfo with _$MaterialInfo {
           ? data.first.governmentMaterialCode
           : governmentMaterialCode;
 
-  String combinationCode(
-          {required bool showGMCPart, required bool showIRNPart,}) =>
+  String combinationCode({
+    required bool showGMCPart,
+    required bool showIRNPart,
+  }) =>
       <String>[
         materialNumber.displayMatNo,
         if (showGMCPart && getGMC.isNotEmpty) getGMC.getValue(),

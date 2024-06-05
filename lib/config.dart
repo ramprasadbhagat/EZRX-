@@ -480,4 +480,14 @@ class Config {
 
     return contactUsEmailMap[country] ?? 'support@ezrxplus.com';
   }
+
+  String get ministryOfHealthPrincipalCode {
+    switch (appFlavor) {
+      case Flavor.prod:
+        return '100822';
+      case Flavor.uat:
+      default:
+        return '100777';
+    }
+  }
 }

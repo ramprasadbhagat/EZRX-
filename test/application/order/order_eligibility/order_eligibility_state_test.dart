@@ -1,4 +1,6 @@
+import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
+import 'package:ezrxmobile/locator.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ezrxmobile/domain/order/entities/bundle.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
@@ -28,6 +30,11 @@ void main() {
   late List<PriceAggregate> mockMaterialsCartItems;
   late List<PriceAggregate> fakeCart;
   group('Test OrderEligibilityState', () {
+    setUpAll(() {
+      final config = Config()..appFlavor = Flavor.uat;
+      locator.registerSingleton(config);
+    });
+
     setUp(
       () async {
         fakeCart = (await CartLocalDataSource().getAddedToCartProductList())

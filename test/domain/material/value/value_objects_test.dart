@@ -1,5 +1,7 @@
+import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
+import 'package:ezrxmobile/locator.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
@@ -20,21 +22,26 @@ void main() {
   });
 
   group('Principal Code value object', () {
-    test('should return true when principal code submit allowed for client',
+    test('Principal code of ministry Of Health in production should be 100822',
         () async {
+      final config = Config()..appFlavor = Flavor.prod;
+      locator.registerSingleton(config);
       const input = '0000000000100822';
       final principalCode = PrincipalCode(input);
       final result = principalCode.isMinistryOfHealth;
       expect(result, true);
+      locator.unregister(instance: config);
     });
 
-    test(
-        'should return false when principal code submit not allowed for client',
+    test('Principal code of ministry Of Health in Uat should be 100777',
         () async {
-      const input = '0000000000150822';
+      final config = Config()..appFlavor = Flavor.uat;
+      locator.registerSingleton(config);
+      const input = '0000000000100777';
       final principalCode = PrincipalCode(input);
       final result = principalCode.isMinistryOfHealth;
-      expect(result, false);
+      expect(result, true);
+      locator.unregister(instance: config);
     });
 
     test('should return true when principal code submit allowed for sales rep',

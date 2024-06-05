@@ -307,9 +307,8 @@ class OrderEligibilityState with _$OrderEligibilityState {
     return customerCodeInfo.status.isSuspended || shipInfo.status.isSuspended;
   }
 
-  bool get _hasMinistryOfHealthProduct => cartItems.any(
-        (e) => e.materialInfo.principalData.principalCode.isMinistryOfHealth,
-      );
+  bool get _hasMinistryOfHealthProduct =>
+      cartItems.containMinistryOfHealthMaterial;
 
   bool get _hasPrincipal =>
       user.role.type.isExternalSalesRep &&
@@ -394,6 +393,11 @@ class OrderEligibilityState with _$OrderEligibilityState {
     if (!zpSmallOrderFeeEnable) return false;
     if (displayAtLeastOneZPItemInStockWarning) return false;
     if (cartItems.zpMaterialOnly.isMOVExclusion) return false;
+
+    if (cartItems.zpMaterialOnly.containCovidMaterial) return false;
+
+    if (cartItems.zpMaterialOnly.containMinistryOfHealthMaterial &&
+        configs.salesOrg.isSg) return false;
 
     return cartItems.zpMaterialOnly.subtotalWithInStockOnly <
         configs.sapMinOrderAmount;

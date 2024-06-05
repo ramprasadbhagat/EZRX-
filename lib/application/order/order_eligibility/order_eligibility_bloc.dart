@@ -37,7 +37,6 @@ class OrderEligibilityBloc
           salesOrg: e.salesOrg,
           shipInfo: e.shipInfo,
           user: e.user,
-          showErrorMessage: false,
         ),
       ),
       update: (e) async => emit(
