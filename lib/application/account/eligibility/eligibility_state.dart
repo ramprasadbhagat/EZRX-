@@ -370,8 +370,4 @@ class EligibilityState with _$EligibilityState {
           !salesOrgConfigs.statementOfAccountEnabled
       ? 0.45
       : 0.3;
-
-  String get invalidSelectedReturnItemMsg => marketPlaceEligible
-      ? 'Please note that ZP and MP products cannot be returned together. Additionally, MP products must be from the same seller in each request.'
-      : 'Please ensure that the items selected for return are from the same Principal.';
 }

@@ -34,6 +34,7 @@ import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 
 import '../../../common_mock_data/customer_code_mock.dart';
+import '../../../common_mock_data/sales_organsiation_mock.dart';
 import '../../../common_mock_data/user_mock.dart';
 import '../../../utils/widget_utils.dart';
 
@@ -214,7 +215,19 @@ void main() {
           ],
         ),
       );
-
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          customerCodeInfo: fakeCustomerCodeInfo.copyWith(
+            isMarketPlace: true,
+          ),
+          user: fakeRootAdminUser.copyWith(
+            acceptMPTC: MarketPlaceTnCAcceptance.accept(),
+          ),
+          salesOrgConfigs: fakeSalesOrganisationConfigs.copyWith(
+            enableMarketPlace: true,
+          ),
+        ),
+      );
       await tester.pumpWidget(getScopedWidget());
       await tester.pumpAndSettle();
       final cannotMoveToNextStep = find.byKey(WidgetKeys.cannotMoveToNextStep);
@@ -227,8 +240,9 @@ void main() {
         ),
         findsNothing,
       );
-      final invalidSelectedReturnItemError =
-          find.byKey(WidgetKeys.invalidSelectedReturnItemError);
+      final invalidSelectedReturnItemError = find.text(
+        'Please ensure that the items selected for return are from the same Principal.',
+      );
       expect(invalidSelectedReturnItemError, findsOneWidget);
     });
 
@@ -248,7 +262,19 @@ void main() {
           ],
         ),
       );
-
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          customerCodeInfo: fakeCustomerCodeInfo.copyWith(
+            isMarketPlace: true,
+          ),
+          user: fakeRootAdminUser.copyWith(
+            acceptMPTC: MarketPlaceTnCAcceptance.accept(),
+          ),
+          salesOrgConfigs: fakeSalesOrganisationConfigs.copyWith(
+            enableMarketPlace: true,
+          ),
+        ),
+      );
       await tester.pumpWidget(getScopedWidget());
       await tester.pumpAndSettle();
       final cannotMoveToNextStep = find.byKey(WidgetKeys.cannotMoveToNextStep);
@@ -261,8 +287,9 @@ void main() {
         ),
         findsNothing,
       );
-      final invalidSelectedReturnItemError =
-          find.byKey(WidgetKeys.invalidSelectedReturnItemError);
+      final invalidSelectedReturnItemError = find.text(
+        'Please note that ZP and MP products cannot be returned together. Additionally, MP products must be from the same seller in each request.',
+      );
       expect(invalidSelectedReturnItemError, findsOneWidget);
     });
 
