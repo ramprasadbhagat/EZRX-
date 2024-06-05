@@ -21,11 +21,6 @@ class _ReturnMaterialWidget extends StatelessWidget {
                       item: data,
                     ),
                   );
-              context.read<NewRequestBloc>().add(
-                    const NewRequestEvent.validateStep(
-                      step: 1,
-                    ),
-                  );
             },
             value: state.selectedItems.contains(data),
             body: _ReturnMaterialInfo(data: data),

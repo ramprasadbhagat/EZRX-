@@ -1,5 +1,6 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/product_image/product_image_bloc.dart';
@@ -797,6 +798,33 @@ void main() {
         ),
       ).called(1);
       expect(autoRouterMock.current.path, 'returns/new_request_successful');
+    });
+
+    testWidgets(' => hide error if showErrorMessages is false',
+        (WidgetTester tester) async {
+      when(() => newRequestBlocMock.state).thenReturn(
+        NewRequestState.initial().copyWith(
+          selectedItems: [
+            ReturnMaterial.empty().copyWith(principalCode: PrincipalCode('1')),
+            ReturnMaterial.empty().copyWith(principalCode: PrincipalCode('2')),
+          ],
+        ),
+      );
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pump();
+      final invalidSelectedReturnItemError =
+          find.byKey(WidgetKeys.invalidSelectedReturnItemError);
+
+      expect(
+        find.descendant(
+          of: invalidSelectedReturnItemError,
+          matching: find.text(
+            'Please ensure that the items selected for return are from the same Principal.'
+                .tr(),
+          ),
+        ),
+        findsNothing,
+      );
     });
   });
 }

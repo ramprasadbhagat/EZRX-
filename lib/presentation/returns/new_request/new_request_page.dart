@@ -192,6 +192,7 @@ class NewRequestPage extends StatelessWidget {
                                   state.invalidSelectedReturnItemMsg,
                                 ),
                                 visible: step == 1 &&
+                                    state.showErrorMessages &&
                                     state.areSelectedReturnItemsInvalid,
                               ),
                               if (step == 1)

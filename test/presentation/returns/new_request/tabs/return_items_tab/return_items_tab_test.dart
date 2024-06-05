@@ -390,13 +390,6 @@ void main() {
           ),
         ),
       ).called(1);
-      verify(
-        () => newRequestBlocMock.add(
-          const NewRequestEvent.validateStep(
-            step: 1,
-          ),
-        ),
-      ).called(1);
     });
 
     testWidgets('=> Search Bar Test', (tester) async {
