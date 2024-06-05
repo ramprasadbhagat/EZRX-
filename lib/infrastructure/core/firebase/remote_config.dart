@@ -36,9 +36,6 @@ class RemoteConfigService {
     }
   }
 
-  bool get enableAccountStatementQuery =>
-      _remoteConfig.getBool(RemoteConfigConstants.enableAccountStatementQuery);
-
   List<String> get enableMarketPlaceMarkets {
     final configAsJson = jsonDecode(
       _remoteConfig
@@ -67,7 +64,6 @@ class RemoteConfigService {
         RemoteConfigConstants.enableMarketPlace: jsonEncode(
           MPRemoteConfigDto.fromDomain(MPRemoteConfig.empty()).toJson(),
         ),
-        RemoteConfigConstants.enableAccountStatementQuery: false,
         RemoteConfigConstants.enablePromotion: jsonEncode(
           PromotionRemoteConfigDto.fromDomain(PromotionRemoteConfig.empty())
               .toJson(),

@@ -37,15 +37,12 @@ void main() {
   final fakeEnablePromotionBlacklist = ['ID'];
 
   final fakeConfigValue = fakeEnableMarketPlaceMarkets.contains(fakeMarket);
-  const fakeAccountStatementConfigDisable = false;
 
   setUpAll(
     () {
       WidgetsFlutterBinding.ensureInitialized();
       when(() => remoteConfigService.enableMarketPlaceMarkets)
           .thenReturn(fakeEnableMarketPlaceMarkets);
-      when(() => remoteConfigService.enableAccountStatementQuery)
-          .thenReturn(fakeAccountStatementConfigDisable);
       when(() => remoteConfigService.enablePromotionBlacklist)
           .thenReturn(fakeEnablePromotionBlacklist);
       remoteDataSource = SalesOrgRemoteDataSource(
@@ -79,7 +76,6 @@ void main() {
             'query':
                 remoteDataSource.salesOrgQueryMutation.getSalesOrgConfigsQuery(
               fakeConfigValue,
-              fakeAccountStatementConfigDisable,
             ),
             'variables': {
               'request': {'salesOrg': saleOrgName},
@@ -116,7 +112,6 @@ void main() {
             'query':
                 remoteDataSource.salesOrgQueryMutation.getSalesOrgConfigsQuery(
               fakeConfigValue,
-              fakeAccountStatementConfigDisable,
             ),
             'variables': {
               'request': {'salesOrg': saleOrgName},
@@ -153,7 +148,6 @@ void main() {
             'query':
                 remoteDataSource.salesOrgQueryMutation.getSalesOrgConfigsQuery(
               fakeConfigValue,
-              fakeAccountStatementConfigDisable,
             ),
             'variables': {
               'request': {'salesOrg': saleOrgName},
@@ -186,7 +180,6 @@ void main() {
             'query':
                 remoteDataSource.salesOrgQueryMutation.getSalesOrgConfigsQuery(
               fakeConfigValue,
-              fakeAccountStatementConfigDisable,
             ),
             'variables': {
               'request': {'salesOrg': saleOrgName},
@@ -224,7 +217,6 @@ void main() {
             'query':
                 remoteDataSource.salesOrgQueryMutation.getSalesOrgConfigsQuery(
               fakeConfigValue,
-              fakeAccountStatementConfigDisable,
             ),
             'variables': {
               'request': {'salesOrg': saleOrgName},
@@ -262,7 +254,6 @@ void main() {
             'query':
                 remoteDataSource.salesOrgQueryMutation.getSalesOrgConfigsQuery(
               fakeConfigValue,
-              fakeAccountStatementConfigDisable,
             ),
             'variables': {
               'request': {'salesOrg': saleOrgName},
