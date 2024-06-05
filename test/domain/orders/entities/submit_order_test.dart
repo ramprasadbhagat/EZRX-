@@ -12,6 +12,16 @@ void main() {
         fakePurchaseOrderType,
       );
     });
+
+    test('Order reason', () {
+      const fakeOrderReason = 'fake-order-reason';
+      final submitOrder =
+          SubmitOrder.empty().copyWith(orderReason: fakeOrderReason);
+      expect(
+        submitOrder.orderReason,
+        fakeOrderReason,
+      );
+    });
   });
 
   group('SmallOrderFeeDetail test -', () {

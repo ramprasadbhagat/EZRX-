@@ -145,6 +145,10 @@ void main() {
         MaterialItemOverrideDto.fromPriceAggregate(emptyPriceAggregate)
             .toDomain(),
       );
+      expect(
+        submitMaterialInfo.salesDistrict,
+        emptyPriceAggregate.tenderContract.salesDistrict.getOrDefaultValue(''),
+      );
     });
 
     test(
@@ -2594,6 +2598,31 @@ void main() {
         [fakePriceAggregateList.first, fakePriceAggregateList.first]
             .showManufacturerName(1),
         false,
+      );
+    });
+
+    test('tenderContractSubmitted', () {
+      final firstAggregate = PriceAggregate.empty().copyWith(
+        tenderContract: TenderContract.empty().copyWith(
+          contractNumber: TenderContractNumber.tenderContractNumber(
+            'fake-contract-number-1',
+          ),
+        ),
+      );
+      final lastAggregate = PriceAggregate.empty().copyWith(
+        tenderContract: TenderContract.empty().copyWith(
+          contractNumber: TenderContractNumber.tenderContractNumber(
+            'fake-contract-number-2',
+          ),
+        ),
+      );
+      final tenderPriceAggregateList = [
+        firstAggregate,
+        lastAggregate,
+      ];
+      expect(
+        tenderPriceAggregateList.tenderContractSubmitted,
+        lastAggregate.tenderContract,
       );
     });
   });

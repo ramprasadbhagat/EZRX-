@@ -5,7 +5,7 @@ import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-
+  const fakeSaleDistrict = 'fake-sale-district';
   late dynamic data;
   group('Test bundleInfoDto ', () {
     setUp(() async {
@@ -27,6 +27,7 @@ void main() {
         ],
         'override': <String, dynamic>{},
         'contract': <String, dynamic>{},
+        'salesDistrict': fakeSaleDistrict,
       };
     });
     test('Test fromDomain', () {
@@ -35,12 +36,14 @@ void main() {
       );
 
       expect(configsDto.materialNumber, '1234');
+      expect(configsDto.salesDistrict, fakeSaleDistrict);
     });
 
     test('Test toDomain', () {
       final configsDto = SubmitMaterialInfoDto.fromJson(data).toDomain();
 
       expect(configsDto.materialNumber.getOrCrash(), '1234');
+      expect(configsDto.salesDistrict, fakeSaleDistrict);
     });
 
     test('Test toJson', () {
@@ -49,6 +52,7 @@ void main() {
       ).toJson();
 
       expect(configsDto['qty'], 20);
+      expect(configsDto['salesDistrict'], fakeSaleDistrict);
     });
 
     test('Test overridetojson', () {

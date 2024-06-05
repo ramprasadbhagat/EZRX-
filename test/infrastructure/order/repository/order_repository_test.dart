@@ -1106,6 +1106,106 @@ void main() {
         expect(result, Right(submitOrderResponseMock));
       },
     );
+
+    test('get submit order successfully Remote success with tender contract',
+        () async {
+      when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
+
+      final materialListResponse =
+          await MaterialListLocalDataSource().getProductList();
+
+      final cartMaterialsTenderContract = materialListResponse.products
+          .map(
+            (e) => PriceAggregate.empty().copyWith(
+              materialInfo: e.copyWith(
+                type: MaterialInfoType.material(),
+              ),
+              salesOrgConfig: fakeVNSalesOrgConfigs,
+              quantity: 1,
+              tenderContract: TenderContract.empty().copyWith(
+                contractPaymentTerm: StringValue('fake-payment-term'),
+                tenderOrderReason: TenderContractReason('fake-reason'),
+                contractNumber:
+                    TenderContractNumber.tenderContractNumber('fake-number'),
+              ),
+            ),
+          )
+          .toList();
+      final submitOrderTenderContractMock = SubmitOrder.empty().copyWith(
+        purchaseOrderType: fakeClientUser.role.type.purchaseOrderType,
+        paymentMethod: 'Bank Transfer',
+        orderValue: 210.0,
+        totalTax: 0.0,
+        orderType: 'ZPOR',
+        userName: deliveryInfoData.contactPerson.getValue().isNotEmpty
+            ? deliveryInfoData.contactPerson.getValue()
+            : fakeClientUser.fullName.toString(),
+        poReference: deliveryInfoData.poReference.getValue(),
+        referenceNotes: deliveryInfoData.referenceNote.getValue(),
+        specialInstructions: deliveryInfoData.deliveryInstruction.getValue(),
+        companyName: CompanyName(mockShipToInfo.shipToName.toString()),
+        requestedDeliveryDate: fakeVNSalesOrgConfigs.enableFutureDeliveryDay
+            ? deliveryInfoData.deliveryDate.getValue()
+            : '',
+        poDate: DateFormat('yyyy-MM-dd').format(DateTime.now()),
+        telephone: deliveryInfoData.mobileNumber.getOrDefaultValue(''),
+        collectiveNumber: '',
+        paymentTerms: 'fake-payment-term',
+        customer: SubmitOrderCustomer.empty().copyWith(
+          customerNumber: fakeCustomerCodeInfo.customerCodeSoldTo,
+          customerNumberShipTo: mockShipToInfo.shipToCustomerCode,
+          division: fakeCustomerCodeInfo.division,
+          salesOrganisation: fakeSalesOrganisation.salesOrg.getOrCrash(),
+        ),
+        language: 'EN',
+        blockOrder: fakeVNSalesOrgConfigs.enablePrincipalList,
+        products: cartMaterialsTenderContract
+            .expand(
+              (element) => [element.toSubmitMaterialInfo()],
+            )
+            .toList(),
+        orderReason: 'fake-reason',
+      );
+      when(() => mockConfig.orderEncryptionSecret).thenReturn(fakeSecretKey);
+      when(
+        () => encryption.encryptionData(
+          data: SubmitOrderDto.fromDomain(
+            submitOrderTenderContractMock,
+          ).toJson(),
+          secretKey: fakeSecretKey,
+        ),
+      ).thenReturn(orderEncryptionMock);
+      when(
+        () => orderRemoteDataSource.submitOrder(
+          orderEncryption: orderEncryptionMock,
+          enableMarketPlace: fakeConfigValue,
+        ),
+      ).thenAnswer(
+        (invocation) async => submitOrderResponseMock,
+      );
+
+      final result = await orderRepository.submitOrder(
+        shipToInfo: mockShipToInfo,
+        user: fakeClientUser,
+        cartProducts: cartMaterialsTenderContract,
+        grandTotal: 210.0,
+        orderValue: 210.0,
+        aplSmallOrderFee: 12500.0,
+        totalTax: 0.0,
+        customerCodeInfo: fakeCustomerCodeInfo,
+        salesOrganisation: fakeSalesOrganisation,
+        data: deliveryInfoData,
+        orderDocumentType: OrderDocumentType.empty()
+            .copyWith(documentType: DocumentType('ZPOR'), orderReason: ''),
+        configs: fakePHSalesOrgConfigs,
+        mpSmallOrderFee: 0,
+        zpSmallOrderFee: 0,
+      );
+      expect(
+        result,
+        Right(submitOrderResponseMock),
+      );
+    });
   });
   test(
       'submit order should contain deliveryFee as null string in ID market when order valye is >=300000.00',

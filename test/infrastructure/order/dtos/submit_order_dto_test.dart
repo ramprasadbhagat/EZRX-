@@ -7,6 +7,7 @@ void main() {
   WidgetsFlutterBinding.ensureInitialized();
   late dynamic data;
   const fakePurchaseOrderType = 'fake-purchase-order-type';
+  const fakeOrderReason = 'fake-order-reason';
   group('Test submitorderdto ', () {
     setUp(() async {
       data = {
@@ -14,6 +15,7 @@ void main() {
         'companyName': 'test-name',
         'PurchaseOrderType': fakePurchaseOrderType,
         'customer': <String, dynamic>{},
+        'orderReason': fakeOrderReason,
       };
     });
     test('Test toDomain', () {
@@ -21,6 +23,7 @@ void main() {
 
       expect(configs.companyName.getOrCrash(), 'test-name');
       expect(configs.purchaseOrderType, fakePurchaseOrderType);
+      expect(configs.orderReason, fakeOrderReason);
     });
 
     test('Test fromDomain', () {
@@ -29,6 +32,7 @@ void main() {
       );
       expect(configsDto.companyName, 'test-name');
       expect(configsDto.purchaseOrderType, fakePurchaseOrderType);
+      expect(configsDto.orderReason, fakeOrderReason);
     });
 
     test('Test toJson', () {
@@ -37,6 +41,7 @@ void main() {
       ).toJson();
       expect(configsDto['companyName'], 'test-name');
       expect(configsDto['PurchaseOrderType'], fakePurchaseOrderType);
+      expect(configsDto['orderReason'], fakeOrderReason);
     });
 
     test(
