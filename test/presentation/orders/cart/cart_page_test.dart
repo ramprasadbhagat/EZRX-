@@ -997,7 +997,7 @@ void main() {
 
           final taxLevelFinder = find.text('Total with tax:');
           expect(taxLevelFinder, findsNothing);
-          expect(cartBloc.state.grandTotalForSubmission, 257.95);
+          expect(cartBloc.state.totalPriceWithTaxExcludeSmallOrderFees, 257.95);
         },
       );
 

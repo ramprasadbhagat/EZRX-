@@ -4382,7 +4382,7 @@ void main() {
             cartProducts: [priceAggregates.first.copyWith(price: prices.first)],
           );
           expect(
-            cartBlocState.grandTotalForSubmission,
+            cartBlocState.totalPriceWithTaxExcludeSmallOrderFees,
             273.6,
           );
         },
@@ -4880,7 +4880,7 @@ void main() {
             ],
           );
           expect(
-            cartBlocState.grandTotalForSubmission,
+            cartBlocState.totalPriceWithTaxExcludeSmallOrderFees,
             273.6,
           );
         },

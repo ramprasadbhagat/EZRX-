@@ -45,7 +45,6 @@ import 'package:ezrxmobile/infrastructure/core/common/tracking_events.dart';
 import 'package:ezrxmobile/infrastructure/core/common/tracking_properties.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/cart/cart_local_datasource.dart';
-import 'package:ezrxmobile/infrastructure/order/datasource/material_price_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/payment_customer_information_local.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/address_info_section.dart';
@@ -98,7 +97,6 @@ void main() {
   late List<PriceAggregate> mockCartItems;
   late List<PriceAggregate> mockCartBundleItems;
   late Bundle fakeBundleList;
-  late List<Price> priceList;
   late AplSimulatorOrder aplSimulatorOrder;
   late CustomerLicenseBloc customerLicenseBlocMock;
   late PaymentCustomerInformationBloc paymentCustomerInformationBlocMock;
@@ -151,7 +149,6 @@ void main() {
     mockCartBundleItems = await CartLocalDataSource().upsertCartItems();
     mockCartItems =
         (await CartLocalDataSource().getAddedToCartProductList()).cartProducts;
-    priceList = await MaterialPriceLocalDataSource().getPriceList();
     aplSimulatorOrder = await CartLocalDataSource().aplSimulateOrder();
     fakeBundleList = Bundle.empty().copyWith(
       materials: [
@@ -2644,7 +2641,6 @@ void main() {
             cartProducts: [
               mockCartItems.first.copyWith(
                 salesOrgConfig: currentSalesOrgConfigVariant,
-                price: priceList.first,
                 quantity: 1,
               ),
             ],
@@ -2676,7 +2672,9 @@ void main() {
               currentSalesOrgConfigVariant,
               currentSalesOrgConfigVariant.salesOrg.isID
                   ? aplSimulatorOrder.totalPriceWithoutTax
-                  : priceList.first.finalPrice.getValue(),
+                  : currentSalesOrgConfigVariant.displaySubtotalTaxBreakdown
+                      ? mockCartItems.first.finalPrice
+                      : mockCartItems.first.finalPriceTotalWithTax,
               false,
             ),
             findRichText: true,

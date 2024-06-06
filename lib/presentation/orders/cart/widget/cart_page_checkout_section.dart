@@ -169,7 +169,8 @@ class _CartPageCheckoutButton extends StatelessWidget {
       trackMixpanelEvent(
         TrackingEvents.checkoutSuccess,
         props: {
-          TrackingProps.grandTotal: cartState.grandTotalForSubmission,
+          TrackingProps.grandTotal:
+              cartState.totalPriceWithTaxExcludeSmallOrderFees,
           TrackingProps.totalQty: cartState.totalCartCount,
         },
       );
@@ -190,7 +191,8 @@ class _CartPageCheckoutButton extends StatelessWidget {
       trackMixpanelEvent(
         TrackingEvents.checkoutFailure,
         props: {
-          TrackingProps.grandTotal: cartState.grandTotalForSubmission,
+          TrackingProps.grandTotal:
+              cartState.totalPriceWithTaxExcludeSmallOrderFees,
           TrackingProps.totalQty: cartState.totalCartCount,
           TrackingProps.errorMessage:
               orderEligibilityState.orderEligibleTrackingErrorMessage,

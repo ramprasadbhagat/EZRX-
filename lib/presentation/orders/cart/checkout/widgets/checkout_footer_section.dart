@@ -54,7 +54,8 @@ class _CheckoutFooterSection extends StatelessWidget {
                   context.read<OrderSummaryBloc>().add(
                         OrderSummaryEvent.submitOrder(
                           cartProducts: cartState.cartProducts,
-                          grandTotal: cartState.grandTotalForSubmission,
+                          grandTotal:
+                              cartState.totalPriceWithTaxExcludeSmallOrderFees,
                           orderValue:
                               cartState.checkoutSubTotalHidePriceMaterial,
                           aplSmallOrderFee:

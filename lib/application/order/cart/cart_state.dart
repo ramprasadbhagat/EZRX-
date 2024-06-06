@@ -153,25 +153,20 @@ class CartState with _$CartState {
   }
 
   //Product tax
-  double get taxMaterial => config.displaySubtotalTaxBreakdown
-      ? cartProducts
-          .where(
-            (item) =>
-                !item.materialInfo.hidePrice &&
-                !item.materialInfo.type.typeBundle &&
-                !item.materialInfo.type.typeCombo &&
-                !item.materialInfo.taxClassification.isNoTax,
-          )
-          .fold<double>(
-            0,
-            (sum, item) =>
-                sum +
-                (item.finalPrice *
-                    item.quantity *
-                    _totalTaxPercentInDouble /
-                    100),
-          )
-      : 0.0;
+  double get taxMaterial => cartProducts
+      .where(
+        (item) =>
+            !item.materialInfo.hidePrice &&
+            !item.materialInfo.type.typeBundle &&
+            !item.materialInfo.type.typeCombo &&
+            !item.materialInfo.taxClassification.isNoTax,
+      )
+      .fold<double>(
+        0,
+        (sum, item) =>
+            sum +
+            (item.finalPrice * item.quantity * _totalTaxPercentInDouble / 100),
+      );
 
   /*
     It's there just as a placeholder but for now we don't have much clarity 
@@ -187,25 +182,23 @@ class CartState with _$CartState {
             (element.bundle.totalPrice * element.salesOrgConfig.vatValue / 100),
       );
 
-  double get taxCombo => config.displaySubtotalTaxBreakdown
-      ? cartProducts
-          .where(
-            (item) => item.materialInfo.type.typeCombo,
-          )
-          .fold<double>(
-            0,
-            (sum, item) =>
-                sum +
-                item.comboMaterials
-                    .where(
-                      (item) => !item.materialInfo.hidePrice,
-                    )
-                    .fold<double>(
-                      0,
-                      (sum, comboMaterial) => sum + comboMaterial.itemTax,
-                    ),
-          )
-      : 0.0;
+  double get taxCombo => cartProducts
+      .where(
+        (item) => item.materialInfo.type.typeCombo,
+      )
+      .fold<double>(
+        0,
+        (sum, item) =>
+            sum +
+            item.comboMaterials
+                .where(
+                  (item) => !item.materialInfo.hidePrice,
+                )
+                .fold<double>(
+                  0,
+                  (sum, comboMaterial) => sum + comboMaterial.itemTax,
+                ),
+      );
 
   double get totalTax =>
       _isID ? aplSimulatorOrder.totalTax : taxMaterial + taxCombo + taxBundle;
@@ -258,7 +251,7 @@ class CartState with _$CartState {
       totalComboPriceWithTax;
 
   //This getter is used for submit order API
-  double get grandTotalForSubmission => _isID
+  double get totalPriceWithTaxExcludeSmallOrderFees => _isID
       ? aplSimulatorOrder.grandTotal
       : totalBundlePriceWithTax +
           totalComboPriceWithTax +
@@ -280,8 +273,9 @@ class CartState with _$CartState {
   double get zpSubTotalHidePriceMaterial =>
       totalZPBundlesPrice + totalZPComboPrice + totalZPMaterialsPriceHidePrice;
 
-  double get subTotalHidePriceMaterial =>
-      totalBundlesPrice + totalComboPrice + totalMaterialsPriceHidePrice;
+  double get subTotalHidePriceMaterial => config.displaySubtotalTaxBreakdown
+      ? totalBundlesPrice + totalComboPrice + totalMaterialsPriceHidePrice
+      : totalPriceWithTaxExcludeSmallOrderFees;
 
   //This getter is used for displaying subtotal value in checkout page
   double get checkoutSubTotalHidePriceMaterial => _isID
