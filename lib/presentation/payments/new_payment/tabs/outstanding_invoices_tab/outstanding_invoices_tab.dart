@@ -31,7 +31,7 @@ import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dar
 part 'package:ezrxmobile/presentation/payments/new_payment/tabs/outstanding_invoices_tab/widgets/outstanding_invoices_search_bar.dart';
 
 class OutstandingInvoicesTab extends StatelessWidget {
-  const OutstandingInvoicesTab({Key? key}) : super(key: key);
+  const OutstandingInvoicesTab({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -148,9 +148,8 @@ class OutstandingInvoicesTab extends StatelessWidget {
 
 class _PaymentItem extends StatelessWidget {
   const _PaymentItem({
-    Key? key,
     required this.data,
-  }) : super(key: key);
+  });
 
   final CustomerOpenItem data;
 

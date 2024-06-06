@@ -18,9 +18,8 @@ class OverlayRouter<T> extends OverlayRoute<T> {
 
   OverlayRouter({
     required this.snackBar,
-    RouteSettings? settings,
-  })  : _builder = Builder(builder: (BuildContext innerContext) => snackBar),
-        super(settings: settings) {
+    super.settings,
+  })  : _builder = Builder(builder: (BuildContext innerContext) => snackBar) {
     _configureAlignment();
   }
 

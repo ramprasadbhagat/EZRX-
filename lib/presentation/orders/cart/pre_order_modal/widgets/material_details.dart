@@ -2,7 +2,7 @@ part of 'package:ezrxmobile/presentation/orders/cart/pre_order_modal/pre_order_m
 
 class _MaterialDetails extends StatelessWidget {
   final PriceAggregate cartItem;
-  const _MaterialDetails({Key? key, required this.cartItem}) : super(key: key);
+  const _MaterialDetails({required this.cartItem});
 
   @override
   Widget build(BuildContext context) {

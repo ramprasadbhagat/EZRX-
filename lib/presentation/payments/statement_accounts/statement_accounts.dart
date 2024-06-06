@@ -42,9 +42,9 @@ class StatementAccountsPage extends StatefulWidget {
   final bool isMarketPlace;
 
   const StatementAccountsPage({
-    Key? key,
+    super.key,
     required this.isMarketPlace,
-  }) : super(key: key);
+  });
 
   @override
   State<StatementAccountsPage> createState() => _StatementAccountsPageState();

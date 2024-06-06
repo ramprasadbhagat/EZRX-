@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class RememberPassword extends StatelessWidget {
-  const RememberPassword({Key? key}) : super(key: key);
+  const RememberPassword({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +30,7 @@ class RememberPassword extends StatelessWidget {
                           const LoginFormEvent.rememberCheckChanged(),
                         );
                   },
-                  side: MaterialStateBorderSide.resolveWith(
+                  side: WidgetStateBorderSide.resolveWith(
                     (states) => const BorderSide(
                       width: 2.0,
                       color: ZPColors.lightGray2,

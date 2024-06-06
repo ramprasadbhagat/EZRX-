@@ -15,9 +15,9 @@ import 'package:flutter_svg/svg.dart';
 
 class SalesOrgSearch extends StatelessWidget {
   const SalesOrgSearch({
-    Key? key,
+    super.key,
     required this.avialableSalesOrgList,
-  }) : super(key: key);
+  });
   final List<SalesOrganisation> avialableSalesOrgList;
   @override
   Widget build(BuildContext context) {
@@ -97,10 +97,10 @@ class SalesOrgSearch extends StatelessWidget {
 
 class _SalesOrgItem extends StatelessWidget {
   const _SalesOrgItem({
-    Key? key,
+    super.key,
     required this.showDivider,
     required this.salesOrganisation,
-  }) : super(key: key);
+  });
   final bool showDivider;
   final SalesOrganisation salesOrganisation;
 

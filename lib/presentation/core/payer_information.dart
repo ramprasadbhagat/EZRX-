@@ -9,9 +9,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class PayerInformation extends StatelessWidget {
   final bool expanded;
   const PayerInformation({
-    Key? key,
+    super.key,
     required this.expanded,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

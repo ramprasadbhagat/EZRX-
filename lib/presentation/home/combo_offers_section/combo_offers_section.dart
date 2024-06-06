@@ -10,7 +10,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
 
 class ComboOffersSection extends StatelessWidget {
-  const ComboOffersSection({Key? key}) : super(key: key);
+  const ComboOffersSection({super.key});
 
   @override
   Widget build(BuildContext context) {

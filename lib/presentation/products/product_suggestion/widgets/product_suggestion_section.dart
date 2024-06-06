@@ -3,9 +3,8 @@ part of 'package:ezrxmobile/presentation/products/product_suggestion/product_sug
 class _ProductSuggestionSection extends StatelessWidget {
   final String parentRoute;
   const _ProductSuggestionSection({
-    Key? key,
     required this.parentRoute,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

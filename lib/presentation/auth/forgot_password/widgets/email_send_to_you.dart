@@ -1,7 +1,7 @@
 part of 'package:ezrxmobile/presentation/auth/forgot_password/forgot_password_confirmation_page.dart';
 
 class _EmailSendToYou extends StatelessWidget {
-  const _EmailSendToYou({Key? key}) : super(key: key);
+  const _EmailSendToYou();
 
   @override
   Widget build(BuildContext context) {

@@ -10,9 +10,9 @@ class ReturnSummaryItemPrice extends StatelessWidget {
   final ReturnRequestInformation requestInformation;
 
   const ReturnSummaryItemPrice({
-    Key? key,
+    super.key,
     required this.requestInformation,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

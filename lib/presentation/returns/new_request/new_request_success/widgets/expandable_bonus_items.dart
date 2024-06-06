@@ -2,8 +2,7 @@ part of 'package:ezrxmobile/presentation/returns/new_request/new_request_success
 
 class _ExpandableBonusItems extends StatelessWidget {
   final List<ReturnMaterial> bonusItems;
-  const _ExpandableBonusItems({Key? key, required this.bonusItems})
-      : super(key: key);
+  const _ExpandableBonusItems({required this.bonusItems});
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +50,7 @@ class _ExpandableBonusItems extends StatelessWidget {
                     .getReturnItemDetails(e.uuid),
               ),
             )
-            .toList(),
+            ,
       ],
     );
   }

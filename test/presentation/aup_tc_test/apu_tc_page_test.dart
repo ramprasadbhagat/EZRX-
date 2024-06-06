@@ -23,6 +23,7 @@ import 'package:mocktail/mocktail.dart';
 import '../../common_mock_data/mock_bloc.dart';
 import '../../common_mock_data/user_mock.dart';
 import '../../utils/widget_utils.dart';
+import '../../common_mock_data/mock_web_view_test.dart';
 
 void main() {
   late AppRouter autoRouterMock;
@@ -31,6 +32,7 @@ void main() {
   late AnnouncementBloc mockAnnouncementBloc;
   late UserBloc mockUserBloc;
   late EligibilityBloc mockEligibilityBloc;
+  final mockWebViewDependencies = MockWebViewDependencies();
 
   setUpAll(() async {
     WidgetsFlutterBinding.ensureInitialized();
@@ -42,6 +44,7 @@ void main() {
     locator<Config>().appFlavor = Flavor.mock;
     autoRouterMock = locator<AppRouter>();
     mockAupTcBloc = locator<AupTcBloc>();
+    await mockWebViewDependencies.init();
   });
 
   setUp(() {

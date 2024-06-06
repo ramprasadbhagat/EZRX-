@@ -1,8 +1,7 @@
 part of 'package:ezrxmobile/presentation/orders/order_tab/orders_tab.dart';
 
 class _OrdersTabFilter extends StatelessWidget {
-  const _OrdersTabFilter({Key? key, required this.viewByItem})
-      : super(key: key);
+  const _OrdersTabFilter({super.key, required this.viewByItem});
   final bool viewByItem;
 
   @override
@@ -49,11 +48,10 @@ class _OrdersTabFilter extends StatelessWidget {
 
 class _FilterElement extends StatelessWidget {
   const _FilterElement({
-    Key? key,
     required this.isNotFetching,
     required this.viewByItem,
     required this.appliedFilterCount,
-  }) : super(key: key);
+  });
   final bool isNotFetching;
   final bool viewByItem;
   final int appliedFilterCount;

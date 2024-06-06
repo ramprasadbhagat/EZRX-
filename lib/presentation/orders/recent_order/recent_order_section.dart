@@ -24,7 +24,7 @@ import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 
 class RecentOrdersSection extends StatelessWidget {
-  const RecentOrdersSection({Key? key}) : super(key: key);
+  const RecentOrdersSection({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -61,7 +61,7 @@ class RecentOrdersSection extends StatelessWidget {
 }
 
 class _BodyContent extends StatelessWidget {
-  const _BodyContent({Key? key}) : super(key: key);
+  const _BodyContent();
 
   @override
   Widget build(BuildContext context) {
@@ -110,7 +110,7 @@ class _BodyContent extends StatelessWidget {
 class _ProductTile extends StatelessWidget {
   final OrderHistoryItem product;
 
-  const _ProductTile({Key? key, required this.product}) : super(key: key);
+  const _ProductTile({required this.product});
 
   @override
   Widget build(BuildContext context) {

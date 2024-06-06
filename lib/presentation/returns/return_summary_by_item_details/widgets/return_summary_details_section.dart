@@ -13,10 +13,10 @@ import 'package:flutter/services.dart';
 
 class ReturnSummaryDetailsSection extends StatelessWidget {
   const ReturnSummaryDetailsSection({
-    Key? key,
+    super.key,
     required this.requestInformation,
     required this.requestInformationHeader,
-  }) : super(key: key);
+  });
   final ReturnRequestInformation requestInformation;
   final ReturnRequestInformationHeader requestInformationHeader;
 
@@ -71,10 +71,9 @@ class ReturnSummaryDetailsSection extends StatelessWidget {
 
 class _ReturnDetailsSection extends StatefulWidget {
   const _ReturnDetailsSection({
-    Key? key,
     required this.requestInformation,
     required this.requestInformationHeader,
-  }) : super(key: key);
+  });
   final ReturnRequestInformation requestInformation;
   final ReturnRequestInformationHeader requestInformationHeader;
 

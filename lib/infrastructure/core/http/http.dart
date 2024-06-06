@@ -14,9 +14,9 @@ class HttpService {
     _dio = Dio(
       BaseOptions(
         baseUrl: config.baseUrl(),
-        sendTimeout: config.httpSendTimeout,
-        connectTimeout: config.httpConnectTimeout,
-        receiveTimeout: config.httpReceiveTimeout,
+        sendTimeout: Duration(milliseconds: config.httpSendTimeout),
+        connectTimeout: Duration(milliseconds: config.httpConnectTimeout),
+        receiveTimeout: Duration(milliseconds: config.httpReceiveTimeout),
       ),
     );
     _dio.interceptors.addAll([
@@ -50,8 +50,8 @@ class HttpService {
         url,
         data: data,
       );
-    } on DioError catch (e) {
-      throw e.error;
+    } on DioException {
+      rethrow;
       // switch (e.error.runtimeType) {
       //   case SocketException:
       //     throw SocketException(message: e.message);

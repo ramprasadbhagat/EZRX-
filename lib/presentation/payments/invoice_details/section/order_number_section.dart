@@ -16,8 +16,7 @@ import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 class OrderNumberSection extends StatelessWidget {
   final String orderNumber;
-  const OrderNumberSection({Key? key, required this.orderNumber})
-      : super(key: key);
+  const OrderNumberSection({super.key, required this.orderNumber});
 
   @override
   Widget build(BuildContext context) {

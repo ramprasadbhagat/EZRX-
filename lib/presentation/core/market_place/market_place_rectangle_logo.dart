@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 class MarketPlaceRectangleLogo extends StatelessWidget {
-  const MarketPlaceRectangleLogo({Key? key}) : super(key: key);
+  const MarketPlaceRectangleLogo({super.key});
 
   @override
   Widget build(BuildContext context) {

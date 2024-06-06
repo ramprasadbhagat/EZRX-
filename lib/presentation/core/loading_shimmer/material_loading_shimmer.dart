@@ -2,8 +2,8 @@ part of 'loading_shimmer.dart';
 
 class MaterialLoading extends StatelessWidget {
   const MaterialLoading({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {

@@ -12,8 +12,8 @@ class FromDueDateFilter extends StatefulWidget {
     required this.dueDateFrom,
     required this.dueDateFilterDateRange,
     required this.onDueDateChanged,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   State<FromDueDateFilter> createState() => _FromDueDateFilterState();

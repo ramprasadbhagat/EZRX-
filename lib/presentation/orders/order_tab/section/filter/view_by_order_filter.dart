@@ -18,7 +18,7 @@ part 'package:ezrxmobile/presentation/orders/order_tab/section/filter/widgets/vi
 const _defaultPadding = EdgeInsets.symmetric(horizontal: 15);
 
 class ViewByOrderFilterBottomSheet extends StatelessWidget {
-  const ViewByOrderFilterBottomSheet({Key? key}) : super(key: key);
+  const ViewByOrderFilterBottomSheet({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -72,9 +72,7 @@ class ViewByOrderFilterBottomSheet extends StatelessWidget {
 }
 
 class _FilterList extends StatelessWidget {
-  const _FilterList({
-    Key? key,
-  }) : super(key: key);
+  const _FilterList();
 
   @override
   Widget build(BuildContext context) {
@@ -161,7 +159,7 @@ class _FilterList extends StatelessWidget {
 
 class _FilterSectionLabel extends StatelessWidget {
   final String text;
-  const _FilterSectionLabel(this.text, {Key? key}) : super(key: key);
+  const _FilterSectionLabel(this.text);
 
   @override
   Widget build(BuildContext context) {

@@ -35,9 +35,9 @@ class AllCreditsPage extends StatefulWidget {
   final bool isMarketPlace;
 
   const AllCreditsPage({
-    Key? key,
+    super.key,
     required this.isMarketPlace,
-  }) : super(key: key);
+  });
 
   @override
   State<AllCreditsPage> createState() => _AllCreditsPageState();

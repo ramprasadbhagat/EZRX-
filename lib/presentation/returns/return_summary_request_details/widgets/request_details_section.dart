@@ -16,10 +16,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class RequestDetailsSection extends StatelessWidget {
   const RequestDetailsSection({
-    Key? key,
+    super.key,
     required this.requestInformation,
     required this.requestInformationHeader,
-  }) : super(key: key);
+  });
   final List<ReturnRequestInformation> requestInformation;
   final ReturnRequestInformationHeader requestInformationHeader;
 
@@ -72,10 +72,9 @@ class RequestDetailsSection extends StatelessWidget {
 
 class _ReturnDetailsSection extends StatelessWidget {
   const _ReturnDetailsSection({
-    Key? key,
     required this.requestInformation,
     required this.requestInformationHeader,
-  }) : super(key: key);
+  });
   final List<ReturnRequestInformation> requestInformation;
   final ReturnRequestInformationHeader requestInformationHeader;
 
@@ -148,9 +147,8 @@ class _ReturnDetailsSection extends StatelessWidget {
 
 class _InvoiceSummarySection extends StatelessWidget {
   const _InvoiceSummarySection({
-    Key? key,
     required this.requestInformationHeader,
-  }) : super(key: key);
+  });
   final ReturnRequestInformationHeader requestInformationHeader;
 
   @override
@@ -193,11 +191,11 @@ class _InvoiceSummarySection extends StatelessWidget {
 
 class _PriceWidget extends StatelessWidget {
   const _PriceWidget({
-    Key? key,
+    super.key,
     required this.title,
     required this.price,
     required this.priceType,
-  }) : super(key: key);
+  });
   final String title;
   final String price;
   final PriceStyle priceType;
@@ -225,9 +223,8 @@ class _PriceWidget extends StatelessWidget {
 
 class _ROSection extends StatelessWidget {
   const _ROSection({
-    Key? key,
     required this.requestInformationHeader,
-  }) : super(key: key);
+  });
   final ReturnRequestInformationHeader requestInformationHeader;
 
   @override

@@ -25,7 +25,7 @@ void main() {
       baseUrl: 'https://ezrx.com',
     ),
   );
-  final dioAdapter = DioAdapter(dio: dio);
+  final dioAdapter = DioAdapter(dio: dio, matcher: const UrlRequestMatcher());
   final service = HttpService.mockDio(dio);
 
   setUpAll(

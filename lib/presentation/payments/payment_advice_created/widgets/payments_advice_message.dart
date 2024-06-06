@@ -1,7 +1,7 @@
 part of 'package:ezrxmobile/presentation/payments/payment_advice_created/payment_advice_created_page.dart';
 
 class _PaymentBankInAdviceMessage extends StatelessWidget {
-  const _PaymentBankInAdviceMessage({Key? key}) : super(key: key);
+  const _PaymentBankInAdviceMessage();
 
   @override
   Widget build(BuildContext context) {
@@ -63,7 +63,7 @@ class _PaymentBankInAdviceMessage extends StatelessWidget {
 }
 
 class _PaymentGatewayAdviceMessage extends StatelessWidget {
-  const _PaymentGatewayAdviceMessage({Key? key}) : super(key: key);
+  const _PaymentGatewayAdviceMessage();
 
   @override
   Widget build(BuildContext context) {

@@ -25,7 +25,7 @@ part 'announcements/widgets/filter_announcement.dart';
 part 'announcements/widgets/filter_announcement_bottomsheet.dart';
 
 class AnnouncementsPage extends StatelessWidget {
-  const AnnouncementsPage({Key? key}) : super(key: key);
+  const AnnouncementsPage({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ApproverReturnFilterDrawer extends StatelessWidget {
-  const ApproverReturnFilterDrawer({Key? key}) : super(key: key);
+  const ApproverReturnFilterDrawer({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -77,7 +77,7 @@ class ApproverReturnFilterDrawer extends StatelessWidget {
 }
 
 class _FilterHeader extends StatelessWidget {
-  const _FilterHeader({Key? key}) : super(key: key);
+  const _FilterHeader();
 
   @override
   Widget build(BuildContext context) {
@@ -100,7 +100,7 @@ class _FilterHeader extends StatelessWidget {
 }
 
 class _ReturnIdByFilter extends StatelessWidget {
-  const _ReturnIdByFilter({Key? key}) : super(key: key);
+  const _ReturnIdByFilter();
 
   @override
   Widget build(BuildContext context) {
@@ -139,7 +139,7 @@ class _ReturnIdByFilter extends StatelessWidget {
 }
 
 class _CreatedByFilter extends StatelessWidget {
-  const _CreatedByFilter({Key? key}) : super(key: key);
+  const _CreatedByFilter();
 
   @override
   Widget build(BuildContext context) {
@@ -178,7 +178,7 @@ class _CreatedByFilter extends StatelessWidget {
 }
 
 class _ShipToFilter extends StatelessWidget {
-  const _ShipToFilter({Key? key}) : super(key: key);
+  const _ShipToFilter();
 
   @override
   Widget build(BuildContext context) {
@@ -216,7 +216,7 @@ class _ShipToFilter extends StatelessWidget {
 }
 
 class _SoldToFilter extends StatelessWidget {
-  const _SoldToFilter({Key? key}) : super(key: key);
+  const _SoldToFilter();
 
   @override
   Widget build(BuildContext context) {
@@ -252,7 +252,7 @@ class _SoldToFilter extends StatelessWidget {
 }
 
 class _ClearButton extends StatelessWidget {
-  const _ClearButton({Key? key}) : super(key: key);
+  const _ClearButton();
 
   @override
   Widget build(BuildContext context) {
@@ -277,7 +277,7 @@ class _ClearButton extends StatelessWidget {
 }
 
 class _ApplyButton extends StatelessWidget {
-  const _ApplyButton({Key? key}) : super(key: key);
+  const _ApplyButton();
 
   @override
   Widget build(BuildContext context) {

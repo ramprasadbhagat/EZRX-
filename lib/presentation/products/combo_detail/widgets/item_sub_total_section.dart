@@ -4,8 +4,7 @@ class _ItemSubTotalSection extends StatelessWidget {
   final PriceAggregate comboItem;
   const _ItemSubTotalSection({
     required this.comboItem,
-    Key? key,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

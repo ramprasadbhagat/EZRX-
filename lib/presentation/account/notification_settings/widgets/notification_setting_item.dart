@@ -8,14 +8,13 @@ class _NotificationSettingItem extends StatelessWidget {
   final List<String> subDescriptionList;
   final Key tileKey;
   const _NotificationSettingItem({
-    Key? key,
     required this.tileKey,
     required this.onChange,
     required this.value,
     required this.title,
     required this.description,
     this.subDescriptionList = const <String>[],
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

@@ -5,10 +5,9 @@ class _CheckoutProductBonusItem extends StatelessWidget {
   final PriceAggregate cartProduct;
 
   const _CheckoutProductBonusItem({
-    Key? key,
     required this.bonusItem,
     required this.cartProduct,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -37,10 +36,9 @@ class _ProductDetailsSection extends StatelessWidget {
   final PriceAggregate cartProduct;
 
   const _ProductDetailsSection({
-    Key? key,
     required this.bonusItem,
     required this.cartProduct,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -67,8 +65,7 @@ class _ProductDetailsSection extends StatelessWidget {
 
 class _ProductImageSection extends StatelessWidget {
   final BonusSampleItem bonusItem;
-  const _ProductImageSection({Key? key, required this.bonusItem})
-      : super(key: key);
+  const _ProductImageSection({required this.bonusItem});
 
   @override
   Widget build(BuildContext context) {
@@ -96,8 +93,7 @@ class _ProductDetails extends StatelessWidget {
   const _ProductDetails({
     required this.bonusItem,
     required this.cartProduct,
-    Key? key,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -152,8 +148,7 @@ class _ProductDetails extends StatelessWidget {
 
 class _QuantityAndPrice extends StatelessWidget {
   final BonusSampleItem bonusItem;
-  const _QuantityAndPrice({required this.bonusItem, Key? key})
-      : super(key: key);
+  const _QuantityAndPrice({required this.bonusItem});
 
   @override
   Widget build(BuildContext context) {

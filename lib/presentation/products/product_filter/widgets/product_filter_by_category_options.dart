@@ -1,7 +1,7 @@
 part of 'package:ezrxmobile/presentation/products/product_filter/product_filter_page.dart';
 
 class _ProductFilterByCategoryOptions extends StatelessWidget {
-  const _ProductFilterByCategoryOptions({Key? key}) : super(key: key);
+  const _ProductFilterByCategoryOptions();
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +33,7 @@ class _ProductFilterByCategoryOptions extends StatelessWidget {
 }
 
 class _ManufacturerSection extends StatelessWidget {
-  const _ManufacturerSection({Key? key}) : super(key: key);
+  const _ManufacturerSection();
 
   @override
   Widget build(BuildContext context) {
@@ -98,7 +98,7 @@ class _ManufacturerSection extends StatelessWidget {
 }
 
 class _CountryOfOriginSection extends StatelessWidget {
-  const _CountryOfOriginSection({Key? key}) : super(key: key);
+  const _CountryOfOriginSection();
 
   @override
   Widget build(BuildContext context) {

@@ -1,9 +1,7 @@
 part of 'package:ezrxmobile/presentation/returns/return_list/return_by_item_filter/return_by_item_filter_page.dart';
 
 class _StatusPicker extends StatelessWidget {
-  const _StatusPicker({
-    Key? key,
-  }) : super(key: key);
+  const _StatusPicker();
 
   @override
   Widget build(BuildContext context) {

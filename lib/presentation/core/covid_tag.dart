@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class CovidTag extends StatelessWidget {
-  const CovidTag({Key? key}) : super(key: key);
+  const CovidTag({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -9,11 +9,11 @@ class QuantityIcon extends StatelessWidget {
   final IconData icon;
   final bool isEnabled;
   const QuantityIcon({
-    Key? key,
+    super.key,
     required this.pressed,
     required this.icon,
     required this.isEnabled,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

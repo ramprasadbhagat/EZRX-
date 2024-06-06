@@ -1,7 +1,7 @@
 part of 'package:ezrxmobile/presentation/returns/new_request/new_request_success/new_request_successful_page.dart';
 
 class _ReturnItemList extends StatelessWidget {
-  const _ReturnItemList({Key? key}) : super(key: key);
+  const _ReturnItemList();
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +49,7 @@ class _ReturnItemList extends StatelessWidget {
                                 .toList(),
                           ),
                   )
-                  .toList(),
+                  ,
             ],
           );
         },

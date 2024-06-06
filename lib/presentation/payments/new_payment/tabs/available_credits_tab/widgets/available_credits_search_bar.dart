@@ -1,7 +1,7 @@
 part of 'package:ezrxmobile/presentation/payments/new_payment/tabs/available_credits_tab/available_credits_tab.dart';
 
 class _AvailableCreditsSearchBar extends StatelessWidget {
-  const _AvailableCreditsSearchBar({Key? key}) : super(key: key);
+  const _AvailableCreditsSearchBar();
 
   @override
   Widget build(BuildContext context) {

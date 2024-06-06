@@ -33,9 +33,9 @@ class ContactUsPage extends StatelessWidget {
   final AppMarket appMarket;
 
   const ContactUsPage({
-    Key? key,
+    super.key,
     required this.appMarket,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

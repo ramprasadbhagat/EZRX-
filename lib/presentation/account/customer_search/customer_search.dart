@@ -42,7 +42,7 @@ part 'package:ezrxmobile/presentation/account/customer_search/widgets/show_defau
 part 'package:ezrxmobile/presentation/account/customer_search/widgets/title_section.dart';
 
 class CustomerSearchPage extends StatelessWidget {
-  const CustomerSearchPage({Key? key}) : super(key: key);
+  const CustomerSearchPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -191,9 +191,8 @@ class _BodyContent extends StatelessWidget {
   final CustomerCodeState state;
 
   const _BodyContent({
-    Key? key,
     required this.state,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

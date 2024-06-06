@@ -12,8 +12,8 @@ class StatusSelectorFilter<T> extends StatelessWidget {
     required this.statusesDisplay,
     required this.onStatusSelected,
     required this.filteredStatuses,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   String _getStatusDisplay(T status) {
     if (status is FilterStatus) {

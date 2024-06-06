@@ -8,9 +8,9 @@ class OrderHistoryStepper extends StatelessWidget {
   final List<OrderHistoryStep> steps;
 
   const OrderHistoryStepper({
-    Key? key,
+    super.key,
     required this.steps,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -40,10 +40,9 @@ class _OrderHistoryStepWithIcon extends StatelessWidget {
   final int index;
 
   const _OrderHistoryStepWithIcon({
-    Key? key,
     required this.customSteps,
     required this.index,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -136,11 +135,10 @@ class _OrderHistoryStepWithIcon extends StatelessWidget {
 
 class _DateTimeWidget extends StatelessWidget {
   const _DateTimeWidget({
-    Key? key,
     required this.dateString,
     required this.timeString,
     required this.state,
-  }) : super(key: key);
+  });
 
   final String dateString;
   final String timeString;
@@ -183,9 +181,8 @@ class _SubStatusSection extends StatelessWidget {
   final List<OrderStatusTracker> subSteps;
 
   const _SubStatusSection({
-    Key? key,
     required this.subSteps,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -244,9 +241,9 @@ class _SubStatusSection extends StatelessWidget {
 class VerticalLine extends StatelessWidget {
   final bool visible;
   const VerticalLine({
-    Key? key,
+    super.key,
     this.visible = true,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

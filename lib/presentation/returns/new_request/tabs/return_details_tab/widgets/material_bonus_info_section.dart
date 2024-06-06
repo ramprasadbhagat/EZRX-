@@ -2,10 +2,9 @@ part of 'package:ezrxmobile/presentation/returns/new_request/tabs/return_details
 
 class _MaterialBonusInfoSection extends StatelessWidget {
   const _MaterialBonusInfoSection({
-    Key? key,
     required this.returnItem,
     required this.bonusItem,
-  }) : super(key: key);
+  });
   final ReturnMaterial returnItem;
   final ReturnMaterial bonusItem;
 
@@ -41,10 +40,9 @@ class _ToggleActiveButton extends StatelessWidget {
   final ReturnMaterial returnItem;
 
   const _ToggleActiveButton({
-    Key? key,
     required this.bonusItem,
     required this.returnItem,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

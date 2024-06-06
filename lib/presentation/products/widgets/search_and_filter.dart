@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SearchAndFilter extends StatelessWidget {
-  const SearchAndFilter({Key? key}) : super(key: key);
+  const SearchAndFilter({super.key});
 
   @override
   Widget build(BuildContext context) {

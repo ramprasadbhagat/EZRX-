@@ -15,8 +15,8 @@ import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dar
 
 class ReturnRequestDetails extends StatelessWidget {
   const ReturnRequestDetails({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {

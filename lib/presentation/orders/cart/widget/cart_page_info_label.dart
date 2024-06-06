@@ -1,7 +1,7 @@
 part of 'package:ezrxmobile/presentation/orders/cart/cart_page.dart';
 
 class _CartPageInfoLabel extends StatelessWidget {
-  const _CartPageInfoLabel({Key? key}) : super(key: key);
+  const _CartPageInfoLabel();
 
   @override
   Widget build(BuildContext context) {
@@ -88,9 +88,8 @@ class _CartPageInfoLabel extends StatelessWidget {
 class _MOVText extends StatelessWidget {
   final OrderEligibilityState state;
   const _MOVText({
-    Key? key,
     required this.state,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -143,10 +142,9 @@ class _ErrorText extends StatelessWidget {
   final bool showLeadingIcon;
   final String text;
   const _ErrorText({
-    Key? key,
     required this.text,
     required this.showLeadingIcon,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

@@ -32,9 +32,9 @@ class AllInvoicesPage extends StatefulWidget {
   final bool isMarketPlace;
 
   const AllInvoicesPage({
-    Key? key,
+    super.key,
     required this.isMarketPlace,
-  }) : super(key: key);
+  });
 
   @override
   State<AllInvoicesPage> createState() => _AllInvoicesPageState();
@@ -114,10 +114,9 @@ class _InvoiceGroup extends StatelessWidget {
   final bool showDivider;
 
   const _InvoiceGroup({
-    Key? key,
     required this.data,
     required this.showDivider,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -166,9 +165,8 @@ class _InvoiceItem extends StatelessWidget {
   final CreditAndInvoiceItem invoiceItem;
 
   const _InvoiceItem({
-    Key? key,
     required this.invoiceItem,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

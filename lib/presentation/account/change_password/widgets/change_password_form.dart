@@ -3,7 +3,7 @@ part of 'package:ezrxmobile/presentation/account/change_password/change_password
 final _formKey = GlobalKey<FormState>();
 
 class _ChangePasswordForm extends StatelessWidget {
-  const _ChangePasswordForm({Key? key}) : super(key: key);
+  const _ChangePasswordForm();
 
   @override
   Widget build(BuildContext context) {

@@ -18,8 +18,8 @@ class DioService {
   Future<Response> get(String url) async {
     try {
       return await _dio.get(url);
-    } on DioError catch (e) {
-      throw e.error;
+    } on DioException {
+      rethrow;
     }
   }
 
@@ -27,8 +27,8 @@ class DioService {
   Future<Response> post(String url, Map<String, dynamic> body) async {
     try {
       return await _dio.post(url, data: jsonEncode(body));
-    } on DioError catch (e) {
-      throw e.error;
+    } on DioException {
+      rethrow;
     }
   }
 }

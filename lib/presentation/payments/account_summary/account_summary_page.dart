@@ -38,9 +38,9 @@ class AccountSummary extends StatelessWidget {
   final bool isMarketPlace;
 
   const AccountSummary({
-    Key? key,
+    super.key,
     required this.isMarketPlace,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

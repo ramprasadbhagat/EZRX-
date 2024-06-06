@@ -30,8 +30,8 @@ class MaterialGridItem extends StatelessWidget {
     required this.materialInfo,
     required this.onTap,
     required this.onFavouriteTap,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {

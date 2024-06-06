@@ -4,9 +4,8 @@ class _PaymentSummaryFilterBottomSheet extends StatelessWidget {
   final bool isMarketPlace;
 
   const _PaymentSummaryFilterBottomSheet({
-    Key? key,
     required this.isMarketPlace,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

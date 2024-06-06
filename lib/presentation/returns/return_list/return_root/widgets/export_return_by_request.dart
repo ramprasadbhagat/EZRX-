@@ -2,8 +2,8 @@ part of '../return_root.dart';
 
 class _ExportReturnByRequest extends StatelessWidget {
   const _ExportReturnByRequest({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {

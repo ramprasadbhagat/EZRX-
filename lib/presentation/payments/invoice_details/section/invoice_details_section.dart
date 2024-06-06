@@ -12,9 +12,9 @@ import 'package:ezrxmobile/domain/payments/entities/credit_and_invoice_item.dart
 class InvoiceDetailsSection extends StatelessWidget {
   final CreditAndInvoiceItem invoiceItem;
   const InvoiceDetailsSection({
-    Key? key,
+    super.key,
     required this.invoiceItem,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

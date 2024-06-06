@@ -15,8 +15,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class AvailableOffer extends StatelessWidget {
   final MaterialNumber materialNumber;
 
-  const AvailableOffer({Key? key, required this.materialNumber})
-      : super(key: key);
+  const AvailableOffer({super.key, required this.materialNumber});
 
   @override
   Widget build(BuildContext context) {
@@ -150,11 +149,10 @@ class _BonusLevelItem extends StatelessWidget {
 
 class _AvailableOfferScrollList extends StatelessWidget {
   const _AvailableOfferScrollList({
-    Key? key,
     required this.bonusMaterialList,
     required this.priceTiersList,
     required this.showTierPrice,
-  }) : super(key: key);
+  });
   final List<BonusMaterial> bonusMaterialList;
   final List<PriceTierItem> priceTiersList;
   final bool showTierPrice;
@@ -182,7 +180,7 @@ class _AvailableOfferScrollList extends StatelessWidget {
                 left: left,
                 right: right,
               );
-            }).toList(),
+            }),
           ...bonusMaterialList.asMap().entries.map((e) {
             final left = priceTiersList.isEmpty && e.key == 0 ? 16.0 : 4.0;
             final right = e.key == bonusMaterialList.length ? 16.0 : 4.0;
@@ -192,7 +190,7 @@ class _AvailableOfferScrollList extends StatelessWidget {
               left: left,
               right: right,
             );
-          }).toList(),
+          }),
         ],
       ),
     );
@@ -201,10 +199,9 @@ class _AvailableOfferScrollList extends StatelessWidget {
 
 class _AvailableOfferLabel extends StatelessWidget {
   const _AvailableOfferLabel({
-    Key? key,
     required this.bonusMaterialList,
     required this.priceTiersList,
-  }) : super(key: key);
+  });
 
   final List<BonusMaterial> bonusMaterialList;
   final List<PriceTierItem> priceTiersList;

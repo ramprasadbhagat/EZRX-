@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 class DropdownWithLabel extends StatelessWidget {
   const DropdownWithLabel({
-    Key? key,
+    super.key,
     required this.fieldKey,
     required this.labelText,
     required this.items,
@@ -14,7 +14,7 @@ class DropdownWithLabel extends StatelessWidget {
     this.hintText = '',
     this.mandatory = false,
     required this.validator,
-  }) : super(key: key);
+  });
   final Key fieldKey;
   final String labelText;
   final ValueChanged<String?> onChanged;

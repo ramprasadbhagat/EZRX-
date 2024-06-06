@@ -1,9 +1,7 @@
 part of 'package:ezrxmobile/presentation/faq/faq.dart';
 
 class _CategoryChip extends StatelessWidget {
-  const _CategoryChip({
-    Key? key,
-  }) : super(key: key);
+  const _CategoryChip();
 
   @override
   Widget build(BuildContext context) {
@@ -59,7 +57,7 @@ class _CategoryChip extends StatelessWidget {
                       ),
                     ),
                   )
-                  .toList(),
+                  ,
             ],
           );
         },
@@ -73,11 +71,11 @@ class _CustomChip extends StatelessWidget {
   final ValueChanged<bool> onChanged;
   final bool isSelected;
   const _CustomChip({
-    Key? key,
+    super.key,
     required this.title,
     required this.onChanged,
     required this.isSelected,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

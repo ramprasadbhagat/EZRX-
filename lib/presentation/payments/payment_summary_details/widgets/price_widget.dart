@@ -2,11 +2,10 @@ part of 'package:ezrxmobile/presentation/payments/payment_summary_details/paymen
 
 class _PriceWidget extends StatelessWidget {
   const _PriceWidget({
-    Key? key,
     required this.title,
     required this.price,
     this.type = PriceStyle.commonPrice,
-  }) : super(key: key);
+  });
   final String title;
   final String price;
   final PriceStyle type;

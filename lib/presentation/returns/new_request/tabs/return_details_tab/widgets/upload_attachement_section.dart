@@ -2,9 +2,8 @@ part of 'package:ezrxmobile/presentation/returns/new_request/tabs/return_details
 
 class _UploadAttachmentSection extends StatelessWidget {
   const _UploadAttachmentSection({
-    Key? key,
     required this.data,
-  }) : super(key: key);
+  });
 
   final ReturnMaterial data;
 
@@ -53,9 +52,8 @@ class _UploadAttachmentSection extends StatelessWidget {
 
 class _AttachmentUploadButton extends StatelessWidget {
   const _AttachmentUploadButton({
-    Key? key,
     required this.data,
-  }) : super(key: key);
+  });
 
   final ReturnMaterial data;
 
@@ -91,10 +89,9 @@ class _AttachmentUploadButton extends StatelessWidget {
 
 class _AttachmentUploadOptionPicker extends StatefulWidget {
   const _AttachmentUploadOptionPicker({
-    Key? key,
     required this.uuid,
     required this.assignmentNumber,
-  }) : super(key: key);
+  });
   final String uuid;
   final String assignmentNumber;
 
@@ -181,9 +178,8 @@ class _AttachmentUploadOptionPickerState
 
 class _UploadedFileList extends StatelessWidget {
   const _UploadedFileList({
-    Key? key,
     required this.data,
-  }) : super(key: key);
+  });
 
   final ReturnItemDetails data;
 
@@ -251,7 +247,7 @@ class _UploadedFileList extends StatelessWidget {
                       ),
                     ),
                   )
-                  .toList(),
+                  ,
             ],
           )
         : const SizedBox.shrink();

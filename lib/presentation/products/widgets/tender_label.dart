@@ -9,8 +9,8 @@ class TenderLabel extends StatelessWidget {
 
   const TenderLabel({
     required this.materialInfo,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {

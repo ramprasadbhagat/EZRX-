@@ -7,7 +7,7 @@ import 'package:flutter_test/flutter_test.dart';
 import '../common/common_robot.dart';
 
 class SecurityRobot extends CommonRobot {
-  SecurityRobot(WidgetTester tester) : super(tester);
+  SecurityRobot(super.tester);
 
   final currentPasswordField = find.byKey(WidgetKeys.currentPasswordField);
   final newPasswordTextField = find.byKey(WidgetKeys.newPasswordTextField);

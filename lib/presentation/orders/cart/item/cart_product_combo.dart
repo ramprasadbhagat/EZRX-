@@ -31,10 +31,10 @@ class CartProductCombo extends StatelessWidget {
   final PriceAggregate cartItem;
   final bool canEditable;
   const CartProductCombo({
-    Key? key,
+    super.key,
     required this.cartItem,
     this.canEditable = false,
-  }) : super(key: key);
+  });
 
   ComboDealScheme get _comboScheme =>
       cartItem.comboMaterials.firstOrNull?.getScheme(cartItem.comboMaterials) ??
@@ -196,7 +196,7 @@ class CartProductCombo extends StatelessWidget {
                           comboScheme: _comboScheme,
                         ),
                       )
-                      .toList(),
+                      ,
                 ],
               ),
             ),
@@ -264,8 +264,7 @@ class _ComboSubTotalSection extends StatelessWidget {
     required this.cartProduct,
     required this.comboScheme,
     required this.priceComboDeal,
-    Key? key,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

@@ -45,8 +45,8 @@ part 'widgets/view_by_order_group.dart';
 
 class ViewByOrdersPage extends StatelessWidget {
   const ViewByOrdersPage({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {

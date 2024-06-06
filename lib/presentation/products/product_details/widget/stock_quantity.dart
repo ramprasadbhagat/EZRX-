@@ -2,7 +2,7 @@ part of 'package:ezrxmobile/presentation/products/product_details/product_detail
 
 class _StockQuantity extends StatelessWidget {
   final ProductDetailState state;
-  const _StockQuantity({Key? key, required this.state}) : super(key: key);
+  const _StockQuantity({required this.state});
 
   @override
   Widget build(BuildContext context) {

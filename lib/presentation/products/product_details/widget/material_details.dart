@@ -12,7 +12,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_html/flutter_html.dart';
 
 class MaterialDetailsToggle extends StatefulWidget {
-  const MaterialDetailsToggle({Key? key}) : super(key: key);
+  const MaterialDetailsToggle({super.key});
 
   @override
   State<MaterialDetailsToggle> createState() => _MaterialDetailsToggleState();
@@ -125,9 +125,8 @@ class _MaterialDetailsToggleState extends State<MaterialDetailsToggle> {
 class _MaterialDetails extends StatelessWidget {
   final ProductDetailAggregate productDetailAggregate;
   const _MaterialDetails({
-    Key? key,
     required this.productDetailAggregate,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -174,10 +173,10 @@ class _MaterialMetaData extends StatelessWidget {
   final String title;
   final StringValue content;
   const _MaterialMetaData({
-    Key? key,
+    super.key,
     required this.title,
     required this.content,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -207,10 +206,10 @@ class _HtmlContent extends StatelessWidget {
   final String title;
   final StringValue data;
   const _HtmlContent({
-    Key? key,
+    super.key,
     required this.title,
     required this.data,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) => data.isValid()

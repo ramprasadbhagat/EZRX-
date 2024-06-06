@@ -7,12 +7,12 @@ class DeleteCancelAdviceBottomSheet extends StatelessWidget {
   final bool isMarketPlace;
 
   const DeleteCancelAdviceBottomSheet({
-    Key? key,
+    super.key,
     required this.paymentAdviceNumber,
     required this.isDelete,
     required this.isMarketPlace,
     this.isInProgress = false,
-  }) : super(key: key);
+  });
 
   factory DeleteCancelAdviceBottomSheet.delete({
     required String paymentAdviceNumber,
@@ -96,10 +96,9 @@ class _DeletePaymentAdviceContent extends StatelessWidget {
   final bool isInProgress;
   final String paymentAdviceNumber;
   const _DeletePaymentAdviceContent({
-    Key? key,
     required this.paymentAdviceNumber,
     this.isInProgress = false,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -160,9 +159,8 @@ class _DeletePaymentAdviceContent extends StatelessWidget {
 
 class _DeleteCancelAdviceButtons extends StatelessWidget {
   const _DeleteCancelAdviceButtons({
-    Key? key,
     required this.isDelete,
-  }) : super(key: key);
+  });
   final bool isDelete;
   @override
   Widget build(BuildContext context) {
@@ -239,7 +237,7 @@ class _DeleteCancelAdviceButtons extends StatelessWidget {
               child: ElevatedButton(
                 key: WidgetKeys.deleteCancelAdviceBottomSheetButton,
                 style: Theme.of(context).elevatedButtonTheme.style!.copyWith(
-                      backgroundColor: const MaterialStatePropertyAll(
+                      backgroundColor: const WidgetStatePropertyAll(
                         ZPColors.red,
                       ),
                     ),

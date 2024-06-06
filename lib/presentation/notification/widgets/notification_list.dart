@@ -2,8 +2,7 @@ part of 'package:ezrxmobile/presentation/notification/notification_tab.dart';
 
 class _NotificationList extends StatelessWidget {
   final NotificationData notificationData;
-  const _NotificationList({Key? key, required this.notificationData})
-      : super(key: key);
+  const _NotificationList({super.key, required this.notificationData});
 
   @override
   Widget build(BuildContext context) {

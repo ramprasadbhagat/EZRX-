@@ -17,7 +17,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class CarouselBanner extends StatefulWidget {
-  const CarouselBanner({Key? key}) : super(key: key);
+  const CarouselBanner({super.key});
 
   @override
   State<CarouselBanner> createState() => _CarouselBannerState();
@@ -233,10 +233,10 @@ class _CircleButton extends StatelessWidget {
   final IconData iconData;
 
   const _CircleButton({
-    Key? key,
+    super.key,
     required this.onTap,
     required this.iconData,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

@@ -818,8 +818,7 @@ class CartRepository implements ICartRepository {
                 ...e.existingProductDealBonus,
               ],
             )
-            .flattened
-            .toList(),
+            .flattened,
       ];
 
       final productList = await cartRemoteDataSource.upsertCartItems(

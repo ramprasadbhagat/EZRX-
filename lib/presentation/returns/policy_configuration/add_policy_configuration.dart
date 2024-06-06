@@ -15,7 +15,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class AddPolicyConfiguration extends StatefulWidget {
-  const AddPolicyConfiguration({Key? key}) : super(key: key);
+  const AddPolicyConfiguration({super.key});
 
   @override
   State<AddPolicyConfiguration> createState() => AddPolicyConfigurationState();
@@ -113,7 +113,7 @@ class AddPolicyConfigurationState extends State<AddPolicyConfiguration> {
 }
 
 class _SalesOrganizationField extends StatelessWidget {
-  const _SalesOrganizationField({Key? key}) : super(key: key);
+  const _SalesOrganizationField();
 
   @override
   Widget build(BuildContext context) {
@@ -135,7 +135,7 @@ class _SalesOrganizationField extends StatelessWidget {
 }
 
 class _ReturnsAllowedField extends StatelessWidget {
-  const _ReturnsAllowedField({Key? key}) : super(key: key);
+  const _ReturnsAllowedField();
 
   @override
   Widget build(BuildContext context) {
@@ -197,7 +197,7 @@ class _ReturnsAllowedField extends StatelessWidget {
 }
 
 class _PrincipalCodeField extends StatelessWidget {
-  const _PrincipalCodeField({Key? key}) : super(key: key);
+  const _PrincipalCodeField();
 
   @override
   Widget build(BuildContext context) {
@@ -220,7 +220,7 @@ class _PrincipalCodeField extends StatelessWidget {
 }
 
 class _MonthsBeforeExpiryField extends StatelessWidget {
-  const _MonthsBeforeExpiryField({Key? key}) : super(key: key);
+  const _MonthsBeforeExpiryField();
 
   @override
   Widget build(BuildContext context) {
@@ -247,7 +247,7 @@ class _MonthsBeforeExpiryField extends StatelessWidget {
 }
 
 class _MonthsAfterExpiryField extends StatelessWidget {
-  const _MonthsAfterExpiryField({Key? key}) : super(key: key);
+  const _MonthsAfterExpiryField();
 
   @override
   Widget build(BuildContext context) {
@@ -274,7 +274,7 @@ class _MonthsAfterExpiryField extends StatelessWidget {
 }
 
 class _SubmitButton extends StatelessWidget {
-  const _SubmitButton({Key? key}) : super(key: key);
+  const _SubmitButton();
 
   @override
   Widget build(BuildContext context) {

@@ -4,10 +4,9 @@ class _CounterOfferDiscountTextField extends StatefulWidget {
   final PriceAggregate cartItem;
   final bool isPriceOverrideEnable;
   const _CounterOfferDiscountTextField({
-    Key? key,
     required this.cartItem,
     required this.isPriceOverrideEnable,
-  }) : super(key: key);
+  });
 
   @override
   State<_CounterOfferDiscountTextField> createState() =>

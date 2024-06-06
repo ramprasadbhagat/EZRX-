@@ -8,8 +8,7 @@ class _ItemBuilder extends StatelessWidget {
     required this.item,
     required this.index,
     required this.materialFilterType,
-    Key? key,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

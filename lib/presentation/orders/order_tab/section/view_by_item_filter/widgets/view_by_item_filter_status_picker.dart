@@ -1,7 +1,7 @@
 part of 'package:ezrxmobile/presentation/orders/order_tab/section/view_by_item_filter/view_by_item_filter_sheet.dart';
 
 class _ViewByItemFilterStatusPicker extends StatelessWidget {
-  const _ViewByItemFilterStatusPicker({Key? key}) : super(key: key);
+  const _ViewByItemFilterStatusPicker();
 
   @override
   Widget build(BuildContext context) {

@@ -1,9 +1,7 @@
 part of '../payment_page.dart';
 
 class _PaymentTotalInvoice extends StatelessWidget {
-  const _PaymentTotalInvoice({
-    Key? key,
-  }) : super(key: key);
+  const _PaymentTotalInvoice();
 
   @override
   Widget build(BuildContext context) {

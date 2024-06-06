@@ -1,9 +1,7 @@
 part of 'package:ezrxmobile/presentation/returns/new_request/new_request_page.dart';
 
 class _SubmitButton extends StatelessWidget {
-  const _SubmitButton({
-    Key? key,
-  }) : super(key: key);
+  const _SubmitButton();
 
   @override
   Widget build(BuildContext context) {

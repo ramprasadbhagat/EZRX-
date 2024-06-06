@@ -1,9 +1,7 @@
 part of 'package:ezrxmobile/presentation/orders/cart/override/request_counter_offer_bottom_sheet.dart';
 
 class _CounterOfferDiscountedPriceField extends StatelessWidget {
-  const _CounterOfferDiscountedPriceField({
-    Key? key,
-  }) : super(key: key);
+  const _CounterOfferDiscountedPriceField();
 
   @override
   Widget build(BuildContext context) {

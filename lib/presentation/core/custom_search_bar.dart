@@ -12,7 +12,7 @@ import 'package:flutter/services.dart';
 //Please note use this widget instead of SearchBar
 class CustomSearchBar extends StatefulWidget {
   const CustomSearchBar({
-    Key? key,
+    super.key,
     this.onSearchChanged,
     required this.enabled,
     required this.onSearchSubmitted,
@@ -26,7 +26,7 @@ class CustomSearchBar extends StatefulWidget {
     this.searchSuffixIcon,
     this.disableBorder = false,
     this.backgroundColor,
-  }) : super(key: key);
+  });
 
   final bool enabled;
   final void Function(String) onSearchSubmitted;

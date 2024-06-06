@@ -13,11 +13,11 @@ class OrderStatusSection extends StatelessWidget {
   final String deliveryDateTitle;
 
   const OrderStatusSection({
-    Key? key,
+    super.key,
     required this.steps,
     required this.deliveryDateTitle,
     required this.deliveryDate,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -60,7 +60,7 @@ class OrderStatusSection extends StatelessWidget {
 }
 
 class _CloseButton extends StatelessWidget {
-  const _CloseButton({Key? key}) : super(key: key);
+  const _CloseButton();
 
   @override
   Widget build(BuildContext context) {

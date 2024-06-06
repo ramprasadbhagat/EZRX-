@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 
 class ColorContainer extends StatelessWidget {
   const ColorContainer({
-    Key? key,
+    super.key,
     this.widgetKey,
     this.margin = const EdgeInsets.all(16),
     this.padding = const EdgeInsets.all(12),
     this.circularRadius = 8,
     required this.color,
     required this.children,
-  }) : super(key: key);
+  });
 
   final Key? widgetKey;
   final EdgeInsetsGeometry margin;

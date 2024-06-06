@@ -20,9 +20,9 @@ import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 class OrderTypeSelector extends StatelessWidget {
   final bool hideReasonField;
   const OrderTypeSelector({
-    Key? key,
+    super.key,
     this.hideReasonField = false,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -89,7 +89,6 @@ class _OrderTypeSelectorField extends StatelessWidget {
   final ViewByOrderDetailsState orderHistoryDetailsState;
   final bool isReason;
   const _OrderTypeSelectorField({
-    Key? key,
     required this.itemList,
     required this.leadingText,
     this.initialDropdownText = '',
@@ -97,7 +96,7 @@ class _OrderTypeSelectorField extends StatelessWidget {
     required this.orderDocumentTypeState,
     this.isReason = false,
     required this.orderHistoryDetailsState,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

@@ -3,9 +3,8 @@ part of 'package:ezrxmobile/presentation/payments/payment_summary/payment_summar
 class _PaymentSummaryGroupList extends StatelessWidget {
   final ScrollController scrollController;
   const _PaymentSummaryGroupList({
-    Key? key,
     required this.scrollController,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

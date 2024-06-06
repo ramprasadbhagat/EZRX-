@@ -12,9 +12,9 @@ import 'package:ezrxmobile/application/returns/new_request/new_request_bloc.dart
 
 class BonusMaterialInfo extends StatelessWidget {
   const BonusMaterialInfo({
-    Key? key,
+    super.key,
     required this.data,
-  }) : super(key: key);
+  });
 
   final ReturnMaterial data;
 

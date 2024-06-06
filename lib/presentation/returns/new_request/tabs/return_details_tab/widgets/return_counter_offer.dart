@@ -11,10 +11,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ReturnCounterOfferField extends StatelessWidget {
   const ReturnCounterOfferField({
-    Key? key,
+    super.key,
     required this.enabled,
     required this.uuid,
-  }) : super(key: key);
+  });
 
   final String uuid;
   final bool enabled;

@@ -10,11 +10,11 @@ class CustomBottomSheet extends StatelessWidget {
   final Widget child;
 
   const CustomBottomSheet({
-    Key? key,
+    super.key,
     required this.sheetKey,
     required this.child,
     this.headerText,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

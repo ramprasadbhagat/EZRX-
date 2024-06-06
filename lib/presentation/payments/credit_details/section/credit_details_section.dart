@@ -18,10 +18,10 @@ class CreditDetailsSection extends StatelessWidget {
   final CreditAndInvoiceItem creditItem;
   final List<CustomerDocumentDetail> creditItems;
   const CreditDetailsSection({
-    Key? key,
+    super.key,
     required this.creditItem,
     required this.creditItems,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

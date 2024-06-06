@@ -1,7 +1,7 @@
 part of 'package:ezrxmobile/presentation/account/profile/profile_page.dart';
 
 class _Header extends StatelessWidget {
-  const _Header({Key? key}) : super(key: key);
+  const _Header();
 
   @override
   Widget build(BuildContext context) {

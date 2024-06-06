@@ -19,7 +19,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class OutstandingInvoicePaymentFilterPage extends StatelessWidget {
-  const OutstandingInvoicePaymentFilterPage({Key? key}) : super(key: key);
+  const OutstandingInvoicePaymentFilterPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -60,7 +60,7 @@ class OutstandingInvoicePaymentFilterPage extends StatelessWidget {
 }
 
 class _PaymentFilter extends StatelessWidget {
-  const _PaymentFilter({Key? key}) : super(key: key);
+  const _PaymentFilter();
 
   @override
   Widget build(BuildContext context) {
@@ -296,7 +296,7 @@ class _PaymentFilter extends StatelessWidget {
 }
 
 class _ResetButton extends StatelessWidget {
-  const _ResetButton({Key? key}) : super(key: key);
+  const _ResetButton();
 
   @override
   Widget build(BuildContext context) {
@@ -321,7 +321,7 @@ class _ResetButton extends StatelessWidget {
 }
 
 class _ApplyButton extends StatelessWidget {
-  const _ApplyButton({Key? key}) : super(key: key);
+  const _ApplyButton();
 
   @override
   Widget build(BuildContext context) {

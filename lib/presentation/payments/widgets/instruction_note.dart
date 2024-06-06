@@ -1,9 +1,7 @@
 part of 'package:ezrxmobile/presentation/payments/widgets/bank_info.dart';
 
 class _InstructionNote extends StatelessWidget {
-  const _InstructionNote({
-    Key? key,
-  }) : super(key: key);
+  const _InstructionNote();
 
   @override
   Widget build(BuildContext context) {

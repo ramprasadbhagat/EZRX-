@@ -11,7 +11,7 @@ class InfoLabel extends StatelessWidget {
   final EdgeInsetsGeometry padding;
   final Widget icon;
   const InfoLabel({
-    Key? key,
+    super.key,
     this.radius = 5,
     this.mainColor = ZPColors.lightBlueColor,
     this.textColor = ZPColors.black,
@@ -20,7 +20,7 @@ class InfoLabel extends StatelessWidget {
     this.margin = const EdgeInsets.symmetric(vertical: 16),
     this.padding = const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
     this.icon = const SizedBox.shrink(),
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

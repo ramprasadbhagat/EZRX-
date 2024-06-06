@@ -33,7 +33,7 @@ part 'widgets/bonus_item_section.dart';
 part 'widgets/return_items_search_bar.dart';
 
 class ReturnItemsTab extends StatelessWidget {
-  const ReturnItemsTab({Key? key}) : super(key: key);
+  const ReturnItemsTab({super.key});
 
   @override
   Widget build(BuildContext context) {

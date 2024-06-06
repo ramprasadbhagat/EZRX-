@@ -2,10 +2,10 @@ part of 'package:ezrxmobile/presentation/returns/new_request/tabs/return_details
 
 class _BonusItemSection extends StatelessWidget {
   const _BonusItemSection({
-    Key? key,
+    super.key,
     required this.returnItem,
     required this.counterOfferEnabled,
-  }) : super(key: key);
+  });
   final ReturnMaterial returnItem;
   final bool counterOfferEnabled;
 

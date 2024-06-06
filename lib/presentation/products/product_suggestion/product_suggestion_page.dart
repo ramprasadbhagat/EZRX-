@@ -32,9 +32,9 @@ class ProductSuggestionPage extends StatelessWidget {
   final String parentRoute;
 
   const ProductSuggestionPage({
-    Key? key,
+    super.key,
     required this.parentRoute,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -62,9 +62,8 @@ class ProductSuggestionPage extends StatelessWidget {
 class _BodyContent extends StatelessWidget {
   final String parentRoute;
   const _BodyContent({
-    Key? key,
     required this.parentRoute,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

@@ -6,10 +6,10 @@ import 'package:flutter/material.dart';
 
 class MaterialDetailsSection extends StatelessWidget {
   const MaterialDetailsSection({
-    Key? key,
+    super.key,
     required this.data,
     this.expandable = false,
-  }) : super(key: key);
+  });
   final ReturnMaterial data;
   final bool expandable;
 

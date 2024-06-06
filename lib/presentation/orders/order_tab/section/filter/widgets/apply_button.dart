@@ -1,7 +1,7 @@
 part of 'package:ezrxmobile/presentation/orders/order_tab/section/filter/view_by_order_filter.dart';
 
 class _ApplyButton extends StatelessWidget {
-  const _ApplyButton({Key? key}) : super(key: key);
+  const _ApplyButton();
 
   @override
   Widget build(BuildContext context) {

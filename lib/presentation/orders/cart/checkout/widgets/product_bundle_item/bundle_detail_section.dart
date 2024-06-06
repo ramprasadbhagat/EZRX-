@@ -2,8 +2,7 @@ part of 'checkout_bundle_item.dart';
 
 class _BundleDetailsSection extends StatelessWidget {
   final PriceAggregate cartItem;
-  const _BundleDetailsSection({Key? key, required this.cartItem})
-      : super(key: key);
+  const _BundleDetailsSection({required this.cartItem});
 
   @override
   Widget build(BuildContext context) {

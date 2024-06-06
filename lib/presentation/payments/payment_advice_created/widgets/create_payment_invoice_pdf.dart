@@ -46,7 +46,7 @@ class CreatePaymentInvoicePdf {
           data: pleaseNote,
           style: {
             '*': Style(
-              fontSize: const FontSize(10),
+              fontSize: FontSize(10),
             ),
           },
         ),
@@ -425,17 +425,15 @@ class CreatePaymentInvoicePdf {
               ],
               isHeader: true,
             ),
-            ...paymentItems
-                .map(
-                  (e) => _invoiceItem([
-                    e.documentDate.dateString,
-                    if (salesOrganisation.salesOrg.isVN) e.documentReferenceID,
-                    e.postingKeyName,
-                    e.searchKey,
-                    e.paymentAmountInDisplayCrcy.toStringAsFixed(2),
-                  ]),
-                )
-                .toList(),
+            ...paymentItems.map(
+              (e) => _invoiceItem([
+                e.documentDate.dateString,
+                if (salesOrganisation.salesOrg.isVN) e.documentReferenceID,
+                e.postingKeyName,
+                e.searchKey,
+                e.paymentAmountInDisplayCrcy.toStringAsFixed(2),
+              ]),
+            ),
           ],
         ),
       );

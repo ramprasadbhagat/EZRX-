@@ -3,9 +3,8 @@ part of 'package:ezrxmobile/presentation/returns/new_request/new_request_success
 class _ReturnExpandableSection extends StatefulWidget {
   final List<Widget> children;
   const _ReturnExpandableSection({
-    Key? key,
     required this.children,
-  }) : super(key: key);
+  });
 
   @override
   State<_ReturnExpandableSection> createState() =>

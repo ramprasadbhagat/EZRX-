@@ -391,7 +391,8 @@ void main() {
       try {
         final bannerPageView = tester.widget<PageView>(bannerPageViewFinder);
         expect(bannerPageViewFinder, findsOneWidget);
-        bannerPageViewController = bannerPageView.controller;
+        bannerPageViewController =
+            bannerPageView.controller ?? PageController();
       } catch (e) {
         expect(bannerPageViewFinder, findsNothing);
         expect(bannerPageViewController.hasClients, false);

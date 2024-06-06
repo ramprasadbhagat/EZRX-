@@ -6,7 +6,6 @@ import 'package:ezrxmobile/infrastructure/core/common/file_picker.dart';
 import 'package:flutter/foundation.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:scandit_flutter_datacapture_barcode/scandit_flutter_datacapture_barcode_capture.dart';
-// ignore: depend_on_referenced_packages
 import 'package:scandit_flutter_datacapture_core/scandit_flutter_datacapture_core.dart';
 
 import 'package:ezrxmobile/domain/order/repository/i_scan_material_info_repository.dart';

@@ -23,7 +23,7 @@ import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 
 class UserRestrictionListPage extends StatelessWidget {
-  const UserRestrictionListPage({Key? key}) : super(key: key);
+  const UserRestrictionListPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -89,9 +89,8 @@ class UserRestrictionListPage extends StatelessWidget {
 
 class _UserRestrictionScrollList extends StatelessWidget {
   const _UserRestrictionScrollList({
-    Key? key,
     required this.state,
-  }) : super(key: key);
+  });
 
   final UserRestrictionListState state;
 
@@ -124,8 +123,7 @@ class _UserRestrictionScrollList extends StatelessWidget {
 class _UserRestrictionItem extends StatelessWidget {
   final String username;
 
-  const _UserRestrictionItem({Key? key, required this.username})
-      : super(key: key);
+  const _UserRestrictionItem({required this.username});
 
   @override
   Widget build(BuildContext context) {
@@ -158,7 +156,7 @@ class _UserRestrictionItem extends StatelessWidget {
 }
 
 class UserRestrictionListSearch extends StatefulWidget {
-  const UserRestrictionListSearch({Key? key}) : super(key: key);
+  const UserRestrictionListSearch({super.key});
 
   @override
   State<UserRestrictionListSearch> createState() =>
@@ -203,7 +201,7 @@ class _UserRestrictionListSearchState extends State<UserRestrictionListSearch> {
 class _HeaderMessage extends StatelessWidget {
   final UserRestrictionListState state;
 
-  const _HeaderMessage({Key? key, required this.state}) : super(key: key);
+  const _HeaderMessage({required this.state});
 
   @override
   Widget build(BuildContext context) {

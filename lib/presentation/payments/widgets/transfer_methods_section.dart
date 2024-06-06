@@ -8,10 +8,10 @@ import 'package:flutter/material.dart';
 
 class TransferMethodsSection extends StatelessWidget {
   const TransferMethodsSection({
-    Key? key,
+    super.key,
     required this.visible,
     required this.bankInstruction,
-  }) : super(key: key);
+  });
   final bool visible;
   final BankInstruction bankInstruction;
   @override
@@ -41,9 +41,8 @@ class TransferMethodsSection extends StatelessWidget {
 class _ExpandableTransferMethodItem extends StatefulWidget {
   final TransferMethod transferMethod;
   const _ExpandableTransferMethodItem({
-    Key? key,
     required this.transferMethod,
-  }) : super(key: key);
+  });
 
   @override
   State<_ExpandableTransferMethodItem> createState() =>

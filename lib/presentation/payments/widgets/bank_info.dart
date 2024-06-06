@@ -16,8 +16,8 @@ class BankInfo extends StatelessWidget {
   final List<BankBeneficiary> bankInAccounts;
   const BankInfo({
     required this.bankInAccounts,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +38,7 @@ class BankInfo extends StatelessWidget {
                 displayDivider: index != bankInAccounts.length - 1,
               ),
             )
-            .toList(),
+            ,
         const _InstructionNote(),
       ],
     );

@@ -40,8 +40,8 @@ part 'package:ezrxmobile/presentation/orders/order_tab/section/view_by_item/widg
 
 class ViewByItemsPage extends StatelessWidget {
   const ViewByItemsPage({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {

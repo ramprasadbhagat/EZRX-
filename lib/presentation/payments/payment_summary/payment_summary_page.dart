@@ -57,9 +57,9 @@ class PaymentSummaryPage extends StatefulWidget {
   final bool isMarketPlace;
 
   const PaymentSummaryPage({
-    Key? key,
+    super.key,
     required this.isMarketPlace,
-  }) : super(key: key);
+  });
 
   @override
   State<PaymentSummaryPage> createState() => _PaymentSummaryPageState();

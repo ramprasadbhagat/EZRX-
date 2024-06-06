@@ -2,9 +2,8 @@ part of 'package:ezrxmobile/presentation/payments/all_credits/all_credits.dart';
 
 class _CreditsItem extends StatelessWidget {
   const _CreditsItem({
-    Key? key,
     required this.creditItem,
-  }) : super(key: key);
+  });
 
   final CreditAndInvoiceItem creditItem;
 

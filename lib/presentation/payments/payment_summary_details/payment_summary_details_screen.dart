@@ -45,9 +45,9 @@ class PaymentSummaryDetailsPage extends StatelessWidget {
   final bool isMarketPlace;
 
   const PaymentSummaryDetailsPage({
-    Key? key,
+    super.key,
     required this.isMarketPlace,
-  }) : super(key: key);
+  });
   @override
   Widget build(BuildContext context) {
     return PaymentModule(

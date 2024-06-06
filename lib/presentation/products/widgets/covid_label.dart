@@ -13,8 +13,8 @@ class CovidLabel extends StatelessWidget {
     required this.materialInfo,
     this.borderRadius,
     this.padding = const EdgeInsets.all(5),
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {

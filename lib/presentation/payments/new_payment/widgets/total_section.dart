@@ -7,8 +7,7 @@ class _TotalAmountSection extends StatelessWidget {
   const _TotalAmountSection({
     required this.currentStep,
     required this.tabController,
-    Key? key,
-  }) : super(key: key);
+  });
 
   Future<bool?> _showConfirmPaymentPopup(BuildContext context) {
     final newPaymentState = context.read<NewPaymentBloc>().state;

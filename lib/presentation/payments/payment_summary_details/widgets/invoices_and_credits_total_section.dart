@@ -2,10 +2,9 @@ part of 'package:ezrxmobile/presentation/payments/payment_summary_details/paymen
 
 class _InvoicesAndCreditsTotalSection extends StatelessWidget {
   const _InvoicesAndCreditsTotalSection({
-    Key? key,
     required this.visible,
     required this.paymentItems,
-  }) : super(key: key);
+  });
   final List<PaymentItem> paymentItems;
   final bool visible;
   @override

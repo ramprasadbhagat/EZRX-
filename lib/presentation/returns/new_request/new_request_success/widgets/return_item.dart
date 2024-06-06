@@ -4,10 +4,9 @@ class _ReturnItem extends StatelessWidget {
   final ReturnMaterial returnMaterial;
   final ReturnItemDetails returnItemDetail;
   const _ReturnItem({
-    Key? key,
     required this.returnMaterial,
     required this.returnItemDetail,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

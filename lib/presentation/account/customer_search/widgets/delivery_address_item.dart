@@ -3,8 +3,7 @@ part of 'package:ezrxmobile/presentation/account/customer_search/customer_search
 class _DeliveryAddressItem extends StatelessWidget {
   final CustomerCodeInfo customerCodeInfo;
 
-  const _DeliveryAddressItem({Key? key, required this.customerCodeInfo})
-      : super(key: key);
+  const _DeliveryAddressItem({required this.customerCodeInfo});
 
   @override
   Widget build(BuildContext context) {

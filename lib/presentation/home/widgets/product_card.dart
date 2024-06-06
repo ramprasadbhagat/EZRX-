@@ -20,13 +20,13 @@ class ProductCard extends StatelessWidget {
   final bool isSimilarProduct;
   final Function() onFavouriteTap;
   const ProductCard({
-    Key? key,
+    super.key,
     this.isSimilarProduct = false,
     required this.widgetKey,
     required this.material,
     required this.section,
     required this.onFavouriteTap,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

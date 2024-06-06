@@ -18,14 +18,14 @@ class ResponsiveRowColumn extends StatelessWidget {
   final CrossAxisAlignment columnCrossAxisAlignment;
 
   const ResponsiveRowColumn({
-    Key? key,
+    super.key,
     required this.isRow,
     required this.children,
     this.rowMainAxisAlignment = MainAxisAlignment.start,
     this.rowCrossAxisAlignment = CrossAxisAlignment.center,
     this.columnMainAxisAlignment = MainAxisAlignment.start,
     this.columnCrossAxisAlignment = CrossAxisAlignment.center,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -54,12 +54,12 @@ class Responsive extends StatelessWidget {
   final Widget? desktop;
 
   const Responsive({
-    Key? key,
+    super.key,
     required this.mobile,
     required this.tablet,
     this.desktop,
     required this.web,
-  }) : super(key: key);
+  });
 
   static bool isLargerThan(
     BuildContext context,

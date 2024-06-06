@@ -3,9 +3,9 @@ part of 'package:ezrxmobile/presentation/orders/cart/item/cart_product_combo.dar
 class DeleteComboDealBottomSheet extends StatelessWidget {
   final PriceAggregate cartItem;
   const DeleteComboDealBottomSheet({
-    Key? key,
+    super.key,
     required this.cartItem,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -50,9 +50,8 @@ class DeleteComboDealBottomSheet extends StatelessWidget {
 class _DeleteComboButtons extends StatelessWidget {
   final PriceAggregate cartItem;
   const _DeleteComboButtons({
-    Key? key,
     required this.cartItem,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -73,7 +72,7 @@ class _DeleteComboButtons extends StatelessWidget {
           child: ElevatedButton(
             key: WidgetKeys.comboDeteleConfirmButton,
             style: Theme.of(context).elevatedButtonTheme.style!.copyWith(
-                  backgroundColor: const MaterialStatePropertyAll(
+                  backgroundColor: const WidgetStatePropertyAll(
                     ZPColors.red,
                   ),
                 ),

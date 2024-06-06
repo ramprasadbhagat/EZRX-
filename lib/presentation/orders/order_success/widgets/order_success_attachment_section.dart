@@ -14,7 +14,7 @@ import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
 import 'package:ezrxmobile/application/order/order_summary/order_summary_bloc.dart';
 
 class OrderSuccessAttachmentSection extends StatelessWidget {
-  const OrderSuccessAttachmentSection({Key? key}) : super(key: key);
+  const OrderSuccessAttachmentSection({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +51,7 @@ class OrderSuccessAttachmentSection extends StatelessWidget {
 }
 
 class _AttachmentsWithIcon extends StatelessWidget {
-  const _AttachmentsWithIcon({Key? key}) : super(key: key);
+  const _AttachmentsWithIcon();
 
   @override
   Widget build(BuildContext context) {
@@ -82,7 +82,7 @@ class _AttachmentsWithIcon extends StatelessWidget {
                   .map(
                     (e) => _AttachmentFile(document: e),
                   )
-                  .toList(),
+                  ,
               if (state.displayShowMoreOrLess)
                 InkWell(
                   key: WidgetKeys.orderSuccessAttachmentShowButton,
@@ -120,7 +120,7 @@ class _AttachmentsWithIcon extends StatelessWidget {
 
 class _AttachmentFile extends StatelessWidget {
   final PoDocuments document;
-  const _AttachmentFile({Key? key, required this.document}) : super(key: key);
+  const _AttachmentFile({required this.document});
 
   @override
   Widget build(BuildContext context) {

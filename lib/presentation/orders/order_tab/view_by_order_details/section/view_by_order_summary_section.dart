@@ -13,8 +13,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class OrderSummarySection extends StatelessWidget {
   const OrderSummarySection({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -143,12 +143,12 @@ class OrderSummarySection extends StatelessWidget {
 
 class _PriceTile extends StatelessWidget {
   const _PriceTile({
-    Key? key,
+    super.key,
     required this.value,
     required this.title,
     required this.orderNumber,
     this.priceStyle = PriceStyle.summaryPrice,
-  }) : super(key: key);
+  });
 
   final PriceStyle priceStyle;
   final double value;
@@ -173,9 +173,7 @@ class _PriceTile extends StatelessWidget {
 }
 
 class _SectionDivider extends StatelessWidget {
-  const _SectionDivider({
-    Key? key,
-  }) : super(key: key);
+  const _SectionDivider();
 
   @override
   Widget build(BuildContext context) {

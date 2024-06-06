@@ -15,7 +15,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class PoAttachmentUpload extends StatelessWidget {
-  const PoAttachmentUpload({Key? key}) : super(key: key);
+  const PoAttachmentUpload({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -79,9 +79,7 @@ class PoAttachmentUpload extends StatelessWidget {
 }
 
 class _PoUploadButton extends StatelessWidget {
-  const _PoUploadButton({
-    Key? key,
-  }) : super(key: key);
+  const _PoUploadButton();
 
   @override
   Widget build(BuildContext context) {
@@ -129,9 +127,7 @@ class _PoUploadButton extends StatelessWidget {
 }
 
 class _UploadErrorMessage extends StatelessWidget {
-  const _UploadErrorMessage({
-    Key? key,
-  }) : super(key: key);
+  const _UploadErrorMessage();
 
   @override
   Widget build(BuildContext context) {
@@ -156,9 +152,8 @@ class _UploadErrorMessage extends StatelessWidget {
 
 class _UploadedFileList extends StatelessWidget {
   const _UploadedFileList({
-    Key? key,
     required this.data,
-  }) : super(key: key);
+  });
 
   final List<PoDocuments> data;
 

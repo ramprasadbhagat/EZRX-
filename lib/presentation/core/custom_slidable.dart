@@ -10,13 +10,13 @@ class CustomSlidable extends StatelessWidget {
   final List<CustomSlidableAction> endActionPaneActions;
 
   const CustomSlidable({
-    Key? key,
+    super.key,
     required this.child,
     this.enabled = true,
     this.borderRadius = 0,
     this.endActionPaneActions = const <CustomSlidableAction>[],
     this.extentRatio = 0.5,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

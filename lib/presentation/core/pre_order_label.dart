@@ -6,7 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class PreOrderLabel extends StatelessWidget {
   final StockInfo stockInfo;
-  const PreOrderLabel({Key? key, required this.stockInfo}) : super(key: key);
+  const PreOrderLabel({super.key, required this.stockInfo});
 
   @override
   Widget build(BuildContext context) {

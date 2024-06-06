@@ -1,7 +1,7 @@
 part of 'package:ezrxmobile/presentation/products/combo_detail/combo_detail_page.dart';
 
 class _ComboDetailAddToCartSection extends StatelessWidget {
-  const _ComboDetailAddToCartSection({Key? key}) : super(key: key);
+  const _ComboDetailAddToCartSection();
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<ComboDealMaterialDetailBloc,
@@ -192,8 +192,7 @@ class _ComboDetailAddToCartSection extends StatelessWidget {
 }
 
 class _CartPageCheckoutButton extends StatelessWidget {
-  const _CartPageCheckoutButton({required this.isUpdateCart, Key? key})
-      : super(key: key);
+  const _CartPageCheckoutButton({required this.isUpdateCart});
   final bool isUpdateCart;
   @override
   Widget build(BuildContext context) {

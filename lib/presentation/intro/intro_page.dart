@@ -11,7 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class IntroPage extends StatefulWidget {
-  const IntroPage({Key? key}) : super(key: key);
+  const IntroPage({super.key});
 
   @override
   State<IntroPage> createState() => _IntroPageState();
@@ -174,11 +174,10 @@ class _CustomIndicator extends StatelessWidget {
   final int length;
 
   const _CustomIndicator({
-    Key? key,
     required this.index,
     required this.lastIndex,
     required this.length,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -195,9 +194,8 @@ class _CustomIndicator extends StatelessWidget {
 
 class _HorizontalDivider extends StatelessWidget {
   const _HorizontalDivider({
-    Key? key,
     required this.isActive,
-  }) : super(key: key);
+  });
 
   final bool isActive;
 

@@ -1,7 +1,7 @@
 part of 'package:ezrxmobile/presentation/payments/payment_advice_created/payment_advice_created_page.dart';
 
 class _PaymentAdviceDocument extends StatelessWidget {
-  const _PaymentAdviceDocument({Key? key}) : super(key: key);
+  const _PaymentAdviceDocument();
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +47,7 @@ class _PaymentAdviceDocument extends StatelessWidget {
 }
 
 class _PDFAdviceSection extends StatelessWidget {
-  const _PDFAdviceSection({Key? key}) : super(key: key);
+  const _PDFAdviceSection();
 
   @override
   Widget build(BuildContext context) {

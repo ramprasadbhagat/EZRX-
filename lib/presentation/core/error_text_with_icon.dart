@@ -5,10 +5,10 @@ class ErrorTextWithIcon extends StatelessWidget {
   final String valueText;
   final EdgeInsets textPadding;
   const ErrorTextWithIcon({
-    Key? key,
+    super.key,
     required this.valueText,
     this.textPadding = const EdgeInsets.symmetric(vertical: 5.0),
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

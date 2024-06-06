@@ -5,11 +5,10 @@ class _ViewByOrderItemGroup extends StatelessWidget {
   final bool showDivider;
   final bool showBanner;
   const _ViewByOrderItemGroup({
-    Key? key,
     required this.orderHistoryItem,
     required this.showDivider,
     required this.showBanner,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +51,7 @@ class _ViewByOrderItemGroup extends StatelessWidget {
                 return _ViewByOrderItem(
                   orderHistoryItem: e,
                 );
-              }).toList(),
+              }),
             ],
           ),
         ),

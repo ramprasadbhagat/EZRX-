@@ -29,7 +29,7 @@ void main() {
       baseUrl: 'https://uat-my.ezrx.com',
     ),
   );
-  final dioAdapter = DioAdapter(dio: dio);
+  final dioAdapter = DioAdapter(dio: dio, matcher: const UrlRequestMatcher());
   final service = HttpService.mockDio(dio);
   final variableData = {
     'template': '4A583EF3-A105-4A00-BC98-EC96A9967966',

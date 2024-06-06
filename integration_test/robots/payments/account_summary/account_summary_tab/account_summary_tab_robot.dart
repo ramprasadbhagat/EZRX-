@@ -26,7 +26,7 @@ class AccountSummaryTabRobot extends CommonRobot {
   final _newPaymentButtonFinder = find.byKey(WidgetKeys.newPaymentButton);
   final _govNumber = find.byKey(WidgetKeys.governmentNumber);
 
-  AccountSummaryTabRobot(WidgetTester tester) : super(tester);
+  AccountSummaryTabRobot(super.tester);
 
   void verifyPage() {
     expect(_allSummaryPage, findsOneWidget);

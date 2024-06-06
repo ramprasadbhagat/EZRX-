@@ -1,7 +1,7 @@
 part of 'package:ezrxmobile/presentation/home/announcement_section/announcement_articles_tab/announcements_page.dart';
 
 class _ArticleFilterIcon extends StatelessWidget {
-  const _ArticleFilterIcon({Key? key}) : super(key: key);
+  const _ArticleFilterIcon();
 
   @override
   Widget build(BuildContext context) {

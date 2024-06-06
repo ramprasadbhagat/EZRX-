@@ -5,11 +5,10 @@ class _TitleSection extends StatelessWidget {
   final String suffixText;
   final Color titleColor;
   const _TitleSection({
-    Key? key,
     required this.prefixText,
     required this.suffixText,
     required this.titleColor,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

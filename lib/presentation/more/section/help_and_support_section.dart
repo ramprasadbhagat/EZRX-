@@ -6,7 +6,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HelpAndSupportTile extends StatelessWidget {
-  const HelpAndSupportTile({Key? key}) : super(key: key);
+  const HelpAndSupportTile({super.key});
   List<MoreDetailsTile> moreHelpAndSupportTiles(BuildContext context) {
     final eligibilityState = context.read<EligibilityBloc>().state;
 

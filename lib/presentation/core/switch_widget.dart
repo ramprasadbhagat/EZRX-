@@ -18,12 +18,12 @@ class SwitchWidget extends StatelessWidget {
       activeTrackColor:
           disable ? ZPColors.toggleOnDisableState : ZPColors.textButtonColor,
       inactiveTrackColor: ZPColors.lightGrey,
-      thumbColor: MaterialStateProperty.resolveWith<Color?>(
-        (Set<MaterialState> states) => ZPColors.white,
+      thumbColor: WidgetStateProperty.resolveWith<Color?>(
+        (Set<WidgetState> states) => ZPColors.white,
       ),
-      thumbIcon: MaterialStateProperty.resolveWith<Icon?>(
-        (Set<MaterialState> states) {
-          if (states.contains(MaterialState.selected)) {
+      thumbIcon: WidgetStateProperty.resolveWith<Icon?>(
+        (Set<WidgetState> states) {
+          if (states.contains(WidgetState.selected)) {
             return const Icon(
               Icons.check,
               color: ZPColors.textButtonColor,

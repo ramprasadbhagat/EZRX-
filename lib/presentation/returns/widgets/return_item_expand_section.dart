@@ -6,11 +6,11 @@ const _itemSpacing = 8.0;
 
 class _ReturnItemExpandSection extends StatelessWidget {
   const _ReturnItemExpandSection({
-    Key? key,
+    super.key,
     required this.returnRequestInformation,
     required this.downloadingAttachments,
     required this.downloadAttachment,
-  }) : super(key: key);
+  });
   final ReturnRequestInformation returnRequestInformation;
   final List<ReturnRequestAttachment> downloadingAttachments;
   final Function(ReturnRequestAttachment) downloadAttachment;
@@ -62,9 +62,8 @@ class _ReturnItemExpandSection extends StatelessWidget {
 
 class _MaterialDetailsSection extends StatelessWidget {
   const _MaterialDetailsSection({
-    Key? key,
     required this.requestInformation,
-  }) : super(key: key);
+  });
   final ReturnRequestInformation requestInformation;
 
   @override
@@ -120,12 +119,12 @@ class _MaterialDetailsSection extends StatelessWidget {
 
 class _ReturnDetailsSection extends StatelessWidget {
   const _ReturnDetailsSection({
-    Key? key,
+    super.key,
     required this.requestInformation,
     required this.downloadingAttachments,
     required this.downloadAttachment,
     this.isBonusDetails = false,
-  }) : super(key: key);
+  });
   final ReturnRequestInformation requestInformation;
   final List<ReturnRequestAttachment> downloadingAttachments;
   final Function(ReturnRequestAttachment) downloadAttachment;
@@ -182,12 +181,12 @@ class _ReturnDetailsSection extends StatelessWidget {
 
 class _ApprovalDetailsSection extends StatelessWidget {
   const _ApprovalDetailsSection({
-    Key? key,
+    super.key,
     required this.requestInformation,
     required this.downloadingAttachments,
     required this.downloadAttachment,
     this.isBonusDetails = false,
-  }) : super(key: key);
+  });
   final ReturnRequestInformation requestInformation;
   final List<ReturnRequestAttachment> downloadingAttachments;
   final Function(ReturnRequestAttachment) downloadAttachment;
@@ -246,11 +245,11 @@ class _ApprovalDetailsSection extends StatelessWidget {
 
 class _ReturnAttachmentSection extends StatelessWidget {
   const _ReturnAttachmentSection({
-    Key? key,
+    super.key,
     required this.attachments,
     required this.downloadingAttachments,
     required this.downloadAttachment,
-  }) : super(key: key);
+  });
   final List<ReturnRequestAttachment> attachments;
   final List<ReturnRequestAttachment> downloadingAttachments;
   final Function(ReturnRequestAttachment) downloadAttachment;

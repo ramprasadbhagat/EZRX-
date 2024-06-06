@@ -1,7 +1,7 @@
 part of 'package:ezrxmobile/presentation/orders/cart/pre_order_modal/pre_order_modal.dart';
 
 class _PreOrderScrollSection extends StatelessWidget {
-  const _PreOrderScrollSection({Key? key}) : super(key: key);
+  const _PreOrderScrollSection();
 
   @override
   Widget build(BuildContext context) {

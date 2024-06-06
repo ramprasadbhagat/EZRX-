@@ -1,7 +1,7 @@
 part of 'package:ezrxmobile/presentation/payments/payment_advice_created/payment_advice_created_page.dart';
 
 class _PaymentAdviceNextStep extends StatelessWidget {
-  const _PaymentAdviceNextStep({Key? key}) : super(key: key);
+  const _PaymentAdviceNextStep();
 
   @override
   Widget build(BuildContext context) {

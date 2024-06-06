@@ -177,7 +177,7 @@ void main() {
     }
 
     testWidgets(
-        ' => showing invalidSelectedReturnItemError  return items are from the different principals',
+        ' => showing invalidSelectedReturnItemError return items are from the different principals',
         (WidgetTester tester) async {
       when(() => newRequestBlocMock.state).thenReturn(
         NewRequestState.initial().copyWith(
@@ -204,6 +204,7 @@ void main() {
       when(() => newRequestBlocMock.state).thenReturn(
         NewRequestState.initial().copyWith(
           salesOrg: fakeSalesOrganisation.salesOrg,
+          showErrorMessages: true,
           selectedItems: [
             fakeReturnMaterial.copyWith(
               itemNumber: '1',
@@ -253,6 +254,7 @@ void main() {
       when(() => newRequestBlocMock.state).thenReturn(
         NewRequestState.initial().copyWith(
           salesOrg: fakeSalesOrganisation.salesOrg,
+          showErrorMessages: true,
           selectedItems: [
             fakeReturnMaterial.copyWith(
               isMarketPlace: true,

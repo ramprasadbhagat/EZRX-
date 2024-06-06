@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:intl/intl.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
-// ignore: depend_on_referenced_packages
 import 'package:path/path.dart' as path;
 
 String stringCapitalize(String text) {

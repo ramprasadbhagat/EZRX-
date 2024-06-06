@@ -44,9 +44,9 @@ class NewPaymentPage extends StatelessWidget {
   final bool isMarketPlace;
 
   const NewPaymentPage({
-    Key? key,
+    super.key,
     required this.isMarketPlace,
-  }) : super(key: key);
+  });
 
   List<PageRouteInfo<void>> _getTabs({
     bool isID = false,
@@ -151,10 +151,9 @@ class _PreviousButton extends StatelessWidget {
   final int step;
 
   const _PreviousButton({
-    Key? key,
     required this.tabController,
     required this.step,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -178,9 +177,8 @@ class _NextButtonID extends StatelessWidget {
   final VoidCallback onTab;
 
   const _NextButtonID({
-    Key? key,
     required this.onTab,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -214,10 +212,9 @@ class _NextButton extends StatelessWidget {
   final bool enabled;
 
   const _NextButton({
-    Key? key,
     required this.tabController,
     required this.enabled,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

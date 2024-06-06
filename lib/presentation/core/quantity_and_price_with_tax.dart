@@ -15,14 +15,13 @@ class QuantityAndPriceWithTax extends StatelessWidget {
   final double? taxValue;
   final bool isTopAligned;
   const QuantityAndPriceWithTax._({
-    Key? key,
     required this.quantity,
     this.quantityDescription = '',
     required this.taxPercentage,
     required this.netPrice,
     this.taxValue,
     this.isTopAligned = false,
-  }) : super(key: key);
+  });
 
   factory QuantityAndPriceWithTax.order({
     required int quantity,

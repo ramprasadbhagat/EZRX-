@@ -13,12 +13,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class BankAccountSection extends StatelessWidget {
   const BankAccountSection({
-    Key? key,
+    super.key,
     required this.widgetKey,
     required this.details,
     required this.visible,
     required this.isLoading,
-  }) : super(key: key);
+  });
   final Key widgetKey;
   final PaymentSummaryDetails details;
   final bool visible;
@@ -67,13 +67,12 @@ class BankAccountSection extends StatelessWidget {
 
 class _BankAccountInfoRow extends StatelessWidget {
   const _BankAccountInfoRow({
-    Key? key,
     required this.title,
     required this.text,
     this.isLoading = false,
     this.isPrice = false,
     this.canCopy = false,
-  }) : super(key: key);
+  });
   final String title;
   final String text;
   final bool isLoading;

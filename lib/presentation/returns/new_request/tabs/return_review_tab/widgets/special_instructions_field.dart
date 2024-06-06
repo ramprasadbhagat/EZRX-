@@ -2,8 +2,8 @@ part of 'package:ezrxmobile/presentation/returns/new_request/tabs/return_review_
 
 class SpecialInstructionsField extends StatelessWidget {
   const SpecialInstructionsField({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {

@@ -62,9 +62,9 @@ class PaymentAdviceCreatedPage extends StatelessWidget {
   final bool isMarketPlace;
 
   const PaymentAdviceCreatedPage({
-    Key? key,
+    super.key,
     required this.isMarketPlace,
-  }) : super(key: key);
+  });
 
   static const paymentErrorMessage =
       'Unable to generate payment advice as at least one of the selected invoices/credit notes have already been selected for another Payment Advice. Please check your payment summary or select other invoices/credit notes for this payment.';
@@ -307,8 +307,7 @@ class PaymentAdviceCreatedPage extends StatelessWidget {
 
 class _PaymentAdviceWaiting extends StatelessWidget {
   final bool isPaymentGateway;
-  const _PaymentAdviceWaiting({required this.isPaymentGateway, Key? key})
-      : super(key: key);
+  const _PaymentAdviceWaiting({required this.isPaymentGateway});
 
   @override
   Widget build(BuildContext context) {

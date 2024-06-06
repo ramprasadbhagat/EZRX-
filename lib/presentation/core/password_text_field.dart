@@ -12,12 +12,12 @@ class PasswordTextField extends StatelessWidget {
   final String hintText;
   final bool isPasswordVisible;
   const PasswordTextField({
-    Key? key,
+    super.key,
     required this.passwordFieldType,
     required this.isPasswordVisible,
     required this.labelText,
     required this.hintText,
-  }) : super(key: key);
+  });
 
   String _getInitialValue(BuildContext context) {
     switch (passwordFieldType) {

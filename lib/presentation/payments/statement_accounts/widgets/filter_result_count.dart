@@ -3,7 +3,7 @@ part of 'package:ezrxmobile/presentation/payments/statement_accounts/statement_a
 class _FilterResultCount extends StatelessWidget {
   final int value;
 
-  const _FilterResultCount(this.value, {Key? key}) : super(key: key);
+  const _FilterResultCount(this.value);
 
   @override
   Widget build(BuildContext context) {

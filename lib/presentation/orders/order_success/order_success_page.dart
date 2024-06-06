@@ -60,7 +60,7 @@ const _horizontalPadding = 12.0;
 const _verticalPadding = 12.0;
 
 class OrderSuccessPage extends StatelessWidget {
-  const OrderSuccessPage({Key? key}) : super(key: key);
+  const OrderSuccessPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -113,7 +113,7 @@ class OrderSuccessPage extends StatelessWidget {
 }
 
 class _BodyContent extends StatelessWidget {
-  const _BodyContent({Key? key}) : super(key: key);
+  const _BodyContent();
 
   @override
   Widget build(BuildContext context) {

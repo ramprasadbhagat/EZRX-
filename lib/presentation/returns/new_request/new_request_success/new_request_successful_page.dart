@@ -37,7 +37,7 @@ part 'package:ezrxmobile/presentation/returns/new_request/new_request_success/wi
 part 'package:ezrxmobile/presentation/returns/new_request/new_request_success/widgets/expandable_bonus_items.dart';
 
 class NewRequestSuccessfulPage extends StatelessWidget {
-  const NewRequestSuccessfulPage({Key? key}) : super(key: key);
+  const NewRequestSuccessfulPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -59,7 +59,7 @@ class NewRequestSuccessfulPage extends StatelessWidget {
 }
 
 class _BodyContent extends StatelessWidget {
-  const _BodyContent({Key? key}) : super(key: key);
+  const _BodyContent();
 
   @override
   Widget build(BuildContext context) {

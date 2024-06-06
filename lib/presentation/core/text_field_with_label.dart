@@ -4,7 +4,7 @@ import 'package:flutter/services.dart';
 
 class TextFieldWithLabel extends StatelessWidget {
   const TextFieldWithLabel({
-    Key? key,
+    super.key,
     required this.fieldKey,
     required this.labelText,
     this.controller,
@@ -27,7 +27,7 @@ class TextFieldWithLabel extends StatelessWidget {
     this.inputFormatters,
     this.onTapOutside,
     this.maxLength,
-  }) : super(key: key);
+  });
   final Key fieldKey;
   final String labelText;
   final TextEditingController? controller;

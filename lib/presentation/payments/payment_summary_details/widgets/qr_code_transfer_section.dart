@@ -2,8 +2,8 @@ part of 'package:ezrxmobile/presentation/payments/payment_summary_details/paymen
 
 class _QRCodeTransferSection extends StatelessWidget {
   const _QRCodeTransferSection({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
   @override
   Widget build(BuildContext context) {
     return Column(

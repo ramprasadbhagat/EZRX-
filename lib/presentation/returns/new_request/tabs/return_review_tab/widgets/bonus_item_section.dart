@@ -2,9 +2,8 @@ part of 'package:ezrxmobile/presentation/returns/new_request/tabs/return_review_
 
 class _BonusItemSection extends StatelessWidget {
   const _BonusItemSection({
-    Key? key,
     required this.items,
-  }) : super(key: key);
+  });
   final List<ReturnMaterial> items;
 
   @override

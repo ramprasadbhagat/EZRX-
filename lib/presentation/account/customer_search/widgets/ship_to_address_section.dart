@@ -5,10 +5,9 @@ class _ShipToAddressSection extends StatelessWidget {
   final CustomerCodeInfo customerCodeInfo;
 
   const _ShipToAddressSection({
-    Key? key,
     required this.shipToInfo,
     required this.customerCodeInfo,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

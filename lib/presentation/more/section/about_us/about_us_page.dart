@@ -19,7 +19,7 @@ part 'package:ezrxmobile/presentation/more/section/about_us/widgets/our_partners
 part 'package:ezrxmobile/presentation/more/section/about_us/widgets/certifications_section.dart';
 
 class AboutUsPage extends StatefulWidget {
-  const AboutUsPage({Key? key}) : super(key: key);
+  const AboutUsPage({super.key});
 
   @override
   State<AboutUsPage> createState() => _AboutUsPageState();
@@ -147,9 +147,8 @@ class _AboutUsPageState extends State<AboutUsPage> {
 class _HeaderSection extends StatelessWidget {
   final BannerTemplate bannerTemplate;
   const _HeaderSection({
-    Key? key,
     required this.bannerTemplate,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

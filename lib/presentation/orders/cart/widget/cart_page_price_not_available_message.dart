@@ -1,7 +1,7 @@
 part of 'package:ezrxmobile/presentation/orders/cart/cart_page.dart';
 
 class _CartPagePriceNotAvailableMessage extends StatelessWidget {
-  const _CartPagePriceNotAvailableMessage({Key? key}) : super(key: key);
+  const _CartPagePriceNotAvailableMessage();
 
   @override
   Widget build(BuildContext context) {

@@ -6,7 +6,7 @@ import 'package:flutter_test/flutter_test.dart';
 import '../common/common_robot.dart';
 
 class PaymentHomeRobot extends CommonRobot {
-  PaymentHomeRobot(WidgetTester tester) : super(tester);
+  PaymentHomeRobot(super.tester);
 
   final accountSummaryMenu = find.byKey(WidgetKeys.accountSummaryMenu);
   final paymentSummaryMenu = find.byKey(WidgetKeys.paymentSummaryMenu);

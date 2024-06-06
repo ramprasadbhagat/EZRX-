@@ -6,10 +6,10 @@ import 'package:flutter/material.dart';
 
 class StatusLabel extends StatelessWidget {
   const StatusLabel({
-    Key? key,
+    super.key,
     required this.status,
     this.valueColor = ZPColors.black,
-  }) : super(key: key);
+  });
 
   final StatusType status;
   final Color valueColor;

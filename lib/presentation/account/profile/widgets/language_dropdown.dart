@@ -1,7 +1,7 @@
 part of 'package:ezrxmobile/presentation/account/profile/profile_page.dart';
 
 class _LanguageDropDown extends StatelessWidget {
-  const _LanguageDropDown({Key? key}) : super(key: key);
+  const _LanguageDropDown();
 
   @override
   Widget build(BuildContext context) {

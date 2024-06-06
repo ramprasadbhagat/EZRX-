@@ -24,10 +24,10 @@ class CarouselBannerTile extends StatelessWidget {
   final int bannerPosition;
 
   const CarouselBannerTile({
-    Key? key,
+    super.key,
     required this.bannerPosition,
     required this.banner,
-  }) : super(key: key);
+  });
   @override
   Widget build(BuildContext context) {
     final bannerUrl = Responsive.isMobile(context)

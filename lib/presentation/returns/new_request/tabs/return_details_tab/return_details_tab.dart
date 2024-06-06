@@ -45,7 +45,7 @@ part 'widgets/comment_field.dart';
 part 'widgets/upload_attachement_section.dart';
 
 class ReturnDetailsTab extends StatelessWidget {
-  const ReturnDetailsTab({Key? key}) : super(key: key);
+  const ReturnDetailsTab({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -73,7 +73,7 @@ class ReturnDetailsTab extends StatelessWidget {
                     detail: state.getReturnItemDetails(item.uuid),
                   ),
                 )
-                .toList(),
+                ,
           ],
         );
       },

@@ -3,9 +3,9 @@ part of 'package:ezrxmobile/presentation/faq/faq_info.dart';
 class _CategoryTile extends StatelessWidget {
   final FAQCategoryGroup faqCategoryGroup;
   const _CategoryTile({
-    Key? key,
+    super.key,
     required this.faqCategoryGroup,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -60,7 +60,7 @@ class _CategoryTile extends StatelessWidget {
                     ),
                   ),
                 )
-                .toList(),
+                ,
           ],
         );
       },

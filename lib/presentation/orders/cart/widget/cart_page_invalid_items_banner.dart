@@ -1,7 +1,7 @@
 part of 'package:ezrxmobile/presentation/orders/cart/cart_page.dart';
 
 class _CartPageInvalidItemsBanner extends StatelessWidget {
-  const _CartPageInvalidItemsBanner({Key? key}) : super(key: key);
+  const _CartPageInvalidItemsBanner();
 
   @override
   Widget build(BuildContext context) {
@@ -104,10 +104,9 @@ class _InvalidItemRemoveButton extends StatelessWidget {
   final List<PriceAggregate> invalidComboItems;
 
   const _InvalidItemRemoveButton({
-    Key? key,
     required this.invalidItems,
     required this.invalidComboItems,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -139,10 +138,10 @@ class _InvalidItemRemoveButton extends StatelessWidget {
                   }
                 },
           style: Theme.of(context).elevatedButtonTheme.style!.copyWith(
-                backgroundColor: const MaterialStatePropertyAll(
+                backgroundColor: const WidgetStatePropertyAll(
                   ZPColors.paleBlueGray,
                 ),
-                side: const MaterialStatePropertyAll(
+                side: const WidgetStatePropertyAll(
                   BorderSide(
                     color: ZPColors.primary,
                   ),

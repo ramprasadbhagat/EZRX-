@@ -31,7 +31,7 @@ part 'package:ezrxmobile/presentation/notification/widgets/delete_notifications_
 part 'package:ezrxmobile/presentation/notification/widgets/announcement_list.dart';
 
 class NotificationTab extends StatelessWidget {
-  const NotificationTab({Key? key}) : super(key: key);
+  const NotificationTab({super.key});
 
   @override
   Widget build(BuildContext context) {

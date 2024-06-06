@@ -1,9 +1,7 @@
 part of 'package:ezrxmobile/presentation/payments/new_payment/tabs/payment_method/payment_method_tab.dart';
 
 class _PaymentItemListView extends StatelessWidget {
-  const _PaymentItemListView({
-    Key? key,
-  }) : super(key: key);
+  const _PaymentItemListView();
 
   @override
   Widget build(BuildContext context) {
@@ -29,9 +27,8 @@ class _InvoiceCreditItemTile extends StatelessWidget {
   final CustomerOpenItem customerOpenItem;
 
   const _InvoiceCreditItemTile({
-    Key? key,
     required this.customerOpenItem,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

@@ -2,8 +2,7 @@ part of 'package:ezrxmobile/presentation/returns/new_request/new_request_success
 
 class _ExpandableMaterialDetails extends StatelessWidget {
   final ReturnMaterial materialDetail;
-  const _ExpandableMaterialDetails({Key? key, required this.materialDetail})
-      : super(key: key);
+  const _ExpandableMaterialDetails({required this.materialDetail});
 
   @override
   Widget build(BuildContext context) {

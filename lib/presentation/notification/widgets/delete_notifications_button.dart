@@ -1,7 +1,7 @@
 part of 'package:ezrxmobile/presentation/notification/notification_tab.dart';
 
 class _DeleteNotificationButton extends StatelessWidget {
-  const _DeleteNotificationButton({Key? key}) : super(key: key);
+  const _DeleteNotificationButton();
 
   @override
   Widget build(BuildContext context) {

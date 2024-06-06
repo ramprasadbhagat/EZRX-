@@ -4,10 +4,9 @@ class _MaterialQuantitySection extends StatefulWidget {
   final PriceAggregate comboItem;
   final ComboDealMaterial comboDealMaterial;
   const _MaterialQuantitySection({
-    Key? key,
     required this.comboItem,
     required this.comboDealMaterial,
-  }) : super(key: key);
+  });
 
   @override
   State<_MaterialQuantitySection> createState() =>

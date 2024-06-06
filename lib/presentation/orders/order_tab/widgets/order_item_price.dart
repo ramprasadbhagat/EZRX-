@@ -12,12 +12,12 @@ class OrderItemPrice extends StatelessWidget {
   final String unitPrice;
   final bool hidePrice;
   const OrderItemPrice({
-    Key? key,
+    super.key,
     required this.showPreviousPrice,
     required this.unitPrice,
     required this.hidePrice,
     this.originPrice = '',
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

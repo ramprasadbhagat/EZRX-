@@ -7,7 +7,7 @@ import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.da
 
 class PriceComponent extends StatelessWidget {
   const PriceComponent({
-    Key? key,
+    super.key,
     required this.salesOrgConfig,
     required this.price,
     this.title = '',
@@ -15,7 +15,7 @@ class PriceComponent extends StatelessWidget {
     this.priceLabelStyle,
     this.obscured = false,
     this.type = PriceStyle.commonPrice,
-  }) : super(key: key);
+  });
 
   final SalesOrganisationConfigs salesOrgConfig;
   final String price;

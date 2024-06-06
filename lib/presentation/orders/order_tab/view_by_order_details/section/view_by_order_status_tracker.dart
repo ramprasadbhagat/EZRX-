@@ -3,9 +3,8 @@ part of 'package:ezrxmobile/presentation/orders/order_tab/view_by_order_details/
 class _ViewByOrderStatusTracker extends StatelessWidget {
   final OrderHistoryDetails orderHistoryDetails;
   const _ViewByOrderStatusTracker({
-    Key? key,
     required this.orderHistoryDetails,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

@@ -2,8 +2,7 @@ part of 'package:ezrxmobile/presentation/home/product_offer_section/product_offe
 
 class _ProductOfferBodyContent extends StatelessWidget {
   final BuildContext ctx;
-  const _ProductOfferBodyContent({Key? key, required this.ctx})
-      : super(key: key);
+  const _ProductOfferBodyContent({required this.ctx});
 
   @override
   Widget build(BuildContext context) {

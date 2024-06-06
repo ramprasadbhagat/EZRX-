@@ -3,9 +3,8 @@ part of 'package:ezrxmobile/presentation/home/announcement_section/announcement_
 class _AnnouncementInfoAttachmentSection extends StatelessWidget {
   final List<Attachment> documentList;
   const _AnnouncementInfoAttachmentSection({
-    Key? key,
     required this.documentList,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +38,7 @@ class _AnnouncementInfoAttachmentSection extends StatelessWidget {
 
 class _AttachmentCard extends StatelessWidget {
   final Attachment url;
-  const _AttachmentCard({Key? key, required this.url}) : super(key: key);
+  const _AttachmentCard({required this.url});
 
   @override
   Widget build(BuildContext context) {

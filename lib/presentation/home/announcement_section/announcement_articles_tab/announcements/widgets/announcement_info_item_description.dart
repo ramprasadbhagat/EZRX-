@@ -5,11 +5,10 @@ class _AnnouncementInfoItemDescription extends StatelessWidget {
   final String description;
   final DateTimeStringValue releaseDate;
   const _AnnouncementInfoItemDescription({
-    Key? key,
     required this.title,
     required this.releaseDate,
     required this.description,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

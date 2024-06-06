@@ -1184,7 +1184,7 @@ void main() {
               ],
             )
             .flattened
-            .toList(),
+            ,
       ];
 
       when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
@@ -1236,7 +1236,7 @@ void main() {
               ],
             )
             .flattened
-            .toList(),
+            ,
       ];
 
       when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);

@@ -8,7 +8,7 @@ import '../../common/common_robot.dart';
 import '../../common/extension.dart';
 
 class OrderSuccessRobot extends CommonRobot {
-  OrderSuccessRobot(WidgetTester tester) : super(tester);
+  OrderSuccessRobot(super.tester);
 
   late Finder _verifyingItem;
 

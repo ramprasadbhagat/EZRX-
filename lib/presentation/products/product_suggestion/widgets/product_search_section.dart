@@ -5,10 +5,9 @@ class _ProductSearchSection extends StatefulWidget {
   final SearchKey initSearchValue;
 
   const _ProductSearchSection({
-    Key? key,
     required this.parentRoute,
     required this.initSearchValue,
-  }) : super(key: key);
+  });
 
   @override
   State<_ProductSearchSection> createState() => _ProductSearchSectionState();

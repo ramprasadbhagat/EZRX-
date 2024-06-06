@@ -6,8 +6,7 @@ class _BankInfoDetail extends StatelessWidget {
   const _BankInfoDetail({
     required this.bankBeneficiary,
     this.displayDivider = false,
-    Key? key,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

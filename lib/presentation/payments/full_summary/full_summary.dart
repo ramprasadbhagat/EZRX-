@@ -33,9 +33,9 @@ class FullSummaryPage extends StatefulWidget {
   final bool isMarketPlace;
 
   const FullSummaryPage({
-    Key? key,
+    super.key,
     required this.isMarketPlace,
-  }) : super(key: key);
+  });
 
   @override
   State<FullSummaryPage> createState() => _FullSummaryPageState();

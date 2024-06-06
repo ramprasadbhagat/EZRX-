@@ -10,10 +10,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ReturnQuantityField extends StatelessWidget {
   const ReturnQuantityField({
-    Key? key,
+    super.key,
     required this.balanceQuantity,
     required this.uuid,
-  }) : super(key: key);
+  });
 
   final IntegerValue balanceQuantity;
   final String uuid;

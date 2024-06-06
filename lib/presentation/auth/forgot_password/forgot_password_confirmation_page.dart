@@ -16,7 +16,7 @@ import 'package:ezrxmobile/presentation/auth/forgot_password/widgets/back_to_log
 part 'package:ezrxmobile/presentation/auth/forgot_password/widgets/email_send_to_you.dart';
 
 class ForgetPasswordConfirmationPage extends StatelessWidget {
-  const ForgetPasswordConfirmationPage({Key? key}) : super(key: key);
+  const ForgetPasswordConfirmationPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +49,7 @@ class ForgetPasswordConfirmationPage extends StatelessWidget {
                 )
               : Column(
                   children: <Widget>[
-                     Logo(
+                    Logo(
                       title: context.tr('Forgot password'),
                     ),
                     Expanded(

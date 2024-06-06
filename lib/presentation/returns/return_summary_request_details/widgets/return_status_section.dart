@@ -8,10 +8,10 @@ class ReturnStatusSection extends StatelessWidget {
   final String title;
 
   const ReturnStatusSection({
-    Key? key,
+    super.key,
     required this.customStep,
     required this.title,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +40,7 @@ class ReturnStatusSection extends StatelessWidget {
 }
 
 class _CloseButton extends StatelessWidget {
-  const _CloseButton({Key? key}) : super(key: key);
+  const _CloseButton();
 
   @override
   Widget build(BuildContext context) {
@@ -66,9 +66,8 @@ class _CustomStatusStepper extends StatelessWidget {
   final List<CustomStep> customStep;
 
   const _CustomStatusStepper({
-    Key? key,
     required this.customStep,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -93,10 +92,9 @@ class _CustomStepWithIcon extends StatelessWidget {
   final int index;
 
   const _CustomStepWithIcon({
-    Key? key,
     required this.customStep,
     required this.index,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

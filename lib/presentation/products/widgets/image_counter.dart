@@ -6,10 +6,10 @@ class ImageCounter extends StatelessWidget {
   final int total;
   final int selected;
   const ImageCounter({
-    Key? key,
+    super.key,
     required this.total,
     required this.selected,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

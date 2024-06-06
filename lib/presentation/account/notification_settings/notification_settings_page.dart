@@ -15,7 +15,7 @@ part 'package:ezrxmobile/presentation/account/notification_settings/widgets/noti
 part 'package:ezrxmobile/presentation/account/notification_settings/widgets/notification_setting_footer.dart';
 
 class NotificationSettingsPage extends StatelessWidget {
-  const NotificationSettingsPage({Key? key}) : super(key: key);
+  const NotificationSettingsPage({super.key});
 
   List<NotificationSection> _getListNotificationSection(
     BuildContext context,
@@ -199,10 +199,10 @@ class NotificationSection extends StatelessWidget {
   final String title;
   final List<SettingItemData> items;
   const NotificationSection({
-    Key? key,
+    super.key,
     required this.title,
     required this.items,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

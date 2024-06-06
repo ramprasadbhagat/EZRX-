@@ -6,9 +6,9 @@ import 'package:flutter_svg/flutter_svg.dart';
 class Logo extends StatelessWidget {
   final String title;
   const Logo({
-    Key? key,
+    super.key,
     required this.title,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

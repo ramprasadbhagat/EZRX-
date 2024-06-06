@@ -1,7 +1,7 @@
 part of 'package:ezrxmobile/presentation/orders/cart/checkout/checkout_page.dart';
 
 class _TotalItems extends StatelessWidget {
-  const _TotalItems({Key? key}) : super(key: key);
+  const _TotalItems();
 
   @override
   Widget build(BuildContext context) {

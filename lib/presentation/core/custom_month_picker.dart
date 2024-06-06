@@ -29,9 +29,9 @@ class _MonthPicker extends StatefulWidget {
   final DateTime initialDate;
 
   const _MonthPicker({
-    Key? key,
+    super.key,
     required this.initialDate,
-  }) : super(key: key);
+  });
 
   @override
   State<_MonthPicker> createState() => __MonthPickerState();
@@ -213,9 +213,8 @@ class __MonthPickerState extends State<_MonthPicker> {
 class _ButtonBar extends StatelessWidget {
   final DateTime selectedDate;
   const _ButtonBar({
-    Key? key,
     required this.selectedDate,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -246,13 +245,12 @@ class _Header extends StatelessWidget {
   final VoidCallback yearSelectionChange;
   final int displayedPage;
   const _Header({
-    Key? key,
     required this.selectedDate,
     required this.pageController,
     required this.isYearSelection,
     required this.yearSelectionChange,
     required this.displayedPage,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

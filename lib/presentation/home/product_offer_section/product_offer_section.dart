@@ -32,7 +32,7 @@ part 'package:ezrxmobile/presentation/home/product_offer_section/widgets/product
 part 'package:ezrxmobile/presentation/home/product_offer_section/widgets/product_title.dart';
 
 class ProductsOnOffer extends StatelessWidget {
-  const ProductsOnOffer({Key? key}) : super(key: key);
+  const ProductsOnOffer({super.key});
 
   @override
   Widget build(BuildContext context) {

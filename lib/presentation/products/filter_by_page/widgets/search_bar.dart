@@ -1,7 +1,7 @@
 part of 'package:ezrxmobile/presentation/products/filter_by_page/filter_by_page.dart';
 
 class _SearchBar extends StatelessWidget {
-  const _SearchBar({Key? key}) : super(key: key);
+  const _SearchBar();
 
   @override
   Widget build(BuildContext context) {

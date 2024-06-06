@@ -5,10 +5,10 @@ class _PaymentSummaryGroupItem extends StatelessWidget {
   final bool showDivider;
 
   const _PaymentSummaryGroupItem({
-    Key? key,
+    super.key,
     required this.paymentSummaryGroup,
     required this.showDivider,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +39,7 @@ class _PaymentSummaryGroupItem extends StatelessWidget {
                 details: e,
               ),
             )
-            .toList(),
+            ,
         const SizedBox(height: 20),
       ],
     );
@@ -50,9 +50,8 @@ class _PaymentSummaryItem extends StatelessWidget {
   final PaymentSummaryDetails details;
 
   const _PaymentSummaryItem({
-    Key? key,
     required this.details,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -124,9 +123,8 @@ class _PaymentSummaryItem extends StatelessWidget {
 class _PaymentDateInfo extends StatelessWidget {
   final PaymentSummaryDetails details;
   const _PaymentDateInfo({
-    Key? key,
     required this.details,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

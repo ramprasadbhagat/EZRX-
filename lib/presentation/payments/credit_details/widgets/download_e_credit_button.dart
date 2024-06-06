@@ -1,7 +1,7 @@
 part of 'package:ezrxmobile/presentation/payments/credit_details/credit_details.dart';
 
 class _DownloadECreditButton extends StatelessWidget {
-  const _DownloadECreditButton({Key? key}) : super(key: key);
+  const _DownloadECreditButton();
 
   @override
   Widget build(BuildContext context) {

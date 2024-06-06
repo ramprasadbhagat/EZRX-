@@ -11,7 +11,7 @@ import '../../common/common_robot.dart';
 import '../../common/extension.dart';
 
 class ViewByOrdersDetailRobot extends CommonRobot {
-  ViewByOrdersDetailRobot(WidgetTester tester) : super(tester);
+  ViewByOrdersDetailRobot(super.tester);
 
   final buyAgainButton = find.byKey(WidgetKeys.viewByOrderBuyAgainButtonKey);
   final contactNumberSection =

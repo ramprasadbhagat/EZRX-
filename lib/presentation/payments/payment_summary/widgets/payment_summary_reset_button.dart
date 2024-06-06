@@ -1,7 +1,7 @@
 part of 'package:ezrxmobile/presentation/payments/payment_summary/payment_summary_page.dart';
 
 class _PaymentSummaryResetButton extends StatelessWidget {
-  const _PaymentSummaryResetButton({Key? key}) : super(key: key);
+  const _PaymentSummaryResetButton();
 
   @override
   Widget build(BuildContext context) {

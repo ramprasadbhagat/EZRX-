@@ -2,9 +2,8 @@ part of 'package:ezrxmobile/presentation/returns/new_request/tabs/return_review_
 
 class _MaterialReturnDetailsSection extends StatelessWidget {
   const _MaterialReturnDetailsSection({
-    Key? key,
     required this.detail,
-  }) : super(key: key);
+  });
   final ReturnItemDetails detail;
 
   @override

@@ -21,10 +21,10 @@ import 'package:ezrxmobile/domain/order/entities/order_history_details_order_ite
 
 class BundleItemMaterial extends StatelessWidget {
   const BundleItemMaterial({
-    Key? key,
+    super.key,
     required this.orderItem,
     required this.orderNumber,
-  }) : super(key: key);
+  });
   final OrderHistoryDetailsOrderItem orderItem;
   final OrderNumber orderNumber;
 

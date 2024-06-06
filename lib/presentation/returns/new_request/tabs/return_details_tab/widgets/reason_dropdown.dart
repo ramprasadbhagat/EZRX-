@@ -8,9 +8,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ReasonDropdown extends StatelessWidget {
   const ReasonDropdown({
-    Key? key,
+    super.key,
     required this.uuid,
-  }) : super(key: key);
+  });
 
   final String uuid;
 

@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ApproverReturnStatusFilterBottomSheet extends StatelessWidget {
-  const ApproverReturnStatusFilterBottomSheet({Key? key}) : super(key: key);
+  const ApproverReturnStatusFilterBottomSheet({super.key});
 
   @override
   Widget build(BuildContext context) {

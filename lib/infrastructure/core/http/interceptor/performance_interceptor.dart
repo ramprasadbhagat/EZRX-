@@ -27,7 +27,7 @@ class PerformanceInterceptor extends Interceptor {
 
   @override
   Future onError(
-    DioError err,
+    DioException err,
     ErrorInterceptorHandler handler,
   ) async {
     await performanceMonitorService.networkOnError(err);

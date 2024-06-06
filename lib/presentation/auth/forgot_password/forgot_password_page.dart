@@ -20,7 +20,7 @@ part 'package:ezrxmobile/presentation/auth/forgot_password/widgets/user_name_fie
 part 'package:ezrxmobile/presentation/auth/forgot_password/widgets/forgot_password_button.dart';
 
 class ForgetPasswordPage extends StatelessWidget {
-  const ForgetPasswordPage({Key? key}) : super(key: key);
+  const ForgetPasswordPage({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -37,8 +37,8 @@ class ReturnListItemCard extends StatelessWidget {
     this.invoiceId,
     this.showApproverUpdated = false,
     this.showUnitPrice = false,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   factory ReturnListItemCard.listItem({
     required ReturnItem data,

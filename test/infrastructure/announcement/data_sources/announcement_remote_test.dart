@@ -29,7 +29,7 @@ void main() {
           'https://zpprodapiportalapimgmt.apimanagement.ap1.hana.ondemand.com',
     ),
   );
-  final dioAdapter = DioAdapter(dio: dio);
+  final dioAdapter = DioAdapter(dio: dio, matcher: const UrlRequestMatcher());
   final service = HttpService.mockDio(dio);
 
   setUpAll(

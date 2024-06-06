@@ -6,11 +6,11 @@ class PaymentSavePdfButton extends StatelessWidget {
   final Color? backgroundColor;
 
   const PaymentSavePdfButton({
-    Key? key,
+    super.key,
     this.text = 'Download payment advice',
     this.textStyle,
     this.backgroundColor,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

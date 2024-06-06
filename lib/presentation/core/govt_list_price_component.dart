@@ -7,9 +7,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class GovtListPriceComponent extends StatelessWidget {
   const GovtListPriceComponent({
-    Key? key,
+    super.key,
     required this.price,
-  }) : super(key: key);
+  });
 
   final String price;
 

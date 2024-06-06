@@ -8,7 +8,7 @@ import '../../common/common_robot.dart';
 import '../../common/extension.dart';
 
 class ViewByOrdersRobot extends CommonRobot {
-  ViewByOrdersRobot(WidgetTester tester) : super(tester);
+  ViewByOrdersRobot(super.tester);
 
   final orderGroups = find.byKey(WidgetKeys.viewByOrdersGroupKey);
   final orderItems = find.byKey(WidgetKeys.viewByOrdersItemKey);

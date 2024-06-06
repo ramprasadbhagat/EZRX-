@@ -20,9 +20,9 @@ class AddEditUserRestrictionPage extends StatelessWidget {
   final bool isEditing;
 
   AddEditUserRestrictionPage({
-    Key? key,
+    super.key,
     required this.isEditing,
-  }) : super(key: key);
+  });
   final returnApprovalLimitFormKey = GlobalKey<FormState>();
 
   @override
@@ -205,10 +205,9 @@ class _AddDeleteButton extends StatelessWidget {
   final GlobalKey<FormState> formKey;
 
   const _AddDeleteButton({
-    Key? key,
     required this.isEditing,
     required this.formKey,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -283,11 +282,10 @@ class _ApproverRights extends StatelessWidget {
   final bool isFromEdit;
 
   const _ApproverRights({
-    Key? key,
     required this.approverRights,
     required this.index,
     required this.isFromEdit,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -429,8 +427,7 @@ class _TextFormField extends StatefulWidget {
     this.index = 0,
     this.keyboardType = TextInputType.text,
     required this.isFromEdit,
-    Key? key,
-  }) : super(key: key);
+  });
 
   @override
   State<_TextFormField> createState() => _TextFormFieldState();

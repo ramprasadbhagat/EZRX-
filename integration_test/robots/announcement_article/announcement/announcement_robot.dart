@@ -6,7 +6,7 @@ import 'package:flutter_test/flutter_test.dart';
 import '../../common/common_robot.dart';
 
 class AnnouncementRobot extends CommonRobot {
-  AnnouncementRobot(WidgetTester tester) : super(tester);
+  AnnouncementRobot(super.tester);
 
   final itemTitle = find.byKey(WidgetKeys.announcementItemTitleKey);
   final itemDate = find.byKey(WidgetKeys.announcementItemDateKey);

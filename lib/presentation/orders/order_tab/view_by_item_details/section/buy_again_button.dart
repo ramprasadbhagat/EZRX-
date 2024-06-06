@@ -1,7 +1,7 @@
 part of 'package:ezrxmobile/presentation/orders/order_tab/view_by_item_details/view_by_item_details.dart';
 
 class _BuyAgainButton extends StatelessWidget {
-  const _BuyAgainButton({Key? key}) : super(key: key);
+  const _BuyAgainButton();
 
   @override
   Widget build(BuildContext context) {

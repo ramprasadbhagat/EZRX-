@@ -11,14 +11,14 @@ class ConfirmBottomSheet extends StatelessWidget {
   final Widget? iconWidget;
   final bool displayCancelButton;
   const ConfirmBottomSheet({
-    Key? key,
+    super.key,
     required this.title,
     required this.content,
     this.iconWidget,
     this.cancelButtonText = 'Cancel',
     this.confirmButtonText = 'Confirm',
     this.displayCancelButton = true,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -66,10 +66,10 @@ class ConfirmBottomSheet extends StatelessWidget {
                       },
                       style:
                           Theme.of(context).elevatedButtonTheme.style!.copyWith(
-                                backgroundColor: const MaterialStatePropertyAll(
+                                backgroundColor: const WidgetStatePropertyAll(
                                   ZPColors.white,
                                 ),
-                                shape: const MaterialStatePropertyAll(
+                                shape: const WidgetStatePropertyAll(
                                   RoundedRectangleBorder(
                                     borderRadius: BorderRadius.all(
                                       Radius.circular(8),
@@ -99,13 +99,13 @@ class ConfirmBottomSheet extends StatelessWidget {
                     },
                     style:
                         Theme.of(context).elevatedButtonTheme.style!.copyWith(
-                              backgroundColor: const MaterialStatePropertyAll(
+                              backgroundColor: const WidgetStatePropertyAll(
                                 ZPColors.primary,
                               ),
-                              padding: const MaterialStatePropertyAll(
+                              padding: const WidgetStatePropertyAll(
                                 EdgeInsets.symmetric(horizontal: 5),
                               ),
-                              shape: const MaterialStatePropertyAll(
+                              shape: const WidgetStatePropertyAll(
                                 RoundedRectangleBorder(
                                   borderRadius: BorderRadius.all(
                                     Radius.circular(8),

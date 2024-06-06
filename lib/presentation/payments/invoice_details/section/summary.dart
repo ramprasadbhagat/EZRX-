@@ -14,10 +14,10 @@ class InvoiceSummary extends StatelessWidget {
   final List<CustomerDocumentDetail> customerDocumentDetail;
 
   const InvoiceSummary({
-    Key? key,
+    super.key,
     required this.invoiceItem,
     required this.customerDocumentDetail,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

@@ -1,9 +1,7 @@
 part of 'package:ezrxmobile/presentation/orders/cart/cart_page.dart';
 
 class _CartPageCartScrollList extends StatelessWidget {
-  const _CartPageCartScrollList({
-    Key? key,
-  }) : super(key: key);
+  const _CartPageCartScrollList();
 
   @override
   Widget build(BuildContext context) {

@@ -10,9 +10,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ReturnItemPrice extends StatelessWidget {
   const ReturnItemPrice({
-    Key? key,
+    super.key,
     required this.data,
-  }) : super(key: key);
+  });
 
   final ReturnMaterial data;
 

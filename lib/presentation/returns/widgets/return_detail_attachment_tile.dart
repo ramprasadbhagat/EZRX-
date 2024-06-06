@@ -6,11 +6,11 @@ import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 class ReturnDetailAttachmentTile extends StatelessWidget {
   const ReturnDetailAttachmentTile({
-    Key? key,
+    super.key,
     required this.attachment,
     required this.isDownloading,
     required this.tapDownload,
-  }) : super(key: key);
+  });
 
   final ReturnRequestAttachment attachment;
   final bool isDownloading;

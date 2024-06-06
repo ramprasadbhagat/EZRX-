@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 
 class ExpandableInfo extends StatefulWidget {
   const ExpandableInfo({
-    Key? key,
+    super.key,
     required this.labelText,
     required this.child,
     this.expandable = false,
     this.toggle = const SizedBox.shrink(),
-  }) : super(key: key);
+  });
   final Widget child;
   final String labelText;
   final bool expandable;

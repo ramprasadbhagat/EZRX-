@@ -15,9 +15,9 @@ class SmallOrderFee extends StatelessWidget {
   final OrderEligibilityState orderEligibilityState;
 
   const SmallOrderFee({
-    Key? key,
+    super.key,
     required this.orderEligibilityState,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -38,10 +38,10 @@ class SmallOrderFeeSection extends StatelessWidget {
   final String message;
 
   const SmallOrderFeeSection({
-    Key? key,
+    super.key,
     required this.value,
     required this.message,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -87,9 +87,8 @@ class SmallOrderFeeSection extends StatelessWidget {
 
 class _DisplayPrice extends StatelessWidget {
   const _DisplayPrice({
-    Key? key,
     required this.priceComponent,
-  }) : super(key: key);
+  });
 
   final PriceComponent priceComponent;
 

@@ -15,7 +15,7 @@ class CurvedRectangleWidget extends StatelessWidget {
   final int semiCircleCount;
   final double semiCircleRadius;
   const CurvedRectangleWidget({
-    Key? key,
+    super.key,
     required this.child,
     required this.padding,
     this.height,
@@ -25,7 +25,7 @@ class CurvedRectangleWidget extends StatelessWidget {
     this.borderWidth = 1,
     required this.semiCircleCount,
     required this.semiCircleRadius,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

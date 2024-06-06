@@ -10,9 +10,9 @@ class MarketPlaceTitleWithLogo extends StatelessWidget {
   final bool showToolTip;
 
   const MarketPlaceTitleWithLogo({
-    Key? key,
+    super.key,
     this.showToolTip = false,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

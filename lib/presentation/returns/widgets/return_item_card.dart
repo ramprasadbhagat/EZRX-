@@ -24,11 +24,11 @@ part 'package:ezrxmobile/presentation/returns/widgets/return_item_expand_section
 
 class ReturnItemCard extends StatelessWidget {
   const ReturnItemCard({
-    Key? key,
+    super.key,
     required this.returnRequestInformation,
     required this.downloadingAttachments,
     required this.downloadAttachment,
-  }) : super(key: key);
+  });
   final ReturnRequestInformation returnRequestInformation;
   final List<ReturnRequestAttachment> downloadingAttachments;
   final Function(ReturnRequestAttachment) downloadAttachment;

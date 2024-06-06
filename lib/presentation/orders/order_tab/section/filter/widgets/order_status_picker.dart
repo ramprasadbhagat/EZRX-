@@ -5,10 +5,9 @@ class _OrderStatusPicker extends StatelessWidget {
   final List<StatusType> selectedStatus;
 
   const _OrderStatusPicker({
-    Key? key,
     required this.statusList,
     required this.selectedStatus,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

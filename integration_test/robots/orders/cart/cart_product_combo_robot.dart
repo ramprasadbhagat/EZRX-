@@ -7,7 +7,7 @@ import 'package:flutter_test/flutter_test.dart';
 import '../../common/common_robot.dart';
 
 class CartProductComboRobot extends CommonRobot {
-  CartProductComboRobot(WidgetTester tester) : super(tester);
+  CartProductComboRobot(super.tester);
 
   Finder _comboItem(String priceComboDealId) =>
       find.byKey(WidgetKeys.cartItemComboTile(priceComboDealId));

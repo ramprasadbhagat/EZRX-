@@ -19,7 +19,7 @@ part 'package:ezrxmobile/presentation/faq/widgets/category_tile.dart';
 part 'package:ezrxmobile/presentation/faq/widgets/show_contact_us_button.dart';
 
 class FaqInfoPage extends StatelessWidget {
-  const FaqInfoPage({Key? key}) : super(key: key);
+  const FaqInfoPage({super.key});
 
   @override
   Widget build(BuildContext context) {

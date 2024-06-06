@@ -7,11 +7,10 @@ class _ViewByOrderGroup extends StatelessWidget {
   final bool showBanner;
 
   const _ViewByOrderGroup({
-    Key? key,
     required this.viewByOrdersItem,
     required this.showDivider,
     required this.showBanner,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

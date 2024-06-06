@@ -19,7 +19,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 part 'section/login_on_behalf/login_on_behalf.dart';
 
 class MoreTab extends StatelessWidget {
-  const MoreTab({Key? key}) : super(key: key);
+  const MoreTab({super.key});
 
   @override
   Widget build(BuildContext context) {

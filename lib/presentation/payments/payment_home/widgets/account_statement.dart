@@ -1,9 +1,7 @@
 part of '../payment_page.dart';
 
 class _AccountStatement extends StatelessWidget {
-  const _AccountStatement({
-    Key? key,
-  }) : super(key: key);
+  const _AccountStatement();
 
   @override
   Widget build(BuildContext context) {
@@ -76,7 +74,7 @@ class _AccountStatement extends StatelessWidget {
 
 class _SoaCard extends StatelessWidget {
   final Soa soa;
-  const _SoaCard({Key? key, required this.soa}) : super(key: key);
+  const _SoaCard({required this.soa});
 
   @override
   Widget build(BuildContext context) {

@@ -6,8 +6,7 @@ class _CheckoutFooterSection extends StatelessWidget {
   const _CheckoutFooterSection({
     required this.cartState,
     required this.focusNode,
-    Key? key,
-  }) : super(key: key);
+  });
 
   void _scrollToFocusedObject({required FocusNode focusNode}) {
     focusNode.requestFocus();
@@ -183,7 +182,7 @@ class _CheckoutFooterSection extends StatelessWidget {
 }
 
 class _ValidationsFailedWarning extends StatelessWidget {
-  const _ValidationsFailedWarning({Key? key}) : super(key: key);
+  const _ValidationsFailedWarning();
 
   @override
   Widget build(BuildContext context) {

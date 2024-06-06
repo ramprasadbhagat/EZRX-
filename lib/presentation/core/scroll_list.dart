@@ -16,7 +16,7 @@ class ScrollList<T> extends StatefulWidget {
   final Widget Function(BuildContext context, int index, T item) itemBuilder;
   final bool dismissOnDrag;
   const ScrollList({
-    Key? key,
+    super.key,
     required this.isLoading,
     required this.itemBuilder,
     required this.items,
@@ -26,7 +26,7 @@ class ScrollList<T> extends StatefulWidget {
     this.onRefresh,
     this.onLoadingMore,
     this.dismissOnDrag = false,
-  }) : super(key: key);
+  });
 
   @override
   State<ScrollList<T>> createState() => _ScrollListState<T>();
@@ -109,9 +109,8 @@ class _ScrollListState<T> extends State<ScrollList<T>> {
 
 class _LoadingMoreIndicator extends StatelessWidget {
   const _LoadingMoreIndicator({
-    Key? key,
     required this.controller,
-  }) : super(key: key);
+  });
 
   final ScrollController controller;
 

@@ -2,8 +2,7 @@ part of 'package:ezrxmobile/presentation/payments/new_payment/tabs/payment_metho
 
 class _PaymentOptionItem extends StatelessWidget {
   final PaymentMethodOption paymentMethodOption;
-  const _PaymentOptionItem({required this.paymentMethodOption, Key? key})
-      : super(key: key);
+  const _PaymentOptionItem({required this.paymentMethodOption});
 
   @override
   Widget build(BuildContext context) {

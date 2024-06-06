@@ -1,7 +1,7 @@
 part of 'package:ezrxmobile/presentation/products/combo_detail/combo_detail_page.dart';
 
 class _ComboRequirementSection extends StatelessWidget {
-  const _ComboRequirementSection({Key? key}) : super(key: key);
+  const _ComboRequirementSection();
 
   @override
   Widget build(BuildContext context) {

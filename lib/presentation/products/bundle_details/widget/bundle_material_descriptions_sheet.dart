@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class BundleMaterialDescription extends StatelessWidget {
-  const BundleMaterialDescription({Key? key}) : super(key: key);
+  const BundleMaterialDescription({super.key});
 
   @override
   Widget build(BuildContext context) {

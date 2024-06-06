@@ -1,7 +1,7 @@
 part of 'package:ezrxmobile/presentation/home/announcement_section/announcement_articles_tab/announcements_page.dart';
 
 class _AnnouncementFilterBottomSheet extends StatelessWidget {
-  const _AnnouncementFilterBottomSheet({Key? key}) : super(key: key);
+  const _AnnouncementFilterBottomSheet();
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +26,7 @@ class _AnnouncementFilterBottomSheet extends StatelessWidget {
             height: 20,
           ),
           const Row(
-            children:  [
+            children: [
               _AnnouncementFilterResetButton(),
               SizedBox(
                 width: 12,
@@ -41,9 +41,7 @@ class _AnnouncementFilterBottomSheet extends StatelessWidget {
 }
 
 class _AnnouncementCategorySelector extends StatelessWidget {
-  const _AnnouncementCategorySelector({
-    Key? key,
-  }) : super(key: key);
+  const _AnnouncementCategorySelector();
 
   @override
   Widget build(BuildContext context) {
@@ -86,7 +84,7 @@ class _AnnouncementCategorySelector extends StatelessWidget {
 }
 
 class _AnnouncementFilterResetButton extends StatelessWidget {
-  const _AnnouncementFilterResetButton({Key? key}) : super(key: key);
+  const _AnnouncementFilterResetButton();
 
   @override
   Widget build(BuildContext context) {
@@ -114,7 +112,7 @@ class _AnnouncementFilterResetButton extends StatelessWidget {
 }
 
 class _AnnouncementFilterApplyButton extends StatelessWidget {
-  const _AnnouncementFilterApplyButton({Key? key}) : super(key: key);
+  const _AnnouncementFilterApplyButton();
 
   @override
   Widget build(BuildContext context) {

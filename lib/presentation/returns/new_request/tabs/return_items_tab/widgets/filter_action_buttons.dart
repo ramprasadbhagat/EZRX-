@@ -1,7 +1,7 @@
 part of 'package:ezrxmobile/presentation/returns/new_request/tabs/return_items_tab/return_items_filter_bottom_sheet.dart';
 
 class _ResetButton extends StatelessWidget {
-  const _ResetButton({Key? key}) : super(key: key);
+  const _ResetButton();
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +35,7 @@ class _ResetButton extends StatelessWidget {
 }
 
 class _ApplyButton extends StatelessWidget {
-  const _ApplyButton({Key? key}) : super(key: key);
+  const _ApplyButton();
 
   @override
   Widget build(BuildContext context) {

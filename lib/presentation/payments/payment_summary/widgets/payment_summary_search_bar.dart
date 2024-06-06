@@ -2,8 +2,8 @@ part of 'package:ezrxmobile/presentation/payments/payment_summary/payment_summar
 
 class _PaymentSummarySearchBar extends StatelessWidget {
   const _PaymentSummarySearchBar({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {

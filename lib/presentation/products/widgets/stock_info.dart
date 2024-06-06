@@ -18,8 +18,8 @@ class StockInfoWidget extends StatelessWidget {
     required this.stockInfo,
     required this.materialInfo,
     this.showToolTip = false,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {

@@ -3,8 +3,7 @@ part of 'package:ezrxmobile/presentation/core/custom_app_bar.dart';
 class _CustomerBlockedBanner extends StatelessWidget {
 
   final bool isCustomerBlocked;
-  const _CustomerBlockedBanner({Key? key, required this.isCustomerBlocked})
-      : super(key: key);
+  const _CustomerBlockedBanner({required this.isCustomerBlocked});
 
   @override
   Widget build(BuildContext context) {

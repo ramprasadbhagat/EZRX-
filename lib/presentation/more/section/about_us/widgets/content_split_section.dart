@@ -3,9 +3,8 @@ part of 'package:ezrxmobile/presentation/more/section/about_us/about_us_page.dar
 class _ContentSplitSection extends StatelessWidget {
   final ContentSplitTemplate contentSplit;
   const _ContentSplitSection({
-    Key? key,
     required this.contentSplit,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

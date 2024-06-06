@@ -1,7 +1,7 @@
 part of 'package:ezrxmobile/presentation/payments/payment_completed/payment_completed_page.dart';
 
 class _PaymentCompletedPleaseNote extends StatelessWidget {
-  const _PaymentCompletedPleaseNote({Key? key}) : super(key: key);
+  const _PaymentCompletedPleaseNote();
 
   @override
   Widget build(BuildContext context) {

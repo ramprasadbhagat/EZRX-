@@ -4,8 +4,7 @@ class _TotalQtySection extends StatelessWidget {
   final PriceAggregate cartProduct;
   const _TotalQtySection({
     required this.cartProduct,
-    Key? key,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

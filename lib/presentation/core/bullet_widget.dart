@@ -5,10 +5,10 @@ class BulletWidget extends StatelessWidget {
   final Widget content;
   final EdgeInsetsGeometry padding;
   const BulletWidget({
-    Key? key,
+    super.key,
     required this.content,
     this.padding = EdgeInsets.zero,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

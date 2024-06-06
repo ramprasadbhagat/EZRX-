@@ -28,9 +28,9 @@ class InvoiceDetailsPage extends StatelessWidget {
   final bool isMarketPlace;
 
   const InvoiceDetailsPage({
-    Key? key,
+    super.key,
     required this.isMarketPlace,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

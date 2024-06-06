@@ -14,7 +14,7 @@ class CustomCard extends StatelessWidget {
   final Color borderColor;
 
   const CustomCard({
-    Key? key,
+    super.key,
     required this.child,
     this.margin = const EdgeInsets.only(bottom: 12.0),
     this.padding = const EdgeInsets.only(bottom: 0.0),
@@ -25,7 +25,7 @@ class CustomCard extends StatelessWidget {
     this.clipBehavior = Clip.none,
     this.backgroundColor = ZPColors.whiteBgCard,
     this.borderColor = ZPColors.boxShadowGray,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

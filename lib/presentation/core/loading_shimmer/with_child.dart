@@ -2,11 +2,10 @@ part of 'loading_shimmer.dart';
 
 class _WithChild extends StatelessWidget {
   const _WithChild({
-    Key? key,
     required this.child,
     required this.enabled,
     this.center = true,
-  }) : super(key: key);
+  });
   final Widget child;
   final bool enabled;
   final bool center;

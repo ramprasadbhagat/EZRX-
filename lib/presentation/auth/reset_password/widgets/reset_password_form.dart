@@ -3,7 +3,7 @@ part of 'package:ezrxmobile/presentation/auth/reset_password/reset_password_page
 final _formKey = GlobalKey<FormState>();
 
 class _ResetPasswordForm extends StatelessWidget {
-  const _ResetPasswordForm({Key? key}) : super(key: key);
+  const _ResetPasswordForm();
 
   @override
   Widget build(BuildContext context) {

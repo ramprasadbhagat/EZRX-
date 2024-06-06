@@ -4,9 +4,9 @@ class ItemDetailsSection extends StatelessWidget {
   final OrderHistoryItem orderHistoryItem;
 
   const ItemDetailsSection({
-    Key? key,
+    super.key,
     required this.orderHistoryItem,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

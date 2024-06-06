@@ -6,7 +6,7 @@ import 'package:flutter_test/flutter_test.dart';
 import '../common/common_robot.dart';
 
 class MoreRobot extends CommonRobot {
-  MoreRobot(WidgetTester tester) : super(tester);
+  MoreRobot(super.tester);
 
   final returnsTile = find.byKey(WidgetKeys.returnsTile);
   final profileTile = find.byKey(WidgetKeys.profileTile);

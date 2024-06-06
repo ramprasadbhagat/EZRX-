@@ -5,8 +5,7 @@ class _BundleGridItem extends StatelessWidget {
 
   const _BundleGridItem({
     required this.materialInfo,
-    Key? key,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -78,7 +77,7 @@ class _BundleGridItem extends StatelessWidget {
             ),
             ...materialInfo.listingVisibleMaterial
                 .map((e) => _BundleMaterial(materialData: e))
-                .toList(),
+                ,
             if (materialInfo.isMaterialHiddenOnListing)
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 9),
@@ -129,8 +128,7 @@ class _BundleMaterial extends StatelessWidget {
 
   const _BundleMaterial({
     required this.materialData,
-    Key? key,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

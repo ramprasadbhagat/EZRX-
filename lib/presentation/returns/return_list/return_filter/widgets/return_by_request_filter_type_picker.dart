@@ -1,7 +1,7 @@
 part of 'package:ezrxmobile/presentation/returns/return_list/return_filter/return_by_request_filter_page.dart';
 
 class _ReturnTypePicker extends StatelessWidget {
-  const _ReturnTypePicker({Key? key}) : super(key: key);
+  const _ReturnTypePicker();
 
   @override
   Widget build(BuildContext context) {

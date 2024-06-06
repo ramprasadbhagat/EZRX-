@@ -66,11 +66,11 @@ class ProductDetailsPage extends StatefulWidget {
   final bool isEditTender;
   final EZReachBanner? banner;
   const ProductDetailsPage({
-    Key? key,
+    super.key,
     required this.materialInfo,
     this.isEditTender = false,
     this.banner,
-  }) : super(key: key);
+  });
 
   @override
   State<ProductDetailsPage> createState() => _ProductDetailsPageState();
@@ -238,9 +238,8 @@ class _SimilarProducts extends StatelessWidget {
 class _BodyContent extends StatelessWidget {
   final bool isEditTender;
   const _BodyContent({
-    Key? key,
     this.isEditTender = false,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -377,9 +376,8 @@ class _BodyContent extends StatelessWidget {
 class _Description extends StatelessWidget {
   final MaterialInfo materialInfo;
   const _Description({
-    Key? key,
     required this.materialInfo,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -484,11 +482,10 @@ class _Footer extends StatefulWidget {
   final bool isEditTender;
   final int quantity;
   const _Footer({
-    Key? key,
     this.banner,
     this.isEditTender = false,
     this.quantity = 0,
-  }) : super(key: key);
+  });
 
   @override
   State<_Footer> createState() => _FooterState();

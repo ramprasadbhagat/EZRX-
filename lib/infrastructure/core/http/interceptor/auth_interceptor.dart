@@ -102,7 +102,7 @@ class AuthInterceptor extends Interceptor {
 
   @override
   Future onError(
-    DioError err,
+    DioException err,
     ErrorInterceptorHandler handler,
   ) async {
     return super.onError(err, handler);
@@ -152,9 +152,9 @@ class AuthInterceptor extends Interceptor {
     final dio = Dio(
       BaseOptions(
         baseUrl: config.baseUrl(marketDomain: _marketDomain),
-        sendTimeout: config.httpSendTimeout,
-        connectTimeout: config.httpConnectTimeout,
-        receiveTimeout: config.httpReceiveTimeout,
+        sendTimeout: Duration(milliseconds: config.httpSendTimeout),
+        connectTimeout: Duration(milliseconds: config.httpConnectTimeout),
+        receiveTimeout: Duration(milliseconds: config.httpReceiveTimeout),
       ),
     );
 

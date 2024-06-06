@@ -25,8 +25,8 @@ import 'package:ezrxmobile/presentation/core/product_tag.dart';
 
 class BundleSection extends StatelessWidget {
   const BundleSection({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -131,8 +131,7 @@ class BundleSection extends StatelessWidget {
 }
 
 class _BundleSectionItem extends StatelessWidget {
-  const _BundleSectionItem({Key? key, required this.materialInfo})
-      : super(key: key);
+  const _BundleSectionItem({required this.materialInfo});
   final MaterialInfo materialInfo;
 
   @override

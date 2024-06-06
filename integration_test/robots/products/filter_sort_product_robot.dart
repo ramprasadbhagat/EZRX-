@@ -12,7 +12,7 @@ class FilterSortProductRobot extends CommonRobot {
   final countryLabel = find.byKey(WidgetKeys.filterCountryOfOriginButton);
   final suggestedCountry = find.byKey(WidgetKeys.suggestedCountryText);
 
-  FilterSortProductRobot(WidgetTester tester) : super(tester);
+  FilterSortProductRobot(super.tester);
 
   void verifySheet({bool isVisible = true}) => expect(
         find.byType(ProductFilterPage),

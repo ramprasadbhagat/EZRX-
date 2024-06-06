@@ -27,7 +27,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_item.dart';
 
 class ReturnByRequestPage extends StatefulWidget {
-  const ReturnByRequestPage({Key? key}) : super(key: key);
+  const ReturnByRequestPage({super.key});
 
   @override
   State<ReturnByRequestPage> createState() => _ReturnByRequestPageState();
@@ -123,11 +123,11 @@ class _ReturnItem extends StatelessWidget {
   final bool showDivider;
   final bool showHeader;
   const _ReturnItem({
-    Key? key,
+    super.key,
     required this.data,
     required this.showDivider,
     required this.showHeader,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

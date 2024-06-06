@@ -21,7 +21,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class ApproverActions extends StatelessWidget {
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
-  ApproverActions({Key? key}) : super(key: key);
+  ApproverActions({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -167,9 +167,8 @@ class ApproverActions extends StatelessWidget {
 
 class _ApproverReturnRequestScrollList extends StatelessWidget {
   const _ApproverReturnRequestScrollList({
-    Key? key,
     required this.state,
-  }) : super(key: key);
+  });
 
   final ReturnApproverState state;
 

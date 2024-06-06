@@ -1,7 +1,7 @@
 part of 'package:ezrxmobile/presentation/products/product_suggestion/product_suggestion_page.dart';
 
 class _ProductSearchHistorySuggestionSection extends StatelessWidget {
-  const _ProductSearchHistorySuggestionSection({Key? key}) : super(key: key);
+  const _ProductSearchHistorySuggestionSection();
 
   @override
   Widget build(BuildContext context) {

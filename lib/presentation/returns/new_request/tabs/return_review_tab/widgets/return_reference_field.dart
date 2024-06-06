@@ -1,9 +1,7 @@
 part of 'package:ezrxmobile/presentation/returns/new_request/tabs/return_review_tab/return_review_tab.dart';
 
 class _ReturnReferenceField extends StatelessWidget {
-  const _ReturnReferenceField({
-    Key? key,
-  }) : super(key: key);
+  const _ReturnReferenceField();
 
   @override
   Widget build(BuildContext context) {

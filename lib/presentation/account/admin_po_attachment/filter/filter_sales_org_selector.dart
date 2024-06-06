@@ -7,7 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class AdminPoAttachmentFilterSalesOrgSelector extends StatelessWidget {
-  const AdminPoAttachmentFilterSalesOrgSelector({Key? key}) : super(key: key);
+  const AdminPoAttachmentFilterSalesOrgSelector({super.key});
 
   @override
   Widget build(BuildContext context) {

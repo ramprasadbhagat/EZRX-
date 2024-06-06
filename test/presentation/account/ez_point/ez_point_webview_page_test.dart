@@ -15,6 +15,7 @@ import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
 
 import '../../../common_mock_data/customer_code_mock.dart';
+import '../../../common_mock_data/mock_web_view_test.dart';
 import '../../../common_mock_data/sales_organsiation_mock.dart';
 import '../../../utils/widget_utils.dart';
 
@@ -32,6 +33,7 @@ void main() {
   late AppRouter autoRouterMock;
   late EZPointBloc eZPointBlocMock;
   late EligibilityBlocMock eligibilityBlocMock;
+  final mockWebViewDependencies = MockWebViewDependencies();
 
   setUpAll(() async {
     TestWidgetsFlutterBinding.ensureInitialized();
@@ -39,6 +41,7 @@ void main() {
     locator.registerLazySingleton(() => AppRouter());
     locator.registerLazySingleton(() => eZPointBlocMock);
     locator.registerLazySingleton(() => eligibilityBlocMock);
+    await mockWebViewDependencies.init();
   });
   setUp(() async {
     eZPointBlocMock = EZPointBlocMock();

@@ -21,8 +21,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class ProductPriceLabel extends StatelessWidget {
   final MaterialInfo materialInfo;
 
-  const ProductPriceLabel({Key? key, required this.materialInfo})
-      : super(key: key);
+  const ProductPriceLabel({super.key, required this.materialInfo});
 
   @override
   Widget build(BuildContext context) {

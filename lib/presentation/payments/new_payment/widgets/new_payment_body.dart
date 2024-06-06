@@ -8,8 +8,7 @@ class _NewPaymentBody extends StatelessWidget {
     required this.currentStep,
     required this.totalTabs,
     required this.child,
-    Key? key,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

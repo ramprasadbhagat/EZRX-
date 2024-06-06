@@ -7,7 +7,7 @@ import 'package:flutter_test/flutter_test.dart';
 import '../../common/common_robot.dart';
 
 class StatementOfAccountRobot extends CommonRobot {
-  StatementOfAccountRobot(WidgetTester tester) : super(tester);
+  StatementOfAccountRobot(super.tester);
 
   final page = find.byKey(WidgetKeys.soaPage);
   final soaHeaderCustomerCodeKey = find.byKey(

@@ -7,9 +7,9 @@ import 'package:flutter/material.dart';
 class ReturnTypeInfoIcon extends StatelessWidget {
   final ReturnType returnType;
   const ReturnTypeInfoIcon({
-    Key? key,
+    super.key,
     required this.returnType,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

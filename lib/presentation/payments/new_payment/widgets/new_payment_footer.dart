@@ -7,8 +7,7 @@ class _NewPaymentFooter extends StatelessWidget {
   const _NewPaymentFooter({
     required this.currentStep,
     required this.tabController,
-    Key? key,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

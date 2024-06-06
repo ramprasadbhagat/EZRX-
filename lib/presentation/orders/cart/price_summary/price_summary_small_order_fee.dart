@@ -3,8 +3,7 @@ part of 'package:ezrxmobile/presentation/orders/cart/price_summary/price_summary
 class _AplSmallOrderFee extends StatelessWidget {
   final CartState cartState;
 
-  const _AplSmallOrderFee({Key? key, required this.cartState})
-      : super(key: key);
+  const _AplSmallOrderFee({required this.cartState});
 
   @override
   Widget build(BuildContext context) {

@@ -2,10 +2,10 @@ part of 'package:ezrxmobile/presentation/orders/cart/cart_page.dart';
 
 class _CartPageScrollListItem extends StatelessWidget {
   const _CartPageScrollListItem({
-    Key? key,
+    super.key,
     required this.showManufacturerName,
     required this.item,
-  }) : super(key: key);
+  });
 
   final bool showManufacturerName;
   final PriceAggregate item;
@@ -47,10 +47,9 @@ class _CartProductMaterial extends StatelessWidget {
   final bool showManufacturerName;
 
   const _CartProductMaterial({
-    Key? key,
     required this.item,
     required this.showManufacturerName,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -88,7 +87,7 @@ class _CartProductMaterial extends StatelessWidget {
                     cartProduct: item,
                   ),
                 )
-                .toList(),
+                ,
         ],
       ),
     );
@@ -99,9 +98,8 @@ class _CartPageManufacturerName extends StatelessWidget {
   final MaterialInfo cartProduct;
 
   const _CartPageManufacturerName({
-    Key? key,
     required this.cartProduct,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

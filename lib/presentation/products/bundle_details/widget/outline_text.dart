@@ -7,11 +7,11 @@ class _OutlineText extends StatelessWidget {
   final TextOverflow overflow;
   const _OutlineText(
     this.text, {
-    Key? key,
+    super.key,
     this.style,
     this.maxLines = 1,
     this.overflow = TextOverflow.ellipsis,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

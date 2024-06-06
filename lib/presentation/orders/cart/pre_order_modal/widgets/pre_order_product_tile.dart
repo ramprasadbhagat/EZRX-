@@ -2,8 +2,7 @@ part of 'package:ezrxmobile/presentation/orders/cart/pre_order_modal/pre_order_m
 
 class _PreOrderProductTile extends StatelessWidget {
   final PriceAggregate cartProduct;
-  const _PreOrderProductTile({required this.cartProduct, Key? key})
-      : super(key: key);
+  const _PreOrderProductTile({required this.cartProduct});
   @override
   Widget build(BuildContext context) {
     return CustomCard(

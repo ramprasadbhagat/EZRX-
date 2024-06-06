@@ -14,9 +14,9 @@ import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 class CameraFilesPermission extends StatelessWidget {
   final PermissionType type;
   const CameraFilesPermission({
-    Key? key,
+    super.key,
     required this.type,
-  }) : super(key: key);
+  });
 
   String get title {
     switch (type) {
@@ -76,9 +76,8 @@ class CameraFilesPermission extends StatelessWidget {
 class _OpenSettingsSection extends StatelessWidget {
   final PermissionType type;
   const _OpenSettingsSection({
-    Key? key,
     required this.type,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

@@ -8,7 +8,7 @@ import 'package:flutter_test/flutter_test.dart';
 import '../../common/common_robot.dart';
 
 class BonusSampleRobot extends CommonRobot {
-  BonusSampleRobot(WidgetTester tester) : super(tester);
+  BonusSampleRobot(super.tester);
 
   final bottomSheet = find.byKey(WidgetKeys.bonusSampleSheet);
   final closeButton = find.byKey(WidgetKeys.bonusSampleSheetCloseButton);

@@ -8,7 +8,7 @@ import 'common/common_robot.dart';
 import 'common/extension.dart';
 
 class LoginRobot extends CommonRobot {
-  LoginRobot(WidgetTester tester) : super(tester);
+  LoginRobot(super.tester);
   final loginPage = find.byKey(WidgetKeys.loginMobileScreen);
   final rememberMeCheckbox =
       find.byKey(WidgetKeys.loginRememberPasswordCheckbox);

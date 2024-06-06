@@ -1,9 +1,7 @@
 part of 'package:ezrxmobile/presentation/payments/payment_summary_details/payment_summary_details_screen.dart';
 
 class _PaymentBasicInfoSection extends StatelessWidget {
-  const _PaymentBasicInfoSection({
-    Key? key,
-  }) : super(key: key);
+  const _PaymentBasicInfoSection();
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<PaymentSummaryDetailsBloc, PaymentSummaryDetailsState>(

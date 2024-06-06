@@ -23,8 +23,8 @@ part 'package:ezrxmobile/presentation/products/product_filter/widgets/product_fi
 
 class ProductFilterPage extends StatefulWidget {
   const ProductFilterPage({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   State<ProductFilterPage> createState() => _ProductFilterPageState();

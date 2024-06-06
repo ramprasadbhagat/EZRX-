@@ -1,7 +1,7 @@
 part of 'package:ezrxmobile/presentation/payments/payment_summary/payment_summary_page.dart';
 
 class _PaymentSummaryFilterIcon extends StatelessWidget {
-  const _PaymentSummaryFilterIcon({Key? key}) : super(key: key);
+  const _PaymentSummaryFilterIcon({super.key});
 
   @override
   Widget build(BuildContext context) {

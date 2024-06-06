@@ -2,8 +2,8 @@ part of '../return_root.dart';
 
 class _ExportReturnByItem extends StatelessWidget {
   const _ExportReturnByItem({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {

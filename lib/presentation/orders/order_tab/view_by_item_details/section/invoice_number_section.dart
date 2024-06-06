@@ -5,10 +5,10 @@ class InvoiceNumberSection extends StatelessWidget {
   final bool isMarketPlace;
 
   const InvoiceNumberSection({
-    Key? key,
+    super.key,
     required this.invoiceNumber,
     required this.isMarketPlace,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

@@ -40,9 +40,9 @@ class CartProductTile extends StatelessWidget {
   final PriceAggregate cartItem;
 
   const CartProductTile({
-    Key? key,
+    super.key,
     required this.cartItem,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -119,10 +119,9 @@ class _MaterialDetailsSection extends StatelessWidget {
   final bool isInvalidCartItem;
 
   const _MaterialDetailsSection({
-    Key? key,
     required this.cartItem,
     required this.isInvalidCartItem,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -150,8 +149,7 @@ class _ItemSubTotalSection extends StatelessWidget {
 
   const _ItemSubTotalSection({
     required this.cartProduct,
-    Key? key,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -245,10 +243,9 @@ class _MaterialDetails extends StatelessWidget {
   final bool isInvalidCartItem;
 
   const _MaterialDetails({
-    Key? key,
     required this.cartItem,
     required this.isInvalidCartItem,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -375,10 +372,9 @@ class _MaterialQuantitySection extends StatefulWidget {
   final bool isInvalidCartItem;
 
   const _MaterialQuantitySection({
-    Key? key,
     required this.cartItem,
     required this.isInvalidCartItem,
-  }) : super(key: key);
+  });
 
   @override
   State<_MaterialQuantitySection> createState() =>
@@ -503,8 +499,7 @@ class _MaterialQuantitySectionState extends State<_MaterialQuantitySection> {
 class _BonusPriceCounterSection extends StatelessWidget {
   final PriceAggregate cartItem;
 
-  const _BonusPriceCounterSection({Key? key, required this.cartItem})
-      : super(key: key);
+  const _BonusPriceCounterSection({required this.cartItem});
 
   @override
   Widget build(BuildContext context) {
@@ -601,8 +596,7 @@ class _BonusPriceCounterSection extends StatelessWidget {
 class _MaterialImageSection extends StatelessWidget {
   final PriceAggregate cartProduct;
 
-  const _MaterialImageSection({required this.cartProduct, Key? key})
-      : super(key: key);
+  const _MaterialImageSection({required this.cartProduct});
 
   @override
   Widget build(BuildContext context) {

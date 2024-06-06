@@ -15,9 +15,11 @@ import 'package:ezrxmobile/presentation/home/announcement_section/announcement_a
 import 'package:ezrxmobile/presentation/home/announcement_section/announcement_articles_tab/announcements/widgets/new_announcement_icon.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
+import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 import 'package:universal_io/io.dart';
 
 import '../../../../../utils/widget_utils.dart';
@@ -77,6 +79,8 @@ void main() {
         .thenReturn(AnnouncementInfoState.initial());
     when(() => announcementAttachmentBlocMock.state)
         .thenReturn(AnnouncementAttachmentState.initial());
+
+    _mockCacheImageNetwork();
   });
 
   Widget getAnnouncementInfoDetailsPage() {
@@ -347,4 +351,16 @@ void main() {
       },
     );
   });
+}
+
+void _mockCacheImageNetwork() {
+  TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
+      .setMockMethodCallHandler(
+          const MethodChannel('plugins.flutter.io/path_provider'),
+          (MethodCall methodCall) async {
+    return '.';
+  });
+  
+  sqfliteFfiInit();
+  databaseFactory = databaseFactoryFfi;
 }

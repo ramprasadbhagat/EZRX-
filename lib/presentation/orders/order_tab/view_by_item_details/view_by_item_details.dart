@@ -75,8 +75,8 @@ part 'package:ezrxmobile/presentation/orders/order_tab/view_by_item_details/sect
 
 class ViewByItemDetailsPage extends StatelessWidget {
   const ViewByItemDetailsPage({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {

@@ -2,8 +2,7 @@ part of 'package:ezrxmobile/presentation/orders/cart/bonus/bonus_items_sheet.dar
 
 class _BonusItemSearchBar extends StatelessWidget {
   final PriceAggregate cartItem;
-  const _BonusItemSearchBar({Key? key, required this.cartItem})
-      : super(key: key);
+  const _BonusItemSearchBar({required this.cartItem});
 
   @override
   Widget build(BuildContext context) {

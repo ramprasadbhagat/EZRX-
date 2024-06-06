@@ -9,8 +9,7 @@ import 'package:flutter/material.dart';
 class ProductSearchEntry extends StatefulWidget {
   final String initValue;
   final VoidCallback? onClear;
-  const ProductSearchEntry({this.initValue = '', this.onClear, Key? key})
-      : super(key: key);
+  const ProductSearchEntry({this.initValue = '', this.onClear, super.key});
 
   @override
   State<ProductSearchEntry> createState() => _ProductSearchEntryState();

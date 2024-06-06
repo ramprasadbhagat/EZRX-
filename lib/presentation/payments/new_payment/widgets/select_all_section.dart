@@ -4,9 +4,8 @@ class _CheckAllCreditsWidget extends StatelessWidget {
   final List<CustomerOpenItem> selectedCredits;
 
   const _CheckAllCreditsWidget({
-    Key? key,
     required this.selectedCredits,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -31,9 +30,8 @@ class _CheckAllInvoicesWidget extends StatelessWidget {
   final List<CustomerOpenItem> selectedInvoices;
 
   const _CheckAllInvoicesWidget({
-    Key? key,
     required this.selectedInvoices,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -59,10 +57,9 @@ class _CheckAllWidget extends StatelessWidget {
   final ValueChanged<bool?> onChanged;
 
   const _CheckAllWidget({
-    Key? key,
     required this.value,
     required this.onChanged,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

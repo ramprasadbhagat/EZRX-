@@ -6,8 +6,7 @@ class _ChangeDeliveryAddress extends StatelessWidget {
   const _ChangeDeliveryAddress({
     required this.shipToInfo,
     required this.customerCodeInfo,
-    Key? key,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -61,8 +60,7 @@ class _ConfirmChangeDeliveryAddressSection extends StatelessWidget {
   const _ConfirmChangeDeliveryAddressSection({
     required this.shipToInfo,
     required this.customerCodeInfo,
-    Key? key,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

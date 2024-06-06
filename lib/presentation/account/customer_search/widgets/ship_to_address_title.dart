@@ -2,9 +2,8 @@ part of 'package:ezrxmobile/presentation/account/customer_search/customer_search
 
 class _ShipToAddressTitle extends StatelessWidget {
   const _ShipToAddressTitle({
-    Key? key,
     required this.shipToInfo,
-  }) : super(key: key);
+  });
 
   final ShipToInfo shipToInfo;
 

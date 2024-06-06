@@ -41,11 +41,11 @@ class FailureHandler {
       );
     } else {
       switch (error.runtimeType) {
-        case MockException:
+        case const (MockException):
           return ApiFailure.other((error as MockException).message);
-        case CacheException:
+        case const (CacheException):
           return ApiFailure.other((error as CacheException).message);
-        case ServerException:
+        case const (ServerException):
           final message = (error as ServerException).message;
           if (message.toLowerCase() == 'authentication failed' ||
               message.toLowerCase() ==
@@ -54,13 +54,13 @@ class FailureHandler {
           }
 
           return ApiFailure.serverError(message);
-        case SocketException:
+        case const (SocketException):
           return const ApiFailure.poorConnection();
-        case TimeoutException:
+        case const (TimeoutException):
           return const ApiFailure.serverTimeout();
-        case PlatformException:
+        case const (PlatformException):
           return ApiFailure.other('${(error as PlatformException).message}');
-        case OtherException:
+        case const (OtherException):
           return ApiFailure.other((error as OtherException).message);
 
         default:

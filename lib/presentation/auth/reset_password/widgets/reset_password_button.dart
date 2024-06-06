@@ -1,7 +1,7 @@
 part of 'package:ezrxmobile/presentation/auth/reset_password/reset_password_page.dart';
 
 class _ResetPasswordButton extends StatelessWidget {
-  const _ResetPasswordButton({Key? key}) : super(key: key);
+  const _ResetPasswordButton();
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +47,7 @@ class _ResetPasswordButton extends StatelessWidget {
 }
 
 class _ValidationsFailedWarning extends StatelessWidget {
-  const _ValidationsFailedWarning({Key? key}) : super(key: key);
+  const _ValidationsFailedWarning();
 
   @override
   Widget build(BuildContext context) {

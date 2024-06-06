@@ -7,8 +7,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 class TenderTag extends StatelessWidget {
   const TenderTag({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {

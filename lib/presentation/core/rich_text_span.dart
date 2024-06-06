@@ -6,10 +6,10 @@ class RichTextSpan extends StatelessWidget {
   final String text;
   final Color textColor;
   const RichTextSpan({
-    Key? key,
+    super.key,
     required this.text,
     this.textColor = ZPColors.black,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

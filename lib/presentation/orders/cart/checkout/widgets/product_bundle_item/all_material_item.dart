@@ -2,7 +2,7 @@ part of 'checkout_bundle_item.dart';
 
 class _AllMaterialItem extends StatelessWidget {
   final PriceAggregate cartItem;
-  const _AllMaterialItem({Key? key, required this.cartItem}) : super(key: key);
+  const _AllMaterialItem({required this.cartItem});
 
   @override
   Widget build(BuildContext context) {
@@ -20,9 +20,8 @@ class _AllMaterialItem extends StatelessWidget {
 class _MaterialDetailsSection extends StatelessWidget {
   final MaterialInfo cartItem;
   const _MaterialDetailsSection({
-    Key? key,
     required this.cartItem,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -43,8 +42,7 @@ class _MaterialDetailsSection extends StatelessWidget {
 
 class _MaterialImageSection extends StatelessWidget {
   final MaterialInfo cartProduct;
-  const _MaterialImageSection({required this.cartProduct, Key? key})
-      : super(key: key);
+  const _MaterialImageSection({required this.cartProduct});
 
   @override
   Widget build(BuildContext context) {
@@ -68,9 +66,8 @@ class _MaterialImageSection extends StatelessWidget {
 class _MaterialDetails extends StatelessWidget {
   final MaterialInfo cartItem;
   const _MaterialDetails({
-    Key? key,
     required this.cartItem,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

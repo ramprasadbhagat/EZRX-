@@ -1,7 +1,7 @@
 part of 'package:ezrxmobile/presentation/products/combo_detail/combo_detail_page.dart';
 
 class _ComboDetailDeleteFromCartButton extends StatelessWidget {
-  const _ComboDetailDeleteFromCartButton({Key? key}) : super(key: key);
+  const _ComboDetailDeleteFromCartButton();
 
   @override
   Widget build(BuildContext context) {

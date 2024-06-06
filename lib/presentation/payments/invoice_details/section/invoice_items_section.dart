@@ -9,8 +9,7 @@ import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:ezrxmobile/domain/payments/entities/customer_document_detail.dart';
 
 class InvoiceItemsSection extends StatelessWidget {
-  const InvoiceItemsSection({Key? key, required this.customerDocumentDetail})
-      : super(key: key);
+  const InvoiceItemsSection({super.key, required this.customerDocumentDetail});
   final List<CustomerDocumentDetail> customerDocumentDetail;
 
   @override
@@ -70,7 +69,7 @@ class InvoiceItemsSection extends StatelessWidget {
                           customerDocumentDetail: e,
                         ),
                       )
-                      .toList(),
+                      ,
                 ],
               );
             },

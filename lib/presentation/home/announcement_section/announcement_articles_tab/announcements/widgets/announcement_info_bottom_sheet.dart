@@ -2,10 +2,10 @@ part of 'package:ezrxmobile/presentation/home/announcement_section/announcement_
 
 class _AnnouncementInfoBottomSheet extends StatelessWidget {
   const _AnnouncementInfoBottomSheet({
-    Key? key,
+    super.key,
     required this.isLoading,
     required this.changeState,
-  }) : super(key: key);
+  });
 
   final bool isLoading;
   final Function changeState;

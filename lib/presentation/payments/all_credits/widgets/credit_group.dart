@@ -5,10 +5,9 @@ class _CreditGroup extends StatelessWidget {
   final bool showDivider;
 
   const _CreditGroup({
-    Key? key,
     required this.data,
     required this.showDivider,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

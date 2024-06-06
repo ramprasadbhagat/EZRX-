@@ -2,9 +2,8 @@ part of 'package:ezrxmobile/presentation/account/profile/profile_page.dart';
 
 class _LicenseTile extends StatelessWidget {
   const _LicenseTile({
-    Key? key,
     required this.customerLicense,
-  }) : super(key: key);
+  });
 
   final CustomerLicense customerLicense;
 

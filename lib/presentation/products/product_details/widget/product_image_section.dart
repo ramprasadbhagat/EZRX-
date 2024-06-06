@@ -1,9 +1,7 @@
 part of 'package:ezrxmobile/presentation/products/product_details/product_details_page.dart';
 
 class _ProductImageSection extends StatelessWidget {
-  const _ProductImageSection({
-    Key? key,
-  }) : super(key: key);
+  const _ProductImageSection();
 
   @override
   Widget build(BuildContext context) {
@@ -101,11 +99,10 @@ class _ProductImages extends StatelessWidget {
   final int selected;
   final ProductDetailState state;
   const _ProductImages({
-    Key? key,
     required this.productImage,
     required this.selected,
     required this.state,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -134,11 +131,10 @@ class _ProductImages extends StatelessWidget {
 
 class _ProductThumbnail extends StatelessWidget {
   const _ProductThumbnail({
-    Key? key,
     required this.productImage,
     required this.selected,
     required this.index,
-  }) : super(key: key);
+  });
   final ProductImages productImage;
   final int selected;
   final int index;

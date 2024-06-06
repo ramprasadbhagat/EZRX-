@@ -27,7 +27,7 @@ part 'package:ezrxmobile/presentation/returns/new_request/widgets/previous_butto
 part 'package:ezrxmobile/presentation/returns/new_request/widgets/submit_button.dart';
 
 class NewRequestPage extends StatelessWidget {
-  const NewRequestPage({Key? key}) : super(key: key);
+  const NewRequestPage({super.key});
   final _tabs = const [
     ReturnItemsTabRoute(),
     ReturnDetailsTabRoute(),

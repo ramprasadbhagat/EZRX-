@@ -7,8 +7,7 @@ class _APLPaymentSelectorWidget extends StatelessWidget {
   const _APLPaymentSelectorWidget({
     required this.paymentMethods,
     required this.selectedPaymentMethod,
-    Key? key,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -71,7 +70,7 @@ class _APLPaymentSelectorWidget extends StatelessWidget {
                                 paymentMethodOption: e,
                               ),
                             )
-                            .toList(),
+                            ,
                         const Padding(
                           padding: EdgeInsets.symmetric(vertical: 16),
                           child: Divider(
@@ -110,7 +109,7 @@ class _APLPaymentSelectorWidget extends StatelessWidget {
                                 paymentMethodOption: e,
                               ),
                             )
-                            .toList(),
+                            ,
                       ],
                     ),
                   ),

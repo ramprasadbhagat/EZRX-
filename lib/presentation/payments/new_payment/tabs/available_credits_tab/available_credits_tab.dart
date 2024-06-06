@@ -28,7 +28,7 @@ import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dar
 part 'package:ezrxmobile/presentation/payments/new_payment/tabs/available_credits_tab/widgets/available_credits_search_bar.dart';
 
 class AvailableCreditsTab extends StatelessWidget {
-  const AvailableCreditsTab({Key? key}) : super(key: key);
+  const AvailableCreditsTab({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -117,9 +117,8 @@ class AvailableCreditsTab extends StatelessWidget {
 
 class _PaymentItem extends StatelessWidget {
   const _PaymentItem({
-    Key? key,
     required this.data,
-  }) : super(key: key);
+  });
 
   final CustomerOpenItem data;
 

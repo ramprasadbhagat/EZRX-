@@ -55,7 +55,7 @@ part 'package:ezrxmobile/presentation/orders/cart/checkout/widgets/total_items.d
 part 'package:ezrxmobile/presentation/orders/cart/checkout/widgets/checkout_footer_section.dart';
 
 class CheckoutPage extends StatefulWidget {
-  const CheckoutPage({Key? key}) : super(key: key);
+  const CheckoutPage({super.key});
 
   @override
   State<CheckoutPage> createState() => _CheckoutPageState();

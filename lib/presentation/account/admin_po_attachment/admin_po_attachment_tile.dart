@@ -10,9 +10,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class AdminPoAttachmentTile extends StatelessWidget {
   final AdminPoAttachment adminPoAttachment;
   const AdminPoAttachmentTile({
-    Key? key,
+    super.key,
     required this.adminPoAttachment,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

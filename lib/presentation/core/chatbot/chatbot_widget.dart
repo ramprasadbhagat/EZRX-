@@ -8,7 +8,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class ChatBotWidget extends StatelessWidget {
-  const ChatBotWidget({Key? key}) : super(key: key);
+  const ChatBotWidget({super.key});
 
   @override
   Widget build(BuildContext context) {

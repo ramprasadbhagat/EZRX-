@@ -29,10 +29,8 @@ import 'package:mocktail/mocktail.dart';
 import '../../../common_mock_data/mock_other.dart';
 import '../../../common_mock_data/sales_organsiation_mock.dart';
 import '../../../common_mock_data/user_mock.dart';
-// ignore: depend_on_referenced_packages
 import 'package:local_auth_android/local_auth_android.dart';
-// ignore: depend_on_referenced_packages
-import 'package:local_auth_ios/local_auth_ios.dart';
+import 'package:local_auth_darwin/local_auth_darwin.dart';
 
 class ConfigMock extends Mock implements Config {}
 

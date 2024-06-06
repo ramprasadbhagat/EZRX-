@@ -1,7 +1,7 @@
 part of 'loading_shimmer.dart';
 
 class _Logo extends StatelessWidget {
-  const _Logo({Key? key}) : super(key: key);
+  const _Logo();
 
   @override
   Widget build(BuildContext context) {

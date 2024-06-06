@@ -12,9 +12,9 @@ import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 
 class InvoiceItemCard extends StatelessWidget {
   const InvoiceItemCard({
-    Key? key,
+    super.key,
     required this.customerOpenItem,
-  }) : super(key: key);
+  });
   final CustomerOpenItem customerOpenItem;
 
   @override

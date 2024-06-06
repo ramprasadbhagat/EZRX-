@@ -5,10 +5,9 @@ class _OrderSuccessMaterialSection extends StatelessWidget {
   final bool isMarketPlace;
 
   const _OrderSuccessMaterialSection({
-    Key? key,
     required this.orderItems,
     this.isMarketPlace = false,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +49,7 @@ class _OrderSuccessMaterialSection extends StatelessWidget {
                           orderItem: e,
                         ),
                       )
-                      .toList(),
+                      ,
                 ],
               ),
             ),
@@ -64,9 +63,9 @@ class _MaterialItem extends StatelessWidget {
   final OrderHistoryDetailsOrderItem orderItem;
 
   const _MaterialItem({
-    Key? key,
+    super.key,
     required this.orderItem,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

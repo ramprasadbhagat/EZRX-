@@ -27,10 +27,10 @@ class AupTCPage extends StatelessWidget {
   final bool isMarketPlace;
 
   const AupTCPage({
-    Key? key,
+    super.key,
     required this.user,
     required this.isMarketPlace,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -153,7 +153,7 @@ class AupTCPage extends StatelessWidget {
 }
 
 class _TermsOfUseConsentCheckBox extends StatelessWidget {
-  const _TermsOfUseConsentCheckBox({Key? key}) : super(key: key);
+  const _TermsOfUseConsentCheckBox();
 
   @override
   Widget build(BuildContext context) {
@@ -189,7 +189,7 @@ class _TermsOfUseConsentCheckBox extends StatelessWidget {
 }
 
 class _PrivacyPolicyConsentCheckBox extends StatelessWidget {
-  const _PrivacyPolicyConsentCheckBox({Key? key}) : super(key: key);
+  const _PrivacyPolicyConsentCheckBox();
 
   @override
   Widget build(BuildContext context) {
@@ -226,9 +226,9 @@ class _PrivacyPolicyConsentCheckBox extends StatelessWidget {
 
 class _ConsentBox extends StatelessWidget {
   const _ConsentBox({
-    Key? key,
+    super.key,
     required this.url,
-  }) : super(key: key);
+  });
   final String url;
 
   @override
@@ -267,8 +267,8 @@ class AcceptButton extends StatelessWidget {
 
   const AcceptButton({
     required this.isMarketPlace,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {

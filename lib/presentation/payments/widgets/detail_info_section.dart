@@ -4,12 +4,12 @@ import 'package:flutter/material.dart';
 
 class DetailsInfoSection extends StatelessWidget {
   const DetailsInfoSection({
-    Key? key,
+    super.key,
     required this.label,
     this.labelStyle,
     required this.child,
     this.padding,
-  }) : super(key: key);
+  });
   final String label;
   final Widget child;
   final TextStyle? labelStyle;

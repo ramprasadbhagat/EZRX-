@@ -8,7 +8,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class StockLabel extends StatelessWidget {
   final MaterialInfo materialInfo;
 
-  const StockLabel({required this.materialInfo, Key? key}) : super(key: key);
+  const StockLabel({required this.materialInfo, super.key});
 
   @override
   Widget build(BuildContext context) {

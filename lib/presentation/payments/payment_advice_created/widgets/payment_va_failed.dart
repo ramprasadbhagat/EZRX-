@@ -43,10 +43,10 @@ class _PaymentVirtualAccountFailed extends StatelessWidget {
                 );
               },
               style: Theme.of(context).elevatedButtonTheme.style!.copyWith(
-                    backgroundColor: const MaterialStatePropertyAll(
+                    backgroundColor: const WidgetStatePropertyAll(
                       ZPColors.white,
                     ),
-                    shape: const MaterialStatePropertyAll(
+                    shape: const WidgetStatePropertyAll(
                       RoundedRectangleBorder(
                         borderRadius: BorderRadius.all(
                           Radius.circular(8),

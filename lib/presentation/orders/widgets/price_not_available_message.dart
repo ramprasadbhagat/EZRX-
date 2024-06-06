@@ -7,9 +7,9 @@ import 'package:flutter/material.dart';
 class PriceNotAvailableMessage extends StatelessWidget {
   final EdgeInsets margin;
   const PriceNotAvailableMessage({
-    Key? key,
+    super.key,
     this.margin = EdgeInsets.zero,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

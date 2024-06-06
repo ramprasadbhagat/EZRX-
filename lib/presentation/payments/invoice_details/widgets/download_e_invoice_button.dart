@@ -4,9 +4,8 @@ class _DownloadEInvoiceButton extends StatelessWidget {
   final String invoiceNumber;
 
   const _DownloadEInvoiceButton({
-    Key? key,
     required this.invoiceNumber,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

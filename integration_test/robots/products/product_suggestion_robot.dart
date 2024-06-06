@@ -8,7 +8,7 @@ import '../common/common_robot.dart';
 import '../common/extension.dart';
 
 class ProductSuggestionRobot extends CommonRobot {
-  ProductSuggestionRobot(WidgetTester tester) : super(tester);
+  ProductSuggestionRobot(super.tester);
 
   final suggestedProductsTile = find.byKey(WidgetKeys.suggestedProductsTile);
   final searchHistory = find.byKey(WidgetKeys.searchProductHistory);

@@ -1,7 +1,7 @@
 part of 'package:ezrxmobile/presentation/faq/faq_info.dart';
 
 class _ShowContactUsButton extends StatelessWidget {
-  const _ShowContactUsButton({Key? key}) : super(key: key);
+  const _ShowContactUsButton();
 
   @override
   Widget build(BuildContext context) {

@@ -1,0 +1,383 @@
+/*
+ * This file is part of the Scandit Data Capture SDK
+ *
+ * Copyright (C) 2020- Scandit AG. All rights reserved.
+ */
+
+import 'dart:async';
+import 'dart:convert';
+import 'dart:io';
+
+import 'package:flutter/foundation.dart';
+import 'package:flutter/gestures.dart';
+import 'package:flutter/rendering.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter/widgets.dart';
+
+import 'package:scandit_flutter_datacapture_core/src/control.dart';
+import 'package:scandit_flutter_datacapture_core/src/common.dart' as common;
+import 'package:scandit_flutter_datacapture_core/src/data_capture_context.dart';
+import 'package:scandit_flutter_datacapture_core/src/defaults.dart';
+import 'package:scandit_flutter_datacapture_core/src/focus_gesture.dart';
+import 'package:scandit_flutter_datacapture_core/src/function_names.dart';
+import 'package:scandit_flutter_datacapture_core/src/zoom_gesture.dart';
+import 'package:scandit_flutter_datacapture_core/src/logo_style.dart';
+
+abstract class DataCaptureOverlay extends common.Serializable {
+  final String _type;
+
+  DataCaptureView? get view;
+
+  set view(DataCaptureView? newValue);
+
+  DataCaptureOverlay(this._type);
+
+  @override
+  Map<String, dynamic> toMap() {
+    return {'type': _type};
+  }
+}
+
+abstract class DataCaptureViewListener {
+  void didChangeSize(
+    DataCaptureView view,
+    common.Size size,
+    common.Orientation orientation,
+  );
+}
+
+// ignore: must_be_immutable
+class DataCaptureView extends StatefulWidget with PrivateDataCaptureView {
+  PrivateDataCaptureContext? _dataCaptureContext;
+
+  final EventChannel _viewDidChangeSizeEventChannel =
+      const EventChannel(FunctionNames.eventsChannelName);
+
+  StreamSubscription? _streamSubscription;
+
+  DataCaptureView._(this._dataCaptureContext) : super() {
+    _controller = _DataCaptureViewController(this);
+    _dataCaptureContext?.view = this;
+  }
+
+  factory DataCaptureView.forContext(DataCaptureContext dataCaptureContext) {
+    return DataCaptureView._(dataCaptureContext);
+  }
+
+  @override
+  State<StatefulWidget> createState() => _DataCaptureViewState();
+
+  DataCaptureContext? get dataCaptureContext {
+    return _dataCaptureContext as DataCaptureContext?;
+  }
+
+  set dataCaptureContext(DataCaptureContext? newValue) {
+    _dataCaptureContext = newValue;
+
+    _dataCaptureContext?.view = this;
+    _dataCaptureContext?.update();
+  }
+
+  common.MarginsWithUnit get scanAreaMargins {
+    return _scanAreaMargins;
+  }
+
+  set scanAreaMargins(common.MarginsWithUnit newValue) {
+    _scanAreaMargins = newValue;
+    _controller.update();
+  }
+
+  common.PointWithUnit get pointOfInterest {
+    return _pointOfInterest;
+  }
+
+  set pointOfInterest(common.PointWithUnit newValue) {
+    _pointOfInterest = newValue;
+    _controller.update();
+  }
+
+  common.Anchor get logoAnchor {
+    return _logoAnchor;
+  }
+
+  set logoAnchor(common.Anchor newValue) {
+    _logoAnchor = newValue;
+    _controller.update();
+  }
+
+  common.PointWithUnit get logoOffset {
+    return _logoOffset;
+  }
+
+  set logoOffset(common.PointWithUnit newValue) {
+    _logoOffset = newValue;
+    _controller.update();
+  }
+
+  FocusGesture? get focusGesture {
+    return _focusGesture;
+  }
+
+  set focusGesture(FocusGesture? newValue) {
+    _focusGesture = newValue;
+    _controller.update();
+  }
+
+  ZoomGesture? get zoomGesture {
+    return _zoomGesture;
+  }
+
+  set zoomGesture(ZoomGesture? newValue) {
+    _zoomGesture = newValue;
+    _controller.update();
+  }
+
+  void addOverlay(DataCaptureOverlay overlay) {
+    if (_overlays.contains(overlay)) {
+      return;
+    }
+    _overlays.add(overlay);
+    _controller.addOverlay(overlay);
+  }
+
+  void removeOverlay(DataCaptureOverlay overlay) {
+    if (!_overlays.contains(overlay)) {
+      return;
+    }
+    _overlays.remove(overlay);
+    _controller.removeOverlay(overlay);
+  }
+
+  void addListener(DataCaptureViewListener listener) {
+    if (_listeners.isEmpty) {
+      _registerListener();
+    }
+
+    if (!_listeners.contains(listener)) {
+      _listeners.add(listener);
+    }
+  }
+
+  void removeListener(DataCaptureViewListener listener) {
+    _listeners.remove(listener);
+
+    if (_listeners.isEmpty) {
+      _unregisterListener();
+    }
+  }
+
+  Future<common.Point> viewPointForFramePoint(common.Point point) {
+    return _controller._viewPointForFramePoint(point);
+  }
+
+  Future<common.Quadrilateral> viewQuadrilateralForFrameQuadrilateral(
+    common.Quadrilateral quadrilateral,
+  ) {
+    return _controller._viewQuadrilateralForFrameQuadrilateral(quadrilateral);
+  }
+
+  void _registerListener() {
+    _unregisterListener();
+    _streamSubscription =
+        _viewDidChangeSizeEventChannel.receiveBroadcastStream().listen((event) {
+      final eventJSON = jsonDecode(event as String);
+      final eventName = eventJSON['event'] as String;
+
+      if (eventName == FunctionNames.eventDataCaptureViewSizeChanged) {
+        final size = common.Size.fromJSON(eventJSON['size']);
+        final orientation =
+            common.OrientationDeserializer.fromJSON(eventJSON['orientation']);
+        _notifyListenersOfViewDidChangeSize(size, orientation);
+      }
+    });
+  }
+
+  void _unregisterListener() {
+    _streamSubscription?.cancel();
+    _streamSubscription = null;
+  }
+
+  void _notifyListenersOfViewDidChangeSize(
+    common.Size size,
+    common.Orientation orientation,
+  ) {
+    for (final listener in _listeners) {
+      listener.didChangeSize(this, size, orientation);
+    }
+  }
+
+  void addControl(Control control) {
+    if (!_controls.contains(control)) {
+      _controls.add(control);
+      _controller.update();
+    }
+  }
+
+  void removeControl(Control control) {
+    if (_controls.remove(control)) {
+      _controller.update();
+    }
+  }
+
+  set logoStyle(LogoStyle newValue) {
+    _logoStyle = newValue;
+    _controller.update();
+  }
+
+  LogoStyle get logoStyle => _logoStyle;
+}
+
+class _DataCaptureViewController {
+  final MethodChannel _methodChannel = Defaults.channel;
+  final DataCaptureView _view;
+
+  _DataCaptureViewController(this._view);
+
+  Future<common.Point> _viewPointForFramePoint(common.Point point) {
+    final args = jsonEncode(point.toMap());
+    return _methodChannel
+        .invokeMethod(FunctionNames.viewPointForFramePoint, args)
+        .then((value) => common.Point.fromJSON(jsonDecode(value)));
+  }
+
+  Future<common.Quadrilateral> _viewQuadrilateralForFrameQuadrilateral(
+    common.Quadrilateral quadrilateral,
+  ) {
+    final args = jsonEncode(quadrilateral.toMap());
+    return _methodChannel
+        .invokeMethod(
+          FunctionNames.viewQuadrilateralForFrameQuadrilateral,
+          args,
+        )
+        .then((value) => common.Quadrilateral.fromJSON(jsonDecode(value)));
+  }
+
+  Future<void> update() {
+    final args = jsonEncode(_view.toMap());
+    return _methodChannel
+        .invokeMethod(FunctionNames.updateDataCaptureView, args)
+        .onError(_onError);
+  }
+
+  Future<void> addOverlay(DataCaptureOverlay overlay) {
+    final args = jsonEncode(overlay.toMap());
+    return _methodChannel
+        .invokeMethod(FunctionNames.addOverlay, args)
+        .onError(_onError);
+  }
+
+  Future<void> removeOverlay(DataCaptureOverlay overlay) {
+    final args = jsonEncode(overlay.toMap());
+    return _methodChannel
+        .invokeMethod(FunctionNames.removeOverlay, args)
+        .onError(_onError);
+  }
+
+  Future<void> removeAllOverlays() {
+    return _methodChannel
+        .invokeMethod(FunctionNames.removeAllOverlays)
+        .onError(_onError);
+  }
+
+  void _onError(Object? error, StackTrace? stackTrace) {
+    if (error == null) return;
+    if (stackTrace != null) {}
+
+    throw error;
+  }
+}
+
+mixin PrivateDataCaptureView implements common.Serializable {
+  common.MarginsWithUnit _scanAreaMargins =
+      Defaults.captureViewDefaults.scanAreaMargins;
+  common.PointWithUnit _pointOfInterest =
+      Defaults.captureViewDefaults.pointOfInterest;
+  common.Anchor _logoAnchor = Defaults.captureViewDefaults.logoAnchor;
+  common.PointWithUnit _logoOffset = Defaults.captureViewDefaults.logoOffset;
+  final List<DataCaptureViewListener> _listeners = [];
+  final List<Control> _controls = [];
+  LogoStyle _logoStyle = Defaults.captureViewDefaults.logoStyle;
+  late _DataCaptureViewController _controller;
+
+  FocusGesture? _focusGesture = Defaults.captureViewDefaults.focusGesture;
+  ZoomGesture? _zoomGesture = Defaults.captureViewDefaults.zoomGesture;
+  final List<DataCaptureOverlay> _overlays = [];
+
+  void removeAllOverlays() {
+    _overlays.clear();
+    _controller.removeAllOverlays();
+  }
+
+  @override
+  Map<String, dynamic> toMap() {
+    final json = <String, dynamic>{};
+    json['scanAreaMargins'] = _scanAreaMargins.toMap();
+    json['pointOfInterest'] = _pointOfInterest.toMap();
+    json['logoAnchor'] = _logoAnchor.toString();
+    json['logoOffset'] = _logoOffset.toMap();
+    json['focusGesture'] = _focusGesture?.toMap();
+    json['zoomGesture'] = _zoomGesture?.toMap();
+    json['controls'] = _controls.map((e) => e.toMap()).toList();
+    json['logoStyle'] = _logoStyle.toString();
+
+    return json;
+  }
+}
+
+class _DataCaptureViewState extends State<DataCaptureView> {
+  DataCaptureContext? _dataCaptureContext;
+
+  DataCaptureContext? get dataCaptureContext => _dataCaptureContext;
+
+  set dataCaptureContext(DataCaptureContext? newValue) {
+    _dataCaptureContext = newValue;
+    _dataCaptureContext?.view = widget;
+    _dataCaptureContext?.update();
+  }
+
+  _DataCaptureViewState();
+
+  @override
+  void initState() {
+    _dataCaptureContext = widget._dataCaptureContext as DataCaptureContext?;
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    const viewType = 'com.scandit.DataCaptureView';
+
+    if (Platform.isAndroid) {
+      return PlatformViewLink(
+        viewType: viewType,
+        surfaceFactory: (context, controller) {
+          return AndroidViewSurface(
+            controller: controller as AndroidViewController,
+            gestureRecognizers: const <Factory<OneSequenceGestureRecognizer>>{},
+            hitTestBehavior: PlatformViewHitTestBehavior.opaque,
+          );
+        },
+        onCreatePlatformView: (params) {
+          return PlatformViewsService.initSurfaceAndroidView(
+            id: params.id,
+            viewType: viewType,
+            layoutDirection: TextDirection.ltr,
+            creationParams: {'DataCaptureView': jsonEncode(widget.toMap())},
+            creationParamsCodec: const StandardMessageCodec(),
+            onFocus: () {
+              params.onFocusChanged(true);
+            },
+          )
+            ..addOnPlatformViewCreatedListener(params.onPlatformViewCreated)
+            ..create();
+        },
+      );
+    } else {
+      return UiKitView(
+        viewType: viewType,
+        creationParams: {'DataCaptureView': jsonEncode(widget.toMap())},
+        creationParamsCodec: const StandardMessageCodec(),
+      );
+    }
+  }
+}

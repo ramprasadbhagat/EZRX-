@@ -1,7 +1,6 @@
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:scandit_flutter_datacapture_barcode/scandit_flutter_datacapture_barcode.dart';
 import 'package:scandit_flutter_datacapture_barcode/scandit_flutter_datacapture_barcode_capture.dart';
-// ignore: depend_on_referenced_packages
 import 'package:scandit_flutter_datacapture_core/scandit_flutter_datacapture_core.dart';
 
 import 'package:ezrxmobile/config.dart';
@@ -37,7 +36,7 @@ class MaterialInfoScanner {
   RectangularViewfinder get _rectangularViewfinder =>
       _overlay.viewfinder as RectangularViewfinder;
 
-  SizeWithUnit get _scanArea => SizeWithUnit(
+  SizeWithUnit get _scanArea => const SizeWithUnit(
         DoubleWithUnit(0.9, MeasureUnit.fraction),
         DoubleWithUnit(0.1, MeasureUnit.fraction),
       );

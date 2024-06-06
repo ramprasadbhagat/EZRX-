@@ -9,7 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class LicenseExpiredBanner extends StatelessWidget {
-  const LicenseExpiredBanner({Key? key}) : super(key: key);
+  const LicenseExpiredBanner({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +44,7 @@ class LicenseExpiredBanner extends StatelessWidget {
                   TextButton(
                     key: WidgetKeys.viewLicenseButton,
                     style: ButtonStyle(
-                      padding: MaterialStateProperty.all(EdgeInsets.zero),
+                      padding: WidgetStateProperty.all(EdgeInsets.zero),
                     ),
                     child: Text(
                       context.tr('View license'),

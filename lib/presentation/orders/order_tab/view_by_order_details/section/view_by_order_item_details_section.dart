@@ -25,10 +25,10 @@ import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart
 
 class OrderItemDetailsSection extends StatelessWidget {
   const OrderItemDetailsSection({
-    Key? key,
+    super.key,
     required this.viewByOrderHistoryGroupList,
     this.isMarketPlace = false,
-  }) : super(key: key);
+  });
   final List<ViewByOrdersGroup> viewByOrderHistoryGroupList;
   final bool isMarketPlace;
 
@@ -77,9 +77,8 @@ class _OrderItemTile extends StatelessWidget {
   final OrderHistoryDetailsOrderItem orderItem;
 
   const _OrderItemTile({
-    Key? key,
     required this.orderItem,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

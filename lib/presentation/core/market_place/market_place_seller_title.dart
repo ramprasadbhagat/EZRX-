@@ -11,12 +11,12 @@ class MarketPlaceSellerTitle extends StatelessWidget {
   final Color textColor;
 
   const MarketPlaceSellerTitle({
-    Key? key,
+    super.key,
     required this.sellerName,
     this.iconSize = 18,
     this.iconColor = ZPColors.primary,
     this.textColor = ZPColors.neutralsBlack,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

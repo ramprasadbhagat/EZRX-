@@ -10,12 +10,12 @@ class ScaleButton extends StatefulWidget {
   final ScrollController scrollController;
 
   const ScaleButton({
-    Key? key,
+    super.key,
     required this.icon,
     required this.label,
     required this.onPress,
     required this.scrollController,
-  }) : super(key: key);
+  });
 
   @override
   State<ScaleButton> createState() => _ScaleButtonState();

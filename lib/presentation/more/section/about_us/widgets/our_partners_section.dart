@@ -3,9 +3,8 @@ part of 'package:ezrxmobile/presentation/more/section/about_us/about_us_page.dar
 class _OurPartnersSection extends StatelessWidget {
   final MediaListTemplate ourPartners;
   const _OurPartnersSection({
-    Key? key,
     required this.ourPartners,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

@@ -9,7 +9,7 @@ import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 
 class ExploreMarketPlaceBanner extends StatelessWidget {
-  const ExploreMarketPlaceBanner({Key? key}) : super(key: key);
+  const ExploreMarketPlaceBanner({super.key});
 
   @override
   Widget build(BuildContext context) {

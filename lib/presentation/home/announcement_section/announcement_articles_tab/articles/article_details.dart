@@ -16,7 +16,7 @@ const offSet = 60.0;
 
 class ArticleDetails extends StatefulWidget {
   final AnnouncementArticleItem article;
-  const ArticleDetails({Key? key, required this.article}) : super(key: key);
+  const ArticleDetails({super.key, required this.article});
 
   @override
   State<ArticleDetails> createState() => _ArticleDetailsState();
@@ -171,8 +171,8 @@ class _ArticleDetailsState extends State<ArticleDetails> {
                           key: WidgetKeys.articleDetailsBodyKey,
                           style: {
                             'body': Style(
-                              padding: const EdgeInsets.all(0),
-                              margin: const EdgeInsets.all(0),
+                              padding: HtmlPaddings.all(0),
+                              margin: Margins.all(0),
                             ),
                           },
                           data: widget.article.content
@@ -209,9 +209,8 @@ class _ArticleDetailsState extends State<ArticleDetails> {
 
 class _TitleSection extends StatelessWidget {
   const _TitleSection({
-    Key? key,
     required this.article,
-  }) : super(key: key);
+  });
 
   final AnnouncementArticleItem article;
 

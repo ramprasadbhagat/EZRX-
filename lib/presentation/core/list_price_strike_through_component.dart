@@ -10,10 +10,10 @@ class ListPriceStrikeThroughComponent extends StatelessWidget {
   final String title;
 
   const ListPriceStrikeThroughComponent({
-    Key? key,
+    super.key,
     required this.priceAggregate,
     this.title = '',
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

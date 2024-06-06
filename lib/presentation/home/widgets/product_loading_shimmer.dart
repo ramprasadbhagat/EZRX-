@@ -3,8 +3,7 @@ import 'package:flutter/material.dart';
 
 class ProductLoadingShimmer extends StatelessWidget {
   final bool gridView;
-  const ProductLoadingShimmer({this.gridView = false, Key? key})
-      : super(key: key);
+  const ProductLoadingShimmer({super.key, this.gridView = false});
 
   @override
   Widget build(BuildContext context) {

@@ -22,9 +22,9 @@ class PriceSummaryTile extends StatelessWidget {
   final CartState cartState;
 
   const PriceSummaryTile({
-    Key? key,
+    super.key,
     required this.cartState,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

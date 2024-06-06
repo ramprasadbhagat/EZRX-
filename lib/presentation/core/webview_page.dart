@@ -12,11 +12,11 @@ class WebViewPage extends StatefulWidget {
   final String? initialFile;
   final String titleText;
   const WebViewPage({
-    Key? key,
+    super.key,
     this.url = '',
     this.initialFile,
     this.titleText = '',
-  }) : super(key: key);
+  });
 
   @override
   State<WebViewPage> createState() => WebViewPageState();
@@ -60,11 +60,9 @@ class WebViewPageState extends State<WebViewPage> {
                   children: <Widget>[
                     InAppWebView(
                       initialFile: widget.initialFile,
-                      initialUrlRequest: URLRequest(url: Uri.parse(widget.url)),
-                      initialOptions: InAppWebViewGroupOptions(
-                        crossPlatform: InAppWebViewOptions(
-                          mediaPlaybackRequiresUserGesture: false,
-                        ),
+                      initialUrlRequest: URLRequest(url: WebUri(widget.url)),
+                      initialSettings: InAppWebViewSettings(
+                        mediaPlaybackRequiresUserGesture: false,
                       ),
                       onWebViewCreated:
                           (InAppWebViewController webViewController) {
@@ -82,24 +80,22 @@ class WebViewPageState extends State<WebViewPage> {
                           isLoading = false;
                         });
                       },
-                      onLoadHttpError: (
+                      onReceivedHttpError: (
                         InAppWebViewController controller,
-                        Uri? url,
-                        int i,
-                        String s,
+                        WebResourceRequest request,
+                        WebResourceResponse respone,
                       ) {
                         setState(() {
                           errorLoadingUrl = true;
                         });
                       },
-                      androidOnPermissionRequest: (
+                      onPermissionRequest: (
                         InAppWebViewController controller,
-                        String origin,
-                        List<String> resources,
+                        PermissionRequest requests,
                       ) async {
-                        return PermissionRequestResponse(
-                          resources: resources,
-                          action: PermissionRequestResponseAction.GRANT,
+                        return PermissionResponse(
+                          resources: requests.resources,
+                          action: PermissionResponseAction.GRANT,
                         );
                       },
                     ),

@@ -1,7 +1,7 @@
 part of 'package:ezrxmobile/presentation/products/product_filter/product_filter_page.dart';
 
 class _ProductFilterAppBar extends StatelessWidget {
-  const _ProductFilterAppBar({Key? key}) : super(key: key);
+  const _ProductFilterAppBar();
 
   @override
   Widget build(BuildContext context) {

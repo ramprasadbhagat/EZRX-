@@ -15,7 +15,7 @@ import 'package:ezrxmobile/application/chatbot/chat_bot_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 
 class QuickAccessMenuPanel extends StatelessWidget {
-  const QuickAccessMenuPanel({Key? key}) : super(key: key);
+  const QuickAccessMenuPanel({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -50,9 +50,8 @@ class _QuickAccessMenu extends StatelessWidget {
   final _QuickAccessMenuData quickAccessMenuData;
 
   const _QuickAccessMenu({
-    Key? key,
     required this.quickAccessMenuData,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

@@ -22,9 +22,9 @@ class PaymentCompletedPage extends StatelessWidget {
   final bool isMarketPlace;
 
   const PaymentCompletedPage({
-    Key? key,
+    super.key,
     required this.isMarketPlace,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +56,7 @@ class PaymentCompletedPage extends StatelessWidget {
 }
 
 class _BodyContent extends StatelessWidget {
-  const _BodyContent({Key? key}) : super(key: key);
+  const _BodyContent();
 
   @override
   Widget build(BuildContext context) {

@@ -22,13 +22,13 @@ enum LoadingShimmerType {
 
 class LoadingShimmer extends StatelessWidget {
   const LoadingShimmer._({
-    Key? key,
+    super.key,
     required this.type,
     this.child,
     this.enabled,
     this.line,
     this.center = true,
-  }) : super(key: key);
+  });
   final LoadingShimmerType type;
   final Widget? child;
   final bool? enabled;

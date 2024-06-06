@@ -4,9 +4,9 @@ class _SoaTile extends StatelessWidget {
   final Soa soa;
 
   const _SoaTile({
-    Key? key,
+    super.key,
     required this.soa,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

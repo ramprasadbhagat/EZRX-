@@ -16,8 +16,8 @@ class _ItemCard extends StatefulWidget {
   const _ItemCard({
     required this.keyVal,
     required this.isFetching,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   final List<_KeyValuePair> keyVal;
   final bool isFetching;

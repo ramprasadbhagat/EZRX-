@@ -6,11 +6,12 @@ class _ReturnMaterialWidget extends StatelessWidget {
   final ReturnItemDetails itemDetail;
 
   const _ReturnMaterialWidget({
-    Key? key,
+    super.key,
     required this.item,
     required this.bonusItems,
     required this.itemDetail,
-  }) : super(key: key);
+  });
+
   @override
   Widget build(BuildContext context) {
     return CustomCard(

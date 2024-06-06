@@ -2,11 +2,10 @@ part of 'package:ezrxmobile/presentation/returns/widgets/return_item_card.dart';
 
 class _ExpandableDetailSection extends StatefulWidget {
   const _ExpandableDetailSection({
-    Key? key,
     required this.isExpandable,
     required this.isExpanded,
     required this.expandWidget,
-  }) : super(key: key);
+  });
   final bool isExpandable;
   final bool isExpanded;
   final Widget expandWidget;

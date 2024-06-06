@@ -21,9 +21,9 @@ class AllCreditsFilterBottomSheet extends StatelessWidget {
   final bool isMarketPlace;
 
   const AllCreditsFilterBottomSheet({
-    Key? key,
+    super.key,
     required this.isMarketPlace,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -227,9 +227,7 @@ class AllCreditsFilterBottomSheet extends StatelessWidget {
 }
 
 class _ResetButton extends StatelessWidget {
-  const _ResetButton({
-    Key? key,
-  }) : super(key: key);
+  const _ResetButton();
 
   @override
   Widget build(BuildContext context) {
@@ -263,9 +261,7 @@ class _ResetButton extends StatelessWidget {
 }
 
 class _ApplyButton extends StatelessWidget {
-  const _ApplyButton({
-    Key? key,
-  }) : super(key: key);
+  const _ApplyButton();
 
   @override
   Widget build(BuildContext context) {

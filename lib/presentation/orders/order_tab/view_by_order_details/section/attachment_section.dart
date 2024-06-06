@@ -13,7 +13,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class AttachmentSection extends StatelessWidget {
-  const AttachmentSection({Key? key}) : super(key: key);
+  const AttachmentSection({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -62,9 +62,8 @@ class _AttachmentWidget extends StatelessWidget {
   final PoDocuments poDocuments;
 
   const _AttachmentWidget({
-    Key? key,
     required this.poDocuments,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -81,7 +80,7 @@ class _AttachmentWidget extends StatelessWidget {
 }
 
 class _AttachmentsWithIcon extends StatelessWidget {
-  const _AttachmentsWithIcon({Key? key}) : super(key: key);
+  const _AttachmentsWithIcon();
 
   @override
   Widget build(BuildContext context) {

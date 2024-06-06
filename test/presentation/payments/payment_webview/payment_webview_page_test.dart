@@ -10,6 +10,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
+import '../../../common_mock_data/mock_web_view_test.dart';
 import '../../../common_mock_data/sales_organsiation_mock.dart';
 import '../../../utils/widget_utils.dart';
 
@@ -21,6 +22,7 @@ class AppRouterMock extends Mock implements AppRouter {}
 void main() {
   late AppRouter autoRouterMock;
   late NewPaymentBloc newPaymentBlocMock;
+  final mockWebViewDependencies = MockWebViewDependencies();
 
   setUpAll(() async {
     TestWidgetsFlutterBinding.ensureInitialized();
@@ -35,6 +37,7 @@ void main() {
     });
 
     newPaymentBlocMock = NewPaymentBlocMock();
+    await mockWebViewDependencies.init();
   });
 
   setUp(() {

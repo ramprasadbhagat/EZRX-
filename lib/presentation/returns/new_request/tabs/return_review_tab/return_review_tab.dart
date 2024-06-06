@@ -31,7 +31,7 @@ part 'widgets/material_return_details_section.dart';
 part 'widgets/bonus_item_section.dart';
 
 class ReturnReviewTab extends StatelessWidget {
-  const ReturnReviewTab({Key? key}) : super(key: key);
+  const ReturnReviewTab({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -60,31 +60,34 @@ class ReturnReviewTab extends StatelessWidget {
                   height: 8,
                 ),
                 const SpecialInstructionsField(),
-                ...state.selectedItems.map((item) {
-                  final bonusItems = state.getReturnBonusItemsOfMainItem(item);
+                ...state.selectedItems.map(
+                  (item) {
+                    final bonusItems =
+                        state.getReturnBonusItemsOfMainItem(item);
 
-                  return item.balanceQuantity.isGreaterThanZero
-                      ? _ReturnMaterialWidget(
-                          key: WidgetKeys.genericKey(
-                            key:
-                                'selectedItem#${state.selectedItems.indexOf(item)}',
-                          ),
-                          item: item,
-                          bonusItems: bonusItems,
-                          itemDetail: state.getReturnItemDetails(item.uuid),
-                        )
-                      : Column(
-                          children: bonusItems
-                              .map(
-                                (item) => BonusMaterialReturnWidget(
-                                  returnMaterial: item,
-                                  returnItemDetail:
-                                      state.getReturnItemDetails(item.uuid),
-                                ),
-                              )
-                              .toList(),
-                        );
-                }).toList(),
+                    return item.balanceQuantity.isGreaterThanZero
+                        ? _ReturnMaterialWidget(
+                            key: WidgetKeys.genericKey(
+                              key:
+                                  'selectedItem#${state.selectedItems.indexOf(item)}',
+                            ),
+                            item: item,
+                            bonusItems: bonusItems,
+                            itemDetail: state.getReturnItemDetails(item.uuid),
+                          )
+                        : Column(
+                            children: bonusItems
+                                .map(
+                                  (item) => BonusMaterialReturnWidget(
+                                    returnMaterial: item,
+                                    returnItemDetail:
+                                        state.getReturnItemDetails(item.uuid),
+                                  ),
+                                )
+                                .toList(),
+                          );
+                  },
+                ),
               ],
             ),
           ),

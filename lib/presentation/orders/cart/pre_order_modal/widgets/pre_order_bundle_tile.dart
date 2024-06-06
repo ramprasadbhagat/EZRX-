@@ -94,7 +94,7 @@ class _PreOrderBundleTile extends StatelessWidget {
                         child: _PreOrderBundleMaterialTile(bundleMaterial: e),
                       ),
                     )
-                    .toList(),
+                    ,
               ],
             ),
           ),

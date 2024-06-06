@@ -23,9 +23,9 @@ class CreditDetailsPage extends StatelessWidget {
   final bool isMarketPlace;
 
   const CreditDetailsPage({
-    Key? key,
+    super.key,
     required this.isMarketPlace,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

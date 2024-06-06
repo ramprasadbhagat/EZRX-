@@ -13,7 +13,7 @@ class IconLabel extends StatelessWidget {
   final EdgeInsets margin;
   final EdgeInsets padding;
   const IconLabel({
-    Key? key,
+    super.key,
     required this.icon,
     this.iconColor = ZPColors.white,
     this.iconSize = 20,
@@ -26,7 +26,7 @@ class IconLabel extends StatelessWidget {
       topRight: Radius.circular(20.0),
       bottomRight: Radius.circular(20.0),
     ),
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

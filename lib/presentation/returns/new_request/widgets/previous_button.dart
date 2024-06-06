@@ -5,10 +5,9 @@ class _PreviousButton extends StatelessWidget {
   final int step;
 
   const _PreviousButton({
-    Key? key,
     required this.tabController,
     required this.step,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

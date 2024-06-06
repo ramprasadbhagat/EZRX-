@@ -8,13 +8,12 @@ import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/returns/widgets/return_item_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-// ignore: depend_on_referenced_packages
 
 class RequestItemSection extends StatelessWidget {
   const RequestItemSection({
-    Key? key,
+    super.key,
     required this.returnDetailsByRequestState,
-  }) : super(key: key);
+  });
   final ReturnDetailsByRequestState returnDetailsByRequestState;
 
   @override

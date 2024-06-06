@@ -8,7 +8,7 @@ import '../common/common_robot.dart';
 import '../common/extension.dart';
 
 class BundleDetailRobot extends CommonRobot {
-  BundleDetailRobot(WidgetTester tester) : super(tester);
+  BundleDetailRobot(super.tester);
 
   final addToCartButton = find.byKey(WidgetKeys.materialDetailsAddToCartButton);
   final sheetAddToCart = find.byKey(WidgetKeys.bundleAddToCartSheet);

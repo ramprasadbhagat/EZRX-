@@ -13,13 +13,12 @@ class AddressInfoSection extends StatelessWidget {
   final EdgeInsets padding;
 
   const AddressInfoSection._({
-    Key? key,
     required this.actionText,
     this.backgroundColor,
     this.infoTextColor,
     this.customerNameTextColor,
     this.padding = EdgeInsets.zero,
-  }) : super(key: key);
+  });
 
   factory AddressInfoSection.order() => const AddressInfoSection._(
         actionText: 'Order for',

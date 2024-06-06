@@ -4,7 +4,7 @@ import 'package:ezrxmobile/presentation/core/svg_image.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 
 class EzrxAplLogo extends StatelessWidget {
-  const EzrxAplLogo({Key? key}) : super(key: key);
+  const EzrxAplLogo({super.key});
 
   @override
   Widget build(BuildContext context) {

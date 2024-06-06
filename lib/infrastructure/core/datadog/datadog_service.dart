@@ -5,7 +5,6 @@ import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/device_storage.dart';
 import 'package:ezrxmobile/infrastructure/core/package_info/package_info.dart';
-import 'package:flutter/foundation.dart';
 
 class DatadogService {
   final PackageInfoService packageInfoService;
@@ -18,10 +17,12 @@ class DatadogService {
     required this.deviceStorage,
   });
 
-  late DdSdkConfiguration configuration;
+  late DatadogConfiguration configuration;
   final navigationObserver = DatadogNavigationObserver(
     datadogSdk: DatadogSdk.instance,
   );
+
+  final logConfiguration = DatadogLoggerConfiguration();
 
   Future<void> init() async {
     final version = await packageInfoService.getVersion();
@@ -32,20 +33,15 @@ class DatadogService {
           marketDomain: AppMarket(deviceStorage.currentMarket()).marketDomain,
         )
         .replaceFirst('https://', '');
-    configuration = DdSdkConfiguration(
+    configuration = DatadogConfiguration(
       clientToken: config.datadogClientToken,
       env: config.appFlavor.name,
       site: config.datadogSite,
-      trackingConsent: TrackingConsent.granted,
       nativeCrashReportEnabled: true,
-      loggingConfiguration: LoggingConfiguration(
-        sendNetworkInfo: true,
-        printLogsToConsole: !kReleaseMode,
-        sendLogsToDatadog: true,
-      ),
-      rumConfiguration: RumConfiguration(
+      loggingConfiguration: DatadogLoggingConfiguration(),
+      rumConfiguration: DatadogRumConfiguration(
         applicationId: config.datadogRumConfiguration,
-        tracingSamplingRate: 100,
+        traceSampleRate: 100,
       ),
       version: appVersion,
       flavor: config.appFlavor.name,
@@ -65,5 +61,6 @@ class DatadogService {
     );
   }
 
-  DdLogs? get logs => DatadogSdk.instance.logs;
+  DatadogLogger? get logs =>
+      DatadogSdk.instance.logs?.createLogger(logConfiguration);
 }

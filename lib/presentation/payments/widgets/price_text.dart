@@ -11,12 +11,12 @@ class PriceText extends StatelessWidget {
   final bool isNegativeColorDisplay;
 
   const PriceText({
-    Key? key,
+    super.key,
     required this.data,
     required this.title,
     required this.salesOrgConfig,
     this.isNegativeColorDisplay = false,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

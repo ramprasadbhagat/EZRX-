@@ -14,7 +14,7 @@ import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 class FilterValueList extends StatefulWidget {
   final bool isFetching;
 
-  const FilterValueList({required this.isFetching, Key? key}) : super(key: key);
+  const FilterValueList({required this.isFetching, super.key});
 
   @override
   State<FilterValueList> createState() => _FilterValueListState();

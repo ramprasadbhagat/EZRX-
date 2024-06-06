@@ -17,13 +17,13 @@ import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 
 class AvailableOfferItem extends StatelessWidget {
   const AvailableOfferItem({
-    Key? key,
+    super.key,
     required this.bonusMaterial,
     required this.priceTier,
     this.height,
     required this.width,
     required this.padding,
-  }) : super(key: key);
+  });
 
   final double? height;
   final double width;
@@ -48,9 +48,8 @@ class AvailableOfferItem extends StatelessWidget {
 
 class _BonusItem extends StatelessWidget {
   const _BonusItem({
-    Key? key,
     required this.bonusMaterial,
-  }) : super(key: key);
+  });
 
   final BonusMaterial bonusMaterial;
 
@@ -127,9 +126,8 @@ class _BonusItem extends StatelessWidget {
 
 class _TierItem extends StatelessWidget {
   const _TierItem({
-    Key? key,
     required this.priceTier,
-  }) : super(key: key);
+  });
 
   final PriceTierItem priceTier;
 

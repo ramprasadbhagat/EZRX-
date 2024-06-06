@@ -11,14 +11,14 @@ class FavouriteIcon extends StatelessWidget {
   final double? iconSize;
 
   const FavouriteIcon({
-    Key? key,
+    super.key,
     required this.isFavourite,
     required this.onTap,
     this.iconSize,
     this.visualDensity,
     this.constraints,
     this.enable = true,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

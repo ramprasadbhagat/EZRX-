@@ -53,7 +53,7 @@ part 'package:ezrxmobile/presentation/orders/cart/widget/cart_page_invalid_items
 part 'package:ezrxmobile/presentation/orders/cart/widget/cart_page_price_not_available_message.dart';
 
 class CartPage extends StatefulWidget {
-  const CartPage({Key? key}) : super(key: key);
+  const CartPage({super.key});
 
   @override
   State<CartPage> createState() => _CartPageState();

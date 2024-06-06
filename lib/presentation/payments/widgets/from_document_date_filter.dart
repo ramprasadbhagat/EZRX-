@@ -12,8 +12,8 @@ class FromDocumentDateFilter extends StatefulWidget {
     required this.documentDateFrom,
     required this.documentDateFilterDateRange,
     required this.onDocumentDateChanged,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   State<FromDocumentDateFilter> createState() => _FromDocumentDateFilterState();

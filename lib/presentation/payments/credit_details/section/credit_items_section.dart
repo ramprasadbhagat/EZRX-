@@ -10,9 +10,9 @@ import 'package:flutter/material.dart';
 class CreditItemsSection extends StatelessWidget {
   final List<CustomerDocumentDetailGroup> creditItems;
   const CreditItemsSection({
-    Key? key,
+    super.key,
     required this.creditItems,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +47,7 @@ class CreditItemsSection extends StatelessWidget {
                     customerDocumentDetail: creditItem,
                   ),
                 )
-                .toList(),
+                ,
           ],
         );
       },

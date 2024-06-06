@@ -1,7 +1,7 @@
 part of 'package:ezrxmobile/presentation/orders/order_tab/view_by_item_details/view_by_item_details.dart';
 
 class ViewByItemAttachmentSection extends StatelessWidget {
-  const ViewByItemAttachmentSection({Key? key}) : super(key: key);
+  const ViewByItemAttachmentSection({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +38,7 @@ class ViewByItemAttachmentSection extends StatelessWidget {
 }
 
 class _AttachmentsWithIcon extends StatelessWidget {
-  const _AttachmentsWithIcon({Key? key}) : super(key: key);
+  const _AttachmentsWithIcon();
 
   @override
   Widget build(BuildContext context) {
@@ -68,7 +68,7 @@ class _AttachmentsWithIcon extends StatelessWidget {
                   .map(
                     (e) => _AttachmentFile(document: e),
                   )
-                  .toList(),
+                  ,
               if (state.displayShowMoreOrLess)
                 InkWell(
                   key: WidgetKeys.viewByItemsOrderDetailsShowMoreAttachments,
@@ -106,7 +106,7 @@ class _AttachmentsWithIcon extends StatelessWidget {
 
 class _AttachmentFile extends StatelessWidget {
   final PoDocuments document;
-  const _AttachmentFile({Key? key, required this.document}) : super(key: key);
+  const _AttachmentFile({required this.document});
 
   @override
   Widget build(BuildContext context) {

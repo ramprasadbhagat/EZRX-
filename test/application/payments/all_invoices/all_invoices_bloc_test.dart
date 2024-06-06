@@ -263,7 +263,7 @@ void main() {
       expect: () {
         final newList = [
           ...creditAndInvoiceItemList,
-          ...creditAndInvoiceItemList.take(9).toList(),
+          ...creditAndInvoiceItemList.take(9),
         ];
         return [
           AllInvoicesState.initial().copyWith(
@@ -310,7 +310,7 @@ void main() {
       expect: () {
         final newList = [
           ...creditAndInvoiceItemList,
-          ...creditAndInvoiceItemList.take(9).toList(),
+          ...creditAndInvoiceItemList.take(9),
         ];
         return [
           AllInvoicesState.initial().copyWith(

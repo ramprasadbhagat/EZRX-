@@ -2,8 +2,7 @@ part of 'package:ezrxmobile/presentation/orders/order_tab/view_by_item_details/v
 
 class OrderNumberSection extends StatelessWidget {
   final OrderHistoryItem orderHistoryItem;
-  const OrderNumberSection({Key? key, required this.orderHistoryItem})
-      : super(key: key);
+  const OrderNumberSection({super.key, required this.orderHistoryItem});
 
   @override
   Widget build(BuildContext context) {

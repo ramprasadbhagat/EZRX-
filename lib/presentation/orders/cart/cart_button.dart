@@ -20,14 +20,14 @@ class CartButton extends StatelessWidget {
   final double? positionTop;
   final bool isPriceResetApplicable;
   const CartButton({
-    Key? key,
+    super.key,
     this.cartColor,
     this.backgroundCartColor,
     this.size,
     this.iconSize,
     this.positionTop,
     this.isPriceResetApplicable = false,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -47,12 +47,14 @@ class CartButton extends StatelessWidget {
                         color: ZPColors.white,
                       ),
                 ),
-                badgeColor: ZPColors.red,
                 showBadge: state.cartProducts.isNotEmpty,
-                elevation: 0,
+                badgeStyle: const bd.BadgeStyle(
+                  badgeColor: ZPColors.orange,
+                  elevation: 0,
+                ),
+                badgeAnimation: const bd.BadgeAnimation.fade(),
                 position:
                     bd.BadgePosition.topEnd(top: positionTop ?? -5, end: 3),
-                animationType: bd.BadgeAnimationType.fade,
                 child: Container(
                   height: size,
                   decoration: BoxDecoration(

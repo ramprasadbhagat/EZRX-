@@ -5,9 +5,9 @@ import 'package:flutter/material.dart';
 class TopAdvertBoxBannerTile extends StatelessWidget {
   final String imageUrl;
   const TopAdvertBoxBannerTile({
-    Key? key,
+    super.key,
     required this.imageUrl,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

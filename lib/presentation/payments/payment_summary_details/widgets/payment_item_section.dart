@@ -1,9 +1,7 @@
 part of 'package:ezrxmobile/presentation/payments/payment_summary_details/payment_summary_details_screen.dart';
 
 class _PaymentItemSection extends StatelessWidget {
-  const _PaymentItemSection({
-    Key? key,
-  }) : super(key: key);
+  const _PaymentItemSection();
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<PaymentSummaryDetailsBloc, PaymentSummaryDetailsState>(
@@ -30,10 +28,9 @@ class _PaymentItemSection extends StatelessWidget {
 
 class _PaymentItem extends StatelessWidget {
   const _PaymentItem({
-    Key? key,
     required this.paymentItem,
     required this.showDivider,
-  }) : super(key: key);
+  });
   final PaymentItem paymentItem;
   final bool showDivider;
   @override

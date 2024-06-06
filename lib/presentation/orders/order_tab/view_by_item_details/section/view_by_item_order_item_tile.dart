@@ -4,9 +4,9 @@ class ViewByItemOrderItemTile extends StatelessWidget {
   final OrderHistoryItem orderHistoryItem;
 
   const ViewByItemOrderItemTile({
-    Key? key,
+    super.key,
     required this.orderHistoryItem,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -60,9 +60,8 @@ class ViewByItemOrderItemTile extends StatelessWidget {
 
 class _PriceComponentSubtitle extends StatelessWidget {
   const _PriceComponentSubtitle({
-    Key? key,
     required this.orderHistoryItem,
-  }) : super(key: key);
+  });
 
   final OrderHistoryItem orderHistoryItem;
 

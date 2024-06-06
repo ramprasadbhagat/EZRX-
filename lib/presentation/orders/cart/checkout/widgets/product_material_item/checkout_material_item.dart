@@ -21,8 +21,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CheckoutMaterialItem extends StatelessWidget {
   final PriceAggregate cartItem;
-  const CheckoutMaterialItem({required this.cartItem, Key? key})
-      : super(key: key);
+  const CheckoutMaterialItem({required this.cartItem, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -50,8 +49,7 @@ class CheckoutMaterialItem extends StatelessWidget {
 
 class _ProductDetailsSection extends StatelessWidget {
   final PriceAggregate cartItem;
-  const _ProductDetailsSection({Key? key, required this.cartItem})
-      : super(key: key);
+  const _ProductDetailsSection({required this.cartItem});
 
   @override
   Widget build(BuildContext context) {
@@ -75,8 +73,7 @@ class _ProductDetailsSection extends StatelessWidget {
 
 class _ProductImageSection extends StatelessWidget {
   final PriceAggregate cartProduct;
-  const _ProductImageSection({Key? key, required this.cartProduct})
-      : super(key: key);
+  const _ProductImageSection({required this.cartProduct});
 
   @override
   Widget build(BuildContext context) {
@@ -113,7 +110,7 @@ class _ProductImageSection extends StatelessWidget {
 
 class _ProductDetails extends StatelessWidget {
   final PriceAggregate cartItem;
-  const _ProductDetails({required this.cartItem, Key? key}) : super(key: key);
+  const _ProductDetails({required this.cartItem});
 
   @override
   Widget build(BuildContext context) {
@@ -229,7 +226,7 @@ class _ProductDetails extends StatelessWidget {
 
 class _QuantityAndPrice extends StatelessWidget {
   final PriceAggregate cartItem;
-  const _QuantityAndPrice({required this.cartItem, Key? key}) : super(key: key);
+  const _QuantityAndPrice({required this.cartItem});
 
   @override
   Widget build(BuildContext context) {
@@ -279,9 +276,9 @@ class _QuantityAndPrice extends StatelessWidget {
 
 class _DisplayMaterialDetails extends StatelessWidget {
   const _DisplayMaterialDetails({
-    Key? key,
+    super.key,
     required this.child,
-  }) : super(key: key);
+  });
 
   final Widget child;
 

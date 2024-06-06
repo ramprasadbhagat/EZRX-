@@ -17,7 +17,7 @@ import 'package:ezrxmobile/domain/announcement_info/entities/announcement_articl
 import 'package:ezrxmobile/application/announcement_info/announcement_info_details/announcement_info_details_bloc.dart';
 
 class AnnouncementsTab extends StatefulWidget {
-  const AnnouncementsTab({Key? key}) : super(key: key);
+  const AnnouncementsTab({super.key});
 
   @override
   State<AnnouncementsTab> createState() => _AnnouncementsTabState();
@@ -147,9 +147,8 @@ class _AnnouncementsTabState extends State<AnnouncementsTab> {
 class _AnnouncementItem extends StatelessWidget {
   final AnnouncementArticleItem item;
   const _AnnouncementItem({
-    Key? key,
     required this.item,
-  }) : super(key: key);
+  });
   @override
   Widget build(BuildContext context) {
     return CustomCard(

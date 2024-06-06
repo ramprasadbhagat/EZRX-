@@ -3,9 +3,8 @@ part of 'package:ezrxmobile/presentation/orders/cart/checkout/checkout_page.dart
 class _DeliveryInfo extends StatelessWidget {
   final Map<DeliveryInfoLabel, FocusNode> focusNodes;
   const _DeliveryInfo({
-    Key? key,
     required this.focusNodes,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -139,8 +138,7 @@ class _TextFormField extends StatefulWidget {
     required this.focusNode,
     this.maxLength,
     this.inputFormatters,
-    Key? key,
-  }) : super(key: key);
+  });
 
   @override
   State<_TextFormField> createState() => _TextFormFieldState();

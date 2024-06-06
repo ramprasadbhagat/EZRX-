@@ -10,8 +10,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ClearProductSearchSuggestionHistory extends StatelessWidget {
   const ClearProductSearchSuggestionHistory({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -38,9 +38,7 @@ class ClearProductSearchSuggestionHistory extends StatelessWidget {
 }
 
 class _ClearDeliveryAddressSection extends StatelessWidget {
-  const _ClearDeliveryAddressSection({
-    Key? key,
-  }) : super(key: key);
+  const _ClearDeliveryAddressSection();
 
   @override
   Widget build(BuildContext context) {

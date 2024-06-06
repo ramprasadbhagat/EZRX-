@@ -9,9 +9,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CreditItemCard extends StatelessWidget {
   const CreditItemCard({
-    Key? key,
+    super.key,
     required this.customerOpenItem,
-  }) : super(key: key);
+  });
   final CustomerOpenItem customerOpenItem;
 
   @override

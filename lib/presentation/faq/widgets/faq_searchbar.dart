@@ -1,9 +1,7 @@
 part of 'package:ezrxmobile/presentation/faq/faq.dart';
 
 class _FAQSearchBar extends StatelessWidget {
-  const _FAQSearchBar({
-    Key? key,
-  }) : super(key: key);
+  const _FAQSearchBar();
 
   @override
   Widget build(BuildContext context) {

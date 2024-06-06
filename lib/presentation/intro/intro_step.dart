@@ -12,12 +12,12 @@ class IntroStep extends StatelessWidget {
   final Function() nextPage;
 
   const IntroStep({
-    Key? key,
+    super.key,
     required this.introObject,
     required this.getStarted,
     required this.nextPage,
     required this.isLastPage,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -67,7 +67,7 @@ class IntroStep extends StatelessWidget {
                             .outlinedButtonTheme
                             .style!
                             .copyWith(
-                              backgroundColor: MaterialStateProperty.all(
+                              backgroundColor: WidgetStateProperty.all(
                                 introObject.buttonBGColor,
                               ),
                             ),

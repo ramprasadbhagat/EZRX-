@@ -1,7 +1,7 @@
 part of 'package:ezrxmobile/presentation/orders/order_tab/section/filter/view_by_order_filter.dart';
 
 class _ViewByOrderFilterHistoryTypePicker extends StatelessWidget {
-  const _ViewByOrderFilterHistoryTypePicker({Key? key}) : super(key: key);
+  const _ViewByOrderFilterHistoryTypePicker();
 
   @override
   Widget build(BuildContext context) {

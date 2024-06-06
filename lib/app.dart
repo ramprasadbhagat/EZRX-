@@ -146,7 +146,7 @@ Future<void> initialSetup({required Flavor flavor}) async {
   if (kDebugMode) {
     await Upgrader.clearSavedSettings();
     if (Platform.isAndroid) {
-      await AndroidInAppWebViewController.setWebContentsDebuggingEnabled(true);
+      await InAppWebViewController.setWebContentsDebuggingEnabled(true);
     }
   } else {
     FlutterError.onError = (errorDetails) {
@@ -192,6 +192,7 @@ Future<void> runAppWithCrashlyticsAndLocalization() async {
   final configuration = locator<DatadogService>().configuration;
   await DatadogSdk.runApp(
     configuration,
+    TrackingConsent.granted,
     () {
       runApp(
         EasyLocalization(
@@ -221,7 +222,7 @@ Future<void> runAppWithCrashlyticsAndLocalization() async {
 }
 
 class App extends StatelessWidget {
-  const App({Key? key}) : super(key: key);
+  const App({super.key});
 
   // This widget is the root of your application.
   @override

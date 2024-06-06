@@ -47,7 +47,7 @@ stages:
         script: |
           brew tap leoafarias/fvm
           brew install fvm
-          echo Y | fvm global 3.19.4
+          echo Y | fvm global 3.22.1
           fvm flutter clean
           cd ios
           rm -rf Pods
@@ -158,7 +158,7 @@ stages:
         script: |
           brew tap leoafarias/fvm
           brew install fvm
-          echo Y | fvm global 3.19.4
+          echo Y | fvm global 3.22.1
           fvm flutter pub get
 
     - task: Bash@3

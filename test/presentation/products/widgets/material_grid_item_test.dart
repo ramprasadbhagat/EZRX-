@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:bloc_test/bloc_test.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
@@ -60,6 +62,7 @@ void main() {
     listMaterialInfo =
         (await MaterialListLocalDataSource().getProductList()).products;
     zpMaterialInfoMock = listMaterialInfo.firstWhere((e) => !e.isMarketPlace);
+    HttpOverrides.global = null;
   });
 
   group('Test "Material Grid Item"', () {

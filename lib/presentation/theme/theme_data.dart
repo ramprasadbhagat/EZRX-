@@ -55,7 +55,7 @@ final appThemeData = {
 ColorScheme _colorScheme() {
   return ColorScheme.fromSeed(seedColor: ZPColors.primary).copyWith(
     primary: ZPColors.primary,
-    background: ZPColors.white,
+    surface: ZPColors.white,
     secondary: ZPColors.secondary,
     onPrimary: ZPColors.black,
     error: ZPColors.error,
@@ -360,11 +360,11 @@ OutlinedButtonThemeData _outlinedButtonTheme() {
 CheckboxThemeData _checkboxTheme() {
   return CheckboxThemeData(
     materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-    checkColor: MaterialStateProperty.all(
+    checkColor: WidgetStateProperty.all(
       ZPColors.white,
     ),
-    fillColor: MaterialStateColor.resolveWith(
-      (states) => states.contains(MaterialState.selected)
+    fillColor: WidgetStateColor.resolveWith(
+      (states) => states.contains(WidgetState.selected)
           ? ZPColors.primary
           : ZPColors.white,
     ),
@@ -380,7 +380,7 @@ CheckboxThemeData _checkboxTheme() {
 RadioThemeData _radioTheme() {
   return RadioThemeData(
     materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-    fillColor: MaterialStateProperty.all(
+    fillColor: WidgetStateProperty.all(
       ZPColors.primary,
     ),
   );
@@ -455,10 +455,10 @@ ListTileThemeData _listTileTheme() {
 
 DatePickerThemeData _datePickerTheme() {
   return DatePickerThemeData(
-    dayForegroundColor: MaterialStateProperty.resolveWith((states) {
-      if (states.contains(MaterialState.selected)) {
+    dayForegroundColor: WidgetStateProperty.resolveWith((states) {
+      if (states.contains(WidgetState.selected)) {
         return ZPColors.white;
-      } else if (states.contains(MaterialState.disabled)) {
+      } else if (states.contains(WidgetState.disabled)) {
         return ZPColors.darkGray;
       } else {
         return ZPColors.black;

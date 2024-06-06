@@ -18,10 +18,10 @@ import 'package:sizer/sizer.dart';
 
 class AnnouncementBottomSheet extends StatelessWidget {
   const AnnouncementBottomSheet({
-    Key? key,
+    super.key,
     required this.maintenanceItem,
     required this.storageType,
-  }) : super(key: key);
+  });
   final MaintenanceItem maintenanceItem;
   final StorageType storageType;
 
@@ -62,9 +62,8 @@ class AnnouncementBottomSheet extends StatelessWidget {
 
 class _ListViewAnnouncement extends StatelessWidget {
   const _ListViewAnnouncement({
-    Key? key,
     required this.banners,
-  }) : super(key: key);
+  });
   final List<MaintenanceBanner> banners;
 
   @override
@@ -94,9 +93,8 @@ class _ListViewAnnouncement extends StatelessWidget {
 
 class _ItemBanner extends StatelessWidget {
   const _ItemBanner({
-    Key? key,
     required this.banner,
-  }) : super(key: key);
+  });
   final MaintenanceBanner banner;
 
   @override
@@ -126,8 +124,8 @@ class _ItemBanner extends StatelessWidget {
                 data: banner.content,
                 style: {
                   'body': Style(
-                    padding: EdgeInsets.zero,
-                    margin: EdgeInsets.zero,
+                    padding: HtmlPaddings.zero,
+                    margin: Margins.zero,
                   ),
                 },
               ),
@@ -151,9 +149,8 @@ class _ItemBanner extends StatelessWidget {
 
 class _ButtonClose extends StatelessWidget {
   const _ButtonClose({
-    Key? key,
     required this.storageType,
-  }) : super(key: key);
+  });
 
   final StorageType storageType;
 

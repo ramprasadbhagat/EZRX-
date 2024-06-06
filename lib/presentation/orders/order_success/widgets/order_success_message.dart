@@ -4,9 +4,8 @@ class _OrderSuccessMessage extends StatelessWidget {
   final OrderStepValue orderStatus;
 
   const _OrderSuccessMessage({
-    Key? key,
     required this.orderStatus,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

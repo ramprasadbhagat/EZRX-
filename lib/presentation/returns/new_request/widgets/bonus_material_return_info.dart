@@ -11,10 +11,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class BonusMaterialReturnInfo extends StatelessWidget {
   const BonusMaterialReturnInfo({
-    Key? key,
+    super.key,
     required this.returnMaterial,
     required this.returnItemDetail,
-  }) : super(key: key);
+  });
   final ReturnMaterial returnMaterial;
   final ReturnItemDetails returnItemDetail;
 

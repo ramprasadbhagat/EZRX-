@@ -1,7 +1,7 @@
 part of 'package:ezrxmobile/presentation/account/notification_settings/notification_settings_page.dart';
 
 class _NotificationSettingFooter extends StatelessWidget {
-  const _NotificationSettingFooter({Key? key}) : super(key: key);
+  const _NotificationSettingFooter();
 
   @override
   Widget build(BuildContext context) {

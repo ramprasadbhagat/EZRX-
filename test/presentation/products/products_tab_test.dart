@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:bloc_test/bloc_test.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/customer_license_bloc/customer_license_bloc.dart';
@@ -80,6 +82,7 @@ void main() {
     mockCartItems = await CartLocalDataSource().upsertCart();
     customerLicense =
         await CustomerLicenseLocalDataSource().getCustomerLicense();
+    HttpOverrides.global = null;
   });
 
   group(

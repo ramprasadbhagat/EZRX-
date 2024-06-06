@@ -2,8 +2,7 @@ part of 'package:ezrxmobile/presentation/payments/new_payment/new_payment_page.d
 
 class _WarningLabelVirtualBank extends StatelessWidget {
   final int currentStep;
-  const _WarningLabelVirtualBank({required this.currentStep, Key? key})
-      : super(key: key);
+  const _WarningLabelVirtualBank({required this.currentStep});
 
   @override
   Widget build(BuildContext context) {

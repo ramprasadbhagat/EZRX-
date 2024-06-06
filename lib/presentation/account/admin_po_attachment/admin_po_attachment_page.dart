@@ -17,7 +17,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
 
 class AdminPoAttachmentPage extends StatelessWidget {
-  AdminPoAttachmentPage({Key? key}) : super(key: key);
+  AdminPoAttachmentPage({super.key});
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -125,9 +125,8 @@ class AdminPoAttachmentPage extends StatelessWidget {
 
 class _DownloadButton extends StatelessWidget {
   const _DownloadButton({
-    Key? key,
     required this.state,
-  }) : super(key: key);
+  });
   final AdminPoAttachmentState state;
 
   @override
@@ -151,9 +150,7 @@ class _DownloadButton extends StatelessWidget {
 }
 
 class _HeaderMessage extends StatelessWidget {
-  const _HeaderMessage({
-    Key? key,
-  }) : super(key: key);
+  const _HeaderMessage();
 
   @override
   Widget build(BuildContext context) {
@@ -183,7 +180,7 @@ class _HeaderMessage extends StatelessWidget {
 }
 
 class _BodyContent extends StatelessWidget {
-  const _BodyContent({Key? key, required this.state}) : super(key: key);
+  const _BodyContent({required this.state});
   final AdminPoAttachmentState state;
 
   @override

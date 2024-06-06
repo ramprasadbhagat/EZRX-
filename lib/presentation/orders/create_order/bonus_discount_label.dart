@@ -13,11 +13,11 @@ class BonusDiscountLabel extends StatelessWidget {
   final String tenderContractNumber;
 
   const BonusDiscountLabel({
-    Key? key,
+    super.key,
     required this.materialInfo,
     required this.tenderContractNumber,
     required this.price,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

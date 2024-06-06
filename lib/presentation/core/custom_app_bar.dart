@@ -24,7 +24,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final List<Widget> actionWidget;
   final Widget? title;
   const CustomAppBar._({
-    Key? key,
+    super.key,
     required this.automaticallyImplyLeading,
     required this.isSearchBarVisible,
     required this.actionWidget,
@@ -38,7 +38,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.leadingWidth,
     this.toolBarHeight,
     this.boxShadowColor,
-  }) : super(key: key);
+  });
 
   factory CustomAppBar.homeTabAppBar({
     required Widget title,

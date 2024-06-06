@@ -4,10 +4,9 @@ class _HomeProductSearchBar extends StatelessWidget {
   final bool isCustomerBlocked;
   final Color? boxShadowColor;
   const _HomeProductSearchBar({
-    Key? key,
     required this.isCustomerBlocked,
     this.boxShadowColor,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

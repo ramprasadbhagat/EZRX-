@@ -1,7 +1,7 @@
 part of 'package:ezrxmobile/presentation/payments/statement_accounts/statement_accounts.dart';
 
 class _SOAFilterBottomSheet extends StatelessWidget {
-  const _SOAFilterBottomSheet({Key? key}) : super(key: key);
+  const _SOAFilterBottomSheet({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -82,7 +82,7 @@ class _SOAFilterBottomSheet extends StatelessWidget {
 }
 
 class _FromDateField extends StatelessWidget {
-  const _FromDateField({Key? key}) : super(key: key);
+  const _FromDateField();
 
   @override
   Widget build(BuildContext context) {
@@ -133,7 +133,7 @@ class _FromDateField extends StatelessWidget {
 }
 
 class _ToDateField extends StatelessWidget {
-  const _ToDateField({Key? key}) : super(key: key);
+  const _ToDateField();
 
   @override
   Widget build(BuildContext context) {
@@ -184,7 +184,7 @@ class _ToDateField extends StatelessWidget {
 }
 
 class _ResetButton extends StatelessWidget {
-  const _ResetButton({Key? key}) : super(key: key);
+  const _ResetButton();
 
   @override
   Widget build(BuildContext context) {
@@ -202,7 +202,7 @@ class _ResetButton extends StatelessWidget {
 }
 
 class _ApplyButton extends StatelessWidget {
-  const _ApplyButton({Key? key}) : super(key: key);
+  const _ApplyButton();
 
   @override
   Widget build(BuildContext context) {

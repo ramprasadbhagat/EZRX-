@@ -1,7 +1,7 @@
 part of 'package:ezrxmobile/presentation/products/combo_detail/combo_detail_page.dart';
 
 class _ComboDetailSearchBar extends StatelessWidget {
-  const _ComboDetailSearchBar({Key? key}) : super(key: key);
+  const _ComboDetailSearchBar();
 
   @override
   Widget build(BuildContext context) {

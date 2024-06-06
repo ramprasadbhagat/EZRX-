@@ -12,7 +12,7 @@ import 'package:flutter/material.dart';
 
 class CommonTileItem extends StatelessWidget {
   const CommonTileItem({
-    Key? key,
+    super.key,
     required this.label,
     required this.materialNumber,
     required this.title,
@@ -36,7 +36,7 @@ class CommonTileItem extends StatelessWidget {
     this.labelTrailing,
     this.labelLeading,
     this.margin,
-  }) : super(key: key);
+  });
 
   final String label;
   final MaterialNumber materialNumber;
@@ -162,12 +162,11 @@ class CommonTileItem extends StatelessWidget {
 
 class _Subtitle extends StatelessWidget {
   const _Subtitle({
-    Key? key,
     required this.tileBody3,
     required this.isQuantityBelowImage,
     required this.quantity,
     required this.priceComponent,
-  }) : super(key: key);
+  });
 
   final String tileBody3;
   final bool isQuantityBelowImage;
@@ -226,13 +225,12 @@ class _Subtitle extends StatelessWidget {
 
 class _HeaderItem extends StatelessWidget {
   const _HeaderItem({
-    Key? key,
     this.header,
     this.headerTextStyle,
     this.statusWidget,
     this.topHeaderWidget,
     this.headerTextInfoIcon,
-  }) : super(key: key);
+  });
 
   final String? header;
   final TextStyle? headerTextStyle;

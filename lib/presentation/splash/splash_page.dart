@@ -101,7 +101,7 @@ import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:upgrader/upgrader.dart';
 
 class SplashPage extends StatefulWidget {
-  const SplashPage({Key? key}) : super(key: key);
+  const SplashPage({super.key});
 
   @override
   State<SplashPage> createState() => _SplashPageState();
@@ -1622,7 +1622,7 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
 }
 
 class _Splash extends StatelessWidget {
-  const _Splash({Key? key}) : super(key: key);
+  const _Splash();
 
   @override
   Widget build(BuildContext context) {

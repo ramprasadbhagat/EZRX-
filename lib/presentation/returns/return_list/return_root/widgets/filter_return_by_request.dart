@@ -1,7 +1,7 @@
 part of '../return_root.dart';
 
 class _FilterReturnByRequest extends StatelessWidget {
-  const _FilterReturnByRequest({Key? key}) : super(key: key);
+  const _FilterReturnByRequest({super.key});
 
   @override
   Widget build(BuildContext context) {

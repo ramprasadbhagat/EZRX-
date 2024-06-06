@@ -5,10 +5,10 @@ class ViewByItemDetailsHeaderSection extends StatelessWidget {
   final OrderHistoryBasicInfo orderHistoryBasicInfo;
 
   const ViewByItemDetailsHeaderSection({
-    Key? key,
+    super.key,
     required this.orderHistoryItem,
     required this.orderHistoryBasicInfo,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

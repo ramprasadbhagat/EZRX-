@@ -4,9 +4,9 @@ class _Export extends StatelessWidget {
   final String currentActiveTabName;
 
   const _Export({
-    Key? key,
+    super.key,
     required this.currentActiveTabName,
-  }) : super(key: key);
+  });
 
   void _downloadAttachment(BuildContext context) {
     if (currentActiveTabName == AllInvoicesPageRoute.name) {

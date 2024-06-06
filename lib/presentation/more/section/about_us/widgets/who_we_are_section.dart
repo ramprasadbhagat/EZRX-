@@ -3,9 +3,8 @@ part of 'package:ezrxmobile/presentation/more/section/about_us/about_us_page.dar
 class _WhoWeAreSection extends StatelessWidget {
   final HorizontalListTemplate whoWeAre;
   const _WhoWeAreSection({
-    Key? key,
     required this.whoWeAre,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -41,9 +40,8 @@ class _WhoWeAreSection extends StatelessWidget {
 class _AchievementsItem extends StatelessWidget {
   final HorizontalListTemplateItem achievement;
   const _AchievementsItem({
-    Key? key,
     required this.achievement,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

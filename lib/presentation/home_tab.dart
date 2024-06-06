@@ -18,7 +18,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HomeNavigationTabbar extends StatelessWidget {
-  const HomeNavigationTabbar({Key? key}) : super(key: key);
+  const HomeNavigationTabbar({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -76,9 +76,8 @@ class _CustomTabBar extends StatefulWidget {
   final List<RouteItem> routes;
 
   const _CustomTabBar({
-    Key? key,
     required this.routes,
-  }) : super(key: key);
+  });
 
   @override
   State<_CustomTabBar> createState() => _CustomTabBarState();

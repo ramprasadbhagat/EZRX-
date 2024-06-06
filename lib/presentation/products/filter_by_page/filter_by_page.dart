@@ -18,9 +18,9 @@ part 'package:ezrxmobile/presentation/products/filter_by_page/widgets/search_bar
 class FilterByPage extends StatelessWidget {
   final MaterialFilterType materialFilterType;
   const FilterByPage({
-    Key? key,
+    super.key,
     required this.materialFilterType,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

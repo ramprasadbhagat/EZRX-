@@ -4,10 +4,9 @@ class _ViewByItemStatusTracker extends StatelessWidget {
   final OrderHistoryItem orderHistoryItem;
   final List<OrderStatusTracker> subSteps;
   const _ViewByItemStatusTracker({
-    Key? key,
     required this.orderHistoryItem,
     required this.subSteps,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

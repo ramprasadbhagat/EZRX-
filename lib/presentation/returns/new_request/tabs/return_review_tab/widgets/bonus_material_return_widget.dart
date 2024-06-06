@@ -15,10 +15,10 @@ class BonusMaterialReturnWidget extends StatefulWidget {
   final ReturnMaterial returnMaterial;
   final ReturnItemDetails returnItemDetail;
   const BonusMaterialReturnWidget({
-    Key? key,
+    super.key,
     required this.returnItemDetail,
     required this.returnMaterial,
-  }) : super(key: key);
+  });
 
   @override
   State<BonusMaterialReturnWidget> createState() =>

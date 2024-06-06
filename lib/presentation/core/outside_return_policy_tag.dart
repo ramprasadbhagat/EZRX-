@@ -4,7 +4,7 @@ import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 
 class OutsideReturnPolicyTag extends StatelessWidget {
-  const OutsideReturnPolicyTag({Key? key}) : super(key: key);
+  const OutsideReturnPolicyTag({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -23,7 +23,7 @@ void main() async {
       baseUrl: 'https://uat.ezrx.com',
     ),
   );
-  final dioAdapter = DioAdapter(dio: dio);
+  final dioAdapter = DioAdapter(dio: dio, matcher: const UrlRequestMatcher());
   final service = HttpService.mockDio(dio);
   final remoteDataSource = ComboDealRemoteDataSource(
     httpService: service,
@@ -85,7 +85,6 @@ void main() async {
             salesDeal: fakeSalesDeal,
             flexibleGroup: fakeFlexibleGroup,
             materialNumbers: fakeMaterialNumbers,
-
           );
 
           expect(

@@ -7,7 +7,6 @@ import 'package:keyboard_actions/keyboard_actions.dart';
 
 class CustomNumericTextField extends StatefulWidget {
   const CustomNumericTextField._({
-    Key? key,
     required this.fieldKey,
     required this.onChanged,
     required this.decoration,
@@ -26,7 +25,7 @@ class CustomNumericTextField extends StatefulWidget {
     this.onTapOutside,
     this.textAlign = TextAlign.start,
     this.style,
-  }) : super(key: key);
+  });
   final Key fieldKey;
   final String? labelText;
   final TextEditingController? controller;

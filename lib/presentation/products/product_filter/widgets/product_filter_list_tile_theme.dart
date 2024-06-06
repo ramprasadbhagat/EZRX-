@@ -5,11 +5,10 @@ class _ListTileThemeWidget extends StatelessWidget {
   final String title;
   final void Function(bool?) onChanged;
   const _ListTileThemeWidget({
-    Key? key,
     required this.value,
     required this.title,
     required this.onChanged,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

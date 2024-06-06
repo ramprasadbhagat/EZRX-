@@ -1,9 +1,7 @@
 part of 'package:ezrxmobile/presentation/products/bundle_details/bundle_detail_page.dart';
 
 class _BundleImageSection extends StatelessWidget {
-  const _BundleImageSection({
-    Key? key,
-  }) : super(key: key);
+  const _BundleImageSection();
 
   @override
   Widget build(BuildContext context) {
@@ -92,10 +90,9 @@ class _BundleImages extends StatelessWidget {
   final MaterialInfo materialInfo;
   final int selected;
   const _BundleImages({
-    Key? key,
     required this.materialInfo,
     required this.selected,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

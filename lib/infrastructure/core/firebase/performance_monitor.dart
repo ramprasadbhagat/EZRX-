@@ -42,7 +42,7 @@ class PerformanceMonitorService {
     } catch (_) {}
   }
 
-  Future networkOnError(DioError err) async {
+  Future networkOnError(DioException err) async {
     try {
       final requestKey = err.requestOptions.extra.hashCode;
       final metric = _map[requestKey];

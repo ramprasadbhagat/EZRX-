@@ -16,11 +16,11 @@ class StaticHtmlViewer extends StatefulWidget {
   final String styleCss;
 
   const StaticHtmlViewer({
-    Key? key,
+    super.key,
     this.title = '',
     required this.htmlPath,
     this.styleCss = '',
-  }) : super(key: key);
+  });
 
   @override
   State<StaticHtmlViewer> createState() => StaticHtmlViewerState();
@@ -57,19 +57,13 @@ class StaticHtmlViewerState extends State<StaticHtmlViewer> {
               InAppWebView(
                 key: WidgetKeys.staticHtmlViewer,
                 initialFile: widget.htmlPath,
-                initialOptions: InAppWebViewGroupOptions(
-                  android: AndroidInAppWebViewOptions(
-                    useHybridComposition: true,
-                    useWideViewPort: false,
-                  ),
-                  ios: IOSInAppWebViewOptions(
-                    enableViewportScale: true,
-                  ),
-                  crossPlatform: InAppWebViewOptions(
-                    preferredContentMode: UserPreferredContentMode.RECOMMENDED,
-                    minimumFontSize: 14,
-                    allowUniversalAccessFromFileURLs: true,
-                  ),
+                initialSettings: InAppWebViewSettings(
+                  useHybridComposition: true,
+                  useWideViewPort: false,
+                  enableViewportScale: true,
+                  preferredContentMode: UserPreferredContentMode.RECOMMENDED,
+                  minimumFontSize: 14,
+                  allowUniversalAccessFromFileURLs: true,
                 ),
                 onLoadStop: (controller, url) async {
                   _controller = controller;

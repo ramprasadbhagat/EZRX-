@@ -3,9 +3,8 @@ part of 'package:ezrxmobile/presentation/orders/order_tab/view_by_order_details/
 class _BundleItemDetailsSection extends StatelessWidget {
   final OrderNumber orderNumber;
   const _BundleItemDetailsSection({
-    Key? key,
     required this.orderNumber,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

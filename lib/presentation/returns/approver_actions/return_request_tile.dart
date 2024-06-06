@@ -10,9 +10,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class ApproverReturnRequestTile extends StatelessWidget {
   final RequestInformation approverReturnRequest;
   const ApproverReturnRequestTile({
-    Key? key,
+    super.key,
     required this.approverReturnRequest,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

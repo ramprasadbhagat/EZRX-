@@ -2,12 +2,11 @@ part of 'package:ezrxmobile/presentation/returns/widgets/return_item_card.dart';
 
 class _ReturnBonusItemSection extends StatelessWidget {
   const _ReturnBonusItemSection({
-    Key? key,
     required this.bonusItem,
     required this.isExpandable,
     required this.downloadingAttachments,
     required this.downloadAttachment,
-  }) : super(key: key);
+  });
   final ReturnRequestInformation bonusItem;
   final List<ReturnRequestAttachment> downloadingAttachments;
   final Function(ReturnRequestAttachment) downloadAttachment;
@@ -159,11 +158,10 @@ class _ReturnBonusItemSection extends StatelessWidget {
 
 class _ReturnBonusExpandSection extends StatelessWidget {
   const _ReturnBonusExpandSection({
-    Key? key,
     required this.requestInformation,
     required this.downloadingAttachments,
     required this.downloadAttachment,
-  }) : super(key: key);
+  });
   final ReturnRequestInformation requestInformation;
   final List<ReturnRequestAttachment> downloadingAttachments;
   final Function(ReturnRequestAttachment) downloadAttachment;

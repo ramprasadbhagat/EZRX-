@@ -6,7 +6,6 @@ import '../../../domain/value/value_objects.dart';
 import '../../../test_config.dart';
 import '../../../domain/entities/step.dart';
 import '../../infra_core/dio_service/dio_service.dart';
-// ignore: depend_on_referenced_packages
 import 'package:test_api/src/backend/state.dart';
 
 import '../../infra_core/zephyr_service/zephyr_service.dart';

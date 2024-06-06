@@ -1,7 +1,7 @@
 part of 'package:ezrxmobile/presentation/account/profile/profile_page.dart';
 
 class _UserDetails extends StatelessWidget {
-  const _UserDetails({Key? key}) : super(key: key);
+  const _UserDetails({super.key});
 
   @override
   Widget build(BuildContext context) {

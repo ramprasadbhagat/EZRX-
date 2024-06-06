@@ -30,7 +30,7 @@ part 'package:ezrxmobile/presentation/home/announcement_section/announcement_art
 part 'package:ezrxmobile/presentation/home/announcement_section/announcement_articles_tab/announcements/widgets/announcement_info_attachment_section.dart';
 
 class AnnouncementInfoDetailsPage extends StatefulWidget {
-  const AnnouncementInfoDetailsPage({Key? key}) : super(key: key);
+  const AnnouncementInfoDetailsPage({super.key});
 
   @override
   State<AnnouncementInfoDetailsPage> createState() =>
@@ -188,8 +188,8 @@ class _AnnouncementInfoDetailsPageState
                                   Html(
                                     style: {
                                       'body': Style(
-                                        padding: const EdgeInsets.all(0),
-                                        margin: const EdgeInsets.all(0),
+                                        padding: HtmlPaddings.all(0),
+                                        margin: Margins.all(0),
                                       ),
                                     },
                                     data: state.announcementInfoDetails.content

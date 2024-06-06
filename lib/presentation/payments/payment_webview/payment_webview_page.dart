@@ -14,7 +14,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 
 class PaymentWebviewPage extends StatelessWidget {
-  const PaymentWebviewPage({Key? key}) : super(key: key);
+  const PaymentWebviewPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -76,7 +76,7 @@ class PaymentWebviewPage extends StatelessWidget {
 
 class _WebviewBody extends StatefulWidget {
   final bool isTH;
-  const _WebviewBody({required this.isTH, Key? key}) : super(key: key);
+  const _WebviewBody({required this.isTH});
 
   @override
   State<_WebviewBody> createState() => _WebviewBodyState();
@@ -146,19 +146,19 @@ class _WebviewBodyState extends State<_WebviewBody> {
   Widget build(BuildContext context) {
     return InAppWebView(
       key: WidgetKeys.paymentWebviewPage,
-      initialOptions: InAppWebViewGroupOptions(
-        crossPlatform: InAppWebViewOptions(
-          javaScriptCanOpenWindowsAutomatically: true,
-          supportZoom: false,
-          useShouldOverrideUrlLoading: true,
-          cacheEnabled: false,
-          clearCache: true,
-        ),
+      initialSettings: InAppWebViewSettings(
+        javaScriptCanOpenWindowsAutomatically: true,
+        supportZoom: false,
+        useShouldOverrideUrlLoading: true,
+        cacheEnabled: false,
+        clearCache: true,
       ),
       initialUrlRequest: URLRequest(
-        url: Uri.dataFromString(
-          _newPaymentState.paymentInfo.zzHtmcs,
-          mimeType: 'text/html',
+        url: WebUri.uri(
+          Uri.dataFromString(
+            _newPaymentState.paymentInfo.zzHtmcs,
+            mimeType: 'text/html',
+          ),
         ),
       ),
       shouldOverrideUrlLoading: (controller, navigationAction) async {

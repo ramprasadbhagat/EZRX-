@@ -15,7 +15,7 @@ import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AnnouncementSection extends StatelessWidget {
-  const AnnouncementSection({Key? key}) : super(key: key);
+  const AnnouncementSection({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +44,7 @@ class AnnouncementSection extends StatelessWidget {
             ),
             ...state.announcementInfo.homePageAnnouncementList
                 .map((e) => _AnnouncementSectionItem(announcementItem: e))
-                .toList(),
+                ,
           ],
         );
       },
@@ -55,8 +55,7 @@ class AnnouncementSection extends StatelessWidget {
 class _AnnouncementSectionItem extends StatelessWidget {
   final AnnouncementArticleItem announcementItem;
 
-  const _AnnouncementSectionItem({Key? key, required this.announcementItem})
-      : super(key: key);
+  const _AnnouncementSectionItem({required this.announcementItem});
 
   @override
   Widget build(BuildContext context) {
@@ -89,11 +88,10 @@ class _ItemDescription extends StatelessWidget {
   final DateTimeStringValue publishedDate;
 
   const _ItemDescription({
-    Key? key,
     required this.title,
     required this.publishedDate,
     required this.description,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -141,7 +139,7 @@ class _ItemDescription extends StatelessWidget {
 }
 
 class _AnnouncementSectionLoadingShimmer extends StatelessWidget {
-  const _AnnouncementSectionLoadingShimmer({Key? key}) : super(key: key);
+  const _AnnouncementSectionLoadingShimmer();
 
   @override
   Widget build(BuildContext context) {

@@ -9,9 +9,9 @@ class AttentionRow extends StatelessWidget {
   final String valueText;
 
   const AttentionRow({
-    Key? key,
+    super.key,
     required this.valueText,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

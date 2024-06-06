@@ -2,7 +2,7 @@ part of 'package:ezrxmobile/presentation/orders/cart/pre_order_modal/pre_order_m
 
 class _ImageSection extends StatelessWidget {
   final PriceAggregate cartProduct;
-  const _ImageSection({required this.cartProduct, Key? key}) : super(key: key);
+  const _ImageSection({required this.cartProduct});
   @override
   Widget build(BuildContext context) {
     final defaultHeight = MediaQuery.of(context).size.height * 0.08;

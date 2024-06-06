@@ -2,9 +2,8 @@ part of 'package:ezrxmobile/presentation/returns/new_request/tabs/return_details
 
 class _CommentsField extends StatefulWidget {
   const _CommentsField({
-    Key? key,
     required this.uuid,
-  }) : super(key: key);
+  });
 
   final String uuid;
 

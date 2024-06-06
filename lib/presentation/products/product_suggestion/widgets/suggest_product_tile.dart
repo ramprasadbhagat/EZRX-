@@ -4,10 +4,9 @@ class _SuggestedProductTile extends StatelessWidget {
   final MaterialInfo product;
   final String parentRoute;
   const _SuggestedProductTile({
-    Key? key,
     required this.product,
     required this.parentRoute,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

@@ -3,9 +3,8 @@ part of 'package:ezrxmobile/presentation/returns/new_request/new_request_success
 class _ExpandableReturnDetail extends StatelessWidget {
   final ReturnItemDetails returnItemDetail;
   const _ExpandableReturnDetail({
-    Key? key,
     required this.returnItemDetail,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

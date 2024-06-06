@@ -8,7 +8,7 @@ import '../common/common_robot.dart';
 import '../common/extension.dart';
 
 class ComboDetailRobot extends CommonRobot {
-  ComboDetailRobot(WidgetTester tester) : super(tester);
+  ComboDetailRobot(super.tester);
 
   void verifyPage() {
     final comboDetail = find.byKey(WidgetKeys.comboDealDetailPage);

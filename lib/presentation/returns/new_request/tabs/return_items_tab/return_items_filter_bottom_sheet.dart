@@ -13,7 +13,7 @@ part 'package:ezrxmobile/presentation/returns/new_request/tabs/return_items_tab/
 part 'package:ezrxmobile/presentation/returns/new_request/tabs/return_items_tab/widgets/filter_action_buttons.dart';
 
 class ReturnItemsFilterBottomSheet extends StatelessWidget {
-  const ReturnItemsFilterBottomSheet({Key? key}) : super(key: key);
+  const ReturnItemsFilterBottomSheet({super.key});
 
   @override
   Widget build(BuildContext context) {

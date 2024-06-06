@@ -5,8 +5,8 @@ class _AccountSummarySearchBar extends StatelessWidget {
 
   const _AccountSummarySearchBar({
     required this.currentActiveTabName,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -69,11 +69,10 @@ class _SummarySearchBar extends StatelessWidget {
   final String hintText;
 
   const _SummarySearchBar({
-    Key? key,
     required this.isEnable,
     required this.searchKey,
     required this.hintText,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

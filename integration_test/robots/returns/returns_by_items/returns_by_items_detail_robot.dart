@@ -8,7 +8,7 @@ import 'package:flutter_test/flutter_test.dart';
 import '../../common/common_robot.dart';
 
 class ReturnsByItemsDetailRobot extends CommonRobot {
-  ReturnsByItemsDetailRobot(WidgetTester tester) : super(tester);
+  ReturnsByItemsDetailRobot(super.tester);
 
   final copyButton = find.byKey(WidgetKeys.returnItemDetailCopyButton);
   final showDetailButton = find.byKey(WidgetKeys.returnDetailShowDetailButton);

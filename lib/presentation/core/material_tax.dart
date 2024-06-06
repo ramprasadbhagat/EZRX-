@@ -10,11 +10,11 @@ class MaterialTax extends StatelessWidget {
   final double percentage;
   final double taxValue;
   const MaterialTax({
-    Key? key,
+    super.key,
     required this.totalPrice,
     required this.percentage,
     required this.taxValue,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

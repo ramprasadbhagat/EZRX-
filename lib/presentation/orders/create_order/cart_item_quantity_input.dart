@@ -22,7 +22,7 @@ class CartItemQuantityInput extends StatelessWidget {
   final double height;
 
   const CartItemQuantityInput({
-    Key? key,
+    super.key,
     required this.controller,
     required this.quantityTextKey,
     required this.onFieldChange,
@@ -37,7 +37,7 @@ class CartItemQuantityInput extends StatelessWidget {
     this.minimumQty = 1,
     this.maximumQty = 99999,
     this.height = 35,
-  }) : super(key: key);
+  });
 
   bool get _isEnableMinusWithMinQty {
     final value = (int.tryParse(controller.text) ?? 0) - 1;
@@ -173,8 +173,8 @@ class CartItemQuantityInputShimmer extends StatelessWidget {
   final TextEditingController controller;
   const CartItemQuantityInputShimmer({
     required this.controller,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {

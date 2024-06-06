@@ -6,10 +6,10 @@ class ValueRangeError extends StatelessWidget {
   final String label;
   final bool isValid;
   const ValueRangeError({
-    Key? key,
+    super.key,
     required this.label,
     required this.isValid,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

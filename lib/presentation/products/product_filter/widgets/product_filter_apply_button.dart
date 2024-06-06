@@ -1,9 +1,7 @@
 part of 'package:ezrxmobile/presentation/products/product_filter/product_filter_page.dart';
 
 class _ProductFilterApplyButton extends StatelessWidget {
-  const _ProductFilterApplyButton({
-    Key? key,
-  }) : super(key: key);
+  const _ProductFilterApplyButton();
 
   @override
   Widget build(BuildContext context) {
@@ -19,10 +17,10 @@ class _ProductFilterApplyButton extends StatelessWidget {
         Navigator.of(context).pop(selectedFilter);
       },
       style: Theme.of(context).elevatedButtonTheme.style!.copyWith(
-            backgroundColor: const MaterialStatePropertyAll(
+            backgroundColor: const WidgetStatePropertyAll(
               ZPColors.primary,
             ),
-            shape: MaterialStatePropertyAll(
+            shape: WidgetStatePropertyAll(
               RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(8),
                 side: const BorderSide(color: ZPColors.primary),

@@ -13,7 +13,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_html/flutter_html.dart';
 
 class AnnouncementBannerWidget extends StatelessWidget {
-  const AnnouncementBannerWidget({Key? key}) : super(key: key);
+  const AnnouncementBannerWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -49,10 +49,9 @@ class _ItemAnnouncement extends StatelessWidget {
   final bool isLoading;
 
   const _ItemAnnouncement({
-    Key? key,
     required this.banner,
     required this.isLoading,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -72,11 +71,11 @@ class _ItemAnnouncement extends StatelessWidget {
             data: banner.contentHtml(context.tr('More')),
             style: {
               'body': Style(
-                padding: EdgeInsets.zero,
-                margin: EdgeInsets.zero,
+                padding: HtmlPaddings.zero,
+                margin: Margins.zero,
               ),
             },
-            onLinkTap: (url, _, attributes, element) {
+            onLinkTap: (url, attributes, element) {
               if (banner.hyperlink.isInternalLink) {
                 context.read<DeepLinkingBloc>().add(
                       DeepLinkingEvent.addPendingLink(

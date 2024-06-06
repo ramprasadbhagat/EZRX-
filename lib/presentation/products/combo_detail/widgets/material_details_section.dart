@@ -6,11 +6,10 @@ class _MaterialDetailsSection extends StatelessWidget {
   final bool isFixed;
 
   const _MaterialDetailsSection({
-    Key? key,
     required this.comboItem,
     required this.comboDealMaterial,
     this.isFixed = false,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -57,8 +56,7 @@ class _MaterialImageSection extends StatelessWidget {
   const _MaterialImageSection({
     required this.comboItem,
     this.isFixed = false,
-    Key? key,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

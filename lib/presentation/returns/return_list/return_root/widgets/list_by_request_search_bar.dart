@@ -2,8 +2,8 @@ part of 'package:ezrxmobile/presentation/returns/return_list/return_root/return_
 
 class _ListByRequestSearchBar extends StatelessWidget {
   const _ListByRequestSearchBar({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {

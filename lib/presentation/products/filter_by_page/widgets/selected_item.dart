@@ -2,8 +2,7 @@ part of 'package:ezrxmobile/presentation/products/filter_by_page/filter_by_page.
 
 class _SelectedItem extends StatelessWidget {
   final MaterialFilterType materialFilterType;
-  const _SelectedItem({required this.materialFilterType, Key? key})
-      : super(key: key);
+  const _SelectedItem({required this.materialFilterType});
 
   @override
   Widget build(BuildContext context) {

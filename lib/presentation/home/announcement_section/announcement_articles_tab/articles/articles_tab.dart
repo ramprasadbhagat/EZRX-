@@ -14,7 +14,7 @@ import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dar
 import 'package:ezrxmobile/domain/announcement_info/entities/announcement_article_info.dart';
 
 class ArticlesTab extends StatefulWidget {
-  const ArticlesTab({Key? key}) : super(key: key);
+  const ArticlesTab({super.key});
 
   @override
   State<ArticlesTab> createState() => _ArticlesTabState();
@@ -112,7 +112,7 @@ class _ArticlesTabState extends State<ArticlesTab> {
 
 class _ArticlesTile extends StatelessWidget {
   final AnnouncementArticleItem article;
-  const _ArticlesTile({Key? key, required this.article}) : super(key: key);
+  const _ArticlesTile({super.key, required this.article});
 
   @override
   Widget build(BuildContext context) {
@@ -196,7 +196,7 @@ class _ArticlesTile extends StatelessWidget {
 
 class _ArticleImageBox extends StatelessWidget {
   final String imageUrl;
-  const _ArticleImageBox({Key? key, required this.imageUrl}) : super(key: key);
+  const _ArticleImageBox({super.key, required this.imageUrl});
 
   @override
   Widget build(BuildContext context) {

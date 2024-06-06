@@ -1,9 +1,7 @@
 part of 'package:ezrxmobile/presentation/payments/payment_summary_details/payment_summary_details_screen.dart';
 
 class _PaymentSummarySection extends StatelessWidget {
-  const _PaymentSummarySection({
-    Key? key,
-  }) : super(key: key);
+  const _PaymentSummarySection();
 
   @override
   Widget build(BuildContext context) {

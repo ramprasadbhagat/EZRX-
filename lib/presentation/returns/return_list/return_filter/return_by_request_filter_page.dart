@@ -22,8 +22,8 @@ part 'package:ezrxmobile/presentation/returns/return_list/return_filter/widgets/
 
 class ReturnByRequestFilterPage extends StatelessWidget {
   const ReturnByRequestFilterPage({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -59,7 +59,7 @@ class ReturnByRequestFilterPage extends StatelessWidget {
 }
 
 class _ReturnFilter extends StatelessWidget {
-  const _ReturnFilter({Key? key}) : super(key: key);
+  const _ReturnFilter();
 
   @override
   Widget build(BuildContext context) {
@@ -121,7 +121,7 @@ class _ReturnFilter extends StatelessWidget {
 
 class _FilterSectionLabel extends StatelessWidget {
   final String text;
-  const _FilterSectionLabel(this.text, {Key? key}) : super(key: key);
+  const _FilterSectionLabel(this.text);
 
   @override
   Widget build(BuildContext context) {

@@ -2,10 +2,10 @@ part of 'package:ezrxmobile/presentation/orders/order_tab/section/view_by_item/v
 
 class _ViewByOrderItemTile extends StatelessWidget {
   const _ViewByOrderItemTile({
-    Key? key,
+    super.key,
     required this.orderHistoryItem,
     required this.salesOrgConfigs,
-  }) : super(key: key);
+  });
   final OrderHistoryItem orderHistoryItem;
   final SalesOrganisationConfigs salesOrgConfigs;
 
@@ -190,10 +190,9 @@ class _ViewByOrderItemTile extends StatelessWidget {
 
 class _Subtitle extends StatelessWidget {
   const _Subtitle({
-    Key? key,
     required this.quantity,
     required this.priceComponent,
-  }) : super(key: key);
+  });
 
   final String quantity;
   final Widget priceComponent;

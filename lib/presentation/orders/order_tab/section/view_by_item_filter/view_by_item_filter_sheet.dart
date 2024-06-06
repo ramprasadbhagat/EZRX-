@@ -21,8 +21,8 @@ const _defaultPadding = EdgeInsets.symmetric(horizontal: 15);
 
 class ViewByItemFilterSheet extends StatelessWidget {
   const ViewByItemFilterSheet({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -63,9 +63,7 @@ class ViewByItemFilterSheet extends StatelessWidget {
 }
 
 class _FilterList extends StatelessWidget {
-  const _FilterList({
-    Key? key,
-  }) : super(key: key);
+  const _FilterList();
 
   @override
   Widget build(BuildContext context) {
@@ -106,7 +104,7 @@ class _FilterList extends StatelessWidget {
 
 class _FilterSectionLabel extends StatelessWidget {
   final String text;
-  const _FilterSectionLabel(this.text, {Key? key}) : super(key: key);
+  const _FilterSectionLabel(this.text);
 
   @override
   Widget build(BuildContext context) {

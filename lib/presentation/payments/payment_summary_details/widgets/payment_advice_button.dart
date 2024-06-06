@@ -1,9 +1,7 @@
 part of 'package:ezrxmobile/presentation/payments/payment_summary_details/payment_summary_details_screen.dart';
 
 class _PaymentAdviceButton extends StatelessWidget {
-  const _PaymentAdviceButton({
-    Key? key,
-  }) : super(key: key);
+  const _PaymentAdviceButton();
 
   @override
   Widget build(BuildContext context) {
@@ -111,7 +109,7 @@ class _PaymentAdviceButton extends StatelessWidget {
 }
 
 class _DeleteAdviceButton extends StatelessWidget {
-  const _DeleteAdviceButton({required this.state, Key? key}) : super(key: key);
+  const _DeleteAdviceButton({required this.state});
   final PaymentSummaryDetailsState state;
 
   void _showDeleteAdviceBottomSheet(
@@ -167,8 +165,7 @@ class _DeleteAdviceButton extends StatelessWidget {
 }
 
 class _DownloadAdviceButton extends StatelessWidget {
-  const _DownloadAdviceButton({required this.state, Key? key})
-      : super(key: key);
+  const _DownloadAdviceButton({required this.state});
   final PaymentSummaryDetailsState state;
   @override
   Widget build(BuildContext context) {
@@ -208,9 +205,8 @@ class _DownloadAdviceButton extends StatelessWidget {
 
 class _CancelAdviceButton extends StatelessWidget {
   const _CancelAdviceButton({
-    Key? key,
     required this.state,
-  }) : super(key: key);
+  });
   final PaymentSummaryDetailsState state;
 
   void _showCancelAdviceBottomSheet(BuildContext context) {

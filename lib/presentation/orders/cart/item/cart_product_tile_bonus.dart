@@ -31,10 +31,10 @@ class CartProductTileBonus extends StatelessWidget {
   final BonusSampleItem bonusItem;
 
   const CartProductTileBonus({
-    Key? key,
+    super.key,
     required this.bonusItem,
     required this.cartProduct,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -88,10 +88,9 @@ class _MaterialDetailsSection extends StatelessWidget {
   final PriceAggregate cartProduct;
   final BonusSampleItem bonusItem;
   const _MaterialDetailsSection({
-    Key? key,
     required this.bonusItem,
     required this.cartProduct,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -117,9 +116,7 @@ class _MaterialDetailsSection extends StatelessWidget {
 }
 
 class _ItemSubTotalSection extends StatelessWidget {
-  const _ItemSubTotalSection({
-    Key? key,
-  }) : super(key: key);
+  const _ItemSubTotalSection();
 
   @override
   Widget build(BuildContext context) {
@@ -150,10 +147,9 @@ class _MaterialDetails extends StatelessWidget {
   final PriceAggregate cartProduct;
   final BonusSampleItem bonusItem;
   const _MaterialDetails({
-    Key? key,
     required this.bonusItem,
     required this.cartProduct,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -209,10 +205,9 @@ class _MaterialQuantitySection extends StatefulWidget {
   final PriceAggregate cartProduct;
   final BonusSampleItem bonusItem;
   const _MaterialQuantitySection({
-    Key? key,
     required this.bonusItem,
     required this.cartProduct,
-  }) : super(key: key);
+  });
 
   @override
   State<_MaterialQuantitySection> createState() =>
@@ -290,8 +285,7 @@ class _MaterialQuantitySectionState extends State<_MaterialQuantitySection> {
 
 class _MaterialImageSection extends StatelessWidget {
   final BonusSampleItem bonusItem;
-  const _MaterialImageSection({required this.bonusItem, Key? key})
-      : super(key: key);
+  const _MaterialImageSection({required this.bonusItem});
 
   @override
   Widget build(BuildContext context) {

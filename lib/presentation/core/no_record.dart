@@ -9,7 +9,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 class NoRecordFound extends StatelessWidget {
   const NoRecordFound({
-    Key? key,
+    super.key,
     this.title = "That didn't match anything",
     this.subTitle =
         'Try adjusting your search or filter selection to find what you’re looking for',
@@ -17,7 +17,7 @@ class NoRecordFound extends StatelessWidget {
     this.isSearchKeyEmpty = true,
     this.actionButton = const SizedBox.shrink(),
     this.subTitleWidget,
-  }) : super(key: key);
+  });
   final String title;
   final bool isSearchKeyEmpty;
   final String subTitle;

@@ -3,9 +3,9 @@ part of 'package:ezrxmobile/presentation/orders/order_tab/section/view_by_order/
 class BuyAgainButton extends StatelessWidget {
   final OrderHistoryDetails viewByOrderHistoryItem;
   const BuyAgainButton({
-    Key? key,
+    super.key,
     required this.viewByOrderHistoryItem,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

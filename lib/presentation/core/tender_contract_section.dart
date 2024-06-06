@@ -9,8 +9,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class TenderContractSection extends StatelessWidget {
   final TenderContract tenderContract;
-  const TenderContractSection({Key? key, required this.tenderContract})
-      : super(key: key);
+  const TenderContractSection({super.key, required this.tenderContract});
 
   @override
   Widget build(BuildContext context) {

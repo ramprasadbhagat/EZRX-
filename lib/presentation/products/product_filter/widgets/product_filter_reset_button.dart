@@ -1,9 +1,7 @@
 part of 'package:ezrxmobile/presentation/products/product_filter/product_filter_page.dart';
 
 class _ProductFilterResetButton extends StatelessWidget {
-  const _ProductFilterResetButton({
-    Key? key,
-  }) : super(key: key);
+  const _ProductFilterResetButton();
 
   @override
   Widget build(BuildContext context) {
@@ -11,10 +9,10 @@ class _ProductFilterResetButton extends StatelessWidget {
       key: WidgetKeys.filterResetButton,
       onPressed: () => _onResetPressed(context),
       style: Theme.of(context).elevatedButtonTheme.style!.copyWith(
-            backgroundColor: const MaterialStatePropertyAll(
+            backgroundColor: const WidgetStatePropertyAll(
               ZPColors.white,
             ),
-            shape: MaterialStatePropertyAll(
+            shape: WidgetStatePropertyAll(
               RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(8),
                 side: const BorderSide(color: ZPColors.primary),

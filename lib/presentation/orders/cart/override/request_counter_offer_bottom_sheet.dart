@@ -27,9 +27,9 @@ part 'request_counter_offer_widgets/counter_offer_discounted_price_field.dart';
 class RequestCounterOfferBottomSheet extends StatelessWidget {
   final PriceAggregate cartItem;
   const RequestCounterOfferBottomSheet({
-    Key? key,
+    super.key,
     required this.cartItem,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -179,7 +179,7 @@ class RequestCounterOfferBottomSheet extends StatelessWidget {
 }
 
 class _CounterOfferEmptyFieldsErrorMessage extends StatelessWidget {
-  const _CounterOfferEmptyFieldsErrorMessage({Key? key}) : super(key: key);
+  const _CounterOfferEmptyFieldsErrorMessage({super.key});
 
   @override
   Widget build(BuildContext context) {

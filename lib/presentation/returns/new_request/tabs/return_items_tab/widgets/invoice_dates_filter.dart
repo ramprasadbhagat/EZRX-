@@ -1,7 +1,7 @@
 part of 'package:ezrxmobile/presentation/returns/new_request/tabs/return_items_tab/return_items_filter_bottom_sheet.dart';
 
 class _FromInvoiceDateFilter extends StatelessWidget {
-  const _FromInvoiceDateFilter({Key? key}) : super(key: key);
+  const _FromInvoiceDateFilter();
 
   @override
   Widget build(BuildContext context) {
@@ -60,7 +60,7 @@ class _FromInvoiceDateFilter extends StatelessWidget {
 }
 
 class _ToInvoiceDateFilter extends StatelessWidget {
-  const _ToInvoiceDateFilter({Key? key}) : super(key: key);
+  const _ToInvoiceDateFilter();
 
   @override
   Widget build(BuildContext context) {

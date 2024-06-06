@@ -27,7 +27,7 @@ class OrderItemCommonTile extends StatelessWidget {
   final String sellerName;
   final StatusType statusTag;
   const OrderItemCommonTile({
-    Key? key,
+    super.key,
     this.onTap,
     this.padding,
     required this.label,
@@ -44,7 +44,7 @@ class OrderItemCommonTile extends StatelessWidget {
     required this.tenderContractSection,
     required this.batchExpiryDate,
     required this.statusTag,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

@@ -29,7 +29,7 @@ part 'package:ezrxmobile/presentation/payments/new_payment/tabs/payment_method/w
 part 'package:ezrxmobile/presentation/payments/new_payment/tabs/payment_method/widgets/apl_payment_method.dart';
 
 class PaymentMethodTab extends StatelessWidget {
-  const PaymentMethodTab({Key? key}) : super(key: key);
+  const PaymentMethodTab({super.key});
 
   @override
   Widget build(BuildContext context) {

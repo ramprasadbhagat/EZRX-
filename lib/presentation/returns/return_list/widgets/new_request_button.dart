@@ -16,9 +16,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class NewRequestButton extends StatelessWidget {
   const NewRequestButton({
-    Key? key,
+    super.key,
     required this.controller,
-  }) : super(key: key);
+  });
   final ScrollController controller;
 
   @override

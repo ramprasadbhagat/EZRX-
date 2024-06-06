@@ -5,10 +5,10 @@ class OtherItemDetailsSection extends StatelessWidget {
   final bool isMarketPlace;
 
   const OtherItemDetailsSection({
-    Key? key,
+    super.key,
     required this.otherItems,
     required this.isMarketPlace,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

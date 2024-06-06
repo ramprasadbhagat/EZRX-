@@ -6,11 +6,11 @@ class PriceSummarySection extends StatelessWidget {
   final double? titleSpacing;
 
   const PriceSummarySection({
-    Key? key,
+    super.key,
     required this.cartState,
     this.titleSpacing,
     this.titleStyle,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -168,7 +168,7 @@ class PriceSummarySection extends StatelessWidget {
 }
 
 class _TaxWidget extends StatelessWidget {
-  const _TaxWidget({required this.cartState, Key? key}) : super(key: key);
+  const _TaxWidget({required this.cartState});
   final CartState cartState;
   @override
   Widget build(BuildContext context) {
@@ -214,9 +214,8 @@ class _TaxWidget extends StatelessWidget {
 
 class _DisplayPrice extends StatelessWidget {
   const _DisplayPrice({
-    Key? key,
     required this.priceComponent,
-  }) : super(key: key);
+  });
 
   final PriceComponent priceComponent;
 

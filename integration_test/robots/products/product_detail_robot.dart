@@ -10,7 +10,7 @@ import '../common/common_robot.dart';
 import '../common/extension.dart';
 
 class ProductDetailRobot extends CommonRobot {
-  ProductDetailRobot(WidgetTester tester) : super(tester);
+  ProductDetailRobot(super.tester);
 
   final materialDetailsMaterialDescription =
       find.byKey(WidgetKeys.materialDetailsMaterialDescription);

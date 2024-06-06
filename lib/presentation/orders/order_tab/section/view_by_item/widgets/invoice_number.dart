@@ -2,7 +2,7 @@ part of 'package:ezrxmobile/presentation/orders/order_tab/section/view_by_item/v
 
 class _InvoiceNumber extends StatelessWidget {
   final StringValue invoiceData;
-  const _InvoiceNumber({Key? key, required this.invoiceData}) : super(key: key);
+  const _InvoiceNumber({required this.invoiceData});
 
   @override
   Widget build(BuildContext context) {

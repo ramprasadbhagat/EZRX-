@@ -2,9 +2,8 @@ part of 'package:ezrxmobile/presentation/returns/new_request/tabs/return_items_t
 
 class _ReturnMaterialInfo extends StatelessWidget {
   const _ReturnMaterialInfo({
-    Key? key,
     required this.data,
-  }) : super(key: key);
+  });
 
   final ReturnMaterial data;
 

@@ -1,7 +1,7 @@
 part of 'package:ezrxmobile/presentation/orders/order_tab/section/view_by_item_filter/view_by_item_filter_sheet.dart';
 
 class _ViewByItemFilterDateRangePicker extends StatelessWidget {
-  const _ViewByItemFilterDateRangePicker({Key? key}) : super(key: key);
+  const _ViewByItemFilterDateRangePicker();
 
   @override
   Widget build(BuildContext context) {
@@ -46,10 +46,10 @@ class _DateField extends StatelessWidget {
   final String hintText;
 
   const _DateField({
-    Key? key,
+    super.key,
     required this.displayDate,
     required this.hintText,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

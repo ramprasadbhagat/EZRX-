@@ -2,7 +2,7 @@ part of 'package:ezrxmobile/presentation/home/product_offer_section/product_offe
 
 class _ProductTile extends StatelessWidget {
   final MaterialInfo materialInfo;
-  const _ProductTile({Key? key, required this.materialInfo}) : super(key: key);
+  const _ProductTile({required this.materialInfo});
 
   @override
   Widget build(BuildContext context) {

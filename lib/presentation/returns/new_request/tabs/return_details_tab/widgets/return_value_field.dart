@@ -10,9 +10,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ReturnValueField extends StatelessWidget {
   const ReturnValueField({
-    Key? key,
+    super.key,
     required this.data,
-  }) : super(key: key);
+  });
 
   final ReturnMaterial data;
 

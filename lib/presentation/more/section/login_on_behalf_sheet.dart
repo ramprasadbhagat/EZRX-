@@ -17,7 +17,7 @@ part 'package:ezrxmobile/presentation/more/section/login_on_behalf/cancel_button
 part 'package:ezrxmobile/presentation/more/section/login_on_behalf/login_button.dart';
 
 class LoginOnBehalfSheet extends StatelessWidget {
-  const LoginOnBehalfSheet({Key? key}) : super(key: key);
+  const LoginOnBehalfSheet({super.key});
 
   @override
   Widget build(BuildContext context) {

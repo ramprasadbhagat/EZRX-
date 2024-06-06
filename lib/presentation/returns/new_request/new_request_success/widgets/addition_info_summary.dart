@@ -1,7 +1,7 @@
 part of 'package:ezrxmobile/presentation/returns/new_request/new_request_success/new_request_successful_page.dart';
 
 class _AdditionInfoSummary extends StatelessWidget {
-  const _AdditionInfoSummary({Key? key}) : super(key: key);
+  const _AdditionInfoSummary();
 
   @override
   Widget build(BuildContext context) {

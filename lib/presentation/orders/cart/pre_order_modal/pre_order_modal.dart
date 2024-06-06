@@ -35,7 +35,7 @@ const _horizontalPadding = EdgeInsets.symmetric(horizontal: 12);
 const _itemSpacing = 20.0;
 
 class PreOrderModal extends StatelessWidget {
-  const PreOrderModal({Key? key}) : super(key: key);
+  const PreOrderModal({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -16,10 +16,10 @@ import 'package:ezrxmobile/presentation/orders/widgets/order_bundle_material.dar
 
 class OrderBundleItem extends StatelessWidget {
   const OrderBundleItem({
-    Key? key,
+    super.key,
     required this.orderNumber,
     required this.viewByOrdersGroup,
-  }) : super(key: key);
+  });
   final OrderNumber orderNumber;
   final ViewByOrdersGroup viewByOrdersGroup;
 
@@ -81,7 +81,7 @@ class OrderBundleItem extends StatelessWidget {
                         orderNumber: orderNumber,
                       ),
                     )
-                    .toList(),
+                    ,
                 const SizedBox(height: 10),
                 Wrap(
                   alignment: WrapAlignment.spaceBetween,
@@ -115,9 +115,9 @@ class _BundleInformation extends StatelessWidget {
   final ViewByOrdersGroup viewByOrdersGroup;
 
   const _BundleInformation({
-    Key? key,
+    super.key,
     required this.viewByOrdersGroup,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

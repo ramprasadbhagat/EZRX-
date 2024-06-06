@@ -5,7 +5,7 @@ import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 
 class VersionDisplay extends StatelessWidget {
-  const VersionDisplay({Key? key}) : super(key: key);
+  const VersionDisplay({super.key});
 
   @override
   Widget build(BuildContext context) {

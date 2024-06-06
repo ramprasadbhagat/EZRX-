@@ -1,7 +1,7 @@
 part of 'package:ezrxmobile/presentation/orders/cart/checkout/checkout_page.dart';
 
 class _RequestDeliveryDate extends StatefulWidget {
-  const _RequestDeliveryDate({Key? key}) : super(key: key);
+  const _RequestDeliveryDate();
 
   @override
   State<_RequestDeliveryDate> createState() => _RequestDeliveryDateState();

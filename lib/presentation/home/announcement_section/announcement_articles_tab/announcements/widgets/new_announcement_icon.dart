@@ -4,7 +4,7 @@ import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 
 class NewAnnouncementIcon extends StatelessWidget {
-  const NewAnnouncementIcon({Key? key}) : super(key: key);
+  const NewAnnouncementIcon({super.key});
 
   @override
   Widget build(BuildContext context) {

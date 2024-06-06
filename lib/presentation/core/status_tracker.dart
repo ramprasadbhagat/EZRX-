@@ -6,12 +6,12 @@ import 'package:flutter/material.dart';
 
 class StatusTrackerSection extends StatelessWidget {
   const StatusTrackerSection({
-    Key? key,
+    super.key,
     required this.title,
     required this.status,
     this.createDateTime,
     required this.onTap,
-  }) : super(key: key);
+  });
   final String title;
   final String status;
   final DateTimeStringValue? createDateTime;

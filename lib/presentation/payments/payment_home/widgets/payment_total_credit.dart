@@ -1,9 +1,7 @@
 part of '../payment_page.dart';
 
 class _PaymentTotalCredit extends StatelessWidget {
-  const _PaymentTotalCredit({
-    Key? key,
-  }) : super(key: key);
+  const _PaymentTotalCredit();
 
   @override
   Widget build(BuildContext context) {

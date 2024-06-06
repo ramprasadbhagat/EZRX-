@@ -23,7 +23,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CartProductBundle extends StatelessWidget {
   final PriceAggregate cartItem;
-  const CartProductBundle({Key? key, required this.cartItem}) : super(key: key);
+  const CartProductBundle({super.key, required this.cartItem});
 
   @override
   Widget build(BuildContext context) {
@@ -75,8 +75,7 @@ class CartProductBundle extends StatelessWidget {
 
 class _BundleDetailsSection extends StatelessWidget {
   final PriceAggregate cartItem;
-  const _BundleDetailsSection({Key? key, required this.cartItem})
-      : super(key: key);
+  const _BundleDetailsSection({required this.cartItem});
 
   @override
   Widget build(BuildContext context) {
@@ -180,7 +179,7 @@ class _BundleDetailsSection extends StatelessWidget {
 
 class _AllMaterialItem extends StatelessWidget {
   final PriceAggregate cartItem;
-  const _AllMaterialItem({Key? key, required this.cartItem}) : super(key: key);
+  const _AllMaterialItem({required this.cartItem});
 
   @override
   Widget build(BuildContext context) {
@@ -201,10 +200,9 @@ class _MaterialDetailsSection extends StatelessWidget {
   final MaterialInfo cartItem;
   final Bundle bundle;
   const _MaterialDetailsSection({
-    Key? key,
     required this.cartItem,
     required this.bundle,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -232,8 +230,7 @@ class _MaterialDetailsSection extends StatelessWidget {
 
 class _MaterialImageSection extends StatelessWidget {
   final MaterialInfo cartProduct;
-  const _MaterialImageSection({required this.cartProduct, Key? key})
-      : super(key: key);
+  const _MaterialImageSection({required this.cartProduct});
 
   @override
   Widget build(BuildContext context) {
@@ -264,10 +261,9 @@ class _MaterialDetails extends StatelessWidget {
   final MaterialInfo cartItem;
   final Bundle bundle;
   const _MaterialDetails({
-    Key? key,
     required this.cartItem,
     required this.bundle,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -334,10 +330,9 @@ class _MaterialQuantitySection extends StatefulWidget {
   final MaterialInfo cartItem;
   final Bundle bundle;
   const _MaterialQuantitySection({
-    Key? key,
     required this.cartItem,
     required this.bundle,
-  }) : super(key: key);
+  });
 
   @override
   State<_MaterialQuantitySection> createState() =>
@@ -502,8 +497,7 @@ class _MaterialQuantitySectionState extends State<_MaterialQuantitySection> {
 
 class _ConfirmButton extends StatelessWidget {
   final Function({required int quantity}) confirmFunction;
-  const _ConfirmButton({Key? key, required this.confirmFunction})
-      : super(key: key);
+  const _ConfirmButton({required this.confirmFunction});
 
   @override
   Widget build(BuildContext context) {
@@ -515,10 +509,10 @@ class _ConfirmButton extends StatelessWidget {
               Navigator.of(context).pop();
             },
             style: Theme.of(context).elevatedButtonTheme.style!.copyWith(
-                  backgroundColor: const MaterialStatePropertyAll(
+                  backgroundColor: const WidgetStatePropertyAll(
                     ZPColors.white,
                   ),
-                  shape: const MaterialStatePropertyAll(
+                  shape: const WidgetStatePropertyAll(
                     RoundedRectangleBorder(
                       borderRadius: BorderRadius.all(
                         Radius.circular(8),
@@ -545,10 +539,10 @@ class _ConfirmButton extends StatelessWidget {
               Navigator.of(context).pop();
             },
             style: Theme.of(context).elevatedButtonTheme.style!.copyWith(
-                  backgroundColor: const MaterialStatePropertyAll(
+                  backgroundColor: const WidgetStatePropertyAll(
                     ZPColors.primary,
                   ),
-                  shape: const MaterialStatePropertyAll(
+                  shape: const WidgetStatePropertyAll(
                     RoundedRectangleBorder(
                       borderRadius: BorderRadius.all(
                         Radius.circular(8),
@@ -574,8 +568,7 @@ class _BundleSubTotalSection extends StatelessWidget {
   final PriceAggregate cartProduct;
   const _BundleSubTotalSection({
     required this.cartProduct,
-    Key? key,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

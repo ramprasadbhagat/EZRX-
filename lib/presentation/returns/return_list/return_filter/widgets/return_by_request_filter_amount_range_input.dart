@@ -1,7 +1,7 @@
 part of 'package:ezrxmobile/presentation/returns/return_list/return_filter/return_by_request_filter_page.dart';
 
 class _RequestAmountRangeInput extends StatelessWidget {
-  const _RequestAmountRangeInput({Key? key}) : super(key: key);
+  const _RequestAmountRangeInput();
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +23,7 @@ class _RequestAmountRangeInput extends StatelessWidget {
 }
 
 class _AmountValueToFilter extends StatelessWidget {
-  const _AmountValueToFilter({Key? key}) : super(key: key);
+  const _AmountValueToFilter();
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<ViewByRequestReturnFilterBloc,
@@ -61,7 +61,7 @@ class _AmountValueToFilter extends StatelessWidget {
 }
 
 class _AmountValueFromFilter extends StatelessWidget {
-  const _AmountValueFromFilter({Key? key}) : super(key: key);
+  const _AmountValueFromFilter();
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<ViewByRequestReturnFilterBloc,

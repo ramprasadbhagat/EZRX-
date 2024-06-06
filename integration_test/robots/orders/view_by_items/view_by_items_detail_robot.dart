@@ -14,7 +14,7 @@ import '../../common/common_robot.dart';
 import '../../common/extension.dart';
 
 class ViewByItemsDetailRobot extends CommonRobot {
-  ViewByItemsDetailRobot(WidgetTester tester) : super(tester);
+  ViewByItemsDetailRobot(super.tester);
 
   final statusTrackerSection = find.byType(StatusTrackerSection);
   final addressSection = find.byType(AddressInfoSection);

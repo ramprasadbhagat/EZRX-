@@ -17,7 +17,7 @@ part 'package:ezrxmobile/presentation/account/change_password/widgets/change_pas
 part 'package:ezrxmobile/presentation/account/change_password//widgets/save_clear_changes_section.dart';
 
 class ChangePasswordPage extends StatelessWidget {
-  const ChangePasswordPage({Key? key}) : super(key: key);
+  const ChangePasswordPage({super.key});
 
   @override
   Widget build(BuildContext context) {

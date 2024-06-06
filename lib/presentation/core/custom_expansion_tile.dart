@@ -27,7 +27,7 @@ class ExpansionTile extends StatefulWidget {
   /// the tile to reveal or hide the [children]. The [initiallyExpanded] property must
   /// be non-null.
   const ExpansionTile({
-    Key? key,
+    super.key,
     this.expandWidgetkey,
     this.headerBackgroundColor,
     this.leading,
@@ -46,7 +46,7 @@ class ExpansionTile extends StatefulWidget {
     this.boxBorder = const Border(),
     this.maintainState = false,
     this.expandedCrossAxisAlignment,
-  }) : super(key: key);
+  });
 
   /// A widget to display before the title.
   ///

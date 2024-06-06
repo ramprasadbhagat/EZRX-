@@ -12,7 +12,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 
 class EZPointWebviewPage extends StatefulWidget {
-  const EZPointWebviewPage({Key? key}) : super(key: key);
+  const EZPointWebviewPage({super.key});
 
   @override
   State<EZPointWebviewPage> createState() => _EZPointWebviewPageState();
@@ -26,9 +26,7 @@ class _EZPointWebviewPageState extends State<EZPointWebviewPage> {
     super.initState();
 
     pullToRefreshController = PullToRefreshController(
-      options: PullToRefreshOptions(
-        color: ZPColors.primary,
-      ),
+      settings: PullToRefreshSettings(color: ZPColors.primary),
       onRefresh: () {
         pullToRefreshController.endRefreshing();
         context.read<EZPointBloc>().add(
@@ -79,7 +77,7 @@ class _EZPointWebviewPageState extends State<EZPointWebviewPage> {
                 children: [
                   InAppWebView(
                     initialUrlRequest: URLRequest(
-                      url: Uri.parse(
+                      url: WebUri(
                         '${locator<Config>().getEZPointIframe}?token=${state.ezPointToken.ezPointToken}',
                       ),
                     ),

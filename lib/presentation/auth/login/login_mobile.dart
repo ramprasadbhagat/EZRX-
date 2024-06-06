@@ -24,9 +24,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class LoginMobile extends StatelessWidget {
   final LoginFormState state;
   const LoginMobile({
-    Key? key,
+    super.key,
     required this.state,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -84,7 +84,7 @@ class LoginMobile extends StatelessWidget {
 }
 
 class _SSOLoginButton extends StatelessWidget {
-  const _SSOLoginButton({Key? key}) : super(key: key);
+  const _SSOLoginButton();
 
   @override
   Widget build(BuildContext context) {
@@ -106,10 +106,10 @@ class _SSOLoginButton extends StatelessWidget {
                           );
                     },
               style: Theme.of(context).elevatedButtonTheme.style!.copyWith(
-                    backgroundColor: const MaterialStatePropertyAll(
+                    backgroundColor: const WidgetStatePropertyAll(
                       ZPColors.accentColor,
                     ),
-                    shape: const MaterialStatePropertyAll(
+                    shape: const WidgetStatePropertyAll(
                       StadiumBorder(),
                     ),
                   ),
@@ -137,7 +137,7 @@ class _SSOLoginButton extends StatelessWidget {
 }
 
 class _CreateAccount extends StatelessWidget {
-  const _CreateAccount({Key? key}) : super(key: key);
+  const _CreateAccount();
 
   @override
   Widget build(BuildContext context) {
@@ -151,8 +151,8 @@ class _CreateAccount extends StatelessWidget {
         TextButton(
           key: WidgetKeys.createAccountButton,
           style: Theme.of(context).textButtonTheme.style?.copyWith(
-                minimumSize: MaterialStateProperty.all(const Size(0, 0)),
-                padding: MaterialStateProperty.all(
+                minimumSize: WidgetStateProperty.all(const Size(0, 0)),
+                padding: WidgetStateProperty.all(
                   const EdgeInsets.only(left: 3),
                 ),
               ),

@@ -7,7 +7,7 @@ import '../common/common_robot.dart';
 import '../common/extension.dart';
 
 class ProductRobot extends CommonRobot {
-  ProductRobot(WidgetTester tester) : super(tester);
+  ProductRobot(super.tester);
 
   final materialCard = find.byKey(WidgetKeys.materialListMaterialCard);
   final bundleCard = find.byKey(WidgetKeys.materialListBundleCard);

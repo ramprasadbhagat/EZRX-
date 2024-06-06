@@ -15,10 +15,10 @@ import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 
 class ShowOfferDialogWidget extends StatelessWidget {
   const ShowOfferDialogWidget({
-    Key? key,
+    super.key,
     required this.bonusMaterialList,
     required this.priceTiersList,
-  }) : super(key: key);
+  });
   final List<BonusMaterial> bonusMaterialList;
   final List<PriceTierItem> priceTiersList;
 
@@ -46,9 +46,7 @@ class ShowOfferDialogWidget extends StatelessWidget {
 }
 
 class _CloseButton extends StatelessWidget {
-  const _CloseButton({
-    Key? key,
-  }) : super(key: key);
+  const _CloseButton();
 
   @override
   Widget build(BuildContext context) {
@@ -68,10 +66,9 @@ class _CloseButton extends StatelessWidget {
 
 class _AvailableOfferList extends StatelessWidget {
   const _AvailableOfferList({
-    Key? key,
     required this.bonusMaterialList,
     required this.priceTiersList,
-  }) : super(key: key);
+  });
   final List<BonusMaterial> bonusMaterialList;
   final List<PriceTierItem> priceTiersList;
 
@@ -87,8 +84,8 @@ class _AvailableOfferList extends StatelessWidget {
       shrinkWrap: true,
       children: [
         if (showTierPrice)
-          ...priceTiersList.map((e) => _PriceTierItem(item: e)).toList(),
-        ...bonusMaterialList.map((e) => _BonusMaterialItem(item: e)).toList(),
+          ...priceTiersList.map((e) => _PriceTierItem(item: e)),
+        ...bonusMaterialList.map((e) => _BonusMaterialItem(item: e)),
       ],
     );
   }
@@ -147,9 +144,7 @@ class _PriceTierItem extends StatelessWidget {
 }
 
 class _AvailableOfferHeader extends StatelessWidget {
-  const _AvailableOfferHeader({
-    Key? key,
-  }) : super(key: key);
+  const _AvailableOfferHeader();
 
   @override
   Widget build(BuildContext context) {

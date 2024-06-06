@@ -21,7 +21,7 @@ class PaymentSummaryDetailRobot extends CommonRobot {
   final Finder _paymentSummaryDetailsBackButton =
       find.byKey(WidgetKeys.paymentSummaryDetailsBackButton);
 
-  PaymentSummaryDetailRobot(WidgetTester tester) : super(tester);
+  PaymentSummaryDetailRobot(super.tester);
 
   void verifyPage() {
     expect(_paymentSummaryDetailsPage, findsOneWidget);

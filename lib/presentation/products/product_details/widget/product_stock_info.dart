@@ -14,9 +14,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class ProductStockInfo extends StatelessWidget {
   final MaterialNumber materialNumber;
   const ProductStockInfo({
-    Key? key,
+    super.key,
     required this.materialNumber,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -61,8 +61,7 @@ class _MaterialExpiresSoonTag extends StatelessWidget {
   const _MaterialExpiresSoonTag({
     required this.stockInfo,
     required this.materialInfo,
-    Key? key,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

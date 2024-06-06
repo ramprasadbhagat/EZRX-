@@ -10,7 +10,7 @@ import '../common/common_robot.dart';
 import '../common/extension.dart';
 
 class HomeRobot extends CommonRobot {
-  HomeRobot(WidgetTester tester) : super(tester);
+  HomeRobot(super.tester);
 
   final miniCart = find.byType(CartButton);
   final quickAccessMenu = find.byType(QuickAccessMenuPanel);
@@ -193,7 +193,7 @@ class HomeRobot extends CommonRobot {
 
   void verifyFirstBannerIsDisplay() {
     final listPosition = tester.widget<PageView>(homeBanner);
-    expect((listPosition.controller.page ?? -1) >= 0, true);
+    expect((listPosition.controller?.page ?? -1) >= 0, true);
   }
 
   void findQuickAccessOrders() {

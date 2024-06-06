@@ -11,8 +11,8 @@ class ComboOfferLabel extends StatelessWidget {
   const ComboOfferLabel({
     required this.materialInfo,
     this.iconSize = 15,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {

@@ -2,8 +2,7 @@ part of 'package:ezrxmobile/presentation/orders/cart/override/request_counter_of
 
 class _CounterOfferRemarksTextField extends StatefulWidget {
   final String remarks;
-  const _CounterOfferRemarksTextField({Key? key, required this.remarks})
-      : super(key: key);
+  const _CounterOfferRemarksTextField({required this.remarks});
 
   @override
   State<_CounterOfferRemarksTextField> createState() =>

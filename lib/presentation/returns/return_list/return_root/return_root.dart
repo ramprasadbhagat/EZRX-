@@ -43,7 +43,7 @@ part 'widgets/export_return_by_item.dart';
 part 'widgets/export_return_by_request.dart';
 
 class ReturnRoot extends StatefulWidget {
-  const ReturnRoot({Key? key}) : super(key: key);
+  const ReturnRoot({super.key});
 
   @override
   State<ReturnRoot> createState() => _ReturnRootState();

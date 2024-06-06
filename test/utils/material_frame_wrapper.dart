@@ -9,11 +9,11 @@ class MaterialFrameWrapper extends StatelessWidget {
   final bool useMediaQuery;
 
   const MaterialFrameWrapper({
-    Key? key,
+    super.key,
     required this.child,
     this.usingLocalization = false,
     this.useMediaQuery = true,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

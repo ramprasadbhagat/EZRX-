@@ -5,11 +5,11 @@ class _MaterialDetails extends StatelessWidget {
   final ComboDealMaterial comboDealMaterial;
   final VoidCallback onTapName;
   const _MaterialDetails({
-    Key? key,
+    super.key,
     required this.comboItem,
     required this.comboDealMaterial,
     required this.onTapName,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -139,9 +139,8 @@ class _MaterialPriceSection extends StatelessWidget {
   final int totalQuantityUnit;
   const _MaterialPriceSection({
     required this.comboItem,
-    Key? key,
     required this.totalQuantityUnit,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

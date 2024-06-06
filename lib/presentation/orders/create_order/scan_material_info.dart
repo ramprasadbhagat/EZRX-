@@ -8,7 +8,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ezrxmobile/application/order/scan_material_info/scan_material_info_bloc.dart';
 
 class ScanMaterialInfo extends StatefulWidget {
-  const ScanMaterialInfo({Key? key}) : super(key: key);
+  const ScanMaterialInfo({super.key});
 
   @override
   State<StatefulWidget> createState() {
@@ -65,7 +65,7 @@ class _ScanMaterialInfoState extends State<ScanMaterialInfo>
 }
 
 class _ScannerTorchButton extends StatelessWidget {
-  const _ScannerTorchButton({Key? key}) : super(key: key);
+  const _ScannerTorchButton();
 
   @override
   Widget build(BuildContext context) {
@@ -98,7 +98,7 @@ class _ScannerTorchButton extends StatelessWidget {
 }
 
 class _ScannerBackButton extends StatelessWidget {
-  const _ScannerBackButton({Key? key}) : super(key: key);
+  const _ScannerBackButton();
 
   @override
   Widget build(BuildContext context) {
@@ -126,7 +126,7 @@ class _ScannerBackButton extends StatelessWidget {
 }
 
 class _PhotoGalleryButton extends StatelessWidget {
-  const _PhotoGalleryButton({Key? key}) : super(key: key);
+  const _PhotoGalleryButton();
 
   @override
   Widget build(BuildContext context) {
@@ -147,7 +147,7 @@ class _PhotoGalleryButton extends StatelessWidget {
 }
 
 class _InfoSection extends StatelessWidget {
-  const _InfoSection({Key? key}) : super(key: key);
+  const _InfoSection();
 
   @override
   Widget build(BuildContext context) {

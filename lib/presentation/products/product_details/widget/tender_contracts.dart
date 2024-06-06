@@ -193,12 +193,11 @@ class _TenderContractsState extends State<TenderContracts> {
                                       key: WidgetKeys
                                           .materialTenderContractRadio,
                                       value: currentContract,
-                                      fillColor: MaterialStateProperty
+                                      fillColor: WidgetStateProperty
                                           .resolveWith<Color>(
-                                        (Set<MaterialState> states) =>
-                                            isSelected
-                                                ? ZPColors.darkTeal
-                                                : ZPColors.elevatedDisableColor,
+                                        (Set<WidgetState> states) => isSelected
+                                            ? ZPColors.darkTeal
+                                            : ZPColors.elevatedDisableColor,
                                       ),
                                       visualDensity: const VisualDensity(
                                         horizontal:

@@ -6,7 +6,7 @@ import 'package:flutter_test/flutter_test.dart';
 import '../common/common_robot.dart';
 
 class ContactUsRobot extends CommonRobot {
-  ContactUsRobot(WidgetTester tester) : super(tester);
+  ContactUsRobot(super.tester);
 
   final scrollView = find.byKey(WidgetKeys.scrollList);
   final userNameKey = find.byKey(WidgetKeys.userNameKey);

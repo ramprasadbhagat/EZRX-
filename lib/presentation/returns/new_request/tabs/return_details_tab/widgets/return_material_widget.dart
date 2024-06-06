@@ -4,10 +4,9 @@ class _ReturnMaterialWidget extends StatelessWidget {
   final ReturnMaterial item;
   final ReturnItemDetails detail;
   const _ReturnMaterialWidget({
-    Key? key,
     required this.item,
     required this.detail,
-  }) : super(key: key);
+  });
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<NewRequestBloc, NewRequestState>(
@@ -129,7 +128,7 @@ class _ReturnMaterialWidget extends StatelessWidget {
 }
 
 class _ReturnRequestWarning extends StatelessWidget {
-  const _ReturnRequestWarning({Key? key}) : super(key: key);
+  const _ReturnRequestWarning();
 
   @override
   Widget build(BuildContext context) {

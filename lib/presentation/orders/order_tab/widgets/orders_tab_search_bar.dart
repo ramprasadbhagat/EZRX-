@@ -3,9 +3,9 @@ part of 'package:ezrxmobile/presentation/orders/order_tab/orders_tab.dart';
 class _OrdersTabSearchBar extends StatelessWidget {
   final bool isFromViewByOrder;
   const _OrdersTabSearchBar({
-    Key? key,
+    super.key,
     required this.isFromViewByOrder,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -40,11 +40,10 @@ class _SummarySearchBar extends StatelessWidget {
   final bool isFromViewByOrder;
   final String searchKey;
   const _SummarySearchBar({
-    Key? key,
     required this.isEnable,
     required this.isFromViewByOrder,
     required this.searchKey,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

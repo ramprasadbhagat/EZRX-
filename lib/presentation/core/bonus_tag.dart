@@ -3,8 +3,7 @@ import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 
 class BonusTag extends StatelessWidget {
-  const BonusTag({Key? key, this.margin = const EdgeInsets.all(0)})
-      : super(key: key);
+  const BonusTag({super.key, this.margin = const EdgeInsets.all(0)});
   final EdgeInsetsGeometry margin;
 
   @override

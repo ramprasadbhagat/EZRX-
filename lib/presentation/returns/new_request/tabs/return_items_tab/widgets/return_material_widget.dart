@@ -3,9 +3,8 @@ part of 'package:ezrxmobile/presentation/returns/new_request/tabs/return_items_t
 class _ReturnMaterialWidget extends StatelessWidget {
   final ReturnMaterial data;
   const _ReturnMaterialWidget({
-    Key? key,
     required this.data,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

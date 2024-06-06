@@ -10,9 +10,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class UploadedFileList extends StatelessWidget {
   const UploadedFileList({
-    Key? key,
+    super.key,
     required this.uuid,
-  }) : super(key: key);
+  });
 
   final String uuid;
 
@@ -93,7 +93,7 @@ class UploadedFileList extends StatelessWidget {
                     ),
                   ),
                 )
-                .toList(),
+                ,
           ],
         );
       },

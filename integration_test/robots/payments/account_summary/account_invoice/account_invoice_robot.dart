@@ -10,7 +10,7 @@ import '../../../common/common_robot.dart';
 import '../../../common/extension.dart';
 
 class AccountInvoiceRobot extends CommonRobot {
-  AccountInvoiceRobot(WidgetTester tester) : super(tester);
+  AccountInvoiceRobot(super.tester);
 
   final filterButton = find.byKey(WidgetKeys.accountSummaryFilterButton);
   final downloadButton = find.byKey(WidgetKeys.accountSummaryDownloadButton);

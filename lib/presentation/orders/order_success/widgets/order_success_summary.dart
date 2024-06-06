@@ -4,9 +4,8 @@ class _OrderSuccessSummary extends StatelessWidget {
   final List<OrderHistoryDetails> orderHistoryDetailList;
 
   const _OrderSuccessSummary({
-    Key? key,
     required this.orderHistoryDetailList,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

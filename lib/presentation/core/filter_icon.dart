@@ -6,10 +6,10 @@ class FilterCountButton extends StatelessWidget {
   final int filterCount;
   final VoidCallback onTap;
   const FilterCountButton({
-    Key? key,
+    super.key,
     required this.filterCount,
     required this.onTap,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

@@ -1,7 +1,7 @@
 part of 'package:ezrxmobile/presentation/payments/invoice_details/invoice_details.dart';
 
 class _OrderItemCount extends StatelessWidget {
-  const _OrderItemCount({Key? key}) : super(key: key);
+  const _OrderItemCount();
 
   @override
   Widget build(BuildContext context) {

@@ -1,9 +1,7 @@
 part of '../payment_page.dart';
 
 class _PaymentOptionMenu extends StatelessWidget {
-  const _PaymentOptionMenu({
-    Key? key,
-  }) : super(key: key);
+  const _PaymentOptionMenu();
 
   @override
   Widget build(BuildContext context) {
@@ -80,11 +78,10 @@ class _PaymentOption extends StatelessWidget {
   final double height;
 
   const _PaymentOption({
-    Key? key,
     required this.paymentOptionData,
     required this.width,
     required this.height,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

@@ -2,7 +2,7 @@ part of 'package:ezrxmobile/presentation/products/product_suggestion/product_sug
 
 class _HistoryTile extends StatelessWidget {
   final SearchKey searchKey;
-  const _HistoryTile({Key? key, required this.searchKey}) : super(key: key);
+  const _HistoryTile({required this.searchKey});
 
   @override
   Widget build(BuildContext context) {

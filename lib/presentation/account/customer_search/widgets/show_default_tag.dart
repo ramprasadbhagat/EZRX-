@@ -1,9 +1,7 @@
 part of 'package:ezrxmobile/presentation/account/customer_search/customer_search.dart';
 
 class _ShowDefaultTag extends StatelessWidget {
-  const _ShowDefaultTag({
-    Key? key,
-  }) : super(key: key);
+  const _ShowDefaultTag();
 
   @override
   Widget build(BuildContext context) {

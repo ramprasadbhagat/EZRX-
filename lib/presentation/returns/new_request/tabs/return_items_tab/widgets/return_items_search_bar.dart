@@ -1,7 +1,7 @@
 part of 'package:ezrxmobile/presentation/returns/new_request/tabs/return_items_tab/return_items_tab.dart';
 
 class _ReturnItemsSearchBar extends StatelessWidget {
-  const _ReturnItemsSearchBar({Key? key}) : super(key: key);
+  const _ReturnItemsSearchBar({super.key});
 
   @override
   Widget build(BuildContext context) =>

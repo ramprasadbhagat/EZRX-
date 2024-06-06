@@ -38,9 +38,9 @@ part 'package:ezrxmobile/presentation/orders/cart/bonus/widgets/bonus_item_searc
 class BonusItemsSheet extends StatelessWidget {
   final PriceAggregate cartProduct;
   const BonusItemsSheet({
-    Key? key,
+    super.key,
     required this.cartProduct,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -107,9 +107,8 @@ class _BodyContent extends StatelessWidget {
   final PriceAggregate cartProduct;
 
   const _BodyContent({
-    Key? key,
     required this.cartProduct,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -213,7 +212,7 @@ class _BodyContent extends StatelessWidget {
 }
 
 class _BonusQuantityEmptyWarning extends StatelessWidget {
-  const _BonusQuantityEmptyWarning({Key? key}) : super(key: key);
+  const _BonusQuantityEmptyWarning();
 
   @override
   Widget build(BuildContext context) {

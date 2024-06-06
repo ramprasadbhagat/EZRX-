@@ -5,8 +5,7 @@ import 'package:flutter/material.dart';
 
 class DiscountTagWidget extends StatelessWidget {
   final String rateDisplay;
-  const DiscountTagWidget({required this.rateDisplay, Key? key})
-      : super(key: key);
+  const DiscountTagWidget({required this.rateDisplay, super.key});
 
   @override
   Widget build(BuildContext context) {

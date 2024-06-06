@@ -2,11 +2,11 @@ part of 'package:ezrxmobile/presentation/returns/new_request/new_request_page.da
 
 class _AttentionWidget extends StatelessWidget {
   const _AttentionWidget({
-    Key? key,
+    super.key,
     this.widgetKey,
     required this.message,
     required this.visible,
-  }) : super(key: key);
+  });
   final Key? widgetKey;
   final String message;
   final bool visible;

@@ -1,7 +1,7 @@
 part of 'package:ezrxmobile/presentation/account/contact_us/contact_us_page.dart';
 
 class _ContactDetails extends StatelessWidget {
-  const _ContactDetails({Key? key}) : super(key: key);
+  const _ContactDetails({super.key});
 
   final contactText = 'Have any questions? we\'d love to hear from you.';
 
@@ -30,8 +30,8 @@ class _ContactDetails extends StatelessWidget {
                         key: WidgetKeys.contactDetailsSectionKey,
                         style: {
                           'body': Style(
-                            padding: const EdgeInsets.all(0),
-                            margin: const EdgeInsets.all(0),
+                            padding: HtmlPaddings.all(0),
+                            margin: Margins.all(0),
                           ),
                         },
                         data: state.contactUsDetails.content
@@ -76,11 +76,11 @@ class _ContactDetails extends StatelessWidget {
 
 class _ContactItem extends StatelessWidget {
   const _ContactItem({
-    Key? key,
+    super.key,
     required this.label,
     required this.icon,
     required this.onTap,
-  }) : super(key: key);
+  });
 
   final String label;
   final IconData icon;

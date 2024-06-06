@@ -1,7 +1,7 @@
 part of 'package:ezrxmobile/presentation/orders/cart/cart_page.dart';
 
 class _CartPageCheckoutSection extends StatelessWidget {
-  const _CartPageCheckoutSection({Key? key}) : super(key: key);
+  const _CartPageCheckoutSection();
 
   @override
   Widget build(BuildContext context) {
@@ -88,7 +88,7 @@ class _CartPageCheckoutSection extends StatelessWidget {
 }
 
 class _CartPageCheckoutButton extends StatelessWidget {
-  const _CartPageCheckoutButton({Key? key}) : super(key: key);
+  const _CartPageCheckoutButton();
 
   @override
   Widget build(BuildContext context) {
@@ -109,16 +109,16 @@ class _CartPageCheckoutButton extends StatelessWidget {
           child: ElevatedButton(
             style: isCheckoutDisabled
                 ? ButtonStyle(
-                    elevation: MaterialStateProperty.resolveWith(
+                    elevation: WidgetStateProperty.resolveWith(
                       (_) => 0,
                     ),
-                    overlayColor: MaterialStateProperty.resolveWith(
+                    overlayColor: WidgetStateProperty.resolveWith(
                       (_) => Colors.transparent,
                     ),
-                    foregroundColor: MaterialStateProperty.resolveWith(
+                    foregroundColor: WidgetStateProperty.resolveWith(
                       (_) => ZPColors.white,
                     ),
-                    backgroundColor: MaterialStateProperty.resolveWith(
+                    backgroundColor: WidgetStateProperty.resolveWith(
                       (_) => ZPColors.elevatedDisableColor,
                     ),
                     splashFactory: NoSplash.splashFactory,

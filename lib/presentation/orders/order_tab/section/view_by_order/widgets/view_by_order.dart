@@ -4,9 +4,8 @@ class _ViewByOrder extends StatelessWidget {
   final OrderHistoryDetails viewByOrderHistoryItem;
 
   const _ViewByOrder({
-    Key? key,
     required this.viewByOrderHistoryItem,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

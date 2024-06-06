@@ -1,7 +1,7 @@
 part of 'package:ezrxmobile/presentation/account/customer_search/customer_search.dart';
 
 class _DeliveryAddressSearchSection extends StatelessWidget {
-  const _DeliveryAddressSearchSection({Key? key}) : super(key: key);
+  const _DeliveryAddressSearchSection();
 
   @override
   Widget build(BuildContext context) {

@@ -34,7 +34,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 part 'package:ezrxmobile/presentation/products/widgets/bundle_grid_item.dart';
 
 class ProductsTab extends StatelessWidget {
-  const ProductsTab({Key? key}) : super(key: key);
+  const ProductsTab({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -199,7 +199,7 @@ class ProductsTab extends StatelessWidget {
 }
 
 class _TotalMaterialCount extends StatelessWidget {
-  const _TotalMaterialCount({Key? key}) : super(key: key);
+  const _TotalMaterialCount();
 
   @override
   Widget build(BuildContext context) {

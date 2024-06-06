@@ -15,7 +15,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class AdminPoAttachmentFilterDrawer extends StatelessWidget {
-  const AdminPoAttachmentFilterDrawer({Key? key}) : super(key: key);
+  const AdminPoAttachmentFilterDrawer({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -108,7 +108,7 @@ class AdminPoAttachmentFilterDrawer extends StatelessWidget {
 }
 
 class _FilterHeader extends StatelessWidget {
-  const _FilterHeader({Key? key}) : super(key: key);
+  const _FilterHeader();
   @override
   Widget build(BuildContext context) {
     return AppBar(
@@ -128,7 +128,7 @@ class _FilterHeader extends StatelessWidget {
 }
 
 class _OrderNoByFilter extends StatelessWidget {
-  const _OrderNoByFilter({Key? key}) : super(key: key);
+  const _OrderNoByFilter();
 
   @override
   Widget build(BuildContext context) {
@@ -167,7 +167,7 @@ class _OrderNoByFilter extends StatelessWidget {
 }
 
 class _EzrxNumberFilter extends StatelessWidget {
-  const _EzrxNumberFilter({Key? key}) : super(key: key);
+  const _EzrxNumberFilter();
 
   @override
   Widget build(BuildContext context) {
@@ -207,7 +207,7 @@ class _EzrxNumberFilter extends StatelessWidget {
 }
 
 class _SalesOrgByFilter extends StatelessWidget {
-  const _SalesOrgByFilter({Key? key}) : super(key: key);
+  const _SalesOrgByFilter();
 
   @override
   Widget build(BuildContext context) {
@@ -250,7 +250,7 @@ class _SalesOrgByFilter extends StatelessWidget {
 }
 
 class _CustomerCodeByFilter extends StatelessWidget {
-  const _CustomerCodeByFilter({Key? key}) : super(key: key);
+  const _CustomerCodeByFilter();
 
   @override
   Widget build(BuildContext context) {
@@ -291,7 +291,7 @@ class _CustomerCodeByFilter extends StatelessWidget {
 }
 
 class _AdminAttachmentDateFilter extends StatelessWidget {
-  const _AdminAttachmentDateFilter({Key? key}) : super(key: key);
+  const _AdminAttachmentDateFilter();
 
   @override
   Widget build(BuildContext context) {
@@ -344,7 +344,7 @@ class _AdminAttachmentDateFilter extends StatelessWidget {
 }
 
 class _ClearButton extends StatelessWidget {
-  const _ClearButton({Key? key}) : super(key: key);
+  const _ClearButton();
 
   @override
   Widget build(BuildContext context) {
@@ -365,7 +365,7 @@ class _ClearButton extends StatelessWidget {
 }
 
 class _ApplyButton extends StatelessWidget {
-  const _ApplyButton({Key? key}) : super(key: key);
+  const _ApplyButton();
 
   @override
   Widget build(BuildContext context) {

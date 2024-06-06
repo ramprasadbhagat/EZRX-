@@ -5,11 +5,10 @@ class _NextButton extends StatelessWidget {
   final TabController tabController;
   final bool nextAllowed;
   const _NextButton({
-    Key? key,
     required this.validation,
     required this.tabController,
     required this.nextAllowed,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

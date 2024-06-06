@@ -10,11 +10,11 @@ class CustomBadge extends StatelessWidget {
   final VoidCallback onPressed;
   const CustomBadge(
     this.iconData, {
-    Key? key,
+    super.key,
     required this.badgeColor,
     required this.count,
     required this.onPressed,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -27,11 +27,13 @@ class CustomBadge extends StatelessWidget {
               color: ZPColors.white,
             ),
       ),
-      badgeColor: ZPColors.orange,
       showBadge: count > 0,
-      elevation: 0,
+      badgeStyle: const bd.BadgeStyle(
+        badgeColor: ZPColors.orange,
+        elevation: 0,
+      ),
+      badgeAnimation: const bd.BadgeAnimation.fade(),
       position: bd.BadgePosition.topEnd(top: 0, end: 0),
-      animationType: bd.BadgeAnimationType.fade,
       child: IconButton(
         visualDensity: VisualDensity.compact,
         icon: Icon(

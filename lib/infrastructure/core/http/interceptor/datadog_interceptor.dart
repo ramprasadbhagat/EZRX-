@@ -32,7 +32,7 @@ class DatadogInterceptor extends Interceptor {
 
   @override
   Future onError(
-    DioError err,
+    DioException err,
     ErrorInterceptorHandler handler,
   ) async {
     final errorString =

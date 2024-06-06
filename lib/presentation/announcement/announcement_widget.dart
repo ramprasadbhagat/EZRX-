@@ -11,10 +11,10 @@ class AnnouncementBanner extends StatelessWidget {
   final Widget child;
   final String currentPath;
   const AnnouncementBanner({
-    Key? key,
+    super.key,
     required this.child,
     required this.currentPath,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -33,9 +33,9 @@ class AnnouncementWidget extends StatelessWidget {
   final String currentPath;
 
   const AnnouncementWidget({
-    Key? key,
+    super.key,
     required this.currentPath,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

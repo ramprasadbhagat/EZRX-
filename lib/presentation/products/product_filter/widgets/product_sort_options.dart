@@ -1,7 +1,7 @@
 part of 'package:ezrxmobile/presentation/products/product_filter/product_filter_page.dart';
 
 class _ProductSortOptions extends StatelessWidget {
-  const _ProductSortOptions({Key? key}) : super(key: key);
+  const _ProductSortOptions();
 
   @override
   Widget build(BuildContext context) {

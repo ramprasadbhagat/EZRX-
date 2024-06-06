@@ -18,7 +18,7 @@ class ScrollableGridView<T> extends StatefulWidget {
   final double mainAxisSpacing;
 
   const ScrollableGridView({
-    Key? key,
+    super.key,
     required this.isLoading,
     required this.itemBuilder,
     required this.items,
@@ -28,7 +28,7 @@ class ScrollableGridView<T> extends StatefulWidget {
     this.crossAxisSpacing = 12.0,
     this.mainAxisSpacing = 12.0,
     this.noRecordFoundWidget,
-  }) : super(key: key);
+  });
 
   @override
   State<ScrollableGridView> createState() => _ScrollableGridViewState<T>();
@@ -117,9 +117,8 @@ class _ScrollableGridViewState<T> extends State<ScrollableGridView<T>> {
 
 class _LoadingMoreIndicator extends StatelessWidget {
   const _LoadingMoreIndicator({
-    Key? key,
     required this.controller,
-  }) : super(key: key);
+  });
 
   final ScrollController controller;
 

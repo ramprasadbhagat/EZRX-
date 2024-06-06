@@ -20,7 +20,7 @@ class AccountCreditsRobot extends CommonRobot {
   final Finder _itemTile = find.byKey(WidgetKeys.creditsItemTile);
   final Finder _itemGroupDate = find.byKey(WidgetKeys.creditCreatedOn);
 
-  AccountCreditsRobot(WidgetTester tester) : super(tester);
+  AccountCreditsRobot(super.tester);
 
   //Robot Functions
   void verify() {

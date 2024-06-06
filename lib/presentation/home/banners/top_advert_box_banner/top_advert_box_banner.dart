@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class TopAdvertBoxBanner extends StatelessWidget {
-  const TopAdvertBoxBanner({Key? key}) : super(key: key);
+  const TopAdvertBoxBanner({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -11,10 +11,10 @@ class PdfViewPage extends StatelessWidget {
   final String url;
   final String titleText;
   const PdfViewPage({
-    Key? key,
+    super.key,
     this.url = '',
     this.titleText = '',
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

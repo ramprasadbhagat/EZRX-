@@ -10,7 +10,7 @@ enum CustomSnackBarStatus { showing, dismissed, isAppearing, isHiding }
 //ignore: must_be_immutable
 class CustomSnackBar<T> extends StatefulWidget {
   CustomSnackBar({
-    Key? key,
+    super.key,
     required this.messageText,
     this.backgroundColor = ZPColors.backgroundTopSnackBar,
     this.icon = const Icon(
@@ -19,7 +19,7 @@ class CustomSnackBar<T> extends StatefulWidget {
     ),
     this.textStyle,
     this.mainButton,
-  }) : super(key: key);
+  });
 
   final String messageText;
   final Color backgroundColor;
@@ -78,14 +78,13 @@ class _CustomSnackBarState<K extends Object?> extends State<CustomSnackBar<K>> {
 
 class _ActualSnackbar extends StatelessWidget {
   const _ActualSnackbar({
-    Key? key,
     required this.backgroundColor,
     required this.icon,
     required this.messageText,
     required this.dismiss,
     this.mainButton,
     this.textStyle,
-  }) : super(key: key);
+  });
 
   final Color backgroundColor;
   final Widget icon;

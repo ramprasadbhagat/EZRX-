@@ -21,10 +21,10 @@ class CartProductComboItem extends StatelessWidget {
   final ComboDealScheme comboScheme;
 
   const CartProductComboItem({
-    Key? key,
+    super.key,
     required this.comboMaterialItem,
     required this.comboScheme,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -51,10 +51,9 @@ class _MaterialDetailsSection extends StatelessWidget {
   final ComboDealScheme comboScheme;
 
   const _MaterialDetailsSection({
-    Key? key,
     required this.comboMaterialItem,
     required this.comboScheme,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -84,8 +83,7 @@ class _ComboSubTotalSection extends StatelessWidget {
   const _ComboSubTotalSection({
     required this.comboMaterialItem,
     required this.comboScheme,
-    Key? key,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -184,10 +182,9 @@ class _MaterialDetails extends StatelessWidget {
   final ComboDealScheme comboScheme;
 
   const _MaterialDetails({
-    Key? key,
     required this.comboMaterialItem,
     required this.comboScheme,
-  }) : super(key: key);
+  });
 
   bool get _canDisplayDiscountTag => comboScheme.displayDiscountedPrice;
 
@@ -271,8 +268,7 @@ class _MaterialImageSection extends StatelessWidget {
   const _MaterialImageSection({
     required this.comboMaterialItem,
     required this.comboScheme,
-    Key? key,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

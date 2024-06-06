@@ -1,7 +1,7 @@
 part of 'package:ezrxmobile/presentation/account/change_password/change_password_page.dart';
 
 class _SaveClearChangesSection extends StatelessWidget {
-  const _SaveClearChangesSection({Key? key}) : super(key: key);
+  const _SaveClearChangesSection();
 
   @override
   Widget build(BuildContext context) {
@@ -71,7 +71,7 @@ class _SaveClearChangesSection extends StatelessWidget {
 }
 
 class _ValidationsFailedWarning extends StatelessWidget {
-  const _ValidationsFailedWarning({Key? key}) : super(key: key);
+  const _ValidationsFailedWarning();
 
   @override
   Widget build(BuildContext context) {

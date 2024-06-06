@@ -1,7 +1,7 @@
 part of 'package:ezrxmobile/presentation/payments/payment_summary/payment_summary_page.dart';
 
 class _PaymentInProgressLabel extends StatelessWidget {
-  const _PaymentInProgressLabel({Key? key}) : super(key: key);
+  const _PaymentInProgressLabel();
 
   @override
   Widget build(BuildContext context) {

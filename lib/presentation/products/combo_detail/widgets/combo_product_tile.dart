@@ -5,11 +5,10 @@ class _ComboProductTile extends StatelessWidget {
   final bool isMandatory;
   final bool isFixed;
   const _ComboProductTile({
-    Key? key,
     required this.comboItem,
     this.isMandatory = true,
     this.isFixed = false,
-  }) : super(key: key);
+  });
 
   ComboDealMaterial get _comboDealMaterial => comboItem.comboDeal
       .singleDeal(materialNumber: comboItem.getMaterialNumber);

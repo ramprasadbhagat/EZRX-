@@ -11,8 +11,8 @@ class OfferLabel extends StatelessWidget {
   const OfferLabel({
     required this.materialInfo,
     this.iconOnly = false,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {

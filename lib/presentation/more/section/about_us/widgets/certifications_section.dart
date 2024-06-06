@@ -3,9 +3,8 @@ part of 'package:ezrxmobile/presentation/more/section/about_us/about_us_page.dar
 class _OurCertificationsSection extends StatelessWidget {
   final SliderTemplate certifications;
   const _OurCertificationsSection({
-    Key? key,
     required this.certifications,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -41,9 +40,8 @@ class _OurCertificationsSection extends StatelessWidget {
 class _CertificationsItem extends StatelessWidget {
   final Certifications certifications;
   const _CertificationsItem({
-    Key? key,
     required this.certifications,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

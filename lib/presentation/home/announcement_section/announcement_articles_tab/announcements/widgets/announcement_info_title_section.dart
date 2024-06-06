@@ -2,9 +2,8 @@ part of 'package:ezrxmobile/presentation/home/announcement_section/announcement_
 
 class _AnnouncementInfoTitleSection extends StatelessWidget {
   const _AnnouncementInfoTitleSection({
-    Key? key,
     required this.details,
-  }) : super(key: key);
+  });
 
   final AnnouncementInfoDetails details;
 

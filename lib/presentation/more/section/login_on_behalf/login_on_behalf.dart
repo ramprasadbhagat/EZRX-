@@ -1,7 +1,7 @@
 part of 'package:ezrxmobile/presentation/more/more_tab.dart';
 
 class LoginOnBehalf extends StatelessWidget {
-  const LoginOnBehalf({Key? key}) : super(key: key);
+  const LoginOnBehalf({super.key});
 
   @override
   Widget build(BuildContext context) {

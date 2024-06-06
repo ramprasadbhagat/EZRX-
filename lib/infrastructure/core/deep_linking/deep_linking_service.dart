@@ -15,7 +15,7 @@ class DeepLinkingService {
     if (!_initialLinkHandled) {
       // Because init() will be called whenever shipTo changed, this check is to prevent handle
       // the link that open the app more than 1 time
-      final initialUri = await _appLinks.getInitialAppLink();
+      final initialUri = await _appLinks.getInitialLink();
       handleDeepLink(initialUri);
       _initialLinkHandled = true;
     }

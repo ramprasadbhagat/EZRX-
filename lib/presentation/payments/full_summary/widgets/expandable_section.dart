@@ -3,9 +3,8 @@ part of 'package:ezrxmobile/presentation/payments/full_summary/full_summary.dart
 class _ExpandableSection extends StatefulWidget {
   final Widget child;
   const _ExpandableSection({
-    Key? key,
     required this.child,
-  }) : super(key: key);
+  });
 
   @override
   State<_ExpandableSection> createState() => _ExpandableSectionState();

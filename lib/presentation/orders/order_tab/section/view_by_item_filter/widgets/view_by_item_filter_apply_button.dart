@@ -1,7 +1,7 @@
 part of 'package:ezrxmobile/presentation/orders/order_tab/section/view_by_item_filter/view_by_item_filter_sheet.dart';
 
 class _ViewByItemFilterApplyButton extends StatelessWidget {
-  const _ViewByItemFilterApplyButton({Key? key}) : super(key: key);
+  const _ViewByItemFilterApplyButton();
 
   @override
   Widget build(BuildContext context) {

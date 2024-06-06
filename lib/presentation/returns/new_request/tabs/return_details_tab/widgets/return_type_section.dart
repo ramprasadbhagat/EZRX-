@@ -10,13 +10,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ReturnTypeSection extends StatelessWidget {
   const ReturnTypeSection({
-    Key? key,
+    super.key,
     required this.isDisable,
     required this.uuid,
     required this.assignmentNumber,
-  }) : super(
-          key: key,
-        );
+  });
 
   final bool isDisable;
   final String uuid;
@@ -101,8 +99,8 @@ class CustomRadioTile extends StatelessWidget {
           ),
           groupValue: groupValue,
           value: value,
-          fillColor: MaterialStateProperty.resolveWith<Color?>(
-            (Set<MaterialState> states) =>
+          fillColor: WidgetStateProperty.resolveWith<Color?>(
+            (Set<WidgetState> states) =>
                 isDisabled ? ZPColors.lightGray : ZPColors.primary,
           ),
           onChanged: isDisabled

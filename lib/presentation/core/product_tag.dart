@@ -18,7 +18,7 @@ class ProductTag extends StatelessWidget {
   final BorderRadiusGeometry? borderRadius;
   final IconData iconData;
   const ProductTag._({
-    Key? key,
+    super.key,
     required this.labelTag,
     this.hasIcon = false,
     this.assetIconSvg = '',
@@ -30,7 +30,7 @@ class ProductTag extends StatelessWidget {
     this.margin,
     this.padding,
     this.borderRadius,
-  }) : super(key: key);
+  });
 
   factory ProductTag.bundleOffer({TextStyle? labelStyle}) => ProductTag._(
         key: WidgetKeys.bundleTag,

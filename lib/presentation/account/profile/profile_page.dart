@@ -26,7 +26,7 @@ part 'package:ezrxmobile/presentation/account/profile/widgets/user_details.dart'
 part 'package:ezrxmobile/presentation/account/profile/widgets/license_tile.dart';
 
 class ProfilePage extends StatelessWidget {
-  const ProfilePage({Key? key}) : super(key: key);
+  const ProfilePage({super.key});
 
   @override
   Widget build(BuildContext context) {

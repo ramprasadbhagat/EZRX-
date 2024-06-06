@@ -13,7 +13,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 
 class MarketSelector extends StatefulWidget {
-  const MarketSelector({Key? key}) : super(key: key);
+  const MarketSelector({super.key});
 
   @override
   State<MarketSelector> createState() => _MarketSelectorState();

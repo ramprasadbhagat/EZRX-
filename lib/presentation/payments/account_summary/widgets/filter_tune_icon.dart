@@ -4,9 +4,9 @@ class _FilterTuneIcon extends StatelessWidget {
   final String currentActiveTabName;
 
   const _FilterTuneIcon({
-    Key? key,
+    super.key,
     required this.currentActiveTabName,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -65,10 +65,10 @@ class _FilterTuneIcon extends StatelessWidget {
 
 class _FilterElement extends StatelessWidget {
   const _FilterElement({
-    Key? key,
+    super.key,
     required this.isActive,
     required this.appliedFilterCount,
-  }) : super(key: key);
+  });
   final bool isActive;
   final int appliedFilterCount;
 

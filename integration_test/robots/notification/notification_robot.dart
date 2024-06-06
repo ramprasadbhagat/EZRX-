@@ -8,7 +8,7 @@ import 'package:flutter_test/flutter_test.dart';
 import '../common/common_robot.dart';
 
 class NotificationRobot extends CommonRobot {
-  NotificationRobot(WidgetTester tester) : super(tester);
+  NotificationRobot(super.tester);
 
   final deleteButton = find.byKey(WidgetKeys.notificationDeleteButton);
   final items = find.byKey(WidgetKeys.notificationItem);

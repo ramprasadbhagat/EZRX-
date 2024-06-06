@@ -22,7 +22,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ReturnByItemPage extends StatefulWidget {
-  const ReturnByItemPage({Key? key}) : super(key: key);
+  const ReturnByItemPage({super.key});
 
   @override
   State<ReturnByItemPage> createState() => _ReturnByItemPageState();
@@ -106,11 +106,11 @@ class _ReturnItem extends StatelessWidget {
   final bool showDivider;
   final bool showHeader;
   const _ReturnItem({
-    Key? key,
+    super.key,
     required this.data,
     required this.showDivider,
     required this.showHeader,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

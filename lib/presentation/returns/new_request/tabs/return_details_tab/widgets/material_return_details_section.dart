@@ -2,10 +2,10 @@ part of 'package:ezrxmobile/presentation/returns/new_request/tabs/return_details
 
 class _MaterialReturnDetailsSection extends StatelessWidget {
   const _MaterialReturnDetailsSection({
-    Key? key,
+    super.key,
     required this.item,
     required this.detail,
-  }) : super(key: key);
+  });
   final ReturnMaterial item;
   final ReturnItemDetails detail;
 

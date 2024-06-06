@@ -1,7 +1,7 @@
 part of 'package:ezrxmobile/presentation/home/announcement_section/announcement_articles_tab/announcements_page.dart';
 
 class _SearchArticle extends StatelessWidget {
-  const _SearchArticle({Key? key}) : super(key: key);
+  const _SearchArticle();
 
   @override
   Widget build(BuildContext context) {

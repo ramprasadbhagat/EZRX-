@@ -2,10 +2,9 @@ part of 'loading_shimmer.dart';
 
 class _Tile extends StatelessWidget {
   const _Tile({
-    Key? key,
     required this.enabled,
     required this.line,
-  }) : super(key: key);
+  });
   final int line;
   final bool enabled;
 

@@ -13,8 +13,8 @@ class AmountFromFilter extends StatefulWidget {
     required this.amountFrom,
     required this.onAmountFromChanged,
     this.decoration ,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   State<AmountFromFilter> createState() => _AmountFromFilterState();

@@ -8,11 +8,11 @@ class EdgeCheckbox extends StatelessWidget {
   final ValueChanged<bool> onChanged;
 
   const EdgeCheckbox({
-    Key? key,
+    super.key,
     required this.body,
     required this.value,
     required this.onChanged,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -45,9 +45,8 @@ class EdgeCheckbox extends StatelessWidget {
 
 class _SelectedIcon extends StatelessWidget {
   const _SelectedIcon({
-    Key? key,
     required this.visible,
-  }) : super(key: key);
+  });
   final bool visible;
   @override
   Widget build(BuildContext context) {

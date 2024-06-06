@@ -22,7 +22,7 @@ import 'package:ezrxmobile/presentation/core/custom_app_bar.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 
 class PolicyConfigurationPage extends StatelessWidget {
-  const PolicyConfigurationPage({Key? key}) : super(key: key);
+  const PolicyConfigurationPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -76,9 +76,8 @@ class PolicyConfigurationPage extends StatelessWidget {
 
 class _PolicyConfigurationScrollList extends StatelessWidget {
   const _PolicyConfigurationScrollList({
-    Key? key,
     required this.policyConfigurationState,
-  }) : super(key: key);
+  });
 
   final PolicyConfigurationState policyConfigurationState;
 
@@ -114,9 +113,9 @@ class _PolicyConfigurationScrollList extends StatelessWidget {
 
 class PolicyConfigurationListItem extends StatelessWidget {
   const PolicyConfigurationListItem({
-    Key? key,
+    super.key,
     required this.policyConfigurationItem,
-  }) : super(key: key);
+  });
 
   final PolicyConfiguration policyConfigurationItem;
 
@@ -207,7 +206,7 @@ class PolicyConfigurationListItem extends StatelessWidget {
 }
 
 class _PolicyConfigurationSearch extends StatelessWidget {
-  const _PolicyConfigurationSearch({Key? key}) : super(key: key);
+  const _PolicyConfigurationSearch();
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<PolicyConfigurationBloc, PolicyConfigurationState>(

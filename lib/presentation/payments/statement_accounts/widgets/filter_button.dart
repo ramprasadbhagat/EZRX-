@@ -1,7 +1,7 @@
 part of 'package:ezrxmobile/presentation/payments/statement_accounts/statement_accounts.dart';
 
 class _Filter extends StatelessWidget {
-  const _Filter({Key? key}) : super(key: key);
+  const _Filter();
 
   @override
   Widget build(BuildContext context) {

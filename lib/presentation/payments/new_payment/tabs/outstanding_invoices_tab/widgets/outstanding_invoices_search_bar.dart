@@ -1,7 +1,7 @@
 part of 'package:ezrxmobile/presentation/payments/new_payment/tabs/outstanding_invoices_tab/outstanding_invoices_tab.dart';
 
 class _OutstandingInvoicesSearchBar extends StatelessWidget {
-  const _OutstandingInvoicesSearchBar({Key? key}) : super(key: key);
+  const _OutstandingInvoicesSearchBar();
 
   @override
   Widget build(BuildContext context) {

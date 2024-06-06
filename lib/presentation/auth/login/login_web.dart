@@ -26,9 +26,9 @@ class LoginWeb extends StatelessWidget {
   final LoginFormState state;
 
   const LoginWeb({
-    Key? key,
+    super.key,
     required this.state,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -63,10 +63,9 @@ class _LoginBanner extends StatelessWidget {
   final double width;
   final double height;
   const _LoginBanner({
-    Key? key,
     required this.width,
     required this.height,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -153,9 +152,8 @@ class _LoginBanner extends StatelessWidget {
 class _LoginFormWeb extends StatelessWidget {
   final LoginFormState state;
   const _LoginFormWeb({
-    Key? key,
     required this.state,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -223,7 +221,7 @@ class _LoginFormWeb extends StatelessWidget {
 }
 
 class _TermsOfUse extends StatelessWidget {
-  const _TermsOfUse({Key? key}) : super(key: key);
+  const _TermsOfUse();
 
   @override
   Widget build(BuildContext context) {
@@ -249,7 +247,7 @@ class _TermsOfUse extends StatelessWidget {
 }
 
 class _CreateAccount extends StatelessWidget {
-  const _CreateAccount({Key? key}) : super(key: key);
+  const _CreateAccount();
 
   @override
   Widget build(BuildContext context) {
@@ -289,7 +287,7 @@ class _CreateAccount extends StatelessWidget {
 }
 
 class _SSOLogin extends StatelessWidget {
-  const _SSOLogin({Key? key}) : super(key: key);
+  const _SSOLogin({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -332,7 +330,7 @@ class _SSOLogin extends StatelessWidget {
 }
 
 class _Logo extends StatelessWidget {
-  const _Logo({Key? key}) : super(key: key);
+  const _Logo();
 
   @override
   Widget build(BuildContext context) {
@@ -343,7 +341,7 @@ class _Logo extends StatelessWidget {
 }
 
 class _Welcome extends StatelessWidget {
-  const _Welcome({Key? key}) : super(key: key);
+  const _Welcome();
 
   @override
   Widget build(BuildContext context) {

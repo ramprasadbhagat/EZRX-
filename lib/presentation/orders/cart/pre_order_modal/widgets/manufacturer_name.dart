@@ -3,9 +3,8 @@ part of 'package:ezrxmobile/presentation/orders/cart/pre_order_modal/pre_order_m
 class _ManufacturerName extends StatelessWidget {
   final MaterialInfo cartProduct;
   const _ManufacturerName({
-    Key? key,
     required this.cartProduct,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

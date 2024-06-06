@@ -9,12 +9,12 @@ import 'package:flutter/material.dart';
 
 class AttentionSection extends StatefulWidget {
   const AttentionSection({
-    Key? key,
+    super.key,
     required this.widgetKey,
     required this.visible,
     required this.createdTime,
     required this.onCountdownComplete,
-  }) : super(key: key);
+  });
 
   final Key widgetKey;
   final bool visible;

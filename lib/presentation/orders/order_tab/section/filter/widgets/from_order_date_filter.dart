@@ -1,7 +1,7 @@
 part of 'package:ezrxmobile/presentation/orders/order_tab/section/filter/view_by_order_filter.dart';
 
 class _FromOrderDateFilter extends StatelessWidget {
-  const _FromOrderDateFilter({Key? key}) : super(key: key);
+  const _FromOrderDateFilter();
 
   @override
   Widget build(BuildContext context) {

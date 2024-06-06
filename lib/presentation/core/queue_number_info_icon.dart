@@ -6,8 +6,7 @@ import 'package:flutter/material.dart';
 
 class QueueNumberInfoIcon extends StatelessWidget {
   final Color iconColor;
-  const QueueNumberInfoIcon({Key? key, this.iconColor = ZPColors.primary})
-      : super(key: key);
+  const QueueNumberInfoIcon({super.key, this.iconColor = ZPColors.primary});
 
   @override
   Widget build(BuildContext context) {

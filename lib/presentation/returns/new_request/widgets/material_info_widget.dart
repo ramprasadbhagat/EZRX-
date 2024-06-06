@@ -11,10 +11,10 @@ class MaterialInfoWidget extends StatelessWidget {
   final ReturnMaterial data;
 
   const MaterialInfoWidget({
-    Key? key,
+    super.key,
     required this.data,
     this.showMpLogo = false,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

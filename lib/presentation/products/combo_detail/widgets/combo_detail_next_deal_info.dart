@@ -7,11 +7,11 @@ import 'package:flutter/material.dart';
 
 class ComboDetailNextDealInfo extends StatelessWidget {
   const ComboDetailNextDealInfo({
-    Key? key,
+    super.key,
     required this.totalQty,
     required this.comboDeal,
     required this.totalAmount,
-  }) : super(key: key);
+  });
   final int totalQty;
   final double totalAmount;
   final ComboDeal comboDeal;

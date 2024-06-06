@@ -5,10 +5,9 @@ class _OrderSuccessHeader extends StatelessWidget {
   final OrderHistoryDetails orderHeader;
 
   const _OrderSuccessHeader({
-    Key? key,
     required this.orderHistoryList,
     required this.orderHeader,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -143,11 +142,11 @@ class _OrderSuccessHeader extends StatelessWidget {
 
 class _OrderNumberList extends StatelessWidget {
   const _OrderNumberList({
-    Key? key,
+    super.key,
     required this.orderStatus,
     required this.orderNumber,
     this.prefix = '',
-  }) : super(key: key);
+  });
 
   final OrderStepValue orderStatus;
   final List<OrderNumber> orderNumber;
@@ -192,7 +191,7 @@ class _OrderNumberList extends StatelessWidget {
                 ],
               )
               .flattened
-              .toList(),
+              ,
           if (orderStatus.isInQueue)
             const WidgetSpan(
               alignment: PlaceholderAlignment.middle,

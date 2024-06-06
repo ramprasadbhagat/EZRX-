@@ -44,10 +44,10 @@ class BundleDetailPage extends StatefulWidget {
   final MaterialInfo materialInfo;
   final EZReachBanner? banner;
   const BundleDetailPage({
-    Key? key,
+    super.key,
     required this.materialInfo,
     this.banner,
-  }) : super(key: key);
+  });
 
   @override
   State<BundleDetailPage> createState() => _BundleDetailPageState();
@@ -158,9 +158,7 @@ class _BundleDetailPageState extends State<BundleDetailPage> {
 }
 
 class _BundleDetails extends StatelessWidget {
-  const _BundleDetails({
-    Key? key,
-  }) : super(key: key);
+  const _BundleDetails();
 
   @override
   Widget build(BuildContext context) {
@@ -273,7 +271,7 @@ class _BundleDetails extends StatelessWidget {
 }
 
 class _BundleOfferDetails extends StatelessWidget {
-  const _BundleOfferDetails({Key? key}) : super(key: key);
+  const _BundleOfferDetails();
 
   @override
   Widget build(BuildContext context) {
@@ -420,9 +418,8 @@ class _BundleOfferDetails extends StatelessWidget {
 class _AddToCartButton extends StatelessWidget {
   final EZReachBanner? banner;
   const _AddToCartButton({
-    Key? key,
     this.banner,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

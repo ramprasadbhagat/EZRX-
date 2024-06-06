@@ -7,9 +7,9 @@ import 'package:flutter/material.dart';
 
 class BalanceQuantityField extends StatelessWidget {
   const BalanceQuantityField({
-    Key? key,
+    super.key,
     required this.data,
-  }) : super(key: key);
+  });
 
   final ReturnMaterial data;
 

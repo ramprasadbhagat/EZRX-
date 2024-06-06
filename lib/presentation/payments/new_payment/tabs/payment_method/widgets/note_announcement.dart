@@ -1,9 +1,7 @@
 part of 'package:ezrxmobile/presentation/payments/new_payment/tabs/payment_method/payment_method_tab.dart';
 
 class _NoteAnnouncement extends StatelessWidget {
-  const _NoteAnnouncement({
-    Key? key,
-  }) : super(key: key);
+  const _NoteAnnouncement();
 
   @override
   Widget build(BuildContext context) {

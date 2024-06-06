@@ -3,9 +3,8 @@ part of 'package:ezrxmobile/presentation/orders/cart/override/request_counter_of
 class _CounterOfferButtons extends StatelessWidget {
   final PriceAggregate cartItem;
   const _CounterOfferButtons({
-    Key? key,
     required this.cartItem,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

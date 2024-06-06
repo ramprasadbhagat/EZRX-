@@ -4,9 +4,8 @@ class _InvoiceCreditItem extends StatelessWidget {
   final CreditAndInvoiceItem data;
 
   const _InvoiceCreditItem({
-    Key? key,
     required this.data,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

@@ -23,8 +23,8 @@ const _defaultPadding = EdgeInsets.symmetric(horizontal: 15);
 
 class ReturnByItemFilterPage extends StatelessWidget {
   const ReturnByItemFilterPage({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -78,7 +78,7 @@ class ReturnByItemFilterPage extends StatelessWidget {
 }
 
 class _ReturnFilter extends StatelessWidget {
-  const _ReturnFilter({Key? key}) : super(key: key);
+  const _ReturnFilter();
 
   @override
   Widget build(BuildContext context) {
@@ -141,7 +141,7 @@ class _ReturnFilter extends StatelessWidget {
 
 class _FilterSectionLabel extends StatelessWidget {
   final String text;
-  const _FilterSectionLabel(this.text, {Key? key}) : super(key: key);
+  const _FilterSectionLabel(this.text);
 
   @override
   Widget build(BuildContext context) {

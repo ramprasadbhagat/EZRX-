@@ -1,9 +1,7 @@
 part of 'package:ezrxmobile/presentation/payments/payment_advice_created/payment_advice_created_page.dart';
 
 class _PaymentCancelAdviceButton extends StatelessWidget {
-  const _PaymentCancelAdviceButton({
-    Key? key,
-  }) : super(key: key);
+  const _PaymentCancelAdviceButton();
 
   void _showCancelAdviceBottomSheet(BuildContext context) {
     showModalBottomSheet(

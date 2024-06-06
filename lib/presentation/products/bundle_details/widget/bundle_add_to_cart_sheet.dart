@@ -40,9 +40,9 @@ const _horizontalPadding = EdgeInsets.symmetric(horizontal: 20);
 class BundlesAddToCartSheet extends StatelessWidget {
   final EZReachBanner? banner;
   const BundlesAddToCartSheet({
-    Key? key,
+    super.key,
     this.banner,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -108,9 +108,8 @@ class BundlesAddToCartSheet extends StatelessWidget {
 class _BundleMaterialListTile extends StatefulWidget {
   final MaterialInfo materialInfo;
   const _BundleMaterialListTile({
-    Key? key,
     required this.materialInfo,
-  }) : super(key: key);
+  });
 
   @override
   State<_BundleMaterialListTile> createState() =>
@@ -246,7 +245,7 @@ class _BundleMaterialListTileState extends State<_BundleMaterialListTile> {
 
 class _BundleSheetFooter extends StatelessWidget {
   final EZReachBanner? banner;
-  const _BundleSheetFooter({Key? key, this.banner}) : super(key: key);
+  const _BundleSheetFooter({this.banner});
 
   @override
   Widget build(BuildContext context) {

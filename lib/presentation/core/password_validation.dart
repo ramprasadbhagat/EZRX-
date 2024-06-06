@@ -7,7 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class PasswordValidation extends StatelessWidget {
   final User user;
-  const PasswordValidation({Key? key, required this.user}) : super(key: key);
+  const PasswordValidation({super.key, required this.user});
 
   @override
   Widget build(BuildContext context) {
@@ -69,10 +69,9 @@ class _ConditionText extends StatelessWidget {
   final String msgText;
 
   const _ConditionText({
-    Key? key,
     required this.msgText,
     required this.enableGreenTick,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

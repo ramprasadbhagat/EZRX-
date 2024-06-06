@@ -15,7 +15,7 @@ class CustomImage extends StatelessWidget {
   final Widget? placeholder;
   final Widget Function(BuildContext, ImageProvider<Object>)? imageBuilder;
   const CustomImage({
-    Key? key,
+    super.key,
     required this.imageUrl,
     this.height,
     this.width,
@@ -23,7 +23,7 @@ class CustomImage extends StatelessWidget {
     this.errorWidget,
     this.imageBuilder,
     this.placeholder,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -74,10 +74,9 @@ class _ErrorWidget extends StatelessWidget {
   final double width;
 
   const _ErrorWidget({
-    Key? key,
     required this.height,
     required this.width,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

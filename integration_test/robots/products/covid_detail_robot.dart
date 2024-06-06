@@ -6,7 +6,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'product_detail_robot.dart';
 
 class CovidDetailRobot extends ProductDetailRobot {
-  CovidDetailRobot(WidgetTester tester) : super(tester);
+  CovidDetailRobot(super.tester);
   final addToCartErrorSection = find.byKey(WidgetKeys.addToCartErrorSection);
   final cancelCovidMaterialAddToCart = find.byKey(
     WidgetKeys.cancelCovidMaterialAddToCart,

@@ -10,11 +10,10 @@ class ReturnOverrideInfoIcon extends StatelessWidget {
   final String subContent;
 
   const ReturnOverrideInfoIcon._({
-    Key? key,
     required this.header,
     required this.content,
     required this.subContent,
-  }) : super(key: key);
+  });
 
   factory ReturnOverrideInfoIcon.quantity({
     required BuildContext context,
@@ -96,11 +95,10 @@ class _ReturnInfoBottomSheet extends StatelessWidget {
   final String content;
   final String subContent;
   const _ReturnInfoBottomSheet({
-    Key? key,
     required this.header,
     required this.content,
     required this.subContent,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

@@ -30,10 +30,8 @@ import 'package:ezrxmobile/infrastructure/core/okta/okta_login.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:local_auth/local_auth.dart';
-// ignore: depend_on_referenced_packages
 import 'package:local_auth_android/local_auth_android.dart';
-// ignore: depend_on_referenced_packages
-import 'package:local_auth_ios/local_auth_ios.dart';
+import 'package:local_auth_darwin/local_auth_darwin.dart';
 
 class AuthRepository implements IAuthRepository {
   final Config config;

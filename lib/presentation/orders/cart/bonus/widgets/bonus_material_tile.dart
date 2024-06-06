@@ -31,10 +31,10 @@ class BonusMaterialTile extends StatelessWidget {
   final PriceAggregate cartProduct;
 
   const BonusMaterialTile({
-    Key? key,
+    super.key,
     required this.bonusMaterial,
     required this.cartProduct,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -110,8 +110,7 @@ class _MaterialImageSection extends StatelessWidget {
   final MaterialInfo bonusMaterial;
   const _MaterialImageSection({
     required this.bonusMaterial,
-    Key? key,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -136,10 +135,9 @@ class _MaterialQuantitySection extends StatefulWidget {
   final MaterialInfo bonusItem;
   final PriceAggregate cartProduct;
   const _MaterialQuantitySection({
-    Key? key,
     required this.bonusItem,
     required this.cartProduct,
-  }) : super(key: key);
+  });
 
   @override
   State<_MaterialQuantitySection> createState() =>
@@ -240,10 +238,9 @@ class _CartIcon extends StatelessWidget {
   final PriceAggregate cartProduct;
 
   const _CartIcon({
-    Key? key,
     required this.bonusItem,
     required this.cartProduct,
-  }) : super(key: key);
+  });
 
   void _addBonusMaterial(BuildContext context) {
     final bonusItemId = context

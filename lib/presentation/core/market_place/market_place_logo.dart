@@ -5,7 +5,7 @@ import 'package:flutter_svg/svg.dart';
 class MarketPlaceLogo extends StatelessWidget {
   final double? width;
   final double? height;
-  const MarketPlaceLogo({Key? key, this.width, this.height}) : super(key: key);
+  const MarketPlaceLogo({super.key, this.width, this.height});
 
   @override
   Widget build(BuildContext context) {

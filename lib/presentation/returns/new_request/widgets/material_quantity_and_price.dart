@@ -8,10 +8,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class MaterialQuantityAndPrice extends StatelessWidget {
   const MaterialQuantityAndPrice({
-    Key? key,
+    super.key,
     required this.quantity,
     required this.totalPrice,
-  }) : super(key: key);
+  });
 
   final int quantity;
   final double totalPrice;

@@ -2,8 +2,7 @@ part of 'package:ezrxmobile/presentation/orders/cart/checkout/checkout_page.dart
 
 class _ProductScrollList extends StatelessWidget {
   final List<PriceAggregate> listItems;
-  const _ProductScrollList({Key? key, required this.listItems})
-      : super(key: key);
+  const _ProductScrollList({required this.listItems});
 
   @override
   Widget build(BuildContext context) {
@@ -52,11 +51,10 @@ class _CheckoutProductMaterialWithBonus extends StatelessWidget {
   final bool isFirst;
 
   const _CheckoutProductMaterialWithBonus({
-    Key? key,
     required this.cartItem,
     required this.isDifferentSeller,
     required this.isFirst,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -89,14 +87,12 @@ class _CheckoutProductMaterialWithBonus extends StatelessWidget {
           cartItem: cartItem,
         ),
         if (cartItem.sortedBonusList.isNotEmpty)
-          ...cartItem.sortedBonusList
-              .map(
-                (e) => _CheckoutProductBonusItem(
-                  bonusItem: e,
-                  cartProduct: cartItem,
-                ),
-              )
-              .toList(),
+          ...cartItem.sortedBonusList.map(
+            (e) => _CheckoutProductBonusItem(
+              bonusItem: e,
+              cartProduct: cartItem,
+            ),
+          ),
       ],
     );
   }
@@ -104,8 +100,7 @@ class _CheckoutProductMaterialWithBonus extends StatelessWidget {
 
 class _ZPTitleScrollList extends StatelessWidget {
   final MaterialInfo cartProduct;
-  const _ZPTitleScrollList({Key? key, required this.cartProduct})
-      : super(key: key);
+  const _ZPTitleScrollList({required this.cartProduct});
 
   @override
   Widget build(BuildContext context) {
@@ -122,8 +117,7 @@ class _ZPTitleScrollList extends StatelessWidget {
 class _DividerAndMarketPlaceTitle extends StatelessWidget {
   final bool showDivider;
 
-  const _DividerAndMarketPlaceTitle({Key? key, required this.showDivider})
-      : super(key: key);
+  const _DividerAndMarketPlaceTitle({required this.showDivider});
 
   @override
   Widget build(BuildContext context) {
@@ -145,7 +139,7 @@ class _DividerAndMarketPlaceTitle extends StatelessWidget {
 }
 
 class _Divider extends StatelessWidget {
-  const _Divider({Key? key}) : super(key: key);
+  const _Divider();
 
   @override
   Widget build(BuildContext context) {

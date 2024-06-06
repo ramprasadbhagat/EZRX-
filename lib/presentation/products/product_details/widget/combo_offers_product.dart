@@ -20,8 +20,8 @@ class ComboOffersProduct extends StatelessWidget {
 
   const ComboOffersProduct({
     required this.materialNumber,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {

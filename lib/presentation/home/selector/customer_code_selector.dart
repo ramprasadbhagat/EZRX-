@@ -8,7 +8,7 @@ import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 
 class CustomerCodeSelector extends StatelessWidget {
-  const CustomerCodeSelector({Key? key}) : super(key: key);
+  const CustomerCodeSelector({super.key});
 
   @override
   Widget build(BuildContext context) {

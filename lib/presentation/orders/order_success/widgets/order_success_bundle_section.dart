@@ -3,9 +3,8 @@ part of 'package:ezrxmobile/presentation/orders/order_success/order_success_page
 class _OrderSuccessBundleSection extends StatelessWidget {
   final List<ViewByOrdersGroup> bundleItems;
   const _OrderSuccessBundleSection({
-    Key? key,
     required this.bundleItems,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -22,9 +21,8 @@ class _OrderSuccessBundleSection extends StatelessWidget {
 
 class _BundleTile extends StatelessWidget {
   const _BundleTile({
-    Key? key,
     required this.viewByOrdersGroup,
-  }) : super(key: key);
+  });
   final ViewByOrdersGroup viewByOrdersGroup;
 
   @override
@@ -113,7 +111,7 @@ class _BundleTile extends StatelessWidget {
                 const SizedBox(height: 8),
                 ...viewByOrdersGroup.viewByOrderItem
                     .map((e) => _BundleMaterialTile(orderItem: e))
-                    .toList(),
+                    ,
                 const SizedBox(height: 8),
                 Wrap(
                   crossAxisAlignment: WrapCrossAlignment.center,
@@ -145,9 +143,8 @@ class _BundleTile extends StatelessWidget {
 
 class _BundleMaterialTile extends StatelessWidget {
   const _BundleMaterialTile({
-    Key? key,
     required this.orderItem,
-  }) : super(key: key);
+  });
   final OrderHistoryDetailsOrderItem orderItem;
 
   @override

@@ -19,8 +19,8 @@ import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 
 class ReturnRequestSummaryByItemDetails extends StatelessWidget {
   const ReturnRequestSummaryByItemDetails({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {

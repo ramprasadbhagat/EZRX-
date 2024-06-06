@@ -18,7 +18,7 @@ class BalanceTextRow extends StatelessWidget {
   final EdgeInsetsGeometry padding;
 
   const BalanceTextRow({
-    Key? key,
+    super.key,
     required this.keyText,
     required this.valueText,
     this.keyFlex = 1,
@@ -31,7 +31,7 @@ class BalanceTextRow extends StatelessWidget {
       vertical: 2.0,
     ),
     this.statusTextColor = ZPColors.black,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

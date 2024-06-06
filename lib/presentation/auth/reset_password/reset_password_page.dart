@@ -18,7 +18,7 @@ part 'package:ezrxmobile/presentation/auth/reset_password/widgets/reset_password
 part 'package:ezrxmobile/presentation/auth/reset_password/widgets/reset_password_form.dart';
 
 class ResetPasswordPage extends StatelessWidget {
-  const ResetPasswordPage({Key? key}) : super(key: key);
+  const ResetPasswordPage({super.key});
 
   @override
   Widget build(BuildContext context) {

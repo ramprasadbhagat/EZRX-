@@ -15,8 +15,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class MaterialInformation extends StatelessWidget {
   final MaterialInfo materialInfo;
 
-  const MaterialInformation({Key? key, required this.materialInfo})
-      : super(key: key);
+  const MaterialInformation({super.key, required this.materialInfo});
 
   @override
   Widget build(BuildContext context) {
@@ -62,7 +61,7 @@ class MaterialInformation extends StatelessWidget {
 }
 
 class _MaterialInfoDialog extends StatelessWidget {
-  const _MaterialInfoDialog({Key? key}) : super(key: key);
+  const _MaterialInfoDialog();
 
   @override
   Widget build(BuildContext context) {
@@ -214,9 +213,8 @@ class _MaterialInfoDialog extends StatelessWidget {
 
 class _ExpiryDateWidget extends StatelessWidget {
   const _ExpiryDateWidget({
-    Key? key,
     required this.expiryDateText,
-  }) : super(key: key);
+  });
 
   final String expiryDateText;
 

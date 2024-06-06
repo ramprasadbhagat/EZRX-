@@ -22,7 +22,7 @@ class _RequestDateRangePicker extends StatelessWidget {
 }
 
 class _FromRequestDateFilter extends StatelessWidget {
-  const _FromRequestDateFilter({Key? key}) : super(key: key);
+  const _FromRequestDateFilter();
 
   @override
   Widget build(BuildContext context) {
@@ -79,7 +79,7 @@ class _FromRequestDateFilter extends StatelessWidget {
 }
 
 class _ToRequestDateFilter extends StatelessWidget {
-  const _ToRequestDateFilter({Key? key}) : super(key: key);
+  const _ToRequestDateFilter();
 
   @override
   Widget build(BuildContext context) {

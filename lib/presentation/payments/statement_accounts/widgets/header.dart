@@ -1,7 +1,7 @@
 part of 'package:ezrxmobile/presentation/payments/statement_accounts/statement_accounts.dart';
 
 class _Header extends StatelessWidget {
-  const _Header({Key? key}) : super(key: key);
+  const _Header();
 
   @override
   Widget build(BuildContext context) {
