@@ -1881,6 +1881,34 @@ void main() {
       );
 
       testWidgets(
+        ' -> Find suspended message if product is suspended',
+        (WidgetTester tester) async {
+          when(() => productDetailMockBloc.state).thenReturn(
+            ProductDetailState.initial().copyWith(
+              productDetailAggregate: ProductDetailAggregate.empty().copyWith(
+                materialInfo: MaterialInfo.empty().copyWith(
+                  materialNumber: MaterialNumber('00000111111'),
+                  isFavourite: false,
+                  isSuspended: true,
+                  isFOCMaterial: false,
+                ),
+                stockInfo: StockInfo.empty().copyWith(
+                  inStock: MaterialInStock('Yes'),
+                ),
+              ),
+              isDetailFetching: true,
+            ),
+          );
+          await tester.pumpWidget(getScopedWidget());
+          await tester.pump();
+          final suspendedMessage = find.text(
+            "The product is currently suspended. You won't be able to add the product to the cart.",
+          );
+          expect(suspendedMessage, findsOneWidget);
+        },
+      );
+
+      testWidgets(
           'List price strike through price visible, if final price is less than list price && enableListPrice = true',
           (tester) async {
         final finalPrice = MaterialPrice(80);

@@ -625,8 +625,10 @@ class _FooterState extends State<_Footer> {
                   children: [
                     if (materialInfo.isSuspended)
                       InfoLabel(
-                        textValue:
-                            context.tr('This material is currently suspended'),
+                        textValue: context.tr(
+                          "The product is currently suspended. You won't be able to add the product to the cart.",
+                        ),
+                        textColor: ZPColors.infoTextBlueColor,
                         key: WidgetKeys.productDetailSuspended,
                         margin: const EdgeInsets.only(
                           top: 16,
