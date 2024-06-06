@@ -47,6 +47,7 @@ import 'package:ezrxmobile/infrastructure/order/datasource/payment_customer_info
 import 'package:ezrxmobile/infrastructure/order/datasource/view_by_order_local.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/balance_text_row.dart';
+import 'package:ezrxmobile/presentation/core/item_tax.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/market_place/market_place_rectangle_logo.dart';
 import 'package:ezrxmobile/presentation/core/market_place/market_place_seller_title.dart';
@@ -55,7 +56,6 @@ import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/orders/order_tab/view_by_order_details/section/view_by_order_header_section.dart';
 import 'package:ezrxmobile/presentation/orders/order_tab/view_by_order_details/section/view_by_order_item_details_section.dart';
 import 'package:ezrxmobile/presentation/orders/order_tab/view_by_order_details/view_by_order_details.dart';
-import 'package:ezrxmobile/presentation/core/material_tax.dart';
 import 'package:ezrxmobile/presentation/orders/order_tab/widgets/order_item_price.dart';
 import 'package:ezrxmobile/presentation/core/quantity_and_price_with_tax.dart';
 import 'package:ezrxmobile/presentation/orders/widgets/order_bundle_item.dart';
@@ -94,6 +94,7 @@ void main() {
   late AuthBloc mockAuthBloc;
   late AnnouncementBloc announcementBlocMock;
   late AppRouter autoRouterMock;
+
   late EligibilityBlocMock eligibilityBlocMock;
   late CartBlocMock cartBlocMock;
   late ProductImageBloc mockProductImageBloc;
@@ -1151,9 +1152,12 @@ void main() {
             orderHistoryDetailsOrderItem: [
               viewByOrder.orderHeaders.first.orderHistoryDetailsOrderItem.first
                   .copyWith(
-                unitPrice: 892.86,
-                qty: 8231,
-                tax: 109.28,
+                unitPrice: 100,
+                qty: 10,
+                totalUnitPrice: 1000,
+                totalTax: 50,
+                taxRate: 5,
+                totalPrice: 1050,
               ),
             ],
           ),
@@ -1180,15 +1184,15 @@ void main() {
 
       expect(viewByOrderDetailItemsSection, findsOneWidget);
       final totalPriceWithTax = find.textContaining(
-        '8,231,026.34',
+        '1,050',
         findRichText: true,
       );
       final tax = find.textContaining(
-        '(12.0% tax)',
+        '(5.0% tax)',
         findRichText: true,
       );
       final taxAmount = find.textContaining(
-        '881,895.68',
+        'THB 50',
         findRichText: true,
       );
       expect(tax, findsOneWidget);
@@ -1363,7 +1367,7 @@ void main() {
     });
 
     testWidgets(
-        'Order summary section - Hide Tax Rate for other market except VN',
+        'Order summary section - Enable Tax Rate for other market except VN',
         (tester) async {
       when(() => eligibilityBlocMock.state).thenReturn(
         EligibilityState.initial().copyWith(
@@ -1383,7 +1387,7 @@ void main() {
       expect(
         find.descendant(
           of: find.byKey(WidgetKeys.viewByOrderTaxKey),
-          matching: find.text('Tax:'),
+          matching: find.textContaining('Tax at'),
         ),
         findsOneWidget,
       );
@@ -1587,6 +1591,14 @@ void main() {
             ),
           ),
         );
+
+        when(() => viewByOrderDetailsBlocMock.state).thenReturn(
+          ViewByOrderDetailsState.initial().copyWith(
+            orderHistoryDetails:
+                OrderHistoryDetails.empty().copyWith(taxRate: 11),
+          ),
+        );
+
         await tester.pumpWidget(getScopedWidget());
         await tester.pumpAndSettle();
         expect(
@@ -1606,7 +1618,7 @@ void main() {
         expect(
           find.descendant(
             of: find.byKey(WidgetKeys.viewByOrderIdTaxKey),
-            matching: find.text('Tax at 11%:'),
+            matching: find.text('Tax at 11.0%:'),
           ),
           findsOneWidget,
         );
@@ -1697,7 +1709,14 @@ void main() {
       );
       when(() => viewByOrderDetailsBlocMock.state).thenReturn(
         ViewByOrderDetailsState.initial().copyWith(
-          orderHistoryDetails: viewByOrderWithTax.orderHeaders.first,
+          orderHistoryDetails: viewByOrder.orderHeaders.first.copyWith(
+            orderHistoryDetailsOrderItem: [
+              viewByOrder.orderHeaders.first.orderHistoryDetailsOrderItem.first
+                  .copyWith(
+                totalUnitPrice: 50,
+              ),
+            ],
+          ),
         ),
       );
 
@@ -1710,7 +1729,7 @@ void main() {
       );
       final quantityAndPriceWithTax = find.byType(QuantityAndPriceWithTax);
       expect(quantityAndPriceWithTax, findsOneWidget);
-      final materialTax = find.byType(MaterialTax);
+      final materialTax = find.byType(ItemTax);
       expect(materialTax, findsOneWidget);
     });
 
@@ -1747,7 +1766,7 @@ void main() {
       );
       final quantityAndPriceWithTax = find.byType(QuantityAndPriceWithTax);
       expect(quantityAndPriceWithTax, findsOneWidget);
-      final materialTax = find.byType(MaterialTax);
+      final materialTax = find.byType(ItemTax);
       expect(materialTax, findsNothing);
     });
 
@@ -2113,7 +2132,7 @@ void main() {
     });
 
     testWidgets(
-        'Test Bundle Order, Grand total and Sub total only with displaySubtotalTaxBreakdown is disabled ',
+        'Test Bundle Order, Test Grand total and Sub total value only with displaySubtotalTaxBreakdown is disabled ',
         (tester) async {
       when(() => eligibilityBlocMock.state).thenReturn(
         EligibilityState.initial().copyWith(
@@ -2132,7 +2151,7 @@ void main() {
         ViewByOrderDetailsState.initial().copyWith(
           orderHistoryDetails: OrderHistoryDetails.empty().copyWith(
             orderNumber: OrderNumber('Fake-Order-Number'),
-            orderValue: 990.0,
+            orderValue: 1089.0,
             totalTax: 99.0,
             totalValue: 1089.00,
             orderHistoryDetailsOrderItem: bundleList,
@@ -2743,8 +2762,7 @@ void main() {
       );
     });
 
-    testWidgets('Show IRN when enableIRN is true',
-        (tester) async {
+    testWidgets('Show IRN when enableIRN is true', (tester) async {
       const iRNNumber = '12C 234/11';
 
       when(() => eligibilityBlocMock.state).thenReturn(
@@ -2777,8 +2795,7 @@ void main() {
       expect(find.textContaining(iRNNumber), findsOneWidget);
     });
 
-    testWidgets('Do not show IRN when enableIRN is false',
-        (tester) async {
+    testWidgets('Do not show IRN when enableIRN is false', (tester) async {
       const iRNNumber = '12C 234/11';
 
       when(() => eligibilityBlocMock.state).thenReturn(

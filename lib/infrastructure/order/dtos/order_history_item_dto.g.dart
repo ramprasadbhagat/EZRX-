@@ -54,6 +54,9 @@ _$OrderHistoryItemDtoImpl _$$OrderHistoryItemDtoImplFromJson(
       tenderPrice: json['TenderPrice'] as String? ?? '',
       isTenderExpired: json['isTenderExpire'] as bool? ?? false,
       isCovid: json['isCovid'] as bool? ?? false,
+      totalUnitPrice: (json['TotalUnitPrice'] as num?)?.toDouble() ?? 0.0,
+      totalTax: (json['TotalTax'] as num?)?.toDouble() ?? 0.0,
+      taxRate: (handleTax(json, 'TaxRate') as num).toDouble(),
     );
 
 Map<String, dynamic> _$$OrderHistoryItemDtoImplToJson(
@@ -102,4 +105,7 @@ Map<String, dynamic> _$$OrderHistoryItemDtoImplToJson(
       'TenderPrice': instance.tenderPrice,
       'isTenderExpire': instance.isTenderExpired,
       'isCovid': instance.isCovid,
+      'TotalUnitPrice': instance.totalUnitPrice,
+      'TotalTax': instance.totalTax,
+      'TaxRate': instance.taxRate,
     };

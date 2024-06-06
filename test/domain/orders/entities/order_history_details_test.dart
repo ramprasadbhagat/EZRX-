@@ -29,6 +29,9 @@ void main() async {
     orderValue: 19,
   );
 
+  final zpOrderInclTax = zpOrder.copyWith(orderValue: 10);
+  final mpOrderInclTax = zpOrder.copyWith(orderValue: 20);
+
   group('OrderHistoryDetails list', () {
     test(
       'Get only zp orders',
@@ -88,7 +91,7 @@ void main() async {
     test(
       'Subtotal include tax',
       () => expect(
-        [zpOrder, mpOrder].subtotal(false),
+        [zpOrderInclTax, mpOrderInclTax].subtotal,
         zpOrder.totalValue + mpOrder.totalValue,
       ),
     );
@@ -96,7 +99,7 @@ void main() async {
     test(
       'Subtotal exclude tax',
       () => expect(
-        [zpOrder, mpOrder].subtotal(true),
+        [zpOrder, mpOrder].subtotal,
         zpOrder.orderValue + mpOrder.orderValue,
       ),
     );

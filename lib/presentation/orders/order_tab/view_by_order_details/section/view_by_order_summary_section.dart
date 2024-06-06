@@ -38,23 +38,21 @@ class OrderSummarySection extends StatelessWidget {
           const SizedBox(
             height: 20,
           ),
+          //on order detail as there is single entity we can directly fetch subtotal value as order value
           _PriceTile(
             key: WidgetKeys.viewByOrderSubtotalKey,
             orderNumber: orderDetails.orderNumber,
             title: context.tr(
               'Subtotal (${eligibilityState.salesOrgConfigs.displayPrefixTax}.tax)',
             ),
-            value: orderDetails.subTotal(
-              eligibilityState.salesOrgConfigs.displaySubtotalTaxBreakdown,
-            ),
+            value: orderDetails.orderValue,
           ),
           if (eligibilityState.salesOrg.isID) ...[
             const SizedBox(height: 10),
             _PriceTile(
               key: WidgetKeys.viewByOrderIdTaxKey,
               orderNumber: orderDetails.orderNumber,
-              title:
-                  '${context.tr('Tax at')} ${salesOrgConfigs.vatValue}%',
+              title: '${context.tr('Tax at')} ${orderDetails.taxRate}%',
               value: orderDetails.totalTax,
             ),
             const SizedBox(height: 10),
@@ -103,7 +101,9 @@ class OrderSummarySection extends StatelessWidget {
               _PriceTile(
                 key: WidgetKeys.viewByOrderTaxKey,
                 orderNumber: orderDetails.orderNumber,
-                title: context.tr('Tax'),
+                title: eligibilityState.salesOrg.isMaterialTax
+                    ? context.tr('Tax')
+                    : '${context.tr('Tax at')} ${orderDetails.taxRate}%',
                 value: orderDetails.totalTax,
               ),
             const SizedBox(

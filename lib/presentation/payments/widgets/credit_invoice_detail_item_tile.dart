@@ -37,6 +37,11 @@ class CreditInvoiceDetailItemTile extends StatelessWidget {
         taxValue: customerDocumentDetail.taxAmount,
         quantity: customerDocumentDetail.billingQuantity.getOrDefaultValue(0),
         taxPercentage: customerDocumentDetail.taxPercent,
+        //TODO: will comeback and refactor totalPrice also need to investigate, can we get the value from grossAmount
+        totalPrice:
+            (double.tryParse(customerDocumentDetail.netPriceText) ?? 0) +
+                customerDocumentDetail.taxAmount,
+
         netPrice: customerDocumentDetail.netPriceText,
       ),
       priceComponent: customerDocumentDetail.isNotFree

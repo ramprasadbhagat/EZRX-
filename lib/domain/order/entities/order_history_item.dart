@@ -1,5 +1,4 @@
 import 'package:collection/collection.dart';
-import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/product_images/entities/product_images.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
@@ -59,6 +58,9 @@ class OrderHistoryItem with _$OrderHistoryItem {
     required bool isCovid,
     required bool isTenderExpired,
     required ItemRegistrationNumber itemRegistrationNumber,
+    required double totalUnitPrice,
+    required double totalTax,
+    required double taxRate,
   }) = _OrderHistoryItem;
 
   factory OrderHistoryItem.empty() => OrderHistoryItem(
@@ -104,6 +106,9 @@ class OrderHistoryItem with _$OrderHistoryItem {
         tenderOrderReason: TenderContractReason(''),
         isTenderExpired: false,
         isCovid: false,
+        taxRate: 0,
+        totalTax: 0,
+        totalUnitPrice: 0,
       );
 
   bool get isOfferItem => !isBundle && !isBonusMaterial && promoStatus;
@@ -112,18 +117,6 @@ class OrderHistoryItem with _$OrderHistoryItem {
 
   StringValue get hashId => StringValue(
         '${orderNumber.value.getOrElse(() => '')}${lineNumber.value.getOrElse(() => '')}',
-      );
-
-  OrderHistoryItem copyWithTaxCal({
-    required SalesOrganisationConfigs salesOrganisationConfigs,
-  }) =>
-      copyWith(
-        totalPrice: salesOrganisationConfigs.taxDisplayForOrderHistoryMaterial
-            ? totalPrice + tax
-            : totalPrice,
-        unitPrice: salesOrganisationConfigs.taxDisplayForOrderHistoryMaterial
-            ? unitPrice + tax / qty
-            : unitPrice,
       );
 
   MaterialInfo get reOrderMaterialInfo => MaterialInfo.empty().copyWith(
@@ -147,13 +140,10 @@ class OrderHistoryItem with _$OrderHistoryItem {
       );
 
   String itemTotalNetPrice(
-    bool showItemTotalExcludingTax,
     bool isIDMarket,
   ) =>
       _itemPrice(
-        showItemTotalExcludingTax
-            ? unitPrice * qty //item total price excl tax
-            : totalPrice, //item total price incl tax
+        totalUnitPrice,
         isIDMarket,
       );
 
@@ -194,9 +184,6 @@ class OrderHistoryItem with _$OrderHistoryItem {
         if (showIRNPart && itemRegistrationNumber.isValidIRN)
           itemRegistrationNumber.getValue(),
       ].join(' | ');
-
-  double get taxPercentage =>
-      unitPrice == 0 ? 0 : (tax * 100 / unitPrice).roundToDouble();
 
   String get manufacturerPrefix => isMarketPlace ? 'Sold by' : '';
 

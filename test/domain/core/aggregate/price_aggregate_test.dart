@@ -1917,7 +1917,7 @@ void main() {
     );
 
     test(
-      'PriceAggregate itemTaxPercent displayItemTaxBreakdown is not active',
+      'PriceAggregate itemTaxPercent still active if displayItemTaxBreakdown false',
       () {
         final customPriceAggregate = emptyPriceAggregate.copyWith(
           materialInfo: emptyMaterialInfo.copyWith(
@@ -1928,9 +1928,10 @@ void main() {
           ),
           salesOrgConfig: fakeTWSalesOrgConfigs,
         );
+        //please note it will take from vat value, i.e 10
         expect(
           customPriceAggregate.itemTaxPercent,
-          0.0,
+          10.0,
         );
       },
     );

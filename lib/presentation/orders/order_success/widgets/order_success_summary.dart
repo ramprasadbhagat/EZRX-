@@ -42,8 +42,7 @@ class _OrderSuccessSummary extends StatelessWidget {
                 ),
                 PriceComponent(
                   salesOrgConfig: eligibilityState.salesOrgConfigs,
-                  price:
-                      '${orderHistoryDetailList.zpOrderOnly.subtotal(eligibilityState.salesOrgConfigs.displaySubtotalTaxBreakdown)}',
+                  price: '${orderHistoryDetailList.zpOrderOnly.subtotal}',
                 ),
               ],
             ),
@@ -62,8 +61,7 @@ class _OrderSuccessSummary extends StatelessWidget {
                 ),
                 PriceComponent(
                   salesOrgConfig: eligibilityState.salesOrgConfigs,
-                  price:
-                      '${orderHistoryDetailList.mpOrderOnly.subtotal(eligibilityState.salesOrgConfigs.displaySubtotalTaxBreakdown)}',
+                  price: '${orderHistoryDetailList.mpOrderOnly.subtotal}',
                 ),
               ],
             ),
@@ -84,8 +82,7 @@ class _OrderSuccessSummary extends StatelessWidget {
               ),
               PriceComponent(
                 salesOrgConfig: eligibilityState.salesOrgConfigs,
-                price:
-                    '${orderHistoryDetailList.subtotal(eligibilityState.salesOrgConfigs.displaySubtotalTaxBreakdown)}',
+                price: '${orderHistoryDetailList.subtotal}',
               ),
             ],
           ),
@@ -97,9 +94,9 @@ class _OrderSuccessSummary extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    eligibilityState.salesOrg.isVN
+                    eligibilityState.salesOrg.isMaterialTax
                         ? '${context.tr('Tax')}:'
-                        : '${context.tr('Tax at')} ${eligibilityState.salesOrgConfigs.vatValue}%:',
+                        : '${context.tr('Tax at')} ${orderHistoryDetailList.firstOrNull?.taxRate}%:',
                     style: Theme.of(context).textTheme.titleSmall,
                   ),
                   PriceComponent(

@@ -359,21 +359,20 @@ class PriceAggregate with _$PriceAggregate {
   double get finalPriceTotalWithTax => finalPriceTotal + itemTax;
 
   double get itemTaxPercent {
-    if (!salesOrgConfig.displayItemTaxBreakdown ||
-        materialInfo.taxClassification.isNoTax) {
+    if (materialInfo.taxClassification.isNoTax) {
       return 0.0;
     }
-    final salesOrg = salesOrgConfig.salesOrg;
 
-    if (salesOrg.isVN) {
+    if (salesOrgConfig.salesOrg.isMaterialTax) {
       return materialInfo.tax;
     }
 
     return salesOrgConfig.vatValue.toDouble();
   }
 
-  String get itemTaxPercentPadded =>
-      itemTaxPercent.toString().replaceAll(RegExp(r'([.]*0)(?!.*\d)'), '');
+  double get itemTaxPercentPadded => double.parse(
+        itemTaxPercent.toString().replaceAll(RegExp(r'([.]*0)(?!.*\d)'), ''),
+      );
 
   double get itemTax {
     final tax = (finalPriceTotal * itemTaxPercent) / 100;
@@ -385,7 +384,7 @@ class PriceAggregate with _$PriceAggregate {
     return tax;
   }
 
-  double get individualItemTax => (finalPrice * itemTaxPercent) / 100;
+  double get individualItemTax => (_priceSubmitted * itemTaxPercent) / 100;
 
   double get totalVatForBundle =>
       salesOrgConfig.shouldShowTax ? salesOrgConfig.vatValue / 100 : 0.0;

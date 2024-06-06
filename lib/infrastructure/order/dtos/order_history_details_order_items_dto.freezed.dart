@@ -87,6 +87,12 @@ mixin _$OrderHistoryDetailsOrderItemDto {
   bool get isMarketPlace => throw _privateConstructorUsedError;
   @JsonKey(name: 'isCovid', defaultValue: false)
   bool get isCovid => throw _privateConstructorUsedError;
+  @JsonKey(name: 'TotalUnitPrice', defaultValue: 0.0)
+  double get totalUnitPrice => throw _privateConstructorUsedError;
+  @JsonKey(name: 'TotalTax', defaultValue: 0.0)
+  double get totalTax => throw _privateConstructorUsedError;
+  @JsonKey(name: 'TaxRate', readValue: handleTax)
+  double get taxRate => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -148,7 +154,10 @@ abstract class $OrderHistoryDetailsOrderItemDtoCopyWith<$Res> {
       @JsonKey(name: 'HidePrice', defaultValue: false) bool hidePrice,
       @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
       bool isMarketPlace,
-      @JsonKey(name: 'isCovid', defaultValue: false) bool isCovid});
+      @JsonKey(name: 'isCovid', defaultValue: false) bool isCovid,
+      @JsonKey(name: 'TotalUnitPrice', defaultValue: 0.0) double totalUnitPrice,
+      @JsonKey(name: 'TotalTax', defaultValue: 0.0) double totalTax,
+      @JsonKey(name: 'TaxRate', readValue: handleTax) double taxRate});
 
   $OrderHistoryDetailsTenderContractDtoCopyWith<$Res> get tenderContractDetails;
 }
@@ -196,6 +205,9 @@ class _$OrderHistoryDetailsOrderItemDtoCopyWithImpl<$Res,
     Object? hidePrice = null,
     Object? isMarketPlace = null,
     Object? isCovid = null,
+    Object? totalUnitPrice = null,
+    Object? totalTax = null,
+    Object? taxRate = null,
   }) {
     return _then(_value.copyWith(
       type: null == type
@@ -314,6 +326,18 @@ class _$OrderHistoryDetailsOrderItemDtoCopyWithImpl<$Res,
           ? _value.isCovid
           : isCovid // ignore: cast_nullable_to_non_nullable
               as bool,
+      totalUnitPrice: null == totalUnitPrice
+          ? _value.totalUnitPrice
+          : totalUnitPrice // ignore: cast_nullable_to_non_nullable
+              as double,
+      totalTax: null == totalTax
+          ? _value.totalTax
+          : totalTax // ignore: cast_nullable_to_non_nullable
+              as double,
+      taxRate: null == taxRate
+          ? _value.taxRate
+          : taxRate // ignore: cast_nullable_to_non_nullable
+              as double,
     ) as $Val);
   }
 
@@ -383,7 +407,10 @@ abstract class _$$OrderHistoryDetailsOrderItemDtoImplCopyWith<$Res>
       @JsonKey(name: 'HidePrice', defaultValue: false) bool hidePrice,
       @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
       bool isMarketPlace,
-      @JsonKey(name: 'isCovid', defaultValue: false) bool isCovid});
+      @JsonKey(name: 'isCovid', defaultValue: false) bool isCovid,
+      @JsonKey(name: 'TotalUnitPrice', defaultValue: 0.0) double totalUnitPrice,
+      @JsonKey(name: 'TotalTax', defaultValue: 0.0) double totalTax,
+      @JsonKey(name: 'TaxRate', readValue: handleTax) double taxRate});
 
   @override
   $OrderHistoryDetailsTenderContractDtoCopyWith<$Res> get tenderContractDetails;
@@ -431,6 +458,9 @@ class __$$OrderHistoryDetailsOrderItemDtoImplCopyWithImpl<$Res>
     Object? hidePrice = null,
     Object? isMarketPlace = null,
     Object? isCovid = null,
+    Object? totalUnitPrice = null,
+    Object? totalTax = null,
+    Object? taxRate = null,
   }) {
     return _then(_$OrderHistoryDetailsOrderItemDtoImpl(
       type: null == type
@@ -549,6 +579,18 @@ class __$$OrderHistoryDetailsOrderItemDtoImplCopyWithImpl<$Res>
           ? _value.isCovid
           : isCovid // ignore: cast_nullable_to_non_nullable
               as bool,
+      totalUnitPrice: null == totalUnitPrice
+          ? _value.totalUnitPrice
+          : totalUnitPrice // ignore: cast_nullable_to_non_nullable
+              as double,
+      totalTax: null == totalTax
+          ? _value.totalTax
+          : totalTax // ignore: cast_nullable_to_non_nullable
+              as double,
+      taxRate: null == taxRate
+          ? _value.taxRate
+          : taxRate // ignore: cast_nullable_to_non_nullable
+              as double,
     ));
   }
 }
@@ -611,7 +653,11 @@ class _$OrderHistoryDetailsOrderItemDtoImpl
       @JsonKey(name: 'HidePrice', defaultValue: false) required this.hidePrice,
       @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
       required this.isMarketPlace,
-      @JsonKey(name: 'isCovid', defaultValue: false) required this.isCovid})
+      @JsonKey(name: 'isCovid', defaultValue: false) required this.isCovid,
+      @JsonKey(name: 'TotalUnitPrice', defaultValue: 0.0)
+      required this.totalUnitPrice,
+      @JsonKey(name: 'TotalTax', defaultValue: 0.0) required this.totalTax,
+      @JsonKey(name: 'TaxRate', readValue: handleTax) required this.taxRate})
       : _details = details,
         super._();
 
@@ -718,10 +764,19 @@ class _$OrderHistoryDetailsOrderItemDtoImpl
   @override
   @JsonKey(name: 'isCovid', defaultValue: false)
   final bool isCovid;
+  @override
+  @JsonKey(name: 'TotalUnitPrice', defaultValue: 0.0)
+  final double totalUnitPrice;
+  @override
+  @JsonKey(name: 'TotalTax', defaultValue: 0.0)
+  final double totalTax;
+  @override
+  @JsonKey(name: 'TaxRate', readValue: handleTax)
+  final double taxRate;
 
   @override
   String toString() {
-    return 'OrderHistoryDetailsOrderItemDto(type: $type, materialNumber: $materialNumber, materialDescription: $materialDescription, qty: $qty, unitPrice: $unitPrice, originPrice: $originPrice, totalPrice: $totalPrice, tax: $tax, sAPStatus: $sAPStatus, plannedDeliveryDate: $plannedDeliveryDate, pickedQuantity: $pickedQuantity, batch: $batch, expiryDate: $expiryDate, lineReferenceNotes: $lineReferenceNotes, lineNumber: $lineNumber, isTenderContractMaterial: $isTenderContractMaterial, parentId: $parentId, details: $details, tenderContractDetails: $tenderContractDetails, principalName: $principalName, principalCode: $principalCode, governmentMaterialCode: $governmentMaterialCode, itemRegistrationNumber: $itemRegistrationNumber, productType: $productType, promosStatus: $promosStatus, isCounterOffer: $isCounterOffer, hidePrice: $hidePrice, isMarketPlace: $isMarketPlace, isCovid: $isCovid)';
+    return 'OrderHistoryDetailsOrderItemDto(type: $type, materialNumber: $materialNumber, materialDescription: $materialDescription, qty: $qty, unitPrice: $unitPrice, originPrice: $originPrice, totalPrice: $totalPrice, tax: $tax, sAPStatus: $sAPStatus, plannedDeliveryDate: $plannedDeliveryDate, pickedQuantity: $pickedQuantity, batch: $batch, expiryDate: $expiryDate, lineReferenceNotes: $lineReferenceNotes, lineNumber: $lineNumber, isTenderContractMaterial: $isTenderContractMaterial, parentId: $parentId, details: $details, tenderContractDetails: $tenderContractDetails, principalName: $principalName, principalCode: $principalCode, governmentMaterialCode: $governmentMaterialCode, itemRegistrationNumber: $itemRegistrationNumber, productType: $productType, promosStatus: $promosStatus, isCounterOffer: $isCounterOffer, hidePrice: $hidePrice, isMarketPlace: $isMarketPlace, isCovid: $isCovid, totalUnitPrice: $totalUnitPrice, totalTax: $totalTax, taxRate: $taxRate)';
   }
 
   @override
@@ -781,7 +836,12 @@ class _$OrderHistoryDetailsOrderItemDtoImpl
                 other.hidePrice == hidePrice) &&
             (identical(other.isMarketPlace, isMarketPlace) ||
                 other.isMarketPlace == isMarketPlace) &&
-            (identical(other.isCovid, isCovid) || other.isCovid == isCovid));
+            (identical(other.isCovid, isCovid) || other.isCovid == isCovid) &&
+            (identical(other.totalUnitPrice, totalUnitPrice) ||
+                other.totalUnitPrice == totalUnitPrice) &&
+            (identical(other.totalTax, totalTax) ||
+                other.totalTax == totalTax) &&
+            (identical(other.taxRate, taxRate) || other.taxRate == taxRate));
   }
 
   @JsonKey(ignore: true)
@@ -816,7 +876,10 @@ class _$OrderHistoryDetailsOrderItemDtoImpl
         isCounterOffer,
         hidePrice,
         isMarketPlace,
-        isCovid
+        isCovid,
+        totalUnitPrice,
+        totalTax,
+        taxRate
       ]);
 
   @JsonKey(ignore: true)
@@ -897,7 +960,13 @@ abstract class _OrderHistoryDetailsOrderItemDto
       @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
       required final bool isMarketPlace,
       @JsonKey(name: 'isCovid', defaultValue: false)
-      required final bool isCovid}) = _$OrderHistoryDetailsOrderItemDtoImpl;
+      required final bool isCovid,
+      @JsonKey(name: 'TotalUnitPrice', defaultValue: 0.0)
+      required final double totalUnitPrice,
+      @JsonKey(name: 'TotalTax', defaultValue: 0.0)
+      required final double totalTax,
+      @JsonKey(name: 'TaxRate', readValue: handleTax)
+      required final double taxRate}) = _$OrderHistoryDetailsOrderItemDtoImpl;
   const _OrderHistoryDetailsOrderItemDto._() : super._();
 
   factory _OrderHistoryDetailsOrderItemDto.fromJson(Map<String, dynamic> json) =
@@ -996,6 +1065,15 @@ abstract class _OrderHistoryDetailsOrderItemDto
   @override
   @JsonKey(name: 'isCovid', defaultValue: false)
   bool get isCovid;
+  @override
+  @JsonKey(name: 'TotalUnitPrice', defaultValue: 0.0)
+  double get totalUnitPrice;
+  @override
+  @JsonKey(name: 'TotalTax', defaultValue: 0.0)
+  double get totalTax;
+  @override
+  @JsonKey(name: 'TaxRate', readValue: handleTax)
+  double get taxRate;
   @override
   @JsonKey(ignore: true)
   _$$OrderHistoryDetailsOrderItemDtoImplCopyWith<

@@ -25,6 +25,7 @@ query orderHistoryQuery($soldTo: String!, $language: String, $searchKey: String,
       TelephoneNumber
       POReference
       TotalTax
+      TaxRate
       ReferenceNotes
       TotalValue
       SpecialInstructions
@@ -56,12 +57,15 @@ query orderHistoryQuery($soldTo: String!, $language: String, $searchKey: String,
         Qty
         PickedQuantity
         UnitPrice
+        TotalUnitPrice
         TotalPrice
         LineReferenceNotes
         Batch
         ExpiryDate
         SAPStatus
         Tax
+        TotalTax
+        TaxRate
         taxClassification
         ParentID
         PlannedDeliveryDate

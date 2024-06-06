@@ -60,6 +60,7 @@ class ViewByOrderDetailsQueryMutation {
       TelephoneNumber
       POReference
       TotalTax
+      TaxRate
       ReferenceNotes
       TotalValue
       SpecialInstructions
@@ -96,6 +97,7 @@ class ViewByOrderDetailsQueryMutation {
         Qty
         PickedQuantity
         UnitPrice
+        TotalUnitPrice
         TotalPrice
         LineReferenceNotes
         LineNumber
@@ -103,6 +105,8 @@ class ViewByOrderDetailsQueryMutation {
         ExpiryDate
         SAPStatus
         Tax
+        TotalTax
+        TaxRate
         taxClassification
         ParentID
         PlannedDeliveryDate

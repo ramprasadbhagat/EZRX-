@@ -1,4 +1,3 @@
-import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/bonus_sample_item.dart';
@@ -56,14 +55,6 @@ class OrderHistoryDetailsBonusAggregate
           contractReference: StringValue(
             tenderContractDetails.contractReference,
           ),
-        ),
-      );
-  OrderHistoryDetailsBonusAggregate copyWithTaxCal({
-    required SalesOrganisationConfigs salesOrganisationConfigs,
-  }) =>
-      copyWith(
-        orderItem: orderItem.copyWithTaxCal(
-          salesOrganisationConfigs: salesOrganisationConfigs,
         ),
       );
 }

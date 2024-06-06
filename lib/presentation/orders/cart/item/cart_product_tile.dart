@@ -18,7 +18,7 @@ import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dar
 import 'package:ezrxmobile/presentation/core/price_component.dart';
 import 'package:ezrxmobile/presentation/orders/cart/item/cart_product_tile_widgets/cart_product_tender_contract_section.dart';
 import 'package:ezrxmobile/presentation/orders/cart/override/request_counter_offer_bottom_sheet.dart';
-import 'package:ezrxmobile/presentation/orders/cart/widget/item_tax.dart';
+import 'package:ezrxmobile/presentation/core/item_tax.dart';
 import 'package:ezrxmobile/presentation/core/pre_order_label.dart';
 import 'package:ezrxmobile/presentation/products/widgets/offer_label.dart';
 import 'package:ezrxmobile/presentation/products/widgets/stock_info.dart';
@@ -210,7 +210,9 @@ class _ItemSubTotalSection extends StatelessWidget {
                 ),
                 _LoadingShimmerWithChild(
                   child: ItemTax(
-                    cartItem: cartProduct,
+                    finalPriceTotalWithTax: cartProduct.finalPriceTotalWithTax,
+                    itemTax: cartProduct.itemTax,
+                    itemTaxPercent: cartProduct.itemTaxPercentPadded,
                   ),
                 ),
               ],

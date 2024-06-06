@@ -27,9 +27,10 @@ class ViewByItemOrderItemTile extends StatelessWidget {
       ),
       footerWidget: QuantityAndPriceWithTax.order(
         quantity: orderHistoryItem.qty,
-        taxPercentage: orderHistoryItem.taxPercentage,
+        taxValue: orderHistoryItem.totalTax,
+        totalPrice: orderHistoryItem.totalPrice,
+        taxPercentage: orderHistoryItem.taxRate,
         netPrice: orderHistoryItem.itemTotalNetPrice(
-          eligibilityState.salesOrgConfigs.displayItemTaxBreakdown,
           eligibilityState.salesOrg.isID,
         ),
         isTopAlignment: true,

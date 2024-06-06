@@ -11,7 +11,7 @@ import 'package:ezrxmobile/presentation/core/price_component.dart';
 import 'package:ezrxmobile/presentation/core/responsive.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/orders/cart/item/cart_product_tile_widgets/cart_product_tender_contract_section.dart';
-import 'package:ezrxmobile/presentation/orders/cart/widget/item_tax.dart';
+import 'package:ezrxmobile/presentation/core/item_tax.dart';
 import 'package:ezrxmobile/presentation/core/pre_order_label.dart';
 import 'package:ezrxmobile/presentation/products/widgets/offer_label.dart';
 import 'package:ezrxmobile/presentation/products/widgets/stock_info.dart';
@@ -262,7 +262,9 @@ class _QuantityAndPrice extends StatelessWidget {
                   ),
                   if (cartItem.showTaxBreakDown)
                     ItemTax(
-                      cartItem: cartItem,
+                      finalPriceTotalWithTax: cartItem.finalPriceTotalWithTax,
+                      itemTax: cartItem.itemTax,
+                      itemTaxPercent: cartItem.itemTaxPercentPadded,
                     ),
                 ],
               ),

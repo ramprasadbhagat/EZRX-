@@ -2,7 +2,6 @@ import 'package:ezrxmobile/domain/order/entities/order_history.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_item.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:flutter_test/flutter_test.dart';
-import '../../../common_mock_data/sales_org_config_mock/fake_id_sales_org_config.dart';
 
 void main() async {
   TestWidgetsFlutterBinding.ensureInitialized();
@@ -56,13 +55,26 @@ void main() async {
       });
       test('netPrice calculation test', () {
         final orderHistoryItem = OrderHistoryItem.empty().copyWith(
-          unitPrice: 10,
-          qty: 10,
+          totalUnitPrice: 100,
+          totalPrice: 150,
         );
 
         expect(
           orderHistoryItem.itemTotalNetPrice(
-            fakeIDSalesOrgConfigs.displayItemTaxBreakdown,
+            false,
+          ),
+          '100.0',
+        );
+      });
+
+      test('netPrice calculation test', () {
+        final orderHistoryItem = OrderHistoryItem.empty().copyWith(
+          totalUnitPrice: 100,
+          totalPrice: 150,
+        );
+
+        expect(
+          orderHistoryItem.itemTotalNetPrice(
             false,
           ),
           '100.0',
@@ -73,9 +85,10 @@ void main() async {
           unitPrice: 100,
           qty: 10,
           tax: 5.0,
+          taxRate: 5,
         );
 
-        expect(orderHistoryItem.taxPercentage, 5.0);
+        expect(orderHistoryItem.taxRate, 5);
       });
     });
 

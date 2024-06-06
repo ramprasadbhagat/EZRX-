@@ -153,10 +153,11 @@ class _OrderItemTile extends StatelessWidget {
             ? '${orderItem.pickedQuantity} ${context.tr('of')} ${orderItem.qty} ${context.tr('stocks fulfilled')}'
             : '',
         netPrice: orderItem.itemNetPrice(
-          salesOrgConfig.displayItemTaxBreakdown,
           isIDMarket,
         ),
-        taxPercentage: orderItem.taxPercentage,
+        taxValue: orderItem.totalTax,
+        totalPrice: orderItem.totalPrice,
+        taxPercentage: orderItem.taxRate,
         isTopAlignment: true,
       ),
     );

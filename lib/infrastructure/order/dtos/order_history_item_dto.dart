@@ -78,6 +78,10 @@ class OrderHistoryItemDto with _$OrderHistoryItemDto {
     @JsonKey(name: 'isTenderExpire', defaultValue: false)
     required bool isTenderExpired,
     @JsonKey(name: 'isCovid', defaultValue: false) required bool isCovid,
+    @JsonKey(name: 'TotalUnitPrice', defaultValue: 0.0)
+    required double totalUnitPrice,
+    @JsonKey(name: 'TotalTax', defaultValue: 0.0) required double totalTax,
+    @JsonKey(name: 'TaxRate', readValue: handleTax) required double taxRate,
   }) = _OrderHistoryItemDto;
 
   factory OrderHistoryItemDto.fromDomain(OrderHistoryItem orderHistoryItem) {
@@ -133,6 +137,9 @@ class OrderHistoryItemDto with _$OrderHistoryItemDto {
           orderHistoryItem.tenderOrderReason.getOrDefaultValue(''),
       isTenderExpired: orderHistoryItem.isTenderExpired,
       isCovid: orderHistoryItem.isCovid,
+      taxRate: orderHistoryItem.taxRate,
+      totalTax: orderHistoryItem.totalTax,
+      totalUnitPrice: orderHistoryItem.totalUnitPrice,
     );
   }
   OrderHistoryItem toDomain() {
@@ -184,6 +191,9 @@ class OrderHistoryItemDto with _$OrderHistoryItemDto {
       tenderOrderReason: TenderContractReason(tenderOrderReason),
       isTenderExpired: isTenderExpired,
       isCovid: isCovid,
+      taxRate: taxRate,
+      totalTax: totalTax,
+      totalUnitPrice: totalUnitPrice,
     );
   }
 

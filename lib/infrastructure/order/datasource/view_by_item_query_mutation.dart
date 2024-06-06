@@ -61,10 +61,13 @@ class ViewByItemQueryMutation {
         CreatedDate
         Qty
         UnitPrice
+        TotalUnitPrice
         TotalPrice
         Status
         LineNumber
         Tax
+        TotalTax
+        TaxRate
         DeliveryDate
         DeliveryTime
         OrderType

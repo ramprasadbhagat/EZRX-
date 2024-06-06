@@ -74,6 +74,10 @@ class OrderHistoryDetailsOrderItemDto with _$OrderHistoryDetailsOrderItemDto {
     @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
     required bool isMarketPlace,
     @JsonKey(name: 'isCovid', defaultValue: false) required bool isCovid,
+    @JsonKey(name: 'TotalUnitPrice', defaultValue: 0.0)
+    required double totalUnitPrice,
+    @JsonKey(name: 'TotalTax', defaultValue: 0.0) required double totalTax,
+    @JsonKey(name: 'TaxRate', readValue: handleTax) required double taxRate,
   }) = _OrderHistoryDetailsOrderItemDto;
   factory OrderHistoryDetailsOrderItemDto.fromDomain(
     OrderHistoryDetailsOrderItem orderHistoryDetailsOrderItem,
@@ -122,6 +126,9 @@ class OrderHistoryDetailsOrderItemDto with _$OrderHistoryDetailsOrderItemDto {
       hidePrice: orderHistoryDetailsOrderItem.hidePrice,
       isMarketPlace: orderHistoryDetailsOrderItem.isMarketPlace,
       isCovid: orderHistoryDetailsOrderItem.isCovid,
+      taxRate: orderHistoryDetailsOrderItem.taxRate,
+      totalTax: orderHistoryDetailsOrderItem.totalTax,
+      totalUnitPrice: orderHistoryDetailsOrderItem.totalUnitPrice,
     );
   }
 
@@ -179,6 +186,9 @@ class OrderHistoryDetailsOrderItemDto with _$OrderHistoryDetailsOrderItemDto {
       isMarketPlace: isMarketPlace,
       isCovid: isCovid,
       invoiceNumber: StringValue(''),
+      taxRate: taxRate,
+      totalTax: totalTax,
+      totalUnitPrice: totalUnitPrice,
     );
   }
 

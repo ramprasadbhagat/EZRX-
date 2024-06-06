@@ -53,7 +53,7 @@ import 'package:ezrxmobile/presentation/core/list_price_strike_through_component
 import 'package:ezrxmobile/presentation/core/market_place/market_place_logo.dart';
 import 'package:ezrxmobile/presentation/core/status_label.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
-import 'package:ezrxmobile/presentation/orders/cart/widget/item_tax.dart';
+import 'package:ezrxmobile/presentation/core/item_tax.dart';
 import 'package:ezrxmobile/presentation/orders/cart/widget/market_place_delivery_tile.dart';
 import 'package:ezrxmobile/presentation/orders/order_success/order_success_page.dart';
 import 'package:ezrxmobile/presentation/orders/order_success/widgets/order_success_attachment_section.dart';
@@ -569,6 +569,7 @@ void main() {
             OrderSummaryState.initial().copyWith(
               orderHistoryDetailsList: [
                 OrderHistoryDetails.empty().copyWith(
+                  taxRate: fakeSGSalesOrgConfigs.vatValue.toDouble(),
                   orderHistoryDetailsOrderItem: [
                     OrderHistoryDetailsOrderItem.empty().copyWith(
                       qty: quantity,
@@ -595,7 +596,7 @@ void main() {
           );
           //Fetching the vat value for other market - 5
           final taxRateFinder = find.text(
-            'Tax at ${fakeSGSalesOrgConfigs.vatValue}%:',
+            'Tax at ${fakeSGSalesOrgConfigs.vatValue.toDouble()}%:',
           );
           expect(
             find.descendant(
@@ -625,6 +626,7 @@ void main() {
             OrderSummaryState.initial().copyWith(
               orderHistoryDetailsList: [
                 OrderHistoryDetails.empty().copyWith(
+                  taxRate: 10,
                   orderHistoryDetailsOrderItem: [
                     OrderHistoryDetailsOrderItem.empty().copyWith(
                       qty: quantity,
@@ -649,7 +651,7 @@ void main() {
           );
           //Fetching the vat value from salesOrgConfig - 10
           final taxRateFinder = find.text(
-            'Tax at ${fakeKHSalesOrgConfigs.vatValue}%:',
+            'Tax at ${fakeKHSalesOrgConfigs.vatValue.toDouble()}%:',
           );
           expect(
             find.descendant(
@@ -925,7 +927,7 @@ void main() {
       );
 
       testWidgets(
-          'Test Bundle Order, Grand total and Sub total only with displaySubtotalTaxBreakdown is disabled ',
+          'Test Bundle Order, Test Grand total and Sub total only with displaySubtotalTaxBreakdown is disabled ',
           (tester) async {
         when(() => eligibilityBlocMock.state).thenReturn(
           EligibilityState.initial().copyWith(
@@ -945,7 +947,7 @@ void main() {
             orderHistoryDetailsList: [
               OrderHistoryDetails.empty().copyWith(
                 orderNumber: OrderNumber('Fake-Order-Number'),
-                orderValue: 990.0,
+                orderValue: 1089.0,
                 totalTax: 99.0,
                 totalValue: 1089.00,
                 orderHistoryDetailsOrderItem: bundleList,
@@ -1420,6 +1422,10 @@ void main() {
       );
 
       testWidgets('Find Material tax Breakdown', (tester) async {
+        const taxRate = 5.0;
+        const totalTax = 5.0;
+        const unitPrice = 100.0;
+        const totalPrice = unitPrice + totalTax;
         when(() => eligibilityBlocMock.state).thenReturn(
           EligibilityState.initial().copyWith(
             salesOrgConfigs: fakeVNSalesOrgConfigs,
@@ -1429,13 +1435,17 @@ void main() {
           (invocation) => OrderSummaryState.initial().copyWith(
             orderHistoryDetailsList: [
               fakeOrderHistoryDetails.copyWith(
+                taxRate: taxRate,
                 orderHistoryDetailsOrderItem: [
                   fakeMaterialItem.copyWith(
+                    taxRate: taxRate,
+                    totalTax: totalTax,
+                    totalPrice: totalPrice,
                     priceAggregate: PriceAggregate.empty().copyWith(
                       salesOrgConfig: fakeVNSalesOrgConfigs,
                       materialInfo: MaterialInfo.empty().copyWith(tax: 5),
                       price: Price.empty().copyWith(
-                        finalPrice: MaterialPrice(100),
+                        finalPrice: MaterialPrice(unitPrice),
                       ),
                     ),
                   ),
@@ -1457,7 +1467,7 @@ void main() {
           findRichText: true,
         );
         final tax = find.textContaining(
-          '(5% tax)',
+          '(5.0% tax)',
           findRichText: true,
         );
         final taxAmount = find.textContaining(
@@ -1598,6 +1608,7 @@ void main() {
             salesOrganisation: fakeVNSalesOrganisation,
             orderHistoryDetailsList: [
               OrderHistoryDetails.empty().copyWith(
+                totalValue: totalMaterialPrice,
                 orderHistoryDetailsOrderItem: <OrderHistoryDetailsOrderItem>[
                   OrderHistoryDetailsOrderItem.empty().copyWith(
                     principalData: PrincipalData.empty().copyWith(

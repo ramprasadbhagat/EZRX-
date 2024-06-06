@@ -77,6 +77,8 @@ class SalesOrg extends ValueObject<String> {
     return country == 'VN';
   }
 
+  bool get isMaterialTax => isVN || isMM;
+
   bool get isSg {
     return country == 'SG';
   }

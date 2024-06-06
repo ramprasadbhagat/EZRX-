@@ -53,6 +53,7 @@ mixin _$OrderHistoryDetails {
   List<PoDocuments> get orderHistoryDetailsPoDocuments =>
       throw _privateConstructorUsedError;
   bool get isMarketPlace => throw _privateConstructorUsedError;
+  double get taxRate => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $OrderHistoryDetailsCopyWith<OrderHistoryDetails> get copyWith =>
@@ -95,7 +96,8 @@ abstract class $OrderHistoryDetailsCopyWith<$Res> {
       OrderHistoryDetailsPaymentTerm orderHistoryDetailsPaymentTerm,
       SpecialInstructions orderHistoryDetailsSpecialInstructions,
       List<PoDocuments> orderHistoryDetailsPoDocuments,
-      bool isMarketPlace});
+      bool isMarketPlace,
+      double taxRate});
 
   $OrderHistoryDetailsPaymentTermCopyWith<$Res>
       get orderHistoryDetailsPaymentTerm;
@@ -144,6 +146,7 @@ class _$OrderHistoryDetailsCopyWithImpl<$Res, $Val extends OrderHistoryDetails>
     Object? orderHistoryDetailsSpecialInstructions = null,
     Object? orderHistoryDetailsPoDocuments = null,
     Object? isMarketPlace = null,
+    Object? taxRate = null,
   }) {
     return _then(_value.copyWith(
       totalTax: null == totalTax
@@ -267,6 +270,10 @@ class _$OrderHistoryDetailsCopyWithImpl<$Res, $Val extends OrderHistoryDetails>
           ? _value.isMarketPlace
           : isMarketPlace // ignore: cast_nullable_to_non_nullable
               as bool,
+      taxRate: null == taxRate
+          ? _value.taxRate
+          : taxRate // ignore: cast_nullable_to_non_nullable
+              as double,
     ) as $Val);
   }
 
@@ -320,7 +327,8 @@ abstract class _$$OrderHistoryDetailsImplCopyWith<$Res>
       OrderHistoryDetailsPaymentTerm orderHistoryDetailsPaymentTerm,
       SpecialInstructions orderHistoryDetailsSpecialInstructions,
       List<PoDocuments> orderHistoryDetailsPoDocuments,
-      bool isMarketPlace});
+      bool isMarketPlace,
+      double taxRate});
 
   @override
   $OrderHistoryDetailsPaymentTermCopyWith<$Res>
@@ -368,6 +376,7 @@ class __$$OrderHistoryDetailsImplCopyWithImpl<$Res>
     Object? orderHistoryDetailsSpecialInstructions = null,
     Object? orderHistoryDetailsPoDocuments = null,
     Object? isMarketPlace = null,
+    Object? taxRate = null,
   }) {
     return _then(_$OrderHistoryDetailsImpl(
       totalTax: null == totalTax
@@ -491,6 +500,10 @@ class __$$OrderHistoryDetailsImplCopyWithImpl<$Res>
           ? _value.isMarketPlace
           : isMarketPlace // ignore: cast_nullable_to_non_nullable
               as bool,
+      taxRate: null == taxRate
+          ? _value.taxRate
+          : taxRate // ignore: cast_nullable_to_non_nullable
+              as double,
     ));
   }
 }
@@ -529,7 +542,8 @@ class _$OrderHistoryDetailsImpl extends _OrderHistoryDetails {
       required this.orderHistoryDetailsPaymentTerm,
       required this.orderHistoryDetailsSpecialInstructions,
       required final List<PoDocuments> orderHistoryDetailsPoDocuments,
-      required this.isMarketPlace})
+      required this.isMarketPlace,
+      required this.taxRate})
       : _orderHistoryDetailsOrderItem = orderHistoryDetailsOrderItem,
         _orderHistoryDetailsPoDocuments = orderHistoryDetailsPoDocuments,
         super._();
@@ -609,10 +623,12 @@ class _$OrderHistoryDetailsImpl extends _OrderHistoryDetails {
 
   @override
   final bool isMarketPlace;
+  @override
+  final double taxRate;
 
   @override
   String toString() {
-    return 'OrderHistoryDetails(totalTax: $totalTax, orderValue: $orderValue, deliveryFee: $deliveryFee, manualFee: $manualFee, totalValue: $totalValue, totalDiscount: $totalDiscount, processingStatus: $processingStatus, requestedDeliveryDate: $requestedDeliveryDate, expectedDeliveryDate: $expectedDeliveryDate, type: $type, telephoneNumber: $telephoneNumber, createdDate: $createdDate, eZRXNumber: $eZRXNumber, orderBy: $orderBy, referenceNotes: $referenceNotes, orderNumber: $orderNumber, soldTo: $soldTo, shipTo: $shipTo, companyName: $companyName, pOReference: $pOReference, shipToAddress: $shipToAddress, soldToAddress: $soldToAddress, invoiceNumber: $invoiceNumber, orderReason: $orderReason, itemCount: $itemCount, orderHistoryDetailsOrderItem: $orderHistoryDetailsOrderItem, orderHistoryDetailsPaymentTerm: $orderHistoryDetailsPaymentTerm, orderHistoryDetailsSpecialInstructions: $orderHistoryDetailsSpecialInstructions, orderHistoryDetailsPoDocuments: $orderHistoryDetailsPoDocuments, isMarketPlace: $isMarketPlace)';
+    return 'OrderHistoryDetails(totalTax: $totalTax, orderValue: $orderValue, deliveryFee: $deliveryFee, manualFee: $manualFee, totalValue: $totalValue, totalDiscount: $totalDiscount, processingStatus: $processingStatus, requestedDeliveryDate: $requestedDeliveryDate, expectedDeliveryDate: $expectedDeliveryDate, type: $type, telephoneNumber: $telephoneNumber, createdDate: $createdDate, eZRXNumber: $eZRXNumber, orderBy: $orderBy, referenceNotes: $referenceNotes, orderNumber: $orderNumber, soldTo: $soldTo, shipTo: $shipTo, companyName: $companyName, pOReference: $pOReference, shipToAddress: $shipToAddress, soldToAddress: $soldToAddress, invoiceNumber: $invoiceNumber, orderReason: $orderReason, itemCount: $itemCount, orderHistoryDetailsOrderItem: $orderHistoryDetailsOrderItem, orderHistoryDetailsPaymentTerm: $orderHistoryDetailsPaymentTerm, orderHistoryDetailsSpecialInstructions: $orderHistoryDetailsSpecialInstructions, orderHistoryDetailsPoDocuments: $orderHistoryDetailsPoDocuments, isMarketPlace: $isMarketPlace, taxRate: $taxRate)';
   }
 
   @override
@@ -681,7 +697,8 @@ class _$OrderHistoryDetailsImpl extends _OrderHistoryDetails {
                 other._orderHistoryDetailsPoDocuments,
                 _orderHistoryDetailsPoDocuments) &&
             (identical(other.isMarketPlace, isMarketPlace) ||
-                other.isMarketPlace == isMarketPlace));
+                other.isMarketPlace == isMarketPlace) &&
+            (identical(other.taxRate, taxRate) || other.taxRate == taxRate));
   }
 
   @override
@@ -716,7 +733,8 @@ class _$OrderHistoryDetailsImpl extends _OrderHistoryDetails {
         orderHistoryDetailsPaymentTerm,
         orderHistoryDetailsSpecialInstructions,
         const DeepCollectionEquality().hash(_orderHistoryDetailsPoDocuments),
-        isMarketPlace
+        isMarketPlace,
+        taxRate
       ]);
 
   @JsonKey(ignore: true)
@@ -760,7 +778,8 @@ abstract class _OrderHistoryDetails extends OrderHistoryDetails {
           orderHistoryDetailsPaymentTerm,
       required final SpecialInstructions orderHistoryDetailsSpecialInstructions,
       required final List<PoDocuments> orderHistoryDetailsPoDocuments,
-      required final bool isMarketPlace}) = _$OrderHistoryDetailsImpl;
+      required final bool isMarketPlace,
+      required final double taxRate}) = _$OrderHistoryDetailsImpl;
   _OrderHistoryDetails._() : super._();
 
   @override
@@ -823,6 +842,8 @@ abstract class _OrderHistoryDetails extends OrderHistoryDetails {
   List<PoDocuments> get orderHistoryDetailsPoDocuments;
   @override
   bool get isMarketPlace;
+  @override
+  double get taxRate;
   @override
   @JsonKey(ignore: true)
   _$$OrderHistoryDetailsImplCopyWith<_$OrderHistoryDetailsImpl> get copyWith =>

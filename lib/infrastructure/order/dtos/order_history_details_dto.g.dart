@@ -50,6 +50,7 @@ _$OrderHistoryDetailsDtoImpl _$$OrderHistoryDetailsDtoImplFromJson(
       itemCount: (json['ItmCount'] as num?)?.toInt() ?? 0,
       isMarketPlace:
           mappingIsMarketPlace(json, 'isMarketPlace') as bool? ?? false,
+      taxRate: (handleTax(json, 'TaxRate') as num).toDouble(),
     );
 
 Map<String, dynamic> _$$OrderHistoryDetailsDtoImplToJson(
@@ -88,4 +89,5 @@ Map<String, dynamic> _$$OrderHistoryDetailsDtoImplToJson(
           .toList(),
       'ItmCount': instance.itemCount,
       'isMarketPlace': instance.isMarketPlace,
+      'TaxRate': instance.taxRate,
     };

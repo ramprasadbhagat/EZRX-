@@ -53,6 +53,9 @@ mixin _$OrderHistoryDetailsOrderItem {
   StringValue get invoiceNumber => throw _privateConstructorUsedError;
   ItemRegistrationNumber get itemRegistrationNumber =>
       throw _privateConstructorUsedError;
+  double get totalUnitPrice => throw _privateConstructorUsedError;
+  double get totalTax => throw _privateConstructorUsedError;
+  double get taxRate => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $OrderHistoryDetailsOrderItemCopyWith<OrderHistoryDetailsOrderItem>
@@ -100,7 +103,10 @@ abstract class $OrderHistoryDetailsOrderItemCopyWith<$Res> {
       bool isMarketPlace,
       bool isCovid,
       StringValue invoiceNumber,
-      ItemRegistrationNumber itemRegistrationNumber});
+      ItemRegistrationNumber itemRegistrationNumber,
+      double totalUnitPrice,
+      double totalTax,
+      double taxRate});
 
   $OrderHistoryDetailsTenderContractCopyWith<$Res> get tenderContractDetails;
   $PrincipalDataCopyWith<$Res> get principalData;
@@ -157,6 +163,9 @@ class _$OrderHistoryDetailsOrderItemCopyWithImpl<$Res,
     Object? isCovid = null,
     Object? invoiceNumber = null,
     Object? itemRegistrationNumber = null,
+    Object? totalUnitPrice = null,
+    Object? totalTax = null,
+    Object? taxRate = null,
   }) {
     return _then(_value.copyWith(
       type: null == type
@@ -291,6 +300,18 @@ class _$OrderHistoryDetailsOrderItemCopyWithImpl<$Res,
           ? _value.itemRegistrationNumber
           : itemRegistrationNumber // ignore: cast_nullable_to_non_nullable
               as ItemRegistrationNumber,
+      totalUnitPrice: null == totalUnitPrice
+          ? _value.totalUnitPrice
+          : totalUnitPrice // ignore: cast_nullable_to_non_nullable
+              as double,
+      totalTax: null == totalTax
+          ? _value.totalTax
+          : totalTax // ignore: cast_nullable_to_non_nullable
+              as double,
+      taxRate: null == taxRate
+          ? _value.taxRate
+          : taxRate // ignore: cast_nullable_to_non_nullable
+              as double,
     ) as $Val);
   }
 
@@ -386,7 +407,10 @@ abstract class _$$OrderHistoryDetailsOrderItemImplCopyWith<$Res>
       bool isMarketPlace,
       bool isCovid,
       StringValue invoiceNumber,
-      ItemRegistrationNumber itemRegistrationNumber});
+      ItemRegistrationNumber itemRegistrationNumber,
+      double totalUnitPrice,
+      double totalTax,
+      double taxRate});
 
   @override
   $OrderHistoryDetailsTenderContractCopyWith<$Res> get tenderContractDetails;
@@ -448,6 +472,9 @@ class __$$OrderHistoryDetailsOrderItemImplCopyWithImpl<$Res>
     Object? isCovid = null,
     Object? invoiceNumber = null,
     Object? itemRegistrationNumber = null,
+    Object? totalUnitPrice = null,
+    Object? totalTax = null,
+    Object? taxRate = null,
   }) {
     return _then(_$OrderHistoryDetailsOrderItemImpl(
       type: null == type
@@ -582,6 +609,18 @@ class __$$OrderHistoryDetailsOrderItemImplCopyWithImpl<$Res>
           ? _value.itemRegistrationNumber
           : itemRegistrationNumber // ignore: cast_nullable_to_non_nullable
               as ItemRegistrationNumber,
+      totalUnitPrice: null == totalUnitPrice
+          ? _value.totalUnitPrice
+          : totalUnitPrice // ignore: cast_nullable_to_non_nullable
+              as double,
+      totalTax: null == totalTax
+          ? _value.totalTax
+          : totalTax // ignore: cast_nullable_to_non_nullable
+              as double,
+      taxRate: null == taxRate
+          ? _value.taxRate
+          : taxRate // ignore: cast_nullable_to_non_nullable
+              as double,
     ));
   }
 }
@@ -622,7 +661,10 @@ class _$OrderHistoryDetailsOrderItemImpl extends _OrderHistoryDetailsOrderItem {
       required this.isMarketPlace,
       required this.isCovid,
       required this.invoiceNumber,
-      required this.itemRegistrationNumber})
+      required this.itemRegistrationNumber,
+      required this.totalUnitPrice,
+      required this.totalTax,
+      required this.taxRate})
       : _details = details,
         super._();
 
@@ -698,10 +740,16 @@ class _$OrderHistoryDetailsOrderItemImpl extends _OrderHistoryDetailsOrderItem {
   final StringValue invoiceNumber;
   @override
   final ItemRegistrationNumber itemRegistrationNumber;
+  @override
+  final double totalUnitPrice;
+  @override
+  final double totalTax;
+  @override
+  final double taxRate;
 
   @override
   String toString() {
-    return 'OrderHistoryDetailsOrderItem(type: $type, materialNumber: $materialNumber, materialDescription: $materialDescription, qty: $qty, unitPrice: $unitPrice, originPrice: $originPrice, totalPrice: $totalPrice, tax: $tax, sAPStatus: $sAPStatus, plannedDeliveryDate: $plannedDeliveryDate, pickedQuantity: $pickedQuantity, batch: $batch, expiryDate: $expiryDate, lineReferenceNotes: $lineReferenceNotes, lineNumber: $lineNumber, isTenderContractMaterial: $isTenderContractMaterial, details: $details, tenderContractDetails: $tenderContractDetails, principalData: $principalData, productImages: $productImages, governmentMaterialCode: $governmentMaterialCode, materialStockInfo: $materialStockInfo, priceAggregate: $priceAggregate, productType: $productType, parentId: $parentId, material: $material, promoStatus: $promoStatus, isCounterOffer: $isCounterOffer, hidePrice: $hidePrice, isMarketPlace: $isMarketPlace, isCovid: $isCovid, invoiceNumber: $invoiceNumber, itemRegistrationNumber: $itemRegistrationNumber)';
+    return 'OrderHistoryDetailsOrderItem(type: $type, materialNumber: $materialNumber, materialDescription: $materialDescription, qty: $qty, unitPrice: $unitPrice, originPrice: $originPrice, totalPrice: $totalPrice, tax: $tax, sAPStatus: $sAPStatus, plannedDeliveryDate: $plannedDeliveryDate, pickedQuantity: $pickedQuantity, batch: $batch, expiryDate: $expiryDate, lineReferenceNotes: $lineReferenceNotes, lineNumber: $lineNumber, isTenderContractMaterial: $isTenderContractMaterial, details: $details, tenderContractDetails: $tenderContractDetails, principalData: $principalData, productImages: $productImages, governmentMaterialCode: $governmentMaterialCode, materialStockInfo: $materialStockInfo, priceAggregate: $priceAggregate, productType: $productType, parentId: $parentId, material: $material, promoStatus: $promoStatus, isCounterOffer: $isCounterOffer, hidePrice: $hidePrice, isMarketPlace: $isMarketPlace, isCovid: $isCovid, invoiceNumber: $invoiceNumber, itemRegistrationNumber: $itemRegistrationNumber, totalUnitPrice: $totalUnitPrice, totalTax: $totalTax, taxRate: $taxRate)';
   }
 
   @override
@@ -769,7 +817,12 @@ class _$OrderHistoryDetailsOrderItemImpl extends _OrderHistoryDetailsOrderItem {
             (identical(other.invoiceNumber, invoiceNumber) ||
                 other.invoiceNumber == invoiceNumber) &&
             (identical(other.itemRegistrationNumber, itemRegistrationNumber) ||
-                other.itemRegistrationNumber == itemRegistrationNumber));
+                other.itemRegistrationNumber == itemRegistrationNumber) &&
+            (identical(other.totalUnitPrice, totalUnitPrice) ||
+                other.totalUnitPrice == totalUnitPrice) &&
+            (identical(other.totalTax, totalTax) ||
+                other.totalTax == totalTax) &&
+            (identical(other.taxRate, taxRate) || other.taxRate == taxRate));
   }
 
   @override
@@ -807,7 +860,10 @@ class _$OrderHistoryDetailsOrderItemImpl extends _OrderHistoryDetailsOrderItem {
         isMarketPlace,
         isCovid,
         invoiceNumber,
-        itemRegistrationNumber
+        itemRegistrationNumber,
+        totalUnitPrice,
+        totalTax,
+        taxRate
       ]);
 
   @JsonKey(ignore: true)
@@ -854,8 +910,10 @@ abstract class _OrderHistoryDetailsOrderItem
       required final bool isMarketPlace,
       required final bool isCovid,
       required final StringValue invoiceNumber,
-      required final ItemRegistrationNumber
-          itemRegistrationNumber}) = _$OrderHistoryDetailsOrderItemImpl;
+      required final ItemRegistrationNumber itemRegistrationNumber,
+      required final double totalUnitPrice,
+      required final double totalTax,
+      required final double taxRate}) = _$OrderHistoryDetailsOrderItemImpl;
   _OrderHistoryDetailsOrderItem._() : super._();
 
   @override
@@ -924,6 +982,12 @@ abstract class _OrderHistoryDetailsOrderItem
   StringValue get invoiceNumber;
   @override
   ItemRegistrationNumber get itemRegistrationNumber;
+  @override
+  double get totalUnitPrice;
+  @override
+  double get totalTax;
+  @override
+  double get taxRate;
   @override
   @JsonKey(ignore: true)
   _$$OrderHistoryDetailsOrderItemImplCopyWith<

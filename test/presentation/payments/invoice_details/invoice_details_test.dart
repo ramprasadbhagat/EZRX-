@@ -20,13 +20,13 @@ import 'package:ezrxmobile/domain/payments/entities/credit_and_invoice_item.dart
 import 'package:ezrxmobile/domain/payments/entities/customer_document_detail.dart';
 import 'package:ezrxmobile/domain/utils/string_utils.dart';
 import 'package:ezrxmobile/locator.dart';
+import 'package:ezrxmobile/presentation/core/item_tax.dart';
 import 'package:ezrxmobile/presentation/core/market_place/market_place_seller_title.dart';
 import 'package:ezrxmobile/presentation/core/market_place/market_place_title_with_logo.dart';
 import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
 import 'package:ezrxmobile/infrastructure/payments/datasource/all_credits_and_invoices_local.dart';
 import 'package:ezrxmobile/infrastructure/payments/datasource/credit_and_invoice_details_local.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
-import 'package:ezrxmobile/presentation/core/material_tax.dart';
 import 'package:ezrxmobile/presentation/payments/invoice_details/invoice_details.dart';
 import 'package:ezrxmobile/presentation/payments/invoice_details/section/invoice_details_section.dart';
 import 'package:ezrxmobile/presentation/payments/invoice_details/section/order_number_section.dart';
@@ -800,7 +800,7 @@ void main() {
         );
         expect(
           find.descendant(
-            of: find.byType(MaterialTax),
+            of: find.byType(ItemTax),
             matching: find.text(
               '(${invoiceDetail.taxPercent}% ${'tax'.tr()})',
             ),
@@ -812,7 +812,7 @@ void main() {
         );
         expect(
           find.descendant(
-            of: find.byType(MaterialTax),
+            of: find.byType(ItemTax),
             matching: find.text(
               StringUtils.priceComponentDisplayPrice(
                 currentSalesOrgConfigs,
@@ -883,7 +883,7 @@ void main() {
 
         expect(
           find.descendant(
-            of: find.byType(MaterialTax),
+            of: find.byType(ItemTax),
             matching: find.text(
               'VND 34,017.00',
               findRichText: true,

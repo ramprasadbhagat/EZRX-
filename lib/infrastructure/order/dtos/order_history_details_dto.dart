@@ -61,6 +61,7 @@ class OrderHistoryDetailsDto with _$OrderHistoryDetailsDto {
     @JsonKey(name: 'ItmCount', defaultValue: 0) required int itemCount,
     @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
     required bool isMarketPlace,
+    @JsonKey(name: 'TaxRate', readValue: handleTax) required double taxRate,
   }) = _OrderHistoryDetailsDto;
   factory OrderHistoryDetailsDto.fromDomain(
     OrderHistoryDetails orderHistoryDetails,
@@ -109,6 +110,7 @@ class OrderHistoryDetailsDto with _$OrderHistoryDetailsDto {
               .toList(),
       itemCount: orderHistoryDetails.orderItemsCount,
       isMarketPlace: orderHistoryDetails.isMarketPlace,
+      taxRate: orderHistoryDetails.taxRate,
     );
   }
 
@@ -147,6 +149,7 @@ class OrderHistoryDetailsDto with _$OrderHistoryDetailsDto {
           orderHistoryDetailsPoDocuments.map((dto) => dto.toDomain()).toList(),
       itemCount: itemCount,
       isMarketPlace: isMarketPlace,
+      taxRate: taxRate,
     );
   }
 

@@ -50,6 +50,7 @@ class OrderHistoryDetails with _$OrderHistoryDetails {
     required SpecialInstructions orderHistoryDetailsSpecialInstructions,
     required List<PoDocuments> orderHistoryDetailsPoDocuments,
     required bool isMarketPlace,
+    required double taxRate,
   }) = _OrderHistoryDetails;
 
   factory OrderHistoryDetails.empty() => OrderHistoryDetails(
@@ -83,6 +84,7 @@ class OrderHistoryDetails with _$OrderHistoryDetails {
         orderHistoryDetailsPoDocuments: <PoDocuments>[],
         itemCount: 0,
         isMarketPlace: false,
+        taxRate: 0,
       );
 
   bool get poDocumentsAvailable => orderHistoryDetailsPoDocuments.isNotEmpty;
@@ -174,10 +176,6 @@ class OrderHistoryDetails with _$OrderHistoryDetails {
             .toList(),
       );
 
-  double subTotal(bool showSubTotalExcludingTax) => showSubTotalExcludingTax
-      ? orderValue //order value is excl tax
-      : totalValue; //total value is incl tax
-
   String get trackingOrderId => processingStatus.isInQueue
       ? 'no order number'
       : orderNumber.getOrDefaultValue('');
@@ -235,6 +233,8 @@ class OrderHistoryDetails with _$OrderHistoryDetails {
 }
 
 extension ViewByOrderListExtension on List<OrderHistoryDetails> {
+  double get subtotal => fold<double>(0, (sum, e) => sum + e.orderValue);
+
   double get grandTotal => fold<double>(0, (sum, e) => sum + e.totalValue);
 
   double get totalSaving => fold<double>(0, (sum, e) => sum + e.totalDiscount);
@@ -244,9 +244,6 @@ extension ViewByOrderListExtension on List<OrderHistoryDetails> {
   double get smallOrderFee => fold<double>(0, (sum, e) => sum + e.deliveryFee);
 
   double get totalTax => fold<double>(0, (sum, e) => sum + e.totalTax);
-
-  double subtotal(bool showSubTotalExcludingTax) =>
-      fold<double>(0, (sum, e) => sum + e.subTotal(showSubTotalExcludingTax));
 
   List<OrderHistoryDetailsOrderItem> get allItems =>
       map((e) => e.orderHistoryDetailsOrderItem).flattened.toList();

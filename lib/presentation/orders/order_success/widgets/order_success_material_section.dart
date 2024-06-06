@@ -154,7 +154,6 @@ class _MaterialItem extends StatelessWidget {
                     key: WidgetKeys.orderSuccessItemTotalPrice,
                     salesOrgConfig: context.read<SalesOrgBloc>().state.configs,
                     price: orderItem.itemNetPrice(
-                      eligibilityState.salesOrgConfigs.displayItemTaxBreakdown,
                       isIDMarket,
                     ),
                   ),
@@ -162,7 +161,9 @@ class _MaterialItem extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.only(top: 2),
                       child: ItemTax(
-                        cartItem: orderItem.priceAggregate,
+                        finalPriceTotalWithTax: orderItem.totalPrice,
+                        itemTax: orderItem.totalTax,
+                        itemTaxPercent: orderItem.taxRate,
                       ),
                     ),
                 ],

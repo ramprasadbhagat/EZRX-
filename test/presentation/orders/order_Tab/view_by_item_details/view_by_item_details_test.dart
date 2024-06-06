@@ -128,6 +128,7 @@ void main() {
     reOrderPermissionBlocMock = ReOrderPermissionBlocMock();
     locator.registerFactory<MixpanelService>(() => mixpanelServiceMock);
     locator.registerSingleton<ClevertapService>(ClevertapServiceMock());
+
     locator.registerFactory<ReOrderPermissionBloc>(
       () => reOrderPermissionBlocMock,
     );
@@ -1727,7 +1728,10 @@ void main() {
           orderHistoryItem: fakeOrderHistoryItem.copyWith(
             unitPrice: 60,
             qty: 30,
-            tax: 126,
+            totalUnitPrice: 1800,
+            taxRate: 20,
+            totalTax: 36,
+            totalPrice: 1836,
           ),
         ),
       ];
@@ -1748,12 +1752,12 @@ void main() {
       );
       expect(expectedNetPrice, findsOneWidget);
       final taxPercentage = find.text(
-        '(210.0% ${'tax'.tr()})',
+        '(20.0% ${'tax'.tr()})',
       );
       expect(taxPercentage, findsOneWidget);
 
       final expectedPrice = find.text(
-        'THB 5,580.00',
+        'THB 1,836.00',
         findRichText: true,
       );
       expect(expectedPrice, findsOneWidget);
@@ -1776,6 +1780,10 @@ void main() {
             unitPrice: 136.5,
             qty: 5,
             tax: 68.25,
+            taxRate: 50,
+            totalTax: 341.25,
+            totalUnitPrice: 682.5,
+            totalPrice: 1023.75,
           ),
         ),
       ];
@@ -1791,7 +1799,7 @@ void main() {
         const Offset(0, -300),
       );
       final expectedTax = find.text(
-        '(50.0% tax)',
+        '(50.0% ${'tax'.tr()})',
       );
       expect(expectedTax, findsOneWidget);
     });
@@ -1862,7 +1870,7 @@ void main() {
             unitPrice: 60,
             qty: 30,
             tax: 126,
-            totalPrice: 1926.00,
+            totalUnitPrice: 1926.00,
           ),
         ),
       ];
@@ -2571,8 +2579,7 @@ void main() {
       },
     );
 
-    testWidgets('Show IRN when enableIRN is true',
-        (tester) async {
+    testWidgets('Show IRN when enableIRN is true', (tester) async {
       const iRNNumber = '12C 234/11';
 
       when(() => eligibilityBlocMock.state).thenReturn(
@@ -2608,8 +2615,7 @@ void main() {
       expect(find.textContaining(iRNNumber), findsOneWidget);
     });
 
-    testWidgets('Do not show IRN when enableIRN is false',
-        (tester) async {
+    testWidgets('Do not show IRN when enableIRN is false', (tester) async {
       const iRNNumber = '12C 234/11';
 
       when(() => eligibilityBlocMock.state).thenReturn(

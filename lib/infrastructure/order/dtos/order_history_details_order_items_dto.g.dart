@@ -50,6 +50,9 @@ _$OrderHistoryDetailsOrderItemDtoImpl
           isMarketPlace:
               mappingIsMarketPlace(json, 'isMarketPlace') as bool? ?? false,
           isCovid: json['isCovid'] as bool? ?? false,
+          totalUnitPrice: (json['TotalUnitPrice'] as num?)?.toDouble() ?? 0.0,
+          totalTax: (json['TotalTax'] as num?)?.toDouble() ?? 0.0,
+          taxRate: (handleTax(json, 'TaxRate') as num).toDouble(),
         );
 
 Map<String, dynamic> _$$OrderHistoryDetailsOrderItemDtoImplToJson(
@@ -84,4 +87,7 @@ Map<String, dynamic> _$$OrderHistoryDetailsOrderItemDtoImplToJson(
       'HidePrice': instance.hidePrice,
       'isMarketPlace': instance.isMarketPlace,
       'isCovid': instance.isCovid,
+      'TotalUnitPrice': instance.totalUnitPrice,
+      'TotalTax': instance.totalTax,
+      'TaxRate': instance.taxRate,
     };

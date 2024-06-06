@@ -10,8 +10,8 @@ import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/infrastructure/payments/datasource/credit_and_invoice_details_local.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/common_tile_item.dart';
+import 'package:ezrxmobile/presentation/core/item_tax.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
-import 'package:ezrxmobile/presentation/core/material_tax.dart';
 import 'package:ezrxmobile/presentation/payments/credit_details/section/credit_items_section.dart';
 import 'package:ezrxmobile/presentation/payments/widgets/payment_module.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
@@ -209,7 +209,7 @@ void main() {
         );
         expect(
           find.descendant(
-            of: find.byType(MaterialTax),
+            of: find.byType(ItemTax),
             matching: find.text(
               '(${e.taxPercent}% ${'tax'.tr()})',
             ),
@@ -220,7 +220,7 @@ void main() {
         );
         expect(
           find.descendant(
-            of: find.byType(MaterialTax),
+            of: find.byType(ItemTax),
             matching: find.text(
               StringUtils.priceComponentDisplayPrice(
                 currentSalesOrgConfigs,

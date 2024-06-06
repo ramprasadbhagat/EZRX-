@@ -1,7 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
-import 'package:ezrxmobile/presentation/core/material_tax.dart';
+import 'package:ezrxmobile/presentation/core/item_tax.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -9,43 +9,52 @@ import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 
 class QuantityAndPriceWithTax extends StatelessWidget {
   final int quantity;
+
   final String quantityDescription;
   final String netPrice;
   final double taxPercentage;
-  final double? taxValue;
+  final double taxValue;
   final bool isTopAligned;
+  final double totalPrice;
   const QuantityAndPriceWithTax._({
     required this.quantity,
+    required this.totalPrice,
     this.quantityDescription = '',
     required this.taxPercentage,
     required this.netPrice,
-    this.taxValue,
+    required this.taxValue,
     this.isTopAligned = false,
   });
 
   factory QuantityAndPriceWithTax.order({
     required int quantity,
-    String quantityDescription = '',
+    required double totalPrice,
     required String netPrice,
     required double taxPercentage,
+    required double taxValue,
+    String quantityDescription = '',
     bool isTopAlignment = false,
   }) =>
       QuantityAndPriceWithTax._(
         quantity: quantity,
+        totalPrice: totalPrice,
         quantityDescription: quantityDescription,
         netPrice: netPrice,
         taxPercentage: taxPercentage,
         isTopAligned: isTopAlignment,
+        taxValue: taxValue,
       );
 
   factory QuantityAndPriceWithTax.invoice({
     required int quantity,
+    required double totalPrice,
     required String netPrice,
     required double taxValue,
     required double taxPercentage,
   }) =>
       QuantityAndPriceWithTax._(
         quantity: quantity,
+        totalPrice: totalPrice,
         netPrice: netPrice,
         taxValue: taxValue,
         taxPercentage: taxPercentage,
@@ -92,14 +101,10 @@ class QuantityAndPriceWithTax extends StatelessWidget {
             ),
             if (eligibilityState.salesOrgConfigs.displayItemTaxBreakdown &&
                 netPriceValue > 0)
-              MaterialTax(
-                totalPrice: netPriceValue,
-                percentage: taxPercentage,
-                //TODO : This is a temporary solution once C4P fix the calculated total, we will remove this
-                taxValue: taxValue ??
-                    (eligibilityState.salesOrgConfigs.salesOrg.isID
-                        ? (netPriceValue * taxPercentage / 100).floorToDouble()
-                        : (netPriceValue * taxPercentage / 100)),
+              ItemTax(
+                finalPriceTotalWithTax: totalPrice,
+                itemTax: taxValue,
+                itemTaxPercent: taxPercentage,
               ),
           ],
         ),

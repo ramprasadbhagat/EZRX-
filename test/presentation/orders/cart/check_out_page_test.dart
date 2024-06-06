@@ -2169,9 +2169,8 @@ void main() {
         expect(taxPercentageFinder, findsNothing);
         final vatPercentageFinder = find.text('Tax at 5%');
         expect(vatPercentageFinder, findsNothing);
-        final listPriceWithTax = cartState
-            .cartProducts.first.finalPriceTotalWithTax
-            .toStringAsFixed(2);
+        final listPriceWithTax =
+            cartState.cartProducts.first.finalPrice.toStringAsFixed(2);
         expect(
           find.text(
             'PHP $listPriceWithTax',
