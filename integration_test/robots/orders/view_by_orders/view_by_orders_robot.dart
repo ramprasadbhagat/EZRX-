@@ -60,6 +60,13 @@ class ViewByOrdersRobot extends CommonRobot {
     );
   }
 
+  void verifyBuyAgainButtonDisabled() {
+    expect(
+      (tester.widget<OutlinedButton>(find.byType(OutlinedButton))).enabled,
+      false,
+    );
+  }
+
   void verifyOrderItemsForID() {
     expect(orderItems, findsAtLeastNWidgets(1));
     final itemCount = orderItems.evaluate().length;

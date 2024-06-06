@@ -117,6 +117,13 @@ class ViewByItemsDetailRobot extends CommonRobot {
     expect(buyAgainButton, isVisible ? findsOneWidget : findsNothing);
   }
 
+  void verifyBuyAgainButtonDisabled() {
+    expect(
+      (tester.widget<OutlinedButton>(buyAgainButton)).enabled,
+      false,
+    );
+  }
+
   Future<void> verifyItemComponent() async {
     await scrollEnsureFinderVisible(orderItem.first);
     _verifyItemComponent(orderItem);

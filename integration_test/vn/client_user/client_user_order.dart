@@ -124,7 +124,8 @@ void main() {
   const shipToCode = '0071201150';
   const otherShipToCode = '0000003070';
   const tenderShipToCode = '0071192868';
-
+  const shipToCodeWithCustomerCodeBlocked = '0071210440';
+  const blockedShipToCode = '0071192119';
   const billToCustomerCode = '0030277787';
   const billToShipToCode = '0071205149';
   const billToOrderAddress = 'Cong Ty TNHH Xuan Thuy';
@@ -829,6 +830,25 @@ void main() {
         announcementArticleRootRobot.verifyAnnouncementPage();
       },
     );
+
+    testWidgets(
+        'EZRX-T1695 | Find customer suspended banner in home tab when customer code is blocked',
+        (tester) async {
+      await pumpAppWithHomeScreen(
+        tester,
+        shipToCode: shipToCodeWithCustomerCodeBlocked,
+      );
+
+      commonRobot.verifyCustomerSuspendedBanner();
+    });
+
+    testWidgets(
+        'EZRX-T1696 | Find customer suspended banner in home tab when ship to code is blocked',
+        (tester) async {
+      await pumpAppWithHomeScreen(tester, shipToCode: blockedShipToCode);
+
+      commonRobot.verifyCustomerSuspendedBanner();
+    });
   });
 
   group('Product Tab -', () {
@@ -1082,6 +1102,27 @@ void main() {
         productDetailRobot.verifyFavorite(false);
       },
     );
+
+    testWidgets(
+        'EZRX-T1697 | Find customer suspended banner in Products tab when customer code is blocked',
+        (tester) async {
+      await pumpAppWithHomeScreen(
+        tester,
+        shipToCode: shipToCodeWithCustomerCodeBlocked,
+      );
+      await productRobot.navigateToScreen(NavigationTab.products);
+
+      commonRobot.verifyCustomerSuspendedBanner();
+    });
+
+    testWidgets(
+        'EZRX-T1698 | Find customer suspended banner in Products tab when ship to code is blocked',
+        (tester) async {
+      await pumpAppWithHomeScreen(tester, shipToCode: blockedShipToCode);
+      await productRobot.navigateToScreen(NavigationTab.products);
+
+      commonRobot.verifyCustomerSuspendedBanner();
+    });
   });
 
   group('Product search -', () {
@@ -1774,6 +1815,29 @@ void main() {
         checkoutRobot.verifyPage();
       },
     );
+
+    testWidgets(
+        'EZRX-T1701 | Find customer suspended banner in Cart page when customer code is blocked',
+        (tester) async {
+      await pumpAppWithHomeScreen(
+        tester,
+        shipToCode: shipToCodeWithCustomerCodeBlocked,
+      );
+
+      homeRobot.findMiniCartIcon();
+      await homeRobot.tapMiniCartIcon();
+      commonRobot.verifyCustomerSuspendedBanner();
+    });
+
+    testWidgets(
+        ' EZRX-T1702 | Find customer suspended banner in Cart page when ship to code is blocked',
+        (tester) async {
+      await pumpAppWithHomeScreen(tester, shipToCode: blockedShipToCode);
+
+      homeRobot.findMiniCartIcon();
+      await homeRobot.tapMiniCartIcon();
+      commonRobot.verifyCustomerSuspendedBanner();
+    });
   });
 
   group('Checkout -', () {
@@ -2186,6 +2250,35 @@ void main() {
           viewByItemsRobot.verifyOrderItems();
         },
       );
+
+      testWidgets(
+          'EZRX-T1703 | Find customer suspended banner in view by items tab when customer code is blocked',
+          (tester) async {
+        await pumpAppWithHomeScreen(
+          tester,
+          shipToCode: shipToCodeWithCustomerCodeBlocked,
+        );
+
+        await commonRobot.navigateToScreen(NavigationTab.orders);
+
+        //verify
+        ordersRootRobot.verifyViewByItemsPage();
+
+        commonRobot.verifyCustomerSuspendedBanner();
+      });
+
+      testWidgets(
+          'EZRX-T1704 | Find customer suspended banner in view by items tab when ship to code is blocked',
+          (tester) async {
+        await pumpAppWithHomeScreen(tester, shipToCode: blockedShipToCode);
+
+        await commonRobot.navigateToScreen(NavigationTab.orders);
+
+        //verify
+        ordersRootRobot.verifyViewByItemsPage();
+
+        commonRobot.verifyCustomerSuspendedBanner();
+      });
     });
 
     group('View by item detail -', () {
@@ -2313,6 +2406,44 @@ void main() {
           cartRobot.verifyMaterialQty(bonusMaterialNumber, qty);
         },
       );
+
+      testWidgets(
+          'EZRX-T1705 | Find customer suspended banner in view by items details  when customer code is blocked',
+          (tester) async {
+        const orderId = '3661e562-8f71-4765-b8b6-66d86ba83654';
+        await pumpAppWithHomeScreen(
+          tester,
+          shipToCode: shipToCodeWithCustomerCodeBlocked,
+        );
+        await commonRobot.navigateToScreen(NavigationTab.orders);
+
+        //verify
+        ordersRootRobot.verifyViewByItemsPage();
+        await commonRobot.searchWithKeyboardAction(orderId);
+        await viewByItemsRobot.tapFirstOrder();
+        viewByItemsDetailRobot.verifyHeader();
+        commonRobot.verifyCustomerSuspendedBanner();
+        viewByItemsDetailRobot.verifyBuyAgainButton(isVisible: true);
+        viewByItemsDetailRobot.verifyBuyAgainButtonDisabled();
+      });
+
+      testWidgets(
+          'EZRX-T1706 | Find customer suspended banner in view by items details when ship to code is blocked',
+          (tester) async {
+        const orderId = '6a57f4b1-4892-49cd-84b1-e82cc2e2862b';
+        await pumpAppWithHomeScreen(tester, shipToCode: blockedShipToCode);
+
+        await commonRobot.navigateToScreen(NavigationTab.orders);
+
+        //verify
+        ordersRootRobot.verifyViewByItemsPage();
+        await commonRobot.searchWithKeyboardAction(orderId);
+        await viewByItemsRobot.tapFirstOrder();
+        viewByItemsDetailRobot.verifyHeader();
+        commonRobot.verifyCustomerSuspendedBanner();
+        viewByItemsDetailRobot.verifyBuyAgainButton(isVisible: true);
+        viewByItemsDetailRobot.verifyBuyAgainButtonDisabled();
+      });
     });
 
     group('View by orders -', () {
@@ -2468,6 +2599,45 @@ void main() {
         await cartRobot.verifyMaterial(materialNumber);
         cartRobot.verifyMaterialQty(materialNumber, qty);
       });
+
+      testWidgets(
+          'EZRX-T1707 | Find customer suspended banner in view by order when customer code is blocked',
+          (tester) async {
+        const orderId = '3661e562-8f71-4765-b8b6-66d86ba83654';
+        await pumpAppWithHomeScreen(
+          tester,
+          shipToCode: shipToCodeWithCustomerCodeBlocked,
+        );
+
+        await commonRobot.navigateToScreen(NavigationTab.orders);
+        await ordersRootRobot.switchToViewByOrders();
+
+        //verify
+        viewByOrdersRobot.verifyOrders();
+
+        commonRobot.verifyCustomerSuspendedBanner();
+        await commonRobot.searchWithKeyboardAction(orderId);
+        viewByOrdersRobot.verifyOrdersWithOrderCode(orderId);
+        viewByOrdersRobot.verifyBuyAgainButtonDisabled();
+      });
+
+      testWidgets(
+          'EZRX-T1708 | Find customer suspended banner in view by order when ship to code is blocked',
+          (tester) async {
+        const orderId = '6a57f4b1-4892-49cd-84b1-e82cc2e2862b';
+        await pumpAppWithHomeScreen(tester, shipToCode: blockedShipToCode);
+
+        await commonRobot.navigateToScreen(NavigationTab.orders);
+        await ordersRootRobot.switchToViewByOrders();
+
+        //verify
+        viewByOrdersRobot.verifyOrders();
+
+        commonRobot.verifyCustomerSuspendedBanner();
+        await commonRobot.searchWithKeyboardAction(orderId);
+        viewByOrdersRobot.verifyOrdersWithOrderCode(orderId);
+        viewByOrdersRobot.verifyBuyAgainButtonDisabled();
+      });
     });
 
     group('View by order detail -', () {
@@ -2617,6 +2787,43 @@ void main() {
           );
         },
       );
+
+      testWidgets(
+          'EZRX-T1709 | Find customer suspended banner in order details page  when customer code is blocked',
+          (tester) async {
+        const orderId = '3661e562-8f71-4765-b8b6-66d86ba83654';
+        await pumpAppWithHomeScreen(
+          tester,
+          shipToCode: shipToCodeWithCustomerCodeBlocked,
+        );
+
+        await commonRobot.navigateToScreen(NavigationTab.orders);
+        await ordersRootRobot.switchToViewByOrders();
+
+        await commonRobot.searchWithKeyboardAction(orderId);
+        viewByOrdersRobot.verifyOrdersWithOrderCode(orderId);
+        await viewByOrdersRobot.tapFirstOrder();
+        commonRobot.verifyCustomerSuspendedBanner();
+        viewByOrdersDetailRobot.verifyOrderId(orderId);
+        viewByOrdersRobot.verifyBuyAgainButtonDisabled();
+      });
+
+      testWidgets(
+          'EZRX-T1710 | Find customer suspended banner in order details page when ship to code is blocked',
+          (tester) async {
+        const orderId = '6a57f4b1-4892-49cd-84b1-e82cc2e2862b';
+        await pumpAppWithHomeScreen(tester, shipToCode: blockedShipToCode);
+
+        await commonRobot.navigateToScreen(NavigationTab.orders);
+        await ordersRootRobot.switchToViewByOrders();
+
+        await commonRobot.searchWithKeyboardAction(orderId);
+        viewByOrdersRobot.verifyOrdersWithOrderCode(orderId);
+        await viewByOrdersRobot.tapFirstOrder();
+        commonRobot.verifyCustomerSuspendedBanner();
+        viewByOrdersDetailRobot.verifyOrderId(orderId);
+        viewByOrdersRobot.verifyBuyAgainButtonDisabled();
+      });
     });
   });
 

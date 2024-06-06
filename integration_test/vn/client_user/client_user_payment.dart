@@ -96,11 +96,14 @@ void main() {
   const password = 'St@ysafe01';
   const customerCode = '0000102668';
   const shipToCode = '0071192102';
+  const shipToCodeWithCustomerCodeBlocked = '0071192102';
+  const blockedShipToCode = '0071210440';
   const shipToAddress = 'LG VINA COSMETICS CO., LTD';
   const currency = 'VND';
   final successSnackbarMessage = 'File downloaded successfully'.tr();
 
   var loginRequired = true;
+  const dateTimeFormat = 'dd/MM/yyyy';
 
   Future<void> pumpAppWithHomeScreen(
     WidgetTester tester, {
@@ -132,9 +135,12 @@ void main() {
   }
 
   group('Payment Home Page - ', () {
-    Future<void> goToPaymentHomePage(WidgetTester tester) async {
+    Future<void> goToPaymentHomePage(
+      WidgetTester tester, {
+      String shipToCode = shipToCode,
+    }) async {
       //init app
-      await pumpAppWithHomeScreen(tester);
+      await pumpAppWithHomeScreen(tester, shipToCode: shipToCode);
 
       await homeRobot.tapPaymentQuickAccess();
       paymentHomeRobot.verifyPaymentsTabPage();
@@ -194,6 +200,25 @@ void main() {
       await paymentHomeRobot.tapNewPayment();
       newPaymentRobot.verifyPage();
     });
+
+    testWidgets(
+        'EZRX-19747 | Find customer suspended banner in Payment Home Page when customer code is blocked',
+        (tester) async {
+      await goToPaymentHomePage(
+        tester,
+        shipToCode: shipToCodeWithCustomerCodeBlocked,
+      );
+
+      commonRobot.verifyCustomerSuspendedBanner();
+    });
+
+    testWidgets(
+        'EZRX-19747 | Find customer suspended banner in Payment Home Page when ship to code is blocked',
+        (tester) async {
+      await goToPaymentHomePage(tester, shipToCode: blockedShipToCode);
+
+      commonRobot.verifyCustomerSuspendedBanner();
+    });
   });
 
   group('Account Summary menu - invoice tab', () {
@@ -223,6 +248,20 @@ void main() {
 
     const invoiceSubtotal = materialTotalPrice1;
     const taxPercentage = 5;
+
+    Future<void> goToAccountSummaryInvoicePage(
+      WidgetTester tester, {
+      String shipToCode = shipToCode,
+    }) async {
+      //init app
+      await pumpAppWithHomeScreen(tester, shipToCode: shipToCode);
+
+      await homeRobot.tapPaymentQuickAccess();
+      await paymentHomeRobot.tapAccountSummaryMenu();
+      accountSummaryRootRobot.verifyRootPage();
+      accountSummaryRootRobot.verifyTabBar();
+      accountSummaryRootRobot.verifyInvoicesPage();
+    }
 
     Future<void> getFilterDataDocumentDate({
       required String dateTimeFormat,
@@ -651,6 +690,28 @@ void main() {
         message: successSnackbarMessage,
       );
       await commonRobot.dismissSnackbar();
+    });
+
+    testWidgets(
+        'EZRX-19747 | Find customer suspended banner in invoices tab when customer code is blocked',
+        (tester) async {
+      await goToAccountSummaryInvoicePage(
+        tester,
+        shipToCode: shipToCodeWithCustomerCodeBlocked,
+      );
+
+      commonRobot.verifyCustomerSuspendedBanner();
+    });
+
+    testWidgets(
+        'EZRX-19747 | Find customer suspended banner in invoices tab when ship to code is blocked',
+        (tester) async {
+      await goToAccountSummaryInvoicePage(
+        tester,
+        shipToCode: blockedShipToCode,
+      );
+
+      commonRobot.verifyCustomerSuspendedBanner();
     });
   });
 
@@ -1325,9 +1386,12 @@ void main() {
     final toDate = DateTime.now();
     const inValidCreditId = '1232136712';
 
-    Future<void> goToAccountSummaryPage(WidgetTester tester) async {
+    Future<void> goToAccountSummaryPage(
+      WidgetTester tester, {
+      String shipToCode = shipToCode,
+    }) async {
       //init app
-      await pumpAppWithHomeScreen(tester);
+      await pumpAppWithHomeScreen(tester, shipToCode: shipToCode);
 
       await homeRobot.tapPaymentQuickAccess();
       await paymentHomeRobot.tapAccountSummaryMenu();
@@ -1712,6 +1776,28 @@ void main() {
       accountInvoiceDetailRobot.verifyPage();
       await commonRobot.tapToBackScreen();
     });
+
+    testWidgets(
+        'EZRX-19747 | Find customer suspended banner in summary detail page when customer code is blocked',
+        (tester) async {
+      await goToAccountSummaryPage(
+        tester,
+        shipToCode: shipToCodeWithCustomerCodeBlocked,
+      );
+
+      commonRobot.verifyCustomerSuspendedBanner();
+    });
+
+    testWidgets(
+        'EZRX-19747 | Find customer suspended banner in summary detail page when ship to code is blocked',
+        (tester) async {
+      await goToAccountSummaryPage(
+        tester,
+        shipToCode: blockedShipToCode,
+      );
+
+      commonRobot.verifyCustomerSuspendedBanner();
+    });
   });
 
   group('Payment summary menu - ', () {
@@ -1730,9 +1816,12 @@ void main() {
 
     const filterOption = ['In Progress', 'Failed', 'Processed', 'Successful'];
 
-    Future<void> goToPaymentSummaryPage(WidgetTester tester) async {
+    Future<void> goToPaymentSummaryPage(
+      WidgetTester tester, {
+      String shipToCode = shipToCode,
+    }) async {
       //init app
-      await pumpAppWithHomeScreen(tester);
+      await pumpAppWithHomeScreen(tester, shipToCode: shipToCode);
       //Redirect to payment summary page
       await homeRobot.tapPaymentQuickAccess();
       paymentHomeRobot.verifyPage();
@@ -1958,6 +2047,28 @@ void main() {
       );
       await commonRobot.dismissSnackbar();
     });
+
+    testWidgets(
+        'EZRX-19747 | Find customer suspended banner in Payment Summary Details Page when customer code is blocked',
+        (tester) async {
+      await goToPaymentSummaryPage(
+        tester,
+        shipToCode: shipToCodeWithCustomerCodeBlocked,
+      );
+
+      commonRobot.verifyCustomerSuspendedBanner();
+    });
+
+    testWidgets(
+        'EZRX-19747 | Find customer suspended banner in Payment Summary Details Page when ship to code is blocked',
+        (tester) async {
+      await goToPaymentSummaryPage(
+        tester,
+        shipToCode: blockedShipToCode,
+      );
+
+      commonRobot.verifyCustomerSuspendedBanner();
+    });
   });
 
   // //TODO:
@@ -2052,9 +2163,12 @@ void main() {
       const inValidKeyword = '00000000000';
       const validKeyword = '10';
 
-      Future<void> goToPaymentStep1Page(WidgetTester tester) async {
+      Future<void> goToPaymentStep1Page(
+        WidgetTester tester, {
+        String shipToCode = shipToCode,
+      }) async {
         //init app
-        await pumpAppWithHomeScreen(tester);
+        await pumpAppWithHomeScreen(tester, shipToCode: shipToCode);
         //Redirect to Payment Step1 page
         await homeRobot.tapPaymentQuickAccess();
         paymentHomeRobot.verifyPage();
@@ -2320,14 +2434,40 @@ void main() {
         await commonRobot.searchWithKeyboardAction(inValidKeyword);
         newPaymentStep1Robot.verifyNoItemFound();
       });
+
+      testWidgets(
+          'EZRX-19747 | Find customer suspended banner in New Payment step1 when customer code is blocked',
+          (tester) async {
+        await goToPaymentStep1Page(
+          tester,
+          shipToCode: shipToCodeWithCustomerCodeBlocked,
+        );
+
+        commonRobot.verifyCustomerSuspendedBanner();
+      });
+
+      testWidgets(
+          'EZRX-19747 | Find customer suspended banner in New Payment step1 when ship to code is blocked',
+          (tester) async {
+        await goToPaymentStep1Page(
+          tester,
+          shipToCode: blockedShipToCode,
+        );
+
+        commonRobot.verifyCustomerSuspendedBanner();
+      });
     });
 
     group('Step 2 - ', () {
       const noResultCreditSearchKeyword = '0000000000';
 
-      Future<void> goToPaymentStep2Page(WidgetTester tester) async {
+      Future<void> goToPaymentStep2Page(
+        WidgetTester tester, {
+        String shipToCode = shipToCode,
+        String dateTimeFormat = dateTimeFormat,
+      }) async {
         //init app
-        await pumpAppWithHomeScreen(tester);
+        await pumpAppWithHomeScreen(tester, shipToCode: shipToCode);
         final dateFormat = await getDateFormatBasedOnUserLanguage();
 
         //Redirect to Payment Step1 page
@@ -2758,14 +2898,40 @@ void main() {
           creditIdPrice,
         );
       });
+
+      testWidgets(
+          'EZRX-19747 | Find customer suspended banner in New Payment step2 when customer code is blocked',
+          (tester) async {
+        await goToPaymentStep2Page(
+          tester,
+          shipToCode: shipToCodeWithCustomerCodeBlocked,
+          dateTimeFormat: 'MM/dd/yyyy',
+        );
+
+        commonRobot.verifyCustomerSuspendedBanner();
+      });
+
+      testWidgets(
+          'EZRX-19747 | Find customer suspended banner in New Payment step2 when ship to code is blocked',
+          (tester) async {
+        await goToPaymentStep2Page(
+          tester,
+          shipToCode: blockedShipToCode,
+          dateTimeFormat: 'MM/dd/yyyy',
+        );
+
+        commonRobot.verifyCustomerSuspendedBanner();
+      });
     });
 
     group('Step 3 - ', () {
       Future<void> goToPaymentStep3PageWithoutCredit(
-        WidgetTester tester,
-      ) async {
+        WidgetTester tester, {
+        String dateTimeFormat = dateTimeFormat,
+        String shipToCode = shipToCode,
+      }) async {
         //init app
-        await pumpAppWithHomeScreen(tester);
+        await pumpAppWithHomeScreen(tester, shipToCode: shipToCode);
         final dateFormat = await getDateFormatBasedOnUserLanguage();
         //Redirect to Payment Step1 page
         await homeRobot.tapPaymentQuickAccess();
@@ -2823,6 +2989,18 @@ void main() {
           0.0,
         );
         newPaymentStep3Robot.verifyGeneratePaymentAdviceButton();
+      });
+
+      testWidgets(
+          'EZRX-19747 | Find customer suspended banner in New Payment step 3',
+          (tester) async {
+        await goToPaymentStep3PageWithoutCredit(
+          tester,
+          shipToCode: shipToCodeWithCustomerCodeBlocked,
+          dateTimeFormat: 'MM/dd/yyyy',
+        );
+
+        commonRobot.verifyCustomerSuspendedBanner();
       });
     });
   });

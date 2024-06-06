@@ -275,6 +275,13 @@ class ProductDetailRobot extends CommonRobot {
     );
   }
 
+  void verifyAddToCarButtonDisabled() {
+    expect(
+      (tester.widget<ElevatedButton>(find.byType(ElevatedButton))).enabled,
+      false,
+    );
+  }
+
   void verifyMaterialDosageDisplayed() {
     expect(find.byKey(WidgetKeys.materialDosage).first, findsOneWidget);
   }

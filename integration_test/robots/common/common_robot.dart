@@ -95,6 +95,24 @@ class CommonRobot {
     await tester.pumpAndSettle();
   }
 
+  void verifyCustomerSuspendedBanner() {
+    final customerSuspendedBannerLeading = find.descendant(
+      of: find.byKey(WidgetKeys.customerBlockedBanner),
+      matching: find.text('Your account is blocked.'.tr()),
+    );
+
+    final customerSuspendedBannerTrailing = find.descendant(
+      of: find.byKey(WidgetKeys.customerBlockedBanner),
+      matching: find.text(
+        'To continue using eZRx+, please contact your system administrator.'
+            .tr(),
+      ),
+    );
+
+    expect(customerSuspendedBannerLeading, findsOneWidget);
+    expect(customerSuspendedBannerTrailing, findsOneWidget);
+  }
+
   void verifyLoadingImage({bool isVisible = true}) {
     expect(
       find.byKey(WidgetKeys.loaderImage),

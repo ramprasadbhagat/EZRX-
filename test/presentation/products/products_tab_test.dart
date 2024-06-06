@@ -37,6 +37,7 @@ import 'package:ezrxmobile/presentation/products/widgets/material_grid_item.dart
 import 'package:ezrxmobile/presentation/products/widgets/search_and_filter.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
@@ -83,6 +84,13 @@ void main() {
     customerLicense =
         await CustomerLicenseLocalDataSource().getCustomerLicense();
     HttpOverrides.global = null;
+    
+    TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
+      .setMockMethodCallHandler(
+          const MethodChannel('plugins.flutter.io/path_provider'),
+          (MethodCall methodCall) async {
+    return '.';
+  });
   });
 
   group(
