@@ -14,6 +14,7 @@ import 'package:ezrxmobile/domain/order/entities/order_document_type.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details.dart';
 import 'package:ezrxmobile/domain/order/entities/submit_order_response.dart';
 import 'package:ezrxmobile/domain/order/repository/i_order_repository.dart';
+import 'package:ezrxmobile/domain/order/repository/i_stock_info_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -25,8 +26,10 @@ part 'order_summary_bloc.freezed.dart';
 
 class OrderSummaryBloc extends Bloc<OrderSummaryEvent, OrderSummaryState> {
   final IOrderRepository repository;
+  final IStockInfoRepository stockInfoRepository;
   OrderSummaryBloc({
     required this.repository,
+    required this.stockInfoRepository,
   }) : super(OrderSummaryState.initial()) {
     on<OrderSummaryEvent>(_onEvent);
   }
@@ -137,10 +140,13 @@ class OrderSummaryBloc extends Bloc<OrderSummaryEvent, OrderSummaryState> {
         );
       },
       confirmedOrderStockInfo: (e) async {
-        final failureOrSuccess = await repository.getConfirmedOrderStockInfo(
+        final failureOrSuccess = await stockInfoRepository.getStockInfoList(
           customerCodeInfo: state.customerCodeInfo,
-          orderHistoryDetailList: e.orderHistoryDetailList,
-          salesOrg: state.salesOrganisation.salesOrg,
+          materials: e.orderHistoryDetailList.allItems
+              .map((e) => e.materialNumber)
+              .toList(),
+          salesOrganisation: state.salesOrganisation,
+          shipToInfo: state.shipToInfo,
         );
         failureOrSuccess.fold(
           (failure) {

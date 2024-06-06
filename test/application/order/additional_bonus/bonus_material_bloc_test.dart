@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/cart_repository.dart';
+import 'package:ezrxmobile/infrastructure/order/repository/stock_info_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:ezrxmobile/config.dart';
@@ -26,6 +27,8 @@ class MaterialListRepositoryMock extends Mock
 
 class CartRepositoryMock extends Mock implements CartRepository {}
 
+class StockInfoRepositoryMock extends Mock implements StockInfoRepository {}
+
 void main() {
   late final MaterialListRepository materialListRepository;
   late final CartRepository cartRepository;
@@ -38,6 +41,7 @@ void main() {
     principalCode: PrincipalCode('0000101246'),
   );
   const fakeError = ApiFailure.other('fake-error');
+  final stockInfoRepositoryMock = StockInfoRepositoryMock();
   setUpAll(() async {
     WidgetsFlutterBinding.ensureInitialized();
     config = Config()..appFlavor = Flavor.mock;
@@ -63,6 +67,7 @@ void main() {
         materialListRepository: materialListRepository,
         cartRepository: cartRepository,
         config: config,
+        stockInfoRepository: stockInfoRepositoryMock,
       ),
       setUp: () {
         when(
@@ -82,7 +87,7 @@ void main() {
           (_) async => Right(fakeMaterialListData),
         );
         when(
-          () => cartRepository.getStockInfoList(
+          () => stockInfoRepositoryMock.getMappedStockInfoList(
             customerCodeInfo: fakeCustomerCodeInfo,
             shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
             salesOrganisation: fakeMYSalesOrganisation,
@@ -136,6 +141,7 @@ void main() {
         materialListRepository: materialListRepository,
         cartRepository: cartRepository,
         config: config,
+        stockInfoRepository: stockInfoRepositoryMock,
       ),
       setUp: () {
         when(
@@ -185,6 +191,7 @@ void main() {
         materialListRepository: materialListRepository,
         cartRepository: cartRepository,
         config: config,
+        stockInfoRepository: stockInfoRepositoryMock,
       ),
       seed: () => BonusMaterialState.initial().copyWith(
         bonusItemList: fakeMaterialListData.products,
@@ -208,7 +215,7 @@ void main() {
           (_) async => Right(fakeMaterialListData),
         );
         when(
-          () => cartRepository.getStockInfoList(
+          () => stockInfoRepositoryMock.getMappedStockInfoList(
             customerCodeInfo: fakeCustomerCodeInfo,
             shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
             salesOrganisation: fakeMYSalesOrganisation,
@@ -268,6 +275,7 @@ void main() {
         materialListRepository: materialListRepository,
         cartRepository: cartRepository,
         config: config,
+        stockInfoRepository: stockInfoRepositoryMock,
       ),
       seed: () => BonusMaterialState.initial().copyWith(
         bonusItemList: fakeMaterialListData.products,
@@ -321,6 +329,7 @@ void main() {
         materialListRepository: materialListRepository,
         cartRepository: cartRepository,
         config: config,
+        stockInfoRepository: stockInfoRepositoryMock,
       ),
       seed: () => BonusMaterialState.initial().copyWith(
         bonusItemList: fakeMaterialListData.products,
@@ -347,6 +356,7 @@ void main() {
         materialListRepository: materialListRepository,
         cartRepository: cartRepository,
         config: config,
+        stockInfoRepository: stockInfoRepositoryMock,
       ),
       seed: () => BonusMaterialState.initial().copyWith(
         bonusItemList: fakeMaterialListData.products,
@@ -376,6 +386,7 @@ void main() {
         materialListRepository: materialListRepository,
         cartRepository: cartRepository,
         config: config,
+        stockInfoRepository: stockInfoRepositoryMock,
       ),
       seed: () => BonusMaterialState.initial().copyWith(
         bonusItemList: [
@@ -408,6 +419,7 @@ void main() {
         materialListRepository: materialListRepository,
         cartRepository: cartRepository,
         config: config,
+        stockInfoRepository: stockInfoRepositoryMock,
       ),
       seed: () => BonusMaterialState.initial().copyWith(
         bonusItemList: [
@@ -422,7 +434,7 @@ void main() {
       ),
       setUp: () {
         when(
-          () => cartRepository.getStockInfoList(
+          () => stockInfoRepositoryMock.getMappedStockInfoList(
             customerCodeInfo: fakeCustomerCodeInfo,
             shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
             salesOrganisation: fakeMYSalesOrganisation,
@@ -485,6 +497,7 @@ void main() {
         materialListRepository: materialListRepository,
         cartRepository: cartRepository,
         config: config,
+        stockInfoRepository: stockInfoRepositoryMock,
       ),
       seed: () => BonusMaterialState.initial().copyWith(
         bonusItemList: [
@@ -493,7 +506,7 @@ void main() {
       ),
       setUp: () {
         when(
-          () => cartRepository.getStockInfoList(
+          () => stockInfoRepositoryMock.getMappedStockInfoList(
             customerCodeInfo: fakeCustomerCodeInfo,
             shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
             salesOrganisation: fakeMYSalesOrganisation,
@@ -542,6 +555,7 @@ void main() {
       materialListRepository: materialListRepository,
       cartRepository: cartRepository,
       config: config,
+      stockInfoRepository: stockInfoRepositoryMock,
     ),
     seed: () => BonusMaterialState.initial().copyWith(
       bonusItemList: fakeMaterialListData.products,

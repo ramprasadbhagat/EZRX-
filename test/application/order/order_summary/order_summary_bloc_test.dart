@@ -14,6 +14,7 @@ import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/domain/order/entities/submit_order_response.dart';
 import 'package:ezrxmobile/domain/order/entities/submit_order_response_message.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
+import 'package:ezrxmobile/infrastructure/order/repository/stock_info_repository.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/order_repository.dart';
@@ -25,8 +26,11 @@ import '../../../common_mock_data/user_mock.dart';
 
 class OrderRepositoryMock extends Mock implements OrderRepository {}
 
+class StockInfoRepositoryMock extends Mock implements StockInfoRepository {}
+
 void main() {
   late OrderRepository orderRepositoryMock;
+  late StockInfoRepository stockInfoRepositoryMock;
   final submitOrderResponse = SubmitOrderResponse.empty().copyWith(
     salesDocument: 'fake-sales-document',
     messages: [
@@ -54,12 +58,16 @@ void main() {
     setUp(
       () {
         orderRepositoryMock = OrderRepositoryMock();
+        stockInfoRepositoryMock = StockInfoRepositoryMock();
       },
     );
 
     blocTest(
       ' => Initialized event test',
-      build: () => OrderSummaryBloc(repository: orderRepositoryMock),
+      build: () => OrderSummaryBloc(
+        repository: orderRepositoryMock,
+        stockInfoRepository: stockInfoRepositoryMock,
+      ),
       act: (OrderSummaryBloc bloc) {
         bloc.add(
           OrderSummaryEvent.initialized(
@@ -102,7 +110,10 @@ void main() {
         ).thenAnswer((value) async => Right(submitOrderResponse));
       },
       seed: () => seedState,
-      build: () => OrderSummaryBloc(repository: orderRepositoryMock),
+      build: () => OrderSummaryBloc(
+        repository: orderRepositoryMock,
+        stockInfoRepository: stockInfoRepositoryMock,
+      ),
       act: (OrderSummaryBloc bloc) {
         bloc.add(
           OrderSummaryEvent.submitOrder(
@@ -161,7 +172,10 @@ void main() {
         );
       },
       seed: () => seedState,
-      build: () => OrderSummaryBloc(repository: orderRepositoryMock),
+      build: () => OrderSummaryBloc(
+        repository: orderRepositoryMock,
+        stockInfoRepository: stockInfoRepositoryMock,
+      ),
       act: (OrderSummaryBloc bloc) {
         bloc.add(
           OrderSummaryEvent.submitOrder(
@@ -241,7 +255,10 @@ void main() {
         ).thenAnswer((value) async => Right(submitOrderResponse));
       },
       seed: () => seedState,
-      build: () => OrderSummaryBloc(repository: orderRepositoryMock),
+      build: () => OrderSummaryBloc(
+        repository: orderRepositoryMock,
+        stockInfoRepository: stockInfoRepositoryMock,
+      ),
       act: (OrderSummaryBloc bloc) {
         bloc.add(
           OrderSummaryEvent.submitOrder(
@@ -314,10 +331,14 @@ void main() {
           (value) async => Right([orderHistoryDetails]),
         );
         when(
-          () => orderRepositoryMock.getConfirmedOrderStockInfo(
-            salesOrg: seedState.salesOrganisation.salesOrg,
+          () => stockInfoRepositoryMock.getStockInfoList(
+            salesOrganisation: seedState.salesOrganisation,
             customerCodeInfo: seedState.customerCodeInfo,
-            orderHistoryDetailList: [orderHistoryDetails],
+            materials: [orderHistoryDetails]
+                .allItems
+                .map((e) => e.materialNumber)
+                .toList(),
+            shipToInfo: fakeShipToInfo,
           ),
         ).thenAnswer(
           (value) async => Right(stockInfoList),
@@ -326,7 +347,10 @@ void main() {
       seed: () => seedState.copyWith(
         submitOrderResponse: submitOrderResponse,
       ),
-      build: () => OrderSummaryBloc(repository: orderRepositoryMock),
+      build: () => OrderSummaryBloc(
+        repository: orderRepositoryMock,
+        stockInfoRepository: stockInfoRepositoryMock,
+      ),
       act: (OrderSummaryBloc bloc) {
         bloc.add(
           OrderSummaryEvent.orderConfirmationDetail(
@@ -378,7 +402,10 @@ void main() {
       seed: () => seedState.copyWith(
         submitOrderResponse: submitOrderResponse,
       ),
-      build: () => OrderSummaryBloc(repository: orderRepositoryMock),
+      build: () => OrderSummaryBloc(
+        repository: orderRepositoryMock,
+        stockInfoRepository: stockInfoRepositoryMock,
+      ),
       act: (OrderSummaryBloc bloc) {
         bloc.add(
           OrderSummaryEvent.orderConfirmationDetail(
@@ -407,10 +434,14 @@ void main() {
       ' => Get confirmed order stock info success',
       setUp: () {
         when(
-          () => orderRepositoryMock.getConfirmedOrderStockInfo(
-            salesOrg: seedState.salesOrganisation.salesOrg,
+          () => stockInfoRepositoryMock.getStockInfoList(
+            salesOrganisation: seedState.salesOrganisation,
             customerCodeInfo: seedState.customerCodeInfo,
-            orderHistoryDetailList: [orderHistoryDetails],
+            materials: [orderHistoryDetails]
+                .allItems
+                .map((e) => e.materialNumber)
+                .toList(),
+            shipToInfo: fakeShipToInfo,
           ),
         ).thenAnswer(
           (value) async => Right(stockInfoList),
@@ -419,7 +450,10 @@ void main() {
       seed: () => seedState.copyWith(
         submitOrderResponse: submitOrderResponse,
       ),
-      build: () => OrderSummaryBloc(repository: orderRepositoryMock),
+      build: () => OrderSummaryBloc(
+        repository: orderRepositoryMock,
+        stockInfoRepository: stockInfoRepositoryMock,
+      ),
       act: (OrderSummaryBloc bloc) {
         bloc.add(
           OrderSummaryEvent.confirmedOrderStockInfo(
@@ -444,10 +478,14 @@ void main() {
       ' => Get confirmed order stock info failure',
       setUp: () {
         when(
-          () => orderRepositoryMock.getConfirmedOrderStockInfo(
+          () => stockInfoRepositoryMock.getStockInfoList(
             customerCodeInfo: seedState.customerCodeInfo,
-            orderHistoryDetailList: [orderHistoryDetails],
-            salesOrg: seedState.salesOrganisation.salesOrg,
+            materials: [orderHistoryDetails]
+                .allItems
+                .map((e) => e.materialNumber)
+                .toList(),
+            salesOrganisation: seedState.salesOrganisation,
+            shipToInfo: fakeShipToInfo,
           ),
         ).thenAnswer(
           (value) async => const Left(ApiFailure.other('Some Error')),
@@ -456,7 +494,10 @@ void main() {
       seed: () => seedState.copyWith(
         submitOrderResponse: submitOrderResponse,
       ),
-      build: () => OrderSummaryBloc(repository: orderRepositoryMock),
+      build: () => OrderSummaryBloc(
+        repository: orderRepositoryMock,
+        stockInfoRepository: stockInfoRepositoryMock,
+      ),
       act: (OrderSummaryBloc bloc) {
         bloc.add(
           OrderSummaryEvent.confirmedOrderStockInfo(
@@ -480,7 +521,10 @@ void main() {
 
     blocTest(
       ' => UpdateIsExpanded event when isExpanded is true',
-      build: () => OrderSummaryBloc(repository: orderRepositoryMock),
+      build: () => OrderSummaryBloc(
+        repository: orderRepositoryMock,
+        stockInfoRepository: stockInfoRepositoryMock,
+      ),
       seed: () => seedState,
       act: (OrderSummaryBloc bloc) {
         bloc.add(
@@ -494,7 +538,10 @@ void main() {
 
     blocTest(
       ' => UpdateIsExpanded event when isExpanded is false',
-      build: () => OrderSummaryBloc(repository: orderRepositoryMock),
+      build: () => OrderSummaryBloc(
+        repository: orderRepositoryMock,
+        stockInfoRepository: stockInfoRepositoryMock,
+      ),
       seed: () => seedState.copyWith(
         isExpanded: true,
       ),

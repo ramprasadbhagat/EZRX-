@@ -22,6 +22,7 @@ import 'package:ezrxmobile/presentation/home/selector/customer_code_selector.dar
 import 'package:ezrxmobile/presentation/home/widgets/product_loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/orders/cart/cart_button.dart';
 import 'package:ezrxmobile/presentation/orders/widgets/edi_user_banner.dart';
+import 'package:ezrxmobile/presentation/orders/widgets/stock_info_banner.dart';
 import 'package:ezrxmobile/presentation/products/widgets/filter_value_list.dart';
 import 'package:ezrxmobile/presentation/products/widgets/material_grid_item.dart';
 import 'package:ezrxmobile/presentation/products/widgets/search_and_filter.dart';
@@ -75,6 +76,7 @@ class ProductsTab extends StatelessWidget {
                 children: [
                   const LicenseExpiredBanner(),
                   const EdiUserBanner(),
+                  const StockInfoBanner(),
                   const SearchAndFilter(),
                   FilterValueList(
                     isFetching: state.isFetching,

@@ -2773,6 +2773,58 @@ void main() {
         );
       });
 
+      testWidgets(
+        ' -> Stock Info banner visible in product details',
+        (WidgetTester tester) async {
+          when(() => eligibilityBlocMock.state).thenReturn(
+            EligibilityState.initial().copyWith(
+              customerCodeInfo: fakeCustomerCodeInfo,
+              salesOrgConfigs: fakeIDSalesOrgConfigs,
+              isStockInfoNotAvailable: true,
+            ),
+          );
+
+          await tester.pumpWidget(getScopedWidget());
+          await tester.pump();
+
+          final stockInfoBanner = find.byKey(WidgetKeys.stockInfoBanner);
+          final stockInfoBannerTitle = find.text('Stock status not available:');
+          final stockInfoBannerSubTitle = find.text(
+            'Please note that stock information is not available at the moment. While you can still place orders, fulfilment will be subjected to available stock levels.',
+          );
+
+          expect(stockInfoBanner, findsOneWidget);
+          expect(stockInfoBannerTitle, findsOneWidget);
+          expect(stockInfoBannerSubTitle, findsOneWidget);
+        },
+      );
+
+      testWidgets(
+        ' -> Stock Info banner not visible in product details',
+        (WidgetTester tester) async {
+          when(() => eligibilityBlocMock.state).thenReturn(
+            EligibilityState.initial().copyWith(
+              customerCodeInfo: fakeCustomerCodeInfo,
+              salesOrgConfigs: fakeIDSalesOrgConfigs,
+              isStockInfoNotAvailable: false,
+            ),
+          );
+
+          await tester.pumpWidget(getScopedWidget());
+          await tester.pump();
+
+          final stockInfoBanner = find.byKey(WidgetKeys.stockInfoBanner);
+          final stockInfoBannerTitle = find.text('Stock status not available:');
+          final stockInfoBannerSubTitle = find.text(
+            'Please note that stock information is not available at the moment. While you can still place orders, fulfilment will be subjected to available stock levels.',
+          );
+
+          expect(stockInfoBanner, findsNothing);
+          expect(stockInfoBannerTitle, findsNothing);
+          expect(stockInfoBannerSubTitle, findsNothing);
+        },
+      );
+
       group('Marketplace icon -', () {
         testWidgets('Visible when material is from MP', (tester) async {
           when(() => productDetailMockBloc.state).thenReturn(

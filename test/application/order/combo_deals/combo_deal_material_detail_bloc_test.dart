@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:ezrxmobile/infrastructure/order/repository/stock_info_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:mocktail/mocktail.dart';
@@ -32,6 +33,8 @@ class ConfigMock extends Mock implements Config {}
 class MaterialListRepositoryMock extends Mock
     implements MaterialListRepository {}
 
+class StockInfoRepositoryMock extends Mock implements StockInfoRepository {}    
+
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   late ProductDetailRepository productDetailRepository;
@@ -49,9 +52,11 @@ void main() {
   late List<MaterialInfo> materialInfos;
   late List<MaterialStockInfo> materialStockInfos;
   late MaterialResponse materialResponse;
+  late StockInfoRepository stockInfoRepositoryMock;
   setUpAll(() async {
     productDetailRepository = ProductDetailRepositoryMock();
     materialListRepository = MaterialListRepositoryMock();
+    stockInfoRepositoryMock = StockInfoRepositoryMock();
     config = ConfigMock();
     productList = (await CartLocalDataSource().getAddedToCartProductList())
         .cartProducts
@@ -99,6 +104,7 @@ void main() {
         productDetailRepository: productDetailRepository,
         materialListRepository: materialListRepository,
         config: config,
+        stockInfoRepository: stockInfoRepositoryMock,
       ),
       act: (ComboDealMaterialDetailBloc bloc) => bloc.add(initialEvent),
       expect: () => [initialState],
@@ -146,6 +152,7 @@ void main() {
         productDetailRepository: productDetailRepository,
         materialListRepository: materialListRepository,
         config: config,
+        stockInfoRepository: stockInfoRepositoryMock,
       ),
       seed: () => initialState,
       act: (ComboDealMaterialDetailBloc bloc) => bloc.add(
@@ -179,6 +186,7 @@ void main() {
         productDetailRepository: productDetailRepository,
         materialListRepository: materialListRepository,
         config: config,
+        stockInfoRepository: stockInfoRepositoryMock,
       ),
       seed: () => initialState.copyWith(
         items: {
@@ -216,6 +224,7 @@ void main() {
         productDetailRepository: productDetailRepository,
         materialListRepository: materialListRepository,
         config: config,
+        stockInfoRepository: stockInfoRepositoryMock,
       ),
       seed: () => initialState.copyWith(
         items: {
@@ -254,6 +263,7 @@ void main() {
         productDetailRepository: productDetailRepository,
         materialListRepository: materialListRepository,
         config: config,
+        stockInfoRepository: stockInfoRepositoryMock,
       ),
       seed: () => initialState.copyWith(
         items: items,
@@ -337,12 +347,13 @@ void main() {
           }
         }
         when(
-          () => productDetailRepository.getStockInfoList(
+          () => stockInfoRepositoryMock.getStockInfoList(
             customerCodeInfo: fakeCustomerCodeInfo,
             salesOrganisation: fakeKHSalesOrganisation,
             materials: itemsAfterGetMaterials.entries
                 .map((e) => e.value.materialInfo)
-                .toList(),
+                .toList().map((e) => e.materialNumber).toList(),
+            shipToInfo: fakeShipToInfo,    
           ),
         ).thenAnswer(
           (_) async => Right(
@@ -393,6 +404,7 @@ void main() {
         productDetailRepository: productDetailRepository,
         materialListRepository: materialListRepository,
         config: config,
+        stockInfoRepository: stockInfoRepositoryMock,
       ),
       seed: () => initialState.copyWith(
         items: items,
@@ -503,12 +515,15 @@ void main() {
               .mapByMaterialNumber,
         );
         when(
-          () => productDetailRepository.getStockInfoList(
+          () => stockInfoRepositoryMock.getStockInfoList(
             customerCodeInfo: fakeCustomerCodeInfo,
             salesOrganisation: fakeKHSalesOrganisation,
             materials: itemsAfterGetMaterials.entries
                 .map((e) => e.value.materialInfo)
+                .toList()
+                .map((e) => e.materialNumber)
                 .toList(),
+            shipToInfo: fakeShipToInfo,    
           ),
         ).thenAnswer(
           (_) async => Right(
@@ -552,6 +567,7 @@ void main() {
         productDetailRepository: productDetailRepository,
         materialListRepository: materialListRepository,
         config: config,
+        stockInfoRepository: stockInfoRepositoryMock,
       ),
       seed: () => initialState.copyWith(
         items: items,
@@ -651,11 +667,14 @@ void main() {
         }
 
         when(
-          () => productDetailRepository.getStockInfoList(
+          () => stockInfoRepositoryMock.getStockInfoList(
             customerCodeInfo: fakeCustomerCodeInfo,
             salesOrganisation: fakeKHSalesOrganisation,
             materials:
-                newItems.entries.map((e) => e.value.materialInfo).toList(),
+                newItems.entries.map((e) => e.value.materialInfo).toList()
+                .map((e) => e.materialNumber)
+                .toList(),
+            shipToInfo: fakeShipToInfo,    
           ),
         ).thenAnswer(
           (_) async => Right(
@@ -681,6 +700,7 @@ void main() {
         productDetailRepository: productDetailRepository,
         materialListRepository: materialListRepository,
         config: config,
+        stockInfoRepository: stockInfoRepositoryMock,
       ),
       seed: () => initialState.copyWith(
         items: items,
@@ -715,6 +735,7 @@ void main() {
         productDetailRepository: productDetailRepository,
         materialListRepository: materialListRepository,
         config: config,
+        stockInfoRepository: stockInfoRepositoryMock,
       ),
       seed: () => initialState.copyWith(searchKey: SearchKey('dummy')),
       act: (ComboDealMaterialDetailBloc bloc) => bloc.add(
@@ -733,6 +754,7 @@ void main() {
         productDetailRepository: productDetailRepository,
         materialListRepository: materialListRepository,
         config: config,
+        stockInfoRepository: stockInfoRepositoryMock,
       ),
       seed: () => initialState,
       act: (ComboDealMaterialDetailBloc bloc) => bloc.add(
@@ -753,6 +775,7 @@ void main() {
         productDetailRepository: productDetailRepository,
         materialListRepository: materialListRepository,
         config: config,
+        stockInfoRepository: stockInfoRepositoryMock,
       ),
       seed: () => initialState,
       act: (ComboDealMaterialDetailBloc bloc) => bloc.add(
@@ -806,6 +829,7 @@ void main() {
         productDetailRepository: productDetailRepository,
         materialListRepository: materialListRepository,
         config: config,
+        stockInfoRepository: stockInfoRepositoryMock,
       ),
       seed: () => initialState.copyWith(
         items: items,
@@ -860,6 +884,7 @@ void main() {
       productDetailRepository: productDetailRepository,
       materialListRepository: materialListRepository,
       config: config,
+      stockInfoRepository: stockInfoRepositoryMock,
     ),
     seed: () => initialState.copyWith(
       items: items,

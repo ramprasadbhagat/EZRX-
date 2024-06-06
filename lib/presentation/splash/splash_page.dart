@@ -191,7 +191,7 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
             state.mapOrNull(
               authenticated: (authState) {
                 context.read<UserBloc>().add(const UserEvent.fetch());
-
+                
                 context.router.replaceAll(
                   const [
                     SplashPageRoute(),

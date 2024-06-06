@@ -7,6 +7,7 @@ import 'package:ezrxmobile/infrastructure/order/repository/product_details_repos
 import 'package:ezrxmobile/domain/order/entities/price_rule.dart';
 
 import 'package:ezrxmobile/domain/order/entities/cart.dart';
+import 'package:ezrxmobile/infrastructure/order/repository/stock_info_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:bloc_test/bloc_test.dart';
@@ -44,6 +45,8 @@ class CartRepositoryMock extends Mock implements CartRepository {}
 class ProductDetailRepositoryMock extends Mock
     implements ProductDetailRepository {}
 
+class StockInfoRepositoryMock extends Mock implements StockInfoRepository {}
+
 void main() {
   late List<Price> prices;
   late ApiFailure fakeError;
@@ -64,6 +67,7 @@ void main() {
   late RequestCounterOfferDetails fakeCounterOfferDetails;
   late AplSimulatorOrder aplSimulatorOrder;
   late final Cart cartProducts;
+  late StockInfoRepository stockInfoRepositoryMock;
 
   setUpAll(() async {
     WidgetsFlutterBinding.ensureInitialized();
@@ -183,6 +187,7 @@ void main() {
   setUp(() {
     cartRepositoryMock = CartRepositoryMock();
     productDetailRepository = ProductDetailRepositoryMock();
+    stockInfoRepositoryMock = StockInfoRepositoryMock();
   });
 
   List<MaterialInfo> allMaterial(List<PriceAggregate> priceAggregates) =>
@@ -199,7 +204,11 @@ void main() {
     () {
       blocTest<CartBloc, CartState>(
         'Cart initialized-emit fetchProductsAddedToCart-error emit',
-        build: () => CartBloc(cartRepositoryMock, productDetailRepository),
+        build: () => CartBloc(
+          cartRepositoryMock,
+          productDetailRepository,
+          stockInfoRepositoryMock,
+        ),
         setUp: () {
           when(
             () => cartRepositoryMock.getAddedToCartProductList(
@@ -248,7 +257,11 @@ void main() {
       );
       blocTest<CartBloc, CartState>(
         'Cart initialized fetchProductsAddedToCart-emit => fetch product empty',
-        build: () => CartBloc(cartRepositoryMock, productDetailRepository),
+        build: () => CartBloc(
+          cartRepositoryMock,
+          productDetailRepository,
+          stockInfoRepositoryMock,
+        ),
         setUp: () {
           when(
             () => cartRepositoryMock.getAddedToCartProductList(
@@ -306,7 +319,11 @@ void main() {
       );
       blocTest<CartBloc, CartState>(
         'Cart initialized fetchProductsAddedToCart-emit => getDetailsProductsAddedToCart-emit error',
-        build: () => CartBloc(cartRepositoryMock, productDetailRepository),
+        build: () => CartBloc(
+          cartRepositoryMock,
+          productDetailRepository,
+          stockInfoRepositoryMock,
+        ),
         setUp: () {
           final updatedPriceAggregates = priceAggregates
               .map(
@@ -387,7 +404,7 @@ void main() {
             ),
           ];
           when(
-            () => cartRepositoryMock.getStockInfoList(
+            () => stockInfoRepositoryMock.getMappedStockInfoList(
               items: priceAggregates
                   .map((e) => e.toStockListMaterials)
                   .expand((e) => e)
@@ -448,7 +465,11 @@ void main() {
 
       blocTest<CartBloc, CartState>(
         'Cart initialized fetchProductsAddedToCart-emit => getDetailsProductsAddedToCart-emit => updateProductStock-emit error',
-        build: () => CartBloc(cartRepositoryMock, productDetailRepository),
+        build: () => CartBloc(
+          cartRepositoryMock,
+          productDetailRepository,
+          stockInfoRepositoryMock,
+        ),
         setUp: () {
           final priceAggregateAllMaterial = allMaterial(priceAggregates);
           final metaDataResponse = ProductMetaData(
@@ -546,7 +567,7 @@ void main() {
             ),
           ];
           when(
-            () => cartRepositoryMock.getStockInfoList(
+            () => stockInfoRepositoryMock.getMappedStockInfoList(
               items: priceAggregateAllMaterial,
               salesOrganisation: fakeMYSalesOrganisation,
               shipToInfo: shipToInfo,
@@ -604,7 +625,11 @@ void main() {
 
       blocTest<CartBloc, CartState>(
         'Cart initialized fetchProductsAddedToCart-emit => getDetailsProductsAddedToCart-emit => updateProductStock-emit',
-        build: () => CartBloc(cartRepositoryMock, productDetailRepository),
+        build: () => CartBloc(
+          cartRepositoryMock,
+          productDetailRepository,
+          stockInfoRepositoryMock,
+        ),
         setUp: () {
           final priceAggregateAllMaterial = allMaterial(priceAggregates);
           final metaDataResponse = ProductMetaData(
@@ -729,7 +754,7 @@ void main() {
             ),
           ];
           when(
-            () => cartRepositoryMock.getStockInfoList(
+            () => stockInfoRepositoryMock.getMappedStockInfoList(
               items: priceAggregateAllMaterial,
               salesOrganisation: fakeMYSalesOrganisation,
               shipToInfo: shipToInfo,
@@ -787,7 +812,11 @@ void main() {
 
       blocTest<CartBloc, CartState>(
         'Cart initialized fetchProductsAddedToCart-emit => getDetailsProductsAddedToCart-emit => ClearCart-emit',
-        build: () => CartBloc(cartRepositoryMock, productDetailRepository),
+        build: () => CartBloc(
+          cartRepositoryMock,
+          productDetailRepository,
+          stockInfoRepositoryMock,
+        ),
         setUp: () {
           final updatedPriceAggregates = priceAggregates
               .map(
@@ -883,7 +912,11 @@ void main() {
 
       blocTest<CartBloc, CartState>(
         'fetch Bonus Items Meta Data when bonus sample items is added to cart',
-        build: () => CartBloc(cartRepositoryMock, productDetailRepository),
+        build: () => CartBloc(
+          cartRepositoryMock,
+          productDetailRepository,
+          stockInfoRepositoryMock,
+        ),
         setUp: () {
           final priceAggregateAllMaterial = allMaterial([
             priceAggregates.first.copyWith(bonusSampleItems: bonusSampleItem),
@@ -938,7 +971,7 @@ void main() {
             ),
           ];
           when(
-            () => cartRepositoryMock.getStockInfoList(
+            () => stockInfoRepositoryMock.getMappedStockInfoList(
               items: priceAggregateAllMaterial,
               salesOrganisation: fakeMYSalesOrganisation,
               shipToInfo: shipToInfo,
@@ -987,7 +1020,11 @@ void main() {
     () {
       blocTest<CartBloc, CartState>(
         'Cart verifyMaterialDealBonus with no bonus item in cart',
-        build: () => CartBloc(cartRepositoryMock, productDetailRepository),
+        build: () => CartBloc(
+          cartRepositoryMock,
+          productDetailRepository,
+          stockInfoRepositoryMock,
+        ),
         act: (bloc) => bloc.add(
           CartEvent.verifyMaterialDealBonus(
             item: priceAggregates.first,
@@ -1003,7 +1040,11 @@ void main() {
 
       blocTest<CartBloc, CartState>(
         'Cart verifyMaterialDealBonus refresh bonus fail',
-        build: () => CartBloc(cartRepositoryMock, productDetailRepository),
+        build: () => CartBloc(
+          cartRepositoryMock,
+          productDetailRepository,
+          stockInfoRepositoryMock,
+        ),
         seed: () => CartState.initial().copyWith(
           salesOrganisation: fakeMYSalesOrganisation,
           config: fakeMYSalesOrgConfigs,
@@ -1012,7 +1053,7 @@ void main() {
         ),
         setUp: () {
           when(
-            () => cartRepositoryMock.updateMaterialDealBonus(
+            () => stockInfoRepositoryMock.updateStockForMaterialDealBonus(
               salesOrganisation: fakeMYSalesOrganisation,
               salesOrganisationConfigs: fakeMYSalesOrgConfigs,
               shipToInfo: shipToInfo,
@@ -1070,7 +1111,11 @@ void main() {
 
       blocTest<CartBloc, CartState>(
         'Cart verifyMaterialDealBonus refresh bonus',
-        build: () => CartBloc(cartRepositoryMock, productDetailRepository),
+        build: () => CartBloc(
+          cartRepositoryMock,
+          productDetailRepository,
+          stockInfoRepositoryMock,
+        ),
         seed: () => CartState.initial().copyWith(
           salesOrganisation: fakeMYSalesOrganisation,
           config: fakeMYSalesOrgConfigs,
@@ -1079,18 +1124,16 @@ void main() {
         ),
         setUp: () {
           when(
-            () => cartRepositoryMock.updateMaterialDealBonus(
-              salesOrganisation: fakeMYSalesOrganisation,
-              salesOrganisationConfigs: fakeMYSalesOrgConfigs,
-              shipToInfo: shipToInfo,
-              customerCodeInfo: fakeCustomerCodeInfo,
+            () => stockInfoRepositoryMock.updateStockForMaterialDealBonus(
               materials:
                   priceAggregates.map((e) => e.copyWith(quantity: 1)).toList(),
+              salesOrganisation: fakeMYSalesOrganisation,
+              shipToInfo: shipToInfo,
+              customerCodeInfo: fakeCustomerCodeInfo,
+              salesOrganisationConfigs: fakeMYSalesOrgConfigs,
             ),
           ).thenAnswer(
-            (invocation) async => Right(
-              priceAggregates,
-            ),
+            (invocation) async => Right(priceAggregates),
           );
         },
         act: (bloc) => bloc.add(
@@ -1136,7 +1179,11 @@ void main() {
 
       blocTest<CartBloc, CartState>(
         'Cart verifyMaterialDealBonus emitted with updated price info of state has',
-        build: () => CartBloc(cartRepositoryMock, productDetailRepository),
+        build: () => CartBloc(
+          cartRepositoryMock,
+          productDetailRepository,
+          stockInfoRepositoryMock,
+        ),
         seed: () => CartState.initial().copyWith(
           salesOrganisation: fakeSalesOrganisation,
           config: fakeMYSalesOrgConfigs,
@@ -1154,7 +1201,7 @@ void main() {
         ),
         setUp: () {
           when(
-            () => cartRepositoryMock.updateMaterialDealBonus(
+            () => stockInfoRepositoryMock.updateStockForMaterialDealBonus(
               salesOrganisation: fakeSalesOrganisation,
               salesOrganisationConfigs: fakeMYSalesOrgConfigs,
               shipToInfo: shipToInfo,
@@ -1234,7 +1281,11 @@ void main() {
 
       blocTest<CartBloc, CartState>(
         'Cart updateMaterialDealBonus with cart having material with both tier and deal bonus',
-        build: () => CartBloc(cartRepositoryMock, productDetailRepository),
+        build: () => CartBloc(
+          cartRepositoryMock,
+          productDetailRepository,
+          stockInfoRepositoryMock,
+        ),
         seed: () => CartState.initial().copyWith(
           cartProducts: priceAggregatesWithBothTierAndDealBonus,
           salesOrganisation: fakeSalesOrganisation,
@@ -1244,7 +1295,7 @@ void main() {
         ),
         setUp: () {
           when(
-            () => cartRepositoryMock.updateMaterialDealBonus(
+            () => stockInfoRepositoryMock.updateStockForMaterialDealBonus(
               salesOrganisation: fakeSalesOrganisation,
               salesOrganisationConfigs: fakeMYSalesOrgConfigs,
               shipToInfo: shipToInfo,
@@ -1314,7 +1365,11 @@ void main() {
     () {
       blocTest<CartBloc, CartState>(
         'Cart addBonusToCartItem fail',
-        build: () => CartBloc(cartRepositoryMock, productDetailRepository),
+        build: () => CartBloc(
+          cartRepositoryMock,
+          productDetailRepository,
+          stockInfoRepositoryMock,
+        ),
         seed: () => CartState.initial().copyWith(
           salesOrganisation: fakeMYSalesOrganisation,
           config: fakeMYSalesOrgConfigs,
@@ -1322,6 +1377,16 @@ void main() {
           customerCodeInfo: fakeCustomerCodeInfo,
         ),
         setUp: () {
+          when(
+            () => stockInfoRepositoryMock.getStockInfoList(
+              materials: [priceAggregates.first.materialInfo.materialNumber],
+              salesOrganisation: fakeMYSalesOrganisation,
+              shipToInfo: shipToInfo,
+              customerCodeInfo: fakeCustomerCodeInfo,
+            ),
+          ).thenAnswer(
+            (invocation) async => const Right([]),
+          );
           when(
             () => cartRepositoryMock.upsertCart(
               salesOrganisation: fakeMYSalesOrganisation,
@@ -1335,6 +1400,7 @@ void main() {
                   .copyWith(quantity: MaterialQty(1)),
               quantity: 1,
               tenderContractNumber: '',
+              stockInfo: MaterialStockInfo.empty(),
             ),
           ).thenAnswer(
             (invocation) async => Left(fakeError),
@@ -1374,7 +1440,11 @@ void main() {
 
       blocTest<CartBloc, CartState>(
         'Cart addBonusToCartItem',
-        build: () => CartBloc(cartRepositoryMock, productDetailRepository),
+        build: () => CartBloc(
+          cartRepositoryMock,
+          productDetailRepository,
+          stockInfoRepositoryMock,
+        ),
         seed: () => CartState.initial().copyWith(
           cartProducts: [priceAggregates.first],
           salesOrganisation: fakeMYSalesOrganisation,
@@ -1384,50 +1454,52 @@ void main() {
         ),
         setUp: () {
           when(
+            () => stockInfoRepositoryMock.getStockInfoList(
+              materials: [priceAggregates.first.materialInfo.materialNumber],
+              salesOrganisation: fakeMYSalesOrganisation,
+              shipToInfo: shipToInfo,
+              customerCodeInfo: fakeCustomerCodeInfo,
+            ),
+          ).thenAnswer(
+            (invocation) async => Right([
+              MaterialStockInfo.empty().copyWith(
+                stockInfos: priceAggregates.first.stockInfoList,
+                materialNumber:
+                    priceAggregates.first.materialInfo.materialNumber,
+              ),
+            ]),
+          );
+          when(
             () => cartRepositoryMock.upsertCart(
               salesOrganisation: fakeMYSalesOrganisation,
               salesOrganisationConfig: fakeMYSalesOrgConfigs,
               shipToInfo: shipToInfo,
               customerCodeInfo: fakeCustomerCodeInfo,
               counterOfferDetails: RequestCounterOfferDetails.empty(),
-              itemId: StringValue('fake-bonus-item-id').getValue(),
+              itemId: StringValue('fake-item-id').getValue(),
               language: fakeClientUser.preferredLanguage,
               materialInfo: priceAggregates.first.materialInfo.copyWith(
                 quantity: MaterialQty(1),
               ),
               quantity: 1,
               tenderContractNumber: '',
+              stockInfo: MaterialStockInfo.empty().copyWith(
+                stockInfos: priceAggregates.first.stockInfoList,
+                materialNumber:
+                    priceAggregates.first.materialInfo.materialNumber,
+              ),
             ),
           ).thenAnswer(
             (invocation) async => Right(
               [
-                priceAggregates.first.copyWith(
-                  bonusSampleItems: bonusSampleItem,
-                ),
+                priceAggregates.first,
               ],
-            ),
-          );
-          when(
-            () => cartRepositoryMock.updateMaterialDealBonus(
-              salesOrganisation: fakeMYSalesOrganisation,
-              salesOrganisationConfigs: fakeMYSalesOrgConfigs,
-              shipToInfo: shipToInfo,
-              customerCodeInfo: fakeCustomerCodeInfo,
-              materials: [
-                priceAggregates.first.copyWith(
-                  bonusSampleItems: bonusSampleItem,
-                ),
-              ],
-            ),
-          ).thenAnswer(
-            (invocation) async => Left(
-              fakeError,
             ),
           );
         },
         act: (bloc) => bloc.add(
           CartEvent.addBonusToCartItem(
-            bonusItemId: StringValue('fake-bonus-item-id'),
+            bonusItemId: StringValue('fake-item-id'),
             bonusMaterial: priceAggregates.first.materialInfo.copyWith(
               quantity: MaterialQty(1),
             ),
@@ -1454,35 +1526,12 @@ void main() {
           ),
           CartState.initial().copyWith(
             cartProducts: [
-              priceAggregates.first.copyWith(bonusSampleItems: bonusSampleItem),
+              priceAggregates.first,
             ],
             salesOrganisation: fakeMYSalesOrganisation,
             config: fakeMYSalesOrgConfigs,
             shipToInfo: shipToInfo,
             customerCodeInfo: fakeCustomerCodeInfo,
-          ),
-          CartState.initial().copyWith(
-            upsertBonusItemInProgressHashCode: [],
-            isFetchingBonus: true,
-            cartProducts: [
-              priceAggregates.first.copyWith(bonusSampleItems: bonusSampleItem),
-            ],
-            salesOrganisation: fakeMYSalesOrganisation,
-            config: fakeMYSalesOrgConfigs,
-            shipToInfo: shipToInfo,
-            customerCodeInfo: fakeCustomerCodeInfo,
-          ),
-          CartState.initial().copyWith(
-            upsertBonusItemInProgressHashCode: [],
-            cartProducts: [
-              priceAggregates.first.copyWith(bonusSampleItems: bonusSampleItem),
-            ],
-            salesOrganisation: fakeMYSalesOrganisation,
-            config: fakeMYSalesOrgConfigs,
-            shipToInfo: shipToInfo,
-            customerCodeInfo: fakeCustomerCodeInfo,
-            isFetchingBonus: false,
-            apiFailureOrSuccessOption: optionOf(Left(fakeError)),
           ),
         ],
       );
@@ -1494,7 +1543,11 @@ void main() {
     () {
       blocTest<CartBloc, CartState>(
         'Cart upsertCart new Item fail',
-        build: () => CartBloc(cartRepositoryMock, productDetailRepository),
+        build: () => CartBloc(
+          cartRepositoryMock,
+          productDetailRepository,
+          stockInfoRepositoryMock,
+        ),
         seed: () => CartState.initial().copyWith(
           salesOrganisation: fakeMYSalesOrganisation,
           config: fakeMYSalesOrgConfigs,
@@ -1513,9 +1566,20 @@ void main() {
               product: priceAggregates.first.copyWith(
                 quantity: 2,
               ),
+              materialStockInfo: [],
             ),
           ).thenAnswer(
             (invocation) async => Left(fakeError),
+          );
+          when(
+            () => stockInfoRepositoryMock.getStockInfoList(
+              materials: [priceAggregates.first.materialInfo.materialNumber],
+              salesOrganisation: fakeMYSalesOrganisation,
+              shipToInfo: shipToInfo,
+              customerCodeInfo: fakeCustomerCodeInfo,
+            ),
+          ).thenAnswer(
+            (invocation) async => const Right([]),
           );
         },
         act: (bloc) => bloc.add(
@@ -1545,7 +1609,11 @@ void main() {
 
       blocTest<CartBloc, CartState>(
         'Cart upsertCart update old Item',
-        build: () => CartBloc(cartRepositoryMock, productDetailRepository),
+        build: () => CartBloc(
+          cartRepositoryMock,
+          productDetailRepository,
+          stockInfoRepositoryMock,
+        ),
         seed: () => CartState.initial().copyWith(
           cartProducts: [priceAggregates.first.copyWith(quantity: 1)],
           salesOrganisation: fakeMYSalesOrganisation,
@@ -1565,7 +1633,11 @@ void main() {
 
       blocTest<CartBloc, CartState>(
         'Cart upsertCart old Item and call update stock event afterward',
-        build: () => CartBloc(cartRepositoryMock, productDetailRepository),
+        build: () => CartBloc(
+          cartRepositoryMock,
+          productDetailRepository,
+          stockInfoRepositoryMock,
+        ),
         seed: () => CartState.initial().copyWith(
           cartProducts: [priceAggregates.elementAt(1)],
           salesOrganisation: fakeMYSalesOrganisation,
@@ -1585,13 +1657,25 @@ void main() {
               product: priceAggregates.first.copyWith(
                 quantity: 2,
               ),
+              materialStockInfo: [],
             ),
           ).thenAnswer(
             (_) async => Right([priceAggregates.first.copyWith(quantity: 2)]),
           );
 
           when(
-            () => cartRepositoryMock.getStockInfoList(
+            () => stockInfoRepositoryMock.getStockInfoList(
+              materials: [priceAggregates.first.materialInfo.materialNumber],
+              salesOrganisation: fakeMYSalesOrganisation,
+              shipToInfo: shipToInfo,
+              customerCodeInfo: fakeCustomerCodeInfo,
+            ),
+          ).thenAnswer(
+            (invocation) async => const Right([]),
+          );
+
+          when(
+            () => stockInfoRepositoryMock.getMappedStockInfoList(
               items: priceAggregates.first
                   .copyWith(quantity: 2)
                   .toStockListMaterials,
@@ -1647,7 +1731,11 @@ void main() {
 
       blocTest<CartBloc, CartState>(
         'Cart upsertCart new Item and call update stock event afterward',
-        build: () => CartBloc(cartRepositoryMock, productDetailRepository),
+        build: () => CartBloc(
+          cartRepositoryMock,
+          productDetailRepository,
+          stockInfoRepositoryMock,
+        ),
         seed: () => CartState.initial().copyWith(
           salesOrganisation: fakeMYSalesOrganisation,
           config: fakeMYSalesOrgConfigs,
@@ -1666,13 +1754,23 @@ void main() {
               product: priceAggregates.first.copyWith(
                 quantity: 2,
               ),
+              materialStockInfo: [],
             ),
           ).thenAnswer(
             (_) async => Right([priceAggregates.first.copyWith(quantity: 2)]),
           );
-
           when(
-            () => cartRepositoryMock.getStockInfoList(
+            () => stockInfoRepositoryMock.getStockInfoList(
+              materials: [priceAggregates.first.materialInfo.materialNumber],
+              salesOrganisation: fakeMYSalesOrganisation,
+              shipToInfo: shipToInfo,
+              customerCodeInfo: fakeCustomerCodeInfo,
+            ),
+          ).thenAnswer(
+            (invocation) async => const Right([]),
+          );
+          when(
+            () => stockInfoRepositoryMock.getMappedStockInfoList(
               items: priceAggregates.first
                   .copyWith(quantity: 2)
                   .toStockListMaterials,
@@ -1727,7 +1825,11 @@ void main() {
 
       blocTest<CartBloc, CartState>(
         'Should add fetch total price event and update stock for ID market after upsert success',
-        build: () => CartBloc(cartRepositoryMock, productDetailRepository),
+        build: () => CartBloc(
+          cartRepositoryMock,
+          productDetailRepository,
+          stockInfoRepositoryMock,
+        ),
         seed: () => CartState.initial().copyWith(
           salesOrganisation: fakeIDSalesOrganisation,
           config: fakeIDSalesOrgConfigs,
@@ -1750,10 +1852,21 @@ void main() {
                 quantity: 2,
                 salesOrgConfig: fakeIDSalesOrgConfigs,
               ),
+              materialStockInfo: [],
             ),
           ).thenAnswer((_) async => Right([priceAggregatesForID.first]));
           when(
-            () => cartRepositoryMock.getStockInfoList(
+            () => stockInfoRepositoryMock.getStockInfoList(
+              materials: [priceAggregates.first.materialInfo.materialNumber],
+              salesOrganisation: fakeIDSalesOrganisation,
+              shipToInfo: shipToInfo,
+              customerCodeInfo: fakeCustomerCodeInfo,
+            ),
+          ).thenAnswer(
+            (invocation) async => const Right([]),
+          );
+          when(
+            () => stockInfoRepositoryMock.getMappedStockInfoList(
               items: priceAggregatesForID.first.toStockListMaterials,
               salesOrganisation: fakeIDSalesOrganisation,
               salesOrganisationConfigs: fakeIDSalesOrgConfigs,
@@ -1858,7 +1971,11 @@ void main() {
 
       blocTest<CartBloc, CartState>(
         'Should not add verify bonus and fetch total price after upsert success and cart is empty',
-        build: () => CartBloc(cartRepositoryMock, productDetailRepository),
+        build: () => CartBloc(
+          cartRepositoryMock,
+          productDetailRepository,
+          stockInfoRepositoryMock,
+        ),
         seed: () => CartState.initial().copyWith(
           salesOrganisation: fakeIDSalesOrganisation,
           config: fakeIDSalesOrgConfigs,
@@ -1866,6 +1983,16 @@ void main() {
           customerCodeInfo: fakeCustomerCodeInfo,
         ),
         setUp: () {
+          when(
+            () => stockInfoRepositoryMock.getStockInfoList(
+              materials: [priceAggregates.first.materialInfo.materialNumber],
+              salesOrganisation: fakeIDSalesOrganisation,
+              shipToInfo: shipToInfo,
+              customerCodeInfo: fakeCustomerCodeInfo,
+            ),
+          ).thenAnswer(
+            (invocation) async => const Right([]),
+          );
           when(
             () => cartRepositoryMock.upsertCartWithBonus(
               salesOrganisation: fakeIDSalesOrganisation,
@@ -1879,6 +2006,7 @@ void main() {
               product: priceAggregates.first.copyWith(
                 quantity: 2,
               ),
+              materialStockInfo: [],
             ),
           ).thenAnswer((_) async => const Right([]));
         },
@@ -1914,7 +2042,11 @@ void main() {
     () {
       blocTest<CartBloc, CartState>(
         'Cart upsertCartItems new Item fail',
-        build: () => CartBloc(cartRepositoryMock, productDetailRepository),
+        build: () => CartBloc(
+          cartRepositoryMock,
+          productDetailRepository,
+          stockInfoRepositoryMock,
+        ),
         seed: () => CartState.initial().copyWith(
           salesOrganisation: fakeMYSalesOrganisation,
           config: fakeMYSalesOrgConfigs,
@@ -1959,7 +2091,11 @@ void main() {
 
       blocTest<CartBloc, CartState>(
         'Cart upsertCartItems new Item fail same bundle',
-        build: () => CartBloc(cartRepositoryMock, productDetailRepository),
+        build: () => CartBloc(
+          cartRepositoryMock,
+          productDetailRepository,
+          stockInfoRepositoryMock,
+        ),
         seed: () => CartState.initial().copyWith(
           cartProducts: [
             priceAggregates.elementAt(1),
@@ -1991,7 +2127,11 @@ void main() {
       );
       blocTest<CartBloc, CartState>(
         'Cart upsertCartItems update existing bundle',
-        build: () => CartBloc(cartRepositoryMock, productDetailRepository),
+        build: () => CartBloc(
+          cartRepositoryMock,
+          productDetailRepository,
+          stockInfoRepositoryMock,
+        ),
         seed: () => CartState.initial().copyWith(
           cartProducts: [
             bundleItem.copyWith(
@@ -2034,7 +2174,7 @@ void main() {
             ]),
           );
           when(
-            () => cartRepositoryMock.getStockInfoList(
+            () => stockInfoRepositoryMock.getMappedStockInfoList(
               items: bundleItem.bundle.materials
                   .map((e) => e.copyWith(quantity: MaterialQty(10)))
                   .toList(),
@@ -2127,7 +2267,11 @@ void main() {
 
       blocTest<CartBloc, CartState>(
         'Cart upsertCartItems new Item',
-        build: () => CartBloc(cartRepositoryMock, productDetailRepository),
+        build: () => CartBloc(
+          cartRepositoryMock,
+          productDetailRepository,
+          stockInfoRepositoryMock,
+        ),
         seed: () => CartState.initial().copyWith(
           salesOrganisation: fakeMYSalesOrganisation,
           config: fakeMYSalesOrgConfigs,
@@ -2149,7 +2293,7 @@ void main() {
             ),
           );
           when(
-            () => cartRepositoryMock.getStockInfoList(
+            () => stockInfoRepositoryMock.getMappedStockInfoList(
               items: bundleItem.bundle.materials.map((e) => e).toList(),
               salesOrganisation: fakeMYSalesOrganisation,
               shipToInfo: shipToInfo,
@@ -2206,7 +2350,11 @@ void main() {
     () {
       blocTest<CartBloc, CartState>(
         'Cart addHistoryItemsToCart fail',
-        build: () => CartBloc(cartRepositoryMock, productDetailRepository),
+        build: () => CartBloc(
+          cartRepositoryMock,
+          productDetailRepository,
+          stockInfoRepositoryMock,
+        ),
         seed: () => CartState.initial().copyWith(
           salesOrganisation: fakeMYSalesOrganisation,
           config: fakeMYSalesOrgConfigs,
@@ -2257,7 +2405,11 @@ void main() {
 
       blocTest<CartBloc, CartState>(
         'Cart addHistoryItemsToCart',
-        build: () => CartBloc(cartRepositoryMock, productDetailRepository),
+        build: () => CartBloc(
+          cartRepositoryMock,
+          productDetailRepository,
+          stockInfoRepositoryMock,
+        ),
         seed: () => CartState.initial().copyWith(
           salesOrganisation: fakeMYSalesOrganisation,
           config: fakeMYSalesOrgConfigs,
@@ -2266,7 +2418,7 @@ void main() {
         ),
         setUp: () {
           when(
-            () => cartRepositoryMock.getStockInfoList(
+            () => stockInfoRepositoryMock.getMappedStockInfoList(
               items: [priceAggregates.first.materialInfo],
               salesOrganisation: fakeMYSalesOrganisation,
               shipToInfo: shipToInfo,
@@ -2336,7 +2488,11 @@ void main() {
 
       blocTest<CartBloc, CartState>(
         'Add material with offer when cart already has material with offer',
-        build: () => CartBloc(cartRepositoryMock, productDetailRepository),
+        build: () => CartBloc(
+          cartRepositoryMock,
+          productDetailRepository,
+          stockInfoRepositoryMock,
+        ),
         seed: () => CartState.initial().copyWith(
           salesOrganisation: fakeMYSalesOrganisation,
           config: fakeMYSalesOrgConfigs,
@@ -2412,7 +2568,11 @@ void main() {
     () {
       blocTest<CartBloc, CartState>(
         'Cart updatePriceProduct',
-        build: () => CartBloc(cartRepositoryMock, productDetailRepository),
+        build: () => CartBloc(
+          cartRepositoryMock,
+          productDetailRepository,
+          stockInfoRepositoryMock,
+        ),
         seed: () => CartState.initial().copyWith(
           cartProducts: [
             priceAggregates.first.copyWith(
@@ -2428,7 +2588,7 @@ void main() {
         ),
         setUp: () {
           when(
-            () => cartRepositoryMock.updateMaterialDealBonus(
+            () => stockInfoRepositoryMock.updateStockForMaterialDealBonus(
               salesOrganisation: fakeMYSalesOrganisation,
               salesOrganisationConfigs: fakeMYSalesOrgConfigs,
               shipToInfo: shipToInfo,
@@ -2511,7 +2671,11 @@ void main() {
 
       blocTest<CartBloc, CartState>(
         'Cart updatePriceProduct with zmg individual discount',
-        build: () => CartBloc(cartRepositoryMock, productDetailRepository),
+        build: () => CartBloc(
+          cartRepositoryMock,
+          productDetailRepository,
+          stockInfoRepositoryMock,
+        ),
         seed: () => CartState.initial().copyWith(
           cartProducts: [
             cartProducts.cartProducts.first,
@@ -2524,7 +2688,7 @@ void main() {
         ),
         setUp: () {
           when(
-            () => cartRepositoryMock.updateMaterialDealBonus(
+            () => stockInfoRepositoryMock.updateStockForMaterialDealBonus(
               salesOrganisation: fakeMYSalesOrganisation,
               salesOrganisationConfigs: fakeMYSalesOrgConfigs,
               shipToInfo: shipToInfo,
@@ -2641,7 +2805,11 @@ void main() {
 
       blocTest<CartBloc, CartState>(
         'Cart updatePriceProduct with zmg group discount',
-        build: () => CartBloc(cartRepositoryMock, productDetailRepository),
+        build: () => CartBloc(
+          cartRepositoryMock,
+          productDetailRepository,
+          stockInfoRepositoryMock,
+        ),
         seed: () => CartState.initial().copyWith(
           cartProducts: [
             cartProducts.cartProducts.first,
@@ -2654,7 +2822,7 @@ void main() {
         ),
         setUp: () {
           when(
-            () => cartRepositoryMock.updateMaterialDealBonus(
+            () => stockInfoRepositoryMock.updateStockForMaterialDealBonus(
               salesOrganisation: fakeMYSalesOrganisation,
               salesOrganisationConfigs: fakeMYSalesOrgConfigs,
               shipToInfo: shipToInfo,
@@ -2771,7 +2939,11 @@ void main() {
 
       blocTest<CartBloc, CartState>(
         'Cart updatePriceProduct fail',
-        build: () => CartBloc(cartRepositoryMock, productDetailRepository),
+        build: () => CartBloc(
+          cartRepositoryMock,
+          productDetailRepository,
+          stockInfoRepositoryMock,
+        ),
         seed: () => CartState.initial().copyWith(
           cartProducts: [
             priceAggregates.first.copyWith(
@@ -2785,7 +2957,7 @@ void main() {
         ),
         setUp: () {
           when(
-            () => cartRepositoryMock.updateMaterialDealBonus(
+            () => stockInfoRepositoryMock.updateStockForMaterialDealBonus(
               salesOrganisation: fakeMYSalesOrganisation,
               salesOrganisationConfigs: fakeMYSalesOrgConfigs,
               shipToInfo: shipToInfo,
@@ -2865,7 +3037,11 @@ void main() {
       );
       blocTest<CartBloc, CartState>(
         'Cart updatePriceProduct without override available',
-        build: () => CartBloc(cartRepositoryMock, productDetailRepository),
+        build: () => CartBloc(
+          cartRepositoryMock,
+          productDetailRepository,
+          stockInfoRepositoryMock,
+        ),
         seed: () => CartState.initial().copyWith(
           cartProducts: [
             priceAggregates.first.copyWith(
@@ -2879,7 +3055,7 @@ void main() {
         ),
         setUp: () {
           when(
-            () => cartRepositoryMock.updateMaterialDealBonus(
+            () => stockInfoRepositoryMock.updateStockForMaterialDealBonus(
               salesOrganisation: fakeMYSalesOrganisation,
               salesOrganisationConfigs: fakeMYSalesOrgConfigs,
               shipToInfo: shipToInfo,
@@ -2942,7 +3118,11 @@ void main() {
 
       blocTest<CartBloc, CartState>(
         'Cart updatePriceProduct with tiered pricing',
-        build: () => CartBloc(cartRepositoryMock, productDetailRepository),
+        build: () => CartBloc(
+          cartRepositoryMock,
+          productDetailRepository,
+          stockInfoRepositoryMock,
+        ),
         seed: () => CartState.initial().copyWith(
           cartProducts: [
             priceAggregates.first.copyWith(
@@ -2956,7 +3136,7 @@ void main() {
         ),
         setUp: () {
           when(
-            () => cartRepositoryMock.updateMaterialDealBonus(
+            () => stockInfoRepositoryMock.updateStockForMaterialDealBonus(
               salesOrganisation: fakeMYSalesOrganisation,
               salesOrganisationConfigs: fakeMYSalesOrgConfigs,
               shipToInfo: shipToInfo,
@@ -3056,7 +3236,11 @@ void main() {
     () {
       blocTest<CartBloc, CartState>(
         'Cart removeInvalidProducts bundle in cart',
-        build: () => CartBloc(cartRepositoryMock, productDetailRepository),
+        build: () => CartBloc(
+          cartRepositoryMock,
+          productDetailRepository,
+          stockInfoRepositoryMock,
+        ),
         seed: () => CartState.initial().copyWith(
           cartProducts: [priceAggregates.first, bundleItem],
           salesOrganisation: fakeMYSalesOrganisation,
@@ -3105,7 +3289,11 @@ void main() {
       );
       blocTest<CartBloc, CartState>(
         'Cart removeInvalidProducts',
-        build: () => CartBloc(cartRepositoryMock, productDetailRepository),
+        build: () => CartBloc(
+          cartRepositoryMock,
+          productDetailRepository,
+          stockInfoRepositoryMock,
+        ),
         seed: () => CartState.initial().copyWith(
           cartProducts: priceAggregates,
           salesOrganisation: fakeMYSalesOrganisation,
@@ -3155,7 +3343,11 @@ void main() {
 
       blocTest<CartBloc, CartState>(
         'Cart removeInvalidProducts fail',
-        build: () => CartBloc(cartRepositoryMock, productDetailRepository),
+        build: () => CartBloc(
+          cartRepositoryMock,
+          productDetailRepository,
+          stockInfoRepositoryMock,
+        ),
         seed: () => CartState.initial().copyWith(
           cartProducts: priceAggregates,
           salesOrganisation: fakeMYSalesOrganisation,
@@ -3209,7 +3401,11 @@ void main() {
     () {
       blocTest<CartBloc, CartState>(
         'Cart removeSampleBonusFromCartConfig',
-        build: () => CartBloc(cartRepositoryMock, productDetailRepository),
+        build: () => CartBloc(
+          cartRepositoryMock,
+          productDetailRepository,
+          stockInfoRepositoryMock,
+        ),
         seed: () => CartState.initial().copyWith(
           cartProducts: [
             priceAggregates.first.copyWith(
@@ -3271,7 +3467,11 @@ void main() {
       );
       blocTest<CartBloc, CartState>(
         'Cart removeSampleBonusFromCartConfig fail',
-        build: () => CartBloc(cartRepositoryMock, productDetailRepository),
+        build: () => CartBloc(
+          cartRepositoryMock,
+          productDetailRepository,
+          stockInfoRepositoryMock,
+        ),
         seed: () => CartState.initial().copyWith(
           cartProducts: [
             priceAggregates.first.copyWith(
@@ -3377,7 +3577,11 @@ void main() {
     () {
       blocTest<CartBloc, CartState>(
         'clearCart failure',
-        build: () => CartBloc(cartRepositoryMock, productDetailRepository),
+        build: () => CartBloc(
+          cartRepositoryMock,
+          productDetailRepository,
+          stockInfoRepositoryMock,
+        ),
         setUp: () {
           when(
             () => cartRepositoryMock.clearCart(),
@@ -3416,7 +3620,11 @@ void main() {
       );
       blocTest<CartBloc, CartState>(
         'clearCart Success',
-        build: () => CartBloc(cartRepositoryMock, productDetailRepository),
+        build: () => CartBloc(
+          cartRepositoryMock,
+          productDetailRepository,
+          stockInfoRepositoryMock,
+        ),
         setUp: () {
           when(
             () => cartRepositoryMock.clearCart(),
@@ -3459,7 +3667,11 @@ void main() {
   group('Testing CartBloc updateProductDetermination test', () {
     blocTest<CartBloc, CartState>(
       'updateProductDetermination get product list failure',
-      build: () => CartBloc(cartRepositoryMock, productDetailRepository),
+      build: () => CartBloc(
+        cartRepositoryMock,
+        productDetailRepository,
+        stockInfoRepositoryMock,
+      ),
       setUp: () {
         when(
           () => productDetailRepository.getProductListDetail(
@@ -3519,7 +3731,11 @@ void main() {
 
     blocTest<CartBloc, CartState>(
       'updateProductDetermination Update Cart With Product Determination failure',
-      build: () => CartBloc(cartRepositoryMock, productDetailRepository),
+      build: () => CartBloc(
+        cartRepositoryMock,
+        productDetailRepository,
+        stockInfoRepositoryMock,
+      ),
       setUp: () {
         when(
           () => productDetailRepository.getProductListDetail(
@@ -3603,7 +3819,11 @@ void main() {
 
     blocTest<CartBloc, CartState>(
       'updateProductDetermination update Cart With Product Determination success',
-      build: () => CartBloc(cartRepositoryMock, productDetailRepository),
+      build: () => CartBloc(
+        cartRepositoryMock,
+        productDetailRepository,
+        stockInfoRepositoryMock,
+      ),
       setUp: () {
         when(
           () => productDetailRepository.getProductListDetail(
@@ -3644,7 +3864,7 @@ void main() {
         );
 
         when(
-          () => cartRepositoryMock.getStockInfoList(
+          () => stockInfoRepositoryMock.getMappedStockInfoList(
             items: priceAggregatesForID
                 .map(
                   (element) => element.toStockListMaterials,
@@ -3715,7 +3935,11 @@ void main() {
 
     blocTest<CartBloc, CartState>(
       'updatePriceForIdMarket for Id market aplSimulateOrder failure',
-      build: () => CartBloc(cartRepositoryMock, productDetailRepository),
+      build: () => CartBloc(
+        cartRepositoryMock,
+        productDetailRepository,
+        stockInfoRepositoryMock,
+      ),
       setUp: () {
         when(
           () => cartRepositoryMock.aplSimulateOrder(
@@ -3759,7 +3983,11 @@ void main() {
 
     blocTest<CartBloc, CartState>(
       'updatePriceForIdMarket for Id market aplSimulateOrder success',
-      build: () => CartBloc(cartRepositoryMock, productDetailRepository),
+      build: () => CartBloc(
+        cartRepositoryMock,
+        productDetailRepository,
+        stockInfoRepositoryMock,
+      ),
       setUp: () {
         final aplProductList =
             aplSimulatorOrder.productDeterminationList(priceAggregatesForID);
@@ -4893,7 +5121,11 @@ void main() {
 
       blocTest<CartBloc, CartState>(
         'Cart upsertCart new Item if delivery address for the user is changed',
-        build: () => CartBloc(cartRepositoryMock, productDetailRepository),
+        build: () => CartBloc(
+          cartRepositoryMock,
+          productDetailRepository,
+          stockInfoRepositoryMock,
+        ),
         setUp: () {
           when(
             () => cartRepositoryMock.upsertCartWithBonus(
@@ -4906,11 +5138,21 @@ void main() {
               product: priceAggregates.first.copyWith(
                 quantity: 2,
               ),
+              materialStockInfo: [],
             ),
           ).thenAnswer(
             (invocation) async => Left(fakeErrorWithDifferentDeliveryAddress),
           );
-
+          when(
+            () => stockInfoRepositoryMock.getStockInfoList(
+              materials: [priceAggregates.first.materialInfo.materialNumber],
+              salesOrganisation: fakeMYSalesOrganisation,
+              shipToInfo: shipToInfo,
+              customerCodeInfo: fakeCustomerCodeInfo,
+            ),
+          ).thenAnswer(
+            (invocation) async => const Right([]),
+          );
           when(
             () => cartRepositoryMock.clearCart(),
           ).thenAnswer((invocation) async => Left(fakeError));

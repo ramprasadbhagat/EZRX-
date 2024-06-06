@@ -10,6 +10,7 @@ import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/domain/order/repository/i_cart_repository.dart';
+import 'package:ezrxmobile/domain/order/repository/i_stock_info_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -31,10 +32,12 @@ class BonusMaterialBloc extends Bloc<BonusMaterialEvent, BonusMaterialState> {
   final IMaterialListRepository materialListRepository;
   final ICartRepository cartRepository;
   final Config config;
+  final IStockInfoRepository stockInfoRepository;
   BonusMaterialBloc({
     required this.materialListRepository,
     required this.cartRepository,
     required this.config,
+    required this.stockInfoRepository,
   }) : super(BonusMaterialState.initial()) {
     on<_Fetch>(
       (e, emit) async {
@@ -198,7 +201,7 @@ class BonusMaterialBloc extends Bloc<BonusMaterialEvent, BonusMaterialState> {
           ),
         );
 
-        final failureOrSuccess = await cartRepository.getStockInfoList(
+        final failureOrSuccess = await stockInfoRepository.getMappedStockInfoList(
           items: e.items,
           customerCodeInfo: e.customerCodeInfo,
           salesOrganisationConfigs: e.configs,

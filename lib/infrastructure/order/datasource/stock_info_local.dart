@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
@@ -5,6 +6,8 @@ import 'package:ezrxmobile/infrastructure/order/dtos/stock_info_dto.dart';
 import 'package:flutter/services.dart';
 
 class StockInfoLocalDataSource {
+  final _stockApiStatusDataController = StreamController<bool>.broadcast();
+
   StockInfoLocalDataSource();
 
   Future<List<StockInfo>> getStockInfoList() async {
@@ -29,4 +32,14 @@ class StockInfoLocalDataSource {
         .map((e) => MaterialStockInfoDto.fromJson(e).toDomain())
         .toList();
   }
+
+  void notifyStockApiStatusUpdated(
+    bool isFailure,
+  ) =>
+      _stockApiStatusDataController.add(
+        isFailure,
+      );
+
+  Stream<bool> get stockApiStatusData =>
+      _stockApiStatusDataController.stream;
 }

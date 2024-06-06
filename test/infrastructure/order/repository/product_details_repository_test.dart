@@ -3,7 +3,6 @@ import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/product_meta_data.dart';
-import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/device_storage.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/material_list_local.dart';
@@ -53,7 +52,6 @@ void main() {
   late StockInfoRemoteDataSource stockInfoRemoteDataSource;
   late MaterialInfo fakeMaterialInfo;
   late ProductMetaData fakeProductMetaData;
-  late List<MaterialStockInfo> fakeStockInfoList;
   late DeviceStorage deviceStorage;
 
   final mockMaterialNumber = MaterialNumber('12345');
@@ -75,9 +73,6 @@ void main() {
     fakeMaterialInfo = await ProductDetailLocalDataSource().getProductDetails();
     fakeProductMetaData =
         await ProductDetailLocalDataSource().getItemProductMetaData();
-
-    fakeStockInfoList =
-        await StockInfoLocalDataSource().getMaterialStockInfoList();
 
     productDetailRepository = ProductDetailRepository(
       config: mockConfig,
@@ -492,167 +487,6 @@ void main() {
         );
       });
     });
-    group('get StockInfo - ', () {
-      test('successfully - local', () async {
-        when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
-
-        when(
-          () => stockInfoLocalDataSource.getMaterialStockInfoList(),
-        ).thenAnswer((invocation) async => fakeStockInfoList);
-
-        final result = await productDetailRepository.getStockInfo(
-          customerCodeInfo: fakeCustomerCodeInfo,
-          salesOrganisation: fakeSalesOrganisation,
-          materialNumber: mockMaterialNumber,
-        );
-        expect(
-          result.isRight(),
-          true,
-        );
-      });
-
-      test('successfully - remote', () async {
-        when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
-
-        when(
-          () => stockInfoRemoteDataSource.getMaterialStockInfoList(
-            salesOrg: fakeSalesOrganisation.salesOrg.getOrCrash(),
-            materialNumbers: [mockMaterialNumber.getOrCrash()],
-            selectedCustomerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
-          ),
-        ).thenAnswer((invocation) async => fakeStockInfoList);
-
-        final result = await productDetailRepository.getStockInfo(
-          customerCodeInfo: fakeCustomerCodeInfo,
-          salesOrganisation: fakeSalesOrganisation,
-          materialNumber: mockMaterialNumber,
-        );
-        expect(
-          result.isRight(),
-          true,
-        );
-      });
-      test('failure - local', () async {
-        when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
-
-        when(
-          () => stockInfoLocalDataSource.getMaterialStockInfoList(),
-        ).thenThrow((invocation) async => MockException());
-
-        final result = await productDetailRepository.getStockInfo(
-          customerCodeInfo: fakeCustomerCodeInfo,
-          salesOrganisation: fakeSalesOrganisation,
-          materialNumber: mockMaterialNumber,
-        );
-        expect(
-          result.isLeft(),
-          true,
-        );
-      });
-
-      test('failure - remote', () async {
-        when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
-
-        when(
-          () => stockInfoRemoteDataSource.getMaterialStockInfoList(
-            salesOrg: fakeSalesOrganisation.salesOrg.getOrCrash(),
-            materialNumbers: [mockMaterialNumber.getOrCrash()],
-            selectedCustomerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
-          ),
-        ).thenThrow((invocation) async => MockException());
-
-        final result = await productDetailRepository.getStockInfo(
-          customerCodeInfo: fakeCustomerCodeInfo,
-          salesOrganisation: fakeSalesOrganisation,
-          materialNumber: mockMaterialNumber,
-        );
-        expect(
-          result.isLeft(),
-          true,
-        );
-      });
-    });
-
-    group('get getStockInfoList - ', () {
-      test('successfully - local', () async {
-        when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
-
-        when(
-          () => stockInfoLocalDataSource.getMaterialStockInfoList(),
-        ).thenAnswer((invocation) async => fakeStockInfoList);
-
-        final result = await productDetailRepository.getStockInfoList(
-          customerCodeInfo: fakeCustomerCodeInfo,
-          salesOrganisation: fakeSalesOrganisation,
-          materials: [fakeMaterialInfo],
-        );
-        expect(
-          result.isRight(),
-          true,
-        );
-      });
-
-      test('successfully - remote', () async {
-        when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
-
-        when(
-          () => stockInfoRemoteDataSource.getMaterialStockInfoList(
-            salesOrg: fakeSalesOrganisation.salesOrg.getOrCrash(),
-            materialNumbers: [fakeMaterialInfo.materialNumber.getOrCrash()],
-            selectedCustomerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
-          ),
-        ).thenAnswer((invocation) async => fakeStockInfoList);
-
-        final result = await productDetailRepository.getStockInfoList(
-          customerCodeInfo: fakeCustomerCodeInfo,
-          salesOrganisation: fakeSalesOrganisation,
-          materials: [fakeMaterialInfo],
-        );
-        expect(
-          result.isRight(),
-          true,
-        );
-      });
-      test('failure - local', () async {
-        when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
-
-        when(
-          () => stockInfoLocalDataSource.getMaterialStockInfoList(),
-        ).thenThrow((invocation) async => MockException());
-
-        final result = await productDetailRepository.getStockInfoList(
-          customerCodeInfo: fakeCustomerCodeInfo,
-          salesOrganisation: fakeSalesOrganisation,
-          materials: [fakeMaterialInfo],
-        );
-        expect(
-          result.isLeft(),
-          true,
-        );
-      });
-
-      test('failure - remote', () async {
-        when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
-
-        when(
-          () => stockInfoRemoteDataSource.getMaterialStockInfoList(
-            salesOrg: fakeSalesOrganisation.salesOrg.getOrCrash(),
-            materialNumbers: [fakeMaterialInfo.materialNumber.getOrCrash()],
-            selectedCustomerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
-          ),
-        ).thenThrow((invocation) async => MockException());
-
-        final result = await productDetailRepository.getStockInfoList(
-          customerCodeInfo: fakeCustomerCodeInfo,
-          salesOrganisation: fakeSalesOrganisation,
-          materials: [fakeMaterialInfo],
-        );
-        expect(
-          result.isLeft(),
-          true,
-        );
-      });
-    });
 
     group('get SimilarProduct - ', () {
       test('successfully - local', () async {
@@ -675,128 +509,11 @@ void main() {
           true,
         );
       });
-
-      test('successfully - remote (when material numbet dose not match)',
-          () async {
-        when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
-        when(() => deviceStorage.currentMarket()).thenReturn(mockMarket);
-        when(
-          () => productDetailRemoteDataSource.getSimilarProduct(
-            salesOrg: fakeSalesOrganisation.salesOrg.getOrCrash(),
-            materialNumber: mockMaterialNumber.getOrCrash(),
-            customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
-            shipToCode: fakeShipToInfo.shipToCustomerCode,
-            language: mockLanguage.languageCode,
-            principalCode: mockPrincipalCode.getOrCrash(),
-            market: mockMarket,
-          ),
-        ).thenAnswer((invocation) async => [fakeMaterialInfo]);
-        when(
-          () => stockInfoRemoteDataSource.getMaterialStockInfoList(
-            salesOrg: fakeSalesOrganisation.salesOrg.getOrCrash(),
-            materialNumbers: [fakeMaterialInfo.materialNumber.getOrCrash()],
-            selectedCustomerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
-          ),
-        ).thenAnswer((invocation) async => fakeStockInfoList);
-
-        final result = await productDetailRepository.getSimilarProduct(
-          customerCodeInfo: fakeCustomerCodeInfo,
-          salesOrganisation: fakeSalesOrganisation,
-          language: mockLanguage,
-          materialNumber: mockMaterialNumber,
-          principalCode: mockPrincipalCode,
-          shipToInfo: fakeShipToInfo,
-        );
-        expect(
-          result.isRight(),
-          true,
-        );
-      });
-      test('successfully - remote (when material numbet match)', () async {
-        when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
-        when(() => deviceStorage.currentMarket()).thenReturn(mockMarket);
-        when(
-          () => productDetailRemoteDataSource.getSimilarProduct(
-            salesOrg: fakeSalesOrganisation.salesOrg.getOrCrash(),
-            materialNumber: mockMaterialNumber.getOrCrash(),
-            customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
-            shipToCode: fakeShipToInfo.shipToCustomerCode,
-            language: mockLanguage.languageCode,
-            principalCode: mockPrincipalCode.getOrCrash(),
-            market: mockMarket,
-          ),
-        ).thenAnswer(
-          (invocation) async => [
-            fakeMaterialInfo.copyWith(materialNumber: MaterialNumber('12345')),
-          ],
-        );
-        when(
-          () => stockInfoRemoteDataSource.getMaterialStockInfoList(
-            salesOrg: fakeSalesOrganisation.salesOrg.getOrCrash(),
-            materialNumbers: [fakeMaterialInfo.materialNumber.getOrCrash()],
-            selectedCustomerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
-          ),
-        ).thenAnswer(
-          (invocation) async => [
-            fakeStockInfoList.first
-                .copyWith(materialNumber: MaterialNumber('12345')),
-          ],
-        );
-
-        final result = await productDetailRepository.getSimilarProduct(
-          customerCodeInfo: fakeCustomerCodeInfo,
-          salesOrganisation: fakeSalesOrganisation,
-          language: mockLanguage,
-          materialNumber: mockMaterialNumber,
-          principalCode: mockPrincipalCode,
-          shipToInfo: fakeShipToInfo,
-        );
-        expect(
-          result.isRight(),
-          true,
-        );
-      });
       test('failure - local', () async {
         when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
 
         when(
           () => productDetailLocalDataSource.getSimilarProduct(),
-        ).thenThrow((invocation) async => MockException());
-
-        final result = await productDetailRepository.getSimilarProduct(
-          customerCodeInfo: fakeCustomerCodeInfo,
-          salesOrganisation: fakeSalesOrganisation,
-          language: mockLanguage,
-          materialNumber: mockMaterialNumber,
-          principalCode: mockPrincipalCode,
-          shipToInfo: fakeShipToInfo,
-        );
-        expect(
-          result.isLeft(),
-          true,
-        );
-      });
-
-      test('failure - remote', () async {
-        when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
-        when(() => deviceStorage.currentMarket()).thenReturn(mockMarket);
-        when(
-          () => productDetailRemoteDataSource.getSimilarProduct(
-            salesOrg: fakeSalesOrganisation.salesOrg.getOrCrash(),
-            materialNumber: mockMaterialNumber.getOrCrash(),
-            customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
-            shipToCode: fakeShipToInfo.shipToCustomerCode,
-            language: mockLanguage.languageCode,
-            principalCode: mockPrincipalCode.getOrCrash(),
-            market: mockMarket,
-          ),
-        ).thenThrow((invocation) async => MockException());
-        when(
-          () => stockInfoRemoteDataSource.getMaterialStockInfoList(
-            salesOrg: fakeSalesOrganisation.salesOrg.getOrCrash(),
-            materialNumbers: [fakeMaterialInfo.materialNumber.getOrCrash()],
-            selectedCustomerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
-          ),
         ).thenThrow((invocation) async => MockException());
 
         final result = await productDetailRepository.getSimilarProduct(

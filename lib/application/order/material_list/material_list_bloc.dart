@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
+import 'package:ezrxmobile/domain/order/repository/i_stock_info_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:ezrxmobile/config.dart';
@@ -26,12 +27,14 @@ class MaterialListBloc extends Bloc<MaterialListEvent, MaterialListState> {
   final IMaterialListRepository materialListRepository;
   final IFavouriteRepository favouriteRepository;
   final Config config;
+  final IStockInfoRepository stockInfoRepository;
   StreamSubscription<MaterialInfo>? _favoriteStatusStreamSubscription;
 
   MaterialListBloc({
     required this.materialListRepository,
     required this.favouriteRepository,
     required this.config,
+    required this.stockInfoRepository,
   }) : super(MaterialListState.initial()) {
     on<_Initialized>((e, emit) {
       emit(
@@ -173,10 +176,11 @@ class MaterialListBloc extends Bloc<MaterialListEvent, MaterialListState> {
       );
     });
     on<_FetchStock>((e, emit) async {
-      final failureOrSuccess = await materialListRepository.getStockInfoList(
-        materials: e.materials,
+      final failureOrSuccess = await stockInfoRepository.getStockInfoList(
+        materials: e.materials.map((e) => e.materialNumber).toList(),
         customerCodeInfo: state.customerCodeInfo,
         salesOrganisation: state.salesOrganisation,
+        shipToInfo: state.shipToInfo,
       );
 
       failureOrSuccess.fold(

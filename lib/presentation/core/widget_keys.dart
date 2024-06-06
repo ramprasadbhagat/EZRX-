@@ -1707,4 +1707,11 @@ class WidgetKeys {
       Key('ediCustomerOrderDisableTitle');
   static const Key ediCustomerOrderDisableContent =
       Key('ediCustomerOrderDisableContent');
+
+  //============================================================
+  //  Stock Info banner
+  //============================================================
+  static const Key stockInfoBanner = Key('stockInfoBanner');
+  static const Key stockInfoBannerTitle = Key('stockInfoBannerTitle');
+  static const Key stockInfoBannerContent = Key('stockInfoBannerContent');
 }

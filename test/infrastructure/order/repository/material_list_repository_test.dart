@@ -5,7 +5,6 @@ import 'package:mocktail/mocktail.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
-import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
@@ -64,9 +63,6 @@ void main() {
   final fakePrincipleData = PrincipalData.empty().copyWith(
     principalCode: PrincipalCode(fakePrinciple),
     principalName: PrincipalName('fake-principleName'),
-  );
-  final fakeStockInfo1 = MaterialStockInfo.empty().copyWith(
-    materialNumber: MaterialNumber('123'),
   );
   final fakeMatchMaterialInfo = MaterialInfo.empty().copyWith(
     materialNumber: MaterialNumber('123'),
@@ -401,92 +397,6 @@ void main() {
         );
       });
     });
-
-    group('=> get Stock Info List Test', () {
-      test('=> get locally fail', () async {
-        when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
-        when(() => stockInfoLocalDataSource.getMaterialStockInfoList())
-            .thenThrow((invocation) async => MockException());
-
-        final result = await materialListRepository.getStockInfoList(
-          customerCodeInfo: fakeCustomerCodeInfo,
-          salesOrganisation: fakeSGSalesOrganisation,
-          materials: fakeMaterialResponse.products,
-        );
-        expect(
-          result.isLeft(),
-          true,
-        );
-      });
-
-      test('=> get locally success', () async {
-        when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
-        when(() => stockInfoLocalDataSource.getMaterialStockInfoList())
-            .thenAnswer(
-          (invocation) async => [fakeStockInfo1],
-        );
-
-        final result = await materialListRepository.getStockInfoList(
-          customerCodeInfo: fakeCustomerCodeInfo,
-          salesOrganisation: fakeSGSalesOrganisation,
-          materials: fakeMaterialResponse.products,
-        );
-        expect(
-          result.isRight(),
-          true,
-        );
-      });
-
-      test('=> get remotely fail', () async {
-        when(() => mockConfig.appFlavor).thenReturn(Flavor.dev);
-        when(
-          () => stockInfoRemoteDataSource.getMaterialStockInfoList(
-            materialNumbers: fakeMaterialResponse.products
-                .map((e) => e.materialNumber.getOrCrash())
-                .toList(),
-            salesOrg: fakeSGSalesOrganisation.salesOrg.getOrCrash(),
-            selectedCustomerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
-          ),
-        ).thenThrow((invocation) async => MockException());
-
-        final result = await materialListRepository.getStockInfoList(
-          customerCodeInfo: fakeCustomerCodeInfo,
-          salesOrganisation: fakeSGSalesOrganisation,
-          materials: fakeMaterialResponse.products,
-        );
-        expect(
-          result.isLeft(),
-          true,
-        );
-      });
-
-      test('=> get remotely success', () async {
-        when(() => mockConfig.appFlavor).thenReturn(Flavor.dev);
-        when(
-          () => stockInfoRemoteDataSource.getMaterialStockInfoList(
-            materialNumbers: fakeMaterialResponse.products
-                .where((element) => element.type.typeMaterial)
-                .map((e) => e.materialNumber.getOrCrash())
-                .toList(),
-            salesOrg: fakeSGSalesOrganisation.salesOrg.getOrCrash(),
-            selectedCustomerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
-          ),
-        ).thenAnswer(
-          (invocation) async => [fakeStockInfo1],
-        );
-
-        final result = await materialListRepository.getStockInfoList(
-          customerCodeInfo: fakeCustomerCodeInfo,
-          salesOrganisation: fakeSGSalesOrganisation,
-          materials: fakeMaterialResponse.products,
-        );
-        expect(
-          result.isRight(),
-          true,
-        );
-      });
-    });
-
     group('=> get Material Data Test', () {
       test('=> get locally fail', () async {
         when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);

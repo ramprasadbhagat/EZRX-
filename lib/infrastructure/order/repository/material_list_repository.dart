@@ -9,7 +9,6 @@ import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
 import 'package:ezrxmobile/domain/order/entities/material_filter.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
-import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/domain/order/repository/i_material_list_repository.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/device_storage.dart';
@@ -159,43 +158,6 @@ class MaterialListRepository implements IMaterialListRepository {
       return Right(materialListData);
     } catch (e) {
       return Left(FailureHandler.handleFailure(e));
-    }
-  }
-
-  @override
-  Future<Either<ApiFailure, List<MaterialStockInfo>>> getStockInfoList({
-    required List<MaterialInfo> materials,
-    required CustomerCodeInfo customerCodeInfo,
-    required SalesOrganisation salesOrganisation,
-  }) async {
-    if (config.appFlavor == Flavor.mock) {
-      try {
-        final stockInfoList =
-            await stockInfoLocalDataSource.getMaterialStockInfoList();
-
-        return Right(stockInfoList);
-      } catch (e) {
-        return Left(FailureHandler.handleFailure(e));
-      }
-    } else {
-      try {
-        final materialList = materials
-            .where((element) => element.isValidMaterial)
-            .map((e) => e.materialNumber.getValue())
-            .toList();
-        if (materialList.isEmpty) return const Right([]);
-
-        final stockInfoList =
-            await stockInfoRemoteDataSource.getMaterialStockInfoList(
-          materialNumbers: materialList,
-          salesOrg: salesOrganisation.salesOrg.getOrCrash(),
-          selectedCustomerCode: customerCodeInfo.customerCodeSoldTo,
-        );
-
-        return Right(stockInfoList);
-      } catch (e) {
-        return Left(FailureHandler.handleFailure(e));
-      }
     }
   }
 

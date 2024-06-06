@@ -38,6 +38,7 @@ import 'package:ezrxmobile/presentation/orders/cart/add_to_cart/add_to_cart_erro
 import 'package:ezrxmobile/presentation/orders/cart/cart_button.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/cart_item_quantity_input.dart';
 import 'package:ezrxmobile/presentation/orders/widgets/edi_user_banner.dart';
+import 'package:ezrxmobile/presentation/orders/widgets/stock_info_banner.dart';
 import 'package:ezrxmobile/presentation/products/available_offers/available_offer.dart';
 import 'package:ezrxmobile/presentation/products/product_details/widget/material_details.dart';
 import 'package:ezrxmobile/presentation/products/product_details/widget/material_info.dart';
@@ -201,6 +202,7 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
             children: [
               const LicenseExpiredBanner(),
               const EdiUserBanner(),
+              const StockInfoBanner(),
               const _ProductImageSection(),
               _BodyContent(
                 isEditTender: widget.isEditTender,

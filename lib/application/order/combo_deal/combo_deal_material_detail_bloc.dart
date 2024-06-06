@@ -14,6 +14,7 @@ import 'package:ezrxmobile/domain/order/entities/material_price_detail.dart';
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/domain/order/repository/i_material_list_repository.dart';
 import 'package:ezrxmobile/domain/order/repository/i_product_details_repository.dart';
+import 'package:ezrxmobile/domain/order/repository/i_stock_info_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
@@ -28,11 +29,13 @@ class ComboDealMaterialDetailBloc
   final IProductDetailRepository productDetailRepository;
   final IMaterialListRepository materialListRepository;
   final Config config;
+  final IStockInfoRepository stockInfoRepository;
 
   ComboDealMaterialDetailBloc({
     required this.productDetailRepository,
     required this.materialListRepository,
     required this.config,
+    required this.stockInfoRepository,
   }) : super(ComboDealMaterialDetailState.initial()) {
     on<ComboDealMaterialDetailEvent>(_onEvent);
   }
@@ -549,10 +552,11 @@ class ComboDealMaterialDetailBloc
     List<MaterialInfo> materialsInfo,
   ) async {
     final failureOrSuccessStockList =
-        await productDetailRepository.getStockInfoList(
+        await stockInfoRepository.getStockInfoList(
       customerCodeInfo: state.customerCodeInfo,
       salesOrganisation: state.salesOrganisation,
-      materials: materialsInfo,
+      materials: materialsInfo.map((e) => e.materialNumber).toList(), 
+      shipToInfo: state.shipToInfo,
     );
 
     return failureOrSuccessStockList.fold(

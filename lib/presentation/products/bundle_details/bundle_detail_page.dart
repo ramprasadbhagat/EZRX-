@@ -22,6 +22,7 @@ import 'package:ezrxmobile/presentation/core/svg_image.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/orders/cart/cart_button.dart';
 import 'package:ezrxmobile/presentation/orders/widgets/edi_user_banner.dart';
+import 'package:ezrxmobile/presentation/orders/widgets/stock_info_banner.dart';
 import 'package:ezrxmobile/presentation/products/bundle_details/widget/bundle_add_to_cart_sheet.dart';
 import 'package:ezrxmobile/presentation/products/bundle_details/widget/bundle_material_descriptions_sheet.dart';
 import 'package:ezrxmobile/presentation/products/widgets/image_counter.dart';
@@ -134,6 +135,7 @@ class _BundleDetailPageState extends State<BundleDetailPage> {
           key: WidgetKeys.scrollList,
           children: [
             const EdiUserBanner(),
+            const StockInfoBanner(),
             const _BundleImageSection(),
             Align(
               alignment: Alignment.topLeft,
@@ -183,10 +185,11 @@ class _BundleDetails extends StatelessWidget {
       buildWhen: (previous, current) =>
           previous.productDetailAggregate.materialInfo !=
               current.productDetailAggregate.materialInfo ||
-          previous.isDetailAndStockFetching != current.isDetailAndStockFetching,
+          previous.isDetailAndStockFetching !=
+              current.isDetailAndStockFetching,
       builder: (context, state) {
         final material = state.productDetailAggregate.materialInfo;
-
+    
         return Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
           child: Column(
@@ -254,9 +257,12 @@ class _BundleDetails extends StatelessWidget {
               state.isDetailAndStockFetching
                   ? SizedBox(width: 100, child: LoadingShimmer.tile())
                   : PriceComponent(
-                      salesOrgConfig:
-                          context.read<EligibilityBloc>().state.salesOrgConfigs,
-                      price: material.bundle.minimumQuantityBundleMaterial.rate
+                      salesOrgConfig: context
+                          .read<EligibilityBloc>()
+                          .state
+                          .salesOrgConfigs,
+                      price: material
+                          .bundle.minimumQuantityBundleMaterial.rate
                           .toString(),
                       type: PriceStyle.bundlePrice,
                       trailingText: context.tr('per item'),

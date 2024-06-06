@@ -6,7 +6,6 @@ import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/product_meta_data.dart';
-import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 
 abstract class IProductDetailRepository {
@@ -54,12 +53,6 @@ abstract class IProductDetailRepository {
     required MaterialInfoType type,
   });
 
-  Future<Either<ApiFailure, StockInfo>> getStockInfo({
-    required MaterialNumber materialNumber,
-    required CustomerCodeInfo customerCodeInfo,
-    required SalesOrganisation salesOrganisation,
-  });
-
   Future<Either<ApiFailure, List<MaterialInfo>>> getSimilarProduct({
     required MaterialNumber materialNumber,
     required PrincipalCode principalCode,
@@ -67,12 +60,6 @@ abstract class IProductDetailRepository {
     required CustomerCodeInfo customerCodeInfo,
     required ShipToInfo shipToInfo,
     required Language language,
-  });
-
-  Future<Either<ApiFailure, List<MaterialStockInfo>>> getStockInfoList({
-    required List<MaterialInfo> materials,
-    required CustomerCodeInfo customerCodeInfo,
-    required SalesOrganisation salesOrganisation,
   });
 
   Future<Either<ApiFailure, ProductMetaData>> getProductsMetaData({

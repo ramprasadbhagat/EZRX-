@@ -12,7 +12,7 @@ part of 'product_detail_bloc.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$ProductDetailEvent {
@@ -158,9 +158,10 @@ class _$ProductDetailEventCopyWithImpl<$Res, $Val extends ProductDetailEvent>
 }
 
 /// @nodoc
-abstract class _$$_FetchCopyWith<$Res> {
-  factory _$$_FetchCopyWith(_$_Fetch value, $Res Function(_$_Fetch) then) =
-      __$$_FetchCopyWithImpl<$Res>;
+abstract class _$$FetchImplCopyWith<$Res> {
+  factory _$$FetchImplCopyWith(
+          _$FetchImpl value, $Res Function(_$FetchImpl) then) =
+      __$$FetchImplCopyWithImpl<$Res>;
   @useResult
   $Res call(
       {SalesOrganisation salesOrganisation,
@@ -177,10 +178,11 @@ abstract class _$$_FetchCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_FetchCopyWithImpl<$Res>
-    extends _$ProductDetailEventCopyWithImpl<$Res, _$_Fetch>
-    implements _$$_FetchCopyWith<$Res> {
-  __$$_FetchCopyWithImpl(_$_Fetch _value, $Res Function(_$_Fetch) _then)
+class __$$FetchImplCopyWithImpl<$Res>
+    extends _$ProductDetailEventCopyWithImpl<$Res, _$FetchImpl>
+    implements _$$FetchImplCopyWith<$Res> {
+  __$$FetchImplCopyWithImpl(
+      _$FetchImpl _value, $Res Function(_$FetchImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -192,7 +194,7 @@ class __$$_FetchCopyWithImpl<$Res>
     Object? user = null,
     Object? materialInfo = null,
   }) {
-    return _then(_$_Fetch(
+    return _then(_$FetchImpl(
       salesOrganisation: null == salesOrganisation
           ? _value.salesOrganisation
           : salesOrganisation // ignore: cast_nullable_to_non_nullable
@@ -259,8 +261,8 @@ class __$$_FetchCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_Fetch implements _Fetch {
-  _$_Fetch(
+class _$FetchImpl implements _Fetch {
+  _$FetchImpl(
       {required this.salesOrganisation,
       required this.customerCodeInfo,
       required this.shipToInfo,
@@ -284,10 +286,10 @@ class _$_Fetch implements _Fetch {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Fetch &&
+            other is _$FetchImpl &&
             (identical(other.salesOrganisation, salesOrganisation) ||
                 other.salesOrganisation == salesOrganisation) &&
             (identical(other.customerCodeInfo, customerCodeInfo) ||
@@ -306,8 +308,8 @@ class _$_Fetch implements _Fetch {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_FetchCopyWith<_$_Fetch> get copyWith =>
-      __$$_FetchCopyWithImpl<_$_Fetch>(this, _$identity);
+  _$$FetchImplCopyWith<_$FetchImpl> get copyWith =>
+      __$$FetchImplCopyWithImpl<_$FetchImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -464,7 +466,7 @@ abstract class _Fetch implements ProductDetailEvent {
       required final CustomerCodeInfo customerCodeInfo,
       required final ShipToInfo shipToInfo,
       required final User user,
-      required final MaterialInfo materialInfo}) = _$_Fetch;
+      required final MaterialInfo materialInfo}) = _$FetchImpl;
 
   SalesOrganisation get salesOrganisation;
   CustomerCodeInfo get customerCodeInfo;
@@ -472,30 +474,30 @@ abstract class _Fetch implements ProductDetailEvent {
   User get user;
   MaterialInfo get materialInfo;
   @JsonKey(ignore: true)
-  _$$_FetchCopyWith<_$_Fetch> get copyWith =>
+  _$$FetchImplCopyWith<_$FetchImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_FetchSimilarProductCopyWith<$Res> {
-  factory _$$_FetchSimilarProductCopyWith(_$_FetchSimilarProduct value,
-          $Res Function(_$_FetchSimilarProduct) then) =
-      __$$_FetchSimilarProductCopyWithImpl<$Res>;
+abstract class _$$FetchSimilarProductImplCopyWith<$Res> {
+  factory _$$FetchSimilarProductImplCopyWith(_$FetchSimilarProductImpl value,
+          $Res Function(_$FetchSimilarProductImpl) then) =
+      __$$FetchSimilarProductImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_FetchSimilarProductCopyWithImpl<$Res>
-    extends _$ProductDetailEventCopyWithImpl<$Res, _$_FetchSimilarProduct>
-    implements _$$_FetchSimilarProductCopyWith<$Res> {
-  __$$_FetchSimilarProductCopyWithImpl(_$_FetchSimilarProduct _value,
-      $Res Function(_$_FetchSimilarProduct) _then)
+class __$$FetchSimilarProductImplCopyWithImpl<$Res>
+    extends _$ProductDetailEventCopyWithImpl<$Res, _$FetchSimilarProductImpl>
+    implements _$$FetchSimilarProductImplCopyWith<$Res> {
+  __$$FetchSimilarProductImplCopyWithImpl(_$FetchSimilarProductImpl _value,
+      $Res Function(_$FetchSimilarProductImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_FetchSimilarProduct implements _FetchSimilarProduct {
-  _$_FetchSimilarProduct();
+class _$FetchSimilarProductImpl implements _FetchSimilarProduct {
+  _$FetchSimilarProductImpl();
 
   @override
   String toString() {
@@ -503,9 +505,10 @@ class _$_FetchSimilarProduct implements _FetchSimilarProduct {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_FetchSimilarProduct);
+        (other.runtimeType == runtimeType &&
+            other is _$FetchSimilarProductImpl);
   }
 
   @override
@@ -658,29 +661,29 @@ class _$_FetchSimilarProduct implements _FetchSimilarProduct {
 }
 
 abstract class _FetchSimilarProduct implements ProductDetailEvent {
-  factory _FetchSimilarProduct() = _$_FetchSimilarProduct;
+  factory _FetchSimilarProduct() = _$FetchSimilarProductImpl;
 }
 
 /// @nodoc
-abstract class _$$_FetchMetaDataCopyWith<$Res> {
-  factory _$$_FetchMetaDataCopyWith(
-          _$_FetchMetaData value, $Res Function(_$_FetchMetaData) then) =
-      __$$_FetchMetaDataCopyWithImpl<$Res>;
+abstract class _$$FetchMetaDataImplCopyWith<$Res> {
+  factory _$$FetchMetaDataImplCopyWith(
+          _$FetchMetaDataImpl value, $Res Function(_$FetchMetaDataImpl) then) =
+      __$$FetchMetaDataImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_FetchMetaDataCopyWithImpl<$Res>
-    extends _$ProductDetailEventCopyWithImpl<$Res, _$_FetchMetaData>
-    implements _$$_FetchMetaDataCopyWith<$Res> {
-  __$$_FetchMetaDataCopyWithImpl(
-      _$_FetchMetaData _value, $Res Function(_$_FetchMetaData) _then)
+class __$$FetchMetaDataImplCopyWithImpl<$Res>
+    extends _$ProductDetailEventCopyWithImpl<$Res, _$FetchMetaDataImpl>
+    implements _$$FetchMetaDataImplCopyWith<$Res> {
+  __$$FetchMetaDataImplCopyWithImpl(
+      _$FetchMetaDataImpl _value, $Res Function(_$FetchMetaDataImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_FetchMetaData implements _FetchMetaData {
-  _$_FetchMetaData();
+class _$FetchMetaDataImpl implements _FetchMetaData {
+  _$FetchMetaDataImpl();
 
   @override
   String toString() {
@@ -688,9 +691,9 @@ class _$_FetchMetaData implements _FetchMetaData {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_FetchMetaData);
+        (other.runtimeType == runtimeType && other is _$FetchMetaDataImpl);
   }
 
   @override
@@ -843,24 +846,24 @@ class _$_FetchMetaData implements _FetchMetaData {
 }
 
 abstract class _FetchMetaData implements ProductDetailEvent {
-  factory _FetchMetaData() = _$_FetchMetaData;
+  factory _FetchMetaData() = _$FetchMetaDataImpl;
 }
 
 /// @nodoc
-abstract class _$$_FetchStockCopyWith<$Res> {
-  factory _$$_FetchStockCopyWith(
-          _$_FetchStock value, $Res Function(_$_FetchStock) then) =
-      __$$_FetchStockCopyWithImpl<$Res>;
+abstract class _$$FetchStockImplCopyWith<$Res> {
+  factory _$$FetchStockImplCopyWith(
+          _$FetchStockImpl value, $Res Function(_$FetchStockImpl) then) =
+      __$$FetchStockImplCopyWithImpl<$Res>;
   @useResult
   $Res call({MaterialNumber materialNumber});
 }
 
 /// @nodoc
-class __$$_FetchStockCopyWithImpl<$Res>
-    extends _$ProductDetailEventCopyWithImpl<$Res, _$_FetchStock>
-    implements _$$_FetchStockCopyWith<$Res> {
-  __$$_FetchStockCopyWithImpl(
-      _$_FetchStock _value, $Res Function(_$_FetchStock) _then)
+class __$$FetchStockImplCopyWithImpl<$Res>
+    extends _$ProductDetailEventCopyWithImpl<$Res, _$FetchStockImpl>
+    implements _$$FetchStockImplCopyWith<$Res> {
+  __$$FetchStockImplCopyWithImpl(
+      _$FetchStockImpl _value, $Res Function(_$FetchStockImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -868,7 +871,7 @@ class __$$_FetchStockCopyWithImpl<$Res>
   $Res call({
     Object? materialNumber = null,
   }) {
-    return _then(_$_FetchStock(
+    return _then(_$FetchStockImpl(
       materialNumber: null == materialNumber
           ? _value.materialNumber
           : materialNumber // ignore: cast_nullable_to_non_nullable
@@ -879,8 +882,8 @@ class __$$_FetchStockCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_FetchStock implements _FetchStock {
-  _$_FetchStock({required this.materialNumber});
+class _$FetchStockImpl implements _FetchStock {
+  _$FetchStockImpl({required this.materialNumber});
 
   @override
   final MaterialNumber materialNumber;
@@ -891,10 +894,10 @@ class _$_FetchStock implements _FetchStock {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_FetchStock &&
+            other is _$FetchStockImpl &&
             (identical(other.materialNumber, materialNumber) ||
                 other.materialNumber == materialNumber));
   }
@@ -905,8 +908,8 @@ class _$_FetchStock implements _FetchStock {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_FetchStockCopyWith<_$_FetchStock> get copyWith =>
-      __$$_FetchStockCopyWithImpl<_$_FetchStock>(this, _$identity);
+  _$$FetchStockImplCopyWith<_$FetchStockImpl> get copyWith =>
+      __$$FetchStockImplCopyWithImpl<_$FetchStockImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -1056,29 +1059,29 @@ class _$_FetchStock implements _FetchStock {
 
 abstract class _FetchStock implements ProductDetailEvent {
   factory _FetchStock({required final MaterialNumber materialNumber}) =
-      _$_FetchStock;
+      _$FetchStockImpl;
 
   MaterialNumber get materialNumber;
   @JsonKey(ignore: true)
-  _$$_FetchStockCopyWith<_$_FetchStock> get copyWith =>
+  _$$FetchStockImplCopyWith<_$FetchStockImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_FetchStockForBundleCopyWith<$Res> {
-  factory _$$_FetchStockForBundleCopyWith(_$_FetchStockForBundle value,
-          $Res Function(_$_FetchStockForBundle) then) =
-      __$$_FetchStockForBundleCopyWithImpl<$Res>;
+abstract class _$$FetchStockForBundleImplCopyWith<$Res> {
+  factory _$$FetchStockForBundleImplCopyWith(_$FetchStockForBundleImpl value,
+          $Res Function(_$FetchStockForBundleImpl) then) =
+      __$$FetchStockForBundleImplCopyWithImpl<$Res>;
   @useResult
   $Res call({List<MaterialInfo> materials});
 }
 
 /// @nodoc
-class __$$_FetchStockForBundleCopyWithImpl<$Res>
-    extends _$ProductDetailEventCopyWithImpl<$Res, _$_FetchStockForBundle>
-    implements _$$_FetchStockForBundleCopyWith<$Res> {
-  __$$_FetchStockForBundleCopyWithImpl(_$_FetchStockForBundle _value,
-      $Res Function(_$_FetchStockForBundle) _then)
+class __$$FetchStockForBundleImplCopyWithImpl<$Res>
+    extends _$ProductDetailEventCopyWithImpl<$Res, _$FetchStockForBundleImpl>
+    implements _$$FetchStockForBundleImplCopyWith<$Res> {
+  __$$FetchStockForBundleImplCopyWithImpl(_$FetchStockForBundleImpl _value,
+      $Res Function(_$FetchStockForBundleImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1086,7 +1089,7 @@ class __$$_FetchStockForBundleCopyWithImpl<$Res>
   $Res call({
     Object? materials = null,
   }) {
-    return _then(_$_FetchStockForBundle(
+    return _then(_$FetchStockForBundleImpl(
       materials: null == materials
           ? _value._materials
           : materials // ignore: cast_nullable_to_non_nullable
@@ -1097,8 +1100,8 @@ class __$$_FetchStockForBundleCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_FetchStockForBundle implements _FetchStockForBundle {
-  _$_FetchStockForBundle({required final List<MaterialInfo> materials})
+class _$FetchStockForBundleImpl implements _FetchStockForBundle {
+  _$FetchStockForBundleImpl({required final List<MaterialInfo> materials})
       : _materials = materials;
 
   final List<MaterialInfo> _materials;
@@ -1115,10 +1118,10 @@ class _$_FetchStockForBundle implements _FetchStockForBundle {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_FetchStockForBundle &&
+            other is _$FetchStockForBundleImpl &&
             const DeepCollectionEquality()
                 .equals(other._materials, _materials));
   }
@@ -1130,8 +1133,8 @@ class _$_FetchStockForBundle implements _FetchStockForBundle {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_FetchStockForBundleCopyWith<_$_FetchStockForBundle> get copyWith =>
-      __$$_FetchStockForBundleCopyWithImpl<_$_FetchStockForBundle>(
+  _$$FetchStockForBundleImplCopyWith<_$FetchStockForBundleImpl> get copyWith =>
+      __$$FetchStockForBundleImplCopyWithImpl<_$FetchStockForBundleImpl>(
           this, _$identity);
 
   @override
@@ -1282,29 +1285,29 @@ class _$_FetchStockForBundle implements _FetchStockForBundle {
 
 abstract class _FetchStockForBundle implements ProductDetailEvent {
   factory _FetchStockForBundle({required final List<MaterialInfo> materials}) =
-      _$_FetchStockForBundle;
+      _$FetchStockForBundleImpl;
 
   List<MaterialInfo> get materials;
   @JsonKey(ignore: true)
-  _$$_FetchStockForBundleCopyWith<_$_FetchStockForBundle> get copyWith =>
+  _$$FetchStockForBundleImplCopyWith<_$FetchStockForBundleImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_ChangeImageCopyWith<$Res> {
-  factory _$$_ChangeImageCopyWith(
-          _$_ChangeImage value, $Res Function(_$_ChangeImage) then) =
-      __$$_ChangeImageCopyWithImpl<$Res>;
+abstract class _$$ChangeImageImplCopyWith<$Res> {
+  factory _$$ChangeImageImplCopyWith(
+          _$ChangeImageImpl value, $Res Function(_$ChangeImageImpl) then) =
+      __$$ChangeImageImplCopyWithImpl<$Res>;
   @useResult
   $Res call({int index});
 }
 
 /// @nodoc
-class __$$_ChangeImageCopyWithImpl<$Res>
-    extends _$ProductDetailEventCopyWithImpl<$Res, _$_ChangeImage>
-    implements _$$_ChangeImageCopyWith<$Res> {
-  __$$_ChangeImageCopyWithImpl(
-      _$_ChangeImage _value, $Res Function(_$_ChangeImage) _then)
+class __$$ChangeImageImplCopyWithImpl<$Res>
+    extends _$ProductDetailEventCopyWithImpl<$Res, _$ChangeImageImpl>
+    implements _$$ChangeImageImplCopyWith<$Res> {
+  __$$ChangeImageImplCopyWithImpl(
+      _$ChangeImageImpl _value, $Res Function(_$ChangeImageImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1312,7 +1315,7 @@ class __$$_ChangeImageCopyWithImpl<$Res>
   $Res call({
     Object? index = null,
   }) {
-    return _then(_$_ChangeImage(
+    return _then(_$ChangeImageImpl(
       null == index
           ? _value.index
           : index // ignore: cast_nullable_to_non_nullable
@@ -1323,8 +1326,8 @@ class __$$_ChangeImageCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_ChangeImage implements _ChangeImage {
-  _$_ChangeImage(this.index);
+class _$ChangeImageImpl implements _ChangeImage {
+  _$ChangeImageImpl(this.index);
 
   @override
   final int index;
@@ -1335,10 +1338,10 @@ class _$_ChangeImage implements _ChangeImage {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ChangeImage &&
+            other is _$ChangeImageImpl &&
             (identical(other.index, index) || other.index == index));
   }
 
@@ -1348,8 +1351,8 @@ class _$_ChangeImage implements _ChangeImage {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ChangeImageCopyWith<_$_ChangeImage> get copyWith =>
-      __$$_ChangeImageCopyWithImpl<_$_ChangeImage>(this, _$identity);
+  _$$ChangeImageImplCopyWith<_$ChangeImageImpl> get copyWith =>
+      __$$ChangeImageImplCopyWithImpl<_$ChangeImageImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -1498,29 +1501,29 @@ class _$_ChangeImage implements _ChangeImage {
 }
 
 abstract class _ChangeImage implements ProductDetailEvent {
-  factory _ChangeImage(final int index) = _$_ChangeImage;
+  factory _ChangeImage(final int index) = _$ChangeImageImpl;
 
   int get index;
   @JsonKey(ignore: true)
-  _$$_ChangeImageCopyWith<_$_ChangeImage> get copyWith =>
+  _$$ChangeImageImplCopyWith<_$ChangeImageImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_AddFavouriteCopyWith<$Res> {
-  factory _$$_AddFavouriteCopyWith(
-          _$_AddFavourite value, $Res Function(_$_AddFavourite) then) =
-      __$$_AddFavouriteCopyWithImpl<$Res>;
+abstract class _$$AddFavouriteImplCopyWith<$Res> {
+  factory _$$AddFavouriteImplCopyWith(
+          _$AddFavouriteImpl value, $Res Function(_$AddFavouriteImpl) then) =
+      __$$AddFavouriteImplCopyWithImpl<$Res>;
   @useResult
   $Res call({bool isForSimilarProduct, MaterialNumber materialNumber});
 }
 
 /// @nodoc
-class __$$_AddFavouriteCopyWithImpl<$Res>
-    extends _$ProductDetailEventCopyWithImpl<$Res, _$_AddFavourite>
-    implements _$$_AddFavouriteCopyWith<$Res> {
-  __$$_AddFavouriteCopyWithImpl(
-      _$_AddFavourite _value, $Res Function(_$_AddFavourite) _then)
+class __$$AddFavouriteImplCopyWithImpl<$Res>
+    extends _$ProductDetailEventCopyWithImpl<$Res, _$AddFavouriteImpl>
+    implements _$$AddFavouriteImplCopyWith<$Res> {
+  __$$AddFavouriteImplCopyWithImpl(
+      _$AddFavouriteImpl _value, $Res Function(_$AddFavouriteImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1529,7 +1532,7 @@ class __$$_AddFavouriteCopyWithImpl<$Res>
     Object? isForSimilarProduct = null,
     Object? materialNumber = null,
   }) {
-    return _then(_$_AddFavourite(
+    return _then(_$AddFavouriteImpl(
       isForSimilarProduct: null == isForSimilarProduct
           ? _value.isForSimilarProduct
           : isForSimilarProduct // ignore: cast_nullable_to_non_nullable
@@ -1544,8 +1547,8 @@ class __$$_AddFavouriteCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_AddFavourite implements _AddFavourite {
-  _$_AddFavourite(
+class _$AddFavouriteImpl implements _AddFavourite {
+  _$AddFavouriteImpl(
       {required this.isForSimilarProduct, required this.materialNumber});
 
   @override
@@ -1559,10 +1562,10 @@ class _$_AddFavourite implements _AddFavourite {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_AddFavourite &&
+            other is _$AddFavouriteImpl &&
             (identical(other.isForSimilarProduct, isForSimilarProduct) ||
                 other.isForSimilarProduct == isForSimilarProduct) &&
             (identical(other.materialNumber, materialNumber) ||
@@ -1576,8 +1579,8 @@ class _$_AddFavourite implements _AddFavourite {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_AddFavouriteCopyWith<_$_AddFavourite> get copyWith =>
-      __$$_AddFavouriteCopyWithImpl<_$_AddFavourite>(this, _$identity);
+  _$$AddFavouriteImplCopyWith<_$AddFavouriteImpl> get copyWith =>
+      __$$AddFavouriteImplCopyWithImpl<_$AddFavouriteImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -1728,30 +1731,30 @@ class _$_AddFavourite implements _AddFavourite {
 abstract class _AddFavourite implements ProductDetailEvent {
   factory _AddFavourite(
       {required final bool isForSimilarProduct,
-      required final MaterialNumber materialNumber}) = _$_AddFavourite;
+      required final MaterialNumber materialNumber}) = _$AddFavouriteImpl;
 
   bool get isForSimilarProduct;
   MaterialNumber get materialNumber;
   @JsonKey(ignore: true)
-  _$$_AddFavouriteCopyWith<_$_AddFavourite> get copyWith =>
+  _$$AddFavouriteImplCopyWith<_$AddFavouriteImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_DeleteFavouriteCopyWith<$Res> {
-  factory _$$_DeleteFavouriteCopyWith(
-          _$_DeleteFavourite value, $Res Function(_$_DeleteFavourite) then) =
-      __$$_DeleteFavouriteCopyWithImpl<$Res>;
+abstract class _$$DeleteFavouriteImplCopyWith<$Res> {
+  factory _$$DeleteFavouriteImplCopyWith(_$DeleteFavouriteImpl value,
+          $Res Function(_$DeleteFavouriteImpl) then) =
+      __$$DeleteFavouriteImplCopyWithImpl<$Res>;
   @useResult
   $Res call({bool isForSimilarProduct, MaterialNumber materialNumber});
 }
 
 /// @nodoc
-class __$$_DeleteFavouriteCopyWithImpl<$Res>
-    extends _$ProductDetailEventCopyWithImpl<$Res, _$_DeleteFavourite>
-    implements _$$_DeleteFavouriteCopyWith<$Res> {
-  __$$_DeleteFavouriteCopyWithImpl(
-      _$_DeleteFavourite _value, $Res Function(_$_DeleteFavourite) _then)
+class __$$DeleteFavouriteImplCopyWithImpl<$Res>
+    extends _$ProductDetailEventCopyWithImpl<$Res, _$DeleteFavouriteImpl>
+    implements _$$DeleteFavouriteImplCopyWith<$Res> {
+  __$$DeleteFavouriteImplCopyWithImpl(
+      _$DeleteFavouriteImpl _value, $Res Function(_$DeleteFavouriteImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1760,7 +1763,7 @@ class __$$_DeleteFavouriteCopyWithImpl<$Res>
     Object? isForSimilarProduct = null,
     Object? materialNumber = null,
   }) {
-    return _then(_$_DeleteFavourite(
+    return _then(_$DeleteFavouriteImpl(
       isForSimilarProduct: null == isForSimilarProduct
           ? _value.isForSimilarProduct
           : isForSimilarProduct // ignore: cast_nullable_to_non_nullable
@@ -1775,8 +1778,8 @@ class __$$_DeleteFavouriteCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_DeleteFavourite implements _DeleteFavourite {
-  _$_DeleteFavourite(
+class _$DeleteFavouriteImpl implements _DeleteFavourite {
+  _$DeleteFavouriteImpl(
       {required this.isForSimilarProduct, required this.materialNumber});
 
   @override
@@ -1790,10 +1793,10 @@ class _$_DeleteFavourite implements _DeleteFavourite {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_DeleteFavourite &&
+            other is _$DeleteFavouriteImpl &&
             (identical(other.isForSimilarProduct, isForSimilarProduct) ||
                 other.isForSimilarProduct == isForSimilarProduct) &&
             (identical(other.materialNumber, materialNumber) ||
@@ -1807,8 +1810,9 @@ class _$_DeleteFavourite implements _DeleteFavourite {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_DeleteFavouriteCopyWith<_$_DeleteFavourite> get copyWith =>
-      __$$_DeleteFavouriteCopyWithImpl<_$_DeleteFavourite>(this, _$identity);
+  _$$DeleteFavouriteImplCopyWith<_$DeleteFavouriteImpl> get copyWith =>
+      __$$DeleteFavouriteImplCopyWithImpl<_$DeleteFavouriteImpl>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -1959,30 +1963,30 @@ class _$_DeleteFavourite implements _DeleteFavourite {
 abstract class _DeleteFavourite implements ProductDetailEvent {
   factory _DeleteFavourite(
       {required final bool isForSimilarProduct,
-      required final MaterialNumber materialNumber}) = _$_DeleteFavourite;
+      required final MaterialNumber materialNumber}) = _$DeleteFavouriteImpl;
 
   bool get isForSimilarProduct;
   MaterialNumber get materialNumber;
   @JsonKey(ignore: true)
-  _$$_DeleteFavouriteCopyWith<_$_DeleteFavourite> get copyWith =>
+  _$$DeleteFavouriteImplCopyWith<_$DeleteFavouriteImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_UpdateQtyCopyWith<$Res> {
-  factory _$$_UpdateQtyCopyWith(
-          _$_UpdateQty value, $Res Function(_$_UpdateQty) then) =
-      __$$_UpdateQtyCopyWithImpl<$Res>;
+abstract class _$$UpdateQtyImplCopyWith<$Res> {
+  factory _$$UpdateQtyImplCopyWith(
+          _$UpdateQtyImpl value, $Res Function(_$UpdateQtyImpl) then) =
+      __$$UpdateQtyImplCopyWithImpl<$Res>;
   @useResult
   $Res call({int qty});
 }
 
 /// @nodoc
-class __$$_UpdateQtyCopyWithImpl<$Res>
-    extends _$ProductDetailEventCopyWithImpl<$Res, _$_UpdateQty>
-    implements _$$_UpdateQtyCopyWith<$Res> {
-  __$$_UpdateQtyCopyWithImpl(
-      _$_UpdateQty _value, $Res Function(_$_UpdateQty) _then)
+class __$$UpdateQtyImplCopyWithImpl<$Res>
+    extends _$ProductDetailEventCopyWithImpl<$Res, _$UpdateQtyImpl>
+    implements _$$UpdateQtyImplCopyWith<$Res> {
+  __$$UpdateQtyImplCopyWithImpl(
+      _$UpdateQtyImpl _value, $Res Function(_$UpdateQtyImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1990,7 +1994,7 @@ class __$$_UpdateQtyCopyWithImpl<$Res>
   $Res call({
     Object? qty = null,
   }) {
-    return _then(_$_UpdateQty(
+    return _then(_$UpdateQtyImpl(
       qty: null == qty
           ? _value.qty
           : qty // ignore: cast_nullable_to_non_nullable
@@ -2001,8 +2005,8 @@ class __$$_UpdateQtyCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_UpdateQty implements _UpdateQty {
-  _$_UpdateQty({required this.qty});
+class _$UpdateQtyImpl implements _UpdateQty {
+  _$UpdateQtyImpl({required this.qty});
 
   @override
   final int qty;
@@ -2013,10 +2017,10 @@ class _$_UpdateQty implements _UpdateQty {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_UpdateQty &&
+            other is _$UpdateQtyImpl &&
             (identical(other.qty, qty) || other.qty == qty));
   }
 
@@ -2026,8 +2030,8 @@ class _$_UpdateQty implements _UpdateQty {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_UpdateQtyCopyWith<_$_UpdateQty> get copyWith =>
-      __$$_UpdateQtyCopyWithImpl<_$_UpdateQty>(this, _$identity);
+  _$$UpdateQtyImplCopyWith<_$UpdateQtyImpl> get copyWith =>
+      __$$UpdateQtyImplCopyWithImpl<_$UpdateQtyImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -2176,32 +2180,32 @@ class _$_UpdateQty implements _UpdateQty {
 }
 
 abstract class _UpdateQty implements ProductDetailEvent {
-  factory _UpdateQty({required final int qty}) = _$_UpdateQty;
+  factory _UpdateQty({required final int qty}) = _$UpdateQtyImpl;
 
   int get qty;
   @JsonKey(ignore: true)
-  _$$_UpdateQtyCopyWith<_$_UpdateQty> get copyWith =>
+  _$$UpdateQtyImplCopyWith<_$UpdateQtyImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_FetchItemQuantityForZdp5DiscountCopyWith<$Res> {
-  factory _$$_FetchItemQuantityForZdp5DiscountCopyWith(
-          _$_FetchItemQuantityForZdp5Discount value,
-          $Res Function(_$_FetchItemQuantityForZdp5Discount) then) =
-      __$$_FetchItemQuantityForZdp5DiscountCopyWithImpl<$Res>;
+abstract class _$$FetchItemQuantityForZdp5DiscountImplCopyWith<$Res> {
+  factory _$$FetchItemQuantityForZdp5DiscountImplCopyWith(
+          _$FetchItemQuantityForZdp5DiscountImpl value,
+          $Res Function(_$FetchItemQuantityForZdp5DiscountImpl) then) =
+      __$$FetchItemQuantityForZdp5DiscountImplCopyWithImpl<$Res>;
   @useResult
   $Res call({int quantity});
 }
 
 /// @nodoc
-class __$$_FetchItemQuantityForZdp5DiscountCopyWithImpl<$Res>
+class __$$FetchItemQuantityForZdp5DiscountImplCopyWithImpl<$Res>
     extends _$ProductDetailEventCopyWithImpl<$Res,
-        _$_FetchItemQuantityForZdp5Discount>
-    implements _$$_FetchItemQuantityForZdp5DiscountCopyWith<$Res> {
-  __$$_FetchItemQuantityForZdp5DiscountCopyWithImpl(
-      _$_FetchItemQuantityForZdp5Discount _value,
-      $Res Function(_$_FetchItemQuantityForZdp5Discount) _then)
+        _$FetchItemQuantityForZdp5DiscountImpl>
+    implements _$$FetchItemQuantityForZdp5DiscountImplCopyWith<$Res> {
+  __$$FetchItemQuantityForZdp5DiscountImplCopyWithImpl(
+      _$FetchItemQuantityForZdp5DiscountImpl _value,
+      $Res Function(_$FetchItemQuantityForZdp5DiscountImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -2209,7 +2213,7 @@ class __$$_FetchItemQuantityForZdp5DiscountCopyWithImpl<$Res>
   $Res call({
     Object? quantity = null,
   }) {
-    return _then(_$_FetchItemQuantityForZdp5Discount(
+    return _then(_$FetchItemQuantityForZdp5DiscountImpl(
       quantity: null == quantity
           ? _value.quantity
           : quantity // ignore: cast_nullable_to_non_nullable
@@ -2220,9 +2224,9 @@ class __$$_FetchItemQuantityForZdp5DiscountCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_FetchItemQuantityForZdp5Discount
+class _$FetchItemQuantityForZdp5DiscountImpl
     implements _FetchItemQuantityForZdp5Discount {
-  const _$_FetchItemQuantityForZdp5Discount({required this.quantity});
+  const _$FetchItemQuantityForZdp5DiscountImpl({required this.quantity});
 
   @override
   final int quantity;
@@ -2233,10 +2237,10 @@ class _$_FetchItemQuantityForZdp5Discount
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_FetchItemQuantityForZdp5Discount &&
+            other is _$FetchItemQuantityForZdp5DiscountImpl &&
             (identical(other.quantity, quantity) ||
                 other.quantity == quantity));
   }
@@ -2247,10 +2251,10 @@ class _$_FetchItemQuantityForZdp5Discount
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_FetchItemQuantityForZdp5DiscountCopyWith<
-          _$_FetchItemQuantityForZdp5Discount>
-      get copyWith => __$$_FetchItemQuantityForZdp5DiscountCopyWithImpl<
-          _$_FetchItemQuantityForZdp5Discount>(this, _$identity);
+  _$$FetchItemQuantityForZdp5DiscountImplCopyWith<
+          _$FetchItemQuantityForZdp5DiscountImpl>
+      get copyWith => __$$FetchItemQuantityForZdp5DiscountImplCopyWithImpl<
+          _$FetchItemQuantityForZdp5DiscountImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -2400,30 +2404,30 @@ class _$_FetchItemQuantityForZdp5Discount
 
 abstract class _FetchItemQuantityForZdp5Discount implements ProductDetailEvent {
   const factory _FetchItemQuantityForZdp5Discount(
-      {required final int quantity}) = _$_FetchItemQuantityForZdp5Discount;
+      {required final int quantity}) = _$FetchItemQuantityForZdp5DiscountImpl;
 
   int get quantity;
   @JsonKey(ignore: true)
-  _$$_FetchItemQuantityForZdp5DiscountCopyWith<
-          _$_FetchItemQuantityForZdp5Discount>
+  _$$FetchItemQuantityForZdp5DiscountImplCopyWith<
+          _$FetchItemQuantityForZdp5DiscountImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_SetExceedQtyCopyWith<$Res> {
-  factory _$$_SetExceedQtyCopyWith(
-          _$_SetExceedQty value, $Res Function(_$_SetExceedQty) then) =
-      __$$_SetExceedQtyCopyWithImpl<$Res>;
+abstract class _$$SetExceedQtyImplCopyWith<$Res> {
+  factory _$$SetExceedQtyImplCopyWith(
+          _$SetExceedQtyImpl value, $Res Function(_$SetExceedQtyImpl) then) =
+      __$$SetExceedQtyImplCopyWithImpl<$Res>;
   @useResult
   $Res call({bool exceedQty});
 }
 
 /// @nodoc
-class __$$_SetExceedQtyCopyWithImpl<$Res>
-    extends _$ProductDetailEventCopyWithImpl<$Res, _$_SetExceedQty>
-    implements _$$_SetExceedQtyCopyWith<$Res> {
-  __$$_SetExceedQtyCopyWithImpl(
-      _$_SetExceedQty _value, $Res Function(_$_SetExceedQty) _then)
+class __$$SetExceedQtyImplCopyWithImpl<$Res>
+    extends _$ProductDetailEventCopyWithImpl<$Res, _$SetExceedQtyImpl>
+    implements _$$SetExceedQtyImplCopyWith<$Res> {
+  __$$SetExceedQtyImplCopyWithImpl(
+      _$SetExceedQtyImpl _value, $Res Function(_$SetExceedQtyImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -2431,7 +2435,7 @@ class __$$_SetExceedQtyCopyWithImpl<$Res>
   $Res call({
     Object? exceedQty = null,
   }) {
-    return _then(_$_SetExceedQty(
+    return _then(_$SetExceedQtyImpl(
       exceedQty: null == exceedQty
           ? _value.exceedQty
           : exceedQty // ignore: cast_nullable_to_non_nullable
@@ -2442,8 +2446,8 @@ class __$$_SetExceedQtyCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_SetExceedQty implements _SetExceedQty {
-  const _$_SetExceedQty({required this.exceedQty});
+class _$SetExceedQtyImpl implements _SetExceedQty {
+  const _$SetExceedQtyImpl({required this.exceedQty});
 
   @override
   final bool exceedQty;
@@ -2454,10 +2458,10 @@ class _$_SetExceedQty implements _SetExceedQty {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_SetExceedQty &&
+            other is _$SetExceedQtyImpl &&
             (identical(other.exceedQty, exceedQty) ||
                 other.exceedQty == exceedQty));
   }
@@ -2468,8 +2472,8 @@ class _$_SetExceedQty implements _SetExceedQty {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_SetExceedQtyCopyWith<_$_SetExceedQty> get copyWith =>
-      __$$_SetExceedQtyCopyWithImpl<_$_SetExceedQty>(this, _$identity);
+  _$$SetExceedQtyImplCopyWith<_$SetExceedQtyImpl> get copyWith =>
+      __$$SetExceedQtyImplCopyWithImpl<_$SetExceedQtyImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -2619,11 +2623,11 @@ class _$_SetExceedQty implements _SetExceedQty {
 
 abstract class _SetExceedQty implements ProductDetailEvent {
   const factory _SetExceedQty({required final bool exceedQty}) =
-      _$_SetExceedQty;
+      _$SetExceedQtyImpl;
 
   bool get exceedQty;
   @JsonKey(ignore: true)
-  _$$_SetExceedQtyCopyWith<_$_SetExceedQty> get copyWith =>
+  _$$SetExceedQtyImplCopyWith<_$SetExceedQtyImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -2797,11 +2801,11 @@ class _$ProductDetailStateCopyWithImpl<$Res, $Val extends ProductDetailState>
 }
 
 /// @nodoc
-abstract class _$$_ProductDetailStateCopyWith<$Res>
+abstract class _$$ProductDetailStateImplCopyWith<$Res>
     implements $ProductDetailStateCopyWith<$Res> {
-  factory _$$_ProductDetailStateCopyWith(_$_ProductDetailState value,
-          $Res Function(_$_ProductDetailState) then) =
-      __$$_ProductDetailStateCopyWithImpl<$Res>;
+  factory _$$ProductDetailStateImplCopyWith(_$ProductDetailStateImpl value,
+          $Res Function(_$ProductDetailStateImpl) then) =
+      __$$ProductDetailStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -2831,11 +2835,11 @@ abstract class _$$_ProductDetailStateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_ProductDetailStateCopyWithImpl<$Res>
-    extends _$ProductDetailStateCopyWithImpl<$Res, _$_ProductDetailState>
-    implements _$$_ProductDetailStateCopyWith<$Res> {
-  __$$_ProductDetailStateCopyWithImpl(
-      _$_ProductDetailState _value, $Res Function(_$_ProductDetailState) _then)
+class __$$ProductDetailStateImplCopyWithImpl<$Res>
+    extends _$ProductDetailStateCopyWithImpl<$Res, _$ProductDetailStateImpl>
+    implements _$$ProductDetailStateImplCopyWith<$Res> {
+  __$$ProductDetailStateImplCopyWithImpl(_$ProductDetailStateImpl _value,
+      $Res Function(_$ProductDetailStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -2854,7 +2858,7 @@ class __$$_ProductDetailStateCopyWithImpl<$Res>
     Object? inputQty = null,
     Object? selectedImageIndex = null,
   }) {
-    return _then(_$_ProductDetailState(
+    return _then(_$ProductDetailStateImpl(
       user: null == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
@@ -2909,8 +2913,8 @@ class __$$_ProductDetailStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_ProductDetailState extends _ProductDetailState {
-  const _$_ProductDetailState(
+class _$ProductDetailStateImpl extends _ProductDetailState {
+  const _$ProductDetailStateImpl(
       {required this.user,
       required this.salesOrganisation,
       required this.customerCodeInfo,
@@ -2957,10 +2961,10 @@ class _$_ProductDetailState extends _ProductDetailState {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ProductDetailState &&
+            other is _$ProductDetailStateImpl &&
             (identical(other.user, user) || other.user == user) &&
             (identical(other.salesOrganisation, salesOrganisation) ||
                 other.salesOrganisation == salesOrganisation) &&
@@ -3006,8 +3010,8 @@ class _$_ProductDetailState extends _ProductDetailState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ProductDetailStateCopyWith<_$_ProductDetailState> get copyWith =>
-      __$$_ProductDetailStateCopyWithImpl<_$_ProductDetailState>(
+  _$$ProductDetailStateImplCopyWith<_$ProductDetailStateImpl> get copyWith =>
+      __$$ProductDetailStateImplCopyWithImpl<_$ProductDetailStateImpl>(
           this, _$identity);
 }
 
@@ -3024,7 +3028,7 @@ abstract class _ProductDetailState extends ProductDetailState {
       required final bool isRelatedProductsFetching,
       required final bool isMetadataFetching,
       required final int inputQty,
-      final int selectedImageIndex}) = _$_ProductDetailState;
+      final int selectedImageIndex}) = _$ProductDetailStateImpl;
   const _ProductDetailState._() : super._();
 
   @override
@@ -3053,6 +3057,6 @@ abstract class _ProductDetailState extends ProductDetailState {
   int get selectedImageIndex;
   @override
   @JsonKey(ignore: true)
-  _$$_ProductDetailStateCopyWith<_$_ProductDetailState> get copyWith =>
+  _$$ProductDetailStateImplCopyWith<_$ProductDetailStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -5,6 +5,7 @@ import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
+import 'package:ezrxmobile/domain/order/error/order_exception.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/stock_info_query.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/stock_info_remote.dart';
@@ -67,6 +68,7 @@ void main() {
                 'materialNumbers': ['fake-material'],
                 'customerCode': 'fake-customercode',
                 'salesOrganisation': 'fake-salesorg',
+                'shipToCode': 'fake-ship-to-code',
               },
             },
           }),
@@ -76,6 +78,7 @@ void main() {
           materialNumbers: ['fake-material'],
           salesOrg: 'fake-salesorg',
           selectedCustomerCode: 'fake-customercode',
+          selectedShipToCode: 'fake-ship-to-code',
         );
 
         expect(
@@ -101,6 +104,7 @@ void main() {
               'materialNumbers': ['fake-material'],
               'customerCode': 'fake-customercode',
               'salesOrganisation': 'fake-salesorg',
+              'shipToCode': 'fake-ship-to-code',
             },
           }),
         );
@@ -109,8 +113,9 @@ void main() {
           materialNumbers: ['fake-material'],
           salesOrg: 'fake-salesorg',
           selectedCustomerCode: 'fake-customercode',
+          selectedShipToCode: 'fake-ship-to-code',
         ).onError((error, _) async {
-          expect(error, isA<ServerException>());
+          expect(error, isA<StockInfoException>());
           return Future.value([StockInfoMock()]);
         });
       });
@@ -136,6 +141,7 @@ void main() {
               'materialNumbers': ['fake-material'],
               'customerCode': 'fake-customercode',
               'salesOrganisation': 'fake-salesorg',
+              'shipToCode': 'fake-ship-to-code',
             },
           }),
         );
@@ -144,6 +150,7 @@ void main() {
           materialNumbers: ['fake-material'],
           salesOrg: 'fake-salesorg',
           selectedCustomerCode: 'fake-customercode',
+          selectedShipToCode: 'fake-ship-to-code',
         ).onError((error, _) async {
           expect(error, isA<ServerException>());
           return Future.value([StockInfoMock()]);

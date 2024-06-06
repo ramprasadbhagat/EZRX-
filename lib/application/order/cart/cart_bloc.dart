@@ -22,6 +22,7 @@ import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/domain/order/entities/tender_contract.dart';
 import 'package:ezrxmobile/domain/order/repository/i_cart_repository.dart';
 import 'package:ezrxmobile/domain/order/repository/i_product_details_repository.dart';
+import 'package:ezrxmobile/domain/order/repository/i_stock_info_repository.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/domain/utils/num_utils.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -36,10 +37,12 @@ part 'cart_state.dart';
 class CartBloc extends Bloc<CartEvent, CartState> {
   final ICartRepository repository;
   final IProductDetailRepository productDetailRepository;
+  final IStockInfoRepository stockInfoRepository;
 
   CartBloc(
     this.repository,
     this.productDetailRepository,
+    this.stockInfoRepository,
   ) : super(CartState.initial()) {
     on<CartEvent>(_onEvent);
   }
@@ -78,7 +81,9 @@ class CartBloc extends Bloc<CartEvent, CartState> {
             isFetchingBonus: true,
           ),
         );
-        final failureOrSuccess = await repository.updateMaterialDealBonus(
+
+        final failureOrSuccess =
+            await stockInfoRepository.updateStockForMaterialDealBonus(
           materials: e.items,
           customerCodeInfo: state.customerCodeInfo,
           salesOrganisationConfigs: state.config,
@@ -124,6 +129,23 @@ class CartBloc extends Bloc<CartEvent, CartState> {
           ),
         );
 
+        final response = await stockInfoRepository.getStockInfoList(
+          customerCodeInfo: state.customerCodeInfo,
+          materials: [e.bonusMaterial.materialNumber],
+          salesOrganisation: state.salesOrganisation,
+          shipToInfo: state.shipToInfo,
+        );
+        final stockInfo = response
+            .fold(
+              (failure) => <MaterialStockInfo>[],
+              (stockInfo) => stockInfo,
+            )
+            .firstWhere(
+              (element) =>
+                  element.materialNumber == e.bonusMaterial.materialNumber,
+              orElse: () => MaterialStockInfo.empty(),
+            );
+
         final failureOrSuccess = await repository.upsertCart(
           customerCodeInfo: state.customerCodeInfo,
           salesOrganisation: state.salesOrganisation,
@@ -135,6 +157,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
           counterOfferDetails: e.counterOfferDetails,
           itemId: e.bonusItemId.getValue(),
           tenderContractNumber: '',
+          stockInfo: stockInfo,
         );
 
         failureOrSuccess.fold(
@@ -383,6 +406,24 @@ class CartBloc extends Bloc<CartEvent, CartState> {
           ),
         );
 
+        final products = [
+          e.priceAggregate.materialInfo.copyWith(
+            quantity: MaterialQty(e.priceAggregate.quantity),
+          ),
+          ...e.priceAggregate.dealBonusList,
+        ];
+
+        final response = await stockInfoRepository.getStockInfoList(
+          customerCodeInfo: state.customerCodeInfo,
+          materials: [...products.map((e) => e.materialNumber)],
+          salesOrganisation: state.salesOrganisation,
+          shipToInfo: state.shipToInfo,
+        );
+        final materialStockInfo = response.fold(
+          (failure) => <MaterialStockInfo>[],
+          (stockInfo) => stockInfo,
+        );
+
         final failureOrSuccess = await repository.upsertCartWithBonus(
           customerCodeInfo: state.customerCodeInfo,
           salesOrganisation: state.salesOrganisation,
@@ -395,6 +436,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
             counterOfferCurrency: state.config.currency,
           ),
           banner: e.banner,
+          materialStockInfo: materialStockInfo,
         );
 
         await failureOrSuccess.fold(
@@ -777,7 +819,8 @@ class CartBloc extends Bloc<CartEvent, CartState> {
           ),
         );
 
-        final failureOrSuccess = await repository.getStockInfoList(
+        final failureOrSuccess =
+            await stockInfoRepository.getMappedStockInfoList(
           items: state.cartProducts
               .map(
                 (element) => element.toStockListMaterials,

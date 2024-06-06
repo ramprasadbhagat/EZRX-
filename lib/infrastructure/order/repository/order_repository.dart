@@ -13,7 +13,6 @@ import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
 import 'package:ezrxmobile/domain/order/entities/delivery_info_data.dart';
 import 'package:ezrxmobile/domain/order/entities/order_document_type.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details.dart';
-import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/domain/order/entities/submit_material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/submit_order.dart';
 import 'package:ezrxmobile/domain/order/entities/submit_order_customer.dart';
@@ -318,42 +317,7 @@ class OrderRepository implements IOrderRepository {
       );
     }
   }
-
-  @override
-  Future<Either<ApiFailure, List<MaterialStockInfo>>>
-      getConfirmedOrderStockInfo({
-    required List<OrderHistoryDetails> orderHistoryDetailList,
-    required SalesOrg salesOrg,
-    required CustomerCodeInfo customerCodeInfo,
-  }) async {
-    if (config.appFlavor == Flavor.mock) {
-      try {
-        final stockInfoList =
-            await stockInfoLocalDataSource.getMaterialStockInfoList();
-
-        return Right(stockInfoList);
-      } catch (e) {
-        return Left(FailureHandler.handleFailure(e));
-      }
-    }
-    try {
-      final stockInfoList =
-          await stockInfoRemoteDataSource.getMaterialStockInfoList(
-        materialNumbers: orderHistoryDetailList.allItems
-            .map((e) => e.materialNumber.getOrDefaultValue(''))
-            .toList(),
-        salesOrg: salesOrg.getOrCrash(),
-        selectedCustomerCode: customerCodeInfo.customerCodeSoldTo,
-      );
-
-      return Right(stockInfoList);
-    } catch (e) {
-      return Left(
-        FailureHandler.handleFailure(e),
-      );
-    }
-  }
-
+  
   SubmitOrder _getSubmitOrderRequest({
     required ShipToInfo shipToInfo,
     required User user,

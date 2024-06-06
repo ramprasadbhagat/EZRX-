@@ -15,6 +15,7 @@ class EligibilityState with _$EligibilityState {
     required Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
     required bool isLoadingCustomerCode,
     required bool preSelectShipTo,
+    required bool isStockInfoNotAvailable,
   }) = _EligibilityState;
 
   factory EligibilityState.initial() => EligibilityState(
@@ -28,6 +29,7 @@ class EligibilityState with _$EligibilityState {
         failureOrSuccessOption: none(),
         preSelectShipTo: false,
         isLoadingCustomerCode: false,
+        isStockInfoNotAvailable: false,
       );
 
   bool get isReturnsEnable {

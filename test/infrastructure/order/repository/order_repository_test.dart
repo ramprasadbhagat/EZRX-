@@ -23,7 +23,6 @@ import 'package:ezrxmobile/domain/order/entities/bundle.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
-import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/submit_order.dart';
@@ -98,7 +97,6 @@ void main() {
   late List<PriceAggregate> cartMaterials;
   late OrderEncryption orderEncryptionMock;
   late OrderLocalDataSource orderLocalDataSource;
-  late List<MaterialStockInfo> stockInfoListMock;
   late SubmitOrderResponse submitOrderResponseMock;
   late OrderHistoryDetails orderHistoryDetailsMock;
   late OrderRemoteDataSource orderRemoteDataSource;
@@ -226,8 +224,6 @@ void main() {
     submitOrderResponseMock = await OrderLocalDataSource().submitOrder();
     orderHistoryDetailsMock =
         await ViewByOrderDetailsLocalDataSource().getOrderHistoryDetails();
-    stockInfoListMock =
-        await StockInfoLocalDataSource().getMaterialStockInfoList();
     when(() => deviceStorage.currentMarket()).thenReturn(fakeMarketPlaceMarket);
     when(() => remoteConfigService.enableMarketPlaceMarkets)
         .thenReturn(fakeEnableMarketPlaceMarkets);
@@ -1576,101 +1572,6 @@ void main() {
         salesOrganisation: fakeSalesOrganisation,
         orderResponse: submitOrderResponseMock,
         shipToInfo: fakeShipToInfo,
-      );
-      expect(
-        result,
-        Left(FailureHandler.handleFailure(fakeError)),
-      );
-    });
-  });
-
-  group('OrderRepository => getConfirmedOrderStockInfo', () {
-    test(
-      'get submit order getConfirmedOrderStockInfo locally success',
-      () async {
-        when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
-
-        when(() => stockInfoLocalDataSource.getMaterialStockInfoList())
-            .thenAnswer(
-          (invocation) async => stockInfoListMock,
-        );
-
-        final result = await orderRepository.getConfirmedOrderStockInfo(
-          customerCodeInfo: fakeCustomerCodeInfo,
-          salesOrg: fakeSalesOrganisation.salesOrg,
-          orderHistoryDetailList: [orderHistoryDetailsMock],
-        );
-        expect(
-          result,
-          Right(stockInfoListMock),
-        );
-      },
-    );
-
-    test('get submit order getConfirmedOrderStockInfo locally fail', () async {
-      when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
-
-      when(() => stockInfoLocalDataSource.getMaterialStockInfoList())
-          .thenThrow(fakeError);
-
-      final result = await orderRepository.getConfirmedOrderStockInfo(
-        customerCodeInfo: fakeCustomerCodeInfo,
-        salesOrg: fakeSalesOrganisation.salesOrg,
-        orderHistoryDetailList: [orderHistoryDetailsMock],
-      );
-      expect(
-        result,
-        Left(FailureHandler.handleFailure(fakeError)),
-      );
-    });
-
-    test(
-      'get submit order getConfirmedOrderStockInfo Remote success',
-      () async {
-        when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
-
-        when(
-          () => stockInfoRemoteDataSource.getMaterialStockInfoList(
-            materialNumbers: orderHistoryDetailsMock
-                .orderHistoryDetailsOrderItem
-                .map((e) => e.materialNumber.getOrDefaultValue(''))
-                .toList(),
-            salesOrg: fakeSalesOrganisation.salesOrg.getValue(),
-            selectedCustomerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
-          ),
-        ).thenAnswer(
-          (invocation) async => stockInfoListMock,
-        );
-
-        final result = await orderRepository.getConfirmedOrderStockInfo(
-          customerCodeInfo: fakeCustomerCodeInfo,
-          salesOrg: fakeSalesOrganisation.salesOrg,
-          orderHistoryDetailList: [orderHistoryDetailsMock],
-        );
-        expect(
-          result,
-          Right(stockInfoListMock),
-        );
-      },
-    );
-
-    test('get submit order getConfirmedOrderStockInfo Remote fail', () async {
-      when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
-
-      when(
-        () => stockInfoRemoteDataSource.getMaterialStockInfoList(
-          materialNumbers: orderHistoryDetailsMock.orderHistoryDetailsOrderItem
-              .map((e) => e.materialNumber.getOrDefaultValue(''))
-              .toList(),
-          salesOrg: fakeSalesOrganisation.salesOrg.getValue(),
-          selectedCustomerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
-        ),
-      ).thenThrow(fakeError);
-
-      final result = await orderRepository.getConfirmedOrderStockInfo(
-        customerCodeInfo: fakeCustomerCodeInfo,
-        salesOrg: fakeSalesOrganisation.salesOrg,
-        orderHistoryDetailList: [orderHistoryDetailsMock],
       );
       expect(
         result,

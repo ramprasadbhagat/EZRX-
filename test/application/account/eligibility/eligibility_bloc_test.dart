@@ -5,6 +5,7 @@ import 'package:ezrxmobile/domain/account/entities/customer_code_information.dar
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/customer_code_local.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
+import 'package:ezrxmobile/infrastructure/order/repository/stock_info_repository.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -40,6 +41,8 @@ class MixpanelRepoMock extends Mock implements MixpanelRepository {}
 
 class CustomerCodeRepositoryMock extends Mock
     implements CustomerCodeRepository {}
+
+class StockInfoRepositoryMock extends Mock implements StockInfoRepository {}
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
@@ -137,12 +140,18 @@ void main() {
   final chatBotRepositoryMock = ChatBotRepositoryMock();
   final mixpanelRepositoryMock = MixpanelRepoMock();
   final customerCodeRepositoryMock = CustomerCodeRepositoryMock();
+  final stockInfoRepositoryMock = StockInfoRepositoryMock();
   final config = Config()..appFlavor = Flavor.mock;
   late CustomerInformation customerMockData;
 
   setUpAll(() async {
     customerMockData =
         await CustomerCodeLocalDataSource().getCustomerCodeList();
+  });
+
+  setUp(() {
+    when(() => stockInfoRepositoryMock.watchStockApiStatus())
+        .thenAnswer((_) => Stream.fromIterable([]));
   });
 
   group('Eligibility Bloc', () {
@@ -153,6 +162,7 @@ void main() {
         mixpanelRepository: mixpanelRepositoryMock,
         customerCodeRepository: customerCodeRepositoryMock,
         config: config,
+        stockRepository: stockInfoRepositoryMock,
       ),
       act: (EligibilityBloc bloc) {
         bloc.add(const EligibilityEvent.initialized());
@@ -167,6 +177,7 @@ void main() {
         mixpanelRepository: mixpanelRepositoryMock,
         customerCodeRepository: customerCodeRepositoryMock,
         config: config,
+        stockRepository: stockInfoRepositoryMock,
       ),
       setUp: () {
         when(
@@ -215,6 +226,7 @@ void main() {
         mixpanelRepository: mixpanelRepositoryMock,
         customerCodeRepository: customerCodeRepositoryMock,
         config: config,
+        stockRepository: stockInfoRepositoryMock,
       ),
       seed: () => EligibilityState.initial().copyWith(
         salesOrganisation: fakeSaleOrg,
@@ -263,6 +275,7 @@ void main() {
         mixpanelRepository: mixpanelRepositoryMock,
         customerCodeRepository: customerCodeRepositoryMock,
         config: config,
+        stockRepository: stockInfoRepositoryMock,
       ),
       seed: () => EligibilityState.initial().copyWith(
         user: fakeUser,
@@ -351,6 +364,7 @@ void main() {
       mixpanelRepository: mixpanelRepositoryMock,
       customerCodeRepository: customerCodeRepositoryMock,
       config: config,
+      stockRepository: stockInfoRepositoryMock,
     ),
     setUp: () {
       when(() => customerCodeRepositoryMock.getCustomerCodeStorage())
@@ -412,6 +426,7 @@ void main() {
       mixpanelRepository: mixpanelRepositoryMock,
       customerCodeRepository: customerCodeRepositoryMock,
       config: config,
+      stockRepository: stockInfoRepositoryMock,
     ),
     setUp: () {
       when(() => customerCodeRepositoryMock.getCustomerCodeStorage())
@@ -475,6 +490,7 @@ void main() {
       mixpanelRepository: mixpanelRepositoryMock,
       customerCodeRepository: customerCodeRepositoryMock,
       config: config,
+      stockRepository: stockInfoRepositoryMock,
     ),
     setUp: () {
       when(() => customerCodeRepositoryMock.getCustomerCodeStorage())
@@ -1515,6 +1531,7 @@ void main() {
         mixpanelRepository: mixpanelRepositoryMock,
         customerCodeRepository: customerCodeRepositoryMock,
         config: config,
+        stockRepository: stockInfoRepositoryMock,
       ),
       setUp: () {
         when(

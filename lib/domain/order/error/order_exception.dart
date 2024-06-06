@@ -11,3 +11,7 @@ class OrderException with _$OrderException {
   const factory OrderException.draftOrdersInCreateDraftOrderDataIsEmpty() =
       _DraftOrdersInCreateDraftOrderDataIsEmpty;
 }
+
+class StockInfoException implements Exception {
+  StockInfoException();
+}

@@ -12,16 +12,17 @@ class StockLabel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final addOosMaterials =
-        context.read<EligibilityBloc>().state.salesOrgConfigs.addOosMaterials;
+    final eligibilityState = context.read<EligibilityBloc>().state;
 
-    final validateOutOfStockValue =
-        context.read<EligibilityBloc>().state.validateOutOfStockValue;
+    final addOosMaterials = eligibilityState.salesOrgConfigs.addOosMaterials;
 
-    final salesOrgConfig =
-        context.read<EligibilityBloc>().state.salesOrgConfigs;
+    final validateOutOfStockValue = eligibilityState.validateOutOfStockValue;
 
-    return materialInfo.displayOOSPreorderTag(salesOrgConfig.hideStockDisplay)
+    final salesOrgConfig = eligibilityState.salesOrgConfigs;
+
+    return materialInfo
+                .displayOOSPreorderTag(salesOrgConfig.hideStockDisplay) &&
+            !eligibilityState.isStockInfoNotAvailable
         ? Container(
             key: WidgetKeys.materialListStockLabel,
             child: ProductTag.preOrderTag(

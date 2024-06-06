@@ -27,4 +27,10 @@ class EligibilityEvent with _$EligibilityEvent {
 
   const factory EligibilityEvent.fetchAndPreSelectCustomerCode() =
       _FetchAndPreSelectCustomerCode;
+
+  const factory EligibilityEvent.updateStockInfoAvailability({
+    required bool isStockInfoNotAvailable,
+  }) = _UpdateStockInfoAvailability;
+
+  const factory EligibilityEvent.watchStockApiStatus() = _WatchStockApiStatus;
 }

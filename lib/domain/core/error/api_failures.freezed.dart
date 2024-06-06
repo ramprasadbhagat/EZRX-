@@ -62,6 +62,7 @@ mixin _$ApiFailure {
     required TResult Function(String message) openDownloadedFileError,
     required TResult Function() addAnimalHealthWithNormalProductToCart,
     required TResult Function() missingzzHtmcs,
+    required TResult Function() stockInfoNotAvailable,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -110,6 +111,7 @@ mixin _$ApiFailure {
     TResult? Function(String message)? openDownloadedFileError,
     TResult? Function()? addAnimalHealthWithNormalProductToCart,
     TResult? Function()? missingzzHtmcs,
+    TResult? Function()? stockInfoNotAvailable,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -158,6 +160,7 @@ mixin _$ApiFailure {
     TResult Function(String message)? openDownloadedFileError,
     TResult Function()? addAnimalHealthWithNormalProductToCart,
     TResult Function()? missingzzHtmcs,
+    TResult Function()? stockInfoNotAvailable,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -230,6 +233,8 @@ mixin _$ApiFailure {
     required TResult Function(_AddAnimalHealthWithNormalProductToCart value)
         addAnimalHealthWithNormalProductToCart,
     required TResult Function(_MissingzzHtmcs value) missingzzHtmcs,
+    required TResult Function(_StockInfoNotAvailable value)
+        stockInfoNotAvailable,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -288,6 +293,7 @@ mixin _$ApiFailure {
     TResult? Function(_AddAnimalHealthWithNormalProductToCart value)?
         addAnimalHealthWithNormalProductToCart,
     TResult? Function(_MissingzzHtmcs value)? missingzzHtmcs,
+    TResult? Function(_StockInfoNotAvailable value)? stockInfoNotAvailable,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -346,6 +352,7 @@ mixin _$ApiFailure {
     TResult Function(_AddAnimalHealthWithNormalProductToCart value)?
         addAnimalHealthWithNormalProductToCart,
     TResult Function(_MissingzzHtmcs value)? missingzzHtmcs,
+    TResult Function(_StockInfoNotAvailable value)? stockInfoNotAvailable,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -477,6 +484,7 @@ class _$OtherImpl implements _Other {
     required TResult Function(String message) openDownloadedFileError,
     required TResult Function() addAnimalHealthWithNormalProductToCart,
     required TResult Function() missingzzHtmcs,
+    required TResult Function() stockInfoNotAvailable,
   }) {
     return other(message);
   }
@@ -528,6 +536,7 @@ class _$OtherImpl implements _Other {
     TResult? Function(String message)? openDownloadedFileError,
     TResult? Function()? addAnimalHealthWithNormalProductToCart,
     TResult? Function()? missingzzHtmcs,
+    TResult? Function()? stockInfoNotAvailable,
   }) {
     return other?.call(message);
   }
@@ -579,6 +588,7 @@ class _$OtherImpl implements _Other {
     TResult Function(String message)? openDownloadedFileError,
     TResult Function()? addAnimalHealthWithNormalProductToCart,
     TResult Function()? missingzzHtmcs,
+    TResult Function()? stockInfoNotAvailable,
     required TResult orElse(),
   }) {
     if (other != null) {
@@ -657,6 +667,8 @@ class _$OtherImpl implements _Other {
     required TResult Function(_AddAnimalHealthWithNormalProductToCart value)
         addAnimalHealthWithNormalProductToCart,
     required TResult Function(_MissingzzHtmcs value) missingzzHtmcs,
+    required TResult Function(_StockInfoNotAvailable value)
+        stockInfoNotAvailable,
   }) {
     return other(this);
   }
@@ -718,6 +730,7 @@ class _$OtherImpl implements _Other {
     TResult? Function(_AddAnimalHealthWithNormalProductToCart value)?
         addAnimalHealthWithNormalProductToCart,
     TResult? Function(_MissingzzHtmcs value)? missingzzHtmcs,
+    TResult? Function(_StockInfoNotAvailable value)? stockInfoNotAvailable,
   }) {
     return other?.call(this);
   }
@@ -779,6 +792,7 @@ class _$OtherImpl implements _Other {
     TResult Function(_AddAnimalHealthWithNormalProductToCart value)?
         addAnimalHealthWithNormalProductToCart,
     TResult Function(_MissingzzHtmcs value)? missingzzHtmcs,
+    TResult Function(_StockInfoNotAvailable value)? stockInfoNotAvailable,
     required TResult orElse(),
   }) {
     if (other != null) {
@@ -905,6 +919,7 @@ class _$ServerErrorImpl implements _ServerError {
     required TResult Function(String message) openDownloadedFileError,
     required TResult Function() addAnimalHealthWithNormalProductToCart,
     required TResult Function() missingzzHtmcs,
+    required TResult Function() stockInfoNotAvailable,
   }) {
     return serverError(message);
   }
@@ -956,6 +971,7 @@ class _$ServerErrorImpl implements _ServerError {
     TResult? Function(String message)? openDownloadedFileError,
     TResult? Function()? addAnimalHealthWithNormalProductToCart,
     TResult? Function()? missingzzHtmcs,
+    TResult? Function()? stockInfoNotAvailable,
   }) {
     return serverError?.call(message);
   }
@@ -1007,6 +1023,7 @@ class _$ServerErrorImpl implements _ServerError {
     TResult Function(String message)? openDownloadedFileError,
     TResult Function()? addAnimalHealthWithNormalProductToCart,
     TResult Function()? missingzzHtmcs,
+    TResult Function()? stockInfoNotAvailable,
     required TResult orElse(),
   }) {
     if (serverError != null) {
@@ -1085,6 +1102,8 @@ class _$ServerErrorImpl implements _ServerError {
     required TResult Function(_AddAnimalHealthWithNormalProductToCart value)
         addAnimalHealthWithNormalProductToCart,
     required TResult Function(_MissingzzHtmcs value) missingzzHtmcs,
+    required TResult Function(_StockInfoNotAvailable value)
+        stockInfoNotAvailable,
   }) {
     return serverError(this);
   }
@@ -1146,6 +1165,7 @@ class _$ServerErrorImpl implements _ServerError {
     TResult? Function(_AddAnimalHealthWithNormalProductToCart value)?
         addAnimalHealthWithNormalProductToCart,
     TResult? Function(_MissingzzHtmcs value)? missingzzHtmcs,
+    TResult? Function(_StockInfoNotAvailable value)? stockInfoNotAvailable,
   }) {
     return serverError?.call(this);
   }
@@ -1207,6 +1227,7 @@ class _$ServerErrorImpl implements _ServerError {
     TResult Function(_AddAnimalHealthWithNormalProductToCart value)?
         addAnimalHealthWithNormalProductToCart,
     TResult Function(_MissingzzHtmcs value)? missingzzHtmcs,
+    TResult Function(_StockInfoNotAvailable value)? stockInfoNotAvailable,
     required TResult orElse(),
   }) {
     if (serverError != null) {
@@ -1307,6 +1328,7 @@ class _$PoorConnectionImpl implements _PoorConnection {
     required TResult Function(String message) openDownloadedFileError,
     required TResult Function() addAnimalHealthWithNormalProductToCart,
     required TResult Function() missingzzHtmcs,
+    required TResult Function() stockInfoNotAvailable,
   }) {
     return poorConnection();
   }
@@ -1358,6 +1380,7 @@ class _$PoorConnectionImpl implements _PoorConnection {
     TResult? Function(String message)? openDownloadedFileError,
     TResult? Function()? addAnimalHealthWithNormalProductToCart,
     TResult? Function()? missingzzHtmcs,
+    TResult? Function()? stockInfoNotAvailable,
   }) {
     return poorConnection?.call();
   }
@@ -1409,6 +1432,7 @@ class _$PoorConnectionImpl implements _PoorConnection {
     TResult Function(String message)? openDownloadedFileError,
     TResult Function()? addAnimalHealthWithNormalProductToCart,
     TResult Function()? missingzzHtmcs,
+    TResult Function()? stockInfoNotAvailable,
     required TResult orElse(),
   }) {
     if (poorConnection != null) {
@@ -1487,6 +1511,8 @@ class _$PoorConnectionImpl implements _PoorConnection {
     required TResult Function(_AddAnimalHealthWithNormalProductToCart value)
         addAnimalHealthWithNormalProductToCart,
     required TResult Function(_MissingzzHtmcs value) missingzzHtmcs,
+    required TResult Function(_StockInfoNotAvailable value)
+        stockInfoNotAvailable,
   }) {
     return poorConnection(this);
   }
@@ -1548,6 +1574,7 @@ class _$PoorConnectionImpl implements _PoorConnection {
     TResult? Function(_AddAnimalHealthWithNormalProductToCart value)?
         addAnimalHealthWithNormalProductToCart,
     TResult? Function(_MissingzzHtmcs value)? missingzzHtmcs,
+    TResult? Function(_StockInfoNotAvailable value)? stockInfoNotAvailable,
   }) {
     return poorConnection?.call(this);
   }
@@ -1609,6 +1636,7 @@ class _$PoorConnectionImpl implements _PoorConnection {
     TResult Function(_AddAnimalHealthWithNormalProductToCart value)?
         addAnimalHealthWithNormalProductToCart,
     TResult Function(_MissingzzHtmcs value)? missingzzHtmcs,
+    TResult Function(_StockInfoNotAvailable value)? stockInfoNotAvailable,
     required TResult orElse(),
   }) {
     if (poorConnection != null) {
@@ -1704,6 +1732,7 @@ class _$ServerTimeoutImpl implements _ServerTimeout {
     required TResult Function(String message) openDownloadedFileError,
     required TResult Function() addAnimalHealthWithNormalProductToCart,
     required TResult Function() missingzzHtmcs,
+    required TResult Function() stockInfoNotAvailable,
   }) {
     return serverTimeout();
   }
@@ -1755,6 +1784,7 @@ class _$ServerTimeoutImpl implements _ServerTimeout {
     TResult? Function(String message)? openDownloadedFileError,
     TResult? Function()? addAnimalHealthWithNormalProductToCart,
     TResult? Function()? missingzzHtmcs,
+    TResult? Function()? stockInfoNotAvailable,
   }) {
     return serverTimeout?.call();
   }
@@ -1806,6 +1836,7 @@ class _$ServerTimeoutImpl implements _ServerTimeout {
     TResult Function(String message)? openDownloadedFileError,
     TResult Function()? addAnimalHealthWithNormalProductToCart,
     TResult Function()? missingzzHtmcs,
+    TResult Function()? stockInfoNotAvailable,
     required TResult orElse(),
   }) {
     if (serverTimeout != null) {
@@ -1884,6 +1915,8 @@ class _$ServerTimeoutImpl implements _ServerTimeout {
     required TResult Function(_AddAnimalHealthWithNormalProductToCart value)
         addAnimalHealthWithNormalProductToCart,
     required TResult Function(_MissingzzHtmcs value) missingzzHtmcs,
+    required TResult Function(_StockInfoNotAvailable value)
+        stockInfoNotAvailable,
   }) {
     return serverTimeout(this);
   }
@@ -1945,6 +1978,7 @@ class _$ServerTimeoutImpl implements _ServerTimeout {
     TResult? Function(_AddAnimalHealthWithNormalProductToCart value)?
         addAnimalHealthWithNormalProductToCart,
     TResult? Function(_MissingzzHtmcs value)? missingzzHtmcs,
+    TResult? Function(_StockInfoNotAvailable value)? stockInfoNotAvailable,
   }) {
     return serverTimeout?.call(this);
   }
@@ -2006,6 +2040,7 @@ class _$ServerTimeoutImpl implements _ServerTimeout {
     TResult Function(_AddAnimalHealthWithNormalProductToCart value)?
         addAnimalHealthWithNormalProductToCart,
     TResult Function(_MissingzzHtmcs value)? missingzzHtmcs,
+    TResult Function(_StockInfoNotAvailable value)? stockInfoNotAvailable,
     required TResult orElse(),
   }) {
     if (serverTimeout != null) {
@@ -2101,6 +2136,7 @@ class _$UserNotFoundImpl implements _UserNotFound {
     required TResult Function(String message) openDownloadedFileError,
     required TResult Function() addAnimalHealthWithNormalProductToCart,
     required TResult Function() missingzzHtmcs,
+    required TResult Function() stockInfoNotAvailable,
   }) {
     return userNotFound();
   }
@@ -2152,6 +2188,7 @@ class _$UserNotFoundImpl implements _UserNotFound {
     TResult? Function(String message)? openDownloadedFileError,
     TResult? Function()? addAnimalHealthWithNormalProductToCart,
     TResult? Function()? missingzzHtmcs,
+    TResult? Function()? stockInfoNotAvailable,
   }) {
     return userNotFound?.call();
   }
@@ -2203,6 +2240,7 @@ class _$UserNotFoundImpl implements _UserNotFound {
     TResult Function(String message)? openDownloadedFileError,
     TResult Function()? addAnimalHealthWithNormalProductToCart,
     TResult Function()? missingzzHtmcs,
+    TResult Function()? stockInfoNotAvailable,
     required TResult orElse(),
   }) {
     if (userNotFound != null) {
@@ -2281,6 +2319,8 @@ class _$UserNotFoundImpl implements _UserNotFound {
     required TResult Function(_AddAnimalHealthWithNormalProductToCart value)
         addAnimalHealthWithNormalProductToCart,
     required TResult Function(_MissingzzHtmcs value) missingzzHtmcs,
+    required TResult Function(_StockInfoNotAvailable value)
+        stockInfoNotAvailable,
   }) {
     return userNotFound(this);
   }
@@ -2342,6 +2382,7 @@ class _$UserNotFoundImpl implements _UserNotFound {
     TResult? Function(_AddAnimalHealthWithNormalProductToCart value)?
         addAnimalHealthWithNormalProductToCart,
     TResult? Function(_MissingzzHtmcs value)? missingzzHtmcs,
+    TResult? Function(_StockInfoNotAvailable value)? stockInfoNotAvailable,
   }) {
     return userNotFound?.call(this);
   }
@@ -2403,6 +2444,7 @@ class _$UserNotFoundImpl implements _UserNotFound {
     TResult Function(_AddAnimalHealthWithNormalProductToCart value)?
         addAnimalHealthWithNormalProductToCart,
     TResult Function(_MissingzzHtmcs value)? missingzzHtmcs,
+    TResult Function(_StockInfoNotAvailable value)? stockInfoNotAvailable,
     required TResult orElse(),
   }) {
     if (userNotFound != null) {
@@ -2502,6 +2544,7 @@ class _$MarketPlaceTnCAcceptanceErrorImpl
     required TResult Function(String message) openDownloadedFileError,
     required TResult Function() addAnimalHealthWithNormalProductToCart,
     required TResult Function() missingzzHtmcs,
+    required TResult Function() stockInfoNotAvailable,
   }) {
     return marketplaceTnCAcceptanceError();
   }
@@ -2553,6 +2596,7 @@ class _$MarketPlaceTnCAcceptanceErrorImpl
     TResult? Function(String message)? openDownloadedFileError,
     TResult? Function()? addAnimalHealthWithNormalProductToCart,
     TResult? Function()? missingzzHtmcs,
+    TResult? Function()? stockInfoNotAvailable,
   }) {
     return marketplaceTnCAcceptanceError?.call();
   }
@@ -2604,6 +2648,7 @@ class _$MarketPlaceTnCAcceptanceErrorImpl
     TResult Function(String message)? openDownloadedFileError,
     TResult Function()? addAnimalHealthWithNormalProductToCart,
     TResult Function()? missingzzHtmcs,
+    TResult Function()? stockInfoNotAvailable,
     required TResult orElse(),
   }) {
     if (marketplaceTnCAcceptanceError != null) {
@@ -2682,6 +2727,8 @@ class _$MarketPlaceTnCAcceptanceErrorImpl
     required TResult Function(_AddAnimalHealthWithNormalProductToCart value)
         addAnimalHealthWithNormalProductToCart,
     required TResult Function(_MissingzzHtmcs value) missingzzHtmcs,
+    required TResult Function(_StockInfoNotAvailable value)
+        stockInfoNotAvailable,
   }) {
     return marketplaceTnCAcceptanceError(this);
   }
@@ -2743,6 +2790,7 @@ class _$MarketPlaceTnCAcceptanceErrorImpl
     TResult? Function(_AddAnimalHealthWithNormalProductToCart value)?
         addAnimalHealthWithNormalProductToCart,
     TResult? Function(_MissingzzHtmcs value)? missingzzHtmcs,
+    TResult? Function(_StockInfoNotAvailable value)? stockInfoNotAvailable,
   }) {
     return marketplaceTnCAcceptanceError?.call(this);
   }
@@ -2804,6 +2852,7 @@ class _$MarketPlaceTnCAcceptanceErrorImpl
     TResult Function(_AddAnimalHealthWithNormalProductToCart value)?
         addAnimalHealthWithNormalProductToCart,
     TResult Function(_MissingzzHtmcs value)? missingzzHtmcs,
+    TResult Function(_StockInfoNotAvailable value)? stockInfoNotAvailable,
     required TResult orElse(),
   }) {
     if (marketplaceTnCAcceptanceError != null) {
@@ -2905,6 +2954,7 @@ class _$InvalidEmailAndPasswordCombinationImpl
     required TResult Function(String message) openDownloadedFileError,
     required TResult Function() addAnimalHealthWithNormalProductToCart,
     required TResult Function() missingzzHtmcs,
+    required TResult Function() stockInfoNotAvailable,
   }) {
     return invalidEmailAndPasswordCombination();
   }
@@ -2956,6 +3006,7 @@ class _$InvalidEmailAndPasswordCombinationImpl
     TResult? Function(String message)? openDownloadedFileError,
     TResult? Function()? addAnimalHealthWithNormalProductToCart,
     TResult? Function()? missingzzHtmcs,
+    TResult? Function()? stockInfoNotAvailable,
   }) {
     return invalidEmailAndPasswordCombination?.call();
   }
@@ -3007,6 +3058,7 @@ class _$InvalidEmailAndPasswordCombinationImpl
     TResult Function(String message)? openDownloadedFileError,
     TResult Function()? addAnimalHealthWithNormalProductToCart,
     TResult Function()? missingzzHtmcs,
+    TResult Function()? stockInfoNotAvailable,
     required TResult orElse(),
   }) {
     if (invalidEmailAndPasswordCombination != null) {
@@ -3085,6 +3137,8 @@ class _$InvalidEmailAndPasswordCombinationImpl
     required TResult Function(_AddAnimalHealthWithNormalProductToCart value)
         addAnimalHealthWithNormalProductToCart,
     required TResult Function(_MissingzzHtmcs value) missingzzHtmcs,
+    required TResult Function(_StockInfoNotAvailable value)
+        stockInfoNotAvailable,
   }) {
     return invalidEmailAndPasswordCombination(this);
   }
@@ -3146,6 +3200,7 @@ class _$InvalidEmailAndPasswordCombinationImpl
     TResult? Function(_AddAnimalHealthWithNormalProductToCart value)?
         addAnimalHealthWithNormalProductToCart,
     TResult? Function(_MissingzzHtmcs value)? missingzzHtmcs,
+    TResult? Function(_StockInfoNotAvailable value)? stockInfoNotAvailable,
   }) {
     return invalidEmailAndPasswordCombination?.call(this);
   }
@@ -3207,6 +3262,7 @@ class _$InvalidEmailAndPasswordCombinationImpl
     TResult Function(_AddAnimalHealthWithNormalProductToCart value)?
         addAnimalHealthWithNormalProductToCart,
     TResult Function(_MissingzzHtmcs value)? missingzzHtmcs,
+    TResult Function(_StockInfoNotAvailable value)? stockInfoNotAvailable,
     required TResult orElse(),
   }) {
     if (invalidEmailAndPasswordCombination != null) {
@@ -3303,6 +3359,7 @@ class _$AccountLockedImpl implements _AccountLocked {
     required TResult Function(String message) openDownloadedFileError,
     required TResult Function() addAnimalHealthWithNormalProductToCart,
     required TResult Function() missingzzHtmcs,
+    required TResult Function() stockInfoNotAvailable,
   }) {
     return accountLocked();
   }
@@ -3354,6 +3411,7 @@ class _$AccountLockedImpl implements _AccountLocked {
     TResult? Function(String message)? openDownloadedFileError,
     TResult? Function()? addAnimalHealthWithNormalProductToCart,
     TResult? Function()? missingzzHtmcs,
+    TResult? Function()? stockInfoNotAvailable,
   }) {
     return accountLocked?.call();
   }
@@ -3405,6 +3463,7 @@ class _$AccountLockedImpl implements _AccountLocked {
     TResult Function(String message)? openDownloadedFileError,
     TResult Function()? addAnimalHealthWithNormalProductToCart,
     TResult Function()? missingzzHtmcs,
+    TResult Function()? stockInfoNotAvailable,
     required TResult orElse(),
   }) {
     if (accountLocked != null) {
@@ -3483,6 +3542,8 @@ class _$AccountLockedImpl implements _AccountLocked {
     required TResult Function(_AddAnimalHealthWithNormalProductToCart value)
         addAnimalHealthWithNormalProductToCart,
     required TResult Function(_MissingzzHtmcs value) missingzzHtmcs,
+    required TResult Function(_StockInfoNotAvailable value)
+        stockInfoNotAvailable,
   }) {
     return accountLocked(this);
   }
@@ -3544,6 +3605,7 @@ class _$AccountLockedImpl implements _AccountLocked {
     TResult? Function(_AddAnimalHealthWithNormalProductToCart value)?
         addAnimalHealthWithNormalProductToCart,
     TResult? Function(_MissingzzHtmcs value)? missingzzHtmcs,
+    TResult? Function(_StockInfoNotAvailable value)? stockInfoNotAvailable,
   }) {
     return accountLocked?.call(this);
   }
@@ -3605,6 +3667,7 @@ class _$AccountLockedImpl implements _AccountLocked {
     TResult Function(_AddAnimalHealthWithNormalProductToCart value)?
         addAnimalHealthWithNormalProductToCart,
     TResult Function(_MissingzzHtmcs value)? missingzzHtmcs,
+    TResult Function(_StockInfoNotAvailable value)? stockInfoNotAvailable,
     required TResult orElse(),
   }) {
     if (accountLocked != null) {
@@ -3700,6 +3763,7 @@ class _$AccountExpiredImpl implements _AccountExpired {
     required TResult Function(String message) openDownloadedFileError,
     required TResult Function() addAnimalHealthWithNormalProductToCart,
     required TResult Function() missingzzHtmcs,
+    required TResult Function() stockInfoNotAvailable,
   }) {
     return accountExpired();
   }
@@ -3751,6 +3815,7 @@ class _$AccountExpiredImpl implements _AccountExpired {
     TResult? Function(String message)? openDownloadedFileError,
     TResult? Function()? addAnimalHealthWithNormalProductToCart,
     TResult? Function()? missingzzHtmcs,
+    TResult? Function()? stockInfoNotAvailable,
   }) {
     return accountExpired?.call();
   }
@@ -3802,6 +3867,7 @@ class _$AccountExpiredImpl implements _AccountExpired {
     TResult Function(String message)? openDownloadedFileError,
     TResult Function()? addAnimalHealthWithNormalProductToCart,
     TResult Function()? missingzzHtmcs,
+    TResult Function()? stockInfoNotAvailable,
     required TResult orElse(),
   }) {
     if (accountExpired != null) {
@@ -3880,6 +3946,8 @@ class _$AccountExpiredImpl implements _AccountExpired {
     required TResult Function(_AddAnimalHealthWithNormalProductToCart value)
         addAnimalHealthWithNormalProductToCart,
     required TResult Function(_MissingzzHtmcs value) missingzzHtmcs,
+    required TResult Function(_StockInfoNotAvailable value)
+        stockInfoNotAvailable,
   }) {
     return accountExpired(this);
   }
@@ -3941,6 +4009,7 @@ class _$AccountExpiredImpl implements _AccountExpired {
     TResult? Function(_AddAnimalHealthWithNormalProductToCart value)?
         addAnimalHealthWithNormalProductToCart,
     TResult? Function(_MissingzzHtmcs value)? missingzzHtmcs,
+    TResult? Function(_StockInfoNotAvailable value)? stockInfoNotAvailable,
   }) {
     return accountExpired?.call(this);
   }
@@ -4002,6 +4071,7 @@ class _$AccountExpiredImpl implements _AccountExpired {
     TResult Function(_AddAnimalHealthWithNormalProductToCart value)?
         addAnimalHealthWithNormalProductToCart,
     TResult Function(_MissingzzHtmcs value)? missingzzHtmcs,
+    TResult Function(_StockInfoNotAvailable value)? stockInfoNotAvailable,
     required TResult orElse(),
   }) {
     if (accountExpired != null) {
@@ -4097,6 +4167,7 @@ class _$TokenExpiredImpl implements _TokenExpired {
     required TResult Function(String message) openDownloadedFileError,
     required TResult Function() addAnimalHealthWithNormalProductToCart,
     required TResult Function() missingzzHtmcs,
+    required TResult Function() stockInfoNotAvailable,
   }) {
     return tokenExpired();
   }
@@ -4148,6 +4219,7 @@ class _$TokenExpiredImpl implements _TokenExpired {
     TResult? Function(String message)? openDownloadedFileError,
     TResult? Function()? addAnimalHealthWithNormalProductToCart,
     TResult? Function()? missingzzHtmcs,
+    TResult? Function()? stockInfoNotAvailable,
   }) {
     return tokenExpired?.call();
   }
@@ -4199,6 +4271,7 @@ class _$TokenExpiredImpl implements _TokenExpired {
     TResult Function(String message)? openDownloadedFileError,
     TResult Function()? addAnimalHealthWithNormalProductToCart,
     TResult Function()? missingzzHtmcs,
+    TResult Function()? stockInfoNotAvailable,
     required TResult orElse(),
   }) {
     if (tokenExpired != null) {
@@ -4277,6 +4350,8 @@ class _$TokenExpiredImpl implements _TokenExpired {
     required TResult Function(_AddAnimalHealthWithNormalProductToCart value)
         addAnimalHealthWithNormalProductToCart,
     required TResult Function(_MissingzzHtmcs value) missingzzHtmcs,
+    required TResult Function(_StockInfoNotAvailable value)
+        stockInfoNotAvailable,
   }) {
     return tokenExpired(this);
   }
@@ -4338,6 +4413,7 @@ class _$TokenExpiredImpl implements _TokenExpired {
     TResult? Function(_AddAnimalHealthWithNormalProductToCart value)?
         addAnimalHealthWithNormalProductToCart,
     TResult? Function(_MissingzzHtmcs value)? missingzzHtmcs,
+    TResult? Function(_StockInfoNotAvailable value)? stockInfoNotAvailable,
   }) {
     return tokenExpired?.call(this);
   }
@@ -4399,6 +4475,7 @@ class _$TokenExpiredImpl implements _TokenExpired {
     TResult Function(_AddAnimalHealthWithNormalProductToCart value)?
         addAnimalHealthWithNormalProductToCart,
     TResult Function(_MissingzzHtmcs value)? missingzzHtmcs,
+    TResult Function(_StockInfoNotAvailable value)? stockInfoNotAvailable,
     required TResult orElse(),
   }) {
     if (tokenExpired != null) {
@@ -4495,6 +4572,7 @@ class _$AuthenticationFailedImpl implements _AuthenticationFailed {
     required TResult Function(String message) openDownloadedFileError,
     required TResult Function() addAnimalHealthWithNormalProductToCart,
     required TResult Function() missingzzHtmcs,
+    required TResult Function() stockInfoNotAvailable,
   }) {
     return authenticationFailed();
   }
@@ -4546,6 +4624,7 @@ class _$AuthenticationFailedImpl implements _AuthenticationFailed {
     TResult? Function(String message)? openDownloadedFileError,
     TResult? Function()? addAnimalHealthWithNormalProductToCart,
     TResult? Function()? missingzzHtmcs,
+    TResult? Function()? stockInfoNotAvailable,
   }) {
     return authenticationFailed?.call();
   }
@@ -4597,6 +4676,7 @@ class _$AuthenticationFailedImpl implements _AuthenticationFailed {
     TResult Function(String message)? openDownloadedFileError,
     TResult Function()? addAnimalHealthWithNormalProductToCart,
     TResult Function()? missingzzHtmcs,
+    TResult Function()? stockInfoNotAvailable,
     required TResult orElse(),
   }) {
     if (authenticationFailed != null) {
@@ -4675,6 +4755,8 @@ class _$AuthenticationFailedImpl implements _AuthenticationFailed {
     required TResult Function(_AddAnimalHealthWithNormalProductToCart value)
         addAnimalHealthWithNormalProductToCart,
     required TResult Function(_MissingzzHtmcs value) missingzzHtmcs,
+    required TResult Function(_StockInfoNotAvailable value)
+        stockInfoNotAvailable,
   }) {
     return authenticationFailed(this);
   }
@@ -4736,6 +4818,7 @@ class _$AuthenticationFailedImpl implements _AuthenticationFailed {
     TResult? Function(_AddAnimalHealthWithNormalProductToCart value)?
         addAnimalHealthWithNormalProductToCart,
     TResult? Function(_MissingzzHtmcs value)? missingzzHtmcs,
+    TResult? Function(_StockInfoNotAvailable value)? stockInfoNotAvailable,
   }) {
     return authenticationFailed?.call(this);
   }
@@ -4797,6 +4880,7 @@ class _$AuthenticationFailedImpl implements _AuthenticationFailed {
     TResult Function(_AddAnimalHealthWithNormalProductToCart value)?
         addAnimalHealthWithNormalProductToCart,
     TResult Function(_MissingzzHtmcs value)? missingzzHtmcs,
+    TResult Function(_StockInfoNotAvailable value)? stockInfoNotAvailable,
     required TResult orElse(),
   }) {
     if (authenticationFailed != null) {
@@ -4897,6 +4981,7 @@ class _$ProxyLoginRolePermissionNotMatchImpl
     required TResult Function(String message) openDownloadedFileError,
     required TResult Function() addAnimalHealthWithNormalProductToCart,
     required TResult Function() missingzzHtmcs,
+    required TResult Function() stockInfoNotAvailable,
   }) {
     return proxyLoginRolePermissionNotMatch();
   }
@@ -4948,6 +5033,7 @@ class _$ProxyLoginRolePermissionNotMatchImpl
     TResult? Function(String message)? openDownloadedFileError,
     TResult? Function()? addAnimalHealthWithNormalProductToCart,
     TResult? Function()? missingzzHtmcs,
+    TResult? Function()? stockInfoNotAvailable,
   }) {
     return proxyLoginRolePermissionNotMatch?.call();
   }
@@ -4999,6 +5085,7 @@ class _$ProxyLoginRolePermissionNotMatchImpl
     TResult Function(String message)? openDownloadedFileError,
     TResult Function()? addAnimalHealthWithNormalProductToCart,
     TResult Function()? missingzzHtmcs,
+    TResult Function()? stockInfoNotAvailable,
     required TResult orElse(),
   }) {
     if (proxyLoginRolePermissionNotMatch != null) {
@@ -5077,6 +5164,8 @@ class _$ProxyLoginRolePermissionNotMatchImpl
     required TResult Function(_AddAnimalHealthWithNormalProductToCart value)
         addAnimalHealthWithNormalProductToCart,
     required TResult Function(_MissingzzHtmcs value) missingzzHtmcs,
+    required TResult Function(_StockInfoNotAvailable value)
+        stockInfoNotAvailable,
   }) {
     return proxyLoginRolePermissionNotMatch(this);
   }
@@ -5138,6 +5227,7 @@ class _$ProxyLoginRolePermissionNotMatchImpl
     TResult? Function(_AddAnimalHealthWithNormalProductToCart value)?
         addAnimalHealthWithNormalProductToCart,
     TResult? Function(_MissingzzHtmcs value)? missingzzHtmcs,
+    TResult? Function(_StockInfoNotAvailable value)? stockInfoNotAvailable,
   }) {
     return proxyLoginRolePermissionNotMatch?.call(this);
   }
@@ -5199,6 +5289,7 @@ class _$ProxyLoginRolePermissionNotMatchImpl
     TResult Function(_AddAnimalHealthWithNormalProductToCart value)?
         addAnimalHealthWithNormalProductToCart,
     TResult Function(_MissingzzHtmcs value)? missingzzHtmcs,
+    TResult Function(_StockInfoNotAvailable value)? stockInfoNotAvailable,
     required TResult orElse(),
   }) {
     if (proxyLoginRolePermissionNotMatch != null) {
@@ -5299,6 +5390,7 @@ class _$ProxyLoginZPTargetRoleNotMatchImpl
     required TResult Function(String message) openDownloadedFileError,
     required TResult Function() addAnimalHealthWithNormalProductToCart,
     required TResult Function() missingzzHtmcs,
+    required TResult Function() stockInfoNotAvailable,
   }) {
     return proxyLoginZPTargetRoleNotMatch();
   }
@@ -5350,6 +5442,7 @@ class _$ProxyLoginZPTargetRoleNotMatchImpl
     TResult? Function(String message)? openDownloadedFileError,
     TResult? Function()? addAnimalHealthWithNormalProductToCart,
     TResult? Function()? missingzzHtmcs,
+    TResult? Function()? stockInfoNotAvailable,
   }) {
     return proxyLoginZPTargetRoleNotMatch?.call();
   }
@@ -5401,6 +5494,7 @@ class _$ProxyLoginZPTargetRoleNotMatchImpl
     TResult Function(String message)? openDownloadedFileError,
     TResult Function()? addAnimalHealthWithNormalProductToCart,
     TResult Function()? missingzzHtmcs,
+    TResult Function()? stockInfoNotAvailable,
     required TResult orElse(),
   }) {
     if (proxyLoginZPTargetRoleNotMatch != null) {
@@ -5479,6 +5573,8 @@ class _$ProxyLoginZPTargetRoleNotMatchImpl
     required TResult Function(_AddAnimalHealthWithNormalProductToCart value)
         addAnimalHealthWithNormalProductToCart,
     required TResult Function(_MissingzzHtmcs value) missingzzHtmcs,
+    required TResult Function(_StockInfoNotAvailable value)
+        stockInfoNotAvailable,
   }) {
     return proxyLoginZPTargetRoleNotMatch(this);
   }
@@ -5540,6 +5636,7 @@ class _$ProxyLoginZPTargetRoleNotMatchImpl
     TResult? Function(_AddAnimalHealthWithNormalProductToCart value)?
         addAnimalHealthWithNormalProductToCart,
     TResult? Function(_MissingzzHtmcs value)? missingzzHtmcs,
+    TResult? Function(_StockInfoNotAvailable value)? stockInfoNotAvailable,
   }) {
     return proxyLoginZPTargetRoleNotMatch?.call(this);
   }
@@ -5601,6 +5698,7 @@ class _$ProxyLoginZPTargetRoleNotMatchImpl
     TResult Function(_AddAnimalHealthWithNormalProductToCart value)?
         addAnimalHealthWithNormalProductToCart,
     TResult Function(_MissingzzHtmcs value)? missingzzHtmcs,
+    TResult Function(_StockInfoNotAvailable value)? stockInfoNotAvailable,
     required TResult orElse(),
   }) {
     if (proxyLoginZPTargetRoleNotMatch != null) {
@@ -5701,6 +5799,7 @@ class _$ProxyLoginZPSalesOrgNotMatchImpl
     required TResult Function(String message) openDownloadedFileError,
     required TResult Function() addAnimalHealthWithNormalProductToCart,
     required TResult Function() missingzzHtmcs,
+    required TResult Function() stockInfoNotAvailable,
   }) {
     return proxyLoginZPSalesOrgNotMatch();
   }
@@ -5752,6 +5851,7 @@ class _$ProxyLoginZPSalesOrgNotMatchImpl
     TResult? Function(String message)? openDownloadedFileError,
     TResult? Function()? addAnimalHealthWithNormalProductToCart,
     TResult? Function()? missingzzHtmcs,
+    TResult? Function()? stockInfoNotAvailable,
   }) {
     return proxyLoginZPSalesOrgNotMatch?.call();
   }
@@ -5803,6 +5903,7 @@ class _$ProxyLoginZPSalesOrgNotMatchImpl
     TResult Function(String message)? openDownloadedFileError,
     TResult Function()? addAnimalHealthWithNormalProductToCart,
     TResult Function()? missingzzHtmcs,
+    TResult Function()? stockInfoNotAvailable,
     required TResult orElse(),
   }) {
     if (proxyLoginZPSalesOrgNotMatch != null) {
@@ -5881,6 +5982,8 @@ class _$ProxyLoginZPSalesOrgNotMatchImpl
     required TResult Function(_AddAnimalHealthWithNormalProductToCart value)
         addAnimalHealthWithNormalProductToCart,
     required TResult Function(_MissingzzHtmcs value) missingzzHtmcs,
+    required TResult Function(_StockInfoNotAvailable value)
+        stockInfoNotAvailable,
   }) {
     return proxyLoginZPSalesOrgNotMatch(this);
   }
@@ -5942,6 +6045,7 @@ class _$ProxyLoginZPSalesOrgNotMatchImpl
     TResult? Function(_AddAnimalHealthWithNormalProductToCart value)?
         addAnimalHealthWithNormalProductToCart,
     TResult? Function(_MissingzzHtmcs value)? missingzzHtmcs,
+    TResult? Function(_StockInfoNotAvailable value)? stockInfoNotAvailable,
   }) {
     return proxyLoginZPSalesOrgNotMatch?.call(this);
   }
@@ -6003,6 +6107,7 @@ class _$ProxyLoginZPSalesOrgNotMatchImpl
     TResult Function(_AddAnimalHealthWithNormalProductToCart value)?
         addAnimalHealthWithNormalProductToCart,
     TResult Function(_MissingzzHtmcs value)? missingzzHtmcs,
+    TResult Function(_StockInfoNotAvailable value)? stockInfoNotAvailable,
     required TResult orElse(),
   }) {
     if (proxyLoginZPSalesOrgNotMatch != null) {
@@ -6099,6 +6204,7 @@ class _$PasswordResetFailImpl implements _PasswordResetFail {
     required TResult Function(String message) openDownloadedFileError,
     required TResult Function() addAnimalHealthWithNormalProductToCart,
     required TResult Function() missingzzHtmcs,
+    required TResult Function() stockInfoNotAvailable,
   }) {
     return passwordResetFail();
   }
@@ -6150,6 +6256,7 @@ class _$PasswordResetFailImpl implements _PasswordResetFail {
     TResult? Function(String message)? openDownloadedFileError,
     TResult? Function()? addAnimalHealthWithNormalProductToCart,
     TResult? Function()? missingzzHtmcs,
+    TResult? Function()? stockInfoNotAvailable,
   }) {
     return passwordResetFail?.call();
   }
@@ -6201,6 +6308,7 @@ class _$PasswordResetFailImpl implements _PasswordResetFail {
     TResult Function(String message)? openDownloadedFileError,
     TResult Function()? addAnimalHealthWithNormalProductToCart,
     TResult Function()? missingzzHtmcs,
+    TResult Function()? stockInfoNotAvailable,
     required TResult orElse(),
   }) {
     if (passwordResetFail != null) {
@@ -6279,6 +6387,8 @@ class _$PasswordResetFailImpl implements _PasswordResetFail {
     required TResult Function(_AddAnimalHealthWithNormalProductToCart value)
         addAnimalHealthWithNormalProductToCart,
     required TResult Function(_MissingzzHtmcs value) missingzzHtmcs,
+    required TResult Function(_StockInfoNotAvailable value)
+        stockInfoNotAvailable,
   }) {
     return passwordResetFail(this);
   }
@@ -6340,6 +6450,7 @@ class _$PasswordResetFailImpl implements _PasswordResetFail {
     TResult? Function(_AddAnimalHealthWithNormalProductToCart value)?
         addAnimalHealthWithNormalProductToCart,
     TResult? Function(_MissingzzHtmcs value)? missingzzHtmcs,
+    TResult? Function(_StockInfoNotAvailable value)? stockInfoNotAvailable,
   }) {
     return passwordResetFail?.call(this);
   }
@@ -6401,6 +6512,7 @@ class _$PasswordResetFailImpl implements _PasswordResetFail {
     TResult Function(_AddAnimalHealthWithNormalProductToCart value)?
         addAnimalHealthWithNormalProductToCart,
     TResult Function(_MissingzzHtmcs value)? missingzzHtmcs,
+    TResult Function(_StockInfoNotAvailable value)? stockInfoNotAvailable,
     required TResult orElse(),
   }) {
     if (passwordResetFail != null) {
@@ -6499,6 +6611,7 @@ class _$DeviceNotSupportBiometricImpl implements _DeviceNotSupportBiometric {
     required TResult Function(String message) openDownloadedFileError,
     required TResult Function() addAnimalHealthWithNormalProductToCart,
     required TResult Function() missingzzHtmcs,
+    required TResult Function() stockInfoNotAvailable,
   }) {
     return deviceNotSupportBiometric();
   }
@@ -6550,6 +6663,7 @@ class _$DeviceNotSupportBiometricImpl implements _DeviceNotSupportBiometric {
     TResult? Function(String message)? openDownloadedFileError,
     TResult? Function()? addAnimalHealthWithNormalProductToCart,
     TResult? Function()? missingzzHtmcs,
+    TResult? Function()? stockInfoNotAvailable,
   }) {
     return deviceNotSupportBiometric?.call();
   }
@@ -6601,6 +6715,7 @@ class _$DeviceNotSupportBiometricImpl implements _DeviceNotSupportBiometric {
     TResult Function(String message)? openDownloadedFileError,
     TResult Function()? addAnimalHealthWithNormalProductToCart,
     TResult Function()? missingzzHtmcs,
+    TResult Function()? stockInfoNotAvailable,
     required TResult orElse(),
   }) {
     if (deviceNotSupportBiometric != null) {
@@ -6679,6 +6794,8 @@ class _$DeviceNotSupportBiometricImpl implements _DeviceNotSupportBiometric {
     required TResult Function(_AddAnimalHealthWithNormalProductToCart value)
         addAnimalHealthWithNormalProductToCart,
     required TResult Function(_MissingzzHtmcs value) missingzzHtmcs,
+    required TResult Function(_StockInfoNotAvailable value)
+        stockInfoNotAvailable,
   }) {
     return deviceNotSupportBiometric(this);
   }
@@ -6740,6 +6857,7 @@ class _$DeviceNotSupportBiometricImpl implements _DeviceNotSupportBiometric {
     TResult? Function(_AddAnimalHealthWithNormalProductToCart value)?
         addAnimalHealthWithNormalProductToCart,
     TResult? Function(_MissingzzHtmcs value)? missingzzHtmcs,
+    TResult? Function(_StockInfoNotAvailable value)? stockInfoNotAvailable,
   }) {
     return deviceNotSupportBiometric?.call(this);
   }
@@ -6801,6 +6919,7 @@ class _$DeviceNotSupportBiometricImpl implements _DeviceNotSupportBiometric {
     TResult Function(_AddAnimalHealthWithNormalProductToCart value)?
         addAnimalHealthWithNormalProductToCart,
     TResult Function(_MissingzzHtmcs value)? missingzzHtmcs,
+    TResult Function(_StockInfoNotAvailable value)? stockInfoNotAvailable,
     required TResult orElse(),
   }) {
     if (deviceNotSupportBiometric != null) {
@@ -6898,6 +7017,7 @@ class _$CannotCheckBiometricsImpl implements _CannotCheckBiometrics {
     required TResult Function(String message) openDownloadedFileError,
     required TResult Function() addAnimalHealthWithNormalProductToCart,
     required TResult Function() missingzzHtmcs,
+    required TResult Function() stockInfoNotAvailable,
   }) {
     return cannotCheckBiometrics();
   }
@@ -6949,6 +7069,7 @@ class _$CannotCheckBiometricsImpl implements _CannotCheckBiometrics {
     TResult? Function(String message)? openDownloadedFileError,
     TResult? Function()? addAnimalHealthWithNormalProductToCart,
     TResult? Function()? missingzzHtmcs,
+    TResult? Function()? stockInfoNotAvailable,
   }) {
     return cannotCheckBiometrics?.call();
   }
@@ -7000,6 +7121,7 @@ class _$CannotCheckBiometricsImpl implements _CannotCheckBiometrics {
     TResult Function(String message)? openDownloadedFileError,
     TResult Function()? addAnimalHealthWithNormalProductToCart,
     TResult Function()? missingzzHtmcs,
+    TResult Function()? stockInfoNotAvailable,
     required TResult orElse(),
   }) {
     if (cannotCheckBiometrics != null) {
@@ -7078,6 +7200,8 @@ class _$CannotCheckBiometricsImpl implements _CannotCheckBiometrics {
     required TResult Function(_AddAnimalHealthWithNormalProductToCart value)
         addAnimalHealthWithNormalProductToCart,
     required TResult Function(_MissingzzHtmcs value) missingzzHtmcs,
+    required TResult Function(_StockInfoNotAvailable value)
+        stockInfoNotAvailable,
   }) {
     return cannotCheckBiometrics(this);
   }
@@ -7139,6 +7263,7 @@ class _$CannotCheckBiometricsImpl implements _CannotCheckBiometrics {
     TResult? Function(_AddAnimalHealthWithNormalProductToCart value)?
         addAnimalHealthWithNormalProductToCart,
     TResult? Function(_MissingzzHtmcs value)? missingzzHtmcs,
+    TResult? Function(_StockInfoNotAvailable value)? stockInfoNotAvailable,
   }) {
     return cannotCheckBiometrics?.call(this);
   }
@@ -7200,6 +7325,7 @@ class _$CannotCheckBiometricsImpl implements _CannotCheckBiometrics {
     TResult Function(_AddAnimalHealthWithNormalProductToCart value)?
         addAnimalHealthWithNormalProductToCart,
     TResult Function(_MissingzzHtmcs value)? missingzzHtmcs,
+    TResult Function(_StockInfoNotAvailable value)? stockInfoNotAvailable,
     required TResult orElse(),
   }) {
     if (cannotCheckBiometrics != null) {
@@ -7297,6 +7423,7 @@ class _$NoSupportedBiometricsImpl implements _NoSupportedBiometrics {
     required TResult Function(String message) openDownloadedFileError,
     required TResult Function() addAnimalHealthWithNormalProductToCart,
     required TResult Function() missingzzHtmcs,
+    required TResult Function() stockInfoNotAvailable,
   }) {
     return noSupportedBiometrics();
   }
@@ -7348,6 +7475,7 @@ class _$NoSupportedBiometricsImpl implements _NoSupportedBiometrics {
     TResult? Function(String message)? openDownloadedFileError,
     TResult? Function()? addAnimalHealthWithNormalProductToCart,
     TResult? Function()? missingzzHtmcs,
+    TResult? Function()? stockInfoNotAvailable,
   }) {
     return noSupportedBiometrics?.call();
   }
@@ -7399,6 +7527,7 @@ class _$NoSupportedBiometricsImpl implements _NoSupportedBiometrics {
     TResult Function(String message)? openDownloadedFileError,
     TResult Function()? addAnimalHealthWithNormalProductToCart,
     TResult Function()? missingzzHtmcs,
+    TResult Function()? stockInfoNotAvailable,
     required TResult orElse(),
   }) {
     if (noSupportedBiometrics != null) {
@@ -7477,6 +7606,8 @@ class _$NoSupportedBiometricsImpl implements _NoSupportedBiometrics {
     required TResult Function(_AddAnimalHealthWithNormalProductToCart value)
         addAnimalHealthWithNormalProductToCart,
     required TResult Function(_MissingzzHtmcs value) missingzzHtmcs,
+    required TResult Function(_StockInfoNotAvailable value)
+        stockInfoNotAvailable,
   }) {
     return noSupportedBiometrics(this);
   }
@@ -7538,6 +7669,7 @@ class _$NoSupportedBiometricsImpl implements _NoSupportedBiometrics {
     TResult? Function(_AddAnimalHealthWithNormalProductToCart value)?
         addAnimalHealthWithNormalProductToCart,
     TResult? Function(_MissingzzHtmcs value)? missingzzHtmcs,
+    TResult? Function(_StockInfoNotAvailable value)? stockInfoNotAvailable,
   }) {
     return noSupportedBiometrics?.call(this);
   }
@@ -7599,6 +7731,7 @@ class _$NoSupportedBiometricsImpl implements _NoSupportedBiometrics {
     TResult Function(_AddAnimalHealthWithNormalProductToCart value)?
         addAnimalHealthWithNormalProductToCart,
     TResult Function(_MissingzzHtmcs value)? missingzzHtmcs,
+    TResult Function(_StockInfoNotAvailable value)? stockInfoNotAvailable,
     required TResult orElse(),
   }) {
     if (noSupportedBiometrics != null) {
@@ -7694,6 +7827,7 @@ class _$InvalidBiometricImpl implements _InvalidBiometric {
     required TResult Function(String message) openDownloadedFileError,
     required TResult Function() addAnimalHealthWithNormalProductToCart,
     required TResult Function() missingzzHtmcs,
+    required TResult Function() stockInfoNotAvailable,
   }) {
     return invalidBiometric();
   }
@@ -7745,6 +7879,7 @@ class _$InvalidBiometricImpl implements _InvalidBiometric {
     TResult? Function(String message)? openDownloadedFileError,
     TResult? Function()? addAnimalHealthWithNormalProductToCart,
     TResult? Function()? missingzzHtmcs,
+    TResult? Function()? stockInfoNotAvailable,
   }) {
     return invalidBiometric?.call();
   }
@@ -7796,6 +7931,7 @@ class _$InvalidBiometricImpl implements _InvalidBiometric {
     TResult Function(String message)? openDownloadedFileError,
     TResult Function()? addAnimalHealthWithNormalProductToCart,
     TResult Function()? missingzzHtmcs,
+    TResult Function()? stockInfoNotAvailable,
     required TResult orElse(),
   }) {
     if (invalidBiometric != null) {
@@ -7874,6 +8010,8 @@ class _$InvalidBiometricImpl implements _InvalidBiometric {
     required TResult Function(_AddAnimalHealthWithNormalProductToCart value)
         addAnimalHealthWithNormalProductToCart,
     required TResult Function(_MissingzzHtmcs value) missingzzHtmcs,
+    required TResult Function(_StockInfoNotAvailable value)
+        stockInfoNotAvailable,
   }) {
     return invalidBiometric(this);
   }
@@ -7935,6 +8073,7 @@ class _$InvalidBiometricImpl implements _InvalidBiometric {
     TResult? Function(_AddAnimalHealthWithNormalProductToCart value)?
         addAnimalHealthWithNormalProductToCart,
     TResult? Function(_MissingzzHtmcs value)? missingzzHtmcs,
+    TResult? Function(_StockInfoNotAvailable value)? stockInfoNotAvailable,
   }) {
     return invalidBiometric?.call(this);
   }
@@ -7996,6 +8135,7 @@ class _$InvalidBiometricImpl implements _InvalidBiometric {
     TResult Function(_AddAnimalHealthWithNormalProductToCart value)?
         addAnimalHealthWithNormalProductToCart,
     TResult Function(_MissingzzHtmcs value)? missingzzHtmcs,
+    TResult Function(_StockInfoNotAvailable value)? stockInfoNotAvailable,
     required TResult orElse(),
   }) {
     if (invalidBiometric != null) {
@@ -8093,6 +8233,7 @@ class _$PriceOverrideNotFoundImpl implements _PriceOverrideNotFound {
     required TResult Function(String message) openDownloadedFileError,
     required TResult Function() addAnimalHealthWithNormalProductToCart,
     required TResult Function() missingzzHtmcs,
+    required TResult Function() stockInfoNotAvailable,
   }) {
     return priceOverrideNotFound();
   }
@@ -8144,6 +8285,7 @@ class _$PriceOverrideNotFoundImpl implements _PriceOverrideNotFound {
     TResult? Function(String message)? openDownloadedFileError,
     TResult? Function()? addAnimalHealthWithNormalProductToCart,
     TResult? Function()? missingzzHtmcs,
+    TResult? Function()? stockInfoNotAvailable,
   }) {
     return priceOverrideNotFound?.call();
   }
@@ -8195,6 +8337,7 @@ class _$PriceOverrideNotFoundImpl implements _PriceOverrideNotFound {
     TResult Function(String message)? openDownloadedFileError,
     TResult Function()? addAnimalHealthWithNormalProductToCart,
     TResult Function()? missingzzHtmcs,
+    TResult Function()? stockInfoNotAvailable,
     required TResult orElse(),
   }) {
     if (priceOverrideNotFound != null) {
@@ -8273,6 +8416,8 @@ class _$PriceOverrideNotFoundImpl implements _PriceOverrideNotFound {
     required TResult Function(_AddAnimalHealthWithNormalProductToCart value)
         addAnimalHealthWithNormalProductToCart,
     required TResult Function(_MissingzzHtmcs value) missingzzHtmcs,
+    required TResult Function(_StockInfoNotAvailable value)
+        stockInfoNotAvailable,
   }) {
     return priceOverrideNotFound(this);
   }
@@ -8334,6 +8479,7 @@ class _$PriceOverrideNotFoundImpl implements _PriceOverrideNotFound {
     TResult? Function(_AddAnimalHealthWithNormalProductToCart value)?
         addAnimalHealthWithNormalProductToCart,
     TResult? Function(_MissingzzHtmcs value)? missingzzHtmcs,
+    TResult? Function(_StockInfoNotAvailable value)? stockInfoNotAvailable,
   }) {
     return priceOverrideNotFound?.call(this);
   }
@@ -8395,6 +8541,7 @@ class _$PriceOverrideNotFoundImpl implements _PriceOverrideNotFound {
     TResult Function(_AddAnimalHealthWithNormalProductToCart value)?
         addAnimalHealthWithNormalProductToCart,
     TResult Function(_MissingzzHtmcs value)? missingzzHtmcs,
+    TResult Function(_StockInfoNotAvailable value)? stockInfoNotAvailable,
     required TResult orElse(),
   }) {
     if (priceOverrideNotFound != null) {
@@ -8490,6 +8637,7 @@ class _$ProductOutOfStockImpl implements _ProductOutOfStock {
     required TResult Function(String message) openDownloadedFileError,
     required TResult Function() addAnimalHealthWithNormalProductToCart,
     required TResult Function() missingzzHtmcs,
+    required TResult Function() stockInfoNotAvailable,
   }) {
     return productOutOfStock();
   }
@@ -8541,6 +8689,7 @@ class _$ProductOutOfStockImpl implements _ProductOutOfStock {
     TResult? Function(String message)? openDownloadedFileError,
     TResult? Function()? addAnimalHealthWithNormalProductToCart,
     TResult? Function()? missingzzHtmcs,
+    TResult? Function()? stockInfoNotAvailable,
   }) {
     return productOutOfStock?.call();
   }
@@ -8592,6 +8741,7 @@ class _$ProductOutOfStockImpl implements _ProductOutOfStock {
     TResult Function(String message)? openDownloadedFileError,
     TResult Function()? addAnimalHealthWithNormalProductToCart,
     TResult Function()? missingzzHtmcs,
+    TResult Function()? stockInfoNotAvailable,
     required TResult orElse(),
   }) {
     if (productOutOfStock != null) {
@@ -8670,6 +8820,8 @@ class _$ProductOutOfStockImpl implements _ProductOutOfStock {
     required TResult Function(_AddAnimalHealthWithNormalProductToCart value)
         addAnimalHealthWithNormalProductToCart,
     required TResult Function(_MissingzzHtmcs value) missingzzHtmcs,
+    required TResult Function(_StockInfoNotAvailable value)
+        stockInfoNotAvailable,
   }) {
     return productOutOfStock(this);
   }
@@ -8731,6 +8883,7 @@ class _$ProductOutOfStockImpl implements _ProductOutOfStock {
     TResult? Function(_AddAnimalHealthWithNormalProductToCart value)?
         addAnimalHealthWithNormalProductToCart,
     TResult? Function(_MissingzzHtmcs value)? missingzzHtmcs,
+    TResult? Function(_StockInfoNotAvailable value)? stockInfoNotAvailable,
   }) {
     return productOutOfStock?.call(this);
   }
@@ -8792,6 +8945,7 @@ class _$ProductOutOfStockImpl implements _ProductOutOfStock {
     TResult Function(_AddAnimalHealthWithNormalProductToCart value)?
         addAnimalHealthWithNormalProductToCart,
     TResult Function(_MissingzzHtmcs value)? missingzzHtmcs,
+    TResult Function(_StockInfoNotAvailable value)? stockInfoNotAvailable,
     required TResult orElse(),
   }) {
     if (productOutOfStock != null) {
@@ -8889,6 +9043,7 @@ class _$PhotoPermissionFailedImpl implements _PhotoPermissionFailed {
     required TResult Function(String message) openDownloadedFileError,
     required TResult Function() addAnimalHealthWithNormalProductToCart,
     required TResult Function() missingzzHtmcs,
+    required TResult Function() stockInfoNotAvailable,
   }) {
     return photoPermissionFailed();
   }
@@ -8940,6 +9095,7 @@ class _$PhotoPermissionFailedImpl implements _PhotoPermissionFailed {
     TResult? Function(String message)? openDownloadedFileError,
     TResult? Function()? addAnimalHealthWithNormalProductToCart,
     TResult? Function()? missingzzHtmcs,
+    TResult? Function()? stockInfoNotAvailable,
   }) {
     return photoPermissionFailed?.call();
   }
@@ -8991,6 +9147,7 @@ class _$PhotoPermissionFailedImpl implements _PhotoPermissionFailed {
     TResult Function(String message)? openDownloadedFileError,
     TResult Function()? addAnimalHealthWithNormalProductToCart,
     TResult Function()? missingzzHtmcs,
+    TResult Function()? stockInfoNotAvailable,
     required TResult orElse(),
   }) {
     if (photoPermissionFailed != null) {
@@ -9069,6 +9226,8 @@ class _$PhotoPermissionFailedImpl implements _PhotoPermissionFailed {
     required TResult Function(_AddAnimalHealthWithNormalProductToCart value)
         addAnimalHealthWithNormalProductToCart,
     required TResult Function(_MissingzzHtmcs value) missingzzHtmcs,
+    required TResult Function(_StockInfoNotAvailable value)
+        stockInfoNotAvailable,
   }) {
     return photoPermissionFailed(this);
   }
@@ -9130,6 +9289,7 @@ class _$PhotoPermissionFailedImpl implements _PhotoPermissionFailed {
     TResult? Function(_AddAnimalHealthWithNormalProductToCart value)?
         addAnimalHealthWithNormalProductToCart,
     TResult? Function(_MissingzzHtmcs value)? missingzzHtmcs,
+    TResult? Function(_StockInfoNotAvailable value)? stockInfoNotAvailable,
   }) {
     return photoPermissionFailed?.call(this);
   }
@@ -9191,6 +9351,7 @@ class _$PhotoPermissionFailedImpl implements _PhotoPermissionFailed {
     TResult Function(_AddAnimalHealthWithNormalProductToCart value)?
         addAnimalHealthWithNormalProductToCart,
     TResult Function(_MissingzzHtmcs value)? missingzzHtmcs,
+    TResult Function(_StockInfoNotAvailable value)? stockInfoNotAvailable,
     required TResult orElse(),
   }) {
     if (photoPermissionFailed != null) {
@@ -9289,6 +9450,7 @@ class _$StoragePermissionFailedImpl implements _StoragePermissionFailed {
     required TResult Function(String message) openDownloadedFileError,
     required TResult Function() addAnimalHealthWithNormalProductToCart,
     required TResult Function() missingzzHtmcs,
+    required TResult Function() stockInfoNotAvailable,
   }) {
     return storagePermissionFailed();
   }
@@ -9340,6 +9502,7 @@ class _$StoragePermissionFailedImpl implements _StoragePermissionFailed {
     TResult? Function(String message)? openDownloadedFileError,
     TResult? Function()? addAnimalHealthWithNormalProductToCart,
     TResult? Function()? missingzzHtmcs,
+    TResult? Function()? stockInfoNotAvailable,
   }) {
     return storagePermissionFailed?.call();
   }
@@ -9391,6 +9554,7 @@ class _$StoragePermissionFailedImpl implements _StoragePermissionFailed {
     TResult Function(String message)? openDownloadedFileError,
     TResult Function()? addAnimalHealthWithNormalProductToCart,
     TResult Function()? missingzzHtmcs,
+    TResult Function()? stockInfoNotAvailable,
     required TResult orElse(),
   }) {
     if (storagePermissionFailed != null) {
@@ -9469,6 +9633,8 @@ class _$StoragePermissionFailedImpl implements _StoragePermissionFailed {
     required TResult Function(_AddAnimalHealthWithNormalProductToCart value)
         addAnimalHealthWithNormalProductToCart,
     required TResult Function(_MissingzzHtmcs value) missingzzHtmcs,
+    required TResult Function(_StockInfoNotAvailable value)
+        stockInfoNotAvailable,
   }) {
     return storagePermissionFailed(this);
   }
@@ -9530,6 +9696,7 @@ class _$StoragePermissionFailedImpl implements _StoragePermissionFailed {
     TResult? Function(_AddAnimalHealthWithNormalProductToCart value)?
         addAnimalHealthWithNormalProductToCart,
     TResult? Function(_MissingzzHtmcs value)? missingzzHtmcs,
+    TResult? Function(_StockInfoNotAvailable value)? stockInfoNotAvailable,
   }) {
     return storagePermissionFailed?.call(this);
   }
@@ -9591,6 +9758,7 @@ class _$StoragePermissionFailedImpl implements _StoragePermissionFailed {
     TResult Function(_AddAnimalHealthWithNormalProductToCart value)?
         addAnimalHealthWithNormalProductToCart,
     TResult Function(_MissingzzHtmcs value)? missingzzHtmcs,
+    TResult Function(_StockInfoNotAvailable value)? stockInfoNotAvailable,
     required TResult orElse(),
   }) {
     if (storagePermissionFailed != null) {
@@ -9686,6 +9854,7 @@ class _$InvalidFileFormatImpl implements _InvalidFileFormat {
     required TResult Function(String message) openDownloadedFileError,
     required TResult Function() addAnimalHealthWithNormalProductToCart,
     required TResult Function() missingzzHtmcs,
+    required TResult Function() stockInfoNotAvailable,
   }) {
     return invalidFileFormat();
   }
@@ -9737,6 +9906,7 @@ class _$InvalidFileFormatImpl implements _InvalidFileFormat {
     TResult? Function(String message)? openDownloadedFileError,
     TResult? Function()? addAnimalHealthWithNormalProductToCart,
     TResult? Function()? missingzzHtmcs,
+    TResult? Function()? stockInfoNotAvailable,
   }) {
     return invalidFileFormat?.call();
   }
@@ -9788,6 +9958,7 @@ class _$InvalidFileFormatImpl implements _InvalidFileFormat {
     TResult Function(String message)? openDownloadedFileError,
     TResult Function()? addAnimalHealthWithNormalProductToCart,
     TResult Function()? missingzzHtmcs,
+    TResult Function()? stockInfoNotAvailable,
     required TResult orElse(),
   }) {
     if (invalidFileFormat != null) {
@@ -9866,6 +10037,8 @@ class _$InvalidFileFormatImpl implements _InvalidFileFormat {
     required TResult Function(_AddAnimalHealthWithNormalProductToCart value)
         addAnimalHealthWithNormalProductToCart,
     required TResult Function(_MissingzzHtmcs value) missingzzHtmcs,
+    required TResult Function(_StockInfoNotAvailable value)
+        stockInfoNotAvailable,
   }) {
     return invalidFileFormat(this);
   }
@@ -9927,6 +10100,7 @@ class _$InvalidFileFormatImpl implements _InvalidFileFormat {
     TResult? Function(_AddAnimalHealthWithNormalProductToCart value)?
         addAnimalHealthWithNormalProductToCart,
     TResult? Function(_MissingzzHtmcs value)? missingzzHtmcs,
+    TResult? Function(_StockInfoNotAvailable value)? stockInfoNotAvailable,
   }) {
     return invalidFileFormat?.call(this);
   }
@@ -9988,6 +10162,7 @@ class _$InvalidFileFormatImpl implements _InvalidFileFormat {
     TResult Function(_AddAnimalHealthWithNormalProductToCart value)?
         addAnimalHealthWithNormalProductToCart,
     TResult Function(_MissingzzHtmcs value)? missingzzHtmcs,
+    TResult Function(_StockInfoNotAvailable value)? stockInfoNotAvailable,
     required TResult orElse(),
   }) {
     if (invalidFileFormat != null) {
@@ -10086,6 +10261,7 @@ class _$UploadCountExcideLimitImpl implements _UploadCountExcideLimit {
     required TResult Function(String message) openDownloadedFileError,
     required TResult Function() addAnimalHealthWithNormalProductToCart,
     required TResult Function() missingzzHtmcs,
+    required TResult Function() stockInfoNotAvailable,
   }) {
     return uploadCountExcideLimit();
   }
@@ -10137,6 +10313,7 @@ class _$UploadCountExcideLimitImpl implements _UploadCountExcideLimit {
     TResult? Function(String message)? openDownloadedFileError,
     TResult? Function()? addAnimalHealthWithNormalProductToCart,
     TResult? Function()? missingzzHtmcs,
+    TResult? Function()? stockInfoNotAvailable,
   }) {
     return uploadCountExcideLimit?.call();
   }
@@ -10188,6 +10365,7 @@ class _$UploadCountExcideLimitImpl implements _UploadCountExcideLimit {
     TResult Function(String message)? openDownloadedFileError,
     TResult Function()? addAnimalHealthWithNormalProductToCart,
     TResult Function()? missingzzHtmcs,
+    TResult Function()? stockInfoNotAvailable,
     required TResult orElse(),
   }) {
     if (uploadCountExcideLimit != null) {
@@ -10266,6 +10444,8 @@ class _$UploadCountExcideLimitImpl implements _UploadCountExcideLimit {
     required TResult Function(_AddAnimalHealthWithNormalProductToCart value)
         addAnimalHealthWithNormalProductToCart,
     required TResult Function(_MissingzzHtmcs value) missingzzHtmcs,
+    required TResult Function(_StockInfoNotAvailable value)
+        stockInfoNotAvailable,
   }) {
     return uploadCountExcideLimit(this);
   }
@@ -10327,6 +10507,7 @@ class _$UploadCountExcideLimitImpl implements _UploadCountExcideLimit {
     TResult? Function(_AddAnimalHealthWithNormalProductToCart value)?
         addAnimalHealthWithNormalProductToCart,
     TResult? Function(_MissingzzHtmcs value)? missingzzHtmcs,
+    TResult? Function(_StockInfoNotAvailable value)? stockInfoNotAvailable,
   }) {
     return uploadCountExcideLimit?.call(this);
   }
@@ -10388,6 +10569,7 @@ class _$UploadCountExcideLimitImpl implements _UploadCountExcideLimit {
     TResult Function(_AddAnimalHealthWithNormalProductToCart value)?
         addAnimalHealthWithNormalProductToCart,
     TResult Function(_MissingzzHtmcs value)? missingzzHtmcs,
+    TResult Function(_StockInfoNotAvailable value)? stockInfoNotAvailable,
     required TResult orElse(),
   }) {
     if (uploadCountExcideLimit != null) {
@@ -10483,6 +10665,7 @@ class _$ProductDetailRouteImpl implements _ProductDetailRoute {
     required TResult Function(String message) openDownloadedFileError,
     required TResult Function() addAnimalHealthWithNormalProductToCart,
     required TResult Function() missingzzHtmcs,
+    required TResult Function() stockInfoNotAvailable,
   }) {
     return productDetailRoute();
   }
@@ -10534,6 +10717,7 @@ class _$ProductDetailRouteImpl implements _ProductDetailRoute {
     TResult? Function(String message)? openDownloadedFileError,
     TResult? Function()? addAnimalHealthWithNormalProductToCart,
     TResult? Function()? missingzzHtmcs,
+    TResult? Function()? stockInfoNotAvailable,
   }) {
     return productDetailRoute?.call();
   }
@@ -10585,6 +10769,7 @@ class _$ProductDetailRouteImpl implements _ProductDetailRoute {
     TResult Function(String message)? openDownloadedFileError,
     TResult Function()? addAnimalHealthWithNormalProductToCart,
     TResult Function()? missingzzHtmcs,
+    TResult Function()? stockInfoNotAvailable,
     required TResult orElse(),
   }) {
     if (productDetailRoute != null) {
@@ -10663,6 +10848,8 @@ class _$ProductDetailRouteImpl implements _ProductDetailRoute {
     required TResult Function(_AddAnimalHealthWithNormalProductToCart value)
         addAnimalHealthWithNormalProductToCart,
     required TResult Function(_MissingzzHtmcs value) missingzzHtmcs,
+    required TResult Function(_StockInfoNotAvailable value)
+        stockInfoNotAvailable,
   }) {
     return productDetailRoute(this);
   }
@@ -10724,6 +10911,7 @@ class _$ProductDetailRouteImpl implements _ProductDetailRoute {
     TResult? Function(_AddAnimalHealthWithNormalProductToCart value)?
         addAnimalHealthWithNormalProductToCart,
     TResult? Function(_MissingzzHtmcs value)? missingzzHtmcs,
+    TResult? Function(_StockInfoNotAvailable value)? stockInfoNotAvailable,
   }) {
     return productDetailRoute?.call(this);
   }
@@ -10785,6 +10973,7 @@ class _$ProductDetailRouteImpl implements _ProductDetailRoute {
     TResult Function(_AddAnimalHealthWithNormalProductToCart value)?
         addAnimalHealthWithNormalProductToCart,
     TResult Function(_MissingzzHtmcs value)? missingzzHtmcs,
+    TResult Function(_StockInfoNotAvailable value)? stockInfoNotAvailable,
     required TResult orElse(),
   }) {
     if (productDetailRoute != null) {
@@ -10880,6 +11069,7 @@ class _$OrderDetailRouteImpl implements _OrderDetailRoute {
     required TResult Function(String message) openDownloadedFileError,
     required TResult Function() addAnimalHealthWithNormalProductToCart,
     required TResult Function() missingzzHtmcs,
+    required TResult Function() stockInfoNotAvailable,
   }) {
     return orderDetailRoute();
   }
@@ -10931,6 +11121,7 @@ class _$OrderDetailRouteImpl implements _OrderDetailRoute {
     TResult? Function(String message)? openDownloadedFileError,
     TResult? Function()? addAnimalHealthWithNormalProductToCart,
     TResult? Function()? missingzzHtmcs,
+    TResult? Function()? stockInfoNotAvailable,
   }) {
     return orderDetailRoute?.call();
   }
@@ -10982,6 +11173,7 @@ class _$OrderDetailRouteImpl implements _OrderDetailRoute {
     TResult Function(String message)? openDownloadedFileError,
     TResult Function()? addAnimalHealthWithNormalProductToCart,
     TResult Function()? missingzzHtmcs,
+    TResult Function()? stockInfoNotAvailable,
     required TResult orElse(),
   }) {
     if (orderDetailRoute != null) {
@@ -11060,6 +11252,8 @@ class _$OrderDetailRouteImpl implements _OrderDetailRoute {
     required TResult Function(_AddAnimalHealthWithNormalProductToCart value)
         addAnimalHealthWithNormalProductToCart,
     required TResult Function(_MissingzzHtmcs value) missingzzHtmcs,
+    required TResult Function(_StockInfoNotAvailable value)
+        stockInfoNotAvailable,
   }) {
     return orderDetailRoute(this);
   }
@@ -11121,6 +11315,7 @@ class _$OrderDetailRouteImpl implements _OrderDetailRoute {
     TResult? Function(_AddAnimalHealthWithNormalProductToCart value)?
         addAnimalHealthWithNormalProductToCart,
     TResult? Function(_MissingzzHtmcs value)? missingzzHtmcs,
+    TResult? Function(_StockInfoNotAvailable value)? stockInfoNotAvailable,
   }) {
     return orderDetailRoute?.call(this);
   }
@@ -11182,6 +11377,7 @@ class _$OrderDetailRouteImpl implements _OrderDetailRoute {
     TResult Function(_AddAnimalHealthWithNormalProductToCart value)?
         addAnimalHealthWithNormalProductToCart,
     TResult Function(_MissingzzHtmcs value)? missingzzHtmcs,
+    TResult Function(_StockInfoNotAvailable value)? stockInfoNotAvailable,
     required TResult orElse(),
   }) {
     if (orderDetailRoute != null) {
@@ -11277,6 +11473,7 @@ class _$ReturnDetailRouteImpl implements _ReturnDetailRoute {
     required TResult Function(String message) openDownloadedFileError,
     required TResult Function() addAnimalHealthWithNormalProductToCart,
     required TResult Function() missingzzHtmcs,
+    required TResult Function() stockInfoNotAvailable,
   }) {
     return returnDetailRoute();
   }
@@ -11328,6 +11525,7 @@ class _$ReturnDetailRouteImpl implements _ReturnDetailRoute {
     TResult? Function(String message)? openDownloadedFileError,
     TResult? Function()? addAnimalHealthWithNormalProductToCart,
     TResult? Function()? missingzzHtmcs,
+    TResult? Function()? stockInfoNotAvailable,
   }) {
     return returnDetailRoute?.call();
   }
@@ -11379,6 +11577,7 @@ class _$ReturnDetailRouteImpl implements _ReturnDetailRoute {
     TResult Function(String message)? openDownloadedFileError,
     TResult Function()? addAnimalHealthWithNormalProductToCart,
     TResult Function()? missingzzHtmcs,
+    TResult Function()? stockInfoNotAvailable,
     required TResult orElse(),
   }) {
     if (returnDetailRoute != null) {
@@ -11457,6 +11656,8 @@ class _$ReturnDetailRouteImpl implements _ReturnDetailRoute {
     required TResult Function(_AddAnimalHealthWithNormalProductToCart value)
         addAnimalHealthWithNormalProductToCart,
     required TResult Function(_MissingzzHtmcs value) missingzzHtmcs,
+    required TResult Function(_StockInfoNotAvailable value)
+        stockInfoNotAvailable,
   }) {
     return returnDetailRoute(this);
   }
@@ -11518,6 +11719,7 @@ class _$ReturnDetailRouteImpl implements _ReturnDetailRoute {
     TResult? Function(_AddAnimalHealthWithNormalProductToCart value)?
         addAnimalHealthWithNormalProductToCart,
     TResult? Function(_MissingzzHtmcs value)? missingzzHtmcs,
+    TResult? Function(_StockInfoNotAvailable value)? stockInfoNotAvailable,
   }) {
     return returnDetailRoute?.call(this);
   }
@@ -11579,6 +11781,7 @@ class _$ReturnDetailRouteImpl implements _ReturnDetailRoute {
     TResult Function(_AddAnimalHealthWithNormalProductToCart value)?
         addAnimalHealthWithNormalProductToCart,
     TResult Function(_MissingzzHtmcs value)? missingzzHtmcs,
+    TResult Function(_StockInfoNotAvailable value)? stockInfoNotAvailable,
     required TResult orElse(),
   }) {
     if (returnDetailRoute != null) {
@@ -11674,6 +11877,7 @@ class _$PaymentDetailRouteImpl implements _PaymentDetailRoute {
     required TResult Function(String message) openDownloadedFileError,
     required TResult Function() addAnimalHealthWithNormalProductToCart,
     required TResult Function() missingzzHtmcs,
+    required TResult Function() stockInfoNotAvailable,
   }) {
     return paymentDetailRoute();
   }
@@ -11725,6 +11929,7 @@ class _$PaymentDetailRouteImpl implements _PaymentDetailRoute {
     TResult? Function(String message)? openDownloadedFileError,
     TResult? Function()? addAnimalHealthWithNormalProductToCart,
     TResult? Function()? missingzzHtmcs,
+    TResult? Function()? stockInfoNotAvailable,
   }) {
     return paymentDetailRoute?.call();
   }
@@ -11776,6 +11981,7 @@ class _$PaymentDetailRouteImpl implements _PaymentDetailRoute {
     TResult Function(String message)? openDownloadedFileError,
     TResult Function()? addAnimalHealthWithNormalProductToCart,
     TResult Function()? missingzzHtmcs,
+    TResult Function()? stockInfoNotAvailable,
     required TResult orElse(),
   }) {
     if (paymentDetailRoute != null) {
@@ -11854,6 +12060,8 @@ class _$PaymentDetailRouteImpl implements _PaymentDetailRoute {
     required TResult Function(_AddAnimalHealthWithNormalProductToCart value)
         addAnimalHealthWithNormalProductToCart,
     required TResult Function(_MissingzzHtmcs value) missingzzHtmcs,
+    required TResult Function(_StockInfoNotAvailable value)
+        stockInfoNotAvailable,
   }) {
     return paymentDetailRoute(this);
   }
@@ -11915,6 +12123,7 @@ class _$PaymentDetailRouteImpl implements _PaymentDetailRoute {
     TResult? Function(_AddAnimalHealthWithNormalProductToCart value)?
         addAnimalHealthWithNormalProductToCart,
     TResult? Function(_MissingzzHtmcs value)? missingzzHtmcs,
+    TResult? Function(_StockInfoNotAvailable value)? stockInfoNotAvailable,
   }) {
     return paymentDetailRoute?.call(this);
   }
@@ -11976,6 +12185,7 @@ class _$PaymentDetailRouteImpl implements _PaymentDetailRoute {
     TResult Function(_AddAnimalHealthWithNormalProductToCart value)?
         addAnimalHealthWithNormalProductToCart,
     TResult Function(_MissingzzHtmcs value)? missingzzHtmcs,
+    TResult Function(_StockInfoNotAvailable value)? stockInfoNotAvailable,
     required TResult orElse(),
   }) {
     if (paymentDetailRoute != null) {
@@ -12071,6 +12281,7 @@ class _$InvoiceDetailRouteImpl implements _InvoiceDetailRoute {
     required TResult Function(String message) openDownloadedFileError,
     required TResult Function() addAnimalHealthWithNormalProductToCart,
     required TResult Function() missingzzHtmcs,
+    required TResult Function() stockInfoNotAvailable,
   }) {
     return invoiceDetailRoute();
   }
@@ -12122,6 +12333,7 @@ class _$InvoiceDetailRouteImpl implements _InvoiceDetailRoute {
     TResult? Function(String message)? openDownloadedFileError,
     TResult? Function()? addAnimalHealthWithNormalProductToCart,
     TResult? Function()? missingzzHtmcs,
+    TResult? Function()? stockInfoNotAvailable,
   }) {
     return invoiceDetailRoute?.call();
   }
@@ -12173,6 +12385,7 @@ class _$InvoiceDetailRouteImpl implements _InvoiceDetailRoute {
     TResult Function(String message)? openDownloadedFileError,
     TResult Function()? addAnimalHealthWithNormalProductToCart,
     TResult Function()? missingzzHtmcs,
+    TResult Function()? stockInfoNotAvailable,
     required TResult orElse(),
   }) {
     if (invoiceDetailRoute != null) {
@@ -12251,6 +12464,8 @@ class _$InvoiceDetailRouteImpl implements _InvoiceDetailRoute {
     required TResult Function(_AddAnimalHealthWithNormalProductToCart value)
         addAnimalHealthWithNormalProductToCart,
     required TResult Function(_MissingzzHtmcs value) missingzzHtmcs,
+    required TResult Function(_StockInfoNotAvailable value)
+        stockInfoNotAvailable,
   }) {
     return invoiceDetailRoute(this);
   }
@@ -12312,6 +12527,7 @@ class _$InvoiceDetailRouteImpl implements _InvoiceDetailRoute {
     TResult? Function(_AddAnimalHealthWithNormalProductToCart value)?
         addAnimalHealthWithNormalProductToCart,
     TResult? Function(_MissingzzHtmcs value)? missingzzHtmcs,
+    TResult? Function(_StockInfoNotAvailable value)? stockInfoNotAvailable,
   }) {
     return invoiceDetailRoute?.call(this);
   }
@@ -12373,6 +12589,7 @@ class _$InvoiceDetailRouteImpl implements _InvoiceDetailRoute {
     TResult Function(_AddAnimalHealthWithNormalProductToCart value)?
         addAnimalHealthWithNormalProductToCart,
     TResult Function(_MissingzzHtmcs value)? missingzzHtmcs,
+    TResult Function(_StockInfoNotAvailable value)? stockInfoNotAvailable,
     required TResult orElse(),
   }) {
     if (invoiceDetailRoute != null) {
@@ -12468,6 +12685,7 @@ class _$LanguageChangeFailImpl implements _LanguageChangeFail {
     required TResult Function(String message) openDownloadedFileError,
     required TResult Function() addAnimalHealthWithNormalProductToCart,
     required TResult Function() missingzzHtmcs,
+    required TResult Function() stockInfoNotAvailable,
   }) {
     return languageChangeFail();
   }
@@ -12519,6 +12737,7 @@ class _$LanguageChangeFailImpl implements _LanguageChangeFail {
     TResult? Function(String message)? openDownloadedFileError,
     TResult? Function()? addAnimalHealthWithNormalProductToCart,
     TResult? Function()? missingzzHtmcs,
+    TResult? Function()? stockInfoNotAvailable,
   }) {
     return languageChangeFail?.call();
   }
@@ -12570,6 +12789,7 @@ class _$LanguageChangeFailImpl implements _LanguageChangeFail {
     TResult Function(String message)? openDownloadedFileError,
     TResult Function()? addAnimalHealthWithNormalProductToCart,
     TResult Function()? missingzzHtmcs,
+    TResult Function()? stockInfoNotAvailable,
     required TResult orElse(),
   }) {
     if (languageChangeFail != null) {
@@ -12648,6 +12868,8 @@ class _$LanguageChangeFailImpl implements _LanguageChangeFail {
     required TResult Function(_AddAnimalHealthWithNormalProductToCart value)
         addAnimalHealthWithNormalProductToCart,
     required TResult Function(_MissingzzHtmcs value) missingzzHtmcs,
+    required TResult Function(_StockInfoNotAvailable value)
+        stockInfoNotAvailable,
   }) {
     return languageChangeFail(this);
   }
@@ -12709,6 +12931,7 @@ class _$LanguageChangeFailImpl implements _LanguageChangeFail {
     TResult? Function(_AddAnimalHealthWithNormalProductToCart value)?
         addAnimalHealthWithNormalProductToCart,
     TResult? Function(_MissingzzHtmcs value)? missingzzHtmcs,
+    TResult? Function(_StockInfoNotAvailable value)? stockInfoNotAvailable,
   }) {
     return languageChangeFail?.call(this);
   }
@@ -12770,6 +12993,7 @@ class _$LanguageChangeFailImpl implements _LanguageChangeFail {
     TResult Function(_AddAnimalHealthWithNormalProductToCart value)?
         addAnimalHealthWithNormalProductToCart,
     TResult Function(_MissingzzHtmcs value)? missingzzHtmcs,
+    TResult Function(_StockInfoNotAvailable value)? stockInfoNotAvailable,
     required TResult orElse(),
   }) {
     if (languageChangeFail != null) {
@@ -12895,6 +13119,7 @@ class _$ScannedProductNotFoundImpl implements _ScannedProductNotFound {
     required TResult Function(String message) openDownloadedFileError,
     required TResult Function() addAnimalHealthWithNormalProductToCart,
     required TResult Function() missingzzHtmcs,
+    required TResult Function() stockInfoNotAvailable,
   }) {
     return scannedProductNotFound(productNumber);
   }
@@ -12946,6 +13171,7 @@ class _$ScannedProductNotFoundImpl implements _ScannedProductNotFound {
     TResult? Function(String message)? openDownloadedFileError,
     TResult? Function()? addAnimalHealthWithNormalProductToCart,
     TResult? Function()? missingzzHtmcs,
+    TResult? Function()? stockInfoNotAvailable,
   }) {
     return scannedProductNotFound?.call(productNumber);
   }
@@ -12997,6 +13223,7 @@ class _$ScannedProductNotFoundImpl implements _ScannedProductNotFound {
     TResult Function(String message)? openDownloadedFileError,
     TResult Function()? addAnimalHealthWithNormalProductToCart,
     TResult Function()? missingzzHtmcs,
+    TResult Function()? stockInfoNotAvailable,
     required TResult orElse(),
   }) {
     if (scannedProductNotFound != null) {
@@ -13075,6 +13302,8 @@ class _$ScannedProductNotFoundImpl implements _ScannedProductNotFound {
     required TResult Function(_AddAnimalHealthWithNormalProductToCart value)
         addAnimalHealthWithNormalProductToCart,
     required TResult Function(_MissingzzHtmcs value) missingzzHtmcs,
+    required TResult Function(_StockInfoNotAvailable value)
+        stockInfoNotAvailable,
   }) {
     return scannedProductNotFound(this);
   }
@@ -13136,6 +13365,7 @@ class _$ScannedProductNotFoundImpl implements _ScannedProductNotFound {
     TResult? Function(_AddAnimalHealthWithNormalProductToCart value)?
         addAnimalHealthWithNormalProductToCart,
     TResult? Function(_MissingzzHtmcs value)? missingzzHtmcs,
+    TResult? Function(_StockInfoNotAvailable value)? stockInfoNotAvailable,
   }) {
     return scannedProductNotFound?.call(this);
   }
@@ -13197,6 +13427,7 @@ class _$ScannedProductNotFoundImpl implements _ScannedProductNotFound {
     TResult Function(_AddAnimalHealthWithNormalProductToCart value)?
         addAnimalHealthWithNormalProductToCart,
     TResult Function(_MissingzzHtmcs value)? missingzzHtmcs,
+    TResult Function(_StockInfoNotAvailable value)? stockInfoNotAvailable,
     required TResult orElse(),
   }) {
     if (scannedProductNotFound != null) {
@@ -13328,6 +13559,7 @@ class _$CameraPermissionFailedImpl implements _CameraPermissionFailed {
     required TResult Function(String message) openDownloadedFileError,
     required TResult Function() addAnimalHealthWithNormalProductToCart,
     required TResult Function() missingzzHtmcs,
+    required TResult Function() stockInfoNotAvailable,
   }) {
     return cameraPermissionFailed(permanentlyDenied);
   }
@@ -13379,6 +13611,7 @@ class _$CameraPermissionFailedImpl implements _CameraPermissionFailed {
     TResult? Function(String message)? openDownloadedFileError,
     TResult? Function()? addAnimalHealthWithNormalProductToCart,
     TResult? Function()? missingzzHtmcs,
+    TResult? Function()? stockInfoNotAvailable,
   }) {
     return cameraPermissionFailed?.call(permanentlyDenied);
   }
@@ -13430,6 +13663,7 @@ class _$CameraPermissionFailedImpl implements _CameraPermissionFailed {
     TResult Function(String message)? openDownloadedFileError,
     TResult Function()? addAnimalHealthWithNormalProductToCart,
     TResult Function()? missingzzHtmcs,
+    TResult Function()? stockInfoNotAvailable,
     required TResult orElse(),
   }) {
     if (cameraPermissionFailed != null) {
@@ -13508,6 +13742,8 @@ class _$CameraPermissionFailedImpl implements _CameraPermissionFailed {
     required TResult Function(_AddAnimalHealthWithNormalProductToCart value)
         addAnimalHealthWithNormalProductToCart,
     required TResult Function(_MissingzzHtmcs value) missingzzHtmcs,
+    required TResult Function(_StockInfoNotAvailable value)
+        stockInfoNotAvailable,
   }) {
     return cameraPermissionFailed(this);
   }
@@ -13569,6 +13805,7 @@ class _$CameraPermissionFailedImpl implements _CameraPermissionFailed {
     TResult? Function(_AddAnimalHealthWithNormalProductToCart value)?
         addAnimalHealthWithNormalProductToCart,
     TResult? Function(_MissingzzHtmcs value)? missingzzHtmcs,
+    TResult? Function(_StockInfoNotAvailable value)? stockInfoNotAvailable,
   }) {
     return cameraPermissionFailed?.call(this);
   }
@@ -13630,6 +13867,7 @@ class _$CameraPermissionFailedImpl implements _CameraPermissionFailed {
     TResult Function(_AddAnimalHealthWithNormalProductToCart value)?
         addAnimalHealthWithNormalProductToCart,
     TResult Function(_MissingzzHtmcs value)? missingzzHtmcs,
+    TResult Function(_StockInfoNotAvailable value)? stockInfoNotAvailable,
     required TResult orElse(),
   }) {
     if (cameraPermissionFailed != null) {
@@ -13731,6 +13969,7 @@ class _$UserNameNotFoundImpl implements _UserNameNotFound {
     required TResult Function(String message) openDownloadedFileError,
     required TResult Function() addAnimalHealthWithNormalProductToCart,
     required TResult Function() missingzzHtmcs,
+    required TResult Function() stockInfoNotAvailable,
   }) {
     return userNameNotFound();
   }
@@ -13782,6 +14021,7 @@ class _$UserNameNotFoundImpl implements _UserNameNotFound {
     TResult? Function(String message)? openDownloadedFileError,
     TResult? Function()? addAnimalHealthWithNormalProductToCart,
     TResult? Function()? missingzzHtmcs,
+    TResult? Function()? stockInfoNotAvailable,
   }) {
     return userNameNotFound?.call();
   }
@@ -13833,6 +14073,7 @@ class _$UserNameNotFoundImpl implements _UserNameNotFound {
     TResult Function(String message)? openDownloadedFileError,
     TResult Function()? addAnimalHealthWithNormalProductToCart,
     TResult Function()? missingzzHtmcs,
+    TResult Function()? stockInfoNotAvailable,
     required TResult orElse(),
   }) {
     if (userNameNotFound != null) {
@@ -13911,6 +14152,8 @@ class _$UserNameNotFoundImpl implements _UserNameNotFound {
     required TResult Function(_AddAnimalHealthWithNormalProductToCart value)
         addAnimalHealthWithNormalProductToCart,
     required TResult Function(_MissingzzHtmcs value) missingzzHtmcs,
+    required TResult Function(_StockInfoNotAvailable value)
+        stockInfoNotAvailable,
   }) {
     return userNameNotFound(this);
   }
@@ -13972,6 +14215,7 @@ class _$UserNameNotFoundImpl implements _UserNameNotFound {
     TResult? Function(_AddAnimalHealthWithNormalProductToCart value)?
         addAnimalHealthWithNormalProductToCart,
     TResult? Function(_MissingzzHtmcs value)? missingzzHtmcs,
+    TResult? Function(_StockInfoNotAvailable value)? stockInfoNotAvailable,
   }) {
     return userNameNotFound?.call(this);
   }
@@ -14033,6 +14277,7 @@ class _$UserNameNotFoundImpl implements _UserNameNotFound {
     TResult Function(_AddAnimalHealthWithNormalProductToCart value)?
         addAnimalHealthWithNormalProductToCart,
     TResult Function(_MissingzzHtmcs value)? missingzzHtmcs,
+    TResult Function(_StockInfoNotAvailable value)? stockInfoNotAvailable,
     required TResult orElse(),
   }) {
     if (userNameNotFound != null) {
@@ -14131,6 +14376,7 @@ class _$UploadedFileSizeExceedImpl implements _UploadedFileSizeExceed {
     required TResult Function(String message) openDownloadedFileError,
     required TResult Function() addAnimalHealthWithNormalProductToCart,
     required TResult Function() missingzzHtmcs,
+    required TResult Function() stockInfoNotAvailable,
   }) {
     return uploadedFileSizeExceed();
   }
@@ -14182,6 +14428,7 @@ class _$UploadedFileSizeExceedImpl implements _UploadedFileSizeExceed {
     TResult? Function(String message)? openDownloadedFileError,
     TResult? Function()? addAnimalHealthWithNormalProductToCart,
     TResult? Function()? missingzzHtmcs,
+    TResult? Function()? stockInfoNotAvailable,
   }) {
     return uploadedFileSizeExceed?.call();
   }
@@ -14233,6 +14480,7 @@ class _$UploadedFileSizeExceedImpl implements _UploadedFileSizeExceed {
     TResult Function(String message)? openDownloadedFileError,
     TResult Function()? addAnimalHealthWithNormalProductToCart,
     TResult Function()? missingzzHtmcs,
+    TResult Function()? stockInfoNotAvailable,
     required TResult orElse(),
   }) {
     if (uploadedFileSizeExceed != null) {
@@ -14311,6 +14559,8 @@ class _$UploadedFileSizeExceedImpl implements _UploadedFileSizeExceed {
     required TResult Function(_AddAnimalHealthWithNormalProductToCart value)
         addAnimalHealthWithNormalProductToCart,
     required TResult Function(_MissingzzHtmcs value) missingzzHtmcs,
+    required TResult Function(_StockInfoNotAvailable value)
+        stockInfoNotAvailable,
   }) {
     return uploadedFileSizeExceed(this);
   }
@@ -14372,6 +14622,7 @@ class _$UploadedFileSizeExceedImpl implements _UploadedFileSizeExceed {
     TResult? Function(_AddAnimalHealthWithNormalProductToCart value)?
         addAnimalHealthWithNormalProductToCart,
     TResult? Function(_MissingzzHtmcs value)? missingzzHtmcs,
+    TResult? Function(_StockInfoNotAvailable value)? stockInfoNotAvailable,
   }) {
     return uploadedFileSizeExceed?.call(this);
   }
@@ -14433,6 +14684,7 @@ class _$UploadedFileSizeExceedImpl implements _UploadedFileSizeExceed {
     TResult Function(_AddAnimalHealthWithNormalProductToCart value)?
         addAnimalHealthWithNormalProductToCart,
     TResult Function(_MissingzzHtmcs value)? missingzzHtmcs,
+    TResult Function(_StockInfoNotAvailable value)? stockInfoNotAvailable,
     required TResult orElse(),
   }) {
     if (uploadedFileSizeExceed != null) {
@@ -14558,6 +14810,7 @@ class _$PaymentAdviceDeleteFailedImpl implements _PaymentAdviceDeleteFailed {
     required TResult Function(String message) openDownloadedFileError,
     required TResult Function() addAnimalHealthWithNormalProductToCart,
     required TResult Function() missingzzHtmcs,
+    required TResult Function() stockInfoNotAvailable,
   }) {
     return paymentAdviceDeleteFailed(adviceNumber);
   }
@@ -14609,6 +14862,7 @@ class _$PaymentAdviceDeleteFailedImpl implements _PaymentAdviceDeleteFailed {
     TResult? Function(String message)? openDownloadedFileError,
     TResult? Function()? addAnimalHealthWithNormalProductToCart,
     TResult? Function()? missingzzHtmcs,
+    TResult? Function()? stockInfoNotAvailable,
   }) {
     return paymentAdviceDeleteFailed?.call(adviceNumber);
   }
@@ -14660,6 +14914,7 @@ class _$PaymentAdviceDeleteFailedImpl implements _PaymentAdviceDeleteFailed {
     TResult Function(String message)? openDownloadedFileError,
     TResult Function()? addAnimalHealthWithNormalProductToCart,
     TResult Function()? missingzzHtmcs,
+    TResult Function()? stockInfoNotAvailable,
     required TResult orElse(),
   }) {
     if (paymentAdviceDeleteFailed != null) {
@@ -14738,6 +14993,8 @@ class _$PaymentAdviceDeleteFailedImpl implements _PaymentAdviceDeleteFailed {
     required TResult Function(_AddAnimalHealthWithNormalProductToCart value)
         addAnimalHealthWithNormalProductToCart,
     required TResult Function(_MissingzzHtmcs value) missingzzHtmcs,
+    required TResult Function(_StockInfoNotAvailable value)
+        stockInfoNotAvailable,
   }) {
     return paymentAdviceDeleteFailed(this);
   }
@@ -14799,6 +15056,7 @@ class _$PaymentAdviceDeleteFailedImpl implements _PaymentAdviceDeleteFailed {
     TResult? Function(_AddAnimalHealthWithNormalProductToCart value)?
         addAnimalHealthWithNormalProductToCart,
     TResult? Function(_MissingzzHtmcs value)? missingzzHtmcs,
+    TResult? Function(_StockInfoNotAvailable value)? stockInfoNotAvailable,
   }) {
     return paymentAdviceDeleteFailed?.call(this);
   }
@@ -14860,6 +15118,7 @@ class _$PaymentAdviceDeleteFailedImpl implements _PaymentAdviceDeleteFailed {
     TResult Function(_AddAnimalHealthWithNormalProductToCart value)?
         addAnimalHealthWithNormalProductToCart,
     TResult Function(_MissingzzHtmcs value)? missingzzHtmcs,
+    TResult Function(_StockInfoNotAvailable value)? stockInfoNotAvailable,
     required TResult orElse(),
   }) {
     if (paymentAdviceDeleteFailed != null) {
@@ -14963,6 +15222,7 @@ class _$AllReorderItemInvalidImpl implements _AllReorderItemInvalid {
     required TResult Function(String message) openDownloadedFileError,
     required TResult Function() addAnimalHealthWithNormalProductToCart,
     required TResult Function() missingzzHtmcs,
+    required TResult Function() stockInfoNotAvailable,
   }) {
     return allReorderItemInvalid();
   }
@@ -15014,6 +15274,7 @@ class _$AllReorderItemInvalidImpl implements _AllReorderItemInvalid {
     TResult? Function(String message)? openDownloadedFileError,
     TResult? Function()? addAnimalHealthWithNormalProductToCart,
     TResult? Function()? missingzzHtmcs,
+    TResult? Function()? stockInfoNotAvailable,
   }) {
     return allReorderItemInvalid?.call();
   }
@@ -15065,6 +15326,7 @@ class _$AllReorderItemInvalidImpl implements _AllReorderItemInvalid {
     TResult Function(String message)? openDownloadedFileError,
     TResult Function()? addAnimalHealthWithNormalProductToCart,
     TResult Function()? missingzzHtmcs,
+    TResult Function()? stockInfoNotAvailable,
     required TResult orElse(),
   }) {
     if (allReorderItemInvalid != null) {
@@ -15143,6 +15405,8 @@ class _$AllReorderItemInvalidImpl implements _AllReorderItemInvalid {
     required TResult Function(_AddAnimalHealthWithNormalProductToCart value)
         addAnimalHealthWithNormalProductToCart,
     required TResult Function(_MissingzzHtmcs value) missingzzHtmcs,
+    required TResult Function(_StockInfoNotAvailable value)
+        stockInfoNotAvailable,
   }) {
     return allReorderItemInvalid(this);
   }
@@ -15204,6 +15468,7 @@ class _$AllReorderItemInvalidImpl implements _AllReorderItemInvalid {
     TResult? Function(_AddAnimalHealthWithNormalProductToCart value)?
         addAnimalHealthWithNormalProductToCart,
     TResult? Function(_MissingzzHtmcs value)? missingzzHtmcs,
+    TResult? Function(_StockInfoNotAvailable value)? stockInfoNotAvailable,
   }) {
     return allReorderItemInvalid?.call(this);
   }
@@ -15265,6 +15530,7 @@ class _$AllReorderItemInvalidImpl implements _AllReorderItemInvalid {
     TResult Function(_AddAnimalHealthWithNormalProductToCart value)?
         addAnimalHealthWithNormalProductToCart,
     TResult Function(_MissingzzHtmcs value)? missingzzHtmcs,
+    TResult Function(_StockInfoNotAvailable value)? stockInfoNotAvailable,
     required TResult orElse(),
   }) {
     if (allReorderItemInvalid != null) {
@@ -15390,6 +15656,7 @@ class _$MaximumCartQuantityExceedImpl implements _MaximumCartQuantityExceed {
     required TResult Function(String message) openDownloadedFileError,
     required TResult Function() addAnimalHealthWithNormalProductToCart,
     required TResult Function() missingzzHtmcs,
+    required TResult Function() stockInfoNotAvailable,
   }) {
     return maximumCartQuantityExceed(maximumNumber);
   }
@@ -15441,6 +15708,7 @@ class _$MaximumCartQuantityExceedImpl implements _MaximumCartQuantityExceed {
     TResult? Function(String message)? openDownloadedFileError,
     TResult? Function()? addAnimalHealthWithNormalProductToCart,
     TResult? Function()? missingzzHtmcs,
+    TResult? Function()? stockInfoNotAvailable,
   }) {
     return maximumCartQuantityExceed?.call(maximumNumber);
   }
@@ -15492,6 +15760,7 @@ class _$MaximumCartQuantityExceedImpl implements _MaximumCartQuantityExceed {
     TResult Function(String message)? openDownloadedFileError,
     TResult Function()? addAnimalHealthWithNormalProductToCart,
     TResult Function()? missingzzHtmcs,
+    TResult Function()? stockInfoNotAvailable,
     required TResult orElse(),
   }) {
     if (maximumCartQuantityExceed != null) {
@@ -15570,6 +15839,8 @@ class _$MaximumCartQuantityExceedImpl implements _MaximumCartQuantityExceed {
     required TResult Function(_AddAnimalHealthWithNormalProductToCart value)
         addAnimalHealthWithNormalProductToCart,
     required TResult Function(_MissingzzHtmcs value) missingzzHtmcs,
+    required TResult Function(_StockInfoNotAvailable value)
+        stockInfoNotAvailable,
   }) {
     return maximumCartQuantityExceed(this);
   }
@@ -15631,6 +15902,7 @@ class _$MaximumCartQuantityExceedImpl implements _MaximumCartQuantityExceed {
     TResult? Function(_AddAnimalHealthWithNormalProductToCart value)?
         addAnimalHealthWithNormalProductToCart,
     TResult? Function(_MissingzzHtmcs value)? missingzzHtmcs,
+    TResult? Function(_StockInfoNotAvailable value)? stockInfoNotAvailable,
   }) {
     return maximumCartQuantityExceed?.call(this);
   }
@@ -15692,6 +15964,7 @@ class _$MaximumCartQuantityExceedImpl implements _MaximumCartQuantityExceed {
     TResult Function(_AddAnimalHealthWithNormalProductToCart value)?
         addAnimalHealthWithNormalProductToCart,
     TResult Function(_MissingzzHtmcs value)? missingzzHtmcs,
+    TResult Function(_StockInfoNotAvailable value)? stockInfoNotAvailable,
     required TResult orElse(),
   }) {
     if (maximumCartQuantityExceed != null) {
@@ -15796,6 +16069,7 @@ class _$CartHasDifferentAddressImpl implements _CartHasDifferentAddress {
     required TResult Function(String message) openDownloadedFileError,
     required TResult Function() addAnimalHealthWithNormalProductToCart,
     required TResult Function() missingzzHtmcs,
+    required TResult Function() stockInfoNotAvailable,
   }) {
     return cartHasDifferentAddress();
   }
@@ -15847,6 +16121,7 @@ class _$CartHasDifferentAddressImpl implements _CartHasDifferentAddress {
     TResult? Function(String message)? openDownloadedFileError,
     TResult? Function()? addAnimalHealthWithNormalProductToCart,
     TResult? Function()? missingzzHtmcs,
+    TResult? Function()? stockInfoNotAvailable,
   }) {
     return cartHasDifferentAddress?.call();
   }
@@ -15898,6 +16173,7 @@ class _$CartHasDifferentAddressImpl implements _CartHasDifferentAddress {
     TResult Function(String message)? openDownloadedFileError,
     TResult Function()? addAnimalHealthWithNormalProductToCart,
     TResult Function()? missingzzHtmcs,
+    TResult Function()? stockInfoNotAvailable,
     required TResult orElse(),
   }) {
     if (cartHasDifferentAddress != null) {
@@ -15976,6 +16252,8 @@ class _$CartHasDifferentAddressImpl implements _CartHasDifferentAddress {
     required TResult Function(_AddAnimalHealthWithNormalProductToCart value)
         addAnimalHealthWithNormalProductToCart,
     required TResult Function(_MissingzzHtmcs value) missingzzHtmcs,
+    required TResult Function(_StockInfoNotAvailable value)
+        stockInfoNotAvailable,
   }) {
     return cartHasDifferentAddress(this);
   }
@@ -16037,6 +16315,7 @@ class _$CartHasDifferentAddressImpl implements _CartHasDifferentAddress {
     TResult? Function(_AddAnimalHealthWithNormalProductToCart value)?
         addAnimalHealthWithNormalProductToCart,
     TResult? Function(_MissingzzHtmcs value)? missingzzHtmcs,
+    TResult? Function(_StockInfoNotAvailable value)? stockInfoNotAvailable,
   }) {
     return cartHasDifferentAddress?.call(this);
   }
@@ -16098,6 +16377,7 @@ class _$CartHasDifferentAddressImpl implements _CartHasDifferentAddress {
     TResult Function(_AddAnimalHealthWithNormalProductToCart value)?
         addAnimalHealthWithNormalProductToCart,
     TResult Function(_MissingzzHtmcs value)? missingzzHtmcs,
+    TResult Function(_StockInfoNotAvailable value)? stockInfoNotAvailable,
     required TResult orElse(),
   }) {
     if (cartHasDifferentAddress != null) {
@@ -16198,6 +16478,7 @@ class _$ArticleannuncementTagFetchingErrorImpl
     required TResult Function(String message) openDownloadedFileError,
     required TResult Function() addAnimalHealthWithNormalProductToCart,
     required TResult Function() missingzzHtmcs,
+    required TResult Function() stockInfoNotAvailable,
   }) {
     return articleannuncementTagFetchingError();
   }
@@ -16249,6 +16530,7 @@ class _$ArticleannuncementTagFetchingErrorImpl
     TResult? Function(String message)? openDownloadedFileError,
     TResult? Function()? addAnimalHealthWithNormalProductToCart,
     TResult? Function()? missingzzHtmcs,
+    TResult? Function()? stockInfoNotAvailable,
   }) {
     return articleannuncementTagFetchingError?.call();
   }
@@ -16300,6 +16582,7 @@ class _$ArticleannuncementTagFetchingErrorImpl
     TResult Function(String message)? openDownloadedFileError,
     TResult Function()? addAnimalHealthWithNormalProductToCart,
     TResult Function()? missingzzHtmcs,
+    TResult Function()? stockInfoNotAvailable,
     required TResult orElse(),
   }) {
     if (articleannuncementTagFetchingError != null) {
@@ -16378,6 +16661,8 @@ class _$ArticleannuncementTagFetchingErrorImpl
     required TResult Function(_AddAnimalHealthWithNormalProductToCart value)
         addAnimalHealthWithNormalProductToCart,
     required TResult Function(_MissingzzHtmcs value) missingzzHtmcs,
+    required TResult Function(_StockInfoNotAvailable value)
+        stockInfoNotAvailable,
   }) {
     return articleannuncementTagFetchingError(this);
   }
@@ -16439,6 +16724,7 @@ class _$ArticleannuncementTagFetchingErrorImpl
     TResult? Function(_AddAnimalHealthWithNormalProductToCart value)?
         addAnimalHealthWithNormalProductToCart,
     TResult? Function(_MissingzzHtmcs value)? missingzzHtmcs,
+    TResult? Function(_StockInfoNotAvailable value)? stockInfoNotAvailable,
   }) {
     return articleannuncementTagFetchingError?.call(this);
   }
@@ -16500,6 +16786,7 @@ class _$ArticleannuncementTagFetchingErrorImpl
     TResult Function(_AddAnimalHealthWithNormalProductToCart value)?
         addAnimalHealthWithNormalProductToCart,
     TResult Function(_MissingzzHtmcs value)? missingzzHtmcs,
+    TResult Function(_StockInfoNotAvailable value)? stockInfoNotAvailable,
     required TResult orElse(),
   }) {
     if (articleannuncementTagFetchingError != null) {
@@ -16599,6 +16886,7 @@ class _$AttachmentDownloadErrorImpl implements _AttachmentDownloadError {
     required TResult Function(String message) openDownloadedFileError,
     required TResult Function() addAnimalHealthWithNormalProductToCart,
     required TResult Function() missingzzHtmcs,
+    required TResult Function() stockInfoNotAvailable,
   }) {
     return attachmentDownloadError();
   }
@@ -16650,6 +16938,7 @@ class _$AttachmentDownloadErrorImpl implements _AttachmentDownloadError {
     TResult? Function(String message)? openDownloadedFileError,
     TResult? Function()? addAnimalHealthWithNormalProductToCart,
     TResult? Function()? missingzzHtmcs,
+    TResult? Function()? stockInfoNotAvailable,
   }) {
     return attachmentDownloadError?.call();
   }
@@ -16701,6 +16990,7 @@ class _$AttachmentDownloadErrorImpl implements _AttachmentDownloadError {
     TResult Function(String message)? openDownloadedFileError,
     TResult Function()? addAnimalHealthWithNormalProductToCart,
     TResult Function()? missingzzHtmcs,
+    TResult Function()? stockInfoNotAvailable,
     required TResult orElse(),
   }) {
     if (attachmentDownloadError != null) {
@@ -16779,6 +17069,8 @@ class _$AttachmentDownloadErrorImpl implements _AttachmentDownloadError {
     required TResult Function(_AddAnimalHealthWithNormalProductToCart value)
         addAnimalHealthWithNormalProductToCart,
     required TResult Function(_MissingzzHtmcs value) missingzzHtmcs,
+    required TResult Function(_StockInfoNotAvailable value)
+        stockInfoNotAvailable,
   }) {
     return attachmentDownloadError(this);
   }
@@ -16840,6 +17132,7 @@ class _$AttachmentDownloadErrorImpl implements _AttachmentDownloadError {
     TResult? Function(_AddAnimalHealthWithNormalProductToCart value)?
         addAnimalHealthWithNormalProductToCart,
     TResult? Function(_MissingzzHtmcs value)? missingzzHtmcs,
+    TResult? Function(_StockInfoNotAvailable value)? stockInfoNotAvailable,
   }) {
     return attachmentDownloadError?.call(this);
   }
@@ -16901,6 +17194,7 @@ class _$AttachmentDownloadErrorImpl implements _AttachmentDownloadError {
     TResult Function(_AddAnimalHealthWithNormalProductToCart value)?
         addAnimalHealthWithNormalProductToCart,
     TResult Function(_MissingzzHtmcs value)? missingzzHtmcs,
+    TResult Function(_StockInfoNotAvailable value)? stockInfoNotAvailable,
     required TResult orElse(),
   }) {
     if (attachmentDownloadError != null) {
@@ -17025,6 +17319,7 @@ class _$OpenDownloadedFileErrorImpl implements _OpenDownloadedFileError {
     required TResult Function(String message) openDownloadedFileError,
     required TResult Function() addAnimalHealthWithNormalProductToCart,
     required TResult Function() missingzzHtmcs,
+    required TResult Function() stockInfoNotAvailable,
   }) {
     return openDownloadedFileError(message);
   }
@@ -17076,6 +17371,7 @@ class _$OpenDownloadedFileErrorImpl implements _OpenDownloadedFileError {
     TResult? Function(String message)? openDownloadedFileError,
     TResult? Function()? addAnimalHealthWithNormalProductToCart,
     TResult? Function()? missingzzHtmcs,
+    TResult? Function()? stockInfoNotAvailable,
   }) {
     return openDownloadedFileError?.call(message);
   }
@@ -17127,6 +17423,7 @@ class _$OpenDownloadedFileErrorImpl implements _OpenDownloadedFileError {
     TResult Function(String message)? openDownloadedFileError,
     TResult Function()? addAnimalHealthWithNormalProductToCart,
     TResult Function()? missingzzHtmcs,
+    TResult Function()? stockInfoNotAvailable,
     required TResult orElse(),
   }) {
     if (openDownloadedFileError != null) {
@@ -17205,6 +17502,8 @@ class _$OpenDownloadedFileErrorImpl implements _OpenDownloadedFileError {
     required TResult Function(_AddAnimalHealthWithNormalProductToCart value)
         addAnimalHealthWithNormalProductToCart,
     required TResult Function(_MissingzzHtmcs value) missingzzHtmcs,
+    required TResult Function(_StockInfoNotAvailable value)
+        stockInfoNotAvailable,
   }) {
     return openDownloadedFileError(this);
   }
@@ -17266,6 +17565,7 @@ class _$OpenDownloadedFileErrorImpl implements _OpenDownloadedFileError {
     TResult? Function(_AddAnimalHealthWithNormalProductToCart value)?
         addAnimalHealthWithNormalProductToCart,
     TResult? Function(_MissingzzHtmcs value)? missingzzHtmcs,
+    TResult? Function(_StockInfoNotAvailable value)? stockInfoNotAvailable,
   }) {
     return openDownloadedFileError?.call(this);
   }
@@ -17327,6 +17627,7 @@ class _$OpenDownloadedFileErrorImpl implements _OpenDownloadedFileError {
     TResult Function(_AddAnimalHealthWithNormalProductToCart value)?
         addAnimalHealthWithNormalProductToCart,
     TResult Function(_MissingzzHtmcs value)? missingzzHtmcs,
+    TResult Function(_StockInfoNotAvailable value)? stockInfoNotAvailable,
     required TResult orElse(),
   }) {
     if (openDownloadedFileError != null) {
@@ -17433,6 +17734,7 @@ class _$AddAnimalHealthWithNormalProductToCartImpl
     required TResult Function(String message) openDownloadedFileError,
     required TResult Function() addAnimalHealthWithNormalProductToCart,
     required TResult Function() missingzzHtmcs,
+    required TResult Function() stockInfoNotAvailable,
   }) {
     return addAnimalHealthWithNormalProductToCart();
   }
@@ -17484,6 +17786,7 @@ class _$AddAnimalHealthWithNormalProductToCartImpl
     TResult? Function(String message)? openDownloadedFileError,
     TResult? Function()? addAnimalHealthWithNormalProductToCart,
     TResult? Function()? missingzzHtmcs,
+    TResult? Function()? stockInfoNotAvailable,
   }) {
     return addAnimalHealthWithNormalProductToCart?.call();
   }
@@ -17535,6 +17838,7 @@ class _$AddAnimalHealthWithNormalProductToCartImpl
     TResult Function(String message)? openDownloadedFileError,
     TResult Function()? addAnimalHealthWithNormalProductToCart,
     TResult Function()? missingzzHtmcs,
+    TResult Function()? stockInfoNotAvailable,
     required TResult orElse(),
   }) {
     if (addAnimalHealthWithNormalProductToCart != null) {
@@ -17613,6 +17917,8 @@ class _$AddAnimalHealthWithNormalProductToCartImpl
     required TResult Function(_AddAnimalHealthWithNormalProductToCart value)
         addAnimalHealthWithNormalProductToCart,
     required TResult Function(_MissingzzHtmcs value) missingzzHtmcs,
+    required TResult Function(_StockInfoNotAvailable value)
+        stockInfoNotAvailable,
   }) {
     return addAnimalHealthWithNormalProductToCart(this);
   }
@@ -17674,6 +17980,7 @@ class _$AddAnimalHealthWithNormalProductToCartImpl
     TResult? Function(_AddAnimalHealthWithNormalProductToCart value)?
         addAnimalHealthWithNormalProductToCart,
     TResult? Function(_MissingzzHtmcs value)? missingzzHtmcs,
+    TResult? Function(_StockInfoNotAvailable value)? stockInfoNotAvailable,
   }) {
     return addAnimalHealthWithNormalProductToCart?.call(this);
   }
@@ -17735,6 +18042,7 @@ class _$AddAnimalHealthWithNormalProductToCartImpl
     TResult Function(_AddAnimalHealthWithNormalProductToCart value)?
         addAnimalHealthWithNormalProductToCart,
     TResult Function(_MissingzzHtmcs value)? missingzzHtmcs,
+    TResult Function(_StockInfoNotAvailable value)? stockInfoNotAvailable,
     required TResult orElse(),
   }) {
     if (addAnimalHealthWithNormalProductToCart != null) {
@@ -17831,6 +18139,7 @@ class _$MissingzzHtmcsImpl implements _MissingzzHtmcs {
     required TResult Function(String message) openDownloadedFileError,
     required TResult Function() addAnimalHealthWithNormalProductToCart,
     required TResult Function() missingzzHtmcs,
+    required TResult Function() stockInfoNotAvailable,
   }) {
     return missingzzHtmcs();
   }
@@ -17882,6 +18191,7 @@ class _$MissingzzHtmcsImpl implements _MissingzzHtmcs {
     TResult? Function(String message)? openDownloadedFileError,
     TResult? Function()? addAnimalHealthWithNormalProductToCart,
     TResult? Function()? missingzzHtmcs,
+    TResult? Function()? stockInfoNotAvailable,
   }) {
     return missingzzHtmcs?.call();
   }
@@ -17933,6 +18243,7 @@ class _$MissingzzHtmcsImpl implements _MissingzzHtmcs {
     TResult Function(String message)? openDownloadedFileError,
     TResult Function()? addAnimalHealthWithNormalProductToCart,
     TResult Function()? missingzzHtmcs,
+    TResult Function()? stockInfoNotAvailable,
     required TResult orElse(),
   }) {
     if (missingzzHtmcs != null) {
@@ -18011,6 +18322,8 @@ class _$MissingzzHtmcsImpl implements _MissingzzHtmcs {
     required TResult Function(_AddAnimalHealthWithNormalProductToCart value)
         addAnimalHealthWithNormalProductToCart,
     required TResult Function(_MissingzzHtmcs value) missingzzHtmcs,
+    required TResult Function(_StockInfoNotAvailable value)
+        stockInfoNotAvailable,
   }) {
     return missingzzHtmcs(this);
   }
@@ -18072,6 +18385,7 @@ class _$MissingzzHtmcsImpl implements _MissingzzHtmcs {
     TResult? Function(_AddAnimalHealthWithNormalProductToCart value)?
         addAnimalHealthWithNormalProductToCart,
     TResult? Function(_MissingzzHtmcs value)? missingzzHtmcs,
+    TResult? Function(_StockInfoNotAvailable value)? stockInfoNotAvailable,
   }) {
     return missingzzHtmcs?.call(this);
   }
@@ -18133,6 +18447,7 @@ class _$MissingzzHtmcsImpl implements _MissingzzHtmcs {
     TResult Function(_AddAnimalHealthWithNormalProductToCart value)?
         addAnimalHealthWithNormalProductToCart,
     TResult Function(_MissingzzHtmcs value)? missingzzHtmcs,
+    TResult Function(_StockInfoNotAvailable value)? stockInfoNotAvailable,
     required TResult orElse(),
   }) {
     if (missingzzHtmcs != null) {
@@ -18144,4 +18459,410 @@ class _$MissingzzHtmcsImpl implements _MissingzzHtmcs {
 
 abstract class _MissingzzHtmcs implements ApiFailure {
   const factory _MissingzzHtmcs() = _$MissingzzHtmcsImpl;
+}
+
+/// @nodoc
+abstract class _$$StockInfoNotAvailableImplCopyWith<$Res> {
+  factory _$$StockInfoNotAvailableImplCopyWith(
+          _$StockInfoNotAvailableImpl value,
+          $Res Function(_$StockInfoNotAvailableImpl) then) =
+      __$$StockInfoNotAvailableImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$StockInfoNotAvailableImplCopyWithImpl<$Res>
+    extends _$ApiFailureCopyWithImpl<$Res, _$StockInfoNotAvailableImpl>
+    implements _$$StockInfoNotAvailableImplCopyWith<$Res> {
+  __$$StockInfoNotAvailableImplCopyWithImpl(_$StockInfoNotAvailableImpl _value,
+      $Res Function(_$StockInfoNotAvailableImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$StockInfoNotAvailableImpl implements _StockInfoNotAvailable {
+  const _$StockInfoNotAvailableImpl();
+
+  @override
+  String toString() {
+    return 'ApiFailure.stockInfoNotAvailable()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$StockInfoNotAvailableImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String message) other,
+    required TResult Function(String message) serverError,
+    required TResult Function() poorConnection,
+    required TResult Function() serverTimeout,
+    required TResult Function() userNotFound,
+    required TResult Function() marketplaceTnCAcceptanceError,
+    required TResult Function() invalidEmailAndPasswordCombination,
+    required TResult Function() accountLocked,
+    required TResult Function() accountExpired,
+    required TResult Function() tokenExpired,
+    required TResult Function() authenticationFailed,
+    required TResult Function() proxyLoginRolePermissionNotMatch,
+    required TResult Function() proxyLoginZPTargetRoleNotMatch,
+    required TResult Function() proxyLoginZPSalesOrgNotMatch,
+    required TResult Function() passwordResetFail,
+    required TResult Function() deviceNotSupportBiometric,
+    required TResult Function() cannotCheckBiometrics,
+    required TResult Function() noSupportedBiometrics,
+    required TResult Function() invalidBiometric,
+    required TResult Function() priceOverrideNotFound,
+    required TResult Function() productOutOfStock,
+    required TResult Function() photoPermissionFailed,
+    required TResult Function() storagePermissionFailed,
+    required TResult Function() invalidFileFormat,
+    required TResult Function() uploadCountExcideLimit,
+    required TResult Function() productDetailRoute,
+    required TResult Function() orderDetailRoute,
+    required TResult Function() returnDetailRoute,
+    required TResult Function() paymentDetailRoute,
+    required TResult Function() invoiceDetailRoute,
+    required TResult Function() languageChangeFail,
+    required TResult Function(String productNumber) scannedProductNotFound,
+    required TResult Function(bool permanentlyDenied) cameraPermissionFailed,
+    required TResult Function() userNameNotFound,
+    required TResult Function() uploadedFileSizeExceed,
+    required TResult Function(String adviceNumber) paymentAdviceDeleteFailed,
+    required TResult Function() allReorderItemInvalid,
+    required TResult Function(String maximumNumber) maximumCartQuantityExceed,
+    required TResult Function() cartHasDifferentAddress,
+    required TResult Function() articleannuncementTagFetchingError,
+    required TResult Function() attachmentDownloadError,
+    required TResult Function(String message) openDownloadedFileError,
+    required TResult Function() addAnimalHealthWithNormalProductToCart,
+    required TResult Function() missingzzHtmcs,
+    required TResult Function() stockInfoNotAvailable,
+  }) {
+    return stockInfoNotAvailable();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String message)? other,
+    TResult? Function(String message)? serverError,
+    TResult? Function()? poorConnection,
+    TResult? Function()? serverTimeout,
+    TResult? Function()? userNotFound,
+    TResult? Function()? marketplaceTnCAcceptanceError,
+    TResult? Function()? invalidEmailAndPasswordCombination,
+    TResult? Function()? accountLocked,
+    TResult? Function()? accountExpired,
+    TResult? Function()? tokenExpired,
+    TResult? Function()? authenticationFailed,
+    TResult? Function()? proxyLoginRolePermissionNotMatch,
+    TResult? Function()? proxyLoginZPTargetRoleNotMatch,
+    TResult? Function()? proxyLoginZPSalesOrgNotMatch,
+    TResult? Function()? passwordResetFail,
+    TResult? Function()? deviceNotSupportBiometric,
+    TResult? Function()? cannotCheckBiometrics,
+    TResult? Function()? noSupportedBiometrics,
+    TResult? Function()? invalidBiometric,
+    TResult? Function()? priceOverrideNotFound,
+    TResult? Function()? productOutOfStock,
+    TResult? Function()? photoPermissionFailed,
+    TResult? Function()? storagePermissionFailed,
+    TResult? Function()? invalidFileFormat,
+    TResult? Function()? uploadCountExcideLimit,
+    TResult? Function()? productDetailRoute,
+    TResult? Function()? orderDetailRoute,
+    TResult? Function()? returnDetailRoute,
+    TResult? Function()? paymentDetailRoute,
+    TResult? Function()? invoiceDetailRoute,
+    TResult? Function()? languageChangeFail,
+    TResult? Function(String productNumber)? scannedProductNotFound,
+    TResult? Function(bool permanentlyDenied)? cameraPermissionFailed,
+    TResult? Function()? userNameNotFound,
+    TResult? Function()? uploadedFileSizeExceed,
+    TResult? Function(String adviceNumber)? paymentAdviceDeleteFailed,
+    TResult? Function()? allReorderItemInvalid,
+    TResult? Function(String maximumNumber)? maximumCartQuantityExceed,
+    TResult? Function()? cartHasDifferentAddress,
+    TResult? Function()? articleannuncementTagFetchingError,
+    TResult? Function()? attachmentDownloadError,
+    TResult? Function(String message)? openDownloadedFileError,
+    TResult? Function()? addAnimalHealthWithNormalProductToCart,
+    TResult? Function()? missingzzHtmcs,
+    TResult? Function()? stockInfoNotAvailable,
+  }) {
+    return stockInfoNotAvailable?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String message)? other,
+    TResult Function(String message)? serverError,
+    TResult Function()? poorConnection,
+    TResult Function()? serverTimeout,
+    TResult Function()? userNotFound,
+    TResult Function()? marketplaceTnCAcceptanceError,
+    TResult Function()? invalidEmailAndPasswordCombination,
+    TResult Function()? accountLocked,
+    TResult Function()? accountExpired,
+    TResult Function()? tokenExpired,
+    TResult Function()? authenticationFailed,
+    TResult Function()? proxyLoginRolePermissionNotMatch,
+    TResult Function()? proxyLoginZPTargetRoleNotMatch,
+    TResult Function()? proxyLoginZPSalesOrgNotMatch,
+    TResult Function()? passwordResetFail,
+    TResult Function()? deviceNotSupportBiometric,
+    TResult Function()? cannotCheckBiometrics,
+    TResult Function()? noSupportedBiometrics,
+    TResult Function()? invalidBiometric,
+    TResult Function()? priceOverrideNotFound,
+    TResult Function()? productOutOfStock,
+    TResult Function()? photoPermissionFailed,
+    TResult Function()? storagePermissionFailed,
+    TResult Function()? invalidFileFormat,
+    TResult Function()? uploadCountExcideLimit,
+    TResult Function()? productDetailRoute,
+    TResult Function()? orderDetailRoute,
+    TResult Function()? returnDetailRoute,
+    TResult Function()? paymentDetailRoute,
+    TResult Function()? invoiceDetailRoute,
+    TResult Function()? languageChangeFail,
+    TResult Function(String productNumber)? scannedProductNotFound,
+    TResult Function(bool permanentlyDenied)? cameraPermissionFailed,
+    TResult Function()? userNameNotFound,
+    TResult Function()? uploadedFileSizeExceed,
+    TResult Function(String adviceNumber)? paymentAdviceDeleteFailed,
+    TResult Function()? allReorderItemInvalid,
+    TResult Function(String maximumNumber)? maximumCartQuantityExceed,
+    TResult Function()? cartHasDifferentAddress,
+    TResult Function()? articleannuncementTagFetchingError,
+    TResult Function()? attachmentDownloadError,
+    TResult Function(String message)? openDownloadedFileError,
+    TResult Function()? addAnimalHealthWithNormalProductToCart,
+    TResult Function()? missingzzHtmcs,
+    TResult Function()? stockInfoNotAvailable,
+    required TResult orElse(),
+  }) {
+    if (stockInfoNotAvailable != null) {
+      return stockInfoNotAvailable();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Other value) other,
+    required TResult Function(_ServerError value) serverError,
+    required TResult Function(_PoorConnection value) poorConnection,
+    required TResult Function(_ServerTimeout value) serverTimeout,
+    required TResult Function(_UserNotFound value) userNotFound,
+    required TResult Function(_MarketPlaceTnCAcceptanceError value)
+        marketplaceTnCAcceptanceError,
+    required TResult Function(_InvalidEmailAndPasswordCombination value)
+        invalidEmailAndPasswordCombination,
+    required TResult Function(_AccountLocked value) accountLocked,
+    required TResult Function(_AccountExpired value) accountExpired,
+    required TResult Function(_TokenExpired value) tokenExpired,
+    required TResult Function(_AuthenticationFailed value) authenticationFailed,
+    required TResult Function(_ProxyLoginRolePermissionNotMatch value)
+        proxyLoginRolePermissionNotMatch,
+    required TResult Function(_ProxyLoginZPTargetRoleNotMatch value)
+        proxyLoginZPTargetRoleNotMatch,
+    required TResult Function(_ProxyLoginZPSalesOrgNotMatch value)
+        proxyLoginZPSalesOrgNotMatch,
+    required TResult Function(_PasswordResetFail value) passwordResetFail,
+    required TResult Function(_DeviceNotSupportBiometric value)
+        deviceNotSupportBiometric,
+    required TResult Function(_CannotCheckBiometrics value)
+        cannotCheckBiometrics,
+    required TResult Function(_NoSupportedBiometrics value)
+        noSupportedBiometrics,
+    required TResult Function(_InvalidBiometric value) invalidBiometric,
+    required TResult Function(_PriceOverrideNotFound value)
+        priceOverrideNotFound,
+    required TResult Function(_ProductOutOfStock value) productOutOfStock,
+    required TResult Function(_PhotoPermissionFailed value)
+        photoPermissionFailed,
+    required TResult Function(_StoragePermissionFailed value)
+        storagePermissionFailed,
+    required TResult Function(_InvalidFileFormat value) invalidFileFormat,
+    required TResult Function(_UploadCountExcideLimit value)
+        uploadCountExcideLimit,
+    required TResult Function(_ProductDetailRoute value) productDetailRoute,
+    required TResult Function(_OrderDetailRoute value) orderDetailRoute,
+    required TResult Function(_ReturnDetailRoute value) returnDetailRoute,
+    required TResult Function(_PaymentDetailRoute value) paymentDetailRoute,
+    required TResult Function(_InvoiceDetailRoute value) invoiceDetailRoute,
+    required TResult Function(_LanguageChangeFail value) languageChangeFail,
+    required TResult Function(_ScannedProductNotFound value)
+        scannedProductNotFound,
+    required TResult Function(_CameraPermissionFailed value)
+        cameraPermissionFailed,
+    required TResult Function(_UserNameNotFound value) userNameNotFound,
+    required TResult Function(_UploadedFileSizeExceed value)
+        uploadedFileSizeExceed,
+    required TResult Function(_PaymentAdviceDeleteFailed value)
+        paymentAdviceDeleteFailed,
+    required TResult Function(_AllReorderItemInvalid value)
+        allReorderItemInvalid,
+    required TResult Function(_MaximumCartQuantityExceed value)
+        maximumCartQuantityExceed,
+    required TResult Function(_CartHasDifferentAddress value)
+        cartHasDifferentAddress,
+    required TResult Function(_ArticleannuncementTagFetchingError value)
+        articleannuncementTagFetchingError,
+    required TResult Function(_AttachmentDownloadError value)
+        attachmentDownloadError,
+    required TResult Function(_OpenDownloadedFileError value)
+        openDownloadedFileError,
+    required TResult Function(_AddAnimalHealthWithNormalProductToCart value)
+        addAnimalHealthWithNormalProductToCart,
+    required TResult Function(_MissingzzHtmcs value) missingzzHtmcs,
+    required TResult Function(_StockInfoNotAvailable value)
+        stockInfoNotAvailable,
+  }) {
+    return stockInfoNotAvailable(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Other value)? other,
+    TResult? Function(_ServerError value)? serverError,
+    TResult? Function(_PoorConnection value)? poorConnection,
+    TResult? Function(_ServerTimeout value)? serverTimeout,
+    TResult? Function(_UserNotFound value)? userNotFound,
+    TResult? Function(_MarketPlaceTnCAcceptanceError value)?
+        marketplaceTnCAcceptanceError,
+    TResult? Function(_InvalidEmailAndPasswordCombination value)?
+        invalidEmailAndPasswordCombination,
+    TResult? Function(_AccountLocked value)? accountLocked,
+    TResult? Function(_AccountExpired value)? accountExpired,
+    TResult? Function(_TokenExpired value)? tokenExpired,
+    TResult? Function(_AuthenticationFailed value)? authenticationFailed,
+    TResult? Function(_ProxyLoginRolePermissionNotMatch value)?
+        proxyLoginRolePermissionNotMatch,
+    TResult? Function(_ProxyLoginZPTargetRoleNotMatch value)?
+        proxyLoginZPTargetRoleNotMatch,
+    TResult? Function(_ProxyLoginZPSalesOrgNotMatch value)?
+        proxyLoginZPSalesOrgNotMatch,
+    TResult? Function(_PasswordResetFail value)? passwordResetFail,
+    TResult? Function(_DeviceNotSupportBiometric value)?
+        deviceNotSupportBiometric,
+    TResult? Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
+    TResult? Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
+    TResult? Function(_InvalidBiometric value)? invalidBiometric,
+    TResult? Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
+    TResult? Function(_ProductOutOfStock value)? productOutOfStock,
+    TResult? Function(_PhotoPermissionFailed value)? photoPermissionFailed,
+    TResult? Function(_StoragePermissionFailed value)? storagePermissionFailed,
+    TResult? Function(_InvalidFileFormat value)? invalidFileFormat,
+    TResult? Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
+    TResult? Function(_ProductDetailRoute value)? productDetailRoute,
+    TResult? Function(_OrderDetailRoute value)? orderDetailRoute,
+    TResult? Function(_ReturnDetailRoute value)? returnDetailRoute,
+    TResult? Function(_PaymentDetailRoute value)? paymentDetailRoute,
+    TResult? Function(_InvoiceDetailRoute value)? invoiceDetailRoute,
+    TResult? Function(_LanguageChangeFail value)? languageChangeFail,
+    TResult? Function(_ScannedProductNotFound value)? scannedProductNotFound,
+    TResult? Function(_CameraPermissionFailed value)? cameraPermissionFailed,
+    TResult? Function(_UserNameNotFound value)? userNameNotFound,
+    TResult? Function(_UploadedFileSizeExceed value)? uploadedFileSizeExceed,
+    TResult? Function(_PaymentAdviceDeleteFailed value)?
+        paymentAdviceDeleteFailed,
+    TResult? Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult? Function(_MaximumCartQuantityExceed value)?
+        maximumCartQuantityExceed,
+    TResult? Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
+    TResult? Function(_ArticleannuncementTagFetchingError value)?
+        articleannuncementTagFetchingError,
+    TResult? Function(_AttachmentDownloadError value)? attachmentDownloadError,
+    TResult? Function(_OpenDownloadedFileError value)? openDownloadedFileError,
+    TResult? Function(_AddAnimalHealthWithNormalProductToCart value)?
+        addAnimalHealthWithNormalProductToCart,
+    TResult? Function(_MissingzzHtmcs value)? missingzzHtmcs,
+    TResult? Function(_StockInfoNotAvailable value)? stockInfoNotAvailable,
+  }) {
+    return stockInfoNotAvailable?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Other value)? other,
+    TResult Function(_ServerError value)? serverError,
+    TResult Function(_PoorConnection value)? poorConnection,
+    TResult Function(_ServerTimeout value)? serverTimeout,
+    TResult Function(_UserNotFound value)? userNotFound,
+    TResult Function(_MarketPlaceTnCAcceptanceError value)?
+        marketplaceTnCAcceptanceError,
+    TResult Function(_InvalidEmailAndPasswordCombination value)?
+        invalidEmailAndPasswordCombination,
+    TResult Function(_AccountLocked value)? accountLocked,
+    TResult Function(_AccountExpired value)? accountExpired,
+    TResult Function(_TokenExpired value)? tokenExpired,
+    TResult Function(_AuthenticationFailed value)? authenticationFailed,
+    TResult Function(_ProxyLoginRolePermissionNotMatch value)?
+        proxyLoginRolePermissionNotMatch,
+    TResult Function(_ProxyLoginZPTargetRoleNotMatch value)?
+        proxyLoginZPTargetRoleNotMatch,
+    TResult Function(_ProxyLoginZPSalesOrgNotMatch value)?
+        proxyLoginZPSalesOrgNotMatch,
+    TResult Function(_PasswordResetFail value)? passwordResetFail,
+    TResult Function(_DeviceNotSupportBiometric value)?
+        deviceNotSupportBiometric,
+    TResult Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
+    TResult Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
+    TResult Function(_InvalidBiometric value)? invalidBiometric,
+    TResult Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
+    TResult Function(_ProductOutOfStock value)? productOutOfStock,
+    TResult Function(_PhotoPermissionFailed value)? photoPermissionFailed,
+    TResult Function(_StoragePermissionFailed value)? storagePermissionFailed,
+    TResult Function(_InvalidFileFormat value)? invalidFileFormat,
+    TResult Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
+    TResult Function(_ProductDetailRoute value)? productDetailRoute,
+    TResult Function(_OrderDetailRoute value)? orderDetailRoute,
+    TResult Function(_ReturnDetailRoute value)? returnDetailRoute,
+    TResult Function(_PaymentDetailRoute value)? paymentDetailRoute,
+    TResult Function(_InvoiceDetailRoute value)? invoiceDetailRoute,
+    TResult Function(_LanguageChangeFail value)? languageChangeFail,
+    TResult Function(_ScannedProductNotFound value)? scannedProductNotFound,
+    TResult Function(_CameraPermissionFailed value)? cameraPermissionFailed,
+    TResult Function(_UserNameNotFound value)? userNameNotFound,
+    TResult Function(_UploadedFileSizeExceed value)? uploadedFileSizeExceed,
+    TResult Function(_PaymentAdviceDeleteFailed value)?
+        paymentAdviceDeleteFailed,
+    TResult Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult Function(_MaximumCartQuantityExceed value)?
+        maximumCartQuantityExceed,
+    TResult Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
+    TResult Function(_ArticleannuncementTagFetchingError value)?
+        articleannuncementTagFetchingError,
+    TResult Function(_AttachmentDownloadError value)? attachmentDownloadError,
+    TResult Function(_OpenDownloadedFileError value)? openDownloadedFileError,
+    TResult Function(_AddAnimalHealthWithNormalProductToCart value)?
+        addAnimalHealthWithNormalProductToCart,
+    TResult Function(_MissingzzHtmcs value)? missingzzHtmcs,
+    TResult Function(_StockInfoNotAvailable value)? stockInfoNotAvailable,
+    required TResult orElse(),
+  }) {
+    if (stockInfoNotAvailable != null) {
+      return stockInfoNotAvailable(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _StockInfoNotAvailable implements ApiFailure {
+  const factory _StockInfoNotAvailable() = _$StockInfoNotAvailableImpl;
 }

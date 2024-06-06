@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/account_selector.dart';
@@ -13,6 +15,7 @@ import 'package:ezrxmobile/domain/chatbot/repository/i_chatbot_repository.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/mixpanel/repository/i_mixpanel_repository.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/order/repository/i_stock_info_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -29,14 +32,18 @@ class EligibilityBloc extends Bloc<EligibilityEvent, EligibilityState> {
   final IMixpanelRepository mixpanelRepository;
   final ICustomerCodeRepository customerCodeRepository;
   final Config config;
+  StreamSubscription<bool>? _stockApiStatusStreamSubscription;
+  IStockInfoRepository stockRepository;
 
   EligibilityBloc({
     required this.chatBotRepository,
     required this.mixpanelRepository,
     required this.customerCodeRepository,
     required this.config,
+    required this.stockRepository,
   }) : super(EligibilityState.initial()) {
     on<EligibilityEvent>(_onEvent);
+    add(const EligibilityEvent.watchStockApiStatus());
   }
 
   Future<void> _onEvent(
@@ -225,6 +232,30 @@ class EligibilityBloc extends Bloc<EligibilityEvent, EligibilityState> {
           customerCodeConfig: e.customerCodeConfig,
         ),
       ),
+      updateStockInfoAvailability: (_UpdateStockInfoAvailability e) async =>
+          emit(
+        state.copyWith(
+          isStockInfoNotAvailable: e.isStockInfoNotAvailable,
+        ),
+      ),
+      watchStockApiStatus: (_WatchStockApiStatus e) {
+        _stockApiStatusStreamSubscription?.cancel();
+        _stockApiStatusStreamSubscription =
+            stockRepository.watchStockApiStatus().listen((event) {
+          add(
+            EligibilityEvent.updateStockInfoAvailability(
+              isStockInfoNotAvailable: event,
+            ),
+          );
+        });
+      },
     );
+  }
+
+  @override
+  Future<void> close() async {
+    await _stockApiStatusStreamSubscription?.cancel();
+
+    return super.close();
   }
 }

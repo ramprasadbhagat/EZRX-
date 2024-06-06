@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:ezrxmobile/domain/account/error/cart_exception.dart';
+import 'package:ezrxmobile/domain/order/error/order_exception.dart';
 import 'package:ezrxmobile/domain/payments/error/payment_exception.dart';
 import 'package:universal_io/io.dart';
 
@@ -62,6 +63,8 @@ class FailureHandler {
           return ApiFailure.other('${(error as PlatformException).message}');
         case const (OtherException):
           return ApiFailure.other((error as OtherException).message);
+        case const (StockInfoException):
+          return const ApiFailure.stockInfoNotAvailable();
 
         default:
           return ApiFailure.other(error.toString());

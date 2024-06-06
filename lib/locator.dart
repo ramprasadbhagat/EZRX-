@@ -327,6 +327,7 @@ import 'package:ezrxmobile/infrastructure/order/repository/product_details_repos
 import 'package:ezrxmobile/infrastructure/order/repository/product_search_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/re_order_permission_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/scan_material_info_repository.dart';
+import 'package:ezrxmobile/infrastructure/order/repository/stock_info_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/tender_contract_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/view_by_item_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/view_by_order_details_repository.dart';
@@ -739,6 +740,7 @@ void setupLocator() {
       materialListRepository: locator<MaterialListRepository>(),
       cartRepository: locator<CartRepository>(),
       config: locator<Config>(),
+      stockInfoRepository: locator<StockInfoRepository>(),
     ),
   );
   //============================================================
@@ -856,6 +858,7 @@ void setupLocator() {
       mixpanelRepository: locator<MixpanelRepository>(),
       customerCodeRepository: locator<CustomerCodeRepository>(),
       config: locator<Config>(),
+      stockRepository: locator<StockInfoRepository>(),
     ),
   );
 
@@ -932,7 +935,10 @@ void setupLocator() {
   );
 
   locator.registerLazySingleton(
-    () => OrderSummaryBloc(repository: locator<OrderRepository>()),
+    () => OrderSummaryBloc(
+      repository: locator<OrderRepository>(),
+      stockInfoRepository: locator<StockInfoRepository>(),
+    ),
   );
 
   locator.registerLazySingleton(
@@ -1009,6 +1015,7 @@ void setupLocator() {
       materialListRepository: locator<MaterialListRepository>(),
       favouriteRepository: locator<FavouriteRepository>(),
       config: locator<Config>(),
+      stockInfoRepository: locator<StockInfoRepository>(),
     ),
   );
 
@@ -1071,6 +1078,7 @@ void setupLocator() {
     () => ProductDetailBloc(
       productDetailRepository: locator<ProductDetailRepository>(),
       favouriteRepository: locator<FavouriteRepository>(),
+      stockInfoRepository: locator<StockInfoRepository>(),
     ),
   );
 
@@ -1736,6 +1744,7 @@ void setupLocator() {
     () => CartBloc(
       locator<CartRepository>(),
       locator<ProductDetailRepository>(),
+      locator<StockInfoRepository>(),
     ),
   );
 
@@ -2142,6 +2151,7 @@ void setupLocator() {
       productDetailRepository: locator<ProductDetailRepository>(),
       materialListRepository: locator<MaterialListRepository>(),
       config: locator<Config>(),
+      stockInfoRepository: locator<StockInfoRepository>(),
     ),
   );
 
@@ -3211,6 +3221,19 @@ void setupLocator() {
   locator.registerFactory(
     () => NotificationSettingsBloc(
       notificationSettingsRepository: locator<NotificationSettingsRepository>(),
+    ),
+  );
+
+  //============================================================
+  //  Stock
+  //
+  //============================================================
+
+  locator.registerLazySingleton(
+    () => StockInfoRepository(
+      config: locator<Config>(),
+      localDataSource: locator<StockInfoLocalDataSource>(),
+      remoteDataSource: locator<StockInfoRemoteDataSource>(),
     ),
   );
 }

@@ -2,6 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/stock_info_local.dart';
+import 'package:ezrxmobile/infrastructure/order/repository/stock_info_repository.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:bloc_test/bloc_test.dart';
@@ -28,6 +29,8 @@ class MockMaterialListRepository extends Mock
 
 class MockFavouriteRepository extends Mock implements FavouriteRepository {}
 
+class StockInfoRepositoryMock extends Mock implements StockInfoRepository {}
+
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   late MaterialListRepository materialListMockRepository;
@@ -42,6 +45,7 @@ void main() {
   late List removeFavouritesList;
   final fakeSearchKey = SearchKey.searchFilter('');
 
+  late StockInfoRepository stockInfoRepositoryMock;
   final materialState = MaterialListState.initial().copyWith(
     salesOrganisation: fakeSGSalesOrganisation,
     configs: fakeSGSalesOrgConfigs,
@@ -72,6 +76,7 @@ void main() {
         await FavouriteLocalDataSource().addFavouriteMaterial();
     removeFavouritesResponseMock =
         await FavouriteLocalDataSource().removeFavouriteMaterial();
+    stockInfoRepositoryMock = StockInfoRepositoryMock();    
   });
 
   setUp(() {
@@ -86,6 +91,7 @@ void main() {
         materialListRepository: materialListMockRepository,
         favouriteRepository: favouriteMockRepository,
         config: config,
+        stockInfoRepository: stockInfoRepositoryMock,
       ),
       setUp: () {
         when(
@@ -146,6 +152,7 @@ void main() {
         materialListRepository: materialListMockRepository,
         favouriteRepository: favouriteMockRepository,
         config: config,
+        stockInfoRepository: stockInfoRepositoryMock,
       ),
       seed: () => materialState,
       setUp: () {
@@ -165,10 +172,13 @@ void main() {
           (invocation) async => Right(materialResponseMock),
         );
         when(
-          () => materialListMockRepository.getStockInfoList(
-            materials: materialResponseMock.products,
+          () => stockInfoRepositoryMock.getStockInfoList(
+            materials: materialResponseMock.products
+                .map((e) => e.materialNumber)
+                .toList(),
             salesOrganisation: fakeSGSalesOrganisation,
             customerCodeInfo: fakeCustomerCodeInfo,
+            shipToInfo: fakeShipToInfo,
           ),
         ).thenAnswer((_) async => const Left(ApiFailure.other('fake-error')));
       },
@@ -217,6 +227,7 @@ void main() {
         materialListRepository: materialListMockRepository,
         favouriteRepository: favouriteMockRepository,
         config: config,
+        stockInfoRepository: stockInfoRepositoryMock,
       ),
       seed: () => materialState,
       setUp: () {
@@ -274,6 +285,7 @@ void main() {
         materialListRepository: materialListMockRepository,
         favouriteRepository: favouriteMockRepository,
         config: config,
+        stockInfoRepository: stockInfoRepositoryMock,
       ),
       seed: () => materialState,
       act: (MaterialListBloc bloc) {
@@ -296,6 +308,7 @@ void main() {
         materialListRepository: materialListMockRepository,
         favouriteRepository: favouriteMockRepository,
         config: config,
+        stockInfoRepository: stockInfoRepositoryMock,
       ),
       setUp: () {
         when(
@@ -314,10 +327,13 @@ void main() {
           (invocation) async => Right(materialResponseMock),
         );
         when(
-          () => materialListMockRepository.getStockInfoList(
-            materials: materialResponseMock.products,
+          () => stockInfoRepositoryMock.getStockInfoList(
+            materials: materialResponseMock.products
+                .map((e) => e.materialNumber)
+                .toList(),
             salesOrganisation: fakeSGSalesOrganisation,
             customerCodeInfo: fakeCustomerCodeInfo,
+            shipToInfo: fakeShipToInfo,
           ),
         ).thenAnswer((_) async => const Left(ApiFailure.other('fake-error')));
       },
@@ -358,6 +374,7 @@ void main() {
         materialListRepository: materialListMockRepository,
         favouriteRepository: favouriteMockRepository,
         config: config,
+        stockInfoRepository: stockInfoRepositoryMock,
       ),
       setUp: () {
         when(
@@ -407,6 +424,7 @@ void main() {
         materialListRepository: materialListMockRepository,
         favouriteRepository: favouriteMockRepository,
         config: config,
+        stockInfoRepository: stockInfoRepositoryMock,
       ),
       setUp: () {
         when(
@@ -431,10 +449,13 @@ void main() {
         );
 
         when(
-          () => materialListMockRepository.getStockInfoList(
-            materials: materialResponseMock.products.skip(20).toList(),
+          () => stockInfoRepositoryMock.getStockInfoList(
+            materials: materialResponseMock.products.skip(20).toList()
+                .map((e) => e.materialNumber)
+                .toList(),
             customerCodeInfo: fakeCustomerCodeInfo,
             salesOrganisation: fakeSGSalesOrganisation,
+            shipToInfo: fakeShipToInfo,
           ),
         ).thenAnswer((_) async => const Left(ApiFailure.poorConnection()));
       },
@@ -488,6 +509,7 @@ void main() {
         materialListRepository: materialListMockRepository,
         favouriteRepository: favouriteMockRepository,
         config: config,
+        stockInfoRepository: stockInfoRepositoryMock,
       ),
       setUp: () {
         when(
@@ -536,6 +558,7 @@ void main() {
         materialListRepository: materialListMockRepository,
         favouriteRepository: favouriteMockRepository,
         config: config,
+        stockInfoRepository: stockInfoRepositoryMock,
       ),
       setUp: () {
         when(
@@ -569,6 +592,7 @@ void main() {
         materialListRepository: materialListMockRepository,
         favouriteRepository: favouriteMockRepository,
         config: config,
+        stockInfoRepository: stockInfoRepositoryMock,
       ),
       setUp: () {
         when(
@@ -617,6 +641,7 @@ void main() {
         materialListRepository: materialListMockRepository,
         favouriteRepository: favouriteMockRepository,
         config: config,
+        stockInfoRepository: stockInfoRepositoryMock,
       ),
       setUp: () {
         when(
@@ -652,6 +677,7 @@ void main() {
         materialListRepository: materialListMockRepository,
         favouriteRepository: favouriteMockRepository,
         config: config,
+        stockInfoRepository: stockInfoRepositoryMock,
       ),
       seed: () => MaterialListState.initial().copyWith(
         materialList: [
@@ -688,6 +714,7 @@ void main() {
         materialListRepository: materialListMockRepository,
         favouriteRepository: favouriteMockRepository,
         config: config,
+        stockInfoRepository: stockInfoRepositoryMock,
       ),
       seed: () => MaterialListState.initial().copyWith(
         materialList: [
@@ -712,6 +739,7 @@ void main() {
         materialListRepository: materialListMockRepository,
         favouriteRepository: favouriteMockRepository,
         config: config,
+        stockInfoRepository: stockInfoRepositoryMock,
       ),
       seed: () => MaterialListState.initial().copyWith(
         materialList: [
@@ -731,6 +759,7 @@ void main() {
         materialListRepository: materialListMockRepository,
         favouriteRepository: favouriteMockRepository,
         config: config,
+        stockInfoRepository: stockInfoRepositoryMock,
       );
       materialBloc.emit(
         MaterialListState.initial().copyWith(
@@ -748,6 +777,7 @@ void main() {
         materialListRepository: materialListMockRepository,
         favouriteRepository: favouriteMockRepository,
         config: config,
+        stockInfoRepository: stockInfoRepositoryMock,
       ),
       seed: () => materialState.copyWith(
         materialList: materialResponseMock.products,
@@ -756,10 +786,13 @@ void main() {
       ),
       setUp: () {
         when(
-          () => materialListMockRepository.getStockInfoList(
-            materials: materialResponseMock.products,
+          () => stockInfoRepositoryMock.getStockInfoList(
+            materials: materialResponseMock.products
+                .map((e) => e.materialNumber)
+                .toList(),
             customerCodeInfo: fakeCustomerCodeInfo,
             salesOrganisation: fakeSGSalesOrganisation,
+            shipToInfo: fakeShipToInfo,
           ),
         ).thenAnswer((_) async => Right(stockInfoList));
       },
@@ -791,6 +824,7 @@ void main() {
         materialListRepository: materialListMockRepository,
         favouriteRepository: favouriteMockRepository,
         config: config,
+        stockInfoRepository: stockInfoRepositoryMock,
       ),
       seed: () => materialState.copyWith(
         materialList: [],
@@ -798,10 +832,11 @@ void main() {
       ),
       setUp: () {
         when(
-          () => materialListMockRepository.getStockInfoList(
+          () => stockInfoRepositoryMock.getStockInfoList(
             materials: [],
             customerCodeInfo: fakeCustomerCodeInfo,
             salesOrganisation: fakeSGSalesOrganisation,
+            shipToInfo: fakeShipToInfo,
           ),
         ).thenAnswer((_) async => const Right(<MaterialStockInfo>[]));
       },
@@ -826,6 +861,7 @@ void main() {
         materialListRepository: materialListMockRepository,
         favouriteRepository: favouriteMockRepository,
         config: config,
+        stockInfoRepository: stockInfoRepositoryMock,
       ),
       seed: () => materialState.copyWith(
         materialList: [
@@ -843,7 +879,7 @@ void main() {
       ),
       setUp: () {
         when(
-          () => materialListMockRepository.getStockInfoList(
+          () => stockInfoRepositoryMock.getStockInfoList(
             materials: [
               MaterialInfo.empty().copyWith(
                 materialNumber: MaterialNumber('fake-bundle-code'),
@@ -854,9 +890,10 @@ void main() {
                   ),
                 ],
               ),
-            ],
+            ].map((e) => e.materialNumber).toList(),
             customerCodeInfo: fakeCustomerCodeInfo,
             salesOrganisation: fakeSGSalesOrganisation,
+            shipToInfo: fakeShipToInfo,
           ),
         ).thenAnswer((_) async => const Right(<MaterialStockInfo>[]));
       },

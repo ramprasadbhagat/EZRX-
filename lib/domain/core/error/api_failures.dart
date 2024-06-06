@@ -78,6 +78,7 @@ class ApiFailure with _$ApiFailure {
   const factory ApiFailure.addAnimalHealthWithNormalProductToCart() =
       _AddAnimalHealthWithNormalProductToCart;
   const factory ApiFailure.missingzzHtmcs() = _MissingzzHtmcs;
+  const factory ApiFailure.stockInfoNotAvailable() = _StockInfoNotAvailable;
 }
 
 extension ApiFailureExt on ApiFailure {
@@ -176,6 +177,8 @@ extension ApiFailureExt on ApiFailure {
         missingzzHtmcs: (_MissingzzHtmcs value) => const TRObject(
           'Missing zzHtmcs parameter',
         ),
+        stockInfoNotAvailable: (_) =>
+            const TRObject('Unable to get stock info'),
       );
   String get nonTranslatedFailureMessage {
     var fullMessage = failureMessage.message;

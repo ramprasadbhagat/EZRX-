@@ -16,6 +16,7 @@ query ($request: GetStockInformationListsRequest!) {
 variables : {
   "request": {
     "customerCode": "0000101219",
+    "shipToCode": "0071115077"
     "salesOrganisation": "2001",
     "materialNumbers": [
       "000000000021038305",

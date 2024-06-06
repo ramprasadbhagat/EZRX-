@@ -5,6 +5,7 @@ import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
+import 'package:ezrxmobile/domain/order/error/order_exception.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/stock_info_query.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/stock_info_dto.dart';
@@ -26,6 +27,7 @@ class StockInfoRemoteDataSource {
     required List<String> materialNumbers,
     required String salesOrg,
     required String selectedCustomerCode,
+    required String selectedShipToCode,
   }) async {
     return await dataSourceExceptionHandler.handle(() async {
       final res = await httpService.request(
@@ -38,6 +40,7 @@ class StockInfoRemoteDataSource {
               'materialNumbers': materialNumbers,
               'customerCode': selectedCustomerCode,
               'salesOrganisation': salesOrg,
+              'shipToCode': selectedShipToCode,
             },
           },
         }),
@@ -55,10 +58,7 @@ class StockInfoRemoteDataSource {
     if (res.data['errors'] != null && res.data['errors'].isNotEmpty) {
       throw ServerException(message: res.data['errors'][0]['message']);
     } else if (res.statusCode != 200) {
-      throw ServerException(
-        code: res.statusCode ?? 0,
-        message: res.statusMessage ?? '',
-      );
+      throw StockInfoException();
     }
   }
 }

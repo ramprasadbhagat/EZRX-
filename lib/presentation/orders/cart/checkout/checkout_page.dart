@@ -39,6 +39,7 @@ import 'package:ezrxmobile/presentation/orders/cart/item/cart_product_combo.dart
 import 'package:ezrxmobile/presentation/orders/cart/price_summary/price_summary_tile.dart';
 import 'package:ezrxmobile/presentation/orders/cart/widget/market_place_delivery_tile.dart';
 import 'package:ezrxmobile/presentation/orders/widgets/price_not_available_message.dart';
+import 'package:ezrxmobile/presentation/orders/widgets/stock_info_banner.dart';
 import 'package:ezrxmobile/presentation/products/widgets/stock_info.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
@@ -108,6 +109,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
           body: Column(
             children: [
               const LicenseExpiredBanner(),
+              const StockInfoBanner(),
               Expanded(
                 child: CustomScrollView(
                   key: WidgetKeys.checkoutScrollList,

@@ -14,6 +14,7 @@ import 'package:ezrxmobile/domain/order/entities/product_meta_data.dart';
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/domain/order/repository/i_favourites_repository.dart';
 import 'package:ezrxmobile/domain/order/repository/i_product_details_repository.dart';
+import 'package:ezrxmobile/domain/order/repository/i_stock_info_repository.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -25,10 +26,12 @@ part 'product_detail_bloc.freezed.dart';
 class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState> {
   final IProductDetailRepository productDetailRepository;
   final IFavouriteRepository favouriteRepository;
+  final IStockInfoRepository stockInfoRepository;
 
   ProductDetailBloc({
     required this.productDetailRepository,
     required this.favouriteRepository,
+    required this.stockInfoRepository,
   }) : super(ProductDetailState.initial()) {
     on<_Fetch>(
       (e, emit) async {
@@ -100,10 +103,11 @@ class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState> {
             failureOrSuccessOption: none(),
           ),
         );
-        final failureOrSuccess = await productDetailRepository.getStockInfoList(
-          materials: e.materials,
+        final failureOrSuccess = await stockInfoRepository.getStockInfoList(
+          materials: e.materials.map((e) => e.materialNumber).toList(),
           customerCodeInfo: state.customerCodeInfo,
           salesOrganisation: state.salesOrganisation,
+          shipToInfo: state.shipToInfo,
         );
 
         failureOrSuccess.fold(
@@ -151,11 +155,12 @@ class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState> {
             failureOrSuccessOption: none(),
           ),
         );
-        final failureOrSuccess = await productDetailRepository.getStockInfo(
+        final failureOrSuccess = await stockInfoRepository.getStockInfo(
           materialNumber:
               state.productDetailAggregate.materialInfo.materialNumber,
           customerCodeInfo: state.customerCodeInfo,
           salesOrganisation: state.salesOrganisation,
+          shipToInfo: state.shipToInfo,
         );
 
         failureOrSuccess.fold(
@@ -242,19 +247,40 @@ class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState> {
           principalCode: state
               .productDetailAggregate.materialInfo.principalData.principalCode,
         );
-        failureOrSuccess.fold(
-          (failure) => emit(
+        await failureOrSuccess.fold(
+          (failure) async => emit(
             state.copyWith(
               isRelatedProductsFetching: false,
               failureOrSuccessOption: optionOf(failureOrSuccess),
             ),
           ),
-          (products) {
+          (products) async {
+            final stockInfoData = await stockInfoRepository.getStockInfoList(
+              customerCodeInfo: state.customerCodeInfo,
+              materials: products.map((e) => e.materialNumber).toList(),
+              salesOrganisation: state.salesOrganisation,
+              shipToInfo: state.shipToInfo,
+            );
+            final stockInfoList = stockInfoData.getOrElse(() => []);
+
+            final similarProduct = products.map(
+              (materialInfo) {
+                final materialStockInfo = stockInfoList.firstWhere(
+                  (MaterialStockInfo materialStockInfo) =>
+                      materialStockInfo.materialNumber == materialInfo.materialNumber,
+                  orElse: () => MaterialStockInfo.empty(),
+                );
+
+                return materialInfo.copyWithStock(
+                  stockInfos: materialStockInfo.stockInfos,
+                );
+              },
+            ).toList();
             emit(
               state.copyWith(
                 isRelatedProductsFetching: false,
                 productDetailAggregate: state.productDetailAggregate.copyWith(
-                  similarProduct: products,
+                  similarProduct: similarProduct,
                 ),
                 failureOrSuccessOption: optionOf(failureOrSuccess),
               ),

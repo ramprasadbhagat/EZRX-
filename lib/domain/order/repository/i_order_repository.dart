@@ -4,13 +4,11 @@ import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
-import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/order/entities/delivery_info_data.dart';
 import 'package:ezrxmobile/domain/order/entities/order_document_type.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details.dart';
-import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/domain/order/entities/submit_order_response.dart';
 
 abstract class IOrderRepository {
@@ -39,12 +37,5 @@ abstract class IOrderRepository {
     required SalesOrganisation salesOrganisation,
     required List<PriceAggregate> cartProducts,
     required ShipToInfo shipToInfo,
-  });
-
-  Future<Either<ApiFailure, List<MaterialStockInfo>>>
-      getConfirmedOrderStockInfo({
-    required List<OrderHistoryDetails> orderHistoryDetailList,
-    required SalesOrg salesOrg,
-    required CustomerCodeInfo customerCodeInfo,
   });
 }

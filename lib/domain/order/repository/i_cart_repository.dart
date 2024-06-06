@@ -19,34 +19,11 @@ abstract class ICartRepository {
   //TODO: evaluate which methods will be removed with addition to this
   Future<Either<ApiFailure, Unit>> clearCart();
 
-  Future<Either<ApiFailure, List<PriceAggregate>>> updateMaterialDealBonus({
-    required List<PriceAggregate> materials,
-    required CustomerCodeInfo customerCodeInfo,
-    required SalesOrganisationConfigs salesOrganisationConfigs,
-    required SalesOrganisation salesOrganisation,
-    required ShipToInfo shipToInfo,
-  });
-
   ///TODO: Might be used while developing ZMG Group discount
 
   // List<CartItem> updateDiscountQty({
   //   required List<CartItem> items,
   // });
-
-  Future<Either<ApiFailure, Map<MaterialNumber, List<StockInfo>>>>
-      getStockInfoList({
-    required List<MaterialInfo> items,
-    required CustomerCodeInfo customerCodeInfo,
-    required SalesOrganisationConfigs salesOrganisationConfigs,
-    required SalesOrganisation salesOrganisation,
-    required ShipToInfo shipToInfo,
-  });
-
-  Future<Either<ApiFailure, List<MaterialStockInfo>>> getStockInfo({
-    required List<MaterialInfo> materials,
-    required CustomerCodeInfo customerCodeInfo,
-    required SalesOrganisation salesOrganisation,
-  });
 
   //TODO: evaluate which methods will be removed with addition to this
   Future<Either<ApiFailure, List<PriceAggregate>>> upsertCart({
@@ -60,6 +37,7 @@ abstract class ICartRepository {
     required String itemId,
     required RequestCounterOfferDetails counterOfferDetails,
     required String tenderContractNumber,
+    required MaterialStockInfo stockInfo,
   });
 
   Future<Either<ApiFailure, List<PriceAggregate>>> addHistoryItemsToCart({
@@ -128,6 +106,7 @@ abstract class ICartRepository {
     required Language language,
     required RequestCounterOfferDetails counterOfferDetails,
     EZReachBanner? banner,
+    required List<MaterialStockInfo> materialStockInfo,
   });
 
   Future<Either<ApiFailure, List<PriceAggregate>>>

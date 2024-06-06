@@ -3,6 +3,7 @@ import 'package:collection/collection.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/order/po_attachment/po_attachment_bloc.dart';
 import 'package:ezrxmobile/application/order/tender_contract/tender_contract_list_bloc.dart';
+import 'package:ezrxmobile/presentation/orders/widgets/stock_info_banner.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
@@ -399,6 +400,7 @@ class _CartPageState extends State<CartPage> {
                 children: [
                   const LicenseExpiredBanner(),
                   const EdiUserBanner(),
+                  const StockInfoBanner(),
                   AnnouncementWidget(
                     currentPath: context.router.currentPath,
                   ),

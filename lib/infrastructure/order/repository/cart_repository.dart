@@ -103,52 +103,6 @@ class CartRepository implements ICartRepository {
     return updatedCartItem;
   }*/
 
-  @override
-  Future<Either<ApiFailure, List<PriceAggregate>>> updateMaterialDealBonus({
-    required List<PriceAggregate> materials,
-    required CustomerCodeInfo customerCodeInfo,
-    required SalesOrganisationConfigs salesOrganisationConfigs,
-    required SalesOrganisation salesOrganisation,
-    required ShipToInfo shipToInfo,
-  }) async {
-    try {
-      final materialTemp = [...materials];
-      for (var i = 0; i < materialTemp.length; i++) {
-        final failureOrSuccess = await getStockInfoList(
-          items: materialTemp[i].bonusListToMaterialInfo,
-          customerCodeInfo: customerCodeInfo,
-          salesOrganisationConfigs: salesOrganisationConfigs,
-          salesOrganisation: salesOrganisation,
-          shipToInfo: shipToInfo,
-        );
-        final bonusStockInfoMap = failureOrSuccess.getOrElse(() => {});
-        final dealBonusWithStockInfo =
-            materialTemp[i].bonusSampleItems.map((bonus) {
-          final stockInfoList = bonusStockInfoMap[bonus.materialNumber] ?? [];
-          if (stockInfoList.isNotEmpty) {
-            final stockInfo = stockInfoList.firstWhere(
-              (element) => element.materialNumber == bonus.materialNumber,
-              orElse: () => StockInfo.empty(),
-            );
-
-            return bonus.copyWith(
-              stockInfo: stockInfo,
-            );
-          }
-
-          return bonus;
-        }).toList();
-
-        materialTemp[i] =
-            materialTemp[i].copyWith(bonusSampleItems: dealBonusWithStockInfo);
-      }
-
-      return Right(materialTemp);
-    } catch (e) {
-      return Left(FailureHandler.handleFailure(e));
-    }
-  }
-
   ///TODO: Might be used while developing ZMG group discount
 
   // @override
@@ -180,79 +134,6 @@ class CartRepository implements ICartRepository {
   //           return item;
   //       }
   //     }).toList();
-
-  @override
-  Future<Either<ApiFailure, Map<MaterialNumber, List<StockInfo>>>>
-      getStockInfoList({
-    required List<MaterialInfo> items,
-    required CustomerCodeInfo customerCodeInfo,
-    required SalesOrganisationConfigs salesOrganisationConfigs,
-    required SalesOrganisation salesOrganisation,
-    required ShipToInfo shipToInfo,
-  }) async {
-    try {
-      if (items.isEmpty) return const Right({});
-
-      final stockInfoMap = <MaterialNumber, List<StockInfo>>{};
-
-      final response = await getStockInfo(
-        customerCodeInfo: customerCodeInfo,
-        materials: items,
-        salesOrganisation: salesOrganisation,
-      );
-      final stockInfo = response.fold(
-        (failure) => <MaterialStockInfo>[],
-        (stockInfo) => stockInfo,
-      );
-      stockInfoMap.addAll(
-        {
-          for (final item in items)
-            item.materialNumber: stockInfo
-                .firstWhere(
-                  (element) => element.materialNumber == item.materialNumber,
-                  orElse: () => MaterialStockInfo.empty(),
-                )
-                .stockInfos,
-        },
-      );
-
-      return Right(stockInfoMap);
-    } catch (e) {
-      return Left(FailureHandler.handleFailure(e));
-    }
-  }
-
-  @override
-  Future<Either<ApiFailure, List<MaterialStockInfo>>> getStockInfo({
-    required List<MaterialInfo> materials,
-    required CustomerCodeInfo customerCodeInfo,
-    required SalesOrganisation salesOrganisation,
-  }) async {
-    if (config.appFlavor == Flavor.mock) {
-      try {
-        final stockInfoList =
-            await stockInfoLocalDataSource.getMaterialStockInfoList();
-
-        return Right(stockInfoList);
-      } catch (e) {
-        return Left(FailureHandler.handleFailure(e));
-      }
-    } else {
-      try {
-        final stockInfoList =
-            await stockInfoRemoteDataSource.getMaterialStockInfoList(
-          materialNumbers:
-              materials.map((e) => e.materialNumber.getOrCrash()).toList(),
-          salesOrg: salesOrganisation.salesOrg.getOrCrash(),
-          selectedCustomerCode: customerCodeInfo.customerCodeSoldTo,
-        );
-
-        return Right(stockInfoList);
-      } catch (e) {
-        return Left(FailureHandler.handleFailure(e));
-      }
-    }
-  }
 
   /*void _trackAddToCartSuccessEvent(CartItem cartItem) {
     final isBannerClicked = cartItem.materials.firstWhere(
@@ -375,6 +256,7 @@ class CartRepository implements ICartRepository {
     required int quantity,
     required RequestCounterOfferDetails counterOfferDetails,
     required String tenderContractNumber,
+    required MaterialStockInfo stockInfo,
   }) async {
     if (quantity > config.maximumCartQuantity) {
       return Left(
@@ -412,21 +294,6 @@ class CartRepository implements ICartRepository {
         market: deviceStorage.currentMarket(),
       );
 
-      final response = await getStockInfo(
-        customerCodeInfo: customerCodeInfo,
-        materials: [materialInfo],
-        salesOrganisation: salesOrganisation,
-      );
-      final stockInfo = response
-          .fold(
-            (failure) => <MaterialStockInfo>[],
-            (stockInfo) => stockInfo,
-          )
-          .firstWhere(
-            (element) => element.materialNumber == materialInfo.materialNumber,
-            orElse: () => MaterialStockInfo.empty(),
-          );
-
       final updatedProductList = productList
           .map(
             (element) =>
@@ -452,6 +319,7 @@ class CartRepository implements ICartRepository {
     required Language language,
     required RequestCounterOfferDetails counterOfferDetails,
     EZReachBanner? banner,
+    required List<MaterialStockInfo> materialStockInfo,
   }) async {
     try {
       final products = [
@@ -462,19 +330,20 @@ class CartRepository implements ICartRepository {
       ];
       var productList = <PriceAggregate>[];
 
-      for (final productData in products) {
+      for (var i = 0; i < products.length; i++) {
         final upserCartResult = await upsertCart(
-          materialInfo: productData,
+          materialInfo: products[i],
           salesOrganisation: salesOrganisation,
           salesOrganisationConfig: salesOrganisationConfig,
           customerCodeInfo: customerCodeInfo,
           shipToInfo: shipToInfo,
           language: language,
-          itemId: productData.sampleBonusItemId,
-          quantity: productData.quantity.intValue,
-          counterOfferDetails: productData.counterOfferDetails,
+          itemId: products[i].sampleBonusItemId,
+          quantity: products[i].quantity.intValue,
+          counterOfferDetails: products[i].counterOfferDetails,
           tenderContractNumber:
               product.tenderContract.contractNumber.getOrDefaultValue(''),
+          stockInfo: materialStockInfo[i],
         );
 
         if (upserCartResult.isLeft()) return upserCartResult;

@@ -8,7 +8,6 @@ import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/product_meta_data.dart';
-import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/domain/order/repository/i_product_details_repository.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/device_storage.dart';
@@ -212,47 +211,6 @@ class ProductDetailRepository implements IProductDetailRepository {
   }
 
   @override
-  Future<Either<ApiFailure, StockInfo>> getStockInfo({
-    required MaterialNumber materialNumber,
-    required CustomerCodeInfo customerCodeInfo,
-    required SalesOrganisation salesOrganisation,
-  }) async {
-    if (config.appFlavor == Flavor.mock) {
-      try {
-        final stockInfoList =
-            await stockInfoLocalDataSource.getMaterialStockInfoList();
-
-        return Right(stockInfoList.first.stockInfos.first);
-      } catch (e) {
-        return Left(FailureHandler.handleFailure(e));
-      }
-    } else {
-      try {
-        final stockInfoList =
-            await stockInfoRemoteDataSource.getMaterialStockInfoList(
-          materialNumbers: [materialNumber.getOrCrash()],
-          salesOrg: salesOrganisation.salesOrg.getOrCrash(),
-          selectedCustomerCode: customerCodeInfo.customerCodeSoldTo,
-        );
-        final stockInfo = stockInfoList
-            .firstWhere(
-              (element) => element.materialNumber == materialNumber,
-              orElse: () => MaterialStockInfo.empty(),
-            )
-            .stockInfos
-            .firstWhere(
-              (element) => element.materialNumber == materialNumber,
-              orElse: () => StockInfo.empty(),
-            );
-
-        return Right(stockInfo);
-      } catch (e) {
-        return Left(FailureHandler.handleFailure(e));
-      }
-    }
-  }
-
-  @override
   Future<Either<ApiFailure, List<MaterialInfo>>> getSimilarProduct({
     required MaterialNumber materialNumber,
     required PrincipalCode principalCode,
@@ -280,62 +238,10 @@ class ProductDetailRepository implements IProductDetailRepository {
         salesOrg: salesOrganisation.salesOrg.getOrCrash(),
         market: deviceStorage.currentMarket(),
       );
-      final stockInfoData = await getStockInfoList(
-        customerCodeInfo: customerCodeInfo,
-        materials: products,
-        salesOrganisation: salesOrganisation,
-      );
-      final stockInfoList = stockInfoData.getOrElse(() => []);
-
-      final similarProduct = products.map(
-        (materialInfo) {
-          final materialStockInfo = stockInfoList.firstWhere(
-            (MaterialStockInfo materialStockInfo) =>
-                materialStockInfo.materialNumber == materialInfo.materialNumber,
-            orElse: () => MaterialStockInfo.empty(),
-          );
-
-          return materialInfo.copyWithStock(
-            stockInfos: materialStockInfo.stockInfos,
-          );
-        },
-      ).toList();
-
-      return Right(similarProduct);
+      
+      return Right(products);
     } catch (e) {
       return Left(FailureHandler.handleFailure(e));
-    }
-  }
-
-  @override
-  Future<Either<ApiFailure, List<MaterialStockInfo>>> getStockInfoList({
-    required List<MaterialInfo> materials,
-    required CustomerCodeInfo customerCodeInfo,
-    required SalesOrganisation salesOrganisation,
-  }) async {
-    if (config.appFlavor == Flavor.mock) {
-      try {
-        final stockInfoList =
-            await stockInfoLocalDataSource.getMaterialStockInfoList();
-
-        return Right(stockInfoList);
-      } catch (e) {
-        return Left(FailureHandler.handleFailure(e));
-      }
-    } else {
-      try {
-        final stockInfoList =
-            await stockInfoRemoteDataSource.getMaterialStockInfoList(
-          materialNumbers:
-              materials.map((e) => e.materialNumber.getOrCrash()).toList(),
-          salesOrg: salesOrganisation.salesOrg.getOrCrash(),
-          selectedCustomerCode: customerCodeInfo.customerCodeSoldTo,
-        );
-
-        return Right(stockInfoList);
-      } catch (e) {
-        return Left(FailureHandler.handleFailure(e));
-      }
     }
   }
 

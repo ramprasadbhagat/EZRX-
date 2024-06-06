@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:ezrxmobile/infrastructure/order/repository/stock_info_repository.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -26,6 +27,8 @@ class ProductDetailRepositoryMock extends Mock
 
 class FavouriteRepositoryMock extends Mock implements FavouriteRepository {}
 
+class StockInfoRepositoryMock extends Mock implements StockInfoRepository {}
+
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   late ProductDetailRepository productDetailMockRepository;
@@ -35,12 +38,14 @@ void main() {
   late List<MaterialStockInfo> mockMaterialStockInfo;
   late ProductMetaData mockProductMetaData;
   late List<MaterialInfo> mockSimilarProducts;
+  late List<MaterialInfo> finalSimilarProduct;
   late List<MaterialInfo> mockMaterialInfoWithBundleStockInfo;
   late List<MaterialInfo> fakeMaterialInfoWithBundleStockInfo;
   late MaterialResponse fakeMaterialInfoList;
   late MaterialInfo fakeMaterialInfo;
   late MaterialInfo fakeMaterialInfoWithBundleMaterial;
   final language = Language.english();
+  late StockInfoRepository stockInfoRepositoryMock;
 
   final materialInfoType = MaterialInfoType('material');
   final bundleInfoType = MaterialInfoType('bundle');
@@ -59,6 +64,7 @@ void main() {
   setUpAll(() async {
     productDetailMockRepository = ProductDetailRepositoryMock();
     favouriteMockRepository = FavouriteRepositoryMock();
+    stockInfoRepositoryMock = StockInfoRepositoryMock();
     mockMaterialInfo = await ProductDetailLocalDataSource().getProductDetails();
     mockStockInfo = (await StockInfoLocalDataSource().getStockInfoList()).first;
     fakeMaterialInfoList =
@@ -109,6 +115,7 @@ void main() {
         build: () => ProductDetailBloc(
           productDetailRepository: productDetailMockRepository,
           favouriteRepository: favouriteMockRepository,
+          stockInfoRepository: stockInfoRepositoryMock,
         ),
         setUp: () {
           when(
@@ -157,6 +164,7 @@ void main() {
         build: () => ProductDetailBloc(
           productDetailRepository: productDetailMockRepository,
           favouriteRepository: favouriteMockRepository,
+          stockInfoRepository: stockInfoRepositoryMock,
         ),
         setUp: () {
           when(
@@ -172,12 +180,24 @@ void main() {
             (invocation) async => Right(mockMaterialInfo),
           );
           when(
-            () => productDetailMockRepository.getStockInfo(
+            () => stockInfoRepositoryMock.getStockInfoList(
+              customerCodeInfo: fakeCustomerCodeInfo,
+              salesOrganisation: fakeMYSalesOrganisation,
+              materials:
+                  mockSimilarProducts.map((e) => e.materialNumber).toList(),
+              shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
+            ),
+          ).thenAnswer((invocation) async => Right(mockMaterialStockInfo));
+          when(
+            () => stockInfoRepositoryMock.getStockInfo(
               customerCodeInfo: fakeCustomerCodeInfo,
               salesOrganisation: fakeMYSalesOrganisation,
               materialNumber: mockMaterialInfo.materialNumber,
+              shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
             ),
-          ).thenAnswer((invocation) async => Right(mockStockInfo));
+          ).thenAnswer(
+            (invocation) async => Right(mockStockInfo),
+          );
           when(
             () => productDetailMockRepository.getProductsMetaData(
               materialNumbers: [mockMaterialInfo.materialNumber],
@@ -199,6 +219,20 @@ void main() {
               language: language,
             ),
           ).thenAnswer((invocation) async => Right(mockSimilarProducts));
+          finalSimilarProduct = mockSimilarProducts.map(
+            (materialInfo) {
+              final materialStockInfo = mockMaterialStockInfo.firstWhere(
+                (MaterialStockInfo materialStockInfo) =>
+                    materialStockInfo.materialNumber ==
+                    materialInfo.materialNumber,
+                orElse: () => MaterialStockInfo.empty(),
+              );
+
+              return materialInfo.copyWithStock(
+                stockInfos: materialStockInfo.stockInfos,
+              );
+            },
+          ).toList();
         },
         act: (ProductDetailBloc bloc) {
           bloc.add(
@@ -249,30 +283,35 @@ void main() {
             ),
           ),
           mockInitialState.copyWith(
-            isRelatedProductsFetching: true,
             isMetadataFetching: true,
+            isRelatedProductsFetching: true,
             productDetailAggregate: ProductDetailAggregate.empty().copyWith(
               materialInfo: mockMaterialInfo,
               stockInfo: mockStockInfo,
             ),
           ),
           mockInitialState.copyWith(
-            isMetadataFetching: true,
+            isRelatedProductsFetching: true,
             productDetailAggregate: ProductDetailAggregate.empty().copyWith(
-              materialInfo: mockMaterialInfo,
+              materialInfo: mockMaterialInfo.copyWith(
+                productImages: mockProductMetaData.productImages.first,
+              ),
               stockInfo: mockStockInfo,
-              similarProduct: mockSimilarProducts,
+              productItem: mockProductMetaData.items.isNotEmpty
+                  ? mockProductMetaData.items.first
+                  : ProductItem.empty(),
             ),
-            failureOrSuccessOption: optionOf(Right(mockSimilarProducts)),
           ),
           mockInitialState.copyWith(
             productDetailAggregate: ProductDetailAggregate.empty().copyWith(
               materialInfo: mockMaterialInfo.copyWith(
                 productImages: mockProductMetaData.productImages.first,
               ),
-              productItem: mockProductMetaData.items.first,
               stockInfo: mockStockInfo,
-              similarProduct: mockSimilarProducts,
+              productItem: mockProductMetaData.items.isNotEmpty
+                  ? mockProductMetaData.items.first
+                  : ProductItem.empty(),
+              similarProduct: finalSimilarProduct,
             ),
             failureOrSuccessOption: optionOf(Right(mockSimilarProducts)),
           ),
@@ -284,6 +323,7 @@ void main() {
         build: () => ProductDetailBloc(
           productDetailRepository: productDetailMockRepository,
           favouriteRepository: favouriteMockRepository,
+          stockInfoRepository: stockInfoRepositoryMock,
         ),
         setUp: () {
           when(
@@ -299,10 +339,13 @@ void main() {
             (invocation) async => Right(mockMaterialInfo),
           );
           when(
-            () => productDetailMockRepository.getStockInfoList(
+            () => stockInfoRepositoryMock.getStockInfoList(
               customerCodeInfo: fakeCustomerCodeInfo,
               salesOrganisation: fakeMYSalesOrganisation,
-              materials: mockMaterialInfo.bundle.materials,
+              materials: mockMaterialInfo.bundle.materials
+                  .map((e) => e.materialNumber)
+                  .toList(),
+              shipToInfo: fakeShipToInfo,
             ),
           ).thenAnswer((invocation) async => Right(mockMaterialStockInfo));
           when(
@@ -391,6 +434,7 @@ void main() {
         build: () => ProductDetailBloc(
           productDetailRepository: productDetailMockRepository,
           favouriteRepository: favouriteMockRepository,
+          stockInfoRepository: stockInfoRepositoryMock,
         ),
         setUp: () {
           when(
@@ -437,13 +481,15 @@ void main() {
         build: () => ProductDetailBloc(
           productDetailRepository: productDetailMockRepository,
           favouriteRepository: favouriteMockRepository,
+          stockInfoRepository: stockInfoRepositoryMock,
         ),
         setUp: () {
           when(
-            () => productDetailMockRepository.getStockInfo(
+            () => stockInfoRepositoryMock.getStockInfo(
               customerCodeInfo: fakeCustomerCodeInfo,
               salesOrganisation: fakeMYSalesOrganisation,
               materialNumber: mockMaterialInfo.materialNumber,
+              shipToInfo: fakeShipToInfo,
             ),
           ).thenAnswer(
             (invocation) async => const Left(ApiFailure.other('Fake-Error')),
@@ -483,13 +529,17 @@ void main() {
         build: () => ProductDetailBloc(
           productDetailRepository: productDetailMockRepository,
           favouriteRepository: favouriteMockRepository,
+          stockInfoRepository: stockInfoRepositoryMock,
         ),
         setUp: () {
           when(
-            () => productDetailMockRepository.getStockInfoList(
+            () => stockInfoRepositoryMock.getStockInfoList(
               customerCodeInfo: fakeCustomerCodeInfo,
               salesOrganisation: fakeMYSalesOrganisation,
-              materials: fakeMaterialInfoWithBundleMaterial.bundle.materials,
+              materials: fakeMaterialInfoWithBundleMaterial.bundle.materials
+                  .map((e) => e.materialNumber)
+                  .toList(),
+              shipToInfo: fakeShipToInfo,
             ),
           ).thenAnswer(
             (invocation) async => Right(mockMaterialStockInfo),
@@ -531,13 +581,17 @@ void main() {
         build: () => ProductDetailBloc(
           productDetailRepository: productDetailMockRepository,
           favouriteRepository: favouriteMockRepository,
+          stockInfoRepository: stockInfoRepositoryMock,
         ),
         setUp: () {
           when(
-            () => productDetailMockRepository.getStockInfoList(
+            () => stockInfoRepositoryMock.getStockInfoList(
               customerCodeInfo: fakeCustomerCodeInfo,
               salesOrganisation: fakeMYSalesOrganisation,
-              materials: mockMaterialInfo.bundle.materials,
+              materials: mockMaterialInfo.bundle.materials
+                  .map((e) => e.materialNumber)
+                  .toList(),
+              shipToInfo: fakeShipToInfo,
             ),
           ).thenAnswer(
             (invocation) async => const Left(ApiFailure.other('Fake-Error')),
@@ -577,6 +631,7 @@ void main() {
         build: () => ProductDetailBloc(
           productDetailRepository: productDetailMockRepository,
           favouriteRepository: favouriteMockRepository,
+          stockInfoRepository: stockInfoRepositoryMock,
         ),
         setUp: () {
           when(
@@ -624,6 +679,7 @@ void main() {
         build: () => ProductDetailBloc(
           productDetailRepository: productDetailMockRepository,
           favouriteRepository: favouriteMockRepository,
+          stockInfoRepository: stockInfoRepositoryMock,
         ),
         setUp: () {
           when(
@@ -683,6 +739,7 @@ void main() {
         build: () => ProductDetailBloc(
           productDetailRepository: productDetailMockRepository,
           favouriteRepository: favouriteMockRepository,
+          stockInfoRepository: stockInfoRepositoryMock,
         ),
         act: (ProductDetailBloc bloc) {
           bloc.add(
@@ -719,6 +776,7 @@ void main() {
         build: () => ProductDetailBloc(
           productDetailRepository: productDetailMockRepository,
           favouriteRepository: favouriteMockRepository,
+          stockInfoRepository: stockInfoRepositoryMock,
         ),
         setUp: () {
           when(
@@ -779,6 +837,7 @@ void main() {
         build: () => ProductDetailBloc(
           productDetailRepository: productDetailMockRepository,
           favouriteRepository: favouriteMockRepository,
+          stockInfoRepository: stockInfoRepositoryMock,
         ),
         setUp: () {
           when(
@@ -842,6 +901,7 @@ void main() {
         build: () => ProductDetailBloc(
           productDetailRepository: productDetailMockRepository,
           favouriteRepository: favouriteMockRepository,
+          stockInfoRepository: stockInfoRepositoryMock,
         ),
         setUp: () {
           when(
@@ -897,6 +957,7 @@ void main() {
         build: () => ProductDetailBloc(
           productDetailRepository: productDetailMockRepository,
           favouriteRepository: favouriteMockRepository,
+          stockInfoRepository: stockInfoRepositoryMock,
         ),
         setUp: () {
           when(
@@ -959,6 +1020,7 @@ void main() {
         build: () => ProductDetailBloc(
           productDetailRepository: productDetailMockRepository,
           favouriteRepository: favouriteMockRepository,
+          stockInfoRepository: stockInfoRepositoryMock,
         ),
         setUp: () {
           when(
@@ -1034,6 +1096,7 @@ void main() {
         build: () => ProductDetailBloc(
           productDetailRepository: productDetailMockRepository,
           favouriteRepository: favouriteMockRepository,
+          stockInfoRepository: stockInfoRepositoryMock,
         ),
         setUp: () {
           when(
@@ -1124,6 +1187,7 @@ void main() {
         build: () => ProductDetailBloc(
           productDetailRepository: productDetailMockRepository,
           favouriteRepository: favouriteMockRepository,
+          stockInfoRepository: stockInfoRepositoryMock,
         ),
         act: (ProductDetailBloc bloc) {
           bloc.add(
@@ -1153,6 +1217,7 @@ void main() {
         build: () => ProductDetailBloc(
           productDetailRepository: productDetailMockRepository,
           favouriteRepository: favouriteMockRepository,
+          stockInfoRepository: stockInfoRepositoryMock,
         ),
         act: (ProductDetailBloc bloc) {
           bloc.add(
