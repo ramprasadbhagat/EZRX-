@@ -49,8 +49,7 @@ class _ProductSuggestionSection extends StatelessWidget {
           parentRoute: parentRoute,
         ),
         items: state.suggestedProductList,
-        noRecordFoundWidget:
-            const NoRecordFound(title: 'That didn’t match anything'),
+        noRecordFoundWidget: const NoRecordFound(),
       ),
     );
   }
