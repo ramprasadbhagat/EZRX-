@@ -756,7 +756,7 @@ class PriceAggregate with _$PriceAggregate {
       isZdp5DiscountEligible && hasRemainingQuotaReached;
 
   bool get isPreOrder =>
-      !inStock &&
+      containOOSItem &&
       salesOrgConfig.addOosMaterials.getOrDefaultValue(false) &&
       !salesOrgConfig.hideStockDisplay;
 

@@ -258,3 +258,8 @@ class MaterialResponse with _$MaterialResponse {
     required List<MaterialInfo> products,
   }) = _MaterialResponse;
 }
+
+extension PriceAggregateExtension on List<MaterialInfo> {
+  List<MaterialInfo> get getOutOfStockMaterialList =>
+      where((element) => !element.inStock).toList();
+}

@@ -94,6 +94,7 @@ void main() {
   late List<PriceAggregate> mockCartItemWithDataList2;
   late List<PriceAggregate> mockCartItemBundles;
   late List<PriceAggregate> mockCartItemBundles2;
+  late List<PriceAggregate> mockCartItemBundlesWithValidStock;
   late List<PriceAggregate> mockCartItemDiscountBundles;
   late MaterialListBloc materialListBlocMock;
   late TenderContractBloc tenderContractBlocMock;
@@ -208,6 +209,43 @@ void main() {
                   StockInfo.empty().copyWith(
                     materialNumber: MaterialNumber('fake-material-1'),
                     inStock: MaterialInStock('No'),
+                  ),
+                ],
+              ),
+              MaterialInfo.empty().copyWith(
+                materialNumber: MaterialNumber('fake-material-2'),
+                quantity: MaterialQty(10),
+                stockInfos: <StockInfo>[
+                  StockInfo.empty().copyWith(
+                    materialNumber: MaterialNumber('fake-material-2'),
+                    inStock: MaterialInStock('Yes'),
+                  ),
+                ],
+              ),
+            ],
+            bundleInformation: [],
+            bundleCode: 'fake-bundle-code',
+            bundleName: BundleName('test'),
+          ),
+          materialInfo: MaterialInfo.empty().copyWith(
+            materialNumber: MaterialNumber('fake-bundle'),
+            type: MaterialInfoType('bundle'),
+          ),
+          salesOrgConfig: fakeMYSalesOrgConfigs,
+        ),
+      ];
+
+      mockCartItemBundlesWithValidStock = [
+        PriceAggregate.empty().copyWith(
+          bundle: Bundle.empty().copyWith(
+            materials: <MaterialInfo>[
+              MaterialInfo.empty().copyWith(
+                materialNumber: MaterialNumber('fake-material-1'),
+                quantity: MaterialQty(10),
+                stockInfos: <StockInfo>[
+                  StockInfo.empty().copyWith(
+                    materialNumber: MaterialNumber('fake-material-1'),
+                    inStock: MaterialInStock('Yes'),
                   ),
                 ],
               ),
@@ -823,6 +861,37 @@ void main() {
           findsOneWidget,
         );
       });
+
+      testWidgets(
+          'Bundle item allowed to place order and dose not display the preorder model bottomsheet',
+          (tester) async {
+        when(() => cartBloc.state).thenReturn(
+          CartState.initial().copyWith(
+            cartProducts: mockCartItemBundlesWithValidStock,
+            config: fakeMYSalesOrgConfigs,
+          ),
+        );
+        when(() => eligibilityBloc.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrgConfigs: fakeMYSalesOrgConfigs,
+          ),
+        );
+        when(() => autoRouterMock.pushNamed('orders/cart/checkout'))
+            .thenAnswer((invocation) => Future(() => checkoutPageRouteData));
+        await tester.pumpWidget(getWidget());
+
+        await tester.pump();
+        expect(find.byType(StatusLabel), findsNothing);
+        expect(find.byKey(WidgetKeys.checkoutButton), findsOneWidget);
+        await tester.tap(find.byKey(WidgetKeys.checkoutButton));
+        await tester.pumpAndSettle();
+        expect(find.byKey(WidgetKeys.preOrderModel), findsNothing);
+        expect(
+          find.byKey(WidgetKeys.preOrderBundle('fake-bundle-code')),
+          findsNothing,
+        );
+      });
+
       testWidgets('Test Start browsing onTap', (tester) async {
         await tester.pumpWidget(getWidget());
 

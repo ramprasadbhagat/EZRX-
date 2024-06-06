@@ -87,14 +87,12 @@ class _PreOrderBundleTile extends StatelessWidget {
                     ),
                   ],
                 ),
-                ...bundle.materials
-                    .map(
-                      (e) => Padding(
-                        padding: const EdgeInsets.only(top: 16, bottom: 8),
-                        child: _PreOrderBundleMaterialTile(bundleMaterial: e),
-                      ),
-                    )
-                    ,
+                ...bundle.materials.getOutOfStockMaterialList.map(
+                  (e) => Padding(
+                    padding: const EdgeInsets.only(top: 16, bottom: 8),
+                    child: _PreOrderBundleMaterialTile(bundleMaterial: e),
+                  ),
+                ),
               ],
             ),
           ),
