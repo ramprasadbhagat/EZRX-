@@ -150,6 +150,9 @@ dependency_overrides:
       url: https://github.com/holzgeist/flutter_inappwebview
       path: flutter_inappwebview_android
       ref: d89b1d32638b49dfc58c4b7c84153be0c269d057
+  #Override to temporarily resolve https://github.com/pichillilorenzo/flutter_inappwebview/issues/2150 
+  webview_flutter_android: 3.16.1
+
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
