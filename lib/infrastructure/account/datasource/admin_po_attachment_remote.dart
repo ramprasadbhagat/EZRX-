@@ -55,7 +55,7 @@ class AdminPoAttachmentRemoteDataSource {
   void _getPoAttachmentExceptionChecker({
     required Response<dynamic> res,
   }) {
-    if (res.data['errors'] != null && res.data['errors'].isNotEmpty) {
+    if (dataSourceExceptionHandler.isServerResponseError(res: res)) {
       throw ServerException(message: res.data['errors'][0]['message']);
     } else if (res.statusCode != 200) {
       throw ServerException(

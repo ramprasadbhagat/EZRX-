@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:ezrxmobile/config.dart';
+import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/ez_point_mutation.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/ez_point_remote.dart';
@@ -37,6 +38,7 @@ void main() {
         httpService: service,
         config: Config(),
         ezPointMutation: EZPointMutation(),
+        dataSourceExceptionHandler: DataSourceExceptionHandler(),
       );
     },
   );

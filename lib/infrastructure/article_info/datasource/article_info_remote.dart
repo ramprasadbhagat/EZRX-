@@ -96,7 +96,7 @@ class ArticleInfoRemoteDataSource {
   }
 
   void _articleInfoExceptionChecker({required Response<dynamic> res}) {
-    if (res.data['errors'] != null) {
+    if (exceptionHandler.isServerResponseError(res: res)) {
       throw ServerException(message: res.data['errors'][0]['message']);
     } else if (res.statusCode != 200) {
       throw ServerException(

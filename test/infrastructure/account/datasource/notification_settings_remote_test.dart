@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/notification_settings.dart';
+import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/notification_settings_local.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/notification_settings_mutation.dart';
@@ -39,6 +40,7 @@ void main() {
         httpService: service,
         config: Config(),
         notificationSettingsMutation: NotificationSettingsMutation(),
+        dataSourceExceptionHandler: DataSourceExceptionHandler(),
       );
       fakeNotificationSettings =
           await NotificationSettingsLocalDataSource().getNotificationSettings();

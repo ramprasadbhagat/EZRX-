@@ -135,7 +135,7 @@ class _CheckoutFooterSection extends StatelessWidget {
                               ),
                             },
                           );
-                          ErrorUtils.handleApiFailure(context, failure);
+                          ErrorUtils.handleStockInfoApiFailure(context, failure);
                         },
                         (_) {},
                       ),

@@ -61,7 +61,7 @@ class PaymentCustomerInformationRemoteDataSource {
         code: res.statusCode ?? 0,
         message: res.statusMessage ?? '',
       );
-    } else if (res.data['errors'] != null && res.data['errors'].isNotEmpty) {
+    } else if (dataSourceExceptionHandler.isServerResponseError(res: res)) {
       throw ServerException(message: res.data['errors'][0]['message']);
     }
   }

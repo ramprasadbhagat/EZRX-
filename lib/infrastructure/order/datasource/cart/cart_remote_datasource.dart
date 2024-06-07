@@ -215,7 +215,7 @@ class CartRemoteDataSource {
   //Note* 'no cart found' error message is received when the cart is empty hence
   //we do not show any error message to the user.
   void _exceptionChecker({required Response<dynamic> res}) {
-    if (res.data['errors'] != null && res.data['errors'].isNotEmpty) {
+    if (dataSourceExceptionHandler.isServerResponseError(res: res)) {
       final message = res.data['errors'][0]['message'].toString().toLowerCase();
       switch (message) {
         case 'shiptoaddress changed from existing cart. delete the cart and then add new item':

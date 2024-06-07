@@ -51,7 +51,7 @@ class ForgotPasswordRemoteDataSource {
   }
 
   void _exceptionChecker({required Response<dynamic> res}) {
-    if (res.data['errors'] != null && res.data['errors'].isNotEmpty) {
+    if (dataSourceExceptionHandler.isServerResponseError(res: res)) {
       isEqualsIgnoreCase(
         res.data['errors'][0]['message'],
         'Invalid username or password',

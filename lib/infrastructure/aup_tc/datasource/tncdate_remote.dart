@@ -31,7 +31,10 @@ class AcceptanceDateRemoteDataSource {
   }
 
   void _tncExceptionChecker({required Response<dynamic> res}) {
-    if (res.data['errors'] != null && res.data['date'] == null) {
+    if (exceptionHandler.isServerResponseError(
+      res: res,
+      additionalCondition: res.data['date'] == null,
+    )) {
       throw ServerException(message: res.data['errors'][0]['message']);
     } else if (res.statusCode != 200) {
       throw ServerException(

@@ -4,6 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/notification_settings.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
+import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/notification_settings_mutation.dart';
 import 'package:ezrxmobile/infrastructure/account/dtos/notification_settings_response_dto.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
@@ -12,13 +13,18 @@ class NotificationSettingsRemoteDataSource {
   final NotificationSettingsMutation notificationSettingsMutation;
   final HttpService httpService;
   final Config config;
+  final DataSourceExceptionHandler dataSourceExceptionHandler;
+
   NotificationSettingsRemoteDataSource({
     required this.notificationSettingsMutation,
     required this.httpService,
     required this.config,
+    required this.dataSourceExceptionHandler,
   });
 
   Future<NotificationSettings> getNotificationSettings() async {
+        return await dataSourceExceptionHandler.handle(() async {
+
     final queryData = notificationSettingsMutation.getNotificationSettings();
 
     final res = await httpService.request(
@@ -33,6 +39,7 @@ class NotificationSettingsRemoteDataSource {
     final finalData = res.data['data']['getNotificationSettings']['settings'];
 
     return NotificationSettingsResponseDto.fromJson(finalData).toDomain;
+        });
   }
 
   Future<NotificationSettings> setNotificationSettings({
@@ -67,7 +74,7 @@ class NotificationSettingsRemoteDataSource {
   }
 
   void _exceptionChecker({required Response<dynamic> res}) {
-    if (res.data['errors'] != null && res.data['errors'].isNotEmpty) {
+    if (dataSourceExceptionHandler.isServerResponseError(res: res)) {
       throw ServerException(message: res.data['errors'][0]['message']);
     } else if (res.statusCode != 200) {
       throw ServerException(

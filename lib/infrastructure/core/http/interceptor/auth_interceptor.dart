@@ -78,8 +78,6 @@ class AuthInterceptor extends Interceptor {
     Response response,
     ResponseInterceptorHandler handler,
   ) async {
-    debugPrint('onResponse ${response.statusCode} ${response.data}');
-
     try {
       if (response.data['errors'] != null &&
           response.data['errors'].isNotEmpty &&

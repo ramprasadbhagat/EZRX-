@@ -35,4 +35,14 @@ class ErrorUtils {
     }
     handleApiFailure(context, failure);
   }
+
+  static void handleStockInfoApiFailure(
+    BuildContext context,
+    ApiFailure failure,
+  ) {
+    if (failure == const ApiFailure.stockInfoNotAvailable()) {
+      return;
+    }
+    handleApiFailure(context, failure);
+  }
 }

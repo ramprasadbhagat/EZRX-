@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
+import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 import 'package:ezrxmobile/infrastructure/payments/datasource/payment_in_progress_query.dart';
@@ -32,6 +33,7 @@ void main() {
         httpService: service,
         config: Config(),
         paymentInProgressQuery: PaymentInProgressQuery(),
+        dataSourceExceptionHandler: DataSourceExceptionHandler(),
       );
     },
   );

@@ -25,31 +25,33 @@ class EInvoiceRemoteDataSource {
     required String country,
     required String soldTo,
   }) async {
-    final data = _getData(
-      invoiceNumber: invoiceNumber,
-      salesOrg: salesOrg,
-      country: country,
-      soldTo: soldTo,
-    );
-    final res = await httpService.request(
-      method: 'POST',
-      url: '${config.urlConstants}payment/listInvoice',
-      data: jsonEncode(
-        data,
-      ),
-    );
-    _exceptionChecker(res: res);
-    if (res.data['data'] == null || res.data['data'].isEmpty) {
-      return DownloadPaymentAttachment.empty();
-    }
+    return await exceptionHandler.handle(() async {
+      final data = _getData(
+        invoiceNumber: invoiceNumber,
+        salesOrg: salesOrg,
+        country: country,
+        soldTo: soldTo,
+      );
+      final res = await httpService.request(
+        method: 'POST',
+        url: '${config.urlConstants}payment/listInvoice',
+        data: jsonEncode(
+          data,
+        ),
+      );
+      _exceptionChecker(res: res);
+      if (res.data['data'] == null || res.data['data'].isEmpty) {
+        return DownloadPaymentAttachment.empty();
+      }
 
-    return ECreditInvoiceDto.fromJson(res.data['data'][0]).toDomain();
+      return ECreditInvoiceDto.fromJson(res.data['data'][0]).toDomain();
+    });
   }
 
   void _exceptionChecker({
     required Response<dynamic> res,
   }) {
-    if (res.data['errors'] != null && res.data['errors'].isNotEmpty) {
+    if (exceptionHandler.isServerResponseError(res: res)) {
       throw ServerException(message: res.data['errors'][0]['message']);
     } else if (res.statusCode != 200) {
       throw ServerException(

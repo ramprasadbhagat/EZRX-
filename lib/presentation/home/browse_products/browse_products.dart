@@ -74,7 +74,7 @@ class BrowseProduct extends StatelessWidget {
           listener: (context, state) => state.apiFailureOrSuccessOption.fold(
             () => {},
             (either) => either.fold(
-              (failure) => ErrorUtils.handleApiFailure(context, failure),
+              (failure) => ErrorUtils.handleStockInfoApiFailure(context, failure),
               (_) => {},
             ),
           ),

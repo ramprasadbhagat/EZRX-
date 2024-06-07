@@ -2,6 +2,8 @@ import 'dart:async';
 
 import 'package:dio/dio.dart';
 import 'package:ezrxmobile/config.dart';
+import 'package:flutter/foundation.dart';
+import 'package:universal_io/io.dart';
 
 class HttpService {
   late Dio _dio;
@@ -11,6 +13,10 @@ class HttpService {
     required Config config,
     required List<Interceptor> interceptors,
   }) {
+    // We only enable network log when run on debug mode and not in test mode
+    final enableLog =
+        kDebugMode && !Platform.environment.containsKey('FLUTTER_TEST');
+
     _dio = Dio(
       BaseOptions(
         baseUrl: config.baseUrl(),
@@ -21,7 +27,7 @@ class HttpService {
     );
     _dio.interceptors.addAll([
       ...interceptors,
-      LogInterceptor(requestBody: true, responseBody: true),
+      if (enableLog) LogInterceptor(requestBody: true, responseBody: true),
     ]);
   }
 
@@ -50,7 +56,11 @@ class HttpService {
         url,
         data: data,
       );
-    } on DioException {
+    } on DioException catch (e) {
+      if (e.type == DioExceptionType.badResponse && e.response != null) {
+        return e.response!;
+      }
+
       rethrow;
       // switch (e.error.runtimeType) {
       //   case SocketException:

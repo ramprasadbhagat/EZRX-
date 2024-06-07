@@ -661,6 +661,7 @@ void setupLocator() {
       config: locator<Config>(),
       httpService: locator<HttpService>(),
       languageMutation: locator<LanguageMutation>(),
+      dataSourceExceptionHandler: locator<DataSourceExceptionHandler>(),
     ),
   );
   locator.registerLazySingleton(() => UserQueryMutation());
@@ -1978,6 +1979,7 @@ void setupLocator() {
     () => SoaRemoteDataSource(
       config: locator<Config>(),
       httpService: locator<HttpService>(),
+      dataSourceExceptionHandler: locator<DataSourceExceptionHandler>(),
     ),
   );
 
@@ -2051,6 +2053,7 @@ void setupLocator() {
       config: locator<Config>(),
       httpService: locator<HttpService>(),
       paymentInProgressQuery: locator<PaymentInProgressQuery>(),
+      dataSourceExceptionHandler: locator<DataSourceExceptionHandler>(),
     ),
   );
 
@@ -3082,6 +3085,7 @@ void setupLocator() {
       config: locator<Config>(),
       httpService: locator<HttpService>(),
       customerLicenseQuery: locator<CustomerLicenseQuery>(),
+      dataSourceExceptionHandler: locator<DataSourceExceptionHandler>(),
     ),
   );
   locator.registerLazySingleton(
@@ -3113,6 +3117,7 @@ void setupLocator() {
       reOrderPermissionQuery: locator<ReOrderPermissionQuery>(),
       httpService: locator<HttpService>(),
       config: locator<Config>(),
+      dataSourceExceptionHandler: locator<DataSourceExceptionHandler>(),
     ),
   );
 
@@ -3178,6 +3183,7 @@ void setupLocator() {
       config: locator<Config>(),
       httpService: locator<HttpService>(),
       ezPointMutation: locator<EZPointMutation>(),
+      dataSourceExceptionHandler: locator<DataSourceExceptionHandler>(),
     ),
   );
 
@@ -3207,6 +3213,7 @@ void setupLocator() {
       config: locator<Config>(),
       httpService: locator<HttpService>(),
       notificationSettingsMutation: locator<NotificationSettingsMutation>(),
+      dataSourceExceptionHandler: locator<DataSourceExceptionHandler>(),
     ),
   );
 

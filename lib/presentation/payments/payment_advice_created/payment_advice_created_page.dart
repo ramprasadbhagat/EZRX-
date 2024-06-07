@@ -72,7 +72,7 @@ class PaymentAdviceCreatedPage extends StatelessWidget {
   Future<bool?> _showConfirmBottomSheet(
     BuildContext context,
     ApiFailure failure,
-  ) async {
+  ) {
     final errorMessage = failure == const ApiFailure.missingzzHtmcs()
         ? failure.failureMessage.message
         : paymentErrorMessage;

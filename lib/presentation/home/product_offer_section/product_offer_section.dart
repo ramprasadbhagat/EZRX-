@@ -79,7 +79,7 @@ class ProductsOnOffer extends StatelessWidget {
                 () {},
                 (either) => either.fold(
                   (failure) {
-                    ErrorUtils.handleApiFailure(context, failure);
+                    ErrorUtils.handleStockInfoApiFailure(context, failure);
                   },
                   (_) {
                     context.read<MaterialPriceBloc>().add(

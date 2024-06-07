@@ -172,7 +172,7 @@ class _BundleDetails extends StatelessWidget {
           () {},
           (either) => either.fold(
             (failure) {
-              ErrorUtils.handleApiFailure(context, failure);
+              ErrorUtils.handleStockInfoApiFailure(context, failure);
             },
             (_) => context.read<ProductImageBloc>().add(
                   ProductImageEvent.fetch(

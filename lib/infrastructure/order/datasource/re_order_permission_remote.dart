@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
+import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
 import 'package:ezrxmobile/domain/order/entities/re_order_permission.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/re_order_permission_query.dart';
@@ -12,11 +13,13 @@ class ReOrderPermissionRemoteDataSource {
   final HttpService httpService;
   final ReOrderPermissionQuery reOrderPermissionQuery;
   final Config config;
+  final DataSourceExceptionHandler dataSourceExceptionHandler;
 
   ReOrderPermissionRemoteDataSource({
     required this.httpService,
     required this.reOrderPermissionQuery,
     required this.config,
+    required this.dataSourceExceptionHandler,
   });
 
   Future<ReOrderPermission> getPermission({
@@ -28,37 +31,39 @@ class ReOrderPermissionRemoteDataSource {
     required String userName,
     required bool isEnableGimmickMaterial,
   }) async {
-    final res = await httpService.request(
-      method: 'POST',
-      url: '${config.urlConstants}/license',
-      data: jsonEncode(
-        {
-          'query': reOrderPermissionQuery.getReOrderPermission(),
-          'variables': {
-            'request': {
-              'materialNumberList': materialNumbers,
-              'customerSoldToCode': customerCode,
-              'customerShipToCode': shipToCode,
-              'salesOrganisation': salesOrg,
-              'cached': false,
-              'invalidateCache': false,
-              if (isSalesRepUser) 'username': userName,
-              if (isSalesRepUser) 'gimmickMaterial': isEnableGimmickMaterial,
+    return await dataSourceExceptionHandler.handle(() async {
+      final res = await httpService.request(
+        method: 'POST',
+        url: '${config.urlConstants}/license',
+        data: jsonEncode(
+          {
+            'query': reOrderPermissionQuery.getReOrderPermission(),
+            'variables': {
+              'request': {
+                'materialNumberList': materialNumbers,
+                'customerSoldToCode': customerCode,
+                'customerShipToCode': shipToCode,
+                'salesOrganisation': salesOrg,
+                'cached': false,
+                'invalidateCache': false,
+                if (isSalesRepUser) 'username': userName,
+                if (isSalesRepUser) 'gimmickMaterial': isEnableGimmickMaterial,
+              },
             },
           },
-        },
-      ),
-    );
+        ),
+      );
 
-    _exceptionChecker(res: res);
+      _exceptionChecker(res: res);
 
-    return ReOrderPermissionDto.fromJson(
-      res.data['data']['validCustomerMaterials'],
-    ).toDomain;
+      return ReOrderPermissionDto.fromJson(
+        res.data['data']['validCustomerMaterials'],
+      ).toDomain;
+    });
   }
 
   void _exceptionChecker({required Response<dynamic> res}) {
-    if (res.data['errors'] != null && res.data['errors'].isNotEmpty) {
+    if (dataSourceExceptionHandler.isServerResponseError(res: res)) {
       throw ServerException(message: res.data['errors'][0]['message']);
     } else if (res.statusCode != 200) {
       throw ServerException(

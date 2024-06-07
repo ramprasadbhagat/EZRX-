@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
+import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
 import 'package:ezrxmobile/domain/payments/entities/soa.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 import 'package:ezrxmobile/infrastructure/payments/datasource/payment_summary_query.dart';
@@ -40,6 +41,7 @@ void main() {
     remoteDataSource = SoaRemoteDataSource(
       httpService: service,
       config: Config(),
+      dataSourceExceptionHandler: DataSourceExceptionHandler(),
     );
   });
   group('SOA remote data source test', () {

@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
+import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 import 'package:ezrxmobile/infrastructure/payments/datasource/payment_in_progress_query.dart';
@@ -12,10 +13,13 @@ class PaymentInProgressRemoteDataSource {
   final HttpService httpService;
   final PaymentInProgressQuery paymentInProgressQuery;
   final Config config;
+  final DataSourceExceptionHandler dataSourceExceptionHandler;
+
   PaymentInProgressRemoteDataSource({
     required this.httpService,
     required this.paymentInProgressQuery,
     required this.config,
+    required this.dataSourceExceptionHandler,
   });
 
   Future<List<StringValue>> getPaymentInProgress({
@@ -23,6 +27,8 @@ class PaymentInProgressRemoteDataSource {
     required String salesOrg,
     required bool isMarketPlace,
   }) async {
+        return await dataSourceExceptionHandler.handle(() async {
+
     final res = await httpService.request(
       method: 'POST',
       url: '${config.urlConstants}ezpay',
@@ -48,10 +54,11 @@ class PaymentInProgressRemoteDataSource {
           (e) => PaymentInProgressDto.fromJson(e).toAmount,
         )
         .toList();
+        });
   }
 
   void _exceptionChecker({required Response<dynamic> res}) {
-    if (res.data['errors'] != null && res.data['errors'].isNotEmpty) {
+    if (dataSourceExceptionHandler.isServerResponseError(res: res)) {
       throw ServerException(message: res.data['errors'][0]['message']);
     } else if (res.statusCode != 200) {
       throw ServerException(

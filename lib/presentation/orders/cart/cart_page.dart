@@ -150,7 +150,7 @@ class _CartPageState extends State<CartPage> {
               either.fold(
                 (failure) {
                   context.router.popUntilRouteWithName(CartPageRoute.name);
-                  ErrorUtils.handleApiFailure(context, failure);
+                  ErrorUtils.handleStockInfoApiFailure(context, failure);
                 },
                 (_) {},
               );

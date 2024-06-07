@@ -50,7 +50,7 @@ class OrderStatusTrackerRemoteDataSource {
   }
 
   void _orderStatusTrackerExceptionChecker({required Response<dynamic> res}) {
-    if (res.data['errors'] != null) {
+    if (dataSourceExceptionHandler.isServerResponseError(res: res)) {
       throw ServerException(message: res.data['errors'][0]['message']);
     } else if (res.statusCode != 200) {
       throw ServerException(
