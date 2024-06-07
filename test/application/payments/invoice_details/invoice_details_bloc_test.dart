@@ -3,6 +3,8 @@ import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/application/payments/credit_and_invoice_details/credit_and_invoice_details_bloc.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/domain/payments/entities/all_invoices_filter.dart';
 import 'package:ezrxmobile/domain/payments/entities/credit_and_invoice_item.dart';
 import 'package:ezrxmobile/domain/payments/entities/customer_document_detail.dart';
@@ -38,6 +40,22 @@ void main() {
     salesOrganisation: fakeMYSalesOrganisation,
   );
   const fakeError = ApiFailure.other('fake-error');
+  final creditListContainInvalidItem = [
+    CustomerDocumentDetail.empty().copyWith(
+      principalData: PrincipalData.empty().copyWith(
+        principalCode: PrincipalCode(
+          '',
+        ),
+      ),
+    ),
+    CustomerDocumentDetail.empty().copyWith(
+      principalData: PrincipalData.empty().copyWith(
+        principalCode: PrincipalCode(
+          '1',
+        ),
+      ),
+    ),
+  ];
 
   setUpAll(() async {
     WidgetsFlutterBinding.ensureInitialized();
@@ -258,5 +276,50 @@ void main() {
         ),
       ],
     );
+
+    blocTest(
+      'fetch -> Invoice Details fetch success and return valid items',
+      build: () => CreditAndInvoiceDetailsBloc(
+        creditAndInvoiceDetailsRepository: creditAndInvoiceDetailsRepository,
+        allCreditsAndInvoicesRepository: allCreditsAndInvoicesRepository,
+      ),
+      seed: () => fakeInitialState,
+      setUp: () {
+        when(
+          () => creditAndInvoiceDetailsRepository.getCreditAndInvoiceDetails(
+            salesOrganisation: fakeMYSalesOrganisation,
+            customerCodeInfo: fakeCustomerCodeInfo,
+            creditAndInvoiceItem: fakeInvoice,
+            isMarketPlace: false,
+          ),
+        ).thenAnswer(
+          (invocation) async => Right(creditListContainInvalidItem),
+        );
+      },
+      act: (CreditAndInvoiceDetailsBloc bloc) => bloc.add(
+        CreditAndInvoiceDetailsEvent.fetch(
+          creditAndInvoiceItem: fakeInvoice,
+          isMarketPlace: false,
+        ),
+      ),
+      expect: () => [
+        fakeInitialState.copyWith(isLoading: true, basicInfo: fakeInvoice),
+        fakeInitialState.copyWith(
+          basicInfo: fakeInvoice,
+          itemsInfo: creditListContainInvalidItem.validItems,
+          failureOrSuccessOption: optionOf(
+            Right(creditListContainInvalidItem),
+          ),
+        ),
+      ],
+    );
+
+    test('validItems getter return only items have valid principalCode', () {
+      expect(
+        creditListContainInvalidItem.validItems
+            .every((e) => e.principalData.principalCode.isValid()),
+        true,
+      );
+    });
   });
 }

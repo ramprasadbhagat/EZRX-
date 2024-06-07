@@ -98,4 +98,7 @@ extension CustomerDocumentDetailExtension on List<CustomerDocumentDetail> {
       (totalTaxAmount / totalNetAmount * 100).toStringAsExponential(2),
     );
   }
+
+  List<CustomerDocumentDetail> get validItems =>
+      where((item) => item.principalData.principalCode.isValid()).toList();
 }
