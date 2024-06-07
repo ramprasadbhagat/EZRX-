@@ -27,6 +27,7 @@ import '../../../../common_mock_data/mock_bloc.dart';
 import '../../../../common_mock_data/mock_other.dart';
 import '../../../../common_mock_data/sales_org_config_mock/fake_id_sales_org_config.dart';
 import '../../../../common_mock_data/sales_org_config_mock/fake_kh_sales_org_config.dart';
+import '../../../../common_mock_data/sales_org_config_mock/fake_mm_sales_org_config.dart';
 import '../../../../common_mock_data/sales_org_config_mock/fake_my_sales_org_config.dart';
 import '../../../../common_mock_data/sales_organsiation_mock.dart';
 import '../../../../common_mock_data/user_mock.dart';
@@ -569,6 +570,59 @@ void main() {
             of: find.byKey(WidgetKeys.checkoutSummaryTax),
             matching: find.text(
               '${fakeKHSalesOrgConfigs.currency.code} 99.00',
+              findRichText: true,
+            ),
+          ),
+          findsOneWidget,
+        );
+      });
+
+      testWidgets(
+          'Test Tax value in Checkout page for MM with displaySubtotalTaxBreakdown enabled',
+          (tester) async {
+        final cartState = CartState.initial().copyWith(
+          cartProducts: [
+            cartItemMock.first.copyWith(
+              salesOrgConfig: fakeMMSalesOrgConfigs,
+              price: Price.empty().copyWith(
+                finalPrice: MaterialPrice(100),
+              ),
+              materialInfo: cartItemMock.first.materialInfo.copyWith(
+                taxClassification:
+                    MaterialTaxClassification('Product : Full Tax'),
+                tax: 5,
+              ),
+            ),
+          ],
+          salesOrganisation: fakeMMSalesOrganisation,
+          config: fakeMMSalesOrgConfigs,
+        );
+
+        when(() => autoRouter.current)
+            .thenReturn(fakeRouteData(CartPageRoute.name));
+        when(() => eligibilityBloc.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrganisation: fakeMMSalesOrganisation,
+            salesOrgConfigs: fakeMMSalesOrgConfigs,
+          ),
+        );
+        when(() => cartBloc.state).thenReturn(cartState);
+
+        await tester.pumpWidget(getWidget(cartState));
+        await tester.pumpAndSettle();
+        expect(find.byKey(WidgetKeys.checkoutSummaryTax), findsOneWidget);
+        expect(
+          find.descendant(
+            of: find.byKey(WidgetKeys.checkoutSummaryTax),
+            matching: find.textContaining('Tax:'),
+          ),
+          findsOneWidget,
+        );
+        expect(
+          find.descendant(
+            of: find.byKey(WidgetKeys.checkoutSummaryTax),
+            matching: find.text(
+              '${fakeMMSalesOrgConfigs.currency.code} 95.00',
               findRichText: true,
             ),
           ),

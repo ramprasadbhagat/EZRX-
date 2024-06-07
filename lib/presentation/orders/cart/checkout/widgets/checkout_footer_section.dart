@@ -57,7 +57,7 @@ class _CheckoutFooterSection extends StatelessWidget {
                           grandTotal:
                               cartState.totalPriceWithTaxExcludeSmallOrderFees,
                           orderValue:
-                              cartState.checkoutSubTotalHidePriceMaterial,
+                              cartState.subTotalHidePriceMaterialForSubmission,
                           aplSmallOrderFee:
                               cartState.aplSimulatorOrder.smallOrderFee,
                           mpSmallOrderFee:

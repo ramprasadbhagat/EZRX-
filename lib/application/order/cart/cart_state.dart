@@ -277,6 +277,10 @@ class CartState with _$CartState {
       ? totalBundlesPrice + totalComboPrice + totalMaterialsPriceHidePrice
       : totalPriceWithTaxExcludeSmallOrderFees;
 
+  double get subTotalHidePriceMaterialForSubmission => _isID
+      ? aplSimulatorOrder.totalPriceWithoutTax
+      : totalBundlesPrice + totalComboPrice + totalMaterialsPriceHidePrice;
+
   //This getter is used for displaying subtotal value in checkout page
   double get checkoutSubTotalHidePriceMaterial => _isID
       ? aplSimulatorOrder.totalPriceWithoutTax
@@ -306,7 +310,7 @@ class CartState with _$CartState {
       .replaceAll(RegExp(r'([.]*0)(?!.*\d)'), '');
 
   double get _totalTaxPercentInDouble {
-    if (!config.salesOrg.isVN) {
+    if (!config.salesOrg.isMaterialTax) {
       return config.vatValue.toDouble();
     }
 

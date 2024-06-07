@@ -31,6 +31,7 @@ import 'package:ezrxmobile/infrastructure/order/datasource/material_list_local.d
 import 'package:ezrxmobile/domain/order/entities/request_counter_offer_details.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/material_price_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/cart/cart_local_datasource.dart';
+import '../../../common_mock_data/sales_org_config_mock/fake_mm_sales_org_config.dart';
 import '../../../common_mock_data/user_mock.dart';
 import '../../../common_mock_data/customer_code_mock.dart';
 import '../../../common_mock_data/sales_organsiation_mock.dart';
@@ -4766,6 +4767,31 @@ void main() {
               ),
             ],
             config: fakeVNSalesOrgConfigs.copyWith(
+              displaySubtotalTaxBreakdown: true,
+            ),
+          );
+          expect(
+            cartBlocState.taxMaterial,
+            2.736,
+          );
+        },
+      );
+
+      test(
+        'Testing CartBloc state taxMaterial full tax applied of MM market',
+        () {
+          final cartBlocState = CartState.initial().copyWith(
+            cartProducts: [
+              priceAggregates.first.copyWith(
+                price: prices.first,
+                materialInfo: priceAggregates.first.materialInfo.copyWith(
+                  taxClassification:
+                      MaterialTaxClassification('Product : Full Tax'),
+                  tax: 1,
+                ),
+              ),
+            ],
+            config: fakeMMSalesOrgConfigs.copyWith(
               displaySubtotalTaxBreakdown: true,
             ),
           );
