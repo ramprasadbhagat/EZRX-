@@ -42,14 +42,12 @@ class _OrderSuccessMaterialSection extends StatelessWidget {
                                 ),
                           ),
                   ),
-                  ...item.viewByOrderItem
-                      .mapIndexed(
-                        (index, e) => _MaterialItem(
-                          key: WidgetKeys.orderSuccessMaterialItem(index),
-                          orderItem: e,
-                        ),
-                      )
-                      ,
+                  ...item.viewByOrderItem.mapIndexed(
+                    (index, e) => _MaterialItem(
+                      key: WidgetKeys.orderSuccessMaterialItem(index),
+                      orderItem: e,
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -125,13 +123,11 @@ class _MaterialItem extends StatelessWidget {
       isQuantityRequired: false,
       statusTag: orderItem.productTag,
       showOfferTag: orderItem.showOfferTag,
-      labelTrailing: orderItem.isBonus && !orderItem.inStock
+      labelTrailing: orderItem.isBonus
           ? Padding(
               padding: const EdgeInsets.symmetric(horizontal: 4),
-              child: StatusLabel(
-                status: eligibilityState.outOfStockProductStatus,
-                valueColor: eligibilityState
-                    .outOfStockProductStatus.displayStatusTextColor,
+              child: PreOrderLabel(
+                stockInfo: orderItem.outOfStockInfo,
               ),
             )
           : null,

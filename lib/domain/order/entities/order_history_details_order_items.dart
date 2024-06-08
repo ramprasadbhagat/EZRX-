@@ -210,6 +210,11 @@ class OrderHistoryDetailsOrderItem with _$OrderHistoryDetailsOrderItem {
   StringValue gethashId({required OrderNumber orderNumber}) => StringValue(
         '${orderNumber.value.getOrElse(() => '')}${lineNumber.value.getOrElse(() => '')}',
       );
+
+  StockInfo get outOfStockInfo => materialStockInfo.stockInfos.firstWhere(
+        (element) => !element.inStock.isMaterialInStock,
+        orElse: () => StockInfo.empty(),
+      );
 }
 
 extension ViewByOrderDetailsListExtension

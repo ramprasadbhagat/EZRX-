@@ -2745,6 +2745,10 @@ void main() {
                 bonusSampleItems: [
                   BonusSampleItem.empty().copyWith(
                     materialNumber: mockCartItems.first.getMaterialNumber,
+                    stockInfo: StockInfo.empty().copyWith(
+                      inStock: MaterialInStock('No'),
+                      materialNumber: mockCartItems.first.getMaterialNumber,
+                    ),
                   ),
                 ],
                 stockInfoList: [
@@ -2827,6 +2831,60 @@ void main() {
             matching: find.byKey(WidgetKeys.materialDetailsStock),
           ),
           findsOneWidget,
+        );
+      },
+    );
+
+    testWidgets(
+      '=> test Do not Show OOS-Preorder tag when hideStock Config Enable for bonus material ',
+      (tester) async {
+        when(() => eligibilityBloc.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrgConfigs: fakeTWSalesOrgConfigs,
+          ),
+        );
+        when(() => cartBloc.state).thenReturn(
+          CartState.initial().copyWith(
+            cartProducts: [
+              mockCartItems.first.copyWith(
+                materialInfo: mockCartItems.first.materialInfo.copyWith(
+                  type: MaterialInfoType.material(),
+                ),
+                bonusSampleItems: [
+                  BonusSampleItem.empty().copyWith(
+                    materialNumber: mockCartItems.first.getMaterialNumber,
+                  ),
+                ],
+                stockInfoList: [
+                  StockInfo.empty().copyWith(
+                    inStock: MaterialInStock('No'),
+                    materialNumber: mockCartItems.first.getMaterialNumber,
+                  ),
+                ],
+              ),
+            ],
+          ),
+        );
+
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pump();
+        await tester.fling(
+          find.byKey(WidgetKeys.checkoutScrollList),
+          const Offset(0.0, -1000.0),
+          1000.0,
+        );
+
+        expect(
+          find.descendant(
+            of: find.byKey(
+              WidgetKeys.cartItemBonus(
+                mockCartItems.first.getMaterialNumber.displayMatNo,
+                mockCartItems.first.getMaterialNumber.displayMatNo,
+              ),
+            ),
+            matching: find.byKey(WidgetKeys.paymentSummaryTextStatus),
+          ),
+          findsNothing,
         );
       },
     );

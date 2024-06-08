@@ -119,15 +119,12 @@ class _ProductDetails extends StatelessWidget {
                 width: 4,
               ),
               if (eligibilityState.salesOrg.showBonus) const BonusTag(),
-              if (!bonusItem.stockInfo.inStock.isMaterialInStock)
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 4),
-                  child: StatusLabel(
-                    status: eligibilityState.outOfStockProductStatus,
-                    valueColor: eligibilityState
-                        .outOfStockProductStatus.displayStatusTextColor,
-                  ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 4),
+                child: PreOrderLabel(
+                  stockInfo: bonusItem.stockInfo,
                 ),
+              ),
             ],
           ),
           Text(

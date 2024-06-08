@@ -76,7 +76,7 @@ void main() {
         await FavouriteLocalDataSource().addFavouriteMaterial();
     removeFavouritesResponseMock =
         await FavouriteLocalDataSource().removeFavouriteMaterial();
-    stockInfoRepositoryMock = StockInfoRepositoryMock();    
+    stockInfoRepositoryMock = StockInfoRepositoryMock();
   });
 
   setUp(() {
@@ -174,6 +174,7 @@ void main() {
         when(
           () => stockInfoRepositoryMock.getStockInfoList(
             materials: materialResponseMock.products
+                .where((element) => element.isValidMaterial)
                 .map((e) => e.materialNumber)
                 .toList(),
             salesOrganisation: fakeSGSalesOrganisation,
@@ -329,6 +330,7 @@ void main() {
         when(
           () => stockInfoRepositoryMock.getStockInfoList(
             materials: materialResponseMock.products
+                .where((element) => element.isValidMaterial)
                 .map((e) => e.materialNumber)
                 .toList(),
             salesOrganisation: fakeSGSalesOrganisation,
@@ -450,7 +452,9 @@ void main() {
 
         when(
           () => stockInfoRepositoryMock.getStockInfoList(
-            materials: materialResponseMock.products.skip(20).toList()
+            materials: materialResponseMock.products
+                .skip(20)
+                .toList()
                 .map((e) => e.materialNumber)
                 .toList(),
             customerCodeInfo: fakeCustomerCodeInfo,
@@ -788,6 +792,7 @@ void main() {
         when(
           () => stockInfoRepositoryMock.getStockInfoList(
             materials: materialResponseMock.products
+                .where((element) => element.isValidMaterial)
                 .map((e) => e.materialNumber)
                 .toList(),
             customerCodeInfo: fakeCustomerCodeInfo,

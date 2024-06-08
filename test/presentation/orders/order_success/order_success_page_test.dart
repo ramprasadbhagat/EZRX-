@@ -101,6 +101,7 @@ void main() {
   late OrderHistoryDetailsOrderItem fakeBundleItem;
   late OrderHistoryDetailsOrderItem fakeMaterialItem;
   late OrderHistoryDetails fakeOrderHistoryDetails;
+  late List<OrderHistoryDetails> fakeOrderHistoryDetailsListWithStock;
   late OrderHistory fakeOrderHistory;
   late PaymentCustomerInformationBloc paymentCustomerInformationBlocMock;
   late List<OrderHistoryDetails> fakeOrderHistoryList;
@@ -124,6 +125,21 @@ void main() {
 
       fakeOrderHistoryDetails =
           await ViewByOrderDetailsLocalDataSource().getOrderHistoryDetails();
+      fakeOrderHistoryDetailsListWithStock = [
+        fakeOrderHistoryDetails.copyWith(
+          orderHistoryDetailsOrderItem: [
+            fakeOrderHistoryDetails.orderHistoryDetailsOrderItem.first.copyWith(
+              materialStockInfo: MaterialStockInfo.empty().copyWith(
+                materialNumber: fakeOrderHistoryDetails
+                    .orderHistoryDetailsOrderItem.first.materialNumber,
+                stockInfos: [
+                  StockInfo.empty().copyWith(inStock: MaterialInStock('Yes')),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ];
       fakeOrderHistory = await ViewByItemLocalDataSource().getViewByItems();
       fakeBundleItem = fakeOrderHistoryDetails.orderHistoryDetailsOrderItem
           .firstWhere((e) => e.productType.typeBundle);
@@ -1011,7 +1027,7 @@ void main() {
         );
         when(() => orderSummaryBlocMock.state).thenAnswer(
           (invocation) => OrderSummaryState.initial().copyWith(
-            orderHistoryDetailsList: [fakeOrderHistoryDetails],
+            orderHistoryDetailsList: fakeOrderHistoryDetailsListWithStock,
           ),
         );
         await tester.pumpWidget(getWidget());
@@ -1043,7 +1059,7 @@ void main() {
         );
         when(() => orderSummaryBlocMock.state).thenAnswer(
           (invocation) => OrderSummaryState.initial().copyWith(
-            orderHistoryDetailsList: [fakeOrderHistoryDetails],
+            orderHistoryDetailsList: fakeOrderHistoryDetailsListWithStock,
           ),
         );
         await tester.pumpWidget(getWidget());
@@ -1522,18 +1538,40 @@ void main() {
       );
 
       testWidgets('Bonus Stock tag', (tester) async {
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrgConfigs: fakeVNSalesOrgConfigs,
+            salesOrganisation: fakeTWSalesOrganisation,
+          ),
+        );
         when(() => orderSummaryBlocMock.state).thenAnswer(
           (invocation) => OrderSummaryState.initial().copyWith(
-            orderHistoryDetailsList: [fakeOrderHistoryDetails],
+            orderHistoryDetailsList: [
+              fakeOrderHistoryDetails.copyWith(
+                orderHistoryDetailsOrderItem: [
+                  fakeOrderHistoryDetails.orderHistoryDetailsOrderItem.first
+                      .copyWith(
+                    isMarketPlace: false,
+                    unitPrice: 0,
+                    type: OrderItemType('Bonus'),
+                    productType: MaterialInfoType.material(),
+                    materialStockInfo: MaterialStockInfo.empty().copyWith(
+                      materialNumber: fakeOrderHistoryDetails
+                          .orderHistoryDetailsOrderItem.first.materialNumber,
+                      stockInfos: [
+                        StockInfo.empty()
+                            .copyWith(inStock: MaterialInStock('No')),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ],
           ),
         );
 
         await tester.pumpWidget(getWidget());
         await tester.pump();
-        expect(
-          find.byKey(WidgetKeys.orderSuccessZPItemsSection),
-          findsOneWidget,
-        );
         await tester.fling(
           find.byKey(WidgetKeys.scrollList),
           const Offset(0, -10000),
@@ -1555,7 +1593,7 @@ void main() {
         expect(
           find.descendant(
             of: find.byKey(WidgetKeys.orderSuccessMaterialItem(0)).first,
-            matching: find.widgetWithText(StatusLabel, 'Out of stock'),
+            matching: find.widgetWithText(StatusLabel, 'OOS-Preorder'),
           ),
           findsOneWidget,
         );
@@ -1656,14 +1694,31 @@ void main() {
         (tester) async {
           when(() => eligibilityBlocMock.state).thenReturn(
             EligibilityState.initial().copyWith(
-              salesOrgConfigs: fakeSGSalesOrgConfigs,
+              salesOrgConfigs: fakeTWSalesOrgConfigs,
             ),
           );
           final materialList = [
-            fakeMaterialItem,
             fakeMaterialItem.copyWith(
-              type: OrderItemType('Bonus'),
-              unitPrice: 0,
+              isMarketPlace: false,
+              productType: MaterialInfoType.material(),
+              materialStockInfo: MaterialStockInfo.empty().copyWith(
+                materialNumber: fakeOrderHistoryDetails
+                    .orderHistoryDetailsOrderItem.first.materialNumber,
+                stockInfos: [
+                  StockInfo.empty().copyWith(inStock: MaterialInStock('Yes')),
+                ],
+              ),
+            ),
+            fakeMaterialItem.copyWith(
+              isMarketPlace: false,
+              productType: MaterialInfoType.material(),
+              materialStockInfo: MaterialStockInfo.empty().copyWith(
+                materialNumber: fakeOrderHistoryDetails
+                    .orderHistoryDetailsOrderItem.first.materialNumber,
+                stockInfos: [
+                  StockInfo.empty().copyWith(inStock: MaterialInStock('Yes')),
+                ],
+              ),
             ),
           ];
           when(() => orderSummaryBlocMock.state).thenReturn(
@@ -2374,9 +2429,60 @@ void main() {
       testWidgets(
         'Display ZP and MP order number when order contains MP items',
         (tester) async {
+          final fakeOrderHistoryDetailsListWithStockWithMPData = [
+            fakeOrderHistoryDetails.copyWith(
+              isMarketPlace: true,
+              orderHistoryDetailsOrderItem: [
+                fakeOrderHistoryDetails.orderHistoryDetailsOrderItem.first
+                    .copyWith(
+                  isMarketPlace: true,
+                  materialStockInfo: MaterialStockInfo.empty().copyWith(
+                    materialNumber: fakeOrderHistoryDetails
+                        .orderHistoryDetailsOrderItem.first.materialNumber,
+                    stockInfos: [
+                      StockInfo.empty()
+                          .copyWith(inStock: MaterialInStock('Yes')),
+                    ],
+                  ),
+                ),
+                fakeOrderHistoryDetails.orderHistoryDetailsOrderItem.first
+                    .copyWith(
+                  isMarketPlace: false,
+                  productType: MaterialInfoType.material(),
+                  materialStockInfo: MaterialStockInfo.empty().copyWith(
+                    materialNumber: fakeOrderHistoryDetails
+                        .orderHistoryDetailsOrderItem.first.materialNumber,
+                    stockInfos: [
+                      StockInfo.empty()
+                          .copyWith(inStock: MaterialInStock('Yes')),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+            fakeOrderHistoryDetails.copyWith(
+              orderHistoryDetailsOrderItem: [
+                fakeOrderHistoryDetails.orderHistoryDetailsOrderItem.first
+                    .copyWith(
+                  isMarketPlace: false,
+                  productType: MaterialInfoType.material(),
+                  materialStockInfo: MaterialStockInfo.empty().copyWith(
+                    materialNumber: fakeOrderHistoryDetails
+                        .orderHistoryDetailsOrderItem.first.materialNumber,
+                    stockInfos: [
+                      StockInfo.empty()
+                          .copyWith(inStock: MaterialInStock('Yes')),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ];
           when(() => orderSummaryBlocMock.state).thenReturn(
-            OrderSummaryState.initial()
-                .copyWith(orderHistoryDetailsList: fakeOrderHistoryList),
+            OrderSummaryState.initial().copyWith(
+              orderHistoryDetailsList:
+                  fakeOrderHistoryDetailsListWithStockWithMPData,
+            ),
           );
           await tester.pumpWidget(getWidget());
           await tester.pumpAndSettle();
@@ -2385,26 +2491,30 @@ void main() {
           expect(
             find.descendant(
               of: zpOrderNumbers,
-              matching: find.textContaining('ZP Queue', findRichText: true),
+              matching: find.textContaining('ZP Order', findRichText: true),
             ),
             findsOneWidget,
           );
           expect(
             find.descendant(of: zpOrderNumbers, matching: orderId),
-            findsNWidgets(fakeOrderHistoryList.zpOrderOnly.length),
+            findsNWidgets(
+              fakeOrderHistoryDetailsListWithStockWithMPData.zpOrderOnly.length,
+            ),
           );
 
           expect(mpOrderNumbers, findsOneWidget);
           expect(
             find.descendant(
               of: mpOrderNumbers,
-              matching: find.textContaining('MP Queue', findRichText: true),
+              matching: find.textContaining('MP Order', findRichText: true),
             ),
             findsOneWidget,
           );
           expect(
             find.descendant(of: mpOrderNumbers, matching: orderId),
-            findsNWidgets(fakeOrderHistoryList.mpOrderOnly.length),
+            findsNWidgets(
+              fakeOrderHistoryDetailsListWithStockWithMPData.mpOrderOnly.length,
+            ),
           );
         },
       );

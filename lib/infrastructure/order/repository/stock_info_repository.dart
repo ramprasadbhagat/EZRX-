@@ -134,10 +134,7 @@ class StockInfoRepository implements IStockInfoRepository {
 
       final response = await getStockInfoList(
         customerCodeInfo: customerCodeInfo,
-        materials: items
-            .where((element) => element.isValidMaterial)
-            .map((e) => e.materialNumber)
-            .toList(),
+        materials: items.map((e) => e.materialNumber).toList(),
         salesOrganisation: salesOrganisation,
         shipToInfo: shipToInfo,
       );

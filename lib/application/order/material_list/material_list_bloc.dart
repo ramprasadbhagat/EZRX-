@@ -177,7 +177,10 @@ class MaterialListBloc extends Bloc<MaterialListEvent, MaterialListState> {
     });
     on<_FetchStock>((e, emit) async {
       final failureOrSuccess = await stockInfoRepository.getStockInfoList(
-        materials: e.materials.map((e) => e.materialNumber).toList(),
+        materials: e.materials
+            .where((element) => element.isValidMaterial)
+            .map((e) => e.materialNumber)
+            .toList(),
         customerCodeInfo: state.customerCodeInfo,
         salesOrganisation: state.salesOrganisation,
         shipToInfo: state.shipToInfo,
