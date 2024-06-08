@@ -31,7 +31,6 @@ import 'package:ezrxmobile/infrastructure/order/datasource/material_list_local.d
 import 'package:ezrxmobile/domain/order/entities/request_counter_offer_details.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/material_price_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/cart/cart_local_datasource.dart';
-import '../../../common_mock_data/sales_org_config_mock/fake_mm_sales_org_config.dart';
 import '../../../common_mock_data/user_mock.dart';
 import '../../../common_mock_data/customer_code_mock.dart';
 import '../../../common_mock_data/sales_organsiation_mock.dart';
@@ -4709,6 +4708,7 @@ void main() {
       test(
         'Testing CartBloc state taxMaterial',
         () {
+          const qty = 1;
           final cartBlocState = CartState.initial().copyWith(
             cartProducts: [
               priceAggregates.first.copyWith(
@@ -4717,6 +4717,7 @@ void main() {
                   taxClassification:
                       MaterialTaxClassification('Product : Full Tax'),
                   tax: 1,
+                  quantity: MaterialQty(qty),
                 ),
               ),
             ],
@@ -4724,7 +4725,10 @@ void main() {
           );
           expect(
             cartBlocState.taxMaterial,
-            0.0,
+            (prices.first.finalPrice.getValue() *
+                    qty *
+                    fakeIDSalesOrgConfigs.vatValue) /
+                100,
           );
         },
       );
@@ -4732,6 +4736,7 @@ void main() {
       test(
         'Testing CartBloc state taxMaterial full tax applied of non vn market',
         () {
+          const qty = 1;
           final cartBlocState = CartState.initial().copyWith(
             cartProducts: [
               priceAggregates.first.copyWith(
@@ -4739,7 +4744,7 @@ void main() {
                 materialInfo: priceAggregates.first.materialInfo.copyWith(
                   taxClassification:
                       MaterialTaxClassification('Product : Full Tax'),
-                  tax: 1,
+                  tax: 5,
                 ),
               ),
             ],
@@ -4747,7 +4752,10 @@ void main() {
           );
           expect(
             cartBlocState.taxMaterial,
-            27.36,
+            (prices.first.finalPrice.getValue() *
+                    qty *
+                    fakeKHSalesOrgConfigs.vatValue) /
+                100,
           );
         },
       );
@@ -4755,15 +4763,17 @@ void main() {
       test(
         'Testing CartBloc state taxMaterial full tax applied of vn market',
         () {
+          const qty = 1;
+          final materialInfo = priceAggregates.first.materialInfo.copyWith(
+            taxClassification: MaterialTaxClassification('Product : Full Tax'),
+            tax: 5.0,
+            quantity: MaterialQty(qty),
+          );
           final cartBlocState = CartState.initial().copyWith(
             cartProducts: [
               priceAggregates.first.copyWith(
                 price: prices.first,
-                materialInfo: priceAggregates.first.materialInfo.copyWith(
-                  taxClassification:
-                      MaterialTaxClassification('Product : Full Tax'),
-                  tax: 1,
-                ),
+                materialInfo: materialInfo,
               ),
             ],
             config: fakeVNSalesOrgConfigs.copyWith(
@@ -4772,7 +4782,7 @@ void main() {
           );
           expect(
             cartBlocState.taxMaterial,
-            2.736,
+            (prices.first.finalPrice.getValue() * qty * materialInfo.tax) / 100,
           );
         },
       );
@@ -4780,24 +4790,26 @@ void main() {
       test(
         'Testing CartBloc state taxMaterial full tax applied of MM market',
         () {
+          const qty = 1;
+          final materialInfo = priceAggregates.first.materialInfo.copyWith(
+            taxClassification: MaterialTaxClassification('Product : Full Tax'),
+            tax: 5.0,
+            quantity: MaterialQty(qty),
+          );
           final cartBlocState = CartState.initial().copyWith(
             cartProducts: [
               priceAggregates.first.copyWith(
                 price: prices.first,
-                materialInfo: priceAggregates.first.materialInfo.copyWith(
-                  taxClassification:
-                      MaterialTaxClassification('Product : Full Tax'),
-                  tax: 1,
-                ),
+                materialInfo: materialInfo,
               ),
             ],
-            config: fakeMMSalesOrgConfigs.copyWith(
+            config: fakeVNSalesOrgConfigs.copyWith(
               displaySubtotalTaxBreakdown: true,
             ),
           );
           expect(
             cartBlocState.taxMaterial,
-            2.736,
+            (prices.first.finalPrice.getValue() * qty * materialInfo.tax) / 100,
           );
         },
       );

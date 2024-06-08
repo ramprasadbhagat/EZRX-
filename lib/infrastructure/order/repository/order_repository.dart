@@ -186,7 +186,6 @@ class OrderRepository implements IOrderRepository {
         for (final orderHistoryDetails in orderHistoryDetailsList) {
           await _trackOrderSuccess(
             orderHistoryDetails,
-            salesOrganisation.salesOrg.isID,
           );
         }
         await materialBannerStorage.clear();
@@ -209,7 +208,6 @@ class OrderRepository implements IOrderRepository {
       );
       await _trackOrderSuccess(
         orderHistoryDetails,
-        salesOrganisation.salesOrg.isID,
       );
       await materialBannerStorage.clear();
 
@@ -229,7 +227,6 @@ class OrderRepository implements IOrderRepository {
 
   Future<void> _trackOrderSuccess(
     OrderHistoryDetails orderDetail,
-    bool isIDMarket,
   ) async {
     final orderQueueNumber = orderDetail.orderNumber.getOrDefaultValue('');
 
@@ -283,9 +280,7 @@ class OrderRepository implements IOrderRepository {
           TrackingProps.productName: item.materialDescription,
           TrackingProps.productNumber: item.materialNumber.displayMatNo,
           TrackingProps.productQty: item.qty,
-          TrackingProps.grandTotal: item.itemTotalPrice(
-            isIDMarket,
-          ),
+          TrackingProps.grandTotal: item.totalPrice,
           TrackingProps.unitPrice: item.unitPrice,
           TrackingProps.productManufacturer:
               item.principalData.principalName.name,
@@ -303,9 +298,7 @@ class OrderRepository implements IOrderRepository {
           TrackingProps.productName: item.materialDescription,
           TrackingProps.productNumber: item.materialNumber.displayMatNo,
           TrackingProps.productQty: item.qty,
-          TrackingProps.grandTotal: item.itemTotalPrice(
-            isIDMarket,
-          ),
+          TrackingProps.grandTotal: item.totalPrice,
           TrackingProps.unitPrice: item.unitPrice,
           TrackingProps.productManufacturer:
               item.principalData.principalName.name,
@@ -317,7 +310,7 @@ class OrderRepository implements IOrderRepository {
       );
     }
   }
-  
+
   SubmitOrder _getSubmitOrderRequest({
     required ShipToInfo shipToInfo,
     required User user,

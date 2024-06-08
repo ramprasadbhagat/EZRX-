@@ -151,14 +151,6 @@ class OrderHistoryDetailsOrderItem with _$OrderHistoryDetailsOrderItem {
         isIDMarket,
       );
 
-  String itemTotalPrice(
-    bool isIDMarket,
-  ) =>
-      _itemPrice(
-        totalPrice,
-        isIDMarket,
-      );
-
   String _itemPrice(
     double price,
     bool isIDMarket,

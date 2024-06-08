@@ -68,55 +68,21 @@ void main() async {
     });
 
     group('Item total price -', () {
-      test(
-          'Display Price not available when is MYExternalSalesRep, material is PnG and invoice number is not valid',
-          () {
-        expect(
-          OrderHistoryDetailsOrderItem.empty()
-              .copyWith(
-                type: comOrderItemType,
-                principalData: PrincipalData.empty().copyWith(
-                  principalCode: pngPrincipleCode,
-                ),
-              )
-              .itemTotalPrice(true),
-          priceNotAvailableText,
-        );
-      });
-
-      test('Display 0 when is bonus and market is ID', () {
-        expect(
-          OrderHistoryDetailsOrderItem.empty()
-              .copyWith(type: bonusOrderItemType)
-              .itemTotalPrice(true),
-          0.toString(),
-        );
-      });
-
-      test('Display FREE when is bonus and market is not ID', () {
-        expect(
-          OrderHistoryDetailsOrderItem.empty()
-              .copyWith(type: bonusOrderItemType)
-              .itemTotalPrice(false),
-          freeText,
-        );
-      });
-
-      test('Display Price not available when price is 0', () {
+      test('Get Total Price as 0 when total price is 0', () {
         expect(
           OrderHistoryDetailsOrderItem.empty()
               .copyWith(totalPrice: 0)
-              .itemTotalPrice(false),
-          priceNotAvailableText,
+              .totalPrice,
+          0,
         );
       });
 
-      test('Display Price not available when hidePrice is true', () {
+      test('Get total price as 0 when hidePrice is true', () {
         expect(
           OrderHistoryDetailsOrderItem.empty()
               .copyWith(hidePrice: true)
-              .itemTotalPrice(false),
-          priceNotAvailableText,
+              .totalPrice,
+          0,
         );
       });
 
@@ -124,8 +90,8 @@ void main() async {
         expect(
           OrderHistoryDetailsOrderItem.empty()
               .copyWith(totalPrice: fakePrice)
-              .itemTotalPrice(false),
-          fakePrice.toString(),
+              .totalPrice,
+          fakePrice,
         );
       });
     });

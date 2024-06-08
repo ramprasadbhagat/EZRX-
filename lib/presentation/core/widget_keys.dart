@@ -570,6 +570,13 @@ class WidgetKeys {
   static const Key errorLoadingUrl = Key('errorLoadingUrl');
 
   //============================================================
+  //  Item Tax Widget Keys
+  //============================================================
+  static const Key itemTax = Key('itemTax');
+  static const Key itemTaxPercentage = Key('itemTaxPercentage');
+  static const Key finalTotalPriceWithTax = Key('finalTotalPriceWithTax');
+
+  //============================================================
   //  Quantity Input Widget Keys
   //============================================================
   static const Key increaseQuantityKey = Key('increaseQuantityKey');

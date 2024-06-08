@@ -12,8 +12,11 @@ import 'package:ezrxmobile/infrastructure/account/datasource/customer_license_lo
 import 'package:ezrxmobile/infrastructure/core/clevertap/clevertap_service.dart';
 import 'package:ezrxmobile/infrastructure/core/common/tracking_events.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/payment_customer_information_local.dart';
+import 'package:ezrxmobile/presentation/core/item_tax.dart';
 import 'package:ezrxmobile/presentation/core/market_place/market_place_rectangle_logo.dart';
 import 'package:ezrxmobile/presentation/core/market_place/market_place_seller_title.dart';
+import 'package:ezrxmobile/presentation/core/price_component.dart';
+import 'package:ezrxmobile/presentation/core/quantity_and_price_with_tax.dart';
 import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
 import 'package:ezrxmobile/domain/order/entities/payment_customer_information.dart';
 import 'package:ezrxmobile/presentation/core/status_tracker.dart';
@@ -69,6 +72,7 @@ import 'package:ezrxmobile/presentation/orders/order_tab/view_by_item_details/vi
 import 'package:ezrxmobile/domain/order/entities/payment_term.dart'
     as payment_term;
 
+import '../../../../../integration_test/robots/common/extension.dart';
 import '../../../../common_mock_data/customer_code_mock.dart';
 import '../../../../common_mock_data/mock_bloc.dart';
 import '../../../../common_mock_data/mock_other.dart';
@@ -79,8 +83,10 @@ import '../../../../common_mock_data/sales_org_config_mock/fake_sg_sales_org_con
 import '../../../../common_mock_data/sales_org_config_mock/fake_th_sales_org_config.dart';
 import '../../../../common_mock_data/sales_org_config_mock/fake_tw_sales_org_config.dart';
 import '../../../../common_mock_data/sales_org_config_mock/fake_vn_sales_org_config.dart';
+import '../../../../common_mock_data/sales_org_config_variant_mock.dart';
 import '../../../../common_mock_data/sales_organsiation_mock.dart';
 import '../../../../common_mock_data/user_mock.dart';
+import '../../../../utils/common_methods.dart';
 import '../../../../utils/widget_utils.dart';
 
 void main() {
@@ -160,146 +166,147 @@ void main() {
     customerLicense =
         await CustomerLicenseLocalDataSource().getCustomerLicense();
   });
+
+  Widget getScopedWidget() {
+    return WidgetUtils.getScopedWidget(
+      autoRouterMock: autoRouterMock,
+      usingLocalization: true,
+      useMediaQuery: true,
+      providers: [
+        BlocProvider<AuthBloc>(
+          create: (context) => mockAuthBloc,
+        ),
+        BlocProvider<AnnouncementBloc>(
+          create: (context) => announcementBlocMock,
+        ),
+        BlocProvider<ViewByItemsBloc>(
+          create: (context) => viewByItemsBlocMock,
+        ),
+        BlocProvider<CustomerCodeBloc>(
+          create: (context) => customerCodeBlocMock,
+        ),
+        BlocProvider<ViewByOrderBloc>(
+          create: (context) => viewByOrderBlocMock,
+        ),
+        BlocProvider<ViewByItemDetailsBloc>(
+          create: (context) => viewByItemDetailsBlocMock,
+        ),
+        BlocProvider<EligibilityBloc>(
+          create: ((context) => eligibilityBlocMock),
+        ),
+        BlocProvider<ProductImageBloc>(
+          create: ((context) => productImageBlocMock),
+        ),
+        BlocProvider<CartBloc>(
+          create: ((context) => cartBlocMock),
+        ),
+        BlocProvider<ReOrderPermissionBloc>(
+          create: ((context) => reOrderPermissionBlocMock),
+        ),
+        BlocProvider<CreditAndInvoiceDetailsBloc>(
+          create: ((context) => creditAndInvoiceDetailsBlocMock),
+        ),
+        BlocProvider<ViewByOrderDetailsBloc>(
+          create: ((context) => viewByOrderDetailsBlocMock),
+        ),
+        BlocProvider<ZPAllInvoicesBloc>(
+          create: ((context) => allInvoicesBlocMock),
+        ),
+        BlocProvider<PoAttachmentBloc>(
+          create: ((context) => poAttachmentBlocMock),
+        ),
+        BlocProvider<ProductImageBloc>(
+          create: (context) => mockProductImageBloc,
+        ),
+        BlocProvider<MaterialPriceBloc>(
+          create: ((context) => materialPriceBlocMock),
+        ),
+        BlocProvider<PaymentCustomerInformationBloc>(
+          create: ((context) => paymentCustomerInformationBlocMock),
+        ),
+        BlocProvider<CustomerLicenseBloc>(
+          create: (context) => customerLicenseBlocMock,
+        ),
+        BlocProvider<AdditionalDetailsBloc>(
+          create: (context) => additionalDetailsBlocMock,
+        ),
+      ],
+      child: const Material(
+        child: ViewByItemDetailsPage(),
+      ),
+    );
+  }
+
+  setUp(() {
+    cartBlocMock = CartBlocMock();
+    viewByItemsBlocMock = ViewByItemsBlocMock();
+    viewByItemDetailsBlocMock = ViewByItemDetailsBlocMock();
+    customerCodeBlocMock = CustomerCodeBlocMock();
+    viewByOrderBlocMock = ViewByOrderBlocMock();
+    eligibilityBlocMock = EligibilityBlocMock();
+    announcementBlocMock = AnnouncementBlocMock();
+    productImageBlocMock = ProductImageBlocMock();
+    allInvoicesBlocMock = ZPAllInvoicesBlocMock();
+    mpAllInvoicesBlocMock = MPAllInvoicesBlocMock();
+    creditAndInvoiceDetailsBlocMock = CreditAndInvoiceDetailsBlocMock();
+    viewByOrderDetailsBlocMock = ViewByOrderDetailsBlocMock();
+    poAttachmentBlocMock = PoAttachmentBlocMock();
+    mockAuthBloc = AuthBlocMock();
+    mockProductImageBloc = ProductImageBlocMock();
+    materialPriceBlocMock = MaterialPriceBlocMock();
+    customerLicenseBlocMock = CustomerLicenseBlocMock();
+    paymentCustomerInformationBlocMock = PaymentCustomerInformationBlocMock();
+    additionalDetailsBlocMock = AdditionalDetailsBlocMock();
+
+    when(() => reOrderPermissionBlocMock.state)
+        .thenReturn(ReOrderPermissionState.initial());
+    when(() => mockAuthBloc.state).thenReturn(const AuthState.initial());
+    when(() => viewByItemsBlocMock.state)
+        .thenReturn(ViewByItemsState.initial());
+    when(() => customerCodeBlocMock.state)
+        .thenReturn(CustomerCodeState.initial());
+    when(() => viewByOrderBlocMock.state)
+        .thenReturn(ViewByOrderState.initial());
+    when(() => announcementBlocMock.state)
+        .thenReturn(AnnouncementState.initial());
+    when(() => viewByItemDetailsBlocMock.state)
+        .thenReturn(ViewByItemDetailsState.initial());
+    when(() => productImageBlocMock.state)
+        .thenReturn(ProductImageState.initial());
+    when(() => cartBlocMock.state).thenReturn(CartState.initial());
+    when(() => customerLicenseBlocMock.state)
+        .thenReturn(CustomerLicenseState.initial());
+    when(() => allInvoicesBlocMock.state)
+        .thenReturn(AllInvoicesState.initial());
+    when(() => mpAllInvoicesBlocMock.state)
+        .thenReturn(AllInvoicesState.initial());
+    when(() => creditAndInvoiceDetailsBlocMock.state)
+        .thenReturn(CreditAndInvoiceDetailsState.initial());
+    when(() => viewByOrderDetailsBlocMock.state)
+        .thenReturn(ViewByOrderDetailsState.initial());
+    when(() => poAttachmentBlocMock.state)
+        .thenReturn(PoAttachmentState.initial());
+    when(() => eligibilityBlocMock.state).thenReturn(
+      EligibilityState.initial().copyWith(
+        user: fakeClientUser,
+        salesOrganisation: fakeSGSalesOrganisation,
+        customerCodeInfo: fakeCustomerCodeInfoWithCustomerGrp4,
+      ),
+    );
+    when(() => mockProductImageBloc.state)
+        .thenReturn(ProductImageState.initial());
+    when(() => materialPriceBlocMock.state).thenReturn(
+      MaterialPriceState.initial(),
+    );
+    when(() => paymentCustomerInformationBlocMock.state).thenReturn(
+      PaymentCustomerInformationState.initial(),
+    );
+    when(() => additionalDetailsBlocMock.state).thenReturn(
+      AdditionalDetailsState.initial(),
+    );
+  });
+
   group('Order History Details By Item Page', () {
-    setUp(() async {
-      cartBlocMock = CartBlocMock();
-      viewByItemsBlocMock = ViewByItemsBlocMock();
-      viewByItemDetailsBlocMock = ViewByItemDetailsBlocMock();
-      customerCodeBlocMock = CustomerCodeBlocMock();
-      viewByOrderBlocMock = ViewByOrderBlocMock();
-      eligibilityBlocMock = EligibilityBlocMock();
-      announcementBlocMock = AnnouncementBlocMock();
-      productImageBlocMock = ProductImageBlocMock();
-      allInvoicesBlocMock = ZPAllInvoicesBlocMock();
-      mpAllInvoicesBlocMock = MPAllInvoicesBlocMock();
-      creditAndInvoiceDetailsBlocMock = CreditAndInvoiceDetailsBlocMock();
-      viewByOrderDetailsBlocMock = ViewByOrderDetailsBlocMock();
-      poAttachmentBlocMock = PoAttachmentBlocMock();
-      mockAuthBloc = AuthBlocMock();
-      mockProductImageBloc = ProductImageBlocMock();
-      materialPriceBlocMock = MaterialPriceBlocMock();
-      customerLicenseBlocMock = CustomerLicenseBlocMock();
-      paymentCustomerInformationBlocMock = PaymentCustomerInformationBlocMock();
-      additionalDetailsBlocMock = AdditionalDetailsBlocMock();
-
-      when(() => reOrderPermissionBlocMock.state)
-          .thenReturn(ReOrderPermissionState.initial());
-      when(() => mockAuthBloc.state).thenReturn(const AuthState.initial());
-      when(() => viewByItemsBlocMock.state)
-          .thenReturn(ViewByItemsState.initial());
-      when(() => customerCodeBlocMock.state)
-          .thenReturn(CustomerCodeState.initial());
-      when(() => viewByOrderBlocMock.state)
-          .thenReturn(ViewByOrderState.initial());
-      when(() => announcementBlocMock.state)
-          .thenReturn(AnnouncementState.initial());
-      when(() => viewByItemDetailsBlocMock.state)
-          .thenReturn(ViewByItemDetailsState.initial());
-      when(() => productImageBlocMock.state)
-          .thenReturn(ProductImageState.initial());
-      when(() => cartBlocMock.state).thenReturn(CartState.initial());
-      when(() => customerLicenseBlocMock.state)
-          .thenReturn(CustomerLicenseState.initial());
-      when(() => allInvoicesBlocMock.state)
-          .thenReturn(AllInvoicesState.initial());
-      when(() => mpAllInvoicesBlocMock.state)
-          .thenReturn(AllInvoicesState.initial());
-      when(() => creditAndInvoiceDetailsBlocMock.state)
-          .thenReturn(CreditAndInvoiceDetailsState.initial());
-      when(() => viewByOrderDetailsBlocMock.state)
-          .thenReturn(ViewByOrderDetailsState.initial());
-      when(() => poAttachmentBlocMock.state)
-          .thenReturn(PoAttachmentState.initial());
-      when(() => eligibilityBlocMock.state).thenReturn(
-        EligibilityState.initial().copyWith(
-          user: fakeClientUser,
-          salesOrganisation: fakeSGSalesOrganisation,
-          customerCodeInfo: fakeCustomerCodeInfoWithCustomerGrp4,
-        ),
-      );
-      when(() => mockProductImageBloc.state)
-          .thenReturn(ProductImageState.initial());
-      when(() => materialPriceBlocMock.state).thenReturn(
-        MaterialPriceState.initial(),
-      );
-      when(() => paymentCustomerInformationBlocMock.state).thenReturn(
-        PaymentCustomerInformationState.initial(),
-      );
-      when(() => additionalDetailsBlocMock.state).thenReturn(
-        AdditionalDetailsState.initial(),
-      );
-    });
-
-    Widget getScopedWidget() {
-      return WidgetUtils.getScopedWidget(
-        autoRouterMock: autoRouterMock,
-        usingLocalization: true,
-        useMediaQuery: true,
-        providers: [
-          BlocProvider<AuthBloc>(
-            create: (context) => mockAuthBloc,
-          ),
-          BlocProvider<AnnouncementBloc>(
-            create: (context) => announcementBlocMock,
-          ),
-          BlocProvider<ViewByItemsBloc>(
-            create: (context) => viewByItemsBlocMock,
-          ),
-          BlocProvider<CustomerCodeBloc>(
-            create: (context) => customerCodeBlocMock,
-          ),
-          BlocProvider<ViewByOrderBloc>(
-            create: (context) => viewByOrderBlocMock,
-          ),
-          BlocProvider<ViewByItemDetailsBloc>(
-            create: (context) => viewByItemDetailsBlocMock,
-          ),
-          BlocProvider<EligibilityBloc>(
-            create: ((context) => eligibilityBlocMock),
-          ),
-          BlocProvider<ProductImageBloc>(
-            create: ((context) => productImageBlocMock),
-          ),
-          BlocProvider<CartBloc>(
-            create: ((context) => cartBlocMock),
-          ),
-          BlocProvider<ReOrderPermissionBloc>(
-            create: ((context) => reOrderPermissionBlocMock),
-          ),
-          BlocProvider<CreditAndInvoiceDetailsBloc>(
-            create: ((context) => creditAndInvoiceDetailsBlocMock),
-          ),
-          BlocProvider<ViewByOrderDetailsBloc>(
-            create: ((context) => viewByOrderDetailsBlocMock),
-          ),
-          BlocProvider<ZPAllInvoicesBloc>(
-            create: ((context) => allInvoicesBlocMock),
-          ),
-          BlocProvider<PoAttachmentBloc>(
-            create: ((context) => poAttachmentBlocMock),
-          ),
-          BlocProvider<ProductImageBloc>(
-            create: (context) => mockProductImageBloc,
-          ),
-          BlocProvider<MaterialPriceBloc>(
-            create: ((context) => materialPriceBlocMock),
-          ),
-          BlocProvider<PaymentCustomerInformationBloc>(
-            create: ((context) => paymentCustomerInformationBlocMock),
-          ),
-          BlocProvider<CustomerLicenseBloc>(
-            create: (context) => customerLicenseBlocMock,
-          ),
-          BlocProvider<AdditionalDetailsBloc>(
-            create: (context) => additionalDetailsBlocMock,
-          ),
-        ],
-        child: const Material(
-          child: ViewByItemDetailsPage(),
-        ),
-      );
-    }
-
     testWidgets('loaderImage  test ', (tester) async {
       when(() => viewByItemDetailsBlocMock.state).thenReturn(
         ViewByItemDetailsState.initial().copyWith(
@@ -2650,5 +2657,130 @@ void main() {
       );
       expect(find.textContaining(iRNNumber), findsNothing);
     });
+  });
+
+  group('Item material - ', () {
+    testWidgets(
+      ' => Material price with tax when order history item is applied tax',
+      (tester) async {
+        final currentSalesOrgConfigVariant =
+            salesOrgConfigVariant.currentValue ?? fakeIDSalesOrgConfigs;
+        final currentSalesOrg = currentSalesOrgConfigVariant.salesOrg;
+
+        final currentSalesOrganisation = fakeEmptySalesOrganisation.copyWith(
+          salesOrg: currentSalesOrg,
+        );
+        final currency = currentSalesOrgConfigVariant.currency.code;
+
+        final hideItemTax =
+            !currentSalesOrgConfigVariant.displayItemTaxBreakdown;
+
+        const unitPrice = 100.0;
+        const quantity = 2;
+        const taxRate = 5.0;
+        const totalTax = 10.0;
+        const totalUnitPrice = unitPrice * quantity;
+        const totalPrice = totalUnitPrice + totalTax;
+
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrgConfigs: currentSalesOrgConfigVariant,
+            salesOrganisation: currentSalesOrganisation,
+          ),
+        );
+        when(() => viewByItemDetailsBlocMock.state).thenReturn(
+          ViewByItemDetailsState.initial().copyWith(
+            orderHistoryItem: fakeOrderHistoryItem.copyWith(
+              unitPrice: unitPrice,
+              qty: quantity,
+              totalUnitPrice: totalUnitPrice,
+              totalPrice: totalPrice,
+              taxRate: taxRate,
+            ),
+          ),
+        );
+
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pumpAndSettle();
+        await tester.dragUntilVisible(
+          find.byType(ItemDetailsSection),
+          find.byKey(WidgetKeys.scrollList),
+          const Offset(0, -300),
+        );
+
+        final quantityAndPriceWithTax = find.byType(QuantityAndPriceWithTax);
+        await tester.dragUntilVisible(
+          quantityAndPriceWithTax,
+          find.byType(ListView),
+          const Offset(0.0, -200.0),
+        );
+        //checking quantityAndPriceWithTax widget
+        expect(quantityAndPriceWithTax, findsOneWidget);
+        final itemTaxFinder = find.byKey(WidgetKeys.itemTax);
+        await tester.scrollUntilVisible(quantityAndPriceWithTax, -200);
+
+        //check quantity
+        expect(
+          find.descendant(
+            of: quantityAndPriceWithTax,
+            matching: find.byWidgetPredicate(
+              (widget) =>
+                  widget is Text &&
+                  widget.key == WidgetKeys.cartItemProductQty &&
+                  widget.data!.contains(quantity.toString()),
+            ),
+          ),
+          findsOneWidget,
+        );
+        //check total price
+        expect(
+          tester
+              .widget<PriceComponent>(
+                find.byKey(WidgetKeys.cartItemProductTotalPrice),
+              )
+              .price,
+          totalUnitPrice.toString(),
+        );
+
+        //if item tax disable no need to check tax, just return
+        if (hideItemTax) {
+          expect(itemTaxFinder, findsNothing);
+          return;
+        }
+
+        //checking item tax
+        final materialTaxWidget = find.byType(ItemTax);
+        expect(materialTaxWidget, findsOneWidget);
+        expect(itemTaxFinder, findsOneWidget);
+
+        //checking item tax percentage
+        final itemTaxPercentage = find.byKey(WidgetKeys.itemTaxPercentage);
+        expect(
+          find.descendant(
+            of: itemTaxFinder,
+            matching: itemTaxPercentage,
+          ),
+          findsOneWidget,
+        );
+        expect(
+          tester.widget<Text>(itemTaxPercentage).data,
+          '($taxRate% ${'tax'.tr()})',
+        );
+
+        // checking item total price at item tax level
+        find.descendant(
+          of: itemTaxFinder,
+          matching: find.descendant(
+            of: find.byKey(WidgetKeys.finalTotalPriceWithTax),
+            matching: priceComponent(
+              currentSalesOrg.isID
+                  ? totalPrice.priceDisplayForID(currency)
+                  : totalPrice.priceDisplay(currency),
+            ),
+          ),
+        );
+      },
+      variant: salesOrgConfigVariant,
+    );
   });
 }

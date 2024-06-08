@@ -24,7 +24,7 @@ final fakeIDSalesOrgConfigs = SalesOrganisationConfigs.empty().copyWith(
   enableGMC: false,
   enableGMN: false,
   minOrderAmount: 100.0,
-  vatValue: 0,
+  vatValue: 11,
   netPriceOverride: true,
   enableFutureDeliveryDay: false,
   futureDeliveryDay: FutureDeliveryDay('7'),

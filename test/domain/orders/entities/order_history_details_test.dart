@@ -17,6 +17,7 @@ void main() async {
     deliveryFee: 13,
     totalTax: 14,
     orderValue: 9,
+    taxRate: 1,
   );
   final mpOrder = OrderHistoryDetails.empty().copyWith(
     isMarketPlace: true,
@@ -77,6 +78,14 @@ void main() async {
       () => expect(
         [zpOrder, mpOrder].smallOrderFee,
         zpOrder.deliveryFee + mpOrder.deliveryFee,
+      ),
+    );
+
+    test(
+      'Tax Rate',
+      () => expect(
+        zpOrder.taxRate,
+        1,
       ),
     );
 

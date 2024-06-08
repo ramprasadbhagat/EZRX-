@@ -51,10 +51,12 @@ import 'package:ezrxmobile/presentation/core/item_tax.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/market_place/market_place_rectangle_logo.dart';
 import 'package:ezrxmobile/presentation/core/market_place/market_place_seller_title.dart';
+import 'package:ezrxmobile/presentation/core/price_component.dart';
 import 'package:ezrxmobile/presentation/core/status_label.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/orders/order_tab/view_by_order_details/section/view_by_order_header_section.dart';
 import 'package:ezrxmobile/presentation/orders/order_tab/view_by_order_details/section/view_by_order_item_details_section.dart';
+import 'package:ezrxmobile/presentation/orders/order_tab/view_by_order_details/section/view_by_order_summary_section.dart';
 import 'package:ezrxmobile/presentation/orders/order_tab/view_by_order_details/view_by_order_details.dart';
 import 'package:ezrxmobile/presentation/orders/order_tab/widgets/order_item_price.dart';
 import 'package:ezrxmobile/presentation/core/quantity_and_price_with_tax.dart';
@@ -67,6 +69,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
+import '../../../../integration_test/robots/common/extension.dart';
 import '../../../common_mock_data/customer_code_mock.dart';
 import '../../../common_mock_data/mock_bloc.dart';
 import '../../../common_mock_data/mock_other.dart';
@@ -78,8 +81,10 @@ import '../../../common_mock_data/sales_org_config_mock/fake_sg_sales_org_config
 import '../../../common_mock_data/sales_org_config_mock/fake_th_sales_org_config.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_tw_sales_org_config.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_vn_sales_org_config.dart';
+import '../../../common_mock_data/sales_org_config_variant_mock.dart';
 import '../../../common_mock_data/sales_organsiation_mock.dart';
 import '../../../common_mock_data/user_mock.dart';
+import '../../../utils/common_methods.dart';
 import '../../../utils/widget_utils.dart';
 
 void main() {
@@ -101,8 +106,6 @@ void main() {
   late PoAttachmentBloc mockPoAttachmentBloc;
   late CustomerInformation customerCodeInfoList;
   late ViewByOrder viewByOrder;
-  late ViewByOrder viewByOrderWithCounterOffer;
-  late ViewByOrder viewByOrderWithTax;
   late OrderHistoryDetailsOrderItem fakeOrderHistoryItem;
   late PaymentCustomerInformationBloc paymentCustomerInformationBlocMock;
   late CustomerLicenseBloc customerLicenseBlocMock;
@@ -127,33 +130,6 @@ void main() {
     );
     customerLicense =
         await CustomerLicenseLocalDataSource().getCustomerLicense();
-    viewByOrderWithCounterOffer = viewByOrder.copyWith(
-      orderHeaders: [
-        viewByOrder.orderHeaders.first.copyWith(
-          orderHistoryDetailsOrderItem: [
-            fakeOrderHistoryItem.copyWith(
-              isCounterOffer: true,
-              originPrice: 100.1,
-              unitPrice: 98,
-            ),
-          ],
-        ),
-      ],
-    );
-    viewByOrderWithTax = viewByOrderWithCounterOffer.copyWith(
-      orderHeaders: [
-        viewByOrder.orderHeaders.first.copyWith(
-          orderHistoryDetailsOrderItem: [
-            fakeOrderHistoryItem.copyWith(
-              tax: 9,
-              totalPrice: 336.6,
-              unitPrice: 336.6,
-              qty: 1,
-            ),
-          ],
-        ),
-      ],
-    );
   });
   group('Order History Details Page', () {
     setUp(() async {
@@ -232,12 +208,6 @@ void main() {
         ),
       );
     });
-
-    ///////////////////Finder//////////////////////////////////////////////////
-    final viewByOrderTaxKey = find.byKey(
-      WidgetKeys.viewByOrderTaxKey,
-    );
-    //////////////////////////////////////////////////////////////////////////
 
     Widget getScopedWidget() {
       return WidgetUtils.getScopedWidget(
@@ -1690,125 +1660,296 @@ void main() {
     });
 
     testWidgets(
-        '=> Display material tax when order history item is applied tax',
-        (tester) async {
-      when(() => eligibilityBlocMock.state).thenReturn(
-        EligibilityState.initial().copyWith(
-          salesOrganisation: fakeSalesOrganisation,
-          customerCodeInfo: fakeCustomerCodeInfo,
-          salesOrgConfigs: fakeVNSalesOrgConfigs,
-        ),
-      );
-      when(() => viewByOrderBlocMock.state).thenReturn(
-        ViewByOrderState.initial().copyWith(
-          salesOrganisation: fakeSalesOrganisation,
-          customerCodeInfo: fakeCustomerCodeInfo,
-          salesOrgConfigs: fakeVNSalesOrgConfigs,
-          viewByOrderList: viewByOrderWithTax,
-        ),
-      );
-      when(() => viewByOrderDetailsBlocMock.state).thenReturn(
-        ViewByOrderDetailsState.initial().copyWith(
-          orderHistoryDetails: viewByOrder.orderHeaders.first.copyWith(
-            orderHistoryDetailsOrderItem: [
-              viewByOrder.orderHeaders.first.orderHistoryDetailsOrderItem.first
-                  .copyWith(
-                totalUnitPrice: 50,
-              ),
-            ],
-          ),
-        ),
-      );
+      '=> Display material price with tax when order history item is applied tax',
+      (tester) async {
+        final currentSalesOrgConfigVariant =
+            salesOrgConfigVariant.currentValue ?? fakeIDSalesOrgConfigs;
+        final currentSalesOrg = currentSalesOrgConfigVariant.salesOrg;
 
-      await tester.pumpWidget(getScopedWidget());
-      await tester.pumpAndSettle();
-      await tester.fling(
-        find.byType(ListView),
-        const Offset(0.0, -1000.0),
-        1000.0,
-      );
-      final quantityAndPriceWithTax = find.byType(QuantityAndPriceWithTax);
-      expect(quantityAndPriceWithTax, findsOneWidget);
-      final materialTax = find.byType(ItemTax);
-      expect(materialTax, findsOneWidget);
-    });
+        final currentSalesOrganisation = fakeEmptySalesOrganisation.copyWith(
+          salesOrg: currentSalesOrg,
+        );
+
+        final currency = currentSalesOrgConfigVariant.currency.code;
+        final hideSubTotalTax =
+            currentSalesOrgConfigVariant.displaySubtotalTaxBreakdown;
+        final hideItemTax =
+            !currentSalesOrgConfigVariant.displayItemTaxBreakdown;
+
+        const unitPrice = 100.0;
+        const quantity = 2;
+        const taxRate = 5.0;
+        const totalTax = 10.0;
+        const totalUnitPrice = unitPrice * quantity;
+
+        const totalPrice = totalUnitPrice + totalTax;
+
+        final subTotalValue = hideSubTotalTax ? totalUnitPrice : totalPrice;
+
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrganisation: currentSalesOrganisation,
+            salesOrgConfigs: currentSalesOrgConfigVariant,
+          ),
+        );
+        when(() => viewByOrderDetailsBlocMock.state).thenReturn(
+          ViewByOrderDetailsState.initial().copyWith(
+            salesOrganisation: currentSalesOrganisation,
+            configs: currentSalesOrgConfigVariant,
+            orderHistoryDetails: viewByOrder.orderHeaders.first.copyWith(
+              orderValue: subTotalValue,
+              orderHistoryDetailsOrderItem: [
+                viewByOrder
+                    .orderHeaders.first.orderHistoryDetailsOrderItem.first
+                    .copyWith(
+                  totalUnitPrice: totalUnitPrice,
+                  taxRate: taxRate,
+                  totalTax: totalTax,
+                  totalPrice: totalPrice,
+                  qty: quantity,
+                ),
+              ],
+            ),
+          ),
+        );
+
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pumpAndSettle();
+
+        final quantityAndPriceWithTax = find.byType(QuantityAndPriceWithTax);
+        await tester.dragUntilVisible(
+          quantityAndPriceWithTax,
+          find.byType(ListView),
+          const Offset(0.0, -200.0),
+        );
+        //checking quantityAndPriceWithTax widget
+        expect(quantityAndPriceWithTax, findsOneWidget);
+        final itemTaxFinder = find.byKey(WidgetKeys.itemTax);
+        await tester.scrollUntilVisible(quantityAndPriceWithTax, -200);
+
+        //check quantity
+        expect(
+          find.descendant(
+            of: quantityAndPriceWithTax,
+            matching: find.byWidgetPredicate(
+              (widget) =>
+                  widget is Text &&
+                  widget.key == WidgetKeys.cartItemProductQty &&
+                  widget.data!.contains(quantity.toString()),
+            ),
+          ),
+          findsOneWidget,
+        );
+        //check total price
+        expect(
+          tester
+              .widget<PriceComponent>(
+                find.byKey(WidgetKeys.cartItemProductTotalPrice),
+              )
+              .price,
+          totalUnitPrice.toString(),
+        );
+
+        //if item tax disable no need to check tax, just return
+        if (hideItemTax) {
+          expect(itemTaxFinder, findsNothing);
+          return;
+        }
+
+        //checking item tax
+        final materialTaxWidget = find.byType(ItemTax);
+        expect(materialTaxWidget, findsOneWidget);
+        expect(itemTaxFinder, findsOneWidget);
+
+        //checking item total tax
+        expect(
+          find.descendant(
+            of: itemTaxFinder,
+            matching: priceComponent(
+              currentSalesOrg.isID
+                  ? totalTax.priceDisplayForID(currency)
+                  : totalTax.priceDisplay(currency),
+            ),
+          ),
+          findsOneWidget,
+        );
+
+        //checking item tax percentage
+        final itemTaxPercentage = find.byKey(WidgetKeys.itemTaxPercentage);
+        expect(
+          find.descendant(
+            of: itemTaxFinder,
+            matching: itemTaxPercentage,
+          ),
+          findsOneWidget,
+        );
+        expect(
+          tester.widget<Text>(itemTaxPercentage).data,
+          '($taxRate% ${'tax'.tr()})',
+        );
+
+        //checking item total price at item tax level
+        find.descendant(
+          of: itemTaxFinder,
+          matching: find.descendant(
+            of: find.byKey(WidgetKeys.finalTotalPriceWithTax),
+            matching: priceComponent(
+              currentSalesOrg.isID
+                  ? totalPrice.priceDisplayForID(currency)
+                  : totalPrice.priceDisplay(currency),
+            ),
+          ),
+        );
+      },
+      variant: salesOrgConfigVariant,
+    );
 
     testWidgets(
-        '=> NOT display material tax when order history item is NOT applied tax',
-        (tester) async {
-      when(() => eligibilityBlocMock.state).thenReturn(
-        EligibilityState.initial().copyWith(
-          salesOrganisation: fakeSalesOrganisation,
-          customerCodeInfo: fakeCustomerCodeInfo,
-          salesOrgConfigs: fakeMYSalesOrgConfigs,
-        ),
-      );
-      when(() => viewByOrderBlocMock.state).thenReturn(
-        ViewByOrderState.initial().copyWith(
-          salesOrganisation: fakeSalesOrganisation,
-          customerCodeInfo: fakeCustomerCodeInfo,
-          salesOrgConfigs: fakeMYSalesOrgConfigs,
-          viewByOrderList: viewByOrder,
-        ),
-      );
-      when(() => viewByOrderDetailsBlocMock.state).thenReturn(
-        ViewByOrderDetailsState.initial().copyWith(
-          orderHistoryDetails: viewByOrder.orderHeaders.first,
-        ),
-      );
+      '=> Order Summary Subtotal excl/incl. with & without tax',
+      (tester) async {
+        final currentSalesOrgConfigVariant =
+            salesOrgConfigVariant.currentValue ?? fakeIDSalesOrgConfigs;
+        final currentSalesOrg = currentSalesOrgConfigVariant.salesOrg;
+        final currentSalesOrganisation = fakeEmptySalesOrganisation.copyWith(
+          salesOrg: currentSalesOrg,
+        );
+        final currency = currentSalesOrgConfigVariant.currency.code;
+        final hideSubTotalTax =
+            currentSalesOrgConfigVariant.displaySubtotalTaxBreakdown;
+        const unitPrice = 100.0;
+        const quantity = 2;
+        final taxRate = currentSalesOrgConfigVariant.vatValue.toDouble();
+        const totalUnitPrice = unitPrice * quantity;
+        final totalTax =
+            totalUnitPrice * currentSalesOrgConfigVariant.vatValue * 0.01;
+        final totalPrice = totalUnitPrice + totalTax;
+        final subTotalValue = hideSubTotalTax ? totalUnitPrice : totalPrice;
 
-      await tester.pumpWidget(getScopedWidget());
-      await tester.pumpAndSettle();
-      await tester.fling(
-        find.byType(ListView),
-        const Offset(0.0, -1000.0),
-        1000.0,
-      );
-      final quantityAndPriceWithTax = find.byType(QuantityAndPriceWithTax);
-      expect(quantityAndPriceWithTax, findsOneWidget);
-      final materialTax = find.byType(ItemTax);
-      expect(materialTax, findsNothing);
-    });
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrganisation: currentSalesOrganisation,
+            salesOrgConfigs: currentSalesOrgConfigVariant,
+          ),
+        );
+        when(() => viewByOrderDetailsBlocMock.state).thenReturn(
+          ViewByOrderDetailsState.initial().copyWith(
+            salesOrganisation: currentSalesOrganisation,
+            configs: currentSalesOrgConfigVariant,
+            orderHistoryDetails: viewByOrder.orderHeaders.first.copyWith(
+              orderValue: subTotalValue,
+              totalValue: totalPrice,
+              taxRate: taxRate,
+              totalTax: totalTax,
+              orderHistoryDetailsOrderItem: [
+                viewByOrder
+                    .orderHeaders.first.orderHistoryDetailsOrderItem.first
+                    .copyWith(
+                  totalUnitPrice: totalUnitPrice,
+                  taxRate: taxRate,
+                  totalTax: totalTax,
+                  totalPrice: totalPrice,
+                  qty: quantity,
+                ),
+              ],
+            ),
+          ),
+        );
 
-    testWidgets('=>  display summary tax when tax break down on from sales org',
-        (tester) async {
-      when(() => mockSalesOrgBloc.state).thenReturn(
-        SalesOrgState.initial().copyWith(
-          configs: fakeSGSalesOrgConfigs,
-        ),
-      );
-      when(() => eligibilityBlocMock.state).thenReturn(
-        EligibilityState.initial().copyWith(
-          salesOrganisation: fakeSalesOrganisation,
-          customerCodeInfo: fakeCustomerCodeInfo,
-          salesOrgConfigs: fakeSGSalesOrgConfigs,
-        ),
-      );
-      when(() => viewByOrderBlocMock.state).thenReturn(
-        ViewByOrderState.initial().copyWith(
-          salesOrganisation: fakeSalesOrganisation,
-          customerCodeInfo: fakeCustomerCodeInfo,
-          salesOrgConfigs: fakeSGSalesOrgConfigs,
-          viewByOrderList: viewByOrder,
-        ),
-      );
-      when(() => viewByOrderDetailsBlocMock.state).thenReturn(
-        ViewByOrderDetailsState.initial().copyWith(
-          orderHistoryDetails: viewByOrder.orderHeaders.first,
-        ),
-      );
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pumpAndSettle();
 
-      await tester.pumpWidget(getScopedWidget());
-      await tester.pumpAndSettle();
+        final orderSummarySection = find.byType(OrderSummarySection);
+        expect(orderSummarySection, findsOneWidget);
 
-      expect(
-        find.descendant(
-          of: viewByOrderTaxKey,
-          matching: find.text('SGD 0.00', findRichText: true),
-        ),
-        findsOneWidget,
-      );
-    });
+        final subTotalFinder = find.byKey(WidgetKeys.viewByOrderSubtotalKey);
+
+        //subtotal price
+        expect(
+          find.descendant(
+            of: subTotalFinder,
+            matching: find.text(
+              'Subtotal (${currentSalesOrgConfigVariant.displayPrefixTax}.tax):',
+            ),
+          ),
+          findsOneWidget,
+        );
+        expect(
+          find.descendant(
+            of: subTotalFinder,
+            matching: priceComponent(
+              currentSalesOrg.isID
+                  ? subTotalValue.priceDisplayForID(currency)
+                  : subTotalValue.priceDisplay(currency),
+            ),
+          ),
+          findsOneWidget,
+        );
+
+        //Tax % with value
+        final taxRateVisible = find.text(
+          'Tax at ${currentSalesOrgConfigVariant.vatValue.toDouble()}%:',
+        );
+        final hideTaxRate = find.text(
+          'Tax:',
+        );
+        final taxSection = find.byKey(
+          currentSalesOrg.isID
+              ? WidgetKeys.viewByOrderIdTaxKey
+              : WidgetKeys.viewByOrderTaxKey,
+        );
+        expect(
+          find.descendant(
+            of: taxSection,
+            matching:
+                currentSalesOrg.isMaterialTax ? hideTaxRate : taxRateVisible,
+          ),
+          currentSalesOrgConfigVariant.displaySubtotalTaxBreakdown ||
+                  currentSalesOrg.isID
+              ? findsOneWidget
+              : findsNothing,
+        );
+        expect(
+          find.descendant(
+            of: taxSection,
+            matching: priceComponent(
+              currentSalesOrg.isID
+                  ? totalTax.priceDisplayForID(currency)
+                  : totalTax.priceDisplay(currency),
+            ),
+          ),
+          currentSalesOrgConfigVariant.displaySubtotalTaxBreakdown
+              ? findsOneWidget
+              : findsNothing,
+        );
+
+        //grand total price
+        final grandTotalFinder = find.byKey(
+          currentSalesOrg.isID
+              ? WidgetKeys.viewByOrderIdGrandTotalKey
+              : WidgetKeys.viewByOrderGrandTotalKey,
+        );
+
+        expect(
+          find.descendant(
+            of: grandTotalFinder,
+            matching: find.text('Grand total:'),
+          ),
+          findsOneWidget,
+        );
+        expect(
+          find.descendant(
+            of: grandTotalFinder,
+            matching: priceComponent(
+              currentSalesOrg.isID
+                  ? totalPrice.priceDisplayForID(currency)
+                  : totalPrice.priceDisplay(currency),
+            ),
+          ),
+          findsWidgets,
+        );
+      },
+      variant: salesOrgConfigVariant,
+    );
 
     testWidgets(
         '=> List price strike through price visible, if final price is less than list price && enableListPrice = true',

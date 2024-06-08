@@ -13,7 +13,7 @@ void main() {
         'MaterialDescription': 'fake-desc',
         'Qty': 10,
         'UnitPrice': 10.0,
-        'TotalPrice': 20.0,
+        'TotalPrice': 200.0,
         'HidePrice': true,
         'Tax': 0,
         'SAPStatus': 'fake-status',
@@ -24,6 +24,9 @@ void main() {
         'IsTenderContractMaterial': false,
         'Details': [],
         'TenderContractDetails': <String, dynamic>{},
+        'TotalUnitPrice': 200.0,
+        'TotalTax': 0.0,
+        'TaxRate': ['0'],
       };
     });
 
@@ -36,6 +39,9 @@ void main() {
 
       expect(configs.batch, 'fake-batch');
       expect(configs.hidePrice, true);
+      expect(configs.totalUnitPrice, 200.0);
+      expect(configs.totalTax, 0.0);
+      expect(configs.taxRate, 0.0);
     });
 
     test('Test tojson', () {
@@ -47,6 +53,9 @@ void main() {
 
       expect(configs['Batch'], 'fake-batch');
       expect(configs['HidePrice'], true);
+      expect(configs['TotalUnitPrice'], 200.0);
+      expect(configs['TotalTax'], 0.0);
+      expect(configs['TaxRate'], 0.0);
     });
   });
 }

@@ -53,7 +53,6 @@ import 'package:ezrxmobile/presentation/core/list_price_strike_through_component
 import 'package:ezrxmobile/presentation/core/market_place/market_place_logo.dart';
 import 'package:ezrxmobile/presentation/core/status_label.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
-import 'package:ezrxmobile/presentation/core/item_tax.dart';
 import 'package:ezrxmobile/presentation/orders/cart/widget/market_place_delivery_tile.dart';
 import 'package:ezrxmobile/presentation/orders/order_success/order_success_page.dart';
 import 'package:ezrxmobile/presentation/orders/order_success/widgets/order_success_attachment_section.dart';
@@ -65,6 +64,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 
+import '../../../../integration_test/robots/common/extension.dart';
 import '../../../common_mock_data/customer_code_mock.dart';
 import '../../../common_mock_data/mock_bloc.dart';
 import '../../../common_mock_data/mock_other.dart';
@@ -75,8 +75,10 @@ import '../../../common_mock_data/sales_org_config_mock/fake_sg_sales_org_config
 import '../../../common_mock_data/sales_org_config_mock/fake_th_sales_org_config.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_tw_sales_org_config.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_vn_sales_org_config.dart';
+import '../../../common_mock_data/sales_org_config_variant_mock.dart';
 import '../../../common_mock_data/sales_organsiation_mock.dart';
 import '../../../common_mock_data/user_mock.dart';
+import '../../../utils/common_methods.dart';
 import '../../../utils/widget_utils.dart';
 
 void main() {
@@ -470,17 +472,38 @@ void main() {
 
     group('Order summary check -', () {
       testWidgets(
-        'Order summary price check - subTotal include tax & grandTotal price ',
+        'subTotal excl./incl. tax & grandTotal price',
         (tester) async {
+          final currentSalesOrgConfigVariant =
+              salesOrgConfigVariant.currentValue ?? fakeIDSalesOrgConfigs;
+
+          final currentSalesOrg = currentSalesOrgConfigVariant.salesOrg;
+
+          final currentSalesOrganisation = fakeEmptySalesOrganisation.copyWith(
+            salesOrg: currentSalesOrg,
+          );
+
+          final currency = currentSalesOrgConfigVariant.currency.code;
+
           const finalPrice = 88.0;
-          const vatValue = 9;
           const quantity = 2;
           const subTotalValueWithoutTax = finalPrice * quantity;
-          const totalTax = subTotalValueWithoutTax * vatValue * 0.01;
-          const grandTotalValue = subTotalValueWithoutTax + totalTax;
+          final totalTax = subTotalValueWithoutTax *
+              currentSalesOrgConfigVariant.vatValue *
+              0.01;
+          final grandTotalValue = subTotalValueWithoutTax + totalTax;
+          final grandTotalValueForID =
+              subTotalValueWithoutTax + totalTax.roundToDouble();
+
+          final orderValue =
+              currentSalesOrgConfigVariant.displaySubtotalTaxBreakdown
+                  ? subTotalValueWithoutTax
+                  : grandTotalValue;
+
           when(() => eligibilityBlocMock.state).thenReturn(
             EligibilityState.initial().copyWith(
-              salesOrgConfigs: fakeSGSalesOrgConfigs,
+              salesOrgConfigs: currentSalesOrgConfigVariant,
+              salesOrganisation: currentSalesOrganisation,
             ),
           );
           when(() => orderSummaryBlocMock.state).thenReturn(
@@ -493,7 +516,7 @@ void main() {
                     ),
                   ],
                   totalValue: grandTotalValue,
-                  orderValue: subTotalValueWithoutTax,
+                  orderValue: orderValue,
                   totalTax: totalTax,
                 ),
               ],
@@ -505,191 +528,108 @@ void main() {
           final orderSummarySection =
               find.byKey(WidgetKeys.orderSuccessOrderSummarySection);
           final scrollList = find.byKey(WidgetKeys.scrollList);
+
+          final orderSuccessSubTotal =
+              find.byKey(WidgetKeys.orderSuccessSubTotal);
+
+          final orderSuccessGrandTotal =
+              find.byKey(WidgetKeys.orderSuccessGrandTotal);
           await tester.dragUntilVisible(
             orderSummarySection,
             scrollList,
             const Offset(0, -300),
           );
-          //sub total (excl. tax)
+          await tester.pump(Durations.long2);
+
+          //subtotal price
           expect(
             find.descendant(
-              of: orderSummarySection,
-              matching: find.text('Subtotal (excl.tax):'),
+              of: orderSuccessSubTotal,
+              matching: find.text(
+                'Subtotal (${currentSalesOrgConfigVariant.displayPrefixTax}.tax):',
+              ),
             ),
             findsOneWidget,
           );
           expect(
-            find.byWidgetPredicate(
-              (widget) =>
-                  widget is RichText &&
-                  widget.key == WidgetKeys.priceComponent &&
-                  widget.text
-                      .toPlainText()
-                      .contains(subTotalValueWithoutTax.toStringAsFixed(2)),
+            find.descendant(
+              of: orderSuccessSubTotal,
+              matching: priceComponent(
+                currentSalesOrg.isID
+                    ? orderValue.priceDisplayForID(currency)
+                    : orderValue.priceDisplay(currency),
+              ),
             ),
             findsOneWidget,
           );
-          //grand total
+          await tester.dragUntilVisible(
+            orderSuccessGrandTotal,
+            scrollList,
+            const Offset(0, -300),
+          );
+          await tester.pump(Durations.long2);
+
+          //grand total price
           expect(
             find.descendant(
-              of: orderSummarySection,
+              of: orderSuccessGrandTotal,
               matching: find.text('Grand total:'),
             ),
             findsOneWidget,
           );
-          expect(
-            find.byWidgetPredicate(
-              (widget) =>
-                  widget is RichText &&
-                  widget.key == WidgetKeys.priceComponent &&
-                  widget.text
-                      .toPlainText()
-                      .contains(grandTotalValue.toStringAsFixed(2)),
-            ),
-            findsOneWidget,
-          );
-        },
-      );
 
-      testWidgets(
-        'Tax rate display for other market except VN',
-        (tester) async {
-          const finalPrice = 100.0;
-          const vatValue = 10.0;
-          const quantity = 2;
-          const subTotalValueWithoutTax = finalPrice * quantity;
-          const totalTax = subTotalValueWithoutTax * vatValue * 0.01;
-          when(() => eligibilityBlocMock.state).thenReturn(
-            EligibilityState.initial().copyWith(
-              salesOrgConfigs: fakeSGSalesOrgConfigs,
-              salesOrganisation: fakeSGSalesOrganisation,
-            ),
-          );
-          when(() => orderSummaryBlocMock.state).thenReturn(
-            OrderSummaryState.initial().copyWith(
-              orderHistoryDetailsList: [
-                OrderHistoryDetails.empty().copyWith(
-                  taxRate: fakeSGSalesOrgConfigs.vatValue.toDouble(),
-                  orderHistoryDetailsOrderItem: [
-                    OrderHistoryDetailsOrderItem.empty().copyWith(
-                      qty: quantity,
-                      tax: vatValue,
-                      unitPrice: finalPrice,
-                    ),
-                  ],
-                  orderValue: subTotalValueWithoutTax,
-                  totalTax: totalTax,
-                ),
-              ],
-            ),
-          );
-          await tester.pumpWidget(getWidget());
-          await tester.pumpAndSettle();
-
-          final orderSummarySection =
-              find.byKey(WidgetKeys.orderSuccessOrderSummarySection);
-          final scrollList = find.byKey(WidgetKeys.scrollList);
-          await tester.dragUntilVisible(
-            orderSummarySection,
-            scrollList,
-            const Offset(0, -300),
-          );
-          //Fetching the vat value for other market - 5
-          final taxRateFinder = find.text(
-            'Tax at ${fakeSGSalesOrgConfigs.vatValue.toDouble()}%:',
-          );
           expect(
             find.descendant(
-              of: find.byKey(
-                WidgetKeys.orderSummaryTax,
+              of: orderSuccessGrandTotal,
+              matching: priceComponent(
+                currentSalesOrg.isID
+                    ? grandTotalValueForID.priceDisplayForID(currency)
+                    : grandTotalValue.priceDisplay(currency),
               ),
-              matching: taxRateFinder,
             ),
-            findsOneWidget,
+            findsWidgets,
           );
         },
+        variant: salesOrgConfigVariant,
       );
 
       testWidgets(
-        'Tax rate display from salesOrgConfig vat value for other market except VN',
+        'Tax rate display for other market & hide for VN & MM',
         (tester) async {
+          final currentSalesOrgConfigVariant =
+              salesOrgConfigVariant.currentValue ?? fakeIDSalesOrgConfigs;
+          final currentSalesOrg = currentSalesOrgConfigVariant.salesOrg;
+
+          final currentSalesOrganisation = fakeEmptySalesOrganisation.copyWith(
+            salesOrg: currentSalesOrg,
+          );
+          final currency = currentSalesOrgConfigVariant.currency.code;
+
           const finalPrice = 100.0;
           const quantity = 2;
           const subTotalValueWithoutTax = finalPrice * quantity;
+
+          final totalTax = subTotalValueWithoutTax *
+              currentSalesOrgConfigVariant.vatValue *
+              0.01;
+
           when(() => eligibilityBlocMock.state).thenReturn(
             EligibilityState.initial().copyWith(
-              salesOrgConfigs: fakeKHSalesOrgConfigs,
-              salesOrganisation: fakeKHSalesOrganisation,
+              salesOrgConfigs: currentSalesOrgConfigVariant,
+              salesOrganisation: currentSalesOrganisation,
             ),
           );
           when(() => orderSummaryBlocMock.state).thenReturn(
             OrderSummaryState.initial().copyWith(
               orderHistoryDetailsList: [
                 OrderHistoryDetails.empty().copyWith(
-                  taxRate: 10,
-                  orderHistoryDetailsOrderItem: [
-                    OrderHistoryDetailsOrderItem.empty().copyWith(
-                      qty: quantity,
-                      unitPrice: finalPrice,
-                    ),
-                  ],
-                  orderValue: subTotalValueWithoutTax,
-                ),
-              ],
-            ),
-          );
-          await tester.pumpWidget(getWidget());
-          await tester.pumpAndSettle();
-
-          final orderSummarySection =
-              find.byKey(WidgetKeys.orderSuccessOrderSummarySection);
-          final scrollList = find.byKey(WidgetKeys.scrollList);
-          await tester.dragUntilVisible(
-            orderSummarySection,
-            scrollList,
-            const Offset(0, -300),
-          );
-          //Fetching the vat value from salesOrgConfig - 10
-          final taxRateFinder = find.text(
-            'Tax at ${fakeKHSalesOrgConfigs.vatValue.toDouble()}%:',
-          );
-          expect(
-            find.descendant(
-              of: find.byKey(
-                WidgetKeys.orderSummaryTax,
-              ),
-              matching: taxRateFinder,
-            ),
-            findsOneWidget,
-          );
-        },
-      );
-
-      testWidgets(
-        'Hide Tax rate display for VN',
-        (tester) async {
-          const finalPrice = 88.0;
-          const vatValue = 9;
-          const quantity = 2;
-          const subTotalValueWithoutTax = finalPrice * quantity;
-          const totalTax = subTotalValueWithoutTax * vatValue * 0.01;
-          when(() => eligibilityBlocMock.state).thenReturn(
-            EligibilityState.initial().copyWith(
-              salesOrgConfigs: fakeVNSalesOrgConfigs,
-              salesOrganisation: fakeVNSalesOrganisation,
-            ),
-          );
-          when(() => orderSummaryBlocMock.state).thenReturn(
-            OrderSummaryState.initial().copyWith(
-              orderHistoryDetailsList: [
-                OrderHistoryDetails.empty().copyWith(
-                  orderHistoryDetailsOrderItem: [
-                    OrderHistoryDetailsOrderItem.empty().copyWith(
-                      qty: quantity,
-                    ),
-                  ],
-                  orderValue: subTotalValueWithoutTax,
+                  taxRate: currentSalesOrgConfigVariant.vatValue.toDouble(),
                   totalTax: totalTax,
+                  orderHistoryDetailsOrderItem: [
+                    OrderHistoryDetailsOrderItem.empty().copyWith(
+                      taxRate: currentSalesOrgConfigVariant.vatValue.toDouble(),
+                    ),
+                  ],
                 ),
               ],
             ),
@@ -705,18 +645,41 @@ void main() {
             scrollList,
             const Offset(0, -300),
           );
-          //Hide the vat value
-          final taxRateFinder = find.text('Tax:');
+          await tester.pump(Durations.long2);
+
+          final taxRateVisible = find.text(
+            'Tax at ${currentSalesOrgConfigVariant.vatValue.toDouble()}%:',
+          );
+          final hideTaxRate = find.text(
+            'Tax:',
+          );
+          final taxSection = find.byKey(WidgetKeys.orderSummaryTax);
+
           expect(
             find.descendant(
-              of: find.byKey(
-                WidgetKeys.orderSummaryTax,
-              ),
-              matching: taxRateFinder,
+              of: taxSection,
+              matching:
+                  currentSalesOrg.isMaterialTax ? hideTaxRate : taxRateVisible,
             ),
-            findsOneWidget,
+            currentSalesOrgConfigVariant.displaySubtotalTaxBreakdown
+                ? findsOneWidget
+                : findsNothing,
+          );
+          expect(
+            find.descendant(
+              of: taxSection,
+              matching: priceComponent(
+                currentSalesOrg.isID
+                    ? totalTax.priceDisplayForID(currency)
+                    : totalTax.priceDisplay(currency),
+              ),
+            ),
+            currentSalesOrgConfigVariant.displaySubtotalTaxBreakdown
+                ? findsOneWidget
+                : findsNothing,
           );
         },
+        variant: salesOrgConfigVariant,
       );
 
       testWidgets(
@@ -1421,63 +1384,111 @@ void main() {
         },
       );
 
-      testWidgets('Find Material tax Breakdown', (tester) async {
-        const taxRate = 5.0;
-        const totalTax = 5.0;
-        const unitPrice = 100.0;
-        const totalPrice = unitPrice + totalTax;
-        when(() => eligibilityBlocMock.state).thenReturn(
-          EligibilityState.initial().copyWith(
-            salesOrgConfigs: fakeVNSalesOrgConfigs,
-          ),
-        );
-        when(() => orderSummaryBlocMock.state).thenAnswer(
-          (invocation) => OrderSummaryState.initial().copyWith(
-            orderHistoryDetailsList: [
-              fakeOrderHistoryDetails.copyWith(
-                taxRate: taxRate,
-                orderHistoryDetailsOrderItem: [
-                  fakeMaterialItem.copyWith(
-                    taxRate: taxRate,
-                    totalTax: totalTax,
-                    totalPrice: totalPrice,
-                    priceAggregate: PriceAggregate.empty().copyWith(
-                      salesOrgConfig: fakeVNSalesOrgConfigs,
-                      materialInfo: MaterialInfo.empty().copyWith(tax: 5),
-                      price: Price.empty().copyWith(
-                        finalPrice: MaterialPrice(unitPrice),
+      testWidgets(
+        'Find Material tax Breakdown',
+        (tester) async {
+          final currentSalesOrgConfigVariant =
+              salesOrgConfigVariant.currentValue ?? fakeKHSalesOrgConfigs;
+
+          final hideItemTax =
+              !currentSalesOrgConfigVariant.displayItemTaxBreakdown;
+
+          final currentSalesOrg = currentSalesOrgConfigVariant.salesOrg;
+
+          final currentSalesOrganisation = fakeEmptySalesOrganisation.copyWith(
+            salesOrg: currentSalesOrg,
+          );
+          final currency = currentSalesOrgConfigVariant.currency.code;
+
+          const unitPrice = 100.0;
+          const quantity = 2;
+          const taxRate = 5.0;
+          const totalTax = 10.0;
+          const totalPrice = unitPrice * quantity + totalTax;
+          when(() => eligibilityBlocMock.state).thenReturn(
+            EligibilityState.initial().copyWith(
+              salesOrganisation: currentSalesOrganisation,
+              salesOrgConfigs: currentSalesOrgConfigVariant,
+            ),
+          );
+          when(() => orderSummaryBlocMock.state).thenAnswer(
+            (invocation) => OrderSummaryState.initial().copyWith(
+              orderHistoryDetailsList: [
+                fakeOrderHistoryDetails.copyWith(
+                  taxRate: taxRate,
+                  orderHistoryDetailsOrderItem: [
+                    fakeMaterialItem.copyWith(
+                      taxRate: taxRate,
+                      totalTax: totalTax,
+                      totalPrice: totalPrice,
+                      priceAggregate: PriceAggregate.empty().copyWith(
+                        salesOrgConfig: currentSalesOrgConfigVariant,
+                        materialInfo: MaterialInfo.empty().copyWith(tax: 5),
+                        price: Price.empty().copyWith(
+                          finalPrice: MaterialPrice(unitPrice),
+                        ),
+                        quantity: quantity,
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
+              ],
+            ),
+          );
+          await tester.pumpWidget(getWidget());
+          await tester.pumpAndSettle();
+          final orderItemsSection =
+              find.byKey(WidgetKeys.orderSuccessZPItemsSection);
+          await tester.scrollUntilVisible(orderItemsSection, -500);
+          expect(orderItemsSection, findsOneWidget);
+          final itemTaxFinder = find.byKey(WidgetKeys.itemTax);
+
+          if (hideItemTax) {
+            expect(itemTaxFinder, findsNothing);
+            return;
+          }
+
+          await tester.scrollUntilVisible(itemTaxFinder, -500);
+
+          expect(itemTaxFinder, findsOneWidget);
+          expect(
+            find.descendant(
+              of: itemTaxFinder,
+              matching: priceComponent(
+                currentSalesOrg.isID
+                    ? totalTax.priceDisplayForID(currency)
+                    : totalTax.priceDisplay(currency),
               ),
-            ],
-          ),
-        );
-        await tester.pumpWidget(getWidget());
-        await tester.pumpAndSettle();
-        final orderItemsSection =
-            find.byKey(WidgetKeys.orderSuccessZPItemsSection);
-        await tester.scrollUntilVisible(orderItemsSection, -500);
-        expect(orderItemsSection, findsOneWidget);
-        final itemTax = find.byType(ItemTax);
-        expect(itemTax, findsOneWidget);
-        final totalPriceWithTax = find.textContaining(
-          'VND 105.00',
-          findRichText: true,
-        );
-        final tax = find.textContaining(
-          '(5.0% tax)',
-          findRichText: true,
-        );
-        final taxAmount = find.textContaining(
-          'VND 5.00',
-          findRichText: true,
-        );
-        expect(tax, findsOneWidget);
-        expect(taxAmount, findsOneWidget);
-        expect(totalPriceWithTax, findsOneWidget);
-      });
+            ),
+            findsOneWidget,
+          );
+          final itemTaxPercentage = find.byKey(WidgetKeys.itemTaxPercentage);
+          expect(
+            find.descendant(
+              of: itemTaxFinder,
+              matching: itemTaxPercentage,
+            ),
+            findsOneWidget,
+          );
+          expect(
+            tester.widget<Text>(itemTaxPercentage).data,
+            '($taxRate% ${'tax'.tr()})',
+          );
+
+          find.descendant(
+            of: itemTaxFinder,
+            matching: find.descendant(
+              of: find.byKey(WidgetKeys.finalTotalPriceWithTax),
+              matching: priceComponent(
+                currentSalesOrg.isID
+                    ? totalPrice.priceDisplayForID(currency)
+                    : totalPrice.priceDisplay(currency),
+              ),
+            ),
+          );
+        },
+        variant: salesOrgConfigVariant,
+      );
 
       testWidgets(
         'Find Price is not available warning if any item has invalid price',

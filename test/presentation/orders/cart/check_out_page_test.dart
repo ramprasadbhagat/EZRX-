@@ -16,7 +16,6 @@ import 'package:ezrxmobile/application/order/order_summary/order_summary_bloc.da
 import 'package:ezrxmobile/application/order/payment_customer_information/payment_customer_information_bloc.dart';
 import 'package:ezrxmobile/application/order/payment_term/payment_term_bloc.dart';
 import 'package:ezrxmobile/application/order/po_attachment/po_attachment_bloc.dart';
-import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/product_images/entities/product_images.dart';
@@ -70,13 +69,13 @@ import '../../../common_mock_data/mock_bloc.dart';
 import '../../../common_mock_data/mock_other.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_id_sales_org_config.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_kh_sales_org_config.dart';
-import '../../../common_mock_data/sales_org_config_mock/fake_mm_sales_org_config.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_my_sales_org_config.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_ph_sales_org_config.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_sg_sales_org_config.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_th_sales_org_config.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_tw_sales_org_config.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_vn_sales_org_config.dart';
+import '../../../common_mock_data/sales_org_config_variant_mock.dart';
 import '../../../common_mock_data/sales_organsiation_mock.dart';
 import '../../../common_mock_data/user_mock.dart';
 import '../../../utils/widget_utils.dart';
@@ -126,20 +125,6 @@ void main() {
       salesOrgConfig: fakeVNSalesOrgConfigs,
     ),
   ];
-
-  final salesOrgConfigVariant = ValueVariant<SalesOrganisationConfigs>(
-    {
-      fakeIDSalesOrgConfigs,
-      fakeKHSalesOrgConfigs,
-      fakeMMSalesOrgConfigs,
-      fakeMYSalesOrgConfigs,
-      fakePHSalesOrgConfigs,
-      fakeSGSalesOrgConfigs,
-      fakeTHSalesOrgConfigs,
-      fakeTWSalesOrgConfigs,
-      fakeVNSalesOrgConfigs,
-    },
-  );
 
   setUpAll(() async {
     locator.registerFactory(() => AutoRouteMock());

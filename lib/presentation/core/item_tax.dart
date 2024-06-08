@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
+import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -26,6 +27,7 @@ class ItemTax extends StatelessWidget {
         );
 
     return Column(
+      key: WidgetKeys.itemTax,
       mainAxisAlignment: MainAxisAlignment.end,
       crossAxisAlignment: CrossAxisAlignment.end,
       children: [
@@ -43,11 +45,13 @@ class ItemTax extends StatelessWidget {
             ),
             Text(
               '($itemTaxPercent% ${context.tr('tax')})',
+              key: WidgetKeys.itemTaxPercentage,
               style: txtStyle,
             ),
           ],
         ),
         Wrap(
+          key: WidgetKeys.finalTotalPriceWithTax,
           children: [
             Text(
               '= ',

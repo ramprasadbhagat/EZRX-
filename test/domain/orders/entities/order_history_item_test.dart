@@ -58,15 +58,17 @@ void main() async {
       });
     });
 
-    group('Item total price -', () {
+    group('Item total price with tax-', () {
       test(
           'Display Price not available when is MYExternalSalesRep, material is PnG and invoice number is not valid',
           () {
         expect(
           OrderHistoryItem.empty()
               .copyWith
-              .principalData(principalCode: pngPrincipleCode)
-              .itemTotalPrice(true),
+              .principalData(
+                principalCode: pngPrincipleCode,
+              )
+              .itemTotalNetPrice(true),
           priceNotAvailableText,
         );
       });
@@ -75,7 +77,7 @@ void main() async {
         expect(
           OrderHistoryItem.empty()
               .copyWith(isBonusMaterial: true)
-              .itemTotalPrice(true),
+              .itemTotalNetPrice(true),
           0.toString(),
         );
       });
@@ -84,7 +86,7 @@ void main() async {
         expect(
           OrderHistoryItem.empty()
               .copyWith(isBonusMaterial: true)
-              .itemTotalPrice(false),
+              .itemTotalNetPrice(false),
           freeText,
         );
       });
@@ -92,8 +94,8 @@ void main() async {
       test('Display Price not available when price is 0', () {
         expect(
           OrderHistoryItem.empty()
-              .copyWith(totalPrice: 0)
-              .itemTotalPrice(false),
+              .copyWith(totalUnitPrice: 0)
+              .itemTotalNetPrice(false),
           priceNotAvailableText,
         );
       });
@@ -101,9 +103,23 @@ void main() async {
       test('Display normal price', () {
         expect(
           OrderHistoryItem.empty()
-              .copyWith(totalPrice: fakePrice)
-              .itemTotalPrice(false),
+              .copyWith(totalUnitPrice: fakePrice)
+              .itemTotalNetPrice(false),
           fakePrice.toString(),
+        );
+      });
+
+      test('Display tax rate', () {
+        expect(
+          OrderHistoryItem.empty().copyWith(taxRate: 10).taxRate,
+          10,
+        );
+      });
+
+      test('Display total tax ', () {
+        expect(
+          OrderHistoryItem.empty().copyWith(totalTax: 50).totalTax,
+          50,
         );
       });
     });
