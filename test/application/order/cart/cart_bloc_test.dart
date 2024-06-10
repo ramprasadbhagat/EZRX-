@@ -1492,8 +1492,31 @@ void main() {
           ).thenAnswer(
             (invocation) async => Right(
               [
-                priceAggregates.first,
+                priceAggregates.first.copyWith(
+                  bonusSampleItems: [
+                    bonusSampleItem.first,
+                  ],
+                ),
               ],
+            ),
+          );
+          when(
+            () => stockInfoRepositoryMock.updateStockForMaterialDealBonus(
+              salesOrganisation: fakeMYSalesOrganisation,
+              salesOrganisationConfigs: fakeMYSalesOrgConfigs,
+              shipToInfo: shipToInfo,
+              customerCodeInfo: fakeCustomerCodeInfo,
+              materials: [
+                priceAggregates.first.copyWith(
+                  bonusSampleItems: [
+                    bonusSampleItem.first.copyWith(bonusOverrideFlag: true),
+                  ],
+                ),
+              ],
+            ),
+          ).thenAnswer(
+            (invocation) async => Left(
+              fakeError,
             ),
           );
         },
@@ -1526,12 +1549,47 @@ void main() {
           ),
           CartState.initial().copyWith(
             cartProducts: [
-              priceAggregates.first,
+              priceAggregates.first.copyWith(
+                bonusSampleItems: [
+                  bonusSampleItem.first.copyWith(bonusOverrideFlag: true),
+                ],
+              ),
             ],
             salesOrganisation: fakeMYSalesOrganisation,
             config: fakeMYSalesOrgConfigs,
             shipToInfo: shipToInfo,
             customerCodeInfo: fakeCustomerCodeInfo,
+          ),
+          CartState.initial().copyWith(
+            upsertBonusItemInProgressHashCode: [],
+            isFetchingBonus: true,
+            cartProducts: [
+              priceAggregates.first.copyWith(
+                bonusSampleItems: [
+                  bonusSampleItem.first.copyWith(bonusOverrideFlag: true),
+                ],
+              ),
+            ],
+            salesOrganisation: fakeMYSalesOrganisation,
+            config: fakeMYSalesOrgConfigs,
+            shipToInfo: shipToInfo,
+            customerCodeInfo: fakeCustomerCodeInfo,
+          ),
+          CartState.initial().copyWith(
+            upsertBonusItemInProgressHashCode: [],
+            cartProducts: [
+              priceAggregates.first.copyWith(
+                bonusSampleItems: [
+                  bonusSampleItem.first.copyWith(bonusOverrideFlag: true),
+                ],
+              ),
+            ],
+            salesOrganisation: fakeMYSalesOrganisation,
+            config: fakeMYSalesOrgConfigs,
+            shipToInfo: shipToInfo,
+            customerCodeInfo: fakeCustomerCodeInfo,
+            isFetchingBonus: false,
+            apiFailureOrSuccessOption: optionOf(Left(fakeError)),
           ),
         ],
       );
@@ -2579,6 +2637,9 @@ void main() {
               price: prices.first.copyWith(
                 materialNumber: priceAggregates.first.getMaterialNumber,
               ),
+              bonusSampleItems: [
+                bonusSampleItem.first.copyWith(bonusOverrideFlag: true),
+              ],
             ),
           ],
           salesOrganisation: fakeMYSalesOrganisation,
@@ -2596,6 +2657,9 @@ void main() {
               materials: [
                 priceAggregates.first.copyWith(
                   price: prices.first,
+                  bonusSampleItems: [
+                    bonusSampleItem.first.copyWith(bonusOverrideFlag: true),
+                  ],
                 ),
               ],
             ),
@@ -2620,6 +2684,9 @@ void main() {
                 price: prices.first.copyWith(
                   materialNumber: priceAggregates.first.getMaterialNumber,
                 ),
+                bonusSampleItems: [
+                  bonusSampleItem.first.copyWith(bonusOverrideFlag: true),
+                ],
               ),
             ],
             salesOrganisation: fakeMYSalesOrganisation,
@@ -2631,6 +2698,9 @@ void main() {
             cartProducts: [
               priceAggregates.first.copyWith(
                 price: prices.first,
+                bonusSampleItems: [
+                  bonusSampleItem.first.copyWith(bonusOverrideFlag: true),
+                ],
               ),
             ],
             salesOrganisation: fakeMYSalesOrganisation,
@@ -2643,6 +2713,9 @@ void main() {
             cartProducts: [
               priceAggregates.first.copyWith(
                 price: prices.first,
+                bonusSampleItems: [
+                  bonusSampleItem.first.copyWith(bonusOverrideFlag: true),
+                ],
               ),
             ],
             salesOrganisation: fakeMYSalesOrganisation,
@@ -2654,6 +2727,9 @@ void main() {
             cartProducts: [
               priceAggregates.first.copyWith(
                 price: prices.first,
+                bonusSampleItems: [
+                  bonusSampleItem.first.copyWith(bonusOverrideFlag: true),
+                ],
               ),
             ],
             salesOrganisation: fakeMYSalesOrganisation,

@@ -10,22 +10,21 @@ part 'material_item_override_dto.g.dart';
 class MaterialItemOverrideDto with _$MaterialItemOverrideDto {
   const MaterialItemOverrideDto._();
   const factory MaterialItemOverrideDto({
-    @JsonKey(name: 'reference', defaultValue: '')
-        required String reference,
+    @JsonKey(name: 'reference', defaultValue: '') required String reference,
     @JsonKey(
       name: 'valueOverride',
       defaultValue: <ValueOverrideDto>[],
       includeIfNull: false,
       toJson: valueOverrideTojson,
     )
-        required List<ValueOverrideDto> valueOverride,
+    required List<ValueOverrideDto> valueOverride,
     @JsonKey(
       name: 'percentageOverride',
       defaultValue: <PercentageOverrideDto>[],
       includeIfNull: false,
       toJson: percentageOverrideTojson,
     )
-        required List<PercentageOverrideDto> percentageOverride,
+    required List<PercentageOverrideDto> percentageOverride,
   }) = _MaterialItemOverrideDto;
 
   MaterialItemOverride toDomain() => MaterialItemOverride(
@@ -55,13 +54,11 @@ class MaterialItemOverrideDto with _$MaterialItemOverrideDto {
     // for bundles we've to pass the override price,
     // else SAP will consider the material's actual
     // price instead of bundle unit price
-    final isMaterialItemOverride = priceAggregate.price.isPriceOverride ||
-        priceAggregate.materialInfo.type.typeBundle;
 
     return MaterialItemOverrideDto(
       reference: '',
       valueOverride: [
-        if (isMaterialItemOverride)
+        if (priceAggregate.isMaterialItemOverride)
           ValueOverrideDto.fromDomain(
             ValueOverride.empty().copyWith(
               price: priceAggregate.materialInfo.type.typeBundle

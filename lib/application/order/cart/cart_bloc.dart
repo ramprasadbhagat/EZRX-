@@ -183,8 +183,16 @@ class CartBloc extends Bloc<CartEvent, CartState> {
                     cartProductList[i].materialInfo.materialNumber,
                 orElse: () => PriceAggregate.empty(),
               );
+              final bonusList = cartProductList[i]
+                  .bonusSampleItems
+                  .map(
+                    (item) => item.copyWith(bonusOverrideFlag: true),
+                  )
+                  .toList();
+
               cartProductListTemp[i] = cartProductListTemp[i].copyWith(
                 price: priceAggregate.price,
+                bonusSampleItems: bonusList,
                 bundle: priceAggregate.bundle,
                 salesOrgConfig: state.config,
               );

@@ -47,6 +47,7 @@ class BonusSampleItemDto with _$BonusSampleItemDto {
       type: MaterialInfoType(type),
       stockInfo: StockInfo.empty(),
       itemRegistrationNumber: ItemRegistrationNumber(itemRegistrationNumber),
+      bonusOverrideFlag: false,
     );
   }
 

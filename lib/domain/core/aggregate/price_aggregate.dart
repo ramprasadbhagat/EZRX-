@@ -954,6 +954,17 @@ class PriceAggregate with _$PriceAggregate {
 
   bool get _displayPriceNotAvailable =>
       invalidPrice || price.finalPrice.isUnavailable || !price.isValidMaterial;
+
+  bool get _additionalBonusOverride => bonusSampleItems.any(
+        (element) =>
+            element.bonusOverrideFlag && !price.additionalBonusEligible,
+      );
+
+  bool get _didPriceOrBonusOverride =>
+      price.isPriceOverride || _additionalBonusOverride;
+
+  bool get isMaterialItemOverride =>
+      _didPriceOrBonusOverride || materialInfo.type.typeBundle;
 }
 
 enum PriceType {

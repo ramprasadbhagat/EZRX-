@@ -25,6 +25,7 @@ mixin _$BonusSampleItem {
   StockInfo get stockInfo => throw _privateConstructorUsedError;
   ItemRegistrationNumber get itemRegistrationNumber =>
       throw _privateConstructorUsedError;
+  bool get bonusOverrideFlag => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $BonusSampleItemCopyWith<BonusSampleItem> get copyWith =>
@@ -45,7 +46,8 @@ abstract class $BonusSampleItemCopyWith<$Res> {
       PrincipalData principalData,
       MaterialInfoType type,
       StockInfo stockInfo,
-      ItemRegistrationNumber itemRegistrationNumber});
+      ItemRegistrationNumber itemRegistrationNumber,
+      bool bonusOverrideFlag});
 
   $PrincipalDataCopyWith<$Res> get principalData;
   $StockInfoCopyWith<$Res> get stockInfo;
@@ -72,6 +74,7 @@ class _$BonusSampleItemCopyWithImpl<$Res, $Val extends BonusSampleItem>
     Object? type = null,
     Object? stockInfo = null,
     Object? itemRegistrationNumber = null,
+    Object? bonusOverrideFlag = null,
   }) {
     return _then(_value.copyWith(
       qty: null == qty
@@ -106,6 +109,10 @@ class _$BonusSampleItemCopyWithImpl<$Res, $Val extends BonusSampleItem>
           ? _value.itemRegistrationNumber
           : itemRegistrationNumber // ignore: cast_nullable_to_non_nullable
               as ItemRegistrationNumber,
+      bonusOverrideFlag: null == bonusOverrideFlag
+          ? _value.bonusOverrideFlag
+          : bonusOverrideFlag // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 
@@ -142,7 +149,8 @@ abstract class _$$BonusSampleItemImplCopyWith<$Res>
       PrincipalData principalData,
       MaterialInfoType type,
       StockInfo stockInfo,
-      ItemRegistrationNumber itemRegistrationNumber});
+      ItemRegistrationNumber itemRegistrationNumber,
+      bool bonusOverrideFlag});
 
   @override
   $PrincipalDataCopyWith<$Res> get principalData;
@@ -169,6 +177,7 @@ class __$$BonusSampleItemImplCopyWithImpl<$Res>
     Object? type = null,
     Object? stockInfo = null,
     Object? itemRegistrationNumber = null,
+    Object? bonusOverrideFlag = null,
   }) {
     return _then(_$BonusSampleItemImpl(
       qty: null == qty
@@ -203,6 +212,10 @@ class __$$BonusSampleItemImplCopyWithImpl<$Res>
           ? _value.itemRegistrationNumber
           : itemRegistrationNumber // ignore: cast_nullable_to_non_nullable
               as ItemRegistrationNumber,
+      bonusOverrideFlag: null == bonusOverrideFlag
+          ? _value.bonusOverrideFlag
+          : bonusOverrideFlag // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -218,7 +231,8 @@ class _$BonusSampleItemImpl extends _BonusSampleItem {
       required this.principalData,
       required this.type,
       required this.stockInfo,
-      required this.itemRegistrationNumber})
+      required this.itemRegistrationNumber,
+      required this.bonusOverrideFlag})
       : super._();
 
   @override
@@ -237,10 +251,12 @@ class _$BonusSampleItemImpl extends _BonusSampleItem {
   final StockInfo stockInfo;
   @override
   final ItemRegistrationNumber itemRegistrationNumber;
+  @override
+  final bool bonusOverrideFlag;
 
   @override
   String toString() {
-    return 'BonusSampleItem(qty: $qty, materialNumber: $materialNumber, itemId: $itemId, materialDescription: $materialDescription, principalData: $principalData, type: $type, stockInfo: $stockInfo, itemRegistrationNumber: $itemRegistrationNumber)';
+    return 'BonusSampleItem(qty: $qty, materialNumber: $materialNumber, itemId: $itemId, materialDescription: $materialDescription, principalData: $principalData, type: $type, stockInfo: $stockInfo, itemRegistrationNumber: $itemRegistrationNumber, bonusOverrideFlag: $bonusOverrideFlag)';
   }
 
   @override
@@ -260,7 +276,9 @@ class _$BonusSampleItemImpl extends _BonusSampleItem {
             (identical(other.stockInfo, stockInfo) ||
                 other.stockInfo == stockInfo) &&
             (identical(other.itemRegistrationNumber, itemRegistrationNumber) ||
-                other.itemRegistrationNumber == itemRegistrationNumber));
+                other.itemRegistrationNumber == itemRegistrationNumber) &&
+            (identical(other.bonusOverrideFlag, bonusOverrideFlag) ||
+                other.bonusOverrideFlag == bonusOverrideFlag));
   }
 
   @override
@@ -273,7 +291,8 @@ class _$BonusSampleItemImpl extends _BonusSampleItem {
       principalData,
       type,
       stockInfo,
-      itemRegistrationNumber);
+      itemRegistrationNumber,
+      bonusOverrideFlag);
 
   @JsonKey(ignore: true)
   @override
@@ -285,15 +304,15 @@ class _$BonusSampleItemImpl extends _BonusSampleItem {
 
 abstract class _BonusSampleItem extends BonusSampleItem {
   const factory _BonusSampleItem(
-          {required final MaterialQty qty,
-          required final MaterialNumber materialNumber,
-          required final StringValue itemId,
-          required final String materialDescription,
-          required final PrincipalData principalData,
-          required final MaterialInfoType type,
-          required final StockInfo stockInfo,
-          required final ItemRegistrationNumber itemRegistrationNumber}) =
-      _$BonusSampleItemImpl;
+      {required final MaterialQty qty,
+      required final MaterialNumber materialNumber,
+      required final StringValue itemId,
+      required final String materialDescription,
+      required final PrincipalData principalData,
+      required final MaterialInfoType type,
+      required final StockInfo stockInfo,
+      required final ItemRegistrationNumber itemRegistrationNumber,
+      required final bool bonusOverrideFlag}) = _$BonusSampleItemImpl;
   const _BonusSampleItem._() : super._();
 
   @override
@@ -312,6 +331,8 @@ abstract class _BonusSampleItem extends BonusSampleItem {
   StockInfo get stockInfo;
   @override
   ItemRegistrationNumber get itemRegistrationNumber;
+  @override
+  bool get bonusOverrideFlag;
   @override
   @JsonKey(ignore: true)
   _$$BonusSampleItemImplCopyWith<_$BonusSampleItemImpl> get copyWith =>

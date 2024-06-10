@@ -20,6 +20,7 @@ class BonusSampleItem with _$BonusSampleItem {
     required MaterialInfoType type,
     required StockInfo stockInfo,
     required ItemRegistrationNumber itemRegistrationNumber,
+    required bool bonusOverrideFlag,
   }) = _BonusSampleItem;
 
   factory BonusSampleItem.empty() => BonusSampleItem(
@@ -31,6 +32,7 @@ class BonusSampleItem with _$BonusSampleItem {
         type: MaterialInfoType(''),
         stockInfo: StockInfo.empty(),
         itemRegistrationNumber: ItemRegistrationNumber(''),
+        bonusOverrideFlag: false,
       );
 
   String combinationCode({required bool showIRNPart}) => <String>[

@@ -2287,11 +2287,15 @@ void main() {
       () {
         final customPriceAggregate = emptyPriceAggregate.copyWith(
           quantity: 3,
-          price: bonusPrice.copyWith(isPriceOverride: true),
+          price: bonusPrice.copyWith(
+            isPriceOverride: true,
+            additionalBonusEligible: false,
+          ),
           bonusSampleItems: [
             BonusSampleItem.empty().copyWith(
               qty: MaterialQty(2),
               materialNumber: MaterialNumber('fake-number'),
+              bonusOverrideFlag: true,
             ),
           ],
           salesOrgConfig: fakeMYSalesOrgConfigs,
@@ -2321,12 +2325,16 @@ void main() {
       'PriceAggregate ZPO1 test on additionalBonusFlag',
       () {
         final customPriceAggregate = emptyPriceAggregate.copyWith(
-          price: Price.empty()
-              .copyWith(finalPrice: MaterialPrice(10), isPriceOverride: true),
+          price: Price.empty().copyWith(
+            finalPrice: MaterialPrice(10),
+            isPriceOverride: true,
+            additionalBonusEligible: false,
+          ),
           bonusSampleItems: [
             BonusSampleItem.empty().copyWith(
               qty: MaterialQty(2),
               materialNumber: MaterialNumber('fake-number'),
+              bonusOverrideFlag: true,
             ),
           ],
           salesOrgConfig: fakeMYSalesOrgConfigs,

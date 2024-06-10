@@ -6,9 +6,9 @@ part of 'material_item_override_dto.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_MaterialItemOverrideDto _$$_MaterialItemOverrideDtoFromJson(
+_$MaterialItemOverrideDtoImpl _$$MaterialItemOverrideDtoImplFromJson(
         Map<String, dynamic> json) =>
-    _$_MaterialItemOverrideDto(
+    _$MaterialItemOverrideDtoImpl(
       reference: json['reference'] as String? ?? '',
       valueOverride: (json['valueOverride'] as List<dynamic>?)
               ?.map((e) => ValueOverrideDto.fromJson(e as Map<String, dynamic>))
@@ -21,8 +21,8 @@ _$_MaterialItemOverrideDto _$$_MaterialItemOverrideDtoFromJson(
           [],
     );
 
-Map<String, dynamic> _$$_MaterialItemOverrideDtoToJson(
-    _$_MaterialItemOverrideDto instance) {
+Map<String, dynamic> _$$MaterialItemOverrideDtoImplToJson(
+    _$MaterialItemOverrideDtoImpl instance) {
   final val = <String, dynamic>{
     'reference': instance.reference,
   };
@@ -39,29 +39,31 @@ Map<String, dynamic> _$$_MaterialItemOverrideDtoToJson(
   return val;
 }
 
-_$_ValueOverrideDto _$$_ValueOverrideDtoFromJson(Map<String, dynamic> json) =>
-    _$_ValueOverrideDto(
+_$ValueOverrideDtoImpl _$$ValueOverrideDtoImplFromJson(
+        Map<String, dynamic> json) =>
+    _$ValueOverrideDtoImpl(
       code: json['code'] as String? ?? '',
       price: (json['price'] as num?)?.toDouble() ?? 0,
       currency: json['currency'] as String? ?? '',
     );
 
-Map<String, dynamic> _$$_ValueOverrideDtoToJson(_$_ValueOverrideDto instance) =>
+Map<String, dynamic> _$$ValueOverrideDtoImplToJson(
+        _$ValueOverrideDtoImpl instance) =>
     <String, dynamic>{
       'code': instance.code,
       'price': instance.price,
       'currency': instance.currency,
     };
 
-_$_PercentageOverrideDto _$$_PercentageOverrideDtoFromJson(
+_$PercentageOverrideDtoImpl _$$PercentageOverrideDtoImplFromJson(
         Map<String, dynamic> json) =>
-    _$_PercentageOverrideDto(
+    _$PercentageOverrideDtoImpl(
       code: json['code'] as String,
       percentage: (json['percentage'] as num?)?.toDouble() ?? 0,
     );
 
-Map<String, dynamic> _$$_PercentageOverrideDtoToJson(
-        _$_PercentageOverrideDto instance) =>
+Map<String, dynamic> _$$PercentageOverrideDtoImplToJson(
+        _$PercentageOverrideDtoImpl instance) =>
     <String, dynamic>{
       'code': instance.code,
       'percentage': instance.percentage,

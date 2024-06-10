@@ -12,7 +12,7 @@ part of 'material_item_override_dto.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 MaterialItemOverrideDto _$MaterialItemOverrideDtoFromJson(
     Map<String, dynamic> json) {
@@ -102,11 +102,12 @@ class _$MaterialItemOverrideDtoCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_MaterialItemOverrideDtoCopyWith<$Res>
+abstract class _$$MaterialItemOverrideDtoImplCopyWith<$Res>
     implements $MaterialItemOverrideDtoCopyWith<$Res> {
-  factory _$$_MaterialItemOverrideDtoCopyWith(_$_MaterialItemOverrideDto value,
-          $Res Function(_$_MaterialItemOverrideDto) then) =
-      __$$_MaterialItemOverrideDtoCopyWithImpl<$Res>;
+  factory _$$MaterialItemOverrideDtoImplCopyWith(
+          _$MaterialItemOverrideDtoImpl value,
+          $Res Function(_$MaterialItemOverrideDtoImpl) then) =
+      __$$MaterialItemOverrideDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -126,12 +127,13 @@ abstract class _$$_MaterialItemOverrideDtoCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_MaterialItemOverrideDtoCopyWithImpl<$Res>
+class __$$MaterialItemOverrideDtoImplCopyWithImpl<$Res>
     extends _$MaterialItemOverrideDtoCopyWithImpl<$Res,
-        _$_MaterialItemOverrideDto>
-    implements _$$_MaterialItemOverrideDtoCopyWith<$Res> {
-  __$$_MaterialItemOverrideDtoCopyWithImpl(_$_MaterialItemOverrideDto _value,
-      $Res Function(_$_MaterialItemOverrideDto) _then)
+        _$MaterialItemOverrideDtoImpl>
+    implements _$$MaterialItemOverrideDtoImplCopyWith<$Res> {
+  __$$MaterialItemOverrideDtoImplCopyWithImpl(
+      _$MaterialItemOverrideDtoImpl _value,
+      $Res Function(_$MaterialItemOverrideDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -141,7 +143,7 @@ class __$$_MaterialItemOverrideDtoCopyWithImpl<$Res>
     Object? valueOverride = null,
     Object? percentageOverride = null,
   }) {
-    return _then(_$_MaterialItemOverrideDto(
+    return _then(_$MaterialItemOverrideDtoImpl(
       reference: null == reference
           ? _value.reference
           : reference // ignore: cast_nullable_to_non_nullable
@@ -160,8 +162,8 @@ class __$$_MaterialItemOverrideDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_MaterialItemOverrideDto extends _MaterialItemOverrideDto {
-  const _$_MaterialItemOverrideDto(
+class _$MaterialItemOverrideDtoImpl extends _MaterialItemOverrideDto {
+  const _$MaterialItemOverrideDtoImpl(
       {@JsonKey(name: 'reference', defaultValue: '') required this.reference,
       @JsonKey(
           name: 'valueOverride',
@@ -179,8 +181,8 @@ class _$_MaterialItemOverrideDto extends _MaterialItemOverrideDto {
         _percentageOverride = percentageOverride,
         super._();
 
-  factory _$_MaterialItemOverrideDto.fromJson(Map<String, dynamic> json) =>
-      _$$_MaterialItemOverrideDtoFromJson(json);
+  factory _$MaterialItemOverrideDtoImpl.fromJson(Map<String, dynamic> json) =>
+      _$$MaterialItemOverrideDtoImplFromJson(json);
 
   @override
   @JsonKey(name: 'reference', defaultValue: '')
@@ -218,10 +220,10 @@ class _$_MaterialItemOverrideDto extends _MaterialItemOverrideDto {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_MaterialItemOverrideDto &&
+            other is _$MaterialItemOverrideDtoImpl &&
             (identical(other.reference, reference) ||
                 other.reference == reference) &&
             const DeepCollectionEquality()
@@ -241,14 +243,13 @@ class _$_MaterialItemOverrideDto extends _MaterialItemOverrideDto {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_MaterialItemOverrideDtoCopyWith<_$_MaterialItemOverrideDto>
-      get copyWith =>
-          __$$_MaterialItemOverrideDtoCopyWithImpl<_$_MaterialItemOverrideDto>(
-              this, _$identity);
+  _$$MaterialItemOverrideDtoImplCopyWith<_$MaterialItemOverrideDtoImpl>
+      get copyWith => __$$MaterialItemOverrideDtoImplCopyWithImpl<
+          _$MaterialItemOverrideDtoImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_MaterialItemOverrideDtoToJson(
+    return _$$MaterialItemOverrideDtoImplToJson(
       this,
     );
   }
@@ -270,11 +271,11 @@ abstract class _MaterialItemOverrideDto extends MaterialItemOverrideDto {
               includeIfNull: false,
               toJson: percentageOverrideTojson)
           required final List<PercentageOverrideDto> percentageOverride}) =
-      _$_MaterialItemOverrideDto;
+      _$MaterialItemOverrideDtoImpl;
   const _MaterialItemOverrideDto._() : super._();
 
   factory _MaterialItemOverrideDto.fromJson(Map<String, dynamic> json) =
-      _$_MaterialItemOverrideDto.fromJson;
+      _$MaterialItemOverrideDtoImpl.fromJson;
 
   @override
   @JsonKey(name: 'reference', defaultValue: '')
@@ -295,7 +296,7 @@ abstract class _MaterialItemOverrideDto extends MaterialItemOverrideDto {
   List<PercentageOverrideDto> get percentageOverride;
   @override
   @JsonKey(ignore: true)
-  _$$_MaterialItemOverrideDtoCopyWith<_$_MaterialItemOverrideDto>
+  _$$MaterialItemOverrideDtoImplCopyWith<_$MaterialItemOverrideDtoImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -365,11 +366,11 @@ class _$ValueOverrideDtoCopyWithImpl<$Res, $Val extends ValueOverrideDto>
 }
 
 /// @nodoc
-abstract class _$$_ValueOverrideDtoCopyWith<$Res>
+abstract class _$$ValueOverrideDtoImplCopyWith<$Res>
     implements $ValueOverrideDtoCopyWith<$Res> {
-  factory _$$_ValueOverrideDtoCopyWith(
-          _$_ValueOverrideDto value, $Res Function(_$_ValueOverrideDto) then) =
-      __$$_ValueOverrideDtoCopyWithImpl<$Res>;
+  factory _$$ValueOverrideDtoImplCopyWith(_$ValueOverrideDtoImpl value,
+          $Res Function(_$ValueOverrideDtoImpl) then) =
+      __$$ValueOverrideDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -379,11 +380,11 @@ abstract class _$$_ValueOverrideDtoCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_ValueOverrideDtoCopyWithImpl<$Res>
-    extends _$ValueOverrideDtoCopyWithImpl<$Res, _$_ValueOverrideDto>
-    implements _$$_ValueOverrideDtoCopyWith<$Res> {
-  __$$_ValueOverrideDtoCopyWithImpl(
-      _$_ValueOverrideDto _value, $Res Function(_$_ValueOverrideDto) _then)
+class __$$ValueOverrideDtoImplCopyWithImpl<$Res>
+    extends _$ValueOverrideDtoCopyWithImpl<$Res, _$ValueOverrideDtoImpl>
+    implements _$$ValueOverrideDtoImplCopyWith<$Res> {
+  __$$ValueOverrideDtoImplCopyWithImpl(_$ValueOverrideDtoImpl _value,
+      $Res Function(_$ValueOverrideDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -393,7 +394,7 @@ class __$$_ValueOverrideDtoCopyWithImpl<$Res>
     Object? price = null,
     Object? currency = null,
   }) {
-    return _then(_$_ValueOverrideDto(
+    return _then(_$ValueOverrideDtoImpl(
       code: null == code
           ? _value.code
           : code // ignore: cast_nullable_to_non_nullable
@@ -412,15 +413,15 @@ class __$$_ValueOverrideDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_ValueOverrideDto extends _ValueOverrideDto {
-  const _$_ValueOverrideDto(
+class _$ValueOverrideDtoImpl extends _ValueOverrideDto {
+  const _$ValueOverrideDtoImpl(
       {@JsonKey(name: 'code', defaultValue: '') required this.code,
       @JsonKey(name: 'price', defaultValue: 0) required this.price,
       @JsonKey(name: 'currency', defaultValue: '') required this.currency})
       : super._();
 
-  factory _$_ValueOverrideDto.fromJson(Map<String, dynamic> json) =>
-      _$$_ValueOverrideDtoFromJson(json);
+  factory _$ValueOverrideDtoImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ValueOverrideDtoImplFromJson(json);
 
   @override
   @JsonKey(name: 'code', defaultValue: '')
@@ -438,10 +439,10 @@ class _$_ValueOverrideDto extends _ValueOverrideDto {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ValueOverrideDto &&
+            other is _$ValueOverrideDtoImpl &&
             (identical(other.code, code) || other.code == code) &&
             (identical(other.price, price) || other.price == price) &&
             (identical(other.currency, currency) ||
@@ -455,12 +456,13 @@ class _$_ValueOverrideDto extends _ValueOverrideDto {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ValueOverrideDtoCopyWith<_$_ValueOverrideDto> get copyWith =>
-      __$$_ValueOverrideDtoCopyWithImpl<_$_ValueOverrideDto>(this, _$identity);
+  _$$ValueOverrideDtoImplCopyWith<_$ValueOverrideDtoImpl> get copyWith =>
+      __$$ValueOverrideDtoImplCopyWithImpl<_$ValueOverrideDtoImpl>(
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_ValueOverrideDtoToJson(
+    return _$$ValueOverrideDtoImplToJson(
       this,
     );
   }
@@ -471,11 +473,11 @@ abstract class _ValueOverrideDto extends ValueOverrideDto {
       {@JsonKey(name: 'code', defaultValue: '') required final String code,
       @JsonKey(name: 'price', defaultValue: 0) required final double price,
       @JsonKey(name: 'currency', defaultValue: '')
-      required final String currency}) = _$_ValueOverrideDto;
+      required final String currency}) = _$ValueOverrideDtoImpl;
   const _ValueOverrideDto._() : super._();
 
   factory _ValueOverrideDto.fromJson(Map<String, dynamic> json) =
-      _$_ValueOverrideDto.fromJson;
+      _$ValueOverrideDtoImpl.fromJson;
 
   @override
   @JsonKey(name: 'code', defaultValue: '')
@@ -488,7 +490,7 @@ abstract class _ValueOverrideDto extends ValueOverrideDto {
   String get currency;
   @override
   @JsonKey(ignore: true)
-  _$$_ValueOverrideDtoCopyWith<_$_ValueOverrideDto> get copyWith =>
+  _$$ValueOverrideDtoImplCopyWith<_$ValueOverrideDtoImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -551,11 +553,12 @@ class _$PercentageOverrideDtoCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_PercentageOverrideDtoCopyWith<$Res>
+abstract class _$$PercentageOverrideDtoImplCopyWith<$Res>
     implements $PercentageOverrideDtoCopyWith<$Res> {
-  factory _$$_PercentageOverrideDtoCopyWith(_$_PercentageOverrideDto value,
-          $Res Function(_$_PercentageOverrideDto) then) =
-      __$$_PercentageOverrideDtoCopyWithImpl<$Res>;
+  factory _$$PercentageOverrideDtoImplCopyWith(
+          _$PercentageOverrideDtoImpl value,
+          $Res Function(_$PercentageOverrideDtoImpl) then) =
+      __$$PercentageOverrideDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -564,11 +567,12 @@ abstract class _$$_PercentageOverrideDtoCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_PercentageOverrideDtoCopyWithImpl<$Res>
-    extends _$PercentageOverrideDtoCopyWithImpl<$Res, _$_PercentageOverrideDto>
-    implements _$$_PercentageOverrideDtoCopyWith<$Res> {
-  __$$_PercentageOverrideDtoCopyWithImpl(_$_PercentageOverrideDto _value,
-      $Res Function(_$_PercentageOverrideDto) _then)
+class __$$PercentageOverrideDtoImplCopyWithImpl<$Res>
+    extends _$PercentageOverrideDtoCopyWithImpl<$Res,
+        _$PercentageOverrideDtoImpl>
+    implements _$$PercentageOverrideDtoImplCopyWith<$Res> {
+  __$$PercentageOverrideDtoImplCopyWithImpl(_$PercentageOverrideDtoImpl _value,
+      $Res Function(_$PercentageOverrideDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -577,7 +581,7 @@ class __$$_PercentageOverrideDtoCopyWithImpl<$Res>
     Object? code = null,
     Object? percentage = null,
   }) {
-    return _then(_$_PercentageOverrideDto(
+    return _then(_$PercentageOverrideDtoImpl(
       code: null == code
           ? _value.code
           : code // ignore: cast_nullable_to_non_nullable
@@ -592,14 +596,14 @@ class __$$_PercentageOverrideDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_PercentageOverrideDto extends _PercentageOverrideDto {
-  const _$_PercentageOverrideDto(
+class _$PercentageOverrideDtoImpl extends _PercentageOverrideDto {
+  const _$PercentageOverrideDtoImpl(
       {required this.code,
       @JsonKey(name: 'percentage', defaultValue: 0) required this.percentage})
       : super._();
 
-  factory _$_PercentageOverrideDto.fromJson(Map<String, dynamic> json) =>
-      _$$_PercentageOverrideDtoFromJson(json);
+  factory _$PercentageOverrideDtoImpl.fromJson(Map<String, dynamic> json) =>
+      _$$PercentageOverrideDtoImplFromJson(json);
 
   @override
   final String code;
@@ -613,10 +617,10 @@ class _$_PercentageOverrideDto extends _PercentageOverrideDto {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_PercentageOverrideDto &&
+            other is _$PercentageOverrideDtoImpl &&
             (identical(other.code, code) || other.code == code) &&
             (identical(other.percentage, percentage) ||
                 other.percentage == percentage));
@@ -629,13 +633,13 @@ class _$_PercentageOverrideDto extends _PercentageOverrideDto {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_PercentageOverrideDtoCopyWith<_$_PercentageOverrideDto> get copyWith =>
-      __$$_PercentageOverrideDtoCopyWithImpl<_$_PercentageOverrideDto>(
-          this, _$identity);
+  _$$PercentageOverrideDtoImplCopyWith<_$PercentageOverrideDtoImpl>
+      get copyWith => __$$PercentageOverrideDtoImplCopyWithImpl<
+          _$PercentageOverrideDtoImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_PercentageOverrideDtoToJson(
+    return _$$PercentageOverrideDtoImplToJson(
       this,
     );
   }
@@ -645,11 +649,11 @@ abstract class _PercentageOverrideDto extends PercentageOverrideDto {
   const factory _PercentageOverrideDto(
       {required final String code,
       @JsonKey(name: 'percentage', defaultValue: 0)
-      required final double percentage}) = _$_PercentageOverrideDto;
+      required final double percentage}) = _$PercentageOverrideDtoImpl;
   const _PercentageOverrideDto._() : super._();
 
   factory _PercentageOverrideDto.fromJson(Map<String, dynamic> json) =
-      _$_PercentageOverrideDto.fromJson;
+      _$PercentageOverrideDtoImpl.fromJson;
 
   @override
   String get code;
@@ -658,6 +662,6 @@ abstract class _PercentageOverrideDto extends PercentageOverrideDto {
   double get percentage;
   @override
   @JsonKey(ignore: true)
-  _$$_PercentageOverrideDtoCopyWith<_$_PercentageOverrideDto> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$PercentageOverrideDtoImplCopyWith<_$PercentageOverrideDtoImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
