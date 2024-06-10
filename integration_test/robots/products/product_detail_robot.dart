@@ -462,7 +462,9 @@ class ProductDetailRobot extends CommonRobot {
   }
 
   Future<void> openAvailableOffers() async {
-    await tester.tap(find.byKey(WidgetKeys.availableOffersTile));
+    final availableOffer = find.byKey(WidgetKeys.availableOffersTile);
+    await scrollEnsureFinderVisible(availableOffer);
+    await tester.tap(availableOffer);
     await tester.pumpAndSettle();
   }
 

@@ -150,8 +150,26 @@ class ProductRobot extends CommonRobot {
     await tester.pumpAndSettle();
   }
 
+  Future<void> tapSearchMaterial(String materialNumber) async {
+    final product = find.descendant(
+      of: materialCard,
+      matching: find.textContaining(materialNumber),
+    );
+    await tester.tap(product);
+    await tester.pumpAndSettle();
+  }
+
   Future<void> tapFirstBundle() async {
     await tester.tap(bundleCard.first);
+    await tester.pumpAndSettle();
+  }
+
+  Future<void> tapSearchBundle(String materialNumber) async {
+    final bundle = find.descendant(
+      of: bundleCard,
+      matching: find.textContaining(materialNumber),
+    );
+    await tester.tap(bundle);
     await tester.pumpAndSettle();
   }
 

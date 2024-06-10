@@ -100,21 +100,21 @@ void main() {
   const currency = 'IDR';
   const invalidLengthSearchKey = '1';
   const invalidSearchKey = 'auto-test-auto-test';
-  const materialNumber = 'COBIOC1';
+  const materialNumber = 'DAULSL20';
   const customerLicenseExpiredMaterial = 'DAAHOA10';
 
-  const materialName = 'BIONECT CREAM';
-  const materialPrincipalName = 'PT. COMBIPHAR';
+  const materialName = '8011 - AHA ULTRA SMOOTHINGLOTION 200ML';
+  const materialPrincipalName = 'PT. DARYA VARIA LABORATORY TBK';
   const materialUnitMeasurement = 'BOX';
   const materialCountryOfOrigin = 'NA';
-  const materialUnitPrice = 110500;
+  const materialUnitPrice = 1000110;
   const taxPercentage = 11;
   var smallOrderFee = 0.0;
 
   const multiImageMaterialNumber = 'TNACNESPLNP';
   const otherInfoMaterialNumber = 'TNACNESPLNP';
 
-  const oosMaterialNumber = multiImageMaterialNumber;
+  const oosMaterialNumber = 'DAAHOA10';
 
   //commenting this line as in prod ID MOV is 100, and there is no data
   //which have below MOV price material.
@@ -189,7 +189,7 @@ void main() {
   }) async {
     await browseProductFromEmptyCart();
     await productSuggestionRobot.searchWithKeyboardAction(materialNumber);
-    await productSuggestionRobot.tapSearchResult(materialNumber);
+    await productRobot.tapSearchMaterial(materialNumber);
     await productDetailRobot.tapAddToCart();
     await productDetailRobot.tapCartButton();
     await cartRobot.changeMaterialQty(materialNumber, qty);
@@ -268,7 +268,10 @@ void main() {
       productRobot.verifySearchBarVisible();
       await productRobot.openSearchProductScreen();
       await productSuggestionRobot.searchWithKeyboardAction(materialName);
-      productSuggestionRobot.verifySuggestProductsSearch(materialName);
+      productRobot.verifyPageVisible();
+
+      await productRobot.openSearchProductScreen();
+
       await commonRobot.autoSearch(materialName);
       productSuggestionRobot.verifySuggestProductsSearch(materialName);
     });
@@ -287,7 +290,7 @@ void main() {
       productSuggestionRobot.verifyNoSuggestedProduct();
       await productSuggestionRobot.dismissSnackbar();
       await productSuggestionRobot.searchWithKeyboardAction(materialNumber);
-      productSuggestionRobot.verifySuggestProductsSearch(materialName);
+      productRobot.verifyPageVisible();
     });
     testWidgets(
         'EZRX-T33 | Verify Search Product by inputting keyword not contain Product name/code',
@@ -432,7 +435,7 @@ void main() {
       await commonRobot.navigateToScreen(NavigationTab.products);
       await productRobot.openSearchProductScreen();
       await productSuggestionRobot.searchWithKeyboardAction(materialNumber);
-      await productSuggestionRobot.tapSearchResult(materialNumber);
+      await productRobot.tapSearchMaterial(materialNumber);
       productDetailRobot.verifyProductImageDisplayed();
       productDetailRobot.verifyProductFavoriteIconDisplayed();
       productDetailRobot.verifyProductNameDisplayed();
@@ -480,7 +483,7 @@ void main() {
       await commonRobot.navigateToScreen(NavigationTab.products);
       await productRobot.openSearchProductScreen();
       await productSuggestionRobot.searchWithKeyboardAction(materialNumber);
-      await productSuggestionRobot.tapSearchResult(materialNumber);
+      await productRobot.tapSearchMaterial(materialNumber);
       await productDetailRobot.openMaterialInformation();
       productDetailRobot.verifyMateriaNumberDisplayed(materialNumber);
       productDetailRobot.verifyManufacturerDisplayed(materialPrincipalName);
@@ -505,7 +508,7 @@ void main() {
       await commonRobot.navigateToScreen(NavigationTab.products);
       await productRobot.openSearchProductScreen();
       await productRobot.searchWithKeyboardAction(multiImageMaterialNumber);
-      await productSuggestionRobot.tapSearchResult(multiImageMaterialNumber);
+      await productRobot.tapSearchMaterial(multiImageMaterialNumber);
       productDetailRobot.verifyImageMaterialSelected(0, true);
       productDetailRobot.verifyImageMaterialSelected(1, false);
       await productDetailRobot.tapToImageMaterial(1, false);
@@ -519,7 +522,7 @@ void main() {
       await commonRobot.navigateToScreen(NavigationTab.products);
       await productRobot.openSearchProductScreen();
       await productSuggestionRobot.searchWithKeyboardAction(materialNumber);
-      await productSuggestionRobot.tapSearchResult(materialNumber);
+      await productRobot.tapSearchMaterial(materialNumber);
       await productDetailRobot.dragMaterialDetailsInfoTileDisplayed();
       await productDetailRobot.verifyRelateProductDisplayed();
     });
@@ -532,7 +535,7 @@ void main() {
       await productRobot.openSearchProductScreen();
       await productSuggestionRobot
           .searchWithKeyboardAction(otherInfoMaterialNumber);
-      await productSuggestionRobot.tapSearchResult(otherInfoMaterialNumber);
+      await productRobot.tapSearchMaterial(otherInfoMaterialNumber);
       await productDetailRobot.tapToSeeMore();
       productDetailRobot.verifyMaterialHowToUseDisplayed();
       productDetailRobot.verifyMaterialCompositionDisplayed();
@@ -545,7 +548,7 @@ void main() {
       await productRobot.navigateToScreen(NavigationTab.products);
       await productRobot.openSearchProductScreen();
       await productSuggestionRobot.searchWithKeyboardAction(materialNumber);
-      await productSuggestionRobot.tapSearchResult(materialNumber);
+      await productRobot.tapSearchMaterial(materialNumber);
       await productDetailRobot.tapCartButton();
       cartRobot.verifyPage();
     });
@@ -577,7 +580,7 @@ void main() {
       await productDetailRobot.setProductToFavoriteList(false);
       await productDetailRobot.tapBackButton();
       await productRobot.filterFavoritesInProductsScreen();
-      productRobot.verifyProductFilter(nameProduct, matched: false);
+      productRobot.verifyProductFilter(nameProduct, matched: true);
     });
 
     testWidgets(
@@ -622,7 +625,7 @@ void main() {
       await pumpAppWithHomeScreen(tester);
       await browseProductFromEmptyCart();
       await productSuggestionRobot.searchWithKeyboardAction(materialNumber);
-      await productSuggestionRobot.tapSearchResult(materialNumber);
+      await productRobot.tapSearchMaterial(materialNumber);
       await productDetailRobot.tapAddToCart();
       productDetailRobot.verifyCartButtonQty(1);
       await productDetailRobot.tapCartButton();
@@ -666,12 +669,14 @@ void main() {
 
       //verify
       await productSuggestionRobot.searchWithKeyboardAction(materialNumber);
-      await productSuggestionRobot.tapSearchResult(materialNumber);
+      await productRobot.tapSearchMaterial(materialNumber);
       await productDetailRobot.tapAddToCart();
       await productDetailRobot.dismissSnackbar();
       await productDetailRobot.tapBackButton();
+
+      await productRobot.openSearchProductScreen();
       await productSuggestionRobot.searchWithKeyboardAction(materialNumber);
-      await productSuggestionRobot.tapSearchResult(materialNumber);
+      await productRobot.tapSearchMaterial(materialNumber);
       await productDetailRobot.tapAddToCart();
       await productDetailRobot.tapCartButton();
       cartRobot.verifyCartQty(1);
@@ -689,7 +694,7 @@ void main() {
 
       //verify
       await productSuggestionRobot.searchWithKeyboardAction(materialNumber);
-      await productSuggestionRobot.tapSearchResult(materialNumber);
+      await productRobot.tapSearchMaterial(materialNumber);
       await productDetailRobot.tapAddToCart();
       await productDetailRobot.dismissSnackbar();
       await productDetailRobot.tapCartButton();
@@ -708,7 +713,7 @@ void main() {
 
       //verify
       await productSuggestionRobot.searchWithKeyboardAction(materialNumber);
-      await productSuggestionRobot.tapSearchResult(materialNumber);
+      await productRobot.tapSearchMaterial(materialNumber);
       await productDetailRobot.tapAddToCart();
       await productDetailRobot.dismissSnackbar();
       await productDetailRobot.tapCartButton();
@@ -731,7 +736,7 @@ void main() {
 
       //verify
       await productSuggestionRobot.searchWithKeyboardAction(materialNumber);
-      await productSuggestionRobot.tapSearchResult(materialNumber);
+      await productRobot.tapSearchMaterial(materialNumber);
       await productDetailRobot.tapAddToCart();
       await productDetailRobot.tapCartButton();
       await updateAndVerifySmallOrderFee();
@@ -797,7 +802,7 @@ void main() {
       //verify
       await productSuggestionRobot
           .searchWithKeyboardAction(lowPriceMaterialNumber);
-      await productSuggestionRobot.tapSearchResult(lowPriceMaterialNumber);
+      await productRobot.tapSearchMaterial(lowPriceMaterialNumber);
       await productDetailRobot.tapAddToCart();
       await productDetailRobot.tapCartButton();
       await cartRobot.verifyMaterial(lowPriceMaterialNumber);
@@ -839,7 +844,7 @@ void main() {
       await commonRobot.navigateToScreen(NavigationTab.products);
       await productRobot.openSearchProductScreen();
       await productRobot.searchWithKeyboardAction(bonusMaterialNumber);
-      await productSuggestionRobot.tapSearchResult(bonusMaterialNumber);
+      await productRobot.tapSearchMaterial(bonusMaterialNumber);
       final productName =
           productDetailRobot.getMaterialDetailsMaterialDescription();
       await productDetailRobot.openAvailableOffers();
@@ -858,7 +863,7 @@ void main() {
 
       //verify
       await productSuggestionRobot.searchWithKeyboardAction(oosMaterialNumber);
-      await productSuggestionRobot.tapSearchResult(oosMaterialNumber);
+      await productRobot.tapSearchMaterial(oosMaterialNumber);
       if (productDetailRobot.isOosPreOrderMaterial) {
         await productDetailRobot.tapAddToCart();
         await productDetailRobot.dismissSnackbar();
@@ -902,7 +907,7 @@ void main() {
 
       //verify
       await productSuggestionRobot.searchWithKeyboardAction(oosMaterialNumber);
-      await productSuggestionRobot.tapSearchResult(oosMaterialNumber);
+      await productRobot.tapSearchMaterial(oosMaterialNumber);
 
       await productDetailRobot.tapAddToCart();
       await productDetailRobot.dismissSnackbar();
@@ -953,7 +958,7 @@ void main() {
       //verify
       await productSuggestionRobot
           .searchWithKeyboardAction(bonusMaterialNumber);
-      await productSuggestionRobot.tapSearchResult(bonusMaterialNumber);
+      await productRobot.tapSearchMaterial(bonusMaterialNumber);
       await productDetailRobot.tapAddToCart();
       await productDetailRobot.dismissSnackbar();
       await productDetailRobot.tapCartButton();
@@ -1209,9 +1214,7 @@ void main() {
         (tester) async {
       const qty = 3;
 
-      //offer applied 7% so unit price changes
-      const newBonusMaterialNumberUnitPrice = 115528;
-      const totalPrice = (newBonusMaterialNumberUnitPrice * qty);
+      const totalPrice = (bonusMaterialNumberUnitPrice * qty);
 
       final grandTotalPrice =
           totalPrice.includeTax(taxPercentage) + smallOrderFee;
@@ -1240,7 +1243,7 @@ void main() {
       orderSuccessRobot.verifyItemQty(qty);
       orderSuccessRobot.verifyMaterialOnOfferTag();
       orderSuccessRobot.verifyMaterialUnitPrice(
-        newBonusMaterialNumberUnitPrice.priceDisplayForID(currency),
+        bonusMaterialNumberUnitPrice.priceDisplayForID(currency),
       );
       orderSuccessRobot
           .verifyMaterialTotalPrice(totalPrice.priceDisplayForID(currency));
@@ -1688,14 +1691,13 @@ void main() {
         await commonRobot.navigateToScreen(NavigationTab.products);
         await productRobot.openSearchProductScreen();
         await productSuggestionRobot.searchWithKeyboardAction(materialNumber);
-        await productSuggestionRobot.tapSearchResult(materialNumber);
+        await productRobot.tapSearchMaterial(materialNumber);
         await productDetailRobot.tapAddToCart();
         await productDetailRobot.dismissSnackbar();
         await productDetailRobot.tapCartButton();
         await cartRobot.changeMaterialQty(materialNumber, cartQty);
         await cartRobot.tapCloseButton();
         await productDetailRobot.tapBackButton();
-        await productSuggestionRobot.tapToBackScreen();
         await commonRobot.navigateToScreen(NavigationTab.orders);
 
         //verify

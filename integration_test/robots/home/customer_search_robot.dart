@@ -60,6 +60,9 @@ class CustomerSearchRobot {
     await search(shipToCode);
     findCustomerCode(shipToCode);
     await tapOnCustomerCode(shipToCode);
+    if (confirmChangeAddress.hasFound) {
+      await tapOnConfirmChangeAddressButton();
+    }
   }
 
   void findCustomerCodeSearchField() {
