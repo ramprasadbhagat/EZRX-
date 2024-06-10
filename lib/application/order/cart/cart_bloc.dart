@@ -129,23 +129,6 @@ class CartBloc extends Bloc<CartEvent, CartState> {
           ),
         );
 
-        final response = await stockInfoRepository.getStockInfoList(
-          customerCodeInfo: state.customerCodeInfo,
-          materials: [e.bonusMaterial.materialNumber],
-          salesOrganisation: state.salesOrganisation,
-          shipToInfo: state.shipToInfo,
-        );
-        final stockInfo = response
-            .fold(
-              (failure) => <MaterialStockInfo>[],
-              (stockInfo) => stockInfo,
-            )
-            .firstWhere(
-              (element) =>
-                  element.materialNumber == e.bonusMaterial.materialNumber,
-              orElse: () => MaterialStockInfo.empty(),
-            );
-
         final failureOrSuccess = await repository.upsertCart(
           customerCodeInfo: state.customerCodeInfo,
           salesOrganisation: state.salesOrganisation,
@@ -157,7 +140,6 @@ class CartBloc extends Bloc<CartEvent, CartState> {
           counterOfferDetails: e.counterOfferDetails,
           itemId: e.bonusItemId.getValue(),
           tenderContractNumber: '',
-          stockInfo: stockInfo,
         );
 
         failureOrSuccess.fold(
@@ -195,6 +177,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
                 bonusSampleItems: bonusList,
                 bundle: priceAggregate.bundle,
                 salesOrgConfig: state.config,
+                stockInfoList: priceAggregate.stockInfoList,
               );
             }
 
@@ -413,25 +396,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
             isUpserting: true,
           ),
         );
-
-        final products = [
-          e.priceAggregate.materialInfo.copyWith(
-            quantity: MaterialQty(e.priceAggregate.quantity),
-          ),
-          ...e.priceAggregate.dealBonusList,
-        ];
-
-        final response = await stockInfoRepository.getStockInfoList(
-          customerCodeInfo: state.customerCodeInfo,
-          materials: [...products.map((e) => e.materialNumber)],
-          salesOrganisation: state.salesOrganisation,
-          shipToInfo: state.shipToInfo,
-        );
-        final materialStockInfo = response.fold(
-          (failure) => <MaterialStockInfo>[],
-          (stockInfo) => stockInfo,
-        );
-
+        
         final failureOrSuccess = await repository.upsertCartWithBonus(
           customerCodeInfo: state.customerCodeInfo,
           salesOrganisation: state.salesOrganisation,
@@ -444,7 +409,6 @@ class CartBloc extends Bloc<CartEvent, CartState> {
             counterOfferCurrency: state.config.currency,
           ),
           banner: e.banner,
-          materialStockInfo: materialStockInfo,
         );
 
         await failureOrSuccess.fold(

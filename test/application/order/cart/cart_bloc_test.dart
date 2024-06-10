@@ -1378,16 +1378,6 @@ void main() {
         ),
         setUp: () {
           when(
-            () => stockInfoRepositoryMock.getStockInfoList(
-              materials: [priceAggregates.first.materialInfo.materialNumber],
-              salesOrganisation: fakeMYSalesOrganisation,
-              shipToInfo: shipToInfo,
-              customerCodeInfo: fakeCustomerCodeInfo,
-            ),
-          ).thenAnswer(
-            (invocation) async => const Right([]),
-          );
-          when(
             () => cartRepositoryMock.upsertCart(
               salesOrganisation: fakeMYSalesOrganisation,
               salesOrganisationConfig: fakeMYSalesOrgConfigs,
@@ -1400,7 +1390,6 @@ void main() {
                   .copyWith(quantity: MaterialQty(1)),
               quantity: 1,
               tenderContractNumber: '',
-              stockInfo: MaterialStockInfo.empty(),
             ),
           ).thenAnswer(
             (invocation) async => Left(fakeError),
@@ -1454,22 +1443,6 @@ void main() {
         ),
         setUp: () {
           when(
-            () => stockInfoRepositoryMock.getStockInfoList(
-              materials: [priceAggregates.first.materialInfo.materialNumber],
-              salesOrganisation: fakeMYSalesOrganisation,
-              shipToInfo: shipToInfo,
-              customerCodeInfo: fakeCustomerCodeInfo,
-            ),
-          ).thenAnswer(
-            (invocation) async => Right([
-              MaterialStockInfo.empty().copyWith(
-                stockInfos: priceAggregates.first.stockInfoList,
-                materialNumber:
-                    priceAggregates.first.materialInfo.materialNumber,
-              ),
-            ]),
-          );
-          when(
             () => cartRepositoryMock.upsertCart(
               salesOrganisation: fakeMYSalesOrganisation,
               salesOrganisationConfig: fakeMYSalesOrgConfigs,
@@ -1483,11 +1456,6 @@ void main() {
               ),
               quantity: 1,
               tenderContractNumber: '',
-              stockInfo: MaterialStockInfo.empty().copyWith(
-                stockInfos: priceAggregates.first.stockInfoList,
-                materialNumber:
-                    priceAggregates.first.materialInfo.materialNumber,
-              ),
             ),
           ).thenAnswer(
             (invocation) async => Right(
@@ -1624,20 +1592,9 @@ void main() {
               product: priceAggregates.first.copyWith(
                 quantity: 2,
               ),
-              materialStockInfo: [],
             ),
           ).thenAnswer(
             (invocation) async => Left(fakeError),
-          );
-          when(
-            () => stockInfoRepositoryMock.getStockInfoList(
-              materials: [priceAggregates.first.materialInfo.materialNumber],
-              salesOrganisation: fakeMYSalesOrganisation,
-              shipToInfo: shipToInfo,
-              customerCodeInfo: fakeCustomerCodeInfo,
-            ),
-          ).thenAnswer(
-            (invocation) async => const Right([]),
           );
         },
         act: (bloc) => bloc.add(
@@ -1715,23 +1672,10 @@ void main() {
               product: priceAggregates.first.copyWith(
                 quantity: 2,
               ),
-              materialStockInfo: [],
             ),
           ).thenAnswer(
             (_) async => Right([priceAggregates.first.copyWith(quantity: 2)]),
           );
-
-          when(
-            () => stockInfoRepositoryMock.getStockInfoList(
-              materials: [priceAggregates.first.materialInfo.materialNumber],
-              salesOrganisation: fakeMYSalesOrganisation,
-              shipToInfo: shipToInfo,
-              customerCodeInfo: fakeCustomerCodeInfo,
-            ),
-          ).thenAnswer(
-            (invocation) async => const Right([]),
-          );
-
           when(
             () => stockInfoRepositoryMock.getMappedStockInfoList(
               items: priceAggregates.first
@@ -1812,20 +1756,9 @@ void main() {
               product: priceAggregates.first.copyWith(
                 quantity: 2,
               ),
-              materialStockInfo: [],
             ),
           ).thenAnswer(
             (_) async => Right([priceAggregates.first.copyWith(quantity: 2)]),
-          );
-          when(
-            () => stockInfoRepositoryMock.getStockInfoList(
-              materials: [priceAggregates.first.materialInfo.materialNumber],
-              salesOrganisation: fakeMYSalesOrganisation,
-              shipToInfo: shipToInfo,
-              customerCodeInfo: fakeCustomerCodeInfo,
-            ),
-          ).thenAnswer(
-            (invocation) async => const Right([]),
           );
           when(
             () => stockInfoRepositoryMock.getMappedStockInfoList(
@@ -1910,19 +1843,8 @@ void main() {
                 quantity: 2,
                 salesOrgConfig: fakeIDSalesOrgConfigs,
               ),
-              materialStockInfo: [],
             ),
           ).thenAnswer((_) async => Right([priceAggregatesForID.first]));
-          when(
-            () => stockInfoRepositoryMock.getStockInfoList(
-              materials: [priceAggregates.first.materialInfo.materialNumber],
-              salesOrganisation: fakeIDSalesOrganisation,
-              shipToInfo: shipToInfo,
-              customerCodeInfo: fakeCustomerCodeInfo,
-            ),
-          ).thenAnswer(
-            (invocation) async => const Right([]),
-          );
           when(
             () => stockInfoRepositoryMock.getMappedStockInfoList(
               items: priceAggregatesForID.first.toStockListMaterials,
@@ -2042,16 +1964,6 @@ void main() {
         ),
         setUp: () {
           when(
-            () => stockInfoRepositoryMock.getStockInfoList(
-              materials: [priceAggregates.first.materialInfo.materialNumber],
-              salesOrganisation: fakeIDSalesOrganisation,
-              shipToInfo: shipToInfo,
-              customerCodeInfo: fakeCustomerCodeInfo,
-            ),
-          ).thenAnswer(
-            (invocation) async => const Right([]),
-          );
-          when(
             () => cartRepositoryMock.upsertCartWithBonus(
               salesOrganisation: fakeIDSalesOrganisation,
               salesOrganisationConfig: fakeIDSalesOrgConfigs,
@@ -2064,7 +1976,6 @@ void main() {
               product: priceAggregates.first.copyWith(
                 quantity: 2,
               ),
-              materialStockInfo: [],
             ),
           ).thenAnswer((_) async => const Right([]));
         },
@@ -5252,20 +5163,9 @@ void main() {
               product: priceAggregates.first.copyWith(
                 quantity: 2,
               ),
-              materialStockInfo: [],
             ),
           ).thenAnswer(
             (invocation) async => Left(fakeErrorWithDifferentDeliveryAddress),
-          );
-          when(
-            () => stockInfoRepositoryMock.getStockInfoList(
-              materials: [priceAggregates.first.materialInfo.materialNumber],
-              salesOrganisation: fakeMYSalesOrganisation,
-              shipToInfo: shipToInfo,
-              customerCodeInfo: fakeCustomerCodeInfo,
-            ),
-          ).thenAnswer(
-            (invocation) async => const Right([]),
           );
           when(
             () => cartRepositoryMock.clearCart(),

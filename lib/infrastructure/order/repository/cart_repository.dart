@@ -14,7 +14,6 @@ import 'package:ezrxmobile/domain/order/entities/cart.dart';
 import 'package:ezrxmobile/domain/order/entities/cart_product_request.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/request_counter_offer_details.dart';
-import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/domain/order/entities/tender_contract.dart';
 import 'package:ezrxmobile/domain/order/repository/i_cart_repository.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
@@ -256,7 +255,6 @@ class CartRepository implements ICartRepository {
     required int quantity,
     required RequestCounterOfferDetails counterOfferDetails,
     required String tenderContractNumber,
-    required MaterialStockInfo stockInfo,
   }) async {
     if (quantity > config.maximumCartQuantity) {
       return Left(
@@ -294,16 +292,7 @@ class CartRepository implements ICartRepository {
         market: deviceStorage.currentMarket(),
       );
 
-      final updatedProductList = productList
-          .map(
-            (element) =>
-                element.getMaterialNumber == materialInfo.materialNumber
-                    ? element.copyWith(stockInfoList: stockInfo.stockInfos)
-                    : element,
-          )
-          .toList();
-
-      return Right(updatedProductList);
+      return Right(productList);
     } catch (e) {
       return Left(FailureHandler.handleFailure(e));
     }
@@ -319,7 +308,6 @@ class CartRepository implements ICartRepository {
     required Language language,
     required RequestCounterOfferDetails counterOfferDetails,
     EZReachBanner? banner,
-    required List<MaterialStockInfo> materialStockInfo,
   }) async {
     try {
       final products = [
@@ -343,7 +331,6 @@ class CartRepository implements ICartRepository {
           counterOfferDetails: products[i].counterOfferDetails,
           tenderContractNumber:
               product.tenderContract.contractNumber.getOrDefaultValue(''),
-          stockInfo: materialStockInfo[i],
         );
 
         if (upserCartResult.isLeft()) return upserCartResult;

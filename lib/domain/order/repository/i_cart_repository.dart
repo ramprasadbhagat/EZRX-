@@ -11,7 +11,6 @@ import 'package:ezrxmobile/domain/order/entities/apl_simulator_order.dart';
 import 'package:ezrxmobile/domain/order/entities/cart.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/request_counter_offer_details.dart';
-import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/domain/order/entities/tender_contract.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 
@@ -37,7 +36,6 @@ abstract class ICartRepository {
     required String itemId,
     required RequestCounterOfferDetails counterOfferDetails,
     required String tenderContractNumber,
-    required MaterialStockInfo stockInfo,
   });
 
   Future<Either<ApiFailure, List<PriceAggregate>>> addHistoryItemsToCart({
@@ -106,7 +104,6 @@ abstract class ICartRepository {
     required Language language,
     required RequestCounterOfferDetails counterOfferDetails,
     EZReachBanner? banner,
-    required List<MaterialStockInfo> materialStockInfo,
   });
 
   Future<Either<ApiFailure, List<PriceAggregate>>>
