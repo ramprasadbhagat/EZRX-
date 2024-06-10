@@ -16,6 +16,8 @@ class EligibilityState with _$EligibilityState {
     required bool isLoadingCustomerCode,
     required bool preSelectShipTo,
     required bool isStockInfoNotAvailable,
+    required bool isNetworkAvailable,
+
   }) = _EligibilityState;
 
   factory EligibilityState.initial() => EligibilityState(
@@ -30,6 +32,7 @@ class EligibilityState with _$EligibilityState {
         preSelectShipTo: false,
         isLoadingCustomerCode: false,
         isStockInfoNotAvailable: false,
+        isNetworkAvailable: true,
       );
 
   bool get isReturnsEnable {

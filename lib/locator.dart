@@ -194,6 +194,7 @@ import 'package:ezrxmobile/infrastructure/banner/datasource/banner_query_mutatio
 import 'package:ezrxmobile/infrastructure/banner/datasource/banner_remote.dart';
 import 'package:ezrxmobile/infrastructure/banner/repository/banner_repository.dart';
 import 'package:ezrxmobile/infrastructure/chatbot/repository/chatbot_repository.dart';
+import 'package:ezrxmobile/infrastructure/connectivity/repository/connectivity_repository.dart';
 import 'package:ezrxmobile/infrastructure/contact_us/datasource/contact_us_local.dart';
 import 'package:ezrxmobile/infrastructure/contact_us/datasource/contact_us_query_mutation.dart';
 import 'package:ezrxmobile/infrastructure/contact_us/datasource/contact_us_remote.dart';
@@ -205,6 +206,7 @@ import 'package:ezrxmobile/infrastructure/core/common/file_path_helper.dart';
 import 'package:ezrxmobile/infrastructure/core/common/file_picker.dart';
 import 'package:ezrxmobile/infrastructure/core/common/permission_service.dart';
 import 'package:ezrxmobile/infrastructure/core/common/take_picture_service.dart';
+import 'package:ezrxmobile/infrastructure/core/connectivity/connectivity_service.dart';
 import 'package:ezrxmobile/infrastructure/core/crypto/encryption.dart';
 import 'package:ezrxmobile/infrastructure/core/datadog/datadog_service.dart';
 import 'package:ezrxmobile/infrastructure/core/device/repository/device_repository.dart';
@@ -465,6 +467,8 @@ void setupLocator() {
     ),
   );
 
+  locator.registerLazySingleton(() => ConnectivityService());
+
   locator.registerLazySingleton(
     () => RouterObserver(
       firebaseAnalyticsService: locator<FirebaseAnalyticsService>(),
@@ -481,6 +485,11 @@ void setupLocator() {
       deviceInfo: locator<DeviceInfo>(),
       permissionService: locator<PermissionService>(),
       mixpanelService: locator<MixpanelService>(),
+    ),
+  );
+  locator.registerLazySingleton(
+    () => ConnectivityRepository(
+      connectivityService: locator<ConnectivityService>(),
     ),
   );
   locator.registerLazySingleton(() => SecureStorage());
@@ -860,6 +869,7 @@ void setupLocator() {
       customerCodeRepository: locator<CustomerCodeRepository>(),
       config: locator<Config>(),
       stockRepository: locator<StockInfoRepository>(),
+      connectivityRepository: locator<ConnectivityRepository>(),
     ),
   );
 

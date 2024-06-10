@@ -5,6 +5,7 @@ import 'package:ezrxmobile/domain/account/entities/customer_code_information.dar
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/customer_code_local.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
+import 'package:ezrxmobile/infrastructure/connectivity/repository/connectivity_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/stock_info_repository.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:bloc_test/bloc_test.dart';
@@ -43,6 +44,9 @@ class CustomerCodeRepositoryMock extends Mock
     implements CustomerCodeRepository {}
 
 class StockInfoRepositoryMock extends Mock implements StockInfoRepository {}
+
+class ConnectivityRepositoryMock extends Mock
+    implements ConnectivityRepository {}
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
@@ -141,6 +145,8 @@ void main() {
   final mixpanelRepositoryMock = MixpanelRepoMock();
   final customerCodeRepositoryMock = CustomerCodeRepositoryMock();
   final stockInfoRepositoryMock = StockInfoRepositoryMock();
+  final connectivityRepositoryMock = ConnectivityRepositoryMock();
+
   final config = Config()..appFlavor = Flavor.mock;
   late CustomerInformation customerMockData;
 
@@ -151,6 +157,12 @@ void main() {
 
   setUp(() {
     when(() => stockInfoRepositoryMock.watchStockApiStatus())
+        .thenAnswer((_) => Stream.fromIterable([]));
+
+    when(() => connectivityRepositoryMock.initializeConnectivity())
+        .thenAnswer((_) async => const Right(unit));
+
+    when(() => connectivityRepositoryMock.watchNetworkAvailability())
         .thenAnswer((_) => Stream.fromIterable([]));
   });
 
@@ -163,6 +175,7 @@ void main() {
         customerCodeRepository: customerCodeRepositoryMock,
         config: config,
         stockRepository: stockInfoRepositoryMock,
+        connectivityRepository: connectivityRepositoryMock,
       ),
       act: (EligibilityBloc bloc) {
         bloc.add(const EligibilityEvent.initialized());
@@ -178,6 +191,7 @@ void main() {
         customerCodeRepository: customerCodeRepositoryMock,
         config: config,
         stockRepository: stockInfoRepositoryMock,
+        connectivityRepository: connectivityRepositoryMock,
       ),
       setUp: () {
         when(
@@ -227,6 +241,7 @@ void main() {
         customerCodeRepository: customerCodeRepositoryMock,
         config: config,
         stockRepository: stockInfoRepositoryMock,
+        connectivityRepository: connectivityRepositoryMock,
       ),
       seed: () => EligibilityState.initial().copyWith(
         salesOrganisation: fakeSaleOrg,
@@ -276,6 +291,7 @@ void main() {
         customerCodeRepository: customerCodeRepositoryMock,
         config: config,
         stockRepository: stockInfoRepositoryMock,
+        connectivityRepository: connectivityRepositoryMock,
       ),
       seed: () => EligibilityState.initial().copyWith(
         user: fakeUser,
@@ -355,6 +371,97 @@ void main() {
         ),
       ],
     );
+
+    blocTest(
+      'Eligibility Bloc watch connecivity with network unavailable',
+      build: () => EligibilityBloc(
+        chatBotRepository: chatBotRepositoryMock,
+        mixpanelRepository: mixpanelRepositoryMock,
+        customerCodeRepository: customerCodeRepositoryMock,
+        config: config,
+        stockRepository: stockInfoRepositoryMock,
+        connectivityRepository: connectivityRepositoryMock,
+      ),
+      setUp: () {
+        when(() => connectivityRepositoryMock.watchNetworkAvailability())
+            .thenAnswer((_) => Stream.fromIterable([false]));
+      },
+      act: (EligibilityBloc bloc) {
+        bloc.add(const EligibilityEvent.watchConnectivityStatus());
+      },
+      expect: () => [
+        EligibilityState.initial().copyWith(isNetworkAvailable: false),
+      ],
+    );
+
+    blocTest(
+      'Eligibility Bloc watch connecivity with network available',
+      build: () => EligibilityBloc(
+        chatBotRepository: chatBotRepositoryMock,
+        mixpanelRepository: mixpanelRepositoryMock,
+        customerCodeRepository: customerCodeRepositoryMock,
+        config: config,
+        stockRepository: stockInfoRepositoryMock,
+        connectivityRepository: connectivityRepositoryMock,
+      ),
+      setUp: () {
+        when(() => connectivityRepositoryMock.watchNetworkAvailability())
+            .thenAnswer((_) => Stream.fromIterable([true]));
+      },
+      act: (EligibilityBloc bloc) {
+        bloc.add(const EligibilityEvent.watchConnectivityStatus());
+      },
+      expect: () => [
+        EligibilityState.initial(),
+      ],
+    );
+
+    blocTest(
+      'Eligibility Bloc watch connecivity with network available and then unavailable',
+      build: () => EligibilityBloc(
+        chatBotRepository: chatBotRepositoryMock,
+        mixpanelRepository: mixpanelRepositoryMock,
+        customerCodeRepository: customerCodeRepositoryMock,
+        config: config,
+        stockRepository: stockInfoRepositoryMock,
+        connectivityRepository: connectivityRepositoryMock,
+      ),
+      setUp: () {
+        when(() => connectivityRepositoryMock.watchNetworkAvailability())
+            .thenAnswer((_) => Stream.fromIterable([true, false]));
+      },
+      act: (EligibilityBloc bloc) {
+        bloc.add(const EligibilityEvent.watchConnectivityStatus());
+      },
+      expect: () => [
+        EligibilityState.initial(),
+        EligibilityState.initial().copyWith(isNetworkAvailable: false),
+      ],
+    );
+
+    blocTest(
+      'Eligibility Bloc watch connecivity with network available and then unavailable then available',
+      build: () => EligibilityBloc(
+        chatBotRepository: chatBotRepositoryMock,
+        mixpanelRepository: mixpanelRepositoryMock,
+        customerCodeRepository: customerCodeRepositoryMock,
+        config: config,
+        stockRepository: stockInfoRepositoryMock,
+        connectivityRepository: connectivityRepositoryMock,
+      ),
+      setUp: () {
+        when(() => connectivityRepositoryMock.watchNetworkAvailability())
+            .thenAnswer((_) => Stream.fromIterable([true, false, true]));
+      },
+      act: (EligibilityBloc bloc) {
+        bloc.add(const EligibilityEvent.watchConnectivityStatus());
+      },
+      expect: () => [
+        EligibilityState.initial(),
+        EligibilityState.initial().copyWith(isNetworkAvailable: false),
+        EligibilityState.initial(),
+      ],
+    );
   });
 
   blocTest(
@@ -365,6 +472,7 @@ void main() {
       customerCodeRepository: customerCodeRepositoryMock,
       config: config,
       stockRepository: stockInfoRepositoryMock,
+      connectivityRepository: connectivityRepositoryMock,
     ),
     setUp: () {
       when(() => customerCodeRepositoryMock.getCustomerCodeStorage())
@@ -427,6 +535,7 @@ void main() {
       customerCodeRepository: customerCodeRepositoryMock,
       config: config,
       stockRepository: stockInfoRepositoryMock,
+      connectivityRepository: connectivityRepositoryMock,
     ),
     setUp: () {
       when(() => customerCodeRepositoryMock.getCustomerCodeStorage())
@@ -491,6 +600,7 @@ void main() {
       customerCodeRepository: customerCodeRepositoryMock,
       config: config,
       stockRepository: stockInfoRepositoryMock,
+      connectivityRepository: connectivityRepositoryMock,
     ),
     setUp: () {
       when(() => customerCodeRepositoryMock.getCustomerCodeStorage())
@@ -1532,6 +1642,7 @@ void main() {
         customerCodeRepository: customerCodeRepositoryMock,
         config: config,
         stockRepository: stockInfoRepositoryMock,
+        connectivityRepository: connectivityRepositoryMock,
       ),
       setUp: () {
         when(

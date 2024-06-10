@@ -12,6 +12,7 @@ import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/repository/i_customer_code_repository.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/chatbot/repository/i_chatbot_repository.dart';
+import 'package:ezrxmobile/domain/connectivity/i_connectivity_repository.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/mixpanel/repository/i_mixpanel_repository.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
@@ -31,9 +32,11 @@ class EligibilityBloc extends Bloc<EligibilityEvent, EligibilityState> {
   final IChatBotRepository chatBotRepository;
   final IMixpanelRepository mixpanelRepository;
   final ICustomerCodeRepository customerCodeRepository;
+  final IConnectivityRepository connectivityRepository;
   final Config config;
   StreamSubscription<bool>? _stockApiStatusStreamSubscription;
   IStockInfoRepository stockRepository;
+  StreamSubscription<bool>? _connectivityStreamSubscription;
 
   EligibilityBloc({
     required this.chatBotRepository,
@@ -41,9 +44,12 @@ class EligibilityBloc extends Bloc<EligibilityEvent, EligibilityState> {
     required this.customerCodeRepository,
     required this.config,
     required this.stockRepository,
+    required this.connectivityRepository,
   }) : super(EligibilityState.initial()) {
     on<EligibilityEvent>(_onEvent);
-    add(const EligibilityEvent.watchStockApiStatus());
+    this
+      ..add(const EligibilityEvent.watchStockApiStatus())
+      ..add(const EligibilityEvent.watchConnectivityStatus());
   }
 
   Future<void> _onEvent(
@@ -249,12 +255,42 @@ class EligibilityBloc extends Bloc<EligibilityEvent, EligibilityState> {
           );
         });
       },
+      watchConnectivityStatus: (_WatchConnectivityStatus value) async {
+        await _connectivityStreamSubscription?.cancel();
+
+        _connectivityStreamSubscription =
+            connectivityRepository.watchNetworkAvailability().listen(
+                  (isNetworkAvailable) => add(
+                    EligibilityEvent.updateNetworkAvailability(
+                      isNetworkAvailable: isNetworkAvailable,
+                    ),
+                  ),
+                );
+        final failureOrSuccess =
+            await connectivityRepository.initializeConnectivity();
+
+        failureOrSuccess.fold(
+          (failure) => emit(
+            state.copyWith(
+              failureOrSuccessOption: optionOf(failureOrSuccess),
+            ),
+          ),
+          (_) {},
+        );
+      },
+      updateNetworkAvailability: (_UpdateNetworkAvailability value) async =>
+          emit(
+        state.copyWith(
+          isNetworkAvailable: value.isNetworkAvailable,
+        ),
+      ),
     );
   }
 
   @override
   Future<void> close() async {
     await _stockApiStatusStreamSubscription?.cancel();
+    await _connectivityStreamSubscription?.cancel();
 
     return super.close();
   }

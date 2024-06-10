@@ -14,7 +14,7 @@ class UpgraderLocalizationMessage extends UpgraderMessages {
       case UpgraderMessage.buttonTitleUpdate:
         return 'Update Now'.tr();
       case UpgraderMessage.prompt:
-        return 'Want to update?'.tr();
+        return '';
       case UpgraderMessage.releaseNotes:
         return 'Release Notes'.tr();
       case UpgraderMessage.title:

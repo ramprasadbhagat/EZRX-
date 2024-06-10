@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:ezrxmobile/application/about_us/about_us_bloc.dart';
 import 'package:ezrxmobile/application/account/customer_license_bloc/customer_license_bloc.dart';
 import 'package:ezrxmobile/application/account/settings/setting_bloc.dart';
@@ -191,7 +193,7 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
             state.mapOrNull(
               authenticated: (authState) {
                 context.read<UserBloc>().add(const UserEvent.fetch());
-                
+
                 context.router.replaceAll(
                   const [
                     SplashPageRoute(),
@@ -1162,6 +1164,12 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                   ),
                 );
           },
+        ),
+        BlocListener<EligibilityBloc, EligibilityState>(
+          listenWhen: (previous, current) =>
+              previous.isNetworkAvailable != current.isNetworkAvailable &&
+              current.isNetworkAvailable,
+          listener: (context, state) => locator<Upgrader>().updateVersionInfo(),
         ),
       ],
       child: const _Splash(),

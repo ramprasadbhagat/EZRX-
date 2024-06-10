@@ -36,6 +36,9 @@ mixin _$EligibilityEvent {
     required TResult Function(bool isStockInfoNotAvailable)
         updateStockInfoAvailability,
     required TResult Function() watchStockApiStatus,
+    required TResult Function() watchConnectivityStatus,
+    required TResult Function(bool isNetworkAvailable)
+        updateNetworkAvailability,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -57,6 +60,8 @@ mixin _$EligibilityEvent {
     TResult? Function(bool isStockInfoNotAvailable)?
         updateStockInfoAvailability,
     TResult? Function()? watchStockApiStatus,
+    TResult? Function()? watchConnectivityStatus,
+    TResult? Function(bool isNetworkAvailable)? updateNetworkAvailability,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -77,6 +82,8 @@ mixin _$EligibilityEvent {
     TResult Function()? fetchAndPreSelectCustomerCode,
     TResult Function(bool isStockInfoNotAvailable)? updateStockInfoAvailability,
     TResult Function()? watchStockApiStatus,
+    TResult Function()? watchConnectivityStatus,
+    TResult Function(bool isNetworkAvailable)? updateNetworkAvailability,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -95,6 +102,10 @@ mixin _$EligibilityEvent {
     required TResult Function(_UpdateStockInfoAvailability value)
         updateStockInfoAvailability,
     required TResult Function(_WatchStockApiStatus value) watchStockApiStatus,
+    required TResult Function(_WatchConnectivityStatus value)
+        watchConnectivityStatus,
+    required TResult Function(_UpdateNetworkAvailability value)
+        updateNetworkAvailability,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -111,6 +122,9 @@ mixin _$EligibilityEvent {
     TResult? Function(_UpdateStockInfoAvailability value)?
         updateStockInfoAvailability,
     TResult? Function(_WatchStockApiStatus value)? watchStockApiStatus,
+    TResult? Function(_WatchConnectivityStatus value)? watchConnectivityStatus,
+    TResult? Function(_UpdateNetworkAvailability value)?
+        updateNetworkAvailability,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -127,6 +141,9 @@ mixin _$EligibilityEvent {
     TResult Function(_UpdateStockInfoAvailability value)?
         updateStockInfoAvailability,
     TResult Function(_WatchStockApiStatus value)? watchStockApiStatus,
+    TResult Function(_WatchConnectivityStatus value)? watchConnectivityStatus,
+    TResult Function(_UpdateNetworkAvailability value)?
+        updateNetworkAvailability,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -206,6 +223,9 @@ class _$InitializedImpl implements _Initialized {
     required TResult Function(bool isStockInfoNotAvailable)
         updateStockInfoAvailability,
     required TResult Function() watchStockApiStatus,
+    required TResult Function() watchConnectivityStatus,
+    required TResult Function(bool isNetworkAvailable)
+        updateNetworkAvailability,
   }) {
     return initialized();
   }
@@ -230,6 +250,8 @@ class _$InitializedImpl implements _Initialized {
     TResult? Function(bool isStockInfoNotAvailable)?
         updateStockInfoAvailability,
     TResult? Function()? watchStockApiStatus,
+    TResult? Function()? watchConnectivityStatus,
+    TResult? Function(bool isNetworkAvailable)? updateNetworkAvailability,
   }) {
     return initialized?.call();
   }
@@ -253,6 +275,8 @@ class _$InitializedImpl implements _Initialized {
     TResult Function()? fetchAndPreSelectCustomerCode,
     TResult Function(bool isStockInfoNotAvailable)? updateStockInfoAvailability,
     TResult Function()? watchStockApiStatus,
+    TResult Function()? watchConnectivityStatus,
+    TResult Function(bool isNetworkAvailable)? updateNetworkAvailability,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -277,6 +301,10 @@ class _$InitializedImpl implements _Initialized {
     required TResult Function(_UpdateStockInfoAvailability value)
         updateStockInfoAvailability,
     required TResult Function(_WatchStockApiStatus value) watchStockApiStatus,
+    required TResult Function(_WatchConnectivityStatus value)
+        watchConnectivityStatus,
+    required TResult Function(_UpdateNetworkAvailability value)
+        updateNetworkAvailability,
   }) {
     return initialized(this);
   }
@@ -296,6 +324,9 @@ class _$InitializedImpl implements _Initialized {
     TResult? Function(_UpdateStockInfoAvailability value)?
         updateStockInfoAvailability,
     TResult? Function(_WatchStockApiStatus value)? watchStockApiStatus,
+    TResult? Function(_WatchConnectivityStatus value)? watchConnectivityStatus,
+    TResult? Function(_UpdateNetworkAvailability value)?
+        updateNetworkAvailability,
   }) {
     return initialized?.call(this);
   }
@@ -315,6 +346,9 @@ class _$InitializedImpl implements _Initialized {
     TResult Function(_UpdateStockInfoAvailability value)?
         updateStockInfoAvailability,
     TResult Function(_WatchStockApiStatus value)? watchStockApiStatus,
+    TResult Function(_WatchConnectivityStatus value)? watchConnectivityStatus,
+    TResult Function(_UpdateNetworkAvailability value)?
+        updateNetworkAvailability,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -484,6 +518,9 @@ class _$UpdateImpl implements _Update {
     required TResult Function(bool isStockInfoNotAvailable)
         updateStockInfoAvailability,
     required TResult Function() watchStockApiStatus,
+    required TResult Function() watchConnectivityStatus,
+    required TResult Function(bool isNetworkAvailable)
+        updateNetworkAvailability,
   }) {
     return update(user, salesOrganisation, salesOrgConfigs, selectedOrderType);
   }
@@ -508,6 +545,8 @@ class _$UpdateImpl implements _Update {
     TResult? Function(bool isStockInfoNotAvailable)?
         updateStockInfoAvailability,
     TResult? Function()? watchStockApiStatus,
+    TResult? Function()? watchConnectivityStatus,
+    TResult? Function(bool isNetworkAvailable)? updateNetworkAvailability,
   }) {
     return update?.call(
         user, salesOrganisation, salesOrgConfigs, selectedOrderType);
@@ -532,6 +571,8 @@ class _$UpdateImpl implements _Update {
     TResult Function()? fetchAndPreSelectCustomerCode,
     TResult Function(bool isStockInfoNotAvailable)? updateStockInfoAvailability,
     TResult Function()? watchStockApiStatus,
+    TResult Function()? watchConnectivityStatus,
+    TResult Function(bool isNetworkAvailable)? updateNetworkAvailability,
     required TResult orElse(),
   }) {
     if (update != null) {
@@ -557,6 +598,10 @@ class _$UpdateImpl implements _Update {
     required TResult Function(_UpdateStockInfoAvailability value)
         updateStockInfoAvailability,
     required TResult Function(_WatchStockApiStatus value) watchStockApiStatus,
+    required TResult Function(_WatchConnectivityStatus value)
+        watchConnectivityStatus,
+    required TResult Function(_UpdateNetworkAvailability value)
+        updateNetworkAvailability,
   }) {
     return update(this);
   }
@@ -576,6 +621,9 @@ class _$UpdateImpl implements _Update {
     TResult? Function(_UpdateStockInfoAvailability value)?
         updateStockInfoAvailability,
     TResult? Function(_WatchStockApiStatus value)? watchStockApiStatus,
+    TResult? Function(_WatchConnectivityStatus value)? watchConnectivityStatus,
+    TResult? Function(_UpdateNetworkAvailability value)?
+        updateNetworkAvailability,
   }) {
     return update?.call(this);
   }
@@ -595,6 +643,9 @@ class _$UpdateImpl implements _Update {
     TResult Function(_UpdateStockInfoAvailability value)?
         updateStockInfoAvailability,
     TResult Function(_WatchStockApiStatus value)? watchStockApiStatus,
+    TResult Function(_WatchConnectivityStatus value)? watchConnectivityStatus,
+    TResult Function(_UpdateNetworkAvailability value)?
+        updateNetworkAvailability,
     required TResult orElse(),
   }) {
     if (update != null) {
@@ -676,6 +727,9 @@ class _$RegisterChatBotImpl implements _RegisterChatBot {
     required TResult Function(bool isStockInfoNotAvailable)
         updateStockInfoAvailability,
     required TResult Function() watchStockApiStatus,
+    required TResult Function() watchConnectivityStatus,
+    required TResult Function(bool isNetworkAvailable)
+        updateNetworkAvailability,
   }) {
     return registerChatBot();
   }
@@ -700,6 +754,8 @@ class _$RegisterChatBotImpl implements _RegisterChatBot {
     TResult? Function(bool isStockInfoNotAvailable)?
         updateStockInfoAvailability,
     TResult? Function()? watchStockApiStatus,
+    TResult? Function()? watchConnectivityStatus,
+    TResult? Function(bool isNetworkAvailable)? updateNetworkAvailability,
   }) {
     return registerChatBot?.call();
   }
@@ -723,6 +779,8 @@ class _$RegisterChatBotImpl implements _RegisterChatBot {
     TResult Function()? fetchAndPreSelectCustomerCode,
     TResult Function(bool isStockInfoNotAvailable)? updateStockInfoAvailability,
     TResult Function()? watchStockApiStatus,
+    TResult Function()? watchConnectivityStatus,
+    TResult Function(bool isNetworkAvailable)? updateNetworkAvailability,
     required TResult orElse(),
   }) {
     if (registerChatBot != null) {
@@ -747,6 +805,10 @@ class _$RegisterChatBotImpl implements _RegisterChatBot {
     required TResult Function(_UpdateStockInfoAvailability value)
         updateStockInfoAvailability,
     required TResult Function(_WatchStockApiStatus value) watchStockApiStatus,
+    required TResult Function(_WatchConnectivityStatus value)
+        watchConnectivityStatus,
+    required TResult Function(_UpdateNetworkAvailability value)
+        updateNetworkAvailability,
   }) {
     return registerChatBot(this);
   }
@@ -766,6 +828,9 @@ class _$RegisterChatBotImpl implements _RegisterChatBot {
     TResult? Function(_UpdateStockInfoAvailability value)?
         updateStockInfoAvailability,
     TResult? Function(_WatchStockApiStatus value)? watchStockApiStatus,
+    TResult? Function(_WatchConnectivityStatus value)? watchConnectivityStatus,
+    TResult? Function(_UpdateNetworkAvailability value)?
+        updateNetworkAvailability,
   }) {
     return registerChatBot?.call(this);
   }
@@ -785,6 +850,9 @@ class _$RegisterChatBotImpl implements _RegisterChatBot {
     TResult Function(_UpdateStockInfoAvailability value)?
         updateStockInfoAvailability,
     TResult Function(_WatchStockApiStatus value)? watchStockApiStatus,
+    TResult Function(_WatchConnectivityStatus value)? watchConnectivityStatus,
+    TResult Function(_UpdateNetworkAvailability value)?
+        updateNetworkAvailability,
     required TResult orElse(),
   }) {
     if (registerChatBot != null) {
@@ -912,6 +980,9 @@ class _$SelectedCustomerCodeImpl implements _SelectedCustomerCode {
     required TResult Function(bool isStockInfoNotAvailable)
         updateStockInfoAvailability,
     required TResult Function() watchStockApiStatus,
+    required TResult Function() watchConnectivityStatus,
+    required TResult Function(bool isNetworkAvailable)
+        updateNetworkAvailability,
   }) {
     return selectedCustomerCode(customerCodeInfo, shipToInfo);
   }
@@ -936,6 +1007,8 @@ class _$SelectedCustomerCodeImpl implements _SelectedCustomerCode {
     TResult? Function(bool isStockInfoNotAvailable)?
         updateStockInfoAvailability,
     TResult? Function()? watchStockApiStatus,
+    TResult? Function()? watchConnectivityStatus,
+    TResult? Function(bool isNetworkAvailable)? updateNetworkAvailability,
   }) {
     return selectedCustomerCode?.call(customerCodeInfo, shipToInfo);
   }
@@ -959,6 +1032,8 @@ class _$SelectedCustomerCodeImpl implements _SelectedCustomerCode {
     TResult Function()? fetchAndPreSelectCustomerCode,
     TResult Function(bool isStockInfoNotAvailable)? updateStockInfoAvailability,
     TResult Function()? watchStockApiStatus,
+    TResult Function()? watchConnectivityStatus,
+    TResult Function(bool isNetworkAvailable)? updateNetworkAvailability,
     required TResult orElse(),
   }) {
     if (selectedCustomerCode != null) {
@@ -983,6 +1058,10 @@ class _$SelectedCustomerCodeImpl implements _SelectedCustomerCode {
     required TResult Function(_UpdateStockInfoAvailability value)
         updateStockInfoAvailability,
     required TResult Function(_WatchStockApiStatus value) watchStockApiStatus,
+    required TResult Function(_WatchConnectivityStatus value)
+        watchConnectivityStatus,
+    required TResult Function(_UpdateNetworkAvailability value)
+        updateNetworkAvailability,
   }) {
     return selectedCustomerCode(this);
   }
@@ -1002,6 +1081,9 @@ class _$SelectedCustomerCodeImpl implements _SelectedCustomerCode {
     TResult? Function(_UpdateStockInfoAvailability value)?
         updateStockInfoAvailability,
     TResult? Function(_WatchStockApiStatus value)? watchStockApiStatus,
+    TResult? Function(_WatchConnectivityStatus value)? watchConnectivityStatus,
+    TResult? Function(_UpdateNetworkAvailability value)?
+        updateNetworkAvailability,
   }) {
     return selectedCustomerCode?.call(this);
   }
@@ -1021,6 +1103,9 @@ class _$SelectedCustomerCodeImpl implements _SelectedCustomerCode {
     TResult Function(_UpdateStockInfoAvailability value)?
         updateStockInfoAvailability,
     TResult Function(_WatchStockApiStatus value)? watchStockApiStatus,
+    TResult Function(_WatchConnectivityStatus value)? watchConnectivityStatus,
+    TResult Function(_UpdateNetworkAvailability value)?
+        updateNetworkAvailability,
     required TResult orElse(),
   }) {
     if (selectedCustomerCode != null) {
@@ -1140,6 +1225,9 @@ class _$UpdatedCustomerCodeConfigImpl implements _UpdatedCustomerCodeConfig {
     required TResult Function(bool isStockInfoNotAvailable)
         updateStockInfoAvailability,
     required TResult Function() watchStockApiStatus,
+    required TResult Function() watchConnectivityStatus,
+    required TResult Function(bool isNetworkAvailable)
+        updateNetworkAvailability,
   }) {
     return updatedCustomerCodeConfig(customerCodeConfig);
   }
@@ -1164,6 +1252,8 @@ class _$UpdatedCustomerCodeConfigImpl implements _UpdatedCustomerCodeConfig {
     TResult? Function(bool isStockInfoNotAvailable)?
         updateStockInfoAvailability,
     TResult? Function()? watchStockApiStatus,
+    TResult? Function()? watchConnectivityStatus,
+    TResult? Function(bool isNetworkAvailable)? updateNetworkAvailability,
   }) {
     return updatedCustomerCodeConfig?.call(customerCodeConfig);
   }
@@ -1187,6 +1277,8 @@ class _$UpdatedCustomerCodeConfigImpl implements _UpdatedCustomerCodeConfig {
     TResult Function()? fetchAndPreSelectCustomerCode,
     TResult Function(bool isStockInfoNotAvailable)? updateStockInfoAvailability,
     TResult Function()? watchStockApiStatus,
+    TResult Function()? watchConnectivityStatus,
+    TResult Function(bool isNetworkAvailable)? updateNetworkAvailability,
     required TResult orElse(),
   }) {
     if (updatedCustomerCodeConfig != null) {
@@ -1211,6 +1303,10 @@ class _$UpdatedCustomerCodeConfigImpl implements _UpdatedCustomerCodeConfig {
     required TResult Function(_UpdateStockInfoAvailability value)
         updateStockInfoAvailability,
     required TResult Function(_WatchStockApiStatus value) watchStockApiStatus,
+    required TResult Function(_WatchConnectivityStatus value)
+        watchConnectivityStatus,
+    required TResult Function(_UpdateNetworkAvailability value)
+        updateNetworkAvailability,
   }) {
     return updatedCustomerCodeConfig(this);
   }
@@ -1230,6 +1326,9 @@ class _$UpdatedCustomerCodeConfigImpl implements _UpdatedCustomerCodeConfig {
     TResult? Function(_UpdateStockInfoAvailability value)?
         updateStockInfoAvailability,
     TResult? Function(_WatchStockApiStatus value)? watchStockApiStatus,
+    TResult? Function(_WatchConnectivityStatus value)? watchConnectivityStatus,
+    TResult? Function(_UpdateNetworkAvailability value)?
+        updateNetworkAvailability,
   }) {
     return updatedCustomerCodeConfig?.call(this);
   }
@@ -1249,6 +1348,9 @@ class _$UpdatedCustomerCodeConfigImpl implements _UpdatedCustomerCodeConfig {
     TResult Function(_UpdateStockInfoAvailability value)?
         updateStockInfoAvailability,
     TResult Function(_WatchStockApiStatus value)? watchStockApiStatus,
+    TResult Function(_WatchConnectivityStatus value)? watchConnectivityStatus,
+    TResult Function(_UpdateNetworkAvailability value)?
+        updateNetworkAvailability,
     required TResult orElse(),
   }) {
     if (updatedCustomerCodeConfig != null) {
@@ -1328,6 +1430,9 @@ class _$LoadStoredCustomerCodeImpl implements _LoadStoredCustomerCode {
     required TResult Function(bool isStockInfoNotAvailable)
         updateStockInfoAvailability,
     required TResult Function() watchStockApiStatus,
+    required TResult Function() watchConnectivityStatus,
+    required TResult Function(bool isNetworkAvailable)
+        updateNetworkAvailability,
   }) {
     return loadStoredCustomerCode();
   }
@@ -1352,6 +1457,8 @@ class _$LoadStoredCustomerCodeImpl implements _LoadStoredCustomerCode {
     TResult? Function(bool isStockInfoNotAvailable)?
         updateStockInfoAvailability,
     TResult? Function()? watchStockApiStatus,
+    TResult? Function()? watchConnectivityStatus,
+    TResult? Function(bool isNetworkAvailable)? updateNetworkAvailability,
   }) {
     return loadStoredCustomerCode?.call();
   }
@@ -1375,6 +1482,8 @@ class _$LoadStoredCustomerCodeImpl implements _LoadStoredCustomerCode {
     TResult Function()? fetchAndPreSelectCustomerCode,
     TResult Function(bool isStockInfoNotAvailable)? updateStockInfoAvailability,
     TResult Function()? watchStockApiStatus,
+    TResult Function()? watchConnectivityStatus,
+    TResult Function(bool isNetworkAvailable)? updateNetworkAvailability,
     required TResult orElse(),
   }) {
     if (loadStoredCustomerCode != null) {
@@ -1399,6 +1508,10 @@ class _$LoadStoredCustomerCodeImpl implements _LoadStoredCustomerCode {
     required TResult Function(_UpdateStockInfoAvailability value)
         updateStockInfoAvailability,
     required TResult Function(_WatchStockApiStatus value) watchStockApiStatus,
+    required TResult Function(_WatchConnectivityStatus value)
+        watchConnectivityStatus,
+    required TResult Function(_UpdateNetworkAvailability value)
+        updateNetworkAvailability,
   }) {
     return loadStoredCustomerCode(this);
   }
@@ -1418,6 +1531,9 @@ class _$LoadStoredCustomerCodeImpl implements _LoadStoredCustomerCode {
     TResult? Function(_UpdateStockInfoAvailability value)?
         updateStockInfoAvailability,
     TResult? Function(_WatchStockApiStatus value)? watchStockApiStatus,
+    TResult? Function(_WatchConnectivityStatus value)? watchConnectivityStatus,
+    TResult? Function(_UpdateNetworkAvailability value)?
+        updateNetworkAvailability,
   }) {
     return loadStoredCustomerCode?.call(this);
   }
@@ -1437,6 +1553,9 @@ class _$LoadStoredCustomerCodeImpl implements _LoadStoredCustomerCode {
     TResult Function(_UpdateStockInfoAvailability value)?
         updateStockInfoAvailability,
     TResult Function(_WatchStockApiStatus value)? watchStockApiStatus,
+    TResult Function(_WatchConnectivityStatus value)? watchConnectivityStatus,
+    TResult Function(_UpdateNetworkAvailability value)?
+        updateNetworkAvailability,
     required TResult orElse(),
   }) {
     if (loadStoredCustomerCode != null) {
@@ -1511,6 +1630,9 @@ class _$FetchAndPreSelectCustomerCodeImpl
     required TResult Function(bool isStockInfoNotAvailable)
         updateStockInfoAvailability,
     required TResult Function() watchStockApiStatus,
+    required TResult Function() watchConnectivityStatus,
+    required TResult Function(bool isNetworkAvailable)
+        updateNetworkAvailability,
   }) {
     return fetchAndPreSelectCustomerCode();
   }
@@ -1535,6 +1657,8 @@ class _$FetchAndPreSelectCustomerCodeImpl
     TResult? Function(bool isStockInfoNotAvailable)?
         updateStockInfoAvailability,
     TResult? Function()? watchStockApiStatus,
+    TResult? Function()? watchConnectivityStatus,
+    TResult? Function(bool isNetworkAvailable)? updateNetworkAvailability,
   }) {
     return fetchAndPreSelectCustomerCode?.call();
   }
@@ -1558,6 +1682,8 @@ class _$FetchAndPreSelectCustomerCodeImpl
     TResult Function()? fetchAndPreSelectCustomerCode,
     TResult Function(bool isStockInfoNotAvailable)? updateStockInfoAvailability,
     TResult Function()? watchStockApiStatus,
+    TResult Function()? watchConnectivityStatus,
+    TResult Function(bool isNetworkAvailable)? updateNetworkAvailability,
     required TResult orElse(),
   }) {
     if (fetchAndPreSelectCustomerCode != null) {
@@ -1582,6 +1708,10 @@ class _$FetchAndPreSelectCustomerCodeImpl
     required TResult Function(_UpdateStockInfoAvailability value)
         updateStockInfoAvailability,
     required TResult Function(_WatchStockApiStatus value) watchStockApiStatus,
+    required TResult Function(_WatchConnectivityStatus value)
+        watchConnectivityStatus,
+    required TResult Function(_UpdateNetworkAvailability value)
+        updateNetworkAvailability,
   }) {
     return fetchAndPreSelectCustomerCode(this);
   }
@@ -1601,6 +1731,9 @@ class _$FetchAndPreSelectCustomerCodeImpl
     TResult? Function(_UpdateStockInfoAvailability value)?
         updateStockInfoAvailability,
     TResult? Function(_WatchStockApiStatus value)? watchStockApiStatus,
+    TResult? Function(_WatchConnectivityStatus value)? watchConnectivityStatus,
+    TResult? Function(_UpdateNetworkAvailability value)?
+        updateNetworkAvailability,
   }) {
     return fetchAndPreSelectCustomerCode?.call(this);
   }
@@ -1620,6 +1753,9 @@ class _$FetchAndPreSelectCustomerCodeImpl
     TResult Function(_UpdateStockInfoAvailability value)?
         updateStockInfoAvailability,
     TResult Function(_WatchStockApiStatus value)? watchStockApiStatus,
+    TResult Function(_WatchConnectivityStatus value)? watchConnectivityStatus,
+    TResult Function(_UpdateNetworkAvailability value)?
+        updateNetworkAvailability,
     required TResult orElse(),
   }) {
     if (fetchAndPreSelectCustomerCode != null) {
@@ -1724,6 +1860,9 @@ class _$UpdateStockInfoAvailabilityImpl
     required TResult Function(bool isStockInfoNotAvailable)
         updateStockInfoAvailability,
     required TResult Function() watchStockApiStatus,
+    required TResult Function() watchConnectivityStatus,
+    required TResult Function(bool isNetworkAvailable)
+        updateNetworkAvailability,
   }) {
     return updateStockInfoAvailability(isStockInfoNotAvailable);
   }
@@ -1748,6 +1887,8 @@ class _$UpdateStockInfoAvailabilityImpl
     TResult? Function(bool isStockInfoNotAvailable)?
         updateStockInfoAvailability,
     TResult? Function()? watchStockApiStatus,
+    TResult? Function()? watchConnectivityStatus,
+    TResult? Function(bool isNetworkAvailable)? updateNetworkAvailability,
   }) {
     return updateStockInfoAvailability?.call(isStockInfoNotAvailable);
   }
@@ -1771,6 +1912,8 @@ class _$UpdateStockInfoAvailabilityImpl
     TResult Function()? fetchAndPreSelectCustomerCode,
     TResult Function(bool isStockInfoNotAvailable)? updateStockInfoAvailability,
     TResult Function()? watchStockApiStatus,
+    TResult Function()? watchConnectivityStatus,
+    TResult Function(bool isNetworkAvailable)? updateNetworkAvailability,
     required TResult orElse(),
   }) {
     if (updateStockInfoAvailability != null) {
@@ -1795,6 +1938,10 @@ class _$UpdateStockInfoAvailabilityImpl
     required TResult Function(_UpdateStockInfoAvailability value)
         updateStockInfoAvailability,
     required TResult Function(_WatchStockApiStatus value) watchStockApiStatus,
+    required TResult Function(_WatchConnectivityStatus value)
+        watchConnectivityStatus,
+    required TResult Function(_UpdateNetworkAvailability value)
+        updateNetworkAvailability,
   }) {
     return updateStockInfoAvailability(this);
   }
@@ -1814,6 +1961,9 @@ class _$UpdateStockInfoAvailabilityImpl
     TResult? Function(_UpdateStockInfoAvailability value)?
         updateStockInfoAvailability,
     TResult? Function(_WatchStockApiStatus value)? watchStockApiStatus,
+    TResult? Function(_WatchConnectivityStatus value)? watchConnectivityStatus,
+    TResult? Function(_UpdateNetworkAvailability value)?
+        updateNetworkAvailability,
   }) {
     return updateStockInfoAvailability?.call(this);
   }
@@ -1833,6 +1983,9 @@ class _$UpdateStockInfoAvailabilityImpl
     TResult Function(_UpdateStockInfoAvailability value)?
         updateStockInfoAvailability,
     TResult Function(_WatchStockApiStatus value)? watchStockApiStatus,
+    TResult Function(_WatchConnectivityStatus value)? watchConnectivityStatus,
+    TResult Function(_UpdateNetworkAvailability value)?
+        updateNetworkAvailability,
     required TResult orElse(),
   }) {
     if (updateStockInfoAvailability != null) {
@@ -1910,6 +2063,9 @@ class _$WatchStockApiStatusImpl implements _WatchStockApiStatus {
     required TResult Function(bool isStockInfoNotAvailable)
         updateStockInfoAvailability,
     required TResult Function() watchStockApiStatus,
+    required TResult Function() watchConnectivityStatus,
+    required TResult Function(bool isNetworkAvailable)
+        updateNetworkAvailability,
   }) {
     return watchStockApiStatus();
   }
@@ -1934,6 +2090,8 @@ class _$WatchStockApiStatusImpl implements _WatchStockApiStatus {
     TResult? Function(bool isStockInfoNotAvailable)?
         updateStockInfoAvailability,
     TResult? Function()? watchStockApiStatus,
+    TResult? Function()? watchConnectivityStatus,
+    TResult? Function(bool isNetworkAvailable)? updateNetworkAvailability,
   }) {
     return watchStockApiStatus?.call();
   }
@@ -1957,6 +2115,8 @@ class _$WatchStockApiStatusImpl implements _WatchStockApiStatus {
     TResult Function()? fetchAndPreSelectCustomerCode,
     TResult Function(bool isStockInfoNotAvailable)? updateStockInfoAvailability,
     TResult Function()? watchStockApiStatus,
+    TResult Function()? watchConnectivityStatus,
+    TResult Function(bool isNetworkAvailable)? updateNetworkAvailability,
     required TResult orElse(),
   }) {
     if (watchStockApiStatus != null) {
@@ -1981,6 +2141,10 @@ class _$WatchStockApiStatusImpl implements _WatchStockApiStatus {
     required TResult Function(_UpdateStockInfoAvailability value)
         updateStockInfoAvailability,
     required TResult Function(_WatchStockApiStatus value) watchStockApiStatus,
+    required TResult Function(_WatchConnectivityStatus value)
+        watchConnectivityStatus,
+    required TResult Function(_UpdateNetworkAvailability value)
+        updateNetworkAvailability,
   }) {
     return watchStockApiStatus(this);
   }
@@ -2000,6 +2164,9 @@ class _$WatchStockApiStatusImpl implements _WatchStockApiStatus {
     TResult? Function(_UpdateStockInfoAvailability value)?
         updateStockInfoAvailability,
     TResult? Function(_WatchStockApiStatus value)? watchStockApiStatus,
+    TResult? Function(_WatchConnectivityStatus value)? watchConnectivityStatus,
+    TResult? Function(_UpdateNetworkAvailability value)?
+        updateNetworkAvailability,
   }) {
     return watchStockApiStatus?.call(this);
   }
@@ -2019,6 +2186,9 @@ class _$WatchStockApiStatusImpl implements _WatchStockApiStatus {
     TResult Function(_UpdateStockInfoAvailability value)?
         updateStockInfoAvailability,
     TResult Function(_WatchStockApiStatus value)? watchStockApiStatus,
+    TResult Function(_WatchConnectivityStatus value)? watchConnectivityStatus,
+    TResult Function(_UpdateNetworkAvailability value)?
+        updateNetworkAvailability,
     required TResult orElse(),
   }) {
     if (watchStockApiStatus != null) {
@@ -2030,6 +2200,437 @@ class _$WatchStockApiStatusImpl implements _WatchStockApiStatus {
 
 abstract class _WatchStockApiStatus implements EligibilityEvent {
   const factory _WatchStockApiStatus() = _$WatchStockApiStatusImpl;
+}
+
+/// @nodoc
+abstract class _$$WatchConnectivityStatusImplCopyWith<$Res> {
+  factory _$$WatchConnectivityStatusImplCopyWith(
+          _$WatchConnectivityStatusImpl value,
+          $Res Function(_$WatchConnectivityStatusImpl) then) =
+      __$$WatchConnectivityStatusImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$WatchConnectivityStatusImplCopyWithImpl<$Res>
+    extends _$EligibilityEventCopyWithImpl<$Res, _$WatchConnectivityStatusImpl>
+    implements _$$WatchConnectivityStatusImplCopyWith<$Res> {
+  __$$WatchConnectivityStatusImplCopyWithImpl(
+      _$WatchConnectivityStatusImpl _value,
+      $Res Function(_$WatchConnectivityStatusImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$WatchConnectivityStatusImpl implements _WatchConnectivityStatus {
+  const _$WatchConnectivityStatusImpl();
+
+  @override
+  String toString() {
+    return 'EligibilityEvent.watchConnectivityStatus()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$WatchConnectivityStatusImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initialized,
+    required TResult Function(
+            User user,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrgConfigs,
+            OrderDocumentType selectedOrderType)
+        update,
+    required TResult Function() registerChatBot,
+    required TResult Function(
+            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)
+        selectedCustomerCode,
+    required TResult Function(CustomerCodeConfig customerCodeConfig)
+        updatedCustomerCodeConfig,
+    required TResult Function() loadStoredCustomerCode,
+    required TResult Function() fetchAndPreSelectCustomerCode,
+    required TResult Function(bool isStockInfoNotAvailable)
+        updateStockInfoAvailability,
+    required TResult Function() watchStockApiStatus,
+    required TResult Function() watchConnectivityStatus,
+    required TResult Function(bool isNetworkAvailable)
+        updateNetworkAvailability,
+  }) {
+    return watchConnectivityStatus();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initialized,
+    TResult? Function(
+            User user,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrgConfigs,
+            OrderDocumentType selectedOrderType)?
+        update,
+    TResult? Function()? registerChatBot,
+    TResult? Function(CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
+        selectedCustomerCode,
+    TResult? Function(CustomerCodeConfig customerCodeConfig)?
+        updatedCustomerCodeConfig,
+    TResult? Function()? loadStoredCustomerCode,
+    TResult? Function()? fetchAndPreSelectCustomerCode,
+    TResult? Function(bool isStockInfoNotAvailable)?
+        updateStockInfoAvailability,
+    TResult? Function()? watchStockApiStatus,
+    TResult? Function()? watchConnectivityStatus,
+    TResult? Function(bool isNetworkAvailable)? updateNetworkAvailability,
+  }) {
+    return watchConnectivityStatus?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initialized,
+    TResult Function(
+            User user,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrgConfigs,
+            OrderDocumentType selectedOrderType)?
+        update,
+    TResult Function()? registerChatBot,
+    TResult Function(CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
+        selectedCustomerCode,
+    TResult Function(CustomerCodeConfig customerCodeConfig)?
+        updatedCustomerCodeConfig,
+    TResult Function()? loadStoredCustomerCode,
+    TResult Function()? fetchAndPreSelectCustomerCode,
+    TResult Function(bool isStockInfoNotAvailable)? updateStockInfoAvailability,
+    TResult Function()? watchStockApiStatus,
+    TResult Function()? watchConnectivityStatus,
+    TResult Function(bool isNetworkAvailable)? updateNetworkAvailability,
+    required TResult orElse(),
+  }) {
+    if (watchConnectivityStatus != null) {
+      return watchConnectivityStatus();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initialized value) initialized,
+    required TResult Function(_Update value) update,
+    required TResult Function(_RegisterChatBot value) registerChatBot,
+    required TResult Function(_SelectedCustomerCode value) selectedCustomerCode,
+    required TResult Function(_UpdatedCustomerCodeConfig value)
+        updatedCustomerCodeConfig,
+    required TResult Function(_LoadStoredCustomerCode value)
+        loadStoredCustomerCode,
+    required TResult Function(_FetchAndPreSelectCustomerCode value)
+        fetchAndPreSelectCustomerCode,
+    required TResult Function(_UpdateStockInfoAvailability value)
+        updateStockInfoAvailability,
+    required TResult Function(_WatchStockApiStatus value) watchStockApiStatus,
+    required TResult Function(_WatchConnectivityStatus value)
+        watchConnectivityStatus,
+    required TResult Function(_UpdateNetworkAvailability value)
+        updateNetworkAvailability,
+  }) {
+    return watchConnectivityStatus(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_Update value)? update,
+    TResult? Function(_RegisterChatBot value)? registerChatBot,
+    TResult? Function(_SelectedCustomerCode value)? selectedCustomerCode,
+    TResult? Function(_UpdatedCustomerCodeConfig value)?
+        updatedCustomerCodeConfig,
+    TResult? Function(_LoadStoredCustomerCode value)? loadStoredCustomerCode,
+    TResult? Function(_FetchAndPreSelectCustomerCode value)?
+        fetchAndPreSelectCustomerCode,
+    TResult? Function(_UpdateStockInfoAvailability value)?
+        updateStockInfoAvailability,
+    TResult? Function(_WatchStockApiStatus value)? watchStockApiStatus,
+    TResult? Function(_WatchConnectivityStatus value)? watchConnectivityStatus,
+    TResult? Function(_UpdateNetworkAvailability value)?
+        updateNetworkAvailability,
+  }) {
+    return watchConnectivityStatus?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_Update value)? update,
+    TResult Function(_RegisterChatBot value)? registerChatBot,
+    TResult Function(_SelectedCustomerCode value)? selectedCustomerCode,
+    TResult Function(_UpdatedCustomerCodeConfig value)?
+        updatedCustomerCodeConfig,
+    TResult Function(_LoadStoredCustomerCode value)? loadStoredCustomerCode,
+    TResult Function(_FetchAndPreSelectCustomerCode value)?
+        fetchAndPreSelectCustomerCode,
+    TResult Function(_UpdateStockInfoAvailability value)?
+        updateStockInfoAvailability,
+    TResult Function(_WatchStockApiStatus value)? watchStockApiStatus,
+    TResult Function(_WatchConnectivityStatus value)? watchConnectivityStatus,
+    TResult Function(_UpdateNetworkAvailability value)?
+        updateNetworkAvailability,
+    required TResult orElse(),
+  }) {
+    if (watchConnectivityStatus != null) {
+      return watchConnectivityStatus(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _WatchConnectivityStatus implements EligibilityEvent {
+  const factory _WatchConnectivityStatus() = _$WatchConnectivityStatusImpl;
+}
+
+/// @nodoc
+abstract class _$$UpdateNetworkAvailabilityImplCopyWith<$Res> {
+  factory _$$UpdateNetworkAvailabilityImplCopyWith(
+          _$UpdateNetworkAvailabilityImpl value,
+          $Res Function(_$UpdateNetworkAvailabilityImpl) then) =
+      __$$UpdateNetworkAvailabilityImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({bool isNetworkAvailable});
+}
+
+/// @nodoc
+class __$$UpdateNetworkAvailabilityImplCopyWithImpl<$Res>
+    extends _$EligibilityEventCopyWithImpl<$Res,
+        _$UpdateNetworkAvailabilityImpl>
+    implements _$$UpdateNetworkAvailabilityImplCopyWith<$Res> {
+  __$$UpdateNetworkAvailabilityImplCopyWithImpl(
+      _$UpdateNetworkAvailabilityImpl _value,
+      $Res Function(_$UpdateNetworkAvailabilityImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? isNetworkAvailable = null,
+  }) {
+    return _then(_$UpdateNetworkAvailabilityImpl(
+      isNetworkAvailable: null == isNetworkAvailable
+          ? _value.isNetworkAvailable
+          : isNetworkAvailable // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$UpdateNetworkAvailabilityImpl implements _UpdateNetworkAvailability {
+  const _$UpdateNetworkAvailabilityImpl({required this.isNetworkAvailable});
+
+  @override
+  final bool isNetworkAvailable;
+
+  @override
+  String toString() {
+    return 'EligibilityEvent.updateNetworkAvailability(isNetworkAvailable: $isNetworkAvailable)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$UpdateNetworkAvailabilityImpl &&
+            (identical(other.isNetworkAvailable, isNetworkAvailable) ||
+                other.isNetworkAvailable == isNetworkAvailable));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, isNetworkAvailable);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$UpdateNetworkAvailabilityImplCopyWith<_$UpdateNetworkAvailabilityImpl>
+      get copyWith => __$$UpdateNetworkAvailabilityImplCopyWithImpl<
+          _$UpdateNetworkAvailabilityImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initialized,
+    required TResult Function(
+            User user,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrgConfigs,
+            OrderDocumentType selectedOrderType)
+        update,
+    required TResult Function() registerChatBot,
+    required TResult Function(
+            CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)
+        selectedCustomerCode,
+    required TResult Function(CustomerCodeConfig customerCodeConfig)
+        updatedCustomerCodeConfig,
+    required TResult Function() loadStoredCustomerCode,
+    required TResult Function() fetchAndPreSelectCustomerCode,
+    required TResult Function(bool isStockInfoNotAvailable)
+        updateStockInfoAvailability,
+    required TResult Function() watchStockApiStatus,
+    required TResult Function() watchConnectivityStatus,
+    required TResult Function(bool isNetworkAvailable)
+        updateNetworkAvailability,
+  }) {
+    return updateNetworkAvailability(isNetworkAvailable);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initialized,
+    TResult? Function(
+            User user,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrgConfigs,
+            OrderDocumentType selectedOrderType)?
+        update,
+    TResult? Function()? registerChatBot,
+    TResult? Function(CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
+        selectedCustomerCode,
+    TResult? Function(CustomerCodeConfig customerCodeConfig)?
+        updatedCustomerCodeConfig,
+    TResult? Function()? loadStoredCustomerCode,
+    TResult? Function()? fetchAndPreSelectCustomerCode,
+    TResult? Function(bool isStockInfoNotAvailable)?
+        updateStockInfoAvailability,
+    TResult? Function()? watchStockApiStatus,
+    TResult? Function()? watchConnectivityStatus,
+    TResult? Function(bool isNetworkAvailable)? updateNetworkAvailability,
+  }) {
+    return updateNetworkAvailability?.call(isNetworkAvailable);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initialized,
+    TResult Function(
+            User user,
+            SalesOrganisation salesOrganisation,
+            SalesOrganisationConfigs salesOrgConfigs,
+            OrderDocumentType selectedOrderType)?
+        update,
+    TResult Function()? registerChatBot,
+    TResult Function(CustomerCodeInfo customerCodeInfo, ShipToInfo shipToInfo)?
+        selectedCustomerCode,
+    TResult Function(CustomerCodeConfig customerCodeConfig)?
+        updatedCustomerCodeConfig,
+    TResult Function()? loadStoredCustomerCode,
+    TResult Function()? fetchAndPreSelectCustomerCode,
+    TResult Function(bool isStockInfoNotAvailable)? updateStockInfoAvailability,
+    TResult Function()? watchStockApiStatus,
+    TResult Function()? watchConnectivityStatus,
+    TResult Function(bool isNetworkAvailable)? updateNetworkAvailability,
+    required TResult orElse(),
+  }) {
+    if (updateNetworkAvailability != null) {
+      return updateNetworkAvailability(isNetworkAvailable);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initialized value) initialized,
+    required TResult Function(_Update value) update,
+    required TResult Function(_RegisterChatBot value) registerChatBot,
+    required TResult Function(_SelectedCustomerCode value) selectedCustomerCode,
+    required TResult Function(_UpdatedCustomerCodeConfig value)
+        updatedCustomerCodeConfig,
+    required TResult Function(_LoadStoredCustomerCode value)
+        loadStoredCustomerCode,
+    required TResult Function(_FetchAndPreSelectCustomerCode value)
+        fetchAndPreSelectCustomerCode,
+    required TResult Function(_UpdateStockInfoAvailability value)
+        updateStockInfoAvailability,
+    required TResult Function(_WatchStockApiStatus value) watchStockApiStatus,
+    required TResult Function(_WatchConnectivityStatus value)
+        watchConnectivityStatus,
+    required TResult Function(_UpdateNetworkAvailability value)
+        updateNetworkAvailability,
+  }) {
+    return updateNetworkAvailability(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_Update value)? update,
+    TResult? Function(_RegisterChatBot value)? registerChatBot,
+    TResult? Function(_SelectedCustomerCode value)? selectedCustomerCode,
+    TResult? Function(_UpdatedCustomerCodeConfig value)?
+        updatedCustomerCodeConfig,
+    TResult? Function(_LoadStoredCustomerCode value)? loadStoredCustomerCode,
+    TResult? Function(_FetchAndPreSelectCustomerCode value)?
+        fetchAndPreSelectCustomerCode,
+    TResult? Function(_UpdateStockInfoAvailability value)?
+        updateStockInfoAvailability,
+    TResult? Function(_WatchStockApiStatus value)? watchStockApiStatus,
+    TResult? Function(_WatchConnectivityStatus value)? watchConnectivityStatus,
+    TResult? Function(_UpdateNetworkAvailability value)?
+        updateNetworkAvailability,
+  }) {
+    return updateNetworkAvailability?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_Update value)? update,
+    TResult Function(_RegisterChatBot value)? registerChatBot,
+    TResult Function(_SelectedCustomerCode value)? selectedCustomerCode,
+    TResult Function(_UpdatedCustomerCodeConfig value)?
+        updatedCustomerCodeConfig,
+    TResult Function(_LoadStoredCustomerCode value)? loadStoredCustomerCode,
+    TResult Function(_FetchAndPreSelectCustomerCode value)?
+        fetchAndPreSelectCustomerCode,
+    TResult Function(_UpdateStockInfoAvailability value)?
+        updateStockInfoAvailability,
+    TResult Function(_WatchStockApiStatus value)? watchStockApiStatus,
+    TResult Function(_WatchConnectivityStatus value)? watchConnectivityStatus,
+    TResult Function(_UpdateNetworkAvailability value)?
+        updateNetworkAvailability,
+    required TResult orElse(),
+  }) {
+    if (updateNetworkAvailability != null) {
+      return updateNetworkAvailability(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _UpdateNetworkAvailability implements EligibilityEvent {
+  const factory _UpdateNetworkAvailability(
+          {required final bool isNetworkAvailable}) =
+      _$UpdateNetworkAvailabilityImpl;
+
+  bool get isNetworkAvailable;
+  @JsonKey(ignore: true)
+  _$$UpdateNetworkAvailabilityImplCopyWith<_$UpdateNetworkAvailabilityImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -2048,6 +2649,7 @@ mixin _$EligibilityState {
   bool get isLoadingCustomerCode => throw _privateConstructorUsedError;
   bool get preSelectShipTo => throw _privateConstructorUsedError;
   bool get isStockInfoNotAvailable => throw _privateConstructorUsedError;
+  bool get isNetworkAvailable => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $EligibilityStateCopyWith<EligibilityState> get copyWith =>
@@ -2071,7 +2673,8 @@ abstract class $EligibilityStateCopyWith<$Res> {
       Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
       bool isLoadingCustomerCode,
       bool preSelectShipTo,
-      bool isStockInfoNotAvailable});
+      bool isStockInfoNotAvailable,
+      bool isNetworkAvailable});
 
   $UserCopyWith<$Res> get user;
   $SalesOrganisationCopyWith<$Res> get salesOrganisation;
@@ -2106,6 +2709,7 @@ class _$EligibilityStateCopyWithImpl<$Res, $Val extends EligibilityState>
     Object? isLoadingCustomerCode = null,
     Object? preSelectShipTo = null,
     Object? isStockInfoNotAvailable = null,
+    Object? isNetworkAvailable = null,
   }) {
     return _then(_value.copyWith(
       user: null == user
@@ -2151,6 +2755,10 @@ class _$EligibilityStateCopyWithImpl<$Res, $Val extends EligibilityState>
       isStockInfoNotAvailable: null == isStockInfoNotAvailable
           ? _value.isStockInfoNotAvailable
           : isStockInfoNotAvailable // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isNetworkAvailable: null == isNetworkAvailable
+          ? _value.isNetworkAvailable
+          : isNetworkAvailable // ignore: cast_nullable_to_non_nullable
               as bool,
     ) as $Val);
   }
@@ -2233,7 +2841,8 @@ abstract class _$$EligibilityStateImplCopyWith<$Res>
       Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
       bool isLoadingCustomerCode,
       bool preSelectShipTo,
-      bool isStockInfoNotAvailable});
+      bool isStockInfoNotAvailable,
+      bool isNetworkAvailable});
 
   @override
   $UserCopyWith<$Res> get user;
@@ -2273,6 +2882,7 @@ class __$$EligibilityStateImplCopyWithImpl<$Res>
     Object? isLoadingCustomerCode = null,
     Object? preSelectShipTo = null,
     Object? isStockInfoNotAvailable = null,
+    Object? isNetworkAvailable = null,
   }) {
     return _then(_$EligibilityStateImpl(
       user: null == user
@@ -2319,6 +2929,10 @@ class __$$EligibilityStateImplCopyWithImpl<$Res>
           ? _value.isStockInfoNotAvailable
           : isStockInfoNotAvailable // ignore: cast_nullable_to_non_nullable
               as bool,
+      isNetworkAvailable: null == isNetworkAvailable
+          ? _value.isNetworkAvailable
+          : isNetworkAvailable // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -2337,7 +2951,8 @@ class _$EligibilityStateImpl extends _EligibilityState {
       required this.failureOrSuccessOption,
       required this.isLoadingCustomerCode,
       required this.preSelectShipTo,
-      required this.isStockInfoNotAvailable})
+      required this.isStockInfoNotAvailable,
+      required this.isNetworkAvailable})
       : super._();
 
   @override
@@ -2362,10 +2977,12 @@ class _$EligibilityStateImpl extends _EligibilityState {
   final bool preSelectShipTo;
   @override
   final bool isStockInfoNotAvailable;
+  @override
+  final bool isNetworkAvailable;
 
   @override
   String toString() {
-    return 'EligibilityState(user: $user, salesOrganisation: $salesOrganisation, salesOrgConfigs: $salesOrgConfigs, customerCodeInfo: $customerCodeInfo, shipToInfo: $shipToInfo, customerCodeConfig: $customerCodeConfig, selectedOrderType: $selectedOrderType, failureOrSuccessOption: $failureOrSuccessOption, isLoadingCustomerCode: $isLoadingCustomerCode, preSelectShipTo: $preSelectShipTo, isStockInfoNotAvailable: $isStockInfoNotAvailable)';
+    return 'EligibilityState(user: $user, salesOrganisation: $salesOrganisation, salesOrgConfigs: $salesOrgConfigs, customerCodeInfo: $customerCodeInfo, shipToInfo: $shipToInfo, customerCodeConfig: $customerCodeConfig, selectedOrderType: $selectedOrderType, failureOrSuccessOption: $failureOrSuccessOption, isLoadingCustomerCode: $isLoadingCustomerCode, preSelectShipTo: $preSelectShipTo, isStockInfoNotAvailable: $isStockInfoNotAvailable, isNetworkAvailable: $isNetworkAvailable)';
   }
 
   @override
@@ -2394,7 +3011,9 @@ class _$EligibilityStateImpl extends _EligibilityState {
                 other.preSelectShipTo == preSelectShipTo) &&
             (identical(
                     other.isStockInfoNotAvailable, isStockInfoNotAvailable) ||
-                other.isStockInfoNotAvailable == isStockInfoNotAvailable));
+                other.isStockInfoNotAvailable == isStockInfoNotAvailable) &&
+            (identical(other.isNetworkAvailable, isNetworkAvailable) ||
+                other.isNetworkAvailable == isNetworkAvailable));
   }
 
   @override
@@ -2410,7 +3029,8 @@ class _$EligibilityStateImpl extends _EligibilityState {
       failureOrSuccessOption,
       isLoadingCustomerCode,
       preSelectShipTo,
-      isStockInfoNotAvailable);
+      isStockInfoNotAvailable,
+      isNetworkAvailable);
 
   @JsonKey(ignore: true)
   @override
@@ -2432,7 +3052,8 @@ abstract class _EligibilityState extends EligibilityState {
       required final Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
       required final bool isLoadingCustomerCode,
       required final bool preSelectShipTo,
-      required final bool isStockInfoNotAvailable}) = _$EligibilityStateImpl;
+      required final bool isStockInfoNotAvailable,
+      required final bool isNetworkAvailable}) = _$EligibilityStateImpl;
   const _EligibilityState._() : super._();
 
   @override
@@ -2457,6 +3078,8 @@ abstract class _EligibilityState extends EligibilityState {
   bool get preSelectShipTo;
   @override
   bool get isStockInfoNotAvailable;
+  @override
+  bool get isNetworkAvailable;
   @override
   @JsonKey(ignore: true)
   _$$EligibilityStateImplCopyWith<_$EligibilityStateImpl> get copyWith =>

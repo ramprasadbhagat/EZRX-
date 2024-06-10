@@ -369,7 +369,8 @@ class _CartPageState extends State<CartPage> {
                                 alignment: Alignment.center,
                                 child: LoadingAnimationWidget
                                     .horizontalRotatingDots(
-                                  key: WidgetKeys.soaLoadingAnimationWidgetKey,
+                                  key:
+                                      WidgetKeys.soaLoadingAnimationWidgetKey,
                                   color: ZPColors.red,
                                   size: 24,
                                 ),
@@ -385,7 +386,8 @@ class _CartPageState extends State<CartPage> {
                                         const CartEvent.clearCart(),
                                       );
                                   context.read<PriceOverrideBloc>().add(
-                                        const PriceOverrideEvent.initialized(),
+                                        const PriceOverrideEvent
+                                            .initialized(),
                                       );
                                 },
                               ),

@@ -33,4 +33,11 @@ class EligibilityEvent with _$EligibilityEvent {
   }) = _UpdateStockInfoAvailability;
 
   const factory EligibilityEvent.watchStockApiStatus() = _WatchStockApiStatus;
+
+  const factory EligibilityEvent.watchConnectivityStatus() =
+      _WatchConnectivityStatus;
+
+  const factory EligibilityEvent.updateNetworkAvailability({
+    required bool isNetworkAvailable,
+  }) = _UpdateNetworkAvailability;
 }

@@ -25,7 +25,7 @@ void main() {
     expect(buttonTitleIgnoreMessage, 'Ignore');
     expect(buttonTitleLaterMessage, 'Later');
     expect(buttonTitleUpdate, 'Update Now');
-    expect(promptMessage, 'Want to update?');
+    expect(promptMessage, '');
     expect(releaseNotesMessage, 'Release Notes');
     expect(titleMessage, 'Update App?');
   });
