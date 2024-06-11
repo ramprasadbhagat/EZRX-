@@ -46,8 +46,10 @@ import 'package:ezrxmobile/infrastructure/order/datasource/tender_contract_local
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/list_price_strike_through_component.dart';
 import 'package:ezrxmobile/presentation/core/market_place/market_place_rectangle_logo.dart';
+import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
 import 'package:ezrxmobile/presentation/core/switch_widget.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
+import 'package:ezrxmobile/presentation/orders/cart/add_to_cart/add_to_cart_error_section.dart';
 import 'package:ezrxmobile/presentation/products/product_details/product_details_page.dart';
 import 'package:ezrxmobile/presentation/products/product_details/widget/material_info.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
@@ -3391,6 +3393,484 @@ void main() {
               ),
             ),
           );
+        });
+
+        testWidgets(
+            'Show Maximum tender qty message when order quantity is greater than qty available for tender',
+            (tester) async {
+          when(() => productDetailMockBloc.state).thenReturn(
+            ProductDetailState.initial().copyWith(
+              productDetailAggregate: ProductDetailAggregate.empty().copyWith(
+                materialInfo: materialInfo.copyWith(
+                  hasValidTenderContract: true,
+                  hasMandatoryTenderContract: false,
+                ),
+              ),
+            ),
+          );
+          when(() => eligibilityBlocMock.state).thenReturn(
+            EligibilityState.initial().copyWith(
+              salesOrgConfigs: fakeVNSalesOrgConfigs,
+              salesOrganisation: fakeVNSalesOrganisation,
+            ),
+          );
+          when(() => tenderContractDetailBlocMock.state).thenReturn(
+            TenderContractDetailState.initial().copyWith(
+              tenderContractList: tenderContractList,
+              tenderContractEnable: true,
+              selectedTenderContract: tenderContractList.first,
+              inputQty: 300,
+            ),
+          );
+          await tester.pumpWidget(getScopedWidget());
+          await tester.pump();
+
+          expect(
+            find.byKey(WidgetKeys.materialDetailsQuantityInput),
+            findsOneWidget,
+          );
+          final inputFinder =
+              find.byKey(WidgetKeys.productDetailQuantityTextKey);
+
+          await tester.enterText(inputFinder, '300');
+          await tester.pump();
+          await tester.testTextInput.receiveAction(TextInputAction.done);
+
+          expect(
+            tester.widget<TextFormField>(inputFinder).controller?.text,
+            '300',
+          );
+
+          await tester.dragUntilVisible(
+            inputFinder,
+            find.byKey(WidgetKeys.scrollList),
+            const Offset(0.0, -200),
+          );
+          await tester.pumpAndSettle();
+
+          expect(
+            find.textContaining(
+              'Maximum tender qty',
+              findRichText: true,
+            ),
+            findsOneWidget,
+          );
+        });
+
+        testWidgets('Show This is a mandatory contract message',
+            (tester) async {
+          when(() => productDetailMockBloc.state).thenReturn(
+            ProductDetailState.initial().copyWith(
+              productDetailAggregate: ProductDetailAggregate.empty().copyWith(
+                materialInfo: materialInfo.copyWith(
+                  hasValidTenderContract: true,
+                  hasMandatoryTenderContract: true,
+                ),
+              ),
+            ),
+          );
+          when(() => eligibilityBlocMock.state).thenReturn(
+            EligibilityState.initial().copyWith(
+              salesOrgConfigs: fakeVNSalesOrgConfigs,
+              salesOrganisation: fakeVNSalesOrganisation,
+            ),
+          );
+          when(() => tenderContractDetailBlocMock.state).thenReturn(
+            TenderContractDetailState.initial().copyWith(
+              tenderContractList: tenderContractList,
+              tenderContractEnable: true,
+            ),
+          );
+          final expectedState = [
+            TenderContractDetailState.initial().copyWith(isFetching: true),
+            TenderContractDetailState.initial().copyWith(
+              tenderContractList: tenderContractList,
+              tenderContractEnable: true,
+            ),
+          ];
+          whenListen(
+            tenderContractDetailBlocMock,
+            Stream.fromIterable(expectedState),
+          );
+          await tester.pumpWidget(getScopedWidget());
+          await tester.pump();
+          verify(
+            () => tenderContractDetailBlocMock.add(
+              const TenderContractDetailEvent.toggleSwitch(
+                enable: true,
+              ),
+            ),
+          ).called(1);
+
+          final tenderContracts =
+              find.byKey(WidgetKeys.materialUseTenderContract);
+          final tenderSwitch = find.byType(SwitchWidget);
+          final contracts = find.byKey(WidgetKeys.materialTenderContracts);
+
+          expect(tenderContracts, findsOneWidget);
+          expect(
+            find.descendant(
+              of: tenderContracts,
+              matching: find.text('Use Tender Contract'.tr()),
+            ),
+            findsOneWidget,
+          );
+          expect(
+            find.descendant(
+              of: tenderContracts,
+              matching: tenderSwitch,
+            ),
+            findsOneWidget,
+          );
+          await tester.tap(tenderSwitch);
+          await tester.pumpAndSettle();
+
+          expect(contracts, findsOneWidget);
+          expect(
+            find.byType(CustomSnackBar),
+            findsOneWidget,
+          );
+          expect(
+            find.textContaining(
+              'This is a mandatory contract',
+            ),
+            findsOneWidget,
+          );
+        });
+
+        testWidgets(
+            'Show message for Insufficient available quantity. Tender contract is no longer available',
+            (tester) async {
+          when(() => productDetailMockBloc.state).thenReturn(
+            ProductDetailState.initial().copyWith(
+              productDetailAggregate: ProductDetailAggregate.empty().copyWith(
+                materialInfo: materialInfo.copyWith(
+                  hasValidTenderContract: true,
+                  hasMandatoryTenderContract: true,
+                ),
+              ),
+            ),
+          );
+          when(() => eligibilityBlocMock.state).thenReturn(
+            EligibilityState.initial().copyWith(
+              salesOrgConfigs: fakeVNSalesOrgConfigs,
+              salesOrganisation: fakeVNSalesOrganisation,
+            ),
+          );
+          when(() => tenderContractDetailBlocMock.state).thenReturn(
+            TenderContractDetailState.initial().copyWith(
+              tenderContractList: tenderContractList,
+              tenderContractEnable: true,
+              selectedTenderContract: TenderContract.empty(),
+            ),
+          );
+
+          await tester.pumpWidget(getScopedWidget());
+          await tester.pump();
+
+          final cartButtonFinder =
+              find.byKey(WidgetKeys.materialDetailsAddToCartButton);
+          final addToCartButton = find.byType(ElevatedButton);
+
+          expect(cartButtonFinder, findsOneWidget);
+          expect(addToCartButton, findsOneWidget);
+          await tester.tap(
+            addToCartButton,
+            warnIfMissed: false,
+          );
+
+          await tester.pump(const Duration(seconds: 1));
+
+          expect(
+            find.byType(CustomSnackBar),
+            findsOneWidget,
+          );
+          expect(
+            find.textContaining(
+              'Insufficient available quantity. Tender contract is no longer available',
+            ),
+            findsOneWidget,
+          );
+        });
+
+        testWidgets(
+            'Show message when adding tender contract materials while commercial materials exists in the cart',
+            (tester) async {
+          when(() => eligibilityBlocMock.state).thenReturn(
+            EligibilityState.initial().copyWith(
+              salesOrgConfigs: fakeVNSalesOrgConfigs,
+              salesOrganisation: fakeVNSalesOrganisation,
+            ),
+          );
+          when(() => productDetailMockBloc.state).thenReturn(
+            ProductDetailState.initial().copyWith(
+              productDetailAggregate: ProductDetailAggregate.empty().copyWith(
+                materialInfo: materialInfo.copyWith(
+                  quantity: MaterialQty(2),
+                  isFOCMaterial: true,
+                ),
+                stockInfo: StockInfo.empty().copyWith(
+                  inStock: MaterialInStock('true'),
+                ),
+              ),
+            ),
+          );
+          when(() => cartMockBloc.state).thenReturn(
+            CartState.initial().copyWith(
+              isUpserting: false,
+              cartProducts: <PriceAggregate>[
+                PriceAggregate.empty().copyWith(
+                  materialInfo: materialInfo.copyWith(isFOCMaterial: true),
+                ),
+              ],
+            ),
+          );
+          await tester.pumpWidget(getScopedWidget());
+          await tester.pump();
+          final cartButtonFinder =
+              find.byKey(WidgetKeys.materialDetailsAddToCartButton);
+          final addToCartButton = find.byType(ElevatedButton);
+          expect(cartButtonFinder, findsOneWidget);
+          expect(addToCartButton, findsOneWidget);
+          await tester.tap(addToCartButton);
+          await tester.pump(const Duration(seconds: 2));
+          final selectedTenderContract = tenderContractList.first;
+          when(() => productDetailMockBloc.state).thenReturn(
+            ProductDetailState.initial().copyWith(
+              productDetailAggregate: ProductDetailAggregate.empty().copyWith(
+                materialInfo: materialInfo.copyWith(
+                  hasValidTenderContract: true,
+                  hasMandatoryTenderContract: true,
+                ),
+              ),
+            ),
+          );
+          when(() => tenderContractDetailBlocMock.state).thenReturn(
+            TenderContractDetailState.initial().copyWith(
+              tenderContractList: tenderContractList,
+              tenderContractEnable: true,
+              selectedTenderContract: selectedTenderContract,
+            ),
+          );
+          await tester.tap(
+            addToCartButton,
+            warnIfMissed: false,
+          );
+
+          await tester.pump(const Duration(seconds: 1));
+
+          expect(
+            find.byType(AddToCartErrorSection),
+            findsOneWidget,
+          );
+          expect(
+            find.textContaining(
+              'Materials from the ${selectedTenderContract.tenderOrderReason.displayTenderContractReason} tender contract cannot be added to your cart if you have other materials in your cart. By proceeding, your current cart will be cleared.',
+            ),
+            findsOneWidget,
+          );
+        });
+
+        testWidgets(
+            'Show message Materials from the 730 tender contract cannot be added to your cart if you have other materials in your cart.',
+            (tester) async {
+          when(() => eligibilityBlocMock.state).thenReturn(
+            EligibilityState.initial().copyWith(
+              salesOrgConfigs: fakeVNSalesOrgConfigs,
+              salesOrganisation: fakeVNSalesOrganisation,
+            ),
+          );
+          when(() => productDetailMockBloc.state).thenReturn(
+            ProductDetailState.initial().copyWith(
+              productDetailAggregate: ProductDetailAggregate.empty().copyWith(
+                materialInfo: materialInfo.copyWith(
+                  quantity: MaterialQty(2),
+                  isFOCMaterial: true,
+                ),
+                stockInfo: StockInfo.empty().copyWith(
+                  inStock: MaterialInStock('true'),
+                ),
+              ),
+            ),
+          );
+          when(() => cartMockBloc.state).thenReturn(
+            CartState.initial().copyWith(
+              isUpserting: false,
+              cartProducts: <PriceAggregate>[
+                PriceAggregate.empty().copyWith(
+                  materialInfo: materialInfo.copyWith(isFOCMaterial: true),
+                ),
+              ],
+            ),
+          );
+          await tester.pumpWidget(getScopedWidget());
+          await tester.pump();
+          final cartButtonFinder =
+              find.byKey(WidgetKeys.materialDetailsAddToCartButton);
+          final addToCartButton = find.byType(ElevatedButton);
+          expect(cartButtonFinder, findsOneWidget);
+          expect(addToCartButton, findsOneWidget);
+          await tester.tap(addToCartButton);
+          await tester.pump(const Duration(seconds: 2));
+          final selectedTenderContract = tenderContractList.first
+              .copyWith(tenderOrderReason: TenderContractReason('730'));
+          when(() => productDetailMockBloc.state).thenReturn(
+            ProductDetailState.initial().copyWith(
+              productDetailAggregate: ProductDetailAggregate.empty().copyWith(
+                materialInfo: materialInfo.copyWith(
+                  hasValidTenderContract: true,
+                  hasMandatoryTenderContract: true,
+                ),
+              ),
+            ),
+          );
+          when(() => tenderContractDetailBlocMock.state).thenReturn(
+            TenderContractDetailState.initial().copyWith(
+              tenderContractList: tenderContractList,
+              tenderContractEnable: true,
+              selectedTenderContract: selectedTenderContract,
+            ),
+          );
+          await tester.tap(
+            addToCartButton,
+            warnIfMissed: false,
+          );
+
+          await tester.pump(const Duration(seconds: 1));
+
+          expect(
+            find.byType(AddToCartErrorSection),
+            findsOneWidget,
+          );
+          expect(
+            find.textContaining(
+              'Materials from the 730 tender contract cannot be added to your cart if you have other materials in your cart. By proceeding, your current cart will be cleared.',
+            ),
+            findsOneWidget,
+          );
+        });
+
+        testWidgets(
+            'Show message Other materials cannot be ordered while materials from the 730 tender contract are in your cart. By proceeding, your current cart will be cleared.',
+            (tester) async {
+          when(() => eligibilityBlocMock.state).thenReturn(
+            EligibilityState.initial().copyWith(
+              salesOrgConfigs: fakeVNSalesOrgConfigs,
+              salesOrganisation: fakeVNSalesOrganisation,
+            ),
+          );
+          when(() => productDetailMockBloc.state).thenReturn(
+            ProductDetailState.initial().copyWith(
+              productDetailAggregate: ProductDetailAggregate.empty().copyWith(
+                materialInfo: materialInfo.copyWith(
+                  quantity: MaterialQty(2),
+                  isFOCMaterial: true,
+                ),
+                stockInfo: StockInfo.empty().copyWith(
+                  inStock: MaterialInStock('true'),
+                ),
+              ),
+            ),
+          );
+          final existingTenderContract = tenderContractList.first
+              .copyWith(tenderOrderReason: TenderContractReason('730'));
+          final cartProduct = PriceAggregate.empty().copyWith(
+            materialInfo: materialInfo.copyWith(isFOCMaterial: true),
+            tenderContract: existingTenderContract,
+          );
+          when(() => cartMockBloc.state).thenReturn(
+            CartState.initial().copyWith(
+              isUpserting: false,
+              cartProducts: <PriceAggregate>[
+                cartProduct,
+              ],
+            ),
+          );
+          await tester.pumpWidget(getScopedWidget());
+          await tester.pump();
+          final cartButtonFinder =
+              find.byKey(WidgetKeys.materialDetailsAddToCartButton);
+          final addToCartButton = find.byType(ElevatedButton);
+          expect(cartButtonFinder, findsOneWidget);
+          expect(addToCartButton, findsOneWidget);
+          await tester.tap(addToCartButton);
+          await tester.pumpAndSettle(const Duration(seconds: 2));
+
+          expect(
+            find.byType(AddToCartErrorSection),
+            findsOneWidget,
+          );
+          final addToCartErrorSection =
+              find.byKey(WidgetKeys.addToCartErrorSection);
+          expect(addToCartErrorSection, findsOneWidget);
+
+          expect(
+            find.textContaining(
+              'Other materials cannot be ordered while materials from the 730 tender contract are in your cart. By proceeding, your current cart will be cleared.',
+            ),
+            findsOneWidget,
+          );
+
+          final errorSectionProceed =
+              find.byKey(WidgetKeys.addToCartErrorSectionProceed);
+          final errorSectionCancel =
+              find.byKey(WidgetKeys.cancelCovidMaterialAddToCart);
+          expect(errorSectionProceed, findsOneWidget);
+          expect(errorSectionCancel, findsOneWidget);
+          await tester.tap(errorSectionProceed);
+          await tester.pumpAndSettle(const Duration(seconds: 2));
+          verify(
+            () => cartMockBloc.add(
+              const CartEvent.clearCart(),
+            ),
+          ).called(1);
+        });
+
+        testWidgets('Add material to and empty cart with valid tender',
+            (tester) async {
+          when(() => productDetailMockBloc.state).thenReturn(
+            ProductDetailState.initial().copyWith(
+              productDetailAggregate: ProductDetailAggregate.empty().copyWith(
+                materialInfo: materialInfo.copyWith(
+                  hasValidTenderContract: true,
+                  hasMandatoryTenderContract: true,
+                ),
+              ),
+            ),
+          );
+          when(() => eligibilityBlocMock.state).thenReturn(
+            EligibilityState.initial().copyWith(
+              salesOrgConfigs: fakeVNSalesOrgConfigs,
+              salesOrganisation: fakeVNSalesOrganisation,
+            ),
+          );
+          when(() => tenderContractDetailBlocMock.state).thenReturn(
+            TenderContractDetailState.initial().copyWith(
+              tenderContractList: tenderContractList,
+              tenderContractEnable: true,
+              selectedTenderContract: tenderContractList.first,
+            ),
+          );
+
+          await tester.pumpWidget(getScopedWidget());
+          await tester.pump();
+
+          final cartButtonFinder =
+              find.byKey(WidgetKeys.materialDetailsAddToCartButton);
+          final addToCartButton = find.byType(ElevatedButton);
+
+          expect(cartButtonFinder, findsOneWidget);
+          expect(addToCartButton, findsOneWidget);
+          await tester.tap(
+            addToCartButton,
+            warnIfMissed: false,
+          );
+
+          await tester.pump(const Duration(seconds: 1));
+
+          final addToCartErrorSection =
+              find.byKey(WidgetKeys.addToCartErrorSection);
+          expect(addToCartErrorSection, findsNothing);
         });
       });
     },

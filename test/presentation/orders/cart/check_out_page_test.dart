@@ -34,6 +34,7 @@ import 'package:ezrxmobile/domain/order/entities/product_meta_data.dart';
 import 'package:ezrxmobile/domain/order/entities/request_counter_offer_details.dart';
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/domain/order/entities/submit_order_response.dart';
+import 'package:ezrxmobile/domain/order/entities/tender_contract.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/payment_term.dart'
     as payment_term;
@@ -55,6 +56,8 @@ import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/orders/cart/checkout/checkout_page.dart';
 import 'package:ezrxmobile/presentation/orders/cart/checkout/widgets/po_upload_attachment_section.dart';
 import 'package:ezrxmobile/presentation/orders/cart/checkout/widgets/product_bundle_item/checkout_bundle_item.dart';
+import 'package:ezrxmobile/presentation/orders/cart/checkout/widgets/product_material_item/checkout_material_item.dart';
+import 'package:ezrxmobile/presentation/orders/cart/item/cart_product_tile_widgets/cart_product_tender_contract_section.dart';
 import 'package:ezrxmobile/presentation/orders/cart/widget/market_place_delivery_tile.dart';
 import 'package:ezrxmobile/presentation/products/widgets/stock_info.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
@@ -125,6 +128,18 @@ void main() {
       salesOrgConfig: fakeVNSalesOrgConfigs,
     ),
   ];
+
+  final fakeTenderContract = TenderContract.empty().copyWith(
+    tenderOrderReason: TenderContractReason('730'),
+    contractNumber: TenderContractNumber.tenderContractNumber('fake-Number'),
+    tenderPrice: TenderPrice('11832000'),
+    contractReference: StringValue('fake-Reference'),
+    salesDistrict: StringValue('fake-SalesDistrict'),
+    announcementLetterNumber: TenderContractNumber.announcementLetterNumber(
+      'fake-AnnouncementLetterNo',
+    ),
+    remainingTenderQuantity: 10,
+  );
 
   setUpAll(() async {
     locator.registerFactory(() => AutoRouteMock());
@@ -3243,5 +3258,221 @@ void main() {
         expect(stockInfoBannerSubTitle, findsNothing);
       },
     );
+
+    group('Tender Contract - ', () {
+      testWidgets('Show collapsed Tender Contract Section',
+          (WidgetTester tester) async {
+        final cartState = CartState.initial().copyWith(
+          cartProducts: <PriceAggregate>[
+            PriceAggregate.empty().copyWith(
+              tenderContract: fakeTenderContract,
+              materialInfo: MaterialInfo.empty().copyWith(
+                materialNumber: MaterialNumber('123456789'),
+                quantity: MaterialQty(1),
+                type: MaterialInfoType.material(),
+              ),
+              salesOrgConfig: fakeVNSalesOrgConfigs,
+            ),
+          ],
+          config: fakeVNSalesOrgConfigs,
+        );
+        when(() => cartBloc.state).thenReturn(
+          cartState,
+        );
+        when(() => eligibilityBloc.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrganisation: fakeVNSalesOrganisation,
+            salesOrgConfigs: fakeVNSalesOrgConfigs,
+          ),
+        );
+
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pumpAndSettle();
+        final checkOutItems = find.byType(CheckoutMaterialItem);
+        final scrollList = find.byKey(WidgetKeys.checkoutScrollList);
+        await tester.dragUntilVisible(
+          checkOutItems,
+          scrollList,
+          const Offset(0, -450),
+        );
+
+        final tenderContractSection =
+            find.byType(CartProductTenderContractSection);
+        expect(tenderContractSection, findsOneWidget);
+
+        final tenderContractExpansionTile = find.byKey(
+          WidgetKeys.tenderExpandableSection,
+        );
+        expect(tenderContractExpansionTile, findsOneWidget);
+
+        final isExpanded = tester
+            .widget<ExpansionTile>(tenderContractExpansionTile)
+            .initiallyExpanded;
+        expect(isExpanded, isFalse);
+      });
+
+      testWidgets('Show expanded Tender Contract Section',
+          (WidgetTester tester) async {
+        final cartState = CartState.initial().copyWith(
+          cartProducts: <PriceAggregate>[
+            PriceAggregate.empty().copyWith(
+              tenderContract: fakeTenderContract,
+              materialInfo: MaterialInfo.empty().copyWith(
+                materialNumber: MaterialNumber('123456789'),
+                quantity: MaterialQty(1),
+                type: MaterialInfoType.material(),
+              ),
+              salesOrgConfig: fakeVNSalesOrgConfigs,
+            ),
+          ],
+          config: fakeVNSalesOrgConfigs,
+        );
+        when(() => cartBloc.state).thenReturn(
+          cartState,
+        );
+        when(() => eligibilityBloc.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrganisation: fakeVNSalesOrganisation,
+            salesOrgConfigs: fakeVNSalesOrgConfigs,
+          ),
+        );
+
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pumpAndSettle();
+
+        final checkOutItems = find.byType(CheckoutMaterialItem);
+        final scrollList = find.byKey(WidgetKeys.checkoutScrollList);
+        await tester.dragUntilVisible(
+          checkOutItems,
+          scrollList,
+          const Offset(0, -300),
+        );
+        await tester.pumpAndSettle();
+        final tenderContractSection =
+            find.byType(CartProductTenderContractSection);
+        expect(tenderContractSection, findsOneWidget);
+
+        final tenderContractExpansionTile = find.byKey(
+          WidgetKeys.tenderExpandableSection,
+        );
+        expect(tenderContractExpansionTile, findsOneWidget);
+
+        final isExpanded = tester
+            .widget<ExpansionTile>(tenderContractExpansionTile)
+            .initiallyExpanded;
+        expect(isExpanded, isFalse);
+        if (!isExpanded) {
+          await tester.tap(tenderContractExpansionTile);
+          await tester.pumpAndSettle(const Duration(seconds: 1));
+        }
+        await tester.dragUntilVisible(
+          checkOutItems,
+          scrollList,
+          const Offset(0, -100),
+        );
+        await tester.pumpAndSettle();
+        expect(
+          find.descendant(
+            of: tenderContractSection,
+            matching: find.text('Price'),
+          ),
+          findsOneWidget,
+        );
+        expect(
+          find.descendant(
+            of: tenderContractSection,
+            matching: find.text(
+              'VND 11,832,000.00',
+              findRichText: true,
+            ),
+          ),
+          findsOneWidget,
+        );
+        expect(
+          find.descendant(
+            of: tenderContractSection,
+            matching: find.text('Quantity Available'),
+          ),
+          findsOneWidget,
+        );
+        expect(
+          find.descendant(
+            of: tenderContractSection,
+            matching: find.text('10/0'),
+          ),
+          findsOneWidget,
+        );
+        expect(
+          find.descendant(
+            of: tenderContractSection,
+            matching: find.text('Expiry Date'),
+          ),
+          findsOneWidget,
+        );
+        expect(
+          find.descendant(
+            of: tenderContractSection,
+            matching: find.text('-'),
+          ),
+          findsOneWidget,
+        );
+        expect(
+          find.descendant(
+            of: tenderContractSection,
+            matching: find.text('Reference'),
+          ),
+          findsOneWidget,
+        );
+        expect(
+          find.descendant(
+            of: tenderContractSection,
+            matching: find.text('fake-Reference'),
+          ),
+          findsOneWidget,
+        );
+        expect(
+          find.descendant(
+            of: tenderContractSection,
+            matching: find.text('Material Visa No.'),
+          ),
+          findsOneWidget,
+        );
+        expect(
+          find.descendant(
+            of: tenderContractSection,
+            matching: find.text('NA'),
+          ),
+          findsOneWidget,
+        );
+        expect(
+          find.descendant(
+            of: tenderContractSection,
+            matching: find.text('Sale District'),
+          ),
+          findsOneWidget,
+        );
+        expect(
+          find.descendant(
+            of: tenderContractSection,
+            matching: find.text('fake-SalesDistrict'),
+          ),
+          findsOneWidget,
+        );
+        expect(
+          find.descendant(
+            of: tenderContractSection,
+            matching: find.text('Announcement Letter No.'.tr()),
+          ),
+          findsOneWidget,
+        );
+        expect(
+          find.descendant(
+            of: tenderContractSection,
+            matching: find.text('fake-AnnouncementLetterNo'),
+          ),
+          findsOneWidget,
+        );
+      });
+    });
   });
 }

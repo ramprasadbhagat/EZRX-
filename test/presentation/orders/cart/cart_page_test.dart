@@ -4570,6 +4570,106 @@ void main() {
           expect(find.text(classicMOVErrorMessage), findsOneWidget);
         });
       });
+
+      group('Tender Contract - ', () {
+        testWidgets(
+            'Show error message Tender Contract is no longer available for one or few item(s). Please remove to continue.',
+            (tester) async {
+          final mockItem = mockCartItems.first.copyWith(
+            tenderContract: TenderContract.empty().copyWith(
+              tenderOrderReason: TenderContractReason('730'),
+              contractNumber:
+                  TenderContractNumber.tenderContractNumber('fake-Number'),
+              tenderPrice: TenderPrice('11832000'),
+              contractReference: StringValue('fake-Reference'),
+              isTenderExpired: true,
+            ),
+            quantity: 11,
+            stockInfoList: [
+              StockInfo.empty().copyWith(
+                materialNumber: mockCartItems.first.getMaterialNumber,
+                stockQuantity: 10,
+              ),
+            ],
+            salesOrgConfig: fakeVNSalesOrgConfigs,
+          );
+          final orderEligibilityState =
+              OrderEligibilityState.initial().copyWith(
+            cartItems: [mockItem],
+          );
+          when(() => cartBloc.state).thenReturn(
+            CartState.initial().copyWith(
+              cartProducts: [
+                mockItem,
+              ],
+            ),
+          );
+          when(() => orderEligibilityBlocMock.state).thenReturn(
+            orderEligibilityState,
+          );
+
+          await tester.pumpWidget(getWidget());
+          await tester.pumpAndSettle();
+          expect(
+            find.text(
+              'Tender Contract is no longer available for one or few item(s). Please remove to continue.',
+            ),
+            findsOneWidget,
+          );
+          final checkoutButton = find.byKey(WidgetKeys.checkoutButton);
+          expect(checkoutButton, findsOneWidget);
+          expect(orderEligibilityState.isCheckoutDisabled, true);
+        });
+
+        testWidgets(
+            'Show error message One or few item(s) order qty exceed the maximum available tender quantity.',
+            (tester) async {
+          final mockItem = mockCartItems.first.copyWith(
+            tenderContract: TenderContract.empty().copyWith(
+              tenderOrderReason: TenderContractReason('730'),
+              contractNumber:
+                  TenderContractNumber.tenderContractNumber('fake-Number'),
+              tenderPrice: TenderPrice('11832000'),
+              contractReference: StringValue('fake-Reference'),
+              remainingTenderQuantity: 1,
+            ),
+            quantity: 11,
+            stockInfoList: [
+              StockInfo.empty().copyWith(
+                materialNumber: mockCartItems.first.getMaterialNumber,
+                stockQuantity: 10,
+              ),
+            ],
+            salesOrgConfig: fakeVNSalesOrgConfigs,
+          );
+          final orderEligibilityState =
+              OrderEligibilityState.initial().copyWith(
+            cartItems: [mockItem],
+          );
+          when(() => cartBloc.state).thenReturn(
+            CartState.initial().copyWith(
+              cartProducts: [
+                mockItem,
+              ],
+            ),
+          );
+          when(() => orderEligibilityBlocMock.state).thenReturn(
+            orderEligibilityState,
+          );
+
+          await tester.pumpWidget(getWidget());
+          await tester.pumpAndSettle();
+          expect(
+            find.text(
+              'One or few item(s) order qty exceed the maximum available tender quantity.',
+            ),
+            findsOneWidget,
+          );
+          final checkoutButton = find.byKey(WidgetKeys.checkoutButton);
+          expect(checkoutButton, findsOneWidget);
+          expect(orderEligibilityState.isCheckoutDisabled, true);
+        });
+      });
     },
   );
 }

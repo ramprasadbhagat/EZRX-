@@ -2660,6 +2660,36 @@ void main() {
         lastAggregate.tenderContract,
       );
     });
+
+    test(
+      'Tender Contract Validation',
+      () {
+        expect(
+          fakePriceAggregateList.hasTenderContract,
+          true,
+        );
+        expect(
+          fakePriceAggregateList.hasTenderContractWithReason730,
+          true,
+        );
+        expect(
+          fakePriceAggregateList.hasNonMandatoryTenderContract,
+          true,
+        );
+        expect(
+          fakePriceAggregateList.hasMandatoryTenderContract,
+          true,
+        );
+        expect(
+          fakePriceAggregateList.hasNonTenderContractMaterials,
+          true,
+        );
+        expect(
+          fakePriceAggregateList.tenderReasons,
+          ['715', 'NA', '730'],
+        );
+      },
+    );
   });
 
   group('Price Aggregate Get Stock Info Valid -', () {
