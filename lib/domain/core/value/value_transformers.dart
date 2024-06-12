@@ -202,7 +202,7 @@ DateTime? tryParseDateTime(String input) {
           return DateTime.utc(year, month, day, hour).toLocal();
         }
 
-        return DateTime(year, month, day, hour, minute, second);
+        return DateTime(year, month, day, hour, minute, second).toLocal();
       } else {
         try {
           //input for announcement date
@@ -211,7 +211,7 @@ DateTime? tryParseDateTime(String input) {
           //input for invoices date string with format yyyy-MM-dd
           return input.replaceAll(RegExp(r'^0+(?=.)'), '') == '0'
               ? null
-              : DateTime.parse(input);
+              : DateTime.parse(input).toLocal();
         }
       }
     } on FormatException {
