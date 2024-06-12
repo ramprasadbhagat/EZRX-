@@ -379,24 +379,6 @@ void main() {
       );
     });
 
-    test('Status is eligible For Fetch Zyllem Statues ', () {
-      final orderCreating = OrderStepValue('Order Creating');
-      final outForDelivery = OrderStepValue('Out for delivery');
-      final delivered = OrderStepValue('Delivered');
-      expect(
-        delivered.fetchZyllemStatusesNeeded,
-        true,
-      );
-      expect(
-        outForDelivery.fetchZyllemStatusesNeeded,
-        true,
-      );
-      expect(
-        orderCreating.fetchZyllemStatusesNeeded,
-        false,
-      );
-    });
-
     test('History steps display or status == Order received', () {
       final orderReceived = OrderStepValue('Order received');
       expect(
@@ -454,20 +436,20 @@ void main() {
 
       expect(
         partialRejection.viewByOrderHistorySteps.map((e) => e.title).toList(),
-        ['Delivered - partial rejection', ...fixedStep],
+        ['Delivered', ...fixedStep],
       );
       expect(
         rejectUponDelivery.viewByOrderHistorySteps.map((e) => e.title).toList(),
-        ['Delivered - rejected upon delivery', ...fixedStep],
+        ['Delivered', ...fixedStep],
       );
 
       expect(
         partialRejection.viewByItemHistorySteps.map((e) => e.title).toList(),
-        ['Delivered - partial rejection', ...viewByItemFixedSteps],
+        ['Delivered', ...viewByItemFixedSteps],
       );
       expect(
         rejectUponDelivery.viewByItemHistorySteps.map((e) => e.title).toList(),
-        ['Delivered - rejected upon delivery', ...viewByItemFixedSteps],
+        ['Delivered', ...viewByItemFixedSteps],
       );
     });
 

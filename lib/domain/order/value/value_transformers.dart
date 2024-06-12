@@ -130,10 +130,6 @@ String queueStateToOrderConfirmationSuffixMessage(bool isInQueue) => isInQueue
 
 String getOrderNumberPrefix(bool value) => value ? 'Queue' : 'Order';
 
-bool checkIsEligibleForFetchZyllemStatues(String orderStatus) =>
-    isEqualsIgnoreCase(orderStatus, 'Out for delivery') ||
-    isEqualsIgnoreCase(orderStatus, 'Delivered');
-
 List<OrderHistoryStep> getOrderHistorySteps({
   required bool isViewByOrder,
   required String stepTitle,
@@ -181,7 +177,7 @@ List<OrderHistoryStep> getOrderHistorySteps({
         icon: Icons.local_shipping_outlined,
       ),
       OrderHistoryStep.empty().copyWith(
-        title: stepTitle,
+        title: 'Delivered',
         icon: Icons.cancel,
       ),
     ];

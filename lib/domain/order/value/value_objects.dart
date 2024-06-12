@@ -846,9 +846,6 @@ class OrderStepValue extends ValueObject<String> {
   String get deliveryDateTitle =>
       getDeliveryDateTitle(value.getOrElse(() => ''));
 
-  bool get fetchZyllemStatusesNeeded =>
-      checkIsEligibleForFetchZyllemStatues(value.getOrElse(() => ''));
-
   List<OrderHistoryStep> get viewByOrderHistorySteps => getOrderHistorySteps(
         isViewByOrder: true,
         stepTitle: value.getOrElse(() => ''),

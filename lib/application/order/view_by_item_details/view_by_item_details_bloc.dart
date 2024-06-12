@@ -176,7 +176,7 @@ class ViewByItemDetailsBloc
               ),
             );
             if (!state.salesOrgConfig.disableDeliveryDate &&
-                orderHistoryItem.status.fetchZyllemStatusesNeeded) {
+                orderHistoryItem.invoiceNumber.isNotEmpty) {
               add(
                 _FetchZyllemStatus(
                   invoiceNumber: orderHistoryItem.invoiceNumber,
