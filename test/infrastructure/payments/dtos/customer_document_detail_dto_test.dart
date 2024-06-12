@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/payments/dtos/customer_document_detail_dto.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
@@ -23,6 +24,10 @@ void main() {
       ).toDomain();
 
       expect(customerDocumentDetailDto.billingDocumentItem, '000010');
+      expect(
+        customerDocumentDetailDto.principalData.principalCode,
+        PrincipalCode('0000140087'),
+      );
     });
   });
 }

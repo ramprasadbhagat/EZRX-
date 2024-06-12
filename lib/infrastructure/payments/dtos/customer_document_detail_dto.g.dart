@@ -6,9 +6,9 @@ part of 'customer_document_detail_dto.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_CustomerDocumentDetailDto _$$_CustomerDocumentDetailDtoFromJson(
+_$CustomerDocumentDetailDtoImpl _$$CustomerDocumentDetailDtoImplFromJson(
         Map<String, dynamic> json) =>
-    _$_CustomerDocumentDetailDto(
+    _$CustomerDocumentDetailDtoImpl(
       billingDocumentItem: json['billingDocumentItem'] as String? ?? '',
       salesDocumentItemType: json['salesDocumentItemType'] as String? ?? '',
       materialNumber: json['material'] as String? ?? '',
@@ -26,10 +26,11 @@ _$_CustomerDocumentDetailDto _$$_CustomerDocumentDetailDtoFromJson(
       batchNumber: json['batchNumber'] as String? ?? '',
       expiryDate: json['expiryDate'] as String? ?? '',
       principalName: json['principalName'] as String? ?? '',
+      principalCode: json['principalCode'] as String? ?? '',
     );
 
-Map<String, dynamic> _$$_CustomerDocumentDetailDtoToJson(
-        _$_CustomerDocumentDetailDto instance) =>
+Map<String, dynamic> _$$CustomerDocumentDetailDtoImplToJson(
+        _$CustomerDocumentDetailDtoImpl instance) =>
     <String, dynamic>{
       'billingDocumentItem': instance.billingDocumentItem,
       'salesDocumentItemType': instance.salesDocumentItemType,
@@ -47,4 +48,5 @@ Map<String, dynamic> _$$_CustomerDocumentDetailDtoToJson(
       'batchNumber': instance.batchNumber,
       'expiryDate': instance.expiryDate,
       'principalName': instance.principalName,
+      'principalCode': instance.principalCode,
     };

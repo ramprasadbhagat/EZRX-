@@ -19,6 +19,7 @@ class CreditAndInvoiceDetailsQueryMutation {
         batchNumber
         expiryDate
         principalName
+        principalCode
       }
     }
     ''';

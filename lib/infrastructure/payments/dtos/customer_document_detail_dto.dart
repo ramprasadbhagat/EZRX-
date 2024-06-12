@@ -16,82 +16,87 @@ class CustomerDocumentDetailDto with _$CustomerDocumentDetailDto {
       name: 'billingDocumentItem',
       defaultValue: '',
     )
-        required String billingDocumentItem,
+    required String billingDocumentItem,
     @JsonKey(
       name: 'salesDocumentItemType',
       defaultValue: '',
     )
-        required String salesDocumentItemType,
+    required String salesDocumentItemType,
     @JsonKey(
       name: 'material',
       defaultValue: '',
     )
-        required String materialNumber,
+    required String materialNumber,
     @JsonKey(
       name: 'billingDocumentItemText',
       defaultValue: '',
     )
-        required String billingDocumentItemText,
+    required String billingDocumentItemText,
     @JsonKey(
       name: 'billingQuantity',
       defaultValue: '',
     )
-        required String billingQuantity,
+    required String billingQuantity,
     @JsonKey(
       name: 'billingQuantityUnit',
       defaultValue: '',
     )
-        required String billingQuantityUnit,
+    required String billingQuantityUnit,
     @JsonKey(
       name: 'salesMeasureISOUnit',
       defaultValue: '',
     )
-        required String salesMeasureISOUnit,
+    required String salesMeasureISOUnit,
     @JsonKey(
       name: 'referenceSDDocument',
       defaultValue: '',
     )
-        required String referenceSDDocument,
+    required String referenceSDDocument,
     @JsonKey(
       name: 'referenceSDDocumentItem',
       defaultValue: '',
     )
-        required String referenceSDDocumentItem,
+    required String referenceSDDocumentItem,
     @JsonKey(
       name: 'referenceSDDocumentCategory',
       defaultValue: '',
     )
-        required String referenceSDDocumentCategory,
+    required String referenceSDDocumentCategory,
     @JsonKey(
       name: 'grossAmount',
       defaultValue: 0.0,
     )
-        required double grossAmount,
+    required double grossAmount,
     @JsonKey(
       name: 'netAmount',
       defaultValue: 0.0,
     )
-        required double netAmount,
+    required double netAmount,
     @JsonKey(
       name: 'taxAmount',
       defaultValue: 0.0,
     )
-        required double taxAmount,
+    required double taxAmount,
     @JsonKey(
       name: 'batchNumber',
       defaultValue: '',
     )
-        required String batchNumber,
+    required String batchNumber,
     @JsonKey(
       name: 'expiryDate',
       defaultValue: '',
     )
-        required String expiryDate,
+    required String expiryDate,
     @JsonKey(
       name: 'principalName',
       defaultValue: '',
     )
-        required String principalName,
+    required String principalName,
+    @JsonKey(
+      name: 'principalCode',
+      defaultValue: '',
+    )
+    required String principalCode,
   }) = _CustomerDocumentDetailDto;
 
   CustomerDocumentDetail toDomain() {
@@ -113,7 +118,7 @@ class CustomerDocumentDetailDto with _$CustomerDocumentDetailDto {
       expiryDate: DateTimeStringValue(expiryDate),
       principalData: PrincipalData(
         principalName: PrincipalName(principalName),
-        principalCode: PrincipalCode(''),
+        principalCode: PrincipalCode(principalCode),
       ),
       productImages: ProductImages.empty(),
     );
