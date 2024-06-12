@@ -222,6 +222,7 @@ class _DetailField extends StatelessWidget {
                       ),
                 )
               : PriceComponent(
+                  key: WidgetKeys.tenderContractPrice,
                   type: PriceStyle.tenderCartPrice,
                   price: value,
                   salesOrgConfig:
@@ -244,6 +245,7 @@ class _EditButton extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(top: 8.0),
       child: InkWell(
+        key: WidgetKeys.editTenderContractButton,
         onTap: () {
           context.router.pushAndPopUntil(
             ProductDetailsPageRoute(

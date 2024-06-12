@@ -6,6 +6,7 @@ import 'package:ezrxmobile/presentation/core/status_tracker.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/orders/order_tab/view_by_item_details/view_by_item_details.dart';
 import 'package:ezrxmobile/presentation/orders/order_tab/view_by_order_details/view_by_order_details.dart';
+import 'package:ezrxmobile/presentation/orders/order_tab/widgets/order_item_common_tile.dart';
 import 'package:ezrxmobile/presentation/payments/invoice_details/invoice_details.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -22,7 +23,7 @@ class ViewByItemsDetailRobot extends CommonRobot {
   final otherItemDetailSection = find.byType(OtherItemDetailsSection);
   final otherItem =
       find.byKey(WidgetKeys.viewByItemDetailOtherItemExpandSection);
-  final orderItem = find.byType(ViewByItemOrderItemTile);
+  final orderItem = find.byType(OrderItemCommonTile);
   final offerTag = find.byKey(WidgetKeys.offerTag);
   final bundleTag = find.byKey(WidgetKeys.bundleTag);
   final bonusTag = find.byKey(WidgetKeys.commonTileItemStatusLabel);

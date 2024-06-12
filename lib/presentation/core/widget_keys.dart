@@ -719,6 +719,7 @@ class WidgetKeys {
   static const Key cartItemComboTotalPrice = Key('cartItemComboTotalPrice');
   static const Key marketplaceDeliveryInfoSheet =
       Key('marketplaceDeliveryInfoSheet');
+  static const Key editTenderContractButton = Key('editTenderContractButton');
 
   //============================================================
   //  Checkout Page Keys
@@ -1454,6 +1455,7 @@ class WidgetKeys {
   static Key viewByItemsTabKey = const Key('view by items');
   static Key viewByItemsOrderGroupKey = const Key('viewByItemsOrderGroupKey');
   static Key viewByItemsOrderItemKey = const Key('viewByItemsOrderItemKey');
+  static Key viewByItemsOrderItem = const Key('viewByItemsOrderItem');
   static Key orderItemStatusKey = const Key('orderItemStatusKey');
   //============================================================
   // View By Items filter bottom sheet

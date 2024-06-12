@@ -34,6 +34,7 @@ import '../../robots/products/filter_sort_product_robot.dart';
 import '../../robots/products/product_detail_robot.dart';
 import '../../robots/products/product_robot.dart';
 import '../../robots/products/product_suggestion_robot.dart';
+import '../../robots/products/tender_contract_details_robot.dart';
 import '../../robots/returns/returns_by_items/returns_by_items_detail_robot.dart';
 // import '../../robots/returns/returns_root_robot.dart';
 
@@ -50,6 +51,7 @@ void main() {
 
   late ProductRobot productRobot;
   late ProductDetailRobot productDetailRobot;
+  late TenderContractDetailRobot tenderContractDetailRobot;
   late FilterSortProductRobot filterSortProductRobot;
   late ProductSuggestionRobot productSuggestionRobot;
   late CartRobot cartRobot;
@@ -88,6 +90,7 @@ void main() {
 
     productRobot = ProductRobot(tester);
     productDetailRobot = ProductDetailRobot(tester);
+    tenderContractDetailRobot = TenderContractDetailRobot(tester);
     filterSortProductRobot = FilterSortProductRobot(tester);
     productSuggestionRobot = ProductSuggestionRobot(tester);
     cartRobot = CartRobot(tester);
@@ -123,7 +126,7 @@ void main() {
   const shipToAddress = 'Cong Ty TNHH MTV VacXin Va  Sinh Pham So 1';
   const shipToCode = '0071201150';
   const otherShipToCode = '0000003070';
-  const tenderShipToCode = '0071192868';
+  const tenderShipToCode = '0071193309';
   const shipToCodeWithCustomerCodeBlocked = '0071210440';
   const blockedShipToCode = '0071192119';
 
@@ -160,8 +163,17 @@ void main() {
   const bonusMaterialNumberUnitPrice = 11430.0;
   const bonusMaterialName = 'DIPOLAC G CREAM 15G';
 
-  const nonMandatoryTenderContractMaterialNumber = '21128147';
-  const mandatoryTenderContractMaterialNumber = '21128148';
+  const nonMandatoryTenderContractMaterialNumber = '21223505';
+  const mandatoryTenderContractMaterialNumber = '21128893';
+  const mandatoryTenderContractMaterialName =
+      "AVELOX           INJ 400MG/ 250ML 1'S";
+  const mandatoryTenderContractMaterialPrincipleName =
+      'Bayer (South East Asia) Pte. Ltd';
+  const mandatoryTenderContractMaterialUnitPrice = 327950.00;
+  const mandatoryTenderContractMaterialTotalPrice = 32795000.00;
+  const mandatoryTenderContractMaterialTenderReferenceNumber = 'HNO-56789';
+  const mandatoryTenderContractMaterialTenderExpiryDate = '31 Dec 2025';
+  const mandatoryTenderContractNumberWithInsufficientQty = '21129394';
 
   const poReference = 'Auto-test-po-reference';
   const deliveryInstruction = 'Auto-test-delivery-instruction';
@@ -1394,32 +1406,63 @@ void main() {
       await productRobot.openSearchProductScreen();
       await productSuggestionRobot
           .searchWithKeyboardAction(nonMandatoryTenderContractMaterialNumber);
-      await productRobot
-          .tapSearchMaterial(nonMandatoryTenderContractMaterialNumber);
-      productDetailRobot.verifyTenderContractSection();
-      productDetailRobot.verifyUseTenderContractToggle(false);
-      productDetailRobot.verifyTenderContractItems(false);
-      await productDetailRobot.tapUseTenderContractToggle();
-      productDetailRobot.verifyUseTenderContractToggle(true);
-      productDetailRobot.verifyTenderContractItems(true);
-      productDetailRobot.verifyTenderContractItem(index: 0, isSelected: true);
+      await productSuggestionRobot
+          .tapSearchResult(nonMandatoryTenderContractMaterialNumber);
+      tenderContractDetailRobot.verifyTenderContractSection();
+      tenderContractDetailRobot.verifyUseTenderContractToggle(false);
+      tenderContractDetailRobot.verifyTenderContractItems(false);
+      await tenderContractDetailRobot.tapUseTenderContractToggle();
+      tenderContractDetailRobot.verifyUseTenderContractToggle(true);
+      tenderContractDetailRobot.verifyTenderContractItems(true);
+      tenderContractDetailRobot.verifyTenderContractItem(
+        index: 0,
+        isSelected: true,
+      );
       await productDetailRobot.tapBackButton();
 
-      await productRobot.openSearchProductScreen();
       // mandatory tender contract material
       await productSuggestionRobot
           .searchWithKeyboardAction(mandatoryTenderContractMaterialNumber);
-      await productRobot
-          .tapSearchMaterial(mandatoryTenderContractMaterialNumber);
-      productDetailRobot.verifyTenderContractSection();
-      productDetailRobot.verifyUseTenderContractToggle(true);
-      productDetailRobot.verifyTenderContractItems(true);
-      await productDetailRobot.tapUseTenderContractToggle();
-      productDetailRobot.verifyUseTenderContractToggle(true);
-      productDetailRobot.verifyTenderContractItem(index: 0, isSelected: true);
-      await productDetailRobot.tapSecondTenderContractItem();
-      productDetailRobot.verifyTenderContractItem(index: 0, isSelected: false);
-      productDetailRobot.verifyTenderContractItem(index: 1, isSelected: true);
+      await productSuggestionRobot
+          .tapSearchResult(mandatoryTenderContractMaterialNumber);
+      tenderContractDetailRobot.verifyTenderContractSection();
+      tenderContractDetailRobot.verifyUseTenderContractToggle(true);
+      tenderContractDetailRobot.verifyTenderContractItems(true);
+      await tenderContractDetailRobot.tapUseTenderContractToggle();
+      tenderContractDetailRobot
+          .verifyMandetoryTenderContractToggleChangeMessage(true);
+      await commonRobot.dismissSnackbar(dismissAll: true);
+      tenderContractDetailRobot.verifyUseTenderContractToggle(true);
+      tenderContractDetailRobot.verifyTenderContractItem(
+        index: 0,
+        isSelected: true,
+      );
+      await tenderContractDetailRobot.tapSecondTenderContractItem();
+      tenderContractDetailRobot.verifyTenderContractItem(
+        index: 0,
+        isSelected: false,
+      );
+      tenderContractDetailRobot.verifyTenderContractItem(
+        index: 1,
+        isSelected: true,
+      );
+      await productDetailRobot.tapBackButton();
+
+      // mandatory tender contract material with insufficient quantiity
+      await productSuggestionRobot.searchWithKeyboardAction(
+        mandatoryTenderContractNumberWithInsufficientQty,
+      );
+      await productSuggestionRobot
+          .tapSearchResult(mandatoryTenderContractNumberWithInsufficientQty);
+      tenderContractDetailRobot.verifyTenderContractSection();
+      tenderContractDetailRobot.verifyUseTenderContractToggle(true);
+      tenderContractDetailRobot.verifyTenderContractItems(true);
+      tenderContractDetailRobot.verifyTenderContractItem(
+        index: 0,
+        isSelected: false,
+      );
+      await tenderContractDetailRobot.tapAddToCart();
+      tenderContractDetailRobot.verifyInsufficientQuantityMessage();
     });
   });
 
@@ -1852,6 +1895,233 @@ void main() {
       await homeRobot.tapMiniCartIcon();
       commonRobot.verifyCustomerSuspendedBanner();
     });
+
+    testWidgets(
+      'EZRX-T2064 | Verify tender contract material in cart + edit tender contract',
+      (tester) async {
+        //init app
+        await pumpAppWithHomeScreen(tester, shipToCode: tenderShipToCode);
+        await browseProductFromEmptyCart();
+        await productSuggestionRobot
+            .searchWithKeyboardAction(mandatoryTenderContractMaterialNumber);
+        await productSuggestionRobot
+            .tapSearchResult(mandatoryTenderContractMaterialNumber);
+        await productDetailRobot.tapAddToCart();
+        await productDetailRobot.dismissSnackbar(dismissAll: true);
+        productDetailRobot.verifyCartButtonQty(1);
+        await productDetailRobot.tapCartButton();
+
+        //verify
+        cartRobot.verifyClearCartButton();
+        await cartRobot.verifyMaterial(mandatoryTenderContractMaterialNumber);
+        cartRobot.verifyManufacturerName(
+          mandatoryTenderContractMaterialPrincipleName,
+        );
+        cartRobot.verifyMaterialNumber(mandatoryTenderContractMaterialNumber);
+        cartRobot.verifyMaterialImage(mandatoryTenderContractMaterialNumber);
+        cartRobot.verifyMaterialQty(mandatoryTenderContractMaterialNumber, 1);
+        cartRobot.verifyMaterialDescription(
+          mandatoryTenderContractMaterialNumber,
+          mandatoryTenderContractMaterialName,
+        );
+        cartRobot.verifyMaterialUnitPrice(
+          mandatoryTenderContractMaterialNumber,
+          mandatoryTenderContractMaterialUnitPrice.priceDisplay(currency),
+        );
+        cartRobot.verifyMaterialTotalPrice(
+          mandatoryTenderContractMaterialNumber,
+          mandatoryTenderContractMaterialUnitPrice.priceDisplay(currency),
+        );
+        cartRobot.verifyCartQty(1);
+        cartRobot.verifyQtyOnAppBar(1);
+        cartRobot.verifyCartTotalPrice(
+          mandatoryTenderContractMaterialUnitPrice
+              .includeTax(tax)
+              .priceDisplay(currency),
+        );
+        cartRobot.verifyCheckoutButton();
+
+        var totalPrice = mandatoryTenderContractMaterialUnitPrice;
+        await cartRobot
+            .increaseMaterialQty(mandatoryTenderContractMaterialNumber);
+        totalPrice = mandatoryTenderContractMaterialUnitPrice * 2;
+        cartRobot.verifyMaterialQty(mandatoryTenderContractMaterialNumber, 2);
+        cartRobot.verifyMaterialTotalPrice(
+          mandatoryTenderContractMaterialNumber,
+          totalPrice.priceDisplay(currency),
+        );
+        cartRobot.verifyCartTotalPrice(
+          totalPrice.includeTax(tax).priceDisplay(currency),
+        );
+
+        await cartRobot.changeMaterialQty(
+          mandatoryTenderContractMaterialNumber,
+          10,
+        );
+        totalPrice = mandatoryTenderContractMaterialUnitPrice * 10;
+        cartRobot.verifyMaterialQty(mandatoryTenderContractMaterialNumber, 10);
+        cartRobot.verifyMaterialTotalPrice(
+          mandatoryTenderContractMaterialNumber,
+          totalPrice.priceDisplay(currency),
+        );
+        cartRobot.verifyCartTotalPrice(
+          totalPrice.includeTax(tax).priceDisplay(currency),
+        );
+
+        await cartRobot
+            .decreaseMaterialQty(mandatoryTenderContractMaterialNumber);
+        totalPrice = mandatoryTenderContractMaterialUnitPrice * 9;
+        cartRobot.verifyMaterialQty(mandatoryTenderContractMaterialNumber, 9);
+        cartRobot.verifyMaterialTotalPrice(
+          mandatoryTenderContractMaterialNumber,
+          totalPrice.priceDisplay(currency),
+        );
+        cartRobot.verifyCartTotalPrice(
+          totalPrice.includeTax(tax).priceDisplay(currency),
+        );
+        tenderContractDetailRobot
+            .verifyTenderContractSectionInCartAndCheckout();
+        await tenderContractDetailRobot.tapTenderContractSection();
+        tenderContractDetailRobot.verifyTenderContractDetailsSection(
+          price:
+              mandatoryTenderContractMaterialTotalPrice.priceDisplay(currency),
+          expiryDate: mandatoryTenderContractMaterialTenderExpiryDate,
+          referance: mandatoryTenderContractMaterialTenderReferenceNumber,
+        );
+        tenderContractDetailRobot.verifyEditTenderContractSection();
+        await tenderContractDetailRobot.tapEditTenderContractSection();
+        productDetailRobot.verifyPage();
+      },
+    );
+
+    testWidgets(
+      'EZRX-T2064 | Verify mandetory tender contract material in cart with commertial material',
+      (tester) async {
+        //init app
+        await pumpAppWithHomeScreen(tester, shipToCode: tenderShipToCode);
+        await browseProductFromEmptyCart();
+        await productSuggestionRobot.searchWithKeyboardAction(materialNumber);
+        await productSuggestionRobot.tapSearchResult(materialNumber);
+        await productDetailRobot.tapAddToCart();
+        await productDetailRobot.dismissSnackbar(dismissAll: true);
+        productDetailRobot.verifyCartButtonQty(1);
+        await productDetailRobot.tapBackButton();
+        await productSuggestionRobot.tapClearSearch();
+        await productSuggestionRobot
+            .searchWithKeyboardAction(mandatoryTenderContractMaterialNumber);
+        await productSuggestionRobot
+            .tapSearchResult(mandatoryTenderContractMaterialNumber);
+        await productDetailRobot.tapAddToCart();
+        tenderContractDetailRobot
+            .verifyMandetoryTenderContactMessageWhenCartHasNonTenderMaterial();
+        await tenderContractDetailRobot
+            .tapCancelTenderMaterialAddToCartButton();
+        await productDetailRobot.tapAddToCart();
+        tenderContractDetailRobot
+            .verifyMandetoryTenderContactMessageWhenCartHasNonTenderMaterial();
+        await tenderContractDetailRobot
+            .tapProceedTenderMaterialAddToCartButton();
+        productDetailRobot.verifyCartButtonQty(1);
+      },
+    );
+
+    testWidgets(
+      'EZRX-T2064 | Verify non mandetory tender contract material in cart with commertial material',
+      (tester) async {
+        //init app
+        await pumpAppWithHomeScreen(tester, shipToCode: tenderShipToCode);
+        await browseProductFromEmptyCart();
+        await productSuggestionRobot.searchWithKeyboardAction(materialNumber);
+        await productSuggestionRobot.tapSearchResult(materialNumber);
+        await productDetailRobot.tapAddToCart();
+        await productDetailRobot.dismissSnackbar(dismissAll: true);
+        productDetailRobot.verifyCartButtonQty(1);
+        await productDetailRobot.tapBackButton();
+        await productSuggestionRobot.tapClearSearch();
+        await productSuggestionRobot
+            .searchWithKeyboardAction(nonMandatoryTenderContractMaterialNumber);
+        await productSuggestionRobot
+            .tapSearchResult(nonMandatoryTenderContractMaterialNumber);
+        await tenderContractDetailRobot.tapUseTenderContractToggle();
+        await productDetailRobot.tapAddToCart();
+        tenderContractDetailRobot
+            .verifyNonMandetoryTenderContactMessageWhenCartHasNonTenderMaterial();
+        await tenderContractDetailRobot
+            .tapCancelTenderMaterialAddToCartButton();
+        await productDetailRobot.tapAddToCart();
+        await productDetailRobot.dismissSnackbar(dismissAll: true);
+        tenderContractDetailRobot
+            .verifyNonMandetoryTenderContactMessageWhenCartHasNonTenderMaterial();
+        await tenderContractDetailRobot
+            .tapProceedTenderMaterialAddToCartButton();
+        productDetailRobot.verifyCartButtonQty(1);
+      },
+    );
+
+    testWidgets(
+      'EZRX-T2064 | Verify commertial material in cart with non mandetory tender contract material',
+      (tester) async {
+        //init app
+        await pumpAppWithHomeScreen(tester, shipToCode: tenderShipToCode);
+        await browseProductFromEmptyCart();
+        await productSuggestionRobot
+            .searchWithKeyboardAction(nonMandatoryTenderContractMaterialNumber);
+        await productSuggestionRobot
+            .tapSearchResult(nonMandatoryTenderContractMaterialNumber);
+        await tenderContractDetailRobot.tapUseTenderContractToggle();
+        await productDetailRobot.tapAddToCart();
+        await productDetailRobot.dismissSnackbar(dismissAll: true);
+        productDetailRobot.verifyCartButtonQty(1);
+        await productDetailRobot.tapBackButton();
+        await productSuggestionRobot.tapClearSearch();
+        await productSuggestionRobot.searchWithKeyboardAction(materialNumber);
+        await productSuggestionRobot.tapSearchResult(materialNumber);
+        await productDetailRobot.tapAddToCart();
+        tenderContractDetailRobot
+            .verifyMessageWhenCartHasNonMandetoryTenderMaterial();
+        await tenderContractDetailRobot
+            .tapCancelTenderMaterialAddToCartButton();
+        await productDetailRobot.tapAddToCart();
+        tenderContractDetailRobot
+            .verifyMessageWhenCartHasNonMandetoryTenderMaterial();
+        await tenderContractDetailRobot
+            .tapProceedTenderMaterialAddToCartButton();
+        productDetailRobot.verifyCartButtonQty(1);
+      },
+    );
+
+    testWidgets(
+      'EZRX-T2064 | Verify commertial material in cart with mandetory tender contract material',
+      (tester) async {
+        //init app
+        await pumpAppWithHomeScreen(tester, shipToCode: tenderShipToCode);
+        await browseProductFromEmptyCart();
+        await productSuggestionRobot
+            .searchWithKeyboardAction(mandatoryTenderContractMaterialNumber);
+        await productSuggestionRobot
+            .tapSearchResult(mandatoryTenderContractMaterialNumber);
+        await tenderContractDetailRobot.tapUseTenderContractToggle();
+        await productDetailRobot.tapAddToCart();
+        await productDetailRobot.dismissSnackbar(dismissAll: true);
+        productDetailRobot.verifyCartButtonQty(1);
+        await productDetailRobot.tapCartButton();
+        await cartRobot.tapCloseButton();
+        await productDetailRobot.tapBackButton();
+        await productSuggestionRobot.searchWithKeyboardAction(materialNumber);
+        await productSuggestionRobot.tapSearchResult(materialNumber);
+        await productDetailRobot.tapAddToCart();
+        tenderContractDetailRobot
+            .verifyMessageWhenCartHasMandetoryTenderMaterial();
+        await tenderContractDetailRobot
+            .tapCancelTenderMaterialAddToCartButton();
+        await productDetailRobot.tapAddToCart();
+        tenderContractDetailRobot
+            .verifyMessageWhenCartHasMandetoryTenderMaterial();
+        await tenderContractDetailRobot
+            .tapProceedTenderMaterialAddToCartButton();
+        productDetailRobot.verifyCartButtonQty(1);
+      },
+    );
   });
 
   group('Checkout -', () {
@@ -1993,6 +2263,68 @@ void main() {
         );
       },
     );
+
+    testWidgets(
+      'EZRX-T2064 | Verify tender contract material in checkout page',
+      (tester) async {
+        const qty = 5;
+        const totalPrice = mandatoryTenderContractMaterialUnitPrice * qty;
+        //init app
+        await pumpAppWithHomeScreen(tester, shipToCode: tenderShipToCode);
+        await checkoutWithMaterial(mandatoryTenderContractMaterialNumber, qty);
+
+        //verify
+        checkoutRobot.verifyPage();
+        checkoutRobot.verifyAddressSection();
+        await checkoutRobot.verifyPoReferenceField(isVisible: true);
+        await checkoutRobot.verifyDeliveryDateField(isVisible: false);
+        await checkoutRobot.verifyReferenceNoteField(isVisible: false);
+        await checkoutRobot.verifyPaymentTermField(isVisible: false);
+        await checkoutRobot.verifyContactPersonField(isVisible: false);
+        await checkoutRobot.verifyMobileNumberField(isVisible: false);
+        await checkoutRobot.verifyDeliveryInstructionField(isVisible: true);
+        await checkoutRobot.verifyYoursItemLabel(1);
+        await checkoutRobot
+            .verifyMaterial(mandatoryTenderContractMaterialNumber);
+        tenderContractDetailRobot
+            .verifyTenderContractSectionInCartAndCheckout();
+        await tenderContractDetailRobot.tapTenderContractSection();
+        tenderContractDetailRobot.verifyTenderContractDetailsSection(
+          price:
+              mandatoryTenderContractMaterialTotalPrice.priceDisplay(currency),
+          expiryDate: mandatoryTenderContractMaterialTenderExpiryDate,
+          referance: mandatoryTenderContractMaterialTenderReferenceNumber,
+        );
+        tenderContractDetailRobot.verifyEditTenderContractSection(
+          isVisible: false,
+        );
+        await checkoutRobot
+            .verifySubTotalLabel(totalPrice.priceDisplay(currency));
+        await checkoutRobot.verifyGrandTotalLabel(
+          totalPrice.includeTax(tax).priceDisplay(currency),
+        );
+        checkoutRobot.verifyStickyTotalQty(1);
+        checkoutRobot.verifyStickyGrandTotal(
+          totalPrice.includeTax(tax).priceDisplay(currency),
+        );
+        await checkoutRobot.tapStickyGrandTotal();
+        orderPriceSummaryRobot.verifySheet(isVisible: true);
+        orderPriceSummaryRobot.verifyTaxLabel(
+          totalPrice.taxValue(tax).priceDisplay(currency),
+          tax,
+          isVn: true,
+        );
+        orderPriceSummaryRobot.verifySubTotalLabel(
+          totalPrice.priceDisplay(currency),
+        );
+        orderPriceSummaryRobot.verifyGrandTotalLabel(
+          totalPrice.includeTax(tax).priceDisplay(currency),
+        );
+        await orderPriceSummaryRobot.tapCloseButton();
+        orderPriceSummaryRobot.verifySheet(isVisible: false);
+        checkoutRobot.verifyPlaceOrderButton();
+      },
+    );
   });
 
   group('Order success -', () {
@@ -2105,6 +2437,13 @@ void main() {
   group('Order Tab -', () {
     final fromDate = DateTime.now().subtract(const Duration(days: 60));
     final toDate = DateTime.now().subtract(const Duration(days: 2));
+    const tenderOrderNumberForMandetoryTenderContract = '0200376777';
+    const tenderOrderMaterialNoForMandetoryTenderContract = '21129394';
+    const tenderOrderNumberForNonMandetoryTenderContract = '0200375393';
+    const tenderOrderPrincipleNameForMandetoryTenderContract =
+        'Merck Sharp & Dohme (Asia) Ltd.';
+    const tenderOrderPrincipleNameForNonMandetoryTenderContract =
+        'UNITE INTERNATIONAL PHARMA CO.,';
 
     group('View by items -', () {
       testWidgets(
@@ -2293,6 +2632,26 @@ void main() {
 
         commonRobot.verifyCustomerSuspendedBanner();
       });
+
+      testWidgets(
+        'EZRX-T2110 | Verify tender order in view by item listing',
+        (tester) async {
+          //init app
+          await pumpAppWithHomeScreen(tester, shipToCode: tenderShipToCode);
+          await commonRobot.navigateToScreen(NavigationTab.orders);
+
+          //verify
+          ordersRootRobot.verifyViewByItemsPage();
+          await commonRobot.searchWithSearchIcon(
+            tenderOrderNumberForMandetoryTenderContract,
+          );
+          viewByItemsRobot.verifyOrdersWithOrderCode(
+            tenderOrderNumberForMandetoryTenderContract,
+          );
+          viewByItemsRobot.verifyOrders();
+          viewByItemsRobot.verifyTenderContractSection();
+        },
+      );
     });
 
     group('View by item detail -', () {
@@ -2458,6 +2817,185 @@ void main() {
         viewByItemsDetailRobot.verifyBuyAgainButton(isVisible: true);
         viewByItemsDetailRobot.verifyBuyAgainButtonDisabled();
       });
+
+      testWidgets(
+        'EZRX-T2112 | Verify view by item detail with tender contract',
+        (tester) async {
+          //init app
+          await pumpAppWithHomeScreen(tester, shipToCode: tenderShipToCode);
+          await commonRobot.navigateToScreen(NavigationTab.orders);
+
+          //verify
+          ordersRootRobot.verifyViewByItemsPage();
+          await commonRobot.searchWithKeyboardAction(
+            tenderOrderNumberForMandetoryTenderContract,
+          );
+          await viewByItemsRobot.tapFirstOrder();
+          viewByItemsDetailRobot.verifyHeader();
+          viewByItemsDetailRobot.verifyStatusTracker();
+          viewByItemsDetailRobot.verifyAddress();
+          await viewByItemsDetailRobot.verifyManufacturerName(
+            tenderOrderPrincipleNameForMandetoryTenderContract,
+          );
+          await viewByItemsDetailRobot.verifyItemComponent();
+          tenderContractDetailRobot
+              .verifyTenderContractSectionForOrderSection();
+          viewByItemsDetailRobot.verifyBuyAgainButton(isVisible: true);
+        },
+      );
+
+      testWidgets(
+        'EZRX-T2113  | Verify view by item detail buy again with tender contract when cart has commertial material ',
+        (tester) async {
+          //init app
+          await pumpAppWithHomeScreen(tester, shipToCode: tenderShipToCode);
+          await browseProductFromEmptyCart();
+          await productSuggestionRobot.searchWithKeyboardAction(materialNumber);
+          await productSuggestionRobot.tapSearchResult(materialNumber);
+          await productDetailRobot.tapAddToCart();
+          await productDetailRobot.dismissSnackbar(dismissAll: true);
+          await productDetailRobot.tapBackButton();
+          await commonRobot.tapToBackScreen();
+          await commonRobot.navigateToScreen(NavigationTab.orders);
+
+          //verify
+          ordersRootRobot.verifyViewByItemsPage();
+          await commonRobot.searchWithKeyboardAction(
+            tenderOrderNumberForMandetoryTenderContract,
+          );
+          await viewByItemsRobot.tapFirstOrder();
+          viewByItemsDetailRobot.verifyHeader();
+          viewByItemsDetailRobot.verifyStatusTracker();
+          viewByItemsDetailRobot.verifyAddress();
+          await viewByItemsDetailRobot.verifyManufacturerName(
+            tenderOrderPrincipleNameForMandetoryTenderContract,
+          );
+          await viewByItemsDetailRobot.verifyItemComponent();
+          tenderContractDetailRobot
+              .verifyTenderContractSectionForOrderSection();
+          viewByItemsDetailRobot.verifyBuyAgainButton(isVisible: true);
+          await viewByItemsDetailRobot.tapBuyAgainButton();
+          tenderContractDetailRobot
+              .verifyMandetoryTenderContactMessageWhenCartHasNonTenderMaterialForOrderDetails();
+        },
+      );
+
+      testWidgets(
+        'EZRX-T2113  | Verify view by item detail buy again with tender contract when cart has non mandetory tender contract',
+        (tester) async {
+          //init app
+          await pumpAppWithHomeScreen(tester, shipToCode: tenderShipToCode);
+          await browseProductFromEmptyCart();
+          await productSuggestionRobot.searchWithKeyboardAction(
+            nonMandatoryTenderContractMaterialNumber,
+          );
+          await productSuggestionRobot
+              .tapSearchResult(nonMandatoryTenderContractMaterialNumber);
+          await tenderContractDetailRobot.tapUseTenderContractToggle();
+          await productDetailRobot.tapAddToCart();
+          await productDetailRobot.dismissSnackbar(dismissAll: true);
+          await productDetailRobot.tapBackButton();
+          await commonRobot.tapToBackScreen();
+          await commonRobot.navigateToScreen(NavigationTab.orders);
+
+          //verify
+          ordersRootRobot.verifyViewByItemsPage();
+          await commonRobot.searchWithKeyboardAction(
+            tenderOrderNumberForMandetoryTenderContract,
+          );
+          await viewByItemsRobot.tapFirstOrder();
+          viewByItemsDetailRobot.verifyHeader();
+          viewByItemsDetailRobot.verifyStatusTracker();
+          viewByItemsDetailRobot.verifyAddress();
+          await viewByItemsDetailRobot.verifyManufacturerName(
+            tenderOrderPrincipleNameForMandetoryTenderContract,
+          );
+          await viewByItemsDetailRobot.verifyItemComponent();
+          tenderContractDetailRobot
+              .verifyTenderContractSectionForOrderSection();
+          viewByItemsDetailRobot.verifyBuyAgainButton(isVisible: true);
+          await viewByItemsDetailRobot.tapBuyAgainButton();
+          tenderContractDetailRobot
+              .verifyMandetoryTenderContactMessageWhenCartHasNonTenderMaterialForOrderDetails();
+        },
+      );
+
+      testWidgets(
+        'EZRX-T2113  | Verify view by item detail buy again with Non Mandetory tender contract when cart has mandetory tender contract',
+        (tester) async {
+          //init app
+          await pumpAppWithHomeScreen(tester, shipToCode: tenderShipToCode);
+          await browseProductFromEmptyCart();
+          await productSuggestionRobot.searchWithKeyboardAction(
+            mandatoryTenderContractMaterialNumber,
+          );
+          await productSuggestionRobot
+              .tapSearchResult(mandatoryTenderContractMaterialNumber);
+          await productDetailRobot.tapAddToCart();
+          await productDetailRobot.dismissSnackbar(dismissAll: true);
+          await productDetailRobot.tapBackButton();
+          await commonRobot.tapToBackScreen();
+          await commonRobot.navigateToScreen(NavigationTab.orders);
+
+          //verify
+          ordersRootRobot.verifyViewByItemsPage();
+          await commonRobot.searchWithKeyboardAction(
+            tenderOrderNumberForNonMandetoryTenderContract,
+          );
+          await viewByItemsRobot.tapFirstOrder();
+          viewByItemsDetailRobot.verifyHeader();
+          viewByItemsDetailRobot.verifyStatusTracker();
+          viewByItemsDetailRobot.verifyAddress();
+          await viewByItemsDetailRobot.verifyManufacturerName(
+            tenderOrderPrincipleNameForNonMandetoryTenderContract,
+          );
+          await viewByItemsDetailRobot.verifyItemComponent();
+          tenderContractDetailRobot
+              .verifyTenderContractSectionForOrderSection();
+          viewByItemsDetailRobot.verifyBuyAgainButton(isVisible: true);
+          await viewByItemsDetailRobot.tapBuyAgainButton();
+          tenderContractDetailRobot
+              .verifyNonMandetoryTenderContactMessageWhenCartHasMandetoryTenderMaterialForOrderDetails();
+        },
+      );
+
+      testWidgets(
+        'EZRX-T2113  | Verify view by item detail buy again with tender contract when cart has commertial material',
+        (tester) async {
+          //init app
+          await pumpAppWithHomeScreen(tester, shipToCode: tenderShipToCode);
+          await browseProductFromEmptyCart();
+          await productSuggestionRobot.searchWithKeyboardAction(
+            materialNumber,
+          );
+          await productSuggestionRobot.tapSearchResult(materialNumber);
+          await productDetailRobot.tapAddToCart();
+          await productDetailRobot.dismissSnackbar(dismissAll: true);
+          await productDetailRobot.tapBackButton();
+          await commonRobot.tapToBackScreen();
+          await commonRobot.navigateToScreen(NavigationTab.orders);
+
+          //verify
+          ordersRootRobot.verifyViewByItemsPage();
+          await commonRobot.searchWithKeyboardAction(
+            tenderOrderNumberForNonMandetoryTenderContract,
+          );
+          await viewByItemsRobot.tapFirstOrder();
+          viewByItemsDetailRobot.verifyHeader();
+          viewByItemsDetailRobot.verifyStatusTracker();
+          viewByItemsDetailRobot.verifyAddress();
+          await viewByItemsDetailRobot.verifyManufacturerName(
+            tenderOrderPrincipleNameForNonMandetoryTenderContract,
+          );
+          await viewByItemsDetailRobot.verifyItemComponent();
+          tenderContractDetailRobot
+              .verifyTenderContractSectionForOrderSection();
+          viewByItemsDetailRobot.verifyBuyAgainButton(isVisible: true);
+          await viewByItemsDetailRobot.tapBuyAgainButton();
+          tenderContractDetailRobot
+              .verifyNonMandetoryTenderContactMessageWhenCartHasNonTenderMaterialForOrderDetails();
+        },
+      );
     });
 
     group('View by orders -', () {
@@ -2652,6 +3190,152 @@ void main() {
         viewByOrdersRobot.verifyOrdersWithOrderCode(orderId);
         viewByOrdersRobot.verifyBuyAgainButtonDisabled();
       });
+
+      testWidgets(
+          'EZRX-T2111 | Verify search by tender order number and tender details section',
+          (tester) async {
+        //init app
+        await pumpAppWithHomeScreen(tester, shipToCode: tenderShipToCode);
+        await commonRobot.navigateToScreen(NavigationTab.orders);
+        await ordersRootRobot.switchToViewByOrders();
+
+        //verify
+        viewByOrdersRobot.verifyOrders();
+        await commonRobot.searchWithKeyboardAction(
+          tenderOrderNumberForMandetoryTenderContract,
+        );
+        viewByOrdersRobot.verifyOrdersWithOrderCode(
+          tenderOrderNumberForMandetoryTenderContract,
+        );
+        await commonRobot.waitAutoSearchDuration();
+        commonRobot.verifyLoadingImage(isVisible: false);
+      });
+
+      testWidgets(
+        'EZRX-T2111 | Verify view by order listing buy again with Mandetory tender contract when cart has commertial material ',
+        (tester) async {
+          //init app
+          await pumpAppWithHomeScreen(tester, shipToCode: tenderShipToCode);
+          await browseProductFromEmptyCart();
+          await productSuggestionRobot.searchWithKeyboardAction(materialNumber);
+          await productSuggestionRobot.tapSearchResult(materialNumber);
+          await productDetailRobot.tapAddToCart();
+          await productDetailRobot.dismissSnackbar(dismissAll: true);
+          await productDetailRobot.tapBackButton();
+          await commonRobot.tapToBackScreen();
+
+          await commonRobot.navigateToScreen(NavigationTab.orders);
+          await ordersRootRobot.switchToViewByOrders();
+
+          //verify
+          viewByOrdersRobot.verifyOrders();
+          await commonRobot.searchWithKeyboardAction(
+            tenderOrderNumberForMandetoryTenderContract,
+          );
+          viewByOrdersRobot.verifyOrdersWithOrderCode(
+            tenderOrderNumberForMandetoryTenderContract,
+          );
+          await viewByOrdersRobot.tapFirstBuyAgainButtonForTender();
+          tenderContractDetailRobot
+              .verifyMandetoryTenderContactMessageWhenCartHasNonTenderMaterialForOrderDetails();
+        },
+      );
+
+      testWidgets(
+        'EZRX-T2111 | Verify view by order listing buy again with Mandetory tender contract when cart has non mandetory tender contract',
+        (tester) async {
+          //init app
+          await pumpAppWithHomeScreen(tester, shipToCode: tenderShipToCode);
+          await browseProductFromEmptyCart();
+          await productSuggestionRobot.searchWithKeyboardAction(
+            nonMandatoryTenderContractMaterialNumber,
+          );
+          await productSuggestionRobot
+              .tapSearchResult(nonMandatoryTenderContractMaterialNumber);
+          await tenderContractDetailRobot.tapUseTenderContractToggle();
+          await productDetailRobot.tapAddToCart();
+          await productDetailRobot.dismissSnackbar(dismissAll: true);
+          await productDetailRobot.tapBackButton();
+          await commonRobot.tapToBackScreen();
+          await commonRobot.navigateToScreen(NavigationTab.orders);
+          await ordersRootRobot.switchToViewByOrders();
+
+          //verify
+          viewByOrdersRobot.verifyOrders();
+          await commonRobot.searchWithKeyboardAction(
+            tenderOrderNumberForMandetoryTenderContract,
+          );
+          viewByOrdersRobot.verifyOrdersWithOrderCode(
+            tenderOrderNumberForMandetoryTenderContract,
+          );
+          await viewByOrdersRobot.tapFirstBuyAgainButtonForTender();
+          tenderContractDetailRobot
+              .verifyMandetoryTenderContactMessageWhenCartHasNonTenderMaterialForOrderDetails();
+        },
+      );
+
+      testWidgets(
+        'EZRX-T2111 | Verify view by order listing buy again with Non Mandetory tender contract when cart has mandetory tender contract',
+        (tester) async {
+          //init app
+          await pumpAppWithHomeScreen(tester, shipToCode: tenderShipToCode);
+          await browseProductFromEmptyCart();
+          await productSuggestionRobot.searchWithKeyboardAction(
+            mandatoryTenderContractMaterialNumber,
+          );
+          await productSuggestionRobot
+              .tapSearchResult(mandatoryTenderContractMaterialNumber);
+          await productDetailRobot.tapAddToCart();
+          await productDetailRobot.dismissSnackbar(dismissAll: true);
+          await productDetailRobot.tapBackButton();
+          await commonRobot.tapToBackScreen();
+          await commonRobot.navigateToScreen(NavigationTab.orders);
+          await ordersRootRobot.switchToViewByOrders();
+
+          //verify
+          viewByOrdersRobot.verifyOrders();
+          await commonRobot.searchWithKeyboardAction(
+            tenderOrderNumberForNonMandetoryTenderContract,
+          );
+          viewByOrdersRobot.verifyOrdersWithOrderCode(
+            tenderOrderNumberForNonMandetoryTenderContract,
+          );
+          await viewByOrdersRobot.tapFirstBuyAgainButtonForTender();
+          tenderContractDetailRobot
+              .verifyNonMandetoryTenderContactMessageWhenCartHasMandetoryTenderMaterialForOrderDetails();
+        },
+      );
+
+      testWidgets(
+        'EZRX-T2111 | Verify view by order listing buy again with Non Mandetory tender contract when cart has commertial material',
+        (tester) async {
+          //init app
+          await pumpAppWithHomeScreen(tester, shipToCode: tenderShipToCode);
+          await browseProductFromEmptyCart();
+          await productSuggestionRobot.searchWithKeyboardAction(
+            materialNumber,
+          );
+          await productSuggestionRobot.tapSearchResult(materialNumber);
+          await productDetailRobot.tapAddToCart();
+          await productDetailRobot.dismissSnackbar(dismissAll: true);
+          await productDetailRobot.tapBackButton();
+          await commonRobot.tapToBackScreen();
+          await commonRobot.navigateToScreen(NavigationTab.orders);
+          await ordersRootRobot.switchToViewByOrders();
+
+          //verify
+          viewByOrdersRobot.verifyOrders();
+          await commonRobot.searchWithKeyboardAction(
+            tenderOrderNumberForNonMandetoryTenderContract,
+          );
+          viewByOrdersRobot.verifyOrdersWithOrderCode(
+            tenderOrderNumberForNonMandetoryTenderContract,
+          );
+          await viewByOrdersRobot.tapFirstBuyAgainButtonForTender();
+          tenderContractDetailRobot
+              .verifyNonMandetoryTenderContactMessageWhenCartHasNonTenderMaterialForOrderDetails();
+        },
+      );
     });
 
     group('View by order detail -', () {
@@ -2837,6 +3521,185 @@ void main() {
         viewByOrdersDetailRobot.verifyOrderId(orderId);
         viewByOrdersRobot.verifyBuyAgainButtonDisabled();
       });
+
+      testWidgets(
+        'EZRX-T2114 | Verify view by order detail with default components',
+        (tester) async {
+          const poReferenceForTenderOrder = 'HNO-56789';
+          const deliveryInstructionForTenderOrder = 'NA';
+          const qty = 100;
+          const mandatoryTenderContractMaterialUnitPriceForOrder = 17279431.20;
+          const totalPrice =
+              mandatoryTenderContractMaterialUnitPriceForOrder * qty;
+          //init app
+          await pumpAppWithHomeScreen(tester, shipToCode: tenderShipToCode);
+          await commonRobot.navigateToScreen(NavigationTab.orders);
+          await ordersRootRobot.switchToViewByOrders();
+
+          //verify
+          await commonRobot.pullToRefresh();
+          await commonRobot.searchWithKeyboardAction(
+            tenderOrderNumberForMandetoryTenderContract,
+          );
+          viewByOrdersRobot.verifyOrdersWithOrderCode(
+            tenderOrderNumberForMandetoryTenderContract,
+          );
+          await viewByOrdersRobot.tapFirstOrder();
+          viewByOrdersDetailRobot
+              .verifyOrderId(tenderOrderNumberForMandetoryTenderContract);
+          viewByOrdersDetailRobot.verifyOrderDate();
+          viewByOrdersDetailRobot.verifyPoReference(poReferenceForTenderOrder);
+          viewByOrdersDetailRobot
+              .verifyDeliveryInstructions(deliveryInstructionForTenderOrder);
+          viewByOrdersDetailRobot.verifyDeliveryTo(tenderShipToCode);
+          await viewByOrdersDetailRobot.dragToVerifySummary();
+          viewByOrdersDetailRobot
+              .verifySubTotal(totalPrice.priceDisplay(currency));
+          viewByOrdersDetailRobot.verifyGrandTotal(
+            totalPrice.includeTax(tax).priceDisplay(currency),
+          );
+          await viewByOrdersDetailRobot.dragToVerifyItemsSection();
+          await viewByOrdersDetailRobot.startVerifyMaterial(
+            tenderOrderMaterialNoForMandetoryTenderContract,
+          );
+          tenderContractDetailRobot
+              .verifyTenderContractSectionForOrderSection();
+          viewByOrdersDetailRobot.verifyQty(qty);
+          viewByOrdersDetailRobot
+              .verifyMaterialTotalPrice(totalPrice.priceDisplay(currency));
+          viewByOrdersDetailRobot.verifyBuyAgainButton();
+        },
+      );
+
+      testWidgets(
+        'EZRX-T2114 | Verify view by order listing buy again with Mandetory tender contract when cart has commertial material ',
+        (tester) async {
+          //init app
+          await pumpAppWithHomeScreen(tester, shipToCode: tenderShipToCode);
+          await browseProductFromEmptyCart();
+          await productSuggestionRobot.searchWithKeyboardAction(materialNumber);
+          await productSuggestionRobot.tapSearchResult(materialNumber);
+          await productDetailRobot.tapAddToCart();
+          await productDetailRobot.dismissSnackbar(dismissAll: true);
+          await productDetailRobot.tapBackButton();
+          await commonRobot.tapToBackScreen();
+
+          await commonRobot.navigateToScreen(NavigationTab.orders);
+          await ordersRootRobot.switchToViewByOrders();
+
+          //verify
+          viewByOrdersRobot.verifyOrders();
+          await commonRobot.searchWithKeyboardAction(
+            tenderOrderNumberForMandetoryTenderContract,
+          );
+          viewByOrdersRobot.verifyOrdersWithOrderCode(
+            tenderOrderNumberForMandetoryTenderContract,
+          );
+          await viewByOrdersRobot.tapFirstOrder();
+          await viewByOrdersDetailRobot.tapBuyAgainButtonForTender();
+          tenderContractDetailRobot
+              .verifyMandetoryTenderContactMessageWhenCartHasNonTenderMaterialForOrderDetails();
+        },
+      );
+
+      testWidgets(
+        'EZRX-T2114 | Verify view by order listing buy again with Mandetory tender contract when cart has non mandetory tender contract',
+        (tester) async {
+          //init app
+          await pumpAppWithHomeScreen(tester, shipToCode: tenderShipToCode);
+          await browseProductFromEmptyCart();
+          await productSuggestionRobot.searchWithKeyboardAction(
+            nonMandatoryTenderContractMaterialNumber,
+          );
+          await productSuggestionRobot
+              .tapSearchResult(nonMandatoryTenderContractMaterialNumber);
+          await tenderContractDetailRobot.tapUseTenderContractToggle();
+          await productDetailRobot.tapAddToCart();
+          await productDetailRobot.dismissSnackbar(dismissAll: true);
+          await productDetailRobot.tapBackButton();
+          await commonRobot.tapToBackScreen();
+          await commonRobot.navigateToScreen(NavigationTab.orders);
+          await ordersRootRobot.switchToViewByOrders();
+
+          //verify
+          viewByOrdersRobot.verifyOrders();
+          await commonRobot.searchWithKeyboardAction(
+            tenderOrderNumberForMandetoryTenderContract,
+          );
+          viewByOrdersRobot.verifyOrdersWithOrderCode(
+            tenderOrderNumberForMandetoryTenderContract,
+          );
+          await viewByOrdersRobot.tapFirstOrder();
+          await viewByOrdersDetailRobot.tapBuyAgainButtonForTender();
+          tenderContractDetailRobot
+              .verifyMandetoryTenderContactMessageWhenCartHasNonTenderMaterialForOrderDetails();
+        },
+      );
+
+      testWidgets(
+        'EZRX-T2114 | Verify view by order listing buy again with Non Mandetory tender contract when cart has mandetory tender contract',
+        (tester) async {
+          //init app
+          await pumpAppWithHomeScreen(tester, shipToCode: tenderShipToCode);
+          await browseProductFromEmptyCart();
+          await productSuggestionRobot.searchWithKeyboardAction(
+            mandatoryTenderContractMaterialNumber,
+          );
+          await productSuggestionRobot
+              .tapSearchResult(mandatoryTenderContractMaterialNumber);
+          await productDetailRobot.tapAddToCart();
+          await productDetailRobot.dismissSnackbar(dismissAll: true);
+          await productDetailRobot.tapBackButton();
+          await commonRobot.tapToBackScreen();
+          await commonRobot.navigateToScreen(NavigationTab.orders);
+          await ordersRootRobot.switchToViewByOrders();
+
+          //verify
+          viewByOrdersRobot.verifyOrders();
+          await commonRobot.searchWithKeyboardAction(
+            tenderOrderNumberForNonMandetoryTenderContract,
+          );
+          viewByOrdersRobot.verifyOrdersWithOrderCode(
+            tenderOrderNumberForNonMandetoryTenderContract,
+          );
+          await viewByOrdersRobot.tapFirstOrder();
+          await viewByOrdersDetailRobot.tapBuyAgainButtonForTender();
+          tenderContractDetailRobot
+              .verifyNonMandetoryTenderContactMessageWhenCartHasMandetoryTenderMaterialForOrderDetails();
+        },
+      );
+
+      testWidgets(
+        'EZRX-T2114 | Verify view by order listing buy again with Non Mandetory tender contract when cart has commertial material',
+        (tester) async {
+          //init app
+          await pumpAppWithHomeScreen(tester, shipToCode: tenderShipToCode);
+          await browseProductFromEmptyCart();
+          await productSuggestionRobot.searchWithKeyboardAction(
+            materialNumber,
+          );
+          await productSuggestionRobot.tapSearchResult(materialNumber);
+          await productDetailRobot.tapAddToCart();
+          await productDetailRobot.dismissSnackbar(dismissAll: true);
+          await productDetailRobot.tapBackButton();
+          await commonRobot.tapToBackScreen();
+          await commonRobot.navigateToScreen(NavigationTab.orders);
+          await ordersRootRobot.switchToViewByOrders();
+
+          //verify
+          viewByOrdersRobot.verifyOrders();
+          await commonRobot.searchWithKeyboardAction(
+            tenderOrderNumberForNonMandetoryTenderContract,
+          );
+          viewByOrdersRobot.verifyOrdersWithOrderCode(
+            tenderOrderNumberForNonMandetoryTenderContract,
+          );
+          await viewByOrdersRobot.tapFirstOrder();
+          await viewByOrdersDetailRobot.tapBuyAgainButtonForTender();
+          tenderContractDetailRobot
+              .verifyNonMandetoryTenderContactMessageWhenCartHasNonTenderMaterialForOrderDetails();
+        },
+      );
     });
   });
 

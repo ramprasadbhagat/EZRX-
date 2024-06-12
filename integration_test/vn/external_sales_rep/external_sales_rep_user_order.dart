@@ -34,6 +34,7 @@ import '../../robots/products/filter_sort_product_robot.dart';
 import '../../robots/products/product_detail_robot.dart';
 import '../../robots/products/product_robot.dart';
 import '../../robots/products/product_suggestion_robot.dart';
+import '../../robots/products/tender_contract_details_robot.dart';
 import '../../robots/returns/returns_by_items/returns_by_items_detail_robot.dart';
 import '../../robots/returns/returns_root_robot.dart';
 
@@ -63,6 +64,7 @@ void main() {
   late OrderSuccessRobot orderSuccessRobot;
   late ProfileRobot profileRobot;
 
+  late TenderContractDetailRobot tenderContractDetailRobot;
   late OrdersRootRobot ordersRootRobot;
   late ViewByItemsDetailRobot viewByItemsDetailRobot;
   late ViewByItemsRobot viewByItemsRobot;
@@ -101,6 +103,7 @@ void main() {
     orderSuccessRobot = OrderSuccessRobot(tester);
 
     ordersRootRobot = OrdersRootRobot(tester);
+    tenderContractDetailRobot = TenderContractDetailRobot(tester);
     viewByItemsDetailRobot = ViewByItemsDetailRobot(tester);
     viewByItemsRobot = ViewByItemsRobot(tester);
     viewByItemsFilterRobot = ViewByItemsFilterRobot(tester);
@@ -153,6 +156,13 @@ void main() {
   const poReference = 'test Po Reference';
   const deliveryInstruction = 'test Delivery Instruction';
   const mandatoryTenderContractMaterialNumber = '21129929';
+  const mandatoryTenderContractMaterialName = "SOLU-MEDROL INJ 40MG 1'S";
+  const mandatoryTenderContractMaterialPrincipleName =
+      'PFIZER (THAILAND) Limited';
+  const mandatoryTenderContractMaterialUnitPrice = 32769.00;
+  const mandatoryTenderContractMaterialTotalPrice = 3276900.00;
+  const mandatoryTenderContractMaterialTenderReferenceNumber = 'HCM-01234';
+  const mandatoryTenderContractMaterialTenderExpiryDate = '31 Dec 2025';
 
   const firstName = 'VNExternalSR';
   const lastName = 'User20';
@@ -1259,19 +1269,26 @@ void main() {
       await productRobot.openSearchProductScreen();
       await productSuggestionRobot
           .searchWithKeyboardAction(mandatoryTenderContractMaterialNumber);
-      await productRobot
-          .tapSearchMaterial(mandatoryTenderContractMaterialNumber);
-      productDetailRobot.verifyTenderContractSection();
-      productDetailRobot.verifyUseTenderContractToggle(true);
-      productDetailRobot.verifyTenderContractItems(true);
-      await productDetailRobot.tapUseTenderContractToggle();
-      productDetailRobot.verifyUseTenderContractToggle(true);
-
-      // Verify mandatory tender contract
-      productDetailRobot.verifyTenderContractItem(index: 0, isSelected: true);
-      await productDetailRobot.tapSecondTenderContractItem();
-      productDetailRobot.verifyTenderContractItem(index: 0, isSelected: true);
-      productDetailRobot.verifyTenderContractItem(index: 1, isSelected: false);
+      await productSuggestionRobot
+          .tapSearchResult(mandatoryTenderContractMaterialNumber);
+      tenderContractDetailRobot.verifyTenderContractSection();
+      tenderContractDetailRobot.verifyUseTenderContractToggle(true);
+      tenderContractDetailRobot.verifyTenderContractItems(true);
+      await tenderContractDetailRobot.tapUseTenderContractToggle();
+      tenderContractDetailRobot.verifyUseTenderContractToggle(true);
+      tenderContractDetailRobot.verifyTenderContractItem(
+        index: 0,
+        isSelected: true,
+      );
+      await tenderContractDetailRobot.tapSecondTenderContractItem();
+      tenderContractDetailRobot.verifyTenderContractItem(
+        index: 0,
+        isSelected: false,
+      );
+      tenderContractDetailRobot.verifyTenderContractItem(
+        index: 1,
+        isSelected: true,
+      );
     });
   });
 
@@ -1773,6 +1790,167 @@ void main() {
       await homeRobot.tapMiniCartIcon();
       commonRobot.verifyCustomerSuspendedBanner();
     });
+    testWidgets(
+      'EZRX-T2064 | Verify tender contract material in cart + edit tender contract',
+      (tester) async {
+        //init app
+        await pumpAppWithLoginOnBehalf(tester);
+        await browseProductFromEmptyCart();
+        await productSuggestionRobot
+            .searchWithKeyboardAction(mandatoryTenderContractMaterialNumber);
+        await productSuggestionRobot
+            .tapSearchResult(mandatoryTenderContractMaterialNumber);
+        await productDetailRobot.tapAddToCart();
+        await productDetailRobot.dismissSnackbar(dismissAll: true);
+        productDetailRobot.verifyCartButtonQty(1);
+        await productDetailRobot.tapCartButton();
+
+        //verify
+        cartRobot.verifyClearCartButton();
+        await cartRobot.verifyMaterial(mandatoryTenderContractMaterialNumber);
+        cartRobot.verifyManufacturerName(
+          mandatoryTenderContractMaterialPrincipleName,
+        );
+        cartRobot.verifyMaterialNumber(mandatoryTenderContractMaterialNumber);
+        cartRobot.verifyMaterialImage(mandatoryTenderContractMaterialNumber);
+        cartRobot.verifyMaterialQty(mandatoryTenderContractMaterialNumber, 1);
+        cartRobot.verifyMaterialDescription(
+          mandatoryTenderContractMaterialNumber,
+          mandatoryTenderContractMaterialName,
+        );
+        cartRobot.verifyMaterialUnitPrice(
+          mandatoryTenderContractMaterialNumber,
+          mandatoryTenderContractMaterialUnitPrice.priceDisplay(currency),
+        );
+        cartRobot.verifyMaterialTotalPrice(
+          mandatoryTenderContractMaterialNumber,
+          mandatoryTenderContractMaterialUnitPrice.priceDisplay(currency),
+        );
+        cartRobot.verifyCartQty(1);
+        cartRobot.verifyQtyOnAppBar(1);
+        cartRobot.verifyCartTotalPrice(
+          mandatoryTenderContractMaterialUnitPrice
+              .includeTax(tax)
+              .priceDisplay(currency),
+        );
+        cartRobot.verifyCheckoutButton();
+
+        var totalPrice = mandatoryTenderContractMaterialUnitPrice;
+        await cartRobot
+            .increaseMaterialQty(mandatoryTenderContractMaterialNumber);
+        totalPrice = mandatoryTenderContractMaterialUnitPrice * 2;
+        cartRobot.verifyMaterialQty(mandatoryTenderContractMaterialNumber, 2);
+        cartRobot.verifyMaterialTotalPrice(
+          mandatoryTenderContractMaterialNumber,
+          totalPrice.priceDisplay(currency),
+        );
+        cartRobot.verifyCartTotalPrice(
+          totalPrice.includeTax(tax).priceDisplay(currency),
+        );
+
+        await cartRobot.changeMaterialQty(
+          mandatoryTenderContractMaterialNumber,
+          10,
+        );
+        totalPrice = mandatoryTenderContractMaterialUnitPrice * 10;
+        cartRobot.verifyMaterialQty(mandatoryTenderContractMaterialNumber, 10);
+        cartRobot.verifyMaterialTotalPrice(
+          mandatoryTenderContractMaterialNumber,
+          totalPrice.priceDisplay(currency),
+        );
+        cartRobot.verifyCartTotalPrice(
+          totalPrice.includeTax(tax).priceDisplay(currency),
+        );
+
+        await cartRobot
+            .decreaseMaterialQty(mandatoryTenderContractMaterialNumber);
+        totalPrice = mandatoryTenderContractMaterialUnitPrice * 9;
+        cartRobot.verifyMaterialQty(mandatoryTenderContractMaterialNumber, 9);
+        cartRobot.verifyMaterialTotalPrice(
+          mandatoryTenderContractMaterialNumber,
+          totalPrice.priceDisplay(currency),
+        );
+        cartRobot.verifyCartTotalPrice(
+          totalPrice.includeTax(tax).priceDisplay(currency),
+        );
+        tenderContractDetailRobot
+            .verifyTenderContractSectionInCartAndCheckout();
+        await tenderContractDetailRobot.tapTenderContractSection();
+        tenderContractDetailRobot.verifyTenderContractDetailsSection(
+          price:
+              mandatoryTenderContractMaterialTotalPrice.priceDisplay(currency),
+          expiryDate: mandatoryTenderContractMaterialTenderExpiryDate,
+          referance: mandatoryTenderContractMaterialTenderReferenceNumber,
+        );
+        tenderContractDetailRobot.verifyEditTenderContractSection();
+        await tenderContractDetailRobot.tapEditTenderContractSection();
+        productDetailRobot.verifyPage();
+      },
+    );
+
+    testWidgets(
+      'EZRX-T2064 | Verify mandetory tender contract material in cart with commertial material',
+      (tester) async {
+        //init app
+        await pumpAppWithLoginOnBehalf(tester);
+        await browseProductFromEmptyCart();
+        await productSuggestionRobot.searchWithKeyboardAction(materialNumber);
+        await productSuggestionRobot.tapSearchResult(materialNumber);
+        await productDetailRobot.tapAddToCart();
+        await productDetailRobot.dismissSnackbar(dismissAll: true);
+        productDetailRobot.verifyCartButtonQty(1);
+        await productDetailRobot.tapBackButton();
+        await productSuggestionRobot.tapClearSearch();
+        await productSuggestionRobot
+            .searchWithKeyboardAction(mandatoryTenderContractMaterialNumber);
+        await productSuggestionRobot
+            .tapSearchResult(mandatoryTenderContractMaterialNumber);
+        await productDetailRobot.tapAddToCart();
+        tenderContractDetailRobot
+            .verifyMandetoryTenderContactMessageWhenCartHasNonTenderMaterial();
+        await tenderContractDetailRobot
+            .tapCancelTenderMaterialAddToCartButton();
+        await productDetailRobot.tapAddToCart();
+        tenderContractDetailRobot
+            .verifyMandetoryTenderContactMessageWhenCartHasNonTenderMaterial();
+        await tenderContractDetailRobot
+            .tapProceedTenderMaterialAddToCartButton();
+        productDetailRobot.verifyCartButtonQty(1);
+      },
+    );
+
+    testWidgets(
+      'EZRX-T2064 | Verify commertial material in cart with mandetory tender contract material',
+      (tester) async {
+        //init app
+        await pumpAppWithLoginOnBehalf(tester);
+        await browseProductFromEmptyCart();
+        await productSuggestionRobot
+            .searchWithKeyboardAction(mandatoryTenderContractMaterialNumber);
+        await productSuggestionRobot
+            .tapSearchResult(mandatoryTenderContractMaterialNumber);
+        await tenderContractDetailRobot.tapUseTenderContractToggle();
+        await productDetailRobot.tapAddToCart();
+        await productDetailRobot.dismissSnackbar(dismissAll: true);
+        productDetailRobot.verifyCartButtonQty(1);
+        await productDetailRobot.tapCartButton();
+        await cartRobot.tapCloseButton();
+        await productDetailRobot.tapBackButton();
+        await productSuggestionRobot.searchWithKeyboardAction(materialNumber);
+        await productSuggestionRobot.tapSearchResult(materialNumber);
+        await productDetailRobot.tapAddToCart();
+        tenderContractDetailRobot
+            .verifyMessageWhenCartHasMandetoryTenderMaterial();
+        await tenderContractDetailRobot
+            .tapCancelTenderMaterialAddToCartButton();
+        await productDetailRobot.tapAddToCart();
+        tenderContractDetailRobot
+            .verifyMessageWhenCartHasMandetoryTenderMaterial();
+        await tenderContractDetailRobot
+            .tapProceedTenderMaterialAddToCartButton();
+        productDetailRobot.verifyCartButtonQty(1);
+      },
+    );
   });
 
   group('Checkout -', () {
@@ -1984,6 +2162,68 @@ void main() {
       checkoutRobot.verifyStickyGrandTotal(grandTotalPrice);
       checkoutRobot.verifyStickyTotalQty(2);
     });
+
+    testWidgets(
+      'EZRX-T2064 | Verify tender contract material in checkout page',
+      (tester) async {
+        const qty = 5;
+        const totalPrice = mandatoryTenderContractMaterialUnitPrice * qty;
+        //init app
+        await pumpAppWithLoginOnBehalf(tester);
+        await checkoutWithMaterial(mandatoryTenderContractMaterialNumber, qty);
+
+        //verify
+        checkoutRobot.verifyPage();
+        checkoutRobot.verifyAddressSection();
+        await checkoutRobot.verifyPoReferenceField(isVisible: true);
+        await checkoutRobot.verifyDeliveryDateField(isVisible: false);
+        await checkoutRobot.verifyReferenceNoteField(isVisible: false);
+        await checkoutRobot.verifyPaymentTermField(isVisible: false);
+        await checkoutRobot.verifyContactPersonField(isVisible: false);
+        await checkoutRobot.verifyMobileNumberField(isVisible: false);
+        await checkoutRobot.verifyDeliveryInstructionField(isVisible: true);
+        await checkoutRobot.verifyYoursItemLabel(1);
+        await checkoutRobot
+            .verifyMaterial(mandatoryTenderContractMaterialNumber);
+        tenderContractDetailRobot
+            .verifyTenderContractSectionInCartAndCheckout();
+        await tenderContractDetailRobot.tapTenderContractSection();
+        tenderContractDetailRobot.verifyTenderContractDetailsSection(
+          price:
+              mandatoryTenderContractMaterialTotalPrice.priceDisplay(currency),
+          expiryDate: mandatoryTenderContractMaterialTenderExpiryDate,
+          referance: mandatoryTenderContractMaterialTenderReferenceNumber,
+        );
+        tenderContractDetailRobot.verifyEditTenderContractSection(
+          isVisible: false,
+        );
+        await checkoutRobot
+            .verifySubTotalLabel(totalPrice.priceDisplay(currency));
+        await checkoutRobot.verifyGrandTotalLabel(
+          totalPrice.includeTax(tax).priceDisplay(currency),
+        );
+        checkoutRobot.verifyStickyTotalQty(1);
+        checkoutRobot.verifyStickyGrandTotal(
+          totalPrice.includeTax(tax).priceDisplay(currency),
+        );
+        await checkoutRobot.tapStickyGrandTotal();
+        orderPriceSummaryRobot.verifySheet(isVisible: true);
+        orderPriceSummaryRobot.verifyTaxLabel(
+          totalPrice.taxValue(tax).priceDisplay(currency),
+          tax,
+          isVn: true,
+        );
+        orderPriceSummaryRobot.verifySubTotalLabel(
+          totalPrice.priceDisplay(currency),
+        );
+        orderPriceSummaryRobot.verifyGrandTotalLabel(
+          totalPrice.includeTax(tax).priceDisplay(currency),
+        );
+        await orderPriceSummaryRobot.tapCloseButton();
+        orderPriceSummaryRobot.verifySheet(isVisible: false);
+        checkoutRobot.verifyPlaceOrderButton();
+      },
+    );
   });
 
   group('Order success -', () {

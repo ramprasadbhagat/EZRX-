@@ -20,6 +20,7 @@ class _ViewByOrderItemTile extends StatelessWidget {
         orderHistoryItem.principalData.principalName.name;
 
     return CustomCard(
+      key: WidgetKeys.viewByItemsOrderItem,
       padding: const EdgeInsets.symmetric(vertical: 10),
       child: ListTile(
         contentPadding: const EdgeInsets.symmetric(horizontal: 0),

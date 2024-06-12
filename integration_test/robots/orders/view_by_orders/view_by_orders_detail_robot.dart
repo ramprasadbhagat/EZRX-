@@ -292,6 +292,11 @@ class ViewByOrdersDetailRobot extends CommonRobot {
     await tester.pumpUntilVisible(find.byKey(WidgetKeys.cartPage));
   }
 
+  Future<void> tapBuyAgainButtonForTender() async {
+    await tester.tap(buyAgainButton);
+    await tester.pumpAndSettle();
+  }
+
   void verifyCovidMaterialLabel() {
     expect(
       find.descendant(

@@ -168,4 +168,9 @@ class ViewByOrdersRobot extends CommonRobot {
     await tester.tap(buyAgainButton.first);
     await tester.pumpUntilVisible(find.byKey(WidgetKeys.cartPage));
   }
+
+  Future<void> tapFirstBuyAgainButtonForTender() async {
+    await tester.tap(buyAgainButton.first);
+    await tester.pumpAndSettle();
+  }
 }

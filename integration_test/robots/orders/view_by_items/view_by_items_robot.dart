@@ -226,4 +226,12 @@ class ViewByItemsRobot extends CommonRobot {
     );
     await tester.pumpAndSettle();
   }
+
+  void verifyTenderContractSection() {
+    final itemCount = orderItems.evaluate().length;
+    expect(
+      find.byKey(WidgetKeys.tenderExpandableSection),
+      findsAtLeastNWidgets(itemCount),
+    );
+  }
 }
