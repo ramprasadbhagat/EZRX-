@@ -1,8 +1,10 @@
+import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/auth/entities/login.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
+import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/infrastructure/auth/datasource/auth_local.dart';
 import 'package:ezrxmobile/infrastructure/auth/datasource/auth_remote.dart';
@@ -216,7 +218,9 @@ void main() {
               username: fakeUserName.getValue(),
               fcmToken: fakeJWT.getValue(),
             ),
-          ).thenAnswer((_) async => Login.empty());
+          ).thenAnswer(
+            (_) async => Login.empty().copyWith(access: fakeJWT),
+          );
           final result = await repository.login(
             password: fakePassword,
             username: fakeUserName,
@@ -230,6 +234,31 @@ void main() {
               },
             ),
           ).called(1);
+        },
+      );
+
+      test(
+        'test login uat success but sale org in token is empty',
+        () async {
+          when(() => configMock.appFlavor).thenAnswer((_) => Flavor.uat);
+
+          when(() => pushNotificationServiceMock.getToken())
+              .thenAnswer((_) async => fakeJWT.getValue());
+
+          when(
+            () => remoteDataSourceMock.loginWithPassword(
+              password: fakePassword.getValidPassword,
+              username: fakeUserName.getValue(),
+              fcmToken: fakeJWT.getValue(),
+            ),
+          ).thenAnswer(
+            (_) async => Login.empty(),
+          );
+          final result = await repository.login(
+            password: fakePassword,
+            username: fakeUserName,
+          );
+          expect(result, const Left(ApiFailure.accountCreationIncomplete()));
         },
       );
 
@@ -317,6 +346,24 @@ void main() {
             username: fakeUserName,
           );
           expect(result.isRight(), true);
+        },
+      );
+
+      test(
+        'test login uat success but sale org in token is empty',
+        () async {
+          when(() => configMock.appFlavor).thenAnswer((_) => Flavor.uat);
+          when(
+            () => remoteDataSourceMock.proxyLoginWithUsername(
+              username: fakeUserName.getValue(),
+            ),
+          ).thenAnswer(
+            (_) async => Login.empty(),
+          );
+          final result = await repository.proxyLogin(
+            username: fakeUserName,
+          );
+          expect(result, const Left(ApiFailure.accountCreationIncomplete()));
         },
       );
 

@@ -60,7 +60,8 @@ class ApiFailure with _$ApiFailure {
   const factory ApiFailure.languageChangeFail() = _LanguageChangeFail;
   const factory ApiFailure.scannedProductNotFound(String productNumber) =
       _ScannedProductNotFound;
-  const factory ApiFailure.cameraPermissionFailed(bool permanentlyDenied) = _CameraPermissionFailed;
+  const factory ApiFailure.cameraPermissionFailed(bool permanentlyDenied) =
+      _CameraPermissionFailed;
   const factory ApiFailure.userNameNotFound() = _UserNameNotFound;
   const factory ApiFailure.uploadedFileSizeExceed() = _UploadedFileSizeExceed;
   const factory ApiFailure.paymentAdviceDeleteFailed(String adviceNumber) =
@@ -79,6 +80,8 @@ class ApiFailure with _$ApiFailure {
       _AddAnimalHealthWithNormalProductToCart;
   const factory ApiFailure.missingzzHtmcs() = _MissingzzHtmcs;
   const factory ApiFailure.stockInfoNotAvailable() = _StockInfoNotAvailable;
+  const factory ApiFailure.accountCreationIncomplete() =
+      _AccountCreationIncomplete;
 }
 
 extension ApiFailureExt on ApiFailure {
@@ -179,6 +182,9 @@ extension ApiFailureExt on ApiFailure {
         ),
         stockInfoNotAvailable: (_) =>
             const TRObject('Unable to get stock info'),
+        accountCreationIncomplete: (_) => const TRObject(
+          'Your account creation is incomplete. Please contact the local customer service team for assistance.',
+        ),
       );
   String get nonTranslatedFailureMessage {
     var fullMessage = failureMessage.message;

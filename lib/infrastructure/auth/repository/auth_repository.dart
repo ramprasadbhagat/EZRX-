@@ -89,6 +89,9 @@ class AuthRepository implements IAuthRepository {
         password: passwordStr,
         fcmToken: fcmToken,
       );
+      if (login.access.salesOrgs.isEmpty) {
+        return const Left(ApiFailure.accountCreationIncomplete());
+      }
       _registerMixpanelSuperProperties(login.user);
       mixpanelService.trackEvent(
         eventName: TrackingEvents.successfulLogin,
@@ -134,6 +137,10 @@ class AuthRepository implements IAuthRepository {
       final login = await remoteDataSource.proxyLoginWithUsername(
         username: usernameStr,
       );
+
+      if (login.access.salesOrgs.isEmpty) {
+        return const Left(ApiFailure.accountCreationIncomplete());
+      }
 
       return Right(login);
     } catch (e) {

@@ -66,14 +66,14 @@ bool isJWTExpired(String token) {
 }
 
 List getJWTSalesOrg(String token) {
-  if (token.isEmpty) [];
+  if (token.isEmpty) return [];
   final payload = getJWTPayload(token);
 
   return payload['salesOrgs'];
 }
 
 RoleName getJWTRoleName(String token) {
-  if (token.isEmpty) [];
+  if (token.isEmpty) return RoleName('');
   final payload = getJWTPayload(token);
 
   return RoleName(payload['role']);
