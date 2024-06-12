@@ -15,6 +15,11 @@ jobs:
   steps:
   - bash: flutter analyze --fatal-infos --fatal-warnings
 
+- job: DCMVersion
+  displayName: 'DCM Version'
+  steps:
+  - bash: dcm --version
+
 - job: DCMAnalyse
   displayName: 'DCM Analyse'
   steps:
@@ -24,7 +29,7 @@ jobs:
       DCM_LICENSE_EMAIL: '$(DCM_LICENSE_EMAIL)'
 
 - job: DCMCheckParameters
-  displayName: 'DCM Check Unnecessary Nullable'
+  displayName: 'DCM Check Parameters'
   steps:
   - bash: dcm check-parameters lib --ci-key=$DCM_CI_KEY --email=$DCM_LICENSE_EMAIL --fatal-found
     env:

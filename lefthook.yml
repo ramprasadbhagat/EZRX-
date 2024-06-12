@@ -23,8 +23,8 @@ pre-push:
       run: fvm flutter analyze --fatal-infos --fatal-warnings
     dcm-analyze:
       run: dcm analyze lib --fatal-style --fatal-performance --fatal-warnings
-    check-unnecessary-nullable:
-      run: dcm check-unnecessary-nullable lib --fatal-found
+    check-parameters:
+      run: dcm check-parameters lib --fatal-found
     check-unused-code:
       run: dcm check-unused-code lib --fatal-unused
     check-unused-files:
