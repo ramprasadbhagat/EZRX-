@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/application/returns/return_list/view_by_item/return_list_by_item_bloc.dart';
@@ -15,6 +17,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:ezrxmobile/config.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 class ReturnListRepositoryMock extends Mock implements ReturnListRepository {}
 
@@ -36,7 +39,8 @@ void main() {
       requestId: '02',
     ),
   ];
-
+  final fakeFile = File('fake-file');
+  const fakeApiFailure = ApiFailure.other('fake-error');
   group('Return List BLOC Testing=>', () {
     setUp(() {
       returnListRepositoryMock = ReturnListRepositoryMock();
@@ -161,6 +165,58 @@ void main() {
     );
 
     blocTest<ReturnListByItemBloc, ReturnListByItemState>(
+      'For "loadMore" Event with success',
+      build: () => ReturnListByItemBloc(
+        returnListRepository: returnListRepositoryMock,
+        config: config,
+      ),
+      seed: () => ReturnListByItemState.initial().copyWith(
+        salesOrg: mockSalesOrg,
+        shipInfo: mockShipInfo,
+        customerCodeInfo: mockCustomerCodeInfo,
+        user: mockUser,
+      ),
+      setUp: () {
+        when(
+          () => returnListRepositoryMock.fetchReturnListByItem(
+            appliedFilter: ReturnFilter.empty(),
+            salesOrg: mockSalesOrg,
+            shipToInfo: mockShipInfo,
+            customerCode: mockCustomerCodeInfo,
+            user: mockUser,
+            searchKey: SearchKey(''),
+            offset: 0,
+            pageSize: config.pageSize,
+          ),
+        ).thenAnswer(
+          (invocation) async => Right(mockReturnItemList),
+        );
+      },
+      act: (bloc) => bloc.add(
+        const ReturnListByItemEvent.loadMore(),
+      ),
+      expect: () => [
+        ReturnListByItemState.initial().copyWith(
+          salesOrg: mockSalesOrg,
+          shipInfo: mockShipInfo,
+          customerCodeInfo: mockCustomerCodeInfo,
+          user: mockUser,
+          isFetching: true,
+        ),
+        ReturnListByItemState.initial().copyWith(
+          salesOrg: mockSalesOrg,
+          shipInfo: mockShipInfo,
+          customerCodeInfo: mockCustomerCodeInfo,
+          user: mockUser,
+          isFetching: false,
+          canLoadMore: false,
+          returnItemList: mockReturnItemList,
+          failureOrSuccessOption: optionOf(Right(mockReturnItemList)),
+        ),
+      ],
+    );
+
+    blocTest<ReturnListByItemBloc, ReturnListByItemState>(
       'For "loadMore" Event with failure',
       build: () => ReturnListByItemBloc(
         returnListRepository: returnListRepositoryMock,
@@ -208,6 +264,201 @@ void main() {
           canLoadMore: false,
           failureOrSuccessOption:
               optionOf(const Left(ApiFailure.other('Fake-Error'))),
+        ),
+      ],
+    );
+
+    blocTest(
+      'For Download event with success',
+      build: () => ReturnListByItemBloc(
+        config: config,
+        returnListRepository: returnListRepositoryMock,
+      ),
+      setUp: () {
+        when(
+          () => returnListRepositoryMock.getDownloadPermission(),
+        ).thenAnswer((_) async => const Right(PermissionStatus.granted));
+        when(
+          () => returnListRepositoryMock.getFileUrl(
+            customerCodeInfo: mockCustomerCodeInfo,
+            shipToInfo: mockShipInfo,
+            user: mockUser,
+            salesOrg: mockSalesOrg,
+            isViewByReturn: false,
+            appliedFilter: ReturnFilter.empty(),
+            searchKey: SearchKey.searchFilter(''),
+          ),
+        ).thenAnswer((_) async => const Right('fake-url'));
+        when(
+          () => returnListRepositoryMock.downloadFile(url: 'fake-url'),
+        ).thenAnswer((_) async => Right(fakeFile));
+      },
+      seed: () => ReturnListByItemState.initial().copyWith(
+        salesOrg: mockSalesOrg,
+        shipInfo: mockShipInfo,
+        customerCodeInfo: mockCustomerCodeInfo,
+        user: mockUser,
+      ),
+      act: (bloc) => bloc.add(
+        const ReturnListByItemEvent.downloadFile(),
+      ),
+      expect: () => [
+        ReturnListByItemState.initial().copyWith(
+          salesOrg: mockSalesOrg,
+          shipInfo: mockShipInfo,
+          customerCodeInfo: mockCustomerCodeInfo,
+          user: mockUser,
+          isDownloadInProgress: true,
+          failureOrSuccessOption: none(),
+        ),
+        ReturnListByItemState.initial().copyWith(
+          salesOrg: mockSalesOrg,
+          shipInfo: mockShipInfo,
+          customerCodeInfo: mockCustomerCodeInfo,
+          user: mockUser,
+          failureOrSuccessOption: optionOf(Right(fakeFile)),
+        ),
+      ],
+    );
+
+    blocTest(
+      'For Download event with failure due to no permission',
+      build: () => ReturnListByItemBloc(
+        config: config,
+        returnListRepository: returnListRepositoryMock,
+      ),
+      setUp: () {
+        when(
+          () => returnListRepositoryMock.getDownloadPermission(),
+        ).thenAnswer((_) async => const Left(fakeApiFailure));
+      },
+      seed: () => ReturnListByItemState.initial().copyWith(
+        salesOrg: mockSalesOrg,
+        shipInfo: mockShipInfo,
+        customerCodeInfo: mockCustomerCodeInfo,
+        user: mockUser,
+      ),
+      act: (bloc) => bloc.add(
+        const ReturnListByItemEvent.downloadFile(),
+      ),
+      expect: () => [
+        ReturnListByItemState.initial().copyWith(
+          salesOrg: mockSalesOrg,
+          shipInfo: mockShipInfo,
+          customerCodeInfo: mockCustomerCodeInfo,
+          user: mockUser,
+          isDownloadInProgress: true,
+          failureOrSuccessOption: none(),
+        ),
+        ReturnListByItemState.initial().copyWith(
+          salesOrg: mockSalesOrg,
+          shipInfo: mockShipInfo,
+          customerCodeInfo: mockCustomerCodeInfo,
+          user: mockUser,
+          failureOrSuccessOption: optionOf(const Left(fakeApiFailure)),
+        ),
+      ],
+    );
+
+    blocTest(
+      'For Download event with failure due to invalid file url',
+      build: () => ReturnListByItemBloc(
+        config: config,
+        returnListRepository: returnListRepositoryMock,
+      ),
+      setUp: () {
+        when(
+          () => returnListRepositoryMock.getDownloadPermission(),
+        ).thenAnswer((_) async => const Right(PermissionStatus.granted));
+        when(
+          () => returnListRepositoryMock.getFileUrl(
+            customerCodeInfo: mockCustomerCodeInfo,
+            shipToInfo: mockShipInfo,
+            user: mockUser,
+            salesOrg: mockSalesOrg,
+            isViewByReturn: false,
+            appliedFilter: ReturnFilter.empty(),
+            searchKey: SearchKey.searchFilter(''),
+          ),
+        ).thenAnswer((_) async => const Left(fakeApiFailure));
+      },
+      seed: () => ReturnListByItemState.initial().copyWith(
+        salesOrg: mockSalesOrg,
+        shipInfo: mockShipInfo,
+        customerCodeInfo: mockCustomerCodeInfo,
+        user: mockUser,
+      ),
+      act: (bloc) => bloc.add(
+        const ReturnListByItemEvent.downloadFile(),
+      ),
+      expect: () => [
+        ReturnListByItemState.initial().copyWith(
+          salesOrg: mockSalesOrg,
+          shipInfo: mockShipInfo,
+          customerCodeInfo: mockCustomerCodeInfo,
+          user: mockUser,
+          isDownloadInProgress: true,
+          failureOrSuccessOption: none(),
+        ),
+        ReturnListByItemState.initial().copyWith(
+          salesOrg: mockSalesOrg,
+          shipInfo: mockShipInfo,
+          customerCodeInfo: mockCustomerCodeInfo,
+          user: mockUser,
+          failureOrSuccessOption: optionOf(const Left(fakeApiFailure)),
+        ),
+      ],
+    );
+
+    blocTest(
+      'For Download event with failure due to file not found',
+      build: () => ReturnListByItemBloc(
+        config: config,
+        returnListRepository: returnListRepositoryMock,
+      ),
+      setUp: () {
+        when(
+          () => returnListRepositoryMock.getDownloadPermission(),
+        ).thenAnswer((_) async => const Right(PermissionStatus.granted));
+        when(
+          () => returnListRepositoryMock.getFileUrl(
+            appliedFilter: ReturnFilter.empty(),
+            searchKey: SearchKey.searchFilter(''),
+            customerCodeInfo: mockCustomerCodeInfo,
+            shipToInfo: mockShipInfo,
+            user: mockUser,
+            salesOrg: mockSalesOrg,
+            isViewByReturn: false,
+          ),
+        ).thenAnswer((_) async => const Right('fake-url'));
+        when(
+          () => returnListRepositoryMock.downloadFile(url: 'fake-url'),
+        ).thenAnswer((_) async => const Left(fakeApiFailure));
+      },
+      seed: () => ReturnListByItemState.initial().copyWith(
+        salesOrg: mockSalesOrg,
+        shipInfo: mockShipInfo,
+        customerCodeInfo: mockCustomerCodeInfo,
+        user: mockUser,
+      ),
+      act: (bloc) => bloc.add(
+        const ReturnListByItemEvent.downloadFile(),
+      ),
+      expect: () => [
+        ReturnListByItemState.initial().copyWith(
+          salesOrg: mockSalesOrg,
+          shipInfo: mockShipInfo,
+          customerCodeInfo: mockCustomerCodeInfo,
+          user: mockUser,
+          isDownloadInProgress: true,
+          failureOrSuccessOption: none(),
+        ),
+        ReturnListByItemState.initial().copyWith(
+          salesOrg: mockSalesOrg,
+          shipInfo: mockShipInfo,
+          customerCodeInfo: mockCustomerCodeInfo,
+          user: mockUser,
+          failureOrSuccessOption: optionOf(const Left(fakeApiFailure)),
         ),
       ],
     );
