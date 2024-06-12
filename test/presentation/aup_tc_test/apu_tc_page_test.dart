@@ -23,7 +23,7 @@ import 'package:mocktail/mocktail.dart';
 import '../../common_mock_data/mock_bloc.dart';
 import '../../common_mock_data/user_mock.dart';
 import '../../utils/widget_utils.dart';
-import '../../common_mock_data/mock_web_view_test.dart';
+import '../../common_mock_data/mock_web_view.dart';
 
 void main() {
   late AppRouter autoRouterMock;
