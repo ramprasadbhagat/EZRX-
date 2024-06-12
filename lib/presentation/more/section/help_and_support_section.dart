@@ -17,6 +17,7 @@ class HelpAndSupportTile extends StatelessWidget {
       if (eligibilityState.salesOrg.isAboutUsEnabled)
         MoreDetailsTile.aboutUs(context),
       MoreDetailsTile.chatSupport(context),
+      MoreDetailsTile.acceptableUsePolicy(context),
       MoreDetailsTile.termsOfUse(context),
       MoreDetailsTile.privacyPolicy(context),
       MoreDetailsTile.contactUs(context),

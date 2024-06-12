@@ -111,33 +111,23 @@ class AupTCPage extends StatelessWidget {
                               color: ZPColors.neutralsGrey1,
                             ),
                       ),
-                      const SizedBox(
-                        height: 16,
+                      const SizedBox(height: 16),
+                      _ConsentBox(
+                        key: WidgetKeys.tncContentBox,
+                        user: state.user,
+                        url: state.user.tncFile,
                       ),
-                      Expanded(
-                        child: _ConsentBox(
-                          key: WidgetKeys.tncContentBox,
-                          url: state.user.tncFile,
-                        ),
+                      const SizedBox(height: 16),
+                      _ConsentBox(
+                        key: WidgetKeys.privacyContentBox,
+                        user: state.user,
+                        url: isMarketPlace
+                            ? state.user.marketPlacePrivacyPolicyFile
+                            : state.user.privacyPolicyFile,
                       ),
-                      const SizedBox(
-                        height: 16,
-                      ),
-                      Expanded(
-                        child: _ConsentBox(
-                          key: WidgetKeys.privacyContentBox,
-                          url: isMarketPlace
-                              ? state.user.marketPlacePrivacyPolicyFile
-                              : state.user.privacyPolicyFile,
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 16,
-                      ),
+                      const SizedBox(height: 16),
                       const _TermsOfUseConsentCheckBox(),
-                      const SizedBox(
-                        height: 5,
-                      ),
+                      const SizedBox(height: 5),
                       const _PrivacyPolicyConsentCheckBox(),
                     ],
                   ),
@@ -228,37 +218,30 @@ class _ConsentBox extends StatelessWidget {
   const _ConsentBox({
     super.key,
     required this.url,
+    required this.user,
   });
   final String url;
+  final User user;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(3),
-      height: MediaQuery.of(context).size.height * .20,
-      decoration: BoxDecoration(
-        color: ZPColors.white,
-        border: Border.all(
-          color: ZPColors.lightGray,
+    if (user == User.empty()) return const SizedBox.shrink();
+
+    return Expanded(
+      child: Container(
+        padding: const EdgeInsets.all(3),
+        height: MediaQuery.sizeOf(context).height * .20,
+        decoration: BoxDecoration(
+          color: ZPColors.white,
+          border: Border.all(color: ZPColors.lightGray),
+          borderRadius: const BorderRadius.all(Radius.circular(10)),
         ),
-        borderRadius: const BorderRadius.all(
-          Radius.circular(10),
+        child: StaticHtmlViewer(
+          key: WidgetKeys.aupTcWebView,
+          htmlPath: url,
         ),
-      ),
-      child: StaticHtmlViewer(
-        key: WidgetKeys.aupTcWebView,
-        htmlPath: url,
-        styleCss: styleCss,
       ),
     );
-  }
-
-  String get styleCss {
-    return '''
-      var style = document.createElement('style');
-      style.innerHTML = 'body { padding: 3.5rem !important; padding-top: 0rem !important; align-items: center; justify-content: center;}';
-      document.head.appendChild(style);
-    ''';
   }
 }
 

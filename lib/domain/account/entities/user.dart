@@ -122,7 +122,41 @@ class User with _$User {
 
   String get userPreferredLanguageCode => preferredLanguage.languageCode;
 
-  List<String> get _supportedMarketsForStaticFiles => <String>[
+  String get tncFile => _getUserFilePath(_UserFile.termOfUse);
+
+  String get tncStaticFile => _getUserFilePath(_UserFile.termOfUseStatic);
+
+  String get marketPlacePrivacyPolicyFile =>
+      'assets/html/eZRxMarketPlacePrivacyPolicy.html';
+
+  String get privacyPolicyFile => _getUserFilePath(_UserFile.privacyPolicy);
+
+  String get privacyPolicyStaticFile =>
+      _getUserFilePath(_UserFile.privacyPolicyStatic);
+
+  String get acceptableUsePolicyFile =>
+      _getUserFilePath(_UserFile.acceptableUsePolicy);
+
+  String _getUserFilePath(_UserFile type) {
+    final regionalEnglishTranslatedFile =
+        'assets/html/${type.englishTranslatedName}';
+
+    if (_supportedMarketLanguageFile.contains(_userCountry)) {
+      if (userPreferredLanguageCode == _userCountryLanguage) {
+        return 'assets/html/${_userCountry.toLowerCase()}/${type.marketTranslatedName}';
+      }
+
+      if (_supportedMarketCustomEnglishFile.contains(_userCountry)) {
+        return 'assets/html/${_userCountry.toLowerCase()}/${type.englishTranslatedName}';
+      }
+
+      return regionalEnglishTranslatedFile;
+    }
+
+    return regionalEnglishTranslatedFile;
+  }
+
+  List<String> get _supportedMarketLanguageFile => <String>[
         'ID',
         'KH',
         'VN',
@@ -133,48 +167,7 @@ class User with _$User {
         // 'KR',
       ];
 
-  String get tncFile {
-    if (_supportedMarketsForStaticFiles.contains(_userCountry)) {
-      return userPreferredLanguageCode == _userCountryLanguage
-          ? 'assets/html/${_userCountry.toLowerCase()}/eZRxTermsOfUse${_userCountry}MarketTranslated.html'
-          : 'assets/html/${_userCountry.toLowerCase()}/eZRxTermsOfUse${_userCountry}Market.html';
-    }
-
-    return 'assets/html/eZRxTermsOfUse.html';
-  }
-
-  String get tncStaticFile {
-    if (_supportedMarketsForStaticFiles.contains(_userCountry)) {
-      return userPreferredLanguageCode == _userCountryLanguage
-          ? 'assets/html/${_userCountry.toLowerCase()}/eZRxTermsOfUse${_userCountry}MarketTranslatedStatic.html'
-          : 'assets/html/${_userCountry.toLowerCase()}/eZRxTermsOfUse${_userCountry}MarketStatic.html';
-    }
-
-    return 'assets/html/eZRxTermsOfUseStatic.html';
-  }
-
-  String get marketPlacePrivacyPolicyFile =>
-      'assets/html/eZRxMarketPlacePrivacyPolicy.html';
-
-  String get privacyPolicyFile {
-    if (_supportedMarketsForStaticFiles.contains(_userCountry)) {
-      return userPreferredLanguageCode == _userCountryLanguage
-          ? 'assets/html/${_userCountry.toLowerCase()}/eZRxPrivacyPolicy${_userCountry}MarketTranslated.html'
-          : 'assets/html/${_userCountry.toLowerCase()}/eZRxPrivacyPolicy${_userCountry}Market.html';
-    }
-
-    return 'assets/html/eZRxPrivacyPolicy.html';
-  }
-
-  String get privacyPolicyStaticFile {
-    if (_supportedMarketsForStaticFiles.contains(_userCountry)) {
-      return userPreferredLanguageCode == _userCountryLanguage
-          ? 'assets/html/${_userCountry.toLowerCase()}/eZRxPrivacyPolicy${_userCountry}MarketTranslatedStatic.html'
-          : 'assets/html/${_userCountry.toLowerCase()}/eZRxPrivacyPolicy${_userCountry}MarketStatic.html';
-    }
-
-    return 'assets/html/eZRxPrivacyPolicyStatic.html';
-  }
+  List<String> get _supportedMarketCustomEnglishFile => <String>['VN'];
 
   String get _userCountry =>
       userSalesOrganisations.firstOrNull?.salesOrg.country ?? '';
@@ -185,4 +178,32 @@ class User with _$User {
 
   bool get isCustomerWithPaymentsDisable =>
       role.type.isCustomer && disablePaymentAccess;
+}
+
+enum _UserFile {
+  termOfUse(
+    'eZRxTermsOfUse.html',
+    'eZRxTermsOfUseTranslated.html',
+  ),
+  termOfUseStatic(
+    'eZRxTermsOfUseStatic.html',
+    'eZRxTermsOfUseStaticTranslated.html',
+  ),
+  acceptableUsePolicy(
+    'eZRxAcceptableUsePolicy.html',
+    'eZRxAcceptableUsePolicyTranslated.html',
+  ),
+  privacyPolicy(
+    'eZRxPrivacyPolicy.html',
+    'eZRxPrivacyPolicyTranslated.html',
+  ),
+  privacyPolicyStatic(
+    'eZRxPrivacyPolicyStatic.html',
+    'eZRxPrivacyPolicyStaticTranslated.html',
+  );
+
+  final String englishTranslatedName;
+  final String marketTranslatedName;
+
+  const _UserFile(this.englishTranslatedName, this.marketTranslatedName);
 }

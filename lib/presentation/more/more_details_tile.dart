@@ -136,6 +136,23 @@ class MoreDetailsTile {
         label: 'Contact us',
       );
 
+  factory MoreDetailsTile.acceptableUsePolicy(BuildContext context) =>
+      MoreDetailsTile(
+        key: WidgetKeys.acceptableUsePolicy,
+        icon: const SizedBox.shrink(),
+        label: 'Acceptable Use Policy',
+        onTap: () => context.navigateTo(
+          StaticHtmlViewerRoute(
+            title: 'Acceptable Use Policy',
+            htmlPath: context
+                .read<EligibilityBloc>()
+                .state
+                .user
+                .acceptableUsePolicyFile,
+          ),
+        ),
+      );
+
   factory MoreDetailsTile.orderTab(BuildContext context) => MoreDetailsTile(
         key: WidgetKeys.orderTile,
         icon: const Icon(

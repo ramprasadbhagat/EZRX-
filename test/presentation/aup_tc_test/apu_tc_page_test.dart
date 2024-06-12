@@ -89,6 +89,10 @@ void main() {
 
     group('Normal TnC -', () {
       testWidgets('Show with default component', (tester) async {
+        when(() => mockAupTcBloc.state).thenReturn(
+          AupTcState.initial().copyWith(user: fakeClient),
+        );
+
         await tester.pumpWidget(aupTcWidget(fakeClientUser, false));
         await tester.pump();
 
@@ -212,6 +216,10 @@ void main() {
 
     group('Marketplace TnC -', () {
       testWidgets('Show with default component', (tester) async {
+        when(() => mockAupTcBloc.state).thenReturn(
+          AupTcState.initial().copyWith(user: fakeClient),
+        );
+
         await tester.pumpWidget(aupTcWidget(fakeClientUser, true));
         await tester.pump();
 
