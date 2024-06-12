@@ -156,6 +156,45 @@ void main() {
           return Future.value([StockInfoMock()]);
         });
       });
+
+      test('response with stock server down error msg', () async {
+        dioAdapter.onPost(
+          '/api//order',
+          (server) => server.reply(
+            200,
+            {
+              'data': null,
+              'errors': [
+                {
+                  'message': 'something went wrong in the stock information API',
+                },
+              ],
+            },
+            delay: const Duration(seconds: 1),
+          ),
+          headers: {'Content-Type': 'application/json; charset=utf-8'},
+          data: jsonEncode({
+            'query': remoteDataSource.stockInfoQueryMutation
+                .getMaterialStockInfoListQuery(),
+            'variables': {
+              'materialNumbers': ['fake-material'],
+              'customerCode': 'fake-customercode',
+              'salesOrganisation': 'fake-salesorg',
+              'shipToCode': 'fake-ship-to-code',
+            },
+          }),
+        );
+
+        await remoteDataSource.getMaterialStockInfoList(
+          materialNumbers: ['fake-material'],
+          salesOrg: 'fake-salesorg',
+          selectedCustomerCode: 'fake-customercode',
+          selectedShipToCode: 'fake-ship-to-code',
+        ).onError((error, _) async {
+          expect(error, isA<StockInfoException>());
+          return Future.value([StockInfoMock()]);
+        });
+      });
     },
   );
 }
