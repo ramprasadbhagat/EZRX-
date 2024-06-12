@@ -23,10 +23,10 @@ jobs:
       DCM_CI_KEY: '$(DCM_CI_KEY)'
       DCM_LICENSE_EMAIL: '$(DCM_LICENSE_EMAIL)'
 
-- job: DCMCheckUnnecessaryNullable
+- job: DCMCheckParameters
   displayName: 'DCM Check Unnecessary Nullable'
   steps:
-  - bash: dcm check-unnecessary-nullable lib --ci-key=$DCM_CI_KEY --email=$DCM_LICENSE_EMAIL --fatal-found
+  - bash: dcm check-parameters lib --ci-key=$DCM_CI_KEY --email=$DCM_LICENSE_EMAIL --fatal-found
     env:
       DCM_CI_KEY: '$(DCM_CI_KEY)'
       DCM_LICENSE_EMAIL: '$(DCM_LICENSE_EMAIL)'

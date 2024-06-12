@@ -14,7 +14,7 @@ clean_ios:
 run_test:
 	@fvm flutter analyze --fatal-infos --fatal-warnings
 	@dcm analyze lib --fatal-style --fatal-performance --fatal-warnings
-	@dcm check-unnecessary-nullable lib --fatal-found
+	@dcm check-parameters lib --fatal-found
 	@dcm check-unused-code lib --fatal-unused
 	@dcm check-unused-files lib --fatal-unused
 	@fvm flutter test --coverage && genhtml coverage/lcov.info -o coverage/html && open coverage/html/index.html
