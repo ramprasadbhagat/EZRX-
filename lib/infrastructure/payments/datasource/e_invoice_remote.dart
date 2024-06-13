@@ -61,7 +61,7 @@ class EInvoiceRemoteDataSource {
     }
   }
 
-  dynamic _getData({
+  Map<String, dynamic> _getData({
     required String invoiceNumber,
     required String salesOrg,
     required String country,
@@ -79,6 +79,8 @@ class EInvoiceRemoteDataSource {
           'sold_to': soldTo,
           'document_type': 'ZPF2',
         };
+      default:
+        return <String, dynamic>{};
     }
   }
 }
