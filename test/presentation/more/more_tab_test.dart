@@ -4,8 +4,8 @@ import 'package:ezrxmobile/domain/account/entities/customer_code_config.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/package_info/package_info.dart';
 import 'package:ezrxmobile/application/account/notification_settings/notification_settings_bloc.dart';
+import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/more/section/help_and_support_section.dart';
-import 'package:get_it/get_it.dart';
 import 'package:flutter/material.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:ezrxmobile/config.dart';
@@ -19,8 +19,6 @@ import 'package:ezrxmobile/domain/account/entities/role.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
-import 'package:ezrxmobile/application/banner/banner_bloc.dart';
-import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/full_name.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
@@ -29,9 +27,6 @@ import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
-import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
-import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
-import 'package:ezrxmobile/application/announcement_info/announcement_info_bloc.dart';
 
 import '../../common_mock_data/customer_code_mock.dart';
 import '../../common_mock_data/mock_bloc.dart';
@@ -45,32 +40,23 @@ import '../../common_mock_data/user_mock.dart';
 import '../../utils/widget_utils.dart';
 
 void main() {
-  late CustomerCodeBloc customerCodeBlocMock;
-  late CartBloc cartBlocMock;
   late AuthBloc authBlocMock;
-  late MaterialListBlocMock materialListBlocMock;
   late UserBloc userBlocMock;
   late EligibilityBlocMock eligibilityBlocMock;
-  late BannerBloc bannerBlocMock;
   late SalesOrgBloc salesOrgBlocMock;
-  late AnnouncementInfoBloc announcementInfoBlocMock;
   late AnnouncementBlocMock announcementBlocMock;
   late EZPointBlocMock eZPointBlocMock;
   late NotificationSettingsBlocMock notificationSettingsBlocMock;
   late AppRouter autoRouterMock;
-  final locator = GetIt.instance;
 
   setUpAll(() async {
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.mock);
     locator.registerLazySingleton(() => AppRouter());
-    locator.registerFactory<BannerBloc>(() => bannerBlocMock);
-    locator.registerFactory<MaterialListBloc>(() => materialListBlocMock);
     locator.registerFactory<EZPointBlocMock>(() => eZPointBlocMock);
     locator.registerLazySingleton(() => PackageInfoService());
     locator.registerFactory<NotificationSettingsBlocMock>(
       () => notificationSettingsBlocMock,
     );
-
     autoRouterMock = locator<AppRouter>();
   });
 
@@ -78,29 +64,16 @@ void main() {
     WidgetsFlutterBinding.ensureInitialized();
     salesOrgBlocMock = SalesOrgBlocMock();
     when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial());
-    customerCodeBlocMock = CustomerCodeBlocMock();
-    when(() => customerCodeBlocMock.state)
-        .thenReturn(CustomerCodeState.initial());
-    cartBlocMock = CartBlocMock();
-    when(() => cartBlocMock.state).thenReturn(CartState.initial());
     authBlocMock = AuthBlocMock();
     when(() => authBlocMock.state).thenReturn(const AuthState.initial());
-    materialListBlocMock = MaterialListBlocMock();
-    when(() => materialListBlocMock.state)
-        .thenReturn(MaterialListState.initial());
     userBlocMock = UserBlocMock();
     when(() => userBlocMock.state).thenReturn(UserState.initial());
     eligibilityBlocMock = EligibilityBlocMock();
     when(() => eligibilityBlocMock.state)
         .thenReturn(EligibilityState.initial());
-    bannerBlocMock = BannerBlocMock();
-    when(() => bannerBlocMock.state).thenReturn(BannerState.initial());
     announcementBlocMock = AnnouncementBlocMock();
     when(() => announcementBlocMock.state)
         .thenReturn(AnnouncementState.initial());
-    announcementInfoBlocMock = AnnouncementInfoBlocMock();
-    when(() => announcementInfoBlocMock.state)
-        .thenReturn(AnnouncementInfoState.initial());
     eZPointBlocMock = EZPointBlocMock();
     when(() => eZPointBlocMock.state).thenReturn(EZPointState.initial());
     notificationSettingsBlocMock = NotificationSettingsBlocMock();
@@ -123,24 +96,11 @@ void main() {
           BlocProvider<EligibilityBloc>(
             create: (context) => eligibilityBlocMock,
           ),
-          BlocProvider<CustomerCodeBloc>(
-            create: (context) => customerCodeBlocMock,
-          ),
-          BlocProvider<BannerBloc>(
-            create: (context) => bannerBlocMock,
-          ),
           BlocProvider<SalesOrgBloc>(
             create: (context) => salesOrgBlocMock,
           ),
-          BlocProvider<MaterialListBloc>(
-            create: (context) => materialListBlocMock,
-          ),
-          BlocProvider<CartBloc>(create: (context) => cartBlocMock),
           BlocProvider<AnnouncementBloc>(
             create: (context) => announcementBlocMock,
-          ),
-          BlocProvider<AnnouncementInfoBloc>(
-            create: (context) => announcementInfoBlocMock,
           ),
           BlocProvider<EZPointBloc>(
             create: (context) => eZPointBlocMock,
@@ -709,6 +669,27 @@ void main() {
         await tester.pump();
         expect(find.byKey(WidgetKeys.mpPaymentsTile), findsNothing);
       });
+    });
+
+    testWidgets('-> Should show AUP, TnC, PC tiles', (tester) async {
+      await getWidget(tester);
+      await tester.pump();
+      final aupTile = find.byKey(WidgetKeys.acceptableUsePolicy);
+      await tester.dragUntilVisible(
+        aupTile,
+        find.byKey(WidgetKeys.moreTapListContent),
+        const Offset(0, -500),
+      );
+      expect(aupTile, findsOne);
+      expect(
+        find.descendant(
+          of: aupTile,
+          matching: find.text('Acceptable Use Policy'),
+        ),
+        findsOne,
+      );
+      expect(find.text('Privacy policy'), findsOne);
+      expect(find.text('Terms of use'), findsOne);
     });
   });
 }
