@@ -44,7 +44,7 @@ class ItemTax extends StatelessWidget {
               type: PriceStyle.taxPrice,
             ),
             Text(
-              '($itemTaxPercent% ${context.tr('tax')})',
+              ' ($itemTaxPercent% ${context.tr('tax')})',
               key: WidgetKeys.itemTaxPercentage,
               style: txtStyle,
             ),

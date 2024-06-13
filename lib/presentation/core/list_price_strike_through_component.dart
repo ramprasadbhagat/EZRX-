@@ -18,13 +18,18 @@ class ListPriceStrikeThroughComponent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return priceAggregate.showMaterialListPrice
-        ? PriceComponent(
-            key: WidgetKeys.listPriceStrikeThroughComponent,
-            title: title,
-            salesOrgConfig:
-                context.read<EligibilityBloc>().state.salesOrgConfigs,
-            price: priceAggregate.display(PriceType.listPrice),
-            type: PriceStyle.materialListPriceStrikeThrough,
+        ? Row(
+            children: [
+              PriceComponent(
+                key: WidgetKeys.listPriceStrikeThroughComponent,
+                title: title,
+                salesOrgConfig:
+                    context.read<EligibilityBloc>().state.salesOrgConfigs,
+                price: priceAggregate.display(PriceType.listPrice),
+                type: PriceStyle.materialListPriceStrikeThrough,
+              ),
+              const SizedBox(width: 4),
+            ],
           )
         : const SizedBox.shrink();
   }

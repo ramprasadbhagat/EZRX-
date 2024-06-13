@@ -1759,7 +1759,7 @@ void main() {
       );
       expect(expectedNetPrice, findsOneWidget);
       final taxPercentage = find.text(
-        '(20.0% ${'tax'.tr()})',
+        ' (20.0% ${'tax'.tr()})',
       );
       expect(taxPercentage, findsOneWidget);
 
@@ -1806,7 +1806,7 @@ void main() {
         const Offset(0, -300),
       );
       final expectedTax = find.text(
-        '(50.0% ${'tax'.tr()})',
+        ' (50.0% ${'tax'.tr()})',
       );
       expect(expectedTax, findsOneWidget);
     });
@@ -2764,7 +2764,7 @@ void main() {
         );
         expect(
           tester.widget<Text>(itemTaxPercentage).data,
-          '($taxRate% ${'tax'.tr()})',
+          ' ($taxRate% ${'tax'.tr()})',
         );
 
         // checking item total price at item tax level

@@ -1488,7 +1488,7 @@ void main() {
           );
           expect(
             tester.widget<Text>(itemTaxPercentage).data,
-            '($taxRate% ${'tax'.tr()})',
+            ' ($taxRate% ${'tax'.tr()})',
           );
 
           find.descendant(

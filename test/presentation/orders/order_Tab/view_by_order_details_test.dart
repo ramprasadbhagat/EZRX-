@@ -1158,7 +1158,7 @@ void main() {
         findRichText: true,
       );
       final tax = find.textContaining(
-        '(5.0% tax)',
+        ' (5.0% tax)',
         findRichText: true,
       );
       final taxAmount = find.textContaining(
@@ -1785,7 +1785,7 @@ void main() {
         );
         expect(
           tester.widget<Text>(itemTaxPercentage).data,
-          '($taxRate% ${'tax'.tr()})',
+          ' ($taxRate% ${'tax'.tr()})',
         );
 
         //checking item total price at item tax level

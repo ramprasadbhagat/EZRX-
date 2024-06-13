@@ -1108,9 +1108,9 @@ void main() {
 
           final taxLevelFinder = find.text('Total with tax:');
           expect(taxLevelFinder, findsOneWidget);
-          final taxPercentageFinder = find.text('(10.0% tax)');
+          final taxPercentageFinder = find.text(' (10.0% tax)');
           expect(taxPercentageFinder, findsOneWidget);
-          final vatPercentageFinder = find.text('(5.0% tax)');
+          final vatPercentageFinder = find.text(' (5.0% tax)');
           expect(vatPercentageFinder, findsNothing);
           final listPriceWithTax = cartState
               .cartProducts.first.finalPriceTotalWithTax
@@ -1162,10 +1162,10 @@ void main() {
 
           final taxLevelFinder = find.text('Total with tax:');
           expect(taxLevelFinder, findsOneWidget);
-          final taxPercentageFinder = find.text('(5% tax)');
+          final taxPercentageFinder = find.text(' (5% tax)');
           expect(taxPercentageFinder, findsNothing);
           final vatPercentageFinder =
-              find.text('(${fakeTHSalesOrgConfigs.vatValue.toDouble()}% tax)');
+              find.text(' (${fakeTHSalesOrgConfigs.vatValue.toDouble()}% tax)');
           expect(vatPercentageFinder, findsOneWidget);
           final listPriceWithTax = cartState
               .cartProducts.first.finalPriceTotalWithTax
@@ -1223,9 +1223,9 @@ void main() {
 
           final taxLevelFinder = find.text('Total with tax:');
           expect(taxLevelFinder, findsOneWidget);
-          final taxPercentageFinder = find.text('(0.0% tax)');
+          final taxPercentageFinder = find.text(' (0.0% tax)');
           expect(taxPercentageFinder, findsNothing);
-          final vatPercentageFinder = find.text('(10.0% tax)');
+          final vatPercentageFinder = find.text(' (10.0% tax)');
           expect(vatPercentageFinder, findsOneWidget);
           final listPriceWithTax = cartState
               .cartProducts.first.finalPriceTotalWithTax

@@ -211,7 +211,7 @@ void main() {
           find.descendant(
             of: find.byType(ItemTax),
             matching: find.text(
-              '(${e.taxPercent}% ${'tax'.tr()})',
+              ' (${e.taxPercent}% ${'tax'.tr()})',
             ),
           ),
           (currentSalesOrgConfigs.displayItemTaxBreakdown && e.netAmount > 0)

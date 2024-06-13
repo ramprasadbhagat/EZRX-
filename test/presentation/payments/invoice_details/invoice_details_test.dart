@@ -802,7 +802,7 @@ void main() {
           find.descendant(
             of: find.byType(ItemTax),
             matching: find.text(
-              '(${invoiceDetail.taxPercent}% ${'tax'.tr()})',
+              ' (${invoiceDetail.taxPercent}% ${'tax'.tr()})',
             ),
           ),
           (currentSalesOrgConfigs.displayItemTaxBreakdown &&
