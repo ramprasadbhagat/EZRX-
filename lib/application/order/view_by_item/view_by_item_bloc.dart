@@ -95,11 +95,13 @@ class ViewByItemsBloc extends Bloc<ViewByItemsEvent, ViewByItemsState> {
                 appliedFilter: e.viewByItemFilter,
               ),
             );
-            add(
-              _FetchOrdersInvoiceData(
-                orderHistoryItems: orderHistory.orderHistoryItems,
-              ),
-            );
+            if (!isClosed) {
+              add(
+                _FetchOrdersInvoiceData(
+                  orderHistoryItems: orderHistory.orderHistoryItems,
+                ),
+              );
+            }
           },
         );
       },
@@ -149,11 +151,13 @@ class ViewByItemsBloc extends Bloc<ViewByItemsEvent, ViewByItemsState> {
               ),
             );
 
-            add(
-              _FetchOrdersInvoiceData(
-                orderHistoryItems: orderHistory.orderHistoryItems,
-              ),
-            );
+            if (!isClosed) {
+              add(
+                _FetchOrdersInvoiceData(
+                  orderHistoryItems: orderHistory.orderHistoryItems,
+                ),
+              );
+            }
           },
         );
       },

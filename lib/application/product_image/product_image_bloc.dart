@@ -72,13 +72,20 @@ class ProductImageBloc extends Bloc<ProductImageEvent, ProductImageState> {
           salesOrganisation: state.salesOrganisation,
         );
         failureOrSuccess.fold(
-          (failure) => emit(
-            state.copyWith(
-              isFetching: false,
-            ),
-          ),
-          (metaData) =>
-              add(ProductImageEvent.set(productImageMap: metaData.imageMap)),
+          (_) {
+            emit(
+              state.copyWith(
+                isFetching: false,
+              ),
+            );
+          },
+          (metaData) {
+            if (!isClosed) {
+              add(
+                ProductImageEvent.set(productImageMap: metaData.imageMap),
+              );
+            }
+          },
         );
       },
     );
