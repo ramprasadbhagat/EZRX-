@@ -590,4 +590,58 @@ void main() {
       );
     },
   );
+
+  group('New Request State getter -', () {
+    group('invalidSelectedReturnItemMsg -', () {
+      test(
+          'Should return MP warning message when selected items contains both ZP and MP',
+          () {
+        final selectedItems = [
+          ReturnMaterial.empty().copyWith(isMarketPlace: true),
+          ReturnMaterial.empty(),
+        ];
+
+        expect(
+          NewRequestState.initial()
+              .copyWith(selectedItems: selectedItems)
+              .invalidSelectedReturnItemMsg,
+          'Please note that ZP and MP products cannot be returned together. Additionally, MP products must be from the same seller in each request.',
+        );
+      });
+
+      test(
+          'Should return MP warning message when selected items contains MP items from different seller',
+          () {
+        final selectedItems = [
+          ReturnMaterial.empty()
+              .copyWith(isMarketPlace: true, principalCode: PrincipalCode('a')),
+          ReturnMaterial.empty()
+              .copyWith(isMarketPlace: true, principalCode: PrincipalCode('b')),
+        ];
+
+        expect(
+          NewRequestState.initial()
+              .copyWith(selectedItems: selectedItems)
+              .invalidSelectedReturnItemMsg,
+          'Please note that ZP and MP products cannot be returned together. Additionally, MP products must be from the same seller in each request.',
+        );
+      });
+
+      test(
+          'Should return ZP warning message when selected items contains only ZP items',
+          () {
+        final selectedItems = [
+          ReturnMaterial.empty().copyWith(principalCode: PrincipalCode('a')),
+          ReturnMaterial.empty().copyWith(principalCode: PrincipalCode('b')),
+        ];
+
+        expect(
+          NewRequestState.initial()
+              .copyWith(selectedItems: selectedItems)
+              .invalidSelectedReturnItemMsg,
+          'Please ensure that the items selected for return are from the same Principal.',
+        );
+      });
+    });
+  });
 }

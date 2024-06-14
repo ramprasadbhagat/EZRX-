@@ -21,6 +21,7 @@ import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
 import 'package:ezrxmobile/infrastructure/core/common/tracking_events.dart';
 import 'package:ezrxmobile/infrastructure/core/common/tracking_properties.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
+import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/confirm_bottom_sheet.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/returns/new_request/new_request_page.dart';
@@ -28,55 +29,16 @@ import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 
 import '../../../common_mock_data/customer_code_mock.dart';
+import '../../../common_mock_data/mock_bloc.dart';
+import '../../../common_mock_data/mock_other.dart';
 import '../../../common_mock_data/sales_organsiation_mock.dart';
 import '../../../common_mock_data/user_mock.dart';
 import '../../../utils/widget_utils.dart';
-
-class AuthBlocMock extends MockBloc<AuthEvent, AuthState> implements AuthBloc {}
-
-class ReturnItemsBlocMock extends MockBloc<ReturnItemsEvent, ReturnItemsState>
-    implements ReturnItemsBloc {}
-
-class AnnouncementBlocMock
-    extends MockBloc<AnnouncementEvent, AnnouncementState>
-    implements AnnouncementBloc {}
-
-class CustomerCodeBlocMock
-    extends MockBloc<CustomerCodeEvent, CustomerCodeState>
-    implements CustomerCodeBloc {}
-
-class NewRequestMockBloc extends MockBloc<NewRequestEvent, NewRequestState>
-    implements NewRequestBloc {}
-
-class SalesOrgMockBloc extends MockBloc<SalesOrgEvent, SalesOrgState>
-    implements SalesOrgBloc {}
-
-class UsageCodeBlocMock extends MockBloc<UsageCodeEvent, UsageCodeState>
-    implements UsageCodeBloc {}
-
-class ProductImageBlocMock
-    extends MockBloc<ProductImageEvent, ProductImageState>
-    implements ProductImageBloc {}
-
-class ReturnRequestAttachmentBlocMock
-    extends MockBloc<ReturnRequestAttachmentEvent, ReturnRequestAttachmentState>
-    implements ReturnRequestAttachmentBloc {}
-
-class EligibilityBlocMock extends MockBloc<EligibilityEvent, EligibilityState>
-    implements EligibilityBloc {}
-
-class AutoRouterMock extends Mock implements AppRouter {}
-
-class MixpanelServiceMock extends Mock implements MixpanelService {}
-
-final locator = GetIt.instance;
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
@@ -85,8 +47,7 @@ void main() {
   late AnnouncementBloc announcementBlocMock;
   late ReturnItemsBloc returnItemsBlocMock;
   late AppRouter autoRouterMock;
-  late CustomerCodeBloc customerCodeBlocMock;
-  final salesOrgBlocMock = SalesOrgMockBloc();
+  final salesOrgBlocMock = SalesOrgBlocMock();
   late EligibilityBloc eligibilityBlocMock;
   late NewRequestBloc newRequestBlocMock;
   final usageCodeBlocMock = UsageCodeBlocMock();
@@ -118,7 +79,6 @@ void main() {
       newRequestBlocMock = NewRequestMockBloc();
       announcementBlocMock = AnnouncementBlocMock();
       returnItemsBlocMock = ReturnItemsBlocMock();
-      customerCodeBlocMock = CustomerCodeBlocMock();
       returnRequestAttachmentBlocMock = ReturnRequestAttachmentBlocMock();
       productImageBlocMock = ProductImageBlocMock();
       eligibilityBlocMock = EligibilityBlocMock();
@@ -132,8 +92,6 @@ void main() {
       when(() => newRequestBlocMock.state)
           .thenReturn(NewRequestState.initial());
       when(() => authBlocMock.state).thenReturn(const AuthState.initial());
-      when(() => customerCodeBlocMock.state)
-          .thenReturn(CustomerCodeState.initial());
       when(() => usageCodeBlocMock.state).thenReturn(UsageCodeState.initial());
       when(() => returnRequestAttachmentBlocMock.state)
           .thenReturn(ReturnRequestAttachmentState.initial());
@@ -157,9 +115,6 @@ void main() {
           ),
           BlocProvider<NewRequestBloc>(
             create: (context) => newRequestBlocMock,
-          ),
-          BlocProvider<CustomerCodeBloc>(
-            create: (context) => customerCodeBlocMock,
           ),
           BlocProvider<UsageCodeBloc>(create: (context) => usageCodeBlocMock),
           BlocProvider<ReturnRequestAttachmentBloc>(
@@ -256,26 +211,9 @@ void main() {
           salesOrg: fakeSalesOrganisation.salesOrg,
           showErrorMessages: true,
           selectedItems: [
-            fakeReturnMaterial.copyWith(
-              isMarketPlace: true,
-            ),
-            fakeReturnMaterial.copyWith(
-              isMarketPlace: false,
-            ),
+            fakeReturnMaterial.copyWith(isMarketPlace: true),
+            fakeReturnMaterial.copyWith(isMarketPlace: false),
           ],
-        ),
-      );
-      when(() => eligibilityBlocMock.state).thenReturn(
-        EligibilityState.initial().copyWith(
-          customerCodeInfo: fakeCustomerCodeInfo.copyWith(
-            isMarketPlace: true,
-          ),
-          user: fakeRootAdminUser.copyWith(
-            acceptMPTC: MarketPlaceTnCAcceptance.accept(),
-          ),
-          salesOrgConfigs: fakeSalesOrganisationConfigs.copyWith(
-            enableMarketPlace: true,
-          ),
         ),
       );
       await tester.pumpWidget(getScopedWidget());

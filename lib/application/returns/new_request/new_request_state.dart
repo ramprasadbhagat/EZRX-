@@ -40,9 +40,10 @@ class NewRequestState with _$NewRequestState {
         (item) => selectedItems.first.isMarketPlace == item.isMarketPlace,
       );
 
-  String get invalidSelectedReturnItemMsg => _areItemsFromBothZPAndMP
-      ? 'Please note that ZP and MP products cannot be returned together. Additionally, MP products must be from the same seller in each request.'
-      : 'Please ensure that the items selected for return are from the same Principal.';
+  String get invalidSelectedReturnItemMsg => selectedItems
+          .every((e) => !e.isMarketPlace)
+      ? 'Please ensure that the items selected for return are from the same Principal.'
+      : 'Please note that ZP and MP products cannot be returned together. Additionally, MP products must be from the same seller in each request.';
 
   bool get validateForStep1 =>
       selectedItems.isNotEmpty && !areSelectedReturnItemsInvalid;
