@@ -110,15 +110,15 @@ class PriceAggregate with _$PriceAggregate {
 
   bool get isMaxQtyExceedsForTender =>
       salesOrgConfig.enableTenderOrders &&
-      (tenderContract.isNotEmpty &&
-          (tenderContract.remainingTenderQuantity != 0 &&
-              tenderContract.remainingTenderQuantity < quantity));
+      tenderContract.isNotEmpty &&
+      tenderContract.remainingTenderQuantity != 0 &&
+      tenderContract.remainingTenderQuantity < quantity;
 
   bool get isTenderContractInvalid =>
       salesOrgConfig.enableTenderOrders &&
-      (tenderContract.isNotEmpty &&
-          (tenderContract.contractNumber.isContractNumberNotEmpty &&
-              tenderContract.isTenderExpired));
+      tenderContract.isNotEmpty &&
+      tenderContract.contractNumber.isContractNumberNotEmpty &&
+      tenderContract.isTenderExpired;
 
   bool get showErrorMessageForID =>
       salesOrgConfig.salesOrg.isID &&
@@ -212,10 +212,11 @@ class PriceAggregate with _$PriceAggregate {
     return value;
   }
 
-  bool get promoStatus =>
-      materialInfo.promoStatus ||
-      price.tiers.isNotEmpty ||
-      price.bonuses.isNotEmpty;
+  bool get promoStatus => tenderContract.isNotEmpty
+      ? false
+      : materialInfo.promoStatus ||
+          price.tiers.isNotEmpty ||
+          price.bonuses.isNotEmpty;
 
   double get listPrice {
     return NumUtils.roundToPlaces(vatCalculation(price.lastPrice.getOrCrash()));

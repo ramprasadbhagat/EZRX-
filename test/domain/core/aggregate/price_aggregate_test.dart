@@ -2596,6 +2596,23 @@ void main() {
     );
   });
 
+  test(
+      '=> toSubmitMaterialInfo should return promoStatus false for tender contract',
+      () {
+    final customPriceAggregate = emptyPriceAggregate.copyWith(
+      tenderContract: emptyTenderContract.copyWith(
+        contractNumber:
+            TenderContractNumber.tenderContractNumber('fake-contract-number'),
+      ),
+      salesOrgConfig: fakeVNSalesOrgConfigs,
+    );
+
+    expect(
+      customPriceAggregate.toSubmitMaterialInfo().promoStatus,
+      false,
+    );
+  });
+
   group('Price Aggregate List Test -', () {
     test('Sort to display in cart page & checkout page', () {
       final materials = fakePriceAggregateList
