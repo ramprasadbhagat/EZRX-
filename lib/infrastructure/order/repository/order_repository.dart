@@ -365,8 +365,10 @@ class OrderRepository implements IOrderRepository {
         mpSmallOrderFee: mpSmallOrderFee,
         currency: configs.currency,
       ),
-      orderReason: cartProducts.tenderContractSubmitted.tenderOrderReason
-          .getOrDefaultValue(''),
+      orderReason: _getOrderReason(
+        cartItems: cartProducts,
+        customerCodeInfo: customerCodeInfo,
+      ),
     );
   }
 }
@@ -433,4 +435,16 @@ String getOrderType({
   }
 
   return '';
+}
+
+String _getOrderReason({
+  required List<PriceAggregate> cartItems,
+  required CustomerCodeInfo customerCodeInfo,
+}) {
+  if (cartItems.containCovidMaterial && customerCodeInfo.customerGrp4.isVR) {
+    return '802';
+  }
+
+  return cartItems.tenderContractSubmitted.tenderOrderReason
+      .getOrDefaultValue('');
 }

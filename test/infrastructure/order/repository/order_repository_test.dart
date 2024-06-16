@@ -1202,6 +1202,85 @@ void main() {
         Right(submitOrderResponseMock),
       );
     });
+
+    test(
+        'get submit order successfully Remote success for covid item when customer is Private Company',
+        () async {
+      when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
+      when(() => mockConfig.orderEncryptionSecret).thenReturn(fakeSecretKey);
+
+      when(
+        () => encryption.encryptionData(
+          data: SubmitOrderDto.fromDomain(
+            submitOrderMock.copyWith(
+              products: cartMaterials
+                  .expand(
+                    (element) => !element.materialInfo.type.typeBundle
+                        ? [element.toSubmitMaterialInfo()]
+                        : element.bundle.materials.map(
+                            (el) => PriceAggregate.empty()
+                                .copyWith(
+                                  materialInfo: el,
+                                  quantity: el.quantity.intValue,
+                                  salesOrgConfig: element.salesOrgConfig,
+                                  bundle: element.bundle,
+                                  isCovid: true,
+                                )
+                                .toSubmitMaterialInfo(),
+                          ),
+                  )
+                  .toList(),
+              orderReason: '802',
+              customer: SubmitOrderCustomer.empty().copyWith(
+                customerNumber: fakeCustomerCodeInfo.customerCodeSoldTo,
+                customerNumberShipTo: mockShipToInfo.shipToCustomerCode,
+                division: fakeCustomerCodeInfo.division,
+                salesOrganisation:
+                    fakePHSalesOrganisation.salesOrg.getOrCrash(),
+              ),
+            ),
+          ).toJson(),
+          secretKey: fakeSecretKey,
+        ),
+      ).thenReturn(orderEncryptionMock);
+      when(
+        () => orderRemoteDataSource.submitOrder(
+          orderEncryption: orderEncryptionMock,
+          enableMarketPlace: fakeConfigValue,
+        ),
+      ).thenAnswer(
+        (invocation) async => submitOrderResponseMock,
+      );
+
+      final result = await orderRepository.submitOrder(
+        shipToInfo: mockShipToInfo,
+        user: fakeClientUser,
+        cartProducts: cartMaterials
+            .map(
+              (e) => e.copyWith(
+                isCovid: true,
+              ),
+            )
+            .toList(),
+        grandTotal: 100.0,
+        customerCodeInfo:
+            fakeCustomerCodeInfo.copyWith(customerGrp4: CustomerGrp4('VR')),
+        salesOrganisation: fakePHSalesOrganisation,
+        data: deliveryInfoData,
+        orderDocumentType: OrderDocumentType.empty()
+            .copyWith(documentType: DocumentType('ZPOR'), orderReason: '802'),
+        configs: fakePHSalesOrgConfigs,
+        orderValue: 100.0,
+        totalTax: 100,
+        aplSmallOrderFee: 12500.0,
+        mpSmallOrderFee: 0,
+        zpSmallOrderFee: 0,
+      );
+      expect(
+        result,
+        Right(submitOrderResponseMock),
+      );
+    });
   });
   test(
       'submit order should contain deliveryFee as null string in ID market when order valye is >=300000.00',
