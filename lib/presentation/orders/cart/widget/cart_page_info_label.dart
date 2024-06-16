@@ -66,7 +66,7 @@ class _CartPageInfoLabel extends StatelessWidget {
                         ),
                         showLeadingIcon: state.hasMultipleErrors,
                       ),
-                    if (state.displayAtLeastOneItemInStockWarning)
+                    if (state.atLeastOneItemInStockRequired)
                       _ErrorText(
                         text: context.tr(
                           context
@@ -93,46 +93,13 @@ class _MOVText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final displayZPMinOrderAmount = StringUtils.displayPrice(
-      state.configs,
-      state.configs.minOrderAmount,
-    );
-    var errorMessage =
-        '${context.tr('Please ensure that the order value satisfies the minimum order value of')} $displayZPMinOrderAmount';
-
-    if (state.cartItems.containMPMaterial) {
-      final displayMPMinOrderAmount = StringUtils.displayPrice(
-        state.configs,
-        state.configs.mpMinOrderAmount,
-      );
-
-      if (!state.zpSubtotalMOVEligible && !state.mpSubtotalMOVEligible) {
-        errorMessage = context.tr(
-          'Please ensure that minimum order value is at least {zpMOV} for ZP subtotal & {mpMOV} for MP subtotal.',
-          namedArgs: {
-            'zpMOV': displayZPMinOrderAmount,
-            'mpMOV': displayMPMinOrderAmount,
-          },
-        );
-      } else if (!state.zpSubtotalMOVEligible) {
-        errorMessage = context.tr(
-          'Please ensure that minimum order value is at least {mov} for ZP subtotal.',
-          namedArgs: {
-            'mov': displayZPMinOrderAmount,
-          },
-        );
-      } else {
-        errorMessage = context.tr(
-          'Please ensure that minimum order value is at least {mov} for MP subtotal.',
-          namedArgs: {
-            'mov': displayMPMinOrderAmount,
-          },
-        );
-      }
-    }
+    final messageObject = state.movNotEligibleMessage;
 
     return _ErrorText(
-      text: errorMessage,
+      text: context.tr(
+        messageObject.message,
+        namedArgs: messageObject.arguments,
+      ),
       showLeadingIcon: state.hasMultipleErrors,
     );
   }

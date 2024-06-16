@@ -39,12 +39,12 @@ class OrderEligibilityState with _$OrderEligibilityState {
         'The following items have been identified in your cart:';
     if (!isMinOrderValuePassed) {
       final displayMinOrderAmount =
-          StringUtils.displayPrice(configs, configs.minOrderAmount);
+          StringUtils.displayPrice(configs, configs.zpMinOrderAmount);
       final displayMPMinOrderAmount =
           StringUtils.displayPrice(configs, configs.mpMinOrderAmount);
 
       if (!cartItems.containMPMaterial) {
-        return 'Please ensure that the order value satisfies the minimum order value of $displayMinOrderAmount}';
+        return 'Please ensure that the order value satisfies the minimum order value of $displayMinOrderAmount';
       }
       if (cartItems.containInvalidTenderContractMaterial) {
         return 'Tender Contract is no longer available for one or few item(s). Please remove to continue.';
@@ -53,9 +53,9 @@ class OrderEligibilityState with _$OrderEligibilityState {
         return 'One or few item(s) order qty exceed the maximum available tender quantity.';
       }
 
-      if (!mpSubtotalMOVEligible && !zpSubtotalMOVEligible) {
+      if (!mpMOVEligible && !zpMOVEligible) {
         return 'Please ensure that minimum order value is at least $displayMinOrderAmount for ZP subtotal & $displayMPMinOrderAmount for MP subtotal.';
-      } else if (!zpSubtotalMOVEligible) {
+      } else if (!zpMOVEligible) {
         return 'Please ensure that minimum order value is at least $displayMinOrderAmount for ZP subtotal.';
       } else if (askUserToAddCommercialMaterial) {
         return 'Your cart must contain other commercial material to proceed checkout';
@@ -231,7 +231,7 @@ class OrderEligibilityState with _$OrderEligibilityState {
       isGimmickMaterialNotAllowed ||
       hasInvalidTenderMaterial ||
       isMaxQtyExceedsForAnyTender ||
-      displayAtLeastOneItemInStockWarning;
+      atLeastOneItemInStockRequired;
 
   List<bool> get activeErrorsList => [
         displayMovWarning,
@@ -241,7 +241,7 @@ class OrderEligibilityState with _$OrderEligibilityState {
         isGimmickMaterialNotAllowed,
         hasInvalidTenderMaterial,
         isMaxQtyExceedsForAnyTender,
-        displayAtLeastOneItemInStockWarning,
+        atLeastOneItemInStockRequired,
       ].where((condition) => condition).toList();
 
   bool get hasMultipleErrors => activeErrorsList.length > 1;
@@ -278,6 +278,52 @@ class OrderEligibilityState with _$OrderEligibilityState {
   // Minimum order value
   //
   //============================================================
+
+  TRObject get movNotEligibleMessage {
+    final displayZPMinOrderAmount = StringUtils.displayPrice(
+      configs,
+      configs.zpMinOrderAmount,
+    );
+
+    var errorMessage = TRObject(
+      'Please ensure that the order value satisfies the minimum order value of {mov}',
+      arguments: {'mov': displayZPMinOrderAmount},
+    );
+
+    if (cartItems.containMPMaterial) {
+      final displayMPMinOrderAmount = StringUtils.displayPrice(
+        configs,
+        configs.mpMinOrderAmount,
+      );
+
+      if (!zpMOVEligible && !mpMOVEligible) {
+        errorMessage = TRObject(
+          'Please ensure that minimum order value is at least {zpMOV} for ZP subtotal & {mpMOV} for MP subtotal.',
+          arguments: {
+            'zpMOV': displayZPMinOrderAmount,
+            'mpMOV': displayMPMinOrderAmount,
+          },
+        );
+      } else if (!zpMOVEligible) {
+        errorMessage = TRObject(
+          'Please ensure that minimum order value is at least {mov} for ZP subtotal.',
+          arguments: {
+            'mov': displayZPMinOrderAmount,
+          },
+        );
+      } else {
+        errorMessage = TRObject(
+          'Please ensure that minimum order value is at least {mov} for MP subtotal.',
+          arguments: {
+            'mov': displayMPMinOrderAmount,
+          },
+        );
+      }
+    }
+
+    return errorMessage;
+  }
+
   bool get displayMovWarning =>
       !isMinOrderValuePassed && showErrorMessage && !isAccountSuspended;
 
@@ -322,30 +368,41 @@ class OrderEligibilityState with _$OrderEligibilityState {
       .where((element) => element.materialInfo.isFOCMaterial)
       .isNotEmpty;
 
-  bool get isTotalGreaterThanMinOrderAmount {
-    if (cartItems.containMPMaterial) {
-      return zpSubtotalMOVEligible && mpSubtotalMOVEligible;
-    }
-
-    if (zpSmallOrderFeeEnable) return true;
-
-    if (salesOrg.salesOrg.checkMOVonSubTotal) {
-      return subTotal >= configs.minOrderAmount;
-    }
-
-    return grandTotal >= configs.minOrderAmount;
-  }
+  bool get isTotalGreaterThanMinOrderAmount => zpMOVEligible && mpMOVEligible;
 
   // If small order fee is enabled, will validate MOV using value from SAP instead of from SalesConfig
-  bool get zpSubtotalMOVEligible =>
-      cartItems.zpMaterialOnly.isEmpty ||
-      zpSubtotal >= configs.minOrderAmount ||
-      zpSmallOrderFeeEnable;
+  bool get zpMOVEligible {
+    if (cartItems.zpMaterialOnly.isEmpty) return true;
+    if (zpSmallOrderFeeEnable) return true;
 
-  bool get mpSubtotalMOVEligible =>
+    if (isIntSalesRepWithSmallOrderFeeForCustomer &&
+        atLeastOneZPItemInStockRequired) {
+      return false;
+    }
+
+    if (isIntSalesRepWithSmallOrderFeeForCustomer) {
+      return zpSubtotalInStockGreaterThanSAPMOV;
+    }
+
+    if (cartItems.containMPMaterial || user.role.type.isInternalSalesRep) {
+      return zpSubtotal >= configs.zpMinOrderAmount;
+    }
+
+    if (salesOrg.salesOrg.checkMOVonSubTotal) {
+      return subTotal >= configs.zpMinOrderAmount;
+    }
+
+    return grandTotal >= configs.zpMinOrderAmount;
+  }
+
+  bool get mpMOVEligible =>
       cartItems.mpMaterialOnly.isEmpty ||
       mpSubtotal >= configs.mpMinOrderAmount ||
       mpSmallOrderFeeEnable;
+
+  bool get zpSubtotalInStockGreaterThanSAPMOV =>
+      cartItems.zpMaterialOnly.subtotalWithInStockOnly >=
+      configs.sapMinOrderAmount;
 
   //============================================================
   // Small order fee
@@ -391,7 +448,7 @@ class OrderEligibilityState with _$OrderEligibilityState {
 
   bool get zpSmallOrderFeeApplied {
     if (!zpSmallOrderFeeEnable) return false;
-    if (displayAtLeastOneZPItemInStockWarning) return false;
+    if (atLeastOneZPItemInStockRequired) return false;
     if (cartItems.zpMaterialOnly.isMOVExclusion) return false;
 
     if (cartItems.zpMaterialOnly.containCovidMaterial) return false;
@@ -399,29 +456,27 @@ class OrderEligibilityState with _$OrderEligibilityState {
     if (cartItems.zpMaterialOnly.containMinistryOfHealthMaterial &&
         configs.salesOrg.isSg) return false;
 
-    return cartItems.zpMaterialOnly.subtotalWithInStockOnly <
-        configs.sapMinOrderAmount;
+    return !zpSubtotalInStockGreaterThanSAPMOV;
   }
 
   bool get mpSmallOrderFeeApplied {
     if (!mpSmallOrderFeeEnable) return false;
-    if (displayAtLeastOneMPItemInStockWarning) return false;
+    if (atLeastOneMPItemInStockRequired) return false;
 
     return cartItems.mpMaterialOnly.subtotalWithInStockOnly <
         configs.mpSAPMinOrderAmount;
   }
 
-  bool get displayAtLeastOneItemInStockWarning =>
-      displayAtLeastOneMPItemInStockWarning ||
-      displayAtLeastOneZPItemInStockWarning;
+  bool get atLeastOneItemInStockRequired =>
+      atLeastOneMPItemInStockRequired || atLeastOneZPItemInStockRequired;
 
-  bool get displayAtLeastOneMPItemInStockWarning =>
+  bool get atLeastOneMPItemInStockRequired =>
       cartItems.mpMaterialOnly.every((e) => e.containAllOOSItem) &&
       mpSmallOrderFeeEnable;
 
-  bool get displayAtLeastOneZPItemInStockWarning =>
+  bool get atLeastOneZPItemInStockRequired =>
       cartItems.zpMaterialOnly.every((e) => e.containAllOOSItem) &&
-      zpSmallOrderFeeEnable;
+      (zpSmallOrderFeeEnable || isIntSalesRepWithSmallOrderFeeForCustomer);
 
   bool get mpSmallOrderFeeEnable =>
       cartItems.mpMaterialOnly.isNotEmpty &&
@@ -433,4 +488,12 @@ class OrderEligibilityState with _$OrderEligibilityState {
       cartItems.zpMaterialOnly.isNotEmpty &&
       configs.enableSmallOrderFee &&
       configs.smallOrderFeeUserRoles.contains(user.role.type.smallOrderFeeRole);
+
+  bool get isIntSalesRepWithSmallOrderFeeForCustomer =>
+      user.role.type.isInternalSalesRep &&
+      configs.enableSmallOrderFee &&
+      [
+        RoleType.clientUser().smallOrderFeeRole,
+        RoleType.clientAdmin().smallOrderFeeRole,
+      ].any((role) => configs.smallOrderFeeUserRoles.contains(role));
 }

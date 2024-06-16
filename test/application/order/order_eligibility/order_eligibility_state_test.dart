@@ -1,5 +1,6 @@
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
+import 'package:ezrxmobile/domain/order/entities/tender_contract.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ezrxmobile/domain/order/entities/bundle.dart';
@@ -95,6 +96,11 @@ void main() {
       // displayMovWarning is true
       final modifiedState = initializedState.copyWith(
         showErrorMessage: true,
+        cartItems: [
+          fakeCartItem.copyWith(
+            tenderContract: TenderContract.empty(),
+          ),
+        ],
       );
       expect(modifiedState.displayMovWarning, true);
 
@@ -333,9 +339,8 @@ void main() {
     });
 
     test(' => isCheckoutDisabled should return correct value', () {
-      // isCheckoutDisabled is false
-      expect(initializedState.isCheckoutDisabled, true);
-      // isCheckoutDisabled is true
+      expect(initializedState.isCheckoutDisabled, false);
+
       final modifiedState = initializedState.copyWith(
         orderType: 'ZPFC',
         cartItems: [
@@ -378,12 +383,12 @@ void main() {
     });
 
     group('MOV validation -', () {
-      test('zpSubtotalMOVEligible getter', () {
+      test('zpMOVEligible getter', () {
         //return true when there is no zp material
         expect(
           OrderEligibilityState.initial().copyWith(
             cartItems: [fakeMPCartItem],
-          ).zpSubtotalMOVEligible,
+          ).zpMOVEligible,
           true,
         );
 
@@ -393,9 +398,9 @@ void main() {
               .copyWith(
                 configs: fakeMYSalesOrgConfigs,
                 cartItems: [fakeCartItem],
-                zpSubtotal: fakeMYSalesOrgConfigs.minOrderAmount,
+                grandTotal: fakeMYSalesOrgConfigs.minOrderAmount,
               )
-              .zpSubtotalMOVEligible,
+              .zpMOVEligible,
           true,
         );
 
@@ -405,19 +410,19 @@ void main() {
               .copyWith(
                 configs: fakeMYSalesOrgConfigs,
                 cartItems: [fakeCartItem],
-                zpSubtotal: fakeMYSalesOrgConfigs.minOrderAmount - 1,
+                grandTotal: fakeMYSalesOrgConfigs.minOrderAmount - 1,
               )
-              .zpSubtotalMOVEligible,
+              .zpMOVEligible,
           false,
         );
       });
 
-      test('mpSubtotalMOVEligible getter', () {
+      test('mpMOVEligible getter', () {
         //return true when there is no mp material
         expect(
           OrderEligibilityState.initial().copyWith(
             cartItems: [fakeCartItem],
-          ).mpSubtotalMOVEligible,
+          ).mpMOVEligible,
           true,
         );
 
@@ -429,7 +434,7 @@ void main() {
                 cartItems: [fakeMPCartItem],
                 mpSubtotal: fakeMYSalesOrgConfigs.mpMinOrderAmount,
               )
-              .mpSubtotalMOVEligible,
+              .mpMOVEligible,
           true,
         );
 
@@ -441,7 +446,7 @@ void main() {
                 cartItems: [fakeMPCartItem],
                 mpSubtotal: fakeMYSalesOrgConfigs.mpMinOrderAmount - 1,
               )
-              .mpSubtotalMOVEligible,
+              .mpMOVEligible,
           false,
         );
       });
@@ -452,7 +457,7 @@ void main() {
             cartItems: [fakeMPCartItem, fakeCartItem],
             configs: fakeMYSalesOrgConfigs,
           );
-          //return false when not satisfied zp MOV
+          // return false when not satisfied zp MOV
           expect(
             stateWithMPMaterial
                 .copyWith(
@@ -626,38 +631,38 @@ void main() {
 
       test('displayAtLeastOneZPItemInStockWarning getter', () {
         expect(
-          zpSmallOrderFeeEnableState.displayAtLeastOneZPItemInStockWarning,
+          zpSmallOrderFeeEnableState.atLeastOneZPItemInStockRequired,
           true,
         );
 
         expect(
-          OrderEligibilityState.initial().displayAtLeastOneZPItemInStockWarning,
+          OrderEligibilityState.initial().atLeastOneZPItemInStockRequired,
           false,
         );
 
         expect(
           zpSmallOrderFeeEnableState.copyWith(
             cartItems: [fakeCartItem.copyWith(stockInfoList: inStock)],
-          ).displayAtLeastOneZPItemInStockWarning,
+          ).atLeastOneZPItemInStockRequired,
           false,
         );
       });
 
       test('displayAtLeastOneMPItemInStockWarning getter', () {
         expect(
-          mpSmallOrderFeeEnableState.displayAtLeastOneMPItemInStockWarning,
+          mpSmallOrderFeeEnableState.atLeastOneMPItemInStockRequired,
           true,
         );
 
         expect(
-          OrderEligibilityState.initial().displayAtLeastOneMPItemInStockWarning,
+          OrderEligibilityState.initial().atLeastOneMPItemInStockRequired,
           false,
         );
 
         expect(
           mpSmallOrderFeeEnableState.copyWith(
             cartItems: [fakeMPCartItem.copyWith(stockInfoList: inStock)],
-          ).displayAtLeastOneMPItemInStockWarning,
+          ).atLeastOneMPItemInStockRequired,
           false,
         );
       });

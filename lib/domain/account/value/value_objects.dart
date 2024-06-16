@@ -236,6 +236,9 @@ class RoleType extends ValueObject<String> {
     return RoleType._(validateStringNotEmpty(input));
   }
 
+  factory RoleType.clientAdmin() => RoleType('client_admin');
+  factory RoleType.clientUser() => RoleType('client_user');
+
   bool get canLoginOnBehalf {
     return isAdmin(value.getOrElse(() => ''));
   }

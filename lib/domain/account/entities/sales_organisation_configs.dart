@@ -281,4 +281,7 @@ class SalesOrganisationConfigs with _$SalesOrganisationConfigs {
   bool get displayStockInfo => enableBatchNumber || expiryDateDisplay;
 
   double get browseProductsCardHeight => showGovtListPrice ? 330 : 300;
+
+  double get zpMinOrderAmount =>
+      enableSmallOrderFee ? sapMinOrderAmount : minOrderAmount;
 }

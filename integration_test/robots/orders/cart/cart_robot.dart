@@ -133,7 +133,12 @@ class CartRobot {
   }) {
     expect(
       find.text(
-        '${'Please ensure that the order value satisfies the minimum order value of'.tr()} $minimumOrderAmount',
+        'Please ensure that the order value satisfies the minimum order value of {mov}'
+            .tr(
+          namedArgs: {
+            'mov': minimumOrderAmount,
+          },
+        ),
       ),
       isVisible ? findsOneWidget : findsNothing,
     );

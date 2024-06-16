@@ -8,6 +8,7 @@ import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
+import 'package:ezrxmobile/domain/order/entities/tender_contract.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/cart/cart_local_datasource.dart';
 import 'package:ezrxmobile/locator.dart';
@@ -216,13 +217,16 @@ void main() {
         '=> Test if isMinOrderValuePassed when salesOrg county TH and subTotal is less than minOrderValue',
         build: () => OrderEligibilityBloc(),
         act: (bloc) {
-          final isMinOrderValuePassed = initializedState
-              .copyWith(
-                salesOrg: fakeTHSalesOrganisation,
-                configs: fakeTHSalesOrgConfigs,
-                subTotal: 40.0,
-              )
-              .isMinOrderValuePassed;
+          final isMinOrderValuePassed = initializedState.copyWith(
+            salesOrg: fakeTHSalesOrganisation,
+            configs: fakeTHSalesOrgConfigs,
+            subTotal: 40.0,
+            cartItems: [
+              fakeCartItem.copyWith(
+                tenderContract: TenderContract.empty(),
+              ),
+            ],
+          ).isMinOrderValuePassed;
           expect(isMinOrderValuePassed, false);
         },
       );

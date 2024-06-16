@@ -1904,7 +1904,8 @@ void main() {
         await tester.pump();
 
         final movWarning = find.text(
-          'Please ensure that the order value satisfies the minimum order value of MYR 100.00',
+          'Please ensure that the order value satisfies the minimum order value of {mov}'
+              .tr(namedArgs: {'mov': 'MYR 100.00'}),
         );
 
         expect(movWarning, findsNothing);
@@ -2933,7 +2934,8 @@ void main() {
         await tester.pumpAndSettle();
 
         final movWarning = find.text(
-          'Please ensure that the order value satisfies the minimum order value of MYR 100.00',
+          'Please ensure that the order value satisfies the minimum order value of {mov}'
+              .tr(namedArgs: {'mov': 'MYR 100.00'}),
         );
 
         expect(movWarning, findsNothing);
@@ -3456,7 +3458,8 @@ void main() {
         await tester.pumpWidget(getWidget());
         await tester.pumpAndSettle();
         final movWarning = find.text(
-          'Please ensure that the order value satisfies the minimum order value of SGD 100.00',
+          'Please ensure that the order value satisfies the minimum order value of {mov}'
+              .tr(namedArgs: {'mov': 'SGD 100.00'}),
         );
 
         expect(movWarning, findsNothing);
@@ -3505,7 +3508,8 @@ void main() {
         await tester.pumpWidget(getWidget());
         await tester.pumpAndSettle();
         final movWarning = find.text(
-          'Please ensure that the order value satisfies the minimum order value of SGD 100.00',
+          'Please ensure that the order value satisfies the minimum order value of {mov}'
+              .tr(namedArgs: {'mov': 'SGD 100.00'}),
         );
 
         expect(movWarning, findsOneWidget);
@@ -4079,7 +4083,15 @@ void main() {
           await tester.pumpAndSettle();
 
           final classicMOVErrorMessage =
-              'Please ensure that the order value satisfies the minimum order value of ${StringUtils.displayPrice(salesOrgConfig, salesOrgConfig.minOrderAmount)}';
+              'Please ensure that the order value satisfies the minimum order value of {mov}'
+                  .tr(
+            namedArgs: {
+              'mov': StringUtils.displayPrice(
+                salesOrgConfig,
+                salesOrgConfig.minOrderAmount,
+              ),
+            },
+          );
           final errorMessage =
               'Please ensure that minimum order value is at least ${StringUtils.displayPrice(salesOrgConfig, salesOrgConfig.minOrderAmount)} for ZP subtotal & ${StringUtils.displayPrice(salesOrgConfig, salesOrgConfig.mpMinOrderAmount)} for MP subtotal.';
           expect(find.text(errorMessage), findsOneWidget);
@@ -4536,7 +4548,15 @@ void main() {
           await tester.pumpAndSettle();
 
           final classicMOVErrorMessage =
-              'Please ensure that the order value satisfies the minimum order value of ${StringUtils.displayPrice(salesOrgConfig, salesOrgConfig.minOrderAmount)}';
+              'Please ensure that the order value satisfies the minimum order value of {mov}'
+                  .tr(
+            namedArgs: {
+              'mov': StringUtils.displayPrice(
+                salesOrgConfig,
+                salesOrgConfig.minOrderAmount,
+              ),
+            },
+          );
           expect(find.text(classicMOVErrorMessage), findsNothing);
         });
 
@@ -4566,7 +4586,15 @@ void main() {
           await tester.pumpAndSettle();
 
           final classicMOVErrorMessage =
-              'Please ensure that the order value satisfies the minimum order value of ${StringUtils.displayPrice(salesOrgConfig, salesOrgConfig.minOrderAmount)}';
+              'Please ensure that the order value satisfies the minimum order value of {mov}'
+                  .tr(
+            namedArgs: {
+              'mov': StringUtils.displayPrice(
+                salesOrgConfig,
+                salesOrgConfig.minOrderAmount,
+              ),
+            },
+          );
           expect(find.text(classicMOVErrorMessage), findsOneWidget);
         });
       });
