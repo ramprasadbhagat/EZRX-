@@ -1,5 +1,8 @@
+import 'dart:io';
+
 import 'package:auto_route/auto_route.dart';
 import 'package:bloc_test/bloc_test.dart';
+import 'package:dartz/dartz.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
@@ -13,19 +16,24 @@ import 'package:ezrxmobile/application/returns/return_list/view_by_request/detai
 import 'package:ezrxmobile/application/returns/return_list/view_by_request/return_list_by_request_bloc.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
+import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/domain/returns/entities/request_information.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_item.dart';
+import 'package:ezrxmobile/domain/returns/entities/return_request_attachment.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_request_information.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_request_information_header.dart';
 import 'package:ezrxmobile/domain/returns/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/return_details_by_request_local.dart';
 import 'package:ezrxmobile/presentation/core/custom_card.dart';
+import 'package:ezrxmobile/presentation/core/market_place/market_place_seller_with_logo.dart';
+import 'package:ezrxmobile/presentation/returns/return_summary_request_details/widgets/request_item_section.dart';
 import 'package:ezrxmobile/presentation/core/status_label.dart';
 import 'package:ezrxmobile/presentation/core/status_tracker.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/returns/return_summary_request_details/return_request_details.dart';
+import 'package:ezrxmobile/presentation/returns/return_summary_request_details/widgets/return_status_section.dart';
 import 'package:ezrxmobile/presentation/returns/widgets/return_item_card.dart';
 import 'package:ezrxmobile/presentation/returns/widgets/return_summary_item_price.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
@@ -97,6 +105,12 @@ void main() {
       StatusType('APPROVED'),
       StatusType('REJECTED'),
     },
+  );
+
+  final requestAttachment = ReturnRequestAttachment(
+    path: 'fake-path',
+    name: 'fake-name',
+    size: FileSize(256),
   );
 
   setUpAll(() async {
@@ -1152,5 +1166,157 @@ void main() {
         expect(find.text('Approver updated'), findsNothing);
       },
     );
+    testWidgets('Return Item section widget', (tester) async {
+      when(() => mockReturnDetailsByRequestBloc.state).thenReturn(
+        ReturnDetailsByRequestState.initial().copyWith(
+          requestInformationHeader:
+              ReturnRequestInformationHeader.empty().copyWith(
+            bapiStatus: StatusType('reviewed'),
+          ),
+        ),
+      );
+      await tester.pumpWidget(getWUT());
+      await tester.pump();
+      final statusWidget = find.byType(StatusTrackerSection);
+      expect(statusWidget, findsOneWidget);
+      final listTitle =
+          find.descendant(of: statusWidget, matching: find.byType(ListTile));
+      await tester.tap(listTitle);
+      await tester.pumpAndSettle();
+      final returnStatusWidget = find.byType(ReturnStatusSection);
+      expect(returnStatusWidget, findsOneWidget);
+      final closeBtn = find.descendant(
+        of: returnStatusWidget,
+        matching: find.byType(ElevatedButton),
+      );
+      await tester.tap(closeBtn);
+      await tester.pumpAndSettle();
+      expect(find.byType(ReturnStatusSection), findsNothing);
+    });
+    testWidgets('Show MP logo when item is from market place', (tester) async {
+      when(() => mockReturnDetailsByRequestBloc.state).thenReturn(
+        ReturnDetailsByRequestState.initial().copyWith(
+          requestInformationHeader:
+              ReturnRequestInformationHeader.empty().copyWith(
+            isMarketPlace: true,
+          ),
+        ),
+      );
+      await tester.pumpWidget(getWUT());
+      await tester.pump();
+      expect(find.byType(MarketPlaceSellerWithLogo), findsOneWidget);
+    });
+
+    testWidgets('Display failed message when Bapi failed', (tester) async {
+      when(() => mockReturnDetailsByRequestBloc.state).thenReturn(
+        ReturnDetailsByRequestState.initial().copyWith(
+          requestInformationHeader:
+              ReturnRequestInformationHeader.empty().copyWith(
+            bapiStatus: StatusType('failed'),
+          ),
+        ),
+      );
+      await tester.pumpWidget(getWUT());
+      await tester.pump();
+      expect(
+        find.text(
+          'RO creation for at least one material has failed. Please recreate your return request to proceed.',
+        ),
+        findsOne,
+      );
+    });
+
+    testWidgets('Return item section test download success', (tester) async {
+      final expectedReturnDetailsState = [
+        ReturnDetailsByRequestState.initial().copyWith(
+          downloadedAttachment: ReturnRequestAttachment.empty(),
+        ),
+        ReturnDetailsByRequestState.initial().copyWith(
+          downloadedAttachment: requestAttachment,
+          downloadFailureOrSuccessOption: none(),
+        ),
+        ReturnDetailsByRequestState.initial().copyWith(
+          downloadedAttachment: ReturnRequestAttachment.empty(),
+        ),
+        ReturnDetailsByRequestState.initial().copyWith(
+          downloadedAttachment: requestAttachment,
+          downloadFailureOrSuccessOption: optionOf(Right(File('path'))),
+        ),
+      ];
+      whenListen(
+        mockReturnDetailsByRequestBloc,
+        Stream.fromIterable(expectedReturnDetailsState),
+      );
+      await tester.pumpWidget(getWUT());
+      await tester.pumpAndSettle();
+      expect(find.text('The attachments downloaded successfully'), findsOne);
+    });
+
+    testWidgets('Return item section test download fail', (tester) async {
+      final expectedReturnDetailsState = [
+        ReturnDetailsByRequestState.initial().copyWith(
+          downloadedAttachment: ReturnRequestAttachment.empty(),
+        ),
+        ReturnDetailsByRequestState.initial().copyWith(
+          downloadedAttachment: requestAttachment,
+          downloadFailureOrSuccessOption:
+              optionOf(const Left(ApiFailure.other('fake-api-fail-message'))),
+        ),
+      ];
+      whenListen(
+        mockReturnDetailsByRequestBloc,
+        Stream.fromIterable(expectedReturnDetailsState),
+      );
+      await tester.pumpWidget(getWUT());
+      await tester.pumpAndSettle();
+      expect(
+        find.text('fake-api-fail-message'),
+        findsOne,
+      );
+    });
+    testWidgets('Download attachment function', (tester) async {
+      when(() => mockReturnDetailsByRequestBloc.state).thenReturn(
+        ReturnDetailsByRequestState.initial().copyWith(
+          requestInformation: [
+            ReturnRequestInformation.empty().copyWith(
+              attachmentUrl: [requestAttachment],
+            ),
+          ],
+        ),
+      );
+      await tester.pumpWidget(getWUT());
+      await tester.pumpAndSettle();
+      final scrollList = find.byKey(WidgetKeys.returnRequestDetailScrollList);
+      expect(
+        scrollList,
+        findsOneWidget,
+      );
+      await tester.dragUntilVisible(
+        find.byType(RequestItemSection),
+        scrollList,
+        const Offset(0, -1000),
+      );
+      await tester.pumpAndSettle();
+      final expandBtn = find.byKey(WidgetKeys.returnExpandableSection);
+      expect(expandBtn, findsOneWidget);
+      await tester.tap(expandBtn);
+      await tester.pumpAndSettle();
+      await tester.drag(scrollList, const Offset(0, -1500));
+      await tester.pumpAndSettle();
+      final downloadAttachmentBtn = find.byKey(
+        WidgetKeys.returnAttachmentDownloadButton,
+        skipOffstage: false,
+      );
+      expect(downloadAttachmentBtn, findsOneWidget);
+      await tester.tap(downloadAttachmentBtn);
+      await tester.pumpAndSettle();
+      verify(
+        () => mockReturnDetailsByRequestBloc.add(
+          ReturnDetailsByRequestEvent.downloadFile(
+            file: requestAttachment,
+          ),
+        ),
+      ).called(1);
+    });
   });
 }

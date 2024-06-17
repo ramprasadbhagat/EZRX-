@@ -29,6 +29,7 @@ class __ExpandableDetailSectionState extends State<_ExpandableDetailSection> {
       children: [
         if (widget.isExpandable)
           InkWell(
+            key: WidgetKeys.returnExpandableSection,
             onTap: () {
               setState(() {
                 isExpanded = !isExpanded;
