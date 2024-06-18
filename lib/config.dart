@@ -45,7 +45,12 @@ class Config {
       // https://my.ezrx.com/
       case Flavor.mock:
       case Flavor.uat:
-        return '$schema$env-$marketDomain$domain';
+        //TODO: Revisit to update domain of UAT market to .ezrxplus.com
+        // This check here is required for HK market because its domain is different
+        // from the rest now
+        return marketDomain == 'hk'
+            ? '$schema$env-$marketDomain.ezrxplus.com'
+            : '$schema$env-$marketDomain$domain';
     }
   }
 
