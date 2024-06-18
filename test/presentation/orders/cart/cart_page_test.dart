@@ -4,6 +4,7 @@ import 'package:ezrxmobile/application/account/customer_license_bloc/customer_li
 import 'package:ezrxmobile/application/order/po_attachment/po_attachment_bloc.dart';
 import 'package:ezrxmobile/application/order/tender_contract/tender_contract_list_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
+import 'package:ezrxmobile/domain/order/entities/delivery_info_data.dart';
 import 'package:ezrxmobile/domain/order/entities/tender_contract.dart';
 import 'package:ezrxmobile/domain/utils/string_utils.dart';
 import 'package:ezrxmobile/infrastructure/core/common/tracking_events.dart';
@@ -569,7 +570,7 @@ void main() {
   group(
     'Test Cart_Page',
     () {
-      Widget getWidget() {
+      Widget getWidget({bool isReOrder = false}) {
         return WidgetUtils.getScopedWidget(
           autoRouterMock: autoRouterMock,
           usingLocalization: true,
@@ -624,7 +625,7 @@ void main() {
               create: (context) => poAttachmentBlocMock,
             ),
           ],
-          child: const CartPage(),
+          child: CartPage(isReOrder: isReOrder),
         );
       }
 
@@ -2255,36 +2256,24 @@ void main() {
         ).called(1);
       });
       testWidgets('Should show snackbar when buy again', (tester) async {
-        final cartItem = mockCartItems.last.copyWith(
-          materialInfo: mockCartItems.last.materialInfo,
-        );
-        final cartState = CartState.initial().copyWith(
-          cartProducts: <PriceAggregate>[cartItem],
-        );
-        when(() => cartBloc.state).thenReturn(
-          cartState,
-        );
-        whenListen(
-          materialPriceBloc,
-          Stream.fromIterable([
-            MaterialPriceState.initial().copyWith(isFetching: true),
-            MaterialPriceState.initial(),
-          ]),
-        );
-        whenListen(
-          cartBloc,
-          Stream.fromIterable([
-            cartState.copyWith(isBuyAgain: true),
-            cartState,
-          ]),
-        );
-        await tester.pumpWidget(getWidget());
+        await tester.pumpWidget(getWidget(isReOrder: true));
         await tester.pumpAndSettle();
 
         expect(
           find.byKey(WidgetKeys.materialDetailsAddToCartSnackBar),
           findsOneWidget,
         );
+
+        verify(
+          () => poAttachmentBlocMock.add(const PoAttachmentEvent.initialized()),
+        ).called(1);
+        verify(
+          () => additionalDetailsBlocMock.add(
+            AdditionalDetailsEvent.initiateFromHistory(
+              data: DeliveryInfoData.empty(),
+            ),
+          ),
+        ).called(1);
       });
       //TODO: Re-check unit test
 

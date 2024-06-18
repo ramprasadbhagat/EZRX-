@@ -3,6 +3,7 @@ import 'package:collection/collection.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/order/po_attachment/po_attachment_bloc.dart';
 import 'package:ezrxmobile/application/order/tender_contract/tender_contract_list_bloc.dart';
+import 'package:ezrxmobile/domain/order/entities/delivery_info_data.dart';
 import 'package:ezrxmobile/presentation/orders/widgets/stock_info_banner.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -53,7 +54,14 @@ part 'package:ezrxmobile/presentation/orders/cart/widget/cart_page_invalid_items
 part 'package:ezrxmobile/presentation/orders/cart/widget/cart_page_price_not_available_message.dart';
 
 class CartPage extends StatefulWidget {
-  const CartPage({super.key});
+  final bool isReOrder;
+  final DeliveryInfoData? deliveryInfo;
+
+  const CartPage({
+    super.key,
+    this.isReOrder = false,
+    this.deliveryInfo,
+  });
 
   @override
   State<CartPage> createState() => _CartPageState();
@@ -111,6 +119,25 @@ class _CartPageState extends State<CartPage> {
           }
         }
       }
+    }
+
+    if (widget.isReOrder) {
+      context.read<PoAttachmentBloc>().add(
+            const PoAttachmentEvent.initialized(),
+          );
+
+      context.read<AdditionalDetailsBloc>().add(
+            AdditionalDetailsEvent.initiateFromHistory(
+              data: widget.deliveryInfo ?? DeliveryInfoData.empty(),
+            ),
+          );
+
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        CustomSnackBar(
+          key: WidgetKeys.materialDetailsAddToCartSnackBar,
+          messageText: context.tr('Available item(s) added to cart'),
+        ).show(context);
+      });
     }
     super.initState();
   }
@@ -285,23 +312,6 @@ class _CartPageState extends State<CartPage> {
                 );
           },
         ),
-        BlocListener<CartBloc, CartState>(
-          listenWhen: (previous, current) =>
-              previous.isBuyAgain != current.isBuyAgain && !current.isBuyAgain,
-          listener: (context, state) {
-            if (context.router.current.path == 'orders/cart') {
-              state.apiFailureOrSuccessOption.fold(
-                () {
-                  CustomSnackBar(
-                    key: WidgetKeys.materialDetailsAddToCartSnackBar,
-                    messageText: context.tr('Available item(s) added to cart'),
-                  ).show(context);
-                },
-                (_) {},
-              );
-            }
-          },
-        ),
       ],
       child: BlocConsumer<CartBloc, CartState>(
         listenWhen: (previous, current) {
@@ -368,8 +378,7 @@ class _CartPageState extends State<CartPage> {
                                 alignment: Alignment.center,
                                 child: LoadingAnimationWidget
                                     .horizontalRotatingDots(
-                                  key:
-                                      WidgetKeys.soaLoadingAnimationWidgetKey,
+                                  key: WidgetKeys.soaLoadingAnimationWidgetKey,
                                   color: ZPColors.red,
                                   size: 24,
                                 ),
@@ -385,8 +394,7 @@ class _CartPageState extends State<CartPage> {
                                         const CartEvent.clearCart(),
                                       );
                                   context.read<PriceOverrideBloc>().add(
-                                        const PriceOverrideEvent
-                                            .initialized(),
+                                        const PriceOverrideEvent.initialized(),
                                       );
                                 },
                               ),

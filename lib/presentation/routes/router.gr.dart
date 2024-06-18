@@ -14,13 +14,14 @@
 import 'package:auto_route/auto_route.dart' as _i78;
 import 'package:flutter/material.dart' as _i79;
 
-import '../../domain/account/entities/sales_organisation.dart' as _i86;
+import '../../domain/account/entities/sales_organisation.dart' as _i87;
 import '../../domain/account/entities/user.dart' as _i82;
 import '../../domain/announcement_info/entities/announcement_article_info.dart'
-    as _i85;
+    as _i86;
 import '../../domain/auth/value/value_objects.dart' as _i81;
-import '../../domain/banner/entities/ez_reach_banner.dart' as _i84;
-import '../../domain/order/entities/material_info.dart' as _i83;
+import '../../domain/banner/entities/ez_reach_banner.dart' as _i85;
+import '../../domain/order/entities/delivery_info_data.dart' as _i83;
+import '../../domain/order/entities/material_info.dart' as _i84;
 import '../account/admin_po_attachment/admin_po_attachment_page.dart' as _i41;
 import '../account/change_password/change_password_page.dart' as _i13;
 import '../account/contact_us/contact_us_page.dart' as _i14;
@@ -261,9 +262,15 @@ class AppRouter extends _i78.RootStackRouter {
       );
     },
     CartPageRoute.name: (routeData) {
+      final args = routeData.argsAs<CartPageRouteArgs>(
+          orElse: () => const CartPageRouteArgs());
       return _i78.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const _i18.CartPage(),
+        child: _i18.CartPage(
+          key: args.key,
+          isReOrder: args.isReOrder,
+          deliveryInfo: args.deliveryInfo,
+        ),
       );
     },
     CheckoutPageRoute.name: (routeData) {
@@ -1412,14 +1419,41 @@ class AupTCPageRouteArgs {
 
 /// generated route for
 /// [_i18.CartPage]
-class CartPageRoute extends _i78.PageRouteInfo<void> {
-  const CartPageRoute()
-      : super(
+class CartPageRoute extends _i78.PageRouteInfo<CartPageRouteArgs> {
+  CartPageRoute({
+    _i79.Key? key,
+    bool isReOrder = false,
+    _i83.DeliveryInfoData? deliveryInfo,
+  }) : super(
           CartPageRoute.name,
           path: 'orders/cart',
+          args: CartPageRouteArgs(
+            key: key,
+            isReOrder: isReOrder,
+            deliveryInfo: deliveryInfo,
+          ),
         );
 
   static const String name = 'CartPageRoute';
+}
+
+class CartPageRouteArgs {
+  const CartPageRouteArgs({
+    this.key,
+    this.isReOrder = false,
+    this.deliveryInfo,
+  });
+
+  final _i79.Key? key;
+
+  final bool isReOrder;
+
+  final _i83.DeliveryInfoData? deliveryInfo;
+
+  @override
+  String toString() {
+    return 'CartPageRouteArgs{key: $key, isReOrder: $isReOrder, deliveryInfo: $deliveryInfo}';
+  }
 }
 
 /// generated route for
@@ -2059,8 +2093,8 @@ class BundleDetailPageRoute
     extends _i78.PageRouteInfo<BundleDetailPageRouteArgs> {
   BundleDetailPageRoute({
     _i79.Key? key,
-    required _i83.MaterialInfo materialInfo,
-    _i84.EZReachBanner? banner,
+    required _i84.MaterialInfo materialInfo,
+    _i85.EZReachBanner? banner,
   }) : super(
           BundleDetailPageRoute.name,
           path: 'orders/bundle_detail_page',
@@ -2083,9 +2117,9 @@ class BundleDetailPageRouteArgs {
 
   final _i79.Key? key;
 
-  final _i83.MaterialInfo materialInfo;
+  final _i84.MaterialInfo materialInfo;
 
-  final _i84.EZReachBanner? banner;
+  final _i85.EZReachBanner? banner;
 
   @override
   String toString() {
@@ -2099,9 +2133,9 @@ class ProductDetailsPageRoute
     extends _i78.PageRouteInfo<ProductDetailsPageRouteArgs> {
   ProductDetailsPageRoute({
     _i79.Key? key,
-    required _i83.MaterialInfo materialInfo,
+    required _i84.MaterialInfo materialInfo,
     bool isEditTender = false,
-    _i84.EZReachBanner? banner,
+    _i85.EZReachBanner? banner,
   }) : super(
           ProductDetailsPageRoute.name,
           path: 'orders/material_details',
@@ -2126,11 +2160,11 @@ class ProductDetailsPageRouteArgs {
 
   final _i79.Key? key;
 
-  final _i83.MaterialInfo materialInfo;
+  final _i84.MaterialInfo materialInfo;
 
   final bool isEditTender;
 
-  final _i84.EZReachBanner? banner;
+  final _i85.EZReachBanner? banner;
 
   @override
   String toString() {
@@ -2168,7 +2202,7 @@ class AnnouncementsPageRoute extends _i78.PageRouteInfo<void> {
 class ArticleDetailsRoute extends _i78.PageRouteInfo<ArticleDetailsRouteArgs> {
   ArticleDetailsRoute({
     _i79.Key? key,
-    required _i85.AnnouncementArticleItem article,
+    required _i86.AnnouncementArticleItem article,
   }) : super(
           ArticleDetailsRoute.name,
           path: 'article_details',
@@ -2189,7 +2223,7 @@ class ArticleDetailsRouteArgs {
 
   final _i79.Key? key;
 
-  final _i85.AnnouncementArticleItem article;
+  final _i86.AnnouncementArticleItem article;
 
   @override
   String toString() {
@@ -2214,7 +2248,7 @@ class ReturnRequestDetailsRoute extends _i78.PageRouteInfo<void> {
 class SalesOrgSearchRoute extends _i78.PageRouteInfo<SalesOrgSearchRouteArgs> {
   SalesOrgSearchRoute({
     _i79.Key? key,
-    required List<_i86.SalesOrganisation> avialableSalesOrgList,
+    required List<_i87.SalesOrganisation> avialableSalesOrgList,
   }) : super(
           SalesOrgSearchRoute.name,
           path: 'salesOrg_search',
@@ -2235,7 +2269,7 @@ class SalesOrgSearchRouteArgs {
 
   final _i79.Key? key;
 
-  final List<_i86.SalesOrganisation> avialableSalesOrgList;
+  final List<_i87.SalesOrganisation> avialableSalesOrgList;
 
   @override
   String toString() {

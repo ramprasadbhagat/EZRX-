@@ -16,6 +16,7 @@ import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/order/entities/delivery_info_data.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details.dart';
 import 'package:ezrxmobile/domain/order/entities/request_counter_offer_details.dart';
@@ -41,45 +42,12 @@ import 'package:mocktail/mocktail.dart';
 
 import '../../../../../common_mock_data/customer_code_mock.dart';
 import '../../../../../common_mock_data/mock_bloc.dart';
+import '../../../../../common_mock_data/mock_other.dart';
 import '../../../../../common_mock_data/sales_org_config_mock/fake_sg_sales_org_config.dart';
 import '../../../../../common_mock_data/sales_org_config_mock/fake_my_sales_org_config.dart';
 import '../../../../../common_mock_data/sales_organsiation_mock.dart';
 import '../../../../../common_mock_data/user_mock.dart';
 import '../../../../../utils/widget_utils.dart';
-
-class ViewByOrderBlocMock extends MockBloc<ViewByOrderEvent, ViewByOrderState>
-    implements ViewByOrderBloc {}
-
-class EligibilityBlocMock extends MockBloc<EligibilityEvent, EligibilityState>
-    implements EligibilityBloc {}
-
-class MaterialPriceBlocMock
-    extends MockBloc<MaterialPriceEvent, MaterialPriceState>
-    implements MaterialPriceBloc {}
-
-class ViewByOrderDetailsBlockMock
-    extends MockBloc<ViewByOrderDetailsEvent, ViewByOrderDetailsState>
-    implements ViewByOrderDetailsBloc {}
-
-class CartBlocMock extends MockBloc<CartEvent, CartState> implements CartBloc {}
-
-class ReOrderPermissionBlocMock
-    extends MockBloc<ReOrderPermissionEvent, ReOrderPermissionState>
-    implements ReOrderPermissionBloc {}
-
-class MockMixpanelService extends Mock implements MixpanelService {}
-
-class ClevertapServiceMock extends Mock implements ClevertapService {}
-
-class ViewByItemDetailsBlocMock
-    extends MockBloc<ViewByItemDetailsEvent, ViewByItemDetailsState>
-    implements ViewByItemDetailsBloc {}
-
-class AdditionalDetailsBlocMock
-    extends MockBloc<AdditionalDetailsEvent, AdditionalDetailsState>
-    implements AdditionalDetailsBloc {}
-
-class AutoRouterMock extends Mock implements AppRouter {}
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
@@ -99,11 +67,11 @@ void main() {
   setUpAll(() async {
     locator.registerLazySingleton(() => AppRouter());
     locator.registerFactory(() => reOrderPermissionBlocMock);
-    locator.registerSingleton<MixpanelService>(MockMixpanelService());
+    locator.registerSingleton<MixpanelService>(MixpanelServiceMock());
     locator.registerSingleton<ClevertapService>(ClevertapServiceMock());
     viewByOrder = await ViewByOrderLocalDataSource().getViewByOrders();
-    locator.registerLazySingleton(() => AutoRouterMock());
-    autoRouterMock = locator<AutoRouterMock>();
+    locator.registerLazySingleton(() => AutoRouteMock());
+    autoRouterMock = locator<AutoRouteMock>();
     cartBlocMock = CartBlocMock();
     materialPriceBlocMock = MaterialPriceBlocMock();
     additionalDetailsBlocMock = AdditionalDetailsBlocMock();
@@ -112,7 +80,7 @@ void main() {
 
   setUp(() {
     mockViewByOrderBloc = ViewByOrderBlocMock();
-    mockViewByOrderDetailsBloc = ViewByOrderDetailsBlockMock();
+    mockViewByOrderDetailsBloc = ViewByOrderDetailsBlocMock();
     eligibilityBlocMock = EligibilityBlocMock();
     cartBlocMock = CartBlocMock();
     reOrderPermissionBlocMock = ReOrderPermissionBlocMock();
@@ -162,6 +130,7 @@ void main() {
     return WidgetUtils.getScopedWidget(
       autoRouterMock: autoRouterMock,
       usingLocalization: true,
+      routeName: ViewByOrdersPageRoute.name,
       providers: [
         BlocProvider<ViewByOrderBloc>(
           create: (context) => mockViewByOrderBloc,
@@ -382,6 +351,9 @@ void main() {
     });
 
     testWidgets('Buy again button go to cart page', (tester) async {
+      final deliveryInfo = DeliveryInfoData.empty();
+      when(() => autoRouterMock.isRouteActive( ViewByOrdersPageRoute.name))
+          .thenReturn(true);
       when(() => mockViewByOrderBloc.state).thenReturn(
         ViewByOrderState.initial().copyWith(
           viewByOrderList: viewByOrder
@@ -423,7 +395,12 @@ void main() {
         () => autoRouterMock.currentPath,
       ).thenAnswer((invocation) => 'orders/view_by_order_details_page');
       when(
-        () => autoRouterMock.push(const CartPageRoute()),
+        () => autoRouterMock.push(
+          CartPageRoute(
+            isReOrder: true,
+            deliveryInfo: deliveryInfo,
+          ),
+        ),
       ).thenAnswer((invocation) => Future(() => null));
       await tester.pumpWidget(getScopedWidget());
       await tester.pumpAndSettle();
@@ -449,7 +426,12 @@ void main() {
         ),
       ).called(1);
       verify(
-        () => autoRouterMock.push(const CartPageRoute()),
+        () => autoRouterMock.push(
+          CartPageRoute(
+            isReOrder: true,
+            deliveryInfo: deliveryInfo,
+          ),
+        ),
       ).called(1);
     });
 

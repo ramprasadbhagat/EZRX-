@@ -123,7 +123,7 @@ void main() {
   const fakeCreatedDate = '20230412';
   final fakePhoneNumber = PhoneNumber('19877389922');
   setUpAll(() async {
-    locator.registerLazySingleton(() => AppRouter());
+    locator.registerLazySingleton<AppRouter>(() => AutoRouteMock());
     locator.registerFactory(() => viewByOrderBlocMock);
     registerFallbackValue(CustomerCodeInfo.empty());
     registerFallbackValue(SalesOrganisation.empty());
@@ -172,6 +172,7 @@ void main() {
       autoRouterMock: autoRouterMock,
       usingLocalization: true,
       useMediaQuery: true,
+      routeName: ViewByItemDetailsPageRoute.name,
       providers: [
         BlocProvider<AuthBloc>(
           create: (context) => mockAuthBloc,
@@ -304,6 +305,9 @@ void main() {
     when(() => additionalDetailsBlocMock.state).thenReturn(
       AdditionalDetailsState.initial(),
     );
+    when(
+      () => autoRouterMock.currentPath,
+    ).thenAnswer((_) => 'orders/view_by_item_details_page');
   });
 
   group('Order History Details By Item Page', () {
@@ -1237,6 +1241,10 @@ void main() {
       );
     });
     testWidgets('Invoice Number section test salesRep', (tester) async {
+      when(
+        () =>
+            autoRouterMock.push(InvoiceDetailsPageRoute(isMarketPlace: false)),
+      ).thenAnswer((_) async => true);
       when(() => eligibilityBlocMock.state).thenReturn(
         EligibilityState.initial().copyWith(
           salesOrganisation: fakeSalesOrganisation,
@@ -1414,6 +1422,7 @@ void main() {
       );
     });
     testWidgets('Order Number section test ', (tester) async {
+      const orderRoute = ViewByOrderDetailsPageRoute();
       when(() => eligibilityBlocMock.state).thenReturn(
         EligibilityState.initial().copyWith(
           salesOrganisation: fakeSalesOrganisation,
@@ -1423,7 +1432,9 @@ void main() {
           shipToInfo: fakeShipToInfo,
         ),
       );
-
+      when(
+        () => autoRouterMock.push(orderRoute),
+      ).thenAnswer((_) => Future.value(true));
       when(() => viewByItemDetailsBlocMock.state).thenReturn(
         ViewByItemDetailsState.initial().copyWith(
           orderHistoryItem: fakeOrderHistoryItem,
@@ -1469,7 +1480,7 @@ void main() {
           ),
         ),
       ).called(1);
-      expect(autoRouterMock.current.name, ViewByOrderDetailsPageRoute.name);
+      verify(() => autoRouterMock.push(orderRoute)).called(1);
 
       final orderNoTextFinder = find.textContaining(
         fakeOrderHistoryItem.orderNumber.getOrDefaultValue(''),
@@ -2518,6 +2529,17 @@ void main() {
     testWidgets(
       ' -> Navigate to cart page when re-order success',
       (WidgetTester tester) async {
+        when(
+          () => autoRouterMock.push(
+            CartPageRoute(
+              isReOrder: true,
+              deliveryInfo: DeliveryInfoData.empty(),
+            ),
+          ),
+        ).thenAnswer((_) async => true);
+        when(
+          () => autoRouterMock.isRouteActive(ViewByItemDetailsPageRoute.name),
+        ).thenReturn(true);
         when(() => viewByItemDetailsBlocMock.state).thenReturn(
           ViewByItemDetailsState.initial().copyWith(
             orderHistoryItem: fakeOrderHistoryItem,
@@ -2534,27 +2556,24 @@ void main() {
         );
         await tester.pumpWidget(getScopedWidget());
         await tester.pumpAndSettle();
+
         verify(
-          () => additionalDetailsBlocMock.add(
-            AdditionalDetailsEvent.initiateFromHistory(
-              data: DeliveryInfoData.empty().copyWith(
-                mobileNumber: fakeOrderHistoryItem.telephoneNumber,
-              ),
+          () => autoRouterMock.push(
+            CartPageRoute(
+              isReOrder: true,
+              deliveryInfo: DeliveryInfoData.empty(),
             ),
           ),
         ).called(1);
-        verify(
-          () => poAttachmentBlocMock.add(
-            const PoAttachmentEvent.initialized(),
-          ),
-        ).called(1);
-        expect(autoRouterMock.current.name, CartPageRoute.name);
       },
     );
 
     testWidgets(
       ' -> show bottomsheet when re-order animal health item with normal product in cart',
       (WidgetTester tester) async {
+        when(
+          () => autoRouterMock.isRouteActive(ViewByItemDetailsPageRoute.name),
+        ).thenReturn(true);
         when(() => viewByItemDetailsBlocMock.state).thenReturn(
           ViewByItemDetailsState.initial().copyWith(
             orderHistoryItem: fakeOrderHistoryItem,

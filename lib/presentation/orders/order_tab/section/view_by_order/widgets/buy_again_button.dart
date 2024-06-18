@@ -13,43 +13,36 @@ class BuyAgainButton extends StatelessWidget {
       listenWhen: (previous, current) =>
           previous.isBuyAgain != current.isBuyAgain && !current.isBuyAgain,
       listener: (context, state) {
-        final reOrderPermissionOrderNumber =
-            context.read<ReOrderPermissionBloc>().state.orderNumberWillUpsert;
-        final currentRoutePath = context.router.currentPath;
-        if (viewByOrderHistoryItem.orderNumber ==
-                reOrderPermissionOrderNumber &&
-            (currentRoutePath == 'main/orders_tab/orders/view_by_orders' ||
-                currentRoutePath == 'orders/view_by_order_details_page' ||
-                currentRoutePath == 'orders/cart')) {
-          context.read<ReOrderPermissionBloc>().add(
-                ReOrderPermissionEvent.resetOrderNumberWillUpsert(
-                  orderNumberWillUpsert: OrderNumber(''),
+        if (viewByOrderHistoryItem.orderNumber !=
+                context
+                    .read<ReOrderPermissionBloc>()
+                    .state
+                    .orderNumberWillUpsert ||
+            !context.routeData.isActive) return;
+        context.read<ReOrderPermissionBloc>().add(
+              ReOrderPermissionEvent.resetOrderNumberWillUpsert(
+                orderNumberWillUpsert: OrderNumber(''),
+              ),
+            );
+
+        state.apiFailureOrSuccessOption.fold(
+          () {
+            context.router.push(
+              CartPageRoute(
+                isReOrder: true,
+                deliveryInfo: DeliveryInfoData.empty().copyWith(
+                  mobileNumber: viewByOrderHistoryItem.telephoneNumber,
                 ),
-              );
-
-          state.apiFailureOrSuccessOption.fold(
-            () {
-              context.read<PoAttachmentBloc>().add(
-                    const PoAttachmentEvent.initialized(),
-                  );
-              context.read<AdditionalDetailsBloc>().add(
-                    AdditionalDetailsEvent.initiateFromHistory(
-                      data: DeliveryInfoData.empty().copyWith(
-                        mobileNumber: viewByOrderHistoryItem.telephoneNumber,
-                      ),
-                    ),
-                  );
-
-              context.router.push(const CartPageRoute());
+              ),
+            );
+          },
+          (either) => either.fold(
+            (failure) {
+              _handleCartFailure(context, failure);
             },
-            (either) => either.fold(
-              (failure) {
-                _handleCartFailure(context, failure);
-              },
-              (_) {},
-            ),
-          );
-        }
+            (_) {},
+          ),
+        );
       },
       buildWhen: (previous, current) =>
           previous.isBuyAgain != current.isBuyAgain ||

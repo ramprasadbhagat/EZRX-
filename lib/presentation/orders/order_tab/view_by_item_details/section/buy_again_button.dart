@@ -12,24 +12,21 @@ class _BuyAgainButton extends StatelessWidget {
       listenWhen: (previous, current) =>
           previous.isBuyAgain != current.isBuyAgain && !current.isBuyAgain,
       listener: (context, state) {
+        if (!context.routeData.isActive) return;
         state.apiFailureOrSuccessOption.fold(
           () {
-            context.read<PoAttachmentBloc>().add(
-                  const PoAttachmentEvent.initialized(),
-                );
-            context.read<AdditionalDetailsBloc>().add(
-                  AdditionalDetailsEvent.initiateFromHistory(
-                    data: DeliveryInfoData.empty().copyWith(
-                      mobileNumber: context
-                          .read<ViewByItemDetailsBloc>()
-                          .state
-                          .orderHistoryItem
-                          .telephoneNumber,
-                    ),
-                  ),
-                );
-
-            context.router.push(const CartPageRoute());
+            context.router.push(
+              CartPageRoute(
+                isReOrder: true,
+                deliveryInfo: DeliveryInfoData.empty().copyWith(
+                  mobileNumber: context
+                      .read<ViewByItemDetailsBloc>()
+                      .state
+                      .orderHistoryItem
+                      .telephoneNumber,
+                ),
+              ),
+            );
           },
           (either) => either.fold(
             (failure) {

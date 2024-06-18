@@ -2,10 +2,8 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
-import 'package:ezrxmobile/application/order/additional_details/additional_details_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
-import 'package:ezrxmobile/application/order/po_attachment/po_attachment_bloc.dart';
 import 'package:ezrxmobile/application/order/re_order_permission/re_order_permission_bloc.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/order/entities/delivery_info_data.dart';
@@ -30,25 +28,14 @@ import '../../../../../../common_mock_data/mock_bloc.dart';
 import '../../../../../../common_mock_data/mock_other.dart';
 import '../../../../../../utils/widget_utils.dart';
 
-class ReOrderPermissionBlocMock
-    extends MockBloc<ReOrderPermissionEvent, ReOrderPermissionState>
-    implements ReOrderPermissionBloc {}
-
-class AdditionalDetailsBlocMock
-    extends MockBloc<AdditionalDetailsEvent, AdditionalDetailsState>
-    implements AdditionalDetailsBloc {}
-
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   WidgetsFlutterBinding.ensureInitialized();
   late ReOrderPermissionBloc reOrderPermissionBlocMock;
   late AppRouter autoRouterMock;
   late EligibilityBlocMock eligibilityBlocMock;
-  late AdditionalDetailsBloc additionalDetailsBlocMock;
   late MaterialPriceBloc materialPriceBlocMock;
   late CartBlocMock cartBlocMock;
-  late PoAttachmentBloc poAttachmentBlocMock;
-
   late MixpanelService mixpanelService;
   late ClevertapService clevertapService;
   final fakePhoneNumber = PhoneNumber('0987378484');
@@ -61,14 +48,12 @@ void main() {
     locator.registerLazySingleton<MixpanelService>(() => mixpanelService);
     locator.registerSingleton<ClevertapService>(clevertapService);
     reOrderPermissionBlocMock = ReOrderPermissionBlocMock();
-    additionalDetailsBlocMock = AdditionalDetailsBlocMock();
     materialPriceBlocMock = MaterialPriceBlocMock();
     locator.registerFactory(() => reOrderPermissionBlocMock);
     cartBlocMock = CartBlocMock();
     autoRouterMock = locator<AutoRouteMock>();
 
     eligibilityBlocMock = EligibilityBlocMock();
-    poAttachmentBlocMock = PoAttachmentBlocMock();
   });
   group('Order History Details Page', () {
     setUp(() async {
@@ -78,14 +63,9 @@ void main() {
       when(() => eligibilityBlocMock.state).thenReturn(
         EligibilityState.initial(),
       );
-      when(() => additionalDetailsBlocMock.state).thenReturn(
-        AdditionalDetailsState.initial(),
-      );
       when(() => materialPriceBlocMock.state).thenReturn(
         MaterialPriceState.initial(),
       );
-      when(() => poAttachmentBlocMock.state)
-          .thenReturn(PoAttachmentState.initial());
     });
 
     Widget getScopedWidget(OrderHistoryDetails viewByOrderHistoryItem) {
@@ -93,6 +73,7 @@ void main() {
         autoRouterMock: autoRouterMock,
         usingLocalization: true,
         useMediaQuery: false,
+        routeName: ViewByOrderDetailsPageRoute.name,
         providers: [
           BlocProvider<EligibilityBloc>(
             create: ((context) => eligibilityBlocMock),
@@ -103,14 +84,8 @@ void main() {
           BlocProvider<ReOrderPermissionBloc>(
             create: ((context) => reOrderPermissionBlocMock),
           ),
-          BlocProvider<AdditionalDetailsBloc>(
-            create: (context) => additionalDetailsBlocMock,
-          ),
           BlocProvider<MaterialPriceBloc>(
             create: (context) => materialPriceBlocMock,
-          ),
-          BlocProvider<PoAttachmentBloc>(
-            create: (context) => poAttachmentBlocMock,
           ),
         ],
         child: Material(
@@ -122,12 +97,14 @@ void main() {
     }
 
     testWidgets('Buy Again Button disable check', (tester) async {
+      final deliveryInfo = DeliveryInfoData.empty();
       when(
-        () => autoRouterMock.currentPath,
-      ).thenAnswer((invocation) => 'orders/cart');
+        () => autoRouterMock.isRouteActive(ViewByOrderDetailsPageRoute.name),
+      ).thenReturn(true);
 
       when(
-        () => autoRouterMock.push(const CartPageRoute()),
+        () => autoRouterMock
+            .push(CartPageRoute(isReOrder: true, deliveryInfo: deliveryInfo)),
       ).thenAnswer((invocation) => Future.value());
 
       whenListen(
@@ -151,14 +128,22 @@ void main() {
         ),
       ).called(1);
 
-      verify(() => autoRouterMock.push(const CartPageRoute())).called(1);
+      verify(
+        () => autoRouterMock.push(
+          CartPageRoute(
+            deliveryInfo: deliveryInfo,
+            isReOrder: true,
+          ),
+        ),
+      ).called(1);
     });
 
-    testWidgets('Buy Again Button disable check if current path is not cart',
+    testWidgets(
+        'Buy Again Button disable check if current route is not active one',
         (tester) async {
       when(
-        () => autoRouterMock.currentPath,
-      ).thenAnswer((invocation) => 'orders/checkout');
+        () => autoRouterMock.isRouteActive(ViewByOrderDetailsPageRoute.name),
+      ).thenReturn(false);
 
       whenListen(
         cartBlocMock,
@@ -184,6 +169,12 @@ void main() {
 
     testWidgets('Pass phone number to the Checkout page when reorder is valid',
         (tester) async {
+      final deliveryInfo =
+          DeliveryInfoData.empty().copyWith(mobileNumber: fakePhoneNumber);
+      when(
+        () => autoRouterMock.isRouteActive(ViewByOrderDetailsPageRoute.name),
+      ).thenReturn(true);
+
       whenListen(
         cartBlocMock,
         Stream.fromIterable([
@@ -199,7 +190,12 @@ void main() {
       ).thenAnswer((invocation) => 'orders/cart');
 
       when(
-        () => autoRouterMock.push(const CartPageRoute()),
+        () => autoRouterMock.push(
+          CartPageRoute(
+            isReOrder: true,
+            deliveryInfo: deliveryInfo,
+          ),
+        ),
       ).thenAnswer((invocation) => Future.value());
 
       await tester.pumpWidget(
@@ -218,22 +214,9 @@ void main() {
       ).called(1);
 
       verify(
-        () => additionalDetailsBlocMock.add(
-          AdditionalDetailsEvent.initiateFromHistory(
-            data: DeliveryInfoData.empty().copyWith(
-              mobileNumber: fakePhoneNumber,
-            ),
-          ),
-        ),
+        () => autoRouterMock
+            .push(CartPageRoute(deliveryInfo: deliveryInfo, isReOrder: true)),
       ).called(1);
-
-      verify(
-        () => poAttachmentBlocMock.add(
-          const PoAttachmentEvent.initialized(),
-        ),
-      ).called(2);
-
-      verify(() => autoRouterMock.push(const CartPageRoute())).called(1);
     });
 
     testWidgets('tap re-order button', (tester) async {
