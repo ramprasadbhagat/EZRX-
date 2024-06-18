@@ -89,7 +89,10 @@ class _ProductSearchSectionState extends State<_ProductSearchSection> {
                   )
                   ..add(
                     MaterialListEvent.fetch(
-                      selectedMaterialFilter: MaterialFilter.empty(),
+                      selectedMaterialFilter: context
+                          .read<MaterialFilterBloc>()
+                          .state
+                          .materialFilter,
                     ),
                   );
               },

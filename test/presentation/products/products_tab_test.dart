@@ -84,13 +84,13 @@ void main() {
     customerLicense =
         await CustomerLicenseLocalDataSource().getCustomerLicense();
     HttpOverrides.global = null;
-    
+
     TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
-      .setMockMethodCallHandler(
-          const MethodChannel('plugins.flutter.io/path_provider'),
-          (MethodCall methodCall) async {
-    return '.';
-  });
+        .setMockMethodCallHandler(
+            const MethodChannel('plugins.flutter.io/path_provider'),
+            (MethodCall methodCall) async {
+      return '.';
+    });
   });
 
   group(
@@ -914,6 +914,61 @@ void main() {
                 selectedMaterialFilter: MaterialFilter.empty().copyWith(
                   bundleOffers: true,
                 ),
+              ),
+            ),
+          ).called(1);
+        },
+      );
+
+      testWidgets(
+        '=> Test SearchAndFilter - on clear feature',
+        (tester) async {
+          final selectedFilter = MaterialFilter.empty().copyWith(
+            isCovidSelected: true,
+          );
+          const fakeMaterial = 'fake-material';
+
+          when(() => materialFilterBlocMock.state).thenReturn(
+            MaterialFilterState.initial().copyWith(
+              materialFilter: selectedFilter,
+            ),
+          );
+
+          when(() => materialListBlocMock.state).thenReturn(
+            MaterialListState.initial().copyWith(
+              searchKey: SearchKey(fakeMaterial),
+            ),
+          );
+
+          final expectedState = <MaterialListState>[
+            MaterialListState.initial().copyWith(
+              selectedMaterialFilter: selectedFilter,
+            ),
+          ];
+          whenListen(materialListBlocMock, Stream.fromIterable(expectedState));
+
+          await tester.pumpWidget(getScopedWidget());
+          await tester.pump();
+          expect(find.byType(SearchAndFilter), findsOneWidget);
+
+          final clearIcon = find.byKey(WidgetKeys.clearIconKey);
+          expect(clearIcon, findsOneWidget);
+
+          await tester.tap(clearIcon);
+          await tester.pump();
+
+          verify(
+            () => materialListBlocMock.add(
+              const MaterialListEvent.updateSearchKey(
+                searchKey: '',
+              ),
+            ),
+          ).called(1);
+
+          verify(
+            () => materialListBlocMock.add(
+              MaterialListEvent.fetch(
+                selectedMaterialFilter: selectedFilter,
               ),
             ),
           ).called(1);

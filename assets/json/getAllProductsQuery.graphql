@@ -54,6 +54,8 @@ variables:{
         "isTender": false,
         "OrderByName": "asc",
         "Language": "EN",
-        "salesDeal":[],
+        "salesDeal":[],          
+        "SearchKey": "",
+        "isCovid": false,
     }
 }

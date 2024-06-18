@@ -32,7 +32,10 @@ class SearchAndFilter extends StatelessWidget {
                       )
                       ..add(
                         MaterialListEvent.fetch(
-                          selectedMaterialFilter: state.selectedMaterialFilter,
+                          selectedMaterialFilter: context
+                              .read<MaterialListBloc>()
+                              .state
+                              .selectedMaterialFilter,
                         ),
                       );
                   },

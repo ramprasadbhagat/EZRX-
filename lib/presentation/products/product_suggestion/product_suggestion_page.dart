@@ -1,6 +1,5 @@
 import 'package:ezrxmobile/application/order/material_filter/material_filter_bloc.dart';
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
-import 'package:ezrxmobile/domain/order/entities/material_filter.dart';
 import 'package:ezrxmobile/infrastructure/core/common/clevertap_helper.dart';
 import 'package:ezrxmobile/infrastructure/core/common/tracking_events.dart';
 import 'package:ezrxmobile/infrastructure/core/common/tracking_properties.dart';

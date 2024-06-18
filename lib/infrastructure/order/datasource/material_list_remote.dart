@@ -66,7 +66,7 @@ class MaterialListRemoteDataSource {
           'ShipTo': shipToCode,
           'isGimmick': gimmickMaterial,
           'SearchKey': searchKey,
-          'isFOCMaterial': isCovidSelected,
+          'isCovid': isCovidSelected,
           if (isMarketPlace) 'isMarketPlace': isMarketPlace,
           if (isTender) 'isTender': isTender,
           if (showSampleItem) 'fromAddBonus': showSampleItem,

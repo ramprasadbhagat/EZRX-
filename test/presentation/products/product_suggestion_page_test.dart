@@ -16,6 +16,7 @@ import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/clevertap/clevertap_service.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/product_search_local.dart';
+import 'package:ezrxmobile/presentation/core/custom_search_bar.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/market_place/market_place_logo.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
@@ -172,6 +173,56 @@ void main() {
     });
 
     testWidgets(
+        '=> search material on suggestion page - verify material list fetch',
+        (tester) async {
+      final selectedFilter = MaterialFilter.empty().copyWith(
+        isCovidSelected: true,
+      );
+
+      when(() => materialFilterBlocMock.state).thenReturn(
+        MaterialFilterState.initial().copyWith(
+          materialFilter: selectedFilter,
+        ),
+      );
+
+      await tester.pumpWidget(getWidget());
+      await tester.pump();
+      final searchBar = find.byType(CustomSearchBar);
+      expect(searchBar, findsOneWidget);
+
+      await tester.tap(searchBar);
+
+      await tester.enterText(searchBar, fakeSearchText);
+      await tester.testTextInput.receiveAction(TextInputAction.done);
+      await tester.pump();
+
+      verify(
+        () => productSearchBlocMock.add(
+          ProductSearchEvent.saveSearchHistory(
+            searchKey: SearchKey.search(fakeSearchText),
+          ),
+        ),
+      ).called(1);
+
+      verify(
+        () => materialListBlocMock
+          ..add(
+            const MaterialListEvent.updateSearchKey(
+              searchKey: fakeSearchText,
+            ),
+          ),
+      ).called(1);
+
+      verify(
+        () => materialListBlocMock.add(
+          MaterialListEvent.fetch(
+            selectedMaterialFilter: selectedFilter,
+          ),
+        ),
+      ).called(1);
+    });
+
+    testWidgets(
         '=> Test to check search history when search field is empty but search history list is also empty',
         (tester) async {
       when(() => productSearchBlocMock.state)
@@ -307,7 +358,7 @@ void main() {
           expect(autoRouterMock.current.name, BundleDetailPageRoute.name);
         },
       );
-      
+
       testWidgets(
         'Test Product Search Section',
         (tester) async {
@@ -482,7 +533,7 @@ void main() {
           await tester.tap(historyTileFinder.first);
           await tester.pump();
 
-         verify(
+          verify(
             () => productSearchBlocMock.add(
               ProductSearchEvent.searchProduct(
                 searchKey: SearchKey.search(

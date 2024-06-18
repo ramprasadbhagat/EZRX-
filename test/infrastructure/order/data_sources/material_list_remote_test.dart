@@ -66,6 +66,7 @@ void main() {
         'fromAddBonus': true,
         'isMarketPlace': true,
         'isTender': true,
+        'isCovid': false,
       },
     };
     final res = json.decode(
