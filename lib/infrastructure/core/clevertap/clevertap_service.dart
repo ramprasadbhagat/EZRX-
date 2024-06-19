@@ -13,9 +13,7 @@ class ClevertapService {
   });
 
   Future<void> init() async {
-    if (config.appFlavor != Flavor.prod) {
-      await CleverTapPlugin.setDebugLevel(3);
-    }
+    await CleverTapPlugin.setDebugLevel(3);
     await createNotificationChannel();
     await setPushToken();
     if (Platform.isIOS) {
