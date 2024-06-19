@@ -123,6 +123,7 @@ class _AnnouncementInfoDetailsPageState
                               key: WidgetKeys.announcementDetailImageKey,
                               background: CustomImage(
                                 width: MediaQuery.of(context).size.width,
+                                fit: BoxFit.contain,
                                 imageUrl:
                                     state.announcementInfoDetails.thumbnail,
                                 errorWidget: const NoRecordFound(
