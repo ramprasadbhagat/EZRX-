@@ -2,6 +2,7 @@ import 'package:dartz/dartz.dart';
 
 import 'package:ezrxmobile/domain/core/product_images/entities/product_images.dart';
 import 'package:ezrxmobile/domain/order/entities/apl_product.dart';
+import 'package:ezrxmobile/domain/order/entities/combo_material_item.dart';
 import 'package:ezrxmobile/domain/order/entities/price_tier.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/product_details_repository.dart';
 import 'package:ezrxmobile/domain/order/entities/price_rule.dart';
@@ -68,6 +69,8 @@ void main() {
   late AplSimulatorOrder aplSimulatorOrder;
   late final Cart cartProducts;
   late StockInfoRepository stockInfoRepositoryMock;
+  late final List<PriceAggregate> comboUpdateCartProductList;
+  late final ComboMaterialItem comboMaterialItem;
 
   setUpAll(() async {
     WidgetsFlutterBinding.ensureInitialized();
@@ -183,6 +186,12 @@ void main() {
       ),
     ];
     cartProducts = await CartLocalDataSource().getAddedToCartProductList();
+
+    comboUpdateCartProductList = [
+      (await CartLocalDataSource().upsertCartItemsWithComboOffers()).last,
+    ];
+
+    comboMaterialItem = comboUpdateCartProductList.first.comboMaterials.last;
   });
   setUp(() {
     cartRepositoryMock = CartRepositoryMock();
@@ -1810,6 +1819,97 @@ void main() {
             config: fakeMYSalesOrgConfigs,
             shipToInfo: shipToInfo,
             customerCodeInfo: fakeCustomerCodeInfo,
+          ),
+        ],
+      );
+
+      blocTest<CartBloc, CartState>(
+        'Cart upsertCartItemsWithComboOffers update quantity test',
+        build: () => CartBloc(
+          cartRepositoryMock,
+          productDetailRepository,
+          stockInfoRepositoryMock,
+        ),
+        seed: () => CartState.initial().copyWith(
+          salesOrganisation: fakeMYSalesOrganisation,
+          config: fakeMYSalesOrgConfigs,
+          shipToInfo: shipToInfo,
+          customerCodeInfo: fakeCustomerCodeInfo,
+          cartProducts: [
+            comboUpdateCartProductList.last.copyWith(
+              comboMaterials: [comboMaterialItem],
+            ),
+          ],
+        ),
+        setUp: () {
+          when(
+            () => cartRepositoryMock.upsertCartItemsWithComboOffers(
+              salesOrganisation: fakeMYSalesOrganisation,
+              shipToInfo: shipToInfo,
+              customerCodeInfo: fakeCustomerCodeInfo,
+              products: [
+                comboUpdateCartProductList.last.copyWith(
+                  comboMaterials: [comboMaterialItem],
+                  quantity: 1,
+                ),
+              ],
+            ),
+          ).thenAnswer(
+            (_) async => Right(
+              [
+                comboUpdateCartProductList.last.copyWith(
+                  comboMaterials: [comboMaterialItem],
+                  quantity: 1,
+                ),
+              ],
+            ),
+          );
+        },
+        act: (bloc) => bloc.add(
+          CartEvent.upsertCartItemsWithComboOffers(
+            priceAggregates: [
+              comboUpdateCartProductList.last.copyWith(
+                comboMaterials: [comboMaterialItem],
+                quantity: 1,
+              ),
+            ],
+            isDeleteCombo: false,
+          ),
+        ),
+        expect: () => [
+          CartState.initial().copyWith(
+            salesOrganisation: fakeMYSalesOrganisation,
+            config: fakeMYSalesOrgConfigs,
+            shipToInfo: shipToInfo,
+            customerCodeInfo: fakeCustomerCodeInfo,
+            apiFailureOrSuccessOption: none(),
+            isUpserting: true,
+            isDeleteCombo: false,
+            cartProducts: [
+              comboUpdateCartProductList.last.copyWith(
+                comboMaterials: [comboMaterialItem],
+              ),
+            ],
+          ),
+          CartState.initial().copyWith(
+            cartProducts: [
+              comboUpdateCartProductList.last.copyWith(
+                quantity: 1,
+                comboMaterials: [
+                  comboMaterialItem.copyWith(
+                    salesOrgConfig: fakeMYSalesOrgConfigs,
+                  ),
+                ],
+                salesOrgConfig: fakeMYSalesOrgConfigs,
+              ),
+            ],
+            salesOrganisation: fakeMYSalesOrganisation,
+            isDeleteCombo: false,
+            config: fakeMYSalesOrgConfigs,
+            shipToInfo: shipToInfo,
+            customerCodeInfo: fakeCustomerCodeInfo,
+            apiFailureOrSuccessOption: none(),
+            isUpserting: false,
           ),
         ],
       );

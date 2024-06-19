@@ -396,7 +396,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
             isUpserting: true,
           ),
         );
-        
+
         final failureOrSuccess = await repository.upsertCartWithBonus(
           customerCodeInfo: state.customerCodeInfo,
           salesOrganisation: state.salesOrganisation,
@@ -1187,6 +1187,11 @@ class CartBloc extends Bloc<CartEvent, CartState> {
                 priceAggregate.price.zdp5RemainingQuota.intValue,
               )
             : false,
+        comboMaterials: cartProduct.comboMaterials
+            .map(
+              (item) => item.copyWith(salesOrgConfig: salesOrganisationConfigs),
+            )
+            .toList(),
       );
     }).toList();
   }
