@@ -38,6 +38,7 @@ class User with _$User {
     required List<Language> supportedLanguages,
     required PhoneNumber mobileNumber,
     required MarketPlaceTnCAcceptance acceptMPTC,
+    required bool isFirstLogin,
   }) = _User;
 
   factory User.empty() => User(
@@ -67,6 +68,7 @@ class User with _$User {
         supportedLanguages: <Language>[],
         mobileNumber: PhoneNumber(''),
         acceptMPTC: MarketPlaceTnCAcceptance(''),
+        isFirstLogin: false,
       );
 
   bool get userCanCreateOrder {

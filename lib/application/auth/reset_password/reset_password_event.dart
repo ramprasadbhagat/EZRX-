@@ -22,6 +22,8 @@ class ResetPasswordEvent with _$ResetPasswordEvent {
   }) = _Initialize;
 
   const factory ResetPasswordEvent.resetPassword() = _ResetPasswords;
+  const factory ResetPasswordEvent.changePasswordForFirstTime() =
+      _ChangePasswordForFirstTime;
 }
 
 enum PasswordFieldType {

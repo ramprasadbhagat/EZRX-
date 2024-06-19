@@ -190,4 +190,15 @@ class AuthQueryMutation {
         }
     ''';
   }
+
+  String changePasswordForFirstTime() {
+    return '''
+       mutation (\$newPassword: String!) {
+  changePasswordFirstTime(newPassword: \$newPassword) {
+    success
+    status
+  }
+}
+    ''';
+  }
 }

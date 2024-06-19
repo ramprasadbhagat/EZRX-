@@ -37,6 +37,7 @@
          "mobileNumber": "-",
          "countryCode": "-",
          "acceptTC": true,
+         "isFirstLogin": false,
          "optIn": false,
          "optInTimestamp": "",
          "hasPriceOverride": false,

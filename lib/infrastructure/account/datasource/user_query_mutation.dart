@@ -44,6 +44,7 @@ class UserQueryMutation {
             mobileNumber
             countryCode
             acceptTC
+            isFirstLogin
             optIn
             optInTimestamp
             hasPriceOverride

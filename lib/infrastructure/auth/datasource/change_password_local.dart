@@ -21,4 +21,14 @@ class ChangePasswordLocalDataSource {
     return ResetPasswordDto.fromJson(data['data']['resetPasswordV3'])
         .toDomain();
   }
+
+  Future<ResetPassword> changePasswordForFirstTime() async {
+    final data = json.decode(
+      await rootBundle
+          .loadString('assets/json/changePasswordFirstTimeResponse.json'),
+    );
+
+    return ResetPasswordDto.fromJson(data['data']['changePasswordFirstTime'])
+        .toDomain();
+  }
 }

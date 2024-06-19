@@ -58,6 +58,7 @@ _$UserDtoImpl _$$UserDtoImplFromJson(Map<String, dynamic> json) =>
           [],
       mobileNumber: json['MobileNumber'] as String? ?? '',
       acceptMPTC: handleMarketPlaceTnCAcceptance(json, 'acceptMPTC') as String,
+      isFirstLogin: json['isFirstLogin'] as bool? ?? false,
     );
 
 Map<String, dynamic> _$$UserDtoImplToJson(_$UserDtoImpl instance) =>
@@ -90,4 +91,5 @@ Map<String, dynamic> _$$UserDtoImplToJson(_$UserDtoImpl instance) =>
       'supportedLanguages': instance.supportedLanguages,
       'MobileNumber': instance.mobileNumber,
       'acceptMPTC': instance.acceptMPTC,
+      'isFirstLogin': instance.isFirstLogin,
     };

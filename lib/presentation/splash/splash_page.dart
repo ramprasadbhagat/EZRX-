@@ -213,7 +213,7 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                         .state
                         .resetPasswordCred
                         .isNotEmpty)
-                      const ResetPasswordPageRoute(),
+                      ResetPasswordPageRoute(),
                   ],
                 );
               },
@@ -291,13 +291,28 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
             );
           },
         ),
+        BlocListener<UserBloc, UserState>(
+          listenWhen: (previous, current) =>
+              previous.showResetPasswordScreen !=
+                  current.showResetPasswordScreen &&
+              current.showResetPasswordScreen,
+          listener: (context, state) {
+            context.router.push(
+              ResetPasswordPageRoute(isFirstLogin: true),
+            );
+          },
+        ),
         BlocListener<IntroBloc, IntroState>(
           listenWhen: (previous, current) =>
               previous.isLoading != current.isLoading && !current.isLoading,
           listener: (context, state) {
             final showTermsAndCondition =
                 context.read<UserBloc>().state.showTermsAndConditionDialog;
-            if (showTermsAndCondition || !state.isAppFirstLaunch) return;
+            final showResetPasswordScreen =
+                context.read<UserBloc>().state.showResetPasswordScreen;
+            if (showTermsAndCondition ||
+                !state.isAppFirstLaunch ||
+                showResetPasswordScreen) return;
 
             context.router.push(const IntroPageRoute());
           },
@@ -1045,7 +1060,7 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                     .haveSelectedSalesOrganisation) {
                   context.read<AuthBloc>().add(const AuthEvent.logout());
                 } else {
-                  context.router.push(const ResetPasswordPageRoute());
+                  context.router.push(ResetPasswordPageRoute());
                 }
               },
             );
@@ -1110,9 +1125,12 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
               previous.isLoadingCustomerCode != current.isLoadingCustomerCode &&
               !current.isLoadingCustomerCode,
           listener: (context, state) {
-            final appFirstLaunch =
-                context.read<IntroBloc>().state.isAppFirstLaunch ||
-                    context.read<UserBloc>().state.showTermsAndConditionDialog;
+            final appFirstLaunch = context
+                    .read<IntroBloc>()
+                    .state
+                    .isAppFirstLaunch ||
+                context.read<UserBloc>().state.showTermsAndConditionDialog ||
+                context.read<UserBloc>().state.showResetPasswordScreen;
 
             final mandatoryShipTo = !state.preSelectShipTo && !appFirstLaunch;
 

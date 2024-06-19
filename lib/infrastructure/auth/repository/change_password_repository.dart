@@ -39,8 +39,7 @@ class ChangePasswordRepository implements IChangePasswordRepository {
       }
     }
     try {
-      final resetPasswordEntities =
-          await remoteDataSource.changePassword(
+      final resetPasswordEntities = await remoteDataSource.changePassword(
         user.username.getOrCrash(),
         oldPassword.getOrCrash(),
         newPassword.getOrCrash(),
@@ -71,6 +70,32 @@ class ChangePasswordRepository implements IChangePasswordRepository {
       final resetPasswordEntities = await remoteDataSource.resetPassword(
         username: username.getOrCrash(),
         resetPasswordToken: token.getOrCrash(),
+        newPassword: newPassword.getOrCrash(),
+      );
+
+      return Right(resetPasswordEntities);
+    } catch (e) {
+      return Left(FailureHandler.handleFailure(e));
+    }
+  }
+
+  @override
+  Future<Either<ApiFailure, ResetPassword>> changePasswordForFirstTime({
+    required Password newPassword,
+  }) async {
+    if (config.appFlavor == Flavor.mock) {
+      try {
+        final changePasswordForFirstTimeEntities =
+            await localDataSource.changePasswordForFirstTime();
+
+        return Right(changePasswordForFirstTimeEntities);
+      } catch (e) {
+        return Left(FailureHandler.handleFailure(e));
+      }
+    }
+    try {
+      final resetPasswordEntities =
+          await remoteDataSource.changePasswordForFirstTime(
         newPassword: newPassword.getOrCrash(),
       );
 

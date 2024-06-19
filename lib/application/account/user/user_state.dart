@@ -33,4 +33,10 @@ class UserState with _$UserState {
 
   bool get showTermsAndConditionDialog =>
       isNotEmpty && !isLoginOnBehalf && !user.acceptPrivacyPolicy;
+
+  bool get showResetPasswordScreen =>
+      isNotEmpty &&
+      !isLoginOnBehalf &&
+      user.acceptPrivacyPolicy &&
+      user.isFirstLogin;
 }

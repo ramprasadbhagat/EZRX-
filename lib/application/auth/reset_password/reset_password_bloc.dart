@@ -169,6 +169,41 @@ class ResetPasswordBloc extends Bloc<ResetPasswordEvent, ResetPasswordState> {
           (resetPassword) => add(const _Clear()),
         );
       },
+      changePasswordForFirstTime: (e) async {
+        final isFormValidated =
+            state.newPassword.isValid() && state.confirmPassword.isValid();
+
+        if (!isFormValidated) {
+          emit(
+            state.copyWith(showErrorMessages: true),
+          );
+
+          return;
+        }
+        emit(
+          state.copyWith(
+            isSubmitting: true,
+            passwordResetFailureOrSuccessOption: none(),
+            showErrorMessages: false,
+          ),
+        );
+
+        final failureOrSuccess =
+            await changePasswordRepository.changePasswordForFirstTime(
+          newPassword: state.newPassword,
+        );
+        failureOrSuccess.fold(
+          (failure) {
+            emit(
+              state.copyWith(
+                passwordResetFailureOrSuccessOption: optionOf(failureOrSuccess),
+                isSubmitting: false,
+              ),
+            );
+          },
+          (resetPassword) => add(const _Clear()),
+        );
+      },
       initialize: (_Initialize e) async => emit(
         state.copyWith(resetPasswordCred: e.resetPasswordCred, user: e.user),
       ),

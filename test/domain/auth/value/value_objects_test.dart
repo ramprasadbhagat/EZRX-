@@ -837,7 +837,7 @@ void main() {
     test(
       'should return error message when the confrim password should same as new password',
       () async {
-        const errorMessage = 'Password mismatch';
+        const errorMessage = 'Please make sure your passwords match';
         const newPassword = 'Auron@2022';
         const confirmPassword = 'Auron@2022!';
         final password = Password.confirm(confirmPassword, newPassword);

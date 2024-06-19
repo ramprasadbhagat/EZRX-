@@ -17,4 +17,8 @@ abstract class IChangePasswordRepository {
     required StringValue token,
     required Username username,
   });
+
+  Future<Either<ApiFailure, ResetPassword>> changePasswordForFirstTime({
+    required Password newPassword,
+  });
 }

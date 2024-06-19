@@ -82,6 +82,33 @@ class ChangePasswordRemoteDataSource {
     });
   }
 
+  Future<ResetPassword> changePasswordForFirstTime({
+    required String newPassword,
+  }) async {
+    return await dataSourceExceptionHandler.handle(() async {
+      final res = await httpService.request(
+        method: 'POST',
+        url: '${config.urlConstants}license',
+        data: jsonEncode(
+          {
+            'query': authQueryMutation.changePasswordForFirstTime(),
+            'variables': {
+              'newPassword': newPassword,
+            },
+          },
+        ),
+      );
+
+      _exceptionChecker(
+        res: res,
+      );
+
+      return ResetPasswordDto.fromJson(
+        res.data['data']['changePasswordFirstTime'],
+      ).toDomain();
+    });
+  }
+
   void _exceptionChecker({required Response<dynamic> res}) {
     if (dataSourceExceptionHandler.isServerResponseError(res: res)) {
       throw ServerException(message: res.data['errors'][0]['message']);

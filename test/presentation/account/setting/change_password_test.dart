@@ -236,7 +236,7 @@ void main() {
     //   expect(newPasswordText, findsWidgets);
     //   expect(confirmPasswordText, findsWidgets);
 
-    //   final mismatchErrorMessage = find.text('Password mismatch'.tr());
+    //   final mismatchErrorMessage = find.text('Please make sure your passwords match'.tr());
     //   final validationMessageFinder = find.descendant(
     //       of: confirmPasswordTextField, matching: mismatchErrorMessage);
     //   expect(validationMessageFinder, findsNothing);

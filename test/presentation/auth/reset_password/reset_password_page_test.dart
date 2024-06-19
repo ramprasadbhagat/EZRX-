@@ -155,12 +155,6 @@ void main() {
       whenListen(resetPasswordBlocMock, Stream.fromIterable(expectedStates));
       await tester.pumpWidget(getWidget());
       await tester.pumpAndSettle();
-      await tester.dragUntilVisible(
-        find.byType(PasswordValidation),
-        find.byType(ListView),
-        const Offset(0.0, -500),
-      );
-      await tester.pumpAndSettle();
       await tester.pump();
       final warning = find.byKey(WidgetKeys.errorRequirementsFillAllField);
       final confirmPasswordEmptyWarning =
@@ -168,6 +162,12 @@ void main() {
 
       expect(warning, findsOneWidget);
       expect(confirmPasswordEmptyWarning, findsOneWidget);
+      await tester.dragUntilVisible(
+        find.byType(PasswordValidation),
+        find.byType(ListView),
+        const Offset(0.0, -500),
+      );
+      await tester.pumpAndSettle();
 
       final resetPasswordButton = find.byKey(WidgetKeys.resetPasswordButton);
 
@@ -199,7 +199,8 @@ void main() {
         const Offset(0.0, -500),
       );
       await tester.pumpAndSettle();
-      final passwordMismatchWarning = find.text('Password mismatch');
+      final passwordMismatchWarning =
+          find.text('Please make sure your passwords match');
       final checkIcon = find.byIcon(Icons.check);
 
       expect(passwordMismatchWarning, findsOneWidget);
@@ -259,7 +260,8 @@ void main() {
         const Offset(0.0, -500),
       );
       await tester.pumpAndSettle();
-      final passwordMismatchWarning = find.text('Password mismatch');
+      final passwordMismatchWarning =
+          find.text('Please make sure your passwords match');
       final checkIcon = find.byIcon(Icons.check);
       final warning = find.byKey(WidgetKeys.errorRequirementsFillAllField);
 
@@ -307,8 +309,8 @@ void main() {
           ResetPasswordState.initial(),
         ];
         when(
-          () => autoRouterMock.push(
-            const ResetPasswordSuccessRoute(),
+          () => autoRouterMock.replace(
+            ResetPasswordSuccessRoute(),
           ),
         ).thenAnswer(
           (_) => Future.value(),
@@ -317,8 +319,8 @@ void main() {
         await tester.pumpWidget(getWidget());
         await tester.pumpAndSettle();
         verify(
-          () => autoRouterMock.push(
-            const ResetPasswordSuccessRoute(),
+          () => autoRouterMock.replace(
+            ResetPasswordSuccessRoute(),
           ),
         ).called(1);
       },

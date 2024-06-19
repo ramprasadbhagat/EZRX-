@@ -3,7 +3,8 @@ part of 'package:ezrxmobile/presentation/auth/reset_password/reset_password_page
 final _formKey = GlobalKey<FormState>();
 
 class _ResetPasswordForm extends StatelessWidget {
-  const _ResetPasswordForm();
+  final bool isFirstLogin;
+  const _ResetPasswordForm({this.isFirstLogin = false});
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +14,11 @@ class _ResetPasswordForm extends StatelessWidget {
           !current.isSubmitting,
       listener: (context, state) => {
         state.passwordResetFailureOrSuccessOption.fold(
-          () => context.router.push(const ResetPasswordSuccessRoute()),
+          () => context.router.replace(
+            ResetPasswordSuccessRoute(
+              isFirstLogin: isFirstLogin,
+            ),
+          ),
           (either) => either.fold(
             (failure) => ErrorUtils.handleApiFailure(context, failure),
             (_) {},

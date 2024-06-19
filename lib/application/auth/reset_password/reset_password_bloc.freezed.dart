@@ -27,6 +27,7 @@ mixin _$ResetPasswordEvent {
     required TResult Function(User user, ResetPasswordCred resetPasswordCred)
         initialize,
     required TResult Function() resetPassword,
+    required TResult Function() changePasswordForFirstTime,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -40,6 +41,7 @@ mixin _$ResetPasswordEvent {
     TResult? Function(User user, ResetPasswordCred resetPasswordCred)?
         initialize,
     TResult? Function()? resetPassword,
+    TResult? Function()? changePasswordForFirstTime,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -53,6 +55,7 @@ mixin _$ResetPasswordEvent {
     TResult Function(User user, ResetPasswordCred resetPasswordCred)?
         initialize,
     TResult Function()? resetPassword,
+    TResult Function()? changePasswordForFirstTime,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -65,6 +68,8 @@ mixin _$ResetPasswordEvent {
     required TResult Function(_Clear value) clear,
     required TResult Function(_Initialize value) initialize,
     required TResult Function(_ResetPasswords value) resetPassword,
+    required TResult Function(_ChangePasswordForFirstTime value)
+        changePasswordForFirstTime,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -75,6 +80,8 @@ mixin _$ResetPasswordEvent {
     TResult? Function(_Clear value)? clear,
     TResult? Function(_Initialize value)? initialize,
     TResult? Function(_ResetPasswords value)? resetPassword,
+    TResult? Function(_ChangePasswordForFirstTime value)?
+        changePasswordForFirstTime,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -85,6 +92,8 @@ mixin _$ResetPasswordEvent {
     TResult Function(_Clear value)? clear,
     TResult Function(_Initialize value)? initialize,
     TResult Function(_ResetPasswords value)? resetPassword,
+    TResult Function(_ChangePasswordForFirstTime value)?
+        changePasswordForFirstTime,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -192,6 +201,7 @@ class _$PasswordVisibilityImpl implements _PasswordVisibility {
     required TResult Function(User user, ResetPasswordCred resetPasswordCred)
         initialize,
     required TResult Function() resetPassword,
+    required TResult Function() changePasswordForFirstTime,
   }) {
     return togglePasswordVisibility(fieldType, toggleValue);
   }
@@ -208,6 +218,7 @@ class _$PasswordVisibilityImpl implements _PasswordVisibility {
     TResult? Function(User user, ResetPasswordCred resetPasswordCred)?
         initialize,
     TResult? Function()? resetPassword,
+    TResult? Function()? changePasswordForFirstTime,
   }) {
     return togglePasswordVisibility?.call(fieldType, toggleValue);
   }
@@ -224,6 +235,7 @@ class _$PasswordVisibilityImpl implements _PasswordVisibility {
     TResult Function(User user, ResetPasswordCred resetPasswordCred)?
         initialize,
     TResult Function()? resetPassword,
+    TResult Function()? changePasswordForFirstTime,
     required TResult orElse(),
   }) {
     if (togglePasswordVisibility != null) {
@@ -242,6 +254,8 @@ class _$PasswordVisibilityImpl implements _PasswordVisibility {
     required TResult Function(_Clear value) clear,
     required TResult Function(_Initialize value) initialize,
     required TResult Function(_ResetPasswords value) resetPassword,
+    required TResult Function(_ChangePasswordForFirstTime value)
+        changePasswordForFirstTime,
   }) {
     return togglePasswordVisibility(this);
   }
@@ -255,6 +269,8 @@ class _$PasswordVisibilityImpl implements _PasswordVisibility {
     TResult? Function(_Clear value)? clear,
     TResult? Function(_Initialize value)? initialize,
     TResult? Function(_ResetPasswords value)? resetPassword,
+    TResult? Function(_ChangePasswordForFirstTime value)?
+        changePasswordForFirstTime,
   }) {
     return togglePasswordVisibility?.call(this);
   }
@@ -268,6 +284,8 @@ class _$PasswordVisibilityImpl implements _PasswordVisibility {
     TResult Function(_Clear value)? clear,
     TResult Function(_Initialize value)? initialize,
     TResult Function(_ResetPasswords value)? resetPassword,
+    TResult Function(_ChangePasswordForFirstTime value)?
+        changePasswordForFirstTime,
     required TResult orElse(),
   }) {
     if (togglePasswordVisibility != null) {
@@ -374,6 +392,7 @@ class _$PasswordTextOnChangeImpl implements _PasswordTextOnChange {
     required TResult Function(User user, ResetPasswordCred resetPasswordCred)
         initialize,
     required TResult Function() resetPassword,
+    required TResult Function() changePasswordForFirstTime,
   }) {
     return onTextChange(fieldType, newValue);
   }
@@ -390,6 +409,7 @@ class _$PasswordTextOnChangeImpl implements _PasswordTextOnChange {
     TResult? Function(User user, ResetPasswordCred resetPasswordCred)?
         initialize,
     TResult? Function()? resetPassword,
+    TResult? Function()? changePasswordForFirstTime,
   }) {
     return onTextChange?.call(fieldType, newValue);
   }
@@ -406,6 +426,7 @@ class _$PasswordTextOnChangeImpl implements _PasswordTextOnChange {
     TResult Function(User user, ResetPasswordCred resetPasswordCred)?
         initialize,
     TResult Function()? resetPassword,
+    TResult Function()? changePasswordForFirstTime,
     required TResult orElse(),
   }) {
     if (onTextChange != null) {
@@ -424,6 +445,8 @@ class _$PasswordTextOnChangeImpl implements _PasswordTextOnChange {
     required TResult Function(_Clear value) clear,
     required TResult Function(_Initialize value) initialize,
     required TResult Function(_ResetPasswords value) resetPassword,
+    required TResult Function(_ChangePasswordForFirstTime value)
+        changePasswordForFirstTime,
   }) {
     return onTextChange(this);
   }
@@ -437,6 +460,8 @@ class _$PasswordTextOnChangeImpl implements _PasswordTextOnChange {
     TResult? Function(_Clear value)? clear,
     TResult? Function(_Initialize value)? initialize,
     TResult? Function(_ResetPasswords value)? resetPassword,
+    TResult? Function(_ChangePasswordForFirstTime value)?
+        changePasswordForFirstTime,
   }) {
     return onTextChange?.call(this);
   }
@@ -450,6 +475,8 @@ class _$PasswordTextOnChangeImpl implements _PasswordTextOnChange {
     TResult Function(_Clear value)? clear,
     TResult Function(_Initialize value)? initialize,
     TResult Function(_ResetPasswords value)? resetPassword,
+    TResult Function(_ChangePasswordForFirstTime value)?
+        changePasswordForFirstTime,
     required TResult orElse(),
   }) {
     if (onTextChange != null) {
@@ -518,6 +545,7 @@ class _$ChangePasswordImpl implements _ChangePassword {
     required TResult Function(User user, ResetPasswordCred resetPasswordCred)
         initialize,
     required TResult Function() resetPassword,
+    required TResult Function() changePasswordForFirstTime,
   }) {
     return changePassword();
   }
@@ -534,6 +562,7 @@ class _$ChangePasswordImpl implements _ChangePassword {
     TResult? Function(User user, ResetPasswordCred resetPasswordCred)?
         initialize,
     TResult? Function()? resetPassword,
+    TResult? Function()? changePasswordForFirstTime,
   }) {
     return changePassword?.call();
   }
@@ -550,6 +579,7 @@ class _$ChangePasswordImpl implements _ChangePassword {
     TResult Function(User user, ResetPasswordCred resetPasswordCred)?
         initialize,
     TResult Function()? resetPassword,
+    TResult Function()? changePasswordForFirstTime,
     required TResult orElse(),
   }) {
     if (changePassword != null) {
@@ -568,6 +598,8 @@ class _$ChangePasswordImpl implements _ChangePassword {
     required TResult Function(_Clear value) clear,
     required TResult Function(_Initialize value) initialize,
     required TResult Function(_ResetPasswords value) resetPassword,
+    required TResult Function(_ChangePasswordForFirstTime value)
+        changePasswordForFirstTime,
   }) {
     return changePassword(this);
   }
@@ -581,6 +613,8 @@ class _$ChangePasswordImpl implements _ChangePassword {
     TResult? Function(_Clear value)? clear,
     TResult? Function(_Initialize value)? initialize,
     TResult? Function(_ResetPasswords value)? resetPassword,
+    TResult? Function(_ChangePasswordForFirstTime value)?
+        changePasswordForFirstTime,
   }) {
     return changePassword?.call(this);
   }
@@ -594,6 +628,8 @@ class _$ChangePasswordImpl implements _ChangePassword {
     TResult Function(_Clear value)? clear,
     TResult Function(_Initialize value)? initialize,
     TResult Function(_ResetPasswords value)? resetPassword,
+    TResult Function(_ChangePasswordForFirstTime value)?
+        changePasswordForFirstTime,
     required TResult orElse(),
   }) {
     if (changePassword != null) {
@@ -654,6 +690,7 @@ class _$ClearImpl implements _Clear {
     required TResult Function(User user, ResetPasswordCred resetPasswordCred)
         initialize,
     required TResult Function() resetPassword,
+    required TResult Function() changePasswordForFirstTime,
   }) {
     return clear();
   }
@@ -670,6 +707,7 @@ class _$ClearImpl implements _Clear {
     TResult? Function(User user, ResetPasswordCred resetPasswordCred)?
         initialize,
     TResult? Function()? resetPassword,
+    TResult? Function()? changePasswordForFirstTime,
   }) {
     return clear?.call();
   }
@@ -686,6 +724,7 @@ class _$ClearImpl implements _Clear {
     TResult Function(User user, ResetPasswordCred resetPasswordCred)?
         initialize,
     TResult Function()? resetPassword,
+    TResult Function()? changePasswordForFirstTime,
     required TResult orElse(),
   }) {
     if (clear != null) {
@@ -704,6 +743,8 @@ class _$ClearImpl implements _Clear {
     required TResult Function(_Clear value) clear,
     required TResult Function(_Initialize value) initialize,
     required TResult Function(_ResetPasswords value) resetPassword,
+    required TResult Function(_ChangePasswordForFirstTime value)
+        changePasswordForFirstTime,
   }) {
     return clear(this);
   }
@@ -717,6 +758,8 @@ class _$ClearImpl implements _Clear {
     TResult? Function(_Clear value)? clear,
     TResult? Function(_Initialize value)? initialize,
     TResult? Function(_ResetPasswords value)? resetPassword,
+    TResult? Function(_ChangePasswordForFirstTime value)?
+        changePasswordForFirstTime,
   }) {
     return clear?.call(this);
   }
@@ -730,6 +773,8 @@ class _$ClearImpl implements _Clear {
     TResult Function(_Clear value)? clear,
     TResult Function(_Initialize value)? initialize,
     TResult Function(_ResetPasswords value)? resetPassword,
+    TResult Function(_ChangePasswordForFirstTime value)?
+        changePasswordForFirstTime,
     required TResult orElse(),
   }) {
     if (clear != null) {
@@ -844,6 +889,7 @@ class _$InitializeImpl implements _Initialize {
     required TResult Function(User user, ResetPasswordCred resetPasswordCred)
         initialize,
     required TResult Function() resetPassword,
+    required TResult Function() changePasswordForFirstTime,
   }) {
     return initialize(user, resetPasswordCred);
   }
@@ -860,6 +906,7 @@ class _$InitializeImpl implements _Initialize {
     TResult? Function(User user, ResetPasswordCred resetPasswordCred)?
         initialize,
     TResult? Function()? resetPassword,
+    TResult? Function()? changePasswordForFirstTime,
   }) {
     return initialize?.call(user, resetPasswordCred);
   }
@@ -876,6 +923,7 @@ class _$InitializeImpl implements _Initialize {
     TResult Function(User user, ResetPasswordCred resetPasswordCred)?
         initialize,
     TResult Function()? resetPassword,
+    TResult Function()? changePasswordForFirstTime,
     required TResult orElse(),
   }) {
     if (initialize != null) {
@@ -894,6 +942,8 @@ class _$InitializeImpl implements _Initialize {
     required TResult Function(_Clear value) clear,
     required TResult Function(_Initialize value) initialize,
     required TResult Function(_ResetPasswords value) resetPassword,
+    required TResult Function(_ChangePasswordForFirstTime value)
+        changePasswordForFirstTime,
   }) {
     return initialize(this);
   }
@@ -907,6 +957,8 @@ class _$InitializeImpl implements _Initialize {
     TResult? Function(_Clear value)? clear,
     TResult? Function(_Initialize value)? initialize,
     TResult? Function(_ResetPasswords value)? resetPassword,
+    TResult? Function(_ChangePasswordForFirstTime value)?
+        changePasswordForFirstTime,
   }) {
     return initialize?.call(this);
   }
@@ -920,6 +972,8 @@ class _$InitializeImpl implements _Initialize {
     TResult Function(_Clear value)? clear,
     TResult Function(_Initialize value)? initialize,
     TResult Function(_ResetPasswords value)? resetPassword,
+    TResult Function(_ChangePasswordForFirstTime value)?
+        changePasswordForFirstTime,
     required TResult orElse(),
   }) {
     if (initialize != null) {
@@ -988,6 +1042,7 @@ class _$ResetPasswordsImpl implements _ResetPasswords {
     required TResult Function(User user, ResetPasswordCred resetPasswordCred)
         initialize,
     required TResult Function() resetPassword,
+    required TResult Function() changePasswordForFirstTime,
   }) {
     return resetPassword();
   }
@@ -1004,6 +1059,7 @@ class _$ResetPasswordsImpl implements _ResetPasswords {
     TResult? Function(User user, ResetPasswordCred resetPasswordCred)?
         initialize,
     TResult? Function()? resetPassword,
+    TResult? Function()? changePasswordForFirstTime,
   }) {
     return resetPassword?.call();
   }
@@ -1020,6 +1076,7 @@ class _$ResetPasswordsImpl implements _ResetPasswords {
     TResult Function(User user, ResetPasswordCred resetPasswordCred)?
         initialize,
     TResult Function()? resetPassword,
+    TResult Function()? changePasswordForFirstTime,
     required TResult orElse(),
   }) {
     if (resetPassword != null) {
@@ -1038,6 +1095,8 @@ class _$ResetPasswordsImpl implements _ResetPasswords {
     required TResult Function(_Clear value) clear,
     required TResult Function(_Initialize value) initialize,
     required TResult Function(_ResetPasswords value) resetPassword,
+    required TResult Function(_ChangePasswordForFirstTime value)
+        changePasswordForFirstTime,
   }) {
     return resetPassword(this);
   }
@@ -1051,6 +1110,8 @@ class _$ResetPasswordsImpl implements _ResetPasswords {
     TResult? Function(_Clear value)? clear,
     TResult? Function(_Initialize value)? initialize,
     TResult? Function(_ResetPasswords value)? resetPassword,
+    TResult? Function(_ChangePasswordForFirstTime value)?
+        changePasswordForFirstTime,
   }) {
     return resetPassword?.call(this);
   }
@@ -1064,6 +1125,8 @@ class _$ResetPasswordsImpl implements _ResetPasswords {
     TResult Function(_Clear value)? clear,
     TResult Function(_Initialize value)? initialize,
     TResult Function(_ResetPasswords value)? resetPassword,
+    TResult Function(_ChangePasswordForFirstTime value)?
+        changePasswordForFirstTime,
     required TResult orElse(),
   }) {
     if (resetPassword != null) {
@@ -1075,6 +1138,156 @@ class _$ResetPasswordsImpl implements _ResetPasswords {
 
 abstract class _ResetPasswords implements ResetPasswordEvent {
   const factory _ResetPasswords() = _$ResetPasswordsImpl;
+}
+
+/// @nodoc
+abstract class _$$ChangePasswordForFirstTimeImplCopyWith<$Res> {
+  factory _$$ChangePasswordForFirstTimeImplCopyWith(
+          _$ChangePasswordForFirstTimeImpl value,
+          $Res Function(_$ChangePasswordForFirstTimeImpl) then) =
+      __$$ChangePasswordForFirstTimeImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$ChangePasswordForFirstTimeImplCopyWithImpl<$Res>
+    extends _$ResetPasswordEventCopyWithImpl<$Res,
+        _$ChangePasswordForFirstTimeImpl>
+    implements _$$ChangePasswordForFirstTimeImplCopyWith<$Res> {
+  __$$ChangePasswordForFirstTimeImplCopyWithImpl(
+      _$ChangePasswordForFirstTimeImpl _value,
+      $Res Function(_$ChangePasswordForFirstTimeImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$ChangePasswordForFirstTimeImpl implements _ChangePasswordForFirstTime {
+  const _$ChangePasswordForFirstTimeImpl();
+
+  @override
+  String toString() {
+    return 'ResetPasswordEvent.changePasswordForFirstTime()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ChangePasswordForFirstTimeImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(PasswordFieldType fieldType, bool toggleValue)
+        togglePasswordVisibility,
+    required TResult Function(PasswordFieldType fieldType, String newValue)
+        onTextChange,
+    required TResult Function() changePassword,
+    required TResult Function() clear,
+    required TResult Function(User user, ResetPasswordCred resetPasswordCred)
+        initialize,
+    required TResult Function() resetPassword,
+    required TResult Function() changePasswordForFirstTime,
+  }) {
+    return changePasswordForFirstTime();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(PasswordFieldType fieldType, bool toggleValue)?
+        togglePasswordVisibility,
+    TResult? Function(PasswordFieldType fieldType, String newValue)?
+        onTextChange,
+    TResult? Function()? changePassword,
+    TResult? Function()? clear,
+    TResult? Function(User user, ResetPasswordCred resetPasswordCred)?
+        initialize,
+    TResult? Function()? resetPassword,
+    TResult? Function()? changePasswordForFirstTime,
+  }) {
+    return changePasswordForFirstTime?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(PasswordFieldType fieldType, bool toggleValue)?
+        togglePasswordVisibility,
+    TResult Function(PasswordFieldType fieldType, String newValue)?
+        onTextChange,
+    TResult Function()? changePassword,
+    TResult Function()? clear,
+    TResult Function(User user, ResetPasswordCred resetPasswordCred)?
+        initialize,
+    TResult Function()? resetPassword,
+    TResult Function()? changePasswordForFirstTime,
+    required TResult orElse(),
+  }) {
+    if (changePasswordForFirstTime != null) {
+      return changePasswordForFirstTime();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_PasswordVisibility value)
+        togglePasswordVisibility,
+    required TResult Function(_PasswordTextOnChange value) onTextChange,
+    required TResult Function(_ChangePassword value) changePassword,
+    required TResult Function(_Clear value) clear,
+    required TResult Function(_Initialize value) initialize,
+    required TResult Function(_ResetPasswords value) resetPassword,
+    required TResult Function(_ChangePasswordForFirstTime value)
+        changePasswordForFirstTime,
+  }) {
+    return changePasswordForFirstTime(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_PasswordVisibility value)? togglePasswordVisibility,
+    TResult? Function(_PasswordTextOnChange value)? onTextChange,
+    TResult? Function(_ChangePassword value)? changePassword,
+    TResult? Function(_Clear value)? clear,
+    TResult? Function(_Initialize value)? initialize,
+    TResult? Function(_ResetPasswords value)? resetPassword,
+    TResult? Function(_ChangePasswordForFirstTime value)?
+        changePasswordForFirstTime,
+  }) {
+    return changePasswordForFirstTime?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_PasswordVisibility value)? togglePasswordVisibility,
+    TResult Function(_PasswordTextOnChange value)? onTextChange,
+    TResult Function(_ChangePassword value)? changePassword,
+    TResult Function(_Clear value)? clear,
+    TResult Function(_Initialize value)? initialize,
+    TResult Function(_ResetPasswords value)? resetPassword,
+    TResult Function(_ChangePasswordForFirstTime value)?
+        changePasswordForFirstTime,
+    required TResult orElse(),
+  }) {
+    if (changePasswordForFirstTime != null) {
+      return changePasswordForFirstTime(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _ChangePasswordForFirstTime implements ResetPasswordEvent {
+  const factory _ChangePasswordForFirstTime() =
+      _$ChangePasswordForFirstTimeImpl;
 }
 
 /// @nodoc

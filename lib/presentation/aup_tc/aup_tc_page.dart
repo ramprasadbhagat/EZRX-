@@ -266,7 +266,6 @@ class AcceptButton extends StatelessWidget {
                     cur.isLoginOnBehalf) &&
                 cur.user != User.empty(),
             listener: (context, _) {
-              context.navigateBack();
               context.read<IntroBloc>().add(
                     const IntroEvent.checkAppFirstLaunch(),
                   );

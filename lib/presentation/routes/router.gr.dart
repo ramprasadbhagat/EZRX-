@@ -154,15 +154,25 @@ class AppRouter extends _i78.RootStackRouter {
       );
     },
     ResetPasswordPageRoute.name: (routeData) {
+      final args = routeData.argsAs<ResetPasswordPageRouteArgs>(
+          orElse: () => const ResetPasswordPageRouteArgs());
       return _i78.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const _i5.ResetPasswordPage(),
+        child: _i5.ResetPasswordPage(
+          key: args.key,
+          isFirstLogin: args.isFirstLogin,
+        ),
       );
     },
     ResetPasswordSuccessRoute.name: (routeData) {
+      final args = routeData.argsAs<ResetPasswordSuccessRouteArgs>(
+          orElse: () => const ResetPasswordSuccessRouteArgs());
       return _i78.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const _i6.ResetPasswordSuccess(),
+        child: _i6.ResetPasswordSuccess(
+          key: args.key,
+          isFirstLogin: args.isFirstLogin,
+        ),
       );
     },
     ApproverActionsRoute.name: (routeData) {
@@ -1136,26 +1146,72 @@ class ForgetPasswordConfirmationPageRoute extends _i78.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i5.ResetPasswordPage]
-class ResetPasswordPageRoute extends _i78.PageRouteInfo<void> {
-  const ResetPasswordPageRoute()
-      : super(
+class ResetPasswordPageRoute
+    extends _i78.PageRouteInfo<ResetPasswordPageRouteArgs> {
+  ResetPasswordPageRoute({
+    _i79.Key? key,
+    bool isFirstLogin = false,
+  }) : super(
           ResetPasswordPageRoute.name,
           path: 'reset_password',
+          args: ResetPasswordPageRouteArgs(
+            key: key,
+            isFirstLogin: isFirstLogin,
+          ),
         );
 
   static const String name = 'ResetPasswordPageRoute';
 }
 
+class ResetPasswordPageRouteArgs {
+  const ResetPasswordPageRouteArgs({
+    this.key,
+    this.isFirstLogin = false,
+  });
+
+  final _i79.Key? key;
+
+  final bool isFirstLogin;
+
+  @override
+  String toString() {
+    return 'ResetPasswordPageRouteArgs{key: $key, isFirstLogin: $isFirstLogin}';
+  }
+}
+
 /// generated route for
 /// [_i6.ResetPasswordSuccess]
-class ResetPasswordSuccessRoute extends _i78.PageRouteInfo<void> {
-  const ResetPasswordSuccessRoute()
-      : super(
+class ResetPasswordSuccessRoute
+    extends _i78.PageRouteInfo<ResetPasswordSuccessRouteArgs> {
+  ResetPasswordSuccessRoute({
+    _i79.Key? key,
+    bool isFirstLogin = false,
+  }) : super(
           ResetPasswordSuccessRoute.name,
           path: 'reset_password_success',
+          args: ResetPasswordSuccessRouteArgs(
+            key: key,
+            isFirstLogin: isFirstLogin,
+          ),
         );
 
   static const String name = 'ResetPasswordSuccessRoute';
+}
+
+class ResetPasswordSuccessRouteArgs {
+  const ResetPasswordSuccessRouteArgs({
+    this.key,
+    this.isFirstLogin = false,
+  });
+
+  final _i79.Key? key;
+
+  final bool isFirstLogin;
+
+  @override
+  String toString() {
+    return 'ResetPasswordSuccessRouteArgs{key: $key, isFirstLogin: $isFirstLogin}';
+  }
 }
 
 /// generated route for

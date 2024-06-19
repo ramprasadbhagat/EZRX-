@@ -92,7 +92,8 @@ class PasswordTextField extends StatelessWidget {
             .fold(
               (f) => f.mapOrNull(
                 empty: (_) => context.tr('Confirm password cannot be empty.'),
-                mustMatchNewPassword: (_) => context.tr('Password mismatch'),
+                mustMatchNewPassword: (_) =>
+                    context.tr('Please make sure your passwords match'),
               ),
               (_) => null,
             );

@@ -86,7 +86,7 @@ class SecurityRobot extends CommonRobot {
     expect(
       _errorMessageField(
         confirmPasswordField,
-        'Password mismatch',
+        'Please make sure your passwords match',
       ),
       findsOneWidget,
     );
