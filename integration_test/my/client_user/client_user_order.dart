@@ -195,6 +195,7 @@ void main() {
   const bundleMaterialPrincipalName2 = 'MERCK SHARP & DOHME (I.A)';
   const poReference = 'Auto-test-po-reference';
   const deliveryInstruction = 'Auto-test-delivery-instruction';
+  const shipToWithDisableReturn = '0000002010';
 
   final bundleStockInfoList = [
     StockInfo.empty().copyWith(materialNumber: MaterialNumber('23046003')),
@@ -829,6 +830,25 @@ void main() {
 
       //verify go to returns page
       returnsRootRobot.verifyRootPageVisible();
+
+      await commonRobot.tapToBackScreen();
+      await commonRobot.navigateToScreen(NavigationTab.more);
+      moreRobot.findReturnsTile();
+    });
+
+    testWidgets(
+        'EZRX-T2255 | Verify quick access return buttons are not visible if ship to code disable return',
+        (tester) async {
+      //init app
+      await pumpAppWithHomeScreen(tester, shipToCode: shipToWithDisableReturn);
+
+      //verify on home quick access return
+      homeRobot.findQuickAccessReturns(isVisible: false);
+
+      await commonRobot.navigateToScreen(NavigationTab.notifications);
+
+      await commonRobot.navigateToScreen(NavigationTab.more);
+      moreRobot.findReturnsTile(isVisible: false);
     });
 
     testWidgets(

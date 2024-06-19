@@ -153,7 +153,7 @@ void main() {
   const shipToCode = '0070015858';
   const shipToAddress = 'WATSONS PERSONAL CARE';
   const otherShipToCode = '0000002511';
-
+  const shipToWithDisableReturn = '0070009490';
   const mdiSalesOrg = '2501';
   const mdiShipTo = '0000107381';
   //abbott principal we show expiry date
@@ -992,6 +992,39 @@ void main() {
 
       //verify navigate to material page
       productDetailRobot.verifyPage();
+    });
+
+    testWidgets(
+        'EZRX-T23 | Verify click on Returns action in Top navigation menu',
+        (tester) async {
+      //init app
+      await pumpAppWithHomeScreen(tester);
+
+      //tap on home quick access return
+      homeRobot.findQuickAccessReturns();
+      await homeRobot.tapReturnsQuickAccess();
+
+      //verify go to returns page
+      returnsRootRobot.verifyRootPageVisible();
+
+      await commonRobot.tapToBackScreen();
+      await commonRobot.navigateToScreen(NavigationTab.more);
+      moreRobot.findReturnsTile();
+    });
+
+    testWidgets(
+        'EZRX-T2255 | Verify quick access return buttons are not visible if ship to code disable return',
+        (tester) async {
+      //init app
+      await pumpAppWithHomeScreen(tester, shipToCode: shipToWithDisableReturn);
+
+      //verify on home quick access return
+      homeRobot.findQuickAccessReturns(isVisible: false);
+
+      await commonRobot.navigateToScreen(NavigationTab.notifications);
+
+      await commonRobot.navigateToScreen(NavigationTab.more);
+      moreRobot.findReturnsTile(isVisible: false);
     });
 
     testWidgets('EZRX-T59 | Verify click on Announcement in Announcements',

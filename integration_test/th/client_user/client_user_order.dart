@@ -41,6 +41,7 @@ import '../../robots/products/product_detail_robot.dart';
 import '../../robots/products/product_robot.dart';
 import '../../robots/products/product_suggestion_robot.dart';
 import '../../robots/returns/returns_by_items/returns_by_items_detail_robot.dart';
+import '../../robots/returns/returns_root_robot.dart';
 
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
@@ -49,6 +50,7 @@ void main() {
   late LoginRobot loginRobot;
   late ForgotPasswordRobot forgotPasswordRobot;
   late HomeRobot homeRobot;
+  late ReturnsRootRobot returnsRootRobot;
   late CustomerSearchRobot customerSearchRobot;
   late ContactUsRobot contactUsRobot;
   late ProfileRobot profileRobot;
@@ -97,6 +99,7 @@ void main() {
     securityRobot = SecurityRobot(tester);
     moreRobot = MoreRobot(tester);
     notificationRobot = NotificationRobot(tester);
+    returnsRootRobot = ReturnsRootRobot(tester);
 
     announcementArticleRootRobot = AnnouncementArticleRootRobot(tester);
     articleRobot = ArticleRobot(tester);
@@ -893,6 +896,40 @@ void main() {
       //verify navigate to material page
       productDetailRobot.verifyPage();
     });
+
+    testWidgets(
+        'EZRX-T23 | Verify click on Returns action in Top navigation menu',
+        (tester) async {
+      //init app
+      await pumpAppWithHomeScreen(tester);
+
+      //tap on home quick access return
+      homeRobot.findQuickAccessReturns();
+      await homeRobot.tapReturnsQuickAccess();
+
+      //verify go to returns page
+      returnsRootRobot.verifyRootPageVisible();
+
+      await commonRobot.tapToBackScreen();
+      await commonRobot.navigateToScreen(NavigationTab.more);
+      moreRobot.findReturnsTile();
+    });
+
+    // TODO: enable this when we have the ship to code with disable return is true for TH
+    // testWidgets(
+    //     'EZRX-T2255 | Verify quick access return buttons are not visible if ship to code disable return',
+    //     (tester) async {
+    //   //init app
+    //   await pumpAppWithHomeScreen(tester, shipToCode: shipToWithDisableReturn);
+
+    //   //verify on home quick access return
+    //   homeRobot.findQuickAccessReturns(isVisible: false);
+
+    //   await commonRobot.navigateToScreen(NavigationTab.notifications);
+
+    //   await commonRobot.navigateToScreen(NavigationTab.more);
+    //   moreRobot.findReturnsTile(isVisible: false);
+    // });
 
 // TODO there have SVG error
     // testWidgets('EZRX-T59 | Verify click on Announcement in Announcements',

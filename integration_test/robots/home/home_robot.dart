@@ -205,8 +205,8 @@ class HomeRobot extends CommonRobot {
     await tester.pumpAndSettle();
   }
 
-  void findQuickAccessReturns() {
-    expect(homeQuickAccessReturns, findsOneWidget);
+  void findQuickAccessReturns({bool isVisible = true}) {
+    expect(homeQuickAccessReturns, isVisible ? findsOneWidget : findsNothing);
   }
 
   void findQuickAccessPayments({bool isVisible = true}) {

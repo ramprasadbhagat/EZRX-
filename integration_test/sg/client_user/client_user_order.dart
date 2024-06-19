@@ -477,6 +477,7 @@ void main() {
 
       //logout
       await commonRobot.navigateToScreen(NavigationTab.more);
+      moreRobot.findReturnsTile();
       await moreRobot.findLogout();
       await moreRobot.tapLogout();
     });
@@ -900,6 +901,40 @@ void main() {
       await homeRobot.tapOnFirstBrowseProduct();
       productDetailRobot.verifyPage();
     });
+
+    testWidgets(
+        'EZRX-T23 | Verify click on Returns action in Top navigation menu',
+        (tester) async {
+      //init app
+      await pumpAppWithHomeScreen(tester);
+
+      //tap on home quick access return
+      homeRobot.findQuickAccessReturns();
+      await homeRobot.tapReturnsQuickAccess();
+
+      //verify go to returns page
+      returnsRootRobot.verifyRootPageVisible();
+
+      await commonRobot.tapToBackScreen();
+      await commonRobot.navigateToScreen(NavigationTab.more);
+      moreRobot.findReturnsTile();
+    });
+
+    // TODO: enable this when we have the ship to code with disable return is true for SG
+    // testWidgets(
+    //     'EZRX-T2255 | Verify quick access return buttons are not visible if ship to code disable return',
+    //     (tester) async {
+    //   //init app
+    //   await pumpAppWithHomeScreen(tester, shipToCode: shipToWithDisableReturn);
+
+    //   //verify on home quick access return
+    //   homeRobot.findQuickAccessReturns(isVisible: false);
+
+    //   await commonRobot.navigateToScreen(NavigationTab.notifications);
+
+    //   await commonRobot.navigateToScreen(NavigationTab.more);
+    //   moreRobot.findReturnsTile(isVisible: false);
+    // });
 
     // testWidgets('EZRX-T48 | Verify display Announcements in Homepage',
     //     (tester) async {

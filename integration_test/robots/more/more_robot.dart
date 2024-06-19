@@ -22,6 +22,10 @@ class MoreRobot extends CommonRobot {
       find.byKey(WidgetKeys.announcementArticleTile);
   final scrollList = find.byKey(WidgetKeys.moreTapListContent);
 
+  void findReturnsTile({bool isVisible = true}) {
+    expect(returnsTile, isVisible ? findsOneWidget : findsNothing);
+  }
+
   Future<void> tapReturnsTile() async {
     await tester.tap(returnsTile);
     await tester.pumpAndSettle();
