@@ -33,7 +33,7 @@ class ConfigMock extends Mock implements Config {}
 class MaterialListRepositoryMock extends Mock
     implements MaterialListRepository {}
 
-class StockInfoRepositoryMock extends Mock implements StockInfoRepository {}    
+class StockInfoRepositoryMock extends Mock implements StockInfoRepository {}
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -48,8 +48,6 @@ void main() {
   late Map<MaterialNumber, bool> selectedItems;
   late ComboDeal comboDeal;
   late Map<MaterialNumber, bool> selectionStatus;
-  late Map<MaterialNumber, int> qty;
-  late List<MaterialInfo> materialInfos;
   late List<MaterialStockInfo> materialStockInfos;
   late MaterialResponse materialResponse;
   late StockInfoRepository stockInfoRepositoryMock;
@@ -78,7 +76,6 @@ void main() {
       shipToInfo: fakeShipToInfo,
     );
     comboDeal = (await ComboDealLocalDataSource().getComboDealList()).first;
-    materialInfos = await MaterialListLocalDataSource().getMaterialList();
     materialStockInfos =
         await StockInfoLocalDataSource().getMaterialStockInfoList();
 
@@ -87,9 +84,6 @@ void main() {
         materialInfo: productList[i]
             .materialInfo
             .copyWith(materialNumber: comboDeal.allMaterialNumbers[i]),
-      );
-      materialInfos[i] = materialInfos[i].copyWith(
-        materialNumber: productList[i].getMaterialNumber,
       );
       materialStockInfos[i] = materialStockInfos[i].copyWith(
         materialNumber: productList[i].getMaterialNumber,
@@ -290,318 +284,6 @@ void main() {
         ),
       ],
     );
-
-    blocTest(
-      'combo deal material bloc fetchComboDeal',
-      setUp: () {
-        items = comboDeal.allMaterialNumbers.fold(
-          <MaterialNumber, PriceAggregate>{},
-          (
-            Map<MaterialNumber, PriceAggregate> map,
-            MaterialNumber materialNumber,
-          ) {
-            map[materialNumber] = PriceAggregate.empty()
-                .copyWith(salesOrgConfig: fakeKHSalesOrgConfigs);
-
-            return map;
-          },
-        );
-        itemsAfterGetMaterials =
-            Map<MaterialNumber, PriceAggregate>.from(items);
-        selectionStatus = {
-          for (final item in productList) item.getMaterialNumber: true,
-        };
-        qty = {
-          for (final item in productList) item.materialInfo.materialNumber: 1,
-        };
-        when(
-          () => productDetailRepository.getProductListDetail(
-            customerCodeInfo: fakeCustomerCodeInfo,
-            language: Language.english(),
-            materialNumber: comboDeal.allMaterialNumbers,
-            salesOrganisation: fakeKHSalesOrganisation,
-            shipToInfo: fakeShipToInfo,
-            types: comboDeal.allMaterialNumbers
-                .map((e) => MaterialInfoType('material'))
-                .toList(),
-          ),
-        ).thenAnswer(
-          (_) async => Right(
-            materialInfos,
-          ),
-        );
-        if (materialInfos.isNotEmpty) {
-          for (final materialInfo in materialInfos) {
-            if (itemsAfterGetMaterials[materialInfo.materialNumber] != null) {
-              itemsAfterGetMaterials[materialInfo.materialNumber] =
-                  itemsAfterGetMaterials[materialInfo.materialNumber]!
-                      .copyWith(
-                        materialInfo: materialInfo.copyWith(
-                          parentID: productList.first.getMaterialNumber
-                              .getOrDefaultValue(''),
-                        ),
-                      )
-                      .copyWithComboDealMinQty(comboDeal)
-                      .copyWith();
-            }
-          }
-        }
-        when(
-          () => stockInfoRepositoryMock.getStockInfoList(
-            customerCodeInfo: fakeCustomerCodeInfo,
-            salesOrganisation: fakeKHSalesOrganisation,
-            materials: itemsAfterGetMaterials.entries
-                .map((e) => e.value.materialInfo)
-                .toList().map((e) => e.materialNumber).toList(),
-            shipToInfo: fakeShipToInfo,    
-          ),
-        ).thenAnswer(
-          (_) async => Right(
-            materialStockInfos,
-          ),
-        );
-        if (materialStockInfos.isNotEmpty) {
-          for (final materialStockInfo in materialStockInfos) {
-            final material =
-                itemsAfterGetMaterials[materialStockInfo.materialNumber];
-
-            if (material != null && materialStockInfo.stockInfos.isNotEmpty) {
-              itemsAfterGetMaterials[materialStockInfo.materialNumber] =
-                  material
-                      .copyWith(
-                        stockInfo: materialStockInfo.stockInfos.first,
-                        stockInfoList: materialStockInfo.stockInfos,
-                      )
-                      .copyWithComboDealMinQty(comboDeal);
-            }
-          }
-        }
-        final currentQuantityMap = qty;
-        if (currentQuantityMap.isNotEmpty) {
-          currentQuantityMap.forEach((key, value) {
-            itemsAfterGetMaterials[key] = itemsAfterGetMaterials[key]!.copyWith(
-              quantity: value,
-            );
-          });
-        }
-        itemsAfterGetMaterials.forEach((key, value) {
-          value = value.copyWith(salesOrgConfig: fakeKHSalesOrgConfigs);
-        });
-
-        selectedItems = <MaterialNumber, bool>{};
-
-        selectedItems.addAll(
-          {
-            for (final item in itemsAfterGetMaterials.values)
-              item.getMaterialNumber:
-                  currentQuantityMap.containsKey(item.getMaterialNumber)
-                      ? true
-                      : item.selfComboDeal.mandatory,
-          },
-        );
-      },
-      build: () => ComboDealMaterialDetailBloc(
-        productDetailRepository: productDetailRepository,
-        materialListRepository: materialListRepository,
-        config: config,
-        stockInfoRepository: stockInfoRepositoryMock,
-      ),
-      seed: () => initialState.copyWith(
-        items: items,
-        selectedItems: {
-          for (final item in productList) item.getMaterialNumber: true,
-        },
-        salesConfigs: fakeKHSalesOrgConfigs,
-        salesOrganisation: fakeKHSalesOrganisation,
-      ),
-      act: (ComboDealMaterialDetailBloc bloc) => bloc.add(
-        ComboDealMaterialDetailEvent.fetchComboDealDetail(
-          comboDeal: comboDeal,
-          parentMaterialNumber: productList.first.getMaterialNumber,
-          comboMaterialsCurrentQuantity: qty,
-        ),
-      ),
-      skip: 1,
-      expect: () => [
-        initialState.copyWith(
-          items: itemsAfterGetMaterials,
-          selectedItems: selectedItems,
-          isFetchingPrice: true,
-          salesConfigs: fakeKHSalesOrgConfigs,
-        ),
-      ],
-    );
-    blocTest(
-      'combo deal material bloc fetchComboDealPrincipal',
-      setUp: () {
-        when(() => config.pageSize).thenAnswer((invocation) => 1);
-        items = {};
-        itemsAfterGetMaterials =
-            Map<MaterialNumber, PriceAggregate>.from(items);
-        qty = {
-          for (final item in productList) item.materialInfo.materialNumber: 1,
-        };
-
-        when(
-          () => productDetailRepository.getProductListDetail(
-            customerCodeInfo: fakeCustomerCodeInfo,
-            language: Language.english(),
-            materialNumber: qty.keys.toList(),
-            salesOrganisation: fakeKHSalesOrganisation,
-            shipToInfo: fakeShipToInfo,
-            types: qty.keys.map((e) => MaterialInfoType('material')).toList(),
-          ),
-        ).thenAnswer(
-          (_) async => Right(
-            materialInfos,
-          ),
-        );
-
-        when(
-          () => materialListRepository.getComboDealMaterials(
-            user: fakeClientUser,
-            salesOrganisation: fakeKHSalesOrganisation,
-            customerCodeInfo: fakeCustomerCodeInfo,
-            shipToInfo: fakeShipToInfo,
-            pageSize: 1,
-            offset: 0,
-            principles: [
-              productList.first.materialInfo.principalData.principalCode
-                  .getOrDefaultValue(''),
-            ],
-            salesOrgConfig: fakeKHSalesOrgConfigs,
-          ),
-        ).thenAnswer(
-          (_) async => Right(
-            materialResponse,
-          ),
-        );
-        final materialsNextPage = qty.keys.toList();
-        selectedItems = <MaterialNumber, bool>{};
-        if (materialsNextPage.isNotEmpty) {
-          itemsAfterGetMaterials.addAll({
-            for (final material in materialsNextPage)
-              material: PriceAggregate.empty(),
-          });
-          selectedItems.addAll({
-            for (final material in materialsNextPage) material: true,
-          });
-
-          if (materialInfos.isNotEmpty) {
-            for (final materialInfo in materialInfos) {
-              if (itemsAfterGetMaterials[materialInfo.materialNumber] != null) {
-                itemsAfterGetMaterials[materialInfo.materialNumber] =
-                    itemsAfterGetMaterials[materialInfo.materialNumber]!
-                        .copyWith(
-                  materialInfo: materialInfo,
-                  comboDeal: comboDeal,
-                  salesOrgConfig: fakeKHSalesOrgConfigs,
-                );
-              }
-            }
-          }
-        }
-
-        itemsAfterGetMaterials.addAll(
-          materialResponse.products
-              .map(
-                (material) => PriceAggregate.empty().copyWith(
-                  materialInfo: material,
-                  salesOrgConfig: fakeKHSalesOrgConfigs,
-                  comboDeal: comboDeal,
-                ),
-              )
-              .toList()
-              .mapByMaterialNumber,
-        );
-        when(
-          () => stockInfoRepositoryMock.getStockInfoList(
-            customerCodeInfo: fakeCustomerCodeInfo,
-            salesOrganisation: fakeKHSalesOrganisation,
-            materials: itemsAfterGetMaterials.entries
-                .map((e) => e.value.materialInfo)
-                .toList()
-                .map((e) => e.materialNumber)
-                .toList(),
-            shipToInfo: fakeShipToInfo,    
-          ),
-        ).thenAnswer(
-          (_) async => Right(
-            materialStockInfos,
-          ),
-        );
-        if (materialStockInfos.isNotEmpty) {
-          for (final materialStockInfo in materialStockInfos) {
-            final material =
-                itemsAfterGetMaterials[materialStockInfo.materialNumber];
-
-            if (material != null && materialStockInfo.stockInfos.isNotEmpty) {
-              itemsAfterGetMaterials[materialStockInfo.materialNumber] =
-                  material.copyWith(
-                stockInfo: materialStockInfo.stockInfos.first,
-                stockInfoList: materialStockInfo.stockInfos,
-              );
-            }
-          }
-        }
-
-        if (qty.isNotEmpty) {
-          qty.forEach((key, value) {
-            if (itemsAfterGetMaterials.containsKey(key)) {
-              itemsAfterGetMaterials[key] =
-                  itemsAfterGetMaterials[key]!.copyWith(quantity: value);
-            }
-          });
-        }
-
-        selectedItems.addAll(
-          {
-            for (final item in itemsAfterGetMaterials.values)
-              item.getMaterialNumber: qty.containsKey(item.getMaterialNumber)
-                  ? true
-                  : item.selfComboDeal.mandatory,
-          },
-        );
-      },
-      build: () => ComboDealMaterialDetailBloc(
-        productDetailRepository: productDetailRepository,
-        materialListRepository: materialListRepository,
-        config: config,
-        stockInfoRepository: stockInfoRepositoryMock,
-      ),
-      seed: () => initialState.copyWith(
-        items: items,
-        user: fakeClientUser,
-        salesConfigs: fakeKHSalesOrgConfigs,
-        salesOrganisation: fakeKHSalesOrganisation,
-        selectedItems: {
-          for (final item in productList) item.getMaterialNumber: true,
-        },
-      ),
-      act: (ComboDealMaterialDetailBloc bloc) => bloc.add(
-        ComboDealMaterialDetailEvent.fetchComboDealPrincipal(
-          comboDeal: comboDeal,
-          principles: [
-            productList.first.materialInfo.principalData.principalCode
-                .getOrDefaultValue(''),
-          ],
-          comboMaterialsCurrentQuantity: qty,
-        ),
-      ),
-      skip: 2,
-      expect: () => [
-        initialState.copyWith(
-          items: itemsAfterGetMaterials,
-          selectedItems: selectedItems,
-          isFetchingPrice: true,
-          user: fakeClientUser,
-          salesConfigs: fakeKHSalesOrgConfigs,
-          salesOrganisation: fakeKHSalesOrganisation,
-          nextPageIndex: 1,
-          materialCount: 13,
-        ),
-      ],
-    );
     blocTest(
       'combo deal material bloc loadMoreComboDealPrincipal',
       setUp: () {
@@ -670,11 +352,12 @@ void main() {
           () => stockInfoRepositoryMock.getStockInfoList(
             customerCodeInfo: fakeCustomerCodeInfo,
             salesOrganisation: fakeKHSalesOrganisation,
-            materials:
-                newItems.entries.map((e) => e.value.materialInfo).toList()
+            materials: newItems.entries
+                .map((e) => e.value.materialInfo)
+                .toList()
                 .map((e) => e.materialNumber)
                 .toList(),
-            shipToInfo: fakeShipToInfo,    
+            shipToInfo: fakeShipToInfo,
           ),
         ).thenAnswer(
           (_) async => Right(

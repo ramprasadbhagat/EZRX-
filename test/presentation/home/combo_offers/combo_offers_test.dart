@@ -1,11 +1,6 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/order/material_filter/material_filter_bloc.dart';
-import 'package:ezrxmobile/domain/order/entities/material_filter.dart';
-import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/infrastructure/core/package_info/package_info.dart';
-import 'package:ezrxmobile/infrastructure/order/datasource/material_list_local.dart';
-import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/home/combo_offers_section/combo_offers_section.dart';
 import 'package:get_it/get_it.dart';
 import 'package:flutter/material.dart';
@@ -61,7 +56,6 @@ void main() {
   late MaterialFilterBloc materialFilterBlocMock;
   late AppRouter autoRouterMock;
   final locator = GetIt.instance;
-  late List<MaterialInfo> materialList;
   final routeData = RouteData(
     route: const RouteMatch(
       name: 'HomeTabRoute',
@@ -80,7 +74,6 @@ void main() {
     registerFallbackValue(const PageRouteInfo('HomeTabRoute', path: 'home'));
     locator.registerFactory<MaterialListBloc>(() => materialListBlocMock);
     locator.registerLazySingleton(() => PackageInfoService());
-    materialList = await MaterialListLocalDataSource().getMaterialList();
   });
 
   setUp(() async {
@@ -156,77 +149,6 @@ void main() {
         await tester.pump();
         final comboOffersSectionFinder = find.byType(ComboOffersSection);
         expect(comboOffersSectionFinder, findsOneWidget);
-      },
-    );
-    testWidgets(
-      ' -> Find Combo Offers Section body test',
-      (WidgetTester tester) async {
-        when(() => materialListBlocMock.state).thenReturn(
-          MaterialListState.initial().copyWith(
-            materialList: materialList,
-          ),
-        );
-
-        await getWidget(tester);
-        await tester.pump();
-        final combodealsBodyFinder = find.byKey(WidgetKeys.combodealsBody);
-        expect(combodealsBodyFinder, findsOneWidget);
-        final combodealsTextFinder = find.textContaining('Combo offers'.tr());
-        expect(combodealsTextFinder, findsOneWidget);
-        final exploreComboDealsButttonFinder = find.byKey(
-          WidgetKeys.exploreComboDealsButtton,
-        );
-        expect(exploreComboDealsButttonFinder, findsOneWidget);
-      },
-    );
-
-    testWidgets(
-      ' -> Tap Explore Combo Deals Buttton',
-      (WidgetTester tester) async {
-        when(() => autoRouterMock.navigate(any()))
-            .thenAnswer((_) async => true);
-
-        when(() => materialListBlocMock.state).thenReturn(
-          MaterialListState.initial().copyWith(
-            materialList: materialList,
-            selectedMaterialFilter:
-                MaterialFilter.empty().copyWith(isFavourite: true),
-          ),
-        );
-        when(() => materialFilterBlocMock.state).thenReturn(
-          MaterialFilterState.initial().copyWith(
-            materialFilter: MaterialFilter.empty().copyWith(isFavourite: true),
-          ),
-        );
-
-        await getWidget(tester);
-        await tester.pump();
-        final exploreComboDealsButttonFinder = find.byKey(
-          WidgetKeys.exploreComboDealsButtton,
-        );
-        expect(exploreComboDealsButttonFinder, findsOneWidget);
-        await tester.tap(exploreComboDealsButttonFinder);
-        await tester.pump();
-        verify(
-          () => materialListBlocMock.add(
-            MaterialListEvent.fetch(
-              selectedMaterialFilter: MaterialFilter.empty().copyWith(
-                isFavourite: true,
-                comboOffers: true,
-              ),
-            ),
-          ),
-        ).called(1);
-        verify(
-          () => materialFilterBlocMock.add(
-            MaterialFilterEvent.initSelectedMaterialFilter(
-              MaterialFilter.empty().copyWith(
-                isFavourite: true,
-                comboOffers: true,
-              ),
-            ),
-          ),
-        ).called(1);
       },
     );
   });

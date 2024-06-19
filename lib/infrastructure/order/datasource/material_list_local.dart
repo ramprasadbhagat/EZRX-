@@ -8,18 +8,6 @@ import 'package:flutter/services.dart';
 class MaterialListLocalDataSource {
   MaterialListLocalDataSource();
 
-  Future<List<MaterialInfo>> getMaterialList() async {
-    final data = json.decode(
-      await rootBundle
-          .loadString('assets/json/getMaterialsWithMetaResponse.json'),
-    );
-    final finalData = data['data']['materialsWithMeta']['materials'];
-
-    return List.from(finalData)
-        .map((e) => MaterialDto.fromJson(e).toDomain())
-        .toList();
-  }
-
   Future<MaterialResponse> getProductList() async {
     final data = json.decode(
       await rootBundle.loadString('assets/json/getAllProductsResponse.json'),
@@ -29,18 +17,6 @@ class MaterialListLocalDataSource {
         makeResponseCamelCase(jsonEncode(data['data']['GetAllProducts']));
 
     return MaterialResponseDto.fromJson(finalData).toDomain();
-  }
-
-  Future<List<MaterialInfo>> searchMaterialList() async {
-    final data = json.decode(
-      await rootBundle
-          .loadString('assets/json/getMaterialsWithMetaResponse.json'),
-    );
-    final finalData = data['data']['materialsWithMeta']['materials'];
-
-    return List.from(finalData)
-        .map((e) => MaterialDto.fromJson(e).toDomain())
-        .toList();
   }
 
   Future<MaterialInfo> getProductDetails() async {

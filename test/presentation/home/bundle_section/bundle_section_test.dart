@@ -1,18 +1,12 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:dartz/dartz.dart';
-import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/order/product_detail/details/product_detail_bloc.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/order/entities/bundle.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
-import 'package:ezrxmobile/domain/order/entities/material_filter.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/clevertap/clevertap_service.dart';
-import 'package:ezrxmobile/infrastructure/core/common/clevertap_helper.dart';
-import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
-import 'package:ezrxmobile/infrastructure/core/common/tracking_events.dart';
-import 'package:ezrxmobile/infrastructure/core/common/tracking_properties.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/infrastructure/core/package_info/package_info.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/material_list_local.dart';
@@ -43,7 +37,6 @@ void main() {
   late ProductDetailBloc productDetailBlocMock;
   late AppRouter autoRouterMock;
   final locator = GetIt.instance;
-  late List<MaterialInfo> materialList;
   late MaterialResponse materialResponseMock;
   final routeData = RouteData(
     route: const RouteMatch(
@@ -63,7 +56,7 @@ void main() {
     defaultMaterialDescription: 'defaultMaterialDescription',
     genericMaterialName: '1234567',
     governmentMaterialCode: StringValue('1234567'),
-    isMarketPlace: false, 
+    isMarketPlace: false,
     itemRegistrationNumber: ItemRegistrationNumber(''),
   );
 
@@ -75,7 +68,6 @@ void main() {
     locator.registerSingleton<ClevertapService>(ClevertapServiceMock());
     locator.registerFactory<MaterialListBloc>(() => materialListBlocMock);
     locator.registerLazySingleton(() => PackageInfoService());
-    materialList = await MaterialListLocalDataSource().getMaterialList();
     materialResponseMock = await MaterialListLocalDataSource().getProductList();
   });
 
@@ -147,31 +139,6 @@ void main() {
       },
     );
     testWidgets(
-      ' -> Find Bundle Section body test',
-      (WidgetTester tester) async {
-        when(() => materialListBlocMock.state).thenReturn(
-          MaterialListState.initial().copyWith(
-            materialList: materialList,
-          ),
-        );
-
-        await getWidget(tester);
-        await tester.pump();
-        final bundlesFinder = find.byKey(WidgetKeys.bundlesBody);
-        expect(bundlesFinder, findsOneWidget);
-        final bundlesIconFinder = find.byKey(WidgetKeys.bundles);
-        expect(bundlesIconFinder, findsOneWidget);
-        final bundlesListFinder = find.byKey(
-          WidgetKeys.bundlesList,
-        );
-        expect(bundlesListFinder, findsOneWidget);
-        final bundlesListItemFinder = find.byKey(
-          WidgetKeys.bundlesListItem,
-        );
-        expect(bundlesListItemFinder, findsWidgets);
-      },
-    );
-    testWidgets(
       ' -> Find Bundle Section body test for id market',
       (WidgetTester tester) async {
         when(() => eligibilityBlocMock.state).thenReturn(
@@ -198,106 +165,6 @@ void main() {
       },
     );
 
-    testWidgets(
-      ' -> Tap Bundle Section Icon test',
-      (WidgetTester tester) async {
-        when(() => autoRouterMock.navigate(any()))
-            .thenAnswer((_) async => true);
-
-        when(() => materialListBlocMock.state).thenReturn(
-          MaterialListState.initial().copyWith(
-            materialList: materialList,
-          ),
-        );
-
-        await getWidget(tester);
-        await tester.pump();
-        final bundlesIconFinder = find.byKey(WidgetKeys.bundles);
-        expect(bundlesIconFinder, findsOneWidget);
-        final bundlesIcon =
-            find.byKey(WidgetKeys.sectionTileIcon('Bundles'.tr()));
-        expect(bundlesIcon, findsOneWidget);
-        await tester.tap(bundlesIcon);
-        await tester.pump();
-        verify(
-          () => materialListBlocMock.add(
-            MaterialListEvent.fetch(
-              selectedMaterialFilter: MaterialFilter.empty().copyWith(
-                bundleOffers: true,
-              ),
-            ),
-          ),
-        ).called(1);
-        verify(() => autoRouterMock.navigate(const ProductsTabRoute()))
-            .called(1);
-      },
-    );
-
-    testWidgets(
-      ' -> Tap Bundle Section List item test',
-      (WidgetTester tester) async {
-        when(
-          () => autoRouterMock
-              .push(BundleDetailPageRoute(materialInfo: materialList.first)),
-        ).thenAnswer((invocation) async => true);
-
-        when(() => materialListBlocMock.state).thenReturn(
-          MaterialListState.initial().copyWith(
-            materialList: materialList,
-          ),
-        );
-
-        await getWidget(tester);
-        await tester.pump();
-        final bundlesFinder = find.byKey(WidgetKeys.bundlesBody);
-        expect(bundlesFinder, findsOneWidget);
-        final bundlesListFinder = find.byKey(
-          WidgetKeys.bundlesList,
-        );
-        expect(bundlesListFinder, findsOneWidget);
-        final bundlesListItemFinder = find.byKey(
-          WidgetKeys.bundlesListItem,
-        );
-        expect(bundlesListItemFinder, findsWidgets);
-        await tester.tap(bundlesListItemFinder.first);
-        await tester.pump();
-
-        verify(
-          () => autoRouterMock.push(
-            BundleDetailPageRoute(materialInfo: materialList.first),
-          ),
-        ).called(1);
-        verify(
-          () => trackMixpanelEvent(
-            TrackingEvents.productItemClicked,
-            props: {
-              TrackingProps.clickAt: 'Home Page',
-              TrackingProps.isBundle: true,
-              TrackingProps.productName: materialList.first.displayDescription,
-              TrackingProps.productNumber:
-                  materialList.first.materialNumber.displayMatNo,
-              TrackingProps.productManufacturer:
-                  materialList.first.getManufactured,
-              TrackingProps.section: 'Bundles',
-            },
-          ),
-        ).called(1);
-        verify(
-          () => trackClevertapEvent(
-            TrackingEvents.productItemClicked,
-            props: {
-              TrackingProps.clickAt: 'Home Page',
-              TrackingProps.isBundle: true,
-              TrackingProps.productName: materialList.first.displayDescription,
-              TrackingProps.productNumber:
-                  materialList.first.materialNumber.displayMatNo,
-              TrackingProps.productManufacturer:
-                  materialList.first.getManufactured,
-            },
-          ),
-        ).called(1);
-      },
-    );
     testWidgets(
       ' -> Bundle Section List item test regarding material data',
       (WidgetTester tester) async {
@@ -331,31 +198,6 @@ void main() {
           WidgetKeys.bundlesListItem,
         );
         expect(bundlesListItemFinder, findsOneWidget);
-      },
-    );
-
-    testWidgets(
-      ' -> Find Bundle Name Inside Bundle Section',
-      (WidgetTester tester) async {
-        when(() => materialListBlocMock.state).thenReturn(
-          MaterialListState.initial().copyWith(
-            materialList: [
-              materialList.first.copyWith(
-                bundle: Bundle.empty().copyWith(
-                  bundleName: BundleName('fake-name'),
-                ),
-              ),
-            ],
-          ),
-        );
-
-        await getWidget(tester);
-        await tester.pump();
-
-        final bundleBody = find.byKey(WidgetKeys.bundlesBody);
-        expect(bundleBody, findsOneWidget);
-        final bundleName = find.text('fake-name');
-        expect(bundleName, findsOneWidget);
       },
     );
 

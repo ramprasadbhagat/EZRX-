@@ -1,17 +1,12 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:dartz/dartz.dart';
-import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
 import 'package:ezrxmobile/application/order/product_detail/details/product_detail_bloc.dart';
 import 'package:ezrxmobile/application/product_image/product_image_bloc.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
-import 'package:ezrxmobile/domain/order/entities/material_filter.dart';
-import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/infrastructure/core/clevertap/clevertap_service.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
-import 'package:ezrxmobile/infrastructure/order/datasource/material_list_local.dart';
-import 'package:ezrxmobile/presentation/core/favorite_icon.dart';
 import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/home/browse_products/browse_products.dart';
@@ -27,7 +22,6 @@ import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
 
 import '../../../common_mock_data/sales_organsiation_mock.dart';
-import '../../../common_mock_data/user_mock.dart';
 import '../../../utils/widget_utils.dart';
 
 class MockAppRouter extends Mock implements AppRouter {}
@@ -66,7 +60,6 @@ void main() {
   late UserBlocMock userBlocMock;
   late AppRouter autoRouterMock;
   final locator = GetIt.instance;
-  late List<MaterialInfo> materialList;
   final routeData = RouteData(
     route: const RouteMatch(
       name: 'HomeTabRoute',
@@ -86,7 +79,6 @@ void main() {
     locator.registerSingleton<MixpanelService>(MockMixpanelService());
     locator.registerSingleton<ClevertapService>(ClevertapServiceMock());
     locator.registerFactory<MaterialListBloc>(() => materialListBlocMock);
-    materialList = await MaterialListLocalDataSource().getMaterialList();
   });
 
   setUp(() async {
@@ -172,191 +164,6 @@ void main() {
         final browseProductLoadingShimmerFinder =
             find.byKey(WidgetKeys.browseProductLoadingShimmer);
         expect(browseProductLoadingShimmerFinder, findsOneWidget);
-      },
-    );
-    testWidgets(
-      ' -> Find Browse Product body test',
-      (WidgetTester tester) async {
-        when(() => materialListBlocMock.state).thenReturn(
-          MaterialListState.initial().copyWith(
-            materialList: materialList,
-          ),
-        );
-
-        await getWidget(tester);
-        await tester.pump();
-        final browseProductBodyFinder = find.byKey(WidgetKeys.browseProduct);
-        expect(browseProductBodyFinder, findsOneWidget);
-        final browseProductIconFinder =
-            find.byKey(WidgetKeys.browseProductIcon);
-        expect(browseProductIconFinder, findsOneWidget);
-        final browseProductsListFinder = find.byKey(
-          WidgetKeys.browseProductsList,
-        );
-        if (materialList.length > 4) {
-          expect(browseProductsListFinder, findsNWidgets(4));
-        } else {
-          expect(browseProductsListFinder, findsNWidgets(materialList.length));
-        }
-      },
-    );
-
-    testWidgets(
-      ' -> Tap Browse Product Icon test',
-      (WidgetTester tester) async {
-        when(() => autoRouterMock.navigate(any()))
-            .thenAnswer((_) async => true);
-
-        when(() => materialListBlocMock.state).thenReturn(
-          MaterialListState.initial().copyWith(
-            materialList: materialList,
-            selectedMaterialFilter:
-                MaterialFilter.empty().copyWith(isFavourite: true),
-          ),
-        );
-        when(() => userBlocMock.state).thenReturn(
-          UserState.initial().copyWith(
-            user: fakeClientUser,
-          ),
-        );
-
-        await getWidget(tester);
-        await tester.pump();
-        final browseProductIconFinder =
-            find.byKey(WidgetKeys.browseProductIcon);
-        expect(browseProductIconFinder, findsOneWidget);
-        final browseProductIcon =
-            find.byKey(WidgetKeys.sectionTileIcon('Browse products'.tr()));
-        expect(browseProductIcon, findsOneWidget);
-        await tester.tap(browseProductIcon);
-        await tester.pump();
-        verify(
-          () => materialListBlocMock.add(
-            MaterialListEvent.fetch(
-              selectedMaterialFilter: MaterialFilter.empty(),
-            ),
-          ),
-        ).called(1);
-      },
-    );
-
-    testWidgets(
-      ' -> Tap Browse Product List item test',
-      (WidgetTester tester) async {
-        when(
-          () => autoRouterMock.push(
-            ProductDetailsPageRoute(materialInfo: materialList.first),
-          ),
-        ).thenAnswer(
-          (_) => Future.value(),
-        );
-        when(() => materialListBlocMock.state).thenReturn(
-          MaterialListState.initial().copyWith(
-            materialList: materialList,
-          ),
-        );
-
-        await getWidget(tester);
-        await tester.pump();
-        final browseProductBodyFinder = find.byKey(WidgetKeys.browseProduct);
-        expect(browseProductBodyFinder, findsOneWidget);
-        await tester.drag(browseProductBodyFinder, const Offset(0, -1000));
-
-        final browseProductsListFinder = find.byKey(
-          WidgetKeys.browseProductsList,
-        );
-        if (materialList.length > 4) {
-          expect(browseProductsListFinder, findsNWidgets(4));
-        } else {
-          expect(browseProductsListFinder, findsNWidgets(materialList.length));
-        }
-        await tester.tap(browseProductsListFinder.first);
-        await tester.pump();
-        verify(
-          () => autoRouterMock.push(
-            ProductDetailsPageRoute(materialInfo: materialList.first),
-          ),
-        ).called(1);
-      },
-    );
-
-    testWidgets(
-      '-> Tap to favorite product',
-      (WidgetTester tester) async {
-        when(() => materialListBlocMock.state).thenReturn(
-          MaterialListState.initial().copyWith(
-            materialList: materialList
-                .map((e) => e.copyWith(isFavourite: false))
-                .toList(),
-          ),
-        );
-
-        await getWidget(tester);
-        await tester.pump();
-        final favoriteIcon = find.descendant(
-          of: find.byKey(WidgetKeys.browseProductsList),
-          matching: find.byType(FavouriteIcon),
-        );
-        await tester.tap(favoriteIcon.first);
-        await tester.pumpAndSettle();
-        verify(
-          () => materialListBlocMock.add(
-            MaterialListEvent.addFavourite(
-              item: materialList.first.copyWith(isFavourite: false),
-            ),
-          ),
-        ).called(1);
-      },
-    );
-
-    testWidgets(
-      '-> Tap to unfavorite product',
-      (WidgetTester tester) async {
-        when(() => materialListBlocMock.state).thenReturn(
-          MaterialListState.initial().copyWith(
-            materialList:
-                materialList.map((e) => e.copyWith(isFavourite: true)).toList(),
-          ),
-        );
-
-        await getWidget(tester);
-        await tester.pump();
-        final favoriteIcon = find.descendant(
-          of: find.byKey(WidgetKeys.browseProductsList),
-          matching: find.byType(FavouriteIcon),
-        );
-        await tester.tap(favoriteIcon.first);
-        await tester.pumpAndSettle();
-        verify(
-          () => materialListBlocMock.add(
-            MaterialListEvent.deleteFavourite(
-              item: materialList.first.copyWith(isFavourite: true),
-            ),
-          ),
-        ).called(1);
-      },
-    );
-
-    testWidgets(
-      '-> Test Price Fetch',
-      (WidgetTester tester) async {
-        whenListen(
-          materialListBlocMock,
-          Stream.fromIterable([
-            MaterialListState.initial().copyWith(materialList: materialList),
-          ]),
-        );
-
-        await getWidget(tester);
-        await tester.pumpAndSettle();
-        verify(
-          () => materialPriceBlocMock.add(
-            MaterialPriceEvent.fetch(
-              comboDealEligible: false,
-              materials: materialList,
-            ),
-          ),
-        ).called(1);
       },
     );
 

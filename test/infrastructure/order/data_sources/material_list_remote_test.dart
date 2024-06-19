@@ -44,7 +44,7 @@ void main() {
       remoteDataSource = MaterialListRemoteDataSource(
         httpService: service,
         config: Config(),
-        materialListQuery: MaterialsWithMetaQuery(),
+        materialListQuery: ProductsQuery(),
         dataSourceExceptionHandler: DataSourceExceptionHandler(),
         remoteConfigService: remoteConfigService,
       );

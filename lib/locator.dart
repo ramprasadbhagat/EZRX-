@@ -996,14 +996,14 @@ void setupLocator() {
   //
   //============================================================
 
-  locator.registerLazySingleton(() => MaterialsWithMetaQuery());
+  locator.registerLazySingleton(() => ProductsQuery());
 
   locator.registerLazySingleton(() => MaterialListLocalDataSource());
 
   locator.registerLazySingleton(
     () => MaterialListRemoteDataSource(
       httpService: locator<HttpService>(),
-      materialListQuery: locator<MaterialsWithMetaQuery>(),
+      materialListQuery: locator<ProductsQuery>(),
       config: locator<Config>(),
       dataSourceExceptionHandler: locator<DataSourceExceptionHandler>(),
       remoteConfigService: locator<RemoteConfigService>(),
@@ -2564,7 +2564,7 @@ void setupLocator() {
       config: locator<Config>(),
       dataSourceExceptionHandler: locator<DataSourceExceptionHandler>(),
       httpService: locator<HttpService>(),
-      materialListQuery: locator<MaterialsWithMetaQuery>(),
+      materialListQuery: locator<ProductsQuery>(),
       remoteConfigService: locator<RemoteConfigService>(),
     ),
   );

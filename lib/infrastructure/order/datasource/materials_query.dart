@@ -1,4 +1,4 @@
-class MaterialsWithMetaQuery {
+class ProductsQuery {
   String getProductQuery(bool enableMarketplace) {
     return '''
       query (\$request: GetAllProductsRequest!) {

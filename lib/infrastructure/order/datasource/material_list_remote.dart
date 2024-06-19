@@ -13,7 +13,7 @@ import 'package:ezrxmobile/infrastructure/order/dtos/material_dto.dart';
 
 class MaterialListRemoteDataSource {
   HttpService httpService;
-  MaterialsWithMetaQuery materialListQuery;
+  ProductsQuery materialListQuery;
   DataSourceExceptionHandler dataSourceExceptionHandler;
   Config config;
   RemoteConfigService remoteConfigService;
