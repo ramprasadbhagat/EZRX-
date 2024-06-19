@@ -435,6 +435,18 @@ void main() {
         expect(RoleType(role.key).smallOrderFeeRole, role.value);
       }
     });
+
+    test('Test client admin role contructor', () {
+      final roleType = RoleType.clientAdmin();
+      final result = roleType.isClientAdmin;
+      expect(result, true);
+    });
+
+    test('Test client user role contructor', () {
+      final roleType = RoleType.clientUser();
+      final result = roleType.isClientUser;
+      expect(result, true);
+    });
   });
 
   group('Currency value object', () {

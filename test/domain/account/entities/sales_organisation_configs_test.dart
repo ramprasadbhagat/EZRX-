@@ -106,5 +106,21 @@ void main() {
         false,
       );
     });
+
+    test('zpMinOrderAmount when enableSmallOrderFee is enabled Test', () {
+      configs = fakeMYSalesOrgConfigsWithSmallOrderFee;
+      expect(
+        configs.zpMinOrderAmount,
+        configs.sapMinOrderAmount,
+      );
+    });
+
+    test('zpMinOrderAmount when enableSmallOrderFee is disabled Test', () {
+      configs = fakeMYSalesOrgConfigsWithSmallOrderFee;
+      expect(
+        configs.zpMinOrderAmount,
+        configs.minOrderAmount,
+      );
+    });
   });
 }

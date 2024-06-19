@@ -1,4 +1,5 @@
 import 'package:ezrxmobile/config.dart';
+import 'package:ezrxmobile/domain/core/error/tr_object.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:ezrxmobile/domain/order/entities/tender_contract.dart';
 import 'package:ezrxmobile/locator.dart';
@@ -545,6 +546,172 @@ void main() {
           );
         });
       });
+
+      group('movNotEligibleMessage getter -', () {
+        test('when contains ZP material only and ZP MoV is not eligible', () {
+          final stateWithMPMaterial = OrderEligibilityState.initial().copyWith(
+            cartItems: [fakeCartItem],
+            configs: fakeMYSalesOrgConfigs,
+          );
+
+          expect(
+            stateWithMPMaterial.movNotEligibleMessage,
+            const TRObject(
+              'Please ensure that the order value satisfies the minimum order value of {mov}',
+              arguments: {'mov': 'MYR 300.00'},
+            ),
+          );
+        });
+
+        test(
+            'when contains both ZP and MP materials and both ZP MoV and MP MoV are not eligible',
+            () {
+          final stateWithMPMaterial = OrderEligibilityState.initial().copyWith(
+            cartItems: [fakeCartItem, fakeMPCartItem],
+            configs: fakeMYSalesOrgConfigs,
+            mpSubtotal: fakeMYSalesOrgConfigs.mpMinOrderAmount - 1,
+            zpSubtotal: fakeMYSalesOrgConfigs.zpMinOrderAmount - 1,
+          );
+
+          expect(
+            stateWithMPMaterial.movNotEligibleMessage,
+            const TRObject(
+              'Please ensure that minimum order value is at least {zpMOV} for ZP subtotal & {mpMOV} for MP subtotal.',
+              arguments: {
+                'zpMOV': 'MYR 300.00',
+                'mpMOV': 'MYR 0.00',
+              },
+            ),
+          );
+        });
+
+        test(
+            'when contains both ZP and MP materials and only ZP MoV is not eligible',
+            () {
+          final stateWithMPMaterial = OrderEligibilityState.initial().copyWith(
+            cartItems: [fakeCartItem, fakeMPCartItem],
+            configs: fakeMYSalesOrgConfigs,
+            mpSubtotal: fakeMYSalesOrgConfigs.mpMinOrderAmount,
+            zpSubtotal: fakeMYSalesOrgConfigs.zpMinOrderAmount - 1,
+          );
+
+          expect(
+            stateWithMPMaterial.movNotEligibleMessage,
+            const TRObject(
+              'Please ensure that minimum order value is at least {mov} for ZP subtotal.',
+              arguments: {
+                'mov': 'MYR 300.00',
+              },
+            ),
+          );
+        });
+
+        test(
+            'when contains both ZP and MP materials and only MP MoV is not eligible',
+            () {
+          final stateWithMPMaterial = OrderEligibilityState.initial().copyWith(
+            cartItems: [fakeCartItem, fakeMPCartItem],
+            configs: fakeMYSalesOrgConfigs,
+            mpSubtotal: fakeMYSalesOrgConfigs.mpMinOrderAmount - 1,
+            zpSubtotal: fakeMYSalesOrgConfigs.zpMinOrderAmount,
+          );
+
+          expect(
+            stateWithMPMaterial.movNotEligibleMessage,
+            const TRObject(
+              'Please ensure that minimum order value is at least {mov} for MP subtotal.',
+              arguments: {
+                'mov': 'MYR 0.00',
+              },
+            ),
+          );
+        });
+      });
+
+      test('zpSubtotalInStockGreaterThanSAPMOV getter', () {
+        // return false when there cart only has OOS item
+        final ossStateMaterial = OrderEligibilityState.initial().copyWith(
+          cartItems: [
+            fakeCartItem.copyWith(
+              price: Price.empty().copyWith(
+                finalPrice: MaterialPrice(10),
+              ),
+            ),
+          ],
+          configs: fakeMYSalesOrgConfigs.copyWith(sapMinOrderAmount: 100),
+        );
+        expect(ossStateMaterial.zpSubtotalInStockGreaterThanSAPMOV, false);
+
+        // return true when there cart only has instock item and subtotal is not smaller than sapMinOrderValue
+        final inStockState = initializedState.copyWith(
+          cartItems: [
+            fakeCartItem.copyWith(
+              price: Price.empty().copyWith(
+                finalPrice: MaterialPrice(10),
+              ),
+              stockInfoList: [
+                StockInfo.empty().copyWith(inStock: MaterialInStock('Yes')),
+              ],
+            ),
+          ],
+          configs: fakeMYSalesOrgConfigs.copyWith(sapMinOrderAmount: 100),
+        );
+
+        expect(inStockState.zpSubtotalInStockGreaterThanSAPMOV, true);
+
+        // return true when there cart only has instock item and subtotal is smaller than sapMinOrderValue
+        final invalidInStockState = initializedState.copyWith(
+          cartItems: [
+            fakeCartItem.copyWith(
+              price: Price.empty().copyWith(
+                finalPrice: MaterialPrice(1),
+              ),
+              stockInfoList: [
+                StockInfo.empty().copyWith(inStock: MaterialInStock('Yes')),
+              ],
+            ),
+          ],
+          configs: fakeMYSalesOrgConfigs.copyWith(sapMinOrderAmount: 100),
+        );
+
+        expect(invalidInStockState.zpSubtotalInStockGreaterThanSAPMOV, false);
+      });
+
+      test('isIntSalesRepWithSmallOrderFeeForCustomer getter', () {
+        // return false when user is not internal sales rep role
+        final stateMaterial = OrderEligibilityState.initial().copyWith(
+          user: fakeClientUser,
+        );
+        expect(
+          stateMaterial.isIntSalesRepWithSmallOrderFeeForCustomer,
+          false,
+        );
+
+        // return false when enableSmallOrderFee config is OFF
+        var modifyStateMaterial = stateMaterial.copyWith(
+          user: fakeInternalSalesRepUser,
+        );
+        expect(
+          modifyStateMaterial.isIntSalesRepWithSmallOrderFeeForCustomer,
+          false,
+        );
+
+        // return false when smallOrderFeeUserRoles config doesn't contain client user or client admin
+        modifyStateMaterial = modifyStateMaterial.copyWith(
+          configs: fakeMYSalesOrgConfigsWithSmallOrderFee.copyWith(
+            smallOrderFeeUserRoles: [],
+          ),
+        );
+
+        expect(
+          modifyStateMaterial.isIntSalesRepWithSmallOrderFeeForCustomer,
+          false,
+        );
+
+        modifyStateMaterial = modifyStateMaterial.copyWith(
+          configs: fakeMYSalesOrgConfigsWithSmallOrderFee,
+        );
+      });
     });
 
     group('Small order fee validation -', () {
@@ -629,7 +796,7 @@ void main() {
         expect(mpSmallOrderFeeEnableState.mpSmallOrderFeeEnable, true);
       });
 
-      test('displayAtLeastOneZPItemInStockWarning getter', () {
+      test('atLeastOneZPItemInStockRequired getter', () {
         expect(
           zpSmallOrderFeeEnableState.atLeastOneZPItemInStockRequired,
           true,
@@ -645,6 +812,48 @@ void main() {
             cartItems: [fakeCartItem.copyWith(stockInfoList: inStock)],
           ).atLeastOneZPItemInStockRequired,
           false,
+        );
+        // return true when isIntSalesRepWithSmallOrderFeeForCustomer is true
+        expect(
+          zpSmallOrderFeeEnableState
+              .copyWith(
+                user: fakeInternalSalesRepUser,
+                configs: fakeMYSalesOrgConfigsWithSmallOrderFee,
+              )
+              .atLeastOneZPItemInStockRequired,
+          true,
+        );
+      });
+
+      test('isIntSalesRepWithSmallOrderFeeForCustomer getter', () {
+        var modifiedState = zpSmallOrderFeeEnableState.copyWith(
+          configs: fakePHSalesOrgConfigs,
+        );
+        // return false when user is not internal sales rep
+        expect(
+          modifiedState.isIntSalesRepWithSmallOrderFeeForCustomer,
+          false,
+        );
+        modifiedState = modifiedState.copyWith(user: fakeInternalSalesRepUser);
+        // return false when enableSmallOrderFee is OFF
+        expect(
+          modifiedState.isIntSalesRepWithSmallOrderFeeForCustomer,
+          false,
+        );
+        // return false when smallOrderFeeUserRoles doesn't contain client role
+        modifiedState = modifiedState.copyWith(
+          configs: fakeMYSalesOrgConfigs,
+        );
+        expect(
+          modifiedState.isIntSalesRepWithSmallOrderFeeForCustomer,
+          false,
+        );
+        modifiedState = modifiedState.copyWith(
+          configs: fakeMYSalesOrgConfigsWithSmallOrderFee,
+        );
+        expect(
+          modifiedState.isIntSalesRepWithSmallOrderFeeForCustomer,
+          true,
         );
       });
 
