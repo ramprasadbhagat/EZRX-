@@ -230,12 +230,14 @@ class _AvailableOfferLabel extends StatelessWidget {
       isDismissible: false,
       useSafeArea: true,
       context: context,
-      builder: (_) => BlocProvider<ProductDetailBloc>.value(
-        value: context.read<ProductDetailBloc>(),
-        child: ShowOfferDialogWidget(
-          bonusMaterialList: bonusMaterialList,
-          priceTiersList: priceTiersList,
-        ),
+      builder: (_) => ShowOfferDialogWidget(
+        bonusMaterialList: bonusMaterialList,
+        priceTiersList: priceTiersList,
+        materialInfo: context
+            .read<ProductDetailBloc>()
+            .state
+            .productDetailAggregate
+            .materialInfo,
       ),
     );
   }

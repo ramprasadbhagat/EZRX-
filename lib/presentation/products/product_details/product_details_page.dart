@@ -292,6 +292,7 @@ class _BodyContent extends StatelessWidget {
             if (!state.isDetailFetching)
               OfferLabel(
                 materialInfo: materialInfo,
+                disableOfferOnTap: true,
               ),
             ComboOfferLabel(
               materialInfo: materialInfo,

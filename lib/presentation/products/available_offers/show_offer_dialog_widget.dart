@@ -1,9 +1,6 @@
-//ignore_for_file: unused-code
-//ignore_for_file: unused-class
-//ignore_for_file: unused-files
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
-import 'package:ezrxmobile/application/order/product_detail/details/product_detail_bloc.dart';
+import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/price_bonus.dart';
 import 'package:ezrxmobile/domain/order/entities/price_tier.dart';
 import 'package:ezrxmobile/presentation/products/available_offers/available_offer_item.dart';
@@ -18,9 +15,11 @@ class ShowOfferDialogWidget extends StatelessWidget {
     super.key,
     required this.bonusMaterialList,
     required this.priceTiersList,
+    required this.materialInfo,
   });
   final List<BonusMaterial> bonusMaterialList;
   final List<PriceTierItem> priceTiersList;
+  final MaterialInfo materialInfo;
 
   @override
   Widget build(BuildContext context) {
@@ -36,6 +35,7 @@ class ShowOfferDialogWidget extends StatelessWidget {
             _AvailableOfferList(
               bonusMaterialList: bonusMaterialList,
               priceTiersList: priceTiersList,
+              materialInfo: materialInfo,
             ),
             const _CloseButton(),
           ],
@@ -68,16 +68,17 @@ class _AvailableOfferList extends StatelessWidget {
   const _AvailableOfferList({
     required this.bonusMaterialList,
     required this.priceTiersList,
+    required this.materialInfo,
   });
   final List<BonusMaterial> bonusMaterialList;
   final List<PriceTierItem> priceTiersList;
+  final MaterialInfo materialInfo;
 
   @override
   Widget build(BuildContext context) {
-    final showTierPrice = context.read<ProductDetailBloc>().state.showTierPrice(
-          isMYExternalSalesRepUser:
-              context.read<EligibilityBloc>().state.isMYExternalSalesRepUser,
-        );
+    final showTierPrice = !materialInfo.hidePrice ||
+        !(materialInfo.isPnGPrinciple &&
+            context.read<EligibilityBloc>().state.isMYExternalSalesRepUser);
 
     return ListView(
       padding: const EdgeInsets.symmetric(horizontal: 15),
