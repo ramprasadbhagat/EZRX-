@@ -283,7 +283,7 @@ void main() {
       accountInvoiceRobot.verifyFilterApplied(1);
       accountInvoiceRobot.verifyItems();
 
-       await accountInvoiceRobot.tapFilterButton();
+      await accountInvoiceRobot.tapFilterButton();
       await accountInvoiceFilterRobot.enterFromAmount(amountFrom.toString());
       await accountInvoiceFilterRobot.enterToAmount(amountTo.toString());
       await accountInvoiceFilterRobot.tapApplyButton();
@@ -1174,13 +1174,17 @@ void main() {
     const creditId = '0160000075';
     const creditIdStatus = 'Cleared';
     const debitId = creditId;
+    const emptyReferenceListString = 'NA';
 
     final fromDate = DateTime(2000, 1, 15);
     final toDate = DateTime.now();
 
-    Future<void> goToAccountSummaryPage(WidgetTester tester) async {
+    Future<void> goToAccountSummaryPage(
+      WidgetTester tester, {
+      String shipToCode = shipToCode,
+    }) async {
       //init app
-      await pumpAppWithHomeScreen(tester);
+      await pumpAppWithHomeScreen(tester, shipToCode: shipToCode);
 
       await homeRobot.tapPaymentQuickAccess();
       await paymentHomeRobot.tapAccountSummaryMenu();
@@ -1255,7 +1259,7 @@ void main() {
     );
 
     testWidgets(
-      'EZRX-T566 | Verify Detail Feature - show reference details',
+      'EZRX-T566 | Verify Detail Feature - show reference details with empty reference number',
       (tester) async {
         //Got to Summary Page
         await goToAccountSummaryPage(tester);
@@ -1278,13 +1282,38 @@ void main() {
         accountSummaryTabRobot.verifyExpandableDetailsButton();
         accountSummaryTabRobot.displayDetails(isHidden: true);
         await accountSummaryTabRobot.tapExpandableDetailsButton();
-        accountSummaryTabRobot.displayDetails();
+        accountSummaryTabRobot.displayDetails(
+          referenceListString: emptyReferenceListString,
+        );
         await accountSummaryTabRobot.tapExpandableDetailsButton();
         accountSummaryTabRobot.displayDetails(isHidden: true);
         await commonRobot.tapClearSearch();
         accountSummaryTabRobot.verifyItems();
       },
     );
+
+    // TODO: Enable when having credit with reference data
+    // testWidgets(
+    //   'EZRX-T566 | Verify Detail Feature - show reference details with Reference List',
+    //   (tester) async {
+    //     //Got to Summary Page
+    //     await goToAccountSummaryPage(tester, shipToCode: refNumberShipToCode);
+
+    //     //search credit Cleared Id
+    //     await commonRobot.searchWithKeyboardAction(creditIdWithReference);
+
+    //     accountSummaryTabRobot.verifyExpandableDetailsButton();
+    //     accountSummaryTabRobot.displayDetails(isHidden: true);
+    //     await accountSummaryTabRobot.tapExpandableDetailsButton();
+    //     accountSummaryTabRobot.displayDetails(
+    //       referenceListString: referenceList,
+    //     );
+    //     await accountSummaryTabRobot.tapExpandableDetailsButton();
+    //     accountSummaryTabRobot.displayDetails(isHidden: true);
+    //     await commonRobot.tapClearSearch();
+    //     accountSummaryTabRobot.verifyItems();
+    //   },
+    // );
 
     testWidgets(
       'EZRX-T549 | Verify search summary by inputting invalid keyword on Summary Tab - Unhappy Flow',

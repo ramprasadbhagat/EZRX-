@@ -1437,6 +1437,8 @@ class WidgetKeys {
   //============================================================
   static const Key allSummaryPage = Key('allSummaryPage');
   static const Key summaryExpandableSection = Key('summaryExpandableSection');
+  static const Key summaryExpandableSectionDetails =
+      Key('summaryExpandableSectionDetails');
   static const Key invoiceCreditItem = Key('invoiceCreditItem');
 
   //===========================================================

@@ -103,6 +103,7 @@ class _InvoiceCreditItem extends StatelessWidget {
             ),
             _ExpandableSection(
               child: Padding(
+                key: WidgetKeys.summaryExpandableSectionDetails,
                 padding: const EdgeInsets.only(top: 8.0),
                 child: Text(
                   data.referenceId.referenceListString,

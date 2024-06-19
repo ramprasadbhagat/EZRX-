@@ -270,7 +270,7 @@ void main() {
       accountInvoiceRobot.verifyFilterApplied(1);
       accountInvoiceRobot.verifyItems();
 
-       await accountInvoiceRobot.tapFilterButton();
+      await accountInvoiceRobot.tapFilterButton();
       await accountInvoiceFilterRobot.enterFromAmount(amountFrom.toString());
       await accountInvoiceFilterRobot.enterToAmount(amountTo.toString());
       await accountInvoiceFilterRobot.tapApplyButton();
@@ -565,7 +565,6 @@ void main() {
       );
       await commonRobot.dismissSnackbar();
     });
-
   });
 
   group('Account summary menu - credit tab', () {
@@ -1118,7 +1117,7 @@ void main() {
   group('Account Summary menu - summary tab', () {
     const creditId = '4160003952';
     const creditIdStatus = 'Open';
-
+    const emptyReferenceListString = 'NA';
     const debitId = '1310000455';
 
     final fromDate = DateTime(2000, 1, 15);
@@ -1202,7 +1201,7 @@ void main() {
     );
 
     testWidgets(
-      'EZRX-T566 | Verify Detail Feature - show reference details',
+      'EZRX-T566 | Verify Detail Feature - show reference details with empty reference number',
       (tester) async {
         //Got to Summary Page
         await goToAccountSummaryPage(tester);
@@ -1216,16 +1215,41 @@ void main() {
         //search credit Cleared Id
         await commonRobot.searchWithKeyboardAction(creditId);
 
-        // accountSummaryTabRobot.verifyExpandableDetailsButton();
-        // accountSummaryTabRobot.displayDetails(isHidden: true);
-        // await accountSummaryTabRobot.tapExpandableDetailsButton();
-        // accountSummaryTabRobot.displayDetails();
-        // await accountSummaryTabRobot.tapExpandableDetailsButton();
-        // accountSummaryTabRobot.displayDetails(isHidden: true);
+        accountSummaryTabRobot.verifyExpandableDetailsButton();
+        accountSummaryTabRobot.displayDetails(isHidden: true);
+        await accountSummaryTabRobot.tapExpandableDetailsButton();
+        accountSummaryTabRobot.displayDetails(
+          referenceListString: emptyReferenceListString,
+        );
+        await accountSummaryTabRobot.tapExpandableDetailsButton();
+        accountSummaryTabRobot.displayDetails(isHidden: true);
         await commonRobot.tapClearSearch();
         accountSummaryTabRobot.verifyItems();
       },
     );
+
+    // TODO: Enable when having credit with reference data
+    // testWidgets(
+    //   'EZRX-T566 | Verify Detail Feature - show reference details with Reference List',
+    //   (tester) async {
+    //     //Got to Summary Page
+    //     await goToAccountSummaryPage(tester, shipToCode: refNumberShipToCode);
+
+    //     //search credit Cleared Id
+    //     await commonRobot.searchWithKeyboardAction(creditIdWithReference);
+
+    //     accountSummaryTabRobot.verifyExpandableDetailsButton();
+    //     accountSummaryTabRobot.displayDetails(isHidden: true);
+    //     await accountSummaryTabRobot.tapExpandableDetailsButton();
+    //     accountSummaryTabRobot.displayDetails(
+    //       referenceListString: referenceList,
+    //     );
+    //     await accountSummaryTabRobot.tapExpandableDetailsButton();
+    //     accountSummaryTabRobot.displayDetails(isHidden: true);
+    //     await commonRobot.tapClearSearch();
+    //     accountSummaryTabRobot.verifyItems();
+    //   },
+    // );
 
     testWidgets(
       'EZRX-T549 | Verify search summary by inputting invalid keyword on Summary Tab - Unhappy Flow',
@@ -1563,7 +1587,6 @@ void main() {
       await accountSummaryTabRobot.tapItemWithId(creditId, true);
       accountCreditDetailsRobot.verify();
     });
-
   });
 
   group('Payment summary menu - ', () {
@@ -1814,7 +1837,6 @@ void main() {
       );
       await commonRobot.dismissSnackbar();
     });
-
   });
 
 // TODO Soa is not enable for TH

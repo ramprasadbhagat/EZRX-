@@ -163,7 +163,11 @@ class AccountSummaryTabRobot extends CommonRobot {
     await tester.pumpAndSettle();
   }
 
-  void displayDetails({bool isHidden = false, int index = 0}) {
+  void displayDetails({
+    bool isHidden = false,
+    int index = 0,
+    String referenceListString = '',
+  }) {
     expect(
       find.descendant(
         of: _summaryExpandableSection.at(index),
@@ -174,6 +178,16 @@ class AccountSummaryTabRobot extends CommonRobot {
         ),
       ),
       findsOneWidget,
+    );
+
+    expect(
+      find.descendant(
+        of: find.byKey(WidgetKeys.summaryExpandableSectionDetails),
+        matching: find.text(
+          referenceListString,
+        ),
+      ),
+      isHidden ? findsNothing : findsOneWidget,
     );
   }
 

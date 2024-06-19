@@ -1075,6 +1075,9 @@ void main() {
 
   group('Account Summary menu - summary tab', () {
     const creditId = '0180000002';
+    const creditIdWithReference = '1100001357';
+    const referenceList = '#4040002375, #4040000133';
+    const emptyReferenceListString = 'NA';
     const creditIdStatus = 'Cleared';
 
     const debitId = creditId;
@@ -1160,7 +1163,7 @@ void main() {
     );
 
     testWidgets(
-      'EZRX-T566 | Verify Detail Feature - show reference details',
+      'EZRX-T566 | Verify Detail Feature - show reference details with empty reference number',
       (tester) async {
         //Got to Summary Page
         await goToAccountSummaryPage(tester);
@@ -1177,7 +1180,31 @@ void main() {
         accountSummaryTabRobot.verifyExpandableDetailsButton();
         accountSummaryTabRobot.displayDetails(isHidden: true);
         await accountSummaryTabRobot.tapExpandableDetailsButton();
-        accountSummaryTabRobot.displayDetails();
+        accountSummaryTabRobot.displayDetails(
+          referenceListString: emptyReferenceListString,
+        );
+        await accountSummaryTabRobot.tapExpandableDetailsButton();
+        accountSummaryTabRobot.displayDetails(isHidden: true);
+        await commonRobot.tapClearSearch();
+        accountSummaryTabRobot.verifyItems();
+      },
+    );
+
+    testWidgets(
+      'EZRX-T566 | Verify Detail Feature - show reference details with reference',
+      (tester) async {
+        //Got to Summary Page
+        await goToAccountSummaryPage(tester);
+
+        //search credit Cleared Id
+        await commonRobot.searchWithKeyboardAction(creditIdWithReference);
+
+        accountSummaryTabRobot.verifyExpandableDetailsButton();
+        accountSummaryTabRobot.displayDetails(isHidden: true);
+        await accountSummaryTabRobot.tapExpandableDetailsButton();
+        accountSummaryTabRobot.displayDetails(
+          referenceListString: referenceList,
+        );
         await accountSummaryTabRobot.tapExpandableDetailsButton();
         accountSummaryTabRobot.displayDetails(isHidden: true);
         await commonRobot.tapClearSearch();
