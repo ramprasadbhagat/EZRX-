@@ -146,79 +146,81 @@ List<OrderHistoryStep> getOrderHistorySteps({
     ),
   ];
 
-  var result = <OrderHistoryStep>[];
-  if (isEqualsIgnoreCase(stepTitle, 'Cancelled') ||
-      isEqualsIgnoreCase(stepTitle, 'Order Cancelled')) {
-    result = <OrderHistoryStep>[
-      ...baseSteps,
-      OrderHistoryStep.empty().copyWith(
-        title: stepTitle,
-        icon: Icons.cancel,
-      ),
-    ];
-  } else if (isEqualsIgnoreCase(stepTitle, 'Delivered - partial rejection') ||
-      isEqualsIgnoreCase(stepTitle, 'Delivered - rejected upon delivery')) {
-    result = <OrderHistoryStep>[
-      ...baseSteps,
-      OrderHistoryStep.empty().copyWith(
-        title: 'Pending release',
-        icon: Icons.query_builder,
-      ),
-      OrderHistoryStep.empty().copyWith(
-        title: 'Picking in progress',
-        icon: Icons.inventory_2_outlined,
-      ),
-      OrderHistoryStep.empty().copyWith(
-        title: 'Order packed and ready for delivery',
-        icon: Icons.inventory_2_outlined,
-      ),
-      OrderHistoryStep.empty().copyWith(
-        title: 'Out for delivery',
-        icon: Icons.local_shipping_outlined,
-      ),
-      OrderHistoryStep.empty().copyWith(
-        title: 'Delivered',
-        icon: Icons.cancel,
-      ),
-    ];
-  } else {
-    final fullSteps = <OrderHistoryStep>[
-      ...baseSteps,
-      if (!isViewByOrder || isEqualsIgnoreCase(stepTitle, 'Pending release'))
-        OrderHistoryStep.empty().copyWith(
-          title: 'Pending release',
-          icon: Icons.query_builder,
-        ),
-      OrderHistoryStep.empty().copyWith(
-        title: 'Picking in progress',
-        icon: Icons.inventory_2_outlined,
-      ),
-      OrderHistoryStep.empty().copyWith(
-        title: 'Order packed and ready for delivery',
-        icon: Icons.inventory_2_outlined,
-      ),
-      OrderHistoryStep.empty().copyWith(
-        title: 'Out for delivery',
-        icon: Icons.local_shipping_outlined,
-      ),
-      OrderHistoryStep.empty().copyWith(
-        title: 'Delivered',
-        icon: Icons.check,
-      ),
-    ];
+  final otherSteps = <OrderHistoryStep>[
+    OrderHistoryStep.empty().copyWith(
+      title: 'Pending release',
+      icon: Icons.query_builder,
+    ),
+    OrderHistoryStep.empty().copyWith(
+      title: 'Picking in progress',
+      icon: Icons.inventory_2_outlined,
+    ),
+    OrderHistoryStep.empty().copyWith(
+      title: 'Order packed and ready for delivery',
+      icon: Icons.inventory_2_outlined,
+    ),
+    OrderHistoryStep.empty().copyWith(
+      title: 'Out for delivery',
+      icon: Icons.local_shipping_outlined,
+    ),
+    OrderHistoryStep.empty().copyWith(
+      title: 'Delivered',
+      icon: Icons.cancel,
+    ),
+  ];
 
-    final stepIndex = fullSteps.indexWhere(
-      (step) => isEqualsIgnoreCase(step.title, stepTitle),
-    );
-    result = stepIndex > -1
-        ? fullSteps.sublist(0, stepIndex + 1)
-        : [
-            ...baseSteps,
-            OrderHistoryStep.empty().copyWith(
-              title: stepTitle,
-              icon: Icons.check,
-            ),
-          ];
+  var result = <OrderHistoryStep>[];
+
+  switch (stepTitle.toLowerCase()) {
+    case 'cancelled':
+    case 'order cancelled':
+      result = <OrderHistoryStep>[
+        ...baseSteps,
+        OrderHistoryStep.empty().copyWith(
+          title: stepTitle,
+          icon: Icons.cancel,
+        ),
+      ];
+      break;
+    case 'delivered - partial rejection':
+    case 'delivered - rejected upon delivery':
+      result = [
+        ...baseSteps,
+        ...otherSteps,
+      ];
+      break;
+    case 'out for redelivery':
+      result = [
+        ...baseSteps,
+        ...otherSteps,
+      ]..removeLast();
+      break;
+    default:
+      if (isViewByOrder) {
+        otherSteps.removeAt(0);
+      }
+      final fullSteps = [
+        ...baseSteps,
+        ...otherSteps..removeLast(),
+        OrderHistoryStep.empty().copyWith(
+          title: 'Delivered',
+          icon: Icons.check,
+        ),
+      ];
+
+      final stepIndex = fullSteps.indexWhere(
+        (step) => isEqualsIgnoreCase(step.title, stepTitle),
+      );
+      result = stepIndex > -1
+          ? fullSteps.sublist(0, stepIndex + 1)
+          : [
+              ...baseSteps,
+              OrderHistoryStep.empty().copyWith(
+                title: stepTitle,
+                icon: Icons.check,
+              ),
+            ];
+      break;
   }
 
   if (result.isNotEmpty) {

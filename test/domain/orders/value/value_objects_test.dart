@@ -588,6 +588,23 @@ void main() {
       );
     });
 
+    test('History steps display or status == Out for redelivery', () {
+      final outForRedelivery = OrderStepValue('Out for redelivery');
+
+      final fixedStep = [
+        'Out for delivery',
+        'Order packed and ready for delivery',
+        'Picking in progress',
+        'Pending release',
+        'Order created',
+      ];
+
+      expect(
+        outForRedelivery.viewByItemHistorySteps.map((e) => e.title).toList(),
+        fixedStep,
+      );
+    });
+
     test('Check is in queue', () {
       // Return true if raw data return "in queue" text
       expect(OrderStepValue('in queue').isInQueue, true);

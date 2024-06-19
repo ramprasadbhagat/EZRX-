@@ -39,7 +39,7 @@ extension OrderHistoryStepExtension on List<OrderHistoryStep> {
     List<OrderStatusTracker> subSteps,
   ) {
     final needToUpdated = any(
-      (status) => ['out for delivery', 'delivered']
+      (status) => ['out for delivery', 'delivered', 'out for redelivery']
           .contains(status.title.trim().toLowerCase()),
     );
 
