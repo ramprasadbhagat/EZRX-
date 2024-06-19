@@ -656,7 +656,7 @@ void main() {
       cartRobot.verifyCartShipToAddress(shipToAddress);
       await updateAndVerifySmallOrderFee();
       final totalPrice =
-          materialUnitPrice.includeTax(taxPercentage) + smallOrderFee;
+          materialUnitPrice.includeTaxForID(taxPercentage) + smallOrderFee;
       cartRobot.verifyCartTotalPrice(
         totalPrice.priceDisplayForID(currency),
       );
@@ -741,7 +741,7 @@ void main() {
       await productDetailRobot.tapCartButton();
       await updateAndVerifySmallOrderFee();
       var totalPrice =
-          materialUnitPrice.includeTax(taxPercentage) + smallOrderFee;
+          materialUnitPrice.includeTaxForID(taxPercentage) + smallOrderFee;
 
       await cartRobot.verifyMaterial(materialNumber);
       cartRobot.verifyMaterialQty(materialNumber, 1);
@@ -758,7 +758,8 @@ void main() {
       //applied small order fees here as total price is less than 3,00,000
       const materialTotalPrice = materialUnitPrice * 2;
       await updateAndVerifySmallOrderFee();
-      totalPrice = materialTotalPrice.includeTax(taxPercentage) + smallOrderFee;
+      totalPrice =
+          materialTotalPrice.includeTaxForID(taxPercentage) + smallOrderFee;
       cartRobot.verifyMaterialQty(materialNumber, 2);
       cartRobot.verifyMaterialTotalPrice(
         materialNumber,
@@ -777,7 +778,7 @@ void main() {
         totalPrice.priceDisplayForID(currency),
       );
       cartRobot.verifyCartTotalPrice(
-        totalPrice.includeTax(taxPercentage).priceDisplayForID(currency),
+        totalPrice.includeTaxForID(taxPercentage).priceDisplayForID(currency),
       );
 
       await cartRobot.decreaseMaterialQty(materialNumber);
@@ -788,7 +789,7 @@ void main() {
         totalPrice.priceDisplayForID(currency),
       );
       cartRobot.verifyCartTotalPrice(
-        totalPrice.includeTax(taxPercentage).priceDisplayForID(currency),
+        totalPrice.includeTaxForID(taxPercentage).priceDisplayForID(currency),
       );
     });
 
@@ -819,7 +820,8 @@ void main() {
       await updateAndVerifySmallOrderFee();
 
       cartRobot.verifyCartTotalPrice(
-        (lowPriceMaterialUnitPrice.includeTax(taxPercentage) + smallOrderFee)
+        (lowPriceMaterialUnitPrice.includeTaxForID(taxPercentage) +
+                smallOrderFee)
             .priceDisplayForID(currency),
       );
 
@@ -831,7 +833,7 @@ void main() {
       );
       cartRobot.verifyCartTotalPrice(
         (lowPriceMaterialUnitPrice * 3)
-            .includeTax(taxPercentage)
+            .includeTaxForID(taxPercentage)
             .priceDisplayForID(currency),
       );
       await updateAndVerifySmallOrderFee();
@@ -1014,7 +1016,7 @@ void main() {
       await updateAndVerifySmallOrderFee();
       //we need to update the small order fee first, then we can finalize grand total value
       final grandTotalPrice =
-          materialUnitPrice.includeTax(taxPercentage) + smallOrderFee;
+          materialUnitPrice.includeTaxForID(taxPercentage) + smallOrderFee;
       await checkoutRobot
           .verifySubTotalLabel(totalPrice.priceDisplayForID(currency));
       await checkoutRobot
@@ -1128,13 +1130,13 @@ void main() {
     //   await updateAndVerifySmallOrderFee();
     //   await checkoutRobot.verifyGrandTotalLabel(
     //     totalPrice
-    //         .includeTax(taxPercentage)
+    //         .includeTaxForID(taxPercentage)
     //         .floor()
     //         .priceDisplayForID(currency),
     //   );
     //   checkoutRobot.verifyStickyGrandTotal(
     //     totalPrice
-    //         .includeTax(taxPercentage)
+    //         .includeTaxForID(taxPercentage)
     //         .floor()
     //         .priceDisplayForID(currency),
     //   );
@@ -1186,7 +1188,7 @@ void main() {
       await checkoutRobot.verifyYoursItemLabel(1);
       await updateAndVerifySmallOrderFee();
       final grandTotalPrice =
-          totalPrice.includeTax(taxPercentage) + smallOrderFee;
+          totalPrice.includeTaxForID(taxPercentage) + smallOrderFee;
       await checkoutRobot.tapPlaceOrderButton();
       await orderSuccessRobot.dismissSnackbar();
 
@@ -1217,7 +1219,7 @@ void main() {
       const totalPrice = (bonusMaterialNumberUnitPrice * qty);
 
       final grandTotalPrice =
-          totalPrice.includeTax(taxPercentage) + smallOrderFee;
+          totalPrice.includeTaxForID(taxPercentage) + smallOrderFee;
 
       //init app
       await pumpAppWithHomeScreen(tester);
