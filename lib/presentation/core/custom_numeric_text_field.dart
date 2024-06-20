@@ -173,7 +173,10 @@ class _CustomNumericTextFieldState extends State<CustomNumericTextField> {
       enabled: widget.isEnabled,
       controller: widget.controller,
       keyboardType: widget.keyboardType,
-      decoration: widget.decoration,
+      decoration: widget.decoration.copyWith(
+        contentPadding: const EdgeInsets.fromLTRB(0, 10, 15, 10),
+        prefix: const SizedBox(width: 15),
+      ),
       onChanged: widget.onChanged,
       validator: (value) => widget.validator?.call(value),
       initialValue: widget.initValue,

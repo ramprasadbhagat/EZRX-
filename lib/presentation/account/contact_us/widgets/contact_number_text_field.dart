@@ -68,6 +68,7 @@ class _ContactNumberTextField extends StatelessWidget {
               ),
               inputDecoration: InputDecoration(
                 hintText: 'Enter your phone number'.tr(),
+                contentPadding: const EdgeInsets.symmetric(vertical: 10, horizontal: 0),
               ),
               validator: (_) {
                 return context

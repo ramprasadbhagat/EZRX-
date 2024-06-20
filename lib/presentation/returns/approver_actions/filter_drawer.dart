@@ -131,6 +131,9 @@ class _ReturnIdByFilter extends StatelessWidget {
           ),
           decoration: InputDecoration(
             labelText: 'Return ID'.tr(),
+            contentPadding: const EdgeInsets.symmetric(vertical: 10, horizontal: 0),
+            prefixIcon: const SizedBox.shrink(),
+            prefixIconConstraints: const BoxConstraints.tightFor(width: 14),
           ),
         );
       },
@@ -170,6 +173,8 @@ class _CreatedByFilter extends StatelessWidget {
           ),
           decoration: InputDecoration(
             labelText: 'Created By'.tr(),
+            contentPadding: const EdgeInsets.fromLTRB(0, 10, 15, 10),
+            prefix: const SizedBox(width: 15),
           ),
         );
       },
@@ -208,6 +213,9 @@ class _ShipToFilter extends StatelessWidget {
           ),
           decoration: InputDecoration(
             labelText: 'Ship To'.tr(),
+            contentPadding: const EdgeInsets.symmetric(vertical: 10, horizontal: 0),
+            prefixIcon: const SizedBox.shrink(),
+            prefixIconConstraints: const BoxConstraints.tightFor(width: 14),
           ),
         );
       },
@@ -244,6 +252,9 @@ class _SoldToFilter extends StatelessWidget {
           ),
           decoration: InputDecoration(
             labelText: 'Sold To'.tr(),
+            contentPadding: const EdgeInsets.symmetric(vertical: 10, horizontal: 0),
+            prefixIcon: const SizedBox.shrink(),
+            prefixIconConstraints: const BoxConstraints.tightFor(width: 14),
           ),
         );
       },

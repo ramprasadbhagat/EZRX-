@@ -547,6 +547,8 @@ class _TextFormFieldState extends State<_TextFormField> {
         labelText: _getLabelText(widget.label),
         filled: !_isEnabled,
         fillColor: ZPColors.extraLightGray,
+        contentPadding: const EdgeInsets.fromLTRB(0, 10, 15, 10),
+        prefix: const SizedBox(width: 15),
       ),
       validator: (value) => _validate(widget.label, _controller.text),
       enabled: _isEnabled,

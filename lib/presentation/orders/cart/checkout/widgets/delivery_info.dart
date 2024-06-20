@@ -225,8 +225,6 @@ class _TextFormFieldState extends State<_TextFormField> {
             },
             inputFormatters: widget.inputFormatters,
             decoration: InputDecoration(
-              contentPadding:
-                  const EdgeInsets.only(left: 10, top: 12, bottom: 12),
               hintText: context.tr(widget.hintText),
               suffixIcon: state.isLoading
                   ? const Padding(

@@ -86,7 +86,10 @@ class TextFieldWithLabel extends StatelessWidget {
           enabled: isEnabled,
           controller: controller,
           keyboardType: keyboardType,
-          decoration: decoration,
+          decoration: decoration.copyWith(
+            contentPadding: const EdgeInsets.fromLTRB(0, 10, 15, 10),
+            prefix: const SizedBox(width: 15),
+          ),
           obscureText: obscureText,
           onChanged: onChanged,
           validator: (value) => validator?.call(value),

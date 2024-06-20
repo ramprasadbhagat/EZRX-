@@ -129,6 +129,8 @@ class _SalesOrganizationField extends StatelessWidget {
       keyboardType: TextInputType.none,
       decoration: InputDecoration(
         labelText: 'Sales Organization '.tr(),
+        contentPadding: const EdgeInsets.fromLTRB(0, 10, 15, 10),
+        prefix: const SizedBox(width: 15),
       ),
     );
   }
@@ -214,6 +216,8 @@ class _PrincipalCodeField extends StatelessWidget {
       keyboardType: TextInputType.text,
       decoration: InputDecoration(
         labelText: 'Please assign a valid sales principal code'.tr(),
+        contentPadding: const EdgeInsets.fromLTRB(0, 10, 15, 10),
+        prefix: const SizedBox(width: 15),
       ),
     );
   }
@@ -241,6 +245,8 @@ class _MonthsBeforeExpiryField extends StatelessWidget {
       keyboardType: TextInputType.number,
       decoration: InputDecoration(
         labelText: 'Months Before Expiry'.tr(),
+        contentPadding: const EdgeInsets.fromLTRB(0, 10, 15, 10),
+        prefix: const SizedBox(width: 15),
       ),
     );
   }
@@ -268,6 +274,8 @@ class _MonthsAfterExpiryField extends StatelessWidget {
       keyboardType: TextInputType.number,
       decoration: InputDecoration(
         labelText: 'Months After Expiry'.tr(),
+        contentPadding: const EdgeInsets.fromLTRB(0, 10, 15, 10),
+        prefix: const SizedBox(width: 15),
       ),
     );
   }
