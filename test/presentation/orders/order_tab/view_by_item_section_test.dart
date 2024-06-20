@@ -32,6 +32,7 @@ import 'package:mocktail/mocktail.dart';
 import '../../../common_mock_data/customer_code_mock.dart';
 import '../../../common_mock_data/mock_bloc.dart';
 import '../../../common_mock_data/mock_other.dart';
+import '../../../common_mock_data/sales_org_config_mock/fake_id_sales_org_config.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_my_sales_org_config.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_th_sales_org_config.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_tw_sales_org_config.dart';
@@ -643,8 +644,7 @@ void main() {
       );
     });
 
-    testWidgets('Show IRN when enableIRN is true',
-        (tester) async {
+    testWidgets('Show IRN when enableIRN is true', (tester) async {
       const iRNNumber = '12C 234/11';
 
       when(() => eligibilityBlocMock.state).thenReturn(
@@ -674,8 +674,7 @@ void main() {
       expect(find.textContaining(iRNNumber), findsOneWidget);
     });
 
-    testWidgets('Do not show IRN when enableIRN is false',
-        (tester) async {
+    testWidgets('Do not show IRN when enableIRN is false', (tester) async {
       const iRNNumber = '12C 234/11';
 
       when(() => eligibilityBlocMock.state).thenReturn(
@@ -703,6 +702,60 @@ void main() {
       await tester.pumpAndSettle();
 
       expect(find.textContaining(iRNNumber), findsNothing);
+    });
+
+    testWidgets('Display "FREE" for zero price', (tester) async {
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrganisation: fakeTHSalesOrganisation.copyWith(
+            salesOrg: fakeMYSalesOrg,
+          ),
+          salesOrgConfigs: fakeMYSalesOrgConfigs,
+        ),
+      );
+
+      when(() => mockViewByItemsBloc.state).thenReturn(
+        ViewByItemsState.initial().copyWith(
+          isFetching: false,
+          orderHistory: orderHistory.copyWith(
+            orderHistoryItems: [
+              fakeOrderHistoryItems.first.copyWith(isBonusMaterial: true),
+            ],
+          ),
+        ),
+      );
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pumpAndSettle();
+
+      expect(find.text('FREE', findRichText: true), findsOneWidget);
+    });
+
+    testWidgets('Do not display "FREE" for zero price in Indo market', (tester) async {
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrganisation: fakeTHSalesOrganisation.copyWith(
+            salesOrg: fakeIDSalesOrg,
+          ),
+          salesOrgConfigs: fakeIDSalesOrgConfigs,
+        ),
+      );
+
+      when(() => mockViewByItemsBloc.state).thenReturn(
+        ViewByItemsState.initial().copyWith(
+          isFetching: false,
+          orderHistory: orderHistory.copyWith(
+            orderHistoryItems: [
+              fakeOrderHistoryItems.first.copyWith(
+                isBonusMaterial: true,
+              ),
+            ],
+          ),
+        ),
+      );
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pumpAndSettle();
+
+      expect(find.text('IDR 0', findRichText: true), findsOneWidget);
     });
   });
 }
