@@ -10,6 +10,7 @@ import 'package:ezrxmobile/domain/core/device/repository/i_device_repository.dar
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/payments/entities/create_virtual_account.dart';
 import 'package:ezrxmobile/domain/payments/entities/customer_open_item.dart';
+import 'package:ezrxmobile/domain/payments/entities/payment_status.dart';
 import 'package:ezrxmobile/domain/payments/entities/principal_cutoffs.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_info.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_invoice_info_pdf.dart';
@@ -188,7 +189,7 @@ class NewPaymentBloc extends Bloc<NewPaymentEvent, NewPaymentState> {
             salesOrganisation: state.salesOrganisation,
             customerCodeInfo: state.customerCodeInfo,
             isMarketPlace: state.isMarketPlace,
-            uri: e.paymentUrl,
+            paymentStatus: e.paymentStatus,
           );
         }
       },

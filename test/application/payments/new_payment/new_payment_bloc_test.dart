@@ -13,6 +13,7 @@ import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/payments/entities/customer_open_item.dart';
 import 'package:ezrxmobile/domain/payments/entities/new_payment_method.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_info.dart';
+import 'package:ezrxmobile/domain/payments/entities/payment_status.dart';
 import 'package:ezrxmobile/domain/payments/value/value_object.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_invoice_info_pdf.dart';
@@ -37,6 +38,11 @@ void main() {
   late List<CustomerOpenItem> fakeCustomerOpenItemSelected;
   late List<CustomerOpenItem> fakeCreditSelected;
   late List<NewPaymentMethod> fakePaymentMethodValues;
+  final fakePaymentStatus = PaymentStatus(
+    paymentId: 'fake-id',
+    transactionReference: 'fake-ref',
+    transactionStatus: TransactionStatus('fake-status'),
+  );
 
   setUpAll(() {
     newPaymentRepository = NewPaymentRepositoryMock();
@@ -486,7 +492,7 @@ void main() {
             () => newPaymentRepository.updatePaymentGateway(
               salesOrganisation: fakeMYSalesOrganisation,
               customerCodeInfo: fakeCustomerCodeInfo,
-              uri: Uri.parse('https://fake-uri'),
+              paymentStatus: fakePaymentStatus,
               isMarketPlace: true,
             ),
           ).thenAnswer(
@@ -506,7 +512,7 @@ void main() {
         ),
         act: (NewPaymentBloc bloc) => bloc.add(
           NewPaymentEvent.updatePaymentGateway(
-            paymentUrl: Uri.parse('https://fake-uri'),
+            paymentStatus: fakePaymentStatus,
           ),
         ),
         verify: (NewPaymentBloc newPaymentBloc) {
@@ -514,7 +520,7 @@ void main() {
             () => newPaymentRepository.updatePaymentGateway(
               salesOrganisation: fakeMYSalesOrganisation,
               customerCodeInfo: fakeCustomerCodeInfo,
-              uri: Uri.parse('https://fake-uri'),
+              paymentStatus: fakePaymentStatus,
               isMarketPlace: true,
             ),
           ).called(1);
@@ -537,14 +543,14 @@ void main() {
         ),
         act: (NewPaymentBloc bloc) => bloc.add(
           NewPaymentEvent.updatePaymentGateway(
-            paymentUrl: Uri.parse('https://fake-uri'),
+            paymentStatus: fakePaymentStatus,
           ),
         ),
         verify: (NewPaymentBloc newPaymentBloc) {
           verifyNever(
             () => newPaymentRepository.updatePaymentGateway(
               salesOrganisation: fakePHSalesOrganisation,
-              uri: Uri.parse('https://fake-uri'),
+              paymentStatus: fakePaymentStatus,
               isMarketPlace: false,
               customerCodeInfo: fakeCustomerCodeInfo,
             ),
@@ -564,7 +570,7 @@ void main() {
               salesOrganisation: fakeVNSalesOrganisation,
               customerCodeInfo: fakeCustomerCodeInfo,
               isMarketPlace: false,
-              uri: Uri.parse('https://fake-uri'),
+              paymentStatus: fakePaymentStatus,
             ),
           ).thenAnswer(
             (invocation) async => const Left(
@@ -582,7 +588,7 @@ void main() {
         ),
         act: (NewPaymentBloc bloc) => bloc.add(
           NewPaymentEvent.updatePaymentGateway(
-            paymentUrl: Uri.parse('https://fake-uri'),
+            paymentStatus: fakePaymentStatus,
           ),
         ),
         verify: (NewPaymentBloc newPaymentBloc) {
@@ -591,7 +597,7 @@ void main() {
               salesOrganisation: fakeVNSalesOrganisation,
               customerCodeInfo: fakeCustomerCodeInfo,
               isMarketPlace: false,
-              uri: Uri.parse('https://fake-uri'),
+              paymentStatus: fakePaymentStatus,
             ),
           ).called(1);
         },
@@ -613,7 +619,7 @@ void main() {
         ),
         act: (NewPaymentBloc bloc) => bloc.add(
           NewPaymentEvent.updatePaymentGateway(
-            paymentUrl: Uri.parse('https://fake-uri'),
+            paymentStatus: fakePaymentStatus,
           ),
         ),
         verify: (NewPaymentBloc newPaymentBloc) {
@@ -622,7 +628,7 @@ void main() {
               salesOrganisation: fakeTHSalesOrganisation,
               customerCodeInfo: fakeCustomerCodeInfo,
               isMarketPlace: false,
-              uri: Uri.parse('https://fake-uri'),
+              paymentStatus: fakePaymentStatus,
             ),
           );
         },
@@ -636,7 +642,7 @@ void main() {
         ),
         act: (NewPaymentBloc bloc) => bloc.add(
           NewPaymentEvent.updatePaymentGateway(
-            paymentUrl: Uri.parse('https://fake-uri'),
+            paymentStatus: fakePaymentStatus,
           ),
         ),
         seed: () => NewPaymentState.initial().copyWith(
@@ -649,7 +655,7 @@ void main() {
               salesOrganisation: fakeSGSalesOrganisation,
               customerCodeInfo: fakeCustomerCodeInfo,
               isMarketPlace: false,
-              uri: Uri.parse('https://fake-uri'),
+              paymentStatus: fakePaymentStatus,
             ),
           );
         },

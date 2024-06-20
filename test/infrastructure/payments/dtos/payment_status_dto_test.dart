@@ -1,25 +1,19 @@
-import 'package:ezrxmobile/domain/payments/entities/payment_status.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/payment_status_dto.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  late dynamic paymentStatus;
-  group('Test Payment Status Dto ', () {
-    setUp(() async {
-      paymentStatus = PaymentStatus(
-        uri: Uri.parse(
-          'https://uat-vn.ezrx.com/my-account/thankyou?TxnStatus=53616c7465645f5fc43ab15f2f89a2de95b0584241d3a13c8f362f7a3f381aed&paymentId=53616c7465645f5f695668d5bbbf4cb0fd82d2235709e16923dae9aa4825a450508f24ad167ba1a5fb145fec903d2848&transactionReference=53616c7465645f5f155ff94a92e04b49941c1f31d393b934a6a36ca650b56d33&redirectFrom=VN',
-        ),
-      );
-    });
+  final uri = Uri.parse(
+    'https://uat-my.ezrx.com/my-account/thankyou?TxnStatus=53616c7465645f5f8e5e0ca2b58a806b94a4ebbf208dfa4b0d88785a87b5d51c&paymentId=53616c7465645f5fe091adf59597a72a5abfd6acc86a3ab61711eb2bbde29eb142069eb826b994521f0f6f6aef1b0b39&transactionReference=53616c7465645f5f1848629ba40e99bbaa51def8fee526d27b1aa47b0db74a940b88ea79ee309de40f5853a2fe8a4eba&isCancelled=false&serviceID=53616c7465645f5f4359c1513d51facdf3714b241e1968387b451b21e5096e25',
+  );
 
-    test('Test fromDomain', () {
-      final paymentStatusDto = PaymentStatusDto.fromDomain(paymentStatus);
+  group('Test Payment Status Dto ', () {
+    test('Test fromUri', () {
+      final paymentStatusDto = PaymentStatusDto.fromUri(uri);
       expect(paymentStatusDto.txnStatus, '0');
-      expect(paymentStatusDto.paymentID, '09EZ230000943101');
-      expect(paymentStatusDto.transactionRef, '');
+      expect(paymentStatusDto.paymentID, '09EZ240002433001');
+      expect(paymentStatusDto.transactionRef, 'ZPA000009EZ240002433001');
     });
   });
 }

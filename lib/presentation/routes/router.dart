@@ -44,6 +44,7 @@ import 'package:ezrxmobile/presentation/payments/new_payment/tabs/outstanding_in
 import 'package:ezrxmobile/presentation/payments/new_payment/tabs/payment_method/payment_method_tab.dart';
 import 'package:ezrxmobile/presentation/payments/payment_advice_created/payment_advice_created_page.dart';
 import 'package:ezrxmobile/presentation/payments/payment_completed/payment_completed_page.dart';
+import 'package:ezrxmobile/presentation/payments/payment_failed/payment_failed_page.dart';
 import 'package:ezrxmobile/presentation/payments/payment_home/payment_page.dart';
 import 'package:ezrxmobile/presentation/payments/payment_summary_details/payment_summary_details_screen.dart';
 import 'package:ezrxmobile/presentation/payments/statement_accounts/statement_accounts.dart';
@@ -311,6 +312,10 @@ import 'package:flutter/material.dart';
     AutoRoute(
       path: 'payments/payment_completed',
       page: PaymentCompletedPage,
+    ),
+    AutoRoute(
+      path: 'payments/payment_failed',
+      page: PaymentFailedPage,
     ),
     AutoRoute(
       path: 'admin_po_attachment',

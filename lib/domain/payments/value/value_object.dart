@@ -120,3 +120,19 @@ class ReferenceId extends ValueObject<String> {
 
   const ReferenceId._(this.value);
 }
+
+class TransactionStatus extends ValueObject<String> {
+  @override
+  final Either<ValueFailure<String>, String> value;
+
+  factory TransactionStatus(String input) =>
+      TransactionStatus._(validateStringNotEmpty(input));
+
+  const TransactionStatus._(this.value);
+
+  bool get paymentMYFailed =>
+      isPaymentMYFailedStatusCode(value.getOrElse(() => ''));
+
+  bool get paymentMarketPlaceFailed =>
+      isPaymentMarketPlaceFailedStatusCode(value.getOrElse(() => ''));
+}

@@ -922,9 +922,7 @@ void setupLocator() {
     ),
   );
 
-  locator.registerLazySingleton(
-    () => Encryption(),
-  );
+  locator.registerLazySingleton(() => Encryption());
 
   locator.registerLazySingleton(
     () => OrderRepository(

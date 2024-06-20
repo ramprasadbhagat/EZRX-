@@ -34,7 +34,7 @@ class NewPaymentEvent with _$NewPaymentEvent {
   const factory NewPaymentEvent.pay() = _Pay;
 
   const factory NewPaymentEvent.updatePaymentGateway({
-    required Uri paymentUrl,
+    required PaymentStatus paymentStatus,
   }) = _UpdatePaymentGateway;
 
   const factory NewPaymentEvent.fetchInvoiceInfoPdf() = _FetchInvoiceInfoPdf;

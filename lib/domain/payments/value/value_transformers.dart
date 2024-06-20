@@ -65,3 +65,7 @@ bool checkIsCreditByCode(String debitCreditCode) =>
 String getReferenceListString(String referenceId) => referenceId.isNotEmpty
     ? referenceId.split(',').map((e) => '#${e.trim()}').join(', ')
     : naIfEmpty('');
+
+bool isPaymentMYFailedStatusCode(String code) => code == '0';
+
+bool isPaymentMarketPlaceFailedStatusCode(String code) => code == '1';

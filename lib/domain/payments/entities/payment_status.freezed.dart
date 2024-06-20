@@ -12,11 +12,13 @@ part of 'payment_status.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$PaymentStatus {
-  Uri get uri => throw _privateConstructorUsedError;
+  String get paymentId => throw _privateConstructorUsedError;
+  String get transactionReference => throw _privateConstructorUsedError;
+  TransactionStatus get transactionStatus => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $PaymentStatusCopyWith<PaymentStatus> get copyWith =>
@@ -29,7 +31,10 @@ abstract class $PaymentStatusCopyWith<$Res> {
           PaymentStatus value, $Res Function(PaymentStatus) then) =
       _$PaymentStatusCopyWithImpl<$Res, PaymentStatus>;
   @useResult
-  $Res call({Uri uri});
+  $Res call(
+      {String paymentId,
+      String transactionReference,
+      TransactionStatus transactionStatus});
 }
 
 /// @nodoc
@@ -45,89 +50,134 @@ class _$PaymentStatusCopyWithImpl<$Res, $Val extends PaymentStatus>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? uri = null,
+    Object? paymentId = null,
+    Object? transactionReference = null,
+    Object? transactionStatus = null,
   }) {
     return _then(_value.copyWith(
-      uri: null == uri
-          ? _value.uri
-          : uri // ignore: cast_nullable_to_non_nullable
-              as Uri,
+      paymentId: null == paymentId
+          ? _value.paymentId
+          : paymentId // ignore: cast_nullable_to_non_nullable
+              as String,
+      transactionReference: null == transactionReference
+          ? _value.transactionReference
+          : transactionReference // ignore: cast_nullable_to_non_nullable
+              as String,
+      transactionStatus: null == transactionStatus
+          ? _value.transactionStatus
+          : transactionStatus // ignore: cast_nullable_to_non_nullable
+              as TransactionStatus,
     ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$$_PaymentStatusCopyWith<$Res>
+abstract class _$$PaymentStatusImplCopyWith<$Res>
     implements $PaymentStatusCopyWith<$Res> {
-  factory _$$_PaymentStatusCopyWith(
-          _$_PaymentStatus value, $Res Function(_$_PaymentStatus) then) =
-      __$$_PaymentStatusCopyWithImpl<$Res>;
+  factory _$$PaymentStatusImplCopyWith(
+          _$PaymentStatusImpl value, $Res Function(_$PaymentStatusImpl) then) =
+      __$$PaymentStatusImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({Uri uri});
+  $Res call(
+      {String paymentId,
+      String transactionReference,
+      TransactionStatus transactionStatus});
 }
 
 /// @nodoc
-class __$$_PaymentStatusCopyWithImpl<$Res>
-    extends _$PaymentStatusCopyWithImpl<$Res, _$_PaymentStatus>
-    implements _$$_PaymentStatusCopyWith<$Res> {
-  __$$_PaymentStatusCopyWithImpl(
-      _$_PaymentStatus _value, $Res Function(_$_PaymentStatus) _then)
+class __$$PaymentStatusImplCopyWithImpl<$Res>
+    extends _$PaymentStatusCopyWithImpl<$Res, _$PaymentStatusImpl>
+    implements _$$PaymentStatusImplCopyWith<$Res> {
+  __$$PaymentStatusImplCopyWithImpl(
+      _$PaymentStatusImpl _value, $Res Function(_$PaymentStatusImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? uri = null,
+    Object? paymentId = null,
+    Object? transactionReference = null,
+    Object? transactionStatus = null,
   }) {
-    return _then(_$_PaymentStatus(
-      uri: null == uri
-          ? _value.uri
-          : uri // ignore: cast_nullable_to_non_nullable
-              as Uri,
+    return _then(_$PaymentStatusImpl(
+      paymentId: null == paymentId
+          ? _value.paymentId
+          : paymentId // ignore: cast_nullable_to_non_nullable
+              as String,
+      transactionReference: null == transactionReference
+          ? _value.transactionReference
+          : transactionReference // ignore: cast_nullable_to_non_nullable
+              as String,
+      transactionStatus: null == transactionStatus
+          ? _value.transactionStatus
+          : transactionStatus // ignore: cast_nullable_to_non_nullable
+              as TransactionStatus,
     ));
   }
 }
 
 /// @nodoc
 
-class _$_PaymentStatus extends _PaymentStatus {
-  const _$_PaymentStatus({required this.uri}) : super._();
+class _$PaymentStatusImpl extends _PaymentStatus {
+  const _$PaymentStatusImpl(
+      {required this.paymentId,
+      required this.transactionReference,
+      required this.transactionStatus})
+      : super._();
 
   @override
-  final Uri uri;
+  final String paymentId;
+  @override
+  final String transactionReference;
+  @override
+  final TransactionStatus transactionStatus;
 
   @override
   String toString() {
-    return 'PaymentStatus(uri: $uri)';
+    return 'PaymentStatus(paymentId: $paymentId, transactionReference: $transactionReference, transactionStatus: $transactionStatus)';
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_PaymentStatus &&
-            (identical(other.uri, uri) || other.uri == uri));
+            other is _$PaymentStatusImpl &&
+            (identical(other.paymentId, paymentId) ||
+                other.paymentId == paymentId) &&
+            (identical(other.transactionReference, transactionReference) ||
+                other.transactionReference == transactionReference) &&
+            (identical(other.transactionStatus, transactionStatus) ||
+                other.transactionStatus == transactionStatus));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, uri);
+  int get hashCode => Object.hash(
+      runtimeType, paymentId, transactionReference, transactionStatus);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_PaymentStatusCopyWith<_$_PaymentStatus> get copyWith =>
-      __$$_PaymentStatusCopyWithImpl<_$_PaymentStatus>(this, _$identity);
+  _$$PaymentStatusImplCopyWith<_$PaymentStatusImpl> get copyWith =>
+      __$$PaymentStatusImplCopyWithImpl<_$PaymentStatusImpl>(this, _$identity);
 }
 
 abstract class _PaymentStatus extends PaymentStatus {
-  const factory _PaymentStatus({required final Uri uri}) = _$_PaymentStatus;
+  const factory _PaymentStatus(
+          {required final String paymentId,
+          required final String transactionReference,
+          required final TransactionStatus transactionStatus}) =
+      _$PaymentStatusImpl;
   const _PaymentStatus._() : super._();
 
   @override
-  Uri get uri;
+  String get paymentId;
+  @override
+  String get transactionReference;
+  @override
+  TransactionStatus get transactionStatus;
   @override
   @JsonKey(ignore: true)
-  _$$_PaymentStatusCopyWith<_$_PaymentStatus> get copyWith =>
+  _$$PaymentStatusImplCopyWith<_$PaymentStatusImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

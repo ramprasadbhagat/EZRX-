@@ -166,17 +166,25 @@ class _PaymentSummarySection extends StatelessWidget {
           },
         );
 
+        final paymentStatus = PaymentStatusDto.fromUri(uri).toDomain;
+
         context.read<NewPaymentBloc>().add(
               NewPaymentEvent.updatePaymentGateway(
-                paymentUrl: uri,
+                paymentStatus: paymentStatus,
               ),
             );
         unawaited(
-          context.router.pushAndPopUntil(
-            PaymentCompletedPageRoute(isMarketPlace: context.isMPPayment),
-            predicate: (Route route) =>
-                route.settings.name == PaymentPageRoute.name,
-          ),
+          _isFailedPayment(context, paymentStatus.transactionStatus)
+              ? context.router.pushAndPopUntil(
+                  PaymentFailedPageRoute(isMarketPlace: context.isMPPayment),
+                  predicate: (Route route) =>
+                      route.settings.name == PaymentPageRoute.name,
+                )
+              : context.router.pushAndPopUntil(
+                  PaymentCompletedPageRoute(isMarketPlace: context.isMPPayment),
+                  predicate: (Route route) =>
+                      route.settings.name == PaymentPageRoute.name,
+                ),
         );
       }
     } else {
@@ -196,5 +204,21 @@ class _PaymentSummarySection extends StatelessWidget {
         context.router.popUntilRouteWithPath('payments');
       }
     }
+  }
+
+  bool _isFailedPayment(
+    BuildContext context,
+    TransactionStatus transactionStatus,
+  ) {
+    //TODO: Revisit to check for VN because VN also use webview flow
+    if (context.read<EligibilityBloc>().state.salesOrg.isMY) {
+      if (context.isMPPayment) {
+        return transactionStatus.paymentMarketPlaceFailed;
+      }
+
+      return transactionStatus.paymentMYFailed;
+    }
+
+    return false;
   }
 }

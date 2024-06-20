@@ -24,7 +24,6 @@ import 'package:ezrxmobile/domain/payments/repository/i_new_payment_repository.d
 import 'package:ezrxmobile/infrastructure/core/common/device_info.dart';
 import 'package:ezrxmobile/infrastructure/core/common/file_path_helper.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/device_storage.dart';
-import 'package:ezrxmobile/infrastructure/order/dtos/payment_status_dto.dart';
 import 'package:ezrxmobile/infrastructure/payments/datasource/new_payment_local.dart';
 import 'package:ezrxmobile/infrastructure/payments/datasource/new_payment_remote.dart';
 import 'package:ezrxmobile/infrastructure/payments/dtos/available_credit_filter_dto.dart';
@@ -216,7 +215,7 @@ class NewPaymentRepository extends INewPaymentRepository {
     required SalesOrganisation salesOrganisation,
     required CustomerCodeInfo customerCodeInfo,
     required bool isMarketPlace,
-    required Uri uri,
+    required PaymentStatus paymentStatus,
   }) async {
     if (config.appFlavor == Flavor.mock) {
       try {
@@ -230,16 +229,13 @@ class NewPaymentRepository extends INewPaymentRepository {
       }
     }
     try {
-      final paymentStatusDto =
-          PaymentStatusDto.fromDomain(PaymentStatus(uri: uri));
-
       await remoteDataSource.updatePaymentGateway(
         salesOrg: salesOrganisation.salesOrg.getOrCrash(),
-        txnStatus: paymentStatusDto.txnStatus,
-        paymentID: paymentStatusDto.paymentID,
-        transactionRef: paymentStatusDto.transactionRef,
         customerCode: customerCodeInfo.customerCodeSoldTo,
         isMarketPlace: isMarketPlace,
+        txnStatus: paymentStatus.transactionStatus.getOrDefaultValue(''),
+        paymentID: paymentStatus.paymentId,
+        transactionRef: paymentStatus.transactionReference,
       );
 
       return const Right(unit);

@@ -21,7 +21,6 @@ import 'package:ezrxmobile/domain/payments/value/value_object.dart';
 import 'package:ezrxmobile/infrastructure/core/common/device_info.dart';
 import 'package:ezrxmobile/infrastructure/core/common/file_path_helper.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/device_storage.dart';
-import 'package:ezrxmobile/infrastructure/order/dtos/payment_status_dto.dart';
 import 'package:ezrxmobile/infrastructure/payments/datasource/new_payment_local.dart';
 import 'package:ezrxmobile/infrastructure/payments/datasource/new_payment_remote.dart';
 import 'package:ezrxmobile/infrastructure/payments/dtos/customer_invoice_dto.dart';
@@ -81,6 +80,11 @@ void main() {
       'value': 'fake',
     }
   ];
+  final fakePaymentStatus = PaymentStatus(
+    paymentId: 'fake-id',
+    transactionReference: 'fake-ref',
+    transactionStatus: TransactionStatus('fake-status'),
+  );
 
   final fakeUser = User.empty().copyWith(username: Username(fakeUserName));
 
@@ -328,14 +332,7 @@ void main() {
           salesOrganisation: fakeSGSalesOrganisation,
           customerCodeInfo: fakeCustomerCodeInfo,
           isMarketPlace: false,
-          uri: Uri(
-            queryParameters: {
-              'salesOrg': 'fake-salesOrg',
-              'txnStatus': 'success',
-              'paymentId': '1A2B3C4D',
-              'transactionRef': '1A2B3C4D',
-            },
-          ),
+          paymentStatus: fakePaymentStatus,
         );
         expect(
           result.isRight(),
@@ -353,14 +350,7 @@ void main() {
           salesOrganisation: fakeSGSalesOrganisation,
           customerCodeInfo: fakeCustomerCodeInfo,
           isMarketPlace: false,
-          uri: Uri(
-            queryParameters: {
-              'salesOrg': 'fake-salesOrg',
-              'txnStatus': 'success',
-              'paymentId': '1A2B3C4D',
-              'transactionRef': '1A2B3C4D',
-            },
-          ),
+          paymentStatus: fakePaymentStatus,
         );
         expect(
           result.isLeft(),
@@ -369,22 +359,17 @@ void main() {
       });
 
       test('Update Payment Gateway Method success- UAT', () async {
-        final uri = Uri.parse(
-          'https://uat-vn.ezrx.com/my-account/thankyou?TxnStatus=53616c7465645f5fc43ab15f2f89a2de95b0584241d3a13c8f362f7a3f381aed&paymentId=53616c7465645f5f695668d5bbbf4cb0fd82d2235709e16923dae9aa4825a450508f24ad167ba1a5fb145fec903d2848&transactionReference=53616c7465645f5f155ff94a92e04b49941c1f31d393b934a6a36ca650b56d33&redirectFrom=VN',
-        );
-        final paymentStatusDto =
-            PaymentStatusDto.fromDomain(PaymentStatus(uri: uri));
         when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
         when(
           () => newPaymentRemoteDataSource.updatePaymentGateway(
             salesOrg: fakeSGSalesOrg.getOrCrash(),
-            txnStatus: paymentStatusDto.txnStatus,
-            paymentID: paymentStatusDto.paymentID,
-            transactionRef: paymentStatusDto.transactionRef,
+            txnStatus: 'fake-status',
+            paymentID: 'fake-id',
+            transactionRef: 'fake-ref',
             customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
             isMarketPlace: false,
           ),
-        ).thenAnswer((invocation) async {
+        ).thenAnswer((_) async {
           return;
         });
 
@@ -392,7 +377,7 @@ void main() {
           salesOrganisation: fakeSGSalesOrganisation,
           customerCodeInfo: fakeCustomerCodeInfo,
           isMarketPlace: false,
-          uri: uri,
+          paymentStatus: fakePaymentStatus,
         );
         expect(
           result.isRight(),
@@ -400,18 +385,13 @@ void main() {
         );
       });
       test('Update Payment Gateway Method failure- UAT', () async {
-        final uri = Uri.parse(
-          'https://uat-vn.ezrx.com/my-account/thankyou?TxnStatus=53616c7465645f5fc43ab15f2f89a2de95b0584241d3a13c8f362f7a3f381aed&paymentId=53616c7465645f5f695668d5bbbf4cb0fd82d2235709e16923dae9aa4825a450508f24ad167ba1a5fb145fec903d2848&transactionReference=53616c7465645f5f155ff94a92e04b49941c1f31d393b934a6a36ca650b56d33&redirectFrom=VN',
-        );
-        final paymentStatusDto =
-            PaymentStatusDto.fromDomain(PaymentStatus(uri: uri));
         when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
         when(
           () => newPaymentRemoteDataSource.updatePaymentGateway(
             salesOrg: fakeSGSalesOrg.getOrCrash(),
-            txnStatus: paymentStatusDto.txnStatus,
-            paymentID: paymentStatusDto.paymentID,
-            transactionRef: paymentStatusDto.transactionRef,
+            txnStatus: 'fake-status',
+            paymentID: 'fake-id',
+            transactionRef: 'fake-ref',
             customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
             isMarketPlace: true,
           ),
@@ -421,7 +401,7 @@ void main() {
           salesOrganisation: fakeSGSalesOrganisation,
           customerCodeInfo: fakeCustomerCodeInfo,
           isMarketPlace: true,
-          uri: uri,
+          paymentStatus: fakePaymentStatus,
         );
         expect(
           result.isLeft(),
@@ -768,9 +748,9 @@ void main() {
         when(
           () => newPaymentRemoteDataSource.updatePaymentGateway(
             salesOrg: fakeSGSalesOrg.getOrCrash(),
-            txnStatus: 'success',
-            paymentID: '1A2B3C4D',
-            transactionRef: '1A2B3C4D',
+            txnStatus: 'fake-status',
+            paymentID: 'fake-id',
+            transactionRef: 'fake-ref',
             customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
             isMarketPlace: true,
           ),
@@ -780,14 +760,7 @@ void main() {
           salesOrganisation: fakeSGSalesOrganisation,
           customerCodeInfo: fakeCustomerCodeInfo,
           isMarketPlace: true,
-          uri: Uri(
-            queryParameters: {
-              'salesOrg': 'fake-salesOrg',
-              'txnStatus': 'success',
-              'paymentId': '1A2B3C4D',
-              'transactionRef': '1A2B3C4D',
-            },
-          ),
+          paymentStatus: fakePaymentStatus,
         );
         expect(
           result.isLeft(),

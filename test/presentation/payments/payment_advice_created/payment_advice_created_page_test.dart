@@ -25,6 +25,7 @@ import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
 import 'package:ezrxmobile/infrastructure/core/common/tracking_events.dart';
 import 'package:ezrxmobile/infrastructure/core/common/tracking_properties.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
+import 'package:ezrxmobile/infrastructure/order/dtos/payment_status_dto.dart';
 import 'package:ezrxmobile/infrastructure/payments/datasource/new_payment_local.dart';
 import 'package:ezrxmobile/infrastructure/payments/datasource/payment_item_local_datasource.dart';
 import 'package:ezrxmobile/locator.dart';
@@ -797,7 +798,10 @@ void main() {
       testWidgets(
         'On Tap Pay Now Button And Get Url',
         (tester) async {
-          final fakeUrl = Uri.parse('fake-url');
+          final fakeUrl = Uri.parse(
+            'https://uat-my.ezrx.com/my-account/thankyou?TxnStatus=53616c7465645f5f8e5e0ca2b58a806b94a4ebbf208dfa4b0d88785a87b5d51c&paymentId=53616c7465645f5fe091adf59597a72a5abfd6acc86a3ab61711eb2bbde29eb142069eb826b994521f0f6f6aef1b0b39&transactionReference=53616c7465645f5f1848629ba40e99bbaa51def8fee526d27b1aa47b0db74a940b88ea79ee309de40f5853a2fe8a4eba&isCancelled=false&serviceID=53616c7465645f5f4359c1513d51facdf3714b241e1968387b451b21e5096e25',
+          );
+          final paymentStatus = PaymentStatusDto.fromUri(fakeUrl).toDomain;
           when(() => autoRouterMock.pushNamed<Uri>('payments/payments_webview'))
               .thenAnswer((invocation) => Future.value(fakeUrl));
           when(
@@ -831,7 +835,7 @@ void main() {
           verify(
             () => newPaymentBlocMock.add(
               NewPaymentEvent.updatePaymentGateway(
-                paymentUrl: fakeUrl,
+                paymentStatus: paymentStatus,
               ),
             ),
           ).called(1);
