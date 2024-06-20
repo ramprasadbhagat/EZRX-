@@ -690,20 +690,11 @@ bool isSuccessfulOrProcessed(String status) =>
     isEqualsIgnoreCase(status, 'Processed') ||
     isEqualsIgnoreCase(status, 'Payment received') ||
     isEqualsIgnoreCase(status, 'success') ||
-    isEqualsIgnoreCase(status, 'expired') ||
-    isEqualsIgnoreCase(status, 'canceled');
+    getExpiredOrCanceled(status);
 
 bool getExpiredOrCanceled(String status) =>
     isEqualsIgnoreCase(status, 'expired') ||
     isEqualsIgnoreCase(status, 'canceled');
-
-bool getSuccessful(String status) =>
-    isEqualsIgnoreCase(status, 'Successful') ||
-    isEqualsIgnoreCase(status, 'success') ||
-    isEqualsIgnoreCase(status, 'Processed');
-
-bool getPaymentReceived(String status) =>
-    isEqualsIgnoreCase(status, 'Payment Received');
 
 Color getDisplayStatusTextColor(String status) =>
     isSuccessfulOrProcessed(status) ? ZPColors.black : ZPColors.red;

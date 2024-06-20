@@ -956,10 +956,7 @@ void main() {
             '${'Payment date'.tr()}: ${fakeDate.dateOrNaString}',
           );
         } else {
-          expect(
-            dateTextFinder.data,
-            '${'Expires in'.tr()} ${fakeAdviceExpiry.displayDashIfEmpty}',
-          );
+          expect(dateTextFinder.data, 'Expires in 0 day(s)');
         }
       },
       variant: filterStatusVariant,

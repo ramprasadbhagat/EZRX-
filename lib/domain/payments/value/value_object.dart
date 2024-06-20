@@ -89,7 +89,6 @@ class AdviceExpiryValue extends ValueObject<String> {
 
   int get expiryDays => getExpiryDays(value.getOrElse(() => ''));
 
-  String get displayDashIfEmpty => dashIfEmpty((value.getOrElse(() => '')));
   const AdviceExpiryValue._(this.value);
 }
 

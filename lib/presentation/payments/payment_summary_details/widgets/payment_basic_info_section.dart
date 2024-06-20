@@ -92,7 +92,10 @@ class _PaymentBasicInfoSection extends StatelessWidget {
                 valueFlex: 3,
                 keyText: context.tr('Advice expiry'),
                 valueTextLoading: state.isDetailFetching,
-                valueText: state.adviceExpiryText,
+                valueText: context.tr(
+                  state.adviceExpiryText.message,
+                  namedArgs: state.adviceExpiryText.arguments,
+                ),
                 keyTextStyle: Theme.of(context).textTheme.bodyLarge?.copyWith(
                       color: ZPColors.white,
                     ),

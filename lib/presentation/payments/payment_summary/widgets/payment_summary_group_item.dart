@@ -34,12 +34,7 @@ class _PaymentSummaryGroupItem extends StatelessWidget {
           ),
         ),
         ...paymentSummaryGroup.details
-            .map(
-              (e) => _PaymentSummaryItem(
-                details: e,
-              ),
-            )
-            ,
+            .map((e) => _PaymentSummaryItem(details: e)),
         const SizedBox(height: 20),
       ],
     );
@@ -141,12 +136,18 @@ class _PaymentDateInfo extends StatelessWidget {
       return const SizedBox.shrink();
     }
 
+    final expiresDate =
+        isIDMarket ? details.idAdviceExpiryText : details.adviceExpiryText;
+
     return Column(
       children: [
         Text(
           details.status.getIsSuccessfulOrProcessed
               ? '${context.tr('Payment date')}: $displayPaymentDate'
-              : '${context.tr('Expires')} ${isIDMarket ? details.idAdviceExpiryText : details.adviceExpiryText}',
+              : context.tr(
+                  expiresDate.message,
+                  namedArgs: expiresDate.arguments,
+                ),
           key: WidgetKeys.paymentSummaryDateOrExpiry,
           style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                 color: details.status.getPaymentDisplayStatusTextColor,

@@ -22,6 +22,9 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:permission_handler/permission_handler.dart';
 
+import '../../../common_mock_data/customer_code_mock.dart';
+import '../../../common_mock_data/sales_organsiation_mock.dart';
+
 class NewPaymentRepositoryMock extends Mock implements NewPaymentRepository {}
 
 class DeviceRepositoryMock extends Mock implements DeviceRepository {}
@@ -481,9 +484,10 @@ void main() {
         setUp: () {
           when(
             () => newPaymentRepository.updatePaymentGateway(
-              salesOrganisation: SalesOrganisation.empty()
-                  .copyWith(salesOrg: SalesOrg('2001')),
+              salesOrganisation: fakeMYSalesOrganisation,
+              customerCodeInfo: fakeCustomerCodeInfo,
               uri: Uri.parse('https://fake-uri'),
+              isMarketPlace: true,
             ),
           ).thenAnswer(
             (invocation) async => const Left(
@@ -496,8 +500,9 @@ void main() {
           selectedInvoices: fakeCustomerOpenItemSelected,
           paymentMethods: fakePaymentMethodValues,
           selectedPaymentMethod: fakePaymentMethodValues.first,
-          salesOrganisation:
-              SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2001')),
+          salesOrganisation: fakeMYSalesOrganisation,
+          customerCodeInfo: fakeCustomerCodeInfo,
+          isMarketPlace: true,
         ),
         act: (NewPaymentBloc bloc) => bloc.add(
           NewPaymentEvent.updatePaymentGateway(
@@ -507,9 +512,10 @@ void main() {
         verify: (NewPaymentBloc newPaymentBloc) {
           verify(
             () => newPaymentRepository.updatePaymentGateway(
-              salesOrganisation: SalesOrganisation.empty()
-                  .copyWith(salesOrg: SalesOrg('2001')),
+              salesOrganisation: fakeMYSalesOrganisation,
+              customerCodeInfo: fakeCustomerCodeInfo,
               uri: Uri.parse('https://fake-uri'),
+              isMarketPlace: true,
             ),
           ).called(1);
         },
@@ -526,8 +532,8 @@ void main() {
           selectedInvoices: fakeCustomerOpenItemSelected,
           paymentMethods: fakePaymentMethodValues,
           selectedPaymentMethod: fakePaymentMethodValues.first,
-          salesOrganisation:
-              SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2500')),
+          salesOrganisation: fakePHSalesOrganisation,
+          customerCodeInfo: fakeCustomerCodeInfo,
         ),
         act: (NewPaymentBloc bloc) => bloc.add(
           NewPaymentEvent.updatePaymentGateway(
@@ -537,9 +543,10 @@ void main() {
         verify: (NewPaymentBloc newPaymentBloc) {
           verifyNever(
             () => newPaymentRepository.updatePaymentGateway(
-              salesOrganisation: SalesOrganisation.empty()
-                  .copyWith(salesOrg: SalesOrg('2500')),
+              salesOrganisation: fakePHSalesOrganisation,
               uri: Uri.parse('https://fake-uri'),
+              isMarketPlace: false,
+              customerCodeInfo: fakeCustomerCodeInfo,
             ),
           );
         },
@@ -554,8 +561,9 @@ void main() {
         setUp: () {
           when(
             () => newPaymentRepository.updatePaymentGateway(
-              salesOrganisation: SalesOrganisation.empty()
-                  .copyWith(salesOrg: SalesOrg('3070')),
+              salesOrganisation: fakeVNSalesOrganisation,
+              customerCodeInfo: fakeCustomerCodeInfo,
+              isMarketPlace: false,
               uri: Uri.parse('https://fake-uri'),
             ),
           ).thenAnswer(
@@ -569,8 +577,8 @@ void main() {
           selectedInvoices: fakeCustomerOpenItemSelected,
           paymentMethods: fakePaymentMethodValues,
           selectedPaymentMethod: fakePaymentMethodValues.first,
-          salesOrganisation:
-              SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('3070')),
+          salesOrganisation: fakeVNSalesOrganisation,
+          customerCodeInfo: fakeCustomerCodeInfo,
         ),
         act: (NewPaymentBloc bloc) => bloc.add(
           NewPaymentEvent.updatePaymentGateway(
@@ -580,8 +588,9 @@ void main() {
         verify: (NewPaymentBloc newPaymentBloc) {
           verify(
             () => newPaymentRepository.updatePaymentGateway(
-              salesOrganisation: SalesOrganisation.empty()
-                  .copyWith(salesOrg: SalesOrg('3070')),
+              salesOrganisation: fakeVNSalesOrganisation,
+              customerCodeInfo: fakeCustomerCodeInfo,
+              isMarketPlace: false,
               uri: Uri.parse('https://fake-uri'),
             ),
           ).called(1);
@@ -599,8 +608,8 @@ void main() {
           selectedInvoices: fakeCustomerOpenItemSelected,
           paymentMethods: fakePaymentMethodValues,
           selectedPaymentMethod: fakePaymentMethodValues.first,
-          salesOrganisation:
-              SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2902')),
+          salesOrganisation: fakeTHSalesOrganisation,
+          customerCodeInfo: fakeCustomerCodeInfo,
         ),
         act: (NewPaymentBloc bloc) => bloc.add(
           NewPaymentEvent.updatePaymentGateway(
@@ -610,8 +619,9 @@ void main() {
         verify: (NewPaymentBloc newPaymentBloc) {
           verifyNever(
             () => newPaymentRepository.updatePaymentGateway(
-              salesOrganisation: SalesOrganisation.empty()
-                  .copyWith(salesOrg: SalesOrg('2902')),
+              salesOrganisation: fakeTHSalesOrganisation,
+              customerCodeInfo: fakeCustomerCodeInfo,
+              isMarketPlace: false,
               uri: Uri.parse('https://fake-uri'),
             ),
           );
@@ -629,11 +639,16 @@ void main() {
             paymentUrl: Uri.parse('https://fake-uri'),
           ),
         ),
+        seed: () => NewPaymentState.initial().copyWith(
+          salesOrganisation: fakeSGSalesOrganisation,
+          customerCodeInfo: fakeCustomerCodeInfo,
+        ),
         verify: (NewPaymentBloc newPaymentBloc) {
           verifyNever(
             () => newPaymentRepository.updatePaymentGateway(
-              salesOrganisation: SalesOrganisation.empty()
-                  .copyWith(salesOrg: SalesOrg('2601')),
+              salesOrganisation: fakeSGSalesOrganisation,
+              customerCodeInfo: fakeCustomerCodeInfo,
+              isMarketPlace: false,
               uri: Uri.parse('https://fake-uri'),
             ),
           );

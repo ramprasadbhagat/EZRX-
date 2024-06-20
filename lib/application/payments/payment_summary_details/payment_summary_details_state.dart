@@ -46,11 +46,9 @@ class PaymentSummaryDetailsState with _$PaymentSummaryDetailsState {
 
   bool get isSavingOrDeleting => isSavingAdvice || isDeletingPayment;
 
-  String get adviceExpiryText {
-    if (details.status.isSuccessful ||
-        details.status.isPaymentReceived ||
-        details.status.isExpiredOrCanceled) {
-      return 'NA';
+  TRObject get adviceExpiryText {
+    if (details.status.getIsSuccessfulOrProcessed) {
+      return const TRObject('NA');
     }
 
     return salesOrganization.salesOrg.isID

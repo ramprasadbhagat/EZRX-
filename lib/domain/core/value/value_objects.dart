@@ -416,10 +416,6 @@ class FilterStatus extends ValueObject<String> {
   bool get isExpiredOrCanceled =>
       getExpiredOrCanceled(value.getOrElse(() => ''));
 
-  bool get isSuccessful => getSuccessful(value.getOrElse(() => ''));
-
-  bool get isPaymentReceived => getPaymentReceived(value.getOrElse(() => ''));
-
   Color get getPaymentDisplayStatusTextColor =>
       getDisplayStatusTextColor(value.getOrElse(() => ''));
 

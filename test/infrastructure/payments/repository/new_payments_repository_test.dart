@@ -2,7 +2,6 @@ import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
-import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/attachment_files/entities/attachment_file_buffer.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
@@ -326,8 +325,9 @@ void main() {
         });
 
         final result = await nawPaymentsRepository.updatePaymentGateway(
-          salesOrganisation:
-              SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2601')),
+          salesOrganisation: fakeSGSalesOrganisation,
+          customerCodeInfo: fakeCustomerCodeInfo,
+          isMarketPlace: false,
           uri: Uri(
             queryParameters: {
               'salesOrg': 'fake-salesOrg',
@@ -350,8 +350,9 @@ void main() {
         ).thenThrow((invocation) => MockException());
 
         final result = await nawPaymentsRepository.updatePaymentGateway(
-          salesOrganisation:
-              SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2601')),
+          salesOrganisation: fakeSGSalesOrganisation,
+          customerCodeInfo: fakeCustomerCodeInfo,
+          isMarketPlace: false,
           uri: Uri(
             queryParameters: {
               'salesOrg': 'fake-salesOrg',
@@ -376,18 +377,21 @@ void main() {
         when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
         when(
           () => newPaymentRemoteDataSource.updatePaymentGateway(
-            salesOrg: fakeSalesOrg.getOrCrash(),
+            salesOrg: fakeSGSalesOrg.getOrCrash(),
             txnStatus: paymentStatusDto.txnStatus,
             paymentID: paymentStatusDto.paymentID,
             transactionRef: paymentStatusDto.transactionRef,
+            customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
+            isMarketPlace: false,
           ),
         ).thenAnswer((invocation) async {
           return;
         });
 
         final result = await nawPaymentsRepository.updatePaymentGateway(
-          salesOrganisation:
-              SalesOrganisation.empty().copyWith(salesOrg: fakeSalesOrg),
+          salesOrganisation: fakeSGSalesOrganisation,
+          customerCodeInfo: fakeCustomerCodeInfo,
+          isMarketPlace: false,
           uri: uri,
         );
         expect(
@@ -404,16 +408,19 @@ void main() {
         when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
         when(
           () => newPaymentRemoteDataSource.updatePaymentGateway(
-            salesOrg: fakeSalesOrg.getOrCrash(),
+            salesOrg: fakeSGSalesOrg.getOrCrash(),
             txnStatus: paymentStatusDto.txnStatus,
             paymentID: paymentStatusDto.paymentID,
             transactionRef: paymentStatusDto.transactionRef,
+            customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
+            isMarketPlace: true,
           ),
         ).thenThrow((invocation) => MockException());
 
         final result = await nawPaymentsRepository.updatePaymentGateway(
-          salesOrganisation:
-              SalesOrganisation.empty().copyWith(salesOrg: fakeSalesOrg),
+          salesOrganisation: fakeSGSalesOrganisation,
+          customerCodeInfo: fakeCustomerCodeInfo,
+          isMarketPlace: true,
           uri: uri,
         );
         expect(
@@ -760,16 +767,19 @@ void main() {
         when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
         when(
           () => newPaymentRemoteDataSource.updatePaymentGateway(
-            salesOrg: fakeSalesOrg.getOrCrash(),
+            salesOrg: fakeSGSalesOrg.getOrCrash(),
             txnStatus: 'success',
             paymentID: '1A2B3C4D',
             transactionRef: '1A2B3C4D',
+            customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
+            isMarketPlace: true,
           ),
         ).thenThrow((invocation) => MockException());
 
         final result = await nawPaymentsRepository.updatePaymentGateway(
-          salesOrganisation:
-              SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2601')),
+          salesOrganisation: fakeSGSalesOrganisation,
+          customerCodeInfo: fakeCustomerCodeInfo,
+          isMarketPlace: true,
           uri: Uri(
             queryParameters: {
               'salesOrg': 'fake-salesOrg',

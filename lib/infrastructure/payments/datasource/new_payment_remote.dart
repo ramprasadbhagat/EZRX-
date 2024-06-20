@@ -126,6 +126,8 @@ class NewPaymentRemoteDataSource {
     required String txnStatus,
     required String paymentID,
     required String transactionRef,
+    required bool isMarketPlace,
+    required String customerCode,
   }) async {
     final res = await httpService.request(
       method: 'POST',
@@ -139,6 +141,10 @@ class NewPaymentRemoteDataSource {
               'txnStatus': txnStatus,
               'transactionRef': transactionRef,
               'salesOrg': salesOrg,
+              if (isMarketPlace) ...{
+                'isMarketPlace': isMarketPlace,
+                'customerCode': customerCode,
+              },
             },
           },
         },

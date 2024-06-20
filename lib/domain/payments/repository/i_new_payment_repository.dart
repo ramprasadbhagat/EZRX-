@@ -51,6 +51,8 @@ abstract class INewPaymentRepository {
 
   Future<Either<ApiFailure, Unit>> updatePaymentGateway({
     required SalesOrganisation salesOrganisation,
+    required CustomerCodeInfo customerCodeInfo,
+    required bool isMarketPlace,
     required Uri uri,
   });
 

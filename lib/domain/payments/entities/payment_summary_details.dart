@@ -1,6 +1,6 @@
 import 'package:collection/collection.dart';
-import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
+import 'package:ezrxmobile/domain/core/error/tr_object.dart';
 import 'package:ezrxmobile/domain/payments/entities/create_virtual_account.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_invoice_info_pdf.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_item.dart';
@@ -136,24 +136,21 @@ class PaymentSummaryDetails with _$PaymentSummaryDetails {
         paymentItems: <PaymentItem>[],
       );
 
-  String get adviceExpiryText {
-    if (!status.getIsSuccessfulOrProcessed) {
-      var text = adviceExpiry.displayDashIfEmpty;
-      adviceExpiry.isValid()
-          ? text = status.getIsFailed ? 'Expires in $text' : 'in $text'
-          : text = text;
+  TRObject get adviceExpiryText => adviceExpiry.isValid()
+      ? TRObject(
+          'Expires in {day} day(s)',
+          arguments: {'day': adviceExpiry.expiryDays.toString()},
+        )
+      : const TRObject('NA');
 
-      return text;
-    }
-
-    return 'NA';
-  }
-
-  String get idAdviceExpiryText => 'in {day} day(s)'.tr(
-        namedArgs: {
-          'day': createdDate.paymentAttentionExpiry.toString(),
-        },
-      );
+  TRObject get idAdviceExpiryText => createdDate.isValid()
+      ? TRObject(
+          'Expires in {day} day(s)',
+          arguments: {
+            'day': createdDate.paymentAttentionExpiry.toString(),
+          },
+        )
+      : const TRObject('NA');
 
   bool get allIdentifierInfoValid =>
       paymentBatchAdditionalInfo.isValid() &&

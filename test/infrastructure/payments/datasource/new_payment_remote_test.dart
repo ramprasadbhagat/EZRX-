@@ -15,7 +15,6 @@ import 'package:ezrxmobile/infrastructure/payments/dtos/payment_info_dto.dart';
 import 'package:ezrxmobile/infrastructure/payments/dtos/payment_invoice_info_pdf_dto.dart';
 import 'package:ezrxmobile/infrastructure/payments/dtos/payment_method_dto.dart';
 import 'package:ezrxmobile/locator.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http_mock_adapter/http_mock_adapter.dart';
@@ -27,8 +26,13 @@ class PaymentInvoiceInfoPdfMock extends Mock implements PaymentInvoiceInfoPdf {}
 
 class NewPaymentMethodMock extends Mock implements NewPaymentMethod {}
 
-void main() {
+void main() async {
+  TestWidgetsFlutterBinding.ensureInitialized();
   late NewPaymentRemoteDataSource newPaymentRemoteDataSource;
+  final updatePaymentGatewayResponse = json.decode(
+    await rootBundle
+        .loadString('assets/json/updatePaymentGatewayResponse.json'),
+  );
   locator.registerSingleton<Config>(Config()..appFlavor = Flavor.uat);
 
   final dio = Dio(
@@ -45,7 +49,6 @@ void main() {
 
   setUpAll(
     () {
-      WidgetsFlutterBinding.ensureInitialized();
       newPaymentRemoteDataSource = NewPaymentRemoteDataSource(
         httpService: service,
         config: Config(),
@@ -249,7 +252,8 @@ void main() {
 
       test('pay with error missing zzhtmcs on response', () async {
         final res = json.decode(
-          await rootBundle.loadString('assets/json/payResponseVNEmptyzzHtmcs.json'),
+          await rootBundle
+              .loadString('assets/json/payResponseVNEmptyzzHtmcs.json'),
         );
 
         final data = jsonEncode({
@@ -506,11 +510,6 @@ void main() {
     'New Payment Remote Data Test: update payment gateway method',
     () {
       test('update payment gateway with statuscode equal to 200', () async {
-        final res = json.decode(
-          await rootBundle
-              .loadString('assets/json/updatePaymentGatewayResponse.json'),
-        );
-
         final data = jsonEncode({
           'query': newPaymentRemoteDataSource.newPaymentQuery
               .updatePaymentGatewayQuery(),
@@ -528,7 +527,7 @@ void main() {
           '/api/ezpay',
           (server) => server.reply(
             200,
-            res,
+            updatePaymentGatewayResponse,
           ),
           headers: {'Content-Type': 'application/json; charset=utf-8'},
           data: data,
@@ -539,6 +538,8 @@ void main() {
           txnStatus: 'fake-txnStatus',
           transactionRef: 'fake-transactionRef',
           salesOrg: 'fake-salesOrg',
+          customerCode: 'fake-customer-code',
+          isMarketPlace: false,
         );
 
         expect(
@@ -548,11 +549,6 @@ void main() {
       });
 
       test('update payment gateway with statuscode not equal to 200', () async {
-        final res = json.decode(
-          await rootBundle
-              .loadString('assets/json/updatePaymentGatewayResponse.json'),
-        );
-
         final data = jsonEncode({
           'query': newPaymentRemoteDataSource.newPaymentQuery
               .updatePaymentGatewayQuery(),
@@ -570,7 +566,7 @@ void main() {
           '/api/ezpay',
           (server) => server.reply(
             205,
-            res,
+            updatePaymentGatewayResponse,
           ),
           headers: {'Content-Type': 'application/json; charset=utf-8'},
           data: data,
@@ -582,10 +578,55 @@ void main() {
           txnStatus: 'fake-txnStatus',
           transactionRef: 'fake-transactionRef',
           salesOrg: 'fake-salesOrg',
+          customerCode: 'fake-customer-code',
+          isMarketPlace: false,
         )
             .onError((error, _) {
           expect(error, isA<ServerException>());
         });
+      });
+
+      test(
+          'should contain isMarketPlace and customer code in payload when isMarketPlace is true',
+          () async {
+        final data = jsonEncode({
+          'query': newPaymentRemoteDataSource.newPaymentQuery
+              .updatePaymentGatewayQuery(),
+          'variables': {
+            'input': {
+              'paymentID': 'fake-paymentID',
+              'txnStatus': 'fake-txnStatus',
+              'transactionRef': 'fake-transactionRef',
+              'salesOrg': 'fake-salesOrg',
+              'customerCode': 'fake-customer-code',
+              'isMarketPlace': true,
+            },
+          },
+        });
+
+        dioAdapter.onPost(
+          '/api/ezpay',
+          (server) => server.reply(
+            200,
+            updatePaymentGatewayResponse,
+          ),
+          headers: {'Content-Type': 'application/json; charset=utf-8'},
+          data: data,
+        );
+
+        final result = await newPaymentRemoteDataSource.updatePaymentGateway(
+          paymentID: 'fake-paymentID',
+          txnStatus: 'fake-txnStatus',
+          transactionRef: 'fake-transactionRef',
+          salesOrg: 'fake-salesOrg',
+          customerCode: 'fake-customer-code',
+          isMarketPlace: true,
+        );
+
+        expect(
+          () => result,
+          isA<void>(),
+        );
       });
     },
   );

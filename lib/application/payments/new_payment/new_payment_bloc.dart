@@ -186,6 +186,8 @@ class NewPaymentBloc extends Bloc<NewPaymentEvent, NewPaymentState> {
         if (state.salesOrganisation.salesOrg.needUpdatePaymentGateway) {
           await newPaymentRepository.updatePaymentGateway(
             salesOrganisation: state.salesOrganisation,
+            customerCodeInfo: state.customerCodeInfo,
+            isMarketPlace: state.isMarketPlace,
             uri: e.paymentUrl,
           );
         }

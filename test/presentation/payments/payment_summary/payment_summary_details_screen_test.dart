@@ -688,7 +688,7 @@ void main() {
       );
       await tester.pumpAndSettle();
 
-      expect(find.text('in 23 Day(s)'), findsOneWidget);
+      expect(find.text('Expires in 23 day(s)'), findsOneWidget);
     });
 
     testWidgets(

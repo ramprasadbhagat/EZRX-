@@ -44,16 +44,6 @@ void main() {
         expect(result, 0);
       },
     );
-
-    test(
-      'display dash if empty',
-      () async {
-        const input = '';
-        final adviceExpiry = AdviceExpiryValue(input);
-        final result = adviceExpiry.displayDashIfEmpty;
-        expect(result, '-');
-      },
-    );
   });
 
   group('DebitCreditCode value object', () {

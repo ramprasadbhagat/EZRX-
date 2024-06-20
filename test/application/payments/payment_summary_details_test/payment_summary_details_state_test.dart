@@ -1,4 +1,5 @@
 import 'package:ezrxmobile/application/payments/payment_summary_details/payment_summary_details_bloc.dart';
+import 'package:ezrxmobile/domain/core/error/tr_object.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_summary_details.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -54,8 +55,8 @@ void main() {
       );
 
       expect(
-        modifiedState.adviceExpiryText.contains('in') &&
-            modifiedState.adviceExpiryText.contains('Day(s)'),
+        modifiedState.adviceExpiryText.message.contains('in') &&
+            modifiedState.adviceExpiryText.message.contains('Day(s)'),
         false,
       );
     });
@@ -75,7 +76,7 @@ void main() {
 
       expect(
         modifiedState.adviceExpiryText,
-        'NA',
+        const TRObject('NA'),
       );
     });
   });

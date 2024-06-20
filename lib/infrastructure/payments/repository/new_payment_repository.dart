@@ -214,6 +214,8 @@ class NewPaymentRepository extends INewPaymentRepository {
   @override
   Future<Either<ApiFailure, Unit>> updatePaymentGateway({
     required SalesOrganisation salesOrganisation,
+    required CustomerCodeInfo customerCodeInfo,
+    required bool isMarketPlace,
     required Uri uri,
   }) async {
     if (config.appFlavor == Flavor.mock) {
@@ -236,6 +238,8 @@ class NewPaymentRepository extends INewPaymentRepository {
         txnStatus: paymentStatusDto.txnStatus,
         paymentID: paymentStatusDto.paymentID,
         transactionRef: paymentStatusDto.transactionRef,
+        customerCode: customerCodeInfo.customerCodeSoldTo,
+        isMarketPlace: isMarketPlace,
       );
 
       return const Right(unit);
