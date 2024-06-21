@@ -24,7 +24,7 @@ final fakeTWSalesOrgConfigs = SalesOrganisationConfigs.empty().copyWith(
   enableGMC: true,
   enableGMN: false,
   minOrderAmount: 0,
-  vatValue: 10,
+  vatValue: 0,
   netPriceOverride: false,
   enableFutureDeliveryDay: false,
   futureDeliveryDay: FutureDeliveryDay('7'),

@@ -33,10 +33,10 @@ import 'package:ezrxmobile/infrastructure/core/common/json_key_converter.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/material_item_override_dto.dart';
 
 import '../../../common_mock_data/sales_org_config_mock/fake_id_sales_org_config.dart';
+import '../../../common_mock_data/sales_org_config_mock/fake_kh_sales_org_config.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_my_sales_org_config.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_sg_sales_org_config.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_th_sales_org_config.dart';
-import '../../../common_mock_data/sales_org_config_mock/fake_tw_sales_org_config.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_vn_sales_org_config.dart';
 
 void main() {
@@ -1926,7 +1926,7 @@ void main() {
             ),
             tax: 5.0,
           ),
-          salesOrgConfig: fakeTWSalesOrgConfigs,
+          salesOrgConfig: fakeKHSalesOrgConfigs,
         );
         //please note it will take from vat value, i.e 10
         expect(

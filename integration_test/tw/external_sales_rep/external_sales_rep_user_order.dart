@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 
+import '../../../test/common_mock_data/sales_org_config_mock/fake_tw_sales_org_config.dart';
 import '../../core/common.dart';
 import '../../robots/announcement_article/announcement_article_root_robot.dart';
 import '../../robots/common/common_robot.dart';
@@ -103,6 +104,7 @@ void main() {
     bonusSampleRobot = BonusSampleRobot(tester);
   }
 
+  final config = fakeTWSalesOrgConfigs;
   const username = 'twexternalsalesrep';
   const password = 'St@ysafe01';
   const shipToCode = '0070100007';
@@ -129,9 +131,9 @@ void main() {
   const suspendedMaterialNumber = '21081162';
   const contactPerson = 'contact-person';
   const contactNumber = '1234567890';
-  const shipToCodeForGimmick = '0070100010';
+  const shipToCodeForGimmick = '0070100007';
   const materialNumberForGimmick = '23168627';
-  const taxes = 10;
+  final taxes = config.vatValue;
 
   Future<void> pumpAppWithLogin(
     WidgetTester tester, {
@@ -1263,7 +1265,6 @@ void main() {
       orderPriceSummaryRobot.verifySheet(isVisible: false);
     });
 
-    //TODO: Fail because don't have gimmick material data
     testWidgets(
         'EZRX-T1662 | Verify Your cart must contain other commercial material to proceed checkout message when cart contain only Gimmick material',
         (tester) async {

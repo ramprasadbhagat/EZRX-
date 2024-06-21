@@ -70,7 +70,7 @@ updateSalesorgconfigMutationReq=$(curl --location 'https://uat-tw.ezrx.com/api/l
                 "disableProcessingStatus": false, 
                 "disableOrderType": true, 
                 "enableCollectiveNumber": false, 
-                "enableGimmickMaterial": false, 
+                "enableGimmickMaterial": true, 
                 "enableVat": false, 
                 "hideCustomer": true, 
                 "enableBillTo": false, 
