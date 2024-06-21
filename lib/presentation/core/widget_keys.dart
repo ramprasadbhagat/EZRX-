@@ -804,8 +804,8 @@ class WidgetKeys {
   static const Key scanProductInfoDialog = Key('scanProductInfoDialog');
   static const Key scanFromGallery = Key('scanFromGallery');
   static const Key scanFromCamera = Key('scanFromCamera');
-  static const Key favoritesChoiceChip = Key('favoritesChoiceChip');
-  static const Key covidChoiceChip = Key('covidChoiceChip');
+  static Key productTypeFilterChip(String name) =>
+      Key('productTypeFilterChip$name');
   static Key statusFavoriteIcon(bool isFavorite) =>
       Key('isFavorite$isFavorite');
   static const Key materialCard = Key('MaterialCard');

@@ -16,6 +16,7 @@ class ScrollableGridView<T> extends StatefulWidget {
   final Widget header;
   final double crossAxisSpacing;
   final double mainAxisSpacing;
+  final ScrollPhysics? scrollPhysics;
 
   const ScrollableGridView({
     super.key,
@@ -28,6 +29,7 @@ class ScrollableGridView<T> extends StatefulWidget {
     this.crossAxisSpacing = 12.0,
     this.mainAxisSpacing = 12.0,
     this.noRecordFoundWidget,
+    this.scrollPhysics,
   });
 
   @override
@@ -63,6 +65,7 @@ class _ScrollableGridViewState<T> extends State<ScrollableGridView<T>> {
       color: ZPColors.primary,
       onRefresh: () async => widget.onRefresh?.call(),
       child: CustomScrollView(
+        physics: widget.scrollPhysics,
         key: WidgetKeys.scrollList,
         controller: _scrollController,
         slivers: [

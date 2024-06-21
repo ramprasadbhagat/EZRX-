@@ -23,6 +23,8 @@ import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/customer_license_local.dart';
 import 'package:ezrxmobile/infrastructure/core/clevertap/clevertap_service.dart';
+import 'package:ezrxmobile/infrastructure/core/common/tracking_events.dart';
+import 'package:ezrxmobile/infrastructure/core/common/tracking_properties.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/cart/cart_local_datasource.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/material_list_local.dart';
@@ -40,7 +42,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
 
 import '../../common_mock_data/customer_code_mock.dart';
@@ -50,7 +51,9 @@ import '../../common_mock_data/mock_other.dart';
 import '../../common_mock_data/sales_org_config_mock/fake_kh_sales_org_config.dart';
 import '../../common_mock_data/sales_org_config_mock/fake_my_sales_org_config.dart';
 import '../../common_mock_data/sales_org_config_mock/fake_ph_sales_org_config.dart';
+import '../../common_mock_data/sales_org_config_mock/fake_sg_sales_org_config.dart';
 import '../../common_mock_data/sales_org_config_mock/fake_tw_sales_org_config.dart';
+import '../../common_mock_data/sales_org_config_mock/fake_vn_sales_org_config.dart';
 import '../../common_mock_data/sales_organsiation_mock.dart';
 import '../../common_mock_data/user_mock.dart';
 import '../../utils/widget_utils.dart';
@@ -71,9 +74,10 @@ void main() {
   late Map<MaterialNumber, Price> materialPriceMock;
   late List<PriceAggregate> mockCartItems;
   late List<CustomerLicense> customerLicense;
+  late MixpanelService mixpanelServiceMock;
   setUpAll(() async {
     locator.registerFactory(() => AutoRouteMock());
-    locator.registerLazySingleton<MixpanelService>(() => MixpanelServiceMock());
+    locator.registerSingleton<MixpanelService>(MixpanelServiceMock());
     locator.registerSingleton<ClevertapService>(ClevertapServiceMock());
     autoRouterMock = locator<AutoRouteMock>();
     orderEligibilityBloc = OrderEligibilityBlocMock();
@@ -98,7 +102,6 @@ void main() {
     () {
       setUp(() async {
         TestWidgetsFlutterBinding.ensureInitialized();
-        locator = GetIt.instance;
         materialListBlocMock = MaterialListBlocMock();
         productDetailBlocMock = ProductDetailBlocMock();
         eligibilityBlocMock = EligibilityBlocMock();
@@ -108,6 +111,7 @@ void main() {
         materialFilterBlocMock = MaterialFilterBlocMock();
         productImageBlocMock = ProductImageBlocMock();
         cartBlocMock = CartBlocMock();
+        mixpanelServiceMock = locator<MixpanelService>();
         materialPriceMock = Map.fromEntries(
           priceList.map((price) => MapEntry(price.materialNumber, price)),
         );
@@ -675,43 +679,7 @@ void main() {
         expect(find.byKey(WidgetKeys.cartButton), findsOneWidget);
         expect(find.text('3'), findsOneWidget);
       });
-      testWidgets('Test the Covid filter button', (tester) async {
-        when(() => eligibilityBlocMock.state).thenReturn(
-          EligibilityState.initial().copyWith(
-            salesOrganisation: fakePHSalesOrganisation,
-            salesOrgConfigs: fakePHSalesOrgConfigs,
-            customerCodeInfo: fakeCustomerCodeInfoForCovid,
-            user: fakeClientAdmin,
-            shipToInfo: fakeShipToInfo,
-          ),
-        );
-        await tester.pumpWidget(getScopedWidget());
-        await tester.pump();
-        final covidFilterButton = find.text(
-          'Covid-19'.tr(),
-        );
-        expect(covidFilterButton, findsOneWidget);
-        await tester.tap(covidFilterButton);
-        await tester.pump();
-        verify(
-          () => materialListBlocMock.add(
-            MaterialListEvent.fetch(
-              selectedMaterialFilter: MaterialFilter.empty().copyWith(
-                hasAccessToCovidMaterial: true,
-                isCovidSelected: true,
-              ),
-            ),
-          ),
-        ).called(1);
-        verify(
-          () => materialFilterBlocMock.add(
-            const MaterialFilterEvent.updateSelectedMaterialFilter(
-              MaterialFilterType.isCovidSelected,
-              true,
-            ),
-          ),
-        ).called(1);
-      });
+
       testWidgets(
           'Test the Covid tag on product item and the price of the product',
           (tester) async {
@@ -1146,6 +1114,341 @@ void main() {
           expect(stockInfoBannerSubTitle, findsNothing);
         },
       );
+
+      group('Filter chip group -', () {
+        testWidgets('Favorite visible by default', (tester) async {
+          await tester.pumpWidget(getScopedWidget());
+          await tester.pumpAndSettle();
+
+          final chip =
+              find.byKey(WidgetKeys.productTypeFilterChip('Favourites'));
+
+          expect(chip, findsOne);
+          expect(
+            find.descendant(of: chip, matching: find.text('Favourites')),
+            findsOne,
+          );
+          await tester.tap(chip);
+          await tester.pumpAndSettle();
+
+          verify(
+            () => materialFilterBlocMock.add(
+              const MaterialFilterEvent.updateSelectedMaterialFilter(
+                MaterialFilterType.isFavourite,
+                true,
+              ),
+            ),
+          ).called(1);
+          verify(
+            () => materialListBlocMock.add(
+              MaterialListEvent.fetch(
+                selectedMaterialFilter:
+                    MaterialFilter.empty().copyWith(isFavourite: true),
+              ),
+            ),
+          ).called(1);
+          verify(
+            () => mixpanelServiceMock.trackEvent(
+              eventName: TrackingEvents.productFilterClicked,
+              properties: {TrackingProps.filterClicked: 'Favourites'},
+            ),
+          ).called(1);
+        });
+
+        group('On offer -', () {
+          final chip = find.byKey(WidgetKeys.productTypeFilterChip('Offers'));
+
+          testWidgets('Not visibile when disable promotion', (tester) async {
+            when(() => eligibilityBlocMock.state).thenReturn(
+              EligibilityState.initial()
+                  .copyWith(salesOrgConfigs: fakeIDSalesOrgConfigs),
+            );
+
+            await tester.pumpWidget(getScopedWidget());
+            await tester.pumpAndSettle();
+            expect(chip, findsNothing);
+          });
+
+          testWidgets('Visible when enable promotion', (tester) async {
+            when(() => eligibilityBlocMock.state).thenReturn(
+              EligibilityState.initial()
+                  .copyWith(salesOrgConfigs: fakeMYSalesOrgConfigs),
+            );
+
+            await tester.pumpWidget(getScopedWidget());
+            await tester.pumpAndSettle();
+            expect(
+              find.descendant(of: chip, matching: find.text('Offers')),
+              findsOne,
+            );
+            await tester.tap(chip);
+            await tester.pumpAndSettle();
+
+            verify(
+              () => materialFilterBlocMock.add(
+                const MaterialFilterEvent.updateSelectedMaterialFilter(
+                  MaterialFilterType.productOffers,
+                  true,
+                ),
+              ),
+            ).called(1);
+            verify(
+              () => materialListBlocMock.add(
+                MaterialListEvent.fetch(
+                  selectedMaterialFilter:
+                      MaterialFilter.empty().copyWith(isProductOffer: true),
+                ),
+              ),
+            ).called(1);
+            verify(
+              () => mixpanelServiceMock.trackEvent(
+                eventName: TrackingEvents.productFilterClicked,
+                properties: {TrackingProps.filterClicked: 'Offers'},
+              ),
+            ).called(1);
+          });
+        });
+
+        group('Bundle offer -', () {
+          final chip =
+              find.byKey(WidgetKeys.productTypeFilterChip('Bundle offers'));
+
+          testWidgets('Not visibile when disable bundle', (tester) async {
+            when(() => eligibilityBlocMock.state).thenReturn(
+              EligibilityState.initial()
+                  .copyWith(salesOrgConfigs: fakeIDSalesOrgConfigs),
+            );
+
+            await tester.pumpWidget(getScopedWidget());
+            await tester.pumpAndSettle();
+            expect(chip, findsNothing);
+          });
+
+          testWidgets('Visible when enable bundle', (tester) async {
+            when(() => eligibilityBlocMock.state).thenReturn(
+              EligibilityState.initial()
+                  .copyWith(salesOrgConfigs: fakeMYSalesOrgConfigs),
+            );
+
+            await tester.pumpWidget(getScopedWidget());
+            await tester.pumpAndSettle();
+            expect(
+              find.descendant(of: chip, matching: find.text('Bundle offers')),
+              findsOne,
+            );
+            await tester.tap(chip);
+            await tester.pumpAndSettle();
+
+            verify(
+              () => materialFilterBlocMock.add(
+                const MaterialFilterEvent.updateSelectedMaterialFilter(
+                  MaterialFilterType.bundleOffers,
+                  true,
+                ),
+              ),
+            ).called(1);
+            verify(
+              () => materialListBlocMock.add(
+                MaterialListEvent.fetch(
+                  selectedMaterialFilter:
+                      MaterialFilter.empty().copyWith(bundleOffers: true),
+                ),
+              ),
+            ).called(1);
+            verify(
+              () => mixpanelServiceMock.trackEvent(
+                eventName: TrackingEvents.productFilterClicked,
+                properties: {TrackingProps.filterClicked: 'Bundle offers'},
+              ),
+            ).called(1);
+          });
+        });
+
+        group('Combo offer -', () {
+          final chip =
+              find.byKey(WidgetKeys.productTypeFilterChip('Combo offers'));
+
+          testWidgets('Not visibile when disable Combo', (tester) async {
+            when(() => eligibilityBlocMock.state).thenReturn(
+              EligibilityState.initial()
+                  .copyWith(salesOrgConfigs: fakeIDSalesOrgConfigs),
+            );
+
+            await tester.pumpWidget(getScopedWidget());
+            await tester.pumpAndSettle();
+            expect(chip, findsNothing);
+          });
+
+          testWidgets('Visible when enable Combo', (tester) async {
+            when(() => eligibilityBlocMock.state).thenReturn(
+              EligibilityState.initial()
+                  .copyWith(salesOrgConfigs: fakeKHSalesOrgConfigs),
+            );
+
+            await tester.pumpWidget(getScopedWidget());
+            await tester.pumpAndSettle();
+            expect(
+              find.descendant(of: chip, matching: find.text('Combo offers')),
+              findsOne,
+            );
+            await tester.tap(chip);
+            await tester.pumpAndSettle();
+
+            verify(
+              () => materialFilterBlocMock.add(
+                const MaterialFilterEvent.updateSelectedMaterialFilter(
+                  MaterialFilterType.comboOffers,
+                  true,
+                ),
+              ),
+            ).called(1);
+            verify(
+              () => materialListBlocMock.add(
+                MaterialListEvent.fetch(
+                  selectedMaterialFilter:
+                      MaterialFilter.empty().copyWith(comboOffers: true),
+                ),
+              ),
+            ).called(1);
+            verify(
+              () => mixpanelServiceMock.trackEvent(
+                eventName: TrackingEvents.productFilterClicked,
+                properties: {TrackingProps.filterClicked: 'Combo offers'},
+              ),
+            ).called(1);
+          });
+        });
+
+        group('Tender contract -', () {
+          final chip =
+              find.byKey(WidgetKeys.productTypeFilterChip('Tender contract'));
+
+          testWidgets('Not visibile when disable Tender contract',
+              (tester) async {
+            when(() => eligibilityBlocMock.state).thenReturn(
+              EligibilityState.initial()
+                  .copyWith(salesOrgConfigs: fakeIDSalesOrgConfigs),
+            );
+
+            await tester.pumpWidget(getScopedWidget());
+            await tester.pumpAndSettle();
+            expect(chip, findsNothing);
+          });
+
+          testWidgets('Visible when enable Tender contract', (tester) async {
+            when(() => eligibilityBlocMock.state).thenReturn(
+              EligibilityState.initial()
+                  .copyWith(salesOrgConfigs: fakeVNSalesOrgConfigs),
+            );
+
+            await tester.pumpWidget(getScopedWidget());
+            await tester.pumpAndSettle();
+            await tester.dragUntilVisible(
+              chip,
+              find.byKey(WidgetKeys.productTypeFilterChip('Favourites')),
+              const Offset(-200, 0),
+            );
+            await tester.pump();
+            expect(
+              find.descendant(of: chip, matching: find.text('Tender contract')),
+              findsOne,
+            );
+            await tester.tap(chip);
+            await tester.pumpAndSettle();
+
+            verify(
+              () => materialFilterBlocMock.add(
+                const MaterialFilterEvent.updateSelectedMaterialFilter(
+                  MaterialFilterType.isTender,
+                  true,
+                ),
+              ),
+            ).called(1);
+            verify(
+              () => materialListBlocMock.add(
+                MaterialListEvent.fetch(
+                  selectedMaterialFilter:
+                      MaterialFilter.empty().copyWith(isTender: true),
+                ),
+              ),
+            ).called(1);
+            verify(
+              () => mixpanelServiceMock.trackEvent(
+                eventName: TrackingEvents.productFilterClicked,
+                properties: {TrackingProps.filterClicked: 'Tender contract'},
+              ),
+            ).called(1);
+          });
+        });
+
+        group('Covid-19 -', () {
+          final chip = find.byKey(WidgetKeys.productTypeFilterChip('Covid-19'));
+
+          testWidgets('Not visibile when can not access covid-19 materials',
+              (tester) async {
+            when(() => eligibilityBlocMock.state).thenReturn(
+              EligibilityState.initial()
+                  .copyWith(salesOrgConfigs: fakeIDSalesOrgConfigs),
+            );
+
+            await tester.pumpWidget(getScopedWidget());
+            await tester.pumpAndSettle();
+            expect(chip, findsNothing);
+          });
+
+          testWidgets('Visible when can access covid-19 materials',
+              (tester) async {
+            when(() => eligibilityBlocMock.state).thenReturn(
+              EligibilityState.initial().copyWith(
+                salesOrganisation: fakeSGSalesOrganisation,
+                salesOrgConfigs: fakeSGSalesOrgConfigs,
+                user: fakeClientUser,
+                customerCodeInfo: fakeCustomerCodeInfoWithCustomerGrp4,
+              ),
+            );
+
+            await tester.pumpWidget(getScopedWidget());
+            await tester.pumpAndSettle();
+            await tester.dragUntilVisible(
+              chip,
+              find.byKey(WidgetKeys.productTypeFilterChip('Favourites')),
+              const Offset(-200, 0),
+            );
+            await tester.pump();
+            expect(
+              find.descendant(of: chip, matching: find.text('Covid-19')),
+              findsOne,
+            );
+            await tester.tap(chip);
+            await tester.pumpAndSettle();
+
+            verify(
+              () => materialFilterBlocMock.add(
+                const MaterialFilterEvent.updateSelectedMaterialFilter(
+                  MaterialFilterType.isCovidSelected,
+                  true,
+                ),
+              ),
+            ).called(1);
+            verify(
+              () => materialListBlocMock.add(
+                MaterialListEvent.fetch(
+                  selectedMaterialFilter: MaterialFilter.empty().copyWith(
+                    isCovidSelected: true,
+                    hasAccessToCovidMaterial: true,
+                  ),
+                ),
+              ),
+            ).called(1);
+            verify(
+              () => mixpanelServiceMock.trackEvent(
+                eventName: TrackingEvents.productFilterClicked,
+                properties: {TrackingProps.filterClicked: 'Covid-19'},
+              ),
+            ).called(1);
+          });
+        });
+      });
     },
   );
 }

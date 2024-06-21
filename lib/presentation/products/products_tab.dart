@@ -78,9 +78,7 @@ class ProductsTab extends StatelessWidget {
                   const EdiUserBanner(),
                   const StockInfoBanner(),
                   const SearchAndFilter(),
-                  FilterValueList(
-                    isFetching: state.isFetching,
-                  ),
+                  FilterValueList(state: state),
                   Expanded(
                     child: state.isFetching && state.materialList.isEmpty
                         ? const ProductLoadingShimmer(
@@ -95,6 +93,8 @@ class ProductsTab extends StatelessWidget {
                                 context,
                                 isFavourite: isFavourite,
                               ),
+                              scrollPhysics:
+                                  const AlwaysScrollableScrollPhysics(),
                               header: const _TotalMaterialCount(),
                               isLoading: state.isFetching,
                               items: state.materialList,

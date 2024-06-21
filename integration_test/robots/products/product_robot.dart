@@ -14,8 +14,10 @@ class ProductRobot extends CommonRobot {
   final nameCart = find.byKey(WidgetKeys.nameCart);
   final priceComponent = find.byKey(WidgetKeys.priceComponent);
   final govtMaterialListPrice = find.byKey(WidgetKeys.govtMaterialListPrice);
-  final favoritesChoiceChip = find.byKey(WidgetKeys.favoritesChoiceChip);
-  final covidChoiceChip = find.byKey(WidgetKeys.covidChoiceChip);
+  final favoritesChoiceChip =
+      find.byKey(WidgetKeys.productTypeFilterChip('Favourites'));
+  final covidChoiceChip =
+      find.byKey(WidgetKeys.productTypeFilterChip('Covid-19'));
 
   final searchProductField = find.byKey(WidgetKeys.searchProductField);
 
