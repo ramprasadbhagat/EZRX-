@@ -290,7 +290,7 @@ void main() {
         (invocation) => EligibilityState.initial().copyWith(
           customerCodeInfo: fakeCustomerCodeInfo,
           salesOrgConfigs: fakeTWSalesOrgConfigs,
-          user: fakeZPAdminUser,
+          user: fakeClientUser,
         ),
       );
       when(() => viewByOrderDetailsBlocMock.state).thenReturn(
@@ -432,6 +432,7 @@ void main() {
       when(() => eligibilityBlocMock.state).thenReturn(
         EligibilityState.initial().copyWith(
           salesOrgConfigs: fakeTWSalesOrgConfigs,
+          user: fakeClientUser,
         ),
       );
       await tester.pumpWidget(getScopedWidget());

@@ -2,6 +2,7 @@
 
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/customer_license_bloc/customer_license_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
@@ -25,6 +26,9 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
 
+import '../../../common_mock_data/customer_code_mock.dart';
+import '../../../common_mock_data/sales_org_config_mock/fake_sg_sales_org_config.dart';
+import '../../../common_mock_data/sales_org_config_mock/fake_tw_sales_org_config.dart';
 import '../../../utils/widget_utils.dart';
 
 class UserBlocMock extends MockBloc<UserEvent, UserState> implements UserBloc {}
@@ -329,6 +333,179 @@ void main() {
           ),
         ),
       ).called(1);
+    });
+
+    testWidgets(
+        'test payment term in user details section when user is client and disablePaymentTermsDisplay is false in salesorg config',
+        (tester) async {
+      when(() => customerLicenseBlocMock.state).thenReturn(
+        CustomerLicenseState.initial().copyWith(
+          customerLicenses: [
+            customerLicensesListMock.first.copyWith(
+              licenseNumbers: StringValue('fake-license-number'),
+              licenseDescription: StringValue(''),
+            ),
+          ],
+        ),
+      );
+      when(() => userBlockMock.state).thenReturn(
+        UserState.initial().copyWith(
+          user: userMock.copyWith(
+            role: Role.empty().copyWith(type: RoleType.clientUser()),
+          ),
+        ),
+      );
+
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          user: userMock.copyWith(
+            role: Role.empty().copyWith(type: RoleType.clientUser()),
+          ),
+          customerCodeInfo: fakeCustomerCodeInfoWithPaymetTerm,
+          salesOrgConfigs: fakeSGSalesOrgConfigs,
+        ),
+      );
+      await tester.pumpWidget(getWidget());
+      await tester.pumpAndSettle();
+      expect(find.text('fakeUser'), findsOneWidget);
+      expect(
+        find.byKey(
+          WidgetKeys.balanceTextRow(
+            'Payment terms'.tr(),
+            fakeCustomerCodeInfoWithPaymetTerm.displayPaymentTerm,
+          ),
+        ),
+        findsOneWidget,
+      );
+    });
+    testWidgets(
+        'test payment term in user details section when user is client and disablePaymentTermsDisplay is true in salesorg config',
+        (tester) async {
+      when(() => customerLicenseBlocMock.state).thenReturn(
+        CustomerLicenseState.initial().copyWith(
+          customerLicenses: [
+            customerLicensesListMock.first.copyWith(
+              licenseNumbers: StringValue('fake-license-number'),
+              licenseDescription: StringValue(''),
+            ),
+          ],
+        ),
+      );
+      when(() => userBlockMock.state).thenReturn(
+        UserState.initial().copyWith(
+          user: userMock.copyWith(
+            role: Role.empty().copyWith(type: RoleType.clientUser()),
+          ),
+        ),
+      );
+
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          user: userMock.copyWith(
+            role: Role.empty().copyWith(type: RoleType.clientUser()),
+          ),
+          customerCodeInfo: fakeCustomerCodeInfoWithPaymetTerm,
+          salesOrgConfigs: fakeTWSalesOrgConfigs,
+        ),
+      );
+      await tester.pumpWidget(getWidget());
+      await tester.pumpAndSettle();
+      expect(find.text('fakeUser'), findsOneWidget);
+      expect(
+        find.byKey(
+          WidgetKeys.balanceTextRow(
+            'Payment terms'.tr(),
+            fakeCustomerCodeInfoWithPaymetTerm.displayPaymentTerm,
+          ),
+        ),
+        findsNothing,
+      );
+    });
+    testWidgets(
+        'test payment term in user details section when user is not client and disablePaymentTermsDisplay is true in salesorg config',
+        (tester) async {
+      when(() => customerLicenseBlocMock.state).thenReturn(
+        CustomerLicenseState.initial().copyWith(
+          customerLicenses: [
+            customerLicensesListMock.first.copyWith(
+              licenseNumbers: StringValue('fake-license-number'),
+              licenseDescription: StringValue(''),
+            ),
+          ],
+        ),
+      );
+      when(() => userBlockMock.state).thenReturn(
+        UserState.initial().copyWith(
+          user: userMock.copyWith(
+            role: Role.empty().copyWith(type: RoleType('root_admin')),
+          ),
+        ),
+      );
+
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          user: userMock.copyWith(
+            role: Role.empty().copyWith(type: RoleType('root_admin')),
+          ),
+          customerCodeInfo: fakeCustomerCodeInfoWithPaymetTerm,
+          salesOrgConfigs: fakeTWSalesOrgConfigs,
+        ),
+      );
+      await tester.pumpWidget(getWidget());
+      await tester.pumpAndSettle();
+      expect(find.text('fakeUser'), findsOneWidget);
+      expect(
+        find.byKey(
+          WidgetKeys.balanceTextRow(
+            'Payment terms'.tr(),
+            fakeCustomerCodeInfoWithPaymetTerm.displayPaymentTerm,
+          ),
+        ),
+        findsOneWidget,
+      );
+    });
+    testWidgets(
+        'test payment term in user details section when user is not client and disablePaymentTermsDisplay is false in salesorg config',
+        (tester) async {
+      when(() => customerLicenseBlocMock.state).thenReturn(
+        CustomerLicenseState.initial().copyWith(
+          customerLicenses: [
+            customerLicensesListMock.first.copyWith(
+              licenseNumbers: StringValue('fake-license-number'),
+              licenseDescription: StringValue(''),
+            ),
+          ],
+        ),
+      );
+      when(() => userBlockMock.state).thenReturn(
+        UserState.initial().copyWith(
+          user: userMock.copyWith(
+            role: Role.empty().copyWith(type: RoleType('root_admin')),
+          ),
+        ),
+      );
+
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          user: userMock.copyWith(
+            role: Role.empty().copyWith(type: RoleType('root_admin')),
+          ),
+          customerCodeInfo: fakeCustomerCodeInfoWithPaymetTerm,
+          salesOrgConfigs: fakeSGSalesOrgConfigs,
+        ),
+      );
+      await tester.pumpWidget(getWidget());
+      await tester.pumpAndSettle();
+      expect(find.text('fakeUser'), findsOneWidget);
+      expect(
+        find.byKey(
+          WidgetKeys.balanceTextRow(
+            'Payment terms'.tr(),
+            fakeCustomerCodeInfoWithPaymetTerm.displayPaymentTerm,
+          ),
+        ),
+        findsOneWidget,
+      );
     });
   });
 }

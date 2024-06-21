@@ -89,7 +89,7 @@ class _OrderSuccessHeader extends StatelessWidget {
               valueText: orderHeader.referenceNotes,
               valueTextStyle: textStyle,
             ),
-          if (!eligibilityState.salesOrgConfigs.disablePaymentTermsDisplay)
+          if (!eligibilityState.disablePaymentTermsDisplayForCustomer)
             BalanceTextRow(
               keyFlex: keyFlex,
               valueFlex: valueFlex,
@@ -190,8 +190,7 @@ class _OrderNumberList extends StatelessWidget {
                     const TextSpan(text: ', '),
                 ],
               )
-              .flattened
-              ,
+              .flattened,
           if (orderStatus.isInQueue)
             const WidgetSpan(
               alignment: PlaceholderAlignment.middle,

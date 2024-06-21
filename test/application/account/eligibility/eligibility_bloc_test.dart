@@ -891,13 +891,34 @@ void main() {
   );
 
   test(
-    'isPaymentTermDescriptionEnable',
+    'disablePaymentTermsDisplayForCustomer',
     () {
-      final eligibilityState = EligibilityState.initial().copyWith(
+      var eligibilityState = EligibilityState.initial().copyWith(
         user: fakeUser,
+        salesOrgConfigs: fakeTWSalesOrgConfigs,
       );
 
-      expect(eligibilityState.isPaymentTermDescriptionEnable, true);
+      expect(eligibilityState.disablePaymentTermsDisplayForCustomer, true);
+
+      eligibilityState = EligibilityState.initial().copyWith(
+        user: fakeUser,
+      );
+      expect(eligibilityState.disablePaymentTermsDisplayForCustomer, false);
+
+      eligibilityState = EligibilityState.initial().copyWith(
+        user: fakeUser.copyWith(
+          role: Role.empty().copyWith(type: RoleType('root_admin')),
+        ),
+      );
+      expect(eligibilityState.disablePaymentTermsDisplayForCustomer, false);
+
+      eligibilityState = EligibilityState.initial().copyWith(
+        user: fakeUser.copyWith(
+          role: Role.empty().copyWith(type: RoleType('root_admin')),
+        ),
+        salesOrgConfigs: fakeTWSalesOrgConfigs,
+      );
+      expect(eligibilityState.disablePaymentTermsDisplayForCustomer, false);
     },
   );
 

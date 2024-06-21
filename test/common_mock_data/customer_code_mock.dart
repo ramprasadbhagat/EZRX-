@@ -3,6 +3,7 @@ import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_name.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 
 // Customer code info
 const _fakeBuilding = 'fakeBuilding';
@@ -53,3 +54,8 @@ final fakeBlockedShipToInfo =
 
 final fakeEDICustomerCodeInfo =
     CustomerCodeInfo.empty().copyWith(status: Status('EDI'));
+final fakeCustomerCodeInfoWithPaymetTerm = CustomerCodeInfo.empty().copyWith(
+  paymentTerm: PaymentTermCode('fake_payment-term_code'),
+  paymentTermDescription:
+      PaymentTermDescription('fake_payment-term_description'),
+);

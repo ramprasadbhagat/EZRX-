@@ -17,7 +17,6 @@ class EligibilityState with _$EligibilityState {
     required bool preSelectShipTo,
     required bool isStockInfoNotAvailable,
     required bool isNetworkAvailable,
-
   }) = _EligibilityState;
 
   factory EligibilityState.initial() => EligibilityState(
@@ -135,11 +134,6 @@ class EligibilityState with _$EligibilityState {
             (salesOrganisation.salesOrg.isSg || salesOrganisation.salesOrg.isMY)
         ? 'include'
         : '';
-  }
-
-  bool get isPaymentTermDescriptionEnable {
-    return !user.role.type.isSalesRepRole &&
-        !salesOrgConfigs.disablePaymentTermsDisplay;
   }
 
   bool get validateOutOfStockValue => salesOrgConfigs.oosValue.isOosValueZero
@@ -309,6 +303,9 @@ class EligibilityState with _$EligibilityState {
             ? salesOrgConfigs.addOosMaterials.oosMaterialTag
             : salesOrgConfigs.addOosMaterials.oosTag,
       );
+
+  bool get disablePaymentTermsDisplayForCustomer =>
+      salesOrgConfigs.disablePaymentTermsDisplay && user.role.type.isCustomer;
 
   //============================================================
   // MARKETPLACE

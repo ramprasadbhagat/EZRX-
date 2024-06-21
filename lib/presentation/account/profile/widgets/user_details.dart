@@ -88,24 +88,28 @@ class _UserDetails extends StatelessWidget {
                     ?.copyWith(color: ZPColors.neutralsBlack),
               ),
               const SizedBox(height: 20),
-              BalanceTextRow(
-                keyFlex: 3,
-                valueFlex: 5,
-                keyText: context.tr('Payment terms'),
-                valueText: context
-                    .read<EligibilityBloc>()
-                    .state
-                    .customerCodeInfo
-                    .displayPaymentTerm,
-                keyTextStyle: Theme.of(context)
-                    .textTheme
-                    .labelSmall
-                    ?.copyWith(color: ZPColors.neutralsBlack),
-                valueTextStyle: Theme.of(context)
-                    .textTheme
-                    .bodyLarge
-                    ?.copyWith(color: ZPColors.neutralsBlack),
-              ),
+              if (!context
+                  .read<EligibilityBloc>()
+                  .state
+                  .disablePaymentTermsDisplayForCustomer)
+                BalanceTextRow(
+                  keyFlex: 3,
+                  valueFlex: 5,
+                  keyText: context.tr('Payment terms'),
+                  valueText: context
+                      .read<EligibilityBloc>()
+                      .state
+                      .customerCodeInfo
+                      .displayPaymentTerm,
+                  keyTextStyle: Theme.of(context)
+                      .textTheme
+                      .labelSmall
+                      ?.copyWith(color: ZPColors.neutralsBlack),
+                  valueTextStyle: Theme.of(context)
+                      .textTheme
+                      .bodyLarge
+                      ?.copyWith(color: ZPColors.neutralsBlack),
+                ),
               const SizedBox(height: 20),
               const _LanguageDropDown(),
             ],

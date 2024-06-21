@@ -297,13 +297,13 @@ void main() {
       );
 
       testWidgets(
-        'Hide Payment Term when disablePaymentTermsDisplay is true',
+        'Hide Payment Term when disablePaymentTermsDisplay is true and the user is customer',
         (tester) async {
           VisibilityDetectorController.instance.updateInterval = Duration.zero;
           when(() => eligibilityBlocMock.state).thenReturn(
             EligibilityState.initial().copyWith(
               salesOrgConfigs: fakeTWSalesOrgConfigs,
-              user: fakeZPAdminUser,
+              user: fakeClientUser,
             ),
           );
           when(() => orderSummaryBlocMock.state).thenReturn(

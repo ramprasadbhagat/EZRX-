@@ -2219,7 +2219,7 @@ void main() {
         (invocation) => EligibilityState.initial().copyWith(
           customerCodeInfo: fakeCustomerCodeInfo,
           salesOrgConfigs: fakeTWSalesOrgConfigs,
-          user: fakeZPAdminUser,
+          user: fakeClientUser,
         ),
       );
 

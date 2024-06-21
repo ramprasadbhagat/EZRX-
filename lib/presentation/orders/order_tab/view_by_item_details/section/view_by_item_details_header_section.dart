@@ -12,7 +12,8 @@ class ViewByItemDetailsHeaderSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final config = context.read<EligibilityBloc>().state.salesOrgConfigs;
+    final eligibilityState = context.read<EligibilityBloc>().state;
+    final config = eligibilityState.salesOrgConfigs;
 
     return Container(
       color: ZPColors.primary,
@@ -95,7 +96,7 @@ class ViewByItemDetailsHeaderSection extends StatelessWidget {
                   ),
             ),
           ],
-          if (!config.disablePaymentTermsDisplay) ...[
+          if (!eligibilityState.disablePaymentTermsDisplayForCustomer) ...[
             const SizedBox(height: 8),
             LoadingShimmer.withChild(
               enabled:

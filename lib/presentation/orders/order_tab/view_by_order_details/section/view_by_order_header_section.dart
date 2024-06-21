@@ -132,8 +132,7 @@ class OrderHeaderSection extends StatelessWidget {
                   valueFlex: 7,
                 ),
               ],
-              if (!eligibilityState
-                  .salesOrgConfigs.disablePaymentTermsDisplay) ...[
+              if (!eligibilityState.disablePaymentTermsDisplayForCustomer) ...[
                 const SizedBox(height: 5),
                 BalanceTextRow(
                   key: WidgetKeys.paymentTermKey,
