@@ -211,7 +211,7 @@ void main() async {
 
         expect(
           result,
-          const Left(ApiFailure.scannedProductNotFound(fakeEanNumber)),
+          const Left(ApiFailure.scannedProductNotFound()),
         );
       });
 

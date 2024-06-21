@@ -17,6 +17,7 @@ import 'package:ezrxmobile/infrastructure/core/clevertap/clevertap_service.dart'
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/product_search_local.dart';
 import 'package:ezrxmobile/presentation/core/custom_search_bar.dart';
+import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/market_place/market_place_logo.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
@@ -25,7 +26,6 @@ import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:get_it/get_it.dart';
 
 import 'package:mocktail/mocktail.dart';
 import 'package:visibility_detector/visibility_detector.dart';
@@ -33,31 +33,6 @@ import 'package:visibility_detector/visibility_detector.dart';
 import '../../common_mock_data/mock_bloc.dart';
 import '../../common_mock_data/mock_other.dart';
 import '../../utils/widget_utils.dart';
-
-class MockMixPanelService extends Mock implements MixpanelService {}
-
-class ProductSearchBlocMock
-    extends MockBloc<ProductSearchEvent, ProductSearchState>
-    implements ProductSearchBloc {}
-
-class EligibilityBlocMock extends MockBloc<EligibilityEvent, EligibilityState>
-    implements EligibilityBloc {}
-
-class ProductDetailBlocMock
-    extends MockBloc<ProductDetailEvent, ProductDetailState>
-    implements ProductDetailBloc {}
-
-class MaterialPriceBlocMock
-    extends MockBloc<MaterialPriceEvent, MaterialPriceState>
-    implements MaterialPriceBloc {}
-
-class ScanMaterialInfoBlocMock
-    extends MockBloc<ScanMaterialInfoEvent, ScanMaterialInfoState>
-    implements ScanMaterialInfoBloc {}
-
-class MockMaterialFilterBloc
-    extends MockBloc<MaterialFilterEvent, MaterialFilterState>
-    implements MaterialFilterBloc {}
 
 void main() {
   late ProductSearchBloc productSearchBlocMock;
@@ -67,7 +42,6 @@ void main() {
   late ScanMaterialInfoBloc scanMaterialInfoBlocMock;
   late AppRouter autoRouterMock;
   late MaterialFilterBloc materialFilterBlocMock;
-  final locator = GetIt.instance;
   const fakeSearchText = 'fake-search-text';
   late List<MaterialInfo> materialSearchResults;
   late MaterialListBloc materialListBlocMock;
@@ -81,7 +55,7 @@ void main() {
 
   setUpAll(() async {
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.mock);
-    locator.registerLazySingleton<MixpanelService>(() => MockMixPanelService());
+    locator.registerLazySingleton<MixpanelService>(() => MixpanelServiceMock());
     locator.registerSingleton<ClevertapService>(ClevertapServiceMock());
     locator.registerLazySingleton(() => AppRouter());
     autoRouterMock = locator<AppRouter>();
@@ -97,7 +71,7 @@ void main() {
     materialPriceBloc = MaterialPriceBlocMock();
     scanMaterialInfoBlocMock = ScanMaterialInfoBlocMock();
     productSearchBlocMock = ProductSearchBlocMock();
-    materialFilterBlocMock = MockMaterialFilterBloc();
+    materialFilterBlocMock = MaterialFilterBlocMock();
     materialListBlocMock = MaterialListBlocMock();
 
     when(() => productSearchBlocMock.state).thenReturn(
@@ -403,13 +377,6 @@ void main() {
           final scanIconFinder = find.byKey(WidgetKeys.productScanCameraKey);
           expect(scanIconFinder, findsOneWidget);
           await tester.tap(scanIconFinder);
-          verify(
-            () => scanMaterialInfoBlocMock.add(
-              ScanMaterialInfoEvent.scanMaterialNumberFromCamera(
-                materialFilter: MaterialFilter.empty(),
-              ),
-            ),
-          ).called(1);
           expect(autoRouterMock.current.path, 'orders/scan_material_info');
         },
       );

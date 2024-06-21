@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/application/order/material_filter/material_filter_bloc.dart';
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
@@ -18,13 +19,18 @@ class ScanMaterialInfo extends StatefulWidget {
 
 class _ScanMaterialInfoState extends State<ScanMaterialInfo>
     with WidgetsBindingObserver {
-  late ScanMaterialInfoBloc scanMaterialInfoBloc;
+  late ScanMaterialInfoBloc scanMaterialInfoBloc =
+      context.read<ScanMaterialInfoBloc>();
   _ScanMaterialInfoState();
 
   @override
   void initState() {
     super.initState();
-
+    scanMaterialInfoBloc.add(
+      ScanMaterialInfoEvent.scanMaterialNumberFromCamera(
+        materialFilter: context.read<MaterialFilterBloc>().state.materialFilter,
+      ),
+    );
     _ambiguate(WidgetsBinding.instance)?.addObserver(this);
   }
 

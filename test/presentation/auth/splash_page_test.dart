@@ -67,7 +67,6 @@ import 'package:ezrxmobile/application/returns/return_list/view_by_request/retur
 import 'package:ezrxmobile/application/returns/return_request_type_code/return_request_type_code_bloc.dart';
 import 'package:ezrxmobile/application/returns/usage_code/usage_code_bloc.dart';
 import 'package:ezrxmobile/application/returns/user_restriction/user_restriction_list_bloc.dart';
-import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_config.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/full_name.dart';
@@ -90,19 +89,17 @@ import 'package:ezrxmobile/domain/order/entities/order_document_type.dart';
 import 'package:ezrxmobile/domain/order/entities/payment_customer_information.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/customer_code_local.dart';
-import 'package:ezrxmobile/infrastructure/core/chatbot/chatbot_service.dart';
-import 'package:ezrxmobile/infrastructure/core/firebase/push_notification.dart';
 import 'package:ezrxmobile/infrastructure/core/firebase/remote_config.dart';
-import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/locator.dart';
+import 'package:ezrxmobile/presentation/core/confirm_bottom_sheet.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
+import 'package:ezrxmobile/presentation/orders/create_order/camera_files_permission_bottomsheet.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/splash/splash_page.dart';
 import 'package:ezrxmobile/presentation/splash/upgrader_localization_message.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:upgrader/upgrader.dart';
 import '../../common_mock_data/customer_code_mock.dart';
@@ -157,7 +154,6 @@ void main() {
   final mockOrderHistoryDetailsBloc = ViewByOrderDetailsBlocMock();
   final mockOrderHistoryFilterBloc = ViewByItemFilterBlocMock();
   final mockViewByOrderBloc = ViewByOrderBlocMock();
-  late PushNotificationService pushNotificationServiceMock;
   final chatBotBloc = ChatBotMockBloc();
   late MaterialPriceBloc mockMaterialPriceBloc;
   late CreditAndInvoiceDetailsBloc creditAndInvoiceDetailsBloc;
@@ -185,7 +181,6 @@ void main() {
   late CustomerLicenseBloc customerLicenseBlocMock;
   late AnnouncementFilterBloc announcementFilterBlocMock;
   late PoAttachmentBloc poAttachmentBlocMock;
-
   late CustomerCodeConfig customerCodeConfig;
   final fakeSalesOrganisation =
       SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2601'));
@@ -208,29 +203,14 @@ void main() {
     ),
   );
 
-  // late AppRouter router;
   setUpAll(() async {
     remoteConfigServiceMock = RemoteConfigServiceMock();
-    pushNotificationServiceMock = PushNotificationServiceMock();
-    locator.registerSingleton<Config>(Config()..appFlavor = Flavor.mock);
-    locator.registerLazySingleton(() => AppRouter());
-    locator.registerLazySingleton(
-      () => MixpanelService(
-        config: locator<Config>(),
-      ),
-    );
-    // await locator<MixpanelService>().init();
-    locator.registerLazySingleton(
-      () => ChatBotService(
-        config: locator<Config>(),
-        pushNotificationService: pushNotificationServiceMock,
-      ),
-    );
-
+    locator.registerLazySingleton(() => MixpanelServiceMock());
+    locator.registerLazySingleton(() => ChatBotServiceMock());
     locator.registerLazySingleton<RemoteConfigService>(
       () => remoteConfigServiceMock,
     );
-
+    locator.registerFactory<AppRouter>(() => AutoRouteMock());
     locator.registerLazySingleton(() => mockViewByItemsBloc);
     locator.registerLazySingleton(() => mockMaterialPriceBloc);
     locator.registerLazySingleton(() => mockNotificationBloc);
@@ -244,7 +224,6 @@ void main() {
 
   group('Splash Screen', () {
     setUp(() {
-      locator = GetIt.instance;
       customerCodeBlocMock = CustomerCodeBlocMock();
       fullSummaryBlocMock = ZPFullSummaryBlocMock();
       authBlocMock = AuthBlocMock();
@@ -656,6 +635,11 @@ void main() {
       final expectedAuthListStates = [
         const AuthState.authenticated(),
       ];
+      when(
+        () => autoRouterMock.replaceAll(
+          const [SplashPageRoute(), HomeNavigationTabbarRoute()],
+        ),
+      ).thenAnswer((_) async => Future.value());
       whenListen(authBlocMock, Stream.fromIterable(expectedAuthListStates));
       await getWidget(tester);
       await tester.pump();
@@ -669,30 +653,44 @@ void main() {
         IntroState.initial().copyWith(isAppFirstLaunch: true, isLoading: false),
       ];
       whenListen(introBlocMock, Stream.fromIterable(expectedStates));
+      when(() => autoRouterMock.push(const IntroPageRoute()))
+          .thenAnswer((_) async => true);
       await getWidget(tester);
       await tester.pump();
-      expect(autoRouterMock.current.name, IntroPageRoute.name);
+      verify(() => autoRouterMock.push(const IntroPageRoute())).called(1);
     });
 
     testWidgets('When Intro Bloc is listener and showTermsAndCondition == true',
         (tester) async {
-      final expectedStates = [
-        IntroState.initial().copyWith(isLoading: true),
-        IntroState.initial()
-            .copyWith(isAppFirstLaunch: false, isLoading: false),
-      ];
-      whenListen(introBlocMock, Stream.fromIterable(expectedStates));
-      when(() => userBlocMock.state).thenAnswer(
-        (invocation) => UserState.initial().copyWith(
-          user: fakeUser.copyWith(
-            acceptPrivacyPolicy: true,
-          ),
-          isLoginOnBehalf: false,
-        ),
+      final auptcRoute = AupTCPageRoute(
+        key: WidgetKeys.aupTcScreen,
+        user: fakeUser,
+        isMarketPlace: false,
       );
+      when((() => autoRouterMock.push(auptcRoute)))
+          .thenAnswer((_) async => true);
+      whenListen(
+        introBlocMock,
+        Stream.fromIterable([
+          IntroState.initial().copyWith(isLoading: true),
+          IntroState.initial()
+              .copyWith(isAppFirstLaunch: false, isLoading: false),
+        ]),
+      );
+      whenListen(
+        userBlocMock,
+        Stream.fromIterable([
+          UserState.initial().copyWith(
+            user: fakeUser,
+            isLoginOnBehalf: false,
+          ),
+        ]),
+      );
+
       await getWidget(tester);
-      await tester.pump();
-      expect(autoRouterMock.current.name, IntroPageRoute.name);
+      await tester.pumpAndSettle(Durations.extralong1);
+      verifyNever(() => autoRouterMock.push(const IntroPageRoute()));
+      verify(() => autoRouterMock.push(auptcRoute)).called(1);
     });
 
     testWidgets('When PaymentCustomerInformation bloc is listening',
@@ -797,6 +795,7 @@ void main() {
     });
 
     testWidgets('When user dont have state organization', (tester) async {
+      final user = fakeInternalSalesRepUser.copyWith(acceptPrivacyPolicy: true);
       final expectedEligibilityStates = [
         EligibilityState.initial().copyWith(
           salesOrganisation: SalesOrganisation.empty(),
@@ -809,11 +808,7 @@ void main() {
           salesOrganisation: fakeTWSalesOrganisation,
           salesOrgConfigs: fakeSalesOrganisationConfigs,
           customerCodeInfo: fakeCustomerCodeInfo,
-          user: fakeUser.copyWith(
-            role: Role.empty().copyWith(
-              type: RoleType('internal_sales_rep'),
-            ),
-          ),
+          user: user,
         ),
       ];
 
@@ -841,12 +836,7 @@ void main() {
       final expectedUserListStates = [
         UserState.initial(),
         UserState.initial().copyWith(
-          user: fakeUser.copyWith(
-            userSalesOrganisations: [],
-            role: Role.empty().copyWith(
-              type: RoleType('internal_sales_rep'),
-            ),
-          ),
+          user: user,
         ),
       ];
       whenListen(userBlocMock, Stream.fromIterable(expectedUserListStates));
@@ -864,11 +854,7 @@ void main() {
             salesOrganisation: fakeTWSalesOrganisation,
             salesOrganisationConfigs: fakeSalesOrganisationConfigs,
             customerCodeInfo: fakeCustomerCodeInfo,
-            user: fakeUser.copyWith(
-              role: Role.empty().copyWith(
-                type: RoleType('internal_sales_rep'),
-              ),
-            ),
+            user: user,
           ),
         ),
       ).called(1);
@@ -876,6 +862,7 @@ void main() {
     });
 
     testWidgets('When user role has return admin access ', (tester) async {
+      final user = fakeRootAdminUser.copyWith(acceptPrivacyPolicy: true);
       final expectedEligibilityStates = [
         EligibilityState.initial().copyWith(
           salesOrganisation: SalesOrganisation.empty(),
@@ -888,11 +875,7 @@ void main() {
           salesOrganisation: fakeTWSalesOrganisation,
           salesOrgConfigs: fakeSalesOrganisationConfigs,
           customerCodeInfo: fakeCustomerCodeInfo,
-          user: fakeUser.copyWith(
-            role: Role.empty().copyWith(
-              type: RoleType('root_admin'),
-            ),
-          ),
+          user: user,
         ),
       ];
 
@@ -904,12 +887,7 @@ void main() {
       final expectedUserListStates = [
         UserState.initial(),
         UserState.initial().copyWith(
-          user: fakeUser.copyWith(
-            disableReturns: false,
-            role: Role.empty().copyWith(
-              type: RoleType('root_admin'),
-            ),
-          ),
+          user: user.copyWith(disableReturns: false),
         ),
       ];
       whenListen(userBlocMock, Stream.fromIterable(expectedUserListStates));
@@ -1077,7 +1055,7 @@ void main() {
     testWidgets('When user Language Change', (tester) async {
       final expectedUserListStates = [
         UserState.initial().copyWith(
-          user: fakeUser,
+          user: fakeUser.copyWith(acceptPrivacyPolicy: true),
         ),
       ];
       whenListen(userBlocMock, Stream.fromIterable(expectedUserListStates));
@@ -1348,6 +1326,175 @@ void main() {
           ),
         ),
       ).called(1);
+    });
+
+    group('Scan material -', () {
+      testWidgets('Should show camera permission denied bottom sheet',
+          (tester) async {
+        when(
+          () => autoRouterMock.popUntilRouteWithName(
+            HomeNavigationTabbarRoute.name,
+          ),
+        ).thenAnswer((_) async => true);
+        whenListen(
+          scanMaterialInfoMockBloc,
+          Stream.fromIterable([
+            ScanMaterialInfoState.initial().copyWith(
+              apiFailureOrSuccessOption: optionOf(
+                const Left(ApiFailure.cameraPermissionFailed(true)),
+              ),
+            ),
+          ]),
+        );
+
+        await getWidget(tester);
+        await tester.pumpAndSettle();
+        final bottomSheet = find.byType(CameraFilesPermission);
+        expect(bottomSheet, findsOne);
+        expect(
+          find.descendant(
+            of: bottomSheet,
+            matching: find.text('eZRx+ is unable to turn on camera'),
+          ),
+          findsOne,
+        );
+        expect(
+          find.descendant(
+            of: bottomSheet,
+            matching: find.text(
+              'Camera access was denied. Grant camera access permission in Settings to capture photos on eZRx+.',
+            ),
+          ),
+          findsOne,
+        );
+        final cancelButton = find.byKey(WidgetKeys.cancelButton);
+        expect(
+          find.descendant(of: cancelButton, matching: find.text('Cancel')),
+          findsOne,
+        );
+        final openSettingButton = find.byKey(WidgetKeys.confirmButton);
+        expect(
+          find.descendant(
+            of: openSettingButton,
+            matching: find.text('Open Settings'),
+          ),
+          findsOne,
+        );
+        await tester.tap(cancelButton);
+        await tester.pumpAndSettle();
+        verify(
+          () => autoRouterMock
+              .popUntilRouteWithName(HomeNavigationTabbarRoute.name),
+        ).called(1);
+      });
+
+      testWidgets('Should show gallery permission denied bottom sheet',
+          (tester) async {
+        when(() => autoRouterMock.pop()).thenAnswer((_) async => true);
+        whenListen(
+          scanMaterialInfoMockBloc,
+          Stream.fromIterable([
+            ScanMaterialInfoState.initial().copyWith(
+              apiFailureOrSuccessOption: optionOf(
+                const Left(ApiFailure.storagePermissionFailed()),
+              ),
+            ),
+          ]),
+        );
+
+        await getWidget(tester);
+        await tester.pumpAndSettle();
+        final bottomSheet = find.byType(CameraFilesPermission);
+        expect(bottomSheet, findsOne);
+        expect(
+          find.descendant(
+            of: bottomSheet,
+            matching: find.text('eZRx+ is unable to access your files'),
+          ),
+          findsOne,
+        );
+        expect(
+          find.descendant(
+            of: bottomSheet,
+            matching: find.text(
+              'Photos and files access was denied. Grant photos and files access permission in Settings to upload photos and documents on eZRx+.',
+            ),
+          ),
+          findsOne,
+        );
+        final cancelButton = find.byKey(WidgetKeys.cancelButton);
+        expect(
+          find.descendant(of: cancelButton, matching: find.text('Cancel')),
+          findsOne,
+        );
+        final openSettingButton = find.byKey(WidgetKeys.confirmButton);
+        expect(
+          find.descendant(
+            of: openSettingButton,
+            matching: find.text('Open Settings'),
+          ),
+          findsOne,
+        );
+        await tester.tap(cancelButton);
+        await tester.pumpAndSettle();
+        verify(() => autoRouterMock.pop()).called(1);
+      });
+
+      testWidgets('Should show scan not found bottom sheet', (tester) async {
+        when(() => autoRouterMock.push(const ScanMaterialInfoRoute()))
+            .thenAnswer((_) async => true);
+        whenListen(
+          scanMaterialInfoMockBloc,
+          Stream.fromIterable([
+            ScanMaterialInfoState.initial().copyWith(
+              apiFailureOrSuccessOption: optionOf(
+                const Left(ApiFailure.scannedProductNotFound()),
+              ),
+            ),
+          ]),
+        );
+
+        await getWidget(tester);
+        await tester.pumpAndSettle();
+        final bottomSheet = find.byType(ConfirmBottomSheet);
+        expect(bottomSheet, findsOne);
+        expect(
+          find.descendant(
+            of: bottomSheet,
+            matching: find.text('Unable to find this product'),
+          ),
+          findsOne,
+        );
+        expect(
+          find.descendant(
+            of: bottomSheet,
+            matching: find.text(
+              'Please try scanning different barcode',
+            ),
+          ),
+          findsOne,
+        );
+        expect(
+          find.descendant(
+            of: find.byKey(WidgetKeys.confirmBottomSheetCancelButton),
+            matching: find.text('Close'),
+          ),
+          findsOne,
+        );
+        final scanAgain =
+            find.byKey(WidgetKeys.confirmBottomSheetConfirmButton);
+        expect(
+          find.descendant(
+            of: scanAgain,
+            matching: find.text('Scan again'),
+          ),
+          findsOne,
+        );
+        await tester.tap(scanAgain);
+        await tester.pumpAndSettle();
+        verify(() => autoRouterMock.push(const ScanMaterialInfoRoute()))
+            .called(1);
+      });
     });
   });
 }

@@ -1,9 +1,7 @@
-import 'package:bloc_test/bloc_test.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/order/material_filter/material_filter_bloc.dart';
 import 'package:ezrxmobile/application/order/scan_material_info/scan_material_info_bloc.dart';
-import 'package:ezrxmobile/domain/order/entities/material_filter.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
@@ -15,20 +13,9 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
 
+import '../../common_mock_data/mock_bloc.dart';
+import '../../common_mock_data/mock_other.dart';
 import '../../utils/widget_utils.dart';
-
-class EligibilityBlocMock extends MockBloc<EligibilityEvent, EligibilityState>
-    implements EligibilityBloc {}
-
-class ScanMaterialInfoBlocMock
-    extends MockBloc<ScanMaterialInfoEvent, ScanMaterialInfoState>
-    implements ScanMaterialInfoBloc {}
-
-class MockMaterialFilterBloc
-    extends MockBloc<MaterialFilterEvent, MaterialFilterState>
-    implements MaterialFilterBloc {}
-
-class MixpanelServiceMock extends Mock implements MixpanelService {}
 
 void main() {
   late ScanMaterialInfoBlocMock scanMaterialInfoBlocMock;
@@ -39,9 +26,7 @@ void main() {
   setUpAll(() async {
     locator.registerFactory(() => AppRouter());
     autoRouterMock = locator<AppRouter>();
-    locator.registerLazySingleton<MixpanelService>(
-      () => MixpanelServiceMock(),
-    );
+    locator.registerLazySingleton<MixpanelService>(() => MixpanelServiceMock());
   });
 
   group('Test "Product Search Entry Test"', () {
@@ -50,7 +35,7 @@ void main() {
       locator = GetIt.instance;
       scanMaterialInfoBlocMock = ScanMaterialInfoBlocMock();
       eligibilityBlocMock = EligibilityBlocMock();
-      materialFilterBlocMock = MockMaterialFilterBloc();
+      materialFilterBlocMock = MaterialFilterBlocMock();
       when(() => scanMaterialInfoBlocMock.state)
           .thenReturn(ScanMaterialInfoState.initial());
       when(() => eligibilityBlocMock.state)
@@ -130,13 +115,6 @@ void main() {
         await tester.tap(findSuffixIcon);
         await tester.pumpAndSettle();
         expect(autoRouterMock.current.path, 'orders/scan_material_info');
-        verify(
-          () => scanMaterialInfoBlocMock.add(
-            ScanMaterialInfoEvent.scanMaterialNumberFromCamera(
-              materialFilter: MaterialFilter.empty(),
-            ),
-          ),
-        ).called(1);
       },
     );
   });

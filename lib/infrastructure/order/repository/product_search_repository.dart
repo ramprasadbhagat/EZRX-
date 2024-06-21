@@ -147,9 +147,7 @@ class ProductSearchRepository implements IProductSearchRepository {
       );
 
       if (materialList.products.isEmpty) {
-        return Left(
-          ApiFailure.scannedProductNotFound(eanNumber.getOrCrash()),
-        );
+        return const Left(ApiFailure.scannedProductNotFound());
       }
 
       return Right(materialList.products.first);
@@ -159,7 +157,9 @@ class ProductSearchRepository implements IProductSearchRepository {
   }
 
   @override
-  Future<Either<ApiFailure, Unit>> saveSearchHistory(SearchKey searchKey) async {
+  Future<Either<ApiFailure, Unit>> saveSearchHistory(
+    SearchKey searchKey,
+  ) async {
     try {
       final getSearchKeyResponse = await getSearchKeys();
       final storedKeys = getSearchKeyResponse.fold(

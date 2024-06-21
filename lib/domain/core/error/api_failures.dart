@@ -58,8 +58,7 @@ class ApiFailure with _$ApiFailure {
   const factory ApiFailure.invoiceDetailRoute() = _InvoiceDetailRoute;
 
   const factory ApiFailure.languageChangeFail() = _LanguageChangeFail;
-  const factory ApiFailure.scannedProductNotFound(String productNumber) =
-      _ScannedProductNotFound;
+  const factory ApiFailure.scannedProductNotFound() = _ScannedProductNotFound;
   const factory ApiFailure.cameraPermissionFailed(bool permanentlyDenied) =
       _CameraPermissionFailed;
   const factory ApiFailure.userNameNotFound() = _UserNameNotFound;
@@ -144,10 +143,7 @@ extension ApiFailureExt on ApiFailure {
         ),
         passwordResetFail: (_) => const TRObject('Unable to reset password'),
         languageChangeFail: (_) => const TRObject('Unable to change language'),
-        scannedProductNotFound: (scannedProduct) => TRObject(
-          'Unable to fetch Material {productNumber}',
-          arguments: {'productNumber': scannedProduct.productNumber},
-        ),
+        scannedProductNotFound: (_) => const TRObject(''),
         cameraPermissionFailed: (_) =>
             const TRObject('Camera Permission Denied'),
         userNameNotFound: (_) => const TRObject('Incorrect username'),
