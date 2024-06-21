@@ -12,7 +12,7 @@ part of 'auth_exception.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$AuthException {
@@ -22,6 +22,7 @@ mixin _$AuthException {
     required TResult Function() accountLocked,
     required TResult Function() accountExpired,
     required TResult Function() invalidUserName,
+    required TResult Function() accountBlocked,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -30,6 +31,7 @@ mixin _$AuthException {
     TResult? Function()? accountLocked,
     TResult? Function()? accountExpired,
     TResult? Function()? invalidUserName,
+    TResult? Function()? accountBlocked,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -38,6 +40,7 @@ mixin _$AuthException {
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
     TResult Function()? invalidUserName,
+    TResult Function()? accountBlocked,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -48,6 +51,7 @@ mixin _$AuthException {
     required TResult Function(_AccountLocked value) accountLocked,
     required TResult Function(_AccountExpired value) accountExpired,
     required TResult Function(_InvalidUserName value) invalidUserName,
+    required TResult Function(_AccountBlocked value) accountBlocked,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -57,6 +61,7 @@ mixin _$AuthException {
     TResult? Function(_AccountLocked value)? accountLocked,
     TResult? Function(_AccountExpired value)? accountExpired,
     TResult? Function(_InvalidUserName value)? invalidUserName,
+    TResult? Function(_AccountBlocked value)? accountBlocked,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -66,6 +71,7 @@ mixin _$AuthException {
     TResult Function(_AccountLocked value)? accountLocked,
     TResult Function(_AccountExpired value)? accountExpired,
     TResult Function(_InvalidUserName value)? invalidUserName,
+    TResult Function(_AccountBlocked value)? accountBlocked,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -90,29 +96,29 @@ class _$AuthExceptionCopyWithImpl<$Res, $Val extends AuthException>
 }
 
 /// @nodoc
-abstract class _$$_InvalidEmailAndPasswordCombinationCopyWith<$Res> {
-  factory _$$_InvalidEmailAndPasswordCombinationCopyWith(
-          _$_InvalidEmailAndPasswordCombination value,
-          $Res Function(_$_InvalidEmailAndPasswordCombination) then) =
-      __$$_InvalidEmailAndPasswordCombinationCopyWithImpl<$Res>;
+abstract class _$$InvalidEmailAndPasswordCombinationImplCopyWith<$Res> {
+  factory _$$InvalidEmailAndPasswordCombinationImplCopyWith(
+          _$InvalidEmailAndPasswordCombinationImpl value,
+          $Res Function(_$InvalidEmailAndPasswordCombinationImpl) then) =
+      __$$InvalidEmailAndPasswordCombinationImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_InvalidEmailAndPasswordCombinationCopyWithImpl<$Res>
+class __$$InvalidEmailAndPasswordCombinationImplCopyWithImpl<$Res>
     extends _$AuthExceptionCopyWithImpl<$Res,
-        _$_InvalidEmailAndPasswordCombination>
-    implements _$$_InvalidEmailAndPasswordCombinationCopyWith<$Res> {
-  __$$_InvalidEmailAndPasswordCombinationCopyWithImpl(
-      _$_InvalidEmailAndPasswordCombination _value,
-      $Res Function(_$_InvalidEmailAndPasswordCombination) _then)
+        _$InvalidEmailAndPasswordCombinationImpl>
+    implements _$$InvalidEmailAndPasswordCombinationImplCopyWith<$Res> {
+  __$$InvalidEmailAndPasswordCombinationImplCopyWithImpl(
+      _$InvalidEmailAndPasswordCombinationImpl _value,
+      $Res Function(_$InvalidEmailAndPasswordCombinationImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_InvalidEmailAndPasswordCombination
+class _$InvalidEmailAndPasswordCombinationImpl
     implements _InvalidEmailAndPasswordCombination {
-  const _$_InvalidEmailAndPasswordCombination();
+  const _$InvalidEmailAndPasswordCombinationImpl();
 
   @override
   String toString() {
@@ -120,10 +126,10 @@ class _$_InvalidEmailAndPasswordCombination
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_InvalidEmailAndPasswordCombination);
+            other is _$InvalidEmailAndPasswordCombinationImpl);
   }
 
   @override
@@ -136,6 +142,7 @@ class _$_InvalidEmailAndPasswordCombination
     required TResult Function() accountLocked,
     required TResult Function() accountExpired,
     required TResult Function() invalidUserName,
+    required TResult Function() accountBlocked,
   }) {
     return invalidEmailAndPasswordCombination();
   }
@@ -147,6 +154,7 @@ class _$_InvalidEmailAndPasswordCombination
     TResult? Function()? accountLocked,
     TResult? Function()? accountExpired,
     TResult? Function()? invalidUserName,
+    TResult? Function()? accountBlocked,
   }) {
     return invalidEmailAndPasswordCombination?.call();
   }
@@ -158,6 +166,7 @@ class _$_InvalidEmailAndPasswordCombination
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
     TResult Function()? invalidUserName,
+    TResult Function()? accountBlocked,
     required TResult orElse(),
   }) {
     if (invalidEmailAndPasswordCombination != null) {
@@ -174,6 +183,7 @@ class _$_InvalidEmailAndPasswordCombination
     required TResult Function(_AccountLocked value) accountLocked,
     required TResult Function(_AccountExpired value) accountExpired,
     required TResult Function(_InvalidUserName value) invalidUserName,
+    required TResult Function(_AccountBlocked value) accountBlocked,
   }) {
     return invalidEmailAndPasswordCombination(this);
   }
@@ -186,6 +196,7 @@ class _$_InvalidEmailAndPasswordCombination
     TResult? Function(_AccountLocked value)? accountLocked,
     TResult? Function(_AccountExpired value)? accountExpired,
     TResult? Function(_InvalidUserName value)? invalidUserName,
+    TResult? Function(_AccountBlocked value)? accountBlocked,
   }) {
     return invalidEmailAndPasswordCombination?.call(this);
   }
@@ -198,6 +209,7 @@ class _$_InvalidEmailAndPasswordCombination
     TResult Function(_AccountLocked value)? accountLocked,
     TResult Function(_AccountExpired value)? accountExpired,
     TResult Function(_InvalidUserName value)? invalidUserName,
+    TResult Function(_AccountBlocked value)? accountBlocked,
     required TResult orElse(),
   }) {
     if (invalidEmailAndPasswordCombination != null) {
@@ -209,29 +221,29 @@ class _$_InvalidEmailAndPasswordCombination
 
 abstract class _InvalidEmailAndPasswordCombination implements AuthException {
   const factory _InvalidEmailAndPasswordCombination() =
-      _$_InvalidEmailAndPasswordCombination;
+      _$InvalidEmailAndPasswordCombinationImpl;
 }
 
 /// @nodoc
-abstract class _$$_AccountLockedCopyWith<$Res> {
-  factory _$$_AccountLockedCopyWith(
-          _$_AccountLocked value, $Res Function(_$_AccountLocked) then) =
-      __$$_AccountLockedCopyWithImpl<$Res>;
+abstract class _$$AccountLockedImplCopyWith<$Res> {
+  factory _$$AccountLockedImplCopyWith(
+          _$AccountLockedImpl value, $Res Function(_$AccountLockedImpl) then) =
+      __$$AccountLockedImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_AccountLockedCopyWithImpl<$Res>
-    extends _$AuthExceptionCopyWithImpl<$Res, _$_AccountLocked>
-    implements _$$_AccountLockedCopyWith<$Res> {
-  __$$_AccountLockedCopyWithImpl(
-      _$_AccountLocked _value, $Res Function(_$_AccountLocked) _then)
+class __$$AccountLockedImplCopyWithImpl<$Res>
+    extends _$AuthExceptionCopyWithImpl<$Res, _$AccountLockedImpl>
+    implements _$$AccountLockedImplCopyWith<$Res> {
+  __$$AccountLockedImplCopyWithImpl(
+      _$AccountLockedImpl _value, $Res Function(_$AccountLockedImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_AccountLocked implements _AccountLocked {
-  const _$_AccountLocked();
+class _$AccountLockedImpl implements _AccountLocked {
+  const _$AccountLockedImpl();
 
   @override
   String toString() {
@@ -239,9 +251,9 @@ class _$_AccountLocked implements _AccountLocked {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_AccountLocked);
+        (other.runtimeType == runtimeType && other is _$AccountLockedImpl);
   }
 
   @override
@@ -254,6 +266,7 @@ class _$_AccountLocked implements _AccountLocked {
     required TResult Function() accountLocked,
     required TResult Function() accountExpired,
     required TResult Function() invalidUserName,
+    required TResult Function() accountBlocked,
   }) {
     return accountLocked();
   }
@@ -265,6 +278,7 @@ class _$_AccountLocked implements _AccountLocked {
     TResult? Function()? accountLocked,
     TResult? Function()? accountExpired,
     TResult? Function()? invalidUserName,
+    TResult? Function()? accountBlocked,
   }) {
     return accountLocked?.call();
   }
@@ -276,6 +290,7 @@ class _$_AccountLocked implements _AccountLocked {
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
     TResult Function()? invalidUserName,
+    TResult Function()? accountBlocked,
     required TResult orElse(),
   }) {
     if (accountLocked != null) {
@@ -292,6 +307,7 @@ class _$_AccountLocked implements _AccountLocked {
     required TResult Function(_AccountLocked value) accountLocked,
     required TResult Function(_AccountExpired value) accountExpired,
     required TResult Function(_InvalidUserName value) invalidUserName,
+    required TResult Function(_AccountBlocked value) accountBlocked,
   }) {
     return accountLocked(this);
   }
@@ -304,6 +320,7 @@ class _$_AccountLocked implements _AccountLocked {
     TResult? Function(_AccountLocked value)? accountLocked,
     TResult? Function(_AccountExpired value)? accountExpired,
     TResult? Function(_InvalidUserName value)? invalidUserName,
+    TResult? Function(_AccountBlocked value)? accountBlocked,
   }) {
     return accountLocked?.call(this);
   }
@@ -316,6 +333,7 @@ class _$_AccountLocked implements _AccountLocked {
     TResult Function(_AccountLocked value)? accountLocked,
     TResult Function(_AccountExpired value)? accountExpired,
     TResult Function(_InvalidUserName value)? invalidUserName,
+    TResult Function(_AccountBlocked value)? accountBlocked,
     required TResult orElse(),
   }) {
     if (accountLocked != null) {
@@ -326,29 +344,29 @@ class _$_AccountLocked implements _AccountLocked {
 }
 
 abstract class _AccountLocked implements AuthException {
-  const factory _AccountLocked() = _$_AccountLocked;
+  const factory _AccountLocked() = _$AccountLockedImpl;
 }
 
 /// @nodoc
-abstract class _$$_AccountExpiredCopyWith<$Res> {
-  factory _$$_AccountExpiredCopyWith(
-          _$_AccountExpired value, $Res Function(_$_AccountExpired) then) =
-      __$$_AccountExpiredCopyWithImpl<$Res>;
+abstract class _$$AccountExpiredImplCopyWith<$Res> {
+  factory _$$AccountExpiredImplCopyWith(_$AccountExpiredImpl value,
+          $Res Function(_$AccountExpiredImpl) then) =
+      __$$AccountExpiredImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_AccountExpiredCopyWithImpl<$Res>
-    extends _$AuthExceptionCopyWithImpl<$Res, _$_AccountExpired>
-    implements _$$_AccountExpiredCopyWith<$Res> {
-  __$$_AccountExpiredCopyWithImpl(
-      _$_AccountExpired _value, $Res Function(_$_AccountExpired) _then)
+class __$$AccountExpiredImplCopyWithImpl<$Res>
+    extends _$AuthExceptionCopyWithImpl<$Res, _$AccountExpiredImpl>
+    implements _$$AccountExpiredImplCopyWith<$Res> {
+  __$$AccountExpiredImplCopyWithImpl(
+      _$AccountExpiredImpl _value, $Res Function(_$AccountExpiredImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_AccountExpired implements _AccountExpired {
-  const _$_AccountExpired();
+class _$AccountExpiredImpl implements _AccountExpired {
+  const _$AccountExpiredImpl();
 
   @override
   String toString() {
@@ -356,9 +374,9 @@ class _$_AccountExpired implements _AccountExpired {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_AccountExpired);
+        (other.runtimeType == runtimeType && other is _$AccountExpiredImpl);
   }
 
   @override
@@ -371,6 +389,7 @@ class _$_AccountExpired implements _AccountExpired {
     required TResult Function() accountLocked,
     required TResult Function() accountExpired,
     required TResult Function() invalidUserName,
+    required TResult Function() accountBlocked,
   }) {
     return accountExpired();
   }
@@ -382,6 +401,7 @@ class _$_AccountExpired implements _AccountExpired {
     TResult? Function()? accountLocked,
     TResult? Function()? accountExpired,
     TResult? Function()? invalidUserName,
+    TResult? Function()? accountBlocked,
   }) {
     return accountExpired?.call();
   }
@@ -393,6 +413,7 @@ class _$_AccountExpired implements _AccountExpired {
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
     TResult Function()? invalidUserName,
+    TResult Function()? accountBlocked,
     required TResult orElse(),
   }) {
     if (accountExpired != null) {
@@ -409,6 +430,7 @@ class _$_AccountExpired implements _AccountExpired {
     required TResult Function(_AccountLocked value) accountLocked,
     required TResult Function(_AccountExpired value) accountExpired,
     required TResult Function(_InvalidUserName value) invalidUserName,
+    required TResult Function(_AccountBlocked value) accountBlocked,
   }) {
     return accountExpired(this);
   }
@@ -421,6 +443,7 @@ class _$_AccountExpired implements _AccountExpired {
     TResult? Function(_AccountLocked value)? accountLocked,
     TResult? Function(_AccountExpired value)? accountExpired,
     TResult? Function(_InvalidUserName value)? invalidUserName,
+    TResult? Function(_AccountBlocked value)? accountBlocked,
   }) {
     return accountExpired?.call(this);
   }
@@ -433,6 +456,7 @@ class _$_AccountExpired implements _AccountExpired {
     TResult Function(_AccountLocked value)? accountLocked,
     TResult Function(_AccountExpired value)? accountExpired,
     TResult Function(_InvalidUserName value)? invalidUserName,
+    TResult Function(_AccountBlocked value)? accountBlocked,
     required TResult orElse(),
   }) {
     if (accountExpired != null) {
@@ -443,29 +467,29 @@ class _$_AccountExpired implements _AccountExpired {
 }
 
 abstract class _AccountExpired implements AuthException {
-  const factory _AccountExpired() = _$_AccountExpired;
+  const factory _AccountExpired() = _$AccountExpiredImpl;
 }
 
 /// @nodoc
-abstract class _$$_InvalidUserNameCopyWith<$Res> {
-  factory _$$_InvalidUserNameCopyWith(
-          _$_InvalidUserName value, $Res Function(_$_InvalidUserName) then) =
-      __$$_InvalidUserNameCopyWithImpl<$Res>;
+abstract class _$$InvalidUserNameImplCopyWith<$Res> {
+  factory _$$InvalidUserNameImplCopyWith(_$InvalidUserNameImpl value,
+          $Res Function(_$InvalidUserNameImpl) then) =
+      __$$InvalidUserNameImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_InvalidUserNameCopyWithImpl<$Res>
-    extends _$AuthExceptionCopyWithImpl<$Res, _$_InvalidUserName>
-    implements _$$_InvalidUserNameCopyWith<$Res> {
-  __$$_InvalidUserNameCopyWithImpl(
-      _$_InvalidUserName _value, $Res Function(_$_InvalidUserName) _then)
+class __$$InvalidUserNameImplCopyWithImpl<$Res>
+    extends _$AuthExceptionCopyWithImpl<$Res, _$InvalidUserNameImpl>
+    implements _$$InvalidUserNameImplCopyWith<$Res> {
+  __$$InvalidUserNameImplCopyWithImpl(
+      _$InvalidUserNameImpl _value, $Res Function(_$InvalidUserNameImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_InvalidUserName implements _InvalidUserName {
-  const _$_InvalidUserName();
+class _$InvalidUserNameImpl implements _InvalidUserName {
+  const _$InvalidUserNameImpl();
 
   @override
   String toString() {
@@ -473,9 +497,9 @@ class _$_InvalidUserName implements _InvalidUserName {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_InvalidUserName);
+        (other.runtimeType == runtimeType && other is _$InvalidUserNameImpl);
   }
 
   @override
@@ -488,6 +512,7 @@ class _$_InvalidUserName implements _InvalidUserName {
     required TResult Function() accountLocked,
     required TResult Function() accountExpired,
     required TResult Function() invalidUserName,
+    required TResult Function() accountBlocked,
   }) {
     return invalidUserName();
   }
@@ -499,6 +524,7 @@ class _$_InvalidUserName implements _InvalidUserName {
     TResult? Function()? accountLocked,
     TResult? Function()? accountExpired,
     TResult? Function()? invalidUserName,
+    TResult? Function()? accountBlocked,
   }) {
     return invalidUserName?.call();
   }
@@ -510,6 +536,7 @@ class _$_InvalidUserName implements _InvalidUserName {
     TResult Function()? accountLocked,
     TResult Function()? accountExpired,
     TResult Function()? invalidUserName,
+    TResult Function()? accountBlocked,
     required TResult orElse(),
   }) {
     if (invalidUserName != null) {
@@ -526,6 +553,7 @@ class _$_InvalidUserName implements _InvalidUserName {
     required TResult Function(_AccountLocked value) accountLocked,
     required TResult Function(_AccountExpired value) accountExpired,
     required TResult Function(_InvalidUserName value) invalidUserName,
+    required TResult Function(_AccountBlocked value) accountBlocked,
   }) {
     return invalidUserName(this);
   }
@@ -538,6 +566,7 @@ class _$_InvalidUserName implements _InvalidUserName {
     TResult? Function(_AccountLocked value)? accountLocked,
     TResult? Function(_AccountExpired value)? accountExpired,
     TResult? Function(_InvalidUserName value)? invalidUserName,
+    TResult? Function(_AccountBlocked value)? accountBlocked,
   }) {
     return invalidUserName?.call(this);
   }
@@ -550,6 +579,7 @@ class _$_InvalidUserName implements _InvalidUserName {
     TResult Function(_AccountLocked value)? accountLocked,
     TResult Function(_AccountExpired value)? accountExpired,
     TResult Function(_InvalidUserName value)? invalidUserName,
+    TResult Function(_AccountBlocked value)? accountBlocked,
     required TResult orElse(),
   }) {
     if (invalidUserName != null) {
@@ -560,5 +590,128 @@ class _$_InvalidUserName implements _InvalidUserName {
 }
 
 abstract class _InvalidUserName implements AuthException {
-  const factory _InvalidUserName() = _$_InvalidUserName;
+  const factory _InvalidUserName() = _$InvalidUserNameImpl;
+}
+
+/// @nodoc
+abstract class _$$AccountBlockedImplCopyWith<$Res> {
+  factory _$$AccountBlockedImplCopyWith(_$AccountBlockedImpl value,
+          $Res Function(_$AccountBlockedImpl) then) =
+      __$$AccountBlockedImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$AccountBlockedImplCopyWithImpl<$Res>
+    extends _$AuthExceptionCopyWithImpl<$Res, _$AccountBlockedImpl>
+    implements _$$AccountBlockedImplCopyWith<$Res> {
+  __$$AccountBlockedImplCopyWithImpl(
+      _$AccountBlockedImpl _value, $Res Function(_$AccountBlockedImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$AccountBlockedImpl implements _AccountBlocked {
+  const _$AccountBlockedImpl();
+
+  @override
+  String toString() {
+    return 'AuthException.accountBlocked()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$AccountBlockedImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() invalidEmailAndPasswordCombination,
+    required TResult Function() accountLocked,
+    required TResult Function() accountExpired,
+    required TResult Function() invalidUserName,
+    required TResult Function() accountBlocked,
+  }) {
+    return accountBlocked();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? invalidEmailAndPasswordCombination,
+    TResult? Function()? accountLocked,
+    TResult? Function()? accountExpired,
+    TResult? Function()? invalidUserName,
+    TResult? Function()? accountBlocked,
+  }) {
+    return accountBlocked?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? invalidEmailAndPasswordCombination,
+    TResult Function()? accountLocked,
+    TResult Function()? accountExpired,
+    TResult Function()? invalidUserName,
+    TResult Function()? accountBlocked,
+    required TResult orElse(),
+  }) {
+    if (accountBlocked != null) {
+      return accountBlocked();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_InvalidEmailAndPasswordCombination value)
+        invalidEmailAndPasswordCombination,
+    required TResult Function(_AccountLocked value) accountLocked,
+    required TResult Function(_AccountExpired value) accountExpired,
+    required TResult Function(_InvalidUserName value) invalidUserName,
+    required TResult Function(_AccountBlocked value) accountBlocked,
+  }) {
+    return accountBlocked(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_InvalidEmailAndPasswordCombination value)?
+        invalidEmailAndPasswordCombination,
+    TResult? Function(_AccountLocked value)? accountLocked,
+    TResult? Function(_AccountExpired value)? accountExpired,
+    TResult? Function(_InvalidUserName value)? invalidUserName,
+    TResult? Function(_AccountBlocked value)? accountBlocked,
+  }) {
+    return accountBlocked?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_InvalidEmailAndPasswordCombination value)?
+        invalidEmailAndPasswordCombination,
+    TResult Function(_AccountLocked value)? accountLocked,
+    TResult Function(_AccountExpired value)? accountExpired,
+    TResult Function(_InvalidUserName value)? invalidUserName,
+    TResult Function(_AccountBlocked value)? accountBlocked,
+    required TResult orElse(),
+  }) {
+    if (accountBlocked != null) {
+      return accountBlocked(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _AccountBlocked implements AuthException {
+  const factory _AccountBlocked() = _$AccountBlockedImpl;
 }

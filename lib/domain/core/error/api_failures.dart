@@ -62,6 +62,7 @@ class ApiFailure with _$ApiFailure {
   const factory ApiFailure.cameraPermissionFailed(bool permanentlyDenied) =
       _CameraPermissionFailed;
   const factory ApiFailure.userNameNotFound() = _UserNameNotFound;
+  const factory ApiFailure.accountBlocked() = _AccountBlocked;
   const factory ApiFailure.uploadedFileSizeExceed() = _UploadedFileSizeExceed;
   const factory ApiFailure.paymentAdviceDeleteFailed(String adviceNumber) =
       _PaymentAdviceDeleteFailed;
@@ -91,6 +92,7 @@ extension ApiFailureExt on ApiFailure {
         poorConnection: (_) => const TRObject('Poor Internet connection'),
         serverTimeout: (_) => const TRObject('Server time out'),
         userNotFound: (_) => const TRObject('User not found.'),
+        accountBlocked: (_) => const TRObject('This account is blocked'),
         invalidEmailAndPasswordCombination: (_) => const TRObject(
           'Incorrect username and/or password.',
         ),

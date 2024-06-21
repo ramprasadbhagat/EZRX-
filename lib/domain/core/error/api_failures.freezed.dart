@@ -52,6 +52,7 @@ mixin _$ApiFailure {
     required TResult Function() scannedProductNotFound,
     required TResult Function(bool permanentlyDenied) cameraPermissionFailed,
     required TResult Function() userNameNotFound,
+    required TResult Function() accountBlocked,
     required TResult Function() uploadedFileSizeExceed,
     required TResult Function(String adviceNumber) paymentAdviceDeleteFailed,
     required TResult Function() allReorderItemInvalid,
@@ -102,6 +103,7 @@ mixin _$ApiFailure {
     TResult? Function()? scannedProductNotFound,
     TResult? Function(bool permanentlyDenied)? cameraPermissionFailed,
     TResult? Function()? userNameNotFound,
+    TResult? Function()? accountBlocked,
     TResult? Function()? uploadedFileSizeExceed,
     TResult? Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult? Function()? allReorderItemInvalid,
@@ -152,6 +154,7 @@ mixin _$ApiFailure {
     TResult Function()? scannedProductNotFound,
     TResult Function(bool permanentlyDenied)? cameraPermissionFailed,
     TResult Function()? userNameNotFound,
+    TResult Function()? accountBlocked,
     TResult Function()? uploadedFileSizeExceed,
     TResult Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult Function()? allReorderItemInvalid,
@@ -217,6 +220,7 @@ mixin _$ApiFailure {
     required TResult Function(_CameraPermissionFailed value)
         cameraPermissionFailed,
     required TResult Function(_UserNameNotFound value) userNameNotFound,
+    required TResult Function(_AccountBlocked value) accountBlocked,
     required TResult Function(_UploadedFileSizeExceed value)
         uploadedFileSizeExceed,
     required TResult Function(_PaymentAdviceDeleteFailed value)
@@ -284,6 +288,7 @@ mixin _$ApiFailure {
     TResult? Function(_ScannedProductNotFound value)? scannedProductNotFound,
     TResult? Function(_CameraPermissionFailed value)? cameraPermissionFailed,
     TResult? Function(_UserNameNotFound value)? userNameNotFound,
+    TResult? Function(_AccountBlocked value)? accountBlocked,
     TResult? Function(_UploadedFileSizeExceed value)? uploadedFileSizeExceed,
     TResult? Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
@@ -345,6 +350,7 @@ mixin _$ApiFailure {
     TResult Function(_ScannedProductNotFound value)? scannedProductNotFound,
     TResult Function(_CameraPermissionFailed value)? cameraPermissionFailed,
     TResult Function(_UserNameNotFound value)? userNameNotFound,
+    TResult Function(_AccountBlocked value)? accountBlocked,
     TResult Function(_UploadedFileSizeExceed value)? uploadedFileSizeExceed,
     TResult Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
@@ -483,6 +489,7 @@ class _$OtherImpl implements _Other {
     required TResult Function() scannedProductNotFound,
     required TResult Function(bool permanentlyDenied) cameraPermissionFailed,
     required TResult Function() userNameNotFound,
+    required TResult Function() accountBlocked,
     required TResult Function() uploadedFileSizeExceed,
     required TResult Function(String adviceNumber) paymentAdviceDeleteFailed,
     required TResult Function() allReorderItemInvalid,
@@ -536,6 +543,7 @@ class _$OtherImpl implements _Other {
     TResult? Function()? scannedProductNotFound,
     TResult? Function(bool permanentlyDenied)? cameraPermissionFailed,
     TResult? Function()? userNameNotFound,
+    TResult? Function()? accountBlocked,
     TResult? Function()? uploadedFileSizeExceed,
     TResult? Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult? Function()? allReorderItemInvalid,
@@ -589,6 +597,7 @@ class _$OtherImpl implements _Other {
     TResult Function()? scannedProductNotFound,
     TResult Function(bool permanentlyDenied)? cameraPermissionFailed,
     TResult Function()? userNameNotFound,
+    TResult Function()? accountBlocked,
     TResult Function()? uploadedFileSizeExceed,
     TResult Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult Function()? allReorderItemInvalid,
@@ -660,6 +669,7 @@ class _$OtherImpl implements _Other {
     required TResult Function(_CameraPermissionFailed value)
         cameraPermissionFailed,
     required TResult Function(_UserNameNotFound value) userNameNotFound,
+    required TResult Function(_AccountBlocked value) accountBlocked,
     required TResult Function(_UploadedFileSizeExceed value)
         uploadedFileSizeExceed,
     required TResult Function(_PaymentAdviceDeleteFailed value)
@@ -730,6 +740,7 @@ class _$OtherImpl implements _Other {
     TResult? Function(_ScannedProductNotFound value)? scannedProductNotFound,
     TResult? Function(_CameraPermissionFailed value)? cameraPermissionFailed,
     TResult? Function(_UserNameNotFound value)? userNameNotFound,
+    TResult? Function(_AccountBlocked value)? accountBlocked,
     TResult? Function(_UploadedFileSizeExceed value)? uploadedFileSizeExceed,
     TResult? Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
@@ -794,6 +805,7 @@ class _$OtherImpl implements _Other {
     TResult Function(_ScannedProductNotFound value)? scannedProductNotFound,
     TResult Function(_CameraPermissionFailed value)? cameraPermissionFailed,
     TResult Function(_UserNameNotFound value)? userNameNotFound,
+    TResult Function(_AccountBlocked value)? accountBlocked,
     TResult Function(_UploadedFileSizeExceed value)? uploadedFileSizeExceed,
     TResult Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
@@ -927,6 +939,7 @@ class _$ServerErrorImpl implements _ServerError {
     required TResult Function() scannedProductNotFound,
     required TResult Function(bool permanentlyDenied) cameraPermissionFailed,
     required TResult Function() userNameNotFound,
+    required TResult Function() accountBlocked,
     required TResult Function() uploadedFileSizeExceed,
     required TResult Function(String adviceNumber) paymentAdviceDeleteFailed,
     required TResult Function() allReorderItemInvalid,
@@ -980,6 +993,7 @@ class _$ServerErrorImpl implements _ServerError {
     TResult? Function()? scannedProductNotFound,
     TResult? Function(bool permanentlyDenied)? cameraPermissionFailed,
     TResult? Function()? userNameNotFound,
+    TResult? Function()? accountBlocked,
     TResult? Function()? uploadedFileSizeExceed,
     TResult? Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult? Function()? allReorderItemInvalid,
@@ -1033,6 +1047,7 @@ class _$ServerErrorImpl implements _ServerError {
     TResult Function()? scannedProductNotFound,
     TResult Function(bool permanentlyDenied)? cameraPermissionFailed,
     TResult Function()? userNameNotFound,
+    TResult Function()? accountBlocked,
     TResult Function()? uploadedFileSizeExceed,
     TResult Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult Function()? allReorderItemInvalid,
@@ -1104,6 +1119,7 @@ class _$ServerErrorImpl implements _ServerError {
     required TResult Function(_CameraPermissionFailed value)
         cameraPermissionFailed,
     required TResult Function(_UserNameNotFound value) userNameNotFound,
+    required TResult Function(_AccountBlocked value) accountBlocked,
     required TResult Function(_UploadedFileSizeExceed value)
         uploadedFileSizeExceed,
     required TResult Function(_PaymentAdviceDeleteFailed value)
@@ -1174,6 +1190,7 @@ class _$ServerErrorImpl implements _ServerError {
     TResult? Function(_ScannedProductNotFound value)? scannedProductNotFound,
     TResult? Function(_CameraPermissionFailed value)? cameraPermissionFailed,
     TResult? Function(_UserNameNotFound value)? userNameNotFound,
+    TResult? Function(_AccountBlocked value)? accountBlocked,
     TResult? Function(_UploadedFileSizeExceed value)? uploadedFileSizeExceed,
     TResult? Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
@@ -1238,6 +1255,7 @@ class _$ServerErrorImpl implements _ServerError {
     TResult Function(_ScannedProductNotFound value)? scannedProductNotFound,
     TResult Function(_CameraPermissionFailed value)? cameraPermissionFailed,
     TResult Function(_UserNameNotFound value)? userNameNotFound,
+    TResult Function(_AccountBlocked value)? accountBlocked,
     TResult Function(_UploadedFileSizeExceed value)? uploadedFileSizeExceed,
     TResult Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
@@ -1345,6 +1363,7 @@ class _$PoorConnectionImpl implements _PoorConnection {
     required TResult Function() scannedProductNotFound,
     required TResult Function(bool permanentlyDenied) cameraPermissionFailed,
     required TResult Function() userNameNotFound,
+    required TResult Function() accountBlocked,
     required TResult Function() uploadedFileSizeExceed,
     required TResult Function(String adviceNumber) paymentAdviceDeleteFailed,
     required TResult Function() allReorderItemInvalid,
@@ -1398,6 +1417,7 @@ class _$PoorConnectionImpl implements _PoorConnection {
     TResult? Function()? scannedProductNotFound,
     TResult? Function(bool permanentlyDenied)? cameraPermissionFailed,
     TResult? Function()? userNameNotFound,
+    TResult? Function()? accountBlocked,
     TResult? Function()? uploadedFileSizeExceed,
     TResult? Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult? Function()? allReorderItemInvalid,
@@ -1451,6 +1471,7 @@ class _$PoorConnectionImpl implements _PoorConnection {
     TResult Function()? scannedProductNotFound,
     TResult Function(bool permanentlyDenied)? cameraPermissionFailed,
     TResult Function()? userNameNotFound,
+    TResult Function()? accountBlocked,
     TResult Function()? uploadedFileSizeExceed,
     TResult Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult Function()? allReorderItemInvalid,
@@ -1522,6 +1543,7 @@ class _$PoorConnectionImpl implements _PoorConnection {
     required TResult Function(_CameraPermissionFailed value)
         cameraPermissionFailed,
     required TResult Function(_UserNameNotFound value) userNameNotFound,
+    required TResult Function(_AccountBlocked value) accountBlocked,
     required TResult Function(_UploadedFileSizeExceed value)
         uploadedFileSizeExceed,
     required TResult Function(_PaymentAdviceDeleteFailed value)
@@ -1592,6 +1614,7 @@ class _$PoorConnectionImpl implements _PoorConnection {
     TResult? Function(_ScannedProductNotFound value)? scannedProductNotFound,
     TResult? Function(_CameraPermissionFailed value)? cameraPermissionFailed,
     TResult? Function(_UserNameNotFound value)? userNameNotFound,
+    TResult? Function(_AccountBlocked value)? accountBlocked,
     TResult? Function(_UploadedFileSizeExceed value)? uploadedFileSizeExceed,
     TResult? Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
@@ -1656,6 +1679,7 @@ class _$PoorConnectionImpl implements _PoorConnection {
     TResult Function(_ScannedProductNotFound value)? scannedProductNotFound,
     TResult Function(_CameraPermissionFailed value)? cameraPermissionFailed,
     TResult Function(_UserNameNotFound value)? userNameNotFound,
+    TResult Function(_AccountBlocked value)? accountBlocked,
     TResult Function(_UploadedFileSizeExceed value)? uploadedFileSizeExceed,
     TResult Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
@@ -1758,6 +1782,7 @@ class _$ServerTimeoutImpl implements _ServerTimeout {
     required TResult Function() scannedProductNotFound,
     required TResult Function(bool permanentlyDenied) cameraPermissionFailed,
     required TResult Function() userNameNotFound,
+    required TResult Function() accountBlocked,
     required TResult Function() uploadedFileSizeExceed,
     required TResult Function(String adviceNumber) paymentAdviceDeleteFailed,
     required TResult Function() allReorderItemInvalid,
@@ -1811,6 +1836,7 @@ class _$ServerTimeoutImpl implements _ServerTimeout {
     TResult? Function()? scannedProductNotFound,
     TResult? Function(bool permanentlyDenied)? cameraPermissionFailed,
     TResult? Function()? userNameNotFound,
+    TResult? Function()? accountBlocked,
     TResult? Function()? uploadedFileSizeExceed,
     TResult? Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult? Function()? allReorderItemInvalid,
@@ -1864,6 +1890,7 @@ class _$ServerTimeoutImpl implements _ServerTimeout {
     TResult Function()? scannedProductNotFound,
     TResult Function(bool permanentlyDenied)? cameraPermissionFailed,
     TResult Function()? userNameNotFound,
+    TResult Function()? accountBlocked,
     TResult Function()? uploadedFileSizeExceed,
     TResult Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult Function()? allReorderItemInvalid,
@@ -1935,6 +1962,7 @@ class _$ServerTimeoutImpl implements _ServerTimeout {
     required TResult Function(_CameraPermissionFailed value)
         cameraPermissionFailed,
     required TResult Function(_UserNameNotFound value) userNameNotFound,
+    required TResult Function(_AccountBlocked value) accountBlocked,
     required TResult Function(_UploadedFileSizeExceed value)
         uploadedFileSizeExceed,
     required TResult Function(_PaymentAdviceDeleteFailed value)
@@ -2005,6 +2033,7 @@ class _$ServerTimeoutImpl implements _ServerTimeout {
     TResult? Function(_ScannedProductNotFound value)? scannedProductNotFound,
     TResult? Function(_CameraPermissionFailed value)? cameraPermissionFailed,
     TResult? Function(_UserNameNotFound value)? userNameNotFound,
+    TResult? Function(_AccountBlocked value)? accountBlocked,
     TResult? Function(_UploadedFileSizeExceed value)? uploadedFileSizeExceed,
     TResult? Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
@@ -2069,6 +2098,7 @@ class _$ServerTimeoutImpl implements _ServerTimeout {
     TResult Function(_ScannedProductNotFound value)? scannedProductNotFound,
     TResult Function(_CameraPermissionFailed value)? cameraPermissionFailed,
     TResult Function(_UserNameNotFound value)? userNameNotFound,
+    TResult Function(_AccountBlocked value)? accountBlocked,
     TResult Function(_UploadedFileSizeExceed value)? uploadedFileSizeExceed,
     TResult Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
@@ -2171,6 +2201,7 @@ class _$UserNotFoundImpl implements _UserNotFound {
     required TResult Function() scannedProductNotFound,
     required TResult Function(bool permanentlyDenied) cameraPermissionFailed,
     required TResult Function() userNameNotFound,
+    required TResult Function() accountBlocked,
     required TResult Function() uploadedFileSizeExceed,
     required TResult Function(String adviceNumber) paymentAdviceDeleteFailed,
     required TResult Function() allReorderItemInvalid,
@@ -2224,6 +2255,7 @@ class _$UserNotFoundImpl implements _UserNotFound {
     TResult? Function()? scannedProductNotFound,
     TResult? Function(bool permanentlyDenied)? cameraPermissionFailed,
     TResult? Function()? userNameNotFound,
+    TResult? Function()? accountBlocked,
     TResult? Function()? uploadedFileSizeExceed,
     TResult? Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult? Function()? allReorderItemInvalid,
@@ -2277,6 +2309,7 @@ class _$UserNotFoundImpl implements _UserNotFound {
     TResult Function()? scannedProductNotFound,
     TResult Function(bool permanentlyDenied)? cameraPermissionFailed,
     TResult Function()? userNameNotFound,
+    TResult Function()? accountBlocked,
     TResult Function()? uploadedFileSizeExceed,
     TResult Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult Function()? allReorderItemInvalid,
@@ -2348,6 +2381,7 @@ class _$UserNotFoundImpl implements _UserNotFound {
     required TResult Function(_CameraPermissionFailed value)
         cameraPermissionFailed,
     required TResult Function(_UserNameNotFound value) userNameNotFound,
+    required TResult Function(_AccountBlocked value) accountBlocked,
     required TResult Function(_UploadedFileSizeExceed value)
         uploadedFileSizeExceed,
     required TResult Function(_PaymentAdviceDeleteFailed value)
@@ -2418,6 +2452,7 @@ class _$UserNotFoundImpl implements _UserNotFound {
     TResult? Function(_ScannedProductNotFound value)? scannedProductNotFound,
     TResult? Function(_CameraPermissionFailed value)? cameraPermissionFailed,
     TResult? Function(_UserNameNotFound value)? userNameNotFound,
+    TResult? Function(_AccountBlocked value)? accountBlocked,
     TResult? Function(_UploadedFileSizeExceed value)? uploadedFileSizeExceed,
     TResult? Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
@@ -2482,6 +2517,7 @@ class _$UserNotFoundImpl implements _UserNotFound {
     TResult Function(_ScannedProductNotFound value)? scannedProductNotFound,
     TResult Function(_CameraPermissionFailed value)? cameraPermissionFailed,
     TResult Function(_UserNameNotFound value)? userNameNotFound,
+    TResult Function(_AccountBlocked value)? accountBlocked,
     TResult Function(_UploadedFileSizeExceed value)? uploadedFileSizeExceed,
     TResult Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
@@ -2588,6 +2624,7 @@ class _$MarketPlaceTnCAcceptanceErrorImpl
     required TResult Function() scannedProductNotFound,
     required TResult Function(bool permanentlyDenied) cameraPermissionFailed,
     required TResult Function() userNameNotFound,
+    required TResult Function() accountBlocked,
     required TResult Function() uploadedFileSizeExceed,
     required TResult Function(String adviceNumber) paymentAdviceDeleteFailed,
     required TResult Function() allReorderItemInvalid,
@@ -2641,6 +2678,7 @@ class _$MarketPlaceTnCAcceptanceErrorImpl
     TResult? Function()? scannedProductNotFound,
     TResult? Function(bool permanentlyDenied)? cameraPermissionFailed,
     TResult? Function()? userNameNotFound,
+    TResult? Function()? accountBlocked,
     TResult? Function()? uploadedFileSizeExceed,
     TResult? Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult? Function()? allReorderItemInvalid,
@@ -2694,6 +2732,7 @@ class _$MarketPlaceTnCAcceptanceErrorImpl
     TResult Function()? scannedProductNotFound,
     TResult Function(bool permanentlyDenied)? cameraPermissionFailed,
     TResult Function()? userNameNotFound,
+    TResult Function()? accountBlocked,
     TResult Function()? uploadedFileSizeExceed,
     TResult Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult Function()? allReorderItemInvalid,
@@ -2765,6 +2804,7 @@ class _$MarketPlaceTnCAcceptanceErrorImpl
     required TResult Function(_CameraPermissionFailed value)
         cameraPermissionFailed,
     required TResult Function(_UserNameNotFound value) userNameNotFound,
+    required TResult Function(_AccountBlocked value) accountBlocked,
     required TResult Function(_UploadedFileSizeExceed value)
         uploadedFileSizeExceed,
     required TResult Function(_PaymentAdviceDeleteFailed value)
@@ -2835,6 +2875,7 @@ class _$MarketPlaceTnCAcceptanceErrorImpl
     TResult? Function(_ScannedProductNotFound value)? scannedProductNotFound,
     TResult? Function(_CameraPermissionFailed value)? cameraPermissionFailed,
     TResult? Function(_UserNameNotFound value)? userNameNotFound,
+    TResult? Function(_AccountBlocked value)? accountBlocked,
     TResult? Function(_UploadedFileSizeExceed value)? uploadedFileSizeExceed,
     TResult? Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
@@ -2899,6 +2940,7 @@ class _$MarketPlaceTnCAcceptanceErrorImpl
     TResult Function(_ScannedProductNotFound value)? scannedProductNotFound,
     TResult Function(_CameraPermissionFailed value)? cameraPermissionFailed,
     TResult Function(_UserNameNotFound value)? userNameNotFound,
+    TResult Function(_AccountBlocked value)? accountBlocked,
     TResult Function(_UploadedFileSizeExceed value)? uploadedFileSizeExceed,
     TResult Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
@@ -3007,6 +3049,7 @@ class _$InvalidEmailAndPasswordCombinationImpl
     required TResult Function() scannedProductNotFound,
     required TResult Function(bool permanentlyDenied) cameraPermissionFailed,
     required TResult Function() userNameNotFound,
+    required TResult Function() accountBlocked,
     required TResult Function() uploadedFileSizeExceed,
     required TResult Function(String adviceNumber) paymentAdviceDeleteFailed,
     required TResult Function() allReorderItemInvalid,
@@ -3060,6 +3103,7 @@ class _$InvalidEmailAndPasswordCombinationImpl
     TResult? Function()? scannedProductNotFound,
     TResult? Function(bool permanentlyDenied)? cameraPermissionFailed,
     TResult? Function()? userNameNotFound,
+    TResult? Function()? accountBlocked,
     TResult? Function()? uploadedFileSizeExceed,
     TResult? Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult? Function()? allReorderItemInvalid,
@@ -3113,6 +3157,7 @@ class _$InvalidEmailAndPasswordCombinationImpl
     TResult Function()? scannedProductNotFound,
     TResult Function(bool permanentlyDenied)? cameraPermissionFailed,
     TResult Function()? userNameNotFound,
+    TResult Function()? accountBlocked,
     TResult Function()? uploadedFileSizeExceed,
     TResult Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult Function()? allReorderItemInvalid,
@@ -3184,6 +3229,7 @@ class _$InvalidEmailAndPasswordCombinationImpl
     required TResult Function(_CameraPermissionFailed value)
         cameraPermissionFailed,
     required TResult Function(_UserNameNotFound value) userNameNotFound,
+    required TResult Function(_AccountBlocked value) accountBlocked,
     required TResult Function(_UploadedFileSizeExceed value)
         uploadedFileSizeExceed,
     required TResult Function(_PaymentAdviceDeleteFailed value)
@@ -3254,6 +3300,7 @@ class _$InvalidEmailAndPasswordCombinationImpl
     TResult? Function(_ScannedProductNotFound value)? scannedProductNotFound,
     TResult? Function(_CameraPermissionFailed value)? cameraPermissionFailed,
     TResult? Function(_UserNameNotFound value)? userNameNotFound,
+    TResult? Function(_AccountBlocked value)? accountBlocked,
     TResult? Function(_UploadedFileSizeExceed value)? uploadedFileSizeExceed,
     TResult? Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
@@ -3318,6 +3365,7 @@ class _$InvalidEmailAndPasswordCombinationImpl
     TResult Function(_ScannedProductNotFound value)? scannedProductNotFound,
     TResult Function(_CameraPermissionFailed value)? cameraPermissionFailed,
     TResult Function(_UserNameNotFound value)? userNameNotFound,
+    TResult Function(_AccountBlocked value)? accountBlocked,
     TResult Function(_UploadedFileSizeExceed value)? uploadedFileSizeExceed,
     TResult Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
@@ -3421,6 +3469,7 @@ class _$AccountLockedImpl implements _AccountLocked {
     required TResult Function() scannedProductNotFound,
     required TResult Function(bool permanentlyDenied) cameraPermissionFailed,
     required TResult Function() userNameNotFound,
+    required TResult Function() accountBlocked,
     required TResult Function() uploadedFileSizeExceed,
     required TResult Function(String adviceNumber) paymentAdviceDeleteFailed,
     required TResult Function() allReorderItemInvalid,
@@ -3474,6 +3523,7 @@ class _$AccountLockedImpl implements _AccountLocked {
     TResult? Function()? scannedProductNotFound,
     TResult? Function(bool permanentlyDenied)? cameraPermissionFailed,
     TResult? Function()? userNameNotFound,
+    TResult? Function()? accountBlocked,
     TResult? Function()? uploadedFileSizeExceed,
     TResult? Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult? Function()? allReorderItemInvalid,
@@ -3527,6 +3577,7 @@ class _$AccountLockedImpl implements _AccountLocked {
     TResult Function()? scannedProductNotFound,
     TResult Function(bool permanentlyDenied)? cameraPermissionFailed,
     TResult Function()? userNameNotFound,
+    TResult Function()? accountBlocked,
     TResult Function()? uploadedFileSizeExceed,
     TResult Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult Function()? allReorderItemInvalid,
@@ -3598,6 +3649,7 @@ class _$AccountLockedImpl implements _AccountLocked {
     required TResult Function(_CameraPermissionFailed value)
         cameraPermissionFailed,
     required TResult Function(_UserNameNotFound value) userNameNotFound,
+    required TResult Function(_AccountBlocked value) accountBlocked,
     required TResult Function(_UploadedFileSizeExceed value)
         uploadedFileSizeExceed,
     required TResult Function(_PaymentAdviceDeleteFailed value)
@@ -3668,6 +3720,7 @@ class _$AccountLockedImpl implements _AccountLocked {
     TResult? Function(_ScannedProductNotFound value)? scannedProductNotFound,
     TResult? Function(_CameraPermissionFailed value)? cameraPermissionFailed,
     TResult? Function(_UserNameNotFound value)? userNameNotFound,
+    TResult? Function(_AccountBlocked value)? accountBlocked,
     TResult? Function(_UploadedFileSizeExceed value)? uploadedFileSizeExceed,
     TResult? Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
@@ -3732,6 +3785,7 @@ class _$AccountLockedImpl implements _AccountLocked {
     TResult Function(_ScannedProductNotFound value)? scannedProductNotFound,
     TResult Function(_CameraPermissionFailed value)? cameraPermissionFailed,
     TResult Function(_UserNameNotFound value)? userNameNotFound,
+    TResult Function(_AccountBlocked value)? accountBlocked,
     TResult Function(_UploadedFileSizeExceed value)? uploadedFileSizeExceed,
     TResult Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
@@ -3834,6 +3888,7 @@ class _$AccountExpiredImpl implements _AccountExpired {
     required TResult Function() scannedProductNotFound,
     required TResult Function(bool permanentlyDenied) cameraPermissionFailed,
     required TResult Function() userNameNotFound,
+    required TResult Function() accountBlocked,
     required TResult Function() uploadedFileSizeExceed,
     required TResult Function(String adviceNumber) paymentAdviceDeleteFailed,
     required TResult Function() allReorderItemInvalid,
@@ -3887,6 +3942,7 @@ class _$AccountExpiredImpl implements _AccountExpired {
     TResult? Function()? scannedProductNotFound,
     TResult? Function(bool permanentlyDenied)? cameraPermissionFailed,
     TResult? Function()? userNameNotFound,
+    TResult? Function()? accountBlocked,
     TResult? Function()? uploadedFileSizeExceed,
     TResult? Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult? Function()? allReorderItemInvalid,
@@ -3940,6 +3996,7 @@ class _$AccountExpiredImpl implements _AccountExpired {
     TResult Function()? scannedProductNotFound,
     TResult Function(bool permanentlyDenied)? cameraPermissionFailed,
     TResult Function()? userNameNotFound,
+    TResult Function()? accountBlocked,
     TResult Function()? uploadedFileSizeExceed,
     TResult Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult Function()? allReorderItemInvalid,
@@ -4011,6 +4068,7 @@ class _$AccountExpiredImpl implements _AccountExpired {
     required TResult Function(_CameraPermissionFailed value)
         cameraPermissionFailed,
     required TResult Function(_UserNameNotFound value) userNameNotFound,
+    required TResult Function(_AccountBlocked value) accountBlocked,
     required TResult Function(_UploadedFileSizeExceed value)
         uploadedFileSizeExceed,
     required TResult Function(_PaymentAdviceDeleteFailed value)
@@ -4081,6 +4139,7 @@ class _$AccountExpiredImpl implements _AccountExpired {
     TResult? Function(_ScannedProductNotFound value)? scannedProductNotFound,
     TResult? Function(_CameraPermissionFailed value)? cameraPermissionFailed,
     TResult? Function(_UserNameNotFound value)? userNameNotFound,
+    TResult? Function(_AccountBlocked value)? accountBlocked,
     TResult? Function(_UploadedFileSizeExceed value)? uploadedFileSizeExceed,
     TResult? Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
@@ -4145,6 +4204,7 @@ class _$AccountExpiredImpl implements _AccountExpired {
     TResult Function(_ScannedProductNotFound value)? scannedProductNotFound,
     TResult Function(_CameraPermissionFailed value)? cameraPermissionFailed,
     TResult Function(_UserNameNotFound value)? userNameNotFound,
+    TResult Function(_AccountBlocked value)? accountBlocked,
     TResult Function(_UploadedFileSizeExceed value)? uploadedFileSizeExceed,
     TResult Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
@@ -4247,6 +4307,7 @@ class _$TokenExpiredImpl implements _TokenExpired {
     required TResult Function() scannedProductNotFound,
     required TResult Function(bool permanentlyDenied) cameraPermissionFailed,
     required TResult Function() userNameNotFound,
+    required TResult Function() accountBlocked,
     required TResult Function() uploadedFileSizeExceed,
     required TResult Function(String adviceNumber) paymentAdviceDeleteFailed,
     required TResult Function() allReorderItemInvalid,
@@ -4300,6 +4361,7 @@ class _$TokenExpiredImpl implements _TokenExpired {
     TResult? Function()? scannedProductNotFound,
     TResult? Function(bool permanentlyDenied)? cameraPermissionFailed,
     TResult? Function()? userNameNotFound,
+    TResult? Function()? accountBlocked,
     TResult? Function()? uploadedFileSizeExceed,
     TResult? Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult? Function()? allReorderItemInvalid,
@@ -4353,6 +4415,7 @@ class _$TokenExpiredImpl implements _TokenExpired {
     TResult Function()? scannedProductNotFound,
     TResult Function(bool permanentlyDenied)? cameraPermissionFailed,
     TResult Function()? userNameNotFound,
+    TResult Function()? accountBlocked,
     TResult Function()? uploadedFileSizeExceed,
     TResult Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult Function()? allReorderItemInvalid,
@@ -4424,6 +4487,7 @@ class _$TokenExpiredImpl implements _TokenExpired {
     required TResult Function(_CameraPermissionFailed value)
         cameraPermissionFailed,
     required TResult Function(_UserNameNotFound value) userNameNotFound,
+    required TResult Function(_AccountBlocked value) accountBlocked,
     required TResult Function(_UploadedFileSizeExceed value)
         uploadedFileSizeExceed,
     required TResult Function(_PaymentAdviceDeleteFailed value)
@@ -4494,6 +4558,7 @@ class _$TokenExpiredImpl implements _TokenExpired {
     TResult? Function(_ScannedProductNotFound value)? scannedProductNotFound,
     TResult? Function(_CameraPermissionFailed value)? cameraPermissionFailed,
     TResult? Function(_UserNameNotFound value)? userNameNotFound,
+    TResult? Function(_AccountBlocked value)? accountBlocked,
     TResult? Function(_UploadedFileSizeExceed value)? uploadedFileSizeExceed,
     TResult? Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
@@ -4558,6 +4623,7 @@ class _$TokenExpiredImpl implements _TokenExpired {
     TResult Function(_ScannedProductNotFound value)? scannedProductNotFound,
     TResult Function(_CameraPermissionFailed value)? cameraPermissionFailed,
     TResult Function(_UserNameNotFound value)? userNameNotFound,
+    TResult Function(_AccountBlocked value)? accountBlocked,
     TResult Function(_UploadedFileSizeExceed value)? uploadedFileSizeExceed,
     TResult Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
@@ -4661,6 +4727,7 @@ class _$AuthenticationFailedImpl implements _AuthenticationFailed {
     required TResult Function() scannedProductNotFound,
     required TResult Function(bool permanentlyDenied) cameraPermissionFailed,
     required TResult Function() userNameNotFound,
+    required TResult Function() accountBlocked,
     required TResult Function() uploadedFileSizeExceed,
     required TResult Function(String adviceNumber) paymentAdviceDeleteFailed,
     required TResult Function() allReorderItemInvalid,
@@ -4714,6 +4781,7 @@ class _$AuthenticationFailedImpl implements _AuthenticationFailed {
     TResult? Function()? scannedProductNotFound,
     TResult? Function(bool permanentlyDenied)? cameraPermissionFailed,
     TResult? Function()? userNameNotFound,
+    TResult? Function()? accountBlocked,
     TResult? Function()? uploadedFileSizeExceed,
     TResult? Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult? Function()? allReorderItemInvalid,
@@ -4767,6 +4835,7 @@ class _$AuthenticationFailedImpl implements _AuthenticationFailed {
     TResult Function()? scannedProductNotFound,
     TResult Function(bool permanentlyDenied)? cameraPermissionFailed,
     TResult Function()? userNameNotFound,
+    TResult Function()? accountBlocked,
     TResult Function()? uploadedFileSizeExceed,
     TResult Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult Function()? allReorderItemInvalid,
@@ -4838,6 +4907,7 @@ class _$AuthenticationFailedImpl implements _AuthenticationFailed {
     required TResult Function(_CameraPermissionFailed value)
         cameraPermissionFailed,
     required TResult Function(_UserNameNotFound value) userNameNotFound,
+    required TResult Function(_AccountBlocked value) accountBlocked,
     required TResult Function(_UploadedFileSizeExceed value)
         uploadedFileSizeExceed,
     required TResult Function(_PaymentAdviceDeleteFailed value)
@@ -4908,6 +4978,7 @@ class _$AuthenticationFailedImpl implements _AuthenticationFailed {
     TResult? Function(_ScannedProductNotFound value)? scannedProductNotFound,
     TResult? Function(_CameraPermissionFailed value)? cameraPermissionFailed,
     TResult? Function(_UserNameNotFound value)? userNameNotFound,
+    TResult? Function(_AccountBlocked value)? accountBlocked,
     TResult? Function(_UploadedFileSizeExceed value)? uploadedFileSizeExceed,
     TResult? Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
@@ -4972,6 +5043,7 @@ class _$AuthenticationFailedImpl implements _AuthenticationFailed {
     TResult Function(_ScannedProductNotFound value)? scannedProductNotFound,
     TResult Function(_CameraPermissionFailed value)? cameraPermissionFailed,
     TResult Function(_UserNameNotFound value)? userNameNotFound,
+    TResult Function(_AccountBlocked value)? accountBlocked,
     TResult Function(_UploadedFileSizeExceed value)? uploadedFileSizeExceed,
     TResult Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
@@ -5079,6 +5151,7 @@ class _$ProxyLoginRolePermissionNotMatchImpl
     required TResult Function() scannedProductNotFound,
     required TResult Function(bool permanentlyDenied) cameraPermissionFailed,
     required TResult Function() userNameNotFound,
+    required TResult Function() accountBlocked,
     required TResult Function() uploadedFileSizeExceed,
     required TResult Function(String adviceNumber) paymentAdviceDeleteFailed,
     required TResult Function() allReorderItemInvalid,
@@ -5132,6 +5205,7 @@ class _$ProxyLoginRolePermissionNotMatchImpl
     TResult? Function()? scannedProductNotFound,
     TResult? Function(bool permanentlyDenied)? cameraPermissionFailed,
     TResult? Function()? userNameNotFound,
+    TResult? Function()? accountBlocked,
     TResult? Function()? uploadedFileSizeExceed,
     TResult? Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult? Function()? allReorderItemInvalid,
@@ -5185,6 +5259,7 @@ class _$ProxyLoginRolePermissionNotMatchImpl
     TResult Function()? scannedProductNotFound,
     TResult Function(bool permanentlyDenied)? cameraPermissionFailed,
     TResult Function()? userNameNotFound,
+    TResult Function()? accountBlocked,
     TResult Function()? uploadedFileSizeExceed,
     TResult Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult Function()? allReorderItemInvalid,
@@ -5256,6 +5331,7 @@ class _$ProxyLoginRolePermissionNotMatchImpl
     required TResult Function(_CameraPermissionFailed value)
         cameraPermissionFailed,
     required TResult Function(_UserNameNotFound value) userNameNotFound,
+    required TResult Function(_AccountBlocked value) accountBlocked,
     required TResult Function(_UploadedFileSizeExceed value)
         uploadedFileSizeExceed,
     required TResult Function(_PaymentAdviceDeleteFailed value)
@@ -5326,6 +5402,7 @@ class _$ProxyLoginRolePermissionNotMatchImpl
     TResult? Function(_ScannedProductNotFound value)? scannedProductNotFound,
     TResult? Function(_CameraPermissionFailed value)? cameraPermissionFailed,
     TResult? Function(_UserNameNotFound value)? userNameNotFound,
+    TResult? Function(_AccountBlocked value)? accountBlocked,
     TResult? Function(_UploadedFileSizeExceed value)? uploadedFileSizeExceed,
     TResult? Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
@@ -5390,6 +5467,7 @@ class _$ProxyLoginRolePermissionNotMatchImpl
     TResult Function(_ScannedProductNotFound value)? scannedProductNotFound,
     TResult Function(_CameraPermissionFailed value)? cameraPermissionFailed,
     TResult Function(_UserNameNotFound value)? userNameNotFound,
+    TResult Function(_AccountBlocked value)? accountBlocked,
     TResult Function(_UploadedFileSizeExceed value)? uploadedFileSizeExceed,
     TResult Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
@@ -5497,6 +5575,7 @@ class _$ProxyLoginZPTargetRoleNotMatchImpl
     required TResult Function() scannedProductNotFound,
     required TResult Function(bool permanentlyDenied) cameraPermissionFailed,
     required TResult Function() userNameNotFound,
+    required TResult Function() accountBlocked,
     required TResult Function() uploadedFileSizeExceed,
     required TResult Function(String adviceNumber) paymentAdviceDeleteFailed,
     required TResult Function() allReorderItemInvalid,
@@ -5550,6 +5629,7 @@ class _$ProxyLoginZPTargetRoleNotMatchImpl
     TResult? Function()? scannedProductNotFound,
     TResult? Function(bool permanentlyDenied)? cameraPermissionFailed,
     TResult? Function()? userNameNotFound,
+    TResult? Function()? accountBlocked,
     TResult? Function()? uploadedFileSizeExceed,
     TResult? Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult? Function()? allReorderItemInvalid,
@@ -5603,6 +5683,7 @@ class _$ProxyLoginZPTargetRoleNotMatchImpl
     TResult Function()? scannedProductNotFound,
     TResult Function(bool permanentlyDenied)? cameraPermissionFailed,
     TResult Function()? userNameNotFound,
+    TResult Function()? accountBlocked,
     TResult Function()? uploadedFileSizeExceed,
     TResult Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult Function()? allReorderItemInvalid,
@@ -5674,6 +5755,7 @@ class _$ProxyLoginZPTargetRoleNotMatchImpl
     required TResult Function(_CameraPermissionFailed value)
         cameraPermissionFailed,
     required TResult Function(_UserNameNotFound value) userNameNotFound,
+    required TResult Function(_AccountBlocked value) accountBlocked,
     required TResult Function(_UploadedFileSizeExceed value)
         uploadedFileSizeExceed,
     required TResult Function(_PaymentAdviceDeleteFailed value)
@@ -5744,6 +5826,7 @@ class _$ProxyLoginZPTargetRoleNotMatchImpl
     TResult? Function(_ScannedProductNotFound value)? scannedProductNotFound,
     TResult? Function(_CameraPermissionFailed value)? cameraPermissionFailed,
     TResult? Function(_UserNameNotFound value)? userNameNotFound,
+    TResult? Function(_AccountBlocked value)? accountBlocked,
     TResult? Function(_UploadedFileSizeExceed value)? uploadedFileSizeExceed,
     TResult? Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
@@ -5808,6 +5891,7 @@ class _$ProxyLoginZPTargetRoleNotMatchImpl
     TResult Function(_ScannedProductNotFound value)? scannedProductNotFound,
     TResult Function(_CameraPermissionFailed value)? cameraPermissionFailed,
     TResult Function(_UserNameNotFound value)? userNameNotFound,
+    TResult Function(_AccountBlocked value)? accountBlocked,
     TResult Function(_UploadedFileSizeExceed value)? uploadedFileSizeExceed,
     TResult Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
@@ -5915,6 +5999,7 @@ class _$ProxyLoginZPSalesOrgNotMatchImpl
     required TResult Function() scannedProductNotFound,
     required TResult Function(bool permanentlyDenied) cameraPermissionFailed,
     required TResult Function() userNameNotFound,
+    required TResult Function() accountBlocked,
     required TResult Function() uploadedFileSizeExceed,
     required TResult Function(String adviceNumber) paymentAdviceDeleteFailed,
     required TResult Function() allReorderItemInvalid,
@@ -5968,6 +6053,7 @@ class _$ProxyLoginZPSalesOrgNotMatchImpl
     TResult? Function()? scannedProductNotFound,
     TResult? Function(bool permanentlyDenied)? cameraPermissionFailed,
     TResult? Function()? userNameNotFound,
+    TResult? Function()? accountBlocked,
     TResult? Function()? uploadedFileSizeExceed,
     TResult? Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult? Function()? allReorderItemInvalid,
@@ -6021,6 +6107,7 @@ class _$ProxyLoginZPSalesOrgNotMatchImpl
     TResult Function()? scannedProductNotFound,
     TResult Function(bool permanentlyDenied)? cameraPermissionFailed,
     TResult Function()? userNameNotFound,
+    TResult Function()? accountBlocked,
     TResult Function()? uploadedFileSizeExceed,
     TResult Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult Function()? allReorderItemInvalid,
@@ -6092,6 +6179,7 @@ class _$ProxyLoginZPSalesOrgNotMatchImpl
     required TResult Function(_CameraPermissionFailed value)
         cameraPermissionFailed,
     required TResult Function(_UserNameNotFound value) userNameNotFound,
+    required TResult Function(_AccountBlocked value) accountBlocked,
     required TResult Function(_UploadedFileSizeExceed value)
         uploadedFileSizeExceed,
     required TResult Function(_PaymentAdviceDeleteFailed value)
@@ -6162,6 +6250,7 @@ class _$ProxyLoginZPSalesOrgNotMatchImpl
     TResult? Function(_ScannedProductNotFound value)? scannedProductNotFound,
     TResult? Function(_CameraPermissionFailed value)? cameraPermissionFailed,
     TResult? Function(_UserNameNotFound value)? userNameNotFound,
+    TResult? Function(_AccountBlocked value)? accountBlocked,
     TResult? Function(_UploadedFileSizeExceed value)? uploadedFileSizeExceed,
     TResult? Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
@@ -6226,6 +6315,7 @@ class _$ProxyLoginZPSalesOrgNotMatchImpl
     TResult Function(_ScannedProductNotFound value)? scannedProductNotFound,
     TResult Function(_CameraPermissionFailed value)? cameraPermissionFailed,
     TResult Function(_UserNameNotFound value)? userNameNotFound,
+    TResult Function(_AccountBlocked value)? accountBlocked,
     TResult Function(_UploadedFileSizeExceed value)? uploadedFileSizeExceed,
     TResult Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
@@ -6329,6 +6419,7 @@ class _$PasswordResetFailImpl implements _PasswordResetFail {
     required TResult Function() scannedProductNotFound,
     required TResult Function(bool permanentlyDenied) cameraPermissionFailed,
     required TResult Function() userNameNotFound,
+    required TResult Function() accountBlocked,
     required TResult Function() uploadedFileSizeExceed,
     required TResult Function(String adviceNumber) paymentAdviceDeleteFailed,
     required TResult Function() allReorderItemInvalid,
@@ -6382,6 +6473,7 @@ class _$PasswordResetFailImpl implements _PasswordResetFail {
     TResult? Function()? scannedProductNotFound,
     TResult? Function(bool permanentlyDenied)? cameraPermissionFailed,
     TResult? Function()? userNameNotFound,
+    TResult? Function()? accountBlocked,
     TResult? Function()? uploadedFileSizeExceed,
     TResult? Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult? Function()? allReorderItemInvalid,
@@ -6435,6 +6527,7 @@ class _$PasswordResetFailImpl implements _PasswordResetFail {
     TResult Function()? scannedProductNotFound,
     TResult Function(bool permanentlyDenied)? cameraPermissionFailed,
     TResult Function()? userNameNotFound,
+    TResult Function()? accountBlocked,
     TResult Function()? uploadedFileSizeExceed,
     TResult Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult Function()? allReorderItemInvalid,
@@ -6506,6 +6599,7 @@ class _$PasswordResetFailImpl implements _PasswordResetFail {
     required TResult Function(_CameraPermissionFailed value)
         cameraPermissionFailed,
     required TResult Function(_UserNameNotFound value) userNameNotFound,
+    required TResult Function(_AccountBlocked value) accountBlocked,
     required TResult Function(_UploadedFileSizeExceed value)
         uploadedFileSizeExceed,
     required TResult Function(_PaymentAdviceDeleteFailed value)
@@ -6576,6 +6670,7 @@ class _$PasswordResetFailImpl implements _PasswordResetFail {
     TResult? Function(_ScannedProductNotFound value)? scannedProductNotFound,
     TResult? Function(_CameraPermissionFailed value)? cameraPermissionFailed,
     TResult? Function(_UserNameNotFound value)? userNameNotFound,
+    TResult? Function(_AccountBlocked value)? accountBlocked,
     TResult? Function(_UploadedFileSizeExceed value)? uploadedFileSizeExceed,
     TResult? Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
@@ -6640,6 +6735,7 @@ class _$PasswordResetFailImpl implements _PasswordResetFail {
     TResult Function(_ScannedProductNotFound value)? scannedProductNotFound,
     TResult Function(_CameraPermissionFailed value)? cameraPermissionFailed,
     TResult Function(_UserNameNotFound value)? userNameNotFound,
+    TResult Function(_AccountBlocked value)? accountBlocked,
     TResult Function(_UploadedFileSizeExceed value)? uploadedFileSizeExceed,
     TResult Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
@@ -6745,6 +6841,7 @@ class _$DeviceNotSupportBiometricImpl implements _DeviceNotSupportBiometric {
     required TResult Function() scannedProductNotFound,
     required TResult Function(bool permanentlyDenied) cameraPermissionFailed,
     required TResult Function() userNameNotFound,
+    required TResult Function() accountBlocked,
     required TResult Function() uploadedFileSizeExceed,
     required TResult Function(String adviceNumber) paymentAdviceDeleteFailed,
     required TResult Function() allReorderItemInvalid,
@@ -6798,6 +6895,7 @@ class _$DeviceNotSupportBiometricImpl implements _DeviceNotSupportBiometric {
     TResult? Function()? scannedProductNotFound,
     TResult? Function(bool permanentlyDenied)? cameraPermissionFailed,
     TResult? Function()? userNameNotFound,
+    TResult? Function()? accountBlocked,
     TResult? Function()? uploadedFileSizeExceed,
     TResult? Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult? Function()? allReorderItemInvalid,
@@ -6851,6 +6949,7 @@ class _$DeviceNotSupportBiometricImpl implements _DeviceNotSupportBiometric {
     TResult Function()? scannedProductNotFound,
     TResult Function(bool permanentlyDenied)? cameraPermissionFailed,
     TResult Function()? userNameNotFound,
+    TResult Function()? accountBlocked,
     TResult Function()? uploadedFileSizeExceed,
     TResult Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult Function()? allReorderItemInvalid,
@@ -6922,6 +7021,7 @@ class _$DeviceNotSupportBiometricImpl implements _DeviceNotSupportBiometric {
     required TResult Function(_CameraPermissionFailed value)
         cameraPermissionFailed,
     required TResult Function(_UserNameNotFound value) userNameNotFound,
+    required TResult Function(_AccountBlocked value) accountBlocked,
     required TResult Function(_UploadedFileSizeExceed value)
         uploadedFileSizeExceed,
     required TResult Function(_PaymentAdviceDeleteFailed value)
@@ -6992,6 +7092,7 @@ class _$DeviceNotSupportBiometricImpl implements _DeviceNotSupportBiometric {
     TResult? Function(_ScannedProductNotFound value)? scannedProductNotFound,
     TResult? Function(_CameraPermissionFailed value)? cameraPermissionFailed,
     TResult? Function(_UserNameNotFound value)? userNameNotFound,
+    TResult? Function(_AccountBlocked value)? accountBlocked,
     TResult? Function(_UploadedFileSizeExceed value)? uploadedFileSizeExceed,
     TResult? Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
@@ -7056,6 +7157,7 @@ class _$DeviceNotSupportBiometricImpl implements _DeviceNotSupportBiometric {
     TResult Function(_ScannedProductNotFound value)? scannedProductNotFound,
     TResult Function(_CameraPermissionFailed value)? cameraPermissionFailed,
     TResult Function(_UserNameNotFound value)? userNameNotFound,
+    TResult Function(_AccountBlocked value)? accountBlocked,
     TResult Function(_UploadedFileSizeExceed value)? uploadedFileSizeExceed,
     TResult Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
@@ -7160,6 +7262,7 @@ class _$CannotCheckBiometricsImpl implements _CannotCheckBiometrics {
     required TResult Function() scannedProductNotFound,
     required TResult Function(bool permanentlyDenied) cameraPermissionFailed,
     required TResult Function() userNameNotFound,
+    required TResult Function() accountBlocked,
     required TResult Function() uploadedFileSizeExceed,
     required TResult Function(String adviceNumber) paymentAdviceDeleteFailed,
     required TResult Function() allReorderItemInvalid,
@@ -7213,6 +7316,7 @@ class _$CannotCheckBiometricsImpl implements _CannotCheckBiometrics {
     TResult? Function()? scannedProductNotFound,
     TResult? Function(bool permanentlyDenied)? cameraPermissionFailed,
     TResult? Function()? userNameNotFound,
+    TResult? Function()? accountBlocked,
     TResult? Function()? uploadedFileSizeExceed,
     TResult? Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult? Function()? allReorderItemInvalid,
@@ -7266,6 +7370,7 @@ class _$CannotCheckBiometricsImpl implements _CannotCheckBiometrics {
     TResult Function()? scannedProductNotFound,
     TResult Function(bool permanentlyDenied)? cameraPermissionFailed,
     TResult Function()? userNameNotFound,
+    TResult Function()? accountBlocked,
     TResult Function()? uploadedFileSizeExceed,
     TResult Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult Function()? allReorderItemInvalid,
@@ -7337,6 +7442,7 @@ class _$CannotCheckBiometricsImpl implements _CannotCheckBiometrics {
     required TResult Function(_CameraPermissionFailed value)
         cameraPermissionFailed,
     required TResult Function(_UserNameNotFound value) userNameNotFound,
+    required TResult Function(_AccountBlocked value) accountBlocked,
     required TResult Function(_UploadedFileSizeExceed value)
         uploadedFileSizeExceed,
     required TResult Function(_PaymentAdviceDeleteFailed value)
@@ -7407,6 +7513,7 @@ class _$CannotCheckBiometricsImpl implements _CannotCheckBiometrics {
     TResult? Function(_ScannedProductNotFound value)? scannedProductNotFound,
     TResult? Function(_CameraPermissionFailed value)? cameraPermissionFailed,
     TResult? Function(_UserNameNotFound value)? userNameNotFound,
+    TResult? Function(_AccountBlocked value)? accountBlocked,
     TResult? Function(_UploadedFileSizeExceed value)? uploadedFileSizeExceed,
     TResult? Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
@@ -7471,6 +7578,7 @@ class _$CannotCheckBiometricsImpl implements _CannotCheckBiometrics {
     TResult Function(_ScannedProductNotFound value)? scannedProductNotFound,
     TResult Function(_CameraPermissionFailed value)? cameraPermissionFailed,
     TResult Function(_UserNameNotFound value)? userNameNotFound,
+    TResult Function(_AccountBlocked value)? accountBlocked,
     TResult Function(_UploadedFileSizeExceed value)? uploadedFileSizeExceed,
     TResult Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
@@ -7575,6 +7683,7 @@ class _$NoSupportedBiometricsImpl implements _NoSupportedBiometrics {
     required TResult Function() scannedProductNotFound,
     required TResult Function(bool permanentlyDenied) cameraPermissionFailed,
     required TResult Function() userNameNotFound,
+    required TResult Function() accountBlocked,
     required TResult Function() uploadedFileSizeExceed,
     required TResult Function(String adviceNumber) paymentAdviceDeleteFailed,
     required TResult Function() allReorderItemInvalid,
@@ -7628,6 +7737,7 @@ class _$NoSupportedBiometricsImpl implements _NoSupportedBiometrics {
     TResult? Function()? scannedProductNotFound,
     TResult? Function(bool permanentlyDenied)? cameraPermissionFailed,
     TResult? Function()? userNameNotFound,
+    TResult? Function()? accountBlocked,
     TResult? Function()? uploadedFileSizeExceed,
     TResult? Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult? Function()? allReorderItemInvalid,
@@ -7681,6 +7791,7 @@ class _$NoSupportedBiometricsImpl implements _NoSupportedBiometrics {
     TResult Function()? scannedProductNotFound,
     TResult Function(bool permanentlyDenied)? cameraPermissionFailed,
     TResult Function()? userNameNotFound,
+    TResult Function()? accountBlocked,
     TResult Function()? uploadedFileSizeExceed,
     TResult Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult Function()? allReorderItemInvalid,
@@ -7752,6 +7863,7 @@ class _$NoSupportedBiometricsImpl implements _NoSupportedBiometrics {
     required TResult Function(_CameraPermissionFailed value)
         cameraPermissionFailed,
     required TResult Function(_UserNameNotFound value) userNameNotFound,
+    required TResult Function(_AccountBlocked value) accountBlocked,
     required TResult Function(_UploadedFileSizeExceed value)
         uploadedFileSizeExceed,
     required TResult Function(_PaymentAdviceDeleteFailed value)
@@ -7822,6 +7934,7 @@ class _$NoSupportedBiometricsImpl implements _NoSupportedBiometrics {
     TResult? Function(_ScannedProductNotFound value)? scannedProductNotFound,
     TResult? Function(_CameraPermissionFailed value)? cameraPermissionFailed,
     TResult? Function(_UserNameNotFound value)? userNameNotFound,
+    TResult? Function(_AccountBlocked value)? accountBlocked,
     TResult? Function(_UploadedFileSizeExceed value)? uploadedFileSizeExceed,
     TResult? Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
@@ -7886,6 +7999,7 @@ class _$NoSupportedBiometricsImpl implements _NoSupportedBiometrics {
     TResult Function(_ScannedProductNotFound value)? scannedProductNotFound,
     TResult Function(_CameraPermissionFailed value)? cameraPermissionFailed,
     TResult Function(_UserNameNotFound value)? userNameNotFound,
+    TResult Function(_AccountBlocked value)? accountBlocked,
     TResult Function(_UploadedFileSizeExceed value)? uploadedFileSizeExceed,
     TResult Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
@@ -7988,6 +8102,7 @@ class _$InvalidBiometricImpl implements _InvalidBiometric {
     required TResult Function() scannedProductNotFound,
     required TResult Function(bool permanentlyDenied) cameraPermissionFailed,
     required TResult Function() userNameNotFound,
+    required TResult Function() accountBlocked,
     required TResult Function() uploadedFileSizeExceed,
     required TResult Function(String adviceNumber) paymentAdviceDeleteFailed,
     required TResult Function() allReorderItemInvalid,
@@ -8041,6 +8156,7 @@ class _$InvalidBiometricImpl implements _InvalidBiometric {
     TResult? Function()? scannedProductNotFound,
     TResult? Function(bool permanentlyDenied)? cameraPermissionFailed,
     TResult? Function()? userNameNotFound,
+    TResult? Function()? accountBlocked,
     TResult? Function()? uploadedFileSizeExceed,
     TResult? Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult? Function()? allReorderItemInvalid,
@@ -8094,6 +8210,7 @@ class _$InvalidBiometricImpl implements _InvalidBiometric {
     TResult Function()? scannedProductNotFound,
     TResult Function(bool permanentlyDenied)? cameraPermissionFailed,
     TResult Function()? userNameNotFound,
+    TResult Function()? accountBlocked,
     TResult Function()? uploadedFileSizeExceed,
     TResult Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult Function()? allReorderItemInvalid,
@@ -8165,6 +8282,7 @@ class _$InvalidBiometricImpl implements _InvalidBiometric {
     required TResult Function(_CameraPermissionFailed value)
         cameraPermissionFailed,
     required TResult Function(_UserNameNotFound value) userNameNotFound,
+    required TResult Function(_AccountBlocked value) accountBlocked,
     required TResult Function(_UploadedFileSizeExceed value)
         uploadedFileSizeExceed,
     required TResult Function(_PaymentAdviceDeleteFailed value)
@@ -8235,6 +8353,7 @@ class _$InvalidBiometricImpl implements _InvalidBiometric {
     TResult? Function(_ScannedProductNotFound value)? scannedProductNotFound,
     TResult? Function(_CameraPermissionFailed value)? cameraPermissionFailed,
     TResult? Function(_UserNameNotFound value)? userNameNotFound,
+    TResult? Function(_AccountBlocked value)? accountBlocked,
     TResult? Function(_UploadedFileSizeExceed value)? uploadedFileSizeExceed,
     TResult? Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
@@ -8299,6 +8418,7 @@ class _$InvalidBiometricImpl implements _InvalidBiometric {
     TResult Function(_ScannedProductNotFound value)? scannedProductNotFound,
     TResult Function(_CameraPermissionFailed value)? cameraPermissionFailed,
     TResult Function(_UserNameNotFound value)? userNameNotFound,
+    TResult Function(_AccountBlocked value)? accountBlocked,
     TResult Function(_UploadedFileSizeExceed value)? uploadedFileSizeExceed,
     TResult Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
@@ -8403,6 +8523,7 @@ class _$PriceOverrideNotFoundImpl implements _PriceOverrideNotFound {
     required TResult Function() scannedProductNotFound,
     required TResult Function(bool permanentlyDenied) cameraPermissionFailed,
     required TResult Function() userNameNotFound,
+    required TResult Function() accountBlocked,
     required TResult Function() uploadedFileSizeExceed,
     required TResult Function(String adviceNumber) paymentAdviceDeleteFailed,
     required TResult Function() allReorderItemInvalid,
@@ -8456,6 +8577,7 @@ class _$PriceOverrideNotFoundImpl implements _PriceOverrideNotFound {
     TResult? Function()? scannedProductNotFound,
     TResult? Function(bool permanentlyDenied)? cameraPermissionFailed,
     TResult? Function()? userNameNotFound,
+    TResult? Function()? accountBlocked,
     TResult? Function()? uploadedFileSizeExceed,
     TResult? Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult? Function()? allReorderItemInvalid,
@@ -8509,6 +8631,7 @@ class _$PriceOverrideNotFoundImpl implements _PriceOverrideNotFound {
     TResult Function()? scannedProductNotFound,
     TResult Function(bool permanentlyDenied)? cameraPermissionFailed,
     TResult Function()? userNameNotFound,
+    TResult Function()? accountBlocked,
     TResult Function()? uploadedFileSizeExceed,
     TResult Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult Function()? allReorderItemInvalid,
@@ -8580,6 +8703,7 @@ class _$PriceOverrideNotFoundImpl implements _PriceOverrideNotFound {
     required TResult Function(_CameraPermissionFailed value)
         cameraPermissionFailed,
     required TResult Function(_UserNameNotFound value) userNameNotFound,
+    required TResult Function(_AccountBlocked value) accountBlocked,
     required TResult Function(_UploadedFileSizeExceed value)
         uploadedFileSizeExceed,
     required TResult Function(_PaymentAdviceDeleteFailed value)
@@ -8650,6 +8774,7 @@ class _$PriceOverrideNotFoundImpl implements _PriceOverrideNotFound {
     TResult? Function(_ScannedProductNotFound value)? scannedProductNotFound,
     TResult? Function(_CameraPermissionFailed value)? cameraPermissionFailed,
     TResult? Function(_UserNameNotFound value)? userNameNotFound,
+    TResult? Function(_AccountBlocked value)? accountBlocked,
     TResult? Function(_UploadedFileSizeExceed value)? uploadedFileSizeExceed,
     TResult? Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
@@ -8714,6 +8839,7 @@ class _$PriceOverrideNotFoundImpl implements _PriceOverrideNotFound {
     TResult Function(_ScannedProductNotFound value)? scannedProductNotFound,
     TResult Function(_CameraPermissionFailed value)? cameraPermissionFailed,
     TResult Function(_UserNameNotFound value)? userNameNotFound,
+    TResult Function(_AccountBlocked value)? accountBlocked,
     TResult Function(_UploadedFileSizeExceed value)? uploadedFileSizeExceed,
     TResult Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
@@ -8816,6 +8942,7 @@ class _$ProductOutOfStockImpl implements _ProductOutOfStock {
     required TResult Function() scannedProductNotFound,
     required TResult Function(bool permanentlyDenied) cameraPermissionFailed,
     required TResult Function() userNameNotFound,
+    required TResult Function() accountBlocked,
     required TResult Function() uploadedFileSizeExceed,
     required TResult Function(String adviceNumber) paymentAdviceDeleteFailed,
     required TResult Function() allReorderItemInvalid,
@@ -8869,6 +8996,7 @@ class _$ProductOutOfStockImpl implements _ProductOutOfStock {
     TResult? Function()? scannedProductNotFound,
     TResult? Function(bool permanentlyDenied)? cameraPermissionFailed,
     TResult? Function()? userNameNotFound,
+    TResult? Function()? accountBlocked,
     TResult? Function()? uploadedFileSizeExceed,
     TResult? Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult? Function()? allReorderItemInvalid,
@@ -8922,6 +9050,7 @@ class _$ProductOutOfStockImpl implements _ProductOutOfStock {
     TResult Function()? scannedProductNotFound,
     TResult Function(bool permanentlyDenied)? cameraPermissionFailed,
     TResult Function()? userNameNotFound,
+    TResult Function()? accountBlocked,
     TResult Function()? uploadedFileSizeExceed,
     TResult Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult Function()? allReorderItemInvalid,
@@ -8993,6 +9122,7 @@ class _$ProductOutOfStockImpl implements _ProductOutOfStock {
     required TResult Function(_CameraPermissionFailed value)
         cameraPermissionFailed,
     required TResult Function(_UserNameNotFound value) userNameNotFound,
+    required TResult Function(_AccountBlocked value) accountBlocked,
     required TResult Function(_UploadedFileSizeExceed value)
         uploadedFileSizeExceed,
     required TResult Function(_PaymentAdviceDeleteFailed value)
@@ -9063,6 +9193,7 @@ class _$ProductOutOfStockImpl implements _ProductOutOfStock {
     TResult? Function(_ScannedProductNotFound value)? scannedProductNotFound,
     TResult? Function(_CameraPermissionFailed value)? cameraPermissionFailed,
     TResult? Function(_UserNameNotFound value)? userNameNotFound,
+    TResult? Function(_AccountBlocked value)? accountBlocked,
     TResult? Function(_UploadedFileSizeExceed value)? uploadedFileSizeExceed,
     TResult? Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
@@ -9127,6 +9258,7 @@ class _$ProductOutOfStockImpl implements _ProductOutOfStock {
     TResult Function(_ScannedProductNotFound value)? scannedProductNotFound,
     TResult Function(_CameraPermissionFailed value)? cameraPermissionFailed,
     TResult Function(_UserNameNotFound value)? userNameNotFound,
+    TResult Function(_AccountBlocked value)? accountBlocked,
     TResult Function(_UploadedFileSizeExceed value)? uploadedFileSizeExceed,
     TResult Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
@@ -9231,6 +9363,7 @@ class _$PhotoPermissionFailedImpl implements _PhotoPermissionFailed {
     required TResult Function() scannedProductNotFound,
     required TResult Function(bool permanentlyDenied) cameraPermissionFailed,
     required TResult Function() userNameNotFound,
+    required TResult Function() accountBlocked,
     required TResult Function() uploadedFileSizeExceed,
     required TResult Function(String adviceNumber) paymentAdviceDeleteFailed,
     required TResult Function() allReorderItemInvalid,
@@ -9284,6 +9417,7 @@ class _$PhotoPermissionFailedImpl implements _PhotoPermissionFailed {
     TResult? Function()? scannedProductNotFound,
     TResult? Function(bool permanentlyDenied)? cameraPermissionFailed,
     TResult? Function()? userNameNotFound,
+    TResult? Function()? accountBlocked,
     TResult? Function()? uploadedFileSizeExceed,
     TResult? Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult? Function()? allReorderItemInvalid,
@@ -9337,6 +9471,7 @@ class _$PhotoPermissionFailedImpl implements _PhotoPermissionFailed {
     TResult Function()? scannedProductNotFound,
     TResult Function(bool permanentlyDenied)? cameraPermissionFailed,
     TResult Function()? userNameNotFound,
+    TResult Function()? accountBlocked,
     TResult Function()? uploadedFileSizeExceed,
     TResult Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult Function()? allReorderItemInvalid,
@@ -9408,6 +9543,7 @@ class _$PhotoPermissionFailedImpl implements _PhotoPermissionFailed {
     required TResult Function(_CameraPermissionFailed value)
         cameraPermissionFailed,
     required TResult Function(_UserNameNotFound value) userNameNotFound,
+    required TResult Function(_AccountBlocked value) accountBlocked,
     required TResult Function(_UploadedFileSizeExceed value)
         uploadedFileSizeExceed,
     required TResult Function(_PaymentAdviceDeleteFailed value)
@@ -9478,6 +9614,7 @@ class _$PhotoPermissionFailedImpl implements _PhotoPermissionFailed {
     TResult? Function(_ScannedProductNotFound value)? scannedProductNotFound,
     TResult? Function(_CameraPermissionFailed value)? cameraPermissionFailed,
     TResult? Function(_UserNameNotFound value)? userNameNotFound,
+    TResult? Function(_AccountBlocked value)? accountBlocked,
     TResult? Function(_UploadedFileSizeExceed value)? uploadedFileSizeExceed,
     TResult? Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
@@ -9542,6 +9679,7 @@ class _$PhotoPermissionFailedImpl implements _PhotoPermissionFailed {
     TResult Function(_ScannedProductNotFound value)? scannedProductNotFound,
     TResult Function(_CameraPermissionFailed value)? cameraPermissionFailed,
     TResult Function(_UserNameNotFound value)? userNameNotFound,
+    TResult Function(_AccountBlocked value)? accountBlocked,
     TResult Function(_UploadedFileSizeExceed value)? uploadedFileSizeExceed,
     TResult Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
@@ -9647,6 +9785,7 @@ class _$StoragePermissionFailedImpl implements _StoragePermissionFailed {
     required TResult Function() scannedProductNotFound,
     required TResult Function(bool permanentlyDenied) cameraPermissionFailed,
     required TResult Function() userNameNotFound,
+    required TResult Function() accountBlocked,
     required TResult Function() uploadedFileSizeExceed,
     required TResult Function(String adviceNumber) paymentAdviceDeleteFailed,
     required TResult Function() allReorderItemInvalid,
@@ -9700,6 +9839,7 @@ class _$StoragePermissionFailedImpl implements _StoragePermissionFailed {
     TResult? Function()? scannedProductNotFound,
     TResult? Function(bool permanentlyDenied)? cameraPermissionFailed,
     TResult? Function()? userNameNotFound,
+    TResult? Function()? accountBlocked,
     TResult? Function()? uploadedFileSizeExceed,
     TResult? Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult? Function()? allReorderItemInvalid,
@@ -9753,6 +9893,7 @@ class _$StoragePermissionFailedImpl implements _StoragePermissionFailed {
     TResult Function()? scannedProductNotFound,
     TResult Function(bool permanentlyDenied)? cameraPermissionFailed,
     TResult Function()? userNameNotFound,
+    TResult Function()? accountBlocked,
     TResult Function()? uploadedFileSizeExceed,
     TResult Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult Function()? allReorderItemInvalid,
@@ -9824,6 +9965,7 @@ class _$StoragePermissionFailedImpl implements _StoragePermissionFailed {
     required TResult Function(_CameraPermissionFailed value)
         cameraPermissionFailed,
     required TResult Function(_UserNameNotFound value) userNameNotFound,
+    required TResult Function(_AccountBlocked value) accountBlocked,
     required TResult Function(_UploadedFileSizeExceed value)
         uploadedFileSizeExceed,
     required TResult Function(_PaymentAdviceDeleteFailed value)
@@ -9894,6 +10036,7 @@ class _$StoragePermissionFailedImpl implements _StoragePermissionFailed {
     TResult? Function(_ScannedProductNotFound value)? scannedProductNotFound,
     TResult? Function(_CameraPermissionFailed value)? cameraPermissionFailed,
     TResult? Function(_UserNameNotFound value)? userNameNotFound,
+    TResult? Function(_AccountBlocked value)? accountBlocked,
     TResult? Function(_UploadedFileSizeExceed value)? uploadedFileSizeExceed,
     TResult? Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
@@ -9958,6 +10101,7 @@ class _$StoragePermissionFailedImpl implements _StoragePermissionFailed {
     TResult Function(_ScannedProductNotFound value)? scannedProductNotFound,
     TResult Function(_CameraPermissionFailed value)? cameraPermissionFailed,
     TResult Function(_UserNameNotFound value)? userNameNotFound,
+    TResult Function(_AccountBlocked value)? accountBlocked,
     TResult Function(_UploadedFileSizeExceed value)? uploadedFileSizeExceed,
     TResult Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
@@ -10060,6 +10204,7 @@ class _$InvalidFileFormatImpl implements _InvalidFileFormat {
     required TResult Function() scannedProductNotFound,
     required TResult Function(bool permanentlyDenied) cameraPermissionFailed,
     required TResult Function() userNameNotFound,
+    required TResult Function() accountBlocked,
     required TResult Function() uploadedFileSizeExceed,
     required TResult Function(String adviceNumber) paymentAdviceDeleteFailed,
     required TResult Function() allReorderItemInvalid,
@@ -10113,6 +10258,7 @@ class _$InvalidFileFormatImpl implements _InvalidFileFormat {
     TResult? Function()? scannedProductNotFound,
     TResult? Function(bool permanentlyDenied)? cameraPermissionFailed,
     TResult? Function()? userNameNotFound,
+    TResult? Function()? accountBlocked,
     TResult? Function()? uploadedFileSizeExceed,
     TResult? Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult? Function()? allReorderItemInvalid,
@@ -10166,6 +10312,7 @@ class _$InvalidFileFormatImpl implements _InvalidFileFormat {
     TResult Function()? scannedProductNotFound,
     TResult Function(bool permanentlyDenied)? cameraPermissionFailed,
     TResult Function()? userNameNotFound,
+    TResult Function()? accountBlocked,
     TResult Function()? uploadedFileSizeExceed,
     TResult Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult Function()? allReorderItemInvalid,
@@ -10237,6 +10384,7 @@ class _$InvalidFileFormatImpl implements _InvalidFileFormat {
     required TResult Function(_CameraPermissionFailed value)
         cameraPermissionFailed,
     required TResult Function(_UserNameNotFound value) userNameNotFound,
+    required TResult Function(_AccountBlocked value) accountBlocked,
     required TResult Function(_UploadedFileSizeExceed value)
         uploadedFileSizeExceed,
     required TResult Function(_PaymentAdviceDeleteFailed value)
@@ -10307,6 +10455,7 @@ class _$InvalidFileFormatImpl implements _InvalidFileFormat {
     TResult? Function(_ScannedProductNotFound value)? scannedProductNotFound,
     TResult? Function(_CameraPermissionFailed value)? cameraPermissionFailed,
     TResult? Function(_UserNameNotFound value)? userNameNotFound,
+    TResult? Function(_AccountBlocked value)? accountBlocked,
     TResult? Function(_UploadedFileSizeExceed value)? uploadedFileSizeExceed,
     TResult? Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
@@ -10371,6 +10520,7 @@ class _$InvalidFileFormatImpl implements _InvalidFileFormat {
     TResult Function(_ScannedProductNotFound value)? scannedProductNotFound,
     TResult Function(_CameraPermissionFailed value)? cameraPermissionFailed,
     TResult Function(_UserNameNotFound value)? userNameNotFound,
+    TResult Function(_AccountBlocked value)? accountBlocked,
     TResult Function(_UploadedFileSizeExceed value)? uploadedFileSizeExceed,
     TResult Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
@@ -10476,6 +10626,7 @@ class _$UploadCountExcideLimitImpl implements _UploadCountExcideLimit {
     required TResult Function() scannedProductNotFound,
     required TResult Function(bool permanentlyDenied) cameraPermissionFailed,
     required TResult Function() userNameNotFound,
+    required TResult Function() accountBlocked,
     required TResult Function() uploadedFileSizeExceed,
     required TResult Function(String adviceNumber) paymentAdviceDeleteFailed,
     required TResult Function() allReorderItemInvalid,
@@ -10529,6 +10680,7 @@ class _$UploadCountExcideLimitImpl implements _UploadCountExcideLimit {
     TResult? Function()? scannedProductNotFound,
     TResult? Function(bool permanentlyDenied)? cameraPermissionFailed,
     TResult? Function()? userNameNotFound,
+    TResult? Function()? accountBlocked,
     TResult? Function()? uploadedFileSizeExceed,
     TResult? Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult? Function()? allReorderItemInvalid,
@@ -10582,6 +10734,7 @@ class _$UploadCountExcideLimitImpl implements _UploadCountExcideLimit {
     TResult Function()? scannedProductNotFound,
     TResult Function(bool permanentlyDenied)? cameraPermissionFailed,
     TResult Function()? userNameNotFound,
+    TResult Function()? accountBlocked,
     TResult Function()? uploadedFileSizeExceed,
     TResult Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult Function()? allReorderItemInvalid,
@@ -10653,6 +10806,7 @@ class _$UploadCountExcideLimitImpl implements _UploadCountExcideLimit {
     required TResult Function(_CameraPermissionFailed value)
         cameraPermissionFailed,
     required TResult Function(_UserNameNotFound value) userNameNotFound,
+    required TResult Function(_AccountBlocked value) accountBlocked,
     required TResult Function(_UploadedFileSizeExceed value)
         uploadedFileSizeExceed,
     required TResult Function(_PaymentAdviceDeleteFailed value)
@@ -10723,6 +10877,7 @@ class _$UploadCountExcideLimitImpl implements _UploadCountExcideLimit {
     TResult? Function(_ScannedProductNotFound value)? scannedProductNotFound,
     TResult? Function(_CameraPermissionFailed value)? cameraPermissionFailed,
     TResult? Function(_UserNameNotFound value)? userNameNotFound,
+    TResult? Function(_AccountBlocked value)? accountBlocked,
     TResult? Function(_UploadedFileSizeExceed value)? uploadedFileSizeExceed,
     TResult? Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
@@ -10787,6 +10942,7 @@ class _$UploadCountExcideLimitImpl implements _UploadCountExcideLimit {
     TResult Function(_ScannedProductNotFound value)? scannedProductNotFound,
     TResult Function(_CameraPermissionFailed value)? cameraPermissionFailed,
     TResult Function(_UserNameNotFound value)? userNameNotFound,
+    TResult Function(_AccountBlocked value)? accountBlocked,
     TResult Function(_UploadedFileSizeExceed value)? uploadedFileSizeExceed,
     TResult Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
@@ -10889,6 +11045,7 @@ class _$ProductDetailRouteImpl implements _ProductDetailRoute {
     required TResult Function() scannedProductNotFound,
     required TResult Function(bool permanentlyDenied) cameraPermissionFailed,
     required TResult Function() userNameNotFound,
+    required TResult Function() accountBlocked,
     required TResult Function() uploadedFileSizeExceed,
     required TResult Function(String adviceNumber) paymentAdviceDeleteFailed,
     required TResult Function() allReorderItemInvalid,
@@ -10942,6 +11099,7 @@ class _$ProductDetailRouteImpl implements _ProductDetailRoute {
     TResult? Function()? scannedProductNotFound,
     TResult? Function(bool permanentlyDenied)? cameraPermissionFailed,
     TResult? Function()? userNameNotFound,
+    TResult? Function()? accountBlocked,
     TResult? Function()? uploadedFileSizeExceed,
     TResult? Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult? Function()? allReorderItemInvalid,
@@ -10995,6 +11153,7 @@ class _$ProductDetailRouteImpl implements _ProductDetailRoute {
     TResult Function()? scannedProductNotFound,
     TResult Function(bool permanentlyDenied)? cameraPermissionFailed,
     TResult Function()? userNameNotFound,
+    TResult Function()? accountBlocked,
     TResult Function()? uploadedFileSizeExceed,
     TResult Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult Function()? allReorderItemInvalid,
@@ -11066,6 +11225,7 @@ class _$ProductDetailRouteImpl implements _ProductDetailRoute {
     required TResult Function(_CameraPermissionFailed value)
         cameraPermissionFailed,
     required TResult Function(_UserNameNotFound value) userNameNotFound,
+    required TResult Function(_AccountBlocked value) accountBlocked,
     required TResult Function(_UploadedFileSizeExceed value)
         uploadedFileSizeExceed,
     required TResult Function(_PaymentAdviceDeleteFailed value)
@@ -11136,6 +11296,7 @@ class _$ProductDetailRouteImpl implements _ProductDetailRoute {
     TResult? Function(_ScannedProductNotFound value)? scannedProductNotFound,
     TResult? Function(_CameraPermissionFailed value)? cameraPermissionFailed,
     TResult? Function(_UserNameNotFound value)? userNameNotFound,
+    TResult? Function(_AccountBlocked value)? accountBlocked,
     TResult? Function(_UploadedFileSizeExceed value)? uploadedFileSizeExceed,
     TResult? Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
@@ -11200,6 +11361,7 @@ class _$ProductDetailRouteImpl implements _ProductDetailRoute {
     TResult Function(_ScannedProductNotFound value)? scannedProductNotFound,
     TResult Function(_CameraPermissionFailed value)? cameraPermissionFailed,
     TResult Function(_UserNameNotFound value)? userNameNotFound,
+    TResult Function(_AccountBlocked value)? accountBlocked,
     TResult Function(_UploadedFileSizeExceed value)? uploadedFileSizeExceed,
     TResult Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
@@ -11302,6 +11464,7 @@ class _$OrderDetailRouteImpl implements _OrderDetailRoute {
     required TResult Function() scannedProductNotFound,
     required TResult Function(bool permanentlyDenied) cameraPermissionFailed,
     required TResult Function() userNameNotFound,
+    required TResult Function() accountBlocked,
     required TResult Function() uploadedFileSizeExceed,
     required TResult Function(String adviceNumber) paymentAdviceDeleteFailed,
     required TResult Function() allReorderItemInvalid,
@@ -11355,6 +11518,7 @@ class _$OrderDetailRouteImpl implements _OrderDetailRoute {
     TResult? Function()? scannedProductNotFound,
     TResult? Function(bool permanentlyDenied)? cameraPermissionFailed,
     TResult? Function()? userNameNotFound,
+    TResult? Function()? accountBlocked,
     TResult? Function()? uploadedFileSizeExceed,
     TResult? Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult? Function()? allReorderItemInvalid,
@@ -11408,6 +11572,7 @@ class _$OrderDetailRouteImpl implements _OrderDetailRoute {
     TResult Function()? scannedProductNotFound,
     TResult Function(bool permanentlyDenied)? cameraPermissionFailed,
     TResult Function()? userNameNotFound,
+    TResult Function()? accountBlocked,
     TResult Function()? uploadedFileSizeExceed,
     TResult Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult Function()? allReorderItemInvalid,
@@ -11479,6 +11644,7 @@ class _$OrderDetailRouteImpl implements _OrderDetailRoute {
     required TResult Function(_CameraPermissionFailed value)
         cameraPermissionFailed,
     required TResult Function(_UserNameNotFound value) userNameNotFound,
+    required TResult Function(_AccountBlocked value) accountBlocked,
     required TResult Function(_UploadedFileSizeExceed value)
         uploadedFileSizeExceed,
     required TResult Function(_PaymentAdviceDeleteFailed value)
@@ -11549,6 +11715,7 @@ class _$OrderDetailRouteImpl implements _OrderDetailRoute {
     TResult? Function(_ScannedProductNotFound value)? scannedProductNotFound,
     TResult? Function(_CameraPermissionFailed value)? cameraPermissionFailed,
     TResult? Function(_UserNameNotFound value)? userNameNotFound,
+    TResult? Function(_AccountBlocked value)? accountBlocked,
     TResult? Function(_UploadedFileSizeExceed value)? uploadedFileSizeExceed,
     TResult? Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
@@ -11613,6 +11780,7 @@ class _$OrderDetailRouteImpl implements _OrderDetailRoute {
     TResult Function(_ScannedProductNotFound value)? scannedProductNotFound,
     TResult Function(_CameraPermissionFailed value)? cameraPermissionFailed,
     TResult Function(_UserNameNotFound value)? userNameNotFound,
+    TResult Function(_AccountBlocked value)? accountBlocked,
     TResult Function(_UploadedFileSizeExceed value)? uploadedFileSizeExceed,
     TResult Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
@@ -11715,6 +11883,7 @@ class _$ReturnDetailRouteImpl implements _ReturnDetailRoute {
     required TResult Function() scannedProductNotFound,
     required TResult Function(bool permanentlyDenied) cameraPermissionFailed,
     required TResult Function() userNameNotFound,
+    required TResult Function() accountBlocked,
     required TResult Function() uploadedFileSizeExceed,
     required TResult Function(String adviceNumber) paymentAdviceDeleteFailed,
     required TResult Function() allReorderItemInvalid,
@@ -11768,6 +11937,7 @@ class _$ReturnDetailRouteImpl implements _ReturnDetailRoute {
     TResult? Function()? scannedProductNotFound,
     TResult? Function(bool permanentlyDenied)? cameraPermissionFailed,
     TResult? Function()? userNameNotFound,
+    TResult? Function()? accountBlocked,
     TResult? Function()? uploadedFileSizeExceed,
     TResult? Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult? Function()? allReorderItemInvalid,
@@ -11821,6 +11991,7 @@ class _$ReturnDetailRouteImpl implements _ReturnDetailRoute {
     TResult Function()? scannedProductNotFound,
     TResult Function(bool permanentlyDenied)? cameraPermissionFailed,
     TResult Function()? userNameNotFound,
+    TResult Function()? accountBlocked,
     TResult Function()? uploadedFileSizeExceed,
     TResult Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult Function()? allReorderItemInvalid,
@@ -11892,6 +12063,7 @@ class _$ReturnDetailRouteImpl implements _ReturnDetailRoute {
     required TResult Function(_CameraPermissionFailed value)
         cameraPermissionFailed,
     required TResult Function(_UserNameNotFound value) userNameNotFound,
+    required TResult Function(_AccountBlocked value) accountBlocked,
     required TResult Function(_UploadedFileSizeExceed value)
         uploadedFileSizeExceed,
     required TResult Function(_PaymentAdviceDeleteFailed value)
@@ -11962,6 +12134,7 @@ class _$ReturnDetailRouteImpl implements _ReturnDetailRoute {
     TResult? Function(_ScannedProductNotFound value)? scannedProductNotFound,
     TResult? Function(_CameraPermissionFailed value)? cameraPermissionFailed,
     TResult? Function(_UserNameNotFound value)? userNameNotFound,
+    TResult? Function(_AccountBlocked value)? accountBlocked,
     TResult? Function(_UploadedFileSizeExceed value)? uploadedFileSizeExceed,
     TResult? Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
@@ -12026,6 +12199,7 @@ class _$ReturnDetailRouteImpl implements _ReturnDetailRoute {
     TResult Function(_ScannedProductNotFound value)? scannedProductNotFound,
     TResult Function(_CameraPermissionFailed value)? cameraPermissionFailed,
     TResult Function(_UserNameNotFound value)? userNameNotFound,
+    TResult Function(_AccountBlocked value)? accountBlocked,
     TResult Function(_UploadedFileSizeExceed value)? uploadedFileSizeExceed,
     TResult Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
@@ -12128,6 +12302,7 @@ class _$PaymentDetailRouteImpl implements _PaymentDetailRoute {
     required TResult Function() scannedProductNotFound,
     required TResult Function(bool permanentlyDenied) cameraPermissionFailed,
     required TResult Function() userNameNotFound,
+    required TResult Function() accountBlocked,
     required TResult Function() uploadedFileSizeExceed,
     required TResult Function(String adviceNumber) paymentAdviceDeleteFailed,
     required TResult Function() allReorderItemInvalid,
@@ -12181,6 +12356,7 @@ class _$PaymentDetailRouteImpl implements _PaymentDetailRoute {
     TResult? Function()? scannedProductNotFound,
     TResult? Function(bool permanentlyDenied)? cameraPermissionFailed,
     TResult? Function()? userNameNotFound,
+    TResult? Function()? accountBlocked,
     TResult? Function()? uploadedFileSizeExceed,
     TResult? Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult? Function()? allReorderItemInvalid,
@@ -12234,6 +12410,7 @@ class _$PaymentDetailRouteImpl implements _PaymentDetailRoute {
     TResult Function()? scannedProductNotFound,
     TResult Function(bool permanentlyDenied)? cameraPermissionFailed,
     TResult Function()? userNameNotFound,
+    TResult Function()? accountBlocked,
     TResult Function()? uploadedFileSizeExceed,
     TResult Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult Function()? allReorderItemInvalid,
@@ -12305,6 +12482,7 @@ class _$PaymentDetailRouteImpl implements _PaymentDetailRoute {
     required TResult Function(_CameraPermissionFailed value)
         cameraPermissionFailed,
     required TResult Function(_UserNameNotFound value) userNameNotFound,
+    required TResult Function(_AccountBlocked value) accountBlocked,
     required TResult Function(_UploadedFileSizeExceed value)
         uploadedFileSizeExceed,
     required TResult Function(_PaymentAdviceDeleteFailed value)
@@ -12375,6 +12553,7 @@ class _$PaymentDetailRouteImpl implements _PaymentDetailRoute {
     TResult? Function(_ScannedProductNotFound value)? scannedProductNotFound,
     TResult? Function(_CameraPermissionFailed value)? cameraPermissionFailed,
     TResult? Function(_UserNameNotFound value)? userNameNotFound,
+    TResult? Function(_AccountBlocked value)? accountBlocked,
     TResult? Function(_UploadedFileSizeExceed value)? uploadedFileSizeExceed,
     TResult? Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
@@ -12439,6 +12618,7 @@ class _$PaymentDetailRouteImpl implements _PaymentDetailRoute {
     TResult Function(_ScannedProductNotFound value)? scannedProductNotFound,
     TResult Function(_CameraPermissionFailed value)? cameraPermissionFailed,
     TResult Function(_UserNameNotFound value)? userNameNotFound,
+    TResult Function(_AccountBlocked value)? accountBlocked,
     TResult Function(_UploadedFileSizeExceed value)? uploadedFileSizeExceed,
     TResult Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
@@ -12541,6 +12721,7 @@ class _$InvoiceDetailRouteImpl implements _InvoiceDetailRoute {
     required TResult Function() scannedProductNotFound,
     required TResult Function(bool permanentlyDenied) cameraPermissionFailed,
     required TResult Function() userNameNotFound,
+    required TResult Function() accountBlocked,
     required TResult Function() uploadedFileSizeExceed,
     required TResult Function(String adviceNumber) paymentAdviceDeleteFailed,
     required TResult Function() allReorderItemInvalid,
@@ -12594,6 +12775,7 @@ class _$InvoiceDetailRouteImpl implements _InvoiceDetailRoute {
     TResult? Function()? scannedProductNotFound,
     TResult? Function(bool permanentlyDenied)? cameraPermissionFailed,
     TResult? Function()? userNameNotFound,
+    TResult? Function()? accountBlocked,
     TResult? Function()? uploadedFileSizeExceed,
     TResult? Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult? Function()? allReorderItemInvalid,
@@ -12647,6 +12829,7 @@ class _$InvoiceDetailRouteImpl implements _InvoiceDetailRoute {
     TResult Function()? scannedProductNotFound,
     TResult Function(bool permanentlyDenied)? cameraPermissionFailed,
     TResult Function()? userNameNotFound,
+    TResult Function()? accountBlocked,
     TResult Function()? uploadedFileSizeExceed,
     TResult Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult Function()? allReorderItemInvalid,
@@ -12718,6 +12901,7 @@ class _$InvoiceDetailRouteImpl implements _InvoiceDetailRoute {
     required TResult Function(_CameraPermissionFailed value)
         cameraPermissionFailed,
     required TResult Function(_UserNameNotFound value) userNameNotFound,
+    required TResult Function(_AccountBlocked value) accountBlocked,
     required TResult Function(_UploadedFileSizeExceed value)
         uploadedFileSizeExceed,
     required TResult Function(_PaymentAdviceDeleteFailed value)
@@ -12788,6 +12972,7 @@ class _$InvoiceDetailRouteImpl implements _InvoiceDetailRoute {
     TResult? Function(_ScannedProductNotFound value)? scannedProductNotFound,
     TResult? Function(_CameraPermissionFailed value)? cameraPermissionFailed,
     TResult? Function(_UserNameNotFound value)? userNameNotFound,
+    TResult? Function(_AccountBlocked value)? accountBlocked,
     TResult? Function(_UploadedFileSizeExceed value)? uploadedFileSizeExceed,
     TResult? Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
@@ -12852,6 +13037,7 @@ class _$InvoiceDetailRouteImpl implements _InvoiceDetailRoute {
     TResult Function(_ScannedProductNotFound value)? scannedProductNotFound,
     TResult Function(_CameraPermissionFailed value)? cameraPermissionFailed,
     TResult Function(_UserNameNotFound value)? userNameNotFound,
+    TResult Function(_AccountBlocked value)? accountBlocked,
     TResult Function(_UploadedFileSizeExceed value)? uploadedFileSizeExceed,
     TResult Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
@@ -12954,6 +13140,7 @@ class _$LanguageChangeFailImpl implements _LanguageChangeFail {
     required TResult Function() scannedProductNotFound,
     required TResult Function(bool permanentlyDenied) cameraPermissionFailed,
     required TResult Function() userNameNotFound,
+    required TResult Function() accountBlocked,
     required TResult Function() uploadedFileSizeExceed,
     required TResult Function(String adviceNumber) paymentAdviceDeleteFailed,
     required TResult Function() allReorderItemInvalid,
@@ -13007,6 +13194,7 @@ class _$LanguageChangeFailImpl implements _LanguageChangeFail {
     TResult? Function()? scannedProductNotFound,
     TResult? Function(bool permanentlyDenied)? cameraPermissionFailed,
     TResult? Function()? userNameNotFound,
+    TResult? Function()? accountBlocked,
     TResult? Function()? uploadedFileSizeExceed,
     TResult? Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult? Function()? allReorderItemInvalid,
@@ -13060,6 +13248,7 @@ class _$LanguageChangeFailImpl implements _LanguageChangeFail {
     TResult Function()? scannedProductNotFound,
     TResult Function(bool permanentlyDenied)? cameraPermissionFailed,
     TResult Function()? userNameNotFound,
+    TResult Function()? accountBlocked,
     TResult Function()? uploadedFileSizeExceed,
     TResult Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult Function()? allReorderItemInvalid,
@@ -13131,6 +13320,7 @@ class _$LanguageChangeFailImpl implements _LanguageChangeFail {
     required TResult Function(_CameraPermissionFailed value)
         cameraPermissionFailed,
     required TResult Function(_UserNameNotFound value) userNameNotFound,
+    required TResult Function(_AccountBlocked value) accountBlocked,
     required TResult Function(_UploadedFileSizeExceed value)
         uploadedFileSizeExceed,
     required TResult Function(_PaymentAdviceDeleteFailed value)
@@ -13201,6 +13391,7 @@ class _$LanguageChangeFailImpl implements _LanguageChangeFail {
     TResult? Function(_ScannedProductNotFound value)? scannedProductNotFound,
     TResult? Function(_CameraPermissionFailed value)? cameraPermissionFailed,
     TResult? Function(_UserNameNotFound value)? userNameNotFound,
+    TResult? Function(_AccountBlocked value)? accountBlocked,
     TResult? Function(_UploadedFileSizeExceed value)? uploadedFileSizeExceed,
     TResult? Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
@@ -13265,6 +13456,7 @@ class _$LanguageChangeFailImpl implements _LanguageChangeFail {
     TResult Function(_ScannedProductNotFound value)? scannedProductNotFound,
     TResult Function(_CameraPermissionFailed value)? cameraPermissionFailed,
     TResult Function(_UserNameNotFound value)? userNameNotFound,
+    TResult Function(_AccountBlocked value)? accountBlocked,
     TResult Function(_UploadedFileSizeExceed value)? uploadedFileSizeExceed,
     TResult Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
@@ -13370,6 +13562,7 @@ class _$ScannedProductNotFoundImpl implements _ScannedProductNotFound {
     required TResult Function() scannedProductNotFound,
     required TResult Function(bool permanentlyDenied) cameraPermissionFailed,
     required TResult Function() userNameNotFound,
+    required TResult Function() accountBlocked,
     required TResult Function() uploadedFileSizeExceed,
     required TResult Function(String adviceNumber) paymentAdviceDeleteFailed,
     required TResult Function() allReorderItemInvalid,
@@ -13423,6 +13616,7 @@ class _$ScannedProductNotFoundImpl implements _ScannedProductNotFound {
     TResult? Function()? scannedProductNotFound,
     TResult? Function(bool permanentlyDenied)? cameraPermissionFailed,
     TResult? Function()? userNameNotFound,
+    TResult? Function()? accountBlocked,
     TResult? Function()? uploadedFileSizeExceed,
     TResult? Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult? Function()? allReorderItemInvalid,
@@ -13476,6 +13670,7 @@ class _$ScannedProductNotFoundImpl implements _ScannedProductNotFound {
     TResult Function()? scannedProductNotFound,
     TResult Function(bool permanentlyDenied)? cameraPermissionFailed,
     TResult Function()? userNameNotFound,
+    TResult Function()? accountBlocked,
     TResult Function()? uploadedFileSizeExceed,
     TResult Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult Function()? allReorderItemInvalid,
@@ -13547,6 +13742,7 @@ class _$ScannedProductNotFoundImpl implements _ScannedProductNotFound {
     required TResult Function(_CameraPermissionFailed value)
         cameraPermissionFailed,
     required TResult Function(_UserNameNotFound value) userNameNotFound,
+    required TResult Function(_AccountBlocked value) accountBlocked,
     required TResult Function(_UploadedFileSizeExceed value)
         uploadedFileSizeExceed,
     required TResult Function(_PaymentAdviceDeleteFailed value)
@@ -13617,6 +13813,7 @@ class _$ScannedProductNotFoundImpl implements _ScannedProductNotFound {
     TResult? Function(_ScannedProductNotFound value)? scannedProductNotFound,
     TResult? Function(_CameraPermissionFailed value)? cameraPermissionFailed,
     TResult? Function(_UserNameNotFound value)? userNameNotFound,
+    TResult? Function(_AccountBlocked value)? accountBlocked,
     TResult? Function(_UploadedFileSizeExceed value)? uploadedFileSizeExceed,
     TResult? Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
@@ -13681,6 +13878,7 @@ class _$ScannedProductNotFoundImpl implements _ScannedProductNotFound {
     TResult Function(_ScannedProductNotFound value)? scannedProductNotFound,
     TResult Function(_CameraPermissionFailed value)? cameraPermissionFailed,
     TResult Function(_UserNameNotFound value)? userNameNotFound,
+    TResult Function(_AccountBlocked value)? accountBlocked,
     TResult Function(_UploadedFileSizeExceed value)? uploadedFileSizeExceed,
     TResult Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
@@ -13813,6 +14011,7 @@ class _$CameraPermissionFailedImpl implements _CameraPermissionFailed {
     required TResult Function() scannedProductNotFound,
     required TResult Function(bool permanentlyDenied) cameraPermissionFailed,
     required TResult Function() userNameNotFound,
+    required TResult Function() accountBlocked,
     required TResult Function() uploadedFileSizeExceed,
     required TResult Function(String adviceNumber) paymentAdviceDeleteFailed,
     required TResult Function() allReorderItemInvalid,
@@ -13866,6 +14065,7 @@ class _$CameraPermissionFailedImpl implements _CameraPermissionFailed {
     TResult? Function()? scannedProductNotFound,
     TResult? Function(bool permanentlyDenied)? cameraPermissionFailed,
     TResult? Function()? userNameNotFound,
+    TResult? Function()? accountBlocked,
     TResult? Function()? uploadedFileSizeExceed,
     TResult? Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult? Function()? allReorderItemInvalid,
@@ -13919,6 +14119,7 @@ class _$CameraPermissionFailedImpl implements _CameraPermissionFailed {
     TResult Function()? scannedProductNotFound,
     TResult Function(bool permanentlyDenied)? cameraPermissionFailed,
     TResult Function()? userNameNotFound,
+    TResult Function()? accountBlocked,
     TResult Function()? uploadedFileSizeExceed,
     TResult Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult Function()? allReorderItemInvalid,
@@ -13990,6 +14191,7 @@ class _$CameraPermissionFailedImpl implements _CameraPermissionFailed {
     required TResult Function(_CameraPermissionFailed value)
         cameraPermissionFailed,
     required TResult Function(_UserNameNotFound value) userNameNotFound,
+    required TResult Function(_AccountBlocked value) accountBlocked,
     required TResult Function(_UploadedFileSizeExceed value)
         uploadedFileSizeExceed,
     required TResult Function(_PaymentAdviceDeleteFailed value)
@@ -14060,6 +14262,7 @@ class _$CameraPermissionFailedImpl implements _CameraPermissionFailed {
     TResult? Function(_ScannedProductNotFound value)? scannedProductNotFound,
     TResult? Function(_CameraPermissionFailed value)? cameraPermissionFailed,
     TResult? Function(_UserNameNotFound value)? userNameNotFound,
+    TResult? Function(_AccountBlocked value)? accountBlocked,
     TResult? Function(_UploadedFileSizeExceed value)? uploadedFileSizeExceed,
     TResult? Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
@@ -14124,6 +14327,7 @@ class _$CameraPermissionFailedImpl implements _CameraPermissionFailed {
     TResult Function(_ScannedProductNotFound value)? scannedProductNotFound,
     TResult Function(_CameraPermissionFailed value)? cameraPermissionFailed,
     TResult Function(_UserNameNotFound value)? userNameNotFound,
+    TResult Function(_AccountBlocked value)? accountBlocked,
     TResult Function(_UploadedFileSizeExceed value)? uploadedFileSizeExceed,
     TResult Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
@@ -14232,6 +14436,7 @@ class _$UserNameNotFoundImpl implements _UserNameNotFound {
     required TResult Function() scannedProductNotFound,
     required TResult Function(bool permanentlyDenied) cameraPermissionFailed,
     required TResult Function() userNameNotFound,
+    required TResult Function() accountBlocked,
     required TResult Function() uploadedFileSizeExceed,
     required TResult Function(String adviceNumber) paymentAdviceDeleteFailed,
     required TResult Function() allReorderItemInvalid,
@@ -14285,6 +14490,7 @@ class _$UserNameNotFoundImpl implements _UserNameNotFound {
     TResult? Function()? scannedProductNotFound,
     TResult? Function(bool permanentlyDenied)? cameraPermissionFailed,
     TResult? Function()? userNameNotFound,
+    TResult? Function()? accountBlocked,
     TResult? Function()? uploadedFileSizeExceed,
     TResult? Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult? Function()? allReorderItemInvalid,
@@ -14338,6 +14544,7 @@ class _$UserNameNotFoundImpl implements _UserNameNotFound {
     TResult Function()? scannedProductNotFound,
     TResult Function(bool permanentlyDenied)? cameraPermissionFailed,
     TResult Function()? userNameNotFound,
+    TResult Function()? accountBlocked,
     TResult Function()? uploadedFileSizeExceed,
     TResult Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult Function()? allReorderItemInvalid,
@@ -14409,6 +14616,7 @@ class _$UserNameNotFoundImpl implements _UserNameNotFound {
     required TResult Function(_CameraPermissionFailed value)
         cameraPermissionFailed,
     required TResult Function(_UserNameNotFound value) userNameNotFound,
+    required TResult Function(_AccountBlocked value) accountBlocked,
     required TResult Function(_UploadedFileSizeExceed value)
         uploadedFileSizeExceed,
     required TResult Function(_PaymentAdviceDeleteFailed value)
@@ -14479,6 +14687,7 @@ class _$UserNameNotFoundImpl implements _UserNameNotFound {
     TResult? Function(_ScannedProductNotFound value)? scannedProductNotFound,
     TResult? Function(_CameraPermissionFailed value)? cameraPermissionFailed,
     TResult? Function(_UserNameNotFound value)? userNameNotFound,
+    TResult? Function(_AccountBlocked value)? accountBlocked,
     TResult? Function(_UploadedFileSizeExceed value)? uploadedFileSizeExceed,
     TResult? Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
@@ -14543,6 +14752,7 @@ class _$UserNameNotFoundImpl implements _UserNameNotFound {
     TResult Function(_ScannedProductNotFound value)? scannedProductNotFound,
     TResult Function(_CameraPermissionFailed value)? cameraPermissionFailed,
     TResult Function(_UserNameNotFound value)? userNameNotFound,
+    TResult Function(_AccountBlocked value)? accountBlocked,
     TResult Function(_UploadedFileSizeExceed value)? uploadedFileSizeExceed,
     TResult Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
@@ -14571,6 +14781,425 @@ class _$UserNameNotFoundImpl implements _UserNameNotFound {
 
 abstract class _UserNameNotFound implements ApiFailure {
   const factory _UserNameNotFound() = _$UserNameNotFoundImpl;
+}
+
+/// @nodoc
+abstract class _$$AccountBlockedImplCopyWith<$Res> {
+  factory _$$AccountBlockedImplCopyWith(_$AccountBlockedImpl value,
+          $Res Function(_$AccountBlockedImpl) then) =
+      __$$AccountBlockedImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$AccountBlockedImplCopyWithImpl<$Res>
+    extends _$ApiFailureCopyWithImpl<$Res, _$AccountBlockedImpl>
+    implements _$$AccountBlockedImplCopyWith<$Res> {
+  __$$AccountBlockedImplCopyWithImpl(
+      _$AccountBlockedImpl _value, $Res Function(_$AccountBlockedImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$AccountBlockedImpl implements _AccountBlocked {
+  const _$AccountBlockedImpl();
+
+  @override
+  String toString() {
+    return 'ApiFailure.accountBlocked()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$AccountBlockedImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String message) other,
+    required TResult Function(String message) serverError,
+    required TResult Function() poorConnection,
+    required TResult Function() serverTimeout,
+    required TResult Function() userNotFound,
+    required TResult Function() marketplaceTnCAcceptanceError,
+    required TResult Function() invalidEmailAndPasswordCombination,
+    required TResult Function() accountLocked,
+    required TResult Function() accountExpired,
+    required TResult Function() tokenExpired,
+    required TResult Function() authenticationFailed,
+    required TResult Function() proxyLoginRolePermissionNotMatch,
+    required TResult Function() proxyLoginZPTargetRoleNotMatch,
+    required TResult Function() proxyLoginZPSalesOrgNotMatch,
+    required TResult Function() passwordResetFail,
+    required TResult Function() deviceNotSupportBiometric,
+    required TResult Function() cannotCheckBiometrics,
+    required TResult Function() noSupportedBiometrics,
+    required TResult Function() invalidBiometric,
+    required TResult Function() priceOverrideNotFound,
+    required TResult Function() productOutOfStock,
+    required TResult Function() photoPermissionFailed,
+    required TResult Function() storagePermissionFailed,
+    required TResult Function() invalidFileFormat,
+    required TResult Function() uploadCountExcideLimit,
+    required TResult Function() productDetailRoute,
+    required TResult Function() orderDetailRoute,
+    required TResult Function() returnDetailRoute,
+    required TResult Function() paymentDetailRoute,
+    required TResult Function() invoiceDetailRoute,
+    required TResult Function() languageChangeFail,
+    required TResult Function(String productNumber) scannedProductNotFound,
+    required TResult Function(bool permanentlyDenied) cameraPermissionFailed,
+    required TResult Function() userNameNotFound,
+    required TResult Function() accountBlocked,
+    required TResult Function() uploadedFileSizeExceed,
+    required TResult Function(String adviceNumber) paymentAdviceDeleteFailed,
+    required TResult Function() allReorderItemInvalid,
+    required TResult Function(String maximumNumber) maximumCartQuantityExceed,
+    required TResult Function() cartHasDifferentAddress,
+    required TResult Function() articleannuncementTagFetchingError,
+    required TResult Function() attachmentDownloadError,
+    required TResult Function(String message) openDownloadedFileError,
+    required TResult Function() addAnimalHealthWithNormalProductToCart,
+    required TResult Function() missingzzHtmcs,
+    required TResult Function() stockInfoNotAvailable,
+    required TResult Function() accountCreationIncomplete,
+  }) {
+    return accountBlocked();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String message)? other,
+    TResult? Function(String message)? serverError,
+    TResult? Function()? poorConnection,
+    TResult? Function()? serverTimeout,
+    TResult? Function()? userNotFound,
+    TResult? Function()? marketplaceTnCAcceptanceError,
+    TResult? Function()? invalidEmailAndPasswordCombination,
+    TResult? Function()? accountLocked,
+    TResult? Function()? accountExpired,
+    TResult? Function()? tokenExpired,
+    TResult? Function()? authenticationFailed,
+    TResult? Function()? proxyLoginRolePermissionNotMatch,
+    TResult? Function()? proxyLoginZPTargetRoleNotMatch,
+    TResult? Function()? proxyLoginZPSalesOrgNotMatch,
+    TResult? Function()? passwordResetFail,
+    TResult? Function()? deviceNotSupportBiometric,
+    TResult? Function()? cannotCheckBiometrics,
+    TResult? Function()? noSupportedBiometrics,
+    TResult? Function()? invalidBiometric,
+    TResult? Function()? priceOverrideNotFound,
+    TResult? Function()? productOutOfStock,
+    TResult? Function()? photoPermissionFailed,
+    TResult? Function()? storagePermissionFailed,
+    TResult? Function()? invalidFileFormat,
+    TResult? Function()? uploadCountExcideLimit,
+    TResult? Function()? productDetailRoute,
+    TResult? Function()? orderDetailRoute,
+    TResult? Function()? returnDetailRoute,
+    TResult? Function()? paymentDetailRoute,
+    TResult? Function()? invoiceDetailRoute,
+    TResult? Function()? languageChangeFail,
+    TResult? Function(String productNumber)? scannedProductNotFound,
+    TResult? Function(bool permanentlyDenied)? cameraPermissionFailed,
+    TResult? Function()? userNameNotFound,
+    TResult? Function()? accountBlocked,
+    TResult? Function()? uploadedFileSizeExceed,
+    TResult? Function(String adviceNumber)? paymentAdviceDeleteFailed,
+    TResult? Function()? allReorderItemInvalid,
+    TResult? Function(String maximumNumber)? maximumCartQuantityExceed,
+    TResult? Function()? cartHasDifferentAddress,
+    TResult? Function()? articleannuncementTagFetchingError,
+    TResult? Function()? attachmentDownloadError,
+    TResult? Function(String message)? openDownloadedFileError,
+    TResult? Function()? addAnimalHealthWithNormalProductToCart,
+    TResult? Function()? missingzzHtmcs,
+    TResult? Function()? stockInfoNotAvailable,
+    TResult? Function()? accountCreationIncomplete,
+  }) {
+    return accountBlocked?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String message)? other,
+    TResult Function(String message)? serverError,
+    TResult Function()? poorConnection,
+    TResult Function()? serverTimeout,
+    TResult Function()? userNotFound,
+    TResult Function()? marketplaceTnCAcceptanceError,
+    TResult Function()? invalidEmailAndPasswordCombination,
+    TResult Function()? accountLocked,
+    TResult Function()? accountExpired,
+    TResult Function()? tokenExpired,
+    TResult Function()? authenticationFailed,
+    TResult Function()? proxyLoginRolePermissionNotMatch,
+    TResult Function()? proxyLoginZPTargetRoleNotMatch,
+    TResult Function()? proxyLoginZPSalesOrgNotMatch,
+    TResult Function()? passwordResetFail,
+    TResult Function()? deviceNotSupportBiometric,
+    TResult Function()? cannotCheckBiometrics,
+    TResult Function()? noSupportedBiometrics,
+    TResult Function()? invalidBiometric,
+    TResult Function()? priceOverrideNotFound,
+    TResult Function()? productOutOfStock,
+    TResult Function()? photoPermissionFailed,
+    TResult Function()? storagePermissionFailed,
+    TResult Function()? invalidFileFormat,
+    TResult Function()? uploadCountExcideLimit,
+    TResult Function()? productDetailRoute,
+    TResult Function()? orderDetailRoute,
+    TResult Function()? returnDetailRoute,
+    TResult Function()? paymentDetailRoute,
+    TResult Function()? invoiceDetailRoute,
+    TResult Function()? languageChangeFail,
+    TResult Function(String productNumber)? scannedProductNotFound,
+    TResult Function(bool permanentlyDenied)? cameraPermissionFailed,
+    TResult Function()? userNameNotFound,
+    TResult Function()? accountBlocked,
+    TResult Function()? uploadedFileSizeExceed,
+    TResult Function(String adviceNumber)? paymentAdviceDeleteFailed,
+    TResult Function()? allReorderItemInvalid,
+    TResult Function(String maximumNumber)? maximumCartQuantityExceed,
+    TResult Function()? cartHasDifferentAddress,
+    TResult Function()? articleannuncementTagFetchingError,
+    TResult Function()? attachmentDownloadError,
+    TResult Function(String message)? openDownloadedFileError,
+    TResult Function()? addAnimalHealthWithNormalProductToCart,
+    TResult Function()? missingzzHtmcs,
+    TResult Function()? stockInfoNotAvailable,
+    TResult Function()? accountCreationIncomplete,
+    required TResult orElse(),
+  }) {
+    if (accountBlocked != null) {
+      return accountBlocked();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Other value) other,
+    required TResult Function(_ServerError value) serverError,
+    required TResult Function(_PoorConnection value) poorConnection,
+    required TResult Function(_ServerTimeout value) serverTimeout,
+    required TResult Function(_UserNotFound value) userNotFound,
+    required TResult Function(_MarketPlaceTnCAcceptanceError value)
+        marketplaceTnCAcceptanceError,
+    required TResult Function(_InvalidEmailAndPasswordCombination value)
+        invalidEmailAndPasswordCombination,
+    required TResult Function(_AccountLocked value) accountLocked,
+    required TResult Function(_AccountExpired value) accountExpired,
+    required TResult Function(_TokenExpired value) tokenExpired,
+    required TResult Function(_AuthenticationFailed value) authenticationFailed,
+    required TResult Function(_ProxyLoginRolePermissionNotMatch value)
+        proxyLoginRolePermissionNotMatch,
+    required TResult Function(_ProxyLoginZPTargetRoleNotMatch value)
+        proxyLoginZPTargetRoleNotMatch,
+    required TResult Function(_ProxyLoginZPSalesOrgNotMatch value)
+        proxyLoginZPSalesOrgNotMatch,
+    required TResult Function(_PasswordResetFail value) passwordResetFail,
+    required TResult Function(_DeviceNotSupportBiometric value)
+        deviceNotSupportBiometric,
+    required TResult Function(_CannotCheckBiometrics value)
+        cannotCheckBiometrics,
+    required TResult Function(_NoSupportedBiometrics value)
+        noSupportedBiometrics,
+    required TResult Function(_InvalidBiometric value) invalidBiometric,
+    required TResult Function(_PriceOverrideNotFound value)
+        priceOverrideNotFound,
+    required TResult Function(_ProductOutOfStock value) productOutOfStock,
+    required TResult Function(_PhotoPermissionFailed value)
+        photoPermissionFailed,
+    required TResult Function(_StoragePermissionFailed value)
+        storagePermissionFailed,
+    required TResult Function(_InvalidFileFormat value) invalidFileFormat,
+    required TResult Function(_UploadCountExcideLimit value)
+        uploadCountExcideLimit,
+    required TResult Function(_ProductDetailRoute value) productDetailRoute,
+    required TResult Function(_OrderDetailRoute value) orderDetailRoute,
+    required TResult Function(_ReturnDetailRoute value) returnDetailRoute,
+    required TResult Function(_PaymentDetailRoute value) paymentDetailRoute,
+    required TResult Function(_InvoiceDetailRoute value) invoiceDetailRoute,
+    required TResult Function(_LanguageChangeFail value) languageChangeFail,
+    required TResult Function(_ScannedProductNotFound value)
+        scannedProductNotFound,
+    required TResult Function(_CameraPermissionFailed value)
+        cameraPermissionFailed,
+    required TResult Function(_UserNameNotFound value) userNameNotFound,
+    required TResult Function(_AccountBlocked value) accountBlocked,
+    required TResult Function(_UploadedFileSizeExceed value)
+        uploadedFileSizeExceed,
+    required TResult Function(_PaymentAdviceDeleteFailed value)
+        paymentAdviceDeleteFailed,
+    required TResult Function(_AllReorderItemInvalid value)
+        allReorderItemInvalid,
+    required TResult Function(_MaximumCartQuantityExceed value)
+        maximumCartQuantityExceed,
+    required TResult Function(_CartHasDifferentAddress value)
+        cartHasDifferentAddress,
+    required TResult Function(_ArticleannuncementTagFetchingError value)
+        articleannuncementTagFetchingError,
+    required TResult Function(_AttachmentDownloadError value)
+        attachmentDownloadError,
+    required TResult Function(_OpenDownloadedFileError value)
+        openDownloadedFileError,
+    required TResult Function(_AddAnimalHealthWithNormalProductToCart value)
+        addAnimalHealthWithNormalProductToCart,
+    required TResult Function(_MissingzzHtmcs value) missingzzHtmcs,
+    required TResult Function(_StockInfoNotAvailable value)
+        stockInfoNotAvailable,
+    required TResult Function(_AccountCreationIncomplete value)
+        accountCreationIncomplete,
+  }) {
+    return accountBlocked(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Other value)? other,
+    TResult? Function(_ServerError value)? serverError,
+    TResult? Function(_PoorConnection value)? poorConnection,
+    TResult? Function(_ServerTimeout value)? serverTimeout,
+    TResult? Function(_UserNotFound value)? userNotFound,
+    TResult? Function(_MarketPlaceTnCAcceptanceError value)?
+        marketplaceTnCAcceptanceError,
+    TResult? Function(_InvalidEmailAndPasswordCombination value)?
+        invalidEmailAndPasswordCombination,
+    TResult? Function(_AccountLocked value)? accountLocked,
+    TResult? Function(_AccountExpired value)? accountExpired,
+    TResult? Function(_TokenExpired value)? tokenExpired,
+    TResult? Function(_AuthenticationFailed value)? authenticationFailed,
+    TResult? Function(_ProxyLoginRolePermissionNotMatch value)?
+        proxyLoginRolePermissionNotMatch,
+    TResult? Function(_ProxyLoginZPTargetRoleNotMatch value)?
+        proxyLoginZPTargetRoleNotMatch,
+    TResult? Function(_ProxyLoginZPSalesOrgNotMatch value)?
+        proxyLoginZPSalesOrgNotMatch,
+    TResult? Function(_PasswordResetFail value)? passwordResetFail,
+    TResult? Function(_DeviceNotSupportBiometric value)?
+        deviceNotSupportBiometric,
+    TResult? Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
+    TResult? Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
+    TResult? Function(_InvalidBiometric value)? invalidBiometric,
+    TResult? Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
+    TResult? Function(_ProductOutOfStock value)? productOutOfStock,
+    TResult? Function(_PhotoPermissionFailed value)? photoPermissionFailed,
+    TResult? Function(_StoragePermissionFailed value)? storagePermissionFailed,
+    TResult? Function(_InvalidFileFormat value)? invalidFileFormat,
+    TResult? Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
+    TResult? Function(_ProductDetailRoute value)? productDetailRoute,
+    TResult? Function(_OrderDetailRoute value)? orderDetailRoute,
+    TResult? Function(_ReturnDetailRoute value)? returnDetailRoute,
+    TResult? Function(_PaymentDetailRoute value)? paymentDetailRoute,
+    TResult? Function(_InvoiceDetailRoute value)? invoiceDetailRoute,
+    TResult? Function(_LanguageChangeFail value)? languageChangeFail,
+    TResult? Function(_ScannedProductNotFound value)? scannedProductNotFound,
+    TResult? Function(_CameraPermissionFailed value)? cameraPermissionFailed,
+    TResult? Function(_UserNameNotFound value)? userNameNotFound,
+    TResult? Function(_AccountBlocked value)? accountBlocked,
+    TResult? Function(_UploadedFileSizeExceed value)? uploadedFileSizeExceed,
+    TResult? Function(_PaymentAdviceDeleteFailed value)?
+        paymentAdviceDeleteFailed,
+    TResult? Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult? Function(_MaximumCartQuantityExceed value)?
+        maximumCartQuantityExceed,
+    TResult? Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
+    TResult? Function(_ArticleannuncementTagFetchingError value)?
+        articleannuncementTagFetchingError,
+    TResult? Function(_AttachmentDownloadError value)? attachmentDownloadError,
+    TResult? Function(_OpenDownloadedFileError value)? openDownloadedFileError,
+    TResult? Function(_AddAnimalHealthWithNormalProductToCart value)?
+        addAnimalHealthWithNormalProductToCart,
+    TResult? Function(_MissingzzHtmcs value)? missingzzHtmcs,
+    TResult? Function(_StockInfoNotAvailable value)? stockInfoNotAvailable,
+    TResult? Function(_AccountCreationIncomplete value)?
+        accountCreationIncomplete,
+  }) {
+    return accountBlocked?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Other value)? other,
+    TResult Function(_ServerError value)? serverError,
+    TResult Function(_PoorConnection value)? poorConnection,
+    TResult Function(_ServerTimeout value)? serverTimeout,
+    TResult Function(_UserNotFound value)? userNotFound,
+    TResult Function(_MarketPlaceTnCAcceptanceError value)?
+        marketplaceTnCAcceptanceError,
+    TResult Function(_InvalidEmailAndPasswordCombination value)?
+        invalidEmailAndPasswordCombination,
+    TResult Function(_AccountLocked value)? accountLocked,
+    TResult Function(_AccountExpired value)? accountExpired,
+    TResult Function(_TokenExpired value)? tokenExpired,
+    TResult Function(_AuthenticationFailed value)? authenticationFailed,
+    TResult Function(_ProxyLoginRolePermissionNotMatch value)?
+        proxyLoginRolePermissionNotMatch,
+    TResult Function(_ProxyLoginZPTargetRoleNotMatch value)?
+        proxyLoginZPTargetRoleNotMatch,
+    TResult Function(_ProxyLoginZPSalesOrgNotMatch value)?
+        proxyLoginZPSalesOrgNotMatch,
+    TResult Function(_PasswordResetFail value)? passwordResetFail,
+    TResult Function(_DeviceNotSupportBiometric value)?
+        deviceNotSupportBiometric,
+    TResult Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
+    TResult Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
+    TResult Function(_InvalidBiometric value)? invalidBiometric,
+    TResult Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
+    TResult Function(_ProductOutOfStock value)? productOutOfStock,
+    TResult Function(_PhotoPermissionFailed value)? photoPermissionFailed,
+    TResult Function(_StoragePermissionFailed value)? storagePermissionFailed,
+    TResult Function(_InvalidFileFormat value)? invalidFileFormat,
+    TResult Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
+    TResult Function(_ProductDetailRoute value)? productDetailRoute,
+    TResult Function(_OrderDetailRoute value)? orderDetailRoute,
+    TResult Function(_ReturnDetailRoute value)? returnDetailRoute,
+    TResult Function(_PaymentDetailRoute value)? paymentDetailRoute,
+    TResult Function(_InvoiceDetailRoute value)? invoiceDetailRoute,
+    TResult Function(_LanguageChangeFail value)? languageChangeFail,
+    TResult Function(_ScannedProductNotFound value)? scannedProductNotFound,
+    TResult Function(_CameraPermissionFailed value)? cameraPermissionFailed,
+    TResult Function(_UserNameNotFound value)? userNameNotFound,
+    TResult Function(_AccountBlocked value)? accountBlocked,
+    TResult Function(_UploadedFileSizeExceed value)? uploadedFileSizeExceed,
+    TResult Function(_PaymentAdviceDeleteFailed value)?
+        paymentAdviceDeleteFailed,
+    TResult Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult Function(_MaximumCartQuantityExceed value)?
+        maximumCartQuantityExceed,
+    TResult Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
+    TResult Function(_ArticleannuncementTagFetchingError value)?
+        articleannuncementTagFetchingError,
+    TResult Function(_AttachmentDownloadError value)? attachmentDownloadError,
+    TResult Function(_OpenDownloadedFileError value)? openDownloadedFileError,
+    TResult Function(_AddAnimalHealthWithNormalProductToCart value)?
+        addAnimalHealthWithNormalProductToCart,
+    TResult Function(_MissingzzHtmcs value)? missingzzHtmcs,
+    TResult Function(_StockInfoNotAvailable value)? stockInfoNotAvailable,
+    TResult Function(_AccountCreationIncomplete value)?
+        accountCreationIncomplete,
+    required TResult orElse(),
+  }) {
+    if (accountBlocked != null) {
+      return accountBlocked(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _AccountBlocked implements ApiFailure {
+  const factory _AccountBlocked() = _$AccountBlockedImpl;
 }
 
 /// @nodoc
@@ -14648,6 +15277,7 @@ class _$UploadedFileSizeExceedImpl implements _UploadedFileSizeExceed {
     required TResult Function() scannedProductNotFound,
     required TResult Function(bool permanentlyDenied) cameraPermissionFailed,
     required TResult Function() userNameNotFound,
+    required TResult Function() accountBlocked,
     required TResult Function() uploadedFileSizeExceed,
     required TResult Function(String adviceNumber) paymentAdviceDeleteFailed,
     required TResult Function() allReorderItemInvalid,
@@ -14701,6 +15331,7 @@ class _$UploadedFileSizeExceedImpl implements _UploadedFileSizeExceed {
     TResult? Function()? scannedProductNotFound,
     TResult? Function(bool permanentlyDenied)? cameraPermissionFailed,
     TResult? Function()? userNameNotFound,
+    TResult? Function()? accountBlocked,
     TResult? Function()? uploadedFileSizeExceed,
     TResult? Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult? Function()? allReorderItemInvalid,
@@ -14754,6 +15385,7 @@ class _$UploadedFileSizeExceedImpl implements _UploadedFileSizeExceed {
     TResult Function()? scannedProductNotFound,
     TResult Function(bool permanentlyDenied)? cameraPermissionFailed,
     TResult Function()? userNameNotFound,
+    TResult Function()? accountBlocked,
     TResult Function()? uploadedFileSizeExceed,
     TResult Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult Function()? allReorderItemInvalid,
@@ -14825,6 +15457,7 @@ class _$UploadedFileSizeExceedImpl implements _UploadedFileSizeExceed {
     required TResult Function(_CameraPermissionFailed value)
         cameraPermissionFailed,
     required TResult Function(_UserNameNotFound value) userNameNotFound,
+    required TResult Function(_AccountBlocked value) accountBlocked,
     required TResult Function(_UploadedFileSizeExceed value)
         uploadedFileSizeExceed,
     required TResult Function(_PaymentAdviceDeleteFailed value)
@@ -14895,6 +15528,7 @@ class _$UploadedFileSizeExceedImpl implements _UploadedFileSizeExceed {
     TResult? Function(_ScannedProductNotFound value)? scannedProductNotFound,
     TResult? Function(_CameraPermissionFailed value)? cameraPermissionFailed,
     TResult? Function(_UserNameNotFound value)? userNameNotFound,
+    TResult? Function(_AccountBlocked value)? accountBlocked,
     TResult? Function(_UploadedFileSizeExceed value)? uploadedFileSizeExceed,
     TResult? Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
@@ -14959,6 +15593,7 @@ class _$UploadedFileSizeExceedImpl implements _UploadedFileSizeExceed {
     TResult Function(_ScannedProductNotFound value)? scannedProductNotFound,
     TResult Function(_CameraPermissionFailed value)? cameraPermissionFailed,
     TResult Function(_UserNameNotFound value)? userNameNotFound,
+    TResult Function(_AccountBlocked value)? accountBlocked,
     TResult Function(_UploadedFileSizeExceed value)? uploadedFileSizeExceed,
     TResult Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
@@ -15091,6 +15726,7 @@ class _$PaymentAdviceDeleteFailedImpl implements _PaymentAdviceDeleteFailed {
     required TResult Function() scannedProductNotFound,
     required TResult Function(bool permanentlyDenied) cameraPermissionFailed,
     required TResult Function() userNameNotFound,
+    required TResult Function() accountBlocked,
     required TResult Function() uploadedFileSizeExceed,
     required TResult Function(String adviceNumber) paymentAdviceDeleteFailed,
     required TResult Function() allReorderItemInvalid,
@@ -15144,6 +15780,7 @@ class _$PaymentAdviceDeleteFailedImpl implements _PaymentAdviceDeleteFailed {
     TResult? Function()? scannedProductNotFound,
     TResult? Function(bool permanentlyDenied)? cameraPermissionFailed,
     TResult? Function()? userNameNotFound,
+    TResult? Function()? accountBlocked,
     TResult? Function()? uploadedFileSizeExceed,
     TResult? Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult? Function()? allReorderItemInvalid,
@@ -15197,6 +15834,7 @@ class _$PaymentAdviceDeleteFailedImpl implements _PaymentAdviceDeleteFailed {
     TResult Function()? scannedProductNotFound,
     TResult Function(bool permanentlyDenied)? cameraPermissionFailed,
     TResult Function()? userNameNotFound,
+    TResult Function()? accountBlocked,
     TResult Function()? uploadedFileSizeExceed,
     TResult Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult Function()? allReorderItemInvalid,
@@ -15268,6 +15906,7 @@ class _$PaymentAdviceDeleteFailedImpl implements _PaymentAdviceDeleteFailed {
     required TResult Function(_CameraPermissionFailed value)
         cameraPermissionFailed,
     required TResult Function(_UserNameNotFound value) userNameNotFound,
+    required TResult Function(_AccountBlocked value) accountBlocked,
     required TResult Function(_UploadedFileSizeExceed value)
         uploadedFileSizeExceed,
     required TResult Function(_PaymentAdviceDeleteFailed value)
@@ -15338,6 +15977,7 @@ class _$PaymentAdviceDeleteFailedImpl implements _PaymentAdviceDeleteFailed {
     TResult? Function(_ScannedProductNotFound value)? scannedProductNotFound,
     TResult? Function(_CameraPermissionFailed value)? cameraPermissionFailed,
     TResult? Function(_UserNameNotFound value)? userNameNotFound,
+    TResult? Function(_AccountBlocked value)? accountBlocked,
     TResult? Function(_UploadedFileSizeExceed value)? uploadedFileSizeExceed,
     TResult? Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
@@ -15402,6 +16042,7 @@ class _$PaymentAdviceDeleteFailedImpl implements _PaymentAdviceDeleteFailed {
     TResult Function(_ScannedProductNotFound value)? scannedProductNotFound,
     TResult Function(_CameraPermissionFailed value)? cameraPermissionFailed,
     TResult Function(_UserNameNotFound value)? userNameNotFound,
+    TResult Function(_AccountBlocked value)? accountBlocked,
     TResult Function(_UploadedFileSizeExceed value)? uploadedFileSizeExceed,
     TResult Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
@@ -15512,6 +16153,7 @@ class _$AllReorderItemInvalidImpl implements _AllReorderItemInvalid {
     required TResult Function() scannedProductNotFound,
     required TResult Function(bool permanentlyDenied) cameraPermissionFailed,
     required TResult Function() userNameNotFound,
+    required TResult Function() accountBlocked,
     required TResult Function() uploadedFileSizeExceed,
     required TResult Function(String adviceNumber) paymentAdviceDeleteFailed,
     required TResult Function() allReorderItemInvalid,
@@ -15565,6 +16207,7 @@ class _$AllReorderItemInvalidImpl implements _AllReorderItemInvalid {
     TResult? Function()? scannedProductNotFound,
     TResult? Function(bool permanentlyDenied)? cameraPermissionFailed,
     TResult? Function()? userNameNotFound,
+    TResult? Function()? accountBlocked,
     TResult? Function()? uploadedFileSizeExceed,
     TResult? Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult? Function()? allReorderItemInvalid,
@@ -15618,6 +16261,7 @@ class _$AllReorderItemInvalidImpl implements _AllReorderItemInvalid {
     TResult Function()? scannedProductNotFound,
     TResult Function(bool permanentlyDenied)? cameraPermissionFailed,
     TResult Function()? userNameNotFound,
+    TResult Function()? accountBlocked,
     TResult Function()? uploadedFileSizeExceed,
     TResult Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult Function()? allReorderItemInvalid,
@@ -15689,6 +16333,7 @@ class _$AllReorderItemInvalidImpl implements _AllReorderItemInvalid {
     required TResult Function(_CameraPermissionFailed value)
         cameraPermissionFailed,
     required TResult Function(_UserNameNotFound value) userNameNotFound,
+    required TResult Function(_AccountBlocked value) accountBlocked,
     required TResult Function(_UploadedFileSizeExceed value)
         uploadedFileSizeExceed,
     required TResult Function(_PaymentAdviceDeleteFailed value)
@@ -15759,6 +16404,7 @@ class _$AllReorderItemInvalidImpl implements _AllReorderItemInvalid {
     TResult? Function(_ScannedProductNotFound value)? scannedProductNotFound,
     TResult? Function(_CameraPermissionFailed value)? cameraPermissionFailed,
     TResult? Function(_UserNameNotFound value)? userNameNotFound,
+    TResult? Function(_AccountBlocked value)? accountBlocked,
     TResult? Function(_UploadedFileSizeExceed value)? uploadedFileSizeExceed,
     TResult? Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
@@ -15823,6 +16469,7 @@ class _$AllReorderItemInvalidImpl implements _AllReorderItemInvalid {
     TResult Function(_ScannedProductNotFound value)? scannedProductNotFound,
     TResult Function(_CameraPermissionFailed value)? cameraPermissionFailed,
     TResult Function(_UserNameNotFound value)? userNameNotFound,
+    TResult Function(_AccountBlocked value)? accountBlocked,
     TResult Function(_UploadedFileSizeExceed value)? uploadedFileSizeExceed,
     TResult Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
@@ -15955,6 +16602,7 @@ class _$MaximumCartQuantityExceedImpl implements _MaximumCartQuantityExceed {
     required TResult Function() scannedProductNotFound,
     required TResult Function(bool permanentlyDenied) cameraPermissionFailed,
     required TResult Function() userNameNotFound,
+    required TResult Function() accountBlocked,
     required TResult Function() uploadedFileSizeExceed,
     required TResult Function(String adviceNumber) paymentAdviceDeleteFailed,
     required TResult Function() allReorderItemInvalid,
@@ -16008,6 +16656,7 @@ class _$MaximumCartQuantityExceedImpl implements _MaximumCartQuantityExceed {
     TResult? Function()? scannedProductNotFound,
     TResult? Function(bool permanentlyDenied)? cameraPermissionFailed,
     TResult? Function()? userNameNotFound,
+    TResult? Function()? accountBlocked,
     TResult? Function()? uploadedFileSizeExceed,
     TResult? Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult? Function()? allReorderItemInvalid,
@@ -16061,6 +16710,7 @@ class _$MaximumCartQuantityExceedImpl implements _MaximumCartQuantityExceed {
     TResult Function()? scannedProductNotFound,
     TResult Function(bool permanentlyDenied)? cameraPermissionFailed,
     TResult Function()? userNameNotFound,
+    TResult Function()? accountBlocked,
     TResult Function()? uploadedFileSizeExceed,
     TResult Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult Function()? allReorderItemInvalid,
@@ -16132,6 +16782,7 @@ class _$MaximumCartQuantityExceedImpl implements _MaximumCartQuantityExceed {
     required TResult Function(_CameraPermissionFailed value)
         cameraPermissionFailed,
     required TResult Function(_UserNameNotFound value) userNameNotFound,
+    required TResult Function(_AccountBlocked value) accountBlocked,
     required TResult Function(_UploadedFileSizeExceed value)
         uploadedFileSizeExceed,
     required TResult Function(_PaymentAdviceDeleteFailed value)
@@ -16202,6 +16853,7 @@ class _$MaximumCartQuantityExceedImpl implements _MaximumCartQuantityExceed {
     TResult? Function(_ScannedProductNotFound value)? scannedProductNotFound,
     TResult? Function(_CameraPermissionFailed value)? cameraPermissionFailed,
     TResult? Function(_UserNameNotFound value)? userNameNotFound,
+    TResult? Function(_AccountBlocked value)? accountBlocked,
     TResult? Function(_UploadedFileSizeExceed value)? uploadedFileSizeExceed,
     TResult? Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
@@ -16266,6 +16918,7 @@ class _$MaximumCartQuantityExceedImpl implements _MaximumCartQuantityExceed {
     TResult Function(_ScannedProductNotFound value)? scannedProductNotFound,
     TResult Function(_CameraPermissionFailed value)? cameraPermissionFailed,
     TResult Function(_UserNameNotFound value)? userNameNotFound,
+    TResult Function(_AccountBlocked value)? accountBlocked,
     TResult Function(_UploadedFileSizeExceed value)? uploadedFileSizeExceed,
     TResult Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
@@ -16377,6 +17030,7 @@ class _$CartHasDifferentAddressImpl implements _CartHasDifferentAddress {
     required TResult Function() scannedProductNotFound,
     required TResult Function(bool permanentlyDenied) cameraPermissionFailed,
     required TResult Function() userNameNotFound,
+    required TResult Function() accountBlocked,
     required TResult Function() uploadedFileSizeExceed,
     required TResult Function(String adviceNumber) paymentAdviceDeleteFailed,
     required TResult Function() allReorderItemInvalid,
@@ -16430,6 +17084,7 @@ class _$CartHasDifferentAddressImpl implements _CartHasDifferentAddress {
     TResult? Function()? scannedProductNotFound,
     TResult? Function(bool permanentlyDenied)? cameraPermissionFailed,
     TResult? Function()? userNameNotFound,
+    TResult? Function()? accountBlocked,
     TResult? Function()? uploadedFileSizeExceed,
     TResult? Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult? Function()? allReorderItemInvalid,
@@ -16483,6 +17138,7 @@ class _$CartHasDifferentAddressImpl implements _CartHasDifferentAddress {
     TResult Function()? scannedProductNotFound,
     TResult Function(bool permanentlyDenied)? cameraPermissionFailed,
     TResult Function()? userNameNotFound,
+    TResult Function()? accountBlocked,
     TResult Function()? uploadedFileSizeExceed,
     TResult Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult Function()? allReorderItemInvalid,
@@ -16554,6 +17210,7 @@ class _$CartHasDifferentAddressImpl implements _CartHasDifferentAddress {
     required TResult Function(_CameraPermissionFailed value)
         cameraPermissionFailed,
     required TResult Function(_UserNameNotFound value) userNameNotFound,
+    required TResult Function(_AccountBlocked value) accountBlocked,
     required TResult Function(_UploadedFileSizeExceed value)
         uploadedFileSizeExceed,
     required TResult Function(_PaymentAdviceDeleteFailed value)
@@ -16624,6 +17281,7 @@ class _$CartHasDifferentAddressImpl implements _CartHasDifferentAddress {
     TResult? Function(_ScannedProductNotFound value)? scannedProductNotFound,
     TResult? Function(_CameraPermissionFailed value)? cameraPermissionFailed,
     TResult? Function(_UserNameNotFound value)? userNameNotFound,
+    TResult? Function(_AccountBlocked value)? accountBlocked,
     TResult? Function(_UploadedFileSizeExceed value)? uploadedFileSizeExceed,
     TResult? Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
@@ -16688,6 +17346,7 @@ class _$CartHasDifferentAddressImpl implements _CartHasDifferentAddress {
     TResult Function(_ScannedProductNotFound value)? scannedProductNotFound,
     TResult Function(_CameraPermissionFailed value)? cameraPermissionFailed,
     TResult Function(_UserNameNotFound value)? userNameNotFound,
+    TResult Function(_AccountBlocked value)? accountBlocked,
     TResult Function(_UploadedFileSizeExceed value)? uploadedFileSizeExceed,
     TResult Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
@@ -16795,6 +17454,7 @@ class _$ArticleannuncementTagFetchingErrorImpl
     required TResult Function() scannedProductNotFound,
     required TResult Function(bool permanentlyDenied) cameraPermissionFailed,
     required TResult Function() userNameNotFound,
+    required TResult Function() accountBlocked,
     required TResult Function() uploadedFileSizeExceed,
     required TResult Function(String adviceNumber) paymentAdviceDeleteFailed,
     required TResult Function() allReorderItemInvalid,
@@ -16848,6 +17508,7 @@ class _$ArticleannuncementTagFetchingErrorImpl
     TResult? Function()? scannedProductNotFound,
     TResult? Function(bool permanentlyDenied)? cameraPermissionFailed,
     TResult? Function()? userNameNotFound,
+    TResult? Function()? accountBlocked,
     TResult? Function()? uploadedFileSizeExceed,
     TResult? Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult? Function()? allReorderItemInvalid,
@@ -16901,6 +17562,7 @@ class _$ArticleannuncementTagFetchingErrorImpl
     TResult Function()? scannedProductNotFound,
     TResult Function(bool permanentlyDenied)? cameraPermissionFailed,
     TResult Function()? userNameNotFound,
+    TResult Function()? accountBlocked,
     TResult Function()? uploadedFileSizeExceed,
     TResult Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult Function()? allReorderItemInvalid,
@@ -16972,6 +17634,7 @@ class _$ArticleannuncementTagFetchingErrorImpl
     required TResult Function(_CameraPermissionFailed value)
         cameraPermissionFailed,
     required TResult Function(_UserNameNotFound value) userNameNotFound,
+    required TResult Function(_AccountBlocked value) accountBlocked,
     required TResult Function(_UploadedFileSizeExceed value)
         uploadedFileSizeExceed,
     required TResult Function(_PaymentAdviceDeleteFailed value)
@@ -17042,6 +17705,7 @@ class _$ArticleannuncementTagFetchingErrorImpl
     TResult? Function(_ScannedProductNotFound value)? scannedProductNotFound,
     TResult? Function(_CameraPermissionFailed value)? cameraPermissionFailed,
     TResult? Function(_UserNameNotFound value)? userNameNotFound,
+    TResult? Function(_AccountBlocked value)? accountBlocked,
     TResult? Function(_UploadedFileSizeExceed value)? uploadedFileSizeExceed,
     TResult? Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
@@ -17106,6 +17770,7 @@ class _$ArticleannuncementTagFetchingErrorImpl
     TResult Function(_ScannedProductNotFound value)? scannedProductNotFound,
     TResult Function(_CameraPermissionFailed value)? cameraPermissionFailed,
     TResult Function(_UserNameNotFound value)? userNameNotFound,
+    TResult Function(_AccountBlocked value)? accountBlocked,
     TResult Function(_UploadedFileSizeExceed value)? uploadedFileSizeExceed,
     TResult Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
@@ -17212,6 +17877,7 @@ class _$AttachmentDownloadErrorImpl implements _AttachmentDownloadError {
     required TResult Function() scannedProductNotFound,
     required TResult Function(bool permanentlyDenied) cameraPermissionFailed,
     required TResult Function() userNameNotFound,
+    required TResult Function() accountBlocked,
     required TResult Function() uploadedFileSizeExceed,
     required TResult Function(String adviceNumber) paymentAdviceDeleteFailed,
     required TResult Function() allReorderItemInvalid,
@@ -17265,6 +17931,7 @@ class _$AttachmentDownloadErrorImpl implements _AttachmentDownloadError {
     TResult? Function()? scannedProductNotFound,
     TResult? Function(bool permanentlyDenied)? cameraPermissionFailed,
     TResult? Function()? userNameNotFound,
+    TResult? Function()? accountBlocked,
     TResult? Function()? uploadedFileSizeExceed,
     TResult? Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult? Function()? allReorderItemInvalid,
@@ -17318,6 +17985,7 @@ class _$AttachmentDownloadErrorImpl implements _AttachmentDownloadError {
     TResult Function()? scannedProductNotFound,
     TResult Function(bool permanentlyDenied)? cameraPermissionFailed,
     TResult Function()? userNameNotFound,
+    TResult Function()? accountBlocked,
     TResult Function()? uploadedFileSizeExceed,
     TResult Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult Function()? allReorderItemInvalid,
@@ -17389,6 +18057,7 @@ class _$AttachmentDownloadErrorImpl implements _AttachmentDownloadError {
     required TResult Function(_CameraPermissionFailed value)
         cameraPermissionFailed,
     required TResult Function(_UserNameNotFound value) userNameNotFound,
+    required TResult Function(_AccountBlocked value) accountBlocked,
     required TResult Function(_UploadedFileSizeExceed value)
         uploadedFileSizeExceed,
     required TResult Function(_PaymentAdviceDeleteFailed value)
@@ -17459,6 +18128,7 @@ class _$AttachmentDownloadErrorImpl implements _AttachmentDownloadError {
     TResult? Function(_ScannedProductNotFound value)? scannedProductNotFound,
     TResult? Function(_CameraPermissionFailed value)? cameraPermissionFailed,
     TResult? Function(_UserNameNotFound value)? userNameNotFound,
+    TResult? Function(_AccountBlocked value)? accountBlocked,
     TResult? Function(_UploadedFileSizeExceed value)? uploadedFileSizeExceed,
     TResult? Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
@@ -17523,6 +18193,7 @@ class _$AttachmentDownloadErrorImpl implements _AttachmentDownloadError {
     TResult Function(_ScannedProductNotFound value)? scannedProductNotFound,
     TResult Function(_CameraPermissionFailed value)? cameraPermissionFailed,
     TResult Function(_UserNameNotFound value)? userNameNotFound,
+    TResult Function(_AccountBlocked value)? accountBlocked,
     TResult Function(_UploadedFileSizeExceed value)? uploadedFileSizeExceed,
     TResult Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
@@ -17654,6 +18325,7 @@ class _$OpenDownloadedFileErrorImpl implements _OpenDownloadedFileError {
     required TResult Function() scannedProductNotFound,
     required TResult Function(bool permanentlyDenied) cameraPermissionFailed,
     required TResult Function() userNameNotFound,
+    required TResult Function() accountBlocked,
     required TResult Function() uploadedFileSizeExceed,
     required TResult Function(String adviceNumber) paymentAdviceDeleteFailed,
     required TResult Function() allReorderItemInvalid,
@@ -17707,6 +18379,7 @@ class _$OpenDownloadedFileErrorImpl implements _OpenDownloadedFileError {
     TResult? Function()? scannedProductNotFound,
     TResult? Function(bool permanentlyDenied)? cameraPermissionFailed,
     TResult? Function()? userNameNotFound,
+    TResult? Function()? accountBlocked,
     TResult? Function()? uploadedFileSizeExceed,
     TResult? Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult? Function()? allReorderItemInvalid,
@@ -17760,6 +18433,7 @@ class _$OpenDownloadedFileErrorImpl implements _OpenDownloadedFileError {
     TResult Function()? scannedProductNotFound,
     TResult Function(bool permanentlyDenied)? cameraPermissionFailed,
     TResult Function()? userNameNotFound,
+    TResult Function()? accountBlocked,
     TResult Function()? uploadedFileSizeExceed,
     TResult Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult Function()? allReorderItemInvalid,
@@ -17831,6 +18505,7 @@ class _$OpenDownloadedFileErrorImpl implements _OpenDownloadedFileError {
     required TResult Function(_CameraPermissionFailed value)
         cameraPermissionFailed,
     required TResult Function(_UserNameNotFound value) userNameNotFound,
+    required TResult Function(_AccountBlocked value) accountBlocked,
     required TResult Function(_UploadedFileSizeExceed value)
         uploadedFileSizeExceed,
     required TResult Function(_PaymentAdviceDeleteFailed value)
@@ -17901,6 +18576,7 @@ class _$OpenDownloadedFileErrorImpl implements _OpenDownloadedFileError {
     TResult? Function(_ScannedProductNotFound value)? scannedProductNotFound,
     TResult? Function(_CameraPermissionFailed value)? cameraPermissionFailed,
     TResult? Function(_UserNameNotFound value)? userNameNotFound,
+    TResult? Function(_AccountBlocked value)? accountBlocked,
     TResult? Function(_UploadedFileSizeExceed value)? uploadedFileSizeExceed,
     TResult? Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
@@ -17965,6 +18641,7 @@ class _$OpenDownloadedFileErrorImpl implements _OpenDownloadedFileError {
     TResult Function(_ScannedProductNotFound value)? scannedProductNotFound,
     TResult Function(_CameraPermissionFailed value)? cameraPermissionFailed,
     TResult Function(_UserNameNotFound value)? userNameNotFound,
+    TResult Function(_AccountBlocked value)? accountBlocked,
     TResult Function(_UploadedFileSizeExceed value)? uploadedFileSizeExceed,
     TResult Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
@@ -18078,6 +18755,7 @@ class _$AddAnimalHealthWithNormalProductToCartImpl
     required TResult Function() scannedProductNotFound,
     required TResult Function(bool permanentlyDenied) cameraPermissionFailed,
     required TResult Function() userNameNotFound,
+    required TResult Function() accountBlocked,
     required TResult Function() uploadedFileSizeExceed,
     required TResult Function(String adviceNumber) paymentAdviceDeleteFailed,
     required TResult Function() allReorderItemInvalid,
@@ -18131,6 +18809,7 @@ class _$AddAnimalHealthWithNormalProductToCartImpl
     TResult? Function()? scannedProductNotFound,
     TResult? Function(bool permanentlyDenied)? cameraPermissionFailed,
     TResult? Function()? userNameNotFound,
+    TResult? Function()? accountBlocked,
     TResult? Function()? uploadedFileSizeExceed,
     TResult? Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult? Function()? allReorderItemInvalid,
@@ -18184,6 +18863,7 @@ class _$AddAnimalHealthWithNormalProductToCartImpl
     TResult Function()? scannedProductNotFound,
     TResult Function(bool permanentlyDenied)? cameraPermissionFailed,
     TResult Function()? userNameNotFound,
+    TResult Function()? accountBlocked,
     TResult Function()? uploadedFileSizeExceed,
     TResult Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult Function()? allReorderItemInvalid,
@@ -18255,6 +18935,7 @@ class _$AddAnimalHealthWithNormalProductToCartImpl
     required TResult Function(_CameraPermissionFailed value)
         cameraPermissionFailed,
     required TResult Function(_UserNameNotFound value) userNameNotFound,
+    required TResult Function(_AccountBlocked value) accountBlocked,
     required TResult Function(_UploadedFileSizeExceed value)
         uploadedFileSizeExceed,
     required TResult Function(_PaymentAdviceDeleteFailed value)
@@ -18325,6 +19006,7 @@ class _$AddAnimalHealthWithNormalProductToCartImpl
     TResult? Function(_ScannedProductNotFound value)? scannedProductNotFound,
     TResult? Function(_CameraPermissionFailed value)? cameraPermissionFailed,
     TResult? Function(_UserNameNotFound value)? userNameNotFound,
+    TResult? Function(_AccountBlocked value)? accountBlocked,
     TResult? Function(_UploadedFileSizeExceed value)? uploadedFileSizeExceed,
     TResult? Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
@@ -18389,6 +19071,7 @@ class _$AddAnimalHealthWithNormalProductToCartImpl
     TResult Function(_ScannedProductNotFound value)? scannedProductNotFound,
     TResult Function(_CameraPermissionFailed value)? cameraPermissionFailed,
     TResult Function(_UserNameNotFound value)? userNameNotFound,
+    TResult Function(_AccountBlocked value)? accountBlocked,
     TResult Function(_UploadedFileSizeExceed value)? uploadedFileSizeExceed,
     TResult Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
@@ -18492,6 +19175,7 @@ class _$MissingzzHtmcsImpl implements _MissingzzHtmcs {
     required TResult Function() scannedProductNotFound,
     required TResult Function(bool permanentlyDenied) cameraPermissionFailed,
     required TResult Function() userNameNotFound,
+    required TResult Function() accountBlocked,
     required TResult Function() uploadedFileSizeExceed,
     required TResult Function(String adviceNumber) paymentAdviceDeleteFailed,
     required TResult Function() allReorderItemInvalid,
@@ -18545,6 +19229,7 @@ class _$MissingzzHtmcsImpl implements _MissingzzHtmcs {
     TResult? Function()? scannedProductNotFound,
     TResult? Function(bool permanentlyDenied)? cameraPermissionFailed,
     TResult? Function()? userNameNotFound,
+    TResult? Function()? accountBlocked,
     TResult? Function()? uploadedFileSizeExceed,
     TResult? Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult? Function()? allReorderItemInvalid,
@@ -18598,6 +19283,7 @@ class _$MissingzzHtmcsImpl implements _MissingzzHtmcs {
     TResult Function()? scannedProductNotFound,
     TResult Function(bool permanentlyDenied)? cameraPermissionFailed,
     TResult Function()? userNameNotFound,
+    TResult Function()? accountBlocked,
     TResult Function()? uploadedFileSizeExceed,
     TResult Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult Function()? allReorderItemInvalid,
@@ -18669,6 +19355,7 @@ class _$MissingzzHtmcsImpl implements _MissingzzHtmcs {
     required TResult Function(_CameraPermissionFailed value)
         cameraPermissionFailed,
     required TResult Function(_UserNameNotFound value) userNameNotFound,
+    required TResult Function(_AccountBlocked value) accountBlocked,
     required TResult Function(_UploadedFileSizeExceed value)
         uploadedFileSizeExceed,
     required TResult Function(_PaymentAdviceDeleteFailed value)
@@ -18739,6 +19426,7 @@ class _$MissingzzHtmcsImpl implements _MissingzzHtmcs {
     TResult? Function(_ScannedProductNotFound value)? scannedProductNotFound,
     TResult? Function(_CameraPermissionFailed value)? cameraPermissionFailed,
     TResult? Function(_UserNameNotFound value)? userNameNotFound,
+    TResult? Function(_AccountBlocked value)? accountBlocked,
     TResult? Function(_UploadedFileSizeExceed value)? uploadedFileSizeExceed,
     TResult? Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
@@ -18803,6 +19491,7 @@ class _$MissingzzHtmcsImpl implements _MissingzzHtmcs {
     TResult Function(_ScannedProductNotFound value)? scannedProductNotFound,
     TResult Function(_CameraPermissionFailed value)? cameraPermissionFailed,
     TResult Function(_UserNameNotFound value)? userNameNotFound,
+    TResult Function(_AccountBlocked value)? accountBlocked,
     TResult Function(_UploadedFileSizeExceed value)? uploadedFileSizeExceed,
     TResult Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
@@ -18907,6 +19596,7 @@ class _$StockInfoNotAvailableImpl implements _StockInfoNotAvailable {
     required TResult Function() scannedProductNotFound,
     required TResult Function(bool permanentlyDenied) cameraPermissionFailed,
     required TResult Function() userNameNotFound,
+    required TResult Function() accountBlocked,
     required TResult Function() uploadedFileSizeExceed,
     required TResult Function(String adviceNumber) paymentAdviceDeleteFailed,
     required TResult Function() allReorderItemInvalid,
@@ -18960,6 +19650,7 @@ class _$StockInfoNotAvailableImpl implements _StockInfoNotAvailable {
     TResult? Function()? scannedProductNotFound,
     TResult? Function(bool permanentlyDenied)? cameraPermissionFailed,
     TResult? Function()? userNameNotFound,
+    TResult? Function()? accountBlocked,
     TResult? Function()? uploadedFileSizeExceed,
     TResult? Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult? Function()? allReorderItemInvalid,
@@ -19013,6 +19704,7 @@ class _$StockInfoNotAvailableImpl implements _StockInfoNotAvailable {
     TResult Function()? scannedProductNotFound,
     TResult Function(bool permanentlyDenied)? cameraPermissionFailed,
     TResult Function()? userNameNotFound,
+    TResult Function()? accountBlocked,
     TResult Function()? uploadedFileSizeExceed,
     TResult Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult Function()? allReorderItemInvalid,
@@ -19084,6 +19776,7 @@ class _$StockInfoNotAvailableImpl implements _StockInfoNotAvailable {
     required TResult Function(_CameraPermissionFailed value)
         cameraPermissionFailed,
     required TResult Function(_UserNameNotFound value) userNameNotFound,
+    required TResult Function(_AccountBlocked value) accountBlocked,
     required TResult Function(_UploadedFileSizeExceed value)
         uploadedFileSizeExceed,
     required TResult Function(_PaymentAdviceDeleteFailed value)
@@ -19154,6 +19847,7 @@ class _$StockInfoNotAvailableImpl implements _StockInfoNotAvailable {
     TResult? Function(_ScannedProductNotFound value)? scannedProductNotFound,
     TResult? Function(_CameraPermissionFailed value)? cameraPermissionFailed,
     TResult? Function(_UserNameNotFound value)? userNameNotFound,
+    TResult? Function(_AccountBlocked value)? accountBlocked,
     TResult? Function(_UploadedFileSizeExceed value)? uploadedFileSizeExceed,
     TResult? Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
@@ -19218,6 +19912,7 @@ class _$StockInfoNotAvailableImpl implements _StockInfoNotAvailable {
     TResult Function(_ScannedProductNotFound value)? scannedProductNotFound,
     TResult Function(_CameraPermissionFailed value)? cameraPermissionFailed,
     TResult Function(_UserNameNotFound value)? userNameNotFound,
+    TResult Function(_AccountBlocked value)? accountBlocked,
     TResult Function(_UploadedFileSizeExceed value)? uploadedFileSizeExceed,
     TResult Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
@@ -19323,6 +20018,7 @@ class _$AccountCreationIncompleteImpl implements _AccountCreationIncomplete {
     required TResult Function() scannedProductNotFound,
     required TResult Function(bool permanentlyDenied) cameraPermissionFailed,
     required TResult Function() userNameNotFound,
+    required TResult Function() accountBlocked,
     required TResult Function() uploadedFileSizeExceed,
     required TResult Function(String adviceNumber) paymentAdviceDeleteFailed,
     required TResult Function() allReorderItemInvalid,
@@ -19376,6 +20072,7 @@ class _$AccountCreationIncompleteImpl implements _AccountCreationIncomplete {
     TResult? Function()? scannedProductNotFound,
     TResult? Function(bool permanentlyDenied)? cameraPermissionFailed,
     TResult? Function()? userNameNotFound,
+    TResult? Function()? accountBlocked,
     TResult? Function()? uploadedFileSizeExceed,
     TResult? Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult? Function()? allReorderItemInvalid,
@@ -19429,6 +20126,7 @@ class _$AccountCreationIncompleteImpl implements _AccountCreationIncomplete {
     TResult Function()? scannedProductNotFound,
     TResult Function(bool permanentlyDenied)? cameraPermissionFailed,
     TResult Function()? userNameNotFound,
+    TResult Function()? accountBlocked,
     TResult Function()? uploadedFileSizeExceed,
     TResult Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult Function()? allReorderItemInvalid,
@@ -19500,6 +20198,7 @@ class _$AccountCreationIncompleteImpl implements _AccountCreationIncomplete {
     required TResult Function(_CameraPermissionFailed value)
         cameraPermissionFailed,
     required TResult Function(_UserNameNotFound value) userNameNotFound,
+    required TResult Function(_AccountBlocked value) accountBlocked,
     required TResult Function(_UploadedFileSizeExceed value)
         uploadedFileSizeExceed,
     required TResult Function(_PaymentAdviceDeleteFailed value)
@@ -19570,6 +20269,7 @@ class _$AccountCreationIncompleteImpl implements _AccountCreationIncomplete {
     TResult? Function(_ScannedProductNotFound value)? scannedProductNotFound,
     TResult? Function(_CameraPermissionFailed value)? cameraPermissionFailed,
     TResult? Function(_UserNameNotFound value)? userNameNotFound,
+    TResult? Function(_AccountBlocked value)? accountBlocked,
     TResult? Function(_UploadedFileSizeExceed value)? uploadedFileSizeExceed,
     TResult? Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
@@ -19634,6 +20334,7 @@ class _$AccountCreationIncompleteImpl implements _AccountCreationIncomplete {
     TResult Function(_ScannedProductNotFound value)? scannedProductNotFound,
     TResult Function(_CameraPermissionFailed value)? cameraPermissionFailed,
     TResult Function(_UserNameNotFound value)? userNameNotFound,
+    TResult Function(_AccountBlocked value)? accountBlocked,
     TResult Function(_UploadedFileSizeExceed value)? uploadedFileSizeExceed,
     TResult Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,

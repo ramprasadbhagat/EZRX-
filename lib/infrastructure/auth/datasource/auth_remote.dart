@@ -146,14 +146,25 @@ class AuthRemoteDataSource {
         code: res.statusCode ?? 0,
         message: res.statusMessage ?? '',
       );
-    } else if (dataSourceExceptionHandler.isServerResponseError(res: res)) {
+    }
+
+    if (dataSourceExceptionHandler.isServerResponseError(res: res)) {
       throw ServerException(message: res.data['errors'][0]['message']);
-    } else if (res.data['data'][jsonKey]['authenticated'] == false &&
-        (!isProxyLogin)) {
-      throw const AuthException.invalidEmailAndPasswordCombination();
-    } else if (res.data['data'][jsonKey]['isAccountLocked'] == true) {
+    }
+
+    final jsonData = res.data['data'][jsonKey];
+
+    if (jsonData['authenticated'] == false) {
+      throw isProxyLogin
+          ? const AuthException.accountBlocked()
+          : const AuthException.invalidEmailAndPasswordCombination();
+    }
+
+    if (jsonData['isAccountLocked'] == true) {
       throw const AuthException.accountLocked();
-    } else if (res.data['data'][jsonKey]['isAccountExpired'] == true) {
+    }
+
+    if (jsonData['isAccountExpired'] == true) {
       throw const AuthException.accountExpired();
     }
   }

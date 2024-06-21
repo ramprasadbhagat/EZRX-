@@ -20,6 +20,7 @@ class FailureHandler {
         accountLocked: (_) => const ApiFailure.accountLocked(),
         accountExpired: (_) => const ApiFailure.accountExpired(),
         invalidUserName: (_) => const ApiFailure.userNameNotFound(),
+        accountBlocked: (_) => const ApiFailure.accountBlocked(),
       );
     } else if (error is UserException) {
       return error.map(
