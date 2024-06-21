@@ -6,9 +6,9 @@ part of 'submit_order_response_dto.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_SubmitOrderResponseDto _$$_SubmitOrderResponseDtoFromJson(
+_$SubmitOrderResponseDtoImpl _$$SubmitOrderResponseDtoImplFromJson(
         Map<String, dynamic> json) =>
-    _$_SubmitOrderResponseDto(
+    _$SubmitOrderResponseDtoImpl(
       salesDocument: json['SalesDocument'] as String? ?? '',
       salesDocuments: (json['SalesDocuments'] as List<dynamic>?)
               ?.map((e) => e as String)
@@ -21,8 +21,8 @@ _$_SubmitOrderResponseDto _$$_SubmitOrderResponseDtoFromJson(
           [],
     );
 
-Map<String, dynamic> _$$_SubmitOrderResponseDtoToJson(
-        _$_SubmitOrderResponseDto instance) =>
+Map<String, dynamic> _$$SubmitOrderResponseDtoImplToJson(
+        _$SubmitOrderResponseDtoImpl instance) =>
     <String, dynamic>{
       'SalesDocument': instance.salesDocument,
       'SalesDocuments': instance.salesDocuments,

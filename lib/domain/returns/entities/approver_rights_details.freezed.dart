@@ -12,7 +12,7 @@ part of 'approver_rights_details.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$ApproverRightsDetails {
@@ -122,11 +122,12 @@ class _$ApproverRightsDetailsCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_ApproverRightsDetailsCopyWith<$Res>
+abstract class _$$ApproverRightsDetailsImplCopyWith<$Res>
     implements $ApproverRightsDetailsCopyWith<$Res> {
-  factory _$$_ApproverRightsDetailsCopyWith(_$_ApproverRightsDetails value,
-          $Res Function(_$_ApproverRightsDetails) then) =
-      __$$_ApproverRightsDetailsCopyWithImpl<$Res>;
+  factory _$$ApproverRightsDetailsImplCopyWith(
+          _$ApproverRightsDetailsImpl value,
+          $Res Function(_$ApproverRightsDetailsImpl) then) =
+      __$$ApproverRightsDetailsImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -143,11 +144,12 @@ abstract class _$$_ApproverRightsDetailsCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_ApproverRightsDetailsCopyWithImpl<$Res>
-    extends _$ApproverRightsDetailsCopyWithImpl<$Res, _$_ApproverRightsDetails>
-    implements _$$_ApproverRightsDetailsCopyWith<$Res> {
-  __$$_ApproverRightsDetailsCopyWithImpl(_$_ApproverRightsDetails _value,
-      $Res Function(_$_ApproverRightsDetails) _then)
+class __$$ApproverRightsDetailsImplCopyWithImpl<$Res>
+    extends _$ApproverRightsDetailsCopyWithImpl<$Res,
+        _$ApproverRightsDetailsImpl>
+    implements _$$ApproverRightsDetailsImplCopyWith<$Res> {
+  __$$ApproverRightsDetailsImplCopyWithImpl(_$ApproverRightsDetailsImpl _value,
+      $Res Function(_$ApproverRightsDetailsImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -164,7 +166,7 @@ class __$$_ApproverRightsDetailsCopyWithImpl<$Res>
     Object? materialNumber = null,
     Object? uuid = null,
   }) {
-    return _then(_$_ApproverRightsDetails(
+    return _then(_$ApproverRightsDetailsImpl(
       salesOrg: null == salesOrg
           ? _value.salesOrg
           : salesOrg // ignore: cast_nullable_to_non_nullable
@@ -211,8 +213,8 @@ class __$$_ApproverRightsDetailsCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_ApproverRightsDetails extends _ApproverRightsDetails {
-  const _$_ApproverRightsDetails(
+class _$ApproverRightsDetailsImpl extends _ApproverRightsDetails {
+  const _$ApproverRightsDetailsImpl(
       {required this.salesOrg,
       required this.principal,
       required this.industryCode1,
@@ -252,10 +254,10 @@ class _$_ApproverRightsDetails extends _ApproverRightsDetails {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ApproverRightsDetails &&
+            other is _$ApproverRightsDetailsImpl &&
             (identical(other.salesOrg, salesOrg) ||
                 other.salesOrg == salesOrg) &&
             (identical(other.principal, principal) ||
@@ -293,9 +295,9 @@ class _$_ApproverRightsDetails extends _ApproverRightsDetails {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ApproverRightsDetailsCopyWith<_$_ApproverRightsDetails> get copyWith =>
-      __$$_ApproverRightsDetailsCopyWithImpl<_$_ApproverRightsDetails>(
-          this, _$identity);
+  _$$ApproverRightsDetailsImplCopyWith<_$ApproverRightsDetailsImpl>
+      get copyWith => __$$ApproverRightsDetailsImplCopyWithImpl<
+          _$ApproverRightsDetailsImpl>(this, _$identity);
 }
 
 abstract class _ApproverRightsDetails extends ApproverRightsDetails {
@@ -309,7 +311,7 @@ abstract class _ApproverRightsDetails extends ApproverRightsDetails {
       required final String industryCode5,
       required final String plant,
       required final MaterialNumber materialNumber,
-      required final String uuid}) = _$_ApproverRightsDetails;
+      required final String uuid}) = _$ApproverRightsDetailsImpl;
   const _ApproverRightsDetails._() : super._();
 
   @override
@@ -334,6 +336,6 @@ abstract class _ApproverRightsDetails extends ApproverRightsDetails {
   String get uuid;
   @override
   @JsonKey(ignore: true)
-  _$$_ApproverRightsDetailsCopyWith<_$_ApproverRightsDetails> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$ApproverRightsDetailsImplCopyWith<_$ApproverRightsDetailsImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }

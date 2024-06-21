@@ -12,7 +12,7 @@ part of 'apl_simulator_order_dto.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 AplSimulatorOrderDto _$AplSimulatorOrderDtoFromJson(Map<String, dynamic> json) {
   return _AplSimulatorOrderDto.fromJson(json);
@@ -111,11 +111,11 @@ class _$AplSimulatorOrderDtoCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_AplSimulatorOrderDtoCopyWith<$Res>
+abstract class _$$AplSimulatorOrderDtoImplCopyWith<$Res>
     implements $AplSimulatorOrderDtoCopyWith<$Res> {
-  factory _$$_AplSimulatorOrderDtoCopyWith(_$_AplSimulatorOrderDto value,
-          $Res Function(_$_AplSimulatorOrderDto) then) =
-      __$$_AplSimulatorOrderDtoCopyWithImpl<$Res>;
+  factory _$$AplSimulatorOrderDtoImplCopyWith(_$AplSimulatorOrderDtoImpl value,
+          $Res Function(_$AplSimulatorOrderDtoImpl) then) =
+      __$$AplSimulatorOrderDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -130,11 +130,11 @@ abstract class _$$_AplSimulatorOrderDtoCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_AplSimulatorOrderDtoCopyWithImpl<$Res>
-    extends _$AplSimulatorOrderDtoCopyWithImpl<$Res, _$_AplSimulatorOrderDto>
-    implements _$$_AplSimulatorOrderDtoCopyWith<$Res> {
-  __$$_AplSimulatorOrderDtoCopyWithImpl(_$_AplSimulatorOrderDto _value,
-      $Res Function(_$_AplSimulatorOrderDto) _then)
+class __$$AplSimulatorOrderDtoImplCopyWithImpl<$Res>
+    extends _$AplSimulatorOrderDtoCopyWithImpl<$Res, _$AplSimulatorOrderDtoImpl>
+    implements _$$AplSimulatorOrderDtoImplCopyWith<$Res> {
+  __$$AplSimulatorOrderDtoImplCopyWithImpl(_$AplSimulatorOrderDtoImpl _value,
+      $Res Function(_$AplSimulatorOrderDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -147,7 +147,7 @@ class __$$_AplSimulatorOrderDtoCopyWithImpl<$Res>
     Object? totalDiscountValue = null,
     Object? aplProductList = null,
   }) {
-    return _then(_$_AplSimulatorOrderDto(
+    return _then(_$AplSimulatorOrderDtoImpl(
       totalPriceWithoutTax: null == totalPriceWithoutTax
           ? _value.totalPriceWithoutTax
           : totalPriceWithoutTax // ignore: cast_nullable_to_non_nullable
@@ -178,8 +178,8 @@ class __$$_AplSimulatorOrderDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_AplSimulatorOrderDto extends _AplSimulatorOrderDto {
-  const _$_AplSimulatorOrderDto(
+class _$AplSimulatorOrderDtoImpl extends _AplSimulatorOrderDto {
+  const _$AplSimulatorOrderDtoImpl(
       {@JsonKey(name: 'beforeTax', defaultValue: 0)
       required this.totalPriceWithoutTax,
       @JsonKey(name: 'deliveryFee', defaultValue: 0)
@@ -193,8 +193,8 @@ class _$_AplSimulatorOrderDto extends _AplSimulatorOrderDto {
       : _aplProductList = aplProductList,
         super._();
 
-  factory _$_AplSimulatorOrderDto.fromJson(Map<String, dynamic> json) =>
-      _$$_AplSimulatorOrderDtoFromJson(json);
+  factory _$AplSimulatorOrderDtoImpl.fromJson(Map<String, dynamic> json) =>
+      _$$AplSimulatorOrderDtoImplFromJson(json);
 
   @override
   @JsonKey(name: 'beforeTax', defaultValue: 0)
@@ -232,10 +232,10 @@ class _$_AplSimulatorOrderDto extends _AplSimulatorOrderDto {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_AplSimulatorOrderDto &&
+            other is _$AplSimulatorOrderDtoImpl &&
             (identical(other.totalPriceWithoutTax, totalPriceWithoutTax) ||
                 other.totalPriceWithoutTax == totalPriceWithoutTax) &&
             (identical(other.smallOrderFee, smallOrderFee) ||
@@ -264,13 +264,14 @@ class _$_AplSimulatorOrderDto extends _AplSimulatorOrderDto {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_AplSimulatorOrderDtoCopyWith<_$_AplSimulatorOrderDto> get copyWith =>
-      __$$_AplSimulatorOrderDtoCopyWithImpl<_$_AplSimulatorOrderDto>(
-          this, _$identity);
+  _$$AplSimulatorOrderDtoImplCopyWith<_$AplSimulatorOrderDtoImpl>
+      get copyWith =>
+          __$$AplSimulatorOrderDtoImplCopyWithImpl<_$AplSimulatorOrderDtoImpl>(
+              this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_AplSimulatorOrderDtoToJson(
+    return _$$AplSimulatorOrderDtoImplToJson(
       this,
     );
   }
@@ -289,11 +290,11 @@ abstract class _AplSimulatorOrderDto extends AplSimulatorOrderDto {
           required final double totalDiscountValue,
           @JsonKey(name: 'products', defaultValue: <AplProductDto>[])
           required final List<AplProductDto> aplProductList}) =
-      _$_AplSimulatorOrderDto;
+      _$AplSimulatorOrderDtoImpl;
   const _AplSimulatorOrderDto._() : super._();
 
   factory _AplSimulatorOrderDto.fromJson(Map<String, dynamic> json) =
-      _$_AplSimulatorOrderDto.fromJson;
+      _$AplSimulatorOrderDtoImpl.fromJson;
 
   @override
   @JsonKey(name: 'beforeTax', defaultValue: 0)
@@ -315,6 +316,6 @@ abstract class _AplSimulatorOrderDto extends AplSimulatorOrderDto {
   List<AplProductDto> get aplProductList;
   @override
   @JsonKey(ignore: true)
-  _$$_AplSimulatorOrderDtoCopyWith<_$_AplSimulatorOrderDto> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$AplSimulatorOrderDtoImplCopyWith<_$AplSimulatorOrderDtoImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }

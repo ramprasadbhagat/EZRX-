@@ -12,7 +12,7 @@ part of 'order_document_type.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$OrderDocumentType {
@@ -86,11 +86,11 @@ class _$OrderDocumentTypeCopyWithImpl<$Res, $Val extends OrderDocumentType>
 }
 
 /// @nodoc
-abstract class _$$_OrderDocumentTypeCopyWith<$Res>
+abstract class _$$OrderDocumentTypeImplCopyWith<$Res>
     implements $OrderDocumentTypeCopyWith<$Res> {
-  factory _$$_OrderDocumentTypeCopyWith(_$_OrderDocumentType value,
-          $Res Function(_$_OrderDocumentType) then) =
-      __$$_OrderDocumentTypeCopyWithImpl<$Res>;
+  factory _$$OrderDocumentTypeImplCopyWith(_$OrderDocumentTypeImpl value,
+          $Res Function(_$OrderDocumentTypeImpl) then) =
+      __$$OrderDocumentTypeImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -102,11 +102,11 @@ abstract class _$$_OrderDocumentTypeCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_OrderDocumentTypeCopyWithImpl<$Res>
-    extends _$OrderDocumentTypeCopyWithImpl<$Res, _$_OrderDocumentType>
-    implements _$$_OrderDocumentTypeCopyWith<$Res> {
-  __$$_OrderDocumentTypeCopyWithImpl(
-      _$_OrderDocumentType _value, $Res Function(_$_OrderDocumentType) _then)
+class __$$OrderDocumentTypeImplCopyWithImpl<$Res>
+    extends _$OrderDocumentTypeCopyWithImpl<$Res, _$OrderDocumentTypeImpl>
+    implements _$$OrderDocumentTypeImplCopyWith<$Res> {
+  __$$OrderDocumentTypeImplCopyWithImpl(_$OrderDocumentTypeImpl _value,
+      $Res Function(_$OrderDocumentTypeImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -118,7 +118,7 @@ class __$$_OrderDocumentTypeCopyWithImpl<$Res>
     Object? shippingCondition = null,
     Object? orderReason = null,
   }) {
-    return _then(_$_OrderDocumentType(
+    return _then(_$OrderDocumentTypeImpl(
       salesOrg: null == salesOrg
           ? _value.salesOrg
           : salesOrg // ignore: cast_nullable_to_non_nullable
@@ -145,8 +145,8 @@ class __$$_OrderDocumentTypeCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_OrderDocumentType extends _OrderDocumentType {
-  const _$_OrderDocumentType(
+class _$OrderDocumentTypeImpl extends _OrderDocumentType {
+  const _$OrderDocumentTypeImpl(
       {required this.salesOrg,
       required this.documentType,
       required this.description,
@@ -171,10 +171,10 @@ class _$_OrderDocumentType extends _OrderDocumentType {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_OrderDocumentType &&
+            other is _$OrderDocumentTypeImpl &&
             (identical(other.salesOrg, salesOrg) ||
                 other.salesOrg == salesOrg) &&
             (identical(other.documentType, documentType) ||
@@ -194,8 +194,8 @@ class _$_OrderDocumentType extends _OrderDocumentType {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_OrderDocumentTypeCopyWith<_$_OrderDocumentType> get copyWith =>
-      __$$_OrderDocumentTypeCopyWithImpl<_$_OrderDocumentType>(
+  _$$OrderDocumentTypeImplCopyWith<_$OrderDocumentTypeImpl> get copyWith =>
+      __$$OrderDocumentTypeImplCopyWithImpl<_$OrderDocumentTypeImpl>(
           this, _$identity);
 }
 
@@ -205,7 +205,7 @@ abstract class _OrderDocumentType extends OrderDocumentType {
       required final DocumentType documentType,
       required final String description,
       required final String shippingCondition,
-      required final String orderReason}) = _$_OrderDocumentType;
+      required final String orderReason}) = _$OrderDocumentTypeImpl;
   const _OrderDocumentType._() : super._();
 
   @override
@@ -220,6 +220,6 @@ abstract class _OrderDocumentType extends OrderDocumentType {
   String get orderReason;
   @override
   @JsonKey(ignore: true)
-  _$$_OrderDocumentTypeCopyWith<_$_OrderDocumentType> get copyWith =>
+  _$$OrderDocumentTypeImplCopyWith<_$OrderDocumentTypeImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

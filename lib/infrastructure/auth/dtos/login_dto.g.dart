@@ -6,7 +6,8 @@ part of 'login_dto.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_LoginDto _$$_LoginDtoFromJson(Map<String, dynamic> json) => _$_LoginDto(
+_$LoginDtoImpl _$$LoginDtoImplFromJson(Map<String, dynamic> json) =>
+    _$LoginDtoImpl(
       access: _convertAccessToken(json, 'eZRxJWT') as String,
       refresh: _convertRefreshToken(json, 'eZRxRefreshJWT') as String,
       user: json['user'] == null
@@ -14,7 +15,7 @@ _$_LoginDto _$$_LoginDtoFromJson(Map<String, dynamic> json) => _$_LoginDto(
           : UserDto.fromJson(json['user'] as Map<String, dynamic>),
     );
 
-Map<String, dynamic> _$$_LoginDtoToJson(_$_LoginDto instance) =>
+Map<String, dynamic> _$$LoginDtoImplToJson(_$LoginDtoImpl instance) =>
     <String, dynamic>{
       'eZRxJWT': instance.access,
       'eZRxRefreshJWT': instance.refresh,

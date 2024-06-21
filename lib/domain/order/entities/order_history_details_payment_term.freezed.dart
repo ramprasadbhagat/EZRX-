@@ -12,7 +12,7 @@ part of 'order_history_details_payment_term.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$OrderHistoryDetailsPaymentTerm {
@@ -69,12 +69,12 @@ class _$OrderHistoryDetailsPaymentTermCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_OrderHistoryDetailsPaymentTermCopyWith<$Res>
+abstract class _$$OrderHistoryDetailsPaymentTermImplCopyWith<$Res>
     implements $OrderHistoryDetailsPaymentTermCopyWith<$Res> {
-  factory _$$_OrderHistoryDetailsPaymentTermCopyWith(
-          _$_OrderHistoryDetailsPaymentTerm value,
-          $Res Function(_$_OrderHistoryDetailsPaymentTerm) then) =
-      __$$_OrderHistoryDetailsPaymentTermCopyWithImpl<$Res>;
+  factory _$$OrderHistoryDetailsPaymentTermImplCopyWith(
+          _$OrderHistoryDetailsPaymentTermImpl value,
+          $Res Function(_$OrderHistoryDetailsPaymentTermImpl) then) =
+      __$$OrderHistoryDetailsPaymentTermImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -83,13 +83,13 @@ abstract class _$$_OrderHistoryDetailsPaymentTermCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_OrderHistoryDetailsPaymentTermCopyWithImpl<$Res>
+class __$$OrderHistoryDetailsPaymentTermImplCopyWithImpl<$Res>
     extends _$OrderHistoryDetailsPaymentTermCopyWithImpl<$Res,
-        _$_OrderHistoryDetailsPaymentTerm>
-    implements _$$_OrderHistoryDetailsPaymentTermCopyWith<$Res> {
-  __$$_OrderHistoryDetailsPaymentTermCopyWithImpl(
-      _$_OrderHistoryDetailsPaymentTerm _value,
-      $Res Function(_$_OrderHistoryDetailsPaymentTerm) _then)
+        _$OrderHistoryDetailsPaymentTermImpl>
+    implements _$$OrderHistoryDetailsPaymentTermImplCopyWith<$Res> {
+  __$$OrderHistoryDetailsPaymentTermImplCopyWithImpl(
+      _$OrderHistoryDetailsPaymentTermImpl _value,
+      $Res Function(_$OrderHistoryDetailsPaymentTermImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -98,7 +98,7 @@ class __$$_OrderHistoryDetailsPaymentTermCopyWithImpl<$Res>
     Object? paymentTermCode = null,
     Object? paymentTermDescription = null,
   }) {
-    return _then(_$_OrderHistoryDetailsPaymentTerm(
+    return _then(_$OrderHistoryDetailsPaymentTermImpl(
       paymentTermCode: null == paymentTermCode
           ? _value.paymentTermCode
           : paymentTermCode // ignore: cast_nullable_to_non_nullable
@@ -113,9 +113,9 @@ class __$$_OrderHistoryDetailsPaymentTermCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_OrderHistoryDetailsPaymentTerm
+class _$OrderHistoryDetailsPaymentTermImpl
     extends _OrderHistoryDetailsPaymentTerm {
-  _$_OrderHistoryDetailsPaymentTerm(
+  _$OrderHistoryDetailsPaymentTermImpl(
       {required this.paymentTermCode, required this.paymentTermDescription})
       : super._();
 
@@ -130,10 +130,10 @@ class _$_OrderHistoryDetailsPaymentTerm
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_OrderHistoryDetailsPaymentTerm &&
+            other is _$OrderHistoryDetailsPaymentTermImpl &&
             (identical(other.paymentTermCode, paymentTermCode) ||
                 other.paymentTermCode == paymentTermCode) &&
             (identical(other.paymentTermDescription, paymentTermDescription) ||
@@ -147,9 +147,10 @@ class _$_OrderHistoryDetailsPaymentTerm
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_OrderHistoryDetailsPaymentTermCopyWith<_$_OrderHistoryDetailsPaymentTerm>
-      get copyWith => __$$_OrderHistoryDetailsPaymentTermCopyWithImpl<
-          _$_OrderHistoryDetailsPaymentTerm>(this, _$identity);
+  _$$OrderHistoryDetailsPaymentTermImplCopyWith<
+          _$OrderHistoryDetailsPaymentTermImpl>
+      get copyWith => __$$OrderHistoryDetailsPaymentTermImplCopyWithImpl<
+          _$OrderHistoryDetailsPaymentTermImpl>(this, _$identity);
 }
 
 abstract class _OrderHistoryDetailsPaymentTerm
@@ -157,7 +158,7 @@ abstract class _OrderHistoryDetailsPaymentTerm
   factory _OrderHistoryDetailsPaymentTerm(
           {required final PaymentTermCode paymentTermCode,
           required final PaymentTermDescription paymentTermDescription}) =
-      _$_OrderHistoryDetailsPaymentTerm;
+      _$OrderHistoryDetailsPaymentTermImpl;
   _OrderHistoryDetailsPaymentTerm._() : super._();
 
   @override
@@ -166,6 +167,7 @@ abstract class _OrderHistoryDetailsPaymentTerm
   PaymentTermDescription get paymentTermDescription;
   @override
   @JsonKey(ignore: true)
-  _$$_OrderHistoryDetailsPaymentTermCopyWith<_$_OrderHistoryDetailsPaymentTerm>
+  _$$OrderHistoryDetailsPaymentTermImplCopyWith<
+          _$OrderHistoryDetailsPaymentTermImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

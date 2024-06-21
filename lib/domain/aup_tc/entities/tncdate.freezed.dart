@@ -12,7 +12,7 @@ part of 'tncdate.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$TncDate {
@@ -55,20 +55,21 @@ class _$TncDateCopyWithImpl<$Res, $Val extends TncDate>
 }
 
 /// @nodoc
-abstract class _$$_TncDateCopyWith<$Res> implements $TncDateCopyWith<$Res> {
-  factory _$$_TncDateCopyWith(
-          _$_TncDate value, $Res Function(_$_TncDate) then) =
-      __$$_TncDateCopyWithImpl<$Res>;
+abstract class _$$TncDateImplCopyWith<$Res> implements $TncDateCopyWith<$Res> {
+  factory _$$TncDateImplCopyWith(
+          _$TncDateImpl value, $Res Function(_$TncDateImpl) then) =
+      __$$TncDateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({DateTime date});
 }
 
 /// @nodoc
-class __$$_TncDateCopyWithImpl<$Res>
-    extends _$TncDateCopyWithImpl<$Res, _$_TncDate>
-    implements _$$_TncDateCopyWith<$Res> {
-  __$$_TncDateCopyWithImpl(_$_TncDate _value, $Res Function(_$_TncDate) _then)
+class __$$TncDateImplCopyWithImpl<$Res>
+    extends _$TncDateCopyWithImpl<$Res, _$TncDateImpl>
+    implements _$$TncDateImplCopyWith<$Res> {
+  __$$TncDateImplCopyWithImpl(
+      _$TncDateImpl _value, $Res Function(_$TncDateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -76,7 +77,7 @@ class __$$_TncDateCopyWithImpl<$Res>
   $Res call({
     Object? date = null,
   }) {
-    return _then(_$_TncDate(
+    return _then(_$TncDateImpl(
       date: null == date
           ? _value.date
           : date // ignore: cast_nullable_to_non_nullable
@@ -87,8 +88,8 @@ class __$$_TncDateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_TncDate extends _TncDate {
-  const _$_TncDate({required this.date}) : super._();
+class _$TncDateImpl extends _TncDate {
+  const _$TncDateImpl({required this.date}) : super._();
 
   @override
   final DateTime date;
@@ -99,10 +100,10 @@ class _$_TncDate extends _TncDate {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_TncDate &&
+            other is _$TncDateImpl &&
             (identical(other.date, date) || other.date == date));
   }
 
@@ -112,18 +113,18 @@ class _$_TncDate extends _TncDate {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_TncDateCopyWith<_$_TncDate> get copyWith =>
-      __$$_TncDateCopyWithImpl<_$_TncDate>(this, _$identity);
+  _$$TncDateImplCopyWith<_$TncDateImpl> get copyWith =>
+      __$$TncDateImplCopyWithImpl<_$TncDateImpl>(this, _$identity);
 }
 
 abstract class _TncDate extends TncDate {
-  const factory _TncDate({required final DateTime date}) = _$_TncDate;
+  const factory _TncDate({required final DateTime date}) = _$TncDateImpl;
   const _TncDate._() : super._();
 
   @override
   DateTime get date;
   @override
   @JsonKey(ignore: true)
-  _$$_TncDateCopyWith<_$_TncDate> get copyWith =>
+  _$$TncDateImplCopyWith<_$TncDateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

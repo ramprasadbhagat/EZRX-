@@ -6,9 +6,10 @@ part of 'update_sales_organisation_configs_dto.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_UpdateSalesOrganisationConfigsDto
-    _$$_UpdateSalesOrganisationConfigsDtoFromJson(Map<String, dynamic> json) =>
-        _$_UpdateSalesOrganisationConfigsDto(
+_$UpdateSalesOrganisationConfigsDtoImpl
+    _$$UpdateSalesOrganisationConfigsDtoImplFromJson(
+            Map<String, dynamic> json) =>
+        _$UpdateSalesOrganisationConfigsDtoImpl(
           salesOrg: json['salesOrgCode'] as String? ?? '0',
           poNumberRequired: json['ponRequired'] as bool? ?? false,
           priceOverride: json['priceOverride'] as bool? ?? false,
@@ -38,12 +39,13 @@ _$_UpdateSalesOrganisationConfigsDto
               json['enableTaxAtTotalLevelOnly'] as bool? ?? false,
           enableGreenDelivery: json['enableGreenDelivery'] as bool? ?? false,
           greenDeliveryDelayInDays:
-              json['greenDeliveryDelayInDays'] as int? ?? 2,
-          greenDeliveryUserRole: json['greenDeliveryUserRole'] as int? ?? 0,
+              (json['greenDeliveryDelayInDays'] as num?)?.toInt() ?? 2,
+          greenDeliveryUserRole:
+              (json['greenDeliveryUserRole'] as num?)?.toInt() ?? 0,
           minOrderAmount: json['minOrderAmount'] as String? ?? '0',
           hideCustomer: json['hideCustomer'] as bool? ?? false,
           disableOrderType: json['disableOrderType'] as bool? ?? false,
-          vatValue: json['vatValue'] as int? ?? 0,
+          vatValue: (json['vatValue'] as num?)?.toInt() ?? 0,
           enableSpecialInstructions:
               json['enableSpecialInstructions'] as bool? ?? false,
           enableReferenceNote: json['enableReferenceNote'] as bool? ?? false,
@@ -57,14 +59,14 @@ _$_UpdateSalesOrganisationConfigsDto
           enableBillTo: json['enableBillTo'] as bool? ?? false,
           enableOHPrice: json['enableOHPrice'] as bool? ?? true,
           addOosMaterials: json['addOosMaterials'] as bool? ?? false,
-          oosValue: json['oosValue'] as int? ?? 0,
+          oosValue: (json['oosValue'] as num?)?.toInt() ?? 0,
           enableRemarks: json['enableRemarks'] as bool? ?? false,
           enableTaxDisplay: json['enableTaxDisplay'] as bool? ?? false,
           enableGMN: json['enableGMN'] as bool? ?? false,
         );
 
-Map<String, dynamic> _$$_UpdateSalesOrganisationConfigsDtoToJson(
-        _$_UpdateSalesOrganisationConfigsDto instance) =>
+Map<String, dynamic> _$$UpdateSalesOrganisationConfigsDtoImplToJson(
+        _$UpdateSalesOrganisationConfigsDtoImpl instance) =>
     <String, dynamic>{
       'salesOrgCode': instance.salesOrg,
       'ponRequired': instance.poNumberRequired,

@@ -6,12 +6,12 @@ part of 'sales_org_id_dto.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_SalesOrgIdDto _$$_SalesOrgIdDtoFromJson(Map<String, dynamic> json) =>
-    _$_SalesOrgIdDto(
-      id: json['id'] as int,
+_$SalesOrgIdDtoImpl _$$SalesOrgIdDtoImplFromJson(Map<String, dynamic> json) =>
+    _$SalesOrgIdDtoImpl(
+      id: (json['id'] as num).toInt(),
     );
 
-Map<String, dynamic> _$$_SalesOrgIdDtoToJson(_$_SalesOrgIdDto instance) =>
+Map<String, dynamic> _$$SalesOrgIdDtoImplToJson(_$SalesOrgIdDtoImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
     };

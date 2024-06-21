@@ -12,7 +12,7 @@ part of 'banner_bloc.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$BannerEvent {
@@ -99,25 +99,25 @@ class _$BannerEventCopyWithImpl<$Res, $Val extends BannerEvent>
 }
 
 /// @nodoc
-abstract class _$$_InitializedCopyWith<$Res> {
-  factory _$$_InitializedCopyWith(
-          _$_Initialized value, $Res Function(_$_Initialized) then) =
-      __$$_InitializedCopyWithImpl<$Res>;
+abstract class _$$InitializedImplCopyWith<$Res> {
+  factory _$$InitializedImplCopyWith(
+          _$InitializedImpl value, $Res Function(_$InitializedImpl) then) =
+      __$$InitializedImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_InitializedCopyWithImpl<$Res>
-    extends _$BannerEventCopyWithImpl<$Res, _$_Initialized>
-    implements _$$_InitializedCopyWith<$Res> {
-  __$$_InitializedCopyWithImpl(
-      _$_Initialized _value, $Res Function(_$_Initialized) _then)
+class __$$InitializedImplCopyWithImpl<$Res>
+    extends _$BannerEventCopyWithImpl<$Res, _$InitializedImpl>
+    implements _$$InitializedImplCopyWith<$Res> {
+  __$$InitializedImplCopyWithImpl(
+      _$InitializedImpl _value, $Res Function(_$InitializedImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_Initialized implements _Initialized {
-  const _$_Initialized();
+class _$InitializedImpl implements _Initialized {
+  const _$InitializedImpl();
 
   @override
   String toString() {
@@ -125,9 +125,9 @@ class _$_Initialized implements _Initialized {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_Initialized);
+        (other.runtimeType == runtimeType && other is _$InitializedImpl);
   }
 
   @override
@@ -221,13 +221,14 @@ class _$_Initialized implements _Initialized {
 }
 
 abstract class _Initialized implements BannerEvent {
-  const factory _Initialized() = _$_Initialized;
+  const factory _Initialized() = _$InitializedImpl;
 }
 
 /// @nodoc
-abstract class _$$_FetchCopyWith<$Res> {
-  factory _$$_FetchCopyWith(_$_Fetch value, $Res Function(_$_Fetch) then) =
-      __$$_FetchCopyWithImpl<$Res>;
+abstract class _$$FetchImplCopyWith<$Res> {
+  factory _$$FetchImplCopyWith(
+          _$FetchImpl value, $Res Function(_$FetchImpl) then) =
+      __$$FetchImplCopyWithImpl<$Res>;
   @useResult
   $Res call(
       {bool isPreSalesOrg,
@@ -242,10 +243,11 @@ abstract class _$$_FetchCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_FetchCopyWithImpl<$Res>
-    extends _$BannerEventCopyWithImpl<$Res, _$_Fetch>
-    implements _$$_FetchCopyWith<$Res> {
-  __$$_FetchCopyWithImpl(_$_Fetch _value, $Res Function(_$_Fetch) _then)
+class __$$FetchImplCopyWithImpl<$Res>
+    extends _$BannerEventCopyWithImpl<$Res, _$FetchImpl>
+    implements _$$FetchImplCopyWith<$Res> {
+  __$$FetchImplCopyWithImpl(
+      _$FetchImpl _value, $Res Function(_$FetchImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -259,7 +261,7 @@ class __$$_FetchCopyWithImpl<$Res>
     Object? branchCode = null,
     Object? targetCustomerType = null,
   }) {
-    return _then(_$_Fetch(
+    return _then(_$FetchImpl(
       isPreSalesOrg: null == isPreSalesOrg
           ? _value.isPreSalesOrg
           : isPreSalesOrg // ignore: cast_nullable_to_non_nullable
@@ -302,8 +304,8 @@ class __$$_FetchCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_Fetch implements _Fetch {
-  const _$_Fetch(
+class _$FetchImpl implements _Fetch {
+  const _$FetchImpl(
       {required this.isPreSalesOrg,
       required this.salesOrganisation,
       required this.country,
@@ -333,10 +335,10 @@ class _$_Fetch implements _Fetch {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Fetch &&
+            other is _$FetchImpl &&
             (identical(other.isPreSalesOrg, isPreSalesOrg) ||
                 other.isPreSalesOrg == isPreSalesOrg) &&
             (identical(other.salesOrganisation, salesOrganisation) ||
@@ -358,8 +360,8 @@ class _$_Fetch implements _Fetch {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_FetchCopyWith<_$_Fetch> get copyWith =>
-      __$$_FetchCopyWithImpl<_$_Fetch>(this, _$identity);
+  _$$FetchImplCopyWith<_$FetchImpl> get copyWith =>
+      __$$FetchImplCopyWithImpl<_$FetchImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -459,7 +461,7 @@ abstract class _Fetch implements BannerEvent {
       required final String role,
       required final String bannerType,
       required final String branchCode,
-      required final String targetCustomerType}) = _$_Fetch;
+      required final String targetCustomerType}) = _$FetchImpl;
 
   bool get isPreSalesOrg;
   SalesOrganisation get salesOrganisation;
@@ -469,7 +471,7 @@ abstract class _Fetch implements BannerEvent {
   String get branchCode;
   String get targetCustomerType;
   @JsonKey(ignore: true)
-  _$$_FetchCopyWith<_$_Fetch> get copyWith =>
+  _$$FetchImplCopyWith<_$FetchImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -532,11 +534,11 @@ class _$BannerStateCopyWithImpl<$Res, $Val extends BannerState>
 }
 
 /// @nodoc
-abstract class _$$_BannerStateCopyWith<$Res>
+abstract class _$$BannerStateImplCopyWith<$Res>
     implements $BannerStateCopyWith<$Res> {
-  factory _$$_BannerStateCopyWith(
-          _$_BannerState value, $Res Function(_$_BannerState) then) =
-      __$$_BannerStateCopyWithImpl<$Res>;
+  factory _$$BannerStateImplCopyWith(
+          _$BannerStateImpl value, $Res Function(_$BannerStateImpl) then) =
+      __$$BannerStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -546,11 +548,11 @@ abstract class _$$_BannerStateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_BannerStateCopyWithImpl<$Res>
-    extends _$BannerStateCopyWithImpl<$Res, _$_BannerState>
-    implements _$$_BannerStateCopyWith<$Res> {
-  __$$_BannerStateCopyWithImpl(
-      _$_BannerState _value, $Res Function(_$_BannerState) _then)
+class __$$BannerStateImplCopyWithImpl<$Res>
+    extends _$BannerStateCopyWithImpl<$Res, _$BannerStateImpl>
+    implements _$$BannerStateImplCopyWith<$Res> {
+  __$$BannerStateImplCopyWithImpl(
+      _$BannerStateImpl _value, $Res Function(_$BannerStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -560,7 +562,7 @@ class __$$_BannerStateCopyWithImpl<$Res>
     Object? bannerFailureOrSuccessOption = null,
     Object? isLoading = null,
   }) {
-    return _then(_$_BannerState(
+    return _then(_$BannerStateImpl(
       banner: null == banner
           ? _value._banner
           : banner // ignore: cast_nullable_to_non_nullable
@@ -579,8 +581,8 @@ class __$$_BannerStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_BannerState implements _BannerState {
-  const _$_BannerState(
+class _$BannerStateImpl implements _BannerState {
+  const _$BannerStateImpl(
       {required final List<EZReachBanner> banner,
       required this.bannerFailureOrSuccessOption,
       required this.isLoading})
@@ -605,10 +607,10 @@ class _$_BannerState implements _BannerState {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_BannerState &&
+            other is _$BannerStateImpl &&
             const DeepCollectionEquality().equals(other._banner, _banner) &&
             (identical(other.bannerFailureOrSuccessOption,
                     bannerFailureOrSuccessOption) ||
@@ -628,8 +630,8 @@ class _$_BannerState implements _BannerState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_BannerStateCopyWith<_$_BannerState> get copyWith =>
-      __$$_BannerStateCopyWithImpl<_$_BannerState>(this, _$identity);
+  _$$BannerStateImplCopyWith<_$BannerStateImpl> get copyWith =>
+      __$$BannerStateImplCopyWithImpl<_$BannerStateImpl>(this, _$identity);
 }
 
 abstract class _BannerState implements BannerState {
@@ -637,7 +639,7 @@ abstract class _BannerState implements BannerState {
       {required final List<EZReachBanner> banner,
       required final Option<Either<ApiFailure, dynamic>>
           bannerFailureOrSuccessOption,
-      required final bool isLoading}) = _$_BannerState;
+      required final bool isLoading}) = _$BannerStateImpl;
 
   @override
   List<EZReachBanner> get banner;
@@ -647,6 +649,6 @@ abstract class _BannerState implements BannerState {
   bool get isLoading;
   @override
   @JsonKey(ignore: true)
-  _$$_BannerStateCopyWith<_$_BannerState> get copyWith =>
+  _$$BannerStateImplCopyWith<_$BannerStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

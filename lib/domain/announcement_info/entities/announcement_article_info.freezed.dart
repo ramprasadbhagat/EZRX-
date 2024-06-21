@@ -12,7 +12,7 @@ part of 'announcement_article_info.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$AnnouncementArticleInfo {
@@ -74,11 +74,12 @@ class _$AnnouncementArticleInfoCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_AnnouncementArticleInfoCopyWith<$Res>
+abstract class _$$AnnouncementArticleInfoImplCopyWith<$Res>
     implements $AnnouncementArticleInfoCopyWith<$Res> {
-  factory _$$_AnnouncementArticleInfoCopyWith(_$_AnnouncementArticleInfo value,
-          $Res Function(_$_AnnouncementArticleInfo) then) =
-      __$$_AnnouncementArticleInfoCopyWithImpl<$Res>;
+  factory _$$AnnouncementArticleInfoImplCopyWith(
+          _$AnnouncementArticleInfoImpl value,
+          $Res Function(_$AnnouncementArticleInfoImpl) then) =
+      __$$AnnouncementArticleInfoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -88,12 +89,13 @@ abstract class _$$_AnnouncementArticleInfoCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_AnnouncementArticleInfoCopyWithImpl<$Res>
+class __$$AnnouncementArticleInfoImplCopyWithImpl<$Res>
     extends _$AnnouncementArticleInfoCopyWithImpl<$Res,
-        _$_AnnouncementArticleInfo>
-    implements _$$_AnnouncementArticleInfoCopyWith<$Res> {
-  __$$_AnnouncementArticleInfoCopyWithImpl(_$_AnnouncementArticleInfo _value,
-      $Res Function(_$_AnnouncementArticleInfo) _then)
+        _$AnnouncementArticleInfoImpl>
+    implements _$$AnnouncementArticleInfoImplCopyWith<$Res> {
+  __$$AnnouncementArticleInfoImplCopyWithImpl(
+      _$AnnouncementArticleInfoImpl _value,
+      $Res Function(_$AnnouncementArticleInfoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -103,7 +105,7 @@ class __$$_AnnouncementArticleInfoCopyWithImpl<$Res>
     Object? endCursor = null,
     Object? announcementList = null,
   }) {
-    return _then(_$_AnnouncementArticleInfo(
+    return _then(_$AnnouncementArticleInfoImpl(
       total: null == total
           ? _value.total
           : total // ignore: cast_nullable_to_non_nullable
@@ -122,8 +124,8 @@ class __$$_AnnouncementArticleInfoCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_AnnouncementArticleInfo extends _AnnouncementArticleInfo {
-  const _$_AnnouncementArticleInfo(
+class _$AnnouncementArticleInfoImpl extends _AnnouncementArticleInfo {
+  const _$AnnouncementArticleInfoImpl(
       {required this.total,
       required this.endCursor,
       required final List<AnnouncementArticleItem> announcementList})
@@ -149,10 +151,10 @@ class _$_AnnouncementArticleInfo extends _AnnouncementArticleInfo {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_AnnouncementArticleInfo &&
+            other is _$AnnouncementArticleInfoImpl &&
             (identical(other.total, total) || other.total == total) &&
             (identical(other.endCursor, endCursor) ||
                 other.endCursor == endCursor) &&
@@ -167,10 +169,9 @@ class _$_AnnouncementArticleInfo extends _AnnouncementArticleInfo {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_AnnouncementArticleInfoCopyWith<_$_AnnouncementArticleInfo>
-      get copyWith =>
-          __$$_AnnouncementArticleInfoCopyWithImpl<_$_AnnouncementArticleInfo>(
-              this, _$identity);
+  _$$AnnouncementArticleInfoImplCopyWith<_$AnnouncementArticleInfoImpl>
+      get copyWith => __$$AnnouncementArticleInfoImplCopyWithImpl<
+          _$AnnouncementArticleInfoImpl>(this, _$identity);
 }
 
 abstract class _AnnouncementArticleInfo extends AnnouncementArticleInfo {
@@ -178,7 +179,7 @@ abstract class _AnnouncementArticleInfo extends AnnouncementArticleInfo {
           {required final int total,
           required final String endCursor,
           required final List<AnnouncementArticleItem> announcementList}) =
-      _$_AnnouncementArticleInfo;
+      _$AnnouncementArticleInfoImpl;
   const _AnnouncementArticleInfo._() : super._();
 
   @override
@@ -189,7 +190,7 @@ abstract class _AnnouncementArticleInfo extends AnnouncementArticleInfo {
   List<AnnouncementArticleItem> get announcementList;
   @override
   @JsonKey(ignore: true)
-  _$$_AnnouncementArticleInfoCopyWith<_$_AnnouncementArticleInfo>
+  _$$AnnouncementArticleInfoImplCopyWith<_$AnnouncementArticleInfoImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -322,11 +323,12 @@ class _$AnnouncementArticleItemCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_AnnouncementArticleItemCopyWith<$Res>
+abstract class _$$AnnouncementArticleItemImplCopyWith<$Res>
     implements $AnnouncementArticleItemCopyWith<$Res> {
-  factory _$$_AnnouncementArticleItemCopyWith(_$_AnnouncementArticleItem value,
-          $Res Function(_$_AnnouncementArticleItem) then) =
-      __$$_AnnouncementArticleItemCopyWithImpl<$Res>;
+  factory _$$AnnouncementArticleItemImplCopyWith(
+          _$AnnouncementArticleItemImpl value,
+          $Res Function(_$AnnouncementArticleItemImpl) then) =
+      __$$AnnouncementArticleItemImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -346,12 +348,13 @@ abstract class _$$_AnnouncementArticleItemCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_AnnouncementArticleItemCopyWithImpl<$Res>
+class __$$AnnouncementArticleItemImplCopyWithImpl<$Res>
     extends _$AnnouncementArticleItemCopyWithImpl<$Res,
-        _$_AnnouncementArticleItem>
-    implements _$$_AnnouncementArticleItemCopyWith<$Res> {
-  __$$_AnnouncementArticleItemCopyWithImpl(_$_AnnouncementArticleItem _value,
-      $Res Function(_$_AnnouncementArticleItem) _then)
+        _$AnnouncementArticleItemImpl>
+    implements _$$AnnouncementArticleItemImplCopyWith<$Res> {
+  __$$AnnouncementArticleItemImplCopyWithImpl(
+      _$AnnouncementArticleItemImpl _value,
+      $Res Function(_$AnnouncementArticleItemImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -371,7 +374,7 @@ class __$$_AnnouncementArticleItemCopyWithImpl<$Res>
     Object? documents = null,
     Object? pinToTop = null,
   }) {
-    return _then(_$_AnnouncementArticleItem(
+    return _then(_$AnnouncementArticleItemImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -430,8 +433,8 @@ class __$$_AnnouncementArticleItemCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_AnnouncementArticleItem extends _AnnouncementArticleItem {
-  const _$_AnnouncementArticleItem(
+class _$AnnouncementArticleItemImpl extends _AnnouncementArticleItem {
+  const _$AnnouncementArticleItemImpl(
       {required this.id,
       required this.title,
       required this.summary,
@@ -501,10 +504,10 @@ class _$_AnnouncementArticleItem extends _AnnouncementArticleItem {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_AnnouncementArticleItem &&
+            other is _$AnnouncementArticleItemImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.title, title) || other.title == title) &&
             (identical(other.summary, summary) || other.summary == summary) &&
@@ -547,10 +550,9 @@ class _$_AnnouncementArticleItem extends _AnnouncementArticleItem {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_AnnouncementArticleItemCopyWith<_$_AnnouncementArticleItem>
-      get copyWith =>
-          __$$_AnnouncementArticleItemCopyWithImpl<_$_AnnouncementArticleItem>(
-              this, _$identity);
+  _$$AnnouncementArticleItemImplCopyWith<_$AnnouncementArticleItemImpl>
+      get copyWith => __$$AnnouncementArticleItemImplCopyWithImpl<
+          _$AnnouncementArticleItemImpl>(this, _$identity);
 }
 
 abstract class _AnnouncementArticleItem extends AnnouncementArticleItem {
@@ -567,7 +569,7 @@ abstract class _AnnouncementArticleItem extends AnnouncementArticleItem {
       required final String tag,
       required final String manufacturer,
       required final List<String> documents,
-      required final bool pinToTop}) = _$_AnnouncementArticleItem;
+      required final bool pinToTop}) = _$AnnouncementArticleItemImpl;
   const _AnnouncementArticleItem._() : super._();
 
   @override
@@ -598,7 +600,7 @@ abstract class _AnnouncementArticleItem extends AnnouncementArticleItem {
   bool get pinToTop;
   @override
   @JsonKey(ignore: true)
-  _$$_AnnouncementArticleItemCopyWith<_$_AnnouncementArticleItem>
+  _$$AnnouncementArticleItemImplCopyWith<_$AnnouncementArticleItemImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -657,22 +659,22 @@ class _$BranchAndIc4InfoCopyWithImpl<$Res, $Val extends BranchAndIc4Info>
 }
 
 /// @nodoc
-abstract class _$$_BranchAndIc4InfoCopyWith<$Res>
+abstract class _$$BranchAndIc4InfoImplCopyWith<$Res>
     implements $BranchAndIc4InfoCopyWith<$Res> {
-  factory _$$_BranchAndIc4InfoCopyWith(
-          _$_BranchAndIc4Info value, $Res Function(_$_BranchAndIc4Info) then) =
-      __$$_BranchAndIc4InfoCopyWithImpl<$Res>;
+  factory _$$BranchAndIc4InfoImplCopyWith(_$BranchAndIc4InfoImpl value,
+          $Res Function(_$BranchAndIc4InfoImpl) then) =
+      __$$BranchAndIc4InfoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String id, String name, String displayName});
 }
 
 /// @nodoc
-class __$$_BranchAndIc4InfoCopyWithImpl<$Res>
-    extends _$BranchAndIc4InfoCopyWithImpl<$Res, _$_BranchAndIc4Info>
-    implements _$$_BranchAndIc4InfoCopyWith<$Res> {
-  __$$_BranchAndIc4InfoCopyWithImpl(
-      _$_BranchAndIc4Info _value, $Res Function(_$_BranchAndIc4Info) _then)
+class __$$BranchAndIc4InfoImplCopyWithImpl<$Res>
+    extends _$BranchAndIc4InfoCopyWithImpl<$Res, _$BranchAndIc4InfoImpl>
+    implements _$$BranchAndIc4InfoImplCopyWith<$Res> {
+  __$$BranchAndIc4InfoImplCopyWithImpl(_$BranchAndIc4InfoImpl _value,
+      $Res Function(_$BranchAndIc4InfoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -682,7 +684,7 @@ class __$$_BranchAndIc4InfoCopyWithImpl<$Res>
     Object? name = null,
     Object? displayName = null,
   }) {
-    return _then(_$_BranchAndIc4Info(
+    return _then(_$BranchAndIc4InfoImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -701,8 +703,8 @@ class __$$_BranchAndIc4InfoCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_BranchAndIc4Info extends _BranchAndIc4Info {
-  const _$_BranchAndIc4Info(
+class _$BranchAndIc4InfoImpl extends _BranchAndIc4Info {
+  const _$BranchAndIc4InfoImpl(
       {required this.id, required this.name, required this.displayName})
       : super._();
 
@@ -719,10 +721,10 @@ class _$_BranchAndIc4Info extends _BranchAndIc4Info {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_BranchAndIc4Info &&
+            other is _$BranchAndIc4InfoImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.displayName, displayName) ||
@@ -735,15 +737,16 @@ class _$_BranchAndIc4Info extends _BranchAndIc4Info {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_BranchAndIc4InfoCopyWith<_$_BranchAndIc4Info> get copyWith =>
-      __$$_BranchAndIc4InfoCopyWithImpl<_$_BranchAndIc4Info>(this, _$identity);
+  _$$BranchAndIc4InfoImplCopyWith<_$BranchAndIc4InfoImpl> get copyWith =>
+      __$$BranchAndIc4InfoImplCopyWithImpl<_$BranchAndIc4InfoImpl>(
+          this, _$identity);
 }
 
 abstract class _BranchAndIc4Info extends BranchAndIc4Info {
   const factory _BranchAndIc4Info(
       {required final String id,
       required final String name,
-      required final String displayName}) = _$_BranchAndIc4Info;
+      required final String displayName}) = _$BranchAndIc4InfoImpl;
   const _BranchAndIc4Info._() : super._();
 
   @override
@@ -754,6 +757,6 @@ abstract class _BranchAndIc4Info extends BranchAndIc4Info {
   String get displayName;
   @override
   @JsonKey(ignore: true)
-  _$$_BranchAndIc4InfoCopyWith<_$_BranchAndIc4Info> get copyWith =>
+  _$$BranchAndIc4InfoImplCopyWith<_$BranchAndIc4InfoImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

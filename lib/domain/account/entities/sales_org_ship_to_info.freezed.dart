@@ -12,7 +12,7 @@ part of 'sales_org_ship_to_info.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$SalesOrgShipToInfo {
@@ -57,22 +57,22 @@ class _$SalesOrgShipToInfoCopyWithImpl<$Res, $Val extends SalesOrgShipToInfo>
 }
 
 /// @nodoc
-abstract class _$$_SalesOrgShipToInfoCopyWith<$Res>
+abstract class _$$SalesOrgShipToInfoImplCopyWith<$Res>
     implements $SalesOrgShipToInfoCopyWith<$Res> {
-  factory _$$_SalesOrgShipToInfoCopyWith(_$_SalesOrgShipToInfo value,
-          $Res Function(_$_SalesOrgShipToInfo) then) =
-      __$$_SalesOrgShipToInfoCopyWithImpl<$Res>;
+  factory _$$SalesOrgShipToInfoImplCopyWith(_$SalesOrgShipToInfoImpl value,
+          $Res Function(_$SalesOrgShipToInfoImpl) then) =
+      __$$SalesOrgShipToInfoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String shipToCustomerCode});
 }
 
 /// @nodoc
-class __$$_SalesOrgShipToInfoCopyWithImpl<$Res>
-    extends _$SalesOrgShipToInfoCopyWithImpl<$Res, _$_SalesOrgShipToInfo>
-    implements _$$_SalesOrgShipToInfoCopyWith<$Res> {
-  __$$_SalesOrgShipToInfoCopyWithImpl(
-      _$_SalesOrgShipToInfo _value, $Res Function(_$_SalesOrgShipToInfo) _then)
+class __$$SalesOrgShipToInfoImplCopyWithImpl<$Res>
+    extends _$SalesOrgShipToInfoCopyWithImpl<$Res, _$SalesOrgShipToInfoImpl>
+    implements _$$SalesOrgShipToInfoImplCopyWith<$Res> {
+  __$$SalesOrgShipToInfoImplCopyWithImpl(_$SalesOrgShipToInfoImpl _value,
+      $Res Function(_$SalesOrgShipToInfoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -80,7 +80,7 @@ class __$$_SalesOrgShipToInfoCopyWithImpl<$Res>
   $Res call({
     Object? shipToCustomerCode = null,
   }) {
-    return _then(_$_SalesOrgShipToInfo(
+    return _then(_$SalesOrgShipToInfoImpl(
       shipToCustomerCode: null == shipToCustomerCode
           ? _value.shipToCustomerCode
           : shipToCustomerCode // ignore: cast_nullable_to_non_nullable
@@ -91,8 +91,9 @@ class __$$_SalesOrgShipToInfoCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_SalesOrgShipToInfo extends _SalesOrgShipToInfo {
-  const _$_SalesOrgShipToInfo({required this.shipToCustomerCode}) : super._();
+class _$SalesOrgShipToInfoImpl extends _SalesOrgShipToInfo {
+  const _$SalesOrgShipToInfoImpl({required this.shipToCustomerCode})
+      : super._();
 
   @override
   final String shipToCustomerCode;
@@ -103,10 +104,10 @@ class _$_SalesOrgShipToInfo extends _SalesOrgShipToInfo {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_SalesOrgShipToInfo &&
+            other is _$SalesOrgShipToInfoImpl &&
             (identical(other.shipToCustomerCode, shipToCustomerCode) ||
                 other.shipToCustomerCode == shipToCustomerCode));
   }
@@ -117,20 +118,20 @@ class _$_SalesOrgShipToInfo extends _SalesOrgShipToInfo {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_SalesOrgShipToInfoCopyWith<_$_SalesOrgShipToInfo> get copyWith =>
-      __$$_SalesOrgShipToInfoCopyWithImpl<_$_SalesOrgShipToInfo>(
+  _$$SalesOrgShipToInfoImplCopyWith<_$SalesOrgShipToInfoImpl> get copyWith =>
+      __$$SalesOrgShipToInfoImplCopyWithImpl<_$SalesOrgShipToInfoImpl>(
           this, _$identity);
 }
 
 abstract class _SalesOrgShipToInfo extends SalesOrgShipToInfo {
   const factory _SalesOrgShipToInfo(
-      {required final String shipToCustomerCode}) = _$_SalesOrgShipToInfo;
+      {required final String shipToCustomerCode}) = _$SalesOrgShipToInfoImpl;
   const _SalesOrgShipToInfo._() : super._();
 
   @override
   String get shipToCustomerCode;
   @override
   @JsonKey(ignore: true)
-  _$$_SalesOrgShipToInfoCopyWith<_$_SalesOrgShipToInfo> get copyWith =>
+  _$$SalesOrgShipToInfoImplCopyWith<_$SalesOrgShipToInfoImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

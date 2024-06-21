@@ -12,7 +12,7 @@ part of 'outstanding_balance_dto.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 OutstandingBalanceDto _$OutstandingBalanceDtoFromJson(
     Map<String, dynamic> json) {
@@ -98,11 +98,12 @@ class _$OutstandingBalanceDtoCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_OutstandingBalanceDtoCopyWith<$Res>
+abstract class _$$OutstandingBalanceDtoImplCopyWith<$Res>
     implements $OutstandingBalanceDtoCopyWith<$Res> {
-  factory _$$_OutstandingBalanceDtoCopyWith(_$_OutstandingBalanceDto value,
-          $Res Function(_$_OutstandingBalanceDto) then) =
-      __$$_OutstandingBalanceDtoCopyWithImpl<$Res>;
+  factory _$$OutstandingBalanceDtoImplCopyWith(
+          _$OutstandingBalanceDtoImpl value,
+          $Res Function(_$OutstandingBalanceDtoImpl) then) =
+      __$$OutstandingBalanceDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -114,11 +115,12 @@ abstract class _$$_OutstandingBalanceDtoCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_OutstandingBalanceDtoCopyWithImpl<$Res>
-    extends _$OutstandingBalanceDtoCopyWithImpl<$Res, _$_OutstandingBalanceDto>
-    implements _$$_OutstandingBalanceDtoCopyWith<$Res> {
-  __$$_OutstandingBalanceDtoCopyWithImpl(_$_OutstandingBalanceDto _value,
-      $Res Function(_$_OutstandingBalanceDto) _then)
+class __$$OutstandingBalanceDtoImplCopyWithImpl<$Res>
+    extends _$OutstandingBalanceDtoCopyWithImpl<$Res,
+        _$OutstandingBalanceDtoImpl>
+    implements _$$OutstandingBalanceDtoImplCopyWith<$Res> {
+  __$$OutstandingBalanceDtoImplCopyWithImpl(_$OutstandingBalanceDtoImpl _value,
+      $Res Function(_$OutstandingBalanceDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -130,7 +132,7 @@ class __$$_OutstandingBalanceDtoCopyWithImpl<$Res>
     Object? overdue = null,
     Object? checkDate = null,
   }) {
-    return _then(_$_OutstandingBalanceDto(
+    return _then(_$OutstandingBalanceDtoImpl(
       customerCode: null == customerCode
           ? _value.customerCode
           : customerCode // ignore: cast_nullable_to_non_nullable
@@ -157,8 +159,8 @@ class __$$_OutstandingBalanceDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_OutstandingBalanceDto extends _OutstandingBalanceDto {
-  const _$_OutstandingBalanceDto(
+class _$OutstandingBalanceDtoImpl extends _OutstandingBalanceDto {
+  const _$OutstandingBalanceDtoImpl(
       {@JsonKey(name: 'customerCode', defaultValue: '')
       required this.customerCode,
       @JsonKey(name: 'currency', defaultValue: '') required this.currency,
@@ -167,8 +169,8 @@ class _$_OutstandingBalanceDto extends _OutstandingBalanceDto {
       @JsonKey(name: 'checkDate', defaultValue: '') required this.checkDate})
       : super._();
 
-  factory _$_OutstandingBalanceDto.fromJson(Map<String, dynamic> json) =>
-      _$$_OutstandingBalanceDtoFromJson(json);
+  factory _$OutstandingBalanceDtoImpl.fromJson(Map<String, dynamic> json) =>
+      _$$OutstandingBalanceDtoImplFromJson(json);
 
   @override
   @JsonKey(name: 'customerCode', defaultValue: '')
@@ -192,10 +194,10 @@ class _$_OutstandingBalanceDto extends _OutstandingBalanceDto {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_OutstandingBalanceDto &&
+            other is _$OutstandingBalanceDtoImpl &&
             (identical(other.customerCode, customerCode) ||
                 other.customerCode == customerCode) &&
             (identical(other.currency, currency) ||
@@ -214,13 +216,13 @@ class _$_OutstandingBalanceDto extends _OutstandingBalanceDto {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_OutstandingBalanceDtoCopyWith<_$_OutstandingBalanceDto> get copyWith =>
-      __$$_OutstandingBalanceDtoCopyWithImpl<_$_OutstandingBalanceDto>(
-          this, _$identity);
+  _$$OutstandingBalanceDtoImplCopyWith<_$OutstandingBalanceDtoImpl>
+      get copyWith => __$$OutstandingBalanceDtoImplCopyWithImpl<
+          _$OutstandingBalanceDtoImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_OutstandingBalanceDtoToJson(
+    return _$$OutstandingBalanceDtoImplToJson(
       this,
     );
   }
@@ -235,11 +237,11 @@ abstract class _OutstandingBalanceDto extends OutstandingBalanceDto {
       @JsonKey(name: 'amount', defaultValue: '') required final String amount,
       @JsonKey(name: 'overdue', defaultValue: '') required final String overdue,
       @JsonKey(name: 'checkDate', defaultValue: '')
-      required final String checkDate}) = _$_OutstandingBalanceDto;
+      required final String checkDate}) = _$OutstandingBalanceDtoImpl;
   const _OutstandingBalanceDto._() : super._();
 
   factory _OutstandingBalanceDto.fromJson(Map<String, dynamic> json) =
-      _$_OutstandingBalanceDto.fromJson;
+      _$OutstandingBalanceDtoImpl.fromJson;
 
   @override
   @JsonKey(name: 'customerCode', defaultValue: '')
@@ -258,6 +260,6 @@ abstract class _OutstandingBalanceDto extends OutstandingBalanceDto {
   String get checkDate;
   @override
   @JsonKey(ignore: true)
-  _$$_OutstandingBalanceDtoCopyWith<_$_OutstandingBalanceDto> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$OutstandingBalanceDtoImplCopyWith<_$OutstandingBalanceDtoImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }

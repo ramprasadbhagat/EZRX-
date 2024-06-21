@@ -12,7 +12,7 @@ part of 'customer_name.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$CustomerName {
@@ -75,22 +75,22 @@ class _$CustomerNameCopyWithImpl<$Res, $Val extends CustomerName>
 }
 
 /// @nodoc
-abstract class _$$_CustomerNameCopyWith<$Res>
+abstract class _$$CustomerNameImplCopyWith<$Res>
     implements $CustomerNameCopyWith<$Res> {
-  factory _$$_CustomerNameCopyWith(
-          _$_CustomerName value, $Res Function(_$_CustomerName) then) =
-      __$$_CustomerNameCopyWithImpl<$Res>;
+  factory _$$CustomerNameImplCopyWith(
+          _$CustomerNameImpl value, $Res Function(_$CustomerNameImpl) then) =
+      __$$CustomerNameImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String name1, String name2, String name3, String name4});
 }
 
 /// @nodoc
-class __$$_CustomerNameCopyWithImpl<$Res>
-    extends _$CustomerNameCopyWithImpl<$Res, _$_CustomerName>
-    implements _$$_CustomerNameCopyWith<$Res> {
-  __$$_CustomerNameCopyWithImpl(
-      _$_CustomerName _value, $Res Function(_$_CustomerName) _then)
+class __$$CustomerNameImplCopyWithImpl<$Res>
+    extends _$CustomerNameCopyWithImpl<$Res, _$CustomerNameImpl>
+    implements _$$CustomerNameImplCopyWith<$Res> {
+  __$$CustomerNameImplCopyWithImpl(
+      _$CustomerNameImpl _value, $Res Function(_$CustomerNameImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -101,7 +101,7 @@ class __$$_CustomerNameCopyWithImpl<$Res>
     Object? name3 = null,
     Object? name4 = null,
   }) {
-    return _then(_$_CustomerName(
+    return _then(_$CustomerNameImpl(
       name1: null == name1
           ? _value.name1
           : name1 // ignore: cast_nullable_to_non_nullable
@@ -124,8 +124,8 @@ class __$$_CustomerNameCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_CustomerName extends _CustomerName {
-  const _$_CustomerName(
+class _$CustomerNameImpl extends _CustomerName {
+  const _$CustomerNameImpl(
       {required this.name1,
       required this.name2,
       required this.name3,
@@ -142,10 +142,10 @@ class _$_CustomerName extends _CustomerName {
   final String name4;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_CustomerName &&
+            other is _$CustomerNameImpl &&
             (identical(other.name1, name1) || other.name1 == name1) &&
             (identical(other.name2, name2) || other.name2 == name2) &&
             (identical(other.name3, name3) || other.name3 == name3) &&
@@ -158,8 +158,8 @@ class _$_CustomerName extends _CustomerName {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_CustomerNameCopyWith<_$_CustomerName> get copyWith =>
-      __$$_CustomerNameCopyWithImpl<_$_CustomerName>(this, _$identity);
+  _$$CustomerNameImplCopyWith<_$CustomerNameImpl> get copyWith =>
+      __$$CustomerNameImplCopyWithImpl<_$CustomerNameImpl>(this, _$identity);
 }
 
 abstract class _CustomerName extends CustomerName {
@@ -167,7 +167,7 @@ abstract class _CustomerName extends CustomerName {
       {required final String name1,
       required final String name2,
       required final String name3,
-      required final String name4}) = _$_CustomerName;
+      required final String name4}) = _$CustomerNameImpl;
   const _CustomerName._() : super._();
 
   @override
@@ -180,6 +180,6 @@ abstract class _CustomerName extends CustomerName {
   String get name4;
   @override
   @JsonKey(ignore: true)
-  _$$_CustomerNameCopyWith<_$_CustomerName> get copyWith =>
+  _$$CustomerNameImplCopyWith<_$CustomerNameImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

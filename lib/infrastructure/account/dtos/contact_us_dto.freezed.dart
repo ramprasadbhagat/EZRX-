@@ -12,7 +12,7 @@ part of 'contact_us_dto.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 ContactUsDto _$ContactUsDtoFromJson(Map<String, dynamic> json) {
   return _ContactUsDto.fromJson(json);
@@ -88,11 +88,11 @@ class _$ContactUsDtoCopyWithImpl<$Res, $Val extends ContactUsDto>
 }
 
 /// @nodoc
-abstract class _$$_ContactUsDtoCopyWith<$Res>
+abstract class _$$ContactUsDtoImplCopyWith<$Res>
     implements $ContactUsDtoCopyWith<$Res> {
-  factory _$$_ContactUsDtoCopyWith(
-          _$_ContactUsDto value, $Res Function(_$_ContactUsDto) then) =
-      __$$_ContactUsDtoCopyWithImpl<$Res>;
+  factory _$$ContactUsDtoImplCopyWith(
+          _$ContactUsDtoImpl value, $Res Function(_$ContactUsDtoImpl) then) =
+      __$$ContactUsDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -103,11 +103,11 @@ abstract class _$$_ContactUsDtoCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_ContactUsDtoCopyWithImpl<$Res>
-    extends _$ContactUsDtoCopyWithImpl<$Res, _$_ContactUsDto>
-    implements _$$_ContactUsDtoCopyWith<$Res> {
-  __$$_ContactUsDtoCopyWithImpl(
-      _$_ContactUsDto _value, $Res Function(_$_ContactUsDto) _then)
+class __$$ContactUsDtoImplCopyWithImpl<$Res>
+    extends _$ContactUsDtoCopyWithImpl<$Res, _$ContactUsDtoImpl>
+    implements _$$ContactUsDtoImplCopyWith<$Res> {
+  __$$ContactUsDtoImplCopyWithImpl(
+      _$ContactUsDtoImpl _value, $Res Function(_$ContactUsDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -118,7 +118,7 @@ class __$$_ContactUsDtoCopyWithImpl<$Res>
     Object? email = null,
     Object? message = null,
   }) {
-    return _then(_$_ContactUsDto(
+    return _then(_$ContactUsDtoImpl(
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -141,8 +141,8 @@ class __$$_ContactUsDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_ContactUsDto extends _ContactUsDto {
-  const _$_ContactUsDto(
+class _$ContactUsDtoImpl extends _ContactUsDto {
+  const _$ContactUsDtoImpl(
       {@JsonKey(name: 'name', defaultValue: '') required this.name,
       @JsonKey(name: 'contactNumber', defaultValue: '')
       required this.contactNumber,
@@ -150,8 +150,8 @@ class _$_ContactUsDto extends _ContactUsDto {
       @JsonKey(name: 'message', defaultValue: '') required this.message})
       : super._();
 
-  factory _$_ContactUsDto.fromJson(Map<String, dynamic> json) =>
-      _$$_ContactUsDtoFromJson(json);
+  factory _$ContactUsDtoImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ContactUsDtoImplFromJson(json);
 
   @override
   @JsonKey(name: 'name', defaultValue: '')
@@ -172,10 +172,10 @@ class _$_ContactUsDto extends _ContactUsDto {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ContactUsDto &&
+            other is _$ContactUsDtoImpl &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.contactNumber, contactNumber) ||
                 other.contactNumber == contactNumber) &&
@@ -191,12 +191,12 @@ class _$_ContactUsDto extends _ContactUsDto {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ContactUsDtoCopyWith<_$_ContactUsDto> get copyWith =>
-      __$$_ContactUsDtoCopyWithImpl<_$_ContactUsDto>(this, _$identity);
+  _$$ContactUsDtoImplCopyWith<_$ContactUsDtoImpl> get copyWith =>
+      __$$ContactUsDtoImplCopyWithImpl<_$ContactUsDtoImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_ContactUsDtoToJson(
+    return _$$ContactUsDtoImplToJson(
       this,
     );
   }
@@ -209,11 +209,11 @@ abstract class _ContactUsDto extends ContactUsDto {
       required final String contactNumber,
       @JsonKey(name: 'email', defaultValue: '') required final String email,
       @JsonKey(name: 'message', defaultValue: '')
-      required final String message}) = _$_ContactUsDto;
+      required final String message}) = _$ContactUsDtoImpl;
   const _ContactUsDto._() : super._();
 
   factory _ContactUsDto.fromJson(Map<String, dynamic> json) =
-      _$_ContactUsDto.fromJson;
+      _$ContactUsDtoImpl.fromJson;
 
   @override
   @JsonKey(name: 'name', defaultValue: '')
@@ -229,6 +229,6 @@ abstract class _ContactUsDto extends ContactUsDto {
   String get message;
   @override
   @JsonKey(ignore: true)
-  _$$_ContactUsDtoCopyWith<_$_ContactUsDto> get copyWith =>
+  _$$ContactUsDtoImplCopyWith<_$ContactUsDtoImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

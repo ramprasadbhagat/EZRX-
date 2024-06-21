@@ -6,7 +6,7 @@ part of 'setting_tc_dto.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_SettingTcDto _$$_SettingTcDtoFromJson(Map<String, dynamic> json) =>
-    _$_SettingTcDto(
+_$SettingTcDtoImpl _$$SettingTcDtoImplFromJson(Map<String, dynamic> json) =>
+    _$SettingTcDtoImpl(
       acceptTC: json['updateAcceptanceStatus'] as bool? ?? false,
     );

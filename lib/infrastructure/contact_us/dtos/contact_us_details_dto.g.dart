@@ -6,9 +6,9 @@ part of 'contact_us_details_dto.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_ContactUsDetailsDto _$$_ContactUsDetailsDtoFromJson(
+_$ContactUsDetailsDtoImpl _$$ContactUsDetailsDtoImplFromJson(
         Map<String, dynamic> json) =>
-    _$_ContactUsDetailsDto(
+    _$ContactUsDetailsDtoImpl(
       content: readValue(json, 'content') as String? ?? '',
       preloginSendToEmail:
           readValue(json, 'preloginSendToEmail') as String? ?? '',
@@ -16,8 +16,8 @@ _$_ContactUsDetailsDto _$$_ContactUsDetailsDtoFromJson(
           readValue(json, 'postloginSendToEmail') as String? ?? '',
     );
 
-Map<String, dynamic> _$$_ContactUsDetailsDtoToJson(
-        _$_ContactUsDetailsDto instance) =>
+Map<String, dynamic> _$$ContactUsDetailsDtoImplToJson(
+        _$ContactUsDetailsDtoImpl instance) =>
     <String, dynamic>{
       'content': instance.content,
       'preloginSendToEmail': instance.preloginSendToEmail,

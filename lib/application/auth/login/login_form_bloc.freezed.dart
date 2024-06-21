@@ -12,7 +12,7 @@ part of 'login_form_bloc.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$LoginFormEvent {
@@ -136,20 +136,20 @@ class _$LoginFormEventCopyWithImpl<$Res, $Val extends LoginFormEvent>
 }
 
 /// @nodoc
-abstract class _$$_LoadLastSavedCredCopyWith<$Res> {
-  factory _$$_LoadLastSavedCredCopyWith(_$_LoadLastSavedCred value,
-          $Res Function(_$_LoadLastSavedCred) then) =
-      __$$_LoadLastSavedCredCopyWithImpl<$Res>;
+abstract class _$$LoadLastSavedCredImplCopyWith<$Res> {
+  factory _$$LoadLastSavedCredImplCopyWith(_$LoadLastSavedCredImpl value,
+          $Res Function(_$LoadLastSavedCredImpl) then) =
+      __$$LoadLastSavedCredImplCopyWithImpl<$Res>;
   @useResult
   $Res call({AppMarket appMarket});
 }
 
 /// @nodoc
-class __$$_LoadLastSavedCredCopyWithImpl<$Res>
-    extends _$LoginFormEventCopyWithImpl<$Res, _$_LoadLastSavedCred>
-    implements _$$_LoadLastSavedCredCopyWith<$Res> {
-  __$$_LoadLastSavedCredCopyWithImpl(
-      _$_LoadLastSavedCred _value, $Res Function(_$_LoadLastSavedCred) _then)
+class __$$LoadLastSavedCredImplCopyWithImpl<$Res>
+    extends _$LoginFormEventCopyWithImpl<$Res, _$LoadLastSavedCredImpl>
+    implements _$$LoadLastSavedCredImplCopyWith<$Res> {
+  __$$LoadLastSavedCredImplCopyWithImpl(_$LoadLastSavedCredImpl _value,
+      $Res Function(_$LoadLastSavedCredImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -157,7 +157,7 @@ class __$$_LoadLastSavedCredCopyWithImpl<$Res>
   $Res call({
     Object? appMarket = null,
   }) {
-    return _then(_$_LoadLastSavedCred(
+    return _then(_$LoadLastSavedCredImpl(
       null == appMarket
           ? _value.appMarket
           : appMarket // ignore: cast_nullable_to_non_nullable
@@ -168,8 +168,8 @@ class __$$_LoadLastSavedCredCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_LoadLastSavedCred implements _LoadLastSavedCred {
-  const _$_LoadLastSavedCred(this.appMarket);
+class _$LoadLastSavedCredImpl implements _LoadLastSavedCred {
+  const _$LoadLastSavedCredImpl(this.appMarket);
 
   @override
   final AppMarket appMarket;
@@ -180,10 +180,10 @@ class _$_LoadLastSavedCred implements _LoadLastSavedCred {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_LoadLastSavedCred &&
+            other is _$LoadLastSavedCredImpl &&
             (identical(other.appMarket, appMarket) ||
                 other.appMarket == appMarket));
   }
@@ -194,8 +194,8 @@ class _$_LoadLastSavedCred implements _LoadLastSavedCred {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_LoadLastSavedCredCopyWith<_$_LoadLastSavedCred> get copyWith =>
-      __$$_LoadLastSavedCredCopyWithImpl<_$_LoadLastSavedCred>(
+  _$$LoadLastSavedCredImplCopyWith<_$LoadLastSavedCredImpl> get copyWith =>
+      __$$LoadLastSavedCredImplCopyWithImpl<_$LoadLastSavedCredImpl>(
           this, _$identity);
 
   @override
@@ -324,29 +324,29 @@ class _$_LoadLastSavedCred implements _LoadLastSavedCred {
 
 abstract class _LoadLastSavedCred implements LoginFormEvent {
   const factory _LoadLastSavedCred(final AppMarket appMarket) =
-      _$_LoadLastSavedCred;
+      _$LoadLastSavedCredImpl;
 
   AppMarket get appMarket;
   @JsonKey(ignore: true)
-  _$$_LoadLastSavedCredCopyWith<_$_LoadLastSavedCred> get copyWith =>
+  _$$LoadLastSavedCredImplCopyWith<_$LoadLastSavedCredImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_UsernameChangedCopyWith<$Res> {
-  factory _$$_UsernameChangedCopyWith(
-          _$_UsernameChanged value, $Res Function(_$_UsernameChanged) then) =
-      __$$_UsernameChangedCopyWithImpl<$Res>;
+abstract class _$$UsernameChangedImplCopyWith<$Res> {
+  factory _$$UsernameChangedImplCopyWith(_$UsernameChangedImpl value,
+          $Res Function(_$UsernameChangedImpl) then) =
+      __$$UsernameChangedImplCopyWithImpl<$Res>;
   @useResult
   $Res call({String usernameStr});
 }
 
 /// @nodoc
-class __$$_UsernameChangedCopyWithImpl<$Res>
-    extends _$LoginFormEventCopyWithImpl<$Res, _$_UsernameChanged>
-    implements _$$_UsernameChangedCopyWith<$Res> {
-  __$$_UsernameChangedCopyWithImpl(
-      _$_UsernameChanged _value, $Res Function(_$_UsernameChanged) _then)
+class __$$UsernameChangedImplCopyWithImpl<$Res>
+    extends _$LoginFormEventCopyWithImpl<$Res, _$UsernameChangedImpl>
+    implements _$$UsernameChangedImplCopyWith<$Res> {
+  __$$UsernameChangedImplCopyWithImpl(
+      _$UsernameChangedImpl _value, $Res Function(_$UsernameChangedImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -354,7 +354,7 @@ class __$$_UsernameChangedCopyWithImpl<$Res>
   $Res call({
     Object? usernameStr = null,
   }) {
-    return _then(_$_UsernameChanged(
+    return _then(_$UsernameChangedImpl(
       null == usernameStr
           ? _value.usernameStr
           : usernameStr // ignore: cast_nullable_to_non_nullable
@@ -365,8 +365,8 @@ class __$$_UsernameChangedCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_UsernameChanged implements _UsernameChanged {
-  const _$_UsernameChanged(this.usernameStr);
+class _$UsernameChangedImpl implements _UsernameChanged {
+  const _$UsernameChangedImpl(this.usernameStr);
 
   @override
   final String usernameStr;
@@ -377,10 +377,10 @@ class _$_UsernameChanged implements _UsernameChanged {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_UsernameChanged &&
+            other is _$UsernameChangedImpl &&
             (identical(other.usernameStr, usernameStr) ||
                 other.usernameStr == usernameStr));
   }
@@ -391,8 +391,9 @@ class _$_UsernameChanged implements _UsernameChanged {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_UsernameChangedCopyWith<_$_UsernameChanged> get copyWith =>
-      __$$_UsernameChangedCopyWithImpl<_$_UsernameChanged>(this, _$identity);
+  _$$UsernameChangedImplCopyWith<_$UsernameChangedImpl> get copyWith =>
+      __$$UsernameChangedImplCopyWithImpl<_$UsernameChangedImpl>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -519,29 +520,30 @@ class _$_UsernameChanged implements _UsernameChanged {
 }
 
 abstract class _UsernameChanged implements LoginFormEvent {
-  const factory _UsernameChanged(final String usernameStr) = _$_UsernameChanged;
+  const factory _UsernameChanged(final String usernameStr) =
+      _$UsernameChangedImpl;
 
   String get usernameStr;
   @JsonKey(ignore: true)
-  _$$_UsernameChangedCopyWith<_$_UsernameChanged> get copyWith =>
+  _$$UsernameChangedImplCopyWith<_$UsernameChangedImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_PasswordChangedCopyWith<$Res> {
-  factory _$$_PasswordChangedCopyWith(
-          _$_PasswordChanged value, $Res Function(_$_PasswordChanged) then) =
-      __$$_PasswordChangedCopyWithImpl<$Res>;
+abstract class _$$PasswordChangedImplCopyWith<$Res> {
+  factory _$$PasswordChangedImplCopyWith(_$PasswordChangedImpl value,
+          $Res Function(_$PasswordChangedImpl) then) =
+      __$$PasswordChangedImplCopyWithImpl<$Res>;
   @useResult
   $Res call({String passwordStr});
 }
 
 /// @nodoc
-class __$$_PasswordChangedCopyWithImpl<$Res>
-    extends _$LoginFormEventCopyWithImpl<$Res, _$_PasswordChanged>
-    implements _$$_PasswordChangedCopyWith<$Res> {
-  __$$_PasswordChangedCopyWithImpl(
-      _$_PasswordChanged _value, $Res Function(_$_PasswordChanged) _then)
+class __$$PasswordChangedImplCopyWithImpl<$Res>
+    extends _$LoginFormEventCopyWithImpl<$Res, _$PasswordChangedImpl>
+    implements _$$PasswordChangedImplCopyWith<$Res> {
+  __$$PasswordChangedImplCopyWithImpl(
+      _$PasswordChangedImpl _value, $Res Function(_$PasswordChangedImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -549,7 +551,7 @@ class __$$_PasswordChangedCopyWithImpl<$Res>
   $Res call({
     Object? passwordStr = null,
   }) {
-    return _then(_$_PasswordChanged(
+    return _then(_$PasswordChangedImpl(
       null == passwordStr
           ? _value.passwordStr
           : passwordStr // ignore: cast_nullable_to_non_nullable
@@ -560,8 +562,8 @@ class __$$_PasswordChangedCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_PasswordChanged implements _PasswordChanged {
-  const _$_PasswordChanged(this.passwordStr);
+class _$PasswordChangedImpl implements _PasswordChanged {
+  const _$PasswordChangedImpl(this.passwordStr);
 
   @override
   final String passwordStr;
@@ -572,10 +574,10 @@ class _$_PasswordChanged implements _PasswordChanged {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_PasswordChanged &&
+            other is _$PasswordChangedImpl &&
             (identical(other.passwordStr, passwordStr) ||
                 other.passwordStr == passwordStr));
   }
@@ -586,8 +588,9 @@ class _$_PasswordChanged implements _PasswordChanged {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_PasswordChangedCopyWith<_$_PasswordChanged> get copyWith =>
-      __$$_PasswordChangedCopyWithImpl<_$_PasswordChanged>(this, _$identity);
+  _$$PasswordChangedImplCopyWith<_$PasswordChangedImpl> get copyWith =>
+      __$$PasswordChangedImplCopyWithImpl<_$PasswordChangedImpl>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -714,34 +717,37 @@ class _$_PasswordChanged implements _PasswordChanged {
 }
 
 abstract class _PasswordChanged implements LoginFormEvent {
-  const factory _PasswordChanged(final String passwordStr) = _$_PasswordChanged;
+  const factory _PasswordChanged(final String passwordStr) =
+      _$PasswordChangedImpl;
 
   String get passwordStr;
   @JsonKey(ignore: true)
-  _$$_PasswordChangedCopyWith<_$_PasswordChanged> get copyWith =>
+  _$$PasswordChangedImplCopyWith<_$PasswordChangedImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_PasswordVisibleChangedCopyWith<$Res> {
-  factory _$$_PasswordVisibleChangedCopyWith(_$_PasswordVisibleChanged value,
-          $Res Function(_$_PasswordVisibleChanged) then) =
-      __$$_PasswordVisibleChangedCopyWithImpl<$Res>;
+abstract class _$$PasswordVisibleChangedImplCopyWith<$Res> {
+  factory _$$PasswordVisibleChangedImplCopyWith(
+          _$PasswordVisibleChangedImpl value,
+          $Res Function(_$PasswordVisibleChangedImpl) then) =
+      __$$PasswordVisibleChangedImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_PasswordVisibleChangedCopyWithImpl<$Res>
-    extends _$LoginFormEventCopyWithImpl<$Res, _$_PasswordVisibleChanged>
-    implements _$$_PasswordVisibleChangedCopyWith<$Res> {
-  __$$_PasswordVisibleChangedCopyWithImpl(_$_PasswordVisibleChanged _value,
-      $Res Function(_$_PasswordVisibleChanged) _then)
+class __$$PasswordVisibleChangedImplCopyWithImpl<$Res>
+    extends _$LoginFormEventCopyWithImpl<$Res, _$PasswordVisibleChangedImpl>
+    implements _$$PasswordVisibleChangedImplCopyWith<$Res> {
+  __$$PasswordVisibleChangedImplCopyWithImpl(
+      _$PasswordVisibleChangedImpl _value,
+      $Res Function(_$PasswordVisibleChangedImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_PasswordVisibleChanged implements _PasswordVisibleChanged {
-  const _$_PasswordVisibleChanged();
+class _$PasswordVisibleChangedImpl implements _PasswordVisibleChanged {
+  const _$PasswordVisibleChangedImpl();
 
   @override
   String toString() {
@@ -749,10 +755,10 @@ class _$_PasswordVisibleChanged implements _PasswordVisibleChanged {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_PasswordVisibleChanged);
+            other is _$PasswordVisibleChangedImpl);
   }
 
   @override
@@ -883,29 +889,29 @@ class _$_PasswordVisibleChanged implements _PasswordVisibleChanged {
 }
 
 abstract class _PasswordVisibleChanged implements LoginFormEvent {
-  const factory _PasswordVisibleChanged() = _$_PasswordVisibleChanged;
+  const factory _PasswordVisibleChanged() = _$PasswordVisibleChangedImpl;
 }
 
 /// @nodoc
-abstract class _$$_RememberCheckChangedCopyWith<$Res> {
-  factory _$$_RememberCheckChangedCopyWith(_$_RememberCheckChanged value,
-          $Res Function(_$_RememberCheckChanged) then) =
-      __$$_RememberCheckChangedCopyWithImpl<$Res>;
+abstract class _$$RememberCheckChangedImplCopyWith<$Res> {
+  factory _$$RememberCheckChangedImplCopyWith(_$RememberCheckChangedImpl value,
+          $Res Function(_$RememberCheckChangedImpl) then) =
+      __$$RememberCheckChangedImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_RememberCheckChangedCopyWithImpl<$Res>
-    extends _$LoginFormEventCopyWithImpl<$Res, _$_RememberCheckChanged>
-    implements _$$_RememberCheckChangedCopyWith<$Res> {
-  __$$_RememberCheckChangedCopyWithImpl(_$_RememberCheckChanged _value,
-      $Res Function(_$_RememberCheckChanged) _then)
+class __$$RememberCheckChangedImplCopyWithImpl<$Res>
+    extends _$LoginFormEventCopyWithImpl<$Res, _$RememberCheckChangedImpl>
+    implements _$$RememberCheckChangedImplCopyWith<$Res> {
+  __$$RememberCheckChangedImplCopyWithImpl(_$RememberCheckChangedImpl _value,
+      $Res Function(_$RememberCheckChangedImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_RememberCheckChanged implements _RememberCheckChanged {
-  const _$_RememberCheckChanged();
+class _$RememberCheckChangedImpl implements _RememberCheckChanged {
+  const _$RememberCheckChangedImpl();
 
   @override
   String toString() {
@@ -913,9 +919,10 @@ class _$_RememberCheckChanged implements _RememberCheckChanged {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_RememberCheckChanged);
+        (other.runtimeType == runtimeType &&
+            other is _$RememberCheckChangedImpl);
   }
 
   @override
@@ -1046,33 +1053,33 @@ class _$_RememberCheckChanged implements _RememberCheckChanged {
 }
 
 abstract class _RememberCheckChanged implements LoginFormEvent {
-  const factory _RememberCheckChanged() = _$_RememberCheckChanged;
+  const factory _RememberCheckChanged() = _$RememberCheckChangedImpl;
 }
 
 /// @nodoc
-abstract class _$$_LoginWithEmailAndPasswordPressedCopyWith<$Res> {
-  factory _$$_LoginWithEmailAndPasswordPressedCopyWith(
-          _$_LoginWithEmailAndPasswordPressed value,
-          $Res Function(_$_LoginWithEmailAndPasswordPressed) then) =
-      __$$_LoginWithEmailAndPasswordPressedCopyWithImpl<$Res>;
+abstract class _$$LoginWithEmailAndPasswordPressedImplCopyWith<$Res> {
+  factory _$$LoginWithEmailAndPasswordPressedImplCopyWith(
+          _$LoginWithEmailAndPasswordPressedImpl value,
+          $Res Function(_$LoginWithEmailAndPasswordPressedImpl) then) =
+      __$$LoginWithEmailAndPasswordPressedImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_LoginWithEmailAndPasswordPressedCopyWithImpl<$Res>
+class __$$LoginWithEmailAndPasswordPressedImplCopyWithImpl<$Res>
     extends _$LoginFormEventCopyWithImpl<$Res,
-        _$_LoginWithEmailAndPasswordPressed>
-    implements _$$_LoginWithEmailAndPasswordPressedCopyWith<$Res> {
-  __$$_LoginWithEmailAndPasswordPressedCopyWithImpl(
-      _$_LoginWithEmailAndPasswordPressed _value,
-      $Res Function(_$_LoginWithEmailAndPasswordPressed) _then)
+        _$LoginWithEmailAndPasswordPressedImpl>
+    implements _$$LoginWithEmailAndPasswordPressedImplCopyWith<$Res> {
+  __$$LoginWithEmailAndPasswordPressedImplCopyWithImpl(
+      _$LoginWithEmailAndPasswordPressedImpl _value,
+      $Res Function(_$LoginWithEmailAndPasswordPressedImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_LoginWithEmailAndPasswordPressed
+class _$LoginWithEmailAndPasswordPressedImpl
     implements _LoginWithEmailAndPasswordPressed {
-  const _$_LoginWithEmailAndPasswordPressed();
+  const _$LoginWithEmailAndPasswordPressedImpl();
 
   @override
   String toString() {
@@ -1080,10 +1087,10 @@ class _$_LoginWithEmailAndPasswordPressed
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_LoginWithEmailAndPasswordPressed);
+            other is _$LoginWithEmailAndPasswordPressedImpl);
   }
 
   @override
@@ -1215,31 +1222,31 @@ class _$_LoginWithEmailAndPasswordPressed
 
 abstract class _LoginWithEmailAndPasswordPressed implements LoginFormEvent {
   const factory _LoginWithEmailAndPasswordPressed() =
-      _$_LoginWithEmailAndPasswordPressed;
+      _$LoginWithEmailAndPasswordPressedImpl;
 }
 
 /// @nodoc
-abstract class _$$_LoginWithOktaButtonPressedCopyWith<$Res> {
-  factory _$$_LoginWithOktaButtonPressedCopyWith(
-          _$_LoginWithOktaButtonPressed value,
-          $Res Function(_$_LoginWithOktaButtonPressed) then) =
-      __$$_LoginWithOktaButtonPressedCopyWithImpl<$Res>;
+abstract class _$$LoginWithOktaButtonPressedImplCopyWith<$Res> {
+  factory _$$LoginWithOktaButtonPressedImplCopyWith(
+          _$LoginWithOktaButtonPressedImpl value,
+          $Res Function(_$LoginWithOktaButtonPressedImpl) then) =
+      __$$LoginWithOktaButtonPressedImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_LoginWithOktaButtonPressedCopyWithImpl<$Res>
-    extends _$LoginFormEventCopyWithImpl<$Res, _$_LoginWithOktaButtonPressed>
-    implements _$$_LoginWithOktaButtonPressedCopyWith<$Res> {
-  __$$_LoginWithOktaButtonPressedCopyWithImpl(
-      _$_LoginWithOktaButtonPressed _value,
-      $Res Function(_$_LoginWithOktaButtonPressed) _then)
+class __$$LoginWithOktaButtonPressedImplCopyWithImpl<$Res>
+    extends _$LoginFormEventCopyWithImpl<$Res, _$LoginWithOktaButtonPressedImpl>
+    implements _$$LoginWithOktaButtonPressedImplCopyWith<$Res> {
+  __$$LoginWithOktaButtonPressedImplCopyWithImpl(
+      _$LoginWithOktaButtonPressedImpl _value,
+      $Res Function(_$LoginWithOktaButtonPressedImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_LoginWithOktaButtonPressed implements _LoginWithOktaButtonPressed {
-  const _$_LoginWithOktaButtonPressed();
+class _$LoginWithOktaButtonPressedImpl implements _LoginWithOktaButtonPressed {
+  const _$LoginWithOktaButtonPressedImpl();
 
   @override
   String toString() {
@@ -1247,10 +1254,10 @@ class _$_LoginWithOktaButtonPressed implements _LoginWithOktaButtonPressed {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_LoginWithOktaButtonPressed);
+            other is _$LoginWithOktaButtonPressedImpl);
   }
 
   @override
@@ -1381,29 +1388,30 @@ class _$_LoginWithOktaButtonPressed implements _LoginWithOktaButtonPressed {
 }
 
 abstract class _LoginWithOktaButtonPressed implements LoginFormEvent {
-  const factory _LoginWithOktaButtonPressed() = _$_LoginWithOktaButtonPressed;
+  const factory _LoginWithOktaButtonPressed() =
+      _$LoginWithOktaButtonPressedImpl;
 }
 
 /// @nodoc
-abstract class _$$_RefreshOktaTokenCopyWith<$Res> {
-  factory _$$_RefreshOktaTokenCopyWith(
-          _$_RefreshOktaToken value, $Res Function(_$_RefreshOktaToken) then) =
-      __$$_RefreshOktaTokenCopyWithImpl<$Res>;
+abstract class _$$RefreshOktaTokenImplCopyWith<$Res> {
+  factory _$$RefreshOktaTokenImplCopyWith(_$RefreshOktaTokenImpl value,
+          $Res Function(_$RefreshOktaTokenImpl) then) =
+      __$$RefreshOktaTokenImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_RefreshOktaTokenCopyWithImpl<$Res>
-    extends _$LoginFormEventCopyWithImpl<$Res, _$_RefreshOktaToken>
-    implements _$$_RefreshOktaTokenCopyWith<$Res> {
-  __$$_RefreshOktaTokenCopyWithImpl(
-      _$_RefreshOktaToken _value, $Res Function(_$_RefreshOktaToken) _then)
+class __$$RefreshOktaTokenImplCopyWithImpl<$Res>
+    extends _$LoginFormEventCopyWithImpl<$Res, _$RefreshOktaTokenImpl>
+    implements _$$RefreshOktaTokenImplCopyWith<$Res> {
+  __$$RefreshOktaTokenImplCopyWithImpl(_$RefreshOktaTokenImpl _value,
+      $Res Function(_$RefreshOktaTokenImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_RefreshOktaToken implements _RefreshOktaToken {
-  const _$_RefreshOktaToken();
+class _$RefreshOktaTokenImpl implements _RefreshOktaToken {
+  const _$RefreshOktaTokenImpl();
 
   @override
   String toString() {
@@ -1411,9 +1419,9 @@ class _$_RefreshOktaToken implements _RefreshOktaToken {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_RefreshOktaToken);
+        (other.runtimeType == runtimeType && other is _$RefreshOktaTokenImpl);
   }
 
   @override
@@ -1544,24 +1552,24 @@ class _$_RefreshOktaToken implements _RefreshOktaToken {
 }
 
 abstract class _RefreshOktaToken implements LoginFormEvent {
-  const factory _RefreshOktaToken() = _$_RefreshOktaToken;
+  const factory _RefreshOktaToken() = _$RefreshOktaTokenImpl;
 }
 
 /// @nodoc
-abstract class _$$_ExchanhgeEZRXTokenCopyWith<$Res> {
-  factory _$$_ExchanhgeEZRXTokenCopyWith(_$_ExchanhgeEZRXToken value,
-          $Res Function(_$_ExchanhgeEZRXToken) then) =
-      __$$_ExchanhgeEZRXTokenCopyWithImpl<$Res>;
+abstract class _$$ExchanhgeEZRXTokenImplCopyWith<$Res> {
+  factory _$$ExchanhgeEZRXTokenImplCopyWith(_$ExchanhgeEZRXTokenImpl value,
+          $Res Function(_$ExchanhgeEZRXTokenImpl) then) =
+      __$$ExchanhgeEZRXTokenImplCopyWithImpl<$Res>;
   @useResult
   $Res call({JWT oktaAccessToken});
 }
 
 /// @nodoc
-class __$$_ExchanhgeEZRXTokenCopyWithImpl<$Res>
-    extends _$LoginFormEventCopyWithImpl<$Res, _$_ExchanhgeEZRXToken>
-    implements _$$_ExchanhgeEZRXTokenCopyWith<$Res> {
-  __$$_ExchanhgeEZRXTokenCopyWithImpl(
-      _$_ExchanhgeEZRXToken _value, $Res Function(_$_ExchanhgeEZRXToken) _then)
+class __$$ExchanhgeEZRXTokenImplCopyWithImpl<$Res>
+    extends _$LoginFormEventCopyWithImpl<$Res, _$ExchanhgeEZRXTokenImpl>
+    implements _$$ExchanhgeEZRXTokenImplCopyWith<$Res> {
+  __$$ExchanhgeEZRXTokenImplCopyWithImpl(_$ExchanhgeEZRXTokenImpl _value,
+      $Res Function(_$ExchanhgeEZRXTokenImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1569,7 +1577,7 @@ class __$$_ExchanhgeEZRXTokenCopyWithImpl<$Res>
   $Res call({
     Object? oktaAccessToken = null,
   }) {
-    return _then(_$_ExchanhgeEZRXToken(
+    return _then(_$ExchanhgeEZRXTokenImpl(
       null == oktaAccessToken
           ? _value.oktaAccessToken
           : oktaAccessToken // ignore: cast_nullable_to_non_nullable
@@ -1580,8 +1588,8 @@ class __$$_ExchanhgeEZRXTokenCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_ExchanhgeEZRXToken implements _ExchanhgeEZRXToken {
-  const _$_ExchanhgeEZRXToken(this.oktaAccessToken);
+class _$ExchanhgeEZRXTokenImpl implements _ExchanhgeEZRXToken {
+  const _$ExchanhgeEZRXTokenImpl(this.oktaAccessToken);
 
   @override
   final JWT oktaAccessToken;
@@ -1592,10 +1600,10 @@ class _$_ExchanhgeEZRXToken implements _ExchanhgeEZRXToken {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ExchanhgeEZRXToken &&
+            other is _$ExchanhgeEZRXTokenImpl &&
             (identical(other.oktaAccessToken, oktaAccessToken) ||
                 other.oktaAccessToken == oktaAccessToken));
   }
@@ -1606,8 +1614,8 @@ class _$_ExchanhgeEZRXToken implements _ExchanhgeEZRXToken {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ExchanhgeEZRXTokenCopyWith<_$_ExchanhgeEZRXToken> get copyWith =>
-      __$$_ExchanhgeEZRXTokenCopyWithImpl<_$_ExchanhgeEZRXToken>(
+  _$$ExchanhgeEZRXTokenImplCopyWith<_$ExchanhgeEZRXTokenImpl> get copyWith =>
+      __$$ExchanhgeEZRXTokenImplCopyWithImpl<_$ExchanhgeEZRXTokenImpl>(
           this, _$identity);
 
   @override
@@ -1736,34 +1744,34 @@ class _$_ExchanhgeEZRXToken implements _ExchanhgeEZRXToken {
 
 abstract class _ExchanhgeEZRXToken implements LoginFormEvent {
   const factory _ExchanhgeEZRXToken(final JWT oktaAccessToken) =
-      _$_ExchanhgeEZRXToken;
+      _$ExchanhgeEZRXTokenImpl;
 
   JWT get oktaAccessToken;
   @JsonKey(ignore: true)
-  _$$_ExchanhgeEZRXTokenCopyWith<_$_ExchanhgeEZRXToken> get copyWith =>
+  _$$ExchanhgeEZRXTokenImplCopyWith<_$ExchanhgeEZRXTokenImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_FetchCurrentMarketCopyWith<$Res> {
-  factory _$$_FetchCurrentMarketCopyWith(_$_FetchCurrentMarket value,
-          $Res Function(_$_FetchCurrentMarket) then) =
-      __$$_FetchCurrentMarketCopyWithImpl<$Res>;
+abstract class _$$FetchCurrentMarketImplCopyWith<$Res> {
+  factory _$$FetchCurrentMarketImplCopyWith(_$FetchCurrentMarketImpl value,
+          $Res Function(_$FetchCurrentMarketImpl) then) =
+      __$$FetchCurrentMarketImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_FetchCurrentMarketCopyWithImpl<$Res>
-    extends _$LoginFormEventCopyWithImpl<$Res, _$_FetchCurrentMarket>
-    implements _$$_FetchCurrentMarketCopyWith<$Res> {
-  __$$_FetchCurrentMarketCopyWithImpl(
-      _$_FetchCurrentMarket _value, $Res Function(_$_FetchCurrentMarket) _then)
+class __$$FetchCurrentMarketImplCopyWithImpl<$Res>
+    extends _$LoginFormEventCopyWithImpl<$Res, _$FetchCurrentMarketImpl>
+    implements _$$FetchCurrentMarketImplCopyWith<$Res> {
+  __$$FetchCurrentMarketImplCopyWithImpl(_$FetchCurrentMarketImpl _value,
+      $Res Function(_$FetchCurrentMarketImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_FetchCurrentMarket implements _FetchCurrentMarket {
-  const _$_FetchCurrentMarket();
+class _$FetchCurrentMarketImpl implements _FetchCurrentMarket {
+  const _$FetchCurrentMarketImpl();
 
   @override
   String toString() {
@@ -1771,9 +1779,9 @@ class _$_FetchCurrentMarket implements _FetchCurrentMarket {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_FetchCurrentMarket);
+        (other.runtimeType == runtimeType && other is _$FetchCurrentMarketImpl);
   }
 
   @override
@@ -1904,24 +1912,24 @@ class _$_FetchCurrentMarket implements _FetchCurrentMarket {
 }
 
 abstract class _FetchCurrentMarket implements LoginFormEvent {
-  const factory _FetchCurrentMarket() = _$_FetchCurrentMarket;
+  const factory _FetchCurrentMarket() = _$FetchCurrentMarketImpl;
 }
 
 /// @nodoc
-abstract class _$$_SetCurrentMarketCopyWith<$Res> {
-  factory _$$_SetCurrentMarketCopyWith(
-          _$_SetCurrentMarket value, $Res Function(_$_SetCurrentMarket) then) =
-      __$$_SetCurrentMarketCopyWithImpl<$Res>;
+abstract class _$$SetCurrentMarketImplCopyWith<$Res> {
+  factory _$$SetCurrentMarketImplCopyWith(_$SetCurrentMarketImpl value,
+          $Res Function(_$SetCurrentMarketImpl) then) =
+      __$$SetCurrentMarketImplCopyWithImpl<$Res>;
   @useResult
   $Res call({AppMarket currentMarket});
 }
 
 /// @nodoc
-class __$$_SetCurrentMarketCopyWithImpl<$Res>
-    extends _$LoginFormEventCopyWithImpl<$Res, _$_SetCurrentMarket>
-    implements _$$_SetCurrentMarketCopyWith<$Res> {
-  __$$_SetCurrentMarketCopyWithImpl(
-      _$_SetCurrentMarket _value, $Res Function(_$_SetCurrentMarket) _then)
+class __$$SetCurrentMarketImplCopyWithImpl<$Res>
+    extends _$LoginFormEventCopyWithImpl<$Res, _$SetCurrentMarketImpl>
+    implements _$$SetCurrentMarketImplCopyWith<$Res> {
+  __$$SetCurrentMarketImplCopyWithImpl(_$SetCurrentMarketImpl _value,
+      $Res Function(_$SetCurrentMarketImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1929,7 +1937,7 @@ class __$$_SetCurrentMarketCopyWithImpl<$Res>
   $Res call({
     Object? currentMarket = null,
   }) {
-    return _then(_$_SetCurrentMarket(
+    return _then(_$SetCurrentMarketImpl(
       null == currentMarket
           ? _value.currentMarket
           : currentMarket // ignore: cast_nullable_to_non_nullable
@@ -1940,8 +1948,8 @@ class __$$_SetCurrentMarketCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_SetCurrentMarket implements _SetCurrentMarket {
-  const _$_SetCurrentMarket(this.currentMarket);
+class _$SetCurrentMarketImpl implements _SetCurrentMarket {
+  const _$SetCurrentMarketImpl(this.currentMarket);
 
   @override
   final AppMarket currentMarket;
@@ -1952,10 +1960,10 @@ class _$_SetCurrentMarket implements _SetCurrentMarket {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_SetCurrentMarket &&
+            other is _$SetCurrentMarketImpl &&
             (identical(other.currentMarket, currentMarket) ||
                 other.currentMarket == currentMarket));
   }
@@ -1966,8 +1974,9 @@ class _$_SetCurrentMarket implements _SetCurrentMarket {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_SetCurrentMarketCopyWith<_$_SetCurrentMarket> get copyWith =>
-      __$$_SetCurrentMarketCopyWithImpl<_$_SetCurrentMarket>(this, _$identity);
+  _$$SetCurrentMarketImplCopyWith<_$SetCurrentMarketImpl> get copyWith =>
+      __$$SetCurrentMarketImplCopyWithImpl<_$SetCurrentMarketImpl>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -2095,11 +2104,11 @@ class _$_SetCurrentMarket implements _SetCurrentMarket {
 
 abstract class _SetCurrentMarket implements LoginFormEvent {
   const factory _SetCurrentMarket(final AppMarket currentMarket) =
-      _$_SetCurrentMarket;
+      _$SetCurrentMarketImpl;
 
   AppMarket get currentMarket;
   @JsonKey(ignore: true)
-  _$$_SetCurrentMarketCopyWith<_$_SetCurrentMarket> get copyWith =>
+  _$$SetCurrentMarketImplCopyWith<_$SetCurrentMarketImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -2197,11 +2206,11 @@ class _$LoginFormStateCopyWithImpl<$Res, $Val extends LoginFormState>
 }
 
 /// @nodoc
-abstract class _$$_LoginFormStateCopyWith<$Res>
+abstract class _$$LoginFormStateImplCopyWith<$Res>
     implements $LoginFormStateCopyWith<$Res> {
-  factory _$$_LoginFormStateCopyWith(
-          _$_LoginFormState value, $Res Function(_$_LoginFormState) then) =
-      __$$_LoginFormStateCopyWithImpl<$Res>;
+  factory _$$LoginFormStateImplCopyWith(_$LoginFormStateImpl value,
+          $Res Function(_$LoginFormStateImpl) then) =
+      __$$LoginFormStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -2216,11 +2225,11 @@ abstract class _$$_LoginFormStateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_LoginFormStateCopyWithImpl<$Res>
-    extends _$LoginFormStateCopyWithImpl<$Res, _$_LoginFormState>
-    implements _$$_LoginFormStateCopyWith<$Res> {
-  __$$_LoginFormStateCopyWithImpl(
-      _$_LoginFormState _value, $Res Function(_$_LoginFormState) _then)
+class __$$LoginFormStateImplCopyWithImpl<$Res>
+    extends _$LoginFormStateCopyWithImpl<$Res, _$LoginFormStateImpl>
+    implements _$$LoginFormStateImplCopyWith<$Res> {
+  __$$LoginFormStateImplCopyWithImpl(
+      _$LoginFormStateImpl _value, $Res Function(_$LoginFormStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -2235,7 +2244,7 @@ class __$$_LoginFormStateCopyWithImpl<$Res>
     Object? authFailureOrSuccessOption = null,
     Object? currentMarket = null,
   }) {
-    return _then(_$_LoginFormState(
+    return _then(_$LoginFormStateImpl(
       username: null == username
           ? _value.username
           : username // ignore: cast_nullable_to_non_nullable
@@ -2274,8 +2283,8 @@ class __$$_LoginFormStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_LoginFormState extends _LoginFormState {
-  const _$_LoginFormState(
+class _$LoginFormStateImpl extends _LoginFormState {
+  const _$LoginFormStateImpl(
       {required this.username,
       required this.password,
       required this.passwordVisible,
@@ -2309,10 +2318,10 @@ class _$_LoginFormState extends _LoginFormState {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_LoginFormState &&
+            other is _$LoginFormStateImpl &&
             (identical(other.username, username) ||
                 other.username == username) &&
             (identical(other.password, password) ||
@@ -2348,8 +2357,9 @@ class _$_LoginFormState extends _LoginFormState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_LoginFormStateCopyWith<_$_LoginFormState> get copyWith =>
-      __$$_LoginFormStateCopyWithImpl<_$_LoginFormState>(this, _$identity);
+  _$$LoginFormStateImplCopyWith<_$LoginFormStateImpl> get copyWith =>
+      __$$LoginFormStateImplCopyWithImpl<_$LoginFormStateImpl>(
+          this, _$identity);
 }
 
 abstract class _LoginFormState extends LoginFormState {
@@ -2362,7 +2372,7 @@ abstract class _LoginFormState extends LoginFormState {
       required final bool isSubmitting,
       required final Option<Either<ApiFailure, dynamic>>
           authFailureOrSuccessOption,
-      required final AppMarket currentMarket}) = _$_LoginFormState;
+      required final AppMarket currentMarket}) = _$LoginFormStateImpl;
   const _LoginFormState._() : super._();
 
   @override
@@ -2383,6 +2393,6 @@ abstract class _LoginFormState extends LoginFormState {
   AppMarket get currentMarket;
   @override
   @JsonKey(ignore: true)
-  _$$_LoginFormStateCopyWith<_$_LoginFormState> get copyWith =>
+  _$$LoginFormStateImplCopyWith<_$LoginFormStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

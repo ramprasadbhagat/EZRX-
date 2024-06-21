@@ -12,7 +12,7 @@ part of 'maintenance_item.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$MaintenanceItem {
@@ -79,11 +79,11 @@ class _$MaintenanceItemCopyWithImpl<$Res, $Val extends MaintenanceItem>
 }
 
 /// @nodoc
-abstract class _$$_MaintenanceItemCopyWith<$Res>
+abstract class _$$MaintenanceItemImplCopyWith<$Res>
     implements $MaintenanceItemCopyWith<$Res> {
-  factory _$$_MaintenanceItemCopyWith(
-          _$_MaintenanceItem value, $Res Function(_$_MaintenanceItem) then) =
-      __$$_MaintenanceItemCopyWithImpl<$Res>;
+  factory _$$MaintenanceItemImplCopyWith(_$MaintenanceItemImpl value,
+          $Res Function(_$MaintenanceItemImpl) then) =
+      __$$MaintenanceItemImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -94,11 +94,11 @@ abstract class _$$_MaintenanceItemCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_MaintenanceItemCopyWithImpl<$Res>
-    extends _$MaintenanceItemCopyWithImpl<$Res, _$_MaintenanceItem>
-    implements _$$_MaintenanceItemCopyWith<$Res> {
-  __$$_MaintenanceItemCopyWithImpl(
-      _$_MaintenanceItem _value, $Res Function(_$_MaintenanceItem) _then)
+class __$$MaintenanceItemImplCopyWithImpl<$Res>
+    extends _$MaintenanceItemCopyWithImpl<$Res, _$MaintenanceItemImpl>
+    implements _$$MaintenanceItemImplCopyWith<$Res> {
+  __$$MaintenanceItemImplCopyWithImpl(
+      _$MaintenanceItemImpl _value, $Res Function(_$MaintenanceItemImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -109,7 +109,7 @@ class __$$_MaintenanceItemCopyWithImpl<$Res>
     Object? maxNumberOfItem = null,
     Object? banners = null,
   }) {
-    return _then(_$_MaintenanceItem(
+    return _then(_$MaintenanceItemImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -132,8 +132,8 @@ class __$$_MaintenanceItemCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_MaintenanceItem extends _MaintenanceItem {
-  const _$_MaintenanceItem(
+class _$MaintenanceItemImpl extends _MaintenanceItem {
+  const _$MaintenanceItemImpl(
       {required this.id,
       required this.displayName,
       required this.maxNumberOfItem,
@@ -161,10 +161,10 @@ class _$_MaintenanceItem extends _MaintenanceItem {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_MaintenanceItem &&
+            other is _$MaintenanceItemImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.displayName, displayName) ||
                 other.displayName == displayName) &&
@@ -180,8 +180,9 @@ class _$_MaintenanceItem extends _MaintenanceItem {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_MaintenanceItemCopyWith<_$_MaintenanceItem> get copyWith =>
-      __$$_MaintenanceItemCopyWithImpl<_$_MaintenanceItem>(this, _$identity);
+  _$$MaintenanceItemImplCopyWith<_$MaintenanceItemImpl> get copyWith =>
+      __$$MaintenanceItemImplCopyWithImpl<_$MaintenanceItemImpl>(
+          this, _$identity);
 }
 
 abstract class _MaintenanceItem extends MaintenanceItem {
@@ -189,7 +190,7 @@ abstract class _MaintenanceItem extends MaintenanceItem {
       {required final String id,
       required final String displayName,
       required final int maxNumberOfItem,
-      required final List<MaintenanceBanner> banners}) = _$_MaintenanceItem;
+      required final List<MaintenanceBanner> banners}) = _$MaintenanceItemImpl;
   const _MaintenanceItem._() : super._();
 
   @override
@@ -202,7 +203,7 @@ abstract class _MaintenanceItem extends MaintenanceItem {
   List<MaintenanceBanner> get banners;
   @override
   @JsonKey(ignore: true)
-  _$$_MaintenanceItemCopyWith<_$_MaintenanceItem> get copyWith =>
+  _$$MaintenanceItemImplCopyWith<_$MaintenanceItemImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -314,11 +315,11 @@ class _$MaintenanceBannerCopyWithImpl<$Res, $Val extends MaintenanceBanner>
 }
 
 /// @nodoc
-abstract class _$$_MaintenanceBannerCopyWith<$Res>
+abstract class _$$MaintenanceBannerImplCopyWith<$Res>
     implements $MaintenanceBannerCopyWith<$Res> {
-  factory _$$_MaintenanceBannerCopyWith(_$_MaintenanceBanner value,
-          $Res Function(_$_MaintenanceBanner) then) =
-      __$$_MaintenanceBannerCopyWithImpl<$Res>;
+  factory _$$MaintenanceBannerImplCopyWith(_$MaintenanceBannerImpl value,
+          $Res Function(_$MaintenanceBannerImpl) then) =
+      __$$MaintenanceBannerImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -335,11 +336,11 @@ abstract class _$$_MaintenanceBannerCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_MaintenanceBannerCopyWithImpl<$Res>
-    extends _$MaintenanceBannerCopyWithImpl<$Res, _$_MaintenanceBanner>
-    implements _$$_MaintenanceBannerCopyWith<$Res> {
-  __$$_MaintenanceBannerCopyWithImpl(
-      _$_MaintenanceBanner _value, $Res Function(_$_MaintenanceBanner) _then)
+class __$$MaintenanceBannerImplCopyWithImpl<$Res>
+    extends _$MaintenanceBannerCopyWithImpl<$Res, _$MaintenanceBannerImpl>
+    implements _$$MaintenanceBannerImplCopyWith<$Res> {
+  __$$MaintenanceBannerImplCopyWithImpl(_$MaintenanceBannerImpl _value,
+      $Res Function(_$MaintenanceBannerImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -356,7 +357,7 @@ class __$$_MaintenanceBannerCopyWithImpl<$Res>
     Object? enableCrossButton = null,
     Object? loginType = null,
   }) {
-    return _then(_$_MaintenanceBanner(
+    return _then(_$MaintenanceBannerImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -403,8 +404,8 @@ class __$$_MaintenanceBannerCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_MaintenanceBanner extends _MaintenanceBanner {
-  const _$_MaintenanceBanner(
+class _$MaintenanceBannerImpl extends _MaintenanceBanner {
+  const _$MaintenanceBannerImpl(
       {required this.id,
       required this.displayName,
       required this.content,
@@ -452,10 +453,10 @@ class _$_MaintenanceBanner extends _MaintenanceBanner {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_MaintenanceBanner &&
+            other is _$MaintenanceBannerImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.displayName, displayName) ||
                 other.displayName == displayName) &&
@@ -492,23 +493,24 @@ class _$_MaintenanceBanner extends _MaintenanceBanner {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_MaintenanceBannerCopyWith<_$_MaintenanceBanner> get copyWith =>
-      __$$_MaintenanceBannerCopyWithImpl<_$_MaintenanceBanner>(
+  _$$MaintenanceBannerImplCopyWith<_$MaintenanceBannerImpl> get copyWith =>
+      __$$MaintenanceBannerImplCopyWithImpl<_$MaintenanceBannerImpl>(
           this, _$identity);
 }
 
 abstract class _MaintenanceBanner extends MaintenanceBanner {
   const factory _MaintenanceBanner(
-      {required final String id,
-      required final String displayName,
-      required final String content,
-      required final EZReachBannerLink hyperlink,
-      required final String isoDateValue,
-      required final String formattedDateValue,
-      required final String type,
-      required final List<ApplicableModules> applicableModules,
-      required final bool enableCrossButton,
-      required final AnnouncementDislayTime loginType}) = _$_MaintenanceBanner;
+          {required final String id,
+          required final String displayName,
+          required final String content,
+          required final EZReachBannerLink hyperlink,
+          required final String isoDateValue,
+          required final String formattedDateValue,
+          required final String type,
+          required final List<ApplicableModules> applicableModules,
+          required final bool enableCrossButton,
+          required final AnnouncementDislayTime loginType}) =
+      _$MaintenanceBannerImpl;
   const _MaintenanceBanner._() : super._();
 
   @override
@@ -533,7 +535,7 @@ abstract class _MaintenanceBanner extends MaintenanceBanner {
   AnnouncementDislayTime get loginType;
   @override
   @JsonKey(ignore: true)
-  _$$_MaintenanceBannerCopyWith<_$_MaintenanceBanner> get copyWith =>
+  _$$MaintenanceBannerImplCopyWith<_$MaintenanceBannerImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -596,11 +598,11 @@ class _$ApplicableModulesCopyWithImpl<$Res, $Val extends ApplicableModules>
 }
 
 /// @nodoc
-abstract class _$$_ApplicableModulesCopyWith<$Res>
+abstract class _$$ApplicableModulesImplCopyWith<$Res>
     implements $ApplicableModulesCopyWith<$Res> {
-  factory _$$_ApplicableModulesCopyWith(_$_ApplicableModules value,
-          $Res Function(_$_ApplicableModules) then) =
-      __$$_ApplicableModulesCopyWithImpl<$Res>;
+  factory _$$ApplicableModulesImplCopyWith(_$ApplicableModulesImpl value,
+          $Res Function(_$ApplicableModulesImpl) then) =
+      __$$ApplicableModulesImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -610,11 +612,11 @@ abstract class _$$_ApplicableModulesCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_ApplicableModulesCopyWithImpl<$Res>
-    extends _$ApplicableModulesCopyWithImpl<$Res, _$_ApplicableModules>
-    implements _$$_ApplicableModulesCopyWith<$Res> {
-  __$$_ApplicableModulesCopyWithImpl(
-      _$_ApplicableModules _value, $Res Function(_$_ApplicableModules) _then)
+class __$$ApplicableModulesImplCopyWithImpl<$Res>
+    extends _$ApplicableModulesCopyWithImpl<$Res, _$ApplicableModulesImpl>
+    implements _$$ApplicableModulesImplCopyWith<$Res> {
+  __$$ApplicableModulesImplCopyWithImpl(_$ApplicableModulesImpl _value,
+      $Res Function(_$ApplicableModulesImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -624,7 +626,7 @@ class __$$_ApplicableModulesCopyWithImpl<$Res>
     Object? name = null,
     Object? displayName = null,
   }) {
-    return _then(_$_ApplicableModules(
+    return _then(_$ApplicableModulesImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -643,8 +645,8 @@ class __$$_ApplicableModulesCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_ApplicableModules extends _ApplicableModules {
-  const _$_ApplicableModules(
+class _$ApplicableModulesImpl extends _ApplicableModules {
+  const _$ApplicableModulesImpl(
       {required this.id, required this.name, required this.displayName})
       : super._();
 
@@ -661,10 +663,10 @@ class _$_ApplicableModules extends _ApplicableModules {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ApplicableModules &&
+            other is _$ApplicableModulesImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.displayName, displayName) ||
@@ -677,8 +679,8 @@ class _$_ApplicableModules extends _ApplicableModules {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ApplicableModulesCopyWith<_$_ApplicableModules> get copyWith =>
-      __$$_ApplicableModulesCopyWithImpl<_$_ApplicableModules>(
+  _$$ApplicableModulesImplCopyWith<_$ApplicableModulesImpl> get copyWith =>
+      __$$ApplicableModulesImplCopyWithImpl<_$ApplicableModulesImpl>(
           this, _$identity);
 }
 
@@ -687,7 +689,7 @@ abstract class _ApplicableModules extends ApplicableModules {
           {required final String id,
           required final AnnouncementDislayModule name,
           required final AnnouncementDislayModule displayName}) =
-      _$_ApplicableModules;
+      _$ApplicableModulesImpl;
   const _ApplicableModules._() : super._();
 
   @override
@@ -698,6 +700,6 @@ abstract class _ApplicableModules extends ApplicableModules {
   AnnouncementDislayModule get displayName;
   @override
   @JsonKey(ignore: true)
-  _$$_ApplicableModulesCopyWith<_$_ApplicableModules> get copyWith =>
+  _$$ApplicableModulesImplCopyWith<_$ApplicableModulesImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

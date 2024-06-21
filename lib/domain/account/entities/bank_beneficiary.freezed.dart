@@ -12,7 +12,7 @@ part of 'bank_beneficiary.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$BankBeneficiary {
@@ -142,11 +142,11 @@ class _$BankBeneficiaryCopyWithImpl<$Res, $Val extends BankBeneficiary>
 }
 
 /// @nodoc
-abstract class _$$_BankBeneficiaryCopyWith<$Res>
+abstract class _$$BankBeneficiaryImplCopyWith<$Res>
     implements $BankBeneficiaryCopyWith<$Res> {
-  factory _$$_BankBeneficiaryCopyWith(
-          _$_BankBeneficiary value, $Res Function(_$_BankBeneficiary) then) =
-      __$$_BankBeneficiaryCopyWithImpl<$Res>;
+  factory _$$BankBeneficiaryImplCopyWith(_$BankBeneficiaryImpl value,
+          $Res Function(_$BankBeneficiaryImpl) then) =
+      __$$BankBeneficiaryImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -166,11 +166,11 @@ abstract class _$$_BankBeneficiaryCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_BankBeneficiaryCopyWithImpl<$Res>
-    extends _$BankBeneficiaryCopyWithImpl<$Res, _$_BankBeneficiary>
-    implements _$$_BankBeneficiaryCopyWith<$Res> {
-  __$$_BankBeneficiaryCopyWithImpl(
-      _$_BankBeneficiary _value, $Res Function(_$_BankBeneficiary) _then)
+class __$$BankBeneficiaryImplCopyWithImpl<$Res>
+    extends _$BankBeneficiaryCopyWithImpl<$Res, _$BankBeneficiaryImpl>
+    implements _$$BankBeneficiaryImplCopyWith<$Res> {
+  __$$BankBeneficiaryImplCopyWithImpl(
+      _$BankBeneficiaryImpl _value, $Res Function(_$BankBeneficiaryImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -190,7 +190,7 @@ class __$$_BankBeneficiaryCopyWithImpl<$Res>
     Object? salesDistrict = null,
     Object? isDeleteInProgress = null,
   }) {
-    return _then(_$_BankBeneficiary(
+    return _then(_$BankBeneficiaryImpl(
       key: null == key
           ? _value.key
           : key // ignore: cast_nullable_to_non_nullable
@@ -249,8 +249,8 @@ class __$$_BankBeneficiaryCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_BankBeneficiary extends _BankBeneficiary {
-  const _$_BankBeneficiary(
+class _$BankBeneficiaryImpl extends _BankBeneficiary {
+  const _$BankBeneficiaryImpl(
       {required this.key,
       required this.salesOrg,
       required this.bankAccount,
@@ -299,10 +299,10 @@ class _$_BankBeneficiary extends _BankBeneficiary {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_BankBeneficiary &&
+            other is _$BankBeneficiaryImpl &&
             (identical(other.key, key) || other.key == key) &&
             (identical(other.salesOrg, salesOrg) ||
                 other.salesOrg == salesOrg) &&
@@ -348,8 +348,9 @@ class _$_BankBeneficiary extends _BankBeneficiary {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_BankBeneficiaryCopyWith<_$_BankBeneficiary> get copyWith =>
-      __$$_BankBeneficiaryCopyWithImpl<_$_BankBeneficiary>(this, _$identity);
+  _$$BankBeneficiaryImplCopyWith<_$BankBeneficiaryImpl> get copyWith =>
+      __$$BankBeneficiaryImplCopyWithImpl<_$BankBeneficiaryImpl>(
+          this, _$identity);
 }
 
 abstract class _BankBeneficiary extends BankBeneficiary {
@@ -366,7 +367,7 @@ abstract class _BankBeneficiary extends BankBeneficiary {
       required final String hdbcSwiftCode,
       required final String payNowUen,
       required final String salesDistrict,
-      required final bool isDeleteInProgress}) = _$_BankBeneficiary;
+      required final bool isDeleteInProgress}) = _$BankBeneficiaryImpl;
   const _BankBeneficiary._() : super._();
 
   @override
@@ -397,6 +398,6 @@ abstract class _BankBeneficiary extends BankBeneficiary {
   bool get isDeleteInProgress;
   @override
   @JsonKey(ignore: true)
-  _$$_BankBeneficiaryCopyWith<_$_BankBeneficiary> get copyWith =>
+  _$$BankBeneficiaryImplCopyWith<_$BankBeneficiaryImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

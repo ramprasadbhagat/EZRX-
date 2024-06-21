@@ -12,7 +12,7 @@ part of 'material_item_override.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$MaterialItemOverride {
@@ -74,11 +74,11 @@ class _$MaterialItemOverrideCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_MaterialItemOverrideCopyWith<$Res>
+abstract class _$$MaterialItemOverrideImplCopyWith<$Res>
     implements $MaterialItemOverrideCopyWith<$Res> {
-  factory _$$_MaterialItemOverrideCopyWith(_$_MaterialItemOverride value,
-          $Res Function(_$_MaterialItemOverride) then) =
-      __$$_MaterialItemOverrideCopyWithImpl<$Res>;
+  factory _$$MaterialItemOverrideImplCopyWith(_$MaterialItemOverrideImpl value,
+          $Res Function(_$MaterialItemOverrideImpl) then) =
+      __$$MaterialItemOverrideImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -88,11 +88,11 @@ abstract class _$$_MaterialItemOverrideCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_MaterialItemOverrideCopyWithImpl<$Res>
-    extends _$MaterialItemOverrideCopyWithImpl<$Res, _$_MaterialItemOverride>
-    implements _$$_MaterialItemOverrideCopyWith<$Res> {
-  __$$_MaterialItemOverrideCopyWithImpl(_$_MaterialItemOverride _value,
-      $Res Function(_$_MaterialItemOverride) _then)
+class __$$MaterialItemOverrideImplCopyWithImpl<$Res>
+    extends _$MaterialItemOverrideCopyWithImpl<$Res, _$MaterialItemOverrideImpl>
+    implements _$$MaterialItemOverrideImplCopyWith<$Res> {
+  __$$MaterialItemOverrideImplCopyWithImpl(_$MaterialItemOverrideImpl _value,
+      $Res Function(_$MaterialItemOverrideImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -102,7 +102,7 @@ class __$$_MaterialItemOverrideCopyWithImpl<$Res>
     Object? valueOverride = null,
     Object? percentageOverride = null,
   }) {
-    return _then(_$_MaterialItemOverride(
+    return _then(_$MaterialItemOverrideImpl(
       reference: null == reference
           ? _value.reference
           : reference // ignore: cast_nullable_to_non_nullable
@@ -121,8 +121,8 @@ class __$$_MaterialItemOverrideCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_MaterialItemOverride extends _MaterialItemOverride {
-  const _$_MaterialItemOverride(
+class _$MaterialItemOverrideImpl extends _MaterialItemOverride {
+  const _$MaterialItemOverrideImpl(
       {required this.reference,
       required final List<ValueOverride> valueOverride,
       required final List<PercentageOverride> percentageOverride})
@@ -155,10 +155,10 @@ class _$_MaterialItemOverride extends _MaterialItemOverride {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_MaterialItemOverride &&
+            other is _$MaterialItemOverrideImpl &&
             (identical(other.reference, reference) ||
                 other.reference == reference) &&
             const DeepCollectionEquality()
@@ -177,9 +177,10 @@ class _$_MaterialItemOverride extends _MaterialItemOverride {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_MaterialItemOverrideCopyWith<_$_MaterialItemOverride> get copyWith =>
-      __$$_MaterialItemOverrideCopyWithImpl<_$_MaterialItemOverride>(
-          this, _$identity);
+  _$$MaterialItemOverrideImplCopyWith<_$MaterialItemOverrideImpl>
+      get copyWith =>
+          __$$MaterialItemOverrideImplCopyWithImpl<_$MaterialItemOverrideImpl>(
+              this, _$identity);
 }
 
 abstract class _MaterialItemOverride extends MaterialItemOverride {
@@ -187,7 +188,7 @@ abstract class _MaterialItemOverride extends MaterialItemOverride {
           {required final String reference,
           required final List<ValueOverride> valueOverride,
           required final List<PercentageOverride> percentageOverride}) =
-      _$_MaterialItemOverride;
+      _$MaterialItemOverrideImpl;
   const _MaterialItemOverride._() : super._();
 
   @override
@@ -198,8 +199,8 @@ abstract class _MaterialItemOverride extends MaterialItemOverride {
   List<PercentageOverride> get percentageOverride;
   @override
   @JsonKey(ignore: true)
-  _$$_MaterialItemOverrideCopyWith<_$_MaterialItemOverride> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$MaterialItemOverrideImplCopyWith<_$MaterialItemOverrideImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -257,22 +258,22 @@ class _$ValueOverrideCopyWithImpl<$Res, $Val extends ValueOverride>
 }
 
 /// @nodoc
-abstract class _$$_ValueOverrideCopyWith<$Res>
+abstract class _$$ValueOverrideImplCopyWith<$Res>
     implements $ValueOverrideCopyWith<$Res> {
-  factory _$$_ValueOverrideCopyWith(
-          _$_ValueOverride value, $Res Function(_$_ValueOverride) then) =
-      __$$_ValueOverrideCopyWithImpl<$Res>;
+  factory _$$ValueOverrideImplCopyWith(
+          _$ValueOverrideImpl value, $Res Function(_$ValueOverrideImpl) then) =
+      __$$ValueOverrideImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String code, double price, Currency currency});
 }
 
 /// @nodoc
-class __$$_ValueOverrideCopyWithImpl<$Res>
-    extends _$ValueOverrideCopyWithImpl<$Res, _$_ValueOverride>
-    implements _$$_ValueOverrideCopyWith<$Res> {
-  __$$_ValueOverrideCopyWithImpl(
-      _$_ValueOverride _value, $Res Function(_$_ValueOverride) _then)
+class __$$ValueOverrideImplCopyWithImpl<$Res>
+    extends _$ValueOverrideCopyWithImpl<$Res, _$ValueOverrideImpl>
+    implements _$$ValueOverrideImplCopyWith<$Res> {
+  __$$ValueOverrideImplCopyWithImpl(
+      _$ValueOverrideImpl _value, $Res Function(_$ValueOverrideImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -282,7 +283,7 @@ class __$$_ValueOverrideCopyWithImpl<$Res>
     Object? price = null,
     Object? currency = null,
   }) {
-    return _then(_$_ValueOverride(
+    return _then(_$ValueOverrideImpl(
       code: null == code
           ? _value.code
           : code // ignore: cast_nullable_to_non_nullable
@@ -301,8 +302,8 @@ class __$$_ValueOverrideCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_ValueOverride implements _ValueOverride {
-  const _$_ValueOverride(
+class _$ValueOverrideImpl implements _ValueOverride {
+  const _$ValueOverrideImpl(
       {this.code = 'ZPO1', required this.price, required this.currency});
 
   @override
@@ -319,10 +320,10 @@ class _$_ValueOverride implements _ValueOverride {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ValueOverride &&
+            other is _$ValueOverrideImpl &&
             (identical(other.code, code) || other.code == code) &&
             (identical(other.price, price) || other.price == price) &&
             (identical(other.currency, currency) ||
@@ -335,15 +336,15 @@ class _$_ValueOverride implements _ValueOverride {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ValueOverrideCopyWith<_$_ValueOverride> get copyWith =>
-      __$$_ValueOverrideCopyWithImpl<_$_ValueOverride>(this, _$identity);
+  _$$ValueOverrideImplCopyWith<_$ValueOverrideImpl> get copyWith =>
+      __$$ValueOverrideImplCopyWithImpl<_$ValueOverrideImpl>(this, _$identity);
 }
 
 abstract class _ValueOverride implements ValueOverride {
   const factory _ValueOverride(
       {final String code,
       required final double price,
-      required final Currency currency}) = _$_ValueOverride;
+      required final Currency currency}) = _$ValueOverrideImpl;
 
   @override
   String get code;
@@ -353,7 +354,7 @@ abstract class _ValueOverride implements ValueOverride {
   Currency get currency;
   @override
   @JsonKey(ignore: true)
-  _$$_ValueOverrideCopyWith<_$_ValueOverride> get copyWith =>
+  _$$ValueOverrideImplCopyWith<_$ValueOverrideImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -406,22 +407,22 @@ class _$PercentageOverrideCopyWithImpl<$Res, $Val extends PercentageOverride>
 }
 
 /// @nodoc
-abstract class _$$_PercentageOverrideCopyWith<$Res>
+abstract class _$$PercentageOverrideImplCopyWith<$Res>
     implements $PercentageOverrideCopyWith<$Res> {
-  factory _$$_PercentageOverrideCopyWith(_$_PercentageOverride value,
-          $Res Function(_$_PercentageOverride) then) =
-      __$$_PercentageOverrideCopyWithImpl<$Res>;
+  factory _$$PercentageOverrideImplCopyWith(_$PercentageOverrideImpl value,
+          $Res Function(_$PercentageOverrideImpl) then) =
+      __$$PercentageOverrideImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String code, double percentage});
 }
 
 /// @nodoc
-class __$$_PercentageOverrideCopyWithImpl<$Res>
-    extends _$PercentageOverrideCopyWithImpl<$Res, _$_PercentageOverride>
-    implements _$$_PercentageOverrideCopyWith<$Res> {
-  __$$_PercentageOverrideCopyWithImpl(
-      _$_PercentageOverride _value, $Res Function(_$_PercentageOverride) _then)
+class __$$PercentageOverrideImplCopyWithImpl<$Res>
+    extends _$PercentageOverrideCopyWithImpl<$Res, _$PercentageOverrideImpl>
+    implements _$$PercentageOverrideImplCopyWith<$Res> {
+  __$$PercentageOverrideImplCopyWithImpl(_$PercentageOverrideImpl _value,
+      $Res Function(_$PercentageOverrideImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -430,7 +431,7 @@ class __$$_PercentageOverrideCopyWithImpl<$Res>
     Object? code = null,
     Object? percentage = null,
   }) {
-    return _then(_$_PercentageOverride(
+    return _then(_$PercentageOverrideImpl(
       code: null == code
           ? _value.code
           : code // ignore: cast_nullable_to_non_nullable
@@ -445,8 +446,9 @@ class __$$_PercentageOverrideCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_PercentageOverride implements _PercentageOverride {
-  const _$_PercentageOverride({this.code = 'ZDP8', required this.percentage});
+class _$PercentageOverrideImpl implements _PercentageOverride {
+  const _$PercentageOverrideImpl(
+      {this.code = 'ZDP8', required this.percentage});
 
   @override
   @JsonKey()
@@ -460,10 +462,10 @@ class _$_PercentageOverride implements _PercentageOverride {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_PercentageOverride &&
+            other is _$PercentageOverrideImpl &&
             (identical(other.code, code) || other.code == code) &&
             (identical(other.percentage, percentage) ||
                 other.percentage == percentage));
@@ -475,15 +477,15 @@ class _$_PercentageOverride implements _PercentageOverride {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_PercentageOverrideCopyWith<_$_PercentageOverride> get copyWith =>
-      __$$_PercentageOverrideCopyWithImpl<_$_PercentageOverride>(
+  _$$PercentageOverrideImplCopyWith<_$PercentageOverrideImpl> get copyWith =>
+      __$$PercentageOverrideImplCopyWithImpl<_$PercentageOverrideImpl>(
           this, _$identity);
 }
 
 abstract class _PercentageOverride implements PercentageOverride {
   const factory _PercentageOverride(
       {final String code,
-      required final double percentage}) = _$_PercentageOverride;
+      required final double percentage}) = _$PercentageOverrideImpl;
 
   @override
   String get code;
@@ -491,6 +493,6 @@ abstract class _PercentageOverride implements PercentageOverride {
   double get percentage;
   @override
   @JsonKey(ignore: true)
-  _$$_PercentageOverrideCopyWith<_$_PercentageOverride> get copyWith =>
+  _$$PercentageOverrideImplCopyWith<_$PercentageOverrideImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

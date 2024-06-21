@@ -12,7 +12,7 @@ part of 'return_request_type_code_details_dto.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 ReturnRequestTypeCodeDetailsDto _$ReturnRequestTypeCodeDetailsDtoFromJson(
     Map<String, dynamic> json) {
@@ -76,12 +76,12 @@ class _$ReturnRequestTypeCodeDetailsDtoCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_ReturnRequestTypeCodeDetailsDtoCopyWith<$Res>
+abstract class _$$ReturnRequestTypeCodeDetailsDtoImplCopyWith<$Res>
     implements $ReturnRequestTypeCodeDetailsDtoCopyWith<$Res> {
-  factory _$$_ReturnRequestTypeCodeDetailsDtoCopyWith(
-          _$_ReturnRequestTypeCodeDetailsDto value,
-          $Res Function(_$_ReturnRequestTypeCodeDetailsDto) then) =
-      __$$_ReturnRequestTypeCodeDetailsDtoCopyWithImpl<$Res>;
+  factory _$$ReturnRequestTypeCodeDetailsDtoImplCopyWith(
+          _$ReturnRequestTypeCodeDetailsDtoImpl value,
+          $Res Function(_$ReturnRequestTypeCodeDetailsDtoImpl) then) =
+      __$$ReturnRequestTypeCodeDetailsDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -90,13 +90,13 @@ abstract class _$$_ReturnRequestTypeCodeDetailsDtoCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_ReturnRequestTypeCodeDetailsDtoCopyWithImpl<$Res>
+class __$$ReturnRequestTypeCodeDetailsDtoImplCopyWithImpl<$Res>
     extends _$ReturnRequestTypeCodeDetailsDtoCopyWithImpl<$Res,
-        _$_ReturnRequestTypeCodeDetailsDto>
-    implements _$$_ReturnRequestTypeCodeDetailsDtoCopyWith<$Res> {
-  __$$_ReturnRequestTypeCodeDetailsDtoCopyWithImpl(
-      _$_ReturnRequestTypeCodeDetailsDto _value,
-      $Res Function(_$_ReturnRequestTypeCodeDetailsDto) _then)
+        _$ReturnRequestTypeCodeDetailsDtoImpl>
+    implements _$$ReturnRequestTypeCodeDetailsDtoImplCopyWith<$Res> {
+  __$$ReturnRequestTypeCodeDetailsDtoImplCopyWithImpl(
+      _$ReturnRequestTypeCodeDetailsDtoImpl _value,
+      $Res Function(_$ReturnRequestTypeCodeDetailsDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -105,7 +105,7 @@ class __$$_ReturnRequestTypeCodeDetailsDtoCopyWithImpl<$Res>
     Object? returnCode = null,
     Object? returnDescription = null,
   }) {
-    return _then(_$_ReturnRequestTypeCodeDetailsDto(
+    return _then(_$ReturnRequestTypeCodeDetailsDtoImpl(
       returnCode: null == returnCode
           ? _value.returnCode
           : returnCode // ignore: cast_nullable_to_non_nullable
@@ -120,18 +120,17 @@ class __$$_ReturnRequestTypeCodeDetailsDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_ReturnRequestTypeCodeDetailsDto
+class _$ReturnRequestTypeCodeDetailsDtoImpl
     extends _ReturnRequestTypeCodeDetailsDto {
-  const _$_ReturnRequestTypeCodeDetailsDto(
-      {@JsonKey(name: 'returnCode', defaultValue: '')
-          required this.returnCode,
+  const _$ReturnRequestTypeCodeDetailsDtoImpl(
+      {@JsonKey(name: 'returnCode', defaultValue: '') required this.returnCode,
       @JsonKey(name: 'returnDesc', defaultValue: '')
-          required this.returnDescription})
+      required this.returnDescription})
       : super._();
 
-  factory _$_ReturnRequestTypeCodeDetailsDto.fromJson(
+  factory _$ReturnRequestTypeCodeDetailsDtoImpl.fromJson(
           Map<String, dynamic> json) =>
-      _$$_ReturnRequestTypeCodeDetailsDtoFromJson(json);
+      _$$ReturnRequestTypeCodeDetailsDtoImplFromJson(json);
 
   @override
   @JsonKey(name: 'returnCode', defaultValue: '')
@@ -146,10 +145,10 @@ class _$_ReturnRequestTypeCodeDetailsDto
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ReturnRequestTypeCodeDetailsDto &&
+            other is _$ReturnRequestTypeCodeDetailsDtoImpl &&
             (identical(other.returnCode, returnCode) ||
                 other.returnCode == returnCode) &&
             (identical(other.returnDescription, returnDescription) ||
@@ -163,14 +162,14 @@ class _$_ReturnRequestTypeCodeDetailsDto
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ReturnRequestTypeCodeDetailsDtoCopyWith<
-          _$_ReturnRequestTypeCodeDetailsDto>
-      get copyWith => __$$_ReturnRequestTypeCodeDetailsDtoCopyWithImpl<
-          _$_ReturnRequestTypeCodeDetailsDto>(this, _$identity);
+  _$$ReturnRequestTypeCodeDetailsDtoImplCopyWith<
+          _$ReturnRequestTypeCodeDetailsDtoImpl>
+      get copyWith => __$$ReturnRequestTypeCodeDetailsDtoImplCopyWithImpl<
+          _$ReturnRequestTypeCodeDetailsDtoImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_ReturnRequestTypeCodeDetailsDtoToJson(
+    return _$$ReturnRequestTypeCodeDetailsDtoImplToJson(
       this,
     );
   }
@@ -180,14 +179,14 @@ abstract class _ReturnRequestTypeCodeDetailsDto
     extends ReturnRequestTypeCodeDetailsDto {
   const factory _ReturnRequestTypeCodeDetailsDto(
           {@JsonKey(name: 'returnCode', defaultValue: '')
-              required final String returnCode,
+          required final String returnCode,
           @JsonKey(name: 'returnDesc', defaultValue: '')
-              required final String returnDescription}) =
-      _$_ReturnRequestTypeCodeDetailsDto;
+          required final String returnDescription}) =
+      _$ReturnRequestTypeCodeDetailsDtoImpl;
   const _ReturnRequestTypeCodeDetailsDto._() : super._();
 
   factory _ReturnRequestTypeCodeDetailsDto.fromJson(Map<String, dynamic> json) =
-      _$_ReturnRequestTypeCodeDetailsDto.fromJson;
+      _$ReturnRequestTypeCodeDetailsDtoImpl.fromJson;
 
   @override
   @JsonKey(name: 'returnCode', defaultValue: '')
@@ -197,7 +196,7 @@ abstract class _ReturnRequestTypeCodeDetailsDto
   String get returnDescription;
   @override
   @JsonKey(ignore: true)
-  _$$_ReturnRequestTypeCodeDetailsDtoCopyWith<
-          _$_ReturnRequestTypeCodeDetailsDto>
+  _$$ReturnRequestTypeCodeDetailsDtoImplCopyWith<
+          _$ReturnRequestTypeCodeDetailsDtoImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

@@ -12,7 +12,7 @@ part of 'payment_customer_information_dto.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 PaymentCustomerInformationDto _$PaymentCustomerInformationDtoFromJson(
     Map<String, dynamic> json) {
@@ -84,12 +84,12 @@ class _$PaymentCustomerInformationDtoCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_PaymentCustomerInformationDtoCopyWith<$Res>
+abstract class _$$PaymentCustomerInformationDtoImplCopyWith<$Res>
     implements $PaymentCustomerInformationDtoCopyWith<$Res> {
-  factory _$$_PaymentCustomerInformationDtoCopyWith(
-          _$_PaymentCustomerInformationDto value,
-          $Res Function(_$_PaymentCustomerInformationDto) then) =
-      __$$_PaymentCustomerInformationDtoCopyWithImpl<$Res>;
+  factory _$$PaymentCustomerInformationDtoImplCopyWith(
+          _$PaymentCustomerInformationDtoImpl value,
+          $Res Function(_$PaymentCustomerInformationDtoImpl) then) =
+      __$$PaymentCustomerInformationDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -99,13 +99,13 @@ abstract class _$$_PaymentCustomerInformationDtoCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_PaymentCustomerInformationDtoCopyWithImpl<$Res>
+class __$$PaymentCustomerInformationDtoImplCopyWithImpl<$Res>
     extends _$PaymentCustomerInformationDtoCopyWithImpl<$Res,
-        _$_PaymentCustomerInformationDto>
-    implements _$$_PaymentCustomerInformationDtoCopyWith<$Res> {
-  __$$_PaymentCustomerInformationDtoCopyWithImpl(
-      _$_PaymentCustomerInformationDto _value,
-      $Res Function(_$_PaymentCustomerInformationDto) _then)
+        _$PaymentCustomerInformationDtoImpl>
+    implements _$$PaymentCustomerInformationDtoImplCopyWith<$Res> {
+  __$$PaymentCustomerInformationDtoImplCopyWithImpl(
+      _$PaymentCustomerInformationDtoImpl _value,
+      $Res Function(_$PaymentCustomerInformationDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -115,7 +115,7 @@ class __$$_PaymentCustomerInformationDtoCopyWithImpl<$Res>
     Object? shipToDtoList = null,
     Object? billToDto = null,
   }) {
-    return _then(_$_PaymentCustomerInformationDto(
+    return _then(_$PaymentCustomerInformationDtoImpl(
       paymentTerm: null == paymentTerm
           ? _value.paymentTerm
           : paymentTerm // ignore: cast_nullable_to_non_nullable
@@ -134,8 +134,9 @@ class __$$_PaymentCustomerInformationDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_PaymentCustomerInformationDto extends _PaymentCustomerInformationDto {
-  const _$_PaymentCustomerInformationDto(
+class _$PaymentCustomerInformationDtoImpl
+    extends _PaymentCustomerInformationDto {
+  const _$PaymentCustomerInformationDtoImpl(
       {@JsonKey(name: 'paymentTerm') required this.paymentTerm,
       @JsonKey(name: 'shipTo') required final List<ShipToDto> shipToDtoList,
       @JsonKey(name: 'billTo') required final List<BillToDto> billToDto})
@@ -143,9 +144,9 @@ class _$_PaymentCustomerInformationDto extends _PaymentCustomerInformationDto {
         _billToDto = billToDto,
         super._();
 
-  factory _$_PaymentCustomerInformationDto.fromJson(
+  factory _$PaymentCustomerInformationDtoImpl.fromJson(
           Map<String, dynamic> json) =>
-      _$$_PaymentCustomerInformationDtoFromJson(json);
+      _$$PaymentCustomerInformationDtoImplFromJson(json);
 
   @override
   @JsonKey(name: 'paymentTerm')
@@ -174,10 +175,10 @@ class _$_PaymentCustomerInformationDto extends _PaymentCustomerInformationDto {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_PaymentCustomerInformationDto &&
+            other is _$PaymentCustomerInformationDtoImpl &&
             (identical(other.paymentTerm, paymentTerm) ||
                 other.paymentTerm == paymentTerm) &&
             const DeepCollectionEquality()
@@ -197,13 +198,14 @@ class _$_PaymentCustomerInformationDto extends _PaymentCustomerInformationDto {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_PaymentCustomerInformationDtoCopyWith<_$_PaymentCustomerInformationDto>
-      get copyWith => __$$_PaymentCustomerInformationDtoCopyWithImpl<
-          _$_PaymentCustomerInformationDto>(this, _$identity);
+  _$$PaymentCustomerInformationDtoImplCopyWith<
+          _$PaymentCustomerInformationDtoImpl>
+      get copyWith => __$$PaymentCustomerInformationDtoImplCopyWithImpl<
+          _$PaymentCustomerInformationDtoImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_PaymentCustomerInformationDtoToJson(
+    return _$$PaymentCustomerInformationDtoImplToJson(
       this,
     );
   }
@@ -215,11 +217,11 @@ abstract class _PaymentCustomerInformationDto
           {@JsonKey(name: 'paymentTerm') required final String paymentTerm,
           @JsonKey(name: 'shipTo') required final List<ShipToDto> shipToDtoList,
           @JsonKey(name: 'billTo') required final List<BillToDto> billToDto}) =
-      _$_PaymentCustomerInformationDto;
+      _$PaymentCustomerInformationDtoImpl;
   const _PaymentCustomerInformationDto._() : super._();
 
   factory _PaymentCustomerInformationDto.fromJson(Map<String, dynamic> json) =
-      _$_PaymentCustomerInformationDto.fromJson;
+      _$PaymentCustomerInformationDtoImpl.fromJson;
 
   @override
   @JsonKey(name: 'paymentTerm')
@@ -232,6 +234,7 @@ abstract class _PaymentCustomerInformationDto
   List<BillToDto> get billToDto;
   @override
   @JsonKey(ignore: true)
-  _$$_PaymentCustomerInformationDtoCopyWith<_$_PaymentCustomerInformationDto>
+  _$$PaymentCustomerInformationDtoImplCopyWith<
+          _$PaymentCustomerInformationDtoImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

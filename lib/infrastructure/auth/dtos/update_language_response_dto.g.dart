@@ -6,14 +6,14 @@ part of 'update_language_response_dto.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_UpdateLanguageResponseDto _$$_UpdateLanguageResponseDtoFromJson(
+_$UpdateLanguageResponseDtoImpl _$$UpdateLanguageResponseDtoImplFromJson(
         Map<String, dynamic> json) =>
-    _$_UpdateLanguageResponseDto(
+    _$UpdateLanguageResponseDtoImpl(
       success: json['success'] as bool? ?? false,
     );
 
-Map<String, dynamic> _$$_UpdateLanguageResponseDtoToJson(
-        _$_UpdateLanguageResponseDto instance) =>
+Map<String, dynamic> _$$UpdateLanguageResponseDtoImplToJson(
+        _$UpdateLanguageResponseDtoImpl instance) =>
     <String, dynamic>{
       'success': instance.success,
     };

@@ -6,9 +6,9 @@ part of 'combo_deal_group_deal_dto.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_ComboDealGroupDealDto _$$_ComboDealGroupDealDtoFromJson(
+_$ComboDealGroupDealDtoImpl _$$ComboDealGroupDealDtoImplFromJson(
         Map<String, dynamic> json) =>
-    _$_ComboDealGroupDealDto(
+    _$ComboDealGroupDealDtoImpl(
       minTotalAmount: json['minTotalAmount'] == null
           ? 0
           : const StringToDoubleConverter()
@@ -28,8 +28,8 @@ _$_ComboDealGroupDealDto _$$_ComboDealGroupDealDtoFromJson(
       conditionNumber: json['conditionNumber'] as String? ?? '',
     );
 
-Map<String, dynamic> _$$_ComboDealGroupDealDtoToJson(
-        _$_ComboDealGroupDealDto instance) =>
+Map<String, dynamic> _$$ComboDealGroupDealDtoImplToJson(
+        _$ComboDealGroupDealDtoImpl instance) =>
     <String, dynamic>{
       'minTotalAmount':
           const StringToDoubleConverter().toJson(instance.minTotalAmount),

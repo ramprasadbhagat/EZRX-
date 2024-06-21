@@ -12,7 +12,7 @@ part of 'payment_details.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$PaymentDetails {
@@ -72,11 +72,11 @@ class _$PaymentDetailsCopyWithImpl<$Res, $Val extends PaymentDetails>
 }
 
 /// @nodoc
-abstract class _$$_PaymentDetailsCopyWith<$Res>
+abstract class _$$PaymentDetailsImplCopyWith<$Res>
     implements $PaymentDetailsCopyWith<$Res> {
-  factory _$$_PaymentDetailsCopyWith(
-          _$_PaymentDetails value, $Res Function(_$_PaymentDetails) then) =
-      __$$_PaymentDetailsCopyWithImpl<$Res>;
+  factory _$$PaymentDetailsImplCopyWith(_$PaymentDetailsImpl value,
+          $Res Function(_$PaymentDetailsImpl) then) =
+      __$$PaymentDetailsImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -86,11 +86,11 @@ abstract class _$$_PaymentDetailsCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_PaymentDetailsCopyWithImpl<$Res>
-    extends _$PaymentDetailsCopyWithImpl<$Res, _$_PaymentDetails>
-    implements _$$_PaymentDetailsCopyWith<$Res> {
-  __$$_PaymentDetailsCopyWithImpl(
-      _$_PaymentDetails _value, $Res Function(_$_PaymentDetails) _then)
+class __$$PaymentDetailsImplCopyWithImpl<$Res>
+    extends _$PaymentDetailsCopyWithImpl<$Res, _$PaymentDetailsImpl>
+    implements _$$PaymentDetailsImplCopyWith<$Res> {
+  __$$PaymentDetailsImplCopyWithImpl(
+      _$PaymentDetailsImpl _value, $Res Function(_$PaymentDetailsImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -100,7 +100,7 @@ class __$$_PaymentDetailsCopyWithImpl<$Res>
     Object? vaName = null,
     Object? expiresAt = null,
   }) {
-    return _then(_$_PaymentDetails(
+    return _then(_$PaymentDetailsImpl(
       vaNumber: null == vaNumber
           ? _value.vaNumber
           : vaNumber // ignore: cast_nullable_to_non_nullable
@@ -119,8 +119,8 @@ class __$$_PaymentDetailsCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_PaymentDetails extends _PaymentDetails {
-  const _$_PaymentDetails(
+class _$PaymentDetailsImpl extends _PaymentDetails {
+  const _$PaymentDetailsImpl(
       {required this.vaNumber, required this.vaName, required this.expiresAt})
       : super._();
 
@@ -137,10 +137,10 @@ class _$_PaymentDetails extends _PaymentDetails {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_PaymentDetails &&
+            other is _$PaymentDetailsImpl &&
             (identical(other.vaNumber, vaNumber) ||
                 other.vaNumber == vaNumber) &&
             (identical(other.vaName, vaName) || other.vaName == vaName) &&
@@ -154,15 +154,16 @@ class _$_PaymentDetails extends _PaymentDetails {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_PaymentDetailsCopyWith<_$_PaymentDetails> get copyWith =>
-      __$$_PaymentDetailsCopyWithImpl<_$_PaymentDetails>(this, _$identity);
+  _$$PaymentDetailsImplCopyWith<_$PaymentDetailsImpl> get copyWith =>
+      __$$PaymentDetailsImplCopyWithImpl<_$PaymentDetailsImpl>(
+          this, _$identity);
 }
 
 abstract class _PaymentDetails extends PaymentDetails {
   const factory _PaymentDetails(
       {required final StringValue vaNumber,
       required final StringValue vaName,
-      required final DateTimeStringValue expiresAt}) = _$_PaymentDetails;
+      required final DateTimeStringValue expiresAt}) = _$PaymentDetailsImpl;
   const _PaymentDetails._() : super._();
 
   @override
@@ -173,6 +174,6 @@ abstract class _PaymentDetails extends PaymentDetails {
   DateTimeStringValue get expiresAt;
   @override
   @JsonKey(ignore: true)
-  _$$_PaymentDetailsCopyWith<_$_PaymentDetails> get copyWith =>
+  _$$PaymentDetailsImplCopyWith<_$PaymentDetailsImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

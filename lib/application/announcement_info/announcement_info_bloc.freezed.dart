@@ -12,7 +12,7 @@ part of 'announcement_info_bloc.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$AnnouncementInfoEvent {
@@ -94,10 +94,10 @@ class _$AnnouncementInfoEventCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_InitializeCopyWith<$Res> {
-  factory _$$_InitializeCopyWith(
-          _$_Initialize value, $Res Function(_$_Initialize) then) =
-      __$$_InitializeCopyWithImpl<$Res>;
+abstract class _$$InitializeImplCopyWith<$Res> {
+  factory _$$InitializeImplCopyWith(
+          _$InitializeImpl value, $Res Function(_$InitializeImpl) then) =
+      __$$InitializeImplCopyWithImpl<$Res>;
   @useResult
   $Res call({User user, SalesOrg salesOrg});
 
@@ -105,11 +105,11 @@ abstract class _$$_InitializeCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_InitializeCopyWithImpl<$Res>
-    extends _$AnnouncementInfoEventCopyWithImpl<$Res, _$_Initialize>
-    implements _$$_InitializeCopyWith<$Res> {
-  __$$_InitializeCopyWithImpl(
-      _$_Initialize _value, $Res Function(_$_Initialize) _then)
+class __$$InitializeImplCopyWithImpl<$Res>
+    extends _$AnnouncementInfoEventCopyWithImpl<$Res, _$InitializeImpl>
+    implements _$$InitializeImplCopyWith<$Res> {
+  __$$InitializeImplCopyWithImpl(
+      _$InitializeImpl _value, $Res Function(_$InitializeImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -118,7 +118,7 @@ class __$$_InitializeCopyWithImpl<$Res>
     Object? user = null,
     Object? salesOrg = null,
   }) {
-    return _then(_$_Initialize(
+    return _then(_$InitializeImpl(
       user: null == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
@@ -141,8 +141,8 @@ class __$$_InitializeCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_Initialize implements _Initialize {
-  const _$_Initialize({required this.user, required this.salesOrg});
+class _$InitializeImpl implements _Initialize {
+  const _$InitializeImpl({required this.user, required this.salesOrg});
 
   @override
   final User user;
@@ -155,10 +155,10 @@ class _$_Initialize implements _Initialize {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Initialize &&
+            other is _$InitializeImpl &&
             (identical(other.user, user) || other.user == user) &&
             (identical(other.salesOrg, salesOrg) ||
                 other.salesOrg == salesOrg));
@@ -170,8 +170,8 @@ class _$_Initialize implements _Initialize {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_InitializeCopyWith<_$_Initialize> get copyWith =>
-      __$$_InitializeCopyWithImpl<_$_Initialize>(this, _$identity);
+  _$$InitializeImplCopyWith<_$InitializeImpl> get copyWith =>
+      __$$InitializeImplCopyWithImpl<_$InitializeImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -257,33 +257,35 @@ class _$_Initialize implements _Initialize {
 abstract class _Initialize implements AnnouncementInfoEvent {
   const factory _Initialize(
       {required final User user,
-      required final SalesOrg salesOrg}) = _$_Initialize;
+      required final SalesOrg salesOrg}) = _$InitializeImpl;
 
   User get user;
   SalesOrg get salesOrg;
   @JsonKey(ignore: true)
-  _$$_InitializeCopyWith<_$_Initialize> get copyWith =>
+  _$$InitializeImplCopyWith<_$InitializeImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_FetchCopyWith<$Res> {
-  factory _$$_FetchCopyWith(_$_Fetch value, $Res Function(_$_Fetch) then) =
-      __$$_FetchCopyWithImpl<$Res>;
+abstract class _$$FetchImplCopyWith<$Res> {
+  factory _$$FetchImplCopyWith(
+          _$FetchImpl value, $Res Function(_$FetchImpl) then) =
+      __$$FetchImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_FetchCopyWithImpl<$Res>
-    extends _$AnnouncementInfoEventCopyWithImpl<$Res, _$_Fetch>
-    implements _$$_FetchCopyWith<$Res> {
-  __$$_FetchCopyWithImpl(_$_Fetch _value, $Res Function(_$_Fetch) _then)
+class __$$FetchImplCopyWithImpl<$Res>
+    extends _$AnnouncementInfoEventCopyWithImpl<$Res, _$FetchImpl>
+    implements _$$FetchImplCopyWith<$Res> {
+  __$$FetchImplCopyWithImpl(
+      _$FetchImpl _value, $Res Function(_$FetchImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_Fetch implements _Fetch {
-  const _$_Fetch();
+class _$FetchImpl implements _Fetch {
+  const _$FetchImpl();
 
   @override
   String toString() {
@@ -291,9 +293,9 @@ class _$_Fetch implements _Fetch {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_Fetch);
+        (other.runtimeType == runtimeType && other is _$FetchImpl);
   }
 
   @override
@@ -381,29 +383,29 @@ class _$_Fetch implements _Fetch {
 }
 
 abstract class _Fetch implements AnnouncementInfoEvent {
-  const factory _Fetch() = _$_Fetch;
+  const factory _Fetch() = _$FetchImpl;
 }
 
 /// @nodoc
-abstract class _$$_LoadMoreCopyWith<$Res> {
-  factory _$$_LoadMoreCopyWith(
-          _$_LoadMore value, $Res Function(_$_LoadMore) then) =
-      __$$_LoadMoreCopyWithImpl<$Res>;
+abstract class _$$LoadMoreImplCopyWith<$Res> {
+  factory _$$LoadMoreImplCopyWith(
+          _$LoadMoreImpl value, $Res Function(_$LoadMoreImpl) then) =
+      __$$LoadMoreImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_LoadMoreCopyWithImpl<$Res>
-    extends _$AnnouncementInfoEventCopyWithImpl<$Res, _$_LoadMore>
-    implements _$$_LoadMoreCopyWith<$Res> {
-  __$$_LoadMoreCopyWithImpl(
-      _$_LoadMore _value, $Res Function(_$_LoadMore) _then)
+class __$$LoadMoreImplCopyWithImpl<$Res>
+    extends _$AnnouncementInfoEventCopyWithImpl<$Res, _$LoadMoreImpl>
+    implements _$$LoadMoreImplCopyWith<$Res> {
+  __$$LoadMoreImplCopyWithImpl(
+      _$LoadMoreImpl _value, $Res Function(_$LoadMoreImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_LoadMore implements _LoadMore {
-  const _$_LoadMore();
+class _$LoadMoreImpl implements _LoadMore {
+  const _$LoadMoreImpl();
 
   @override
   String toString() {
@@ -411,9 +413,9 @@ class _$_LoadMore implements _LoadMore {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_LoadMore);
+        (other.runtimeType == runtimeType && other is _$LoadMoreImpl);
   }
 
   @override
@@ -501,24 +503,24 @@ class _$_LoadMore implements _LoadMore {
 }
 
 abstract class _LoadMore implements AnnouncementInfoEvent {
-  const factory _LoadMore() = _$_LoadMore;
+  const factory _LoadMore() = _$LoadMoreImpl;
 }
 
 /// @nodoc
-abstract class _$$_UpdateSearchKeyCopyWith<$Res> {
-  factory _$$_UpdateSearchKeyCopyWith(
-          _$_UpdateSearchKey value, $Res Function(_$_UpdateSearchKey) then) =
-      __$$_UpdateSearchKeyCopyWithImpl<$Res>;
+abstract class _$$UpdateSearchKeyImplCopyWith<$Res> {
+  factory _$$UpdateSearchKeyImplCopyWith(_$UpdateSearchKeyImpl value,
+          $Res Function(_$UpdateSearchKeyImpl) then) =
+      __$$UpdateSearchKeyImplCopyWithImpl<$Res>;
   @useResult
   $Res call({String searchKey});
 }
 
 /// @nodoc
-class __$$_UpdateSearchKeyCopyWithImpl<$Res>
-    extends _$AnnouncementInfoEventCopyWithImpl<$Res, _$_UpdateSearchKey>
-    implements _$$_UpdateSearchKeyCopyWith<$Res> {
-  __$$_UpdateSearchKeyCopyWithImpl(
-      _$_UpdateSearchKey _value, $Res Function(_$_UpdateSearchKey) _then)
+class __$$UpdateSearchKeyImplCopyWithImpl<$Res>
+    extends _$AnnouncementInfoEventCopyWithImpl<$Res, _$UpdateSearchKeyImpl>
+    implements _$$UpdateSearchKeyImplCopyWith<$Res> {
+  __$$UpdateSearchKeyImplCopyWithImpl(
+      _$UpdateSearchKeyImpl _value, $Res Function(_$UpdateSearchKeyImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -526,7 +528,7 @@ class __$$_UpdateSearchKeyCopyWithImpl<$Res>
   $Res call({
     Object? searchKey = null,
   }) {
-    return _then(_$_UpdateSearchKey(
+    return _then(_$UpdateSearchKeyImpl(
       searchKey: null == searchKey
           ? _value.searchKey
           : searchKey // ignore: cast_nullable_to_non_nullable
@@ -537,8 +539,8 @@ class __$$_UpdateSearchKeyCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_UpdateSearchKey implements _UpdateSearchKey {
-  const _$_UpdateSearchKey({required this.searchKey});
+class _$UpdateSearchKeyImpl implements _UpdateSearchKey {
+  const _$UpdateSearchKeyImpl({required this.searchKey});
 
   @override
   final String searchKey;
@@ -549,10 +551,10 @@ class _$_UpdateSearchKey implements _UpdateSearchKey {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_UpdateSearchKey &&
+            other is _$UpdateSearchKeyImpl &&
             (identical(other.searchKey, searchKey) ||
                 other.searchKey == searchKey));
   }
@@ -563,8 +565,9 @@ class _$_UpdateSearchKey implements _UpdateSearchKey {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_UpdateSearchKeyCopyWith<_$_UpdateSearchKey> get copyWith =>
-      __$$_UpdateSearchKeyCopyWithImpl<_$_UpdateSearchKey>(this, _$identity);
+  _$$UpdateSearchKeyImplCopyWith<_$UpdateSearchKeyImpl> get copyWith =>
+      __$$UpdateSearchKeyImplCopyWithImpl<_$UpdateSearchKeyImpl>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -649,29 +652,29 @@ class _$_UpdateSearchKey implements _UpdateSearchKey {
 
 abstract class _UpdateSearchKey implements AnnouncementInfoEvent {
   const factory _UpdateSearchKey({required final String searchKey}) =
-      _$_UpdateSearchKey;
+      _$UpdateSearchKeyImpl;
 
   String get searchKey;
   @JsonKey(ignore: true)
-  _$$_UpdateSearchKeyCopyWith<_$_UpdateSearchKey> get copyWith =>
+  _$$UpdateSearchKeyImplCopyWith<_$UpdateSearchKeyImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_SetCategoryKeyCopyWith<$Res> {
-  factory _$$_SetCategoryKeyCopyWith(
-          _$_SetCategoryKey value, $Res Function(_$_SetCategoryKey) then) =
-      __$$_SetCategoryKeyCopyWithImpl<$Res>;
+abstract class _$$SetCategoryKeyImplCopyWith<$Res> {
+  factory _$$SetCategoryKeyImplCopyWith(_$SetCategoryKeyImpl value,
+          $Res Function(_$SetCategoryKeyImpl) then) =
+      __$$SetCategoryKeyImplCopyWithImpl<$Res>;
   @useResult
   $Res call({List<String> categoryKeyList});
 }
 
 /// @nodoc
-class __$$_SetCategoryKeyCopyWithImpl<$Res>
-    extends _$AnnouncementInfoEventCopyWithImpl<$Res, _$_SetCategoryKey>
-    implements _$$_SetCategoryKeyCopyWith<$Res> {
-  __$$_SetCategoryKeyCopyWithImpl(
-      _$_SetCategoryKey _value, $Res Function(_$_SetCategoryKey) _then)
+class __$$SetCategoryKeyImplCopyWithImpl<$Res>
+    extends _$AnnouncementInfoEventCopyWithImpl<$Res, _$SetCategoryKeyImpl>
+    implements _$$SetCategoryKeyImplCopyWith<$Res> {
+  __$$SetCategoryKeyImplCopyWithImpl(
+      _$SetCategoryKeyImpl _value, $Res Function(_$SetCategoryKeyImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -679,7 +682,7 @@ class __$$_SetCategoryKeyCopyWithImpl<$Res>
   $Res call({
     Object? categoryKeyList = null,
   }) {
-    return _then(_$_SetCategoryKey(
+    return _then(_$SetCategoryKeyImpl(
       categoryKeyList: null == categoryKeyList
           ? _value._categoryKeyList
           : categoryKeyList // ignore: cast_nullable_to_non_nullable
@@ -690,8 +693,8 @@ class __$$_SetCategoryKeyCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_SetCategoryKey implements _SetCategoryKey {
-  const _$_SetCategoryKey({required final List<String> categoryKeyList})
+class _$SetCategoryKeyImpl implements _SetCategoryKey {
+  const _$SetCategoryKeyImpl({required final List<String> categoryKeyList})
       : _categoryKeyList = categoryKeyList;
 
   final List<String> _categoryKeyList;
@@ -708,10 +711,10 @@ class _$_SetCategoryKey implements _SetCategoryKey {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_SetCategoryKey &&
+            other is _$SetCategoryKeyImpl &&
             const DeepCollectionEquality()
                 .equals(other._categoryKeyList, _categoryKeyList));
   }
@@ -723,8 +726,9 @@ class _$_SetCategoryKey implements _SetCategoryKey {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_SetCategoryKeyCopyWith<_$_SetCategoryKey> get copyWith =>
-      __$$_SetCategoryKeyCopyWithImpl<_$_SetCategoryKey>(this, _$identity);
+  _$$SetCategoryKeyImplCopyWith<_$SetCategoryKeyImpl> get copyWith =>
+      __$$SetCategoryKeyImplCopyWithImpl<_$SetCategoryKeyImpl>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -809,11 +813,11 @@ class _$_SetCategoryKey implements _SetCategoryKey {
 
 abstract class _SetCategoryKey implements AnnouncementInfoEvent {
   const factory _SetCategoryKey({required final List<String> categoryKeyList}) =
-      _$_SetCategoryKey;
+      _$SetCategoryKeyImpl;
 
   List<String> get categoryKeyList;
   @JsonKey(ignore: true)
-  _$$_SetCategoryKeyCopyWith<_$_SetCategoryKey> get copyWith =>
+  _$$SetCategoryKeyImplCopyWith<_$SetCategoryKeyImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -933,11 +937,12 @@ class _$AnnouncementInfoStateCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_AnnouncementInfoStateCopyWith<$Res>
+abstract class _$$AnnouncementInfoStateImplCopyWith<$Res>
     implements $AnnouncementInfoStateCopyWith<$Res> {
-  factory _$$_AnnouncementInfoStateCopyWith(_$_AnnouncementInfoState value,
-          $Res Function(_$_AnnouncementInfoState) then) =
-      __$$_AnnouncementInfoStateCopyWithImpl<$Res>;
+  factory _$$AnnouncementInfoStateImplCopyWith(
+          _$AnnouncementInfoStateImpl value,
+          $Res Function(_$AnnouncementInfoStateImpl) then) =
+      __$$AnnouncementInfoStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -957,11 +962,12 @@ abstract class _$$_AnnouncementInfoStateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_AnnouncementInfoStateCopyWithImpl<$Res>
-    extends _$AnnouncementInfoStateCopyWithImpl<$Res, _$_AnnouncementInfoState>
-    implements _$$_AnnouncementInfoStateCopyWith<$Res> {
-  __$$_AnnouncementInfoStateCopyWithImpl(_$_AnnouncementInfoState _value,
-      $Res Function(_$_AnnouncementInfoState) _then)
+class __$$AnnouncementInfoStateImplCopyWithImpl<$Res>
+    extends _$AnnouncementInfoStateCopyWithImpl<$Res,
+        _$AnnouncementInfoStateImpl>
+    implements _$$AnnouncementInfoStateImplCopyWith<$Res> {
+  __$$AnnouncementInfoStateImplCopyWithImpl(_$AnnouncementInfoStateImpl _value,
+      $Res Function(_$AnnouncementInfoStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -976,7 +982,7 @@ class __$$_AnnouncementInfoStateCopyWithImpl<$Res>
     Object? categoryKeyList = null,
     Object? apiFailureOrSuccessOption = null,
   }) {
-    return _then(_$_AnnouncementInfoState(
+    return _then(_$AnnouncementInfoStateImpl(
       user: null == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
@@ -1015,8 +1021,8 @@ class __$$_AnnouncementInfoStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_AnnouncementInfoState extends _AnnouncementInfoState {
-  const _$_AnnouncementInfoState(
+class _$AnnouncementInfoStateImpl extends _AnnouncementInfoState {
+  const _$AnnouncementInfoStateImpl(
       {required this.user,
       required this.salesOrg,
       required this.announcementInfo,
@@ -1057,10 +1063,10 @@ class _$_AnnouncementInfoState extends _AnnouncementInfoState {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_AnnouncementInfoState &&
+            other is _$AnnouncementInfoStateImpl &&
             (identical(other.user, user) || other.user == user) &&
             (identical(other.salesOrg, salesOrg) ||
                 other.salesOrg == salesOrg) &&
@@ -1094,9 +1100,9 @@ class _$_AnnouncementInfoState extends _AnnouncementInfoState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_AnnouncementInfoStateCopyWith<_$_AnnouncementInfoState> get copyWith =>
-      __$$_AnnouncementInfoStateCopyWithImpl<_$_AnnouncementInfoState>(
-          this, _$identity);
+  _$$AnnouncementInfoStateImplCopyWith<_$AnnouncementInfoStateImpl>
+      get copyWith => __$$AnnouncementInfoStateImplCopyWithImpl<
+          _$AnnouncementInfoStateImpl>(this, _$identity);
 }
 
 abstract class _AnnouncementInfoState extends AnnouncementInfoState {
@@ -1109,7 +1115,7 @@ abstract class _AnnouncementInfoState extends AnnouncementInfoState {
       required final SearchKey searchKey,
       required final List<String> categoryKeyList,
       required final Option<Either<ApiFailure, dynamic>>
-          apiFailureOrSuccessOption}) = _$_AnnouncementInfoState;
+          apiFailureOrSuccessOption}) = _$AnnouncementInfoStateImpl;
   const _AnnouncementInfoState._() : super._();
 
   @override
@@ -1130,6 +1136,6 @@ abstract class _AnnouncementInfoState extends AnnouncementInfoState {
   Option<Either<ApiFailure, dynamic>> get apiFailureOrSuccessOption;
   @override
   @JsonKey(ignore: true)
-  _$$_AnnouncementInfoStateCopyWith<_$_AnnouncementInfoState> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$AnnouncementInfoStateImplCopyWith<_$AnnouncementInfoStateImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }

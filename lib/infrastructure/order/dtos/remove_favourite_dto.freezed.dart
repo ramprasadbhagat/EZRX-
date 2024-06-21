@@ -12,7 +12,7 @@ part of 'remove_favourite_dto.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 RemoveFavouriteDto _$RemoveFavouriteDtoFromJson(Map<String, dynamic> json) {
   return _RemoveFavouriteDto.fromJson(json);
@@ -37,7 +37,7 @@ abstract class $RemoveFavouriteDtoCopyWith<$Res> {
   @useResult
   $Res call(
       {@JsonKey(name: 'removeFavouriteMaterial', defaultValue: 0)
-          int removeFavouriteMaterial});
+      int removeFavouriteMaterial});
 }
 
 /// @nodoc
@@ -65,24 +65,24 @@ class _$RemoveFavouriteDtoCopyWithImpl<$Res, $Val extends RemoveFavouriteDto>
 }
 
 /// @nodoc
-abstract class _$$_RemoveFavouriteDtoCopyWith<$Res>
+abstract class _$$RemoveFavouriteDtoImplCopyWith<$Res>
     implements $RemoveFavouriteDtoCopyWith<$Res> {
-  factory _$$_RemoveFavouriteDtoCopyWith(_$_RemoveFavouriteDto value,
-          $Res Function(_$_RemoveFavouriteDto) then) =
-      __$$_RemoveFavouriteDtoCopyWithImpl<$Res>;
+  factory _$$RemoveFavouriteDtoImplCopyWith(_$RemoveFavouriteDtoImpl value,
+          $Res Function(_$RemoveFavouriteDtoImpl) then) =
+      __$$RemoveFavouriteDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
       {@JsonKey(name: 'removeFavouriteMaterial', defaultValue: 0)
-          int removeFavouriteMaterial});
+      int removeFavouriteMaterial});
 }
 
 /// @nodoc
-class __$$_RemoveFavouriteDtoCopyWithImpl<$Res>
-    extends _$RemoveFavouriteDtoCopyWithImpl<$Res, _$_RemoveFavouriteDto>
-    implements _$$_RemoveFavouriteDtoCopyWith<$Res> {
-  __$$_RemoveFavouriteDtoCopyWithImpl(
-      _$_RemoveFavouriteDto _value, $Res Function(_$_RemoveFavouriteDto) _then)
+class __$$RemoveFavouriteDtoImplCopyWithImpl<$Res>
+    extends _$RemoveFavouriteDtoCopyWithImpl<$Res, _$RemoveFavouriteDtoImpl>
+    implements _$$RemoveFavouriteDtoImplCopyWith<$Res> {
+  __$$RemoveFavouriteDtoImplCopyWithImpl(_$RemoveFavouriteDtoImpl _value,
+      $Res Function(_$RemoveFavouriteDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -90,7 +90,7 @@ class __$$_RemoveFavouriteDtoCopyWithImpl<$Res>
   $Res call({
     Object? removeFavouriteMaterial = null,
   }) {
-    return _then(_$_RemoveFavouriteDto(
+    return _then(_$RemoveFavouriteDtoImpl(
       removeFavouriteMaterial: null == removeFavouriteMaterial
           ? _value.removeFavouriteMaterial
           : removeFavouriteMaterial // ignore: cast_nullable_to_non_nullable
@@ -101,14 +101,14 @@ class __$$_RemoveFavouriteDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_RemoveFavouriteDto extends _RemoveFavouriteDto {
-  const _$_RemoveFavouriteDto(
+class _$RemoveFavouriteDtoImpl extends _RemoveFavouriteDto {
+  const _$RemoveFavouriteDtoImpl(
       {@JsonKey(name: 'removeFavouriteMaterial', defaultValue: 0)
-          required this.removeFavouriteMaterial})
+      required this.removeFavouriteMaterial})
       : super._();
 
-  factory _$_RemoveFavouriteDto.fromJson(Map<String, dynamic> json) =>
-      _$$_RemoveFavouriteDtoFromJson(json);
+  factory _$RemoveFavouriteDtoImpl.fromJson(Map<String, dynamic> json) =>
+      _$$RemoveFavouriteDtoImplFromJson(json);
 
   @override
   @JsonKey(name: 'removeFavouriteMaterial', defaultValue: 0)
@@ -120,10 +120,10 @@ class _$_RemoveFavouriteDto extends _RemoveFavouriteDto {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_RemoveFavouriteDto &&
+            other is _$RemoveFavouriteDtoImpl &&
             (identical(
                     other.removeFavouriteMaterial, removeFavouriteMaterial) ||
                 other.removeFavouriteMaterial == removeFavouriteMaterial));
@@ -136,13 +136,13 @@ class _$_RemoveFavouriteDto extends _RemoveFavouriteDto {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_RemoveFavouriteDtoCopyWith<_$_RemoveFavouriteDto> get copyWith =>
-      __$$_RemoveFavouriteDtoCopyWithImpl<_$_RemoveFavouriteDto>(
+  _$$RemoveFavouriteDtoImplCopyWith<_$RemoveFavouriteDtoImpl> get copyWith =>
+      __$$RemoveFavouriteDtoImplCopyWithImpl<_$RemoveFavouriteDtoImpl>(
           this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_RemoveFavouriteDtoToJson(
+    return _$$RemoveFavouriteDtoImplToJson(
       this,
     );
   }
@@ -151,17 +151,17 @@ class _$_RemoveFavouriteDto extends _RemoveFavouriteDto {
 abstract class _RemoveFavouriteDto extends RemoveFavouriteDto {
   const factory _RemoveFavouriteDto(
       {@JsonKey(name: 'removeFavouriteMaterial', defaultValue: 0)
-          required final int removeFavouriteMaterial}) = _$_RemoveFavouriteDto;
+      required final int removeFavouriteMaterial}) = _$RemoveFavouriteDtoImpl;
   const _RemoveFavouriteDto._() : super._();
 
   factory _RemoveFavouriteDto.fromJson(Map<String, dynamic> json) =
-      _$_RemoveFavouriteDto.fromJson;
+      _$RemoveFavouriteDtoImpl.fromJson;
 
   @override
   @JsonKey(name: 'removeFavouriteMaterial', defaultValue: 0)
   int get removeFavouriteMaterial;
   @override
   @JsonKey(ignore: true)
-  _$$_RemoveFavouriteDtoCopyWith<_$_RemoveFavouriteDto> get copyWith =>
+  _$$RemoveFavouriteDtoImplCopyWith<_$RemoveFavouriteDtoImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

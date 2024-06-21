@@ -17,7 +17,7 @@ _$ReturnFilterDtoImpl _$$ReturnFilterDtoImplFromJson(
               ?.map((e) => e as String)
               .toList() ??
           [],
-      returnType: json['returnType'] as int?,
+      returnType: (json['returnType'] as num?)?.toInt(),
     );
 
 Map<String, dynamic> _$$ReturnFilterDtoImplToJson(

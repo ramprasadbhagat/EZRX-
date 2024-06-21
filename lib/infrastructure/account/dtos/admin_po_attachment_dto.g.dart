@@ -6,9 +6,9 @@ part of 'admin_po_attachment_dto.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_AdminPoAttachmentDto _$$_AdminPoAttachmentDtoFromJson(
+_$AdminPoAttachmentDtoImpl _$$AdminPoAttachmentDtoImplFromJson(
         Map<String, dynamic> json) =>
-    _$_AdminPoAttachmentDto(
+    _$AdminPoAttachmentDtoImpl(
       salesOrderNumber: json['salesOrderNumber'] as String? ?? '',
       ezrxReferenceNumber: json['ezrxReferenceNumber'] as String? ?? '',
       createdBy: json['createdBy'] as String? ?? '',
@@ -21,8 +21,8 @@ _$_AdminPoAttachmentDto _$$_AdminPoAttachmentDtoFromJson(
       tempOrderNumber: json['tempOrderNumber'] as String? ?? '',
     );
 
-Map<String, dynamic> _$$_AdminPoAttachmentDtoToJson(
-        _$_AdminPoAttachmentDto instance) =>
+Map<String, dynamic> _$$AdminPoAttachmentDtoImplToJson(
+        _$AdminPoAttachmentDtoImpl instance) =>
     <String, dynamic>{
       'salesOrderNumber': overrideToJson(instance.salesOrderNumber),
       'ezrxReferenceNumber': overrideToJson(instance.ezrxReferenceNumber),

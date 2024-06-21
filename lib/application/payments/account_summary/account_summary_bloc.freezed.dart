@@ -12,7 +12,7 @@ part of 'account_summary_bloc.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$AccountSummaryEvent {
@@ -83,25 +83,25 @@ class _$AccountSummaryEventCopyWithImpl<$Res, $Val extends AccountSummaryEvent>
 }
 
 /// @nodoc
-abstract class _$$_InitializeCopyWith<$Res> {
-  factory _$$_InitializeCopyWith(
-          _$_Initialize value, $Res Function(_$_Initialize) then) =
-      __$$_InitializeCopyWithImpl<$Res>;
+abstract class _$$InitializeImplCopyWith<$Res> {
+  factory _$$InitializeImplCopyWith(
+          _$InitializeImpl value, $Res Function(_$InitializeImpl) then) =
+      __$$InitializeImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_InitializeCopyWithImpl<$Res>
-    extends _$AccountSummaryEventCopyWithImpl<$Res, _$_Initialize>
-    implements _$$_InitializeCopyWith<$Res> {
-  __$$_InitializeCopyWithImpl(
-      _$_Initialize _value, $Res Function(_$_Initialize) _then)
+class __$$InitializeImplCopyWithImpl<$Res>
+    extends _$AccountSummaryEventCopyWithImpl<$Res, _$InitializeImpl>
+    implements _$$InitializeImplCopyWith<$Res> {
+  __$$InitializeImplCopyWithImpl(
+      _$InitializeImpl _value, $Res Function(_$InitializeImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_Initialize implements _Initialize {
-  const _$_Initialize();
+class _$InitializeImpl implements _Initialize {
+  const _$InitializeImpl();
 
   @override
   String toString() {
@@ -109,9 +109,9 @@ class _$_Initialize implements _Initialize {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_Initialize);
+        (other.runtimeType == runtimeType && other is _$InitializeImpl);
   }
 
   @override
@@ -189,24 +189,24 @@ class _$_Initialize implements _Initialize {
 }
 
 abstract class _Initialize implements AccountSummaryEvent {
-  const factory _Initialize() = _$_Initialize;
+  const factory _Initialize() = _$InitializeImpl;
 }
 
 /// @nodoc
-abstract class _$$_FetchInvoiceSummaryCopyWith<$Res> {
-  factory _$$_FetchInvoiceSummaryCopyWith(_$_FetchInvoiceSummary value,
-          $Res Function(_$_FetchInvoiceSummary) then) =
-      __$$_FetchInvoiceSummaryCopyWithImpl<$Res>;
+abstract class _$$FetchInvoiceSummaryImplCopyWith<$Res> {
+  factory _$$FetchInvoiceSummaryImplCopyWith(_$FetchInvoiceSummaryImpl value,
+          $Res Function(_$FetchInvoiceSummaryImpl) then) =
+      __$$FetchInvoiceSummaryImplCopyWithImpl<$Res>;
   @useResult
   $Res call({String custCode, SalesOrg salesOrg});
 }
 
 /// @nodoc
-class __$$_FetchInvoiceSummaryCopyWithImpl<$Res>
-    extends _$AccountSummaryEventCopyWithImpl<$Res, _$_FetchInvoiceSummary>
-    implements _$$_FetchInvoiceSummaryCopyWith<$Res> {
-  __$$_FetchInvoiceSummaryCopyWithImpl(_$_FetchInvoiceSummary _value,
-      $Res Function(_$_FetchInvoiceSummary) _then)
+class __$$FetchInvoiceSummaryImplCopyWithImpl<$Res>
+    extends _$AccountSummaryEventCopyWithImpl<$Res, _$FetchInvoiceSummaryImpl>
+    implements _$$FetchInvoiceSummaryImplCopyWith<$Res> {
+  __$$FetchInvoiceSummaryImplCopyWithImpl(_$FetchInvoiceSummaryImpl _value,
+      $Res Function(_$FetchInvoiceSummaryImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -215,7 +215,7 @@ class __$$_FetchInvoiceSummaryCopyWithImpl<$Res>
     Object? custCode = null,
     Object? salesOrg = null,
   }) {
-    return _then(_$_FetchInvoiceSummary(
+    return _then(_$FetchInvoiceSummaryImpl(
       custCode: null == custCode
           ? _value.custCode
           : custCode // ignore: cast_nullable_to_non_nullable
@@ -230,8 +230,8 @@ class __$$_FetchInvoiceSummaryCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_FetchInvoiceSummary implements _FetchInvoiceSummary {
-  const _$_FetchInvoiceSummary(
+class _$FetchInvoiceSummaryImpl implements _FetchInvoiceSummary {
+  const _$FetchInvoiceSummaryImpl(
       {required this.custCode, required this.salesOrg});
 
   @override
@@ -245,10 +245,10 @@ class _$_FetchInvoiceSummary implements _FetchInvoiceSummary {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_FetchInvoiceSummary &&
+            other is _$FetchInvoiceSummaryImpl &&
             (identical(other.custCode, custCode) ||
                 other.custCode == custCode) &&
             (identical(other.salesOrg, salesOrg) ||
@@ -261,8 +261,8 @@ class _$_FetchInvoiceSummary implements _FetchInvoiceSummary {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_FetchInvoiceSummaryCopyWith<_$_FetchInvoiceSummary> get copyWith =>
-      __$$_FetchInvoiceSummaryCopyWithImpl<_$_FetchInvoiceSummary>(
+  _$$FetchInvoiceSummaryImplCopyWith<_$FetchInvoiceSummaryImpl> get copyWith =>
+      __$$FetchInvoiceSummaryImplCopyWithImpl<_$FetchInvoiceSummaryImpl>(
           this, _$identity);
 
   @override
@@ -339,30 +339,30 @@ class _$_FetchInvoiceSummary implements _FetchInvoiceSummary {
 abstract class _FetchInvoiceSummary implements AccountSummaryEvent {
   const factory _FetchInvoiceSummary(
       {required final String custCode,
-      required final SalesOrg salesOrg}) = _$_FetchInvoiceSummary;
+      required final SalesOrg salesOrg}) = _$FetchInvoiceSummaryImpl;
 
   String get custCode;
   SalesOrg get salesOrg;
   @JsonKey(ignore: true)
-  _$$_FetchInvoiceSummaryCopyWith<_$_FetchInvoiceSummary> get copyWith =>
+  _$$FetchInvoiceSummaryImplCopyWith<_$FetchInvoiceSummaryImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_FetchCreditSummaryCopyWith<$Res> {
-  factory _$$_FetchCreditSummaryCopyWith(_$_FetchCreditSummary value,
-          $Res Function(_$_FetchCreditSummary) then) =
-      __$$_FetchCreditSummaryCopyWithImpl<$Res>;
+abstract class _$$FetchCreditSummaryImplCopyWith<$Res> {
+  factory _$$FetchCreditSummaryImplCopyWith(_$FetchCreditSummaryImpl value,
+          $Res Function(_$FetchCreditSummaryImpl) then) =
+      __$$FetchCreditSummaryImplCopyWithImpl<$Res>;
   @useResult
   $Res call({String custCode, SalesOrg salesOrg});
 }
 
 /// @nodoc
-class __$$_FetchCreditSummaryCopyWithImpl<$Res>
-    extends _$AccountSummaryEventCopyWithImpl<$Res, _$_FetchCreditSummary>
-    implements _$$_FetchCreditSummaryCopyWith<$Res> {
-  __$$_FetchCreditSummaryCopyWithImpl(
-      _$_FetchCreditSummary _value, $Res Function(_$_FetchCreditSummary) _then)
+class __$$FetchCreditSummaryImplCopyWithImpl<$Res>
+    extends _$AccountSummaryEventCopyWithImpl<$Res, _$FetchCreditSummaryImpl>
+    implements _$$FetchCreditSummaryImplCopyWith<$Res> {
+  __$$FetchCreditSummaryImplCopyWithImpl(_$FetchCreditSummaryImpl _value,
+      $Res Function(_$FetchCreditSummaryImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -371,7 +371,7 @@ class __$$_FetchCreditSummaryCopyWithImpl<$Res>
     Object? custCode = null,
     Object? salesOrg = null,
   }) {
-    return _then(_$_FetchCreditSummary(
+    return _then(_$FetchCreditSummaryImpl(
       custCode: null == custCode
           ? _value.custCode
           : custCode // ignore: cast_nullable_to_non_nullable
@@ -386,8 +386,9 @@ class __$$_FetchCreditSummaryCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_FetchCreditSummary implements _FetchCreditSummary {
-  const _$_FetchCreditSummary({required this.custCode, required this.salesOrg});
+class _$FetchCreditSummaryImpl implements _FetchCreditSummary {
+  const _$FetchCreditSummaryImpl(
+      {required this.custCode, required this.salesOrg});
 
   @override
   final String custCode;
@@ -400,10 +401,10 @@ class _$_FetchCreditSummary implements _FetchCreditSummary {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_FetchCreditSummary &&
+            other is _$FetchCreditSummaryImpl &&
             (identical(other.custCode, custCode) ||
                 other.custCode == custCode) &&
             (identical(other.salesOrg, salesOrg) ||
@@ -416,8 +417,8 @@ class _$_FetchCreditSummary implements _FetchCreditSummary {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_FetchCreditSummaryCopyWith<_$_FetchCreditSummary> get copyWith =>
-      __$$_FetchCreditSummaryCopyWithImpl<_$_FetchCreditSummary>(
+  _$$FetchCreditSummaryImplCopyWith<_$FetchCreditSummaryImpl> get copyWith =>
+      __$$FetchCreditSummaryImplCopyWithImpl<_$FetchCreditSummaryImpl>(
           this, _$identity);
 
   @override
@@ -494,12 +495,12 @@ class _$_FetchCreditSummary implements _FetchCreditSummary {
 abstract class _FetchCreditSummary implements AccountSummaryEvent {
   const factory _FetchCreditSummary(
       {required final String custCode,
-      required final SalesOrg salesOrg}) = _$_FetchCreditSummary;
+      required final SalesOrg salesOrg}) = _$FetchCreditSummaryImpl;
 
   String get custCode;
   SalesOrg get salesOrg;
   @JsonKey(ignore: true)
-  _$$_FetchCreditSummaryCopyWith<_$_FetchCreditSummary> get copyWith =>
+  _$$FetchCreditSummaryImplCopyWith<_$FetchCreditSummaryImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -597,11 +598,11 @@ class _$AccountSummaryStateCopyWithImpl<$Res, $Val extends AccountSummaryState>
 }
 
 /// @nodoc
-abstract class _$$_AccountSummaryStateCopyWith<$Res>
+abstract class _$$AccountSummaryStateImplCopyWith<$Res>
     implements $AccountSummaryStateCopyWith<$Res> {
-  factory _$$_AccountSummaryStateCopyWith(_$_AccountSummaryState value,
-          $Res Function(_$_AccountSummaryState) then) =
-      __$$_AccountSummaryStateCopyWithImpl<$Res>;
+  factory _$$AccountSummaryStateImplCopyWith(_$AccountSummaryStateImpl value,
+          $Res Function(_$AccountSummaryStateImpl) then) =
+      __$$AccountSummaryStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -618,11 +619,11 @@ abstract class _$$_AccountSummaryStateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_AccountSummaryStateCopyWithImpl<$Res>
-    extends _$AccountSummaryStateCopyWithImpl<$Res, _$_AccountSummaryState>
-    implements _$$_AccountSummaryStateCopyWith<$Res> {
-  __$$_AccountSummaryStateCopyWithImpl(_$_AccountSummaryState _value,
-      $Res Function(_$_AccountSummaryState) _then)
+class __$$AccountSummaryStateImplCopyWithImpl<$Res>
+    extends _$AccountSummaryStateCopyWithImpl<$Res, _$AccountSummaryStateImpl>
+    implements _$$AccountSummaryStateImplCopyWith<$Res> {
+  __$$AccountSummaryStateImplCopyWithImpl(_$AccountSummaryStateImpl _value,
+      $Res Function(_$AccountSummaryStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -634,7 +635,7 @@ class __$$_AccountSummaryStateCopyWithImpl<$Res>
     Object? isFetchingCreditLimit = null,
     Object? failureOrSuccessOption = null,
   }) {
-    return _then(_$_AccountSummaryState(
+    return _then(_$AccountSummaryStateImpl(
       outstandingBalance: null == outstandingBalance
           ? _value.outstandingBalance
           : outstandingBalance // ignore: cast_nullable_to_non_nullable
@@ -661,8 +662,8 @@ class __$$_AccountSummaryStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_AccountSummaryState extends _AccountSummaryState {
-  const _$_AccountSummaryState(
+class _$AccountSummaryStateImpl extends _AccountSummaryState {
+  const _$AccountSummaryStateImpl(
       {required this.outstandingBalance,
       required this.creditLimit,
       required this.isFetchingOutstandingBalance,
@@ -687,10 +688,10 @@ class _$_AccountSummaryState extends _AccountSummaryState {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_AccountSummaryState &&
+            other is _$AccountSummaryStateImpl &&
             (identical(other.outstandingBalance, outstandingBalance) ||
                 other.outstandingBalance == outstandingBalance) &&
             (identical(other.creditLimit, creditLimit) ||
@@ -717,8 +718,8 @@ class _$_AccountSummaryState extends _AccountSummaryState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_AccountSummaryStateCopyWith<_$_AccountSummaryState> get copyWith =>
-      __$$_AccountSummaryStateCopyWithImpl<_$_AccountSummaryState>(
+  _$$AccountSummaryStateImplCopyWith<_$AccountSummaryStateImpl> get copyWith =>
+      __$$AccountSummaryStateImplCopyWithImpl<_$AccountSummaryStateImpl>(
           this, _$identity);
 }
 
@@ -729,7 +730,7 @@ abstract class _AccountSummaryState extends AccountSummaryState {
       required final bool isFetchingOutstandingBalance,
       required final bool isFetchingCreditLimit,
       required final Option<Either<ApiFailure, dynamic>>
-          failureOrSuccessOption}) = _$_AccountSummaryState;
+          failureOrSuccessOption}) = _$AccountSummaryStateImpl;
   const _AccountSummaryState._() : super._();
 
   @override
@@ -744,6 +745,6 @@ abstract class _AccountSummaryState extends AccountSummaryState {
   Option<Either<ApiFailure, dynamic>> get failureOrSuccessOption;
   @override
   @JsonKey(ignore: true)
-  _$$_AccountSummaryStateCopyWith<_$_AccountSummaryState> get copyWith =>
+  _$$AccountSummaryStateImplCopyWith<_$AccountSummaryStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

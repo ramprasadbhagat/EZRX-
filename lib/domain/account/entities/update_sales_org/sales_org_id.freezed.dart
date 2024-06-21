@@ -12,7 +12,7 @@ part of 'sales_org_id.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$SalesOrgId {
@@ -57,22 +57,22 @@ class _$SalesOrgIdCopyWithImpl<$Res, $Val extends SalesOrgId>
 }
 
 /// @nodoc
-abstract class _$$_SalesOrgIdCopyWith<$Res>
+abstract class _$$SalesOrgIdImplCopyWith<$Res>
     implements $SalesOrgIdCopyWith<$Res> {
-  factory _$$_SalesOrgIdCopyWith(
-          _$_SalesOrgId value, $Res Function(_$_SalesOrgId) then) =
-      __$$_SalesOrgIdCopyWithImpl<$Res>;
+  factory _$$SalesOrgIdImplCopyWith(
+          _$SalesOrgIdImpl value, $Res Function(_$SalesOrgIdImpl) then) =
+      __$$SalesOrgIdImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({int id});
 }
 
 /// @nodoc
-class __$$_SalesOrgIdCopyWithImpl<$Res>
-    extends _$SalesOrgIdCopyWithImpl<$Res, _$_SalesOrgId>
-    implements _$$_SalesOrgIdCopyWith<$Res> {
-  __$$_SalesOrgIdCopyWithImpl(
-      _$_SalesOrgId _value, $Res Function(_$_SalesOrgId) _then)
+class __$$SalesOrgIdImplCopyWithImpl<$Res>
+    extends _$SalesOrgIdCopyWithImpl<$Res, _$SalesOrgIdImpl>
+    implements _$$SalesOrgIdImplCopyWith<$Res> {
+  __$$SalesOrgIdImplCopyWithImpl(
+      _$SalesOrgIdImpl _value, $Res Function(_$SalesOrgIdImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -80,7 +80,7 @@ class __$$_SalesOrgIdCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
   }) {
-    return _then(_$_SalesOrgId(
+    return _then(_$SalesOrgIdImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -91,8 +91,8 @@ class __$$_SalesOrgIdCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_SalesOrgId extends _SalesOrgId {
-  const _$_SalesOrgId({required this.id}) : super._();
+class _$SalesOrgIdImpl extends _SalesOrgId {
+  const _$SalesOrgIdImpl({required this.id}) : super._();
 
   @override
   final int id;
@@ -103,10 +103,10 @@ class _$_SalesOrgId extends _SalesOrgId {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_SalesOrgId &&
+            other is _$SalesOrgIdImpl &&
             (identical(other.id, id) || other.id == id));
   }
 
@@ -116,18 +116,18 @@ class _$_SalesOrgId extends _SalesOrgId {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_SalesOrgIdCopyWith<_$_SalesOrgId> get copyWith =>
-      __$$_SalesOrgIdCopyWithImpl<_$_SalesOrgId>(this, _$identity);
+  _$$SalesOrgIdImplCopyWith<_$SalesOrgIdImpl> get copyWith =>
+      __$$SalesOrgIdImplCopyWithImpl<_$SalesOrgIdImpl>(this, _$identity);
 }
 
 abstract class _SalesOrgId extends SalesOrgId {
-  const factory _SalesOrgId({required final int id}) = _$_SalesOrgId;
+  const factory _SalesOrgId({required final int id}) = _$SalesOrgIdImpl;
   const _SalesOrgId._() : super._();
 
   @override
   int get id;
   @override
   @JsonKey(ignore: true)
-  _$$_SalesOrgIdCopyWith<_$_SalesOrgId> get copyWith =>
+  _$$SalesOrgIdImplCopyWith<_$SalesOrgIdImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

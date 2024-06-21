@@ -6,7 +6,8 @@ part of 'ship_to_dto.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_ShipToDto _$$_ShipToDtoFromJson(Map<String, dynamic> json) => _$_ShipToDto(
+_$ShipToDtoImpl _$$ShipToDtoImplFromJson(Map<String, dynamic> json) =>
+    _$ShipToDtoImpl(
       shipToCustomerCode: json['shipToCustomerCode'] as String? ?? '',
       defaultShipToAddress: json['defaultShipToAddress'] as bool? ?? true,
       name1: json['name1'] as String? ?? '',
@@ -37,7 +38,7 @@ _$_ShipToDto _$$_ShipToDtoFromJson(Map<String, dynamic> json) => _$_ShipToDto(
       customerBlock: json['customerBlock'] as String? ?? '',
     );
 
-Map<String, dynamic> _$$_ShipToDtoToJson(_$_ShipToDto instance) =>
+Map<String, dynamic> _$$ShipToDtoImplToJson(_$ShipToDtoImpl instance) =>
     <String, dynamic>{
       'shipToCustomerCode': instance.shipToCustomerCode,
       'defaultShipToAddress': instance.defaultShipToAddress,

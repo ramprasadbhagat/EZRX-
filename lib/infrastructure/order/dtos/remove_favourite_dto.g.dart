@@ -6,14 +6,15 @@ part of 'remove_favourite_dto.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_RemoveFavouriteDto _$$_RemoveFavouriteDtoFromJson(
+_$RemoveFavouriteDtoImpl _$$RemoveFavouriteDtoImplFromJson(
         Map<String, dynamic> json) =>
-    _$_RemoveFavouriteDto(
-      removeFavouriteMaterial: json['removeFavouriteMaterial'] as int? ?? 0,
+    _$RemoveFavouriteDtoImpl(
+      removeFavouriteMaterial:
+          (json['removeFavouriteMaterial'] as num?)?.toInt() ?? 0,
     );
 
-Map<String, dynamic> _$$_RemoveFavouriteDtoToJson(
-        _$_RemoveFavouriteDto instance) =>
+Map<String, dynamic> _$$RemoveFavouriteDtoImplToJson(
+        _$RemoveFavouriteDtoImpl instance) =>
     <String, dynamic>{
       'removeFavouriteMaterial': instance.removeFavouriteMaterial,
     };

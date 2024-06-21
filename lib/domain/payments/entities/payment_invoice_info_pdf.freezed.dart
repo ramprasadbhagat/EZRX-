@@ -12,7 +12,7 @@ part of 'payment_invoice_info_pdf.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$PaymentInvoiceInfoPdf {
@@ -165,11 +165,12 @@ class _$PaymentInvoiceInfoPdfCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_PaymentInvoiceInfoPdfCopyWith<$Res>
+abstract class _$$PaymentInvoiceInfoPdfImplCopyWith<$Res>
     implements $PaymentInvoiceInfoPdfCopyWith<$Res> {
-  factory _$$_PaymentInvoiceInfoPdfCopyWith(_$_PaymentInvoiceInfoPdf value,
-          $Res Function(_$_PaymentInvoiceInfoPdf) then) =
-      __$$_PaymentInvoiceInfoPdfCopyWithImpl<$Res>;
+  factory _$$PaymentInvoiceInfoPdfImplCopyWith(
+          _$PaymentInvoiceInfoPdfImpl value,
+          $Res Function(_$PaymentInvoiceInfoPdfImpl) then) =
+      __$$PaymentInvoiceInfoPdfImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -192,11 +193,12 @@ abstract class _$$_PaymentInvoiceInfoPdfCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_PaymentInvoiceInfoPdfCopyWithImpl<$Res>
-    extends _$PaymentInvoiceInfoPdfCopyWithImpl<$Res, _$_PaymentInvoiceInfoPdf>
-    implements _$$_PaymentInvoiceInfoPdfCopyWith<$Res> {
-  __$$_PaymentInvoiceInfoPdfCopyWithImpl(_$_PaymentInvoiceInfoPdf _value,
-      $Res Function(_$_PaymentInvoiceInfoPdf) _then)
+class __$$PaymentInvoiceInfoPdfImplCopyWithImpl<$Res>
+    extends _$PaymentInvoiceInfoPdfCopyWithImpl<$Res,
+        _$PaymentInvoiceInfoPdfImpl>
+    implements _$$PaymentInvoiceInfoPdfImplCopyWith<$Res> {
+  __$$PaymentInvoiceInfoPdfImplCopyWithImpl(_$PaymentInvoiceInfoPdfImpl _value,
+      $Res Function(_$PaymentInvoiceInfoPdfImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -219,7 +221,7 @@ class __$$_PaymentInvoiceInfoPdfCopyWithImpl<$Res>
     Object? pleaseNote = null,
     Object? header = null,
   }) {
-    return _then(_$_PaymentInvoiceInfoPdf(
+    return _then(_$PaymentInvoiceInfoPdfImpl(
       valueDate: null == valueDate
           ? _value.valueDate
           : valueDate // ignore: cast_nullable_to_non_nullable
@@ -290,8 +292,8 @@ class __$$_PaymentInvoiceInfoPdfCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_PaymentInvoiceInfoPdf extends _PaymentInvoiceInfoPdf {
-  const _$_PaymentInvoiceInfoPdf(
+class _$PaymentInvoiceInfoPdfImpl extends _PaymentInvoiceInfoPdf {
+  const _$PaymentInvoiceInfoPdfImpl(
       {required this.valueDate,
       required this.paymentID,
       required this.zzAdvice,
@@ -363,10 +365,10 @@ class _$_PaymentInvoiceInfoPdf extends _PaymentInvoiceInfoPdf {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_PaymentInvoiceInfoPdf &&
+            other is _$PaymentInvoiceInfoPdfImpl &&
             (identical(other.valueDate, valueDate) ||
                 other.valueDate == valueDate) &&
             (identical(other.paymentID, paymentID) ||
@@ -422,9 +424,9 @@ class _$_PaymentInvoiceInfoPdf extends _PaymentInvoiceInfoPdf {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_PaymentInvoiceInfoPdfCopyWith<_$_PaymentInvoiceInfoPdf> get copyWith =>
-      __$$_PaymentInvoiceInfoPdfCopyWithImpl<_$_PaymentInvoiceInfoPdf>(
-          this, _$identity);
+  _$$PaymentInvoiceInfoPdfImplCopyWith<_$PaymentInvoiceInfoPdfImpl>
+      get copyWith => __$$PaymentInvoiceInfoPdfImplCopyWithImpl<
+          _$PaymentInvoiceInfoPdfImpl>(this, _$identity);
 }
 
 abstract class _PaymentInvoiceInfoPdf extends PaymentInvoiceInfoPdf {
@@ -444,7 +446,7 @@ abstract class _PaymentInvoiceInfoPdf extends PaymentInvoiceInfoPdf {
       required final String footer,
       required final String headerLogoPath,
       required final String pleaseNote,
-      required final String header}) = _$_PaymentInvoiceInfoPdf;
+      required final String header}) = _$PaymentInvoiceInfoPdfImpl;
   const _PaymentInvoiceInfoPdf._() : super._();
 
   @override
@@ -481,6 +483,6 @@ abstract class _PaymentInvoiceInfoPdf extends PaymentInvoiceInfoPdf {
   String get header;
   @override
   @JsonKey(ignore: true)
-  _$$_PaymentInvoiceInfoPdfCopyWith<_$_PaymentInvoiceInfoPdf> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$PaymentInvoiceInfoPdfImplCopyWith<_$PaymentInvoiceInfoPdfImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }

@@ -12,7 +12,7 @@ part of 'reset_password.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$ResetPassword {
@@ -63,22 +63,22 @@ class _$ResetPasswordCopyWithImpl<$Res, $Val extends ResetPassword>
 }
 
 /// @nodoc
-abstract class _$$_ResetPasswordCopyWith<$Res>
+abstract class _$$ResetPasswordImplCopyWith<$Res>
     implements $ResetPasswordCopyWith<$Res> {
-  factory _$$_ResetPasswordCopyWith(
-          _$_ResetPassword value, $Res Function(_$_ResetPassword) then) =
-      __$$_ResetPasswordCopyWithImpl<$Res>;
+  factory _$$ResetPasswordImplCopyWith(
+          _$ResetPasswordImpl value, $Res Function(_$ResetPasswordImpl) then) =
+      __$$ResetPasswordImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({bool success, String status});
 }
 
 /// @nodoc
-class __$$_ResetPasswordCopyWithImpl<$Res>
-    extends _$ResetPasswordCopyWithImpl<$Res, _$_ResetPassword>
-    implements _$$_ResetPasswordCopyWith<$Res> {
-  __$$_ResetPasswordCopyWithImpl(
-      _$_ResetPassword _value, $Res Function(_$_ResetPassword) _then)
+class __$$ResetPasswordImplCopyWithImpl<$Res>
+    extends _$ResetPasswordCopyWithImpl<$Res, _$ResetPasswordImpl>
+    implements _$$ResetPasswordImplCopyWith<$Res> {
+  __$$ResetPasswordImplCopyWithImpl(
+      _$ResetPasswordImpl _value, $Res Function(_$ResetPasswordImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -87,7 +87,7 @@ class __$$_ResetPasswordCopyWithImpl<$Res>
     Object? success = null,
     Object? status = null,
   }) {
-    return _then(_$_ResetPassword(
+    return _then(_$ResetPasswordImpl(
       success: null == success
           ? _value.success
           : success // ignore: cast_nullable_to_non_nullable
@@ -102,8 +102,8 @@ class __$$_ResetPasswordCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_ResetPassword extends _ResetPassword {
-  const _$_ResetPassword({required this.success, required this.status})
+class _$ResetPasswordImpl extends _ResetPassword {
+  const _$ResetPasswordImpl({required this.success, required this.status})
       : super._();
 
   @override
@@ -117,10 +117,10 @@ class _$_ResetPassword extends _ResetPassword {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ResetPassword &&
+            other is _$ResetPasswordImpl &&
             (identical(other.success, success) || other.success == success) &&
             (identical(other.status, status) || other.status == status));
   }
@@ -131,14 +131,14 @@ class _$_ResetPassword extends _ResetPassword {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ResetPasswordCopyWith<_$_ResetPassword> get copyWith =>
-      __$$_ResetPasswordCopyWithImpl<_$_ResetPassword>(this, _$identity);
+  _$$ResetPasswordImplCopyWith<_$ResetPasswordImpl> get copyWith =>
+      __$$ResetPasswordImplCopyWithImpl<_$ResetPasswordImpl>(this, _$identity);
 }
 
 abstract class _ResetPassword extends ResetPassword {
   const factory _ResetPassword(
       {required final bool success,
-      required final String status}) = _$_ResetPassword;
+      required final String status}) = _$ResetPasswordImpl;
   const _ResetPassword._() : super._();
 
   @override
@@ -147,6 +147,6 @@ abstract class _ResetPassword extends ResetPassword {
   String get status;
   @override
   @JsonKey(ignore: true)
-  _$$_ResetPasswordCopyWith<_$_ResetPassword> get copyWith =>
+  _$$ResetPasswordImplCopyWith<_$ResetPasswordImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -12,7 +12,7 @@ part of 'product_meta_data.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$ProductMetaData {
@@ -63,22 +63,22 @@ class _$ProductMetaDataCopyWithImpl<$Res, $Val extends ProductMetaData>
 }
 
 /// @nodoc
-abstract class _$$_ProductMetaDataCopyWith<$Res>
+abstract class _$$ProductMetaDataImplCopyWith<$Res>
     implements $ProductMetaDataCopyWith<$Res> {
-  factory _$$_ProductMetaDataCopyWith(
-          _$_ProductMetaData value, $Res Function(_$_ProductMetaData) then) =
-      __$$_ProductMetaDataCopyWithImpl<$Res>;
+  factory _$$ProductMetaDataImplCopyWith(_$ProductMetaDataImpl value,
+          $Res Function(_$ProductMetaDataImpl) then) =
+      __$$ProductMetaDataImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({List<ProductImages> productImages, List<ProductItem> items});
 }
 
 /// @nodoc
-class __$$_ProductMetaDataCopyWithImpl<$Res>
-    extends _$ProductMetaDataCopyWithImpl<$Res, _$_ProductMetaData>
-    implements _$$_ProductMetaDataCopyWith<$Res> {
-  __$$_ProductMetaDataCopyWithImpl(
-      _$_ProductMetaData _value, $Res Function(_$_ProductMetaData) _then)
+class __$$ProductMetaDataImplCopyWithImpl<$Res>
+    extends _$ProductMetaDataCopyWithImpl<$Res, _$ProductMetaDataImpl>
+    implements _$$ProductMetaDataImplCopyWith<$Res> {
+  __$$ProductMetaDataImplCopyWithImpl(
+      _$ProductMetaDataImpl _value, $Res Function(_$ProductMetaDataImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -87,7 +87,7 @@ class __$$_ProductMetaDataCopyWithImpl<$Res>
     Object? productImages = null,
     Object? items = null,
   }) {
-    return _then(_$_ProductMetaData(
+    return _then(_$ProductMetaDataImpl(
       productImages: null == productImages
           ? _value._productImages
           : productImages // ignore: cast_nullable_to_non_nullable
@@ -102,8 +102,8 @@ class __$$_ProductMetaDataCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_ProductMetaData extends _ProductMetaData {
-  _$_ProductMetaData(
+class _$ProductMetaDataImpl extends _ProductMetaData {
+  _$ProductMetaDataImpl(
       {required final List<ProductImages> productImages,
       required final List<ProductItem> items})
       : _productImages = productImages,
@@ -132,10 +132,10 @@ class _$_ProductMetaData extends _ProductMetaData {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ProductMetaData &&
+            other is _$ProductMetaDataImpl &&
             const DeepCollectionEquality()
                 .equals(other._productImages, _productImages) &&
             const DeepCollectionEquality().equals(other._items, _items));
@@ -150,14 +150,15 @@ class _$_ProductMetaData extends _ProductMetaData {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ProductMetaDataCopyWith<_$_ProductMetaData> get copyWith =>
-      __$$_ProductMetaDataCopyWithImpl<_$_ProductMetaData>(this, _$identity);
+  _$$ProductMetaDataImplCopyWith<_$ProductMetaDataImpl> get copyWith =>
+      __$$ProductMetaDataImplCopyWithImpl<_$ProductMetaDataImpl>(
+          this, _$identity);
 }
 
 abstract class _ProductMetaData extends ProductMetaData {
   factory _ProductMetaData(
       {required final List<ProductImages> productImages,
-      required final List<ProductItem> items}) = _$_ProductMetaData;
+      required final List<ProductItem> items}) = _$ProductMetaDataImpl;
   _ProductMetaData._() : super._();
 
   @override
@@ -166,7 +167,7 @@ abstract class _ProductMetaData extends ProductMetaData {
   List<ProductItem> get items;
   @override
   @JsonKey(ignore: true)
-  _$$_ProductMetaDataCopyWith<_$_ProductMetaData> get copyWith =>
+  _$$ProductMetaDataImplCopyWith<_$ProductMetaDataImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -238,11 +239,11 @@ class _$ProductItemCopyWithImpl<$Res, $Val extends ProductItem>
 }
 
 /// @nodoc
-abstract class _$$_ProductItemCopyWith<$Res>
+abstract class _$$ProductItemImplCopyWith<$Res>
     implements $ProductItemCopyWith<$Res> {
-  factory _$$_ProductItemCopyWith(
-          _$_ProductItem value, $Res Function(_$_ProductItem) then) =
-      __$$_ProductItemCopyWithImpl<$Res>;
+  factory _$$ProductItemImplCopyWith(
+          _$ProductItemImpl value, $Res Function(_$ProductItemImpl) then) =
+      __$$ProductItemImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -255,11 +256,11 @@ abstract class _$$_ProductItemCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_ProductItemCopyWithImpl<$Res>
-    extends _$ProductItemCopyWithImpl<$Res, _$_ProductItem>
-    implements _$$_ProductItemCopyWith<$Res> {
-  __$$_ProductItemCopyWithImpl(
-      _$_ProductItem _value, $Res Function(_$_ProductItem) _then)
+class __$$ProductItemImplCopyWithImpl<$Res>
+    extends _$ProductItemCopyWithImpl<$Res, _$ProductItemImpl>
+    implements _$$ProductItemImplCopyWith<$Res> {
+  __$$ProductItemImplCopyWithImpl(
+      _$ProductItemImpl _value, $Res Function(_$ProductItemImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -269,7 +270,7 @@ class __$$_ProductItemCopyWithImpl<$Res>
     Object? productItemXp = null,
     Object? materialNumber = null,
   }) {
-    return _then(_$_ProductItem(
+    return _then(_$ProductItemImpl(
       promotionMaterial: null == promotionMaterial
           ? _value.promotionMaterial
           : promotionMaterial // ignore: cast_nullable_to_non_nullable
@@ -288,8 +289,8 @@ class __$$_ProductItemCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_ProductItem extends _ProductItem {
-  _$_ProductItem(
+class _$ProductItemImpl extends _ProductItem {
+  _$ProductItemImpl(
       {required this.promotionMaterial,
       required this.productItemXp,
       required this.materialNumber})
@@ -308,10 +309,10 @@ class _$_ProductItem extends _ProductItem {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ProductItem &&
+            other is _$ProductItemImpl &&
             (identical(other.promotionMaterial, promotionMaterial) ||
                 other.promotionMaterial == promotionMaterial) &&
             (identical(other.productItemXp, productItemXp) ||
@@ -327,15 +328,15 @@ class _$_ProductItem extends _ProductItem {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ProductItemCopyWith<_$_ProductItem> get copyWith =>
-      __$$_ProductItemCopyWithImpl<_$_ProductItem>(this, _$identity);
+  _$$ProductItemImplCopyWith<_$ProductItemImpl> get copyWith =>
+      __$$ProductItemImplCopyWithImpl<_$ProductItemImpl>(this, _$identity);
 }
 
 abstract class _ProductItem extends ProductItem {
   factory _ProductItem(
       {required final StringValue promotionMaterial,
       required final ProductItemXp productItemXp,
-      required final MaterialNumber materialNumber}) = _$_ProductItem;
+      required final MaterialNumber materialNumber}) = _$ProductItemImpl;
   _ProductItem._() : super._();
 
   @override
@@ -346,7 +347,7 @@ abstract class _ProductItem extends ProductItem {
   MaterialNumber get materialNumber;
   @override
   @JsonKey(ignore: true)
-  _$$_ProductItemCopyWith<_$_ProductItem> get copyWith =>
+  _$$ProductItemImplCopyWith<_$ProductItemImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -415,11 +416,11 @@ class _$ProductItemXpCopyWithImpl<$Res, $Val extends ProductItemXp>
 }
 
 /// @nodoc
-abstract class _$$_ProductItemXpCopyWith<$Res>
+abstract class _$$ProductItemXpImplCopyWith<$Res>
     implements $ProductItemXpCopyWith<$Res> {
-  factory _$$_ProductItemXpCopyWith(
-          _$_ProductItemXp value, $Res Function(_$_ProductItemXp) then) =
-      __$$_ProductItemXpCopyWithImpl<$Res>;
+  factory _$$ProductItemXpImplCopyWith(
+          _$ProductItemXpImpl value, $Res Function(_$ProductItemXpImpl) then) =
+      __$$ProductItemXpImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -430,11 +431,11 @@ abstract class _$$_ProductItemXpCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_ProductItemXpCopyWithImpl<$Res>
-    extends _$ProductItemXpCopyWithImpl<$Res, _$_ProductItemXp>
-    implements _$$_ProductItemXpCopyWith<$Res> {
-  __$$_ProductItemXpCopyWithImpl(
-      _$_ProductItemXp _value, $Res Function(_$_ProductItemXp) _then)
+class __$$ProductItemXpImplCopyWithImpl<$Res>
+    extends _$ProductItemXpCopyWithImpl<$Res, _$ProductItemXpImpl>
+    implements _$$ProductItemXpImplCopyWith<$Res> {
+  __$$ProductItemXpImplCopyWithImpl(
+      _$ProductItemXpImpl _value, $Res Function(_$ProductItemXpImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -445,7 +446,7 @@ class __$$_ProductItemXpCopyWithImpl<$Res>
     Object? composition = null,
     Object? deliveryInstructions = null,
   }) {
-    return _then(_$_ProductItemXp(
+    return _then(_$ProductItemXpImpl(
       dosage: null == dosage
           ? _value.dosage
           : dosage // ignore: cast_nullable_to_non_nullable
@@ -468,8 +469,8 @@ class __$$_ProductItemXpCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_ProductItemXp extends _ProductItemXp {
-  _$_ProductItemXp(
+class _$ProductItemXpImpl extends _ProductItemXp {
+  _$ProductItemXpImpl(
       {required this.dosage,
       required this.howToUse,
       required this.composition,
@@ -491,10 +492,10 @@ class _$_ProductItemXp extends _ProductItemXp {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ProductItemXp &&
+            other is _$ProductItemXpImpl &&
             (identical(other.dosage, dosage) || other.dosage == dosage) &&
             (identical(other.howToUse, howToUse) ||
                 other.howToUse == howToUse) &&
@@ -511,8 +512,8 @@ class _$_ProductItemXp extends _ProductItemXp {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ProductItemXpCopyWith<_$_ProductItemXp> get copyWith =>
-      __$$_ProductItemXpCopyWithImpl<_$_ProductItemXp>(this, _$identity);
+  _$$ProductItemXpImplCopyWith<_$ProductItemXpImpl> get copyWith =>
+      __$$ProductItemXpImplCopyWithImpl<_$ProductItemXpImpl>(this, _$identity);
 }
 
 abstract class _ProductItemXp extends ProductItemXp {
@@ -520,7 +521,7 @@ abstract class _ProductItemXp extends ProductItemXp {
       {required final StringValue dosage,
       required final StringValue howToUse,
       required final StringValue composition,
-      required final StringValue deliveryInstructions}) = _$_ProductItemXp;
+      required final StringValue deliveryInstructions}) = _$ProductItemXpImpl;
   _ProductItemXp._() : super._();
 
   @override
@@ -533,6 +534,6 @@ abstract class _ProductItemXp extends ProductItemXp {
   StringValue get deliveryInstructions;
   @override
   @JsonKey(ignore: true)
-  _$$_ProductItemXpCopyWith<_$_ProductItemXp> get copyWith =>
+  _$$ProductItemXpImplCopyWith<_$ProductItemXpImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

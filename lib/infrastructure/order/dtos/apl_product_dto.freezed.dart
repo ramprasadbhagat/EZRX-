@@ -12,7 +12,7 @@ part of 'apl_product_dto.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 AplProductDto _$AplProductDtoFromJson(Map<String, dynamic> json) {
   return _AplProductDto.fromJson(json);
@@ -132,11 +132,11 @@ class _$AplProductDtoCopyWithImpl<$Res, $Val extends AplProductDto>
 }
 
 /// @nodoc
-abstract class _$$_AplProductDtoCopyWith<$Res>
+abstract class _$$AplProductDtoImplCopyWith<$Res>
     implements $AplProductDtoCopyWith<$Res> {
-  factory _$$_AplProductDtoCopyWith(
-          _$_AplProductDto value, $Res Function(_$_AplProductDto) then) =
-      __$$_AplProductDtoCopyWithImpl<$Res>;
+  factory _$$AplProductDtoImplCopyWith(
+          _$AplProductDtoImpl value, $Res Function(_$AplProductDtoImpl) then) =
+      __$$AplProductDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -154,11 +154,11 @@ abstract class _$$_AplProductDtoCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_AplProductDtoCopyWithImpl<$Res>
-    extends _$AplProductDtoCopyWithImpl<$Res, _$_AplProductDto>
-    implements _$$_AplProductDtoCopyWith<$Res> {
-  __$$_AplProductDtoCopyWithImpl(
-      _$_AplProductDto _value, $Res Function(_$_AplProductDto) _then)
+class __$$AplProductDtoImplCopyWithImpl<$Res>
+    extends _$AplProductDtoCopyWithImpl<$Res, _$AplProductDtoImpl>
+    implements _$$AplProductDtoImplCopyWith<$Res> {
+  __$$AplProductDtoImplCopyWithImpl(
+      _$AplProductDtoImpl _value, $Res Function(_$AplProductDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -174,7 +174,7 @@ class __$$_AplProductDtoCopyWithImpl<$Res>
     Object? taxValue = null,
     Object? aplPromotions = null,
   }) {
-    return _then(_$_AplProductDto(
+    return _then(_$AplProductDtoImpl(
       type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
@@ -217,8 +217,8 @@ class __$$_AplProductDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_AplProductDto extends _AplProductDto {
-  const _$_AplProductDto(
+class _$AplProductDtoImpl extends _AplProductDto {
+  const _$AplProductDtoImpl(
       {@JsonKey(name: 'type', defaultValue: '') required this.type,
       @JsonKey(name: 'itemNumber', defaultValue: '') required this.itemNumber,
       @JsonKey(name: 'parentItemNumber', defaultValue: '')
@@ -234,8 +234,8 @@ class _$_AplProductDto extends _AplProductDto {
       : _aplPromotions = aplPromotions,
         super._();
 
-  factory _$_AplProductDto.fromJson(Map<String, dynamic> json) =>
-      _$$_AplProductDtoFromJson(json);
+  factory _$AplProductDtoImpl.fromJson(Map<String, dynamic> json) =>
+      _$$AplProductDtoImplFromJson(json);
 
   @override
   @JsonKey(name: 'type', defaultValue: '')
@@ -278,10 +278,10 @@ class _$_AplProductDto extends _AplProductDto {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_AplProductDto &&
+            other is _$AplProductDtoImpl &&
             (identical(other.type, type) || other.type == type) &&
             (identical(other.itemNumber, itemNumber) ||
                 other.itemNumber == itemNumber) &&
@@ -318,12 +318,12 @@ class _$_AplProductDto extends _AplProductDto {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_AplProductDtoCopyWith<_$_AplProductDto> get copyWith =>
-      __$$_AplProductDtoCopyWithImpl<_$_AplProductDto>(this, _$identity);
+  _$$AplProductDtoImplCopyWith<_$AplProductDtoImpl> get copyWith =>
+      __$$AplProductDtoImplCopyWithImpl<_$AplProductDtoImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_AplProductDtoToJson(
+    return _$$AplProductDtoImplToJson(
       this,
     );
   }
@@ -331,27 +331,28 @@ class _$_AplProductDto extends _AplProductDto {
 
 abstract class _AplProductDto extends AplProductDto {
   const factory _AplProductDto(
-      {@JsonKey(name: 'type', defaultValue: '') required final String type,
-      @JsonKey(name: 'itemNumber', defaultValue: '')
-      required final String itemNumber,
-      @JsonKey(name: 'parentItemNumber', defaultValue: '')
-      required final String parentItemNumber,
-      @JsonKey(name: 'material', defaultValue: '')
-      required final String materialNumber,
-      @JsonKey(name: 'netValue', defaultValue: 0)
-      required final double finalPriceTotal,
-      @JsonKey(name: 'productPriceNetValue', defaultValue: 0)
-      required final double finalPrice,
-      @JsonKey(name: 'productQty', defaultValue: 0)
-      required final int productQty,
-      @JsonKey(name: 'taxValue', defaultValue: 0)
-      required final double taxValue,
-      @JsonKey(name: 'promotions', defaultValue: <AplPromotionsDto>[])
-      required final List<AplPromotionsDto> aplPromotions}) = _$_AplProductDto;
+          {@JsonKey(name: 'type', defaultValue: '') required final String type,
+          @JsonKey(name: 'itemNumber', defaultValue: '')
+          required final String itemNumber,
+          @JsonKey(name: 'parentItemNumber', defaultValue: '')
+          required final String parentItemNumber,
+          @JsonKey(name: 'material', defaultValue: '')
+          required final String materialNumber,
+          @JsonKey(name: 'netValue', defaultValue: 0)
+          required final double finalPriceTotal,
+          @JsonKey(name: 'productPriceNetValue', defaultValue: 0)
+          required final double finalPrice,
+          @JsonKey(name: 'productQty', defaultValue: 0)
+          required final int productQty,
+          @JsonKey(name: 'taxValue', defaultValue: 0)
+          required final double taxValue,
+          @JsonKey(name: 'promotions', defaultValue: <AplPromotionsDto>[])
+          required final List<AplPromotionsDto> aplPromotions}) =
+      _$AplProductDtoImpl;
   const _AplProductDto._() : super._();
 
   factory _AplProductDto.fromJson(Map<String, dynamic> json) =
-      _$_AplProductDto.fromJson;
+      _$AplProductDtoImpl.fromJson;
 
   @override
   @JsonKey(name: 'type', defaultValue: '')
@@ -382,6 +383,6 @@ abstract class _AplProductDto extends AplProductDto {
   List<AplPromotionsDto> get aplPromotions;
   @override
   @JsonKey(ignore: true)
-  _$$_AplProductDtoCopyWith<_$_AplProductDto> get copyWith =>
+  _$$AplProductDtoImplCopyWith<_$AplProductDtoImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

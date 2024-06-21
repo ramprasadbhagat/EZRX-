@@ -12,7 +12,7 @@ part of 'submit_order_response_message.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$SubmitOrderResponseMessage {
@@ -65,25 +65,25 @@ class _$SubmitOrderResponseMessageCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_SubmitOrderResponseMessageCopyWith<$Res>
+abstract class _$$SubmitOrderResponseMessageImplCopyWith<$Res>
     implements $SubmitOrderResponseMessageCopyWith<$Res> {
-  factory _$$_SubmitOrderResponseMessageCopyWith(
-          _$_SubmitOrderResponseMessage value,
-          $Res Function(_$_SubmitOrderResponseMessage) then) =
-      __$$_SubmitOrderResponseMessageCopyWithImpl<$Res>;
+  factory _$$SubmitOrderResponseMessageImplCopyWith(
+          _$SubmitOrderResponseMessageImpl value,
+          $Res Function(_$SubmitOrderResponseMessageImpl) then) =
+      __$$SubmitOrderResponseMessageImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String type, String message});
 }
 
 /// @nodoc
-class __$$_SubmitOrderResponseMessageCopyWithImpl<$Res>
+class __$$SubmitOrderResponseMessageImplCopyWithImpl<$Res>
     extends _$SubmitOrderResponseMessageCopyWithImpl<$Res,
-        _$_SubmitOrderResponseMessage>
-    implements _$$_SubmitOrderResponseMessageCopyWith<$Res> {
-  __$$_SubmitOrderResponseMessageCopyWithImpl(
-      _$_SubmitOrderResponseMessage _value,
-      $Res Function(_$_SubmitOrderResponseMessage) _then)
+        _$SubmitOrderResponseMessageImpl>
+    implements _$$SubmitOrderResponseMessageImplCopyWith<$Res> {
+  __$$SubmitOrderResponseMessageImplCopyWithImpl(
+      _$SubmitOrderResponseMessageImpl _value,
+      $Res Function(_$SubmitOrderResponseMessageImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -92,7 +92,7 @@ class __$$_SubmitOrderResponseMessageCopyWithImpl<$Res>
     Object? type = null,
     Object? message = null,
   }) {
-    return _then(_$_SubmitOrderResponseMessage(
+    return _then(_$SubmitOrderResponseMessageImpl(
       type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
@@ -107,8 +107,8 @@ class __$$_SubmitOrderResponseMessageCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_SubmitOrderResponseMessage extends _SubmitOrderResponseMessage {
-  const _$_SubmitOrderResponseMessage(
+class _$SubmitOrderResponseMessageImpl extends _SubmitOrderResponseMessage {
+  const _$SubmitOrderResponseMessageImpl(
       {required this.type, required this.message})
       : super._();
 
@@ -123,10 +123,10 @@ class _$_SubmitOrderResponseMessage extends _SubmitOrderResponseMessage {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_SubmitOrderResponseMessage &&
+            other is _$SubmitOrderResponseMessageImpl &&
             (identical(other.type, type) || other.type == type) &&
             (identical(other.message, message) || other.message == message));
   }
@@ -137,15 +137,15 @@ class _$_SubmitOrderResponseMessage extends _SubmitOrderResponseMessage {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_SubmitOrderResponseMessageCopyWith<_$_SubmitOrderResponseMessage>
-      get copyWith => __$$_SubmitOrderResponseMessageCopyWithImpl<
-          _$_SubmitOrderResponseMessage>(this, _$identity);
+  _$$SubmitOrderResponseMessageImplCopyWith<_$SubmitOrderResponseMessageImpl>
+      get copyWith => __$$SubmitOrderResponseMessageImplCopyWithImpl<
+          _$SubmitOrderResponseMessageImpl>(this, _$identity);
 }
 
 abstract class _SubmitOrderResponseMessage extends SubmitOrderResponseMessage {
   const factory _SubmitOrderResponseMessage(
       {required final String type,
-      required final String message}) = _$_SubmitOrderResponseMessage;
+      required final String message}) = _$SubmitOrderResponseMessageImpl;
   const _SubmitOrderResponseMessage._() : super._();
 
   @override
@@ -154,6 +154,6 @@ abstract class _SubmitOrderResponseMessage extends SubmitOrderResponseMessage {
   String get message;
   @override
   @JsonKey(ignore: true)
-  _$$_SubmitOrderResponseMessageCopyWith<_$_SubmitOrderResponseMessage>
+  _$$SubmitOrderResponseMessageImplCopyWith<_$SubmitOrderResponseMessageImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

@@ -12,7 +12,7 @@ part of 'price_rule.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$PriceRule {
@@ -123,10 +123,11 @@ class _$PriceRuleCopyWithImpl<$Res, $Val extends PriceRule>
 }
 
 /// @nodoc
-abstract class _$$_PriceRuleCopyWith<$Res> implements $PriceRuleCopyWith<$Res> {
-  factory _$$_PriceRuleCopyWith(
-          _$_PriceRule value, $Res Function(_$_PriceRule) then) =
-      __$$_PriceRuleCopyWithImpl<$Res>;
+abstract class _$$PriceRuleImplCopyWith<$Res>
+    implements $PriceRuleCopyWith<$Res> {
+  factory _$$PriceRuleImplCopyWith(
+          _$PriceRuleImpl value, $Res Function(_$PriceRuleImpl) then) =
+      __$$PriceRuleImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -145,11 +146,11 @@ abstract class _$$_PriceRuleCopyWith<$Res> implements $PriceRuleCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_PriceRuleCopyWithImpl<$Res>
-    extends _$PriceRuleCopyWithImpl<$Res, _$_PriceRule>
-    implements _$$_PriceRuleCopyWith<$Res> {
-  __$$_PriceRuleCopyWithImpl(
-      _$_PriceRule _value, $Res Function(_$_PriceRule) _then)
+class __$$PriceRuleImplCopyWithImpl<$Res>
+    extends _$PriceRuleCopyWithImpl<$Res, _$PriceRuleImpl>
+    implements _$$PriceRuleImplCopyWith<$Res> {
+  __$$PriceRuleImplCopyWithImpl(
+      _$PriceRuleImpl _value, $Res Function(_$PriceRuleImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -165,7 +166,7 @@ class __$$_PriceRuleCopyWithImpl<$Res>
     Object? remainingQuota = null,
     Object? bonusEligible = null,
   }) {
-    return _then(_$_PriceRule(
+    return _then(_$PriceRuleImpl(
       type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
@@ -208,8 +209,8 @@ class __$$_PriceRuleCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_PriceRule extends _PriceRule {
-  const _$_PriceRule(
+class _$PriceRuleImpl extends _PriceRule {
+  const _$PriceRuleImpl(
       {required this.type,
       required this.rate,
       required this.condition,
@@ -246,10 +247,10 @@ class _$_PriceRule extends _PriceRule {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_PriceRule &&
+            other is _$PriceRuleImpl &&
             (identical(other.type, type) || other.type == type) &&
             (identical(other.rate, rate) || other.rate == rate) &&
             (identical(other.condition, condition) ||
@@ -284,8 +285,8 @@ class _$_PriceRule extends _PriceRule {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_PriceRuleCopyWith<_$_PriceRule> get copyWith =>
-      __$$_PriceRuleCopyWithImpl<_$_PriceRule>(this, _$identity);
+  _$$PriceRuleImplCopyWith<_$PriceRuleImpl> get copyWith =>
+      __$$PriceRuleImplCopyWithImpl<_$PriceRuleImpl>(this, _$identity);
 }
 
 abstract class _PriceRule extends PriceRule {
@@ -298,7 +299,7 @@ abstract class _PriceRule extends PriceRule {
       required final String overriddenBy,
       required final String maxQuota,
       required final String remainingQuota,
-      required final bool bonusEligible}) = _$_PriceRule;
+      required final bool bonusEligible}) = _$PriceRuleImpl;
   const _PriceRule._() : super._();
 
   @override
@@ -321,7 +322,7 @@ abstract class _PriceRule extends PriceRule {
   bool get bonusEligible;
   @override
   @JsonKey(ignore: true)
-  _$$_PriceRuleCopyWith<_$_PriceRule> get copyWith =>
+  _$$PriceRuleImplCopyWith<_$PriceRuleImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -374,22 +375,22 @@ class _$TieredRulesCopyWithImpl<$Res, $Val extends TieredRules>
 }
 
 /// @nodoc
-abstract class _$$_TieredRulesCopyWith<$Res>
+abstract class _$$TieredRulesImplCopyWith<$Res>
     implements $TieredRulesCopyWith<$Res> {
-  factory _$$_TieredRulesCopyWith(
-          _$_TieredRules value, $Res Function(_$_TieredRules) then) =
-      __$$_TieredRulesCopyWithImpl<$Res>;
+  factory _$$TieredRulesImplCopyWith(
+          _$TieredRulesImpl value, $Res Function(_$TieredRulesImpl) then) =
+      __$$TieredRulesImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String tier, List<RuleTier> ruleTier});
 }
 
 /// @nodoc
-class __$$_TieredRulesCopyWithImpl<$Res>
-    extends _$TieredRulesCopyWithImpl<$Res, _$_TieredRules>
-    implements _$$_TieredRulesCopyWith<$Res> {
-  __$$_TieredRulesCopyWithImpl(
-      _$_TieredRules _value, $Res Function(_$_TieredRules) _then)
+class __$$TieredRulesImplCopyWithImpl<$Res>
+    extends _$TieredRulesCopyWithImpl<$Res, _$TieredRulesImpl>
+    implements _$$TieredRulesImplCopyWith<$Res> {
+  __$$TieredRulesImplCopyWithImpl(
+      _$TieredRulesImpl _value, $Res Function(_$TieredRulesImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -398,7 +399,7 @@ class __$$_TieredRulesCopyWithImpl<$Res>
     Object? tier = null,
     Object? ruleTier = null,
   }) {
-    return _then(_$_TieredRules(
+    return _then(_$TieredRulesImpl(
       tier: null == tier
           ? _value.tier
           : tier // ignore: cast_nullable_to_non_nullable
@@ -413,8 +414,8 @@ class __$$_TieredRulesCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_TieredRules implements _TieredRules {
-  const _$_TieredRules(
+class _$TieredRulesImpl implements _TieredRules {
+  const _$TieredRulesImpl(
       {required this.tier, required final List<RuleTier> ruleTier})
       : _ruleTier = ruleTier;
 
@@ -434,10 +435,10 @@ class _$_TieredRules implements _TieredRules {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_TieredRules &&
+            other is _$TieredRulesImpl &&
             (identical(other.tier, tier) || other.tier == tier) &&
             const DeepCollectionEquality().equals(other._ruleTier, _ruleTier));
   }
@@ -449,14 +450,14 @@ class _$_TieredRules implements _TieredRules {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_TieredRulesCopyWith<_$_TieredRules> get copyWith =>
-      __$$_TieredRulesCopyWithImpl<_$_TieredRules>(this, _$identity);
+  _$$TieredRulesImplCopyWith<_$TieredRulesImpl> get copyWith =>
+      __$$TieredRulesImplCopyWithImpl<_$TieredRulesImpl>(this, _$identity);
 }
 
 abstract class _TieredRules implements TieredRules {
   const factory _TieredRules(
       {required final String tier,
-      required final List<RuleTier> ruleTier}) = _$_TieredRules;
+      required final List<RuleTier> ruleTier}) = _$TieredRulesImpl;
 
   @override
   String get tier;
@@ -464,7 +465,7 @@ abstract class _TieredRules implements TieredRules {
   List<RuleTier> get ruleTier;
   @override
   @JsonKey(ignore: true)
-  _$$_TieredRulesCopyWith<_$_TieredRules> get copyWith =>
+  _$$TieredRulesImplCopyWith<_$TieredRulesImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -516,21 +517,22 @@ class _$RuleTierCopyWithImpl<$Res, $Val extends RuleTier>
 }
 
 /// @nodoc
-abstract class _$$_RuleTierCopyWith<$Res> implements $RuleTierCopyWith<$Res> {
-  factory _$$_RuleTierCopyWith(
-          _$_RuleTier value, $Res Function(_$_RuleTier) then) =
-      __$$_RuleTierCopyWithImpl<$Res>;
+abstract class _$$RuleTierImplCopyWith<$Res>
+    implements $RuleTierCopyWith<$Res> {
+  factory _$$RuleTierImplCopyWith(
+          _$RuleTierImpl value, $Res Function(_$RuleTierImpl) then) =
+      __$$RuleTierImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({double rate, double quantity});
 }
 
 /// @nodoc
-class __$$_RuleTierCopyWithImpl<$Res>
-    extends _$RuleTierCopyWithImpl<$Res, _$_RuleTier>
-    implements _$$_RuleTierCopyWith<$Res> {
-  __$$_RuleTierCopyWithImpl(
-      _$_RuleTier _value, $Res Function(_$_RuleTier) _then)
+class __$$RuleTierImplCopyWithImpl<$Res>
+    extends _$RuleTierCopyWithImpl<$Res, _$RuleTierImpl>
+    implements _$$RuleTierImplCopyWith<$Res> {
+  __$$RuleTierImplCopyWithImpl(
+      _$RuleTierImpl _value, $Res Function(_$RuleTierImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -539,7 +541,7 @@ class __$$_RuleTierCopyWithImpl<$Res>
     Object? rate = null,
     Object? quantity = null,
   }) {
-    return _then(_$_RuleTier(
+    return _then(_$RuleTierImpl(
       rate: null == rate
           ? _value.rate
           : rate // ignore: cast_nullable_to_non_nullable
@@ -554,8 +556,8 @@ class __$$_RuleTierCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_RuleTier implements _RuleTier {
-  const _$_RuleTier({required this.rate, required this.quantity});
+class _$RuleTierImpl implements _RuleTier {
+  const _$RuleTierImpl({required this.rate, required this.quantity});
 
   @override
   final double rate;
@@ -568,10 +570,10 @@ class _$_RuleTier implements _RuleTier {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_RuleTier &&
+            other is _$RuleTierImpl &&
             (identical(other.rate, rate) || other.rate == rate) &&
             (identical(other.quantity, quantity) ||
                 other.quantity == quantity));
@@ -583,14 +585,14 @@ class _$_RuleTier implements _RuleTier {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_RuleTierCopyWith<_$_RuleTier> get copyWith =>
-      __$$_RuleTierCopyWithImpl<_$_RuleTier>(this, _$identity);
+  _$$RuleTierImplCopyWith<_$RuleTierImpl> get copyWith =>
+      __$$RuleTierImplCopyWithImpl<_$RuleTierImpl>(this, _$identity);
 }
 
 abstract class _RuleTier implements RuleTier {
   const factory _RuleTier(
       {required final double rate,
-      required final double quantity}) = _$_RuleTier;
+      required final double quantity}) = _$RuleTierImpl;
 
   @override
   double get rate;
@@ -598,6 +600,6 @@ abstract class _RuleTier implements RuleTier {
   double get quantity;
   @override
   @JsonKey(ignore: true)
-  _$$_RuleTierCopyWith<_$_RuleTier> get copyWith =>
+  _$$RuleTierImplCopyWith<_$RuleTierImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

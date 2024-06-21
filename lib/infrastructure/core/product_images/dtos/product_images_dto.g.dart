@@ -6,8 +6,9 @@ part of 'product_images_dto.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_ProductImagesDto _$$_ProductImagesDtoFromJson(Map<String, dynamic> json) =>
-    _$_ProductImagesDto(
+_$ProductImagesDtoImpl _$$ProductImagesDtoImplFromJson(
+        Map<String, dynamic> json) =>
+    _$ProductImagesDtoImpl(
       materialNumber: json['materialID'] as String? ?? '',
       name: json['name'] as String? ?? '',
       description: json['description'] as String? ?? '',
@@ -17,7 +18,8 @@ _$_ProductImagesDto _$$_ProductImagesDtoFromJson(Map<String, dynamic> json) =>
               [],
     );
 
-Map<String, dynamic> _$$_ProductImagesDtoToJson(_$_ProductImagesDto instance) =>
+Map<String, dynamic> _$$ProductImagesDtoImplToJson(
+        _$ProductImagesDtoImpl instance) =>
     <String, dynamic>{
       'materialID': instance.materialNumber,
       'name': instance.name,

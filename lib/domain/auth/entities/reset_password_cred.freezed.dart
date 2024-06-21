@@ -12,7 +12,7 @@ part of 'reset_password_cred.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$ResetPasswordCred {
@@ -63,22 +63,22 @@ class _$ResetPasswordCredCopyWithImpl<$Res, $Val extends ResetPasswordCred>
 }
 
 /// @nodoc
-abstract class _$$_ResetPasswordCredCopyWith<$Res>
+abstract class _$$ResetPasswordCredImplCopyWith<$Res>
     implements $ResetPasswordCredCopyWith<$Res> {
-  factory _$$_ResetPasswordCredCopyWith(_$_ResetPasswordCred value,
-          $Res Function(_$_ResetPasswordCred) then) =
-      __$$_ResetPasswordCredCopyWithImpl<$Res>;
+  factory _$$ResetPasswordCredImplCopyWith(_$ResetPasswordCredImpl value,
+          $Res Function(_$ResetPasswordCredImpl) then) =
+      __$$ResetPasswordCredImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({Username username, StringValue token});
 }
 
 /// @nodoc
-class __$$_ResetPasswordCredCopyWithImpl<$Res>
-    extends _$ResetPasswordCredCopyWithImpl<$Res, _$_ResetPasswordCred>
-    implements _$$_ResetPasswordCredCopyWith<$Res> {
-  __$$_ResetPasswordCredCopyWithImpl(
-      _$_ResetPasswordCred _value, $Res Function(_$_ResetPasswordCred) _then)
+class __$$ResetPasswordCredImplCopyWithImpl<$Res>
+    extends _$ResetPasswordCredCopyWithImpl<$Res, _$ResetPasswordCredImpl>
+    implements _$$ResetPasswordCredImplCopyWith<$Res> {
+  __$$ResetPasswordCredImplCopyWithImpl(_$ResetPasswordCredImpl _value,
+      $Res Function(_$ResetPasswordCredImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -87,7 +87,7 @@ class __$$_ResetPasswordCredCopyWithImpl<$Res>
     Object? username = null,
     Object? token = null,
   }) {
-    return _then(_$_ResetPasswordCred(
+    return _then(_$ResetPasswordCredImpl(
       username: null == username
           ? _value.username
           : username // ignore: cast_nullable_to_non_nullable
@@ -102,8 +102,8 @@ class __$$_ResetPasswordCredCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_ResetPasswordCred extends _ResetPasswordCred {
-  const _$_ResetPasswordCred({required this.username, required this.token})
+class _$ResetPasswordCredImpl extends _ResetPasswordCred {
+  const _$ResetPasswordCredImpl({required this.username, required this.token})
       : super._();
 
   @override
@@ -117,10 +117,10 @@ class _$_ResetPasswordCred extends _ResetPasswordCred {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ResetPasswordCred &&
+            other is _$ResetPasswordCredImpl &&
             (identical(other.username, username) ||
                 other.username == username) &&
             (identical(other.token, token) || other.token == token));
@@ -132,15 +132,15 @@ class _$_ResetPasswordCred extends _ResetPasswordCred {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ResetPasswordCredCopyWith<_$_ResetPasswordCred> get copyWith =>
-      __$$_ResetPasswordCredCopyWithImpl<_$_ResetPasswordCred>(
+  _$$ResetPasswordCredImplCopyWith<_$ResetPasswordCredImpl> get copyWith =>
+      __$$ResetPasswordCredImplCopyWithImpl<_$ResetPasswordCredImpl>(
           this, _$identity);
 }
 
 abstract class _ResetPasswordCred extends ResetPasswordCred {
   const factory _ResetPasswordCred(
       {required final Username username,
-      required final StringValue token}) = _$_ResetPasswordCred;
+      required final StringValue token}) = _$ResetPasswordCredImpl;
   const _ResetPasswordCred._() : super._();
 
   @override
@@ -149,6 +149,6 @@ abstract class _ResetPasswordCred extends ResetPasswordCred {
   StringValue get token;
   @override
   @JsonKey(ignore: true)
-  _$$_ResetPasswordCredCopyWith<_$_ResetPasswordCred> get copyWith =>
+  _$$ResetPasswordCredImplCopyWith<_$ResetPasswordCredImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

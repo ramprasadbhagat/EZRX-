@@ -12,7 +12,7 @@ part of 'sales_representative_info_dto.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 SalesRepresentativeInfoDto _$SalesRepresentativeInfoDtoFromJson(
     Map<String, dynamic> json) {
@@ -45,14 +45,12 @@ abstract class $SalesRepresentativeInfoDtoCopyWith<$Res> {
           SalesRepresentativeInfoDto>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'count')
-          int count,
-      @JsonKey(name: 'uniquePrincipalGroup')
-          List<String> uniquePrincipalGroups,
+      {@JsonKey(name: 'count') int count,
+      @JsonKey(name: 'uniquePrincipalGroup') List<String> uniquePrincipalGroups,
       @JsonKey(name: 'uniquePrincipalNumber')
-          List<String> uniquePrincipalNumbers,
+      List<String> uniquePrincipalNumbers,
       @JsonKey(name: 'uniqueSalesOrganisation')
-          List<String> uniqueSalesOrganisations});
+      List<String> uniqueSalesOrganisations});
 }
 
 /// @nodoc
@@ -96,33 +94,31 @@ class _$SalesRepresentativeInfoDtoCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_SalesRepresentativeInfoDtoCopyWith<$Res>
+abstract class _$$SalesRepresentativeInfoDtoImplCopyWith<$Res>
     implements $SalesRepresentativeInfoDtoCopyWith<$Res> {
-  factory _$$_SalesRepresentativeInfoDtoCopyWith(
-          _$_SalesRepresentativeInfoDto value,
-          $Res Function(_$_SalesRepresentativeInfoDto) then) =
-      __$$_SalesRepresentativeInfoDtoCopyWithImpl<$Res>;
+  factory _$$SalesRepresentativeInfoDtoImplCopyWith(
+          _$SalesRepresentativeInfoDtoImpl value,
+          $Res Function(_$SalesRepresentativeInfoDtoImpl) then) =
+      __$$SalesRepresentativeInfoDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'count')
-          int count,
-      @JsonKey(name: 'uniquePrincipalGroup')
-          List<String> uniquePrincipalGroups,
+      {@JsonKey(name: 'count') int count,
+      @JsonKey(name: 'uniquePrincipalGroup') List<String> uniquePrincipalGroups,
       @JsonKey(name: 'uniquePrincipalNumber')
-          List<String> uniquePrincipalNumbers,
+      List<String> uniquePrincipalNumbers,
       @JsonKey(name: 'uniqueSalesOrganisation')
-          List<String> uniqueSalesOrganisations});
+      List<String> uniqueSalesOrganisations});
 }
 
 /// @nodoc
-class __$$_SalesRepresentativeInfoDtoCopyWithImpl<$Res>
+class __$$SalesRepresentativeInfoDtoImplCopyWithImpl<$Res>
     extends _$SalesRepresentativeInfoDtoCopyWithImpl<$Res,
-        _$_SalesRepresentativeInfoDto>
-    implements _$$_SalesRepresentativeInfoDtoCopyWith<$Res> {
-  __$$_SalesRepresentativeInfoDtoCopyWithImpl(
-      _$_SalesRepresentativeInfoDto _value,
-      $Res Function(_$_SalesRepresentativeInfoDto) _then)
+        _$SalesRepresentativeInfoDtoImpl>
+    implements _$$SalesRepresentativeInfoDtoImplCopyWith<$Res> {
+  __$$SalesRepresentativeInfoDtoImplCopyWithImpl(
+      _$SalesRepresentativeInfoDtoImpl _value,
+      $Res Function(_$SalesRepresentativeInfoDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -133,7 +129,7 @@ class __$$_SalesRepresentativeInfoDtoCopyWithImpl<$Res>
     Object? uniquePrincipalNumbers = null,
     Object? uniqueSalesOrganisations = null,
   }) {
-    return _then(_$_SalesRepresentativeInfoDto(
+    return _then(_$SalesRepresentativeInfoDtoImpl(
       count: null == count
           ? _value.count
           : count // ignore: cast_nullable_to_non_nullable
@@ -156,23 +152,23 @@ class __$$_SalesRepresentativeInfoDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_SalesRepresentativeInfoDto extends _SalesRepresentativeInfoDto {
-  const _$_SalesRepresentativeInfoDto(
-      {@JsonKey(name: 'count')
-          required this.count,
+class _$SalesRepresentativeInfoDtoImpl extends _SalesRepresentativeInfoDto {
+  const _$SalesRepresentativeInfoDtoImpl(
+      {@JsonKey(name: 'count') required this.count,
       @JsonKey(name: 'uniquePrincipalGroup')
-          required final List<String> uniquePrincipalGroups,
+      required final List<String> uniquePrincipalGroups,
       @JsonKey(name: 'uniquePrincipalNumber')
-          required final List<String> uniquePrincipalNumbers,
+      required final List<String> uniquePrincipalNumbers,
       @JsonKey(name: 'uniqueSalesOrganisation')
-          required final List<String> uniqueSalesOrganisations})
+      required final List<String> uniqueSalesOrganisations})
       : _uniquePrincipalGroups = uniquePrincipalGroups,
         _uniquePrincipalNumbers = uniquePrincipalNumbers,
         _uniqueSalesOrganisations = uniqueSalesOrganisations,
         super._();
 
-  factory _$_SalesRepresentativeInfoDto.fromJson(Map<String, dynamic> json) =>
-      _$$_SalesRepresentativeInfoDtoFromJson(json);
+  factory _$SalesRepresentativeInfoDtoImpl.fromJson(
+          Map<String, dynamic> json) =>
+      _$$SalesRepresentativeInfoDtoImplFromJson(json);
 
   @override
   @JsonKey(name: 'count')
@@ -213,10 +209,10 @@ class _$_SalesRepresentativeInfoDto extends _SalesRepresentativeInfoDto {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_SalesRepresentativeInfoDto &&
+            other is _$SalesRepresentativeInfoDtoImpl &&
             (identical(other.count, count) || other.count == count) &&
             const DeepCollectionEquality()
                 .equals(other._uniquePrincipalGroups, _uniquePrincipalGroups) &&
@@ -238,13 +234,13 @@ class _$_SalesRepresentativeInfoDto extends _SalesRepresentativeInfoDto {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_SalesRepresentativeInfoDtoCopyWith<_$_SalesRepresentativeInfoDto>
-      get copyWith => __$$_SalesRepresentativeInfoDtoCopyWithImpl<
-          _$_SalesRepresentativeInfoDto>(this, _$identity);
+  _$$SalesRepresentativeInfoDtoImplCopyWith<_$SalesRepresentativeInfoDtoImpl>
+      get copyWith => __$$SalesRepresentativeInfoDtoImplCopyWithImpl<
+          _$SalesRepresentativeInfoDtoImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_SalesRepresentativeInfoDtoToJson(
+    return _$$SalesRepresentativeInfoDtoImplToJson(
       this,
     );
   }
@@ -252,19 +248,18 @@ class _$_SalesRepresentativeInfoDto extends _SalesRepresentativeInfoDto {
 
 abstract class _SalesRepresentativeInfoDto extends SalesRepresentativeInfoDto {
   const factory _SalesRepresentativeInfoDto(
-          {@JsonKey(name: 'count')
-              required final int count,
+          {@JsonKey(name: 'count') required final int count,
           @JsonKey(name: 'uniquePrincipalGroup')
-              required final List<String> uniquePrincipalGroups,
+          required final List<String> uniquePrincipalGroups,
           @JsonKey(name: 'uniquePrincipalNumber')
-              required final List<String> uniquePrincipalNumbers,
+          required final List<String> uniquePrincipalNumbers,
           @JsonKey(name: 'uniqueSalesOrganisation')
-              required final List<String> uniqueSalesOrganisations}) =
-      _$_SalesRepresentativeInfoDto;
+          required final List<String> uniqueSalesOrganisations}) =
+      _$SalesRepresentativeInfoDtoImpl;
   const _SalesRepresentativeInfoDto._() : super._();
 
   factory _SalesRepresentativeInfoDto.fromJson(Map<String, dynamic> json) =
-      _$_SalesRepresentativeInfoDto.fromJson;
+      _$SalesRepresentativeInfoDtoImpl.fromJson;
 
   @override
   @JsonKey(name: 'count')
@@ -280,6 +275,6 @@ abstract class _SalesRepresentativeInfoDto extends SalesRepresentativeInfoDto {
   List<String> get uniqueSalesOrganisations;
   @override
   @JsonKey(ignore: true)
-  _$$_SalesRepresentativeInfoDtoCopyWith<_$_SalesRepresentativeInfoDto>
+  _$$SalesRepresentativeInfoDtoImplCopyWith<_$SalesRepresentativeInfoDtoImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

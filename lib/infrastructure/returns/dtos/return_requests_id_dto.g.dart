@@ -6,14 +6,14 @@ part of 'return_requests_id_dto.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_ReturnRequestsIdDto _$$_ReturnRequestsIdDtoFromJson(
+_$ReturnRequestsIdDtoImpl _$$ReturnRequestsIdDtoImplFromJson(
         Map<String, dynamic> json) =>
-    _$_ReturnRequestsIdDto(
+    _$ReturnRequestsIdDtoImpl(
       requestId: json['requestId'] as String? ?? '',
     );
 
-Map<String, dynamic> _$$_ReturnRequestsIdDtoToJson(
-        _$_ReturnRequestsIdDto instance) =>
+Map<String, dynamic> _$$ReturnRequestsIdDtoImplToJson(
+        _$ReturnRequestsIdDtoImpl instance) =>
     <String, dynamic>{
       'requestId': instance.requestId,
     };

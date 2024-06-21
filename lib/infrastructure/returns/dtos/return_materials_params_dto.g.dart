@@ -6,14 +6,14 @@ part of 'return_materials_params_dto.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_ReturnMaterialsParamsDto _$$_ReturnMaterialsParamsDtoFromJson(
+_$ReturnMaterialsParamsDtoImpl _$$ReturnMaterialsParamsDtoImplFromJson(
         Map<String, dynamic> json) =>
-    _$_ReturnMaterialsParamsDto(
+    _$ReturnMaterialsParamsDtoImpl(
       salesOrg: json['salesOrg'] as String? ?? '',
       soldTo: json['soldTo'] as String? ?? '',
       shipTo: json['shipTo'] as String? ?? '',
-      first: json['first'] as int? ?? 0,
-      after: json['after'] as int? ?? 0,
+      first: (json['first'] as num?)?.toInt() ?? 0,
+      after: (json['after'] as num?)?.toInt() ?? 0,
       searchFilter: json['searchFilter'] as String? ?? '',
       filter:
           ReturnItemsFilterDto.fromJson(json['filter'] as Map<String, dynamic>),
@@ -21,8 +21,8 @@ _$_ReturnMaterialsParamsDto _$$_ReturnMaterialsParamsDtoFromJson(
       username: json['username'] as String? ?? '',
     );
 
-Map<String, dynamic> _$$_ReturnMaterialsParamsDtoToJson(
-        _$_ReturnMaterialsParamsDto instance) =>
+Map<String, dynamic> _$$ReturnMaterialsParamsDtoImplToJson(
+        _$ReturnMaterialsParamsDtoImpl instance) =>
     <String, dynamic>{
       'salesOrg': instance.salesOrg,
       'soldTo': instance.soldTo,

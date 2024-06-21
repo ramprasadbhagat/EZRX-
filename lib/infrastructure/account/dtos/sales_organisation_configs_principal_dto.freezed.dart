@@ -12,7 +12,7 @@ part of 'sales_organisation_configs_principal_dto.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 SalesOrganisationConfigsPrincipalDto
     _$SalesOrganisationConfigsPrincipalDtoFromJson(Map<String, dynamic> json) {
@@ -80,12 +80,12 @@ class _$SalesOrganisationConfigsPrincipalDtoCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_SalesOrganisationConfigsPrincipalDtoCopyWith<$Res>
+abstract class _$$SalesOrganisationConfigsPrincipalDtoImplCopyWith<$Res>
     implements $SalesOrganisationConfigsPrincipalDtoCopyWith<$Res> {
-  factory _$$_SalesOrganisationConfigsPrincipalDtoCopyWith(
-          _$_SalesOrganisationConfigsPrincipalDto value,
-          $Res Function(_$_SalesOrganisationConfigsPrincipalDto) then) =
-      __$$_SalesOrganisationConfigsPrincipalDtoCopyWithImpl<$Res>;
+  factory _$$SalesOrganisationConfigsPrincipalDtoImplCopyWith(
+          _$SalesOrganisationConfigsPrincipalDtoImpl value,
+          $Res Function(_$SalesOrganisationConfigsPrincipalDtoImpl) then) =
+      __$$SalesOrganisationConfigsPrincipalDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -94,13 +94,13 @@ abstract class _$$_SalesOrganisationConfigsPrincipalDtoCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_SalesOrganisationConfigsPrincipalDtoCopyWithImpl<$Res>
+class __$$SalesOrganisationConfigsPrincipalDtoImplCopyWithImpl<$Res>
     extends _$SalesOrganisationConfigsPrincipalDtoCopyWithImpl<$Res,
-        _$_SalesOrganisationConfigsPrincipalDto>
-    implements _$$_SalesOrganisationConfigsPrincipalDtoCopyWith<$Res> {
-  __$$_SalesOrganisationConfigsPrincipalDtoCopyWithImpl(
-      _$_SalesOrganisationConfigsPrincipalDto _value,
-      $Res Function(_$_SalesOrganisationConfigsPrincipalDto) _then)
+        _$SalesOrganisationConfigsPrincipalDtoImpl>
+    implements _$$SalesOrganisationConfigsPrincipalDtoImplCopyWith<$Res> {
+  __$$SalesOrganisationConfigsPrincipalDtoImplCopyWithImpl(
+      _$SalesOrganisationConfigsPrincipalDtoImpl _value,
+      $Res Function(_$SalesOrganisationConfigsPrincipalDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -109,7 +109,7 @@ class __$$_SalesOrganisationConfigsPrincipalDtoCopyWithImpl<$Res>
     Object? date = null,
     Object? principalCode = null,
   }) {
-    return _then(_$_SalesOrganisationConfigsPrincipalDto(
+    return _then(_$SalesOrganisationConfigsPrincipalDtoImpl(
       date: null == date
           ? _value.date
           : date // ignore: cast_nullable_to_non_nullable
@@ -124,16 +124,16 @@ class __$$_SalesOrganisationConfigsPrincipalDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_SalesOrganisationConfigsPrincipalDto
+class _$SalesOrganisationConfigsPrincipalDtoImpl
     extends _SalesOrganisationConfigsPrincipalDto {
-  const _$_SalesOrganisationConfigsPrincipalDto(
+  const _$SalesOrganisationConfigsPrincipalDtoImpl(
       {@JsonKey(name: 'date', defaultValue: 0) required this.date,
       @JsonKey(name: 'principal') required this.principalCode})
       : super._();
 
-  factory _$_SalesOrganisationConfigsPrincipalDto.fromJson(
+  factory _$SalesOrganisationConfigsPrincipalDtoImpl.fromJson(
           Map<String, dynamic> json) =>
-      _$$_SalesOrganisationConfigsPrincipalDtoFromJson(json);
+      _$$SalesOrganisationConfigsPrincipalDtoImplFromJson(json);
 
 //The date is not been used anywhere and
 //it is not in proper format
@@ -151,10 +151,10 @@ class _$_SalesOrganisationConfigsPrincipalDto
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_SalesOrganisationConfigsPrincipalDto &&
+            other is _$SalesOrganisationConfigsPrincipalDtoImpl &&
             (identical(other.date, date) || other.date == date) &&
             (identical(other.principalCode, principalCode) ||
                 other.principalCode == principalCode));
@@ -167,14 +167,14 @@ class _$_SalesOrganisationConfigsPrincipalDto
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_SalesOrganisationConfigsPrincipalDtoCopyWith<
-          _$_SalesOrganisationConfigsPrincipalDto>
-      get copyWith => __$$_SalesOrganisationConfigsPrincipalDtoCopyWithImpl<
-          _$_SalesOrganisationConfigsPrincipalDto>(this, _$identity);
+  _$$SalesOrganisationConfigsPrincipalDtoImplCopyWith<
+          _$SalesOrganisationConfigsPrincipalDtoImpl>
+      get copyWith => __$$SalesOrganisationConfigsPrincipalDtoImplCopyWithImpl<
+          _$SalesOrganisationConfigsPrincipalDtoImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_SalesOrganisationConfigsPrincipalDtoToJson(
+    return _$$SalesOrganisationConfigsPrincipalDtoImplToJson(
       this,
     );
   }
@@ -185,12 +185,12 @@ abstract class _SalesOrganisationConfigsPrincipalDto
   const factory _SalesOrganisationConfigsPrincipalDto(
           {@JsonKey(name: 'date', defaultValue: 0) required final int date,
           @JsonKey(name: 'principal') required final String principalCode}) =
-      _$_SalesOrganisationConfigsPrincipalDto;
+      _$SalesOrganisationConfigsPrincipalDtoImpl;
   const _SalesOrganisationConfigsPrincipalDto._() : super._();
 
   factory _SalesOrganisationConfigsPrincipalDto.fromJson(
           Map<String, dynamic> json) =
-      _$_SalesOrganisationConfigsPrincipalDto.fromJson;
+      _$SalesOrganisationConfigsPrincipalDtoImpl.fromJson;
 
   @override //The date is not been used anywhere and
 //it is not in proper format
@@ -202,7 +202,7 @@ abstract class _SalesOrganisationConfigsPrincipalDto
   String get principalCode;
   @override
   @JsonKey(ignore: true)
-  _$$_SalesOrganisationConfigsPrincipalDtoCopyWith<
-          _$_SalesOrganisationConfigsPrincipalDto>
+  _$$SalesOrganisationConfigsPrincipalDtoImplCopyWith<
+          _$SalesOrganisationConfigsPrincipalDtoImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

@@ -6,14 +6,14 @@ part of 'download_payment_attachment_dto.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_DownloadPaymentAttachmentDto _$$_DownloadPaymentAttachmentDtoFromJson(
+_$DownloadPaymentAttachmentDtoImpl _$$DownloadPaymentAttachmentDtoImplFromJson(
         Map<String, dynamic> json) =>
-    _$_DownloadPaymentAttachmentDto(
+    _$DownloadPaymentAttachmentDtoImpl(
       url: json['url'] as String? ?? '',
     );
 
-Map<String, dynamic> _$$_DownloadPaymentAttachmentDtoToJson(
-        _$_DownloadPaymentAttachmentDto instance) =>
+Map<String, dynamic> _$$DownloadPaymentAttachmentDtoImplToJson(
+        _$DownloadPaymentAttachmentDtoImpl instance) =>
     <String, dynamic>{
       'url': instance.url,
     };

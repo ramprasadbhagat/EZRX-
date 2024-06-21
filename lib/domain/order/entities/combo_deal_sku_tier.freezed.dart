@@ -12,7 +12,7 @@ part of 'combo_deal_sku_tier.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$ComboDealSKUTier {
@@ -76,11 +76,11 @@ class _$ComboDealSKUTierCopyWithImpl<$Res, $Val extends ComboDealSKUTier>
 }
 
 /// @nodoc
-abstract class _$$_ComboDealSKUTierCopyWith<$Res>
+abstract class _$$ComboDealSKUTierImplCopyWith<$Res>
     implements $ComboDealSKUTierCopyWith<$Res> {
-  factory _$$_ComboDealSKUTierCopyWith(
-          _$_ComboDealSKUTier value, $Res Function(_$_ComboDealSKUTier) then) =
-      __$$_ComboDealSKUTierCopyWithImpl<$Res>;
+  factory _$$ComboDealSKUTierImplCopyWith(_$ComboDealSKUTierImpl value,
+          $Res Function(_$ComboDealSKUTierImpl) then) =
+      __$$ComboDealSKUTierImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -88,11 +88,11 @@ abstract class _$$_ComboDealSKUTierCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_ComboDealSKUTierCopyWithImpl<$Res>
-    extends _$ComboDealSKUTierCopyWithImpl<$Res, _$_ComboDealSKUTier>
-    implements _$$_ComboDealSKUTierCopyWith<$Res> {
-  __$$_ComboDealSKUTierCopyWithImpl(
-      _$_ComboDealSKUTier _value, $Res Function(_$_ComboDealSKUTier) _then)
+class __$$ComboDealSKUTierImplCopyWithImpl<$Res>
+    extends _$ComboDealSKUTierCopyWithImpl<$Res, _$ComboDealSKUTierImpl>
+    implements _$$ComboDealSKUTierImplCopyWith<$Res> {
+  __$$ComboDealSKUTierImplCopyWithImpl(_$ComboDealSKUTierImpl _value,
+      $Res Function(_$ComboDealSKUTierImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -103,7 +103,7 @@ class __$$_ComboDealSKUTierCopyWithImpl<$Res>
     Object? minQty = null,
     Object? type = null,
   }) {
-    return _then(_$_ComboDealSKUTier(
+    return _then(_$ComboDealSKUTierImpl(
       rate: null == rate
           ? _value.rate
           : rate // ignore: cast_nullable_to_non_nullable
@@ -126,8 +126,8 @@ class __$$_ComboDealSKUTierCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_ComboDealSKUTier extends _ComboDealSKUTier {
-  const _$_ComboDealSKUTier(
+class _$ComboDealSKUTierImpl extends _ComboDealSKUTier {
+  const _$ComboDealSKUTierImpl(
       {required this.rate,
       required this.conditionNumber,
       required this.minQty,
@@ -149,10 +149,10 @@ class _$_ComboDealSKUTier extends _ComboDealSKUTier {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ComboDealSKUTier &&
+            other is _$ComboDealSKUTierImpl &&
             (identical(other.rate, rate) || other.rate == rate) &&
             (identical(other.conditionNumber, conditionNumber) ||
                 other.conditionNumber == conditionNumber) &&
@@ -167,8 +167,9 @@ class _$_ComboDealSKUTier extends _ComboDealSKUTier {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ComboDealSKUTierCopyWith<_$_ComboDealSKUTier> get copyWith =>
-      __$$_ComboDealSKUTierCopyWithImpl<_$_ComboDealSKUTier>(this, _$identity);
+  _$$ComboDealSKUTierImplCopyWith<_$ComboDealSKUTierImpl> get copyWith =>
+      __$$ComboDealSKUTierImplCopyWithImpl<_$ComboDealSKUTierImpl>(
+          this, _$identity);
 }
 
 abstract class _ComboDealSKUTier extends ComboDealSKUTier {
@@ -176,7 +177,7 @@ abstract class _ComboDealSKUTier extends ComboDealSKUTier {
       {required final double rate,
       required final String conditionNumber,
       required final int minQty,
-      required final DiscountType type}) = _$_ComboDealSKUTier;
+      required final DiscountType type}) = _$ComboDealSKUTierImpl;
   const _ComboDealSKUTier._() : super._();
 
   @override
@@ -189,6 +190,6 @@ abstract class _ComboDealSKUTier extends ComboDealSKUTier {
   DiscountType get type;
   @override
   @JsonKey(ignore: true)
-  _$$_ComboDealSKUTierCopyWith<_$_ComboDealSKUTier> get copyWith =>
+  _$$ComboDealSKUTierImplCopyWith<_$ComboDealSKUTierImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

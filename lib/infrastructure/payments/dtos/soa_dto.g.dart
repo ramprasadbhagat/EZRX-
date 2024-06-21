@@ -6,10 +6,11 @@ part of 'soa_dto.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_SoaDto _$$_SoaDtoFromJson(Map<String, dynamic> json) => _$_SoaDto(
+_$SoaDtoImpl _$$SoaDtoImplFromJson(Map<String, dynamic> json) => _$SoaDtoImpl(
       name: json['name'] as String? ?? '',
     );
 
-Map<String, dynamic> _$$_SoaDtoToJson(_$_SoaDto instance) => <String, dynamic>{
+Map<String, dynamic> _$$SoaDtoImplToJson(_$SoaDtoImpl instance) =>
+    <String, dynamic>{
       'name': instance.name,
     };

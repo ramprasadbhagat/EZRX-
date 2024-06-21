@@ -12,7 +12,7 @@ part of 'price_combo_deal.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$PriceComboDeal {
@@ -89,11 +89,11 @@ class _$PriceComboDealCopyWithImpl<$Res, $Val extends PriceComboDeal>
 }
 
 /// @nodoc
-abstract class _$$_PriceComboDealCopyWith<$Res>
+abstract class _$$PriceComboDealImplCopyWith<$Res>
     implements $PriceComboDealCopyWith<$Res> {
-  factory _$$_PriceComboDealCopyWith(
-          _$_PriceComboDeal value, $Res Function(_$_PriceComboDeal) then) =
-      __$$_PriceComboDealCopyWithImpl<$Res>;
+  factory _$$PriceComboDealImplCopyWith(_$PriceComboDealImpl value,
+          $Res Function(_$PriceComboDealImpl) then) =
+      __$$PriceComboDealImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -107,11 +107,11 @@ abstract class _$$_PriceComboDealCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_PriceComboDealCopyWithImpl<$Res>
-    extends _$PriceComboDealCopyWithImpl<$Res, _$_PriceComboDeal>
-    implements _$$_PriceComboDealCopyWith<$Res> {
-  __$$_PriceComboDealCopyWithImpl(
-      _$_PriceComboDeal _value, $Res Function(_$_PriceComboDeal) _then)
+class __$$PriceComboDealImplCopyWithImpl<$Res>
+    extends _$PriceComboDealCopyWithImpl<$Res, _$PriceComboDealImpl>
+    implements _$$PriceComboDealImplCopyWith<$Res> {
+  __$$PriceComboDealImplCopyWithImpl(
+      _$PriceComboDealImpl _value, $Res Function(_$PriceComboDealImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -122,7 +122,7 @@ class __$$_PriceComboDealCopyWithImpl<$Res>
     Object? salesDeal = null,
     Object? category = null,
   }) {
-    return _then(_$_PriceComboDeal(
+    return _then(_$PriceComboDealImpl(
       isEligible: null == isEligible
           ? _value.isEligible
           : isEligible // ignore: cast_nullable_to_non_nullable
@@ -145,8 +145,8 @@ class __$$_PriceComboDealCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_PriceComboDeal extends _PriceComboDeal {
-  const _$_PriceComboDeal(
+class _$PriceComboDealImpl extends _PriceComboDeal {
+  const _$PriceComboDealImpl(
       {required this.isEligible,
       required this.flexibleGroup,
       required this.salesDeal,
@@ -168,10 +168,10 @@ class _$_PriceComboDeal extends _PriceComboDeal {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_PriceComboDeal &&
+            other is _$PriceComboDealImpl &&
             (identical(other.isEligible, isEligible) ||
                 other.isEligible == isEligible) &&
             (identical(other.flexibleGroup, flexibleGroup) ||
@@ -189,8 +189,9 @@ class _$_PriceComboDeal extends _PriceComboDeal {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_PriceComboDealCopyWith<_$_PriceComboDeal> get copyWith =>
-      __$$_PriceComboDealCopyWithImpl<_$_PriceComboDeal>(this, _$identity);
+  _$$PriceComboDealImplCopyWith<_$PriceComboDealImpl> get copyWith =>
+      __$$PriceComboDealImplCopyWithImpl<_$PriceComboDealImpl>(
+          this, _$identity);
 }
 
 abstract class _PriceComboDeal extends PriceComboDeal {
@@ -198,7 +199,7 @@ abstract class _PriceComboDeal extends PriceComboDeal {
       {required final bool isEligible,
       required final FlexibleGroup flexibleGroup,
       required final SalesDealNumber salesDeal,
-      required final PriceComboDealCategory category}) = _$_PriceComboDeal;
+      required final PriceComboDealCategory category}) = _$PriceComboDealImpl;
   const _PriceComboDeal._() : super._();
 
   @override
@@ -211,7 +212,7 @@ abstract class _PriceComboDeal extends PriceComboDeal {
   PriceComboDealCategory get category;
   @override
   @JsonKey(ignore: true)
-  _$$_PriceComboDealCopyWith<_$_PriceComboDeal> get copyWith =>
+  _$$PriceComboDealImplCopyWith<_$PriceComboDealImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -265,23 +266,25 @@ class _$PriceComboDealCategoryCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_PriceComboDealCategoryCopyWith<$Res>
+abstract class _$$PriceComboDealCategoryImplCopyWith<$Res>
     implements $PriceComboDealCategoryCopyWith<$Res> {
-  factory _$$_PriceComboDealCategoryCopyWith(_$_PriceComboDealCategory value,
-          $Res Function(_$_PriceComboDealCategory) then) =
-      __$$_PriceComboDealCategoryCopyWithImpl<$Res>;
+  factory _$$PriceComboDealCategoryImplCopyWith(
+          _$PriceComboDealCategoryImpl value,
+          $Res Function(_$PriceComboDealCategoryImpl) then) =
+      __$$PriceComboDealCategoryImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({ComboDealCategoryType type, List<String> values});
 }
 
 /// @nodoc
-class __$$_PriceComboDealCategoryCopyWithImpl<$Res>
+class __$$PriceComboDealCategoryImplCopyWithImpl<$Res>
     extends _$PriceComboDealCategoryCopyWithImpl<$Res,
-        _$_PriceComboDealCategory>
-    implements _$$_PriceComboDealCategoryCopyWith<$Res> {
-  __$$_PriceComboDealCategoryCopyWithImpl(_$_PriceComboDealCategory _value,
-      $Res Function(_$_PriceComboDealCategory) _then)
+        _$PriceComboDealCategoryImpl>
+    implements _$$PriceComboDealCategoryImplCopyWith<$Res> {
+  __$$PriceComboDealCategoryImplCopyWithImpl(
+      _$PriceComboDealCategoryImpl _value,
+      $Res Function(_$PriceComboDealCategoryImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -290,7 +293,7 @@ class __$$_PriceComboDealCategoryCopyWithImpl<$Res>
     Object? type = null,
     Object? values = null,
   }) {
-    return _then(_$_PriceComboDealCategory(
+    return _then(_$PriceComboDealCategoryImpl(
       type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
@@ -305,8 +308,8 @@ class __$$_PriceComboDealCategoryCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_PriceComboDealCategory extends _PriceComboDealCategory {
-  const _$_PriceComboDealCategory(
+class _$PriceComboDealCategoryImpl extends _PriceComboDealCategory {
+  const _$PriceComboDealCategoryImpl(
       {required this.type, required final List<String> values})
       : _values = values,
         super._();
@@ -327,10 +330,10 @@ class _$_PriceComboDealCategory extends _PriceComboDealCategory {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_PriceComboDealCategory &&
+            other is _$PriceComboDealCategoryImpl &&
             (identical(other.type, type) || other.type == type) &&
             const DeepCollectionEquality().equals(other._values, _values));
   }
@@ -342,15 +345,15 @@ class _$_PriceComboDealCategory extends _PriceComboDealCategory {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_PriceComboDealCategoryCopyWith<_$_PriceComboDealCategory> get copyWith =>
-      __$$_PriceComboDealCategoryCopyWithImpl<_$_PriceComboDealCategory>(
-          this, _$identity);
+  _$$PriceComboDealCategoryImplCopyWith<_$PriceComboDealCategoryImpl>
+      get copyWith => __$$PriceComboDealCategoryImplCopyWithImpl<
+          _$PriceComboDealCategoryImpl>(this, _$identity);
 }
 
 abstract class _PriceComboDealCategory extends PriceComboDealCategory {
   const factory _PriceComboDealCategory(
       {required final ComboDealCategoryType type,
-      required final List<String> values}) = _$_PriceComboDealCategory;
+      required final List<String> values}) = _$PriceComboDealCategoryImpl;
   const _PriceComboDealCategory._() : super._();
 
   @override
@@ -359,6 +362,6 @@ abstract class _PriceComboDealCategory extends PriceComboDealCategory {
   List<String> get values;
   @override
   @JsonKey(ignore: true)
-  _$$_PriceComboDealCategoryCopyWith<_$_PriceComboDealCategory> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$PriceComboDealCategoryImplCopyWith<_$PriceComboDealCategoryImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }

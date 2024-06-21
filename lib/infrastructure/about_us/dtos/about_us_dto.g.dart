@@ -6,8 +6,8 @@ part of 'about_us_dto.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_AboutUsDto _$$_AboutUsDtoFromJson(Map<String, dynamic> json) =>
-    _$_AboutUsDto(
+_$AboutUsDtoImpl _$$AboutUsDtoImplFromJson(Map<String, dynamic> json) =>
+    _$AboutUsDtoImpl(
       banner: BannerTemplateDto.fromJson(
           bannerReadValue(json, 'banner') as Map<String, dynamic>),
       certifications: SliderTemplateDto.fromJson(
@@ -24,7 +24,7 @@ _$_AboutUsDto _$$_AboutUsDtoFromJson(Map<String, dynamic> json) =>
               .toList(),
     );
 
-Map<String, dynamic> _$$_AboutUsDtoToJson(_$_AboutUsDto instance) =>
+Map<String, dynamic> _$$AboutUsDtoImplToJson(_$AboutUsDtoImpl instance) =>
     <String, dynamic>{
       'banner': instance.banner.toJson(),
       'certifications': instance.certifications.toJson(),
@@ -33,8 +33,9 @@ Map<String, dynamic> _$$_AboutUsDtoToJson(_$_AboutUsDto instance) =>
       'contentSplit': instance.contentSplit.map((e) => e.toJson()).toList(),
     };
 
-_$_BannerTemplateDto _$$_BannerTemplateDtoFromJson(Map<String, dynamic> json) =>
-    _$_BannerTemplateDto(
+_$BannerTemplateDtoImpl _$$BannerTemplateDtoImplFromJson(
+        Map<String, dynamic> json) =>
+    _$BannerTemplateDtoImpl(
       media: MediaValueDto.fromJson(
           mediaReadValue(json, 'media') as Map<String, dynamic>),
       content: TemplateValueItemDto.fromJson(
@@ -43,8 +44,8 @@ _$_BannerTemplateDto _$$_BannerTemplateDtoFromJson(Map<String, dynamic> json) =>
       buttonName: readValue(json, 'buttonName') as String,
     );
 
-Map<String, dynamic> _$$_BannerTemplateDtoToJson(
-        _$_BannerTemplateDto instance) =>
+Map<String, dynamic> _$$BannerTemplateDtoImplToJson(
+        _$BannerTemplateDtoImpl instance) =>
     <String, dynamic>{
       'media': instance.media.toJson(),
       'content': instance.content.toJson(),
@@ -52,8 +53,9 @@ Map<String, dynamic> _$$_BannerTemplateDtoToJson(
       'buttonName': instance.buttonName,
     };
 
-_$_SliderTemplateDto _$$_SliderTemplateDtoFromJson(Map<String, dynamic> json) =>
-    _$_SliderTemplateDto(
+_$SliderTemplateDtoImpl _$$SliderTemplateDtoImplFromJson(
+        Map<String, dynamic> json) =>
+    _$SliderTemplateDtoImpl(
       title: TemplateValueItemDto.fromJson(
           readDynamicValueKey(json, 'title') as Map<String, dynamic>),
       certificates: (readValueKey(json, 'certificates') as List<dynamic>)
@@ -61,15 +63,16 @@ _$_SliderTemplateDto _$$_SliderTemplateDtoFromJson(Map<String, dynamic> json) =>
           .toList(),
     );
 
-Map<String, dynamic> _$$_SliderTemplateDtoToJson(
-        _$_SliderTemplateDto instance) =>
+Map<String, dynamic> _$$SliderTemplateDtoImplToJson(
+        _$SliderTemplateDtoImpl instance) =>
     <String, dynamic>{
       'title': instance.title.toJson(),
       'certificates': instance.certificates.map((e) => e.toJson()).toList(),
     };
 
-_$_CertificationsDto _$$_CertificationsDtoFromJson(Map<String, dynamic> json) =>
-    _$_CertificationsDto(
+_$CertificationsDtoImpl _$$CertificationsDtoImplFromJson(
+        Map<String, dynamic> json) =>
+    _$CertificationsDtoImpl(
       certificationType: TemplateValueItemDto.fromJson(
           readDynamicValueKey(json, 'certificationType')
               as Map<String, dynamic>),
@@ -83,8 +86,8 @@ _$_CertificationsDto _$$_CertificationsDtoFromJson(Map<String, dynamic> json) =>
               as Map<String, dynamic>),
     );
 
-Map<String, dynamic> _$$_CertificationsDtoToJson(
-        _$_CertificationsDto instance) =>
+Map<String, dynamic> _$$CertificationsDtoImplToJson(
+        _$CertificationsDtoImpl instance) =>
     <String, dynamic>{
       'certificationType': instance.certificationType.toJson(),
       'certificationName': instance.certificationName.toJson(),
@@ -92,9 +95,9 @@ Map<String, dynamic> _$$_CertificationsDtoToJson(
       'certificationYear': instance.certificationYear.toJson(),
     };
 
-_$_HorizontalListTemplateDto _$$_HorizontalListTemplateDtoFromJson(
+_$HorizontalListTemplateDtoImpl _$$HorizontalListTemplateDtoImplFromJson(
         Map<String, dynamic> json) =>
-    _$_HorizontalListTemplateDto(
+    _$HorizontalListTemplateDtoImpl(
       title: TemplateValueItemDto.fromJson(
           readDynamicValueKey(json, 'title') as Map<String, dynamic>),
       description: TemplateValueItemDto.fromJson(
@@ -105,28 +108,28 @@ _$_HorizontalListTemplateDto _$$_HorizontalListTemplateDtoFromJson(
           .toList(),
     );
 
-Map<String, dynamic> _$$_HorizontalListTemplateDtoToJson(
-        _$_HorizontalListTemplateDto instance) =>
+Map<String, dynamic> _$$HorizontalListTemplateDtoImplToJson(
+        _$HorizontalListTemplateDtoImpl instance) =>
     <String, dynamic>{
       'title': instance.title.toJson(),
       'description': instance.description.toJson(),
       'list': instance.achievements.map((e) => e.toJson()).toList(),
     };
 
-_$_HorizontalListTemplateItemDto _$$_HorizontalListTemplateItemDtoFromJson(
-        Map<String, dynamic> json) =>
-    _$_HorizontalListTemplateItemDto(
-      name: json['name'] as String,
-      title: TemplateValueItemDto.fromJson(
-          readDynamicValueKey(json, 'title') as Map<String, dynamic>),
-      subTitle: TemplateValueItemDto.fromJson(
-          readDynamicValueKey(json, 'subTitle') as Map<String, dynamic>),
-      description: TemplateValueItemDto.fromJson(
-          json['description'] as Map<String, dynamic>),
-    );
+_$HorizontalListTemplateItemDtoImpl
+    _$$HorizontalListTemplateItemDtoImplFromJson(Map<String, dynamic> json) =>
+        _$HorizontalListTemplateItemDtoImpl(
+          name: json['name'] as String,
+          title: TemplateValueItemDto.fromJson(
+              readDynamicValueKey(json, 'title') as Map<String, dynamic>),
+          subTitle: TemplateValueItemDto.fromJson(
+              readDynamicValueKey(json, 'subTitle') as Map<String, dynamic>),
+          description: TemplateValueItemDto.fromJson(
+              json['description'] as Map<String, dynamic>),
+        );
 
-Map<String, dynamic> _$$_HorizontalListTemplateItemDtoToJson(
-        _$_HorizontalListTemplateItemDto instance) =>
+Map<String, dynamic> _$$HorizontalListTemplateItemDtoImplToJson(
+        _$HorizontalListTemplateItemDtoImpl instance) =>
     <String, dynamic>{
       'name': instance.name,
       'title': instance.title.toJson(),
@@ -134,9 +137,9 @@ Map<String, dynamic> _$$_HorizontalListTemplateItemDtoToJson(
       'description': instance.description.toJson(),
     };
 
-_$_ContentSplitTemplateDto _$$_ContentSplitTemplateDtoFromJson(
+_$ContentSplitTemplateDtoImpl _$$ContentSplitTemplateDtoImplFromJson(
         Map<String, dynamic> json) =>
-    _$_ContentSplitTemplateDto(
+    _$ContentSplitTemplateDtoImpl(
       title: TemplateValueItemDto.fromJson(
           readDynamicValueKey(json, 'title') as Map<String, dynamic>),
       subTitle: TemplateValueItemDto.fromJson(
@@ -147,8 +150,8 @@ _$_ContentSplitTemplateDto _$$_ContentSplitTemplateDtoFromJson(
           mediaReadValue(json, 'media') as Map<String, dynamic>),
     );
 
-Map<String, dynamic> _$$_ContentSplitTemplateDtoToJson(
-        _$_ContentSplitTemplateDto instance) =>
+Map<String, dynamic> _$$ContentSplitTemplateDtoImplToJson(
+        _$ContentSplitTemplateDtoImpl instance) =>
     <String, dynamic>{
       'title': instance.title.toJson(),
       'subTitle': instance.subTitle.toJson(),
@@ -156,9 +159,9 @@ Map<String, dynamic> _$$_ContentSplitTemplateDtoToJson(
       'media': instance.media.toJson(),
     };
 
-_$_MediaListTemplateDto _$$_MediaListTemplateDtoFromJson(
+_$MediaListTemplateDtoImpl _$$MediaListTemplateDtoImplFromJson(
         Map<String, dynamic> json) =>
-    _$_MediaListTemplateDto(
+    _$MediaListTemplateDtoImpl(
       title: TemplateValueItemDto.fromJson(
           readDynamicValueKey(json, 'title') as Map<String, dynamic>),
       description: TemplateValueItemDto.fromJson(
@@ -169,42 +172,42 @@ _$_MediaListTemplateDto _$$_MediaListTemplateDtoFromJson(
           [],
     );
 
-Map<String, dynamic> _$$_MediaListTemplateDtoToJson(
-        _$_MediaListTemplateDto instance) =>
+Map<String, dynamic> _$$MediaListTemplateDtoImplToJson(
+        _$MediaListTemplateDtoImpl instance) =>
     <String, dynamic>{
       'title': instance.title.toJson(),
       'description': instance.description.toJson(),
       'mediaItems': instance.mediaItems.map((e) => e.toJson()).toList(),
     };
 
-_$_MediaItemDto _$$_MediaItemDtoFromJson(Map<String, dynamic> json) =>
-    _$_MediaItemDto(
+_$MediaItemDtoImpl _$$MediaItemDtoImplFromJson(Map<String, dynamic> json) =>
+    _$MediaItemDtoImpl(
       url: TemplateValueItemDto.fromJson(json['url'] as Map<String, dynamic>),
     );
 
-Map<String, dynamic> _$$_MediaItemDtoToJson(_$_MediaItemDto instance) =>
+Map<String, dynamic> _$$MediaItemDtoImplToJson(_$MediaItemDtoImpl instance) =>
     <String, dynamic>{
       'url': instance.url.toJson(),
     };
 
-_$_MediaValueDto _$$_MediaValueDtoFromJson(Map<String, dynamic> json) =>
-    _$_MediaValueDto(
+_$MediaValueDtoImpl _$$MediaValueDtoImplFromJson(Map<String, dynamic> json) =>
+    _$MediaValueDtoImpl(
       src: json['src'] as String? ?? '',
     );
 
-Map<String, dynamic> _$$_MediaValueDtoToJson(_$_MediaValueDto instance) =>
+Map<String, dynamic> _$$MediaValueDtoImplToJson(_$MediaValueDtoImpl instance) =>
     <String, dynamic>{
       'src': instance.src,
     };
 
-_$_TemplateValueItemDto _$$_TemplateValueItemDtoFromJson(
+_$TemplateValueItemDtoImpl _$$TemplateValueItemDtoImplFromJson(
         Map<String, dynamic> json) =>
-    _$_TemplateValueItemDto(
+    _$TemplateValueItemDtoImpl(
       value: json['value'] as String? ?? '',
     );
 
-Map<String, dynamic> _$$_TemplateValueItemDtoToJson(
-        _$_TemplateValueItemDto instance) =>
+Map<String, dynamic> _$$TemplateValueItemDtoImplToJson(
+        _$TemplateValueItemDtoImpl instance) =>
     <String, dynamic>{
       'value': instance.value,
     };

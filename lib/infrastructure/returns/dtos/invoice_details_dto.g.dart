@@ -6,8 +6,9 @@ part of 'invoice_details_dto.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_InvoiceDetailsDto _$$_InvoiceDetailsDtoFromJson(Map<String, dynamic> json) =>
-    _$_InvoiceDetailsDto(
+_$InvoiceDetailsDtoImpl _$$InvoiceDetailsDtoImplFromJson(
+        Map<String, dynamic> json) =>
+    _$InvoiceDetailsDtoImpl(
       invoiceNumber: json['invoiceNumber'] as String? ?? '',
       salesOrg: json['salesOrg'] as String? ?? '',
       materials: (json['materials'] as List<dynamic>?)
@@ -17,8 +18,8 @@ _$_InvoiceDetailsDto _$$_InvoiceDetailsDtoFromJson(Map<String, dynamic> json) =>
           [],
     );
 
-Map<String, dynamic> _$$_InvoiceDetailsDtoToJson(
-        _$_InvoiceDetailsDto instance) =>
+Map<String, dynamic> _$$InvoiceDetailsDtoImplToJson(
+        _$InvoiceDetailsDtoImpl instance) =>
     <String, dynamic>{
       'invoiceNumber': instance.invoiceNumber,
       'salesOrg': instance.salesOrg,

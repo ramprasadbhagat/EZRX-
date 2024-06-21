@@ -12,7 +12,7 @@ part of 'return_list_request_dto.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 ReturnListRequestDto _$ReturnListRequestDtoFromJson(Map<String, dynamic> json) {
   return _ReturnListRequestDto.fromJson(json);
@@ -132,11 +132,11 @@ class _$ReturnListRequestDtoCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_ReturnListRequestDtoCopyWith<$Res>
+abstract class _$$ReturnListRequestDtoImplCopyWith<$Res>
     implements $ReturnListRequestDtoCopyWith<$Res> {
-  factory _$$_ReturnListRequestDtoCopyWith(_$_ReturnListRequestDto value,
-          $Res Function(_$_ReturnListRequestDto) then) =
-      __$$_ReturnListRequestDtoCopyWithImpl<$Res>;
+  factory _$$ReturnListRequestDtoImplCopyWith(_$ReturnListRequestDtoImpl value,
+          $Res Function(_$ReturnListRequestDtoImpl) then) =
+      __$$ReturnListRequestDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -155,11 +155,11 @@ abstract class _$$_ReturnListRequestDtoCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_ReturnListRequestDtoCopyWithImpl<$Res>
-    extends _$ReturnListRequestDtoCopyWithImpl<$Res, _$_ReturnListRequestDto>
-    implements _$$_ReturnListRequestDtoCopyWith<$Res> {
-  __$$_ReturnListRequestDtoCopyWithImpl(_$_ReturnListRequestDto _value,
-      $Res Function(_$_ReturnListRequestDto) _then)
+class __$$ReturnListRequestDtoImplCopyWithImpl<$Res>
+    extends _$ReturnListRequestDtoCopyWithImpl<$Res, _$ReturnListRequestDtoImpl>
+    implements _$$ReturnListRequestDtoImplCopyWith<$Res> {
+  __$$ReturnListRequestDtoImplCopyWithImpl(_$ReturnListRequestDtoImpl _value,
+      $Res Function(_$ReturnListRequestDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -174,7 +174,7 @@ class __$$_ReturnListRequestDtoCopyWithImpl<$Res>
     Object? filterQuery = null,
     Object? searchKey = null,
   }) {
-    return _then(_$_ReturnListRequestDto(
+    return _then(_$ReturnListRequestDtoImpl(
       salesOrg: null == salesOrg
           ? _value.salesOrg
           : salesOrg // ignore: cast_nullable_to_non_nullable
@@ -213,8 +213,8 @@ class __$$_ReturnListRequestDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_ReturnListRequestDto extends _ReturnListRequestDto {
-  const _$_ReturnListRequestDto(
+class _$ReturnListRequestDtoImpl extends _ReturnListRequestDto {
+  const _$ReturnListRequestDtoImpl(
       {@JsonKey(name: 'salesOrg', defaultValue: '') required this.salesOrg,
       @JsonKey(name: 'soldTo', defaultValue: '') required this.soldTo,
       @JsonKey(name: 'shipTo', defaultValue: '') required this.shipTo,
@@ -226,8 +226,8 @@ class _$_ReturnListRequestDto extends _ReturnListRequestDto {
       @JsonKey(name: 'searchFilter', defaultValue: '') required this.searchKey})
       : super._();
 
-  factory _$_ReturnListRequestDto.fromJson(Map<String, dynamic> json) =>
-      _$$_ReturnListRequestDtoFromJson(json);
+  factory _$ReturnListRequestDtoImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ReturnListRequestDtoImplFromJson(json);
 
   @override
   @JsonKey(name: 'salesOrg', defaultValue: '')
@@ -260,10 +260,10 @@ class _$_ReturnListRequestDto extends _ReturnListRequestDto {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ReturnListRequestDto &&
+            other is _$ReturnListRequestDtoImpl &&
             (identical(other.salesOrg, salesOrg) ||
                 other.salesOrg == salesOrg) &&
             (identical(other.soldTo, soldTo) || other.soldTo == soldTo) &&
@@ -286,13 +286,14 @@ class _$_ReturnListRequestDto extends _ReturnListRequestDto {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ReturnListRequestDtoCopyWith<_$_ReturnListRequestDto> get copyWith =>
-      __$$_ReturnListRequestDtoCopyWithImpl<_$_ReturnListRequestDto>(
-          this, _$identity);
+  _$$ReturnListRequestDtoImplCopyWith<_$ReturnListRequestDtoImpl>
+      get copyWith =>
+          __$$ReturnListRequestDtoImplCopyWithImpl<_$ReturnListRequestDtoImpl>(
+              this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_ReturnListRequestDtoToJson(
+    return _$$ReturnListRequestDtoImplToJson(
       this,
     );
   }
@@ -311,11 +312,11 @@ abstract class _ReturnListRequestDto extends ReturnListRequestDto {
       @JsonKey(name: 'filterQuery', defaultValue: null, includeToJson: false)
       required final ReturnFilterDto filterQuery,
       @JsonKey(name: 'searchFilter', defaultValue: '')
-      required final String searchKey}) = _$_ReturnListRequestDto;
+      required final String searchKey}) = _$ReturnListRequestDtoImpl;
   const _ReturnListRequestDto._() : super._();
 
   factory _ReturnListRequestDto.fromJson(Map<String, dynamic> json) =
-      _$_ReturnListRequestDto.fromJson;
+      _$ReturnListRequestDtoImpl.fromJson;
 
   @override
   @JsonKey(name: 'salesOrg', defaultValue: '')
@@ -343,6 +344,6 @@ abstract class _ReturnListRequestDto extends ReturnListRequestDto {
   String get searchKey;
   @override
   @JsonKey(ignore: true)
-  _$$_ReturnListRequestDtoCopyWith<_$_ReturnListRequestDto> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$ReturnListRequestDtoImplCopyWith<_$ReturnListRequestDtoImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }

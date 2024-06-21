@@ -12,7 +12,7 @@ part of 'customer_license_bloc.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$CustomerLicenseEvent {
@@ -88,10 +88,10 @@ class _$CustomerLicenseEventCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_InitializedCopyWith<$Res> {
-  factory _$$_InitializedCopyWith(
-          _$_Initialized value, $Res Function(_$_Initialized) then) =
-      __$$_InitializedCopyWithImpl<$Res>;
+abstract class _$$InitializedImplCopyWith<$Res> {
+  factory _$$InitializedImplCopyWith(
+          _$InitializedImpl value, $Res Function(_$InitializedImpl) then) =
+      __$$InitializedImplCopyWithImpl<$Res>;
   @useResult
   $Res call(
       {SalesOrganisation salesOrganization,
@@ -104,11 +104,11 @@ abstract class _$$_InitializedCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_InitializedCopyWithImpl<$Res>
-    extends _$CustomerLicenseEventCopyWithImpl<$Res, _$_Initialized>
-    implements _$$_InitializedCopyWith<$Res> {
-  __$$_InitializedCopyWithImpl(
-      _$_Initialized _value, $Res Function(_$_Initialized) _then)
+class __$$InitializedImplCopyWithImpl<$Res>
+    extends _$CustomerLicenseEventCopyWithImpl<$Res, _$InitializedImpl>
+    implements _$$InitializedImplCopyWith<$Res> {
+  __$$InitializedImplCopyWithImpl(
+      _$InitializedImpl _value, $Res Function(_$InitializedImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -118,7 +118,7 @@ class __$$_InitializedCopyWithImpl<$Res>
     Object? customerInfo = null,
     Object? user = null,
   }) {
-    return _then(_$_Initialized(
+    return _then(_$InitializedImpl(
       salesOrganization: null == salesOrganization
           ? _value.salesOrganization
           : salesOrganization // ignore: cast_nullable_to_non_nullable
@@ -161,8 +161,8 @@ class __$$_InitializedCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_Initialized implements _Initialized {
-  const _$_Initialized(
+class _$InitializedImpl implements _Initialized {
+  const _$InitializedImpl(
       {required this.salesOrganization,
       required this.customerInfo,
       required this.user});
@@ -180,10 +180,10 @@ class _$_Initialized implements _Initialized {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Initialized &&
+            other is _$InitializedImpl &&
             (identical(other.salesOrganization, salesOrganization) ||
                 other.salesOrganization == salesOrganization) &&
             (identical(other.customerInfo, customerInfo) ||
@@ -198,8 +198,8 @@ class _$_Initialized implements _Initialized {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_InitializedCopyWith<_$_Initialized> get copyWith =>
-      __$$_InitializedCopyWithImpl<_$_Initialized>(this, _$identity);
+  _$$InitializedImplCopyWith<_$InitializedImpl> get copyWith =>
+      __$$InitializedImplCopyWithImpl<_$InitializedImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -280,34 +280,36 @@ abstract class _Initialized implements CustomerLicenseEvent {
   const factory _Initialized(
       {required final SalesOrganisation salesOrganization,
       required final CustomerCodeInfo customerInfo,
-      required final User user}) = _$_Initialized;
+      required final User user}) = _$InitializedImpl;
 
   SalesOrganisation get salesOrganization;
   CustomerCodeInfo get customerInfo;
   User get user;
   @JsonKey(ignore: true)
-  _$$_InitializedCopyWith<_$_Initialized> get copyWith =>
+  _$$InitializedImplCopyWith<_$InitializedImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_FetchCopyWith<$Res> {
-  factory _$$_FetchCopyWith(_$_Fetch value, $Res Function(_$_Fetch) then) =
-      __$$_FetchCopyWithImpl<$Res>;
+abstract class _$$FetchImplCopyWith<$Res> {
+  factory _$$FetchImplCopyWith(
+          _$FetchImpl value, $Res Function(_$FetchImpl) then) =
+      __$$FetchImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_FetchCopyWithImpl<$Res>
-    extends _$CustomerLicenseEventCopyWithImpl<$Res, _$_Fetch>
-    implements _$$_FetchCopyWith<$Res> {
-  __$$_FetchCopyWithImpl(_$_Fetch _value, $Res Function(_$_Fetch) _then)
+class __$$FetchImplCopyWithImpl<$Res>
+    extends _$CustomerLicenseEventCopyWithImpl<$Res, _$FetchImpl>
+    implements _$$FetchImplCopyWith<$Res> {
+  __$$FetchImplCopyWithImpl(
+      _$FetchImpl _value, $Res Function(_$FetchImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_Fetch implements _Fetch {
-  const _$_Fetch();
+class _$FetchImpl implements _Fetch {
+  const _$FetchImpl();
 
   @override
   String toString() {
@@ -315,9 +317,9 @@ class _$_Fetch implements _Fetch {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_Fetch);
+        (other.runtimeType == runtimeType && other is _$FetchImpl);
   }
 
   @override
@@ -399,29 +401,29 @@ class _$_Fetch implements _Fetch {
 }
 
 abstract class _Fetch implements CustomerLicenseEvent {
-  const factory _Fetch() = _$_Fetch;
+  const factory _Fetch() = _$FetchImpl;
 }
 
 /// @nodoc
-abstract class _$$_LoadMoreCopyWith<$Res> {
-  factory _$$_LoadMoreCopyWith(
-          _$_LoadMore value, $Res Function(_$_LoadMore) then) =
-      __$$_LoadMoreCopyWithImpl<$Res>;
+abstract class _$$LoadMoreImplCopyWith<$Res> {
+  factory _$$LoadMoreImplCopyWith(
+          _$LoadMoreImpl value, $Res Function(_$LoadMoreImpl) then) =
+      __$$LoadMoreImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_LoadMoreCopyWithImpl<$Res>
-    extends _$CustomerLicenseEventCopyWithImpl<$Res, _$_LoadMore>
-    implements _$$_LoadMoreCopyWith<$Res> {
-  __$$_LoadMoreCopyWithImpl(
-      _$_LoadMore _value, $Res Function(_$_LoadMore) _then)
+class __$$LoadMoreImplCopyWithImpl<$Res>
+    extends _$CustomerLicenseEventCopyWithImpl<$Res, _$LoadMoreImpl>
+    implements _$$LoadMoreImplCopyWith<$Res> {
+  __$$LoadMoreImplCopyWithImpl(
+      _$LoadMoreImpl _value, $Res Function(_$LoadMoreImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_LoadMore implements _LoadMore {
-  const _$_LoadMore();
+class _$LoadMoreImpl implements _LoadMore {
+  const _$LoadMoreImpl();
 
   @override
   String toString() {
@@ -429,9 +431,9 @@ class _$_LoadMore implements _LoadMore {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_LoadMore);
+        (other.runtimeType == runtimeType && other is _$LoadMoreImpl);
   }
 
   @override
@@ -513,7 +515,7 @@ class _$_LoadMore implements _LoadMore {
 }
 
 abstract class _LoadMore implements CustomerLicenseEvent {
-  const factory _LoadMore() = _$_LoadMore;
+  const factory _LoadMore() = _$LoadMoreImpl;
 }
 
 /// @nodoc
@@ -633,11 +635,11 @@ class _$CustomerLicenseStateCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_CustomerLicenseStateCopyWith<$Res>
+abstract class _$$CustomerLicenseStateImplCopyWith<$Res>
     implements $CustomerLicenseStateCopyWith<$Res> {
-  factory _$$_CustomerLicenseStateCopyWith(_$_CustomerLicenseState value,
-          $Res Function(_$_CustomerLicenseState) then) =
-      __$$_CustomerLicenseStateCopyWithImpl<$Res>;
+  factory _$$CustomerLicenseStateImplCopyWith(_$CustomerLicenseStateImpl value,
+          $Res Function(_$CustomerLicenseStateImpl) then) =
+      __$$CustomerLicenseStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -658,11 +660,11 @@ abstract class _$$_CustomerLicenseStateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_CustomerLicenseStateCopyWithImpl<$Res>
-    extends _$CustomerLicenseStateCopyWithImpl<$Res, _$_CustomerLicenseState>
-    implements _$$_CustomerLicenseStateCopyWith<$Res> {
-  __$$_CustomerLicenseStateCopyWithImpl(_$_CustomerLicenseState _value,
-      $Res Function(_$_CustomerLicenseState) _then)
+class __$$CustomerLicenseStateImplCopyWithImpl<$Res>
+    extends _$CustomerLicenseStateCopyWithImpl<$Res, _$CustomerLicenseStateImpl>
+    implements _$$CustomerLicenseStateImplCopyWith<$Res> {
+  __$$CustomerLicenseStateImplCopyWithImpl(_$CustomerLicenseStateImpl _value,
+      $Res Function(_$CustomerLicenseStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -676,7 +678,7 @@ class __$$_CustomerLicenseStateCopyWithImpl<$Res>
     Object? customerInfo = null,
     Object? user = null,
   }) {
-    return _then(_$_CustomerLicenseState(
+    return _then(_$CustomerLicenseStateImpl(
       isFetching: null == isFetching
           ? _value.isFetching
           : isFetching // ignore: cast_nullable_to_non_nullable
@@ -711,8 +713,8 @@ class __$$_CustomerLicenseStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_CustomerLicenseState extends _CustomerLicenseState {
-  const _$_CustomerLicenseState(
+class _$CustomerLicenseStateImpl extends _CustomerLicenseState {
+  const _$CustomerLicenseStateImpl(
       {required this.isFetching,
       required this.canLoadMore,
       required this.failureOrSuccessOption,
@@ -751,10 +753,10 @@ class _$_CustomerLicenseState extends _CustomerLicenseState {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_CustomerLicenseState &&
+            other is _$CustomerLicenseStateImpl &&
             (identical(other.isFetching, isFetching) ||
                 other.isFetching == isFetching) &&
             (identical(other.canLoadMore, canLoadMore) ||
@@ -784,9 +786,10 @@ class _$_CustomerLicenseState extends _CustomerLicenseState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_CustomerLicenseStateCopyWith<_$_CustomerLicenseState> get copyWith =>
-      __$$_CustomerLicenseStateCopyWithImpl<_$_CustomerLicenseState>(
-          this, _$identity);
+  _$$CustomerLicenseStateImplCopyWith<_$CustomerLicenseStateImpl>
+      get copyWith =>
+          __$$CustomerLicenseStateImplCopyWithImpl<_$CustomerLicenseStateImpl>(
+              this, _$identity);
 }
 
 abstract class _CustomerLicenseState extends CustomerLicenseState {
@@ -797,7 +800,7 @@ abstract class _CustomerLicenseState extends CustomerLicenseState {
       required final List<CustomerLicense> customerLicenses,
       required final SalesOrganisation salesOrganization,
       required final CustomerCodeInfo customerInfo,
-      required final User user}) = _$_CustomerLicenseState;
+      required final User user}) = _$CustomerLicenseStateImpl;
   const _CustomerLicenseState._() : super._();
 
   @override
@@ -816,6 +819,6 @@ abstract class _CustomerLicenseState extends CustomerLicenseState {
   User get user;
   @override
   @JsonKey(ignore: true)
-  _$$_CustomerLicenseStateCopyWith<_$_CustomerLicenseState> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$CustomerLicenseStateImplCopyWith<_$CustomerLicenseStateImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }

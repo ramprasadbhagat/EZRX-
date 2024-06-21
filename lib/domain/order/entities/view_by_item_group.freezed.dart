@@ -12,7 +12,7 @@ part of 'view_by_item_group.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$ViewByItemGroup {
@@ -73,11 +73,11 @@ class _$ViewByItemGroupCopyWithImpl<$Res, $Val extends ViewByItemGroup>
 }
 
 /// @nodoc
-abstract class _$$_ViewByItemGroupCopyWith<$Res>
+abstract class _$$ViewByItemGroupImplCopyWith<$Res>
     implements $ViewByItemGroupCopyWith<$Res> {
-  factory _$$_ViewByItemGroupCopyWith(
-          _$_ViewByItemGroup value, $Res Function(_$_ViewByItemGroup) then) =
-      __$$_ViewByItemGroupCopyWithImpl<$Res>;
+  factory _$$ViewByItemGroupImplCopyWith(_$ViewByItemGroupImpl value,
+          $Res Function(_$ViewByItemGroupImpl) then) =
+      __$$ViewByItemGroupImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -87,11 +87,11 @@ abstract class _$$_ViewByItemGroupCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_ViewByItemGroupCopyWithImpl<$Res>
-    extends _$ViewByItemGroupCopyWithImpl<$Res, _$_ViewByItemGroup>
-    implements _$$_ViewByItemGroupCopyWith<$Res> {
-  __$$_ViewByItemGroupCopyWithImpl(
-      _$_ViewByItemGroup _value, $Res Function(_$_ViewByItemGroup) _then)
+class __$$ViewByItemGroupImplCopyWithImpl<$Res>
+    extends _$ViewByItemGroupCopyWithImpl<$Res, _$ViewByItemGroupImpl>
+    implements _$$ViewByItemGroupImplCopyWith<$Res> {
+  __$$ViewByItemGroupImplCopyWithImpl(
+      _$ViewByItemGroupImpl _value, $Res Function(_$ViewByItemGroupImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -101,7 +101,7 @@ class __$$_ViewByItemGroupCopyWithImpl<$Res>
     Object? manufactureName = null,
     Object? orderHistoryItem = null,
   }) {
-    return _then(_$_ViewByItemGroup(
+    return _then(_$ViewByItemGroupImpl(
       createdDate: null == createdDate
           ? _value.createdDate
           : createdDate // ignore: cast_nullable_to_non_nullable
@@ -120,8 +120,8 @@ class __$$_ViewByItemGroupCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_ViewByItemGroup implements _ViewByItemGroup {
-  _$_ViewByItemGroup(
+class _$ViewByItemGroupImpl implements _ViewByItemGroup {
+  _$ViewByItemGroupImpl(
       {required this.createdDate,
       required this.manufactureName,
       required final List<OrderHistoryItem> orderHistoryItem})
@@ -146,10 +146,10 @@ class _$_ViewByItemGroup implements _ViewByItemGroup {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ViewByItemGroup &&
+            other is _$ViewByItemGroupImpl &&
             (identical(other.createdDate, createdDate) ||
                 other.createdDate == createdDate) &&
             (identical(other.manufactureName, manufactureName) ||
@@ -165,8 +165,9 @@ class _$_ViewByItemGroup implements _ViewByItemGroup {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ViewByItemGroupCopyWith<_$_ViewByItemGroup> get copyWith =>
-      __$$_ViewByItemGroupCopyWithImpl<_$_ViewByItemGroup>(this, _$identity);
+  _$$ViewByItemGroupImplCopyWith<_$ViewByItemGroupImpl> get copyWith =>
+      __$$ViewByItemGroupImplCopyWithImpl<_$ViewByItemGroupImpl>(
+          this, _$identity);
 }
 
 abstract class _ViewByItemGroup implements ViewByItemGroup {
@@ -174,7 +175,7 @@ abstract class _ViewByItemGroup implements ViewByItemGroup {
           {required final DateTimeStringValue createdDate,
           required final PrincipalName manufactureName,
           required final List<OrderHistoryItem> orderHistoryItem}) =
-      _$_ViewByItemGroup;
+      _$ViewByItemGroupImpl;
 
   @override
   DateTimeStringValue get createdDate;
@@ -184,6 +185,6 @@ abstract class _ViewByItemGroup implements ViewByItemGroup {
   List<OrderHistoryItem> get orderHistoryItem;
   @override
   @JsonKey(ignore: true)
-  _$$_ViewByItemGroupCopyWith<_$_ViewByItemGroup> get copyWith =>
+  _$$ViewByItemGroupImplCopyWith<_$ViewByItemGroupImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

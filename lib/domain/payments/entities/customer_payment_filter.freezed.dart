@@ -12,7 +12,7 @@ part of 'customer_payment_filter.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$CustomerPaymentFilter {
@@ -73,11 +73,12 @@ class _$CustomerPaymentFilterCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_CustomerPaymentFilterCopyWith<$Res>
+abstract class _$$CustomerPaymentFilterImplCopyWith<$Res>
     implements $CustomerPaymentFilterCopyWith<$Res> {
-  factory _$$_CustomerPaymentFilterCopyWith(_$_CustomerPaymentFilter value,
-          $Res Function(_$_CustomerPaymentFilter) then) =
-      __$$_CustomerPaymentFilterCopyWithImpl<$Res>;
+  factory _$$CustomerPaymentFilterImplCopyWith(
+          _$CustomerPaymentFilterImpl value,
+          $Res Function(_$CustomerPaymentFilterImpl) then) =
+      __$$CustomerPaymentFilterImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -87,11 +88,12 @@ abstract class _$$_CustomerPaymentFilterCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_CustomerPaymentFilterCopyWithImpl<$Res>
-    extends _$CustomerPaymentFilterCopyWithImpl<$Res, _$_CustomerPaymentFilter>
-    implements _$$_CustomerPaymentFilterCopyWith<$Res> {
-  __$$_CustomerPaymentFilterCopyWithImpl(_$_CustomerPaymentFilter _value,
-      $Res Function(_$_CustomerPaymentFilter) _then)
+class __$$CustomerPaymentFilterImplCopyWithImpl<$Res>
+    extends _$CustomerPaymentFilterCopyWithImpl<$Res,
+        _$CustomerPaymentFilterImpl>
+    implements _$$CustomerPaymentFilterImplCopyWith<$Res> {
+  __$$CustomerPaymentFilterImplCopyWithImpl(_$CustomerPaymentFilterImpl _value,
+      $Res Function(_$CustomerPaymentFilterImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -101,7 +103,7 @@ class __$$_CustomerPaymentFilterCopyWithImpl<$Res>
     Object? yesterday = null,
     Object? paymentBatchAdditionalInfo = null,
   }) {
-    return _then(_$_CustomerPaymentFilter(
+    return _then(_$CustomerPaymentFilterImpl(
       today: null == today
           ? _value.today
           : today // ignore: cast_nullable_to_non_nullable
@@ -120,8 +122,8 @@ class __$$_CustomerPaymentFilterCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_CustomerPaymentFilter extends _CustomerPaymentFilter {
-  _$_CustomerPaymentFilter(
+class _$CustomerPaymentFilterImpl extends _CustomerPaymentFilter {
+  _$CustomerPaymentFilterImpl(
       {required this.today,
       required this.yesterday,
       required this.paymentBatchAdditionalInfo})
@@ -140,10 +142,10 @@ class _$_CustomerPaymentFilter extends _CustomerPaymentFilter {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_CustomerPaymentFilter &&
+            other is _$CustomerPaymentFilterImpl &&
             (identical(other.today, today) || other.today == today) &&
             (identical(other.yesterday, yesterday) ||
                 other.yesterday == yesterday) &&
@@ -160,9 +162,9 @@ class _$_CustomerPaymentFilter extends _CustomerPaymentFilter {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_CustomerPaymentFilterCopyWith<_$_CustomerPaymentFilter> get copyWith =>
-      __$$_CustomerPaymentFilterCopyWithImpl<_$_CustomerPaymentFilter>(
-          this, _$identity);
+  _$$CustomerPaymentFilterImplCopyWith<_$CustomerPaymentFilterImpl>
+      get copyWith => __$$CustomerPaymentFilterImplCopyWithImpl<
+          _$CustomerPaymentFilterImpl>(this, _$identity);
 }
 
 abstract class _CustomerPaymentFilter extends CustomerPaymentFilter {
@@ -170,7 +172,7 @@ abstract class _CustomerPaymentFilter extends CustomerPaymentFilter {
           {required final DateTimeStringValue today,
           required final DateTimeStringValue yesterday,
           required final String paymentBatchAdditionalInfo}) =
-      _$_CustomerPaymentFilter;
+      _$CustomerPaymentFilterImpl;
   _CustomerPaymentFilter._() : super._();
 
   @override
@@ -181,6 +183,6 @@ abstract class _CustomerPaymentFilter extends CustomerPaymentFilter {
   String get paymentBatchAdditionalInfo;
   @override
   @JsonKey(ignore: true)
-  _$$_CustomerPaymentFilterCopyWith<_$_CustomerPaymentFilter> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$CustomerPaymentFilterImplCopyWith<_$CustomerPaymentFilterImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }

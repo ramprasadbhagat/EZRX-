@@ -6,16 +6,17 @@ part of 'order_history_details_payment_term_dto.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_OrderHistoryDetailsPaymentTermDto
-    _$$_OrderHistoryDetailsPaymentTermDtoFromJson(Map<String, dynamic> json) =>
-        _$_OrderHistoryDetailsPaymentTermDto(
+_$OrderHistoryDetailsPaymentTermDtoImpl
+    _$$OrderHistoryDetailsPaymentTermDtoImplFromJson(
+            Map<String, dynamic> json) =>
+        _$OrderHistoryDetailsPaymentTermDtoImpl(
           paymentTermCode: json['PaymentTermCode'] as String? ?? '',
           paymentTermDescription:
               json['PaymentTermDescription'] as String? ?? '',
         );
 
-Map<String, dynamic> _$$_OrderHistoryDetailsPaymentTermDtoToJson(
-        _$_OrderHistoryDetailsPaymentTermDto instance) =>
+Map<String, dynamic> _$$OrderHistoryDetailsPaymentTermDtoImplToJson(
+        _$OrderHistoryDetailsPaymentTermDtoImpl instance) =>
     <String, dynamic>{
       'PaymentTermCode': instance.paymentTermCode,
       'PaymentTermDescription': instance.paymentTermDescription,

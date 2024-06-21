@@ -12,7 +12,7 @@ part of 'return_approval_limit_details.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$ApprovalLimits {
@@ -86,11 +86,11 @@ class _$ApprovalLimitsCopyWithImpl<$Res, $Val extends ApprovalLimits>
 }
 
 /// @nodoc
-abstract class _$$_ApprovalLimitsCopyWith<$Res>
+abstract class _$$ApprovalLimitsImplCopyWith<$Res>
     implements $ApprovalLimitsCopyWith<$Res> {
-  factory _$$_ApprovalLimitsCopyWith(
-          _$_ApprovalLimits value, $Res Function(_$_ApprovalLimits) then) =
-      __$$_ApprovalLimitsCopyWithImpl<$Res>;
+  factory _$$ApprovalLimitsImplCopyWith(_$ApprovalLimitsImpl value,
+          $Res Function(_$ApprovalLimitsImpl) then) =
+      __$$ApprovalLimitsImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -102,11 +102,11 @@ abstract class _$$_ApprovalLimitsCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_ApprovalLimitsCopyWithImpl<$Res>
-    extends _$ApprovalLimitsCopyWithImpl<$Res, _$_ApprovalLimits>
-    implements _$$_ApprovalLimitsCopyWith<$Res> {
-  __$$_ApprovalLimitsCopyWithImpl(
-      _$_ApprovalLimits _value, $Res Function(_$_ApprovalLimits) _then)
+class __$$ApprovalLimitsImplCopyWithImpl<$Res>
+    extends _$ApprovalLimitsCopyWithImpl<$Res, _$ApprovalLimitsImpl>
+    implements _$$ApprovalLimitsImplCopyWith<$Res> {
+  __$$ApprovalLimitsImplCopyWithImpl(
+      _$ApprovalLimitsImpl _value, $Res Function(_$ApprovalLimitsImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -118,7 +118,7 @@ class __$$_ApprovalLimitsCopyWithImpl<$Res>
     Object? valueLowerLimit = null,
     Object? uuid = null,
   }) {
-    return _then(_$_ApprovalLimits(
+    return _then(_$ApprovalLimitsImpl(
       salesOrg: null == salesOrg
           ? _value.salesOrg
           : salesOrg // ignore: cast_nullable_to_non_nullable
@@ -145,8 +145,8 @@ class __$$_ApprovalLimitsCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_ApprovalLimits extends _ApprovalLimits {
-  const _$_ApprovalLimits(
+class _$ApprovalLimitsImpl extends _ApprovalLimits {
+  const _$ApprovalLimitsImpl(
       {required this.salesOrg,
       required this.userName,
       required this.valueUpperLimit,
@@ -171,10 +171,10 @@ class _$_ApprovalLimits extends _ApprovalLimits {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ApprovalLimits &&
+            other is _$ApprovalLimitsImpl &&
             (identical(other.salesOrg, salesOrg) ||
                 other.salesOrg == salesOrg) &&
             (identical(other.userName, userName) ||
@@ -193,8 +193,9 @@ class _$_ApprovalLimits extends _ApprovalLimits {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ApprovalLimitsCopyWith<_$_ApprovalLimits> get copyWith =>
-      __$$_ApprovalLimitsCopyWithImpl<_$_ApprovalLimits>(this, _$identity);
+  _$$ApprovalLimitsImplCopyWith<_$ApprovalLimitsImpl> get copyWith =>
+      __$$ApprovalLimitsImplCopyWithImpl<_$ApprovalLimitsImpl>(
+          this, _$identity);
 }
 
 abstract class _ApprovalLimits extends ApprovalLimits {
@@ -203,7 +204,7 @@ abstract class _ApprovalLimits extends ApprovalLimits {
       required final Username userName,
       required final ApprovalLimit valueUpperLimit,
       required final ApprovalLimit valueLowerLimit,
-      required final String uuid}) = _$_ApprovalLimits;
+      required final String uuid}) = _$ApprovalLimitsImpl;
   const _ApprovalLimits._() : super._();
 
   @override
@@ -218,6 +219,6 @@ abstract class _ApprovalLimits extends ApprovalLimits {
   String get uuid;
   @override
   @JsonKey(ignore: true)
-  _$$_ApprovalLimitsCopyWith<_$_ApprovalLimits> get copyWith =>
+  _$$ApprovalLimitsImplCopyWith<_$ApprovalLimitsImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

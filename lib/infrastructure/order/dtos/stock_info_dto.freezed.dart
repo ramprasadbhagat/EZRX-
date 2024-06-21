@@ -12,7 +12,7 @@ part of 'stock_info_dto.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 MaterialStockInfoDto _$MaterialStockInfoDtoFromJson(Map<String, dynamic> json) {
   return _MaterialStockInfoDto.fromJson(json);
@@ -74,11 +74,11 @@ class _$MaterialStockInfoDtoCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_MaterialStockInfoDtoCopyWith<$Res>
+abstract class _$$MaterialStockInfoDtoImplCopyWith<$Res>
     implements $MaterialStockInfoDtoCopyWith<$Res> {
-  factory _$$_MaterialStockInfoDtoCopyWith(_$_MaterialStockInfoDto value,
-          $Res Function(_$_MaterialStockInfoDto) then) =
-      __$$_MaterialStockInfoDtoCopyWithImpl<$Res>;
+  factory _$$MaterialStockInfoDtoImplCopyWith(_$MaterialStockInfoDtoImpl value,
+          $Res Function(_$MaterialStockInfoDtoImpl) then) =
+      __$$MaterialStockInfoDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -88,11 +88,11 @@ abstract class _$$_MaterialStockInfoDtoCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_MaterialStockInfoDtoCopyWithImpl<$Res>
-    extends _$MaterialStockInfoDtoCopyWithImpl<$Res, _$_MaterialStockInfoDto>
-    implements _$$_MaterialStockInfoDtoCopyWith<$Res> {
-  __$$_MaterialStockInfoDtoCopyWithImpl(_$_MaterialStockInfoDto _value,
-      $Res Function(_$_MaterialStockInfoDto) _then)
+class __$$MaterialStockInfoDtoImplCopyWithImpl<$Res>
+    extends _$MaterialStockInfoDtoCopyWithImpl<$Res, _$MaterialStockInfoDtoImpl>
+    implements _$$MaterialStockInfoDtoImplCopyWith<$Res> {
+  __$$MaterialStockInfoDtoImplCopyWithImpl(_$MaterialStockInfoDtoImpl _value,
+      $Res Function(_$MaterialStockInfoDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -101,7 +101,7 @@ class __$$_MaterialStockInfoDtoCopyWithImpl<$Res>
     Object? materialNumber = null,
     Object? stockInformation = null,
   }) {
-    return _then(_$_MaterialStockInfoDto(
+    return _then(_$MaterialStockInfoDtoImpl(
       materialNumber: null == materialNumber
           ? _value.materialNumber
           : materialNumber // ignore: cast_nullable_to_non_nullable
@@ -116,8 +116,8 @@ class __$$_MaterialStockInfoDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_MaterialStockInfoDto extends _MaterialStockInfoDto {
-  _$_MaterialStockInfoDto(
+class _$MaterialStockInfoDtoImpl extends _MaterialStockInfoDto {
+  _$MaterialStockInfoDtoImpl(
       {@JsonKey(name: 'MaterialNumber', defaultValue: '')
       required this.materialNumber,
       @JsonKey(name: 'StockInformation', defaultValue: [])
@@ -125,8 +125,8 @@ class _$_MaterialStockInfoDto extends _MaterialStockInfoDto {
       : _stockInformation = stockInformation,
         super._();
 
-  factory _$_MaterialStockInfoDto.fromJson(Map<String, dynamic> json) =>
-      _$$_MaterialStockInfoDtoFromJson(json);
+  factory _$MaterialStockInfoDtoImpl.fromJson(Map<String, dynamic> json) =>
+      _$$MaterialStockInfoDtoImplFromJson(json);
 
   @override
   @JsonKey(name: 'MaterialNumber', defaultValue: '')
@@ -147,10 +147,10 @@ class _$_MaterialStockInfoDto extends _MaterialStockInfoDto {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_MaterialStockInfoDto &&
+            other is _$MaterialStockInfoDtoImpl &&
             (identical(other.materialNumber, materialNumber) ||
                 other.materialNumber == materialNumber) &&
             const DeepCollectionEquality()
@@ -165,13 +165,14 @@ class _$_MaterialStockInfoDto extends _MaterialStockInfoDto {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_MaterialStockInfoDtoCopyWith<_$_MaterialStockInfoDto> get copyWith =>
-      __$$_MaterialStockInfoDtoCopyWithImpl<_$_MaterialStockInfoDto>(
-          this, _$identity);
+  _$$MaterialStockInfoDtoImplCopyWith<_$MaterialStockInfoDtoImpl>
+      get copyWith =>
+          __$$MaterialStockInfoDtoImplCopyWithImpl<_$MaterialStockInfoDtoImpl>(
+              this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_MaterialStockInfoDtoToJson(
+    return _$$MaterialStockInfoDtoImplToJson(
       this,
     );
   }
@@ -183,11 +184,11 @@ abstract class _MaterialStockInfoDto extends MaterialStockInfoDto {
           required final String materialNumber,
           @JsonKey(name: 'StockInformation', defaultValue: [])
           required final List<StockInfoDto> stockInformation}) =
-      _$_MaterialStockInfoDto;
+      _$MaterialStockInfoDtoImpl;
   _MaterialStockInfoDto._() : super._();
 
   factory _MaterialStockInfoDto.fromJson(Map<String, dynamic> json) =
-      _$_MaterialStockInfoDto.fromJson;
+      _$MaterialStockInfoDtoImpl.fromJson;
 
   @override
   @JsonKey(name: 'MaterialNumber', defaultValue: '')
@@ -197,8 +198,8 @@ abstract class _MaterialStockInfoDto extends MaterialStockInfoDto {
   List<StockInfoDto> get stockInformation;
   @override
   @JsonKey(ignore: true)
-  _$$_MaterialStockInfoDtoCopyWith<_$_MaterialStockInfoDto> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$MaterialStockInfoDtoImplCopyWith<_$MaterialStockInfoDtoImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 StockInfoDto _$StockInfoDtoFromJson(Map<String, dynamic> json) {
@@ -291,11 +292,11 @@ class _$StockInfoDtoCopyWithImpl<$Res, $Val extends StockInfoDto>
 }
 
 /// @nodoc
-abstract class _$$_StockInfoDtoCopyWith<$Res>
+abstract class _$$StockInfoDtoImplCopyWith<$Res>
     implements $StockInfoDtoCopyWith<$Res> {
-  factory _$$_StockInfoDtoCopyWith(
-          _$_StockInfoDto value, $Res Function(_$_StockInfoDto) then) =
-      __$$_StockInfoDtoCopyWithImpl<$Res>;
+  factory _$$StockInfoDtoImplCopyWith(
+          _$StockInfoDtoImpl value, $Res Function(_$StockInfoDtoImpl) then) =
+      __$$StockInfoDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -308,11 +309,11 @@ abstract class _$$_StockInfoDtoCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_StockInfoDtoCopyWithImpl<$Res>
-    extends _$StockInfoDtoCopyWithImpl<$Res, _$_StockInfoDto>
-    implements _$$_StockInfoDtoCopyWith<$Res> {
-  __$$_StockInfoDtoCopyWithImpl(
-      _$_StockInfoDto _value, $Res Function(_$_StockInfoDto) _then)
+class __$$StockInfoDtoImplCopyWithImpl<$Res>
+    extends _$StockInfoDtoCopyWithImpl<$Res, _$StockInfoDtoImpl>
+    implements _$$StockInfoDtoImplCopyWith<$Res> {
+  __$$StockInfoDtoImplCopyWithImpl(
+      _$StockInfoDtoImpl _value, $Res Function(_$StockInfoDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -325,7 +326,7 @@ class __$$_StockInfoDtoCopyWithImpl<$Res>
     Object? stockQuantity = null,
     Object? salesDistrict = null,
   }) {
-    return _then(_$_StockInfoDto(
+    return _then(_$StockInfoDtoImpl(
       materialNumber: null == materialNumber
           ? _value.materialNumber
           : materialNumber // ignore: cast_nullable_to_non_nullable
@@ -356,8 +357,8 @@ class __$$_StockInfoDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_StockInfoDto extends _StockInfoDto {
-  const _$_StockInfoDto(
+class _$StockInfoDtoImpl extends _StockInfoDto {
+  const _$StockInfoDtoImpl(
       {@JsonKey(name: 'MaterialNumber', defaultValue: '')
       required this.materialNumber,
       @JsonKey(name: 'ExpiryDate', defaultValue: '') required this.expiryDate,
@@ -369,8 +370,8 @@ class _$_StockInfoDto extends _StockInfoDto {
       required this.salesDistrict})
       : super._();
 
-  factory _$_StockInfoDto.fromJson(Map<String, dynamic> json) =>
-      _$$_StockInfoDtoFromJson(json);
+  factory _$StockInfoDtoImpl.fromJson(Map<String, dynamic> json) =>
+      _$$StockInfoDtoImplFromJson(json);
 
   @override
   @JsonKey(name: 'MaterialNumber', defaultValue: '')
@@ -397,10 +398,10 @@ class _$_StockInfoDto extends _StockInfoDto {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_StockInfoDto &&
+            other is _$StockInfoDtoImpl &&
             (identical(other.materialNumber, materialNumber) ||
                 other.materialNumber == materialNumber) &&
             (identical(other.expiryDate, expiryDate) ||
@@ -421,12 +422,12 @@ class _$_StockInfoDto extends _StockInfoDto {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_StockInfoDtoCopyWith<_$_StockInfoDto> get copyWith =>
-      __$$_StockInfoDtoCopyWithImpl<_$_StockInfoDto>(this, _$identity);
+  _$$StockInfoDtoImplCopyWith<_$StockInfoDtoImpl> get copyWith =>
+      __$$StockInfoDtoImplCopyWithImpl<_$StockInfoDtoImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_StockInfoDtoToJson(
+    return _$$StockInfoDtoImplToJson(
       this,
     );
   }
@@ -443,11 +444,11 @@ abstract class _StockInfoDto extends StockInfoDto {
       @JsonKey(name: 'StockQuantity', defaultValue: 0)
       required final int stockQuantity,
       @JsonKey(name: 'SalesDistrict', defaultValue: '')
-      required final String salesDistrict}) = _$_StockInfoDto;
+      required final String salesDistrict}) = _$StockInfoDtoImpl;
   const _StockInfoDto._() : super._();
 
   factory _StockInfoDto.fromJson(Map<String, dynamic> json) =
-      _$_StockInfoDto.fromJson;
+      _$StockInfoDtoImpl.fromJson;
 
   @override
   @JsonKey(name: 'MaterialNumber', defaultValue: '')
@@ -469,6 +470,6 @@ abstract class _StockInfoDto extends StockInfoDto {
   String get salesDistrict;
   @override
   @JsonKey(ignore: true)
-  _$$_StockInfoDtoCopyWith<_$_StockInfoDto> get copyWith =>
+  _$$StockInfoDtoImplCopyWith<_$StockInfoDtoImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

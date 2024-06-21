@@ -12,7 +12,7 @@ part of 'notification.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$Notifications {
@@ -74,11 +74,11 @@ class _$NotificationsCopyWithImpl<$Res, $Val extends Notifications>
 }
 
 /// @nodoc
-abstract class _$$_NotificationsCopyWith<$Res>
+abstract class _$$NotificationsImplCopyWith<$Res>
     implements $NotificationsCopyWith<$Res> {
-  factory _$$_NotificationsCopyWith(
-          _$_Notifications value, $Res Function(_$_Notifications) then) =
-      __$$_NotificationsCopyWithImpl<$Res>;
+  factory _$$NotificationsImplCopyWith(
+          _$NotificationsImpl value, $Res Function(_$NotificationsImpl) then) =
+      __$$NotificationsImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({List<NotificationData> notificationData, Pagination pagination});
@@ -88,11 +88,11 @@ abstract class _$$_NotificationsCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_NotificationsCopyWithImpl<$Res>
-    extends _$NotificationsCopyWithImpl<$Res, _$_Notifications>
-    implements _$$_NotificationsCopyWith<$Res> {
-  __$$_NotificationsCopyWithImpl(
-      _$_Notifications _value, $Res Function(_$_Notifications) _then)
+class __$$NotificationsImplCopyWithImpl<$Res>
+    extends _$NotificationsCopyWithImpl<$Res, _$NotificationsImpl>
+    implements _$$NotificationsImplCopyWith<$Res> {
+  __$$NotificationsImplCopyWithImpl(
+      _$NotificationsImpl _value, $Res Function(_$NotificationsImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -101,7 +101,7 @@ class __$$_NotificationsCopyWithImpl<$Res>
     Object? notificationData = null,
     Object? pagination = null,
   }) {
-    return _then(_$_Notifications(
+    return _then(_$NotificationsImpl(
       notificationData: null == notificationData
           ? _value._notificationData
           : notificationData // ignore: cast_nullable_to_non_nullable
@@ -116,8 +116,8 @@ class __$$_NotificationsCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_Notifications extends _Notifications {
-  const _$_Notifications(
+class _$NotificationsImpl extends _Notifications {
+  const _$NotificationsImpl(
       {required final List<NotificationData> notificationData,
       required this.pagination})
       : _notificationData = notificationData,
@@ -141,10 +141,10 @@ class _$_Notifications extends _Notifications {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Notifications &&
+            other is _$NotificationsImpl &&
             const DeepCollectionEquality()
                 .equals(other._notificationData, _notificationData) &&
             (identical(other.pagination, pagination) ||
@@ -158,14 +158,14 @@ class _$_Notifications extends _Notifications {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_NotificationsCopyWith<_$_Notifications> get copyWith =>
-      __$$_NotificationsCopyWithImpl<_$_Notifications>(this, _$identity);
+  _$$NotificationsImplCopyWith<_$NotificationsImpl> get copyWith =>
+      __$$NotificationsImplCopyWithImpl<_$NotificationsImpl>(this, _$identity);
 }
 
 abstract class _Notifications extends Notifications {
   const factory _Notifications(
       {required final List<NotificationData> notificationData,
-      required final Pagination pagination}) = _$_Notifications;
+      required final Pagination pagination}) = _$NotificationsImpl;
   const _Notifications._() : super._();
 
   @override
@@ -174,6 +174,6 @@ abstract class _Notifications extends Notifications {
   Pagination get pagination;
   @override
   @JsonKey(ignore: true)
-  _$$_NotificationsCopyWith<_$_Notifications> get copyWith =>
+  _$$NotificationsImplCopyWith<_$NotificationsImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

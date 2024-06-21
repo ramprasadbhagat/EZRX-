@@ -12,7 +12,7 @@ part of 'about_us_dto.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 AboutUsDto _$AboutUsDtoFromJson(Map<String, dynamic> json) {
   return _AboutUsDto.fromJson(json);
@@ -136,11 +136,11 @@ class _$AboutUsDtoCopyWithImpl<$Res, $Val extends AboutUsDto>
 }
 
 /// @nodoc
-abstract class _$$_AboutUsDtoCopyWith<$Res>
+abstract class _$$AboutUsDtoImplCopyWith<$Res>
     implements $AboutUsDtoCopyWith<$Res> {
-  factory _$$_AboutUsDtoCopyWith(
-          _$_AboutUsDto value, $Res Function(_$_AboutUsDto) then) =
-      __$$_AboutUsDtoCopyWithImpl<$Res>;
+  factory _$$AboutUsDtoImplCopyWith(
+          _$AboutUsDtoImpl value, $Res Function(_$AboutUsDtoImpl) then) =
+      __$$AboutUsDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -163,11 +163,11 @@ abstract class _$$_AboutUsDtoCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_AboutUsDtoCopyWithImpl<$Res>
-    extends _$AboutUsDtoCopyWithImpl<$Res, _$_AboutUsDto>
-    implements _$$_AboutUsDtoCopyWith<$Res> {
-  __$$_AboutUsDtoCopyWithImpl(
-      _$_AboutUsDto _value, $Res Function(_$_AboutUsDto) _then)
+class __$$AboutUsDtoImplCopyWithImpl<$Res>
+    extends _$AboutUsDtoCopyWithImpl<$Res, _$AboutUsDtoImpl>
+    implements _$$AboutUsDtoImplCopyWith<$Res> {
+  __$$AboutUsDtoImplCopyWithImpl(
+      _$AboutUsDtoImpl _value, $Res Function(_$AboutUsDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -179,7 +179,7 @@ class __$$_AboutUsDtoCopyWithImpl<$Res>
     Object? ourPartners = null,
     Object? contentSplit = null,
   }) {
-    return _then(_$_AboutUsDto(
+    return _then(_$AboutUsDtoImpl(
       banner: null == banner
           ? _value.banner
           : banner // ignore: cast_nullable_to_non_nullable
@@ -206,8 +206,8 @@ class __$$_AboutUsDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_AboutUsDto extends _AboutUsDto {
-  const _$_AboutUsDto(
+class _$AboutUsDtoImpl extends _AboutUsDto {
+  const _$AboutUsDtoImpl(
       {@JsonKey(readValue: bannerReadValue) required this.banner,
       @JsonKey(readValue: certificationReadValue) required this.certifications,
       @JsonKey(readValue: whoWeAreReadValue) required this.whoWeAre,
@@ -217,8 +217,8 @@ class _$_AboutUsDto extends _AboutUsDto {
       : _contentSplit = contentSplit,
         super._();
 
-  factory _$_AboutUsDto.fromJson(Map<String, dynamic> json) =>
-      _$$_AboutUsDtoFromJson(json);
+  factory _$AboutUsDtoImpl.fromJson(Map<String, dynamic> json) =>
+      _$$AboutUsDtoImplFromJson(json);
 
   @override
   @JsonKey(readValue: bannerReadValue)
@@ -247,10 +247,10 @@ class _$_AboutUsDto extends _AboutUsDto {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_AboutUsDto &&
+            other is _$AboutUsDtoImpl &&
             (identical(other.banner, banner) || other.banner == banner) &&
             (identical(other.certifications, certifications) ||
                 other.certifications == certifications) &&
@@ -270,12 +270,12 @@ class _$_AboutUsDto extends _AboutUsDto {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_AboutUsDtoCopyWith<_$_AboutUsDto> get copyWith =>
-      __$$_AboutUsDtoCopyWithImpl<_$_AboutUsDto>(this, _$identity);
+  _$$AboutUsDtoImplCopyWith<_$AboutUsDtoImpl> get copyWith =>
+      __$$AboutUsDtoImplCopyWithImpl<_$AboutUsDtoImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_AboutUsDtoToJson(
+    return _$$AboutUsDtoImplToJson(
       this,
     );
   }
@@ -293,11 +293,11 @@ abstract class _AboutUsDto extends AboutUsDto {
           required final MediaListTemplateDto ourPartners,
           @JsonKey(readValue: contentSplitReadValue)
           required final List<ContentSplitTemplateDto> contentSplit}) =
-      _$_AboutUsDto;
+      _$AboutUsDtoImpl;
   const _AboutUsDto._() : super._();
 
   factory _AboutUsDto.fromJson(Map<String, dynamic> json) =
-      _$_AboutUsDto.fromJson;
+      _$AboutUsDtoImpl.fromJson;
 
   @override
   @JsonKey(readValue: bannerReadValue)
@@ -316,7 +316,7 @@ abstract class _AboutUsDto extends AboutUsDto {
   List<ContentSplitTemplateDto> get contentSplit;
   @override
   @JsonKey(ignore: true)
-  _$$_AboutUsDtoCopyWith<_$_AboutUsDto> get copyWith =>
+  _$$AboutUsDtoImplCopyWith<_$AboutUsDtoImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -414,11 +414,11 @@ class _$BannerTemplateDtoCopyWithImpl<$Res, $Val extends BannerTemplateDto>
 }
 
 /// @nodoc
-abstract class _$$_BannerTemplateDtoCopyWith<$Res>
+abstract class _$$BannerTemplateDtoImplCopyWith<$Res>
     implements $BannerTemplateDtoCopyWith<$Res> {
-  factory _$$_BannerTemplateDtoCopyWith(_$_BannerTemplateDto value,
-          $Res Function(_$_BannerTemplateDto) then) =
-      __$$_BannerTemplateDtoCopyWithImpl<$Res>;
+  factory _$$BannerTemplateDtoImplCopyWith(_$BannerTemplateDtoImpl value,
+          $Res Function(_$BannerTemplateDtoImpl) then) =
+      __$$BannerTemplateDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -435,11 +435,11 @@ abstract class _$$_BannerTemplateDtoCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_BannerTemplateDtoCopyWithImpl<$Res>
-    extends _$BannerTemplateDtoCopyWithImpl<$Res, _$_BannerTemplateDto>
-    implements _$$_BannerTemplateDtoCopyWith<$Res> {
-  __$$_BannerTemplateDtoCopyWithImpl(
-      _$_BannerTemplateDto _value, $Res Function(_$_BannerTemplateDto) _then)
+class __$$BannerTemplateDtoImplCopyWithImpl<$Res>
+    extends _$BannerTemplateDtoCopyWithImpl<$Res, _$BannerTemplateDtoImpl>
+    implements _$$BannerTemplateDtoImplCopyWith<$Res> {
+  __$$BannerTemplateDtoImplCopyWithImpl(_$BannerTemplateDtoImpl _value,
+      $Res Function(_$BannerTemplateDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -450,7 +450,7 @@ class __$$_BannerTemplateDtoCopyWithImpl<$Res>
     Object? title = null,
     Object? buttonName = null,
   }) {
-    return _then(_$_BannerTemplateDto(
+    return _then(_$BannerTemplateDtoImpl(
       media: null == media
           ? _value.media
           : media // ignore: cast_nullable_to_non_nullable
@@ -473,8 +473,8 @@ class __$$_BannerTemplateDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_BannerTemplateDto extends _BannerTemplateDto {
-  _$_BannerTemplateDto(
+class _$BannerTemplateDtoImpl extends _BannerTemplateDto {
+  _$BannerTemplateDtoImpl(
       {@JsonKey(name: 'media', readValue: mediaReadValue) required this.media,
       @JsonKey(name: 'content', readValue: readDynamicValueKey)
       required this.content,
@@ -483,8 +483,8 @@ class _$_BannerTemplateDto extends _BannerTemplateDto {
       required this.buttonName})
       : super._();
 
-  factory _$_BannerTemplateDto.fromJson(Map<String, dynamic> json) =>
-      _$$_BannerTemplateDtoFromJson(json);
+  factory _$BannerTemplateDtoImpl.fromJson(Map<String, dynamic> json) =>
+      _$$BannerTemplateDtoImplFromJson(json);
 
   @override
   @JsonKey(name: 'media', readValue: mediaReadValue)
@@ -505,10 +505,10 @@ class _$_BannerTemplateDto extends _BannerTemplateDto {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_BannerTemplateDto &&
+            other is _$BannerTemplateDtoImpl &&
             (identical(other.media, media) || other.media == media) &&
             (identical(other.content, content) || other.content == content) &&
             (identical(other.title, title) || other.title == title) &&
@@ -524,13 +524,13 @@ class _$_BannerTemplateDto extends _BannerTemplateDto {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_BannerTemplateDtoCopyWith<_$_BannerTemplateDto> get copyWith =>
-      __$$_BannerTemplateDtoCopyWithImpl<_$_BannerTemplateDto>(
+  _$$BannerTemplateDtoImplCopyWith<_$BannerTemplateDtoImpl> get copyWith =>
+      __$$BannerTemplateDtoImplCopyWithImpl<_$BannerTemplateDtoImpl>(
           this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_BannerTemplateDtoToJson(
+    return _$$BannerTemplateDtoImplToJson(
       this,
     );
   }
@@ -544,11 +544,11 @@ abstract class _BannerTemplateDto extends BannerTemplateDto {
       required final TemplateValueItemDto content,
       @JsonKey(name: 'title', readValue: readValue) required final String title,
       @JsonKey(name: 'buttonName', readValue: readValue)
-      required final String buttonName}) = _$_BannerTemplateDto;
+      required final String buttonName}) = _$BannerTemplateDtoImpl;
   _BannerTemplateDto._() : super._();
 
   factory _BannerTemplateDto.fromJson(Map<String, dynamic> json) =
-      _$_BannerTemplateDto.fromJson;
+      _$BannerTemplateDtoImpl.fromJson;
 
   @override
   @JsonKey(name: 'media', readValue: mediaReadValue)
@@ -564,7 +564,7 @@ abstract class _BannerTemplateDto extends BannerTemplateDto {
   String get buttonName;
   @override
   @JsonKey(ignore: true)
-  _$$_BannerTemplateDtoCopyWith<_$_BannerTemplateDto> get copyWith =>
+  _$$BannerTemplateDtoImplCopyWith<_$BannerTemplateDtoImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -639,11 +639,11 @@ class _$SliderTemplateDtoCopyWithImpl<$Res, $Val extends SliderTemplateDto>
 }
 
 /// @nodoc
-abstract class _$$_SliderTemplateDtoCopyWith<$Res>
+abstract class _$$SliderTemplateDtoImplCopyWith<$Res>
     implements $SliderTemplateDtoCopyWith<$Res> {
-  factory _$$_SliderTemplateDtoCopyWith(_$_SliderTemplateDto value,
-          $Res Function(_$_SliderTemplateDto) then) =
-      __$$_SliderTemplateDtoCopyWithImpl<$Res>;
+  factory _$$SliderTemplateDtoImplCopyWith(_$SliderTemplateDtoImpl value,
+          $Res Function(_$SliderTemplateDtoImpl) then) =
+      __$$SliderTemplateDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -657,11 +657,11 @@ abstract class _$$_SliderTemplateDtoCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_SliderTemplateDtoCopyWithImpl<$Res>
-    extends _$SliderTemplateDtoCopyWithImpl<$Res, _$_SliderTemplateDto>
-    implements _$$_SliderTemplateDtoCopyWith<$Res> {
-  __$$_SliderTemplateDtoCopyWithImpl(
-      _$_SliderTemplateDto _value, $Res Function(_$_SliderTemplateDto) _then)
+class __$$SliderTemplateDtoImplCopyWithImpl<$Res>
+    extends _$SliderTemplateDtoCopyWithImpl<$Res, _$SliderTemplateDtoImpl>
+    implements _$$SliderTemplateDtoImplCopyWith<$Res> {
+  __$$SliderTemplateDtoImplCopyWithImpl(_$SliderTemplateDtoImpl _value,
+      $Res Function(_$SliderTemplateDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -670,7 +670,7 @@ class __$$_SliderTemplateDtoCopyWithImpl<$Res>
     Object? title = null,
     Object? certificates = null,
   }) {
-    return _then(_$_SliderTemplateDto(
+    return _then(_$SliderTemplateDtoImpl(
       title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -685,8 +685,8 @@ class __$$_SliderTemplateDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_SliderTemplateDto extends _SliderTemplateDto {
-  _$_SliderTemplateDto(
+class _$SliderTemplateDtoImpl extends _SliderTemplateDto {
+  _$SliderTemplateDtoImpl(
       {@JsonKey(name: 'title', readValue: readDynamicValueKey)
       required this.title,
       @JsonKey(name: 'certificates', readValue: readValueKey)
@@ -694,8 +694,8 @@ class _$_SliderTemplateDto extends _SliderTemplateDto {
       : _certificates = certificates,
         super._();
 
-  factory _$_SliderTemplateDto.fromJson(Map<String, dynamic> json) =>
-      _$$_SliderTemplateDtoFromJson(json);
+  factory _$SliderTemplateDtoImpl.fromJson(Map<String, dynamic> json) =>
+      _$$SliderTemplateDtoImplFromJson(json);
 
   @override
   @JsonKey(name: 'title', readValue: readDynamicValueKey)
@@ -715,10 +715,10 @@ class _$_SliderTemplateDto extends _SliderTemplateDto {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_SliderTemplateDto &&
+            other is _$SliderTemplateDtoImpl &&
             (identical(other.title, title) || other.title == title) &&
             const DeepCollectionEquality()
                 .equals(other._certificates, _certificates));
@@ -732,13 +732,13 @@ class _$_SliderTemplateDto extends _SliderTemplateDto {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_SliderTemplateDtoCopyWith<_$_SliderTemplateDto> get copyWith =>
-      __$$_SliderTemplateDtoCopyWithImpl<_$_SliderTemplateDto>(
+  _$$SliderTemplateDtoImplCopyWith<_$SliderTemplateDtoImpl> get copyWith =>
+      __$$SliderTemplateDtoImplCopyWithImpl<_$SliderTemplateDtoImpl>(
           this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_SliderTemplateDtoToJson(
+    return _$$SliderTemplateDtoImplToJson(
       this,
     );
   }
@@ -750,11 +750,11 @@ abstract class _SliderTemplateDto extends SliderTemplateDto {
           required final TemplateValueItemDto title,
           @JsonKey(name: 'certificates', readValue: readValueKey)
           required final List<CertificationsDto> certificates}) =
-      _$_SliderTemplateDto;
+      _$SliderTemplateDtoImpl;
   _SliderTemplateDto._() : super._();
 
   factory _SliderTemplateDto.fromJson(Map<String, dynamic> json) =
-      _$_SliderTemplateDto.fromJson;
+      _$SliderTemplateDtoImpl.fromJson;
 
   @override
   @JsonKey(name: 'title', readValue: readDynamicValueKey)
@@ -764,7 +764,7 @@ abstract class _SliderTemplateDto extends SliderTemplateDto {
   List<CertificationsDto> get certificates;
   @override
   @JsonKey(ignore: true)
-  _$$_SliderTemplateDtoCopyWith<_$_SliderTemplateDto> get copyWith =>
+  _$$SliderTemplateDtoImplCopyWith<_$SliderTemplateDtoImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -889,11 +889,11 @@ class _$CertificationsDtoCopyWithImpl<$Res, $Val extends CertificationsDto>
 }
 
 /// @nodoc
-abstract class _$$_CertificationsDtoCopyWith<$Res>
+abstract class _$$CertificationsDtoImplCopyWith<$Res>
     implements $CertificationsDtoCopyWith<$Res> {
-  factory _$$_CertificationsDtoCopyWith(_$_CertificationsDto value,
-          $Res Function(_$_CertificationsDto) then) =
-      __$$_CertificationsDtoCopyWithImpl<$Res>;
+  factory _$$CertificationsDtoImplCopyWith(_$CertificationsDtoImpl value,
+          $Res Function(_$CertificationsDtoImpl) then) =
+      __$$CertificationsDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -917,11 +917,11 @@ abstract class _$$_CertificationsDtoCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_CertificationsDtoCopyWithImpl<$Res>
-    extends _$CertificationsDtoCopyWithImpl<$Res, _$_CertificationsDto>
-    implements _$$_CertificationsDtoCopyWith<$Res> {
-  __$$_CertificationsDtoCopyWithImpl(
-      _$_CertificationsDto _value, $Res Function(_$_CertificationsDto) _then)
+class __$$CertificationsDtoImplCopyWithImpl<$Res>
+    extends _$CertificationsDtoCopyWithImpl<$Res, _$CertificationsDtoImpl>
+    implements _$$CertificationsDtoImplCopyWith<$Res> {
+  __$$CertificationsDtoImplCopyWithImpl(_$CertificationsDtoImpl _value,
+      $Res Function(_$CertificationsDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -932,7 +932,7 @@ class __$$_CertificationsDtoCopyWithImpl<$Res>
     Object? description = null,
     Object? certificationYear = null,
   }) {
-    return _then(_$_CertificationsDto(
+    return _then(_$CertificationsDtoImpl(
       certificationType: null == certificationType
           ? _value.certificationType
           : certificationType // ignore: cast_nullable_to_non_nullable
@@ -955,8 +955,8 @@ class __$$_CertificationsDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_CertificationsDto extends _CertificationsDto {
-  _$_CertificationsDto(
+class _$CertificationsDtoImpl extends _CertificationsDto {
+  _$CertificationsDtoImpl(
       {@JsonKey(name: 'certificationType', readValue: readDynamicValueKey)
       required this.certificationType,
       @JsonKey(name: 'certificationName', readValue: readDynamicValueKey)
@@ -967,8 +967,8 @@ class _$_CertificationsDto extends _CertificationsDto {
       required this.certificationYear})
       : super._();
 
-  factory _$_CertificationsDto.fromJson(Map<String, dynamic> json) =>
-      _$$_CertificationsDtoFromJson(json);
+  factory _$CertificationsDtoImpl.fromJson(Map<String, dynamic> json) =>
+      _$$CertificationsDtoImplFromJson(json);
 
   @override
   @JsonKey(name: 'certificationType', readValue: readDynamicValueKey)
@@ -989,10 +989,10 @@ class _$_CertificationsDto extends _CertificationsDto {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_CertificationsDto &&
+            other is _$CertificationsDtoImpl &&
             (identical(other.certificationType, certificationType) ||
                 other.certificationType == certificationType) &&
             (identical(other.certificationName, certificationName) ||
@@ -1011,13 +1011,13 @@ class _$_CertificationsDto extends _CertificationsDto {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_CertificationsDtoCopyWith<_$_CertificationsDto> get copyWith =>
-      __$$_CertificationsDtoCopyWithImpl<_$_CertificationsDto>(
+  _$$CertificationsDtoImplCopyWith<_$CertificationsDtoImpl> get copyWith =>
+      __$$CertificationsDtoImplCopyWithImpl<_$CertificationsDtoImpl>(
           this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_CertificationsDtoToJson(
+    return _$$CertificationsDtoImplToJson(
       this,
     );
   }
@@ -1033,11 +1033,11 @@ abstract class _CertificationsDto extends CertificationsDto {
           required final TemplateValueItemDto description,
           @JsonKey(name: 'certificationYear', readValue: readDynamicValueKey)
           required final TemplateValueItemDto certificationYear}) =
-      _$_CertificationsDto;
+      _$CertificationsDtoImpl;
   _CertificationsDto._() : super._();
 
   factory _CertificationsDto.fromJson(Map<String, dynamic> json) =
-      _$_CertificationsDto.fromJson;
+      _$CertificationsDtoImpl.fromJson;
 
   @override
   @JsonKey(name: 'certificationType', readValue: readDynamicValueKey)
@@ -1053,7 +1053,7 @@ abstract class _CertificationsDto extends CertificationsDto {
   TemplateValueItemDto get certificationYear;
   @override
   @JsonKey(ignore: true)
-  _$$_CertificationsDtoCopyWith<_$_CertificationsDto> get copyWith =>
+  _$$CertificationsDtoImplCopyWith<_$CertificationsDtoImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -1148,12 +1148,12 @@ class _$HorizontalListTemplateDtoCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_HorizontalListTemplateDtoCopyWith<$Res>
+abstract class _$$HorizontalListTemplateDtoImplCopyWith<$Res>
     implements $HorizontalListTemplateDtoCopyWith<$Res> {
-  factory _$$_HorizontalListTemplateDtoCopyWith(
-          _$_HorizontalListTemplateDto value,
-          $Res Function(_$_HorizontalListTemplateDto) then) =
-      __$$_HorizontalListTemplateDtoCopyWithImpl<$Res>;
+  factory _$$HorizontalListTemplateDtoImplCopyWith(
+          _$HorizontalListTemplateDtoImpl value,
+          $Res Function(_$HorizontalListTemplateDtoImpl) then) =
+      __$$HorizontalListTemplateDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -1171,13 +1171,13 @@ abstract class _$$_HorizontalListTemplateDtoCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_HorizontalListTemplateDtoCopyWithImpl<$Res>
+class __$$HorizontalListTemplateDtoImplCopyWithImpl<$Res>
     extends _$HorizontalListTemplateDtoCopyWithImpl<$Res,
-        _$_HorizontalListTemplateDto>
-    implements _$$_HorizontalListTemplateDtoCopyWith<$Res> {
-  __$$_HorizontalListTemplateDtoCopyWithImpl(
-      _$_HorizontalListTemplateDto _value,
-      $Res Function(_$_HorizontalListTemplateDto) _then)
+        _$HorizontalListTemplateDtoImpl>
+    implements _$$HorizontalListTemplateDtoImplCopyWith<$Res> {
+  __$$HorizontalListTemplateDtoImplCopyWithImpl(
+      _$HorizontalListTemplateDtoImpl _value,
+      $Res Function(_$HorizontalListTemplateDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1187,7 +1187,7 @@ class __$$_HorizontalListTemplateDtoCopyWithImpl<$Res>
     Object? description = null,
     Object? achievements = null,
   }) {
-    return _then(_$_HorizontalListTemplateDto(
+    return _then(_$HorizontalListTemplateDtoImpl(
       title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -1206,8 +1206,8 @@ class __$$_HorizontalListTemplateDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_HorizontalListTemplateDto extends _HorizontalListTemplateDto {
-  _$_HorizontalListTemplateDto(
+class _$HorizontalListTemplateDtoImpl extends _HorizontalListTemplateDto {
+  _$HorizontalListTemplateDtoImpl(
       {@JsonKey(name: 'title', readValue: readDynamicValueKey)
       required this.title,
       @JsonKey(name: 'description', readValue: readDynamicValueKey)
@@ -1217,8 +1217,8 @@ class _$_HorizontalListTemplateDto extends _HorizontalListTemplateDto {
       : _achievements = achievements,
         super._();
 
-  factory _$_HorizontalListTemplateDto.fromJson(Map<String, dynamic> json) =>
-      _$$_HorizontalListTemplateDtoFromJson(json);
+  factory _$HorizontalListTemplateDtoImpl.fromJson(Map<String, dynamic> json) =>
+      _$$HorizontalListTemplateDtoImplFromJson(json);
 
   @override
   @JsonKey(name: 'title', readValue: readDynamicValueKey)
@@ -1241,10 +1241,10 @@ class _$_HorizontalListTemplateDto extends _HorizontalListTemplateDto {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_HorizontalListTemplateDto &&
+            other is _$HorizontalListTemplateDtoImpl &&
             (identical(other.title, title) || other.title == title) &&
             (identical(other.description, description) ||
                 other.description == description) &&
@@ -1260,13 +1260,13 @@ class _$_HorizontalListTemplateDto extends _HorizontalListTemplateDto {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_HorizontalListTemplateDtoCopyWith<_$_HorizontalListTemplateDto>
-      get copyWith => __$$_HorizontalListTemplateDtoCopyWithImpl<
-          _$_HorizontalListTemplateDto>(this, _$identity);
+  _$$HorizontalListTemplateDtoImplCopyWith<_$HorizontalListTemplateDtoImpl>
+      get copyWith => __$$HorizontalListTemplateDtoImplCopyWithImpl<
+          _$HorizontalListTemplateDtoImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_HorizontalListTemplateDtoToJson(
+    return _$$HorizontalListTemplateDtoImplToJson(
       this,
     );
   }
@@ -1280,11 +1280,11 @@ abstract class _HorizontalListTemplateDto extends HorizontalListTemplateDto {
           required final TemplateValueItemDto description,
           @JsonKey(name: 'list', readValue: readValueKey)
           required final List<HorizontalListTemplateItemDto> achievements}) =
-      _$_HorizontalListTemplateDto;
+      _$HorizontalListTemplateDtoImpl;
   _HorizontalListTemplateDto._() : super._();
 
   factory _HorizontalListTemplateDto.fromJson(Map<String, dynamic> json) =
-      _$_HorizontalListTemplateDto.fromJson;
+      _$HorizontalListTemplateDtoImpl.fromJson;
 
   @override
   @JsonKey(name: 'title', readValue: readDynamicValueKey)
@@ -1297,7 +1297,7 @@ abstract class _HorizontalListTemplateDto extends HorizontalListTemplateDto {
   List<HorizontalListTemplateItemDto> get achievements;
   @override
   @JsonKey(ignore: true)
-  _$$_HorizontalListTemplateDtoCopyWith<_$_HorizontalListTemplateDto>
+  _$$HorizontalListTemplateDtoImplCopyWith<_$HorizontalListTemplateDtoImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -1409,12 +1409,12 @@ class _$HorizontalListTemplateItemDtoCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_HorizontalListTemplateItemDtoCopyWith<$Res>
+abstract class _$$HorizontalListTemplateItemDtoImplCopyWith<$Res>
     implements $HorizontalListTemplateItemDtoCopyWith<$Res> {
-  factory _$$_HorizontalListTemplateItemDtoCopyWith(
-          _$_HorizontalListTemplateItemDto value,
-          $Res Function(_$_HorizontalListTemplateItemDto) then) =
-      __$$_HorizontalListTemplateItemDtoCopyWithImpl<$Res>;
+  factory _$$HorizontalListTemplateItemDtoImplCopyWith(
+          _$HorizontalListTemplateItemDtoImpl value,
+          $Res Function(_$HorizontalListTemplateItemDtoImpl) then) =
+      __$$HorizontalListTemplateItemDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -1434,13 +1434,13 @@ abstract class _$$_HorizontalListTemplateItemDtoCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_HorizontalListTemplateItemDtoCopyWithImpl<$Res>
+class __$$HorizontalListTemplateItemDtoImplCopyWithImpl<$Res>
     extends _$HorizontalListTemplateItemDtoCopyWithImpl<$Res,
-        _$_HorizontalListTemplateItemDto>
-    implements _$$_HorizontalListTemplateItemDtoCopyWith<$Res> {
-  __$$_HorizontalListTemplateItemDtoCopyWithImpl(
-      _$_HorizontalListTemplateItemDto _value,
-      $Res Function(_$_HorizontalListTemplateItemDto) _then)
+        _$HorizontalListTemplateItemDtoImpl>
+    implements _$$HorizontalListTemplateItemDtoImplCopyWith<$Res> {
+  __$$HorizontalListTemplateItemDtoImplCopyWithImpl(
+      _$HorizontalListTemplateItemDtoImpl _value,
+      $Res Function(_$HorizontalListTemplateItemDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1451,7 +1451,7 @@ class __$$_HorizontalListTemplateItemDtoCopyWithImpl<$Res>
     Object? subTitle = null,
     Object? description = null,
   }) {
-    return _then(_$_HorizontalListTemplateItemDto(
+    return _then(_$HorizontalListTemplateItemDtoImpl(
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -1474,8 +1474,9 @@ class __$$_HorizontalListTemplateItemDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_HorizontalListTemplateItemDto extends _HorizontalListTemplateItemDto {
-  _$_HorizontalListTemplateItemDto(
+class _$HorizontalListTemplateItemDtoImpl
+    extends _HorizontalListTemplateItemDto {
+  _$HorizontalListTemplateItemDtoImpl(
       {@JsonKey(name: 'name') required this.name,
       @JsonKey(name: 'title', readValue: readDynamicValueKey)
       required this.title,
@@ -1484,9 +1485,9 @@ class _$_HorizontalListTemplateItemDto extends _HorizontalListTemplateItemDto {
       @JsonKey(name: 'description') required this.description})
       : super._();
 
-  factory _$_HorizontalListTemplateItemDto.fromJson(
+  factory _$HorizontalListTemplateItemDtoImpl.fromJson(
           Map<String, dynamic> json) =>
-      _$$_HorizontalListTemplateItemDtoFromJson(json);
+      _$$HorizontalListTemplateItemDtoImplFromJson(json);
 
   @override
   @JsonKey(name: 'name')
@@ -1507,10 +1508,10 @@ class _$_HorizontalListTemplateItemDto extends _HorizontalListTemplateItemDto {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_HorizontalListTemplateItemDto &&
+            other is _$HorizontalListTemplateItemDtoImpl &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.title, title) || other.title == title) &&
             (identical(other.subTitle, subTitle) ||
@@ -1527,13 +1528,14 @@ class _$_HorizontalListTemplateItemDto extends _HorizontalListTemplateItemDto {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_HorizontalListTemplateItemDtoCopyWith<_$_HorizontalListTemplateItemDto>
-      get copyWith => __$$_HorizontalListTemplateItemDtoCopyWithImpl<
-          _$_HorizontalListTemplateItemDto>(this, _$identity);
+  _$$HorizontalListTemplateItemDtoImplCopyWith<
+          _$HorizontalListTemplateItemDtoImpl>
+      get copyWith => __$$HorizontalListTemplateItemDtoImplCopyWithImpl<
+          _$HorizontalListTemplateItemDtoImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_HorizontalListTemplateItemDtoToJson(
+    return _$$HorizontalListTemplateItemDtoImplToJson(
       this,
     );
   }
@@ -1549,11 +1551,11 @@ abstract class _HorizontalListTemplateItemDto
           required final TemplateValueItemDto subTitle,
           @JsonKey(name: 'description')
           required final TemplateValueItemDto description}) =
-      _$_HorizontalListTemplateItemDto;
+      _$HorizontalListTemplateItemDtoImpl;
   _HorizontalListTemplateItemDto._() : super._();
 
   factory _HorizontalListTemplateItemDto.fromJson(Map<String, dynamic> json) =
-      _$_HorizontalListTemplateItemDto.fromJson;
+      _$HorizontalListTemplateItemDtoImpl.fromJson;
 
   @override
   @JsonKey(name: 'name')
@@ -1569,7 +1571,8 @@ abstract class _HorizontalListTemplateItemDto
   TemplateValueItemDto get description;
   @override
   @JsonKey(ignore: true)
-  _$$_HorizontalListTemplateItemDtoCopyWith<_$_HorizontalListTemplateItemDto>
+  _$$HorizontalListTemplateItemDtoImplCopyWith<
+          _$HorizontalListTemplateItemDtoImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -1689,11 +1692,12 @@ class _$ContentSplitTemplateDtoCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_ContentSplitTemplateDtoCopyWith<$Res>
+abstract class _$$ContentSplitTemplateDtoImplCopyWith<$Res>
     implements $ContentSplitTemplateDtoCopyWith<$Res> {
-  factory _$$_ContentSplitTemplateDtoCopyWith(_$_ContentSplitTemplateDto value,
-          $Res Function(_$_ContentSplitTemplateDto) then) =
-      __$$_ContentSplitTemplateDtoCopyWithImpl<$Res>;
+  factory _$$ContentSplitTemplateDtoImplCopyWith(
+          _$ContentSplitTemplateDtoImpl value,
+          $Res Function(_$ContentSplitTemplateDtoImpl) then) =
+      __$$ContentSplitTemplateDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -1716,12 +1720,13 @@ abstract class _$$_ContentSplitTemplateDtoCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_ContentSplitTemplateDtoCopyWithImpl<$Res>
+class __$$ContentSplitTemplateDtoImplCopyWithImpl<$Res>
     extends _$ContentSplitTemplateDtoCopyWithImpl<$Res,
-        _$_ContentSplitTemplateDto>
-    implements _$$_ContentSplitTemplateDtoCopyWith<$Res> {
-  __$$_ContentSplitTemplateDtoCopyWithImpl(_$_ContentSplitTemplateDto _value,
-      $Res Function(_$_ContentSplitTemplateDto) _then)
+        _$ContentSplitTemplateDtoImpl>
+    implements _$$ContentSplitTemplateDtoImplCopyWith<$Res> {
+  __$$ContentSplitTemplateDtoImplCopyWithImpl(
+      _$ContentSplitTemplateDtoImpl _value,
+      $Res Function(_$ContentSplitTemplateDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1732,7 +1737,7 @@ class __$$_ContentSplitTemplateDtoCopyWithImpl<$Res>
     Object? description = null,
     Object? media = null,
   }) {
-    return _then(_$_ContentSplitTemplateDto(
+    return _then(_$ContentSplitTemplateDtoImpl(
       title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -1755,8 +1760,8 @@ class __$$_ContentSplitTemplateDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_ContentSplitTemplateDto extends _ContentSplitTemplateDto {
-  const _$_ContentSplitTemplateDto(
+class _$ContentSplitTemplateDtoImpl extends _ContentSplitTemplateDto {
+  const _$ContentSplitTemplateDtoImpl(
       {@JsonKey(name: 'title', readValue: readDynamicValueKey)
       required this.title,
       @JsonKey(name: 'subTitle', readValue: readDynamicValueKey)
@@ -1766,8 +1771,8 @@ class _$_ContentSplitTemplateDto extends _ContentSplitTemplateDto {
       @JsonKey(name: 'media', readValue: mediaReadValue) required this.media})
       : super._();
 
-  factory _$_ContentSplitTemplateDto.fromJson(Map<String, dynamic> json) =>
-      _$$_ContentSplitTemplateDtoFromJson(json);
+  factory _$ContentSplitTemplateDtoImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ContentSplitTemplateDtoImplFromJson(json);
 
   @override
   @JsonKey(name: 'title', readValue: readDynamicValueKey)
@@ -1788,10 +1793,10 @@ class _$_ContentSplitTemplateDto extends _ContentSplitTemplateDto {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ContentSplitTemplateDto &&
+            other is _$ContentSplitTemplateDtoImpl &&
             (identical(other.title, title) || other.title == title) &&
             (identical(other.subTitle, subTitle) ||
                 other.subTitle == subTitle) &&
@@ -1808,14 +1813,13 @@ class _$_ContentSplitTemplateDto extends _ContentSplitTemplateDto {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ContentSplitTemplateDtoCopyWith<_$_ContentSplitTemplateDto>
-      get copyWith =>
-          __$$_ContentSplitTemplateDtoCopyWithImpl<_$_ContentSplitTemplateDto>(
-              this, _$identity);
+  _$$ContentSplitTemplateDtoImplCopyWith<_$ContentSplitTemplateDtoImpl>
+      get copyWith => __$$ContentSplitTemplateDtoImplCopyWithImpl<
+          _$ContentSplitTemplateDtoImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_ContentSplitTemplateDtoToJson(
+    return _$$ContentSplitTemplateDtoImplToJson(
       this,
     );
   }
@@ -1830,11 +1834,11 @@ abstract class _ContentSplitTemplateDto extends ContentSplitTemplateDto {
       @JsonKey(name: 'description', readValue: readDynamicValueKey)
       required final TemplateValueItemDto description,
       @JsonKey(name: 'media', readValue: mediaReadValue)
-      required final MediaValueDto media}) = _$_ContentSplitTemplateDto;
+      required final MediaValueDto media}) = _$ContentSplitTemplateDtoImpl;
   const _ContentSplitTemplateDto._() : super._();
 
   factory _ContentSplitTemplateDto.fromJson(Map<String, dynamic> json) =
-      _$_ContentSplitTemplateDto.fromJson;
+      _$ContentSplitTemplateDtoImpl.fromJson;
 
   @override
   @JsonKey(name: 'title', readValue: readDynamicValueKey)
@@ -1850,7 +1854,7 @@ abstract class _ContentSplitTemplateDto extends ContentSplitTemplateDto {
   MediaValueDto get media;
   @override
   @JsonKey(ignore: true)
-  _$$_ContentSplitTemplateDtoCopyWith<_$_ContentSplitTemplateDto>
+  _$$ContentSplitTemplateDtoImplCopyWith<_$ContentSplitTemplateDtoImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -1949,11 +1953,11 @@ class _$MediaListTemplateDtoCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_MediaListTemplateDtoCopyWith<$Res>
+abstract class _$$MediaListTemplateDtoImplCopyWith<$Res>
     implements $MediaListTemplateDtoCopyWith<$Res> {
-  factory _$$_MediaListTemplateDtoCopyWith(_$_MediaListTemplateDto value,
-          $Res Function(_$_MediaListTemplateDto) then) =
-      __$$_MediaListTemplateDtoCopyWithImpl<$Res>;
+  factory _$$MediaListTemplateDtoImplCopyWith(_$MediaListTemplateDtoImpl value,
+          $Res Function(_$MediaListTemplateDtoImpl) then) =
+      __$$MediaListTemplateDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -1974,11 +1978,11 @@ abstract class _$$_MediaListTemplateDtoCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_MediaListTemplateDtoCopyWithImpl<$Res>
-    extends _$MediaListTemplateDtoCopyWithImpl<$Res, _$_MediaListTemplateDto>
-    implements _$$_MediaListTemplateDtoCopyWith<$Res> {
-  __$$_MediaListTemplateDtoCopyWithImpl(_$_MediaListTemplateDto _value,
-      $Res Function(_$_MediaListTemplateDto) _then)
+class __$$MediaListTemplateDtoImplCopyWithImpl<$Res>
+    extends _$MediaListTemplateDtoCopyWithImpl<$Res, _$MediaListTemplateDtoImpl>
+    implements _$$MediaListTemplateDtoImplCopyWith<$Res> {
+  __$$MediaListTemplateDtoImplCopyWithImpl(_$MediaListTemplateDtoImpl _value,
+      $Res Function(_$MediaListTemplateDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1988,7 +1992,7 @@ class __$$_MediaListTemplateDtoCopyWithImpl<$Res>
     Object? description = null,
     Object? mediaItems = null,
   }) {
-    return _then(_$_MediaListTemplateDto(
+    return _then(_$MediaListTemplateDtoImpl(
       title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -2007,8 +2011,8 @@ class __$$_MediaListTemplateDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_MediaListTemplateDto extends _MediaListTemplateDto {
-  const _$_MediaListTemplateDto(
+class _$MediaListTemplateDtoImpl extends _MediaListTemplateDto {
+  const _$MediaListTemplateDtoImpl(
       {@JsonKey(name: 'title', readValue: readDynamicValueKey)
       required this.title,
       @JsonKey(name: 'description', readValue: readDynamicValueKey)
@@ -2021,8 +2025,8 @@ class _$_MediaListTemplateDto extends _MediaListTemplateDto {
       : _mediaItems = mediaItems,
         super._();
 
-  factory _$_MediaListTemplateDto.fromJson(Map<String, dynamic> json) =>
-      _$$_MediaListTemplateDtoFromJson(json);
+  factory _$MediaListTemplateDtoImpl.fromJson(Map<String, dynamic> json) =>
+      _$$MediaListTemplateDtoImplFromJson(json);
 
   @override
   @JsonKey(name: 'title', readValue: readDynamicValueKey)
@@ -2048,10 +2052,10 @@ class _$_MediaListTemplateDto extends _MediaListTemplateDto {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_MediaListTemplateDto &&
+            other is _$MediaListTemplateDtoImpl &&
             (identical(other.title, title) || other.title == title) &&
             (identical(other.description, description) ||
                 other.description == description) &&
@@ -2067,13 +2071,14 @@ class _$_MediaListTemplateDto extends _MediaListTemplateDto {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_MediaListTemplateDtoCopyWith<_$_MediaListTemplateDto> get copyWith =>
-      __$$_MediaListTemplateDtoCopyWithImpl<_$_MediaListTemplateDto>(
-          this, _$identity);
+  _$$MediaListTemplateDtoImplCopyWith<_$MediaListTemplateDtoImpl>
+      get copyWith =>
+          __$$MediaListTemplateDtoImplCopyWithImpl<_$MediaListTemplateDtoImpl>(
+              this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_MediaListTemplateDtoToJson(
+    return _$$MediaListTemplateDtoImplToJson(
       this,
     );
   }
@@ -2081,19 +2086,20 @@ class _$_MediaListTemplateDto extends _MediaListTemplateDto {
 
 abstract class _MediaListTemplateDto extends MediaListTemplateDto {
   const factory _MediaListTemplateDto(
-      {@JsonKey(name: 'title', readValue: readDynamicValueKey)
-      required final TemplateValueItemDto title,
-      @JsonKey(name: 'description', readValue: readDynamicValueKey)
-      required final TemplateValueItemDto description,
-      @JsonKey(
-          name: 'mediaItems',
-          defaultValue: <MediaItemDto>[],
-          readValue: readValueKey)
-      required final List<MediaItemDto> mediaItems}) = _$_MediaListTemplateDto;
+          {@JsonKey(name: 'title', readValue: readDynamicValueKey)
+          required final TemplateValueItemDto title,
+          @JsonKey(name: 'description', readValue: readDynamicValueKey)
+          required final TemplateValueItemDto description,
+          @JsonKey(
+              name: 'mediaItems',
+              defaultValue: <MediaItemDto>[],
+              readValue: readValueKey)
+          required final List<MediaItemDto> mediaItems}) =
+      _$MediaListTemplateDtoImpl;
   const _MediaListTemplateDto._() : super._();
 
   factory _MediaListTemplateDto.fromJson(Map<String, dynamic> json) =
-      _$_MediaListTemplateDto.fromJson;
+      _$MediaListTemplateDtoImpl.fromJson;
 
   @override
   @JsonKey(name: 'title', readValue: readDynamicValueKey)
@@ -2109,8 +2115,8 @@ abstract class _MediaListTemplateDto extends MediaListTemplateDto {
   List<MediaItemDto> get mediaItems;
   @override
   @JsonKey(ignore: true)
-  _$$_MediaListTemplateDtoCopyWith<_$_MediaListTemplateDto> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$MediaListTemplateDtoImplCopyWith<_$MediaListTemplateDtoImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 MediaItemDto _$MediaItemDtoFromJson(Map<String, dynamic> json) {
@@ -2172,11 +2178,11 @@ class _$MediaItemDtoCopyWithImpl<$Res, $Val extends MediaItemDto>
 }
 
 /// @nodoc
-abstract class _$$_MediaItemDtoCopyWith<$Res>
+abstract class _$$MediaItemDtoImplCopyWith<$Res>
     implements $MediaItemDtoCopyWith<$Res> {
-  factory _$$_MediaItemDtoCopyWith(
-          _$_MediaItemDto value, $Res Function(_$_MediaItemDto) then) =
-      __$$_MediaItemDtoCopyWithImpl<$Res>;
+  factory _$$MediaItemDtoImplCopyWith(
+          _$MediaItemDtoImpl value, $Res Function(_$MediaItemDtoImpl) then) =
+      __$$MediaItemDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({@JsonKey(name: 'url') TemplateValueItemDto url});
@@ -2186,11 +2192,11 @@ abstract class _$$_MediaItemDtoCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_MediaItemDtoCopyWithImpl<$Res>
-    extends _$MediaItemDtoCopyWithImpl<$Res, _$_MediaItemDto>
-    implements _$$_MediaItemDtoCopyWith<$Res> {
-  __$$_MediaItemDtoCopyWithImpl(
-      _$_MediaItemDto _value, $Res Function(_$_MediaItemDto) _then)
+class __$$MediaItemDtoImplCopyWithImpl<$Res>
+    extends _$MediaItemDtoCopyWithImpl<$Res, _$MediaItemDtoImpl>
+    implements _$$MediaItemDtoImplCopyWith<$Res> {
+  __$$MediaItemDtoImplCopyWithImpl(
+      _$MediaItemDtoImpl _value, $Res Function(_$MediaItemDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -2198,7 +2204,7 @@ class __$$_MediaItemDtoCopyWithImpl<$Res>
   $Res call({
     Object? url = null,
   }) {
-    return _then(_$_MediaItemDto(
+    return _then(_$MediaItemDtoImpl(
       url: null == url
           ? _value.url
           : url // ignore: cast_nullable_to_non_nullable
@@ -2209,11 +2215,11 @@ class __$$_MediaItemDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_MediaItemDto extends _MediaItemDto {
-  _$_MediaItemDto({@JsonKey(name: 'url') required this.url}) : super._();
+class _$MediaItemDtoImpl extends _MediaItemDto {
+  _$MediaItemDtoImpl({@JsonKey(name: 'url') required this.url}) : super._();
 
-  factory _$_MediaItemDto.fromJson(Map<String, dynamic> json) =>
-      _$$_MediaItemDtoFromJson(json);
+  factory _$MediaItemDtoImpl.fromJson(Map<String, dynamic> json) =>
+      _$$MediaItemDtoImplFromJson(json);
 
   @override
   @JsonKey(name: 'url')
@@ -2225,10 +2231,10 @@ class _$_MediaItemDto extends _MediaItemDto {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_MediaItemDto &&
+            other is _$MediaItemDtoImpl &&
             (identical(other.url, url) || other.url == url));
   }
 
@@ -2239,12 +2245,12 @@ class _$_MediaItemDto extends _MediaItemDto {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_MediaItemDtoCopyWith<_$_MediaItemDto> get copyWith =>
-      __$$_MediaItemDtoCopyWithImpl<_$_MediaItemDto>(this, _$identity);
+  _$$MediaItemDtoImplCopyWith<_$MediaItemDtoImpl> get copyWith =>
+      __$$MediaItemDtoImplCopyWithImpl<_$MediaItemDtoImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_MediaItemDtoToJson(
+    return _$$MediaItemDtoImplToJson(
       this,
     );
   }
@@ -2253,18 +2259,18 @@ class _$_MediaItemDto extends _MediaItemDto {
 abstract class _MediaItemDto extends MediaItemDto {
   factory _MediaItemDto(
           {@JsonKey(name: 'url') required final TemplateValueItemDto url}) =
-      _$_MediaItemDto;
+      _$MediaItemDtoImpl;
   _MediaItemDto._() : super._();
 
   factory _MediaItemDto.fromJson(Map<String, dynamic> json) =
-      _$_MediaItemDto.fromJson;
+      _$MediaItemDtoImpl.fromJson;
 
   @override
   @JsonKey(name: 'url')
   TemplateValueItemDto get url;
   @override
   @JsonKey(ignore: true)
-  _$$_MediaItemDtoCopyWith<_$_MediaItemDto> get copyWith =>
+  _$$MediaItemDtoImplCopyWith<_$MediaItemDtoImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -2317,22 +2323,22 @@ class _$MediaValueDtoCopyWithImpl<$Res, $Val extends MediaValueDto>
 }
 
 /// @nodoc
-abstract class _$$_MediaValueDtoCopyWith<$Res>
+abstract class _$$MediaValueDtoImplCopyWith<$Res>
     implements $MediaValueDtoCopyWith<$Res> {
-  factory _$$_MediaValueDtoCopyWith(
-          _$_MediaValueDto value, $Res Function(_$_MediaValueDto) then) =
-      __$$_MediaValueDtoCopyWithImpl<$Res>;
+  factory _$$MediaValueDtoImplCopyWith(
+          _$MediaValueDtoImpl value, $Res Function(_$MediaValueDtoImpl) then) =
+      __$$MediaValueDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({@JsonKey(name: 'src', defaultValue: '') String src});
 }
 
 /// @nodoc
-class __$$_MediaValueDtoCopyWithImpl<$Res>
-    extends _$MediaValueDtoCopyWithImpl<$Res, _$_MediaValueDto>
-    implements _$$_MediaValueDtoCopyWith<$Res> {
-  __$$_MediaValueDtoCopyWithImpl(
-      _$_MediaValueDto _value, $Res Function(_$_MediaValueDto) _then)
+class __$$MediaValueDtoImplCopyWithImpl<$Res>
+    extends _$MediaValueDtoCopyWithImpl<$Res, _$MediaValueDtoImpl>
+    implements _$$MediaValueDtoImplCopyWith<$Res> {
+  __$$MediaValueDtoImplCopyWithImpl(
+      _$MediaValueDtoImpl _value, $Res Function(_$MediaValueDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -2340,7 +2346,7 @@ class __$$_MediaValueDtoCopyWithImpl<$Res>
   $Res call({
     Object? src = null,
   }) {
-    return _then(_$_MediaValueDto(
+    return _then(_$MediaValueDtoImpl(
       src: null == src
           ? _value.src
           : src // ignore: cast_nullable_to_non_nullable
@@ -2351,12 +2357,13 @@ class __$$_MediaValueDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_MediaValueDto extends _MediaValueDto {
-  _$_MediaValueDto({@JsonKey(name: 'src', defaultValue: '') required this.src})
+class _$MediaValueDtoImpl extends _MediaValueDto {
+  _$MediaValueDtoImpl(
+      {@JsonKey(name: 'src', defaultValue: '') required this.src})
       : super._();
 
-  factory _$_MediaValueDto.fromJson(Map<String, dynamic> json) =>
-      _$$_MediaValueDtoFromJson(json);
+  factory _$MediaValueDtoImpl.fromJson(Map<String, dynamic> json) =>
+      _$$MediaValueDtoImplFromJson(json);
 
   @override
   @JsonKey(name: 'src', defaultValue: '')
@@ -2368,10 +2375,10 @@ class _$_MediaValueDto extends _MediaValueDto {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_MediaValueDto &&
+            other is _$MediaValueDtoImpl &&
             (identical(other.src, src) || other.src == src));
   }
 
@@ -2382,12 +2389,12 @@ class _$_MediaValueDto extends _MediaValueDto {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_MediaValueDtoCopyWith<_$_MediaValueDto> get copyWith =>
-      __$$_MediaValueDtoCopyWithImpl<_$_MediaValueDto>(this, _$identity);
+  _$$MediaValueDtoImplCopyWith<_$MediaValueDtoImpl> get copyWith =>
+      __$$MediaValueDtoImplCopyWithImpl<_$MediaValueDtoImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_MediaValueDtoToJson(
+    return _$$MediaValueDtoImplToJson(
       this,
     );
   }
@@ -2396,18 +2403,18 @@ class _$_MediaValueDto extends _MediaValueDto {
 abstract class _MediaValueDto extends MediaValueDto {
   factory _MediaValueDto(
           {@JsonKey(name: 'src', defaultValue: '') required final String src}) =
-      _$_MediaValueDto;
+      _$MediaValueDtoImpl;
   _MediaValueDto._() : super._();
 
   factory _MediaValueDto.fromJson(Map<String, dynamic> json) =
-      _$_MediaValueDto.fromJson;
+      _$MediaValueDtoImpl.fromJson;
 
   @override
   @JsonKey(name: 'src', defaultValue: '')
   String get src;
   @override
   @JsonKey(ignore: true)
-  _$$_MediaValueDtoCopyWith<_$_MediaValueDto> get copyWith =>
+  _$$MediaValueDtoImplCopyWith<_$MediaValueDtoImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -2461,22 +2468,22 @@ class _$TemplateValueItemDtoCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_TemplateValueItemDtoCopyWith<$Res>
+abstract class _$$TemplateValueItemDtoImplCopyWith<$Res>
     implements $TemplateValueItemDtoCopyWith<$Res> {
-  factory _$$_TemplateValueItemDtoCopyWith(_$_TemplateValueItemDto value,
-          $Res Function(_$_TemplateValueItemDto) then) =
-      __$$_TemplateValueItemDtoCopyWithImpl<$Res>;
+  factory _$$TemplateValueItemDtoImplCopyWith(_$TemplateValueItemDtoImpl value,
+          $Res Function(_$TemplateValueItemDtoImpl) then) =
+      __$$TemplateValueItemDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({@JsonKey(name: 'value', defaultValue: '') String value});
 }
 
 /// @nodoc
-class __$$_TemplateValueItemDtoCopyWithImpl<$Res>
-    extends _$TemplateValueItemDtoCopyWithImpl<$Res, _$_TemplateValueItemDto>
-    implements _$$_TemplateValueItemDtoCopyWith<$Res> {
-  __$$_TemplateValueItemDtoCopyWithImpl(_$_TemplateValueItemDto _value,
-      $Res Function(_$_TemplateValueItemDto) _then)
+class __$$TemplateValueItemDtoImplCopyWithImpl<$Res>
+    extends _$TemplateValueItemDtoCopyWithImpl<$Res, _$TemplateValueItemDtoImpl>
+    implements _$$TemplateValueItemDtoImplCopyWith<$Res> {
+  __$$TemplateValueItemDtoImplCopyWithImpl(_$TemplateValueItemDtoImpl _value,
+      $Res Function(_$TemplateValueItemDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -2484,7 +2491,7 @@ class __$$_TemplateValueItemDtoCopyWithImpl<$Res>
   $Res call({
     Object? value = null,
   }) {
-    return _then(_$_TemplateValueItemDto(
+    return _then(_$TemplateValueItemDtoImpl(
       value: null == value
           ? _value.value
           : value // ignore: cast_nullable_to_non_nullable
@@ -2495,12 +2502,12 @@ class __$$_TemplateValueItemDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_TemplateValueItemDto implements _TemplateValueItemDto {
-  const _$_TemplateValueItemDto(
+class _$TemplateValueItemDtoImpl implements _TemplateValueItemDto {
+  const _$TemplateValueItemDtoImpl(
       {@JsonKey(name: 'value', defaultValue: '') required this.value});
 
-  factory _$_TemplateValueItemDto.fromJson(Map<String, dynamic> json) =>
-      _$$_TemplateValueItemDtoFromJson(json);
+  factory _$TemplateValueItemDtoImpl.fromJson(Map<String, dynamic> json) =>
+      _$$TemplateValueItemDtoImplFromJson(json);
 
   @override
   @JsonKey(name: 'value', defaultValue: '')
@@ -2512,10 +2519,10 @@ class _$_TemplateValueItemDto implements _TemplateValueItemDto {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_TemplateValueItemDto &&
+            other is _$TemplateValueItemDtoImpl &&
             (identical(other.value, value) || other.value == value));
   }
 
@@ -2526,13 +2533,14 @@ class _$_TemplateValueItemDto implements _TemplateValueItemDto {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_TemplateValueItemDtoCopyWith<_$_TemplateValueItemDto> get copyWith =>
-      __$$_TemplateValueItemDtoCopyWithImpl<_$_TemplateValueItemDto>(
-          this, _$identity);
+  _$$TemplateValueItemDtoImplCopyWith<_$TemplateValueItemDtoImpl>
+      get copyWith =>
+          __$$TemplateValueItemDtoImplCopyWithImpl<_$TemplateValueItemDtoImpl>(
+              this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_TemplateValueItemDtoToJson(
+    return _$$TemplateValueItemDtoImplToJson(
       this,
     );
   }
@@ -2541,16 +2549,16 @@ class _$_TemplateValueItemDto implements _TemplateValueItemDto {
 abstract class _TemplateValueItemDto implements TemplateValueItemDto {
   const factory _TemplateValueItemDto(
       {@JsonKey(name: 'value', defaultValue: '')
-      required final String value}) = _$_TemplateValueItemDto;
+      required final String value}) = _$TemplateValueItemDtoImpl;
 
   factory _TemplateValueItemDto.fromJson(Map<String, dynamic> json) =
-      _$_TemplateValueItemDto.fromJson;
+      _$TemplateValueItemDtoImpl.fromJson;
 
   @override
   @JsonKey(name: 'value', defaultValue: '')
   String get value;
   @override
   @JsonKey(ignore: true)
-  _$$_TemplateValueItemDtoCopyWith<_$_TemplateValueItemDto> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$TemplateValueItemDtoImplCopyWith<_$TemplateValueItemDtoImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }

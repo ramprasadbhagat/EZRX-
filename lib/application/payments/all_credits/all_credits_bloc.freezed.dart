@@ -12,7 +12,7 @@ part of 'all_credits_bloc.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$AllCreditsEvent {
@@ -87,10 +87,10 @@ class _$AllCreditsEventCopyWithImpl<$Res, $Val extends AllCreditsEvent>
 }
 
 /// @nodoc
-abstract class _$$_initializedCopyWith<$Res> {
-  factory _$$_initializedCopyWith(
-          _$_initialized value, $Res Function(_$_initialized) then) =
-      __$$_initializedCopyWithImpl<$Res>;
+abstract class _$$initializedImplCopyWith<$Res> {
+  factory _$$initializedImplCopyWith(
+          _$initializedImpl value, $Res Function(_$initializedImpl) then) =
+      __$$initializedImplCopyWithImpl<$Res>;
   @useResult
   $Res call(
       {SalesOrganisation salesOrganisation, CustomerCodeInfo customerCodeInfo});
@@ -100,11 +100,11 @@ abstract class _$$_initializedCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_initializedCopyWithImpl<$Res>
-    extends _$AllCreditsEventCopyWithImpl<$Res, _$_initialized>
-    implements _$$_initializedCopyWith<$Res> {
-  __$$_initializedCopyWithImpl(
-      _$_initialized _value, $Res Function(_$_initialized) _then)
+class __$$initializedImplCopyWithImpl<$Res>
+    extends _$AllCreditsEventCopyWithImpl<$Res, _$initializedImpl>
+    implements _$$initializedImplCopyWith<$Res> {
+  __$$initializedImplCopyWithImpl(
+      _$initializedImpl _value, $Res Function(_$initializedImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -113,7 +113,7 @@ class __$$_initializedCopyWithImpl<$Res>
     Object? salesOrganisation = null,
     Object? customerCodeInfo = null,
   }) {
-    return _then(_$_initialized(
+    return _then(_$initializedImpl(
       salesOrganisation: null == salesOrganisation
           ? _value.salesOrganisation
           : salesOrganisation // ignore: cast_nullable_to_non_nullable
@@ -144,8 +144,8 @@ class __$$_initializedCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_initialized implements _initialized {
-  const _$_initialized(
+class _$initializedImpl implements _initialized {
+  const _$initializedImpl(
       {required this.salesOrganisation, required this.customerCodeInfo});
 
   @override
@@ -159,10 +159,10 @@ class _$_initialized implements _initialized {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_initialized &&
+            other is _$initializedImpl &&
             (identical(other.salesOrganisation, salesOrganisation) ||
                 other.salesOrganisation == salesOrganisation) &&
             (identical(other.customerCodeInfo, customerCodeInfo) ||
@@ -176,8 +176,8 @@ class _$_initialized implements _initialized {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_initializedCopyWith<_$_initialized> get copyWith =>
-      __$$_initializedCopyWithImpl<_$_initialized>(this, _$identity);
+  _$$initializedImplCopyWith<_$initializedImpl> get copyWith =>
+      __$$initializedImplCopyWithImpl<_$initializedImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -257,19 +257,20 @@ class _$_initialized implements _initialized {
 abstract class _initialized implements AllCreditsEvent {
   const factory _initialized(
       {required final SalesOrganisation salesOrganisation,
-      required final CustomerCodeInfo customerCodeInfo}) = _$_initialized;
+      required final CustomerCodeInfo customerCodeInfo}) = _$initializedImpl;
 
   SalesOrganisation get salesOrganisation;
   CustomerCodeInfo get customerCodeInfo;
   @JsonKey(ignore: true)
-  _$$_initializedCopyWith<_$_initialized> get copyWith =>
+  _$$initializedImplCopyWith<_$initializedImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_FetchCopyWith<$Res> {
-  factory _$$_FetchCopyWith(_$_Fetch value, $Res Function(_$_Fetch) then) =
-      __$$_FetchCopyWithImpl<$Res>;
+abstract class _$$FetchImplCopyWith<$Res> {
+  factory _$$FetchImplCopyWith(
+          _$FetchImpl value, $Res Function(_$FetchImpl) then) =
+      __$$FetchImplCopyWithImpl<$Res>;
   @useResult
   $Res call({AllCreditsFilter appliedFilter});
 
@@ -277,10 +278,11 @@ abstract class _$$_FetchCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_FetchCopyWithImpl<$Res>
-    extends _$AllCreditsEventCopyWithImpl<$Res, _$_Fetch>
-    implements _$$_FetchCopyWith<$Res> {
-  __$$_FetchCopyWithImpl(_$_Fetch _value, $Res Function(_$_Fetch) _then)
+class __$$FetchImplCopyWithImpl<$Res>
+    extends _$AllCreditsEventCopyWithImpl<$Res, _$FetchImpl>
+    implements _$$FetchImplCopyWith<$Res> {
+  __$$FetchImplCopyWithImpl(
+      _$FetchImpl _value, $Res Function(_$FetchImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -288,7 +290,7 @@ class __$$_FetchCopyWithImpl<$Res>
   $Res call({
     Object? appliedFilter = null,
   }) {
-    return _then(_$_Fetch(
+    return _then(_$FetchImpl(
       appliedFilter: null == appliedFilter
           ? _value.appliedFilter
           : appliedFilter // ignore: cast_nullable_to_non_nullable
@@ -307,8 +309,8 @@ class __$$_FetchCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_Fetch implements _Fetch {
-  const _$_Fetch({required this.appliedFilter});
+class _$FetchImpl implements _Fetch {
+  const _$FetchImpl({required this.appliedFilter});
 
   @override
   final AllCreditsFilter appliedFilter;
@@ -319,10 +321,10 @@ class _$_Fetch implements _Fetch {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Fetch &&
+            other is _$FetchImpl &&
             (identical(other.appliedFilter, appliedFilter) ||
                 other.appliedFilter == appliedFilter));
   }
@@ -333,8 +335,8 @@ class _$_Fetch implements _Fetch {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_FetchCopyWith<_$_Fetch> get copyWith =>
-      __$$_FetchCopyWithImpl<_$_Fetch>(this, _$identity);
+  _$$FetchImplCopyWith<_$FetchImpl> get copyWith =>
+      __$$FetchImplCopyWithImpl<_$FetchImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -413,34 +415,34 @@ class _$_Fetch implements _Fetch {
 
 abstract class _Fetch implements AllCreditsEvent {
   const factory _Fetch({required final AllCreditsFilter appliedFilter}) =
-      _$_Fetch;
+      _$FetchImpl;
 
   AllCreditsFilter get appliedFilter;
   @JsonKey(ignore: true)
-  _$$_FetchCopyWith<_$_Fetch> get copyWith =>
+  _$$FetchImplCopyWith<_$FetchImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_LoadMoreCopyWith<$Res> {
-  factory _$$_LoadMoreCopyWith(
-          _$_LoadMore value, $Res Function(_$_LoadMore) then) =
-      __$$_LoadMoreCopyWithImpl<$Res>;
+abstract class _$$LoadMoreImplCopyWith<$Res> {
+  factory _$$LoadMoreImplCopyWith(
+          _$LoadMoreImpl value, $Res Function(_$LoadMoreImpl) then) =
+      __$$LoadMoreImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_LoadMoreCopyWithImpl<$Res>
-    extends _$AllCreditsEventCopyWithImpl<$Res, _$_LoadMore>
-    implements _$$_LoadMoreCopyWith<$Res> {
-  __$$_LoadMoreCopyWithImpl(
-      _$_LoadMore _value, $Res Function(_$_LoadMore) _then)
+class __$$LoadMoreImplCopyWithImpl<$Res>
+    extends _$AllCreditsEventCopyWithImpl<$Res, _$LoadMoreImpl>
+    implements _$$LoadMoreImplCopyWith<$Res> {
+  __$$LoadMoreImplCopyWithImpl(
+      _$LoadMoreImpl _value, $Res Function(_$LoadMoreImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_LoadMore implements _LoadMore {
-  const _$_LoadMore();
+class _$LoadMoreImpl implements _LoadMore {
+  const _$LoadMoreImpl();
 
   @override
   String toString() {
@@ -448,9 +450,9 @@ class _$_LoadMore implements _LoadMore {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_LoadMore);
+        (other.runtimeType == runtimeType && other is _$LoadMoreImpl);
   }
 
   @override
@@ -532,7 +534,7 @@ class _$_LoadMore implements _LoadMore {
 }
 
 abstract class _LoadMore implements AllCreditsEvent {
-  const factory _LoadMore() = _$_LoadMore;
+  const factory _LoadMore() = _$LoadMoreImpl;
 }
 
 /// @nodoc
@@ -650,11 +652,11 @@ class _$AllCreditsStateCopyWithImpl<$Res, $Val extends AllCreditsState>
 }
 
 /// @nodoc
-abstract class _$$_AllCreditsStateCopyWith<$Res>
+abstract class _$$AllCreditsStateImplCopyWith<$Res>
     implements $AllCreditsStateCopyWith<$Res> {
-  factory _$$_AllCreditsStateCopyWith(
-          _$_AllCreditsState value, $Res Function(_$_AllCreditsState) then) =
-      __$$_AllCreditsStateCopyWithImpl<$Res>;
+  factory _$$AllCreditsStateImplCopyWith(_$AllCreditsStateImpl value,
+          $Res Function(_$AllCreditsStateImpl) then) =
+      __$$AllCreditsStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -675,11 +677,11 @@ abstract class _$$_AllCreditsStateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_AllCreditsStateCopyWithImpl<$Res>
-    extends _$AllCreditsStateCopyWithImpl<$Res, _$_AllCreditsState>
-    implements _$$_AllCreditsStateCopyWith<$Res> {
-  __$$_AllCreditsStateCopyWithImpl(
-      _$_AllCreditsState _value, $Res Function(_$_AllCreditsState) _then)
+class __$$AllCreditsStateImplCopyWithImpl<$Res>
+    extends _$AllCreditsStateCopyWithImpl<$Res, _$AllCreditsStateImpl>
+    implements _$$AllCreditsStateImplCopyWith<$Res> {
+  __$$AllCreditsStateImplCopyWithImpl(
+      _$AllCreditsStateImpl _value, $Res Function(_$AllCreditsStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -693,7 +695,7 @@ class __$$_AllCreditsStateCopyWithImpl<$Res>
     Object? salesOrganisation = null,
     Object? customerCodeInfo = null,
   }) {
-    return _then(_$_AllCreditsState(
+    return _then(_$AllCreditsStateImpl(
       appliedFilter: null == appliedFilter
           ? _value.appliedFilter
           : appliedFilter // ignore: cast_nullable_to_non_nullable
@@ -728,8 +730,8 @@ class __$$_AllCreditsStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_AllCreditsState extends _AllCreditsState {
-  const _$_AllCreditsState(
+class _$AllCreditsStateImpl extends _AllCreditsState {
+  const _$AllCreditsStateImpl(
       {required this.appliedFilter,
       required final List<CreditAndInvoiceItem> items,
       required this.failureOrSuccessOption,
@@ -767,10 +769,10 @@ class _$_AllCreditsState extends _AllCreditsState {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_AllCreditsState &&
+            other is _$AllCreditsStateImpl &&
             (identical(other.appliedFilter, appliedFilter) ||
                 other.appliedFilter == appliedFilter) &&
             const DeepCollectionEquality().equals(other._items, _items) &&
@@ -800,8 +802,9 @@ class _$_AllCreditsState extends _AllCreditsState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_AllCreditsStateCopyWith<_$_AllCreditsState> get copyWith =>
-      __$$_AllCreditsStateCopyWithImpl<_$_AllCreditsState>(this, _$identity);
+  _$$AllCreditsStateImplCopyWith<_$AllCreditsStateImpl> get copyWith =>
+      __$$AllCreditsStateImplCopyWithImpl<_$AllCreditsStateImpl>(
+          this, _$identity);
 }
 
 abstract class _AllCreditsState extends AllCreditsState {
@@ -812,7 +815,8 @@ abstract class _AllCreditsState extends AllCreditsState {
       required final bool isLoading,
       required final bool canLoadMore,
       required final SalesOrganisation salesOrganisation,
-      required final CustomerCodeInfo customerCodeInfo}) = _$_AllCreditsState;
+      required final CustomerCodeInfo
+          customerCodeInfo}) = _$AllCreditsStateImpl;
   const _AllCreditsState._() : super._();
 
   @override
@@ -831,6 +835,6 @@ abstract class _AllCreditsState extends AllCreditsState {
   CustomerCodeInfo get customerCodeInfo;
   @override
   @JsonKey(ignore: true)
-  _$$_AllCreditsStateCopyWith<_$_AllCreditsState> get copyWith =>
+  _$$AllCreditsStateImplCopyWith<_$AllCreditsStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

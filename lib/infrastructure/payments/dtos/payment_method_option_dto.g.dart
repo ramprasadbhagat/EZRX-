@@ -6,17 +6,17 @@ part of 'payment_method_option_dto.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_PaymentMethodOptionDto _$$_PaymentMethodOptionDtoFromJson(
+_$PaymentMethodOptionDtoImpl _$$PaymentMethodOptionDtoImplFromJson(
         Map<String, dynamic> json) =>
-    _$_PaymentMethodOptionDto(
+    _$PaymentMethodOptionDtoImpl(
       id: json['id'] as String? ?? '',
       type: json['type'] as String? ?? '',
       provider: json['provider'] as String? ?? '',
       displayName: json['displayName'] as String? ?? '',
     );
 
-Map<String, dynamic> _$$_PaymentMethodOptionDtoToJson(
-        _$_PaymentMethodOptionDto instance) =>
+Map<String, dynamic> _$$PaymentMethodOptionDtoImplToJson(
+        _$PaymentMethodOptionDtoImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'type': instance.type,

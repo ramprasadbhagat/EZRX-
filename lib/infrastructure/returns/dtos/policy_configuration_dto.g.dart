@@ -6,9 +6,9 @@ part of 'policy_configuration_dto.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_PolicyConfigurationDto _$$_PolicyConfigurationDtoFromJson(
+_$PolicyConfigurationDtoImpl _$$PolicyConfigurationDtoImplFromJson(
         Map<String, dynamic> json) =>
-    _$_PolicyConfigurationDto(
+    _$PolicyConfigurationDtoImpl(
       salesOrg: json['salesOrg'] as String? ?? '',
       principalCode: json['principalCode'] as String? ?? '',
       monthsBeforeExpiry: json['monthsBeforeExpiry'] as String? ?? '',
@@ -19,8 +19,8 @@ _$_PolicyConfigurationDto _$$_PolicyConfigurationDtoFromJson(
       status: json['status'] as String? ?? '',
     );
 
-Map<String, dynamic> _$$_PolicyConfigurationDtoToJson(
-        _$_PolicyConfigurationDto instance) =>
+Map<String, dynamic> _$$PolicyConfigurationDtoImplToJson(
+        _$PolicyConfigurationDtoImpl instance) =>
     <String, dynamic>{
       'salesOrg': instance.salesOrg,
       'principalCode': instance.principalCode,

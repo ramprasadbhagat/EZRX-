@@ -6,17 +6,18 @@ part of 'order_document_type_aggregate_dto.dart';
 // TypeAdapterGenerator
 // **************************************************************************
 
-class OrderDocumentTypeDtoAdapter extends TypeAdapter<_$_OrderDocumentTypeDto> {
+class OrderDocumentTypeDtoAdapter
+    extends TypeAdapter<_$OrderDocumentTypeDtoImpl> {
   @override
   final int typeId = 31;
 
   @override
-  _$_OrderDocumentTypeDto read(BinaryReader reader) {
+  _$OrderDocumentTypeDtoImpl read(BinaryReader reader) {
     final numOfFields = reader.readByte();
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return _$_OrderDocumentTypeDto(
+    return _$OrderDocumentTypeDtoImpl(
       salesOrg: fields[0] == null ? '' : fields[0] as String,
       documentType: fields[1] == null ? '' : fields[1] as String,
       description: fields[2] == null ? '' : fields[2] as String,
@@ -26,7 +27,7 @@ class OrderDocumentTypeDtoAdapter extends TypeAdapter<_$_OrderDocumentTypeDto> {
   }
 
   @override
-  void write(BinaryWriter writer, _$_OrderDocumentTypeDto obj) {
+  void write(BinaryWriter writer, _$OrderDocumentTypeDtoImpl obj) {
     writer
       ..writeByte(5)
       ..writeByte(0)
@@ -56,9 +57,9 @@ class OrderDocumentTypeDtoAdapter extends TypeAdapter<_$_OrderDocumentTypeDto> {
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_OrderDocumentTypeDto _$$_OrderDocumentTypeDtoFromJson(
+_$OrderDocumentTypeDtoImpl _$$OrderDocumentTypeDtoImplFromJson(
         Map<String, dynamic> json) =>
-    _$_OrderDocumentTypeDto(
+    _$OrderDocumentTypeDtoImpl(
       salesOrg: json['salesOrg'] as String,
       documentType: json['documentType'] as String,
       description: json['description'] as String,
@@ -66,8 +67,8 @@ _$_OrderDocumentTypeDto _$$_OrderDocumentTypeDtoFromJson(
       orderReason: json['orderReason'] as String,
     );
 
-Map<String, dynamic> _$$_OrderDocumentTypeDtoToJson(
-        _$_OrderDocumentTypeDto instance) =>
+Map<String, dynamic> _$$OrderDocumentTypeDtoImplToJson(
+        _$OrderDocumentTypeDtoImpl instance) =>
     <String, dynamic>{
       'salesOrg': instance.salesOrg,
       'documentType': instance.documentType,

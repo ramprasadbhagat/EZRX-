@@ -12,7 +12,7 @@ part of 'bank_beneficiary_dto.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 BankBeneficiaryDto _$BankBeneficiaryDtoFromJson(Map<String, dynamic> json) {
   return _BankBeneficiaryDto.fromJson(json);
@@ -154,11 +154,11 @@ class _$BankBeneficiaryDtoCopyWithImpl<$Res, $Val extends BankBeneficiaryDto>
 }
 
 /// @nodoc
-abstract class _$$_BankBeneficiaryDtoCopyWith<$Res>
+abstract class _$$BankBeneficiaryDtoImplCopyWith<$Res>
     implements $BankBeneficiaryDtoCopyWith<$Res> {
-  factory _$$_BankBeneficiaryDtoCopyWith(_$_BankBeneficiaryDto value,
-          $Res Function(_$_BankBeneficiaryDto) then) =
-      __$$_BankBeneficiaryDtoCopyWithImpl<$Res>;
+  factory _$$BankBeneficiaryDtoImplCopyWith(_$BankBeneficiaryDtoImpl value,
+          $Res Function(_$BankBeneficiaryDtoImpl) then) =
+      __$$BankBeneficiaryDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -186,11 +186,11 @@ abstract class _$$_BankBeneficiaryDtoCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_BankBeneficiaryDtoCopyWithImpl<$Res>
-    extends _$BankBeneficiaryDtoCopyWithImpl<$Res, _$_BankBeneficiaryDto>
-    implements _$$_BankBeneficiaryDtoCopyWith<$Res> {
-  __$$_BankBeneficiaryDtoCopyWithImpl(
-      _$_BankBeneficiaryDto _value, $Res Function(_$_BankBeneficiaryDto) _then)
+class __$$BankBeneficiaryDtoImplCopyWithImpl<$Res>
+    extends _$BankBeneficiaryDtoCopyWithImpl<$Res, _$BankBeneficiaryDtoImpl>
+    implements _$$BankBeneficiaryDtoImplCopyWith<$Res> {
+  __$$BankBeneficiaryDtoImplCopyWithImpl(_$BankBeneficiaryDtoImpl _value,
+      $Res Function(_$BankBeneficiaryDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -208,7 +208,7 @@ class __$$_BankBeneficiaryDtoCopyWithImpl<$Res>
     Object? payNowUen = null,
     Object? salesDistrict = null,
   }) {
-    return _then(_$_BankBeneficiaryDto(
+    return _then(_$BankBeneficiaryDtoImpl(
       salesOrg: null == salesOrg
           ? _value.salesOrg
           : salesOrg // ignore: cast_nullable_to_non_nullable
@@ -259,8 +259,8 @@ class __$$_BankBeneficiaryDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_BankBeneficiaryDto extends _BankBeneficiaryDto {
-  const _$_BankBeneficiaryDto(
+class _$BankBeneficiaryDtoImpl extends _BankBeneficiaryDto {
+  const _$BankBeneficiaryDtoImpl(
       {@JsonKey(name: 'salesOrg', defaultValue: '') required this.salesOrg,
       @JsonKey(name: 'bankAccount', defaultValue: '', toJson: valueTojson)
       required this.bankAccount,
@@ -284,8 +284,8 @@ class _$_BankBeneficiaryDto extends _BankBeneficiaryDto {
       required this.salesDistrict})
       : super._();
 
-  factory _$_BankBeneficiaryDto.fromJson(Map<String, dynamic> json) =>
-      _$$_BankBeneficiaryDtoFromJson(json);
+  factory _$BankBeneficiaryDtoImpl.fromJson(Map<String, dynamic> json) =>
+      _$$BankBeneficiaryDtoImplFromJson(json);
 
   @override
   @JsonKey(name: 'salesOrg', defaultValue: '')
@@ -327,10 +327,10 @@ class _$_BankBeneficiaryDto extends _BankBeneficiaryDto {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_BankBeneficiaryDto &&
+            other is _$BankBeneficiaryDtoImpl &&
             (identical(other.salesOrg, salesOrg) ||
                 other.salesOrg == salesOrg) &&
             (identical(other.bankAccount, bankAccount) ||
@@ -372,13 +372,13 @@ class _$_BankBeneficiaryDto extends _BankBeneficiaryDto {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_BankBeneficiaryDtoCopyWith<_$_BankBeneficiaryDto> get copyWith =>
-      __$$_BankBeneficiaryDtoCopyWithImpl<_$_BankBeneficiaryDto>(
+  _$$BankBeneficiaryDtoImplCopyWith<_$BankBeneficiaryDtoImpl> get copyWith =>
+      __$$BankBeneficiaryDtoImplCopyWithImpl<_$BankBeneficiaryDtoImpl>(
           this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_BankBeneficiaryDtoToJson(
+    return _$$BankBeneficiaryDtoImplToJson(
       this,
     );
   }
@@ -407,11 +407,11 @@ abstract class _BankBeneficiaryDto extends BankBeneficiaryDto {
       @JsonKey(name: 'payNowUen', defaultValue: '', toJson: valueTojson)
       required final String payNowUen,
       @JsonKey(name: 'salesDistrict', defaultValue: '', toJson: valueTojson)
-      required final String salesDistrict}) = _$_BankBeneficiaryDto;
+      required final String salesDistrict}) = _$BankBeneficiaryDtoImpl;
   const _BankBeneficiaryDto._() : super._();
 
   factory _BankBeneficiaryDto.fromJson(Map<String, dynamic> json) =
-      _$_BankBeneficiaryDto.fromJson;
+      _$BankBeneficiaryDtoImpl.fromJson;
 
   @override
   @JsonKey(name: 'salesOrg', defaultValue: '')
@@ -448,6 +448,6 @@ abstract class _BankBeneficiaryDto extends BankBeneficiaryDto {
   String get salesDistrict;
   @override
   @JsonKey(ignore: true)
-  _$$_BankBeneficiaryDtoCopyWith<_$_BankBeneficiaryDto> get copyWith =>
+  _$$BankBeneficiaryDtoImplCopyWith<_$BankBeneficiaryDtoImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

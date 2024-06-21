@@ -12,7 +12,7 @@ part of 'user_restriction_status.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$UserRestrictionStatus {
@@ -64,22 +64,24 @@ class _$UserRestrictionStatusCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_UserRestrictionStatusCopyWith<$Res>
+abstract class _$$UserRestrictionStatusImplCopyWith<$Res>
     implements $UserRestrictionStatusCopyWith<$Res> {
-  factory _$$_UserRestrictionStatusCopyWith(_$_UserRestrictionStatus value,
-          $Res Function(_$_UserRestrictionStatus) then) =
-      __$$_UserRestrictionStatusCopyWithImpl<$Res>;
+  factory _$$UserRestrictionStatusImplCopyWith(
+          _$UserRestrictionStatusImpl value,
+          $Res Function(_$UserRestrictionStatusImpl) then) =
+      __$$UserRestrictionStatusImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String approverRightsStatus, bool approvalLimitStatus});
 }
 
 /// @nodoc
-class __$$_UserRestrictionStatusCopyWithImpl<$Res>
-    extends _$UserRestrictionStatusCopyWithImpl<$Res, _$_UserRestrictionStatus>
-    implements _$$_UserRestrictionStatusCopyWith<$Res> {
-  __$$_UserRestrictionStatusCopyWithImpl(_$_UserRestrictionStatus _value,
-      $Res Function(_$_UserRestrictionStatus) _then)
+class __$$UserRestrictionStatusImplCopyWithImpl<$Res>
+    extends _$UserRestrictionStatusCopyWithImpl<$Res,
+        _$UserRestrictionStatusImpl>
+    implements _$$UserRestrictionStatusImplCopyWith<$Res> {
+  __$$UserRestrictionStatusImplCopyWithImpl(_$UserRestrictionStatusImpl _value,
+      $Res Function(_$UserRestrictionStatusImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -88,7 +90,7 @@ class __$$_UserRestrictionStatusCopyWithImpl<$Res>
     Object? approverRightsStatus = null,
     Object? approvalLimitStatus = null,
   }) {
-    return _then(_$_UserRestrictionStatus(
+    return _then(_$UserRestrictionStatusImpl(
       approverRightsStatus: null == approverRightsStatus
           ? _value.approverRightsStatus
           : approverRightsStatus // ignore: cast_nullable_to_non_nullable
@@ -103,8 +105,8 @@ class __$$_UserRestrictionStatusCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_UserRestrictionStatus extends _UserRestrictionStatus {
-  const _$_UserRestrictionStatus(
+class _$UserRestrictionStatusImpl extends _UserRestrictionStatus {
+  const _$UserRestrictionStatusImpl(
       {required this.approverRightsStatus, required this.approvalLimitStatus})
       : super._();
 
@@ -119,10 +121,10 @@ class _$_UserRestrictionStatus extends _UserRestrictionStatus {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_UserRestrictionStatus &&
+            other is _$UserRestrictionStatusImpl &&
             (identical(other.approverRightsStatus, approverRightsStatus) ||
                 other.approverRightsStatus == approverRightsStatus) &&
             (identical(other.approvalLimitStatus, approvalLimitStatus) ||
@@ -136,15 +138,15 @@ class _$_UserRestrictionStatus extends _UserRestrictionStatus {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_UserRestrictionStatusCopyWith<_$_UserRestrictionStatus> get copyWith =>
-      __$$_UserRestrictionStatusCopyWithImpl<_$_UserRestrictionStatus>(
-          this, _$identity);
+  _$$UserRestrictionStatusImplCopyWith<_$UserRestrictionStatusImpl>
+      get copyWith => __$$UserRestrictionStatusImplCopyWithImpl<
+          _$UserRestrictionStatusImpl>(this, _$identity);
 }
 
 abstract class _UserRestrictionStatus extends UserRestrictionStatus {
   const factory _UserRestrictionStatus(
       {required final String approverRightsStatus,
-      required final bool approvalLimitStatus}) = _$_UserRestrictionStatus;
+      required final bool approvalLimitStatus}) = _$UserRestrictionStatusImpl;
   const _UserRestrictionStatus._() : super._();
 
   @override
@@ -153,6 +155,6 @@ abstract class _UserRestrictionStatus extends UserRestrictionStatus {
   bool get approvalLimitStatus;
   @override
   @JsonKey(ignore: true)
-  _$$_UserRestrictionStatusCopyWith<_$_UserRestrictionStatus> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$UserRestrictionStatusImplCopyWith<_$UserRestrictionStatusImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }

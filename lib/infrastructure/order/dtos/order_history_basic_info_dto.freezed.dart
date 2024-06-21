@@ -12,7 +12,7 @@ part of 'order_history_basic_info_dto.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 OrderHistoryBasicInfoDto _$OrderHistoryBasicInfoDtoFromJson(
     Map<String, dynamic> json) {
@@ -100,12 +100,12 @@ class _$OrderHistoryBasicInfoDtoCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_OrderHistoryBasicInfoDtoCopyWith<$Res>
+abstract class _$$OrderHistoryBasicInfoDtoImplCopyWith<$Res>
     implements $OrderHistoryBasicInfoDtoCopyWith<$Res> {
-  factory _$$_OrderHistoryBasicInfoDtoCopyWith(
-          _$_OrderHistoryBasicInfoDto value,
-          $Res Function(_$_OrderHistoryBasicInfoDto) then) =
-      __$$_OrderHistoryBasicInfoDtoCopyWithImpl<$Res>;
+  factory _$$OrderHistoryBasicInfoDtoImplCopyWith(
+          _$OrderHistoryBasicInfoDtoImpl value,
+          $Res Function(_$OrderHistoryBasicInfoDtoImpl) then) =
+      __$$OrderHistoryBasicInfoDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -119,12 +119,13 @@ abstract class _$$_OrderHistoryBasicInfoDtoCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_OrderHistoryBasicInfoDtoCopyWithImpl<$Res>
+class __$$OrderHistoryBasicInfoDtoImplCopyWithImpl<$Res>
     extends _$OrderHistoryBasicInfoDtoCopyWithImpl<$Res,
-        _$_OrderHistoryBasicInfoDto>
-    implements _$$_OrderHistoryBasicInfoDtoCopyWith<$Res> {
-  __$$_OrderHistoryBasicInfoDtoCopyWithImpl(_$_OrderHistoryBasicInfoDto _value,
-      $Res Function(_$_OrderHistoryBasicInfoDto) _then)
+        _$OrderHistoryBasicInfoDtoImpl>
+    implements _$$OrderHistoryBasicInfoDtoImplCopyWith<$Res> {
+  __$$OrderHistoryBasicInfoDtoImplCopyWithImpl(
+      _$OrderHistoryBasicInfoDtoImpl _value,
+      $Res Function(_$OrderHistoryBasicInfoDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -135,7 +136,7 @@ class __$$_OrderHistoryBasicInfoDtoCopyWithImpl<$Res>
     Object? companyName = null,
     Object? paymentTerm = null,
   }) {
-    return _then(_$_OrderHistoryBasicInfoDto(
+    return _then(_$OrderHistoryBasicInfoDtoImpl(
       soldTo: null == soldTo
           ? _value.soldTo
           : soldTo // ignore: cast_nullable_to_non_nullable
@@ -158,16 +159,16 @@ class __$$_OrderHistoryBasicInfoDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_OrderHistoryBasicInfoDto extends _OrderHistoryBasicInfoDto {
-  const _$_OrderHistoryBasicInfoDto(
+class _$OrderHistoryBasicInfoDtoImpl extends _OrderHistoryBasicInfoDto {
+  const _$OrderHistoryBasicInfoDtoImpl(
       {@JsonKey(name: 'SoldTo') required this.soldTo,
       @JsonKey(name: 'ShipTo') required this.shipTo,
       @JsonKey(name: 'CompanyName') required this.companyName,
       @JsonKey(name: 'PaymentTerm') required this.paymentTerm})
       : super._();
 
-  factory _$_OrderHistoryBasicInfoDto.fromJson(Map<String, dynamic> json) =>
-      _$$_OrderHistoryBasicInfoDtoFromJson(json);
+  factory _$OrderHistoryBasicInfoDtoImpl.fromJson(Map<String, dynamic> json) =>
+      _$$OrderHistoryBasicInfoDtoImplFromJson(json);
 
   @override
   @JsonKey(name: 'SoldTo')
@@ -188,10 +189,10 @@ class _$_OrderHistoryBasicInfoDto extends _OrderHistoryBasicInfoDto {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_OrderHistoryBasicInfoDto &&
+            other is _$OrderHistoryBasicInfoDtoImpl &&
             (identical(other.soldTo, soldTo) || other.soldTo == soldTo) &&
             (identical(other.shipTo, shipTo) || other.shipTo == shipTo) &&
             (identical(other.companyName, companyName) ||
@@ -208,13 +209,13 @@ class _$_OrderHistoryBasicInfoDto extends _OrderHistoryBasicInfoDto {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_OrderHistoryBasicInfoDtoCopyWith<_$_OrderHistoryBasicInfoDto>
-      get copyWith => __$$_OrderHistoryBasicInfoDtoCopyWithImpl<
-          _$_OrderHistoryBasicInfoDto>(this, _$identity);
+  _$$OrderHistoryBasicInfoDtoImplCopyWith<_$OrderHistoryBasicInfoDtoImpl>
+      get copyWith => __$$OrderHistoryBasicInfoDtoImplCopyWithImpl<
+          _$OrderHistoryBasicInfoDtoImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_OrderHistoryBasicInfoDtoToJson(
+    return _$$OrderHistoryBasicInfoDtoImplToJson(
       this,
     );
   }
@@ -222,15 +223,16 @@ class _$_OrderHistoryBasicInfoDto extends _OrderHistoryBasicInfoDto {
 
 abstract class _OrderHistoryBasicInfoDto extends OrderHistoryBasicInfoDto {
   const factory _OrderHistoryBasicInfoDto(
-      {@JsonKey(name: 'SoldTo') required final String soldTo,
-      @JsonKey(name: 'ShipTo') required final String shipTo,
-      @JsonKey(name: 'CompanyName') required final String companyName,
-      @JsonKey(name: 'PaymentTerm')
-      required final PaymentTermDto paymentTerm}) = _$_OrderHistoryBasicInfoDto;
+          {@JsonKey(name: 'SoldTo') required final String soldTo,
+          @JsonKey(name: 'ShipTo') required final String shipTo,
+          @JsonKey(name: 'CompanyName') required final String companyName,
+          @JsonKey(name: 'PaymentTerm')
+          required final PaymentTermDto paymentTerm}) =
+      _$OrderHistoryBasicInfoDtoImpl;
   const _OrderHistoryBasicInfoDto._() : super._();
 
   factory _OrderHistoryBasicInfoDto.fromJson(Map<String, dynamic> json) =
-      _$_OrderHistoryBasicInfoDto.fromJson;
+      _$OrderHistoryBasicInfoDtoImpl.fromJson;
 
   @override
   @JsonKey(name: 'SoldTo')
@@ -246,7 +248,7 @@ abstract class _OrderHistoryBasicInfoDto extends OrderHistoryBasicInfoDto {
   PaymentTermDto get paymentTerm;
   @override
   @JsonKey(ignore: true)
-  _$$_OrderHistoryBasicInfoDtoCopyWith<_$_OrderHistoryBasicInfoDto>
+  _$$OrderHistoryBasicInfoDtoImplCopyWith<_$OrderHistoryBasicInfoDtoImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -308,11 +310,11 @@ class _$PaymentTermDtoCopyWithImpl<$Res, $Val extends PaymentTermDto>
 }
 
 /// @nodoc
-abstract class _$$_PaymentTermDtoCopyWith<$Res>
+abstract class _$$PaymentTermDtoImplCopyWith<$Res>
     implements $PaymentTermDtoCopyWith<$Res> {
-  factory _$$_PaymentTermDtoCopyWith(
-          _$_PaymentTermDto value, $Res Function(_$_PaymentTermDto) then) =
-      __$$_PaymentTermDtoCopyWithImpl<$Res>;
+  factory _$$PaymentTermDtoImplCopyWith(_$PaymentTermDtoImpl value,
+          $Res Function(_$PaymentTermDtoImpl) then) =
+      __$$PaymentTermDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -321,11 +323,11 @@ abstract class _$$_PaymentTermDtoCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_PaymentTermDtoCopyWithImpl<$Res>
-    extends _$PaymentTermDtoCopyWithImpl<$Res, _$_PaymentTermDto>
-    implements _$$_PaymentTermDtoCopyWith<$Res> {
-  __$$_PaymentTermDtoCopyWithImpl(
-      _$_PaymentTermDto _value, $Res Function(_$_PaymentTermDto) _then)
+class __$$PaymentTermDtoImplCopyWithImpl<$Res>
+    extends _$PaymentTermDtoCopyWithImpl<$Res, _$PaymentTermDtoImpl>
+    implements _$$PaymentTermDtoImplCopyWith<$Res> {
+  __$$PaymentTermDtoImplCopyWithImpl(
+      _$PaymentTermDtoImpl _value, $Res Function(_$PaymentTermDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -334,7 +336,7 @@ class __$$_PaymentTermDtoCopyWithImpl<$Res>
     Object? paymentTermCode = null,
     Object? paymentTermDescription = null,
   }) {
-    return _then(_$_PaymentTermDto(
+    return _then(_$PaymentTermDtoImpl(
       paymentTermCode: null == paymentTermCode
           ? _value.paymentTermCode
           : paymentTermCode // ignore: cast_nullable_to_non_nullable
@@ -349,15 +351,15 @@ class __$$_PaymentTermDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_PaymentTermDto extends _PaymentTermDto {
-  const _$_PaymentTermDto(
+class _$PaymentTermDtoImpl extends _PaymentTermDto {
+  const _$PaymentTermDtoImpl(
       {@JsonKey(name: 'PaymentTermCode') required this.paymentTermCode,
       @JsonKey(name: 'PaymentTermDescription')
       required this.paymentTermDescription})
       : super._();
 
-  factory _$_PaymentTermDto.fromJson(Map<String, dynamic> json) =>
-      _$$_PaymentTermDtoFromJson(json);
+  factory _$PaymentTermDtoImpl.fromJson(Map<String, dynamic> json) =>
+      _$$PaymentTermDtoImplFromJson(json);
 
   @override
   @JsonKey(name: 'PaymentTermCode')
@@ -372,10 +374,10 @@ class _$_PaymentTermDto extends _PaymentTermDto {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_PaymentTermDto &&
+            other is _$PaymentTermDtoImpl &&
             (identical(other.paymentTermCode, paymentTermCode) ||
                 other.paymentTermCode == paymentTermCode) &&
             (identical(other.paymentTermDescription, paymentTermDescription) ||
@@ -390,12 +392,13 @@ class _$_PaymentTermDto extends _PaymentTermDto {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_PaymentTermDtoCopyWith<_$_PaymentTermDto> get copyWith =>
-      __$$_PaymentTermDtoCopyWithImpl<_$_PaymentTermDto>(this, _$identity);
+  _$$PaymentTermDtoImplCopyWith<_$PaymentTermDtoImpl> get copyWith =>
+      __$$PaymentTermDtoImplCopyWithImpl<_$PaymentTermDtoImpl>(
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_PaymentTermDtoToJson(
+    return _$$PaymentTermDtoImplToJson(
       this,
     );
   }
@@ -405,11 +408,11 @@ abstract class _PaymentTermDto extends PaymentTermDto {
   const factory _PaymentTermDto(
       {@JsonKey(name: 'PaymentTermCode') required final String paymentTermCode,
       @JsonKey(name: 'PaymentTermDescription')
-      required final String paymentTermDescription}) = _$_PaymentTermDto;
+      required final String paymentTermDescription}) = _$PaymentTermDtoImpl;
   const _PaymentTermDto._() : super._();
 
   factory _PaymentTermDto.fromJson(Map<String, dynamic> json) =
-      _$_PaymentTermDto.fromJson;
+      _$PaymentTermDtoImpl.fromJson;
 
   @override
   @JsonKey(name: 'PaymentTermCode')
@@ -419,6 +422,6 @@ abstract class _PaymentTermDto extends PaymentTermDto {
   String get paymentTermDescription;
   @override
   @JsonKey(ignore: true)
-  _$$_PaymentTermDtoCopyWith<_$_PaymentTermDto> get copyWith =>
+  _$$PaymentTermDtoImplCopyWith<_$PaymentTermDtoImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -12,7 +12,7 @@ part of 'bill_to_alt_name.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$BillToAltName {
@@ -76,11 +76,11 @@ class _$BillToAltNameCopyWithImpl<$Res, $Val extends BillToAltName>
 }
 
 /// @nodoc
-abstract class _$$_BillToAltNameCopyWith<$Res>
+abstract class _$$BillToAltNameImplCopyWith<$Res>
     implements $BillToAltNameCopyWith<$Res> {
-  factory _$$_BillToAltNameCopyWith(
-          _$_BillToAltName value, $Res Function(_$_BillToAltName) then) =
-      __$$_BillToAltNameCopyWithImpl<$Res>;
+  factory _$$BillToAltNameImplCopyWith(
+          _$BillToAltNameImpl value, $Res Function(_$BillToAltNameImpl) then) =
+      __$$BillToAltNameImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -88,11 +88,11 @@ abstract class _$$_BillToAltNameCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_BillToAltNameCopyWithImpl<$Res>
-    extends _$BillToAltNameCopyWithImpl<$Res, _$_BillToAltName>
-    implements _$$_BillToAltNameCopyWith<$Res> {
-  __$$_BillToAltNameCopyWithImpl(
-      _$_BillToAltName _value, $Res Function(_$_BillToAltName) _then)
+class __$$BillToAltNameImplCopyWithImpl<$Res>
+    extends _$BillToAltNameCopyWithImpl<$Res, _$BillToAltNameImpl>
+    implements _$$BillToAltNameImplCopyWith<$Res> {
+  __$$BillToAltNameImplCopyWithImpl(
+      _$BillToAltNameImpl _value, $Res Function(_$BillToAltNameImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -103,7 +103,7 @@ class __$$_BillToAltNameCopyWithImpl<$Res>
     Object? altName3 = null,
     Object? altName4 = null,
   }) {
-    return _then(_$_BillToAltName(
+    return _then(_$BillToAltNameImpl(
       altName1: null == altName1
           ? _value.altName1
           : altName1 // ignore: cast_nullable_to_non_nullable
@@ -126,8 +126,8 @@ class __$$_BillToAltNameCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_BillToAltName extends _BillToAltName {
-  const _$_BillToAltName(
+class _$BillToAltNameImpl extends _BillToAltName {
+  const _$BillToAltNameImpl(
       {required this.altName1,
       required this.altName2,
       required this.altName3,
@@ -144,10 +144,10 @@ class _$_BillToAltName extends _BillToAltName {
   final String altName4;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_BillToAltName &&
+            other is _$BillToAltNameImpl &&
             (identical(other.altName1, altName1) ||
                 other.altName1 == altName1) &&
             (identical(other.altName2, altName2) ||
@@ -165,8 +165,8 @@ class _$_BillToAltName extends _BillToAltName {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_BillToAltNameCopyWith<_$_BillToAltName> get copyWith =>
-      __$$_BillToAltNameCopyWithImpl<_$_BillToAltName>(this, _$identity);
+  _$$BillToAltNameImplCopyWith<_$BillToAltNameImpl> get copyWith =>
+      __$$BillToAltNameImplCopyWithImpl<_$BillToAltNameImpl>(this, _$identity);
 }
 
 abstract class _BillToAltName extends BillToAltName {
@@ -174,7 +174,7 @@ abstract class _BillToAltName extends BillToAltName {
       {required final String altName1,
       required final String altName2,
       required final String altName3,
-      required final String altName4}) = _$_BillToAltName;
+      required final String altName4}) = _$BillToAltNameImpl;
   const _BillToAltName._() : super._();
 
   @override
@@ -187,6 +187,6 @@ abstract class _BillToAltName extends BillToAltName {
   String get altName4;
   @override
   @JsonKey(ignore: true)
-  _$$_BillToAltNameCopyWith<_$_BillToAltName> get copyWith =>
+  _$$BillToAltNameImplCopyWith<_$BillToAltNameImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

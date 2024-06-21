@@ -12,7 +12,7 @@ part of 'available_credit_filter_dto.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 AvailableCreditFilterDto _$AvailableCreditFilterDtoFromJson(
     Map<String, dynamic> json) {
@@ -95,12 +95,12 @@ class _$AvailableCreditFilterDtoCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_AvailableCreditFilterDtoCopyWith<$Res>
+abstract class _$$AvailableCreditFilterDtoImplCopyWith<$Res>
     implements $AvailableCreditFilterDtoCopyWith<$Res> {
-  factory _$$_AvailableCreditFilterDtoCopyWith(
-          _$_AvailableCreditFilterDto value,
-          $Res Function(_$_AvailableCreditFilterDto) then) =
-      __$$_AvailableCreditFilterDtoCopyWithImpl<$Res>;
+  factory _$$AvailableCreditFilterDtoImplCopyWith(
+          _$AvailableCreditFilterDtoImpl value,
+          $Res Function(_$AvailableCreditFilterDtoImpl) then) =
+      __$$AvailableCreditFilterDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -114,12 +114,13 @@ abstract class _$$_AvailableCreditFilterDtoCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_AvailableCreditFilterDtoCopyWithImpl<$Res>
+class __$$AvailableCreditFilterDtoImplCopyWithImpl<$Res>
     extends _$AvailableCreditFilterDtoCopyWithImpl<$Res,
-        _$_AvailableCreditFilterDto>
-    implements _$$_AvailableCreditFilterDtoCopyWith<$Res> {
-  __$$_AvailableCreditFilterDtoCopyWithImpl(_$_AvailableCreditFilterDto _value,
-      $Res Function(_$_AvailableCreditFilterDto) _then)
+        _$AvailableCreditFilterDtoImpl>
+    implements _$$AvailableCreditFilterDtoImplCopyWith<$Res> {
+  __$$AvailableCreditFilterDtoImplCopyWithImpl(
+      _$AvailableCreditFilterDtoImpl _value,
+      $Res Function(_$AvailableCreditFilterDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -130,7 +131,7 @@ class __$$_AvailableCreditFilterDtoCopyWithImpl<$Res>
     Object? amountInTransactionCurrencyFrom = null,
     Object? amountInTransactionCurrencyTo = null,
   }) {
-    return _then(_$_AvailableCreditFilterDto(
+    return _then(_$AvailableCreditFilterDtoImpl(
       documentDateFrom: null == documentDateFrom
           ? _value.documentDateFrom
           : documentDateFrom // ignore: cast_nullable_to_non_nullable
@@ -153,8 +154,8 @@ class __$$_AvailableCreditFilterDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_AvailableCreditFilterDto extends _AvailableCreditFilterDto {
-  const _$_AvailableCreditFilterDto(
+class _$AvailableCreditFilterDtoImpl extends _AvailableCreditFilterDto {
+  const _$AvailableCreditFilterDtoImpl(
       {@JsonKey(name: 'documentDateFrom', defaultValue: '')
       required this.documentDateFrom,
       @JsonKey(name: 'documentDateTo', defaultValue: '')
@@ -165,8 +166,8 @@ class _$_AvailableCreditFilterDto extends _AvailableCreditFilterDto {
       required this.amountInTransactionCurrencyTo})
       : super._();
 
-  factory _$_AvailableCreditFilterDto.fromJson(Map<String, dynamic> json) =>
-      _$$_AvailableCreditFilterDtoFromJson(json);
+  factory _$AvailableCreditFilterDtoImpl.fromJson(Map<String, dynamic> json) =>
+      _$$AvailableCreditFilterDtoImplFromJson(json);
 
   @override
   @JsonKey(name: 'documentDateFrom', defaultValue: '')
@@ -187,10 +188,10 @@ class _$_AvailableCreditFilterDto extends _AvailableCreditFilterDto {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_AvailableCreditFilterDto &&
+            other is _$AvailableCreditFilterDtoImpl &&
             (identical(other.documentDateFrom, documentDateFrom) ||
                 other.documentDateFrom == documentDateFrom) &&
             (identical(other.documentDateTo, documentDateTo) ||
@@ -213,13 +214,13 @@ class _$_AvailableCreditFilterDto extends _AvailableCreditFilterDto {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_AvailableCreditFilterDtoCopyWith<_$_AvailableCreditFilterDto>
-      get copyWith => __$$_AvailableCreditFilterDtoCopyWithImpl<
-          _$_AvailableCreditFilterDto>(this, _$identity);
+  _$$AvailableCreditFilterDtoImplCopyWith<_$AvailableCreditFilterDtoImpl>
+      get copyWith => __$$AvailableCreditFilterDtoImplCopyWithImpl<
+          _$AvailableCreditFilterDtoImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_AvailableCreditFilterDtoToJson(
+    return _$$AvailableCreditFilterDtoImplToJson(
       this,
     );
   }
@@ -235,11 +236,11 @@ abstract class _AvailableCreditFilterDto extends AvailableCreditFilterDto {
           required final String amountInTransactionCurrencyFrom,
           @JsonKey(name: 'amountInTransactionCurrencyTo', defaultValue: '')
           required final String amountInTransactionCurrencyTo}) =
-      _$_AvailableCreditFilterDto;
+      _$AvailableCreditFilterDtoImpl;
   const _AvailableCreditFilterDto._() : super._();
 
   factory _AvailableCreditFilterDto.fromJson(Map<String, dynamic> json) =
-      _$_AvailableCreditFilterDto.fromJson;
+      _$AvailableCreditFilterDtoImpl.fromJson;
 
   @override
   @JsonKey(name: 'documentDateFrom', defaultValue: '')
@@ -255,6 +256,6 @@ abstract class _AvailableCreditFilterDto extends AvailableCreditFilterDto {
   String get amountInTransactionCurrencyTo;
   @override
   @JsonKey(ignore: true)
-  _$$_AvailableCreditFilterDtoCopyWith<_$_AvailableCreditFilterDto>
+  _$$AvailableCreditFilterDtoImplCopyWith<_$AvailableCreditFilterDtoImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

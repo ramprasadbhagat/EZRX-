@@ -12,7 +12,7 @@ part of 'scan_material_info_bloc.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$ScanMaterialInfoEvent {
@@ -127,10 +127,10 @@ class _$ScanMaterialInfoEventCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_initializedCopyWith<$Res> {
-  factory _$$_initializedCopyWith(
-          _$_initialized value, $Res Function(_$_initialized) then) =
-      __$$_initializedCopyWithImpl<$Res>;
+abstract class _$$initializedImplCopyWith<$Res> {
+  factory _$$initializedImplCopyWith(
+          _$initializedImpl value, $Res Function(_$initializedImpl) then) =
+      __$$initializedImplCopyWithImpl<$Res>;
   @useResult
   $Res call(
       {User user,
@@ -147,11 +147,11 @@ abstract class _$$_initializedCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_initializedCopyWithImpl<$Res>
-    extends _$ScanMaterialInfoEventCopyWithImpl<$Res, _$_initialized>
-    implements _$$_initializedCopyWith<$Res> {
-  __$$_initializedCopyWithImpl(
-      _$_initialized _value, $Res Function(_$_initialized) _then)
+class __$$initializedImplCopyWithImpl<$Res>
+    extends _$ScanMaterialInfoEventCopyWithImpl<$Res, _$initializedImpl>
+    implements _$$initializedImplCopyWith<$Res> {
+  __$$initializedImplCopyWithImpl(
+      _$initializedImpl _value, $Res Function(_$initializedImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -163,7 +163,7 @@ class __$$_initializedCopyWithImpl<$Res>
     Object? shipToInfo = null,
     Object? salesOrgConfigs = null,
   }) {
-    return _then(_$_initialized(
+    return _then(_$initializedImpl(
       user: null == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
@@ -231,8 +231,8 @@ class __$$_initializedCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_initialized implements _initialized {
-  const _$_initialized(
+class _$initializedImpl implements _initialized {
+  const _$initializedImpl(
       {required this.user,
       required this.salesOrganisation,
       required this.customerCodeInfo,
@@ -256,10 +256,10 @@ class _$_initialized implements _initialized {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_initialized &&
+            other is _$initializedImpl &&
             (identical(other.user, user) || other.user == user) &&
             (identical(other.salesOrganisation, salesOrganisation) ||
                 other.salesOrganisation == salesOrganisation) &&
@@ -278,8 +278,8 @@ class _$_initialized implements _initialized {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_initializedCopyWith<_$_initialized> get copyWith =>
-      __$$_initializedCopyWithImpl<_$_initialized>(this, _$identity);
+  _$$initializedImplCopyWith<_$initializedImpl> get copyWith =>
+      __$$initializedImplCopyWithImpl<_$initializedImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -405,7 +405,7 @@ abstract class _initialized implements ScanMaterialInfoEvent {
           required final CustomerCodeInfo customerCodeInfo,
           required final ShipToInfo shipToInfo,
           required final SalesOrganisationConfigs salesOrgConfigs}) =
-      _$_initialized;
+      _$initializedImpl;
 
   User get user;
   SalesOrganisation get salesOrganisation;
@@ -413,16 +413,16 @@ abstract class _initialized implements ScanMaterialInfoEvent {
   ShipToInfo get shipToInfo;
   SalesOrganisationConfigs get salesOrgConfigs;
   @JsonKey(ignore: true)
-  _$$_initializedCopyWith<_$_initialized> get copyWith =>
+  _$$initializedImplCopyWith<_$initializedImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_scanMaterialNumberFromCameraCopyWith<$Res> {
-  factory _$$_scanMaterialNumberFromCameraCopyWith(
-          _$_scanMaterialNumberFromCamera value,
-          $Res Function(_$_scanMaterialNumberFromCamera) then) =
-      __$$_scanMaterialNumberFromCameraCopyWithImpl<$Res>;
+abstract class _$$scanMaterialNumberFromCameraImplCopyWith<$Res> {
+  factory _$$scanMaterialNumberFromCameraImplCopyWith(
+          _$scanMaterialNumberFromCameraImpl value,
+          $Res Function(_$scanMaterialNumberFromCameraImpl) then) =
+      __$$scanMaterialNumberFromCameraImplCopyWithImpl<$Res>;
   @useResult
   $Res call({MaterialFilter materialFilter});
 
@@ -430,13 +430,13 @@ abstract class _$$_scanMaterialNumberFromCameraCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_scanMaterialNumberFromCameraCopyWithImpl<$Res>
+class __$$scanMaterialNumberFromCameraImplCopyWithImpl<$Res>
     extends _$ScanMaterialInfoEventCopyWithImpl<$Res,
-        _$_scanMaterialNumberFromCamera>
-    implements _$$_scanMaterialNumberFromCameraCopyWith<$Res> {
-  __$$_scanMaterialNumberFromCameraCopyWithImpl(
-      _$_scanMaterialNumberFromCamera _value,
-      $Res Function(_$_scanMaterialNumberFromCamera) _then)
+        _$scanMaterialNumberFromCameraImpl>
+    implements _$$scanMaterialNumberFromCameraImplCopyWith<$Res> {
+  __$$scanMaterialNumberFromCameraImplCopyWithImpl(
+      _$scanMaterialNumberFromCameraImpl _value,
+      $Res Function(_$scanMaterialNumberFromCameraImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -444,7 +444,7 @@ class __$$_scanMaterialNumberFromCameraCopyWithImpl<$Res>
   $Res call({
     Object? materialFilter = null,
   }) {
-    return _then(_$_scanMaterialNumberFromCamera(
+    return _then(_$scanMaterialNumberFromCameraImpl(
       materialFilter: null == materialFilter
           ? _value.materialFilter
           : materialFilter // ignore: cast_nullable_to_non_nullable
@@ -463,8 +463,9 @@ class __$$_scanMaterialNumberFromCameraCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_scanMaterialNumberFromCamera implements _scanMaterialNumberFromCamera {
-  const _$_scanMaterialNumberFromCamera({required this.materialFilter});
+class _$scanMaterialNumberFromCameraImpl
+    implements _scanMaterialNumberFromCamera {
+  const _$scanMaterialNumberFromCameraImpl({required this.materialFilter});
 
   @override
   final MaterialFilter materialFilter;
@@ -475,10 +476,10 @@ class _$_scanMaterialNumberFromCamera implements _scanMaterialNumberFromCamera {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_scanMaterialNumberFromCamera &&
+            other is _$scanMaterialNumberFromCameraImpl &&
             (identical(other.materialFilter, materialFilter) ||
                 other.materialFilter == materialFilter));
   }
@@ -489,9 +490,10 @@ class _$_scanMaterialNumberFromCamera implements _scanMaterialNumberFromCamera {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_scanMaterialNumberFromCameraCopyWith<_$_scanMaterialNumberFromCamera>
-      get copyWith => __$$_scanMaterialNumberFromCameraCopyWithImpl<
-          _$_scanMaterialNumberFromCamera>(this, _$identity);
+  _$$scanMaterialNumberFromCameraImplCopyWith<
+          _$scanMaterialNumberFromCameraImpl>
+      get copyWith => __$$scanMaterialNumberFromCameraImplCopyWithImpl<
+          _$scanMaterialNumberFromCameraImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -610,34 +612,35 @@ class _$_scanMaterialNumberFromCamera implements _scanMaterialNumberFromCamera {
 abstract class _scanMaterialNumberFromCamera implements ScanMaterialInfoEvent {
   const factory _scanMaterialNumberFromCamera(
           {required final MaterialFilter materialFilter}) =
-      _$_scanMaterialNumberFromCamera;
+      _$scanMaterialNumberFromCameraImpl;
 
   MaterialFilter get materialFilter;
   @JsonKey(ignore: true)
-  _$$_scanMaterialNumberFromCameraCopyWith<_$_scanMaterialNumberFromCamera>
+  _$$scanMaterialNumberFromCameraImplCopyWith<
+          _$scanMaterialNumberFromCameraImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_disableScanCopyWith<$Res> {
-  factory _$$_disableScanCopyWith(
-          _$_disableScan value, $Res Function(_$_disableScan) then) =
-      __$$_disableScanCopyWithImpl<$Res>;
+abstract class _$$disableScanImplCopyWith<$Res> {
+  factory _$$disableScanImplCopyWith(
+          _$disableScanImpl value, $Res Function(_$disableScanImpl) then) =
+      __$$disableScanImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_disableScanCopyWithImpl<$Res>
-    extends _$ScanMaterialInfoEventCopyWithImpl<$Res, _$_disableScan>
-    implements _$$_disableScanCopyWith<$Res> {
-  __$$_disableScanCopyWithImpl(
-      _$_disableScan _value, $Res Function(_$_disableScan) _then)
+class __$$disableScanImplCopyWithImpl<$Res>
+    extends _$ScanMaterialInfoEventCopyWithImpl<$Res, _$disableScanImpl>
+    implements _$$disableScanImplCopyWith<$Res> {
+  __$$disableScanImplCopyWithImpl(
+      _$disableScanImpl _value, $Res Function(_$disableScanImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_disableScan implements _disableScan {
-  const _$_disableScan();
+class _$disableScanImpl implements _disableScan {
+  const _$disableScanImpl();
 
   @override
   String toString() {
@@ -645,9 +648,9 @@ class _$_disableScan implements _disableScan {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_disableScan);
+        (other.runtimeType == runtimeType && other is _$disableScanImpl);
   }
 
   @override
@@ -768,32 +771,32 @@ class _$_disableScan implements _disableScan {
 }
 
 abstract class _disableScan implements ScanMaterialInfoEvent {
-  const factory _disableScan() = _$_disableScan;
+  const factory _disableScan() = _$disableScanImpl;
 }
 
 /// @nodoc
-abstract class _$$_scanImageFromDeviceStorageCopyWith<$Res> {
-  factory _$$_scanImageFromDeviceStorageCopyWith(
-          _$_scanImageFromDeviceStorage value,
-          $Res Function(_$_scanImageFromDeviceStorage) then) =
-      __$$_scanImageFromDeviceStorageCopyWithImpl<$Res>;
+abstract class _$$scanImageFromDeviceStorageImplCopyWith<$Res> {
+  factory _$$scanImageFromDeviceStorageImplCopyWith(
+          _$scanImageFromDeviceStorageImpl value,
+          $Res Function(_$scanImageFromDeviceStorageImpl) then) =
+      __$$scanImageFromDeviceStorageImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_scanImageFromDeviceStorageCopyWithImpl<$Res>
+class __$$scanImageFromDeviceStorageImplCopyWithImpl<$Res>
     extends _$ScanMaterialInfoEventCopyWithImpl<$Res,
-        _$_scanImageFromDeviceStorage>
-    implements _$$_scanImageFromDeviceStorageCopyWith<$Res> {
-  __$$_scanImageFromDeviceStorageCopyWithImpl(
-      _$_scanImageFromDeviceStorage _value,
-      $Res Function(_$_scanImageFromDeviceStorage) _then)
+        _$scanImageFromDeviceStorageImpl>
+    implements _$$scanImageFromDeviceStorageImplCopyWith<$Res> {
+  __$$scanImageFromDeviceStorageImplCopyWithImpl(
+      _$scanImageFromDeviceStorageImpl _value,
+      $Res Function(_$scanImageFromDeviceStorageImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_scanImageFromDeviceStorage implements _scanImageFromDeviceStorage {
-  const _$_scanImageFromDeviceStorage();
+class _$scanImageFromDeviceStorageImpl implements _scanImageFromDeviceStorage {
+  const _$scanImageFromDeviceStorageImpl();
 
   @override
   String toString() {
@@ -801,10 +804,10 @@ class _$_scanImageFromDeviceStorage implements _scanImageFromDeviceStorage {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_scanImageFromDeviceStorage);
+            other is _$scanImageFromDeviceStorageImpl);
   }
 
   @override
@@ -925,24 +928,25 @@ class _$_scanImageFromDeviceStorage implements _scanImageFromDeviceStorage {
 }
 
 abstract class _scanImageFromDeviceStorage implements ScanMaterialInfoEvent {
-  const factory _scanImageFromDeviceStorage() = _$_scanImageFromDeviceStorage;
+  const factory _scanImageFromDeviceStorage() =
+      _$scanImageFromDeviceStorageImpl;
 }
 
 /// @nodoc
-abstract class _$$_emitScannedDataCopyWith<$Res> {
-  factory _$$_emitScannedDataCopyWith(
-          _$_emitScannedData value, $Res Function(_$_emitScannedData) then) =
-      __$$_emitScannedDataCopyWithImpl<$Res>;
+abstract class _$$emitScannedDataImplCopyWith<$Res> {
+  factory _$$emitScannedDataImplCopyWith(_$emitScannedDataImpl value,
+          $Res Function(_$emitScannedDataImpl) then) =
+      __$$emitScannedDataImplCopyWithImpl<$Res>;
   @useResult
   $Res call({Ean scannedRes});
 }
 
 /// @nodoc
-class __$$_emitScannedDataCopyWithImpl<$Res>
-    extends _$ScanMaterialInfoEventCopyWithImpl<$Res, _$_emitScannedData>
-    implements _$$_emitScannedDataCopyWith<$Res> {
-  __$$_emitScannedDataCopyWithImpl(
-      _$_emitScannedData _value, $Res Function(_$_emitScannedData) _then)
+class __$$emitScannedDataImplCopyWithImpl<$Res>
+    extends _$ScanMaterialInfoEventCopyWithImpl<$Res, _$emitScannedDataImpl>
+    implements _$$emitScannedDataImplCopyWith<$Res> {
+  __$$emitScannedDataImplCopyWithImpl(
+      _$emitScannedDataImpl _value, $Res Function(_$emitScannedDataImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -950,7 +954,7 @@ class __$$_emitScannedDataCopyWithImpl<$Res>
   $Res call({
     Object? scannedRes = null,
   }) {
-    return _then(_$_emitScannedData(
+    return _then(_$emitScannedDataImpl(
       scannedRes: null == scannedRes
           ? _value.scannedRes
           : scannedRes // ignore: cast_nullable_to_non_nullable
@@ -961,8 +965,8 @@ class __$$_emitScannedDataCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_emitScannedData implements _emitScannedData {
-  const _$_emitScannedData({required this.scannedRes});
+class _$emitScannedDataImpl implements _emitScannedData {
+  const _$emitScannedDataImpl({required this.scannedRes});
 
   @override
   final Ean scannedRes;
@@ -973,10 +977,10 @@ class _$_emitScannedData implements _emitScannedData {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_emitScannedData &&
+            other is _$emitScannedDataImpl &&
             (identical(other.scannedRes, scannedRes) ||
                 other.scannedRes == scannedRes));
   }
@@ -987,8 +991,9 @@ class _$_emitScannedData implements _emitScannedData {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_emitScannedDataCopyWith<_$_emitScannedData> get copyWith =>
-      __$$_emitScannedDataCopyWithImpl<_$_emitScannedData>(this, _$identity);
+  _$$emitScannedDataImplCopyWith<_$emitScannedDataImpl> get copyWith =>
+      __$$emitScannedDataImplCopyWithImpl<_$emitScannedDataImpl>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -1106,29 +1111,29 @@ class _$_emitScannedData implements _emitScannedData {
 
 abstract class _emitScannedData implements ScanMaterialInfoEvent {
   const factory _emitScannedData({required final Ean scannedRes}) =
-      _$_emitScannedData;
+      _$emitScannedDataImpl;
 
   Ean get scannedRes;
   @JsonKey(ignore: true)
-  _$$_emitScannedDataCopyWith<_$_emitScannedData> get copyWith =>
+  _$$emitScannedDataImplCopyWith<_$emitScannedDataImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_UpdateTorchStateCopyWith<$Res> {
-  factory _$$_UpdateTorchStateCopyWith(
-          _$_UpdateTorchState value, $Res Function(_$_UpdateTorchState) then) =
-      __$$_UpdateTorchStateCopyWithImpl<$Res>;
+abstract class _$$UpdateTorchStateImplCopyWith<$Res> {
+  factory _$$UpdateTorchStateImplCopyWith(_$UpdateTorchStateImpl value,
+          $Res Function(_$UpdateTorchStateImpl) then) =
+      __$$UpdateTorchStateImplCopyWithImpl<$Res>;
   @useResult
   $Res call({bool torchState});
 }
 
 /// @nodoc
-class __$$_UpdateTorchStateCopyWithImpl<$Res>
-    extends _$ScanMaterialInfoEventCopyWithImpl<$Res, _$_UpdateTorchState>
-    implements _$$_UpdateTorchStateCopyWith<$Res> {
-  __$$_UpdateTorchStateCopyWithImpl(
-      _$_UpdateTorchState _value, $Res Function(_$_UpdateTorchState) _then)
+class __$$UpdateTorchStateImplCopyWithImpl<$Res>
+    extends _$ScanMaterialInfoEventCopyWithImpl<$Res, _$UpdateTorchStateImpl>
+    implements _$$UpdateTorchStateImplCopyWith<$Res> {
+  __$$UpdateTorchStateImplCopyWithImpl(_$UpdateTorchStateImpl _value,
+      $Res Function(_$UpdateTorchStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1136,7 +1141,7 @@ class __$$_UpdateTorchStateCopyWithImpl<$Res>
   $Res call({
     Object? torchState = null,
   }) {
-    return _then(_$_UpdateTorchState(
+    return _then(_$UpdateTorchStateImpl(
       torchState: null == torchState
           ? _value.torchState
           : torchState // ignore: cast_nullable_to_non_nullable
@@ -1147,8 +1152,8 @@ class __$$_UpdateTorchStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_UpdateTorchState implements _UpdateTorchState {
-  const _$_UpdateTorchState({required this.torchState});
+class _$UpdateTorchStateImpl implements _UpdateTorchState {
+  const _$UpdateTorchStateImpl({required this.torchState});
 
   @override
   final bool torchState;
@@ -1159,10 +1164,10 @@ class _$_UpdateTorchState implements _UpdateTorchState {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_UpdateTorchState &&
+            other is _$UpdateTorchStateImpl &&
             (identical(other.torchState, torchState) ||
                 other.torchState == torchState));
   }
@@ -1173,8 +1178,9 @@ class _$_UpdateTorchState implements _UpdateTorchState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_UpdateTorchStateCopyWith<_$_UpdateTorchState> get copyWith =>
-      __$$_UpdateTorchStateCopyWithImpl<_$_UpdateTorchState>(this, _$identity);
+  _$$UpdateTorchStateImplCopyWith<_$UpdateTorchStateImpl> get copyWith =>
+      __$$UpdateTorchStateImplCopyWithImpl<_$UpdateTorchStateImpl>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -1292,11 +1298,11 @@ class _$_UpdateTorchState implements _UpdateTorchState {
 
 abstract class _UpdateTorchState implements ScanMaterialInfoEvent {
   const factory _UpdateTorchState({required final bool torchState}) =
-      _$_UpdateTorchState;
+      _$UpdateTorchStateImpl;
 
   bool get torchState;
   @JsonKey(ignore: true)
-  _$$_UpdateTorchStateCopyWith<_$_UpdateTorchState> get copyWith =>
+  _$$UpdateTorchStateImplCopyWith<_$UpdateTorchStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -1475,11 +1481,12 @@ class _$ScanMaterialInfoStateCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_ScanMaterialInfoStateCopyWith<$Res>
+abstract class _$$ScanMaterialInfoStateImplCopyWith<$Res>
     implements $ScanMaterialInfoStateCopyWith<$Res> {
-  factory _$$_ScanMaterialInfoStateCopyWith(_$_ScanMaterialInfoState value,
-          $Res Function(_$_ScanMaterialInfoState) then) =
-      __$$_ScanMaterialInfoStateCopyWithImpl<$Res>;
+  factory _$$ScanMaterialInfoStateImplCopyWith(
+          _$ScanMaterialInfoStateImpl value,
+          $Res Function(_$ScanMaterialInfoStateImpl) then) =
+      __$$ScanMaterialInfoStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -1511,11 +1518,12 @@ abstract class _$$_ScanMaterialInfoStateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_ScanMaterialInfoStateCopyWithImpl<$Res>
-    extends _$ScanMaterialInfoStateCopyWithImpl<$Res, _$_ScanMaterialInfoState>
-    implements _$$_ScanMaterialInfoStateCopyWith<$Res> {
-  __$$_ScanMaterialInfoStateCopyWithImpl(_$_ScanMaterialInfoState _value,
-      $Res Function(_$_ScanMaterialInfoState) _then)
+class __$$ScanMaterialInfoStateImplCopyWithImpl<$Res>
+    extends _$ScanMaterialInfoStateCopyWithImpl<$Res,
+        _$ScanMaterialInfoStateImpl>
+    implements _$$ScanMaterialInfoStateImplCopyWith<$Res> {
+  __$$ScanMaterialInfoStateImplCopyWithImpl(_$ScanMaterialInfoStateImpl _value,
+      $Res Function(_$ScanMaterialInfoStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1532,7 +1540,7 @@ class __$$_ScanMaterialInfoStateCopyWithImpl<$Res>
     Object? isTorchStateEnabled = null,
     Object? materialFilter = null,
   }) {
-    return _then(_$_ScanMaterialInfoState(
+    return _then(_$ScanMaterialInfoStateImpl(
       material: null == material
           ? _value.material
           : material // ignore: cast_nullable_to_non_nullable
@@ -1579,8 +1587,8 @@ class __$$_ScanMaterialInfoStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_ScanMaterialInfoState extends _ScanMaterialInfoState {
-  const _$_ScanMaterialInfoState(
+class _$ScanMaterialInfoStateImpl extends _ScanMaterialInfoState {
+  const _$ScanMaterialInfoStateImpl(
       {required this.material,
       required this.user,
       required this.salesOrganisation,
@@ -1620,10 +1628,10 @@ class _$_ScanMaterialInfoState extends _ScanMaterialInfoState {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ScanMaterialInfoState &&
+            other is _$ScanMaterialInfoStateImpl &&
             (identical(other.material, material) ||
                 other.material == material) &&
             (identical(other.user, user) || other.user == user) &&
@@ -1663,24 +1671,25 @@ class _$_ScanMaterialInfoState extends _ScanMaterialInfoState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ScanMaterialInfoStateCopyWith<_$_ScanMaterialInfoState> get copyWith =>
-      __$$_ScanMaterialInfoStateCopyWithImpl<_$_ScanMaterialInfoState>(
-          this, _$identity);
+  _$$ScanMaterialInfoStateImplCopyWith<_$ScanMaterialInfoStateImpl>
+      get copyWith => __$$ScanMaterialInfoStateImplCopyWithImpl<
+          _$ScanMaterialInfoStateImpl>(this, _$identity);
 }
 
 abstract class _ScanMaterialInfoState extends ScanMaterialInfoState {
   const factory _ScanMaterialInfoState(
-      {required final MaterialInfo material,
-      required final User user,
-      required final SalesOrganisation salesOrganisation,
-      required final CustomerCodeInfo customerCodeInfo,
-      required final SalesOrganisationConfigs salesOrgConfigs,
-      required final ShipToInfo shipToInfo,
-      required final Option<Either<ApiFailure, dynamic>>
-          apiFailureOrSuccessOption,
-      required final bool isScanInProgress,
-      required final bool isTorchStateEnabled,
-      required final MaterialFilter materialFilter}) = _$_ScanMaterialInfoState;
+          {required final MaterialInfo material,
+          required final User user,
+          required final SalesOrganisation salesOrganisation,
+          required final CustomerCodeInfo customerCodeInfo,
+          required final SalesOrganisationConfigs salesOrgConfigs,
+          required final ShipToInfo shipToInfo,
+          required final Option<Either<ApiFailure, dynamic>>
+              apiFailureOrSuccessOption,
+          required final bool isScanInProgress,
+          required final bool isTorchStateEnabled,
+          required final MaterialFilter materialFilter}) =
+      _$ScanMaterialInfoStateImpl;
   const _ScanMaterialInfoState._() : super._();
 
   @override
@@ -1705,6 +1714,6 @@ abstract class _ScanMaterialInfoState extends ScanMaterialInfoState {
   MaterialFilter get materialFilter;
   @override
   @JsonKey(ignore: true)
-  _$$_ScanMaterialInfoStateCopyWith<_$_ScanMaterialInfoState> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$ScanMaterialInfoStateImplCopyWith<_$ScanMaterialInfoStateImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }

@@ -12,7 +12,7 @@ part of 'order_document_type_bloc.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$OrderDocumentTypeEvent {
@@ -98,25 +98,25 @@ class _$OrderDocumentTypeEventCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_InitializedCopyWith<$Res> {
-  factory _$$_InitializedCopyWith(
-          _$_Initialized value, $Res Function(_$_Initialized) then) =
-      __$$_InitializedCopyWithImpl<$Res>;
+abstract class _$$InitializedImplCopyWith<$Res> {
+  factory _$$InitializedImplCopyWith(
+          _$InitializedImpl value, $Res Function(_$InitializedImpl) then) =
+      __$$InitializedImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_InitializedCopyWithImpl<$Res>
-    extends _$OrderDocumentTypeEventCopyWithImpl<$Res, _$_Initialized>
-    implements _$$_InitializedCopyWith<$Res> {
-  __$$_InitializedCopyWithImpl(
-      _$_Initialized _value, $Res Function(_$_Initialized) _then)
+class __$$InitializedImplCopyWithImpl<$Res>
+    extends _$OrderDocumentTypeEventCopyWithImpl<$Res, _$InitializedImpl>
+    implements _$$InitializedImplCopyWith<$Res> {
+  __$$InitializedImplCopyWithImpl(
+      _$InitializedImpl _value, $Res Function(_$InitializedImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_Initialized implements _Initialized {
-  const _$_Initialized();
+class _$InitializedImpl implements _Initialized {
+  const _$InitializedImpl();
 
   @override
   String toString() {
@@ -124,9 +124,9 @@ class _$_Initialized implements _Initialized {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_Initialized);
+        (other.runtimeType == runtimeType && other is _$InitializedImpl);
   }
 
   @override
@@ -218,14 +218,15 @@ class _$_Initialized implements _Initialized {
 }
 
 abstract class _Initialized implements OrderDocumentTypeEvent {
-  const factory _Initialized() = _$_Initialized;
+  const factory _Initialized() = _$InitializedImpl;
 }
 
 /// @nodoc
-abstract class _$$_FetchOrderDocumentTypeCopyWith<$Res> {
-  factory _$$_FetchOrderDocumentTypeCopyWith(_$_FetchOrderDocumentType value,
-          $Res Function(_$_FetchOrderDocumentType) then) =
-      __$$_FetchOrderDocumentTypeCopyWithImpl<$Res>;
+abstract class _$$FetchOrderDocumentTypeImplCopyWith<$Res> {
+  factory _$$FetchOrderDocumentTypeImplCopyWith(
+          _$FetchOrderDocumentTypeImpl value,
+          $Res Function(_$FetchOrderDocumentTypeImpl) then) =
+      __$$FetchOrderDocumentTypeImplCopyWithImpl<$Res>;
   @useResult
   $Res call({SalesOrganisation salesOrganisation, bool isEDI});
 
@@ -233,12 +234,13 @@ abstract class _$$_FetchOrderDocumentTypeCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_FetchOrderDocumentTypeCopyWithImpl<$Res>
+class __$$FetchOrderDocumentTypeImplCopyWithImpl<$Res>
     extends _$OrderDocumentTypeEventCopyWithImpl<$Res,
-        _$_FetchOrderDocumentType>
-    implements _$$_FetchOrderDocumentTypeCopyWith<$Res> {
-  __$$_FetchOrderDocumentTypeCopyWithImpl(_$_FetchOrderDocumentType _value,
-      $Res Function(_$_FetchOrderDocumentType) _then)
+        _$FetchOrderDocumentTypeImpl>
+    implements _$$FetchOrderDocumentTypeImplCopyWith<$Res> {
+  __$$FetchOrderDocumentTypeImplCopyWithImpl(
+      _$FetchOrderDocumentTypeImpl _value,
+      $Res Function(_$FetchOrderDocumentTypeImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -247,7 +249,7 @@ class __$$_FetchOrderDocumentTypeCopyWithImpl<$Res>
     Object? salesOrganisation = null,
     Object? isEDI = null,
   }) {
-    return _then(_$_FetchOrderDocumentType(
+    return _then(_$FetchOrderDocumentTypeImpl(
       salesOrganisation: null == salesOrganisation
           ? _value.salesOrganisation
           : salesOrganisation // ignore: cast_nullable_to_non_nullable
@@ -270,8 +272,8 @@ class __$$_FetchOrderDocumentTypeCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_FetchOrderDocumentType implements _FetchOrderDocumentType {
-  const _$_FetchOrderDocumentType(
+class _$FetchOrderDocumentTypeImpl implements _FetchOrderDocumentType {
+  const _$FetchOrderDocumentTypeImpl(
       {required this.salesOrganisation, required this.isEDI});
 
   @override
@@ -285,10 +287,10 @@ class _$_FetchOrderDocumentType implements _FetchOrderDocumentType {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_FetchOrderDocumentType &&
+            other is _$FetchOrderDocumentTypeImpl &&
             (identical(other.salesOrganisation, salesOrganisation) ||
                 other.salesOrganisation == salesOrganisation) &&
             (identical(other.isEDI, isEDI) || other.isEDI == isEDI));
@@ -300,9 +302,9 @@ class _$_FetchOrderDocumentType implements _FetchOrderDocumentType {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_FetchOrderDocumentTypeCopyWith<_$_FetchOrderDocumentType> get copyWith =>
-      __$$_FetchOrderDocumentTypeCopyWithImpl<_$_FetchOrderDocumentType>(
-          this, _$identity);
+  _$$FetchOrderDocumentTypeImplCopyWith<_$FetchOrderDocumentTypeImpl>
+      get copyWith => __$$FetchOrderDocumentTypeImplCopyWithImpl<
+          _$FetchOrderDocumentTypeImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -392,20 +394,20 @@ class _$_FetchOrderDocumentType implements _FetchOrderDocumentType {
 abstract class _FetchOrderDocumentType implements OrderDocumentTypeEvent {
   const factory _FetchOrderDocumentType(
       {required final SalesOrganisation salesOrganisation,
-      required final bool isEDI}) = _$_FetchOrderDocumentType;
+      required final bool isEDI}) = _$FetchOrderDocumentTypeImpl;
 
   SalesOrganisation get salesOrganisation;
   bool get isEDI;
   @JsonKey(ignore: true)
-  _$$_FetchOrderDocumentTypeCopyWith<_$_FetchOrderDocumentType> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$FetchOrderDocumentTypeImplCopyWith<_$FetchOrderDocumentTypeImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_SelectedOrderTypeCopyWith<$Res> {
-  factory _$$_SelectedOrderTypeCopyWith(_$_SelectedOrderType value,
-          $Res Function(_$_SelectedOrderType) then) =
-      __$$_SelectedOrderTypeCopyWithImpl<$Res>;
+abstract class _$$SelectedOrderTypeImplCopyWith<$Res> {
+  factory _$$SelectedOrderTypeImplCopyWith(_$SelectedOrderTypeImpl value,
+          $Res Function(_$SelectedOrderTypeImpl) then) =
+      __$$SelectedOrderTypeImplCopyWithImpl<$Res>;
   @useResult
   $Res call({OrderDocumentType selectedOrderType, bool isReasonSelected});
 
@@ -413,11 +415,11 @@ abstract class _$$_SelectedOrderTypeCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_SelectedOrderTypeCopyWithImpl<$Res>
-    extends _$OrderDocumentTypeEventCopyWithImpl<$Res, _$_SelectedOrderType>
-    implements _$$_SelectedOrderTypeCopyWith<$Res> {
-  __$$_SelectedOrderTypeCopyWithImpl(
-      _$_SelectedOrderType _value, $Res Function(_$_SelectedOrderType) _then)
+class __$$SelectedOrderTypeImplCopyWithImpl<$Res>
+    extends _$OrderDocumentTypeEventCopyWithImpl<$Res, _$SelectedOrderTypeImpl>
+    implements _$$SelectedOrderTypeImplCopyWith<$Res> {
+  __$$SelectedOrderTypeImplCopyWithImpl(_$SelectedOrderTypeImpl _value,
+      $Res Function(_$SelectedOrderTypeImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -426,7 +428,7 @@ class __$$_SelectedOrderTypeCopyWithImpl<$Res>
     Object? selectedOrderType = null,
     Object? isReasonSelected = null,
   }) {
-    return _then(_$_SelectedOrderType(
+    return _then(_$SelectedOrderTypeImpl(
       selectedOrderType: null == selectedOrderType
           ? _value.selectedOrderType
           : selectedOrderType // ignore: cast_nullable_to_non_nullable
@@ -449,8 +451,8 @@ class __$$_SelectedOrderTypeCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_SelectedOrderType implements _SelectedOrderType {
-  const _$_SelectedOrderType(
+class _$SelectedOrderTypeImpl implements _SelectedOrderType {
+  const _$SelectedOrderTypeImpl(
       {required this.selectedOrderType, required this.isReasonSelected});
 
   @override
@@ -464,10 +466,10 @@ class _$_SelectedOrderType implements _SelectedOrderType {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_SelectedOrderType &&
+            other is _$SelectedOrderTypeImpl &&
             (identical(other.selectedOrderType, selectedOrderType) ||
                 other.selectedOrderType == selectedOrderType) &&
             (identical(other.isReasonSelected, isReasonSelected) ||
@@ -481,8 +483,8 @@ class _$_SelectedOrderType implements _SelectedOrderType {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_SelectedOrderTypeCopyWith<_$_SelectedOrderType> get copyWith =>
-      __$$_SelectedOrderTypeCopyWithImpl<_$_SelectedOrderType>(
+  _$$SelectedOrderTypeImplCopyWith<_$SelectedOrderTypeImpl> get copyWith =>
+      __$$SelectedOrderTypeImplCopyWithImpl<_$SelectedOrderTypeImpl>(
           this, _$identity);
 
   @override
@@ -573,38 +575,38 @@ class _$_SelectedOrderType implements _SelectedOrderType {
 abstract class _SelectedOrderType implements OrderDocumentTypeEvent {
   const factory _SelectedOrderType(
       {required final OrderDocumentType selectedOrderType,
-      required final bool isReasonSelected}) = _$_SelectedOrderType;
+      required final bool isReasonSelected}) = _$SelectedOrderTypeImpl;
 
   OrderDocumentType get selectedOrderType;
   bool get isReasonSelected;
   @JsonKey(ignore: true)
-  _$$_SelectedOrderTypeCopyWith<_$_SelectedOrderType> get copyWith =>
+  _$$SelectedOrderTypeImplCopyWith<_$SelectedOrderTypeImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_DeleteOrderTypeFromStorageCopyWith<$Res> {
-  factory _$$_DeleteOrderTypeFromStorageCopyWith(
-          _$_DeleteOrderTypeFromStorage value,
-          $Res Function(_$_DeleteOrderTypeFromStorage) then) =
-      __$$_DeleteOrderTypeFromStorageCopyWithImpl<$Res>;
+abstract class _$$DeleteOrderTypeFromStorageImplCopyWith<$Res> {
+  factory _$$DeleteOrderTypeFromStorageImplCopyWith(
+          _$DeleteOrderTypeFromStorageImpl value,
+          $Res Function(_$DeleteOrderTypeFromStorageImpl) then) =
+      __$$DeleteOrderTypeFromStorageImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_DeleteOrderTypeFromStorageCopyWithImpl<$Res>
+class __$$DeleteOrderTypeFromStorageImplCopyWithImpl<$Res>
     extends _$OrderDocumentTypeEventCopyWithImpl<$Res,
-        _$_DeleteOrderTypeFromStorage>
-    implements _$$_DeleteOrderTypeFromStorageCopyWith<$Res> {
-  __$$_DeleteOrderTypeFromStorageCopyWithImpl(
-      _$_DeleteOrderTypeFromStorage _value,
-      $Res Function(_$_DeleteOrderTypeFromStorage) _then)
+        _$DeleteOrderTypeFromStorageImpl>
+    implements _$$DeleteOrderTypeFromStorageImplCopyWith<$Res> {
+  __$$DeleteOrderTypeFromStorageImplCopyWithImpl(
+      _$DeleteOrderTypeFromStorageImpl _value,
+      $Res Function(_$DeleteOrderTypeFromStorageImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_DeleteOrderTypeFromStorage implements _DeleteOrderTypeFromStorage {
-  const _$_DeleteOrderTypeFromStorage();
+class _$DeleteOrderTypeFromStorageImpl implements _DeleteOrderTypeFromStorage {
+  const _$DeleteOrderTypeFromStorageImpl();
 
   @override
   String toString() {
@@ -612,10 +614,10 @@ class _$_DeleteOrderTypeFromStorage implements _DeleteOrderTypeFromStorage {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_DeleteOrderTypeFromStorage);
+            other is _$DeleteOrderTypeFromStorageImpl);
   }
 
   @override
@@ -707,7 +709,8 @@ class _$_DeleteOrderTypeFromStorage implements _DeleteOrderTypeFromStorage {
 }
 
 abstract class _DeleteOrderTypeFromStorage implements OrderDocumentTypeEvent {
-  const factory _DeleteOrderTypeFromStorage() = _$_DeleteOrderTypeFromStorage;
+  const factory _DeleteOrderTypeFromStorage() =
+      _$DeleteOrderTypeFromStorageImpl;
 }
 
 /// @nodoc
@@ -821,11 +824,12 @@ class _$OrderDocumentTypeStateCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_OrderDocumentTypeStateCopyWith<$Res>
+abstract class _$$OrderDocumentTypeStateImplCopyWith<$Res>
     implements $OrderDocumentTypeStateCopyWith<$Res> {
-  factory _$$_OrderDocumentTypeStateCopyWith(_$_OrderDocumentTypeState value,
-          $Res Function(_$_OrderDocumentTypeState) then) =
-      __$$_OrderDocumentTypeStateCopyWithImpl<$Res>;
+  factory _$$OrderDocumentTypeStateImplCopyWith(
+          _$OrderDocumentTypeStateImpl value,
+          $Res Function(_$OrderDocumentTypeStateImpl) then) =
+      __$$OrderDocumentTypeStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -845,12 +849,13 @@ abstract class _$$_OrderDocumentTypeStateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_OrderDocumentTypeStateCopyWithImpl<$Res>
+class __$$OrderDocumentTypeStateImplCopyWithImpl<$Res>
     extends _$OrderDocumentTypeStateCopyWithImpl<$Res,
-        _$_OrderDocumentTypeState>
-    implements _$$_OrderDocumentTypeStateCopyWith<$Res> {
-  __$$_OrderDocumentTypeStateCopyWithImpl(_$_OrderDocumentTypeState _value,
-      $Res Function(_$_OrderDocumentTypeState) _then)
+        _$OrderDocumentTypeStateImpl>
+    implements _$$OrderDocumentTypeStateImplCopyWith<$Res> {
+  __$$OrderDocumentTypeStateImplCopyWithImpl(
+      _$OrderDocumentTypeStateImpl _value,
+      $Res Function(_$OrderDocumentTypeStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -864,7 +869,7 @@ class __$$_OrderDocumentTypeStateCopyWithImpl<$Res>
     Object? isReasonSelected = null,
     Object? selectedReason = null,
   }) {
-    return _then(_$_OrderDocumentTypeState(
+    return _then(_$OrderDocumentTypeStateImpl(
       isSubmitting: null == isSubmitting
           ? _value.isSubmitting
           : isSubmitting // ignore: cast_nullable_to_non_nullable
@@ -900,8 +905,8 @@ class __$$_OrderDocumentTypeStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_OrderDocumentTypeState extends _OrderDocumentTypeState {
-  const _$_OrderDocumentTypeState(
+class _$OrderDocumentTypeStateImpl extends _OrderDocumentTypeState {
+  const _$OrderDocumentTypeStateImpl(
       {required this.isSubmitting,
       required this.orderDocumentTypeListFailureOrSuccessOption,
       required final List<OrderDocumentType> orderDocumentTypeList,
@@ -941,10 +946,10 @@ class _$_OrderDocumentTypeState extends _OrderDocumentTypeState {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_OrderDocumentTypeState &&
+            other is _$OrderDocumentTypeStateImpl &&
             (identical(other.isSubmitting, isSubmitting) ||
                 other.isSubmitting == isSubmitting) &&
             (identical(other.orderDocumentTypeListFailureOrSuccessOption,
@@ -977,9 +982,9 @@ class _$_OrderDocumentTypeState extends _OrderDocumentTypeState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_OrderDocumentTypeStateCopyWith<_$_OrderDocumentTypeState> get copyWith =>
-      __$$_OrderDocumentTypeStateCopyWithImpl<_$_OrderDocumentTypeState>(
-          this, _$identity);
+  _$$OrderDocumentTypeStateImplCopyWith<_$OrderDocumentTypeStateImpl>
+      get copyWith => __$$OrderDocumentTypeStateImplCopyWithImpl<
+          _$OrderDocumentTypeStateImpl>(this, _$identity);
 }
 
 abstract class _OrderDocumentTypeState extends OrderDocumentTypeState {
@@ -992,7 +997,7 @@ abstract class _OrderDocumentTypeState extends OrderDocumentTypeState {
           required final OrderDocumentType selectedOrderType,
           required final bool isReasonSelected,
           required final OrderDocumentType selectedReason}) =
-      _$_OrderDocumentTypeState;
+      _$OrderDocumentTypeStateImpl;
   const _OrderDocumentTypeState._() : super._();
 
   @override
@@ -1012,6 +1017,6 @@ abstract class _OrderDocumentTypeState extends OrderDocumentTypeState {
   OrderDocumentType get selectedReason;
   @override
   @JsonKey(ignore: true)
-  _$$_OrderDocumentTypeStateCopyWith<_$_OrderDocumentTypeState> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$OrderDocumentTypeStateImplCopyWith<_$OrderDocumentTypeStateImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }

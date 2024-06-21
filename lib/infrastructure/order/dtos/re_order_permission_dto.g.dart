@@ -6,28 +6,30 @@ part of 're_order_permission_dto.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_ReOrderPermissionDto _$$_ReOrderPermissionDtoFromJson(
+_$ReOrderPermissionDtoImpl _$$ReOrderPermissionDtoImplFromJson(
         Map<String, dynamic> json) =>
-    _$_ReOrderPermissionDto(
+    _$ReOrderPermissionDtoImpl(
       validMaterials: (json['materials'] as List<dynamic>?)
               ?.map((e) => ValidMaterialDto.fromJson(e as Map<String, dynamic>))
               .toList() ??
           [],
     );
 
-Map<String, dynamic> _$$_ReOrderPermissionDtoToJson(
-        _$_ReOrderPermissionDto instance) =>
+Map<String, dynamic> _$$ReOrderPermissionDtoImplToJson(
+        _$ReOrderPermissionDtoImpl instance) =>
     <String, dynamic>{
       'materials': instance.validMaterials.map((e) => e.toJson()).toList(),
     };
 
-_$_ValidMaterialDto _$$_ValidMaterialDtoFromJson(Map<String, dynamic> json) =>
-    _$_ValidMaterialDto(
+_$ValidMaterialDtoImpl _$$ValidMaterialDtoImplFromJson(
+        Map<String, dynamic> json) =>
+    _$ValidMaterialDtoImpl(
       hidePrice: json['hidePrice'] as bool? ?? false,
       materialNumber: json['materialNumber'] as String? ?? '',
     );
 
-Map<String, dynamic> _$$_ValidMaterialDtoToJson(_$_ValidMaterialDto instance) =>
+Map<String, dynamic> _$$ValidMaterialDtoImplToJson(
+        _$ValidMaterialDtoImpl instance) =>
     <String, dynamic>{
       'hidePrice': instance.hidePrice,
       'materialNumber': instance.materialNumber,

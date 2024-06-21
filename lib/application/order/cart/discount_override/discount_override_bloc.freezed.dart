@@ -12,7 +12,7 @@ part of 'discount_override_bloc.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$DiscountOverrideEvent {
@@ -127,10 +127,11 @@ class _$DiscountOverrideEventCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_FetchCopyWith<$Res>
+abstract class _$$FetchImplCopyWith<$Res>
     implements $DiscountOverrideEventCopyWith<$Res> {
-  factory _$$_FetchCopyWith(_$_Fetch value, $Res Function(_$_Fetch) then) =
-      __$$_FetchCopyWithImpl<$Res>;
+  factory _$$FetchImplCopyWith(
+          _$FetchImpl value, $Res Function(_$FetchImpl) then) =
+      __$$FetchImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -150,10 +151,11 @@ abstract class _$$_FetchCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_FetchCopyWithImpl<$Res>
-    extends _$DiscountOverrideEventCopyWithImpl<$Res, _$_Fetch>
-    implements _$$_FetchCopyWith<$Res> {
-  __$$_FetchCopyWithImpl(_$_Fetch _value, $Res Function(_$_Fetch) _then)
+class __$$FetchImplCopyWithImpl<$Res>
+    extends _$DiscountOverrideEventCopyWithImpl<$Res, _$FetchImpl>
+    implements _$$FetchImplCopyWith<$Res> {
+  __$$FetchImplCopyWithImpl(
+      _$FetchImpl _value, $Res Function(_$FetchImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -166,7 +168,7 @@ class __$$_FetchCopyWithImpl<$Res>
     Object? shipToInfo = null,
     Object? price = null,
   }) {
-    return _then(_$_Fetch(
+    return _then(_$FetchImpl(
       customerCode: null == customerCode
           ? _value.customerCode
           : customerCode // ignore: cast_nullable_to_non_nullable
@@ -229,8 +231,8 @@ class __$$_FetchCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_Fetch implements _Fetch {
-  const _$_Fetch(
+class _$FetchImpl implements _Fetch {
+  const _$FetchImpl(
       {required this.customerCode,
       required this.salesOrganisation,
       required this.material,
@@ -257,10 +259,10 @@ class _$_Fetch implements _Fetch {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Fetch &&
+            other is _$FetchImpl &&
             (identical(other.customerCode, customerCode) ||
                 other.customerCode == customerCode) &&
             (identical(other.salesOrganisation, salesOrganisation) ||
@@ -281,8 +283,8 @@ class _$_Fetch implements _Fetch {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_FetchCopyWith<_$_Fetch> get copyWith =>
-      __$$_FetchCopyWithImpl<_$_Fetch>(this, _$identity);
+  _$$FetchImplCopyWith<_$FetchImpl> get copyWith =>
+      __$$FetchImplCopyWithImpl<_$FetchImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -378,7 +380,7 @@ abstract class _Fetch implements DiscountOverrideEvent {
       required final MaterialInfo material,
       required final MaterialNumber materialNumber,
       required final ShipToInfo shipToInfo,
-      required final Price price}) = _$_Fetch;
+      required final Price price}) = _$FetchImpl;
 
   CustomerCodeInfo get customerCode;
   SalesOrganisation get salesOrganisation;
@@ -389,15 +391,16 @@ abstract class _Fetch implements DiscountOverrideEvent {
   Price get price;
   @override
   @JsonKey(ignore: true)
-  _$$_FetchCopyWith<_$_Fetch> get copyWith =>
+  _$$FetchImplCopyWith<_$FetchImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_UpdateCopyWith<$Res>
+abstract class _$$UpdateImplCopyWith<$Res>
     implements $DiscountOverrideEventCopyWith<$Res> {
-  factory _$$_UpdateCopyWith(_$_Update value, $Res Function(_$_Update) then) =
-      __$$_UpdateCopyWithImpl<$Res>;
+  factory _$$UpdateImplCopyWith(
+          _$UpdateImpl value, $Res Function(_$UpdateImpl) then) =
+      __$$UpdateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({Price price, bool showErrorMessages});
@@ -407,10 +410,11 @@ abstract class _$$_UpdateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_UpdateCopyWithImpl<$Res>
-    extends _$DiscountOverrideEventCopyWithImpl<$Res, _$_Update>
-    implements _$$_UpdateCopyWith<$Res> {
-  __$$_UpdateCopyWithImpl(_$_Update _value, $Res Function(_$_Update) _then)
+class __$$UpdateImplCopyWithImpl<$Res>
+    extends _$DiscountOverrideEventCopyWithImpl<$Res, _$UpdateImpl>
+    implements _$$UpdateImplCopyWith<$Res> {
+  __$$UpdateImplCopyWithImpl(
+      _$UpdateImpl _value, $Res Function(_$UpdateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -419,7 +423,7 @@ class __$$_UpdateCopyWithImpl<$Res>
     Object? price = null,
     Object? showErrorMessages = null,
   }) {
-    return _then(_$_Update(
+    return _then(_$UpdateImpl(
       price: null == price
           ? _value.price
           : price // ignore: cast_nullable_to_non_nullable
@@ -434,8 +438,8 @@ class __$$_UpdateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_Update implements _Update {
-  const _$_Update({required this.price, required this.showErrorMessages});
+class _$UpdateImpl implements _Update {
+  const _$UpdateImpl({required this.price, required this.showErrorMessages});
 
   @override
   final Price price;
@@ -448,10 +452,10 @@ class _$_Update implements _Update {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Update &&
+            other is _$UpdateImpl &&
             (identical(other.price, price) || other.price == price) &&
             (identical(other.showErrorMessages, showErrorMessages) ||
                 other.showErrorMessages == showErrorMessages));
@@ -463,8 +467,8 @@ class _$_Update implements _Update {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_UpdateCopyWith<_$_Update> get copyWith =>
-      __$$_UpdateCopyWithImpl<_$_Update>(this, _$identity);
+  _$$UpdateImplCopyWith<_$UpdateImpl> get copyWith =>
+      __$$UpdateImplCopyWithImpl<_$UpdateImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -553,14 +557,14 @@ class _$_Update implements _Update {
 abstract class _Update implements DiscountOverrideEvent {
   const factory _Update(
       {required final Price price,
-      required final bool showErrorMessages}) = _$_Update;
+      required final bool showErrorMessages}) = _$UpdateImpl;
 
   @override
   Price get price;
   bool get showErrorMessages;
   @override
   @JsonKey(ignore: true)
-  _$$_UpdateCopyWith<_$_Update> get copyWith =>
+  _$$UpdateImplCopyWith<_$UpdateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -634,11 +638,12 @@ class _$DiscountOverrideStateCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_DiscountOverrideStateCopyWith<$Res>
+abstract class _$$DiscountOverrideStateImplCopyWith<$Res>
     implements $DiscountOverrideStateCopyWith<$Res> {
-  factory _$$_DiscountOverrideStateCopyWith(_$_DiscountOverrideState value,
-          $Res Function(_$_DiscountOverrideState) then) =
-      __$$_DiscountOverrideStateCopyWithImpl<$Res>;
+  factory _$$DiscountOverrideStateImplCopyWith(
+          _$DiscountOverrideStateImpl value,
+          $Res Function(_$DiscountOverrideStateImpl) then) =
+      __$$DiscountOverrideStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -651,11 +656,12 @@ abstract class _$$_DiscountOverrideStateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_DiscountOverrideStateCopyWithImpl<$Res>
-    extends _$DiscountOverrideStateCopyWithImpl<$Res, _$_DiscountOverrideState>
-    implements _$$_DiscountOverrideStateCopyWith<$Res> {
-  __$$_DiscountOverrideStateCopyWithImpl(_$_DiscountOverrideState _value,
-      $Res Function(_$_DiscountOverrideState) _then)
+class __$$DiscountOverrideStateImplCopyWithImpl<$Res>
+    extends _$DiscountOverrideStateCopyWithImpl<$Res,
+        _$DiscountOverrideStateImpl>
+    implements _$$DiscountOverrideStateImplCopyWith<$Res> {
+  __$$DiscountOverrideStateImplCopyWithImpl(_$DiscountOverrideStateImpl _value,
+      $Res Function(_$DiscountOverrideStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -665,7 +671,7 @@ class __$$_DiscountOverrideStateCopyWithImpl<$Res>
     Object? apiFailureOrSuccessOption = null,
     Object? showErrorMessages = null,
   }) {
-    return _then(_$_DiscountOverrideState(
+    return _then(_$DiscountOverrideStateImpl(
       materialPrice: null == materialPrice
           ? _value.materialPrice
           : materialPrice // ignore: cast_nullable_to_non_nullable
@@ -684,8 +690,8 @@ class __$$_DiscountOverrideStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_DiscountOverrideState extends _DiscountOverrideState {
-  const _$_DiscountOverrideState(
+class _$DiscountOverrideStateImpl extends _DiscountOverrideState {
+  const _$DiscountOverrideStateImpl(
       {required this.materialPrice,
       required this.apiFailureOrSuccessOption,
       required this.showErrorMessages})
@@ -704,10 +710,10 @@ class _$_DiscountOverrideState extends _DiscountOverrideState {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_DiscountOverrideState &&
+            other is _$DiscountOverrideStateImpl &&
             (identical(other.materialPrice, materialPrice) ||
                 other.materialPrice == materialPrice) &&
             (identical(other.apiFailureOrSuccessOption,
@@ -724,9 +730,9 @@ class _$_DiscountOverrideState extends _DiscountOverrideState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_DiscountOverrideStateCopyWith<_$_DiscountOverrideState> get copyWith =>
-      __$$_DiscountOverrideStateCopyWithImpl<_$_DiscountOverrideState>(
-          this, _$identity);
+  _$$DiscountOverrideStateImplCopyWith<_$DiscountOverrideStateImpl>
+      get copyWith => __$$DiscountOverrideStateImplCopyWithImpl<
+          _$DiscountOverrideStateImpl>(this, _$identity);
 }
 
 abstract class _DiscountOverrideState extends DiscountOverrideState {
@@ -734,7 +740,7 @@ abstract class _DiscountOverrideState extends DiscountOverrideState {
       {required final Price materialPrice,
       required final Option<Either<ApiFailure, dynamic>>
           apiFailureOrSuccessOption,
-      required final bool showErrorMessages}) = _$_DiscountOverrideState;
+      required final bool showErrorMessages}) = _$DiscountOverrideStateImpl;
   const _DiscountOverrideState._() : super._();
 
   @override
@@ -745,6 +751,6 @@ abstract class _DiscountOverrideState extends DiscountOverrideState {
   bool get showErrorMessages;
   @override
   @JsonKey(ignore: true)
-  _$$_DiscountOverrideStateCopyWith<_$_DiscountOverrideState> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$DiscountOverrideStateImplCopyWith<_$DiscountOverrideStateImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }

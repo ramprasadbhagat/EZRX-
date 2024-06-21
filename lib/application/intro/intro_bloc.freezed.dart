@@ -12,7 +12,7 @@ part of 'intro_bloc.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$IntroEvent {
@@ -81,20 +81,20 @@ class _$IntroEventCopyWithImpl<$Res, $Val extends IntroEvent>
 }
 
 /// @nodoc
-abstract class _$$_SetIndexCopyWith<$Res> {
-  factory _$$_SetIndexCopyWith(
-          _$_SetIndex value, $Res Function(_$_SetIndex) then) =
-      __$$_SetIndexCopyWithImpl<$Res>;
+abstract class _$$SetIndexImplCopyWith<$Res> {
+  factory _$$SetIndexImplCopyWith(
+          _$SetIndexImpl value, $Res Function(_$SetIndexImpl) then) =
+      __$$SetIndexImplCopyWithImpl<$Res>;
   @useResult
   $Res call({int index});
 }
 
 /// @nodoc
-class __$$_SetIndexCopyWithImpl<$Res>
-    extends _$IntroEventCopyWithImpl<$Res, _$_SetIndex>
-    implements _$$_SetIndexCopyWith<$Res> {
-  __$$_SetIndexCopyWithImpl(
-      _$_SetIndex _value, $Res Function(_$_SetIndex) _then)
+class __$$SetIndexImplCopyWithImpl<$Res>
+    extends _$IntroEventCopyWithImpl<$Res, _$SetIndexImpl>
+    implements _$$SetIndexImplCopyWith<$Res> {
+  __$$SetIndexImplCopyWithImpl(
+      _$SetIndexImpl _value, $Res Function(_$SetIndexImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -102,7 +102,7 @@ class __$$_SetIndexCopyWithImpl<$Res>
   $Res call({
     Object? index = null,
   }) {
-    return _then(_$_SetIndex(
+    return _then(_$SetIndexImpl(
       index: null == index
           ? _value.index
           : index // ignore: cast_nullable_to_non_nullable
@@ -113,8 +113,8 @@ class __$$_SetIndexCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_SetIndex implements _SetIndex {
-  const _$_SetIndex({required this.index});
+class _$SetIndexImpl implements _SetIndex {
+  const _$SetIndexImpl({required this.index});
 
   @override
   final int index;
@@ -125,10 +125,10 @@ class _$_SetIndex implements _SetIndex {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_SetIndex &&
+            other is _$SetIndexImpl &&
             (identical(other.index, index) || other.index == index));
   }
 
@@ -138,8 +138,8 @@ class _$_SetIndex implements _SetIndex {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_SetIndexCopyWith<_$_SetIndex> get copyWith =>
-      __$$_SetIndexCopyWithImpl<_$_SetIndex>(this, _$identity);
+  _$$SetIndexImplCopyWith<_$SetIndexImpl> get copyWith =>
+      __$$SetIndexImplCopyWithImpl<_$SetIndexImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -211,34 +211,34 @@ class _$_SetIndex implements _SetIndex {
 }
 
 abstract class _SetIndex implements IntroEvent {
-  const factory _SetIndex({required final int index}) = _$_SetIndex;
+  const factory _SetIndex({required final int index}) = _$SetIndexImpl;
 
   int get index;
   @JsonKey(ignore: true)
-  _$$_SetIndexCopyWith<_$_SetIndex> get copyWith =>
+  _$$SetIndexImplCopyWith<_$SetIndexImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_CheckAppFirstLaunchCopyWith<$Res> {
-  factory _$$_CheckAppFirstLaunchCopyWith(_$_CheckAppFirstLaunch value,
-          $Res Function(_$_CheckAppFirstLaunch) then) =
-      __$$_CheckAppFirstLaunchCopyWithImpl<$Res>;
+abstract class _$$CheckAppFirstLaunchImplCopyWith<$Res> {
+  factory _$$CheckAppFirstLaunchImplCopyWith(_$CheckAppFirstLaunchImpl value,
+          $Res Function(_$CheckAppFirstLaunchImpl) then) =
+      __$$CheckAppFirstLaunchImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_CheckAppFirstLaunchCopyWithImpl<$Res>
-    extends _$IntroEventCopyWithImpl<$Res, _$_CheckAppFirstLaunch>
-    implements _$$_CheckAppFirstLaunchCopyWith<$Res> {
-  __$$_CheckAppFirstLaunchCopyWithImpl(_$_CheckAppFirstLaunch _value,
-      $Res Function(_$_CheckAppFirstLaunch) _then)
+class __$$CheckAppFirstLaunchImplCopyWithImpl<$Res>
+    extends _$IntroEventCopyWithImpl<$Res, _$CheckAppFirstLaunchImpl>
+    implements _$$CheckAppFirstLaunchImplCopyWith<$Res> {
+  __$$CheckAppFirstLaunchImplCopyWithImpl(_$CheckAppFirstLaunchImpl _value,
+      $Res Function(_$CheckAppFirstLaunchImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_CheckAppFirstLaunch implements _CheckAppFirstLaunch {
-  const _$_CheckAppFirstLaunch();
+class _$CheckAppFirstLaunchImpl implements _CheckAppFirstLaunch {
+  const _$CheckAppFirstLaunchImpl();
 
   @override
   String toString() {
@@ -246,9 +246,10 @@ class _$_CheckAppFirstLaunch implements _CheckAppFirstLaunch {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_CheckAppFirstLaunch);
+        (other.runtimeType == runtimeType &&
+            other is _$CheckAppFirstLaunchImpl);
   }
 
   @override
@@ -324,29 +325,29 @@ class _$_CheckAppFirstLaunch implements _CheckAppFirstLaunch {
 }
 
 abstract class _CheckAppFirstLaunch implements IntroEvent {
-  const factory _CheckAppFirstLaunch() = _$_CheckAppFirstLaunch;
+  const factory _CheckAppFirstLaunch() = _$CheckAppFirstLaunchImpl;
 }
 
 /// @nodoc
-abstract class _$$_SetAppFirstLaunchCopyWith<$Res> {
-  factory _$$_SetAppFirstLaunchCopyWith(_$_SetAppFirstLaunch value,
-          $Res Function(_$_SetAppFirstLaunch) then) =
-      __$$_SetAppFirstLaunchCopyWithImpl<$Res>;
+abstract class _$$SetAppFirstLaunchImplCopyWith<$Res> {
+  factory _$$SetAppFirstLaunchImplCopyWith(_$SetAppFirstLaunchImpl value,
+          $Res Function(_$SetAppFirstLaunchImpl) then) =
+      __$$SetAppFirstLaunchImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_SetAppFirstLaunchCopyWithImpl<$Res>
-    extends _$IntroEventCopyWithImpl<$Res, _$_SetAppFirstLaunch>
-    implements _$$_SetAppFirstLaunchCopyWith<$Res> {
-  __$$_SetAppFirstLaunchCopyWithImpl(
-      _$_SetAppFirstLaunch _value, $Res Function(_$_SetAppFirstLaunch) _then)
+class __$$SetAppFirstLaunchImplCopyWithImpl<$Res>
+    extends _$IntroEventCopyWithImpl<$Res, _$SetAppFirstLaunchImpl>
+    implements _$$SetAppFirstLaunchImplCopyWith<$Res> {
+  __$$SetAppFirstLaunchImplCopyWithImpl(_$SetAppFirstLaunchImpl _value,
+      $Res Function(_$SetAppFirstLaunchImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_SetAppFirstLaunch implements _SetAppFirstLaunch {
-  const _$_SetAppFirstLaunch();
+class _$SetAppFirstLaunchImpl implements _SetAppFirstLaunch {
+  const _$SetAppFirstLaunchImpl();
 
   @override
   String toString() {
@@ -354,9 +355,9 @@ class _$_SetAppFirstLaunch implements _SetAppFirstLaunch {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_SetAppFirstLaunch);
+        (other.runtimeType == runtimeType && other is _$SetAppFirstLaunchImpl);
   }
 
   @override
@@ -432,7 +433,7 @@ class _$_SetAppFirstLaunch implements _SetAppFirstLaunch {
 }
 
 abstract class _SetAppFirstLaunch implements IntroEvent {
-  const factory _SetAppFirstLaunch() = _$_SetAppFirstLaunch;
+  const factory _SetAppFirstLaunch() = _$SetAppFirstLaunchImpl;
 }
 
 /// @nodoc
@@ -490,22 +491,22 @@ class _$IntroStateCopyWithImpl<$Res, $Val extends IntroState>
 }
 
 /// @nodoc
-abstract class _$$_IntroStateCopyWith<$Res>
+abstract class _$$IntroStateImplCopyWith<$Res>
     implements $IntroStateCopyWith<$Res> {
-  factory _$$_IntroStateCopyWith(
-          _$_IntroState value, $Res Function(_$_IntroState) then) =
-      __$$_IntroStateCopyWithImpl<$Res>;
+  factory _$$IntroStateImplCopyWith(
+          _$IntroStateImpl value, $Res Function(_$IntroStateImpl) then) =
+      __$$IntroStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({int index, bool isAppFirstLaunch, bool isLoading});
 }
 
 /// @nodoc
-class __$$_IntroStateCopyWithImpl<$Res>
-    extends _$IntroStateCopyWithImpl<$Res, _$_IntroState>
-    implements _$$_IntroStateCopyWith<$Res> {
-  __$$_IntroStateCopyWithImpl(
-      _$_IntroState _value, $Res Function(_$_IntroState) _then)
+class __$$IntroStateImplCopyWithImpl<$Res>
+    extends _$IntroStateCopyWithImpl<$Res, _$IntroStateImpl>
+    implements _$$IntroStateImplCopyWith<$Res> {
+  __$$IntroStateImplCopyWithImpl(
+      _$IntroStateImpl _value, $Res Function(_$IntroStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -515,7 +516,7 @@ class __$$_IntroStateCopyWithImpl<$Res>
     Object? isAppFirstLaunch = null,
     Object? isLoading = null,
   }) {
-    return _then(_$_IntroState(
+    return _then(_$IntroStateImpl(
       index: null == index
           ? _value.index
           : index // ignore: cast_nullable_to_non_nullable
@@ -534,8 +535,8 @@ class __$$_IntroStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_IntroState extends _IntroState {
-  const _$_IntroState(
+class _$IntroStateImpl extends _IntroState {
+  const _$IntroStateImpl(
       {required this.index,
       required this.isAppFirstLaunch,
       required this.isLoading})
@@ -554,10 +555,10 @@ class _$_IntroState extends _IntroState {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_IntroState &&
+            other is _$IntroStateImpl &&
             (identical(other.index, index) || other.index == index) &&
             (identical(other.isAppFirstLaunch, isAppFirstLaunch) ||
                 other.isAppFirstLaunch == isAppFirstLaunch) &&
@@ -572,15 +573,15 @@ class _$_IntroState extends _IntroState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_IntroStateCopyWith<_$_IntroState> get copyWith =>
-      __$$_IntroStateCopyWithImpl<_$_IntroState>(this, _$identity);
+  _$$IntroStateImplCopyWith<_$IntroStateImpl> get copyWith =>
+      __$$IntroStateImplCopyWithImpl<_$IntroStateImpl>(this, _$identity);
 }
 
 abstract class _IntroState extends IntroState {
   const factory _IntroState(
       {required final int index,
       required final bool isAppFirstLaunch,
-      required final bool isLoading}) = _$_IntroState;
+      required final bool isLoading}) = _$IntroStateImpl;
   const _IntroState._() : super._();
 
   @override
@@ -591,6 +592,6 @@ abstract class _IntroState extends IntroState {
   bool get isLoading;
   @override
   @JsonKey(ignore: true)
-  _$$_IntroStateCopyWith<_$_IntroState> get copyWith =>
+  _$$IntroStateImplCopyWith<_$IntroStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -12,7 +12,7 @@ part of 'submit_order_response_dto.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 SubmitOrderResponseDto _$SubmitOrderResponseDtoFromJson(
     Map<String, dynamic> json) {
@@ -86,11 +86,12 @@ class _$SubmitOrderResponseDtoCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_SubmitOrderResponseDtoCopyWith<$Res>
+abstract class _$$SubmitOrderResponseDtoImplCopyWith<$Res>
     implements $SubmitOrderResponseDtoCopyWith<$Res> {
-  factory _$$_SubmitOrderResponseDtoCopyWith(_$_SubmitOrderResponseDto value,
-          $Res Function(_$_SubmitOrderResponseDto) then) =
-      __$$_SubmitOrderResponseDtoCopyWithImpl<$Res>;
+  factory _$$SubmitOrderResponseDtoImplCopyWith(
+          _$SubmitOrderResponseDtoImpl value,
+          $Res Function(_$SubmitOrderResponseDtoImpl) then) =
+      __$$SubmitOrderResponseDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -103,12 +104,13 @@ abstract class _$$_SubmitOrderResponseDtoCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_SubmitOrderResponseDtoCopyWithImpl<$Res>
+class __$$SubmitOrderResponseDtoImplCopyWithImpl<$Res>
     extends _$SubmitOrderResponseDtoCopyWithImpl<$Res,
-        _$_SubmitOrderResponseDto>
-    implements _$$_SubmitOrderResponseDtoCopyWith<$Res> {
-  __$$_SubmitOrderResponseDtoCopyWithImpl(_$_SubmitOrderResponseDto _value,
-      $Res Function(_$_SubmitOrderResponseDto) _then)
+        _$SubmitOrderResponseDtoImpl>
+    implements _$$SubmitOrderResponseDtoImplCopyWith<$Res> {
+  __$$SubmitOrderResponseDtoImplCopyWithImpl(
+      _$SubmitOrderResponseDtoImpl _value,
+      $Res Function(_$SubmitOrderResponseDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -118,7 +120,7 @@ class __$$_SubmitOrderResponseDtoCopyWithImpl<$Res>
     Object? salesDocuments = null,
     Object? messages = null,
   }) {
-    return _then(_$_SubmitOrderResponseDto(
+    return _then(_$SubmitOrderResponseDtoImpl(
       salesDocument: null == salesDocument
           ? _value.salesDocument
           : salesDocument // ignore: cast_nullable_to_non_nullable
@@ -137,8 +139,8 @@ class __$$_SubmitOrderResponseDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_SubmitOrderResponseDto extends _SubmitOrderResponseDto {
-  const _$_SubmitOrderResponseDto(
+class _$SubmitOrderResponseDtoImpl extends _SubmitOrderResponseDto {
+  const _$SubmitOrderResponseDtoImpl(
       {@JsonKey(name: 'SalesDocument', defaultValue: '')
       required this.salesDocument,
       @JsonKey(name: 'SalesDocuments', defaultValue: <String>[])
@@ -150,8 +152,8 @@ class _$_SubmitOrderResponseDto extends _SubmitOrderResponseDto {
         _messages = messages,
         super._();
 
-  factory _$_SubmitOrderResponseDto.fromJson(Map<String, dynamic> json) =>
-      _$$_SubmitOrderResponseDtoFromJson(json);
+  factory _$SubmitOrderResponseDtoImpl.fromJson(Map<String, dynamic> json) =>
+      _$$SubmitOrderResponseDtoImplFromJson(json);
 
   @override
   @JsonKey(name: 'SalesDocument', defaultValue: '')
@@ -180,10 +182,10 @@ class _$_SubmitOrderResponseDto extends _SubmitOrderResponseDto {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_SubmitOrderResponseDto &&
+            other is _$SubmitOrderResponseDtoImpl &&
             (identical(other.salesDocument, salesDocument) ||
                 other.salesDocument == salesDocument) &&
             const DeepCollectionEquality()
@@ -202,13 +204,13 @@ class _$_SubmitOrderResponseDto extends _SubmitOrderResponseDto {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_SubmitOrderResponseDtoCopyWith<_$_SubmitOrderResponseDto> get copyWith =>
-      __$$_SubmitOrderResponseDtoCopyWithImpl<_$_SubmitOrderResponseDto>(
-          this, _$identity);
+  _$$SubmitOrderResponseDtoImplCopyWith<_$SubmitOrderResponseDtoImpl>
+      get copyWith => __$$SubmitOrderResponseDtoImplCopyWithImpl<
+          _$SubmitOrderResponseDtoImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_SubmitOrderResponseDtoToJson(
+    return _$$SubmitOrderResponseDtoImplToJson(
       this,
     );
   }
@@ -223,11 +225,11 @@ abstract class _SubmitOrderResponseDto extends SubmitOrderResponseDto {
           @JsonKey(
               name: 'Messages', defaultValue: <SubmitOrderResponseMessageDto>[])
           required final List<SubmitOrderResponseMessageDto> messages}) =
-      _$_SubmitOrderResponseDto;
+      _$SubmitOrderResponseDtoImpl;
   const _SubmitOrderResponseDto._() : super._();
 
   factory _SubmitOrderResponseDto.fromJson(Map<String, dynamic> json) =
-      _$_SubmitOrderResponseDto.fromJson;
+      _$SubmitOrderResponseDtoImpl.fromJson;
 
   @override
   @JsonKey(name: 'SalesDocument', defaultValue: '')
@@ -240,6 +242,6 @@ abstract class _SubmitOrderResponseDto extends SubmitOrderResponseDto {
   List<SubmitOrderResponseMessageDto> get messages;
   @override
   @JsonKey(ignore: true)
-  _$$_SubmitOrderResponseDtoCopyWith<_$_SubmitOrderResponseDto> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$SubmitOrderResponseDtoImplCopyWith<_$SubmitOrderResponseDtoImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }

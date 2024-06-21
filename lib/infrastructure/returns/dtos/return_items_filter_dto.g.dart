@@ -6,15 +6,15 @@ part of 'return_items_filter_dto.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_ReturnItemsFilterDto _$$_ReturnItemsFilterDtoFromJson(
+_$ReturnItemsFilterDtoImpl _$$ReturnItemsFilterDtoImplFromJson(
         Map<String, dynamic> json) =>
-    _$_ReturnItemsFilterDto(
+    _$ReturnItemsFilterDtoImpl(
       dateFrom: json['dateFrom'] as String? ?? '',
       dateTo: json['dateTo'] as String? ?? '',
     );
 
-Map<String, dynamic> _$$_ReturnItemsFilterDtoToJson(
-        _$_ReturnItemsFilterDto instance) =>
+Map<String, dynamic> _$$ReturnItemsFilterDtoImplToJson(
+        _$ReturnItemsFilterDtoImpl instance) =>
     <String, dynamic>{
       'dateFrom': instance.dateFrom,
       'dateTo': instance.dateTo,

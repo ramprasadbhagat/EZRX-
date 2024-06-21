@@ -12,7 +12,7 @@ part of 'usage_dto.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 UsageDto _$UsageDtoFromJson(Map<String, dynamic> json) {
   return _UsageDto.fromJson(json);
@@ -71,10 +71,11 @@ class _$UsageDtoCopyWithImpl<$Res, $Val extends UsageDto>
 }
 
 /// @nodoc
-abstract class _$$_UsageDtoCopyWith<$Res> implements $UsageDtoCopyWith<$Res> {
-  factory _$$_UsageDtoCopyWith(
-          _$_UsageDto value, $Res Function(_$_UsageDto) then) =
-      __$$_UsageDtoCopyWithImpl<$Res>;
+abstract class _$$UsageDtoImplCopyWith<$Res>
+    implements $UsageDtoCopyWith<$Res> {
+  factory _$$UsageDtoImplCopyWith(
+          _$UsageDtoImpl value, $Res Function(_$UsageDtoImpl) then) =
+      __$$UsageDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -83,11 +84,11 @@ abstract class _$$_UsageDtoCopyWith<$Res> implements $UsageDtoCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_UsageDtoCopyWithImpl<$Res>
-    extends _$UsageDtoCopyWithImpl<$Res, _$_UsageDto>
-    implements _$$_UsageDtoCopyWith<$Res> {
-  __$$_UsageDtoCopyWithImpl(
-      _$_UsageDto _value, $Res Function(_$_UsageDto) _then)
+class __$$UsageDtoImplCopyWithImpl<$Res>
+    extends _$UsageDtoCopyWithImpl<$Res, _$UsageDtoImpl>
+    implements _$$UsageDtoImplCopyWith<$Res> {
+  __$$UsageDtoImplCopyWithImpl(
+      _$UsageDtoImpl _value, $Res Function(_$UsageDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -96,7 +97,7 @@ class __$$_UsageDtoCopyWithImpl<$Res>
     Object? usageCode = null,
     Object? usageDescription = null,
   }) {
-    return _then(_$_UsageDto(
+    return _then(_$UsageDtoImpl(
       usageCode: null == usageCode
           ? _value.usageCode
           : usageCode // ignore: cast_nullable_to_non_nullable
@@ -111,14 +112,14 @@ class __$$_UsageDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_UsageDto extends _UsageDto {
-  const _$_UsageDto(
+class _$UsageDtoImpl extends _UsageDto {
+  const _$UsageDtoImpl(
       {@JsonKey(name: 'usageCode') required this.usageCode,
       @JsonKey(name: 'usageDescription') required this.usageDescription})
       : super._();
 
-  factory _$_UsageDto.fromJson(Map<String, dynamic> json) =>
-      _$$_UsageDtoFromJson(json);
+  factory _$UsageDtoImpl.fromJson(Map<String, dynamic> json) =>
+      _$$UsageDtoImplFromJson(json);
 
   @override
   @JsonKey(name: 'usageCode')
@@ -133,10 +134,10 @@ class _$_UsageDto extends _UsageDto {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_UsageDto &&
+            other is _$UsageDtoImpl &&
             (identical(other.usageCode, usageCode) ||
                 other.usageCode == usageCode) &&
             (identical(other.usageDescription, usageDescription) ||
@@ -150,12 +151,12 @@ class _$_UsageDto extends _UsageDto {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_UsageDtoCopyWith<_$_UsageDto> get copyWith =>
-      __$$_UsageDtoCopyWithImpl<_$_UsageDto>(this, _$identity);
+  _$$UsageDtoImplCopyWith<_$UsageDtoImpl> get copyWith =>
+      __$$UsageDtoImplCopyWithImpl<_$UsageDtoImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_UsageDtoToJson(
+    return _$$UsageDtoImplToJson(
       this,
     );
   }
@@ -165,10 +166,11 @@ abstract class _UsageDto extends UsageDto {
   const factory _UsageDto(
       {@JsonKey(name: 'usageCode') required final String usageCode,
       @JsonKey(name: 'usageDescription')
-      required final String usageDescription}) = _$_UsageDto;
+      required final String usageDescription}) = _$UsageDtoImpl;
   const _UsageDto._() : super._();
 
-  factory _UsageDto.fromJson(Map<String, dynamic> json) = _$_UsageDto.fromJson;
+  factory _UsageDto.fromJson(Map<String, dynamic> json) =
+      _$UsageDtoImpl.fromJson;
 
   @override
   @JsonKey(name: 'usageCode')
@@ -178,6 +180,6 @@ abstract class _UsageDto extends UsageDto {
   String get usageDescription;
   @override
   @JsonKey(ignore: true)
-  _$$_UsageDtoCopyWith<_$_UsageDto> get copyWith =>
+  _$$UsageDtoImplCopyWith<_$UsageDtoImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

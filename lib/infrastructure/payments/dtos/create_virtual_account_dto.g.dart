@@ -6,9 +6,9 @@ part of 'create_virtual_account_dto.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_CreateVirtualAccountDto _$$_CreateVirtualAccountDtoFromJson(
+_$CreateVirtualAccountDtoImpl _$$CreateVirtualAccountDtoImplFromJson(
         Map<String, dynamic> json) =>
-    _$_CreateVirtualAccountDto(
+    _$CreateVirtualAccountDtoImpl(
       id: json['id'] as String? ?? '',
       invoices: (json['invoices'] as List<dynamic>?)
               ?.map((e) =>
@@ -24,8 +24,8 @@ _$_CreateVirtualAccountDto _$$_CreateVirtualAccountDtoFromJson(
       paidOn: createdOnDate(json, 'paidOn') as String? ?? '',
     );
 
-Map<String, dynamic> _$$_CreateVirtualAccountDtoToJson(
-        _$_CreateVirtualAccountDto instance) =>
+Map<String, dynamic> _$$CreateVirtualAccountDtoImplToJson(
+        _$CreateVirtualAccountDtoImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'invoices': instance.invoices.map((e) => e.toJson()).toList(),

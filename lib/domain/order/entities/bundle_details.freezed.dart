@@ -12,7 +12,7 @@ part of 'bundle_details.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$BundleDetails {
@@ -72,11 +72,11 @@ class _$BundleDetailsCopyWithImpl<$Res, $Val extends BundleDetails>
 }
 
 /// @nodoc
-abstract class _$$_BundleDetailsCopyWith<$Res>
+abstract class _$$BundleDetailsImplCopyWith<$Res>
     implements $BundleDetailsCopyWith<$Res> {
-  factory _$$_BundleDetailsCopyWith(
-          _$_BundleDetails value, $Res Function(_$_BundleDetails) then) =
-      __$$_BundleDetailsCopyWithImpl<$Res>;
+  factory _$$BundleDetailsImplCopyWith(
+          _$BundleDetailsImpl value, $Res Function(_$BundleDetailsImpl) then) =
+      __$$BundleDetailsImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -86,11 +86,11 @@ abstract class _$$_BundleDetailsCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_BundleDetailsCopyWithImpl<$Res>
-    extends _$BundleDetailsCopyWithImpl<$Res, _$_BundleDetails>
-    implements _$$_BundleDetailsCopyWith<$Res> {
-  __$$_BundleDetailsCopyWithImpl(
-      _$_BundleDetails _value, $Res Function(_$_BundleDetails) _then)
+class __$$BundleDetailsImplCopyWithImpl<$Res>
+    extends _$BundleDetailsCopyWithImpl<$Res, _$BundleDetailsImpl>
+    implements _$$BundleDetailsImplCopyWith<$Res> {
+  __$$BundleDetailsImplCopyWithImpl(
+      _$BundleDetailsImpl _value, $Res Function(_$BundleDetailsImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -100,7 +100,7 @@ class __$$_BundleDetailsCopyWithImpl<$Res>
     Object? bundleCode = null,
     Object? bundleInformation = null,
   }) {
-    return _then(_$_BundleDetails(
+    return _then(_$BundleDetailsImpl(
       bundleName: null == bundleName
           ? _value.bundleName
           : bundleName // ignore: cast_nullable_to_non_nullable
@@ -119,8 +119,8 @@ class __$$_BundleDetailsCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_BundleDetails extends _BundleDetails {
-  const _$_BundleDetails(
+class _$BundleDetailsImpl extends _BundleDetails {
+  const _$BundleDetailsImpl(
       {required this.bundleName,
       required this.bundleCode,
       required final List<BundleInfo> bundleInformation})
@@ -146,10 +146,10 @@ class _$_BundleDetails extends _BundleDetails {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_BundleDetails &&
+            other is _$BundleDetailsImpl &&
             (identical(other.bundleName, bundleName) ||
                 other.bundleName == bundleName) &&
             (identical(other.bundleCode, bundleCode) ||
@@ -165,15 +165,15 @@ class _$_BundleDetails extends _BundleDetails {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_BundleDetailsCopyWith<_$_BundleDetails> get copyWith =>
-      __$$_BundleDetailsCopyWithImpl<_$_BundleDetails>(this, _$identity);
+  _$$BundleDetailsImplCopyWith<_$BundleDetailsImpl> get copyWith =>
+      __$$BundleDetailsImplCopyWithImpl<_$BundleDetailsImpl>(this, _$identity);
 }
 
 abstract class _BundleDetails extends BundleDetails {
   const factory _BundleDetails(
       {required final String bundleName,
       required final String bundleCode,
-      required final List<BundleInfo> bundleInformation}) = _$_BundleDetails;
+      required final List<BundleInfo> bundleInformation}) = _$BundleDetailsImpl;
   const _BundleDetails._() : super._();
 
   @override
@@ -184,6 +184,6 @@ abstract class _BundleDetails extends BundleDetails {
   List<BundleInfo> get bundleInformation;
   @override
   @JsonKey(ignore: true)
-  _$$_BundleDetailsCopyWith<_$_BundleDetails> get copyWith =>
+  _$$BundleDetailsImplCopyWith<_$BundleDetailsImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

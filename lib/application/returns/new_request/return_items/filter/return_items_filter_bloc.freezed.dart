@@ -12,7 +12,7 @@ part of 'return_items_filter_bloc.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$ReturnItemsFilterEvent {
@@ -84,25 +84,25 @@ class _$ReturnItemsFilterEventCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_InitializedCopyWith<$Res> {
-  factory _$$_InitializedCopyWith(
-          _$_Initialized value, $Res Function(_$_Initialized) then) =
-      __$$_InitializedCopyWithImpl<$Res>;
+abstract class _$$InitializedImplCopyWith<$Res> {
+  factory _$$InitializedImplCopyWith(
+          _$InitializedImpl value, $Res Function(_$InitializedImpl) then) =
+      __$$InitializedImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_InitializedCopyWithImpl<$Res>
-    extends _$ReturnItemsFilterEventCopyWithImpl<$Res, _$_Initialized>
-    implements _$$_InitializedCopyWith<$Res> {
-  __$$_InitializedCopyWithImpl(
-      _$_Initialized _value, $Res Function(_$_Initialized) _then)
+class __$$InitializedImplCopyWithImpl<$Res>
+    extends _$ReturnItemsFilterEventCopyWithImpl<$Res, _$InitializedImpl>
+    implements _$$InitializedImplCopyWith<$Res> {
+  __$$InitializedImplCopyWithImpl(
+      _$InitializedImpl _value, $Res Function(_$InitializedImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_Initialized implements _Initialized {
-  const _$_Initialized();
+class _$InitializedImpl implements _Initialized {
+  const _$InitializedImpl();
 
   @override
   String toString() {
@@ -110,9 +110,9 @@ class _$_Initialized implements _Initialized {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_Initialized);
+        (other.runtimeType == runtimeType && other is _$InitializedImpl);
   }
 
   @override
@@ -190,14 +190,15 @@ class _$_Initialized implements _Initialized {
 }
 
 abstract class _Initialized implements ReturnItemsFilterEvent {
-  const factory _Initialized() = _$_Initialized;
+  const factory _Initialized() = _$InitializedImpl;
 }
 
 /// @nodoc
-abstract class _$$_OpenFilterBottomSheetCopyWith<$Res> {
-  factory _$$_OpenFilterBottomSheetCopyWith(_$_OpenFilterBottomSheet value,
-          $Res Function(_$_OpenFilterBottomSheet) then) =
-      __$$_OpenFilterBottomSheetCopyWithImpl<$Res>;
+abstract class _$$OpenFilterBottomSheetImplCopyWith<$Res> {
+  factory _$$OpenFilterBottomSheetImplCopyWith(
+          _$OpenFilterBottomSheetImpl value,
+          $Res Function(_$OpenFilterBottomSheetImpl) then) =
+      __$$OpenFilterBottomSheetImplCopyWithImpl<$Res>;
   @useResult
   $Res call({ReturnItemsFilter appliedFilter});
 
@@ -205,11 +206,12 @@ abstract class _$$_OpenFilterBottomSheetCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_OpenFilterBottomSheetCopyWithImpl<$Res>
-    extends _$ReturnItemsFilterEventCopyWithImpl<$Res, _$_OpenFilterBottomSheet>
-    implements _$$_OpenFilterBottomSheetCopyWith<$Res> {
-  __$$_OpenFilterBottomSheetCopyWithImpl(_$_OpenFilterBottomSheet _value,
-      $Res Function(_$_OpenFilterBottomSheet) _then)
+class __$$OpenFilterBottomSheetImplCopyWithImpl<$Res>
+    extends _$ReturnItemsFilterEventCopyWithImpl<$Res,
+        _$OpenFilterBottomSheetImpl>
+    implements _$$OpenFilterBottomSheetImplCopyWith<$Res> {
+  __$$OpenFilterBottomSheetImplCopyWithImpl(_$OpenFilterBottomSheetImpl _value,
+      $Res Function(_$OpenFilterBottomSheetImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -217,7 +219,7 @@ class __$$_OpenFilterBottomSheetCopyWithImpl<$Res>
   $Res call({
     Object? appliedFilter = null,
   }) {
-    return _then(_$_OpenFilterBottomSheet(
+    return _then(_$OpenFilterBottomSheetImpl(
       appliedFilter: null == appliedFilter
           ? _value.appliedFilter
           : appliedFilter // ignore: cast_nullable_to_non_nullable
@@ -236,8 +238,8 @@ class __$$_OpenFilterBottomSheetCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_OpenFilterBottomSheet implements _OpenFilterBottomSheet {
-  const _$_OpenFilterBottomSheet({required this.appliedFilter});
+class _$OpenFilterBottomSheetImpl implements _OpenFilterBottomSheet {
+  const _$OpenFilterBottomSheetImpl({required this.appliedFilter});
 
   @override
   final ReturnItemsFilter appliedFilter;
@@ -248,10 +250,10 @@ class _$_OpenFilterBottomSheet implements _OpenFilterBottomSheet {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_OpenFilterBottomSheet &&
+            other is _$OpenFilterBottomSheetImpl &&
             (identical(other.appliedFilter, appliedFilter) ||
                 other.appliedFilter == appliedFilter));
   }
@@ -262,9 +264,9 @@ class _$_OpenFilterBottomSheet implements _OpenFilterBottomSheet {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_OpenFilterBottomSheetCopyWith<_$_OpenFilterBottomSheet> get copyWith =>
-      __$$_OpenFilterBottomSheetCopyWithImpl<_$_OpenFilterBottomSheet>(
-          this, _$identity);
+  _$$OpenFilterBottomSheetImplCopyWith<_$OpenFilterBottomSheetImpl>
+      get copyWith => __$$OpenFilterBottomSheetImplCopyWithImpl<
+          _$OpenFilterBottomSheetImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -340,29 +342,29 @@ class _$_OpenFilterBottomSheet implements _OpenFilterBottomSheet {
 abstract class _OpenFilterBottomSheet implements ReturnItemsFilterEvent {
   const factory _OpenFilterBottomSheet(
           {required final ReturnItemsFilter appliedFilter}) =
-      _$_OpenFilterBottomSheet;
+      _$OpenFilterBottomSheetImpl;
 
   ReturnItemsFilter get appliedFilter;
   @JsonKey(ignore: true)
-  _$$_OpenFilterBottomSheetCopyWith<_$_OpenFilterBottomSheet> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$OpenFilterBottomSheetImplCopyWith<_$OpenFilterBottomSheetImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_SetInvoiceDateCopyWith<$Res> {
-  factory _$$_SetInvoiceDateCopyWith(
-          _$_SetInvoiceDate value, $Res Function(_$_SetInvoiceDate) then) =
-      __$$_SetInvoiceDateCopyWithImpl<$Res>;
+abstract class _$$SetInvoiceDateImplCopyWith<$Res> {
+  factory _$$SetInvoiceDateImplCopyWith(_$SetInvoiceDateImpl value,
+          $Res Function(_$SetInvoiceDateImpl) then) =
+      __$$SetInvoiceDateImplCopyWithImpl<$Res>;
   @useResult
   $Res call({DateTimeRange dateRange});
 }
 
 /// @nodoc
-class __$$_SetInvoiceDateCopyWithImpl<$Res>
-    extends _$ReturnItemsFilterEventCopyWithImpl<$Res, _$_SetInvoiceDate>
-    implements _$$_SetInvoiceDateCopyWith<$Res> {
-  __$$_SetInvoiceDateCopyWithImpl(
-      _$_SetInvoiceDate _value, $Res Function(_$_SetInvoiceDate) _then)
+class __$$SetInvoiceDateImplCopyWithImpl<$Res>
+    extends _$ReturnItemsFilterEventCopyWithImpl<$Res, _$SetInvoiceDateImpl>
+    implements _$$SetInvoiceDateImplCopyWith<$Res> {
+  __$$SetInvoiceDateImplCopyWithImpl(
+      _$SetInvoiceDateImpl _value, $Res Function(_$SetInvoiceDateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -370,7 +372,7 @@ class __$$_SetInvoiceDateCopyWithImpl<$Res>
   $Res call({
     Object? dateRange = null,
   }) {
-    return _then(_$_SetInvoiceDate(
+    return _then(_$SetInvoiceDateImpl(
       null == dateRange
           ? _value.dateRange
           : dateRange // ignore: cast_nullable_to_non_nullable
@@ -381,8 +383,8 @@ class __$$_SetInvoiceDateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_SetInvoiceDate implements _SetInvoiceDate {
-  const _$_SetInvoiceDate(this.dateRange);
+class _$SetInvoiceDateImpl implements _SetInvoiceDate {
+  const _$SetInvoiceDateImpl(this.dateRange);
 
   @override
   final DateTimeRange dateRange;
@@ -393,10 +395,10 @@ class _$_SetInvoiceDate implements _SetInvoiceDate {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_SetInvoiceDate &&
+            other is _$SetInvoiceDateImpl &&
             (identical(other.dateRange, dateRange) ||
                 other.dateRange == dateRange));
   }
@@ -407,8 +409,9 @@ class _$_SetInvoiceDate implements _SetInvoiceDate {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_SetInvoiceDateCopyWith<_$_SetInvoiceDate> get copyWith =>
-      __$$_SetInvoiceDateCopyWithImpl<_$_SetInvoiceDate>(this, _$identity);
+  _$$SetInvoiceDateImplCopyWith<_$SetInvoiceDateImpl> get copyWith =>
+      __$$SetInvoiceDateImplCopyWithImpl<_$SetInvoiceDateImpl>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -483,11 +486,11 @@ class _$_SetInvoiceDate implements _SetInvoiceDate {
 
 abstract class _SetInvoiceDate implements ReturnItemsFilterEvent {
   const factory _SetInvoiceDate(final DateTimeRange dateRange) =
-      _$_SetInvoiceDate;
+      _$SetInvoiceDateImpl;
 
   DateTimeRange get dateRange;
   @JsonKey(ignore: true)
-  _$$_SetInvoiceDateCopyWith<_$_SetInvoiceDate> get copyWith =>
+  _$$SetInvoiceDateImplCopyWith<_$SetInvoiceDateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -545,11 +548,12 @@ class _$ReturnItemsFilterStateCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_ReturnItemsFilterStateCopyWith<$Res>
+abstract class _$$ReturnItemsFilterStateImplCopyWith<$Res>
     implements $ReturnItemsFilterStateCopyWith<$Res> {
-  factory _$$_ReturnItemsFilterStateCopyWith(_$_ReturnItemsFilterState value,
-          $Res Function(_$_ReturnItemsFilterState) then) =
-      __$$_ReturnItemsFilterStateCopyWithImpl<$Res>;
+  factory _$$ReturnItemsFilterStateImplCopyWith(
+          _$ReturnItemsFilterStateImpl value,
+          $Res Function(_$ReturnItemsFilterStateImpl) then) =
+      __$$ReturnItemsFilterStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({ReturnItemsFilter filter});
@@ -559,12 +563,13 @@ abstract class _$$_ReturnItemsFilterStateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_ReturnItemsFilterStateCopyWithImpl<$Res>
+class __$$ReturnItemsFilterStateImplCopyWithImpl<$Res>
     extends _$ReturnItemsFilterStateCopyWithImpl<$Res,
-        _$_ReturnItemsFilterState>
-    implements _$$_ReturnItemsFilterStateCopyWith<$Res> {
-  __$$_ReturnItemsFilterStateCopyWithImpl(_$_ReturnItemsFilterState _value,
-      $Res Function(_$_ReturnItemsFilterState) _then)
+        _$ReturnItemsFilterStateImpl>
+    implements _$$ReturnItemsFilterStateImplCopyWith<$Res> {
+  __$$ReturnItemsFilterStateImplCopyWithImpl(
+      _$ReturnItemsFilterStateImpl _value,
+      $Res Function(_$ReturnItemsFilterStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -572,7 +577,7 @@ class __$$_ReturnItemsFilterStateCopyWithImpl<$Res>
   $Res call({
     Object? filter = null,
   }) {
-    return _then(_$_ReturnItemsFilterState(
+    return _then(_$ReturnItemsFilterStateImpl(
       filter: null == filter
           ? _value.filter
           : filter // ignore: cast_nullable_to_non_nullable
@@ -583,8 +588,8 @@ class __$$_ReturnItemsFilterStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_ReturnItemsFilterState extends _ReturnItemsFilterState {
-  const _$_ReturnItemsFilterState({required this.filter}) : super._();
+class _$ReturnItemsFilterStateImpl extends _ReturnItemsFilterState {
+  const _$ReturnItemsFilterStateImpl({required this.filter}) : super._();
 
   @override
   final ReturnItemsFilter filter;
@@ -595,10 +600,10 @@ class _$_ReturnItemsFilterState extends _ReturnItemsFilterState {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ReturnItemsFilterState &&
+            other is _$ReturnItemsFilterStateImpl &&
             (identical(other.filter, filter) || other.filter == filter));
   }
 
@@ -608,20 +613,20 @@ class _$_ReturnItemsFilterState extends _ReturnItemsFilterState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ReturnItemsFilterStateCopyWith<_$_ReturnItemsFilterState> get copyWith =>
-      __$$_ReturnItemsFilterStateCopyWithImpl<_$_ReturnItemsFilterState>(
-          this, _$identity);
+  _$$ReturnItemsFilterStateImplCopyWith<_$ReturnItemsFilterStateImpl>
+      get copyWith => __$$ReturnItemsFilterStateImplCopyWithImpl<
+          _$ReturnItemsFilterStateImpl>(this, _$identity);
 }
 
 abstract class _ReturnItemsFilterState extends ReturnItemsFilterState {
   const factory _ReturnItemsFilterState(
-      {required final ReturnItemsFilter filter}) = _$_ReturnItemsFilterState;
+      {required final ReturnItemsFilter filter}) = _$ReturnItemsFilterStateImpl;
   const _ReturnItemsFilterState._() : super._();
 
   @override
   ReturnItemsFilter get filter;
   @override
   @JsonKey(ignore: true)
-  _$$_ReturnItemsFilterStateCopyWith<_$_ReturnItemsFilterState> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$ReturnItemsFilterStateImplCopyWith<_$ReturnItemsFilterStateImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }

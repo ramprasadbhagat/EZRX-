@@ -12,7 +12,7 @@ part of 'customer_code_information_dto.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 CustomerInformationDTO _$CustomerInformationDTOFromJson(
     Map<String, dynamic> json) {
@@ -76,11 +76,12 @@ class _$CustomerInformationDTOCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_CustomerInformationDTOCopyWith<$Res>
+abstract class _$$CustomerInformationDTOImplCopyWith<$Res>
     implements $CustomerInformationDTOCopyWith<$Res> {
-  factory _$$_CustomerInformationDTOCopyWith(_$_CustomerInformationDTO value,
-          $Res Function(_$_CustomerInformationDTO) then) =
-      __$$_CustomerInformationDTOCopyWithImpl<$Res>;
+  factory _$$CustomerInformationDTOImplCopyWith(
+          _$CustomerInformationDTOImpl value,
+          $Res Function(_$CustomerInformationDTOImpl) then) =
+      __$$CustomerInformationDTOImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -90,12 +91,13 @@ abstract class _$$_CustomerInformationDTOCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_CustomerInformationDTOCopyWithImpl<$Res>
+class __$$CustomerInformationDTOImplCopyWithImpl<$Res>
     extends _$CustomerInformationDTOCopyWithImpl<$Res,
-        _$_CustomerInformationDTO>
-    implements _$$_CustomerInformationDTOCopyWith<$Res> {
-  __$$_CustomerInformationDTOCopyWithImpl(_$_CustomerInformationDTO _value,
-      $Res Function(_$_CustomerInformationDTO) _then)
+        _$CustomerInformationDTOImpl>
+    implements _$$CustomerInformationDTOImplCopyWith<$Res> {
+  __$$CustomerInformationDTOImplCopyWithImpl(
+      _$CustomerInformationDTOImpl _value,
+      $Res Function(_$CustomerInformationDTOImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -104,7 +106,7 @@ class __$$_CustomerInformationDTOCopyWithImpl<$Res>
     Object? shipToCount = null,
     Object? soldToInformation = null,
   }) {
-    return _then(_$_CustomerInformationDTO(
+    return _then(_$CustomerInformationDTOImpl(
       shipToCount: null == shipToCount
           ? _value.shipToCount
           : shipToCount // ignore: cast_nullable_to_non_nullable
@@ -119,16 +121,16 @@ class __$$_CustomerInformationDTOCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_CustomerInformationDTO extends _CustomerInformationDTO {
-  const _$_CustomerInformationDTO(
+class _$CustomerInformationDTOImpl extends _CustomerInformationDTO {
+  const _$CustomerInformationDTOImpl(
       {@JsonKey(name: 'shipToCount', defaultValue: 0) required this.shipToCount,
       @JsonKey(name: 'SoldToInformation', defaultValue: [])
       required final List<CustomerCodeDto> soldToInformation})
       : _soldToInformation = soldToInformation,
         super._();
 
-  factory _$_CustomerInformationDTO.fromJson(Map<String, dynamic> json) =>
-      _$$_CustomerInformationDTOFromJson(json);
+  factory _$CustomerInformationDTOImpl.fromJson(Map<String, dynamic> json) =>
+      _$$CustomerInformationDTOImplFromJson(json);
 
   @override
   @JsonKey(name: 'shipToCount', defaultValue: 0)
@@ -149,10 +151,10 @@ class _$_CustomerInformationDTO extends _CustomerInformationDTO {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_CustomerInformationDTO &&
+            other is _$CustomerInformationDTOImpl &&
             (identical(other.shipToCount, shipToCount) ||
                 other.shipToCount == shipToCount) &&
             const DeepCollectionEquality()
@@ -167,13 +169,13 @@ class _$_CustomerInformationDTO extends _CustomerInformationDTO {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_CustomerInformationDTOCopyWith<_$_CustomerInformationDTO> get copyWith =>
-      __$$_CustomerInformationDTOCopyWithImpl<_$_CustomerInformationDTO>(
-          this, _$identity);
+  _$$CustomerInformationDTOImplCopyWith<_$CustomerInformationDTOImpl>
+      get copyWith => __$$CustomerInformationDTOImplCopyWithImpl<
+          _$CustomerInformationDTOImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_CustomerInformationDTOToJson(
+    return _$$CustomerInformationDTOImplToJson(
       this,
     );
   }
@@ -185,11 +187,11 @@ abstract class _CustomerInformationDTO extends CustomerInformationDTO {
           required final int shipToCount,
           @JsonKey(name: 'SoldToInformation', defaultValue: [])
           required final List<CustomerCodeDto> soldToInformation}) =
-      _$_CustomerInformationDTO;
+      _$CustomerInformationDTOImpl;
   const _CustomerInformationDTO._() : super._();
 
   factory _CustomerInformationDTO.fromJson(Map<String, dynamic> json) =
-      _$_CustomerInformationDTO.fromJson;
+      _$CustomerInformationDTOImpl.fromJson;
 
   @override
   @JsonKey(name: 'shipToCount', defaultValue: 0)
@@ -199,6 +201,6 @@ abstract class _CustomerInformationDTO extends CustomerInformationDTO {
   List<CustomerCodeDto> get soldToInformation;
   @override
   @JsonKey(ignore: true)
-  _$$_CustomerInformationDTOCopyWith<_$_CustomerInformationDTO> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$CustomerInformationDTOImplCopyWith<_$CustomerInformationDTOImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }

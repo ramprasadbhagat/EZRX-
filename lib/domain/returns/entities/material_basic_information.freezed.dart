@@ -12,7 +12,7 @@ part of 'material_basic_information.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$MaterialBasicInformation {
@@ -70,24 +70,25 @@ class _$MaterialBasicInformationCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_MaterialBasicInformationCopyWith<$Res>
+abstract class _$$MaterialBasicInformationImplCopyWith<$Res>
     implements $MaterialBasicInformationCopyWith<$Res> {
-  factory _$$_MaterialBasicInformationCopyWith(
-          _$_MaterialBasicInformation value,
-          $Res Function(_$_MaterialBasicInformation) then) =
-      __$$_MaterialBasicInformationCopyWithImpl<$Res>;
+  factory _$$MaterialBasicInformationImplCopyWith(
+          _$MaterialBasicInformationImpl value,
+          $Res Function(_$MaterialBasicInformationImpl) then) =
+      __$$MaterialBasicInformationImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({SalesOrg salesOrg, String partnerRole, String partnerNumber});
 }
 
 /// @nodoc
-class __$$_MaterialBasicInformationCopyWithImpl<$Res>
+class __$$MaterialBasicInformationImplCopyWithImpl<$Res>
     extends _$MaterialBasicInformationCopyWithImpl<$Res,
-        _$_MaterialBasicInformation>
-    implements _$$_MaterialBasicInformationCopyWith<$Res> {
-  __$$_MaterialBasicInformationCopyWithImpl(_$_MaterialBasicInformation _value,
-      $Res Function(_$_MaterialBasicInformation) _then)
+        _$MaterialBasicInformationImpl>
+    implements _$$MaterialBasicInformationImplCopyWith<$Res> {
+  __$$MaterialBasicInformationImplCopyWithImpl(
+      _$MaterialBasicInformationImpl _value,
+      $Res Function(_$MaterialBasicInformationImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -97,7 +98,7 @@ class __$$_MaterialBasicInformationCopyWithImpl<$Res>
     Object? partnerRole = null,
     Object? partnerNumber = null,
   }) {
-    return _then(_$_MaterialBasicInformation(
+    return _then(_$MaterialBasicInformationImpl(
       salesOrg: null == salesOrg
           ? _value.salesOrg
           : salesOrg // ignore: cast_nullable_to_non_nullable
@@ -116,8 +117,8 @@ class __$$_MaterialBasicInformationCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_MaterialBasicInformation extends _MaterialBasicInformation {
-  const _$_MaterialBasicInformation(
+class _$MaterialBasicInformationImpl extends _MaterialBasicInformation {
+  const _$MaterialBasicInformationImpl(
       {required this.salesOrg,
       required this.partnerRole,
       required this.partnerNumber})
@@ -136,10 +137,10 @@ class _$_MaterialBasicInformation extends _MaterialBasicInformation {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_MaterialBasicInformation &&
+            other is _$MaterialBasicInformationImpl &&
             (identical(other.salesOrg, salesOrg) ||
                 other.salesOrg == salesOrg) &&
             (identical(other.partnerRole, partnerRole) ||
@@ -155,16 +156,16 @@ class _$_MaterialBasicInformation extends _MaterialBasicInformation {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_MaterialBasicInformationCopyWith<_$_MaterialBasicInformation>
-      get copyWith => __$$_MaterialBasicInformationCopyWithImpl<
-          _$_MaterialBasicInformation>(this, _$identity);
+  _$$MaterialBasicInformationImplCopyWith<_$MaterialBasicInformationImpl>
+      get copyWith => __$$MaterialBasicInformationImplCopyWithImpl<
+          _$MaterialBasicInformationImpl>(this, _$identity);
 }
 
 abstract class _MaterialBasicInformation extends MaterialBasicInformation {
   const factory _MaterialBasicInformation(
       {required final SalesOrg salesOrg,
       required final String partnerRole,
-      required final String partnerNumber}) = _$_MaterialBasicInformation;
+      required final String partnerNumber}) = _$MaterialBasicInformationImpl;
   const _MaterialBasicInformation._() : super._();
 
   @override
@@ -175,6 +176,6 @@ abstract class _MaterialBasicInformation extends MaterialBasicInformation {
   String get partnerNumber;
   @override
   @JsonKey(ignore: true)
-  _$$_MaterialBasicInformationCopyWith<_$_MaterialBasicInformation>
+  _$$MaterialBasicInformationImplCopyWith<_$MaterialBasicInformationImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

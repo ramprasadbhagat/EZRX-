@@ -12,7 +12,7 @@ part of 'order_exception.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$OrderException {
@@ -86,25 +86,27 @@ class _$OrderExceptionCopyWithImpl<$Res, $Val extends OrderException>
 }
 
 /// @nodoc
-abstract class _$$_SubmitOrderDataIsEmptyCopyWith<$Res> {
-  factory _$$_SubmitOrderDataIsEmptyCopyWith(_$_SubmitOrderDataIsEmpty value,
-          $Res Function(_$_SubmitOrderDataIsEmpty) then) =
-      __$$_SubmitOrderDataIsEmptyCopyWithImpl<$Res>;
+abstract class _$$SubmitOrderDataIsEmptyImplCopyWith<$Res> {
+  factory _$$SubmitOrderDataIsEmptyImplCopyWith(
+          _$SubmitOrderDataIsEmptyImpl value,
+          $Res Function(_$SubmitOrderDataIsEmptyImpl) then) =
+      __$$SubmitOrderDataIsEmptyImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_SubmitOrderDataIsEmptyCopyWithImpl<$Res>
-    extends _$OrderExceptionCopyWithImpl<$Res, _$_SubmitOrderDataIsEmpty>
-    implements _$$_SubmitOrderDataIsEmptyCopyWith<$Res> {
-  __$$_SubmitOrderDataIsEmptyCopyWithImpl(_$_SubmitOrderDataIsEmpty _value,
-      $Res Function(_$_SubmitOrderDataIsEmpty) _then)
+class __$$SubmitOrderDataIsEmptyImplCopyWithImpl<$Res>
+    extends _$OrderExceptionCopyWithImpl<$Res, _$SubmitOrderDataIsEmptyImpl>
+    implements _$$SubmitOrderDataIsEmptyImplCopyWith<$Res> {
+  __$$SubmitOrderDataIsEmptyImplCopyWithImpl(
+      _$SubmitOrderDataIsEmptyImpl _value,
+      $Res Function(_$SubmitOrderDataIsEmptyImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_SubmitOrderDataIsEmpty implements _SubmitOrderDataIsEmpty {
-  const _$_SubmitOrderDataIsEmpty();
+class _$SubmitOrderDataIsEmptyImpl implements _SubmitOrderDataIsEmpty {
+  const _$SubmitOrderDataIsEmptyImpl();
 
   @override
   String toString() {
@@ -112,10 +114,10 @@ class _$_SubmitOrderDataIsEmpty implements _SubmitOrderDataIsEmpty {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_SubmitOrderDataIsEmpty);
+            other is _$SubmitOrderDataIsEmptyImpl);
   }
 
   @override
@@ -196,29 +198,31 @@ class _$_SubmitOrderDataIsEmpty implements _SubmitOrderDataIsEmpty {
 }
 
 abstract class _SubmitOrderDataIsEmpty implements OrderException {
-  const factory _SubmitOrderDataIsEmpty() = _$_SubmitOrderDataIsEmpty;
+  const factory _SubmitOrderDataIsEmpty() = _$SubmitOrderDataIsEmptyImpl;
 }
 
 /// @nodoc
-abstract class _$$_DraftOrdersDataIsEmptyCopyWith<$Res> {
-  factory _$$_DraftOrdersDataIsEmptyCopyWith(_$_DraftOrdersDataIsEmpty value,
-          $Res Function(_$_DraftOrdersDataIsEmpty) then) =
-      __$$_DraftOrdersDataIsEmptyCopyWithImpl<$Res>;
+abstract class _$$DraftOrdersDataIsEmptyImplCopyWith<$Res> {
+  factory _$$DraftOrdersDataIsEmptyImplCopyWith(
+          _$DraftOrdersDataIsEmptyImpl value,
+          $Res Function(_$DraftOrdersDataIsEmptyImpl) then) =
+      __$$DraftOrdersDataIsEmptyImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_DraftOrdersDataIsEmptyCopyWithImpl<$Res>
-    extends _$OrderExceptionCopyWithImpl<$Res, _$_DraftOrdersDataIsEmpty>
-    implements _$$_DraftOrdersDataIsEmptyCopyWith<$Res> {
-  __$$_DraftOrdersDataIsEmptyCopyWithImpl(_$_DraftOrdersDataIsEmpty _value,
-      $Res Function(_$_DraftOrdersDataIsEmpty) _then)
+class __$$DraftOrdersDataIsEmptyImplCopyWithImpl<$Res>
+    extends _$OrderExceptionCopyWithImpl<$Res, _$DraftOrdersDataIsEmptyImpl>
+    implements _$$DraftOrdersDataIsEmptyImplCopyWith<$Res> {
+  __$$DraftOrdersDataIsEmptyImplCopyWithImpl(
+      _$DraftOrdersDataIsEmptyImpl _value,
+      $Res Function(_$DraftOrdersDataIsEmptyImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_DraftOrdersDataIsEmpty implements _DraftOrdersDataIsEmpty {
-  const _$_DraftOrdersDataIsEmpty();
+class _$DraftOrdersDataIsEmptyImpl implements _DraftOrdersDataIsEmpty {
+  const _$DraftOrdersDataIsEmptyImpl();
 
   @override
   String toString() {
@@ -226,10 +230,10 @@ class _$_DraftOrdersDataIsEmpty implements _DraftOrdersDataIsEmpty {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_DraftOrdersDataIsEmpty);
+            other is _$DraftOrdersDataIsEmptyImpl);
   }
 
   @override
@@ -310,33 +314,33 @@ class _$_DraftOrdersDataIsEmpty implements _DraftOrdersDataIsEmpty {
 }
 
 abstract class _DraftOrdersDataIsEmpty implements OrderException {
-  const factory _DraftOrdersDataIsEmpty() = _$_DraftOrdersDataIsEmpty;
+  const factory _DraftOrdersDataIsEmpty() = _$DraftOrdersDataIsEmptyImpl;
 }
 
 /// @nodoc
-abstract class _$$_DraftOrdersInCreateDraftOrderDataIsEmptyCopyWith<$Res> {
-  factory _$$_DraftOrdersInCreateDraftOrderDataIsEmptyCopyWith(
-          _$_DraftOrdersInCreateDraftOrderDataIsEmpty value,
-          $Res Function(_$_DraftOrdersInCreateDraftOrderDataIsEmpty) then) =
-      __$$_DraftOrdersInCreateDraftOrderDataIsEmptyCopyWithImpl<$Res>;
+abstract class _$$DraftOrdersInCreateDraftOrderDataIsEmptyImplCopyWith<$Res> {
+  factory _$$DraftOrdersInCreateDraftOrderDataIsEmptyImplCopyWith(
+          _$DraftOrdersInCreateDraftOrderDataIsEmptyImpl value,
+          $Res Function(_$DraftOrdersInCreateDraftOrderDataIsEmptyImpl) then) =
+      __$$DraftOrdersInCreateDraftOrderDataIsEmptyImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_DraftOrdersInCreateDraftOrderDataIsEmptyCopyWithImpl<$Res>
+class __$$DraftOrdersInCreateDraftOrderDataIsEmptyImplCopyWithImpl<$Res>
     extends _$OrderExceptionCopyWithImpl<$Res,
-        _$_DraftOrdersInCreateDraftOrderDataIsEmpty>
-    implements _$$_DraftOrdersInCreateDraftOrderDataIsEmptyCopyWith<$Res> {
-  __$$_DraftOrdersInCreateDraftOrderDataIsEmptyCopyWithImpl(
-      _$_DraftOrdersInCreateDraftOrderDataIsEmpty _value,
-      $Res Function(_$_DraftOrdersInCreateDraftOrderDataIsEmpty) _then)
+        _$DraftOrdersInCreateDraftOrderDataIsEmptyImpl>
+    implements _$$DraftOrdersInCreateDraftOrderDataIsEmptyImplCopyWith<$Res> {
+  __$$DraftOrdersInCreateDraftOrderDataIsEmptyImplCopyWithImpl(
+      _$DraftOrdersInCreateDraftOrderDataIsEmptyImpl _value,
+      $Res Function(_$DraftOrdersInCreateDraftOrderDataIsEmptyImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_DraftOrdersInCreateDraftOrderDataIsEmpty
+class _$DraftOrdersInCreateDraftOrderDataIsEmptyImpl
     implements _DraftOrdersInCreateDraftOrderDataIsEmpty {
-  const _$_DraftOrdersInCreateDraftOrderDataIsEmpty();
+  const _$DraftOrdersInCreateDraftOrderDataIsEmptyImpl();
 
   @override
   String toString() {
@@ -344,10 +348,10 @@ class _$_DraftOrdersInCreateDraftOrderDataIsEmpty
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_DraftOrdersInCreateDraftOrderDataIsEmpty);
+            other is _$DraftOrdersInCreateDraftOrderDataIsEmptyImpl);
   }
 
   @override
@@ -430,5 +434,5 @@ class _$_DraftOrdersInCreateDraftOrderDataIsEmpty
 abstract class _DraftOrdersInCreateDraftOrderDataIsEmpty
     implements OrderException {
   const factory _DraftOrdersInCreateDraftOrderDataIsEmpty() =
-      _$_DraftOrdersInCreateDraftOrderDataIsEmpty;
+      _$DraftOrdersInCreateDraftOrderDataIsEmptyImpl;
 }

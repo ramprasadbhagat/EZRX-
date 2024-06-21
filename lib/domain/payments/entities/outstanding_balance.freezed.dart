@@ -12,7 +12,7 @@ part of 'outstanding_balance.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$OutstandingBalance {
@@ -86,11 +86,11 @@ class _$OutstandingBalanceCopyWithImpl<$Res, $Val extends OutstandingBalance>
 }
 
 /// @nodoc
-abstract class _$$_OutstandingBalanceCopyWith<$Res>
+abstract class _$$OutstandingBalanceImplCopyWith<$Res>
     implements $OutstandingBalanceCopyWith<$Res> {
-  factory _$$_OutstandingBalanceCopyWith(_$_OutstandingBalance value,
-          $Res Function(_$_OutstandingBalance) then) =
-      __$$_OutstandingBalanceCopyWithImpl<$Res>;
+  factory _$$OutstandingBalanceImplCopyWith(_$OutstandingBalanceImpl value,
+          $Res Function(_$OutstandingBalanceImpl) then) =
+      __$$OutstandingBalanceImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -102,11 +102,11 @@ abstract class _$$_OutstandingBalanceCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_OutstandingBalanceCopyWithImpl<$Res>
-    extends _$OutstandingBalanceCopyWithImpl<$Res, _$_OutstandingBalance>
-    implements _$$_OutstandingBalanceCopyWith<$Res> {
-  __$$_OutstandingBalanceCopyWithImpl(
-      _$_OutstandingBalance _value, $Res Function(_$_OutstandingBalance) _then)
+class __$$OutstandingBalanceImplCopyWithImpl<$Res>
+    extends _$OutstandingBalanceCopyWithImpl<$Res, _$OutstandingBalanceImpl>
+    implements _$$OutstandingBalanceImplCopyWith<$Res> {
+  __$$OutstandingBalanceImplCopyWithImpl(_$OutstandingBalanceImpl _value,
+      $Res Function(_$OutstandingBalanceImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -118,7 +118,7 @@ class __$$_OutstandingBalanceCopyWithImpl<$Res>
     Object? overdue = null,
     Object? checkDate = null,
   }) {
-    return _then(_$_OutstandingBalance(
+    return _then(_$OutstandingBalanceImpl(
       customerCode: null == customerCode
           ? _value.customerCode
           : customerCode // ignore: cast_nullable_to_non_nullable
@@ -145,8 +145,8 @@ class __$$_OutstandingBalanceCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_OutstandingBalance extends _OutstandingBalance {
-  const _$_OutstandingBalance(
+class _$OutstandingBalanceImpl extends _OutstandingBalance {
+  const _$OutstandingBalanceImpl(
       {required this.customerCode,
       required this.currency,
       required this.amount,
@@ -171,10 +171,10 @@ class _$_OutstandingBalance extends _OutstandingBalance {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_OutstandingBalance &&
+            other is _$OutstandingBalanceImpl &&
             (identical(other.customerCode, customerCode) ||
                 other.customerCode == customerCode) &&
             (identical(other.currency, currency) ||
@@ -192,8 +192,8 @@ class _$_OutstandingBalance extends _OutstandingBalance {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_OutstandingBalanceCopyWith<_$_OutstandingBalance> get copyWith =>
-      __$$_OutstandingBalanceCopyWithImpl<_$_OutstandingBalance>(
+  _$$OutstandingBalanceImplCopyWith<_$OutstandingBalanceImpl> get copyWith =>
+      __$$OutstandingBalanceImplCopyWithImpl<_$OutstandingBalanceImpl>(
           this, _$identity);
 }
 
@@ -203,7 +203,7 @@ abstract class _OutstandingBalance extends OutstandingBalance {
       required final Currency currency,
       required final StringValue amount,
       required final StringValue overdue,
-      required final String checkDate}) = _$_OutstandingBalance;
+      required final String checkDate}) = _$OutstandingBalanceImpl;
   const _OutstandingBalance._() : super._();
 
   @override
@@ -218,6 +218,6 @@ abstract class _OutstandingBalance extends OutstandingBalance {
   String get checkDate;
   @override
   @JsonKey(ignore: true)
-  _$$_OutstandingBalanceCopyWith<_$_OutstandingBalance> get copyWith =>
+  _$$OutstandingBalanceImplCopyWith<_$OutstandingBalanceImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

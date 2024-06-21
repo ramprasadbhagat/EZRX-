@@ -12,7 +12,7 @@ part of 'admin_po_attachment.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$AdminPoAttachment {
@@ -128,11 +128,11 @@ class _$AdminPoAttachmentCopyWithImpl<$Res, $Val extends AdminPoAttachment>
 }
 
 /// @nodoc
-abstract class _$$_AdminPoAttachmentCopyWith<$Res>
+abstract class _$$AdminPoAttachmentImplCopyWith<$Res>
     implements $AdminPoAttachmentCopyWith<$Res> {
-  factory _$$_AdminPoAttachmentCopyWith(_$_AdminPoAttachment value,
-          $Res Function(_$_AdminPoAttachment) then) =
-      __$$_AdminPoAttachmentCopyWithImpl<$Res>;
+  factory _$$AdminPoAttachmentImplCopyWith(_$AdminPoAttachmentImpl value,
+          $Res Function(_$AdminPoAttachmentImpl) then) =
+      __$$AdminPoAttachmentImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -150,11 +150,11 @@ abstract class _$$_AdminPoAttachmentCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_AdminPoAttachmentCopyWithImpl<$Res>
-    extends _$AdminPoAttachmentCopyWithImpl<$Res, _$_AdminPoAttachment>
-    implements _$$_AdminPoAttachmentCopyWith<$Res> {
-  __$$_AdminPoAttachmentCopyWithImpl(
-      _$_AdminPoAttachment _value, $Res Function(_$_AdminPoAttachment) _then)
+class __$$AdminPoAttachmentImplCopyWithImpl<$Res>
+    extends _$AdminPoAttachmentCopyWithImpl<$Res, _$AdminPoAttachmentImpl>
+    implements _$$AdminPoAttachmentImplCopyWith<$Res> {
+  __$$AdminPoAttachmentImplCopyWithImpl(_$AdminPoAttachmentImpl _value,
+      $Res Function(_$AdminPoAttachmentImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -172,7 +172,7 @@ class __$$_AdminPoAttachmentCopyWithImpl<$Res>
     Object? tempOrderNumber = null,
     Object? isSelected = null,
   }) {
-    return _then(_$_AdminPoAttachment(
+    return _then(_$AdminPoAttachmentImpl(
       salesOrderNumber: null == salesOrderNumber
           ? _value.salesOrderNumber
           : salesOrderNumber // ignore: cast_nullable_to_non_nullable
@@ -223,8 +223,8 @@ class __$$_AdminPoAttachmentCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_AdminPoAttachment extends _AdminPoAttachment {
-  _$_AdminPoAttachment(
+class _$AdminPoAttachmentImpl extends _AdminPoAttachment {
+  _$AdminPoAttachmentImpl(
       {required this.salesOrderNumber,
       required this.ezrxReferenceNumber,
       required this.createdBy,
@@ -268,10 +268,10 @@ class _$_AdminPoAttachment extends _AdminPoAttachment {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_AdminPoAttachment &&
+            other is _$AdminPoAttachmentImpl &&
             (identical(other.salesOrderNumber, salesOrderNumber) ||
                 other.salesOrderNumber == salesOrderNumber) &&
             (identical(other.ezrxReferenceNumber, ezrxReferenceNumber) ||
@@ -314,8 +314,8 @@ class _$_AdminPoAttachment extends _AdminPoAttachment {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_AdminPoAttachmentCopyWith<_$_AdminPoAttachment> get copyWith =>
-      __$$_AdminPoAttachmentCopyWithImpl<_$_AdminPoAttachment>(
+  _$$AdminPoAttachmentImplCopyWith<_$AdminPoAttachmentImpl> get copyWith =>
+      __$$AdminPoAttachmentImplCopyWithImpl<_$AdminPoAttachmentImpl>(
           this, _$identity);
 }
 
@@ -331,7 +331,7 @@ abstract class _AdminPoAttachment extends AdminPoAttachment {
       required final String soldToCode,
       required final String shipToCode,
       required final String tempOrderNumber,
-      final bool isSelected}) = _$_AdminPoAttachment;
+      final bool isSelected}) = _$AdminPoAttachmentImpl;
   _AdminPoAttachment._() : super._();
 
   @override
@@ -358,6 +358,6 @@ abstract class _AdminPoAttachment extends AdminPoAttachment {
   bool get isSelected;
   @override
   @JsonKey(ignore: true)
-  _$$_AdminPoAttachmentCopyWith<_$_AdminPoAttachment> get copyWith =>
+  _$$AdminPoAttachmentImplCopyWith<_$AdminPoAttachmentImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

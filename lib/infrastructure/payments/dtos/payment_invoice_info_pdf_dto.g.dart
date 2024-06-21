@@ -6,9 +6,9 @@ part of 'payment_invoice_info_pdf_dto.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_PaymentInvoiceInfoPdfDto _$$_PaymentInvoiceInfoPdfDtoFromJson(
+_$PaymentInvoiceInfoPdfDtoImpl _$$PaymentInvoiceInfoPdfDtoImplFromJson(
         Map<String, dynamic> json) =>
-    _$_PaymentInvoiceInfoPdfDto(
+    _$PaymentInvoiceInfoPdfDtoImpl(
       valueDate: json['valueDate'] as String? ?? '',
       paymentID: json['paymentID'] as String? ?? '',
       zzAdvice: json['zzAdvice'] as String? ?? '',
@@ -35,8 +35,8 @@ _$_PaymentInvoiceInfoPdfDto _$$_PaymentInvoiceInfoPdfDtoFromJson(
       header: json['header'] as String? ?? '',
     );
 
-Map<String, dynamic> _$$_PaymentInvoiceInfoPdfDtoToJson(
-        _$_PaymentInvoiceInfoPdfDto instance) =>
+Map<String, dynamic> _$$PaymentInvoiceInfoPdfDtoImplToJson(
+        _$PaymentInvoiceInfoPdfDtoImpl instance) =>
     <String, dynamic>{
       'valueDate': instance.valueDate,
       'paymentID': instance.paymentID,

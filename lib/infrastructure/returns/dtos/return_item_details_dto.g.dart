@@ -9,7 +9,7 @@ part of 'return_item_details_dto.dart';
 _$ReturnItemDetailsDtoImpl _$$ReturnItemDetailsDtoImplFromJson(
         Map<String, dynamic> json) =>
     _$ReturnItemDetailsDtoImpl(
-      returnQuantity: json['returnQuantity'] as int? ?? 0,
+      returnQuantity: (json['returnQuantity'] as num?)?.toInt() ?? 0,
       materialNumber: json['materialNumber'] as String? ?? '',
       lineNumber: json['lineNumber'] as String? ?? '',
       batch: json['batch'] as String? ?? '',

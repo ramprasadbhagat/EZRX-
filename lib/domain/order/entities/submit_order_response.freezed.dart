@@ -12,7 +12,7 @@ part of 'submit_order_response.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$SubmitOrderResponse {
@@ -73,11 +73,11 @@ class _$SubmitOrderResponseCopyWithImpl<$Res, $Val extends SubmitOrderResponse>
 }
 
 /// @nodoc
-abstract class _$$_SubmitOrderResponseCopyWith<$Res>
+abstract class _$$SubmitOrderResponseImplCopyWith<$Res>
     implements $SubmitOrderResponseCopyWith<$Res> {
-  factory _$$_SubmitOrderResponseCopyWith(_$_SubmitOrderResponse value,
-          $Res Function(_$_SubmitOrderResponse) then) =
-      __$$_SubmitOrderResponseCopyWithImpl<$Res>;
+  factory _$$SubmitOrderResponseImplCopyWith(_$SubmitOrderResponseImpl value,
+          $Res Function(_$SubmitOrderResponseImpl) then) =
+      __$$SubmitOrderResponseImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -87,11 +87,11 @@ abstract class _$$_SubmitOrderResponseCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_SubmitOrderResponseCopyWithImpl<$Res>
-    extends _$SubmitOrderResponseCopyWithImpl<$Res, _$_SubmitOrderResponse>
-    implements _$$_SubmitOrderResponseCopyWith<$Res> {
-  __$$_SubmitOrderResponseCopyWithImpl(_$_SubmitOrderResponse _value,
-      $Res Function(_$_SubmitOrderResponse) _then)
+class __$$SubmitOrderResponseImplCopyWithImpl<$Res>
+    extends _$SubmitOrderResponseCopyWithImpl<$Res, _$SubmitOrderResponseImpl>
+    implements _$$SubmitOrderResponseImplCopyWith<$Res> {
+  __$$SubmitOrderResponseImplCopyWithImpl(_$SubmitOrderResponseImpl _value,
+      $Res Function(_$SubmitOrderResponseImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -101,7 +101,7 @@ class __$$_SubmitOrderResponseCopyWithImpl<$Res>
     Object? salesDocuments = null,
     Object? messages = null,
   }) {
-    return _then(_$_SubmitOrderResponse(
+    return _then(_$SubmitOrderResponseImpl(
       salesDocument: null == salesDocument
           ? _value.salesDocument
           : salesDocument // ignore: cast_nullable_to_non_nullable
@@ -120,8 +120,8 @@ class __$$_SubmitOrderResponseCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_SubmitOrderResponse extends _SubmitOrderResponse {
-  const _$_SubmitOrderResponse(
+class _$SubmitOrderResponseImpl extends _SubmitOrderResponse {
+  const _$SubmitOrderResponseImpl(
       {required this.salesDocument,
       required final List<String> salesDocuments,
       required final List<SubmitOrderResponseMessage> messages})
@@ -153,10 +153,10 @@ class _$_SubmitOrderResponse extends _SubmitOrderResponse {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_SubmitOrderResponse &&
+            other is _$SubmitOrderResponseImpl &&
             (identical(other.salesDocument, salesDocument) ||
                 other.salesDocument == salesDocument) &&
             const DeepCollectionEquality()
@@ -174,8 +174,8 @@ class _$_SubmitOrderResponse extends _SubmitOrderResponse {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_SubmitOrderResponseCopyWith<_$_SubmitOrderResponse> get copyWith =>
-      __$$_SubmitOrderResponseCopyWithImpl<_$_SubmitOrderResponse>(
+  _$$SubmitOrderResponseImplCopyWith<_$SubmitOrderResponseImpl> get copyWith =>
+      __$$SubmitOrderResponseImplCopyWithImpl<_$SubmitOrderResponseImpl>(
           this, _$identity);
 }
 
@@ -184,7 +184,7 @@ abstract class _SubmitOrderResponse extends SubmitOrderResponse {
           {required final String salesDocument,
           required final List<String> salesDocuments,
           required final List<SubmitOrderResponseMessage> messages}) =
-      _$_SubmitOrderResponse;
+      _$SubmitOrderResponseImpl;
   const _SubmitOrderResponse._() : super._();
 
   @override
@@ -195,6 +195,6 @@ abstract class _SubmitOrderResponse extends SubmitOrderResponse {
   List<SubmitOrderResponseMessage> get messages;
   @override
   @JsonKey(ignore: true)
-  _$$_SubmitOrderResponseCopyWith<_$_SubmitOrderResponse> get copyWith =>
+  _$$SubmitOrderResponseImplCopyWith<_$SubmitOrderResponseImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

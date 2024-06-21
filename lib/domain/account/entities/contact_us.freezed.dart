@@ -12,7 +12,7 @@ part of 'contact_us.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$ContactUs {
@@ -78,10 +78,11 @@ class _$ContactUsCopyWithImpl<$Res, $Val extends ContactUs>
 }
 
 /// @nodoc
-abstract class _$$_ContactUsCopyWith<$Res> implements $ContactUsCopyWith<$Res> {
-  factory _$$_ContactUsCopyWith(
-          _$_ContactUs value, $Res Function(_$_ContactUs) then) =
-      __$$_ContactUsCopyWithImpl<$Res>;
+abstract class _$$ContactUsImplCopyWith<$Res>
+    implements $ContactUsCopyWith<$Res> {
+  factory _$$ContactUsImplCopyWith(
+          _$ContactUsImpl value, $Res Function(_$ContactUsImpl) then) =
+      __$$ContactUsImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -92,11 +93,11 @@ abstract class _$$_ContactUsCopyWith<$Res> implements $ContactUsCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_ContactUsCopyWithImpl<$Res>
-    extends _$ContactUsCopyWithImpl<$Res, _$_ContactUs>
-    implements _$$_ContactUsCopyWith<$Res> {
-  __$$_ContactUsCopyWithImpl(
-      _$_ContactUs _value, $Res Function(_$_ContactUs) _then)
+class __$$ContactUsImplCopyWithImpl<$Res>
+    extends _$ContactUsCopyWithImpl<$Res, _$ContactUsImpl>
+    implements _$$ContactUsImplCopyWith<$Res> {
+  __$$ContactUsImplCopyWithImpl(
+      _$ContactUsImpl _value, $Res Function(_$ContactUsImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -107,7 +108,7 @@ class __$$_ContactUsCopyWithImpl<$Res>
     Object? contactNumber = null,
     Object? message = null,
   }) {
-    return _then(_$_ContactUs(
+    return _then(_$ContactUsImpl(
       username: null == username
           ? _value.username
           : username // ignore: cast_nullable_to_non_nullable
@@ -130,8 +131,8 @@ class __$$_ContactUsCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_ContactUs extends _ContactUs {
-  const _$_ContactUs(
+class _$ContactUsImpl extends _ContactUs {
+  const _$ContactUsImpl(
       {required this.username,
       required this.email,
       required this.contactNumber,
@@ -153,10 +154,10 @@ class _$_ContactUs extends _ContactUs {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ContactUs &&
+            other is _$ContactUsImpl &&
             (identical(other.username, username) ||
                 other.username == username) &&
             (identical(other.email, email) || other.email == email) &&
@@ -172,8 +173,8 @@ class _$_ContactUs extends _ContactUs {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ContactUsCopyWith<_$_ContactUs> get copyWith =>
-      __$$_ContactUsCopyWithImpl<_$_ContactUs>(this, _$identity);
+  _$$ContactUsImplCopyWith<_$ContactUsImpl> get copyWith =>
+      __$$ContactUsImplCopyWithImpl<_$ContactUsImpl>(this, _$identity);
 }
 
 abstract class _ContactUs extends ContactUs {
@@ -181,7 +182,7 @@ abstract class _ContactUs extends ContactUs {
       {required final Username username,
       required final EmailAddress email,
       required final PhoneNumber contactNumber,
-      required final StringValue message}) = _$_ContactUs;
+      required final StringValue message}) = _$ContactUsImpl;
   const _ContactUs._() : super._();
 
   @override
@@ -194,6 +195,6 @@ abstract class _ContactUs extends ContactUs {
   StringValue get message;
   @override
   @JsonKey(ignore: true)
-  _$$_ContactUsCopyWith<_$_ContactUs> get copyWith =>
+  _$$ContactUsImplCopyWith<_$ContactUsImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

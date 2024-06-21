@@ -12,7 +12,7 @@ part of 'favourite_status_dto.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 FavouriteStatusDto _$FavouriteStatusDtoFromJson(Map<String, dynamic> json) {
   return _FavouriteStatusDto.fromJson(json);
@@ -64,11 +64,11 @@ class _$FavouriteStatusDtoCopyWithImpl<$Res, $Val extends FavouriteStatusDto>
 }
 
 /// @nodoc
-abstract class _$$_FavouriteStatusDtoCopyWith<$Res>
+abstract class _$$FavouriteStatusDtoImplCopyWith<$Res>
     implements $FavouriteStatusDtoCopyWith<$Res> {
-  factory _$$_FavouriteStatusDtoCopyWith(_$_FavouriteStatusDto value,
-          $Res Function(_$_FavouriteStatusDto) then) =
-      __$$_FavouriteStatusDtoCopyWithImpl<$Res>;
+  factory _$$FavouriteStatusDtoImplCopyWith(_$FavouriteStatusDtoImpl value,
+          $Res Function(_$FavouriteStatusDtoImpl) then) =
+      __$$FavouriteStatusDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -76,11 +76,11 @@ abstract class _$$_FavouriteStatusDtoCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_FavouriteStatusDtoCopyWithImpl<$Res>
-    extends _$FavouriteStatusDtoCopyWithImpl<$Res, _$_FavouriteStatusDto>
-    implements _$$_FavouriteStatusDtoCopyWith<$Res> {
-  __$$_FavouriteStatusDtoCopyWithImpl(
-      _$_FavouriteStatusDto _value, $Res Function(_$_FavouriteStatusDto) _then)
+class __$$FavouriteStatusDtoImplCopyWithImpl<$Res>
+    extends _$FavouriteStatusDtoCopyWithImpl<$Res, _$FavouriteStatusDtoImpl>
+    implements _$$FavouriteStatusDtoImplCopyWith<$Res> {
+  __$$FavouriteStatusDtoImplCopyWithImpl(_$FavouriteStatusDtoImpl _value,
+      $Res Function(_$FavouriteStatusDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -88,7 +88,7 @@ class __$$_FavouriteStatusDtoCopyWithImpl<$Res>
   $Res call({
     Object? isFavourite = null,
   }) {
-    return _then(_$_FavouriteStatusDto(
+    return _then(_$FavouriteStatusDtoImpl(
       isFavourite: null == isFavourite
           ? _value.isFavourite
           : isFavourite // ignore: cast_nullable_to_non_nullable
@@ -99,14 +99,14 @@ class __$$_FavouriteStatusDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_FavouriteStatusDto extends _FavouriteStatusDto {
-  _$_FavouriteStatusDto(
+class _$FavouriteStatusDtoImpl extends _FavouriteStatusDto {
+  _$FavouriteStatusDtoImpl(
       {@JsonKey(name: 'isFavourite', defaultValue: false)
-          required this.isFavourite})
+      required this.isFavourite})
       : super._();
 
-  factory _$_FavouriteStatusDto.fromJson(Map<String, dynamic> json) =>
-      _$$_FavouriteStatusDtoFromJson(json);
+  factory _$FavouriteStatusDtoImpl.fromJson(Map<String, dynamic> json) =>
+      _$$FavouriteStatusDtoImplFromJson(json);
 
   @override
   @JsonKey(name: 'isFavourite', defaultValue: false)
@@ -118,10 +118,10 @@ class _$_FavouriteStatusDto extends _FavouriteStatusDto {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_FavouriteStatusDto &&
+            other is _$FavouriteStatusDtoImpl &&
             (identical(other.isFavourite, isFavourite) ||
                 other.isFavourite == isFavourite));
   }
@@ -133,13 +133,13 @@ class _$_FavouriteStatusDto extends _FavouriteStatusDto {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_FavouriteStatusDtoCopyWith<_$_FavouriteStatusDto> get copyWith =>
-      __$$_FavouriteStatusDtoCopyWithImpl<_$_FavouriteStatusDto>(
+  _$$FavouriteStatusDtoImplCopyWith<_$FavouriteStatusDtoImpl> get copyWith =>
+      __$$FavouriteStatusDtoImplCopyWithImpl<_$FavouriteStatusDtoImpl>(
           this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_FavouriteStatusDtoToJson(
+    return _$$FavouriteStatusDtoImplToJson(
       this,
     );
   }
@@ -148,17 +148,17 @@ class _$_FavouriteStatusDto extends _FavouriteStatusDto {
 abstract class _FavouriteStatusDto extends FavouriteStatusDto {
   factory _FavouriteStatusDto(
       {@JsonKey(name: 'isFavourite', defaultValue: false)
-          required final bool isFavourite}) = _$_FavouriteStatusDto;
+      required final bool isFavourite}) = _$FavouriteStatusDtoImpl;
   _FavouriteStatusDto._() : super._();
 
   factory _FavouriteStatusDto.fromJson(Map<String, dynamic> json) =
-      _$_FavouriteStatusDto.fromJson;
+      _$FavouriteStatusDtoImpl.fromJson;
 
   @override
   @JsonKey(name: 'isFavourite', defaultValue: false)
   bool get isFavourite;
   @override
   @JsonKey(ignore: true)
-  _$$_FavouriteStatusDtoCopyWith<_$_FavouriteStatusDto> get copyWith =>
+  _$$FavouriteStatusDtoImplCopyWith<_$FavouriteStatusDtoImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

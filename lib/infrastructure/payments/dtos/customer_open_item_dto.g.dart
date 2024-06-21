@@ -6,9 +6,9 @@ part of 'customer_open_item_dto.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_CustomerOpenItemDto _$$_CustomerOpenItemDtoFromJson(
+_$CustomerOpenItemDtoImpl _$$CustomerOpenItemDtoImplFromJson(
         Map<String, dynamic> json) =>
-    _$_CustomerOpenItemDto(
+    _$CustomerOpenItemDtoImpl(
       status: json['status'] as String? ?? '',
       accountingDocument: json['accountingDocument'] as String? ?? '',
       netDueDate: json['netDueDate'] as String? ?? '',
@@ -47,8 +47,8 @@ _$_CustomerOpenItemDto _$$_CustomerOpenItemDtoFromJson(
       orderId: json['orderId'] as String? ?? '',
     );
 
-Map<String, dynamic> _$$_CustomerOpenItemDtoToJson(
-        _$_CustomerOpenItemDto instance) =>
+Map<String, dynamic> _$$CustomerOpenItemDtoImplToJson(
+        _$CustomerOpenItemDtoImpl instance) =>
     <String, dynamic>{
       'status': instance.status,
       'accountingDocument': instance.accountingDocument,

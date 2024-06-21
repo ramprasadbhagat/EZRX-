@@ -12,7 +12,7 @@ part of 'contact_us_bloc.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$ContactUsEvent {
@@ -99,20 +99,20 @@ class _$ContactUsEventCopyWithImpl<$Res, $Val extends ContactUsEvent>
 }
 
 /// @nodoc
-abstract class _$$_InitializedCopyWith<$Res> {
-  factory _$$_InitializedCopyWith(
-          _$_Initialized value, $Res Function(_$_Initialized) then) =
-      __$$_InitializedCopyWithImpl<$Res>;
+abstract class _$$InitializedImplCopyWith<$Res> {
+  factory _$$InitializedImplCopyWith(
+          _$InitializedImpl value, $Res Function(_$InitializedImpl) then) =
+      __$$InitializedImplCopyWithImpl<$Res>;
   @useResult
   $Res call({AppMarket market});
 }
 
 /// @nodoc
-class __$$_InitializedCopyWithImpl<$Res>
-    extends _$ContactUsEventCopyWithImpl<$Res, _$_Initialized>
-    implements _$$_InitializedCopyWith<$Res> {
-  __$$_InitializedCopyWithImpl(
-      _$_Initialized _value, $Res Function(_$_Initialized) _then)
+class __$$InitializedImplCopyWithImpl<$Res>
+    extends _$ContactUsEventCopyWithImpl<$Res, _$InitializedImpl>
+    implements _$$InitializedImplCopyWith<$Res> {
+  __$$InitializedImplCopyWithImpl(
+      _$InitializedImpl _value, $Res Function(_$InitializedImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -120,7 +120,7 @@ class __$$_InitializedCopyWithImpl<$Res>
   $Res call({
     Object? market = null,
   }) {
-    return _then(_$_Initialized(
+    return _then(_$InitializedImpl(
       market: null == market
           ? _value.market
           : market // ignore: cast_nullable_to_non_nullable
@@ -131,8 +131,8 @@ class __$$_InitializedCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_Initialized implements _Initialized {
-  const _$_Initialized({required this.market});
+class _$InitializedImpl implements _Initialized {
+  const _$InitializedImpl({required this.market});
 
   @override
   final AppMarket market;
@@ -143,10 +143,10 @@ class _$_Initialized implements _Initialized {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Initialized &&
+            other is _$InitializedImpl &&
             (identical(other.market, market) || other.market == market));
   }
 
@@ -156,8 +156,8 @@ class _$_Initialized implements _Initialized {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_InitializedCopyWith<_$_Initialized> get copyWith =>
-      __$$_InitializedCopyWithImpl<_$_Initialized>(this, _$identity);
+  _$$InitializedImplCopyWith<_$InitializedImpl> get copyWith =>
+      __$$InitializedImplCopyWithImpl<_$InitializedImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -248,32 +248,34 @@ class _$_Initialized implements _Initialized {
 
 abstract class _Initialized implements ContactUsEvent {
   const factory _Initialized({required final AppMarket market}) =
-      _$_Initialized;
+      _$InitializedImpl;
 
   AppMarket get market;
   @JsonKey(ignore: true)
-  _$$_InitializedCopyWith<_$_Initialized> get copyWith =>
+  _$$InitializedImplCopyWith<_$InitializedImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_SubmitCopyWith<$Res> {
-  factory _$$_SubmitCopyWith(_$_Submit value, $Res Function(_$_Submit) then) =
-      __$$_SubmitCopyWithImpl<$Res>;
+abstract class _$$SubmitImplCopyWith<$Res> {
+  factory _$$SubmitImplCopyWith(
+          _$SubmitImpl value, $Res Function(_$SubmitImpl) then) =
+      __$$SubmitImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_SubmitCopyWithImpl<$Res>
-    extends _$ContactUsEventCopyWithImpl<$Res, _$_Submit>
-    implements _$$_SubmitCopyWith<$Res> {
-  __$$_SubmitCopyWithImpl(_$_Submit _value, $Res Function(_$_Submit) _then)
+class __$$SubmitImplCopyWithImpl<$Res>
+    extends _$ContactUsEventCopyWithImpl<$Res, _$SubmitImpl>
+    implements _$$SubmitImplCopyWith<$Res> {
+  __$$SubmitImplCopyWithImpl(
+      _$SubmitImpl _value, $Res Function(_$SubmitImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_Submit implements _Submit {
-  const _$_Submit();
+class _$SubmitImpl implements _Submit {
+  const _$SubmitImpl();
 
   @override
   String toString() {
@@ -281,9 +283,9 @@ class _$_Submit implements _Submit {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_Submit);
+        (other.runtimeType == runtimeType && other is _$SubmitImpl);
   }
 
   @override
@@ -377,24 +379,24 @@ class _$_Submit implements _Submit {
 }
 
 abstract class _Submit implements ContactUsEvent {
-  const factory _Submit() = _$_Submit;
+  const factory _Submit() = _$SubmitImpl;
 }
 
 /// @nodoc
-abstract class _$$_UsernameChangeCopyWith<$Res> {
-  factory _$$_UsernameChangeCopyWith(
-          _$_UsernameChange value, $Res Function(_$_UsernameChange) then) =
-      __$$_UsernameChangeCopyWithImpl<$Res>;
+abstract class _$$UsernameChangeImplCopyWith<$Res> {
+  factory _$$UsernameChangeImplCopyWith(_$UsernameChangeImpl value,
+          $Res Function(_$UsernameChangeImpl) then) =
+      __$$UsernameChangeImplCopyWithImpl<$Res>;
   @useResult
   $Res call({String newValue});
 }
 
 /// @nodoc
-class __$$_UsernameChangeCopyWithImpl<$Res>
-    extends _$ContactUsEventCopyWithImpl<$Res, _$_UsernameChange>
-    implements _$$_UsernameChangeCopyWith<$Res> {
-  __$$_UsernameChangeCopyWithImpl(
-      _$_UsernameChange _value, $Res Function(_$_UsernameChange) _then)
+class __$$UsernameChangeImplCopyWithImpl<$Res>
+    extends _$ContactUsEventCopyWithImpl<$Res, _$UsernameChangeImpl>
+    implements _$$UsernameChangeImplCopyWith<$Res> {
+  __$$UsernameChangeImplCopyWithImpl(
+      _$UsernameChangeImpl _value, $Res Function(_$UsernameChangeImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -402,7 +404,7 @@ class __$$_UsernameChangeCopyWithImpl<$Res>
   $Res call({
     Object? newValue = null,
   }) {
-    return _then(_$_UsernameChange(
+    return _then(_$UsernameChangeImpl(
       newValue: null == newValue
           ? _value.newValue
           : newValue // ignore: cast_nullable_to_non_nullable
@@ -413,8 +415,8 @@ class __$$_UsernameChangeCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_UsernameChange implements _UsernameChange {
-  const _$_UsernameChange({required this.newValue});
+class _$UsernameChangeImpl implements _UsernameChange {
+  const _$UsernameChangeImpl({required this.newValue});
 
   @override
   final String newValue;
@@ -425,10 +427,10 @@ class _$_UsernameChange implements _UsernameChange {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_UsernameChange &&
+            other is _$UsernameChangeImpl &&
             (identical(other.newValue, newValue) ||
                 other.newValue == newValue));
   }
@@ -439,8 +441,9 @@ class _$_UsernameChange implements _UsernameChange {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_UsernameChangeCopyWith<_$_UsernameChange> get copyWith =>
-      __$$_UsernameChangeCopyWithImpl<_$_UsernameChange>(this, _$identity);
+  _$$UsernameChangeImplCopyWith<_$UsernameChangeImpl> get copyWith =>
+      __$$UsernameChangeImplCopyWithImpl<_$UsernameChangeImpl>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -531,29 +534,29 @@ class _$_UsernameChange implements _UsernameChange {
 
 abstract class _UsernameChange implements ContactUsEvent {
   const factory _UsernameChange({required final String newValue}) =
-      _$_UsernameChange;
+      _$UsernameChangeImpl;
 
   String get newValue;
   @JsonKey(ignore: true)
-  _$$_UsernameChangeCopyWith<_$_UsernameChange> get copyWith =>
+  _$$UsernameChangeImplCopyWith<_$UsernameChangeImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_EmailChangeCopyWith<$Res> {
-  factory _$$_EmailChangeCopyWith(
-          _$_EmailChange value, $Res Function(_$_EmailChange) then) =
-      __$$_EmailChangeCopyWithImpl<$Res>;
+abstract class _$$EmailChangeImplCopyWith<$Res> {
+  factory _$$EmailChangeImplCopyWith(
+          _$EmailChangeImpl value, $Res Function(_$EmailChangeImpl) then) =
+      __$$EmailChangeImplCopyWithImpl<$Res>;
   @useResult
   $Res call({String newValue});
 }
 
 /// @nodoc
-class __$$_EmailChangeCopyWithImpl<$Res>
-    extends _$ContactUsEventCopyWithImpl<$Res, _$_EmailChange>
-    implements _$$_EmailChangeCopyWith<$Res> {
-  __$$_EmailChangeCopyWithImpl(
-      _$_EmailChange _value, $Res Function(_$_EmailChange) _then)
+class __$$EmailChangeImplCopyWithImpl<$Res>
+    extends _$ContactUsEventCopyWithImpl<$Res, _$EmailChangeImpl>
+    implements _$$EmailChangeImplCopyWith<$Res> {
+  __$$EmailChangeImplCopyWithImpl(
+      _$EmailChangeImpl _value, $Res Function(_$EmailChangeImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -561,7 +564,7 @@ class __$$_EmailChangeCopyWithImpl<$Res>
   $Res call({
     Object? newValue = null,
   }) {
-    return _then(_$_EmailChange(
+    return _then(_$EmailChangeImpl(
       newValue: null == newValue
           ? _value.newValue
           : newValue // ignore: cast_nullable_to_non_nullable
@@ -572,8 +575,8 @@ class __$$_EmailChangeCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_EmailChange implements _EmailChange {
-  const _$_EmailChange({required this.newValue});
+class _$EmailChangeImpl implements _EmailChange {
+  const _$EmailChangeImpl({required this.newValue});
 
   @override
   final String newValue;
@@ -584,10 +587,10 @@ class _$_EmailChange implements _EmailChange {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_EmailChange &&
+            other is _$EmailChangeImpl &&
             (identical(other.newValue, newValue) ||
                 other.newValue == newValue));
   }
@@ -598,8 +601,8 @@ class _$_EmailChange implements _EmailChange {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_EmailChangeCopyWith<_$_EmailChange> get copyWith =>
-      __$$_EmailChangeCopyWithImpl<_$_EmailChange>(this, _$identity);
+  _$$EmailChangeImplCopyWith<_$EmailChangeImpl> get copyWith =>
+      __$$EmailChangeImplCopyWithImpl<_$EmailChangeImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -689,29 +692,30 @@ class _$_EmailChange implements _EmailChange {
 }
 
 abstract class _EmailChange implements ContactUsEvent {
-  const factory _EmailChange({required final String newValue}) = _$_EmailChange;
+  const factory _EmailChange({required final String newValue}) =
+      _$EmailChangeImpl;
 
   String get newValue;
   @JsonKey(ignore: true)
-  _$$_EmailChangeCopyWith<_$_EmailChange> get copyWith =>
+  _$$EmailChangeImplCopyWith<_$EmailChangeImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_ContactNumberChangeCopyWith<$Res> {
-  factory _$$_ContactNumberChangeCopyWith(_$_ContactNumberChange value,
-          $Res Function(_$_ContactNumberChange) then) =
-      __$$_ContactNumberChangeCopyWithImpl<$Res>;
+abstract class _$$ContactNumberChangeImplCopyWith<$Res> {
+  factory _$$ContactNumberChangeImplCopyWith(_$ContactNumberChangeImpl value,
+          $Res Function(_$ContactNumberChangeImpl) then) =
+      __$$ContactNumberChangeImplCopyWithImpl<$Res>;
   @useResult
   $Res call({String newValue});
 }
 
 /// @nodoc
-class __$$_ContactNumberChangeCopyWithImpl<$Res>
-    extends _$ContactUsEventCopyWithImpl<$Res, _$_ContactNumberChange>
-    implements _$$_ContactNumberChangeCopyWith<$Res> {
-  __$$_ContactNumberChangeCopyWithImpl(_$_ContactNumberChange _value,
-      $Res Function(_$_ContactNumberChange) _then)
+class __$$ContactNumberChangeImplCopyWithImpl<$Res>
+    extends _$ContactUsEventCopyWithImpl<$Res, _$ContactNumberChangeImpl>
+    implements _$$ContactNumberChangeImplCopyWith<$Res> {
+  __$$ContactNumberChangeImplCopyWithImpl(_$ContactNumberChangeImpl _value,
+      $Res Function(_$ContactNumberChangeImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -719,7 +723,7 @@ class __$$_ContactNumberChangeCopyWithImpl<$Res>
   $Res call({
     Object? newValue = null,
   }) {
-    return _then(_$_ContactNumberChange(
+    return _then(_$ContactNumberChangeImpl(
       newValue: null == newValue
           ? _value.newValue
           : newValue // ignore: cast_nullable_to_non_nullable
@@ -730,8 +734,8 @@ class __$$_ContactNumberChangeCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_ContactNumberChange implements _ContactNumberChange {
-  const _$_ContactNumberChange({required this.newValue});
+class _$ContactNumberChangeImpl implements _ContactNumberChange {
+  const _$ContactNumberChangeImpl({required this.newValue});
 
   @override
   final String newValue;
@@ -742,10 +746,10 @@ class _$_ContactNumberChange implements _ContactNumberChange {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ContactNumberChange &&
+            other is _$ContactNumberChangeImpl &&
             (identical(other.newValue, newValue) ||
                 other.newValue == newValue));
   }
@@ -756,8 +760,8 @@ class _$_ContactNumberChange implements _ContactNumberChange {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ContactNumberChangeCopyWith<_$_ContactNumberChange> get copyWith =>
-      __$$_ContactNumberChangeCopyWithImpl<_$_ContactNumberChange>(
+  _$$ContactNumberChangeImplCopyWith<_$ContactNumberChangeImpl> get copyWith =>
+      __$$ContactNumberChangeImplCopyWithImpl<_$ContactNumberChangeImpl>(
           this, _$identity);
 
   @override
@@ -849,29 +853,29 @@ class _$_ContactNumberChange implements _ContactNumberChange {
 
 abstract class _ContactNumberChange implements ContactUsEvent {
   const factory _ContactNumberChange({required final String newValue}) =
-      _$_ContactNumberChange;
+      _$ContactNumberChangeImpl;
 
   String get newValue;
   @JsonKey(ignore: true)
-  _$$_ContactNumberChangeCopyWith<_$_ContactNumberChange> get copyWith =>
+  _$$ContactNumberChangeImplCopyWith<_$ContactNumberChangeImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_MessageChangeCopyWith<$Res> {
-  factory _$$_MessageChangeCopyWith(
-          _$_MessageChange value, $Res Function(_$_MessageChange) then) =
-      __$$_MessageChangeCopyWithImpl<$Res>;
+abstract class _$$MessageChangeImplCopyWith<$Res> {
+  factory _$$MessageChangeImplCopyWith(
+          _$MessageChangeImpl value, $Res Function(_$MessageChangeImpl) then) =
+      __$$MessageChangeImplCopyWithImpl<$Res>;
   @useResult
   $Res call({String newValue});
 }
 
 /// @nodoc
-class __$$_MessageChangeCopyWithImpl<$Res>
-    extends _$ContactUsEventCopyWithImpl<$Res, _$_MessageChange>
-    implements _$$_MessageChangeCopyWith<$Res> {
-  __$$_MessageChangeCopyWithImpl(
-      _$_MessageChange _value, $Res Function(_$_MessageChange) _then)
+class __$$MessageChangeImplCopyWithImpl<$Res>
+    extends _$ContactUsEventCopyWithImpl<$Res, _$MessageChangeImpl>
+    implements _$$MessageChangeImplCopyWith<$Res> {
+  __$$MessageChangeImplCopyWithImpl(
+      _$MessageChangeImpl _value, $Res Function(_$MessageChangeImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -879,7 +883,7 @@ class __$$_MessageChangeCopyWithImpl<$Res>
   $Res call({
     Object? newValue = null,
   }) {
-    return _then(_$_MessageChange(
+    return _then(_$MessageChangeImpl(
       newValue: null == newValue
           ? _value.newValue
           : newValue // ignore: cast_nullable_to_non_nullable
@@ -890,8 +894,8 @@ class __$$_MessageChangeCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_MessageChange implements _MessageChange {
-  const _$_MessageChange({required this.newValue});
+class _$MessageChangeImpl implements _MessageChange {
+  const _$MessageChangeImpl({required this.newValue});
 
   @override
   final String newValue;
@@ -902,10 +906,10 @@ class _$_MessageChange implements _MessageChange {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_MessageChange &&
+            other is _$MessageChangeImpl &&
             (identical(other.newValue, newValue) ||
                 other.newValue == newValue));
   }
@@ -916,8 +920,8 @@ class _$_MessageChange implements _MessageChange {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_MessageChangeCopyWith<_$_MessageChange> get copyWith =>
-      __$$_MessageChangeCopyWithImpl<_$_MessageChange>(this, _$identity);
+  _$$MessageChangeImplCopyWith<_$MessageChangeImpl> get copyWith =>
+      __$$MessageChangeImplCopyWithImpl<_$MessageChangeImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -1008,11 +1012,11 @@ class _$_MessageChange implements _MessageChange {
 
 abstract class _MessageChange implements ContactUsEvent {
   const factory _MessageChange({required final String newValue}) =
-      _$_MessageChange;
+      _$MessageChangeImpl;
 
   String get newValue;
   @JsonKey(ignore: true)
-  _$$_MessageChangeCopyWith<_$_MessageChange> get copyWith =>
+  _$$MessageChangeImplCopyWith<_$MessageChangeImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -1106,11 +1110,11 @@ class _$ContactUsStateCopyWithImpl<$Res, $Val extends ContactUsState>
 }
 
 /// @nodoc
-abstract class _$$_ContactUsStateCopyWith<$Res>
+abstract class _$$ContactUsStateImplCopyWith<$Res>
     implements $ContactUsStateCopyWith<$Res> {
-  factory _$$_ContactUsStateCopyWith(
-          _$_ContactUsState value, $Res Function(_$_ContactUsState) then) =
-      __$$_ContactUsStateCopyWithImpl<$Res>;
+  factory _$$ContactUsStateImplCopyWith(_$ContactUsStateImpl value,
+          $Res Function(_$ContactUsStateImpl) then) =
+      __$$ContactUsStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -1126,11 +1130,11 @@ abstract class _$$_ContactUsStateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_ContactUsStateCopyWithImpl<$Res>
-    extends _$ContactUsStateCopyWithImpl<$Res, _$_ContactUsState>
-    implements _$$_ContactUsStateCopyWith<$Res> {
-  __$$_ContactUsStateCopyWithImpl(
-      _$_ContactUsState _value, $Res Function(_$_ContactUsState) _then)
+class __$$ContactUsStateImplCopyWithImpl<$Res>
+    extends _$ContactUsStateCopyWithImpl<$Res, _$ContactUsStateImpl>
+    implements _$$ContactUsStateImplCopyWith<$Res> {
+  __$$ContactUsStateImplCopyWithImpl(
+      _$ContactUsStateImpl _value, $Res Function(_$ContactUsStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1143,7 +1147,7 @@ class __$$_ContactUsStateCopyWithImpl<$Res>
     Object? showErrorMessage = null,
     Object? responseFlag = null,
   }) {
-    return _then(_$_ContactUsState(
+    return _then(_$ContactUsStateImpl(
       contactUs: null == contactUs
           ? _value.contactUs
           : contactUs // ignore: cast_nullable_to_non_nullable
@@ -1174,8 +1178,8 @@ class __$$_ContactUsStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_ContactUsState extends _ContactUsState {
-  const _$_ContactUsState(
+class _$ContactUsStateImpl extends _ContactUsState {
+  const _$ContactUsStateImpl(
       {required this.contactUs,
       required this.appMarket,
       required this.apiFailureOrSuccessOption,
@@ -1203,10 +1207,10 @@ class _$_ContactUsState extends _ContactUsState {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ContactUsState &&
+            other is _$ContactUsStateImpl &&
             (identical(other.contactUs, contactUs) ||
                 other.contactUs == contactUs) &&
             (identical(other.appMarket, appMarket) ||
@@ -1229,8 +1233,9 @@ class _$_ContactUsState extends _ContactUsState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ContactUsStateCopyWith<_$_ContactUsState> get copyWith =>
-      __$$_ContactUsStateCopyWithImpl<_$_ContactUsState>(this, _$identity);
+  _$$ContactUsStateImplCopyWith<_$ContactUsStateImpl> get copyWith =>
+      __$$ContactUsStateImplCopyWithImpl<_$ContactUsStateImpl>(
+          this, _$identity);
 }
 
 abstract class _ContactUsState extends ContactUsState {
@@ -1241,7 +1246,7 @@ abstract class _ContactUsState extends ContactUsState {
           apiFailureOrSuccessOption,
       required final bool isSubmitting,
       required final bool showErrorMessage,
-      required final bool responseFlag}) = _$_ContactUsState;
+      required final bool responseFlag}) = _$ContactUsStateImpl;
   const _ContactUsState._() : super._();
 
   @override
@@ -1258,6 +1263,6 @@ abstract class _ContactUsState extends ContactUsState {
   bool get responseFlag;
   @override
   @JsonKey(ignore: true)
-  _$$_ContactUsStateCopyWith<_$_ContactUsState> get copyWith =>
+  _$$ContactUsStateImplCopyWith<_$ContactUsStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

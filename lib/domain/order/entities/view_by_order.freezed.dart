@@ -12,7 +12,7 @@ part of 'view_by_order.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$ViewByOrder {
@@ -73,11 +73,11 @@ class _$ViewByOrderCopyWithImpl<$Res, $Val extends ViewByOrder>
 }
 
 /// @nodoc
-abstract class _$$_ViewByOrderCopyWith<$Res>
+abstract class _$$ViewByOrderImplCopyWith<$Res>
     implements $ViewByOrderCopyWith<$Res> {
-  factory _$$_ViewByOrderCopyWith(
-          _$_ViewByOrder value, $Res Function(_$_ViewByOrder) then) =
-      __$$_ViewByOrderCopyWithImpl<$Res>;
+  factory _$$ViewByOrderImplCopyWith(
+          _$ViewByOrderImpl value, $Res Function(_$ViewByOrderImpl) then) =
+      __$$ViewByOrderImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -87,11 +87,11 @@ abstract class _$$_ViewByOrderCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_ViewByOrderCopyWithImpl<$Res>
-    extends _$ViewByOrderCopyWithImpl<$Res, _$_ViewByOrder>
-    implements _$$_ViewByOrderCopyWith<$Res> {
-  __$$_ViewByOrderCopyWithImpl(
-      _$_ViewByOrder _value, $Res Function(_$_ViewByOrder) _then)
+class __$$ViewByOrderImplCopyWithImpl<$Res>
+    extends _$ViewByOrderCopyWithImpl<$Res, _$ViewByOrderImpl>
+    implements _$$ViewByOrderImplCopyWith<$Res> {
+  __$$ViewByOrderImplCopyWithImpl(
+      _$ViewByOrderImpl _value, $Res Function(_$ViewByOrderImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -101,7 +101,7 @@ class __$$_ViewByOrderCopyWithImpl<$Res>
     Object? creatingOrderIds = null,
     Object? orderHeaders = null,
   }) {
-    return _then(_$_ViewByOrder(
+    return _then(_$ViewByOrderImpl(
       orderCount: null == orderCount
           ? _value.orderCount
           : orderCount // ignore: cast_nullable_to_non_nullable
@@ -120,8 +120,8 @@ class __$$_ViewByOrderCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_ViewByOrder extends _ViewByOrder {
-  _$_ViewByOrder(
+class _$ViewByOrderImpl extends _ViewByOrder {
+  _$ViewByOrderImpl(
       {required this.orderCount,
       required final List<String> creatingOrderIds,
       required final List<OrderHistoryDetails> orderHeaders})
@@ -154,10 +154,10 @@ class _$_ViewByOrder extends _ViewByOrder {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ViewByOrder &&
+            other is _$ViewByOrderImpl &&
             (identical(other.orderCount, orderCount) ||
                 other.orderCount == orderCount) &&
             const DeepCollectionEquality()
@@ -176,15 +176,16 @@ class _$_ViewByOrder extends _ViewByOrder {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ViewByOrderCopyWith<_$_ViewByOrder> get copyWith =>
-      __$$_ViewByOrderCopyWithImpl<_$_ViewByOrder>(this, _$identity);
+  _$$ViewByOrderImplCopyWith<_$ViewByOrderImpl> get copyWith =>
+      __$$ViewByOrderImplCopyWithImpl<_$ViewByOrderImpl>(this, _$identity);
 }
 
 abstract class _ViewByOrder extends ViewByOrder {
   factory _ViewByOrder(
-      {required final int orderCount,
-      required final List<String> creatingOrderIds,
-      required final List<OrderHistoryDetails> orderHeaders}) = _$_ViewByOrder;
+          {required final int orderCount,
+          required final List<String> creatingOrderIds,
+          required final List<OrderHistoryDetails> orderHeaders}) =
+      _$ViewByOrderImpl;
   _ViewByOrder._() : super._();
 
   @override
@@ -195,6 +196,6 @@ abstract class _ViewByOrder extends ViewByOrder {
   List<OrderHistoryDetails> get orderHeaders;
   @override
   @JsonKey(ignore: true)
-  _$$_ViewByOrderCopyWith<_$_ViewByOrder> get copyWith =>
+  _$$ViewByOrderImplCopyWith<_$ViewByOrderImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -6,22 +6,22 @@ part of 'return_list_request_dto.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_ReturnListRequestDto _$$_ReturnListRequestDtoFromJson(
+_$ReturnListRequestDtoImpl _$$ReturnListRequestDtoImplFromJson(
         Map<String, dynamic> json) =>
-    _$_ReturnListRequestDto(
+    _$ReturnListRequestDtoImpl(
       salesOrg: json['salesOrg'] as String? ?? '',
       soldTo: json['soldTo'] as String? ?? '',
       shipTo: json['shipTo'] as String? ?? '',
       username: json['username'] as String? ?? '',
-      first: json['first'] as int? ?? 0,
-      after: json['after'] as int? ?? 0,
+      first: (json['first'] as num?)?.toInt() ?? 0,
+      after: (json['after'] as num?)?.toInt() ?? 0,
       filterQuery:
           ReturnFilterDto.fromJson(json['filterQuery'] as Map<String, dynamic>),
       searchKey: json['searchFilter'] as String? ?? '',
     );
 
-Map<String, dynamic> _$$_ReturnListRequestDtoToJson(
-        _$_ReturnListRequestDto instance) =>
+Map<String, dynamic> _$$ReturnListRequestDtoImplToJson(
+        _$ReturnListRequestDtoImpl instance) =>
     <String, dynamic>{
       'salesOrg': instance.salesOrg,
       'soldTo': instance.soldTo,

@@ -12,7 +12,7 @@ part of 'articles_info_filter_bloc.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$ArticlesInfoFilterEvent {
@@ -95,20 +95,20 @@ class _$ArticlesInfoFilterEventCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_CategoryChangedCopyWith<$Res> {
-  factory _$$_CategoryChangedCopyWith(
-          _$_CategoryChanged value, $Res Function(_$_CategoryChanged) then) =
-      __$$_CategoryChangedCopyWithImpl<$Res>;
+abstract class _$$CategoryChangedImplCopyWith<$Res> {
+  factory _$$CategoryChangedImplCopyWith(_$CategoryChangedImpl value,
+          $Res Function(_$CategoryChangedImpl) then) =
+      __$$CategoryChangedImplCopyWithImpl<$Res>;
   @useResult
   $Res call({String filterCategory, bool selected});
 }
 
 /// @nodoc
-class __$$_CategoryChangedCopyWithImpl<$Res>
-    extends _$ArticlesInfoFilterEventCopyWithImpl<$Res, _$_CategoryChanged>
-    implements _$$_CategoryChangedCopyWith<$Res> {
-  __$$_CategoryChangedCopyWithImpl(
-      _$_CategoryChanged _value, $Res Function(_$_CategoryChanged) _then)
+class __$$CategoryChangedImplCopyWithImpl<$Res>
+    extends _$ArticlesInfoFilterEventCopyWithImpl<$Res, _$CategoryChangedImpl>
+    implements _$$CategoryChangedImplCopyWith<$Res> {
+  __$$CategoryChangedImplCopyWithImpl(
+      _$CategoryChangedImpl _value, $Res Function(_$CategoryChangedImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -117,7 +117,7 @@ class __$$_CategoryChangedCopyWithImpl<$Res>
     Object? filterCategory = null,
     Object? selected = null,
   }) {
-    return _then(_$_CategoryChanged(
+    return _then(_$CategoryChangedImpl(
       null == filterCategory
           ? _value.filterCategory
           : filterCategory // ignore: cast_nullable_to_non_nullable
@@ -132,8 +132,8 @@ class __$$_CategoryChangedCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_CategoryChanged implements _CategoryChanged {
-  const _$_CategoryChanged(this.filterCategory, this.selected);
+class _$CategoryChangedImpl implements _CategoryChanged {
+  const _$CategoryChangedImpl(this.filterCategory, this.selected);
 
   @override
   final String filterCategory;
@@ -146,10 +146,10 @@ class _$_CategoryChanged implements _CategoryChanged {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_CategoryChanged &&
+            other is _$CategoryChangedImpl &&
             (identical(other.filterCategory, filterCategory) ||
                 other.filterCategory == filterCategory) &&
             (identical(other.selected, selected) ||
@@ -162,8 +162,9 @@ class _$_CategoryChanged implements _CategoryChanged {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_CategoryChangedCopyWith<_$_CategoryChanged> get copyWith =>
-      __$$_CategoryChangedCopyWithImpl<_$_CategoryChanged>(this, _$identity);
+  _$$CategoryChangedImplCopyWith<_$CategoryChangedImpl> get copyWith =>
+      __$$CategoryChangedImplCopyWithImpl<_$CategoryChangedImpl>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -249,33 +250,33 @@ class _$_CategoryChanged implements _CategoryChanged {
 
 abstract class _CategoryChanged implements ArticlesInfoFilterEvent {
   const factory _CategoryChanged(
-      final String filterCategory, final bool selected) = _$_CategoryChanged;
+      final String filterCategory, final bool selected) = _$CategoryChangedImpl;
 
   String get filterCategory;
   bool get selected;
   @JsonKey(ignore: true)
-  _$$_CategoryChangedCopyWith<_$_CategoryChanged> get copyWith =>
+  _$$CategoryChangedImplCopyWith<_$CategoryChangedImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_SetCategoryWhileOpenBottomSheetCopyWith<$Res> {
-  factory _$$_SetCategoryWhileOpenBottomSheetCopyWith(
-          _$_SetCategoryWhileOpenBottomSheet value,
-          $Res Function(_$_SetCategoryWhileOpenBottomSheet) then) =
-      __$$_SetCategoryWhileOpenBottomSheetCopyWithImpl<$Res>;
+abstract class _$$SetCategoryWhileOpenBottomSheetImplCopyWith<$Res> {
+  factory _$$SetCategoryWhileOpenBottomSheetImplCopyWith(
+          _$SetCategoryWhileOpenBottomSheetImpl value,
+          $Res Function(_$SetCategoryWhileOpenBottomSheetImpl) then) =
+      __$$SetCategoryWhileOpenBottomSheetImplCopyWithImpl<$Res>;
   @useResult
   $Res call({List<String> filterCategory});
 }
 
 /// @nodoc
-class __$$_SetCategoryWhileOpenBottomSheetCopyWithImpl<$Res>
+class __$$SetCategoryWhileOpenBottomSheetImplCopyWithImpl<$Res>
     extends _$ArticlesInfoFilterEventCopyWithImpl<$Res,
-        _$_SetCategoryWhileOpenBottomSheet>
-    implements _$$_SetCategoryWhileOpenBottomSheetCopyWith<$Res> {
-  __$$_SetCategoryWhileOpenBottomSheetCopyWithImpl(
-      _$_SetCategoryWhileOpenBottomSheet _value,
-      $Res Function(_$_SetCategoryWhileOpenBottomSheet) _then)
+        _$SetCategoryWhileOpenBottomSheetImpl>
+    implements _$$SetCategoryWhileOpenBottomSheetImplCopyWith<$Res> {
+  __$$SetCategoryWhileOpenBottomSheetImplCopyWithImpl(
+      _$SetCategoryWhileOpenBottomSheetImpl _value,
+      $Res Function(_$SetCategoryWhileOpenBottomSheetImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -283,7 +284,7 @@ class __$$_SetCategoryWhileOpenBottomSheetCopyWithImpl<$Res>
   $Res call({
     Object? filterCategory = null,
   }) {
-    return _then(_$_SetCategoryWhileOpenBottomSheet(
+    return _then(_$SetCategoryWhileOpenBottomSheetImpl(
       null == filterCategory
           ? _value._filterCategory
           : filterCategory // ignore: cast_nullable_to_non_nullable
@@ -294,9 +295,9 @@ class __$$_SetCategoryWhileOpenBottomSheetCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_SetCategoryWhileOpenBottomSheet
+class _$SetCategoryWhileOpenBottomSheetImpl
     implements _SetCategoryWhileOpenBottomSheet {
-  const _$_SetCategoryWhileOpenBottomSheet(final List<String> filterCategory)
+  const _$SetCategoryWhileOpenBottomSheetImpl(final List<String> filterCategory)
       : _filterCategory = filterCategory;
 
   final List<String> _filterCategory;
@@ -313,10 +314,10 @@ class _$_SetCategoryWhileOpenBottomSheet
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_SetCategoryWhileOpenBottomSheet &&
+            other is _$SetCategoryWhileOpenBottomSheetImpl &&
             const DeepCollectionEquality()
                 .equals(other._filterCategory, _filterCategory));
   }
@@ -328,10 +329,10 @@ class _$_SetCategoryWhileOpenBottomSheet
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_SetCategoryWhileOpenBottomSheetCopyWith<
-          _$_SetCategoryWhileOpenBottomSheet>
-      get copyWith => __$$_SetCategoryWhileOpenBottomSheetCopyWithImpl<
-          _$_SetCategoryWhileOpenBottomSheet>(this, _$identity);
+  _$$SetCategoryWhileOpenBottomSheetImplCopyWith<
+          _$SetCategoryWhileOpenBottomSheetImpl>
+      get copyWith => __$$SetCategoryWhileOpenBottomSheetImplCopyWithImpl<
+          _$SetCategoryWhileOpenBottomSheetImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -418,35 +419,36 @@ class _$_SetCategoryWhileOpenBottomSheet
 abstract class _SetCategoryWhileOpenBottomSheet
     implements ArticlesInfoFilterEvent {
   const factory _SetCategoryWhileOpenBottomSheet(
-      final List<String> filterCategory) = _$_SetCategoryWhileOpenBottomSheet;
+          final List<String> filterCategory) =
+      _$SetCategoryWhileOpenBottomSheetImpl;
 
   List<String> get filterCategory;
   @JsonKey(ignore: true)
-  _$$_SetCategoryWhileOpenBottomSheetCopyWith<
-          _$_SetCategoryWhileOpenBottomSheet>
+  _$$SetCategoryWhileOpenBottomSheetImplCopyWith<
+          _$SetCategoryWhileOpenBottomSheetImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_ResetCategoryCopyWith<$Res> {
-  factory _$$_ResetCategoryCopyWith(
-          _$_ResetCategory value, $Res Function(_$_ResetCategory) then) =
-      __$$_ResetCategoryCopyWithImpl<$Res>;
+abstract class _$$ResetCategoryImplCopyWith<$Res> {
+  factory _$$ResetCategoryImplCopyWith(
+          _$ResetCategoryImpl value, $Res Function(_$ResetCategoryImpl) then) =
+      __$$ResetCategoryImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_ResetCategoryCopyWithImpl<$Res>
-    extends _$ArticlesInfoFilterEventCopyWithImpl<$Res, _$_ResetCategory>
-    implements _$$_ResetCategoryCopyWith<$Res> {
-  __$$_ResetCategoryCopyWithImpl(
-      _$_ResetCategory _value, $Res Function(_$_ResetCategory) _then)
+class __$$ResetCategoryImplCopyWithImpl<$Res>
+    extends _$ArticlesInfoFilterEventCopyWithImpl<$Res, _$ResetCategoryImpl>
+    implements _$$ResetCategoryImplCopyWith<$Res> {
+  __$$ResetCategoryImplCopyWithImpl(
+      _$ResetCategoryImpl _value, $Res Function(_$ResetCategoryImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_ResetCategory implements _ResetCategory {
-  const _$_ResetCategory();
+class _$ResetCategoryImpl implements _ResetCategory {
+  const _$ResetCategoryImpl();
 
   @override
   String toString() {
@@ -454,9 +456,9 @@ class _$_ResetCategory implements _ResetCategory {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_ResetCategory);
+        (other.runtimeType == runtimeType && other is _$ResetCategoryImpl);
   }
 
   @override
@@ -545,24 +547,24 @@ class _$_ResetCategory implements _ResetCategory {
 }
 
 abstract class _ResetCategory implements ArticlesInfoFilterEvent {
-  const factory _ResetCategory() = _$_ResetCategory;
+  const factory _ResetCategory() = _$ResetCategoryImpl;
 }
 
 /// @nodoc
-abstract class _$$_FetchCategoryCopyWith<$Res> {
-  factory _$$_FetchCategoryCopyWith(
-          _$_FetchCategory value, $Res Function(_$_FetchCategory) then) =
-      __$$_FetchCategoryCopyWithImpl<$Res>;
+abstract class _$$FetchCategoryImplCopyWith<$Res> {
+  factory _$$FetchCategoryImplCopyWith(
+          _$FetchCategoryImpl value, $Res Function(_$FetchCategoryImpl) then) =
+      __$$FetchCategoryImplCopyWithImpl<$Res>;
   @useResult
   $Res call({SalesOrg salesOrg});
 }
 
 /// @nodoc
-class __$$_FetchCategoryCopyWithImpl<$Res>
-    extends _$ArticlesInfoFilterEventCopyWithImpl<$Res, _$_FetchCategory>
-    implements _$$_FetchCategoryCopyWith<$Res> {
-  __$$_FetchCategoryCopyWithImpl(
-      _$_FetchCategory _value, $Res Function(_$_FetchCategory) _then)
+class __$$FetchCategoryImplCopyWithImpl<$Res>
+    extends _$ArticlesInfoFilterEventCopyWithImpl<$Res, _$FetchCategoryImpl>
+    implements _$$FetchCategoryImplCopyWith<$Res> {
+  __$$FetchCategoryImplCopyWithImpl(
+      _$FetchCategoryImpl _value, $Res Function(_$FetchCategoryImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -570,7 +572,7 @@ class __$$_FetchCategoryCopyWithImpl<$Res>
   $Res call({
     Object? salesOrg = null,
   }) {
-    return _then(_$_FetchCategory(
+    return _then(_$FetchCategoryImpl(
       salesOrg: null == salesOrg
           ? _value.salesOrg
           : salesOrg // ignore: cast_nullable_to_non_nullable
@@ -581,8 +583,8 @@ class __$$_FetchCategoryCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_FetchCategory implements _FetchCategory {
-  const _$_FetchCategory({required this.salesOrg});
+class _$FetchCategoryImpl implements _FetchCategory {
+  const _$FetchCategoryImpl({required this.salesOrg});
 
   @override
   final SalesOrg salesOrg;
@@ -593,10 +595,10 @@ class _$_FetchCategory implements _FetchCategory {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_FetchCategory &&
+            other is _$FetchCategoryImpl &&
             (identical(other.salesOrg, salesOrg) ||
                 other.salesOrg == salesOrg));
   }
@@ -607,8 +609,8 @@ class _$_FetchCategory implements _FetchCategory {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_FetchCategoryCopyWith<_$_FetchCategory> get copyWith =>
-      __$$_FetchCategoryCopyWithImpl<_$_FetchCategory>(this, _$identity);
+  _$$FetchCategoryImplCopyWith<_$FetchCategoryImpl> get copyWith =>
+      __$$FetchCategoryImplCopyWithImpl<_$FetchCategoryImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -694,11 +696,11 @@ class _$_FetchCategory implements _FetchCategory {
 
 abstract class _FetchCategory implements ArticlesInfoFilterEvent {
   const factory _FetchCategory({required final SalesOrg salesOrg}) =
-      _$_FetchCategory;
+      _$FetchCategoryImpl;
 
   SalesOrg get salesOrg;
   @JsonKey(ignore: true)
-  _$$_FetchCategoryCopyWith<_$_FetchCategory> get copyWith =>
+  _$$FetchCategoryImplCopyWith<_$FetchCategoryImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -761,11 +763,12 @@ class _$ArticlesInfoFilterStateCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_ArticlesInfoFilterStateCopyWith<$Res>
+abstract class _$$ArticlesInfoFilterStateImplCopyWith<$Res>
     implements $ArticlesInfoFilterStateCopyWith<$Res> {
-  factory _$$_ArticlesInfoFilterStateCopyWith(_$_ArticlesInfoFilterState value,
-          $Res Function(_$_ArticlesInfoFilterState) then) =
-      __$$_ArticlesInfoFilterStateCopyWithImpl<$Res>;
+  factory _$$ArticlesInfoFilterStateImplCopyWith(
+          _$ArticlesInfoFilterStateImpl value,
+          $Res Function(_$ArticlesInfoFilterStateImpl) then) =
+      __$$ArticlesInfoFilterStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -775,12 +778,13 @@ abstract class _$$_ArticlesInfoFilterStateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_ArticlesInfoFilterStateCopyWithImpl<$Res>
+class __$$ArticlesInfoFilterStateImplCopyWithImpl<$Res>
     extends _$ArticlesInfoFilterStateCopyWithImpl<$Res,
-        _$_ArticlesInfoFilterState>
-    implements _$$_ArticlesInfoFilterStateCopyWith<$Res> {
-  __$$_ArticlesInfoFilterStateCopyWithImpl(_$_ArticlesInfoFilterState _value,
-      $Res Function(_$_ArticlesInfoFilterState) _then)
+        _$ArticlesInfoFilterStateImpl>
+    implements _$$ArticlesInfoFilterStateImplCopyWith<$Res> {
+  __$$ArticlesInfoFilterStateImplCopyWithImpl(
+      _$ArticlesInfoFilterStateImpl _value,
+      $Res Function(_$ArticlesInfoFilterStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -790,7 +794,7 @@ class __$$_ArticlesInfoFilterStateCopyWithImpl<$Res>
     Object? categoryKeyList = null,
     Object? isLoading = null,
   }) {
-    return _then(_$_ArticlesInfoFilterState(
+    return _then(_$ArticlesInfoFilterStateImpl(
       filterCategoryKeyList: null == filterCategoryKeyList
           ? _value._filterCategoryKeyList
           : filterCategoryKeyList // ignore: cast_nullable_to_non_nullable
@@ -809,8 +813,8 @@ class __$$_ArticlesInfoFilterStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_ArticlesInfoFilterState extends _ArticlesInfoFilterState {
-  const _$_ArticlesInfoFilterState(
+class _$ArticlesInfoFilterStateImpl extends _ArticlesInfoFilterState {
+  const _$ArticlesInfoFilterStateImpl(
       {required final List<String> filterCategoryKeyList,
       required final List<String> categoryKeyList,
       required this.isLoading})
@@ -844,10 +848,10 @@ class _$_ArticlesInfoFilterState extends _ArticlesInfoFilterState {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ArticlesInfoFilterState &&
+            other is _$ArticlesInfoFilterStateImpl &&
             const DeepCollectionEquality()
                 .equals(other._filterCategoryKeyList, _filterCategoryKeyList) &&
             const DeepCollectionEquality()
@@ -866,17 +870,16 @@ class _$_ArticlesInfoFilterState extends _ArticlesInfoFilterState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ArticlesInfoFilterStateCopyWith<_$_ArticlesInfoFilterState>
-      get copyWith =>
-          __$$_ArticlesInfoFilterStateCopyWithImpl<_$_ArticlesInfoFilterState>(
-              this, _$identity);
+  _$$ArticlesInfoFilterStateImplCopyWith<_$ArticlesInfoFilterStateImpl>
+      get copyWith => __$$ArticlesInfoFilterStateImplCopyWithImpl<
+          _$ArticlesInfoFilterStateImpl>(this, _$identity);
 }
 
 abstract class _ArticlesInfoFilterState extends ArticlesInfoFilterState {
   const factory _ArticlesInfoFilterState(
       {required final List<String> filterCategoryKeyList,
       required final List<String> categoryKeyList,
-      required final bool isLoading}) = _$_ArticlesInfoFilterState;
+      required final bool isLoading}) = _$ArticlesInfoFilterStateImpl;
   const _ArticlesInfoFilterState._() : super._();
 
   @override
@@ -887,6 +890,6 @@ abstract class _ArticlesInfoFilterState extends ArticlesInfoFilterState {
   bool get isLoading;
   @override
   @JsonKey(ignore: true)
-  _$$_ArticlesInfoFilterStateCopyWith<_$_ArticlesInfoFilterState>
+  _$$ArticlesInfoFilterStateImplCopyWith<_$ArticlesInfoFilterStateImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

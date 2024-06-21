@@ -12,7 +12,7 @@ part of 'mp_remote_config_dto.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 MPRemoteConfigDto _$MPRemoteConfigDtoFromJson(Map<String, dynamic> json) {
   return _MPRemoteConfigDto.fromJson(json);
@@ -77,11 +77,11 @@ class _$MPRemoteConfigDtoCopyWithImpl<$Res, $Val extends MPRemoteConfigDto>
 }
 
 /// @nodoc
-abstract class _$$_MPRemoteConfigDtoCopyWith<$Res>
+abstract class _$$MPRemoteConfigDtoImplCopyWith<$Res>
     implements $MPRemoteConfigDtoCopyWith<$Res> {
-  factory _$$_MPRemoteConfigDtoCopyWith(_$_MPRemoteConfigDto value,
-          $Res Function(_$_MPRemoteConfigDto) then) =
-      __$$_MPRemoteConfigDtoCopyWithImpl<$Res>;
+  factory _$$MPRemoteConfigDtoImplCopyWith(_$MPRemoteConfigDtoImpl value,
+          $Res Function(_$MPRemoteConfigDtoImpl) then) =
+      __$$MPRemoteConfigDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -93,11 +93,11 @@ abstract class _$$_MPRemoteConfigDtoCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_MPRemoteConfigDtoCopyWithImpl<$Res>
-    extends _$MPRemoteConfigDtoCopyWithImpl<$Res, _$_MPRemoteConfigDto>
-    implements _$$_MPRemoteConfigDtoCopyWith<$Res> {
-  __$$_MPRemoteConfigDtoCopyWithImpl(
-      _$_MPRemoteConfigDto _value, $Res Function(_$_MPRemoteConfigDto) _then)
+class __$$MPRemoteConfigDtoImplCopyWithImpl<$Res>
+    extends _$MPRemoteConfigDtoCopyWithImpl<$Res, _$MPRemoteConfigDtoImpl>
+    implements _$$MPRemoteConfigDtoImplCopyWith<$Res> {
+  __$$MPRemoteConfigDtoImplCopyWithImpl(_$MPRemoteConfigDtoImpl _value,
+      $Res Function(_$MPRemoteConfigDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -105,7 +105,7 @@ class __$$_MPRemoteConfigDtoCopyWithImpl<$Res>
   $Res call({
     Object? marketplaceConfig = null,
   }) {
-    return _then(_$_MPRemoteConfigDto(
+    return _then(_$MPRemoteConfigDtoImpl(
       marketplaceConfig: null == marketplaceConfig
           ? _value.marketplaceConfig
           : marketplaceConfig // ignore: cast_nullable_to_non_nullable
@@ -116,13 +116,13 @@ class __$$_MPRemoteConfigDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_MPRemoteConfigDto extends _MPRemoteConfigDto {
-  const _$_MPRemoteConfigDto(
+class _$MPRemoteConfigDtoImpl extends _MPRemoteConfigDto {
+  const _$MPRemoteConfigDtoImpl(
       {@JsonKey(name: 'marketplaceConfig') required this.marketplaceConfig})
       : super._();
 
-  factory _$_MPRemoteConfigDto.fromJson(Map<String, dynamic> json) =>
-      _$$_MPRemoteConfigDtoFromJson(json);
+  factory _$MPRemoteConfigDtoImpl.fromJson(Map<String, dynamic> json) =>
+      _$$MPRemoteConfigDtoImplFromJson(json);
 
   @override
   @JsonKey(name: 'marketplaceConfig')
@@ -134,10 +134,10 @@ class _$_MPRemoteConfigDto extends _MPRemoteConfigDto {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_MPRemoteConfigDto &&
+            other is _$MPRemoteConfigDtoImpl &&
             (identical(other.marketplaceConfig, marketplaceConfig) ||
                 other.marketplaceConfig == marketplaceConfig));
   }
@@ -149,13 +149,13 @@ class _$_MPRemoteConfigDto extends _MPRemoteConfigDto {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_MPRemoteConfigDtoCopyWith<_$_MPRemoteConfigDto> get copyWith =>
-      __$$_MPRemoteConfigDtoCopyWithImpl<_$_MPRemoteConfigDto>(
+  _$$MPRemoteConfigDtoImplCopyWith<_$MPRemoteConfigDtoImpl> get copyWith =>
+      __$$MPRemoteConfigDtoImplCopyWithImpl<_$MPRemoteConfigDtoImpl>(
           this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_MPRemoteConfigDtoToJson(
+    return _$$MPRemoteConfigDtoImplToJson(
       this,
     );
   }
@@ -165,18 +165,18 @@ abstract class _MPRemoteConfigDto extends MPRemoteConfigDto {
   const factory _MPRemoteConfigDto(
           {@JsonKey(name: 'marketplaceConfig')
           required final MPRemoteConfigValueDto marketplaceConfig}) =
-      _$_MPRemoteConfigDto;
+      _$MPRemoteConfigDtoImpl;
   const _MPRemoteConfigDto._() : super._();
 
   factory _MPRemoteConfigDto.fromJson(Map<String, dynamic> json) =
-      _$_MPRemoteConfigDto.fromJson;
+      _$MPRemoteConfigDtoImpl.fromJson;
 
   @override
   @JsonKey(name: 'marketplaceConfig')
   MPRemoteConfigValueDto get marketplaceConfig;
   @override
   @JsonKey(ignore: true)
-  _$$_MPRemoteConfigDtoCopyWith<_$_MPRemoteConfigDto> get copyWith =>
+  _$$MPRemoteConfigDtoImplCopyWith<_$MPRemoteConfigDtoImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -231,23 +231,25 @@ class _$MPRemoteConfigValueDtoCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_MPRemoteConfigValueDtoCopyWith<$Res>
+abstract class _$$MPRemoteConfigValueDtoImplCopyWith<$Res>
     implements $MPRemoteConfigValueDtoCopyWith<$Res> {
-  factory _$$_MPRemoteConfigValueDtoCopyWith(_$_MPRemoteConfigValueDto value,
-          $Res Function(_$_MPRemoteConfigValueDto) then) =
-      __$$_MPRemoteConfigValueDtoCopyWithImpl<$Res>;
+  factory _$$MPRemoteConfigValueDtoImplCopyWith(
+          _$MPRemoteConfigValueDtoImpl value,
+          $Res Function(_$MPRemoteConfigValueDtoImpl) then) =
+      __$$MPRemoteConfigValueDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({@JsonKey(name: 'whitelist') List<String> whiteList});
 }
 
 /// @nodoc
-class __$$_MPRemoteConfigValueDtoCopyWithImpl<$Res>
+class __$$MPRemoteConfigValueDtoImplCopyWithImpl<$Res>
     extends _$MPRemoteConfigValueDtoCopyWithImpl<$Res,
-        _$_MPRemoteConfigValueDto>
-    implements _$$_MPRemoteConfigValueDtoCopyWith<$Res> {
-  __$$_MPRemoteConfigValueDtoCopyWithImpl(_$_MPRemoteConfigValueDto _value,
-      $Res Function(_$_MPRemoteConfigValueDto) _then)
+        _$MPRemoteConfigValueDtoImpl>
+    implements _$$MPRemoteConfigValueDtoImplCopyWith<$Res> {
+  __$$MPRemoteConfigValueDtoImplCopyWithImpl(
+      _$MPRemoteConfigValueDtoImpl _value,
+      $Res Function(_$MPRemoteConfigValueDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -255,7 +257,7 @@ class __$$_MPRemoteConfigValueDtoCopyWithImpl<$Res>
   $Res call({
     Object? whiteList = null,
   }) {
-    return _then(_$_MPRemoteConfigValueDto(
+    return _then(_$MPRemoteConfigValueDtoImpl(
       whiteList: null == whiteList
           ? _value._whiteList
           : whiteList // ignore: cast_nullable_to_non_nullable
@@ -266,14 +268,14 @@ class __$$_MPRemoteConfigValueDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_MPRemoteConfigValueDto extends _MPRemoteConfigValueDto {
-  const _$_MPRemoteConfigValueDto(
+class _$MPRemoteConfigValueDtoImpl extends _MPRemoteConfigValueDto {
+  const _$MPRemoteConfigValueDtoImpl(
       {@JsonKey(name: 'whitelist') required final List<String> whiteList})
       : _whiteList = whiteList,
         super._();
 
-  factory _$_MPRemoteConfigValueDto.fromJson(Map<String, dynamic> json) =>
-      _$$_MPRemoteConfigValueDtoFromJson(json);
+  factory _$MPRemoteConfigValueDtoImpl.fromJson(Map<String, dynamic> json) =>
+      _$$MPRemoteConfigValueDtoImplFromJson(json);
 
   final List<String> _whiteList;
   @override
@@ -290,10 +292,10 @@ class _$_MPRemoteConfigValueDto extends _MPRemoteConfigValueDto {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_MPRemoteConfigValueDto &&
+            other is _$MPRemoteConfigValueDtoImpl &&
             const DeepCollectionEquality()
                 .equals(other._whiteList, _whiteList));
   }
@@ -306,13 +308,13 @@ class _$_MPRemoteConfigValueDto extends _MPRemoteConfigValueDto {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_MPRemoteConfigValueDtoCopyWith<_$_MPRemoteConfigValueDto> get copyWith =>
-      __$$_MPRemoteConfigValueDtoCopyWithImpl<_$_MPRemoteConfigValueDto>(
-          this, _$identity);
+  _$$MPRemoteConfigValueDtoImplCopyWith<_$MPRemoteConfigValueDtoImpl>
+      get copyWith => __$$MPRemoteConfigValueDtoImplCopyWithImpl<
+          _$MPRemoteConfigValueDtoImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_MPRemoteConfigValueDtoToJson(
+    return _$$MPRemoteConfigValueDtoImplToJson(
       this,
     );
   }
@@ -321,17 +323,17 @@ class _$_MPRemoteConfigValueDto extends _MPRemoteConfigValueDto {
 abstract class _MPRemoteConfigValueDto extends MPRemoteConfigValueDto {
   const factory _MPRemoteConfigValueDto(
           {@JsonKey(name: 'whitelist') required final List<String> whiteList}) =
-      _$_MPRemoteConfigValueDto;
+      _$MPRemoteConfigValueDtoImpl;
   const _MPRemoteConfigValueDto._() : super._();
 
   factory _MPRemoteConfigValueDto.fromJson(Map<String, dynamic> json) =
-      _$_MPRemoteConfigValueDto.fromJson;
+      _$MPRemoteConfigValueDtoImpl.fromJson;
 
   @override
   @JsonKey(name: 'whitelist')
   List<String> get whiteList;
   @override
   @JsonKey(ignore: true)
-  _$$_MPRemoteConfigValueDtoCopyWith<_$_MPRemoteConfigValueDto> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$MPRemoteConfigValueDtoImplCopyWith<_$MPRemoteConfigValueDtoImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }

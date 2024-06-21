@@ -12,7 +12,7 @@ part of 'product_detail_aggregate.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$ProductDetailAggregate {
@@ -115,11 +115,12 @@ class _$ProductDetailAggregateCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_ProductDetailAggregateCopyWith<$Res>
+abstract class _$$ProductDetailAggregateImplCopyWith<$Res>
     implements $ProductDetailAggregateCopyWith<$Res> {
-  factory _$$_ProductDetailAggregateCopyWith(_$_ProductDetailAggregate value,
-          $Res Function(_$_ProductDetailAggregate) then) =
-      __$$_ProductDetailAggregateCopyWithImpl<$Res>;
+  factory _$$ProductDetailAggregateImplCopyWith(
+          _$ProductDetailAggregateImpl value,
+          $Res Function(_$ProductDetailAggregateImpl) then) =
+      __$$ProductDetailAggregateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -138,12 +139,13 @@ abstract class _$$_ProductDetailAggregateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_ProductDetailAggregateCopyWithImpl<$Res>
+class __$$ProductDetailAggregateImplCopyWithImpl<$Res>
     extends _$ProductDetailAggregateCopyWithImpl<$Res,
-        _$_ProductDetailAggregate>
-    implements _$$_ProductDetailAggregateCopyWith<$Res> {
-  __$$_ProductDetailAggregateCopyWithImpl(_$_ProductDetailAggregate _value,
-      $Res Function(_$_ProductDetailAggregate) _then)
+        _$ProductDetailAggregateImpl>
+    implements _$$ProductDetailAggregateImplCopyWith<$Res> {
+  __$$ProductDetailAggregateImplCopyWithImpl(
+      _$ProductDetailAggregateImpl _value,
+      $Res Function(_$ProductDetailAggregateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -155,7 +157,7 @@ class __$$_ProductDetailAggregateCopyWithImpl<$Res>
     Object? stockInfo = null,
     Object? exeedQty = null,
   }) {
-    return _then(_$_ProductDetailAggregate(
+    return _then(_$ProductDetailAggregateImpl(
       materialInfo: null == materialInfo
           ? _value.materialInfo
           : materialInfo // ignore: cast_nullable_to_non_nullable
@@ -182,8 +184,8 @@ class __$$_ProductDetailAggregateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_ProductDetailAggregate extends _ProductDetailAggregate {
-  _$_ProductDetailAggregate(
+class _$ProductDetailAggregateImpl extends _ProductDetailAggregate {
+  _$ProductDetailAggregateImpl(
       {required this.materialInfo,
       required this.productItem,
       required final List<MaterialInfo> similarProduct,
@@ -215,10 +217,10 @@ class _$_ProductDetailAggregate extends _ProductDetailAggregate {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ProductDetailAggregate &&
+            other is _$ProductDetailAggregateImpl &&
             (identical(other.materialInfo, materialInfo) ||
                 other.materialInfo == materialInfo) &&
             (identical(other.productItem, productItem) ||
@@ -243,9 +245,9 @@ class _$_ProductDetailAggregate extends _ProductDetailAggregate {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ProductDetailAggregateCopyWith<_$_ProductDetailAggregate> get copyWith =>
-      __$$_ProductDetailAggregateCopyWithImpl<_$_ProductDetailAggregate>(
-          this, _$identity);
+  _$$ProductDetailAggregateImplCopyWith<_$ProductDetailAggregateImpl>
+      get copyWith => __$$ProductDetailAggregateImplCopyWithImpl<
+          _$ProductDetailAggregateImpl>(this, _$identity);
 }
 
 abstract class _ProductDetailAggregate extends ProductDetailAggregate {
@@ -254,7 +256,7 @@ abstract class _ProductDetailAggregate extends ProductDetailAggregate {
       required final ProductItem productItem,
       required final List<MaterialInfo> similarProduct,
       required final StockInfo stockInfo,
-      required final bool exeedQty}) = _$_ProductDetailAggregate;
+      required final bool exeedQty}) = _$ProductDetailAggregateImpl;
   _ProductDetailAggregate._() : super._();
 
   @override
@@ -269,6 +271,6 @@ abstract class _ProductDetailAggregate extends ProductDetailAggregate {
   bool get exeedQty;
   @override
   @JsonKey(ignore: true)
-  _$$_ProductDetailAggregateCopyWith<_$_ProductDetailAggregate> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$ProductDetailAggregateImplCopyWith<_$ProductDetailAggregateImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }

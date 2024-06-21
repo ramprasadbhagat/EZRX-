@@ -12,7 +12,7 @@ part of 'full_summary_bloc.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$FullSummaryEvent {
@@ -87,10 +87,10 @@ class _$FullSummaryEventCopyWithImpl<$Res, $Val extends FullSummaryEvent>
 }
 
 /// @nodoc
-abstract class _$$_initializedCopyWith<$Res> {
-  factory _$$_initializedCopyWith(
-          _$_initialized value, $Res Function(_$_initialized) then) =
-      __$$_initializedCopyWithImpl<$Res>;
+abstract class _$$initializedImplCopyWith<$Res> {
+  factory _$$initializedImplCopyWith(
+          _$initializedImpl value, $Res Function(_$initializedImpl) then) =
+      __$$initializedImplCopyWithImpl<$Res>;
   @useResult
   $Res call(
       {SalesOrganisation salesOrganisation, CustomerCodeInfo customerCodeInfo});
@@ -100,11 +100,11 @@ abstract class _$$_initializedCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_initializedCopyWithImpl<$Res>
-    extends _$FullSummaryEventCopyWithImpl<$Res, _$_initialized>
-    implements _$$_initializedCopyWith<$Res> {
-  __$$_initializedCopyWithImpl(
-      _$_initialized _value, $Res Function(_$_initialized) _then)
+class __$$initializedImplCopyWithImpl<$Res>
+    extends _$FullSummaryEventCopyWithImpl<$Res, _$initializedImpl>
+    implements _$$initializedImplCopyWith<$Res> {
+  __$$initializedImplCopyWithImpl(
+      _$initializedImpl _value, $Res Function(_$initializedImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -113,7 +113,7 @@ class __$$_initializedCopyWithImpl<$Res>
     Object? salesOrganisation = null,
     Object? customerCodeInfo = null,
   }) {
-    return _then(_$_initialized(
+    return _then(_$initializedImpl(
       salesOrganisation: null == salesOrganisation
           ? _value.salesOrganisation
           : salesOrganisation // ignore: cast_nullable_to_non_nullable
@@ -144,8 +144,8 @@ class __$$_initializedCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_initialized implements _initialized {
-  const _$_initialized(
+class _$initializedImpl implements _initialized {
+  const _$initializedImpl(
       {required this.salesOrganisation, required this.customerCodeInfo});
 
   @override
@@ -159,10 +159,10 @@ class _$_initialized implements _initialized {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_initialized &&
+            other is _$initializedImpl &&
             (identical(other.salesOrganisation, salesOrganisation) ||
                 other.salesOrganisation == salesOrganisation) &&
             (identical(other.customerCodeInfo, customerCodeInfo) ||
@@ -176,8 +176,8 @@ class _$_initialized implements _initialized {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_initializedCopyWith<_$_initialized> get copyWith =>
-      __$$_initializedCopyWithImpl<_$_initialized>(this, _$identity);
+  _$$initializedImplCopyWith<_$initializedImpl> get copyWith =>
+      __$$initializedImplCopyWithImpl<_$initializedImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -257,19 +257,20 @@ class _$_initialized implements _initialized {
 abstract class _initialized implements FullSummaryEvent {
   const factory _initialized(
       {required final SalesOrganisation salesOrganisation,
-      required final CustomerCodeInfo customerCodeInfo}) = _$_initialized;
+      required final CustomerCodeInfo customerCodeInfo}) = _$initializedImpl;
 
   SalesOrganisation get salesOrganisation;
   CustomerCodeInfo get customerCodeInfo;
   @JsonKey(ignore: true)
-  _$$_initializedCopyWith<_$_initialized> get copyWith =>
+  _$$initializedImplCopyWith<_$initializedImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_FetchCopyWith<$Res> {
-  factory _$$_FetchCopyWith(_$_Fetch value, $Res Function(_$_Fetch) then) =
-      __$$_FetchCopyWithImpl<$Res>;
+abstract class _$$FetchImplCopyWith<$Res> {
+  factory _$$FetchImplCopyWith(
+          _$FetchImpl value, $Res Function(_$FetchImpl) then) =
+      __$$FetchImplCopyWithImpl<$Res>;
   @useResult
   $Res call({FullSummaryFilter appliedFilter});
 
@@ -277,10 +278,11 @@ abstract class _$$_FetchCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_FetchCopyWithImpl<$Res>
-    extends _$FullSummaryEventCopyWithImpl<$Res, _$_Fetch>
-    implements _$$_FetchCopyWith<$Res> {
-  __$$_FetchCopyWithImpl(_$_Fetch _value, $Res Function(_$_Fetch) _then)
+class __$$FetchImplCopyWithImpl<$Res>
+    extends _$FullSummaryEventCopyWithImpl<$Res, _$FetchImpl>
+    implements _$$FetchImplCopyWith<$Res> {
+  __$$FetchImplCopyWithImpl(
+      _$FetchImpl _value, $Res Function(_$FetchImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -288,7 +290,7 @@ class __$$_FetchCopyWithImpl<$Res>
   $Res call({
     Object? appliedFilter = null,
   }) {
-    return _then(_$_Fetch(
+    return _then(_$FetchImpl(
       appliedFilter: null == appliedFilter
           ? _value.appliedFilter
           : appliedFilter // ignore: cast_nullable_to_non_nullable
@@ -307,8 +309,8 @@ class __$$_FetchCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_Fetch implements _Fetch {
-  const _$_Fetch({required this.appliedFilter});
+class _$FetchImpl implements _Fetch {
+  const _$FetchImpl({required this.appliedFilter});
 
   @override
   final FullSummaryFilter appliedFilter;
@@ -319,10 +321,10 @@ class _$_Fetch implements _Fetch {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Fetch &&
+            other is _$FetchImpl &&
             (identical(other.appliedFilter, appliedFilter) ||
                 other.appliedFilter == appliedFilter));
   }
@@ -333,8 +335,8 @@ class _$_Fetch implements _Fetch {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_FetchCopyWith<_$_Fetch> get copyWith =>
-      __$$_FetchCopyWithImpl<_$_Fetch>(this, _$identity);
+  _$$FetchImplCopyWith<_$FetchImpl> get copyWith =>
+      __$$FetchImplCopyWithImpl<_$FetchImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -413,34 +415,34 @@ class _$_Fetch implements _Fetch {
 
 abstract class _Fetch implements FullSummaryEvent {
   const factory _Fetch({required final FullSummaryFilter appliedFilter}) =
-      _$_Fetch;
+      _$FetchImpl;
 
   FullSummaryFilter get appliedFilter;
   @JsonKey(ignore: true)
-  _$$_FetchCopyWith<_$_Fetch> get copyWith =>
+  _$$FetchImplCopyWith<_$FetchImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_LoadMoreCopyWith<$Res> {
-  factory _$$_LoadMoreCopyWith(
-          _$_LoadMore value, $Res Function(_$_LoadMore) then) =
-      __$$_LoadMoreCopyWithImpl<$Res>;
+abstract class _$$LoadMoreImplCopyWith<$Res> {
+  factory _$$LoadMoreImplCopyWith(
+          _$LoadMoreImpl value, $Res Function(_$LoadMoreImpl) then) =
+      __$$LoadMoreImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_LoadMoreCopyWithImpl<$Res>
-    extends _$FullSummaryEventCopyWithImpl<$Res, _$_LoadMore>
-    implements _$$_LoadMoreCopyWith<$Res> {
-  __$$_LoadMoreCopyWithImpl(
-      _$_LoadMore _value, $Res Function(_$_LoadMore) _then)
+class __$$LoadMoreImplCopyWithImpl<$Res>
+    extends _$FullSummaryEventCopyWithImpl<$Res, _$LoadMoreImpl>
+    implements _$$LoadMoreImplCopyWith<$Res> {
+  __$$LoadMoreImplCopyWithImpl(
+      _$LoadMoreImpl _value, $Res Function(_$LoadMoreImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_LoadMore implements _LoadMore {
-  const _$_LoadMore();
+class _$LoadMoreImpl implements _LoadMore {
+  const _$LoadMoreImpl();
 
   @override
   String toString() {
@@ -448,9 +450,9 @@ class _$_LoadMore implements _LoadMore {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_LoadMore);
+        (other.runtimeType == runtimeType && other is _$LoadMoreImpl);
   }
 
   @override
@@ -532,7 +534,7 @@ class _$_LoadMore implements _LoadMore {
 }
 
 abstract class _LoadMore implements FullSummaryEvent {
-  const factory _LoadMore() = _$_LoadMore;
+  const factory _LoadMore() = _$LoadMoreImpl;
 }
 
 /// @nodoc
@@ -650,11 +652,11 @@ class _$FullSummaryStateCopyWithImpl<$Res, $Val extends FullSummaryState>
 }
 
 /// @nodoc
-abstract class _$$_FullSummaryStateCopyWith<$Res>
+abstract class _$$FullSummaryStateImplCopyWith<$Res>
     implements $FullSummaryStateCopyWith<$Res> {
-  factory _$$_FullSummaryStateCopyWith(
-          _$_FullSummaryState value, $Res Function(_$_FullSummaryState) then) =
-      __$$_FullSummaryStateCopyWithImpl<$Res>;
+  factory _$$FullSummaryStateImplCopyWith(_$FullSummaryStateImpl value,
+          $Res Function(_$FullSummaryStateImpl) then) =
+      __$$FullSummaryStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -675,11 +677,11 @@ abstract class _$$_FullSummaryStateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_FullSummaryStateCopyWithImpl<$Res>
-    extends _$FullSummaryStateCopyWithImpl<$Res, _$_FullSummaryState>
-    implements _$$_FullSummaryStateCopyWith<$Res> {
-  __$$_FullSummaryStateCopyWithImpl(
-      _$_FullSummaryState _value, $Res Function(_$_FullSummaryState) _then)
+class __$$FullSummaryStateImplCopyWithImpl<$Res>
+    extends _$FullSummaryStateCopyWithImpl<$Res, _$FullSummaryStateImpl>
+    implements _$$FullSummaryStateImplCopyWith<$Res> {
+  __$$FullSummaryStateImplCopyWithImpl(_$FullSummaryStateImpl _value,
+      $Res Function(_$FullSummaryStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -693,7 +695,7 @@ class __$$_FullSummaryStateCopyWithImpl<$Res>
     Object? isLoading = null,
     Object? canLoadMore = null,
   }) {
-    return _then(_$_FullSummaryState(
+    return _then(_$FullSummaryStateImpl(
       salesOrganisation: null == salesOrganisation
           ? _value.salesOrganisation
           : salesOrganisation // ignore: cast_nullable_to_non_nullable
@@ -728,8 +730,8 @@ class __$$_FullSummaryStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_FullSummaryState extends _FullSummaryState {
-  const _$_FullSummaryState(
+class _$FullSummaryStateImpl extends _FullSummaryState {
+  const _$FullSummaryStateImpl(
       {required this.salesOrganisation,
       required this.customerCodeInfo,
       required this.appliedFilter,
@@ -767,10 +769,10 @@ class _$_FullSummaryState extends _FullSummaryState {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_FullSummaryState &&
+            other is _$FullSummaryStateImpl &&
             (identical(other.salesOrganisation, salesOrganisation) ||
                 other.salesOrganisation == salesOrganisation) &&
             (identical(other.customerCodeInfo, customerCodeInfo) ||
@@ -800,8 +802,9 @@ class _$_FullSummaryState extends _FullSummaryState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_FullSummaryStateCopyWith<_$_FullSummaryState> get copyWith =>
-      __$$_FullSummaryStateCopyWithImpl<_$_FullSummaryState>(this, _$identity);
+  _$$FullSummaryStateImplCopyWith<_$FullSummaryStateImpl> get copyWith =>
+      __$$FullSummaryStateImplCopyWithImpl<_$FullSummaryStateImpl>(
+          this, _$identity);
 }
 
 abstract class _FullSummaryState extends FullSummaryState {
@@ -812,7 +815,7 @@ abstract class _FullSummaryState extends FullSummaryState {
       required final List<CreditAndInvoiceItem> items,
       required final Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
       required final bool isLoading,
-      required final bool canLoadMore}) = _$_FullSummaryState;
+      required final bool canLoadMore}) = _$FullSummaryStateImpl;
   const _FullSummaryState._() : super._();
 
   @override
@@ -831,6 +834,6 @@ abstract class _FullSummaryState extends FullSummaryState {
   bool get canLoadMore;
   @override
   @JsonKey(ignore: true)
-  _$$_FullSummaryStateCopyWith<_$_FullSummaryState> get copyWith =>
+  _$$FullSummaryStateImplCopyWith<_$FullSummaryStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -12,7 +12,7 @@ part of 'download_e_credit_bloc.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$DownloadECreditEvent {
@@ -77,20 +77,23 @@ class _$DownloadECreditEventCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_FetchECreditDownloadUrlCopyWith<$Res> {
-  factory _$$_FetchECreditDownloadUrlCopyWith(_$_FetchECreditDownloadUrl value,
-          $Res Function(_$_FetchECreditDownloadUrl) then) =
-      __$$_FetchECreditDownloadUrlCopyWithImpl<$Res>;
+abstract class _$$FetchECreditDownloadUrlImplCopyWith<$Res> {
+  factory _$$FetchECreditDownloadUrlImplCopyWith(
+          _$FetchECreditDownloadUrlImpl value,
+          $Res Function(_$FetchECreditDownloadUrlImpl) then) =
+      __$$FetchECreditDownloadUrlImplCopyWithImpl<$Res>;
   @useResult
   $Res call({String eCredit});
 }
 
 /// @nodoc
-class __$$_FetchECreditDownloadUrlCopyWithImpl<$Res>
-    extends _$DownloadECreditEventCopyWithImpl<$Res, _$_FetchECreditDownloadUrl>
-    implements _$$_FetchECreditDownloadUrlCopyWith<$Res> {
-  __$$_FetchECreditDownloadUrlCopyWithImpl(_$_FetchECreditDownloadUrl _value,
-      $Res Function(_$_FetchECreditDownloadUrl) _then)
+class __$$FetchECreditDownloadUrlImplCopyWithImpl<$Res>
+    extends _$DownloadECreditEventCopyWithImpl<$Res,
+        _$FetchECreditDownloadUrlImpl>
+    implements _$$FetchECreditDownloadUrlImplCopyWith<$Res> {
+  __$$FetchECreditDownloadUrlImplCopyWithImpl(
+      _$FetchECreditDownloadUrlImpl _value,
+      $Res Function(_$FetchECreditDownloadUrlImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -98,7 +101,7 @@ class __$$_FetchECreditDownloadUrlCopyWithImpl<$Res>
   $Res call({
     Object? eCredit = null,
   }) {
-    return _then(_$_FetchECreditDownloadUrl(
+    return _then(_$FetchECreditDownloadUrlImpl(
       eCredit: null == eCredit
           ? _value.eCredit
           : eCredit // ignore: cast_nullable_to_non_nullable
@@ -109,8 +112,8 @@ class __$$_FetchECreditDownloadUrlCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_FetchECreditDownloadUrl implements _FetchECreditDownloadUrl {
-  const _$_FetchECreditDownloadUrl({required this.eCredit});
+class _$FetchECreditDownloadUrlImpl implements _FetchECreditDownloadUrl {
+  const _$FetchECreditDownloadUrlImpl({required this.eCredit});
 
   @override
   final String eCredit;
@@ -121,10 +124,10 @@ class _$_FetchECreditDownloadUrl implements _FetchECreditDownloadUrl {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_FetchECreditDownloadUrl &&
+            other is _$FetchECreditDownloadUrlImpl &&
             (identical(other.eCredit, eCredit) || other.eCredit == eCredit));
   }
 
@@ -134,10 +137,9 @@ class _$_FetchECreditDownloadUrl implements _FetchECreditDownloadUrl {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_FetchECreditDownloadUrlCopyWith<_$_FetchECreditDownloadUrl>
-      get copyWith =>
-          __$$_FetchECreditDownloadUrlCopyWithImpl<_$_FetchECreditDownloadUrl>(
-              this, _$identity);
+  _$$FetchECreditDownloadUrlImplCopyWith<_$FetchECreditDownloadUrlImpl>
+      get copyWith => __$$FetchECreditDownloadUrlImplCopyWithImpl<
+          _$FetchECreditDownloadUrlImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -205,34 +207,34 @@ class _$_FetchECreditDownloadUrl implements _FetchECreditDownloadUrl {
 
 abstract class _FetchECreditDownloadUrl implements DownloadECreditEvent {
   const factory _FetchECreditDownloadUrl({required final String eCredit}) =
-      _$_FetchECreditDownloadUrl;
+      _$FetchECreditDownloadUrlImpl;
 
   String get eCredit;
   @JsonKey(ignore: true)
-  _$$_FetchECreditDownloadUrlCopyWith<_$_FetchECreditDownloadUrl>
+  _$$FetchECreditDownloadUrlImplCopyWith<_$FetchECreditDownloadUrlImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_DownloadECreditCopyWith<$Res> {
-  factory _$$_DownloadECreditCopyWith(
-          _$_DownloadECredit value, $Res Function(_$_DownloadECredit) then) =
-      __$$_DownloadECreditCopyWithImpl<$Res>;
+abstract class _$$DownloadECreditImplCopyWith<$Res> {
+  factory _$$DownloadECreditImplCopyWith(_$DownloadECreditImpl value,
+          $Res Function(_$DownloadECreditImpl) then) =
+      __$$DownloadECreditImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_DownloadECreditCopyWithImpl<$Res>
-    extends _$DownloadECreditEventCopyWithImpl<$Res, _$_DownloadECredit>
-    implements _$$_DownloadECreditCopyWith<$Res> {
-  __$$_DownloadECreditCopyWithImpl(
-      _$_DownloadECredit _value, $Res Function(_$_DownloadECredit) _then)
+class __$$DownloadECreditImplCopyWithImpl<$Res>
+    extends _$DownloadECreditEventCopyWithImpl<$Res, _$DownloadECreditImpl>
+    implements _$$DownloadECreditImplCopyWith<$Res> {
+  __$$DownloadECreditImplCopyWithImpl(
+      _$DownloadECreditImpl _value, $Res Function(_$DownloadECreditImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_DownloadECredit implements _DownloadECredit {
-  const _$_DownloadECredit();
+class _$DownloadECreditImpl implements _DownloadECredit {
+  const _$DownloadECreditImpl();
 
   @override
   String toString() {
@@ -240,9 +242,9 @@ class _$_DownloadECredit implements _DownloadECredit {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_DownloadECredit);
+        (other.runtimeType == runtimeType && other is _$DownloadECreditImpl);
   }
 
   @override
@@ -313,7 +315,7 @@ class _$_DownloadECredit implements _DownloadECredit {
 }
 
 abstract class _DownloadECredit implements DownloadECreditEvent {
-  const factory _DownloadECredit() = _$_DownloadECredit;
+  const factory _DownloadECredit() = _$DownloadECreditImpl;
 }
 
 /// @nodoc
@@ -386,11 +388,11 @@ class _$DownloadECreditStateCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_DownloadECreditStateCopyWith<$Res>
+abstract class _$$DownloadECreditStateImplCopyWith<$Res>
     implements $DownloadECreditStateCopyWith<$Res> {
-  factory _$$_DownloadECreditStateCopyWith(_$_DownloadECreditState value,
-          $Res Function(_$_DownloadECreditState) then) =
-      __$$_DownloadECreditStateCopyWithImpl<$Res>;
+  factory _$$DownloadECreditStateImplCopyWith(_$DownloadECreditStateImpl value,
+          $Res Function(_$DownloadECreditStateImpl) then) =
+      __$$DownloadECreditStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -403,11 +405,11 @@ abstract class _$$_DownloadECreditStateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_DownloadECreditStateCopyWithImpl<$Res>
-    extends _$DownloadECreditStateCopyWithImpl<$Res, _$_DownloadECreditState>
-    implements _$$_DownloadECreditStateCopyWith<$Res> {
-  __$$_DownloadECreditStateCopyWithImpl(_$_DownloadECreditState _value,
-      $Res Function(_$_DownloadECreditState) _then)
+class __$$DownloadECreditStateImplCopyWithImpl<$Res>
+    extends _$DownloadECreditStateCopyWithImpl<$Res, _$DownloadECreditStateImpl>
+    implements _$$DownloadECreditStateImplCopyWith<$Res> {
+  __$$DownloadECreditStateImplCopyWithImpl(_$DownloadECreditStateImpl _value,
+      $Res Function(_$DownloadECreditStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -417,7 +419,7 @@ class __$$_DownloadECreditStateCopyWithImpl<$Res>
     Object? failureOrSuccessOption = null,
     Object? isDownloading = null,
   }) {
-    return _then(_$_DownloadECreditState(
+    return _then(_$DownloadECreditStateImpl(
       fileUrl: null == fileUrl
           ? _value.fileUrl
           : fileUrl // ignore: cast_nullable_to_non_nullable
@@ -436,8 +438,8 @@ class __$$_DownloadECreditStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_DownloadECreditState implements _DownloadECreditState {
-  const _$_DownloadECreditState(
+class _$DownloadECreditStateImpl implements _DownloadECreditState {
+  const _$DownloadECreditStateImpl(
       {required this.fileUrl,
       required this.failureOrSuccessOption,
       required this.isDownloading});
@@ -455,10 +457,10 @@ class _$_DownloadECreditState implements _DownloadECreditState {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_DownloadECreditState &&
+            other is _$DownloadECreditStateImpl &&
             (identical(other.fileUrl, fileUrl) || other.fileUrl == fileUrl) &&
             (identical(other.failureOrSuccessOption, failureOrSuccessOption) ||
                 other.failureOrSuccessOption == failureOrSuccessOption) &&
@@ -473,16 +475,17 @@ class _$_DownloadECreditState implements _DownloadECreditState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_DownloadECreditStateCopyWith<_$_DownloadECreditState> get copyWith =>
-      __$$_DownloadECreditStateCopyWithImpl<_$_DownloadECreditState>(
-          this, _$identity);
+  _$$DownloadECreditStateImplCopyWith<_$DownloadECreditStateImpl>
+      get copyWith =>
+          __$$DownloadECreditStateImplCopyWithImpl<_$DownloadECreditStateImpl>(
+              this, _$identity);
 }
 
 abstract class _DownloadECreditState implements DownloadECreditState {
   const factory _DownloadECreditState(
       {required final DownloadPaymentAttachment fileUrl,
       required final Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
-      required final bool isDownloading}) = _$_DownloadECreditState;
+      required final bool isDownloading}) = _$DownloadECreditStateImpl;
 
   @override
   DownloadPaymentAttachment get fileUrl;
@@ -492,6 +495,6 @@ abstract class _DownloadECreditState implements DownloadECreditState {
   bool get isDownloading;
   @override
   @JsonKey(ignore: true)
-  _$$_DownloadECreditStateCopyWith<_$_DownloadECreditState> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$DownloadECreditStateImplCopyWith<_$DownloadECreditStateImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }

@@ -6,14 +6,14 @@ part of 'principal_cutoffs_dto.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_PrincipalCutoffsDto _$$_PrincipalCutoffsDtoFromJson(
+_$PrincipalCutoffsDtoImpl _$$PrincipalCutoffsDtoImplFromJson(
         Map<String, dynamic> json) =>
-    _$_PrincipalCutoffsDto(
-      total: json['total'] as int? ?? 0,
+    _$PrincipalCutoffsDtoImpl(
+      total: (json['total'] as num?)?.toInt() ?? 0,
     );
 
-Map<String, dynamic> _$$_PrincipalCutoffsDtoToJson(
-        _$_PrincipalCutoffsDto instance) =>
+Map<String, dynamic> _$$PrincipalCutoffsDtoImplToJson(
+        _$PrincipalCutoffsDtoImpl instance) =>
     <String, dynamic>{
       'total': instance.total,
     };

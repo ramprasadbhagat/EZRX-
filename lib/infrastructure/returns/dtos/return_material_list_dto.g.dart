@@ -6,9 +6,9 @@ part of 'return_material_list_dto.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_ReturnMaterialListDto _$$_ReturnMaterialListDtoFromJson(
+_$ReturnMaterialListDtoImpl _$$ReturnMaterialListDtoImplFromJson(
         Map<String, dynamic> json) =>
-    _$_ReturnMaterialListDto(
+    _$ReturnMaterialListDtoImpl(
       basicInformations: (json['materialBasicInformation'] as List<dynamic>?)
               ?.map((e) => MaterialBasicInformationDto.fromJson(
                   e as Map<String, dynamic>))
@@ -19,8 +19,8 @@ _$_ReturnMaterialListDto _$$_ReturnMaterialListDtoFromJson(
           : _mappingReturnMaterial(json['materials']),
     );
 
-Map<String, dynamic> _$$_ReturnMaterialListDtoToJson(
-        _$_ReturnMaterialListDto instance) =>
+Map<String, dynamic> _$$ReturnMaterialListDtoImplToJson(
+        _$ReturnMaterialListDtoImpl instance) =>
     <String, dynamic>{
       'materialBasicInformation':
           instance.basicInformations.map((e) => e.toJson()).toList(),

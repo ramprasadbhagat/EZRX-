@@ -12,7 +12,7 @@ part of 'return_request_attachment.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$ReturnRequestAttachment {
@@ -70,23 +70,25 @@ class _$ReturnRequestAttachmentCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_ReturnRequestAttachmentCopyWith<$Res>
+abstract class _$$ReturnRequestAttachmentImplCopyWith<$Res>
     implements $ReturnRequestAttachmentCopyWith<$Res> {
-  factory _$$_ReturnRequestAttachmentCopyWith(_$_ReturnRequestAttachment value,
-          $Res Function(_$_ReturnRequestAttachment) then) =
-      __$$_ReturnRequestAttachmentCopyWithImpl<$Res>;
+  factory _$$ReturnRequestAttachmentImplCopyWith(
+          _$ReturnRequestAttachmentImpl value,
+          $Res Function(_$ReturnRequestAttachmentImpl) then) =
+      __$$ReturnRequestAttachmentImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String path, String name, FileSize size});
 }
 
 /// @nodoc
-class __$$_ReturnRequestAttachmentCopyWithImpl<$Res>
+class __$$ReturnRequestAttachmentImplCopyWithImpl<$Res>
     extends _$ReturnRequestAttachmentCopyWithImpl<$Res,
-        _$_ReturnRequestAttachment>
-    implements _$$_ReturnRequestAttachmentCopyWith<$Res> {
-  __$$_ReturnRequestAttachmentCopyWithImpl(_$_ReturnRequestAttachment _value,
-      $Res Function(_$_ReturnRequestAttachment) _then)
+        _$ReturnRequestAttachmentImpl>
+    implements _$$ReturnRequestAttachmentImplCopyWith<$Res> {
+  __$$ReturnRequestAttachmentImplCopyWithImpl(
+      _$ReturnRequestAttachmentImpl _value,
+      $Res Function(_$ReturnRequestAttachmentImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -96,7 +98,7 @@ class __$$_ReturnRequestAttachmentCopyWithImpl<$Res>
     Object? name = null,
     Object? size = null,
   }) {
-    return _then(_$_ReturnRequestAttachment(
+    return _then(_$ReturnRequestAttachmentImpl(
       path: null == path
           ? _value.path
           : path // ignore: cast_nullable_to_non_nullable
@@ -115,8 +117,8 @@ class __$$_ReturnRequestAttachmentCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_ReturnRequestAttachment extends _ReturnRequestAttachment {
-  _$_ReturnRequestAttachment(
+class _$ReturnRequestAttachmentImpl extends _ReturnRequestAttachment {
+  _$ReturnRequestAttachmentImpl(
       {required this.path, required this.name, required this.size})
       : super._();
 
@@ -133,10 +135,10 @@ class _$_ReturnRequestAttachment extends _ReturnRequestAttachment {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ReturnRequestAttachment &&
+            other is _$ReturnRequestAttachmentImpl &&
             (identical(other.path, path) || other.path == path) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.size, size) || other.size == size));
@@ -148,17 +150,16 @@ class _$_ReturnRequestAttachment extends _ReturnRequestAttachment {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ReturnRequestAttachmentCopyWith<_$_ReturnRequestAttachment>
-      get copyWith =>
-          __$$_ReturnRequestAttachmentCopyWithImpl<_$_ReturnRequestAttachment>(
-              this, _$identity);
+  _$$ReturnRequestAttachmentImplCopyWith<_$ReturnRequestAttachmentImpl>
+      get copyWith => __$$ReturnRequestAttachmentImplCopyWithImpl<
+          _$ReturnRequestAttachmentImpl>(this, _$identity);
 }
 
 abstract class _ReturnRequestAttachment extends ReturnRequestAttachment {
   factory _ReturnRequestAttachment(
       {required final String path,
       required final String name,
-      required final FileSize size}) = _$_ReturnRequestAttachment;
+      required final FileSize size}) = _$ReturnRequestAttachmentImpl;
   _ReturnRequestAttachment._() : super._();
 
   @override
@@ -169,6 +170,6 @@ abstract class _ReturnRequestAttachment extends ReturnRequestAttachment {
   FileSize get size;
   @override
   @JsonKey(ignore: true)
-  _$$_ReturnRequestAttachmentCopyWith<_$_ReturnRequestAttachment>
+  _$$ReturnRequestAttachmentImplCopyWith<_$ReturnRequestAttachmentImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

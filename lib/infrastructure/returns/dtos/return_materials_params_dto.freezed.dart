@@ -12,7 +12,7 @@ part of 'return_materials_params_dto.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 ReturnMaterialsParamsDto _$ReturnMaterialsParamsDtoFromJson(
     Map<String, dynamic> json) {
@@ -141,12 +141,12 @@ class _$ReturnMaterialsParamsDtoCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_ReturnMaterialsParamsDtoCopyWith<$Res>
+abstract class _$$ReturnMaterialsParamsDtoImplCopyWith<$Res>
     implements $ReturnMaterialsParamsDtoCopyWith<$Res> {
-  factory _$$_ReturnMaterialsParamsDtoCopyWith(
-          _$_ReturnMaterialsParamsDto value,
-          $Res Function(_$_ReturnMaterialsParamsDto) then) =
-      __$$_ReturnMaterialsParamsDtoCopyWithImpl<$Res>;
+  factory _$$ReturnMaterialsParamsDtoImplCopyWith(
+          _$ReturnMaterialsParamsDtoImpl value,
+          $Res Function(_$ReturnMaterialsParamsDtoImpl) then) =
+      __$$ReturnMaterialsParamsDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -166,12 +166,13 @@ abstract class _$$_ReturnMaterialsParamsDtoCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_ReturnMaterialsParamsDtoCopyWithImpl<$Res>
+class __$$ReturnMaterialsParamsDtoImplCopyWithImpl<$Res>
     extends _$ReturnMaterialsParamsDtoCopyWithImpl<$Res,
-        _$_ReturnMaterialsParamsDto>
-    implements _$$_ReturnMaterialsParamsDtoCopyWith<$Res> {
-  __$$_ReturnMaterialsParamsDtoCopyWithImpl(_$_ReturnMaterialsParamsDto _value,
-      $Res Function(_$_ReturnMaterialsParamsDto) _then)
+        _$ReturnMaterialsParamsDtoImpl>
+    implements _$$ReturnMaterialsParamsDtoImplCopyWith<$Res> {
+  __$$ReturnMaterialsParamsDtoImplCopyWithImpl(
+      _$ReturnMaterialsParamsDtoImpl _value,
+      $Res Function(_$ReturnMaterialsParamsDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -187,7 +188,7 @@ class __$$_ReturnMaterialsParamsDtoCopyWithImpl<$Res>
     Object? language = null,
     Object? username = null,
   }) {
-    return _then(_$_ReturnMaterialsParamsDto(
+    return _then(_$ReturnMaterialsParamsDtoImpl(
       salesOrg: null == salesOrg
           ? _value.salesOrg
           : salesOrg // ignore: cast_nullable_to_non_nullable
@@ -230,8 +231,8 @@ class __$$_ReturnMaterialsParamsDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_ReturnMaterialsParamsDto extends _ReturnMaterialsParamsDto {
-  const _$_ReturnMaterialsParamsDto(
+class _$ReturnMaterialsParamsDtoImpl extends _ReturnMaterialsParamsDto {
+  const _$ReturnMaterialsParamsDtoImpl(
       {@JsonKey(name: 'salesOrg', defaultValue: '') required this.salesOrg,
       @JsonKey(name: 'soldTo', defaultValue: '') required this.soldTo,
       @JsonKey(name: 'shipTo', defaultValue: '') required this.shipTo,
@@ -245,8 +246,8 @@ class _$_ReturnMaterialsParamsDto extends _ReturnMaterialsParamsDto {
       @JsonKey(name: 'username', defaultValue: '') required this.username})
       : super._();
 
-  factory _$_ReturnMaterialsParamsDto.fromJson(Map<String, dynamic> json) =>
-      _$$_ReturnMaterialsParamsDtoFromJson(json);
+  factory _$ReturnMaterialsParamsDtoImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ReturnMaterialsParamsDtoImplFromJson(json);
 
   @override
   @JsonKey(name: 'salesOrg', defaultValue: '')
@@ -282,10 +283,10 @@ class _$_ReturnMaterialsParamsDto extends _ReturnMaterialsParamsDto {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ReturnMaterialsParamsDto &&
+            other is _$ReturnMaterialsParamsDtoImpl &&
             (identical(other.salesOrg, salesOrg) ||
                 other.salesOrg == salesOrg) &&
             (identical(other.soldTo, soldTo) || other.soldTo == soldTo) &&
@@ -309,13 +310,13 @@ class _$_ReturnMaterialsParamsDto extends _ReturnMaterialsParamsDto {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ReturnMaterialsParamsDtoCopyWith<_$_ReturnMaterialsParamsDto>
-      get copyWith => __$$_ReturnMaterialsParamsDtoCopyWithImpl<
-          _$_ReturnMaterialsParamsDto>(this, _$identity);
+  _$$ReturnMaterialsParamsDtoImplCopyWith<_$ReturnMaterialsParamsDtoImpl>
+      get copyWith => __$$ReturnMaterialsParamsDtoImplCopyWithImpl<
+          _$ReturnMaterialsParamsDtoImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_ReturnMaterialsParamsDtoToJson(
+    return _$$ReturnMaterialsParamsDtoImplToJson(
       this,
     );
   }
@@ -336,11 +337,11 @@ abstract class _ReturnMaterialsParamsDto extends ReturnMaterialsParamsDto {
       @JsonKey(name: 'language', defaultValue: '')
       required final String language,
       @JsonKey(name: 'username', defaultValue: '')
-      required final String username}) = _$_ReturnMaterialsParamsDto;
+      required final String username}) = _$ReturnMaterialsParamsDtoImpl;
   const _ReturnMaterialsParamsDto._() : super._();
 
   factory _ReturnMaterialsParamsDto.fromJson(Map<String, dynamic> json) =
-      _$_ReturnMaterialsParamsDto.fromJson;
+      _$ReturnMaterialsParamsDtoImpl.fromJson;
 
   @override
   @JsonKey(name: 'salesOrg', defaultValue: '')
@@ -371,6 +372,6 @@ abstract class _ReturnMaterialsParamsDto extends ReturnMaterialsParamsDto {
   String get username;
   @override
   @JsonKey(ignore: true)
-  _$$_ReturnMaterialsParamsDtoCopyWith<_$_ReturnMaterialsParamsDto>
+  _$$ReturnMaterialsParamsDtoImplCopyWith<_$ReturnMaterialsParamsDtoImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

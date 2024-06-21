@@ -12,7 +12,7 @@ part of 'payment_term.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$PaymentTerm {
@@ -79,11 +79,11 @@ class _$PaymentTermCopyWithImpl<$Res, $Val extends PaymentTerm>
 }
 
 /// @nodoc
-abstract class _$$_PaymentTermCopyWith<$Res>
+abstract class _$$PaymentTermImplCopyWith<$Res>
     implements $PaymentTermCopyWith<$Res> {
-  factory _$$_PaymentTermCopyWith(
-          _$_PaymentTerm value, $Res Function(_$_PaymentTerm) then) =
-      __$$_PaymentTermCopyWithImpl<$Res>;
+  factory _$$PaymentTermImplCopyWith(
+          _$PaymentTermImpl value, $Res Function(_$PaymentTermImpl) then) =
+      __$$PaymentTermImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -94,11 +94,11 @@ abstract class _$$_PaymentTermCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_PaymentTermCopyWithImpl<$Res>
-    extends _$PaymentTermCopyWithImpl<$Res, _$_PaymentTerm>
-    implements _$$_PaymentTermCopyWith<$Res> {
-  __$$_PaymentTermCopyWithImpl(
-      _$_PaymentTerm _value, $Res Function(_$_PaymentTerm) _then)
+class __$$PaymentTermImplCopyWithImpl<$Res>
+    extends _$PaymentTermCopyWithImpl<$Res, _$PaymentTermImpl>
+    implements _$$PaymentTermImplCopyWith<$Res> {
+  __$$PaymentTermImplCopyWithImpl(
+      _$PaymentTermImpl _value, $Res Function(_$PaymentTermImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -109,7 +109,7 @@ class __$$_PaymentTermCopyWithImpl<$Res>
     Object? paymentTermDescription = null,
     Object? paymentTermSubranking = null,
   }) {
-    return _then(_$_PaymentTerm(
+    return _then(_$PaymentTermImpl(
       paymentTermCode: null == paymentTermCode
           ? _value.paymentTermCode
           : paymentTermCode // ignore: cast_nullable_to_non_nullable
@@ -132,8 +132,8 @@ class __$$_PaymentTermCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_PaymentTerm extends _PaymentTerm {
-  const _$_PaymentTerm(
+class _$PaymentTermImpl extends _PaymentTerm {
+  const _$PaymentTermImpl(
       {required this.paymentTermCode,
       required this.paymentTermRanking,
       required this.paymentTermDescription,
@@ -155,10 +155,10 @@ class _$_PaymentTerm extends _PaymentTerm {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_PaymentTerm &&
+            other is _$PaymentTermImpl &&
             (identical(other.paymentTermCode, paymentTermCode) ||
                 other.paymentTermCode == paymentTermCode) &&
             (identical(other.paymentTermRanking, paymentTermRanking) ||
@@ -176,8 +176,8 @@ class _$_PaymentTerm extends _PaymentTerm {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_PaymentTermCopyWith<_$_PaymentTerm> get copyWith =>
-      __$$_PaymentTermCopyWithImpl<_$_PaymentTerm>(this, _$identity);
+  _$$PaymentTermImplCopyWith<_$PaymentTermImpl> get copyWith =>
+      __$$PaymentTermImplCopyWithImpl<_$PaymentTermImpl>(this, _$identity);
 }
 
 abstract class _PaymentTerm extends PaymentTerm {
@@ -185,7 +185,7 @@ abstract class _PaymentTerm extends PaymentTerm {
       {required final String paymentTermCode,
       required final int paymentTermRanking,
       required final String paymentTermDescription,
-      required final int paymentTermSubranking}) = _$_PaymentTerm;
+      required final int paymentTermSubranking}) = _$PaymentTermImpl;
   const _PaymentTerm._() : super._();
 
   @override
@@ -198,6 +198,6 @@ abstract class _PaymentTerm extends PaymentTerm {
   int get paymentTermSubranking;
   @override
   @JsonKey(ignore: true)
-  _$$_PaymentTermCopyWith<_$_PaymentTerm> get copyWith =>
+  _$$PaymentTermImplCopyWith<_$PaymentTermImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -12,7 +12,7 @@ part of 'return_requests_id.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$ReturnRequestsId {
@@ -57,22 +57,22 @@ class _$ReturnRequestsIdCopyWithImpl<$Res, $Val extends ReturnRequestsId>
 }
 
 /// @nodoc
-abstract class _$$_ReturnRequestsIdCopyWith<$Res>
+abstract class _$$ReturnRequestsIdImplCopyWith<$Res>
     implements $ReturnRequestsIdCopyWith<$Res> {
-  factory _$$_ReturnRequestsIdCopyWith(
-          _$_ReturnRequestsId value, $Res Function(_$_ReturnRequestsId) then) =
-      __$$_ReturnRequestsIdCopyWithImpl<$Res>;
+  factory _$$ReturnRequestsIdImplCopyWith(_$ReturnRequestsIdImpl value,
+          $Res Function(_$ReturnRequestsIdImpl) then) =
+      __$$ReturnRequestsIdImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String requestId});
 }
 
 /// @nodoc
-class __$$_ReturnRequestsIdCopyWithImpl<$Res>
-    extends _$ReturnRequestsIdCopyWithImpl<$Res, _$_ReturnRequestsId>
-    implements _$$_ReturnRequestsIdCopyWith<$Res> {
-  __$$_ReturnRequestsIdCopyWithImpl(
-      _$_ReturnRequestsId _value, $Res Function(_$_ReturnRequestsId) _then)
+class __$$ReturnRequestsIdImplCopyWithImpl<$Res>
+    extends _$ReturnRequestsIdCopyWithImpl<$Res, _$ReturnRequestsIdImpl>
+    implements _$$ReturnRequestsIdImplCopyWith<$Res> {
+  __$$ReturnRequestsIdImplCopyWithImpl(_$ReturnRequestsIdImpl _value,
+      $Res Function(_$ReturnRequestsIdImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -80,7 +80,7 @@ class __$$_ReturnRequestsIdCopyWithImpl<$Res>
   $Res call({
     Object? requestId = null,
   }) {
-    return _then(_$_ReturnRequestsId(
+    return _then(_$ReturnRequestsIdImpl(
       requestId: null == requestId
           ? _value.requestId
           : requestId // ignore: cast_nullable_to_non_nullable
@@ -91,8 +91,8 @@ class __$$_ReturnRequestsIdCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_ReturnRequestsId extends _ReturnRequestsId {
-  _$_ReturnRequestsId({required this.requestId}) : super._();
+class _$ReturnRequestsIdImpl extends _ReturnRequestsId {
+  _$ReturnRequestsIdImpl({required this.requestId}) : super._();
 
   @override
   final String requestId;
@@ -103,10 +103,10 @@ class _$_ReturnRequestsId extends _ReturnRequestsId {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ReturnRequestsId &&
+            other is _$ReturnRequestsIdImpl &&
             (identical(other.requestId, requestId) ||
                 other.requestId == requestId));
   }
@@ -117,19 +117,20 @@ class _$_ReturnRequestsId extends _ReturnRequestsId {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ReturnRequestsIdCopyWith<_$_ReturnRequestsId> get copyWith =>
-      __$$_ReturnRequestsIdCopyWithImpl<_$_ReturnRequestsId>(this, _$identity);
+  _$$ReturnRequestsIdImplCopyWith<_$ReturnRequestsIdImpl> get copyWith =>
+      __$$ReturnRequestsIdImplCopyWithImpl<_$ReturnRequestsIdImpl>(
+          this, _$identity);
 }
 
 abstract class _ReturnRequestsId extends ReturnRequestsId {
   factory _ReturnRequestsId({required final String requestId}) =
-      _$_ReturnRequestsId;
+      _$ReturnRequestsIdImpl;
   _ReturnRequestsId._() : super._();
 
   @override
   String get requestId;
   @override
   @JsonKey(ignore: true)
-  _$$_ReturnRequestsIdCopyWith<_$_ReturnRequestsId> get copyWith =>
+  _$$ReturnRequestsIdImplCopyWith<_$ReturnRequestsIdImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

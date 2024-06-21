@@ -12,7 +12,7 @@ part of 'order_history_basic_info.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$OrderHistoryBasicInfo {
@@ -91,11 +91,12 @@ class _$OrderHistoryBasicInfoCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_OrderHistoryBasicInfoCopyWith<$Res>
+abstract class _$$OrderHistoryBasicInfoImplCopyWith<$Res>
     implements $OrderHistoryBasicInfoCopyWith<$Res> {
-  factory _$$_OrderHistoryBasicInfoCopyWith(_$_OrderHistoryBasicInfo value,
-          $Res Function(_$_OrderHistoryBasicInfo) then) =
-      __$$_OrderHistoryBasicInfoCopyWithImpl<$Res>;
+  factory _$$OrderHistoryBasicInfoImplCopyWith(
+          _$OrderHistoryBasicInfoImpl value,
+          $Res Function(_$OrderHistoryBasicInfoImpl) then) =
+      __$$OrderHistoryBasicInfoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -109,11 +110,12 @@ abstract class _$$_OrderHistoryBasicInfoCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_OrderHistoryBasicInfoCopyWithImpl<$Res>
-    extends _$OrderHistoryBasicInfoCopyWithImpl<$Res, _$_OrderHistoryBasicInfo>
-    implements _$$_OrderHistoryBasicInfoCopyWith<$Res> {
-  __$$_OrderHistoryBasicInfoCopyWithImpl(_$_OrderHistoryBasicInfo _value,
-      $Res Function(_$_OrderHistoryBasicInfo) _then)
+class __$$OrderHistoryBasicInfoImplCopyWithImpl<$Res>
+    extends _$OrderHistoryBasicInfoCopyWithImpl<$Res,
+        _$OrderHistoryBasicInfoImpl>
+    implements _$$OrderHistoryBasicInfoImplCopyWith<$Res> {
+  __$$OrderHistoryBasicInfoImplCopyWithImpl(_$OrderHistoryBasicInfoImpl _value,
+      $Res Function(_$OrderHistoryBasicInfoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -124,7 +126,7 @@ class __$$_OrderHistoryBasicInfoCopyWithImpl<$Res>
     Object? companyName = null,
     Object? paymentTerm = null,
   }) {
-    return _then(_$_OrderHistoryBasicInfo(
+    return _then(_$OrderHistoryBasicInfoImpl(
       soldTo: null == soldTo
           ? _value.soldTo
           : soldTo // ignore: cast_nullable_to_non_nullable
@@ -147,8 +149,8 @@ class __$$_OrderHistoryBasicInfoCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_OrderHistoryBasicInfo extends _OrderHistoryBasicInfo {
-  _$_OrderHistoryBasicInfo(
+class _$OrderHistoryBasicInfoImpl extends _OrderHistoryBasicInfo {
+  _$OrderHistoryBasicInfoImpl(
       {required this.soldTo,
       required this.shipTo,
       required this.companyName,
@@ -170,10 +172,10 @@ class _$_OrderHistoryBasicInfo extends _OrderHistoryBasicInfo {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_OrderHistoryBasicInfo &&
+            other is _$OrderHistoryBasicInfoImpl &&
             (identical(other.soldTo, soldTo) || other.soldTo == soldTo) &&
             (identical(other.shipTo, shipTo) || other.shipTo == shipTo) &&
             (identical(other.companyName, companyName) ||
@@ -189,9 +191,9 @@ class _$_OrderHistoryBasicInfo extends _OrderHistoryBasicInfo {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_OrderHistoryBasicInfoCopyWith<_$_OrderHistoryBasicInfo> get copyWith =>
-      __$$_OrderHistoryBasicInfoCopyWithImpl<_$_OrderHistoryBasicInfo>(
-          this, _$identity);
+  _$$OrderHistoryBasicInfoImplCopyWith<_$OrderHistoryBasicInfoImpl>
+      get copyWith => __$$OrderHistoryBasicInfoImplCopyWithImpl<
+          _$OrderHistoryBasicInfoImpl>(this, _$identity);
 }
 
 abstract class _OrderHistoryBasicInfo extends OrderHistoryBasicInfo {
@@ -199,7 +201,7 @@ abstract class _OrderHistoryBasicInfo extends OrderHistoryBasicInfo {
       {required final String soldTo,
       required final String shipTo,
       required final value_objects.CompanyName companyName,
-      required final PaymentTerm paymentTerm}) = _$_OrderHistoryBasicInfo;
+      required final PaymentTerm paymentTerm}) = _$OrderHistoryBasicInfoImpl;
   _OrderHistoryBasicInfo._() : super._();
 
   @override
@@ -212,6 +214,6 @@ abstract class _OrderHistoryBasicInfo extends OrderHistoryBasicInfo {
   PaymentTerm get paymentTerm;
   @override
   @JsonKey(ignore: true)
-  _$$_OrderHistoryBasicInfoCopyWith<_$_OrderHistoryBasicInfo> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$OrderHistoryBasicInfoImplCopyWith<_$OrderHistoryBasicInfoImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }

@@ -12,7 +12,7 @@ part of 'access_right.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$AccessRight {
@@ -114,11 +114,11 @@ class _$AccessRightCopyWithImpl<$Res, $Val extends AccessRight>
 }
 
 /// @nodoc
-abstract class _$$_AccessRightCopyWith<$Res>
+abstract class _$$AccessRightImplCopyWith<$Res>
     implements $AccessRightCopyWith<$Res> {
-  factory _$$_AccessRightCopyWith(
-          _$_AccessRight value, $Res Function(_$_AccessRight) then) =
-      __$$_AccessRightCopyWithImpl<$Res>;
+  factory _$$AccessRightImplCopyWith(
+          _$AccessRightImpl value, $Res Function(_$AccessRightImpl) then) =
+      __$$AccessRightImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -134,11 +134,11 @@ abstract class _$$_AccessRightCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_AccessRightCopyWithImpl<$Res>
-    extends _$AccessRightCopyWithImpl<$Res, _$_AccessRight>
-    implements _$$_AccessRightCopyWith<$Res> {
-  __$$_AccessRightCopyWithImpl(
-      _$_AccessRight _value, $Res Function(_$_AccessRight) _then)
+class __$$AccessRightImplCopyWithImpl<$Res>
+    extends _$AccessRightCopyWithImpl<$Res, _$AccessRightImpl>
+    implements _$$AccessRightImplCopyWith<$Res> {
+  __$$AccessRightImplCopyWithImpl(
+      _$AccessRightImpl _value, $Res Function(_$AccessRightImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -154,7 +154,7 @@ class __$$_AccessRightCopyWithImpl<$Res>
     Object? loyaltyScheme = null,
     Object? adminPOAttachment = null,
   }) {
-    return _then(_$_AccessRight(
+    return _then(_$AccessRightImpl(
       users: null == users
           ? _value.users
           : users // ignore: cast_nullable_to_non_nullable
@@ -197,8 +197,8 @@ class __$$_AccessRightCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_AccessRight extends _AccessRight {
-  const _$_AccessRight(
+class _$AccessRightImpl extends _AccessRight {
+  const _$AccessRightImpl(
       {required this.users,
       required this.orders,
       required this.promos,
@@ -235,10 +235,10 @@ class _$_AccessRight extends _AccessRight {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_AccessRight &&
+            other is _$AccessRightImpl &&
             (identical(other.users, users) || other.users == users) &&
             (identical(other.orders, orders) || other.orders == orders) &&
             (identical(other.promos, promos) || other.promos == promos) &&
@@ -262,8 +262,8 @@ class _$_AccessRight extends _AccessRight {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_AccessRightCopyWith<_$_AccessRight> get copyWith =>
-      __$$_AccessRightCopyWithImpl<_$_AccessRight>(this, _$identity);
+  _$$AccessRightImplCopyWith<_$AccessRightImpl> get copyWith =>
+      __$$AccessRightImplCopyWithImpl<_$AccessRightImpl>(this, _$identity);
 }
 
 abstract class _AccessRight extends AccessRight {
@@ -276,7 +276,7 @@ abstract class _AccessRight extends AccessRight {
       required final bool services,
       required final bool analytics,
       required final bool loyaltyScheme,
-      required final bool adminPOAttachment}) = _$_AccessRight;
+      required final bool adminPOAttachment}) = _$AccessRightImpl;
   const _AccessRight._() : super._();
 
   @override
@@ -299,6 +299,6 @@ abstract class _AccessRight extends AccessRight {
   bool get adminPOAttachment;
   @override
   @JsonKey(ignore: true)
-  _$$_AccessRightCopyWith<_$_AccessRight> get copyWith =>
+  _$$AccessRightImplCopyWith<_$AccessRightImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

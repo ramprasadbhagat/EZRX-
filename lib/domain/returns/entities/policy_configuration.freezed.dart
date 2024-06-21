@@ -12,7 +12,7 @@ part of 'policy_configuration.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$PolicyConfiguration {
@@ -108,11 +108,11 @@ class _$PolicyConfigurationCopyWithImpl<$Res, $Val extends PolicyConfiguration>
 }
 
 /// @nodoc
-abstract class _$$_PolicyConfigurationCopyWith<$Res>
+abstract class _$$PolicyConfigurationImplCopyWith<$Res>
     implements $PolicyConfigurationCopyWith<$Res> {
-  factory _$$_PolicyConfigurationCopyWith(_$_PolicyConfiguration value,
-          $Res Function(_$_PolicyConfiguration) then) =
-      __$$_PolicyConfigurationCopyWithImpl<$Res>;
+  factory _$$PolicyConfigurationImplCopyWith(_$PolicyConfigurationImpl value,
+          $Res Function(_$PolicyConfigurationImpl) then) =
+      __$$PolicyConfigurationImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -127,11 +127,11 @@ abstract class _$$_PolicyConfigurationCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_PolicyConfigurationCopyWithImpl<$Res>
-    extends _$PolicyConfigurationCopyWithImpl<$Res, _$_PolicyConfiguration>
-    implements _$$_PolicyConfigurationCopyWith<$Res> {
-  __$$_PolicyConfigurationCopyWithImpl(_$_PolicyConfiguration _value,
-      $Res Function(_$_PolicyConfiguration) _then)
+class __$$PolicyConfigurationImplCopyWithImpl<$Res>
+    extends _$PolicyConfigurationCopyWithImpl<$Res, _$PolicyConfigurationImpl>
+    implements _$$PolicyConfigurationImplCopyWith<$Res> {
+  __$$PolicyConfigurationImplCopyWithImpl(_$PolicyConfigurationImpl _value,
+      $Res Function(_$PolicyConfigurationImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -146,7 +146,7 @@ class __$$_PolicyConfigurationCopyWithImpl<$Res>
     Object? principalName = null,
     Object? status = null,
   }) {
-    return _then(_$_PolicyConfiguration(
+    return _then(_$PolicyConfigurationImpl(
       salesOrg: null == salesOrg
           ? _value.salesOrg
           : salesOrg // ignore: cast_nullable_to_non_nullable
@@ -185,8 +185,8 @@ class __$$_PolicyConfigurationCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_PolicyConfiguration extends _PolicyConfiguration {
-  const _$_PolicyConfiguration(
+class _$PolicyConfigurationImpl extends _PolicyConfiguration {
+  const _$PolicyConfigurationImpl(
       {required this.salesOrg,
       required this.principalCode,
       required this.monthsBeforeExpiry,
@@ -220,10 +220,10 @@ class _$_PolicyConfiguration extends _PolicyConfiguration {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_PolicyConfiguration &&
+            other is _$PolicyConfigurationImpl &&
             (identical(other.salesOrg, salesOrg) ||
                 other.salesOrg == salesOrg) &&
             (identical(other.principalCode, principalCode) ||
@@ -255,8 +255,8 @@ class _$_PolicyConfiguration extends _PolicyConfiguration {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_PolicyConfigurationCopyWith<_$_PolicyConfiguration> get copyWith =>
-      __$$_PolicyConfigurationCopyWithImpl<_$_PolicyConfiguration>(
+  _$$PolicyConfigurationImplCopyWith<_$PolicyConfigurationImpl> get copyWith =>
+      __$$PolicyConfigurationImplCopyWithImpl<_$PolicyConfigurationImpl>(
           this, _$identity);
 }
 
@@ -269,7 +269,7 @@ abstract class _PolicyConfiguration extends PolicyConfiguration {
       required final String uuid,
       required final ReturnsAllowed returnsAllowed,
       required final PrincipalName principalName,
-      required final String status}) = _$_PolicyConfiguration;
+      required final String status}) = _$PolicyConfigurationImpl;
   const _PolicyConfiguration._() : super._();
 
   @override
@@ -290,6 +290,6 @@ abstract class _PolicyConfiguration extends PolicyConfiguration {
   String get status;
   @override
   @JsonKey(ignore: true)
-  _$$_PolicyConfigurationCopyWith<_$_PolicyConfiguration> get copyWith =>
+  _$$PolicyConfigurationImplCopyWith<_$PolicyConfigurationImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

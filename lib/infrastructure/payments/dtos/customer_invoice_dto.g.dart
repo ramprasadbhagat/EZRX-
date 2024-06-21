@@ -6,9 +6,9 @@ part of 'customer_invoice_dto.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_CustomerInvoiceDto _$$_CustomerInvoiceDtoFromJson(
+_$CustomerInvoiceDtoImpl _$$CustomerInvoiceDtoImplFromJson(
         Map<String, dynamic> json) =>
-    _$_CustomerInvoiceDto(
+    _$CustomerInvoiceDtoImpl(
       accountingDocExternalReference:
           json['accountingDocExternalReference'] as String? ?? '',
       accountingDocument: json['accountingDocument'] as String? ?? '',
@@ -30,8 +30,8 @@ _$_CustomerInvoiceDto _$$_CustomerInvoiceDtoFromJson(
       salesOrg: json['salesOrg'] as String? ?? '',
     );
 
-Map<String, dynamic> _$$_CustomerInvoiceDtoToJson(
-        _$_CustomerInvoiceDto instance) =>
+Map<String, dynamic> _$$CustomerInvoiceDtoImplToJson(
+        _$CustomerInvoiceDtoImpl instance) =>
     <String, dynamic>{
       'accountingDocExternalReference': instance.accountingDocExternalReference,
       'accountingDocument': instance.accountingDocument,

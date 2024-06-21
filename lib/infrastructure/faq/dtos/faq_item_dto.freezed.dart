@@ -12,7 +12,7 @@ part of 'faq_item_dto.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 FAQItemDto _$FAQItemDtoFromJson(Map<String, dynamic> json) {
   return _FAQItemDto.fromJson(json);
@@ -87,11 +87,11 @@ class _$FAQItemDtoCopyWithImpl<$Res, $Val extends FAQItemDto>
 }
 
 /// @nodoc
-abstract class _$$_FAQItemDtoCopyWith<$Res>
+abstract class _$$FAQItemDtoImplCopyWith<$Res>
     implements $FAQItemDtoCopyWith<$Res> {
-  factory _$$_FAQItemDtoCopyWith(
-          _$_FAQItemDto value, $Res Function(_$_FAQItemDto) then) =
-      __$$_FAQItemDtoCopyWithImpl<$Res>;
+  factory _$$FAQItemDtoImplCopyWith(
+          _$FAQItemDtoImpl value, $Res Function(_$FAQItemDtoImpl) then) =
+      __$$FAQItemDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -102,11 +102,11 @@ abstract class _$$_FAQItemDtoCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_FAQItemDtoCopyWithImpl<$Res>
-    extends _$FAQItemDtoCopyWithImpl<$Res, _$_FAQItemDto>
-    implements _$$_FAQItemDtoCopyWith<$Res> {
-  __$$_FAQItemDtoCopyWithImpl(
-      _$_FAQItemDto _value, $Res Function(_$_FAQItemDto) _then)
+class __$$FAQItemDtoImplCopyWithImpl<$Res>
+    extends _$FAQItemDtoCopyWithImpl<$Res, _$FAQItemDtoImpl>
+    implements _$$FAQItemDtoImplCopyWith<$Res> {
+  __$$FAQItemDtoImplCopyWithImpl(
+      _$FAQItemDtoImpl _value, $Res Function(_$FAQItemDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -117,7 +117,7 @@ class __$$_FAQItemDtoCopyWithImpl<$Res>
     Object? question = null,
     Object? displayName = null,
   }) {
-    return _then(_$_FAQItemDto(
+    return _then(_$FAQItemDtoImpl(
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -140,8 +140,8 @@ class __$$_FAQItemDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_FAQItemDto extends _FAQItemDto {
-  const _$_FAQItemDto(
+class _$FAQItemDtoImpl extends _FAQItemDto {
+  const _$FAQItemDtoImpl(
       {required this.name,
       @JsonKey(name: 'answer', readValue: getAnswer) required this.answer,
       @JsonKey(name: 'question', readValue: getQuestion) required this.question,
@@ -149,8 +149,8 @@ class _$_FAQItemDto extends _FAQItemDto {
       required this.displayName})
       : super._();
 
-  factory _$_FAQItemDto.fromJson(Map<String, dynamic> json) =>
-      _$$_FAQItemDtoFromJson(json);
+  factory _$FAQItemDtoImpl.fromJson(Map<String, dynamic> json) =>
+      _$$FAQItemDtoImplFromJson(json);
 
   @override
   final String name;
@@ -170,10 +170,10 @@ class _$_FAQItemDto extends _FAQItemDto {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_FAQItemDto &&
+            other is _$FAQItemDtoImpl &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.answer, answer) || other.answer == answer) &&
             (identical(other.question, question) ||
@@ -190,12 +190,12 @@ class _$_FAQItemDto extends _FAQItemDto {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_FAQItemDtoCopyWith<_$_FAQItemDto> get copyWith =>
-      __$$_FAQItemDtoCopyWithImpl<_$_FAQItemDto>(this, _$identity);
+  _$$FAQItemDtoImplCopyWith<_$FAQItemDtoImpl> get copyWith =>
+      __$$FAQItemDtoImplCopyWithImpl<_$FAQItemDtoImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_FAQItemDtoToJson(
+    return _$$FAQItemDtoImplToJson(
       this,
     );
   }
@@ -209,11 +209,11 @@ abstract class _FAQItemDto extends FAQItemDto {
       @JsonKey(name: 'question', readValue: getQuestion)
       required final String question,
       @JsonKey(name: 'category', readValue: getCategory)
-      required final String displayName}) = _$_FAQItemDto;
+      required final String displayName}) = _$FAQItemDtoImpl;
   const _FAQItemDto._() : super._();
 
   factory _FAQItemDto.fromJson(Map<String, dynamic> json) =
-      _$_FAQItemDto.fromJson;
+      _$FAQItemDtoImpl.fromJson;
 
   @override
   String get name;
@@ -228,6 +228,6 @@ abstract class _FAQItemDto extends FAQItemDto {
   String get displayName;
   @override
   @JsonKey(ignore: true)
-  _$$_FAQItemDtoCopyWith<_$_FAQItemDto> get copyWith =>
+  _$$FAQItemDtoImplCopyWith<_$FAQItemDtoImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

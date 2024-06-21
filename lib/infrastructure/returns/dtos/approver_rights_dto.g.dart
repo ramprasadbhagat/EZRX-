@@ -6,9 +6,9 @@ part of 'approver_rights_dto.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_AddReturnApprovalLimitDto _$$_AddReturnApprovalLimitDtoFromJson(
+_$AddReturnApprovalLimitDtoImpl _$$AddReturnApprovalLimitDtoImplFromJson(
         Map<String, dynamic> json) =>
-    _$_AddReturnApprovalLimitDto(
+    _$AddReturnApprovalLimitDtoImpl(
       usernames: (rawMetaDataOverride(json, 'rawMetaData') as List<dynamic>?)
               ?.map((e) => e as String)
               .toList() ??
@@ -20,8 +20,8 @@ _$_AddReturnApprovalLimitDto _$$_AddReturnApprovalLimitDtoFromJson(
           [],
     );
 
-Map<String, dynamic> _$$_AddReturnApprovalLimitDtoToJson(
-        _$_AddReturnApprovalLimitDto instance) =>
+Map<String, dynamic> _$$AddReturnApprovalLimitDtoImplToJson(
+        _$AddReturnApprovalLimitDtoImpl instance) =>
     <String, dynamic>{
       'rawMetaData': instance.usernames,
       'approverRights': instance.approverRights.map((e) => e.toJson()).toList(),

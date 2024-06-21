@@ -12,7 +12,7 @@ part of 'return_attachment_dto.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 ReturnAttachmentDto _$ReturnAttachmentDtoFromJson(Map<String, dynamic> json) {
   return _ReturnAttachmentDto.fromJson(json);
@@ -72,11 +72,11 @@ class _$ReturnAttachmentDtoCopyWithImpl<$Res, $Val extends ReturnAttachmentDto>
 }
 
 /// @nodoc
-abstract class _$$_ReturnAttachmentDtoCopyWith<$Res>
+abstract class _$$ReturnAttachmentDtoImplCopyWith<$Res>
     implements $ReturnAttachmentDtoCopyWith<$Res> {
-  factory _$$_ReturnAttachmentDtoCopyWith(_$_ReturnAttachmentDto value,
-          $Res Function(_$_ReturnAttachmentDto) then) =
-      __$$_ReturnAttachmentDtoCopyWithImpl<$Res>;
+  factory _$$ReturnAttachmentDtoImplCopyWith(_$ReturnAttachmentDtoImpl value,
+          $Res Function(_$ReturnAttachmentDtoImpl) then) =
+      __$$ReturnAttachmentDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -85,11 +85,11 @@ abstract class _$$_ReturnAttachmentDtoCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_ReturnAttachmentDtoCopyWithImpl<$Res>
-    extends _$ReturnAttachmentDtoCopyWithImpl<$Res, _$_ReturnAttachmentDto>
-    implements _$$_ReturnAttachmentDtoCopyWith<$Res> {
-  __$$_ReturnAttachmentDtoCopyWithImpl(_$_ReturnAttachmentDto _value,
-      $Res Function(_$_ReturnAttachmentDto) _then)
+class __$$ReturnAttachmentDtoImplCopyWithImpl<$Res>
+    extends _$ReturnAttachmentDtoCopyWithImpl<$Res, _$ReturnAttachmentDtoImpl>
+    implements _$$ReturnAttachmentDtoImplCopyWith<$Res> {
+  __$$ReturnAttachmentDtoImplCopyWithImpl(_$ReturnAttachmentDtoImpl _value,
+      $Res Function(_$ReturnAttachmentDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -98,7 +98,7 @@ class __$$_ReturnAttachmentDtoCopyWithImpl<$Res>
     Object? fileName = null,
     Object? fileUrl = null,
   }) {
-    return _then(_$_ReturnAttachmentDto(
+    return _then(_$ReturnAttachmentDtoImpl(
       fileName: null == fileName
           ? _value.fileName
           : fileName // ignore: cast_nullable_to_non_nullable
@@ -113,14 +113,14 @@ class __$$_ReturnAttachmentDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_ReturnAttachmentDto extends _ReturnAttachmentDto {
-  const _$_ReturnAttachmentDto(
+class _$ReturnAttachmentDtoImpl extends _ReturnAttachmentDto {
+  const _$ReturnAttachmentDtoImpl(
       {@JsonKey(name: 'fileName', defaultValue: '') required this.fileName,
       @JsonKey(name: 'fileUrl', defaultValue: '') required this.fileUrl})
       : super._();
 
-  factory _$_ReturnAttachmentDto.fromJson(Map<String, dynamic> json) =>
-      _$$_ReturnAttachmentDtoFromJson(json);
+  factory _$ReturnAttachmentDtoImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ReturnAttachmentDtoImplFromJson(json);
 
   @override
   @JsonKey(name: 'fileName', defaultValue: '')
@@ -135,10 +135,10 @@ class _$_ReturnAttachmentDto extends _ReturnAttachmentDto {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ReturnAttachmentDto &&
+            other is _$ReturnAttachmentDtoImpl &&
             (identical(other.fileName, fileName) ||
                 other.fileName == fileName) &&
             (identical(other.fileUrl, fileUrl) || other.fileUrl == fileUrl));
@@ -151,13 +151,13 @@ class _$_ReturnAttachmentDto extends _ReturnAttachmentDto {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ReturnAttachmentDtoCopyWith<_$_ReturnAttachmentDto> get copyWith =>
-      __$$_ReturnAttachmentDtoCopyWithImpl<_$_ReturnAttachmentDto>(
+  _$$ReturnAttachmentDtoImplCopyWith<_$ReturnAttachmentDtoImpl> get copyWith =>
+      __$$ReturnAttachmentDtoImplCopyWithImpl<_$ReturnAttachmentDtoImpl>(
           this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_ReturnAttachmentDtoToJson(
+    return _$$ReturnAttachmentDtoImplToJson(
       this,
     );
   }
@@ -168,11 +168,11 @@ abstract class _ReturnAttachmentDto extends ReturnAttachmentDto {
       {@JsonKey(name: 'fileName', defaultValue: '')
       required final String fileName,
       @JsonKey(name: 'fileUrl', defaultValue: '')
-      required final String fileUrl}) = _$_ReturnAttachmentDto;
+      required final String fileUrl}) = _$ReturnAttachmentDtoImpl;
   const _ReturnAttachmentDto._() : super._();
 
   factory _ReturnAttachmentDto.fromJson(Map<String, dynamic> json) =
-      _$_ReturnAttachmentDto.fromJson;
+      _$ReturnAttachmentDtoImpl.fromJson;
 
   @override
   @JsonKey(name: 'fileName', defaultValue: '')
@@ -182,6 +182,6 @@ abstract class _ReturnAttachmentDto extends ReturnAttachmentDto {
   String get fileUrl;
   @override
   @JsonKey(ignore: true)
-  _$$_ReturnAttachmentDtoCopyWith<_$_ReturnAttachmentDto> get copyWith =>
+  _$$ReturnAttachmentDtoImplCopyWith<_$ReturnAttachmentDtoImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

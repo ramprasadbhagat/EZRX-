@@ -12,7 +12,7 @@ part of 'product_images.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$ProductImages {
@@ -86,11 +86,11 @@ class _$ProductImagesCopyWithImpl<$Res, $Val extends ProductImages>
 }
 
 /// @nodoc
-abstract class _$$_ProductImagesCopyWith<$Res>
+abstract class _$$ProductImagesImplCopyWith<$Res>
     implements $ProductImagesCopyWith<$Res> {
-  factory _$$_ProductImagesCopyWith(
-          _$_ProductImages value, $Res Function(_$_ProductImages) then) =
-      __$$_ProductImagesCopyWithImpl<$Res>;
+  factory _$$ProductImagesImplCopyWith(
+          _$ProductImagesImpl value, $Res Function(_$ProductImagesImpl) then) =
+      __$$ProductImagesImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -102,11 +102,11 @@ abstract class _$$_ProductImagesCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_ProductImagesCopyWithImpl<$Res>
-    extends _$ProductImagesCopyWithImpl<$Res, _$_ProductImages>
-    implements _$$_ProductImagesCopyWith<$Res> {
-  __$$_ProductImagesCopyWithImpl(
-      _$_ProductImages _value, $Res Function(_$_ProductImages) _then)
+class __$$ProductImagesImplCopyWithImpl<$Res>
+    extends _$ProductImagesCopyWithImpl<$Res, _$ProductImagesImpl>
+    implements _$$ProductImagesImplCopyWith<$Res> {
+  __$$ProductImagesImplCopyWithImpl(
+      _$ProductImagesImpl _value, $Res Function(_$ProductImagesImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -118,7 +118,7 @@ class __$$_ProductImagesCopyWithImpl<$Res>
     Object? image = null,
     Object? thumbNail = null,
   }) {
-    return _then(_$_ProductImages(
+    return _then(_$ProductImagesImpl(
       materialNumber: null == materialNumber
           ? _value.materialNumber
           : materialNumber // ignore: cast_nullable_to_non_nullable
@@ -145,8 +145,8 @@ class __$$_ProductImagesCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_ProductImages extends _ProductImages {
-  const _$_ProductImages(
+class _$ProductImagesImpl extends _ProductImages {
+  const _$ProductImagesImpl(
       {required this.materialNumber,
       required this.name,
       required this.description,
@@ -178,10 +178,10 @@ class _$_ProductImages extends _ProductImages {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ProductImages &&
+            other is _$ProductImagesImpl &&
             (identical(other.materialNumber, materialNumber) ||
                 other.materialNumber == materialNumber) &&
             (identical(other.name, name) || other.name == name) &&
@@ -199,8 +199,8 @@ class _$_ProductImages extends _ProductImages {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ProductImagesCopyWith<_$_ProductImages> get copyWith =>
-      __$$_ProductImagesCopyWithImpl<_$_ProductImages>(this, _$identity);
+  _$$ProductImagesImplCopyWith<_$ProductImagesImpl> get copyWith =>
+      __$$ProductImagesImplCopyWithImpl<_$ProductImagesImpl>(this, _$identity);
 }
 
 abstract class _ProductImages extends ProductImages {
@@ -209,7 +209,7 @@ abstract class _ProductImages extends ProductImages {
       required final String name,
       required final StringValue description,
       required final List<String> image,
-      required final String thumbNail}) = _$_ProductImages;
+      required final String thumbNail}) = _$ProductImagesImpl;
   const _ProductImages._() : super._();
 
   @override
@@ -224,6 +224,6 @@ abstract class _ProductImages extends ProductImages {
   String get thumbNail;
   @override
   @JsonKey(ignore: true)
-  _$$_ProductImagesCopyWith<_$_ProductImages> get copyWith =>
+  _$$ProductImagesImplCopyWith<_$ProductImagesImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

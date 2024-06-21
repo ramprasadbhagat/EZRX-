@@ -12,7 +12,7 @@ part of 'soa_group.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$SoaGroup {
@@ -62,21 +62,22 @@ class _$SoaGroupCopyWithImpl<$Res, $Val extends SoaGroup>
 }
 
 /// @nodoc
-abstract class _$$_SoaGroupCopyWith<$Res> implements $SoaGroupCopyWith<$Res> {
-  factory _$$_SoaGroupCopyWith(
-          _$_SoaGroup value, $Res Function(_$_SoaGroup) then) =
-      __$$_SoaGroupCopyWithImpl<$Res>;
+abstract class _$$SoaGroupImplCopyWith<$Res>
+    implements $SoaGroupCopyWith<$Res> {
+  factory _$$SoaGroupImplCopyWith(
+          _$SoaGroupImpl value, $Res Function(_$SoaGroupImpl) then) =
+      __$$SoaGroupImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({int createdDate, List<Soa> soaList});
 }
 
 /// @nodoc
-class __$$_SoaGroupCopyWithImpl<$Res>
-    extends _$SoaGroupCopyWithImpl<$Res, _$_SoaGroup>
-    implements _$$_SoaGroupCopyWith<$Res> {
-  __$$_SoaGroupCopyWithImpl(
-      _$_SoaGroup _value, $Res Function(_$_SoaGroup) _then)
+class __$$SoaGroupImplCopyWithImpl<$Res>
+    extends _$SoaGroupCopyWithImpl<$Res, _$SoaGroupImpl>
+    implements _$$SoaGroupImplCopyWith<$Res> {
+  __$$SoaGroupImplCopyWithImpl(
+      _$SoaGroupImpl _value, $Res Function(_$SoaGroupImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -85,7 +86,7 @@ class __$$_SoaGroupCopyWithImpl<$Res>
     Object? createdDate = null,
     Object? soaList = null,
   }) {
-    return _then(_$_SoaGroup(
+    return _then(_$SoaGroupImpl(
       createdDate: null == createdDate
           ? _value.createdDate
           : createdDate // ignore: cast_nullable_to_non_nullable
@@ -100,8 +101,8 @@ class __$$_SoaGroupCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_SoaGroup implements _SoaGroup {
-  _$_SoaGroup({required this.createdDate, required final List<Soa> soaList})
+class _$SoaGroupImpl implements _SoaGroup {
+  _$SoaGroupImpl({required this.createdDate, required final List<Soa> soaList})
       : _soaList = soaList;
 
   @override
@@ -120,10 +121,10 @@ class _$_SoaGroup implements _SoaGroup {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_SoaGroup &&
+            other is _$SoaGroupImpl &&
             (identical(other.createdDate, createdDate) ||
                 other.createdDate == createdDate) &&
             const DeepCollectionEquality().equals(other._soaList, _soaList));
@@ -136,14 +137,14 @@ class _$_SoaGroup implements _SoaGroup {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_SoaGroupCopyWith<_$_SoaGroup> get copyWith =>
-      __$$_SoaGroupCopyWithImpl<_$_SoaGroup>(this, _$identity);
+  _$$SoaGroupImplCopyWith<_$SoaGroupImpl> get copyWith =>
+      __$$SoaGroupImplCopyWithImpl<_$SoaGroupImpl>(this, _$identity);
 }
 
 abstract class _SoaGroup implements SoaGroup {
   factory _SoaGroup(
       {required final int createdDate,
-      required final List<Soa> soaList}) = _$_SoaGroup;
+      required final List<Soa> soaList}) = _$SoaGroupImpl;
 
   @override
   int get createdDate;
@@ -151,6 +152,6 @@ abstract class _SoaGroup implements SoaGroup {
   List<Soa> get soaList;
   @override
   @JsonKey(ignore: true)
-  _$$_SoaGroupCopyWith<_$_SoaGroup> get copyWith =>
+  _$$SoaGroupImplCopyWith<_$SoaGroupImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

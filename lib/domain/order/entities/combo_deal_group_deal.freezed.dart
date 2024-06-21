@@ -12,7 +12,7 @@ part of 'combo_deal_group_deal.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$ComboDealGroupDeal {
@@ -93,11 +93,11 @@ class _$ComboDealGroupDealCopyWithImpl<$Res, $Val extends ComboDealGroupDeal>
 }
 
 /// @nodoc
-abstract class _$$_ComboDealGroupDealCopyWith<$Res>
+abstract class _$$ComboDealGroupDealImplCopyWith<$Res>
     implements $ComboDealGroupDealCopyWith<$Res> {
-  factory _$$_ComboDealGroupDealCopyWith(_$_ComboDealGroupDeal value,
-          $Res Function(_$_ComboDealGroupDeal) then) =
-      __$$_ComboDealGroupDealCopyWithImpl<$Res>;
+  factory _$$ComboDealGroupDealImplCopyWith(_$ComboDealGroupDealImpl value,
+          $Res Function(_$ComboDealGroupDealImpl) then) =
+      __$$ComboDealGroupDealImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -110,11 +110,11 @@ abstract class _$$_ComboDealGroupDealCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_ComboDealGroupDealCopyWithImpl<$Res>
-    extends _$ComboDealGroupDealCopyWithImpl<$Res, _$_ComboDealGroupDeal>
-    implements _$$_ComboDealGroupDealCopyWith<$Res> {
-  __$$_ComboDealGroupDealCopyWithImpl(
-      _$_ComboDealGroupDeal _value, $Res Function(_$_ComboDealGroupDeal) _then)
+class __$$ComboDealGroupDealImplCopyWithImpl<$Res>
+    extends _$ComboDealGroupDealCopyWithImpl<$Res, _$ComboDealGroupDealImpl>
+    implements _$$ComboDealGroupDealImplCopyWith<$Res> {
+  __$$ComboDealGroupDealImplCopyWithImpl(_$ComboDealGroupDealImpl _value,
+      $Res Function(_$ComboDealGroupDealImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -127,7 +127,7 @@ class __$$_ComboDealGroupDealCopyWithImpl<$Res>
     Object? type = null,
     Object? conditionNumber = null,
   }) {
-    return _then(_$_ComboDealGroupDeal(
+    return _then(_$ComboDealGroupDealImpl(
       minTotalAmount: null == minTotalAmount
           ? _value.minTotalAmount
           : minTotalAmount // ignore: cast_nullable_to_non_nullable
@@ -158,8 +158,8 @@ class __$$_ComboDealGroupDealCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_ComboDealGroupDeal extends _ComboDealGroupDeal {
-  const _$_ComboDealGroupDeal(
+class _$ComboDealGroupDealImpl extends _ComboDealGroupDeal {
+  const _$ComboDealGroupDealImpl(
       {required this.minTotalAmount,
       required this.maxTotalAmount,
       required this.minTotalQuantity,
@@ -187,10 +187,10 @@ class _$_ComboDealGroupDeal extends _ComboDealGroupDeal {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ComboDealGroupDeal &&
+            other is _$ComboDealGroupDealImpl &&
             (identical(other.minTotalAmount, minTotalAmount) ||
                 other.minTotalAmount == minTotalAmount) &&
             (identical(other.maxTotalAmount, maxTotalAmount) ||
@@ -210,8 +210,8 @@ class _$_ComboDealGroupDeal extends _ComboDealGroupDeal {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ComboDealGroupDealCopyWith<_$_ComboDealGroupDeal> get copyWith =>
-      __$$_ComboDealGroupDealCopyWithImpl<_$_ComboDealGroupDeal>(
+  _$$ComboDealGroupDealImplCopyWith<_$ComboDealGroupDealImpl> get copyWith =>
+      __$$ComboDealGroupDealImplCopyWithImpl<_$ComboDealGroupDealImpl>(
           this, _$identity);
 }
 
@@ -222,7 +222,7 @@ abstract class _ComboDealGroupDeal extends ComboDealGroupDeal {
       required final int minTotalQuantity,
       required final double rate,
       required final DiscountType type,
-      required final String conditionNumber}) = _$_ComboDealGroupDeal;
+      required final String conditionNumber}) = _$ComboDealGroupDealImpl;
   const _ComboDealGroupDeal._() : super._();
 
   @override
@@ -239,6 +239,6 @@ abstract class _ComboDealGroupDeal extends ComboDealGroupDeal {
   String get conditionNumber;
   @override
   @JsonKey(ignore: true)
-  _$$_ComboDealGroupDealCopyWith<_$_ComboDealGroupDeal> get copyWith =>
+  _$$ComboDealGroupDealImplCopyWith<_$ComboDealGroupDealImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

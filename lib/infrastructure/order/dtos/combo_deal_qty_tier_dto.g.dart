@@ -6,9 +6,9 @@ part of 'combo_deal_qty_tier_dto.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_ComboDealQtyTierDto _$$_ComboDealQtyTierDtoFromJson(
+_$ComboDealQtyTierDtoImpl _$$ComboDealQtyTierDtoImplFromJson(
         Map<String, dynamic> json) =>
-    _$_ComboDealQtyTierDto(
+    _$ComboDealQtyTierDtoImpl(
       rate: json['rate'] == null
           ? 0
           : const StringToDoubleConverter().fromJson(json['rate'] as String),
@@ -20,8 +20,8 @@ _$_ComboDealQtyTierDto _$$_ComboDealQtyTierDtoFromJson(
       suffix: json['suffix'] as String? ?? '',
     );
 
-Map<String, dynamic> _$$_ComboDealQtyTierDtoToJson(
-        _$_ComboDealQtyTierDto instance) =>
+Map<String, dynamic> _$$ComboDealQtyTierDtoImplToJson(
+        _$ComboDealQtyTierDtoImpl instance) =>
     <String, dynamic>{
       'rate': const StringToDoubleConverter().toJson(instance.rate),
       'conditionNumber': instance.conditionNumber,

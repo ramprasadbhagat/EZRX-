@@ -12,7 +12,7 @@ part of 'material_query_info.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$MaterialQueryInfo {
@@ -131,11 +131,11 @@ class _$MaterialQueryInfoCopyWithImpl<$Res, $Val extends MaterialQueryInfo>
 }
 
 /// @nodoc
-abstract class _$$_MaterialQueryInfoCopyWith<$Res>
+abstract class _$$MaterialQueryInfoImplCopyWith<$Res>
     implements $MaterialQueryInfoCopyWith<$Res> {
-  factory _$$_MaterialQueryInfoCopyWith(_$_MaterialQueryInfo value,
-          $Res Function(_$_MaterialQueryInfo) then) =
-      __$$_MaterialQueryInfoCopyWithImpl<$Res>;
+  factory _$$MaterialQueryInfoImplCopyWith(_$MaterialQueryInfoImpl value,
+          $Res Function(_$MaterialQueryInfoImpl) then) =
+      __$$MaterialQueryInfoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -155,11 +155,11 @@ abstract class _$$_MaterialQueryInfoCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_MaterialQueryInfoCopyWithImpl<$Res>
-    extends _$MaterialQueryInfoCopyWithImpl<$Res, _$_MaterialQueryInfo>
-    implements _$$_MaterialQueryInfoCopyWith<$Res> {
-  __$$_MaterialQueryInfoCopyWithImpl(
-      _$_MaterialQueryInfo _value, $Res Function(_$_MaterialQueryInfo) _then)
+class __$$MaterialQueryInfoImplCopyWithImpl<$Res>
+    extends _$MaterialQueryInfoCopyWithImpl<$Res, _$MaterialQueryInfoImpl>
+    implements _$$MaterialQueryInfoImplCopyWith<$Res> {
+  __$$MaterialQueryInfoImplCopyWithImpl(_$MaterialQueryInfoImpl _value,
+      $Res Function(_$MaterialQueryInfoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -176,7 +176,7 @@ class __$$_MaterialQueryInfoCopyWithImpl<$Res>
     Object? isComboDealMaterial = null,
     Object? tenderContract = null,
   }) {
-    return _then(_$_MaterialQueryInfo(
+    return _then(_$MaterialQueryInfoImpl(
       value: null == value
           ? _value.value
           : value // ignore: cast_nullable_to_non_nullable
@@ -223,8 +223,8 @@ class __$$_MaterialQueryInfoCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_MaterialQueryInfo extends _MaterialQueryInfo {
-  const _$_MaterialQueryInfo(
+class _$MaterialQueryInfoImpl extends _MaterialQueryInfo {
+  const _$MaterialQueryInfoImpl(
       {required this.value,
       required this.materialGroup2,
       required this.materialGroup4,
@@ -267,10 +267,10 @@ class _$_MaterialQueryInfo extends _MaterialQueryInfo {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_MaterialQueryInfo &&
+            other is _$MaterialQueryInfoImpl &&
             (identical(other.value, value) || other.value == value) &&
             (identical(other.materialGroup2, materialGroup2) ||
                 other.materialGroup2 == materialGroup2) &&
@@ -308,8 +308,8 @@ class _$_MaterialQueryInfo extends _MaterialQueryInfo {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_MaterialQueryInfoCopyWith<_$_MaterialQueryInfo> get copyWith =>
-      __$$_MaterialQueryInfoCopyWithImpl<_$_MaterialQueryInfo>(
+  _$$MaterialQueryInfoImplCopyWith<_$MaterialQueryInfoImpl> get copyWith =>
+      __$$MaterialQueryInfoImplCopyWithImpl<_$MaterialQueryInfoImpl>(
           this, _$identity);
 }
 
@@ -324,7 +324,7 @@ abstract class _MaterialQueryInfo extends MaterialQueryInfo {
       final double priceOverride,
       final double zdp8Override,
       final bool isComboDealMaterial,
-      required final TenderContract tenderContract}) = _$_MaterialQueryInfo;
+      required final TenderContract tenderContract}) = _$MaterialQueryInfoImpl;
   const _MaterialQueryInfo._() : super._();
 
   @override
@@ -349,6 +349,6 @@ abstract class _MaterialQueryInfo extends MaterialQueryInfo {
   TenderContract get tenderContract;
   @override
   @JsonKey(ignore: true)
-  _$$_MaterialQueryInfoCopyWith<_$_MaterialQueryInfo> get copyWith =>
+  _$$MaterialQueryInfoImplCopyWith<_$MaterialQueryInfoImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

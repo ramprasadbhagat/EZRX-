@@ -12,7 +12,7 @@ part of 'usage.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$Usage {
@@ -61,18 +61,21 @@ class _$UsageCopyWithImpl<$Res, $Val extends Usage>
 }
 
 /// @nodoc
-abstract class _$$_UsageCopyWith<$Res> implements $UsageCopyWith<$Res> {
-  factory _$$_UsageCopyWith(_$_Usage value, $Res Function(_$_Usage) then) =
-      __$$_UsageCopyWithImpl<$Res>;
+abstract class _$$UsageImplCopyWith<$Res> implements $UsageCopyWith<$Res> {
+  factory _$$UsageImplCopyWith(
+          _$UsageImpl value, $Res Function(_$UsageImpl) then) =
+      __$$UsageImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String usageCode, String usageDescription});
 }
 
 /// @nodoc
-class __$$_UsageCopyWithImpl<$Res> extends _$UsageCopyWithImpl<$Res, _$_Usage>
-    implements _$$_UsageCopyWith<$Res> {
-  __$$_UsageCopyWithImpl(_$_Usage _value, $Res Function(_$_Usage) _then)
+class __$$UsageImplCopyWithImpl<$Res>
+    extends _$UsageCopyWithImpl<$Res, _$UsageImpl>
+    implements _$$UsageImplCopyWith<$Res> {
+  __$$UsageImplCopyWithImpl(
+      _$UsageImpl _value, $Res Function(_$UsageImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -81,7 +84,7 @@ class __$$_UsageCopyWithImpl<$Res> extends _$UsageCopyWithImpl<$Res, _$_Usage>
     Object? usageCode = null,
     Object? usageDescription = null,
   }) {
-    return _then(_$_Usage(
+    return _then(_$UsageImpl(
       usageCode: null == usageCode
           ? _value.usageCode
           : usageCode // ignore: cast_nullable_to_non_nullable
@@ -96,8 +99,8 @@ class __$$_UsageCopyWithImpl<$Res> extends _$UsageCopyWithImpl<$Res, _$_Usage>
 
 /// @nodoc
 
-class _$_Usage extends _Usage {
-  const _$_Usage({required this.usageCode, required this.usageDescription})
+class _$UsageImpl extends _Usage {
+  const _$UsageImpl({required this.usageCode, required this.usageDescription})
       : super._();
 
   @override
@@ -111,10 +114,10 @@ class _$_Usage extends _Usage {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Usage &&
+            other is _$UsageImpl &&
             (identical(other.usageCode, usageCode) ||
                 other.usageCode == usageCode) &&
             (identical(other.usageDescription, usageDescription) ||
@@ -127,14 +130,14 @@ class _$_Usage extends _Usage {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_UsageCopyWith<_$_Usage> get copyWith =>
-      __$$_UsageCopyWithImpl<_$_Usage>(this, _$identity);
+  _$$UsageImplCopyWith<_$UsageImpl> get copyWith =>
+      __$$UsageImplCopyWithImpl<_$UsageImpl>(this, _$identity);
 }
 
 abstract class _Usage extends Usage {
   const factory _Usage(
       {required final String usageCode,
-      required final String usageDescription}) = _$_Usage;
+      required final String usageDescription}) = _$UsageImpl;
   const _Usage._() : super._();
 
   @override
@@ -143,6 +146,6 @@ abstract class _Usage extends Usage {
   String get usageDescription;
   @override
   @JsonKey(ignore: true)
-  _$$_UsageCopyWith<_$_Usage> get copyWith =>
+  _$$UsageImplCopyWith<_$UsageImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

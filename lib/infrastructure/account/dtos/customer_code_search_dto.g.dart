@@ -6,18 +6,18 @@ part of 'customer_code_search_dto.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_CustomerCodeSearchDto _$$_CustomerCodeSearchDtoFromJson(
+_$CustomerCodeSearchDtoImpl _$$CustomerCodeSearchDtoImplFromJson(
         Map<String, dynamic> json) =>
-    _$_CustomerCodeSearchDto(
+    _$CustomerCodeSearchDtoImpl(
       salesOrg: json['salesOrganisation'] as String? ?? '',
-      first: json['first'] as int? ?? 24,
+      first: (json['first'] as num?)?.toInt() ?? 24,
       filterBlockCustomer: json['filterBlockCustomer'] as bool? ?? false,
-      after: json['after'] as int? ?? 0,
+      after: (json['after'] as num?)?.toInt() ?? 0,
       searchKey: json['searchKey'] as String? ?? '',
     );
 
-Map<String, dynamic> _$$_CustomerCodeSearchDtoToJson(
-        _$_CustomerCodeSearchDto instance) =>
+Map<String, dynamic> _$$CustomerCodeSearchDtoImplToJson(
+        _$CustomerCodeSearchDtoImpl instance) =>
     <String, dynamic>{
       'salesOrganisation': instance.salesOrg,
       'first': instance.first,

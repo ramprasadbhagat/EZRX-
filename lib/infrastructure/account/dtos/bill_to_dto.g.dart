@@ -6,7 +6,8 @@ part of 'bill_to_dto.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_BillToDto _$$_BillToDtoFromJson(Map<String, dynamic> json) => _$_BillToDto(
+_$BillToDtoImpl _$$BillToDtoImplFromJson(Map<String, dynamic> json) =>
+    _$BillToDtoImpl(
       billToCustomerCode: json['billToCustomerCode'] as String? ?? '',
       defaulBillToAddress: json['defaulBillToAddress'] as bool? ?? true,
       name1: json['name1'] as String? ?? '',
@@ -51,7 +52,7 @@ _$_BillToDto _$$_BillToDtoFromJson(Map<String, dynamic> json) => _$_BillToDto(
           [],
     );
 
-Map<String, dynamic> _$$_BillToDtoToJson(_$_BillToDto instance) =>
+Map<String, dynamic> _$$BillToDtoImplToJson(_$BillToDtoImpl instance) =>
     <String, dynamic>{
       'billToCustomerCode': instance.billToCustomerCode,
       'defaulBillToAddress': instance.defaulBillToAddress,

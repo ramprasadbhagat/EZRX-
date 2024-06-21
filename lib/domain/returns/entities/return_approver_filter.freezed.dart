@@ -12,7 +12,7 @@ part of 'return_approver_filter.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$ReturnApproverFilter {
@@ -101,11 +101,11 @@ class _$ReturnApproverFilterCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_ReturnApproverFilterCopyWith<$Res>
+abstract class _$$ReturnApproverFilterImplCopyWith<$Res>
     implements $ReturnApproverFilterCopyWith<$Res> {
-  factory _$$_ReturnApproverFilterCopyWith(_$_ReturnApproverFilter value,
-          $Res Function(_$_ReturnApproverFilter) then) =
-      __$$_ReturnApproverFilterCopyWithImpl<$Res>;
+  factory _$$ReturnApproverFilterImplCopyWith(_$ReturnApproverFilterImpl value,
+          $Res Function(_$ReturnApproverFilterImpl) then) =
+      __$$ReturnApproverFilterImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -119,11 +119,11 @@ abstract class _$$_ReturnApproverFilterCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_ReturnApproverFilterCopyWithImpl<$Res>
-    extends _$ReturnApproverFilterCopyWithImpl<$Res, _$_ReturnApproverFilter>
-    implements _$$_ReturnApproverFilterCopyWith<$Res> {
-  __$$_ReturnApproverFilterCopyWithImpl(_$_ReturnApproverFilter _value,
-      $Res Function(_$_ReturnApproverFilter) _then)
+class __$$ReturnApproverFilterImplCopyWithImpl<$Res>
+    extends _$ReturnApproverFilterCopyWithImpl<$Res, _$ReturnApproverFilterImpl>
+    implements _$$ReturnApproverFilterImplCopyWith<$Res> {
+  __$$ReturnApproverFilterImplCopyWithImpl(_$ReturnApproverFilterImpl _value,
+      $Res Function(_$ReturnApproverFilterImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -137,7 +137,7 @@ class __$$_ReturnApproverFilterCopyWithImpl<$Res>
     Object? toInvoiceDate = null,
     Object? sortBy = null,
   }) {
-    return _then(_$_ReturnApproverFilter(
+    return _then(_$ReturnApproverFilterImpl(
       returnId: null == returnId
           ? _value.returnId
           : returnId // ignore: cast_nullable_to_non_nullable
@@ -172,8 +172,8 @@ class __$$_ReturnApproverFilterCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_ReturnApproverFilter extends _ReturnApproverFilter {
-  _$_ReturnApproverFilter(
+class _$ReturnApproverFilterImpl extends _ReturnApproverFilter {
+  _$ReturnApproverFilterImpl(
       {required this.returnId,
       required this.createdBy,
       required this.soldTo,
@@ -204,10 +204,10 @@ class _$_ReturnApproverFilter extends _ReturnApproverFilter {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ReturnApproverFilter &&
+            other is _$ReturnApproverFilterImpl &&
             (identical(other.returnId, returnId) ||
                 other.returnId == returnId) &&
             (identical(other.createdBy, createdBy) ||
@@ -228,9 +228,10 @@ class _$_ReturnApproverFilter extends _ReturnApproverFilter {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ReturnApproverFilterCopyWith<_$_ReturnApproverFilter> get copyWith =>
-      __$$_ReturnApproverFilterCopyWithImpl<_$_ReturnApproverFilter>(
-          this, _$identity);
+  _$$ReturnApproverFilterImplCopyWith<_$ReturnApproverFilterImpl>
+      get copyWith =>
+          __$$ReturnApproverFilterImplCopyWithImpl<_$ReturnApproverFilterImpl>(
+              this, _$identity);
 }
 
 abstract class _ReturnApproverFilter extends ReturnApproverFilter {
@@ -241,7 +242,7 @@ abstract class _ReturnApproverFilter extends ReturnApproverFilter {
       required final SearchKey shipTo,
       required final DateTimeStringValue fromInvoiceDate,
       required final DateTimeStringValue toInvoiceDate,
-      required final FilterStatus sortBy}) = _$_ReturnApproverFilter;
+      required final FilterStatus sortBy}) = _$ReturnApproverFilterImpl;
   _ReturnApproverFilter._() : super._();
 
   @override
@@ -260,6 +261,6 @@ abstract class _ReturnApproverFilter extends ReturnApproverFilter {
   FilterStatus get sortBy;
   @override
   @JsonKey(ignore: true)
-  _$$_ReturnApproverFilterCopyWith<_$_ReturnApproverFilter> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$ReturnApproverFilterImplCopyWith<_$ReturnApproverFilterImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }

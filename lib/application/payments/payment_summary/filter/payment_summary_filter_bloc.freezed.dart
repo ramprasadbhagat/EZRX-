@@ -12,7 +12,7 @@ part of 'payment_summary_filter_bloc.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$PaymentSummaryFilterEvent {
@@ -110,20 +110,20 @@ class _$PaymentSummaryFilterEventCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_InitializedCopyWith<$Res> {
-  factory _$$_InitializedCopyWith(
-          _$_Initialized value, $Res Function(_$_Initialized) then) =
-      __$$_InitializedCopyWithImpl<$Res>;
+abstract class _$$InitializedImplCopyWith<$Res> {
+  factory _$$InitializedImplCopyWith(
+          _$InitializedImpl value, $Res Function(_$InitializedImpl) then) =
+      __$$InitializedImplCopyWithImpl<$Res>;
   @useResult
   $Res call({SalesOrg salesOrg});
 }
 
 /// @nodoc
-class __$$_InitializedCopyWithImpl<$Res>
-    extends _$PaymentSummaryFilterEventCopyWithImpl<$Res, _$_Initialized>
-    implements _$$_InitializedCopyWith<$Res> {
-  __$$_InitializedCopyWithImpl(
-      _$_Initialized _value, $Res Function(_$_Initialized) _then)
+class __$$InitializedImplCopyWithImpl<$Res>
+    extends _$PaymentSummaryFilterEventCopyWithImpl<$Res, _$InitializedImpl>
+    implements _$$InitializedImplCopyWith<$Res> {
+  __$$InitializedImplCopyWithImpl(
+      _$InitializedImpl _value, $Res Function(_$InitializedImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -131,7 +131,7 @@ class __$$_InitializedCopyWithImpl<$Res>
   $Res call({
     Object? salesOrg = null,
   }) {
-    return _then(_$_Initialized(
+    return _then(_$InitializedImpl(
       salesOrg: null == salesOrg
           ? _value.salesOrg
           : salesOrg // ignore: cast_nullable_to_non_nullable
@@ -142,8 +142,8 @@ class __$$_InitializedCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_Initialized implements _Initialized {
-  const _$_Initialized({required this.salesOrg});
+class _$InitializedImpl implements _Initialized {
+  const _$InitializedImpl({required this.salesOrg});
 
   @override
   final SalesOrg salesOrg;
@@ -154,10 +154,10 @@ class _$_Initialized implements _Initialized {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Initialized &&
+            other is _$InitializedImpl &&
             (identical(other.salesOrg, salesOrg) ||
                 other.salesOrg == salesOrg));
   }
@@ -168,8 +168,8 @@ class _$_Initialized implements _Initialized {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_InitializedCopyWith<_$_Initialized> get copyWith =>
-      __$$_InitializedCopyWithImpl<_$_Initialized>(this, _$identity);
+  _$$InitializedImplCopyWith<_$InitializedImpl> get copyWith =>
+      __$$InitializedImplCopyWithImpl<_$InitializedImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -270,19 +270,20 @@ class _$_Initialized implements _Initialized {
 
 abstract class _Initialized implements PaymentSummaryFilterEvent {
   const factory _Initialized({required final SalesOrg salesOrg}) =
-      _$_Initialized;
+      _$InitializedImpl;
 
   SalesOrg get salesOrg;
   @JsonKey(ignore: true)
-  _$$_InitializedCopyWith<_$_Initialized> get copyWith =>
+  _$$InitializedImplCopyWith<_$InitializedImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_OpenFilterBottomSheetCopyWith<$Res> {
-  factory _$$_OpenFilterBottomSheetCopyWith(_$_OpenFilterBottomSheet value,
-          $Res Function(_$_OpenFilterBottomSheet) then) =
-      __$$_OpenFilterBottomSheetCopyWithImpl<$Res>;
+abstract class _$$OpenFilterBottomSheetImplCopyWith<$Res> {
+  factory _$$OpenFilterBottomSheetImplCopyWith(
+          _$OpenFilterBottomSheetImpl value,
+          $Res Function(_$OpenFilterBottomSheetImpl) then) =
+      __$$OpenFilterBottomSheetImplCopyWithImpl<$Res>;
   @useResult
   $Res call({PaymentSummaryFilter appliedFilter});
 
@@ -290,12 +291,12 @@ abstract class _$$_OpenFilterBottomSheetCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_OpenFilterBottomSheetCopyWithImpl<$Res>
+class __$$OpenFilterBottomSheetImplCopyWithImpl<$Res>
     extends _$PaymentSummaryFilterEventCopyWithImpl<$Res,
-        _$_OpenFilterBottomSheet>
-    implements _$$_OpenFilterBottomSheetCopyWith<$Res> {
-  __$$_OpenFilterBottomSheetCopyWithImpl(_$_OpenFilterBottomSheet _value,
-      $Res Function(_$_OpenFilterBottomSheet) _then)
+        _$OpenFilterBottomSheetImpl>
+    implements _$$OpenFilterBottomSheetImplCopyWith<$Res> {
+  __$$OpenFilterBottomSheetImplCopyWithImpl(_$OpenFilterBottomSheetImpl _value,
+      $Res Function(_$OpenFilterBottomSheetImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -303,7 +304,7 @@ class __$$_OpenFilterBottomSheetCopyWithImpl<$Res>
   $Res call({
     Object? appliedFilter = null,
   }) {
-    return _then(_$_OpenFilterBottomSheet(
+    return _then(_$OpenFilterBottomSheetImpl(
       appliedFilter: null == appliedFilter
           ? _value.appliedFilter
           : appliedFilter // ignore: cast_nullable_to_non_nullable
@@ -322,8 +323,8 @@ class __$$_OpenFilterBottomSheetCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_OpenFilterBottomSheet implements _OpenFilterBottomSheet {
-  const _$_OpenFilterBottomSheet({required this.appliedFilter});
+class _$OpenFilterBottomSheetImpl implements _OpenFilterBottomSheet {
+  const _$OpenFilterBottomSheetImpl({required this.appliedFilter});
 
   @override
   final PaymentSummaryFilter appliedFilter;
@@ -334,10 +335,10 @@ class _$_OpenFilterBottomSheet implements _OpenFilterBottomSheet {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_OpenFilterBottomSheet &&
+            other is _$OpenFilterBottomSheetImpl &&
             (identical(other.appliedFilter, appliedFilter) ||
                 other.appliedFilter == appliedFilter));
   }
@@ -348,9 +349,9 @@ class _$_OpenFilterBottomSheet implements _OpenFilterBottomSheet {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_OpenFilterBottomSheetCopyWith<_$_OpenFilterBottomSheet> get copyWith =>
-      __$$_OpenFilterBottomSheetCopyWithImpl<_$_OpenFilterBottomSheet>(
-          this, _$identity);
+  _$$OpenFilterBottomSheetImplCopyWith<_$OpenFilterBottomSheetImpl>
+      get copyWith => __$$OpenFilterBottomSheetImplCopyWithImpl<
+          _$OpenFilterBottomSheetImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -452,34 +453,34 @@ class _$_OpenFilterBottomSheet implements _OpenFilterBottomSheet {
 abstract class _OpenFilterBottomSheet implements PaymentSummaryFilterEvent {
   const factory _OpenFilterBottomSheet(
           {required final PaymentSummaryFilter appliedFilter}) =
-      _$_OpenFilterBottomSheet;
+      _$OpenFilterBottomSheetImpl;
 
   PaymentSummaryFilter get appliedFilter;
   @JsonKey(ignore: true)
-  _$$_OpenFilterBottomSheetCopyWith<_$_OpenFilterBottomSheet> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$OpenFilterBottomSheetImplCopyWith<_$OpenFilterBottomSheetImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_ValidateFiltersCopyWith<$Res> {
-  factory _$$_ValidateFiltersCopyWith(
-          _$_ValidateFilters value, $Res Function(_$_ValidateFilters) then) =
-      __$$_ValidateFiltersCopyWithImpl<$Res>;
+abstract class _$$ValidateFiltersImplCopyWith<$Res> {
+  factory _$$ValidateFiltersImplCopyWith(_$ValidateFiltersImpl value,
+          $Res Function(_$ValidateFiltersImpl) then) =
+      __$$ValidateFiltersImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_ValidateFiltersCopyWithImpl<$Res>
-    extends _$PaymentSummaryFilterEventCopyWithImpl<$Res, _$_ValidateFilters>
-    implements _$$_ValidateFiltersCopyWith<$Res> {
-  __$$_ValidateFiltersCopyWithImpl(
-      _$_ValidateFilters _value, $Res Function(_$_ValidateFilters) _then)
+class __$$ValidateFiltersImplCopyWithImpl<$Res>
+    extends _$PaymentSummaryFilterEventCopyWithImpl<$Res, _$ValidateFiltersImpl>
+    implements _$$ValidateFiltersImplCopyWith<$Res> {
+  __$$ValidateFiltersImplCopyWithImpl(
+      _$ValidateFiltersImpl _value, $Res Function(_$ValidateFiltersImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_ValidateFilters implements _ValidateFilters {
-  const _$_ValidateFilters();
+class _$ValidateFiltersImpl implements _ValidateFilters {
+  const _$ValidateFiltersImpl();
 
   @override
   String toString() {
@@ -487,9 +488,9 @@ class _$_ValidateFilters implements _ValidateFilters {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_ValidateFilters);
+        (other.runtimeType == runtimeType && other is _$ValidateFiltersImpl);
   }
 
   @override
@@ -593,25 +594,27 @@ class _$_ValidateFilters implements _ValidateFilters {
 }
 
 abstract class _ValidateFilters implements PaymentSummaryFilterEvent {
-  const factory _ValidateFilters() = _$_ValidateFilters;
+  const factory _ValidateFilters() = _$ValidateFiltersImpl;
 }
 
 /// @nodoc
-abstract class _$$_AmountValueFromChangedCopyWith<$Res> {
-  factory _$$_AmountValueFromChangedCopyWith(_$_AmountValueFromChanged value,
-          $Res Function(_$_AmountValueFromChanged) then) =
-      __$$_AmountValueFromChangedCopyWithImpl<$Res>;
+abstract class _$$AmountValueFromChangedImplCopyWith<$Res> {
+  factory _$$AmountValueFromChangedImplCopyWith(
+          _$AmountValueFromChangedImpl value,
+          $Res Function(_$AmountValueFromChangedImpl) then) =
+      __$$AmountValueFromChangedImplCopyWithImpl<$Res>;
   @useResult
   $Res call({String amountValueFrom});
 }
 
 /// @nodoc
-class __$$_AmountValueFromChangedCopyWithImpl<$Res>
+class __$$AmountValueFromChangedImplCopyWithImpl<$Res>
     extends _$PaymentSummaryFilterEventCopyWithImpl<$Res,
-        _$_AmountValueFromChanged>
-    implements _$$_AmountValueFromChangedCopyWith<$Res> {
-  __$$_AmountValueFromChangedCopyWithImpl(_$_AmountValueFromChanged _value,
-      $Res Function(_$_AmountValueFromChanged) _then)
+        _$AmountValueFromChangedImpl>
+    implements _$$AmountValueFromChangedImplCopyWith<$Res> {
+  __$$AmountValueFromChangedImplCopyWithImpl(
+      _$AmountValueFromChangedImpl _value,
+      $Res Function(_$AmountValueFromChangedImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -619,7 +622,7 @@ class __$$_AmountValueFromChangedCopyWithImpl<$Res>
   $Res call({
     Object? amountValueFrom = null,
   }) {
-    return _then(_$_AmountValueFromChanged(
+    return _then(_$AmountValueFromChangedImpl(
       null == amountValueFrom
           ? _value.amountValueFrom
           : amountValueFrom // ignore: cast_nullable_to_non_nullable
@@ -630,8 +633,8 @@ class __$$_AmountValueFromChangedCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_AmountValueFromChanged implements _AmountValueFromChanged {
-  const _$_AmountValueFromChanged(this.amountValueFrom);
+class _$AmountValueFromChangedImpl implements _AmountValueFromChanged {
+  const _$AmountValueFromChangedImpl(this.amountValueFrom);
 
   @override
   final String amountValueFrom;
@@ -642,10 +645,10 @@ class _$_AmountValueFromChanged implements _AmountValueFromChanged {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_AmountValueFromChanged &&
+            other is _$AmountValueFromChangedImpl &&
             (identical(other.amountValueFrom, amountValueFrom) ||
                 other.amountValueFrom == amountValueFrom));
   }
@@ -656,9 +659,9 @@ class _$_AmountValueFromChanged implements _AmountValueFromChanged {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_AmountValueFromChangedCopyWith<_$_AmountValueFromChanged> get copyWith =>
-      __$$_AmountValueFromChangedCopyWithImpl<_$_AmountValueFromChanged>(
-          this, _$identity);
+  _$$AmountValueFromChangedImplCopyWith<_$AmountValueFromChangedImpl>
+      get copyWith => __$$AmountValueFromChangedImplCopyWithImpl<
+          _$AmountValueFromChangedImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -759,30 +762,30 @@ class _$_AmountValueFromChanged implements _AmountValueFromChanged {
 
 abstract class _AmountValueFromChanged implements PaymentSummaryFilterEvent {
   const factory _AmountValueFromChanged(final String amountValueFrom) =
-      _$_AmountValueFromChanged;
+      _$AmountValueFromChangedImpl;
 
   String get amountValueFrom;
   @JsonKey(ignore: true)
-  _$$_AmountValueFromChangedCopyWith<_$_AmountValueFromChanged> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$AmountValueFromChangedImplCopyWith<_$AmountValueFromChangedImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_AmountValueToChangedCopyWith<$Res> {
-  factory _$$_AmountValueToChangedCopyWith(_$_AmountValueToChanged value,
-          $Res Function(_$_AmountValueToChanged) then) =
-      __$$_AmountValueToChangedCopyWithImpl<$Res>;
+abstract class _$$AmountValueToChangedImplCopyWith<$Res> {
+  factory _$$AmountValueToChangedImplCopyWith(_$AmountValueToChangedImpl value,
+          $Res Function(_$AmountValueToChangedImpl) then) =
+      __$$AmountValueToChangedImplCopyWithImpl<$Res>;
   @useResult
   $Res call({String amountValueTo});
 }
 
 /// @nodoc
-class __$$_AmountValueToChangedCopyWithImpl<$Res>
+class __$$AmountValueToChangedImplCopyWithImpl<$Res>
     extends _$PaymentSummaryFilterEventCopyWithImpl<$Res,
-        _$_AmountValueToChanged>
-    implements _$$_AmountValueToChangedCopyWith<$Res> {
-  __$$_AmountValueToChangedCopyWithImpl(_$_AmountValueToChanged _value,
-      $Res Function(_$_AmountValueToChanged) _then)
+        _$AmountValueToChangedImpl>
+    implements _$$AmountValueToChangedImplCopyWith<$Res> {
+  __$$AmountValueToChangedImplCopyWithImpl(_$AmountValueToChangedImpl _value,
+      $Res Function(_$AmountValueToChangedImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -790,7 +793,7 @@ class __$$_AmountValueToChangedCopyWithImpl<$Res>
   $Res call({
     Object? amountValueTo = null,
   }) {
-    return _then(_$_AmountValueToChanged(
+    return _then(_$AmountValueToChangedImpl(
       null == amountValueTo
           ? _value.amountValueTo
           : amountValueTo // ignore: cast_nullable_to_non_nullable
@@ -801,8 +804,8 @@ class __$$_AmountValueToChangedCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_AmountValueToChanged implements _AmountValueToChanged {
-  const _$_AmountValueToChanged(this.amountValueTo);
+class _$AmountValueToChangedImpl implements _AmountValueToChanged {
+  const _$AmountValueToChangedImpl(this.amountValueTo);
 
   @override
   final String amountValueTo;
@@ -813,10 +816,10 @@ class _$_AmountValueToChanged implements _AmountValueToChanged {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_AmountValueToChanged &&
+            other is _$AmountValueToChangedImpl &&
             (identical(other.amountValueTo, amountValueTo) ||
                 other.amountValueTo == amountValueTo));
   }
@@ -827,9 +830,10 @@ class _$_AmountValueToChanged implements _AmountValueToChanged {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_AmountValueToChangedCopyWith<_$_AmountValueToChanged> get copyWith =>
-      __$$_AmountValueToChangedCopyWithImpl<_$_AmountValueToChanged>(
-          this, _$identity);
+  _$$AmountValueToChangedImplCopyWith<_$AmountValueToChangedImpl>
+      get copyWith =>
+          __$$AmountValueToChangedImplCopyWithImpl<_$AmountValueToChangedImpl>(
+              this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -930,29 +934,29 @@ class _$_AmountValueToChanged implements _AmountValueToChanged {
 
 abstract class _AmountValueToChanged implements PaymentSummaryFilterEvent {
   const factory _AmountValueToChanged(final String amountValueTo) =
-      _$_AmountValueToChanged;
+      _$AmountValueToChangedImpl;
 
   String get amountValueTo;
   @JsonKey(ignore: true)
-  _$$_AmountValueToChangedCopyWith<_$_AmountValueToChanged> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$AmountValueToChangedImplCopyWith<_$AmountValueToChangedImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_StatusChangedCopyWith<$Res> {
-  factory _$$_StatusChangedCopyWith(
-          _$_StatusChanged value, $Res Function(_$_StatusChanged) then) =
-      __$$_StatusChangedCopyWithImpl<$Res>;
+abstract class _$$StatusChangedImplCopyWith<$Res> {
+  factory _$$StatusChangedImplCopyWith(
+          _$StatusChangedImpl value, $Res Function(_$StatusChangedImpl) then) =
+      __$$StatusChangedImplCopyWithImpl<$Res>;
   @useResult
   $Res call({FilterStatus filterStatus});
 }
 
 /// @nodoc
-class __$$_StatusChangedCopyWithImpl<$Res>
-    extends _$PaymentSummaryFilterEventCopyWithImpl<$Res, _$_StatusChanged>
-    implements _$$_StatusChangedCopyWith<$Res> {
-  __$$_StatusChangedCopyWithImpl(
-      _$_StatusChanged _value, $Res Function(_$_StatusChanged) _then)
+class __$$StatusChangedImplCopyWithImpl<$Res>
+    extends _$PaymentSummaryFilterEventCopyWithImpl<$Res, _$StatusChangedImpl>
+    implements _$$StatusChangedImplCopyWith<$Res> {
+  __$$StatusChangedImplCopyWithImpl(
+      _$StatusChangedImpl _value, $Res Function(_$StatusChangedImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -960,7 +964,7 @@ class __$$_StatusChangedCopyWithImpl<$Res>
   $Res call({
     Object? filterStatus = null,
   }) {
-    return _then(_$_StatusChanged(
+    return _then(_$StatusChangedImpl(
       null == filterStatus
           ? _value.filterStatus
           : filterStatus // ignore: cast_nullable_to_non_nullable
@@ -971,8 +975,8 @@ class __$$_StatusChangedCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_StatusChanged implements _StatusChanged {
-  const _$_StatusChanged(this.filterStatus);
+class _$StatusChangedImpl implements _StatusChanged {
+  const _$StatusChangedImpl(this.filterStatus);
 
   @override
   final FilterStatus filterStatus;
@@ -983,10 +987,10 @@ class _$_StatusChanged implements _StatusChanged {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_StatusChanged &&
+            other is _$StatusChangedImpl &&
             (identical(other.filterStatus, filterStatus) ||
                 other.filterStatus == filterStatus));
   }
@@ -997,8 +1001,8 @@ class _$_StatusChanged implements _StatusChanged {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_StatusChangedCopyWith<_$_StatusChanged> get copyWith =>
-      __$$_StatusChangedCopyWithImpl<_$_StatusChanged>(this, _$identity);
+  _$$StatusChangedImplCopyWith<_$StatusChangedImpl> get copyWith =>
+      __$$StatusChangedImplCopyWithImpl<_$StatusChangedImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -1099,29 +1103,29 @@ class _$_StatusChanged implements _StatusChanged {
 
 abstract class _StatusChanged implements PaymentSummaryFilterEvent {
   const factory _StatusChanged(final FilterStatus filterStatus) =
-      _$_StatusChanged;
+      _$StatusChangedImpl;
 
   FilterStatus get filterStatus;
   @JsonKey(ignore: true)
-  _$$_StatusChangedCopyWith<_$_StatusChanged> get copyWith =>
+  _$$StatusChangedImplCopyWith<_$StatusChangedImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_SetCreatedDateCopyWith<$Res> {
-  factory _$$_SetCreatedDateCopyWith(
-          _$_SetCreatedDate value, $Res Function(_$_SetCreatedDate) then) =
-      __$$_SetCreatedDateCopyWithImpl<$Res>;
+abstract class _$$SetCreatedDateImplCopyWith<$Res> {
+  factory _$$SetCreatedDateImplCopyWith(_$SetCreatedDateImpl value,
+          $Res Function(_$SetCreatedDateImpl) then) =
+      __$$SetCreatedDateImplCopyWithImpl<$Res>;
   @useResult
   $Res call({DateTimeRange dateRange});
 }
 
 /// @nodoc
-class __$$_SetCreatedDateCopyWithImpl<$Res>
-    extends _$PaymentSummaryFilterEventCopyWithImpl<$Res, _$_SetCreatedDate>
-    implements _$$_SetCreatedDateCopyWith<$Res> {
-  __$$_SetCreatedDateCopyWithImpl(
-      _$_SetCreatedDate _value, $Res Function(_$_SetCreatedDate) _then)
+class __$$SetCreatedDateImplCopyWithImpl<$Res>
+    extends _$PaymentSummaryFilterEventCopyWithImpl<$Res, _$SetCreatedDateImpl>
+    implements _$$SetCreatedDateImplCopyWith<$Res> {
+  __$$SetCreatedDateImplCopyWithImpl(
+      _$SetCreatedDateImpl _value, $Res Function(_$SetCreatedDateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1129,7 +1133,7 @@ class __$$_SetCreatedDateCopyWithImpl<$Res>
   $Res call({
     Object? dateRange = null,
   }) {
-    return _then(_$_SetCreatedDate(
+    return _then(_$SetCreatedDateImpl(
       null == dateRange
           ? _value.dateRange
           : dateRange // ignore: cast_nullable_to_non_nullable
@@ -1140,8 +1144,8 @@ class __$$_SetCreatedDateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_SetCreatedDate implements _SetCreatedDate {
-  const _$_SetCreatedDate(this.dateRange);
+class _$SetCreatedDateImpl implements _SetCreatedDate {
+  const _$SetCreatedDateImpl(this.dateRange);
 
   @override
   final DateTimeRange dateRange;
@@ -1152,10 +1156,10 @@ class _$_SetCreatedDate implements _SetCreatedDate {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_SetCreatedDate &&
+            other is _$SetCreatedDateImpl &&
             (identical(other.dateRange, dateRange) ||
                 other.dateRange == dateRange));
   }
@@ -1166,8 +1170,9 @@ class _$_SetCreatedDate implements _SetCreatedDate {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_SetCreatedDateCopyWith<_$_SetCreatedDate> get copyWith =>
-      __$$_SetCreatedDateCopyWithImpl<_$_SetCreatedDate>(this, _$identity);
+  _$$SetCreatedDateImplCopyWith<_$SetCreatedDateImpl> get copyWith =>
+      __$$SetCreatedDateImplCopyWithImpl<_$SetCreatedDateImpl>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -1268,11 +1273,11 @@ class _$_SetCreatedDate implements _SetCreatedDate {
 
 abstract class _SetCreatedDate implements PaymentSummaryFilterEvent {
   const factory _SetCreatedDate(final DateTimeRange dateRange) =
-      _$_SetCreatedDate;
+      _$SetCreatedDateImpl;
 
   DateTimeRange get dateRange;
   @JsonKey(ignore: true)
-  _$$_SetCreatedDateCopyWith<_$_SetCreatedDate> get copyWith =>
+  _$$SetCreatedDateImplCopyWith<_$SetCreatedDateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -1343,12 +1348,12 @@ class _$PaymentSummaryFilterStateCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_PaymentSummaryFilterStateCopyWith<$Res>
+abstract class _$$PaymentSummaryFilterStateImplCopyWith<$Res>
     implements $PaymentSummaryFilterStateCopyWith<$Res> {
-  factory _$$_PaymentSummaryFilterStateCopyWith(
-          _$_PaymentSummaryFilterState value,
-          $Res Function(_$_PaymentSummaryFilterState) then) =
-      __$$_PaymentSummaryFilterStateCopyWithImpl<$Res>;
+  factory _$$PaymentSummaryFilterStateImplCopyWith(
+          _$PaymentSummaryFilterStateImpl value,
+          $Res Function(_$PaymentSummaryFilterStateImpl) then) =
+      __$$PaymentSummaryFilterStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -1359,13 +1364,13 @@ abstract class _$$_PaymentSummaryFilterStateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_PaymentSummaryFilterStateCopyWithImpl<$Res>
+class __$$PaymentSummaryFilterStateImplCopyWithImpl<$Res>
     extends _$PaymentSummaryFilterStateCopyWithImpl<$Res,
-        _$_PaymentSummaryFilterState>
-    implements _$$_PaymentSummaryFilterStateCopyWith<$Res> {
-  __$$_PaymentSummaryFilterStateCopyWithImpl(
-      _$_PaymentSummaryFilterState _value,
-      $Res Function(_$_PaymentSummaryFilterState) _then)
+        _$PaymentSummaryFilterStateImpl>
+    implements _$$PaymentSummaryFilterStateImplCopyWith<$Res> {
+  __$$PaymentSummaryFilterStateImplCopyWithImpl(
+      _$PaymentSummaryFilterStateImpl _value,
+      $Res Function(_$PaymentSummaryFilterStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1375,7 +1380,7 @@ class __$$_PaymentSummaryFilterStateCopyWithImpl<$Res>
     Object? filter = null,
     Object? showErrorMessages = null,
   }) {
-    return _then(_$_PaymentSummaryFilterState(
+    return _then(_$PaymentSummaryFilterStateImpl(
       salesOrg: null == salesOrg
           ? _value.salesOrg
           : salesOrg // ignore: cast_nullable_to_non_nullable
@@ -1394,8 +1399,8 @@ class __$$_PaymentSummaryFilterStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_PaymentSummaryFilterState extends _PaymentSummaryFilterState {
-  const _$_PaymentSummaryFilterState(
+class _$PaymentSummaryFilterStateImpl extends _PaymentSummaryFilterState {
+  const _$PaymentSummaryFilterStateImpl(
       {required this.salesOrg,
       required this.filter,
       required this.showErrorMessages})
@@ -1414,10 +1419,10 @@ class _$_PaymentSummaryFilterState extends _PaymentSummaryFilterState {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_PaymentSummaryFilterState &&
+            other is _$PaymentSummaryFilterStateImpl &&
             (identical(other.salesOrg, salesOrg) ||
                 other.salesOrg == salesOrg) &&
             (identical(other.filter, filter) || other.filter == filter) &&
@@ -1432,16 +1437,16 @@ class _$_PaymentSummaryFilterState extends _PaymentSummaryFilterState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_PaymentSummaryFilterStateCopyWith<_$_PaymentSummaryFilterState>
-      get copyWith => __$$_PaymentSummaryFilterStateCopyWithImpl<
-          _$_PaymentSummaryFilterState>(this, _$identity);
+  _$$PaymentSummaryFilterStateImplCopyWith<_$PaymentSummaryFilterStateImpl>
+      get copyWith => __$$PaymentSummaryFilterStateImplCopyWithImpl<
+          _$PaymentSummaryFilterStateImpl>(this, _$identity);
 }
 
 abstract class _PaymentSummaryFilterState extends PaymentSummaryFilterState {
   const factory _PaymentSummaryFilterState(
       {required final SalesOrg salesOrg,
       required final PaymentSummaryFilter filter,
-      required final bool showErrorMessages}) = _$_PaymentSummaryFilterState;
+      required final bool showErrorMessages}) = _$PaymentSummaryFilterStateImpl;
   const _PaymentSummaryFilterState._() : super._();
 
   @override
@@ -1452,6 +1457,6 @@ abstract class _PaymentSummaryFilterState extends PaymentSummaryFilterState {
   bool get showErrorMessages;
   @override
   @JsonKey(ignore: true)
-  _$$_PaymentSummaryFilterStateCopyWith<_$_PaymentSummaryFilterState>
+  _$$PaymentSummaryFilterStateImplCopyWith<_$PaymentSummaryFilterStateImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

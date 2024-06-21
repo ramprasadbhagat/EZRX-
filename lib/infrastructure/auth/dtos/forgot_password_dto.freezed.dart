@@ -12,7 +12,7 @@ part of 'forgot_password_dto.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 ForgotPasswordDto _$ForgotPasswordDtoFromJson(Map<String, dynamic> json) {
   return _ForgotPasswordDto.fromJson(json);
@@ -72,11 +72,11 @@ class _$ForgotPasswordDtoCopyWithImpl<$Res, $Val extends ForgotPasswordDto>
 }
 
 /// @nodoc
-abstract class _$$_ForgotPasswordDtoCopyWith<$Res>
+abstract class _$$ForgotPasswordDtoImplCopyWith<$Res>
     implements $ForgotPasswordDtoCopyWith<$Res> {
-  factory _$$_ForgotPasswordDtoCopyWith(_$_ForgotPasswordDto value,
-          $Res Function(_$_ForgotPasswordDto) then) =
-      __$$_ForgotPasswordDtoCopyWithImpl<$Res>;
+  factory _$$ForgotPasswordDtoImplCopyWith(_$ForgotPasswordDtoImpl value,
+          $Res Function(_$ForgotPasswordDtoImpl) then) =
+      __$$ForgotPasswordDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -85,11 +85,11 @@ abstract class _$$_ForgotPasswordDtoCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_ForgotPasswordDtoCopyWithImpl<$Res>
-    extends _$ForgotPasswordDtoCopyWithImpl<$Res, _$_ForgotPasswordDto>
-    implements _$$_ForgotPasswordDtoCopyWith<$Res> {
-  __$$_ForgotPasswordDtoCopyWithImpl(
-      _$_ForgotPasswordDto _value, $Res Function(_$_ForgotPasswordDto) _then)
+class __$$ForgotPasswordDtoImplCopyWithImpl<$Res>
+    extends _$ForgotPasswordDtoCopyWithImpl<$Res, _$ForgotPasswordDtoImpl>
+    implements _$$ForgotPasswordDtoImplCopyWith<$Res> {
+  __$$ForgotPasswordDtoImplCopyWithImpl(_$ForgotPasswordDtoImpl _value,
+      $Res Function(_$ForgotPasswordDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -98,7 +98,7 @@ class __$$_ForgotPasswordDtoCopyWithImpl<$Res>
     Object? success = null,
     Object? email = null,
   }) {
-    return _then(_$_ForgotPasswordDto(
+    return _then(_$ForgotPasswordDtoImpl(
       success: null == success
           ? _value.success
           : success // ignore: cast_nullable_to_non_nullable
@@ -113,14 +113,14 @@ class __$$_ForgotPasswordDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_ForgotPasswordDto extends _ForgotPasswordDto {
-  _$_ForgotPasswordDto(
+class _$ForgotPasswordDtoImpl extends _ForgotPasswordDto {
+  _$ForgotPasswordDtoImpl(
       {@JsonKey(name: 'success', defaultValue: false) required this.success,
       @JsonKey(name: 'email', defaultValue: '') required this.email})
       : super._();
 
-  factory _$_ForgotPasswordDto.fromJson(Map<String, dynamic> json) =>
-      _$$_ForgotPasswordDtoFromJson(json);
+  factory _$ForgotPasswordDtoImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ForgotPasswordDtoImplFromJson(json);
 
   @override
   @JsonKey(name: 'success', defaultValue: false)
@@ -135,10 +135,10 @@ class _$_ForgotPasswordDto extends _ForgotPasswordDto {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ForgotPasswordDto &&
+            other is _$ForgotPasswordDtoImpl &&
             (identical(other.success, success) || other.success == success) &&
             (identical(other.email, email) || other.email == email));
   }
@@ -150,13 +150,13 @@ class _$_ForgotPasswordDto extends _ForgotPasswordDto {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ForgotPasswordDtoCopyWith<_$_ForgotPasswordDto> get copyWith =>
-      __$$_ForgotPasswordDtoCopyWithImpl<_$_ForgotPasswordDto>(
+  _$$ForgotPasswordDtoImplCopyWith<_$ForgotPasswordDtoImpl> get copyWith =>
+      __$$ForgotPasswordDtoImplCopyWithImpl<_$ForgotPasswordDtoImpl>(
           this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_ForgotPasswordDtoToJson(
+    return _$$ForgotPasswordDtoImplToJson(
       this,
     );
   }
@@ -167,11 +167,11 @@ abstract class _ForgotPasswordDto extends ForgotPasswordDto {
       {@JsonKey(name: 'success', defaultValue: false)
       required final bool success,
       @JsonKey(name: 'email', defaultValue: '')
-      required final String email}) = _$_ForgotPasswordDto;
+      required final String email}) = _$ForgotPasswordDtoImpl;
   _ForgotPasswordDto._() : super._();
 
   factory _ForgotPasswordDto.fromJson(Map<String, dynamic> json) =
-      _$_ForgotPasswordDto.fromJson;
+      _$ForgotPasswordDtoImpl.fromJson;
 
   @override
   @JsonKey(name: 'success', defaultValue: false)
@@ -181,6 +181,6 @@ abstract class _ForgotPasswordDto extends ForgotPasswordDto {
   String get email;
   @override
   @JsonKey(ignore: true)
-  _$$_ForgotPasswordDtoCopyWith<_$_ForgotPasswordDto> get copyWith =>
+  _$$ForgotPasswordDtoImplCopyWith<_$ForgotPasswordDtoImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

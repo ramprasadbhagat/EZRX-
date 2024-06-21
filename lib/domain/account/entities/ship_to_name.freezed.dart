@@ -12,7 +12,7 @@ part of 'ship_to_name.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$ShipToName {
@@ -75,22 +75,22 @@ class _$ShipToNameCopyWithImpl<$Res, $Val extends ShipToName>
 }
 
 /// @nodoc
-abstract class _$$_ShipToNameCopyWith<$Res>
+abstract class _$$ShipToNameImplCopyWith<$Res>
     implements $ShipToNameCopyWith<$Res> {
-  factory _$$_ShipToNameCopyWith(
-          _$_ShipToName value, $Res Function(_$_ShipToName) then) =
-      __$$_ShipToNameCopyWithImpl<$Res>;
+  factory _$$ShipToNameImplCopyWith(
+          _$ShipToNameImpl value, $Res Function(_$ShipToNameImpl) then) =
+      __$$ShipToNameImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String name1, String name2, String name3, String name4});
 }
 
 /// @nodoc
-class __$$_ShipToNameCopyWithImpl<$Res>
-    extends _$ShipToNameCopyWithImpl<$Res, _$_ShipToName>
-    implements _$$_ShipToNameCopyWith<$Res> {
-  __$$_ShipToNameCopyWithImpl(
-      _$_ShipToName _value, $Res Function(_$_ShipToName) _then)
+class __$$ShipToNameImplCopyWithImpl<$Res>
+    extends _$ShipToNameCopyWithImpl<$Res, _$ShipToNameImpl>
+    implements _$$ShipToNameImplCopyWith<$Res> {
+  __$$ShipToNameImplCopyWithImpl(
+      _$ShipToNameImpl _value, $Res Function(_$ShipToNameImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -101,7 +101,7 @@ class __$$_ShipToNameCopyWithImpl<$Res>
     Object? name3 = null,
     Object? name4 = null,
   }) {
-    return _then(_$_ShipToName(
+    return _then(_$ShipToNameImpl(
       name1: null == name1
           ? _value.name1
           : name1 // ignore: cast_nullable_to_non_nullable
@@ -124,8 +124,8 @@ class __$$_ShipToNameCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_ShipToName extends _ShipToName {
-  const _$_ShipToName(
+class _$ShipToNameImpl extends _ShipToName {
+  const _$ShipToNameImpl(
       {required this.name1,
       required this.name2,
       required this.name3,
@@ -142,10 +142,10 @@ class _$_ShipToName extends _ShipToName {
   final String name4;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ShipToName &&
+            other is _$ShipToNameImpl &&
             (identical(other.name1, name1) || other.name1 == name1) &&
             (identical(other.name2, name2) || other.name2 == name2) &&
             (identical(other.name3, name3) || other.name3 == name3) &&
@@ -158,8 +158,8 @@ class _$_ShipToName extends _ShipToName {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ShipToNameCopyWith<_$_ShipToName> get copyWith =>
-      __$$_ShipToNameCopyWithImpl<_$_ShipToName>(this, _$identity);
+  _$$ShipToNameImplCopyWith<_$ShipToNameImpl> get copyWith =>
+      __$$ShipToNameImplCopyWithImpl<_$ShipToNameImpl>(this, _$identity);
 }
 
 abstract class _ShipToName extends ShipToName {
@@ -167,7 +167,7 @@ abstract class _ShipToName extends ShipToName {
       {required final String name1,
       required final String name2,
       required final String name3,
-      required final String name4}) = _$_ShipToName;
+      required final String name4}) = _$ShipToNameImpl;
   const _ShipToName._() : super._();
 
   @override
@@ -180,6 +180,6 @@ abstract class _ShipToName extends ShipToName {
   String get name4;
   @override
   @JsonKey(ignore: true)
-  _$$_ShipToNameCopyWith<_$_ShipToName> get copyWith =>
+  _$$ShipToNameImplCopyWith<_$ShipToNameImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

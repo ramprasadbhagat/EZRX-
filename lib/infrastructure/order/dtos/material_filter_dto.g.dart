@@ -6,8 +6,9 @@ part of 'material_filter_dto.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_MaterialFilterDto _$$_MaterialFilterDtoFromJson(Map<String, dynamic> json) =>
-    _$_MaterialFilterDto(
+_$MaterialFilterDtoImpl _$$MaterialFilterDtoImplFromJson(
+        Map<String, dynamic> json) =>
+    _$MaterialFilterDtoImpl(
       manufactureList: (json['ManufactureList'] as List<dynamic>?)
               ?.map((e) => e as String)
               .toList() ??
@@ -23,23 +24,23 @@ _$_MaterialFilterDto _$$_MaterialFilterDtoFromJson(Map<String, dynamic> json) =>
           [],
     );
 
-Map<String, dynamic> _$$_MaterialFilterDtoToJson(
-        _$_MaterialFilterDto instance) =>
+Map<String, dynamic> _$$MaterialFilterDtoImplToJson(
+        _$MaterialFilterDtoImpl instance) =>
     <String, dynamic>{
       'ManufactureList': instance.manufactureList,
       'CountryList': instance.countryList.map((e) => e.toJson()).toList(),
       'BrandList': instance.brandList,
     };
 
-_$_MaterialFilterCountryDto _$$_MaterialFilterCountryDtoFromJson(
+_$MaterialFilterCountryDtoImpl _$$MaterialFilterCountryDtoImplFromJson(
         Map<String, dynamic> json) =>
-    _$_MaterialFilterCountryDto(
+    _$MaterialFilterCountryDtoImpl(
       code: json['Code'] as String? ?? '',
       name: json['Name'] as String? ?? '',
     );
 
-Map<String, dynamic> _$$_MaterialFilterCountryDtoToJson(
-        _$_MaterialFilterCountryDto instance) =>
+Map<String, dynamic> _$$MaterialFilterCountryDtoImplToJson(
+        _$MaterialFilterCountryDtoImpl instance) =>
     <String, dynamic>{
       'Code': instance.code,
       'Name': instance.name,

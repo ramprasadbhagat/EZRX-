@@ -12,7 +12,7 @@ part of 'product_images_dto.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 ProductImagesDto _$ProductImagesDtoFromJson(Map<String, dynamic> json) {
   return _ProductImagesDto.fromJson(json);
@@ -96,11 +96,11 @@ class _$ProductImagesDtoCopyWithImpl<$Res, $Val extends ProductImagesDto>
 }
 
 /// @nodoc
-abstract class _$$_ProductImagesDtoCopyWith<$Res>
+abstract class _$$ProductImagesDtoImplCopyWith<$Res>
     implements $ProductImagesDtoCopyWith<$Res> {
-  factory _$$_ProductImagesDtoCopyWith(
-          _$_ProductImagesDto value, $Res Function(_$_ProductImagesDto) then) =
-      __$$_ProductImagesDtoCopyWithImpl<$Res>;
+  factory _$$ProductImagesDtoImplCopyWith(_$ProductImagesDtoImpl value,
+          $Res Function(_$ProductImagesDtoImpl) then) =
+      __$$ProductImagesDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -112,11 +112,11 @@ abstract class _$$_ProductImagesDtoCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_ProductImagesDtoCopyWithImpl<$Res>
-    extends _$ProductImagesDtoCopyWithImpl<$Res, _$_ProductImagesDto>
-    implements _$$_ProductImagesDtoCopyWith<$Res> {
-  __$$_ProductImagesDtoCopyWithImpl(
-      _$_ProductImagesDto _value, $Res Function(_$_ProductImagesDto) _then)
+class __$$ProductImagesDtoImplCopyWithImpl<$Res>
+    extends _$ProductImagesDtoCopyWithImpl<$Res, _$ProductImagesDtoImpl>
+    implements _$$ProductImagesDtoImplCopyWith<$Res> {
+  __$$ProductImagesDtoImplCopyWithImpl(_$ProductImagesDtoImpl _value,
+      $Res Function(_$ProductImagesDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -128,7 +128,7 @@ class __$$_ProductImagesDtoCopyWithImpl<$Res>
     Object? thumbNail = null,
     Object? image = null,
   }) {
-    return _then(_$_ProductImagesDto(
+    return _then(_$ProductImagesDtoImpl(
       materialNumber: null == materialNumber
           ? _value.materialNumber
           : materialNumber // ignore: cast_nullable_to_non_nullable
@@ -155,23 +155,20 @@ class __$$_ProductImagesDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_ProductImagesDto extends _ProductImagesDto {
-  const _$_ProductImagesDto(
+class _$ProductImagesDtoImpl extends _ProductImagesDto {
+  const _$ProductImagesDtoImpl(
       {@JsonKey(name: 'materialID', defaultValue: '')
-          required this.materialNumber,
-      @JsonKey(name: 'name', defaultValue: '')
-          required this.name,
-      @JsonKey(name: 'description', defaultValue: '')
-          required this.description,
-      @JsonKey(name: 'thumbNail', defaultValue: '')
-          required this.thumbNail,
+      required this.materialNumber,
+      @JsonKey(name: 'name', defaultValue: '') required this.name,
+      @JsonKey(name: 'description', defaultValue: '') required this.description,
+      @JsonKey(name: 'thumbNail', defaultValue: '') required this.thumbNail,
       @JsonKey(name: 'image', defaultValue: <String>[])
-          required final List<String> image})
+      required final List<String> image})
       : _image = image,
         super._();
 
-  factory _$_ProductImagesDto.fromJson(Map<String, dynamic> json) =>
-      _$$_ProductImagesDtoFromJson(json);
+  factory _$ProductImagesDtoImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ProductImagesDtoImplFromJson(json);
 
   @override
   @JsonKey(name: 'materialID', defaultValue: '')
@@ -200,10 +197,10 @@ class _$_ProductImagesDto extends _ProductImagesDto {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ProductImagesDto &&
+            other is _$ProductImagesDtoImpl &&
             (identical(other.materialNumber, materialNumber) ||
                 other.materialNumber == materialNumber) &&
             (identical(other.name, name) || other.name == name) &&
@@ -222,12 +219,13 @@ class _$_ProductImagesDto extends _ProductImagesDto {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ProductImagesDtoCopyWith<_$_ProductImagesDto> get copyWith =>
-      __$$_ProductImagesDtoCopyWithImpl<_$_ProductImagesDto>(this, _$identity);
+  _$$ProductImagesDtoImplCopyWith<_$ProductImagesDtoImpl> get copyWith =>
+      __$$ProductImagesDtoImplCopyWithImpl<_$ProductImagesDtoImpl>(
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_ProductImagesDtoToJson(
+    return _$$ProductImagesDtoImplToJson(
       this,
     );
   }
@@ -236,19 +234,18 @@ class _$_ProductImagesDto extends _ProductImagesDto {
 abstract class _ProductImagesDto extends ProductImagesDto {
   const factory _ProductImagesDto(
       {@JsonKey(name: 'materialID', defaultValue: '')
-          required final String materialNumber,
-      @JsonKey(name: 'name', defaultValue: '')
-          required final String name,
+      required final String materialNumber,
+      @JsonKey(name: 'name', defaultValue: '') required final String name,
       @JsonKey(name: 'description', defaultValue: '')
-          required final String description,
+      required final String description,
       @JsonKey(name: 'thumbNail', defaultValue: '')
-          required final String thumbNail,
+      required final String thumbNail,
       @JsonKey(name: 'image', defaultValue: <String>[])
-          required final List<String> image}) = _$_ProductImagesDto;
+      required final List<String> image}) = _$ProductImagesDtoImpl;
   const _ProductImagesDto._() : super._();
 
   factory _ProductImagesDto.fromJson(Map<String, dynamic> json) =
-      _$_ProductImagesDto.fromJson;
+      _$ProductImagesDtoImpl.fromJson;
 
   @override
   @JsonKey(name: 'materialID', defaultValue: '')
@@ -267,6 +264,6 @@ abstract class _ProductImagesDto extends ProductImagesDto {
   List<String> get image;
   @override
   @JsonKey(ignore: true)
-  _$$_ProductImagesDtoCopyWith<_$_ProductImagesDto> get copyWith =>
+  _$$ProductImagesDtoImplCopyWith<_$ProductImagesDtoImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

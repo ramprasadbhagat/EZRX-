@@ -12,7 +12,7 @@ part of 'all_credits_filter_dto.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 AllCreditsFilterDto _$AllCreditsFilterDtoFromJson(Map<String, dynamic> json) {
   return _AllCreditsFilterDto.fromJson(json);
@@ -106,11 +106,11 @@ class _$AllCreditsFilterDtoCopyWithImpl<$Res, $Val extends AllCreditsFilterDto>
 }
 
 /// @nodoc
-abstract class _$$_AllCreditsFilterDtoCopyWith<$Res>
+abstract class _$$AllCreditsFilterDtoImplCopyWith<$Res>
     implements $AllCreditsFilterDtoCopyWith<$Res> {
-  factory _$$_AllCreditsFilterDtoCopyWith(_$_AllCreditsFilterDto value,
-          $Res Function(_$_AllCreditsFilterDto) then) =
-      __$$_AllCreditsFilterDtoCopyWithImpl<$Res>;
+  factory _$$AllCreditsFilterDtoImplCopyWith(_$AllCreditsFilterDtoImpl value,
+          $Res Function(_$AllCreditsFilterDtoImpl) then) =
+      __$$AllCreditsFilterDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -125,11 +125,11 @@ abstract class _$$_AllCreditsFilterDtoCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_AllCreditsFilterDtoCopyWithImpl<$Res>
-    extends _$AllCreditsFilterDtoCopyWithImpl<$Res, _$_AllCreditsFilterDto>
-    implements _$$_AllCreditsFilterDtoCopyWith<$Res> {
-  __$$_AllCreditsFilterDtoCopyWithImpl(_$_AllCreditsFilterDto _value,
-      $Res Function(_$_AllCreditsFilterDto) _then)
+class __$$AllCreditsFilterDtoImplCopyWithImpl<$Res>
+    extends _$AllCreditsFilterDtoCopyWithImpl<$Res, _$AllCreditsFilterDtoImpl>
+    implements _$$AllCreditsFilterDtoImplCopyWith<$Res> {
+  __$$AllCreditsFilterDtoImplCopyWithImpl(_$AllCreditsFilterDtoImpl _value,
+      $Res Function(_$AllCreditsFilterDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -142,7 +142,7 @@ class __$$_AllCreditsFilterDtoCopyWithImpl<$Res>
     Object? filterStatuses = null,
     Object? searchKey = null,
   }) {
-    return _then(_$_AllCreditsFilterDto(
+    return _then(_$AllCreditsFilterDtoImpl(
       documentDateFrom: null == documentDateFrom
           ? _value.documentDateFrom
           : documentDateFrom // ignore: cast_nullable_to_non_nullable
@@ -173,8 +173,8 @@ class __$$_AllCreditsFilterDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_AllCreditsFilterDto extends _AllCreditsFilterDto {
-  const _$_AllCreditsFilterDto(
+class _$AllCreditsFilterDtoImpl extends _AllCreditsFilterDto {
+  const _$AllCreditsFilterDtoImpl(
       {@JsonKey(name: 'documentDateFrom', defaultValue: '')
       required this.documentDateFrom,
       @JsonKey(name: 'documentDateTo', defaultValue: '')
@@ -189,8 +189,8 @@ class _$_AllCreditsFilterDto extends _AllCreditsFilterDto {
       required this.searchKey})
       : super._();
 
-  factory _$_AllCreditsFilterDto.fromJson(Map<String, dynamic> json) =>
-      _$$_AllCreditsFilterDtoFromJson(json);
+  factory _$AllCreditsFilterDtoImpl.fromJson(Map<String, dynamic> json) =>
+      _$$AllCreditsFilterDtoImplFromJson(json);
 
   @override
   @JsonKey(name: 'documentDateFrom', defaultValue: '')
@@ -217,10 +217,10 @@ class _$_AllCreditsFilterDto extends _AllCreditsFilterDto {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_AllCreditsFilterDto &&
+            other is _$AllCreditsFilterDtoImpl &&
             (identical(other.documentDateFrom, documentDateFrom) ||
                 other.documentDateFrom == documentDateFrom) &&
             (identical(other.documentDateTo, documentDateTo) ||
@@ -243,13 +243,13 @@ class _$_AllCreditsFilterDto extends _AllCreditsFilterDto {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_AllCreditsFilterDtoCopyWith<_$_AllCreditsFilterDto> get copyWith =>
-      __$$_AllCreditsFilterDtoCopyWithImpl<_$_AllCreditsFilterDto>(
+  _$$AllCreditsFilterDtoImplCopyWith<_$AllCreditsFilterDtoImpl> get copyWith =>
+      __$$AllCreditsFilterDtoImplCopyWithImpl<_$AllCreditsFilterDtoImpl>(
           this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_AllCreditsFilterDtoToJson(
+    return _$$AllCreditsFilterDtoImplToJson(
       this,
     );
   }
@@ -268,11 +268,11 @@ abstract class _AllCreditsFilterDto extends AllCreditsFilterDto {
       @JsonKey(name: 'filterStatuses', defaultValue: '')
       required final String filterStatuses,
       @JsonKey(name: 'accountingDocument', defaultValue: '')
-      required final String searchKey}) = _$_AllCreditsFilterDto;
+      required final String searchKey}) = _$AllCreditsFilterDtoImpl;
   const _AllCreditsFilterDto._() : super._();
 
   factory _AllCreditsFilterDto.fromJson(Map<String, dynamic> json) =
-      _$_AllCreditsFilterDto.fromJson;
+      _$AllCreditsFilterDtoImpl.fromJson;
 
   @override
   @JsonKey(name: 'documentDateFrom', defaultValue: '')
@@ -294,6 +294,6 @@ abstract class _AllCreditsFilterDto extends AllCreditsFilterDto {
   String get searchKey;
   @override
   @JsonKey(ignore: true)
-  _$$_AllCreditsFilterDtoCopyWith<_$_AllCreditsFilterDto> get copyWith =>
+  _$$AllCreditsFilterDtoImplCopyWith<_$AllCreditsFilterDtoImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

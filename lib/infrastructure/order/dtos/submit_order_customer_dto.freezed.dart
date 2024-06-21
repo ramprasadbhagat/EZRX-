@@ -12,7 +12,7 @@ part of 'submit_order_customer_dto.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 SubmitOrderCustomerDto _$SubmitOrderCustomerDtoFromJson(
     Map<String, dynamic> json) {
@@ -43,14 +43,12 @@ abstract class $SubmitOrderCustomerDtoCopyWith<$Res> {
       _$SubmitOrderCustomerDtoCopyWithImpl<$Res, SubmitOrderCustomerDto>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'customerNumber', defaultValue: '')
-          String customerNumber,
+      {@JsonKey(name: 'customerNumber', defaultValue: '') String customerNumber,
       @JsonKey(name: 'customerNumberShipTo', defaultValue: '')
-          String customerNumberShipTo,
+      String customerNumberShipTo,
       @JsonKey(name: 'salesOrganisation', defaultValue: '')
-          String salesOrganisation,
-      @JsonKey(name: 'division', defaultValue: '')
-          String division});
+      String salesOrganisation,
+      @JsonKey(name: 'division', defaultValue: '') String division});
 }
 
 /// @nodoc
@@ -94,31 +92,31 @@ class _$SubmitOrderCustomerDtoCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_SubmitOrderCustomerDtoCopyWith<$Res>
+abstract class _$$SubmitOrderCustomerDtoImplCopyWith<$Res>
     implements $SubmitOrderCustomerDtoCopyWith<$Res> {
-  factory _$$_SubmitOrderCustomerDtoCopyWith(_$_SubmitOrderCustomerDto value,
-          $Res Function(_$_SubmitOrderCustomerDto) then) =
-      __$$_SubmitOrderCustomerDtoCopyWithImpl<$Res>;
+  factory _$$SubmitOrderCustomerDtoImplCopyWith(
+          _$SubmitOrderCustomerDtoImpl value,
+          $Res Function(_$SubmitOrderCustomerDtoImpl) then) =
+      __$$SubmitOrderCustomerDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'customerNumber', defaultValue: '')
-          String customerNumber,
+      {@JsonKey(name: 'customerNumber', defaultValue: '') String customerNumber,
       @JsonKey(name: 'customerNumberShipTo', defaultValue: '')
-          String customerNumberShipTo,
+      String customerNumberShipTo,
       @JsonKey(name: 'salesOrganisation', defaultValue: '')
-          String salesOrganisation,
-      @JsonKey(name: 'division', defaultValue: '')
-          String division});
+      String salesOrganisation,
+      @JsonKey(name: 'division', defaultValue: '') String division});
 }
 
 /// @nodoc
-class __$$_SubmitOrderCustomerDtoCopyWithImpl<$Res>
+class __$$SubmitOrderCustomerDtoImplCopyWithImpl<$Res>
     extends _$SubmitOrderCustomerDtoCopyWithImpl<$Res,
-        _$_SubmitOrderCustomerDto>
-    implements _$$_SubmitOrderCustomerDtoCopyWith<$Res> {
-  __$$_SubmitOrderCustomerDtoCopyWithImpl(_$_SubmitOrderCustomerDto _value,
-      $Res Function(_$_SubmitOrderCustomerDto) _then)
+        _$SubmitOrderCustomerDtoImpl>
+    implements _$$SubmitOrderCustomerDtoImplCopyWith<$Res> {
+  __$$SubmitOrderCustomerDtoImplCopyWithImpl(
+      _$SubmitOrderCustomerDtoImpl _value,
+      $Res Function(_$SubmitOrderCustomerDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -129,7 +127,7 @@ class __$$_SubmitOrderCustomerDtoCopyWithImpl<$Res>
     Object? salesOrganisation = null,
     Object? division = null,
   }) {
-    return _then(_$_SubmitOrderCustomerDto(
+    return _then(_$SubmitOrderCustomerDtoImpl(
       customerNumber: null == customerNumber
           ? _value.customerNumber
           : customerNumber // ignore: cast_nullable_to_non_nullable
@@ -152,20 +150,19 @@ class __$$_SubmitOrderCustomerDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_SubmitOrderCustomerDto extends _SubmitOrderCustomerDto {
-  const _$_SubmitOrderCustomerDto(
+class _$SubmitOrderCustomerDtoImpl extends _SubmitOrderCustomerDto {
+  const _$SubmitOrderCustomerDtoImpl(
       {@JsonKey(name: 'customerNumber', defaultValue: '')
-          required this.customerNumber,
+      required this.customerNumber,
       @JsonKey(name: 'customerNumberShipTo', defaultValue: '')
-          required this.customerNumberShipTo,
+      required this.customerNumberShipTo,
       @JsonKey(name: 'salesOrganisation', defaultValue: '')
-          required this.salesOrganisation,
-      @JsonKey(name: 'division', defaultValue: '')
-          required this.division})
+      required this.salesOrganisation,
+      @JsonKey(name: 'division', defaultValue: '') required this.division})
       : super._();
 
-  factory _$_SubmitOrderCustomerDto.fromJson(Map<String, dynamic> json) =>
-      _$$_SubmitOrderCustomerDtoFromJson(json);
+  factory _$SubmitOrderCustomerDtoImpl.fromJson(Map<String, dynamic> json) =>
+      _$$SubmitOrderCustomerDtoImplFromJson(json);
 
   @override
   @JsonKey(name: 'customerNumber', defaultValue: '')
@@ -186,10 +183,10 @@ class _$_SubmitOrderCustomerDto extends _SubmitOrderCustomerDto {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_SubmitOrderCustomerDto &&
+            other is _$SubmitOrderCustomerDtoImpl &&
             (identical(other.customerNumber, customerNumber) ||
                 other.customerNumber == customerNumber) &&
             (identical(other.customerNumberShipTo, customerNumberShipTo) ||
@@ -208,13 +205,13 @@ class _$_SubmitOrderCustomerDto extends _SubmitOrderCustomerDto {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_SubmitOrderCustomerDtoCopyWith<_$_SubmitOrderCustomerDto> get copyWith =>
-      __$$_SubmitOrderCustomerDtoCopyWithImpl<_$_SubmitOrderCustomerDto>(
-          this, _$identity);
+  _$$SubmitOrderCustomerDtoImplCopyWith<_$SubmitOrderCustomerDtoImpl>
+      get copyWith => __$$SubmitOrderCustomerDtoImplCopyWithImpl<
+          _$SubmitOrderCustomerDtoImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_SubmitOrderCustomerDtoToJson(
+    return _$$SubmitOrderCustomerDtoImplToJson(
       this,
     );
   }
@@ -223,17 +220,17 @@ class _$_SubmitOrderCustomerDto extends _SubmitOrderCustomerDto {
 abstract class _SubmitOrderCustomerDto extends SubmitOrderCustomerDto {
   const factory _SubmitOrderCustomerDto(
       {@JsonKey(name: 'customerNumber', defaultValue: '')
-          required final String customerNumber,
+      required final String customerNumber,
       @JsonKey(name: 'customerNumberShipTo', defaultValue: '')
-          required final String customerNumberShipTo,
+      required final String customerNumberShipTo,
       @JsonKey(name: 'salesOrganisation', defaultValue: '')
-          required final String salesOrganisation,
+      required final String salesOrganisation,
       @JsonKey(name: 'division', defaultValue: '')
-          required final String division}) = _$_SubmitOrderCustomerDto;
+      required final String division}) = _$SubmitOrderCustomerDtoImpl;
   const _SubmitOrderCustomerDto._() : super._();
 
   factory _SubmitOrderCustomerDto.fromJson(Map<String, dynamic> json) =
-      _$_SubmitOrderCustomerDto.fromJson;
+      _$SubmitOrderCustomerDtoImpl.fromJson;
 
   @override
   @JsonKey(name: 'customerNumber', defaultValue: '')
@@ -249,6 +246,6 @@ abstract class _SubmitOrderCustomerDto extends SubmitOrderCustomerDto {
   String get division;
   @override
   @JsonKey(ignore: true)
-  _$$_SubmitOrderCustomerDtoCopyWith<_$_SubmitOrderCustomerDto> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$SubmitOrderCustomerDtoImplCopyWith<_$SubmitOrderCustomerDtoImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }

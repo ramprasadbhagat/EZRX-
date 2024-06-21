@@ -12,7 +12,7 @@ part of 'order_status_tracker_dto.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 OrderStatusTrackerDto _$OrderStatusTrackerDtoFromJson(
     Map<String, dynamic> json) {
@@ -115,11 +115,12 @@ class _$OrderStatusTrackerDtoCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_OrderStatusTrackerDtoCopyWith<$Res>
+abstract class _$$OrderStatusTrackerDtoImplCopyWith<$Res>
     implements $OrderStatusTrackerDtoCopyWith<$Res> {
-  factory _$$_OrderStatusTrackerDtoCopyWith(_$_OrderStatusTrackerDto value,
-          $Res Function(_$_OrderStatusTrackerDto) then) =
-      __$$_OrderStatusTrackerDtoCopyWithImpl<$Res>;
+  factory _$$OrderStatusTrackerDtoImplCopyWith(
+          _$OrderStatusTrackerDtoImpl value,
+          $Res Function(_$OrderStatusTrackerDtoImpl) then) =
+      __$$OrderStatusTrackerDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -134,11 +135,12 @@ abstract class _$$_OrderStatusTrackerDtoCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_OrderStatusTrackerDtoCopyWithImpl<$Res>
-    extends _$OrderStatusTrackerDtoCopyWithImpl<$Res, _$_OrderStatusTrackerDto>
-    implements _$$_OrderStatusTrackerDtoCopyWith<$Res> {
-  __$$_OrderStatusTrackerDtoCopyWithImpl(_$_OrderStatusTrackerDto _value,
-      $Res Function(_$_OrderStatusTrackerDto) _then)
+class __$$OrderStatusTrackerDtoImplCopyWithImpl<$Res>
+    extends _$OrderStatusTrackerDtoCopyWithImpl<$Res,
+        _$OrderStatusTrackerDtoImpl>
+    implements _$$OrderStatusTrackerDtoImplCopyWith<$Res> {
+  __$$OrderStatusTrackerDtoImplCopyWithImpl(_$OrderStatusTrackerDtoImpl _value,
+      $Res Function(_$OrderStatusTrackerDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -152,7 +154,7 @@ class __$$_OrderStatusTrackerDtoCopyWithImpl<$Res>
     Object? updateTimeStamp = null,
     Object? preformedAt = null,
   }) {
-    return _then(_$_OrderStatusTrackerDto(
+    return _then(_$OrderStatusTrackerDtoImpl(
       action: null == action
           ? _value.action
           : action // ignore: cast_nullable_to_non_nullable
@@ -187,8 +189,8 @@ class __$$_OrderStatusTrackerDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_OrderStatusTrackerDto extends _OrderStatusTrackerDto {
-  const _$_OrderStatusTrackerDto(
+class _$OrderStatusTrackerDtoImpl extends _OrderStatusTrackerDto {
+  const _$OrderStatusTrackerDtoImpl(
       {@JsonKey(name: 'Actiom', defaultValue: '') required this.action,
       @JsonKey(name: 'StepName', defaultValue: '') required this.stepName,
       @JsonKey(name: 'StepStape') required this.stepStage,
@@ -200,8 +202,8 @@ class _$_OrderStatusTrackerDto extends _OrderStatusTrackerDto {
       required this.preformedAt})
       : super._();
 
-  factory _$_OrderStatusTrackerDto.fromJson(Map<String, dynamic> json) =>
-      _$$_OrderStatusTrackerDtoFromJson(json);
+  factory _$OrderStatusTrackerDtoImpl.fromJson(Map<String, dynamic> json) =>
+      _$$OrderStatusTrackerDtoImplFromJson(json);
 
   @override
   @JsonKey(name: 'Actiom', defaultValue: '')
@@ -231,10 +233,10 @@ class _$_OrderStatusTrackerDto extends _OrderStatusTrackerDto {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_OrderStatusTrackerDto &&
+            other is _$OrderStatusTrackerDtoImpl &&
             (identical(other.action, action) || other.action == action) &&
             (identical(other.stepName, stepName) ||
                 other.stepName == stepName) &&
@@ -256,13 +258,13 @@ class _$_OrderStatusTrackerDto extends _OrderStatusTrackerDto {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_OrderStatusTrackerDtoCopyWith<_$_OrderStatusTrackerDto> get copyWith =>
-      __$$_OrderStatusTrackerDtoCopyWithImpl<_$_OrderStatusTrackerDto>(
-          this, _$identity);
+  _$$OrderStatusTrackerDtoImplCopyWith<_$OrderStatusTrackerDtoImpl>
+      get copyWith => __$$OrderStatusTrackerDtoImplCopyWithImpl<
+          _$OrderStatusTrackerDtoImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_OrderStatusTrackerDtoToJson(
+    return _$$OrderStatusTrackerDtoImplToJson(
       this,
     );
   }
@@ -279,11 +281,11 @@ abstract class _OrderStatusTrackerDto extends OrderStatusTrackerDto {
       @JsonKey(name: 'UpdateTimeStamp', defaultValue: '')
       required final String updateTimeStamp,
       @JsonKey(name: 'PreformedAt', defaultValue: '')
-      required final String preformedAt}) = _$_OrderStatusTrackerDto;
+      required final String preformedAt}) = _$OrderStatusTrackerDtoImpl;
   const _OrderStatusTrackerDto._() : super._();
 
   factory _OrderStatusTrackerDto.fromJson(Map<String, dynamic> json) =
-      _$_OrderStatusTrackerDto.fromJson;
+      _$OrderStatusTrackerDtoImpl.fromJson;
 
   @override
   @JsonKey(name: 'Actiom', defaultValue: '')
@@ -308,6 +310,6 @@ abstract class _OrderStatusTrackerDto extends OrderStatusTrackerDto {
   String get preformedAt;
   @override
   @JsonKey(ignore: true)
-  _$$_OrderStatusTrackerDtoCopyWith<_$_OrderStatusTrackerDto> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$OrderStatusTrackerDtoImplCopyWith<_$OrderStatusTrackerDtoImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }

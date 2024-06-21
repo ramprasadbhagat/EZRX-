@@ -12,7 +12,7 @@ part of 'faq_bloc.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$FaqEvent {
@@ -86,18 +86,20 @@ class _$FaqEventCopyWithImpl<$Res, $Val extends FaqEvent>
 }
 
 /// @nodoc
-abstract class _$$_GetFaqCopyWith<$Res> {
-  factory _$$_GetFaqCopyWith(_$_GetFaq value, $Res Function(_$_GetFaq) then) =
-      __$$_GetFaqCopyWithImpl<$Res>;
+abstract class _$$GetFaqImplCopyWith<$Res> {
+  factory _$$GetFaqImplCopyWith(
+          _$GetFaqImpl value, $Res Function(_$GetFaqImpl) then) =
+      __$$GetFaqImplCopyWithImpl<$Res>;
   @useResult
   $Res call({SalesOrg salesOrg});
 }
 
 /// @nodoc
-class __$$_GetFaqCopyWithImpl<$Res>
-    extends _$FaqEventCopyWithImpl<$Res, _$_GetFaq>
-    implements _$$_GetFaqCopyWith<$Res> {
-  __$$_GetFaqCopyWithImpl(_$_GetFaq _value, $Res Function(_$_GetFaq) _then)
+class __$$GetFaqImplCopyWithImpl<$Res>
+    extends _$FaqEventCopyWithImpl<$Res, _$GetFaqImpl>
+    implements _$$GetFaqImplCopyWith<$Res> {
+  __$$GetFaqImplCopyWithImpl(
+      _$GetFaqImpl _value, $Res Function(_$GetFaqImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -105,7 +107,7 @@ class __$$_GetFaqCopyWithImpl<$Res>
   $Res call({
     Object? salesOrg = null,
   }) {
-    return _then(_$_GetFaq(
+    return _then(_$GetFaqImpl(
       salesOrg: null == salesOrg
           ? _value.salesOrg
           : salesOrg // ignore: cast_nullable_to_non_nullable
@@ -116,8 +118,8 @@ class __$$_GetFaqCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_GetFaq implements _GetFaq {
-  const _$_GetFaq({required this.salesOrg});
+class _$GetFaqImpl implements _GetFaq {
+  const _$GetFaqImpl({required this.salesOrg});
 
   @override
   final SalesOrg salesOrg;
@@ -128,10 +130,10 @@ class _$_GetFaq implements _GetFaq {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_GetFaq &&
+            other is _$GetFaqImpl &&
             (identical(other.salesOrg, salesOrg) ||
                 other.salesOrg == salesOrg));
   }
@@ -142,8 +144,8 @@ class _$_GetFaq implements _GetFaq {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_GetFaqCopyWith<_$_GetFaq> get copyWith =>
-      __$$_GetFaqCopyWithImpl<_$_GetFaq>(this, _$identity);
+  _$$GetFaqImplCopyWith<_$GetFaqImpl> get copyWith =>
+      __$$GetFaqImplCopyWithImpl<_$GetFaqImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -221,29 +223,29 @@ class _$_GetFaq implements _GetFaq {
 }
 
 abstract class _GetFaq implements FaqEvent {
-  const factory _GetFaq({required final SalesOrg salesOrg}) = _$_GetFaq;
+  const factory _GetFaq({required final SalesOrg salesOrg}) = _$GetFaqImpl;
 
   SalesOrg get salesOrg;
   @JsonKey(ignore: true)
-  _$$_GetFaqCopyWith<_$_GetFaq> get copyWith =>
+  _$$GetFaqImplCopyWith<_$GetFaqImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_LoadMoreFaqCopyWith<$Res> {
-  factory _$$_LoadMoreFaqCopyWith(
-          _$_LoadMoreFaq value, $Res Function(_$_LoadMoreFaq) then) =
-      __$$_LoadMoreFaqCopyWithImpl<$Res>;
+abstract class _$$LoadMoreFaqImplCopyWith<$Res> {
+  factory _$$LoadMoreFaqImplCopyWith(
+          _$LoadMoreFaqImpl value, $Res Function(_$LoadMoreFaqImpl) then) =
+      __$$LoadMoreFaqImplCopyWithImpl<$Res>;
   @useResult
   $Res call({SalesOrg salesOrg});
 }
 
 /// @nodoc
-class __$$_LoadMoreFaqCopyWithImpl<$Res>
-    extends _$FaqEventCopyWithImpl<$Res, _$_LoadMoreFaq>
-    implements _$$_LoadMoreFaqCopyWith<$Res> {
-  __$$_LoadMoreFaqCopyWithImpl(
-      _$_LoadMoreFaq _value, $Res Function(_$_LoadMoreFaq) _then)
+class __$$LoadMoreFaqImplCopyWithImpl<$Res>
+    extends _$FaqEventCopyWithImpl<$Res, _$LoadMoreFaqImpl>
+    implements _$$LoadMoreFaqImplCopyWith<$Res> {
+  __$$LoadMoreFaqImplCopyWithImpl(
+      _$LoadMoreFaqImpl _value, $Res Function(_$LoadMoreFaqImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -251,7 +253,7 @@ class __$$_LoadMoreFaqCopyWithImpl<$Res>
   $Res call({
     Object? salesOrg = null,
   }) {
-    return _then(_$_LoadMoreFaq(
+    return _then(_$LoadMoreFaqImpl(
       salesOrg: null == salesOrg
           ? _value.salesOrg
           : salesOrg // ignore: cast_nullable_to_non_nullable
@@ -262,8 +264,8 @@ class __$$_LoadMoreFaqCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_LoadMoreFaq implements _LoadMoreFaq {
-  const _$_LoadMoreFaq({required this.salesOrg});
+class _$LoadMoreFaqImpl implements _LoadMoreFaq {
+  const _$LoadMoreFaqImpl({required this.salesOrg});
 
   @override
   final SalesOrg salesOrg;
@@ -274,10 +276,10 @@ class _$_LoadMoreFaq implements _LoadMoreFaq {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_LoadMoreFaq &&
+            other is _$LoadMoreFaqImpl &&
             (identical(other.salesOrg, salesOrg) ||
                 other.salesOrg == salesOrg));
   }
@@ -288,8 +290,8 @@ class _$_LoadMoreFaq implements _LoadMoreFaq {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_LoadMoreFaqCopyWith<_$_LoadMoreFaq> get copyWith =>
-      __$$_LoadMoreFaqCopyWithImpl<_$_LoadMoreFaq>(this, _$identity);
+  _$$LoadMoreFaqImplCopyWith<_$LoadMoreFaqImpl> get copyWith =>
+      __$$LoadMoreFaqImplCopyWithImpl<_$LoadMoreFaqImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -368,29 +370,29 @@ class _$_LoadMoreFaq implements _LoadMoreFaq {
 
 abstract class _LoadMoreFaq implements FaqEvent {
   const factory _LoadMoreFaq({required final SalesOrg salesOrg}) =
-      _$_LoadMoreFaq;
+      _$LoadMoreFaqImpl;
 
   SalesOrg get salesOrg;
   @JsonKey(ignore: true)
-  _$$_LoadMoreFaqCopyWith<_$_LoadMoreFaq> get copyWith =>
+  _$$LoadMoreFaqImplCopyWith<_$LoadMoreFaqImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_FilterByFaqCategoryCopyWith<$Res> {
-  factory _$$_FilterByFaqCategoryCopyWith(_$_FilterByFaqCategory value,
-          $Res Function(_$_FilterByFaqCategory) then) =
-      __$$_FilterByFaqCategoryCopyWithImpl<$Res>;
+abstract class _$$FilterByFaqCategoryImplCopyWith<$Res> {
+  factory _$$FilterByFaqCategoryImplCopyWith(_$FilterByFaqCategoryImpl value,
+          $Res Function(_$FilterByFaqCategoryImpl) then) =
+      __$$FilterByFaqCategoryImplCopyWithImpl<$Res>;
   @useResult
   $Res call({FAQCategory selectedCategory});
 }
 
 /// @nodoc
-class __$$_FilterByFaqCategoryCopyWithImpl<$Res>
-    extends _$FaqEventCopyWithImpl<$Res, _$_FilterByFaqCategory>
-    implements _$$_FilterByFaqCategoryCopyWith<$Res> {
-  __$$_FilterByFaqCategoryCopyWithImpl(_$_FilterByFaqCategory _value,
-      $Res Function(_$_FilterByFaqCategory) _then)
+class __$$FilterByFaqCategoryImplCopyWithImpl<$Res>
+    extends _$FaqEventCopyWithImpl<$Res, _$FilterByFaqCategoryImpl>
+    implements _$$FilterByFaqCategoryImplCopyWith<$Res> {
+  __$$FilterByFaqCategoryImplCopyWithImpl(_$FilterByFaqCategoryImpl _value,
+      $Res Function(_$FilterByFaqCategoryImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -398,7 +400,7 @@ class __$$_FilterByFaqCategoryCopyWithImpl<$Res>
   $Res call({
     Object? selectedCategory = null,
   }) {
-    return _then(_$_FilterByFaqCategory(
+    return _then(_$FilterByFaqCategoryImpl(
       selectedCategory: null == selectedCategory
           ? _value.selectedCategory
           : selectedCategory // ignore: cast_nullable_to_non_nullable
@@ -409,8 +411,8 @@ class __$$_FilterByFaqCategoryCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_FilterByFaqCategory implements _FilterByFaqCategory {
-  const _$_FilterByFaqCategory({required this.selectedCategory});
+class _$FilterByFaqCategoryImpl implements _FilterByFaqCategory {
+  const _$FilterByFaqCategoryImpl({required this.selectedCategory});
 
   @override
   final FAQCategory selectedCategory;
@@ -421,10 +423,10 @@ class _$_FilterByFaqCategory implements _FilterByFaqCategory {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_FilterByFaqCategory &&
+            other is _$FilterByFaqCategoryImpl &&
             (identical(other.selectedCategory, selectedCategory) ||
                 other.selectedCategory == selectedCategory));
   }
@@ -435,8 +437,8 @@ class _$_FilterByFaqCategory implements _FilterByFaqCategory {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_FilterByFaqCategoryCopyWith<_$_FilterByFaqCategory> get copyWith =>
-      __$$_FilterByFaqCategoryCopyWithImpl<_$_FilterByFaqCategory>(
+  _$$FilterByFaqCategoryImplCopyWith<_$FilterByFaqCategoryImpl> get copyWith =>
+      __$$FilterByFaqCategoryImplCopyWithImpl<_$FilterByFaqCategoryImpl>(
           this, _$identity);
 
   @override
@@ -516,29 +518,30 @@ class _$_FilterByFaqCategory implements _FilterByFaqCategory {
 
 abstract class _FilterByFaqCategory implements FaqEvent {
   const factory _FilterByFaqCategory(
-      {required final FAQCategory selectedCategory}) = _$_FilterByFaqCategory;
+          {required final FAQCategory selectedCategory}) =
+      _$FilterByFaqCategoryImpl;
 
   FAQCategory get selectedCategory;
   @JsonKey(ignore: true)
-  _$$_FilterByFaqCategoryCopyWith<_$_FilterByFaqCategory> get copyWith =>
+  _$$FilterByFaqCategoryImplCopyWith<_$FilterByFaqCategoryImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_UpdatedSearchFaqCopyWith<$Res> {
-  factory _$$_UpdatedSearchFaqCopyWith(
-          _$_UpdatedSearchFaq value, $Res Function(_$_UpdatedSearchFaq) then) =
-      __$$_UpdatedSearchFaqCopyWithImpl<$Res>;
+abstract class _$$UpdatedSearchFaqImplCopyWith<$Res> {
+  factory _$$UpdatedSearchFaqImplCopyWith(_$UpdatedSearchFaqImpl value,
+          $Res Function(_$UpdatedSearchFaqImpl) then) =
+      __$$UpdatedSearchFaqImplCopyWithImpl<$Res>;
   @useResult
   $Res call({String searchKey});
 }
 
 /// @nodoc
-class __$$_UpdatedSearchFaqCopyWithImpl<$Res>
-    extends _$FaqEventCopyWithImpl<$Res, _$_UpdatedSearchFaq>
-    implements _$$_UpdatedSearchFaqCopyWith<$Res> {
-  __$$_UpdatedSearchFaqCopyWithImpl(
-      _$_UpdatedSearchFaq _value, $Res Function(_$_UpdatedSearchFaq) _then)
+class __$$UpdatedSearchFaqImplCopyWithImpl<$Res>
+    extends _$FaqEventCopyWithImpl<$Res, _$UpdatedSearchFaqImpl>
+    implements _$$UpdatedSearchFaqImplCopyWith<$Res> {
+  __$$UpdatedSearchFaqImplCopyWithImpl(_$UpdatedSearchFaqImpl _value,
+      $Res Function(_$UpdatedSearchFaqImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -546,7 +549,7 @@ class __$$_UpdatedSearchFaqCopyWithImpl<$Res>
   $Res call({
     Object? searchKey = null,
   }) {
-    return _then(_$_UpdatedSearchFaq(
+    return _then(_$UpdatedSearchFaqImpl(
       searchKey: null == searchKey
           ? _value.searchKey
           : searchKey // ignore: cast_nullable_to_non_nullable
@@ -557,8 +560,8 @@ class __$$_UpdatedSearchFaqCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_UpdatedSearchFaq implements _UpdatedSearchFaq {
-  const _$_UpdatedSearchFaq({required this.searchKey});
+class _$UpdatedSearchFaqImpl implements _UpdatedSearchFaq {
+  const _$UpdatedSearchFaqImpl({required this.searchKey});
 
   @override
   final String searchKey;
@@ -569,10 +572,10 @@ class _$_UpdatedSearchFaq implements _UpdatedSearchFaq {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_UpdatedSearchFaq &&
+            other is _$UpdatedSearchFaqImpl &&
             (identical(other.searchKey, searchKey) ||
                 other.searchKey == searchKey));
   }
@@ -583,8 +586,9 @@ class _$_UpdatedSearchFaq implements _UpdatedSearchFaq {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_UpdatedSearchFaqCopyWith<_$_UpdatedSearchFaq> get copyWith =>
-      __$$_UpdatedSearchFaqCopyWithImpl<_$_UpdatedSearchFaq>(this, _$identity);
+  _$$UpdatedSearchFaqImplCopyWith<_$UpdatedSearchFaqImpl> get copyWith =>
+      __$$UpdatedSearchFaqImplCopyWithImpl<_$UpdatedSearchFaqImpl>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -663,11 +667,11 @@ class _$_UpdatedSearchFaq implements _UpdatedSearchFaq {
 
 abstract class _UpdatedSearchFaq implements FaqEvent {
   const factory _UpdatedSearchFaq({required final String searchKey}) =
-      _$_UpdatedSearchFaq;
+      _$UpdatedSearchFaqImpl;
 
   String get searchKey;
   @JsonKey(ignore: true)
-  _$$_UpdatedSearchFaqCopyWith<_$_UpdatedSearchFaq> get copyWith =>
+  _$$UpdatedSearchFaqImplCopyWith<_$UpdatedSearchFaqImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -760,10 +764,11 @@ class _$FaqStateCopyWithImpl<$Res, $Val extends FaqState>
 }
 
 /// @nodoc
-abstract class _$$_FaqStateCopyWith<$Res> implements $FaqStateCopyWith<$Res> {
-  factory _$$_FaqStateCopyWith(
-          _$_FaqState value, $Res Function(_$_FaqState) then) =
-      __$$_FaqStateCopyWithImpl<$Res>;
+abstract class _$$FaqStateImplCopyWith<$Res>
+    implements $FaqStateCopyWith<$Res> {
+  factory _$$FaqStateImplCopyWith(
+          _$FaqStateImpl value, $Res Function(_$FaqStateImpl) then) =
+      __$$FaqStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -779,11 +784,11 @@ abstract class _$$_FaqStateCopyWith<$Res> implements $FaqStateCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_FaqStateCopyWithImpl<$Res>
-    extends _$FaqStateCopyWithImpl<$Res, _$_FaqState>
-    implements _$$_FaqStateCopyWith<$Res> {
-  __$$_FaqStateCopyWithImpl(
-      _$_FaqState _value, $Res Function(_$_FaqState) _then)
+class __$$FaqStateImplCopyWithImpl<$Res>
+    extends _$FaqStateCopyWithImpl<$Res, _$FaqStateImpl>
+    implements _$$FaqStateImplCopyWith<$Res> {
+  __$$FaqStateImplCopyWithImpl(
+      _$FaqStateImpl _value, $Res Function(_$FaqStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -796,7 +801,7 @@ class __$$_FaqStateCopyWithImpl<$Res>
     Object? searchKey = null,
     Object? apiFailureOrSuccessOption = null,
   }) {
-    return _then(_$_FaqState(
+    return _then(_$FaqStateImpl(
       faqInfo: null == faqInfo
           ? _value.faqInfo
           : faqInfo // ignore: cast_nullable_to_non_nullable
@@ -827,8 +832,8 @@ class __$$_FaqStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_FaqState extends _FaqState {
-  const _$_FaqState(
+class _$FaqStateImpl extends _FaqState {
+  const _$FaqStateImpl(
       {required this.faqInfo,
       required this.isFetching,
       required this.canLoadMore,
@@ -856,10 +861,10 @@ class _$_FaqState extends _FaqState {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_FaqState &&
+            other is _$FaqStateImpl &&
             (identical(other.faqInfo, faqInfo) || other.faqInfo == faqInfo) &&
             (identical(other.isFetching, isFetching) ||
                 other.isFetching == isFetching) &&
@@ -881,8 +886,8 @@ class _$_FaqState extends _FaqState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_FaqStateCopyWith<_$_FaqState> get copyWith =>
-      __$$_FaqStateCopyWithImpl<_$_FaqState>(this, _$identity);
+  _$$FaqStateImplCopyWith<_$FaqStateImpl> get copyWith =>
+      __$$FaqStateImplCopyWithImpl<_$FaqStateImpl>(this, _$identity);
 }
 
 abstract class _FaqState extends FaqState {
@@ -893,7 +898,7 @@ abstract class _FaqState extends FaqState {
       required final FAQCategory selectedCategory,
       required final SearchKey searchKey,
       required final Option<Either<ApiFailure, dynamic>>
-          apiFailureOrSuccessOption}) = _$_FaqState;
+          apiFailureOrSuccessOption}) = _$FaqStateImpl;
   const _FaqState._() : super._();
 
   @override
@@ -910,6 +915,6 @@ abstract class _FaqState extends FaqState {
   Option<Either<ApiFailure, dynamic>> get apiFailureOrSuccessOption;
   @override
   @JsonKey(ignore: true)
-  _$$_FaqStateCopyWith<_$_FaqState> get copyWith =>
+  _$$FaqStateImplCopyWith<_$FaqStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

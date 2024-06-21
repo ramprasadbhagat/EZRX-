@@ -12,7 +12,7 @@ part of 'license_info.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$LicenseInfo {
@@ -86,11 +86,11 @@ class _$LicenseInfoCopyWithImpl<$Res, $Val extends LicenseInfo>
 }
 
 /// @nodoc
-abstract class _$$_LicenseInfoCopyWith<$Res>
+abstract class _$$LicenseInfoImplCopyWith<$Res>
     implements $LicenseInfoCopyWith<$Res> {
-  factory _$$_LicenseInfoCopyWith(
-          _$_LicenseInfo value, $Res Function(_$_LicenseInfo) then) =
-      __$$_LicenseInfoCopyWithImpl<$Res>;
+  factory _$$LicenseInfoImplCopyWith(
+          _$LicenseInfoImpl value, $Res Function(_$LicenseInfoImpl) then) =
+      __$$LicenseInfoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -102,11 +102,11 @@ abstract class _$$_LicenseInfoCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_LicenseInfoCopyWithImpl<$Res>
-    extends _$LicenseInfoCopyWithImpl<$Res, _$_LicenseInfo>
-    implements _$$_LicenseInfoCopyWith<$Res> {
-  __$$_LicenseInfoCopyWithImpl(
-      _$_LicenseInfo _value, $Res Function(_$_LicenseInfo) _then)
+class __$$LicenseInfoImplCopyWithImpl<$Res>
+    extends _$LicenseInfoCopyWithImpl<$Res, _$LicenseInfoImpl>
+    implements _$$LicenseInfoImplCopyWith<$Res> {
+  __$$LicenseInfoImplCopyWithImpl(
+      _$LicenseInfoImpl _value, $Res Function(_$LicenseInfoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -118,7 +118,7 @@ class __$$_LicenseInfoCopyWithImpl<$Res>
     Object? validFrom = null,
     Object? validTo = null,
   }) {
-    return _then(_$_LicenseInfo(
+    return _then(_$LicenseInfoImpl(
       licenceType: null == licenceType
           ? _value.licenceType
           : licenceType // ignore: cast_nullable_to_non_nullable
@@ -145,8 +145,8 @@ class __$$_LicenseInfoCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_LicenseInfo extends _LicenseInfo {
-  const _$_LicenseInfo(
+class _$LicenseInfoImpl extends _LicenseInfo {
+  const _$LicenseInfoImpl(
       {required this.licenceType,
       required this.licenseDescription,
       required this.licenseNumber,
@@ -171,10 +171,10 @@ class _$_LicenseInfo extends _LicenseInfo {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_LicenseInfo &&
+            other is _$LicenseInfoImpl &&
             (identical(other.licenceType, licenceType) ||
                 other.licenceType == licenceType) &&
             (identical(other.licenseDescription, licenseDescription) ||
@@ -193,8 +193,8 @@ class _$_LicenseInfo extends _LicenseInfo {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_LicenseInfoCopyWith<_$_LicenseInfo> get copyWith =>
-      __$$_LicenseInfoCopyWithImpl<_$_LicenseInfo>(this, _$identity);
+  _$$LicenseInfoImplCopyWith<_$LicenseInfoImpl> get copyWith =>
+      __$$LicenseInfoImplCopyWithImpl<_$LicenseInfoImpl>(this, _$identity);
 }
 
 abstract class _LicenseInfo extends LicenseInfo {
@@ -203,7 +203,7 @@ abstract class _LicenseInfo extends LicenseInfo {
       required final String licenseDescription,
       required final String licenseNumber,
       required final String validFrom,
-      required final String validTo}) = _$_LicenseInfo;
+      required final String validTo}) = _$LicenseInfoImpl;
   const _LicenseInfo._() : super._();
 
   @override
@@ -218,6 +218,6 @@ abstract class _LicenseInfo extends LicenseInfo {
   String get validTo;
   @override
   @JsonKey(ignore: true)
-  _$$_LicenseInfoCopyWith<_$_LicenseInfo> get copyWith =>
+  _$$LicenseInfoImplCopyWith<_$LicenseInfoImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

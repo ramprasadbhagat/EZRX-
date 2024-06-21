@@ -12,7 +12,7 @@ part of 'login_dto.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 LoginDto _$LoginDtoFromJson(Map<String, dynamic> json) {
   return _LoginDto.fromJson(json);
@@ -90,10 +90,11 @@ class _$LoginDtoCopyWithImpl<$Res, $Val extends LoginDto>
 }
 
 /// @nodoc
-abstract class _$$_LoginDtoCopyWith<$Res> implements $LoginDtoCopyWith<$Res> {
-  factory _$$_LoginDtoCopyWith(
-          _$_LoginDto value, $Res Function(_$_LoginDto) then) =
-      __$$_LoginDtoCopyWithImpl<$Res>;
+abstract class _$$LoginDtoImplCopyWith<$Res>
+    implements $LoginDtoCopyWith<$Res> {
+  factory _$$LoginDtoImplCopyWith(
+          _$LoginDtoImpl value, $Res Function(_$LoginDtoImpl) then) =
+      __$$LoginDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -107,11 +108,11 @@ abstract class _$$_LoginDtoCopyWith<$Res> implements $LoginDtoCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_LoginDtoCopyWithImpl<$Res>
-    extends _$LoginDtoCopyWithImpl<$Res, _$_LoginDto>
-    implements _$$_LoginDtoCopyWith<$Res> {
-  __$$_LoginDtoCopyWithImpl(
-      _$_LoginDto _value, $Res Function(_$_LoginDto) _then)
+class __$$LoginDtoImplCopyWithImpl<$Res>
+    extends _$LoginDtoCopyWithImpl<$Res, _$LoginDtoImpl>
+    implements _$$LoginDtoImplCopyWith<$Res> {
+  __$$LoginDtoImplCopyWithImpl(
+      _$LoginDtoImpl _value, $Res Function(_$LoginDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -121,7 +122,7 @@ class __$$_LoginDtoCopyWithImpl<$Res>
     Object? refresh = null,
     Object? user = null,
   }) {
-    return _then(_$_LoginDto(
+    return _then(_$LoginDtoImpl(
       access: null == access
           ? _value.access
           : access // ignore: cast_nullable_to_non_nullable
@@ -140,8 +141,8 @@ class __$$_LoginDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_LoginDto extends _LoginDto {
-  const _$_LoginDto(
+class _$LoginDtoImpl extends _LoginDto {
+  const _$LoginDtoImpl(
       {@JsonKey(name: 'eZRxJWT', readValue: _convertAccessToken)
       required this.access,
       @JsonKey(name: 'eZRxRefreshJWT', readValue: _convertRefreshToken)
@@ -149,8 +150,8 @@ class _$_LoginDto extends _LoginDto {
       @JsonKey(name: 'user') this.user = UserDto.emptyUserDto})
       : super._();
 
-  factory _$_LoginDto.fromJson(Map<String, dynamic> json) =>
-      _$$_LoginDtoFromJson(json);
+  factory _$LoginDtoImpl.fromJson(Map<String, dynamic> json) =>
+      _$$LoginDtoImplFromJson(json);
 
   @override
   @JsonKey(name: 'eZRxJWT', readValue: _convertAccessToken)
@@ -168,10 +169,10 @@ class _$_LoginDto extends _LoginDto {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_LoginDto &&
+            other is _$LoginDtoImpl &&
             (identical(other.access, access) || other.access == access) &&
             (identical(other.refresh, refresh) || other.refresh == refresh) &&
             (identical(other.user, user) || other.user == user));
@@ -184,12 +185,12 @@ class _$_LoginDto extends _LoginDto {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_LoginDtoCopyWith<_$_LoginDto> get copyWith =>
-      __$$_LoginDtoCopyWithImpl<_$_LoginDto>(this, _$identity);
+  _$$LoginDtoImplCopyWith<_$LoginDtoImpl> get copyWith =>
+      __$$LoginDtoImplCopyWithImpl<_$LoginDtoImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_LoginDtoToJson(
+    return _$$LoginDtoImplToJson(
       this,
     );
   }
@@ -201,10 +202,11 @@ abstract class _LoginDto extends LoginDto {
       required final String access,
       @JsonKey(name: 'eZRxRefreshJWT', readValue: _convertRefreshToken)
       required final String refresh,
-      @JsonKey(name: 'user') final UserDto user}) = _$_LoginDto;
+      @JsonKey(name: 'user') final UserDto user}) = _$LoginDtoImpl;
   const _LoginDto._() : super._();
 
-  factory _LoginDto.fromJson(Map<String, dynamic> json) = _$_LoginDto.fromJson;
+  factory _LoginDto.fromJson(Map<String, dynamic> json) =
+      _$LoginDtoImpl.fromJson;
 
   @override
   @JsonKey(name: 'eZRxJWT', readValue: _convertAccessToken)
@@ -217,6 +219,6 @@ abstract class _LoginDto extends LoginDto {
   UserDto get user;
   @override
   @JsonKey(ignore: true)
-  _$$_LoginDtoCopyWith<_$_LoginDto> get copyWith =>
+  _$$LoginDtoImplCopyWith<_$LoginDtoImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

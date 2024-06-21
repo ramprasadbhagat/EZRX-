@@ -12,7 +12,7 @@ part of 'request_information.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$RequestInformation {
@@ -78,11 +78,11 @@ class _$RequestInformationCopyWithImpl<$Res, $Val extends RequestInformation>
 }
 
 /// @nodoc
-abstract class _$$_RequestInformationCopyWith<$Res>
+abstract class _$$RequestInformationImplCopyWith<$Res>
     implements $RequestInformationCopyWith<$Res> {
-  factory _$$_RequestInformationCopyWith(_$_RequestInformation value,
-          $Res Function(_$_RequestInformation) then) =
-      __$$_RequestInformationCopyWithImpl<$Res>;
+  factory _$$RequestInformationImplCopyWith(_$RequestInformationImpl value,
+          $Res Function(_$RequestInformationImpl) then) =
+      __$$RequestInformationImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -94,11 +94,11 @@ abstract class _$$_RequestInformationCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_RequestInformationCopyWithImpl<$Res>
-    extends _$RequestInformationCopyWithImpl<$Res, _$_RequestInformation>
-    implements _$$_RequestInformationCopyWith<$Res> {
-  __$$_RequestInformationCopyWithImpl(
-      _$_RequestInformation _value, $Res Function(_$_RequestInformation) _then)
+class __$$RequestInformationImplCopyWithImpl<$Res>
+    extends _$RequestInformationCopyWithImpl<$Res, _$RequestInformationImpl>
+    implements _$$RequestInformationImplCopyWith<$Res> {
+  __$$RequestInformationImplCopyWithImpl(_$RequestInformationImpl _value,
+      $Res Function(_$RequestInformationImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -107,7 +107,7 @@ class __$$_RequestInformationCopyWithImpl<$Res>
     Object? requestInformationHeader = null,
     Object? returnRequestInformationList = null,
   }) {
-    return _then(_$_RequestInformation(
+    return _then(_$RequestInformationImpl(
       requestInformationHeader: null == requestInformationHeader
           ? _value.requestInformationHeader
           : requestInformationHeader // ignore: cast_nullable_to_non_nullable
@@ -122,8 +122,8 @@ class __$$_RequestInformationCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_RequestInformation extends _RequestInformation {
-  _$_RequestInformation(
+class _$RequestInformationImpl extends _RequestInformation {
+  _$RequestInformationImpl(
       {required this.requestInformationHeader,
       required final List<ReturnRequestInformation>
           returnRequestInformationList})
@@ -147,10 +147,10 @@ class _$_RequestInformation extends _RequestInformation {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_RequestInformation &&
+            other is _$RequestInformationImpl &&
             (identical(
                     other.requestInformationHeader, requestInformationHeader) ||
                 other.requestInformationHeader == requestInformationHeader) &&
@@ -166,8 +166,8 @@ class _$_RequestInformation extends _RequestInformation {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_RequestInformationCopyWith<_$_RequestInformation> get copyWith =>
-      __$$_RequestInformationCopyWithImpl<_$_RequestInformation>(
+  _$$RequestInformationImplCopyWith<_$RequestInformationImpl> get copyWith =>
+      __$$RequestInformationImplCopyWithImpl<_$RequestInformationImpl>(
           this, _$identity);
 }
 
@@ -175,7 +175,7 @@ abstract class _RequestInformation extends RequestInformation {
   factory _RequestInformation(
       {required final ReturnRequestInformationHeader requestInformationHeader,
       required final List<ReturnRequestInformation>
-          returnRequestInformationList}) = _$_RequestInformation;
+          returnRequestInformationList}) = _$RequestInformationImpl;
   _RequestInformation._() : super._();
 
   @override
@@ -184,6 +184,6 @@ abstract class _RequestInformation extends RequestInformation {
   List<ReturnRequestInformation> get returnRequestInformationList;
   @override
   @JsonKey(ignore: true)
-  _$$_RequestInformationCopyWith<_$_RequestInformation> get copyWith =>
+  _$$RequestInformationImplCopyWith<_$RequestInformationImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

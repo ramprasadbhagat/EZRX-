@@ -12,7 +12,7 @@ part of 'articles_info_bloc.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$ArticlesInfoEvent {
@@ -97,10 +97,10 @@ class _$ArticlesInfoEventCopyWithImpl<$Res, $Val extends ArticlesInfoEvent>
 }
 
 /// @nodoc
-abstract class _$$_InitializeCopyWith<$Res> {
-  factory _$$_InitializeCopyWith(
-          _$_Initialize value, $Res Function(_$_Initialize) then) =
-      __$$_InitializeCopyWithImpl<$Res>;
+abstract class _$$InitializeImplCopyWith<$Res> {
+  factory _$$InitializeImplCopyWith(
+          _$InitializeImpl value, $Res Function(_$InitializeImpl) then) =
+      __$$InitializeImplCopyWithImpl<$Res>;
   @useResult
   $Res call({User user, SalesOrg salesOrg, ShipToInfo shipToInfo});
 
@@ -109,11 +109,11 @@ abstract class _$$_InitializeCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_InitializeCopyWithImpl<$Res>
-    extends _$ArticlesInfoEventCopyWithImpl<$Res, _$_Initialize>
-    implements _$$_InitializeCopyWith<$Res> {
-  __$$_InitializeCopyWithImpl(
-      _$_Initialize _value, $Res Function(_$_Initialize) _then)
+class __$$InitializeImplCopyWithImpl<$Res>
+    extends _$ArticlesInfoEventCopyWithImpl<$Res, _$InitializeImpl>
+    implements _$$InitializeImplCopyWith<$Res> {
+  __$$InitializeImplCopyWithImpl(
+      _$InitializeImpl _value, $Res Function(_$InitializeImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -123,7 +123,7 @@ class __$$_InitializeCopyWithImpl<$Res>
     Object? salesOrg = null,
     Object? shipToInfo = null,
   }) {
-    return _then(_$_Initialize(
+    return _then(_$InitializeImpl(
       user: null == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
@@ -158,8 +158,8 @@ class __$$_InitializeCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_Initialize implements _Initialize {
-  const _$_Initialize(
+class _$InitializeImpl implements _Initialize {
+  const _$InitializeImpl(
       {required this.user, required this.salesOrg, required this.shipToInfo});
 
   @override
@@ -175,10 +175,10 @@ class _$_Initialize implements _Initialize {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Initialize &&
+            other is _$InitializeImpl &&
             (identical(other.user, user) || other.user == user) &&
             (identical(other.salesOrg, salesOrg) ||
                 other.salesOrg == salesOrg) &&
@@ -192,8 +192,8 @@ class _$_Initialize implements _Initialize {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_InitializeCopyWith<_$_Initialize> get copyWith =>
-      __$$_InitializeCopyWithImpl<_$_Initialize>(this, _$identity);
+  _$$InitializeImplCopyWith<_$InitializeImpl> get copyWith =>
+      __$$InitializeImplCopyWithImpl<_$InitializeImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -284,36 +284,36 @@ abstract class _Initialize implements ArticlesInfoEvent {
   const factory _Initialize(
       {required final User user,
       required final SalesOrg salesOrg,
-      required final ShipToInfo shipToInfo}) = _$_Initialize;
+      required final ShipToInfo shipToInfo}) = _$InitializeImpl;
 
   User get user;
   SalesOrg get salesOrg;
   ShipToInfo get shipToInfo;
   @JsonKey(ignore: true)
-  _$$_InitializeCopyWith<_$_Initialize> get copyWith =>
+  _$$InitializeImplCopyWith<_$InitializeImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_GetArticlesCopyWith<$Res> {
-  factory _$$_GetArticlesCopyWith(
-          _$_GetArticles value, $Res Function(_$_GetArticles) then) =
-      __$$_GetArticlesCopyWithImpl<$Res>;
+abstract class _$$GetArticlesImplCopyWith<$Res> {
+  factory _$$GetArticlesImplCopyWith(
+          _$GetArticlesImpl value, $Res Function(_$GetArticlesImpl) then) =
+      __$$GetArticlesImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_GetArticlesCopyWithImpl<$Res>
-    extends _$ArticlesInfoEventCopyWithImpl<$Res, _$_GetArticles>
-    implements _$$_GetArticlesCopyWith<$Res> {
-  __$$_GetArticlesCopyWithImpl(
-      _$_GetArticles _value, $Res Function(_$_GetArticles) _then)
+class __$$GetArticlesImplCopyWithImpl<$Res>
+    extends _$ArticlesInfoEventCopyWithImpl<$Res, _$GetArticlesImpl>
+    implements _$$GetArticlesImplCopyWith<$Res> {
+  __$$GetArticlesImplCopyWithImpl(
+      _$GetArticlesImpl _value, $Res Function(_$GetArticlesImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_GetArticles implements _GetArticles {
-  const _$_GetArticles();
+class _$GetArticlesImpl implements _GetArticles {
+  const _$GetArticlesImpl();
 
   @override
   String toString() {
@@ -321,9 +321,9 @@ class _$_GetArticles implements _GetArticles {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_GetArticles);
+        (other.runtimeType == runtimeType && other is _$GetArticlesImpl);
   }
 
   @override
@@ -415,29 +415,29 @@ class _$_GetArticles implements _GetArticles {
 }
 
 abstract class _GetArticles implements ArticlesInfoEvent {
-  const factory _GetArticles() = _$_GetArticles;
+  const factory _GetArticles() = _$GetArticlesImpl;
 }
 
 /// @nodoc
-abstract class _$$_LoadMoreArticlesCopyWith<$Res> {
-  factory _$$_LoadMoreArticlesCopyWith(
-          _$_LoadMoreArticles value, $Res Function(_$_LoadMoreArticles) then) =
-      __$$_LoadMoreArticlesCopyWithImpl<$Res>;
+abstract class _$$LoadMoreArticlesImplCopyWith<$Res> {
+  factory _$$LoadMoreArticlesImplCopyWith(_$LoadMoreArticlesImpl value,
+          $Res Function(_$LoadMoreArticlesImpl) then) =
+      __$$LoadMoreArticlesImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_LoadMoreArticlesCopyWithImpl<$Res>
-    extends _$ArticlesInfoEventCopyWithImpl<$Res, _$_LoadMoreArticles>
-    implements _$$_LoadMoreArticlesCopyWith<$Res> {
-  __$$_LoadMoreArticlesCopyWithImpl(
-      _$_LoadMoreArticles _value, $Res Function(_$_LoadMoreArticles) _then)
+class __$$LoadMoreArticlesImplCopyWithImpl<$Res>
+    extends _$ArticlesInfoEventCopyWithImpl<$Res, _$LoadMoreArticlesImpl>
+    implements _$$LoadMoreArticlesImplCopyWith<$Res> {
+  __$$LoadMoreArticlesImplCopyWithImpl(_$LoadMoreArticlesImpl _value,
+      $Res Function(_$LoadMoreArticlesImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_LoadMoreArticles implements _LoadMoreArticles {
-  const _$_LoadMoreArticles();
+class _$LoadMoreArticlesImpl implements _LoadMoreArticles {
+  const _$LoadMoreArticlesImpl();
 
   @override
   String toString() {
@@ -445,9 +445,9 @@ class _$_LoadMoreArticles implements _LoadMoreArticles {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_LoadMoreArticles);
+        (other.runtimeType == runtimeType && other is _$LoadMoreArticlesImpl);
   }
 
   @override
@@ -539,24 +539,24 @@ class _$_LoadMoreArticles implements _LoadMoreArticles {
 }
 
 abstract class _LoadMoreArticles implements ArticlesInfoEvent {
-  const factory _LoadMoreArticles() = _$_LoadMoreArticles;
+  const factory _LoadMoreArticles() = _$LoadMoreArticlesImpl;
 }
 
 /// @nodoc
-abstract class _$$_SetSearchKeyCopyWith<$Res> {
-  factory _$$_SetSearchKeyCopyWith(
-          _$_SetSearchKey value, $Res Function(_$_SetSearchKey) then) =
-      __$$_SetSearchKeyCopyWithImpl<$Res>;
+abstract class _$$SetSearchKeyImplCopyWith<$Res> {
+  factory _$$SetSearchKeyImplCopyWith(
+          _$SetSearchKeyImpl value, $Res Function(_$SetSearchKeyImpl) then) =
+      __$$SetSearchKeyImplCopyWithImpl<$Res>;
   @useResult
   $Res call({String searchKey});
 }
 
 /// @nodoc
-class __$$_SetSearchKeyCopyWithImpl<$Res>
-    extends _$ArticlesInfoEventCopyWithImpl<$Res, _$_SetSearchKey>
-    implements _$$_SetSearchKeyCopyWith<$Res> {
-  __$$_SetSearchKeyCopyWithImpl(
-      _$_SetSearchKey _value, $Res Function(_$_SetSearchKey) _then)
+class __$$SetSearchKeyImplCopyWithImpl<$Res>
+    extends _$ArticlesInfoEventCopyWithImpl<$Res, _$SetSearchKeyImpl>
+    implements _$$SetSearchKeyImplCopyWith<$Res> {
+  __$$SetSearchKeyImplCopyWithImpl(
+      _$SetSearchKeyImpl _value, $Res Function(_$SetSearchKeyImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -564,7 +564,7 @@ class __$$_SetSearchKeyCopyWithImpl<$Res>
   $Res call({
     Object? searchKey = null,
   }) {
-    return _then(_$_SetSearchKey(
+    return _then(_$SetSearchKeyImpl(
       searchKey: null == searchKey
           ? _value.searchKey
           : searchKey // ignore: cast_nullable_to_non_nullable
@@ -575,8 +575,8 @@ class __$$_SetSearchKeyCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_SetSearchKey implements _SetSearchKey {
-  const _$_SetSearchKey({required this.searchKey});
+class _$SetSearchKeyImpl implements _SetSearchKey {
+  const _$SetSearchKeyImpl({required this.searchKey});
 
   @override
   final String searchKey;
@@ -587,10 +587,10 @@ class _$_SetSearchKey implements _SetSearchKey {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_SetSearchKey &&
+            other is _$SetSearchKeyImpl &&
             (identical(other.searchKey, searchKey) ||
                 other.searchKey == searchKey));
   }
@@ -601,8 +601,8 @@ class _$_SetSearchKey implements _SetSearchKey {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_SetSearchKeyCopyWith<_$_SetSearchKey> get copyWith =>
-      __$$_SetSearchKeyCopyWithImpl<_$_SetSearchKey>(this, _$identity);
+  _$$SetSearchKeyImplCopyWith<_$SetSearchKeyImpl> get copyWith =>
+      __$$SetSearchKeyImplCopyWithImpl<_$SetSearchKeyImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -691,29 +691,29 @@ class _$_SetSearchKey implements _SetSearchKey {
 
 abstract class _SetSearchKey implements ArticlesInfoEvent {
   const factory _SetSearchKey({required final String searchKey}) =
-      _$_SetSearchKey;
+      _$SetSearchKeyImpl;
 
   String get searchKey;
   @JsonKey(ignore: true)
-  _$$_SetSearchKeyCopyWith<_$_SetSearchKey> get copyWith =>
+  _$$SetSearchKeyImplCopyWith<_$SetSearchKeyImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_SetCategoryKeyCopyWith<$Res> {
-  factory _$$_SetCategoryKeyCopyWith(
-          _$_SetCategoryKey value, $Res Function(_$_SetCategoryKey) then) =
-      __$$_SetCategoryKeyCopyWithImpl<$Res>;
+abstract class _$$SetCategoryKeyImplCopyWith<$Res> {
+  factory _$$SetCategoryKeyImplCopyWith(_$SetCategoryKeyImpl value,
+          $Res Function(_$SetCategoryKeyImpl) then) =
+      __$$SetCategoryKeyImplCopyWithImpl<$Res>;
   @useResult
   $Res call({List<String> categoryKeyList});
 }
 
 /// @nodoc
-class __$$_SetCategoryKeyCopyWithImpl<$Res>
-    extends _$ArticlesInfoEventCopyWithImpl<$Res, _$_SetCategoryKey>
-    implements _$$_SetCategoryKeyCopyWith<$Res> {
-  __$$_SetCategoryKeyCopyWithImpl(
-      _$_SetCategoryKey _value, $Res Function(_$_SetCategoryKey) _then)
+class __$$SetCategoryKeyImplCopyWithImpl<$Res>
+    extends _$ArticlesInfoEventCopyWithImpl<$Res, _$SetCategoryKeyImpl>
+    implements _$$SetCategoryKeyImplCopyWith<$Res> {
+  __$$SetCategoryKeyImplCopyWithImpl(
+      _$SetCategoryKeyImpl _value, $Res Function(_$SetCategoryKeyImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -721,7 +721,7 @@ class __$$_SetCategoryKeyCopyWithImpl<$Res>
   $Res call({
     Object? categoryKeyList = null,
   }) {
-    return _then(_$_SetCategoryKey(
+    return _then(_$SetCategoryKeyImpl(
       categoryKeyList: null == categoryKeyList
           ? _value._categoryKeyList
           : categoryKeyList // ignore: cast_nullable_to_non_nullable
@@ -732,8 +732,8 @@ class __$$_SetCategoryKeyCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_SetCategoryKey implements _SetCategoryKey {
-  const _$_SetCategoryKey({required final List<String> categoryKeyList})
+class _$SetCategoryKeyImpl implements _SetCategoryKey {
+  const _$SetCategoryKeyImpl({required final List<String> categoryKeyList})
       : _categoryKeyList = categoryKeyList;
 
   final List<String> _categoryKeyList;
@@ -750,10 +750,10 @@ class _$_SetCategoryKey implements _SetCategoryKey {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_SetCategoryKey &&
+            other is _$SetCategoryKeyImpl &&
             const DeepCollectionEquality()
                 .equals(other._categoryKeyList, _categoryKeyList));
   }
@@ -765,8 +765,9 @@ class _$_SetCategoryKey implements _SetCategoryKey {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_SetCategoryKeyCopyWith<_$_SetCategoryKey> get copyWith =>
-      __$$_SetCategoryKeyCopyWithImpl<_$_SetCategoryKey>(this, _$identity);
+  _$$SetCategoryKeyImplCopyWith<_$SetCategoryKeyImpl> get copyWith =>
+      __$$SetCategoryKeyImplCopyWithImpl<_$SetCategoryKeyImpl>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -855,11 +856,11 @@ class _$_SetCategoryKey implements _SetCategoryKey {
 
 abstract class _SetCategoryKey implements ArticlesInfoEvent {
   const factory _SetCategoryKey({required final List<String> categoryKeyList}) =
-      _$_SetCategoryKey;
+      _$SetCategoryKeyImpl;
 
   List<String> get categoryKeyList;
   @JsonKey(ignore: true)
-  _$$_SetCategoryKeyCopyWith<_$_SetCategoryKey> get copyWith =>
+  _$$SetCategoryKeyImplCopyWith<_$SetCategoryKeyImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -992,11 +993,11 @@ class _$ArticlesInfoStateCopyWithImpl<$Res, $Val extends ArticlesInfoState>
 }
 
 /// @nodoc
-abstract class _$$_ArticlesInfoStateCopyWith<$Res>
+abstract class _$$ArticlesInfoStateImplCopyWith<$Res>
     implements $ArticlesInfoStateCopyWith<$Res> {
-  factory _$$_ArticlesInfoStateCopyWith(_$_ArticlesInfoState value,
-          $Res Function(_$_ArticlesInfoState) then) =
-      __$$_ArticlesInfoStateCopyWithImpl<$Res>;
+  factory _$$ArticlesInfoStateImplCopyWith(_$ArticlesInfoStateImpl value,
+          $Res Function(_$ArticlesInfoStateImpl) then) =
+      __$$ArticlesInfoStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -1019,11 +1020,11 @@ abstract class _$$_ArticlesInfoStateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_ArticlesInfoStateCopyWithImpl<$Res>
-    extends _$ArticlesInfoStateCopyWithImpl<$Res, _$_ArticlesInfoState>
-    implements _$$_ArticlesInfoStateCopyWith<$Res> {
-  __$$_ArticlesInfoStateCopyWithImpl(
-      _$_ArticlesInfoState _value, $Res Function(_$_ArticlesInfoState) _then)
+class __$$ArticlesInfoStateImplCopyWithImpl<$Res>
+    extends _$ArticlesInfoStateCopyWithImpl<$Res, _$ArticlesInfoStateImpl>
+    implements _$$ArticlesInfoStateImplCopyWith<$Res> {
+  __$$ArticlesInfoStateImplCopyWithImpl(_$ArticlesInfoStateImpl _value,
+      $Res Function(_$ArticlesInfoStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1039,7 +1040,7 @@ class __$$_ArticlesInfoStateCopyWithImpl<$Res>
     Object? categoryKeyList = null,
     Object? apiFailureOrSuccessOption = null,
   }) {
-    return _then(_$_ArticlesInfoState(
+    return _then(_$ArticlesInfoStateImpl(
       user: null == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
@@ -1082,8 +1083,8 @@ class __$$_ArticlesInfoStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_ArticlesInfoState extends _ArticlesInfoState {
-  const _$_ArticlesInfoState(
+class _$ArticlesInfoStateImpl extends _ArticlesInfoState {
+  const _$ArticlesInfoStateImpl(
       {required this.user,
       required this.salesOrg,
       required this.shipToInfo,
@@ -1127,10 +1128,10 @@ class _$_ArticlesInfoState extends _ArticlesInfoState {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ArticlesInfoState &&
+            other is _$ArticlesInfoStateImpl &&
             (identical(other.user, user) || other.user == user) &&
             (identical(other.salesOrg, salesOrg) ||
                 other.salesOrg == salesOrg) &&
@@ -1167,8 +1168,8 @@ class _$_ArticlesInfoState extends _ArticlesInfoState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ArticlesInfoStateCopyWith<_$_ArticlesInfoState> get copyWith =>
-      __$$_ArticlesInfoStateCopyWithImpl<_$_ArticlesInfoState>(
+  _$$ArticlesInfoStateImplCopyWith<_$ArticlesInfoStateImpl> get copyWith =>
+      __$$ArticlesInfoStateImplCopyWithImpl<_$ArticlesInfoStateImpl>(
           this, _$identity);
 }
 
@@ -1183,7 +1184,7 @@ abstract class _ArticlesInfoState extends ArticlesInfoState {
       required final SearchKey searchKey,
       required final List<String> categoryKeyList,
       required final Option<Either<ApiFailure, dynamic>>
-          apiFailureOrSuccessOption}) = _$_ArticlesInfoState;
+          apiFailureOrSuccessOption}) = _$ArticlesInfoStateImpl;
   const _ArticlesInfoState._() : super._();
 
   @override
@@ -1206,6 +1207,6 @@ abstract class _ArticlesInfoState extends ArticlesInfoState {
   Option<Either<ApiFailure, dynamic>> get apiFailureOrSuccessOption;
   @override
   @JsonKey(ignore: true)
-  _$$_ArticlesInfoStateCopyWith<_$_ArticlesInfoState> get copyWith =>
+  _$$ArticlesInfoStateImplCopyWith<_$ArticlesInfoStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

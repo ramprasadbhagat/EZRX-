@@ -6,9 +6,9 @@ part of 'all_invoices_filter_dto.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_AllInvoicesFilterDto _$$_AllInvoicesFilterDtoFromJson(
+_$AllInvoicesFilterDtoImpl _$$AllInvoicesFilterDtoImplFromJson(
         Map<String, dynamic> json) =>
-    _$_AllInvoicesFilterDto(
+    _$AllInvoicesFilterDtoImpl(
       dueDateFrom: json['dueDateFrom'] as String? ?? '',
       dueDateTo: json['dueDateTo'] as String? ?? '',
       documentDateFrom: json['documentDateFrom'] as String? ?? '',
@@ -19,8 +19,8 @@ _$_AllInvoicesFilterDto _$$_AllInvoicesFilterDtoFromJson(
       searchKey: json['accountingDocument'] as String? ?? '',
     );
 
-Map<String, dynamic> _$$_AllInvoicesFilterDtoToJson(
-        _$_AllInvoicesFilterDto instance) =>
+Map<String, dynamic> _$$AllInvoicesFilterDtoImplToJson(
+        _$AllInvoicesFilterDtoImpl instance) =>
     <String, dynamic>{
       'dueDateFrom': instance.dueDateFrom,
       'dueDateTo': instance.dueDateTo,

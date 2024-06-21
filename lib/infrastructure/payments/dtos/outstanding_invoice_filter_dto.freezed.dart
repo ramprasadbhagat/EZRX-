@@ -12,7 +12,7 @@ part of 'outstanding_invoice_filter_dto.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 OutstandingInvoiceFilterDto _$OutstandingInvoiceFilterDtoFromJson(
     Map<String, dynamic> json) {
@@ -121,12 +121,12 @@ class _$OutstandingInvoiceFilterDtoCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_OutstandingInvoiceFilterDtoCopyWith<$Res>
+abstract class _$$OutstandingInvoiceFilterDtoImplCopyWith<$Res>
     implements $OutstandingInvoiceFilterDtoCopyWith<$Res> {
-  factory _$$_OutstandingInvoiceFilterDtoCopyWith(
-          _$_OutstandingInvoiceFilterDto value,
-          $Res Function(_$_OutstandingInvoiceFilterDto) then) =
-      __$$_OutstandingInvoiceFilterDtoCopyWithImpl<$Res>;
+  factory _$$OutstandingInvoiceFilterDtoImplCopyWith(
+          _$OutstandingInvoiceFilterDtoImpl value,
+          $Res Function(_$OutstandingInvoiceFilterDtoImpl) then) =
+      __$$OutstandingInvoiceFilterDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -143,13 +143,13 @@ abstract class _$$_OutstandingInvoiceFilterDtoCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_OutstandingInvoiceFilterDtoCopyWithImpl<$Res>
+class __$$OutstandingInvoiceFilterDtoImplCopyWithImpl<$Res>
     extends _$OutstandingInvoiceFilterDtoCopyWithImpl<$Res,
-        _$_OutstandingInvoiceFilterDto>
-    implements _$$_OutstandingInvoiceFilterDtoCopyWith<$Res> {
-  __$$_OutstandingInvoiceFilterDtoCopyWithImpl(
-      _$_OutstandingInvoiceFilterDto _value,
-      $Res Function(_$_OutstandingInvoiceFilterDto) _then)
+        _$OutstandingInvoiceFilterDtoImpl>
+    implements _$$OutstandingInvoiceFilterDtoImplCopyWith<$Res> {
+  __$$OutstandingInvoiceFilterDtoImplCopyWithImpl(
+      _$OutstandingInvoiceFilterDtoImpl _value,
+      $Res Function(_$OutstandingInvoiceFilterDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -163,7 +163,7 @@ class __$$_OutstandingInvoiceFilterDtoCopyWithImpl<$Res>
     Object? amountInTransactionCurrencyTo = null,
     Object? status = null,
   }) {
-    return _then(_$_OutstandingInvoiceFilterDto(
+    return _then(_$OutstandingInvoiceFilterDtoImpl(
       dueDateFrom: null == dueDateFrom
           ? _value.dueDateFrom
           : dueDateFrom // ignore: cast_nullable_to_non_nullable
@@ -198,8 +198,8 @@ class __$$_OutstandingInvoiceFilterDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_OutstandingInvoiceFilterDto extends _OutstandingInvoiceFilterDto {
-  const _$_OutstandingInvoiceFilterDto(
+class _$OutstandingInvoiceFilterDtoImpl extends _OutstandingInvoiceFilterDto {
+  const _$OutstandingInvoiceFilterDtoImpl(
       {@JsonKey(name: 'dueDateFrom', defaultValue: '')
       required this.dueDateFrom,
       @JsonKey(name: 'dueDateTo', defaultValue: '') required this.dueDateTo,
@@ -214,8 +214,9 @@ class _$_OutstandingInvoiceFilterDto extends _OutstandingInvoiceFilterDto {
       @JsonKey(name: 'status', defaultValue: '') required this.status})
       : super._();
 
-  factory _$_OutstandingInvoiceFilterDto.fromJson(Map<String, dynamic> json) =>
-      _$$_OutstandingInvoiceFilterDtoFromJson(json);
+  factory _$OutstandingInvoiceFilterDtoImpl.fromJson(
+          Map<String, dynamic> json) =>
+      _$$OutstandingInvoiceFilterDtoImplFromJson(json);
 
   @override
   @JsonKey(name: 'dueDateFrom', defaultValue: '')
@@ -245,10 +246,10 @@ class _$_OutstandingInvoiceFilterDto extends _OutstandingInvoiceFilterDto {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_OutstandingInvoiceFilterDto &&
+            other is _$OutstandingInvoiceFilterDtoImpl &&
             (identical(other.dueDateFrom, dueDateFrom) ||
                 other.dueDateFrom == dueDateFrom) &&
             (identical(other.dueDateTo, dueDateTo) ||
@@ -283,13 +284,13 @@ class _$_OutstandingInvoiceFilterDto extends _OutstandingInvoiceFilterDto {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_OutstandingInvoiceFilterDtoCopyWith<_$_OutstandingInvoiceFilterDto>
-      get copyWith => __$$_OutstandingInvoiceFilterDtoCopyWithImpl<
-          _$_OutstandingInvoiceFilterDto>(this, _$identity);
+  _$$OutstandingInvoiceFilterDtoImplCopyWith<_$OutstandingInvoiceFilterDtoImpl>
+      get copyWith => __$$OutstandingInvoiceFilterDtoImplCopyWithImpl<
+          _$OutstandingInvoiceFilterDtoImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_OutstandingInvoiceFilterDtoToJson(
+    return _$$OutstandingInvoiceFilterDtoImplToJson(
       this,
     );
   }
@@ -311,11 +312,11 @@ abstract class _OutstandingInvoiceFilterDto
       @JsonKey(name: 'amountInTransactionCurrencyTo', defaultValue: '')
       required final String amountInTransactionCurrencyTo,
       @JsonKey(name: 'status', defaultValue: '')
-      required final String status}) = _$_OutstandingInvoiceFilterDto;
+      required final String status}) = _$OutstandingInvoiceFilterDtoImpl;
   const _OutstandingInvoiceFilterDto._() : super._();
 
   factory _OutstandingInvoiceFilterDto.fromJson(Map<String, dynamic> json) =
-      _$_OutstandingInvoiceFilterDto.fromJson;
+      _$OutstandingInvoiceFilterDtoImpl.fromJson;
 
   @override
   @JsonKey(name: 'dueDateFrom', defaultValue: '')
@@ -340,6 +341,6 @@ abstract class _OutstandingInvoiceFilterDto
   String get status;
   @override
   @JsonKey(ignore: true)
-  _$$_OutstandingInvoiceFilterDtoCopyWith<_$_OutstandingInvoiceFilterDto>
+  _$$OutstandingInvoiceFilterDtoImplCopyWith<_$OutstandingInvoiceFilterDtoImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

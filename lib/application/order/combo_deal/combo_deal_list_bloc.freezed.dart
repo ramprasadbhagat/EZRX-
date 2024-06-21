@@ -12,7 +12,7 @@ part of 'combo_deal_list_bloc.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$ComboDealListEvent {
@@ -94,25 +94,25 @@ class _$ComboDealListEventCopyWithImpl<$Res, $Val extends ComboDealListEvent>
 }
 
 /// @nodoc
-abstract class _$$_InitializeCopyWith<$Res> {
-  factory _$$_InitializeCopyWith(
-          _$_Initialize value, $Res Function(_$_Initialize) then) =
-      __$$_InitializeCopyWithImpl<$Res>;
+abstract class _$$InitializeImplCopyWith<$Res> {
+  factory _$$InitializeImplCopyWith(
+          _$InitializeImpl value, $Res Function(_$InitializeImpl) then) =
+      __$$InitializeImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_InitializeCopyWithImpl<$Res>
-    extends _$ComboDealListEventCopyWithImpl<$Res, _$_Initialize>
-    implements _$$_InitializeCopyWith<$Res> {
-  __$$_InitializeCopyWithImpl(
-      _$_Initialize _value, $Res Function(_$_Initialize) _then)
+class __$$InitializeImplCopyWithImpl<$Res>
+    extends _$ComboDealListEventCopyWithImpl<$Res, _$InitializeImpl>
+    implements _$$InitializeImplCopyWith<$Res> {
+  __$$InitializeImplCopyWithImpl(
+      _$InitializeImpl _value, $Res Function(_$InitializeImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_Initialize implements _Initialize {
-  const _$_Initialize();
+class _$InitializeImpl implements _Initialize {
+  const _$InitializeImpl();
 
   @override
   String toString() {
@@ -120,9 +120,9 @@ class _$_Initialize implements _Initialize {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_Initialize);
+        (other.runtimeType == runtimeType && other is _$InitializeImpl);
   }
 
   @override
@@ -211,14 +211,14 @@ class _$_Initialize implements _Initialize {
 }
 
 abstract class _Initialize implements ComboDealListEvent {
-  const factory _Initialize() = _$_Initialize;
+  const factory _Initialize() = _$InitializeImpl;
 }
 
 /// @nodoc
-abstract class _$$_FetchMaterialDealCopyWith<$Res> {
-  factory _$$_FetchMaterialDealCopyWith(_$_FetchMaterialDeal value,
-          $Res Function(_$_FetchMaterialDeal) then) =
-      __$$_FetchMaterialDealCopyWithImpl<$Res>;
+abstract class _$$FetchMaterialDealImplCopyWith<$Res> {
+  factory _$$FetchMaterialDealImplCopyWith(_$FetchMaterialDealImpl value,
+          $Res Function(_$FetchMaterialDealImpl) then) =
+      __$$FetchMaterialDealImplCopyWithImpl<$Res>;
   @useResult
   $Res call(
       {SalesOrganisation salesOrganisation,
@@ -231,11 +231,11 @@ abstract class _$$_FetchMaterialDealCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_FetchMaterialDealCopyWithImpl<$Res>
-    extends _$ComboDealListEventCopyWithImpl<$Res, _$_FetchMaterialDeal>
-    implements _$$_FetchMaterialDealCopyWith<$Res> {
-  __$$_FetchMaterialDealCopyWithImpl(
-      _$_FetchMaterialDeal _value, $Res Function(_$_FetchMaterialDeal) _then)
+class __$$FetchMaterialDealImplCopyWithImpl<$Res>
+    extends _$ComboDealListEventCopyWithImpl<$Res, _$FetchMaterialDealImpl>
+    implements _$$FetchMaterialDealImplCopyWith<$Res> {
+  __$$FetchMaterialDealImplCopyWithImpl(_$FetchMaterialDealImpl _value,
+      $Res Function(_$FetchMaterialDealImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -245,7 +245,7 @@ class __$$_FetchMaterialDealCopyWithImpl<$Res>
     Object? customerCodeInfo = null,
     Object? priceComboDeal = null,
   }) {
-    return _then(_$_FetchMaterialDeal(
+    return _then(_$FetchMaterialDealImpl(
       salesOrganisation: null == salesOrganisation
           ? _value.salesOrganisation
           : salesOrganisation // ignore: cast_nullable_to_non_nullable
@@ -288,8 +288,8 @@ class __$$_FetchMaterialDealCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_FetchMaterialDeal implements _FetchMaterialDeal {
-  const _$_FetchMaterialDeal(
+class _$FetchMaterialDealImpl implements _FetchMaterialDeal {
+  const _$FetchMaterialDealImpl(
       {required this.salesOrganisation,
       required this.customerCodeInfo,
       required this.priceComboDeal});
@@ -307,10 +307,10 @@ class _$_FetchMaterialDeal implements _FetchMaterialDeal {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_FetchMaterialDeal &&
+            other is _$FetchMaterialDealImpl &&
             (identical(other.salesOrganisation, salesOrganisation) ||
                 other.salesOrganisation == salesOrganisation) &&
             (identical(other.customerCodeInfo, customerCodeInfo) ||
@@ -326,8 +326,8 @@ class _$_FetchMaterialDeal implements _FetchMaterialDeal {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_FetchMaterialDealCopyWith<_$_FetchMaterialDeal> get copyWith =>
-      __$$_FetchMaterialDealCopyWithImpl<_$_FetchMaterialDeal>(
+  _$$FetchMaterialDealImplCopyWith<_$FetchMaterialDealImpl> get copyWith =>
+      __$$FetchMaterialDealImplCopyWithImpl<_$FetchMaterialDealImpl>(
           this, _$identity);
 
   @override
@@ -419,21 +419,22 @@ abstract class _FetchMaterialDeal implements ComboDealListEvent {
   const factory _FetchMaterialDeal(
       {required final SalesOrganisation salesOrganisation,
       required final CustomerCodeInfo customerCodeInfo,
-      required final PriceComboDeal priceComboDeal}) = _$_FetchMaterialDeal;
+      required final PriceComboDeal priceComboDeal}) = _$FetchMaterialDealImpl;
 
   SalesOrganisation get salesOrganisation;
   CustomerCodeInfo get customerCodeInfo;
   PriceComboDeal get priceComboDeal;
   @JsonKey(ignore: true)
-  _$$_FetchMaterialDealCopyWith<_$_FetchMaterialDeal> get copyWith =>
+  _$$FetchMaterialDealImplCopyWith<_$FetchMaterialDealImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_FetchPrincipleGroupDealCopyWith<$Res> {
-  factory _$$_FetchPrincipleGroupDealCopyWith(_$_FetchPrincipleGroupDeal value,
-          $Res Function(_$_FetchPrincipleGroupDeal) then) =
-      __$$_FetchPrincipleGroupDealCopyWithImpl<$Res>;
+abstract class _$$FetchPrincipleGroupDealImplCopyWith<$Res> {
+  factory _$$FetchPrincipleGroupDealImplCopyWith(
+          _$FetchPrincipleGroupDealImpl value,
+          $Res Function(_$FetchPrincipleGroupDealImpl) then) =
+      __$$FetchPrincipleGroupDealImplCopyWithImpl<$Res>;
   @useResult
   $Res call(
       {SalesOrganisation salesOrganisation,
@@ -446,11 +447,13 @@ abstract class _$$_FetchPrincipleGroupDealCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_FetchPrincipleGroupDealCopyWithImpl<$Res>
-    extends _$ComboDealListEventCopyWithImpl<$Res, _$_FetchPrincipleGroupDeal>
-    implements _$$_FetchPrincipleGroupDealCopyWith<$Res> {
-  __$$_FetchPrincipleGroupDealCopyWithImpl(_$_FetchPrincipleGroupDeal _value,
-      $Res Function(_$_FetchPrincipleGroupDeal) _then)
+class __$$FetchPrincipleGroupDealImplCopyWithImpl<$Res>
+    extends _$ComboDealListEventCopyWithImpl<$Res,
+        _$FetchPrincipleGroupDealImpl>
+    implements _$$FetchPrincipleGroupDealImplCopyWith<$Res> {
+  __$$FetchPrincipleGroupDealImplCopyWithImpl(
+      _$FetchPrincipleGroupDealImpl _value,
+      $Res Function(_$FetchPrincipleGroupDealImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -460,7 +463,7 @@ class __$$_FetchPrincipleGroupDealCopyWithImpl<$Res>
     Object? customerCodeInfo = null,
     Object? priceComboDeal = null,
   }) {
-    return _then(_$_FetchPrincipleGroupDeal(
+    return _then(_$FetchPrincipleGroupDealImpl(
       salesOrganisation: null == salesOrganisation
           ? _value.salesOrganisation
           : salesOrganisation // ignore: cast_nullable_to_non_nullable
@@ -503,8 +506,8 @@ class __$$_FetchPrincipleGroupDealCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_FetchPrincipleGroupDeal implements _FetchPrincipleGroupDeal {
-  const _$_FetchPrincipleGroupDeal(
+class _$FetchPrincipleGroupDealImpl implements _FetchPrincipleGroupDeal {
+  const _$FetchPrincipleGroupDealImpl(
       {required this.salesOrganisation,
       required this.customerCodeInfo,
       required this.priceComboDeal});
@@ -522,10 +525,10 @@ class _$_FetchPrincipleGroupDeal implements _FetchPrincipleGroupDeal {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_FetchPrincipleGroupDeal &&
+            other is _$FetchPrincipleGroupDealImpl &&
             (identical(other.salesOrganisation, salesOrganisation) ||
                 other.salesOrganisation == salesOrganisation) &&
             (identical(other.customerCodeInfo, customerCodeInfo) ||
@@ -541,10 +544,9 @@ class _$_FetchPrincipleGroupDeal implements _FetchPrincipleGroupDeal {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_FetchPrincipleGroupDealCopyWith<_$_FetchPrincipleGroupDeal>
-      get copyWith =>
-          __$$_FetchPrincipleGroupDealCopyWithImpl<_$_FetchPrincipleGroupDeal>(
-              this, _$identity);
+  _$$FetchPrincipleGroupDealImplCopyWith<_$FetchPrincipleGroupDealImpl>
+      get copyWith => __$$FetchPrincipleGroupDealImplCopyWithImpl<
+          _$FetchPrincipleGroupDealImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -636,13 +638,13 @@ abstract class _FetchPrincipleGroupDeal implements ComboDealListEvent {
           {required final SalesOrganisation salesOrganisation,
           required final CustomerCodeInfo customerCodeInfo,
           required final PriceComboDeal priceComboDeal}) =
-      _$_FetchPrincipleGroupDeal;
+      _$FetchPrincipleGroupDealImpl;
 
   SalesOrganisation get salesOrganisation;
   CustomerCodeInfo get customerCodeInfo;
   PriceComboDeal get priceComboDeal;
   @JsonKey(ignore: true)
-  _$$_FetchPrincipleGroupDealCopyWith<_$_FetchPrincipleGroupDeal>
+  _$$FetchPrincipleGroupDealImplCopyWith<_$FetchPrincipleGroupDealImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -723,11 +725,11 @@ class _$ComboDealListStateCopyWithImpl<$Res, $Val extends ComboDealListState>
 }
 
 /// @nodoc
-abstract class _$$_ComboDealListStateCopyWith<$Res>
+abstract class _$$ComboDealListStateImplCopyWith<$Res>
     implements $ComboDealListStateCopyWith<$Res> {
-  factory _$$_ComboDealListStateCopyWith(_$_ComboDealListState value,
-          $Res Function(_$_ComboDealListState) then) =
-      __$$_ComboDealListStateCopyWithImpl<$Res>;
+  factory _$$ComboDealListStateImplCopyWith(_$ComboDealListStateImpl value,
+          $Res Function(_$ComboDealListStateImpl) then) =
+      __$$ComboDealListStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -741,11 +743,11 @@ abstract class _$$_ComboDealListStateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_ComboDealListStateCopyWithImpl<$Res>
-    extends _$ComboDealListStateCopyWithImpl<$Res, _$_ComboDealListState>
-    implements _$$_ComboDealListStateCopyWith<$Res> {
-  __$$_ComboDealListStateCopyWithImpl(
-      _$_ComboDealListState _value, $Res Function(_$_ComboDealListState) _then)
+class __$$ComboDealListStateImplCopyWithImpl<$Res>
+    extends _$ComboDealListStateCopyWithImpl<$Res, _$ComboDealListStateImpl>
+    implements _$$ComboDealListStateImplCopyWith<$Res> {
+  __$$ComboDealListStateImplCopyWithImpl(_$ComboDealListStateImpl _value,
+      $Res Function(_$ComboDealListStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -756,7 +758,7 @@ class __$$_ComboDealListStateCopyWithImpl<$Res>
     Object? isFetching = null,
     Object? apiFailureOrSuccessOption = null,
   }) {
-    return _then(_$_ComboDealListState(
+    return _then(_$ComboDealListStateImpl(
       comboDeals: null == comboDeals
           ? _value._comboDeals
           : comboDeals // ignore: cast_nullable_to_non_nullable
@@ -779,8 +781,8 @@ class __$$_ComboDealListStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_ComboDealListState extends _ComboDealListState {
-  const _$_ComboDealListState(
+class _$ComboDealListStateImpl extends _ComboDealListState {
+  const _$ComboDealListStateImpl(
       {required final Map<String, List<ComboDeal>> comboDeals,
       required this.priceComboDeal,
       required this.isFetching,
@@ -809,10 +811,10 @@ class _$_ComboDealListState extends _ComboDealListState {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ComboDealListState &&
+            other is _$ComboDealListStateImpl &&
             const DeepCollectionEquality()
                 .equals(other._comboDeals, _comboDeals) &&
             (identical(other.priceComboDeal, priceComboDeal) ||
@@ -835,8 +837,8 @@ class _$_ComboDealListState extends _ComboDealListState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ComboDealListStateCopyWith<_$_ComboDealListState> get copyWith =>
-      __$$_ComboDealListStateCopyWithImpl<_$_ComboDealListState>(
+  _$$ComboDealListStateImplCopyWith<_$ComboDealListStateImpl> get copyWith =>
+      __$$ComboDealListStateImplCopyWithImpl<_$ComboDealListStateImpl>(
           this, _$identity);
 }
 
@@ -846,7 +848,7 @@ abstract class _ComboDealListState extends ComboDealListState {
       required final PriceComboDeal priceComboDeal,
       required final bool isFetching,
       required final Option<Either<ApiFailure, dynamic>>
-          apiFailureOrSuccessOption}) = _$_ComboDealListState;
+          apiFailureOrSuccessOption}) = _$ComboDealListStateImpl;
   const _ComboDealListState._() : super._();
 
   @override
@@ -859,6 +861,6 @@ abstract class _ComboDealListState extends ComboDealListState {
   Option<Either<ApiFailure, dynamic>> get apiFailureOrSuccessOption;
   @override
   @JsonKey(ignore: true)
-  _$$_ComboDealListStateCopyWith<_$_ComboDealListState> get copyWith =>
+  _$$ComboDealListStateImplCopyWith<_$ComboDealListStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

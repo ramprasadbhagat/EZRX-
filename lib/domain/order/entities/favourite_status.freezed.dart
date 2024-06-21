@@ -12,7 +12,7 @@ part of 'favourite_status.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$FavouriteStatus {
@@ -57,22 +57,22 @@ class _$FavouriteStatusCopyWithImpl<$Res, $Val extends FavouriteStatus>
 }
 
 /// @nodoc
-abstract class _$$_FavouriteStatusCopyWith<$Res>
+abstract class _$$FavouriteStatusImplCopyWith<$Res>
     implements $FavouriteStatusCopyWith<$Res> {
-  factory _$$_FavouriteStatusCopyWith(
-          _$_FavouriteStatus value, $Res Function(_$_FavouriteStatus) then) =
-      __$$_FavouriteStatusCopyWithImpl<$Res>;
+  factory _$$FavouriteStatusImplCopyWith(_$FavouriteStatusImpl value,
+          $Res Function(_$FavouriteStatusImpl) then) =
+      __$$FavouriteStatusImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({bool isFavourite});
 }
 
 /// @nodoc
-class __$$_FavouriteStatusCopyWithImpl<$Res>
-    extends _$FavouriteStatusCopyWithImpl<$Res, _$_FavouriteStatus>
-    implements _$$_FavouriteStatusCopyWith<$Res> {
-  __$$_FavouriteStatusCopyWithImpl(
-      _$_FavouriteStatus _value, $Res Function(_$_FavouriteStatus) _then)
+class __$$FavouriteStatusImplCopyWithImpl<$Res>
+    extends _$FavouriteStatusCopyWithImpl<$Res, _$FavouriteStatusImpl>
+    implements _$$FavouriteStatusImplCopyWith<$Res> {
+  __$$FavouriteStatusImplCopyWithImpl(
+      _$FavouriteStatusImpl _value, $Res Function(_$FavouriteStatusImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -80,7 +80,7 @@ class __$$_FavouriteStatusCopyWithImpl<$Res>
   $Res call({
     Object? isFavourite = null,
   }) {
-    return _then(_$_FavouriteStatus(
+    return _then(_$FavouriteStatusImpl(
       isFavourite: null == isFavourite
           ? _value.isFavourite
           : isFavourite // ignore: cast_nullable_to_non_nullable
@@ -91,8 +91,8 @@ class __$$_FavouriteStatusCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_FavouriteStatus extends _FavouriteStatus {
-  const _$_FavouriteStatus({required this.isFavourite}) : super._();
+class _$FavouriteStatusImpl extends _FavouriteStatus {
+  const _$FavouriteStatusImpl({required this.isFavourite}) : super._();
 
   @override
   final bool isFavourite;
@@ -103,10 +103,10 @@ class _$_FavouriteStatus extends _FavouriteStatus {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_FavouriteStatus &&
+            other is _$FavouriteStatusImpl &&
             (identical(other.isFavourite, isFavourite) ||
                 other.isFavourite == isFavourite));
   }
@@ -117,19 +117,20 @@ class _$_FavouriteStatus extends _FavouriteStatus {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_FavouriteStatusCopyWith<_$_FavouriteStatus> get copyWith =>
-      __$$_FavouriteStatusCopyWithImpl<_$_FavouriteStatus>(this, _$identity);
+  _$$FavouriteStatusImplCopyWith<_$FavouriteStatusImpl> get copyWith =>
+      __$$FavouriteStatusImplCopyWithImpl<_$FavouriteStatusImpl>(
+          this, _$identity);
 }
 
 abstract class _FavouriteStatus extends FavouriteStatus {
   const factory _FavouriteStatus({required final bool isFavourite}) =
-      _$_FavouriteStatus;
+      _$FavouriteStatusImpl;
   const _FavouriteStatus._() : super._();
 
   @override
   bool get isFavourite;
   @override
   @JsonKey(ignore: true)
-  _$$_FavouriteStatusCopyWith<_$_FavouriteStatus> get copyWith =>
+  _$$FavouriteStatusImplCopyWith<_$FavouriteStatusImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

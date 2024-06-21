@@ -12,7 +12,7 @@ part of 'faq_info.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$FAQInfo {
@@ -61,20 +61,21 @@ class _$FAQInfoCopyWithImpl<$Res, $Val extends FAQInfo>
 }
 
 /// @nodoc
-abstract class _$$_FAQInfoCopyWith<$Res> implements $FAQInfoCopyWith<$Res> {
-  factory _$$_FAQInfoCopyWith(
-          _$_FAQInfo value, $Res Function(_$_FAQInfo) then) =
-      __$$_FAQInfoCopyWithImpl<$Res>;
+abstract class _$$FAQInfoImplCopyWith<$Res> implements $FAQInfoCopyWith<$Res> {
+  factory _$$FAQInfoImplCopyWith(
+          _$FAQInfoImpl value, $Res Function(_$FAQInfoImpl) then) =
+      __$$FAQInfoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String endCursor, List<FAQItem> faqList});
 }
 
 /// @nodoc
-class __$$_FAQInfoCopyWithImpl<$Res>
-    extends _$FAQInfoCopyWithImpl<$Res, _$_FAQInfo>
-    implements _$$_FAQInfoCopyWith<$Res> {
-  __$$_FAQInfoCopyWithImpl(_$_FAQInfo _value, $Res Function(_$_FAQInfo) _then)
+class __$$FAQInfoImplCopyWithImpl<$Res>
+    extends _$FAQInfoCopyWithImpl<$Res, _$FAQInfoImpl>
+    implements _$$FAQInfoImplCopyWith<$Res> {
+  __$$FAQInfoImplCopyWithImpl(
+      _$FAQInfoImpl _value, $Res Function(_$FAQInfoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -83,7 +84,7 @@ class __$$_FAQInfoCopyWithImpl<$Res>
     Object? endCursor = null,
     Object? faqList = null,
   }) {
-    return _then(_$_FAQInfo(
+    return _then(_$FAQInfoImpl(
       endCursor: null == endCursor
           ? _value.endCursor
           : endCursor // ignore: cast_nullable_to_non_nullable
@@ -98,8 +99,8 @@ class __$$_FAQInfoCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_FAQInfo extends _FAQInfo {
-  const _$_FAQInfo(
+class _$FAQInfoImpl extends _FAQInfo {
+  const _$FAQInfoImpl(
       {required this.endCursor, required final List<FAQItem> faqList})
       : _faqList = faqList,
         super._();
@@ -120,10 +121,10 @@ class _$_FAQInfo extends _FAQInfo {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_FAQInfo &&
+            other is _$FAQInfoImpl &&
             (identical(other.endCursor, endCursor) ||
                 other.endCursor == endCursor) &&
             const DeepCollectionEquality().equals(other._faqList, _faqList));
@@ -136,14 +137,14 @@ class _$_FAQInfo extends _FAQInfo {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_FAQInfoCopyWith<_$_FAQInfo> get copyWith =>
-      __$$_FAQInfoCopyWithImpl<_$_FAQInfo>(this, _$identity);
+  _$$FAQInfoImplCopyWith<_$FAQInfoImpl> get copyWith =>
+      __$$FAQInfoImplCopyWithImpl<_$FAQInfoImpl>(this, _$identity);
 }
 
 abstract class _FAQInfo extends FAQInfo {
   const factory _FAQInfo(
       {required final String endCursor,
-      required final List<FAQItem> faqList}) = _$_FAQInfo;
+      required final List<FAQItem> faqList}) = _$FAQInfoImpl;
   const _FAQInfo._() : super._();
 
   @override
@@ -152,6 +153,6 @@ abstract class _FAQInfo extends FAQInfo {
   List<FAQItem> get faqList;
   @override
   @JsonKey(ignore: true)
-  _$$_FAQInfoCopyWith<_$_FAQInfo> get copyWith =>
+  _$$FAQInfoImplCopyWith<_$FAQInfoImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

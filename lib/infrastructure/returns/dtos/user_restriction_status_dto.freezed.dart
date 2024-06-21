@@ -12,7 +12,7 @@ part of 'user_restriction_status_dto.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 UserRestrictionStatusDto _$UserRestrictionStatusDtoFromJson(
     Map<String, dynamic> json) {
@@ -45,10 +45,16 @@ abstract class $UserRestrictionStatusDtoCopyWith<$Res> {
       _$UserRestrictionStatusDtoCopyWithImpl<$Res, UserRestrictionStatusDto>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'approverRightStatus', defaultValue: '', readValue: _userRestrictionOverride)
-          String userRestrictionStatus,
-      @JsonKey(name: 'approvalLimitStatus', defaultValue: false, readValue: _userReturnApprovalLimitOverride)
-          bool userReturnApprovalLimit});
+      {@JsonKey(
+          name: 'approverRightStatus',
+          defaultValue: '',
+          readValue: _userRestrictionOverride)
+      String userRestrictionStatus,
+      @JsonKey(
+          name: 'approvalLimitStatus',
+          defaultValue: false,
+          readValue: _userReturnApprovalLimitOverride)
+      bool userReturnApprovalLimit});
 }
 
 /// @nodoc
@@ -82,28 +88,35 @@ class _$UserRestrictionStatusDtoCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_UserRestrictionStatusDtoCopyWith<$Res>
+abstract class _$$UserRestrictionStatusDtoImplCopyWith<$Res>
     implements $UserRestrictionStatusDtoCopyWith<$Res> {
-  factory _$$_UserRestrictionStatusDtoCopyWith(
-          _$_UserRestrictionStatusDto value,
-          $Res Function(_$_UserRestrictionStatusDto) then) =
-      __$$_UserRestrictionStatusDtoCopyWithImpl<$Res>;
+  factory _$$UserRestrictionStatusDtoImplCopyWith(
+          _$UserRestrictionStatusDtoImpl value,
+          $Res Function(_$UserRestrictionStatusDtoImpl) then) =
+      __$$UserRestrictionStatusDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'approverRightStatus', defaultValue: '', readValue: _userRestrictionOverride)
-          String userRestrictionStatus,
-      @JsonKey(name: 'approvalLimitStatus', defaultValue: false, readValue: _userReturnApprovalLimitOverride)
-          bool userReturnApprovalLimit});
+      {@JsonKey(
+          name: 'approverRightStatus',
+          defaultValue: '',
+          readValue: _userRestrictionOverride)
+      String userRestrictionStatus,
+      @JsonKey(
+          name: 'approvalLimitStatus',
+          defaultValue: false,
+          readValue: _userReturnApprovalLimitOverride)
+      bool userReturnApprovalLimit});
 }
 
 /// @nodoc
-class __$$_UserRestrictionStatusDtoCopyWithImpl<$Res>
+class __$$UserRestrictionStatusDtoImplCopyWithImpl<$Res>
     extends _$UserRestrictionStatusDtoCopyWithImpl<$Res,
-        _$_UserRestrictionStatusDto>
-    implements _$$_UserRestrictionStatusDtoCopyWith<$Res> {
-  __$$_UserRestrictionStatusDtoCopyWithImpl(_$_UserRestrictionStatusDto _value,
-      $Res Function(_$_UserRestrictionStatusDto) _then)
+        _$UserRestrictionStatusDtoImpl>
+    implements _$$UserRestrictionStatusDtoImplCopyWith<$Res> {
+  __$$UserRestrictionStatusDtoImplCopyWithImpl(
+      _$UserRestrictionStatusDtoImpl _value,
+      $Res Function(_$UserRestrictionStatusDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -112,7 +125,7 @@ class __$$_UserRestrictionStatusDtoCopyWithImpl<$Res>
     Object? userRestrictionStatus = null,
     Object? userReturnApprovalLimit = null,
   }) {
-    return _then(_$_UserRestrictionStatusDto(
+    return _then(_$UserRestrictionStatusDtoImpl(
       userRestrictionStatus: null == userRestrictionStatus
           ? _value.userRestrictionStatus
           : userRestrictionStatus // ignore: cast_nullable_to_non_nullable
@@ -127,16 +140,22 @@ class __$$_UserRestrictionStatusDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_UserRestrictionStatusDto extends _UserRestrictionStatusDto {
-  const _$_UserRestrictionStatusDto(
-      {@JsonKey(name: 'approverRightStatus', defaultValue: '', readValue: _userRestrictionOverride)
-          required this.userRestrictionStatus,
-      @JsonKey(name: 'approvalLimitStatus', defaultValue: false, readValue: _userReturnApprovalLimitOverride)
-          required this.userReturnApprovalLimit})
+class _$UserRestrictionStatusDtoImpl extends _UserRestrictionStatusDto {
+  const _$UserRestrictionStatusDtoImpl(
+      {@JsonKey(
+          name: 'approverRightStatus',
+          defaultValue: '',
+          readValue: _userRestrictionOverride)
+      required this.userRestrictionStatus,
+      @JsonKey(
+          name: 'approvalLimitStatus',
+          defaultValue: false,
+          readValue: _userReturnApprovalLimitOverride)
+      required this.userReturnApprovalLimit})
       : super._();
 
-  factory _$_UserRestrictionStatusDto.fromJson(Map<String, dynamic> json) =>
-      _$$_UserRestrictionStatusDtoFromJson(json);
+  factory _$UserRestrictionStatusDtoImpl.fromJson(Map<String, dynamic> json) =>
+      _$$UserRestrictionStatusDtoImplFromJson(json);
 
   @override
   @JsonKey(
@@ -157,10 +176,10 @@ class _$_UserRestrictionStatusDto extends _UserRestrictionStatusDto {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_UserRestrictionStatusDto &&
+            other is _$UserRestrictionStatusDtoImpl &&
             (identical(other.userRestrictionStatus, userRestrictionStatus) ||
                 other.userRestrictionStatus == userRestrictionStatus) &&
             (identical(
@@ -176,13 +195,13 @@ class _$_UserRestrictionStatusDto extends _UserRestrictionStatusDto {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_UserRestrictionStatusDtoCopyWith<_$_UserRestrictionStatusDto>
-      get copyWith => __$$_UserRestrictionStatusDtoCopyWithImpl<
-          _$_UserRestrictionStatusDto>(this, _$identity);
+  _$$UserRestrictionStatusDtoImplCopyWith<_$UserRestrictionStatusDtoImpl>
+      get copyWith => __$$UserRestrictionStatusDtoImplCopyWithImpl<
+          _$UserRestrictionStatusDtoImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_UserRestrictionStatusDtoToJson(
+    return _$$UserRestrictionStatusDtoImplToJson(
       this,
     );
   }
@@ -190,14 +209,21 @@ class _$_UserRestrictionStatusDto extends _UserRestrictionStatusDto {
 
 abstract class _UserRestrictionStatusDto extends UserRestrictionStatusDto {
   const factory _UserRestrictionStatusDto(
-      {@JsonKey(name: 'approverRightStatus', defaultValue: '', readValue: _userRestrictionOverride)
+          {@JsonKey(
+              name: 'approverRightStatus',
+              defaultValue: '',
+              readValue: _userRestrictionOverride)
           required final String userRestrictionStatus,
-      @JsonKey(name: 'approvalLimitStatus', defaultValue: false, readValue: _userReturnApprovalLimitOverride)
-          required final bool userReturnApprovalLimit}) = _$_UserRestrictionStatusDto;
+          @JsonKey(
+              name: 'approvalLimitStatus',
+              defaultValue: false,
+              readValue: _userReturnApprovalLimitOverride)
+          required final bool userReturnApprovalLimit}) =
+      _$UserRestrictionStatusDtoImpl;
   const _UserRestrictionStatusDto._() : super._();
 
   factory _UserRestrictionStatusDto.fromJson(Map<String, dynamic> json) =
-      _$_UserRestrictionStatusDto.fromJson;
+      _$UserRestrictionStatusDtoImpl.fromJson;
 
   @override
   @JsonKey(
@@ -213,6 +239,6 @@ abstract class _UserRestrictionStatusDto extends UserRestrictionStatusDto {
   bool get userReturnApprovalLimit;
   @override
   @JsonKey(ignore: true)
-  _$$_UserRestrictionStatusDtoCopyWith<_$_UserRestrictionStatusDto>
+  _$$UserRestrictionStatusDtoImplCopyWith<_$UserRestrictionStatusDtoImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

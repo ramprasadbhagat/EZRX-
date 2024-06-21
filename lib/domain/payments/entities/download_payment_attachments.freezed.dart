@@ -12,7 +12,7 @@ part of 'download_payment_attachments.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$DownloadPaymentAttachment {
@@ -58,25 +58,25 @@ class _$DownloadPaymentAttachmentCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_DownloadPaymentAttachmentCopyWith<$Res>
+abstract class _$$DownloadPaymentAttachmentImplCopyWith<$Res>
     implements $DownloadPaymentAttachmentCopyWith<$Res> {
-  factory _$$_DownloadPaymentAttachmentCopyWith(
-          _$_DownloadPaymentAttachment value,
-          $Res Function(_$_DownloadPaymentAttachment) then) =
-      __$$_DownloadPaymentAttachmentCopyWithImpl<$Res>;
+  factory _$$DownloadPaymentAttachmentImplCopyWith(
+          _$DownloadPaymentAttachmentImpl value,
+          $Res Function(_$DownloadPaymentAttachmentImpl) then) =
+      __$$DownloadPaymentAttachmentImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String url});
 }
 
 /// @nodoc
-class __$$_DownloadPaymentAttachmentCopyWithImpl<$Res>
+class __$$DownloadPaymentAttachmentImplCopyWithImpl<$Res>
     extends _$DownloadPaymentAttachmentCopyWithImpl<$Res,
-        _$_DownloadPaymentAttachment>
-    implements _$$_DownloadPaymentAttachmentCopyWith<$Res> {
-  __$$_DownloadPaymentAttachmentCopyWithImpl(
-      _$_DownloadPaymentAttachment _value,
-      $Res Function(_$_DownloadPaymentAttachment) _then)
+        _$DownloadPaymentAttachmentImpl>
+    implements _$$DownloadPaymentAttachmentImplCopyWith<$Res> {
+  __$$DownloadPaymentAttachmentImplCopyWithImpl(
+      _$DownloadPaymentAttachmentImpl _value,
+      $Res Function(_$DownloadPaymentAttachmentImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -84,7 +84,7 @@ class __$$_DownloadPaymentAttachmentCopyWithImpl<$Res>
   $Res call({
     Object? url = null,
   }) {
-    return _then(_$_DownloadPaymentAttachment(
+    return _then(_$DownloadPaymentAttachmentImpl(
       url: null == url
           ? _value.url
           : url // ignore: cast_nullable_to_non_nullable
@@ -95,8 +95,8 @@ class __$$_DownloadPaymentAttachmentCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_DownloadPaymentAttachment extends _DownloadPaymentAttachment {
-  const _$_DownloadPaymentAttachment({required this.url}) : super._();
+class _$DownloadPaymentAttachmentImpl extends _DownloadPaymentAttachment {
+  const _$DownloadPaymentAttachmentImpl({required this.url}) : super._();
 
   @override
   final String url;
@@ -107,10 +107,10 @@ class _$_DownloadPaymentAttachment extends _DownloadPaymentAttachment {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_DownloadPaymentAttachment &&
+            other is _$DownloadPaymentAttachmentImpl &&
             (identical(other.url, url) || other.url == url));
   }
 
@@ -120,20 +120,20 @@ class _$_DownloadPaymentAttachment extends _DownloadPaymentAttachment {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_DownloadPaymentAttachmentCopyWith<_$_DownloadPaymentAttachment>
-      get copyWith => __$$_DownloadPaymentAttachmentCopyWithImpl<
-          _$_DownloadPaymentAttachment>(this, _$identity);
+  _$$DownloadPaymentAttachmentImplCopyWith<_$DownloadPaymentAttachmentImpl>
+      get copyWith => __$$DownloadPaymentAttachmentImplCopyWithImpl<
+          _$DownloadPaymentAttachmentImpl>(this, _$identity);
 }
 
 abstract class _DownloadPaymentAttachment extends DownloadPaymentAttachment {
   const factory _DownloadPaymentAttachment({required final String url}) =
-      _$_DownloadPaymentAttachment;
+      _$DownloadPaymentAttachmentImpl;
   const _DownloadPaymentAttachment._() : super._();
 
   @override
   String get url;
   @override
   @JsonKey(ignore: true)
-  _$$_DownloadPaymentAttachmentCopyWith<_$_DownloadPaymentAttachment>
+  _$$DownloadPaymentAttachmentImplCopyWith<_$DownloadPaymentAttachmentImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

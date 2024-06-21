@@ -12,7 +12,7 @@ part of 'customer_license_dto.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 CustomerLicenseDto _$CustomerLicenseDtoFromJson(Map<String, dynamic> json) {
   return _CustomerLicenseDto.fromJson(json);
@@ -105,11 +105,11 @@ class _$CustomerLicenseDtoCopyWithImpl<$Res, $Val extends CustomerLicenseDto>
 }
 
 /// @nodoc
-abstract class _$$_CustomerLicenseDtoCopyWith<$Res>
+abstract class _$$CustomerLicenseDtoImplCopyWith<$Res>
     implements $CustomerLicenseDtoCopyWith<$Res> {
-  factory _$$_CustomerLicenseDtoCopyWith(_$_CustomerLicenseDto value,
-          $Res Function(_$_CustomerLicenseDto) then) =
-      __$$_CustomerLicenseDtoCopyWithImpl<$Res>;
+  factory _$$CustomerLicenseDtoImplCopyWith(_$CustomerLicenseDtoImpl value,
+          $Res Function(_$CustomerLicenseDtoImpl) then) =
+      __$$CustomerLicenseDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -123,11 +123,11 @@ abstract class _$$_CustomerLicenseDtoCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_CustomerLicenseDtoCopyWithImpl<$Res>
-    extends _$CustomerLicenseDtoCopyWithImpl<$Res, _$_CustomerLicenseDto>
-    implements _$$_CustomerLicenseDtoCopyWith<$Res> {
-  __$$_CustomerLicenseDtoCopyWithImpl(
-      _$_CustomerLicenseDto _value, $Res Function(_$_CustomerLicenseDto) _then)
+class __$$CustomerLicenseDtoImplCopyWithImpl<$Res>
+    extends _$CustomerLicenseDtoCopyWithImpl<$Res, _$CustomerLicenseDtoImpl>
+    implements _$$CustomerLicenseDtoImplCopyWith<$Res> {
+  __$$CustomerLicenseDtoImplCopyWithImpl(_$CustomerLicenseDtoImpl _value,
+      $Res Function(_$CustomerLicenseDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -140,7 +140,7 @@ class __$$_CustomerLicenseDtoCopyWithImpl<$Res>
     Object? licenseDescription = null,
     Object? status = null,
   }) {
-    return _then(_$_CustomerLicenseDto(
+    return _then(_$CustomerLicenseDtoImpl(
       licenseType: null == licenseType
           ? _value.licenseType
           : licenseType // ignore: cast_nullable_to_non_nullable
@@ -171,8 +171,8 @@ class __$$_CustomerLicenseDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_CustomerLicenseDto extends _CustomerLicenseDto {
-  _$_CustomerLicenseDto(
+class _$CustomerLicenseDtoImpl extends _CustomerLicenseDto {
+  _$CustomerLicenseDtoImpl(
       {@JsonKey(name: 'licenceType', defaultValue: '')
       required this.licenseType,
       @JsonKey(name: 'licenseNumber', defaultValue: '')
@@ -184,8 +184,8 @@ class _$_CustomerLicenseDto extends _CustomerLicenseDto {
       @JsonKey(name: 'status', defaultValue: '') required this.status})
       : super._();
 
-  factory _$_CustomerLicenseDto.fromJson(Map<String, dynamic> json) =>
-      _$$_CustomerLicenseDtoFromJson(json);
+  factory _$CustomerLicenseDtoImpl.fromJson(Map<String, dynamic> json) =>
+      _$$CustomerLicenseDtoImplFromJson(json);
 
   @override
   @JsonKey(name: 'licenceType', defaultValue: '')
@@ -212,10 +212,10 @@ class _$_CustomerLicenseDto extends _CustomerLicenseDto {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_CustomerLicenseDto &&
+            other is _$CustomerLicenseDtoImpl &&
             (identical(other.licenseType, licenseType) ||
                 other.licenseType == licenseType) &&
             (identical(other.licenseNumber, licenseNumber) ||
@@ -236,13 +236,13 @@ class _$_CustomerLicenseDto extends _CustomerLicenseDto {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_CustomerLicenseDtoCopyWith<_$_CustomerLicenseDto> get copyWith =>
-      __$$_CustomerLicenseDtoCopyWithImpl<_$_CustomerLicenseDto>(
+  _$$CustomerLicenseDtoImplCopyWith<_$CustomerLicenseDtoImpl> get copyWith =>
+      __$$CustomerLicenseDtoImplCopyWithImpl<_$CustomerLicenseDtoImpl>(
           this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_CustomerLicenseDtoToJson(
+    return _$$CustomerLicenseDtoImplToJson(
       this,
     );
   }
@@ -260,11 +260,11 @@ abstract class _CustomerLicenseDto extends CustomerLicenseDto {
       @JsonKey(name: 'licenseDescription', defaultValue: '')
       required final String licenseDescription,
       @JsonKey(name: 'status', defaultValue: '')
-      required final String status}) = _$_CustomerLicenseDto;
+      required final String status}) = _$CustomerLicenseDtoImpl;
   _CustomerLicenseDto._() : super._();
 
   factory _CustomerLicenseDto.fromJson(Map<String, dynamic> json) =
-      _$_CustomerLicenseDto.fromJson;
+      _$CustomerLicenseDtoImpl.fromJson;
 
   @override
   @JsonKey(name: 'licenceType', defaultValue: '')
@@ -286,6 +286,6 @@ abstract class _CustomerLicenseDto extends CustomerLicenseDto {
   String get status;
   @override
   @JsonKey(ignore: true)
-  _$$_CustomerLicenseDtoCopyWith<_$_CustomerLicenseDto> get copyWith =>
+  _$$CustomerLicenseDtoImplCopyWith<_$CustomerLicenseDtoImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

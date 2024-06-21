@@ -12,7 +12,7 @@ part of 'bu_contact.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$BuContact {
@@ -62,21 +62,22 @@ class _$BuContactCopyWithImpl<$Res, $Val extends BuContact>
 }
 
 /// @nodoc
-abstract class _$$_BuContactCopyWith<$Res> implements $BuContactCopyWith<$Res> {
-  factory _$$_BuContactCopyWith(
-          _$_BuContact value, $Res Function(_$_BuContact) then) =
-      __$$_BuContactCopyWithImpl<$Res>;
+abstract class _$$BuContactImplCopyWith<$Res>
+    implements $BuContactCopyWith<$Res> {
+  factory _$$BuContactImplCopyWith(
+          _$BuContactImpl value, $Res Function(_$BuContactImpl) then) =
+      __$$BuContactImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String instruction, List<PhoneNumber> phoneNumbers});
 }
 
 /// @nodoc
-class __$$_BuContactCopyWithImpl<$Res>
-    extends _$BuContactCopyWithImpl<$Res, _$_BuContact>
-    implements _$$_BuContactCopyWith<$Res> {
-  __$$_BuContactCopyWithImpl(
-      _$_BuContact _value, $Res Function(_$_BuContact) _then)
+class __$$BuContactImplCopyWithImpl<$Res>
+    extends _$BuContactCopyWithImpl<$Res, _$BuContactImpl>
+    implements _$$BuContactImplCopyWith<$Res> {
+  __$$BuContactImplCopyWithImpl(
+      _$BuContactImpl _value, $Res Function(_$BuContactImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -85,7 +86,7 @@ class __$$_BuContactCopyWithImpl<$Res>
     Object? instruction = null,
     Object? phoneNumbers = null,
   }) {
-    return _then(_$_BuContact(
+    return _then(_$BuContactImpl(
       instruction: null == instruction
           ? _value.instruction
           : instruction // ignore: cast_nullable_to_non_nullable
@@ -100,8 +101,8 @@ class __$$_BuContactCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_BuContact extends _BuContact {
-  const _$_BuContact(
+class _$BuContactImpl extends _BuContact {
+  const _$BuContactImpl(
       {required this.instruction,
       required final List<PhoneNumber> phoneNumbers})
       : _phoneNumbers = phoneNumbers,
@@ -123,10 +124,10 @@ class _$_BuContact extends _BuContact {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_BuContact &&
+            other is _$BuContactImpl &&
             (identical(other.instruction, instruction) ||
                 other.instruction == instruction) &&
             const DeepCollectionEquality()
@@ -140,14 +141,14 @@ class _$_BuContact extends _BuContact {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_BuContactCopyWith<_$_BuContact> get copyWith =>
-      __$$_BuContactCopyWithImpl<_$_BuContact>(this, _$identity);
+  _$$BuContactImplCopyWith<_$BuContactImpl> get copyWith =>
+      __$$BuContactImplCopyWithImpl<_$BuContactImpl>(this, _$identity);
 }
 
 abstract class _BuContact extends BuContact {
   const factory _BuContact(
       {required final String instruction,
-      required final List<PhoneNumber> phoneNumbers}) = _$_BuContact;
+      required final List<PhoneNumber> phoneNumbers}) = _$BuContactImpl;
   const _BuContact._() : super._();
 
   @override
@@ -156,6 +157,6 @@ abstract class _BuContact extends BuContact {
   List<PhoneNumber> get phoneNumbers;
   @override
   @JsonKey(ignore: true)
-  _$$_BuContactCopyWith<_$_BuContact> get copyWith =>
+  _$$BuContactImplCopyWith<_$BuContactImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

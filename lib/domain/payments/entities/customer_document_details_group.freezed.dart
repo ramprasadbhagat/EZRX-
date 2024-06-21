@@ -12,7 +12,7 @@ part of 'customer_document_details_group.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$CustomerDocumentDetailGroup {
@@ -66,25 +66,25 @@ class _$CustomerDocumentDetailGroupCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_CustomerDocumentDetailGroupCopyWith<$Res>
+abstract class _$$CustomerDocumentDetailGroupImplCopyWith<$Res>
     implements $CustomerDocumentDetailGroupCopyWith<$Res> {
-  factory _$$_CustomerDocumentDetailGroupCopyWith(
-          _$_CustomerDocumentDetailGroup value,
-          $Res Function(_$_CustomerDocumentDetailGroup) then) =
-      __$$_CustomerDocumentDetailGroupCopyWithImpl<$Res>;
+  factory _$$CustomerDocumentDetailGroupImplCopyWith(
+          _$CustomerDocumentDetailGroupImpl value,
+          $Res Function(_$CustomerDocumentDetailGroupImpl) then) =
+      __$$CustomerDocumentDetailGroupImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({PrincipalName principalName, List<CustomerDocumentDetail> items});
 }
 
 /// @nodoc
-class __$$_CustomerDocumentDetailGroupCopyWithImpl<$Res>
+class __$$CustomerDocumentDetailGroupImplCopyWithImpl<$Res>
     extends _$CustomerDocumentDetailGroupCopyWithImpl<$Res,
-        _$_CustomerDocumentDetailGroup>
-    implements _$$_CustomerDocumentDetailGroupCopyWith<$Res> {
-  __$$_CustomerDocumentDetailGroupCopyWithImpl(
-      _$_CustomerDocumentDetailGroup _value,
-      $Res Function(_$_CustomerDocumentDetailGroup) _then)
+        _$CustomerDocumentDetailGroupImpl>
+    implements _$$CustomerDocumentDetailGroupImplCopyWith<$Res> {
+  __$$CustomerDocumentDetailGroupImplCopyWithImpl(
+      _$CustomerDocumentDetailGroupImpl _value,
+      $Res Function(_$CustomerDocumentDetailGroupImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -93,7 +93,7 @@ class __$$_CustomerDocumentDetailGroupCopyWithImpl<$Res>
     Object? principalName = null,
     Object? items = null,
   }) {
-    return _then(_$_CustomerDocumentDetailGroup(
+    return _then(_$CustomerDocumentDetailGroupImpl(
       principalName: null == principalName
           ? _value.principalName
           : principalName // ignore: cast_nullable_to_non_nullable
@@ -108,8 +108,9 @@ class __$$_CustomerDocumentDetailGroupCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_CustomerDocumentDetailGroup implements _CustomerDocumentDetailGroup {
-  _$_CustomerDocumentDetailGroup(
+class _$CustomerDocumentDetailGroupImpl
+    implements _CustomerDocumentDetailGroup {
+  _$CustomerDocumentDetailGroupImpl(
       {required this.principalName,
       required final List<CustomerDocumentDetail> items})
       : _items = items;
@@ -130,10 +131,10 @@ class _$_CustomerDocumentDetailGroup implements _CustomerDocumentDetailGroup {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_CustomerDocumentDetailGroup &&
+            other is _$CustomerDocumentDetailGroupImpl &&
             (identical(other.principalName, principalName) ||
                 other.principalName == principalName) &&
             const DeepCollectionEquality().equals(other._items, _items));
@@ -146,9 +147,9 @@ class _$_CustomerDocumentDetailGroup implements _CustomerDocumentDetailGroup {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_CustomerDocumentDetailGroupCopyWith<_$_CustomerDocumentDetailGroup>
-      get copyWith => __$$_CustomerDocumentDetailGroupCopyWithImpl<
-          _$_CustomerDocumentDetailGroup>(this, _$identity);
+  _$$CustomerDocumentDetailGroupImplCopyWith<_$CustomerDocumentDetailGroupImpl>
+      get copyWith => __$$CustomerDocumentDetailGroupImplCopyWithImpl<
+          _$CustomerDocumentDetailGroupImpl>(this, _$identity);
 }
 
 abstract class _CustomerDocumentDetailGroup
@@ -156,7 +157,7 @@ abstract class _CustomerDocumentDetailGroup
   factory _CustomerDocumentDetailGroup(
           {required final PrincipalName principalName,
           required final List<CustomerDocumentDetail> items}) =
-      _$_CustomerDocumentDetailGroup;
+      _$CustomerDocumentDetailGroupImpl;
 
   @override
   PrincipalName get principalName;
@@ -164,6 +165,6 @@ abstract class _CustomerDocumentDetailGroup
   List<CustomerDocumentDetail> get items;
   @override
   @JsonKey(ignore: true)
-  _$$_CustomerDocumentDetailGroupCopyWith<_$_CustomerDocumentDetailGroup>
+  _$$CustomerDocumentDetailGroupImplCopyWith<_$CustomerDocumentDetailGroupImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

@@ -12,7 +12,7 @@ part of 'full_summary_filter_dto.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 FullSummaryFilterDto _$FullSummaryFilterDtoFromJson(Map<String, dynamic> json) {
   return _FullSummaryFilterDto.fromJson(json);
@@ -46,18 +46,13 @@ abstract class $FullSummaryFilterDtoCopyWith<$Res> {
       _$FullSummaryFilterDtoCopyWithImpl<$Res, FullSummaryFilterDto>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'dueDateFrom', defaultValue: '')
-          String dueDateFrom,
-      @JsonKey(name: 'dueDateTo', defaultValue: '')
-          String dueDateTo,
+      {@JsonKey(name: 'dueDateFrom', defaultValue: '') String dueDateFrom,
+      @JsonKey(name: 'dueDateTo', defaultValue: '') String dueDateTo,
       @JsonKey(name: 'documentDateFrom', defaultValue: '')
-          String documentDateFrom,
-      @JsonKey(name: 'documentDateTo', defaultValue: '')
-          String documentDateTo,
-      @JsonKey(name: 'filterStatuses', defaultValue: '')
-          String filterStatuses,
-      @JsonKey(name: 'accountingDocument', defaultValue: '')
-          String searchKey});
+      String documentDateFrom,
+      @JsonKey(name: 'documentDateTo', defaultValue: '') String documentDateTo,
+      @JsonKey(name: 'filterStatuses', defaultValue: '') String filterStatuses,
+      @JsonKey(name: 'accountingDocument', defaultValue: '') String searchKey});
 }
 
 /// @nodoc
@@ -111,34 +106,29 @@ class _$FullSummaryFilterDtoCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_FullSummaryFilterDtoCopyWith<$Res>
+abstract class _$$FullSummaryFilterDtoImplCopyWith<$Res>
     implements $FullSummaryFilterDtoCopyWith<$Res> {
-  factory _$$_FullSummaryFilterDtoCopyWith(_$_FullSummaryFilterDto value,
-          $Res Function(_$_FullSummaryFilterDto) then) =
-      __$$_FullSummaryFilterDtoCopyWithImpl<$Res>;
+  factory _$$FullSummaryFilterDtoImplCopyWith(_$FullSummaryFilterDtoImpl value,
+          $Res Function(_$FullSummaryFilterDtoImpl) then) =
+      __$$FullSummaryFilterDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'dueDateFrom', defaultValue: '')
-          String dueDateFrom,
-      @JsonKey(name: 'dueDateTo', defaultValue: '')
-          String dueDateTo,
+      {@JsonKey(name: 'dueDateFrom', defaultValue: '') String dueDateFrom,
+      @JsonKey(name: 'dueDateTo', defaultValue: '') String dueDateTo,
       @JsonKey(name: 'documentDateFrom', defaultValue: '')
-          String documentDateFrom,
-      @JsonKey(name: 'documentDateTo', defaultValue: '')
-          String documentDateTo,
-      @JsonKey(name: 'filterStatuses', defaultValue: '')
-          String filterStatuses,
-      @JsonKey(name: 'accountingDocument', defaultValue: '')
-          String searchKey});
+      String documentDateFrom,
+      @JsonKey(name: 'documentDateTo', defaultValue: '') String documentDateTo,
+      @JsonKey(name: 'filterStatuses', defaultValue: '') String filterStatuses,
+      @JsonKey(name: 'accountingDocument', defaultValue: '') String searchKey});
 }
 
 /// @nodoc
-class __$$_FullSummaryFilterDtoCopyWithImpl<$Res>
-    extends _$FullSummaryFilterDtoCopyWithImpl<$Res, _$_FullSummaryFilterDto>
-    implements _$$_FullSummaryFilterDtoCopyWith<$Res> {
-  __$$_FullSummaryFilterDtoCopyWithImpl(_$_FullSummaryFilterDto _value,
-      $Res Function(_$_FullSummaryFilterDto) _then)
+class __$$FullSummaryFilterDtoImplCopyWithImpl<$Res>
+    extends _$FullSummaryFilterDtoCopyWithImpl<$Res, _$FullSummaryFilterDtoImpl>
+    implements _$$FullSummaryFilterDtoImplCopyWith<$Res> {
+  __$$FullSummaryFilterDtoImplCopyWithImpl(_$FullSummaryFilterDtoImpl _value,
+      $Res Function(_$FullSummaryFilterDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -151,7 +141,7 @@ class __$$_FullSummaryFilterDtoCopyWithImpl<$Res>
     Object? filterStatuses = null,
     Object? searchKey = null,
   }) {
-    return _then(_$_FullSummaryFilterDto(
+    return _then(_$FullSummaryFilterDtoImpl(
       dueDateFrom: null == dueDateFrom
           ? _value.dueDateFrom
           : dueDateFrom // ignore: cast_nullable_to_non_nullable
@@ -182,24 +172,23 @@ class __$$_FullSummaryFilterDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_FullSummaryFilterDto extends _FullSummaryFilterDto {
-  const _$_FullSummaryFilterDto(
+class _$FullSummaryFilterDtoImpl extends _FullSummaryFilterDto {
+  const _$FullSummaryFilterDtoImpl(
       {@JsonKey(name: 'dueDateFrom', defaultValue: '')
-          required this.dueDateFrom,
-      @JsonKey(name: 'dueDateTo', defaultValue: '')
-          required this.dueDateTo,
+      required this.dueDateFrom,
+      @JsonKey(name: 'dueDateTo', defaultValue: '') required this.dueDateTo,
       @JsonKey(name: 'documentDateFrom', defaultValue: '')
-          required this.documentDateFrom,
+      required this.documentDateFrom,
       @JsonKey(name: 'documentDateTo', defaultValue: '')
-          required this.documentDateTo,
+      required this.documentDateTo,
       @JsonKey(name: 'filterStatuses', defaultValue: '')
-          required this.filterStatuses,
+      required this.filterStatuses,
       @JsonKey(name: 'accountingDocument', defaultValue: '')
-          required this.searchKey})
+      required this.searchKey})
       : super._();
 
-  factory _$_FullSummaryFilterDto.fromJson(Map<String, dynamic> json) =>
-      _$$_FullSummaryFilterDtoFromJson(json);
+  factory _$FullSummaryFilterDtoImpl.fromJson(Map<String, dynamic> json) =>
+      _$$FullSummaryFilterDtoImplFromJson(json);
 
   @override
   @JsonKey(name: 'dueDateFrom', defaultValue: '')
@@ -226,10 +215,10 @@ class _$_FullSummaryFilterDto extends _FullSummaryFilterDto {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_FullSummaryFilterDto &&
+            other is _$FullSummaryFilterDtoImpl &&
             (identical(other.dueDateFrom, dueDateFrom) ||
                 other.dueDateFrom == dueDateFrom) &&
             (identical(other.dueDateTo, dueDateTo) ||
@@ -252,13 +241,14 @@ class _$_FullSummaryFilterDto extends _FullSummaryFilterDto {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_FullSummaryFilterDtoCopyWith<_$_FullSummaryFilterDto> get copyWith =>
-      __$$_FullSummaryFilterDtoCopyWithImpl<_$_FullSummaryFilterDto>(
-          this, _$identity);
+  _$$FullSummaryFilterDtoImplCopyWith<_$FullSummaryFilterDtoImpl>
+      get copyWith =>
+          __$$FullSummaryFilterDtoImplCopyWithImpl<_$FullSummaryFilterDtoImpl>(
+              this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_FullSummaryFilterDtoToJson(
+    return _$$FullSummaryFilterDtoImplToJson(
       this,
     );
   }
@@ -267,21 +257,21 @@ class _$_FullSummaryFilterDto extends _FullSummaryFilterDto {
 abstract class _FullSummaryFilterDto extends FullSummaryFilterDto {
   const factory _FullSummaryFilterDto(
       {@JsonKey(name: 'dueDateFrom', defaultValue: '')
-          required final String dueDateFrom,
+      required final String dueDateFrom,
       @JsonKey(name: 'dueDateTo', defaultValue: '')
-          required final String dueDateTo,
+      required final String dueDateTo,
       @JsonKey(name: 'documentDateFrom', defaultValue: '')
-          required final String documentDateFrom,
+      required final String documentDateFrom,
       @JsonKey(name: 'documentDateTo', defaultValue: '')
-          required final String documentDateTo,
+      required final String documentDateTo,
       @JsonKey(name: 'filterStatuses', defaultValue: '')
-          required final String filterStatuses,
+      required final String filterStatuses,
       @JsonKey(name: 'accountingDocument', defaultValue: '')
-          required final String searchKey}) = _$_FullSummaryFilterDto;
+      required final String searchKey}) = _$FullSummaryFilterDtoImpl;
   const _FullSummaryFilterDto._() : super._();
 
   factory _FullSummaryFilterDto.fromJson(Map<String, dynamic> json) =
-      _$_FullSummaryFilterDto.fromJson;
+      _$FullSummaryFilterDtoImpl.fromJson;
 
   @override
   @JsonKey(name: 'dueDateFrom', defaultValue: '')
@@ -303,6 +293,6 @@ abstract class _FullSummaryFilterDto extends FullSummaryFilterDto {
   String get searchKey;
   @override
   @JsonKey(ignore: true)
-  _$$_FullSummaryFilterDtoCopyWith<_$_FullSummaryFilterDto> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$FullSummaryFilterDtoImplCopyWith<_$FullSummaryFilterDtoImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }

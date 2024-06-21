@@ -12,7 +12,7 @@ part of 'combo_deal_qty_tier.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$ComboDealQtyTier {
@@ -86,11 +86,11 @@ class _$ComboDealQtyTierCopyWithImpl<$Res, $Val extends ComboDealQtyTier>
 }
 
 /// @nodoc
-abstract class _$$_ComboDealQtyTierCopyWith<$Res>
+abstract class _$$ComboDealQtyTierImplCopyWith<$Res>
     implements $ComboDealQtyTierCopyWith<$Res> {
-  factory _$$_ComboDealQtyTierCopyWith(
-          _$_ComboDealQtyTier value, $Res Function(_$_ComboDealQtyTier) then) =
-      __$$_ComboDealQtyTierCopyWithImpl<$Res>;
+  factory _$$ComboDealQtyTierImplCopyWith(_$ComboDealQtyTierImpl value,
+          $Res Function(_$ComboDealQtyTierImpl) then) =
+      __$$ComboDealQtyTierImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -102,11 +102,11 @@ abstract class _$$_ComboDealQtyTierCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_ComboDealQtyTierCopyWithImpl<$Res>
-    extends _$ComboDealQtyTierCopyWithImpl<$Res, _$_ComboDealQtyTier>
-    implements _$$_ComboDealQtyTierCopyWith<$Res> {
-  __$$_ComboDealQtyTierCopyWithImpl(
-      _$_ComboDealQtyTier _value, $Res Function(_$_ComboDealQtyTier) _then)
+class __$$ComboDealQtyTierImplCopyWithImpl<$Res>
+    extends _$ComboDealQtyTierCopyWithImpl<$Res, _$ComboDealQtyTierImpl>
+    implements _$$ComboDealQtyTierImplCopyWith<$Res> {
+  __$$ComboDealQtyTierImplCopyWithImpl(_$ComboDealQtyTierImpl _value,
+      $Res Function(_$ComboDealQtyTierImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -118,7 +118,7 @@ class __$$_ComboDealQtyTierCopyWithImpl<$Res>
     Object? type = null,
     Object? suffix = null,
   }) {
-    return _then(_$_ComboDealQtyTier(
+    return _then(_$ComboDealQtyTierImpl(
       rate: null == rate
           ? _value.rate
           : rate // ignore: cast_nullable_to_non_nullable
@@ -145,8 +145,8 @@ class __$$_ComboDealQtyTierCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_ComboDealQtyTier extends _ComboDealQtyTier {
-  const _$_ComboDealQtyTier(
+class _$ComboDealQtyTierImpl extends _ComboDealQtyTier {
+  const _$ComboDealQtyTierImpl(
       {required this.rate,
       required this.conditionNumber,
       required this.minQty,
@@ -171,10 +171,10 @@ class _$_ComboDealQtyTier extends _ComboDealQtyTier {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ComboDealQtyTier &&
+            other is _$ComboDealQtyTierImpl &&
             (identical(other.rate, rate) || other.rate == rate) &&
             (identical(other.conditionNumber, conditionNumber) ||
                 other.conditionNumber == conditionNumber) &&
@@ -190,8 +190,9 @@ class _$_ComboDealQtyTier extends _ComboDealQtyTier {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ComboDealQtyTierCopyWith<_$_ComboDealQtyTier> get copyWith =>
-      __$$_ComboDealQtyTierCopyWithImpl<_$_ComboDealQtyTier>(this, _$identity);
+  _$$ComboDealQtyTierImplCopyWith<_$ComboDealQtyTierImpl> get copyWith =>
+      __$$ComboDealQtyTierImplCopyWithImpl<_$ComboDealQtyTierImpl>(
+          this, _$identity);
 }
 
 abstract class _ComboDealQtyTier extends ComboDealQtyTier {
@@ -200,7 +201,7 @@ abstract class _ComboDealQtyTier extends ComboDealQtyTier {
       required final String conditionNumber,
       required final int minQty,
       required final DiscountType type,
-      required final ComboSuffix suffix}) = _$_ComboDealQtyTier;
+      required final ComboSuffix suffix}) = _$ComboDealQtyTierImpl;
   const _ComboDealQtyTier._() : super._();
 
   @override
@@ -215,6 +216,6 @@ abstract class _ComboDealQtyTier extends ComboDealQtyTier {
   ComboSuffix get suffix;
   @override
   @JsonKey(ignore: true)
-  _$$_ComboDealQtyTierCopyWith<_$_ComboDealQtyTier> get copyWith =>
+  _$$ComboDealQtyTierImplCopyWith<_$ComboDealQtyTierImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -12,7 +12,7 @@ part of 'invoice_data_dto.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 InvoiceDataDto _$InvoiceDataDtoFromJson(Map<String, dynamic> json) {
   return _InvoiceDataDto.fromJson(json);
@@ -80,11 +80,11 @@ class _$InvoiceDataDtoCopyWithImpl<$Res, $Val extends InvoiceDataDto>
 }
 
 /// @nodoc
-abstract class _$$_InvoiceDataDtoCopyWith<$Res>
+abstract class _$$InvoiceDataDtoImplCopyWith<$Res>
     implements $InvoiceDataDtoCopyWith<$Res> {
-  factory _$$_InvoiceDataDtoCopyWith(
-          _$_InvoiceDataDto value, $Res Function(_$_InvoiceDataDto) then) =
-      __$$_InvoiceDataDtoCopyWithImpl<$Res>;
+  factory _$$InvoiceDataDtoImplCopyWith(_$InvoiceDataDtoImpl value,
+          $Res Function(_$InvoiceDataDtoImpl) then) =
+      __$$InvoiceDataDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -94,11 +94,11 @@ abstract class _$$_InvoiceDataDtoCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_InvoiceDataDtoCopyWithImpl<$Res>
-    extends _$InvoiceDataDtoCopyWithImpl<$Res, _$_InvoiceDataDto>
-    implements _$$_InvoiceDataDtoCopyWith<$Res> {
-  __$$_InvoiceDataDtoCopyWithImpl(
-      _$_InvoiceDataDto _value, $Res Function(_$_InvoiceDataDto) _then)
+class __$$InvoiceDataDtoImplCopyWithImpl<$Res>
+    extends _$InvoiceDataDtoCopyWithImpl<$Res, _$InvoiceDataDtoImpl>
+    implements _$$InvoiceDataDtoImplCopyWith<$Res> {
+  __$$InvoiceDataDtoImplCopyWithImpl(
+      _$InvoiceDataDtoImpl _value, $Res Function(_$InvoiceDataDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -108,7 +108,7 @@ class __$$_InvoiceDataDtoCopyWithImpl<$Res>
     Object? invoiceNumber = null,
     Object? lineNumber = null,
   }) {
-    return _then(_$_InvoiceDataDto(
+    return _then(_$InvoiceDataDtoImpl(
       orderNumber: null == orderNumber
           ? _value.orderNumber
           : orderNumber // ignore: cast_nullable_to_non_nullable
@@ -127,15 +127,15 @@ class __$$_InvoiceDataDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_InvoiceDataDto extends _InvoiceDataDto {
-  const _$_InvoiceDataDto(
+class _$InvoiceDataDtoImpl extends _InvoiceDataDto {
+  const _$InvoiceDataDtoImpl(
       {@JsonKey(name: 'orderId', defaultValue: '') required this.orderNumber,
       @JsonKey(name: 'invoice', defaultValue: '') required this.invoiceNumber,
       @JsonKey(name: 'lineNumber', defaultValue: '') required this.lineNumber})
       : super._();
 
-  factory _$_InvoiceDataDto.fromJson(Map<String, dynamic> json) =>
-      _$$_InvoiceDataDtoFromJson(json);
+  factory _$InvoiceDataDtoImpl.fromJson(Map<String, dynamic> json) =>
+      _$$InvoiceDataDtoImplFromJson(json);
 
   @override
   @JsonKey(name: 'orderId', defaultValue: '')
@@ -153,10 +153,10 @@ class _$_InvoiceDataDto extends _InvoiceDataDto {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_InvoiceDataDto &&
+            other is _$InvoiceDataDtoImpl &&
             (identical(other.orderNumber, orderNumber) ||
                 other.orderNumber == orderNumber) &&
             (identical(other.invoiceNumber, invoiceNumber) ||
@@ -173,12 +173,13 @@ class _$_InvoiceDataDto extends _InvoiceDataDto {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_InvoiceDataDtoCopyWith<_$_InvoiceDataDto> get copyWith =>
-      __$$_InvoiceDataDtoCopyWithImpl<_$_InvoiceDataDto>(this, _$identity);
+  _$$InvoiceDataDtoImplCopyWith<_$InvoiceDataDtoImpl> get copyWith =>
+      __$$InvoiceDataDtoImplCopyWithImpl<_$InvoiceDataDtoImpl>(
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_InvoiceDataDtoToJson(
+    return _$$InvoiceDataDtoImplToJson(
       this,
     );
   }
@@ -191,11 +192,11 @@ abstract class _InvoiceDataDto extends InvoiceDataDto {
       @JsonKey(name: 'invoice', defaultValue: '')
       required final String invoiceNumber,
       @JsonKey(name: 'lineNumber', defaultValue: '')
-      required final String lineNumber}) = _$_InvoiceDataDto;
+      required final String lineNumber}) = _$InvoiceDataDtoImpl;
   const _InvoiceDataDto._() : super._();
 
   factory _InvoiceDataDto.fromJson(Map<String, dynamic> json) =
-      _$_InvoiceDataDto.fromJson;
+      _$InvoiceDataDtoImpl.fromJson;
 
   @override
   @JsonKey(name: 'orderId', defaultValue: '')
@@ -208,6 +209,6 @@ abstract class _InvoiceDataDto extends InvoiceDataDto {
   String get lineNumber;
   @override
   @JsonKey(ignore: true)
-  _$$_InvoiceDataDtoCopyWith<_$_InvoiceDataDto> get copyWith =>
+  _$$InvoiceDataDtoImplCopyWith<_$InvoiceDataDtoImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -12,7 +12,7 @@ part of 'announcement_info_details_bloc.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$AnnouncementInfoDetailsEvent {
@@ -98,20 +98,22 @@ class _$AnnouncementInfoDetailsEventCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_FetchCopyWith<$Res>
+abstract class _$$FetchImplCopyWith<$Res>
     implements $AnnouncementInfoDetailsEventCopyWith<$Res> {
-  factory _$$_FetchCopyWith(_$_Fetch value, $Res Function(_$_Fetch) then) =
-      __$$_FetchCopyWithImpl<$Res>;
+  factory _$$FetchImplCopyWith(
+          _$FetchImpl value, $Res Function(_$FetchImpl) then) =
+      __$$FetchImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String itemId, SalesOrg salesOrg});
 }
 
 /// @nodoc
-class __$$_FetchCopyWithImpl<$Res>
-    extends _$AnnouncementInfoDetailsEventCopyWithImpl<$Res, _$_Fetch>
-    implements _$$_FetchCopyWith<$Res> {
-  __$$_FetchCopyWithImpl(_$_Fetch _value, $Res Function(_$_Fetch) _then)
+class __$$FetchImplCopyWithImpl<$Res>
+    extends _$AnnouncementInfoDetailsEventCopyWithImpl<$Res, _$FetchImpl>
+    implements _$$FetchImplCopyWith<$Res> {
+  __$$FetchImplCopyWithImpl(
+      _$FetchImpl _value, $Res Function(_$FetchImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -120,7 +122,7 @@ class __$$_FetchCopyWithImpl<$Res>
     Object? itemId = null,
     Object? salesOrg = null,
   }) {
-    return _then(_$_Fetch(
+    return _then(_$FetchImpl(
       itemId: null == itemId
           ? _value.itemId
           : itemId // ignore: cast_nullable_to_non_nullable
@@ -135,8 +137,8 @@ class __$$_FetchCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_Fetch implements _Fetch {
-  const _$_Fetch({required this.itemId, required this.salesOrg});
+class _$FetchImpl implements _Fetch {
+  const _$FetchImpl({required this.itemId, required this.salesOrg});
 
   @override
   final String itemId;
@@ -149,10 +151,10 @@ class _$_Fetch implements _Fetch {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Fetch &&
+            other is _$FetchImpl &&
             (identical(other.itemId, itemId) || other.itemId == itemId) &&
             (identical(other.salesOrg, salesOrg) ||
                 other.salesOrg == salesOrg));
@@ -164,8 +166,8 @@ class _$_Fetch implements _Fetch {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_FetchCopyWith<_$_Fetch> get copyWith =>
-      __$$_FetchCopyWithImpl<_$_Fetch>(this, _$identity);
+  _$$FetchImplCopyWith<_$FetchImpl> get copyWith =>
+      __$$FetchImplCopyWithImpl<_$FetchImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -227,7 +229,7 @@ class _$_Fetch implements _Fetch {
 abstract class _Fetch implements AnnouncementInfoDetailsEvent {
   const factory _Fetch(
       {required final String itemId,
-      required final SalesOrg salesOrg}) = _$_Fetch;
+      required final SalesOrg salesOrg}) = _$FetchImpl;
 
   @override
   String get itemId;
@@ -235,7 +237,7 @@ abstract class _Fetch implements AnnouncementInfoDetailsEvent {
   SalesOrg get salesOrg;
   @override
   @JsonKey(ignore: true)
-  _$$_FetchCopyWith<_$_Fetch> get copyWith =>
+  _$$FetchImplCopyWith<_$FetchImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -313,12 +315,12 @@ class _$AnnouncementInfoDetailsStateCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_AnnouncementInfoDetailsStateCopyWith<$Res>
+abstract class _$$AnnouncementInfoDetailsStateImplCopyWith<$Res>
     implements $AnnouncementInfoDetailsStateCopyWith<$Res> {
-  factory _$$_AnnouncementInfoDetailsStateCopyWith(
-          _$_AnnouncementInfoDetailsState value,
-          $Res Function(_$_AnnouncementInfoDetailsState) then) =
-      __$$_AnnouncementInfoDetailsStateCopyWithImpl<$Res>;
+  factory _$$AnnouncementInfoDetailsStateImplCopyWith(
+          _$AnnouncementInfoDetailsStateImpl value,
+          $Res Function(_$AnnouncementInfoDetailsStateImpl) then) =
+      __$$AnnouncementInfoDetailsStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -331,13 +333,13 @@ abstract class _$$_AnnouncementInfoDetailsStateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_AnnouncementInfoDetailsStateCopyWithImpl<$Res>
+class __$$AnnouncementInfoDetailsStateImplCopyWithImpl<$Res>
     extends _$AnnouncementInfoDetailsStateCopyWithImpl<$Res,
-        _$_AnnouncementInfoDetailsState>
-    implements _$$_AnnouncementInfoDetailsStateCopyWith<$Res> {
-  __$$_AnnouncementInfoDetailsStateCopyWithImpl(
-      _$_AnnouncementInfoDetailsState _value,
-      $Res Function(_$_AnnouncementInfoDetailsState) _then)
+        _$AnnouncementInfoDetailsStateImpl>
+    implements _$$AnnouncementInfoDetailsStateImplCopyWith<$Res> {
+  __$$AnnouncementInfoDetailsStateImplCopyWithImpl(
+      _$AnnouncementInfoDetailsStateImpl _value,
+      $Res Function(_$AnnouncementInfoDetailsStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -347,7 +349,7 @@ class __$$_AnnouncementInfoDetailsStateCopyWithImpl<$Res>
     Object? isLoading = null,
     Object? apiFailureOrSuccessOption = null,
   }) {
-    return _then(_$_AnnouncementInfoDetailsState(
+    return _then(_$AnnouncementInfoDetailsStateImpl(
       announcementInfoDetails: null == announcementInfoDetails
           ? _value.announcementInfoDetails
           : announcementInfoDetails // ignore: cast_nullable_to_non_nullable
@@ -366,8 +368,8 @@ class __$$_AnnouncementInfoDetailsStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_AnnouncementInfoDetailsState extends _AnnouncementInfoDetailsState {
-  const _$_AnnouncementInfoDetailsState(
+class _$AnnouncementInfoDetailsStateImpl extends _AnnouncementInfoDetailsState {
+  const _$AnnouncementInfoDetailsStateImpl(
       {required this.announcementInfoDetails,
       required this.isLoading,
       required this.apiFailureOrSuccessOption})
@@ -386,10 +388,10 @@ class _$_AnnouncementInfoDetailsState extends _AnnouncementInfoDetailsState {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_AnnouncementInfoDetailsState &&
+            other is _$AnnouncementInfoDetailsStateImpl &&
             (identical(
                     other.announcementInfoDetails, announcementInfoDetails) ||
                 other.announcementInfoDetails == announcementInfoDetails) &&
@@ -407,9 +409,10 @@ class _$_AnnouncementInfoDetailsState extends _AnnouncementInfoDetailsState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_AnnouncementInfoDetailsStateCopyWith<_$_AnnouncementInfoDetailsState>
-      get copyWith => __$$_AnnouncementInfoDetailsStateCopyWithImpl<
-          _$_AnnouncementInfoDetailsState>(this, _$identity);
+  _$$AnnouncementInfoDetailsStateImplCopyWith<
+          _$AnnouncementInfoDetailsStateImpl>
+      get copyWith => __$$AnnouncementInfoDetailsStateImplCopyWithImpl<
+          _$AnnouncementInfoDetailsStateImpl>(this, _$identity);
 }
 
 abstract class _AnnouncementInfoDetailsState
@@ -418,7 +421,7 @@ abstract class _AnnouncementInfoDetailsState
       {required final AnnouncementInfoDetails announcementInfoDetails,
       required final bool isLoading,
       required final Option<Either<ApiFailure, dynamic>>
-          apiFailureOrSuccessOption}) = _$_AnnouncementInfoDetailsState;
+          apiFailureOrSuccessOption}) = _$AnnouncementInfoDetailsStateImpl;
   const _AnnouncementInfoDetailsState._() : super._();
 
   @override
@@ -429,6 +432,7 @@ abstract class _AnnouncementInfoDetailsState
   Option<Either<ApiFailure, dynamic>> get apiFailureOrSuccessOption;
   @override
   @JsonKey(ignore: true)
-  _$$_AnnouncementInfoDetailsStateCopyWith<_$_AnnouncementInfoDetailsState>
+  _$$AnnouncementInfoDetailsStateImplCopyWith<
+          _$AnnouncementInfoDetailsStateImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

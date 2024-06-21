@@ -6,9 +6,9 @@ part of 'announcement_info_details_dto.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_AnnouncementInfoDetailsDto _$$_AnnouncementInfoDetailsDtoFromJson(
+_$AnnouncementInfoDetailsDtoImpl _$$AnnouncementInfoDetailsDtoImplFromJson(
         Map<String, dynamic> json) =>
-    _$_AnnouncementInfoDetailsDto(
+    _$AnnouncementInfoDetailsDtoImpl(
       id: json['id'] as String? ?? '',
       title: readValue(json, 'title') as String? ?? '',
       content: readValue(json, 'content') as String? ?? '',
@@ -24,8 +24,8 @@ _$_AnnouncementInfoDetailsDto _$$_AnnouncementInfoDetailsDtoFromJson(
           .toList(),
     );
 
-Map<String, dynamic> _$$_AnnouncementInfoDetailsDtoToJson(
-        _$_AnnouncementInfoDetailsDto instance) =>
+Map<String, dynamic> _$$AnnouncementInfoDetailsDtoImplToJson(
+        _$AnnouncementInfoDetailsDtoImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'title': instance.title,

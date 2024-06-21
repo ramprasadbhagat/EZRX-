@@ -12,7 +12,7 @@ part of 'return_request_attachment_bloc.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$ReturnRequestAttachmentEvent {
@@ -96,25 +96,25 @@ class _$ReturnRequestAttachmentEventCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_InitializedCopyWith<$Res> {
-  factory _$$_InitializedCopyWith(
-          _$_Initialized value, $Res Function(_$_Initialized) then) =
-      __$$_InitializedCopyWithImpl<$Res>;
+abstract class _$$InitializedImplCopyWith<$Res> {
+  factory _$$InitializedImplCopyWith(
+          _$InitializedImpl value, $Res Function(_$InitializedImpl) then) =
+      __$$InitializedImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_InitializedCopyWithImpl<$Res>
-    extends _$ReturnRequestAttachmentEventCopyWithImpl<$Res, _$_Initialized>
-    implements _$$_InitializedCopyWith<$Res> {
-  __$$_InitializedCopyWithImpl(
-      _$_Initialized _value, $Res Function(_$_Initialized) _then)
+class __$$InitializedImplCopyWithImpl<$Res>
+    extends _$ReturnRequestAttachmentEventCopyWithImpl<$Res, _$InitializedImpl>
+    implements _$$InitializedImplCopyWith<$Res> {
+  __$$InitializedImplCopyWithImpl(
+      _$InitializedImpl _value, $Res Function(_$InitializedImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_Initialized implements _Initialized {
-  const _$_Initialized();
+class _$InitializedImpl implements _Initialized {
+  const _$InitializedImpl();
 
   @override
   String toString() {
@@ -122,9 +122,9 @@ class _$_Initialized implements _Initialized {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_Initialized);
+        (other.runtimeType == runtimeType && other is _$InitializedImpl);
   }
 
   @override
@@ -212,14 +212,14 @@ class _$_Initialized implements _Initialized {
 }
 
 abstract class _Initialized implements ReturnRequestAttachmentEvent {
-  const factory _Initialized() = _$_Initialized;
+  const factory _Initialized() = _$InitializedImpl;
 }
 
 /// @nodoc
-abstract class _$$_UpLoadFileCopyWith<$Res> {
-  factory _$$_UpLoadFileCopyWith(
-          _$_UpLoadFile value, $Res Function(_$_UpLoadFile) then) =
-      __$$_UpLoadFileCopyWithImpl<$Res>;
+abstract class _$$UpLoadFileImplCopyWith<$Res> {
+  factory _$$UpLoadFileImplCopyWith(
+          _$UpLoadFileImpl value, $Res Function(_$UpLoadFileImpl) then) =
+      __$$UpLoadFileImplCopyWithImpl<$Res>;
   @useResult
   $Res call(
       {String assignmentNumber,
@@ -231,11 +231,11 @@ abstract class _$$_UpLoadFileCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_UpLoadFileCopyWithImpl<$Res>
-    extends _$ReturnRequestAttachmentEventCopyWithImpl<$Res, _$_UpLoadFile>
-    implements _$$_UpLoadFileCopyWith<$Res> {
-  __$$_UpLoadFileCopyWithImpl(
-      _$_UpLoadFile _value, $Res Function(_$_UpLoadFile) _then)
+class __$$UpLoadFileImplCopyWithImpl<$Res>
+    extends _$ReturnRequestAttachmentEventCopyWithImpl<$Res, _$UpLoadFileImpl>
+    implements _$$UpLoadFileImplCopyWith<$Res> {
+  __$$UpLoadFileImplCopyWithImpl(
+      _$UpLoadFileImpl _value, $Res Function(_$UpLoadFileImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -246,7 +246,7 @@ class __$$_UpLoadFileCopyWithImpl<$Res>
     Object? uploadOptionType = null,
     Object? user = null,
   }) {
-    return _then(_$_UpLoadFile(
+    return _then(_$UpLoadFileImpl(
       assignmentNumber: null == assignmentNumber
           ? _value.assignmentNumber
           : assignmentNumber // ignore: cast_nullable_to_non_nullable
@@ -277,8 +277,8 @@ class __$$_UpLoadFileCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_UpLoadFile implements _UpLoadFile {
-  const _$_UpLoadFile(
+class _$UpLoadFileImpl implements _UpLoadFile {
+  const _$UpLoadFileImpl(
       {required this.assignmentNumber,
       required this.returnUuid,
       required this.uploadOptionType,
@@ -299,10 +299,10 @@ class _$_UpLoadFile implements _UpLoadFile {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_UpLoadFile &&
+            other is _$UpLoadFileImpl &&
             (identical(other.assignmentNumber, assignmentNumber) ||
                 other.assignmentNumber == assignmentNumber) &&
             (identical(other.returnUuid, returnUuid) ||
@@ -319,8 +319,8 @@ class _$_UpLoadFile implements _UpLoadFile {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_UpLoadFileCopyWith<_$_UpLoadFile> get copyWith =>
-      __$$_UpLoadFileCopyWithImpl<_$_UpLoadFile>(this, _$identity);
+  _$$UpLoadFileImplCopyWith<_$UpLoadFileImpl> get copyWith =>
+      __$$UpLoadFileImplCopyWithImpl<_$UpLoadFileImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -409,22 +409,22 @@ abstract class _UpLoadFile implements ReturnRequestAttachmentEvent {
       {required final String assignmentNumber,
       required final String returnUuid,
       required final UploadOptionType uploadOptionType,
-      required final User user}) = _$_UpLoadFile;
+      required final User user}) = _$UpLoadFileImpl;
 
   String get assignmentNumber;
   String get returnUuid;
   UploadOptionType get uploadOptionType;
   User get user;
   @JsonKey(ignore: true)
-  _$$_UpLoadFileCopyWith<_$_UpLoadFile> get copyWith =>
+  _$$UpLoadFileImplCopyWith<_$UpLoadFileImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_DeleteFileCopyWith<$Res> {
-  factory _$$_DeleteFileCopyWith(
-          _$_DeleteFile value, $Res Function(_$_DeleteFile) then) =
-      __$$_DeleteFileCopyWithImpl<$Res>;
+abstract class _$$DeleteFileImplCopyWith<$Res> {
+  factory _$$DeleteFileImplCopyWith(
+          _$DeleteFileImpl value, $Res Function(_$DeleteFileImpl) then) =
+      __$$DeleteFileImplCopyWithImpl<$Res>;
   @useResult
   $Res call({ReturnRequestAttachment file});
 
@@ -432,11 +432,11 @@ abstract class _$$_DeleteFileCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_DeleteFileCopyWithImpl<$Res>
-    extends _$ReturnRequestAttachmentEventCopyWithImpl<$Res, _$_DeleteFile>
-    implements _$$_DeleteFileCopyWith<$Res> {
-  __$$_DeleteFileCopyWithImpl(
-      _$_DeleteFile _value, $Res Function(_$_DeleteFile) _then)
+class __$$DeleteFileImplCopyWithImpl<$Res>
+    extends _$ReturnRequestAttachmentEventCopyWithImpl<$Res, _$DeleteFileImpl>
+    implements _$$DeleteFileImplCopyWith<$Res> {
+  __$$DeleteFileImplCopyWithImpl(
+      _$DeleteFileImpl _value, $Res Function(_$DeleteFileImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -444,7 +444,7 @@ class __$$_DeleteFileCopyWithImpl<$Res>
   $Res call({
     Object? file = null,
   }) {
-    return _then(_$_DeleteFile(
+    return _then(_$DeleteFileImpl(
       file: null == file
           ? _value.file
           : file // ignore: cast_nullable_to_non_nullable
@@ -463,8 +463,8 @@ class __$$_DeleteFileCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_DeleteFile implements _DeleteFile {
-  const _$_DeleteFile({required this.file});
+class _$DeleteFileImpl implements _DeleteFile {
+  const _$DeleteFileImpl({required this.file});
 
   @override
   final ReturnRequestAttachment file;
@@ -475,10 +475,10 @@ class _$_DeleteFile implements _DeleteFile {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_DeleteFile &&
+            other is _$DeleteFileImpl &&
             (identical(other.file, file) || other.file == file));
   }
 
@@ -488,8 +488,8 @@ class _$_DeleteFile implements _DeleteFile {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_DeleteFileCopyWith<_$_DeleteFile> get copyWith =>
-      __$$_DeleteFileCopyWithImpl<_$_DeleteFile>(this, _$identity);
+  _$$DeleteFileImplCopyWith<_$DeleteFileImpl> get copyWith =>
+      __$$DeleteFileImplCopyWithImpl<_$DeleteFileImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -574,19 +574,19 @@ class _$_DeleteFile implements _DeleteFile {
 
 abstract class _DeleteFile implements ReturnRequestAttachmentEvent {
   const factory _DeleteFile({required final ReturnRequestAttachment file}) =
-      _$_DeleteFile;
+      _$DeleteFileImpl;
 
   ReturnRequestAttachment get file;
   @JsonKey(ignore: true)
-  _$$_DeleteFileCopyWith<_$_DeleteFile> get copyWith =>
+  _$$DeleteFileImplCopyWith<_$DeleteFileImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_DownloadFileCopyWith<$Res> {
-  factory _$$_DownloadFileCopyWith(
-          _$_DownloadFile value, $Res Function(_$_DownloadFile) then) =
-      __$$_DownloadFileCopyWithImpl<$Res>;
+abstract class _$$DownloadFileImplCopyWith<$Res> {
+  factory _$$DownloadFileImplCopyWith(
+          _$DownloadFileImpl value, $Res Function(_$DownloadFileImpl) then) =
+      __$$DownloadFileImplCopyWithImpl<$Res>;
   @useResult
   $Res call({ReturnRequestAttachment file});
 
@@ -594,11 +594,11 @@ abstract class _$$_DownloadFileCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_DownloadFileCopyWithImpl<$Res>
-    extends _$ReturnRequestAttachmentEventCopyWithImpl<$Res, _$_DownloadFile>
-    implements _$$_DownloadFileCopyWith<$Res> {
-  __$$_DownloadFileCopyWithImpl(
-      _$_DownloadFile _value, $Res Function(_$_DownloadFile) _then)
+class __$$DownloadFileImplCopyWithImpl<$Res>
+    extends _$ReturnRequestAttachmentEventCopyWithImpl<$Res, _$DownloadFileImpl>
+    implements _$$DownloadFileImplCopyWith<$Res> {
+  __$$DownloadFileImplCopyWithImpl(
+      _$DownloadFileImpl _value, $Res Function(_$DownloadFileImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -606,7 +606,7 @@ class __$$_DownloadFileCopyWithImpl<$Res>
   $Res call({
     Object? file = null,
   }) {
-    return _then(_$_DownloadFile(
+    return _then(_$DownloadFileImpl(
       file: null == file
           ? _value.file
           : file // ignore: cast_nullable_to_non_nullable
@@ -625,8 +625,8 @@ class __$$_DownloadFileCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_DownloadFile implements _DownloadFile {
-  const _$_DownloadFile({required this.file});
+class _$DownloadFileImpl implements _DownloadFile {
+  const _$DownloadFileImpl({required this.file});
 
   @override
   final ReturnRequestAttachment file;
@@ -637,10 +637,10 @@ class _$_DownloadFile implements _DownloadFile {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_DownloadFile &&
+            other is _$DownloadFileImpl &&
             (identical(other.file, file) || other.file == file));
   }
 
@@ -650,8 +650,8 @@ class _$_DownloadFile implements _DownloadFile {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_DownloadFileCopyWith<_$_DownloadFile> get copyWith =>
-      __$$_DownloadFileCopyWithImpl<_$_DownloadFile>(this, _$identity);
+  _$$DownloadFileImplCopyWith<_$DownloadFileImpl> get copyWith =>
+      __$$DownloadFileImplCopyWithImpl<_$DownloadFileImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -736,11 +736,11 @@ class _$_DownloadFile implements _DownloadFile {
 
 abstract class _DownloadFile implements ReturnRequestAttachmentEvent {
   const factory _DownloadFile({required final ReturnRequestAttachment file}) =
-      _$_DownloadFile;
+      _$DownloadFileImpl;
 
   ReturnRequestAttachment get file;
   @JsonKey(ignore: true)
-  _$$_DownloadFileCopyWith<_$_DownloadFile> get copyWith =>
+  _$$DownloadFileImplCopyWith<_$DownloadFileImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -821,12 +821,12 @@ class _$ReturnRequestAttachmentStateCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_ReturnRequestAttachmentStateCopyWith<$Res>
+abstract class _$$ReturnRequestAttachmentStateImplCopyWith<$Res>
     implements $ReturnRequestAttachmentStateCopyWith<$Res> {
-  factory _$$_ReturnRequestAttachmentStateCopyWith(
-          _$_ReturnRequestAttachmentState value,
-          $Res Function(_$_ReturnRequestAttachmentState) then) =
-      __$$_ReturnRequestAttachmentStateCopyWithImpl<$Res>;
+  factory _$$ReturnRequestAttachmentStateImplCopyWith(
+          _$ReturnRequestAttachmentStateImpl value,
+          $Res Function(_$ReturnRequestAttachmentStateImpl) then) =
+      __$$ReturnRequestAttachmentStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -838,13 +838,13 @@ abstract class _$$_ReturnRequestAttachmentStateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_ReturnRequestAttachmentStateCopyWithImpl<$Res>
+class __$$ReturnRequestAttachmentStateImplCopyWithImpl<$Res>
     extends _$ReturnRequestAttachmentStateCopyWithImpl<$Res,
-        _$_ReturnRequestAttachmentState>
-    implements _$$_ReturnRequestAttachmentStateCopyWith<$Res> {
-  __$$_ReturnRequestAttachmentStateCopyWithImpl(
-      _$_ReturnRequestAttachmentState _value,
-      $Res Function(_$_ReturnRequestAttachmentState) _then)
+        _$ReturnRequestAttachmentStateImpl>
+    implements _$$ReturnRequestAttachmentStateImplCopyWith<$Res> {
+  __$$ReturnRequestAttachmentStateImplCopyWithImpl(
+      _$ReturnRequestAttachmentStateImpl _value,
+      $Res Function(_$ReturnRequestAttachmentStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -856,7 +856,7 @@ class __$$_ReturnRequestAttachmentStateCopyWithImpl<$Res>
     Object? fileOperationMode = null,
     Object? failureOrSuccessOption = null,
   }) {
-    return _then(_$_ReturnRequestAttachmentState(
+    return _then(_$ReturnRequestAttachmentStateImpl(
       isFetching: null == isFetching
           ? _value.isFetching
           : isFetching // ignore: cast_nullable_to_non_nullable
@@ -883,8 +883,8 @@ class __$$_ReturnRequestAttachmentStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_ReturnRequestAttachmentState extends _ReturnRequestAttachmentState {
-  const _$_ReturnRequestAttachmentState(
+class _$ReturnRequestAttachmentStateImpl extends _ReturnRequestAttachmentState {
+  const _$ReturnRequestAttachmentStateImpl(
       {required this.isFetching,
       required this.returnUuid,
       required final List<ReturnRequestAttachment> uploadedFiles,
@@ -916,10 +916,10 @@ class _$_ReturnRequestAttachmentState extends _ReturnRequestAttachmentState {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ReturnRequestAttachmentState &&
+            other is _$ReturnRequestAttachmentStateImpl &&
             (identical(other.isFetching, isFetching) ||
                 other.isFetching == isFetching) &&
             (identical(other.returnUuid, returnUuid) ||
@@ -944,9 +944,10 @@ class _$_ReturnRequestAttachmentState extends _ReturnRequestAttachmentState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ReturnRequestAttachmentStateCopyWith<_$_ReturnRequestAttachmentState>
-      get copyWith => __$$_ReturnRequestAttachmentStateCopyWithImpl<
-          _$_ReturnRequestAttachmentState>(this, _$identity);
+  _$$ReturnRequestAttachmentStateImplCopyWith<
+          _$ReturnRequestAttachmentStateImpl>
+      get copyWith => __$$ReturnRequestAttachmentStateImplCopyWithImpl<
+          _$ReturnRequestAttachmentStateImpl>(this, _$identity);
 }
 
 abstract class _ReturnRequestAttachmentState
@@ -957,7 +958,7 @@ abstract class _ReturnRequestAttachmentState
       required final List<ReturnRequestAttachment> uploadedFiles,
       required final FileOperationMode fileOperationMode,
       required final Option<Either<ApiFailure, dynamic>>
-          failureOrSuccessOption}) = _$_ReturnRequestAttachmentState;
+          failureOrSuccessOption}) = _$ReturnRequestAttachmentStateImpl;
   const _ReturnRequestAttachmentState._() : super._();
 
   @override
@@ -972,6 +973,7 @@ abstract class _ReturnRequestAttachmentState
   Option<Either<ApiFailure, dynamic>> get failureOrSuccessOption;
   @override
   @JsonKey(ignore: true)
-  _$$_ReturnRequestAttachmentStateCopyWith<_$_ReturnRequestAttachmentState>
+  _$$ReturnRequestAttachmentStateImplCopyWith<
+          _$ReturnRequestAttachmentStateImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

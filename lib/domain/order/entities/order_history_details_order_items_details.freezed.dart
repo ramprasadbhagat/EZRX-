@@ -12,7 +12,7 @@ part of 'order_history_details_order_items_details.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$OrderHistoryDetailsOrderItemDetails {
@@ -73,25 +73,25 @@ class _$OrderHistoryDetailsOrderItemDetailsCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_OrderHistoryDetailsOrderItemDetailsCopyWith<$Res>
+abstract class _$$OrderHistoryDetailsOrderItemDetailsImplCopyWith<$Res>
     implements $OrderHistoryDetailsOrderItemDetailsCopyWith<$Res> {
-  factory _$$_OrderHistoryDetailsOrderItemDetailsCopyWith(
-          _$_OrderHistoryDetailsOrderItemDetails value,
-          $Res Function(_$_OrderHistoryDetailsOrderItemDetails) then) =
-      __$$_OrderHistoryDetailsOrderItemDetailsCopyWithImpl<$Res>;
+  factory _$$OrderHistoryDetailsOrderItemDetailsImplCopyWith(
+          _$OrderHistoryDetailsOrderItemDetailsImpl value,
+          $Res Function(_$OrderHistoryDetailsOrderItemDetailsImpl) then) =
+      __$$OrderHistoryDetailsOrderItemDetailsImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String discountCode, String discountDescription, String rate});
 }
 
 /// @nodoc
-class __$$_OrderHistoryDetailsOrderItemDetailsCopyWithImpl<$Res>
+class __$$OrderHistoryDetailsOrderItemDetailsImplCopyWithImpl<$Res>
     extends _$OrderHistoryDetailsOrderItemDetailsCopyWithImpl<$Res,
-        _$_OrderHistoryDetailsOrderItemDetails>
-    implements _$$_OrderHistoryDetailsOrderItemDetailsCopyWith<$Res> {
-  __$$_OrderHistoryDetailsOrderItemDetailsCopyWithImpl(
-      _$_OrderHistoryDetailsOrderItemDetails _value,
-      $Res Function(_$_OrderHistoryDetailsOrderItemDetails) _then)
+        _$OrderHistoryDetailsOrderItemDetailsImpl>
+    implements _$$OrderHistoryDetailsOrderItemDetailsImplCopyWith<$Res> {
+  __$$OrderHistoryDetailsOrderItemDetailsImplCopyWithImpl(
+      _$OrderHistoryDetailsOrderItemDetailsImpl _value,
+      $Res Function(_$OrderHistoryDetailsOrderItemDetailsImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -101,7 +101,7 @@ class __$$_OrderHistoryDetailsOrderItemDetailsCopyWithImpl<$Res>
     Object? discountDescription = null,
     Object? rate = null,
   }) {
-    return _then(_$_OrderHistoryDetailsOrderItemDetails(
+    return _then(_$OrderHistoryDetailsOrderItemDetailsImpl(
       discountCode: null == discountCode
           ? _value.discountCode
           : discountCode // ignore: cast_nullable_to_non_nullable
@@ -120,9 +120,9 @@ class __$$_OrderHistoryDetailsOrderItemDetailsCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_OrderHistoryDetailsOrderItemDetails
+class _$OrderHistoryDetailsOrderItemDetailsImpl
     extends _OrderHistoryDetailsOrderItemDetails {
-  _$_OrderHistoryDetailsOrderItemDetails(
+  _$OrderHistoryDetailsOrderItemDetailsImpl(
       {required this.discountCode,
       required this.discountDescription,
       required this.rate})
@@ -141,10 +141,10 @@ class _$_OrderHistoryDetailsOrderItemDetails
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_OrderHistoryDetailsOrderItemDetails &&
+            other is _$OrderHistoryDetailsOrderItemDetailsImpl &&
             (identical(other.discountCode, discountCode) ||
                 other.discountCode == discountCode) &&
             (identical(other.discountDescription, discountDescription) ||
@@ -159,10 +159,10 @@ class _$_OrderHistoryDetailsOrderItemDetails
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_OrderHistoryDetailsOrderItemDetailsCopyWith<
-          _$_OrderHistoryDetailsOrderItemDetails>
-      get copyWith => __$$_OrderHistoryDetailsOrderItemDetailsCopyWithImpl<
-          _$_OrderHistoryDetailsOrderItemDetails>(this, _$identity);
+  _$$OrderHistoryDetailsOrderItemDetailsImplCopyWith<
+          _$OrderHistoryDetailsOrderItemDetailsImpl>
+      get copyWith => __$$OrderHistoryDetailsOrderItemDetailsImplCopyWithImpl<
+          _$OrderHistoryDetailsOrderItemDetailsImpl>(this, _$identity);
 }
 
 abstract class _OrderHistoryDetailsOrderItemDetails
@@ -170,7 +170,7 @@ abstract class _OrderHistoryDetailsOrderItemDetails
   factory _OrderHistoryDetailsOrderItemDetails(
       {required final String discountCode,
       required final String discountDescription,
-      required final String rate}) = _$_OrderHistoryDetailsOrderItemDetails;
+      required final String rate}) = _$OrderHistoryDetailsOrderItemDetailsImpl;
   _OrderHistoryDetailsOrderItemDetails._() : super._();
 
   @override
@@ -181,7 +181,7 @@ abstract class _OrderHistoryDetailsOrderItemDetails
   String get rate;
   @override
   @JsonKey(ignore: true)
-  _$$_OrderHistoryDetailsOrderItemDetailsCopyWith<
-          _$_OrderHistoryDetailsOrderItemDetails>
+  _$$OrderHistoryDetailsOrderItemDetailsImplCopyWith<
+          _$OrderHistoryDetailsOrderItemDetailsImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

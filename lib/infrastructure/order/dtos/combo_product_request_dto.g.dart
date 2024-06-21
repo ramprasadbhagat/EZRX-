@@ -6,18 +6,18 @@ part of 'combo_product_request_dto.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_ComboProductRequestDto _$$_ComboProductRequestDtoFromJson(
+_$ComboProductRequestDtoImpl _$$ComboProductRequestDtoImplFromJson(
         Map<String, dynamic> json) =>
-    _$_ComboProductRequestDto(
+    _$ComboProductRequestDtoImpl(
       productId: json['ProductID'] as String? ?? '',
       parentId: json['ParentID'] as String? ?? '',
       setNo: json['SetNo'] as String? ?? '',
-      quantity: json['Quantity'] as int? ?? 0,
+      quantity: (json['Quantity'] as num?)?.toInt() ?? 0,
       itemSource: json['ItemSource'] as String? ?? 'EZRX',
       customerCode: json['CustomerCode'] as String? ?? '',
       shipToId: json['ShipToID'] as String? ?? '',
       salesOrg: json['SalesOrg'] as String? ?? '',
-      minQty: json['MinQty'] as int? ?? 0,
+      minQty: (json['MinQty'] as num?)?.toInt() ?? 0,
       rate: (json['Rate'] as num?)?.toDouble() ?? 0,
       conditionNumber: json['ConditionNumber'] as String? ?? '',
       mandatory: json['Mandatory'] as bool? ?? false,
@@ -39,8 +39,8 @@ _$_ComboProductRequestDto _$$_ComboProductRequestDtoFromJson(
           (json['FinalIndividualPrice'] as num?)?.toDouble() ?? 0.0,
     );
 
-Map<String, dynamic> _$$_ComboProductRequestDtoToJson(
-        _$_ComboProductRequestDto instance) =>
+Map<String, dynamic> _$$ComboProductRequestDtoImplToJson(
+        _$ComboProductRequestDtoImpl instance) =>
     <String, dynamic>{
       'ProductID': instance.productId,
       'ParentID': instance.parentId,

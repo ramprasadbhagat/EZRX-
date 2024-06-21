@@ -6,9 +6,9 @@ part of 'credit_and_invoice_item_dto.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_CreditAndInvoiceItemDto _$$_CreditAndInvoiceItemDtoFromJson(
+_$CreditAndInvoiceItemDtoImpl _$$CreditAndInvoiceItemDtoImplFromJson(
         Map<String, dynamic> json) =>
-    _$_CreditAndInvoiceItemDto(
+    _$CreditAndInvoiceItemDtoImpl(
       bpCustomerNumber: json['bpCustomerNumber'] as String? ?? '',
       fiscalYear: json['fiscalYear'] as String? ?? '',
       accountingDocument: json['accountingDocument'] as String? ?? '',
@@ -35,8 +35,8 @@ _$_CreditAndInvoiceItemDto _$$_CreditAndInvoiceItemDtoFromJson(
       orderId: json['orderId'] as String? ?? '',
     );
 
-Map<String, dynamic> _$$_CreditAndInvoiceItemDtoToJson(
-        _$_CreditAndInvoiceItemDto instance) =>
+Map<String, dynamic> _$$CreditAndInvoiceItemDtoImplToJson(
+        _$CreditAndInvoiceItemDtoImpl instance) =>
     <String, dynamic>{
       'bpCustomerNumber': instance.bpCustomerNumber,
       'fiscalYear': instance.fiscalYear,

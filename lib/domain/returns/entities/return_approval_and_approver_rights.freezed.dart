@@ -12,7 +12,7 @@ part of 'return_approval_and_approver_rights.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$UserRestrictions {
@@ -74,11 +74,11 @@ class _$UserRestrictionsCopyWithImpl<$Res, $Val extends UserRestrictions>
 }
 
 /// @nodoc
-abstract class _$$_UserRestrictionsCopyWith<$Res>
+abstract class _$$UserRestrictionsImplCopyWith<$Res>
     implements $UserRestrictionsCopyWith<$Res> {
-  factory _$$_UserRestrictionsCopyWith(
-          _$_UserRestrictions value, $Res Function(_$_UserRestrictions) then) =
-      __$$_UserRestrictionsCopyWithImpl<$Res>;
+  factory _$$UserRestrictionsImplCopyWith(_$UserRestrictionsImpl value,
+          $Res Function(_$UserRestrictionsImpl) then) =
+      __$$UserRestrictionsImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -89,11 +89,11 @@ abstract class _$$_UserRestrictionsCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_UserRestrictionsCopyWithImpl<$Res>
-    extends _$UserRestrictionsCopyWithImpl<$Res, _$_UserRestrictions>
-    implements _$$_UserRestrictionsCopyWith<$Res> {
-  __$$_UserRestrictionsCopyWithImpl(
-      _$_UserRestrictions _value, $Res Function(_$_UserRestrictions) _then)
+class __$$UserRestrictionsImplCopyWithImpl<$Res>
+    extends _$UserRestrictionsCopyWithImpl<$Res, _$UserRestrictionsImpl>
+    implements _$$UserRestrictionsImplCopyWith<$Res> {
+  __$$UserRestrictionsImplCopyWithImpl(_$UserRestrictionsImpl _value,
+      $Res Function(_$UserRestrictionsImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -102,7 +102,7 @@ class __$$_UserRestrictionsCopyWithImpl<$Res>
     Object? approverLimits = null,
     Object? approverRights = null,
   }) {
-    return _then(_$_UserRestrictions(
+    return _then(_$UserRestrictionsImpl(
       approverLimits: null == approverLimits
           ? _value._approverLimits
           : approverLimits // ignore: cast_nullable_to_non_nullable
@@ -117,8 +117,8 @@ class __$$_UserRestrictionsCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_UserRestrictions extends _UserRestrictions {
-  const _$_UserRestrictions(
+class _$UserRestrictionsImpl extends _UserRestrictions {
+  const _$UserRestrictionsImpl(
       {required final List<ApprovalLimits> approverLimits,
       required this.approverRights})
       : _approverLimits = approverLimits,
@@ -141,10 +141,10 @@ class _$_UserRestrictions extends _UserRestrictions {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_UserRestrictions &&
+            other is _$UserRestrictionsImpl &&
             const DeepCollectionEquality()
                 .equals(other._approverLimits, _approverLimits) &&
             (identical(other.approverRights, approverRights) ||
@@ -158,14 +158,15 @@ class _$_UserRestrictions extends _UserRestrictions {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_UserRestrictionsCopyWith<_$_UserRestrictions> get copyWith =>
-      __$$_UserRestrictionsCopyWithImpl<_$_UserRestrictions>(this, _$identity);
+  _$$UserRestrictionsImplCopyWith<_$UserRestrictionsImpl> get copyWith =>
+      __$$UserRestrictionsImplCopyWithImpl<_$UserRestrictionsImpl>(
+          this, _$identity);
 }
 
 abstract class _UserRestrictions extends UserRestrictions {
   const factory _UserRestrictions(
       {required final List<ApprovalLimits> approverLimits,
-      required final ApproverRights approverRights}) = _$_UserRestrictions;
+      required final ApproverRights approverRights}) = _$UserRestrictionsImpl;
   const _UserRestrictions._() : super._();
 
   @override
@@ -174,6 +175,6 @@ abstract class _UserRestrictions extends UserRestrictions {
   ApproverRights get approverRights;
   @override
   @JsonKey(ignore: true)
-  _$$_UserRestrictionsCopyWith<_$_UserRestrictions> get copyWith =>
+  _$$UserRestrictionsImplCopyWith<_$UserRestrictionsImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

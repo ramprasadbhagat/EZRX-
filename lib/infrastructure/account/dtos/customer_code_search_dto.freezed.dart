@@ -12,7 +12,7 @@ part of 'customer_code_search_dto.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 CustomerCodeSearchDto _$CustomerCodeSearchDtoFromJson(
     Map<String, dynamic> json) {
@@ -99,11 +99,12 @@ class _$CustomerCodeSearchDtoCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_CustomerCodeSearchDtoCopyWith<$Res>
+abstract class _$$CustomerCodeSearchDtoImplCopyWith<$Res>
     implements $CustomerCodeSearchDtoCopyWith<$Res> {
-  factory _$$_CustomerCodeSearchDtoCopyWith(_$_CustomerCodeSearchDto value,
-          $Res Function(_$_CustomerCodeSearchDto) then) =
-      __$$_CustomerCodeSearchDtoCopyWithImpl<$Res>;
+  factory _$$CustomerCodeSearchDtoImplCopyWith(
+          _$CustomerCodeSearchDtoImpl value,
+          $Res Function(_$CustomerCodeSearchDtoImpl) then) =
+      __$$CustomerCodeSearchDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -116,11 +117,12 @@ abstract class _$$_CustomerCodeSearchDtoCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_CustomerCodeSearchDtoCopyWithImpl<$Res>
-    extends _$CustomerCodeSearchDtoCopyWithImpl<$Res, _$_CustomerCodeSearchDto>
-    implements _$$_CustomerCodeSearchDtoCopyWith<$Res> {
-  __$$_CustomerCodeSearchDtoCopyWithImpl(_$_CustomerCodeSearchDto _value,
-      $Res Function(_$_CustomerCodeSearchDto) _then)
+class __$$CustomerCodeSearchDtoImplCopyWithImpl<$Res>
+    extends _$CustomerCodeSearchDtoCopyWithImpl<$Res,
+        _$CustomerCodeSearchDtoImpl>
+    implements _$$CustomerCodeSearchDtoImplCopyWith<$Res> {
+  __$$CustomerCodeSearchDtoImplCopyWithImpl(_$CustomerCodeSearchDtoImpl _value,
+      $Res Function(_$CustomerCodeSearchDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -132,7 +134,7 @@ class __$$_CustomerCodeSearchDtoCopyWithImpl<$Res>
     Object? after = null,
     Object? searchKey = null,
   }) {
-    return _then(_$_CustomerCodeSearchDto(
+    return _then(_$CustomerCodeSearchDtoImpl(
       salesOrg: null == salesOrg
           ? _value.salesOrg
           : salesOrg // ignore: cast_nullable_to_non_nullable
@@ -159,8 +161,8 @@ class __$$_CustomerCodeSearchDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_CustomerCodeSearchDto extends _CustomerCodeSearchDto {
-  const _$_CustomerCodeSearchDto(
+class _$CustomerCodeSearchDtoImpl extends _CustomerCodeSearchDto {
+  const _$CustomerCodeSearchDtoImpl(
       {@JsonKey(name: 'salesOrganisation', defaultValue: '')
       required this.salesOrg,
       @JsonKey(name: 'first', defaultValue: 24) required this.first,
@@ -170,8 +172,8 @@ class _$_CustomerCodeSearchDto extends _CustomerCodeSearchDto {
       @JsonKey(name: 'searchKey', defaultValue: '') required this.searchKey})
       : super._();
 
-  factory _$_CustomerCodeSearchDto.fromJson(Map<String, dynamic> json) =>
-      _$$_CustomerCodeSearchDtoFromJson(json);
+  factory _$CustomerCodeSearchDtoImpl.fromJson(Map<String, dynamic> json) =>
+      _$$CustomerCodeSearchDtoImplFromJson(json);
 
   @override
   @JsonKey(name: 'salesOrganisation', defaultValue: '')
@@ -195,10 +197,10 @@ class _$_CustomerCodeSearchDto extends _CustomerCodeSearchDto {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_CustomerCodeSearchDto &&
+            other is _$CustomerCodeSearchDtoImpl &&
             (identical(other.salesOrg, salesOrg) ||
                 other.salesOrg == salesOrg) &&
             (identical(other.first, first) || other.first == first) &&
@@ -217,13 +219,13 @@ class _$_CustomerCodeSearchDto extends _CustomerCodeSearchDto {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_CustomerCodeSearchDtoCopyWith<_$_CustomerCodeSearchDto> get copyWith =>
-      __$$_CustomerCodeSearchDtoCopyWithImpl<_$_CustomerCodeSearchDto>(
-          this, _$identity);
+  _$$CustomerCodeSearchDtoImplCopyWith<_$CustomerCodeSearchDtoImpl>
+      get copyWith => __$$CustomerCodeSearchDtoImplCopyWithImpl<
+          _$CustomerCodeSearchDtoImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_CustomerCodeSearchDtoToJson(
+    return _$$CustomerCodeSearchDtoImplToJson(
       this,
     );
   }
@@ -238,11 +240,11 @@ abstract class _CustomerCodeSearchDto extends CustomerCodeSearchDto {
       required final bool filterBlockCustomer,
       @JsonKey(name: 'after', defaultValue: 0) required final int after,
       @JsonKey(name: 'searchKey', defaultValue: '')
-      required final String searchKey}) = _$_CustomerCodeSearchDto;
+      required final String searchKey}) = _$CustomerCodeSearchDtoImpl;
   const _CustomerCodeSearchDto._() : super._();
 
   factory _CustomerCodeSearchDto.fromJson(Map<String, dynamic> json) =
-      _$_CustomerCodeSearchDto.fromJson;
+      _$CustomerCodeSearchDtoImpl.fromJson;
 
   @override
   @JsonKey(name: 'salesOrganisation', defaultValue: '')
@@ -261,6 +263,6 @@ abstract class _CustomerCodeSearchDto extends CustomerCodeSearchDto {
   String get searchKey;
   @override
   @JsonKey(ignore: true)
-  _$$_CustomerCodeSearchDtoCopyWith<_$_CustomerCodeSearchDto> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$CustomerCodeSearchDtoImplCopyWith<_$CustomerCodeSearchDtoImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }

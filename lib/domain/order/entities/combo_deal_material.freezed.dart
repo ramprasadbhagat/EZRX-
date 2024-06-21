@@ -12,7 +12,7 @@ part of 'combo_deal_material.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$ComboDealMaterialSet {
@@ -64,22 +64,22 @@ class _$ComboDealMaterialSetCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_ComboDealMaterialSetCopyWith<$Res>
+abstract class _$$ComboDealMaterialSetImplCopyWith<$Res>
     implements $ComboDealMaterialSetCopyWith<$Res> {
-  factory _$$_ComboDealMaterialSetCopyWith(_$_ComboDealMaterialSet value,
-          $Res Function(_$_ComboDealMaterialSet) then) =
-      __$$_ComboDealMaterialSetCopyWithImpl<$Res>;
+  factory _$$ComboDealMaterialSetImplCopyWith(_$ComboDealMaterialSetImpl value,
+          $Res Function(_$ComboDealMaterialSetImpl) then) =
+      __$$ComboDealMaterialSetImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String setNo, List<ComboDealMaterial> materials});
 }
 
 /// @nodoc
-class __$$_ComboDealMaterialSetCopyWithImpl<$Res>
-    extends _$ComboDealMaterialSetCopyWithImpl<$Res, _$_ComboDealMaterialSet>
-    implements _$$_ComboDealMaterialSetCopyWith<$Res> {
-  __$$_ComboDealMaterialSetCopyWithImpl(_$_ComboDealMaterialSet _value,
-      $Res Function(_$_ComboDealMaterialSet) _then)
+class __$$ComboDealMaterialSetImplCopyWithImpl<$Res>
+    extends _$ComboDealMaterialSetCopyWithImpl<$Res, _$ComboDealMaterialSetImpl>
+    implements _$$ComboDealMaterialSetImplCopyWith<$Res> {
+  __$$ComboDealMaterialSetImplCopyWithImpl(_$ComboDealMaterialSetImpl _value,
+      $Res Function(_$ComboDealMaterialSetImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -88,7 +88,7 @@ class __$$_ComboDealMaterialSetCopyWithImpl<$Res>
     Object? setNo = null,
     Object? materials = null,
   }) {
-    return _then(_$_ComboDealMaterialSet(
+    return _then(_$ComboDealMaterialSetImpl(
       setNo: null == setNo
           ? _value.setNo
           : setNo // ignore: cast_nullable_to_non_nullable
@@ -103,8 +103,8 @@ class __$$_ComboDealMaterialSetCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_ComboDealMaterialSet extends _ComboDealMaterialSet {
-  const _$_ComboDealMaterialSet(
+class _$ComboDealMaterialSetImpl extends _ComboDealMaterialSet {
+  const _$ComboDealMaterialSetImpl(
       {required this.setNo, required final List<ComboDealMaterial> materials})
       : _materials = materials,
         super._();
@@ -125,10 +125,10 @@ class _$_ComboDealMaterialSet extends _ComboDealMaterialSet {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ComboDealMaterialSet &&
+            other is _$ComboDealMaterialSetImpl &&
             (identical(other.setNo, setNo) || other.setNo == setNo) &&
             const DeepCollectionEquality()
                 .equals(other._materials, _materials));
@@ -141,16 +141,17 @@ class _$_ComboDealMaterialSet extends _ComboDealMaterialSet {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ComboDealMaterialSetCopyWith<_$_ComboDealMaterialSet> get copyWith =>
-      __$$_ComboDealMaterialSetCopyWithImpl<_$_ComboDealMaterialSet>(
-          this, _$identity);
+  _$$ComboDealMaterialSetImplCopyWith<_$ComboDealMaterialSetImpl>
+      get copyWith =>
+          __$$ComboDealMaterialSetImplCopyWithImpl<_$ComboDealMaterialSetImpl>(
+              this, _$identity);
 }
 
 abstract class _ComboDealMaterialSet extends ComboDealMaterialSet {
   const factory _ComboDealMaterialSet(
           {required final String setNo,
           required final List<ComboDealMaterial> materials}) =
-      _$_ComboDealMaterialSet;
+      _$ComboDealMaterialSetImpl;
   const _ComboDealMaterialSet._() : super._();
 
   @override
@@ -159,8 +160,8 @@ abstract class _ComboDealMaterialSet extends ComboDealMaterialSet {
   List<ComboDealMaterial> get materials;
   @override
   @JsonKey(ignore: true)
-  _$$_ComboDealMaterialSetCopyWith<_$_ComboDealMaterialSet> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$ComboDealMaterialSetImplCopyWith<_$ComboDealMaterialSetImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -249,11 +250,11 @@ class _$ComboDealMaterialCopyWithImpl<$Res, $Val extends ComboDealMaterial>
 }
 
 /// @nodoc
-abstract class _$$_ComboDealMaterialCopyWith<$Res>
+abstract class _$$ComboDealMaterialImplCopyWith<$Res>
     implements $ComboDealMaterialCopyWith<$Res> {
-  factory _$$_ComboDealMaterialCopyWith(_$_ComboDealMaterial value,
-          $Res Function(_$_ComboDealMaterial) then) =
-      __$$_ComboDealMaterialCopyWithImpl<$Res>;
+  factory _$$ComboDealMaterialImplCopyWith(_$ComboDealMaterialImpl value,
+          $Res Function(_$ComboDealMaterialImpl) then) =
+      __$$ComboDealMaterialImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -267,11 +268,11 @@ abstract class _$$_ComboDealMaterialCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_ComboDealMaterialCopyWithImpl<$Res>
-    extends _$ComboDealMaterialCopyWithImpl<$Res, _$_ComboDealMaterial>
-    implements _$$_ComboDealMaterialCopyWith<$Res> {
-  __$$_ComboDealMaterialCopyWithImpl(
-      _$_ComboDealMaterial _value, $Res Function(_$_ComboDealMaterial) _then)
+class __$$ComboDealMaterialImplCopyWithImpl<$Res>
+    extends _$ComboDealMaterialCopyWithImpl<$Res, _$ComboDealMaterialImpl>
+    implements _$$ComboDealMaterialImplCopyWith<$Res> {
+  __$$ComboDealMaterialImplCopyWithImpl(_$ComboDealMaterialImpl _value,
+      $Res Function(_$ComboDealMaterialImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -285,7 +286,7 @@ class __$$_ComboDealMaterialCopyWithImpl<$Res>
     Object? mandatory = null,
     Object? suffix = null,
   }) {
-    return _then(_$_ComboDealMaterial(
+    return _then(_$ComboDealMaterialImpl(
       minQty: null == minQty
           ? _value.minQty
           : minQty // ignore: cast_nullable_to_non_nullable
@@ -320,8 +321,8 @@ class __$$_ComboDealMaterialCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_ComboDealMaterial extends _ComboDealMaterial {
-  const _$_ComboDealMaterial(
+class _$ComboDealMaterialImpl extends _ComboDealMaterial {
+  const _$ComboDealMaterialImpl(
       {required this.minQty,
       required this.materialNumber,
       required this.rate,
@@ -352,10 +353,10 @@ class _$_ComboDealMaterial extends _ComboDealMaterial {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ComboDealMaterial &&
+            other is _$ComboDealMaterialImpl &&
             (identical(other.minQty, minQty) || other.minQty == minQty) &&
             (identical(other.materialNumber, materialNumber) ||
                 other.materialNumber == materialNumber) &&
@@ -375,8 +376,8 @@ class _$_ComboDealMaterial extends _ComboDealMaterial {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ComboDealMaterialCopyWith<_$_ComboDealMaterial> get copyWith =>
-      __$$_ComboDealMaterialCopyWithImpl<_$_ComboDealMaterial>(
+  _$$ComboDealMaterialImplCopyWith<_$ComboDealMaterialImpl> get copyWith =>
+      __$$ComboDealMaterialImplCopyWithImpl<_$ComboDealMaterialImpl>(
           this, _$identity);
 }
 
@@ -388,7 +389,7 @@ abstract class _ComboDealMaterial extends ComboDealMaterial {
       required final DiscountType type,
       required final String conditionNumber,
       required final bool mandatory,
-      required final ComboSuffix suffix}) = _$_ComboDealMaterial;
+      required final ComboSuffix suffix}) = _$ComboDealMaterialImpl;
   const _ComboDealMaterial._() : super._();
 
   @override
@@ -407,6 +408,6 @@ abstract class _ComboDealMaterial extends ComboDealMaterial {
   ComboSuffix get suffix;
   @override
   @JsonKey(ignore: true)
-  _$$_ComboDealMaterialCopyWith<_$_ComboDealMaterial> get copyWith =>
+  _$$ComboDealMaterialImplCopyWith<_$ComboDealMaterialImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

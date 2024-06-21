@@ -12,7 +12,7 @@ part of 'transaction_item_dto.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 TransactionItemDto _$TransactionItemDtoFromJson(Map<String, dynamic> json) {
   return _TransactionItemDto.fromJson(json);
@@ -104,11 +104,11 @@ class _$TransactionItemDtoCopyWithImpl<$Res, $Val extends TransactionItemDto>
 }
 
 /// @nodoc
-abstract class _$$_TransactionItemDtoCopyWith<$Res>
+abstract class _$$TransactionItemDtoImplCopyWith<$Res>
     implements $TransactionItemDtoCopyWith<$Res> {
-  factory _$$_TransactionItemDtoCopyWith(_$_TransactionItemDto value,
-          $Res Function(_$_TransactionItemDto) then) =
-      __$$_TransactionItemDtoCopyWithImpl<$Res>;
+  factory _$$TransactionItemDtoImplCopyWith(_$TransactionItemDtoImpl value,
+          $Res Function(_$TransactionItemDtoImpl) then) =
+      __$$TransactionItemDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -121,11 +121,11 @@ abstract class _$$_TransactionItemDtoCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_TransactionItemDtoCopyWithImpl<$Res>
-    extends _$TransactionItemDtoCopyWithImpl<$Res, _$_TransactionItemDto>
-    implements _$$_TransactionItemDtoCopyWith<$Res> {
-  __$$_TransactionItemDtoCopyWithImpl(
-      _$_TransactionItemDto _value, $Res Function(_$_TransactionItemDto) _then)
+class __$$TransactionItemDtoImplCopyWithImpl<$Res>
+    extends _$TransactionItemDtoCopyWithImpl<$Res, _$TransactionItemDtoImpl>
+    implements _$$TransactionItemDtoImplCopyWith<$Res> {
+  __$$TransactionItemDtoImplCopyWithImpl(_$TransactionItemDtoImpl _value,
+      $Res Function(_$TransactionItemDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -138,7 +138,7 @@ class __$$_TransactionItemDtoCopyWithImpl<$Res>
     Object? createdOn = null,
     Object? paidOn = null,
   }) {
-    return _then(_$_TransactionItemDto(
+    return _then(_$TransactionItemDtoImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -169,8 +169,8 @@ class __$$_TransactionItemDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_TransactionItemDto extends _TransactionItemDto {
-  const _$_TransactionItemDto(
+class _$TransactionItemDtoImpl extends _TransactionItemDto {
+  const _$TransactionItemDtoImpl(
       {@JsonKey(name: 'id', defaultValue: '') required this.id,
       @JsonKey(name: 'reference', defaultValue: '') required this.reference,
       @JsonKey(name: 'paymentStatus', defaultValue: '')
@@ -180,8 +180,8 @@ class _$_TransactionItemDto extends _TransactionItemDto {
       @JsonKey(name: 'paidOn', defaultValue: '') required this.paidOn})
       : super._();
 
-  factory _$_TransactionItemDto.fromJson(Map<String, dynamic> json) =>
-      _$$_TransactionItemDtoFromJson(json);
+  factory _$TransactionItemDtoImpl.fromJson(Map<String, dynamic> json) =>
+      _$$TransactionItemDtoImplFromJson(json);
 
   @override
   @JsonKey(name: 'id', defaultValue: '')
@@ -208,10 +208,10 @@ class _$_TransactionItemDto extends _TransactionItemDto {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_TransactionItemDto &&
+            other is _$TransactionItemDtoImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.reference, reference) ||
                 other.reference == reference) &&
@@ -232,13 +232,13 @@ class _$_TransactionItemDto extends _TransactionItemDto {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_TransactionItemDtoCopyWith<_$_TransactionItemDto> get copyWith =>
-      __$$_TransactionItemDtoCopyWithImpl<_$_TransactionItemDto>(
+  _$$TransactionItemDtoImplCopyWith<_$TransactionItemDtoImpl> get copyWith =>
+      __$$TransactionItemDtoImplCopyWithImpl<_$TransactionItemDtoImpl>(
           this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_TransactionItemDtoToJson(
+    return _$$TransactionItemDtoImplToJson(
       this,
     );
   }
@@ -256,11 +256,11 @@ abstract class _TransactionItemDto extends TransactionItemDto {
       @JsonKey(name: 'createdOn', defaultValue: '')
       required final String createdOn,
       @JsonKey(name: 'paidOn', defaultValue: '')
-      required final String paidOn}) = _$_TransactionItemDto;
+      required final String paidOn}) = _$TransactionItemDtoImpl;
   const _TransactionItemDto._() : super._();
 
   factory _TransactionItemDto.fromJson(Map<String, dynamic> json) =
-      _$_TransactionItemDto.fromJson;
+      _$TransactionItemDtoImpl.fromJson;
 
   @override
   @JsonKey(name: 'id', defaultValue: '')
@@ -282,6 +282,6 @@ abstract class _TransactionItemDto extends TransactionItemDto {
   String get paidOn;
   @override
   @JsonKey(ignore: true)
-  _$$_TransactionItemDtoCopyWith<_$_TransactionItemDto> get copyWith =>
+  _$$TransactionItemDtoImplCopyWith<_$TransactionItemDtoImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

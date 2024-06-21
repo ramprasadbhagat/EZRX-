@@ -12,7 +12,7 @@ part of 'product_suggestion_history_dto.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 ProductSuggestionHistoryDto _$ProductSuggestionHistoryDtoFromJson(
     Map<String, dynamic> json) {
@@ -42,7 +42,7 @@ abstract class $ProductSuggestionHistoryDtoCopyWith<$Res> {
   $Res call(
       {@JsonKey(name: 'searchKeyList')
       @HiveField(0, defaultValue: <String>[])
-          List<String> searchKeyList});
+      List<String> searchKeyList});
 }
 
 /// @nodoc
@@ -71,28 +71,28 @@ class _$ProductSuggestionHistoryDtoCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_ProductSuggestionHistoryDtoCopyWith<$Res>
+abstract class _$$ProductSuggestionHistoryDtoImplCopyWith<$Res>
     implements $ProductSuggestionHistoryDtoCopyWith<$Res> {
-  factory _$$_ProductSuggestionHistoryDtoCopyWith(
-          _$_ProductSuggestionHistoryDto value,
-          $Res Function(_$_ProductSuggestionHistoryDto) then) =
-      __$$_ProductSuggestionHistoryDtoCopyWithImpl<$Res>;
+  factory _$$ProductSuggestionHistoryDtoImplCopyWith(
+          _$ProductSuggestionHistoryDtoImpl value,
+          $Res Function(_$ProductSuggestionHistoryDtoImpl) then) =
+      __$$ProductSuggestionHistoryDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
       {@JsonKey(name: 'searchKeyList')
       @HiveField(0, defaultValue: <String>[])
-          List<String> searchKeyList});
+      List<String> searchKeyList});
 }
 
 /// @nodoc
-class __$$_ProductSuggestionHistoryDtoCopyWithImpl<$Res>
+class __$$ProductSuggestionHistoryDtoImplCopyWithImpl<$Res>
     extends _$ProductSuggestionHistoryDtoCopyWithImpl<$Res,
-        _$_ProductSuggestionHistoryDto>
-    implements _$$_ProductSuggestionHistoryDtoCopyWith<$Res> {
-  __$$_ProductSuggestionHistoryDtoCopyWithImpl(
-      _$_ProductSuggestionHistoryDto _value,
-      $Res Function(_$_ProductSuggestionHistoryDto) _then)
+        _$ProductSuggestionHistoryDtoImpl>
+    implements _$$ProductSuggestionHistoryDtoImplCopyWith<$Res> {
+  __$$ProductSuggestionHistoryDtoImplCopyWithImpl(
+      _$ProductSuggestionHistoryDtoImpl _value,
+      $Res Function(_$ProductSuggestionHistoryDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -100,7 +100,7 @@ class __$$_ProductSuggestionHistoryDtoCopyWithImpl<$Res>
   $Res call({
     Object? searchKeyList = null,
   }) {
-    return _then(_$_ProductSuggestionHistoryDto(
+    return _then(_$ProductSuggestionHistoryDtoImpl(
       searchKeyList: null == searchKeyList
           ? _value._searchKeyList
           : searchKeyList // ignore: cast_nullable_to_non_nullable
@@ -112,16 +112,17 @@ class __$$_ProductSuggestionHistoryDtoCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 @HiveType(typeId: 38, adapterName: 'ProductSuggestionHistoryDtoAdapter')
-class _$_ProductSuggestionHistoryDto extends _ProductSuggestionHistoryDto {
-  _$_ProductSuggestionHistoryDto(
+class _$ProductSuggestionHistoryDtoImpl extends _ProductSuggestionHistoryDto {
+  _$ProductSuggestionHistoryDtoImpl(
       {@JsonKey(name: 'searchKeyList')
       @HiveField(0, defaultValue: <String>[])
-          required final List<String> searchKeyList})
+      required final List<String> searchKeyList})
       : _searchKeyList = searchKeyList,
         super._();
 
-  factory _$_ProductSuggestionHistoryDto.fromJson(Map<String, dynamic> json) =>
-      _$$_ProductSuggestionHistoryDtoFromJson(json);
+  factory _$ProductSuggestionHistoryDtoImpl.fromJson(
+          Map<String, dynamic> json) =>
+      _$$ProductSuggestionHistoryDtoImplFromJson(json);
 
   final List<String> _searchKeyList;
   @override
@@ -139,10 +140,10 @@ class _$_ProductSuggestionHistoryDto extends _ProductSuggestionHistoryDto {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ProductSuggestionHistoryDto &&
+            other is _$ProductSuggestionHistoryDtoImpl &&
             const DeepCollectionEquality()
                 .equals(other._searchKeyList, _searchKeyList));
   }
@@ -155,13 +156,13 @@ class _$_ProductSuggestionHistoryDto extends _ProductSuggestionHistoryDto {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ProductSuggestionHistoryDtoCopyWith<_$_ProductSuggestionHistoryDto>
-      get copyWith => __$$_ProductSuggestionHistoryDtoCopyWithImpl<
-          _$_ProductSuggestionHistoryDto>(this, _$identity);
+  _$$ProductSuggestionHistoryDtoImplCopyWith<_$ProductSuggestionHistoryDtoImpl>
+      get copyWith => __$$ProductSuggestionHistoryDtoImplCopyWithImpl<
+          _$ProductSuggestionHistoryDtoImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_ProductSuggestionHistoryDtoToJson(
+    return _$$ProductSuggestionHistoryDtoImplToJson(
       this,
     );
   }
@@ -172,12 +173,12 @@ abstract class _ProductSuggestionHistoryDto
   factory _ProductSuggestionHistoryDto(
           {@JsonKey(name: 'searchKeyList')
           @HiveField(0, defaultValue: <String>[])
-              required final List<String> searchKeyList}) =
-      _$_ProductSuggestionHistoryDto;
+          required final List<String> searchKeyList}) =
+      _$ProductSuggestionHistoryDtoImpl;
   _ProductSuggestionHistoryDto._() : super._();
 
   factory _ProductSuggestionHistoryDto.fromJson(Map<String, dynamic> json) =
-      _$_ProductSuggestionHistoryDto.fromJson;
+      _$ProductSuggestionHistoryDtoImpl.fromJson;
 
   @override
   @JsonKey(name: 'searchKeyList')
@@ -185,6 +186,6 @@ abstract class _ProductSuggestionHistoryDto
   List<String> get searchKeyList;
   @override
   @JsonKey(ignore: true)
-  _$$_ProductSuggestionHistoryDtoCopyWith<_$_ProductSuggestionHistoryDto>
+  _$$ProductSuggestionHistoryDtoImplCopyWith<_$ProductSuggestionHistoryDtoImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

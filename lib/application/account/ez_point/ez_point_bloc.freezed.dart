@@ -12,7 +12,7 @@ part of 'ez_point_bloc.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$EZPointEvent {
@@ -75,25 +75,25 @@ class _$EZPointEventCopyWithImpl<$Res, $Val extends EZPointEvent>
 }
 
 /// @nodoc
-abstract class _$$_InitializedCopyWith<$Res> {
-  factory _$$_InitializedCopyWith(
-          _$_Initialized value, $Res Function(_$_Initialized) then) =
-      __$$_InitializedCopyWithImpl<$Res>;
+abstract class _$$InitializedImplCopyWith<$Res> {
+  factory _$$InitializedImplCopyWith(
+          _$InitializedImpl value, $Res Function(_$InitializedImpl) then) =
+      __$$InitializedImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_InitializedCopyWithImpl<$Res>
-    extends _$EZPointEventCopyWithImpl<$Res, _$_Initialized>
-    implements _$$_InitializedCopyWith<$Res> {
-  __$$_InitializedCopyWithImpl(
-      _$_Initialized _value, $Res Function(_$_Initialized) _then)
+class __$$InitializedImplCopyWithImpl<$Res>
+    extends _$EZPointEventCopyWithImpl<$Res, _$InitializedImpl>
+    implements _$$InitializedImplCopyWith<$Res> {
+  __$$InitializedImplCopyWithImpl(
+      _$InitializedImpl _value, $Res Function(_$InitializedImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_Initialized implements _Initialized {
-  const _$_Initialized();
+class _$InitializedImpl implements _Initialized {
+  const _$InitializedImpl();
 
   @override
   String toString() {
@@ -101,9 +101,9 @@ class _$_Initialized implements _Initialized {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_Initialized);
+        (other.runtimeType == runtimeType && other is _$InitializedImpl);
   }
 
   @override
@@ -173,13 +173,14 @@ class _$_Initialized implements _Initialized {
 }
 
 abstract class _Initialized implements EZPointEvent {
-  const factory _Initialized() = _$_Initialized;
+  const factory _Initialized() = _$InitializedImpl;
 }
 
 /// @nodoc
-abstract class _$$_FetchCopyWith<$Res> {
-  factory _$$_FetchCopyWith(_$_Fetch value, $Res Function(_$_Fetch) then) =
-      __$$_FetchCopyWithImpl<$Res>;
+abstract class _$$FetchImplCopyWith<$Res> {
+  factory _$$FetchImplCopyWith(
+          _$FetchImpl value, $Res Function(_$FetchImpl) then) =
+      __$$FetchImplCopyWithImpl<$Res>;
   @useResult
   $Res call({CustomerCodeInfo customerCodeInfo});
 
@@ -187,10 +188,11 @@ abstract class _$$_FetchCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_FetchCopyWithImpl<$Res>
-    extends _$EZPointEventCopyWithImpl<$Res, _$_Fetch>
-    implements _$$_FetchCopyWith<$Res> {
-  __$$_FetchCopyWithImpl(_$_Fetch _value, $Res Function(_$_Fetch) _then)
+class __$$FetchImplCopyWithImpl<$Res>
+    extends _$EZPointEventCopyWithImpl<$Res, _$FetchImpl>
+    implements _$$FetchImplCopyWith<$Res> {
+  __$$FetchImplCopyWithImpl(
+      _$FetchImpl _value, $Res Function(_$FetchImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -198,7 +200,7 @@ class __$$_FetchCopyWithImpl<$Res>
   $Res call({
     Object? customerCodeInfo = null,
   }) {
-    return _then(_$_Fetch(
+    return _then(_$FetchImpl(
       customerCodeInfo: null == customerCodeInfo
           ? _value.customerCodeInfo
           : customerCodeInfo // ignore: cast_nullable_to_non_nullable
@@ -217,8 +219,8 @@ class __$$_FetchCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_Fetch implements _Fetch {
-  const _$_Fetch({required this.customerCodeInfo});
+class _$FetchImpl implements _Fetch {
+  const _$FetchImpl({required this.customerCodeInfo});
 
   @override
   final CustomerCodeInfo customerCodeInfo;
@@ -229,10 +231,10 @@ class _$_Fetch implements _Fetch {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Fetch &&
+            other is _$FetchImpl &&
             (identical(other.customerCodeInfo, customerCodeInfo) ||
                 other.customerCodeInfo == customerCodeInfo));
   }
@@ -243,8 +245,8 @@ class _$_Fetch implements _Fetch {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_FetchCopyWith<_$_Fetch> get copyWith =>
-      __$$_FetchCopyWithImpl<_$_Fetch>(this, _$identity);
+  _$$FetchImplCopyWith<_$FetchImpl> get copyWith =>
+      __$$FetchImplCopyWithImpl<_$FetchImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -311,11 +313,11 @@ class _$_Fetch implements _Fetch {
 
 abstract class _Fetch implements EZPointEvent {
   const factory _Fetch({required final CustomerCodeInfo customerCodeInfo}) =
-      _$_Fetch;
+      _$FetchImpl;
 
   CustomerCodeInfo get customerCodeInfo;
   @JsonKey(ignore: true)
-  _$$_FetchCopyWith<_$_Fetch> get copyWith =>
+  _$$FetchImplCopyWith<_$FetchImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -389,11 +391,11 @@ class _$EZPointStateCopyWithImpl<$Res, $Val extends EZPointState>
 }
 
 /// @nodoc
-abstract class _$$_EZPointStateCopyWith<$Res>
+abstract class _$$EZPointStateImplCopyWith<$Res>
     implements $EZPointStateCopyWith<$Res> {
-  factory _$$_EZPointStateCopyWith(
-          _$_EZPointState value, $Res Function(_$_EZPointState) then) =
-      __$$_EZPointStateCopyWithImpl<$Res>;
+  factory _$$EZPointStateImplCopyWith(
+          _$EZPointStateImpl value, $Res Function(_$EZPointStateImpl) then) =
+      __$$EZPointStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -406,11 +408,11 @@ abstract class _$$_EZPointStateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_EZPointStateCopyWithImpl<$Res>
-    extends _$EZPointStateCopyWithImpl<$Res, _$_EZPointState>
-    implements _$$_EZPointStateCopyWith<$Res> {
-  __$$_EZPointStateCopyWithImpl(
-      _$_EZPointState _value, $Res Function(_$_EZPointState) _then)
+class __$$EZPointStateImplCopyWithImpl<$Res>
+    extends _$EZPointStateCopyWithImpl<$Res, _$EZPointStateImpl>
+    implements _$$EZPointStateImplCopyWith<$Res> {
+  __$$EZPointStateImplCopyWithImpl(
+      _$EZPointStateImpl _value, $Res Function(_$EZPointStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -420,7 +422,7 @@ class __$$_EZPointStateCopyWithImpl<$Res>
     Object? eZPointTokenFailureOrSuccessOption = null,
     Object? ezPointToken = null,
   }) {
-    return _then(_$_EZPointState(
+    return _then(_$EZPointStateImpl(
       isFetching: null == isFetching
           ? _value.isFetching
           : isFetching // ignore: cast_nullable_to_non_nullable
@@ -440,8 +442,8 @@ class __$$_EZPointStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_EZPointState implements _EZPointState {
-  const _$_EZPointState(
+class _$EZPointStateImpl implements _EZPointState {
+  const _$EZPointStateImpl(
       {required this.isFetching,
       required this.eZPointTokenFailureOrSuccessOption,
       required this.ezPointToken});
@@ -459,10 +461,10 @@ class _$_EZPointState implements _EZPointState {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_EZPointState &&
+            other is _$EZPointStateImpl &&
             (identical(other.isFetching, isFetching) ||
                 other.isFetching == isFetching) &&
             (identical(other.eZPointTokenFailureOrSuccessOption,
@@ -480,8 +482,8 @@ class _$_EZPointState implements _EZPointState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_EZPointStateCopyWith<_$_EZPointState> get copyWith =>
-      __$$_EZPointStateCopyWithImpl<_$_EZPointState>(this, _$identity);
+  _$$EZPointStateImplCopyWith<_$EZPointStateImpl> get copyWith =>
+      __$$EZPointStateImplCopyWithImpl<_$EZPointStateImpl>(this, _$identity);
 }
 
 abstract class _EZPointState implements EZPointState {
@@ -489,7 +491,7 @@ abstract class _EZPointState implements EZPointState {
       {required final bool isFetching,
       required final Option<Either<ApiFailure, dynamic>>
           eZPointTokenFailureOrSuccessOption,
-      required final EZPointToken ezPointToken}) = _$_EZPointState;
+      required final EZPointToken ezPointToken}) = _$EZPointStateImpl;
 
   @override
   bool get isFetching;
@@ -499,6 +501,6 @@ abstract class _EZPointState implements EZPointState {
   EZPointToken get ezPointToken;
   @override
   @JsonKey(ignore: true)
-  _$$_EZPointStateCopyWith<_$_EZPointState> get copyWith =>
+  _$$EZPointStateImplCopyWith<_$EZPointStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

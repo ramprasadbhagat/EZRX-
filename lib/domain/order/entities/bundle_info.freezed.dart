@@ -12,7 +12,7 @@ part of 'bundle_info.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$BundleInfo {
@@ -75,22 +75,22 @@ class _$BundleInfoCopyWithImpl<$Res, $Val extends BundleInfo>
 }
 
 /// @nodoc
-abstract class _$$_BundleInfoCopyWith<$Res>
+abstract class _$$BundleInfoImplCopyWith<$Res>
     implements $BundleInfoCopyWith<$Res> {
-  factory _$$_BundleInfoCopyWith(
-          _$_BundleInfo value, $Res Function(_$_BundleInfo) then) =
-      __$$_BundleInfoCopyWithImpl<$Res>;
+  factory _$$BundleInfoImplCopyWith(
+          _$BundleInfoImpl value, $Res Function(_$BundleInfoImpl) then) =
+      __$$BundleInfoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({int sequence, int quantity, DiscountType type, double rate});
 }
 
 /// @nodoc
-class __$$_BundleInfoCopyWithImpl<$Res>
-    extends _$BundleInfoCopyWithImpl<$Res, _$_BundleInfo>
-    implements _$$_BundleInfoCopyWith<$Res> {
-  __$$_BundleInfoCopyWithImpl(
-      _$_BundleInfo _value, $Res Function(_$_BundleInfo) _then)
+class __$$BundleInfoImplCopyWithImpl<$Res>
+    extends _$BundleInfoCopyWithImpl<$Res, _$BundleInfoImpl>
+    implements _$$BundleInfoImplCopyWith<$Res> {
+  __$$BundleInfoImplCopyWithImpl(
+      _$BundleInfoImpl _value, $Res Function(_$BundleInfoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -101,7 +101,7 @@ class __$$_BundleInfoCopyWithImpl<$Res>
     Object? type = null,
     Object? rate = null,
   }) {
-    return _then(_$_BundleInfo(
+    return _then(_$BundleInfoImpl(
       sequence: null == sequence
           ? _value.sequence
           : sequence // ignore: cast_nullable_to_non_nullable
@@ -124,8 +124,8 @@ class __$$_BundleInfoCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_BundleInfo extends _BundleInfo {
-  const _$_BundleInfo(
+class _$BundleInfoImpl extends _BundleInfo {
+  const _$BundleInfoImpl(
       {required this.sequence,
       required this.quantity,
       required this.type,
@@ -147,10 +147,10 @@ class _$_BundleInfo extends _BundleInfo {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_BundleInfo &&
+            other is _$BundleInfoImpl &&
             (identical(other.sequence, sequence) ||
                 other.sequence == sequence) &&
             (identical(other.quantity, quantity) ||
@@ -165,8 +165,8 @@ class _$_BundleInfo extends _BundleInfo {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_BundleInfoCopyWith<_$_BundleInfo> get copyWith =>
-      __$$_BundleInfoCopyWithImpl<_$_BundleInfo>(this, _$identity);
+  _$$BundleInfoImplCopyWith<_$BundleInfoImpl> get copyWith =>
+      __$$BundleInfoImplCopyWithImpl<_$BundleInfoImpl>(this, _$identity);
 }
 
 abstract class _BundleInfo extends BundleInfo {
@@ -174,7 +174,7 @@ abstract class _BundleInfo extends BundleInfo {
       {required final int sequence,
       required final int quantity,
       required final DiscountType type,
-      required final double rate}) = _$_BundleInfo;
+      required final double rate}) = _$BundleInfoImpl;
   const _BundleInfo._() : super._();
 
   @override
@@ -187,6 +187,6 @@ abstract class _BundleInfo extends BundleInfo {
   double get rate;
   @override
   @JsonKey(ignore: true)
-  _$$_BundleInfoCopyWith<_$_BundleInfo> get copyWith =>
+  _$$BundleInfoImplCopyWith<_$BundleInfoImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

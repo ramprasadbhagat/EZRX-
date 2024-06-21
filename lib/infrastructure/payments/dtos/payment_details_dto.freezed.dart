@@ -12,7 +12,7 @@ part of 'payment_details_dto.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 PaymentDetailsDto _$PaymentDetailsDtoFromJson(Map<String, dynamic> json) {
   return _PaymentDetailsDto.fromJson(json);
@@ -81,11 +81,11 @@ class _$PaymentDetailsDtoCopyWithImpl<$Res, $Val extends PaymentDetailsDto>
 }
 
 /// @nodoc
-abstract class _$$_PaymentDetailsDtoCopyWith<$Res>
+abstract class _$$PaymentDetailsDtoImplCopyWith<$Res>
     implements $PaymentDetailsDtoCopyWith<$Res> {
-  factory _$$_PaymentDetailsDtoCopyWith(_$_PaymentDetailsDto value,
-          $Res Function(_$_PaymentDetailsDto) then) =
-      __$$_PaymentDetailsDtoCopyWithImpl<$Res>;
+  factory _$$PaymentDetailsDtoImplCopyWith(_$PaymentDetailsDtoImpl value,
+          $Res Function(_$PaymentDetailsDtoImpl) then) =
+      __$$PaymentDetailsDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -96,11 +96,11 @@ abstract class _$$_PaymentDetailsDtoCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_PaymentDetailsDtoCopyWithImpl<$Res>
-    extends _$PaymentDetailsDtoCopyWithImpl<$Res, _$_PaymentDetailsDto>
-    implements _$$_PaymentDetailsDtoCopyWith<$Res> {
-  __$$_PaymentDetailsDtoCopyWithImpl(
-      _$_PaymentDetailsDto _value, $Res Function(_$_PaymentDetailsDto) _then)
+class __$$PaymentDetailsDtoImplCopyWithImpl<$Res>
+    extends _$PaymentDetailsDtoCopyWithImpl<$Res, _$PaymentDetailsDtoImpl>
+    implements _$$PaymentDetailsDtoImplCopyWith<$Res> {
+  __$$PaymentDetailsDtoImplCopyWithImpl(_$PaymentDetailsDtoImpl _value,
+      $Res Function(_$PaymentDetailsDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -110,7 +110,7 @@ class __$$_PaymentDetailsDtoCopyWithImpl<$Res>
     Object? vaName = null,
     Object? expiresAt = null,
   }) {
-    return _then(_$_PaymentDetailsDto(
+    return _then(_$PaymentDetailsDtoImpl(
       vaNumber: null == vaNumber
           ? _value.vaNumber
           : vaNumber // ignore: cast_nullable_to_non_nullable
@@ -129,16 +129,16 @@ class __$$_PaymentDetailsDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_PaymentDetailsDto extends _PaymentDetailsDto {
-  const _$_PaymentDetailsDto(
+class _$PaymentDetailsDtoImpl extends _PaymentDetailsDto {
+  const _$PaymentDetailsDtoImpl(
       {@JsonKey(name: 'vaNumber', defaultValue: '') required this.vaNumber,
       @JsonKey(name: 'vaName', defaultValue: '') required this.vaName,
       @JsonKey(name: 'expiresAt', defaultValue: '', readValue: expiresAtDate)
       required this.expiresAt})
       : super._();
 
-  factory _$_PaymentDetailsDto.fromJson(Map<String, dynamic> json) =>
-      _$$_PaymentDetailsDtoFromJson(json);
+  factory _$PaymentDetailsDtoImpl.fromJson(Map<String, dynamic> json) =>
+      _$$PaymentDetailsDtoImplFromJson(json);
 
   @override
   @JsonKey(name: 'vaNumber', defaultValue: '')
@@ -156,10 +156,10 @@ class _$_PaymentDetailsDto extends _PaymentDetailsDto {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_PaymentDetailsDto &&
+            other is _$PaymentDetailsDtoImpl &&
             (identical(other.vaNumber, vaNumber) ||
                 other.vaNumber == vaNumber) &&
             (identical(other.vaName, vaName) || other.vaName == vaName) &&
@@ -174,13 +174,13 @@ class _$_PaymentDetailsDto extends _PaymentDetailsDto {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_PaymentDetailsDtoCopyWith<_$_PaymentDetailsDto> get copyWith =>
-      __$$_PaymentDetailsDtoCopyWithImpl<_$_PaymentDetailsDto>(
+  _$$PaymentDetailsDtoImplCopyWith<_$PaymentDetailsDtoImpl> get copyWith =>
+      __$$PaymentDetailsDtoImplCopyWithImpl<_$PaymentDetailsDtoImpl>(
           this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_PaymentDetailsDtoToJson(
+    return _$$PaymentDetailsDtoImplToJson(
       this,
     );
   }
@@ -192,11 +192,11 @@ abstract class _PaymentDetailsDto extends PaymentDetailsDto {
       required final String vaNumber,
       @JsonKey(name: 'vaName', defaultValue: '') required final String vaName,
       @JsonKey(name: 'expiresAt', defaultValue: '', readValue: expiresAtDate)
-      required final String expiresAt}) = _$_PaymentDetailsDto;
+      required final String expiresAt}) = _$PaymentDetailsDtoImpl;
   const _PaymentDetailsDto._() : super._();
 
   factory _PaymentDetailsDto.fromJson(Map<String, dynamic> json) =
-      _$_PaymentDetailsDto.fromJson;
+      _$PaymentDetailsDtoImpl.fromJson;
 
   @override
   @JsonKey(name: 'vaNumber', defaultValue: '')
@@ -209,6 +209,6 @@ abstract class _PaymentDetailsDto extends PaymentDetailsDto {
   String get expiresAt;
   @override
   @JsonKey(ignore: true)
-  _$$_PaymentDetailsDtoCopyWith<_$_PaymentDetailsDto> get copyWith =>
+  _$$PaymentDetailsDtoImplCopyWith<_$PaymentDetailsDtoImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

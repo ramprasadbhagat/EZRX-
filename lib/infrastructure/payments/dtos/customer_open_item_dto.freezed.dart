@@ -12,7 +12,7 @@ part of 'customer_open_item_dto.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 CustomerOpenItemDto _$CustomerOpenItemDtoFromJson(Map<String, dynamic> json) {
   return _CustomerOpenItemDto.fromJson(json);
@@ -291,11 +291,11 @@ class _$CustomerOpenItemDtoCopyWithImpl<$Res, $Val extends CustomerOpenItemDto>
 }
 
 /// @nodoc
-abstract class _$$_CustomerOpenItemDtoCopyWith<$Res>
+abstract class _$$CustomerOpenItemDtoImplCopyWith<$Res>
     implements $CustomerOpenItemDtoCopyWith<$Res> {
-  factory _$$_CustomerOpenItemDtoCopyWith(_$_CustomerOpenItemDto value,
-          $Res Function(_$_CustomerOpenItemDto) then) =
-      __$$_CustomerOpenItemDtoCopyWithImpl<$Res>;
+  factory _$$CustomerOpenItemDtoImplCopyWith(_$CustomerOpenItemDtoImpl value,
+          $Res Function(_$CustomerOpenItemDtoImpl) then) =
+      __$$CustomerOpenItemDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -347,11 +347,11 @@ abstract class _$$_CustomerOpenItemDtoCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_CustomerOpenItemDtoCopyWithImpl<$Res>
-    extends _$CustomerOpenItemDtoCopyWithImpl<$Res, _$_CustomerOpenItemDto>
-    implements _$$_CustomerOpenItemDtoCopyWith<$Res> {
-  __$$_CustomerOpenItemDtoCopyWithImpl(_$_CustomerOpenItemDto _value,
-      $Res Function(_$_CustomerOpenItemDto) _then)
+class __$$CustomerOpenItemDtoImplCopyWithImpl<$Res>
+    extends _$CustomerOpenItemDtoCopyWithImpl<$Res, _$CustomerOpenItemDtoImpl>
+    implements _$$CustomerOpenItemDtoImplCopyWith<$Res> {
+  __$$CustomerOpenItemDtoImplCopyWithImpl(_$CustomerOpenItemDtoImpl _value,
+      $Res Function(_$CustomerOpenItemDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -385,7 +385,7 @@ class __$$_CustomerOpenItemDtoCopyWithImpl<$Res>
     Object? openAmountInTransCrcy = null,
     Object? orderId = null,
   }) {
-    return _then(_$_CustomerOpenItemDto(
+    return _then(_$CustomerOpenItemDtoImpl(
       status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
@@ -500,8 +500,8 @@ class __$$_CustomerOpenItemDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_CustomerOpenItemDto extends _CustomerOpenItemDto {
-  _$_CustomerOpenItemDto(
+class _$CustomerOpenItemDtoImpl extends _CustomerOpenItemDto {
+  _$CustomerOpenItemDtoImpl(
       {@JsonKey(name: 'status', defaultValue: '') required this.status,
       @JsonKey(name: 'accountingDocument', defaultValue: '')
       required this.accountingDocument,
@@ -551,8 +551,8 @@ class _$_CustomerOpenItemDto extends _CustomerOpenItemDto {
       @JsonKey(name: 'orderId', defaultValue: '') required this.orderId})
       : super._();
 
-  factory _$_CustomerOpenItemDto.fromJson(Map<String, dynamic> json) =>
-      _$$_CustomerOpenItemDtoFromJson(json);
+  factory _$CustomerOpenItemDtoImpl.fromJson(Map<String, dynamic> json) =>
+      _$$CustomerOpenItemDtoImplFromJson(json);
 
   @override
   @JsonKey(name: 'status', defaultValue: '')
@@ -642,10 +642,10 @@ class _$_CustomerOpenItemDto extends _CustomerOpenItemDto {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_CustomerOpenItemDto &&
+            other is _$CustomerOpenItemDtoImpl &&
             (identical(other.status, status) || other.status == status) &&
             (identical(other.accountingDocument, accountingDocument) ||
                 other.accountingDocument == accountingDocument) &&
@@ -740,13 +740,13 @@ class _$_CustomerOpenItemDto extends _CustomerOpenItemDto {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_CustomerOpenItemDtoCopyWith<_$_CustomerOpenItemDto> get copyWith =>
-      __$$_CustomerOpenItemDtoCopyWithImpl<_$_CustomerOpenItemDto>(
+  _$$CustomerOpenItemDtoImplCopyWith<_$CustomerOpenItemDtoImpl> get copyWith =>
+      __$$CustomerOpenItemDtoImplCopyWithImpl<_$CustomerOpenItemDtoImpl>(
           this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_CustomerOpenItemDtoToJson(
+    return _$$CustomerOpenItemDtoImplToJson(
       this,
     );
   }
@@ -806,11 +806,11 @@ abstract class _CustomerOpenItemDto extends CustomerOpenItemDto {
       @JsonKey(name: 'openAmountInTransCrcy', defaultValue: 0)
       required final double openAmountInTransCrcy,
       @JsonKey(name: 'orderId', defaultValue: '')
-      required final String orderId}) = _$_CustomerOpenItemDto;
+      required final String orderId}) = _$CustomerOpenItemDtoImpl;
   _CustomerOpenItemDto._() : super._();
 
   factory _CustomerOpenItemDto.fromJson(Map<String, dynamic> json) =
-      _$_CustomerOpenItemDto.fromJson;
+      _$CustomerOpenItemDtoImpl.fromJson;
 
   @override
   @JsonKey(name: 'status', defaultValue: '')
@@ -895,6 +895,6 @@ abstract class _CustomerOpenItemDto extends CustomerOpenItemDto {
   String get orderId;
   @override
   @JsonKey(ignore: true)
-  _$$_CustomerOpenItemDtoCopyWith<_$_CustomerOpenItemDto> get copyWith =>
+  _$$CustomerOpenItemDtoImplCopyWith<_$CustomerOpenItemDtoImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

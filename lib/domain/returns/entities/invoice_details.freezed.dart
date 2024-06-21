@@ -12,7 +12,7 @@ part of 'invoice_details.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$InvoiceDetails {
@@ -73,11 +73,11 @@ class _$InvoiceDetailsCopyWithImpl<$Res, $Val extends InvoiceDetails>
 }
 
 /// @nodoc
-abstract class _$$_InvoiceDetailsCopyWith<$Res>
+abstract class _$$InvoiceDetailsImplCopyWith<$Res>
     implements $InvoiceDetailsCopyWith<$Res> {
-  factory _$$_InvoiceDetailsCopyWith(
-          _$_InvoiceDetails value, $Res Function(_$_InvoiceDetails) then) =
-      __$$_InvoiceDetailsCopyWithImpl<$Res>;
+  factory _$$InvoiceDetailsImplCopyWith(_$InvoiceDetailsImpl value,
+          $Res Function(_$InvoiceDetailsImpl) then) =
+      __$$InvoiceDetailsImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -87,11 +87,11 @@ abstract class _$$_InvoiceDetailsCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_InvoiceDetailsCopyWithImpl<$Res>
-    extends _$InvoiceDetailsCopyWithImpl<$Res, _$_InvoiceDetails>
-    implements _$$_InvoiceDetailsCopyWith<$Res> {
-  __$$_InvoiceDetailsCopyWithImpl(
-      _$_InvoiceDetails _value, $Res Function(_$_InvoiceDetails) _then)
+class __$$InvoiceDetailsImplCopyWithImpl<$Res>
+    extends _$InvoiceDetailsCopyWithImpl<$Res, _$InvoiceDetailsImpl>
+    implements _$$InvoiceDetailsImplCopyWith<$Res> {
+  __$$InvoiceDetailsImplCopyWithImpl(
+      _$InvoiceDetailsImpl _value, $Res Function(_$InvoiceDetailsImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -101,7 +101,7 @@ class __$$_InvoiceDetailsCopyWithImpl<$Res>
     Object? salesOrg = null,
     Object? returnItemDetailsList = null,
   }) {
-    return _then(_$_InvoiceDetails(
+    return _then(_$InvoiceDetailsImpl(
       invoiceNumber: null == invoiceNumber
           ? _value.invoiceNumber
           : invoiceNumber // ignore: cast_nullable_to_non_nullable
@@ -120,8 +120,8 @@ class __$$_InvoiceDetailsCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_InvoiceDetails extends _InvoiceDetails {
-  const _$_InvoiceDetails(
+class _$InvoiceDetailsImpl extends _InvoiceDetails {
+  const _$InvoiceDetailsImpl(
       {required this.invoiceNumber,
       required this.salesOrg,
       required final List<ReturnItemDetails> returnItemDetailsList})
@@ -147,10 +147,10 @@ class _$_InvoiceDetails extends _InvoiceDetails {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_InvoiceDetails &&
+            other is _$InvoiceDetailsImpl &&
             (identical(other.invoiceNumber, invoiceNumber) ||
                 other.invoiceNumber == invoiceNumber) &&
             (identical(other.salesOrg, salesOrg) ||
@@ -166,8 +166,9 @@ class _$_InvoiceDetails extends _InvoiceDetails {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_InvoiceDetailsCopyWith<_$_InvoiceDetails> get copyWith =>
-      __$$_InvoiceDetailsCopyWithImpl<_$_InvoiceDetails>(this, _$identity);
+  _$$InvoiceDetailsImplCopyWith<_$InvoiceDetailsImpl> get copyWith =>
+      __$$InvoiceDetailsImplCopyWithImpl<_$InvoiceDetailsImpl>(
+          this, _$identity);
 }
 
 abstract class _InvoiceDetails extends InvoiceDetails {
@@ -175,7 +176,7 @@ abstract class _InvoiceDetails extends InvoiceDetails {
           {required final String invoiceNumber,
           required final SalesOrg salesOrg,
           required final List<ReturnItemDetails> returnItemDetailsList}) =
-      _$_InvoiceDetails;
+      _$InvoiceDetailsImpl;
   const _InvoiceDetails._() : super._();
 
   @override
@@ -186,6 +187,6 @@ abstract class _InvoiceDetails extends InvoiceDetails {
   List<ReturnItemDetails> get returnItemDetailsList;
   @override
   @JsonKey(ignore: true)
-  _$$_InvoiceDetailsCopyWith<_$_InvoiceDetails> get copyWith =>
+  _$$InvoiceDetailsImplCopyWith<_$InvoiceDetailsImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

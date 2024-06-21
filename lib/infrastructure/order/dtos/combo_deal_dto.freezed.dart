@@ -12,7 +12,7 @@ part of 'combo_deal_dto.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 ComboDealDto _$ComboDealDtoFromJson(Map<String, dynamic> json) {
   return _ComboDealDto.fromJson(json);
@@ -124,11 +124,11 @@ class _$ComboDealDtoCopyWithImpl<$Res, $Val extends ComboDealDto>
 }
 
 /// @nodoc
-abstract class _$$_ComboDealDtoCopyWith<$Res>
+abstract class _$$ComboDealDtoImplCopyWith<$Res>
     implements $ComboDealDtoCopyWith<$Res> {
-  factory _$$_ComboDealDtoCopyWith(
-          _$_ComboDealDto value, $Res Function(_$_ComboDealDto) then) =
-      __$$_ComboDealDtoCopyWithImpl<$Res>;
+  factory _$$ComboDealDtoImplCopyWith(
+          _$ComboDealDtoImpl value, $Res Function(_$ComboDealDtoImpl) then) =
+      __$$ComboDealDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -149,11 +149,11 @@ abstract class _$$_ComboDealDtoCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_ComboDealDtoCopyWithImpl<$Res>
-    extends _$ComboDealDtoCopyWithImpl<$Res, _$_ComboDealDto>
-    implements _$$_ComboDealDtoCopyWith<$Res> {
-  __$$_ComboDealDtoCopyWithImpl(
-      _$_ComboDealDto _value, $Res Function(_$_ComboDealDto) _then)
+class __$$ComboDealDtoImplCopyWithImpl<$Res>
+    extends _$ComboDealDtoCopyWithImpl<$Res, _$ComboDealDtoImpl>
+    implements _$$ComboDealDtoImplCopyWith<$Res> {
+  __$$ComboDealDtoImplCopyWithImpl(
+      _$ComboDealDtoImpl _value, $Res Function(_$ComboDealDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -166,7 +166,7 @@ class __$$_ComboDealDtoCopyWithImpl<$Res>
     Object? materialComboDeals = null,
     Object? flexiTierRule = null,
   }) {
-    return _then(_$_ComboDealDto(
+    return _then(_$ComboDealDtoImpl(
       groupDeal: null == groupDeal
           ? _value.groupDeal
           : groupDeal // ignore: cast_nullable_to_non_nullable
@@ -197,8 +197,8 @@ class __$$_ComboDealDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_ComboDealDto extends _ComboDealDto {
-  const _$_ComboDealDto(
+class _$ComboDealDtoImpl extends _ComboDealDto {
+  const _$ComboDealDtoImpl(
       {@JsonKey(name: 'groupDeal') this.groupDeal = ComboDealGroupDealDto.empty,
       @JsonKey(name: 'flexiSKUTier', defaultValue: [])
       required final List<ComboDealSKUTierDto> flexiSKUTier,
@@ -217,8 +217,8 @@ class _$_ComboDealDto extends _ComboDealDto {
         _flexiTierRule = flexiTierRule,
         super._();
 
-  factory _$_ComboDealDto.fromJson(Map<String, dynamic> json) =>
-      _$$_ComboDealDtoFromJson(json);
+  factory _$ComboDealDtoImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ComboDealDtoImplFromJson(json);
 
   @override
   @JsonKey(name: 'groupDeal')
@@ -275,10 +275,10 @@ class _$_ComboDealDto extends _ComboDealDto {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ComboDealDto &&
+            other is _$ComboDealDtoImpl &&
             (identical(other.groupDeal, groupDeal) ||
                 other.groupDeal == groupDeal) &&
             const DeepCollectionEquality()
@@ -307,12 +307,12 @@ class _$_ComboDealDto extends _ComboDealDto {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ComboDealDtoCopyWith<_$_ComboDealDto> get copyWith =>
-      __$$_ComboDealDtoCopyWithImpl<_$_ComboDealDto>(this, _$identity);
+  _$$ComboDealDtoImplCopyWith<_$ComboDealDtoImpl> get copyWith =>
+      __$$ComboDealDtoImplCopyWithImpl<_$ComboDealDtoImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_ComboDealDtoToJson(
+    return _$$ComboDealDtoImplToJson(
       this,
     );
   }
@@ -331,11 +331,11 @@ abstract class _ComboDealDto extends ComboDealDto {
           required final List<ComboDealMaterialSetDto> materialComboDeals,
           @JsonKey(name: 'flexiTierRule', defaultValue: [])
           required final List<ComboDealTierRuleDto> flexiTierRule}) =
-      _$_ComboDealDto;
+      _$ComboDealDtoImpl;
   const _ComboDealDto._() : super._();
 
   factory _ComboDealDto.fromJson(Map<String, dynamic> json) =
-      _$_ComboDealDto.fromJson;
+      _$ComboDealDtoImpl.fromJson;
 
   @override
   @JsonKey(name: 'groupDeal')
@@ -357,6 +357,6 @@ abstract class _ComboDealDto extends ComboDealDto {
   List<ComboDealTierRuleDto> get flexiTierRule;
   @override
   @JsonKey(ignore: true)
-  _$$_ComboDealDtoCopyWith<_$_ComboDealDto> get copyWith =>
+  _$$ComboDealDtoImplCopyWith<_$ComboDealDtoImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

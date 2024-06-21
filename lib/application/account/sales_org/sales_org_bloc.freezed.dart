@@ -12,7 +12,7 @@ part of 'sales_org_bloc.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$SalesOrgEvent {
@@ -106,25 +106,25 @@ class _$SalesOrgEventCopyWithImpl<$Res, $Val extends SalesOrgEvent>
 }
 
 /// @nodoc
-abstract class _$$_InitializedCopyWith<$Res> {
-  factory _$$_InitializedCopyWith(
-          _$_Initialized value, $Res Function(_$_Initialized) then) =
-      __$$_InitializedCopyWithImpl<$Res>;
+abstract class _$$InitializedImplCopyWith<$Res> {
+  factory _$$InitializedImplCopyWith(
+          _$InitializedImpl value, $Res Function(_$InitializedImpl) then) =
+      __$$InitializedImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_InitializedCopyWithImpl<$Res>
-    extends _$SalesOrgEventCopyWithImpl<$Res, _$_Initialized>
-    implements _$$_InitializedCopyWith<$Res> {
-  __$$_InitializedCopyWithImpl(
-      _$_Initialized _value, $Res Function(_$_Initialized) _then)
+class __$$InitializedImplCopyWithImpl<$Res>
+    extends _$SalesOrgEventCopyWithImpl<$Res, _$InitializedImpl>
+    implements _$$InitializedImplCopyWith<$Res> {
+  __$$InitializedImplCopyWithImpl(
+      _$InitializedImpl _value, $Res Function(_$InitializedImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_Initialized implements _Initialized {
-  const _$_Initialized();
+class _$InitializedImpl implements _Initialized {
+  const _$InitializedImpl();
 
   @override
   String toString() {
@@ -132,9 +132,9 @@ class _$_Initialized implements _Initialized {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_Initialized);
+        (other.runtimeType == runtimeType && other is _$InitializedImpl);
   }
 
   @override
@@ -235,14 +235,14 @@ class _$_Initialized implements _Initialized {
 }
 
 abstract class _Initialized implements SalesOrgEvent {
-  const factory _Initialized() = _$_Initialized;
+  const factory _Initialized() = _$InitializedImpl;
 }
 
 /// @nodoc
-abstract class _$$_SelectedCopyWith<$Res> {
-  factory _$$_SelectedCopyWith(
-          _$_Selected value, $Res Function(_$_Selected) then) =
-      __$$_SelectedCopyWithImpl<$Res>;
+abstract class _$$SelectedImplCopyWith<$Res> {
+  factory _$$SelectedImplCopyWith(
+          _$SelectedImpl value, $Res Function(_$SelectedImpl) then) =
+      __$$SelectedImplCopyWithImpl<$Res>;
   @useResult
   $Res call({SalesOrganisation salesOrganisation});
 
@@ -250,11 +250,11 @@ abstract class _$$_SelectedCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_SelectedCopyWithImpl<$Res>
-    extends _$SalesOrgEventCopyWithImpl<$Res, _$_Selected>
-    implements _$$_SelectedCopyWith<$Res> {
-  __$$_SelectedCopyWithImpl(
-      _$_Selected _value, $Res Function(_$_Selected) _then)
+class __$$SelectedImplCopyWithImpl<$Res>
+    extends _$SalesOrgEventCopyWithImpl<$Res, _$SelectedImpl>
+    implements _$$SelectedImplCopyWith<$Res> {
+  __$$SelectedImplCopyWithImpl(
+      _$SelectedImpl _value, $Res Function(_$SelectedImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -262,7 +262,7 @@ class __$$_SelectedCopyWithImpl<$Res>
   $Res call({
     Object? salesOrganisation = null,
   }) {
-    return _then(_$_Selected(
+    return _then(_$SelectedImpl(
       salesOrganisation: null == salesOrganisation
           ? _value.salesOrganisation
           : salesOrganisation // ignore: cast_nullable_to_non_nullable
@@ -281,8 +281,8 @@ class __$$_SelectedCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_Selected implements _Selected {
-  const _$_Selected({required this.salesOrganisation});
+class _$SelectedImpl implements _Selected {
+  const _$SelectedImpl({required this.salesOrganisation});
 
   @override
   final SalesOrganisation salesOrganisation;
@@ -293,10 +293,10 @@ class _$_Selected implements _Selected {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Selected &&
+            other is _$SelectedImpl &&
             (identical(other.salesOrganisation, salesOrganisation) ||
                 other.salesOrganisation == salesOrganisation));
   }
@@ -307,8 +307,8 @@ class _$_Selected implements _Selected {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_SelectedCopyWith<_$_Selected> get copyWith =>
-      __$$_SelectedCopyWithImpl<_$_Selected>(this, _$identity);
+  _$$SelectedImplCopyWith<_$SelectedImpl> get copyWith =>
+      __$$SelectedImplCopyWithImpl<_$SelectedImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -406,29 +406,30 @@ class _$_Selected implements _Selected {
 
 abstract class _Selected implements SalesOrgEvent {
   const factory _Selected(
-      {required final SalesOrganisation salesOrganisation}) = _$_Selected;
+      {required final SalesOrganisation salesOrganisation}) = _$SelectedImpl;
 
   SalesOrganisation get salesOrganisation;
   @JsonKey(ignore: true)
-  _$$_SelectedCopyWith<_$_Selected> get copyWith =>
+  _$$SelectedImplCopyWith<_$SelectedImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_LoadSavedOrganisationCopyWith<$Res> {
-  factory _$$_LoadSavedOrganisationCopyWith(_$_LoadSavedOrganisation value,
-          $Res Function(_$_LoadSavedOrganisation) then) =
-      __$$_LoadSavedOrganisationCopyWithImpl<$Res>;
+abstract class _$$LoadSavedOrganisationImplCopyWith<$Res> {
+  factory _$$LoadSavedOrganisationImplCopyWith(
+          _$LoadSavedOrganisationImpl value,
+          $Res Function(_$LoadSavedOrganisationImpl) then) =
+      __$$LoadSavedOrganisationImplCopyWithImpl<$Res>;
   @useResult
   $Res call({List<SalesOrganisation> salesOrganisations});
 }
 
 /// @nodoc
-class __$$_LoadSavedOrganisationCopyWithImpl<$Res>
-    extends _$SalesOrgEventCopyWithImpl<$Res, _$_LoadSavedOrganisation>
-    implements _$$_LoadSavedOrganisationCopyWith<$Res> {
-  __$$_LoadSavedOrganisationCopyWithImpl(_$_LoadSavedOrganisation _value,
-      $Res Function(_$_LoadSavedOrganisation) _then)
+class __$$LoadSavedOrganisationImplCopyWithImpl<$Res>
+    extends _$SalesOrgEventCopyWithImpl<$Res, _$LoadSavedOrganisationImpl>
+    implements _$$LoadSavedOrganisationImplCopyWith<$Res> {
+  __$$LoadSavedOrganisationImplCopyWithImpl(_$LoadSavedOrganisationImpl _value,
+      $Res Function(_$LoadSavedOrganisationImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -436,7 +437,7 @@ class __$$_LoadSavedOrganisationCopyWithImpl<$Res>
   $Res call({
     Object? salesOrganisations = null,
   }) {
-    return _then(_$_LoadSavedOrganisation(
+    return _then(_$LoadSavedOrganisationImpl(
       salesOrganisations: null == salesOrganisations
           ? _value._salesOrganisations
           : salesOrganisations // ignore: cast_nullable_to_non_nullable
@@ -447,8 +448,8 @@ class __$$_LoadSavedOrganisationCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_LoadSavedOrganisation implements _LoadSavedOrganisation {
-  const _$_LoadSavedOrganisation(
+class _$LoadSavedOrganisationImpl implements _LoadSavedOrganisation {
+  const _$LoadSavedOrganisationImpl(
       {required final List<SalesOrganisation> salesOrganisations})
       : _salesOrganisations = salesOrganisations;
 
@@ -467,10 +468,10 @@ class _$_LoadSavedOrganisation implements _LoadSavedOrganisation {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_LoadSavedOrganisation &&
+            other is _$LoadSavedOrganisationImpl &&
             const DeepCollectionEquality()
                 .equals(other._salesOrganisations, _salesOrganisations));
   }
@@ -482,9 +483,9 @@ class _$_LoadSavedOrganisation implements _LoadSavedOrganisation {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_LoadSavedOrganisationCopyWith<_$_LoadSavedOrganisation> get copyWith =>
-      __$$_LoadSavedOrganisationCopyWithImpl<_$_LoadSavedOrganisation>(
-          this, _$identity);
+  _$$LoadSavedOrganisationImplCopyWith<_$LoadSavedOrganisationImpl>
+      get copyWith => __$$LoadSavedOrganisationImplCopyWithImpl<
+          _$LoadSavedOrganisationImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -583,29 +584,31 @@ class _$_LoadSavedOrganisation implements _LoadSavedOrganisation {
 abstract class _LoadSavedOrganisation implements SalesOrgEvent {
   const factory _LoadSavedOrganisation(
           {required final List<SalesOrganisation> salesOrganisations}) =
-      _$_LoadSavedOrganisation;
+      _$LoadSavedOrganisationImpl;
 
   List<SalesOrganisation> get salesOrganisations;
   @JsonKey(ignore: true)
-  _$$_LoadSavedOrganisationCopyWith<_$_LoadSavedOrganisation> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$LoadSavedOrganisationImplCopyWith<_$LoadSavedOrganisationImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_FetchAvailableSalesOrgCopyWith<$Res> {
-  factory _$$_FetchAvailableSalesOrgCopyWith(_$_FetchAvailableSalesOrg value,
-          $Res Function(_$_FetchAvailableSalesOrg) then) =
-      __$$_FetchAvailableSalesOrgCopyWithImpl<$Res>;
+abstract class _$$FetchAvailableSalesOrgImplCopyWith<$Res> {
+  factory _$$FetchAvailableSalesOrgImplCopyWith(
+          _$FetchAvailableSalesOrgImpl value,
+          $Res Function(_$FetchAvailableSalesOrgImpl) then) =
+      __$$FetchAvailableSalesOrgImplCopyWithImpl<$Res>;
   @useResult
   $Res call({List<SalesOrganisation> avialableSalesOrgList});
 }
 
 /// @nodoc
-class __$$_FetchAvailableSalesOrgCopyWithImpl<$Res>
-    extends _$SalesOrgEventCopyWithImpl<$Res, _$_FetchAvailableSalesOrg>
-    implements _$$_FetchAvailableSalesOrgCopyWith<$Res> {
-  __$$_FetchAvailableSalesOrgCopyWithImpl(_$_FetchAvailableSalesOrg _value,
-      $Res Function(_$_FetchAvailableSalesOrg) _then)
+class __$$FetchAvailableSalesOrgImplCopyWithImpl<$Res>
+    extends _$SalesOrgEventCopyWithImpl<$Res, _$FetchAvailableSalesOrgImpl>
+    implements _$$FetchAvailableSalesOrgImplCopyWith<$Res> {
+  __$$FetchAvailableSalesOrgImplCopyWithImpl(
+      _$FetchAvailableSalesOrgImpl _value,
+      $Res Function(_$FetchAvailableSalesOrgImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -613,7 +616,7 @@ class __$$_FetchAvailableSalesOrgCopyWithImpl<$Res>
   $Res call({
     Object? avialableSalesOrgList = null,
   }) {
-    return _then(_$_FetchAvailableSalesOrg(
+    return _then(_$FetchAvailableSalesOrgImpl(
       avialableSalesOrgList: null == avialableSalesOrgList
           ? _value._avialableSalesOrgList
           : avialableSalesOrgList // ignore: cast_nullable_to_non_nullable
@@ -624,8 +627,8 @@ class __$$_FetchAvailableSalesOrgCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_FetchAvailableSalesOrg implements _FetchAvailableSalesOrg {
-  const _$_FetchAvailableSalesOrg(
+class _$FetchAvailableSalesOrgImpl implements _FetchAvailableSalesOrg {
+  const _$FetchAvailableSalesOrgImpl(
       {required final List<SalesOrganisation> avialableSalesOrgList})
       : _avialableSalesOrgList = avialableSalesOrgList;
 
@@ -644,10 +647,10 @@ class _$_FetchAvailableSalesOrg implements _FetchAvailableSalesOrg {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_FetchAvailableSalesOrg &&
+            other is _$FetchAvailableSalesOrgImpl &&
             const DeepCollectionEquality()
                 .equals(other._avialableSalesOrgList, _avialableSalesOrgList));
   }
@@ -659,9 +662,9 @@ class _$_FetchAvailableSalesOrg implements _FetchAvailableSalesOrg {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_FetchAvailableSalesOrgCopyWith<_$_FetchAvailableSalesOrg> get copyWith =>
-      __$$_FetchAvailableSalesOrgCopyWithImpl<_$_FetchAvailableSalesOrg>(
-          this, _$identity);
+  _$$FetchAvailableSalesOrgImplCopyWith<_$FetchAvailableSalesOrgImpl>
+      get copyWith => __$$FetchAvailableSalesOrgImplCopyWithImpl<
+          _$FetchAvailableSalesOrgImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -760,29 +763,29 @@ class _$_FetchAvailableSalesOrg implements _FetchAvailableSalesOrg {
 abstract class _FetchAvailableSalesOrg implements SalesOrgEvent {
   const factory _FetchAvailableSalesOrg(
           {required final List<SalesOrganisation> avialableSalesOrgList}) =
-      _$_FetchAvailableSalesOrg;
+      _$FetchAvailableSalesOrgImpl;
 
   List<SalesOrganisation> get avialableSalesOrgList;
   @JsonKey(ignore: true)
-  _$$_FetchAvailableSalesOrgCopyWith<_$_FetchAvailableSalesOrg> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$FetchAvailableSalesOrgImplCopyWith<_$FetchAvailableSalesOrgImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_SearchSalesOrgCopyWith<$Res> {
-  factory _$$_SearchSalesOrgCopyWith(
-          _$_SearchSalesOrg value, $Res Function(_$_SearchSalesOrg) then) =
-      __$$_SearchSalesOrgCopyWithImpl<$Res>;
+abstract class _$$SearchSalesOrgImplCopyWith<$Res> {
+  factory _$$SearchSalesOrgImplCopyWith(_$SearchSalesOrgImpl value,
+          $Res Function(_$SearchSalesOrgImpl) then) =
+      __$$SearchSalesOrgImplCopyWithImpl<$Res>;
   @useResult
   $Res call({SearchKey searchKey, List<SalesOrganisation> salesOrgList});
 }
 
 /// @nodoc
-class __$$_SearchSalesOrgCopyWithImpl<$Res>
-    extends _$SalesOrgEventCopyWithImpl<$Res, _$_SearchSalesOrg>
-    implements _$$_SearchSalesOrgCopyWith<$Res> {
-  __$$_SearchSalesOrgCopyWithImpl(
-      _$_SearchSalesOrg _value, $Res Function(_$_SearchSalesOrg) _then)
+class __$$SearchSalesOrgImplCopyWithImpl<$Res>
+    extends _$SalesOrgEventCopyWithImpl<$Res, _$SearchSalesOrgImpl>
+    implements _$$SearchSalesOrgImplCopyWith<$Res> {
+  __$$SearchSalesOrgImplCopyWithImpl(
+      _$SearchSalesOrgImpl _value, $Res Function(_$SearchSalesOrgImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -791,7 +794,7 @@ class __$$_SearchSalesOrgCopyWithImpl<$Res>
     Object? searchKey = null,
     Object? salesOrgList = null,
   }) {
-    return _then(_$_SearchSalesOrg(
+    return _then(_$SearchSalesOrgImpl(
       searchKey: null == searchKey
           ? _value.searchKey
           : searchKey // ignore: cast_nullable_to_non_nullable
@@ -806,8 +809,8 @@ class __$$_SearchSalesOrgCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_SearchSalesOrg implements _SearchSalesOrg {
-  const _$_SearchSalesOrg(
+class _$SearchSalesOrgImpl implements _SearchSalesOrg {
+  const _$SearchSalesOrgImpl(
       {required this.searchKey,
       required final List<SalesOrganisation> salesOrgList})
       : _salesOrgList = salesOrgList;
@@ -828,10 +831,10 @@ class _$_SearchSalesOrg implements _SearchSalesOrg {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_SearchSalesOrg &&
+            other is _$SearchSalesOrgImpl &&
             (identical(other.searchKey, searchKey) ||
                 other.searchKey == searchKey) &&
             const DeepCollectionEquality()
@@ -845,8 +848,9 @@ class _$_SearchSalesOrg implements _SearchSalesOrg {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_SearchSalesOrgCopyWith<_$_SearchSalesOrg> get copyWith =>
-      __$$_SearchSalesOrgCopyWithImpl<_$_SearchSalesOrg>(this, _$identity);
+  _$$SearchSalesOrgImplCopyWith<_$SearchSalesOrgImpl> get copyWith =>
+      __$$SearchSalesOrgImplCopyWithImpl<_$SearchSalesOrgImpl>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -944,13 +948,14 @@ class _$_SearchSalesOrg implements _SearchSalesOrg {
 
 abstract class _SearchSalesOrg implements SalesOrgEvent {
   const factory _SearchSalesOrg(
-      {required final SearchKey searchKey,
-      required final List<SalesOrganisation> salesOrgList}) = _$_SearchSalesOrg;
+          {required final SearchKey searchKey,
+          required final List<SalesOrganisation> salesOrgList}) =
+      _$SearchSalesOrgImpl;
 
   SearchKey get searchKey;
   List<SalesOrganisation> get salesOrgList;
   @JsonKey(ignore: true)
-  _$$_SearchSalesOrgCopyWith<_$_SearchSalesOrg> get copyWith =>
+  _$$SearchSalesOrgImplCopyWith<_$SearchSalesOrgImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -1054,11 +1059,11 @@ class _$SalesOrgStateCopyWithImpl<$Res, $Val extends SalesOrgState>
 }
 
 /// @nodoc
-abstract class _$$_SalesOrgStateCopyWith<$Res>
+abstract class _$$SalesOrgStateImplCopyWith<$Res>
     implements $SalesOrgStateCopyWith<$Res> {
-  factory _$$_SalesOrgStateCopyWith(
-          _$_SalesOrgState value, $Res Function(_$_SalesOrgState) then) =
-      __$$_SalesOrgStateCopyWithImpl<$Res>;
+  factory _$$SalesOrgStateImplCopyWith(
+          _$SalesOrgStateImpl value, $Res Function(_$SalesOrgStateImpl) then) =
+      __$$SalesOrgStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -1076,11 +1081,11 @@ abstract class _$$_SalesOrgStateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_SalesOrgStateCopyWithImpl<$Res>
-    extends _$SalesOrgStateCopyWithImpl<$Res, _$_SalesOrgState>
-    implements _$$_SalesOrgStateCopyWith<$Res> {
-  __$$_SalesOrgStateCopyWithImpl(
-      _$_SalesOrgState _value, $Res Function(_$_SalesOrgState) _then)
+class __$$SalesOrgStateImplCopyWithImpl<$Res>
+    extends _$SalesOrgStateCopyWithImpl<$Res, _$SalesOrgStateImpl>
+    implements _$$SalesOrgStateImplCopyWith<$Res> {
+  __$$SalesOrgStateImplCopyWithImpl(
+      _$SalesOrgStateImpl _value, $Res Function(_$SalesOrgStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1093,7 +1098,7 @@ class __$$_SalesOrgStateCopyWithImpl<$Res>
     Object? isLoading = null,
     Object? searchKey = null,
   }) {
-    return _then(_$_SalesOrgState(
+    return _then(_$SalesOrgStateImpl(
       salesOrganisation: null == salesOrganisation
           ? _value.salesOrganisation
           : salesOrganisation // ignore: cast_nullable_to_non_nullable
@@ -1124,8 +1129,8 @@ class __$$_SalesOrgStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_SalesOrgState extends _SalesOrgState {
-  const _$_SalesOrgState(
+class _$SalesOrgStateImpl extends _SalesOrgState {
+  const _$SalesOrgStateImpl(
       {required this.salesOrganisation,
       required this.configs,
       required final List<SalesOrganisation> availableSalesOrg,
@@ -1161,10 +1166,10 @@ class _$_SalesOrgState extends _SalesOrgState {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_SalesOrgState &&
+            other is _$SalesOrgStateImpl &&
             (identical(other.salesOrganisation, salesOrganisation) ||
                 other.salesOrganisation == salesOrganisation) &&
             (identical(other.configs, configs) || other.configs == configs) &&
@@ -1193,8 +1198,8 @@ class _$_SalesOrgState extends _SalesOrgState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_SalesOrgStateCopyWith<_$_SalesOrgState> get copyWith =>
-      __$$_SalesOrgStateCopyWithImpl<_$_SalesOrgState>(this, _$identity);
+  _$$SalesOrgStateImplCopyWith<_$SalesOrgStateImpl> get copyWith =>
+      __$$SalesOrgStateImplCopyWithImpl<_$SalesOrgStateImpl>(this, _$identity);
 }
 
 abstract class _SalesOrgState extends SalesOrgState {
@@ -1205,7 +1210,7 @@ abstract class _SalesOrgState extends SalesOrgState {
       required final Option<Either<ApiFailure, dynamic>>
           salesOrgFailureOrSuccessOption,
       required final bool isLoading,
-      required final SearchKey searchKey}) = _$_SalesOrgState;
+      required final SearchKey searchKey}) = _$SalesOrgStateImpl;
   const _SalesOrgState._() : super._();
 
   @override
@@ -1222,6 +1227,6 @@ abstract class _SalesOrgState extends SalesOrgState {
   SearchKey get searchKey;
   @override
   @JsonKey(ignore: true)
-  _$$_SalesOrgStateCopyWith<_$_SalesOrgState> get copyWith =>
+  _$$SalesOrgStateImplCopyWith<_$SalesOrgStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

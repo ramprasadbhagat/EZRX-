@@ -12,7 +12,7 @@ part of 'payment_notification.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$PaymentNotification {
@@ -69,11 +69,11 @@ class _$PaymentNotificationCopyWithImpl<$Res, $Val extends PaymentNotification>
 }
 
 /// @nodoc
-abstract class _$$_PaymentNotificationCopyWith<$Res>
+abstract class _$$PaymentNotificationImplCopyWith<$Res>
     implements $PaymentNotificationCopyWith<$Res> {
-  factory _$$_PaymentNotificationCopyWith(_$_PaymentNotification value,
-          $Res Function(_$_PaymentNotification) then) =
-      __$$_PaymentNotificationCopyWithImpl<$Res>;
+  factory _$$PaymentNotificationImplCopyWith(_$PaymentNotificationImpl value,
+          $Res Function(_$PaymentNotificationImpl) then) =
+      __$$PaymentNotificationImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -83,11 +83,11 @@ abstract class _$$_PaymentNotificationCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_PaymentNotificationCopyWithImpl<$Res>
-    extends _$PaymentNotificationCopyWithImpl<$Res, _$_PaymentNotification>
-    implements _$$_PaymentNotificationCopyWith<$Res> {
-  __$$_PaymentNotificationCopyWithImpl(_$_PaymentNotification _value,
-      $Res Function(_$_PaymentNotification) _then)
+class __$$PaymentNotificationImplCopyWithImpl<$Res>
+    extends _$PaymentNotificationCopyWithImpl<$Res, _$PaymentNotificationImpl>
+    implements _$$PaymentNotificationImplCopyWith<$Res> {
+  __$$PaymentNotificationImplCopyWithImpl(_$PaymentNotificationImpl _value,
+      $Res Function(_$PaymentNotificationImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -96,7 +96,7 @@ class __$$_PaymentNotificationCopyWithImpl<$Res>
     Object? disablePaymentNotification = null,
     Object? paymentAdviceExpiryNotificationList = null,
   }) {
-    return _then(_$_PaymentNotification(
+    return _then(_$PaymentNotificationImpl(
       disablePaymentNotification: null == disablePaymentNotification
           ? _value.disablePaymentNotification
           : disablePaymentNotification // ignore: cast_nullable_to_non_nullable
@@ -112,8 +112,8 @@ class __$$_PaymentNotificationCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_PaymentNotification extends _PaymentNotification {
-  const _$_PaymentNotification(
+class _$PaymentNotificationImpl extends _PaymentNotification {
+  const _$PaymentNotificationImpl(
       {required this.disablePaymentNotification,
       required final List<PaymentAdviceExpiryNotification>
           paymentAdviceExpiryNotificationList})
@@ -140,10 +140,10 @@ class _$_PaymentNotification extends _PaymentNotification {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_PaymentNotification &&
+            other is _$PaymentNotificationImpl &&
             (identical(other.disablePaymentNotification,
                     disablePaymentNotification) ||
                 other.disablePaymentNotification ==
@@ -163,8 +163,8 @@ class _$_PaymentNotification extends _PaymentNotification {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_PaymentNotificationCopyWith<_$_PaymentNotification> get copyWith =>
-      __$$_PaymentNotificationCopyWithImpl<_$_PaymentNotification>(
+  _$$PaymentNotificationImplCopyWith<_$PaymentNotificationImpl> get copyWith =>
+      __$$PaymentNotificationImplCopyWithImpl<_$PaymentNotificationImpl>(
           this, _$identity);
 }
 
@@ -172,7 +172,7 @@ abstract class _PaymentNotification extends PaymentNotification {
   const factory _PaymentNotification(
       {required final bool disablePaymentNotification,
       required final List<PaymentAdviceExpiryNotification>
-          paymentAdviceExpiryNotificationList}) = _$_PaymentNotification;
+          paymentAdviceExpiryNotificationList}) = _$PaymentNotificationImpl;
   const _PaymentNotification._() : super._();
 
   @override
@@ -181,6 +181,6 @@ abstract class _PaymentNotification extends PaymentNotification {
   List<PaymentAdviceExpiryNotification> get paymentAdviceExpiryNotificationList;
   @override
   @JsonKey(ignore: true)
-  _$$_PaymentNotificationCopyWith<_$_PaymentNotification> get copyWith =>
+  _$$PaymentNotificationImplCopyWith<_$PaymentNotificationImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

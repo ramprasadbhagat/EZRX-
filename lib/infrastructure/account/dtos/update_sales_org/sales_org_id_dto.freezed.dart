@@ -12,7 +12,7 @@ part of 'sales_org_id_dto.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 SalesOrgIdDto _$SalesOrgIdDtoFromJson(Map<String, dynamic> json) {
   return _SalesOrgIdDto.fromJson(json);
@@ -63,22 +63,22 @@ class _$SalesOrgIdDtoCopyWithImpl<$Res, $Val extends SalesOrgIdDto>
 }
 
 /// @nodoc
-abstract class _$$_SalesOrgIdDtoCopyWith<$Res>
+abstract class _$$SalesOrgIdDtoImplCopyWith<$Res>
     implements $SalesOrgIdDtoCopyWith<$Res> {
-  factory _$$_SalesOrgIdDtoCopyWith(
-          _$_SalesOrgIdDto value, $Res Function(_$_SalesOrgIdDto) then) =
-      __$$_SalesOrgIdDtoCopyWithImpl<$Res>;
+  factory _$$SalesOrgIdDtoImplCopyWith(
+          _$SalesOrgIdDtoImpl value, $Res Function(_$SalesOrgIdDtoImpl) then) =
+      __$$SalesOrgIdDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({@JsonKey(name: 'id') int id});
 }
 
 /// @nodoc
-class __$$_SalesOrgIdDtoCopyWithImpl<$Res>
-    extends _$SalesOrgIdDtoCopyWithImpl<$Res, _$_SalesOrgIdDto>
-    implements _$$_SalesOrgIdDtoCopyWith<$Res> {
-  __$$_SalesOrgIdDtoCopyWithImpl(
-      _$_SalesOrgIdDto _value, $Res Function(_$_SalesOrgIdDto) _then)
+class __$$SalesOrgIdDtoImplCopyWithImpl<$Res>
+    extends _$SalesOrgIdDtoCopyWithImpl<$Res, _$SalesOrgIdDtoImpl>
+    implements _$$SalesOrgIdDtoImplCopyWith<$Res> {
+  __$$SalesOrgIdDtoImplCopyWithImpl(
+      _$SalesOrgIdDtoImpl _value, $Res Function(_$SalesOrgIdDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -86,7 +86,7 @@ class __$$_SalesOrgIdDtoCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
   }) {
-    return _then(_$_SalesOrgIdDto(
+    return _then(_$SalesOrgIdDtoImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -97,11 +97,12 @@ class __$$_SalesOrgIdDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_SalesOrgIdDto extends _SalesOrgIdDto {
-  const _$_SalesOrgIdDto({@JsonKey(name: 'id') required this.id}) : super._();
+class _$SalesOrgIdDtoImpl extends _SalesOrgIdDto {
+  const _$SalesOrgIdDtoImpl({@JsonKey(name: 'id') required this.id})
+      : super._();
 
-  factory _$_SalesOrgIdDto.fromJson(Map<String, dynamic> json) =>
-      _$$_SalesOrgIdDtoFromJson(json);
+  factory _$SalesOrgIdDtoImpl.fromJson(Map<String, dynamic> json) =>
+      _$$SalesOrgIdDtoImplFromJson(json);
 
   @override
   @JsonKey(name: 'id')
@@ -113,10 +114,10 @@ class _$_SalesOrgIdDto extends _SalesOrgIdDto {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_SalesOrgIdDto &&
+            other is _$SalesOrgIdDtoImpl &&
             (identical(other.id, id) || other.id == id));
   }
 
@@ -127,12 +128,12 @@ class _$_SalesOrgIdDto extends _SalesOrgIdDto {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_SalesOrgIdDtoCopyWith<_$_SalesOrgIdDto> get copyWith =>
-      __$$_SalesOrgIdDtoCopyWithImpl<_$_SalesOrgIdDto>(this, _$identity);
+  _$$SalesOrgIdDtoImplCopyWith<_$SalesOrgIdDtoImpl> get copyWith =>
+      __$$SalesOrgIdDtoImplCopyWithImpl<_$SalesOrgIdDtoImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_SalesOrgIdDtoToJson(
+    return _$$SalesOrgIdDtoImplToJson(
       this,
     );
   }
@@ -140,17 +141,17 @@ class _$_SalesOrgIdDto extends _SalesOrgIdDto {
 
 abstract class _SalesOrgIdDto extends SalesOrgIdDto {
   const factory _SalesOrgIdDto({@JsonKey(name: 'id') required final int id}) =
-      _$_SalesOrgIdDto;
+      _$SalesOrgIdDtoImpl;
   const _SalesOrgIdDto._() : super._();
 
   factory _SalesOrgIdDto.fromJson(Map<String, dynamic> json) =
-      _$_SalesOrgIdDto.fromJson;
+      _$SalesOrgIdDtoImpl.fromJson;
 
   @override
   @JsonKey(name: 'id')
   int get id;
   @override
   @JsonKey(ignore: true)
-  _$$_SalesOrgIdDtoCopyWith<_$_SalesOrgIdDto> get copyWith =>
+  _$$SalesOrgIdDtoImplCopyWith<_$SalesOrgIdDtoImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

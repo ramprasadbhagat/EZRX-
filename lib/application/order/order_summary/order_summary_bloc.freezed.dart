@@ -12,7 +12,7 @@ part of 'order_summary_bloc.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$OrderSummaryEvent {
@@ -152,10 +152,10 @@ class _$OrderSummaryEventCopyWithImpl<$Res, $Val extends OrderSummaryEvent>
 }
 
 /// @nodoc
-abstract class _$$_InitializedCopyWith<$Res> {
-  factory _$$_InitializedCopyWith(
-          _$_Initialized value, $Res Function(_$_Initialized) then) =
-      __$$_InitializedCopyWithImpl<$Res>;
+abstract class _$$InitializedImplCopyWith<$Res> {
+  factory _$$InitializedImplCopyWith(
+          _$InitializedImpl value, $Res Function(_$InitializedImpl) then) =
+      __$$InitializedImplCopyWithImpl<$Res>;
   @useResult
   $Res call(
       {User user,
@@ -174,11 +174,11 @@ abstract class _$$_InitializedCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_InitializedCopyWithImpl<$Res>
-    extends _$OrderSummaryEventCopyWithImpl<$Res, _$_Initialized>
-    implements _$$_InitializedCopyWith<$Res> {
-  __$$_InitializedCopyWithImpl(
-      _$_Initialized _value, $Res Function(_$_Initialized) _then)
+class __$$InitializedImplCopyWithImpl<$Res>
+    extends _$OrderSummaryEventCopyWithImpl<$Res, _$InitializedImpl>
+    implements _$$InitializedImplCopyWith<$Res> {
+  __$$InitializedImplCopyWithImpl(
+      _$InitializedImpl _value, $Res Function(_$InitializedImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -191,7 +191,7 @@ class __$$_InitializedCopyWithImpl<$Res>
     Object? salesOrgConfig = null,
     Object? salesOrganisation = null,
   }) {
-    return _then(_$_Initialized(
+    return _then(_$InitializedImpl(
       user: null == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
@@ -271,8 +271,8 @@ class __$$_InitializedCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_Initialized implements _Initialized {
-  const _$_Initialized(
+class _$InitializedImpl implements _Initialized {
+  const _$InitializedImpl(
       {required this.user,
       required this.shipToInfo,
       required this.customerCodeInfo,
@@ -299,10 +299,10 @@ class _$_Initialized implements _Initialized {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Initialized &&
+            other is _$InitializedImpl &&
             (identical(other.user, user) || other.user == user) &&
             (identical(other.shipToInfo, shipToInfo) ||
                 other.shipToInfo == shipToInfo) &&
@@ -323,8 +323,8 @@ class _$_Initialized implements _Initialized {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_InitializedCopyWith<_$_Initialized> get copyWith =>
-      __$$_InitializedCopyWithImpl<_$_Initialized>(this, _$identity);
+  _$$InitializedImplCopyWith<_$InitializedImpl> get copyWith =>
+      __$$InitializedImplCopyWithImpl<_$InitializedImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -476,7 +476,7 @@ abstract class _Initialized implements OrderSummaryEvent {
       required final CustomerCodeInfo customerCodeInfo,
       required final OrderDocumentType orderDocumentType,
       required final SalesOrganisationConfigs salesOrgConfig,
-      required final SalesOrganisation salesOrganisation}) = _$_Initialized;
+      required final SalesOrganisation salesOrganisation}) = _$InitializedImpl;
 
   User get user;
   ShipToInfo get shipToInfo;
@@ -485,15 +485,15 @@ abstract class _Initialized implements OrderSummaryEvent {
   SalesOrganisationConfigs get salesOrgConfig;
   SalesOrganisation get salesOrganisation;
   @JsonKey(ignore: true)
-  _$$_InitializedCopyWith<_$_Initialized> get copyWith =>
+  _$$InitializedImplCopyWith<_$InitializedImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_SubmitOrderCopyWith<$Res> {
-  factory _$$_SubmitOrderCopyWith(
-          _$_SubmitOrder value, $Res Function(_$_SubmitOrder) then) =
-      __$$_SubmitOrderCopyWithImpl<$Res>;
+abstract class _$$SubmitOrderImplCopyWith<$Res> {
+  factory _$$SubmitOrderImplCopyWith(
+          _$SubmitOrderImpl value, $Res Function(_$SubmitOrderImpl) then) =
+      __$$SubmitOrderImplCopyWithImpl<$Res>;
   @useResult
   $Res call(
       {List<PriceAggregate> cartProducts,
@@ -509,11 +509,11 @@ abstract class _$$_SubmitOrderCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_SubmitOrderCopyWithImpl<$Res>
-    extends _$OrderSummaryEventCopyWithImpl<$Res, _$_SubmitOrder>
-    implements _$$_SubmitOrderCopyWith<$Res> {
-  __$$_SubmitOrderCopyWithImpl(
-      _$_SubmitOrder _value, $Res Function(_$_SubmitOrder) _then)
+class __$$SubmitOrderImplCopyWithImpl<$Res>
+    extends _$OrderSummaryEventCopyWithImpl<$Res, _$SubmitOrderImpl>
+    implements _$$SubmitOrderImplCopyWith<$Res> {
+  __$$SubmitOrderImplCopyWithImpl(
+      _$SubmitOrderImpl _value, $Res Function(_$SubmitOrderImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -528,7 +528,7 @@ class __$$_SubmitOrderCopyWithImpl<$Res>
     Object? totalTax = null,
     Object? data = null,
   }) {
-    return _then(_$_SubmitOrder(
+    return _then(_$SubmitOrderImpl(
       cartProducts: null == cartProducts
           ? _value._cartProducts
           : cartProducts // ignore: cast_nullable_to_non_nullable
@@ -575,8 +575,8 @@ class __$$_SubmitOrderCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_SubmitOrder implements _SubmitOrder {
-  const _$_SubmitOrder(
+class _$SubmitOrderImpl implements _SubmitOrder {
+  const _$SubmitOrderImpl(
       {required final List<PriceAggregate> cartProducts,
       required this.grandTotal,
       required this.orderValue,
@@ -616,10 +616,10 @@ class _$_SubmitOrder implements _SubmitOrder {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_SubmitOrder &&
+            other is _$SubmitOrderImpl &&
             const DeepCollectionEquality()
                 .equals(other._cartProducts, _cartProducts) &&
             (identical(other.grandTotal, grandTotal) ||
@@ -652,8 +652,8 @@ class _$_SubmitOrder implements _SubmitOrder {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_SubmitOrderCopyWith<_$_SubmitOrder> get copyWith =>
-      __$$_SubmitOrderCopyWithImpl<_$_SubmitOrder>(this, _$identity);
+  _$$SubmitOrderImplCopyWith<_$SubmitOrderImpl> get copyWith =>
+      __$$SubmitOrderImplCopyWithImpl<_$SubmitOrderImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -807,7 +807,7 @@ abstract class _SubmitOrder implements OrderSummaryEvent {
       required final double zpSmallOrderFee,
       required final double mpSmallOrderFee,
       required final double totalTax,
-      required final DeliveryInfoData data}) = _$_SubmitOrder;
+      required final DeliveryInfoData data}) = _$SubmitOrderImpl;
 
   List<PriceAggregate> get cartProducts;
   double get grandTotal;
@@ -818,25 +818,27 @@ abstract class _SubmitOrder implements OrderSummaryEvent {
   double get totalTax;
   DeliveryInfoData get data;
   @JsonKey(ignore: true)
-  _$$_SubmitOrderCopyWith<_$_SubmitOrder> get copyWith =>
+  _$$SubmitOrderImplCopyWith<_$SubmitOrderImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_OrderConfirmationDetailCopyWith<$Res> {
-  factory _$$_OrderConfirmationDetailCopyWith(_$_OrderConfirmationDetail value,
-          $Res Function(_$_OrderConfirmationDetail) then) =
-      __$$_OrderConfirmationDetailCopyWithImpl<$Res>;
+abstract class _$$OrderConfirmationDetailImplCopyWith<$Res> {
+  factory _$$OrderConfirmationDetailImplCopyWith(
+          _$OrderConfirmationDetailImpl value,
+          $Res Function(_$OrderConfirmationDetailImpl) then) =
+      __$$OrderConfirmationDetailImplCopyWithImpl<$Res>;
   @useResult
   $Res call({List<PriceAggregate> priceAggregate});
 }
 
 /// @nodoc
-class __$$_OrderConfirmationDetailCopyWithImpl<$Res>
-    extends _$OrderSummaryEventCopyWithImpl<$Res, _$_OrderConfirmationDetail>
-    implements _$$_OrderConfirmationDetailCopyWith<$Res> {
-  __$$_OrderConfirmationDetailCopyWithImpl(_$_OrderConfirmationDetail _value,
-      $Res Function(_$_OrderConfirmationDetail) _then)
+class __$$OrderConfirmationDetailImplCopyWithImpl<$Res>
+    extends _$OrderSummaryEventCopyWithImpl<$Res, _$OrderConfirmationDetailImpl>
+    implements _$$OrderConfirmationDetailImplCopyWith<$Res> {
+  __$$OrderConfirmationDetailImplCopyWithImpl(
+      _$OrderConfirmationDetailImpl _value,
+      $Res Function(_$OrderConfirmationDetailImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -844,7 +846,7 @@ class __$$_OrderConfirmationDetailCopyWithImpl<$Res>
   $Res call({
     Object? priceAggregate = null,
   }) {
-    return _then(_$_OrderConfirmationDetail(
+    return _then(_$OrderConfirmationDetailImpl(
       priceAggregate: null == priceAggregate
           ? _value._priceAggregate
           : priceAggregate // ignore: cast_nullable_to_non_nullable
@@ -855,8 +857,8 @@ class __$$_OrderConfirmationDetailCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_OrderConfirmationDetail implements _OrderConfirmationDetail {
-  const _$_OrderConfirmationDetail(
+class _$OrderConfirmationDetailImpl implements _OrderConfirmationDetail {
+  const _$OrderConfirmationDetailImpl(
       {required final List<PriceAggregate> priceAggregate})
       : _priceAggregate = priceAggregate;
 
@@ -874,10 +876,10 @@ class _$_OrderConfirmationDetail implements _OrderConfirmationDetail {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_OrderConfirmationDetail &&
+            other is _$OrderConfirmationDetailImpl &&
             const DeepCollectionEquality()
                 .equals(other._priceAggregate, _priceAggregate));
   }
@@ -889,10 +891,9 @@ class _$_OrderConfirmationDetail implements _OrderConfirmationDetail {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_OrderConfirmationDetailCopyWith<_$_OrderConfirmationDetail>
-      get copyWith =>
-          __$$_OrderConfirmationDetailCopyWithImpl<_$_OrderConfirmationDetail>(
-              this, _$identity);
+  _$$OrderConfirmationDetailImplCopyWith<_$OrderConfirmationDetailImpl>
+      get copyWith => __$$OrderConfirmationDetailImplCopyWithImpl<
+          _$OrderConfirmationDetailImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -1037,19 +1038,20 @@ class _$_OrderConfirmationDetail implements _OrderConfirmationDetail {
 abstract class _OrderConfirmationDetail implements OrderSummaryEvent {
   const factory _OrderConfirmationDetail(
           {required final List<PriceAggregate> priceAggregate}) =
-      _$_OrderConfirmationDetail;
+      _$OrderConfirmationDetailImpl;
 
   List<PriceAggregate> get priceAggregate;
   @JsonKey(ignore: true)
-  _$$_OrderConfirmationDetailCopyWith<_$_OrderConfirmationDetail>
+  _$$OrderConfirmationDetailImplCopyWith<_$OrderConfirmationDetailImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_ConfirmedOrderStockInfoCopyWith<$Res> {
-  factory _$$_ConfirmedOrderStockInfoCopyWith(_$_ConfirmedOrderStockInfo value,
-          $Res Function(_$_ConfirmedOrderStockInfo) then) =
-      __$$_ConfirmedOrderStockInfoCopyWithImpl<$Res>;
+abstract class _$$ConfirmedOrderStockInfoImplCopyWith<$Res> {
+  factory _$$ConfirmedOrderStockInfoImplCopyWith(
+          _$ConfirmedOrderStockInfoImpl value,
+          $Res Function(_$ConfirmedOrderStockInfoImpl) then) =
+      __$$ConfirmedOrderStockInfoImplCopyWithImpl<$Res>;
   @useResult
   $Res call(
       {List<OrderHistoryDetails> orderHistoryDetailList,
@@ -1057,11 +1059,12 @@ abstract class _$$_ConfirmedOrderStockInfoCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_ConfirmedOrderStockInfoCopyWithImpl<$Res>
-    extends _$OrderSummaryEventCopyWithImpl<$Res, _$_ConfirmedOrderStockInfo>
-    implements _$$_ConfirmedOrderStockInfoCopyWith<$Res> {
-  __$$_ConfirmedOrderStockInfoCopyWithImpl(_$_ConfirmedOrderStockInfo _value,
-      $Res Function(_$_ConfirmedOrderStockInfo) _then)
+class __$$ConfirmedOrderStockInfoImplCopyWithImpl<$Res>
+    extends _$OrderSummaryEventCopyWithImpl<$Res, _$ConfirmedOrderStockInfoImpl>
+    implements _$$ConfirmedOrderStockInfoImplCopyWith<$Res> {
+  __$$ConfirmedOrderStockInfoImplCopyWithImpl(
+      _$ConfirmedOrderStockInfoImpl _value,
+      $Res Function(_$ConfirmedOrderStockInfoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1070,7 +1073,7 @@ class __$$_ConfirmedOrderStockInfoCopyWithImpl<$Res>
     Object? orderHistoryDetailList = null,
     Object? priceAggregate = null,
   }) {
-    return _then(_$_ConfirmedOrderStockInfo(
+    return _then(_$ConfirmedOrderStockInfoImpl(
       orderHistoryDetailList: null == orderHistoryDetailList
           ? _value._orderHistoryDetailList
           : orderHistoryDetailList // ignore: cast_nullable_to_non_nullable
@@ -1085,8 +1088,8 @@ class __$$_ConfirmedOrderStockInfoCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_ConfirmedOrderStockInfo implements _ConfirmedOrderStockInfo {
-  const _$_ConfirmedOrderStockInfo(
+class _$ConfirmedOrderStockInfoImpl implements _ConfirmedOrderStockInfo {
+  const _$ConfirmedOrderStockInfoImpl(
       {required final List<OrderHistoryDetails> orderHistoryDetailList,
       required final List<PriceAggregate> priceAggregate})
       : _orderHistoryDetailList = orderHistoryDetailList,
@@ -1115,10 +1118,10 @@ class _$_ConfirmedOrderStockInfo implements _ConfirmedOrderStockInfo {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ConfirmedOrderStockInfo &&
+            other is _$ConfirmedOrderStockInfoImpl &&
             const DeepCollectionEquality().equals(
                 other._orderHistoryDetailList, _orderHistoryDetailList) &&
             const DeepCollectionEquality()
@@ -1134,10 +1137,9 @@ class _$_ConfirmedOrderStockInfo implements _ConfirmedOrderStockInfo {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ConfirmedOrderStockInfoCopyWith<_$_ConfirmedOrderStockInfo>
-      get copyWith =>
-          __$$_ConfirmedOrderStockInfoCopyWithImpl<_$_ConfirmedOrderStockInfo>(
-              this, _$identity);
+  _$$ConfirmedOrderStockInfoImplCopyWith<_$ConfirmedOrderStockInfoImpl>
+      get copyWith => __$$ConfirmedOrderStockInfoImplCopyWithImpl<
+          _$ConfirmedOrderStockInfoImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -1284,30 +1286,30 @@ abstract class _ConfirmedOrderStockInfo implements OrderSummaryEvent {
   const factory _ConfirmedOrderStockInfo(
           {required final List<OrderHistoryDetails> orderHistoryDetailList,
           required final List<PriceAggregate> priceAggregate}) =
-      _$_ConfirmedOrderStockInfo;
+      _$ConfirmedOrderStockInfoImpl;
 
   List<OrderHistoryDetails> get orderHistoryDetailList;
   List<PriceAggregate> get priceAggregate;
   @JsonKey(ignore: true)
-  _$$_ConfirmedOrderStockInfoCopyWith<_$_ConfirmedOrderStockInfo>
+  _$$ConfirmedOrderStockInfoImplCopyWith<_$ConfirmedOrderStockInfoImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_updateIsExpandedCopyWith<$Res> {
-  factory _$$_updateIsExpandedCopyWith(
-          _$_updateIsExpanded value, $Res Function(_$_updateIsExpanded) then) =
-      __$$_updateIsExpandedCopyWithImpl<$Res>;
+abstract class _$$updateIsExpandedImplCopyWith<$Res> {
+  factory _$$updateIsExpandedImplCopyWith(_$updateIsExpandedImpl value,
+          $Res Function(_$updateIsExpandedImpl) then) =
+      __$$updateIsExpandedImplCopyWithImpl<$Res>;
   @useResult
   $Res call({bool isExpanded});
 }
 
 /// @nodoc
-class __$$_updateIsExpandedCopyWithImpl<$Res>
-    extends _$OrderSummaryEventCopyWithImpl<$Res, _$_updateIsExpanded>
-    implements _$$_updateIsExpandedCopyWith<$Res> {
-  __$$_updateIsExpandedCopyWithImpl(
-      _$_updateIsExpanded _value, $Res Function(_$_updateIsExpanded) _then)
+class __$$updateIsExpandedImplCopyWithImpl<$Res>
+    extends _$OrderSummaryEventCopyWithImpl<$Res, _$updateIsExpandedImpl>
+    implements _$$updateIsExpandedImplCopyWith<$Res> {
+  __$$updateIsExpandedImplCopyWithImpl(_$updateIsExpandedImpl _value,
+      $Res Function(_$updateIsExpandedImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1315,7 +1317,7 @@ class __$$_updateIsExpandedCopyWithImpl<$Res>
   $Res call({
     Object? isExpanded = null,
   }) {
-    return _then(_$_updateIsExpanded(
+    return _then(_$updateIsExpandedImpl(
       isExpanded: null == isExpanded
           ? _value.isExpanded
           : isExpanded // ignore: cast_nullable_to_non_nullable
@@ -1326,8 +1328,8 @@ class __$$_updateIsExpandedCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_updateIsExpanded implements _updateIsExpanded {
-  const _$_updateIsExpanded({required this.isExpanded});
+class _$updateIsExpandedImpl implements _updateIsExpanded {
+  const _$updateIsExpandedImpl({required this.isExpanded});
 
   @override
   final bool isExpanded;
@@ -1338,10 +1340,10 @@ class _$_updateIsExpanded implements _updateIsExpanded {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_updateIsExpanded &&
+            other is _$updateIsExpandedImpl &&
             (identical(other.isExpanded, isExpanded) ||
                 other.isExpanded == isExpanded));
   }
@@ -1352,8 +1354,9 @@ class _$_updateIsExpanded implements _updateIsExpanded {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_updateIsExpandedCopyWith<_$_updateIsExpanded> get copyWith =>
-      __$$_updateIsExpandedCopyWithImpl<_$_updateIsExpanded>(this, _$identity);
+  _$$updateIsExpandedImplCopyWith<_$updateIsExpandedImpl> get copyWith =>
+      __$$updateIsExpandedImplCopyWithImpl<_$updateIsExpandedImpl>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -1497,11 +1500,11 @@ class _$_updateIsExpanded implements _updateIsExpanded {
 
 abstract class _updateIsExpanded implements OrderSummaryEvent {
   const factory _updateIsExpanded({required final bool isExpanded}) =
-      _$_updateIsExpanded;
+      _$updateIsExpandedImpl;
 
   bool get isExpanded;
   @JsonKey(ignore: true)
-  _$$_updateIsExpandedCopyWith<_$_updateIsExpanded> get copyWith =>
+  _$$updateIsExpandedImplCopyWith<_$updateIsExpandedImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -1696,11 +1699,11 @@ class _$OrderSummaryStateCopyWithImpl<$Res, $Val extends OrderSummaryState>
 }
 
 /// @nodoc
-abstract class _$$_OrderSummaryStateCopyWith<$Res>
+abstract class _$$OrderSummaryStateImplCopyWith<$Res>
     implements $OrderSummaryStateCopyWith<$Res> {
-  factory _$$_OrderSummaryStateCopyWith(_$_OrderSummaryState value,
-          $Res Function(_$_OrderSummaryState) then) =
-      __$$_OrderSummaryStateCopyWithImpl<$Res>;
+  factory _$$OrderSummaryStateImplCopyWith(_$OrderSummaryStateImpl value,
+          $Res Function(_$OrderSummaryStateImpl) then) =
+      __$$OrderSummaryStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -1734,11 +1737,11 @@ abstract class _$$_OrderSummaryStateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_OrderSummaryStateCopyWithImpl<$Res>
-    extends _$OrderSummaryStateCopyWithImpl<$Res, _$_OrderSummaryState>
-    implements _$$_OrderSummaryStateCopyWith<$Res> {
-  __$$_OrderSummaryStateCopyWithImpl(
-      _$_OrderSummaryState _value, $Res Function(_$_OrderSummaryState) _then)
+class __$$OrderSummaryStateImplCopyWithImpl<$Res>
+    extends _$OrderSummaryStateCopyWithImpl<$Res, _$OrderSummaryStateImpl>
+    implements _$$OrderSummaryStateImplCopyWith<$Res> {
+  __$$OrderSummaryStateImplCopyWithImpl(_$OrderSummaryStateImpl _value,
+      $Res Function(_$OrderSummaryStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1757,7 +1760,7 @@ class __$$_OrderSummaryStateCopyWithImpl<$Res>
     Object? salesOrganisation = null,
     Object? isExpanded = null,
   }) {
-    return _then(_$_OrderSummaryState(
+    return _then(_$OrderSummaryStateImpl(
       apiFailureOrSuccessOption: null == apiFailureOrSuccessOption
           ? _value.apiFailureOrSuccessOption
           : apiFailureOrSuccessOption // ignore: cast_nullable_to_non_nullable
@@ -1812,8 +1815,8 @@ class __$$_OrderSummaryStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_OrderSummaryState extends _OrderSummaryState {
-  const _$_OrderSummaryState(
+class _$OrderSummaryStateImpl extends _OrderSummaryState {
+  const _$OrderSummaryStateImpl(
       {required this.apiFailureOrSuccessOption,
       required this.isSubmitting,
       required this.isConfirming,
@@ -1867,10 +1870,10 @@ class _$_OrderSummaryState extends _OrderSummaryState {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_OrderSummaryState &&
+            other is _$OrderSummaryStateImpl &&
             (identical(other.apiFailureOrSuccessOption,
                     apiFailureOrSuccessOption) ||
                 other.apiFailureOrSuccessOption == apiFailureOrSuccessOption) &&
@@ -1916,8 +1919,8 @@ class _$_OrderSummaryState extends _OrderSummaryState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_OrderSummaryStateCopyWith<_$_OrderSummaryState> get copyWith =>
-      __$$_OrderSummaryStateCopyWithImpl<_$_OrderSummaryState>(
+  _$$OrderSummaryStateImplCopyWith<_$OrderSummaryStateImpl> get copyWith =>
+      __$$OrderSummaryStateImplCopyWithImpl<_$OrderSummaryStateImpl>(
           this, _$identity);
 }
 
@@ -1935,7 +1938,7 @@ abstract class _OrderSummaryState extends OrderSummaryState {
       required final OrderDocumentType orderDocumentType,
       required final SalesOrganisationConfigs salesOrgConfig,
       required final SalesOrganisation salesOrganisation,
-      required final bool isExpanded}) = _$_OrderSummaryState;
+      required final bool isExpanded}) = _$OrderSummaryStateImpl;
   const _OrderSummaryState._() : super._();
 
   @override
@@ -1964,6 +1967,6 @@ abstract class _OrderSummaryState extends OrderSummaryState {
   bool get isExpanded;
   @override
   @JsonKey(ignore: true)
-  _$$_OrderSummaryStateCopyWith<_$_OrderSummaryState> get copyWith =>
+  _$$OrderSummaryStateImplCopyWith<_$OrderSummaryStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

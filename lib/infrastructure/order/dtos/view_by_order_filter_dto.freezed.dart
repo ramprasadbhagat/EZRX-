@@ -12,7 +12,7 @@ part of 'view_by_order_filter_dto.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 ViewByOrdersFilterDto _$ViewByOrdersFilterDtoFromJson(
     Map<String, dynamic> json) {
@@ -91,11 +91,12 @@ class _$ViewByOrdersFilterDtoCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_ViewByOrdersFilterDtoCopyWith<$Res>
+abstract class _$$ViewByOrdersFilterDtoImplCopyWith<$Res>
     implements $ViewByOrdersFilterDtoCopyWith<$Res> {
-  factory _$$_ViewByOrdersFilterDtoCopyWith(_$_ViewByOrdersFilterDto value,
-          $Res Function(_$_ViewByOrdersFilterDto) then) =
-      __$$_ViewByOrdersFilterDtoCopyWithImpl<$Res>;
+  factory _$$ViewByOrdersFilterDtoImplCopyWith(
+          _$ViewByOrdersFilterDtoImpl value,
+          $Res Function(_$ViewByOrdersFilterDtoImpl) then) =
+      __$$ViewByOrdersFilterDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -107,11 +108,12 @@ abstract class _$$_ViewByOrdersFilterDtoCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_ViewByOrdersFilterDtoCopyWithImpl<$Res>
-    extends _$ViewByOrdersFilterDtoCopyWithImpl<$Res, _$_ViewByOrdersFilterDto>
-    implements _$$_ViewByOrdersFilterDtoCopyWith<$Res> {
-  __$$_ViewByOrdersFilterDtoCopyWithImpl(_$_ViewByOrdersFilterDto _value,
-      $Res Function(_$_ViewByOrdersFilterDto) _then)
+class __$$ViewByOrdersFilterDtoImplCopyWithImpl<$Res>
+    extends _$ViewByOrdersFilterDtoCopyWithImpl<$Res,
+        _$ViewByOrdersFilterDtoImpl>
+    implements _$$ViewByOrdersFilterDtoImplCopyWith<$Res> {
+  __$$ViewByOrdersFilterDtoImplCopyWithImpl(_$ViewByOrdersFilterDtoImpl _value,
+      $Res Function(_$ViewByOrdersFilterDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -122,7 +124,7 @@ class __$$_ViewByOrdersFilterDtoCopyWithImpl<$Res>
     Object? orderStatus = null,
     Object? orderType = freezed,
   }) {
-    return _then(_$_ViewByOrdersFilterDto(
+    return _then(_$ViewByOrdersFilterDtoImpl(
       dateTo: null == dateTo
           ? _value.dateTo
           : dateTo // ignore: cast_nullable_to_non_nullable
@@ -145,8 +147,8 @@ class __$$_ViewByOrdersFilterDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_ViewByOrdersFilterDto extends _ViewByOrdersFilterDto {
-  const _$_ViewByOrdersFilterDto(
+class _$ViewByOrdersFilterDtoImpl extends _ViewByOrdersFilterDto {
+  const _$ViewByOrdersFilterDtoImpl(
       {@JsonKey(name: 'toDate', defaultValue: '') required this.dateTo,
       @JsonKey(name: 'fromDate', defaultValue: '') required this.dateFrom,
       @JsonKey(name: 'status', defaultValue: <String>[])
@@ -155,8 +157,8 @@ class _$_ViewByOrdersFilterDto extends _ViewByOrdersFilterDto {
       : _orderStatus = orderStatus,
         super._();
 
-  factory _$_ViewByOrdersFilterDto.fromJson(Map<String, dynamic> json) =>
-      _$$_ViewByOrdersFilterDtoFromJson(json);
+  factory _$ViewByOrdersFilterDtoImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ViewByOrdersFilterDtoImplFromJson(json);
 
   @override
   @JsonKey(name: 'toDate', defaultValue: '')
@@ -183,10 +185,10 @@ class _$_ViewByOrdersFilterDto extends _ViewByOrdersFilterDto {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ViewByOrdersFilterDto &&
+            other is _$ViewByOrdersFilterDtoImpl &&
             (identical(other.dateTo, dateTo) || other.dateTo == dateTo) &&
             (identical(other.dateFrom, dateFrom) ||
                 other.dateFrom == dateFrom) &&
@@ -204,13 +206,13 @@ class _$_ViewByOrdersFilterDto extends _ViewByOrdersFilterDto {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ViewByOrdersFilterDtoCopyWith<_$_ViewByOrdersFilterDto> get copyWith =>
-      __$$_ViewByOrdersFilterDtoCopyWithImpl<_$_ViewByOrdersFilterDto>(
-          this, _$identity);
+  _$$ViewByOrdersFilterDtoImplCopyWith<_$ViewByOrdersFilterDtoImpl>
+      get copyWith => __$$ViewByOrdersFilterDtoImplCopyWithImpl<
+          _$ViewByOrdersFilterDtoImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_ViewByOrdersFilterDtoToJson(
+    return _$$ViewByOrdersFilterDtoImplToJson(
       this,
     );
   }
@@ -224,11 +226,11 @@ abstract class _ViewByOrdersFilterDto extends ViewByOrdersFilterDto {
       @JsonKey(name: 'status', defaultValue: <String>[])
       required final List<String> orderStatus,
       @JsonKey(name: 'orderType', includeIfNull: false)
-      final int? orderType}) = _$_ViewByOrdersFilterDto;
+      final int? orderType}) = _$ViewByOrdersFilterDtoImpl;
   const _ViewByOrdersFilterDto._() : super._();
 
   factory _ViewByOrdersFilterDto.fromJson(Map<String, dynamic> json) =
-      _$_ViewByOrdersFilterDto.fromJson;
+      _$ViewByOrdersFilterDtoImpl.fromJson;
 
   @override
   @JsonKey(name: 'toDate', defaultValue: '')
@@ -244,6 +246,6 @@ abstract class _ViewByOrdersFilterDto extends ViewByOrdersFilterDto {
   int? get orderType;
   @override
   @JsonKey(ignore: true)
-  _$$_ViewByOrdersFilterDtoCopyWith<_$_ViewByOrdersFilterDto> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$ViewByOrdersFilterDtoImplCopyWith<_$ViewByOrdersFilterDtoImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }

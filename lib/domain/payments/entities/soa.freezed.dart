@@ -12,7 +12,7 @@ part of 'soa.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$Soa {
@@ -54,18 +54,18 @@ class _$SoaCopyWithImpl<$Res, $Val extends Soa> implements $SoaCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class _$$_SoaCopyWith<$Res> implements $SoaCopyWith<$Res> {
-  factory _$$_SoaCopyWith(_$_Soa value, $Res Function(_$_Soa) then) =
-      __$$_SoaCopyWithImpl<$Res>;
+abstract class _$$SoaImplCopyWith<$Res> implements $SoaCopyWith<$Res> {
+  factory _$$SoaImplCopyWith(_$SoaImpl value, $Res Function(_$SoaImpl) then) =
+      __$$SoaImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({SoaData soaData});
 }
 
 /// @nodoc
-class __$$_SoaCopyWithImpl<$Res> extends _$SoaCopyWithImpl<$Res, _$_Soa>
-    implements _$$_SoaCopyWith<$Res> {
-  __$$_SoaCopyWithImpl(_$_Soa _value, $Res Function(_$_Soa) _then)
+class __$$SoaImplCopyWithImpl<$Res> extends _$SoaCopyWithImpl<$Res, _$SoaImpl>
+    implements _$$SoaImplCopyWith<$Res> {
+  __$$SoaImplCopyWithImpl(_$SoaImpl _value, $Res Function(_$SoaImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -73,7 +73,7 @@ class __$$_SoaCopyWithImpl<$Res> extends _$SoaCopyWithImpl<$Res, _$_Soa>
   $Res call({
     Object? soaData = null,
   }) {
-    return _then(_$_Soa(
+    return _then(_$SoaImpl(
       soaData: null == soaData
           ? _value.soaData
           : soaData // ignore: cast_nullable_to_non_nullable
@@ -84,8 +84,8 @@ class __$$_SoaCopyWithImpl<$Res> extends _$SoaCopyWithImpl<$Res, _$_Soa>
 
 /// @nodoc
 
-class _$_Soa implements _Soa {
-  _$_Soa({required this.soaData});
+class _$SoaImpl implements _Soa {
+  _$SoaImpl({required this.soaData});
 
   @override
   final SoaData soaData;
@@ -96,10 +96,10 @@ class _$_Soa implements _Soa {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Soa &&
+            other is _$SoaImpl &&
             (identical(other.soaData, soaData) || other.soaData == soaData));
   }
 
@@ -109,16 +109,17 @@ class _$_Soa implements _Soa {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_SoaCopyWith<_$_Soa> get copyWith =>
-      __$$_SoaCopyWithImpl<_$_Soa>(this, _$identity);
+  _$$SoaImplCopyWith<_$SoaImpl> get copyWith =>
+      __$$SoaImplCopyWithImpl<_$SoaImpl>(this, _$identity);
 }
 
 abstract class _Soa implements Soa {
-  factory _Soa({required final SoaData soaData}) = _$_Soa;
+  factory _Soa({required final SoaData soaData}) = _$SoaImpl;
 
   @override
   SoaData get soaData;
   @override
   @JsonKey(ignore: true)
-  _$$_SoaCopyWith<_$_Soa> get copyWith => throw _privateConstructorUsedError;
+  _$$SoaImplCopyWith<_$SoaImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }

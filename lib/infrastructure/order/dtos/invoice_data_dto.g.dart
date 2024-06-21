@@ -6,14 +6,15 @@ part of 'invoice_data_dto.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_InvoiceDataDto _$$_InvoiceDataDtoFromJson(Map<String, dynamic> json) =>
-    _$_InvoiceDataDto(
+_$InvoiceDataDtoImpl _$$InvoiceDataDtoImplFromJson(Map<String, dynamic> json) =>
+    _$InvoiceDataDtoImpl(
       orderNumber: json['orderId'] as String? ?? '',
       invoiceNumber: json['invoice'] as String? ?? '',
       lineNumber: json['lineNumber'] as String? ?? '',
     );
 
-Map<String, dynamic> _$$_InvoiceDataDtoToJson(_$_InvoiceDataDto instance) =>
+Map<String, dynamic> _$$InvoiceDataDtoImplToJson(
+        _$InvoiceDataDtoImpl instance) =>
     <String, dynamic>{
       'orderId': instance.orderNumber,
       'invoice': instance.invoiceNumber,

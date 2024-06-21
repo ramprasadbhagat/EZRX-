@@ -12,7 +12,7 @@ part of 'sales_representative_info.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$SalesRepresentativeInfo {
@@ -81,11 +81,12 @@ class _$SalesRepresentativeInfoCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_SalesRepresentativeInfoCopyWith<$Res>
+abstract class _$$SalesRepresentativeInfoImplCopyWith<$Res>
     implements $SalesRepresentativeInfoCopyWith<$Res> {
-  factory _$$_SalesRepresentativeInfoCopyWith(_$_SalesRepresentativeInfo value,
-          $Res Function(_$_SalesRepresentativeInfo) then) =
-      __$$_SalesRepresentativeInfoCopyWithImpl<$Res>;
+  factory _$$SalesRepresentativeInfoImplCopyWith(
+          _$SalesRepresentativeInfoImpl value,
+          $Res Function(_$SalesRepresentativeInfoImpl) then) =
+      __$$SalesRepresentativeInfoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -96,12 +97,13 @@ abstract class _$$_SalesRepresentativeInfoCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_SalesRepresentativeInfoCopyWithImpl<$Res>
+class __$$SalesRepresentativeInfoImplCopyWithImpl<$Res>
     extends _$SalesRepresentativeInfoCopyWithImpl<$Res,
-        _$_SalesRepresentativeInfo>
-    implements _$$_SalesRepresentativeInfoCopyWith<$Res> {
-  __$$_SalesRepresentativeInfoCopyWithImpl(_$_SalesRepresentativeInfo _value,
-      $Res Function(_$_SalesRepresentativeInfo) _then)
+        _$SalesRepresentativeInfoImpl>
+    implements _$$SalesRepresentativeInfoImplCopyWith<$Res> {
+  __$$SalesRepresentativeInfoImplCopyWithImpl(
+      _$SalesRepresentativeInfoImpl _value,
+      $Res Function(_$SalesRepresentativeInfoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -112,7 +114,7 @@ class __$$_SalesRepresentativeInfoCopyWithImpl<$Res>
     Object? uniquePrincipalNumber = null,
     Object? uniqueSalesOrganisation = null,
   }) {
-    return _then(_$_SalesRepresentativeInfo(
+    return _then(_$SalesRepresentativeInfoImpl(
       count: null == count
           ? _value.count
           : count // ignore: cast_nullable_to_non_nullable
@@ -135,8 +137,8 @@ class __$$_SalesRepresentativeInfoCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_SalesRepresentativeInfo extends _SalesRepresentativeInfo {
-  const _$_SalesRepresentativeInfo(
+class _$SalesRepresentativeInfoImpl extends _SalesRepresentativeInfo {
+  const _$SalesRepresentativeInfoImpl(
       {required this.count,
       required final List<String> uniquePrincipalGroup,
       required final List<String> uniquePrincipalNumber,
@@ -181,10 +183,10 @@ class _$_SalesRepresentativeInfo extends _SalesRepresentativeInfo {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_SalesRepresentativeInfo &&
+            other is _$SalesRepresentativeInfoImpl &&
             (identical(other.count, count) || other.count == count) &&
             const DeepCollectionEquality()
                 .equals(other._uniquePrincipalGroup, _uniquePrincipalGroup) &&
@@ -205,10 +207,9 @@ class _$_SalesRepresentativeInfo extends _SalesRepresentativeInfo {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_SalesRepresentativeInfoCopyWith<_$_SalesRepresentativeInfo>
-      get copyWith =>
-          __$$_SalesRepresentativeInfoCopyWithImpl<_$_SalesRepresentativeInfo>(
-              this, _$identity);
+  _$$SalesRepresentativeInfoImplCopyWith<_$SalesRepresentativeInfoImpl>
+      get copyWith => __$$SalesRepresentativeInfoImplCopyWithImpl<
+          _$SalesRepresentativeInfoImpl>(this, _$identity);
 }
 
 abstract class _SalesRepresentativeInfo extends SalesRepresentativeInfo {
@@ -217,7 +218,7 @@ abstract class _SalesRepresentativeInfo extends SalesRepresentativeInfo {
           required final List<String> uniquePrincipalGroup,
           required final List<String> uniquePrincipalNumber,
           required final List<String> uniqueSalesOrganisation}) =
-      _$_SalesRepresentativeInfo;
+      _$SalesRepresentativeInfoImpl;
   const _SalesRepresentativeInfo._() : super._();
 
   @override
@@ -230,6 +231,6 @@ abstract class _SalesRepresentativeInfo extends SalesRepresentativeInfo {
   List<String> get uniqueSalesOrganisation;
   @override
   @JsonKey(ignore: true)
-  _$$_SalesRepresentativeInfoCopyWith<_$_SalesRepresentativeInfo>
+  _$$SalesRepresentativeInfoImplCopyWith<_$SalesRepresentativeInfoImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

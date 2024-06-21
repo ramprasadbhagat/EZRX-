@@ -12,7 +12,7 @@ part of 'payment_advice_expiry_notification.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$PaymentAdviceExpiryNotification {
@@ -66,25 +66,25 @@ class _$PaymentAdviceExpiryNotificationCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_PaymentAdviceExpiryNotificationCopyWith<$Res>
+abstract class _$$PaymentAdviceExpiryNotificationImplCopyWith<$Res>
     implements $PaymentAdviceExpiryNotificationCopyWith<$Res> {
-  factory _$$_PaymentAdviceExpiryNotificationCopyWith(
-          _$_PaymentAdviceExpiryNotification value,
-          $Res Function(_$_PaymentAdviceExpiryNotification) then) =
-      __$$_PaymentAdviceExpiryNotificationCopyWithImpl<$Res>;
+  factory _$$PaymentAdviceExpiryNotificationImplCopyWith(
+          _$PaymentAdviceExpiryNotificationImpl value,
+          $Res Function(_$PaymentAdviceExpiryNotificationImpl) then) =
+      __$$PaymentAdviceExpiryNotificationImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String day, bool disabled});
 }
 
 /// @nodoc
-class __$$_PaymentAdviceExpiryNotificationCopyWithImpl<$Res>
+class __$$PaymentAdviceExpiryNotificationImplCopyWithImpl<$Res>
     extends _$PaymentAdviceExpiryNotificationCopyWithImpl<$Res,
-        _$_PaymentAdviceExpiryNotification>
-    implements _$$_PaymentAdviceExpiryNotificationCopyWith<$Res> {
-  __$$_PaymentAdviceExpiryNotificationCopyWithImpl(
-      _$_PaymentAdviceExpiryNotification _value,
-      $Res Function(_$_PaymentAdviceExpiryNotification) _then)
+        _$PaymentAdviceExpiryNotificationImpl>
+    implements _$$PaymentAdviceExpiryNotificationImplCopyWith<$Res> {
+  __$$PaymentAdviceExpiryNotificationImplCopyWithImpl(
+      _$PaymentAdviceExpiryNotificationImpl _value,
+      $Res Function(_$PaymentAdviceExpiryNotificationImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -93,7 +93,7 @@ class __$$_PaymentAdviceExpiryNotificationCopyWithImpl<$Res>
     Object? day = null,
     Object? disabled = null,
   }) {
-    return _then(_$_PaymentAdviceExpiryNotification(
+    return _then(_$PaymentAdviceExpiryNotificationImpl(
       day: null == day
           ? _value.day
           : day // ignore: cast_nullable_to_non_nullable
@@ -108,9 +108,9 @@ class __$$_PaymentAdviceExpiryNotificationCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_PaymentAdviceExpiryNotification
+class _$PaymentAdviceExpiryNotificationImpl
     extends _PaymentAdviceExpiryNotification {
-  const _$_PaymentAdviceExpiryNotification(
+  const _$PaymentAdviceExpiryNotificationImpl(
       {required this.day, required this.disabled})
       : super._();
 
@@ -125,10 +125,10 @@ class _$_PaymentAdviceExpiryNotification
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_PaymentAdviceExpiryNotification &&
+            other is _$PaymentAdviceExpiryNotificationImpl &&
             (identical(other.day, day) || other.day == day) &&
             (identical(other.disabled, disabled) ||
                 other.disabled == disabled));
@@ -140,17 +140,17 @@ class _$_PaymentAdviceExpiryNotification
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_PaymentAdviceExpiryNotificationCopyWith<
-          _$_PaymentAdviceExpiryNotification>
-      get copyWith => __$$_PaymentAdviceExpiryNotificationCopyWithImpl<
-          _$_PaymentAdviceExpiryNotification>(this, _$identity);
+  _$$PaymentAdviceExpiryNotificationImplCopyWith<
+          _$PaymentAdviceExpiryNotificationImpl>
+      get copyWith => __$$PaymentAdviceExpiryNotificationImplCopyWithImpl<
+          _$PaymentAdviceExpiryNotificationImpl>(this, _$identity);
 }
 
 abstract class _PaymentAdviceExpiryNotification
     extends PaymentAdviceExpiryNotification {
   const factory _PaymentAdviceExpiryNotification(
       {required final String day,
-      required final bool disabled}) = _$_PaymentAdviceExpiryNotification;
+      required final bool disabled}) = _$PaymentAdviceExpiryNotificationImpl;
   const _PaymentAdviceExpiryNotification._() : super._();
 
   @override
@@ -159,7 +159,7 @@ abstract class _PaymentAdviceExpiryNotification
   bool get disabled;
   @override
   @JsonKey(ignore: true)
-  _$$_PaymentAdviceExpiryNotificationCopyWith<
-          _$_PaymentAdviceExpiryNotification>
+  _$$PaymentAdviceExpiryNotificationImplCopyWith<
+          _$PaymentAdviceExpiryNotificationImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

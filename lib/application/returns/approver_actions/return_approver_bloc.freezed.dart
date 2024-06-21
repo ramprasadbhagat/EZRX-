@@ -12,7 +12,7 @@ part of 'return_approver_bloc.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$ReturnApproverEvent {
@@ -89,25 +89,25 @@ class _$ReturnApproverEventCopyWithImpl<$Res, $Val extends ReturnApproverEvent>
 }
 
 /// @nodoc
-abstract class _$$_InitializedCopyWith<$Res> {
-  factory _$$_InitializedCopyWith(
-          _$_Initialized value, $Res Function(_$_Initialized) then) =
-      __$$_InitializedCopyWithImpl<$Res>;
+abstract class _$$InitializedImplCopyWith<$Res> {
+  factory _$$InitializedImplCopyWith(
+          _$InitializedImpl value, $Res Function(_$InitializedImpl) then) =
+      __$$InitializedImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_InitializedCopyWithImpl<$Res>
-    extends _$ReturnApproverEventCopyWithImpl<$Res, _$_Initialized>
-    implements _$$_InitializedCopyWith<$Res> {
-  __$$_InitializedCopyWithImpl(
-      _$_Initialized _value, $Res Function(_$_Initialized) _then)
+class __$$InitializedImplCopyWithImpl<$Res>
+    extends _$ReturnApproverEventCopyWithImpl<$Res, _$InitializedImpl>
+    implements _$$InitializedImplCopyWith<$Res> {
+  __$$InitializedImplCopyWithImpl(
+      _$InitializedImpl _value, $Res Function(_$InitializedImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_Initialized implements _Initialized {
-  const _$_Initialized();
+class _$InitializedImpl implements _Initialized {
+  const _$InitializedImpl();
 
   @override
   String toString() {
@@ -115,9 +115,9 @@ class _$_Initialized implements _Initialized {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_Initialized);
+        (other.runtimeType == runtimeType && other is _$InitializedImpl);
   }
 
   @override
@@ -201,13 +201,14 @@ class _$_Initialized implements _Initialized {
 }
 
 abstract class _Initialized implements ReturnApproverEvent {
-  const factory _Initialized() = _$_Initialized;
+  const factory _Initialized() = _$InitializedImpl;
 }
 
 /// @nodoc
-abstract class _$$_FetchCopyWith<$Res> {
-  factory _$$_FetchCopyWith(_$_Fetch value, $Res Function(_$_Fetch) then) =
-      __$$_FetchCopyWithImpl<$Res>;
+abstract class _$$FetchImplCopyWith<$Res> {
+  factory _$$FetchImplCopyWith(
+          _$FetchImpl value, $Res Function(_$FetchImpl) then) =
+      __$$FetchImplCopyWithImpl<$Res>;
   @useResult
   $Res call({User user, ReturnApproverFilter approverReturnFilter});
 
@@ -216,10 +217,11 @@ abstract class _$$_FetchCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_FetchCopyWithImpl<$Res>
-    extends _$ReturnApproverEventCopyWithImpl<$Res, _$_Fetch>
-    implements _$$_FetchCopyWith<$Res> {
-  __$$_FetchCopyWithImpl(_$_Fetch _value, $Res Function(_$_Fetch) _then)
+class __$$FetchImplCopyWithImpl<$Res>
+    extends _$ReturnApproverEventCopyWithImpl<$Res, _$FetchImpl>
+    implements _$$FetchImplCopyWith<$Res> {
+  __$$FetchImplCopyWithImpl(
+      _$FetchImpl _value, $Res Function(_$FetchImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -228,7 +230,7 @@ class __$$_FetchCopyWithImpl<$Res>
     Object? user = null,
     Object? approverReturnFilter = null,
   }) {
-    return _then(_$_Fetch(
+    return _then(_$FetchImpl(
       user: null == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
@@ -260,8 +262,8 @@ class __$$_FetchCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_Fetch implements _Fetch {
-  const _$_Fetch({required this.user, required this.approverReturnFilter});
+class _$FetchImpl implements _Fetch {
+  const _$FetchImpl({required this.user, required this.approverReturnFilter});
 
   @override
   final User user;
@@ -274,10 +276,10 @@ class _$_Fetch implements _Fetch {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Fetch &&
+            other is _$FetchImpl &&
             (identical(other.user, user) || other.user == user) &&
             (identical(other.approverReturnFilter, approverReturnFilter) ||
                 other.approverReturnFilter == approverReturnFilter));
@@ -289,8 +291,8 @@ class _$_Fetch implements _Fetch {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_FetchCopyWith<_$_Fetch> get copyWith =>
-      __$$_FetchCopyWithImpl<_$_Fetch>(this, _$identity);
+  _$$FetchImplCopyWith<_$FetchImpl> get copyWith =>
+      __$$FetchImplCopyWithImpl<_$FetchImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -372,20 +374,20 @@ class _$_Fetch implements _Fetch {
 abstract class _Fetch implements ReturnApproverEvent {
   const factory _Fetch(
       {required final User user,
-      required final ReturnApproverFilter approverReturnFilter}) = _$_Fetch;
+      required final ReturnApproverFilter approverReturnFilter}) = _$FetchImpl;
 
   User get user;
   ReturnApproverFilter get approverReturnFilter;
   @JsonKey(ignore: true)
-  _$$_FetchCopyWith<_$_Fetch> get copyWith =>
+  _$$FetchImplCopyWith<_$FetchImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_LoadMoreCopyWith<$Res> {
-  factory _$$_LoadMoreCopyWith(
-          _$_LoadMore value, $Res Function(_$_LoadMore) then) =
-      __$$_LoadMoreCopyWithImpl<$Res>;
+abstract class _$$LoadMoreImplCopyWith<$Res> {
+  factory _$$LoadMoreImplCopyWith(
+          _$LoadMoreImpl value, $Res Function(_$LoadMoreImpl) then) =
+      __$$LoadMoreImplCopyWithImpl<$Res>;
   @useResult
   $Res call({User user, ReturnApproverFilter approverReturnFilter});
 
@@ -394,11 +396,11 @@ abstract class _$$_LoadMoreCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_LoadMoreCopyWithImpl<$Res>
-    extends _$ReturnApproverEventCopyWithImpl<$Res, _$_LoadMore>
-    implements _$$_LoadMoreCopyWith<$Res> {
-  __$$_LoadMoreCopyWithImpl(
-      _$_LoadMore _value, $Res Function(_$_LoadMore) _then)
+class __$$LoadMoreImplCopyWithImpl<$Res>
+    extends _$ReturnApproverEventCopyWithImpl<$Res, _$LoadMoreImpl>
+    implements _$$LoadMoreImplCopyWith<$Res> {
+  __$$LoadMoreImplCopyWithImpl(
+      _$LoadMoreImpl _value, $Res Function(_$LoadMoreImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -407,7 +409,7 @@ class __$$_LoadMoreCopyWithImpl<$Res>
     Object? user = null,
     Object? approverReturnFilter = null,
   }) {
-    return _then(_$_LoadMore(
+    return _then(_$LoadMoreImpl(
       user: null == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
@@ -439,8 +441,9 @@ class __$$_LoadMoreCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_LoadMore implements _LoadMore {
-  const _$_LoadMore({required this.user, required this.approverReturnFilter});
+class _$LoadMoreImpl implements _LoadMore {
+  const _$LoadMoreImpl(
+      {required this.user, required this.approverReturnFilter});
 
   @override
   final User user;
@@ -453,10 +456,10 @@ class _$_LoadMore implements _LoadMore {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_LoadMore &&
+            other is _$LoadMoreImpl &&
             (identical(other.user, user) || other.user == user) &&
             (identical(other.approverReturnFilter, approverReturnFilter) ||
                 other.approverReturnFilter == approverReturnFilter));
@@ -468,8 +471,8 @@ class _$_LoadMore implements _LoadMore {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_LoadMoreCopyWith<_$_LoadMore> get copyWith =>
-      __$$_LoadMoreCopyWithImpl<_$_LoadMore>(this, _$identity);
+  _$$LoadMoreImplCopyWith<_$LoadMoreImpl> get copyWith =>
+      __$$LoadMoreImplCopyWithImpl<_$LoadMoreImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -550,13 +553,14 @@ class _$_LoadMore implements _LoadMore {
 
 abstract class _LoadMore implements ReturnApproverEvent {
   const factory _LoadMore(
-      {required final User user,
-      required final ReturnApproverFilter approverReturnFilter}) = _$_LoadMore;
+          {required final User user,
+          required final ReturnApproverFilter approverReturnFilter}) =
+      _$LoadMoreImpl;
 
   User get user;
   ReturnApproverFilter get approverReturnFilter;
   @JsonKey(ignore: true)
-  _$$_LoadMoreCopyWith<_$_LoadMore> get copyWith =>
+  _$$LoadMoreImplCopyWith<_$LoadMoreImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -634,11 +638,11 @@ class _$ReturnApproverStateCopyWithImpl<$Res, $Val extends ReturnApproverState>
 }
 
 /// @nodoc
-abstract class _$$_ReturnApproverStateCopyWith<$Res>
+abstract class _$$ReturnApproverStateImplCopyWith<$Res>
     implements $ReturnApproverStateCopyWith<$Res> {
-  factory _$$_ReturnApproverStateCopyWith(_$_ReturnApproverState value,
-          $Res Function(_$_ReturnApproverState) then) =
-      __$$_ReturnApproverStateCopyWithImpl<$Res>;
+  factory _$$ReturnApproverStateImplCopyWith(_$ReturnApproverStateImpl value,
+          $Res Function(_$ReturnApproverStateImpl) then) =
+      __$$ReturnApproverStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -650,11 +654,11 @@ abstract class _$$_ReturnApproverStateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_ReturnApproverStateCopyWithImpl<$Res>
-    extends _$ReturnApproverStateCopyWithImpl<$Res, _$_ReturnApproverState>
-    implements _$$_ReturnApproverStateCopyWith<$Res> {
-  __$$_ReturnApproverStateCopyWithImpl(_$_ReturnApproverState _value,
-      $Res Function(_$_ReturnApproverState) _then)
+class __$$ReturnApproverStateImplCopyWithImpl<$Res>
+    extends _$ReturnApproverStateCopyWithImpl<$Res, _$ReturnApproverStateImpl>
+    implements _$$ReturnApproverStateImplCopyWith<$Res> {
+  __$$ReturnApproverStateImplCopyWithImpl(_$ReturnApproverStateImpl _value,
+      $Res Function(_$ReturnApproverStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -666,7 +670,7 @@ class __$$_ReturnApproverStateCopyWithImpl<$Res>
     Object? nextPageIndex = null,
     Object? canLoadMore = null,
   }) {
-    return _then(_$_ReturnApproverState(
+    return _then(_$ReturnApproverStateImpl(
       isFetching: null == isFetching
           ? _value.isFetching
           : isFetching // ignore: cast_nullable_to_non_nullable
@@ -693,8 +697,8 @@ class __$$_ReturnApproverStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_ReturnApproverState implements _ReturnApproverState {
-  const _$_ReturnApproverState(
+class _$ReturnApproverStateImpl implements _ReturnApproverState {
+  const _$ReturnApproverStateImpl(
       {required this.isFetching,
       required this.failureOrSuccessOption,
       required final List<RequestInformation> approverReturnRequestList,
@@ -726,10 +730,10 @@ class _$_ReturnApproverState implements _ReturnApproverState {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ReturnApproverState &&
+            other is _$ReturnApproverStateImpl &&
             (identical(other.isFetching, isFetching) ||
                 other.isFetching == isFetching) &&
             (identical(other.failureOrSuccessOption, failureOrSuccessOption) ||
@@ -754,8 +758,8 @@ class _$_ReturnApproverState implements _ReturnApproverState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ReturnApproverStateCopyWith<_$_ReturnApproverState> get copyWith =>
-      __$$_ReturnApproverStateCopyWithImpl<_$_ReturnApproverState>(
+  _$$ReturnApproverStateImplCopyWith<_$ReturnApproverStateImpl> get copyWith =>
+      __$$ReturnApproverStateImplCopyWithImpl<_$ReturnApproverStateImpl>(
           this, _$identity);
 }
 
@@ -765,7 +769,7 @@ abstract class _ReturnApproverState implements ReturnApproverState {
       required final Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
       required final List<RequestInformation> approverReturnRequestList,
       required final int nextPageIndex,
-      required final bool canLoadMore}) = _$_ReturnApproverState;
+      required final bool canLoadMore}) = _$ReturnApproverStateImpl;
 
   @override
   bool get isFetching;
@@ -779,6 +783,6 @@ abstract class _ReturnApproverState implements ReturnApproverState {
   bool get canLoadMore;
   @override
   @JsonKey(ignore: true)
-  _$$_ReturnApproverStateCopyWith<_$_ReturnApproverState> get copyWith =>
+  _$$ReturnApproverStateImplCopyWith<_$ReturnApproverStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

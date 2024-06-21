@@ -12,7 +12,7 @@ part of 'user_bloc.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$UserEvent {
@@ -129,25 +129,25 @@ class _$UserEventCopyWithImpl<$Res, $Val extends UserEvent>
 }
 
 /// @nodoc
-abstract class _$$_InitializedCopyWith<$Res> {
-  factory _$$_InitializedCopyWith(
-          _$_Initialized value, $Res Function(_$_Initialized) then) =
-      __$$_InitializedCopyWithImpl<$Res>;
+abstract class _$$InitializedImplCopyWith<$Res> {
+  factory _$$InitializedImplCopyWith(
+          _$InitializedImpl value, $Res Function(_$InitializedImpl) then) =
+      __$$InitializedImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_InitializedCopyWithImpl<$Res>
-    extends _$UserEventCopyWithImpl<$Res, _$_Initialized>
-    implements _$$_InitializedCopyWith<$Res> {
-  __$$_InitializedCopyWithImpl(
-      _$_Initialized _value, $Res Function(_$_Initialized) _then)
+class __$$InitializedImplCopyWithImpl<$Res>
+    extends _$UserEventCopyWithImpl<$Res, _$InitializedImpl>
+    implements _$$InitializedImplCopyWith<$Res> {
+  __$$InitializedImplCopyWithImpl(
+      _$InitializedImpl _value, $Res Function(_$InitializedImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_Initialized implements _Initialized {
-  const _$_Initialized();
+class _$InitializedImpl implements _Initialized {
+  const _$InitializedImpl();
 
   @override
   String toString() {
@@ -155,9 +155,9 @@ class _$_Initialized implements _Initialized {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_Initialized);
+        (other.runtimeType == runtimeType && other is _$InitializedImpl);
   }
 
   @override
@@ -282,22 +282,24 @@ class _$_Initialized implements _Initialized {
 }
 
 abstract class _Initialized implements UserEvent {
-  const factory _Initialized() = _$_Initialized;
+  const factory _Initialized() = _$InitializedImpl;
 }
 
 /// @nodoc
-abstract class _$$_FetchCopyWith<$Res> {
-  factory _$$_FetchCopyWith(_$_Fetch value, $Res Function(_$_Fetch) then) =
-      __$$_FetchCopyWithImpl<$Res>;
+abstract class _$$FetchImplCopyWith<$Res> {
+  factory _$$FetchImplCopyWith(
+          _$FetchImpl value, $Res Function(_$FetchImpl) then) =
+      __$$FetchImplCopyWithImpl<$Res>;
   @useResult
   $Res call({bool isLoginOnBehalf});
 }
 
 /// @nodoc
-class __$$_FetchCopyWithImpl<$Res>
-    extends _$UserEventCopyWithImpl<$Res, _$_Fetch>
-    implements _$$_FetchCopyWith<$Res> {
-  __$$_FetchCopyWithImpl(_$_Fetch _value, $Res Function(_$_Fetch) _then)
+class __$$FetchImplCopyWithImpl<$Res>
+    extends _$UserEventCopyWithImpl<$Res, _$FetchImpl>
+    implements _$$FetchImplCopyWith<$Res> {
+  __$$FetchImplCopyWithImpl(
+      _$FetchImpl _value, $Res Function(_$FetchImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -305,7 +307,7 @@ class __$$_FetchCopyWithImpl<$Res>
   $Res call({
     Object? isLoginOnBehalf = null,
   }) {
-    return _then(_$_Fetch(
+    return _then(_$FetchImpl(
       isLoginOnBehalf: null == isLoginOnBehalf
           ? _value.isLoginOnBehalf
           : isLoginOnBehalf // ignore: cast_nullable_to_non_nullable
@@ -316,8 +318,8 @@ class __$$_FetchCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_Fetch implements _Fetch {
-  const _$_Fetch({this.isLoginOnBehalf = false});
+class _$FetchImpl implements _Fetch {
+  const _$FetchImpl({this.isLoginOnBehalf = false});
 
   @override
   @JsonKey()
@@ -329,10 +331,10 @@ class _$_Fetch implements _Fetch {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Fetch &&
+            other is _$FetchImpl &&
             (identical(other.isLoginOnBehalf, isLoginOnBehalf) ||
                 other.isLoginOnBehalf == isLoginOnBehalf));
   }
@@ -343,8 +345,8 @@ class _$_Fetch implements _Fetch {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_FetchCopyWith<_$_Fetch> get copyWith =>
-      __$$_FetchCopyWithImpl<_$_Fetch>(this, _$identity);
+  _$$FetchImplCopyWith<_$FetchImpl> get copyWith =>
+      __$$FetchImplCopyWithImpl<_$FetchImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -465,34 +467,34 @@ class _$_Fetch implements _Fetch {
 }
 
 abstract class _Fetch implements UserEvent {
-  const factory _Fetch({final bool isLoginOnBehalf}) = _$_Fetch;
+  const factory _Fetch({final bool isLoginOnBehalf}) = _$FetchImpl;
 
   bool get isLoginOnBehalf;
   @JsonKey(ignore: true)
-  _$$_FetchCopyWith<_$_Fetch> get copyWith =>
+  _$$FetchImplCopyWith<_$FetchImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_AcceptTncCopyWith<$Res> {
-  factory _$$_AcceptTncCopyWith(
-          _$_AcceptTnc value, $Res Function(_$_AcceptTnc) then) =
-      __$$_AcceptTncCopyWithImpl<$Res>;
+abstract class _$$AcceptTncImplCopyWith<$Res> {
+  factory _$$AcceptTncImplCopyWith(
+          _$AcceptTncImpl value, $Res Function(_$AcceptTncImpl) then) =
+      __$$AcceptTncImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_AcceptTncCopyWithImpl<$Res>
-    extends _$UserEventCopyWithImpl<$Res, _$_AcceptTnc>
-    implements _$$_AcceptTncCopyWith<$Res> {
-  __$$_AcceptTncCopyWithImpl(
-      _$_AcceptTnc _value, $Res Function(_$_AcceptTnc) _then)
+class __$$AcceptTncImplCopyWithImpl<$Res>
+    extends _$UserEventCopyWithImpl<$Res, _$AcceptTncImpl>
+    implements _$$AcceptTncImplCopyWith<$Res> {
+  __$$AcceptTncImplCopyWithImpl(
+      _$AcceptTncImpl _value, $Res Function(_$AcceptTncImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_AcceptTnc implements _AcceptTnc {
-  const _$_AcceptTnc();
+class _$AcceptTncImpl implements _AcceptTnc {
+  const _$AcceptTncImpl();
 
   @override
   String toString() {
@@ -500,9 +502,9 @@ class _$_AcceptTnc implements _AcceptTnc {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_AcceptTnc);
+        (other.runtimeType == runtimeType && other is _$AcceptTncImpl);
   }
 
   @override
@@ -627,26 +629,26 @@ class _$_AcceptTnc implements _AcceptTnc {
 }
 
 abstract class _AcceptTnc implements UserEvent {
-  const factory _AcceptTnc() = _$_AcceptTnc;
+  const factory _AcceptTnc() = _$AcceptTncImpl;
 }
 
 /// @nodoc
-abstract class _$$_SetMarketPlaceTncAcceptanceCopyWith<$Res> {
-  factory _$$_SetMarketPlaceTncAcceptanceCopyWith(
-          _$_SetMarketPlaceTncAcceptance value,
-          $Res Function(_$_SetMarketPlaceTncAcceptance) then) =
-      __$$_SetMarketPlaceTncAcceptanceCopyWithImpl<$Res>;
+abstract class _$$SetMarketPlaceTncAcceptanceImplCopyWith<$Res> {
+  factory _$$SetMarketPlaceTncAcceptanceImplCopyWith(
+          _$SetMarketPlaceTncAcceptanceImpl value,
+          $Res Function(_$SetMarketPlaceTncAcceptanceImpl) then) =
+      __$$SetMarketPlaceTncAcceptanceImplCopyWithImpl<$Res>;
   @useResult
   $Res call({MarketPlaceTnCAcceptance value});
 }
 
 /// @nodoc
-class __$$_SetMarketPlaceTncAcceptanceCopyWithImpl<$Res>
-    extends _$UserEventCopyWithImpl<$Res, _$_SetMarketPlaceTncAcceptance>
-    implements _$$_SetMarketPlaceTncAcceptanceCopyWith<$Res> {
-  __$$_SetMarketPlaceTncAcceptanceCopyWithImpl(
-      _$_SetMarketPlaceTncAcceptance _value,
-      $Res Function(_$_SetMarketPlaceTncAcceptance) _then)
+class __$$SetMarketPlaceTncAcceptanceImplCopyWithImpl<$Res>
+    extends _$UserEventCopyWithImpl<$Res, _$SetMarketPlaceTncAcceptanceImpl>
+    implements _$$SetMarketPlaceTncAcceptanceImplCopyWith<$Res> {
+  __$$SetMarketPlaceTncAcceptanceImplCopyWithImpl(
+      _$SetMarketPlaceTncAcceptanceImpl _value,
+      $Res Function(_$SetMarketPlaceTncAcceptanceImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -654,7 +656,7 @@ class __$$_SetMarketPlaceTncAcceptanceCopyWithImpl<$Res>
   $Res call({
     Object? value = null,
   }) {
-    return _then(_$_SetMarketPlaceTncAcceptance(
+    return _then(_$SetMarketPlaceTncAcceptanceImpl(
       null == value
           ? _value.value
           : value // ignore: cast_nullable_to_non_nullable
@@ -665,8 +667,9 @@ class __$$_SetMarketPlaceTncAcceptanceCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_SetMarketPlaceTncAcceptance implements _SetMarketPlaceTncAcceptance {
-  const _$_SetMarketPlaceTncAcceptance(this.value);
+class _$SetMarketPlaceTncAcceptanceImpl
+    implements _SetMarketPlaceTncAcceptance {
+  const _$SetMarketPlaceTncAcceptanceImpl(this.value);
 
   @override
   final MarketPlaceTnCAcceptance value;
@@ -677,10 +680,10 @@ class _$_SetMarketPlaceTncAcceptance implements _SetMarketPlaceTncAcceptance {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_SetMarketPlaceTncAcceptance &&
+            other is _$SetMarketPlaceTncAcceptanceImpl &&
             (identical(other.value, value) || other.value == value));
   }
 
@@ -690,9 +693,9 @@ class _$_SetMarketPlaceTncAcceptance implements _SetMarketPlaceTncAcceptance {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_SetMarketPlaceTncAcceptanceCopyWith<_$_SetMarketPlaceTncAcceptance>
-      get copyWith => __$$_SetMarketPlaceTncAcceptanceCopyWithImpl<
-          _$_SetMarketPlaceTncAcceptance>(this, _$identity);
+  _$$SetMarketPlaceTncAcceptanceImplCopyWith<_$SetMarketPlaceTncAcceptanceImpl>
+      get copyWith => __$$SetMarketPlaceTncAcceptanceImplCopyWithImpl<
+          _$SetMarketPlaceTncAcceptanceImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -814,31 +817,31 @@ class _$_SetMarketPlaceTncAcceptance implements _SetMarketPlaceTncAcceptance {
 
 abstract class _SetMarketPlaceTncAcceptance implements UserEvent {
   const factory _SetMarketPlaceTncAcceptance(
-      final MarketPlaceTnCAcceptance value) = _$_SetMarketPlaceTncAcceptance;
+      final MarketPlaceTnCAcceptance value) = _$SetMarketPlaceTncAcceptanceImpl;
 
   MarketPlaceTnCAcceptance get value;
   @JsonKey(ignore: true)
-  _$$_SetMarketPlaceTncAcceptanceCopyWith<_$_SetMarketPlaceTncAcceptance>
+  _$$SetMarketPlaceTncAcceptanceImplCopyWith<_$SetMarketPlaceTncAcceptanceImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_UpdateNotificationSettingsCopyWith<$Res> {
-  factory _$$_UpdateNotificationSettingsCopyWith(
-          _$_UpdateNotificationSettings value,
-          $Res Function(_$_UpdateNotificationSettings) then) =
-      __$$_UpdateNotificationSettingsCopyWithImpl<$Res>;
+abstract class _$$UpdateNotificationSettingsImplCopyWith<$Res> {
+  factory _$$UpdateNotificationSettingsImplCopyWith(
+          _$UpdateNotificationSettingsImpl value,
+          $Res Function(_$UpdateNotificationSettingsImpl) then) =
+      __$$UpdateNotificationSettingsImplCopyWithImpl<$Res>;
   @useResult
   $Res call({Language languagePreference, bool emailNotifications});
 }
 
 /// @nodoc
-class __$$_UpdateNotificationSettingsCopyWithImpl<$Res>
-    extends _$UserEventCopyWithImpl<$Res, _$_UpdateNotificationSettings>
-    implements _$$_UpdateNotificationSettingsCopyWith<$Res> {
-  __$$_UpdateNotificationSettingsCopyWithImpl(
-      _$_UpdateNotificationSettings _value,
-      $Res Function(_$_UpdateNotificationSettings) _then)
+class __$$UpdateNotificationSettingsImplCopyWithImpl<$Res>
+    extends _$UserEventCopyWithImpl<$Res, _$UpdateNotificationSettingsImpl>
+    implements _$$UpdateNotificationSettingsImplCopyWith<$Res> {
+  __$$UpdateNotificationSettingsImplCopyWithImpl(
+      _$UpdateNotificationSettingsImpl _value,
+      $Res Function(_$UpdateNotificationSettingsImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -847,7 +850,7 @@ class __$$_UpdateNotificationSettingsCopyWithImpl<$Res>
     Object? languagePreference = null,
     Object? emailNotifications = null,
   }) {
-    return _then(_$_UpdateNotificationSettings(
+    return _then(_$UpdateNotificationSettingsImpl(
       languagePreference: null == languagePreference
           ? _value.languagePreference
           : languagePreference // ignore: cast_nullable_to_non_nullable
@@ -862,8 +865,8 @@ class __$$_UpdateNotificationSettingsCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_UpdateNotificationSettings implements _UpdateNotificationSettings {
-  const _$_UpdateNotificationSettings(
+class _$UpdateNotificationSettingsImpl implements _UpdateNotificationSettings {
+  const _$UpdateNotificationSettingsImpl(
       {required this.languagePreference, required this.emailNotifications});
 
   @override
@@ -877,10 +880,10 @@ class _$_UpdateNotificationSettings implements _UpdateNotificationSettings {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_UpdateNotificationSettings &&
+            other is _$UpdateNotificationSettingsImpl &&
             (identical(other.languagePreference, languagePreference) ||
                 other.languagePreference == languagePreference) &&
             (identical(other.emailNotifications, emailNotifications) ||
@@ -894,9 +897,9 @@ class _$_UpdateNotificationSettings implements _UpdateNotificationSettings {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_UpdateNotificationSettingsCopyWith<_$_UpdateNotificationSettings>
-      get copyWith => __$$_UpdateNotificationSettingsCopyWithImpl<
-          _$_UpdateNotificationSettings>(this, _$identity);
+  _$$UpdateNotificationSettingsImplCopyWith<_$UpdateNotificationSettingsImpl>
+      get copyWith => __$$UpdateNotificationSettingsImplCopyWithImpl<
+          _$UpdateNotificationSettingsImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -1019,22 +1022,23 @@ class _$_UpdateNotificationSettings implements _UpdateNotificationSettings {
 
 abstract class _UpdateNotificationSettings implements UserEvent {
   const factory _UpdateNotificationSettings(
-      {required final Language languagePreference,
-      required final bool emailNotifications}) = _$_UpdateNotificationSettings;
+          {required final Language languagePreference,
+          required final bool emailNotifications}) =
+      _$UpdateNotificationSettingsImpl;
 
   Language get languagePreference;
   bool get emailNotifications;
   @JsonKey(ignore: true)
-  _$$_UpdateNotificationSettingsCopyWith<_$_UpdateNotificationSettings>
+  _$$UpdateNotificationSettingsImplCopyWith<_$UpdateNotificationSettingsImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_UpdatePaymentNotificationSettingsCopyWith<$Res> {
-  factory _$$_UpdatePaymentNotificationSettingsCopyWith(
-          _$_UpdatePaymentNotificationSettings value,
-          $Res Function(_$_UpdatePaymentNotificationSettings) then) =
-      __$$_UpdatePaymentNotificationSettingsCopyWithImpl<$Res>;
+abstract class _$$UpdatePaymentNotificationSettingsImplCopyWith<$Res> {
+  factory _$$UpdatePaymentNotificationSettingsImplCopyWith(
+          _$UpdatePaymentNotificationSettingsImpl value,
+          $Res Function(_$UpdatePaymentNotificationSettingsImpl) then) =
+      __$$UpdatePaymentNotificationSettingsImplCopyWithImpl<$Res>;
   @useResult
   $Res call({PaymentNotification paymentNotification});
 
@@ -1042,12 +1046,13 @@ abstract class _$$_UpdatePaymentNotificationSettingsCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_UpdatePaymentNotificationSettingsCopyWithImpl<$Res>
-    extends _$UserEventCopyWithImpl<$Res, _$_UpdatePaymentNotificationSettings>
-    implements _$$_UpdatePaymentNotificationSettingsCopyWith<$Res> {
-  __$$_UpdatePaymentNotificationSettingsCopyWithImpl(
-      _$_UpdatePaymentNotificationSettings _value,
-      $Res Function(_$_UpdatePaymentNotificationSettings) _then)
+class __$$UpdatePaymentNotificationSettingsImplCopyWithImpl<$Res>
+    extends _$UserEventCopyWithImpl<$Res,
+        _$UpdatePaymentNotificationSettingsImpl>
+    implements _$$UpdatePaymentNotificationSettingsImplCopyWith<$Res> {
+  __$$UpdatePaymentNotificationSettingsImplCopyWithImpl(
+      _$UpdatePaymentNotificationSettingsImpl _value,
+      $Res Function(_$UpdatePaymentNotificationSettingsImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1055,7 +1060,7 @@ class __$$_UpdatePaymentNotificationSettingsCopyWithImpl<$Res>
   $Res call({
     Object? paymentNotification = null,
   }) {
-    return _then(_$_UpdatePaymentNotificationSettings(
+    return _then(_$UpdatePaymentNotificationSettingsImpl(
       paymentNotification: null == paymentNotification
           ? _value.paymentNotification
           : paymentNotification // ignore: cast_nullable_to_non_nullable
@@ -1075,9 +1080,9 @@ class __$$_UpdatePaymentNotificationSettingsCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_UpdatePaymentNotificationSettings
+class _$UpdatePaymentNotificationSettingsImpl
     implements _UpdatePaymentNotificationSettings {
-  const _$_UpdatePaymentNotificationSettings(
+  const _$UpdatePaymentNotificationSettingsImpl(
       {required this.paymentNotification});
 
   @override
@@ -1089,10 +1094,10 @@ class _$_UpdatePaymentNotificationSettings
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_UpdatePaymentNotificationSettings &&
+            other is _$UpdatePaymentNotificationSettingsImpl &&
             (identical(other.paymentNotification, paymentNotification) ||
                 other.paymentNotification == paymentNotification));
   }
@@ -1103,10 +1108,10 @@ class _$_UpdatePaymentNotificationSettings
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_UpdatePaymentNotificationSettingsCopyWith<
-          _$_UpdatePaymentNotificationSettings>
-      get copyWith => __$$_UpdatePaymentNotificationSettingsCopyWithImpl<
-          _$_UpdatePaymentNotificationSettings>(this, _$identity);
+  _$$UpdatePaymentNotificationSettingsImplCopyWith<
+          _$UpdatePaymentNotificationSettingsImpl>
+      get copyWith => __$$UpdatePaymentNotificationSettingsImplCopyWithImpl<
+          _$UpdatePaymentNotificationSettingsImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -1229,30 +1234,30 @@ class _$_UpdatePaymentNotificationSettings
 abstract class _UpdatePaymentNotificationSettings implements UserEvent {
   const factory _UpdatePaymentNotificationSettings(
           {required final PaymentNotification paymentNotification}) =
-      _$_UpdatePaymentNotificationSettings;
+      _$UpdatePaymentNotificationSettingsImpl;
 
   PaymentNotification get paymentNotification;
   @JsonKey(ignore: true)
-  _$$_UpdatePaymentNotificationSettingsCopyWith<
-          _$_UpdatePaymentNotificationSettings>
+  _$$UpdatePaymentNotificationSettingsImplCopyWith<
+          _$UpdatePaymentNotificationSettingsImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_UpdateLanguageCopyWith<$Res> {
-  factory _$$_UpdateLanguageCopyWith(
-          _$_UpdateLanguage value, $Res Function(_$_UpdateLanguage) then) =
-      __$$_UpdateLanguageCopyWithImpl<$Res>;
+abstract class _$$UpdateLanguageImplCopyWith<$Res> {
+  factory _$$UpdateLanguageImplCopyWith(_$UpdateLanguageImpl value,
+          $Res Function(_$UpdateLanguageImpl) then) =
+      __$$UpdateLanguageImplCopyWithImpl<$Res>;
   @useResult
   $Res call({Language language});
 }
 
 /// @nodoc
-class __$$_UpdateLanguageCopyWithImpl<$Res>
-    extends _$UserEventCopyWithImpl<$Res, _$_UpdateLanguage>
-    implements _$$_UpdateLanguageCopyWith<$Res> {
-  __$$_UpdateLanguageCopyWithImpl(
-      _$_UpdateLanguage _value, $Res Function(_$_UpdateLanguage) _then)
+class __$$UpdateLanguageImplCopyWithImpl<$Res>
+    extends _$UserEventCopyWithImpl<$Res, _$UpdateLanguageImpl>
+    implements _$$UpdateLanguageImplCopyWith<$Res> {
+  __$$UpdateLanguageImplCopyWithImpl(
+      _$UpdateLanguageImpl _value, $Res Function(_$UpdateLanguageImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1260,7 +1265,7 @@ class __$$_UpdateLanguageCopyWithImpl<$Res>
   $Res call({
     Object? language = null,
   }) {
-    return _then(_$_UpdateLanguage(
+    return _then(_$UpdateLanguageImpl(
       null == language
           ? _value.language
           : language // ignore: cast_nullable_to_non_nullable
@@ -1271,8 +1276,8 @@ class __$$_UpdateLanguageCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_UpdateLanguage implements _UpdateLanguage {
-  const _$_UpdateLanguage(this.language);
+class _$UpdateLanguageImpl implements _UpdateLanguage {
+  const _$UpdateLanguageImpl(this.language);
 
   @override
   final Language language;
@@ -1283,10 +1288,10 @@ class _$_UpdateLanguage implements _UpdateLanguage {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_UpdateLanguage &&
+            other is _$UpdateLanguageImpl &&
             (identical(other.language, language) ||
                 other.language == language));
   }
@@ -1297,8 +1302,9 @@ class _$_UpdateLanguage implements _UpdateLanguage {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_UpdateLanguageCopyWith<_$_UpdateLanguage> get copyWith =>
-      __$$_UpdateLanguageCopyWithImpl<_$_UpdateLanguage>(this, _$identity);
+  _$$UpdateLanguageImplCopyWith<_$UpdateLanguageImpl> get copyWith =>
+      __$$UpdateLanguageImplCopyWithImpl<_$UpdateLanguageImpl>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -1419,29 +1425,29 @@ class _$_UpdateLanguage implements _UpdateLanguage {
 }
 
 abstract class _UpdateLanguage implements UserEvent {
-  const factory _UpdateLanguage(final Language language) = _$_UpdateLanguage;
+  const factory _UpdateLanguage(final Language language) = _$UpdateLanguageImpl;
 
   Language get language;
   @JsonKey(ignore: true)
-  _$$_UpdateLanguageCopyWith<_$_UpdateLanguage> get copyWith =>
+  _$$UpdateLanguageImplCopyWith<_$UpdateLanguageImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_SelectLanguageCopyWith<$Res> {
-  factory _$$_SelectLanguageCopyWith(
-          _$_SelectLanguage value, $Res Function(_$_SelectLanguage) then) =
-      __$$_SelectLanguageCopyWithImpl<$Res>;
+abstract class _$$SelectLanguageImplCopyWith<$Res> {
+  factory _$$SelectLanguageImplCopyWith(_$SelectLanguageImpl value,
+          $Res Function(_$SelectLanguageImpl) then) =
+      __$$SelectLanguageImplCopyWithImpl<$Res>;
   @useResult
   $Res call({Language language});
 }
 
 /// @nodoc
-class __$$_SelectLanguageCopyWithImpl<$Res>
-    extends _$UserEventCopyWithImpl<$Res, _$_SelectLanguage>
-    implements _$$_SelectLanguageCopyWith<$Res> {
-  __$$_SelectLanguageCopyWithImpl(
-      _$_SelectLanguage _value, $Res Function(_$_SelectLanguage) _then)
+class __$$SelectLanguageImplCopyWithImpl<$Res>
+    extends _$UserEventCopyWithImpl<$Res, _$SelectLanguageImpl>
+    implements _$$SelectLanguageImplCopyWith<$Res> {
+  __$$SelectLanguageImplCopyWithImpl(
+      _$SelectLanguageImpl _value, $Res Function(_$SelectLanguageImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1449,7 +1455,7 @@ class __$$_SelectLanguageCopyWithImpl<$Res>
   $Res call({
     Object? language = null,
   }) {
-    return _then(_$_SelectLanguage(
+    return _then(_$SelectLanguageImpl(
       null == language
           ? _value.language
           : language // ignore: cast_nullable_to_non_nullable
@@ -1460,8 +1466,8 @@ class __$$_SelectLanguageCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_SelectLanguage implements _SelectLanguage {
-  const _$_SelectLanguage(this.language);
+class _$SelectLanguageImpl implements _SelectLanguage {
+  const _$SelectLanguageImpl(this.language);
 
   @override
   final Language language;
@@ -1472,10 +1478,10 @@ class _$_SelectLanguage implements _SelectLanguage {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_SelectLanguage &&
+            other is _$SelectLanguageImpl &&
             (identical(other.language, language) ||
                 other.language == language));
   }
@@ -1486,8 +1492,9 @@ class _$_SelectLanguage implements _SelectLanguage {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_SelectLanguageCopyWith<_$_SelectLanguage> get copyWith =>
-      __$$_SelectLanguageCopyWithImpl<_$_SelectLanguage>(this, _$identity);
+  _$$SelectLanguageImplCopyWith<_$SelectLanguageImpl> get copyWith =>
+      __$$SelectLanguageImplCopyWithImpl<_$SelectLanguageImpl>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -1608,11 +1615,11 @@ class _$_SelectLanguage implements _SelectLanguage {
 }
 
 abstract class _SelectLanguage implements UserEvent {
-  const factory _SelectLanguage(final Language language) = _$_SelectLanguage;
+  const factory _SelectLanguage(final Language language) = _$SelectLanguageImpl;
 
   Language get language;
   @JsonKey(ignore: true)
-  _$$_SelectLanguageCopyWith<_$_SelectLanguage> get copyWith =>
+  _$$SelectLanguageImplCopyWith<_$SelectLanguageImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -1698,10 +1705,11 @@ class _$UserStateCopyWithImpl<$Res, $Val extends UserState>
 }
 
 /// @nodoc
-abstract class _$$_UserStateCopyWith<$Res> implements $UserStateCopyWith<$Res> {
-  factory _$$_UserStateCopyWith(
-          _$_UserState value, $Res Function(_$_UserState) then) =
-      __$$_UserStateCopyWithImpl<$Res>;
+abstract class _$$UserStateImplCopyWith<$Res>
+    implements $UserStateCopyWith<$Res> {
+  factory _$$UserStateImplCopyWith(
+          _$UserStateImpl value, $Res Function(_$UserStateImpl) then) =
+      __$$UserStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -1716,11 +1724,11 @@ abstract class _$$_UserStateCopyWith<$Res> implements $UserStateCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_UserStateCopyWithImpl<$Res>
-    extends _$UserStateCopyWithImpl<$Res, _$_UserState>
-    implements _$$_UserStateCopyWith<$Res> {
-  __$$_UserStateCopyWithImpl(
-      _$_UserState _value, $Res Function(_$_UserState) _then)
+class __$$UserStateImplCopyWithImpl<$Res>
+    extends _$UserStateCopyWithImpl<$Res, _$UserStateImpl>
+    implements _$$UserStateImplCopyWith<$Res> {
+  __$$UserStateImplCopyWithImpl(
+      _$UserStateImpl _value, $Res Function(_$UserStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1732,7 +1740,7 @@ class __$$_UserStateCopyWithImpl<$Res>
     Object? activeLanguage = null,
     Object? isLoading = null,
   }) {
-    return _then(_$_UserState(
+    return _then(_$UserStateImpl(
       user: null == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
@@ -1759,8 +1767,8 @@ class __$$_UserStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_UserState extends _UserState {
-  const _$_UserState(
+class _$UserStateImpl extends _UserState {
+  const _$UserStateImpl(
       {required this.user,
       required this.isLoginOnBehalf,
       required this.userFailureOrSuccessOption,
@@ -1785,10 +1793,10 @@ class _$_UserState extends _UserState {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_UserState &&
+            other is _$UserStateImpl &&
             (identical(other.user, user) || other.user == user) &&
             (identical(other.isLoginOnBehalf, isLoginOnBehalf) ||
                 other.isLoginOnBehalf == isLoginOnBehalf) &&
@@ -1809,8 +1817,8 @@ class _$_UserState extends _UserState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_UserStateCopyWith<_$_UserState> get copyWith =>
-      __$$_UserStateCopyWithImpl<_$_UserState>(this, _$identity);
+  _$$UserStateImplCopyWith<_$UserStateImpl> get copyWith =>
+      __$$UserStateImplCopyWithImpl<_$UserStateImpl>(this, _$identity);
 }
 
 abstract class _UserState extends UserState {
@@ -1820,7 +1828,7 @@ abstract class _UserState extends UserState {
       required final Option<Either<ApiFailure, dynamic>>
           userFailureOrSuccessOption,
       required final Language activeLanguage,
-      required final bool isLoading}) = _$_UserState;
+      required final bool isLoading}) = _$UserStateImpl;
   const _UserState._() : super._();
 
   @override
@@ -1835,6 +1843,6 @@ abstract class _UserState extends UserState {
   bool get isLoading;
   @override
   @JsonKey(ignore: true)
-  _$$_UserStateCopyWith<_$_UserState> get copyWith =>
+  _$$UserStateImplCopyWith<_$UserStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -12,7 +12,7 @@ part of 'access_right_dto.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 AccessRightDto _$AccessRightDtoFromJson(Map<String, dynamic> json) {
   return _AccessRightDto.fromJson(json);
@@ -129,11 +129,11 @@ class _$AccessRightDtoCopyWithImpl<$Res, $Val extends AccessRightDto>
 }
 
 /// @nodoc
-abstract class _$$_AccessRightDtoCopyWith<$Res>
+abstract class _$$AccessRightDtoImplCopyWith<$Res>
     implements $AccessRightDtoCopyWith<$Res> {
-  factory _$$_AccessRightDtoCopyWith(
-          _$_AccessRightDto value, $Res Function(_$_AccessRightDto) then) =
-      __$$_AccessRightDtoCopyWithImpl<$Res>;
+  factory _$$AccessRightDtoImplCopyWith(_$AccessRightDtoImpl value,
+          $Res Function(_$AccessRightDtoImpl) then) =
+      __$$AccessRightDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -150,11 +150,11 @@ abstract class _$$_AccessRightDtoCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_AccessRightDtoCopyWithImpl<$Res>
-    extends _$AccessRightDtoCopyWithImpl<$Res, _$_AccessRightDto>
-    implements _$$_AccessRightDtoCopyWith<$Res> {
-  __$$_AccessRightDtoCopyWithImpl(
-      _$_AccessRightDto _value, $Res Function(_$_AccessRightDto) _then)
+class __$$AccessRightDtoImplCopyWithImpl<$Res>
+    extends _$AccessRightDtoCopyWithImpl<$Res, _$AccessRightDtoImpl>
+    implements _$$AccessRightDtoImplCopyWith<$Res> {
+  __$$AccessRightDtoImplCopyWithImpl(
+      _$AccessRightDtoImpl _value, $Res Function(_$AccessRightDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -170,7 +170,7 @@ class __$$_AccessRightDtoCopyWithImpl<$Res>
     Object? loyaltyScheme = null,
     Object? adminPOAttachment = null,
   }) {
-    return _then(_$_AccessRightDto(
+    return _then(_$AccessRightDtoImpl(
       users: null == users
           ? _value.users
           : users // ignore: cast_nullable_to_non_nullable
@@ -213,8 +213,8 @@ class __$$_AccessRightDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_AccessRightDto extends _AccessRightDto {
-  const _$_AccessRightDto(
+class _$AccessRightDtoImpl extends _AccessRightDto {
+  const _$AccessRightDtoImpl(
       {@JsonKey(name: 'Users', defaultValue: false) required this.users,
       @JsonKey(name: 'Orders', defaultValue: false) required this.orders,
       @JsonKey(name: 'Promos', defaultValue: false) required this.promos,
@@ -228,8 +228,8 @@ class _$_AccessRightDto extends _AccessRightDto {
       required this.adminPOAttachment})
       : super._();
 
-  factory _$_AccessRightDto.fromJson(Map<String, dynamic> json) =>
-      _$$_AccessRightDtoFromJson(json);
+  factory _$AccessRightDtoImpl.fromJson(Map<String, dynamic> json) =>
+      _$$AccessRightDtoImplFromJson(json);
 
   @override
   @JsonKey(name: 'Users', defaultValue: false)
@@ -265,10 +265,10 @@ class _$_AccessRightDto extends _AccessRightDto {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_AccessRightDto &&
+            other is _$AccessRightDtoImpl &&
             (identical(other.users, users) || other.users == users) &&
             (identical(other.orders, orders) || other.orders == orders) &&
             (identical(other.promos, promos) || other.promos == promos) &&
@@ -293,12 +293,13 @@ class _$_AccessRightDto extends _AccessRightDto {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_AccessRightDtoCopyWith<_$_AccessRightDto> get copyWith =>
-      __$$_AccessRightDtoCopyWithImpl<_$_AccessRightDto>(this, _$identity);
+  _$$AccessRightDtoImplCopyWith<_$AccessRightDtoImpl> get copyWith =>
+      __$$AccessRightDtoImplCopyWithImpl<_$AccessRightDtoImpl>(
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_AccessRightDtoToJson(
+    return _$$AccessRightDtoImplToJson(
       this,
     );
   }
@@ -319,11 +320,11 @@ abstract class _AccessRightDto extends AccessRightDto {
       @JsonKey(name: 'LoyaltyScheme', defaultValue: false)
       required final bool loyaltyScheme,
       @JsonKey(name: 'AdminPOAttachment', defaultValue: false)
-      required final bool adminPOAttachment}) = _$_AccessRightDto;
+      required final bool adminPOAttachment}) = _$AccessRightDtoImpl;
   const _AccessRightDto._() : super._();
 
   factory _AccessRightDto.fromJson(Map<String, dynamic> json) =
-      _$_AccessRightDto.fromJson;
+      _$AccessRightDtoImpl.fromJson;
 
   @override
   @JsonKey(name: 'Users', defaultValue: false)
@@ -354,6 +355,6 @@ abstract class _AccessRightDto extends AccessRightDto {
   bool get adminPOAttachment;
   @override
   @JsonKey(ignore: true)
-  _$$_AccessRightDtoCopyWith<_$_AccessRightDto> get copyWith =>
+  _$$AccessRightDtoImplCopyWith<_$AccessRightDtoImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

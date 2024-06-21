@@ -12,7 +12,7 @@ part of 'apl_simulator_order.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$AplSimulatorOrder {
@@ -93,11 +93,11 @@ class _$AplSimulatorOrderCopyWithImpl<$Res, $Val extends AplSimulatorOrder>
 }
 
 /// @nodoc
-abstract class _$$_AplSimulatorOrderCopyWith<$Res>
+abstract class _$$AplSimulatorOrderImplCopyWith<$Res>
     implements $AplSimulatorOrderCopyWith<$Res> {
-  factory _$$_AplSimulatorOrderCopyWith(_$_AplSimulatorOrder value,
-          $Res Function(_$_AplSimulatorOrder) then) =
-      __$$_AplSimulatorOrderCopyWithImpl<$Res>;
+  factory _$$AplSimulatorOrderImplCopyWith(_$AplSimulatorOrderImpl value,
+          $Res Function(_$AplSimulatorOrderImpl) then) =
+      __$$AplSimulatorOrderImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -110,11 +110,11 @@ abstract class _$$_AplSimulatorOrderCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_AplSimulatorOrderCopyWithImpl<$Res>
-    extends _$AplSimulatorOrderCopyWithImpl<$Res, _$_AplSimulatorOrder>
-    implements _$$_AplSimulatorOrderCopyWith<$Res> {
-  __$$_AplSimulatorOrderCopyWithImpl(
-      _$_AplSimulatorOrder _value, $Res Function(_$_AplSimulatorOrder) _then)
+class __$$AplSimulatorOrderImplCopyWithImpl<$Res>
+    extends _$AplSimulatorOrderCopyWithImpl<$Res, _$AplSimulatorOrderImpl>
+    implements _$$AplSimulatorOrderImplCopyWith<$Res> {
+  __$$AplSimulatorOrderImplCopyWithImpl(_$AplSimulatorOrderImpl _value,
+      $Res Function(_$AplSimulatorOrderImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -127,7 +127,7 @@ class __$$_AplSimulatorOrderCopyWithImpl<$Res>
     Object? totalDiscountValue = null,
     Object? aplProducts = null,
   }) {
-    return _then(_$_AplSimulatorOrder(
+    return _then(_$AplSimulatorOrderImpl(
       totalPriceWithoutTax: null == totalPriceWithoutTax
           ? _value.totalPriceWithoutTax
           : totalPriceWithoutTax // ignore: cast_nullable_to_non_nullable
@@ -158,8 +158,8 @@ class __$$_AplSimulatorOrderCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_AplSimulatorOrder extends _AplSimulatorOrder {
-  const _$_AplSimulatorOrder(
+class _$AplSimulatorOrderImpl extends _AplSimulatorOrder {
+  const _$AplSimulatorOrderImpl(
       {required this.totalPriceWithoutTax,
       required this.smallOrderFee,
       required this.grandTotal,
@@ -193,10 +193,10 @@ class _$_AplSimulatorOrder extends _AplSimulatorOrder {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_AplSimulatorOrder &&
+            other is _$AplSimulatorOrderImpl &&
             (identical(other.totalPriceWithoutTax, totalPriceWithoutTax) ||
                 other.totalPriceWithoutTax == totalPriceWithoutTax) &&
             (identical(other.smallOrderFee, smallOrderFee) ||
@@ -224,8 +224,8 @@ class _$_AplSimulatorOrder extends _AplSimulatorOrder {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_AplSimulatorOrderCopyWith<_$_AplSimulatorOrder> get copyWith =>
-      __$$_AplSimulatorOrderCopyWithImpl<_$_AplSimulatorOrder>(
+  _$$AplSimulatorOrderImplCopyWith<_$AplSimulatorOrderImpl> get copyWith =>
+      __$$AplSimulatorOrderImplCopyWithImpl<_$AplSimulatorOrderImpl>(
           this, _$identity);
 }
 
@@ -236,7 +236,7 @@ abstract class _AplSimulatorOrder extends AplSimulatorOrder {
       required final double grandTotal,
       required final double totalTax,
       required final double totalDiscountValue,
-      required final List<AplProduct> aplProducts}) = _$_AplSimulatorOrder;
+      required final List<AplProduct> aplProducts}) = _$AplSimulatorOrderImpl;
   const _AplSimulatorOrder._() : super._();
 
   @override
@@ -253,6 +253,6 @@ abstract class _AplSimulatorOrder extends AplSimulatorOrder {
   List<AplProduct> get aplProducts;
   @override
   @JsonKey(ignore: true)
-  _$$_AplSimulatorOrderCopyWith<_$_AplSimulatorOrder> get copyWith =>
+  _$$AplSimulatorOrderImplCopyWith<_$AplSimulatorOrderImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

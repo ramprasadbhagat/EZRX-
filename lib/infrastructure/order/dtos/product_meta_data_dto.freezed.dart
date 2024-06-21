@@ -12,7 +12,7 @@ part of 'product_meta_data_dto.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 ProductMetaDataDto _$ProductMetaDataDtoFromJson(Map<String, dynamic> json) {
   return _ProductMetaDataDto.fromJson(json);
@@ -75,11 +75,11 @@ class _$ProductMetaDataDtoCopyWithImpl<$Res, $Val extends ProductMetaDataDto>
 }
 
 /// @nodoc
-abstract class _$$_ProductMetaDataDtoCopyWith<$Res>
+abstract class _$$ProductMetaDataDtoImplCopyWith<$Res>
     implements $ProductMetaDataDtoCopyWith<$Res> {
-  factory _$$_ProductMetaDataDtoCopyWith(_$_ProductMetaDataDto value,
-          $Res Function(_$_ProductMetaDataDto) then) =
-      __$$_ProductMetaDataDtoCopyWithImpl<$Res>;
+  factory _$$ProductMetaDataDtoImplCopyWith(_$ProductMetaDataDtoImpl value,
+          $Res Function(_$ProductMetaDataDtoImpl) then) =
+      __$$ProductMetaDataDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -90,11 +90,11 @@ abstract class _$$_ProductMetaDataDtoCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_ProductMetaDataDtoCopyWithImpl<$Res>
-    extends _$ProductMetaDataDtoCopyWithImpl<$Res, _$_ProductMetaDataDto>
-    implements _$$_ProductMetaDataDtoCopyWith<$Res> {
-  __$$_ProductMetaDataDtoCopyWithImpl(
-      _$_ProductMetaDataDto _value, $Res Function(_$_ProductMetaDataDto) _then)
+class __$$ProductMetaDataDtoImplCopyWithImpl<$Res>
+    extends _$ProductMetaDataDtoCopyWithImpl<$Res, _$ProductMetaDataDtoImpl>
+    implements _$$ProductMetaDataDtoImplCopyWith<$Res> {
+  __$$ProductMetaDataDtoImplCopyWithImpl(_$ProductMetaDataDtoImpl _value,
+      $Res Function(_$ProductMetaDataDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -103,7 +103,7 @@ class __$$_ProductMetaDataDtoCopyWithImpl<$Res>
     Object? productImages = null,
     Object? items = null,
   }) {
-    return _then(_$_ProductMetaDataDto(
+    return _then(_$ProductMetaDataDtoImpl(
       productImages: null == productImages
           ? _value._productImages
           : productImages // ignore: cast_nullable_to_non_nullable
@@ -118,8 +118,8 @@ class __$$_ProductMetaDataDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_ProductMetaDataDto extends _ProductMetaDataDto {
-  _$_ProductMetaDataDto(
+class _$ProductMetaDataDtoImpl extends _ProductMetaDataDto {
+  _$ProductMetaDataDtoImpl(
       {@JsonKey(name: 'orderCloudProduct', defaultValue: <ProductImagesDto>[])
       required final List<ProductImagesDto> productImages,
       @JsonKey(name: 'Items', defaultValue: <ProductItemDto>[])
@@ -128,8 +128,8 @@ class _$_ProductMetaDataDto extends _ProductMetaDataDto {
         _items = items,
         super._();
 
-  factory _$_ProductMetaDataDto.fromJson(Map<String, dynamic> json) =>
-      _$$_ProductMetaDataDtoFromJson(json);
+  factory _$ProductMetaDataDtoImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ProductMetaDataDtoImplFromJson(json);
 
   final List<ProductImagesDto> _productImages;
   @override
@@ -155,10 +155,10 @@ class _$_ProductMetaDataDto extends _ProductMetaDataDto {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ProductMetaDataDto &&
+            other is _$ProductMetaDataDtoImpl &&
             const DeepCollectionEquality()
                 .equals(other._productImages, _productImages) &&
             const DeepCollectionEquality().equals(other._items, _items));
@@ -174,13 +174,13 @@ class _$_ProductMetaDataDto extends _ProductMetaDataDto {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ProductMetaDataDtoCopyWith<_$_ProductMetaDataDto> get copyWith =>
-      __$$_ProductMetaDataDtoCopyWithImpl<_$_ProductMetaDataDto>(
+  _$$ProductMetaDataDtoImplCopyWith<_$ProductMetaDataDtoImpl> get copyWith =>
+      __$$ProductMetaDataDtoImplCopyWithImpl<_$ProductMetaDataDtoImpl>(
           this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_ProductMetaDataDtoToJson(
+    return _$$ProductMetaDataDtoImplToJson(
       this,
     );
   }
@@ -191,11 +191,11 @@ abstract class _ProductMetaDataDto extends ProductMetaDataDto {
       {@JsonKey(name: 'orderCloudProduct', defaultValue: <ProductImagesDto>[])
       required final List<ProductImagesDto> productImages,
       @JsonKey(name: 'Items', defaultValue: <ProductItemDto>[])
-      required final List<ProductItemDto> items}) = _$_ProductMetaDataDto;
+      required final List<ProductItemDto> items}) = _$ProductMetaDataDtoImpl;
   _ProductMetaDataDto._() : super._();
 
   factory _ProductMetaDataDto.fromJson(Map<String, dynamic> json) =
-      _$_ProductMetaDataDto.fromJson;
+      _$ProductMetaDataDtoImpl.fromJson;
 
   @override
   @JsonKey(name: 'orderCloudProduct', defaultValue: <ProductImagesDto>[])
@@ -205,7 +205,7 @@ abstract class _ProductMetaDataDto extends ProductMetaDataDto {
   List<ProductItemDto> get items;
   @override
   @JsonKey(ignore: true)
-  _$$_ProductMetaDataDtoCopyWith<_$_ProductMetaDataDto> get copyWith =>
+  _$$ProductMetaDataDtoImplCopyWith<_$ProductMetaDataDtoImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -286,11 +286,11 @@ class _$ProductItemDtoCopyWithImpl<$Res, $Val extends ProductItemDto>
 }
 
 /// @nodoc
-abstract class _$$_ProductItemDtoCopyWith<$Res>
+abstract class _$$ProductItemDtoImplCopyWith<$Res>
     implements $ProductItemDtoCopyWith<$Res> {
-  factory _$$_ProductItemDtoCopyWith(
-          _$_ProductItemDto value, $Res Function(_$_ProductItemDto) then) =
-      __$$_ProductItemDtoCopyWithImpl<$Res>;
+  factory _$$ProductItemDtoImplCopyWith(_$ProductItemDtoImpl value,
+          $Res Function(_$ProductItemDtoImpl) then) =
+      __$$ProductItemDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -304,11 +304,11 @@ abstract class _$$_ProductItemDtoCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_ProductItemDtoCopyWithImpl<$Res>
-    extends _$ProductItemDtoCopyWithImpl<$Res, _$_ProductItemDto>
-    implements _$$_ProductItemDtoCopyWith<$Res> {
-  __$$_ProductItemDtoCopyWithImpl(
-      _$_ProductItemDto _value, $Res Function(_$_ProductItemDto) _then)
+class __$$ProductItemDtoImplCopyWithImpl<$Res>
+    extends _$ProductItemDtoCopyWithImpl<$Res, _$ProductItemDtoImpl>
+    implements _$$ProductItemDtoImplCopyWith<$Res> {
+  __$$ProductItemDtoImplCopyWithImpl(
+      _$ProductItemDtoImpl _value, $Res Function(_$ProductItemDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -318,7 +318,7 @@ class __$$_ProductItemDtoCopyWithImpl<$Res>
     Object? materialNumber = null,
     Object? xp = null,
   }) {
-    return _then(_$_ProductItemDto(
+    return _then(_$ProductItemDtoImpl(
       promotionMaterial: null == promotionMaterial
           ? _value.promotionMaterial
           : promotionMaterial // ignore: cast_nullable_to_non_nullable
@@ -337,16 +337,16 @@ class __$$_ProductItemDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_ProductItemDto extends _ProductItemDto {
-  const _$_ProductItemDto(
+class _$ProductItemDtoImpl extends _ProductItemDto {
+  const _$ProductItemDtoImpl(
       {@JsonKey(name: 'PromotionMaterial', defaultValue: '')
       required this.promotionMaterial,
       @JsonKey(name: 'ID', defaultValue: '') required this.materialNumber,
       @JsonKey(name: 'XP') required this.xp})
       : super._();
 
-  factory _$_ProductItemDto.fromJson(Map<String, dynamic> json) =>
-      _$$_ProductItemDtoFromJson(json);
+  factory _$ProductItemDtoImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ProductItemDtoImplFromJson(json);
 
   @override
   @JsonKey(name: 'PromotionMaterial', defaultValue: '')
@@ -364,10 +364,10 @@ class _$_ProductItemDto extends _ProductItemDto {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ProductItemDto &&
+            other is _$ProductItemDtoImpl &&
             (identical(other.promotionMaterial, promotionMaterial) ||
                 other.promotionMaterial == promotionMaterial) &&
             (identical(other.materialNumber, materialNumber) ||
@@ -383,12 +383,13 @@ class _$_ProductItemDto extends _ProductItemDto {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ProductItemDtoCopyWith<_$_ProductItemDto> get copyWith =>
-      __$$_ProductItemDtoCopyWithImpl<_$_ProductItemDto>(this, _$identity);
+  _$$ProductItemDtoImplCopyWith<_$ProductItemDtoImpl> get copyWith =>
+      __$$ProductItemDtoImplCopyWithImpl<_$ProductItemDtoImpl>(
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_ProductItemDtoToJson(
+    return _$$ProductItemDtoImplToJson(
       this,
     );
   }
@@ -401,11 +402,11 @@ abstract class _ProductItemDto extends ProductItemDto {
           @JsonKey(name: 'ID', defaultValue: '')
           required final String materialNumber,
           @JsonKey(name: 'XP') required final ProductItemXpDto xp}) =
-      _$_ProductItemDto;
+      _$ProductItemDtoImpl;
   const _ProductItemDto._() : super._();
 
   factory _ProductItemDto.fromJson(Map<String, dynamic> json) =
-      _$_ProductItemDto.fromJson;
+      _$ProductItemDtoImpl.fromJson;
 
   @override
   @JsonKey(name: 'PromotionMaterial', defaultValue: '')
@@ -418,7 +419,7 @@ abstract class _ProductItemDto extends ProductItemDto {
   ProductItemXpDto get xp;
   @override
   @JsonKey(ignore: true)
-  _$$_ProductItemDtoCopyWith<_$_ProductItemDto> get copyWith =>
+  _$$ProductItemDtoImplCopyWith<_$ProductItemDtoImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -497,11 +498,11 @@ class _$ProductItemXpDtoCopyWithImpl<$Res, $Val extends ProductItemXpDto>
 }
 
 /// @nodoc
-abstract class _$$_ProductItemXpDtoCopyWith<$Res>
+abstract class _$$ProductItemXpDtoImplCopyWith<$Res>
     implements $ProductItemXpDtoCopyWith<$Res> {
-  factory _$$_ProductItemXpDtoCopyWith(
-          _$_ProductItemXpDto value, $Res Function(_$_ProductItemXpDto) then) =
-      __$$_ProductItemXpDtoCopyWithImpl<$Res>;
+  factory _$$ProductItemXpDtoImplCopyWith(_$ProductItemXpDtoImpl value,
+          $Res Function(_$ProductItemXpDtoImpl) then) =
+      __$$ProductItemXpDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -513,11 +514,11 @@ abstract class _$$_ProductItemXpDtoCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_ProductItemXpDtoCopyWithImpl<$Res>
-    extends _$ProductItemXpDtoCopyWithImpl<$Res, _$_ProductItemXpDto>
-    implements _$$_ProductItemXpDtoCopyWith<$Res> {
-  __$$_ProductItemXpDtoCopyWithImpl(
-      _$_ProductItemXpDto _value, $Res Function(_$_ProductItemXpDto) _then)
+class __$$ProductItemXpDtoImplCopyWithImpl<$Res>
+    extends _$ProductItemXpDtoCopyWithImpl<$Res, _$ProductItemXpDtoImpl>
+    implements _$$ProductItemXpDtoImplCopyWith<$Res> {
+  __$$ProductItemXpDtoImplCopyWithImpl(_$ProductItemXpDtoImpl _value,
+      $Res Function(_$ProductItemXpDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -528,7 +529,7 @@ class __$$_ProductItemXpDtoCopyWithImpl<$Res>
     Object? composition = null,
     Object? deliveryInstructions = null,
   }) {
-    return _then(_$_ProductItemXpDto(
+    return _then(_$ProductItemXpDtoImpl(
       dosage: null == dosage
           ? _value.dosage
           : dosage // ignore: cast_nullable_to_non_nullable
@@ -551,8 +552,8 @@ class __$$_ProductItemXpDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_ProductItemXpDto extends _ProductItemXpDto {
-  const _$_ProductItemXpDto(
+class _$ProductItemXpDtoImpl extends _ProductItemXpDto {
+  const _$ProductItemXpDtoImpl(
       {@JsonKey(name: 'Dosage', defaultValue: '') required this.dosage,
       @JsonKey(name: 'HowToUse', defaultValue: '') required this.howToUse,
       @JsonKey(name: 'Composition', defaultValue: '') required this.composition,
@@ -560,8 +561,8 @@ class _$_ProductItemXpDto extends _ProductItemXpDto {
       required this.deliveryInstructions})
       : super._();
 
-  factory _$_ProductItemXpDto.fromJson(Map<String, dynamic> json) =>
-      _$$_ProductItemXpDtoFromJson(json);
+  factory _$ProductItemXpDtoImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ProductItemXpDtoImplFromJson(json);
 
   @override
   @JsonKey(name: 'Dosage', defaultValue: '')
@@ -582,10 +583,10 @@ class _$_ProductItemXpDto extends _ProductItemXpDto {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ProductItemXpDto &&
+            other is _$ProductItemXpDtoImpl &&
             (identical(other.dosage, dosage) || other.dosage == dosage) &&
             (identical(other.howToUse, howToUse) ||
                 other.howToUse == howToUse) &&
@@ -603,12 +604,13 @@ class _$_ProductItemXpDto extends _ProductItemXpDto {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ProductItemXpDtoCopyWith<_$_ProductItemXpDto> get copyWith =>
-      __$$_ProductItemXpDtoCopyWithImpl<_$_ProductItemXpDto>(this, _$identity);
+  _$$ProductItemXpDtoImplCopyWith<_$ProductItemXpDtoImpl> get copyWith =>
+      __$$ProductItemXpDtoImplCopyWithImpl<_$ProductItemXpDtoImpl>(
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_ProductItemXpDtoToJson(
+    return _$$ProductItemXpDtoImplToJson(
       this,
     );
   }
@@ -622,11 +624,11 @@ abstract class _ProductItemXpDto extends ProductItemXpDto {
       @JsonKey(name: 'Composition', defaultValue: '')
       required final String composition,
       @JsonKey(name: 'DeliveryInstructions', defaultValue: '')
-      required final String deliveryInstructions}) = _$_ProductItemXpDto;
+      required final String deliveryInstructions}) = _$ProductItemXpDtoImpl;
   const _ProductItemXpDto._() : super._();
 
   factory _ProductItemXpDto.fromJson(Map<String, dynamic> json) =
-      _$_ProductItemXpDto.fromJson;
+      _$ProductItemXpDtoImpl.fromJson;
 
   @override
   @JsonKey(name: 'Dosage', defaultValue: '')
@@ -642,6 +644,6 @@ abstract class _ProductItemXpDto extends ProductItemXpDto {
   String get deliveryInstructions;
   @override
   @JsonKey(ignore: true)
-  _$$_ProductItemXpDtoCopyWith<_$_ProductItemXpDto> get copyWith =>
+  _$$ProductItemXpDtoImplCopyWith<_$ProductItemXpDtoImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

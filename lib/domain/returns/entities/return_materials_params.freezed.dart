@@ -12,7 +12,7 @@ part of 'return_materials_params.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$ReturnMaterialsParams {
@@ -134,11 +134,12 @@ class _$ReturnMaterialsParamsCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_ReturnMaterialsParamsCopyWith<$Res>
+abstract class _$$ReturnMaterialsParamsImplCopyWith<$Res>
     implements $ReturnMaterialsParamsCopyWith<$Res> {
-  factory _$$_ReturnMaterialsParamsCopyWith(_$_ReturnMaterialsParams value,
-          $Res Function(_$_ReturnMaterialsParams) then) =
-      __$$_ReturnMaterialsParamsCopyWithImpl<$Res>;
+  factory _$$ReturnMaterialsParamsImplCopyWith(
+          _$ReturnMaterialsParamsImpl value,
+          $Res Function(_$ReturnMaterialsParamsImpl) then) =
+      __$$ReturnMaterialsParamsImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -159,11 +160,12 @@ abstract class _$$_ReturnMaterialsParamsCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_ReturnMaterialsParamsCopyWithImpl<$Res>
-    extends _$ReturnMaterialsParamsCopyWithImpl<$Res, _$_ReturnMaterialsParams>
-    implements _$$_ReturnMaterialsParamsCopyWith<$Res> {
-  __$$_ReturnMaterialsParamsCopyWithImpl(_$_ReturnMaterialsParams _value,
-      $Res Function(_$_ReturnMaterialsParams) _then)
+class __$$ReturnMaterialsParamsImplCopyWithImpl<$Res>
+    extends _$ReturnMaterialsParamsCopyWithImpl<$Res,
+        _$ReturnMaterialsParamsImpl>
+    implements _$$ReturnMaterialsParamsImplCopyWith<$Res> {
+  __$$ReturnMaterialsParamsImplCopyWithImpl(_$ReturnMaterialsParamsImpl _value,
+      $Res Function(_$ReturnMaterialsParamsImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -179,7 +181,7 @@ class __$$_ReturnMaterialsParamsCopyWithImpl<$Res>
     Object? language = null,
     Object? user = null,
   }) {
-    return _then(_$_ReturnMaterialsParams(
+    return _then(_$ReturnMaterialsParamsImpl(
       salesOrg: null == salesOrg
           ? _value.salesOrg
           : salesOrg // ignore: cast_nullable_to_non_nullable
@@ -222,8 +224,8 @@ class __$$_ReturnMaterialsParamsCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_ReturnMaterialsParams extends _ReturnMaterialsParams {
-  const _$_ReturnMaterialsParams(
+class _$ReturnMaterialsParamsImpl extends _ReturnMaterialsParams {
+  const _$ReturnMaterialsParamsImpl(
       {required this.salesOrg,
       required this.shipToInfo,
       required this.soldToInfo,
@@ -260,10 +262,10 @@ class _$_ReturnMaterialsParams extends _ReturnMaterialsParams {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ReturnMaterialsParams &&
+            other is _$ReturnMaterialsParamsImpl &&
             (identical(other.salesOrg, salesOrg) ||
                 other.salesOrg == salesOrg) &&
             (identical(other.shipToInfo, shipToInfo) ||
@@ -288,9 +290,9 @@ class _$_ReturnMaterialsParams extends _ReturnMaterialsParams {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ReturnMaterialsParamsCopyWith<_$_ReturnMaterialsParams> get copyWith =>
-      __$$_ReturnMaterialsParamsCopyWithImpl<_$_ReturnMaterialsParams>(
-          this, _$identity);
+  _$$ReturnMaterialsParamsImplCopyWith<_$ReturnMaterialsParamsImpl>
+      get copyWith => __$$ReturnMaterialsParamsImplCopyWithImpl<
+          _$ReturnMaterialsParamsImpl>(this, _$identity);
 }
 
 abstract class _ReturnMaterialsParams extends ReturnMaterialsParams {
@@ -303,7 +305,7 @@ abstract class _ReturnMaterialsParams extends ReturnMaterialsParams {
       required final ReturnItemsFilter filter,
       required final SearchKey searchKey,
       required final String language,
-      required final User user}) = _$_ReturnMaterialsParams;
+      required final User user}) = _$ReturnMaterialsParamsImpl;
   const _ReturnMaterialsParams._() : super._();
 
   @override
@@ -326,6 +328,6 @@ abstract class _ReturnMaterialsParams extends ReturnMaterialsParams {
   User get user;
   @override
   @JsonKey(ignore: true)
-  _$$_ReturnMaterialsParamsCopyWith<_$_ReturnMaterialsParams> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$ReturnMaterialsParamsImplCopyWith<_$ReturnMaterialsParamsImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }

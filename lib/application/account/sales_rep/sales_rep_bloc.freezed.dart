@@ -12,7 +12,7 @@ part of 'sales_rep_bloc.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$SalesRepEvent {
@@ -75,25 +75,25 @@ class _$SalesRepEventCopyWithImpl<$Res, $Val extends SalesRepEvent>
 }
 
 /// @nodoc
-abstract class _$$_InitializedCopyWith<$Res> {
-  factory _$$_InitializedCopyWith(
-          _$_Initialized value, $Res Function(_$_Initialized) then) =
-      __$$_InitializedCopyWithImpl<$Res>;
+abstract class _$$InitializedImplCopyWith<$Res> {
+  factory _$$InitializedImplCopyWith(
+          _$InitializedImpl value, $Res Function(_$InitializedImpl) then) =
+      __$$InitializedImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_InitializedCopyWithImpl<$Res>
-    extends _$SalesRepEventCopyWithImpl<$Res, _$_Initialized>
-    implements _$$_InitializedCopyWith<$Res> {
-  __$$_InitializedCopyWithImpl(
-      _$_Initialized _value, $Res Function(_$_Initialized) _then)
+class __$$InitializedImplCopyWithImpl<$Res>
+    extends _$SalesRepEventCopyWithImpl<$Res, _$InitializedImpl>
+    implements _$$InitializedImplCopyWith<$Res> {
+  __$$InitializedImplCopyWithImpl(
+      _$InitializedImpl _value, $Res Function(_$InitializedImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_Initialized implements _Initialized {
-  const _$_Initialized();
+class _$InitializedImpl implements _Initialized {
+  const _$InitializedImpl();
 
   @override
   String toString() {
@@ -101,9 +101,9 @@ class _$_Initialized implements _Initialized {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_Initialized);
+        (other.runtimeType == runtimeType && other is _$InitializedImpl);
   }
 
   @override
@@ -173,13 +173,14 @@ class _$_Initialized implements _Initialized {
 }
 
 abstract class _Initialized implements SalesRepEvent {
-  const factory _Initialized() = _$_Initialized;
+  const factory _Initialized() = _$InitializedImpl;
 }
 
 /// @nodoc
-abstract class _$$_FetchCopyWith<$Res> {
-  factory _$$_FetchCopyWith(_$_Fetch value, $Res Function(_$_Fetch) then) =
-      __$$_FetchCopyWithImpl<$Res>;
+abstract class _$$FetchImplCopyWith<$Res> {
+  factory _$$FetchImplCopyWith(
+          _$FetchImpl value, $Res Function(_$FetchImpl) then) =
+      __$$FetchImplCopyWithImpl<$Res>;
   @useResult
   $Res call({User user});
 
@@ -187,10 +188,11 @@ abstract class _$$_FetchCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_FetchCopyWithImpl<$Res>
-    extends _$SalesRepEventCopyWithImpl<$Res, _$_Fetch>
-    implements _$$_FetchCopyWith<$Res> {
-  __$$_FetchCopyWithImpl(_$_Fetch _value, $Res Function(_$_Fetch) _then)
+class __$$FetchImplCopyWithImpl<$Res>
+    extends _$SalesRepEventCopyWithImpl<$Res, _$FetchImpl>
+    implements _$$FetchImplCopyWith<$Res> {
+  __$$FetchImplCopyWithImpl(
+      _$FetchImpl _value, $Res Function(_$FetchImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -198,7 +200,7 @@ class __$$_FetchCopyWithImpl<$Res>
   $Res call({
     Object? user = null,
   }) {
-    return _then(_$_Fetch(
+    return _then(_$FetchImpl(
       user: null == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
@@ -217,8 +219,8 @@ class __$$_FetchCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_Fetch implements _Fetch {
-  const _$_Fetch({required this.user});
+class _$FetchImpl implements _Fetch {
+  const _$FetchImpl({required this.user});
 
   @override
   final User user;
@@ -229,10 +231,10 @@ class _$_Fetch implements _Fetch {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Fetch &&
+            other is _$FetchImpl &&
             (identical(other.user, user) || other.user == user));
   }
 
@@ -242,8 +244,8 @@ class _$_Fetch implements _Fetch {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_FetchCopyWith<_$_Fetch> get copyWith =>
-      __$$_FetchCopyWithImpl<_$_Fetch>(this, _$identity);
+  _$$FetchImplCopyWith<_$FetchImpl> get copyWith =>
+      __$$FetchImplCopyWithImpl<_$FetchImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -309,11 +311,11 @@ class _$_Fetch implements _Fetch {
 }
 
 abstract class _Fetch implements SalesRepEvent {
-  const factory _Fetch({required final User user}) = _$_Fetch;
+  const factory _Fetch({required final User user}) = _$FetchImpl;
 
   User get user;
   @JsonKey(ignore: true)
-  _$$_FetchCopyWith<_$_Fetch> get copyWith =>
+  _$$FetchImplCopyWith<_$FetchImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -380,11 +382,11 @@ class _$SalesRepStateCopyWithImpl<$Res, $Val extends SalesRepState>
 }
 
 /// @nodoc
-abstract class _$$_SalesRepStateCopyWith<$Res>
+abstract class _$$SalesRepStateImplCopyWith<$Res>
     implements $SalesRepStateCopyWith<$Res> {
-  factory _$$_SalesRepStateCopyWith(
-          _$_SalesRepState value, $Res Function(_$_SalesRepState) then) =
-      __$$_SalesRepStateCopyWithImpl<$Res>;
+  factory _$$SalesRepStateImplCopyWith(
+          _$SalesRepStateImpl value, $Res Function(_$SalesRepStateImpl) then) =
+      __$$SalesRepStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -396,11 +398,11 @@ abstract class _$$_SalesRepStateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_SalesRepStateCopyWithImpl<$Res>
-    extends _$SalesRepStateCopyWithImpl<$Res, _$_SalesRepState>
-    implements _$$_SalesRepStateCopyWith<$Res> {
-  __$$_SalesRepStateCopyWithImpl(
-      _$_SalesRepState _value, $Res Function(_$_SalesRepState) _then)
+class __$$SalesRepStateImplCopyWithImpl<$Res>
+    extends _$SalesRepStateCopyWithImpl<$Res, _$SalesRepStateImpl>
+    implements _$$SalesRepStateImplCopyWith<$Res> {
+  __$$SalesRepStateImplCopyWithImpl(
+      _$SalesRepStateImpl _value, $Res Function(_$SalesRepStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -409,7 +411,7 @@ class __$$_SalesRepStateCopyWithImpl<$Res>
     Object? salesRepInfo = null,
     Object? salesRepFailureOrSuccessOption = null,
   }) {
-    return _then(_$_SalesRepState(
+    return _then(_$SalesRepStateImpl(
       salesRepInfo: null == salesRepInfo
           ? _value.salesRepInfo
           : salesRepInfo // ignore: cast_nullable_to_non_nullable
@@ -424,8 +426,8 @@ class __$$_SalesRepStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_SalesRepState implements _SalesRepState {
-  const _$_SalesRepState(
+class _$SalesRepStateImpl implements _SalesRepState {
+  const _$SalesRepStateImpl(
       {required this.salesRepInfo,
       required this.salesRepFailureOrSuccessOption});
 
@@ -440,10 +442,10 @@ class _$_SalesRepState implements _SalesRepState {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_SalesRepState &&
+            other is _$SalesRepStateImpl &&
             (identical(other.salesRepInfo, salesRepInfo) ||
                 other.salesRepInfo == salesRepInfo) &&
             (identical(other.salesRepFailureOrSuccessOption,
@@ -459,15 +461,15 @@ class _$_SalesRepState implements _SalesRepState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_SalesRepStateCopyWith<_$_SalesRepState> get copyWith =>
-      __$$_SalesRepStateCopyWithImpl<_$_SalesRepState>(this, _$identity);
+  _$$SalesRepStateImplCopyWith<_$SalesRepStateImpl> get copyWith =>
+      __$$SalesRepStateImplCopyWithImpl<_$SalesRepStateImpl>(this, _$identity);
 }
 
 abstract class _SalesRepState implements SalesRepState {
   const factory _SalesRepState(
       {required final SalesRepresentativeInfo salesRepInfo,
       required final Option<Either<ApiFailure, dynamic>>
-          salesRepFailureOrSuccessOption}) = _$_SalesRepState;
+          salesRepFailureOrSuccessOption}) = _$SalesRepStateImpl;
 
   @override
   SalesRepresentativeInfo get salesRepInfo;
@@ -475,6 +477,6 @@ abstract class _SalesRepState implements SalesRepState {
   Option<Either<ApiFailure, dynamic>> get salesRepFailureOrSuccessOption;
   @override
   @JsonKey(ignore: true)
-  _$$_SalesRepStateCopyWith<_$_SalesRepState> get copyWith =>
+  _$$SalesRepStateImplCopyWith<_$SalesRepStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

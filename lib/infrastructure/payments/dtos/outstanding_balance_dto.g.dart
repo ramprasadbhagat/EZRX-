@@ -6,9 +6,9 @@ part of 'outstanding_balance_dto.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_OutstandingBalanceDto _$$_OutstandingBalanceDtoFromJson(
+_$OutstandingBalanceDtoImpl _$$OutstandingBalanceDtoImplFromJson(
         Map<String, dynamic> json) =>
-    _$_OutstandingBalanceDto(
+    _$OutstandingBalanceDtoImpl(
       customerCode: json['customerCode'] as String? ?? '',
       currency: json['currency'] as String? ?? '',
       amount: json['amount'] as String? ?? '',
@@ -16,8 +16,8 @@ _$_OutstandingBalanceDto _$$_OutstandingBalanceDtoFromJson(
       checkDate: json['checkDate'] as String? ?? '',
     );
 
-Map<String, dynamic> _$$_OutstandingBalanceDtoToJson(
-        _$_OutstandingBalanceDto instance) =>
+Map<String, dynamic> _$$OutstandingBalanceDtoImplToJson(
+        _$OutstandingBalanceDtoImpl instance) =>
     <String, dynamic>{
       'customerCode': instance.customerCode,
       'currency': instance.currency,

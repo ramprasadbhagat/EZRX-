@@ -6,25 +6,25 @@ part of 'transaction_params_dto.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_TransactionParamsDto _$$_TransactionParamsDtoFromJson(
+_$TransactionParamsDtoImpl _$$TransactionParamsDtoImplFromJson(
         Map<String, dynamic> json) =>
-    _$_TransactionParamsDto(
+    _$TransactionParamsDtoImpl(
       customer: json['customer'] as String? ?? '',
       createdStartDate: json['createdStartDate'] as String? ?? '',
       createdEndDate: json['createdEndDate'] as String? ?? '',
       search: json['search'] as String? ?? '',
-      first: json['first'] as int? ?? 0,
-      after: json['after'] as int? ?? 0,
-      amountMin: json['amountMin'] as int? ?? 0,
-      amountMax: json['amountMax'] as int? ?? 0,
+      first: (json['first'] as num?)?.toInt() ?? 0,
+      after: (json['after'] as num?)?.toInt() ?? 0,
+      amountMin: (json['amountMin'] as num?)?.toInt() ?? 0,
+      amountMax: (json['amountMax'] as num?)?.toInt() ?? 0,
       status: (json['status'] as List<dynamic>?)
               ?.map((e) => e as String)
               .toList() ??
           [],
     );
 
-Map<String, dynamic> _$$_TransactionParamsDtoToJson(
-        _$_TransactionParamsDto instance) =>
+Map<String, dynamic> _$$TransactionParamsDtoImplToJson(
+        _$TransactionParamsDtoImpl instance) =>
     <String, dynamic>{
       'customer': instance.customer,
       'createdStartDate': instance.createdStartDate,

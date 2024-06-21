@@ -6,9 +6,9 @@ part of 'price_combo_deal_request_dto.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_PriceComboDealRequestDto _$$_PriceComboDealRequestDtoFromJson(
+_$PriceComboDealRequestDtoImpl _$$PriceComboDealRequestDtoImplFromJson(
         Map<String, dynamic> json) =>
-    _$_PriceComboDealRequestDto(
+    _$PriceComboDealRequestDtoImpl(
       isEligible: json['Eligible'] as bool? ?? false,
       flexibleGroup: json['FlexibleGroup'] as String? ?? '',
       salesDeal: json['SalesDeal'] as String? ?? '',
@@ -18,8 +18,8 @@ _$_PriceComboDealRequestDto _$$_PriceComboDealRequestDtoFromJson(
               json['Category'] as Map<String, dynamic>),
     );
 
-Map<String, dynamic> _$$_PriceComboDealRequestDtoToJson(
-        _$_PriceComboDealRequestDto instance) =>
+Map<String, dynamic> _$$PriceComboDealRequestDtoImplToJson(
+        _$PriceComboDealRequestDtoImpl instance) =>
     <String, dynamic>{
       'Eligible': instance.isEligible,
       'FlexibleGroup': instance.flexibleGroup,
@@ -27,9 +27,10 @@ Map<String, dynamic> _$$_PriceComboDealRequestDtoToJson(
       'Category': instance.category.toJson(),
     };
 
-_$_PriceComboDealCategoryRequestDto
-    _$$_PriceComboDealCategoryRequestDtoFromJson(Map<String, dynamic> json) =>
-        _$_PriceComboDealCategoryRequestDto(
+_$PriceComboDealCategoryRequestDtoImpl
+    _$$PriceComboDealCategoryRequestDtoImplFromJson(
+            Map<String, dynamic> json) =>
+        _$PriceComboDealCategoryRequestDtoImpl(
           type: json['Type'] as String? ?? '',
           value: (json['Value'] as List<dynamic>?)
                   ?.map((e) => e as String)
@@ -37,8 +38,8 @@ _$_PriceComboDealCategoryRequestDto
               [],
         );
 
-Map<String, dynamic> _$$_PriceComboDealCategoryRequestDtoToJson(
-        _$_PriceComboDealCategoryRequestDto instance) =>
+Map<String, dynamic> _$$PriceComboDealCategoryRequestDtoImplToJson(
+        _$PriceComboDealCategoryRequestDtoImpl instance) =>
     <String, dynamic>{
       'Type': instance.type,
       'Value': instance.value,

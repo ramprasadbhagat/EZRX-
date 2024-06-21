@@ -12,7 +12,7 @@ part of 'user_restrictions_dto.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 UserRestrictionsDto _$UserRestrictionsDtoFromJson(Map<String, dynamic> json) {
   return _UserRestrictionsDto.fromJson(json);
@@ -84,11 +84,11 @@ class _$UserRestrictionsDtoCopyWithImpl<$Res, $Val extends UserRestrictionsDto>
 }
 
 /// @nodoc
-abstract class _$$_UserRestrictionsDtoCopyWith<$Res>
+abstract class _$$UserRestrictionsDtoImplCopyWith<$Res>
     implements $UserRestrictionsDtoCopyWith<$Res> {
-  factory _$$_UserRestrictionsDtoCopyWith(_$_UserRestrictionsDto value,
-          $Res Function(_$_UserRestrictionsDto) then) =
-      __$$_UserRestrictionsDtoCopyWithImpl<$Res>;
+  factory _$$UserRestrictionsDtoImplCopyWith(_$UserRestrictionsDtoImpl value,
+          $Res Function(_$UserRestrictionsDtoImpl) then) =
+      __$$UserRestrictionsDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -101,11 +101,11 @@ abstract class _$$_UserRestrictionsDtoCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_UserRestrictionsDtoCopyWithImpl<$Res>
-    extends _$UserRestrictionsDtoCopyWithImpl<$Res, _$_UserRestrictionsDto>
-    implements _$$_UserRestrictionsDtoCopyWith<$Res> {
-  __$$_UserRestrictionsDtoCopyWithImpl(_$_UserRestrictionsDto _value,
-      $Res Function(_$_UserRestrictionsDto) _then)
+class __$$UserRestrictionsDtoImplCopyWithImpl<$Res>
+    extends _$UserRestrictionsDtoCopyWithImpl<$Res, _$UserRestrictionsDtoImpl>
+    implements _$$UserRestrictionsDtoImplCopyWith<$Res> {
+  __$$UserRestrictionsDtoImplCopyWithImpl(_$UserRestrictionsDtoImpl _value,
+      $Res Function(_$UserRestrictionsDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -114,7 +114,7 @@ class __$$_UserRestrictionsDtoCopyWithImpl<$Res>
     Object? approverRights = null,
     Object? approverLimits = null,
   }) {
-    return _then(_$_UserRestrictionsDto(
+    return _then(_$UserRestrictionsDtoImpl(
       approverRights: null == approverRights
           ? _value.approverRights
           : approverRights // ignore: cast_nullable_to_non_nullable
@@ -129,16 +129,16 @@ class __$$_UserRestrictionsDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_UserRestrictionsDto extends _UserRestrictionsDto {
-  const _$_UserRestrictionsDto(
+class _$UserRestrictionsDtoImpl extends _UserRestrictionsDto {
+  const _$UserRestrictionsDtoImpl(
       {@JsonKey(name: 'approverRights') required this.approverRights,
       @JsonKey(name: 'returnApprovalLimit', defaultValue: <ApprovalLimitsDto>[])
       required final List<ApprovalLimitsDto> approverLimits})
       : _approverLimits = approverLimits,
         super._();
 
-  factory _$_UserRestrictionsDto.fromJson(Map<String, dynamic> json) =>
-      _$$_UserRestrictionsDtoFromJson(json);
+  factory _$UserRestrictionsDtoImpl.fromJson(Map<String, dynamic> json) =>
+      _$$UserRestrictionsDtoImplFromJson(json);
 
   @override
   @JsonKey(name: 'approverRights')
@@ -158,10 +158,10 @@ class _$_UserRestrictionsDto extends _UserRestrictionsDto {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_UserRestrictionsDto &&
+            other is _$UserRestrictionsDtoImpl &&
             (identical(other.approverRights, approverRights) ||
                 other.approverRights == approverRights) &&
             const DeepCollectionEquality()
@@ -176,13 +176,13 @@ class _$_UserRestrictionsDto extends _UserRestrictionsDto {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_UserRestrictionsDtoCopyWith<_$_UserRestrictionsDto> get copyWith =>
-      __$$_UserRestrictionsDtoCopyWithImpl<_$_UserRestrictionsDto>(
+  _$$UserRestrictionsDtoImplCopyWith<_$UserRestrictionsDtoImpl> get copyWith =>
+      __$$UserRestrictionsDtoImplCopyWithImpl<_$UserRestrictionsDtoImpl>(
           this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_UserRestrictionsDtoToJson(
+    return _$$UserRestrictionsDtoImplToJson(
       this,
     );
   }
@@ -195,11 +195,11 @@ abstract class _UserRestrictionsDto extends UserRestrictionsDto {
           @JsonKey(
               name: 'returnApprovalLimit', defaultValue: <ApprovalLimitsDto>[])
           required final List<ApprovalLimitsDto> approverLimits}) =
-      _$_UserRestrictionsDto;
+      _$UserRestrictionsDtoImpl;
   const _UserRestrictionsDto._() : super._();
 
   factory _UserRestrictionsDto.fromJson(Map<String, dynamic> json) =
-      _$_UserRestrictionsDto.fromJson;
+      _$UserRestrictionsDtoImpl.fromJson;
 
   @override
   @JsonKey(name: 'approverRights')
@@ -209,6 +209,6 @@ abstract class _UserRestrictionsDto extends UserRestrictionsDto {
   List<ApprovalLimitsDto> get approverLimits;
   @override
   @JsonKey(ignore: true)
-  _$$_UserRestrictionsDtoCopyWith<_$_UserRestrictionsDto> get copyWith =>
+  _$$UserRestrictionsDtoImplCopyWith<_$UserRestrictionsDtoImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

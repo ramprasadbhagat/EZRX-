@@ -12,7 +12,7 @@ part of 'announcement_bloc.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$AnnouncementEvent {
@@ -128,25 +128,25 @@ class _$AnnouncementEventCopyWithImpl<$Res, $Val extends AnnouncementEvent>
 }
 
 /// @nodoc
-abstract class _$$_GetAnnouncementCopyWith<$Res> {
-  factory _$$_GetAnnouncementCopyWith(
-          _$_GetAnnouncement value, $Res Function(_$_GetAnnouncement) then) =
-      __$$_GetAnnouncementCopyWithImpl<$Res>;
+abstract class _$$GetAnnouncementImplCopyWith<$Res> {
+  factory _$$GetAnnouncementImplCopyWith(_$GetAnnouncementImpl value,
+          $Res Function(_$GetAnnouncementImpl) then) =
+      __$$GetAnnouncementImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_GetAnnouncementCopyWithImpl<$Res>
-    extends _$AnnouncementEventCopyWithImpl<$Res, _$_GetAnnouncement>
-    implements _$$_GetAnnouncementCopyWith<$Res> {
-  __$$_GetAnnouncementCopyWithImpl(
-      _$_GetAnnouncement _value, $Res Function(_$_GetAnnouncement) _then)
+class __$$GetAnnouncementImplCopyWithImpl<$Res>
+    extends _$AnnouncementEventCopyWithImpl<$Res, _$GetAnnouncementImpl>
+    implements _$$GetAnnouncementImplCopyWith<$Res> {
+  __$$GetAnnouncementImplCopyWithImpl(
+      _$GetAnnouncementImpl _value, $Res Function(_$GetAnnouncementImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_GetAnnouncement implements _GetAnnouncement {
-  const _$_GetAnnouncement();
+class _$GetAnnouncementImpl implements _GetAnnouncement {
+  const _$GetAnnouncementImpl();
 
   @override
   String toString() {
@@ -154,9 +154,9 @@ class _$_GetAnnouncement implements _GetAnnouncement {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_GetAnnouncement);
+        (other.runtimeType == runtimeType && other is _$GetAnnouncementImpl);
   }
 
   @override
@@ -279,27 +279,29 @@ class _$_GetAnnouncement implements _GetAnnouncement {
 }
 
 abstract class _GetAnnouncement implements AnnouncementEvent {
-  const factory _GetAnnouncement() = _$_GetAnnouncement;
+  const factory _GetAnnouncement() = _$GetAnnouncementImpl;
 }
 
 /// @nodoc
-abstract class _$$_CloseCopyWith<$Res> {
-  factory _$$_CloseCopyWith(_$_Close value, $Res Function(_$_Close) then) =
-      __$$_CloseCopyWithImpl<$Res>;
+abstract class _$$CloseImplCopyWith<$Res> {
+  factory _$$CloseImplCopyWith(
+          _$CloseImpl value, $Res Function(_$CloseImpl) then) =
+      __$$CloseImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_CloseCopyWithImpl<$Res>
-    extends _$AnnouncementEventCopyWithImpl<$Res, _$_Close>
-    implements _$$_CloseCopyWith<$Res> {
-  __$$_CloseCopyWithImpl(_$_Close _value, $Res Function(_$_Close) _then)
+class __$$CloseImplCopyWithImpl<$Res>
+    extends _$AnnouncementEventCopyWithImpl<$Res, _$CloseImpl>
+    implements _$$CloseImplCopyWith<$Res> {
+  __$$CloseImplCopyWithImpl(
+      _$CloseImpl _value, $Res Function(_$CloseImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_Close implements _Close {
-  const _$_Close();
+class _$CloseImpl implements _Close {
+  const _$CloseImpl();
 
   @override
   String toString() {
@@ -307,9 +309,9 @@ class _$_Close implements _Close {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_Close);
+        (other.runtimeType == runtimeType && other is _$CloseImpl);
   }
 
   @override
@@ -432,29 +434,29 @@ class _$_Close implements _Close {
 }
 
 abstract class _Close implements AnnouncementEvent {
-  const factory _Close() = _$_Close;
+  const factory _Close() = _$CloseImpl;
 }
 
 /// @nodoc
-abstract class _$$_ClearBannerIdCopyWith<$Res> {
-  factory _$$_ClearBannerIdCopyWith(
-          _$_ClearBannerId value, $Res Function(_$_ClearBannerId) then) =
-      __$$_ClearBannerIdCopyWithImpl<$Res>;
+abstract class _$$ClearBannerIdImplCopyWith<$Res> {
+  factory _$$ClearBannerIdImplCopyWith(
+          _$ClearBannerIdImpl value, $Res Function(_$ClearBannerIdImpl) then) =
+      __$$ClearBannerIdImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_ClearBannerIdCopyWithImpl<$Res>
-    extends _$AnnouncementEventCopyWithImpl<$Res, _$_ClearBannerId>
-    implements _$$_ClearBannerIdCopyWith<$Res> {
-  __$$_ClearBannerIdCopyWithImpl(
-      _$_ClearBannerId _value, $Res Function(_$_ClearBannerId) _then)
+class __$$ClearBannerIdImplCopyWithImpl<$Res>
+    extends _$AnnouncementEventCopyWithImpl<$Res, _$ClearBannerIdImpl>
+    implements _$$ClearBannerIdImplCopyWith<$Res> {
+  __$$ClearBannerIdImplCopyWithImpl(
+      _$ClearBannerIdImpl _value, $Res Function(_$ClearBannerIdImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_ClearBannerId implements _ClearBannerId {
-  const _$_ClearBannerId();
+class _$ClearBannerIdImpl implements _ClearBannerId {
+  const _$ClearBannerIdImpl();
 
   @override
   String toString() {
@@ -462,9 +464,9 @@ class _$_ClearBannerId implements _ClearBannerId {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_ClearBannerId);
+        (other.runtimeType == runtimeType && other is _$ClearBannerIdImpl);
   }
 
   @override
@@ -587,29 +589,29 @@ class _$_ClearBannerId implements _ClearBannerId {
 }
 
 abstract class _ClearBannerId implements AnnouncementEvent {
-  const factory _ClearBannerId() = _$_ClearBannerId;
+  const factory _ClearBannerId() = _$ClearBannerIdImpl;
 }
 
 /// @nodoc
-abstract class _$$_ClearClosedTimeCopyWith<$Res> {
-  factory _$$_ClearClosedTimeCopyWith(
-          _$_ClearClosedTime value, $Res Function(_$_ClearClosedTime) then) =
-      __$$_ClearClosedTimeCopyWithImpl<$Res>;
+abstract class _$$ClearClosedTimeImplCopyWith<$Res> {
+  factory _$$ClearClosedTimeImplCopyWith(_$ClearClosedTimeImpl value,
+          $Res Function(_$ClearClosedTimeImpl) then) =
+      __$$ClearClosedTimeImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_ClearClosedTimeCopyWithImpl<$Res>
-    extends _$AnnouncementEventCopyWithImpl<$Res, _$_ClearClosedTime>
-    implements _$$_ClearClosedTimeCopyWith<$Res> {
-  __$$_ClearClosedTimeCopyWithImpl(
-      _$_ClearClosedTime _value, $Res Function(_$_ClearClosedTime) _then)
+class __$$ClearClosedTimeImplCopyWithImpl<$Res>
+    extends _$AnnouncementEventCopyWithImpl<$Res, _$ClearClosedTimeImpl>
+    implements _$$ClearClosedTimeImplCopyWith<$Res> {
+  __$$ClearClosedTimeImplCopyWithImpl(
+      _$ClearClosedTimeImpl _value, $Res Function(_$ClearClosedTimeImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_ClearClosedTime implements _ClearClosedTime {
-  const _$_ClearClosedTime();
+class _$ClearClosedTimeImpl implements _ClearClosedTime {
+  const _$ClearClosedTimeImpl();
 
   @override
   String toString() {
@@ -617,9 +619,9 @@ class _$_ClearClosedTime implements _ClearClosedTime {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_ClearClosedTime);
+        (other.runtimeType == runtimeType && other is _$ClearClosedTimeImpl);
   }
 
   @override
@@ -742,27 +744,28 @@ class _$_ClearClosedTime implements _ClearClosedTime {
 }
 
 abstract class _ClearClosedTime implements AnnouncementEvent {
-  const factory _ClearClosedTime() = _$_ClearClosedTime;
+  const factory _ClearClosedTime() = _$ClearClosedTimeImpl;
 }
 
 /// @nodoc
-abstract class _$$_ShowCopyWith<$Res> {
-  factory _$$_ShowCopyWith(_$_Show value, $Res Function(_$_Show) then) =
-      __$$_ShowCopyWithImpl<$Res>;
+abstract class _$$ShowImplCopyWith<$Res> {
+  factory _$$ShowImplCopyWith(
+          _$ShowImpl value, $Res Function(_$ShowImpl) then) =
+      __$$ShowImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_ShowCopyWithImpl<$Res>
-    extends _$AnnouncementEventCopyWithImpl<$Res, _$_Show>
-    implements _$$_ShowCopyWith<$Res> {
-  __$$_ShowCopyWithImpl(_$_Show _value, $Res Function(_$_Show) _then)
+class __$$ShowImplCopyWithImpl<$Res>
+    extends _$AnnouncementEventCopyWithImpl<$Res, _$ShowImpl>
+    implements _$$ShowImplCopyWith<$Res> {
+  __$$ShowImplCopyWithImpl(_$ShowImpl _value, $Res Function(_$ShowImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_Show implements _Show {
-  const _$_Show();
+class _$ShowImpl implements _Show {
+  const _$ShowImpl();
 
   @override
   String toString() {
@@ -770,9 +773,9 @@ class _$_Show implements _Show {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_Show);
+        (other.runtimeType == runtimeType && other is _$ShowImpl);
   }
 
   @override
@@ -895,24 +898,24 @@ class _$_Show implements _Show {
 }
 
 abstract class _Show implements AnnouncementEvent {
-  const factory _Show() = _$_Show;
+  const factory _Show() = _$ShowImpl;
 }
 
 /// @nodoc
-abstract class _$$_SetDontShowDateTimeCopyWith<$Res> {
-  factory _$$_SetDontShowDateTimeCopyWith(_$_SetDontShowDateTime value,
-          $Res Function(_$_SetDontShowDateTime) then) =
-      __$$_SetDontShowDateTimeCopyWithImpl<$Res>;
+abstract class _$$SetDontShowDateTimeImplCopyWith<$Res> {
+  factory _$$SetDontShowDateTimeImplCopyWith(_$SetDontShowDateTimeImpl value,
+          $Res Function(_$SetDontShowDateTimeImpl) then) =
+      __$$SetDontShowDateTimeImplCopyWithImpl<$Res>;
   @useResult
   $Res call({DateTimeStringValue dateTime, StorageType storageType});
 }
 
 /// @nodoc
-class __$$_SetDontShowDateTimeCopyWithImpl<$Res>
-    extends _$AnnouncementEventCopyWithImpl<$Res, _$_SetDontShowDateTime>
-    implements _$$_SetDontShowDateTimeCopyWith<$Res> {
-  __$$_SetDontShowDateTimeCopyWithImpl(_$_SetDontShowDateTime _value,
-      $Res Function(_$_SetDontShowDateTime) _then)
+class __$$SetDontShowDateTimeImplCopyWithImpl<$Res>
+    extends _$AnnouncementEventCopyWithImpl<$Res, _$SetDontShowDateTimeImpl>
+    implements _$$SetDontShowDateTimeImplCopyWith<$Res> {
+  __$$SetDontShowDateTimeImplCopyWithImpl(_$SetDontShowDateTimeImpl _value,
+      $Res Function(_$SetDontShowDateTimeImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -921,7 +924,7 @@ class __$$_SetDontShowDateTimeCopyWithImpl<$Res>
     Object? dateTime = null,
     Object? storageType = null,
   }) {
-    return _then(_$_SetDontShowDateTime(
+    return _then(_$SetDontShowDateTimeImpl(
       dateTime: null == dateTime
           ? _value.dateTime
           : dateTime // ignore: cast_nullable_to_non_nullable
@@ -936,8 +939,8 @@ class __$$_SetDontShowDateTimeCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_SetDontShowDateTime implements _SetDontShowDateTime {
-  const _$_SetDontShowDateTime(
+class _$SetDontShowDateTimeImpl implements _SetDontShowDateTime {
+  const _$SetDontShowDateTimeImpl(
       {required this.dateTime, required this.storageType});
 
   @override
@@ -951,10 +954,10 @@ class _$_SetDontShowDateTime implements _SetDontShowDateTime {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_SetDontShowDateTime &&
+            other is _$SetDontShowDateTimeImpl &&
             (identical(other.dateTime, dateTime) ||
                 other.dateTime == dateTime) &&
             (identical(other.storageType, storageType) ||
@@ -967,8 +970,8 @@ class _$_SetDontShowDateTime implements _SetDontShowDateTime {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_SetDontShowDateTimeCopyWith<_$_SetDontShowDateTime> get copyWith =>
-      __$$_SetDontShowDateTimeCopyWithImpl<_$_SetDontShowDateTime>(
+  _$$SetDontShowDateTimeImplCopyWith<_$SetDontShowDateTimeImpl> get copyWith =>
+      __$$SetDontShowDateTimeImplCopyWithImpl<_$SetDontShowDateTimeImpl>(
           this, _$identity);
 
   @override
@@ -1090,35 +1093,35 @@ class _$_SetDontShowDateTime implements _SetDontShowDateTime {
 abstract class _SetDontShowDateTime implements AnnouncementEvent {
   const factory _SetDontShowDateTime(
       {required final DateTimeStringValue dateTime,
-      required final StorageType storageType}) = _$_SetDontShowDateTime;
+      required final StorageType storageType}) = _$SetDontShowDateTimeImpl;
 
   DateTimeStringValue get dateTime;
   StorageType get storageType;
   @JsonKey(ignore: true)
-  _$$_SetDontShowDateTimeCopyWith<_$_SetDontShowDateTime> get copyWith =>
+  _$$SetDontShowDateTimeImplCopyWith<_$SetDontShowDateTimeImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_GetDontShowDateTimeCopyWith<$Res> {
-  factory _$$_GetDontShowDateTimeCopyWith(_$_GetDontShowDateTime value,
-          $Res Function(_$_GetDontShowDateTime) then) =
-      __$$_GetDontShowDateTimeCopyWithImpl<$Res>;
+abstract class _$$GetDontShowDateTimeImplCopyWith<$Res> {
+  factory _$$GetDontShowDateTimeImplCopyWith(_$GetDontShowDateTimeImpl value,
+          $Res Function(_$GetDontShowDateTimeImpl) then) =
+      __$$GetDontShowDateTimeImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_GetDontShowDateTimeCopyWithImpl<$Res>
-    extends _$AnnouncementEventCopyWithImpl<$Res, _$_GetDontShowDateTime>
-    implements _$$_GetDontShowDateTimeCopyWith<$Res> {
-  __$$_GetDontShowDateTimeCopyWithImpl(_$_GetDontShowDateTime _value,
-      $Res Function(_$_GetDontShowDateTime) _then)
+class __$$GetDontShowDateTimeImplCopyWithImpl<$Res>
+    extends _$AnnouncementEventCopyWithImpl<$Res, _$GetDontShowDateTimeImpl>
+    implements _$$GetDontShowDateTimeImplCopyWith<$Res> {
+  __$$GetDontShowDateTimeImplCopyWithImpl(_$GetDontShowDateTimeImpl _value,
+      $Res Function(_$GetDontShowDateTimeImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_GetDontShowDateTime implements _GetDontShowDateTime {
-  const _$_GetDontShowDateTime();
+class _$GetDontShowDateTimeImpl implements _GetDontShowDateTime {
+  const _$GetDontShowDateTimeImpl();
 
   @override
   String toString() {
@@ -1126,9 +1129,10 @@ class _$_GetDontShowDateTime implements _GetDontShowDateTime {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_GetDontShowDateTime);
+        (other.runtimeType == runtimeType &&
+            other is _$GetDontShowDateTimeImpl);
   }
 
   @override
@@ -1251,24 +1255,25 @@ class _$_GetDontShowDateTime implements _GetDontShowDateTime {
 }
 
 abstract class _GetDontShowDateTime implements AnnouncementEvent {
-  const factory _GetDontShowDateTime() = _$_GetDontShowDateTime;
+  const factory _GetDontShowDateTime() = _$GetDontShowDateTimeImpl;
 }
 
 /// @nodoc
-abstract class _$$_GetMaintenanceBannersCopyWith<$Res> {
-  factory _$$_GetMaintenanceBannersCopyWith(_$_GetMaintenanceBanners value,
-          $Res Function(_$_GetMaintenanceBanners) then) =
-      __$$_GetMaintenanceBannersCopyWithImpl<$Res>;
+abstract class _$$GetMaintenanceBannersImplCopyWith<$Res> {
+  factory _$$GetMaintenanceBannersImplCopyWith(
+          _$GetMaintenanceBannersImpl value,
+          $Res Function(_$GetMaintenanceBannersImpl) then) =
+      __$$GetMaintenanceBannersImplCopyWithImpl<$Res>;
   @useResult
   $Res call({SalesOrg salesOrg});
 }
 
 /// @nodoc
-class __$$_GetMaintenanceBannersCopyWithImpl<$Res>
-    extends _$AnnouncementEventCopyWithImpl<$Res, _$_GetMaintenanceBanners>
-    implements _$$_GetMaintenanceBannersCopyWith<$Res> {
-  __$$_GetMaintenanceBannersCopyWithImpl(_$_GetMaintenanceBanners _value,
-      $Res Function(_$_GetMaintenanceBanners) _then)
+class __$$GetMaintenanceBannersImplCopyWithImpl<$Res>
+    extends _$AnnouncementEventCopyWithImpl<$Res, _$GetMaintenanceBannersImpl>
+    implements _$$GetMaintenanceBannersImplCopyWith<$Res> {
+  __$$GetMaintenanceBannersImplCopyWithImpl(_$GetMaintenanceBannersImpl _value,
+      $Res Function(_$GetMaintenanceBannersImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1276,7 +1281,7 @@ class __$$_GetMaintenanceBannersCopyWithImpl<$Res>
   $Res call({
     Object? salesOrg = null,
   }) {
-    return _then(_$_GetMaintenanceBanners(
+    return _then(_$GetMaintenanceBannersImpl(
       salesOrg: null == salesOrg
           ? _value.salesOrg
           : salesOrg // ignore: cast_nullable_to_non_nullable
@@ -1287,8 +1292,8 @@ class __$$_GetMaintenanceBannersCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_GetMaintenanceBanners implements _GetMaintenanceBanners {
-  const _$_GetMaintenanceBanners({required this.salesOrg});
+class _$GetMaintenanceBannersImpl implements _GetMaintenanceBanners {
+  const _$GetMaintenanceBannersImpl({required this.salesOrg});
 
   @override
   final SalesOrg salesOrg;
@@ -1299,10 +1304,10 @@ class _$_GetMaintenanceBanners implements _GetMaintenanceBanners {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_GetMaintenanceBanners &&
+            other is _$GetMaintenanceBannersImpl &&
             (identical(other.salesOrg, salesOrg) ||
                 other.salesOrg == salesOrg));
   }
@@ -1313,9 +1318,9 @@ class _$_GetMaintenanceBanners implements _GetMaintenanceBanners {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_GetMaintenanceBannersCopyWith<_$_GetMaintenanceBanners> get copyWith =>
-      __$$_GetMaintenanceBannersCopyWithImpl<_$_GetMaintenanceBanners>(
-          this, _$identity);
+  _$$GetMaintenanceBannersImplCopyWith<_$GetMaintenanceBannersImpl>
+      get copyWith => __$$GetMaintenanceBannersImplCopyWithImpl<
+          _$GetMaintenanceBannersImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -1435,29 +1440,29 @@ class _$_GetMaintenanceBanners implements _GetMaintenanceBanners {
 
 abstract class _GetMaintenanceBanners implements AnnouncementEvent {
   const factory _GetMaintenanceBanners({required final SalesOrg salesOrg}) =
-      _$_GetMaintenanceBanners;
+      _$GetMaintenanceBannersImpl;
 
   SalesOrg get salesOrg;
   @JsonKey(ignore: true)
-  _$$_GetMaintenanceBannersCopyWith<_$_GetMaintenanceBanners> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$GetMaintenanceBannersImplCopyWith<_$GetMaintenanceBannersImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_ChangePreferLanguageCopyWith<$Res> {
-  factory _$$_ChangePreferLanguageCopyWith(_$_ChangePreferLanguage value,
-          $Res Function(_$_ChangePreferLanguage) then) =
-      __$$_ChangePreferLanguageCopyWithImpl<$Res>;
+abstract class _$$ChangePreferLanguageImplCopyWith<$Res> {
+  factory _$$ChangePreferLanguageImplCopyWith(_$ChangePreferLanguageImpl value,
+          $Res Function(_$ChangePreferLanguageImpl) then) =
+      __$$ChangePreferLanguageImplCopyWithImpl<$Res>;
   @useResult
   $Res call({bool preferSalesOrgLanguage});
 }
 
 /// @nodoc
-class __$$_ChangePreferLanguageCopyWithImpl<$Res>
-    extends _$AnnouncementEventCopyWithImpl<$Res, _$_ChangePreferLanguage>
-    implements _$$_ChangePreferLanguageCopyWith<$Res> {
-  __$$_ChangePreferLanguageCopyWithImpl(_$_ChangePreferLanguage _value,
-      $Res Function(_$_ChangePreferLanguage) _then)
+class __$$ChangePreferLanguageImplCopyWithImpl<$Res>
+    extends _$AnnouncementEventCopyWithImpl<$Res, _$ChangePreferLanguageImpl>
+    implements _$$ChangePreferLanguageImplCopyWith<$Res> {
+  __$$ChangePreferLanguageImplCopyWithImpl(_$ChangePreferLanguageImpl _value,
+      $Res Function(_$ChangePreferLanguageImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1465,7 +1470,7 @@ class __$$_ChangePreferLanguageCopyWithImpl<$Res>
   $Res call({
     Object? preferSalesOrgLanguage = null,
   }) {
-    return _then(_$_ChangePreferLanguage(
+    return _then(_$ChangePreferLanguageImpl(
       preferSalesOrgLanguage: null == preferSalesOrgLanguage
           ? _value.preferSalesOrgLanguage
           : preferSalesOrgLanguage // ignore: cast_nullable_to_non_nullable
@@ -1476,8 +1481,8 @@ class __$$_ChangePreferLanguageCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_ChangePreferLanguage implements _ChangePreferLanguage {
-  const _$_ChangePreferLanguage({required this.preferSalesOrgLanguage});
+class _$ChangePreferLanguageImpl implements _ChangePreferLanguage {
+  const _$ChangePreferLanguageImpl({required this.preferSalesOrgLanguage});
 
   @override
   final bool preferSalesOrgLanguage;
@@ -1488,10 +1493,10 @@ class _$_ChangePreferLanguage implements _ChangePreferLanguage {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ChangePreferLanguage &&
+            other is _$ChangePreferLanguageImpl &&
             (identical(other.preferSalesOrgLanguage, preferSalesOrgLanguage) ||
                 other.preferSalesOrgLanguage == preferSalesOrgLanguage));
   }
@@ -1502,9 +1507,10 @@ class _$_ChangePreferLanguage implements _ChangePreferLanguage {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ChangePreferLanguageCopyWith<_$_ChangePreferLanguage> get copyWith =>
-      __$$_ChangePreferLanguageCopyWithImpl<_$_ChangePreferLanguage>(
-          this, _$identity);
+  _$$ChangePreferLanguageImplCopyWith<_$ChangePreferLanguageImpl>
+      get copyWith =>
+          __$$ChangePreferLanguageImplCopyWithImpl<_$ChangePreferLanguageImpl>(
+              this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -1624,29 +1630,30 @@ class _$_ChangePreferLanguage implements _ChangePreferLanguage {
 
 abstract class _ChangePreferLanguage implements AnnouncementEvent {
   const factory _ChangePreferLanguage(
-      {required final bool preferSalesOrgLanguage}) = _$_ChangePreferLanguage;
+          {required final bool preferSalesOrgLanguage}) =
+      _$ChangePreferLanguageImpl;
 
   bool get preferSalesOrgLanguage;
   @JsonKey(ignore: true)
-  _$$_ChangePreferLanguageCopyWith<_$_ChangePreferLanguage> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$ChangePreferLanguageImplCopyWith<_$ChangePreferLanguageImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_ClosedBannerIdCopyWith<$Res> {
-  factory _$$_ClosedBannerIdCopyWith(
-          _$_ClosedBannerId value, $Res Function(_$_ClosedBannerId) then) =
-      __$$_ClosedBannerIdCopyWithImpl<$Res>;
+abstract class _$$ClosedBannerIdImplCopyWith<$Res> {
+  factory _$$ClosedBannerIdImplCopyWith(_$ClosedBannerIdImpl value,
+          $Res Function(_$ClosedBannerIdImpl) then) =
+      __$$ClosedBannerIdImplCopyWithImpl<$Res>;
   @useResult
   $Res call({String id});
 }
 
 /// @nodoc
-class __$$_ClosedBannerIdCopyWithImpl<$Res>
-    extends _$AnnouncementEventCopyWithImpl<$Res, _$_ClosedBannerId>
-    implements _$$_ClosedBannerIdCopyWith<$Res> {
-  __$$_ClosedBannerIdCopyWithImpl(
-      _$_ClosedBannerId _value, $Res Function(_$_ClosedBannerId) _then)
+class __$$ClosedBannerIdImplCopyWithImpl<$Res>
+    extends _$AnnouncementEventCopyWithImpl<$Res, _$ClosedBannerIdImpl>
+    implements _$$ClosedBannerIdImplCopyWith<$Res> {
+  __$$ClosedBannerIdImplCopyWithImpl(
+      _$ClosedBannerIdImpl _value, $Res Function(_$ClosedBannerIdImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1654,7 +1661,7 @@ class __$$_ClosedBannerIdCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
   }) {
-    return _then(_$_ClosedBannerId(
+    return _then(_$ClosedBannerIdImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -1665,8 +1672,8 @@ class __$$_ClosedBannerIdCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_ClosedBannerId implements _ClosedBannerId {
-  const _$_ClosedBannerId({required this.id});
+class _$ClosedBannerIdImpl implements _ClosedBannerId {
+  const _$ClosedBannerIdImpl({required this.id});
 
   @override
   final String id;
@@ -1677,10 +1684,10 @@ class _$_ClosedBannerId implements _ClosedBannerId {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ClosedBannerId &&
+            other is _$ClosedBannerIdImpl &&
             (identical(other.id, id) || other.id == id));
   }
 
@@ -1690,8 +1697,9 @@ class _$_ClosedBannerId implements _ClosedBannerId {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ClosedBannerIdCopyWith<_$_ClosedBannerId> get copyWith =>
-      __$$_ClosedBannerIdCopyWithImpl<_$_ClosedBannerId>(this, _$identity);
+  _$$ClosedBannerIdImplCopyWith<_$ClosedBannerIdImpl> get copyWith =>
+      __$$ClosedBannerIdImplCopyWithImpl<_$ClosedBannerIdImpl>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -1810,11 +1818,12 @@ class _$_ClosedBannerId implements _ClosedBannerId {
 }
 
 abstract class _ClosedBannerId implements AnnouncementEvent {
-  const factory _ClosedBannerId({required final String id}) = _$_ClosedBannerId;
+  const factory _ClosedBannerId({required final String id}) =
+      _$ClosedBannerIdImpl;
 
   String get id;
   @JsonKey(ignore: true)
-  _$$_ClosedBannerIdCopyWith<_$_ClosedBannerId> get copyWith =>
+  _$$ClosedBannerIdImplCopyWith<_$ClosedBannerIdImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -1940,11 +1949,11 @@ class _$AnnouncementStateCopyWithImpl<$Res, $Val extends AnnouncementState>
 }
 
 /// @nodoc
-abstract class _$$_AnnouncementStateCopyWith<$Res>
+abstract class _$$AnnouncementStateImplCopyWith<$Res>
     implements $AnnouncementStateCopyWith<$Res> {
-  factory _$$_AnnouncementStateCopyWith(_$_AnnouncementState value,
-          $Res Function(_$_AnnouncementState) then) =
-      __$$_AnnouncementStateCopyWithImpl<$Res>;
+  factory _$$AnnouncementStateImplCopyWith(_$AnnouncementStateImpl value,
+          $Res Function(_$AnnouncementStateImpl) then) =
+      __$$AnnouncementStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -1965,11 +1974,11 @@ abstract class _$$_AnnouncementStateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_AnnouncementStateCopyWithImpl<$Res>
-    extends _$AnnouncementStateCopyWithImpl<$Res, _$_AnnouncementState>
-    implements _$$_AnnouncementStateCopyWith<$Res> {
-  __$$_AnnouncementStateCopyWithImpl(
-      _$_AnnouncementState _value, $Res Function(_$_AnnouncementState) _then)
+class __$$AnnouncementStateImplCopyWithImpl<$Res>
+    extends _$AnnouncementStateCopyWithImpl<$Res, _$AnnouncementStateImpl>
+    implements _$$AnnouncementStateImplCopyWith<$Res> {
+  __$$AnnouncementStateImplCopyWithImpl(_$AnnouncementStateImpl _value,
+      $Res Function(_$AnnouncementStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1985,7 +1994,7 @@ class __$$_AnnouncementStateCopyWithImpl<$Res>
     Object? isLoading = null,
     Object? isClosed = null,
   }) {
-    return _then(_$_AnnouncementState(
+    return _then(_$AnnouncementStateImpl(
       announcement: null == announcement
           ? _value.announcement
           : announcement // ignore: cast_nullable_to_non_nullable
@@ -2028,8 +2037,8 @@ class __$$_AnnouncementStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_AnnouncementState extends _AnnouncementState {
-  const _$_AnnouncementState(
+class _$AnnouncementStateImpl extends _AnnouncementState {
+  const _$AnnouncementStateImpl(
       {required this.announcement,
       required this.maintenanceItem,
       required final List<String> listBannersIdClosed,
@@ -2074,10 +2083,10 @@ class _$_AnnouncementState extends _AnnouncementState {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_AnnouncementState &&
+            other is _$AnnouncementStateImpl &&
             (identical(other.announcement, announcement) ||
                 other.announcement == announcement) &&
             (identical(other.maintenanceItem, maintenanceItem) ||
@@ -2114,8 +2123,8 @@ class _$_AnnouncementState extends _AnnouncementState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_AnnouncementStateCopyWith<_$_AnnouncementState> get copyWith =>
-      __$$_AnnouncementStateCopyWithImpl<_$_AnnouncementState>(
+  _$$AnnouncementStateImplCopyWith<_$AnnouncementStateImpl> get copyWith =>
+      __$$AnnouncementStateImplCopyWithImpl<_$AnnouncementStateImpl>(
           this, _$identity);
 }
 
@@ -2129,7 +2138,7 @@ abstract class _AnnouncementState extends AnnouncementState {
       required final DateTimeStringValue lastClosedTimeReturns,
       required final bool preferSalesOrgLanguage,
       required final bool isLoading,
-      required final bool isClosed}) = _$_AnnouncementState;
+      required final bool isClosed}) = _$AnnouncementStateImpl;
   const _AnnouncementState._() : super._();
 
   @override
@@ -2152,6 +2161,6 @@ abstract class _AnnouncementState extends AnnouncementState {
   bool get isClosed;
   @override
   @JsonKey(ignore: true)
-  _$$_AnnouncementStateCopyWith<_$_AnnouncementState> get copyWith =>
+  _$$AnnouncementStateImplCopyWith<_$AnnouncementStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -12,7 +12,7 @@ part of 'order_history_details_po_documents_dto.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 PoDocumentsDto _$PoDocumentsDtoFromJson(Map<String, dynamic> json) {
   return _PoDocumentsDto.fromJson(json);
@@ -82,11 +82,11 @@ class _$PoDocumentsDtoCopyWithImpl<$Res, $Val extends PoDocumentsDto>
 }
 
 /// @nodoc
-abstract class _$$_PoDocumentsDtoCopyWith<$Res>
+abstract class _$$PoDocumentsDtoImplCopyWith<$Res>
     implements $PoDocumentsDtoCopyWith<$Res> {
-  factory _$$_PoDocumentsDtoCopyWith(
-          _$_PoDocumentsDto value, $Res Function(_$_PoDocumentsDto) then) =
-      __$$_PoDocumentsDtoCopyWithImpl<$Res>;
+  factory _$$PoDocumentsDtoImplCopyWith(_$PoDocumentsDtoImpl value,
+          $Res Function(_$PoDocumentsDtoImpl) then) =
+      __$$PoDocumentsDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -98,11 +98,11 @@ abstract class _$$_PoDocumentsDtoCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_PoDocumentsDtoCopyWithImpl<$Res>
-    extends _$PoDocumentsDtoCopyWithImpl<$Res, _$_PoDocumentsDto>
-    implements _$$_PoDocumentsDtoCopyWith<$Res> {
-  __$$_PoDocumentsDtoCopyWithImpl(
-      _$_PoDocumentsDto _value, $Res Function(_$_PoDocumentsDto) _then)
+class __$$PoDocumentsDtoImplCopyWithImpl<$Res>
+    extends _$PoDocumentsDtoCopyWithImpl<$Res, _$PoDocumentsDtoImpl>
+    implements _$$PoDocumentsDtoImplCopyWith<$Res> {
+  __$$PoDocumentsDtoImplCopyWithImpl(
+      _$PoDocumentsDtoImpl _value, $Res Function(_$PoDocumentsDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -112,7 +112,7 @@ class __$$_PoDocumentsDtoCopyWithImpl<$Res>
     Object? name = null,
     Object? path = null,
   }) {
-    return _then(_$_PoDocumentsDto(
+    return _then(_$PoDocumentsDtoImpl(
       url: null == url
           ? _value.url
           : url // ignore: cast_nullable_to_non_nullable
@@ -131,8 +131,8 @@ class __$$_PoDocumentsDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_PoDocumentsDto extends _PoDocumentsDto {
-  const _$_PoDocumentsDto(
+class _$PoDocumentsDtoImpl extends _PoDocumentsDto {
+  const _$PoDocumentsDtoImpl(
       {@JsonKey(name: 'url', defaultValue: '', readValue: _readUrl)
       required this.url,
       @JsonKey(name: 'name', defaultValue: '', readValue: _readName)
@@ -141,8 +141,8 @@ class _$_PoDocumentsDto extends _PoDocumentsDto {
       required this.path})
       : super._();
 
-  factory _$_PoDocumentsDto.fromJson(Map<String, dynamic> json) =>
-      _$$_PoDocumentsDtoFromJson(json);
+  factory _$PoDocumentsDtoImpl.fromJson(Map<String, dynamic> json) =>
+      _$$PoDocumentsDtoImplFromJson(json);
 
   @override
   @JsonKey(name: 'url', defaultValue: '', readValue: _readUrl)
@@ -160,10 +160,10 @@ class _$_PoDocumentsDto extends _PoDocumentsDto {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_PoDocumentsDto &&
+            other is _$PoDocumentsDtoImpl &&
             (identical(other.url, url) || other.url == url) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.path, path) || other.path == path));
@@ -176,12 +176,13 @@ class _$_PoDocumentsDto extends _PoDocumentsDto {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_PoDocumentsDtoCopyWith<_$_PoDocumentsDto> get copyWith =>
-      __$$_PoDocumentsDtoCopyWithImpl<_$_PoDocumentsDto>(this, _$identity);
+  _$$PoDocumentsDtoImplCopyWith<_$PoDocumentsDtoImpl> get copyWith =>
+      __$$PoDocumentsDtoImplCopyWithImpl<_$PoDocumentsDtoImpl>(
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_PoDocumentsDtoToJson(
+    return _$$PoDocumentsDtoImplToJson(
       this,
     );
   }
@@ -194,11 +195,11 @@ abstract class _PoDocumentsDto extends PoDocumentsDto {
       @JsonKey(name: 'name', defaultValue: '', readValue: _readName)
       required final String name,
       @JsonKey(name: 'path', defaultValue: '', readValue: _readUrl)
-      required final String path}) = _$_PoDocumentsDto;
+      required final String path}) = _$PoDocumentsDtoImpl;
   const _PoDocumentsDto._() : super._();
 
   factory _PoDocumentsDto.fromJson(Map<String, dynamic> json) =
-      _$_PoDocumentsDto.fromJson;
+      _$PoDocumentsDtoImpl.fromJson;
 
   @override
   @JsonKey(name: 'url', defaultValue: '', readValue: _readUrl)
@@ -211,6 +212,6 @@ abstract class _PoDocumentsDto extends PoDocumentsDto {
   String get path;
   @override
   @JsonKey(ignore: true)
-  _$$_PoDocumentsDtoCopyWith<_$_PoDocumentsDto> get copyWith =>
+  _$$PoDocumentsDtoImplCopyWith<_$PoDocumentsDtoImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

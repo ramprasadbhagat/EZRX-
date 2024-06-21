@@ -12,7 +12,7 @@ part of 'announcement_info_details_dto.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 AnnouncementInfoDetailsDto _$AnnouncementInfoDetailsDtoFromJson(
     Map<String, dynamic> json) {
@@ -154,12 +154,12 @@ class _$AnnouncementInfoDetailsDtoCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_AnnouncementInfoDetailsDtoCopyWith<$Res>
+abstract class _$$AnnouncementInfoDetailsDtoImplCopyWith<$Res>
     implements $AnnouncementInfoDetailsDtoCopyWith<$Res> {
-  factory _$$_AnnouncementInfoDetailsDtoCopyWith(
-          _$_AnnouncementInfoDetailsDto value,
-          $Res Function(_$_AnnouncementInfoDetailsDto) then) =
-      __$$_AnnouncementInfoDetailsDtoCopyWithImpl<$Res>;
+  factory _$$AnnouncementInfoDetailsDtoImplCopyWith(
+          _$AnnouncementInfoDetailsDtoImpl value,
+          $Res Function(_$AnnouncementInfoDetailsDtoImpl) then) =
+      __$$AnnouncementInfoDetailsDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -184,13 +184,13 @@ abstract class _$$_AnnouncementInfoDetailsDtoCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_AnnouncementInfoDetailsDtoCopyWithImpl<$Res>
+class __$$AnnouncementInfoDetailsDtoImplCopyWithImpl<$Res>
     extends _$AnnouncementInfoDetailsDtoCopyWithImpl<$Res,
-        _$_AnnouncementInfoDetailsDto>
-    implements _$$_AnnouncementInfoDetailsDtoCopyWith<$Res> {
-  __$$_AnnouncementInfoDetailsDtoCopyWithImpl(
-      _$_AnnouncementInfoDetailsDto _value,
-      $Res Function(_$_AnnouncementInfoDetailsDto) _then)
+        _$AnnouncementInfoDetailsDtoImpl>
+    implements _$$AnnouncementInfoDetailsDtoImplCopyWith<$Res> {
+  __$$AnnouncementInfoDetailsDtoImplCopyWithImpl(
+      _$AnnouncementInfoDetailsDtoImpl _value,
+      $Res Function(_$AnnouncementInfoDetailsDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -208,7 +208,7 @@ class __$$_AnnouncementInfoDetailsDtoCopyWithImpl<$Res>
     Object? tag = null,
     Object? documentsList = null,
   }) {
-    return _then(_$_AnnouncementInfoDetailsDto(
+    return _then(_$AnnouncementInfoDetailsDtoImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -259,8 +259,8 @@ class __$$_AnnouncementInfoDetailsDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_AnnouncementInfoDetailsDto extends _AnnouncementInfoDetailsDto {
-  const _$_AnnouncementInfoDetailsDto(
+class _$AnnouncementInfoDetailsDtoImpl extends _AnnouncementInfoDetailsDto {
+  const _$AnnouncementInfoDetailsDtoImpl(
       {@JsonKey(name: 'id', defaultValue: '') required this.id,
       @JsonKey(name: 'title', readValue: readValue, defaultValue: '')
       required this.title,
@@ -283,8 +283,9 @@ class _$_AnnouncementInfoDetailsDto extends _AnnouncementInfoDetailsDto {
       : _documentsList = documentsList,
         super._();
 
-  factory _$_AnnouncementInfoDetailsDto.fromJson(Map<String, dynamic> json) =>
-      _$$_AnnouncementInfoDetailsDtoFromJson(json);
+  factory _$AnnouncementInfoDetailsDtoImpl.fromJson(
+          Map<String, dynamic> json) =>
+      _$$AnnouncementInfoDetailsDtoImplFromJson(json);
 
   @override
   @JsonKey(name: 'id', defaultValue: '')
@@ -331,10 +332,10 @@ class _$_AnnouncementInfoDetailsDto extends _AnnouncementInfoDetailsDto {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_AnnouncementInfoDetailsDto &&
+            other is _$AnnouncementInfoDetailsDtoImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.title, title) || other.title == title) &&
             (identical(other.content, content) || other.content == content) &&
@@ -372,13 +373,13 @@ class _$_AnnouncementInfoDetailsDto extends _AnnouncementInfoDetailsDto {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_AnnouncementInfoDetailsDtoCopyWith<_$_AnnouncementInfoDetailsDto>
-      get copyWith => __$$_AnnouncementInfoDetailsDtoCopyWithImpl<
-          _$_AnnouncementInfoDetailsDto>(this, _$identity);
+  _$$AnnouncementInfoDetailsDtoImplCopyWith<_$AnnouncementInfoDetailsDtoImpl>
+      get copyWith => __$$AnnouncementInfoDetailsDtoImplCopyWithImpl<
+          _$AnnouncementInfoDetailsDtoImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_AnnouncementInfoDetailsDtoToJson(
+    return _$$AnnouncementInfoDetailsDtoImplToJson(
       this,
     );
   }
@@ -405,11 +406,11 @@ abstract class _AnnouncementInfoDetailsDto extends AnnouncementInfoDetailsDto {
       @JsonKey(name: 'tag', readValue: readTag) required final String tag,
       @JsonKey(name: 'documents', readValue: getDocumentsList)
       required final List<String>
-          documentsList}) = _$_AnnouncementInfoDetailsDto;
+          documentsList}) = _$AnnouncementInfoDetailsDtoImpl;
   const _AnnouncementInfoDetailsDto._() : super._();
 
   factory _AnnouncementInfoDetailsDto.fromJson(Map<String, dynamic> json) =
-      _$_AnnouncementInfoDetailsDto.fromJson;
+      _$AnnouncementInfoDetailsDtoImpl.fromJson;
 
   @override
   @JsonKey(name: 'id', defaultValue: '')
@@ -446,6 +447,6 @@ abstract class _AnnouncementInfoDetailsDto extends AnnouncementInfoDetailsDto {
   List<String> get documentsList;
   @override
   @JsonKey(ignore: true)
-  _$$_AnnouncementInfoDetailsDtoCopyWith<_$_AnnouncementInfoDetailsDto>
+  _$$AnnouncementInfoDetailsDtoImplCopyWith<_$AnnouncementInfoDetailsDtoImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

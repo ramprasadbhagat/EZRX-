@@ -6,9 +6,9 @@ part of 'bank_beneficiary_invoice_dto.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_BankBeneficiaryInvoiceDto _$$_BankBeneficiaryInvoiceDtoFromJson(
+_$BankBeneficiaryInvoiceDtoImpl _$$BankBeneficiaryInvoiceDtoImplFromJson(
         Map<String, dynamic> json) =>
-    _$_BankBeneficiaryInvoiceDto(
+    _$BankBeneficiaryInvoiceDtoImpl(
       beneficiaryName: json['beneficiaryName'] as String? ?? '',
       bankName: json['bankName'] as String? ?? '',
       branch: json['branch'] as String? ?? '',
@@ -20,8 +20,8 @@ _$_BankBeneficiaryInvoiceDto _$$_BankBeneficiaryInvoiceDtoFromJson(
       emailId: json['emailId'] as String? ?? '',
     );
 
-Map<String, dynamic> _$$_BankBeneficiaryInvoiceDtoToJson(
-        _$_BankBeneficiaryInvoiceDto instance) =>
+Map<String, dynamic> _$$BankBeneficiaryInvoiceDtoImplToJson(
+        _$BankBeneficiaryInvoiceDtoImpl instance) =>
     <String, dynamic>{
       'beneficiaryName': instance.beneficiaryName,
       'bankName': instance.bankName,

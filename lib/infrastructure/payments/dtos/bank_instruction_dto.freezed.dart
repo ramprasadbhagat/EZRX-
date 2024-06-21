@@ -12,7 +12,7 @@ part of 'bank_instruction_dto.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 BankInstructionDTO _$BankInstructionDTOFromJson(Map<String, dynamic> json) {
   return _BankInstructionDTO.fromJson(json);
@@ -74,11 +74,11 @@ class _$BankInstructionDTOCopyWithImpl<$Res, $Val extends BankInstructionDTO>
 }
 
 /// @nodoc
-abstract class _$$_BankInstructionDTOCopyWith<$Res>
+abstract class _$$BankInstructionDTOImplCopyWith<$Res>
     implements $BankInstructionDTOCopyWith<$Res> {
-  factory _$$_BankInstructionDTOCopyWith(_$_BankInstructionDTO value,
-          $Res Function(_$_BankInstructionDTO) then) =
-      __$$_BankInstructionDTOCopyWithImpl<$Res>;
+  factory _$$BankInstructionDTOImplCopyWith(_$BankInstructionDTOImpl value,
+          $Res Function(_$BankInstructionDTOImpl) then) =
+      __$$BankInstructionDTOImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -88,11 +88,11 @@ abstract class _$$_BankInstructionDTOCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_BankInstructionDTOCopyWithImpl<$Res>
-    extends _$BankInstructionDTOCopyWithImpl<$Res, _$_BankInstructionDTO>
-    implements _$$_BankInstructionDTOCopyWith<$Res> {
-  __$$_BankInstructionDTOCopyWithImpl(
-      _$_BankInstructionDTO _value, $Res Function(_$_BankInstructionDTO) _then)
+class __$$BankInstructionDTOImplCopyWithImpl<$Res>
+    extends _$BankInstructionDTOCopyWithImpl<$Res, _$BankInstructionDTOImpl>
+    implements _$$BankInstructionDTOImplCopyWith<$Res> {
+  __$$BankInstructionDTOImplCopyWithImpl(_$BankInstructionDTOImpl _value,
+      $Res Function(_$BankInstructionDTOImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -101,7 +101,7 @@ class __$$_BankInstructionDTOCopyWithImpl<$Res>
     Object? bank = null,
     Object? transferMethods = null,
   }) {
-    return _then(_$_BankInstructionDTO(
+    return _then(_$BankInstructionDTOImpl(
       bank: null == bank
           ? _value.bank
           : bank // ignore: cast_nullable_to_non_nullable
@@ -116,16 +116,16 @@ class __$$_BankInstructionDTOCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_BankInstructionDTO extends _BankInstructionDTO {
-  const _$_BankInstructionDTO(
+class _$BankInstructionDTOImpl extends _BankInstructionDTO {
+  const _$BankInstructionDTOImpl(
       {@JsonKey(name: 'bank', defaultValue: '') required this.bank,
       @JsonKey(name: 'transferMethods', defaultValue: [])
       required final List<TransferMethodDTO> transferMethods})
       : _transferMethods = transferMethods,
         super._();
 
-  factory _$_BankInstructionDTO.fromJson(Map<String, dynamic> json) =>
-      _$$_BankInstructionDTOFromJson(json);
+  factory _$BankInstructionDTOImpl.fromJson(Map<String, dynamic> json) =>
+      _$$BankInstructionDTOImplFromJson(json);
 
   @override
   @JsonKey(name: 'bank', defaultValue: '')
@@ -145,10 +145,10 @@ class _$_BankInstructionDTO extends _BankInstructionDTO {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_BankInstructionDTO &&
+            other is _$BankInstructionDTOImpl &&
             (identical(other.bank, bank) || other.bank == bank) &&
             const DeepCollectionEquality()
                 .equals(other._transferMethods, _transferMethods));
@@ -162,13 +162,13 @@ class _$_BankInstructionDTO extends _BankInstructionDTO {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_BankInstructionDTOCopyWith<_$_BankInstructionDTO> get copyWith =>
-      __$$_BankInstructionDTOCopyWithImpl<_$_BankInstructionDTO>(
+  _$$BankInstructionDTOImplCopyWith<_$BankInstructionDTOImpl> get copyWith =>
+      __$$BankInstructionDTOImplCopyWithImpl<_$BankInstructionDTOImpl>(
           this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_BankInstructionDTOToJson(
+    return _$$BankInstructionDTOImplToJson(
       this,
     );
   }
@@ -179,11 +179,11 @@ abstract class _BankInstructionDTO extends BankInstructionDTO {
           {@JsonKey(name: 'bank', defaultValue: '') required final String bank,
           @JsonKey(name: 'transferMethods', defaultValue: [])
           required final List<TransferMethodDTO> transferMethods}) =
-      _$_BankInstructionDTO;
+      _$BankInstructionDTOImpl;
   const _BankInstructionDTO._() : super._();
 
   factory _BankInstructionDTO.fromJson(Map<String, dynamic> json) =
-      _$_BankInstructionDTO.fromJson;
+      _$BankInstructionDTOImpl.fromJson;
 
   @override
   @JsonKey(name: 'bank', defaultValue: '')
@@ -193,7 +193,7 @@ abstract class _BankInstructionDTO extends BankInstructionDTO {
   List<TransferMethodDTO> get transferMethods;
   @override
   @JsonKey(ignore: true)
-  _$$_BankInstructionDTOCopyWith<_$_BankInstructionDTO> get copyWith =>
+  _$$BankInstructionDTOImplCopyWith<_$BankInstructionDTOImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -257,11 +257,11 @@ class _$TransferMethodDTOCopyWithImpl<$Res, $Val extends TransferMethodDTO>
 }
 
 /// @nodoc
-abstract class _$$_TransferMethodDTOCopyWith<$Res>
+abstract class _$$TransferMethodDTOImplCopyWith<$Res>
     implements $TransferMethodDTOCopyWith<$Res> {
-  factory _$$_TransferMethodDTOCopyWith(_$_TransferMethodDTO value,
-          $Res Function(_$_TransferMethodDTO) then) =
-      __$$_TransferMethodDTOCopyWithImpl<$Res>;
+  factory _$$TransferMethodDTOImplCopyWith(_$TransferMethodDTOImpl value,
+          $Res Function(_$TransferMethodDTOImpl) then) =
+      __$$TransferMethodDTOImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -271,11 +271,11 @@ abstract class _$$_TransferMethodDTOCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_TransferMethodDTOCopyWithImpl<$Res>
-    extends _$TransferMethodDTOCopyWithImpl<$Res, _$_TransferMethodDTO>
-    implements _$$_TransferMethodDTOCopyWith<$Res> {
-  __$$_TransferMethodDTOCopyWithImpl(
-      _$_TransferMethodDTO _value, $Res Function(_$_TransferMethodDTO) _then)
+class __$$TransferMethodDTOImplCopyWithImpl<$Res>
+    extends _$TransferMethodDTOCopyWithImpl<$Res, _$TransferMethodDTOImpl>
+    implements _$$TransferMethodDTOImplCopyWith<$Res> {
+  __$$TransferMethodDTOImplCopyWithImpl(_$TransferMethodDTOImpl _value,
+      $Res Function(_$TransferMethodDTOImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -284,7 +284,7 @@ class __$$_TransferMethodDTOCopyWithImpl<$Res>
     Object? title = null,
     Object? paymentInstructions = null,
   }) {
-    return _then(_$_TransferMethodDTO(
+    return _then(_$TransferMethodDTOImpl(
       title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -299,16 +299,16 @@ class __$$_TransferMethodDTOCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_TransferMethodDTO extends _TransferMethodDTO {
-  const _$_TransferMethodDTO(
+class _$TransferMethodDTOImpl extends _TransferMethodDTO {
+  const _$TransferMethodDTOImpl(
       {@JsonKey(name: 'title', defaultValue: '') required this.title,
       @JsonKey(name: 'paymentInstructions', defaultValue: [])
       required final List<InstructionDetailsDTO> paymentInstructions})
       : _paymentInstructions = paymentInstructions,
         super._();
 
-  factory _$_TransferMethodDTO.fromJson(Map<String, dynamic> json) =>
-      _$$_TransferMethodDTOFromJson(json);
+  factory _$TransferMethodDTOImpl.fromJson(Map<String, dynamic> json) =>
+      _$$TransferMethodDTOImplFromJson(json);
 
   @override
   @JsonKey(name: 'title', defaultValue: '')
@@ -329,10 +329,10 @@ class _$_TransferMethodDTO extends _TransferMethodDTO {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_TransferMethodDTO &&
+            other is _$TransferMethodDTOImpl &&
             (identical(other.title, title) || other.title == title) &&
             const DeepCollectionEquality()
                 .equals(other._paymentInstructions, _paymentInstructions));
@@ -346,13 +346,13 @@ class _$_TransferMethodDTO extends _TransferMethodDTO {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_TransferMethodDTOCopyWith<_$_TransferMethodDTO> get copyWith =>
-      __$$_TransferMethodDTOCopyWithImpl<_$_TransferMethodDTO>(
+  _$$TransferMethodDTOImplCopyWith<_$TransferMethodDTOImpl> get copyWith =>
+      __$$TransferMethodDTOImplCopyWithImpl<_$TransferMethodDTOImpl>(
           this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_TransferMethodDTOToJson(
+    return _$$TransferMethodDTOImplToJson(
       this,
     );
   }
@@ -363,11 +363,11 @@ abstract class _TransferMethodDTO extends TransferMethodDTO {
       {@JsonKey(name: 'title', defaultValue: '') required final String title,
       @JsonKey(name: 'paymentInstructions', defaultValue: [])
       required final List<InstructionDetailsDTO>
-          paymentInstructions}) = _$_TransferMethodDTO;
+          paymentInstructions}) = _$TransferMethodDTOImpl;
   const _TransferMethodDTO._() : super._();
 
   factory _TransferMethodDTO.fromJson(Map<String, dynamic> json) =
-      _$_TransferMethodDTO.fromJson;
+      _$TransferMethodDTOImpl.fromJson;
 
   @override
   @JsonKey(name: 'title', defaultValue: '')
@@ -377,7 +377,7 @@ abstract class _TransferMethodDTO extends TransferMethodDTO {
   List<InstructionDetailsDTO> get paymentInstructions;
   @override
   @JsonKey(ignore: true)
-  _$$_TransferMethodDTOCopyWith<_$_TransferMethodDTO> get copyWith =>
+  _$$TransferMethodDTOImplCopyWith<_$TransferMethodDTOImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -443,11 +443,12 @@ class _$InstructionDetailsDTOCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_InstructionDetailsDTOCopyWith<$Res>
+abstract class _$$InstructionDetailsDTOImplCopyWith<$Res>
     implements $InstructionDetailsDTOCopyWith<$Res> {
-  factory _$$_InstructionDetailsDTOCopyWith(_$_InstructionDetailsDTO value,
-          $Res Function(_$_InstructionDetailsDTO) then) =
-      __$$_InstructionDetailsDTOCopyWithImpl<$Res>;
+  factory _$$InstructionDetailsDTOImplCopyWith(
+          _$InstructionDetailsDTOImpl value,
+          $Res Function(_$InstructionDetailsDTOImpl) then) =
+      __$$InstructionDetailsDTOImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -458,11 +459,12 @@ abstract class _$$_InstructionDetailsDTOCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_InstructionDetailsDTOCopyWithImpl<$Res>
-    extends _$InstructionDetailsDTOCopyWithImpl<$Res, _$_InstructionDetailsDTO>
-    implements _$$_InstructionDetailsDTOCopyWith<$Res> {
-  __$$_InstructionDetailsDTOCopyWithImpl(_$_InstructionDetailsDTO _value,
-      $Res Function(_$_InstructionDetailsDTO) _then)
+class __$$InstructionDetailsDTOImplCopyWithImpl<$Res>
+    extends _$InstructionDetailsDTOCopyWithImpl<$Res,
+        _$InstructionDetailsDTOImpl>
+    implements _$$InstructionDetailsDTOImplCopyWith<$Res> {
+  __$$InstructionDetailsDTOImplCopyWithImpl(_$InstructionDetailsDTOImpl _value,
+      $Res Function(_$InstructionDetailsDTOImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -471,7 +473,7 @@ class __$$_InstructionDetailsDTOCopyWithImpl<$Res>
     Object? instructionType = null,
     Object? instructions = null,
   }) {
-    return _then(_$_InstructionDetailsDTO(
+    return _then(_$InstructionDetailsDTOImpl(
       instructionType: null == instructionType
           ? _value.instructionType
           : instructionType // ignore: cast_nullable_to_non_nullable
@@ -486,8 +488,8 @@ class __$$_InstructionDetailsDTOCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_InstructionDetailsDTO extends _InstructionDetailsDTO {
-  const _$_InstructionDetailsDTO(
+class _$InstructionDetailsDTOImpl extends _InstructionDetailsDTO {
+  const _$InstructionDetailsDTOImpl(
       {@JsonKey(name: 'instructionType', defaultValue: '')
       required this.instructionType,
       @JsonKey(name: 'instructions', defaultValue: [])
@@ -495,8 +497,8 @@ class _$_InstructionDetailsDTO extends _InstructionDetailsDTO {
       : _instructions = instructions,
         super._();
 
-  factory _$_InstructionDetailsDTO.fromJson(Map<String, dynamic> json) =>
-      _$$_InstructionDetailsDTOFromJson(json);
+  factory _$InstructionDetailsDTOImpl.fromJson(Map<String, dynamic> json) =>
+      _$$InstructionDetailsDTOImplFromJson(json);
 
   @override
   @JsonKey(name: 'instructionType', defaultValue: '')
@@ -516,10 +518,10 @@ class _$_InstructionDetailsDTO extends _InstructionDetailsDTO {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_InstructionDetailsDTO &&
+            other is _$InstructionDetailsDTOImpl &&
             (identical(other.instructionType, instructionType) ||
                 other.instructionType == instructionType) &&
             const DeepCollectionEquality()
@@ -534,13 +536,13 @@ class _$_InstructionDetailsDTO extends _InstructionDetailsDTO {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_InstructionDetailsDTOCopyWith<_$_InstructionDetailsDTO> get copyWith =>
-      __$$_InstructionDetailsDTOCopyWithImpl<_$_InstructionDetailsDTO>(
-          this, _$identity);
+  _$$InstructionDetailsDTOImplCopyWith<_$InstructionDetailsDTOImpl>
+      get copyWith => __$$InstructionDetailsDTOImplCopyWithImpl<
+          _$InstructionDetailsDTOImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_InstructionDetailsDTOToJson(
+    return _$$InstructionDetailsDTOImplToJson(
       this,
     );
   }
@@ -551,11 +553,11 @@ abstract class _InstructionDetailsDTO extends InstructionDetailsDTO {
       {@JsonKey(name: 'instructionType', defaultValue: '')
       required final String instructionType,
       @JsonKey(name: 'instructions', defaultValue: [])
-      required final List<String> instructions}) = _$_InstructionDetailsDTO;
+      required final List<String> instructions}) = _$InstructionDetailsDTOImpl;
   const _InstructionDetailsDTO._() : super._();
 
   factory _InstructionDetailsDTO.fromJson(Map<String, dynamic> json) =
-      _$_InstructionDetailsDTO.fromJson;
+      _$InstructionDetailsDTOImpl.fromJson;
 
   @override
   @JsonKey(name: 'instructionType', defaultValue: '')
@@ -565,6 +567,6 @@ abstract class _InstructionDetailsDTO extends InstructionDetailsDTO {
   List<String> get instructions;
   @override
   @JsonKey(ignore: true)
-  _$$_InstructionDetailsDTOCopyWith<_$_InstructionDetailsDTO> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$InstructionDetailsDTOImplCopyWith<_$InstructionDetailsDTOImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }

@@ -12,7 +12,7 @@ part of 'license_dto.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 LicenseDto _$LicenseDtoFromJson(Map<String, dynamic> json) {
   return _licenseDto.fromJson(json);
@@ -107,11 +107,11 @@ class _$LicenseDtoCopyWithImpl<$Res, $Val extends LicenseDto>
 }
 
 /// @nodoc
-abstract class _$$_licenseDtoCopyWith<$Res>
+abstract class _$$licenseDtoImplCopyWith<$Res>
     implements $LicenseDtoCopyWith<$Res> {
-  factory _$$_licenseDtoCopyWith(
-          _$_licenseDto value, $Res Function(_$_licenseDto) then) =
-      __$$_licenseDtoCopyWithImpl<$Res>;
+  factory _$$licenseDtoImplCopyWith(
+          _$licenseDtoImpl value, $Res Function(_$licenseDtoImpl) then) =
+      __$$licenseDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -132,11 +132,11 @@ abstract class _$$_licenseDtoCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_licenseDtoCopyWithImpl<$Res>
-    extends _$LicenseDtoCopyWithImpl<$Res, _$_licenseDto>
-    implements _$$_licenseDtoCopyWith<$Res> {
-  __$$_licenseDtoCopyWithImpl(
-      _$_licenseDto _value, $Res Function(_$_licenseDto) _then)
+class __$$licenseDtoImplCopyWithImpl<$Res>
+    extends _$LicenseDtoCopyWithImpl<$Res, _$licenseDtoImpl>
+    implements _$$licenseDtoImplCopyWith<$Res> {
+  __$$licenseDtoImplCopyWithImpl(
+      _$licenseDtoImpl _value, $Res Function(_$licenseDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -148,7 +148,7 @@ class __$$_licenseDtoCopyWithImpl<$Res>
     Object? validFrom = null,
     Object? validTo = null,
   }) {
-    return _then(_$_licenseDto(
+    return _then(_$licenseDtoImpl(
       licenceType: null == licenceType
           ? _value.licenceType
           : licenceType // ignore: cast_nullable_to_non_nullable
@@ -175,8 +175,8 @@ class __$$_licenseDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_licenseDto extends _licenseDto {
-  const _$_licenseDto(
+class _$licenseDtoImpl extends _licenseDto {
+  const _$licenseDtoImpl(
       {@JsonKey(name: 'licenceType', defaultValue: '')
       required this.licenceType,
       @JsonKey(name: 'licenseDescription', defaultValue: '')
@@ -195,8 +195,8 @@ class _$_licenseDto extends _licenseDto {
       required this.validTo})
       : super._();
 
-  factory _$_licenseDto.fromJson(Map<String, dynamic> json) =>
-      _$$_licenseDtoFromJson(json);
+  factory _$licenseDtoImpl.fromJson(Map<String, dynamic> json) =>
+      _$$licenseDtoImplFromJson(json);
 
   @override
   @JsonKey(name: 'licenceType', defaultValue: '')
@@ -222,10 +222,10 @@ class _$_licenseDto extends _licenseDto {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_licenseDto &&
+            other is _$licenseDtoImpl &&
             (identical(other.licenceType, licenceType) ||
                 other.licenceType == licenceType) &&
             (identical(other.licenseDescription, licenseDescription) ||
@@ -245,12 +245,12 @@ class _$_licenseDto extends _licenseDto {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_licenseDtoCopyWith<_$_licenseDto> get copyWith =>
-      __$$_licenseDtoCopyWithImpl<_$_licenseDto>(this, _$identity);
+  _$$licenseDtoImplCopyWith<_$licenseDtoImpl> get copyWith =>
+      __$$licenseDtoImplCopyWithImpl<_$licenseDtoImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_licenseDtoToJson(
+    return _$$licenseDtoImplToJson(
       this,
     );
   }
@@ -273,11 +273,11 @@ abstract class _licenseDto extends LicenseDto {
           name: 'validTo',
           defaultValue: '',
           readValue: dateTimeStringFormatCheck)
-      required final String validTo}) = _$_licenseDto;
+      required final String validTo}) = _$licenseDtoImpl;
   const _licenseDto._() : super._();
 
   factory _licenseDto.fromJson(Map<String, dynamic> json) =
-      _$_licenseDto.fromJson;
+      _$licenseDtoImpl.fromJson;
 
   @override
   @JsonKey(name: 'licenceType', defaultValue: '')
@@ -298,6 +298,6 @@ abstract class _licenseDto extends LicenseDto {
   String get validTo;
   @override
   @JsonKey(ignore: true)
-  _$$_licenseDtoCopyWith<_$_licenseDto> get copyWith =>
+  _$$licenseDtoImplCopyWith<_$licenseDtoImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

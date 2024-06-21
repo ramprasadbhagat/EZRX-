@@ -12,7 +12,7 @@ part of 'mp_remote_config.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$MPRemoteConfig {
@@ -57,22 +57,22 @@ class _$MPRemoteConfigCopyWithImpl<$Res, $Val extends MPRemoteConfig>
 }
 
 /// @nodoc
-abstract class _$$_MPRemoteConfigCopyWith<$Res>
+abstract class _$$MPRemoteConfigImplCopyWith<$Res>
     implements $MPRemoteConfigCopyWith<$Res> {
-  factory _$$_MPRemoteConfigCopyWith(
-          _$_MPRemoteConfig value, $Res Function(_$_MPRemoteConfig) then) =
-      __$$_MPRemoteConfigCopyWithImpl<$Res>;
+  factory _$$MPRemoteConfigImplCopyWith(_$MPRemoteConfigImpl value,
+          $Res Function(_$MPRemoteConfigImpl) then) =
+      __$$MPRemoteConfigImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({List<String> whiteList});
 }
 
 /// @nodoc
-class __$$_MPRemoteConfigCopyWithImpl<$Res>
-    extends _$MPRemoteConfigCopyWithImpl<$Res, _$_MPRemoteConfig>
-    implements _$$_MPRemoteConfigCopyWith<$Res> {
-  __$$_MPRemoteConfigCopyWithImpl(
-      _$_MPRemoteConfig _value, $Res Function(_$_MPRemoteConfig) _then)
+class __$$MPRemoteConfigImplCopyWithImpl<$Res>
+    extends _$MPRemoteConfigCopyWithImpl<$Res, _$MPRemoteConfigImpl>
+    implements _$$MPRemoteConfigImplCopyWith<$Res> {
+  __$$MPRemoteConfigImplCopyWithImpl(
+      _$MPRemoteConfigImpl _value, $Res Function(_$MPRemoteConfigImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -80,7 +80,7 @@ class __$$_MPRemoteConfigCopyWithImpl<$Res>
   $Res call({
     Object? whiteList = null,
   }) {
-    return _then(_$_MPRemoteConfig(
+    return _then(_$MPRemoteConfigImpl(
       whiteList: null == whiteList
           ? _value._whiteList
           : whiteList // ignore: cast_nullable_to_non_nullable
@@ -91,8 +91,8 @@ class __$$_MPRemoteConfigCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_MPRemoteConfig extends _MPRemoteConfig {
-  const _$_MPRemoteConfig({required final List<String> whiteList})
+class _$MPRemoteConfigImpl extends _MPRemoteConfig {
+  const _$MPRemoteConfigImpl({required final List<String> whiteList})
       : _whiteList = whiteList,
         super._();
 
@@ -110,10 +110,10 @@ class _$_MPRemoteConfig extends _MPRemoteConfig {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_MPRemoteConfig &&
+            other is _$MPRemoteConfigImpl &&
             const DeepCollectionEquality()
                 .equals(other._whiteList, _whiteList));
   }
@@ -125,19 +125,20 @@ class _$_MPRemoteConfig extends _MPRemoteConfig {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_MPRemoteConfigCopyWith<_$_MPRemoteConfig> get copyWith =>
-      __$$_MPRemoteConfigCopyWithImpl<_$_MPRemoteConfig>(this, _$identity);
+  _$$MPRemoteConfigImplCopyWith<_$MPRemoteConfigImpl> get copyWith =>
+      __$$MPRemoteConfigImplCopyWithImpl<_$MPRemoteConfigImpl>(
+          this, _$identity);
 }
 
 abstract class _MPRemoteConfig extends MPRemoteConfig {
   const factory _MPRemoteConfig({required final List<String> whiteList}) =
-      _$_MPRemoteConfig;
+      _$MPRemoteConfigImpl;
   const _MPRemoteConfig._() : super._();
 
   @override
   List<String> get whiteList;
   @override
   @JsonKey(ignore: true)
-  _$$_MPRemoteConfigCopyWith<_$_MPRemoteConfig> get copyWith =>
+  _$$MPRemoteConfigImplCopyWith<_$MPRemoteConfigImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -12,7 +12,7 @@ part of 'soa_filter.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$SoaFilter {
@@ -62,21 +62,22 @@ class _$SoaFilterCopyWithImpl<$Res, $Val extends SoaFilter>
 }
 
 /// @nodoc
-abstract class _$$_SoaFilterCopyWith<$Res> implements $SoaFilterCopyWith<$Res> {
-  factory _$$_SoaFilterCopyWith(
-          _$_SoaFilter value, $Res Function(_$_SoaFilter) then) =
-      __$$_SoaFilterCopyWithImpl<$Res>;
+abstract class _$$SoaFilterImplCopyWith<$Res>
+    implements $SoaFilterCopyWith<$Res> {
+  factory _$$SoaFilterImplCopyWith(
+          _$SoaFilterImpl value, $Res Function(_$SoaFilterImpl) then) =
+      __$$SoaFilterImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({DateTimeStringValue toDate, DateTimeStringValue fromDate});
 }
 
 /// @nodoc
-class __$$_SoaFilterCopyWithImpl<$Res>
-    extends _$SoaFilterCopyWithImpl<$Res, _$_SoaFilter>
-    implements _$$_SoaFilterCopyWith<$Res> {
-  __$$_SoaFilterCopyWithImpl(
-      _$_SoaFilter _value, $Res Function(_$_SoaFilter) _then)
+class __$$SoaFilterImplCopyWithImpl<$Res>
+    extends _$SoaFilterCopyWithImpl<$Res, _$SoaFilterImpl>
+    implements _$$SoaFilterImplCopyWith<$Res> {
+  __$$SoaFilterImplCopyWithImpl(
+      _$SoaFilterImpl _value, $Res Function(_$SoaFilterImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -85,7 +86,7 @@ class __$$_SoaFilterCopyWithImpl<$Res>
     Object? toDate = null,
     Object? fromDate = null,
   }) {
-    return _then(_$_SoaFilter(
+    return _then(_$SoaFilterImpl(
       toDate: null == toDate
           ? _value.toDate
           : toDate // ignore: cast_nullable_to_non_nullable
@@ -100,8 +101,8 @@ class __$$_SoaFilterCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_SoaFilter extends _SoaFilter {
-  _$_SoaFilter({required this.toDate, required this.fromDate}) : super._();
+class _$SoaFilterImpl extends _SoaFilter {
+  _$SoaFilterImpl({required this.toDate, required this.fromDate}) : super._();
 
   @override
   final DateTimeStringValue toDate;
@@ -114,10 +115,10 @@ class _$_SoaFilter extends _SoaFilter {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_SoaFilter &&
+            other is _$SoaFilterImpl &&
             (identical(other.toDate, toDate) || other.toDate == toDate) &&
             (identical(other.fromDate, fromDate) ||
                 other.fromDate == fromDate));
@@ -129,14 +130,14 @@ class _$_SoaFilter extends _SoaFilter {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_SoaFilterCopyWith<_$_SoaFilter> get copyWith =>
-      __$$_SoaFilterCopyWithImpl<_$_SoaFilter>(this, _$identity);
+  _$$SoaFilterImplCopyWith<_$SoaFilterImpl> get copyWith =>
+      __$$SoaFilterImplCopyWithImpl<_$SoaFilterImpl>(this, _$identity);
 }
 
 abstract class _SoaFilter extends SoaFilter {
   factory _SoaFilter(
       {required final DateTimeStringValue toDate,
-      required final DateTimeStringValue fromDate}) = _$_SoaFilter;
+      required final DateTimeStringValue fromDate}) = _$SoaFilterImpl;
   _SoaFilter._() : super._();
 
   @override
@@ -145,6 +146,6 @@ abstract class _SoaFilter extends SoaFilter {
   DateTimeStringValue get fromDate;
   @override
   @JsonKey(ignore: true)
-  _$$_SoaFilterCopyWith<_$_SoaFilter> get copyWith =>
+  _$$SoaFilterImplCopyWith<_$SoaFilterImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

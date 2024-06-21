@@ -12,7 +12,7 @@ part of 'bundle.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$Bundle {
@@ -91,9 +91,10 @@ class _$BundleCopyWithImpl<$Res, $Val extends Bundle>
 }
 
 /// @nodoc
-abstract class _$$_BundleCopyWith<$Res> implements $BundleCopyWith<$Res> {
-  factory _$$_BundleCopyWith(_$_Bundle value, $Res Function(_$_Bundle) then) =
-      __$$_BundleCopyWithImpl<$Res>;
+abstract class _$$BundleImplCopyWith<$Res> implements $BundleCopyWith<$Res> {
+  factory _$$BundleImplCopyWith(
+          _$BundleImpl value, $Res Function(_$BundleImpl) then) =
+      __$$BundleImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -106,10 +107,11 @@ abstract class _$$_BundleCopyWith<$Res> implements $BundleCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_BundleCopyWithImpl<$Res>
-    extends _$BundleCopyWithImpl<$Res, _$_Bundle>
-    implements _$$_BundleCopyWith<$Res> {
-  __$$_BundleCopyWithImpl(_$_Bundle _value, $Res Function(_$_Bundle) _then)
+class __$$BundleImplCopyWithImpl<$Res>
+    extends _$BundleCopyWithImpl<$Res, _$BundleImpl>
+    implements _$$BundleImplCopyWith<$Res> {
+  __$$BundleImplCopyWithImpl(
+      _$BundleImpl _value, $Res Function(_$BundleImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -122,7 +124,7 @@ class __$$_BundleCopyWithImpl<$Res>
     Object? conditions = null,
     Object? bonusEligible = null,
   }) {
-    return _then(_$_Bundle(
+    return _then(_$BundleImpl(
       bundleName: null == bundleName
           ? _value.bundleName
           : bundleName // ignore: cast_nullable_to_non_nullable
@@ -153,8 +155,8 @@ class __$$_BundleCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_Bundle extends _Bundle {
-  const _$_Bundle(
+class _$BundleImpl extends _Bundle {
+  const _$BundleImpl(
       {required this.bundleName,
       required final List<MaterialInfo> materials,
       required this.bundleCode,
@@ -197,10 +199,10 @@ class _$_Bundle extends _Bundle {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Bundle &&
+            other is _$BundleImpl &&
             (identical(other.bundleName, bundleName) ||
                 other.bundleName == bundleName) &&
             const DeepCollectionEquality()
@@ -228,8 +230,8 @@ class _$_Bundle extends _Bundle {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_BundleCopyWith<_$_Bundle> get copyWith =>
-      __$$_BundleCopyWithImpl<_$_Bundle>(this, _$identity);
+  _$$BundleImplCopyWith<_$BundleImpl> get copyWith =>
+      __$$BundleImplCopyWithImpl<_$BundleImpl>(this, _$identity);
 }
 
 abstract class _Bundle extends Bundle {
@@ -239,7 +241,7 @@ abstract class _Bundle extends Bundle {
       required final String bundleCode,
       required final List<BundleInfo> bundleInformation,
       required final String conditions,
-      required final bool bonusEligible}) = _$_Bundle;
+      required final bool bonusEligible}) = _$BundleImpl;
   const _Bundle._() : super._();
 
   @override
@@ -256,6 +258,6 @@ abstract class _Bundle extends Bundle {
   bool get bonusEligible;
   @override
   @JsonKey(ignore: true)
-  _$$_BundleCopyWith<_$_Bundle> get copyWith =>
+  _$$BundleImplCopyWith<_$BundleImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

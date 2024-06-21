@@ -12,7 +12,7 @@ part of 'principal_cutoffs.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$PrincipalCutoffs {
@@ -57,22 +57,22 @@ class _$PrincipalCutoffsCopyWithImpl<$Res, $Val extends PrincipalCutoffs>
 }
 
 /// @nodoc
-abstract class _$$_PrincipalCutoffsCopyWith<$Res>
+abstract class _$$PrincipalCutoffsImplCopyWith<$Res>
     implements $PrincipalCutoffsCopyWith<$Res> {
-  factory _$$_PrincipalCutoffsCopyWith(
-          _$_PrincipalCutoffs value, $Res Function(_$_PrincipalCutoffs) then) =
-      __$$_PrincipalCutoffsCopyWithImpl<$Res>;
+  factory _$$PrincipalCutoffsImplCopyWith(_$PrincipalCutoffsImpl value,
+          $Res Function(_$PrincipalCutoffsImpl) then) =
+      __$$PrincipalCutoffsImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({int total});
 }
 
 /// @nodoc
-class __$$_PrincipalCutoffsCopyWithImpl<$Res>
-    extends _$PrincipalCutoffsCopyWithImpl<$Res, _$_PrincipalCutoffs>
-    implements _$$_PrincipalCutoffsCopyWith<$Res> {
-  __$$_PrincipalCutoffsCopyWithImpl(
-      _$_PrincipalCutoffs _value, $Res Function(_$_PrincipalCutoffs) _then)
+class __$$PrincipalCutoffsImplCopyWithImpl<$Res>
+    extends _$PrincipalCutoffsCopyWithImpl<$Res, _$PrincipalCutoffsImpl>
+    implements _$$PrincipalCutoffsImplCopyWith<$Res> {
+  __$$PrincipalCutoffsImplCopyWithImpl(_$PrincipalCutoffsImpl _value,
+      $Res Function(_$PrincipalCutoffsImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -80,7 +80,7 @@ class __$$_PrincipalCutoffsCopyWithImpl<$Res>
   $Res call({
     Object? total = null,
   }) {
-    return _then(_$_PrincipalCutoffs(
+    return _then(_$PrincipalCutoffsImpl(
       total: null == total
           ? _value.total
           : total // ignore: cast_nullable_to_non_nullable
@@ -91,8 +91,8 @@ class __$$_PrincipalCutoffsCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_PrincipalCutoffs extends _PrincipalCutoffs {
-  const _$_PrincipalCutoffs({required this.total}) : super._();
+class _$PrincipalCutoffsImpl extends _PrincipalCutoffs {
+  const _$PrincipalCutoffsImpl({required this.total}) : super._();
 
   @override
   final int total;
@@ -103,10 +103,10 @@ class _$_PrincipalCutoffs extends _PrincipalCutoffs {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_PrincipalCutoffs &&
+            other is _$PrincipalCutoffsImpl &&
             (identical(other.total, total) || other.total == total));
   }
 
@@ -116,19 +116,20 @@ class _$_PrincipalCutoffs extends _PrincipalCutoffs {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_PrincipalCutoffsCopyWith<_$_PrincipalCutoffs> get copyWith =>
-      __$$_PrincipalCutoffsCopyWithImpl<_$_PrincipalCutoffs>(this, _$identity);
+  _$$PrincipalCutoffsImplCopyWith<_$PrincipalCutoffsImpl> get copyWith =>
+      __$$PrincipalCutoffsImplCopyWithImpl<_$PrincipalCutoffsImpl>(
+          this, _$identity);
 }
 
 abstract class _PrincipalCutoffs extends PrincipalCutoffs {
   const factory _PrincipalCutoffs({required final int total}) =
-      _$_PrincipalCutoffs;
+      _$PrincipalCutoffsImpl;
   const _PrincipalCutoffs._() : super._();
 
   @override
   int get total;
   @override
   @JsonKey(ignore: true)
-  _$$_PrincipalCutoffsCopyWith<_$_PrincipalCutoffs> get copyWith =>
+  _$$PrincipalCutoffsImplCopyWith<_$PrincipalCutoffsImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

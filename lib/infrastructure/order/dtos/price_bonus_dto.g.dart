@@ -6,8 +6,8 @@ part of 'price_bonus_dto.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_PriceBonusDto _$$_PriceBonusDtoFromJson(Map<String, dynamic> json) =>
-    _$_PriceBonusDto(
+_$PriceBonusDtoImpl _$$PriceBonusDtoImplFromJson(Map<String, dynamic> json) =>
+    _$PriceBonusDtoImpl(
       items: (json['bonusTiers'] as List<dynamic>?)
               ?.map(
                   (e) => PriceBonusItemDto.fromJson(e as Map<String, dynamic>))
@@ -15,44 +15,47 @@ _$_PriceBonusDto _$$_PriceBonusDtoFromJson(Map<String, dynamic> json) =>
           [],
     );
 
-Map<String, dynamic> _$$_PriceBonusDtoToJson(_$_PriceBonusDto instance) =>
+Map<String, dynamic> _$$PriceBonusDtoImplToJson(_$PriceBonusDtoImpl instance) =>
     <String, dynamic>{
       'bonusTiers': instance.items.map((e) => e.toJson()).toList(),
     };
 
-_$_PriceBonusItemDto _$$_PriceBonusItemDtoFromJson(Map<String, dynamic> json) =>
-    _$_PriceBonusItemDto(
+_$PriceBonusItemDtoImpl _$$PriceBonusItemDtoImplFromJson(
+        Map<String, dynamic> json) =>
+    _$PriceBonusItemDtoImpl(
       calculation: json['calculation'] as String? ?? '',
-      qualifyingQuantity: json['qualifyingQuantity'] as int? ?? 0,
+      qualifyingQuantity: (json['qualifyingQuantity'] as num?)?.toInt() ?? 0,
       bonusMaterials: (json['bonusMaterial'] as List<dynamic>?)
               ?.map((e) => BonusMaterialDto.fromJson(e as Map<String, dynamic>))
               .toList() ??
           [],
     );
 
-Map<String, dynamic> _$$_PriceBonusItemDtoToJson(
-        _$_PriceBonusItemDto instance) =>
+Map<String, dynamic> _$$PriceBonusItemDtoImplToJson(
+        _$PriceBonusItemDtoImpl instance) =>
     <String, dynamic>{
       'calculation': instance.calculation,
       'qualifyingQuantity': instance.qualifyingQuantity,
       'bonusMaterial': instance.bonusMaterials.map((e) => e.toJson()).toList(),
     };
 
-_$_BonusMaterialDto _$$_BonusMaterialDtoFromJson(Map<String, dynamic> json) =>
-    _$_BonusMaterialDto(
-      id: json['id'] as int? ?? 0,
+_$BonusMaterialDtoImpl _$$BonusMaterialDtoImplFromJson(
+        Map<String, dynamic> json) =>
+    _$BonusMaterialDtoImpl(
+      id: (json['id'] as num?)?.toInt() ?? 0,
       materialNumber: json['materialNumber'] as String? ?? '',
       materialDescription: json['materialDescription'] as String? ?? '',
       calculation: json['calculation'] as String? ?? '',
-      bonusRatio: json['bonusRatio'] as int? ?? 0,
-      qualifyingQuantity: json['qualifyingQuantity'] as int? ?? 0,
-      bonusQuantity: json['bonusQuantity'] as int? ?? 0,
-      limitPerTransaction: json['limitPerTransaction'] as int? ?? 0,
+      bonusRatio: (json['bonusRatio'] as num?)?.toInt() ?? 0,
+      qualifyingQuantity: (json['qualifyingQuantity'] as num?)?.toInt() ?? 0,
+      bonusQuantity: (json['bonusQuantity'] as num?)?.toInt() ?? 0,
+      limitPerTransaction: (json['limitPerTransaction'] as num?)?.toInt() ?? 0,
       conditionId: json['conditionId'] as String? ?? '',
       oldMaterialCode: json['oldMaterialCode'] as String? ?? '',
     );
 
-Map<String, dynamic> _$$_BonusMaterialDtoToJson(_$_BonusMaterialDto instance) =>
+Map<String, dynamic> _$$BonusMaterialDtoImplToJson(
+        _$BonusMaterialDtoImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'materialNumber': instance.materialNumber,

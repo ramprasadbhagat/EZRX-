@@ -12,7 +12,7 @@ part of 'usage_code_bloc.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$UsageCodeEvent {
@@ -75,25 +75,25 @@ class _$UsageCodeEventCopyWithImpl<$Res, $Val extends UsageCodeEvent>
 }
 
 /// @nodoc
-abstract class _$$_InitializedCopyWith<$Res> {
-  factory _$$_InitializedCopyWith(
-          _$_Initialized value, $Res Function(_$_Initialized) then) =
-      __$$_InitializedCopyWithImpl<$Res>;
+abstract class _$$InitializedImplCopyWith<$Res> {
+  factory _$$InitializedImplCopyWith(
+          _$InitializedImpl value, $Res Function(_$InitializedImpl) then) =
+      __$$InitializedImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_InitializedCopyWithImpl<$Res>
-    extends _$UsageCodeEventCopyWithImpl<$Res, _$_Initialized>
-    implements _$$_InitializedCopyWith<$Res> {
-  __$$_InitializedCopyWithImpl(
-      _$_Initialized _value, $Res Function(_$_Initialized) _then)
+class __$$InitializedImplCopyWithImpl<$Res>
+    extends _$UsageCodeEventCopyWithImpl<$Res, _$InitializedImpl>
+    implements _$$InitializedImplCopyWith<$Res> {
+  __$$InitializedImplCopyWithImpl(
+      _$InitializedImpl _value, $Res Function(_$InitializedImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_Initialized implements _Initialized {
-  const _$_Initialized();
+class _$InitializedImpl implements _Initialized {
+  const _$InitializedImpl();
 
   @override
   String toString() {
@@ -101,9 +101,9 @@ class _$_Initialized implements _Initialized {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_Initialized);
+        (other.runtimeType == runtimeType && other is _$InitializedImpl);
   }
 
   @override
@@ -173,22 +173,24 @@ class _$_Initialized implements _Initialized {
 }
 
 abstract class _Initialized implements UsageCodeEvent {
-  const factory _Initialized() = _$_Initialized;
+  const factory _Initialized() = _$InitializedImpl;
 }
 
 /// @nodoc
-abstract class _$$_FetchCopyWith<$Res> {
-  factory _$$_FetchCopyWith(_$_Fetch value, $Res Function(_$_Fetch) then) =
-      __$$_FetchCopyWithImpl<$Res>;
+abstract class _$$FetchImplCopyWith<$Res> {
+  factory _$$FetchImplCopyWith(
+          _$FetchImpl value, $Res Function(_$FetchImpl) then) =
+      __$$FetchImplCopyWithImpl<$Res>;
   @useResult
   $Res call({SalesOrg salesOrg});
 }
 
 /// @nodoc
-class __$$_FetchCopyWithImpl<$Res>
-    extends _$UsageCodeEventCopyWithImpl<$Res, _$_Fetch>
-    implements _$$_FetchCopyWith<$Res> {
-  __$$_FetchCopyWithImpl(_$_Fetch _value, $Res Function(_$_Fetch) _then)
+class __$$FetchImplCopyWithImpl<$Res>
+    extends _$UsageCodeEventCopyWithImpl<$Res, _$FetchImpl>
+    implements _$$FetchImplCopyWith<$Res> {
+  __$$FetchImplCopyWithImpl(
+      _$FetchImpl _value, $Res Function(_$FetchImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -196,7 +198,7 @@ class __$$_FetchCopyWithImpl<$Res>
   $Res call({
     Object? salesOrg = null,
   }) {
-    return _then(_$_Fetch(
+    return _then(_$FetchImpl(
       salesOrg: null == salesOrg
           ? _value.salesOrg
           : salesOrg // ignore: cast_nullable_to_non_nullable
@@ -207,8 +209,8 @@ class __$$_FetchCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_Fetch implements _Fetch {
-  const _$_Fetch({required this.salesOrg});
+class _$FetchImpl implements _Fetch {
+  const _$FetchImpl({required this.salesOrg});
 
   @override
   final SalesOrg salesOrg;
@@ -219,10 +221,10 @@ class _$_Fetch implements _Fetch {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Fetch &&
+            other is _$FetchImpl &&
             (identical(other.salesOrg, salesOrg) ||
                 other.salesOrg == salesOrg));
   }
@@ -233,8 +235,8 @@ class _$_Fetch implements _Fetch {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_FetchCopyWith<_$_Fetch> get copyWith =>
-      __$$_FetchCopyWithImpl<_$_Fetch>(this, _$identity);
+  _$$FetchImplCopyWith<_$FetchImpl> get copyWith =>
+      __$$FetchImplCopyWithImpl<_$FetchImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -300,11 +302,11 @@ class _$_Fetch implements _Fetch {
 }
 
 abstract class _Fetch implements UsageCodeEvent {
-  const factory _Fetch({required final SalesOrg salesOrg}) = _$_Fetch;
+  const factory _Fetch({required final SalesOrg salesOrg}) = _$FetchImpl;
 
   SalesOrg get salesOrg;
   @JsonKey(ignore: true)
-  _$$_FetchCopyWith<_$_Fetch> get copyWith =>
+  _$$FetchImplCopyWith<_$FetchImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -360,11 +362,11 @@ class _$UsageCodeStateCopyWithImpl<$Res, $Val extends UsageCodeState>
 }
 
 /// @nodoc
-abstract class _$$_UsageCodeStateCopyWith<$Res>
+abstract class _$$UsageCodeStateImplCopyWith<$Res>
     implements $UsageCodeStateCopyWith<$Res> {
-  factory _$$_UsageCodeStateCopyWith(
-          _$_UsageCodeState value, $Res Function(_$_UsageCodeState) then) =
-      __$$_UsageCodeStateCopyWithImpl<$Res>;
+  factory _$$UsageCodeStateImplCopyWith(_$UsageCodeStateImpl value,
+          $Res Function(_$UsageCodeStateImpl) then) =
+      __$$UsageCodeStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -373,11 +375,11 @@ abstract class _$$_UsageCodeStateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_UsageCodeStateCopyWithImpl<$Res>
-    extends _$UsageCodeStateCopyWithImpl<$Res, _$_UsageCodeState>
-    implements _$$_UsageCodeStateCopyWith<$Res> {
-  __$$_UsageCodeStateCopyWithImpl(
-      _$_UsageCodeState _value, $Res Function(_$_UsageCodeState) _then)
+class __$$UsageCodeStateImplCopyWithImpl<$Res>
+    extends _$UsageCodeStateCopyWithImpl<$Res, _$UsageCodeStateImpl>
+    implements _$$UsageCodeStateImplCopyWith<$Res> {
+  __$$UsageCodeStateImplCopyWithImpl(
+      _$UsageCodeStateImpl _value, $Res Function(_$UsageCodeStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -386,7 +388,7 @@ class __$$_UsageCodeStateCopyWithImpl<$Res>
     Object? usages = null,
     Object? failureOrSuccessOption = null,
   }) {
-    return _then(_$_UsageCodeState(
+    return _then(_$UsageCodeStateImpl(
       usages: null == usages
           ? _value._usages
           : usages // ignore: cast_nullable_to_non_nullable
@@ -401,8 +403,8 @@ class __$$_UsageCodeStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_UsageCodeState extends _UsageCodeState {
-  const _$_UsageCodeState(
+class _$UsageCodeStateImpl extends _UsageCodeState {
+  const _$UsageCodeStateImpl(
       {required final List<Usage> usages, required this.failureOrSuccessOption})
       : _usages = usages,
         super._();
@@ -424,10 +426,10 @@ class _$_UsageCodeState extends _UsageCodeState {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_UsageCodeState &&
+            other is _$UsageCodeStateImpl &&
             const DeepCollectionEquality().equals(other._usages, _usages) &&
             (identical(other.failureOrSuccessOption, failureOrSuccessOption) ||
                 other.failureOrSuccessOption == failureOrSuccessOption));
@@ -440,15 +442,16 @@ class _$_UsageCodeState extends _UsageCodeState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_UsageCodeStateCopyWith<_$_UsageCodeState> get copyWith =>
-      __$$_UsageCodeStateCopyWithImpl<_$_UsageCodeState>(this, _$identity);
+  _$$UsageCodeStateImplCopyWith<_$UsageCodeStateImpl> get copyWith =>
+      __$$UsageCodeStateImplCopyWithImpl<_$UsageCodeStateImpl>(
+          this, _$identity);
 }
 
 abstract class _UsageCodeState extends UsageCodeState {
   const factory _UsageCodeState(
       {required final List<Usage> usages,
       required final Option<Either<ApiFailure, dynamic>>
-          failureOrSuccessOption}) = _$_UsageCodeState;
+          failureOrSuccessOption}) = _$UsageCodeStateImpl;
   const _UsageCodeState._() : super._();
 
   @override
@@ -457,6 +460,6 @@ abstract class _UsageCodeState extends UsageCodeState {
   Option<Either<ApiFailure, dynamic>> get failureOrSuccessOption;
   @override
   @JsonKey(ignore: true)
-  _$$_UsageCodeStateCopyWith<_$_UsageCodeState> get copyWith =>
+  _$$UsageCodeStateImplCopyWith<_$UsageCodeStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

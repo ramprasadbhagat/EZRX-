@@ -12,7 +12,7 @@ part of 'customer_payment_filter_dto.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 CustomerPaymentFilterDto _$CustomerPaymentFilterDtoFromJson(
     Map<String, dynamic> json) {
@@ -85,12 +85,12 @@ class _$CustomerPaymentFilterDtoCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_CustomerPaymentFilterDtoCopyWith<$Res>
+abstract class _$$CustomerPaymentFilterDtoImplCopyWith<$Res>
     implements $CustomerPaymentFilterDtoCopyWith<$Res> {
-  factory _$$_CustomerPaymentFilterDtoCopyWith(
-          _$_CustomerPaymentFilterDto value,
-          $Res Function(_$_CustomerPaymentFilterDto) then) =
-      __$$_CustomerPaymentFilterDtoCopyWithImpl<$Res>;
+  factory _$$CustomerPaymentFilterDtoImplCopyWith(
+          _$CustomerPaymentFilterDtoImpl value,
+          $Res Function(_$CustomerPaymentFilterDtoImpl) then) =
+      __$$CustomerPaymentFilterDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -103,12 +103,13 @@ abstract class _$$_CustomerPaymentFilterDtoCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_CustomerPaymentFilterDtoCopyWithImpl<$Res>
+class __$$CustomerPaymentFilterDtoImplCopyWithImpl<$Res>
     extends _$CustomerPaymentFilterDtoCopyWithImpl<$Res,
-        _$_CustomerPaymentFilterDto>
-    implements _$$_CustomerPaymentFilterDtoCopyWith<$Res> {
-  __$$_CustomerPaymentFilterDtoCopyWithImpl(_$_CustomerPaymentFilterDto _value,
-      $Res Function(_$_CustomerPaymentFilterDto) _then)
+        _$CustomerPaymentFilterDtoImpl>
+    implements _$$CustomerPaymentFilterDtoImplCopyWith<$Res> {
+  __$$CustomerPaymentFilterDtoImplCopyWithImpl(
+      _$CustomerPaymentFilterDtoImpl _value,
+      $Res Function(_$CustomerPaymentFilterDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -118,7 +119,7 @@ class __$$_CustomerPaymentFilterDtoCopyWithImpl<$Res>
     Object? createdDateToday = null,
     Object? createdDateYesterday = null,
   }) {
-    return _then(_$_CustomerPaymentFilterDto(
+    return _then(_$CustomerPaymentFilterDtoImpl(
       paymentBatchAdditionalInfo: null == paymentBatchAdditionalInfo
           ? _value.paymentBatchAdditionalInfo
           : paymentBatchAdditionalInfo // ignore: cast_nullable_to_non_nullable
@@ -137,8 +138,8 @@ class __$$_CustomerPaymentFilterDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_CustomerPaymentFilterDto extends _CustomerPaymentFilterDto {
-  const _$_CustomerPaymentFilterDto(
+class _$CustomerPaymentFilterDtoImpl extends _CustomerPaymentFilterDto {
+  const _$CustomerPaymentFilterDtoImpl(
       {@JsonKey(name: 'paymentBatchAdditionalInfo', defaultValue: '')
       required this.paymentBatchAdditionalInfo,
       @JsonKey(name: 'createdDateToday', defaultValue: '')
@@ -147,8 +148,8 @@ class _$_CustomerPaymentFilterDto extends _CustomerPaymentFilterDto {
       required this.createdDateYesterday})
       : super._();
 
-  factory _$_CustomerPaymentFilterDto.fromJson(Map<String, dynamic> json) =>
-      _$$_CustomerPaymentFilterDtoFromJson(json);
+  factory _$CustomerPaymentFilterDtoImpl.fromJson(Map<String, dynamic> json) =>
+      _$$CustomerPaymentFilterDtoImplFromJson(json);
 
   @override
   @JsonKey(name: 'paymentBatchAdditionalInfo', defaultValue: '')
@@ -166,10 +167,10 @@ class _$_CustomerPaymentFilterDto extends _CustomerPaymentFilterDto {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_CustomerPaymentFilterDto &&
+            other is _$CustomerPaymentFilterDtoImpl &&
             (identical(other.paymentBatchAdditionalInfo,
                     paymentBatchAdditionalInfo) ||
                 other.paymentBatchAdditionalInfo ==
@@ -188,13 +189,13 @@ class _$_CustomerPaymentFilterDto extends _CustomerPaymentFilterDto {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_CustomerPaymentFilterDtoCopyWith<_$_CustomerPaymentFilterDto>
-      get copyWith => __$$_CustomerPaymentFilterDtoCopyWithImpl<
-          _$_CustomerPaymentFilterDto>(this, _$identity);
+  _$$CustomerPaymentFilterDtoImplCopyWith<_$CustomerPaymentFilterDtoImpl>
+      get copyWith => __$$CustomerPaymentFilterDtoImplCopyWithImpl<
+          _$CustomerPaymentFilterDtoImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_CustomerPaymentFilterDtoToJson(
+    return _$$CustomerPaymentFilterDtoImplToJson(
       this,
     );
   }
@@ -208,11 +209,11 @@ abstract class _CustomerPaymentFilterDto extends CustomerPaymentFilterDto {
           required final String createdDateToday,
           @JsonKey(name: 'createdDateYesterday', defaultValue: '')
           required final String createdDateYesterday}) =
-      _$_CustomerPaymentFilterDto;
+      _$CustomerPaymentFilterDtoImpl;
   const _CustomerPaymentFilterDto._() : super._();
 
   factory _CustomerPaymentFilterDto.fromJson(Map<String, dynamic> json) =
-      _$_CustomerPaymentFilterDto.fromJson;
+      _$CustomerPaymentFilterDtoImpl.fromJson;
 
   @override
   @JsonKey(name: 'paymentBatchAdditionalInfo', defaultValue: '')
@@ -225,6 +226,6 @@ abstract class _CustomerPaymentFilterDto extends CustomerPaymentFilterDto {
   String get createdDateYesterday;
   @override
   @JsonKey(ignore: true)
-  _$$_CustomerPaymentFilterDtoCopyWith<_$_CustomerPaymentFilterDto>
+  _$$CustomerPaymentFilterDtoImplCopyWith<_$CustomerPaymentFilterDtoImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

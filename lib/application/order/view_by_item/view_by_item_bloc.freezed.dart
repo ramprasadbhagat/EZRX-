@@ -12,7 +12,7 @@ part of 'view_by_item_bloc.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$ViewByItemsEvent {
@@ -113,10 +113,10 @@ class _$ViewByItemsEventCopyWithImpl<$Res, $Val extends ViewByItemsEvent>
 }
 
 /// @nodoc
-abstract class _$$_InitializedCopyWith<$Res> {
-  factory _$$_InitializedCopyWith(
-          _$_Initialized value, $Res Function(_$_Initialized) then) =
-      __$$_InitializedCopyWithImpl<$Res>;
+abstract class _$$InitializedImplCopyWith<$Res> {
+  factory _$$InitializedImplCopyWith(
+          _$InitializedImpl value, $Res Function(_$InitializedImpl) then) =
+      __$$InitializedImplCopyWithImpl<$Res>;
   @useResult
   $Res call(
       {SalesOrganisationConfigs salesOrgConfigs,
@@ -133,11 +133,11 @@ abstract class _$$_InitializedCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_InitializedCopyWithImpl<$Res>
-    extends _$ViewByItemsEventCopyWithImpl<$Res, _$_Initialized>
-    implements _$$_InitializedCopyWith<$Res> {
-  __$$_InitializedCopyWithImpl(
-      _$_Initialized _value, $Res Function(_$_Initialized) _then)
+class __$$InitializedImplCopyWithImpl<$Res>
+    extends _$ViewByItemsEventCopyWithImpl<$Res, _$InitializedImpl>
+    implements _$$InitializedImplCopyWith<$Res> {
+  __$$InitializedImplCopyWithImpl(
+      _$InitializedImpl _value, $Res Function(_$InitializedImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -149,7 +149,7 @@ class __$$_InitializedCopyWithImpl<$Res>
     Object? user = null,
     Object? salesOrganisation = null,
   }) {
-    return _then(_$_Initialized(
+    return _then(_$InitializedImpl(
       salesOrgConfigs: null == salesOrgConfigs
           ? _value.salesOrgConfigs
           : salesOrgConfigs // ignore: cast_nullable_to_non_nullable
@@ -217,8 +217,8 @@ class __$$_InitializedCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_Initialized implements _Initialized {
-  const _$_Initialized(
+class _$InitializedImpl implements _Initialized {
+  const _$InitializedImpl(
       {required this.salesOrgConfigs,
       required this.customerCodeInfo,
       required this.shipToInfo,
@@ -242,10 +242,10 @@ class _$_Initialized implements _Initialized {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Initialized &&
+            other is _$InitializedImpl &&
             (identical(other.salesOrgConfigs, salesOrgConfigs) ||
                 other.salesOrgConfigs == salesOrgConfigs) &&
             (identical(other.customerCodeInfo, customerCodeInfo) ||
@@ -264,8 +264,8 @@ class _$_Initialized implements _Initialized {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_InitializedCopyWith<_$_Initialized> get copyWith =>
-      __$$_InitializedCopyWithImpl<_$_Initialized>(this, _$identity);
+  _$$InitializedImplCopyWith<_$InitializedImpl> get copyWith =>
+      __$$InitializedImplCopyWithImpl<_$InitializedImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -377,7 +377,7 @@ abstract class _Initialized implements ViewByItemsEvent {
       required final CustomerCodeInfo customerCodeInfo,
       required final ShipToInfo shipToInfo,
       required final User user,
-      required final SalesOrganisation salesOrganisation}) = _$_Initialized;
+      required final SalesOrganisation salesOrganisation}) = _$InitializedImpl;
 
   SalesOrganisationConfigs get salesOrgConfigs;
   CustomerCodeInfo get customerCodeInfo;
@@ -385,14 +385,15 @@ abstract class _Initialized implements ViewByItemsEvent {
   User get user;
   SalesOrganisation get salesOrganisation;
   @JsonKey(ignore: true)
-  _$$_InitializedCopyWith<_$_Initialized> get copyWith =>
+  _$$InitializedImplCopyWith<_$InitializedImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_FetchCopyWith<$Res> {
-  factory _$$_FetchCopyWith(_$_Fetch value, $Res Function(_$_Fetch) then) =
-      __$$_FetchCopyWithImpl<$Res>;
+abstract class _$$FetchImplCopyWith<$Res> {
+  factory _$$FetchImplCopyWith(
+          _$FetchImpl value, $Res Function(_$FetchImpl) then) =
+      __$$FetchImplCopyWithImpl<$Res>;
   @useResult
   $Res call({ViewByItemFilter viewByItemFilter, SearchKey searchKey});
 
@@ -400,10 +401,11 @@ abstract class _$$_FetchCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_FetchCopyWithImpl<$Res>
-    extends _$ViewByItemsEventCopyWithImpl<$Res, _$_Fetch>
-    implements _$$_FetchCopyWith<$Res> {
-  __$$_FetchCopyWithImpl(_$_Fetch _value, $Res Function(_$_Fetch) _then)
+class __$$FetchImplCopyWithImpl<$Res>
+    extends _$ViewByItemsEventCopyWithImpl<$Res, _$FetchImpl>
+    implements _$$FetchImplCopyWith<$Res> {
+  __$$FetchImplCopyWithImpl(
+      _$FetchImpl _value, $Res Function(_$FetchImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -412,7 +414,7 @@ class __$$_FetchCopyWithImpl<$Res>
     Object? viewByItemFilter = null,
     Object? searchKey = null,
   }) {
-    return _then(_$_Fetch(
+    return _then(_$FetchImpl(
       viewByItemFilter: null == viewByItemFilter
           ? _value.viewByItemFilter
           : viewByItemFilter // ignore: cast_nullable_to_non_nullable
@@ -435,8 +437,8 @@ class __$$_FetchCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_Fetch implements _Fetch {
-  const _$_Fetch({required this.viewByItemFilter, required this.searchKey});
+class _$FetchImpl implements _Fetch {
+  const _$FetchImpl({required this.viewByItemFilter, required this.searchKey});
 
   @override
   final ViewByItemFilter viewByItemFilter;
@@ -449,10 +451,10 @@ class _$_Fetch implements _Fetch {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Fetch &&
+            other is _$FetchImpl &&
             (identical(other.viewByItemFilter, viewByItemFilter) ||
                 other.viewByItemFilter == viewByItemFilter) &&
             (identical(other.searchKey, searchKey) ||
@@ -465,8 +467,8 @@ class _$_Fetch implements _Fetch {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_FetchCopyWith<_$_Fetch> get copyWith =>
-      __$$_FetchCopyWithImpl<_$_Fetch>(this, _$identity);
+  _$$FetchImplCopyWith<_$FetchImpl> get copyWith =>
+      __$$FetchImplCopyWithImpl<_$FetchImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -572,35 +574,35 @@ class _$_Fetch implements _Fetch {
 abstract class _Fetch implements ViewByItemsEvent {
   const factory _Fetch(
       {required final ViewByItemFilter viewByItemFilter,
-      required final SearchKey searchKey}) = _$_Fetch;
+      required final SearchKey searchKey}) = _$FetchImpl;
 
   ViewByItemFilter get viewByItemFilter;
   SearchKey get searchKey;
   @JsonKey(ignore: true)
-  _$$_FetchCopyWith<_$_Fetch> get copyWith =>
+  _$$FetchImplCopyWith<_$FetchImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_LoadMoreCopyWith<$Res> {
-  factory _$$_LoadMoreCopyWith(
-          _$_LoadMore value, $Res Function(_$_LoadMore) then) =
-      __$$_LoadMoreCopyWithImpl<$Res>;
+abstract class _$$LoadMoreImplCopyWith<$Res> {
+  factory _$$LoadMoreImplCopyWith(
+          _$LoadMoreImpl value, $Res Function(_$LoadMoreImpl) then) =
+      __$$LoadMoreImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_LoadMoreCopyWithImpl<$Res>
-    extends _$ViewByItemsEventCopyWithImpl<$Res, _$_LoadMore>
-    implements _$$_LoadMoreCopyWith<$Res> {
-  __$$_LoadMoreCopyWithImpl(
-      _$_LoadMore _value, $Res Function(_$_LoadMore) _then)
+class __$$LoadMoreImplCopyWithImpl<$Res>
+    extends _$ViewByItemsEventCopyWithImpl<$Res, _$LoadMoreImpl>
+    implements _$$LoadMoreImplCopyWith<$Res> {
+  __$$LoadMoreImplCopyWithImpl(
+      _$LoadMoreImpl _value, $Res Function(_$LoadMoreImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_LoadMore implements _LoadMore {
-  const _$_LoadMore();
+class _$LoadMoreImpl implements _LoadMore {
+  const _$LoadMoreImpl();
 
   @override
   String toString() {
@@ -608,9 +610,9 @@ class _$_LoadMore implements _LoadMore {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_LoadMore);
+        (other.runtimeType == runtimeType && other is _$LoadMoreImpl);
   }
 
   @override
@@ -718,24 +720,26 @@ class _$_LoadMore implements _LoadMore {
 }
 
 abstract class _LoadMore implements ViewByItemsEvent {
-  const factory _LoadMore() = _$_LoadMore;
+  const factory _LoadMore() = _$LoadMoreImpl;
 }
 
 /// @nodoc
-abstract class _$$_FetchOrdersInvoiceDataCopyWith<$Res> {
-  factory _$$_FetchOrdersInvoiceDataCopyWith(_$_FetchOrdersInvoiceData value,
-          $Res Function(_$_FetchOrdersInvoiceData) then) =
-      __$$_FetchOrdersInvoiceDataCopyWithImpl<$Res>;
+abstract class _$$FetchOrdersInvoiceDataImplCopyWith<$Res> {
+  factory _$$FetchOrdersInvoiceDataImplCopyWith(
+          _$FetchOrdersInvoiceDataImpl value,
+          $Res Function(_$FetchOrdersInvoiceDataImpl) then) =
+      __$$FetchOrdersInvoiceDataImplCopyWithImpl<$Res>;
   @useResult
   $Res call({List<OrderHistoryItem> orderHistoryItems});
 }
 
 /// @nodoc
-class __$$_FetchOrdersInvoiceDataCopyWithImpl<$Res>
-    extends _$ViewByItemsEventCopyWithImpl<$Res, _$_FetchOrdersInvoiceData>
-    implements _$$_FetchOrdersInvoiceDataCopyWith<$Res> {
-  __$$_FetchOrdersInvoiceDataCopyWithImpl(_$_FetchOrdersInvoiceData _value,
-      $Res Function(_$_FetchOrdersInvoiceData) _then)
+class __$$FetchOrdersInvoiceDataImplCopyWithImpl<$Res>
+    extends _$ViewByItemsEventCopyWithImpl<$Res, _$FetchOrdersInvoiceDataImpl>
+    implements _$$FetchOrdersInvoiceDataImplCopyWith<$Res> {
+  __$$FetchOrdersInvoiceDataImplCopyWithImpl(
+      _$FetchOrdersInvoiceDataImpl _value,
+      $Res Function(_$FetchOrdersInvoiceDataImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -743,7 +747,7 @@ class __$$_FetchOrdersInvoiceDataCopyWithImpl<$Res>
   $Res call({
     Object? orderHistoryItems = null,
   }) {
-    return _then(_$_FetchOrdersInvoiceData(
+    return _then(_$FetchOrdersInvoiceDataImpl(
       orderHistoryItems: null == orderHistoryItems
           ? _value._orderHistoryItems
           : orderHistoryItems // ignore: cast_nullable_to_non_nullable
@@ -754,8 +758,8 @@ class __$$_FetchOrdersInvoiceDataCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_FetchOrdersInvoiceData implements _FetchOrdersInvoiceData {
-  const _$_FetchOrdersInvoiceData(
+class _$FetchOrdersInvoiceDataImpl implements _FetchOrdersInvoiceData {
+  const _$FetchOrdersInvoiceDataImpl(
       {required final List<OrderHistoryItem> orderHistoryItems})
       : _orderHistoryItems = orderHistoryItems;
 
@@ -774,10 +778,10 @@ class _$_FetchOrdersInvoiceData implements _FetchOrdersInvoiceData {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_FetchOrdersInvoiceData &&
+            other is _$FetchOrdersInvoiceDataImpl &&
             const DeepCollectionEquality()
                 .equals(other._orderHistoryItems, _orderHistoryItems));
   }
@@ -789,9 +793,9 @@ class _$_FetchOrdersInvoiceData implements _FetchOrdersInvoiceData {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_FetchOrdersInvoiceDataCopyWith<_$_FetchOrdersInvoiceData> get copyWith =>
-      __$$_FetchOrdersInvoiceDataCopyWithImpl<_$_FetchOrdersInvoiceData>(
-          this, _$identity);
+  _$$FetchOrdersInvoiceDataImplCopyWith<_$FetchOrdersInvoiceDataImpl>
+      get copyWith => __$$FetchOrdersInvoiceDataImplCopyWithImpl<
+          _$FetchOrdersInvoiceDataImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -897,12 +901,12 @@ class _$_FetchOrdersInvoiceData implements _FetchOrdersInvoiceData {
 abstract class _FetchOrdersInvoiceData implements ViewByItemsEvent {
   const factory _FetchOrdersInvoiceData(
           {required final List<OrderHistoryItem> orderHistoryItems}) =
-      _$_FetchOrdersInvoiceData;
+      _$FetchOrdersInvoiceDataImpl;
 
   List<OrderHistoryItem> get orderHistoryItems;
   @JsonKey(ignore: true)
-  _$$_FetchOrdersInvoiceDataCopyWith<_$_FetchOrdersInvoiceData> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$FetchOrdersInvoiceDataImplCopyWith<_$FetchOrdersInvoiceDataImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -1100,11 +1104,11 @@ class _$ViewByItemsStateCopyWithImpl<$Res, $Val extends ViewByItemsState>
 }
 
 /// @nodoc
-abstract class _$$_ViewByItemsStateCopyWith<$Res>
+abstract class _$$ViewByItemsStateImplCopyWith<$Res>
     implements $ViewByItemsStateCopyWith<$Res> {
-  factory _$$_ViewByItemsStateCopyWith(
-          _$_ViewByItemsState value, $Res Function(_$_ViewByItemsState) then) =
-      __$$_ViewByItemsStateCopyWithImpl<$Res>;
+  factory _$$ViewByItemsStateImplCopyWith(_$ViewByItemsStateImpl value,
+          $Res Function(_$ViewByItemsStateImpl) then) =
+      __$$ViewByItemsStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -1139,11 +1143,11 @@ abstract class _$$_ViewByItemsStateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_ViewByItemsStateCopyWithImpl<$Res>
-    extends _$ViewByItemsStateCopyWithImpl<$Res, _$_ViewByItemsState>
-    implements _$$_ViewByItemsStateCopyWith<$Res> {
-  __$$_ViewByItemsStateCopyWithImpl(
-      _$_ViewByItemsState _value, $Res Function(_$_ViewByItemsState) _then)
+class __$$ViewByItemsStateImplCopyWithImpl<$Res>
+    extends _$ViewByItemsStateCopyWithImpl<$Res, _$ViewByItemsStateImpl>
+    implements _$$ViewByItemsStateImplCopyWith<$Res> {
+  __$$ViewByItemsStateImplCopyWithImpl(_$ViewByItemsStateImpl _value,
+      $Res Function(_$ViewByItemsStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1163,7 +1167,7 @@ class __$$_ViewByItemsStateCopyWithImpl<$Res>
     Object? searchKey = null,
     Object? failureOrSuccessOption = null,
   }) {
-    return _then(_$_ViewByItemsState(
+    return _then(_$ViewByItemsStateImpl(
       salesOrgConfigs: null == salesOrgConfigs
           ? _value.salesOrgConfigs
           : salesOrgConfigs // ignore: cast_nullable_to_non_nullable
@@ -1222,8 +1226,8 @@ class __$$_ViewByItemsStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_ViewByItemsState extends _ViewByItemsState {
-  const _$_ViewByItemsState(
+class _$ViewByItemsStateImpl extends _ViewByItemsState {
+  const _$ViewByItemsStateImpl(
       {required this.salesOrgConfigs,
       required this.customerCodeInfo,
       required this.shipToInfo,
@@ -1272,10 +1276,10 @@ class _$_ViewByItemsState extends _ViewByItemsState {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ViewByItemsState &&
+            other is _$ViewByItemsStateImpl &&
             (identical(other.salesOrgConfigs, salesOrgConfigs) ||
                 other.salesOrgConfigs == salesOrgConfigs) &&
             (identical(other.customerCodeInfo, customerCodeInfo) ||
@@ -1323,8 +1327,9 @@ class _$_ViewByItemsState extends _ViewByItemsState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ViewByItemsStateCopyWith<_$_ViewByItemsState> get copyWith =>
-      __$$_ViewByItemsStateCopyWithImpl<_$_ViewByItemsState>(this, _$identity);
+  _$$ViewByItemsStateImplCopyWith<_$ViewByItemsStateImpl> get copyWith =>
+      __$$ViewByItemsStateImplCopyWithImpl<_$ViewByItemsStateImpl>(
+          this, _$identity);
 }
 
 abstract class _ViewByItemsState extends ViewByItemsState {
@@ -1342,7 +1347,7 @@ abstract class _ViewByItemsState extends ViewByItemsState {
       required final ViewByItemFilter appliedFilter,
       required final SearchKey searchKey,
       required final Option<Either<ApiFailure, dynamic>>
-          failureOrSuccessOption}) = _$_ViewByItemsState;
+          failureOrSuccessOption}) = _$ViewByItemsStateImpl;
   const _ViewByItemsState._() : super._();
 
   @override
@@ -1373,6 +1378,6 @@ abstract class _ViewByItemsState extends ViewByItemsState {
   Option<Either<ApiFailure, dynamic>> get failureOrSuccessOption;
   @override
   @JsonKey(ignore: true)
-  _$$_ViewByItemsStateCopyWith<_$_ViewByItemsState> get copyWith =>
+  _$$ViewByItemsStateImplCopyWith<_$ViewByItemsStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

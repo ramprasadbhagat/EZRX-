@@ -12,7 +12,7 @@ part of 'order_encryption.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$OrderEncryption {
@@ -63,22 +63,22 @@ class _$OrderEncryptionCopyWithImpl<$Res, $Val extends OrderEncryption>
 }
 
 /// @nodoc
-abstract class _$$_OrderEncryptionCopyWith<$Res>
+abstract class _$$OrderEncryptionImplCopyWith<$Res>
     implements $OrderEncryptionCopyWith<$Res> {
-  factory _$$_OrderEncryptionCopyWith(
-          _$_OrderEncryption value, $Res Function(_$_OrderEncryption) then) =
-      __$$_OrderEncryptionCopyWithImpl<$Res>;
+  factory _$$OrderEncryptionImplCopyWith(_$OrderEncryptionImpl value,
+          $Res Function(_$OrderEncryptionImpl) then) =
+      __$$OrderEncryptionImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String data, String hash});
 }
 
 /// @nodoc
-class __$$_OrderEncryptionCopyWithImpl<$Res>
-    extends _$OrderEncryptionCopyWithImpl<$Res, _$_OrderEncryption>
-    implements _$$_OrderEncryptionCopyWith<$Res> {
-  __$$_OrderEncryptionCopyWithImpl(
-      _$_OrderEncryption _value, $Res Function(_$_OrderEncryption) _then)
+class __$$OrderEncryptionImplCopyWithImpl<$Res>
+    extends _$OrderEncryptionCopyWithImpl<$Res, _$OrderEncryptionImpl>
+    implements _$$OrderEncryptionImplCopyWith<$Res> {
+  __$$OrderEncryptionImplCopyWithImpl(
+      _$OrderEncryptionImpl _value, $Res Function(_$OrderEncryptionImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -87,7 +87,7 @@ class __$$_OrderEncryptionCopyWithImpl<$Res>
     Object? data = null,
     Object? hash = null,
   }) {
-    return _then(_$_OrderEncryption(
+    return _then(_$OrderEncryptionImpl(
       data: null == data
           ? _value.data
           : data // ignore: cast_nullable_to_non_nullable
@@ -102,8 +102,8 @@ class __$$_OrderEncryptionCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_OrderEncryption extends _OrderEncryption {
-  _$_OrderEncryption({required this.data, required this.hash}) : super._();
+class _$OrderEncryptionImpl extends _OrderEncryption {
+  _$OrderEncryptionImpl({required this.data, required this.hash}) : super._();
 
   @override
   final String data;
@@ -116,10 +116,10 @@ class _$_OrderEncryption extends _OrderEncryption {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_OrderEncryption &&
+            other is _$OrderEncryptionImpl &&
             (identical(other.data, data) || other.data == data) &&
             (identical(other.hash, hash) || other.hash == hash));
   }
@@ -130,14 +130,15 @@ class _$_OrderEncryption extends _OrderEncryption {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_OrderEncryptionCopyWith<_$_OrderEncryption> get copyWith =>
-      __$$_OrderEncryptionCopyWithImpl<_$_OrderEncryption>(this, _$identity);
+  _$$OrderEncryptionImplCopyWith<_$OrderEncryptionImpl> get copyWith =>
+      __$$OrderEncryptionImplCopyWithImpl<_$OrderEncryptionImpl>(
+          this, _$identity);
 }
 
 abstract class _OrderEncryption extends OrderEncryption {
   factory _OrderEncryption(
       {required final String data,
-      required final String hash}) = _$_OrderEncryption;
+      required final String hash}) = _$OrderEncryptionImpl;
   _OrderEncryption._() : super._();
 
   @override
@@ -146,6 +147,6 @@ abstract class _OrderEncryption extends OrderEncryption {
   String get hash;
   @override
   @JsonKey(ignore: true)
-  _$$_OrderEncryptionCopyWith<_$_OrderEncryption> get copyWith =>
+  _$$OrderEncryptionImplCopyWith<_$OrderEncryptionImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

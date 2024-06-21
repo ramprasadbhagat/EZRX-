@@ -12,7 +12,7 @@ part of 'tender_contract_list_bloc.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$TenderContractListEvent {
@@ -91,25 +91,25 @@ class _$TenderContractListEventCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_InitializeCopyWith<$Res> {
-  factory _$$_InitializeCopyWith(
-          _$_Initialize value, $Res Function(_$_Initialize) then) =
-      __$$_InitializeCopyWithImpl<$Res>;
+abstract class _$$InitializeImplCopyWith<$Res> {
+  factory _$$InitializeImplCopyWith(
+          _$InitializeImpl value, $Res Function(_$InitializeImpl) then) =
+      __$$InitializeImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_InitializeCopyWithImpl<$Res>
-    extends _$TenderContractListEventCopyWithImpl<$Res, _$_Initialize>
-    implements _$$_InitializeCopyWith<$Res> {
-  __$$_InitializeCopyWithImpl(
-      _$_Initialize _value, $Res Function(_$_Initialize) _then)
+class __$$InitializeImplCopyWithImpl<$Res>
+    extends _$TenderContractListEventCopyWithImpl<$Res, _$InitializeImpl>
+    implements _$$InitializeImplCopyWith<$Res> {
+  __$$InitializeImplCopyWithImpl(
+      _$InitializeImpl _value, $Res Function(_$InitializeImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_Initialize implements _Initialize {
-  const _$_Initialize();
+class _$InitializeImpl implements _Initialize {
+  const _$InitializeImpl();
 
   @override
   String toString() {
@@ -117,9 +117,9 @@ class _$_Initialize implements _Initialize {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_Initialize);
+        (other.runtimeType == runtimeType && other is _$InitializeImpl);
   }
 
   @override
@@ -204,13 +204,14 @@ class _$_Initialize implements _Initialize {
 }
 
 abstract class _Initialize implements TenderContractListEvent {
-  const factory _Initialize() = _$_Initialize;
+  const factory _Initialize() = _$InitializeImpl;
 }
 
 /// @nodoc
-abstract class _$$_FetchCopyWith<$Res> {
-  factory _$$_FetchCopyWith(_$_Fetch value, $Res Function(_$_Fetch) then) =
-      __$$_FetchCopyWithImpl<$Res>;
+abstract class _$$FetchImplCopyWith<$Res> {
+  factory _$$FetchImplCopyWith(
+          _$FetchImpl value, $Res Function(_$FetchImpl) then) =
+      __$$FetchImplCopyWithImpl<$Res>;
   @useResult
   $Res call(
       {SalesOrganisation salesOrganisation,
@@ -224,10 +225,11 @@ abstract class _$$_FetchCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_FetchCopyWithImpl<$Res>
-    extends _$TenderContractListEventCopyWithImpl<$Res, _$_Fetch>
-    implements _$$_FetchCopyWith<$Res> {
-  __$$_FetchCopyWithImpl(_$_Fetch _value, $Res Function(_$_Fetch) _then)
+class __$$FetchImplCopyWithImpl<$Res>
+    extends _$TenderContractListEventCopyWithImpl<$Res, _$FetchImpl>
+    implements _$$FetchImplCopyWith<$Res> {
+  __$$FetchImplCopyWithImpl(
+      _$FetchImpl _value, $Res Function(_$FetchImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -238,7 +240,7 @@ class __$$_FetchCopyWithImpl<$Res>
     Object? shipToInfo = null,
     Object? materialNumbers = null,
   }) {
-    return _then(_$_Fetch(
+    return _then(_$FetchImpl(
       salesOrganisation: null == salesOrganisation
           ? _value.salesOrganisation
           : salesOrganisation // ignore: cast_nullable_to_non_nullable
@@ -285,8 +287,8 @@ class __$$_FetchCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_Fetch implements _Fetch {
-  const _$_Fetch(
+class _$FetchImpl implements _Fetch {
+  const _$FetchImpl(
       {required this.salesOrganisation,
       required this.customerCodeInfo,
       required this.shipToInfo,
@@ -313,10 +315,10 @@ class _$_Fetch implements _Fetch {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Fetch &&
+            other is _$FetchImpl &&
             (identical(other.salesOrganisation, salesOrganisation) ||
                 other.salesOrganisation == salesOrganisation) &&
             (identical(other.customerCodeInfo, customerCodeInfo) ||
@@ -338,8 +340,8 @@ class _$_Fetch implements _Fetch {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_FetchCopyWith<_$_Fetch> get copyWith =>
-      __$$_FetchCopyWithImpl<_$_Fetch>(this, _$identity);
+  _$$FetchImplCopyWith<_$FetchImpl> get copyWith =>
+      __$$FetchImplCopyWithImpl<_$FetchImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -427,14 +429,14 @@ abstract class _Fetch implements TenderContractListEvent {
       {required final SalesOrganisation salesOrganisation,
       required final CustomerCodeInfo customerCodeInfo,
       required final ShipToInfo shipToInfo,
-      required final List<MaterialNumber> materialNumbers}) = _$_Fetch;
+      required final List<MaterialNumber> materialNumbers}) = _$FetchImpl;
 
   SalesOrganisation get salesOrganisation;
   CustomerCodeInfo get customerCodeInfo;
   ShipToInfo get shipToInfo;
   List<MaterialNumber> get materialNumbers;
   @JsonKey(ignore: true)
-  _$$_FetchCopyWith<_$_Fetch> get copyWith =>
+  _$$FetchImplCopyWith<_$FetchImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -499,11 +501,12 @@ class _$TenderContractListStateCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_TenderContractListStateCopyWith<$Res>
+abstract class _$$TenderContractListStateImplCopyWith<$Res>
     implements $TenderContractListStateCopyWith<$Res> {
-  factory _$$_TenderContractListStateCopyWith(_$_TenderContractListState value,
-          $Res Function(_$_TenderContractListState) then) =
-      __$$_TenderContractListStateCopyWithImpl<$Res>;
+  factory _$$TenderContractListStateImplCopyWith(
+          _$TenderContractListStateImpl value,
+          $Res Function(_$TenderContractListStateImpl) then) =
+      __$$TenderContractListStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -513,12 +516,13 @@ abstract class _$$_TenderContractListStateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_TenderContractListStateCopyWithImpl<$Res>
+class __$$TenderContractListStateImplCopyWithImpl<$Res>
     extends _$TenderContractListStateCopyWithImpl<$Res,
-        _$_TenderContractListState>
-    implements _$$_TenderContractListStateCopyWith<$Res> {
-  __$$_TenderContractListStateCopyWithImpl(_$_TenderContractListState _value,
-      $Res Function(_$_TenderContractListState) _then)
+        _$TenderContractListStateImpl>
+    implements _$$TenderContractListStateImplCopyWith<$Res> {
+  __$$TenderContractListStateImplCopyWithImpl(
+      _$TenderContractListStateImpl _value,
+      $Res Function(_$TenderContractListStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -528,7 +532,7 @@ class __$$_TenderContractListStateCopyWithImpl<$Res>
     Object? apiFailureOrSuccessOption = null,
     Object? isFetching = null,
   }) {
-    return _then(_$_TenderContractListState(
+    return _then(_$TenderContractListStateImpl(
       tenderContracts: null == tenderContracts
           ? _value._tenderContracts
           : tenderContracts // ignore: cast_nullable_to_non_nullable
@@ -547,8 +551,8 @@ class __$$_TenderContractListStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_TenderContractListState implements _TenderContractListState {
-  const _$_TenderContractListState(
+class _$TenderContractListStateImpl implements _TenderContractListState {
+  const _$TenderContractListStateImpl(
       {required final Map<MaterialNumber, List<TenderContract>> tenderContracts,
       required this.apiFailureOrSuccessOption,
       required this.isFetching})
@@ -573,10 +577,10 @@ class _$_TenderContractListState implements _TenderContractListState {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_TenderContractListState &&
+            other is _$TenderContractListStateImpl &&
             const DeepCollectionEquality()
                 .equals(other._tenderContracts, _tenderContracts) &&
             (identical(other.apiFailureOrSuccessOption,
@@ -596,10 +600,9 @@ class _$_TenderContractListState implements _TenderContractListState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_TenderContractListStateCopyWith<_$_TenderContractListState>
-      get copyWith =>
-          __$$_TenderContractListStateCopyWithImpl<_$_TenderContractListState>(
-              this, _$identity);
+  _$$TenderContractListStateImplCopyWith<_$TenderContractListStateImpl>
+      get copyWith => __$$TenderContractListStateImplCopyWithImpl<
+          _$TenderContractListStateImpl>(this, _$identity);
 }
 
 abstract class _TenderContractListState implements TenderContractListState {
@@ -607,7 +610,7 @@ abstract class _TenderContractListState implements TenderContractListState {
       {required final Map<MaterialNumber, List<TenderContract>> tenderContracts,
       required final Option<Either<ApiFailure, dynamic>>
           apiFailureOrSuccessOption,
-      required final bool isFetching}) = _$_TenderContractListState;
+      required final bool isFetching}) = _$TenderContractListStateImpl;
 
   @override
   Map<MaterialNumber, List<TenderContract>> get tenderContracts;
@@ -617,6 +620,6 @@ abstract class _TenderContractListState implements TenderContractListState {
   bool get isFetching;
   @override
   @JsonKey(ignore: true)
-  _$$_TenderContractListStateCopyWith<_$_TenderContractListState>
+  _$$TenderContractListStateImplCopyWith<_$TenderContractListStateImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

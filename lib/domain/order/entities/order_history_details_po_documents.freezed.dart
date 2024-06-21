@@ -12,7 +12,7 @@ part of 'order_history_details_po_documents.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$PoDocuments {
@@ -63,22 +63,22 @@ class _$PoDocumentsCopyWithImpl<$Res, $Val extends PoDocuments>
 }
 
 /// @nodoc
-abstract class _$$_PoDocumentsCopyWith<$Res>
+abstract class _$$PoDocumentsImplCopyWith<$Res>
     implements $PoDocumentsCopyWith<$Res> {
-  factory _$$_PoDocumentsCopyWith(
-          _$_PoDocuments value, $Res Function(_$_PoDocuments) then) =
-      __$$_PoDocumentsCopyWithImpl<$Res>;
+  factory _$$PoDocumentsImplCopyWith(
+          _$PoDocumentsImpl value, $Res Function(_$PoDocumentsImpl) then) =
+      __$$PoDocumentsImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String url, String name});
 }
 
 /// @nodoc
-class __$$_PoDocumentsCopyWithImpl<$Res>
-    extends _$PoDocumentsCopyWithImpl<$Res, _$_PoDocuments>
-    implements _$$_PoDocumentsCopyWith<$Res> {
-  __$$_PoDocumentsCopyWithImpl(
-      _$_PoDocuments _value, $Res Function(_$_PoDocuments) _then)
+class __$$PoDocumentsImplCopyWithImpl<$Res>
+    extends _$PoDocumentsCopyWithImpl<$Res, _$PoDocumentsImpl>
+    implements _$$PoDocumentsImplCopyWith<$Res> {
+  __$$PoDocumentsImplCopyWithImpl(
+      _$PoDocumentsImpl _value, $Res Function(_$PoDocumentsImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -87,7 +87,7 @@ class __$$_PoDocumentsCopyWithImpl<$Res>
     Object? url = null,
     Object? name = null,
   }) {
-    return _then(_$_PoDocuments(
+    return _then(_$PoDocumentsImpl(
       url: null == url
           ? _value.url
           : url // ignore: cast_nullable_to_non_nullable
@@ -102,8 +102,8 @@ class __$$_PoDocumentsCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_PoDocuments extends _PoDocuments {
-  _$_PoDocuments({required this.url, required this.name}) : super._();
+class _$PoDocumentsImpl extends _PoDocuments {
+  _$PoDocumentsImpl({required this.url, required this.name}) : super._();
 
   @override
   final String url;
@@ -116,10 +116,10 @@ class _$_PoDocuments extends _PoDocuments {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_PoDocuments &&
+            other is _$PoDocumentsImpl &&
             (identical(other.url, url) || other.url == url) &&
             (identical(other.name, name) || other.name == name));
   }
@@ -130,13 +130,14 @@ class _$_PoDocuments extends _PoDocuments {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_PoDocumentsCopyWith<_$_PoDocuments> get copyWith =>
-      __$$_PoDocumentsCopyWithImpl<_$_PoDocuments>(this, _$identity);
+  _$$PoDocumentsImplCopyWith<_$PoDocumentsImpl> get copyWith =>
+      __$$PoDocumentsImplCopyWithImpl<_$PoDocumentsImpl>(this, _$identity);
 }
 
 abstract class _PoDocuments extends PoDocuments {
   factory _PoDocuments(
-      {required final String url, required final String name}) = _$_PoDocuments;
+      {required final String url,
+      required final String name}) = _$PoDocumentsImpl;
   _PoDocuments._() : super._();
 
   @override
@@ -145,6 +146,6 @@ abstract class _PoDocuments extends PoDocuments {
   String get name;
   @override
   @JsonKey(ignore: true)
-  _$$_PoDocumentsCopyWith<_$_PoDocuments> get copyWith =>
+  _$$PoDocumentsImplCopyWith<_$PoDocumentsImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

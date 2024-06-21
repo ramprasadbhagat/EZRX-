@@ -12,7 +12,7 @@ part of 'update_sales_organisation_configs_variable_dto.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 UpdateSalesOrganisationConfigsVariableDto
     _$UpdateSalesOrganisationConfigsVariableDtoFromJson(
@@ -100,12 +100,12 @@ class _$UpdateSalesOrganisationConfigsVariableDtoCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_UpdateSalesOrganisationConfigsVariableDtoCopyWith<$Res>
+abstract class _$$UpdateSalesOrganisationConfigsVariableDtoImplCopyWith<$Res>
     implements $UpdateSalesOrganisationConfigsVariableDtoCopyWith<$Res> {
-  factory _$$_UpdateSalesOrganisationConfigsVariableDtoCopyWith(
-          _$_UpdateSalesOrganisationConfigsVariableDto value,
-          $Res Function(_$_UpdateSalesOrganisationConfigsVariableDto) then) =
-      __$$_UpdateSalesOrganisationConfigsVariableDtoCopyWithImpl<$Res>;
+  factory _$$UpdateSalesOrganisationConfigsVariableDtoImplCopyWith(
+          _$UpdateSalesOrganisationConfigsVariableDtoImpl value,
+          $Res Function(_$UpdateSalesOrganisationConfigsVariableDtoImpl) then) =
+      __$$UpdateSalesOrganisationConfigsVariableDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -119,13 +119,13 @@ abstract class _$$_UpdateSalesOrganisationConfigsVariableDtoCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_UpdateSalesOrganisationConfigsVariableDtoCopyWithImpl<$Res>
+class __$$UpdateSalesOrganisationConfigsVariableDtoImplCopyWithImpl<$Res>
     extends _$UpdateSalesOrganisationConfigsVariableDtoCopyWithImpl<$Res,
-        _$_UpdateSalesOrganisationConfigsVariableDto>
-    implements _$$_UpdateSalesOrganisationConfigsVariableDtoCopyWith<$Res> {
-  __$$_UpdateSalesOrganisationConfigsVariableDtoCopyWithImpl(
-      _$_UpdateSalesOrganisationConfigsVariableDto _value,
-      $Res Function(_$_UpdateSalesOrganisationConfigsVariableDto) _then)
+        _$UpdateSalesOrganisationConfigsVariableDtoImpl>
+    implements _$$UpdateSalesOrganisationConfigsVariableDtoImplCopyWith<$Res> {
+  __$$UpdateSalesOrganisationConfigsVariableDtoImplCopyWithImpl(
+      _$UpdateSalesOrganisationConfigsVariableDtoImpl _value,
+      $Res Function(_$UpdateSalesOrganisationConfigsVariableDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -134,7 +134,7 @@ class __$$_UpdateSalesOrganisationConfigsVariableDtoCopyWithImpl<$Res>
     Object? salesOrgIdDto = null,
     Object? data = null,
   }) {
-    return _then(_$_UpdateSalesOrganisationConfigsVariableDto(
+    return _then(_$UpdateSalesOrganisationConfigsVariableDtoImpl(
       salesOrgIdDto: null == salesOrgIdDto
           ? _value.salesOrgIdDto
           : salesOrgIdDto // ignore: cast_nullable_to_non_nullable
@@ -149,16 +149,16 @@ class __$$_UpdateSalesOrganisationConfigsVariableDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_UpdateSalesOrganisationConfigsVariableDto
+class _$UpdateSalesOrganisationConfigsVariableDtoImpl
     extends _UpdateSalesOrganisationConfigsVariableDto {
-  const _$_UpdateSalesOrganisationConfigsVariableDto(
+  const _$UpdateSalesOrganisationConfigsVariableDtoImpl(
       {@JsonKey(name: 'where') required this.salesOrgIdDto,
       @JsonKey(name: 'data') required this.data})
       : super._();
 
-  factory _$_UpdateSalesOrganisationConfigsVariableDto.fromJson(
+  factory _$UpdateSalesOrganisationConfigsVariableDtoImpl.fromJson(
           Map<String, dynamic> json) =>
-      _$$_UpdateSalesOrganisationConfigsVariableDtoFromJson(json);
+      _$$UpdateSalesOrganisationConfigsVariableDtoImplFromJson(json);
 
   @override
   @JsonKey(name: 'where')
@@ -173,10 +173,10 @@ class _$_UpdateSalesOrganisationConfigsVariableDto
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_UpdateSalesOrganisationConfigsVariableDto &&
+            other is _$UpdateSalesOrganisationConfigsVariableDtoImpl &&
             (identical(other.salesOrgIdDto, salesOrgIdDto) ||
                 other.salesOrgIdDto == salesOrgIdDto) &&
             (identical(other.data, data) || other.data == data));
@@ -189,15 +189,16 @@ class _$_UpdateSalesOrganisationConfigsVariableDto
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_UpdateSalesOrganisationConfigsVariableDtoCopyWith<
-          _$_UpdateSalesOrganisationConfigsVariableDto>
+  _$$UpdateSalesOrganisationConfigsVariableDtoImplCopyWith<
+          _$UpdateSalesOrganisationConfigsVariableDtoImpl>
       get copyWith =>
-          __$$_UpdateSalesOrganisationConfigsVariableDtoCopyWithImpl<
-              _$_UpdateSalesOrganisationConfigsVariableDto>(this, _$identity);
+          __$$UpdateSalesOrganisationConfigsVariableDtoImplCopyWithImpl<
+                  _$UpdateSalesOrganisationConfigsVariableDtoImpl>(
+              this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_UpdateSalesOrganisationConfigsVariableDtoToJson(
+    return _$$UpdateSalesOrganisationConfigsVariableDtoImplToJson(
       this,
     );
   }
@@ -206,16 +207,15 @@ class _$_UpdateSalesOrganisationConfigsVariableDto
 abstract class _UpdateSalesOrganisationConfigsVariableDto
     extends UpdateSalesOrganisationConfigsVariableDto {
   const factory _UpdateSalesOrganisationConfigsVariableDto(
-          {@JsonKey(name: 'where')
-              required final SalesOrgIdDto salesOrgIdDto,
+          {@JsonKey(name: 'where') required final SalesOrgIdDto salesOrgIdDto,
           @JsonKey(name: 'data')
-              required final UpdateSalesOrganisationConfigsDto data}) =
-      _$_UpdateSalesOrganisationConfigsVariableDto;
+          required final UpdateSalesOrganisationConfigsDto data}) =
+      _$UpdateSalesOrganisationConfigsVariableDtoImpl;
   const _UpdateSalesOrganisationConfigsVariableDto._() : super._();
 
   factory _UpdateSalesOrganisationConfigsVariableDto.fromJson(
           Map<String, dynamic> json) =
-      _$_UpdateSalesOrganisationConfigsVariableDto.fromJson;
+      _$UpdateSalesOrganisationConfigsVariableDtoImpl.fromJson;
 
   @override
   @JsonKey(name: 'where')
@@ -225,7 +225,7 @@ abstract class _UpdateSalesOrganisationConfigsVariableDto
   UpdateSalesOrganisationConfigsDto get data;
   @override
   @JsonKey(ignore: true)
-  _$$_UpdateSalesOrganisationConfigsVariableDtoCopyWith<
-          _$_UpdateSalesOrganisationConfigsVariableDto>
+  _$$UpdateSalesOrganisationConfigsVariableDtoImplCopyWith<
+          _$UpdateSalesOrganisationConfigsVariableDtoImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

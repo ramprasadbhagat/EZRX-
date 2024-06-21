@@ -12,7 +12,7 @@ part of 'chat_bot_bloc.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$ChatBotEvent {
@@ -81,25 +81,25 @@ class _$ChatBotEventCopyWithImpl<$Res, $Val extends ChatBotEvent>
 }
 
 /// @nodoc
-abstract class _$$_InitializeCopyWith<$Res> {
-  factory _$$_InitializeCopyWith(
-          _$_Initialize value, $Res Function(_$_Initialize) then) =
-      __$$_InitializeCopyWithImpl<$Res>;
+abstract class _$$InitializeImplCopyWith<$Res> {
+  factory _$$InitializeImplCopyWith(
+          _$InitializeImpl value, $Res Function(_$InitializeImpl) then) =
+      __$$InitializeImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_InitializeCopyWithImpl<$Res>
-    extends _$ChatBotEventCopyWithImpl<$Res, _$_Initialize>
-    implements _$$_InitializeCopyWith<$Res> {
-  __$$_InitializeCopyWithImpl(
-      _$_Initialize _value, $Res Function(_$_Initialize) _then)
+class __$$InitializeImplCopyWithImpl<$Res>
+    extends _$ChatBotEventCopyWithImpl<$Res, _$InitializeImpl>
+    implements _$$InitializeImplCopyWith<$Res> {
+  __$$InitializeImplCopyWithImpl(
+      _$InitializeImpl _value, $Res Function(_$InitializeImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_Initialize implements _Initialize {
-  const _$_Initialize();
+class _$InitializeImpl implements _Initialize {
+  const _$InitializeImpl();
 
   @override
   String toString() {
@@ -107,9 +107,9 @@ class _$_Initialize implements _Initialize {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_Initialize);
+        (other.runtimeType == runtimeType && other is _$InitializeImpl);
   }
 
   @override
@@ -185,29 +185,29 @@ class _$_Initialize implements _Initialize {
 }
 
 abstract class _Initialize implements ChatBotEvent {
-  const factory _Initialize() = _$_Initialize;
+  const factory _Initialize() = _$InitializeImpl;
 }
 
 /// @nodoc
-abstract class _$$_StartChatbotCopyWith<$Res> {
-  factory _$$_StartChatbotCopyWith(
-          _$_StartChatbot value, $Res Function(_$_StartChatbot) then) =
-      __$$_StartChatbotCopyWithImpl<$Res>;
+abstract class _$$StartChatbotImplCopyWith<$Res> {
+  factory _$$StartChatbotImplCopyWith(
+          _$StartChatbotImpl value, $Res Function(_$StartChatbotImpl) then) =
+      __$$StartChatbotImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_StartChatbotCopyWithImpl<$Res>
-    extends _$ChatBotEventCopyWithImpl<$Res, _$_StartChatbot>
-    implements _$$_StartChatbotCopyWith<$Res> {
-  __$$_StartChatbotCopyWithImpl(
-      _$_StartChatbot _value, $Res Function(_$_StartChatbot) _then)
+class __$$StartChatbotImplCopyWithImpl<$Res>
+    extends _$ChatBotEventCopyWithImpl<$Res, _$StartChatbotImpl>
+    implements _$$StartChatbotImplCopyWith<$Res> {
+  __$$StartChatbotImplCopyWithImpl(
+      _$StartChatbotImpl _value, $Res Function(_$StartChatbotImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_StartChatbot implements _StartChatbot {
-  const _$_StartChatbot();
+class _$StartChatbotImpl implements _StartChatbot {
+  const _$StartChatbotImpl();
 
   @override
   String toString() {
@@ -215,9 +215,9 @@ class _$_StartChatbot implements _StartChatbot {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_StartChatbot);
+        (other.runtimeType == runtimeType && other is _$StartChatbotImpl);
   }
 
   @override
@@ -293,29 +293,29 @@ class _$_StartChatbot implements _StartChatbot {
 }
 
 abstract class _StartChatbot implements ChatBotEvent {
-  const factory _StartChatbot() = _$_StartChatbot;
+  const factory _StartChatbot() = _$StartChatbotImpl;
 }
 
 /// @nodoc
-abstract class _$$_ResetChatbotCopyWith<$Res> {
-  factory _$$_ResetChatbotCopyWith(
-          _$_ResetChatbot value, $Res Function(_$_ResetChatbot) then) =
-      __$$_ResetChatbotCopyWithImpl<$Res>;
+abstract class _$$ResetChatbotImplCopyWith<$Res> {
+  factory _$$ResetChatbotImplCopyWith(
+          _$ResetChatbotImpl value, $Res Function(_$ResetChatbotImpl) then) =
+      __$$ResetChatbotImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_ResetChatbotCopyWithImpl<$Res>
-    extends _$ChatBotEventCopyWithImpl<$Res, _$_ResetChatbot>
-    implements _$$_ResetChatbotCopyWith<$Res> {
-  __$$_ResetChatbotCopyWithImpl(
-      _$_ResetChatbot _value, $Res Function(_$_ResetChatbot) _then)
+class __$$ResetChatbotImplCopyWithImpl<$Res>
+    extends _$ChatBotEventCopyWithImpl<$Res, _$ResetChatbotImpl>
+    implements _$$ResetChatbotImplCopyWith<$Res> {
+  __$$ResetChatbotImplCopyWithImpl(
+      _$ResetChatbotImpl _value, $Res Function(_$ResetChatbotImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_ResetChatbot implements _ResetChatbot {
-  const _$_ResetChatbot();
+class _$ResetChatbotImpl implements _ResetChatbot {
+  const _$ResetChatbotImpl();
 
   @override
   String toString() {
@@ -323,9 +323,9 @@ class _$_ResetChatbot implements _ResetChatbot {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_ResetChatbot);
+        (other.runtimeType == runtimeType && other is _$ResetChatbotImpl);
   }
 
   @override
@@ -401,7 +401,7 @@ class _$_ResetChatbot implements _ResetChatbot {
 }
 
 abstract class _ResetChatbot implements ChatBotEvent {
-  const factory _ResetChatbot() = _$_ResetChatbot;
+  const factory _ResetChatbot() = _$ResetChatbotImpl;
 }
 
 /// @nodoc
@@ -456,11 +456,11 @@ class _$ChatBotStateCopyWithImpl<$Res, $Val extends ChatBotState>
 }
 
 /// @nodoc
-abstract class _$$_ChatBotStateCopyWith<$Res>
+abstract class _$$ChatBotStateImplCopyWith<$Res>
     implements $ChatBotStateCopyWith<$Res> {
-  factory _$$_ChatBotStateCopyWith(
-          _$_ChatBotState value, $Res Function(_$_ChatBotState) then) =
-      __$$_ChatBotStateCopyWithImpl<$Res>;
+  factory _$$ChatBotStateImplCopyWith(
+          _$ChatBotStateImpl value, $Res Function(_$ChatBotStateImpl) then) =
+      __$$ChatBotStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -469,11 +469,11 @@ abstract class _$$_ChatBotStateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_ChatBotStateCopyWithImpl<$Res>
-    extends _$ChatBotStateCopyWithImpl<$Res, _$_ChatBotState>
-    implements _$$_ChatBotStateCopyWith<$Res> {
-  __$$_ChatBotStateCopyWithImpl(
-      _$_ChatBotState _value, $Res Function(_$_ChatBotState) _then)
+class __$$ChatBotStateImplCopyWithImpl<$Res>
+    extends _$ChatBotStateCopyWithImpl<$Res, _$ChatBotStateImpl>
+    implements _$$ChatBotStateImplCopyWith<$Res> {
+  __$$ChatBotStateImplCopyWithImpl(
+      _$ChatBotStateImpl _value, $Res Function(_$ChatBotStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -482,7 +482,7 @@ class __$$_ChatBotStateCopyWithImpl<$Res>
     Object? isLoading = null,
     Object? chatbotFailureOrSuccessOption = null,
   }) {
-    return _then(_$_ChatBotState(
+    return _then(_$ChatBotStateImpl(
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
@@ -497,8 +497,8 @@ class __$$_ChatBotStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_ChatBotState extends _ChatBotState {
-  const _$_ChatBotState(
+class _$ChatBotStateImpl extends _ChatBotState {
+  const _$ChatBotStateImpl(
       {required this.isLoading, required this.chatbotFailureOrSuccessOption})
       : super._();
 
@@ -513,10 +513,10 @@ class _$_ChatBotState extends _ChatBotState {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ChatBotState &&
+            other is _$ChatBotStateImpl &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
             (identical(other.chatbotFailureOrSuccessOption,
@@ -532,15 +532,15 @@ class _$_ChatBotState extends _ChatBotState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ChatBotStateCopyWith<_$_ChatBotState> get copyWith =>
-      __$$_ChatBotStateCopyWithImpl<_$_ChatBotState>(this, _$identity);
+  _$$ChatBotStateImplCopyWith<_$ChatBotStateImpl> get copyWith =>
+      __$$ChatBotStateImplCopyWithImpl<_$ChatBotStateImpl>(this, _$identity);
 }
 
 abstract class _ChatBotState extends ChatBotState {
   const factory _ChatBotState(
       {required final bool isLoading,
       required final Option<Either<ApiFailure, dynamic>>
-          chatbotFailureOrSuccessOption}) = _$_ChatBotState;
+          chatbotFailureOrSuccessOption}) = _$ChatBotStateImpl;
   const _ChatBotState._() : super._();
 
   @override
@@ -549,6 +549,6 @@ abstract class _ChatBotState extends ChatBotState {
   Option<Either<ApiFailure, dynamic>> get chatbotFailureOrSuccessOption;
   @override
   @JsonKey(ignore: true)
-  _$$_ChatBotStateCopyWith<_$_ChatBotState> get copyWith =>
+  _$$ChatBotStateImplCopyWith<_$ChatBotStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

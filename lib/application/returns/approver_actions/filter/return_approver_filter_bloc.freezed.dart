@@ -12,7 +12,7 @@ part of 'return_approver_filter_bloc.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$ReturnApproverFilterEvent {
@@ -112,25 +112,25 @@ class _$ReturnApproverFilterEventCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_InitializedCopyWith<$Res> {
-  factory _$$_InitializedCopyWith(
-          _$_Initialized value, $Res Function(_$_Initialized) then) =
-      __$$_InitializedCopyWithImpl<$Res>;
+abstract class _$$InitializedImplCopyWith<$Res> {
+  factory _$$InitializedImplCopyWith(
+          _$InitializedImpl value, $Res Function(_$InitializedImpl) then) =
+      __$$InitializedImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_InitializedCopyWithImpl<$Res>
-    extends _$ReturnApproverFilterEventCopyWithImpl<$Res, _$_Initialized>
-    implements _$$_InitializedCopyWith<$Res> {
-  __$$_InitializedCopyWithImpl(
-      _$_Initialized _value, $Res Function(_$_Initialized) _then)
+class __$$InitializedImplCopyWithImpl<$Res>
+    extends _$ReturnApproverFilterEventCopyWithImpl<$Res, _$InitializedImpl>
+    implements _$$InitializedImplCopyWith<$Res> {
+  __$$InitializedImplCopyWithImpl(
+      _$InitializedImpl _value, $Res Function(_$InitializedImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_Initialized implements _Initialized {
-  const _$_Initialized();
+class _$InitializedImpl implements _Initialized {
+  const _$InitializedImpl();
 
   @override
   String toString() {
@@ -138,9 +138,9 @@ class _$_Initialized implements _Initialized {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_Initialized);
+        (other.runtimeType == runtimeType && other is _$InitializedImpl);
   }
 
   @override
@@ -246,29 +246,29 @@ class _$_Initialized implements _Initialized {
 }
 
 abstract class _Initialized implements ReturnApproverFilterEvent {
-  const factory _Initialized() = _$_Initialized;
+  const factory _Initialized() = _$InitializedImpl;
 }
 
 /// @nodoc
-abstract class _$$_ApplyFiltersCopyWith<$Res> {
-  factory _$$_ApplyFiltersCopyWith(
-          _$_ApplyFilters value, $Res Function(_$_ApplyFilters) then) =
-      __$$_ApplyFiltersCopyWithImpl<$Res>;
+abstract class _$$ApplyFiltersImplCopyWith<$Res> {
+  factory _$$ApplyFiltersImplCopyWith(
+          _$ApplyFiltersImpl value, $Res Function(_$ApplyFiltersImpl) then) =
+      __$$ApplyFiltersImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_ApplyFiltersCopyWithImpl<$Res>
-    extends _$ReturnApproverFilterEventCopyWithImpl<$Res, _$_ApplyFilters>
-    implements _$$_ApplyFiltersCopyWith<$Res> {
-  __$$_ApplyFiltersCopyWithImpl(
-      _$_ApplyFilters _value, $Res Function(_$_ApplyFilters) _then)
+class __$$ApplyFiltersImplCopyWithImpl<$Res>
+    extends _$ReturnApproverFilterEventCopyWithImpl<$Res, _$ApplyFiltersImpl>
+    implements _$$ApplyFiltersImplCopyWith<$Res> {
+  __$$ApplyFiltersImplCopyWithImpl(
+      _$ApplyFiltersImpl _value, $Res Function(_$ApplyFiltersImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_ApplyFilters implements _ApplyFilters {
-  const _$_ApplyFilters();
+class _$ApplyFiltersImpl implements _ApplyFilters {
+  const _$ApplyFiltersImpl();
 
   @override
   String toString() {
@@ -276,9 +276,9 @@ class _$_ApplyFilters implements _ApplyFilters {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_ApplyFilters);
+        (other.runtimeType == runtimeType && other is _$ApplyFiltersImpl);
   }
 
   @override
@@ -384,24 +384,24 @@ class _$_ApplyFilters implements _ApplyFilters {
 }
 
 abstract class _ApplyFilters implements ReturnApproverFilterEvent {
-  const factory _ApplyFilters() = _$_ApplyFilters;
+  const factory _ApplyFilters() = _$ApplyFiltersImpl;
 }
 
 /// @nodoc
-abstract class _$$_ReturnIdChangedCopyWith<$Res> {
-  factory _$$_ReturnIdChangedCopyWith(
-          _$_ReturnIdChanged value, $Res Function(_$_ReturnIdChanged) then) =
-      __$$_ReturnIdChangedCopyWithImpl<$Res>;
+abstract class _$$ReturnIdChangedImplCopyWith<$Res> {
+  factory _$$ReturnIdChangedImplCopyWith(_$ReturnIdChangedImpl value,
+          $Res Function(_$ReturnIdChangedImpl) then) =
+      __$$ReturnIdChangedImplCopyWithImpl<$Res>;
   @useResult
   $Res call({String returnId});
 }
 
 /// @nodoc
-class __$$_ReturnIdChangedCopyWithImpl<$Res>
-    extends _$ReturnApproverFilterEventCopyWithImpl<$Res, _$_ReturnIdChanged>
-    implements _$$_ReturnIdChangedCopyWith<$Res> {
-  __$$_ReturnIdChangedCopyWithImpl(
-      _$_ReturnIdChanged _value, $Res Function(_$_ReturnIdChanged) _then)
+class __$$ReturnIdChangedImplCopyWithImpl<$Res>
+    extends _$ReturnApproverFilterEventCopyWithImpl<$Res, _$ReturnIdChangedImpl>
+    implements _$$ReturnIdChangedImplCopyWith<$Res> {
+  __$$ReturnIdChangedImplCopyWithImpl(
+      _$ReturnIdChangedImpl _value, $Res Function(_$ReturnIdChangedImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -409,7 +409,7 @@ class __$$_ReturnIdChangedCopyWithImpl<$Res>
   $Res call({
     Object? returnId = null,
   }) {
-    return _then(_$_ReturnIdChanged(
+    return _then(_$ReturnIdChangedImpl(
       null == returnId
           ? _value.returnId
           : returnId // ignore: cast_nullable_to_non_nullable
@@ -420,8 +420,8 @@ class __$$_ReturnIdChangedCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_ReturnIdChanged implements _ReturnIdChanged {
-  const _$_ReturnIdChanged(this.returnId);
+class _$ReturnIdChangedImpl implements _ReturnIdChanged {
+  const _$ReturnIdChangedImpl(this.returnId);
 
   @override
   final String returnId;
@@ -432,10 +432,10 @@ class _$_ReturnIdChanged implements _ReturnIdChanged {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ReturnIdChanged &&
+            other is _$ReturnIdChangedImpl &&
             (identical(other.returnId, returnId) ||
                 other.returnId == returnId));
   }
@@ -446,8 +446,9 @@ class _$_ReturnIdChanged implements _ReturnIdChanged {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ReturnIdChangedCopyWith<_$_ReturnIdChanged> get copyWith =>
-      __$$_ReturnIdChangedCopyWithImpl<_$_ReturnIdChanged>(this, _$identity);
+  _$$ReturnIdChangedImplCopyWith<_$ReturnIdChangedImpl> get copyWith =>
+      __$$ReturnIdChangedImplCopyWithImpl<_$ReturnIdChangedImpl>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -549,29 +550,29 @@ class _$_ReturnIdChanged implements _ReturnIdChanged {
 }
 
 abstract class _ReturnIdChanged implements ReturnApproverFilterEvent {
-  const factory _ReturnIdChanged(final String returnId) = _$_ReturnIdChanged;
+  const factory _ReturnIdChanged(final String returnId) = _$ReturnIdChangedImpl;
 
   String get returnId;
   @JsonKey(ignore: true)
-  _$$_ReturnIdChangedCopyWith<_$_ReturnIdChanged> get copyWith =>
+  _$$ReturnIdChangedImplCopyWith<_$ReturnIdChangedImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_SoldToChangedCopyWith<$Res> {
-  factory _$$_SoldToChangedCopyWith(
-          _$_SoldToChanged value, $Res Function(_$_SoldToChanged) then) =
-      __$$_SoldToChangedCopyWithImpl<$Res>;
+abstract class _$$SoldToChangedImplCopyWith<$Res> {
+  factory _$$SoldToChangedImplCopyWith(
+          _$SoldToChangedImpl value, $Res Function(_$SoldToChangedImpl) then) =
+      __$$SoldToChangedImplCopyWithImpl<$Res>;
   @useResult
   $Res call({String soldTo});
 }
 
 /// @nodoc
-class __$$_SoldToChangedCopyWithImpl<$Res>
-    extends _$ReturnApproverFilterEventCopyWithImpl<$Res, _$_SoldToChanged>
-    implements _$$_SoldToChangedCopyWith<$Res> {
-  __$$_SoldToChangedCopyWithImpl(
-      _$_SoldToChanged _value, $Res Function(_$_SoldToChanged) _then)
+class __$$SoldToChangedImplCopyWithImpl<$Res>
+    extends _$ReturnApproverFilterEventCopyWithImpl<$Res, _$SoldToChangedImpl>
+    implements _$$SoldToChangedImplCopyWith<$Res> {
+  __$$SoldToChangedImplCopyWithImpl(
+      _$SoldToChangedImpl _value, $Res Function(_$SoldToChangedImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -579,7 +580,7 @@ class __$$_SoldToChangedCopyWithImpl<$Res>
   $Res call({
     Object? soldTo = null,
   }) {
-    return _then(_$_SoldToChanged(
+    return _then(_$SoldToChangedImpl(
       null == soldTo
           ? _value.soldTo
           : soldTo // ignore: cast_nullable_to_non_nullable
@@ -590,8 +591,8 @@ class __$$_SoldToChangedCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_SoldToChanged implements _SoldToChanged {
-  const _$_SoldToChanged(this.soldTo);
+class _$SoldToChangedImpl implements _SoldToChanged {
+  const _$SoldToChangedImpl(this.soldTo);
 
   @override
   final String soldTo;
@@ -602,10 +603,10 @@ class _$_SoldToChanged implements _SoldToChanged {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_SoldToChanged &&
+            other is _$SoldToChangedImpl &&
             (identical(other.soldTo, soldTo) || other.soldTo == soldTo));
   }
 
@@ -615,8 +616,8 @@ class _$_SoldToChanged implements _SoldToChanged {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_SoldToChangedCopyWith<_$_SoldToChanged> get copyWith =>
-      __$$_SoldToChangedCopyWithImpl<_$_SoldToChanged>(this, _$identity);
+  _$$SoldToChangedImplCopyWith<_$SoldToChangedImpl> get copyWith =>
+      __$$SoldToChangedImplCopyWithImpl<_$SoldToChangedImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -718,29 +719,29 @@ class _$_SoldToChanged implements _SoldToChanged {
 }
 
 abstract class _SoldToChanged implements ReturnApproverFilterEvent {
-  const factory _SoldToChanged(final String soldTo) = _$_SoldToChanged;
+  const factory _SoldToChanged(final String soldTo) = _$SoldToChangedImpl;
 
   String get soldTo;
   @JsonKey(ignore: true)
-  _$$_SoldToChangedCopyWith<_$_SoldToChanged> get copyWith =>
+  _$$SoldToChangedImplCopyWith<_$SoldToChangedImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_ShipToChangedCopyWith<$Res> {
-  factory _$$_ShipToChangedCopyWith(
-          _$_ShipToChanged value, $Res Function(_$_ShipToChanged) then) =
-      __$$_ShipToChangedCopyWithImpl<$Res>;
+abstract class _$$ShipToChangedImplCopyWith<$Res> {
+  factory _$$ShipToChangedImplCopyWith(
+          _$ShipToChangedImpl value, $Res Function(_$ShipToChangedImpl) then) =
+      __$$ShipToChangedImplCopyWithImpl<$Res>;
   @useResult
   $Res call({String shitTo});
 }
 
 /// @nodoc
-class __$$_ShipToChangedCopyWithImpl<$Res>
-    extends _$ReturnApproverFilterEventCopyWithImpl<$Res, _$_ShipToChanged>
-    implements _$$_ShipToChangedCopyWith<$Res> {
-  __$$_ShipToChangedCopyWithImpl(
-      _$_ShipToChanged _value, $Res Function(_$_ShipToChanged) _then)
+class __$$ShipToChangedImplCopyWithImpl<$Res>
+    extends _$ReturnApproverFilterEventCopyWithImpl<$Res, _$ShipToChangedImpl>
+    implements _$$ShipToChangedImplCopyWith<$Res> {
+  __$$ShipToChangedImplCopyWithImpl(
+      _$ShipToChangedImpl _value, $Res Function(_$ShipToChangedImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -748,7 +749,7 @@ class __$$_ShipToChangedCopyWithImpl<$Res>
   $Res call({
     Object? shitTo = null,
   }) {
-    return _then(_$_ShipToChanged(
+    return _then(_$ShipToChangedImpl(
       null == shitTo
           ? _value.shitTo
           : shitTo // ignore: cast_nullable_to_non_nullable
@@ -759,8 +760,8 @@ class __$$_ShipToChangedCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_ShipToChanged implements _ShipToChanged {
-  const _$_ShipToChanged(this.shitTo);
+class _$ShipToChangedImpl implements _ShipToChanged {
+  const _$ShipToChangedImpl(this.shitTo);
 
   @override
   final String shitTo;
@@ -771,10 +772,10 @@ class _$_ShipToChanged implements _ShipToChanged {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ShipToChanged &&
+            other is _$ShipToChangedImpl &&
             (identical(other.shitTo, shitTo) || other.shitTo == shitTo));
   }
 
@@ -784,8 +785,8 @@ class _$_ShipToChanged implements _ShipToChanged {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ShipToChangedCopyWith<_$_ShipToChanged> get copyWith =>
-      __$$_ShipToChangedCopyWithImpl<_$_ShipToChanged>(this, _$identity);
+  _$$ShipToChangedImplCopyWith<_$ShipToChangedImpl> get copyWith =>
+      __$$ShipToChangedImplCopyWithImpl<_$ShipToChangedImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -887,29 +888,30 @@ class _$_ShipToChanged implements _ShipToChanged {
 }
 
 abstract class _ShipToChanged implements ReturnApproverFilterEvent {
-  const factory _ShipToChanged(final String shitTo) = _$_ShipToChanged;
+  const factory _ShipToChanged(final String shitTo) = _$ShipToChangedImpl;
 
   String get shitTo;
   @JsonKey(ignore: true)
-  _$$_ShipToChangedCopyWith<_$_ShipToChanged> get copyWith =>
+  _$$ShipToChangedImplCopyWith<_$ShipToChangedImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_CreatedByChangedCopyWith<$Res> {
-  factory _$$_CreatedByChangedCopyWith(
-          _$_CreatedByChanged value, $Res Function(_$_CreatedByChanged) then) =
-      __$$_CreatedByChangedCopyWithImpl<$Res>;
+abstract class _$$CreatedByChangedImplCopyWith<$Res> {
+  factory _$$CreatedByChangedImplCopyWith(_$CreatedByChangedImpl value,
+          $Res Function(_$CreatedByChangedImpl) then) =
+      __$$CreatedByChangedImplCopyWithImpl<$Res>;
   @useResult
   $Res call({String createdBy});
 }
 
 /// @nodoc
-class __$$_CreatedByChangedCopyWithImpl<$Res>
-    extends _$ReturnApproverFilterEventCopyWithImpl<$Res, _$_CreatedByChanged>
-    implements _$$_CreatedByChangedCopyWith<$Res> {
-  __$$_CreatedByChangedCopyWithImpl(
-      _$_CreatedByChanged _value, $Res Function(_$_CreatedByChanged) _then)
+class __$$CreatedByChangedImplCopyWithImpl<$Res>
+    extends _$ReturnApproverFilterEventCopyWithImpl<$Res,
+        _$CreatedByChangedImpl>
+    implements _$$CreatedByChangedImplCopyWith<$Res> {
+  __$$CreatedByChangedImplCopyWithImpl(_$CreatedByChangedImpl _value,
+      $Res Function(_$CreatedByChangedImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -917,7 +919,7 @@ class __$$_CreatedByChangedCopyWithImpl<$Res>
   $Res call({
     Object? createdBy = null,
   }) {
-    return _then(_$_CreatedByChanged(
+    return _then(_$CreatedByChangedImpl(
       null == createdBy
           ? _value.createdBy
           : createdBy // ignore: cast_nullable_to_non_nullable
@@ -928,8 +930,8 @@ class __$$_CreatedByChangedCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_CreatedByChanged implements _CreatedByChanged {
-  const _$_CreatedByChanged(this.createdBy);
+class _$CreatedByChangedImpl implements _CreatedByChanged {
+  const _$CreatedByChangedImpl(this.createdBy);
 
   @override
   final String createdBy;
@@ -940,10 +942,10 @@ class _$_CreatedByChanged implements _CreatedByChanged {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_CreatedByChanged &&
+            other is _$CreatedByChangedImpl &&
             (identical(other.createdBy, createdBy) ||
                 other.createdBy == createdBy));
   }
@@ -954,8 +956,9 @@ class _$_CreatedByChanged implements _CreatedByChanged {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_CreatedByChangedCopyWith<_$_CreatedByChanged> get copyWith =>
-      __$$_CreatedByChangedCopyWithImpl<_$_CreatedByChanged>(this, _$identity);
+  _$$CreatedByChangedImplCopyWith<_$CreatedByChangedImpl> get copyWith =>
+      __$$CreatedByChangedImplCopyWithImpl<_$CreatedByChangedImpl>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -1057,29 +1060,30 @@ class _$_CreatedByChanged implements _CreatedByChanged {
 }
 
 abstract class _CreatedByChanged implements ReturnApproverFilterEvent {
-  const factory _CreatedByChanged(final String createdBy) = _$_CreatedByChanged;
+  const factory _CreatedByChanged(final String createdBy) =
+      _$CreatedByChangedImpl;
 
   String get createdBy;
   @JsonKey(ignore: true)
-  _$$_CreatedByChangedCopyWith<_$_CreatedByChanged> get copyWith =>
+  _$$CreatedByChangedImplCopyWith<_$CreatedByChangedImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_SortByChangedCopyWith<$Res> {
-  factory _$$_SortByChangedCopyWith(
-          _$_SortByChanged value, $Res Function(_$_SortByChanged) then) =
-      __$$_SortByChangedCopyWithImpl<$Res>;
+abstract class _$$SortByChangedImplCopyWith<$Res> {
+  factory _$$SortByChangedImplCopyWith(
+          _$SortByChangedImpl value, $Res Function(_$SortByChangedImpl) then) =
+      __$$SortByChangedImplCopyWithImpl<$Res>;
   @useResult
   $Res call({FilterStatus sortBy});
 }
 
 /// @nodoc
-class __$$_SortByChangedCopyWithImpl<$Res>
-    extends _$ReturnApproverFilterEventCopyWithImpl<$Res, _$_SortByChanged>
-    implements _$$_SortByChangedCopyWith<$Res> {
-  __$$_SortByChangedCopyWithImpl(
-      _$_SortByChanged _value, $Res Function(_$_SortByChanged) _then)
+class __$$SortByChangedImplCopyWithImpl<$Res>
+    extends _$ReturnApproverFilterEventCopyWithImpl<$Res, _$SortByChangedImpl>
+    implements _$$SortByChangedImplCopyWith<$Res> {
+  __$$SortByChangedImplCopyWithImpl(
+      _$SortByChangedImpl _value, $Res Function(_$SortByChangedImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1087,7 +1091,7 @@ class __$$_SortByChangedCopyWithImpl<$Res>
   $Res call({
     Object? sortBy = null,
   }) {
-    return _then(_$_SortByChanged(
+    return _then(_$SortByChangedImpl(
       null == sortBy
           ? _value.sortBy
           : sortBy // ignore: cast_nullable_to_non_nullable
@@ -1098,8 +1102,8 @@ class __$$_SortByChangedCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_SortByChanged implements _SortByChanged {
-  const _$_SortByChanged(this.sortBy);
+class _$SortByChangedImpl implements _SortByChanged {
+  const _$SortByChangedImpl(this.sortBy);
 
   @override
   final FilterStatus sortBy;
@@ -1110,10 +1114,10 @@ class _$_SortByChanged implements _SortByChanged {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_SortByChanged &&
+            other is _$SortByChangedImpl &&
             (identical(other.sortBy, sortBy) || other.sortBy == sortBy));
   }
 
@@ -1123,8 +1127,8 @@ class _$_SortByChanged implements _SortByChanged {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_SortByChangedCopyWith<_$_SortByChanged> get copyWith =>
-      __$$_SortByChangedCopyWithImpl<_$_SortByChanged>(this, _$identity);
+  _$$SortByChangedImplCopyWith<_$SortByChangedImpl> get copyWith =>
+      __$$SortByChangedImplCopyWithImpl<_$SortByChangedImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -1226,29 +1230,29 @@ class _$_SortByChanged implements _SortByChanged {
 }
 
 abstract class _SortByChanged implements ReturnApproverFilterEvent {
-  const factory _SortByChanged(final FilterStatus sortBy) = _$_SortByChanged;
+  const factory _SortByChanged(final FilterStatus sortBy) = _$SortByChangedImpl;
 
   FilterStatus get sortBy;
   @JsonKey(ignore: true)
-  _$$_SortByChangedCopyWith<_$_SortByChanged> get copyWith =>
+  _$$SortByChangedImplCopyWith<_$SortByChangedImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_SetInvoiceDateCopyWith<$Res> {
-  factory _$$_SetInvoiceDateCopyWith(
-          _$_SetInvoiceDate value, $Res Function(_$_SetInvoiceDate) then) =
-      __$$_SetInvoiceDateCopyWithImpl<$Res>;
+abstract class _$$SetInvoiceDateImplCopyWith<$Res> {
+  factory _$$SetInvoiceDateImplCopyWith(_$SetInvoiceDateImpl value,
+          $Res Function(_$SetInvoiceDateImpl) then) =
+      __$$SetInvoiceDateImplCopyWithImpl<$Res>;
   @useResult
   $Res call({DateTimeRange invoiceDateRange});
 }
 
 /// @nodoc
-class __$$_SetInvoiceDateCopyWithImpl<$Res>
-    extends _$ReturnApproverFilterEventCopyWithImpl<$Res, _$_SetInvoiceDate>
-    implements _$$_SetInvoiceDateCopyWith<$Res> {
-  __$$_SetInvoiceDateCopyWithImpl(
-      _$_SetInvoiceDate _value, $Res Function(_$_SetInvoiceDate) _then)
+class __$$SetInvoiceDateImplCopyWithImpl<$Res>
+    extends _$ReturnApproverFilterEventCopyWithImpl<$Res, _$SetInvoiceDateImpl>
+    implements _$$SetInvoiceDateImplCopyWith<$Res> {
+  __$$SetInvoiceDateImplCopyWithImpl(
+      _$SetInvoiceDateImpl _value, $Res Function(_$SetInvoiceDateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1256,7 +1260,7 @@ class __$$_SetInvoiceDateCopyWithImpl<$Res>
   $Res call({
     Object? invoiceDateRange = null,
   }) {
-    return _then(_$_SetInvoiceDate(
+    return _then(_$SetInvoiceDateImpl(
       null == invoiceDateRange
           ? _value.invoiceDateRange
           : invoiceDateRange // ignore: cast_nullable_to_non_nullable
@@ -1267,8 +1271,8 @@ class __$$_SetInvoiceDateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_SetInvoiceDate implements _SetInvoiceDate {
-  const _$_SetInvoiceDate(this.invoiceDateRange);
+class _$SetInvoiceDateImpl implements _SetInvoiceDate {
+  const _$SetInvoiceDateImpl(this.invoiceDateRange);
 
   @override
   final DateTimeRange invoiceDateRange;
@@ -1279,10 +1283,10 @@ class _$_SetInvoiceDate implements _SetInvoiceDate {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_SetInvoiceDate &&
+            other is _$SetInvoiceDateImpl &&
             (identical(other.invoiceDateRange, invoiceDateRange) ||
                 other.invoiceDateRange == invoiceDateRange));
   }
@@ -1293,8 +1297,9 @@ class _$_SetInvoiceDate implements _SetInvoiceDate {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_SetInvoiceDateCopyWith<_$_SetInvoiceDate> get copyWith =>
-      __$$_SetInvoiceDateCopyWithImpl<_$_SetInvoiceDate>(this, _$identity);
+  _$$SetInvoiceDateImplCopyWith<_$SetInvoiceDateImpl> get copyWith =>
+      __$$SetInvoiceDateImplCopyWithImpl<_$SetInvoiceDateImpl>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -1397,11 +1402,11 @@ class _$_SetInvoiceDate implements _SetInvoiceDate {
 
 abstract class _SetInvoiceDate implements ReturnApproverFilterEvent {
   const factory _SetInvoiceDate(final DateTimeRange invoiceDateRange) =
-      _$_SetInvoiceDate;
+      _$SetInvoiceDateImpl;
 
   DateTimeRange get invoiceDateRange;
   @JsonKey(ignore: true)
-  _$$_SetInvoiceDateCopyWith<_$_SetInvoiceDate> get copyWith =>
+  _$$SetInvoiceDateImplCopyWith<_$SetInvoiceDateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -1476,12 +1481,12 @@ class _$ReturnApproverFilterStateCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_ReturnApproverFilterStateCopyWith<$Res>
+abstract class _$$ReturnApproverFilterStateImplCopyWith<$Res>
     implements $ReturnApproverFilterStateCopyWith<$Res> {
-  factory _$$_ReturnApproverFilterStateCopyWith(
-          _$_ReturnApproverFilterState value,
-          $Res Function(_$_ReturnApproverFilterState) then) =
-      __$$_ReturnApproverFilterStateCopyWithImpl<$Res>;
+  factory _$$ReturnApproverFilterStateImplCopyWith(
+          _$ReturnApproverFilterStateImpl value,
+          $Res Function(_$ReturnApproverFilterStateImpl) then) =
+      __$$ReturnApproverFilterStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -1494,13 +1499,13 @@ abstract class _$$_ReturnApproverFilterStateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_ReturnApproverFilterStateCopyWithImpl<$Res>
+class __$$ReturnApproverFilterStateImplCopyWithImpl<$Res>
     extends _$ReturnApproverFilterStateCopyWithImpl<$Res,
-        _$_ReturnApproverFilterState>
-    implements _$$_ReturnApproverFilterStateCopyWith<$Res> {
-  __$$_ReturnApproverFilterStateCopyWithImpl(
-      _$_ReturnApproverFilterState _value,
-      $Res Function(_$_ReturnApproverFilterState) _then)
+        _$ReturnApproverFilterStateImpl>
+    implements _$$ReturnApproverFilterStateImplCopyWith<$Res> {
+  __$$ReturnApproverFilterStateImplCopyWithImpl(
+      _$ReturnApproverFilterStateImpl _value,
+      $Res Function(_$ReturnApproverFilterStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1510,7 +1515,7 @@ class __$$_ReturnApproverFilterStateCopyWithImpl<$Res>
     Object? isSubmitting = null,
     Object? showErrorMessages = null,
   }) {
-    return _then(_$_ReturnApproverFilterState(
+    return _then(_$ReturnApproverFilterStateImpl(
       approverReturnFilter: null == approverReturnFilter
           ? _value.approverReturnFilter
           : approverReturnFilter // ignore: cast_nullable_to_non_nullable
@@ -1529,8 +1534,8 @@ class __$$_ReturnApproverFilterStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_ReturnApproverFilterState extends _ReturnApproverFilterState {
-  const _$_ReturnApproverFilterState(
+class _$ReturnApproverFilterStateImpl extends _ReturnApproverFilterState {
+  const _$ReturnApproverFilterStateImpl(
       {required this.approverReturnFilter,
       required this.isSubmitting,
       required this.showErrorMessages})
@@ -1549,10 +1554,10 @@ class _$_ReturnApproverFilterState extends _ReturnApproverFilterState {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ReturnApproverFilterState &&
+            other is _$ReturnApproverFilterStateImpl &&
             (identical(other.approverReturnFilter, approverReturnFilter) ||
                 other.approverReturnFilter == approverReturnFilter) &&
             (identical(other.isSubmitting, isSubmitting) ||
@@ -1568,16 +1573,16 @@ class _$_ReturnApproverFilterState extends _ReturnApproverFilterState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ReturnApproverFilterStateCopyWith<_$_ReturnApproverFilterState>
-      get copyWith => __$$_ReturnApproverFilterStateCopyWithImpl<
-          _$_ReturnApproverFilterState>(this, _$identity);
+  _$$ReturnApproverFilterStateImplCopyWith<_$ReturnApproverFilterStateImpl>
+      get copyWith => __$$ReturnApproverFilterStateImplCopyWithImpl<
+          _$ReturnApproverFilterStateImpl>(this, _$identity);
 }
 
 abstract class _ReturnApproverFilterState extends ReturnApproverFilterState {
   const factory _ReturnApproverFilterState(
       {required final ReturnApproverFilter approverReturnFilter,
       required final bool isSubmitting,
-      required final bool showErrorMessages}) = _$_ReturnApproverFilterState;
+      required final bool showErrorMessages}) = _$ReturnApproverFilterStateImpl;
   const _ReturnApproverFilterState._() : super._();
 
   @override
@@ -1588,6 +1593,6 @@ abstract class _ReturnApproverFilterState extends ReturnApproverFilterState {
   bool get showErrorMessages;
   @override
   @JsonKey(ignore: true)
-  _$$_ReturnApproverFilterStateCopyWith<_$_ReturnApproverFilterState>
+  _$$ReturnApproverFilterStateImplCopyWith<_$ReturnApproverFilterStateImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

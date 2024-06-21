@@ -12,7 +12,7 @@ part of 'po_attachment_bloc.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$PoAttachmentEvent {
@@ -106,25 +106,25 @@ class _$PoAttachmentEventCopyWithImpl<$Res, $Val extends PoAttachmentEvent>
 }
 
 /// @nodoc
-abstract class _$$_InitializedCopyWith<$Res> {
-  factory _$$_InitializedCopyWith(
-          _$_Initialized value, $Res Function(_$_Initialized) then) =
-      __$$_InitializedCopyWithImpl<$Res>;
+abstract class _$$InitializedImplCopyWith<$Res> {
+  factory _$$InitializedImplCopyWith(
+          _$InitializedImpl value, $Res Function(_$InitializedImpl) then) =
+      __$$InitializedImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_InitializedCopyWithImpl<$Res>
-    extends _$PoAttachmentEventCopyWithImpl<$Res, _$_Initialized>
-    implements _$$_InitializedCopyWith<$Res> {
-  __$$_InitializedCopyWithImpl(
-      _$_Initialized _value, $Res Function(_$_Initialized) _then)
+class __$$InitializedImplCopyWithImpl<$Res>
+    extends _$PoAttachmentEventCopyWithImpl<$Res, _$InitializedImpl>
+    implements _$$InitializedImplCopyWith<$Res> {
+  __$$InitializedImplCopyWithImpl(
+      _$InitializedImpl _value, $Res Function(_$InitializedImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_Initialized implements _Initialized {
-  const _$_Initialized();
+class _$InitializedImpl implements _Initialized {
+  const _$InitializedImpl();
 
   @override
   String toString() {
@@ -132,9 +132,9 @@ class _$_Initialized implements _Initialized {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_Initialized);
+        (other.runtimeType == runtimeType && other is _$InitializedImpl);
   }
 
   @override
@@ -235,24 +235,24 @@ class _$_Initialized implements _Initialized {
 }
 
 abstract class _Initialized implements PoAttachmentEvent {
-  const factory _Initialized() = _$_Initialized;
+  const factory _Initialized() = _$InitializedImpl;
 }
 
 /// @nodoc
-abstract class _$$_DownloadFileCopyWith<$Res> {
-  factory _$$_DownloadFileCopyWith(
-          _$_DownloadFile value, $Res Function(_$_DownloadFile) then) =
-      __$$_DownloadFileCopyWithImpl<$Res>;
+abstract class _$$DownloadFileImplCopyWith<$Res> {
+  factory _$$DownloadFileImplCopyWith(
+          _$DownloadFileImpl value, $Res Function(_$DownloadFileImpl) then) =
+      __$$DownloadFileImplCopyWithImpl<$Res>;
   @useResult
   $Res call({List<PoDocuments> files, AttachmentType attachmentType});
 }
 
 /// @nodoc
-class __$$_DownloadFileCopyWithImpl<$Res>
-    extends _$PoAttachmentEventCopyWithImpl<$Res, _$_DownloadFile>
-    implements _$$_DownloadFileCopyWith<$Res> {
-  __$$_DownloadFileCopyWithImpl(
-      _$_DownloadFile _value, $Res Function(_$_DownloadFile) _then)
+class __$$DownloadFileImplCopyWithImpl<$Res>
+    extends _$PoAttachmentEventCopyWithImpl<$Res, _$DownloadFileImpl>
+    implements _$$DownloadFileImplCopyWith<$Res> {
+  __$$DownloadFileImplCopyWithImpl(
+      _$DownloadFileImpl _value, $Res Function(_$DownloadFileImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -261,7 +261,7 @@ class __$$_DownloadFileCopyWithImpl<$Res>
     Object? files = null,
     Object? attachmentType = null,
   }) {
-    return _then(_$_DownloadFile(
+    return _then(_$DownloadFileImpl(
       files: null == files
           ? _value._files
           : files // ignore: cast_nullable_to_non_nullable
@@ -276,8 +276,8 @@ class __$$_DownloadFileCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_DownloadFile implements _DownloadFile {
-  const _$_DownloadFile(
+class _$DownloadFileImpl implements _DownloadFile {
+  const _$DownloadFileImpl(
       {required final List<PoDocuments> files,
       this.attachmentType = AttachmentType.downloadPOAttachment})
       : _files = files;
@@ -300,10 +300,10 @@ class _$_DownloadFile implements _DownloadFile {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_DownloadFile &&
+            other is _$DownloadFileImpl &&
             const DeepCollectionEquality().equals(other._files, _files) &&
             (identical(other.attachmentType, attachmentType) ||
                 other.attachmentType == attachmentType));
@@ -316,8 +316,8 @@ class _$_DownloadFile implements _DownloadFile {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_DownloadFileCopyWith<_$_DownloadFile> get copyWith =>
-      __$$_DownloadFileCopyWithImpl<_$_DownloadFile>(this, _$identity);
+  _$$DownloadFileImplCopyWith<_$DownloadFileImpl> get copyWith =>
+      __$$DownloadFileImplCopyWithImpl<_$DownloadFileImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -416,20 +416,20 @@ class _$_DownloadFile implements _DownloadFile {
 abstract class _DownloadFile implements PoAttachmentEvent {
   const factory _DownloadFile(
       {required final List<PoDocuments> files,
-      final AttachmentType attachmentType}) = _$_DownloadFile;
+      final AttachmentType attachmentType}) = _$DownloadFileImpl;
 
   List<PoDocuments> get files;
   AttachmentType get attachmentType;
   @JsonKey(ignore: true)
-  _$$_DownloadFileCopyWith<_$_DownloadFile> get copyWith =>
+  _$$DownloadFileImplCopyWith<_$DownloadFileImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_OpenFileCopyWith<$Res> {
-  factory _$$_OpenFileCopyWith(
-          _$_OpenFile value, $Res Function(_$_OpenFile) then) =
-      __$$_OpenFileCopyWithImpl<$Res>;
+abstract class _$$OpenFileImplCopyWith<$Res> {
+  factory _$$OpenFileImplCopyWith(
+          _$OpenFileImpl value, $Res Function(_$OpenFileImpl) then) =
+      __$$OpenFileImplCopyWithImpl<$Res>;
   @useResult
   $Res call({PoDocuments files, AttachmentType attachmentType});
 
@@ -437,11 +437,11 @@ abstract class _$$_OpenFileCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_OpenFileCopyWithImpl<$Res>
-    extends _$PoAttachmentEventCopyWithImpl<$Res, _$_OpenFile>
-    implements _$$_OpenFileCopyWith<$Res> {
-  __$$_OpenFileCopyWithImpl(
-      _$_OpenFile _value, $Res Function(_$_OpenFile) _then)
+class __$$OpenFileImplCopyWithImpl<$Res>
+    extends _$PoAttachmentEventCopyWithImpl<$Res, _$OpenFileImpl>
+    implements _$$OpenFileImplCopyWith<$Res> {
+  __$$OpenFileImplCopyWithImpl(
+      _$OpenFileImpl _value, $Res Function(_$OpenFileImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -450,7 +450,7 @@ class __$$_OpenFileCopyWithImpl<$Res>
     Object? files = null,
     Object? attachmentType = null,
   }) {
-    return _then(_$_OpenFile(
+    return _then(_$OpenFileImpl(
       files: null == files
           ? _value.files
           : files // ignore: cast_nullable_to_non_nullable
@@ -473,8 +473,8 @@ class __$$_OpenFileCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_OpenFile implements _OpenFile {
-  const _$_OpenFile(
+class _$OpenFileImpl implements _OpenFile {
+  const _$OpenFileImpl(
       {required this.files,
       this.attachmentType = AttachmentType.downloadPOAttachment});
 
@@ -490,10 +490,10 @@ class _$_OpenFile implements _OpenFile {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_OpenFile &&
+            other is _$OpenFileImpl &&
             (identical(other.files, files) || other.files == files) &&
             (identical(other.attachmentType, attachmentType) ||
                 other.attachmentType == attachmentType));
@@ -505,8 +505,8 @@ class _$_OpenFile implements _OpenFile {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_OpenFileCopyWith<_$_OpenFile> get copyWith =>
-      __$$_OpenFileCopyWithImpl<_$_OpenFile>(this, _$identity);
+  _$$OpenFileImplCopyWith<_$OpenFileImpl> get copyWith =>
+      __$$OpenFileImplCopyWithImpl<_$OpenFileImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -605,20 +605,20 @@ class _$_OpenFile implements _OpenFile {
 abstract class _OpenFile implements PoAttachmentEvent {
   const factory _OpenFile(
       {required final PoDocuments files,
-      final AttachmentType attachmentType}) = _$_OpenFile;
+      final AttachmentType attachmentType}) = _$OpenFileImpl;
 
   PoDocuments get files;
   AttachmentType get attachmentType;
   @JsonKey(ignore: true)
-  _$$_OpenFileCopyWith<_$_OpenFile> get copyWith =>
+  _$$OpenFileImplCopyWith<_$OpenFileImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_UpLoadFileCopyWith<$Res> {
-  factory _$$_UpLoadFileCopyWith(
-          _$_UpLoadFile value, $Res Function(_$_UpLoadFile) then) =
-      __$$_UpLoadFileCopyWithImpl<$Res>;
+abstract class _$$UpLoadFileImplCopyWith<$Res> {
+  factory _$$UpLoadFileImplCopyWith(
+          _$UpLoadFileImpl value, $Res Function(_$UpLoadFileImpl) then) =
+      __$$UpLoadFileImplCopyWithImpl<$Res>;
   @useResult
   $Res call(
       {List<PoDocuments> uploadedPODocument,
@@ -629,11 +629,11 @@ abstract class _$$_UpLoadFileCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_UpLoadFileCopyWithImpl<$Res>
-    extends _$PoAttachmentEventCopyWithImpl<$Res, _$_UpLoadFile>
-    implements _$$_UpLoadFileCopyWith<$Res> {
-  __$$_UpLoadFileCopyWithImpl(
-      _$_UpLoadFile _value, $Res Function(_$_UpLoadFile) _then)
+class __$$UpLoadFileImplCopyWithImpl<$Res>
+    extends _$PoAttachmentEventCopyWithImpl<$Res, _$UpLoadFileImpl>
+    implements _$$UpLoadFileImplCopyWith<$Res> {
+  __$$UpLoadFileImplCopyWithImpl(
+      _$UpLoadFileImpl _value, $Res Function(_$UpLoadFileImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -643,7 +643,7 @@ class __$$_UpLoadFileCopyWithImpl<$Res>
     Object? uploadOptionType = null,
     Object? user = null,
   }) {
-    return _then(_$_UpLoadFile(
+    return _then(_$UpLoadFileImpl(
       uploadedPODocument: null == uploadedPODocument
           ? _value._uploadedPODocument
           : uploadedPODocument // ignore: cast_nullable_to_non_nullable
@@ -670,8 +670,8 @@ class __$$_UpLoadFileCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_UpLoadFile implements _UpLoadFile {
-  const _$_UpLoadFile(
+class _$UpLoadFileImpl implements _UpLoadFile {
+  const _$UpLoadFileImpl(
       {required final List<PoDocuments> uploadedPODocument,
       required this.uploadOptionType,
       required this.user})
@@ -697,10 +697,10 @@ class _$_UpLoadFile implements _UpLoadFile {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_UpLoadFile &&
+            other is _$UpLoadFileImpl &&
             const DeepCollectionEquality()
                 .equals(other._uploadedPODocument, _uploadedPODocument) &&
             (identical(other.uploadOptionType, uploadOptionType) ||
@@ -718,8 +718,8 @@ class _$_UpLoadFile implements _UpLoadFile {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_UpLoadFileCopyWith<_$_UpLoadFile> get copyWith =>
-      __$$_UpLoadFileCopyWithImpl<_$_UpLoadFile>(this, _$identity);
+  _$$UpLoadFileImplCopyWith<_$UpLoadFileImpl> get copyWith =>
+      __$$UpLoadFileImplCopyWithImpl<_$UpLoadFileImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -819,21 +819,21 @@ abstract class _UpLoadFile implements PoAttachmentEvent {
   const factory _UpLoadFile(
       {required final List<PoDocuments> uploadedPODocument,
       required final UploadOptionType uploadOptionType,
-      required final User user}) = _$_UpLoadFile;
+      required final User user}) = _$UpLoadFileImpl;
 
   List<PoDocuments> get uploadedPODocument;
   UploadOptionType get uploadOptionType;
   User get user;
   @JsonKey(ignore: true)
-  _$$_UpLoadFileCopyWith<_$_UpLoadFile> get copyWith =>
+  _$$UpLoadFileImplCopyWith<_$UpLoadFileImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_DeleteFileCopyWith<$Res> {
-  factory _$$_DeleteFileCopyWith(
-          _$_DeleteFile value, $Res Function(_$_DeleteFile) then) =
-      __$$_DeleteFileCopyWithImpl<$Res>;
+abstract class _$$DeleteFileImplCopyWith<$Res> {
+  factory _$$DeleteFileImplCopyWith(
+          _$DeleteFileImpl value, $Res Function(_$DeleteFileImpl) then) =
+      __$$DeleteFileImplCopyWithImpl<$Res>;
   @useResult
   $Res call({PoDocuments file});
 
@@ -841,11 +841,11 @@ abstract class _$$_DeleteFileCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_DeleteFileCopyWithImpl<$Res>
-    extends _$PoAttachmentEventCopyWithImpl<$Res, _$_DeleteFile>
-    implements _$$_DeleteFileCopyWith<$Res> {
-  __$$_DeleteFileCopyWithImpl(
-      _$_DeleteFile _value, $Res Function(_$_DeleteFile) _then)
+class __$$DeleteFileImplCopyWithImpl<$Res>
+    extends _$PoAttachmentEventCopyWithImpl<$Res, _$DeleteFileImpl>
+    implements _$$DeleteFileImplCopyWith<$Res> {
+  __$$DeleteFileImplCopyWithImpl(
+      _$DeleteFileImpl _value, $Res Function(_$DeleteFileImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -853,7 +853,7 @@ class __$$_DeleteFileCopyWithImpl<$Res>
   $Res call({
     Object? file = null,
   }) {
-    return _then(_$_DeleteFile(
+    return _then(_$DeleteFileImpl(
       file: null == file
           ? _value.file
           : file // ignore: cast_nullable_to_non_nullable
@@ -872,8 +872,8 @@ class __$$_DeleteFileCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_DeleteFile implements _DeleteFile {
-  const _$_DeleteFile({required this.file});
+class _$DeleteFileImpl implements _DeleteFile {
+  const _$DeleteFileImpl({required this.file});
 
   @override
   final PoDocuments file;
@@ -884,10 +884,10 @@ class _$_DeleteFile implements _DeleteFile {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_DeleteFile &&
+            other is _$DeleteFileImpl &&
             (identical(other.file, file) || other.file == file));
   }
 
@@ -897,8 +897,8 @@ class _$_DeleteFile implements _DeleteFile {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_DeleteFileCopyWith<_$_DeleteFile> get copyWith =>
-      __$$_DeleteFileCopyWithImpl<_$_DeleteFile>(this, _$identity);
+  _$$DeleteFileImplCopyWith<_$DeleteFileImpl> get copyWith =>
+      __$$DeleteFileImplCopyWithImpl<_$DeleteFileImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -995,11 +995,12 @@ class _$_DeleteFile implements _DeleteFile {
 }
 
 abstract class _DeleteFile implements PoAttachmentEvent {
-  const factory _DeleteFile({required final PoDocuments file}) = _$_DeleteFile;
+  const factory _DeleteFile({required final PoDocuments file}) =
+      _$DeleteFileImpl;
 
   PoDocuments get file;
   @JsonKey(ignore: true)
-  _$$_DeleteFileCopyWith<_$_DeleteFile> get copyWith =>
+  _$$DeleteFileImplCopyWith<_$DeleteFileImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -1069,11 +1070,11 @@ class _$PoAttachmentStateCopyWithImpl<$Res, $Val extends PoAttachmentState>
 }
 
 /// @nodoc
-abstract class _$$_PoAttachmentStateCopyWith<$Res>
+abstract class _$$PoAttachmentStateImplCopyWith<$Res>
     implements $PoAttachmentStateCopyWith<$Res> {
-  factory _$$_PoAttachmentStateCopyWith(_$_PoAttachmentState value,
-          $Res Function(_$_PoAttachmentState) then) =
-      __$$_PoAttachmentStateCopyWithImpl<$Res>;
+  factory _$$PoAttachmentStateImplCopyWith(_$PoAttachmentStateImpl value,
+          $Res Function(_$PoAttachmentStateImpl) then) =
+      __$$PoAttachmentStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -1084,11 +1085,11 @@ abstract class _$$_PoAttachmentStateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_PoAttachmentStateCopyWithImpl<$Res>
-    extends _$PoAttachmentStateCopyWithImpl<$Res, _$_PoAttachmentState>
-    implements _$$_PoAttachmentStateCopyWith<$Res> {
-  __$$_PoAttachmentStateCopyWithImpl(
-      _$_PoAttachmentState _value, $Res Function(_$_PoAttachmentState) _then)
+class __$$PoAttachmentStateImplCopyWithImpl<$Res>
+    extends _$PoAttachmentStateCopyWithImpl<$Res, _$PoAttachmentStateImpl>
+    implements _$$PoAttachmentStateImplCopyWith<$Res> {
+  __$$PoAttachmentStateImplCopyWithImpl(_$PoAttachmentStateImpl _value,
+      $Res Function(_$PoAttachmentStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1099,7 +1100,7 @@ class __$$_PoAttachmentStateCopyWithImpl<$Res>
     Object? fileOperationMode = null,
     Object? failureOrSuccessOption = null,
   }) {
-    return _then(_$_PoAttachmentState(
+    return _then(_$PoAttachmentStateImpl(
       isFetching: null == isFetching
           ? _value.isFetching
           : isFetching // ignore: cast_nullable_to_non_nullable
@@ -1122,8 +1123,8 @@ class __$$_PoAttachmentStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_PoAttachmentState extends _PoAttachmentState {
-  const _$_PoAttachmentState(
+class _$PoAttachmentStateImpl extends _PoAttachmentState {
+  const _$PoAttachmentStateImpl(
       {required this.isFetching,
       required final List<PoDocuments> fileUrl,
       required this.fileOperationMode,
@@ -1152,10 +1153,10 @@ class _$_PoAttachmentState extends _PoAttachmentState {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_PoAttachmentState &&
+            other is _$PoAttachmentStateImpl &&
             (identical(other.isFetching, isFetching) ||
                 other.isFetching == isFetching) &&
             const DeepCollectionEquality().equals(other._fileUrl, _fileUrl) &&
@@ -1176,8 +1177,8 @@ class _$_PoAttachmentState extends _PoAttachmentState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_PoAttachmentStateCopyWith<_$_PoAttachmentState> get copyWith =>
-      __$$_PoAttachmentStateCopyWithImpl<_$_PoAttachmentState>(
+  _$$PoAttachmentStateImplCopyWith<_$PoAttachmentStateImpl> get copyWith =>
+      __$$PoAttachmentStateImplCopyWithImpl<_$PoAttachmentStateImpl>(
           this, _$identity);
 }
 
@@ -1187,7 +1188,7 @@ abstract class _PoAttachmentState extends PoAttachmentState {
       required final List<PoDocuments> fileUrl,
       required final FileOperationMode fileOperationMode,
       required final Option<Either<ApiFailure, dynamic>>
-          failureOrSuccessOption}) = _$_PoAttachmentState;
+          failureOrSuccessOption}) = _$PoAttachmentStateImpl;
   const _PoAttachmentState._() : super._();
 
   @override
@@ -1200,6 +1201,6 @@ abstract class _PoAttachmentState extends PoAttachmentState {
   Option<Either<ApiFailure, dynamic>> get failureOrSuccessOption;
   @override
   @JsonKey(ignore: true)
-  _$$_PoAttachmentStateCopyWith<_$_PoAttachmentState> get copyWith =>
+  _$$PoAttachmentStateImplCopyWith<_$PoAttachmentStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

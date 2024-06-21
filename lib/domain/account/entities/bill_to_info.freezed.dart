@@ -12,7 +12,7 @@ part of 'bill_to_info.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$BillToInfo {
@@ -275,11 +275,11 @@ class _$BillToInfoCopyWithImpl<$Res, $Val extends BillToInfo>
 }
 
 /// @nodoc
-abstract class _$$_BillToInfoCopyWith<$Res>
+abstract class _$$BillToInfoImplCopyWith<$Res>
     implements $BillToInfoCopyWith<$Res> {
-  factory _$$_BillToInfoCopyWith(
-          _$_BillToInfo value, $Res Function(_$_BillToInfo) then) =
-      __$$_BillToInfoCopyWithImpl<$Res>;
+  factory _$$BillToInfoImplCopyWith(
+          _$BillToInfoImpl value, $Res Function(_$BillToInfoImpl) then) =
+      __$$BillToInfoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -321,11 +321,11 @@ abstract class _$$_BillToInfoCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_BillToInfoCopyWithImpl<$Res>
-    extends _$BillToInfoCopyWithImpl<$Res, _$_BillToInfo>
-    implements _$$_BillToInfoCopyWith<$Res> {
-  __$$_BillToInfoCopyWithImpl(
-      _$_BillToInfo _value, $Res Function(_$_BillToInfo) _then)
+class __$$BillToInfoImplCopyWithImpl<$Res>
+    extends _$BillToInfoCopyWithImpl<$Res, _$BillToInfoImpl>
+    implements _$$BillToInfoImplCopyWith<$Res> {
+  __$$BillToInfoImplCopyWithImpl(
+      _$BillToInfoImpl _value, $Res Function(_$BillToInfoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -360,7 +360,7 @@ class __$$_BillToInfoCopyWithImpl<$Res>
     Object? customerClassification = null,
     Object? customerLocalGroup = null,
   }) {
-    return _then(_$_BillToInfo(
+    return _then(_$BillToInfoImpl(
       defaulBillToAddress: null == defaulBillToAddress
           ? _value.defaulBillToAddress
           : defaulBillToAddress // ignore: cast_nullable_to_non_nullable
@@ -479,8 +479,8 @@ class __$$_BillToInfoCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_BillToInfo extends _BillToInfo {
-  const _$_BillToInfo(
+class _$BillToInfoImpl extends _BillToInfo {
+  const _$BillToInfoImpl(
       {required this.defaulBillToAddress,
       required this.billToCustomerCode,
       required this.billToName,
@@ -581,10 +581,10 @@ class _$_BillToInfo extends _BillToInfo {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_BillToInfo &&
+            other is _$BillToInfoImpl &&
             (identical(other.defaulBillToAddress, defaulBillToAddress) ||
                 other.defaulBillToAddress == defaulBillToAddress) &&
             (identical(other.billToCustomerCode, billToCustomerCode) ||
@@ -674,8 +674,8 @@ class _$_BillToInfo extends _BillToInfo {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_BillToInfoCopyWith<_$_BillToInfo> get copyWith =>
-      __$$_BillToInfoCopyWithImpl<_$_BillToInfo>(this, _$identity);
+  _$$BillToInfoImplCopyWith<_$BillToInfoImpl> get copyWith =>
+      __$$BillToInfoImplCopyWithImpl<_$BillToInfoImpl>(this, _$identity);
 }
 
 abstract class _BillToInfo extends BillToInfo {
@@ -707,7 +707,7 @@ abstract class _BillToInfo extends BillToInfo {
       required final String roomnumber,
       required final bool taxIncludedBySalesOrganization,
       required final String customerClassification,
-      required final String customerLocalGroup}) = _$_BillToInfo;
+      required final String customerLocalGroup}) = _$BillToInfoImpl;
   const _BillToInfo._() : super._();
 
   @override
@@ -768,6 +768,6 @@ abstract class _BillToInfo extends BillToInfo {
   String get customerLocalGroup;
   @override
   @JsonKey(ignore: true)
-  _$$_BillToInfoCopyWith<_$_BillToInfo> get copyWith =>
+  _$$BillToInfoImplCopyWith<_$BillToInfoImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

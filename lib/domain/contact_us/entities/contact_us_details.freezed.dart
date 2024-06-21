@@ -12,7 +12,7 @@ part of 'contact_us_details.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$ContactUsDetails {
@@ -72,11 +72,11 @@ class _$ContactUsDetailsCopyWithImpl<$Res, $Val extends ContactUsDetails>
 }
 
 /// @nodoc
-abstract class _$$_ContactUsDetailsCopyWith<$Res>
+abstract class _$$ContactUsDetailsImplCopyWith<$Res>
     implements $ContactUsDetailsCopyWith<$Res> {
-  factory _$$_ContactUsDetailsCopyWith(
-          _$_ContactUsDetails value, $Res Function(_$_ContactUsDetails) then) =
-      __$$_ContactUsDetailsCopyWithImpl<$Res>;
+  factory _$$ContactUsDetailsImplCopyWith(_$ContactUsDetailsImpl value,
+          $Res Function(_$ContactUsDetailsImpl) then) =
+      __$$ContactUsDetailsImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -86,11 +86,11 @@ abstract class _$$_ContactUsDetailsCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_ContactUsDetailsCopyWithImpl<$Res>
-    extends _$ContactUsDetailsCopyWithImpl<$Res, _$_ContactUsDetails>
-    implements _$$_ContactUsDetailsCopyWith<$Res> {
-  __$$_ContactUsDetailsCopyWithImpl(
-      _$_ContactUsDetails _value, $Res Function(_$_ContactUsDetails) _then)
+class __$$ContactUsDetailsImplCopyWithImpl<$Res>
+    extends _$ContactUsDetailsCopyWithImpl<$Res, _$ContactUsDetailsImpl>
+    implements _$$ContactUsDetailsImplCopyWith<$Res> {
+  __$$ContactUsDetailsImplCopyWithImpl(_$ContactUsDetailsImpl _value,
+      $Res Function(_$ContactUsDetailsImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -100,7 +100,7 @@ class __$$_ContactUsDetailsCopyWithImpl<$Res>
     Object? preloginSendToEmail = null,
     Object? postloginSendToEmail = null,
   }) {
-    return _then(_$_ContactUsDetails(
+    return _then(_$ContactUsDetailsImpl(
       content: null == content
           ? _value.content
           : content // ignore: cast_nullable_to_non_nullable
@@ -119,8 +119,8 @@ class __$$_ContactUsDetailsCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_ContactUsDetails extends _ContactUsDetails {
-  const _$_ContactUsDetails(
+class _$ContactUsDetailsImpl extends _ContactUsDetails {
+  const _$ContactUsDetailsImpl(
       {required this.content,
       required this.preloginSendToEmail,
       required this.postloginSendToEmail})
@@ -139,10 +139,10 @@ class _$_ContactUsDetails extends _ContactUsDetails {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ContactUsDetails &&
+            other is _$ContactUsDetailsImpl &&
             (identical(other.content, content) || other.content == content) &&
             (identical(other.preloginSendToEmail, preloginSendToEmail) ||
                 other.preloginSendToEmail == preloginSendToEmail) &&
@@ -157,15 +157,16 @@ class _$_ContactUsDetails extends _ContactUsDetails {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ContactUsDetailsCopyWith<_$_ContactUsDetails> get copyWith =>
-      __$$_ContactUsDetailsCopyWithImpl<_$_ContactUsDetails>(this, _$identity);
+  _$$ContactUsDetailsImplCopyWith<_$ContactUsDetailsImpl> get copyWith =>
+      __$$ContactUsDetailsImplCopyWithImpl<_$ContactUsDetailsImpl>(
+          this, _$identity);
 }
 
 abstract class _ContactUsDetails extends ContactUsDetails {
   const factory _ContactUsDetails(
       {required final HtmlContent content,
       required final String preloginSendToEmail,
-      required final String postloginSendToEmail}) = _$_ContactUsDetails;
+      required final String postloginSendToEmail}) = _$ContactUsDetailsImpl;
   const _ContactUsDetails._() : super._();
 
   @override
@@ -176,6 +177,6 @@ abstract class _ContactUsDetails extends ContactUsDetails {
   String get postloginSendToEmail;
   @override
   @JsonKey(ignore: true)
-  _$$_ContactUsDetailsCopyWith<_$_ContactUsDetails> get copyWith =>
+  _$$ContactUsDetailsImplCopyWith<_$ContactUsDetailsImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

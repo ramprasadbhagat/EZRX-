@@ -6,8 +6,8 @@ part of 'price_rule_dto.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_PriceRuleDto _$$_PriceRuleDtoFromJson(Map<String, dynamic> json) =>
-    _$_PriceRuleDto(
+_$PriceRuleDtoImpl _$$PriceRuleDtoImplFromJson(Map<String, dynamic> json) =>
+    _$PriceRuleDtoImpl(
       type: json['type'] as String? ?? '',
       rate: (json['rate'] as num?)?.toDouble() ?? 0,
       condition: json['conditions'] as String? ?? '',
@@ -22,7 +22,7 @@ _$_PriceRuleDto _$$_PriceRuleDtoFromJson(Map<String, dynamic> json) =>
       remainingQuota: json['remainingQuota'] as String? ?? '',
     );
 
-Map<String, dynamic> _$$_PriceRuleDtoToJson(_$_PriceRuleDto instance) =>
+Map<String, dynamic> _$$PriceRuleDtoImplToJson(_$PriceRuleDtoImpl instance) =>
     <String, dynamic>{
       'type': instance.type,
       'rate': instance.rate,
@@ -35,8 +35,8 @@ Map<String, dynamic> _$$_PriceRuleDtoToJson(_$_PriceRuleDto instance) =>
       'remainingQuota': instance.remainingQuota,
     };
 
-_$_TieredRulesDto _$$_TieredRulesDtoFromJson(Map<String, dynamic> json) =>
-    _$_TieredRulesDto(
+_$TieredRulesDtoImpl _$$TieredRulesDtoImplFromJson(Map<String, dynamic> json) =>
+    _$TieredRulesDtoImpl(
       tier: json['tier'] as String? ?? '',
       ruleTier: (json['ruleTier'] as List<dynamic>?)
               ?.map((e) => RuleTierDto.fromJson(e as Map<String, dynamic>))
@@ -44,19 +44,20 @@ _$_TieredRulesDto _$$_TieredRulesDtoFromJson(Map<String, dynamic> json) =>
           [],
     );
 
-Map<String, dynamic> _$$_TieredRulesDtoToJson(_$_TieredRulesDto instance) =>
+Map<String, dynamic> _$$TieredRulesDtoImplToJson(
+        _$TieredRulesDtoImpl instance) =>
     <String, dynamic>{
       'tier': instance.tier,
       'ruleTier': instance.ruleTier.map((e) => e.toJson()).toList(),
     };
 
-_$_RuleTierDto _$$_RuleTierDtoFromJson(Map<String, dynamic> json) =>
-    _$_RuleTierDto(
+_$RuleTierDtoImpl _$$RuleTierDtoImplFromJson(Map<String, dynamic> json) =>
+    _$RuleTierDtoImpl(
       rate: (json['rate'] as num?)?.toDouble() ?? 0,
       quantity: (json['quantity'] as num?)?.toDouble() ?? 0,
     );
 
-Map<String, dynamic> _$$_RuleTierDtoToJson(_$_RuleTierDto instance) =>
+Map<String, dynamic> _$$RuleTierDtoImplToJson(_$RuleTierDtoImpl instance) =>
     <String, dynamic>{
       'rate': instance.rate,
       'quantity': instance.quantity,

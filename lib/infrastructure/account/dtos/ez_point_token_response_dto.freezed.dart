@@ -12,7 +12,7 @@ part of 'ez_point_token_response_dto.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 EZPointTokenResponseDto _$EZPointTokenResponseDtoFromJson(
     Map<String, dynamic> json) {
@@ -66,11 +66,12 @@ class _$EZPointTokenResponseDtoCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_EZPointTokenResponseDtoCopyWith<$Res>
+abstract class _$$EZPointTokenResponseDtoImplCopyWith<$Res>
     implements $EZPointTokenResponseDtoCopyWith<$Res> {
-  factory _$$_EZPointTokenResponseDtoCopyWith(_$_EZPointTokenResponseDto value,
-          $Res Function(_$_EZPointTokenResponseDto) then) =
-      __$$_EZPointTokenResponseDtoCopyWithImpl<$Res>;
+  factory _$$EZPointTokenResponseDtoImplCopyWith(
+          _$EZPointTokenResponseDtoImpl value,
+          $Res Function(_$EZPointTokenResponseDtoImpl) then) =
+      __$$EZPointTokenResponseDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -78,12 +79,13 @@ abstract class _$$_EZPointTokenResponseDtoCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_EZPointTokenResponseDtoCopyWithImpl<$Res>
+class __$$EZPointTokenResponseDtoImplCopyWithImpl<$Res>
     extends _$EZPointTokenResponseDtoCopyWithImpl<$Res,
-        _$_EZPointTokenResponseDto>
-    implements _$$_EZPointTokenResponseDtoCopyWith<$Res> {
-  __$$_EZPointTokenResponseDtoCopyWithImpl(_$_EZPointTokenResponseDto _value,
-      $Res Function(_$_EZPointTokenResponseDto) _then)
+        _$EZPointTokenResponseDtoImpl>
+    implements _$$EZPointTokenResponseDtoImplCopyWith<$Res> {
+  __$$EZPointTokenResponseDtoImplCopyWithImpl(
+      _$EZPointTokenResponseDtoImpl _value,
+      $Res Function(_$EZPointTokenResponseDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -91,7 +93,7 @@ class __$$_EZPointTokenResponseDtoCopyWithImpl<$Res>
   $Res call({
     Object? ezPointToken = null,
   }) {
-    return _then(_$_EZPointTokenResponseDto(
+    return _then(_$EZPointTokenResponseDtoImpl(
       ezPointToken: null == ezPointToken
           ? _value.ezPointToken
           : ezPointToken // ignore: cast_nullable_to_non_nullable
@@ -102,14 +104,14 @@ class __$$_EZPointTokenResponseDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_EZPointTokenResponseDto extends _EZPointTokenResponseDto {
-  const _$_EZPointTokenResponseDto(
+class _$EZPointTokenResponseDtoImpl extends _EZPointTokenResponseDto {
+  const _$EZPointTokenResponseDtoImpl(
       {@JsonKey(name: 'ezPointToken', defaultValue: '')
-          required this.ezPointToken})
+      required this.ezPointToken})
       : super._();
 
-  factory _$_EZPointTokenResponseDto.fromJson(Map<String, dynamic> json) =>
-      _$$_EZPointTokenResponseDtoFromJson(json);
+  factory _$EZPointTokenResponseDtoImpl.fromJson(Map<String, dynamic> json) =>
+      _$$EZPointTokenResponseDtoImplFromJson(json);
 
   @override
   @JsonKey(name: 'ezPointToken', defaultValue: '')
@@ -121,10 +123,10 @@ class _$_EZPointTokenResponseDto extends _EZPointTokenResponseDto {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_EZPointTokenResponseDto &&
+            other is _$EZPointTokenResponseDtoImpl &&
             (identical(other.ezPointToken, ezPointToken) ||
                 other.ezPointToken == ezPointToken));
   }
@@ -136,14 +138,13 @@ class _$_EZPointTokenResponseDto extends _EZPointTokenResponseDto {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_EZPointTokenResponseDtoCopyWith<_$_EZPointTokenResponseDto>
-      get copyWith =>
-          __$$_EZPointTokenResponseDtoCopyWithImpl<_$_EZPointTokenResponseDto>(
-              this, _$identity);
+  _$$EZPointTokenResponseDtoImplCopyWith<_$EZPointTokenResponseDtoImpl>
+      get copyWith => __$$EZPointTokenResponseDtoImplCopyWithImpl<
+          _$EZPointTokenResponseDtoImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_EZPointTokenResponseDtoToJson(
+    return _$$EZPointTokenResponseDtoImplToJson(
       this,
     );
   }
@@ -152,17 +153,17 @@ class _$_EZPointTokenResponseDto extends _EZPointTokenResponseDto {
 abstract class _EZPointTokenResponseDto extends EZPointTokenResponseDto {
   const factory _EZPointTokenResponseDto(
       {@JsonKey(name: 'ezPointToken', defaultValue: '')
-          required final String ezPointToken}) = _$_EZPointTokenResponseDto;
+      required final String ezPointToken}) = _$EZPointTokenResponseDtoImpl;
   const _EZPointTokenResponseDto._() : super._();
 
   factory _EZPointTokenResponseDto.fromJson(Map<String, dynamic> json) =
-      _$_EZPointTokenResponseDto.fromJson;
+      _$EZPointTokenResponseDtoImpl.fromJson;
 
   @override
   @JsonKey(name: 'ezPointToken', defaultValue: '')
   String get ezPointToken;
   @override
   @JsonKey(ignore: true)
-  _$$_EZPointTokenResponseDtoCopyWith<_$_EZPointTokenResponseDto>
+  _$$EZPointTokenResponseDtoImplCopyWith<_$EZPointTokenResponseDtoImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

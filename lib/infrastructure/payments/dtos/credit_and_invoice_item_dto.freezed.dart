@@ -12,7 +12,7 @@ part of 'credit_and_invoice_item_dto.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 CreditAndInvoiceItemDto _$CreditAndInvoiceItemDtoFromJson(
     Map<String, dynamic> json) {
@@ -252,11 +252,12 @@ class _$CreditAndInvoiceItemDtoCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_CreditAndInvoiceItemDtoCopyWith<$Res>
+abstract class _$$CreditAndInvoiceItemDtoImplCopyWith<$Res>
     implements $CreditAndInvoiceItemDtoCopyWith<$Res> {
-  factory _$$_CreditAndInvoiceItemDtoCopyWith(_$_CreditAndInvoiceItemDto value,
-          $Res Function(_$_CreditAndInvoiceItemDto) then) =
-      __$$_CreditAndInvoiceItemDtoCopyWithImpl<$Res>;
+  factory _$$CreditAndInvoiceItemDtoImplCopyWith(
+          _$CreditAndInvoiceItemDtoImpl value,
+          $Res Function(_$CreditAndInvoiceItemDtoImpl) then) =
+      __$$CreditAndInvoiceItemDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -296,12 +297,13 @@ abstract class _$$_CreditAndInvoiceItemDtoCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_CreditAndInvoiceItemDtoCopyWithImpl<$Res>
+class __$$CreditAndInvoiceItemDtoImplCopyWithImpl<$Res>
     extends _$CreditAndInvoiceItemDtoCopyWithImpl<$Res,
-        _$_CreditAndInvoiceItemDto>
-    implements _$$_CreditAndInvoiceItemDtoCopyWith<$Res> {
-  __$$_CreditAndInvoiceItemDtoCopyWithImpl(_$_CreditAndInvoiceItemDto _value,
-      $Res Function(_$_CreditAndInvoiceItemDto) _then)
+        _$CreditAndInvoiceItemDtoImpl>
+    implements _$$CreditAndInvoiceItemDtoImplCopyWith<$Res> {
+  __$$CreditAndInvoiceItemDtoImplCopyWithImpl(
+      _$CreditAndInvoiceItemDtoImpl _value,
+      $Res Function(_$CreditAndInvoiceItemDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -331,7 +333,7 @@ class __$$_CreditAndInvoiceItemDtoCopyWithImpl<$Res>
     Object? netAmount = null,
     Object? orderId = null,
   }) {
-    return _then(_$_CreditAndInvoiceItemDto(
+    return _then(_$CreditAndInvoiceItemDtoImpl(
       bpCustomerNumber: null == bpCustomerNumber
           ? _value.bpCustomerNumber
           : bpCustomerNumber // ignore: cast_nullable_to_non_nullable
@@ -430,8 +432,8 @@ class __$$_CreditAndInvoiceItemDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_CreditAndInvoiceItemDto extends _CreditAndInvoiceItemDto {
-  _$_CreditAndInvoiceItemDto(
+class _$CreditAndInvoiceItemDtoImpl extends _CreditAndInvoiceItemDto {
+  _$CreditAndInvoiceItemDtoImpl(
       {@JsonKey(name: 'bpCustomerNumber', defaultValue: '')
       required this.bpCustomerNumber,
       @JsonKey(name: 'fiscalYear', defaultValue: '') required this.fiscalYear,
@@ -471,8 +473,8 @@ class _$_CreditAndInvoiceItemDto extends _CreditAndInvoiceItemDto {
       @JsonKey(name: 'orderId', defaultValue: '') required this.orderId})
       : super._();
 
-  factory _$_CreditAndInvoiceItemDto.fromJson(Map<String, dynamic> json) =>
-      _$$_CreditAndInvoiceItemDtoFromJson(json);
+  factory _$CreditAndInvoiceItemDtoImpl.fromJson(Map<String, dynamic> json) =>
+      _$$CreditAndInvoiceItemDtoImplFromJson(json);
 
   @override
   @JsonKey(name: 'bpCustomerNumber', defaultValue: '')
@@ -550,10 +552,10 @@ class _$_CreditAndInvoiceItemDto extends _CreditAndInvoiceItemDto {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_CreditAndInvoiceItemDto &&
+            other is _$CreditAndInvoiceItemDtoImpl &&
             (identical(other.bpCustomerNumber, bpCustomerNumber) ||
                 other.bpCustomerNumber == bpCustomerNumber) &&
             (identical(other.fiscalYear, fiscalYear) ||
@@ -637,14 +639,13 @@ class _$_CreditAndInvoiceItemDto extends _CreditAndInvoiceItemDto {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_CreditAndInvoiceItemDtoCopyWith<_$_CreditAndInvoiceItemDto>
-      get copyWith =>
-          __$$_CreditAndInvoiceItemDtoCopyWithImpl<_$_CreditAndInvoiceItemDto>(
-              this, _$identity);
+  _$$CreditAndInvoiceItemDtoImplCopyWith<_$CreditAndInvoiceItemDtoImpl>
+      get copyWith => __$$CreditAndInvoiceItemDtoImplCopyWithImpl<
+          _$CreditAndInvoiceItemDtoImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_CreditAndInvoiceItemDtoToJson(
+    return _$$CreditAndInvoiceItemDtoImplToJson(
       this,
     );
   }
@@ -697,11 +698,11 @@ abstract class _CreditAndInvoiceItemDto extends CreditAndInvoiceItemDto {
       @JsonKey(name: 'netAmount', defaultValue: 0.0)
       required final double netAmount,
       @JsonKey(name: 'orderId', defaultValue: '')
-      required final String orderId}) = _$_CreditAndInvoiceItemDto;
+      required final String orderId}) = _$CreditAndInvoiceItemDtoImpl;
   _CreditAndInvoiceItemDto._() : super._();
 
   factory _CreditAndInvoiceItemDto.fromJson(Map<String, dynamic> json) =
-      _$_CreditAndInvoiceItemDto.fromJson;
+      _$CreditAndInvoiceItemDtoImpl.fromJson;
 
   @override
   @JsonKey(name: 'bpCustomerNumber', defaultValue: '')
@@ -774,6 +775,6 @@ abstract class _CreditAndInvoiceItemDto extends CreditAndInvoiceItemDto {
   String get orderId;
   @override
   @JsonKey(ignore: true)
-  _$$_CreditAndInvoiceItemDtoCopyWith<_$_CreditAndInvoiceItemDto>
+  _$$CreditAndInvoiceItemDtoImplCopyWith<_$CreditAndInvoiceItemDtoImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

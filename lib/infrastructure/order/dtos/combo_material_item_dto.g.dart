@@ -6,13 +6,13 @@ part of 'combo_material_item_dto.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_ComboMaterialItemDto _$$_ComboMaterialItemDtoFromJson(
+_$ComboMaterialItemDtoImpl _$$ComboMaterialItemDtoImplFromJson(
         Map<String, dynamic> json) =>
-    _$_ComboMaterialItemDto(
+    _$ComboMaterialItemDtoImpl(
       productId: json['productID'] as String? ?? '',
       parentId: json['parentID'] as String? ?? '',
       setNo: json['setNo'] as String? ?? '',
-      quantity: json['quantity'] as int? ?? 0,
+      quantity: (json['quantity'] as num?)?.toInt() ?? 0,
       itemSource: json['ttemSource'] as String? ?? 'EZRX',
       rate: (json['rate'] as num?)?.toDouble() ?? 0,
       conditionNumber: json['conditionNumber'] as String? ?? '',
@@ -37,8 +37,8 @@ _$_ComboMaterialItemDto _$$_ComboMaterialItemDtoFromJson(
       taxClassification: json['taxClassification'] as String? ?? '',
     );
 
-Map<String, dynamic> _$$_ComboMaterialItemDtoToJson(
-        _$_ComboMaterialItemDto instance) =>
+Map<String, dynamic> _$$ComboMaterialItemDtoImplToJson(
+        _$ComboMaterialItemDtoImpl instance) =>
     <String, dynamic>{
       'productID': instance.productId,
       'parentID': instance.parentId,

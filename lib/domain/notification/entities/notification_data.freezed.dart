@@ -12,7 +12,7 @@ part of 'notification_data.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$NotificationData {
@@ -146,11 +146,11 @@ class _$NotificationDataCopyWithImpl<$Res, $Val extends NotificationData>
 }
 
 /// @nodoc
-abstract class _$$_NotificationDataCopyWith<$Res>
+abstract class _$$NotificationDataImplCopyWith<$Res>
     implements $NotificationDataCopyWith<$Res> {
-  factory _$$_NotificationDataCopyWith(
-          _$_NotificationData value, $Res Function(_$_NotificationData) then) =
-      __$$_NotificationDataCopyWithImpl<$Res>;
+  factory _$$NotificationDataImplCopyWith(_$NotificationDataImpl value,
+          $Res Function(_$NotificationDataImpl) then) =
+      __$$NotificationDataImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -172,11 +172,11 @@ abstract class _$$_NotificationDataCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_NotificationDataCopyWithImpl<$Res>
-    extends _$NotificationDataCopyWithImpl<$Res, _$_NotificationData>
-    implements _$$_NotificationDataCopyWith<$Res> {
-  __$$_NotificationDataCopyWithImpl(
-      _$_NotificationData _value, $Res Function(_$_NotificationData) _then)
+class __$$NotificationDataImplCopyWithImpl<$Res>
+    extends _$NotificationDataCopyWithImpl<$Res, _$NotificationDataImpl>
+    implements _$$NotificationDataImplCopyWith<$Res> {
+  __$$NotificationDataImplCopyWithImpl(_$NotificationDataImpl _value,
+      $Res Function(_$NotificationDataImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -195,7 +195,7 @@ class __$$_NotificationDataCopyWithImpl<$Res>
     Object? hyperLink = null,
     Object? isMarketPlace = null,
   }) {
-    return _then(_$_NotificationData(
+    return _then(_$NotificationDataImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -250,8 +250,8 @@ class __$$_NotificationDataCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_NotificationData extends _NotificationData {
-  _$_NotificationData(
+class _$NotificationDataImpl extends _NotificationData {
+  _$NotificationDataImpl(
       {required this.id,
       required this.type,
       required this.title,
@@ -297,10 +297,10 @@ class _$_NotificationData extends _NotificationData {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_NotificationData &&
+            other is _$NotificationDataImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.type, type) || other.type == type) &&
             (identical(other.title, title) || other.title == title) &&
@@ -344,8 +344,9 @@ class _$_NotificationData extends _NotificationData {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_NotificationDataCopyWith<_$_NotificationData> get copyWith =>
-      __$$_NotificationDataCopyWithImpl<_$_NotificationData>(this, _$identity);
+  _$$NotificationDataImplCopyWith<_$NotificationDataImpl> get copyWith =>
+      __$$NotificationDataImplCopyWithImpl<_$NotificationDataImpl>(
+          this, _$identity);
 }
 
 abstract class _NotificationData extends NotificationData {
@@ -361,7 +362,7 @@ abstract class _NotificationData extends NotificationData {
       required final StringValue paymentNumber,
       required final StringValue paymentBatchAdditionalInfo,
       required final EZReachBannerLink hyperLink,
-      required final bool isMarketPlace}) = _$_NotificationData;
+      required final bool isMarketPlace}) = _$NotificationDataImpl;
   _NotificationData._() : super._();
 
   @override
@@ -390,6 +391,6 @@ abstract class _NotificationData extends NotificationData {
   bool get isMarketPlace;
   @override
   @JsonKey(ignore: true)
-  _$$_NotificationDataCopyWith<_$_NotificationData> get copyWith =>
+  _$$NotificationDataImplCopyWith<_$NotificationDataImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

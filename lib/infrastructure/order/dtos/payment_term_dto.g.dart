@@ -6,15 +6,16 @@ part of 'payment_term_dto.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_PaymentTermDto _$$_PaymentTermDtoFromJson(Map<String, dynamic> json) =>
-    _$_PaymentTermDto(
+_$PaymentTermDtoImpl _$$PaymentTermDtoImplFromJson(Map<String, dynamic> json) =>
+    _$PaymentTermDtoImpl(
       paymentTermCode: json['paymentTermCode'] as String,
-      paymentTermRanking: json['paymentTermRanking'] as int,
+      paymentTermRanking: (json['paymentTermRanking'] as num).toInt(),
       paymentTermDescription: json['paymentTermDescription'] as String,
-      paymentTermSubranking: json['paymentTermSubranking'] as int,
+      paymentTermSubranking: (json['paymentTermSubranking'] as num).toInt(),
     );
 
-Map<String, dynamic> _$$_PaymentTermDtoToJson(_$_PaymentTermDto instance) =>
+Map<String, dynamic> _$$PaymentTermDtoImplToJson(
+        _$PaymentTermDtoImpl instance) =>
     <String, dynamic>{
       'paymentTermCode': instance.paymentTermCode,
       'paymentTermRanking': instance.paymentTermRanking,

@@ -12,7 +12,7 @@ part of 'payment_in_progress_bloc.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$PaymentInProgressEvent {
@@ -82,25 +82,25 @@ class _$PaymentInProgressEventCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_initializedCopyWith<$Res> {
-  factory _$$_initializedCopyWith(
-          _$_initialized value, $Res Function(_$_initialized) then) =
-      __$$_initializedCopyWithImpl<$Res>;
+abstract class _$$initializedImplCopyWith<$Res> {
+  factory _$$initializedImplCopyWith(
+          _$initializedImpl value, $Res Function(_$initializedImpl) then) =
+      __$$initializedImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_initializedCopyWithImpl<$Res>
-    extends _$PaymentInProgressEventCopyWithImpl<$Res, _$_initialized>
-    implements _$$_initializedCopyWith<$Res> {
-  __$$_initializedCopyWithImpl(
-      _$_initialized _value, $Res Function(_$_initialized) _then)
+class __$$initializedImplCopyWithImpl<$Res>
+    extends _$PaymentInProgressEventCopyWithImpl<$Res, _$initializedImpl>
+    implements _$$initializedImplCopyWith<$Res> {
+  __$$initializedImplCopyWithImpl(
+      _$initializedImpl _value, $Res Function(_$initializedImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_initialized implements _initialized {
-  const _$_initialized();
+class _$initializedImpl implements _initialized {
+  const _$initializedImpl();
 
   @override
   String toString() {
@@ -108,9 +108,9 @@ class _$_initialized implements _initialized {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_initialized);
+        (other.runtimeType == runtimeType && other is _$initializedImpl);
   }
 
   @override
@@ -186,13 +186,14 @@ class _$_initialized implements _initialized {
 }
 
 abstract class _initialized implements PaymentInProgressEvent {
-  const factory _initialized() = _$_initialized;
+  const factory _initialized() = _$initializedImpl;
 }
 
 /// @nodoc
-abstract class _$$_FetchCopyWith<$Res> {
-  factory _$$_FetchCopyWith(_$_Fetch value, $Res Function(_$_Fetch) then) =
-      __$$_FetchCopyWithImpl<$Res>;
+abstract class _$$FetchImplCopyWith<$Res> {
+  factory _$$FetchImplCopyWith(
+          _$FetchImpl value, $Res Function(_$FetchImpl) then) =
+      __$$FetchImplCopyWithImpl<$Res>;
   @useResult
   $Res call(
       {SalesOrganisation salesOrganization, CustomerCodeInfo customerCodeInfo});
@@ -202,10 +203,11 @@ abstract class _$$_FetchCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_FetchCopyWithImpl<$Res>
-    extends _$PaymentInProgressEventCopyWithImpl<$Res, _$_Fetch>
-    implements _$$_FetchCopyWith<$Res> {
-  __$$_FetchCopyWithImpl(_$_Fetch _value, $Res Function(_$_Fetch) _then)
+class __$$FetchImplCopyWithImpl<$Res>
+    extends _$PaymentInProgressEventCopyWithImpl<$Res, _$FetchImpl>
+    implements _$$FetchImplCopyWith<$Res> {
+  __$$FetchImplCopyWithImpl(
+      _$FetchImpl _value, $Res Function(_$FetchImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -214,7 +216,7 @@ class __$$_FetchCopyWithImpl<$Res>
     Object? salesOrganization = null,
     Object? customerCodeInfo = null,
   }) {
-    return _then(_$_Fetch(
+    return _then(_$FetchImpl(
       salesOrganization: null == salesOrganization
           ? _value.salesOrganization
           : salesOrganization // ignore: cast_nullable_to_non_nullable
@@ -245,8 +247,8 @@ class __$$_FetchCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_Fetch implements _Fetch {
-  const _$_Fetch(
+class _$FetchImpl implements _Fetch {
+  const _$FetchImpl(
       {required this.salesOrganization, required this.customerCodeInfo});
 
   @override
@@ -260,10 +262,10 @@ class _$_Fetch implements _Fetch {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Fetch &&
+            other is _$FetchImpl &&
             (identical(other.salesOrganization, salesOrganization) ||
                 other.salesOrganization == salesOrganization) &&
             (identical(other.customerCodeInfo, customerCodeInfo) ||
@@ -277,8 +279,8 @@ class _$_Fetch implements _Fetch {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_FetchCopyWith<_$_Fetch> get copyWith =>
-      __$$_FetchCopyWithImpl<_$_Fetch>(this, _$identity);
+  _$$FetchImplCopyWith<_$FetchImpl> get copyWith =>
+      __$$FetchImplCopyWithImpl<_$FetchImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -352,12 +354,12 @@ class _$_Fetch implements _Fetch {
 abstract class _Fetch implements PaymentInProgressEvent {
   const factory _Fetch(
       {required final SalesOrganisation salesOrganization,
-      required final CustomerCodeInfo customerCodeInfo}) = _$_Fetch;
+      required final CustomerCodeInfo customerCodeInfo}) = _$FetchImpl;
 
   SalesOrganisation get salesOrganization;
   CustomerCodeInfo get customerCodeInfo;
   @JsonKey(ignore: true)
-  _$$_FetchCopyWith<_$_Fetch> get copyWith =>
+  _$$FetchImplCopyWith<_$FetchImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -421,11 +423,11 @@ class _$PaymentInProgressStateCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_PaymentSummaryStateCopyWith<$Res>
+abstract class _$$PaymentSummaryStateImplCopyWith<$Res>
     implements $PaymentInProgressStateCopyWith<$Res> {
-  factory _$$_PaymentSummaryStateCopyWith(_$_PaymentSummaryState value,
-          $Res Function(_$_PaymentSummaryState) then) =
-      __$$_PaymentSummaryStateCopyWithImpl<$Res>;
+  factory _$$PaymentSummaryStateImplCopyWith(_$PaymentSummaryStateImpl value,
+          $Res Function(_$PaymentSummaryStateImpl) then) =
+      __$$PaymentSummaryStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -435,11 +437,12 @@ abstract class _$$_PaymentSummaryStateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_PaymentSummaryStateCopyWithImpl<$Res>
-    extends _$PaymentInProgressStateCopyWithImpl<$Res, _$_PaymentSummaryState>
-    implements _$$_PaymentSummaryStateCopyWith<$Res> {
-  __$$_PaymentSummaryStateCopyWithImpl(_$_PaymentSummaryState _value,
-      $Res Function(_$_PaymentSummaryState) _then)
+class __$$PaymentSummaryStateImplCopyWithImpl<$Res>
+    extends _$PaymentInProgressStateCopyWithImpl<$Res,
+        _$PaymentSummaryStateImpl>
+    implements _$$PaymentSummaryStateImplCopyWith<$Res> {
+  __$$PaymentSummaryStateImplCopyWithImpl(_$PaymentSummaryStateImpl _value,
+      $Res Function(_$PaymentSummaryStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -449,7 +452,7 @@ class __$$_PaymentSummaryStateCopyWithImpl<$Res>
     Object? isFetching = null,
     Object? failureOrSuccessOption = null,
   }) {
-    return _then(_$_PaymentSummaryState(
+    return _then(_$PaymentSummaryStateImpl(
       amount: null == amount
           ? _value.amount
           : amount // ignore: cast_nullable_to_non_nullable
@@ -468,8 +471,8 @@ class __$$_PaymentSummaryStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_PaymentSummaryState extends _PaymentSummaryState {
-  const _$_PaymentSummaryState(
+class _$PaymentSummaryStateImpl extends _PaymentSummaryState {
+  const _$PaymentSummaryStateImpl(
       {required this.amount,
       required this.isFetching,
       required this.failureOrSuccessOption})
@@ -488,10 +491,10 @@ class _$_PaymentSummaryState extends _PaymentSummaryState {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_PaymentSummaryState &&
+            other is _$PaymentSummaryStateImpl &&
             (identical(other.amount, amount) || other.amount == amount) &&
             (identical(other.isFetching, isFetching) ||
                 other.isFetching == isFetching) &&
@@ -506,8 +509,8 @@ class _$_PaymentSummaryState extends _PaymentSummaryState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_PaymentSummaryStateCopyWith<_$_PaymentSummaryState> get copyWith =>
-      __$$_PaymentSummaryStateCopyWithImpl<_$_PaymentSummaryState>(
+  _$$PaymentSummaryStateImplCopyWith<_$PaymentSummaryStateImpl> get copyWith =>
+      __$$PaymentSummaryStateImplCopyWithImpl<_$PaymentSummaryStateImpl>(
           this, _$identity);
 }
 
@@ -516,7 +519,7 @@ abstract class _PaymentSummaryState extends PaymentInProgressState {
       {required final StringValue amount,
       required final bool isFetching,
       required final Option<Either<ApiFailure, dynamic>>
-          failureOrSuccessOption}) = _$_PaymentSummaryState;
+          failureOrSuccessOption}) = _$PaymentSummaryStateImpl;
   const _PaymentSummaryState._() : super._();
 
   @override
@@ -527,6 +530,6 @@ abstract class _PaymentSummaryState extends PaymentInProgressState {
   Option<Either<ApiFailure, dynamic>> get failureOrSuccessOption;
   @override
   @JsonKey(ignore: true)
-  _$$_PaymentSummaryStateCopyWith<_$_PaymentSummaryState> get copyWith =>
+  _$$PaymentSummaryStateImplCopyWith<_$PaymentSummaryStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

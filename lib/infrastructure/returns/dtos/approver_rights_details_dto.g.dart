@@ -6,9 +6,9 @@ part of 'approver_rights_details_dto.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_ApproverRightsDetailsDto _$$_ApproverRightsDetailsDtoFromJson(
+_$ApproverRightsDetailsDtoImpl _$$ApproverRightsDetailsDtoImplFromJson(
         Map<String, dynamic> json) =>
-    _$_ApproverRightsDetailsDto(
+    _$ApproverRightsDetailsDtoImpl(
       salesOrg: json['salesOrg'] as String? ?? '',
       principal: json['principal'] as String? ?? '',
       industryCode1: json['industryCode1'] as String? ?? '',
@@ -21,8 +21,8 @@ _$_ApproverRightsDetailsDto _$$_ApproverRightsDetailsDtoFromJson(
       uuid: json['uuid'] as String? ?? '',
     );
 
-Map<String, dynamic> _$$_ApproverRightsDetailsDtoToJson(
-        _$_ApproverRightsDetailsDto instance) =>
+Map<String, dynamic> _$$ApproverRightsDetailsDtoImplToJson(
+        _$ApproverRightsDetailsDtoImpl instance) =>
     <String, dynamic>{
       'salesOrg': instance.salesOrg,
       'principal': instance.principal,

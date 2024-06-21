@@ -12,7 +12,7 @@ part of 'user_restriction_list_raw_meta_data_dto.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 UserRestrictionListRawMetaDataDto _$UserRestrictionListRawMetaDataDtoFromJson(
     Map<String, dynamic> json) {
@@ -66,25 +66,25 @@ class _$UserRestrictionListRawMetaDataDtoCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_UserRestrictionRawMetaDataDtoCopyWith<$Res>
+abstract class _$$UserRestrictionRawMetaDataDtoImplCopyWith<$Res>
     implements $UserRestrictionListRawMetaDataDtoCopyWith<$Res> {
-  factory _$$_UserRestrictionRawMetaDataDtoCopyWith(
-          _$_UserRestrictionRawMetaDataDto value,
-          $Res Function(_$_UserRestrictionRawMetaDataDto) then) =
-      __$$_UserRestrictionRawMetaDataDtoCopyWithImpl<$Res>;
+  factory _$$UserRestrictionRawMetaDataDtoImplCopyWith(
+          _$UserRestrictionRawMetaDataDtoImpl value,
+          $Res Function(_$UserRestrictionRawMetaDataDtoImpl) then) =
+      __$$UserRestrictionRawMetaDataDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({List<String> usernames});
 }
 
 /// @nodoc
-class __$$_UserRestrictionRawMetaDataDtoCopyWithImpl<$Res>
+class __$$UserRestrictionRawMetaDataDtoImplCopyWithImpl<$Res>
     extends _$UserRestrictionListRawMetaDataDtoCopyWithImpl<$Res,
-        _$_UserRestrictionRawMetaDataDto>
-    implements _$$_UserRestrictionRawMetaDataDtoCopyWith<$Res> {
-  __$$_UserRestrictionRawMetaDataDtoCopyWithImpl(
-      _$_UserRestrictionRawMetaDataDto _value,
-      $Res Function(_$_UserRestrictionRawMetaDataDto) _then)
+        _$UserRestrictionRawMetaDataDtoImpl>
+    implements _$$UserRestrictionRawMetaDataDtoImplCopyWith<$Res> {
+  __$$UserRestrictionRawMetaDataDtoImplCopyWithImpl(
+      _$UserRestrictionRawMetaDataDtoImpl _value,
+      $Res Function(_$UserRestrictionRawMetaDataDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -92,7 +92,7 @@ class __$$_UserRestrictionRawMetaDataDtoCopyWithImpl<$Res>
   $Res call({
     Object? usernames = null,
   }) {
-    return _then(_$_UserRestrictionRawMetaDataDto(
+    return _then(_$UserRestrictionRawMetaDataDtoImpl(
       usernames: null == usernames
           ? _value._usernames
           : usernames // ignore: cast_nullable_to_non_nullable
@@ -103,14 +103,15 @@ class __$$_UserRestrictionRawMetaDataDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_UserRestrictionRawMetaDataDto extends _UserRestrictionRawMetaDataDto {
-  _$_UserRestrictionRawMetaDataDto({required final List<String> usernames})
+class _$UserRestrictionRawMetaDataDtoImpl
+    extends _UserRestrictionRawMetaDataDto {
+  _$UserRestrictionRawMetaDataDtoImpl({required final List<String> usernames})
       : _usernames = usernames,
         super._();
 
-  factory _$_UserRestrictionRawMetaDataDto.fromJson(
+  factory _$UserRestrictionRawMetaDataDtoImpl.fromJson(
           Map<String, dynamic> json) =>
-      _$$_UserRestrictionRawMetaDataDtoFromJson(json);
+      _$$UserRestrictionRawMetaDataDtoImplFromJson(json);
 
   final List<String> _usernames;
   @override
@@ -126,10 +127,10 @@ class _$_UserRestrictionRawMetaDataDto extends _UserRestrictionRawMetaDataDto {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_UserRestrictionRawMetaDataDto &&
+            other is _$UserRestrictionRawMetaDataDtoImpl &&
             const DeepCollectionEquality()
                 .equals(other._usernames, _usernames));
   }
@@ -142,13 +143,14 @@ class _$_UserRestrictionRawMetaDataDto extends _UserRestrictionRawMetaDataDto {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_UserRestrictionRawMetaDataDtoCopyWith<_$_UserRestrictionRawMetaDataDto>
-      get copyWith => __$$_UserRestrictionRawMetaDataDtoCopyWithImpl<
-          _$_UserRestrictionRawMetaDataDto>(this, _$identity);
+  _$$UserRestrictionRawMetaDataDtoImplCopyWith<
+          _$UserRestrictionRawMetaDataDtoImpl>
+      get copyWith => __$$UserRestrictionRawMetaDataDtoImplCopyWithImpl<
+          _$UserRestrictionRawMetaDataDtoImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_UserRestrictionRawMetaDataDtoToJson(
+    return _$$UserRestrictionRawMetaDataDtoImplToJson(
       this,
     );
   }
@@ -158,16 +160,17 @@ abstract class _UserRestrictionRawMetaDataDto
     extends UserRestrictionListRawMetaDataDto {
   factory _UserRestrictionRawMetaDataDto(
           {required final List<String> usernames}) =
-      _$_UserRestrictionRawMetaDataDto;
+      _$UserRestrictionRawMetaDataDtoImpl;
   _UserRestrictionRawMetaDataDto._() : super._();
 
   factory _UserRestrictionRawMetaDataDto.fromJson(Map<String, dynamic> json) =
-      _$_UserRestrictionRawMetaDataDto.fromJson;
+      _$UserRestrictionRawMetaDataDtoImpl.fromJson;
 
   @override
   List<String> get usernames;
   @override
   @JsonKey(ignore: true)
-  _$$_UserRestrictionRawMetaDataDtoCopyWith<_$_UserRestrictionRawMetaDataDto>
+  _$$UserRestrictionRawMetaDataDtoImplCopyWith<
+          _$UserRestrictionRawMetaDataDtoImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

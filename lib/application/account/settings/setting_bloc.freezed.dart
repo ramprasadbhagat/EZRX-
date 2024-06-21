@@ -12,7 +12,7 @@ part of 'setting_bloc.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$SettingEvent {
@@ -83,25 +83,25 @@ class _$SettingEventCopyWithImpl<$Res, $Val extends SettingEvent>
 }
 
 /// @nodoc
-abstract class _$$_FetchBiometricFlagCopyWith<$Res> {
-  factory _$$_FetchBiometricFlagCopyWith(_$_FetchBiometricFlag value,
-          $Res Function(_$_FetchBiometricFlag) then) =
-      __$$_FetchBiometricFlagCopyWithImpl<$Res>;
+abstract class _$$FetchBiometricFlagImplCopyWith<$Res> {
+  factory _$$FetchBiometricFlagImplCopyWith(_$FetchBiometricFlagImpl value,
+          $Res Function(_$FetchBiometricFlagImpl) then) =
+      __$$FetchBiometricFlagImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_FetchBiometricFlagCopyWithImpl<$Res>
-    extends _$SettingEventCopyWithImpl<$Res, _$_FetchBiometricFlag>
-    implements _$$_FetchBiometricFlagCopyWith<$Res> {
-  __$$_FetchBiometricFlagCopyWithImpl(
-      _$_FetchBiometricFlag _value, $Res Function(_$_FetchBiometricFlag) _then)
+class __$$FetchBiometricFlagImplCopyWithImpl<$Res>
+    extends _$SettingEventCopyWithImpl<$Res, _$FetchBiometricFlagImpl>
+    implements _$$FetchBiometricFlagImplCopyWith<$Res> {
+  __$$FetchBiometricFlagImplCopyWithImpl(_$FetchBiometricFlagImpl _value,
+      $Res Function(_$FetchBiometricFlagImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_FetchBiometricFlag implements _FetchBiometricFlag {
-  const _$_FetchBiometricFlag();
+class _$FetchBiometricFlagImpl implements _FetchBiometricFlag {
+  const _$FetchBiometricFlagImpl();
 
   @override
   String toString() {
@@ -109,9 +109,9 @@ class _$_FetchBiometricFlag implements _FetchBiometricFlag {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_FetchBiometricFlag);
+        (other.runtimeType == runtimeType && other is _$FetchBiometricFlagImpl);
   }
 
   @override
@@ -189,24 +189,24 @@ class _$_FetchBiometricFlag implements _FetchBiometricFlag {
 }
 
 abstract class _FetchBiometricFlag implements SettingEvent {
-  const factory _FetchBiometricFlag() = _$_FetchBiometricFlag;
+  const factory _FetchBiometricFlag() = _$FetchBiometricFlagImpl;
 }
 
 /// @nodoc
-abstract class _$$_PutBiometricEnabledCopyWith<$Res> {
-  factory _$$_PutBiometricEnabledCopyWith(_$_PutBiometricEnabled value,
-          $Res Function(_$_PutBiometricEnabled) then) =
-      __$$_PutBiometricEnabledCopyWithImpl<$Res>;
+abstract class _$$PutBiometricEnabledImplCopyWith<$Res> {
+  factory _$$PutBiometricEnabledImplCopyWith(_$PutBiometricEnabledImpl value,
+          $Res Function(_$PutBiometricEnabledImpl) then) =
+      __$$PutBiometricEnabledImplCopyWithImpl<$Res>;
   @useResult
   $Res call({bool isBiometricEnabled});
 }
 
 /// @nodoc
-class __$$_PutBiometricEnabledCopyWithImpl<$Res>
-    extends _$SettingEventCopyWithImpl<$Res, _$_PutBiometricEnabled>
-    implements _$$_PutBiometricEnabledCopyWith<$Res> {
-  __$$_PutBiometricEnabledCopyWithImpl(_$_PutBiometricEnabled _value,
-      $Res Function(_$_PutBiometricEnabled) _then)
+class __$$PutBiometricEnabledImplCopyWithImpl<$Res>
+    extends _$SettingEventCopyWithImpl<$Res, _$PutBiometricEnabledImpl>
+    implements _$$PutBiometricEnabledImplCopyWith<$Res> {
+  __$$PutBiometricEnabledImplCopyWithImpl(_$PutBiometricEnabledImpl _value,
+      $Res Function(_$PutBiometricEnabledImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -214,7 +214,7 @@ class __$$_PutBiometricEnabledCopyWithImpl<$Res>
   $Res call({
     Object? isBiometricEnabled = null,
   }) {
-    return _then(_$_PutBiometricEnabled(
+    return _then(_$PutBiometricEnabledImpl(
       isBiometricEnabled: null == isBiometricEnabled
           ? _value.isBiometricEnabled
           : isBiometricEnabled // ignore: cast_nullable_to_non_nullable
@@ -225,8 +225,8 @@ class __$$_PutBiometricEnabledCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_PutBiometricEnabled implements _PutBiometricEnabled {
-  const _$_PutBiometricEnabled({required this.isBiometricEnabled});
+class _$PutBiometricEnabledImpl implements _PutBiometricEnabled {
+  const _$PutBiometricEnabledImpl({required this.isBiometricEnabled});
 
   @override
   final bool isBiometricEnabled;
@@ -237,10 +237,10 @@ class _$_PutBiometricEnabled implements _PutBiometricEnabled {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_PutBiometricEnabled &&
+            other is _$PutBiometricEnabledImpl &&
             (identical(other.isBiometricEnabled, isBiometricEnabled) ||
                 other.isBiometricEnabled == isBiometricEnabled));
   }
@@ -251,8 +251,8 @@ class _$_PutBiometricEnabled implements _PutBiometricEnabled {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_PutBiometricEnabledCopyWith<_$_PutBiometricEnabled> get copyWith =>
-      __$$_PutBiometricEnabledCopyWithImpl<_$_PutBiometricEnabled>(
+  _$$PutBiometricEnabledImplCopyWith<_$PutBiometricEnabledImpl> get copyWith =>
+      __$$PutBiometricEnabledImplCopyWithImpl<_$PutBiometricEnabledImpl>(
           this, _$identity);
 
   @override
@@ -328,35 +328,36 @@ class _$_PutBiometricEnabled implements _PutBiometricEnabled {
 
 abstract class _PutBiometricEnabled implements SettingEvent {
   const factory _PutBiometricEnabled({required final bool isBiometricEnabled}) =
-      _$_PutBiometricEnabled;
+      _$PutBiometricEnabledImpl;
 
   bool get isBiometricEnabled;
   @JsonKey(ignore: true)
-  _$$_PutBiometricEnabledCopyWith<_$_PutBiometricEnabled> get copyWith =>
+  _$$PutBiometricEnabledImplCopyWith<_$PutBiometricEnabledImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_CheckIfBiometricPossibleCopyWith<$Res> {
-  factory _$$_CheckIfBiometricPossibleCopyWith(
-          _$_CheckIfBiometricPossible value,
-          $Res Function(_$_CheckIfBiometricPossible) then) =
-      __$$_CheckIfBiometricPossibleCopyWithImpl<$Res>;
+abstract class _$$CheckIfBiometricPossibleImplCopyWith<$Res> {
+  factory _$$CheckIfBiometricPossibleImplCopyWith(
+          _$CheckIfBiometricPossibleImpl value,
+          $Res Function(_$CheckIfBiometricPossibleImpl) then) =
+      __$$CheckIfBiometricPossibleImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_CheckIfBiometricPossibleCopyWithImpl<$Res>
-    extends _$SettingEventCopyWithImpl<$Res, _$_CheckIfBiometricPossible>
-    implements _$$_CheckIfBiometricPossibleCopyWith<$Res> {
-  __$$_CheckIfBiometricPossibleCopyWithImpl(_$_CheckIfBiometricPossible _value,
-      $Res Function(_$_CheckIfBiometricPossible) _then)
+class __$$CheckIfBiometricPossibleImplCopyWithImpl<$Res>
+    extends _$SettingEventCopyWithImpl<$Res, _$CheckIfBiometricPossibleImpl>
+    implements _$$CheckIfBiometricPossibleImplCopyWith<$Res> {
+  __$$CheckIfBiometricPossibleImplCopyWithImpl(
+      _$CheckIfBiometricPossibleImpl _value,
+      $Res Function(_$CheckIfBiometricPossibleImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_CheckIfBiometricPossible implements _CheckIfBiometricPossible {
-  const _$_CheckIfBiometricPossible();
+class _$CheckIfBiometricPossibleImpl implements _CheckIfBiometricPossible {
+  const _$CheckIfBiometricPossibleImpl();
 
   @override
   String toString() {
@@ -364,10 +365,10 @@ class _$_CheckIfBiometricPossible implements _CheckIfBiometricPossible {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_CheckIfBiometricPossible);
+            other is _$CheckIfBiometricPossibleImpl);
   }
 
   @override
@@ -445,7 +446,7 @@ class _$_CheckIfBiometricPossible implements _CheckIfBiometricPossible {
 }
 
 abstract class _CheckIfBiometricPossible implements SettingEvent {
-  const factory _CheckIfBiometricPossible() = _$_CheckIfBiometricPossible;
+  const factory _CheckIfBiometricPossible() = _$CheckIfBiometricPossibleImpl;
 }
 
 /// @nodoc
@@ -507,11 +508,11 @@ class _$SettingStateCopyWithImpl<$Res, $Val extends SettingState>
 }
 
 /// @nodoc
-abstract class _$$_SettingStateCopyWith<$Res>
+abstract class _$$SettingStateImplCopyWith<$Res>
     implements $SettingStateCopyWith<$Res> {
-  factory _$$_SettingStateCopyWith(
-          _$_SettingState value, $Res Function(_$_SettingState) then) =
-      __$$_SettingStateCopyWithImpl<$Res>;
+  factory _$$SettingStateImplCopyWith(
+          _$SettingStateImpl value, $Res Function(_$SettingStateImpl) then) =
+      __$$SettingStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -521,11 +522,11 @@ abstract class _$$_SettingStateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_SettingStateCopyWithImpl<$Res>
-    extends _$SettingStateCopyWithImpl<$Res, _$_SettingState>
-    implements _$$_SettingStateCopyWith<$Res> {
-  __$$_SettingStateCopyWithImpl(
-      _$_SettingState _value, $Res Function(_$_SettingState) _then)
+class __$$SettingStateImplCopyWithImpl<$Res>
+    extends _$SettingStateCopyWithImpl<$Res, _$SettingStateImpl>
+    implements _$$SettingStateImplCopyWith<$Res> {
+  __$$SettingStateImplCopyWithImpl(
+      _$SettingStateImpl _value, $Res Function(_$SettingStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -535,7 +536,7 @@ class __$$_SettingStateCopyWithImpl<$Res>
     Object? isBiometricPossible = null,
     Object? failureOrSuccessOption = null,
   }) {
-    return _then(_$_SettingState(
+    return _then(_$SettingStateImpl(
       isBiometricEnable: null == isBiometricEnable
           ? _value.isBiometricEnable
           : isBiometricEnable // ignore: cast_nullable_to_non_nullable
@@ -554,8 +555,8 @@ class __$$_SettingStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_SettingState implements _SettingState {
-  const _$_SettingState(
+class _$SettingStateImpl implements _SettingState {
+  const _$SettingStateImpl(
       {required this.isBiometricEnable,
       required this.isBiometricPossible,
       required this.failureOrSuccessOption});
@@ -573,10 +574,10 @@ class _$_SettingState implements _SettingState {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_SettingState &&
+            other is _$SettingStateImpl &&
             (identical(other.isBiometricEnable, isBiometricEnable) ||
                 other.isBiometricEnable == isBiometricEnable) &&
             (identical(other.isBiometricPossible, isBiometricPossible) ||
@@ -592,8 +593,8 @@ class _$_SettingState implements _SettingState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_SettingStateCopyWith<_$_SettingState> get copyWith =>
-      __$$_SettingStateCopyWithImpl<_$_SettingState>(this, _$identity);
+  _$$SettingStateImplCopyWith<_$SettingStateImpl> get copyWith =>
+      __$$SettingStateImplCopyWithImpl<_$SettingStateImpl>(this, _$identity);
 }
 
 abstract class _SettingState implements SettingState {
@@ -601,7 +602,7 @@ abstract class _SettingState implements SettingState {
       {required final bool isBiometricEnable,
       required final bool isBiometricPossible,
       required final Option<Either<ApiFailure, dynamic>>
-          failureOrSuccessOption}) = _$_SettingState;
+          failureOrSuccessOption}) = _$SettingStateImpl;
 
   @override
   bool get isBiometricEnable;
@@ -611,6 +612,6 @@ abstract class _SettingState implements SettingState {
   Option<Either<ApiFailure, dynamic>> get failureOrSuccessOption;
   @override
   @JsonKey(ignore: true)
-  _$$_SettingStateCopyWith<_$_SettingState> get copyWith =>
+  _$$SettingStateImplCopyWith<_$SettingStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

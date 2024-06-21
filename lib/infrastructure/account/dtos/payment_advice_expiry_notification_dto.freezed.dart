@@ -12,7 +12,7 @@ part of 'payment_advice_expiry_notification_dto.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 PaymentAdviceExpiryNotificationDto _$PaymentAdviceExpiryNotificationDtoFromJson(
     Map<String, dynamic> json) {
@@ -77,12 +77,12 @@ class _$PaymentAdviceExpiryNotificationDtoCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_PaymentAdviceExpiryNotificationDtoCopyWith<$Res>
+abstract class _$$PaymentAdviceExpiryNotificationDtoImplCopyWith<$Res>
     implements $PaymentAdviceExpiryNotificationDtoCopyWith<$Res> {
-  factory _$$_PaymentAdviceExpiryNotificationDtoCopyWith(
-          _$_PaymentAdviceExpiryNotificationDto value,
-          $Res Function(_$_PaymentAdviceExpiryNotificationDto) then) =
-      __$$_PaymentAdviceExpiryNotificationDtoCopyWithImpl<$Res>;
+  factory _$$PaymentAdviceExpiryNotificationDtoImplCopyWith(
+          _$PaymentAdviceExpiryNotificationDtoImpl value,
+          $Res Function(_$PaymentAdviceExpiryNotificationDtoImpl) then) =
+      __$$PaymentAdviceExpiryNotificationDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -91,13 +91,13 @@ abstract class _$$_PaymentAdviceExpiryNotificationDtoCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_PaymentAdviceExpiryNotificationDtoCopyWithImpl<$Res>
+class __$$PaymentAdviceExpiryNotificationDtoImplCopyWithImpl<$Res>
     extends _$PaymentAdviceExpiryNotificationDtoCopyWithImpl<$Res,
-        _$_PaymentAdviceExpiryNotificationDto>
-    implements _$$_PaymentAdviceExpiryNotificationDtoCopyWith<$Res> {
-  __$$_PaymentAdviceExpiryNotificationDtoCopyWithImpl(
-      _$_PaymentAdviceExpiryNotificationDto _value,
-      $Res Function(_$_PaymentAdviceExpiryNotificationDto) _then)
+        _$PaymentAdviceExpiryNotificationDtoImpl>
+    implements _$$PaymentAdviceExpiryNotificationDtoImplCopyWith<$Res> {
+  __$$PaymentAdviceExpiryNotificationDtoImplCopyWithImpl(
+      _$PaymentAdviceExpiryNotificationDtoImpl _value,
+      $Res Function(_$PaymentAdviceExpiryNotificationDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -106,7 +106,7 @@ class __$$_PaymentAdviceExpiryNotificationDtoCopyWithImpl<$Res>
     Object? day = null,
     Object? disabled = null,
   }) {
-    return _then(_$_PaymentAdviceExpiryNotificationDto(
+    return _then(_$PaymentAdviceExpiryNotificationDtoImpl(
       day: null == day
           ? _value.day
           : day // ignore: cast_nullable_to_non_nullable
@@ -121,16 +121,16 @@ class __$$_PaymentAdviceExpiryNotificationDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_PaymentAdviceExpiryNotificationDto
+class _$PaymentAdviceExpiryNotificationDtoImpl
     extends _PaymentAdviceExpiryNotificationDto {
-  const _$_PaymentAdviceExpiryNotificationDto(
+  const _$PaymentAdviceExpiryNotificationDtoImpl(
       {@JsonKey(name: 'day') required this.day,
       @JsonKey(name: 'disabled', defaultValue: false) required this.disabled})
       : super._();
 
-  factory _$_PaymentAdviceExpiryNotificationDto.fromJson(
+  factory _$PaymentAdviceExpiryNotificationDtoImpl.fromJson(
           Map<String, dynamic> json) =>
-      _$$_PaymentAdviceExpiryNotificationDtoFromJson(json);
+      _$$PaymentAdviceExpiryNotificationDtoImplFromJson(json);
 
   @override
   @JsonKey(name: 'day')
@@ -145,10 +145,10 @@ class _$_PaymentAdviceExpiryNotificationDto
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_PaymentAdviceExpiryNotificationDto &&
+            other is _$PaymentAdviceExpiryNotificationDtoImpl &&
             (identical(other.day, day) || other.day == day) &&
             (identical(other.disabled, disabled) ||
                 other.disabled == disabled));
@@ -161,14 +161,14 @@ class _$_PaymentAdviceExpiryNotificationDto
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_PaymentAdviceExpiryNotificationDtoCopyWith<
-          _$_PaymentAdviceExpiryNotificationDto>
-      get copyWith => __$$_PaymentAdviceExpiryNotificationDtoCopyWithImpl<
-          _$_PaymentAdviceExpiryNotificationDto>(this, _$identity);
+  _$$PaymentAdviceExpiryNotificationDtoImplCopyWith<
+          _$PaymentAdviceExpiryNotificationDtoImpl>
+      get copyWith => __$$PaymentAdviceExpiryNotificationDtoImplCopyWithImpl<
+          _$PaymentAdviceExpiryNotificationDtoImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_PaymentAdviceExpiryNotificationDtoToJson(
+    return _$$PaymentAdviceExpiryNotificationDtoImplToJson(
       this,
     );
   }
@@ -177,16 +177,14 @@ class _$_PaymentAdviceExpiryNotificationDto
 abstract class _PaymentAdviceExpiryNotificationDto
     extends PaymentAdviceExpiryNotificationDto {
   const factory _PaymentAdviceExpiryNotificationDto(
-          {@JsonKey(name: 'day')
-              required final String day,
-          @JsonKey(name: 'disabled', defaultValue: false)
-              required final bool disabled}) =
-      _$_PaymentAdviceExpiryNotificationDto;
+      {@JsonKey(name: 'day') required final String day,
+      @JsonKey(name: 'disabled', defaultValue: false)
+      required final bool disabled}) = _$PaymentAdviceExpiryNotificationDtoImpl;
   const _PaymentAdviceExpiryNotificationDto._() : super._();
 
   factory _PaymentAdviceExpiryNotificationDto.fromJson(
           Map<String, dynamic> json) =
-      _$_PaymentAdviceExpiryNotificationDto.fromJson;
+      _$PaymentAdviceExpiryNotificationDtoImpl.fromJson;
 
   @override
   @JsonKey(name: 'day')
@@ -196,7 +194,7 @@ abstract class _PaymentAdviceExpiryNotificationDto
   bool get disabled;
   @override
   @JsonKey(ignore: true)
-  _$$_PaymentAdviceExpiryNotificationDtoCopyWith<
-          _$_PaymentAdviceExpiryNotificationDto>
+  _$$PaymentAdviceExpiryNotificationDtoImplCopyWith<
+          _$PaymentAdviceExpiryNotificationDtoImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

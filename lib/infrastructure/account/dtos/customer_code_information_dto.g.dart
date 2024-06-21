@@ -6,18 +6,18 @@ part of 'customer_code_information_dto.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_CustomerInformationDTO _$$_CustomerInformationDTOFromJson(
+_$CustomerInformationDTOImpl _$$CustomerInformationDTOImplFromJson(
         Map<String, dynamic> json) =>
-    _$_CustomerInformationDTO(
-      shipToCount: json['shipToCount'] as int? ?? 0,
+    _$CustomerInformationDTOImpl(
+      shipToCount: (json['shipToCount'] as num?)?.toInt() ?? 0,
       soldToInformation: (json['SoldToInformation'] as List<dynamic>?)
               ?.map((e) => CustomerCodeDto.fromJson(e as Map<String, dynamic>))
               .toList() ??
           [],
     );
 
-Map<String, dynamic> _$$_CustomerInformationDTOToJson(
-        _$_CustomerInformationDTO instance) =>
+Map<String, dynamic> _$$CustomerInformationDTOImplToJson(
+        _$CustomerInformationDTOImpl instance) =>
     <String, dynamic>{
       'shipToCount': instance.shipToCount,
       'SoldToInformation':

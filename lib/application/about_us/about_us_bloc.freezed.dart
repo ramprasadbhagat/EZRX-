@@ -12,7 +12,7 @@ part of 'about_us_bloc.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$AboutUsEvent {
@@ -82,20 +82,20 @@ class _$AboutUsEventCopyWithImpl<$Res, $Val extends AboutUsEvent>
 }
 
 /// @nodoc
-abstract class _$$_InitializeCopyWith<$Res> {
-  factory _$$_InitializeCopyWith(
-          _$_Initialize value, $Res Function(_$_Initialize) then) =
-      __$$_InitializeCopyWithImpl<$Res>;
+abstract class _$$InitializeImplCopyWith<$Res> {
+  factory _$$InitializeImplCopyWith(
+          _$InitializeImpl value, $Res Function(_$InitializeImpl) then) =
+      __$$InitializeImplCopyWithImpl<$Res>;
   @useResult
   $Res call({SalesOrg salesOrg});
 }
 
 /// @nodoc
-class __$$_InitializeCopyWithImpl<$Res>
-    extends _$AboutUsEventCopyWithImpl<$Res, _$_Initialize>
-    implements _$$_InitializeCopyWith<$Res> {
-  __$$_InitializeCopyWithImpl(
-      _$_Initialize _value, $Res Function(_$_Initialize) _then)
+class __$$InitializeImplCopyWithImpl<$Res>
+    extends _$AboutUsEventCopyWithImpl<$Res, _$InitializeImpl>
+    implements _$$InitializeImplCopyWith<$Res> {
+  __$$InitializeImplCopyWithImpl(
+      _$InitializeImpl _value, $Res Function(_$InitializeImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -103,7 +103,7 @@ class __$$_InitializeCopyWithImpl<$Res>
   $Res call({
     Object? salesOrg = null,
   }) {
-    return _then(_$_Initialize(
+    return _then(_$InitializeImpl(
       salesOrg: null == salesOrg
           ? _value.salesOrg
           : salesOrg // ignore: cast_nullable_to_non_nullable
@@ -114,8 +114,8 @@ class __$$_InitializeCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_Initialize implements _Initialize {
-  const _$_Initialize({required this.salesOrg});
+class _$InitializeImpl implements _Initialize {
+  const _$InitializeImpl({required this.salesOrg});
 
   @override
   final SalesOrg salesOrg;
@@ -126,10 +126,10 @@ class _$_Initialize implements _Initialize {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Initialize &&
+            other is _$InitializeImpl &&
             (identical(other.salesOrg, salesOrg) ||
                 other.salesOrg == salesOrg));
   }
@@ -140,8 +140,8 @@ class _$_Initialize implements _Initialize {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_InitializeCopyWith<_$_Initialize> get copyWith =>
-      __$$_InitializeCopyWithImpl<_$_Initialize>(this, _$identity);
+  _$$InitializeImplCopyWith<_$InitializeImpl> get copyWith =>
+      __$$InitializeImplCopyWithImpl<_$InitializeImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -214,34 +214,35 @@ class _$_Initialize implements _Initialize {
 }
 
 abstract class _Initialize implements AboutUsEvent {
-  const factory _Initialize({required final SalesOrg salesOrg}) = _$_Initialize;
+  const factory _Initialize({required final SalesOrg salesOrg}) =
+      _$InitializeImpl;
 
   SalesOrg get salesOrg;
   @JsonKey(ignore: true)
-  _$$_InitializeCopyWith<_$_Initialize> get copyWith =>
+  _$$InitializeImplCopyWith<_$InitializeImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_FetchAboutUsInfoCopyWith<$Res> {
-  factory _$$_FetchAboutUsInfoCopyWith(
-          _$_FetchAboutUsInfo value, $Res Function(_$_FetchAboutUsInfo) then) =
-      __$$_FetchAboutUsInfoCopyWithImpl<$Res>;
+abstract class _$$FetchAboutUsInfoImplCopyWith<$Res> {
+  factory _$$FetchAboutUsInfoImplCopyWith(_$FetchAboutUsInfoImpl value,
+          $Res Function(_$FetchAboutUsInfoImpl) then) =
+      __$$FetchAboutUsInfoImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_FetchAboutUsInfoCopyWithImpl<$Res>
-    extends _$AboutUsEventCopyWithImpl<$Res, _$_FetchAboutUsInfo>
-    implements _$$_FetchAboutUsInfoCopyWith<$Res> {
-  __$$_FetchAboutUsInfoCopyWithImpl(
-      _$_FetchAboutUsInfo _value, $Res Function(_$_FetchAboutUsInfo) _then)
+class __$$FetchAboutUsInfoImplCopyWithImpl<$Res>
+    extends _$AboutUsEventCopyWithImpl<$Res, _$FetchAboutUsInfoImpl>
+    implements _$$FetchAboutUsInfoImplCopyWith<$Res> {
+  __$$FetchAboutUsInfoImplCopyWithImpl(_$FetchAboutUsInfoImpl _value,
+      $Res Function(_$FetchAboutUsInfoImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_FetchAboutUsInfo implements _FetchAboutUsInfo {
-  const _$_FetchAboutUsInfo();
+class _$FetchAboutUsInfoImpl implements _FetchAboutUsInfo {
+  const _$FetchAboutUsInfoImpl();
 
   @override
   String toString() {
@@ -249,9 +250,9 @@ class _$_FetchAboutUsInfo implements _FetchAboutUsInfo {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_FetchAboutUsInfo);
+        (other.runtimeType == runtimeType && other is _$FetchAboutUsInfoImpl);
   }
 
   @override
@@ -328,29 +329,31 @@ class _$_FetchAboutUsInfo implements _FetchAboutUsInfo {
 }
 
 abstract class _FetchAboutUsInfo implements AboutUsEvent {
-  const factory _FetchAboutUsInfo() = _$_FetchAboutUsInfo;
+  const factory _FetchAboutUsInfo() = _$FetchAboutUsInfoImpl;
 }
 
 /// @nodoc
-abstract class _$$_FetchAboutUsStaticInfoCopyWith<$Res> {
-  factory _$$_FetchAboutUsStaticInfoCopyWith(_$_FetchAboutUsStaticInfo value,
-          $Res Function(_$_FetchAboutUsStaticInfo) then) =
-      __$$_FetchAboutUsStaticInfoCopyWithImpl<$Res>;
+abstract class _$$FetchAboutUsStaticInfoImplCopyWith<$Res> {
+  factory _$$FetchAboutUsStaticInfoImplCopyWith(
+          _$FetchAboutUsStaticInfoImpl value,
+          $Res Function(_$FetchAboutUsStaticInfoImpl) then) =
+      __$$FetchAboutUsStaticInfoImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_FetchAboutUsStaticInfoCopyWithImpl<$Res>
-    extends _$AboutUsEventCopyWithImpl<$Res, _$_FetchAboutUsStaticInfo>
-    implements _$$_FetchAboutUsStaticInfoCopyWith<$Res> {
-  __$$_FetchAboutUsStaticInfoCopyWithImpl(_$_FetchAboutUsStaticInfo _value,
-      $Res Function(_$_FetchAboutUsStaticInfo) _then)
+class __$$FetchAboutUsStaticInfoImplCopyWithImpl<$Res>
+    extends _$AboutUsEventCopyWithImpl<$Res, _$FetchAboutUsStaticInfoImpl>
+    implements _$$FetchAboutUsStaticInfoImplCopyWith<$Res> {
+  __$$FetchAboutUsStaticInfoImplCopyWithImpl(
+      _$FetchAboutUsStaticInfoImpl _value,
+      $Res Function(_$FetchAboutUsStaticInfoImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_FetchAboutUsStaticInfo implements _FetchAboutUsStaticInfo {
-  const _$_FetchAboutUsStaticInfo();
+class _$FetchAboutUsStaticInfoImpl implements _FetchAboutUsStaticInfo {
+  const _$FetchAboutUsStaticInfoImpl();
 
   @override
   String toString() {
@@ -358,10 +361,10 @@ class _$_FetchAboutUsStaticInfo implements _FetchAboutUsStaticInfo {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_FetchAboutUsStaticInfo);
+            other is _$FetchAboutUsStaticInfoImpl);
   }
 
   @override
@@ -438,7 +441,7 @@ class _$_FetchAboutUsStaticInfo implements _FetchAboutUsStaticInfo {
 }
 
 abstract class _FetchAboutUsStaticInfo implements AboutUsEvent {
-  const factory _FetchAboutUsStaticInfo() = _$_FetchAboutUsStaticInfo;
+  const factory _FetchAboutUsStaticInfo() = _$FetchAboutUsStaticInfoImpl;
 }
 
 /// @nodoc
@@ -517,11 +520,11 @@ class _$AboutUsStateCopyWithImpl<$Res, $Val extends AboutUsState>
 }
 
 /// @nodoc
-abstract class _$$_AboutUsStateCopyWith<$Res>
+abstract class _$$AboutUsStateImplCopyWith<$Res>
     implements $AboutUsStateCopyWith<$Res> {
-  factory _$$_AboutUsStateCopyWith(
-          _$_AboutUsState value, $Res Function(_$_AboutUsState) then) =
-      __$$_AboutUsStateCopyWithImpl<$Res>;
+  factory _$$AboutUsStateImplCopyWith(
+          _$AboutUsStateImpl value, $Res Function(_$AboutUsStateImpl) then) =
+      __$$AboutUsStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -535,11 +538,11 @@ abstract class _$$_AboutUsStateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_AboutUsStateCopyWithImpl<$Res>
-    extends _$AboutUsStateCopyWithImpl<$Res, _$_AboutUsState>
-    implements _$$_AboutUsStateCopyWith<$Res> {
-  __$$_AboutUsStateCopyWithImpl(
-      _$_AboutUsState _value, $Res Function(_$_AboutUsState) _then)
+class __$$AboutUsStateImplCopyWithImpl<$Res>
+    extends _$AboutUsStateCopyWithImpl<$Res, _$AboutUsStateImpl>
+    implements _$$AboutUsStateImplCopyWith<$Res> {
+  __$$AboutUsStateImplCopyWithImpl(
+      _$AboutUsStateImpl _value, $Res Function(_$AboutUsStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -550,7 +553,7 @@ class __$$_AboutUsStateCopyWithImpl<$Res>
     Object? aboutUsInfo = null,
     Object? apiFailureOrSuccessOption = null,
   }) {
-    return _then(_$_AboutUsState(
+    return _then(_$AboutUsStateImpl(
       salesOrg: null == salesOrg
           ? _value.salesOrg
           : salesOrg // ignore: cast_nullable_to_non_nullable
@@ -573,8 +576,8 @@ class __$$_AboutUsStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_AboutUsState implements _AboutUsState {
-  const _$_AboutUsState(
+class _$AboutUsStateImpl implements _AboutUsState {
+  const _$AboutUsStateImpl(
       {required this.salesOrg,
       required this.isFetching,
       required this.aboutUsInfo,
@@ -595,10 +598,10 @@ class _$_AboutUsState implements _AboutUsState {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_AboutUsState &&
+            other is _$AboutUsStateImpl &&
             (identical(other.salesOrg, salesOrg) ||
                 other.salesOrg == salesOrg) &&
             (identical(other.isFetching, isFetching) ||
@@ -617,8 +620,8 @@ class _$_AboutUsState implements _AboutUsState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_AboutUsStateCopyWith<_$_AboutUsState> get copyWith =>
-      __$$_AboutUsStateCopyWithImpl<_$_AboutUsState>(this, _$identity);
+  _$$AboutUsStateImplCopyWith<_$AboutUsStateImpl> get copyWith =>
+      __$$AboutUsStateImplCopyWithImpl<_$AboutUsStateImpl>(this, _$identity);
 }
 
 abstract class _AboutUsState implements AboutUsState {
@@ -627,7 +630,7 @@ abstract class _AboutUsState implements AboutUsState {
       required final bool isFetching,
       required final AboutUs aboutUsInfo,
       required final Option<Either<ApiFailure, dynamic>>
-          apiFailureOrSuccessOption}) = _$_AboutUsState;
+          apiFailureOrSuccessOption}) = _$AboutUsStateImpl;
 
   @override
   SalesOrg get salesOrg;
@@ -639,6 +642,6 @@ abstract class _AboutUsState implements AboutUsState {
   Option<Either<ApiFailure, dynamic>> get apiFailureOrSuccessOption;
   @override
   @JsonKey(ignore: true)
-  _$$_AboutUsStateCopyWith<_$_AboutUsState> get copyWith =>
+  _$$AboutUsStateImplCopyWith<_$AboutUsStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -12,7 +12,7 @@ part of 'about_us.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$AboutUs {
@@ -122,10 +122,10 @@ class _$AboutUsCopyWithImpl<$Res, $Val extends AboutUs>
 }
 
 /// @nodoc
-abstract class _$$_AboutUsCopyWith<$Res> implements $AboutUsCopyWith<$Res> {
-  factory _$$_AboutUsCopyWith(
-          _$_AboutUs value, $Res Function(_$_AboutUs) then) =
-      __$$_AboutUsCopyWithImpl<$Res>;
+abstract class _$$AboutUsImplCopyWith<$Res> implements $AboutUsCopyWith<$Res> {
+  factory _$$AboutUsImplCopyWith(
+          _$AboutUsImpl value, $Res Function(_$AboutUsImpl) then) =
+      __$$AboutUsImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -146,10 +146,11 @@ abstract class _$$_AboutUsCopyWith<$Res> implements $AboutUsCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_AboutUsCopyWithImpl<$Res>
-    extends _$AboutUsCopyWithImpl<$Res, _$_AboutUs>
-    implements _$$_AboutUsCopyWith<$Res> {
-  __$$_AboutUsCopyWithImpl(_$_AboutUs _value, $Res Function(_$_AboutUs) _then)
+class __$$AboutUsImplCopyWithImpl<$Res>
+    extends _$AboutUsCopyWithImpl<$Res, _$AboutUsImpl>
+    implements _$$AboutUsImplCopyWith<$Res> {
+  __$$AboutUsImplCopyWithImpl(
+      _$AboutUsImpl _value, $Res Function(_$AboutUsImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -161,7 +162,7 @@ class __$$_AboutUsCopyWithImpl<$Res>
     Object? ourPartners = null,
     Object? whoWeAre = null,
   }) {
-    return _then(_$_AboutUs(
+    return _then(_$AboutUsImpl(
       banner: null == banner
           ? _value.banner
           : banner // ignore: cast_nullable_to_non_nullable
@@ -188,8 +189,8 @@ class __$$_AboutUsCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_AboutUs extends _AboutUs {
-  const _$_AboutUs(
+class _$AboutUsImpl extends _AboutUs {
+  const _$AboutUsImpl(
       {required this.banner,
       required final List<ContentSplitTemplate> contentSplit,
       required this.certifications,
@@ -221,10 +222,10 @@ class _$_AboutUs extends _AboutUs {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_AboutUs &&
+            other is _$AboutUsImpl &&
             (identical(other.banner, banner) || other.banner == banner) &&
             const DeepCollectionEquality()
                 .equals(other._contentSplit, _contentSplit) &&
@@ -248,8 +249,8 @@ class _$_AboutUs extends _AboutUs {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_AboutUsCopyWith<_$_AboutUs> get copyWith =>
-      __$$_AboutUsCopyWithImpl<_$_AboutUs>(this, _$identity);
+  _$$AboutUsImplCopyWith<_$AboutUsImpl> get copyWith =>
+      __$$AboutUsImplCopyWithImpl<_$AboutUsImpl>(this, _$identity);
 }
 
 abstract class _AboutUs extends AboutUs {
@@ -258,7 +259,7 @@ abstract class _AboutUs extends AboutUs {
       required final List<ContentSplitTemplate> contentSplit,
       required final SliderTemplate certifications,
       required final MediaListTemplate ourPartners,
-      required final HorizontalListTemplate whoWeAre}) = _$_AboutUs;
+      required final HorizontalListTemplate whoWeAre}) = _$AboutUsImpl;
   const _AboutUs._() : super._();
 
   @override
@@ -273,7 +274,7 @@ abstract class _AboutUs extends AboutUs {
   HorizontalListTemplate get whoWeAre;
   @override
   @JsonKey(ignore: true)
-  _$$_AboutUsCopyWith<_$_AboutUs> get copyWith =>
+  _$$AboutUsImplCopyWith<_$AboutUsImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -326,22 +327,22 @@ class _$SliderTemplateCopyWithImpl<$Res, $Val extends SliderTemplate>
 }
 
 /// @nodoc
-abstract class _$$_SliderTemplateCopyWith<$Res>
+abstract class _$$SliderTemplateImplCopyWith<$Res>
     implements $SliderTemplateCopyWith<$Res> {
-  factory _$$_SliderTemplateCopyWith(
-          _$_SliderTemplate value, $Res Function(_$_SliderTemplate) then) =
-      __$$_SliderTemplateCopyWithImpl<$Res>;
+  factory _$$SliderTemplateImplCopyWith(_$SliderTemplateImpl value,
+          $Res Function(_$SliderTemplateImpl) then) =
+      __$$SliderTemplateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String title, List<Certifications> certificates});
 }
 
 /// @nodoc
-class __$$_SliderTemplateCopyWithImpl<$Res>
-    extends _$SliderTemplateCopyWithImpl<$Res, _$_SliderTemplate>
-    implements _$$_SliderTemplateCopyWith<$Res> {
-  __$$_SliderTemplateCopyWithImpl(
-      _$_SliderTemplate _value, $Res Function(_$_SliderTemplate) _then)
+class __$$SliderTemplateImplCopyWithImpl<$Res>
+    extends _$SliderTemplateCopyWithImpl<$Res, _$SliderTemplateImpl>
+    implements _$$SliderTemplateImplCopyWith<$Res> {
+  __$$SliderTemplateImplCopyWithImpl(
+      _$SliderTemplateImpl _value, $Res Function(_$SliderTemplateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -350,7 +351,7 @@ class __$$_SliderTemplateCopyWithImpl<$Res>
     Object? title = null,
     Object? certificates = null,
   }) {
-    return _then(_$_SliderTemplate(
+    return _then(_$SliderTemplateImpl(
       title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -365,8 +366,8 @@ class __$$_SliderTemplateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_SliderTemplate extends _SliderTemplate {
-  const _$_SliderTemplate(
+class _$SliderTemplateImpl extends _SliderTemplate {
+  const _$SliderTemplateImpl(
       {required this.title, required final List<Certifications> certificates})
       : _certificates = certificates,
         super._();
@@ -387,10 +388,10 @@ class _$_SliderTemplate extends _SliderTemplate {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_SliderTemplate &&
+            other is _$SliderTemplateImpl &&
             (identical(other.title, title) || other.title == title) &&
             const DeepCollectionEquality()
                 .equals(other._certificates, _certificates));
@@ -403,14 +404,15 @@ class _$_SliderTemplate extends _SliderTemplate {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_SliderTemplateCopyWith<_$_SliderTemplate> get copyWith =>
-      __$$_SliderTemplateCopyWithImpl<_$_SliderTemplate>(this, _$identity);
+  _$$SliderTemplateImplCopyWith<_$SliderTemplateImpl> get copyWith =>
+      __$$SliderTemplateImplCopyWithImpl<_$SliderTemplateImpl>(
+          this, _$identity);
 }
 
 abstract class _SliderTemplate extends SliderTemplate {
   const factory _SliderTemplate(
       {required final String title,
-      required final List<Certifications> certificates}) = _$_SliderTemplate;
+      required final List<Certifications> certificates}) = _$SliderTemplateImpl;
   const _SliderTemplate._() : super._();
 
   @override
@@ -419,7 +421,7 @@ abstract class _SliderTemplate extends SliderTemplate {
   List<Certifications> get certificates;
   @override
   @JsonKey(ignore: true)
-  _$$_SliderTemplateCopyWith<_$_SliderTemplate> get copyWith =>
+  _$$SliderTemplateImplCopyWith<_$SliderTemplateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -488,11 +490,11 @@ class _$CertificationsCopyWithImpl<$Res, $Val extends Certifications>
 }
 
 /// @nodoc
-abstract class _$$_CertificationsCopyWith<$Res>
+abstract class _$$CertificationsImplCopyWith<$Res>
     implements $CertificationsCopyWith<$Res> {
-  factory _$$_CertificationsCopyWith(
-          _$_Certifications value, $Res Function(_$_Certifications) then) =
-      __$$_CertificationsCopyWithImpl<$Res>;
+  factory _$$CertificationsImplCopyWith(_$CertificationsImpl value,
+          $Res Function(_$CertificationsImpl) then) =
+      __$$CertificationsImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -503,11 +505,11 @@ abstract class _$$_CertificationsCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_CertificationsCopyWithImpl<$Res>
-    extends _$CertificationsCopyWithImpl<$Res, _$_Certifications>
-    implements _$$_CertificationsCopyWith<$Res> {
-  __$$_CertificationsCopyWithImpl(
-      _$_Certifications _value, $Res Function(_$_Certifications) _then)
+class __$$CertificationsImplCopyWithImpl<$Res>
+    extends _$CertificationsCopyWithImpl<$Res, _$CertificationsImpl>
+    implements _$$CertificationsImplCopyWith<$Res> {
+  __$$CertificationsImplCopyWithImpl(
+      _$CertificationsImpl _value, $Res Function(_$CertificationsImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -518,7 +520,7 @@ class __$$_CertificationsCopyWithImpl<$Res>
     Object? certificationName = null,
     Object? certificationYear = null,
   }) {
-    return _then(_$_Certifications(
+    return _then(_$CertificationsImpl(
       description: null == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
@@ -541,8 +543,8 @@ class __$$_CertificationsCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_Certifications extends _Certifications {
-  const _$_Certifications(
+class _$CertificationsImpl extends _Certifications {
+  const _$CertificationsImpl(
       {required this.description,
       required this.certificationType,
       required this.certificationName,
@@ -564,10 +566,10 @@ class _$_Certifications extends _Certifications {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Certifications &&
+            other is _$CertificationsImpl &&
             (identical(other.description, description) ||
                 other.description == description) &&
             (identical(other.certificationType, certificationType) ||
@@ -585,8 +587,9 @@ class _$_Certifications extends _Certifications {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_CertificationsCopyWith<_$_Certifications> get copyWith =>
-      __$$_CertificationsCopyWithImpl<_$_Certifications>(this, _$identity);
+  _$$CertificationsImplCopyWith<_$CertificationsImpl> get copyWith =>
+      __$$CertificationsImplCopyWithImpl<_$CertificationsImpl>(
+          this, _$identity);
 }
 
 abstract class _Certifications extends Certifications {
@@ -594,7 +597,7 @@ abstract class _Certifications extends Certifications {
       {required final String description,
       required final String certificationType,
       required final String certificationName,
-      required final String certificationYear}) = _$_Certifications;
+      required final String certificationYear}) = _$CertificationsImpl;
   const _Certifications._() : super._();
 
   @override
@@ -607,7 +610,7 @@ abstract class _Certifications extends Certifications {
   String get certificationYear;
   @override
   @JsonKey(ignore: true)
-  _$$_CertificationsCopyWith<_$_Certifications> get copyWith =>
+  _$$CertificationsImplCopyWith<_$CertificationsImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -671,11 +674,12 @@ class _$HorizontalListTemplateCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_HorizontalListTemplateCopyWith<$Res>
+abstract class _$$HorizontalListTemplateImplCopyWith<$Res>
     implements $HorizontalListTemplateCopyWith<$Res> {
-  factory _$$_HorizontalListTemplateCopyWith(_$_HorizontalListTemplate value,
-          $Res Function(_$_HorizontalListTemplate) then) =
-      __$$_HorizontalListTemplateCopyWithImpl<$Res>;
+  factory _$$HorizontalListTemplateImplCopyWith(
+          _$HorizontalListTemplateImpl value,
+          $Res Function(_$HorizontalListTemplateImpl) then) =
+      __$$HorizontalListTemplateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -685,12 +689,13 @@ abstract class _$$_HorizontalListTemplateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_HorizontalListTemplateCopyWithImpl<$Res>
+class __$$HorizontalListTemplateImplCopyWithImpl<$Res>
     extends _$HorizontalListTemplateCopyWithImpl<$Res,
-        _$_HorizontalListTemplate>
-    implements _$$_HorizontalListTemplateCopyWith<$Res> {
-  __$$_HorizontalListTemplateCopyWithImpl(_$_HorizontalListTemplate _value,
-      $Res Function(_$_HorizontalListTemplate) _then)
+        _$HorizontalListTemplateImpl>
+    implements _$$HorizontalListTemplateImplCopyWith<$Res> {
+  __$$HorizontalListTemplateImplCopyWithImpl(
+      _$HorizontalListTemplateImpl _value,
+      $Res Function(_$HorizontalListTemplateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -700,7 +705,7 @@ class __$$_HorizontalListTemplateCopyWithImpl<$Res>
     Object? description = null,
     Object? achievements = null,
   }) {
-    return _then(_$_HorizontalListTemplate(
+    return _then(_$HorizontalListTemplateImpl(
       title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -719,8 +724,8 @@ class __$$_HorizontalListTemplateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_HorizontalListTemplate extends _HorizontalListTemplate {
-  const _$_HorizontalListTemplate(
+class _$HorizontalListTemplateImpl extends _HorizontalListTemplate {
+  const _$HorizontalListTemplateImpl(
       {required this.title,
       required this.description,
       required final List<HorizontalListTemplateItem> achievements})
@@ -745,10 +750,10 @@ class _$_HorizontalListTemplate extends _HorizontalListTemplate {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_HorizontalListTemplate &&
+            other is _$HorizontalListTemplateImpl &&
             (identical(other.title, title) || other.title == title) &&
             (identical(other.description, description) ||
                 other.description == description) &&
@@ -763,9 +768,9 @@ class _$_HorizontalListTemplate extends _HorizontalListTemplate {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_HorizontalListTemplateCopyWith<_$_HorizontalListTemplate> get copyWith =>
-      __$$_HorizontalListTemplateCopyWithImpl<_$_HorizontalListTemplate>(
-          this, _$identity);
+  _$$HorizontalListTemplateImplCopyWith<_$HorizontalListTemplateImpl>
+      get copyWith => __$$HorizontalListTemplateImplCopyWithImpl<
+          _$HorizontalListTemplateImpl>(this, _$identity);
 }
 
 abstract class _HorizontalListTemplate extends HorizontalListTemplate {
@@ -773,7 +778,7 @@ abstract class _HorizontalListTemplate extends HorizontalListTemplate {
           {required final String title,
           required final String description,
           required final List<HorizontalListTemplateItem> achievements}) =
-      _$_HorizontalListTemplate;
+      _$HorizontalListTemplateImpl;
   const _HorizontalListTemplate._() : super._();
 
   @override
@@ -784,8 +789,8 @@ abstract class _HorizontalListTemplate extends HorizontalListTemplate {
   List<HorizontalListTemplateItem> get achievements;
   @override
   @JsonKey(ignore: true)
-  _$$_HorizontalListTemplateCopyWith<_$_HorizontalListTemplate> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$HorizontalListTemplateImplCopyWith<_$HorizontalListTemplateImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -845,25 +850,25 @@ class _$HorizontalListTemplateItemCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_HorizontalListTemplateItemCopyWith<$Res>
+abstract class _$$HorizontalListTemplateItemImplCopyWith<$Res>
     implements $HorizontalListTemplateItemCopyWith<$Res> {
-  factory _$$_HorizontalListTemplateItemCopyWith(
-          _$_HorizontalListTemplateItem value,
-          $Res Function(_$_HorizontalListTemplateItem) then) =
-      __$$_HorizontalListTemplateItemCopyWithImpl<$Res>;
+  factory _$$HorizontalListTemplateItemImplCopyWith(
+          _$HorizontalListTemplateItemImpl value,
+          $Res Function(_$HorizontalListTemplateItemImpl) then) =
+      __$$HorizontalListTemplateItemImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String title, String subTitle, String description});
 }
 
 /// @nodoc
-class __$$_HorizontalListTemplateItemCopyWithImpl<$Res>
+class __$$HorizontalListTemplateItemImplCopyWithImpl<$Res>
     extends _$HorizontalListTemplateItemCopyWithImpl<$Res,
-        _$_HorizontalListTemplateItem>
-    implements _$$_HorizontalListTemplateItemCopyWith<$Res> {
-  __$$_HorizontalListTemplateItemCopyWithImpl(
-      _$_HorizontalListTemplateItem _value,
-      $Res Function(_$_HorizontalListTemplateItem) _then)
+        _$HorizontalListTemplateItemImpl>
+    implements _$$HorizontalListTemplateItemImplCopyWith<$Res> {
+  __$$HorizontalListTemplateItemImplCopyWithImpl(
+      _$HorizontalListTemplateItemImpl _value,
+      $Res Function(_$HorizontalListTemplateItemImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -873,7 +878,7 @@ class __$$_HorizontalListTemplateItemCopyWithImpl<$Res>
     Object? subTitle = null,
     Object? description = null,
   }) {
-    return _then(_$_HorizontalListTemplateItem(
+    return _then(_$HorizontalListTemplateItemImpl(
       title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -892,8 +897,8 @@ class __$$_HorizontalListTemplateItemCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_HorizontalListTemplateItem extends _HorizontalListTemplateItem {
-  const _$_HorizontalListTemplateItem(
+class _$HorizontalListTemplateItemImpl extends _HorizontalListTemplateItem {
+  const _$HorizontalListTemplateItemImpl(
       {required this.title, required this.subTitle, required this.description})
       : super._();
 
@@ -910,10 +915,10 @@ class _$_HorizontalListTemplateItem extends _HorizontalListTemplateItem {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_HorizontalListTemplateItem &&
+            other is _$HorizontalListTemplateItemImpl &&
             (identical(other.title, title) || other.title == title) &&
             (identical(other.subTitle, subTitle) ||
                 other.subTitle == subTitle) &&
@@ -927,16 +932,16 @@ class _$_HorizontalListTemplateItem extends _HorizontalListTemplateItem {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_HorizontalListTemplateItemCopyWith<_$_HorizontalListTemplateItem>
-      get copyWith => __$$_HorizontalListTemplateItemCopyWithImpl<
-          _$_HorizontalListTemplateItem>(this, _$identity);
+  _$$HorizontalListTemplateItemImplCopyWith<_$HorizontalListTemplateItemImpl>
+      get copyWith => __$$HorizontalListTemplateItemImplCopyWithImpl<
+          _$HorizontalListTemplateItemImpl>(this, _$identity);
 }
 
 abstract class _HorizontalListTemplateItem extends HorizontalListTemplateItem {
   const factory _HorizontalListTemplateItem(
       {required final String title,
       required final String subTitle,
-      required final String description}) = _$_HorizontalListTemplateItem;
+      required final String description}) = _$HorizontalListTemplateItemImpl;
   const _HorizontalListTemplateItem._() : super._();
 
   @override
@@ -947,7 +952,7 @@ abstract class _HorizontalListTemplateItem extends HorizontalListTemplateItem {
   String get description;
   @override
   @JsonKey(ignore: true)
-  _$$_HorizontalListTemplateItemCopyWith<_$_HorizontalListTemplateItem>
+  _$$HorizontalListTemplateItemImplCopyWith<_$HorizontalListTemplateItemImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -1024,10 +1029,11 @@ class _$ContentSplitTemplateCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_WhyUsCopyWith<$Res>
+abstract class _$$WhyUsImplCopyWith<$Res>
     implements $ContentSplitTemplateCopyWith<$Res> {
-  factory _$$_WhyUsCopyWith(_$_WhyUs value, $Res Function(_$_WhyUs) then) =
-      __$$_WhyUsCopyWithImpl<$Res>;
+  factory _$$WhyUsImplCopyWith(
+          _$WhyUsImpl value, $Res Function(_$WhyUsImpl) then) =
+      __$$WhyUsImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -1038,10 +1044,11 @@ abstract class _$$_WhyUsCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_WhyUsCopyWithImpl<$Res>
-    extends _$ContentSplitTemplateCopyWithImpl<$Res, _$_WhyUs>
-    implements _$$_WhyUsCopyWith<$Res> {
-  __$$_WhyUsCopyWithImpl(_$_WhyUs _value, $Res Function(_$_WhyUs) _then)
+class __$$WhyUsImplCopyWithImpl<$Res>
+    extends _$ContentSplitTemplateCopyWithImpl<$Res, _$WhyUsImpl>
+    implements _$$WhyUsImplCopyWith<$Res> {
+  __$$WhyUsImplCopyWithImpl(
+      _$WhyUsImpl _value, $Res Function(_$WhyUsImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1052,7 +1059,7 @@ class __$$_WhyUsCopyWithImpl<$Res>
     Object? media = null,
     Object? description = null,
   }) {
-    return _then(_$_WhyUs(
+    return _then(_$WhyUsImpl(
       title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -1075,8 +1082,8 @@ class __$$_WhyUsCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_WhyUs extends _WhyUs {
-  const _$_WhyUs(
+class _$WhyUsImpl extends _WhyUs {
+  const _$WhyUsImpl(
       {required this.title,
       required this.subTitle,
       required this.media,
@@ -1098,10 +1105,10 @@ class _$_WhyUs extends _WhyUs {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_WhyUs &&
+            other is _$WhyUsImpl &&
             (identical(other.title, title) || other.title == title) &&
             (identical(other.subTitle, subTitle) ||
                 other.subTitle == subTitle) &&
@@ -1117,8 +1124,8 @@ class _$_WhyUs extends _WhyUs {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_WhyUsCopyWith<_$_WhyUs> get copyWith =>
-      __$$_WhyUsCopyWithImpl<_$_WhyUs>(this, _$identity);
+  _$$WhyUsImplCopyWith<_$WhyUsImpl> get copyWith =>
+      __$$WhyUsImplCopyWithImpl<_$WhyUsImpl>(this, _$identity);
 }
 
 abstract class _WhyUs extends ContentSplitTemplate {
@@ -1126,7 +1133,7 @@ abstract class _WhyUs extends ContentSplitTemplate {
       {required final String title,
       required final String subTitle,
       required final MediaValue media,
-      required final String description}) = _$_WhyUs;
+      required final String description}) = _$WhyUsImpl;
   const _WhyUs._() : super._();
 
   @override
@@ -1139,7 +1146,7 @@ abstract class _WhyUs extends ContentSplitTemplate {
   String get description;
   @override
   @JsonKey(ignore: true)
-  _$$_WhyUsCopyWith<_$_WhyUs> get copyWith =>
+  _$$WhyUsImplCopyWith<_$WhyUsImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -1198,22 +1205,22 @@ class _$MediaListTemplateCopyWithImpl<$Res, $Val extends MediaListTemplate>
 }
 
 /// @nodoc
-abstract class _$$_MediaListTemplateCopyWith<$Res>
+abstract class _$$MediaListTemplateImplCopyWith<$Res>
     implements $MediaListTemplateCopyWith<$Res> {
-  factory _$$_MediaListTemplateCopyWith(_$_MediaListTemplate value,
-          $Res Function(_$_MediaListTemplate) then) =
-      __$$_MediaListTemplateCopyWithImpl<$Res>;
+  factory _$$MediaListTemplateImplCopyWith(_$MediaListTemplateImpl value,
+          $Res Function(_$MediaListTemplateImpl) then) =
+      __$$MediaListTemplateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String title, String description, List<MediaItem> mediaItems});
 }
 
 /// @nodoc
-class __$$_MediaListTemplateCopyWithImpl<$Res>
-    extends _$MediaListTemplateCopyWithImpl<$Res, _$_MediaListTemplate>
-    implements _$$_MediaListTemplateCopyWith<$Res> {
-  __$$_MediaListTemplateCopyWithImpl(
-      _$_MediaListTemplate _value, $Res Function(_$_MediaListTemplate) _then)
+class __$$MediaListTemplateImplCopyWithImpl<$Res>
+    extends _$MediaListTemplateCopyWithImpl<$Res, _$MediaListTemplateImpl>
+    implements _$$MediaListTemplateImplCopyWith<$Res> {
+  __$$MediaListTemplateImplCopyWithImpl(_$MediaListTemplateImpl _value,
+      $Res Function(_$MediaListTemplateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1223,7 +1230,7 @@ class __$$_MediaListTemplateCopyWithImpl<$Res>
     Object? description = null,
     Object? mediaItems = null,
   }) {
-    return _then(_$_MediaListTemplate(
+    return _then(_$MediaListTemplateImpl(
       title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -1242,8 +1249,8 @@ class __$$_MediaListTemplateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_MediaListTemplate extends _MediaListTemplate {
-  const _$_MediaListTemplate(
+class _$MediaListTemplateImpl extends _MediaListTemplate {
+  const _$MediaListTemplateImpl(
       {required this.title,
       required this.description,
       required final List<MediaItem> mediaItems})
@@ -1268,10 +1275,10 @@ class _$_MediaListTemplate extends _MediaListTemplate {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_MediaListTemplate &&
+            other is _$MediaListTemplateImpl &&
             (identical(other.title, title) || other.title == title) &&
             (identical(other.description, description) ||
                 other.description == description) &&
@@ -1286,8 +1293,8 @@ class _$_MediaListTemplate extends _MediaListTemplate {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_MediaListTemplateCopyWith<_$_MediaListTemplate> get copyWith =>
-      __$$_MediaListTemplateCopyWithImpl<_$_MediaListTemplate>(
+  _$$MediaListTemplateImplCopyWith<_$MediaListTemplateImpl> get copyWith =>
+      __$$MediaListTemplateImplCopyWithImpl<_$MediaListTemplateImpl>(
           this, _$identity);
 }
 
@@ -1295,7 +1302,7 @@ abstract class _MediaListTemplate extends MediaListTemplate {
   const factory _MediaListTemplate(
       {required final String title,
       required final String description,
-      required final List<MediaItem> mediaItems}) = _$_MediaListTemplate;
+      required final List<MediaItem> mediaItems}) = _$MediaListTemplateImpl;
   const _MediaListTemplate._() : super._();
 
   @override
@@ -1306,7 +1313,7 @@ abstract class _MediaListTemplate extends MediaListTemplate {
   List<MediaItem> get mediaItems;
   @override
   @JsonKey(ignore: true)
-  _$$_MediaListTemplateCopyWith<_$_MediaListTemplate> get copyWith =>
+  _$$MediaListTemplateImplCopyWith<_$MediaListTemplateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -1352,21 +1359,22 @@ class _$MediaItemCopyWithImpl<$Res, $Val extends MediaItem>
 }
 
 /// @nodoc
-abstract class _$$_MediaItemCopyWith<$Res> implements $MediaItemCopyWith<$Res> {
-  factory _$$_MediaItemCopyWith(
-          _$_MediaItem value, $Res Function(_$_MediaItem) then) =
-      __$$_MediaItemCopyWithImpl<$Res>;
+abstract class _$$MediaItemImplCopyWith<$Res>
+    implements $MediaItemCopyWith<$Res> {
+  factory _$$MediaItemImplCopyWith(
+          _$MediaItemImpl value, $Res Function(_$MediaItemImpl) then) =
+      __$$MediaItemImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String url});
 }
 
 /// @nodoc
-class __$$_MediaItemCopyWithImpl<$Res>
-    extends _$MediaItemCopyWithImpl<$Res, _$_MediaItem>
-    implements _$$_MediaItemCopyWith<$Res> {
-  __$$_MediaItemCopyWithImpl(
-      _$_MediaItem _value, $Res Function(_$_MediaItem) _then)
+class __$$MediaItemImplCopyWithImpl<$Res>
+    extends _$MediaItemCopyWithImpl<$Res, _$MediaItemImpl>
+    implements _$$MediaItemImplCopyWith<$Res> {
+  __$$MediaItemImplCopyWithImpl(
+      _$MediaItemImpl _value, $Res Function(_$MediaItemImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1374,7 +1382,7 @@ class __$$_MediaItemCopyWithImpl<$Res>
   $Res call({
     Object? url = null,
   }) {
-    return _then(_$_MediaItem(
+    return _then(_$MediaItemImpl(
       url: null == url
           ? _value.url
           : url // ignore: cast_nullable_to_non_nullable
@@ -1385,8 +1393,8 @@ class __$$_MediaItemCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_MediaItem extends _MediaItem {
-  const _$_MediaItem({required this.url}) : super._();
+class _$MediaItemImpl extends _MediaItem {
+  const _$MediaItemImpl({required this.url}) : super._();
 
   @override
   final String url;
@@ -1397,10 +1405,10 @@ class _$_MediaItem extends _MediaItem {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_MediaItem &&
+            other is _$MediaItemImpl &&
             (identical(other.url, url) || other.url == url));
   }
 
@@ -1410,19 +1418,19 @@ class _$_MediaItem extends _MediaItem {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_MediaItemCopyWith<_$_MediaItem> get copyWith =>
-      __$$_MediaItemCopyWithImpl<_$_MediaItem>(this, _$identity);
+  _$$MediaItemImplCopyWith<_$MediaItemImpl> get copyWith =>
+      __$$MediaItemImplCopyWithImpl<_$MediaItemImpl>(this, _$identity);
 }
 
 abstract class _MediaItem extends MediaItem {
-  const factory _MediaItem({required final String url}) = _$_MediaItem;
+  const factory _MediaItem({required final String url}) = _$MediaItemImpl;
   const _MediaItem._() : super._();
 
   @override
   String get url;
   @override
   @JsonKey(ignore: true)
-  _$$_MediaItemCopyWith<_$_MediaItem> get copyWith =>
+  _$$MediaItemImplCopyWith<_$MediaItemImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -1498,11 +1506,11 @@ class _$BannerTemplateCopyWithImpl<$Res, $Val extends BannerTemplate>
 }
 
 /// @nodoc
-abstract class _$$_BannerTemplateCopyWith<$Res>
+abstract class _$$BannerTemplateImplCopyWith<$Res>
     implements $BannerTemplateCopyWith<$Res> {
-  factory _$$_BannerTemplateCopyWith(
-          _$_BannerTemplate value, $Res Function(_$_BannerTemplate) then) =
-      __$$_BannerTemplateCopyWithImpl<$Res>;
+  factory _$$BannerTemplateImplCopyWith(_$BannerTemplateImpl value,
+          $Res Function(_$BannerTemplateImpl) then) =
+      __$$BannerTemplateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -1513,11 +1521,11 @@ abstract class _$$_BannerTemplateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_BannerTemplateCopyWithImpl<$Res>
-    extends _$BannerTemplateCopyWithImpl<$Res, _$_BannerTemplate>
-    implements _$$_BannerTemplateCopyWith<$Res> {
-  __$$_BannerTemplateCopyWithImpl(
-      _$_BannerTemplate _value, $Res Function(_$_BannerTemplate) _then)
+class __$$BannerTemplateImplCopyWithImpl<$Res>
+    extends _$BannerTemplateCopyWithImpl<$Res, _$BannerTemplateImpl>
+    implements _$$BannerTemplateImplCopyWith<$Res> {
+  __$$BannerTemplateImplCopyWithImpl(
+      _$BannerTemplateImpl _value, $Res Function(_$BannerTemplateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1528,7 +1536,7 @@ class __$$_BannerTemplateCopyWithImpl<$Res>
     Object? title = null,
     Object? buttonName = null,
   }) {
-    return _then(_$_BannerTemplate(
+    return _then(_$BannerTemplateImpl(
       content: null == content
           ? _value.content
           : content // ignore: cast_nullable_to_non_nullable
@@ -1551,8 +1559,8 @@ class __$$_BannerTemplateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_BannerTemplate implements _BannerTemplate {
-  _$_BannerTemplate(
+class _$BannerTemplateImpl implements _BannerTemplate {
+  _$BannerTemplateImpl(
       {required this.content,
       required this.media,
       required this.title,
@@ -1573,10 +1581,10 @@ class _$_BannerTemplate implements _BannerTemplate {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_BannerTemplate &&
+            other is _$BannerTemplateImpl &&
             (identical(other.content, content) || other.content == content) &&
             (identical(other.media, media) || other.media == media) &&
             (identical(other.title, title) || other.title == title) &&
@@ -1591,8 +1599,9 @@ class _$_BannerTemplate implements _BannerTemplate {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_BannerTemplateCopyWith<_$_BannerTemplate> get copyWith =>
-      __$$_BannerTemplateCopyWithImpl<_$_BannerTemplate>(this, _$identity);
+  _$$BannerTemplateImplCopyWith<_$BannerTemplateImpl> get copyWith =>
+      __$$BannerTemplateImplCopyWithImpl<_$BannerTemplateImpl>(
+          this, _$identity);
 }
 
 abstract class _BannerTemplate implements BannerTemplate {
@@ -1600,7 +1609,7 @@ abstract class _BannerTemplate implements BannerTemplate {
       {required final String content,
       required final MediaValue media,
       required final String title,
-      required final String buttonName}) = _$_BannerTemplate;
+      required final String buttonName}) = _$BannerTemplateImpl;
 
   @override
   String get content;
@@ -1612,7 +1621,7 @@ abstract class _BannerTemplate implements BannerTemplate {
   String get buttonName;
   @override
   @JsonKey(ignore: true)
-  _$$_BannerTemplateCopyWith<_$_BannerTemplate> get copyWith =>
+  _$$BannerTemplateImplCopyWith<_$BannerTemplateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -1659,22 +1668,22 @@ class _$MediaValueCopyWithImpl<$Res, $Val extends MediaValue>
 }
 
 /// @nodoc
-abstract class _$$_MediaValueCopyWith<$Res>
+abstract class _$$MediaValueImplCopyWith<$Res>
     implements $MediaValueCopyWith<$Res> {
-  factory _$$_MediaValueCopyWith(
-          _$_MediaValue value, $Res Function(_$_MediaValue) then) =
-      __$$_MediaValueCopyWithImpl<$Res>;
+  factory _$$MediaValueImplCopyWith(
+          _$MediaValueImpl value, $Res Function(_$MediaValueImpl) then) =
+      __$$MediaValueImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String src});
 }
 
 /// @nodoc
-class __$$_MediaValueCopyWithImpl<$Res>
-    extends _$MediaValueCopyWithImpl<$Res, _$_MediaValue>
-    implements _$$_MediaValueCopyWith<$Res> {
-  __$$_MediaValueCopyWithImpl(
-      _$_MediaValue _value, $Res Function(_$_MediaValue) _then)
+class __$$MediaValueImplCopyWithImpl<$Res>
+    extends _$MediaValueCopyWithImpl<$Res, _$MediaValueImpl>
+    implements _$$MediaValueImplCopyWith<$Res> {
+  __$$MediaValueImplCopyWithImpl(
+      _$MediaValueImpl _value, $Res Function(_$MediaValueImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1682,7 +1691,7 @@ class __$$_MediaValueCopyWithImpl<$Res>
   $Res call({
     Object? src = null,
   }) {
-    return _then(_$_MediaValue(
+    return _then(_$MediaValueImpl(
       src: null == src
           ? _value.src
           : src // ignore: cast_nullable_to_non_nullable
@@ -1693,8 +1702,8 @@ class __$$_MediaValueCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_MediaValue implements _MediaValue {
-  _$_MediaValue({required this.src});
+class _$MediaValueImpl implements _MediaValue {
+  _$MediaValueImpl({required this.src});
 
   @override
   final String src;
@@ -1705,10 +1714,10 @@ class _$_MediaValue implements _MediaValue {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_MediaValue &&
+            other is _$MediaValueImpl &&
             (identical(other.src, src) || other.src == src));
   }
 
@@ -1718,17 +1727,17 @@ class _$_MediaValue implements _MediaValue {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_MediaValueCopyWith<_$_MediaValue> get copyWith =>
-      __$$_MediaValueCopyWithImpl<_$_MediaValue>(this, _$identity);
+  _$$MediaValueImplCopyWith<_$MediaValueImpl> get copyWith =>
+      __$$MediaValueImplCopyWithImpl<_$MediaValueImpl>(this, _$identity);
 }
 
 abstract class _MediaValue implements MediaValue {
-  factory _MediaValue({required final String src}) = _$_MediaValue;
+  factory _MediaValue({required final String src}) = _$MediaValueImpl;
 
   @override
   String get src;
   @override
   @JsonKey(ignore: true)
-  _$$_MediaValueCopyWith<_$_MediaValue> get copyWith =>
+  _$$MediaValueImplCopyWith<_$MediaValueImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

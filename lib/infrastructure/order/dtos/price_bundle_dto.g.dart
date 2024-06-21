@@ -6,8 +6,8 @@ part of 'price_bundle_dto.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_PriceBundleDto _$$_PriceBundleDtoFromJson(Map<String, dynamic> json) =>
-    _$_PriceBundleDto(
+_$PriceBundleDtoImpl _$$PriceBundleDtoImplFromJson(Map<String, dynamic> json) =>
+    _$PriceBundleDtoImpl(
       name: json['bundleName'] as String? ?? '',
       code: json['bundleCode'] as String? ?? '',
       conditions: json['conditions'] as String? ?? '',
@@ -19,7 +19,8 @@ _$_PriceBundleDto _$$_PriceBundleDtoFromJson(Map<String, dynamic> json) =>
           [],
     );
 
-Map<String, dynamic> _$$_PriceBundleDtoToJson(_$_PriceBundleDto instance) =>
+Map<String, dynamic> _$$PriceBundleDtoImplToJson(
+        _$PriceBundleDtoImpl instance) =>
     <String, dynamic>{
       'bundleName': instance.name,
       'bundleCode': instance.code,
@@ -28,17 +29,17 @@ Map<String, dynamic> _$$_PriceBundleDtoToJson(_$_PriceBundleDto instance) =>
       'bundleInformation': instance.information.map((e) => e.toJson()).toList(),
     };
 
-_$_PriceBundleItemDto _$$_PriceBundleItemDtoFromJson(
+_$PriceBundleItemDtoImpl _$$PriceBundleItemDtoImplFromJson(
         Map<String, dynamic> json) =>
-    _$_PriceBundleItemDto(
+    _$PriceBundleItemDtoImpl(
       type: json['type'] as String? ?? '',
-      sequence: json['sequence'] as int? ?? 0,
-      quantity: json['quantity'] as int? ?? 0,
+      sequence: (json['sequence'] as num?)?.toInt() ?? 0,
+      quantity: (json['quantity'] as num?)?.toInt() ?? 0,
       rate: (json['rate'] as num?)?.toDouble() ?? 0,
     );
 
-Map<String, dynamic> _$$_PriceBundleItemDtoToJson(
-        _$_PriceBundleItemDto instance) =>
+Map<String, dynamic> _$$PriceBundleItemDtoImplToJson(
+        _$PriceBundleItemDtoImpl instance) =>
     <String, dynamic>{
       'type': instance.type,
       'sequence': instance.sequence,

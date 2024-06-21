@@ -12,7 +12,7 @@ part of 'return_request_type_code_bloc.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$ReturnRequestTypeCodeEvent {
@@ -77,25 +77,25 @@ class _$ReturnRequestTypeCodeEventCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_InitializedCopyWith<$Res> {
-  factory _$$_InitializedCopyWith(
-          _$_Initialized value, $Res Function(_$_Initialized) then) =
-      __$$_InitializedCopyWithImpl<$Res>;
+abstract class _$$InitializedImplCopyWith<$Res> {
+  factory _$$InitializedImplCopyWith(
+          _$InitializedImpl value, $Res Function(_$InitializedImpl) then) =
+      __$$InitializedImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_InitializedCopyWithImpl<$Res>
-    extends _$ReturnRequestTypeCodeEventCopyWithImpl<$Res, _$_Initialized>
-    implements _$$_InitializedCopyWith<$Res> {
-  __$$_InitializedCopyWithImpl(
-      _$_Initialized _value, $Res Function(_$_Initialized) _then)
+class __$$InitializedImplCopyWithImpl<$Res>
+    extends _$ReturnRequestTypeCodeEventCopyWithImpl<$Res, _$InitializedImpl>
+    implements _$$InitializedImplCopyWith<$Res> {
+  __$$InitializedImplCopyWithImpl(
+      _$InitializedImpl _value, $Res Function(_$InitializedImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_Initialized implements _Initialized {
-  const _$_Initialized();
+class _$InitializedImpl implements _Initialized {
+  const _$InitializedImpl();
 
   @override
   String toString() {
@@ -103,9 +103,9 @@ class _$_Initialized implements _Initialized {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_Initialized);
+        (other.runtimeType == runtimeType && other is _$InitializedImpl);
   }
 
   @override
@@ -175,13 +175,14 @@ class _$_Initialized implements _Initialized {
 }
 
 abstract class _Initialized implements ReturnRequestTypeCodeEvent {
-  const factory _Initialized() = _$_Initialized;
+  const factory _Initialized() = _$InitializedImpl;
 }
 
 /// @nodoc
-abstract class _$$_FetchCopyWith<$Res> {
-  factory _$$_FetchCopyWith(_$_Fetch value, $Res Function(_$_Fetch) then) =
-      __$$_FetchCopyWithImpl<$Res>;
+abstract class _$$FetchImplCopyWith<$Res> {
+  factory _$$FetchImplCopyWith(
+          _$FetchImpl value, $Res Function(_$FetchImpl) then) =
+      __$$FetchImplCopyWithImpl<$Res>;
   @useResult
   $Res call({SalesOrganisation salesOrganisation});
 
@@ -189,10 +190,11 @@ abstract class _$$_FetchCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_FetchCopyWithImpl<$Res>
-    extends _$ReturnRequestTypeCodeEventCopyWithImpl<$Res, _$_Fetch>
-    implements _$$_FetchCopyWith<$Res> {
-  __$$_FetchCopyWithImpl(_$_Fetch _value, $Res Function(_$_Fetch) _then)
+class __$$FetchImplCopyWithImpl<$Res>
+    extends _$ReturnRequestTypeCodeEventCopyWithImpl<$Res, _$FetchImpl>
+    implements _$$FetchImplCopyWith<$Res> {
+  __$$FetchImplCopyWithImpl(
+      _$FetchImpl _value, $Res Function(_$FetchImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -200,7 +202,7 @@ class __$$_FetchCopyWithImpl<$Res>
   $Res call({
     Object? salesOrganisation = null,
   }) {
-    return _then(_$_Fetch(
+    return _then(_$FetchImpl(
       salesOrganisation: null == salesOrganisation
           ? _value.salesOrganisation
           : salesOrganisation // ignore: cast_nullable_to_non_nullable
@@ -219,8 +221,8 @@ class __$$_FetchCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_Fetch implements _Fetch {
-  const _$_Fetch({required this.salesOrganisation});
+class _$FetchImpl implements _Fetch {
+  const _$FetchImpl({required this.salesOrganisation});
 
   @override
   final SalesOrganisation salesOrganisation;
@@ -231,10 +233,10 @@ class _$_Fetch implements _Fetch {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Fetch &&
+            other is _$FetchImpl &&
             (identical(other.salesOrganisation, salesOrganisation) ||
                 other.salesOrganisation == salesOrganisation));
   }
@@ -245,8 +247,8 @@ class _$_Fetch implements _Fetch {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_FetchCopyWith<_$_Fetch> get copyWith =>
-      __$$_FetchCopyWithImpl<_$_Fetch>(this, _$identity);
+  _$$FetchImplCopyWith<_$FetchImpl> get copyWith =>
+      __$$FetchImplCopyWithImpl<_$FetchImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -313,11 +315,11 @@ class _$_Fetch implements _Fetch {
 
 abstract class _Fetch implements ReturnRequestTypeCodeEvent {
   const factory _Fetch({required final SalesOrganisation salesOrganisation}) =
-      _$_Fetch;
+      _$FetchImpl;
 
   SalesOrganisation get salesOrganisation;
   @JsonKey(ignore: true)
-  _$$_FetchCopyWith<_$_Fetch> get copyWith =>
+  _$$FetchImplCopyWith<_$FetchImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -386,12 +388,12 @@ class _$ReturnRequestTypeCodeStateCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_ReturnRequestTypeCodeStateCopyWith<$Res>
+abstract class _$$ReturnRequestTypeCodeStateImplCopyWith<$Res>
     implements $ReturnRequestTypeCodeStateCopyWith<$Res> {
-  factory _$$_ReturnRequestTypeCodeStateCopyWith(
-          _$_ReturnRequestTypeCodeState value,
-          $Res Function(_$_ReturnRequestTypeCodeState) then) =
-      __$$_ReturnRequestTypeCodeStateCopyWithImpl<$Res>;
+  factory _$$ReturnRequestTypeCodeStateImplCopyWith(
+          _$ReturnRequestTypeCodeStateImpl value,
+          $Res Function(_$ReturnRequestTypeCodeStateImpl) then) =
+      __$$ReturnRequestTypeCodeStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -402,13 +404,13 @@ abstract class _$$_ReturnRequestTypeCodeStateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_ReturnRequestTypeCodeStateCopyWithImpl<$Res>
+class __$$ReturnRequestTypeCodeStateImplCopyWithImpl<$Res>
     extends _$ReturnRequestTypeCodeStateCopyWithImpl<$Res,
-        _$_ReturnRequestTypeCodeState>
-    implements _$$_ReturnRequestTypeCodeStateCopyWith<$Res> {
-  __$$_ReturnRequestTypeCodeStateCopyWithImpl(
-      _$_ReturnRequestTypeCodeState _value,
-      $Res Function(_$_ReturnRequestTypeCodeState) _then)
+        _$ReturnRequestTypeCodeStateImpl>
+    implements _$$ReturnRequestTypeCodeStateImplCopyWith<$Res> {
+  __$$ReturnRequestTypeCodeStateImplCopyWithImpl(
+      _$ReturnRequestTypeCodeStateImpl _value,
+      $Res Function(_$ReturnRequestTypeCodeStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -418,7 +420,7 @@ class __$$_ReturnRequestTypeCodeStateCopyWithImpl<$Res>
     Object? isFetching = null,
     Object? returnRequestTypeCodeDetailsFailureOrSuccessOption = null,
   }) {
-    return _then(_$_ReturnRequestTypeCodeState(
+    return _then(_$ReturnRequestTypeCodeStateImpl(
       returnRequestTypeCodeDetailsList: null == returnRequestTypeCodeDetailsList
           ? _value._returnRequestTypeCodeDetailsList
           : returnRequestTypeCodeDetailsList // ignore: cast_nullable_to_non_nullable
@@ -438,8 +440,8 @@ class __$$_ReturnRequestTypeCodeStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_ReturnRequestTypeCodeState implements _ReturnRequestTypeCodeState {
-  const _$_ReturnRequestTypeCodeState(
+class _$ReturnRequestTypeCodeStateImpl implements _ReturnRequestTypeCodeState {
+  const _$ReturnRequestTypeCodeStateImpl(
       {required final List<ReturnRequestTypeCodeDetails>
           returnRequestTypeCodeDetailsList,
       required this.isFetching,
@@ -467,10 +469,10 @@ class _$_ReturnRequestTypeCodeState implements _ReturnRequestTypeCodeState {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ReturnRequestTypeCodeState &&
+            other is _$ReturnRequestTypeCodeStateImpl &&
             const DeepCollectionEquality().equals(
                 other._returnRequestTypeCodeDetailsList,
                 _returnRequestTypeCodeDetailsList) &&
@@ -492,9 +494,9 @@ class _$_ReturnRequestTypeCodeState implements _ReturnRequestTypeCodeState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ReturnRequestTypeCodeStateCopyWith<_$_ReturnRequestTypeCodeState>
-      get copyWith => __$$_ReturnRequestTypeCodeStateCopyWithImpl<
-          _$_ReturnRequestTypeCodeState>(this, _$identity);
+  _$$ReturnRequestTypeCodeStateImplCopyWith<_$ReturnRequestTypeCodeStateImpl>
+      get copyWith => __$$ReturnRequestTypeCodeStateImplCopyWithImpl<
+          _$ReturnRequestTypeCodeStateImpl>(this, _$identity);
 }
 
 abstract class _ReturnRequestTypeCodeState
@@ -505,7 +507,7 @@ abstract class _ReturnRequestTypeCodeState
           required final bool isFetching,
           required final Option<Either<ApiFailure, dynamic>>
               returnRequestTypeCodeDetailsFailureOrSuccessOption}) =
-      _$_ReturnRequestTypeCodeState;
+      _$ReturnRequestTypeCodeStateImpl;
 
   @override
   List<ReturnRequestTypeCodeDetails> get returnRequestTypeCodeDetailsList;
@@ -516,6 +518,6 @@ abstract class _ReturnRequestTypeCodeState
       get returnRequestTypeCodeDetailsFailureOrSuccessOption;
   @override
   @JsonKey(ignore: true)
-  _$$_ReturnRequestTypeCodeStateCopyWith<_$_ReturnRequestTypeCodeState>
+  _$$ReturnRequestTypeCodeStateImplCopyWith<_$ReturnRequestTypeCodeStateImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

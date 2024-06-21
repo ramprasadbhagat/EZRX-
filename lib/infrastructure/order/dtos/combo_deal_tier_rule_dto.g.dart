@@ -6,9 +6,9 @@ part of 'combo_deal_tier_rule_dto.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_ComboDealTierRuleDto _$$_ComboDealTierRuleDtoFromJson(
+_$ComboDealTierRuleDtoImpl _$$ComboDealTierRuleDtoImplFromJson(
         Map<String, dynamic> json) =>
-    _$_ComboDealTierRuleDto(
+    _$ComboDealTierRuleDtoImpl(
       rate: json['rate'] == null
           ? 0
           : const StringToDoubleConverter().fromJson(json['rate'] as String),
@@ -29,8 +29,8 @@ _$_ComboDealTierRuleDto _$$_ComboDealTierRuleDtoFromJson(
           : const StringToIntConverter().fromJson(json['minQty'] as String),
     );
 
-Map<String, dynamic> _$$_ComboDealTierRuleDtoToJson(
-        _$_ComboDealTierRuleDto instance) =>
+Map<String, dynamic> _$$ComboDealTierRuleDtoImplToJson(
+        _$ComboDealTierRuleDtoImpl instance) =>
     <String, dynamic>{
       'rate': const StringToDoubleConverter().toJson(instance.rate),
       'conditionNumber': instance.conditionNumber,

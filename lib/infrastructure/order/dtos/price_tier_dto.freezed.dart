@@ -12,7 +12,7 @@ part of 'price_tier_dto.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 PriceTierDto _$PriceTierDtoFromJson(Map<String, dynamic> json) {
   return _PriceTierDto.fromJson(json);
@@ -65,11 +65,11 @@ class _$PriceTierDtoCopyWithImpl<$Res, $Val extends PriceTierDto>
 }
 
 /// @nodoc
-abstract class _$$_PriceTierDtoCopyWith<$Res>
+abstract class _$$PriceTierDtoImplCopyWith<$Res>
     implements $PriceTierDtoCopyWith<$Res> {
-  factory _$$_PriceTierDtoCopyWith(
-          _$_PriceTierDto value, $Res Function(_$_PriceTierDto) then) =
-      __$$_PriceTierDtoCopyWithImpl<$Res>;
+  factory _$$PriceTierDtoImplCopyWith(
+          _$PriceTierDtoImpl value, $Res Function(_$PriceTierDtoImpl) then) =
+      __$$PriceTierDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -78,11 +78,11 @@ abstract class _$$_PriceTierDtoCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_PriceTierDtoCopyWithImpl<$Res>
-    extends _$PriceTierDtoCopyWithImpl<$Res, _$_PriceTierDto>
-    implements _$$_PriceTierDtoCopyWith<$Res> {
-  __$$_PriceTierDtoCopyWithImpl(
-      _$_PriceTierDto _value, $Res Function(_$_PriceTierDto) _then)
+class __$$PriceTierDtoImplCopyWithImpl<$Res>
+    extends _$PriceTierDtoCopyWithImpl<$Res, _$PriceTierDtoImpl>
+    implements _$$PriceTierDtoImplCopyWith<$Res> {
+  __$$PriceTierDtoImplCopyWithImpl(
+      _$PriceTierDtoImpl _value, $Res Function(_$PriceTierDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -90,7 +90,7 @@ class __$$_PriceTierDtoCopyWithImpl<$Res>
   $Res call({
     Object? items = null,
   }) {
-    return _then(_$_PriceTierDto(
+    return _then(_$PriceTierDtoImpl(
       items: null == items
           ? _value._items
           : items // ignore: cast_nullable_to_non_nullable
@@ -101,15 +101,15 @@ class __$$_PriceTierDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_PriceTierDto extends _PriceTierDto {
-  const _$_PriceTierDto(
+class _$PriceTierDtoImpl extends _PriceTierDto {
+  const _$PriceTierDtoImpl(
       {@JsonKey(name: 'priceTier', defaultValue: <PriceTierItemDto>[])
       required final List<PriceTierItemDto> items})
       : _items = items,
         super._();
 
-  factory _$_PriceTierDto.fromJson(Map<String, dynamic> json) =>
-      _$$_PriceTierDtoFromJson(json);
+  factory _$PriceTierDtoImpl.fromJson(Map<String, dynamic> json) =>
+      _$$PriceTierDtoImplFromJson(json);
 
   final List<PriceTierItemDto> _items;
   @override
@@ -126,10 +126,10 @@ class _$_PriceTierDto extends _PriceTierDto {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_PriceTierDto &&
+            other is _$PriceTierDtoImpl &&
             const DeepCollectionEquality().equals(other._items, _items));
   }
 
@@ -141,12 +141,12 @@ class _$_PriceTierDto extends _PriceTierDto {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_PriceTierDtoCopyWith<_$_PriceTierDto> get copyWith =>
-      __$$_PriceTierDtoCopyWithImpl<_$_PriceTierDto>(this, _$identity);
+  _$$PriceTierDtoImplCopyWith<_$PriceTierDtoImpl> get copyWith =>
+      __$$PriceTierDtoImplCopyWithImpl<_$PriceTierDtoImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_PriceTierDtoToJson(
+    return _$$PriceTierDtoImplToJson(
       this,
     );
   }
@@ -155,18 +155,18 @@ class _$_PriceTierDto extends _PriceTierDto {
 abstract class _PriceTierDto extends PriceTierDto {
   const factory _PriceTierDto(
       {@JsonKey(name: 'priceTier', defaultValue: <PriceTierItemDto>[])
-      required final List<PriceTierItemDto> items}) = _$_PriceTierDto;
+      required final List<PriceTierItemDto> items}) = _$PriceTierDtoImpl;
   const _PriceTierDto._() : super._();
 
   factory _PriceTierDto.fromJson(Map<String, dynamic> json) =
-      _$_PriceTierDto.fromJson;
+      _$PriceTierDtoImpl.fromJson;
 
   @override
   @JsonKey(name: 'priceTier', defaultValue: <PriceTierItemDto>[])
   List<PriceTierItemDto> get items;
   @override
   @JsonKey(ignore: true)
-  _$$_PriceTierDtoCopyWith<_$_PriceTierDto> get copyWith =>
+  _$$PriceTierDtoImplCopyWith<_$PriceTierDtoImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -285,11 +285,11 @@ class _$PriceTierItemDtoCopyWithImpl<$Res, $Val extends PriceTierItemDto>
 }
 
 /// @nodoc
-abstract class _$$_PriceTierItemDtoCopyWith<$Res>
+abstract class _$$PriceTierItemDtoImplCopyWith<$Res>
     implements $PriceTierItemDtoCopyWith<$Res> {
-  factory _$$_PriceTierItemDtoCopyWith(
-          _$_PriceTierItemDto value, $Res Function(_$_PriceTierItemDto) then) =
-      __$$_PriceTierItemDtoCopyWithImpl<$Res>;
+  factory _$$PriceTierItemDtoImplCopyWith(_$PriceTierItemDtoImpl value,
+          $Res Function(_$PriceTierItemDtoImpl) then) =
+      __$$PriceTierItemDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -306,11 +306,11 @@ abstract class _$$_PriceTierItemDtoCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_PriceTierItemDtoCopyWithImpl<$Res>
-    extends _$PriceTierItemDtoCopyWithImpl<$Res, _$_PriceTierItemDto>
-    implements _$$_PriceTierItemDtoCopyWith<$Res> {
-  __$$_PriceTierItemDtoCopyWithImpl(
-      _$_PriceTierItemDto _value, $Res Function(_$_PriceTierItemDto) _then)
+class __$$PriceTierItemDtoImplCopyWithImpl<$Res>
+    extends _$PriceTierItemDtoCopyWithImpl<$Res, _$PriceTierItemDtoImpl>
+    implements _$$PriceTierItemDtoImplCopyWith<$Res> {
+  __$$PriceTierItemDtoImplCopyWithImpl(_$PriceTierItemDtoImpl _value,
+      $Res Function(_$PriceTierItemDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -326,7 +326,7 @@ class __$$_PriceTierItemDtoCopyWithImpl<$Res>
     Object? scaleBasis = null,
     Object? promotionAmount = null,
   }) {
-    return _then(_$_PriceTierItemDto(
+    return _then(_$PriceTierItemDtoImpl(
       type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
@@ -369,8 +369,8 @@ class __$$_PriceTierItemDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_PriceTierItemDto extends _PriceTierItemDto {
-  const _$_PriceTierItemDto(
+class _$PriceTierItemDtoImpl extends _PriceTierItemDto {
+  const _$PriceTierItemDtoImpl(
       {@JsonKey(name: 'type', defaultValue: '') required this.type,
       @JsonKey(name: 'applyBonus', defaultValue: false)
       required this.applyBonus,
@@ -384,8 +384,8 @@ class _$_PriceTierItemDto extends _PriceTierItemDto {
       required this.promotionAmount})
       : super._();
 
-  factory _$_PriceTierItemDto.fromJson(Map<String, dynamic> json) =>
-      _$$_PriceTierItemDtoFromJson(json);
+  factory _$PriceTierItemDtoImpl.fromJson(Map<String, dynamic> json) =>
+      _$$PriceTierItemDtoImplFromJson(json);
 
   @override
   @JsonKey(name: 'type', defaultValue: '')
@@ -421,10 +421,10 @@ class _$_PriceTierItemDto extends _PriceTierItemDto {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_PriceTierItemDto &&
+            other is _$PriceTierItemDtoImpl &&
             (identical(other.type, type) || other.type == type) &&
             (identical(other.applyBonus, applyBonus) ||
                 other.applyBonus == applyBonus) &&
@@ -451,12 +451,13 @@ class _$_PriceTierItemDto extends _PriceTierItemDto {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_PriceTierItemDtoCopyWith<_$_PriceTierItemDto> get copyWith =>
-      __$$_PriceTierItemDtoCopyWithImpl<_$_PriceTierItemDto>(this, _$identity);
+  _$$PriceTierItemDtoImplCopyWith<_$PriceTierItemDtoImpl> get copyWith =>
+      __$$PriceTierItemDtoImplCopyWithImpl<_$PriceTierItemDtoImpl>(
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_PriceTierItemDtoToJson(
+    return _$$PriceTierItemDtoImplToJson(
       this,
     );
   }
@@ -477,11 +478,11 @@ abstract class _PriceTierItemDto extends PriceTierItemDto {
       @JsonKey(name: 'scaleBasis', defaultValue: '')
       required final String scaleBasis,
       @JsonKey(name: 'promotionAmount', defaultValue: 0)
-      required final double promotionAmount}) = _$_PriceTierItemDto;
+      required final double promotionAmount}) = _$PriceTierItemDtoImpl;
   const _PriceTierItemDto._() : super._();
 
   factory _PriceTierItemDto.fromJson(Map<String, dynamic> json) =
-      _$_PriceTierItemDto.fromJson;
+      _$PriceTierItemDtoImpl.fromJson;
 
   @override
   @JsonKey(name: 'type', defaultValue: '')
@@ -512,6 +513,6 @@ abstract class _PriceTierItemDto extends PriceTierItemDto {
   double get promotionAmount;
   @override
   @JsonKey(ignore: true)
-  _$$_PriceTierItemDtoCopyWith<_$_PriceTierItemDto> get copyWith =>
+  _$$PriceTierItemDtoImplCopyWith<_$PriceTierItemDtoImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

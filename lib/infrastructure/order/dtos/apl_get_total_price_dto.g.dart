@@ -6,16 +6,16 @@ part of 'apl_get_total_price_dto.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_AplGetTotalPriceDto _$$_AplGetTotalPriceDtoFromJson(
+_$AplGetTotalPriceDtoImpl _$$AplGetTotalPriceDtoImplFromJson(
         Map<String, dynamic> json) =>
-    _$_AplGetTotalPriceDto(
-      grandTotal: json['TotalPrice'] as int? ?? 0,
-      tax: json['Tax'] as int? ?? 0,
-      deliveryFee: json['DeliveryFee'] as int? ?? 0,
+    _$AplGetTotalPriceDtoImpl(
+      grandTotal: (json['TotalPrice'] as num?)?.toInt() ?? 0,
+      tax: (json['Tax'] as num?)?.toInt() ?? 0,
+      deliveryFee: (json['DeliveryFee'] as num?)?.toInt() ?? 0,
     );
 
-Map<String, dynamic> _$$_AplGetTotalPriceDtoToJson(
-        _$_AplGetTotalPriceDto instance) =>
+Map<String, dynamic> _$$AplGetTotalPriceDtoImplToJson(
+        _$AplGetTotalPriceDtoImpl instance) =>
     <String, dynamic>{
       'TotalPrice': instance.grandTotal,
       'Tax': instance.tax,

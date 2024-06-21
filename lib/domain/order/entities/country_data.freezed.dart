@@ -12,7 +12,7 @@ part of 'country_data.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$CountryData {
@@ -63,22 +63,22 @@ class _$CountryDataCopyWithImpl<$Res, $Val extends CountryData>
 }
 
 /// @nodoc
-abstract class _$$_CountryDataCopyWith<$Res>
+abstract class _$$CountryDataImplCopyWith<$Res>
     implements $CountryDataCopyWith<$Res> {
-  factory _$$_CountryDataCopyWith(
-          _$_CountryData value, $Res Function(_$_CountryData) then) =
-      __$$_CountryDataCopyWithImpl<$Res>;
+  factory _$$CountryDataImplCopyWith(
+          _$CountryDataImpl value, $Res Function(_$CountryDataImpl) then) =
+      __$$CountryDataImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String country, StringValue countryName});
 }
 
 /// @nodoc
-class __$$_CountryDataCopyWithImpl<$Res>
-    extends _$CountryDataCopyWithImpl<$Res, _$_CountryData>
-    implements _$$_CountryDataCopyWith<$Res> {
-  __$$_CountryDataCopyWithImpl(
-      _$_CountryData _value, $Res Function(_$_CountryData) _then)
+class __$$CountryDataImplCopyWithImpl<$Res>
+    extends _$CountryDataCopyWithImpl<$Res, _$CountryDataImpl>
+    implements _$$CountryDataImplCopyWith<$Res> {
+  __$$CountryDataImplCopyWithImpl(
+      _$CountryDataImpl _value, $Res Function(_$CountryDataImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -87,7 +87,7 @@ class __$$_CountryDataCopyWithImpl<$Res>
     Object? country = null,
     Object? countryName = null,
   }) {
-    return _then(_$_CountryData(
+    return _then(_$CountryDataImpl(
       country: null == country
           ? _value.country
           : country // ignore: cast_nullable_to_non_nullable
@@ -102,8 +102,8 @@ class __$$_CountryDataCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_CountryData extends _CountryData {
-  _$_CountryData({required this.country, required this.countryName})
+class _$CountryDataImpl extends _CountryData {
+  _$CountryDataImpl({required this.country, required this.countryName})
       : super._();
 
   @override
@@ -117,10 +117,10 @@ class _$_CountryData extends _CountryData {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_CountryData &&
+            other is _$CountryDataImpl &&
             (identical(other.country, country) || other.country == country) &&
             (identical(other.countryName, countryName) ||
                 other.countryName == countryName));
@@ -132,14 +132,14 @@ class _$_CountryData extends _CountryData {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_CountryDataCopyWith<_$_CountryData> get copyWith =>
-      __$$_CountryDataCopyWithImpl<_$_CountryData>(this, _$identity);
+  _$$CountryDataImplCopyWith<_$CountryDataImpl> get copyWith =>
+      __$$CountryDataImplCopyWithImpl<_$CountryDataImpl>(this, _$identity);
 }
 
 abstract class _CountryData extends CountryData {
   factory _CountryData(
       {required final String country,
-      required final StringValue countryName}) = _$_CountryData;
+      required final StringValue countryName}) = _$CountryDataImpl;
   _CountryData._() : super._();
 
   @override
@@ -148,6 +148,6 @@ abstract class _CountryData extends CountryData {
   StringValue get countryName;
   @override
   @JsonKey(ignore: true)
-  _$$_CountryDataCopyWith<_$_CountryData> get copyWith =>
+  _$$CountryDataImplCopyWith<_$CountryDataImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -12,7 +12,7 @@ part of 'sales_organisation.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$SalesOrganisation {
@@ -64,22 +64,22 @@ class _$SalesOrganisationCopyWithImpl<$Res, $Val extends SalesOrganisation>
 }
 
 /// @nodoc
-abstract class _$$_SalesOrganisationCopyWith<$Res>
+abstract class _$$SalesOrganisationImplCopyWith<$Res>
     implements $SalesOrganisationCopyWith<$Res> {
-  factory _$$_SalesOrganisationCopyWith(_$_SalesOrganisation value,
-          $Res Function(_$_SalesOrganisation) then) =
-      __$$_SalesOrganisationCopyWithImpl<$Res>;
+  factory _$$SalesOrganisationImplCopyWith(_$SalesOrganisationImpl value,
+          $Res Function(_$SalesOrganisationImpl) then) =
+      __$$SalesOrganisationImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({SalesOrg salesOrg, List<SalesOrgCustomerInfo> customerInfos});
 }
 
 /// @nodoc
-class __$$_SalesOrganisationCopyWithImpl<$Res>
-    extends _$SalesOrganisationCopyWithImpl<$Res, _$_SalesOrganisation>
-    implements _$$_SalesOrganisationCopyWith<$Res> {
-  __$$_SalesOrganisationCopyWithImpl(
-      _$_SalesOrganisation _value, $Res Function(_$_SalesOrganisation) _then)
+class __$$SalesOrganisationImplCopyWithImpl<$Res>
+    extends _$SalesOrganisationCopyWithImpl<$Res, _$SalesOrganisationImpl>
+    implements _$$SalesOrganisationImplCopyWith<$Res> {
+  __$$SalesOrganisationImplCopyWithImpl(_$SalesOrganisationImpl _value,
+      $Res Function(_$SalesOrganisationImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -88,7 +88,7 @@ class __$$_SalesOrganisationCopyWithImpl<$Res>
     Object? salesOrg = null,
     Object? customerInfos = null,
   }) {
-    return _then(_$_SalesOrganisation(
+    return _then(_$SalesOrganisationImpl(
       salesOrg: null == salesOrg
           ? _value.salesOrg
           : salesOrg // ignore: cast_nullable_to_non_nullable
@@ -103,8 +103,8 @@ class __$$_SalesOrganisationCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_SalesOrganisation extends _SalesOrganisation {
-  const _$_SalesOrganisation(
+class _$SalesOrganisationImpl extends _SalesOrganisation {
+  const _$SalesOrganisationImpl(
       {required this.salesOrg,
       required final List<SalesOrgCustomerInfo> customerInfos})
       : _customerInfos = customerInfos,
@@ -126,10 +126,10 @@ class _$_SalesOrganisation extends _SalesOrganisation {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_SalesOrganisation &&
+            other is _$SalesOrganisationImpl &&
             (identical(other.salesOrg, salesOrg) ||
                 other.salesOrg == salesOrg) &&
             const DeepCollectionEquality()
@@ -143,8 +143,8 @@ class _$_SalesOrganisation extends _SalesOrganisation {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_SalesOrganisationCopyWith<_$_SalesOrganisation> get copyWith =>
-      __$$_SalesOrganisationCopyWithImpl<_$_SalesOrganisation>(
+  _$$SalesOrganisationImplCopyWith<_$SalesOrganisationImpl> get copyWith =>
+      __$$SalesOrganisationImplCopyWithImpl<_$SalesOrganisationImpl>(
           this, _$identity);
 }
 
@@ -152,7 +152,7 @@ abstract class _SalesOrganisation extends SalesOrganisation {
   const factory _SalesOrganisation(
           {required final SalesOrg salesOrg,
           required final List<SalesOrgCustomerInfo> customerInfos}) =
-      _$_SalesOrganisation;
+      _$SalesOrganisationImpl;
   const _SalesOrganisation._() : super._();
 
   @override
@@ -161,6 +161,6 @@ abstract class _SalesOrganisation extends SalesOrganisation {
   List<SalesOrgCustomerInfo> get customerInfos;
   @override
   @JsonKey(ignore: true)
-  _$$_SalesOrganisationCopyWith<_$_SalesOrganisation> get copyWith =>
+  _$$SalesOrganisationImplCopyWith<_$SalesOrganisationImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

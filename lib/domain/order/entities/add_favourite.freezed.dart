@@ -12,7 +12,7 @@ part of 'add_favourite.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$AddFavourite {
@@ -58,22 +58,22 @@ class _$AddFavouriteCopyWithImpl<$Res, $Val extends AddFavourite>
 }
 
 /// @nodoc
-abstract class _$$_AddFavouriteCopyWith<$Res>
+abstract class _$$AddFavouriteImplCopyWith<$Res>
     implements $AddFavouriteCopyWith<$Res> {
-  factory _$$_AddFavouriteCopyWith(
-          _$_AddFavourite value, $Res Function(_$_AddFavourite) then) =
-      __$$_AddFavouriteCopyWithImpl<$Res>;
+  factory _$$AddFavouriteImplCopyWith(
+          _$AddFavouriteImpl value, $Res Function(_$AddFavouriteImpl) then) =
+      __$$AddFavouriteImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({FavouriteResponse addFavouriteMaterial});
 }
 
 /// @nodoc
-class __$$_AddFavouriteCopyWithImpl<$Res>
-    extends _$AddFavouriteCopyWithImpl<$Res, _$_AddFavourite>
-    implements _$$_AddFavouriteCopyWith<$Res> {
-  __$$_AddFavouriteCopyWithImpl(
-      _$_AddFavourite _value, $Res Function(_$_AddFavourite) _then)
+class __$$AddFavouriteImplCopyWithImpl<$Res>
+    extends _$AddFavouriteCopyWithImpl<$Res, _$AddFavouriteImpl>
+    implements _$$AddFavouriteImplCopyWith<$Res> {
+  __$$AddFavouriteImplCopyWithImpl(
+      _$AddFavouriteImpl _value, $Res Function(_$AddFavouriteImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -81,7 +81,7 @@ class __$$_AddFavouriteCopyWithImpl<$Res>
   $Res call({
     Object? addFavouriteMaterial = null,
   }) {
-    return _then(_$_AddFavourite(
+    return _then(_$AddFavouriteImpl(
       addFavouriteMaterial: null == addFavouriteMaterial
           ? _value.addFavouriteMaterial
           : addFavouriteMaterial // ignore: cast_nullable_to_non_nullable
@@ -92,8 +92,8 @@ class __$$_AddFavouriteCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_AddFavourite extends _AddFavourite {
-  const _$_AddFavourite({required this.addFavouriteMaterial}) : super._();
+class _$AddFavouriteImpl extends _AddFavourite {
+  const _$AddFavouriteImpl({required this.addFavouriteMaterial}) : super._();
 
   @override
   final FavouriteResponse addFavouriteMaterial;
@@ -104,10 +104,10 @@ class _$_AddFavourite extends _AddFavourite {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_AddFavourite &&
+            other is _$AddFavouriteImpl &&
             (identical(other.addFavouriteMaterial, addFavouriteMaterial) ||
                 other.addFavouriteMaterial == addFavouriteMaterial));
   }
@@ -118,20 +118,20 @@ class _$_AddFavourite extends _AddFavourite {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_AddFavouriteCopyWith<_$_AddFavourite> get copyWith =>
-      __$$_AddFavouriteCopyWithImpl<_$_AddFavourite>(this, _$identity);
+  _$$AddFavouriteImplCopyWith<_$AddFavouriteImpl> get copyWith =>
+      __$$AddFavouriteImplCopyWithImpl<_$AddFavouriteImpl>(this, _$identity);
 }
 
 abstract class _AddFavourite extends AddFavourite {
   const factory _AddFavourite(
           {required final FavouriteResponse addFavouriteMaterial}) =
-      _$_AddFavourite;
+      _$AddFavouriteImpl;
   const _AddFavourite._() : super._();
 
   @override
   FavouriteResponse get addFavouriteMaterial;
   @override
   @JsonKey(ignore: true)
-  _$$_AddFavouriteCopyWith<_$_AddFavourite> get copyWith =>
+  _$$AddFavouriteImplCopyWith<_$AddFavouriteImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -12,7 +12,7 @@ part of 'admin_po_attachment_filter.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$AdminPoAttachmentFilter {
@@ -104,11 +104,12 @@ class _$AdminPoAttachmentFilterCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_AdminPoAttachmentFilterCopyWith<$Res>
+abstract class _$$AdminPoAttachmentFilterImplCopyWith<$Res>
     implements $AdminPoAttachmentFilterCopyWith<$Res> {
-  factory _$$_AdminPoAttachmentFilterCopyWith(_$_AdminPoAttachmentFilter value,
-          $Res Function(_$_AdminPoAttachmentFilter) then) =
-      __$$_AdminPoAttachmentFilterCopyWithImpl<$Res>;
+  factory _$$AdminPoAttachmentFilterImplCopyWith(
+          _$AdminPoAttachmentFilterImpl value,
+          $Res Function(_$AdminPoAttachmentFilterImpl) then) =
+      __$$AdminPoAttachmentFilterImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -124,12 +125,13 @@ abstract class _$$_AdminPoAttachmentFilterCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_AdminPoAttachmentFilterCopyWithImpl<$Res>
+class __$$AdminPoAttachmentFilterImplCopyWithImpl<$Res>
     extends _$AdminPoAttachmentFilterCopyWithImpl<$Res,
-        _$_AdminPoAttachmentFilter>
-    implements _$$_AdminPoAttachmentFilterCopyWith<$Res> {
-  __$$_AdminPoAttachmentFilterCopyWithImpl(_$_AdminPoAttachmentFilter _value,
-      $Res Function(_$_AdminPoAttachmentFilter) _then)
+        _$AdminPoAttachmentFilterImpl>
+    implements _$$AdminPoAttachmentFilterImplCopyWith<$Res> {
+  __$$AdminPoAttachmentFilterImplCopyWithImpl(
+      _$AdminPoAttachmentFilterImpl _value,
+      $Res Function(_$AdminPoAttachmentFilterImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -142,7 +144,7 @@ class __$$_AdminPoAttachmentFilterCopyWithImpl<$Res>
     Object? toDate = null,
     Object? fromDate = null,
   }) {
-    return _then(_$_AdminPoAttachmentFilter(
+    return _then(_$AdminPoAttachmentFilterImpl(
       orderNumber: null == orderNumber
           ? _value.orderNumber
           : orderNumber // ignore: cast_nullable_to_non_nullable
@@ -173,8 +175,8 @@ class __$$_AdminPoAttachmentFilterCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_AdminPoAttachmentFilter extends _AdminPoAttachmentFilter {
-  _$_AdminPoAttachmentFilter(
+class _$AdminPoAttachmentFilterImpl extends _AdminPoAttachmentFilter {
+  _$AdminPoAttachmentFilterImpl(
       {required this.orderNumber,
       required this.exRxNo,
       required this.salesOrg,
@@ -202,10 +204,10 @@ class _$_AdminPoAttachmentFilter extends _AdminPoAttachmentFilter {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_AdminPoAttachmentFilter &&
+            other is _$AdminPoAttachmentFilterImpl &&
             (identical(other.orderNumber, orderNumber) ||
                 other.orderNumber == orderNumber) &&
             (identical(other.exRxNo, exRxNo) || other.exRxNo == exRxNo) &&
@@ -224,10 +226,9 @@ class _$_AdminPoAttachmentFilter extends _AdminPoAttachmentFilter {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_AdminPoAttachmentFilterCopyWith<_$_AdminPoAttachmentFilter>
-      get copyWith =>
-          __$$_AdminPoAttachmentFilterCopyWithImpl<_$_AdminPoAttachmentFilter>(
-              this, _$identity);
+  _$$AdminPoAttachmentFilterImplCopyWith<_$AdminPoAttachmentFilterImpl>
+      get copyWith => __$$AdminPoAttachmentFilterImplCopyWithImpl<
+          _$AdminPoAttachmentFilterImpl>(this, _$identity);
 }
 
 abstract class _AdminPoAttachmentFilter extends AdminPoAttachmentFilter {
@@ -238,7 +239,7 @@ abstract class _AdminPoAttachmentFilter extends AdminPoAttachmentFilter {
           required final CustomerCodeInfo soldTo,
           required final DateTimeStringValue toDate,
           required final DateTimeStringValue fromDate}) =
-      _$_AdminPoAttachmentFilter;
+      _$AdminPoAttachmentFilterImpl;
   _AdminPoAttachmentFilter._() : super._();
 
   @override
@@ -255,6 +256,6 @@ abstract class _AdminPoAttachmentFilter extends AdminPoAttachmentFilter {
   DateTimeStringValue get fromDate;
   @override
   @JsonKey(ignore: true)
-  _$$_AdminPoAttachmentFilterCopyWith<_$_AdminPoAttachmentFilter>
+  _$$AdminPoAttachmentFilterImplCopyWith<_$AdminPoAttachmentFilterImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

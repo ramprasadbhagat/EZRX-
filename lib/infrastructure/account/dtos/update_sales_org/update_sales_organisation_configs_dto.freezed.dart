@@ -12,7 +12,7 @@ part of 'update_sales_organisation_configs_dto.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 UpdateSalesOrganisationConfigsDto _$UpdateSalesOrganisationConfigsDtoFromJson(
     Map<String, dynamic> json) {
@@ -447,12 +447,12 @@ class _$UpdateSalesOrganisationConfigsDtoCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_UpdateSalesOrganisationConfigsDtoCopyWith<$Res>
+abstract class _$$UpdateSalesOrganisationConfigsDtoImplCopyWith<$Res>
     implements $UpdateSalesOrganisationConfigsDtoCopyWith<$Res> {
-  factory _$$_UpdateSalesOrganisationConfigsDtoCopyWith(
-          _$_UpdateSalesOrganisationConfigsDto value,
-          $Res Function(_$_UpdateSalesOrganisationConfigsDto) then) =
-      __$$_UpdateSalesOrganisationConfigsDtoCopyWithImpl<$Res>;
+  factory _$$UpdateSalesOrganisationConfigsDtoImplCopyWith(
+          _$UpdateSalesOrganisationConfigsDtoImpl value,
+          $Res Function(_$UpdateSalesOrganisationConfigsDtoImpl) then) =
+      __$$UpdateSalesOrganisationConfigsDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -531,13 +531,13 @@ abstract class _$$_UpdateSalesOrganisationConfigsDtoCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_UpdateSalesOrganisationConfigsDtoCopyWithImpl<$Res>
+class __$$UpdateSalesOrganisationConfigsDtoImplCopyWithImpl<$Res>
     extends _$UpdateSalesOrganisationConfigsDtoCopyWithImpl<$Res,
-        _$_UpdateSalesOrganisationConfigsDto>
-    implements _$$_UpdateSalesOrganisationConfigsDtoCopyWith<$Res> {
-  __$$_UpdateSalesOrganisationConfigsDtoCopyWithImpl(
-      _$_UpdateSalesOrganisationConfigsDto _value,
-      $Res Function(_$_UpdateSalesOrganisationConfigsDto) _then)
+        _$UpdateSalesOrganisationConfigsDtoImpl>
+    implements _$$UpdateSalesOrganisationConfigsDtoImplCopyWith<$Res> {
+  __$$UpdateSalesOrganisationConfigsDtoImplCopyWithImpl(
+      _$UpdateSalesOrganisationConfigsDtoImpl _value,
+      $Res Function(_$UpdateSalesOrganisationConfigsDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -589,7 +589,7 @@ class __$$_UpdateSalesOrganisationConfigsDtoCopyWithImpl<$Res>
     Object? enableTaxDisplay = null,
     Object? enableGMN = null,
   }) {
-    return _then(_$_UpdateSalesOrganisationConfigsDto(
+    return _then(_$UpdateSalesOrganisationConfigsDtoImpl(
       salesOrg: null == salesOrg
           ? _value.salesOrg
           : salesOrg // ignore: cast_nullable_to_non_nullable
@@ -776,9 +776,9 @@ class __$$_UpdateSalesOrganisationConfigsDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_UpdateSalesOrganisationConfigsDto
+class _$UpdateSalesOrganisationConfigsDtoImpl
     extends _UpdateSalesOrganisationConfigsDto {
-  const _$_UpdateSalesOrganisationConfigsDto(
+  const _$UpdateSalesOrganisationConfigsDtoImpl(
       {@JsonKey(name: 'salesOrgCode', defaultValue: '0') required this.salesOrg,
       @JsonKey(name: 'ponRequired', defaultValue: false)
       required this.poNumberRequired,
@@ -863,9 +863,9 @@ class _$_UpdateSalesOrganisationConfigsDto
       @JsonKey(name: 'enableGMN', defaultValue: false) required this.enableGMN})
       : super._();
 
-  factory _$_UpdateSalesOrganisationConfigsDto.fromJson(
+  factory _$UpdateSalesOrganisationConfigsDtoImpl.fromJson(
           Map<String, dynamic> json) =>
-      _$$_UpdateSalesOrganisationConfigsDtoFromJson(json);
+      _$$UpdateSalesOrganisationConfigsDtoImplFromJson(json);
 
   @override
   @JsonKey(name: 'salesOrgCode', defaultValue: '0')
@@ -1009,10 +1009,10 @@ class _$_UpdateSalesOrganisationConfigsDto
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_UpdateSalesOrganisationConfigsDto &&
+            other is _$UpdateSalesOrganisationConfigsDtoImpl &&
             (identical(other.salesOrg, salesOrg) ||
                 other.salesOrg == salesOrg) &&
             (identical(other.poNumberRequired, poNumberRequired) ||
@@ -1148,14 +1148,14 @@ class _$_UpdateSalesOrganisationConfigsDto
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_UpdateSalesOrganisationConfigsDtoCopyWith<
-          _$_UpdateSalesOrganisationConfigsDto>
-      get copyWith => __$$_UpdateSalesOrganisationConfigsDtoCopyWithImpl<
-          _$_UpdateSalesOrganisationConfigsDto>(this, _$identity);
+  _$$UpdateSalesOrganisationConfigsDtoImplCopyWith<
+          _$UpdateSalesOrganisationConfigsDtoImpl>
+      get copyWith => __$$UpdateSalesOrganisationConfigsDtoImplCopyWithImpl<
+          _$UpdateSalesOrganisationConfigsDtoImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_UpdateSalesOrganisationConfigsDtoToJson(
+    return _$$UpdateSalesOrganisationConfigsDtoImplToJson(
       this,
     );
   }
@@ -1250,12 +1250,12 @@ abstract class _UpdateSalesOrganisationConfigsDto
       @JsonKey(name: 'enableTaxDisplay', defaultValue: false)
       required final bool enableTaxDisplay,
       @JsonKey(name: 'enableGMN', defaultValue: false)
-      required final bool enableGMN}) = _$_UpdateSalesOrganisationConfigsDto;
+      required final bool enableGMN}) = _$UpdateSalesOrganisationConfigsDtoImpl;
   const _UpdateSalesOrganisationConfigsDto._() : super._();
 
   factory _UpdateSalesOrganisationConfigsDto.fromJson(
           Map<String, dynamic> json) =
-      _$_UpdateSalesOrganisationConfigsDto.fromJson;
+      _$UpdateSalesOrganisationConfigsDtoImpl.fromJson;
 
   @override
   @JsonKey(name: 'salesOrgCode', defaultValue: '0')
@@ -1394,7 +1394,7 @@ abstract class _UpdateSalesOrganisationConfigsDto
   bool get enableGMN;
   @override
   @JsonKey(ignore: true)
-  _$$_UpdateSalesOrganisationConfigsDtoCopyWith<
-          _$_UpdateSalesOrganisationConfigsDto>
+  _$$UpdateSalesOrganisationConfigsDtoImplCopyWith<
+          _$UpdateSalesOrganisationConfigsDtoImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

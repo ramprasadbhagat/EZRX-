@@ -6,8 +6,8 @@ part of 'combo_deal_dto.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_ComboDealDto _$$_ComboDealDtoFromJson(Map<String, dynamic> json) =>
-    _$_ComboDealDto(
+_$ComboDealDtoImpl _$$ComboDealDtoImplFromJson(Map<String, dynamic> json) =>
+    _$ComboDealDtoImpl(
       groupDeal: json['groupDeal'] == null
           ? ComboDealGroupDealDto.empty
           : ComboDealGroupDealDto.fromJson(
@@ -39,7 +39,7 @@ _$_ComboDealDto _$$_ComboDealDtoFromJson(Map<String, dynamic> json) =>
           [],
     );
 
-Map<String, dynamic> _$$_ComboDealDtoToJson(_$_ComboDealDto instance) =>
+Map<String, dynamic> _$$ComboDealDtoImplToJson(_$ComboDealDtoImpl instance) =>
     <String, dynamic>{
       'groupDeal': instance.groupDeal.toJson(),
       'flexiSKUTier': instance.flexiSKUTier.map((e) => e.toJson()).toList(),

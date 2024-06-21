@@ -12,7 +12,7 @@ part of 'bank_beneficiary_invoice_dto.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 BankBeneficiaryInvoiceDto _$BankBeneficiaryInvoiceDtoFromJson(
     Map<String, dynamic> json) {
@@ -131,12 +131,12 @@ class _$BankBeneficiaryInvoiceDtoCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_BankBeneficiaryInvoiceDtoCopyWith<$Res>
+abstract class _$$BankBeneficiaryInvoiceDtoImplCopyWith<$Res>
     implements $BankBeneficiaryInvoiceDtoCopyWith<$Res> {
-  factory _$$_BankBeneficiaryInvoiceDtoCopyWith(
-          _$_BankBeneficiaryInvoiceDto value,
-          $Res Function(_$_BankBeneficiaryInvoiceDto) then) =
-      __$$_BankBeneficiaryInvoiceDtoCopyWithImpl<$Res>;
+  factory _$$BankBeneficiaryInvoiceDtoImplCopyWith(
+          _$BankBeneficiaryInvoiceDtoImpl value,
+          $Res Function(_$BankBeneficiaryInvoiceDtoImpl) then) =
+      __$$BankBeneficiaryInvoiceDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -153,13 +153,13 @@ abstract class _$$_BankBeneficiaryInvoiceDtoCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_BankBeneficiaryInvoiceDtoCopyWithImpl<$Res>
+class __$$BankBeneficiaryInvoiceDtoImplCopyWithImpl<$Res>
     extends _$BankBeneficiaryInvoiceDtoCopyWithImpl<$Res,
-        _$_BankBeneficiaryInvoiceDto>
-    implements _$$_BankBeneficiaryInvoiceDtoCopyWith<$Res> {
-  __$$_BankBeneficiaryInvoiceDtoCopyWithImpl(
-      _$_BankBeneficiaryInvoiceDto _value,
-      $Res Function(_$_BankBeneficiaryInvoiceDto) _then)
+        _$BankBeneficiaryInvoiceDtoImpl>
+    implements _$$BankBeneficiaryInvoiceDtoImplCopyWith<$Res> {
+  __$$BankBeneficiaryInvoiceDtoImplCopyWithImpl(
+      _$BankBeneficiaryInvoiceDtoImpl _value,
+      $Res Function(_$BankBeneficiaryInvoiceDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -175,7 +175,7 @@ class __$$_BankBeneficiaryInvoiceDtoCopyWithImpl<$Res>
     Object? payNowUen = null,
     Object? emailId = null,
   }) {
-    return _then(_$_BankBeneficiaryInvoiceDto(
+    return _then(_$BankBeneficiaryInvoiceDtoImpl(
       beneficiaryName: null == beneficiaryName
           ? _value.beneficiaryName
           : beneficiaryName // ignore: cast_nullable_to_non_nullable
@@ -218,8 +218,8 @@ class __$$_BankBeneficiaryInvoiceDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_BankBeneficiaryInvoiceDto extends _BankBeneficiaryInvoiceDto {
-  const _$_BankBeneficiaryInvoiceDto(
+class _$BankBeneficiaryInvoiceDtoImpl extends _BankBeneficiaryInvoiceDto {
+  const _$BankBeneficiaryInvoiceDtoImpl(
       {@JsonKey(name: 'beneficiaryName', defaultValue: '')
       required this.beneficiaryName,
       @JsonKey(name: 'bankName', defaultValue: '') required this.bankName,
@@ -233,8 +233,8 @@ class _$_BankBeneficiaryInvoiceDto extends _BankBeneficiaryInvoiceDto {
       @JsonKey(name: 'emailId', defaultValue: '') required this.emailId})
       : super._();
 
-  factory _$_BankBeneficiaryInvoiceDto.fromJson(Map<String, dynamic> json) =>
-      _$$_BankBeneficiaryInvoiceDtoFromJson(json);
+  factory _$BankBeneficiaryInvoiceDtoImpl.fromJson(Map<String, dynamic> json) =>
+      _$$BankBeneficiaryInvoiceDtoImplFromJson(json);
 
   @override
   @JsonKey(name: 'beneficiaryName', defaultValue: '')
@@ -270,10 +270,10 @@ class _$_BankBeneficiaryInvoiceDto extends _BankBeneficiaryInvoiceDto {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_BankBeneficiaryInvoiceDto &&
+            other is _$BankBeneficiaryInvoiceDtoImpl &&
             (identical(other.beneficiaryName, beneficiaryName) ||
                 other.beneficiaryName == beneficiaryName) &&
             (identical(other.bankName, bankName) ||
@@ -309,13 +309,13 @@ class _$_BankBeneficiaryInvoiceDto extends _BankBeneficiaryInvoiceDto {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_BankBeneficiaryInvoiceDtoCopyWith<_$_BankBeneficiaryInvoiceDto>
-      get copyWith => __$$_BankBeneficiaryInvoiceDtoCopyWithImpl<
-          _$_BankBeneficiaryInvoiceDto>(this, _$identity);
+  _$$BankBeneficiaryInvoiceDtoImplCopyWith<_$BankBeneficiaryInvoiceDtoImpl>
+      get copyWith => __$$BankBeneficiaryInvoiceDtoImplCopyWithImpl<
+          _$BankBeneficiaryInvoiceDtoImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_BankBeneficiaryInvoiceDtoToJson(
+    return _$$BankBeneficiaryInvoiceDtoImplToJson(
       this,
     );
   }
@@ -339,11 +339,11 @@ abstract class _BankBeneficiaryInvoiceDto extends BankBeneficiaryInvoiceDto {
       @JsonKey(name: 'payNowUen', defaultValue: '')
       required final String payNowUen,
       @JsonKey(name: 'emailId', defaultValue: '')
-      required final String emailId}) = _$_BankBeneficiaryInvoiceDto;
+      required final String emailId}) = _$BankBeneficiaryInvoiceDtoImpl;
   const _BankBeneficiaryInvoiceDto._() : super._();
 
   factory _BankBeneficiaryInvoiceDto.fromJson(Map<String, dynamic> json) =
-      _$_BankBeneficiaryInvoiceDto.fromJson;
+      _$BankBeneficiaryInvoiceDtoImpl.fromJson;
 
   @override
   @JsonKey(name: 'beneficiaryName', defaultValue: '')
@@ -374,6 +374,6 @@ abstract class _BankBeneficiaryInvoiceDto extends BankBeneficiaryInvoiceDto {
   String get emailId;
   @override
   @JsonKey(ignore: true)
-  _$$_BankBeneficiaryInvoiceDtoCopyWith<_$_BankBeneficiaryInvoiceDto>
+  _$$BankBeneficiaryInvoiceDtoImplCopyWith<_$BankBeneficiaryInvoiceDtoImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

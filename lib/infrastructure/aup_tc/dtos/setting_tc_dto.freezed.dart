@@ -12,7 +12,7 @@ part of 'setting_tc_dto.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 SettingTcDto _$SettingTcDtoFromJson(Map<String, dynamic> json) {
   return _SettingTcDto.fromJson(json);
@@ -36,7 +36,7 @@ abstract class $SettingTcDtoCopyWith<$Res> {
   @useResult
   $Res call(
       {@JsonKey(name: 'updateAcceptanceStatus', defaultValue: false)
-          bool acceptTC});
+      bool acceptTC});
 }
 
 /// @nodoc
@@ -64,24 +64,24 @@ class _$SettingTcDtoCopyWithImpl<$Res, $Val extends SettingTcDto>
 }
 
 /// @nodoc
-abstract class _$$_SettingTcDtoCopyWith<$Res>
+abstract class _$$SettingTcDtoImplCopyWith<$Res>
     implements $SettingTcDtoCopyWith<$Res> {
-  factory _$$_SettingTcDtoCopyWith(
-          _$_SettingTcDto value, $Res Function(_$_SettingTcDto) then) =
-      __$$_SettingTcDtoCopyWithImpl<$Res>;
+  factory _$$SettingTcDtoImplCopyWith(
+          _$SettingTcDtoImpl value, $Res Function(_$SettingTcDtoImpl) then) =
+      __$$SettingTcDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
       {@JsonKey(name: 'updateAcceptanceStatus', defaultValue: false)
-          bool acceptTC});
+      bool acceptTC});
 }
 
 /// @nodoc
-class __$$_SettingTcDtoCopyWithImpl<$Res>
-    extends _$SettingTcDtoCopyWithImpl<$Res, _$_SettingTcDto>
-    implements _$$_SettingTcDtoCopyWith<$Res> {
-  __$$_SettingTcDtoCopyWithImpl(
-      _$_SettingTcDto _value, $Res Function(_$_SettingTcDto) _then)
+class __$$SettingTcDtoImplCopyWithImpl<$Res>
+    extends _$SettingTcDtoCopyWithImpl<$Res, _$SettingTcDtoImpl>
+    implements _$$SettingTcDtoImplCopyWith<$Res> {
+  __$$SettingTcDtoImplCopyWithImpl(
+      _$SettingTcDtoImpl _value, $Res Function(_$SettingTcDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -89,7 +89,7 @@ class __$$_SettingTcDtoCopyWithImpl<$Res>
   $Res call({
     Object? acceptTC = null,
   }) {
-    return _then(_$_SettingTcDto(
+    return _then(_$SettingTcDtoImpl(
       acceptTC: null == acceptTC
           ? _value.acceptTC
           : acceptTC // ignore: cast_nullable_to_non_nullable
@@ -100,14 +100,14 @@ class __$$_SettingTcDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable(createToJson: false)
-class _$_SettingTcDto extends _SettingTcDto {
-  const _$_SettingTcDto(
+class _$SettingTcDtoImpl extends _SettingTcDto {
+  const _$SettingTcDtoImpl(
       {@JsonKey(name: 'updateAcceptanceStatus', defaultValue: false)
-          required this.acceptTC})
+      required this.acceptTC})
       : super._();
 
-  factory _$_SettingTcDto.fromJson(Map<String, dynamic> json) =>
-      _$$_SettingTcDtoFromJson(json);
+  factory _$SettingTcDtoImpl.fromJson(Map<String, dynamic> json) =>
+      _$$SettingTcDtoImplFromJson(json);
 
   @override
   @JsonKey(name: 'updateAcceptanceStatus', defaultValue: false)
@@ -119,10 +119,10 @@ class _$_SettingTcDto extends _SettingTcDto {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_SettingTcDto &&
+            other is _$SettingTcDtoImpl &&
             (identical(other.acceptTC, acceptTC) ||
                 other.acceptTC == acceptTC));
   }
@@ -134,24 +134,24 @@ class _$_SettingTcDto extends _SettingTcDto {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_SettingTcDtoCopyWith<_$_SettingTcDto> get copyWith =>
-      __$$_SettingTcDtoCopyWithImpl<_$_SettingTcDto>(this, _$identity);
+  _$$SettingTcDtoImplCopyWith<_$SettingTcDtoImpl> get copyWith =>
+      __$$SettingTcDtoImplCopyWithImpl<_$SettingTcDtoImpl>(this, _$identity);
 }
 
 abstract class _SettingTcDto extends SettingTcDto {
   const factory _SettingTcDto(
       {@JsonKey(name: 'updateAcceptanceStatus', defaultValue: false)
-          required final bool acceptTC}) = _$_SettingTcDto;
+      required final bool acceptTC}) = _$SettingTcDtoImpl;
   const _SettingTcDto._() : super._();
 
   factory _SettingTcDto.fromJson(Map<String, dynamic> json) =
-      _$_SettingTcDto.fromJson;
+      _$SettingTcDtoImpl.fromJson;
 
   @override
   @JsonKey(name: 'updateAcceptanceStatus', defaultValue: false)
   bool get acceptTC;
   @override
   @JsonKey(ignore: true)
-  _$$_SettingTcDtoCopyWith<_$_SettingTcDto> get copyWith =>
+  _$$SettingTcDtoImplCopyWith<_$SettingTcDtoImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

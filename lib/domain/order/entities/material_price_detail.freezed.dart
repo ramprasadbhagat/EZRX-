@@ -12,7 +12,7 @@ part of 'material_price_detail.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$MaterialPriceDetail {
@@ -88,11 +88,11 @@ class _$MaterialPriceDetailCopyWithImpl<$Res, $Val extends MaterialPriceDetail>
 }
 
 /// @nodoc
-abstract class _$$_MaterialPriceDetailCopyWith<$Res>
+abstract class _$$MaterialPriceDetailImplCopyWith<$Res>
     implements $MaterialPriceDetailCopyWith<$Res> {
-  factory _$$_MaterialPriceDetailCopyWith(_$_MaterialPriceDetail value,
-          $Res Function(_$_MaterialPriceDetail) then) =
-      __$$_MaterialPriceDetailCopyWithImpl<$Res>;
+  factory _$$MaterialPriceDetailImplCopyWith(_$MaterialPriceDetailImpl value,
+          $Res Function(_$MaterialPriceDetailImpl) then) =
+      __$$MaterialPriceDetailImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({Price price, MaterialInfo info, bool isValidMaterial});
@@ -104,11 +104,11 @@ abstract class _$$_MaterialPriceDetailCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_MaterialPriceDetailCopyWithImpl<$Res>
-    extends _$MaterialPriceDetailCopyWithImpl<$Res, _$_MaterialPriceDetail>
-    implements _$$_MaterialPriceDetailCopyWith<$Res> {
-  __$$_MaterialPriceDetailCopyWithImpl(_$_MaterialPriceDetail _value,
-      $Res Function(_$_MaterialPriceDetail) _then)
+class __$$MaterialPriceDetailImplCopyWithImpl<$Res>
+    extends _$MaterialPriceDetailCopyWithImpl<$Res, _$MaterialPriceDetailImpl>
+    implements _$$MaterialPriceDetailImplCopyWith<$Res> {
+  __$$MaterialPriceDetailImplCopyWithImpl(_$MaterialPriceDetailImpl _value,
+      $Res Function(_$MaterialPriceDetailImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -118,7 +118,7 @@ class __$$_MaterialPriceDetailCopyWithImpl<$Res>
     Object? info = null,
     Object? isValidMaterial = null,
   }) {
-    return _then(_$_MaterialPriceDetail(
+    return _then(_$MaterialPriceDetailImpl(
       price: null == price
           ? _value.price
           : price // ignore: cast_nullable_to_non_nullable
@@ -137,8 +137,8 @@ class __$$_MaterialPriceDetailCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_MaterialPriceDetail extends _MaterialPriceDetail {
-  const _$_MaterialPriceDetail(
+class _$MaterialPriceDetailImpl extends _MaterialPriceDetail {
+  const _$MaterialPriceDetailImpl(
       {required this.price, required this.info, required this.isValidMaterial})
       : super._();
 
@@ -155,10 +155,10 @@ class _$_MaterialPriceDetail extends _MaterialPriceDetail {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_MaterialPriceDetail &&
+            other is _$MaterialPriceDetailImpl &&
             (identical(other.price, price) || other.price == price) &&
             (identical(other.info, info) || other.info == info) &&
             (identical(other.isValidMaterial, isValidMaterial) ||
@@ -171,8 +171,8 @@ class _$_MaterialPriceDetail extends _MaterialPriceDetail {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_MaterialPriceDetailCopyWith<_$_MaterialPriceDetail> get copyWith =>
-      __$$_MaterialPriceDetailCopyWithImpl<_$_MaterialPriceDetail>(
+  _$$MaterialPriceDetailImplCopyWith<_$MaterialPriceDetailImpl> get copyWith =>
+      __$$MaterialPriceDetailImplCopyWithImpl<_$MaterialPriceDetailImpl>(
           this, _$identity);
 }
 
@@ -180,7 +180,7 @@ abstract class _MaterialPriceDetail extends MaterialPriceDetail {
   const factory _MaterialPriceDetail(
       {required final Price price,
       required final MaterialInfo info,
-      required final bool isValidMaterial}) = _$_MaterialPriceDetail;
+      required final bool isValidMaterial}) = _$MaterialPriceDetailImpl;
   const _MaterialPriceDetail._() : super._();
 
   @override
@@ -191,6 +191,6 @@ abstract class _MaterialPriceDetail extends MaterialPriceDetail {
   bool get isValidMaterial;
   @override
   @JsonKey(ignore: true)
-  _$$_MaterialPriceDetailCopyWith<_$_MaterialPriceDetail> get copyWith =>
+  _$$MaterialPriceDetailImplCopyWith<_$MaterialPriceDetailImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

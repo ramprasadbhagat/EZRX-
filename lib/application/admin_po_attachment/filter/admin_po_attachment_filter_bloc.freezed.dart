@@ -12,7 +12,7 @@ part of 'admin_po_attachment_filter_bloc.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$AdminPoAttachmentFilterEvent {
@@ -108,25 +108,25 @@ class _$AdminPoAttachmentFilterEventCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_InitializedCopyWith<$Res> {
-  factory _$$_InitializedCopyWith(
-          _$_Initialized value, $Res Function(_$_Initialized) then) =
-      __$$_InitializedCopyWithImpl<$Res>;
+abstract class _$$InitializedImplCopyWith<$Res> {
+  factory _$$InitializedImplCopyWith(
+          _$InitializedImpl value, $Res Function(_$InitializedImpl) then) =
+      __$$InitializedImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_InitializedCopyWithImpl<$Res>
-    extends _$AdminPoAttachmentFilterEventCopyWithImpl<$Res, _$_Initialized>
-    implements _$$_InitializedCopyWith<$Res> {
-  __$$_InitializedCopyWithImpl(
-      _$_Initialized _value, $Res Function(_$_Initialized) _then)
+class __$$InitializedImplCopyWithImpl<$Res>
+    extends _$AdminPoAttachmentFilterEventCopyWithImpl<$Res, _$InitializedImpl>
+    implements _$$InitializedImplCopyWith<$Res> {
+  __$$InitializedImplCopyWithImpl(
+      _$InitializedImpl _value, $Res Function(_$InitializedImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_Initialized implements _Initialized {
-  const _$_Initialized();
+class _$InitializedImpl implements _Initialized {
+  const _$InitializedImpl();
 
   @override
   String toString() {
@@ -134,9 +134,9 @@ class _$_Initialized implements _Initialized {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_Initialized);
+        (other.runtimeType == runtimeType && other is _$InitializedImpl);
   }
 
   @override
@@ -236,29 +236,29 @@ class _$_Initialized implements _Initialized {
 }
 
 abstract class _Initialized implements AdminPoAttachmentFilterEvent {
-  const factory _Initialized() = _$_Initialized;
+  const factory _Initialized() = _$InitializedImpl;
 }
 
 /// @nodoc
-abstract class _$$_ApplyFiltersCopyWith<$Res> {
-  factory _$$_ApplyFiltersCopyWith(
-          _$_ApplyFilters value, $Res Function(_$_ApplyFilters) then) =
-      __$$_ApplyFiltersCopyWithImpl<$Res>;
+abstract class _$$ApplyFiltersImplCopyWith<$Res> {
+  factory _$$ApplyFiltersImplCopyWith(
+          _$ApplyFiltersImpl value, $Res Function(_$ApplyFiltersImpl) then) =
+      __$$ApplyFiltersImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_ApplyFiltersCopyWithImpl<$Res>
-    extends _$AdminPoAttachmentFilterEventCopyWithImpl<$Res, _$_ApplyFilters>
-    implements _$$_ApplyFiltersCopyWith<$Res> {
-  __$$_ApplyFiltersCopyWithImpl(
-      _$_ApplyFilters _value, $Res Function(_$_ApplyFilters) _then)
+class __$$ApplyFiltersImplCopyWithImpl<$Res>
+    extends _$AdminPoAttachmentFilterEventCopyWithImpl<$Res, _$ApplyFiltersImpl>
+    implements _$$ApplyFiltersImplCopyWith<$Res> {
+  __$$ApplyFiltersImplCopyWithImpl(
+      _$ApplyFiltersImpl _value, $Res Function(_$ApplyFiltersImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_ApplyFilters implements _ApplyFilters {
-  const _$_ApplyFilters();
+class _$ApplyFiltersImpl implements _ApplyFilters {
+  const _$ApplyFiltersImpl();
 
   @override
   String toString() {
@@ -266,9 +266,9 @@ class _$_ApplyFilters implements _ApplyFilters {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_ApplyFilters);
+        (other.runtimeType == runtimeType && other is _$ApplyFiltersImpl);
   }
 
   @override
@@ -368,24 +368,24 @@ class _$_ApplyFilters implements _ApplyFilters {
 }
 
 abstract class _ApplyFilters implements AdminPoAttachmentFilterEvent {
-  const factory _ApplyFilters() = _$_ApplyFilters;
+  const factory _ApplyFilters() = _$ApplyFiltersImpl;
 }
 
 /// @nodoc
-abstract class _$$_OrderNoChangedCopyWith<$Res> {
-  factory _$$_OrderNoChangedCopyWith(
-          _$_OrderNoChanged value, $Res Function(_$_OrderNoChanged) then) =
-      __$$_OrderNoChangedCopyWithImpl<$Res>;
+abstract class _$$OrderNoChangedImplCopyWith<$Res> {
+  factory _$$OrderNoChangedImplCopyWith(_$OrderNoChangedImpl value,
+          $Res Function(_$OrderNoChangedImpl) then) =
+      __$$OrderNoChangedImplCopyWithImpl<$Res>;
   @useResult
   $Res call({String orderNumber});
 }
 
 /// @nodoc
-class __$$_OrderNoChangedCopyWithImpl<$Res>
-    extends _$AdminPoAttachmentFilterEventCopyWithImpl<$Res, _$_OrderNoChanged>
-    implements _$$_OrderNoChangedCopyWith<$Res> {
-  __$$_OrderNoChangedCopyWithImpl(
-      _$_OrderNoChanged _value, $Res Function(_$_OrderNoChanged) _then)
+class __$$OrderNoChangedImplCopyWithImpl<$Res>
+    extends _$AdminPoAttachmentFilterEventCopyWithImpl<$Res,
+        _$OrderNoChangedImpl> implements _$$OrderNoChangedImplCopyWith<$Res> {
+  __$$OrderNoChangedImplCopyWithImpl(
+      _$OrderNoChangedImpl _value, $Res Function(_$OrderNoChangedImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -393,7 +393,7 @@ class __$$_OrderNoChangedCopyWithImpl<$Res>
   $Res call({
     Object? orderNumber = null,
   }) {
-    return _then(_$_OrderNoChanged(
+    return _then(_$OrderNoChangedImpl(
       null == orderNumber
           ? _value.orderNumber
           : orderNumber // ignore: cast_nullable_to_non_nullable
@@ -404,8 +404,8 @@ class __$$_OrderNoChangedCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_OrderNoChanged implements _OrderNoChanged {
-  const _$_OrderNoChanged(this.orderNumber);
+class _$OrderNoChangedImpl implements _OrderNoChanged {
+  const _$OrderNoChangedImpl(this.orderNumber);
 
   @override
   final String orderNumber;
@@ -416,10 +416,10 @@ class _$_OrderNoChanged implements _OrderNoChanged {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_OrderNoChanged &&
+            other is _$OrderNoChangedImpl &&
             (identical(other.orderNumber, orderNumber) ||
                 other.orderNumber == orderNumber));
   }
@@ -430,8 +430,9 @@ class _$_OrderNoChanged implements _OrderNoChanged {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_OrderNoChangedCopyWith<_$_OrderNoChanged> get copyWith =>
-      __$$_OrderNoChangedCopyWithImpl<_$_OrderNoChanged>(this, _$identity);
+  _$$OrderNoChangedImplCopyWith<_$OrderNoChangedImpl> get copyWith =>
+      __$$OrderNoChangedImplCopyWithImpl<_$OrderNoChangedImpl>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -527,29 +528,30 @@ class _$_OrderNoChanged implements _OrderNoChanged {
 }
 
 abstract class _OrderNoChanged implements AdminPoAttachmentFilterEvent {
-  const factory _OrderNoChanged(final String orderNumber) = _$_OrderNoChanged;
+  const factory _OrderNoChanged(final String orderNumber) =
+      _$OrderNoChangedImpl;
 
   String get orderNumber;
   @JsonKey(ignore: true)
-  _$$_OrderNoChangedCopyWith<_$_OrderNoChanged> get copyWith =>
+  _$$OrderNoChangedImplCopyWith<_$OrderNoChangedImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_EzrxNoChangedCopyWith<$Res> {
-  factory _$$_EzrxNoChangedCopyWith(
-          _$_EzrxNoChanged value, $Res Function(_$_EzrxNoChanged) then) =
-      __$$_EzrxNoChangedCopyWithImpl<$Res>;
+abstract class _$$EzrxNoChangedImplCopyWith<$Res> {
+  factory _$$EzrxNoChangedImplCopyWith(
+          _$EzrxNoChangedImpl value, $Res Function(_$EzrxNoChangedImpl) then) =
+      __$$EzrxNoChangedImplCopyWithImpl<$Res>;
   @useResult
   $Res call({String exRxNo});
 }
 
 /// @nodoc
-class __$$_EzrxNoChangedCopyWithImpl<$Res>
-    extends _$AdminPoAttachmentFilterEventCopyWithImpl<$Res, _$_EzrxNoChanged>
-    implements _$$_EzrxNoChangedCopyWith<$Res> {
-  __$$_EzrxNoChangedCopyWithImpl(
-      _$_EzrxNoChanged _value, $Res Function(_$_EzrxNoChanged) _then)
+class __$$EzrxNoChangedImplCopyWithImpl<$Res>
+    extends _$AdminPoAttachmentFilterEventCopyWithImpl<$Res,
+        _$EzrxNoChangedImpl> implements _$$EzrxNoChangedImplCopyWith<$Res> {
+  __$$EzrxNoChangedImplCopyWithImpl(
+      _$EzrxNoChangedImpl _value, $Res Function(_$EzrxNoChangedImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -557,7 +559,7 @@ class __$$_EzrxNoChangedCopyWithImpl<$Res>
   $Res call({
     Object? exRxNo = null,
   }) {
-    return _then(_$_EzrxNoChanged(
+    return _then(_$EzrxNoChangedImpl(
       null == exRxNo
           ? _value.exRxNo
           : exRxNo // ignore: cast_nullable_to_non_nullable
@@ -568,8 +570,8 @@ class __$$_EzrxNoChangedCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_EzrxNoChanged implements _EzrxNoChanged {
-  const _$_EzrxNoChanged(this.exRxNo);
+class _$EzrxNoChangedImpl implements _EzrxNoChanged {
+  const _$EzrxNoChangedImpl(this.exRxNo);
 
   @override
   final String exRxNo;
@@ -580,10 +582,10 @@ class _$_EzrxNoChanged implements _EzrxNoChanged {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_EzrxNoChanged &&
+            other is _$EzrxNoChangedImpl &&
             (identical(other.exRxNo, exRxNo) || other.exRxNo == exRxNo));
   }
 
@@ -593,8 +595,8 @@ class _$_EzrxNoChanged implements _EzrxNoChanged {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_EzrxNoChangedCopyWith<_$_EzrxNoChanged> get copyWith =>
-      __$$_EzrxNoChangedCopyWithImpl<_$_EzrxNoChanged>(this, _$identity);
+  _$$EzrxNoChangedImplCopyWith<_$EzrxNoChangedImpl> get copyWith =>
+      __$$EzrxNoChangedImplCopyWithImpl<_$EzrxNoChangedImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -690,29 +692,29 @@ class _$_EzrxNoChanged implements _EzrxNoChanged {
 }
 
 abstract class _EzrxNoChanged implements AdminPoAttachmentFilterEvent {
-  const factory _EzrxNoChanged(final String exRxNo) = _$_EzrxNoChanged;
+  const factory _EzrxNoChanged(final String exRxNo) = _$EzrxNoChangedImpl;
 
   String get exRxNo;
   @JsonKey(ignore: true)
-  _$$_EzrxNoChangedCopyWith<_$_EzrxNoChanged> get copyWith =>
+  _$$EzrxNoChangedImplCopyWith<_$EzrxNoChangedImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_SalesOrgChangedCopyWith<$Res> {
-  factory _$$_SalesOrgChangedCopyWith(
-          _$_SalesOrgChanged value, $Res Function(_$_SalesOrgChanged) then) =
-      __$$_SalesOrgChangedCopyWithImpl<$Res>;
+abstract class _$$SalesOrgChangedImplCopyWith<$Res> {
+  factory _$$SalesOrgChangedImplCopyWith(_$SalesOrgChangedImpl value,
+          $Res Function(_$SalesOrgChangedImpl) then) =
+      __$$SalesOrgChangedImplCopyWithImpl<$Res>;
   @useResult
   $Res call({SalesOrg salesOrg});
 }
 
 /// @nodoc
-class __$$_SalesOrgChangedCopyWithImpl<$Res>
-    extends _$AdminPoAttachmentFilterEventCopyWithImpl<$Res, _$_SalesOrgChanged>
-    implements _$$_SalesOrgChangedCopyWith<$Res> {
-  __$$_SalesOrgChangedCopyWithImpl(
-      _$_SalesOrgChanged _value, $Res Function(_$_SalesOrgChanged) _then)
+class __$$SalesOrgChangedImplCopyWithImpl<$Res>
+    extends _$AdminPoAttachmentFilterEventCopyWithImpl<$Res,
+        _$SalesOrgChangedImpl> implements _$$SalesOrgChangedImplCopyWith<$Res> {
+  __$$SalesOrgChangedImplCopyWithImpl(
+      _$SalesOrgChangedImpl _value, $Res Function(_$SalesOrgChangedImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -720,7 +722,7 @@ class __$$_SalesOrgChangedCopyWithImpl<$Res>
   $Res call({
     Object? salesOrg = null,
   }) {
-    return _then(_$_SalesOrgChanged(
+    return _then(_$SalesOrgChangedImpl(
       null == salesOrg
           ? _value.salesOrg
           : salesOrg // ignore: cast_nullable_to_non_nullable
@@ -731,8 +733,8 @@ class __$$_SalesOrgChangedCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_SalesOrgChanged implements _SalesOrgChanged {
-  const _$_SalesOrgChanged(this.salesOrg);
+class _$SalesOrgChangedImpl implements _SalesOrgChanged {
+  const _$SalesOrgChangedImpl(this.salesOrg);
 
   @override
   final SalesOrg salesOrg;
@@ -743,10 +745,10 @@ class _$_SalesOrgChanged implements _SalesOrgChanged {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_SalesOrgChanged &&
+            other is _$SalesOrgChangedImpl &&
             (identical(other.salesOrg, salesOrg) ||
                 other.salesOrg == salesOrg));
   }
@@ -757,8 +759,9 @@ class _$_SalesOrgChanged implements _SalesOrgChanged {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_SalesOrgChangedCopyWith<_$_SalesOrgChanged> get copyWith =>
-      __$$_SalesOrgChangedCopyWithImpl<_$_SalesOrgChanged>(this, _$identity);
+  _$$SalesOrgChangedImplCopyWith<_$SalesOrgChangedImpl> get copyWith =>
+      __$$SalesOrgChangedImplCopyWithImpl<_$SalesOrgChangedImpl>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -854,19 +857,20 @@ class _$_SalesOrgChanged implements _SalesOrgChanged {
 }
 
 abstract class _SalesOrgChanged implements AdminPoAttachmentFilterEvent {
-  const factory _SalesOrgChanged(final SalesOrg salesOrg) = _$_SalesOrgChanged;
+  const factory _SalesOrgChanged(final SalesOrg salesOrg) =
+      _$SalesOrgChangedImpl;
 
   SalesOrg get salesOrg;
   @JsonKey(ignore: true)
-  _$$_SalesOrgChangedCopyWith<_$_SalesOrgChanged> get copyWith =>
+  _$$SalesOrgChangedImplCopyWith<_$SalesOrgChangedImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_CustomerCodeChangedCopyWith<$Res> {
-  factory _$$_CustomerCodeChangedCopyWith(_$_CustomerCodeChanged value,
-          $Res Function(_$_CustomerCodeChanged) then) =
-      __$$_CustomerCodeChangedCopyWithImpl<$Res>;
+abstract class _$$CustomerCodeChangedImplCopyWith<$Res> {
+  factory _$$CustomerCodeChangedImplCopyWith(_$CustomerCodeChangedImpl value,
+          $Res Function(_$CustomerCodeChangedImpl) then) =
+      __$$CustomerCodeChangedImplCopyWithImpl<$Res>;
   @useResult
   $Res call({CustomerCodeInfo soldTo});
 
@@ -874,12 +878,12 @@ abstract class _$$_CustomerCodeChangedCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_CustomerCodeChangedCopyWithImpl<$Res>
+class __$$CustomerCodeChangedImplCopyWithImpl<$Res>
     extends _$AdminPoAttachmentFilterEventCopyWithImpl<$Res,
-        _$_CustomerCodeChanged>
-    implements _$$_CustomerCodeChangedCopyWith<$Res> {
-  __$$_CustomerCodeChangedCopyWithImpl(_$_CustomerCodeChanged _value,
-      $Res Function(_$_CustomerCodeChanged) _then)
+        _$CustomerCodeChangedImpl>
+    implements _$$CustomerCodeChangedImplCopyWith<$Res> {
+  __$$CustomerCodeChangedImplCopyWithImpl(_$CustomerCodeChangedImpl _value,
+      $Res Function(_$CustomerCodeChangedImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -887,7 +891,7 @@ class __$$_CustomerCodeChangedCopyWithImpl<$Res>
   $Res call({
     Object? soldTo = null,
   }) {
-    return _then(_$_CustomerCodeChanged(
+    return _then(_$CustomerCodeChangedImpl(
       null == soldTo
           ? _value.soldTo
           : soldTo // ignore: cast_nullable_to_non_nullable
@@ -906,8 +910,8 @@ class __$$_CustomerCodeChangedCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_CustomerCodeChanged implements _CustomerCodeChanged {
-  const _$_CustomerCodeChanged(this.soldTo);
+class _$CustomerCodeChangedImpl implements _CustomerCodeChanged {
+  const _$CustomerCodeChangedImpl(this.soldTo);
 
   @override
   final CustomerCodeInfo soldTo;
@@ -918,10 +922,10 @@ class _$_CustomerCodeChanged implements _CustomerCodeChanged {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_CustomerCodeChanged &&
+            other is _$CustomerCodeChangedImpl &&
             (identical(other.soldTo, soldTo) || other.soldTo == soldTo));
   }
 
@@ -931,8 +935,8 @@ class _$_CustomerCodeChanged implements _CustomerCodeChanged {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_CustomerCodeChangedCopyWith<_$_CustomerCodeChanged> get copyWith =>
-      __$$_CustomerCodeChangedCopyWithImpl<_$_CustomerCodeChanged>(
+  _$$CustomerCodeChangedImplCopyWith<_$CustomerCodeChangedImpl> get copyWith =>
+      __$$CustomerCodeChangedImplCopyWithImpl<_$CustomerCodeChangedImpl>(
           this, _$identity);
 
   @override
@@ -1030,29 +1034,29 @@ class _$_CustomerCodeChanged implements _CustomerCodeChanged {
 
 abstract class _CustomerCodeChanged implements AdminPoAttachmentFilterEvent {
   const factory _CustomerCodeChanged(final CustomerCodeInfo soldTo) =
-      _$_CustomerCodeChanged;
+      _$CustomerCodeChangedImpl;
 
   CustomerCodeInfo get soldTo;
   @JsonKey(ignore: true)
-  _$$_CustomerCodeChangedCopyWith<_$_CustomerCodeChanged> get copyWith =>
+  _$$CustomerCodeChangedImplCopyWith<_$CustomerCodeChangedImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_SetOrderDateCopyWith<$Res> {
-  factory _$$_SetOrderDateCopyWith(
-          _$_SetOrderDate value, $Res Function(_$_SetOrderDate) then) =
-      __$$_SetOrderDateCopyWithImpl<$Res>;
+abstract class _$$SetOrderDateImplCopyWith<$Res> {
+  factory _$$SetOrderDateImplCopyWith(
+          _$SetOrderDateImpl value, $Res Function(_$SetOrderDateImpl) then) =
+      __$$SetOrderDateImplCopyWithImpl<$Res>;
   @useResult
   $Res call({DateTimeRange orderDateRange});
 }
 
 /// @nodoc
-class __$$_SetOrderDateCopyWithImpl<$Res>
-    extends _$AdminPoAttachmentFilterEventCopyWithImpl<$Res, _$_SetOrderDate>
-    implements _$$_SetOrderDateCopyWith<$Res> {
-  __$$_SetOrderDateCopyWithImpl(
-      _$_SetOrderDate _value, $Res Function(_$_SetOrderDate) _then)
+class __$$SetOrderDateImplCopyWithImpl<$Res>
+    extends _$AdminPoAttachmentFilterEventCopyWithImpl<$Res, _$SetOrderDateImpl>
+    implements _$$SetOrderDateImplCopyWith<$Res> {
+  __$$SetOrderDateImplCopyWithImpl(
+      _$SetOrderDateImpl _value, $Res Function(_$SetOrderDateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1060,7 +1064,7 @@ class __$$_SetOrderDateCopyWithImpl<$Res>
   $Res call({
     Object? orderDateRange = null,
   }) {
-    return _then(_$_SetOrderDate(
+    return _then(_$SetOrderDateImpl(
       orderDateRange: null == orderDateRange
           ? _value.orderDateRange
           : orderDateRange // ignore: cast_nullable_to_non_nullable
@@ -1071,8 +1075,8 @@ class __$$_SetOrderDateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_SetOrderDate implements _SetOrderDate {
-  const _$_SetOrderDate({required this.orderDateRange});
+class _$SetOrderDateImpl implements _SetOrderDate {
+  const _$SetOrderDateImpl({required this.orderDateRange});
 
   @override
   final DateTimeRange orderDateRange;
@@ -1083,10 +1087,10 @@ class _$_SetOrderDate implements _SetOrderDate {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_SetOrderDate &&
+            other is _$SetOrderDateImpl &&
             (identical(other.orderDateRange, orderDateRange) ||
                 other.orderDateRange == orderDateRange));
   }
@@ -1097,8 +1101,8 @@ class _$_SetOrderDate implements _SetOrderDate {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_SetOrderDateCopyWith<_$_SetOrderDate> get copyWith =>
-      __$$_SetOrderDateCopyWithImpl<_$_SetOrderDate>(this, _$identity);
+  _$$SetOrderDateImplCopyWith<_$SetOrderDateImpl> get copyWith =>
+      __$$SetOrderDateImplCopyWithImpl<_$SetOrderDateImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -1195,11 +1199,11 @@ class _$_SetOrderDate implements _SetOrderDate {
 
 abstract class _SetOrderDate implements AdminPoAttachmentFilterEvent {
   const factory _SetOrderDate({required final DateTimeRange orderDateRange}) =
-      _$_SetOrderDate;
+      _$SetOrderDateImpl;
 
   DateTimeRange get orderDateRange;
   @JsonKey(ignore: true)
-  _$$_SetOrderDateCopyWith<_$_SetOrderDate> get copyWith =>
+  _$$SetOrderDateImplCopyWith<_$SetOrderDateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -1276,12 +1280,12 @@ class _$AdminPoAttachmentFilterStateCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_AdminPoAttachmentFilterStateCopyWith<$Res>
+abstract class _$$AdminPoAttachmentFilterStateImplCopyWith<$Res>
     implements $AdminPoAttachmentFilterStateCopyWith<$Res> {
-  factory _$$_AdminPoAttachmentFilterStateCopyWith(
-          _$_AdminPoAttachmentFilterState value,
-          $Res Function(_$_AdminPoAttachmentFilterState) then) =
-      __$$_AdminPoAttachmentFilterStateCopyWithImpl<$Res>;
+  factory _$$AdminPoAttachmentFilterStateImplCopyWith(
+          _$AdminPoAttachmentFilterStateImpl value,
+          $Res Function(_$AdminPoAttachmentFilterStateImpl) then) =
+      __$$AdminPoAttachmentFilterStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -1294,13 +1298,13 @@ abstract class _$$_AdminPoAttachmentFilterStateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_AdminPoAttachmentFilterStateCopyWithImpl<$Res>
+class __$$AdminPoAttachmentFilterStateImplCopyWithImpl<$Res>
     extends _$AdminPoAttachmentFilterStateCopyWithImpl<$Res,
-        _$_AdminPoAttachmentFilterState>
-    implements _$$_AdminPoAttachmentFilterStateCopyWith<$Res> {
-  __$$_AdminPoAttachmentFilterStateCopyWithImpl(
-      _$_AdminPoAttachmentFilterState _value,
-      $Res Function(_$_AdminPoAttachmentFilterState) _then)
+        _$AdminPoAttachmentFilterStateImpl>
+    implements _$$AdminPoAttachmentFilterStateImplCopyWith<$Res> {
+  __$$AdminPoAttachmentFilterStateImplCopyWithImpl(
+      _$AdminPoAttachmentFilterStateImpl _value,
+      $Res Function(_$AdminPoAttachmentFilterStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1310,7 +1314,7 @@ class __$$_AdminPoAttachmentFilterStateCopyWithImpl<$Res>
     Object? isSubmitting = null,
     Object? showErrorMessages = null,
   }) {
-    return _then(_$_AdminPoAttachmentFilterState(
+    return _then(_$AdminPoAttachmentFilterStateImpl(
       adminPoAttachmentFilter: null == adminPoAttachmentFilter
           ? _value.adminPoAttachmentFilter
           : adminPoAttachmentFilter // ignore: cast_nullable_to_non_nullable
@@ -1329,8 +1333,9 @@ class __$$_AdminPoAttachmentFilterStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_AdminPoAttachmentFilterState implements _AdminPoAttachmentFilterState {
-  _$_AdminPoAttachmentFilterState(
+class _$AdminPoAttachmentFilterStateImpl
+    implements _AdminPoAttachmentFilterState {
+  _$AdminPoAttachmentFilterStateImpl(
       {required this.adminPoAttachmentFilter,
       required this.isSubmitting,
       required this.showErrorMessages});
@@ -1348,10 +1353,10 @@ class _$_AdminPoAttachmentFilterState implements _AdminPoAttachmentFilterState {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_AdminPoAttachmentFilterState &&
+            other is _$AdminPoAttachmentFilterStateImpl &&
             (identical(
                     other.adminPoAttachmentFilter, adminPoAttachmentFilter) ||
                 other.adminPoAttachmentFilter == adminPoAttachmentFilter) &&
@@ -1368,17 +1373,19 @@ class _$_AdminPoAttachmentFilterState implements _AdminPoAttachmentFilterState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_AdminPoAttachmentFilterStateCopyWith<_$_AdminPoAttachmentFilterState>
-      get copyWith => __$$_AdminPoAttachmentFilterStateCopyWithImpl<
-          _$_AdminPoAttachmentFilterState>(this, _$identity);
+  _$$AdminPoAttachmentFilterStateImplCopyWith<
+          _$AdminPoAttachmentFilterStateImpl>
+      get copyWith => __$$AdminPoAttachmentFilterStateImplCopyWithImpl<
+          _$AdminPoAttachmentFilterStateImpl>(this, _$identity);
 }
 
 abstract class _AdminPoAttachmentFilterState
     implements AdminPoAttachmentFilterState {
   factory _AdminPoAttachmentFilterState(
-      {required final AdminPoAttachmentFilter adminPoAttachmentFilter,
-      required final bool isSubmitting,
-      required final bool showErrorMessages}) = _$_AdminPoAttachmentFilterState;
+          {required final AdminPoAttachmentFilter adminPoAttachmentFilter,
+          required final bool isSubmitting,
+          required final bool showErrorMessages}) =
+      _$AdminPoAttachmentFilterStateImpl;
 
   @override
   AdminPoAttachmentFilter get adminPoAttachmentFilter;
@@ -1388,6 +1395,7 @@ abstract class _AdminPoAttachmentFilterState
   bool get showErrorMessages;
   @override
   @JsonKey(ignore: true)
-  _$$_AdminPoAttachmentFilterStateCopyWith<_$_AdminPoAttachmentFilterState>
+  _$$AdminPoAttachmentFilterStateImplCopyWith<
+          _$AdminPoAttachmentFilterStateImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

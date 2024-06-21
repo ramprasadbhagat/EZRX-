@@ -12,7 +12,7 @@ part of 'return_material_list.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$ReturnMaterialList {
@@ -66,11 +66,11 @@ class _$ReturnMaterialListCopyWithImpl<$Res, $Val extends ReturnMaterialList>
 }
 
 /// @nodoc
-abstract class _$$_ReturnMaterialListCopyWith<$Res>
+abstract class _$$ReturnMaterialListImplCopyWith<$Res>
     implements $ReturnMaterialListCopyWith<$Res> {
-  factory _$$_ReturnMaterialListCopyWith(_$_ReturnMaterialList value,
-          $Res Function(_$_ReturnMaterialList) then) =
-      __$$_ReturnMaterialListCopyWithImpl<$Res>;
+  factory _$$ReturnMaterialListImplCopyWith(_$ReturnMaterialListImpl value,
+          $Res Function(_$ReturnMaterialListImpl) then) =
+      __$$ReturnMaterialListImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -79,11 +79,11 @@ abstract class _$$_ReturnMaterialListCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_ReturnMaterialListCopyWithImpl<$Res>
-    extends _$ReturnMaterialListCopyWithImpl<$Res, _$_ReturnMaterialList>
-    implements _$$_ReturnMaterialListCopyWith<$Res> {
-  __$$_ReturnMaterialListCopyWithImpl(
-      _$_ReturnMaterialList _value, $Res Function(_$_ReturnMaterialList) _then)
+class __$$ReturnMaterialListImplCopyWithImpl<$Res>
+    extends _$ReturnMaterialListCopyWithImpl<$Res, _$ReturnMaterialListImpl>
+    implements _$$ReturnMaterialListImplCopyWith<$Res> {
+  __$$ReturnMaterialListImplCopyWithImpl(_$ReturnMaterialListImpl _value,
+      $Res Function(_$ReturnMaterialListImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -92,7 +92,7 @@ class __$$_ReturnMaterialListCopyWithImpl<$Res>
     Object? basicInformations = null,
     Object? items = null,
   }) {
-    return _then(_$_ReturnMaterialList(
+    return _then(_$ReturnMaterialListImpl(
       basicInformations: null == basicInformations
           ? _value._basicInformations
           : basicInformations // ignore: cast_nullable_to_non_nullable
@@ -107,8 +107,8 @@ class __$$_ReturnMaterialListCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_ReturnMaterialList extends _ReturnMaterialList {
-  const _$_ReturnMaterialList(
+class _$ReturnMaterialListImpl extends _ReturnMaterialList {
+  const _$ReturnMaterialListImpl(
       {required final List<MaterialBasicInformation> basicInformations,
       required final List<ReturnMaterial> items})
       : _basicInformations = basicInformations,
@@ -138,10 +138,10 @@ class _$_ReturnMaterialList extends _ReturnMaterialList {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ReturnMaterialList &&
+            other is _$ReturnMaterialListImpl &&
             const DeepCollectionEquality()
                 .equals(other._basicInformations, _basicInformations) &&
             const DeepCollectionEquality().equals(other._items, _items));
@@ -156,15 +156,15 @@ class _$_ReturnMaterialList extends _ReturnMaterialList {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ReturnMaterialListCopyWith<_$_ReturnMaterialList> get copyWith =>
-      __$$_ReturnMaterialListCopyWithImpl<_$_ReturnMaterialList>(
+  _$$ReturnMaterialListImplCopyWith<_$ReturnMaterialListImpl> get copyWith =>
+      __$$ReturnMaterialListImplCopyWithImpl<_$ReturnMaterialListImpl>(
           this, _$identity);
 }
 
 abstract class _ReturnMaterialList extends ReturnMaterialList {
   const factory _ReturnMaterialList(
       {required final List<MaterialBasicInformation> basicInformations,
-      required final List<ReturnMaterial> items}) = _$_ReturnMaterialList;
+      required final List<ReturnMaterial> items}) = _$ReturnMaterialListImpl;
   const _ReturnMaterialList._() : super._();
 
   @override
@@ -173,6 +173,6 @@ abstract class _ReturnMaterialList extends ReturnMaterialList {
   List<ReturnMaterial> get items;
   @override
   @JsonKey(ignore: true)
-  _$$_ReturnMaterialListCopyWith<_$_ReturnMaterialList> get copyWith =>
+  _$$ReturnMaterialListImplCopyWith<_$ReturnMaterialListImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

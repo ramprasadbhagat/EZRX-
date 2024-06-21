@@ -12,7 +12,7 @@ part of 'bundle_dto.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 BundleDto _$BundleDtoFromJson(Map<String, dynamic> json) {
   return _BundleDto.fromJson(json);
@@ -106,10 +106,11 @@ class _$BundleDtoCopyWithImpl<$Res, $Val extends BundleDto>
 }
 
 /// @nodoc
-abstract class _$$_BundleDtoCopyWith<$Res> implements $BundleDtoCopyWith<$Res> {
-  factory _$$_BundleDtoCopyWith(
-          _$_BundleDto value, $Res Function(_$_BundleDto) then) =
-      __$$_BundleDtoCopyWithImpl<$Res>;
+abstract class _$$BundleDtoImplCopyWith<$Res>
+    implements $BundleDtoCopyWith<$Res> {
+  factory _$$BundleDtoImplCopyWith(
+          _$BundleDtoImpl value, $Res Function(_$BundleDtoImpl) then) =
+      __$$BundleDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -124,11 +125,11 @@ abstract class _$$_BundleDtoCopyWith<$Res> implements $BundleDtoCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_BundleDtoCopyWithImpl<$Res>
-    extends _$BundleDtoCopyWithImpl<$Res, _$_BundleDto>
-    implements _$$_BundleDtoCopyWith<$Res> {
-  __$$_BundleDtoCopyWithImpl(
-      _$_BundleDto _value, $Res Function(_$_BundleDto) _then)
+class __$$BundleDtoImplCopyWithImpl<$Res>
+    extends _$BundleDtoCopyWithImpl<$Res, _$BundleDtoImpl>
+    implements _$$BundleDtoImplCopyWith<$Res> {
+  __$$BundleDtoImplCopyWithImpl(
+      _$BundleDtoImpl _value, $Res Function(_$BundleDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -141,7 +142,7 @@ class __$$_BundleDtoCopyWithImpl<$Res>
     Object? conditions = null,
     Object? bonusEligible = null,
   }) {
-    return _then(_$_BundleDto(
+    return _then(_$BundleDtoImpl(
       bundleName: null == bundleName
           ? _value.bundleName
           : bundleName // ignore: cast_nullable_to_non_nullable
@@ -172,8 +173,8 @@ class __$$_BundleDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_BundleDto extends _BundleDto {
-  const _$_BundleDto(
+class _$BundleDtoImpl extends _BundleDto {
+  const _$BundleDtoImpl(
       {@JsonKey(name: 'bundleName', defaultValue: '') required this.bundleName,
       @JsonKey(name: 'bundleCode', defaultValue: '') required this.bundleCode,
       @JsonKey(name: 'bundleInformation', defaultValue: <BundleInfoDto>[])
@@ -187,8 +188,8 @@ class _$_BundleDto extends _BundleDto {
         _materials = materials,
         super._();
 
-  factory _$_BundleDto.fromJson(Map<String, dynamic> json) =>
-      _$$_BundleDtoFromJson(json);
+  factory _$BundleDtoImpl.fromJson(Map<String, dynamic> json) =>
+      _$$BundleDtoImplFromJson(json);
 
   @override
   @JsonKey(name: 'bundleName', defaultValue: '')
@@ -228,10 +229,10 @@ class _$_BundleDto extends _BundleDto {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_BundleDto &&
+            other is _$BundleDtoImpl &&
             (identical(other.bundleName, bundleName) ||
                 other.bundleName == bundleName) &&
             (identical(other.bundleCode, bundleCode) ||
@@ -260,12 +261,12 @@ class _$_BundleDto extends _BundleDto {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_BundleDtoCopyWith<_$_BundleDto> get copyWith =>
-      __$$_BundleDtoCopyWithImpl<_$_BundleDto>(this, _$identity);
+  _$$BundleDtoImplCopyWith<_$BundleDtoImpl> get copyWith =>
+      __$$BundleDtoImplCopyWithImpl<_$BundleDtoImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_BundleDtoToJson(
+    return _$$BundleDtoImplToJson(
       this,
     );
   }
@@ -284,11 +285,11 @@ abstract class _BundleDto extends BundleDto {
       @JsonKey(name: 'conditions', defaultValue: '')
       required final String conditions,
       @JsonKey(name: 'bonusEligible', defaultValue: false)
-      required final bool bonusEligible}) = _$_BundleDto;
+      required final bool bonusEligible}) = _$BundleDtoImpl;
   const _BundleDto._() : super._();
 
   factory _BundleDto.fromJson(Map<String, dynamic> json) =
-      _$_BundleDto.fromJson;
+      _$BundleDtoImpl.fromJson;
 
   @override
   @JsonKey(name: 'bundleName', defaultValue: '')
@@ -310,6 +311,6 @@ abstract class _BundleDto extends BundleDto {
   bool get bonusEligible;
   @override
   @JsonKey(ignore: true)
-  _$$_BundleDtoCopyWith<_$_BundleDto> get copyWith =>
+  _$$BundleDtoImplCopyWith<_$BundleDtoImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

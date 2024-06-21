@@ -12,7 +12,7 @@ part of 'update_language_response_dto.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 UpdateLanguageResponseDto _$UpdateLanguageResponseDtoFromJson(
     Map<String, dynamic> json) {
@@ -65,25 +65,25 @@ class _$UpdateLanguageResponseDtoCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_UpdateLanguageResponseDtoCopyWith<$Res>
+abstract class _$$UpdateLanguageResponseDtoImplCopyWith<$Res>
     implements $UpdateLanguageResponseDtoCopyWith<$Res> {
-  factory _$$_UpdateLanguageResponseDtoCopyWith(
-          _$_UpdateLanguageResponseDto value,
-          $Res Function(_$_UpdateLanguageResponseDto) then) =
-      __$$_UpdateLanguageResponseDtoCopyWithImpl<$Res>;
+  factory _$$UpdateLanguageResponseDtoImplCopyWith(
+          _$UpdateLanguageResponseDtoImpl value,
+          $Res Function(_$UpdateLanguageResponseDtoImpl) then) =
+      __$$UpdateLanguageResponseDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({@JsonKey(name: 'success', defaultValue: false) bool success});
 }
 
 /// @nodoc
-class __$$_UpdateLanguageResponseDtoCopyWithImpl<$Res>
+class __$$UpdateLanguageResponseDtoImplCopyWithImpl<$Res>
     extends _$UpdateLanguageResponseDtoCopyWithImpl<$Res,
-        _$_UpdateLanguageResponseDto>
-    implements _$$_UpdateLanguageResponseDtoCopyWith<$Res> {
-  __$$_UpdateLanguageResponseDtoCopyWithImpl(
-      _$_UpdateLanguageResponseDto _value,
-      $Res Function(_$_UpdateLanguageResponseDto) _then)
+        _$UpdateLanguageResponseDtoImpl>
+    implements _$$UpdateLanguageResponseDtoImplCopyWith<$Res> {
+  __$$UpdateLanguageResponseDtoImplCopyWithImpl(
+      _$UpdateLanguageResponseDtoImpl _value,
+      $Res Function(_$UpdateLanguageResponseDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -91,7 +91,7 @@ class __$$_UpdateLanguageResponseDtoCopyWithImpl<$Res>
   $Res call({
     Object? success = null,
   }) {
-    return _then(_$_UpdateLanguageResponseDto(
+    return _then(_$UpdateLanguageResponseDtoImpl(
       success: null == success
           ? _value.success
           : success // ignore: cast_nullable_to_non_nullable
@@ -102,13 +102,13 @@ class __$$_UpdateLanguageResponseDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_UpdateLanguageResponseDto extends _UpdateLanguageResponseDto {
-  _$_UpdateLanguageResponseDto(
+class _$UpdateLanguageResponseDtoImpl extends _UpdateLanguageResponseDto {
+  _$UpdateLanguageResponseDtoImpl(
       {@JsonKey(name: 'success', defaultValue: false) required this.success})
       : super._();
 
-  factory _$_UpdateLanguageResponseDto.fromJson(Map<String, dynamic> json) =>
-      _$$_UpdateLanguageResponseDtoFromJson(json);
+  factory _$UpdateLanguageResponseDtoImpl.fromJson(Map<String, dynamic> json) =>
+      _$$UpdateLanguageResponseDtoImplFromJson(json);
 
   @override
   @JsonKey(name: 'success', defaultValue: false)
@@ -120,10 +120,10 @@ class _$_UpdateLanguageResponseDto extends _UpdateLanguageResponseDto {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_UpdateLanguageResponseDto &&
+            other is _$UpdateLanguageResponseDtoImpl &&
             (identical(other.success, success) || other.success == success));
   }
 
@@ -134,13 +134,13 @@ class _$_UpdateLanguageResponseDto extends _UpdateLanguageResponseDto {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_UpdateLanguageResponseDtoCopyWith<_$_UpdateLanguageResponseDto>
-      get copyWith => __$$_UpdateLanguageResponseDtoCopyWithImpl<
-          _$_UpdateLanguageResponseDto>(this, _$identity);
+  _$$UpdateLanguageResponseDtoImplCopyWith<_$UpdateLanguageResponseDtoImpl>
+      get copyWith => __$$UpdateLanguageResponseDtoImplCopyWithImpl<
+          _$UpdateLanguageResponseDtoImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_UpdateLanguageResponseDtoToJson(
+    return _$$UpdateLanguageResponseDtoImplToJson(
       this,
     );
   }
@@ -149,17 +149,17 @@ class _$_UpdateLanguageResponseDto extends _UpdateLanguageResponseDto {
 abstract class _UpdateLanguageResponseDto extends UpdateLanguageResponseDto {
   factory _UpdateLanguageResponseDto(
       {@JsonKey(name: 'success', defaultValue: false)
-      required final bool success}) = _$_UpdateLanguageResponseDto;
+      required final bool success}) = _$UpdateLanguageResponseDtoImpl;
   _UpdateLanguageResponseDto._() : super._();
 
   factory _UpdateLanguageResponseDto.fromJson(Map<String, dynamic> json) =
-      _$_UpdateLanguageResponseDto.fromJson;
+      _$UpdateLanguageResponseDtoImpl.fromJson;
 
   @override
   @JsonKey(name: 'success', defaultValue: false)
   bool get success;
   @override
   @JsonKey(ignore: true)
-  _$$_UpdateLanguageResponseDtoCopyWith<_$_UpdateLanguageResponseDto>
+  _$$UpdateLanguageResponseDtoImplCopyWith<_$UpdateLanguageResponseDtoImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

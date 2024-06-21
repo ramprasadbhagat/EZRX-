@@ -6,15 +6,15 @@ part of 'faq_item_dto.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_FAQItemDto _$$_FAQItemDtoFromJson(Map<String, dynamic> json) =>
-    _$_FAQItemDto(
+_$FAQItemDtoImpl _$$FAQItemDtoImplFromJson(Map<String, dynamic> json) =>
+    _$FAQItemDtoImpl(
       name: json['name'] as String,
       answer: getAnswer(json, 'answer') as String,
       question: getQuestion(json, 'question') as String,
       displayName: getCategory(json, 'category') as String,
     );
 
-Map<String, dynamic> _$$_FAQItemDtoToJson(_$_FAQItemDto instance) =>
+Map<String, dynamic> _$$FAQItemDtoImplToJson(_$FAQItemDtoImpl instance) =>
     <String, dynamic>{
       'name': instance.name,
       'answer': instance.answer,

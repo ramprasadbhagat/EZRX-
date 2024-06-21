@@ -12,7 +12,7 @@ part of 'customer_address.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$CustomerAddress {
@@ -100,11 +100,11 @@ class _$CustomerAddressCopyWithImpl<$Res, $Val extends CustomerAddress>
 }
 
 /// @nodoc
-abstract class _$$_CustomerAddressCopyWith<$Res>
+abstract class _$$CustomerAddressImplCopyWith<$Res>
     implements $CustomerAddressCopyWith<$Res> {
-  factory _$$_CustomerAddressCopyWith(
-          _$_CustomerAddress value, $Res Function(_$_CustomerAddress) then) =
-      __$$_CustomerAddressCopyWithImpl<$Res>;
+  factory _$$CustomerAddressImplCopyWith(_$CustomerAddressImpl value,
+          $Res Function(_$CustomerAddressImpl) then) =
+      __$$CustomerAddressImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -118,11 +118,11 @@ abstract class _$$_CustomerAddressCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_CustomerAddressCopyWithImpl<$Res>
-    extends _$CustomerAddressCopyWithImpl<$Res, _$_CustomerAddress>
-    implements _$$_CustomerAddressCopyWith<$Res> {
-  __$$_CustomerAddressCopyWithImpl(
-      _$_CustomerAddress _value, $Res Function(_$_CustomerAddress) _then)
+class __$$CustomerAddressImplCopyWithImpl<$Res>
+    extends _$CustomerAddressCopyWithImpl<$Res, _$CustomerAddressImpl>
+    implements _$$CustomerAddressImplCopyWith<$Res> {
+  __$$CustomerAddressImplCopyWithImpl(
+      _$CustomerAddressImpl _value, $Res Function(_$CustomerAddressImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -136,7 +136,7 @@ class __$$_CustomerAddressCopyWithImpl<$Res>
     Object? city1 = null,
     Object? city2 = null,
   }) {
-    return _then(_$_CustomerAddress(
+    return _then(_$CustomerAddressImpl(
       street1: null == street1
           ? _value.street1
           : street1 // ignore: cast_nullable_to_non_nullable
@@ -171,8 +171,8 @@ class __$$_CustomerAddressCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_CustomerAddress extends _CustomerAddress {
-  const _$_CustomerAddress(
+class _$CustomerAddressImpl extends _CustomerAddress {
+  const _$CustomerAddressImpl(
       {required this.street1,
       required this.street2,
       required this.street3,
@@ -198,10 +198,10 @@ class _$_CustomerAddress extends _CustomerAddress {
   final String city2;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_CustomerAddress &&
+            other is _$CustomerAddressImpl &&
             (identical(other.street1, street1) || other.street1 == street1) &&
             (identical(other.street2, street2) || other.street2 == street2) &&
             (identical(other.street3, street3) || other.street3 == street3) &&
@@ -218,8 +218,9 @@ class _$_CustomerAddress extends _CustomerAddress {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_CustomerAddressCopyWith<_$_CustomerAddress> get copyWith =>
-      __$$_CustomerAddressCopyWithImpl<_$_CustomerAddress>(this, _$identity);
+  _$$CustomerAddressImplCopyWith<_$CustomerAddressImpl> get copyWith =>
+      __$$CustomerAddressImplCopyWithImpl<_$CustomerAddressImpl>(
+          this, _$identity);
 }
 
 abstract class _CustomerAddress extends CustomerAddress {
@@ -230,7 +231,7 @@ abstract class _CustomerAddress extends CustomerAddress {
       required final String street4,
       required final String street5,
       required final String city1,
-      required final String city2}) = _$_CustomerAddress;
+      required final String city2}) = _$CustomerAddressImpl;
   const _CustomerAddress._() : super._();
 
   @override
@@ -249,6 +250,6 @@ abstract class _CustomerAddress extends CustomerAddress {
   String get city2;
   @override
   @JsonKey(ignore: true)
-  _$$_CustomerAddressCopyWith<_$_CustomerAddress> get copyWith =>
+  _$$CustomerAddressImplCopyWith<_$CustomerAddressImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -12,7 +12,7 @@ part of 'material_basic_information_dto.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 MaterialBasicInformationDto _$MaterialBasicInformationDtoFromJson(
     Map<String, dynamic> json) {
@@ -84,12 +84,12 @@ class _$MaterialBasicInformationDtoCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_MaterialBasicInformationDtoCopyWith<$Res>
+abstract class _$$MaterialBasicInformationDtoImplCopyWith<$Res>
     implements $MaterialBasicInformationDtoCopyWith<$Res> {
-  factory _$$_MaterialBasicInformationDtoCopyWith(
-          _$_MaterialBasicInformationDto value,
-          $Res Function(_$_MaterialBasicInformationDto) then) =
-      __$$_MaterialBasicInformationDtoCopyWithImpl<$Res>;
+  factory _$$MaterialBasicInformationDtoImplCopyWith(
+          _$MaterialBasicInformationDtoImpl value,
+          $Res Function(_$MaterialBasicInformationDtoImpl) then) =
+      __$$MaterialBasicInformationDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -99,13 +99,13 @@ abstract class _$$_MaterialBasicInformationDtoCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_MaterialBasicInformationDtoCopyWithImpl<$Res>
+class __$$MaterialBasicInformationDtoImplCopyWithImpl<$Res>
     extends _$MaterialBasicInformationDtoCopyWithImpl<$Res,
-        _$_MaterialBasicInformationDto>
-    implements _$$_MaterialBasicInformationDtoCopyWith<$Res> {
-  __$$_MaterialBasicInformationDtoCopyWithImpl(
-      _$_MaterialBasicInformationDto _value,
-      $Res Function(_$_MaterialBasicInformationDto) _then)
+        _$MaterialBasicInformationDtoImpl>
+    implements _$$MaterialBasicInformationDtoImplCopyWith<$Res> {
+  __$$MaterialBasicInformationDtoImplCopyWithImpl(
+      _$MaterialBasicInformationDtoImpl _value,
+      $Res Function(_$MaterialBasicInformationDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -115,7 +115,7 @@ class __$$_MaterialBasicInformationDtoCopyWithImpl<$Res>
     Object? partnerRole = null,
     Object? partnerNumber = null,
   }) {
-    return _then(_$_MaterialBasicInformationDto(
+    return _then(_$MaterialBasicInformationDtoImpl(
       salesOrg: null == salesOrg
           ? _value.salesOrg
           : salesOrg // ignore: cast_nullable_to_non_nullable
@@ -134,16 +134,17 @@ class __$$_MaterialBasicInformationDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_MaterialBasicInformationDto extends _MaterialBasicInformationDto {
-  const _$_MaterialBasicInformationDto(
+class _$MaterialBasicInformationDtoImpl extends _MaterialBasicInformationDto {
+  const _$MaterialBasicInformationDtoImpl(
       {@JsonKey(name: 'salesOrg', defaultValue: '') required this.salesOrg,
       @JsonKey(name: 'partnerRole', defaultValue: '') required this.partnerRole,
       @JsonKey(name: 'partnerNumber', defaultValue: '')
       required this.partnerNumber})
       : super._();
 
-  factory _$_MaterialBasicInformationDto.fromJson(Map<String, dynamic> json) =>
-      _$$_MaterialBasicInformationDtoFromJson(json);
+  factory _$MaterialBasicInformationDtoImpl.fromJson(
+          Map<String, dynamic> json) =>
+      _$$MaterialBasicInformationDtoImplFromJson(json);
 
   @override
   @JsonKey(name: 'salesOrg', defaultValue: '')
@@ -161,10 +162,10 @@ class _$_MaterialBasicInformationDto extends _MaterialBasicInformationDto {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_MaterialBasicInformationDto &&
+            other is _$MaterialBasicInformationDtoImpl &&
             (identical(other.salesOrg, salesOrg) ||
                 other.salesOrg == salesOrg) &&
             (identical(other.partnerRole, partnerRole) ||
@@ -181,13 +182,13 @@ class _$_MaterialBasicInformationDto extends _MaterialBasicInformationDto {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_MaterialBasicInformationDtoCopyWith<_$_MaterialBasicInformationDto>
-      get copyWith => __$$_MaterialBasicInformationDtoCopyWithImpl<
-          _$_MaterialBasicInformationDto>(this, _$identity);
+  _$$MaterialBasicInformationDtoImplCopyWith<_$MaterialBasicInformationDtoImpl>
+      get copyWith => __$$MaterialBasicInformationDtoImplCopyWithImpl<
+          _$MaterialBasicInformationDtoImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_MaterialBasicInformationDtoToJson(
+    return _$$MaterialBasicInformationDtoImplToJson(
       this,
     );
   }
@@ -201,11 +202,11 @@ abstract class _MaterialBasicInformationDto
       @JsonKey(name: 'partnerRole', defaultValue: '')
       required final String partnerRole,
       @JsonKey(name: 'partnerNumber', defaultValue: '')
-      required final String partnerNumber}) = _$_MaterialBasicInformationDto;
+      required final String partnerNumber}) = _$MaterialBasicInformationDtoImpl;
   const _MaterialBasicInformationDto._() : super._();
 
   factory _MaterialBasicInformationDto.fromJson(Map<String, dynamic> json) =
-      _$_MaterialBasicInformationDto.fromJson;
+      _$MaterialBasicInformationDtoImpl.fromJson;
 
   @override
   @JsonKey(name: 'salesOrg', defaultValue: '')
@@ -218,6 +219,6 @@ abstract class _MaterialBasicInformationDto
   String get partnerNumber;
   @override
   @JsonKey(ignore: true)
-  _$$_MaterialBasicInformationDtoCopyWith<_$_MaterialBasicInformationDto>
+  _$$MaterialBasicInformationDtoImplCopyWith<_$MaterialBasicInformationDtoImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

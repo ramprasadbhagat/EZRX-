@@ -12,7 +12,7 @@ part of 'approver_rights.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$ApproverRights {
@@ -65,11 +65,11 @@ class _$ApproverRightsCopyWithImpl<$Res, $Val extends ApproverRights>
 }
 
 /// @nodoc
-abstract class _$$_ApproverRightsCopyWith<$Res>
+abstract class _$$ApproverRightsImplCopyWith<$Res>
     implements $ApproverRightsCopyWith<$Res> {
-  factory _$$_ApproverRightsCopyWith(
-          _$_ApproverRights value, $Res Function(_$_ApproverRights) then) =
-      __$$_ApproverRightsCopyWithImpl<$Res>;
+  factory _$$ApproverRightsImplCopyWith(_$ApproverRightsImpl value,
+          $Res Function(_$ApproverRightsImpl) then) =
+      __$$ApproverRightsImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -77,11 +77,11 @@ abstract class _$$_ApproverRightsCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_ApproverRightsCopyWithImpl<$Res>
-    extends _$ApproverRightsCopyWithImpl<$Res, _$_ApproverRights>
-    implements _$$_ApproverRightsCopyWith<$Res> {
-  __$$_ApproverRightsCopyWithImpl(
-      _$_ApproverRights _value, $Res Function(_$_ApproverRights) _then)
+class __$$ApproverRightsImplCopyWithImpl<$Res>
+    extends _$ApproverRightsCopyWithImpl<$Res, _$ApproverRightsImpl>
+    implements _$$ApproverRightsImplCopyWith<$Res> {
+  __$$ApproverRightsImplCopyWithImpl(
+      _$ApproverRightsImpl _value, $Res Function(_$ApproverRightsImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -90,7 +90,7 @@ class __$$_ApproverRightsCopyWithImpl<$Res>
     Object? userName = null,
     Object? approverRightsList = null,
   }) {
-    return _then(_$_ApproverRights(
+    return _then(_$ApproverRightsImpl(
       userName: null == userName
           ? _value.userName
           : userName // ignore: cast_nullable_to_non_nullable
@@ -105,8 +105,8 @@ class __$$_ApproverRightsCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_ApproverRights extends _ApproverRights {
-  const _$_ApproverRights(
+class _$ApproverRightsImpl extends _ApproverRights {
+  const _$ApproverRightsImpl(
       {required this.userName,
       required final List<ApproverRightsDetails> approverRightsList})
       : _approverRightsList = approverRightsList,
@@ -129,10 +129,10 @@ class _$_ApproverRights extends _ApproverRights {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ApproverRights &&
+            other is _$ApproverRightsImpl &&
             (identical(other.userName, userName) ||
                 other.userName == userName) &&
             const DeepCollectionEquality()
@@ -146,15 +146,16 @@ class _$_ApproverRights extends _ApproverRights {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ApproverRightsCopyWith<_$_ApproverRights> get copyWith =>
-      __$$_ApproverRightsCopyWithImpl<_$_ApproverRights>(this, _$identity);
+  _$$ApproverRightsImplCopyWith<_$ApproverRightsImpl> get copyWith =>
+      __$$ApproverRightsImplCopyWithImpl<_$ApproverRightsImpl>(
+          this, _$identity);
 }
 
 abstract class _ApproverRights extends ApproverRights {
   const factory _ApproverRights(
           {required final Username userName,
           required final List<ApproverRightsDetails> approverRightsList}) =
-      _$_ApproverRights;
+      _$ApproverRightsImpl;
   const _ApproverRights._() : super._();
 
   @override
@@ -163,6 +164,6 @@ abstract class _ApproverRights extends ApproverRights {
   List<ApproverRightsDetails> get approverRightsList;
   @override
   @JsonKey(ignore: true)
-  _$$_ApproverRightsCopyWith<_$_ApproverRights> get copyWith =>
+  _$$ApproverRightsImplCopyWith<_$ApproverRightsImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

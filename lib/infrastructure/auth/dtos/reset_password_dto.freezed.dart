@@ -12,7 +12,7 @@ part of 'reset_password_dto.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 ResetPasswordDto _$ResetPasswordDtoFromJson(Map<String, dynamic> json) {
   return _ResetPasswordDto.fromJson(json);
@@ -72,11 +72,11 @@ class _$ResetPasswordDtoCopyWithImpl<$Res, $Val extends ResetPasswordDto>
 }
 
 /// @nodoc
-abstract class _$$_ResetPasswordDtoCopyWith<$Res>
+abstract class _$$ResetPasswordDtoImplCopyWith<$Res>
     implements $ResetPasswordDtoCopyWith<$Res> {
-  factory _$$_ResetPasswordDtoCopyWith(
-          _$_ResetPasswordDto value, $Res Function(_$_ResetPasswordDto) then) =
-      __$$_ResetPasswordDtoCopyWithImpl<$Res>;
+  factory _$$ResetPasswordDtoImplCopyWith(_$ResetPasswordDtoImpl value,
+          $Res Function(_$ResetPasswordDtoImpl) then) =
+      __$$ResetPasswordDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -85,11 +85,11 @@ abstract class _$$_ResetPasswordDtoCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_ResetPasswordDtoCopyWithImpl<$Res>
-    extends _$ResetPasswordDtoCopyWithImpl<$Res, _$_ResetPasswordDto>
-    implements _$$_ResetPasswordDtoCopyWith<$Res> {
-  __$$_ResetPasswordDtoCopyWithImpl(
-      _$_ResetPasswordDto _value, $Res Function(_$_ResetPasswordDto) _then)
+class __$$ResetPasswordDtoImplCopyWithImpl<$Res>
+    extends _$ResetPasswordDtoCopyWithImpl<$Res, _$ResetPasswordDtoImpl>
+    implements _$$ResetPasswordDtoImplCopyWith<$Res> {
+  __$$ResetPasswordDtoImplCopyWithImpl(_$ResetPasswordDtoImpl _value,
+      $Res Function(_$ResetPasswordDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -98,7 +98,7 @@ class __$$_ResetPasswordDtoCopyWithImpl<$Res>
     Object? success = null,
     Object? status = null,
   }) {
-    return _then(_$_ResetPasswordDto(
+    return _then(_$ResetPasswordDtoImpl(
       success: null == success
           ? _value.success
           : success // ignore: cast_nullable_to_non_nullable
@@ -113,14 +113,14 @@ class __$$_ResetPasswordDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_ResetPasswordDto extends _ResetPasswordDto {
-  const _$_ResetPasswordDto(
+class _$ResetPasswordDtoImpl extends _ResetPasswordDto {
+  const _$ResetPasswordDtoImpl(
       {@JsonKey(name: 'success') required this.success,
       @JsonKey(name: 'status') required this.status})
       : super._();
 
-  factory _$_ResetPasswordDto.fromJson(Map<String, dynamic> json) =>
-      _$$_ResetPasswordDtoFromJson(json);
+  factory _$ResetPasswordDtoImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ResetPasswordDtoImplFromJson(json);
 
   @override
   @JsonKey(name: 'success')
@@ -135,10 +135,10 @@ class _$_ResetPasswordDto extends _ResetPasswordDto {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ResetPasswordDto &&
+            other is _$ResetPasswordDtoImpl &&
             (identical(other.success, success) || other.success == success) &&
             (identical(other.status, status) || other.status == status));
   }
@@ -150,12 +150,13 @@ class _$_ResetPasswordDto extends _ResetPasswordDto {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ResetPasswordDtoCopyWith<_$_ResetPasswordDto> get copyWith =>
-      __$$_ResetPasswordDtoCopyWithImpl<_$_ResetPasswordDto>(this, _$identity);
+  _$$ResetPasswordDtoImplCopyWith<_$ResetPasswordDtoImpl> get copyWith =>
+      __$$ResetPasswordDtoImplCopyWithImpl<_$ResetPasswordDtoImpl>(
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_ResetPasswordDtoToJson(
+    return _$$ResetPasswordDtoImplToJson(
       this,
     );
   }
@@ -165,11 +166,11 @@ abstract class _ResetPasswordDto extends ResetPasswordDto {
   const factory _ResetPasswordDto(
           {@JsonKey(name: 'success') required final bool success,
           @JsonKey(name: 'status') required final String status}) =
-      _$_ResetPasswordDto;
+      _$ResetPasswordDtoImpl;
   const _ResetPasswordDto._() : super._();
 
   factory _ResetPasswordDto.fromJson(Map<String, dynamic> json) =
-      _$_ResetPasswordDto.fromJson;
+      _$ResetPasswordDtoImpl.fromJson;
 
   @override
   @JsonKey(name: 'success')
@@ -179,6 +180,6 @@ abstract class _ResetPasswordDto extends ResetPasswordDto {
   String get status;
   @override
   @JsonKey(ignore: true)
-  _$$_ResetPasswordDtoCopyWith<_$_ResetPasswordDto> get copyWith =>
+  _$$ResetPasswordDtoImplCopyWith<_$ResetPasswordDtoImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

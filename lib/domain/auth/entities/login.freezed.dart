@@ -12,7 +12,7 @@ part of 'login.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$Login {
@@ -77,9 +77,10 @@ class _$LoginCopyWithImpl<$Res, $Val extends Login>
 }
 
 /// @nodoc
-abstract class _$$_LoginCopyWith<$Res> implements $LoginCopyWith<$Res> {
-  factory _$$_LoginCopyWith(_$_Login value, $Res Function(_$_Login) then) =
-      __$$_LoginCopyWithImpl<$Res>;
+abstract class _$$LoginImplCopyWith<$Res> implements $LoginCopyWith<$Res> {
+  factory _$$LoginImplCopyWith(
+          _$LoginImpl value, $Res Function(_$LoginImpl) then) =
+      __$$LoginImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({JWT access, JWT refresh, User user});
@@ -89,9 +90,11 @@ abstract class _$$_LoginCopyWith<$Res> implements $LoginCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_LoginCopyWithImpl<$Res> extends _$LoginCopyWithImpl<$Res, _$_Login>
-    implements _$$_LoginCopyWith<$Res> {
-  __$$_LoginCopyWithImpl(_$_Login _value, $Res Function(_$_Login) _then)
+class __$$LoginImplCopyWithImpl<$Res>
+    extends _$LoginCopyWithImpl<$Res, _$LoginImpl>
+    implements _$$LoginImplCopyWith<$Res> {
+  __$$LoginImplCopyWithImpl(
+      _$LoginImpl _value, $Res Function(_$LoginImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -101,7 +104,7 @@ class __$$_LoginCopyWithImpl<$Res> extends _$LoginCopyWithImpl<$Res, _$_Login>
     Object? refresh = null,
     Object? user = null,
   }) {
-    return _then(_$_Login(
+    return _then(_$LoginImpl(
       access: null == access
           ? _value.access
           : access // ignore: cast_nullable_to_non_nullable
@@ -120,8 +123,8 @@ class __$$_LoginCopyWithImpl<$Res> extends _$LoginCopyWithImpl<$Res, _$_Login>
 
 /// @nodoc
 
-class _$_Login extends _Login {
-  const _$_Login(
+class _$LoginImpl extends _Login {
+  const _$LoginImpl(
       {required this.access, required this.refresh, required this.user})
       : super._();
 
@@ -138,10 +141,10 @@ class _$_Login extends _Login {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Login &&
+            other is _$LoginImpl &&
             (identical(other.access, access) || other.access == access) &&
             (identical(other.refresh, refresh) || other.refresh == refresh) &&
             (identical(other.user, user) || other.user == user));
@@ -153,15 +156,15 @@ class _$_Login extends _Login {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_LoginCopyWith<_$_Login> get copyWith =>
-      __$$_LoginCopyWithImpl<_$_Login>(this, _$identity);
+  _$$LoginImplCopyWith<_$LoginImpl> get copyWith =>
+      __$$LoginImplCopyWithImpl<_$LoginImpl>(this, _$identity);
 }
 
 abstract class _Login extends Login {
   const factory _Login(
       {required final JWT access,
       required final JWT refresh,
-      required final User user}) = _$_Login;
+      required final User user}) = _$LoginImpl;
   const _Login._() : super._();
 
   @override
@@ -172,6 +175,6 @@ abstract class _Login extends Login {
   User get user;
   @override
   @JsonKey(ignore: true)
-  _$$_LoginCopyWith<_$_Login> get copyWith =>
+  _$$LoginImplCopyWith<_$LoginImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

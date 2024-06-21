@@ -12,7 +12,7 @@ part of 'attachment_file_buffer.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$AttachmentFileBuffer {
@@ -64,22 +64,22 @@ class _$AttachmentFileBufferCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_AttachmentFileBufferCopyWith<$Res>
+abstract class _$$AttachmentFileBufferImplCopyWith<$Res>
     implements $AttachmentFileBufferCopyWith<$Res> {
-  factory _$$_AttachmentFileBufferCopyWith(_$_AttachmentFileBuffer value,
-          $Res Function(_$_AttachmentFileBuffer) then) =
-      __$$_AttachmentFileBufferCopyWithImpl<$Res>;
+  factory _$$AttachmentFileBufferImplCopyWith(_$AttachmentFileBufferImpl value,
+          $Res Function(_$AttachmentFileBufferImpl) then) =
+      __$$AttachmentFileBufferImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({Uint8List buffer, String name});
 }
 
 /// @nodoc
-class __$$_AttachmentFileBufferCopyWithImpl<$Res>
-    extends _$AttachmentFileBufferCopyWithImpl<$Res, _$_AttachmentFileBuffer>
-    implements _$$_AttachmentFileBufferCopyWith<$Res> {
-  __$$_AttachmentFileBufferCopyWithImpl(_$_AttachmentFileBuffer _value,
-      $Res Function(_$_AttachmentFileBuffer) _then)
+class __$$AttachmentFileBufferImplCopyWithImpl<$Res>
+    extends _$AttachmentFileBufferCopyWithImpl<$Res, _$AttachmentFileBufferImpl>
+    implements _$$AttachmentFileBufferImplCopyWith<$Res> {
+  __$$AttachmentFileBufferImplCopyWithImpl(_$AttachmentFileBufferImpl _value,
+      $Res Function(_$AttachmentFileBufferImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -88,7 +88,7 @@ class __$$_AttachmentFileBufferCopyWithImpl<$Res>
     Object? buffer = null,
     Object? name = null,
   }) {
-    return _then(_$_AttachmentFileBuffer(
+    return _then(_$AttachmentFileBufferImpl(
       buffer: null == buffer
           ? _value.buffer
           : buffer // ignore: cast_nullable_to_non_nullable
@@ -103,9 +103,9 @@ class __$$_AttachmentFileBufferCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_AttachmentFileBuffer extends _AttachmentFileBuffer
+class _$AttachmentFileBufferImpl extends _AttachmentFileBuffer
     with DiagnosticableTreeMixin {
-  _$_AttachmentFileBuffer({required this.buffer, required this.name})
+  _$AttachmentFileBufferImpl({required this.buffer, required this.name})
       : super._();
 
   @override
@@ -128,10 +128,10 @@ class _$_AttachmentFileBuffer extends _AttachmentFileBuffer
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_AttachmentFileBuffer &&
+            other is _$AttachmentFileBufferImpl &&
             const DeepCollectionEquality().equals(other.buffer, buffer) &&
             (identical(other.name, name) || other.name == name));
   }
@@ -143,15 +143,16 @@ class _$_AttachmentFileBuffer extends _AttachmentFileBuffer
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_AttachmentFileBufferCopyWith<_$_AttachmentFileBuffer> get copyWith =>
-      __$$_AttachmentFileBufferCopyWithImpl<_$_AttachmentFileBuffer>(
-          this, _$identity);
+  _$$AttachmentFileBufferImplCopyWith<_$AttachmentFileBufferImpl>
+      get copyWith =>
+          __$$AttachmentFileBufferImplCopyWithImpl<_$AttachmentFileBufferImpl>(
+              this, _$identity);
 }
 
 abstract class _AttachmentFileBuffer extends AttachmentFileBuffer {
   factory _AttachmentFileBuffer(
       {required final Uint8List buffer,
-      required final String name}) = _$_AttachmentFileBuffer;
+      required final String name}) = _$AttachmentFileBufferImpl;
   _AttachmentFileBuffer._() : super._();
 
   @override
@@ -160,6 +161,6 @@ abstract class _AttachmentFileBuffer extends AttachmentFileBuffer {
   String get name;
   @override
   @JsonKey(ignore: true)
-  _$$_AttachmentFileBufferCopyWith<_$_AttachmentFileBuffer> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$AttachmentFileBufferImplCopyWith<_$AttachmentFileBufferImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }

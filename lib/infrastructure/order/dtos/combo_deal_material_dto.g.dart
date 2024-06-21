@@ -6,9 +6,9 @@ part of 'combo_deal_material_dto.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_ComboDealMaterialSetDto _$$_ComboDealMaterialSetDtoFromJson(
+_$ComboDealMaterialSetDtoImpl _$$ComboDealMaterialSetDtoImplFromJson(
         Map<String, dynamic> json) =>
-    _$_ComboDealMaterialSetDto(
+    _$ComboDealMaterialSetDtoImpl(
       setNo: json['setNo'] as String? ?? '',
       materials: (json['materials'] as List<dynamic>?)
               ?.map((e) =>
@@ -17,16 +17,16 @@ _$_ComboDealMaterialSetDto _$$_ComboDealMaterialSetDtoFromJson(
           [],
     );
 
-Map<String, dynamic> _$$_ComboDealMaterialSetDtoToJson(
-        _$_ComboDealMaterialSetDto instance) =>
+Map<String, dynamic> _$$ComboDealMaterialSetDtoImplToJson(
+        _$ComboDealMaterialSetDtoImpl instance) =>
     <String, dynamic>{
       'setNo': instance.setNo,
       'materials': instance.materials.map((e) => e.toJson()).toList(),
     };
 
-_$_ComboDealMaterialDto _$$_ComboDealMaterialDtoFromJson(
+_$ComboDealMaterialDtoImpl _$$ComboDealMaterialDtoImplFromJson(
         Map<String, dynamic> json) =>
-    _$_ComboDealMaterialDto(
+    _$ComboDealMaterialDtoImpl(
       minQty: _readValue(json, 'minQty') == null
           ? 0
           : const StringToIntConverter()
@@ -41,8 +41,8 @@ _$_ComboDealMaterialDto _$$_ComboDealMaterialDtoFromJson(
       suffix: json['suffix'] as String? ?? '',
     );
 
-Map<String, dynamic> _$$_ComboDealMaterialDtoToJson(
-        _$_ComboDealMaterialDto instance) =>
+Map<String, dynamic> _$$ComboDealMaterialDtoImplToJson(
+        _$ComboDealMaterialDtoImpl instance) =>
     <String, dynamic>{
       'minQty': const StringToIntConverter().toJson(instance.minQty),
       'materialNumber': instance.materialNumber,

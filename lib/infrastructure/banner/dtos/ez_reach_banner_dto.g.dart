@@ -101,7 +101,7 @@ _$EZReachBannerDtoImpl _$$EZReachBannerDtoImplFromJson(
       tabBannerUrl: json['bannerUrl'] as String? ?? '',
       endDate: json['endDate'] as String? ?? '',
       navigationalURL: json['websiteUrl'] as String? ?? '',
-      bannerCountId: json['bannerCountId'] as int? ?? 0,
+      bannerCountId: (json['bannerCountId'] as num?)?.toInt() ?? 0,
       salesRep: json['salesRep'] as bool? ?? false,
       status: json['status'] as String? ?? '',
       customers: json['customers'] as bool? ?? false,

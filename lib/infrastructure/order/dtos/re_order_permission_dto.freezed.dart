@@ -12,7 +12,7 @@ part of 're_order_permission_dto.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 ReOrderPermissionDto _$ReOrderPermissionDtoFromJson(Map<String, dynamic> json) {
   return _ReOrderPermissionDto.fromJson(json);
@@ -67,11 +67,11 @@ class _$ReOrderPermissionDtoCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_ReOrderPermissionDtoCopyWith<$Res>
+abstract class _$$ReOrderPermissionDtoImplCopyWith<$Res>
     implements $ReOrderPermissionDtoCopyWith<$Res> {
-  factory _$$_ReOrderPermissionDtoCopyWith(_$_ReOrderPermissionDto value,
-          $Res Function(_$_ReOrderPermissionDto) then) =
-      __$$_ReOrderPermissionDtoCopyWithImpl<$Res>;
+  factory _$$ReOrderPermissionDtoImplCopyWith(_$ReOrderPermissionDtoImpl value,
+          $Res Function(_$ReOrderPermissionDtoImpl) then) =
+      __$$ReOrderPermissionDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -80,11 +80,11 @@ abstract class _$$_ReOrderPermissionDtoCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_ReOrderPermissionDtoCopyWithImpl<$Res>
-    extends _$ReOrderPermissionDtoCopyWithImpl<$Res, _$_ReOrderPermissionDto>
-    implements _$$_ReOrderPermissionDtoCopyWith<$Res> {
-  __$$_ReOrderPermissionDtoCopyWithImpl(_$_ReOrderPermissionDto _value,
-      $Res Function(_$_ReOrderPermissionDto) _then)
+class __$$ReOrderPermissionDtoImplCopyWithImpl<$Res>
+    extends _$ReOrderPermissionDtoCopyWithImpl<$Res, _$ReOrderPermissionDtoImpl>
+    implements _$$ReOrderPermissionDtoImplCopyWith<$Res> {
+  __$$ReOrderPermissionDtoImplCopyWithImpl(_$ReOrderPermissionDtoImpl _value,
+      $Res Function(_$ReOrderPermissionDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -92,7 +92,7 @@ class __$$_ReOrderPermissionDtoCopyWithImpl<$Res>
   $Res call({
     Object? validMaterials = null,
   }) {
-    return _then(_$_ReOrderPermissionDto(
+    return _then(_$ReOrderPermissionDtoImpl(
       validMaterials: null == validMaterials
           ? _value._validMaterials
           : validMaterials // ignore: cast_nullable_to_non_nullable
@@ -103,15 +103,15 @@ class __$$_ReOrderPermissionDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_ReOrderPermissionDto extends _ReOrderPermissionDto {
-  _$_ReOrderPermissionDto(
+class _$ReOrderPermissionDtoImpl extends _ReOrderPermissionDto {
+  _$ReOrderPermissionDtoImpl(
       {@JsonKey(name: 'materials', defaultValue: <ValidMaterial>[])
       required final List<ValidMaterialDto> validMaterials})
       : _validMaterials = validMaterials,
         super._();
 
-  factory _$_ReOrderPermissionDto.fromJson(Map<String, dynamic> json) =>
-      _$$_ReOrderPermissionDtoFromJson(json);
+  factory _$ReOrderPermissionDtoImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ReOrderPermissionDtoImplFromJson(json);
 
   final List<ValidMaterialDto> _validMaterials;
   @override
@@ -128,10 +128,10 @@ class _$_ReOrderPermissionDto extends _ReOrderPermissionDto {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ReOrderPermissionDto &&
+            other is _$ReOrderPermissionDtoImpl &&
             const DeepCollectionEquality()
                 .equals(other._validMaterials, _validMaterials));
   }
@@ -144,13 +144,14 @@ class _$_ReOrderPermissionDto extends _ReOrderPermissionDto {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ReOrderPermissionDtoCopyWith<_$_ReOrderPermissionDto> get copyWith =>
-      __$$_ReOrderPermissionDtoCopyWithImpl<_$_ReOrderPermissionDto>(
-          this, _$identity);
+  _$$ReOrderPermissionDtoImplCopyWith<_$ReOrderPermissionDtoImpl>
+      get copyWith =>
+          __$$ReOrderPermissionDtoImplCopyWithImpl<_$ReOrderPermissionDtoImpl>(
+              this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_ReOrderPermissionDtoToJson(
+    return _$$ReOrderPermissionDtoImplToJson(
       this,
     );
   }
@@ -160,19 +161,19 @@ abstract class _ReOrderPermissionDto extends ReOrderPermissionDto {
   factory _ReOrderPermissionDto(
           {@JsonKey(name: 'materials', defaultValue: <ValidMaterial>[])
           required final List<ValidMaterialDto> validMaterials}) =
-      _$_ReOrderPermissionDto;
+      _$ReOrderPermissionDtoImpl;
   _ReOrderPermissionDto._() : super._();
 
   factory _ReOrderPermissionDto.fromJson(Map<String, dynamic> json) =
-      _$_ReOrderPermissionDto.fromJson;
+      _$ReOrderPermissionDtoImpl.fromJson;
 
   @override
   @JsonKey(name: 'materials', defaultValue: <ValidMaterial>[])
   List<ValidMaterialDto> get validMaterials;
   @override
   @JsonKey(ignore: true)
-  _$$_ReOrderPermissionDtoCopyWith<_$_ReOrderPermissionDto> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$ReOrderPermissionDtoImplCopyWith<_$ReOrderPermissionDtoImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 ValidMaterialDto _$ValidMaterialDtoFromJson(Map<String, dynamic> json) {
@@ -234,11 +235,11 @@ class _$ValidMaterialDtoCopyWithImpl<$Res, $Val extends ValidMaterialDto>
 }
 
 /// @nodoc
-abstract class _$$_ValidMaterialDtoCopyWith<$Res>
+abstract class _$$ValidMaterialDtoImplCopyWith<$Res>
     implements $ValidMaterialDtoCopyWith<$Res> {
-  factory _$$_ValidMaterialDtoCopyWith(
-          _$_ValidMaterialDto value, $Res Function(_$_ValidMaterialDto) then) =
-      __$$_ValidMaterialDtoCopyWithImpl<$Res>;
+  factory _$$ValidMaterialDtoImplCopyWith(_$ValidMaterialDtoImpl value,
+          $Res Function(_$ValidMaterialDtoImpl) then) =
+      __$$ValidMaterialDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -248,11 +249,11 @@ abstract class _$$_ValidMaterialDtoCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_ValidMaterialDtoCopyWithImpl<$Res>
-    extends _$ValidMaterialDtoCopyWithImpl<$Res, _$_ValidMaterialDto>
-    implements _$$_ValidMaterialDtoCopyWith<$Res> {
-  __$$_ValidMaterialDtoCopyWithImpl(
-      _$_ValidMaterialDto _value, $Res Function(_$_ValidMaterialDto) _then)
+class __$$ValidMaterialDtoImplCopyWithImpl<$Res>
+    extends _$ValidMaterialDtoCopyWithImpl<$Res, _$ValidMaterialDtoImpl>
+    implements _$$ValidMaterialDtoImplCopyWith<$Res> {
+  __$$ValidMaterialDtoImplCopyWithImpl(_$ValidMaterialDtoImpl _value,
+      $Res Function(_$ValidMaterialDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -261,7 +262,7 @@ class __$$_ValidMaterialDtoCopyWithImpl<$Res>
     Object? hidePrice = null,
     Object? materialNumber = null,
   }) {
-    return _then(_$_ValidMaterialDto(
+    return _then(_$ValidMaterialDtoImpl(
       hidePrice: null == hidePrice
           ? _value.hidePrice
           : hidePrice // ignore: cast_nullable_to_non_nullable
@@ -276,15 +277,15 @@ class __$$_ValidMaterialDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_ValidMaterialDto extends _ValidMaterialDto {
-  _$_ValidMaterialDto(
+class _$ValidMaterialDtoImpl extends _ValidMaterialDto {
+  _$ValidMaterialDtoImpl(
       {@JsonKey(name: 'hidePrice', defaultValue: false) required this.hidePrice,
       @JsonKey(name: 'materialNumber', defaultValue: '')
       required this.materialNumber})
       : super._();
 
-  factory _$_ValidMaterialDto.fromJson(Map<String, dynamic> json) =>
-      _$$_ValidMaterialDtoFromJson(json);
+  factory _$ValidMaterialDtoImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ValidMaterialDtoImplFromJson(json);
 
   @override
   @JsonKey(name: 'hidePrice', defaultValue: false)
@@ -299,10 +300,10 @@ class _$_ValidMaterialDto extends _ValidMaterialDto {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ValidMaterialDto &&
+            other is _$ValidMaterialDtoImpl &&
             (identical(other.hidePrice, hidePrice) ||
                 other.hidePrice == hidePrice) &&
             (identical(other.materialNumber, materialNumber) ||
@@ -316,12 +317,13 @@ class _$_ValidMaterialDto extends _ValidMaterialDto {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ValidMaterialDtoCopyWith<_$_ValidMaterialDto> get copyWith =>
-      __$$_ValidMaterialDtoCopyWithImpl<_$_ValidMaterialDto>(this, _$identity);
+  _$$ValidMaterialDtoImplCopyWith<_$ValidMaterialDtoImpl> get copyWith =>
+      __$$ValidMaterialDtoImplCopyWithImpl<_$ValidMaterialDtoImpl>(
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_ValidMaterialDtoToJson(
+    return _$$ValidMaterialDtoImplToJson(
       this,
     );
   }
@@ -332,11 +334,11 @@ abstract class _ValidMaterialDto extends ValidMaterialDto {
       {@JsonKey(name: 'hidePrice', defaultValue: false)
       required final bool hidePrice,
       @JsonKey(name: 'materialNumber', defaultValue: '')
-      required final String materialNumber}) = _$_ValidMaterialDto;
+      required final String materialNumber}) = _$ValidMaterialDtoImpl;
   _ValidMaterialDto._() : super._();
 
   factory _ValidMaterialDto.fromJson(Map<String, dynamic> json) =
-      _$_ValidMaterialDto.fromJson;
+      _$ValidMaterialDtoImpl.fromJson;
 
   @override
   @JsonKey(name: 'hidePrice', defaultValue: false)
@@ -346,6 +348,6 @@ abstract class _ValidMaterialDto extends ValidMaterialDto {
   String get materialNumber;
   @override
   @JsonKey(ignore: true)
-  _$$_ValidMaterialDtoCopyWith<_$_ValidMaterialDto> get copyWith =>
+  _$$ValidMaterialDtoImplCopyWith<_$ValidMaterialDtoImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

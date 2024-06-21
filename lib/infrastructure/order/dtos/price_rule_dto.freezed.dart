@@ -12,7 +12,7 @@ part of 'price_rule_dto.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 PriceRuleDto _$PriceRuleDtoFromJson(Map<String, dynamic> json) {
   return _PriceRuleDto.fromJson(json);
@@ -52,24 +52,17 @@ abstract class $PriceRuleDtoCopyWith<$Res> {
       _$PriceRuleDtoCopyWithImpl<$Res, PriceRuleDto>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'type', defaultValue: '')
-          String type,
-      @JsonKey(name: 'rate', defaultValue: 0)
-          double rate,
-      @JsonKey(name: 'conditions', defaultValue: '')
-          String condition,
-      @JsonKey(name: 'tieredRules')
-          TieredRulesDto tieredRules,
-      @JsonKey(name: 'bonusEligible', defaultValue: false)
-          bool bonusEligible,
+      {@JsonKey(name: 'type', defaultValue: '') String type,
+      @JsonKey(name: 'rate', defaultValue: 0) double rate,
+      @JsonKey(name: 'conditions', defaultValue: '') String condition,
+      @JsonKey(name: 'tieredRules') TieredRulesDto tieredRules,
+      @JsonKey(name: 'bonusEligible', defaultValue: false) bool bonusEligible,
       @JsonKey(name: 'conditionNumber', defaultValue: '')
-          String conditionNumber,
-      @JsonKey(name: 'overriddenBy', defaultValue: '')
-          String overriddenBy,
-      @JsonKey(name: 'maxQuota', defaultValue: '')
-          String maxQuota,
+      String conditionNumber,
+      @JsonKey(name: 'overriddenBy', defaultValue: '') String overriddenBy,
+      @JsonKey(name: 'maxQuota', defaultValue: '') String maxQuota,
       @JsonKey(name: 'remainingQuota', defaultValue: '')
-          String remainingQuota});
+      String remainingQuota});
 
   $TieredRulesDtoCopyWith<$Res> get tieredRules;
 }
@@ -147,43 +140,36 @@ class _$PriceRuleDtoCopyWithImpl<$Res, $Val extends PriceRuleDto>
 }
 
 /// @nodoc
-abstract class _$$_PriceRuleDtoCopyWith<$Res>
+abstract class _$$PriceRuleDtoImplCopyWith<$Res>
     implements $PriceRuleDtoCopyWith<$Res> {
-  factory _$$_PriceRuleDtoCopyWith(
-          _$_PriceRuleDto value, $Res Function(_$_PriceRuleDto) then) =
-      __$$_PriceRuleDtoCopyWithImpl<$Res>;
+  factory _$$PriceRuleDtoImplCopyWith(
+          _$PriceRuleDtoImpl value, $Res Function(_$PriceRuleDtoImpl) then) =
+      __$$PriceRuleDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'type', defaultValue: '')
-          String type,
-      @JsonKey(name: 'rate', defaultValue: 0)
-          double rate,
-      @JsonKey(name: 'conditions', defaultValue: '')
-          String condition,
-      @JsonKey(name: 'tieredRules')
-          TieredRulesDto tieredRules,
-      @JsonKey(name: 'bonusEligible', defaultValue: false)
-          bool bonusEligible,
+      {@JsonKey(name: 'type', defaultValue: '') String type,
+      @JsonKey(name: 'rate', defaultValue: 0) double rate,
+      @JsonKey(name: 'conditions', defaultValue: '') String condition,
+      @JsonKey(name: 'tieredRules') TieredRulesDto tieredRules,
+      @JsonKey(name: 'bonusEligible', defaultValue: false) bool bonusEligible,
       @JsonKey(name: 'conditionNumber', defaultValue: '')
-          String conditionNumber,
-      @JsonKey(name: 'overriddenBy', defaultValue: '')
-          String overriddenBy,
-      @JsonKey(name: 'maxQuota', defaultValue: '')
-          String maxQuota,
+      String conditionNumber,
+      @JsonKey(name: 'overriddenBy', defaultValue: '') String overriddenBy,
+      @JsonKey(name: 'maxQuota', defaultValue: '') String maxQuota,
       @JsonKey(name: 'remainingQuota', defaultValue: '')
-          String remainingQuota});
+      String remainingQuota});
 
   @override
   $TieredRulesDtoCopyWith<$Res> get tieredRules;
 }
 
 /// @nodoc
-class __$$_PriceRuleDtoCopyWithImpl<$Res>
-    extends _$PriceRuleDtoCopyWithImpl<$Res, _$_PriceRuleDto>
-    implements _$$_PriceRuleDtoCopyWith<$Res> {
-  __$$_PriceRuleDtoCopyWithImpl(
-      _$_PriceRuleDto _value, $Res Function(_$_PriceRuleDto) _then)
+class __$$PriceRuleDtoImplCopyWithImpl<$Res>
+    extends _$PriceRuleDtoCopyWithImpl<$Res, _$PriceRuleDtoImpl>
+    implements _$$PriceRuleDtoImplCopyWith<$Res> {
+  __$$PriceRuleDtoImplCopyWithImpl(
+      _$PriceRuleDtoImpl _value, $Res Function(_$PriceRuleDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -199,7 +185,7 @@ class __$$_PriceRuleDtoCopyWithImpl<$Res>
     Object? maxQuota = null,
     Object? remainingQuota = null,
   }) {
-    return _then(_$_PriceRuleDto(
+    return _then(_$PriceRuleDtoImpl(
       type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
@@ -242,30 +228,25 @@ class __$$_PriceRuleDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_PriceRuleDto extends _PriceRuleDto {
-  const _$_PriceRuleDto(
-      {@JsonKey(name: 'type', defaultValue: '')
-          required this.type,
-      @JsonKey(name: 'rate', defaultValue: 0)
-          required this.rate,
-      @JsonKey(name: 'conditions', defaultValue: '')
-          required this.condition,
-      @JsonKey(name: 'tieredRules')
-          this.tieredRules = TieredRulesDto.empty,
+class _$PriceRuleDtoImpl extends _PriceRuleDto {
+  const _$PriceRuleDtoImpl(
+      {@JsonKey(name: 'type', defaultValue: '') required this.type,
+      @JsonKey(name: 'rate', defaultValue: 0) required this.rate,
+      @JsonKey(name: 'conditions', defaultValue: '') required this.condition,
+      @JsonKey(name: 'tieredRules') this.tieredRules = TieredRulesDto.empty,
       @JsonKey(name: 'bonusEligible', defaultValue: false)
-          required this.bonusEligible,
+      required this.bonusEligible,
       @JsonKey(name: 'conditionNumber', defaultValue: '')
-          required this.conditionNumber,
+      required this.conditionNumber,
       @JsonKey(name: 'overriddenBy', defaultValue: '')
-          required this.overriddenBy,
-      @JsonKey(name: 'maxQuota', defaultValue: '')
-          required this.maxQuota,
+      required this.overriddenBy,
+      @JsonKey(name: 'maxQuota', defaultValue: '') required this.maxQuota,
       @JsonKey(name: 'remainingQuota', defaultValue: '')
-          required this.remainingQuota})
+      required this.remainingQuota})
       : super._();
 
-  factory _$_PriceRuleDto.fromJson(Map<String, dynamic> json) =>
-      _$$_PriceRuleDtoFromJson(json);
+  factory _$PriceRuleDtoImpl.fromJson(Map<String, dynamic> json) =>
+      _$$PriceRuleDtoImplFromJson(json);
 
   @override
   @JsonKey(name: 'type', defaultValue: '')
@@ -301,10 +282,10 @@ class _$_PriceRuleDto extends _PriceRuleDto {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_PriceRuleDto &&
+            other is _$PriceRuleDtoImpl &&
             (identical(other.type, type) || other.type == type) &&
             (identical(other.rate, rate) || other.rate == rate) &&
             (identical(other.condition, condition) ||
@@ -340,12 +321,12 @@ class _$_PriceRuleDto extends _PriceRuleDto {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_PriceRuleDtoCopyWith<_$_PriceRuleDto> get copyWith =>
-      __$$_PriceRuleDtoCopyWithImpl<_$_PriceRuleDto>(this, _$identity);
+  _$$PriceRuleDtoImplCopyWith<_$PriceRuleDtoImpl> get copyWith =>
+      __$$PriceRuleDtoImplCopyWithImpl<_$PriceRuleDtoImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_PriceRuleDtoToJson(
+    return _$$PriceRuleDtoImplToJson(
       this,
     );
   }
@@ -353,28 +334,25 @@ class _$_PriceRuleDto extends _PriceRuleDto {
 
 abstract class _PriceRuleDto extends PriceRuleDto {
   const factory _PriceRuleDto(
-      {@JsonKey(name: 'type', defaultValue: '')
-          required final String type,
-      @JsonKey(name: 'rate', defaultValue: 0)
-          required final double rate,
+      {@JsonKey(name: 'type', defaultValue: '') required final String type,
+      @JsonKey(name: 'rate', defaultValue: 0) required final double rate,
       @JsonKey(name: 'conditions', defaultValue: '')
-          required final String condition,
-      @JsonKey(name: 'tieredRules')
-          final TieredRulesDto tieredRules,
+      required final String condition,
+      @JsonKey(name: 'tieredRules') final TieredRulesDto tieredRules,
       @JsonKey(name: 'bonusEligible', defaultValue: false)
-          required final bool bonusEligible,
+      required final bool bonusEligible,
       @JsonKey(name: 'conditionNumber', defaultValue: '')
-          required final String conditionNumber,
+      required final String conditionNumber,
       @JsonKey(name: 'overriddenBy', defaultValue: '')
-          required final String overriddenBy,
+      required final String overriddenBy,
       @JsonKey(name: 'maxQuota', defaultValue: '')
-          required final String maxQuota,
+      required final String maxQuota,
       @JsonKey(name: 'remainingQuota', defaultValue: '')
-          required final String remainingQuota}) = _$_PriceRuleDto;
+      required final String remainingQuota}) = _$PriceRuleDtoImpl;
   const _PriceRuleDto._() : super._();
 
   factory _PriceRuleDto.fromJson(Map<String, dynamic> json) =
-      _$_PriceRuleDto.fromJson;
+      _$PriceRuleDtoImpl.fromJson;
 
   @override
   @JsonKey(name: 'type', defaultValue: '')
@@ -405,7 +383,7 @@ abstract class _PriceRuleDto extends PriceRuleDto {
   String get remainingQuota;
   @override
   @JsonKey(ignore: true)
-  _$$_PriceRuleDtoCopyWith<_$_PriceRuleDto> get copyWith =>
+  _$$PriceRuleDtoImplCopyWith<_$PriceRuleDtoImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -433,10 +411,9 @@ abstract class $TieredRulesDtoCopyWith<$Res> {
       _$TieredRulesDtoCopyWithImpl<$Res, TieredRulesDto>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'tier', defaultValue: '')
-          String tier,
+      {@JsonKey(name: 'tier', defaultValue: '') String tier,
       @JsonKey(name: 'ruleTier', defaultValue: <RuleTierDto>[])
-          List<RuleTierDto> ruleTier});
+      List<RuleTierDto> ruleTier});
 }
 
 /// @nodoc
@@ -469,26 +446,25 @@ class _$TieredRulesDtoCopyWithImpl<$Res, $Val extends TieredRulesDto>
 }
 
 /// @nodoc
-abstract class _$$_TieredRulesDtoCopyWith<$Res>
+abstract class _$$TieredRulesDtoImplCopyWith<$Res>
     implements $TieredRulesDtoCopyWith<$Res> {
-  factory _$$_TieredRulesDtoCopyWith(
-          _$_TieredRulesDto value, $Res Function(_$_TieredRulesDto) then) =
-      __$$_TieredRulesDtoCopyWithImpl<$Res>;
+  factory _$$TieredRulesDtoImplCopyWith(_$TieredRulesDtoImpl value,
+          $Res Function(_$TieredRulesDtoImpl) then) =
+      __$$TieredRulesDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'tier', defaultValue: '')
-          String tier,
+      {@JsonKey(name: 'tier', defaultValue: '') String tier,
       @JsonKey(name: 'ruleTier', defaultValue: <RuleTierDto>[])
-          List<RuleTierDto> ruleTier});
+      List<RuleTierDto> ruleTier});
 }
 
 /// @nodoc
-class __$$_TieredRulesDtoCopyWithImpl<$Res>
-    extends _$TieredRulesDtoCopyWithImpl<$Res, _$_TieredRulesDto>
-    implements _$$_TieredRulesDtoCopyWith<$Res> {
-  __$$_TieredRulesDtoCopyWithImpl(
-      _$_TieredRulesDto _value, $Res Function(_$_TieredRulesDto) _then)
+class __$$TieredRulesDtoImplCopyWithImpl<$Res>
+    extends _$TieredRulesDtoCopyWithImpl<$Res, _$TieredRulesDtoImpl>
+    implements _$$TieredRulesDtoImplCopyWith<$Res> {
+  __$$TieredRulesDtoImplCopyWithImpl(
+      _$TieredRulesDtoImpl _value, $Res Function(_$TieredRulesDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -497,7 +473,7 @@ class __$$_TieredRulesDtoCopyWithImpl<$Res>
     Object? tier = null,
     Object? ruleTier = null,
   }) {
-    return _then(_$_TieredRulesDto(
+    return _then(_$TieredRulesDtoImpl(
       tier: null == tier
           ? _value.tier
           : tier // ignore: cast_nullable_to_non_nullable
@@ -512,17 +488,16 @@ class __$$_TieredRulesDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_TieredRulesDto extends _TieredRulesDto {
-  const _$_TieredRulesDto(
-      {@JsonKey(name: 'tier', defaultValue: '')
-          required this.tier,
+class _$TieredRulesDtoImpl extends _TieredRulesDto {
+  const _$TieredRulesDtoImpl(
+      {@JsonKey(name: 'tier', defaultValue: '') required this.tier,
       @JsonKey(name: 'ruleTier', defaultValue: <RuleTierDto>[])
-          required final List<RuleTierDto> ruleTier})
+      required final List<RuleTierDto> ruleTier})
       : _ruleTier = ruleTier,
         super._();
 
-  factory _$_TieredRulesDto.fromJson(Map<String, dynamic> json) =>
-      _$$_TieredRulesDtoFromJson(json);
+  factory _$TieredRulesDtoImpl.fromJson(Map<String, dynamic> json) =>
+      _$$TieredRulesDtoImplFromJson(json);
 
   @override
   @JsonKey(name: 'tier', defaultValue: '')
@@ -542,10 +517,10 @@ class _$_TieredRulesDto extends _TieredRulesDto {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_TieredRulesDto &&
+            other is _$TieredRulesDtoImpl &&
             (identical(other.tier, tier) || other.tier == tier) &&
             const DeepCollectionEquality().equals(other._ruleTier, _ruleTier));
   }
@@ -558,12 +533,13 @@ class _$_TieredRulesDto extends _TieredRulesDto {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_TieredRulesDtoCopyWith<_$_TieredRulesDto> get copyWith =>
-      __$$_TieredRulesDtoCopyWithImpl<_$_TieredRulesDto>(this, _$identity);
+  _$$TieredRulesDtoImplCopyWith<_$TieredRulesDtoImpl> get copyWith =>
+      __$$TieredRulesDtoImplCopyWithImpl<_$TieredRulesDtoImpl>(
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_TieredRulesDtoToJson(
+    return _$$TieredRulesDtoImplToJson(
       this,
     );
   }
@@ -571,14 +547,13 @@ class _$_TieredRulesDto extends _TieredRulesDto {
 
 abstract class _TieredRulesDto extends TieredRulesDto {
   const factory _TieredRulesDto(
-      {@JsonKey(name: 'tier', defaultValue: '')
-          required final String tier,
+      {@JsonKey(name: 'tier', defaultValue: '') required final String tier,
       @JsonKey(name: 'ruleTier', defaultValue: <RuleTierDto>[])
-          required final List<RuleTierDto> ruleTier}) = _$_TieredRulesDto;
+      required final List<RuleTierDto> ruleTier}) = _$TieredRulesDtoImpl;
   const _TieredRulesDto._() : super._();
 
   factory _TieredRulesDto.fromJson(Map<String, dynamic> json) =
-      _$_TieredRulesDto.fromJson;
+      _$TieredRulesDtoImpl.fromJson;
 
   @override
   @JsonKey(name: 'tier', defaultValue: '')
@@ -588,7 +563,7 @@ abstract class _TieredRulesDto extends TieredRulesDto {
   List<RuleTierDto> get ruleTier;
   @override
   @JsonKey(ignore: true)
-  _$$_TieredRulesDtoCopyWith<_$_TieredRulesDto> get copyWith =>
+  _$$TieredRulesDtoImplCopyWith<_$TieredRulesDtoImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -650,11 +625,11 @@ class _$RuleTierDtoCopyWithImpl<$Res, $Val extends RuleTierDto>
 }
 
 /// @nodoc
-abstract class _$$_RuleTierDtoCopyWith<$Res>
+abstract class _$$RuleTierDtoImplCopyWith<$Res>
     implements $RuleTierDtoCopyWith<$Res> {
-  factory _$$_RuleTierDtoCopyWith(
-          _$_RuleTierDto value, $Res Function(_$_RuleTierDto) then) =
-      __$$_RuleTierDtoCopyWithImpl<$Res>;
+  factory _$$RuleTierDtoImplCopyWith(
+          _$RuleTierDtoImpl value, $Res Function(_$RuleTierDtoImpl) then) =
+      __$$RuleTierDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -663,11 +638,11 @@ abstract class _$$_RuleTierDtoCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_RuleTierDtoCopyWithImpl<$Res>
-    extends _$RuleTierDtoCopyWithImpl<$Res, _$_RuleTierDto>
-    implements _$$_RuleTierDtoCopyWith<$Res> {
-  __$$_RuleTierDtoCopyWithImpl(
-      _$_RuleTierDto _value, $Res Function(_$_RuleTierDto) _then)
+class __$$RuleTierDtoImplCopyWithImpl<$Res>
+    extends _$RuleTierDtoCopyWithImpl<$Res, _$RuleTierDtoImpl>
+    implements _$$RuleTierDtoImplCopyWith<$Res> {
+  __$$RuleTierDtoImplCopyWithImpl(
+      _$RuleTierDtoImpl _value, $Res Function(_$RuleTierDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -676,7 +651,7 @@ class __$$_RuleTierDtoCopyWithImpl<$Res>
     Object? rate = null,
     Object? quantity = null,
   }) {
-    return _then(_$_RuleTierDto(
+    return _then(_$RuleTierDtoImpl(
       rate: null == rate
           ? _value.rate
           : rate // ignore: cast_nullable_to_non_nullable
@@ -691,14 +666,14 @@ class __$$_RuleTierDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_RuleTierDto extends _RuleTierDto {
-  const _$_RuleTierDto(
+class _$RuleTierDtoImpl extends _RuleTierDto {
+  const _$RuleTierDtoImpl(
       {@JsonKey(name: 'rate', defaultValue: 0) required this.rate,
       @JsonKey(name: 'quantity', defaultValue: 0) required this.quantity})
       : super._();
 
-  factory _$_RuleTierDto.fromJson(Map<String, dynamic> json) =>
-      _$$_RuleTierDtoFromJson(json);
+  factory _$RuleTierDtoImpl.fromJson(Map<String, dynamic> json) =>
+      _$$RuleTierDtoImplFromJson(json);
 
   @override
   @JsonKey(name: 'rate', defaultValue: 0)
@@ -713,10 +688,10 @@ class _$_RuleTierDto extends _RuleTierDto {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_RuleTierDto &&
+            other is _$RuleTierDtoImpl &&
             (identical(other.rate, rate) || other.rate == rate) &&
             (identical(other.quantity, quantity) ||
                 other.quantity == quantity));
@@ -729,12 +704,12 @@ class _$_RuleTierDto extends _RuleTierDto {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_RuleTierDtoCopyWith<_$_RuleTierDto> get copyWith =>
-      __$$_RuleTierDtoCopyWithImpl<_$_RuleTierDto>(this, _$identity);
+  _$$RuleTierDtoImplCopyWith<_$RuleTierDtoImpl> get copyWith =>
+      __$$RuleTierDtoImplCopyWithImpl<_$RuleTierDtoImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_RuleTierDtoToJson(
+    return _$$RuleTierDtoImplToJson(
       this,
     );
   }
@@ -742,14 +717,13 @@ class _$_RuleTierDto extends _RuleTierDto {
 
 abstract class _RuleTierDto extends RuleTierDto {
   const factory _RuleTierDto(
-      {@JsonKey(name: 'rate', defaultValue: 0)
-          required final double rate,
+      {@JsonKey(name: 'rate', defaultValue: 0) required final double rate,
       @JsonKey(name: 'quantity', defaultValue: 0)
-          required final double quantity}) = _$_RuleTierDto;
+      required final double quantity}) = _$RuleTierDtoImpl;
   const _RuleTierDto._() : super._();
 
   factory _RuleTierDto.fromJson(Map<String, dynamic> json) =
-      _$_RuleTierDto.fromJson;
+      _$RuleTierDtoImpl.fromJson;
 
   @override
   @JsonKey(name: 'rate', defaultValue: 0)
@@ -759,6 +733,6 @@ abstract class _RuleTierDto extends RuleTierDto {
   double get quantity;
   @override
   @JsonKey(ignore: true)
-  _$$_RuleTierDtoCopyWith<_$_RuleTierDto> get copyWith =>
+  _$$RuleTierDtoImplCopyWith<_$RuleTierDtoImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

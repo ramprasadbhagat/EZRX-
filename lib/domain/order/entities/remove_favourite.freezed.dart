@@ -12,7 +12,7 @@ part of 'remove_favourite.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$RemoveFavourite {
@@ -58,22 +58,22 @@ class _$RemoveFavouriteCopyWithImpl<$Res, $Val extends RemoveFavourite>
 }
 
 /// @nodoc
-abstract class _$$_RemoveFavouriteCopyWith<$Res>
+abstract class _$$RemoveFavouriteImplCopyWith<$Res>
     implements $RemoveFavouriteCopyWith<$Res> {
-  factory _$$_RemoveFavouriteCopyWith(
-          _$_RemoveFavourite value, $Res Function(_$_RemoveFavourite) then) =
-      __$$_RemoveFavouriteCopyWithImpl<$Res>;
+  factory _$$RemoveFavouriteImplCopyWith(_$RemoveFavouriteImpl value,
+          $Res Function(_$RemoveFavouriteImpl) then) =
+      __$$RemoveFavouriteImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({FavouriteResponse removeFavouriteMaterial});
 }
 
 /// @nodoc
-class __$$_RemoveFavouriteCopyWithImpl<$Res>
-    extends _$RemoveFavouriteCopyWithImpl<$Res, _$_RemoveFavourite>
-    implements _$$_RemoveFavouriteCopyWith<$Res> {
-  __$$_RemoveFavouriteCopyWithImpl(
-      _$_RemoveFavourite _value, $Res Function(_$_RemoveFavourite) _then)
+class __$$RemoveFavouriteImplCopyWithImpl<$Res>
+    extends _$RemoveFavouriteCopyWithImpl<$Res, _$RemoveFavouriteImpl>
+    implements _$$RemoveFavouriteImplCopyWith<$Res> {
+  __$$RemoveFavouriteImplCopyWithImpl(
+      _$RemoveFavouriteImpl _value, $Res Function(_$RemoveFavouriteImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -81,7 +81,7 @@ class __$$_RemoveFavouriteCopyWithImpl<$Res>
   $Res call({
     Object? removeFavouriteMaterial = null,
   }) {
-    return _then(_$_RemoveFavourite(
+    return _then(_$RemoveFavouriteImpl(
       removeFavouriteMaterial: null == removeFavouriteMaterial
           ? _value.removeFavouriteMaterial
           : removeFavouriteMaterial // ignore: cast_nullable_to_non_nullable
@@ -92,8 +92,9 @@ class __$$_RemoveFavouriteCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_RemoveFavourite extends _RemoveFavourite {
-  const _$_RemoveFavourite({required this.removeFavouriteMaterial}) : super._();
+class _$RemoveFavouriteImpl extends _RemoveFavourite {
+  const _$RemoveFavouriteImpl({required this.removeFavouriteMaterial})
+      : super._();
 
   @override
   final FavouriteResponse removeFavouriteMaterial;
@@ -104,10 +105,10 @@ class _$_RemoveFavourite extends _RemoveFavourite {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_RemoveFavourite &&
+            other is _$RemoveFavouriteImpl &&
             (identical(
                     other.removeFavouriteMaterial, removeFavouriteMaterial) ||
                 other.removeFavouriteMaterial == removeFavouriteMaterial));
@@ -119,20 +120,21 @@ class _$_RemoveFavourite extends _RemoveFavourite {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_RemoveFavouriteCopyWith<_$_RemoveFavourite> get copyWith =>
-      __$$_RemoveFavouriteCopyWithImpl<_$_RemoveFavourite>(this, _$identity);
+  _$$RemoveFavouriteImplCopyWith<_$RemoveFavouriteImpl> get copyWith =>
+      __$$RemoveFavouriteImplCopyWithImpl<_$RemoveFavouriteImpl>(
+          this, _$identity);
 }
 
 abstract class _RemoveFavourite extends RemoveFavourite {
   const factory _RemoveFavourite(
           {required final FavouriteResponse removeFavouriteMaterial}) =
-      _$_RemoveFavourite;
+      _$RemoveFavouriteImpl;
   const _RemoveFavourite._() : super._();
 
   @override
   FavouriteResponse get removeFavouriteMaterial;
   @override
   @JsonKey(ignore: true)
-  _$$_RemoveFavouriteCopyWith<_$_RemoveFavourite> get copyWith =>
+  _$$RemoveFavouriteImplCopyWith<_$RemoveFavouriteImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

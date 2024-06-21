@@ -12,7 +12,7 @@ part of 'full_name.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$FullName {
@@ -62,21 +62,22 @@ class _$FullNameCopyWithImpl<$Res, $Val extends FullName>
 }
 
 /// @nodoc
-abstract class _$$_FullNameCopyWith<$Res> implements $FullNameCopyWith<$Res> {
-  factory _$$_FullNameCopyWith(
-          _$_FullName value, $Res Function(_$_FullName) then) =
-      __$$_FullNameCopyWithImpl<$Res>;
+abstract class _$$FullNameImplCopyWith<$Res>
+    implements $FullNameCopyWith<$Res> {
+  factory _$$FullNameImplCopyWith(
+          _$FullNameImpl value, $Res Function(_$FullNameImpl) then) =
+      __$$FullNameImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String firstName, String lastName});
 }
 
 /// @nodoc
-class __$$_FullNameCopyWithImpl<$Res>
-    extends _$FullNameCopyWithImpl<$Res, _$_FullName>
-    implements _$$_FullNameCopyWith<$Res> {
-  __$$_FullNameCopyWithImpl(
-      _$_FullName _value, $Res Function(_$_FullName) _then)
+class __$$FullNameImplCopyWithImpl<$Res>
+    extends _$FullNameCopyWithImpl<$Res, _$FullNameImpl>
+    implements _$$FullNameImplCopyWith<$Res> {
+  __$$FullNameImplCopyWithImpl(
+      _$FullNameImpl _value, $Res Function(_$FullNameImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -85,7 +86,7 @@ class __$$_FullNameCopyWithImpl<$Res>
     Object? firstName = null,
     Object? lastName = null,
   }) {
-    return _then(_$_FullName(
+    return _then(_$FullNameImpl(
       firstName: null == firstName
           ? _value.firstName
           : firstName // ignore: cast_nullable_to_non_nullable
@@ -100,8 +101,8 @@ class __$$_FullNameCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_FullName extends _FullName {
-  const _$_FullName({required this.firstName, required this.lastName})
+class _$FullNameImpl extends _FullName {
+  const _$FullNameImpl({required this.firstName, required this.lastName})
       : super._();
 
   @override
@@ -110,10 +111,10 @@ class _$_FullName extends _FullName {
   final String lastName;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_FullName &&
+            other is _$FullNameImpl &&
             (identical(other.firstName, firstName) ||
                 other.firstName == firstName) &&
             (identical(other.lastName, lastName) ||
@@ -126,14 +127,14 @@ class _$_FullName extends _FullName {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_FullNameCopyWith<_$_FullName> get copyWith =>
-      __$$_FullNameCopyWithImpl<_$_FullName>(this, _$identity);
+  _$$FullNameImplCopyWith<_$FullNameImpl> get copyWith =>
+      __$$FullNameImplCopyWithImpl<_$FullNameImpl>(this, _$identity);
 }
 
 abstract class _FullName extends FullName {
   const factory _FullName(
       {required final String firstName,
-      required final String lastName}) = _$_FullName;
+      required final String lastName}) = _$FullNameImpl;
   const _FullName._() : super._();
 
   @override
@@ -142,6 +143,6 @@ abstract class _FullName extends FullName {
   String get lastName;
   @override
   @JsonKey(ignore: true)
-  _$$_FullNameCopyWith<_$_FullName> get copyWith =>
+  _$$FullNameImplCopyWith<_$FullNameImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

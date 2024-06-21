@@ -12,7 +12,7 @@ part of 'notification_settings.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$NotificationSettings {
@@ -76,11 +76,11 @@ class _$NotificationSettingsCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_NotificationSettingsCopyWith<$Res>
+abstract class _$$NotificationSettingsImplCopyWith<$Res>
     implements $NotificationSettingsCopyWith<$Res> {
-  factory _$$_NotificationSettingsCopyWith(_$_NotificationSettings value,
-          $Res Function(_$_NotificationSettings) then) =
-      __$$_NotificationSettingsCopyWithImpl<$Res>;
+  factory _$$NotificationSettingsImplCopyWith(_$NotificationSettingsImpl value,
+          $Res Function(_$NotificationSettingsImpl) then) =
+      __$$NotificationSettingsImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -90,11 +90,11 @@ abstract class _$$_NotificationSettingsCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_NotificationSettingsCopyWithImpl<$Res>
-    extends _$NotificationSettingsCopyWithImpl<$Res, _$_NotificationSettings>
-    implements _$$_NotificationSettingsCopyWith<$Res> {
-  __$$_NotificationSettingsCopyWithImpl(_$_NotificationSettings _value,
-      $Res Function(_$_NotificationSettings) _then)
+class __$$NotificationSettingsImplCopyWithImpl<$Res>
+    extends _$NotificationSettingsCopyWithImpl<$Res, _$NotificationSettingsImpl>
+    implements _$$NotificationSettingsImplCopyWith<$Res> {
+  __$$NotificationSettingsImplCopyWithImpl(_$NotificationSettingsImpl _value,
+      $Res Function(_$NotificationSettingsImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -104,7 +104,7 @@ class __$$_NotificationSettingsCopyWithImpl<$Res>
     Object? paymentConfirmation = null,
     Object? ereturnConfirmation = null,
   }) {
-    return _then(_$_NotificationSettings(
+    return _then(_$NotificationSettingsImpl(
       orderConfirmation: null == orderConfirmation
           ? _value.orderConfirmation
           : orderConfirmation // ignore: cast_nullable_to_non_nullable
@@ -123,8 +123,8 @@ class __$$_NotificationSettingsCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_NotificationSettings extends _NotificationSettings {
-  const _$_NotificationSettings(
+class _$NotificationSettingsImpl extends _NotificationSettings {
+  const _$NotificationSettingsImpl(
       {required this.orderConfirmation,
       required this.paymentConfirmation,
       required this.ereturnConfirmation})
@@ -143,10 +143,10 @@ class _$_NotificationSettings extends _NotificationSettings {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_NotificationSettings &&
+            other is _$NotificationSettingsImpl &&
             (identical(other.orderConfirmation, orderConfirmation) ||
                 other.orderConfirmation == orderConfirmation) &&
             (identical(other.paymentConfirmation, paymentConfirmation) ||
@@ -162,9 +162,10 @@ class _$_NotificationSettings extends _NotificationSettings {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_NotificationSettingsCopyWith<_$_NotificationSettings> get copyWith =>
-      __$$_NotificationSettingsCopyWithImpl<_$_NotificationSettings>(
-          this, _$identity);
+  _$$NotificationSettingsImplCopyWith<_$NotificationSettingsImpl>
+      get copyWith =>
+          __$$NotificationSettingsImplCopyWithImpl<_$NotificationSettingsImpl>(
+              this, _$identity);
 }
 
 abstract class _NotificationSettings extends NotificationSettings {
@@ -172,7 +173,7 @@ abstract class _NotificationSettings extends NotificationSettings {
           {required final NotificationSetting orderConfirmation,
           required final NotificationSetting paymentConfirmation,
           required final NotificationSetting ereturnConfirmation}) =
-      _$_NotificationSettings;
+      _$NotificationSettingsImpl;
   const _NotificationSettings._() : super._();
 
   @override
@@ -183,6 +184,6 @@ abstract class _NotificationSettings extends NotificationSettings {
   NotificationSetting get ereturnConfirmation;
   @override
   @JsonKey(ignore: true)
-  _$$_NotificationSettingsCopyWith<_$_NotificationSettings> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$NotificationSettingsImplCopyWith<_$NotificationSettingsImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }

@@ -12,7 +12,7 @@ part of 'overriden_rule_tier.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$OverridenRuleTier {
@@ -86,11 +86,11 @@ class _$OverridenRuleTierCopyWithImpl<$Res, $Val extends OverridenRuleTier>
 }
 
 /// @nodoc
-abstract class _$$_OverridenRuleTierCopyWith<$Res>
+abstract class _$$OverridenRuleTierImplCopyWith<$Res>
     implements $OverridenRuleTierCopyWith<$Res> {
-  factory _$$_OverridenRuleTierCopyWith(_$_OverridenRuleTier value,
-          $Res Function(_$_OverridenRuleTier) then) =
-      __$$_OverridenRuleTierCopyWithImpl<$Res>;
+  factory _$$OverridenRuleTierImplCopyWith(_$OverridenRuleTierImpl value,
+          $Res Function(_$OverridenRuleTierImpl) then) =
+      __$$OverridenRuleTierImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -102,11 +102,11 @@ abstract class _$$_OverridenRuleTierCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_OverridenRuleTierCopyWithImpl<$Res>
-    extends _$OverridenRuleTierCopyWithImpl<$Res, _$_OverridenRuleTier>
-    implements _$$_OverridenRuleTierCopyWith<$Res> {
-  __$$_OverridenRuleTierCopyWithImpl(
-      _$_OverridenRuleTier _value, $Res Function(_$_OverridenRuleTier) _then)
+class __$$OverridenRuleTierImplCopyWithImpl<$Res>
+    extends _$OverridenRuleTierCopyWithImpl<$Res, _$OverridenRuleTierImpl>
+    implements _$$OverridenRuleTierImplCopyWith<$Res> {
+  __$$OverridenRuleTierImplCopyWithImpl(_$OverridenRuleTierImpl _value,
+      $Res Function(_$OverridenRuleTierImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -118,7 +118,7 @@ class __$$_OverridenRuleTierCopyWithImpl<$Res>
     Object? tier = null,
     Object? overrider = null,
   }) {
-    return _then(_$_OverridenRuleTier(
+    return _then(_$OverridenRuleTierImpl(
       rate: null == rate
           ? _value.rate
           : rate // ignore: cast_nullable_to_non_nullable
@@ -145,8 +145,8 @@ class __$$_OverridenRuleTierCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_OverridenRuleTier extends _OverridenRuleTier {
-  const _$_OverridenRuleTier(
+class _$OverridenRuleTierImpl extends _OverridenRuleTier {
+  const _$OverridenRuleTierImpl(
       {required this.rate,
       required this.quantity,
       required this.conditions,
@@ -171,10 +171,10 @@ class _$_OverridenRuleTier extends _OverridenRuleTier {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_OverridenRuleTier &&
+            other is _$OverridenRuleTierImpl &&
             (identical(other.rate, rate) || other.rate == rate) &&
             (identical(other.quantity, quantity) ||
                 other.quantity == quantity) &&
@@ -192,8 +192,8 @@ class _$_OverridenRuleTier extends _OverridenRuleTier {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_OverridenRuleTierCopyWith<_$_OverridenRuleTier> get copyWith =>
-      __$$_OverridenRuleTierCopyWithImpl<_$_OverridenRuleTier>(
+  _$$OverridenRuleTierImplCopyWith<_$OverridenRuleTierImpl> get copyWith =>
+      __$$OverridenRuleTierImplCopyWithImpl<_$OverridenRuleTierImpl>(
           this, _$identity);
 }
 
@@ -203,7 +203,7 @@ abstract class _OverridenRuleTier extends OverridenRuleTier {
       required final double quantity,
       required final String conditions,
       required final String tier,
-      required final String overrider}) = _$_OverridenRuleTier;
+      required final String overrider}) = _$OverridenRuleTierImpl;
   const _OverridenRuleTier._() : super._();
 
   @override
@@ -218,6 +218,6 @@ abstract class _OverridenRuleTier extends OverridenRuleTier {
   String get overrider;
   @override
   @JsonKey(ignore: true)
-  _$$_OverridenRuleTierCopyWith<_$_OverridenRuleTier> get copyWith =>
+  _$$OverridenRuleTierImplCopyWith<_$OverridenRuleTierImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

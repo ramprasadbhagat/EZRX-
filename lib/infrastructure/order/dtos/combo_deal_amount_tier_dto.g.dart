@@ -6,9 +6,9 @@ part of 'combo_deal_amount_tier_dto.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_ComboDealAmountTierDto _$$_ComboDealAmountTierDtoFromJson(
+_$ComboDealAmountTierDtoImpl _$$ComboDealAmountTierDtoImplFromJson(
         Map<String, dynamic> json) =>
-    _$_ComboDealAmountTierDto(
+    _$ComboDealAmountTierDtoImpl(
       rate: json['rate'] as String? ?? '',
       conditionNumber: json['conditionNumber'] as String? ?? '',
       minTotalAmount: json['minTotalAmount'] as String? ?? '',
@@ -18,8 +18,8 @@ _$_ComboDealAmountTierDto _$$_ComboDealAmountTierDtoFromJson(
       type: json['type'] as String? ?? '',
     );
 
-Map<String, dynamic> _$$_ComboDealAmountTierDtoToJson(
-        _$_ComboDealAmountTierDto instance) =>
+Map<String, dynamic> _$$ComboDealAmountTierDtoImplToJson(
+        _$ComboDealAmountTierDtoImpl instance) =>
     <String, dynamic>{
       'rate': instance.rate,
       'conditionNumber': instance.conditionNumber,

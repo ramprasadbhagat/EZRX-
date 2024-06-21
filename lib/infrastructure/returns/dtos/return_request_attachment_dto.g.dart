@@ -6,15 +6,15 @@ part of 'return_request_attachment_dto.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_ReturnRequestAttachmentDto _$$_ReturnRequestAttachmentDtoFromJson(
+_$ReturnRequestAttachmentDtoImpl _$$ReturnRequestAttachmentDtoImplFromJson(
         Map<String, dynamic> json) =>
-    _$_ReturnRequestAttachmentDto(
+    _$ReturnRequestAttachmentDtoImpl(
       path: json['url'] as String? ?? '',
       name: json['filename'] as String? ?? '',
     );
 
-Map<String, dynamic> _$$_ReturnRequestAttachmentDtoToJson(
-        _$_ReturnRequestAttachmentDto instance) =>
+Map<String, dynamic> _$$ReturnRequestAttachmentDtoImplToJson(
+        _$ReturnRequestAttachmentDtoImpl instance) =>
     <String, dynamic>{
       'url': instance.path,
       'filename': instance.name,

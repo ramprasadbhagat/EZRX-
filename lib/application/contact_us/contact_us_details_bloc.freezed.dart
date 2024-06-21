@@ -12,7 +12,7 @@ part of 'contact_us_details_bloc.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$ContactUsDetailsEvent {
@@ -90,20 +90,22 @@ class _$ContactUsDetailsEventCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_FetchCopyWith<$Res>
+abstract class _$$FetchImplCopyWith<$Res>
     implements $ContactUsDetailsEventCopyWith<$Res> {
-  factory _$$_FetchCopyWith(_$_Fetch value, $Res Function(_$_Fetch) then) =
-      __$$_FetchCopyWithImpl<$Res>;
+  factory _$$FetchImplCopyWith(
+          _$FetchImpl value, $Res Function(_$FetchImpl) then) =
+      __$$FetchImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({AppMarket market});
 }
 
 /// @nodoc
-class __$$_FetchCopyWithImpl<$Res>
-    extends _$ContactUsDetailsEventCopyWithImpl<$Res, _$_Fetch>
-    implements _$$_FetchCopyWith<$Res> {
-  __$$_FetchCopyWithImpl(_$_Fetch _value, $Res Function(_$_Fetch) _then)
+class __$$FetchImplCopyWithImpl<$Res>
+    extends _$ContactUsDetailsEventCopyWithImpl<$Res, _$FetchImpl>
+    implements _$$FetchImplCopyWith<$Res> {
+  __$$FetchImplCopyWithImpl(
+      _$FetchImpl _value, $Res Function(_$FetchImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -111,7 +113,7 @@ class __$$_FetchCopyWithImpl<$Res>
   $Res call({
     Object? market = null,
   }) {
-    return _then(_$_Fetch(
+    return _then(_$FetchImpl(
       market: null == market
           ? _value.market
           : market // ignore: cast_nullable_to_non_nullable
@@ -122,8 +124,8 @@ class __$$_FetchCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_Fetch implements _Fetch {
-  const _$_Fetch({required this.market});
+class _$FetchImpl implements _Fetch {
+  const _$FetchImpl({required this.market});
 
   @override
   final AppMarket market;
@@ -134,10 +136,10 @@ class _$_Fetch implements _Fetch {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Fetch &&
+            other is _$FetchImpl &&
             (identical(other.market, market) || other.market == market));
   }
 
@@ -147,8 +149,8 @@ class _$_Fetch implements _Fetch {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_FetchCopyWith<_$_Fetch> get copyWith =>
-      __$$_FetchCopyWithImpl<_$_Fetch>(this, _$identity);
+  _$$FetchImplCopyWith<_$FetchImpl> get copyWith =>
+      __$$FetchImplCopyWithImpl<_$FetchImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -208,13 +210,13 @@ class _$_Fetch implements _Fetch {
 }
 
 abstract class _Fetch implements ContactUsDetailsEvent {
-  const factory _Fetch({required final AppMarket market}) = _$_Fetch;
+  const factory _Fetch({required final AppMarket market}) = _$FetchImpl;
 
   @override
   AppMarket get market;
   @override
   @JsonKey(ignore: true)
-  _$$_FetchCopyWith<_$_Fetch> get copyWith =>
+  _$$FetchImplCopyWith<_$FetchImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -278,11 +280,12 @@ class _$ContactUsDetailsStateCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_ContactUsDetailsStateCopyWith<$Res>
+abstract class _$$ContactUsDetailsStateImplCopyWith<$Res>
     implements $ContactUsDetailsStateCopyWith<$Res> {
-  factory _$$_ContactUsDetailsStateCopyWith(_$_ContactUsDetailsState value,
-          $Res Function(_$_ContactUsDetailsState) then) =
-      __$$_ContactUsDetailsStateCopyWithImpl<$Res>;
+  factory _$$ContactUsDetailsStateImplCopyWith(
+          _$ContactUsDetailsStateImpl value,
+          $Res Function(_$ContactUsDetailsStateImpl) then) =
+      __$$ContactUsDetailsStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({ContactUsDetails contactUsDetails, bool isLoading});
@@ -292,11 +295,12 @@ abstract class _$$_ContactUsDetailsStateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_ContactUsDetailsStateCopyWithImpl<$Res>
-    extends _$ContactUsDetailsStateCopyWithImpl<$Res, _$_ContactUsDetailsState>
-    implements _$$_ContactUsDetailsStateCopyWith<$Res> {
-  __$$_ContactUsDetailsStateCopyWithImpl(_$_ContactUsDetailsState _value,
-      $Res Function(_$_ContactUsDetailsState) _then)
+class __$$ContactUsDetailsStateImplCopyWithImpl<$Res>
+    extends _$ContactUsDetailsStateCopyWithImpl<$Res,
+        _$ContactUsDetailsStateImpl>
+    implements _$$ContactUsDetailsStateImplCopyWith<$Res> {
+  __$$ContactUsDetailsStateImplCopyWithImpl(_$ContactUsDetailsStateImpl _value,
+      $Res Function(_$ContactUsDetailsStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -305,7 +309,7 @@ class __$$_ContactUsDetailsStateCopyWithImpl<$Res>
     Object? contactUsDetails = null,
     Object? isLoading = null,
   }) {
-    return _then(_$_ContactUsDetailsState(
+    return _then(_$ContactUsDetailsStateImpl(
       contactUsDetails: null == contactUsDetails
           ? _value.contactUsDetails
           : contactUsDetails // ignore: cast_nullable_to_non_nullable
@@ -320,8 +324,8 @@ class __$$_ContactUsDetailsStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_ContactUsDetailsState extends _ContactUsDetailsState {
-  const _$_ContactUsDetailsState(
+class _$ContactUsDetailsStateImpl extends _ContactUsDetailsState {
+  const _$ContactUsDetailsStateImpl(
       {required this.contactUsDetails, required this.isLoading})
       : super._();
 
@@ -336,10 +340,10 @@ class _$_ContactUsDetailsState extends _ContactUsDetailsState {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ContactUsDetailsState &&
+            other is _$ContactUsDetailsStateImpl &&
             (identical(other.contactUsDetails, contactUsDetails) ||
                 other.contactUsDetails == contactUsDetails) &&
             (identical(other.isLoading, isLoading) ||
@@ -352,15 +356,15 @@ class _$_ContactUsDetailsState extends _ContactUsDetailsState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ContactUsDetailsStateCopyWith<_$_ContactUsDetailsState> get copyWith =>
-      __$$_ContactUsDetailsStateCopyWithImpl<_$_ContactUsDetailsState>(
-          this, _$identity);
+  _$$ContactUsDetailsStateImplCopyWith<_$ContactUsDetailsStateImpl>
+      get copyWith => __$$ContactUsDetailsStateImplCopyWithImpl<
+          _$ContactUsDetailsStateImpl>(this, _$identity);
 }
 
 abstract class _ContactUsDetailsState extends ContactUsDetailsState {
   const factory _ContactUsDetailsState(
       {required final ContactUsDetails contactUsDetails,
-      required final bool isLoading}) = _$_ContactUsDetailsState;
+      required final bool isLoading}) = _$ContactUsDetailsStateImpl;
   const _ContactUsDetailsState._() : super._();
 
   @override
@@ -369,6 +373,6 @@ abstract class _ContactUsDetailsState extends ContactUsDetailsState {
   bool get isLoading;
   @override
   @JsonKey(ignore: true)
-  _$$_ContactUsDetailsStateCopyWith<_$_ContactUsDetailsState> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$ContactUsDetailsStateImplCopyWith<_$ContactUsDetailsStateImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }

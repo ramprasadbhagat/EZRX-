@@ -12,7 +12,7 @@ part of 'principal_cutoffs_dto.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 PrincipalCutoffsDto _$PrincipalCutoffsDtoFromJson(Map<String, dynamic> json) {
   return _PrincipalCutoffsDto.fromJson(json);
@@ -63,22 +63,22 @@ class _$PrincipalCutoffsDtoCopyWithImpl<$Res, $Val extends PrincipalCutoffsDto>
 }
 
 /// @nodoc
-abstract class _$$_PrincipalCutoffsDtoCopyWith<$Res>
+abstract class _$$PrincipalCutoffsDtoImplCopyWith<$Res>
     implements $PrincipalCutoffsDtoCopyWith<$Res> {
-  factory _$$_PrincipalCutoffsDtoCopyWith(_$_PrincipalCutoffsDto value,
-          $Res Function(_$_PrincipalCutoffsDto) then) =
-      __$$_PrincipalCutoffsDtoCopyWithImpl<$Res>;
+  factory _$$PrincipalCutoffsDtoImplCopyWith(_$PrincipalCutoffsDtoImpl value,
+          $Res Function(_$PrincipalCutoffsDtoImpl) then) =
+      __$$PrincipalCutoffsDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({@JsonKey(name: 'total', defaultValue: 0) int total});
 }
 
 /// @nodoc
-class __$$_PrincipalCutoffsDtoCopyWithImpl<$Res>
-    extends _$PrincipalCutoffsDtoCopyWithImpl<$Res, _$_PrincipalCutoffsDto>
-    implements _$$_PrincipalCutoffsDtoCopyWith<$Res> {
-  __$$_PrincipalCutoffsDtoCopyWithImpl(_$_PrincipalCutoffsDto _value,
-      $Res Function(_$_PrincipalCutoffsDto) _then)
+class __$$PrincipalCutoffsDtoImplCopyWithImpl<$Res>
+    extends _$PrincipalCutoffsDtoCopyWithImpl<$Res, _$PrincipalCutoffsDtoImpl>
+    implements _$$PrincipalCutoffsDtoImplCopyWith<$Res> {
+  __$$PrincipalCutoffsDtoImplCopyWithImpl(_$PrincipalCutoffsDtoImpl _value,
+      $Res Function(_$PrincipalCutoffsDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -86,7 +86,7 @@ class __$$_PrincipalCutoffsDtoCopyWithImpl<$Res>
   $Res call({
     Object? total = null,
   }) {
-    return _then(_$_PrincipalCutoffsDto(
+    return _then(_$PrincipalCutoffsDtoImpl(
       total: null == total
           ? _value.total
           : total // ignore: cast_nullable_to_non_nullable
@@ -97,13 +97,13 @@ class __$$_PrincipalCutoffsDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_PrincipalCutoffsDto extends _PrincipalCutoffsDto {
-  const _$_PrincipalCutoffsDto(
+class _$PrincipalCutoffsDtoImpl extends _PrincipalCutoffsDto {
+  const _$PrincipalCutoffsDtoImpl(
       {@JsonKey(name: 'total', defaultValue: 0) required this.total})
       : super._();
 
-  factory _$_PrincipalCutoffsDto.fromJson(Map<String, dynamic> json) =>
-      _$$_PrincipalCutoffsDtoFromJson(json);
+  factory _$PrincipalCutoffsDtoImpl.fromJson(Map<String, dynamic> json) =>
+      _$$PrincipalCutoffsDtoImplFromJson(json);
 
   @override
   @JsonKey(name: 'total', defaultValue: 0)
@@ -115,10 +115,10 @@ class _$_PrincipalCutoffsDto extends _PrincipalCutoffsDto {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_PrincipalCutoffsDto &&
+            other is _$PrincipalCutoffsDtoImpl &&
             (identical(other.total, total) || other.total == total));
   }
 
@@ -129,13 +129,13 @@ class _$_PrincipalCutoffsDto extends _PrincipalCutoffsDto {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_PrincipalCutoffsDtoCopyWith<_$_PrincipalCutoffsDto> get copyWith =>
-      __$$_PrincipalCutoffsDtoCopyWithImpl<_$_PrincipalCutoffsDto>(
+  _$$PrincipalCutoffsDtoImplCopyWith<_$PrincipalCutoffsDtoImpl> get copyWith =>
+      __$$PrincipalCutoffsDtoImplCopyWithImpl<_$PrincipalCutoffsDtoImpl>(
           this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_PrincipalCutoffsDtoToJson(
+    return _$$PrincipalCutoffsDtoImplToJson(
       this,
     );
   }
@@ -144,17 +144,17 @@ class _$_PrincipalCutoffsDto extends _PrincipalCutoffsDto {
 abstract class _PrincipalCutoffsDto extends PrincipalCutoffsDto {
   const factory _PrincipalCutoffsDto(
           {@JsonKey(name: 'total', defaultValue: 0) required final int total}) =
-      _$_PrincipalCutoffsDto;
+      _$PrincipalCutoffsDtoImpl;
   const _PrincipalCutoffsDto._() : super._();
 
   factory _PrincipalCutoffsDto.fromJson(Map<String, dynamic> json) =
-      _$_PrincipalCutoffsDto.fromJson;
+      _$PrincipalCutoffsDtoImpl.fromJson;
 
   @override
   @JsonKey(name: 'total', defaultValue: 0)
   int get total;
   @override
   @JsonKey(ignore: true)
-  _$$_PrincipalCutoffsDtoCopyWith<_$_PrincipalCutoffsDto> get copyWith =>
+  _$$PrincipalCutoffsDtoImplCopyWith<_$PrincipalCutoffsDtoImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

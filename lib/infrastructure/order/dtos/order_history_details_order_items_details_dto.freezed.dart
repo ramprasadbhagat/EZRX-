@@ -12,7 +12,7 @@ part of 'order_history_details_order_items_details_dto.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 OrderHistoryDetailsOrderItemDetailsDto
     _$OrderHistoryDetailsOrderItemDetailsDtoFromJson(
@@ -45,12 +45,10 @@ abstract class $OrderHistoryDetailsOrderItemDetailsDtoCopyWith<$Res> {
           OrderHistoryDetailsOrderItemDetailsDto>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'DiscountCode', defaultValue: '')
-          String discountCode,
+      {@JsonKey(name: 'DiscountCode', defaultValue: '') String discountCode,
       @JsonKey(name: 'DiscountDescription', defaultValue: '')
-          String discountDescription,
-      @JsonKey(name: 'Rate', defaultValue: '')
-          String rate});
+      String discountDescription,
+      @JsonKey(name: 'Rate', defaultValue: '') String rate});
 }
 
 /// @nodoc
@@ -89,31 +87,29 @@ class _$OrderHistoryDetailsOrderItemDetailsDtoCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_OrderHistoryDetailsOrderItemDetailsDtoCopyWith<$Res>
+abstract class _$$OrderHistoryDetailsOrderItemDetailsDtoImplCopyWith<$Res>
     implements $OrderHistoryDetailsOrderItemDetailsDtoCopyWith<$Res> {
-  factory _$$_OrderHistoryDetailsOrderItemDetailsDtoCopyWith(
-          _$_OrderHistoryDetailsOrderItemDetailsDto value,
-          $Res Function(_$_OrderHistoryDetailsOrderItemDetailsDto) then) =
-      __$$_OrderHistoryDetailsOrderItemDetailsDtoCopyWithImpl<$Res>;
+  factory _$$OrderHistoryDetailsOrderItemDetailsDtoImplCopyWith(
+          _$OrderHistoryDetailsOrderItemDetailsDtoImpl value,
+          $Res Function(_$OrderHistoryDetailsOrderItemDetailsDtoImpl) then) =
+      __$$OrderHistoryDetailsOrderItemDetailsDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'DiscountCode', defaultValue: '')
-          String discountCode,
+      {@JsonKey(name: 'DiscountCode', defaultValue: '') String discountCode,
       @JsonKey(name: 'DiscountDescription', defaultValue: '')
-          String discountDescription,
-      @JsonKey(name: 'Rate', defaultValue: '')
-          String rate});
+      String discountDescription,
+      @JsonKey(name: 'Rate', defaultValue: '') String rate});
 }
 
 /// @nodoc
-class __$$_OrderHistoryDetailsOrderItemDetailsDtoCopyWithImpl<$Res>
+class __$$OrderHistoryDetailsOrderItemDetailsDtoImplCopyWithImpl<$Res>
     extends _$OrderHistoryDetailsOrderItemDetailsDtoCopyWithImpl<$Res,
-        _$_OrderHistoryDetailsOrderItemDetailsDto>
-    implements _$$_OrderHistoryDetailsOrderItemDetailsDtoCopyWith<$Res> {
-  __$$_OrderHistoryDetailsOrderItemDetailsDtoCopyWithImpl(
-      _$_OrderHistoryDetailsOrderItemDetailsDto _value,
-      $Res Function(_$_OrderHistoryDetailsOrderItemDetailsDto) _then)
+        _$OrderHistoryDetailsOrderItemDetailsDtoImpl>
+    implements _$$OrderHistoryDetailsOrderItemDetailsDtoImplCopyWith<$Res> {
+  __$$OrderHistoryDetailsOrderItemDetailsDtoImplCopyWithImpl(
+      _$OrderHistoryDetailsOrderItemDetailsDtoImpl _value,
+      $Res Function(_$OrderHistoryDetailsOrderItemDetailsDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -123,7 +119,7 @@ class __$$_OrderHistoryDetailsOrderItemDetailsDtoCopyWithImpl<$Res>
     Object? discountDescription = null,
     Object? rate = null,
   }) {
-    return _then(_$_OrderHistoryDetailsOrderItemDetailsDto(
+    return _then(_$OrderHistoryDetailsOrderItemDetailsDtoImpl(
       discountCode: null == discountCode
           ? _value.discountCode
           : discountCode // ignore: cast_nullable_to_non_nullable
@@ -142,20 +138,19 @@ class __$$_OrderHistoryDetailsOrderItemDetailsDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_OrderHistoryDetailsOrderItemDetailsDto
+class _$OrderHistoryDetailsOrderItemDetailsDtoImpl
     extends _OrderHistoryDetailsOrderItemDetailsDto {
-  const _$_OrderHistoryDetailsOrderItemDetailsDto(
+  const _$OrderHistoryDetailsOrderItemDetailsDtoImpl(
       {@JsonKey(name: 'DiscountCode', defaultValue: '')
-          required this.discountCode,
+      required this.discountCode,
       @JsonKey(name: 'DiscountDescription', defaultValue: '')
-          required this.discountDescription,
-      @JsonKey(name: 'Rate', defaultValue: '')
-          required this.rate})
+      required this.discountDescription,
+      @JsonKey(name: 'Rate', defaultValue: '') required this.rate})
       : super._();
 
-  factory _$_OrderHistoryDetailsOrderItemDetailsDto.fromJson(
+  factory _$OrderHistoryDetailsOrderItemDetailsDtoImpl.fromJson(
           Map<String, dynamic> json) =>
-      _$$_OrderHistoryDetailsOrderItemDetailsDtoFromJson(json);
+      _$$OrderHistoryDetailsOrderItemDetailsDtoImplFromJson(json);
 
   @override
   @JsonKey(name: 'DiscountCode', defaultValue: '')
@@ -173,10 +168,10 @@ class _$_OrderHistoryDetailsOrderItemDetailsDto
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_OrderHistoryDetailsOrderItemDetailsDto &&
+            other is _$OrderHistoryDetailsOrderItemDetailsDtoImpl &&
             (identical(other.discountCode, discountCode) ||
                 other.discountCode == discountCode) &&
             (identical(other.discountDescription, discountDescription) ||
@@ -192,14 +187,15 @@ class _$_OrderHistoryDetailsOrderItemDetailsDto
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_OrderHistoryDetailsOrderItemDetailsDtoCopyWith<
-          _$_OrderHistoryDetailsOrderItemDetailsDto>
-      get copyWith => __$$_OrderHistoryDetailsOrderItemDetailsDtoCopyWithImpl<
-          _$_OrderHistoryDetailsOrderItemDetailsDto>(this, _$identity);
+  _$$OrderHistoryDetailsOrderItemDetailsDtoImplCopyWith<
+          _$OrderHistoryDetailsOrderItemDetailsDtoImpl>
+      get copyWith =>
+          __$$OrderHistoryDetailsOrderItemDetailsDtoImplCopyWithImpl<
+              _$OrderHistoryDetailsOrderItemDetailsDtoImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_OrderHistoryDetailsOrderItemDetailsDtoToJson(
+    return _$$OrderHistoryDetailsOrderItemDetailsDtoImplToJson(
       this,
     );
   }
@@ -209,17 +205,17 @@ abstract class _OrderHistoryDetailsOrderItemDetailsDto
     extends OrderHistoryDetailsOrderItemDetailsDto {
   const factory _OrderHistoryDetailsOrderItemDetailsDto(
           {@JsonKey(name: 'DiscountCode', defaultValue: '')
-              required final String discountCode,
+          required final String discountCode,
           @JsonKey(name: 'DiscountDescription', defaultValue: '')
-              required final String discountDescription,
+          required final String discountDescription,
           @JsonKey(name: 'Rate', defaultValue: '')
-              required final String rate}) =
-      _$_OrderHistoryDetailsOrderItemDetailsDto;
+          required final String rate}) =
+      _$OrderHistoryDetailsOrderItemDetailsDtoImpl;
   const _OrderHistoryDetailsOrderItemDetailsDto._() : super._();
 
   factory _OrderHistoryDetailsOrderItemDetailsDto.fromJson(
           Map<String, dynamic> json) =
-      _$_OrderHistoryDetailsOrderItemDetailsDto.fromJson;
+      _$OrderHistoryDetailsOrderItemDetailsDtoImpl.fromJson;
 
   @override
   @JsonKey(name: 'DiscountCode', defaultValue: '')
@@ -232,7 +228,7 @@ abstract class _OrderHistoryDetailsOrderItemDetailsDto
   String get rate;
   @override
   @JsonKey(ignore: true)
-  _$$_OrderHistoryDetailsOrderItemDetailsDtoCopyWith<
-          _$_OrderHistoryDetailsOrderItemDetailsDto>
+  _$$OrderHistoryDetailsOrderItemDetailsDtoImplCopyWith<
+          _$OrderHistoryDetailsOrderItemDetailsDtoImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

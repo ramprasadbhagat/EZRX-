@@ -12,7 +12,7 @@ part of 'account_selector.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$AccountSelector {
@@ -69,22 +69,22 @@ class _$AccountSelectorCopyWithImpl<$Res, $Val extends AccountSelector>
 }
 
 /// @nodoc
-abstract class _$$_AccountSelectorCopyWith<$Res>
+abstract class _$$AccountSelectorImplCopyWith<$Res>
     implements $AccountSelectorCopyWith<$Res> {
-  factory _$$_AccountSelectorCopyWith(
-          _$_AccountSelector value, $Res Function(_$_AccountSelector) then) =
-      __$$_AccountSelectorCopyWithImpl<$Res>;
+  factory _$$AccountSelectorImplCopyWith(_$AccountSelectorImpl value,
+          $Res Function(_$AccountSelectorImpl) then) =
+      __$$AccountSelectorImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String salesOrg, String customerCode, String shippingAddress});
 }
 
 /// @nodoc
-class __$$_AccountSelectorCopyWithImpl<$Res>
-    extends _$AccountSelectorCopyWithImpl<$Res, _$_AccountSelector>
-    implements _$$_AccountSelectorCopyWith<$Res> {
-  __$$_AccountSelectorCopyWithImpl(
-      _$_AccountSelector _value, $Res Function(_$_AccountSelector) _then)
+class __$$AccountSelectorImplCopyWithImpl<$Res>
+    extends _$AccountSelectorCopyWithImpl<$Res, _$AccountSelectorImpl>
+    implements _$$AccountSelectorImplCopyWith<$Res> {
+  __$$AccountSelectorImplCopyWithImpl(
+      _$AccountSelectorImpl _value, $Res Function(_$AccountSelectorImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -94,7 +94,7 @@ class __$$_AccountSelectorCopyWithImpl<$Res>
     Object? customerCode = null,
     Object? shippingAddress = null,
   }) {
-    return _then(_$_AccountSelector(
+    return _then(_$AccountSelectorImpl(
       salesOrg: null == salesOrg
           ? _value.salesOrg
           : salesOrg // ignore: cast_nullable_to_non_nullable
@@ -113,8 +113,8 @@ class __$$_AccountSelectorCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_AccountSelector extends _AccountSelector {
-  const _$_AccountSelector(
+class _$AccountSelectorImpl extends _AccountSelector {
+  const _$AccountSelectorImpl(
       {required this.salesOrg,
       required this.customerCode,
       required this.shippingAddress})
@@ -133,10 +133,10 @@ class _$_AccountSelector extends _AccountSelector {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_AccountSelector &&
+            other is _$AccountSelectorImpl &&
             (identical(other.salesOrg, salesOrg) ||
                 other.salesOrg == salesOrg) &&
             (identical(other.customerCode, customerCode) ||
@@ -152,15 +152,16 @@ class _$_AccountSelector extends _AccountSelector {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_AccountSelectorCopyWith<_$_AccountSelector> get copyWith =>
-      __$$_AccountSelectorCopyWithImpl<_$_AccountSelector>(this, _$identity);
+  _$$AccountSelectorImplCopyWith<_$AccountSelectorImpl> get copyWith =>
+      __$$AccountSelectorImplCopyWithImpl<_$AccountSelectorImpl>(
+          this, _$identity);
 }
 
 abstract class _AccountSelector extends AccountSelector {
   const factory _AccountSelector(
       {required final String salesOrg,
       required final String customerCode,
-      required final String shippingAddress}) = _$_AccountSelector;
+      required final String shippingAddress}) = _$AccountSelectorImpl;
   const _AccountSelector._() : super._();
 
   @override
@@ -171,6 +172,6 @@ abstract class _AccountSelector extends AccountSelector {
   String get shippingAddress;
   @override
   @JsonKey(ignore: true)
-  _$$_AccountSelectorCopyWith<_$_AccountSelector> get copyWith =>
+  _$$AccountSelectorImplCopyWith<_$AccountSelectorImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

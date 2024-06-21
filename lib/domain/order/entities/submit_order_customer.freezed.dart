@@ -12,7 +12,7 @@ part of 'submit_order_customer.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$SubmitOrderCustomer {
@@ -79,11 +79,11 @@ class _$SubmitOrderCustomerCopyWithImpl<$Res, $Val extends SubmitOrderCustomer>
 }
 
 /// @nodoc
-abstract class _$$_SubmitOrderCustomerCopyWith<$Res>
+abstract class _$$SubmitOrderCustomerImplCopyWith<$Res>
     implements $SubmitOrderCustomerCopyWith<$Res> {
-  factory _$$_SubmitOrderCustomerCopyWith(_$_SubmitOrderCustomer value,
-          $Res Function(_$_SubmitOrderCustomer) then) =
-      __$$_SubmitOrderCustomerCopyWithImpl<$Res>;
+  factory _$$SubmitOrderCustomerImplCopyWith(_$SubmitOrderCustomerImpl value,
+          $Res Function(_$SubmitOrderCustomerImpl) then) =
+      __$$SubmitOrderCustomerImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -94,11 +94,11 @@ abstract class _$$_SubmitOrderCustomerCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_SubmitOrderCustomerCopyWithImpl<$Res>
-    extends _$SubmitOrderCustomerCopyWithImpl<$Res, _$_SubmitOrderCustomer>
-    implements _$$_SubmitOrderCustomerCopyWith<$Res> {
-  __$$_SubmitOrderCustomerCopyWithImpl(_$_SubmitOrderCustomer _value,
-      $Res Function(_$_SubmitOrderCustomer) _then)
+class __$$SubmitOrderCustomerImplCopyWithImpl<$Res>
+    extends _$SubmitOrderCustomerCopyWithImpl<$Res, _$SubmitOrderCustomerImpl>
+    implements _$$SubmitOrderCustomerImplCopyWith<$Res> {
+  __$$SubmitOrderCustomerImplCopyWithImpl(_$SubmitOrderCustomerImpl _value,
+      $Res Function(_$SubmitOrderCustomerImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -109,7 +109,7 @@ class __$$_SubmitOrderCustomerCopyWithImpl<$Res>
     Object? salesOrganisation = null,
     Object? division = null,
   }) {
-    return _then(_$_SubmitOrderCustomer(
+    return _then(_$SubmitOrderCustomerImpl(
       customerNumber: null == customerNumber
           ? _value.customerNumber
           : customerNumber // ignore: cast_nullable_to_non_nullable
@@ -132,8 +132,8 @@ class __$$_SubmitOrderCustomerCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_SubmitOrderCustomer extends _SubmitOrderCustomer {
-  const _$_SubmitOrderCustomer(
+class _$SubmitOrderCustomerImpl extends _SubmitOrderCustomer {
+  const _$SubmitOrderCustomerImpl(
       {required this.customerNumber,
       required this.customerNumberShipTo,
       required this.salesOrganisation,
@@ -155,10 +155,10 @@ class _$_SubmitOrderCustomer extends _SubmitOrderCustomer {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_SubmitOrderCustomer &&
+            other is _$SubmitOrderCustomerImpl &&
             (identical(other.customerNumber, customerNumber) ||
                 other.customerNumber == customerNumber) &&
             (identical(other.customerNumberShipTo, customerNumberShipTo) ||
@@ -176,8 +176,8 @@ class _$_SubmitOrderCustomer extends _SubmitOrderCustomer {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_SubmitOrderCustomerCopyWith<_$_SubmitOrderCustomer> get copyWith =>
-      __$$_SubmitOrderCustomerCopyWithImpl<_$_SubmitOrderCustomer>(
+  _$$SubmitOrderCustomerImplCopyWith<_$SubmitOrderCustomerImpl> get copyWith =>
+      __$$SubmitOrderCustomerImplCopyWithImpl<_$SubmitOrderCustomerImpl>(
           this, _$identity);
 }
 
@@ -186,7 +186,7 @@ abstract class _SubmitOrderCustomer extends SubmitOrderCustomer {
       {required final String customerNumber,
       required final String customerNumberShipTo,
       required final String salesOrganisation,
-      required final String division}) = _$_SubmitOrderCustomer;
+      required final String division}) = _$SubmitOrderCustomerImpl;
   const _SubmitOrderCustomer._() : super._();
 
   @override
@@ -199,6 +199,6 @@ abstract class _SubmitOrderCustomer extends SubmitOrderCustomer {
   String get division;
   @override
   @JsonKey(ignore: true)
-  _$$_SubmitOrderCustomerCopyWith<_$_SubmitOrderCustomer> get copyWith =>
+  _$$SubmitOrderCustomerImplCopyWith<_$SubmitOrderCustomerImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

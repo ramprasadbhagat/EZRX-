@@ -12,7 +12,7 @@ part of 'apl_product.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$AplProduct {
@@ -114,11 +114,11 @@ class _$AplProductCopyWithImpl<$Res, $Val extends AplProduct>
 }
 
 /// @nodoc
-abstract class _$$_AplProductCopyWith<$Res>
+abstract class _$$AplProductImplCopyWith<$Res>
     implements $AplProductCopyWith<$Res> {
-  factory _$$_AplProductCopyWith(
-          _$_AplProduct value, $Res Function(_$_AplProduct) then) =
-      __$$_AplProductCopyWithImpl<$Res>;
+  factory _$$AplProductImplCopyWith(
+          _$AplProductImpl value, $Res Function(_$AplProductImpl) then) =
+      __$$AplProductImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -134,11 +134,11 @@ abstract class _$$_AplProductCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_AplProductCopyWithImpl<$Res>
-    extends _$AplProductCopyWithImpl<$Res, _$_AplProduct>
-    implements _$$_AplProductCopyWith<$Res> {
-  __$$_AplProductCopyWithImpl(
-      _$_AplProduct _value, $Res Function(_$_AplProduct) _then)
+class __$$AplProductImplCopyWithImpl<$Res>
+    extends _$AplProductCopyWithImpl<$Res, _$AplProductImpl>
+    implements _$$AplProductImplCopyWith<$Res> {
+  __$$AplProductImplCopyWithImpl(
+      _$AplProductImpl _value, $Res Function(_$AplProductImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -154,7 +154,7 @@ class __$$_AplProductCopyWithImpl<$Res>
     Object? tax = null,
     Object? aplPromotions = null,
   }) {
-    return _then(_$_AplProduct(
+    return _then(_$AplProductImpl(
       type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
@@ -197,8 +197,8 @@ class __$$_AplProductCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_AplProduct extends _AplProduct {
-  const _$_AplProduct(
+class _$AplProductImpl extends _AplProduct {
+  const _$AplProductImpl(
       {required this.type,
       required this.itemNumber,
       required this.parentItemNumber,
@@ -241,10 +241,10 @@ class _$_AplProduct extends _AplProduct {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_AplProduct &&
+            other is _$AplProductImpl &&
             (identical(other.type, type) || other.type == type) &&
             (identical(other.itemNumber, itemNumber) ||
                 other.itemNumber == itemNumber) &&
@@ -279,8 +279,8 @@ class _$_AplProduct extends _AplProduct {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_AplProductCopyWith<_$_AplProduct> get copyWith =>
-      __$$_AplProductCopyWithImpl<_$_AplProduct>(this, _$identity);
+  _$$AplProductImplCopyWith<_$AplProductImpl> get copyWith =>
+      __$$AplProductImplCopyWithImpl<_$AplProductImpl>(this, _$identity);
 }
 
 abstract class _AplProduct extends AplProduct {
@@ -293,7 +293,7 @@ abstract class _AplProduct extends AplProduct {
       required final MaterialPrice finalPrice,
       required final MaterialQty productQty,
       required final double tax,
-      required final List<AplPromotions> aplPromotions}) = _$_AplProduct;
+      required final List<AplPromotions> aplPromotions}) = _$AplProductImpl;
   const _AplProduct._() : super._();
 
   @override
@@ -316,6 +316,6 @@ abstract class _AplProduct extends AplProduct {
   List<AplPromotions> get aplPromotions;
   @override
   @JsonKey(ignore: true)
-  _$$_AplProductCopyWith<_$_AplProduct> get copyWith =>
+  _$$AplProductImplCopyWith<_$AplProductImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -12,7 +12,7 @@ part of 'role_dto.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 RoleDto _$RoleDtoFromJson(Map<String, dynamic> json) {
   return _RoleDto.fromJson(json);
@@ -86,10 +86,10 @@ class _$RoleDtoCopyWithImpl<$Res, $Val extends RoleDto>
 }
 
 /// @nodoc
-abstract class _$$_RoleDtoCopyWith<$Res> implements $RoleDtoCopyWith<$Res> {
-  factory _$$_RoleDtoCopyWith(
-          _$_RoleDto value, $Res Function(_$_RoleDto) then) =
-      __$$_RoleDtoCopyWithImpl<$Res>;
+abstract class _$$RoleDtoImplCopyWith<$Res> implements $RoleDtoCopyWith<$Res> {
+  factory _$$RoleDtoImplCopyWith(
+          _$RoleDtoImpl value, $Res Function(_$RoleDtoImpl) then) =
+      __$$RoleDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -100,10 +100,11 @@ abstract class _$$_RoleDtoCopyWith<$Res> implements $RoleDtoCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_RoleDtoCopyWithImpl<$Res>
-    extends _$RoleDtoCopyWithImpl<$Res, _$_RoleDto>
-    implements _$$_RoleDtoCopyWith<$Res> {
-  __$$_RoleDtoCopyWithImpl(_$_RoleDto _value, $Res Function(_$_RoleDto) _then)
+class __$$RoleDtoImplCopyWithImpl<$Res>
+    extends _$RoleDtoCopyWithImpl<$Res, _$RoleDtoImpl>
+    implements _$$RoleDtoImplCopyWith<$Res> {
+  __$$RoleDtoImplCopyWithImpl(
+      _$RoleDtoImpl _value, $Res Function(_$RoleDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -114,7 +115,7 @@ class __$$_RoleDtoCopyWithImpl<$Res>
     Object? type = null,
     Object? description = null,
   }) {
-    return _then(_$_RoleDto(
+    return _then(_$RoleDtoImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -137,8 +138,8 @@ class __$$_RoleDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_RoleDto extends _RoleDto {
-  const _$_RoleDto(
+class _$RoleDtoImpl extends _RoleDto {
+  const _$RoleDtoImpl(
       {@JsonKey(name: 'id', readValue: _convertRoleId) required this.id,
       @JsonKey(name: 'name', defaultValue: '') required this.name,
       @JsonKey(name: 'type', defaultValue: '') required this.type,
@@ -146,8 +147,8 @@ class _$_RoleDto extends _RoleDto {
       required this.description})
       : super._();
 
-  factory _$_RoleDto.fromJson(Map<String, dynamic> json) =>
-      _$$_RoleDtoFromJson(json);
+  factory _$RoleDtoImpl.fromJson(Map<String, dynamic> json) =>
+      _$$RoleDtoImplFromJson(json);
 
   @override
   @JsonKey(name: 'id', readValue: _convertRoleId)
@@ -168,10 +169,10 @@ class _$_RoleDto extends _RoleDto {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_RoleDto &&
+            other is _$RoleDtoImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.type, type) || other.type == type) &&
@@ -186,12 +187,12 @@ class _$_RoleDto extends _RoleDto {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_RoleDtoCopyWith<_$_RoleDto> get copyWith =>
-      __$$_RoleDtoCopyWithImpl<_$_RoleDto>(this, _$identity);
+  _$$RoleDtoImplCopyWith<_$RoleDtoImpl> get copyWith =>
+      __$$RoleDtoImplCopyWithImpl<_$RoleDtoImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_RoleDtoToJson(
+    return _$$RoleDtoImplToJson(
       this,
     );
   }
@@ -203,10 +204,10 @@ abstract class _RoleDto extends RoleDto {
       @JsonKey(name: 'name', defaultValue: '') required final String name,
       @JsonKey(name: 'type', defaultValue: '') required final String type,
       @JsonKey(name: 'description', defaultValue: '')
-      required final String description}) = _$_RoleDto;
+      required final String description}) = _$RoleDtoImpl;
   const _RoleDto._() : super._();
 
-  factory _RoleDto.fromJson(Map<String, dynamic> json) = _$_RoleDto.fromJson;
+  factory _RoleDto.fromJson(Map<String, dynamic> json) = _$RoleDtoImpl.fromJson;
 
   @override
   @JsonKey(name: 'id', readValue: _convertRoleId)
@@ -222,6 +223,6 @@ abstract class _RoleDto extends RoleDto {
   String get description;
   @override
   @JsonKey(ignore: true)
-  _$$_RoleDtoCopyWith<_$_RoleDto> get copyWith =>
+  _$$RoleDtoImplCopyWith<_$RoleDtoImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

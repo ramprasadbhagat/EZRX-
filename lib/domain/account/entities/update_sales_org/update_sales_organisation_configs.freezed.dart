@@ -12,7 +12,7 @@ part of 'update_sales_organisation_configs.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$UpdateSalesOrganisationConfigs {
@@ -370,12 +370,12 @@ class _$UpdateSalesOrganisationConfigsCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_UpdateSalesOrganisationConfigsCopyWith<$Res>
+abstract class _$$UpdateSalesOrganisationConfigsImplCopyWith<$Res>
     implements $UpdateSalesOrganisationConfigsCopyWith<$Res> {
-  factory _$$_UpdateSalesOrganisationConfigsCopyWith(
-          _$_UpdateSalesOrganisationConfigs value,
-          $Res Function(_$_UpdateSalesOrganisationConfigs) then) =
-      __$$_UpdateSalesOrganisationConfigsCopyWithImpl<$Res>;
+  factory _$$UpdateSalesOrganisationConfigsImplCopyWith(
+          _$UpdateSalesOrganisationConfigsImpl value,
+          $Res Function(_$UpdateSalesOrganisationConfigsImpl) then) =
+      __$$UpdateSalesOrganisationConfigsImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -427,13 +427,13 @@ abstract class _$$_UpdateSalesOrganisationConfigsCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_UpdateSalesOrganisationConfigsCopyWithImpl<$Res>
+class __$$UpdateSalesOrganisationConfigsImplCopyWithImpl<$Res>
     extends _$UpdateSalesOrganisationConfigsCopyWithImpl<$Res,
-        _$_UpdateSalesOrganisationConfigs>
-    implements _$$_UpdateSalesOrganisationConfigsCopyWith<$Res> {
-  __$$_UpdateSalesOrganisationConfigsCopyWithImpl(
-      _$_UpdateSalesOrganisationConfigs _value,
-      $Res Function(_$_UpdateSalesOrganisationConfigs) _then)
+        _$UpdateSalesOrganisationConfigsImpl>
+    implements _$$UpdateSalesOrganisationConfigsImplCopyWith<$Res> {
+  __$$UpdateSalesOrganisationConfigsImplCopyWithImpl(
+      _$UpdateSalesOrganisationConfigsImpl _value,
+      $Res Function(_$UpdateSalesOrganisationConfigsImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -485,7 +485,7 @@ class __$$_UpdateSalesOrganisationConfigsCopyWithImpl<$Res>
     Object? enableTaxDisplay = null,
     Object? enableGMN = null,
   }) {
-    return _then(_$_UpdateSalesOrganisationConfigs(
+    return _then(_$UpdateSalesOrganisationConfigsImpl(
       salesOrg: null == salesOrg
           ? _value.salesOrg
           : salesOrg // ignore: cast_nullable_to_non_nullable
@@ -672,9 +672,9 @@ class __$$_UpdateSalesOrganisationConfigsCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_UpdateSalesOrganisationConfigs
+class _$UpdateSalesOrganisationConfigsImpl
     extends _UpdateSalesOrganisationConfigs {
-  const _$_UpdateSalesOrganisationConfigs(
+  const _$UpdateSalesOrganisationConfigsImpl(
       {required this.salesOrg,
       required this.poNumberRequired,
       required this.priceOverride,
@@ -819,10 +819,10 @@ class _$_UpdateSalesOrganisationConfigs
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_UpdateSalesOrganisationConfigs &&
+            other is _$UpdateSalesOrganisationConfigsImpl &&
             (identical(other.salesOrg, salesOrg) ||
                 other.salesOrg == salesOrg) &&
             (identical(other.poNumberRequired, poNumberRequired) ||
@@ -957,9 +957,10 @@ class _$_UpdateSalesOrganisationConfigs
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_UpdateSalesOrganisationConfigsCopyWith<_$_UpdateSalesOrganisationConfigs>
-      get copyWith => __$$_UpdateSalesOrganisationConfigsCopyWithImpl<
-          _$_UpdateSalesOrganisationConfigs>(this, _$identity);
+  _$$UpdateSalesOrganisationConfigsImplCopyWith<
+          _$UpdateSalesOrganisationConfigsImpl>
+      get copyWith => __$$UpdateSalesOrganisationConfigsImplCopyWithImpl<
+          _$UpdateSalesOrganisationConfigsImpl>(this, _$identity);
 }
 
 abstract class _UpdateSalesOrganisationConfigs
@@ -1009,7 +1010,7 @@ abstract class _UpdateSalesOrganisationConfigs
       required final OosValue oosValue,
       required final bool enableRemarks,
       required final bool enableTaxDisplay,
-      required final bool enableGMN}) = _$_UpdateSalesOrganisationConfigs;
+      required final bool enableGMN}) = _$UpdateSalesOrganisationConfigsImpl;
   const _UpdateSalesOrganisationConfigs._() : super._();
 
   @override
@@ -1104,6 +1105,7 @@ abstract class _UpdateSalesOrganisationConfigs
   bool get enableGMN;
   @override
   @JsonKey(ignore: true)
-  _$$_UpdateSalesOrganisationConfigsCopyWith<_$_UpdateSalesOrganisationConfigs>
+  _$$UpdateSalesOrganisationConfigsImplCopyWith<
+          _$UpdateSalesOrganisationConfigsImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

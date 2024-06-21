@@ -6,25 +6,26 @@ part of 'price_tier_dto.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_PriceTierDto _$$_PriceTierDtoFromJson(Map<String, dynamic> json) =>
-    _$_PriceTierDto(
+_$PriceTierDtoImpl _$$PriceTierDtoImplFromJson(Map<String, dynamic> json) =>
+    _$PriceTierDtoImpl(
       items: (json['priceTier'] as List<dynamic>?)
               ?.map((e) => PriceTierItemDto.fromJson(e as Map<String, dynamic>))
               .toList() ??
           [],
     );
 
-Map<String, dynamic> _$$_PriceTierDtoToJson(_$_PriceTierDto instance) =>
+Map<String, dynamic> _$$PriceTierDtoImplToJson(_$PriceTierDtoImpl instance) =>
     <String, dynamic>{
       'priceTier': instance.items.map((e) => e.toJson()).toList(),
     };
 
-_$_PriceTierItemDto _$$_PriceTierItemDtoFromJson(Map<String, dynamic> json) =>
-    _$_PriceTierItemDto(
+_$PriceTierItemDtoImpl _$$PriceTierItemDtoImplFromJson(
+        Map<String, dynamic> json) =>
+    _$PriceTierItemDtoImpl(
       type: json['type'] as String? ?? '',
       applyBonus: json['applyBonus'] as bool? ?? false,
-      sequence: json['sequence'] as int? ?? 0,
-      quantity: json['quantity'] as int? ?? 0,
+      sequence: (json['sequence'] as num?)?.toInt() ?? 0,
+      quantity: (json['quantity'] as num?)?.toInt() ?? 0,
       rate: (json['rate'] as num?)?.toDouble() ?? 0,
       percentage: (json['percentage'] as num?)?.toDouble() ?? 0,
       minAmount: (json['minAmount'] as num?)?.toDouble() ?? 0,
@@ -32,7 +33,8 @@ _$_PriceTierItemDto _$$_PriceTierItemDtoFromJson(Map<String, dynamic> json) =>
       promotionAmount: (json['promotionAmount'] as num?)?.toDouble() ?? 0,
     );
 
-Map<String, dynamic> _$$_PriceTierItemDtoToJson(_$_PriceTierItemDto instance) =>
+Map<String, dynamic> _$$PriceTierItemDtoImplToJson(
+        _$PriceTierItemDtoImpl instance) =>
     <String, dynamic>{
       'type': instance.type,
       'applyBonus': instance.applyBonus,

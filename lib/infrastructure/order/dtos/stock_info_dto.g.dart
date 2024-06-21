@@ -6,9 +6,9 @@ part of 'stock_info_dto.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_MaterialStockInfoDto _$$_MaterialStockInfoDtoFromJson(
+_$MaterialStockInfoDtoImpl _$$MaterialStockInfoDtoImplFromJson(
         Map<String, dynamic> json) =>
-    _$_MaterialStockInfoDto(
+    _$MaterialStockInfoDtoImpl(
       materialNumber: json['MaterialNumber'] as String? ?? '',
       stockInformation: (json['StockInformation'] as List<dynamic>?)
               ?.map((e) => StockInfoDto.fromJson(e as Map<String, dynamic>))
@@ -16,25 +16,25 @@ _$_MaterialStockInfoDto _$$_MaterialStockInfoDtoFromJson(
           [],
     );
 
-Map<String, dynamic> _$$_MaterialStockInfoDtoToJson(
-        _$_MaterialStockInfoDto instance) =>
+Map<String, dynamic> _$$MaterialStockInfoDtoImplToJson(
+        _$MaterialStockInfoDtoImpl instance) =>
     <String, dynamic>{
       'MaterialNumber': instance.materialNumber,
       'StockInformation':
           instance.stockInformation.map((e) => e.toJson()).toList(),
     };
 
-_$_StockInfoDto _$$_StockInfoDtoFromJson(Map<String, dynamic> json) =>
-    _$_StockInfoDto(
+_$StockInfoDtoImpl _$$StockInfoDtoImplFromJson(Map<String, dynamic> json) =>
+    _$StockInfoDtoImpl(
       materialNumber: json['MaterialNumber'] as String? ?? '',
       expiryDate: json['ExpiryDate'] as String? ?? '',
       batch: json['Batch'] as String? ?? '',
       inStock: json['InStock'] as String? ?? '',
-      stockQuantity: json['StockQuantity'] as int? ?? 0,
+      stockQuantity: (json['StockQuantity'] as num?)?.toInt() ?? 0,
       salesDistrict: json['SalesDistrict'] as String? ?? '',
     );
 
-Map<String, dynamic> _$$_StockInfoDtoToJson(_$_StockInfoDto instance) =>
+Map<String, dynamic> _$$StockInfoDtoImplToJson(_$StockInfoDtoImpl instance) =>
     <String, dynamic>{
       'MaterialNumber': instance.materialNumber,
       'ExpiryDate': instance.expiryDate,

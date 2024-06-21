@@ -12,7 +12,7 @@ part of 'invoice_data.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$InvoiceData {
@@ -72,11 +72,11 @@ class _$InvoiceDataCopyWithImpl<$Res, $Val extends InvoiceData>
 }
 
 /// @nodoc
-abstract class _$$_InvoiceDataCopyWith<$Res>
+abstract class _$$InvoiceDataImplCopyWith<$Res>
     implements $InvoiceDataCopyWith<$Res> {
-  factory _$$_InvoiceDataCopyWith(
-          _$_InvoiceData value, $Res Function(_$_InvoiceData) then) =
-      __$$_InvoiceDataCopyWithImpl<$Res>;
+  factory _$$InvoiceDataImplCopyWith(
+          _$InvoiceDataImpl value, $Res Function(_$InvoiceDataImpl) then) =
+      __$$InvoiceDataImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -86,11 +86,11 @@ abstract class _$$_InvoiceDataCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_InvoiceDataCopyWithImpl<$Res>
-    extends _$InvoiceDataCopyWithImpl<$Res, _$_InvoiceData>
-    implements _$$_InvoiceDataCopyWith<$Res> {
-  __$$_InvoiceDataCopyWithImpl(
-      _$_InvoiceData _value, $Res Function(_$_InvoiceData) _then)
+class __$$InvoiceDataImplCopyWithImpl<$Res>
+    extends _$InvoiceDataCopyWithImpl<$Res, _$InvoiceDataImpl>
+    implements _$$InvoiceDataImplCopyWith<$Res> {
+  __$$InvoiceDataImplCopyWithImpl(
+      _$InvoiceDataImpl _value, $Res Function(_$InvoiceDataImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -100,7 +100,7 @@ class __$$_InvoiceDataCopyWithImpl<$Res>
     Object? invoiceNumber = null,
     Object? lineNumber = null,
   }) {
-    return _then(_$_InvoiceData(
+    return _then(_$InvoiceDataImpl(
       orderNumber: null == orderNumber
           ? _value.orderNumber
           : orderNumber // ignore: cast_nullable_to_non_nullable
@@ -119,8 +119,8 @@ class __$$_InvoiceDataCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_InvoiceData extends _InvoiceData {
-  const _$_InvoiceData(
+class _$InvoiceDataImpl extends _InvoiceData {
+  const _$InvoiceDataImpl(
       {required this.orderNumber,
       required this.invoiceNumber,
       required this.lineNumber})
@@ -139,10 +139,10 @@ class _$_InvoiceData extends _InvoiceData {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_InvoiceData &&
+            other is _$InvoiceDataImpl &&
             (identical(other.orderNumber, orderNumber) ||
                 other.orderNumber == orderNumber) &&
             (identical(other.invoiceNumber, invoiceNumber) ||
@@ -158,15 +158,15 @@ class _$_InvoiceData extends _InvoiceData {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_InvoiceDataCopyWith<_$_InvoiceData> get copyWith =>
-      __$$_InvoiceDataCopyWithImpl<_$_InvoiceData>(this, _$identity);
+  _$$InvoiceDataImplCopyWith<_$InvoiceDataImpl> get copyWith =>
+      __$$InvoiceDataImplCopyWithImpl<_$InvoiceDataImpl>(this, _$identity);
 }
 
 abstract class _InvoiceData extends InvoiceData {
   const factory _InvoiceData(
       {required final OrderNumber orderNumber,
       required final StringValue invoiceNumber,
-      required final StringValue lineNumber}) = _$_InvoiceData;
+      required final StringValue lineNumber}) = _$InvoiceDataImpl;
   const _InvoiceData._() : super._();
 
   @override
@@ -177,6 +177,6 @@ abstract class _InvoiceData extends InvoiceData {
   StringValue get lineNumber;
   @override
   @JsonKey(ignore: true)
-  _$$_InvoiceDataCopyWith<_$_InvoiceData> get copyWith =>
+  _$$InvoiceDataImplCopyWith<_$InvoiceDataImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

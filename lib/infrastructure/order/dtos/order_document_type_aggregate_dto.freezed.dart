@@ -12,7 +12,7 @@ part of 'order_document_type_aggregate_dto.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 OrderDocumentTypeDto _$OrderDocumentTypeDtoFromJson(Map<String, dynamic> json) {
   return _OrderDocumentTypeDto.fromJson(json);
@@ -51,19 +51,19 @@ abstract class $OrderDocumentTypeDtoCopyWith<$Res> {
   $Res call(
       {@JsonKey(name: 'salesOrg')
       @HiveField(0, defaultValue: '')
-          String salesOrg,
+      String salesOrg,
       @JsonKey(name: 'documentType')
       @HiveField(1, defaultValue: '')
-          String documentType,
+      String documentType,
       @JsonKey(name: 'description')
       @HiveField(2, defaultValue: '')
-          String description,
+      String description,
       @JsonKey(name: 'shippingCondition')
       @HiveField(3, defaultValue: '')
-          String shippingCondition,
+      String shippingCondition,
       @JsonKey(name: 'orderReason')
       @HiveField(4, defaultValue: '')
-          String orderReason});
+      String orderReason});
 }
 
 /// @nodoc
@@ -112,37 +112,37 @@ class _$OrderDocumentTypeDtoCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_OrderDocumentTypeDtoCopyWith<$Res>
+abstract class _$$OrderDocumentTypeDtoImplCopyWith<$Res>
     implements $OrderDocumentTypeDtoCopyWith<$Res> {
-  factory _$$_OrderDocumentTypeDtoCopyWith(_$_OrderDocumentTypeDto value,
-          $Res Function(_$_OrderDocumentTypeDto) then) =
-      __$$_OrderDocumentTypeDtoCopyWithImpl<$Res>;
+  factory _$$OrderDocumentTypeDtoImplCopyWith(_$OrderDocumentTypeDtoImpl value,
+          $Res Function(_$OrderDocumentTypeDtoImpl) then) =
+      __$$OrderDocumentTypeDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
       {@JsonKey(name: 'salesOrg')
       @HiveField(0, defaultValue: '')
-          String salesOrg,
+      String salesOrg,
       @JsonKey(name: 'documentType')
       @HiveField(1, defaultValue: '')
-          String documentType,
+      String documentType,
       @JsonKey(name: 'description')
       @HiveField(2, defaultValue: '')
-          String description,
+      String description,
       @JsonKey(name: 'shippingCondition')
       @HiveField(3, defaultValue: '')
-          String shippingCondition,
+      String shippingCondition,
       @JsonKey(name: 'orderReason')
       @HiveField(4, defaultValue: '')
-          String orderReason});
+      String orderReason});
 }
 
 /// @nodoc
-class __$$_OrderDocumentTypeDtoCopyWithImpl<$Res>
-    extends _$OrderDocumentTypeDtoCopyWithImpl<$Res, _$_OrderDocumentTypeDto>
-    implements _$$_OrderDocumentTypeDtoCopyWith<$Res> {
-  __$$_OrderDocumentTypeDtoCopyWithImpl(_$_OrderDocumentTypeDto _value,
-      $Res Function(_$_OrderDocumentTypeDto) _then)
+class __$$OrderDocumentTypeDtoImplCopyWithImpl<$Res>
+    extends _$OrderDocumentTypeDtoCopyWithImpl<$Res, _$OrderDocumentTypeDtoImpl>
+    implements _$$OrderDocumentTypeDtoImplCopyWith<$Res> {
+  __$$OrderDocumentTypeDtoImplCopyWithImpl(_$OrderDocumentTypeDtoImpl _value,
+      $Res Function(_$OrderDocumentTypeDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -154,7 +154,7 @@ class __$$_OrderDocumentTypeDtoCopyWithImpl<$Res>
     Object? shippingCondition = null,
     Object? orderReason = null,
   }) {
-    return _then(_$_OrderDocumentTypeDto(
+    return _then(_$OrderDocumentTypeDtoImpl(
       salesOrg: null == salesOrg
           ? _value.salesOrg
           : salesOrg // ignore: cast_nullable_to_non_nullable
@@ -182,27 +182,27 @@ class __$$_OrderDocumentTypeDtoCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 @HiveType(typeId: 31, adapterName: 'OrderDocumentTypeDtoAdapter')
-class _$_OrderDocumentTypeDto extends _OrderDocumentTypeDto {
-  const _$_OrderDocumentTypeDto(
+class _$OrderDocumentTypeDtoImpl extends _OrderDocumentTypeDto {
+  const _$OrderDocumentTypeDtoImpl(
       {@JsonKey(name: 'salesOrg')
       @HiveField(0, defaultValue: '')
-          required this.salesOrg,
+      required this.salesOrg,
       @JsonKey(name: 'documentType')
       @HiveField(1, defaultValue: '')
-          required this.documentType,
+      required this.documentType,
       @JsonKey(name: 'description')
       @HiveField(2, defaultValue: '')
-          required this.description,
+      required this.description,
       @JsonKey(name: 'shippingCondition')
       @HiveField(3, defaultValue: '')
-          required this.shippingCondition,
+      required this.shippingCondition,
       @JsonKey(name: 'orderReason')
       @HiveField(4, defaultValue: '')
-          required this.orderReason})
+      required this.orderReason})
       : super._();
 
-  factory _$_OrderDocumentTypeDto.fromJson(Map<String, dynamic> json) =>
-      _$$_OrderDocumentTypeDtoFromJson(json);
+  factory _$OrderDocumentTypeDtoImpl.fromJson(Map<String, dynamic> json) =>
+      _$$OrderDocumentTypeDtoImplFromJson(json);
 
   @override
   @JsonKey(name: 'salesOrg')
@@ -231,10 +231,10 @@ class _$_OrderDocumentTypeDto extends _OrderDocumentTypeDto {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_OrderDocumentTypeDto &&
+            other is _$OrderDocumentTypeDtoImpl &&
             (identical(other.salesOrg, salesOrg) ||
                 other.salesOrg == salesOrg) &&
             (identical(other.documentType, documentType) ||
@@ -255,13 +255,14 @@ class _$_OrderDocumentTypeDto extends _OrderDocumentTypeDto {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_OrderDocumentTypeDtoCopyWith<_$_OrderDocumentTypeDto> get copyWith =>
-      __$$_OrderDocumentTypeDtoCopyWithImpl<_$_OrderDocumentTypeDto>(
-          this, _$identity);
+  _$$OrderDocumentTypeDtoImplCopyWith<_$OrderDocumentTypeDtoImpl>
+      get copyWith =>
+          __$$OrderDocumentTypeDtoImplCopyWithImpl<_$OrderDocumentTypeDtoImpl>(
+              this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_OrderDocumentTypeDtoToJson(
+    return _$$OrderDocumentTypeDtoImplToJson(
       this,
     );
   }
@@ -271,23 +272,23 @@ abstract class _OrderDocumentTypeDto extends OrderDocumentTypeDto {
   const factory _OrderDocumentTypeDto(
       {@JsonKey(name: 'salesOrg')
       @HiveField(0, defaultValue: '')
-          required final String salesOrg,
+      required final String salesOrg,
       @JsonKey(name: 'documentType')
       @HiveField(1, defaultValue: '')
-          required final String documentType,
+      required final String documentType,
       @JsonKey(name: 'description')
       @HiveField(2, defaultValue: '')
-          required final String description,
+      required final String description,
       @JsonKey(name: 'shippingCondition')
       @HiveField(3, defaultValue: '')
-          required final String shippingCondition,
+      required final String shippingCondition,
       @JsonKey(name: 'orderReason')
       @HiveField(4, defaultValue: '')
-          required final String orderReason}) = _$_OrderDocumentTypeDto;
+      required final String orderReason}) = _$OrderDocumentTypeDtoImpl;
   const _OrderDocumentTypeDto._() : super._();
 
   factory _OrderDocumentTypeDto.fromJson(Map<String, dynamic> json) =
-      _$_OrderDocumentTypeDto.fromJson;
+      _$OrderDocumentTypeDtoImpl.fromJson;
 
   @override
   @JsonKey(name: 'salesOrg')
@@ -311,6 +312,6 @@ abstract class _OrderDocumentTypeDto extends OrderDocumentTypeDto {
   String get orderReason;
   @override
   @JsonKey(ignore: true)
-  _$$_OrderDocumentTypeDtoCopyWith<_$_OrderDocumentTypeDto> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$OrderDocumentTypeDtoImplCopyWith<_$OrderDocumentTypeDtoImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }

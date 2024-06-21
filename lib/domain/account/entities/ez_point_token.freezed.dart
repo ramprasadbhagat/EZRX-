@@ -12,7 +12,7 @@ part of 'ez_point_token.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$EZPointToken {
@@ -57,22 +57,22 @@ class _$EZPointTokenCopyWithImpl<$Res, $Val extends EZPointToken>
 }
 
 /// @nodoc
-abstract class _$$_EZPointTokenCopyWith<$Res>
+abstract class _$$EZPointTokenImplCopyWith<$Res>
     implements $EZPointTokenCopyWith<$Res> {
-  factory _$$_EZPointTokenCopyWith(
-          _$_EZPointToken value, $Res Function(_$_EZPointToken) then) =
-      __$$_EZPointTokenCopyWithImpl<$Res>;
+  factory _$$EZPointTokenImplCopyWith(
+          _$EZPointTokenImpl value, $Res Function(_$EZPointTokenImpl) then) =
+      __$$EZPointTokenImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String ezPointToken});
 }
 
 /// @nodoc
-class __$$_EZPointTokenCopyWithImpl<$Res>
-    extends _$EZPointTokenCopyWithImpl<$Res, _$_EZPointToken>
-    implements _$$_EZPointTokenCopyWith<$Res> {
-  __$$_EZPointTokenCopyWithImpl(
-      _$_EZPointToken _value, $Res Function(_$_EZPointToken) _then)
+class __$$EZPointTokenImplCopyWithImpl<$Res>
+    extends _$EZPointTokenCopyWithImpl<$Res, _$EZPointTokenImpl>
+    implements _$$EZPointTokenImplCopyWith<$Res> {
+  __$$EZPointTokenImplCopyWithImpl(
+      _$EZPointTokenImpl _value, $Res Function(_$EZPointTokenImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -80,7 +80,7 @@ class __$$_EZPointTokenCopyWithImpl<$Res>
   $Res call({
     Object? ezPointToken = null,
   }) {
-    return _then(_$_EZPointToken(
+    return _then(_$EZPointTokenImpl(
       ezPointToken: null == ezPointToken
           ? _value.ezPointToken
           : ezPointToken // ignore: cast_nullable_to_non_nullable
@@ -91,8 +91,8 @@ class __$$_EZPointTokenCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_EZPointToken extends _EZPointToken {
-  _$_EZPointToken({required this.ezPointToken}) : super._();
+class _$EZPointTokenImpl extends _EZPointToken {
+  _$EZPointTokenImpl({required this.ezPointToken}) : super._();
 
   @override
   final String ezPointToken;
@@ -103,10 +103,10 @@ class _$_EZPointToken extends _EZPointToken {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_EZPointToken &&
+            other is _$EZPointTokenImpl &&
             (identical(other.ezPointToken, ezPointToken) ||
                 other.ezPointToken == ezPointToken));
   }
@@ -117,18 +117,19 @@ class _$_EZPointToken extends _EZPointToken {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_EZPointTokenCopyWith<_$_EZPointToken> get copyWith =>
-      __$$_EZPointTokenCopyWithImpl<_$_EZPointToken>(this, _$identity);
+  _$$EZPointTokenImplCopyWith<_$EZPointTokenImpl> get copyWith =>
+      __$$EZPointTokenImplCopyWithImpl<_$EZPointTokenImpl>(this, _$identity);
 }
 
 abstract class _EZPointToken extends EZPointToken {
-  factory _EZPointToken({required final String ezPointToken}) = _$_EZPointToken;
+  factory _EZPointToken({required final String ezPointToken}) =
+      _$EZPointTokenImpl;
   _EZPointToken._() : super._();
 
   @override
   String get ezPointToken;
   @override
   @JsonKey(ignore: true)
-  _$$_EZPointTokenCopyWith<_$_EZPointToken> get copyWith =>
+  _$$EZPointTokenImplCopyWith<_$EZPointTokenImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

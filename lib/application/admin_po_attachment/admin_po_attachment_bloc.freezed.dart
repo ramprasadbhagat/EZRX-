@@ -12,7 +12,7 @@ part of 'admin_po_attachment_bloc.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$AdminPoAttachmentEvent {
@@ -92,25 +92,25 @@ class _$AdminPoAttachmentEventCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_InitializedCopyWith<$Res> {
-  factory _$$_InitializedCopyWith(
-          _$_Initialized value, $Res Function(_$_Initialized) then) =
-      __$$_InitializedCopyWithImpl<$Res>;
+abstract class _$$InitializedImplCopyWith<$Res> {
+  factory _$$InitializedImplCopyWith(
+          _$InitializedImpl value, $Res Function(_$InitializedImpl) then) =
+      __$$InitializedImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_InitializedCopyWithImpl<$Res>
-    extends _$AdminPoAttachmentEventCopyWithImpl<$Res, _$_Initialized>
-    implements _$$_InitializedCopyWith<$Res> {
-  __$$_InitializedCopyWithImpl(
-      _$_Initialized _value, $Res Function(_$_Initialized) _then)
+class __$$InitializedImplCopyWithImpl<$Res>
+    extends _$AdminPoAttachmentEventCopyWithImpl<$Res, _$InitializedImpl>
+    implements _$$InitializedImplCopyWith<$Res> {
+  __$$InitializedImplCopyWithImpl(
+      _$InitializedImpl _value, $Res Function(_$InitializedImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_Initialized implements _Initialized {
-  const _$_Initialized();
+class _$InitializedImpl implements _Initialized {
+  const _$InitializedImpl();
 
   @override
   String toString() {
@@ -118,9 +118,9 @@ class _$_Initialized implements _Initialized {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_Initialized);
+        (other.runtimeType == runtimeType && other is _$InitializedImpl);
   }
 
   @override
@@ -206,13 +206,14 @@ class _$_Initialized implements _Initialized {
 }
 
 abstract class _Initialized implements AdminPoAttachmentEvent {
-  const factory _Initialized() = _$_Initialized;
+  const factory _Initialized() = _$InitializedImpl;
 }
 
 /// @nodoc
-abstract class _$$_FetchCopyWith<$Res> {
-  factory _$$_FetchCopyWith(_$_Fetch value, $Res Function(_$_Fetch) then) =
-      __$$_FetchCopyWithImpl<$Res>;
+abstract class _$$FetchImplCopyWith<$Res> {
+  factory _$$FetchImplCopyWith(
+          _$FetchImpl value, $Res Function(_$FetchImpl) then) =
+      __$$FetchImplCopyWithImpl<$Res>;
   @useResult
   $Res call({AdminPoAttachmentFilter adminPoAttachmentFilter});
 
@@ -220,10 +221,11 @@ abstract class _$$_FetchCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_FetchCopyWithImpl<$Res>
-    extends _$AdminPoAttachmentEventCopyWithImpl<$Res, _$_Fetch>
-    implements _$$_FetchCopyWith<$Res> {
-  __$$_FetchCopyWithImpl(_$_Fetch _value, $Res Function(_$_Fetch) _then)
+class __$$FetchImplCopyWithImpl<$Res>
+    extends _$AdminPoAttachmentEventCopyWithImpl<$Res, _$FetchImpl>
+    implements _$$FetchImplCopyWith<$Res> {
+  __$$FetchImplCopyWithImpl(
+      _$FetchImpl _value, $Res Function(_$FetchImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -231,7 +233,7 @@ class __$$_FetchCopyWithImpl<$Res>
   $Res call({
     Object? adminPoAttachmentFilter = null,
   }) {
-    return _then(_$_Fetch(
+    return _then(_$FetchImpl(
       adminPoAttachmentFilter: null == adminPoAttachmentFilter
           ? _value.adminPoAttachmentFilter
           : adminPoAttachmentFilter // ignore: cast_nullable_to_non_nullable
@@ -251,8 +253,8 @@ class __$$_FetchCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_Fetch implements _Fetch {
-  const _$_Fetch({required this.adminPoAttachmentFilter});
+class _$FetchImpl implements _Fetch {
+  const _$FetchImpl({required this.adminPoAttachmentFilter});
 
   @override
   final AdminPoAttachmentFilter adminPoAttachmentFilter;
@@ -263,10 +265,10 @@ class _$_Fetch implements _Fetch {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Fetch &&
+            other is _$FetchImpl &&
             (identical(
                     other.adminPoAttachmentFilter, adminPoAttachmentFilter) ||
                 other.adminPoAttachmentFilter == adminPoAttachmentFilter));
@@ -278,8 +280,8 @@ class _$_Fetch implements _Fetch {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_FetchCopyWith<_$_Fetch> get copyWith =>
-      __$$_FetchCopyWithImpl<_$_Fetch>(this, _$identity);
+  _$$FetchImplCopyWith<_$FetchImpl> get copyWith =>
+      __$$FetchImplCopyWithImpl<_$FetchImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -363,19 +365,19 @@ class _$_Fetch implements _Fetch {
 abstract class _Fetch implements AdminPoAttachmentEvent {
   const factory _Fetch(
           {required final AdminPoAttachmentFilter adminPoAttachmentFilter}) =
-      _$_Fetch;
+      _$FetchImpl;
 
   AdminPoAttachmentFilter get adminPoAttachmentFilter;
   @JsonKey(ignore: true)
-  _$$_FetchCopyWith<_$_Fetch> get copyWith =>
+  _$$FetchImplCopyWith<_$FetchImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_LoadMoreCopyWith<$Res> {
-  factory _$$_LoadMoreCopyWith(
-          _$_LoadMore value, $Res Function(_$_LoadMore) then) =
-      __$$_LoadMoreCopyWithImpl<$Res>;
+abstract class _$$LoadMoreImplCopyWith<$Res> {
+  factory _$$LoadMoreImplCopyWith(
+          _$LoadMoreImpl value, $Res Function(_$LoadMoreImpl) then) =
+      __$$LoadMoreImplCopyWithImpl<$Res>;
   @useResult
   $Res call({AdminPoAttachmentFilter adminPoAttachmentFilter});
 
@@ -383,11 +385,11 @@ abstract class _$$_LoadMoreCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_LoadMoreCopyWithImpl<$Res>
-    extends _$AdminPoAttachmentEventCopyWithImpl<$Res, _$_LoadMore>
-    implements _$$_LoadMoreCopyWith<$Res> {
-  __$$_LoadMoreCopyWithImpl(
-      _$_LoadMore _value, $Res Function(_$_LoadMore) _then)
+class __$$LoadMoreImplCopyWithImpl<$Res>
+    extends _$AdminPoAttachmentEventCopyWithImpl<$Res, _$LoadMoreImpl>
+    implements _$$LoadMoreImplCopyWith<$Res> {
+  __$$LoadMoreImplCopyWithImpl(
+      _$LoadMoreImpl _value, $Res Function(_$LoadMoreImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -395,7 +397,7 @@ class __$$_LoadMoreCopyWithImpl<$Res>
   $Res call({
     Object? adminPoAttachmentFilter = null,
   }) {
-    return _then(_$_LoadMore(
+    return _then(_$LoadMoreImpl(
       adminPoAttachmentFilter: null == adminPoAttachmentFilter
           ? _value.adminPoAttachmentFilter
           : adminPoAttachmentFilter // ignore: cast_nullable_to_non_nullable
@@ -415,8 +417,8 @@ class __$$_LoadMoreCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_LoadMore implements _LoadMore {
-  const _$_LoadMore({required this.adminPoAttachmentFilter});
+class _$LoadMoreImpl implements _LoadMore {
+  const _$LoadMoreImpl({required this.adminPoAttachmentFilter});
 
   @override
   final AdminPoAttachmentFilter adminPoAttachmentFilter;
@@ -427,10 +429,10 @@ class _$_LoadMore implements _LoadMore {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_LoadMore &&
+            other is _$LoadMoreImpl &&
             (identical(
                     other.adminPoAttachmentFilter, adminPoAttachmentFilter) ||
                 other.adminPoAttachmentFilter == adminPoAttachmentFilter));
@@ -442,8 +444,8 @@ class _$_LoadMore implements _LoadMore {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_LoadMoreCopyWith<_$_LoadMore> get copyWith =>
-      __$$_LoadMoreCopyWithImpl<_$_LoadMore>(this, _$identity);
+  _$$LoadMoreImplCopyWith<_$LoadMoreImpl> get copyWith =>
+      __$$LoadMoreImplCopyWithImpl<_$LoadMoreImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -527,19 +529,19 @@ class _$_LoadMore implements _LoadMore {
 abstract class _LoadMore implements AdminPoAttachmentEvent {
   const factory _LoadMore(
           {required final AdminPoAttachmentFilter adminPoAttachmentFilter}) =
-      _$_LoadMore;
+      _$LoadMoreImpl;
 
   AdminPoAttachmentFilter get adminPoAttachmentFilter;
   @JsonKey(ignore: true)
-  _$$_LoadMoreCopyWith<_$_LoadMore> get copyWith =>
+  _$$LoadMoreImplCopyWith<_$LoadMoreImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_SelectDeselectCopyWith<$Res> {
-  factory _$$_SelectDeselectCopyWith(
-          _$_SelectDeselect value, $Res Function(_$_SelectDeselect) then) =
-      __$$_SelectDeselectCopyWithImpl<$Res>;
+abstract class _$$SelectDeselectImplCopyWith<$Res> {
+  factory _$$SelectDeselectImplCopyWith(_$SelectDeselectImpl value,
+          $Res Function(_$SelectDeselectImpl) then) =
+      __$$SelectDeselectImplCopyWithImpl<$Res>;
   @useResult
   $Res call({AdminPoAttachment adminPoAttachment});
 
@@ -547,11 +549,11 @@ abstract class _$$_SelectDeselectCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_SelectDeselectCopyWithImpl<$Res>
-    extends _$AdminPoAttachmentEventCopyWithImpl<$Res, _$_SelectDeselect>
-    implements _$$_SelectDeselectCopyWith<$Res> {
-  __$$_SelectDeselectCopyWithImpl(
-      _$_SelectDeselect _value, $Res Function(_$_SelectDeselect) _then)
+class __$$SelectDeselectImplCopyWithImpl<$Res>
+    extends _$AdminPoAttachmentEventCopyWithImpl<$Res, _$SelectDeselectImpl>
+    implements _$$SelectDeselectImplCopyWith<$Res> {
+  __$$SelectDeselectImplCopyWithImpl(
+      _$SelectDeselectImpl _value, $Res Function(_$SelectDeselectImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -559,7 +561,7 @@ class __$$_SelectDeselectCopyWithImpl<$Res>
   $Res call({
     Object? adminPoAttachment = null,
   }) {
-    return _then(_$_SelectDeselect(
+    return _then(_$SelectDeselectImpl(
       adminPoAttachment: null == adminPoAttachment
           ? _value.adminPoAttachment
           : adminPoAttachment // ignore: cast_nullable_to_non_nullable
@@ -578,8 +580,8 @@ class __$$_SelectDeselectCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_SelectDeselect implements _SelectDeselect {
-  const _$_SelectDeselect({required this.adminPoAttachment});
+class _$SelectDeselectImpl implements _SelectDeselect {
+  const _$SelectDeselectImpl({required this.adminPoAttachment});
 
   @override
   final AdminPoAttachment adminPoAttachment;
@@ -590,10 +592,10 @@ class _$_SelectDeselect implements _SelectDeselect {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_SelectDeselect &&
+            other is _$SelectDeselectImpl &&
             (identical(other.adminPoAttachment, adminPoAttachment) ||
                 other.adminPoAttachment == adminPoAttachment));
   }
@@ -604,8 +606,9 @@ class _$_SelectDeselect implements _SelectDeselect {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_SelectDeselectCopyWith<_$_SelectDeselect> get copyWith =>
-      __$$_SelectDeselectCopyWithImpl<_$_SelectDeselect>(this, _$identity);
+  _$$SelectDeselectImplCopyWith<_$SelectDeselectImpl> get copyWith =>
+      __$$SelectDeselectImplCopyWithImpl<_$SelectDeselectImpl>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -688,11 +691,12 @@ class _$_SelectDeselect implements _SelectDeselect {
 
 abstract class _SelectDeselect implements AdminPoAttachmentEvent {
   const factory _SelectDeselect(
-      {required final AdminPoAttachment adminPoAttachment}) = _$_SelectDeselect;
+          {required final AdminPoAttachment adminPoAttachment}) =
+      _$SelectDeselectImpl;
 
   AdminPoAttachment get adminPoAttachment;
   @JsonKey(ignore: true)
-  _$$_SelectDeselectCopyWith<_$_SelectDeselect> get copyWith =>
+  _$$SelectDeselectImplCopyWith<_$SelectDeselectImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -771,11 +775,12 @@ class _$AdminPoAttachmentStateCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_AdminPoAttachmentStateCopyWith<$Res>
+abstract class _$$AdminPoAttachmentStateImplCopyWith<$Res>
     implements $AdminPoAttachmentStateCopyWith<$Res> {
-  factory _$$_AdminPoAttachmentStateCopyWith(_$_AdminPoAttachmentState value,
-          $Res Function(_$_AdminPoAttachmentState) then) =
-      __$$_AdminPoAttachmentStateCopyWithImpl<$Res>;
+  factory _$$AdminPoAttachmentStateImplCopyWith(
+          _$AdminPoAttachmentStateImpl value,
+          $Res Function(_$AdminPoAttachmentStateImpl) then) =
+      __$$AdminPoAttachmentStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -787,12 +792,13 @@ abstract class _$$_AdminPoAttachmentStateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_AdminPoAttachmentStateCopyWithImpl<$Res>
+class __$$AdminPoAttachmentStateImplCopyWithImpl<$Res>
     extends _$AdminPoAttachmentStateCopyWithImpl<$Res,
-        _$_AdminPoAttachmentState>
-    implements _$$_AdminPoAttachmentStateCopyWith<$Res> {
-  __$$_AdminPoAttachmentStateCopyWithImpl(_$_AdminPoAttachmentState _value,
-      $Res Function(_$_AdminPoAttachmentState) _then)
+        _$AdminPoAttachmentStateImpl>
+    implements _$$AdminPoAttachmentStateImplCopyWith<$Res> {
+  __$$AdminPoAttachmentStateImplCopyWithImpl(
+      _$AdminPoAttachmentStateImpl _value,
+      $Res Function(_$AdminPoAttachmentStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -804,7 +810,7 @@ class __$$_AdminPoAttachmentStateCopyWithImpl<$Res>
     Object? nextPageIndex = null,
     Object? failureOrSuccessOption = null,
   }) {
-    return _then(_$_AdminPoAttachmentState(
+    return _then(_$AdminPoAttachmentStateImpl(
       adminPoAttachmentList: null == adminPoAttachmentList
           ? _value._adminPoAttachmentList
           : adminPoAttachmentList // ignore: cast_nullable_to_non_nullable
@@ -831,8 +837,8 @@ class __$$_AdminPoAttachmentStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_AdminPoAttachmentState extends _AdminPoAttachmentState {
-  const _$_AdminPoAttachmentState(
+class _$AdminPoAttachmentStateImpl extends _AdminPoAttachmentState {
+  const _$AdminPoAttachmentStateImpl(
       {required final List<AdminPoAttachment> adminPoAttachmentList,
       required this.canLoadMore,
       required this.isFetching,
@@ -865,10 +871,10 @@ class _$_AdminPoAttachmentState extends _AdminPoAttachmentState {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_AdminPoAttachmentState &&
+            other is _$AdminPoAttachmentStateImpl &&
             const DeepCollectionEquality()
                 .equals(other._adminPoAttachmentList, _adminPoAttachmentList) &&
             (identical(other.canLoadMore, canLoadMore) ||
@@ -893,9 +899,9 @@ class _$_AdminPoAttachmentState extends _AdminPoAttachmentState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_AdminPoAttachmentStateCopyWith<_$_AdminPoAttachmentState> get copyWith =>
-      __$$_AdminPoAttachmentStateCopyWithImpl<_$_AdminPoAttachmentState>(
-          this, _$identity);
+  _$$AdminPoAttachmentStateImplCopyWith<_$AdminPoAttachmentStateImpl>
+      get copyWith => __$$AdminPoAttachmentStateImplCopyWithImpl<
+          _$AdminPoAttachmentStateImpl>(this, _$identity);
 }
 
 abstract class _AdminPoAttachmentState extends AdminPoAttachmentState {
@@ -905,7 +911,7 @@ abstract class _AdminPoAttachmentState extends AdminPoAttachmentState {
       required final bool isFetching,
       required final int nextPageIndex,
       required final Option<Either<ApiFailure, dynamic>>
-          failureOrSuccessOption}) = _$_AdminPoAttachmentState;
+          failureOrSuccessOption}) = _$AdminPoAttachmentStateImpl;
   const _AdminPoAttachmentState._() : super._();
 
   @override
@@ -920,6 +926,6 @@ abstract class _AdminPoAttachmentState extends AdminPoAttachmentState {
   Option<Either<ApiFailure, dynamic>> get failureOrSuccessOption;
   @override
   @JsonKey(ignore: true)
-  _$$_AdminPoAttachmentStateCopyWith<_$_AdminPoAttachmentState> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$AdminPoAttachmentStateImplCopyWith<_$AdminPoAttachmentStateImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }

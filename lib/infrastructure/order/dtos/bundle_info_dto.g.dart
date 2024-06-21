@@ -6,15 +6,15 @@ part of 'bundle_info_dto.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_BundleInfoDto _$$_BundleInfoDtoFromJson(Map<String, dynamic> json) =>
-    _$_BundleInfoDto(
-      sequence: json['sequence'] as int,
-      quantity: json['quantity'] as int,
+_$BundleInfoDtoImpl _$$BundleInfoDtoImplFromJson(Map<String, dynamic> json) =>
+    _$BundleInfoDtoImpl(
+      sequence: (json['sequence'] as num).toInt(),
+      quantity: (json['quantity'] as num).toInt(),
       type: json['type'] as String,
       rate: (json['rate'] as num).toDouble(),
     );
 
-Map<String, dynamic> _$$_BundleInfoDtoToJson(_$_BundleInfoDto instance) =>
+Map<String, dynamic> _$$BundleInfoDtoImplToJson(_$BundleInfoDtoImpl instance) =>
     <String, dynamic>{
       'sequence': instance.sequence,
       'quantity': instance.quantity,

@@ -12,7 +12,7 @@ part of 'product_suggestion_history.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$ProductSuggestionHistory {
@@ -58,24 +58,25 @@ class _$ProductSuggestionHistoryCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_ProductSuggestionHistoryCopyWith<$Res>
+abstract class _$$ProductSuggestionHistoryImplCopyWith<$Res>
     implements $ProductSuggestionHistoryCopyWith<$Res> {
-  factory _$$_ProductSuggestionHistoryCopyWith(
-          _$_ProductSuggestionHistory value,
-          $Res Function(_$_ProductSuggestionHistory) then) =
-      __$$_ProductSuggestionHistoryCopyWithImpl<$Res>;
+  factory _$$ProductSuggestionHistoryImplCopyWith(
+          _$ProductSuggestionHistoryImpl value,
+          $Res Function(_$ProductSuggestionHistoryImpl) then) =
+      __$$ProductSuggestionHistoryImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({List<SearchKey> searchKeyList});
 }
 
 /// @nodoc
-class __$$_ProductSuggestionHistoryCopyWithImpl<$Res>
+class __$$ProductSuggestionHistoryImplCopyWithImpl<$Res>
     extends _$ProductSuggestionHistoryCopyWithImpl<$Res,
-        _$_ProductSuggestionHistory>
-    implements _$$_ProductSuggestionHistoryCopyWith<$Res> {
-  __$$_ProductSuggestionHistoryCopyWithImpl(_$_ProductSuggestionHistory _value,
-      $Res Function(_$_ProductSuggestionHistory) _then)
+        _$ProductSuggestionHistoryImpl>
+    implements _$$ProductSuggestionHistoryImplCopyWith<$Res> {
+  __$$ProductSuggestionHistoryImplCopyWithImpl(
+      _$ProductSuggestionHistoryImpl _value,
+      $Res Function(_$ProductSuggestionHistoryImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -83,7 +84,7 @@ class __$$_ProductSuggestionHistoryCopyWithImpl<$Res>
   $Res call({
     Object? searchKeyList = null,
   }) {
-    return _then(_$_ProductSuggestionHistory(
+    return _then(_$ProductSuggestionHistoryImpl(
       searchKeyList: null == searchKeyList
           ? _value._searchKeyList
           : searchKeyList // ignore: cast_nullable_to_non_nullable
@@ -94,8 +95,8 @@ class __$$_ProductSuggestionHistoryCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_ProductSuggestionHistory extends _ProductSuggestionHistory {
-  _$_ProductSuggestionHistory({required final List<SearchKey> searchKeyList})
+class _$ProductSuggestionHistoryImpl extends _ProductSuggestionHistory {
+  _$ProductSuggestionHistoryImpl({required final List<SearchKey> searchKeyList})
       : _searchKeyList = searchKeyList,
         super._();
 
@@ -113,10 +114,10 @@ class _$_ProductSuggestionHistory extends _ProductSuggestionHistory {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ProductSuggestionHistory &&
+            other is _$ProductSuggestionHistoryImpl &&
             const DeepCollectionEquality()
                 .equals(other._searchKeyList, _searchKeyList));
   }
@@ -128,21 +129,21 @@ class _$_ProductSuggestionHistory extends _ProductSuggestionHistory {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ProductSuggestionHistoryCopyWith<_$_ProductSuggestionHistory>
-      get copyWith => __$$_ProductSuggestionHistoryCopyWithImpl<
-          _$_ProductSuggestionHistory>(this, _$identity);
+  _$$ProductSuggestionHistoryImplCopyWith<_$ProductSuggestionHistoryImpl>
+      get copyWith => __$$ProductSuggestionHistoryImplCopyWithImpl<
+          _$ProductSuggestionHistoryImpl>(this, _$identity);
 }
 
 abstract class _ProductSuggestionHistory extends ProductSuggestionHistory {
   factory _ProductSuggestionHistory(
           {required final List<SearchKey> searchKeyList}) =
-      _$_ProductSuggestionHistory;
+      _$ProductSuggestionHistoryImpl;
   _ProductSuggestionHistory._() : super._();
 
   @override
   List<SearchKey> get searchKeyList;
   @override
   @JsonKey(ignore: true)
-  _$$_ProductSuggestionHistoryCopyWith<_$_ProductSuggestionHistory>
+  _$$ProductSuggestionHistoryImplCopyWith<_$ProductSuggestionHistoryImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

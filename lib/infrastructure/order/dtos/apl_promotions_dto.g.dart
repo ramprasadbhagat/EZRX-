@@ -6,13 +6,15 @@ part of 'apl_promotions_dto.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_AplPromotionsDto _$$_AplPromotionsDtoFromJson(Map<String, dynamic> json) =>
-    _$_AplPromotionsDto(
+_$AplPromotionsDtoImpl _$$AplPromotionsDtoImplFromJson(
+        Map<String, dynamic> json) =>
+    _$AplPromotionsDtoImpl(
       discountValue: (json['discountValue'] as num?)?.toDouble() ?? 0,
       discountTypeValue: json['discountTypeValue'] as String? ?? '',
     );
 
-Map<String, dynamic> _$$_AplPromotionsDtoToJson(_$_AplPromotionsDto instance) =>
+Map<String, dynamic> _$$AplPromotionsDtoImplToJson(
+        _$AplPromotionsDtoImpl instance) =>
     <String, dynamic>{
       'discountValue': instance.discountValue,
       'discountTypeValue': instance.discountTypeValue,

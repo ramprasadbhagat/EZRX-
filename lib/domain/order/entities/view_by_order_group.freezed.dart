@@ -12,7 +12,7 @@ part of 'view_by_order_group.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$ViewByOrdersGroup {
@@ -88,11 +88,11 @@ class _$ViewByOrdersGroupCopyWithImpl<$Res, $Val extends ViewByOrdersGroup>
 }
 
 /// @nodoc
-abstract class _$$_ViewByOrdersGroupCopyWith<$Res>
+abstract class _$$ViewByOrdersGroupImplCopyWith<$Res>
     implements $ViewByOrdersGroupCopyWith<$Res> {
-  factory _$$_ViewByOrdersGroupCopyWith(_$_ViewByOrdersGroup value,
-          $Res Function(_$_ViewByOrdersGroup) then) =
-      __$$_ViewByOrdersGroupCopyWithImpl<$Res>;
+  factory _$$ViewByOrdersGroupImplCopyWith(_$ViewByOrdersGroupImpl value,
+          $Res Function(_$ViewByOrdersGroupImpl) then) =
+      __$$ViewByOrdersGroupImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -104,11 +104,11 @@ abstract class _$$_ViewByOrdersGroupCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_ViewByOrdersGroupCopyWithImpl<$Res>
-    extends _$ViewByOrdersGroupCopyWithImpl<$Res, _$_ViewByOrdersGroup>
-    implements _$$_ViewByOrdersGroupCopyWith<$Res> {
-  __$$_ViewByOrdersGroupCopyWithImpl(
-      _$_ViewByOrdersGroup _value, $Res Function(_$_ViewByOrdersGroup) _then)
+class __$$ViewByOrdersGroupImplCopyWithImpl<$Res>
+    extends _$ViewByOrdersGroupCopyWithImpl<$Res, _$ViewByOrdersGroupImpl>
+    implements _$$ViewByOrdersGroupImplCopyWith<$Res> {
+  __$$ViewByOrdersGroupImplCopyWithImpl(_$ViewByOrdersGroupImpl _value,
+      $Res Function(_$ViewByOrdersGroupImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -120,7 +120,7 @@ class __$$_ViewByOrdersGroupCopyWithImpl<$Res>
     Object? parentId = null,
     Object? viewByOrderItem = null,
   }) {
-    return _then(_$_ViewByOrdersGroup(
+    return _then(_$ViewByOrdersGroupImpl(
       createdDate: null == createdDate
           ? _value.createdDate
           : createdDate // ignore: cast_nullable_to_non_nullable
@@ -147,8 +147,8 @@ class __$$_ViewByOrdersGroupCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_ViewByOrdersGroup extends _ViewByOrdersGroup {
-  _$_ViewByOrdersGroup(
+class _$ViewByOrdersGroupImpl extends _ViewByOrdersGroup {
+  _$ViewByOrdersGroupImpl(
       {required this.createdDate,
       required this.principalName,
       required final List<OrderHistoryDetails> orderHeaders,
@@ -186,10 +186,10 @@ class _$_ViewByOrdersGroup extends _ViewByOrdersGroup {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ViewByOrdersGroup &&
+            other is _$ViewByOrdersGroupImpl &&
             (identical(other.createdDate, createdDate) ||
                 other.createdDate == createdDate) &&
             (identical(other.principalName, principalName) ||
@@ -214,8 +214,8 @@ class _$_ViewByOrdersGroup extends _ViewByOrdersGroup {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ViewByOrdersGroupCopyWith<_$_ViewByOrdersGroup> get copyWith =>
-      __$$_ViewByOrdersGroupCopyWithImpl<_$_ViewByOrdersGroup>(
+  _$$ViewByOrdersGroupImplCopyWith<_$ViewByOrdersGroupImpl> get copyWith =>
+      __$$ViewByOrdersGroupImplCopyWithImpl<_$ViewByOrdersGroupImpl>(
           this, _$identity);
 }
 
@@ -226,7 +226,7 @@ abstract class _ViewByOrdersGroup extends ViewByOrdersGroup {
           required final List<OrderHistoryDetails> orderHeaders,
           required final MaterialNumber parentId,
           required final List<OrderHistoryDetailsOrderItem> viewByOrderItem}) =
-      _$_ViewByOrdersGroup;
+      _$ViewByOrdersGroupImpl;
   _ViewByOrdersGroup._() : super._();
 
   @override
@@ -241,6 +241,6 @@ abstract class _ViewByOrdersGroup extends ViewByOrdersGroup {
   List<OrderHistoryDetailsOrderItem> get viewByOrderItem;
   @override
   @JsonKey(ignore: true)
-  _$$_ViewByOrdersGroupCopyWith<_$_ViewByOrdersGroup> get copyWith =>
+  _$$ViewByOrdersGroupImplCopyWith<_$ViewByOrdersGroupImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

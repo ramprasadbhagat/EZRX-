@@ -12,7 +12,7 @@ part of 'invoice_details_dto.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 InvoiceDetailsDto _$InvoiceDetailsDtoFromJson(Map<String, dynamic> json) {
   return _InvoiceDetailsDto.fromJson(json);
@@ -41,12 +41,10 @@ abstract class $InvoiceDetailsDtoCopyWith<$Res> {
       _$InvoiceDetailsDtoCopyWithImpl<$Res, InvoiceDetailsDto>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'invoiceNumber', defaultValue: '')
-          String invoiceNumber,
-      @JsonKey(name: 'salesOrg', defaultValue: '')
-          String salesOrg,
+      {@JsonKey(name: 'invoiceNumber', defaultValue: '') String invoiceNumber,
+      @JsonKey(name: 'salesOrg', defaultValue: '') String salesOrg,
       @JsonKey(name: 'materials', defaultValue: <ReturnItemDetailsDto>[])
-          List<ReturnItemDetailsDto> materials});
+      List<ReturnItemDetailsDto> materials});
 }
 
 /// @nodoc
@@ -84,28 +82,26 @@ class _$InvoiceDetailsDtoCopyWithImpl<$Res, $Val extends InvoiceDetailsDto>
 }
 
 /// @nodoc
-abstract class _$$_InvoiceDetailsDtoCopyWith<$Res>
+abstract class _$$InvoiceDetailsDtoImplCopyWith<$Res>
     implements $InvoiceDetailsDtoCopyWith<$Res> {
-  factory _$$_InvoiceDetailsDtoCopyWith(_$_InvoiceDetailsDto value,
-          $Res Function(_$_InvoiceDetailsDto) then) =
-      __$$_InvoiceDetailsDtoCopyWithImpl<$Res>;
+  factory _$$InvoiceDetailsDtoImplCopyWith(_$InvoiceDetailsDtoImpl value,
+          $Res Function(_$InvoiceDetailsDtoImpl) then) =
+      __$$InvoiceDetailsDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'invoiceNumber', defaultValue: '')
-          String invoiceNumber,
-      @JsonKey(name: 'salesOrg', defaultValue: '')
-          String salesOrg,
+      {@JsonKey(name: 'invoiceNumber', defaultValue: '') String invoiceNumber,
+      @JsonKey(name: 'salesOrg', defaultValue: '') String salesOrg,
       @JsonKey(name: 'materials', defaultValue: <ReturnItemDetailsDto>[])
-          List<ReturnItemDetailsDto> materials});
+      List<ReturnItemDetailsDto> materials});
 }
 
 /// @nodoc
-class __$$_InvoiceDetailsDtoCopyWithImpl<$Res>
-    extends _$InvoiceDetailsDtoCopyWithImpl<$Res, _$_InvoiceDetailsDto>
-    implements _$$_InvoiceDetailsDtoCopyWith<$Res> {
-  __$$_InvoiceDetailsDtoCopyWithImpl(
-      _$_InvoiceDetailsDto _value, $Res Function(_$_InvoiceDetailsDto) _then)
+class __$$InvoiceDetailsDtoImplCopyWithImpl<$Res>
+    extends _$InvoiceDetailsDtoCopyWithImpl<$Res, _$InvoiceDetailsDtoImpl>
+    implements _$$InvoiceDetailsDtoImplCopyWith<$Res> {
+  __$$InvoiceDetailsDtoImplCopyWithImpl(_$InvoiceDetailsDtoImpl _value,
+      $Res Function(_$InvoiceDetailsDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -115,7 +111,7 @@ class __$$_InvoiceDetailsDtoCopyWithImpl<$Res>
     Object? salesOrg = null,
     Object? materials = null,
   }) {
-    return _then(_$_InvoiceDetailsDto(
+    return _then(_$InvoiceDetailsDtoImpl(
       invoiceNumber: null == invoiceNumber
           ? _value.invoiceNumber
           : invoiceNumber // ignore: cast_nullable_to_non_nullable
@@ -134,19 +130,18 @@ class __$$_InvoiceDetailsDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_InvoiceDetailsDto extends _InvoiceDetailsDto {
-  const _$_InvoiceDetailsDto(
+class _$InvoiceDetailsDtoImpl extends _InvoiceDetailsDto {
+  const _$InvoiceDetailsDtoImpl(
       {@JsonKey(name: 'invoiceNumber', defaultValue: '')
-          required this.invoiceNumber,
-      @JsonKey(name: 'salesOrg', defaultValue: '')
-          required this.salesOrg,
+      required this.invoiceNumber,
+      @JsonKey(name: 'salesOrg', defaultValue: '') required this.salesOrg,
       @JsonKey(name: 'materials', defaultValue: <ReturnItemDetailsDto>[])
-          required final List<ReturnItemDetailsDto> materials})
+      required final List<ReturnItemDetailsDto> materials})
       : _materials = materials,
         super._();
 
-  factory _$_InvoiceDetailsDto.fromJson(Map<String, dynamic> json) =>
-      _$$_InvoiceDetailsDtoFromJson(json);
+  factory _$InvoiceDetailsDtoImpl.fromJson(Map<String, dynamic> json) =>
+      _$$InvoiceDetailsDtoImplFromJson(json);
 
   @override
   @JsonKey(name: 'invoiceNumber', defaultValue: '')
@@ -169,10 +164,10 @@ class _$_InvoiceDetailsDto extends _InvoiceDetailsDto {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_InvoiceDetailsDto &&
+            other is _$InvoiceDetailsDtoImpl &&
             (identical(other.invoiceNumber, invoiceNumber) ||
                 other.invoiceNumber == invoiceNumber) &&
             (identical(other.salesOrg, salesOrg) ||
@@ -189,13 +184,13 @@ class _$_InvoiceDetailsDto extends _InvoiceDetailsDto {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_InvoiceDetailsDtoCopyWith<_$_InvoiceDetailsDto> get copyWith =>
-      __$$_InvoiceDetailsDtoCopyWithImpl<_$_InvoiceDetailsDto>(
+  _$$InvoiceDetailsDtoImplCopyWith<_$InvoiceDetailsDtoImpl> get copyWith =>
+      __$$InvoiceDetailsDtoImplCopyWithImpl<_$InvoiceDetailsDtoImpl>(
           this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_InvoiceDetailsDtoToJson(
+    return _$$InvoiceDetailsDtoImplToJson(
       this,
     );
   }
@@ -204,16 +199,16 @@ class _$_InvoiceDetailsDto extends _InvoiceDetailsDto {
 abstract class _InvoiceDetailsDto extends InvoiceDetailsDto {
   const factory _InvoiceDetailsDto(
           {@JsonKey(name: 'invoiceNumber', defaultValue: '')
-              required final String invoiceNumber,
+          required final String invoiceNumber,
           @JsonKey(name: 'salesOrg', defaultValue: '')
-              required final String salesOrg,
+          required final String salesOrg,
           @JsonKey(name: 'materials', defaultValue: <ReturnItemDetailsDto>[])
-              required final List<ReturnItemDetailsDto> materials}) =
-      _$_InvoiceDetailsDto;
+          required final List<ReturnItemDetailsDto> materials}) =
+      _$InvoiceDetailsDtoImpl;
   const _InvoiceDetailsDto._() : super._();
 
   factory _InvoiceDetailsDto.fromJson(Map<String, dynamic> json) =
-      _$_InvoiceDetailsDto.fromJson;
+      _$InvoiceDetailsDtoImpl.fromJson;
 
   @override
   @JsonKey(name: 'invoiceNumber', defaultValue: '')
@@ -226,6 +221,6 @@ abstract class _InvoiceDetailsDto extends InvoiceDetailsDto {
   List<ReturnItemDetailsDto> get materials;
   @override
   @JsonKey(ignore: true)
-  _$$_InvoiceDetailsDtoCopyWith<_$_InvoiceDetailsDto> get copyWith =>
+  _$$InvoiceDetailsDtoImplCopyWith<_$InvoiceDetailsDtoImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

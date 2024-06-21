@@ -6,27 +6,28 @@ part of 'mp_remote_config_dto.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_MPRemoteConfigDto _$$_MPRemoteConfigDtoFromJson(Map<String, dynamic> json) =>
-    _$_MPRemoteConfigDto(
+_$MPRemoteConfigDtoImpl _$$MPRemoteConfigDtoImplFromJson(
+        Map<String, dynamic> json) =>
+    _$MPRemoteConfigDtoImpl(
       marketplaceConfig: MPRemoteConfigValueDto.fromJson(
           json['marketplaceConfig'] as Map<String, dynamic>),
     );
 
-Map<String, dynamic> _$$_MPRemoteConfigDtoToJson(
-        _$_MPRemoteConfigDto instance) =>
+Map<String, dynamic> _$$MPRemoteConfigDtoImplToJson(
+        _$MPRemoteConfigDtoImpl instance) =>
     <String, dynamic>{
       'marketplaceConfig': instance.marketplaceConfig.toJson(),
     };
 
-_$_MPRemoteConfigValueDto _$$_MPRemoteConfigValueDtoFromJson(
+_$MPRemoteConfigValueDtoImpl _$$MPRemoteConfigValueDtoImplFromJson(
         Map<String, dynamic> json) =>
-    _$_MPRemoteConfigValueDto(
+    _$MPRemoteConfigValueDtoImpl(
       whiteList:
           (json['whitelist'] as List<dynamic>).map((e) => e as String).toList(),
     );
 
-Map<String, dynamic> _$$_MPRemoteConfigValueDtoToJson(
-        _$_MPRemoteConfigValueDto instance) =>
+Map<String, dynamic> _$$MPRemoteConfigValueDtoImplToJson(
+        _$MPRemoteConfigValueDtoImpl instance) =>
     <String, dynamic>{
       'whitelist': instance.whiteList,
     };

@@ -23,7 +23,7 @@ _$SalesOrganisationConfigsDtoImpl _$$SalesOrganisationConfigsDtoImplFromJson(
       enableTaxClassification:
           json['enableTaxClassification'] as bool? ?? false,
       enableVat: json['enableVat'] as bool? ?? false,
-      vatValue: json['vatValue'] as int? ?? 0,
+      vatValue: (json['vatValue'] as num?)?.toInt() ?? 0,
       materialWithoutPrice: json['materialWithoutPrice'] as bool? ?? false,
       enableSpecialInstructions:
           json['enableSpecialInstructions'] as bool? ?? false,
@@ -48,7 +48,7 @@ _$SalesOrganisationConfigsDtoImpl _$$SalesOrganisationConfigsDtoImplFromJson(
       expiryDateDisplay: json['expiryDateDisplay'] as bool? ?? false,
       hideStockDisplay: json['hideStockDisplay'] as bool? ?? false,
       addOosMaterials: json['addOosMaterials'] as bool? ?? false,
-      oosValue: json['oosValue'] as int? ?? 0,
+      oosValue: (json['oosValue'] as num?)?.toInt() ?? 0,
       enableRemarks: json['enableRemarks'] as bool? ?? false,
       enableOHPrice: json['enableOHPrice'] as bool? ?? true,
       poNumberRequired: json['ponRequired'] as bool? ?? false,
@@ -72,10 +72,12 @@ _$SalesOrganisationConfigsDtoImpl _$$SalesOrganisationConfigsDtoImplFromJson(
           json['disableOverrideFieldCustomer'] as bool? ?? false,
       disableOverrideFieldSR: json['disableOverrideFieldSR'] as bool? ?? false,
       enableGreenDelivery: json['enableGreenDelivery'] as bool? ?? false,
-      greenDeliveryDelayInDays: json['greenDeliveryDelayInDays'] as int? ?? 2,
+      greenDeliveryDelayInDays:
+          (json['greenDeliveryDelayInDays'] as num?)?.toInt() ?? 2,
       enableComboDeals: json['enableComboDeals'] as bool? ?? false,
-      greenDeliveryUserRole: json['greenDeliveryUserRole'] as int? ?? 0,
-      comboDealsUserRole: json['comboDealsUserRole'] as int? ?? 0,
+      greenDeliveryUserRole:
+          (json['greenDeliveryUserRole'] as num?)?.toInt() ?? 0,
+      comboDealsUserRole: (json['comboDealsUserRole'] as num?)?.toInt() ?? 0,
       enableGMN: json['enableGMN'] as bool? ?? false,
       displayItemTaxBreakdown:
           json['displayItemTaxBreakdown'] as bool? ?? false,

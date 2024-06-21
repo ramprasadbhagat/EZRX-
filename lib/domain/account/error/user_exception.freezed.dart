@@ -12,7 +12,7 @@ part of 'user_exception.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$UserException {
@@ -69,25 +69,25 @@ class _$UserExceptionCopyWithImpl<$Res, $Val extends UserException>
 }
 
 /// @nodoc
-abstract class _$$_UserNotFoundCopyWith<$Res> {
-  factory _$$_UserNotFoundCopyWith(
-          _$_UserNotFound value, $Res Function(_$_UserNotFound) then) =
-      __$$_UserNotFoundCopyWithImpl<$Res>;
+abstract class _$$UserNotFoundImplCopyWith<$Res> {
+  factory _$$UserNotFoundImplCopyWith(
+          _$UserNotFoundImpl value, $Res Function(_$UserNotFoundImpl) then) =
+      __$$UserNotFoundImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_UserNotFoundCopyWithImpl<$Res>
-    extends _$UserExceptionCopyWithImpl<$Res, _$_UserNotFound>
-    implements _$$_UserNotFoundCopyWith<$Res> {
-  __$$_UserNotFoundCopyWithImpl(
-      _$_UserNotFound _value, $Res Function(_$_UserNotFound) _then)
+class __$$UserNotFoundImplCopyWithImpl<$Res>
+    extends _$UserExceptionCopyWithImpl<$Res, _$UserNotFoundImpl>
+    implements _$$UserNotFoundImplCopyWith<$Res> {
+  __$$UserNotFoundImplCopyWithImpl(
+      _$UserNotFoundImpl _value, $Res Function(_$UserNotFoundImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_UserNotFound implements _UserNotFound {
-  const _$_UserNotFound();
+class _$UserNotFoundImpl implements _UserNotFound {
+  const _$UserNotFoundImpl();
 
   @override
   String toString() {
@@ -95,9 +95,9 @@ class _$_UserNotFound implements _UserNotFound {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_UserNotFound);
+        (other.runtimeType == runtimeType && other is _$UserNotFoundImpl);
   }
 
   @override
@@ -161,5 +161,5 @@ class _$_UserNotFound implements _UserNotFound {
 }
 
 abstract class _UserNotFound implements UserException {
-  const factory _UserNotFound() = _$_UserNotFound;
+  const factory _UserNotFound() = _$UserNotFoundImpl;
 }

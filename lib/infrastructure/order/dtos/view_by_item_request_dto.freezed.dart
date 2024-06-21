@@ -12,7 +12,7 @@ part of 'view_by_item_request_dto.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 ViewByItemRequestDto _$ViewByItemRequestDtoFromJson(Map<String, dynamic> json) {
   return _ViewByItemRequestDto.fromJson(json);
@@ -171,11 +171,11 @@ class _$ViewByItemRequestDtoCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_ViewByItemRequestDtoCopyWith<$Res>
+abstract class _$$ViewByItemRequestDtoImplCopyWith<$Res>
     implements $ViewByItemRequestDtoCopyWith<$Res> {
-  factory _$$_ViewByItemRequestDtoCopyWith(_$_ViewByItemRequestDto value,
-          $Res Function(_$_ViewByItemRequestDto) then) =
-      __$$_ViewByItemRequestDtoCopyWithImpl<$Res>;
+  factory _$$ViewByItemRequestDtoImplCopyWith(_$ViewByItemRequestDtoImpl value,
+          $Res Function(_$ViewByItemRequestDtoImpl) then) =
+      __$$ViewByItemRequestDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -198,11 +198,11 @@ abstract class _$$_ViewByItemRequestDtoCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_ViewByItemRequestDtoCopyWithImpl<$Res>
-    extends _$ViewByItemRequestDtoCopyWithImpl<$Res, _$_ViewByItemRequestDto>
-    implements _$$_ViewByItemRequestDtoCopyWith<$Res> {
-  __$$_ViewByItemRequestDtoCopyWithImpl(_$_ViewByItemRequestDto _value,
-      $Res Function(_$_ViewByItemRequestDto) _then)
+class __$$ViewByItemRequestDtoImplCopyWithImpl<$Res>
+    extends _$ViewByItemRequestDtoCopyWithImpl<$Res, _$ViewByItemRequestDtoImpl>
+    implements _$$ViewByItemRequestDtoImplCopyWith<$Res> {
+  __$$ViewByItemRequestDtoImplCopyWithImpl(_$ViewByItemRequestDtoImpl _value,
+      $Res Function(_$ViewByItemRequestDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -223,7 +223,7 @@ class __$$_ViewByItemRequestDtoCopyWithImpl<$Res>
     Object? orderType = freezed,
     Object? isDetailsPage = null,
   }) {
-    return _then(_$_ViewByItemRequestDto(
+    return _then(_$ViewByItemRequestDtoImpl(
       salesOrg: null == salesOrg
           ? _value._salesOrg
           : salesOrg // ignore: cast_nullable_to_non_nullable
@@ -286,8 +286,8 @@ class __$$_ViewByItemRequestDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_ViewByItemRequestDto extends _ViewByItemRequestDto {
-  const _$_ViewByItemRequestDto(
+class _$ViewByItemRequestDtoImpl extends _ViewByItemRequestDto {
+  const _$ViewByItemRequestDtoImpl(
       {@JsonKey(name: 'salesOrg', defaultValue: <String>[])
       required final List<String> salesOrg,
       @JsonKey(name: 'soldTo', defaultValue: '') required this.soldTo,
@@ -312,8 +312,8 @@ class _$_ViewByItemRequestDto extends _ViewByItemRequestDto {
         _orderStatus = orderStatus,
         super._();
 
-  factory _$_ViewByItemRequestDto.fromJson(Map<String, dynamic> json) =>
-      _$$_ViewByItemRequestDtoFromJson(json);
+  factory _$ViewByItemRequestDtoImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ViewByItemRequestDtoImplFromJson(json);
 
   final List<String> _salesOrg;
   @override
@@ -382,10 +382,10 @@ class _$_ViewByItemRequestDto extends _ViewByItemRequestDto {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ViewByItemRequestDto &&
+            other is _$ViewByItemRequestDtoImpl &&
             const DeepCollectionEquality().equals(other._salesOrg, _salesOrg) &&
             (identical(other.soldTo, soldTo) || other.soldTo == soldTo) &&
             const DeepCollectionEquality().equals(other._shipTo, _shipTo) &&
@@ -433,13 +433,14 @@ class _$_ViewByItemRequestDto extends _ViewByItemRequestDto {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ViewByItemRequestDtoCopyWith<_$_ViewByItemRequestDto> get copyWith =>
-      __$$_ViewByItemRequestDtoCopyWithImpl<_$_ViewByItemRequestDto>(
-          this, _$identity);
+  _$$ViewByItemRequestDtoImplCopyWith<_$ViewByItemRequestDtoImpl>
+      get copyWith =>
+          __$$ViewByItemRequestDtoImplCopyWithImpl<_$ViewByItemRequestDtoImpl>(
+              this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_ViewByItemRequestDtoToJson(
+    return _$$ViewByItemRequestDtoImplToJson(
       this,
     );
   }
@@ -469,11 +470,11 @@ abstract class _ViewByItemRequestDto extends ViewByItemRequestDto {
       required final bool isOptimised,
       @JsonKey(name: 'orderType', includeIfNull: false) final int? orderType,
       @JsonKey(name: 'isDetailsPage', defaultValue: false)
-      required final bool isDetailsPage}) = _$_ViewByItemRequestDto;
+      required final bool isDetailsPage}) = _$ViewByItemRequestDtoImpl;
   const _ViewByItemRequestDto._() : super._();
 
   factory _ViewByItemRequestDto.fromJson(Map<String, dynamic> json) =
-      _$_ViewByItemRequestDto.fromJson;
+      _$ViewByItemRequestDtoImpl.fromJson;
 
   @override
   @JsonKey(name: 'salesOrg', defaultValue: <String>[])
@@ -519,6 +520,6 @@ abstract class _ViewByItemRequestDto extends ViewByItemRequestDto {
   bool get isDetailsPage;
   @override
   @JsonKey(ignore: true)
-  _$$_ViewByItemRequestDtoCopyWith<_$_ViewByItemRequestDto> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$ViewByItemRequestDtoImplCopyWith<_$ViewByItemRequestDtoImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }

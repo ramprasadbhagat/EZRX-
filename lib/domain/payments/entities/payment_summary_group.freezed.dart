@@ -12,7 +12,7 @@ part of 'payment_summary_group.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$PaymentSummaryGroup {
@@ -64,11 +64,11 @@ class _$PaymentSummaryGroupCopyWithImpl<$Res, $Val extends PaymentSummaryGroup>
 }
 
 /// @nodoc
-abstract class _$$_PaymentSummaryGroupCopyWith<$Res>
+abstract class _$$PaymentSummaryGroupImplCopyWith<$Res>
     implements $PaymentSummaryGroupCopyWith<$Res> {
-  factory _$$_PaymentSummaryGroupCopyWith(_$_PaymentSummaryGroup value,
-          $Res Function(_$_PaymentSummaryGroup) then) =
-      __$$_PaymentSummaryGroupCopyWithImpl<$Res>;
+  factory _$$PaymentSummaryGroupImplCopyWith(_$PaymentSummaryGroupImpl value,
+          $Res Function(_$PaymentSummaryGroupImpl) then) =
+      __$$PaymentSummaryGroupImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -76,11 +76,11 @@ abstract class _$$_PaymentSummaryGroupCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_PaymentSummaryGroupCopyWithImpl<$Res>
-    extends _$PaymentSummaryGroupCopyWithImpl<$Res, _$_PaymentSummaryGroup>
-    implements _$$_PaymentSummaryGroupCopyWith<$Res> {
-  __$$_PaymentSummaryGroupCopyWithImpl(_$_PaymentSummaryGroup _value,
-      $Res Function(_$_PaymentSummaryGroup) _then)
+class __$$PaymentSummaryGroupImplCopyWithImpl<$Res>
+    extends _$PaymentSummaryGroupCopyWithImpl<$Res, _$PaymentSummaryGroupImpl>
+    implements _$$PaymentSummaryGroupImplCopyWith<$Res> {
+  __$$PaymentSummaryGroupImplCopyWithImpl(_$PaymentSummaryGroupImpl _value,
+      $Res Function(_$PaymentSummaryGroupImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -89,7 +89,7 @@ class __$$_PaymentSummaryGroupCopyWithImpl<$Res>
     Object? createdDate = null,
     Object? details = null,
   }) {
-    return _then(_$_PaymentSummaryGroup(
+    return _then(_$PaymentSummaryGroupImpl(
       createdDate: null == createdDate
           ? _value.createdDate
           : createdDate // ignore: cast_nullable_to_non_nullable
@@ -104,8 +104,8 @@ class __$$_PaymentSummaryGroupCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_PaymentSummaryGroup implements _PaymentSummaryGroup {
-  _$_PaymentSummaryGroup(
+class _$PaymentSummaryGroupImpl implements _PaymentSummaryGroup {
+  _$PaymentSummaryGroupImpl(
       {required this.createdDate,
       required final List<PaymentSummaryDetails> details})
       : _details = details;
@@ -126,10 +126,10 @@ class _$_PaymentSummaryGroup implements _PaymentSummaryGroup {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_PaymentSummaryGroup &&
+            other is _$PaymentSummaryGroupImpl &&
             (identical(other.createdDate, createdDate) ||
                 other.createdDate == createdDate) &&
             const DeepCollectionEquality().equals(other._details, _details));
@@ -142,8 +142,8 @@ class _$_PaymentSummaryGroup implements _PaymentSummaryGroup {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_PaymentSummaryGroupCopyWith<_$_PaymentSummaryGroup> get copyWith =>
-      __$$_PaymentSummaryGroupCopyWithImpl<_$_PaymentSummaryGroup>(
+  _$$PaymentSummaryGroupImplCopyWith<_$PaymentSummaryGroupImpl> get copyWith =>
+      __$$PaymentSummaryGroupImplCopyWithImpl<_$PaymentSummaryGroupImpl>(
           this, _$identity);
 }
 
@@ -151,7 +151,7 @@ abstract class _PaymentSummaryGroup implements PaymentSummaryGroup {
   factory _PaymentSummaryGroup(
           {required final DateTimeStringValue createdDate,
           required final List<PaymentSummaryDetails> details}) =
-      _$_PaymentSummaryGroup;
+      _$PaymentSummaryGroupImpl;
 
   @override
   DateTimeStringValue get createdDate;
@@ -159,6 +159,6 @@ abstract class _PaymentSummaryGroup implements PaymentSummaryGroup {
   List<PaymentSummaryDetails> get details;
   @override
   @JsonKey(ignore: true)
-  _$$_PaymentSummaryGroupCopyWith<_$_PaymentSummaryGroup> get copyWith =>
+  _$$PaymentSummaryGroupImplCopyWith<_$PaymentSummaryGroupImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -12,7 +12,7 @@ part of 'combo_deal_amount_tier_dto.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 ComboDealAmountTierDto _$ComboDealAmountTierDtoFromJson(
     Map<String, dynamic> json) {
@@ -117,11 +117,12 @@ class _$ComboDealAmountTierDtoCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_ComboDealAmountTierDtoCopyWith<$Res>
+abstract class _$$ComboDealAmountTierDtoImplCopyWith<$Res>
     implements $ComboDealAmountTierDtoCopyWith<$Res> {
-  factory _$$_ComboDealAmountTierDtoCopyWith(_$_ComboDealAmountTierDto value,
-          $Res Function(_$_ComboDealAmountTierDto) then) =
-      __$$_ComboDealAmountTierDtoCopyWithImpl<$Res>;
+  factory _$$ComboDealAmountTierDtoImplCopyWith(
+          _$ComboDealAmountTierDtoImpl value,
+          $Res Function(_$ComboDealAmountTierDtoImpl) then) =
+      __$$ComboDealAmountTierDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -138,12 +139,13 @@ abstract class _$$_ComboDealAmountTierDtoCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_ComboDealAmountTierDtoCopyWithImpl<$Res>
+class __$$ComboDealAmountTierDtoImplCopyWithImpl<$Res>
     extends _$ComboDealAmountTierDtoCopyWithImpl<$Res,
-        _$_ComboDealAmountTierDto>
-    implements _$$_ComboDealAmountTierDtoCopyWith<$Res> {
-  __$$_ComboDealAmountTierDtoCopyWithImpl(_$_ComboDealAmountTierDto _value,
-      $Res Function(_$_ComboDealAmountTierDto) _then)
+        _$ComboDealAmountTierDtoImpl>
+    implements _$$ComboDealAmountTierDtoImplCopyWith<$Res> {
+  __$$ComboDealAmountTierDtoImplCopyWithImpl(
+      _$ComboDealAmountTierDtoImpl _value,
+      $Res Function(_$ComboDealAmountTierDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -157,7 +159,7 @@ class __$$_ComboDealAmountTierDtoCopyWithImpl<$Res>
     Object? maxTotalCurrency = null,
     Object? type = null,
   }) {
-    return _then(_$_ComboDealAmountTierDto(
+    return _then(_$ComboDealAmountTierDtoImpl(
       rate: null == rate
           ? _value.rate
           : rate // ignore: cast_nullable_to_non_nullable
@@ -192,8 +194,8 @@ class __$$_ComboDealAmountTierDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_ComboDealAmountTierDto extends _ComboDealAmountTierDto {
-  const _$_ComboDealAmountTierDto(
+class _$ComboDealAmountTierDtoImpl extends _ComboDealAmountTierDto {
+  const _$ComboDealAmountTierDtoImpl(
       {@JsonKey(name: 'rate', defaultValue: '') required this.rate,
       @JsonKey(name: 'conditionNumber', defaultValue: '')
       required this.conditionNumber,
@@ -208,8 +210,8 @@ class _$_ComboDealAmountTierDto extends _ComboDealAmountTierDto {
       @JsonKey(name: 'type', defaultValue: '') required this.type})
       : super._();
 
-  factory _$_ComboDealAmountTierDto.fromJson(Map<String, dynamic> json) =>
-      _$$_ComboDealAmountTierDtoFromJson(json);
+  factory _$ComboDealAmountTierDtoImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ComboDealAmountTierDtoImplFromJson(json);
 
   @override
   @JsonKey(name: 'rate', defaultValue: '')
@@ -239,10 +241,10 @@ class _$_ComboDealAmountTierDto extends _ComboDealAmountTierDto {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ComboDealAmountTierDto &&
+            other is _$ComboDealAmountTierDtoImpl &&
             (identical(other.rate, rate) || other.rate == rate) &&
             (identical(other.conditionNumber, conditionNumber) ||
                 other.conditionNumber == conditionNumber) &&
@@ -265,13 +267,13 @@ class _$_ComboDealAmountTierDto extends _ComboDealAmountTierDto {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ComboDealAmountTierDtoCopyWith<_$_ComboDealAmountTierDto> get copyWith =>
-      __$$_ComboDealAmountTierDtoCopyWithImpl<_$_ComboDealAmountTierDto>(
-          this, _$identity);
+  _$$ComboDealAmountTierDtoImplCopyWith<_$ComboDealAmountTierDtoImpl>
+      get copyWith => __$$ComboDealAmountTierDtoImplCopyWithImpl<
+          _$ComboDealAmountTierDtoImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_ComboDealAmountTierDtoToJson(
+    return _$$ComboDealAmountTierDtoImplToJson(
       this,
     );
   }
@@ -291,11 +293,11 @@ abstract class _ComboDealAmountTierDto extends ComboDealAmountTierDto {
       @JsonKey(name: 'maxTotalCurrency', defaultValue: '')
       required final String maxTotalCurrency,
       @JsonKey(name: 'type', defaultValue: '')
-      required final String type}) = _$_ComboDealAmountTierDto;
+      required final String type}) = _$ComboDealAmountTierDtoImpl;
   const _ComboDealAmountTierDto._() : super._();
 
   factory _ComboDealAmountTierDto.fromJson(Map<String, dynamic> json) =
-      _$_ComboDealAmountTierDto.fromJson;
+      _$ComboDealAmountTierDtoImpl.fromJson;
 
   @override
   @JsonKey(name: 'rate', defaultValue: '')
@@ -320,6 +322,6 @@ abstract class _ComboDealAmountTierDto extends ComboDealAmountTierDto {
   String get type;
   @override
   @JsonKey(ignore: true)
-  _$$_ComboDealAmountTierDtoCopyWith<_$_ComboDealAmountTierDto> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$ComboDealAmountTierDtoImplCopyWith<_$ComboDealAmountTierDtoImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }

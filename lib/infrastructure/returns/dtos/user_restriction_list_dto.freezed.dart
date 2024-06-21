@@ -12,7 +12,7 @@ part of 'user_restriction_list_dto.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 UserRestrictionListDto _$UserRestrictionListDtoFromJson(
     Map<String, dynamic> json) {
@@ -39,7 +39,7 @@ abstract class $UserRestrictionListDtoCopyWith<$Res> {
   @useResult
   $Res call(
       {@JsonKey(name: 'rawMetaData')
-          UserRestrictionListRawMetaDataDto rawMetaData});
+      UserRestrictionListRawMetaDataDto rawMetaData});
 
   $UserRestrictionListRawMetaDataDtoCopyWith<$Res> get rawMetaData;
 }
@@ -79,28 +79,30 @@ class _$UserRestrictionListDtoCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_UserRestrictionListDtoCopyWith<$Res>
+abstract class _$$UserRestrictionListDtoImplCopyWith<$Res>
     implements $UserRestrictionListDtoCopyWith<$Res> {
-  factory _$$_UserRestrictionListDtoCopyWith(_$_UserRestrictionListDto value,
-          $Res Function(_$_UserRestrictionListDto) then) =
-      __$$_UserRestrictionListDtoCopyWithImpl<$Res>;
+  factory _$$UserRestrictionListDtoImplCopyWith(
+          _$UserRestrictionListDtoImpl value,
+          $Res Function(_$UserRestrictionListDtoImpl) then) =
+      __$$UserRestrictionListDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
       {@JsonKey(name: 'rawMetaData')
-          UserRestrictionListRawMetaDataDto rawMetaData});
+      UserRestrictionListRawMetaDataDto rawMetaData});
 
   @override
   $UserRestrictionListRawMetaDataDtoCopyWith<$Res> get rawMetaData;
 }
 
 /// @nodoc
-class __$$_UserRestrictionListDtoCopyWithImpl<$Res>
+class __$$UserRestrictionListDtoImplCopyWithImpl<$Res>
     extends _$UserRestrictionListDtoCopyWithImpl<$Res,
-        _$_UserRestrictionListDto>
-    implements _$$_UserRestrictionListDtoCopyWith<$Res> {
-  __$$_UserRestrictionListDtoCopyWithImpl(_$_UserRestrictionListDto _value,
-      $Res Function(_$_UserRestrictionListDto) _then)
+        _$UserRestrictionListDtoImpl>
+    implements _$$UserRestrictionListDtoImplCopyWith<$Res> {
+  __$$UserRestrictionListDtoImplCopyWithImpl(
+      _$UserRestrictionListDtoImpl _value,
+      $Res Function(_$UserRestrictionListDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -108,7 +110,7 @@ class __$$_UserRestrictionListDtoCopyWithImpl<$Res>
   $Res call({
     Object? rawMetaData = null,
   }) {
-    return _then(_$_UserRestrictionListDto(
+    return _then(_$UserRestrictionListDtoImpl(
       rawMetaData: null == rawMetaData
           ? _value.rawMetaData
           : rawMetaData // ignore: cast_nullable_to_non_nullable
@@ -119,13 +121,13 @@ class __$$_UserRestrictionListDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_UserRestrictionListDto extends _UserRestrictionListDto {
-  _$_UserRestrictionListDto(
+class _$UserRestrictionListDtoImpl extends _UserRestrictionListDto {
+  _$UserRestrictionListDtoImpl(
       {@JsonKey(name: 'rawMetaData') required this.rawMetaData})
       : super._();
 
-  factory _$_UserRestrictionListDto.fromJson(Map<String, dynamic> json) =>
-      _$$_UserRestrictionListDtoFromJson(json);
+  factory _$UserRestrictionListDtoImpl.fromJson(Map<String, dynamic> json) =>
+      _$$UserRestrictionListDtoImplFromJson(json);
 
   @override
   @JsonKey(name: 'rawMetaData')
@@ -137,10 +139,10 @@ class _$_UserRestrictionListDto extends _UserRestrictionListDto {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_UserRestrictionListDto &&
+            other is _$UserRestrictionListDtoImpl &&
             (identical(other.rawMetaData, rawMetaData) ||
                 other.rawMetaData == rawMetaData));
   }
@@ -152,13 +154,13 @@ class _$_UserRestrictionListDto extends _UserRestrictionListDto {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_UserRestrictionListDtoCopyWith<_$_UserRestrictionListDto> get copyWith =>
-      __$$_UserRestrictionListDtoCopyWithImpl<_$_UserRestrictionListDto>(
-          this, _$identity);
+  _$$UserRestrictionListDtoImplCopyWith<_$UserRestrictionListDtoImpl>
+      get copyWith => __$$UserRestrictionListDtoImplCopyWithImpl<
+          _$UserRestrictionListDtoImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_UserRestrictionListDtoToJson(
+    return _$$UserRestrictionListDtoImplToJson(
       this,
     );
   }
@@ -167,18 +169,18 @@ class _$_UserRestrictionListDto extends _UserRestrictionListDto {
 abstract class _UserRestrictionListDto extends UserRestrictionListDto {
   factory _UserRestrictionListDto(
           {@JsonKey(name: 'rawMetaData')
-              required final UserRestrictionListRawMetaDataDto rawMetaData}) =
-      _$_UserRestrictionListDto;
+          required final UserRestrictionListRawMetaDataDto rawMetaData}) =
+      _$UserRestrictionListDtoImpl;
   _UserRestrictionListDto._() : super._();
 
   factory _UserRestrictionListDto.fromJson(Map<String, dynamic> json) =
-      _$_UserRestrictionListDto.fromJson;
+      _$UserRestrictionListDtoImpl.fromJson;
 
   @override
   @JsonKey(name: 'rawMetaData')
   UserRestrictionListRawMetaDataDto get rawMetaData;
   @override
   @JsonKey(ignore: true)
-  _$$_UserRestrictionListDtoCopyWith<_$_UserRestrictionListDto> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$UserRestrictionListDtoImplCopyWith<_$UserRestrictionListDtoImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }

@@ -12,7 +12,7 @@ part of 'combo_deal_amount_tier.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$ComboDealAmountTier {
@@ -100,11 +100,11 @@ class _$ComboDealAmountTierCopyWithImpl<$Res, $Val extends ComboDealAmountTier>
 }
 
 /// @nodoc
-abstract class _$$_ComboDealAmountTierCopyWith<$Res>
+abstract class _$$ComboDealAmountTierImplCopyWith<$Res>
     implements $ComboDealAmountTierCopyWith<$Res> {
-  factory _$$_ComboDealAmountTierCopyWith(_$_ComboDealAmountTier value,
-          $Res Function(_$_ComboDealAmountTier) then) =
-      __$$_ComboDealAmountTierCopyWithImpl<$Res>;
+  factory _$$ComboDealAmountTierImplCopyWith(_$ComboDealAmountTierImpl value,
+          $Res Function(_$ComboDealAmountTierImpl) then) =
+      __$$ComboDealAmountTierImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -118,11 +118,11 @@ abstract class _$$_ComboDealAmountTierCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_ComboDealAmountTierCopyWithImpl<$Res>
-    extends _$ComboDealAmountTierCopyWithImpl<$Res, _$_ComboDealAmountTier>
-    implements _$$_ComboDealAmountTierCopyWith<$Res> {
-  __$$_ComboDealAmountTierCopyWithImpl(_$_ComboDealAmountTier _value,
-      $Res Function(_$_ComboDealAmountTier) _then)
+class __$$ComboDealAmountTierImplCopyWithImpl<$Res>
+    extends _$ComboDealAmountTierCopyWithImpl<$Res, _$ComboDealAmountTierImpl>
+    implements _$$ComboDealAmountTierImplCopyWith<$Res> {
+  __$$ComboDealAmountTierImplCopyWithImpl(_$ComboDealAmountTierImpl _value,
+      $Res Function(_$ComboDealAmountTierImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -136,7 +136,7 @@ class __$$_ComboDealAmountTierCopyWithImpl<$Res>
     Object? maxTotalCurrency = null,
     Object? type = null,
   }) {
-    return _then(_$_ComboDealAmountTier(
+    return _then(_$ComboDealAmountTierImpl(
       rate: null == rate
           ? _value.rate
           : rate // ignore: cast_nullable_to_non_nullable
@@ -171,8 +171,8 @@ class __$$_ComboDealAmountTierCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_ComboDealAmountTier extends _ComboDealAmountTier {
-  const _$_ComboDealAmountTier(
+class _$ComboDealAmountTierImpl extends _ComboDealAmountTier {
+  const _$ComboDealAmountTierImpl(
       {required this.rate,
       required this.conditionNumber,
       required this.minTotalAmount,
@@ -203,10 +203,10 @@ class _$_ComboDealAmountTier extends _ComboDealAmountTier {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ComboDealAmountTier &&
+            other is _$ComboDealAmountTierImpl &&
             (identical(other.rate, rate) || other.rate == rate) &&
             (identical(other.conditionNumber, conditionNumber) ||
                 other.conditionNumber == conditionNumber) &&
@@ -228,8 +228,8 @@ class _$_ComboDealAmountTier extends _ComboDealAmountTier {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ComboDealAmountTierCopyWith<_$_ComboDealAmountTier> get copyWith =>
-      __$$_ComboDealAmountTierCopyWithImpl<_$_ComboDealAmountTier>(
+  _$$ComboDealAmountTierImplCopyWith<_$ComboDealAmountTierImpl> get copyWith =>
+      __$$ComboDealAmountTierImplCopyWithImpl<_$ComboDealAmountTierImpl>(
           this, _$identity);
 }
 
@@ -241,7 +241,7 @@ abstract class _ComboDealAmountTier extends ComboDealAmountTier {
       required final String minTotalCurrency,
       required final String maxTotalAmount,
       required final String maxTotalCurrency,
-      required final String type}) = _$_ComboDealAmountTier;
+      required final String type}) = _$ComboDealAmountTierImpl;
   const _ComboDealAmountTier._() : super._();
 
   @override
@@ -260,6 +260,6 @@ abstract class _ComboDealAmountTier extends ComboDealAmountTier {
   String get type;
   @override
   @JsonKey(ignore: true)
-  _$$_ComboDealAmountTierCopyWith<_$_ComboDealAmountTier> get copyWith =>
+  _$$ComboDealAmountTierImplCopyWith<_$ComboDealAmountTierImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -6,8 +6,9 @@ part of 'announcement_dto.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_AnnouncementDto _$$_AnnouncementDtoFromJson(Map<String, dynamic> json) =>
-    _$_AnnouncementDto(
+_$AnnouncementDtoImpl _$$AnnouncementDtoImplFromJson(
+        Map<String, dynamic> json) =>
+    _$AnnouncementDtoImpl(
       active: json['active'] as bool? ?? false,
       descriptionList: (json['descriptionList'] as List<dynamic>?)
               ?.map((e) =>
@@ -28,16 +29,16 @@ _$_AnnouncementDto _$$_AnnouncementDtoFromJson(Map<String, dynamic> json) =>
       isCrossButton: json['isCrossButton'] as bool? ?? false,
     );
 
-_$_AnnouncementMessageDto _$$_AnnouncementMessageDtoFromJson(
+_$AnnouncementMessageDtoImpl _$$AnnouncementMessageDtoImplFromJson(
         Map<String, dynamic> json) =>
-    _$_AnnouncementMessageDto(
+    _$AnnouncementMessageDtoImpl(
       languageCode: json['languageCode'] as String? ?? '',
       language: json['language'] as String? ?? '',
       announcement: json['announcement'] as String? ?? '',
     );
 
-Map<String, dynamic> _$$_AnnouncementMessageDtoToJson(
-        _$_AnnouncementMessageDto instance) =>
+Map<String, dynamic> _$$AnnouncementMessageDtoImplToJson(
+        _$AnnouncementMessageDtoImpl instance) =>
     <String, dynamic>{
       'languageCode': instance.languageCode,
       'language': instance.language,

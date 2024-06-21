@@ -12,7 +12,7 @@ part of 'user_restriction_details_bloc.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$UserRestrictionDetailsEvent {
@@ -131,10 +131,10 @@ class _$UserRestrictionDetailsEventCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_InitializedCopyWith<$Res> {
-  factory _$$_InitializedCopyWith(
-          _$_Initialized value, $Res Function(_$_Initialized) then) =
-      __$$_InitializedCopyWithImpl<$Res>;
+abstract class _$$InitializedImplCopyWith<$Res> {
+  factory _$$InitializedImplCopyWith(
+          _$InitializedImpl value, $Res Function(_$InitializedImpl) then) =
+      __$$InitializedImplCopyWithImpl<$Res>;
   @useResult
   $Res call({SalesOrganisation salesOrganisation});
 
@@ -142,11 +142,11 @@ abstract class _$$_InitializedCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_InitializedCopyWithImpl<$Res>
-    extends _$UserRestrictionDetailsEventCopyWithImpl<$Res, _$_Initialized>
-    implements _$$_InitializedCopyWith<$Res> {
-  __$$_InitializedCopyWithImpl(
-      _$_Initialized _value, $Res Function(_$_Initialized) _then)
+class __$$InitializedImplCopyWithImpl<$Res>
+    extends _$UserRestrictionDetailsEventCopyWithImpl<$Res, _$InitializedImpl>
+    implements _$$InitializedImplCopyWith<$Res> {
+  __$$InitializedImplCopyWithImpl(
+      _$InitializedImpl _value, $Res Function(_$InitializedImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -154,7 +154,7 @@ class __$$_InitializedCopyWithImpl<$Res>
   $Res call({
     Object? salesOrganisation = null,
   }) {
-    return _then(_$_Initialized(
+    return _then(_$InitializedImpl(
       salesOrganisation: null == salesOrganisation
           ? _value.salesOrganisation
           : salesOrganisation // ignore: cast_nullable_to_non_nullable
@@ -173,8 +173,8 @@ class __$$_InitializedCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_Initialized implements _Initialized {
-  const _$_Initialized({required this.salesOrganisation});
+class _$InitializedImpl implements _Initialized {
+  const _$InitializedImpl({required this.salesOrganisation});
 
   @override
   final SalesOrganisation salesOrganisation;
@@ -185,10 +185,10 @@ class _$_Initialized implements _Initialized {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Initialized &&
+            other is _$InitializedImpl &&
             (identical(other.salesOrganisation, salesOrganisation) ||
                 other.salesOrganisation == salesOrganisation));
   }
@@ -199,8 +199,8 @@ class _$_Initialized implements _Initialized {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_InitializedCopyWith<_$_Initialized> get copyWith =>
-      __$$_InitializedCopyWithImpl<_$_Initialized>(this, _$identity);
+  _$$InitializedImplCopyWith<_$InitializedImpl> get copyWith =>
+      __$$InitializedImplCopyWithImpl<_$InitializedImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -320,20 +320,20 @@ class _$_Initialized implements _Initialized {
 
 abstract class _Initialized implements UserRestrictionDetailsEvent {
   const factory _Initialized(
-      {required final SalesOrganisation salesOrganisation}) = _$_Initialized;
+      {required final SalesOrganisation salesOrganisation}) = _$InitializedImpl;
 
   SalesOrganisation get salesOrganisation;
   @JsonKey(ignore: true)
-  _$$_InitializedCopyWith<_$_Initialized> get copyWith =>
+  _$$InitializedImplCopyWith<_$InitializedImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_fetchUserRestrictionDetailsCopyWith<$Res> {
-  factory _$$_fetchUserRestrictionDetailsCopyWith(
-          _$_fetchUserRestrictionDetails value,
-          $Res Function(_$_fetchUserRestrictionDetails) then) =
-      __$$_fetchUserRestrictionDetailsCopyWithImpl<$Res>;
+abstract class _$$fetchUserRestrictionDetailsImplCopyWith<$Res> {
+  factory _$$fetchUserRestrictionDetailsImplCopyWith(
+          _$fetchUserRestrictionDetailsImpl value,
+          $Res Function(_$fetchUserRestrictionDetailsImpl) then) =
+      __$$fetchUserRestrictionDetailsImplCopyWithImpl<$Res>;
   @useResult
   $Res call({SalesOrganisation salesOrganisation, Username userName});
 
@@ -341,13 +341,13 @@ abstract class _$$_fetchUserRestrictionDetailsCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_fetchUserRestrictionDetailsCopyWithImpl<$Res>
+class __$$fetchUserRestrictionDetailsImplCopyWithImpl<$Res>
     extends _$UserRestrictionDetailsEventCopyWithImpl<$Res,
-        _$_fetchUserRestrictionDetails>
-    implements _$$_fetchUserRestrictionDetailsCopyWith<$Res> {
-  __$$_fetchUserRestrictionDetailsCopyWithImpl(
-      _$_fetchUserRestrictionDetails _value,
-      $Res Function(_$_fetchUserRestrictionDetails) _then)
+        _$fetchUserRestrictionDetailsImpl>
+    implements _$$fetchUserRestrictionDetailsImplCopyWith<$Res> {
+  __$$fetchUserRestrictionDetailsImplCopyWithImpl(
+      _$fetchUserRestrictionDetailsImpl _value,
+      $Res Function(_$fetchUserRestrictionDetailsImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -356,7 +356,7 @@ class __$$_fetchUserRestrictionDetailsCopyWithImpl<$Res>
     Object? salesOrganisation = null,
     Object? userName = null,
   }) {
-    return _then(_$_fetchUserRestrictionDetails(
+    return _then(_$fetchUserRestrictionDetailsImpl(
       salesOrganisation: null == salesOrganisation
           ? _value.salesOrganisation
           : salesOrganisation // ignore: cast_nullable_to_non_nullable
@@ -379,8 +379,9 @@ class __$$_fetchUserRestrictionDetailsCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_fetchUserRestrictionDetails implements _fetchUserRestrictionDetails {
-  const _$_fetchUserRestrictionDetails(
+class _$fetchUserRestrictionDetailsImpl
+    implements _fetchUserRestrictionDetails {
+  const _$fetchUserRestrictionDetailsImpl(
       {required this.salesOrganisation, required this.userName});
 
   @override
@@ -394,10 +395,10 @@ class _$_fetchUserRestrictionDetails implements _fetchUserRestrictionDetails {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_fetchUserRestrictionDetails &&
+            other is _$fetchUserRestrictionDetailsImpl &&
             (identical(other.salesOrganisation, salesOrganisation) ||
                 other.salesOrganisation == salesOrganisation) &&
             (identical(other.userName, userName) ||
@@ -410,9 +411,9 @@ class _$_fetchUserRestrictionDetails implements _fetchUserRestrictionDetails {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_fetchUserRestrictionDetailsCopyWith<_$_fetchUserRestrictionDetails>
-      get copyWith => __$$_fetchUserRestrictionDetailsCopyWithImpl<
-          _$_fetchUserRestrictionDetails>(this, _$identity);
+  _$$fetchUserRestrictionDetailsImplCopyWith<_$fetchUserRestrictionDetailsImpl>
+      get copyWith => __$$fetchUserRestrictionDetailsImplCopyWithImpl<
+          _$fetchUserRestrictionDetailsImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -534,30 +535,30 @@ abstract class _fetchUserRestrictionDetails
     implements UserRestrictionDetailsEvent {
   const factory _fetchUserRestrictionDetails(
       {required final SalesOrganisation salesOrganisation,
-      required final Username userName}) = _$_fetchUserRestrictionDetails;
+      required final Username userName}) = _$fetchUserRestrictionDetailsImpl;
 
   SalesOrganisation get salesOrganisation;
   Username get userName;
   @JsonKey(ignore: true)
-  _$$_fetchUserRestrictionDetailsCopyWith<_$_fetchUserRestrictionDetails>
+  _$$fetchUserRestrictionDetailsImplCopyWith<_$fetchUserRestrictionDetailsImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_updateTextFieldCopyWith<$Res> {
-  factory _$$_updateTextFieldCopyWith(
-          _$_updateTextField value, $Res Function(_$_updateTextField) then) =
-      __$$_updateTextFieldCopyWithImpl<$Res>;
+abstract class _$$updateTextFieldImplCopyWith<$Res> {
+  factory _$$updateTextFieldImplCopyWith(_$updateTextFieldImpl value,
+          $Res Function(_$updateTextFieldImpl) then) =
+      __$$updateTextFieldImplCopyWithImpl<$Res>;
   @useResult
   $Res call({String value, UserRestrictionLabel label, int index});
 }
 
 /// @nodoc
-class __$$_updateTextFieldCopyWithImpl<$Res>
-    extends _$UserRestrictionDetailsEventCopyWithImpl<$Res, _$_updateTextField>
-    implements _$$_updateTextFieldCopyWith<$Res> {
-  __$$_updateTextFieldCopyWithImpl(
-      _$_updateTextField _value, $Res Function(_$_updateTextField) _then)
+class __$$updateTextFieldImplCopyWithImpl<$Res>
+    extends _$UserRestrictionDetailsEventCopyWithImpl<$Res,
+        _$updateTextFieldImpl> implements _$$updateTextFieldImplCopyWith<$Res> {
+  __$$updateTextFieldImplCopyWithImpl(
+      _$updateTextFieldImpl _value, $Res Function(_$updateTextFieldImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -567,7 +568,7 @@ class __$$_updateTextFieldCopyWithImpl<$Res>
     Object? label = null,
     Object? index = null,
   }) {
-    return _then(_$_updateTextField(
+    return _then(_$updateTextFieldImpl(
       value: null == value
           ? _value.value
           : value // ignore: cast_nullable_to_non_nullable
@@ -586,8 +587,8 @@ class __$$_updateTextFieldCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_updateTextField implements _updateTextField {
-  const _$_updateTextField(
+class _$updateTextFieldImpl implements _updateTextField {
+  const _$updateTextFieldImpl(
       {required this.value, required this.label, required this.index});
 
   @override
@@ -603,10 +604,10 @@ class _$_updateTextField implements _updateTextField {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_updateTextField &&
+            other is _$updateTextFieldImpl &&
             (identical(other.value, value) || other.value == value) &&
             (identical(other.label, label) || other.label == label) &&
             (identical(other.index, index) || other.index == index));
@@ -618,8 +619,9 @@ class _$_updateTextField implements _updateTextField {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_updateTextFieldCopyWith<_$_updateTextField> get copyWith =>
-      __$$_updateTextFieldCopyWithImpl<_$_updateTextField>(this, _$identity);
+  _$$updateTextFieldImplCopyWith<_$updateTextFieldImpl> get copyWith =>
+      __$$updateTextFieldImplCopyWithImpl<_$updateTextFieldImpl>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -741,31 +743,32 @@ abstract class _updateTextField implements UserRestrictionDetailsEvent {
   const factory _updateTextField(
       {required final String value,
       required final UserRestrictionLabel label,
-      required final int index}) = _$_updateTextField;
+      required final int index}) = _$updateTextFieldImpl;
 
   String get value;
   UserRestrictionLabel get label;
   int get index;
   @JsonKey(ignore: true)
-  _$$_updateTextFieldCopyWith<_$_updateTextField> get copyWith =>
+  _$$updateTextFieldImplCopyWith<_$updateTextFieldImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_addApproverRightsCopyWith<$Res> {
-  factory _$$_addApproverRightsCopyWith(_$_addApproverRights value,
-          $Res Function(_$_addApproverRights) then) =
-      __$$_addApproverRightsCopyWithImpl<$Res>;
+abstract class _$$addApproverRightsImplCopyWith<$Res> {
+  factory _$$addApproverRightsImplCopyWith(_$addApproverRightsImpl value,
+          $Res Function(_$addApproverRightsImpl) then) =
+      __$$addApproverRightsImplCopyWithImpl<$Res>;
   @useResult
   $Res call({SalesOrg salesOrg});
 }
 
 /// @nodoc
-class __$$_addApproverRightsCopyWithImpl<$Res>
+class __$$addApproverRightsImplCopyWithImpl<$Res>
     extends _$UserRestrictionDetailsEventCopyWithImpl<$Res,
-        _$_addApproverRights> implements _$$_addApproverRightsCopyWith<$Res> {
-  __$$_addApproverRightsCopyWithImpl(
-      _$_addApproverRights _value, $Res Function(_$_addApproverRights) _then)
+        _$addApproverRightsImpl>
+    implements _$$addApproverRightsImplCopyWith<$Res> {
+  __$$addApproverRightsImplCopyWithImpl(_$addApproverRightsImpl _value,
+      $Res Function(_$addApproverRightsImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -773,7 +776,7 @@ class __$$_addApproverRightsCopyWithImpl<$Res>
   $Res call({
     Object? salesOrg = null,
   }) {
-    return _then(_$_addApproverRights(
+    return _then(_$addApproverRightsImpl(
       salesOrg: null == salesOrg
           ? _value.salesOrg
           : salesOrg // ignore: cast_nullable_to_non_nullable
@@ -784,8 +787,8 @@ class __$$_addApproverRightsCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_addApproverRights implements _addApproverRights {
-  const _$_addApproverRights({required this.salesOrg});
+class _$addApproverRightsImpl implements _addApproverRights {
+  const _$addApproverRightsImpl({required this.salesOrg});
 
   @override
   final SalesOrg salesOrg;
@@ -796,10 +799,10 @@ class _$_addApproverRights implements _addApproverRights {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_addApproverRights &&
+            other is _$addApproverRightsImpl &&
             (identical(other.salesOrg, salesOrg) ||
                 other.salesOrg == salesOrg));
   }
@@ -810,8 +813,8 @@ class _$_addApproverRights implements _addApproverRights {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_addApproverRightsCopyWith<_$_addApproverRights> get copyWith =>
-      __$$_addApproverRightsCopyWithImpl<_$_addApproverRights>(
+  _$$addApproverRightsImplCopyWith<_$addApproverRightsImpl> get copyWith =>
+      __$$addApproverRightsImplCopyWithImpl<_$addApproverRightsImpl>(
           this, _$identity);
 
   @override
@@ -932,19 +935,19 @@ class _$_addApproverRights implements _addApproverRights {
 
 abstract class _addApproverRights implements UserRestrictionDetailsEvent {
   const factory _addApproverRights({required final SalesOrg salesOrg}) =
-      _$_addApproverRights;
+      _$addApproverRightsImpl;
 
   SalesOrg get salesOrg;
   @JsonKey(ignore: true)
-  _$$_addApproverRightsCopyWith<_$_addApproverRights> get copyWith =>
+  _$$addApproverRightsImplCopyWith<_$addApproverRightsImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_deleteApproverRightsCopyWith<$Res> {
-  factory _$$_deleteApproverRightsCopyWith(_$_deleteApproverRights value,
-          $Res Function(_$_deleteApproverRights) then) =
-      __$$_deleteApproverRightsCopyWithImpl<$Res>;
+abstract class _$$deleteApproverRightsImplCopyWith<$Res> {
+  factory _$$deleteApproverRightsImplCopyWith(_$deleteApproverRightsImpl value,
+          $Res Function(_$deleteApproverRightsImpl) then) =
+      __$$deleteApproverRightsImplCopyWithImpl<$Res>;
   @useResult
   $Res call({ApproverRightsDetails approverRightsDetails});
 
@@ -952,12 +955,12 @@ abstract class _$$_deleteApproverRightsCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_deleteApproverRightsCopyWithImpl<$Res>
+class __$$deleteApproverRightsImplCopyWithImpl<$Res>
     extends _$UserRestrictionDetailsEventCopyWithImpl<$Res,
-        _$_deleteApproverRights>
-    implements _$$_deleteApproverRightsCopyWith<$Res> {
-  __$$_deleteApproverRightsCopyWithImpl(_$_deleteApproverRights _value,
-      $Res Function(_$_deleteApproverRights) _then)
+        _$deleteApproverRightsImpl>
+    implements _$$deleteApproverRightsImplCopyWith<$Res> {
+  __$$deleteApproverRightsImplCopyWithImpl(_$deleteApproverRightsImpl _value,
+      $Res Function(_$deleteApproverRightsImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -965,7 +968,7 @@ class __$$_deleteApproverRightsCopyWithImpl<$Res>
   $Res call({
     Object? approverRightsDetails = null,
   }) {
-    return _then(_$_deleteApproverRights(
+    return _then(_$deleteApproverRightsImpl(
       approverRightsDetails: null == approverRightsDetails
           ? _value.approverRightsDetails
           : approverRightsDetails // ignore: cast_nullable_to_non_nullable
@@ -985,8 +988,8 @@ class __$$_deleteApproverRightsCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_deleteApproverRights implements _deleteApproverRights {
-  const _$_deleteApproverRights({required this.approverRightsDetails});
+class _$deleteApproverRightsImpl implements _deleteApproverRights {
+  const _$deleteApproverRightsImpl({required this.approverRightsDetails});
 
   @override
   final ApproverRightsDetails approverRightsDetails;
@@ -997,10 +1000,10 @@ class _$_deleteApproverRights implements _deleteApproverRights {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_deleteApproverRights &&
+            other is _$deleteApproverRightsImpl &&
             (identical(other.approverRightsDetails, approverRightsDetails) ||
                 other.approverRightsDetails == approverRightsDetails));
   }
@@ -1011,9 +1014,10 @@ class _$_deleteApproverRights implements _deleteApproverRights {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_deleteApproverRightsCopyWith<_$_deleteApproverRights> get copyWith =>
-      __$$_deleteApproverRightsCopyWithImpl<_$_deleteApproverRights>(
-          this, _$identity);
+  _$$deleteApproverRightsImplCopyWith<_$deleteApproverRightsImpl>
+      get copyWith =>
+          __$$deleteApproverRightsImplCopyWithImpl<_$deleteApproverRightsImpl>(
+              this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -1134,34 +1138,35 @@ class _$_deleteApproverRights implements _deleteApproverRights {
 abstract class _deleteApproverRights implements UserRestrictionDetailsEvent {
   const factory _deleteApproverRights(
           {required final ApproverRightsDetails approverRightsDetails}) =
-      _$_deleteApproverRights;
+      _$deleteApproverRightsImpl;
 
   ApproverRightsDetails get approverRightsDetails;
   @JsonKey(ignore: true)
-  _$$_deleteApproverRightsCopyWith<_$_deleteApproverRights> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$deleteApproverRightsImplCopyWith<_$deleteApproverRightsImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_addUserRestrictionCopyWith<$Res> {
-  factory _$$_addUserRestrictionCopyWith(_$_addUserRestriction value,
-          $Res Function(_$_addUserRestriction) then) =
-      __$$_addUserRestrictionCopyWithImpl<$Res>;
+abstract class _$$addUserRestrictionImplCopyWith<$Res> {
+  factory _$$addUserRestrictionImplCopyWith(_$addUserRestrictionImpl value,
+          $Res Function(_$addUserRestrictionImpl) then) =
+      __$$addUserRestrictionImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_addUserRestrictionCopyWithImpl<$Res>
+class __$$addUserRestrictionImplCopyWithImpl<$Res>
     extends _$UserRestrictionDetailsEventCopyWithImpl<$Res,
-        _$_addUserRestriction> implements _$$_addUserRestrictionCopyWith<$Res> {
-  __$$_addUserRestrictionCopyWithImpl(
-      _$_addUserRestriction _value, $Res Function(_$_addUserRestriction) _then)
+        _$addUserRestrictionImpl>
+    implements _$$addUserRestrictionImplCopyWith<$Res> {
+  __$$addUserRestrictionImplCopyWithImpl(_$addUserRestrictionImpl _value,
+      $Res Function(_$addUserRestrictionImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_addUserRestriction implements _addUserRestriction {
-  const _$_addUserRestriction();
+class _$addUserRestrictionImpl implements _addUserRestriction {
+  const _$addUserRestrictionImpl();
 
   @override
   String toString() {
@@ -1169,9 +1174,9 @@ class _$_addUserRestriction implements _addUserRestriction {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_addUserRestriction);
+        (other.runtimeType == runtimeType && other is _$addUserRestrictionImpl);
   }
 
   @override
@@ -1294,31 +1299,32 @@ class _$_addUserRestriction implements _addUserRestriction {
 }
 
 abstract class _addUserRestriction implements UserRestrictionDetailsEvent {
-  const factory _addUserRestriction() = _$_addUserRestriction;
+  const factory _addUserRestriction() = _$addUserRestrictionImpl;
 }
 
 /// @nodoc
-abstract class _$$_configureUserRestrictionCopyWith<$Res> {
-  factory _$$_configureUserRestrictionCopyWith(
-          _$_configureUserRestriction value,
-          $Res Function(_$_configureUserRestriction) then) =
-      __$$_configureUserRestrictionCopyWithImpl<$Res>;
+abstract class _$$configureUserRestrictionImplCopyWith<$Res> {
+  factory _$$configureUserRestrictionImplCopyWith(
+          _$configureUserRestrictionImpl value,
+          $Res Function(_$configureUserRestrictionImpl) then) =
+      __$$configureUserRestrictionImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_configureUserRestrictionCopyWithImpl<$Res>
+class __$$configureUserRestrictionImplCopyWithImpl<$Res>
     extends _$UserRestrictionDetailsEventCopyWithImpl<$Res,
-        _$_configureUserRestriction>
-    implements _$$_configureUserRestrictionCopyWith<$Res> {
-  __$$_configureUserRestrictionCopyWithImpl(_$_configureUserRestriction _value,
-      $Res Function(_$_configureUserRestriction) _then)
+        _$configureUserRestrictionImpl>
+    implements _$$configureUserRestrictionImplCopyWith<$Res> {
+  __$$configureUserRestrictionImplCopyWithImpl(
+      _$configureUserRestrictionImpl _value,
+      $Res Function(_$configureUserRestrictionImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_configureUserRestriction implements _configureUserRestriction {
-  const _$_configureUserRestriction();
+class _$configureUserRestrictionImpl implements _configureUserRestriction {
+  const _$configureUserRestrictionImpl();
 
   @override
   String toString() {
@@ -1326,10 +1332,10 @@ class _$_configureUserRestriction implements _configureUserRestriction {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_configureUserRestriction);
+            other is _$configureUserRestrictionImpl);
   }
 
   @override
@@ -1453,30 +1459,31 @@ class _$_configureUserRestriction implements _configureUserRestriction {
 
 abstract class _configureUserRestriction
     implements UserRestrictionDetailsEvent {
-  const factory _configureUserRestriction() = _$_configureUserRestriction;
+  const factory _configureUserRestriction() = _$configureUserRestrictionImpl;
 }
 
 /// @nodoc
-abstract class _$$_deleteUserRestrictionCopyWith<$Res> {
-  factory _$$_deleteUserRestrictionCopyWith(_$_deleteUserRestriction value,
-          $Res Function(_$_deleteUserRestriction) then) =
-      __$$_deleteUserRestrictionCopyWithImpl<$Res>;
+abstract class _$$deleteUserRestrictionImplCopyWith<$Res> {
+  factory _$$deleteUserRestrictionImplCopyWith(
+          _$deleteUserRestrictionImpl value,
+          $Res Function(_$deleteUserRestrictionImpl) then) =
+      __$$deleteUserRestrictionImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_deleteUserRestrictionCopyWithImpl<$Res>
+class __$$deleteUserRestrictionImplCopyWithImpl<$Res>
     extends _$UserRestrictionDetailsEventCopyWithImpl<$Res,
-        _$_deleteUserRestriction>
-    implements _$$_deleteUserRestrictionCopyWith<$Res> {
-  __$$_deleteUserRestrictionCopyWithImpl(_$_deleteUserRestriction _value,
-      $Res Function(_$_deleteUserRestriction) _then)
+        _$deleteUserRestrictionImpl>
+    implements _$$deleteUserRestrictionImplCopyWith<$Res> {
+  __$$deleteUserRestrictionImplCopyWithImpl(_$deleteUserRestrictionImpl _value,
+      $Res Function(_$deleteUserRestrictionImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_deleteUserRestriction implements _deleteUserRestriction {
-  const _$_deleteUserRestriction();
+class _$deleteUserRestrictionImpl implements _deleteUserRestriction {
+  const _$deleteUserRestrictionImpl();
 
   @override
   String toString() {
@@ -1484,9 +1491,10 @@ class _$_deleteUserRestriction implements _deleteUserRestriction {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_deleteUserRestriction);
+        (other.runtimeType == runtimeType &&
+            other is _$deleteUserRestrictionImpl);
   }
 
   @override
@@ -1609,7 +1617,7 @@ class _$_deleteUserRestriction implements _deleteUserRestriction {
 }
 
 abstract class _deleteUserRestriction implements UserRestrictionDetailsEvent {
-  const factory _deleteUserRestriction() = _$_deleteUserRestriction;
+  const factory _deleteUserRestriction() = _$deleteUserRestrictionImpl;
 }
 
 /// @nodoc
@@ -1726,12 +1734,12 @@ class _$UserRestrictionDetailsStateCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_UserRestrictionDetailsStateCopyWith<$Res>
+abstract class _$$UserRestrictionDetailsStateImplCopyWith<$Res>
     implements $UserRestrictionDetailsStateCopyWith<$Res> {
-  factory _$$_UserRestrictionDetailsStateCopyWith(
-          _$_UserRestrictionDetailsState value,
-          $Res Function(_$_UserRestrictionDetailsState) then) =
-      __$$_UserRestrictionDetailsStateCopyWithImpl<$Res>;
+  factory _$$UserRestrictionDetailsStateImplCopyWith(
+          _$UserRestrictionDetailsStateImpl value,
+          $Res Function(_$UserRestrictionDetailsStateImpl) then) =
+      __$$UserRestrictionDetailsStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -1751,13 +1759,13 @@ abstract class _$$_UserRestrictionDetailsStateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_UserRestrictionDetailsStateCopyWithImpl<$Res>
+class __$$UserRestrictionDetailsStateImplCopyWithImpl<$Res>
     extends _$UserRestrictionDetailsStateCopyWithImpl<$Res,
-        _$_UserRestrictionDetailsState>
-    implements _$$_UserRestrictionDetailsStateCopyWith<$Res> {
-  __$$_UserRestrictionDetailsStateCopyWithImpl(
-      _$_UserRestrictionDetailsState _value,
-      $Res Function(_$_UserRestrictionDetailsState) _then)
+        _$UserRestrictionDetailsStateImpl>
+    implements _$$UserRestrictionDetailsStateImplCopyWith<$Res> {
+  __$$UserRestrictionDetailsStateImplCopyWithImpl(
+      _$UserRestrictionDetailsStateImpl _value,
+      $Res Function(_$UserRestrictionDetailsStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1770,7 +1778,7 @@ class __$$_UserRestrictionDetailsStateCopyWithImpl<$Res>
     Object? userRestrictionStatus = null,
     Object? apiFailureOrSuccessOption = null,
   }) {
-    return _then(_$_UserRestrictionDetailsState(
+    return _then(_$UserRestrictionDetailsStateImpl(
       isFetching: null == isFetching
           ? _value.isFetching
           : isFetching // ignore: cast_nullable_to_non_nullable
@@ -1801,8 +1809,8 @@ class __$$_UserRestrictionDetailsStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_UserRestrictionDetailsState extends _UserRestrictionDetailsState {
-  _$_UserRestrictionDetailsState(
+class _$UserRestrictionDetailsStateImpl extends _UserRestrictionDetailsState {
+  _$UserRestrictionDetailsStateImpl(
       {required this.isFetching,
       required this.approvalLimits,
       required final List<ApproverRightsDetails> addedApproverRightsList,
@@ -1838,10 +1846,10 @@ class _$_UserRestrictionDetailsState extends _UserRestrictionDetailsState {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_UserRestrictionDetailsState &&
+            other is _$UserRestrictionDetailsStateImpl &&
             (identical(other.isFetching, isFetching) ||
                 other.isFetching == isFetching) &&
             (identical(other.approvalLimits, approvalLimits) ||
@@ -1870,9 +1878,9 @@ class _$_UserRestrictionDetailsState extends _UserRestrictionDetailsState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_UserRestrictionDetailsStateCopyWith<_$_UserRestrictionDetailsState>
-      get copyWith => __$$_UserRestrictionDetailsStateCopyWithImpl<
-          _$_UserRestrictionDetailsState>(this, _$identity);
+  _$$UserRestrictionDetailsStateImplCopyWith<_$UserRestrictionDetailsStateImpl>
+      get copyWith => __$$UserRestrictionDetailsStateImplCopyWithImpl<
+          _$UserRestrictionDetailsStateImpl>(this, _$identity);
 }
 
 abstract class _UserRestrictionDetailsState
@@ -1884,7 +1892,7 @@ abstract class _UserRestrictionDetailsState
       required final ApproverRights approverRights,
       required final UserRestrictionStatus userRestrictionStatus,
       required final Option<Either<ApiFailure, dynamic>>
-          apiFailureOrSuccessOption}) = _$_UserRestrictionDetailsState;
+          apiFailureOrSuccessOption}) = _$UserRestrictionDetailsStateImpl;
   _UserRestrictionDetailsState._() : super._();
 
   @override
@@ -1901,6 +1909,6 @@ abstract class _UserRestrictionDetailsState
   Option<Either<ApiFailure, dynamic>> get apiFailureOrSuccessOption;
   @override
   @JsonKey(ignore: true)
-  _$$_UserRestrictionDetailsStateCopyWith<_$_UserRestrictionDetailsState>
+  _$$UserRestrictionDetailsStateImplCopyWith<_$UserRestrictionDetailsStateImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

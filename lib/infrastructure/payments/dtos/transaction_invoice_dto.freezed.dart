@@ -12,7 +12,7 @@ part of 'transaction_invoice_dto.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 TransactionInvoiceDto _$TransactionInvoiceDtoFromJson(
     Map<String, dynamic> json) {
@@ -90,11 +90,12 @@ class _$TransactionInvoiceDtoCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_TransactionInvoiceDtoCopyWith<$Res>
+abstract class _$$TransactionInvoiceDtoImplCopyWith<$Res>
     implements $TransactionInvoiceDtoCopyWith<$Res> {
-  factory _$$_TransactionInvoiceDtoCopyWith(_$_TransactionInvoiceDto value,
-          $Res Function(_$_TransactionInvoiceDto) then) =
-      __$$_TransactionInvoiceDtoCopyWithImpl<$Res>;
+  factory _$$TransactionInvoiceDtoImplCopyWith(
+          _$TransactionInvoiceDtoImpl value,
+          $Res Function(_$TransactionInvoiceDtoImpl) then) =
+      __$$TransactionInvoiceDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -105,11 +106,12 @@ abstract class _$$_TransactionInvoiceDtoCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_TransactionInvoiceDtoCopyWithImpl<$Res>
-    extends _$TransactionInvoiceDtoCopyWithImpl<$Res, _$_TransactionInvoiceDto>
-    implements _$$_TransactionInvoiceDtoCopyWith<$Res> {
-  __$$_TransactionInvoiceDtoCopyWithImpl(_$_TransactionInvoiceDto _value,
-      $Res Function(_$_TransactionInvoiceDto) _then)
+class __$$TransactionInvoiceDtoImplCopyWithImpl<$Res>
+    extends _$TransactionInvoiceDtoCopyWithImpl<$Res,
+        _$TransactionInvoiceDtoImpl>
+    implements _$$TransactionInvoiceDtoImplCopyWith<$Res> {
+  __$$TransactionInvoiceDtoImplCopyWithImpl(_$TransactionInvoiceDtoImpl _value,
+      $Res Function(_$TransactionInvoiceDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -120,7 +122,7 @@ class __$$_TransactionInvoiceDtoCopyWithImpl<$Res>
     Object? documentType = null,
     Object? amount = null,
   }) {
-    return _then(_$_TransactionInvoiceDto(
+    return _then(_$TransactionInvoiceDtoImpl(
       documentDate: null == documentDate
           ? _value.documentDate
           : documentDate // ignore: cast_nullable_to_non_nullable
@@ -143,8 +145,8 @@ class __$$_TransactionInvoiceDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_TransactionInvoiceDto extends _TransactionInvoiceDto {
-  const _$_TransactionInvoiceDto(
+class _$TransactionInvoiceDtoImpl extends _TransactionInvoiceDto {
+  const _$TransactionInvoiceDtoImpl(
       {@JsonKey(name: 'documentDate', defaultValue: '')
       required this.documentDate,
       @JsonKey(name: 'documentNo', defaultValue: '') required this.documentNo,
@@ -153,8 +155,8 @@ class _$_TransactionInvoiceDto extends _TransactionInvoiceDto {
       @JsonKey(name: 'amount', defaultValue: 0.0) required this.amount})
       : super._();
 
-  factory _$_TransactionInvoiceDto.fromJson(Map<String, dynamic> json) =>
-      _$$_TransactionInvoiceDtoFromJson(json);
+  factory _$TransactionInvoiceDtoImpl.fromJson(Map<String, dynamic> json) =>
+      _$$TransactionInvoiceDtoImplFromJson(json);
 
   @override
   @JsonKey(name: 'documentDate', defaultValue: '')
@@ -175,10 +177,10 @@ class _$_TransactionInvoiceDto extends _TransactionInvoiceDto {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_TransactionInvoiceDto &&
+            other is _$TransactionInvoiceDtoImpl &&
             (identical(other.documentDate, documentDate) ||
                 other.documentDate == documentDate) &&
             (identical(other.documentNo, documentNo) ||
@@ -196,13 +198,13 @@ class _$_TransactionInvoiceDto extends _TransactionInvoiceDto {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_TransactionInvoiceDtoCopyWith<_$_TransactionInvoiceDto> get copyWith =>
-      __$$_TransactionInvoiceDtoCopyWithImpl<_$_TransactionInvoiceDto>(
-          this, _$identity);
+  _$$TransactionInvoiceDtoImplCopyWith<_$TransactionInvoiceDtoImpl>
+      get copyWith => __$$TransactionInvoiceDtoImplCopyWithImpl<
+          _$TransactionInvoiceDtoImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_TransactionInvoiceDtoToJson(
+    return _$$TransactionInvoiceDtoImplToJson(
       this,
     );
   }
@@ -217,11 +219,11 @@ abstract class _TransactionInvoiceDto extends TransactionInvoiceDto {
       @JsonKey(name: 'documentType', defaultValue: '')
       required final String documentType,
       @JsonKey(name: 'amount', defaultValue: 0.0)
-      required final double amount}) = _$_TransactionInvoiceDto;
+      required final double amount}) = _$TransactionInvoiceDtoImpl;
   const _TransactionInvoiceDto._() : super._();
 
   factory _TransactionInvoiceDto.fromJson(Map<String, dynamic> json) =
-      _$_TransactionInvoiceDto.fromJson;
+      _$TransactionInvoiceDtoImpl.fromJson;
 
   @override
   @JsonKey(name: 'documentDate', defaultValue: '')
@@ -237,6 +239,6 @@ abstract class _TransactionInvoiceDto extends TransactionInvoiceDto {
   double get amount;
   @override
   @JsonKey(ignore: true)
-  _$$_TransactionInvoiceDtoCopyWith<_$_TransactionInvoiceDto> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$TransactionInvoiceDtoImplCopyWith<_$TransactionInvoiceDtoImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }

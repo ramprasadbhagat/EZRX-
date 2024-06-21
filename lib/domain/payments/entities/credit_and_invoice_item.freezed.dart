@@ -12,7 +12,7 @@ part of 'credit_and_invoice_item.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$CreditAndInvoiceItem {
@@ -213,11 +213,11 @@ class _$CreditAndInvoiceItemCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_CreditAndInvoiceItemCopyWith<$Res>
+abstract class _$$CreditAndInvoiceItemImplCopyWith<$Res>
     implements $CreditAndInvoiceItemCopyWith<$Res> {
-  factory _$$_CreditAndInvoiceItemCopyWith(_$_CreditAndInvoiceItem value,
-          $Res Function(_$_CreditAndInvoiceItem) then) =
-      __$$_CreditAndInvoiceItemCopyWithImpl<$Res>;
+  factory _$$CreditAndInvoiceItemImplCopyWith(_$CreditAndInvoiceItemImpl value,
+          $Res Function(_$CreditAndInvoiceItemImpl) then) =
+      __$$CreditAndInvoiceItemImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -247,11 +247,11 @@ abstract class _$$_CreditAndInvoiceItemCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_CreditAndInvoiceItemCopyWithImpl<$Res>
-    extends _$CreditAndInvoiceItemCopyWithImpl<$Res, _$_CreditAndInvoiceItem>
-    implements _$$_CreditAndInvoiceItemCopyWith<$Res> {
-  __$$_CreditAndInvoiceItemCopyWithImpl(_$_CreditAndInvoiceItem _value,
-      $Res Function(_$_CreditAndInvoiceItem) _then)
+class __$$CreditAndInvoiceItemImplCopyWithImpl<$Res>
+    extends _$CreditAndInvoiceItemCopyWithImpl<$Res, _$CreditAndInvoiceItemImpl>
+    implements _$$CreditAndInvoiceItemImplCopyWith<$Res> {
+  __$$CreditAndInvoiceItemImplCopyWithImpl(_$CreditAndInvoiceItemImpl _value,
+      $Res Function(_$CreditAndInvoiceItemImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -281,7 +281,7 @@ class __$$_CreditAndInvoiceItemCopyWithImpl<$Res>
     Object? referenceId = null,
     Object? documentReferenceID = null,
   }) {
-    return _then(_$_CreditAndInvoiceItem(
+    return _then(_$CreditAndInvoiceItemImpl(
       bpCustomerNumber: null == bpCustomerNumber
           ? _value.bpCustomerNumber
           : bpCustomerNumber // ignore: cast_nullable_to_non_nullable
@@ -380,8 +380,8 @@ class __$$_CreditAndInvoiceItemCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_CreditAndInvoiceItem extends _CreditAndInvoiceItem {
-  _$_CreditAndInvoiceItem(
+class _$CreditAndInvoiceItemImpl extends _CreditAndInvoiceItem {
+  _$CreditAndInvoiceItemImpl(
       {required this.bpCustomerNumber,
       required this.fiscalYear,
       required this.searchKey,
@@ -460,10 +460,10 @@ class _$_CreditAndInvoiceItem extends _CreditAndInvoiceItem {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_CreditAndInvoiceItem &&
+            other is _$CreditAndInvoiceItemImpl &&
             (identical(other.bpCustomerNumber, bpCustomerNumber) ||
                 other.bpCustomerNumber == bpCustomerNumber) &&
             (identical(other.fiscalYear, fiscalYear) ||
@@ -546,9 +546,10 @@ class _$_CreditAndInvoiceItem extends _CreditAndInvoiceItem {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_CreditAndInvoiceItemCopyWith<_$_CreditAndInvoiceItem> get copyWith =>
-      __$$_CreditAndInvoiceItemCopyWithImpl<_$_CreditAndInvoiceItem>(
-          this, _$identity);
+  _$$CreditAndInvoiceItemImplCopyWith<_$CreditAndInvoiceItemImpl>
+      get copyWith =>
+          __$$CreditAndInvoiceItemImplCopyWithImpl<_$CreditAndInvoiceItemImpl>(
+              this, _$identity);
 }
 
 abstract class _CreditAndInvoiceItem extends CreditAndInvoiceItem {
@@ -576,7 +577,7 @@ abstract class _CreditAndInvoiceItem extends CreditAndInvoiceItem {
           required final DebitCreditCode debitCreditCode,
           required final ReferenceId referenceId,
           required final StringValue documentReferenceID}) =
-      _$_CreditAndInvoiceItem;
+      _$CreditAndInvoiceItemImpl;
   _CreditAndInvoiceItem._() : super._();
 
   @override
@@ -627,6 +628,6 @@ abstract class _CreditAndInvoiceItem extends CreditAndInvoiceItem {
   StringValue get documentReferenceID;
   @override
   @JsonKey(ignore: true)
-  _$$_CreditAndInvoiceItemCopyWith<_$_CreditAndInvoiceItem> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$CreditAndInvoiceItemImplCopyWith<_$CreditAndInvoiceItemImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }

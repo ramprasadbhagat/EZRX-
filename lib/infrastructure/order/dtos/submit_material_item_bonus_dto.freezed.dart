@@ -12,7 +12,7 @@ part of 'submit_material_item_bonus_dto.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 SubmitMaterialItemBonusDto _$SubmitMaterialItemBonusDtoFromJson(
     Map<String, dynamic> json) {
@@ -75,12 +75,12 @@ class _$SubmitMaterialItemBonusDtoCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_SubmitMaterialItemBonusDtoCopyWith<$Res>
+abstract class _$$SubmitMaterialItemBonusDtoImplCopyWith<$Res>
     implements $SubmitMaterialItemBonusDtoCopyWith<$Res> {
-  factory _$$_SubmitMaterialItemBonusDtoCopyWith(
-          _$_SubmitMaterialItemBonusDto value,
-          $Res Function(_$_SubmitMaterialItemBonusDto) then) =
-      __$$_SubmitMaterialItemBonusDtoCopyWithImpl<$Res>;
+  factory _$$SubmitMaterialItemBonusDtoImplCopyWith(
+          _$SubmitMaterialItemBonusDtoImpl value,
+          $Res Function(_$SubmitMaterialItemBonusDtoImpl) then) =
+      __$$SubmitMaterialItemBonusDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -89,13 +89,13 @@ abstract class _$$_SubmitMaterialItemBonusDtoCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_SubmitMaterialItemBonusDtoCopyWithImpl<$Res>
+class __$$SubmitMaterialItemBonusDtoImplCopyWithImpl<$Res>
     extends _$SubmitMaterialItemBonusDtoCopyWithImpl<$Res,
-        _$_SubmitMaterialItemBonusDto>
-    implements _$$_SubmitMaterialItemBonusDtoCopyWith<$Res> {
-  __$$_SubmitMaterialItemBonusDtoCopyWithImpl(
-      _$_SubmitMaterialItemBonusDto _value,
-      $Res Function(_$_SubmitMaterialItemBonusDto) _then)
+        _$SubmitMaterialItemBonusDtoImpl>
+    implements _$$SubmitMaterialItemBonusDtoImplCopyWith<$Res> {
+  __$$SubmitMaterialItemBonusDtoImplCopyWithImpl(
+      _$SubmitMaterialItemBonusDtoImpl _value,
+      $Res Function(_$SubmitMaterialItemBonusDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -104,7 +104,7 @@ class __$$_SubmitMaterialItemBonusDtoCopyWithImpl<$Res>
     Object? materialNumber = null,
     Object? qty = null,
   }) {
-    return _then(_$_SubmitMaterialItemBonusDto(
+    return _then(_$SubmitMaterialItemBonusDtoImpl(
       materialNumber: null == materialNumber
           ? _value.materialNumber
           : materialNumber // ignore: cast_nullable_to_non_nullable
@@ -119,15 +119,16 @@ class __$$_SubmitMaterialItemBonusDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_SubmitMaterialItemBonusDto extends _SubmitMaterialItemBonusDto {
-  _$_SubmitMaterialItemBonusDto(
+class _$SubmitMaterialItemBonusDtoImpl extends _SubmitMaterialItemBonusDto {
+  _$SubmitMaterialItemBonusDtoImpl(
       {@JsonKey(name: 'materialNumber', defaultValue: '')
       required this.materialNumber,
       @JsonKey(name: 'qty', defaultValue: 0) required this.qty})
       : super._();
 
-  factory _$_SubmitMaterialItemBonusDto.fromJson(Map<String, dynamic> json) =>
-      _$$_SubmitMaterialItemBonusDtoFromJson(json);
+  factory _$SubmitMaterialItemBonusDtoImpl.fromJson(
+          Map<String, dynamic> json) =>
+      _$$SubmitMaterialItemBonusDtoImplFromJson(json);
 
   @override
   @JsonKey(name: 'materialNumber', defaultValue: '')
@@ -142,10 +143,10 @@ class _$_SubmitMaterialItemBonusDto extends _SubmitMaterialItemBonusDto {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_SubmitMaterialItemBonusDto &&
+            other is _$SubmitMaterialItemBonusDtoImpl &&
             (identical(other.materialNumber, materialNumber) ||
                 other.materialNumber == materialNumber) &&
             (identical(other.qty, qty) || other.qty == qty));
@@ -158,13 +159,13 @@ class _$_SubmitMaterialItemBonusDto extends _SubmitMaterialItemBonusDto {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_SubmitMaterialItemBonusDtoCopyWith<_$_SubmitMaterialItemBonusDto>
-      get copyWith => __$$_SubmitMaterialItemBonusDtoCopyWithImpl<
-          _$_SubmitMaterialItemBonusDto>(this, _$identity);
+  _$$SubmitMaterialItemBonusDtoImplCopyWith<_$SubmitMaterialItemBonusDtoImpl>
+      get copyWith => __$$SubmitMaterialItemBonusDtoImplCopyWithImpl<
+          _$SubmitMaterialItemBonusDtoImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_SubmitMaterialItemBonusDtoToJson(
+    return _$$SubmitMaterialItemBonusDtoImplToJson(
       this,
     );
   }
@@ -175,11 +176,11 @@ abstract class _SubmitMaterialItemBonusDto extends SubmitMaterialItemBonusDto {
           {@JsonKey(name: 'materialNumber', defaultValue: '')
           required final String materialNumber,
           @JsonKey(name: 'qty', defaultValue: 0) required final int qty}) =
-      _$_SubmitMaterialItemBonusDto;
+      _$SubmitMaterialItemBonusDtoImpl;
   _SubmitMaterialItemBonusDto._() : super._();
 
   factory _SubmitMaterialItemBonusDto.fromJson(Map<String, dynamic> json) =
-      _$_SubmitMaterialItemBonusDto.fromJson;
+      _$SubmitMaterialItemBonusDtoImpl.fromJson;
 
   @override
   @JsonKey(name: 'materialNumber', defaultValue: '')
@@ -189,6 +190,6 @@ abstract class _SubmitMaterialItemBonusDto extends SubmitMaterialItemBonusDto {
   int get qty;
   @override
   @JsonKey(ignore: true)
-  _$$_SubmitMaterialItemBonusDtoCopyWith<_$_SubmitMaterialItemBonusDto>
+  _$$SubmitMaterialItemBonusDtoImplCopyWith<_$SubmitMaterialItemBonusDtoImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

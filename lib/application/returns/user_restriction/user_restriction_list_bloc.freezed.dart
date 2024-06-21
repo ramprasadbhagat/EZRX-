@@ -12,7 +12,7 @@ part of 'user_restriction_list_bloc.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$UserRestrictionListEvent {
@@ -82,25 +82,25 @@ class _$UserRestrictionListEventCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_InitializedCopyWith<$Res> {
-  factory _$$_InitializedCopyWith(
-          _$_Initialized value, $Res Function(_$_Initialized) then) =
-      __$$_InitializedCopyWithImpl<$Res>;
+abstract class _$$InitializedImplCopyWith<$Res> {
+  factory _$$InitializedImplCopyWith(
+          _$InitializedImpl value, $Res Function(_$InitializedImpl) then) =
+      __$$InitializedImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_InitializedCopyWithImpl<$Res>
-    extends _$UserRestrictionListEventCopyWithImpl<$Res, _$_Initialized>
-    implements _$$_InitializedCopyWith<$Res> {
-  __$$_InitializedCopyWithImpl(
-      _$_Initialized _value, $Res Function(_$_Initialized) _then)
+class __$$InitializedImplCopyWithImpl<$Res>
+    extends _$UserRestrictionListEventCopyWithImpl<$Res, _$InitializedImpl>
+    implements _$$InitializedImplCopyWith<$Res> {
+  __$$InitializedImplCopyWithImpl(
+      _$InitializedImpl _value, $Res Function(_$InitializedImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_Initialized implements _Initialized {
-  const _$_Initialized();
+class _$InitializedImpl implements _Initialized {
+  const _$InitializedImpl();
 
   @override
   String toString() {
@@ -108,9 +108,9 @@ class _$_Initialized implements _Initialized {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_Initialized);
+        (other.runtimeType == runtimeType && other is _$InitializedImpl);
   }
 
   @override
@@ -186,22 +186,24 @@ class _$_Initialized implements _Initialized {
 }
 
 abstract class _Initialized implements UserRestrictionListEvent {
-  const factory _Initialized() = _$_Initialized;
+  const factory _Initialized() = _$InitializedImpl;
 }
 
 /// @nodoc
-abstract class _$$_FetchCopyWith<$Res> {
-  factory _$$_FetchCopyWith(_$_Fetch value, $Res Function(_$_Fetch) then) =
-      __$$_FetchCopyWithImpl<$Res>;
+abstract class _$$FetchImplCopyWith<$Res> {
+  factory _$$FetchImplCopyWith(
+          _$FetchImpl value, $Res Function(_$FetchImpl) then) =
+      __$$FetchImplCopyWithImpl<$Res>;
   @useResult
   $Res call({SalesOrg salesOrg});
 }
 
 /// @nodoc
-class __$$_FetchCopyWithImpl<$Res>
-    extends _$UserRestrictionListEventCopyWithImpl<$Res, _$_Fetch>
-    implements _$$_FetchCopyWith<$Res> {
-  __$$_FetchCopyWithImpl(_$_Fetch _value, $Res Function(_$_Fetch) _then)
+class __$$FetchImplCopyWithImpl<$Res>
+    extends _$UserRestrictionListEventCopyWithImpl<$Res, _$FetchImpl>
+    implements _$$FetchImplCopyWith<$Res> {
+  __$$FetchImplCopyWithImpl(
+      _$FetchImpl _value, $Res Function(_$FetchImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -209,7 +211,7 @@ class __$$_FetchCopyWithImpl<$Res>
   $Res call({
     Object? salesOrg = null,
   }) {
-    return _then(_$_Fetch(
+    return _then(_$FetchImpl(
       salesOrg: null == salesOrg
           ? _value.salesOrg
           : salesOrg // ignore: cast_nullable_to_non_nullable
@@ -220,8 +222,8 @@ class __$$_FetchCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_Fetch implements _Fetch {
-  const _$_Fetch({required this.salesOrg});
+class _$FetchImpl implements _Fetch {
+  const _$FetchImpl({required this.salesOrg});
 
   @override
   final SalesOrg salesOrg;
@@ -232,10 +234,10 @@ class _$_Fetch implements _Fetch {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Fetch &&
+            other is _$FetchImpl &&
             (identical(other.salesOrg, salesOrg) ||
                 other.salesOrg == salesOrg));
   }
@@ -246,8 +248,8 @@ class _$_Fetch implements _Fetch {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_FetchCopyWith<_$_Fetch> get copyWith =>
-      __$$_FetchCopyWithImpl<_$_Fetch>(this, _$identity);
+  _$$FetchImplCopyWith<_$FetchImpl> get copyWith =>
+      __$$FetchImplCopyWithImpl<_$FetchImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -319,29 +321,29 @@ class _$_Fetch implements _Fetch {
 }
 
 abstract class _Fetch implements UserRestrictionListEvent {
-  const factory _Fetch({required final SalesOrg salesOrg}) = _$_Fetch;
+  const factory _Fetch({required final SalesOrg salesOrg}) = _$FetchImpl;
 
   SalesOrg get salesOrg;
   @JsonKey(ignore: true)
-  _$$_FetchCopyWith<_$_Fetch> get copyWith =>
+  _$$FetchImplCopyWith<_$FetchImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_UpdateSearchKeyCopyWith<$Res> {
-  factory _$$_UpdateSearchKeyCopyWith(
-          _$_UpdateSearchKey value, $Res Function(_$_UpdateSearchKey) then) =
-      __$$_UpdateSearchKeyCopyWithImpl<$Res>;
+abstract class _$$UpdateSearchKeyImplCopyWith<$Res> {
+  factory _$$UpdateSearchKeyImplCopyWith(_$UpdateSearchKeyImpl value,
+          $Res Function(_$UpdateSearchKeyImpl) then) =
+      __$$UpdateSearchKeyImplCopyWithImpl<$Res>;
   @useResult
   $Res call({String searchKey});
 }
 
 /// @nodoc
-class __$$_UpdateSearchKeyCopyWithImpl<$Res>
-    extends _$UserRestrictionListEventCopyWithImpl<$Res, _$_UpdateSearchKey>
-    implements _$$_UpdateSearchKeyCopyWith<$Res> {
-  __$$_UpdateSearchKeyCopyWithImpl(
-      _$_UpdateSearchKey _value, $Res Function(_$_UpdateSearchKey) _then)
+class __$$UpdateSearchKeyImplCopyWithImpl<$Res>
+    extends _$UserRestrictionListEventCopyWithImpl<$Res, _$UpdateSearchKeyImpl>
+    implements _$$UpdateSearchKeyImplCopyWith<$Res> {
+  __$$UpdateSearchKeyImplCopyWithImpl(
+      _$UpdateSearchKeyImpl _value, $Res Function(_$UpdateSearchKeyImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -349,7 +351,7 @@ class __$$_UpdateSearchKeyCopyWithImpl<$Res>
   $Res call({
     Object? searchKey = null,
   }) {
-    return _then(_$_UpdateSearchKey(
+    return _then(_$UpdateSearchKeyImpl(
       null == searchKey
           ? _value.searchKey
           : searchKey // ignore: cast_nullable_to_non_nullable
@@ -360,8 +362,8 @@ class __$$_UpdateSearchKeyCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_UpdateSearchKey implements _UpdateSearchKey {
-  const _$_UpdateSearchKey(this.searchKey);
+class _$UpdateSearchKeyImpl implements _UpdateSearchKey {
+  const _$UpdateSearchKeyImpl(this.searchKey);
 
   @override
   final String searchKey;
@@ -372,10 +374,10 @@ class _$_UpdateSearchKey implements _UpdateSearchKey {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_UpdateSearchKey &&
+            other is _$UpdateSearchKeyImpl &&
             (identical(other.searchKey, searchKey) ||
                 other.searchKey == searchKey));
   }
@@ -386,8 +388,9 @@ class _$_UpdateSearchKey implements _UpdateSearchKey {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_UpdateSearchKeyCopyWith<_$_UpdateSearchKey> get copyWith =>
-      __$$_UpdateSearchKeyCopyWithImpl<_$_UpdateSearchKey>(this, _$identity);
+  _$$UpdateSearchKeyImplCopyWith<_$UpdateSearchKeyImpl> get copyWith =>
+      __$$UpdateSearchKeyImplCopyWithImpl<_$UpdateSearchKeyImpl>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -459,11 +462,12 @@ class _$_UpdateSearchKey implements _UpdateSearchKey {
 }
 
 abstract class _UpdateSearchKey implements UserRestrictionListEvent {
-  const factory _UpdateSearchKey(final String searchKey) = _$_UpdateSearchKey;
+  const factory _UpdateSearchKey(final String searchKey) =
+      _$UpdateSearchKeyImpl;
 
   String get searchKey;
   @JsonKey(ignore: true)
-  _$$_UpdateSearchKeyCopyWith<_$_UpdateSearchKey> get copyWith =>
+  _$$UpdateSearchKeyImplCopyWith<_$UpdateSearchKeyImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -534,11 +538,11 @@ class _$UserRestrictionListStateCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_UserRestrictionStateCopyWith<$Res>
+abstract class _$$UserRestrictionStateImplCopyWith<$Res>
     implements $UserRestrictionListStateCopyWith<$Res> {
-  factory _$$_UserRestrictionStateCopyWith(_$_UserRestrictionState value,
-          $Res Function(_$_UserRestrictionState) then) =
-      __$$_UserRestrictionStateCopyWithImpl<$Res>;
+  factory _$$UserRestrictionStateImplCopyWith(_$UserRestrictionStateImpl value,
+          $Res Function(_$UserRestrictionStateImpl) then) =
+      __$$UserRestrictionStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -549,12 +553,12 @@ abstract class _$$_UserRestrictionStateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_UserRestrictionStateCopyWithImpl<$Res>
+class __$$UserRestrictionStateImplCopyWithImpl<$Res>
     extends _$UserRestrictionListStateCopyWithImpl<$Res,
-        _$_UserRestrictionState>
-    implements _$$_UserRestrictionStateCopyWith<$Res> {
-  __$$_UserRestrictionStateCopyWithImpl(_$_UserRestrictionState _value,
-      $Res Function(_$_UserRestrictionState) _then)
+        _$UserRestrictionStateImpl>
+    implements _$$UserRestrictionStateImplCopyWith<$Res> {
+  __$$UserRestrictionStateImplCopyWithImpl(_$UserRestrictionStateImpl _value,
+      $Res Function(_$UserRestrictionStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -565,7 +569,7 @@ class __$$_UserRestrictionStateCopyWithImpl<$Res>
     Object? usernames = null,
     Object? apiFailureOrSuccessOption = null,
   }) {
-    return _then(_$_UserRestrictionState(
+    return _then(_$UserRestrictionStateImpl(
       isFetching: null == isFetching
           ? _value.isFetching
           : isFetching // ignore: cast_nullable_to_non_nullable
@@ -588,8 +592,8 @@ class __$$_UserRestrictionStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_UserRestrictionState extends _UserRestrictionState {
-  _$_UserRestrictionState(
+class _$UserRestrictionStateImpl extends _UserRestrictionState {
+  _$UserRestrictionStateImpl(
       {required this.isFetching,
       required this.searchKey,
       required final List<String> usernames,
@@ -618,10 +622,10 @@ class _$_UserRestrictionState extends _UserRestrictionState {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_UserRestrictionState &&
+            other is _$UserRestrictionStateImpl &&
             (identical(other.isFetching, isFetching) ||
                 other.isFetching == isFetching) &&
             (identical(other.searchKey, searchKey) ||
@@ -644,9 +648,10 @@ class _$_UserRestrictionState extends _UserRestrictionState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_UserRestrictionStateCopyWith<_$_UserRestrictionState> get copyWith =>
-      __$$_UserRestrictionStateCopyWithImpl<_$_UserRestrictionState>(
-          this, _$identity);
+  _$$UserRestrictionStateImplCopyWith<_$UserRestrictionStateImpl>
+      get copyWith =>
+          __$$UserRestrictionStateImplCopyWithImpl<_$UserRestrictionStateImpl>(
+              this, _$identity);
 }
 
 abstract class _UserRestrictionState extends UserRestrictionListState {
@@ -655,7 +660,7 @@ abstract class _UserRestrictionState extends UserRestrictionListState {
       required final String searchKey,
       required final List<String> usernames,
       required final Option<Either<ApiFailure, dynamic>>
-          apiFailureOrSuccessOption}) = _$_UserRestrictionState;
+          apiFailureOrSuccessOption}) = _$UserRestrictionStateImpl;
   _UserRestrictionState._() : super._();
 
   @override
@@ -668,6 +673,6 @@ abstract class _UserRestrictionState extends UserRestrictionListState {
   Option<Either<ApiFailure, dynamic>> get apiFailureOrSuccessOption;
   @override
   @JsonKey(ignore: true)
-  _$$_UserRestrictionStateCopyWith<_$_UserRestrictionState> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$UserRestrictionStateImplCopyWith<_$UserRestrictionStateImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }

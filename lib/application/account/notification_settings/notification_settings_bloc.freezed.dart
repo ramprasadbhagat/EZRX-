@@ -12,7 +12,7 @@ part of 'notification_settings_bloc.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$NotificationSettingsEvent {
@@ -112,25 +112,25 @@ class _$NotificationSettingsEventCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_InitializedCopyWith<$Res> {
-  factory _$$_InitializedCopyWith(
-          _$_Initialized value, $Res Function(_$_Initialized) then) =
-      __$$_InitializedCopyWithImpl<$Res>;
+abstract class _$$InitializedImplCopyWith<$Res> {
+  factory _$$InitializedImplCopyWith(
+          _$InitializedImpl value, $Res Function(_$InitializedImpl) then) =
+      __$$InitializedImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_InitializedCopyWithImpl<$Res>
-    extends _$NotificationSettingsEventCopyWithImpl<$Res, _$_Initialized>
-    implements _$$_InitializedCopyWith<$Res> {
-  __$$_InitializedCopyWithImpl(
-      _$_Initialized _value, $Res Function(_$_Initialized) _then)
+class __$$InitializedImplCopyWithImpl<$Res>
+    extends _$NotificationSettingsEventCopyWithImpl<$Res, _$InitializedImpl>
+    implements _$$InitializedImplCopyWith<$Res> {
+  __$$InitializedImplCopyWithImpl(
+      _$InitializedImpl _value, $Res Function(_$InitializedImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_Initialized with DiagnosticableTreeMixin implements _Initialized {
-  const _$_Initialized();
+class _$InitializedImpl with DiagnosticableTreeMixin implements _Initialized {
+  const _$InitializedImpl();
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
@@ -145,9 +145,9 @@ class _$_Initialized with DiagnosticableTreeMixin implements _Initialized {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_Initialized);
+        (other.runtimeType == runtimeType && other is _$InitializedImpl);
   }
 
   @override
@@ -253,27 +253,29 @@ class _$_Initialized with DiagnosticableTreeMixin implements _Initialized {
 }
 
 abstract class _Initialized implements NotificationSettingsEvent {
-  const factory _Initialized() = _$_Initialized;
+  const factory _Initialized() = _$InitializedImpl;
 }
 
 /// @nodoc
-abstract class _$$_FetchCopyWith<$Res> {
-  factory _$$_FetchCopyWith(_$_Fetch value, $Res Function(_$_Fetch) then) =
-      __$$_FetchCopyWithImpl<$Res>;
+abstract class _$$FetchImplCopyWith<$Res> {
+  factory _$$FetchImplCopyWith(
+          _$FetchImpl value, $Res Function(_$FetchImpl) then) =
+      __$$FetchImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_FetchCopyWithImpl<$Res>
-    extends _$NotificationSettingsEventCopyWithImpl<$Res, _$_Fetch>
-    implements _$$_FetchCopyWith<$Res> {
-  __$$_FetchCopyWithImpl(_$_Fetch _value, $Res Function(_$_Fetch) _then)
+class __$$FetchImplCopyWithImpl<$Res>
+    extends _$NotificationSettingsEventCopyWithImpl<$Res, _$FetchImpl>
+    implements _$$FetchImplCopyWith<$Res> {
+  __$$FetchImplCopyWithImpl(
+      _$FetchImpl _value, $Res Function(_$FetchImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_Fetch with DiagnosticableTreeMixin implements _Fetch {
-  const _$_Fetch();
+class _$FetchImpl with DiagnosticableTreeMixin implements _Fetch {
+  const _$FetchImpl();
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
@@ -288,9 +290,9 @@ class _$_Fetch with DiagnosticableTreeMixin implements _Fetch {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_Fetch);
+        (other.runtimeType == runtimeType && other is _$FetchImpl);
   }
 
   @override
@@ -396,27 +398,29 @@ class _$_Fetch with DiagnosticableTreeMixin implements _Fetch {
 }
 
 abstract class _Fetch implements NotificationSettingsEvent {
-  const factory _Fetch() = _$_Fetch;
+  const factory _Fetch() = _$FetchImpl;
 }
 
 /// @nodoc
-abstract class _$$_SubmitCopyWith<$Res> {
-  factory _$$_SubmitCopyWith(_$_Submit value, $Res Function(_$_Submit) then) =
-      __$$_SubmitCopyWithImpl<$Res>;
+abstract class _$$SubmitImplCopyWith<$Res> {
+  factory _$$SubmitImplCopyWith(
+          _$SubmitImpl value, $Res Function(_$SubmitImpl) then) =
+      __$$SubmitImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_SubmitCopyWithImpl<$Res>
-    extends _$NotificationSettingsEventCopyWithImpl<$Res, _$_Submit>
-    implements _$$_SubmitCopyWith<$Res> {
-  __$$_SubmitCopyWithImpl(_$_Submit _value, $Res Function(_$_Submit) _then)
+class __$$SubmitImplCopyWithImpl<$Res>
+    extends _$NotificationSettingsEventCopyWithImpl<$Res, _$SubmitImpl>
+    implements _$$SubmitImplCopyWith<$Res> {
+  __$$SubmitImplCopyWithImpl(
+      _$SubmitImpl _value, $Res Function(_$SubmitImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_Submit with DiagnosticableTreeMixin implements _Submit {
-  const _$_Submit();
+class _$SubmitImpl with DiagnosticableTreeMixin implements _Submit {
+  const _$SubmitImpl();
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
@@ -431,9 +435,9 @@ class _$_Submit with DiagnosticableTreeMixin implements _Submit {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_Submit);
+        (other.runtimeType == runtimeType && other is _$SubmitImpl);
   }
 
   @override
@@ -539,27 +543,29 @@ class _$_Submit with DiagnosticableTreeMixin implements _Submit {
 }
 
 abstract class _Submit implements NotificationSettingsEvent {
-  const factory _Submit() = _$_Submit;
+  const factory _Submit() = _$SubmitImpl;
 }
 
 /// @nodoc
-abstract class _$$_ClearCopyWith<$Res> {
-  factory _$$_ClearCopyWith(_$_Clear value, $Res Function(_$_Clear) then) =
-      __$$_ClearCopyWithImpl<$Res>;
+abstract class _$$ClearImplCopyWith<$Res> {
+  factory _$$ClearImplCopyWith(
+          _$ClearImpl value, $Res Function(_$ClearImpl) then) =
+      __$$ClearImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_ClearCopyWithImpl<$Res>
-    extends _$NotificationSettingsEventCopyWithImpl<$Res, _$_Clear>
-    implements _$$_ClearCopyWith<$Res> {
-  __$$_ClearCopyWithImpl(_$_Clear _value, $Res Function(_$_Clear) _then)
+class __$$ClearImplCopyWithImpl<$Res>
+    extends _$NotificationSettingsEventCopyWithImpl<$Res, _$ClearImpl>
+    implements _$$ClearImplCopyWith<$Res> {
+  __$$ClearImplCopyWithImpl(
+      _$ClearImpl _value, $Res Function(_$ClearImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_Clear with DiagnosticableTreeMixin implements _Clear {
-  const _$_Clear();
+class _$ClearImpl with DiagnosticableTreeMixin implements _Clear {
+  const _$ClearImpl();
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
@@ -574,9 +580,9 @@ class _$_Clear with DiagnosticableTreeMixin implements _Clear {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_Clear);
+        (other.runtimeType == runtimeType && other is _$ClearImpl);
   }
 
   @override
@@ -682,25 +688,27 @@ class _$_Clear with DiagnosticableTreeMixin implements _Clear {
 }
 
 abstract class _Clear implements NotificationSettingsEvent {
-  const factory _Clear() = _$_Clear;
+  const factory _Clear() = _$ClearImpl;
 }
 
 /// @nodoc
-abstract class _$$_UpdateOrderConfirmationCopyWith<$Res> {
-  factory _$$_UpdateOrderConfirmationCopyWith(_$_UpdateOrderConfirmation value,
-          $Res Function(_$_UpdateOrderConfirmation) then) =
-      __$$_UpdateOrderConfirmationCopyWithImpl<$Res>;
+abstract class _$$UpdateOrderConfirmationImplCopyWith<$Res> {
+  factory _$$UpdateOrderConfirmationImplCopyWith(
+          _$UpdateOrderConfirmationImpl value,
+          $Res Function(_$UpdateOrderConfirmationImpl) then) =
+      __$$UpdateOrderConfirmationImplCopyWithImpl<$Res>;
   @useResult
   $Res call({bool value});
 }
 
 /// @nodoc
-class __$$_UpdateOrderConfirmationCopyWithImpl<$Res>
+class __$$UpdateOrderConfirmationImplCopyWithImpl<$Res>
     extends _$NotificationSettingsEventCopyWithImpl<$Res,
-        _$_UpdateOrderConfirmation>
-    implements _$$_UpdateOrderConfirmationCopyWith<$Res> {
-  __$$_UpdateOrderConfirmationCopyWithImpl(_$_UpdateOrderConfirmation _value,
-      $Res Function(_$_UpdateOrderConfirmation) _then)
+        _$UpdateOrderConfirmationImpl>
+    implements _$$UpdateOrderConfirmationImplCopyWith<$Res> {
+  __$$UpdateOrderConfirmationImplCopyWithImpl(
+      _$UpdateOrderConfirmationImpl _value,
+      $Res Function(_$UpdateOrderConfirmationImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -708,7 +716,7 @@ class __$$_UpdateOrderConfirmationCopyWithImpl<$Res>
   $Res call({
     Object? value = null,
   }) {
-    return _then(_$_UpdateOrderConfirmation(
+    return _then(_$UpdateOrderConfirmationImpl(
       value: null == value
           ? _value.value
           : value // ignore: cast_nullable_to_non_nullable
@@ -719,10 +727,10 @@ class __$$_UpdateOrderConfirmationCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_UpdateOrderConfirmation
+class _$UpdateOrderConfirmationImpl
     with DiagnosticableTreeMixin
     implements _UpdateOrderConfirmation {
-  const _$_UpdateOrderConfirmation({required this.value});
+  const _$UpdateOrderConfirmationImpl({required this.value});
 
   @override
   final bool value;
@@ -742,10 +750,10 @@ class _$_UpdateOrderConfirmation
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_UpdateOrderConfirmation &&
+            other is _$UpdateOrderConfirmationImpl &&
             (identical(other.value, value) || other.value == value));
   }
 
@@ -755,10 +763,9 @@ class _$_UpdateOrderConfirmation
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_UpdateOrderConfirmationCopyWith<_$_UpdateOrderConfirmation>
-      get copyWith =>
-          __$$_UpdateOrderConfirmationCopyWithImpl<_$_UpdateOrderConfirmation>(
-              this, _$identity);
+  _$$UpdateOrderConfirmationImplCopyWith<_$UpdateOrderConfirmationImpl>
+      get copyWith => __$$UpdateOrderConfirmationImplCopyWithImpl<
+          _$UpdateOrderConfirmationImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -861,32 +868,32 @@ class _$_UpdateOrderConfirmation
 
 abstract class _UpdateOrderConfirmation implements NotificationSettingsEvent {
   const factory _UpdateOrderConfirmation({required final bool value}) =
-      _$_UpdateOrderConfirmation;
+      _$UpdateOrderConfirmationImpl;
 
   bool get value;
   @JsonKey(ignore: true)
-  _$$_UpdateOrderConfirmationCopyWith<_$_UpdateOrderConfirmation>
+  _$$UpdateOrderConfirmationImplCopyWith<_$UpdateOrderConfirmationImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_UpdatePaymentConfirmationCopyWith<$Res> {
-  factory _$$_UpdatePaymentConfirmationCopyWith(
-          _$_UpdatePaymentConfirmation value,
-          $Res Function(_$_UpdatePaymentConfirmation) then) =
-      __$$_UpdatePaymentConfirmationCopyWithImpl<$Res>;
+abstract class _$$UpdatePaymentConfirmationImplCopyWith<$Res> {
+  factory _$$UpdatePaymentConfirmationImplCopyWith(
+          _$UpdatePaymentConfirmationImpl value,
+          $Res Function(_$UpdatePaymentConfirmationImpl) then) =
+      __$$UpdatePaymentConfirmationImplCopyWithImpl<$Res>;
   @useResult
   $Res call({bool value});
 }
 
 /// @nodoc
-class __$$_UpdatePaymentConfirmationCopyWithImpl<$Res>
+class __$$UpdatePaymentConfirmationImplCopyWithImpl<$Res>
     extends _$NotificationSettingsEventCopyWithImpl<$Res,
-        _$_UpdatePaymentConfirmation>
-    implements _$$_UpdatePaymentConfirmationCopyWith<$Res> {
-  __$$_UpdatePaymentConfirmationCopyWithImpl(
-      _$_UpdatePaymentConfirmation _value,
-      $Res Function(_$_UpdatePaymentConfirmation) _then)
+        _$UpdatePaymentConfirmationImpl>
+    implements _$$UpdatePaymentConfirmationImplCopyWith<$Res> {
+  __$$UpdatePaymentConfirmationImplCopyWithImpl(
+      _$UpdatePaymentConfirmationImpl _value,
+      $Res Function(_$UpdatePaymentConfirmationImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -894,7 +901,7 @@ class __$$_UpdatePaymentConfirmationCopyWithImpl<$Res>
   $Res call({
     Object? value = null,
   }) {
-    return _then(_$_UpdatePaymentConfirmation(
+    return _then(_$UpdatePaymentConfirmationImpl(
       value: null == value
           ? _value.value
           : value // ignore: cast_nullable_to_non_nullable
@@ -905,10 +912,10 @@ class __$$_UpdatePaymentConfirmationCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_UpdatePaymentConfirmation
+class _$UpdatePaymentConfirmationImpl
     with DiagnosticableTreeMixin
     implements _UpdatePaymentConfirmation {
-  const _$_UpdatePaymentConfirmation({required this.value});
+  const _$UpdatePaymentConfirmationImpl({required this.value});
 
   @override
   final bool value;
@@ -928,10 +935,10 @@ class _$_UpdatePaymentConfirmation
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_UpdatePaymentConfirmation &&
+            other is _$UpdatePaymentConfirmationImpl &&
             (identical(other.value, value) || other.value == value));
   }
 
@@ -941,9 +948,9 @@ class _$_UpdatePaymentConfirmation
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_UpdatePaymentConfirmationCopyWith<_$_UpdatePaymentConfirmation>
-      get copyWith => __$$_UpdatePaymentConfirmationCopyWithImpl<
-          _$_UpdatePaymentConfirmation>(this, _$identity);
+  _$$UpdatePaymentConfirmationImplCopyWith<_$UpdatePaymentConfirmationImpl>
+      get copyWith => __$$UpdatePaymentConfirmationImplCopyWithImpl<
+          _$UpdatePaymentConfirmationImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -1046,31 +1053,32 @@ class _$_UpdatePaymentConfirmation
 
 abstract class _UpdatePaymentConfirmation implements NotificationSettingsEvent {
   const factory _UpdatePaymentConfirmation({required final bool value}) =
-      _$_UpdatePaymentConfirmation;
+      _$UpdatePaymentConfirmationImpl;
 
   bool get value;
   @JsonKey(ignore: true)
-  _$$_UpdatePaymentConfirmationCopyWith<_$_UpdatePaymentConfirmation>
+  _$$UpdatePaymentConfirmationImplCopyWith<_$UpdatePaymentConfirmationImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_UpdateReturnConfirmationCopyWith<$Res> {
-  factory _$$_UpdateReturnConfirmationCopyWith(
-          _$_UpdateReturnConfirmation value,
-          $Res Function(_$_UpdateReturnConfirmation) then) =
-      __$$_UpdateReturnConfirmationCopyWithImpl<$Res>;
+abstract class _$$UpdateReturnConfirmationImplCopyWith<$Res> {
+  factory _$$UpdateReturnConfirmationImplCopyWith(
+          _$UpdateReturnConfirmationImpl value,
+          $Res Function(_$UpdateReturnConfirmationImpl) then) =
+      __$$UpdateReturnConfirmationImplCopyWithImpl<$Res>;
   @useResult
   $Res call({bool value});
 }
 
 /// @nodoc
-class __$$_UpdateReturnConfirmationCopyWithImpl<$Res>
+class __$$UpdateReturnConfirmationImplCopyWithImpl<$Res>
     extends _$NotificationSettingsEventCopyWithImpl<$Res,
-        _$_UpdateReturnConfirmation>
-    implements _$$_UpdateReturnConfirmationCopyWith<$Res> {
-  __$$_UpdateReturnConfirmationCopyWithImpl(_$_UpdateReturnConfirmation _value,
-      $Res Function(_$_UpdateReturnConfirmation) _then)
+        _$UpdateReturnConfirmationImpl>
+    implements _$$UpdateReturnConfirmationImplCopyWith<$Res> {
+  __$$UpdateReturnConfirmationImplCopyWithImpl(
+      _$UpdateReturnConfirmationImpl _value,
+      $Res Function(_$UpdateReturnConfirmationImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1078,7 +1086,7 @@ class __$$_UpdateReturnConfirmationCopyWithImpl<$Res>
   $Res call({
     Object? value = null,
   }) {
-    return _then(_$_UpdateReturnConfirmation(
+    return _then(_$UpdateReturnConfirmationImpl(
       value: null == value
           ? _value.value
           : value // ignore: cast_nullable_to_non_nullable
@@ -1089,10 +1097,10 @@ class __$$_UpdateReturnConfirmationCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_UpdateReturnConfirmation
+class _$UpdateReturnConfirmationImpl
     with DiagnosticableTreeMixin
     implements _UpdateReturnConfirmation {
-  const _$_UpdateReturnConfirmation({required this.value});
+  const _$UpdateReturnConfirmationImpl({required this.value});
 
   @override
   final bool value;
@@ -1112,10 +1120,10 @@ class _$_UpdateReturnConfirmation
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_UpdateReturnConfirmation &&
+            other is _$UpdateReturnConfirmationImpl &&
             (identical(other.value, value) || other.value == value));
   }
 
@@ -1125,9 +1133,9 @@ class _$_UpdateReturnConfirmation
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_UpdateReturnConfirmationCopyWith<_$_UpdateReturnConfirmation>
-      get copyWith => __$$_UpdateReturnConfirmationCopyWithImpl<
-          _$_UpdateReturnConfirmation>(this, _$identity);
+  _$$UpdateReturnConfirmationImplCopyWith<_$UpdateReturnConfirmationImpl>
+      get copyWith => __$$UpdateReturnConfirmationImplCopyWithImpl<
+          _$UpdateReturnConfirmationImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -1230,11 +1238,11 @@ class _$_UpdateReturnConfirmation
 
 abstract class _UpdateReturnConfirmation implements NotificationSettingsEvent {
   const factory _UpdateReturnConfirmation({required final bool value}) =
-      _$_UpdateReturnConfirmation;
+      _$UpdateReturnConfirmationImpl;
 
   bool get value;
   @JsonKey(ignore: true)
-  _$$_UpdateReturnConfirmationCopyWith<_$_UpdateReturnConfirmation>
+  _$$UpdateReturnConfirmationImplCopyWith<_$UpdateReturnConfirmationImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -1337,12 +1345,12 @@ class _$NotificationSettingsStateCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_NotificationSettingsStateCopyWith<$Res>
+abstract class _$$NotificationSettingsStateImplCopyWith<$Res>
     implements $NotificationSettingsStateCopyWith<$Res> {
-  factory _$$_NotificationSettingsStateCopyWith(
-          _$_NotificationSettingsState value,
-          $Res Function(_$_NotificationSettingsState) then) =
-      __$$_NotificationSettingsStateCopyWithImpl<$Res>;
+  factory _$$NotificationSettingsStateImplCopyWith(
+          _$NotificationSettingsStateImpl value,
+          $Res Function(_$NotificationSettingsStateImpl) then) =
+      __$$NotificationSettingsStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -1359,13 +1367,13 @@ abstract class _$$_NotificationSettingsStateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_NotificationSettingsStateCopyWithImpl<$Res>
+class __$$NotificationSettingsStateImplCopyWithImpl<$Res>
     extends _$NotificationSettingsStateCopyWithImpl<$Res,
-        _$_NotificationSettingsState>
-    implements _$$_NotificationSettingsStateCopyWith<$Res> {
-  __$$_NotificationSettingsStateCopyWithImpl(
-      _$_NotificationSettingsState _value,
-      $Res Function(_$_NotificationSettingsState) _then)
+        _$NotificationSettingsStateImpl>
+    implements _$$NotificationSettingsStateImplCopyWith<$Res> {
+  __$$NotificationSettingsStateImplCopyWithImpl(
+      _$NotificationSettingsStateImpl _value,
+      $Res Function(_$NotificationSettingsStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1377,7 +1385,7 @@ class __$$_NotificationSettingsStateCopyWithImpl<$Res>
     Object? previousNotificationSettings = null,
     Object? currentNotificationSettings = null,
   }) {
-    return _then(_$_NotificationSettingsState(
+    return _then(_$NotificationSettingsStateImpl(
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
@@ -1404,9 +1412,9 @@ class __$$_NotificationSettingsStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_NotificationSettingsState extends _NotificationSettingsState
+class _$NotificationSettingsStateImpl extends _NotificationSettingsState
     with DiagnosticableTreeMixin {
-  const _$_NotificationSettingsState(
+  const _$NotificationSettingsStateImpl(
       {required this.isLoading,
       required this.failureOrSuccessOption,
       required this.submitFailureOrSuccessOption,
@@ -1447,10 +1455,10 @@ class _$_NotificationSettingsState extends _NotificationSettingsState
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_NotificationSettingsState &&
+            other is _$NotificationSettingsStateImpl &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
             (identical(other.failureOrSuccessOption, failureOrSuccessOption) ||
@@ -1481,9 +1489,9 @@ class _$_NotificationSettingsState extends _NotificationSettingsState
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_NotificationSettingsStateCopyWith<_$_NotificationSettingsState>
-      get copyWith => __$$_NotificationSettingsStateCopyWithImpl<
-          _$_NotificationSettingsState>(this, _$identity);
+  _$$NotificationSettingsStateImplCopyWith<_$NotificationSettingsStateImpl>
+      get copyWith => __$$NotificationSettingsStateImplCopyWithImpl<
+          _$NotificationSettingsStateImpl>(this, _$identity);
 }
 
 abstract class _NotificationSettingsState extends NotificationSettingsState {
@@ -1494,7 +1502,7 @@ abstract class _NotificationSettingsState extends NotificationSettingsState {
           submitFailureOrSuccessOption,
       required final NotificationSettings previousNotificationSettings,
       required final NotificationSettings
-          currentNotificationSettings}) = _$_NotificationSettingsState;
+          currentNotificationSettings}) = _$NotificationSettingsStateImpl;
   const _NotificationSettingsState._() : super._();
 
   @override
@@ -1509,6 +1517,6 @@ abstract class _NotificationSettingsState extends NotificationSettingsState {
   NotificationSettings get currentNotificationSettings;
   @override
   @JsonKey(ignore: true)
-  _$$_NotificationSettingsStateCopyWith<_$_NotificationSettingsState>
+  _$$NotificationSettingsStateImplCopyWith<_$NotificationSettingsStateImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

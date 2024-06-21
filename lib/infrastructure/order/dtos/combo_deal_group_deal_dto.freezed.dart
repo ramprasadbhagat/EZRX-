@@ -12,7 +12,7 @@ part of 'combo_deal_group_deal_dto.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 ComboDealGroupDealDto _$ComboDealGroupDealDtoFromJson(
     Map<String, dynamic> json) {
@@ -119,11 +119,12 @@ class _$ComboDealGroupDealDtoCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_ComboDealGroupDealDtoCopyWith<$Res>
+abstract class _$$ComboDealGroupDealDtoImplCopyWith<$Res>
     implements $ComboDealGroupDealDtoCopyWith<$Res> {
-  factory _$$_ComboDealGroupDealDtoCopyWith(_$_ComboDealGroupDealDto value,
-          $Res Function(_$_ComboDealGroupDealDto) then) =
-      __$$_ComboDealGroupDealDtoCopyWithImpl<$Res>;
+  factory _$$ComboDealGroupDealDtoImplCopyWith(
+          _$ComboDealGroupDealDtoImpl value,
+          $Res Function(_$ComboDealGroupDealDtoImpl) then) =
+      __$$ComboDealGroupDealDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -145,11 +146,12 @@ abstract class _$$_ComboDealGroupDealDtoCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_ComboDealGroupDealDtoCopyWithImpl<$Res>
-    extends _$ComboDealGroupDealDtoCopyWithImpl<$Res, _$_ComboDealGroupDealDto>
-    implements _$$_ComboDealGroupDealDtoCopyWith<$Res> {
-  __$$_ComboDealGroupDealDtoCopyWithImpl(_$_ComboDealGroupDealDto _value,
-      $Res Function(_$_ComboDealGroupDealDto) _then)
+class __$$ComboDealGroupDealDtoImplCopyWithImpl<$Res>
+    extends _$ComboDealGroupDealDtoCopyWithImpl<$Res,
+        _$ComboDealGroupDealDtoImpl>
+    implements _$$ComboDealGroupDealDtoImplCopyWith<$Res> {
+  __$$ComboDealGroupDealDtoImplCopyWithImpl(_$ComboDealGroupDealDtoImpl _value,
+      $Res Function(_$ComboDealGroupDealDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -162,7 +164,7 @@ class __$$_ComboDealGroupDealDtoCopyWithImpl<$Res>
     Object? type = null,
     Object? conditionNumber = null,
   }) {
-    return _then(_$_ComboDealGroupDealDto(
+    return _then(_$ComboDealGroupDealDtoImpl(
       minTotalAmount: null == minTotalAmount
           ? _value.minTotalAmount
           : minTotalAmount // ignore: cast_nullable_to_non_nullable
@@ -193,8 +195,8 @@ class __$$_ComboDealGroupDealDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_ComboDealGroupDealDto extends _ComboDealGroupDealDto {
-  const _$_ComboDealGroupDealDto(
+class _$ComboDealGroupDealDtoImpl extends _ComboDealGroupDealDto {
+  const _$ComboDealGroupDealDtoImpl(
       {@StringToDoubleConverter()
       @JsonKey(name: 'minTotalAmount', defaultValue: 0)
       required this.minTotalAmount,
@@ -212,8 +214,8 @@ class _$_ComboDealGroupDealDto extends _ComboDealGroupDealDto {
       required this.conditionNumber})
       : super._();
 
-  factory _$_ComboDealGroupDealDto.fromJson(Map<String, dynamic> json) =>
-      _$$_ComboDealGroupDealDtoFromJson(json);
+  factory _$ComboDealGroupDealDtoImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ComboDealGroupDealDtoImplFromJson(json);
 
   @override
   @StringToDoubleConverter()
@@ -244,10 +246,10 @@ class _$_ComboDealGroupDealDto extends _ComboDealGroupDealDto {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ComboDealGroupDealDto &&
+            other is _$ComboDealGroupDealDtoImpl &&
             (identical(other.minTotalAmount, minTotalAmount) ||
                 other.minTotalAmount == minTotalAmount) &&
             (identical(other.maxTotalAmount, maxTotalAmount) ||
@@ -268,13 +270,13 @@ class _$_ComboDealGroupDealDto extends _ComboDealGroupDealDto {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ComboDealGroupDealDtoCopyWith<_$_ComboDealGroupDealDto> get copyWith =>
-      __$$_ComboDealGroupDealDtoCopyWithImpl<_$_ComboDealGroupDealDto>(
-          this, _$identity);
+  _$$ComboDealGroupDealDtoImplCopyWith<_$ComboDealGroupDealDtoImpl>
+      get copyWith => __$$ComboDealGroupDealDtoImplCopyWithImpl<
+          _$ComboDealGroupDealDtoImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_ComboDealGroupDealDtoToJson(
+    return _$$ComboDealGroupDealDtoImplToJson(
       this,
     );
   }
@@ -296,11 +298,11 @@ abstract class _ComboDealGroupDealDto extends ComboDealGroupDealDto {
       required final double rate,
       @JsonKey(name: 'type', defaultValue: '') required final String type,
       @JsonKey(name: 'conditionNumber', defaultValue: '')
-      required final String conditionNumber}) = _$_ComboDealGroupDealDto;
+      required final String conditionNumber}) = _$ComboDealGroupDealDtoImpl;
   const _ComboDealGroupDealDto._() : super._();
 
   factory _ComboDealGroupDealDto.fromJson(Map<String, dynamic> json) =
-      _$_ComboDealGroupDealDto.fromJson;
+      _$ComboDealGroupDealDtoImpl.fromJson;
 
   @override
   @StringToDoubleConverter()
@@ -326,6 +328,6 @@ abstract class _ComboDealGroupDealDto extends ComboDealGroupDealDto {
   String get conditionNumber;
   @override
   @JsonKey(ignore: true)
-  _$$_ComboDealGroupDealDtoCopyWith<_$_ComboDealGroupDealDto> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$ComboDealGroupDealDtoImplCopyWith<_$ComboDealGroupDealDtoImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }

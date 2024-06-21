@@ -12,7 +12,7 @@ part of 'customer_license.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$CustomerLicense {
@@ -93,11 +93,11 @@ class _$CustomerLicenseCopyWithImpl<$Res, $Val extends CustomerLicense>
 }
 
 /// @nodoc
-abstract class _$$_CustomerLicenseCopyWith<$Res>
+abstract class _$$CustomerLicenseImplCopyWith<$Res>
     implements $CustomerLicenseCopyWith<$Res> {
-  factory _$$_CustomerLicenseCopyWith(
-          _$_CustomerLicense value, $Res Function(_$_CustomerLicense) then) =
-      __$$_CustomerLicenseCopyWithImpl<$Res>;
+  factory _$$CustomerLicenseImplCopyWith(_$CustomerLicenseImpl value,
+          $Res Function(_$CustomerLicenseImpl) then) =
+      __$$CustomerLicenseImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -110,11 +110,11 @@ abstract class _$$_CustomerLicenseCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_CustomerLicenseCopyWithImpl<$Res>
-    extends _$CustomerLicenseCopyWithImpl<$Res, _$_CustomerLicense>
-    implements _$$_CustomerLicenseCopyWith<$Res> {
-  __$$_CustomerLicenseCopyWithImpl(
-      _$_CustomerLicense _value, $Res Function(_$_CustomerLicense) _then)
+class __$$CustomerLicenseImplCopyWithImpl<$Res>
+    extends _$CustomerLicenseCopyWithImpl<$Res, _$CustomerLicenseImpl>
+    implements _$$CustomerLicenseImplCopyWith<$Res> {
+  __$$CustomerLicenseImplCopyWithImpl(
+      _$CustomerLicenseImpl _value, $Res Function(_$CustomerLicenseImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -127,7 +127,7 @@ class __$$_CustomerLicenseCopyWithImpl<$Res>
     Object? validTo = null,
     Object? status = null,
   }) {
-    return _then(_$_CustomerLicense(
+    return _then(_$CustomerLicenseImpl(
       licenseNumbers: null == licenseNumbers
           ? _value.licenseNumbers
           : licenseNumbers // ignore: cast_nullable_to_non_nullable
@@ -158,8 +158,8 @@ class __$$_CustomerLicenseCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_CustomerLicense extends _CustomerLicense {
-  _$_CustomerLicense(
+class _$CustomerLicenseImpl extends _CustomerLicense {
+  _$CustomerLicenseImpl(
       {required this.licenseNumbers,
       required this.licenseType,
       required this.licenseDescription,
@@ -187,10 +187,10 @@ class _$_CustomerLicense extends _CustomerLicense {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_CustomerLicense &&
+            other is _$CustomerLicenseImpl &&
             (identical(other.licenseNumbers, licenseNumbers) ||
                 other.licenseNumbers == licenseNumbers) &&
             (identical(other.licenseType, licenseType) ||
@@ -210,8 +210,9 @@ class _$_CustomerLicense extends _CustomerLicense {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_CustomerLicenseCopyWith<_$_CustomerLicense> get copyWith =>
-      __$$_CustomerLicenseCopyWithImpl<_$_CustomerLicense>(this, _$identity);
+  _$$CustomerLicenseImplCopyWith<_$CustomerLicenseImpl> get copyWith =>
+      __$$CustomerLicenseImplCopyWithImpl<_$CustomerLicenseImpl>(
+          this, _$identity);
 }
 
 abstract class _CustomerLicense extends CustomerLicense {
@@ -221,7 +222,7 @@ abstract class _CustomerLicense extends CustomerLicense {
       required final StringValue licenseDescription,
       required final DateTimeStringValue validFrom,
       required final DateTimeStringValue validTo,
-      required final StatusType status}) = _$_CustomerLicense;
+      required final StatusType status}) = _$CustomerLicenseImpl;
   _CustomerLicense._() : super._();
 
   @override
@@ -238,6 +239,6 @@ abstract class _CustomerLicense extends CustomerLicense {
   StatusType get status;
   @override
   @JsonKey(ignore: true)
-  _$$_CustomerLicenseCopyWith<_$_CustomerLicense> get copyWith =>
+  _$$CustomerLicenseImplCopyWith<_$CustomerLicenseImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

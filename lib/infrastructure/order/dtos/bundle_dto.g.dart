@@ -6,7 +6,8 @@ part of 'bundle_dto.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_BundleDto _$$_BundleDtoFromJson(Map<String, dynamic> json) => _$_BundleDto(
+_$BundleDtoImpl _$$BundleDtoImplFromJson(Map<String, dynamic> json) =>
+    _$BundleDtoImpl(
       bundleName: json['bundleName'] as String? ?? '',
       bundleCode: json['bundleCode'] as String? ?? '',
       bundleInformation: (json['bundleInformation'] as List<dynamic>?)
@@ -20,7 +21,7 @@ _$_BundleDto _$$_BundleDtoFromJson(Map<String, dynamic> json) => _$_BundleDto(
       bonusEligible: json['bonusEligible'] as bool? ?? false,
     );
 
-Map<String, dynamic> _$$_BundleDtoToJson(_$_BundleDto instance) =>
+Map<String, dynamic> _$$BundleDtoImplToJson(_$BundleDtoImpl instance) =>
     <String, dynamic>{
       'bundleName': instance.bundleName,
       'bundleCode': instance.bundleCode,

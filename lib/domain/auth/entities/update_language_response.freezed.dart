@@ -12,7 +12,7 @@ part of 'update_language_response.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$UpdateLanguageResponse {
@@ -58,23 +58,25 @@ class _$UpdateLanguageResponseCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_UpdateLanguageResponseCopyWith<$Res>
+abstract class _$$UpdateLanguageResponseImplCopyWith<$Res>
     implements $UpdateLanguageResponseCopyWith<$Res> {
-  factory _$$_UpdateLanguageResponseCopyWith(_$_UpdateLanguageResponse value,
-          $Res Function(_$_UpdateLanguageResponse) then) =
-      __$$_UpdateLanguageResponseCopyWithImpl<$Res>;
+  factory _$$UpdateLanguageResponseImplCopyWith(
+          _$UpdateLanguageResponseImpl value,
+          $Res Function(_$UpdateLanguageResponseImpl) then) =
+      __$$UpdateLanguageResponseImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({bool success});
 }
 
 /// @nodoc
-class __$$_UpdateLanguageResponseCopyWithImpl<$Res>
+class __$$UpdateLanguageResponseImplCopyWithImpl<$Res>
     extends _$UpdateLanguageResponseCopyWithImpl<$Res,
-        _$_UpdateLanguageResponse>
-    implements _$$_UpdateLanguageResponseCopyWith<$Res> {
-  __$$_UpdateLanguageResponseCopyWithImpl(_$_UpdateLanguageResponse _value,
-      $Res Function(_$_UpdateLanguageResponse) _then)
+        _$UpdateLanguageResponseImpl>
+    implements _$$UpdateLanguageResponseImplCopyWith<$Res> {
+  __$$UpdateLanguageResponseImplCopyWithImpl(
+      _$UpdateLanguageResponseImpl _value,
+      $Res Function(_$UpdateLanguageResponseImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -82,7 +84,7 @@ class __$$_UpdateLanguageResponseCopyWithImpl<$Res>
   $Res call({
     Object? success = null,
   }) {
-    return _then(_$_UpdateLanguageResponse(
+    return _then(_$UpdateLanguageResponseImpl(
       success: null == success
           ? _value.success
           : success // ignore: cast_nullable_to_non_nullable
@@ -93,8 +95,8 @@ class __$$_UpdateLanguageResponseCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_UpdateLanguageResponse implements _UpdateLanguageResponse {
-  _$_UpdateLanguageResponse({required this.success});
+class _$UpdateLanguageResponseImpl implements _UpdateLanguageResponse {
+  _$UpdateLanguageResponseImpl({required this.success});
 
   @override
   final bool success;
@@ -105,10 +107,10 @@ class _$_UpdateLanguageResponse implements _UpdateLanguageResponse {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_UpdateLanguageResponse &&
+            other is _$UpdateLanguageResponseImpl &&
             (identical(other.success, success) || other.success == success));
   }
 
@@ -118,19 +120,19 @@ class _$_UpdateLanguageResponse implements _UpdateLanguageResponse {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_UpdateLanguageResponseCopyWith<_$_UpdateLanguageResponse> get copyWith =>
-      __$$_UpdateLanguageResponseCopyWithImpl<_$_UpdateLanguageResponse>(
-          this, _$identity);
+  _$$UpdateLanguageResponseImplCopyWith<_$UpdateLanguageResponseImpl>
+      get copyWith => __$$UpdateLanguageResponseImplCopyWithImpl<
+          _$UpdateLanguageResponseImpl>(this, _$identity);
 }
 
 abstract class _UpdateLanguageResponse implements UpdateLanguageResponse {
   factory _UpdateLanguageResponse({required final bool success}) =
-      _$_UpdateLanguageResponse;
+      _$UpdateLanguageResponseImpl;
 
   @override
   bool get success;
   @override
   @JsonKey(ignore: true)
-  _$$_UpdateLanguageResponseCopyWith<_$_UpdateLanguageResponse> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$UpdateLanguageResponseImplCopyWith<_$UpdateLanguageResponseImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }

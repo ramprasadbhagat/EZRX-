@@ -6,9 +6,9 @@ part of 'admin_po_attachment_filter_dto.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_AdminPoAttachmentFilterDto _$$_AdminPoAttachmentFilterDtoFromJson(
+_$AdminPoAttachmentFilterDtoImpl _$$AdminPoAttachmentFilterDtoImplFromJson(
         Map<String, dynamic> json) =>
-    _$_AdminPoAttachmentFilterDto(
+    _$AdminPoAttachmentFilterDtoImpl(
       orderNumber: json['orderNumber'] as String? ?? '',
       exRxNo: json['exRxNo'] as String? ?? '',
       salesOrg: json['salesOrg'] as String? ?? '',
@@ -17,8 +17,8 @@ _$_AdminPoAttachmentFilterDto _$$_AdminPoAttachmentFilterDtoFromJson(
       fromDate: json['fromDate'] as String? ?? '',
     );
 
-Map<String, dynamic> _$$_AdminPoAttachmentFilterDtoToJson(
-        _$_AdminPoAttachmentFilterDto instance) =>
+Map<String, dynamic> _$$AdminPoAttachmentFilterDtoImplToJson(
+        _$AdminPoAttachmentFilterDtoImpl instance) =>
     <String, dynamic>{
       'orderNumber': overrideToJson(instance.orderNumber),
       'exRxNo': overrideToJson(instance.exRxNo),

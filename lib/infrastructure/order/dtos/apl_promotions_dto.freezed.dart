@@ -12,7 +12,7 @@ part of 'apl_promotions_dto.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 AplPromotionsDto _$AplPromotionsDtoFromJson(Map<String, dynamic> json) {
   return _AplPromotionsDto.fromJson(json);
@@ -73,11 +73,11 @@ class _$AplPromotionsDtoCopyWithImpl<$Res, $Val extends AplPromotionsDto>
 }
 
 /// @nodoc
-abstract class _$$_AplPromotionsDtoCopyWith<$Res>
+abstract class _$$AplPromotionsDtoImplCopyWith<$Res>
     implements $AplPromotionsDtoCopyWith<$Res> {
-  factory _$$_AplPromotionsDtoCopyWith(
-          _$_AplPromotionsDto value, $Res Function(_$_AplPromotionsDto) then) =
-      __$$_AplPromotionsDtoCopyWithImpl<$Res>;
+  factory _$$AplPromotionsDtoImplCopyWith(_$AplPromotionsDtoImpl value,
+          $Res Function(_$AplPromotionsDtoImpl) then) =
+      __$$AplPromotionsDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -87,11 +87,11 @@ abstract class _$$_AplPromotionsDtoCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_AplPromotionsDtoCopyWithImpl<$Res>
-    extends _$AplPromotionsDtoCopyWithImpl<$Res, _$_AplPromotionsDto>
-    implements _$$_AplPromotionsDtoCopyWith<$Res> {
-  __$$_AplPromotionsDtoCopyWithImpl(
-      _$_AplPromotionsDto _value, $Res Function(_$_AplPromotionsDto) _then)
+class __$$AplPromotionsDtoImplCopyWithImpl<$Res>
+    extends _$AplPromotionsDtoCopyWithImpl<$Res, _$AplPromotionsDtoImpl>
+    implements _$$AplPromotionsDtoImplCopyWith<$Res> {
+  __$$AplPromotionsDtoImplCopyWithImpl(_$AplPromotionsDtoImpl _value,
+      $Res Function(_$AplPromotionsDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -100,7 +100,7 @@ class __$$_AplPromotionsDtoCopyWithImpl<$Res>
     Object? discountValue = null,
     Object? discountTypeValue = null,
   }) {
-    return _then(_$_AplPromotionsDto(
+    return _then(_$AplPromotionsDtoImpl(
       discountValue: null == discountValue
           ? _value.discountValue
           : discountValue // ignore: cast_nullable_to_non_nullable
@@ -115,16 +115,16 @@ class __$$_AplPromotionsDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_AplPromotionsDto extends _AplPromotionsDto {
-  const _$_AplPromotionsDto(
+class _$AplPromotionsDtoImpl extends _AplPromotionsDto {
+  const _$AplPromotionsDtoImpl(
       {@JsonKey(name: 'discountValue', defaultValue: 0)
       required this.discountValue,
       @JsonKey(name: 'discountTypeValue', defaultValue: '')
       required this.discountTypeValue})
       : super._();
 
-  factory _$_AplPromotionsDto.fromJson(Map<String, dynamic> json) =>
-      _$$_AplPromotionsDtoFromJson(json);
+  factory _$AplPromotionsDtoImpl.fromJson(Map<String, dynamic> json) =>
+      _$$AplPromotionsDtoImplFromJson(json);
 
   @override
   @JsonKey(name: 'discountValue', defaultValue: 0)
@@ -139,10 +139,10 @@ class _$_AplPromotionsDto extends _AplPromotionsDto {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_AplPromotionsDto &&
+            other is _$AplPromotionsDtoImpl &&
             (identical(other.discountValue, discountValue) ||
                 other.discountValue == discountValue) &&
             (identical(other.discountTypeValue, discountTypeValue) ||
@@ -157,12 +157,13 @@ class _$_AplPromotionsDto extends _AplPromotionsDto {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_AplPromotionsDtoCopyWith<_$_AplPromotionsDto> get copyWith =>
-      __$$_AplPromotionsDtoCopyWithImpl<_$_AplPromotionsDto>(this, _$identity);
+  _$$AplPromotionsDtoImplCopyWith<_$AplPromotionsDtoImpl> get copyWith =>
+      __$$AplPromotionsDtoImplCopyWithImpl<_$AplPromotionsDtoImpl>(
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_AplPromotionsDtoToJson(
+    return _$$AplPromotionsDtoImplToJson(
       this,
     );
   }
@@ -173,11 +174,11 @@ abstract class _AplPromotionsDto extends AplPromotionsDto {
       {@JsonKey(name: 'discountValue', defaultValue: 0)
       required final double discountValue,
       @JsonKey(name: 'discountTypeValue', defaultValue: '')
-      required final String discountTypeValue}) = _$_AplPromotionsDto;
+      required final String discountTypeValue}) = _$AplPromotionsDtoImpl;
   const _AplPromotionsDto._() : super._();
 
   factory _AplPromotionsDto.fromJson(Map<String, dynamic> json) =
-      _$_AplPromotionsDto.fromJson;
+      _$AplPromotionsDtoImpl.fromJson;
 
   @override
   @JsonKey(name: 'discountValue', defaultValue: 0)
@@ -187,6 +188,6 @@ abstract class _AplPromotionsDto extends AplPromotionsDto {
   String get discountTypeValue;
   @override
   @JsonKey(ignore: true)
-  _$$_AplPromotionsDtoCopyWith<_$_AplPromotionsDto> get copyWith =>
+  _$$AplPromotionsDtoImplCopyWith<_$AplPromotionsDtoImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

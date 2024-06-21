@@ -12,7 +12,7 @@ part of 'policy_configuration_bloc.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$PolicyConfigurationEvent {
@@ -121,25 +121,25 @@ class _$PolicyConfigurationEventCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_InitializedCopyWith<$Res> {
-  factory _$$_InitializedCopyWith(
-          _$_Initialized value, $Res Function(_$_Initialized) then) =
-      __$$_InitializedCopyWithImpl<$Res>;
+abstract class _$$InitializedImplCopyWith<$Res> {
+  factory _$$InitializedImplCopyWith(
+          _$InitializedImpl value, $Res Function(_$InitializedImpl) then) =
+      __$$InitializedImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_InitializedCopyWithImpl<$Res>
-    extends _$PolicyConfigurationEventCopyWithImpl<$Res, _$_Initialized>
-    implements _$$_InitializedCopyWith<$Res> {
-  __$$_InitializedCopyWithImpl(
-      _$_Initialized _value, $Res Function(_$_Initialized) _then)
+class __$$InitializedImplCopyWithImpl<$Res>
+    extends _$PolicyConfigurationEventCopyWithImpl<$Res, _$InitializedImpl>
+    implements _$$InitializedImplCopyWith<$Res> {
+  __$$InitializedImplCopyWithImpl(
+      _$InitializedImpl _value, $Res Function(_$InitializedImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_Initialized implements _Initialized {
-  const _$_Initialized();
+class _$InitializedImpl implements _Initialized {
+  const _$InitializedImpl();
 
   @override
   String toString() {
@@ -147,9 +147,9 @@ class _$_Initialized implements _Initialized {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_Initialized);
+        (other.runtimeType == runtimeType && other is _$InitializedImpl);
   }
 
   @override
@@ -264,13 +264,14 @@ class _$_Initialized implements _Initialized {
 }
 
 abstract class _Initialized implements PolicyConfigurationEvent {
-  const factory _Initialized() = _$_Initialized;
+  const factory _Initialized() = _$InitializedImpl;
 }
 
 /// @nodoc
-abstract class _$$_FetchCopyWith<$Res> {
-  factory _$$_FetchCopyWith(_$_Fetch value, $Res Function(_$_Fetch) then) =
-      __$$_FetchCopyWithImpl<$Res>;
+abstract class _$$FetchImplCopyWith<$Res> {
+  factory _$$FetchImplCopyWith(
+          _$FetchImpl value, $Res Function(_$FetchImpl) then) =
+      __$$FetchImplCopyWithImpl<$Res>;
   @useResult
   $Res call({SalesOrganisation salesOrganisation, String searchKey});
 
@@ -278,10 +279,11 @@ abstract class _$$_FetchCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_FetchCopyWithImpl<$Res>
-    extends _$PolicyConfigurationEventCopyWithImpl<$Res, _$_Fetch>
-    implements _$$_FetchCopyWith<$Res> {
-  __$$_FetchCopyWithImpl(_$_Fetch _value, $Res Function(_$_Fetch) _then)
+class __$$FetchImplCopyWithImpl<$Res>
+    extends _$PolicyConfigurationEventCopyWithImpl<$Res, _$FetchImpl>
+    implements _$$FetchImplCopyWith<$Res> {
+  __$$FetchImplCopyWithImpl(
+      _$FetchImpl _value, $Res Function(_$FetchImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -290,7 +292,7 @@ class __$$_FetchCopyWithImpl<$Res>
     Object? salesOrganisation = null,
     Object? searchKey = null,
   }) {
-    return _then(_$_Fetch(
+    return _then(_$FetchImpl(
       salesOrganisation: null == salesOrganisation
           ? _value.salesOrganisation
           : salesOrganisation // ignore: cast_nullable_to_non_nullable
@@ -313,8 +315,8 @@ class __$$_FetchCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_Fetch implements _Fetch {
-  const _$_Fetch({required this.salesOrganisation, required this.searchKey});
+class _$FetchImpl implements _Fetch {
+  const _$FetchImpl({required this.salesOrganisation, required this.searchKey});
 
   @override
   final SalesOrganisation salesOrganisation;
@@ -327,10 +329,10 @@ class _$_Fetch implements _Fetch {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Fetch &&
+            other is _$FetchImpl &&
             (identical(other.salesOrganisation, salesOrganisation) ||
                 other.salesOrganisation == salesOrganisation) &&
             (identical(other.searchKey, searchKey) ||
@@ -343,8 +345,8 @@ class _$_Fetch implements _Fetch {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_FetchCopyWith<_$_Fetch> get copyWith =>
-      __$$_FetchCopyWithImpl<_$_Fetch>(this, _$identity);
+  _$$FetchImplCopyWith<_$FetchImpl> get copyWith =>
+      __$$FetchImplCopyWithImpl<_$FetchImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -457,21 +459,21 @@ class _$_Fetch implements _Fetch {
 abstract class _Fetch implements PolicyConfigurationEvent {
   const factory _Fetch(
       {required final SalesOrganisation salesOrganisation,
-      required final String searchKey}) = _$_Fetch;
+      required final String searchKey}) = _$FetchImpl;
 
   SalesOrganisation get salesOrganisation;
   String get searchKey;
   @JsonKey(ignore: true)
-  _$$_FetchCopyWith<_$_Fetch> get copyWith =>
+  _$$FetchImplCopyWith<_$FetchImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_LoadMorePolicyConfigurationsCopyWith<$Res> {
-  factory _$$_LoadMorePolicyConfigurationsCopyWith(
-          _$_LoadMorePolicyConfigurations value,
-          $Res Function(_$_LoadMorePolicyConfigurations) then) =
-      __$$_LoadMorePolicyConfigurationsCopyWithImpl<$Res>;
+abstract class _$$LoadMorePolicyConfigurationsImplCopyWith<$Res> {
+  factory _$$LoadMorePolicyConfigurationsImplCopyWith(
+          _$LoadMorePolicyConfigurationsImpl value,
+          $Res Function(_$LoadMorePolicyConfigurationsImpl) then) =
+      __$$LoadMorePolicyConfigurationsImplCopyWithImpl<$Res>;
   @useResult
   $Res call({SalesOrganisation salesOrganisation});
 
@@ -479,13 +481,13 @@ abstract class _$$_LoadMorePolicyConfigurationsCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_LoadMorePolicyConfigurationsCopyWithImpl<$Res>
+class __$$LoadMorePolicyConfigurationsImplCopyWithImpl<$Res>
     extends _$PolicyConfigurationEventCopyWithImpl<$Res,
-        _$_LoadMorePolicyConfigurations>
-    implements _$$_LoadMorePolicyConfigurationsCopyWith<$Res> {
-  __$$_LoadMorePolicyConfigurationsCopyWithImpl(
-      _$_LoadMorePolicyConfigurations _value,
-      $Res Function(_$_LoadMorePolicyConfigurations) _then)
+        _$LoadMorePolicyConfigurationsImpl>
+    implements _$$LoadMorePolicyConfigurationsImplCopyWith<$Res> {
+  __$$LoadMorePolicyConfigurationsImplCopyWithImpl(
+      _$LoadMorePolicyConfigurationsImpl _value,
+      $Res Function(_$LoadMorePolicyConfigurationsImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -493,7 +495,7 @@ class __$$_LoadMorePolicyConfigurationsCopyWithImpl<$Res>
   $Res call({
     Object? salesOrganisation = null,
   }) {
-    return _then(_$_LoadMorePolicyConfigurations(
+    return _then(_$LoadMorePolicyConfigurationsImpl(
       salesOrganisation: null == salesOrganisation
           ? _value.salesOrganisation
           : salesOrganisation // ignore: cast_nullable_to_non_nullable
@@ -512,8 +514,9 @@ class __$$_LoadMorePolicyConfigurationsCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_LoadMorePolicyConfigurations implements _LoadMorePolicyConfigurations {
-  const _$_LoadMorePolicyConfigurations({required this.salesOrganisation});
+class _$LoadMorePolicyConfigurationsImpl
+    implements _LoadMorePolicyConfigurations {
+  const _$LoadMorePolicyConfigurationsImpl({required this.salesOrganisation});
 
   @override
   final SalesOrganisation salesOrganisation;
@@ -524,10 +527,10 @@ class _$_LoadMorePolicyConfigurations implements _LoadMorePolicyConfigurations {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_LoadMorePolicyConfigurations &&
+            other is _$LoadMorePolicyConfigurationsImpl &&
             (identical(other.salesOrganisation, salesOrganisation) ||
                 other.salesOrganisation == salesOrganisation));
   }
@@ -538,9 +541,10 @@ class _$_LoadMorePolicyConfigurations implements _LoadMorePolicyConfigurations {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_LoadMorePolicyConfigurationsCopyWith<_$_LoadMorePolicyConfigurations>
-      get copyWith => __$$_LoadMorePolicyConfigurationsCopyWithImpl<
-          _$_LoadMorePolicyConfigurations>(this, _$identity);
+  _$$LoadMorePolicyConfigurationsImplCopyWith<
+          _$LoadMorePolicyConfigurationsImpl>
+      get copyWith => __$$LoadMorePolicyConfigurationsImplCopyWithImpl<
+          _$LoadMorePolicyConfigurationsImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -654,18 +658,20 @@ abstract class _LoadMorePolicyConfigurations
     implements PolicyConfigurationEvent {
   const factory _LoadMorePolicyConfigurations(
           {required final SalesOrganisation salesOrganisation}) =
-      _$_LoadMorePolicyConfigurations;
+      _$LoadMorePolicyConfigurationsImpl;
 
   SalesOrganisation get salesOrganisation;
   @JsonKey(ignore: true)
-  _$$_LoadMorePolicyConfigurationsCopyWith<_$_LoadMorePolicyConfigurations>
+  _$$LoadMorePolicyConfigurationsImplCopyWith<
+          _$LoadMorePolicyConfigurationsImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_DeleteCopyWith<$Res> {
-  factory _$$_DeleteCopyWith(_$_Delete value, $Res Function(_$_Delete) then) =
-      __$$_DeleteCopyWithImpl<$Res>;
+abstract class _$$DeleteImplCopyWith<$Res> {
+  factory _$$DeleteImplCopyWith(
+          _$DeleteImpl value, $Res Function(_$DeleteImpl) then) =
+      __$$DeleteImplCopyWithImpl<$Res>;
   @useResult
   $Res call({PolicyConfiguration policyConfigurationItem});
 
@@ -673,10 +679,11 @@ abstract class _$$_DeleteCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_DeleteCopyWithImpl<$Res>
-    extends _$PolicyConfigurationEventCopyWithImpl<$Res, _$_Delete>
-    implements _$$_DeleteCopyWith<$Res> {
-  __$$_DeleteCopyWithImpl(_$_Delete _value, $Res Function(_$_Delete) _then)
+class __$$DeleteImplCopyWithImpl<$Res>
+    extends _$PolicyConfigurationEventCopyWithImpl<$Res, _$DeleteImpl>
+    implements _$$DeleteImplCopyWith<$Res> {
+  __$$DeleteImplCopyWithImpl(
+      _$DeleteImpl _value, $Res Function(_$DeleteImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -684,7 +691,7 @@ class __$$_DeleteCopyWithImpl<$Res>
   $Res call({
     Object? policyConfigurationItem = null,
   }) {
-    return _then(_$_Delete(
+    return _then(_$DeleteImpl(
       policyConfigurationItem: null == policyConfigurationItem
           ? _value.policyConfigurationItem
           : policyConfigurationItem // ignore: cast_nullable_to_non_nullable
@@ -704,8 +711,8 @@ class __$$_DeleteCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_Delete implements _Delete {
-  const _$_Delete({required this.policyConfigurationItem});
+class _$DeleteImpl implements _Delete {
+  const _$DeleteImpl({required this.policyConfigurationItem});
 
   @override
   final PolicyConfiguration policyConfigurationItem;
@@ -716,10 +723,10 @@ class _$_Delete implements _Delete {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Delete &&
+            other is _$DeleteImpl &&
             (identical(
                     other.policyConfigurationItem, policyConfigurationItem) ||
                 other.policyConfigurationItem == policyConfigurationItem));
@@ -731,8 +738,8 @@ class _$_Delete implements _Delete {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_DeleteCopyWith<_$_Delete> get copyWith =>
-      __$$_DeleteCopyWithImpl<_$_Delete>(this, _$identity);
+  _$$DeleteImplCopyWith<_$DeleteImpl> get copyWith =>
+      __$$DeleteImplCopyWithImpl<_$DeleteImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -844,18 +851,19 @@ class _$_Delete implements _Delete {
 
 abstract class _Delete implements PolicyConfigurationEvent {
   const factory _Delete(
-      {required final PolicyConfiguration policyConfigurationItem}) = _$_Delete;
+          {required final PolicyConfiguration policyConfigurationItem}) =
+      _$DeleteImpl;
 
   PolicyConfiguration get policyConfigurationItem;
   @JsonKey(ignore: true)
-  _$$_DeleteCopyWith<_$_Delete> get copyWith =>
+  _$$DeleteImplCopyWith<_$DeleteImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_AddCopyWith<$Res> {
-  factory _$$_AddCopyWith(_$_Add value, $Res Function(_$_Add) then) =
-      __$$_AddCopyWithImpl<$Res>;
+abstract class _$$AddImplCopyWith<$Res> {
+  factory _$$AddImplCopyWith(_$AddImpl value, $Res Function(_$AddImpl) then) =
+      __$$AddImplCopyWithImpl<$Res>;
   @useResult
   $Res call({PolicyConfiguration policyConfigurationItems});
 
@@ -863,10 +871,10 @@ abstract class _$$_AddCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_AddCopyWithImpl<$Res>
-    extends _$PolicyConfigurationEventCopyWithImpl<$Res, _$_Add>
-    implements _$$_AddCopyWith<$Res> {
-  __$$_AddCopyWithImpl(_$_Add _value, $Res Function(_$_Add) _then)
+class __$$AddImplCopyWithImpl<$Res>
+    extends _$PolicyConfigurationEventCopyWithImpl<$Res, _$AddImpl>
+    implements _$$AddImplCopyWith<$Res> {
+  __$$AddImplCopyWithImpl(_$AddImpl _value, $Res Function(_$AddImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -874,7 +882,7 @@ class __$$_AddCopyWithImpl<$Res>
   $Res call({
     Object? policyConfigurationItems = null,
   }) {
-    return _then(_$_Add(
+    return _then(_$AddImpl(
       policyConfigurationItems: null == policyConfigurationItems
           ? _value.policyConfigurationItems
           : policyConfigurationItems // ignore: cast_nullable_to_non_nullable
@@ -894,8 +902,8 @@ class __$$_AddCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_Add implements _Add {
-  const _$_Add({required this.policyConfigurationItems});
+class _$AddImpl implements _Add {
+  const _$AddImpl({required this.policyConfigurationItems});
 
   @override
   final PolicyConfiguration policyConfigurationItems;
@@ -906,10 +914,10 @@ class _$_Add implements _Add {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Add &&
+            other is _$AddImpl &&
             (identical(
                     other.policyConfigurationItems, policyConfigurationItems) ||
                 other.policyConfigurationItems == policyConfigurationItems));
@@ -921,8 +929,8 @@ class _$_Add implements _Add {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_AddCopyWith<_$_Add> get copyWith =>
-      __$$_AddCopyWithImpl<_$_Add>(this, _$identity);
+  _$$AddImplCopyWith<_$AddImpl> get copyWith =>
+      __$$AddImplCopyWithImpl<_$AddImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -1034,34 +1042,36 @@ class _$_Add implements _Add {
 
 abstract class _Add implements PolicyConfigurationEvent {
   const factory _Add(
-      {required final PolicyConfiguration policyConfigurationItems}) = _$_Add;
+          {required final PolicyConfiguration policyConfigurationItems}) =
+      _$AddImpl;
 
   PolicyConfiguration get policyConfigurationItems;
   @JsonKey(ignore: true)
-  _$$_AddCopyWith<_$_Add> get copyWith => throw _privateConstructorUsedError;
+  _$$AddImplCopyWith<_$AddImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_ReturnsAllowedSwitchCopyWith<$Res> {
-  factory _$$_ReturnsAllowedSwitchCopyWith(_$_ReturnsAllowedSwitch value,
-          $Res Function(_$_ReturnsAllowedSwitch) then) =
-      __$$_ReturnsAllowedSwitchCopyWithImpl<$Res>;
+abstract class _$$ReturnsAllowedSwitchImplCopyWith<$Res> {
+  factory _$$ReturnsAllowedSwitchImplCopyWith(_$ReturnsAllowedSwitchImpl value,
+          $Res Function(_$ReturnsAllowedSwitchImpl) then) =
+      __$$ReturnsAllowedSwitchImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_ReturnsAllowedSwitchCopyWithImpl<$Res>
+class __$$ReturnsAllowedSwitchImplCopyWithImpl<$Res>
     extends _$PolicyConfigurationEventCopyWithImpl<$Res,
-        _$_ReturnsAllowedSwitch>
-    implements _$$_ReturnsAllowedSwitchCopyWith<$Res> {
-  __$$_ReturnsAllowedSwitchCopyWithImpl(_$_ReturnsAllowedSwitch _value,
-      $Res Function(_$_ReturnsAllowedSwitch) _then)
+        _$ReturnsAllowedSwitchImpl>
+    implements _$$ReturnsAllowedSwitchImplCopyWith<$Res> {
+  __$$ReturnsAllowedSwitchImplCopyWithImpl(_$ReturnsAllowedSwitchImpl _value,
+      $Res Function(_$ReturnsAllowedSwitchImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_ReturnsAllowedSwitch implements _ReturnsAllowedSwitch {
-  const _$_ReturnsAllowedSwitch();
+class _$ReturnsAllowedSwitchImpl implements _ReturnsAllowedSwitch {
+  const _$ReturnsAllowedSwitchImpl();
 
   @override
   String toString() {
@@ -1069,9 +1079,10 @@ class _$_ReturnsAllowedSwitch implements _ReturnsAllowedSwitch {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_ReturnsAllowedSwitch);
+        (other.runtimeType == runtimeType &&
+            other is _$ReturnsAllowedSwitchImpl);
   }
 
   @override
@@ -1186,13 +1197,14 @@ class _$_ReturnsAllowedSwitch implements _ReturnsAllowedSwitch {
 }
 
 abstract class _ReturnsAllowedSwitch implements PolicyConfigurationEvent {
-  const factory _ReturnsAllowedSwitch() = _$_ReturnsAllowedSwitch;
+  const factory _ReturnsAllowedSwitch() = _$ReturnsAllowedSwitchImpl;
 }
 
 /// @nodoc
-abstract class _$$_SearchCopyWith<$Res> {
-  factory _$$_SearchCopyWith(_$_Search value, $Res Function(_$_Search) then) =
-      __$$_SearchCopyWithImpl<$Res>;
+abstract class _$$SearchImplCopyWith<$Res> {
+  factory _$$SearchImplCopyWith(
+          _$SearchImpl value, $Res Function(_$SearchImpl) then) =
+      __$$SearchImplCopyWithImpl<$Res>;
   @useResult
   $Res call({SalesOrganisation salesOrganisation, String searchKey});
 
@@ -1200,10 +1212,11 @@ abstract class _$$_SearchCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_SearchCopyWithImpl<$Res>
-    extends _$PolicyConfigurationEventCopyWithImpl<$Res, _$_Search>
-    implements _$$_SearchCopyWith<$Res> {
-  __$$_SearchCopyWithImpl(_$_Search _value, $Res Function(_$_Search) _then)
+class __$$SearchImplCopyWithImpl<$Res>
+    extends _$PolicyConfigurationEventCopyWithImpl<$Res, _$SearchImpl>
+    implements _$$SearchImplCopyWith<$Res> {
+  __$$SearchImplCopyWithImpl(
+      _$SearchImpl _value, $Res Function(_$SearchImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1212,7 +1225,7 @@ class __$$_SearchCopyWithImpl<$Res>
     Object? salesOrganisation = null,
     Object? searchKey = null,
   }) {
-    return _then(_$_Search(
+    return _then(_$SearchImpl(
       salesOrganisation: null == salesOrganisation
           ? _value.salesOrganisation
           : salesOrganisation // ignore: cast_nullable_to_non_nullable
@@ -1235,8 +1248,9 @@ class __$$_SearchCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_Search implements _Search {
-  const _$_Search({required this.salesOrganisation, required this.searchKey});
+class _$SearchImpl implements _Search {
+  const _$SearchImpl(
+      {required this.salesOrganisation, required this.searchKey});
 
   @override
   final SalesOrganisation salesOrganisation;
@@ -1249,10 +1263,10 @@ class _$_Search implements _Search {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Search &&
+            other is _$SearchImpl &&
             (identical(other.salesOrganisation, salesOrganisation) ||
                 other.salesOrganisation == salesOrganisation) &&
             (identical(other.searchKey, searchKey) ||
@@ -1265,8 +1279,8 @@ class _$_Search implements _Search {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_SearchCopyWith<_$_Search> get copyWith =>
-      __$$_SearchCopyWithImpl<_$_Search>(this, _$identity);
+  _$$SearchImplCopyWith<_$SearchImpl> get copyWith =>
+      __$$SearchImplCopyWithImpl<_$SearchImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -1379,12 +1393,12 @@ class _$_Search implements _Search {
 abstract class _Search implements PolicyConfigurationEvent {
   const factory _Search(
       {required final SalesOrganisation salesOrganisation,
-      required final String searchKey}) = _$_Search;
+      required final String searchKey}) = _$SearchImpl;
 
   SalesOrganisation get salesOrganisation;
   String get searchKey;
   @JsonKey(ignore: true)
-  _$$_SearchCopyWith<_$_Search> get copyWith =>
+  _$$SearchImplCopyWith<_$SearchImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -1471,12 +1485,12 @@ class _$PolicyConfigurationStateCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_PolicyConfigurationStateCopyWith<$Res>
+abstract class _$$PolicyConfigurationStateImplCopyWith<$Res>
     implements $PolicyConfigurationStateCopyWith<$Res> {
-  factory _$$_PolicyConfigurationStateCopyWith(
-          _$_PolicyConfigurationState value,
-          $Res Function(_$_PolicyConfigurationState) then) =
-      __$$_PolicyConfigurationStateCopyWithImpl<$Res>;
+  factory _$$PolicyConfigurationStateImplCopyWith(
+          _$PolicyConfigurationStateImpl value,
+          $Res Function(_$PolicyConfigurationStateImpl) then) =
+      __$$PolicyConfigurationStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -1489,12 +1503,13 @@ abstract class _$$_PolicyConfigurationStateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_PolicyConfigurationStateCopyWithImpl<$Res>
+class __$$PolicyConfigurationStateImplCopyWithImpl<$Res>
     extends _$PolicyConfigurationStateCopyWithImpl<$Res,
-        _$_PolicyConfigurationState>
-    implements _$$_PolicyConfigurationStateCopyWith<$Res> {
-  __$$_PolicyConfigurationStateCopyWithImpl(_$_PolicyConfigurationState _value,
-      $Res Function(_$_PolicyConfigurationState) _then)
+        _$PolicyConfigurationStateImpl>
+    implements _$$PolicyConfigurationStateImplCopyWith<$Res> {
+  __$$PolicyConfigurationStateImplCopyWithImpl(
+      _$PolicyConfigurationStateImpl _value,
+      $Res Function(_$PolicyConfigurationStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1507,7 +1522,7 @@ class __$$_PolicyConfigurationStateCopyWithImpl<$Res>
     Object? searchKey = null,
     Object? returnsAllowed = null,
   }) {
-    return _then(_$_PolicyConfigurationState(
+    return _then(_$PolicyConfigurationStateImpl(
       policyConfigurationList: null == policyConfigurationList
           ? _value._policyConfigurationList
           : policyConfigurationList // ignore: cast_nullable_to_non_nullable
@@ -1538,8 +1553,8 @@ class __$$_PolicyConfigurationStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_PolicyConfigurationState implements _PolicyConfigurationState {
-  const _$_PolicyConfigurationState(
+class _$PolicyConfigurationStateImpl implements _PolicyConfigurationState {
+  const _$PolicyConfigurationStateImpl(
       {required final List<PolicyConfiguration> policyConfigurationList,
       required this.failureOrSuccessOption,
       required this.isLoading,
@@ -1574,10 +1589,10 @@ class _$_PolicyConfigurationState implements _PolicyConfigurationState {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_PolicyConfigurationState &&
+            other is _$PolicyConfigurationStateImpl &&
             const DeepCollectionEquality().equals(
                 other._policyConfigurationList, _policyConfigurationList) &&
             (identical(other.failureOrSuccessOption, failureOrSuccessOption) ||
@@ -1607,9 +1622,9 @@ class _$_PolicyConfigurationState implements _PolicyConfigurationState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_PolicyConfigurationStateCopyWith<_$_PolicyConfigurationState>
-      get copyWith => __$$_PolicyConfigurationStateCopyWithImpl<
-          _$_PolicyConfigurationState>(this, _$identity);
+  _$$PolicyConfigurationStateImplCopyWith<_$PolicyConfigurationStateImpl>
+      get copyWith => __$$PolicyConfigurationStateImplCopyWithImpl<
+          _$PolicyConfigurationStateImpl>(this, _$identity);
 }
 
 abstract class _PolicyConfigurationState implements PolicyConfigurationState {
@@ -1620,7 +1635,7 @@ abstract class _PolicyConfigurationState implements PolicyConfigurationState {
       required final bool canLoadMorePolicyConfigurations,
       required final SearchKey searchKey,
       required final ReturnsAllowed
-          returnsAllowed}) = _$_PolicyConfigurationState;
+          returnsAllowed}) = _$PolicyConfigurationStateImpl;
 
   @override
   List<PolicyConfiguration> get policyConfigurationList;
@@ -1636,6 +1651,6 @@ abstract class _PolicyConfigurationState implements PolicyConfigurationState {
   ReturnsAllowed get returnsAllowed;
   @override
   @JsonKey(ignore: true)
-  _$$_PolicyConfigurationStateCopyWith<_$_PolicyConfigurationState>
+  _$$PolicyConfigurationStateImplCopyWith<_$PolicyConfigurationStateImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

@@ -12,7 +12,7 @@ part of 'forgot_password.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$ForgotPassword {
@@ -63,22 +63,22 @@ class _$ForgotPasswordCopyWithImpl<$Res, $Val extends ForgotPassword>
 }
 
 /// @nodoc
-abstract class _$$_ForgotPasswordCopyWith<$Res>
+abstract class _$$ForgotPasswordImplCopyWith<$Res>
     implements $ForgotPasswordCopyWith<$Res> {
-  factory _$$_ForgotPasswordCopyWith(
-          _$_ForgotPassword value, $Res Function(_$_ForgotPassword) then) =
-      __$$_ForgotPasswordCopyWithImpl<$Res>;
+  factory _$$ForgotPasswordImplCopyWith(_$ForgotPasswordImpl value,
+          $Res Function(_$ForgotPasswordImpl) then) =
+      __$$ForgotPasswordImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({bool success, String email});
 }
 
 /// @nodoc
-class __$$_ForgotPasswordCopyWithImpl<$Res>
-    extends _$ForgotPasswordCopyWithImpl<$Res, _$_ForgotPassword>
-    implements _$$_ForgotPasswordCopyWith<$Res> {
-  __$$_ForgotPasswordCopyWithImpl(
-      _$_ForgotPassword _value, $Res Function(_$_ForgotPassword) _then)
+class __$$ForgotPasswordImplCopyWithImpl<$Res>
+    extends _$ForgotPasswordCopyWithImpl<$Res, _$ForgotPasswordImpl>
+    implements _$$ForgotPasswordImplCopyWith<$Res> {
+  __$$ForgotPasswordImplCopyWithImpl(
+      _$ForgotPasswordImpl _value, $Res Function(_$ForgotPasswordImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -87,7 +87,7 @@ class __$$_ForgotPasswordCopyWithImpl<$Res>
     Object? success = null,
     Object? email = null,
   }) {
-    return _then(_$_ForgotPassword(
+    return _then(_$ForgotPasswordImpl(
       success: null == success
           ? _value.success
           : success // ignore: cast_nullable_to_non_nullable
@@ -102,8 +102,9 @@ class __$$_ForgotPasswordCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_ForgotPassword extends _ForgotPassword {
-  _$_ForgotPassword({required this.success, required this.email}) : super._();
+class _$ForgotPasswordImpl extends _ForgotPassword {
+  _$ForgotPasswordImpl({required this.success, required this.email})
+      : super._();
 
   @override
   final bool success;
@@ -116,10 +117,10 @@ class _$_ForgotPassword extends _ForgotPassword {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ForgotPassword &&
+            other is _$ForgotPasswordImpl &&
             (identical(other.success, success) || other.success == success) &&
             (identical(other.email, email) || other.email == email));
   }
@@ -130,14 +131,15 @@ class _$_ForgotPassword extends _ForgotPassword {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ForgotPasswordCopyWith<_$_ForgotPassword> get copyWith =>
-      __$$_ForgotPasswordCopyWithImpl<_$_ForgotPassword>(this, _$identity);
+  _$$ForgotPasswordImplCopyWith<_$ForgotPasswordImpl> get copyWith =>
+      __$$ForgotPasswordImplCopyWithImpl<_$ForgotPasswordImpl>(
+          this, _$identity);
 }
 
 abstract class _ForgotPassword extends ForgotPassword {
   factory _ForgotPassword(
       {required final bool success,
-      required final String email}) = _$_ForgotPassword;
+      required final String email}) = _$ForgotPasswordImpl;
   _ForgotPassword._() : super._();
 
   @override
@@ -146,6 +148,6 @@ abstract class _ForgotPassword extends ForgotPassword {
   String get email;
   @override
   @JsonKey(ignore: true)
-  _$$_ForgotPasswordCopyWith<_$_ForgotPassword> get copyWith =>
+  _$$ForgotPasswordImplCopyWith<_$ForgotPasswordImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

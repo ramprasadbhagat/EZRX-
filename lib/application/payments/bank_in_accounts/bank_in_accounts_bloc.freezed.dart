@@ -12,7 +12,7 @@ part of 'bank_in_accounts_bloc.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$BankInAccountsEvent {
@@ -89,22 +89,22 @@ class _$BankInAccountsEventCopyWithImpl<$Res, $Val extends BankInAccountsEvent>
 }
 
 /// @nodoc
-abstract class _$$_BankInFetchCopyWith<$Res>
+abstract class _$$BankInFetchImplCopyWith<$Res>
     implements $BankInAccountsEventCopyWith<$Res> {
-  factory _$$_BankInFetchCopyWith(
-          _$_BankInFetch value, $Res Function(_$_BankInFetch) then) =
-      __$$_BankInFetchCopyWithImpl<$Res>;
+  factory _$$BankInFetchImplCopyWith(
+          _$BankInFetchImpl value, $Res Function(_$BankInFetchImpl) then) =
+      __$$BankInFetchImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({SalesOrg salesOrg});
 }
 
 /// @nodoc
-class __$$_BankInFetchCopyWithImpl<$Res>
-    extends _$BankInAccountsEventCopyWithImpl<$Res, _$_BankInFetch>
-    implements _$$_BankInFetchCopyWith<$Res> {
-  __$$_BankInFetchCopyWithImpl(
-      _$_BankInFetch _value, $Res Function(_$_BankInFetch) _then)
+class __$$BankInFetchImplCopyWithImpl<$Res>
+    extends _$BankInAccountsEventCopyWithImpl<$Res, _$BankInFetchImpl>
+    implements _$$BankInFetchImplCopyWith<$Res> {
+  __$$BankInFetchImplCopyWithImpl(
+      _$BankInFetchImpl _value, $Res Function(_$BankInFetchImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -112,7 +112,7 @@ class __$$_BankInFetchCopyWithImpl<$Res>
   $Res call({
     Object? salesOrg = null,
   }) {
-    return _then(_$_BankInFetch(
+    return _then(_$BankInFetchImpl(
       salesOrg: null == salesOrg
           ? _value.salesOrg
           : salesOrg // ignore: cast_nullable_to_non_nullable
@@ -123,8 +123,8 @@ class __$$_BankInFetchCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_BankInFetch implements _BankInFetch {
-  const _$_BankInFetch({required this.salesOrg});
+class _$BankInFetchImpl implements _BankInFetch {
+  const _$BankInFetchImpl({required this.salesOrg});
 
   @override
   final SalesOrg salesOrg;
@@ -135,10 +135,10 @@ class _$_BankInFetch implements _BankInFetch {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_BankInFetch &&
+            other is _$BankInFetchImpl &&
             (identical(other.salesOrg, salesOrg) ||
                 other.salesOrg == salesOrg));
   }
@@ -149,8 +149,8 @@ class _$_BankInFetch implements _BankInFetch {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_BankInFetchCopyWith<_$_BankInFetch> get copyWith =>
-      __$$_BankInFetchCopyWithImpl<_$_BankInFetch>(this, _$identity);
+  _$$BankInFetchImplCopyWith<_$BankInFetchImpl> get copyWith =>
+      __$$BankInFetchImplCopyWithImpl<_$BankInFetchImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -211,13 +211,13 @@ class _$_BankInFetch implements _BankInFetch {
 
 abstract class _BankInFetch implements BankInAccountsEvent {
   const factory _BankInFetch({required final SalesOrg salesOrg}) =
-      _$_BankInFetch;
+      _$BankInFetchImpl;
 
   @override
   SalesOrg get salesOrg;
   @override
   @JsonKey(ignore: true)
-  _$$_BankInFetchCopyWith<_$_BankInFetch> get copyWith =>
+  _$$BankInFetchImplCopyWith<_$BankInFetchImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -281,12 +281,12 @@ class _$BankInAccountsStateCopyWithImpl<$Res, $Val extends BankInAccountsState>
 }
 
 /// @nodoc
-abstract class _$$_ManageBankBeneficiaryStateCopyWith<$Res>
+abstract class _$$ManageBankBeneficiaryStateImplCopyWith<$Res>
     implements $BankInAccountsStateCopyWith<$Res> {
-  factory _$$_ManageBankBeneficiaryStateCopyWith(
-          _$_ManageBankBeneficiaryState value,
-          $Res Function(_$_ManageBankBeneficiaryState) then) =
-      __$$_ManageBankBeneficiaryStateCopyWithImpl<$Res>;
+  factory _$$ManageBankBeneficiaryStateImplCopyWith(
+          _$ManageBankBeneficiaryStateImpl value,
+          $Res Function(_$ManageBankBeneficiaryStateImpl) then) =
+      __$$ManageBankBeneficiaryStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -296,13 +296,13 @@ abstract class _$$_ManageBankBeneficiaryStateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_ManageBankBeneficiaryStateCopyWithImpl<$Res>
+class __$$ManageBankBeneficiaryStateImplCopyWithImpl<$Res>
     extends _$BankInAccountsStateCopyWithImpl<$Res,
-        _$_ManageBankBeneficiaryState>
-    implements _$$_ManageBankBeneficiaryStateCopyWith<$Res> {
-  __$$_ManageBankBeneficiaryStateCopyWithImpl(
-      _$_ManageBankBeneficiaryState _value,
-      $Res Function(_$_ManageBankBeneficiaryState) _then)
+        _$ManageBankBeneficiaryStateImpl>
+    implements _$$ManageBankBeneficiaryStateImplCopyWith<$Res> {
+  __$$ManageBankBeneficiaryStateImplCopyWithImpl(
+      _$ManageBankBeneficiaryStateImpl _value,
+      $Res Function(_$ManageBankBeneficiaryStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -312,7 +312,7 @@ class __$$_ManageBankBeneficiaryStateCopyWithImpl<$Res>
     Object? isFetching = null,
     Object? failureOrSuccessOption = null,
   }) {
-    return _then(_$_ManageBankBeneficiaryState(
+    return _then(_$ManageBankBeneficiaryStateImpl(
       bankInAccounts: null == bankInAccounts
           ? _value._bankInAccounts
           : bankInAccounts // ignore: cast_nullable_to_non_nullable
@@ -331,8 +331,8 @@ class __$$_ManageBankBeneficiaryStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_ManageBankBeneficiaryState extends _ManageBankBeneficiaryState {
-  const _$_ManageBankBeneficiaryState(
+class _$ManageBankBeneficiaryStateImpl extends _ManageBankBeneficiaryState {
+  const _$ManageBankBeneficiaryStateImpl(
       {required final List<BankBeneficiary> bankInAccounts,
       required this.isFetching,
       required this.failureOrSuccessOption})
@@ -358,10 +358,10 @@ class _$_ManageBankBeneficiaryState extends _ManageBankBeneficiaryState {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ManageBankBeneficiaryState &&
+            other is _$ManageBankBeneficiaryStateImpl &&
             const DeepCollectionEquality()
                 .equals(other._bankInAccounts, _bankInAccounts) &&
             (identical(other.isFetching, isFetching) ||
@@ -380,9 +380,9 @@ class _$_ManageBankBeneficiaryState extends _ManageBankBeneficiaryState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ManageBankBeneficiaryStateCopyWith<_$_ManageBankBeneficiaryState>
-      get copyWith => __$$_ManageBankBeneficiaryStateCopyWithImpl<
-          _$_ManageBankBeneficiaryState>(this, _$identity);
+  _$$ManageBankBeneficiaryStateImplCopyWith<_$ManageBankBeneficiaryStateImpl>
+      get copyWith => __$$ManageBankBeneficiaryStateImplCopyWithImpl<
+          _$ManageBankBeneficiaryStateImpl>(this, _$identity);
 }
 
 abstract class _ManageBankBeneficiaryState extends BankInAccountsState {
@@ -390,7 +390,7 @@ abstract class _ManageBankBeneficiaryState extends BankInAccountsState {
       {required final List<BankBeneficiary> bankInAccounts,
       required final bool isFetching,
       required final Option<Either<ApiFailure, dynamic>>
-          failureOrSuccessOption}) = _$_ManageBankBeneficiaryState;
+          failureOrSuccessOption}) = _$ManageBankBeneficiaryStateImpl;
   const _ManageBankBeneficiaryState._() : super._();
 
   @override
@@ -401,6 +401,6 @@ abstract class _ManageBankBeneficiaryState extends BankInAccountsState {
   Option<Either<ApiFailure, dynamic>> get failureOrSuccessOption;
   @override
   @JsonKey(ignore: true)
-  _$$_ManageBankBeneficiaryStateCopyWith<_$_ManageBankBeneficiaryState>
+  _$$ManageBankBeneficiaryStateImplCopyWith<_$ManageBankBeneficiaryStateImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

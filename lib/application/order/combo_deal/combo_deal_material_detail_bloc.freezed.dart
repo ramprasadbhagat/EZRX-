@@ -12,7 +12,7 @@ part of 'combo_deal_material_detail_bloc.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$ComboDealMaterialDetailEvent {
@@ -197,10 +197,10 @@ class _$ComboDealMaterialDetailEventCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_InitializeCopyWith<$Res> {
-  factory _$$_InitializeCopyWith(
-          _$_Initialize value, $Res Function(_$_Initialize) then) =
-      __$$_InitializeCopyWithImpl<$Res>;
+abstract class _$$InitializeImplCopyWith<$Res> {
+  factory _$$InitializeImplCopyWith(
+          _$InitializeImpl value, $Res Function(_$InitializeImpl) then) =
+      __$$InitializeImplCopyWithImpl<$Res>;
   @useResult
   $Res call(
       {SalesOrganisation salesOrganisation,
@@ -217,11 +217,11 @@ abstract class _$$_InitializeCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_InitializeCopyWithImpl<$Res>
-    extends _$ComboDealMaterialDetailEventCopyWithImpl<$Res, _$_Initialize>
-    implements _$$_InitializeCopyWith<$Res> {
-  __$$_InitializeCopyWithImpl(
-      _$_Initialize _value, $Res Function(_$_Initialize) _then)
+class __$$InitializeImplCopyWithImpl<$Res>
+    extends _$ComboDealMaterialDetailEventCopyWithImpl<$Res, _$InitializeImpl>
+    implements _$$InitializeImplCopyWith<$Res> {
+  __$$InitializeImplCopyWithImpl(
+      _$InitializeImpl _value, $Res Function(_$InitializeImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -233,7 +233,7 @@ class __$$_InitializeCopyWithImpl<$Res>
     Object? user = null,
     Object? salesConfigs = null,
   }) {
-    return _then(_$_Initialize(
+    return _then(_$InitializeImpl(
       salesOrganisation: null == salesOrganisation
           ? _value.salesOrganisation
           : salesOrganisation // ignore: cast_nullable_to_non_nullable
@@ -301,8 +301,8 @@ class __$$_InitializeCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_Initialize implements _Initialize {
-  const _$_Initialize(
+class _$InitializeImpl implements _Initialize {
+  const _$InitializeImpl(
       {required this.salesOrganisation,
       required this.customerCodeInfo,
       required this.shipToInfo,
@@ -326,10 +326,10 @@ class _$_Initialize implements _Initialize {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Initialize &&
+            other is _$InitializeImpl &&
             (identical(other.salesOrganisation, salesOrganisation) ||
                 other.salesOrganisation == salesOrganisation) &&
             (identical(other.customerCodeInfo, customerCodeInfo) ||
@@ -348,8 +348,8 @@ class _$_Initialize implements _Initialize {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_InitializeCopyWith<_$_Initialize> get copyWith =>
-      __$$_InitializeCopyWithImpl<_$_Initialize>(this, _$identity);
+  _$$InitializeImplCopyWith<_$InitializeImpl> get copyWith =>
+      __$$InitializeImplCopyWithImpl<_$InitializeImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -542,7 +542,7 @@ abstract class _Initialize implements ComboDealMaterialDetailEvent {
       required final CustomerCodeInfo customerCodeInfo,
       required final ShipToInfo shipToInfo,
       required final User user,
-      required final SalesOrganisationConfigs salesConfigs}) = _$_Initialize;
+      required final SalesOrganisationConfigs salesConfigs}) = _$InitializeImpl;
 
   SalesOrganisation get salesOrganisation;
   CustomerCodeInfo get customerCodeInfo;
@@ -550,16 +550,16 @@ abstract class _Initialize implements ComboDealMaterialDetailEvent {
   User get user;
   SalesOrganisationConfigs get salesConfigs;
   @JsonKey(ignore: true)
-  _$$_InitializeCopyWith<_$_Initialize> get copyWith =>
+  _$$InitializeImplCopyWith<_$InitializeImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_InitFromCartComboDealItemsCopyWith<$Res> {
-  factory _$$_InitFromCartComboDealItemsCopyWith(
-          _$_InitFromCartComboDealItems value,
-          $Res Function(_$_InitFromCartComboDealItems) then) =
-      __$$_InitFromCartComboDealItemsCopyWithImpl<$Res>;
+abstract class _$$InitFromCartComboDealItemsImplCopyWith<$Res> {
+  factory _$$InitFromCartComboDealItemsImplCopyWith(
+          _$InitFromCartComboDealItemsImpl value,
+          $Res Function(_$InitFromCartComboDealItemsImpl) then) =
+      __$$InitFromCartComboDealItemsImplCopyWithImpl<$Res>;
   @useResult
   $Res call(
       {List<PriceAggregate> items, SalesOrganisationConfigs salesConfigs});
@@ -568,13 +568,13 @@ abstract class _$$_InitFromCartComboDealItemsCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_InitFromCartComboDealItemsCopyWithImpl<$Res>
+class __$$InitFromCartComboDealItemsImplCopyWithImpl<$Res>
     extends _$ComboDealMaterialDetailEventCopyWithImpl<$Res,
-        _$_InitFromCartComboDealItems>
-    implements _$$_InitFromCartComboDealItemsCopyWith<$Res> {
-  __$$_InitFromCartComboDealItemsCopyWithImpl(
-      _$_InitFromCartComboDealItems _value,
-      $Res Function(_$_InitFromCartComboDealItems) _then)
+        _$InitFromCartComboDealItemsImpl>
+    implements _$$InitFromCartComboDealItemsImplCopyWith<$Res> {
+  __$$InitFromCartComboDealItemsImplCopyWithImpl(
+      _$InitFromCartComboDealItemsImpl _value,
+      $Res Function(_$InitFromCartComboDealItemsImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -583,7 +583,7 @@ class __$$_InitFromCartComboDealItemsCopyWithImpl<$Res>
     Object? items = null,
     Object? salesConfigs = null,
   }) {
-    return _then(_$_InitFromCartComboDealItems(
+    return _then(_$InitFromCartComboDealItemsImpl(
       items: null == items
           ? _value._items
           : items // ignore: cast_nullable_to_non_nullable
@@ -607,8 +607,8 @@ class __$$_InitFromCartComboDealItemsCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_InitFromCartComboDealItems implements _InitFromCartComboDealItems {
-  const _$_InitFromCartComboDealItems(
+class _$InitFromCartComboDealItemsImpl implements _InitFromCartComboDealItems {
+  const _$InitFromCartComboDealItemsImpl(
       {required final List<PriceAggregate> items, required this.salesConfigs})
       : _items = items;
 
@@ -629,10 +629,10 @@ class _$_InitFromCartComboDealItems implements _InitFromCartComboDealItems {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_InitFromCartComboDealItems &&
+            other is _$InitFromCartComboDealItemsImpl &&
             const DeepCollectionEquality().equals(other._items, _items) &&
             (identical(other.salesConfigs, salesConfigs) ||
                 other.salesConfigs == salesConfigs));
@@ -645,9 +645,9 @@ class _$_InitFromCartComboDealItems implements _InitFromCartComboDealItems {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_InitFromCartComboDealItemsCopyWith<_$_InitFromCartComboDealItems>
-      get copyWith => __$$_InitFromCartComboDealItemsCopyWithImpl<
-          _$_InitFromCartComboDealItems>(this, _$identity);
+  _$$InitFromCartComboDealItemsImplCopyWith<_$InitFromCartComboDealItemsImpl>
+      get copyWith => __$$InitFromCartComboDealItemsImplCopyWithImpl<
+          _$InitFromCartComboDealItemsImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -836,30 +836,30 @@ abstract class _InitFromCartComboDealItems
   const factory _InitFromCartComboDealItems(
           {required final List<PriceAggregate> items,
           required final SalesOrganisationConfigs salesConfigs}) =
-      _$_InitFromCartComboDealItems;
+      _$InitFromCartComboDealItemsImpl;
 
   List<PriceAggregate> get items;
   SalesOrganisationConfigs get salesConfigs;
   @JsonKey(ignore: true)
-  _$$_InitFromCartComboDealItemsCopyWith<_$_InitFromCartComboDealItems>
+  _$$InitFromCartComboDealItemsImplCopyWith<_$InitFromCartComboDealItemsImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_SetPriceInfoCopyWith<$Res> {
-  factory _$$_SetPriceInfoCopyWith(
-          _$_SetPriceInfo value, $Res Function(_$_SetPriceInfo) then) =
-      __$$_SetPriceInfoCopyWithImpl<$Res>;
+abstract class _$$SetPriceInfoImplCopyWith<$Res> {
+  factory _$$SetPriceInfoImplCopyWith(
+          _$SetPriceInfoImpl value, $Res Function(_$SetPriceInfoImpl) then) =
+      __$$SetPriceInfoImplCopyWithImpl<$Res>;
   @useResult
   $Res call({Map<MaterialNumber, MaterialPriceDetail> priceMap});
 }
 
 /// @nodoc
-class __$$_SetPriceInfoCopyWithImpl<$Res>
-    extends _$ComboDealMaterialDetailEventCopyWithImpl<$Res, _$_SetPriceInfo>
-    implements _$$_SetPriceInfoCopyWith<$Res> {
-  __$$_SetPriceInfoCopyWithImpl(
-      _$_SetPriceInfo _value, $Res Function(_$_SetPriceInfo) _then)
+class __$$SetPriceInfoImplCopyWithImpl<$Res>
+    extends _$ComboDealMaterialDetailEventCopyWithImpl<$Res, _$SetPriceInfoImpl>
+    implements _$$SetPriceInfoImplCopyWith<$Res> {
+  __$$SetPriceInfoImplCopyWithImpl(
+      _$SetPriceInfoImpl _value, $Res Function(_$SetPriceInfoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -867,7 +867,7 @@ class __$$_SetPriceInfoCopyWithImpl<$Res>
   $Res call({
     Object? priceMap = null,
   }) {
-    return _then(_$_SetPriceInfo(
+    return _then(_$SetPriceInfoImpl(
       priceMap: null == priceMap
           ? _value._priceMap
           : priceMap // ignore: cast_nullable_to_non_nullable
@@ -878,8 +878,8 @@ class __$$_SetPriceInfoCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_SetPriceInfo implements _SetPriceInfo {
-  const _$_SetPriceInfo(
+class _$SetPriceInfoImpl implements _SetPriceInfo {
+  const _$SetPriceInfoImpl(
       {required final Map<MaterialNumber, MaterialPriceDetail> priceMap})
       : _priceMap = priceMap;
 
@@ -897,10 +897,10 @@ class _$_SetPriceInfo implements _SetPriceInfo {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_SetPriceInfo &&
+            other is _$SetPriceInfoImpl &&
             const DeepCollectionEquality().equals(other._priceMap, _priceMap));
   }
 
@@ -911,8 +911,8 @@ class _$_SetPriceInfo implements _SetPriceInfo {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_SetPriceInfoCopyWith<_$_SetPriceInfo> get copyWith =>
-      __$$_SetPriceInfoCopyWithImpl<_$_SetPriceInfo>(this, _$identity);
+  _$$SetPriceInfoImplCopyWith<_$SetPriceInfoImpl> get copyWith =>
+      __$$SetPriceInfoImplCopyWithImpl<_$SetPriceInfoImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -1099,29 +1099,30 @@ class _$_SetPriceInfo implements _SetPriceInfo {
 abstract class _SetPriceInfo implements ComboDealMaterialDetailEvent {
   const factory _SetPriceInfo(
           {required final Map<MaterialNumber, MaterialPriceDetail> priceMap}) =
-      _$_SetPriceInfo;
+      _$SetPriceInfoImpl;
 
   Map<MaterialNumber, MaterialPriceDetail> get priceMap;
   @JsonKey(ignore: true)
-  _$$_SetPriceInfoCopyWith<_$_SetPriceInfo> get copyWith =>
+  _$$SetPriceInfoImplCopyWith<_$SetPriceInfoImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_UpdateItemQuantityCopyWith<$Res> {
-  factory _$$_UpdateItemQuantityCopyWith(_$_UpdateItemQuantity value,
-          $Res Function(_$_UpdateItemQuantity) then) =
-      __$$_UpdateItemQuantityCopyWithImpl<$Res>;
+abstract class _$$UpdateItemQuantityImplCopyWith<$Res> {
+  factory _$$UpdateItemQuantityImplCopyWith(_$UpdateItemQuantityImpl value,
+          $Res Function(_$UpdateItemQuantityImpl) then) =
+      __$$UpdateItemQuantityImplCopyWithImpl<$Res>;
   @useResult
   $Res call({MaterialNumber item, int qty});
 }
 
 /// @nodoc
-class __$$_UpdateItemQuantityCopyWithImpl<$Res>
+class __$$UpdateItemQuantityImplCopyWithImpl<$Res>
     extends _$ComboDealMaterialDetailEventCopyWithImpl<$Res,
-        _$_UpdateItemQuantity> implements _$$_UpdateItemQuantityCopyWith<$Res> {
-  __$$_UpdateItemQuantityCopyWithImpl(
-      _$_UpdateItemQuantity _value, $Res Function(_$_UpdateItemQuantity) _then)
+        _$UpdateItemQuantityImpl>
+    implements _$$UpdateItemQuantityImplCopyWith<$Res> {
+  __$$UpdateItemQuantityImplCopyWithImpl(_$UpdateItemQuantityImpl _value,
+      $Res Function(_$UpdateItemQuantityImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1130,7 +1131,7 @@ class __$$_UpdateItemQuantityCopyWithImpl<$Res>
     Object? item = null,
     Object? qty = null,
   }) {
-    return _then(_$_UpdateItemQuantity(
+    return _then(_$UpdateItemQuantityImpl(
       item: null == item
           ? _value.item
           : item // ignore: cast_nullable_to_non_nullable
@@ -1145,8 +1146,8 @@ class __$$_UpdateItemQuantityCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_UpdateItemQuantity implements _UpdateItemQuantity {
-  const _$_UpdateItemQuantity({required this.item, required this.qty});
+class _$UpdateItemQuantityImpl implements _UpdateItemQuantity {
+  const _$UpdateItemQuantityImpl({required this.item, required this.qty});
 
   @override
   final MaterialNumber item;
@@ -1159,10 +1160,10 @@ class _$_UpdateItemQuantity implements _UpdateItemQuantity {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_UpdateItemQuantity &&
+            other is _$UpdateItemQuantityImpl &&
             (identical(other.item, item) || other.item == item) &&
             (identical(other.qty, qty) || other.qty == qty));
   }
@@ -1173,8 +1174,8 @@ class _$_UpdateItemQuantity implements _UpdateItemQuantity {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_UpdateItemQuantityCopyWith<_$_UpdateItemQuantity> get copyWith =>
-      __$$_UpdateItemQuantityCopyWithImpl<_$_UpdateItemQuantity>(
+  _$$UpdateItemQuantityImplCopyWith<_$UpdateItemQuantityImpl> get copyWith =>
+      __$$UpdateItemQuantityImplCopyWithImpl<_$UpdateItemQuantityImpl>(
           this, _$identity);
 
   @override
@@ -1362,31 +1363,31 @@ class _$_UpdateItemQuantity implements _UpdateItemQuantity {
 abstract class _UpdateItemQuantity implements ComboDealMaterialDetailEvent {
   const factory _UpdateItemQuantity(
       {required final MaterialNumber item,
-      required final int qty}) = _$_UpdateItemQuantity;
+      required final int qty}) = _$UpdateItemQuantityImpl;
 
   MaterialNumber get item;
   int get qty;
   @JsonKey(ignore: true)
-  _$$_UpdateItemQuantityCopyWith<_$_UpdateItemQuantity> get copyWith =>
+  _$$UpdateItemQuantityImplCopyWith<_$UpdateItemQuantityImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_UpdateItemSelectionCopyWith<$Res> {
-  factory _$$_UpdateItemSelectionCopyWith(_$_UpdateItemSelection value,
-          $Res Function(_$_UpdateItemSelection) then) =
-      __$$_UpdateItemSelectionCopyWithImpl<$Res>;
+abstract class _$$UpdateItemSelectionImplCopyWith<$Res> {
+  factory _$$UpdateItemSelectionImplCopyWith(_$UpdateItemSelectionImpl value,
+          $Res Function(_$UpdateItemSelectionImpl) then) =
+      __$$UpdateItemSelectionImplCopyWithImpl<$Res>;
   @useResult
   $Res call({MaterialNumber item});
 }
 
 /// @nodoc
-class __$$_UpdateItemSelectionCopyWithImpl<$Res>
+class __$$UpdateItemSelectionImplCopyWithImpl<$Res>
     extends _$ComboDealMaterialDetailEventCopyWithImpl<$Res,
-        _$_UpdateItemSelection>
-    implements _$$_UpdateItemSelectionCopyWith<$Res> {
-  __$$_UpdateItemSelectionCopyWithImpl(_$_UpdateItemSelection _value,
-      $Res Function(_$_UpdateItemSelection) _then)
+        _$UpdateItemSelectionImpl>
+    implements _$$UpdateItemSelectionImplCopyWith<$Res> {
+  __$$UpdateItemSelectionImplCopyWithImpl(_$UpdateItemSelectionImpl _value,
+      $Res Function(_$UpdateItemSelectionImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1394,7 +1395,7 @@ class __$$_UpdateItemSelectionCopyWithImpl<$Res>
   $Res call({
     Object? item = null,
   }) {
-    return _then(_$_UpdateItemSelection(
+    return _then(_$UpdateItemSelectionImpl(
       item: null == item
           ? _value.item
           : item // ignore: cast_nullable_to_non_nullable
@@ -1405,8 +1406,8 @@ class __$$_UpdateItemSelectionCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_UpdateItemSelection implements _UpdateItemSelection {
-  const _$_UpdateItemSelection({required this.item});
+class _$UpdateItemSelectionImpl implements _UpdateItemSelection {
+  const _$UpdateItemSelectionImpl({required this.item});
 
   @override
   final MaterialNumber item;
@@ -1417,10 +1418,10 @@ class _$_UpdateItemSelection implements _UpdateItemSelection {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_UpdateItemSelection &&
+            other is _$UpdateItemSelectionImpl &&
             (identical(other.item, item) || other.item == item));
   }
 
@@ -1430,8 +1431,8 @@ class _$_UpdateItemSelection implements _UpdateItemSelection {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_UpdateItemSelectionCopyWith<_$_UpdateItemSelection> get copyWith =>
-      __$$_UpdateItemSelectionCopyWithImpl<_$_UpdateItemSelection>(
+  _$$UpdateItemSelectionImplCopyWith<_$UpdateItemSelectionImpl> get copyWith =>
+      __$$UpdateItemSelectionImplCopyWithImpl<_$UpdateItemSelectionImpl>(
           this, _$identity);
 
   @override
@@ -1618,19 +1619,19 @@ class _$_UpdateItemSelection implements _UpdateItemSelection {
 
 abstract class _UpdateItemSelection implements ComboDealMaterialDetailEvent {
   const factory _UpdateItemSelection({required final MaterialNumber item}) =
-      _$_UpdateItemSelection;
+      _$UpdateItemSelectionImpl;
 
   MaterialNumber get item;
   @JsonKey(ignore: true)
-  _$$_UpdateItemSelectionCopyWith<_$_UpdateItemSelection> get copyWith =>
+  _$$UpdateItemSelectionImplCopyWith<_$UpdateItemSelectionImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_FetchComboDealDetailCopyWith<$Res> {
-  factory _$$_FetchComboDealDetailCopyWith(_$_FetchComboDealDetail value,
-          $Res Function(_$_FetchComboDealDetail) then) =
-      __$$_FetchComboDealDetailCopyWithImpl<$Res>;
+abstract class _$$FetchComboDealDetailImplCopyWith<$Res> {
+  factory _$$FetchComboDealDetailImplCopyWith(_$FetchComboDealDetailImpl value,
+          $Res Function(_$FetchComboDealDetailImpl) then) =
+      __$$FetchComboDealDetailImplCopyWithImpl<$Res>;
   @useResult
   $Res call(
       {ComboDeal comboDeal,
@@ -1641,12 +1642,12 @@ abstract class _$$_FetchComboDealDetailCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_FetchComboDealDetailCopyWithImpl<$Res>
+class __$$FetchComboDealDetailImplCopyWithImpl<$Res>
     extends _$ComboDealMaterialDetailEventCopyWithImpl<$Res,
-        _$_FetchComboDealDetail>
-    implements _$$_FetchComboDealDetailCopyWith<$Res> {
-  __$$_FetchComboDealDetailCopyWithImpl(_$_FetchComboDealDetail _value,
-      $Res Function(_$_FetchComboDealDetail) _then)
+        _$FetchComboDealDetailImpl>
+    implements _$$FetchComboDealDetailImplCopyWith<$Res> {
+  __$$FetchComboDealDetailImplCopyWithImpl(_$FetchComboDealDetailImpl _value,
+      $Res Function(_$FetchComboDealDetailImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1656,7 +1657,7 @@ class __$$_FetchComboDealDetailCopyWithImpl<$Res>
     Object? parentMaterialNumber = null,
     Object? comboMaterialsCurrentQuantity = null,
   }) {
-    return _then(_$_FetchComboDealDetail(
+    return _then(_$FetchComboDealDetailImpl(
       comboDeal: null == comboDeal
           ? _value.comboDeal
           : comboDeal // ignore: cast_nullable_to_non_nullable
@@ -1683,8 +1684,8 @@ class __$$_FetchComboDealDetailCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_FetchComboDealDetail implements _FetchComboDealDetail {
-  const _$_FetchComboDealDetail(
+class _$FetchComboDealDetailImpl implements _FetchComboDealDetail {
+  const _$FetchComboDealDetailImpl(
       {required this.comboDeal,
       required this.parentMaterialNumber,
       required final Map<MaterialNumber, int> comboMaterialsCurrentQuantity})
@@ -1709,10 +1710,10 @@ class _$_FetchComboDealDetail implements _FetchComboDealDetail {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_FetchComboDealDetail &&
+            other is _$FetchComboDealDetailImpl &&
             (identical(other.comboDeal, comboDeal) ||
                 other.comboDeal == comboDeal) &&
             (identical(other.parentMaterialNumber, parentMaterialNumber) ||
@@ -1729,9 +1730,10 @@ class _$_FetchComboDealDetail implements _FetchComboDealDetail {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_FetchComboDealDetailCopyWith<_$_FetchComboDealDetail> get copyWith =>
-      __$$_FetchComboDealDetailCopyWithImpl<_$_FetchComboDealDetail>(
-          this, _$identity);
+  _$$FetchComboDealDetailImplCopyWith<_$FetchComboDealDetailImpl>
+      get copyWith =>
+          __$$FetchComboDealDetailImplCopyWithImpl<_$FetchComboDealDetailImpl>(
+              this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -1923,29 +1925,31 @@ abstract class _FetchComboDealDetail implements ComboDealMaterialDetailEvent {
       {required final ComboDeal comboDeal,
       required final MaterialNumber parentMaterialNumber,
       required final Map<MaterialNumber, int>
-          comboMaterialsCurrentQuantity}) = _$_FetchComboDealDetail;
+          comboMaterialsCurrentQuantity}) = _$FetchComboDealDetailImpl;
 
   ComboDeal get comboDeal;
   MaterialNumber get parentMaterialNumber;
   Map<MaterialNumber, int> get comboMaterialsCurrentQuantity;
   @JsonKey(ignore: true)
-  _$$_FetchComboDealDetailCopyWith<_$_FetchComboDealDetail> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$FetchComboDealDetailImplCopyWith<_$FetchComboDealDetailImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_SearchCopyWith<$Res> {
-  factory _$$_SearchCopyWith(_$_Search value, $Res Function(_$_Search) then) =
-      __$$_SearchCopyWithImpl<$Res>;
+abstract class _$$SearchImplCopyWith<$Res> {
+  factory _$$SearchImplCopyWith(
+          _$SearchImpl value, $Res Function(_$SearchImpl) then) =
+      __$$SearchImplCopyWithImpl<$Res>;
   @useResult
   $Res call({SearchKey searchKey});
 }
 
 /// @nodoc
-class __$$_SearchCopyWithImpl<$Res>
-    extends _$ComboDealMaterialDetailEventCopyWithImpl<$Res, _$_Search>
-    implements _$$_SearchCopyWith<$Res> {
-  __$$_SearchCopyWithImpl(_$_Search _value, $Res Function(_$_Search) _then)
+class __$$SearchImplCopyWithImpl<$Res>
+    extends _$ComboDealMaterialDetailEventCopyWithImpl<$Res, _$SearchImpl>
+    implements _$$SearchImplCopyWith<$Res> {
+  __$$SearchImplCopyWithImpl(
+      _$SearchImpl _value, $Res Function(_$SearchImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1953,7 +1957,7 @@ class __$$_SearchCopyWithImpl<$Res>
   $Res call({
     Object? searchKey = null,
   }) {
-    return _then(_$_Search(
+    return _then(_$SearchImpl(
       searchKey: null == searchKey
           ? _value.searchKey
           : searchKey // ignore: cast_nullable_to_non_nullable
@@ -1964,8 +1968,8 @@ class __$$_SearchCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_Search implements _Search {
-  const _$_Search({required this.searchKey});
+class _$SearchImpl implements _Search {
+  const _$SearchImpl({required this.searchKey});
 
   @override
   final SearchKey searchKey;
@@ -1976,10 +1980,10 @@ class _$_Search implements _Search {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Search &&
+            other is _$SearchImpl &&
             (identical(other.searchKey, searchKey) ||
                 other.searchKey == searchKey));
   }
@@ -1990,8 +1994,8 @@ class _$_Search implements _Search {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_SearchCopyWith<_$_Search> get copyWith =>
-      __$$_SearchCopyWithImpl<_$_Search>(this, _$identity);
+  _$$SearchImplCopyWith<_$SearchImpl> get copyWith =>
+      __$$SearchImplCopyWithImpl<_$SearchImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -2176,31 +2180,32 @@ class _$_Search implements _Search {
 }
 
 abstract class _Search implements ComboDealMaterialDetailEvent {
-  const factory _Search({required final SearchKey searchKey}) = _$_Search;
+  const factory _Search({required final SearchKey searchKey}) = _$SearchImpl;
 
   SearchKey get searchKey;
   @JsonKey(ignore: true)
-  _$$_SearchCopyWith<_$_Search> get copyWith =>
+  _$$SearchImplCopyWith<_$SearchImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_CartContainsCurrentComboCopyWith<$Res> {
-  factory _$$_CartContainsCurrentComboCopyWith(
-          _$_CartContainsCurrentCombo value,
-          $Res Function(_$_CartContainsCurrentCombo) then) =
-      __$$_CartContainsCurrentComboCopyWithImpl<$Res>;
+abstract class _$$CartContainsCurrentComboImplCopyWith<$Res> {
+  factory _$$CartContainsCurrentComboImplCopyWith(
+          _$CartContainsCurrentComboImpl value,
+          $Res Function(_$CartContainsCurrentComboImpl) then) =
+      __$$CartContainsCurrentComboImplCopyWithImpl<$Res>;
   @useResult
   $Res call({bool contain});
 }
 
 /// @nodoc
-class __$$_CartContainsCurrentComboCopyWithImpl<$Res>
+class __$$CartContainsCurrentComboImplCopyWithImpl<$Res>
     extends _$ComboDealMaterialDetailEventCopyWithImpl<$Res,
-        _$_CartContainsCurrentCombo>
-    implements _$$_CartContainsCurrentComboCopyWith<$Res> {
-  __$$_CartContainsCurrentComboCopyWithImpl(_$_CartContainsCurrentCombo _value,
-      $Res Function(_$_CartContainsCurrentCombo) _then)
+        _$CartContainsCurrentComboImpl>
+    implements _$$CartContainsCurrentComboImplCopyWith<$Res> {
+  __$$CartContainsCurrentComboImplCopyWithImpl(
+      _$CartContainsCurrentComboImpl _value,
+      $Res Function(_$CartContainsCurrentComboImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -2208,7 +2213,7 @@ class __$$_CartContainsCurrentComboCopyWithImpl<$Res>
   $Res call({
     Object? contain = null,
   }) {
-    return _then(_$_CartContainsCurrentCombo(
+    return _then(_$CartContainsCurrentComboImpl(
       contain: null == contain
           ? _value.contain
           : contain // ignore: cast_nullable_to_non_nullable
@@ -2219,8 +2224,8 @@ class __$$_CartContainsCurrentComboCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_CartContainsCurrentCombo implements _CartContainsCurrentCombo {
-  const _$_CartContainsCurrentCombo({required this.contain});
+class _$CartContainsCurrentComboImpl implements _CartContainsCurrentCombo {
+  const _$CartContainsCurrentComboImpl({required this.contain});
 
   @override
   final bool contain;
@@ -2231,10 +2236,10 @@ class _$_CartContainsCurrentCombo implements _CartContainsCurrentCombo {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_CartContainsCurrentCombo &&
+            other is _$CartContainsCurrentComboImpl &&
             (identical(other.contain, contain) || other.contain == contain));
   }
 
@@ -2244,9 +2249,9 @@ class _$_CartContainsCurrentCombo implements _CartContainsCurrentCombo {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_CartContainsCurrentComboCopyWith<_$_CartContainsCurrentCombo>
-      get copyWith => __$$_CartContainsCurrentComboCopyWithImpl<
-          _$_CartContainsCurrentCombo>(this, _$identity);
+  _$$CartContainsCurrentComboImplCopyWith<_$CartContainsCurrentComboImpl>
+      get copyWith => __$$CartContainsCurrentComboImplCopyWithImpl<
+          _$CartContainsCurrentComboImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -2433,34 +2438,34 @@ class _$_CartContainsCurrentCombo implements _CartContainsCurrentCombo {
 abstract class _CartContainsCurrentCombo
     implements ComboDealMaterialDetailEvent {
   const factory _CartContainsCurrentCombo({required final bool contain}) =
-      _$_CartContainsCurrentCombo;
+      _$CartContainsCurrentComboImpl;
 
   bool get contain;
   @JsonKey(ignore: true)
-  _$$_CartContainsCurrentComboCopyWith<_$_CartContainsCurrentCombo>
+  _$$CartContainsCurrentComboImplCopyWith<_$CartContainsCurrentComboImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_ClearSearchCopyWith<$Res> {
-  factory _$$_ClearSearchCopyWith(
-          _$_ClearSearch value, $Res Function(_$_ClearSearch) then) =
-      __$$_ClearSearchCopyWithImpl<$Res>;
+abstract class _$$ClearSearchImplCopyWith<$Res> {
+  factory _$$ClearSearchImplCopyWith(
+          _$ClearSearchImpl value, $Res Function(_$ClearSearchImpl) then) =
+      __$$ClearSearchImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_ClearSearchCopyWithImpl<$Res>
-    extends _$ComboDealMaterialDetailEventCopyWithImpl<$Res, _$_ClearSearch>
-    implements _$$_ClearSearchCopyWith<$Res> {
-  __$$_ClearSearchCopyWithImpl(
-      _$_ClearSearch _value, $Res Function(_$_ClearSearch) _then)
+class __$$ClearSearchImplCopyWithImpl<$Res>
+    extends _$ComboDealMaterialDetailEventCopyWithImpl<$Res, _$ClearSearchImpl>
+    implements _$$ClearSearchImplCopyWith<$Res> {
+  __$$ClearSearchImplCopyWithImpl(
+      _$ClearSearchImpl _value, $Res Function(_$ClearSearchImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_ClearSearch implements _ClearSearch {
-  const _$_ClearSearch();
+class _$ClearSearchImpl implements _ClearSearch {
+  const _$ClearSearchImpl();
 
   @override
   String toString() {
@@ -2468,9 +2473,9 @@ class _$_ClearSearch implements _ClearSearch {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_ClearSearch);
+        (other.runtimeType == runtimeType && other is _$ClearSearchImpl);
   }
 
   @override
@@ -2659,14 +2664,15 @@ class _$_ClearSearch implements _ClearSearch {
 }
 
 abstract class _ClearSearch implements ComboDealMaterialDetailEvent {
-  const factory _ClearSearch() = _$_ClearSearch;
+  const factory _ClearSearch() = _$ClearSearchImpl;
 }
 
 /// @nodoc
-abstract class _$$_FetchComboDealPrincipalCopyWith<$Res> {
-  factory _$$_FetchComboDealPrincipalCopyWith(_$_FetchComboDealPrincipal value,
-          $Res Function(_$_FetchComboDealPrincipal) then) =
-      __$$_FetchComboDealPrincipalCopyWithImpl<$Res>;
+abstract class _$$FetchComboDealPrincipalImplCopyWith<$Res> {
+  factory _$$FetchComboDealPrincipalImplCopyWith(
+          _$FetchComboDealPrincipalImpl value,
+          $Res Function(_$FetchComboDealPrincipalImpl) then) =
+      __$$FetchComboDealPrincipalImplCopyWithImpl<$Res>;
   @useResult
   $Res call(
       {ComboDeal comboDeal,
@@ -2677,12 +2683,13 @@ abstract class _$$_FetchComboDealPrincipalCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_FetchComboDealPrincipalCopyWithImpl<$Res>
+class __$$FetchComboDealPrincipalImplCopyWithImpl<$Res>
     extends _$ComboDealMaterialDetailEventCopyWithImpl<$Res,
-        _$_FetchComboDealPrincipal>
-    implements _$$_FetchComboDealPrincipalCopyWith<$Res> {
-  __$$_FetchComboDealPrincipalCopyWithImpl(_$_FetchComboDealPrincipal _value,
-      $Res Function(_$_FetchComboDealPrincipal) _then)
+        _$FetchComboDealPrincipalImpl>
+    implements _$$FetchComboDealPrincipalImplCopyWith<$Res> {
+  __$$FetchComboDealPrincipalImplCopyWithImpl(
+      _$FetchComboDealPrincipalImpl _value,
+      $Res Function(_$FetchComboDealPrincipalImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -2692,7 +2699,7 @@ class __$$_FetchComboDealPrincipalCopyWithImpl<$Res>
     Object? comboMaterialsCurrentQuantity = null,
     Object? principles = null,
   }) {
-    return _then(_$_FetchComboDealPrincipal(
+    return _then(_$FetchComboDealPrincipalImpl(
       comboDeal: null == comboDeal
           ? _value.comboDeal
           : comboDeal // ignore: cast_nullable_to_non_nullable
@@ -2719,8 +2726,8 @@ class __$$_FetchComboDealPrincipalCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_FetchComboDealPrincipal implements _FetchComboDealPrincipal {
-  const _$_FetchComboDealPrincipal(
+class _$FetchComboDealPrincipalImpl implements _FetchComboDealPrincipal {
+  const _$FetchComboDealPrincipalImpl(
       {required this.comboDeal,
       required final Map<MaterialNumber, int> comboMaterialsCurrentQuantity,
       required final List<String> principles})
@@ -2752,10 +2759,10 @@ class _$_FetchComboDealPrincipal implements _FetchComboDealPrincipal {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_FetchComboDealPrincipal &&
+            other is _$FetchComboDealPrincipalImpl &&
             (identical(other.comboDeal, comboDeal) ||
                 other.comboDeal == comboDeal) &&
             const DeepCollectionEquality().equals(
@@ -2775,10 +2782,9 @@ class _$_FetchComboDealPrincipal implements _FetchComboDealPrincipal {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_FetchComboDealPrincipalCopyWith<_$_FetchComboDealPrincipal>
-      get copyWith =>
-          __$$_FetchComboDealPrincipalCopyWithImpl<_$_FetchComboDealPrincipal>(
-              this, _$identity);
+  _$$FetchComboDealPrincipalImplCopyWith<_$FetchComboDealPrincipalImpl>
+      get copyWith => __$$FetchComboDealPrincipalImplCopyWithImpl<
+          _$FetchComboDealPrincipalImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -2970,22 +2976,22 @@ abstract class _FetchComboDealPrincipal
   const factory _FetchComboDealPrincipal(
       {required final ComboDeal comboDeal,
       required final Map<MaterialNumber, int> comboMaterialsCurrentQuantity,
-      required final List<String> principles}) = _$_FetchComboDealPrincipal;
+      required final List<String> principles}) = _$FetchComboDealPrincipalImpl;
 
   ComboDeal get comboDeal;
   Map<MaterialNumber, int> get comboMaterialsCurrentQuantity;
   List<String> get principles;
   @JsonKey(ignore: true)
-  _$$_FetchComboDealPrincipalCopyWith<_$_FetchComboDealPrincipal>
+  _$$FetchComboDealPrincipalImplCopyWith<_$FetchComboDealPrincipalImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_LoadMoreComboDealPrincipalCopyWith<$Res> {
-  factory _$$_LoadMoreComboDealPrincipalCopyWith(
-          _$_LoadMoreComboDealPrincipal value,
-          $Res Function(_$_LoadMoreComboDealPrincipal) then) =
-      __$$_LoadMoreComboDealPrincipalCopyWithImpl<$Res>;
+abstract class _$$LoadMoreComboDealPrincipalImplCopyWith<$Res> {
+  factory _$$LoadMoreComboDealPrincipalImplCopyWith(
+          _$LoadMoreComboDealPrincipalImpl value,
+          $Res Function(_$LoadMoreComboDealPrincipalImpl) then) =
+      __$$LoadMoreComboDealPrincipalImplCopyWithImpl<$Res>;
   @useResult
   $Res call({ComboDeal comboDeal, List<String> principles});
 
@@ -2993,13 +2999,13 @@ abstract class _$$_LoadMoreComboDealPrincipalCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_LoadMoreComboDealPrincipalCopyWithImpl<$Res>
+class __$$LoadMoreComboDealPrincipalImplCopyWithImpl<$Res>
     extends _$ComboDealMaterialDetailEventCopyWithImpl<$Res,
-        _$_LoadMoreComboDealPrincipal>
-    implements _$$_LoadMoreComboDealPrincipalCopyWith<$Res> {
-  __$$_LoadMoreComboDealPrincipalCopyWithImpl(
-      _$_LoadMoreComboDealPrincipal _value,
-      $Res Function(_$_LoadMoreComboDealPrincipal) _then)
+        _$LoadMoreComboDealPrincipalImpl>
+    implements _$$LoadMoreComboDealPrincipalImplCopyWith<$Res> {
+  __$$LoadMoreComboDealPrincipalImplCopyWithImpl(
+      _$LoadMoreComboDealPrincipalImpl _value,
+      $Res Function(_$LoadMoreComboDealPrincipalImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -3008,7 +3014,7 @@ class __$$_LoadMoreComboDealPrincipalCopyWithImpl<$Res>
     Object? comboDeal = null,
     Object? principles = null,
   }) {
-    return _then(_$_LoadMoreComboDealPrincipal(
+    return _then(_$LoadMoreComboDealPrincipalImpl(
       comboDeal: null == comboDeal
           ? _value.comboDeal
           : comboDeal // ignore: cast_nullable_to_non_nullable
@@ -3031,8 +3037,8 @@ class __$$_LoadMoreComboDealPrincipalCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_LoadMoreComboDealPrincipal implements _LoadMoreComboDealPrincipal {
-  const _$_LoadMoreComboDealPrincipal(
+class _$LoadMoreComboDealPrincipalImpl implements _LoadMoreComboDealPrincipal {
+  const _$LoadMoreComboDealPrincipalImpl(
       {required this.comboDeal, required final List<String> principles})
       : _principles = principles;
 
@@ -3052,10 +3058,10 @@ class _$_LoadMoreComboDealPrincipal implements _LoadMoreComboDealPrincipal {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_LoadMoreComboDealPrincipal &&
+            other is _$LoadMoreComboDealPrincipalImpl &&
             (identical(other.comboDeal, comboDeal) ||
                 other.comboDeal == comboDeal) &&
             const DeepCollectionEquality()
@@ -3069,9 +3075,9 @@ class _$_LoadMoreComboDealPrincipal implements _LoadMoreComboDealPrincipal {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_LoadMoreComboDealPrincipalCopyWith<_$_LoadMoreComboDealPrincipal>
-      get copyWith => __$$_LoadMoreComboDealPrincipalCopyWithImpl<
-          _$_LoadMoreComboDealPrincipal>(this, _$identity);
+  _$$LoadMoreComboDealPrincipalImplCopyWith<_$LoadMoreComboDealPrincipalImpl>
+      get copyWith => __$$LoadMoreComboDealPrincipalImplCopyWithImpl<
+          _$LoadMoreComboDealPrincipalImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -3258,36 +3264,38 @@ class _$_LoadMoreComboDealPrincipal implements _LoadMoreComboDealPrincipal {
 abstract class _LoadMoreComboDealPrincipal
     implements ComboDealMaterialDetailEvent {
   const factory _LoadMoreComboDealPrincipal(
-      {required final ComboDeal comboDeal,
-      required final List<String> principles}) = _$_LoadMoreComboDealPrincipal;
+          {required final ComboDeal comboDeal,
+          required final List<String> principles}) =
+      _$LoadMoreComboDealPrincipalImpl;
 
   ComboDeal get comboDeal;
   List<String> get principles;
   @JsonKey(ignore: true)
-  _$$_LoadMoreComboDealPrincipalCopyWith<_$_LoadMoreComboDealPrincipal>
+  _$$LoadMoreComboDealPrincipalImplCopyWith<_$LoadMoreComboDealPrincipalImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_ClearSelectedItemCopyWith<$Res> {
-  factory _$$_ClearSelectedItemCopyWith(_$_ClearSelectedItem value,
-          $Res Function(_$_ClearSelectedItem) then) =
-      __$$_ClearSelectedItemCopyWithImpl<$Res>;
+abstract class _$$ClearSelectedItemImplCopyWith<$Res> {
+  factory _$$ClearSelectedItemImplCopyWith(_$ClearSelectedItemImpl value,
+          $Res Function(_$ClearSelectedItemImpl) then) =
+      __$$ClearSelectedItemImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_ClearSelectedItemCopyWithImpl<$Res>
+class __$$ClearSelectedItemImplCopyWithImpl<$Res>
     extends _$ComboDealMaterialDetailEventCopyWithImpl<$Res,
-        _$_ClearSelectedItem> implements _$$_ClearSelectedItemCopyWith<$Res> {
-  __$$_ClearSelectedItemCopyWithImpl(
-      _$_ClearSelectedItem _value, $Res Function(_$_ClearSelectedItem) _then)
+        _$ClearSelectedItemImpl>
+    implements _$$ClearSelectedItemImplCopyWith<$Res> {
+  __$$ClearSelectedItemImplCopyWithImpl(_$ClearSelectedItemImpl _value,
+      $Res Function(_$ClearSelectedItemImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_ClearSelectedItem implements _ClearSelectedItem {
-  const _$_ClearSelectedItem();
+class _$ClearSelectedItemImpl implements _ClearSelectedItem {
+  const _$ClearSelectedItemImpl();
 
   @override
   String toString() {
@@ -3295,9 +3303,9 @@ class _$_ClearSelectedItem implements _ClearSelectedItem {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_ClearSelectedItem);
+        (other.runtimeType == runtimeType && other is _$ClearSelectedItemImpl);
   }
 
   @override
@@ -3486,7 +3494,7 @@ class _$_ClearSelectedItem implements _ClearSelectedItem {
 }
 
 abstract class _ClearSelectedItem implements ComboDealMaterialDetailEvent {
-  const factory _ClearSelectedItem() = _$_ClearSelectedItem;
+  const factory _ClearSelectedItem() = _$ClearSelectedItemImpl;
 }
 
 /// @nodoc
@@ -3692,11 +3700,11 @@ class _$ComboDealMaterialDetailStateCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_ComboDealDetailStateCopyWith<$Res>
+abstract class _$$ComboDealDetailStateImplCopyWith<$Res>
     implements $ComboDealMaterialDetailStateCopyWith<$Res> {
-  factory _$$_ComboDealDetailStateCopyWith(_$_ComboDealDetailState value,
-          $Res Function(_$_ComboDealDetailState) then) =
-      __$$_ComboDealDetailStateCopyWithImpl<$Res>;
+  factory _$$ComboDealDetailStateImplCopyWith(_$ComboDealDetailStateImpl value,
+          $Res Function(_$ComboDealDetailStateImpl) then) =
+      __$$ComboDealDetailStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -3730,12 +3738,12 @@ abstract class _$$_ComboDealDetailStateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_ComboDealDetailStateCopyWithImpl<$Res>
+class __$$ComboDealDetailStateImplCopyWithImpl<$Res>
     extends _$ComboDealMaterialDetailStateCopyWithImpl<$Res,
-        _$_ComboDealDetailState>
-    implements _$$_ComboDealDetailStateCopyWith<$Res> {
-  __$$_ComboDealDetailStateCopyWithImpl(_$_ComboDealDetailState _value,
-      $Res Function(_$_ComboDealDetailState) _then)
+        _$ComboDealDetailStateImpl>
+    implements _$$ComboDealDetailStateImplCopyWith<$Res> {
+  __$$ComboDealDetailStateImplCopyWithImpl(_$ComboDealDetailStateImpl _value,
+      $Res Function(_$ComboDealDetailStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -3758,7 +3766,7 @@ class __$$_ComboDealDetailStateCopyWithImpl<$Res>
     Object? nextPageIndex = null,
     Object? materialCount = null,
   }) {
-    return _then(_$_ComboDealDetailState(
+    return _then(_$ComboDealDetailStateImpl(
       items: null == items
           ? _value._items
           : items // ignore: cast_nullable_to_non_nullable
@@ -3829,8 +3837,8 @@ class __$$_ComboDealDetailStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_ComboDealDetailState extends _ComboDealDetailState {
-  const _$_ComboDealDetailState(
+class _$ComboDealDetailStateImpl extends _ComboDealDetailState {
+  const _$ComboDealDetailStateImpl(
       {required final Map<MaterialNumber, PriceAggregate> items,
       required final Map<MaterialNumber, bool> selectedItems,
       required this.isFetchingPrice,
@@ -3902,10 +3910,10 @@ class _$_ComboDealDetailState extends _ComboDealDetailState {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ComboDealDetailState &&
+            other is _$ComboDealDetailStateImpl &&
             const DeepCollectionEquality().equals(other._items, _items) &&
             const DeepCollectionEquality()
                 .equals(other._selectedItems, _selectedItems) &&
@@ -3962,9 +3970,10 @@ class _$_ComboDealDetailState extends _ComboDealDetailState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ComboDealDetailStateCopyWith<_$_ComboDealDetailState> get copyWith =>
-      __$$_ComboDealDetailStateCopyWithImpl<_$_ComboDealDetailState>(
-          this, _$identity);
+  _$$ComboDealDetailStateImplCopyWith<_$ComboDealDetailStateImpl>
+      get copyWith =>
+          __$$ComboDealDetailStateImplCopyWithImpl<_$ComboDealDetailStateImpl>(
+              this, _$identity);
 }
 
 abstract class _ComboDealDetailState extends ComboDealMaterialDetailState {
@@ -3985,7 +3994,7 @@ abstract class _ComboDealDetailState extends ComboDealMaterialDetailState {
       required final SearchKey searchKey,
       required final bool canLoadMore,
       required final int nextPageIndex,
-      required final int materialCount}) = _$_ComboDealDetailState;
+      required final int materialCount}) = _$ComboDealDetailStateImpl;
   const _ComboDealDetailState._() : super._();
 
   @override
@@ -4022,6 +4031,6 @@ abstract class _ComboDealDetailState extends ComboDealMaterialDetailState {
   int get materialCount;
   @override
   @JsonKey(ignore: true)
-  _$$_ComboDealDetailStateCopyWith<_$_ComboDealDetailState> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$ComboDealDetailStateImplCopyWith<_$ComboDealDetailStateImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }

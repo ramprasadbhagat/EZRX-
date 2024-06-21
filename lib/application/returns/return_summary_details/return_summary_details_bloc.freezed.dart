@@ -12,7 +12,7 @@ part of 'return_summary_details_bloc.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$ReturnSummaryDetailsEvent {
@@ -82,25 +82,25 @@ class _$ReturnSummaryDetailsEventCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_InitializedCopyWith<$Res> {
-  factory _$$_InitializedCopyWith(
-          _$_Initialized value, $Res Function(_$_Initialized) then) =
-      __$$_InitializedCopyWithImpl<$Res>;
+abstract class _$$InitializedImplCopyWith<$Res> {
+  factory _$$InitializedImplCopyWith(
+          _$InitializedImpl value, $Res Function(_$InitializedImpl) then) =
+      __$$InitializedImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_InitializedCopyWithImpl<$Res>
-    extends _$ReturnSummaryDetailsEventCopyWithImpl<$Res, _$_Initialized>
-    implements _$$_InitializedCopyWith<$Res> {
-  __$$_InitializedCopyWithImpl(
-      _$_Initialized _value, $Res Function(_$_Initialized) _then)
+class __$$InitializedImplCopyWithImpl<$Res>
+    extends _$ReturnSummaryDetailsEventCopyWithImpl<$Res, _$InitializedImpl>
+    implements _$$InitializedImplCopyWith<$Res> {
+  __$$InitializedImplCopyWithImpl(
+      _$InitializedImpl _value, $Res Function(_$InitializedImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_Initialized implements _Initialized {
-  const _$_Initialized();
+class _$InitializedImpl implements _Initialized {
+  const _$InitializedImpl();
 
   @override
   String toString() {
@@ -108,9 +108,9 @@ class _$_Initialized implements _Initialized {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_Initialized);
+        (other.runtimeType == runtimeType && other is _$InitializedImpl);
   }
 
   @override
@@ -186,13 +186,14 @@ class _$_Initialized implements _Initialized {
 }
 
 abstract class _Initialized implements ReturnSummaryDetailsEvent {
-  const factory _Initialized() = _$_Initialized;
+  const factory _Initialized() = _$InitializedImpl;
 }
 
 /// @nodoc
-abstract class _$$_FetchCopyWith<$Res> {
-  factory _$$_FetchCopyWith(_$_Fetch value, $Res Function(_$_Fetch) then) =
-      __$$_FetchCopyWithImpl<$Res>;
+abstract class _$$FetchImplCopyWith<$Res> {
+  factory _$$FetchImplCopyWith(
+          _$FetchImpl value, $Res Function(_$FetchImpl) then) =
+      __$$FetchImplCopyWithImpl<$Res>;
   @useResult
   $Res call({ReturnRequestsId returnId});
 
@@ -200,10 +201,11 @@ abstract class _$$_FetchCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_FetchCopyWithImpl<$Res>
-    extends _$ReturnSummaryDetailsEventCopyWithImpl<$Res, _$_Fetch>
-    implements _$$_FetchCopyWith<$Res> {
-  __$$_FetchCopyWithImpl(_$_Fetch _value, $Res Function(_$_Fetch) _then)
+class __$$FetchImplCopyWithImpl<$Res>
+    extends _$ReturnSummaryDetailsEventCopyWithImpl<$Res, _$FetchImpl>
+    implements _$$FetchImplCopyWith<$Res> {
+  __$$FetchImplCopyWithImpl(
+      _$FetchImpl _value, $Res Function(_$FetchImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -211,7 +213,7 @@ class __$$_FetchCopyWithImpl<$Res>
   $Res call({
     Object? returnId = null,
   }) {
-    return _then(_$_Fetch(
+    return _then(_$FetchImpl(
       returnId: null == returnId
           ? _value.returnId
           : returnId // ignore: cast_nullable_to_non_nullable
@@ -230,8 +232,8 @@ class __$$_FetchCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_Fetch implements _Fetch {
-  const _$_Fetch({required this.returnId});
+class _$FetchImpl implements _Fetch {
+  const _$FetchImpl({required this.returnId});
 
   @override
   final ReturnRequestsId returnId;
@@ -242,10 +244,10 @@ class _$_Fetch implements _Fetch {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Fetch &&
+            other is _$FetchImpl &&
             (identical(other.returnId, returnId) ||
                 other.returnId == returnId));
   }
@@ -256,8 +258,8 @@ class _$_Fetch implements _Fetch {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_FetchCopyWith<_$_Fetch> get copyWith =>
-      __$$_FetchCopyWithImpl<_$_Fetch>(this, _$identity);
+  _$$FetchImplCopyWith<_$FetchImpl> get copyWith =>
+      __$$FetchImplCopyWithImpl<_$FetchImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -329,19 +331,20 @@ class _$_Fetch implements _Fetch {
 }
 
 abstract class _Fetch implements ReturnSummaryDetailsEvent {
-  const factory _Fetch({required final ReturnRequestsId returnId}) = _$_Fetch;
+  const factory _Fetch({required final ReturnRequestsId returnId}) =
+      _$FetchImpl;
 
   ReturnRequestsId get returnId;
   @JsonKey(ignore: true)
-  _$$_FetchCopyWith<_$_Fetch> get copyWith =>
+  _$$FetchImplCopyWith<_$FetchImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_DownloadFileCopyWith<$Res> {
-  factory _$$_DownloadFileCopyWith(
-          _$_DownloadFile value, $Res Function(_$_DownloadFile) then) =
-      __$$_DownloadFileCopyWithImpl<$Res>;
+abstract class _$$DownloadFileImplCopyWith<$Res> {
+  factory _$$DownloadFileImplCopyWith(
+          _$DownloadFileImpl value, $Res Function(_$DownloadFileImpl) then) =
+      __$$DownloadFileImplCopyWithImpl<$Res>;
   @useResult
   $Res call({ReturnRequestAttachment file});
 
@@ -349,11 +352,11 @@ abstract class _$$_DownloadFileCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_DownloadFileCopyWithImpl<$Res>
-    extends _$ReturnSummaryDetailsEventCopyWithImpl<$Res, _$_DownloadFile>
-    implements _$$_DownloadFileCopyWith<$Res> {
-  __$$_DownloadFileCopyWithImpl(
-      _$_DownloadFile _value, $Res Function(_$_DownloadFile) _then)
+class __$$DownloadFileImplCopyWithImpl<$Res>
+    extends _$ReturnSummaryDetailsEventCopyWithImpl<$Res, _$DownloadFileImpl>
+    implements _$$DownloadFileImplCopyWith<$Res> {
+  __$$DownloadFileImplCopyWithImpl(
+      _$DownloadFileImpl _value, $Res Function(_$DownloadFileImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -361,7 +364,7 @@ class __$$_DownloadFileCopyWithImpl<$Res>
   $Res call({
     Object? file = null,
   }) {
-    return _then(_$_DownloadFile(
+    return _then(_$DownloadFileImpl(
       file: null == file
           ? _value.file
           : file // ignore: cast_nullable_to_non_nullable
@@ -380,8 +383,8 @@ class __$$_DownloadFileCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_DownloadFile implements _DownloadFile {
-  const _$_DownloadFile({required this.file});
+class _$DownloadFileImpl implements _DownloadFile {
+  const _$DownloadFileImpl({required this.file});
 
   @override
   final ReturnRequestAttachment file;
@@ -392,10 +395,10 @@ class _$_DownloadFile implements _DownloadFile {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_DownloadFile &&
+            other is _$DownloadFileImpl &&
             (identical(other.file, file) || other.file == file));
   }
 
@@ -405,8 +408,8 @@ class _$_DownloadFile implements _DownloadFile {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_DownloadFileCopyWith<_$_DownloadFile> get copyWith =>
-      __$$_DownloadFileCopyWithImpl<_$_DownloadFile>(this, _$identity);
+  _$$DownloadFileImplCopyWith<_$DownloadFileImpl> get copyWith =>
+      __$$DownloadFileImplCopyWithImpl<_$DownloadFileImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -479,11 +482,11 @@ class _$_DownloadFile implements _DownloadFile {
 
 abstract class _DownloadFile implements ReturnSummaryDetailsEvent {
   const factory _DownloadFile({required final ReturnRequestAttachment file}) =
-      _$_DownloadFile;
+      _$DownloadFileImpl;
 
   ReturnRequestAttachment get file;
   @JsonKey(ignore: true)
-  _$$_DownloadFileCopyWith<_$_DownloadFile> get copyWith =>
+  _$$DownloadFileImplCopyWith<_$DownloadFileImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -611,12 +614,12 @@ class _$ReturnSummaryDetailsStateCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_ReturnSummaryDetailsStateCopyWith<$Res>
+abstract class _$$ReturnSummaryDetailsStateImplCopyWith<$Res>
     implements $ReturnSummaryDetailsStateCopyWith<$Res> {
-  factory _$$_ReturnSummaryDetailsStateCopyWith(
-          _$_ReturnSummaryDetailsState value,
-          $Res Function(_$_ReturnSummaryDetailsState) then) =
-      __$$_ReturnSummaryDetailsStateCopyWithImpl<$Res>;
+  factory _$$ReturnSummaryDetailsStateImplCopyWith(
+          _$ReturnSummaryDetailsStateImpl value,
+          $Res Function(_$ReturnSummaryDetailsStateImpl) then) =
+      __$$ReturnSummaryDetailsStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -637,13 +640,13 @@ abstract class _$$_ReturnSummaryDetailsStateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_ReturnSummaryDetailsStateCopyWithImpl<$Res>
+class __$$ReturnSummaryDetailsStateImplCopyWithImpl<$Res>
     extends _$ReturnSummaryDetailsStateCopyWithImpl<$Res,
-        _$_ReturnSummaryDetailsState>
-    implements _$$_ReturnSummaryDetailsStateCopyWith<$Res> {
-  __$$_ReturnSummaryDetailsStateCopyWithImpl(
-      _$_ReturnSummaryDetailsState _value,
-      $Res Function(_$_ReturnSummaryDetailsState) _then)
+        _$ReturnSummaryDetailsStateImpl>
+    implements _$$ReturnSummaryDetailsStateImplCopyWith<$Res> {
+  __$$ReturnSummaryDetailsStateImplCopyWithImpl(
+      _$ReturnSummaryDetailsStateImpl _value,
+      $Res Function(_$ReturnSummaryDetailsStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -657,7 +660,7 @@ class __$$_ReturnSummaryDetailsStateCopyWithImpl<$Res>
     Object? downloadedAttachment = null,
     Object? downloadFailureOrSuccessOption = null,
   }) {
-    return _then(_$_ReturnSummaryDetailsState(
+    return _then(_$ReturnSummaryDetailsStateImpl(
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
@@ -692,8 +695,8 @@ class __$$_ReturnSummaryDetailsStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_ReturnSummaryDetailsState implements _ReturnSummaryDetailsState {
-  const _$_ReturnSummaryDetailsState(
+class _$ReturnSummaryDetailsStateImpl implements _ReturnSummaryDetailsState {
+  const _$ReturnSummaryDetailsStateImpl(
       {required this.isLoading,
       required this.failureOrSuccessOption,
       required this.requestInformation,
@@ -731,10 +734,10 @@ class _$_ReturnSummaryDetailsState implements _ReturnSummaryDetailsState {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ReturnSummaryDetailsState &&
+            other is _$ReturnSummaryDetailsStateImpl &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
             (identical(other.failureOrSuccessOption, failureOrSuccessOption) ||
@@ -768,9 +771,9 @@ class _$_ReturnSummaryDetailsState implements _ReturnSummaryDetailsState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ReturnSummaryDetailsStateCopyWith<_$_ReturnSummaryDetailsState>
-      get copyWith => __$$_ReturnSummaryDetailsStateCopyWithImpl<
-          _$_ReturnSummaryDetailsState>(this, _$identity);
+  _$$ReturnSummaryDetailsStateImplCopyWith<_$ReturnSummaryDetailsStateImpl>
+      get copyWith => __$$ReturnSummaryDetailsStateImplCopyWithImpl<
+          _$ReturnSummaryDetailsStateImpl>(this, _$identity);
 }
 
 abstract class _ReturnSummaryDetailsState implements ReturnSummaryDetailsState {
@@ -782,7 +785,7 @@ abstract class _ReturnSummaryDetailsState implements ReturnSummaryDetailsState {
       required final List<ReturnRequestAttachment> downloadingAttachments,
       required final ReturnRequestAttachment downloadedAttachment,
       required final Option<Either<ApiFailure, dynamic>>
-          downloadFailureOrSuccessOption}) = _$_ReturnSummaryDetailsState;
+          downloadFailureOrSuccessOption}) = _$ReturnSummaryDetailsStateImpl;
 
   @override
   bool get isLoading;
@@ -800,6 +803,6 @@ abstract class _ReturnSummaryDetailsState implements ReturnSummaryDetailsState {
   Option<Either<ApiFailure, dynamic>> get downloadFailureOrSuccessOption;
   @override
   @JsonKey(ignore: true)
-  _$$_ReturnSummaryDetailsStateCopyWith<_$_ReturnSummaryDetailsState>
+  _$$ReturnSummaryDetailsStateImplCopyWith<_$ReturnSummaryDetailsStateImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

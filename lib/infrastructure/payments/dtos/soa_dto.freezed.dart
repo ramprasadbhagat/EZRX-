@@ -12,7 +12,7 @@ part of 'soa_dto.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 SoaDto _$SoaDtoFromJson(Map<String, dynamic> json) {
   return _SoaDto.fromJson(json);
@@ -61,19 +61,21 @@ class _$SoaDtoCopyWithImpl<$Res, $Val extends SoaDto>
 }
 
 /// @nodoc
-abstract class _$$_SoaDtoCopyWith<$Res> implements $SoaDtoCopyWith<$Res> {
-  factory _$$_SoaDtoCopyWith(_$_SoaDto value, $Res Function(_$_SoaDto) then) =
-      __$$_SoaDtoCopyWithImpl<$Res>;
+abstract class _$$SoaDtoImplCopyWith<$Res> implements $SoaDtoCopyWith<$Res> {
+  factory _$$SoaDtoImplCopyWith(
+          _$SoaDtoImpl value, $Res Function(_$SoaDtoImpl) then) =
+      __$$SoaDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({@JsonKey(name: 'name', defaultValue: '') String name});
 }
 
 /// @nodoc
-class __$$_SoaDtoCopyWithImpl<$Res>
-    extends _$SoaDtoCopyWithImpl<$Res, _$_SoaDto>
-    implements _$$_SoaDtoCopyWith<$Res> {
-  __$$_SoaDtoCopyWithImpl(_$_SoaDto _value, $Res Function(_$_SoaDto) _then)
+class __$$SoaDtoImplCopyWithImpl<$Res>
+    extends _$SoaDtoCopyWithImpl<$Res, _$SoaDtoImpl>
+    implements _$$SoaDtoImplCopyWith<$Res> {
+  __$$SoaDtoImplCopyWithImpl(
+      _$SoaDtoImpl _value, $Res Function(_$SoaDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -81,7 +83,7 @@ class __$$_SoaDtoCopyWithImpl<$Res>
   $Res call({
     Object? name = null,
   }) {
-    return _then(_$_SoaDto(
+    return _then(_$SoaDtoImpl(
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -92,12 +94,12 @@ class __$$_SoaDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_SoaDto extends _SoaDto {
-  _$_SoaDto({@JsonKey(name: 'name', defaultValue: '') required this.name})
+class _$SoaDtoImpl extends _SoaDto {
+  _$SoaDtoImpl({@JsonKey(name: 'name', defaultValue: '') required this.name})
       : super._();
 
-  factory _$_SoaDto.fromJson(Map<String, dynamic> json) =>
-      _$$_SoaDtoFromJson(json);
+  factory _$SoaDtoImpl.fromJson(Map<String, dynamic> json) =>
+      _$$SoaDtoImplFromJson(json);
 
   @override
   @JsonKey(name: 'name', defaultValue: '')
@@ -109,10 +111,10 @@ class _$_SoaDto extends _SoaDto {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_SoaDto &&
+            other is _$SoaDtoImpl &&
             (identical(other.name, name) || other.name == name));
   }
 
@@ -123,12 +125,12 @@ class _$_SoaDto extends _SoaDto {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_SoaDtoCopyWith<_$_SoaDto> get copyWith =>
-      __$$_SoaDtoCopyWithImpl<_$_SoaDto>(this, _$identity);
+  _$$SoaDtoImplCopyWith<_$SoaDtoImpl> get copyWith =>
+      __$$SoaDtoImplCopyWithImpl<_$SoaDtoImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_SoaDtoToJson(
+    return _$$SoaDtoImplToJson(
       this,
     );
   }
@@ -137,16 +139,16 @@ class _$_SoaDto extends _SoaDto {
 abstract class _SoaDto extends SoaDto {
   factory _SoaDto(
       {@JsonKey(name: 'name', defaultValue: '')
-      required final String name}) = _$_SoaDto;
+      required final String name}) = _$SoaDtoImpl;
   _SoaDto._() : super._();
 
-  factory _SoaDto.fromJson(Map<String, dynamic> json) = _$_SoaDto.fromJson;
+  factory _SoaDto.fromJson(Map<String, dynamic> json) = _$SoaDtoImpl.fromJson;
 
   @override
   @JsonKey(name: 'name', defaultValue: '')
   String get name;
   @override
   @JsonKey(ignore: true)
-  _$$_SoaDtoCopyWith<_$_SoaDto> get copyWith =>
+  _$$SoaDtoImplCopyWith<_$SoaDtoImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

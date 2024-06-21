@@ -6,8 +6,8 @@ part of 'license_dto.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_licenseDto _$$_licenseDtoFromJson(Map<String, dynamic> json) =>
-    _$_licenseDto(
+_$licenseDtoImpl _$$licenseDtoImplFromJson(Map<String, dynamic> json) =>
+    _$licenseDtoImpl(
       licenceType: json['licenceType'] as String? ?? '',
       licenseDescription: json['licenseDescription'] as String? ?? '',
       licenseNumber: json['licenseNumber'] as String? ?? '',
@@ -15,7 +15,7 @@ _$_licenseDto _$$_licenseDtoFromJson(Map<String, dynamic> json) =>
       validTo: dateTimeStringFormatCheck(json, 'validTo') as String? ?? '',
     );
 
-Map<String, dynamic> _$$_licenseDtoToJson(_$_licenseDto instance) =>
+Map<String, dynamic> _$$licenseDtoImplToJson(_$licenseDtoImpl instance) =>
     <String, dynamic>{
       'licenceType': instance.licenceType,
       'licenseDescription': instance.licenseDescription,

@@ -12,7 +12,7 @@ part of 'role.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$Role {
@@ -73,18 +73,20 @@ class _$RoleCopyWithImpl<$Res, $Val extends Role>
 }
 
 /// @nodoc
-abstract class _$$_RoleCopyWith<$Res> implements $RoleCopyWith<$Res> {
-  factory _$$_RoleCopyWith(_$_Role value, $Res Function(_$_Role) then) =
-      __$$_RoleCopyWithImpl<$Res>;
+abstract class _$$RoleImplCopyWith<$Res> implements $RoleCopyWith<$Res> {
+  factory _$$RoleImplCopyWith(
+          _$RoleImpl value, $Res Function(_$RoleImpl) then) =
+      __$$RoleImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String id, String name, RoleType type, String description});
 }
 
 /// @nodoc
-class __$$_RoleCopyWithImpl<$Res> extends _$RoleCopyWithImpl<$Res, _$_Role>
-    implements _$$_RoleCopyWith<$Res> {
-  __$$_RoleCopyWithImpl(_$_Role _value, $Res Function(_$_Role) _then)
+class __$$RoleImplCopyWithImpl<$Res>
+    extends _$RoleCopyWithImpl<$Res, _$RoleImpl>
+    implements _$$RoleImplCopyWith<$Res> {
+  __$$RoleImplCopyWithImpl(_$RoleImpl _value, $Res Function(_$RoleImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -95,7 +97,7 @@ class __$$_RoleCopyWithImpl<$Res> extends _$RoleCopyWithImpl<$Res, _$_Role>
     Object? type = null,
     Object? description = null,
   }) {
-    return _then(_$_Role(
+    return _then(_$RoleImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -118,8 +120,8 @@ class __$$_RoleCopyWithImpl<$Res> extends _$RoleCopyWithImpl<$Res, _$_Role>
 
 /// @nodoc
 
-class _$_Role extends _Role {
-  const _$_Role(
+class _$RoleImpl extends _Role {
+  const _$RoleImpl(
       {required this.id,
       required this.name,
       required this.type,
@@ -141,10 +143,10 @@ class _$_Role extends _Role {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Role &&
+            other is _$RoleImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.type, type) || other.type == type) &&
@@ -158,8 +160,8 @@ class _$_Role extends _Role {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_RoleCopyWith<_$_Role> get copyWith =>
-      __$$_RoleCopyWithImpl<_$_Role>(this, _$identity);
+  _$$RoleImplCopyWith<_$RoleImpl> get copyWith =>
+      __$$RoleImplCopyWithImpl<_$RoleImpl>(this, _$identity);
 }
 
 abstract class _Role extends Role {
@@ -167,7 +169,7 @@ abstract class _Role extends Role {
       {required final String id,
       required final String name,
       required final RoleType type,
-      required final String description}) = _$_Role;
+      required final String description}) = _$RoleImpl;
   const _Role._() : super._();
 
   @override
@@ -180,5 +182,6 @@ abstract class _Role extends Role {
   String get description;
   @override
   @JsonKey(ignore: true)
-  _$$_RoleCopyWith<_$_Role> get copyWith => throw _privateConstructorUsedError;
+  _$$RoleImplCopyWith<_$RoleImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }

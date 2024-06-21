@@ -12,7 +12,7 @@ part of 'combo_material_item_dto.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 ComboMaterialItemDto _$ComboMaterialItemDtoFromJson(Map<String, dynamic> json) {
   return _ComboMaterialItemDto.fromJson(json);
@@ -263,11 +263,11 @@ class _$ComboMaterialItemDtoCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_ComboMaterialItemDtoCopyWith<$Res>
+abstract class _$$ComboMaterialItemDtoImplCopyWith<$Res>
     implements $ComboMaterialItemDtoCopyWith<$Res> {
-  factory _$$_ComboMaterialItemDtoCopyWith(_$_ComboMaterialItemDto value,
-          $Res Function(_$_ComboMaterialItemDto) then) =
-      __$$_ComboMaterialItemDtoCopyWithImpl<$Res>;
+  factory _$$ComboMaterialItemDtoImplCopyWith(_$ComboMaterialItemDtoImpl value,
+          $Res Function(_$ComboMaterialItemDtoImpl) then) =
+      __$$ComboMaterialItemDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -305,11 +305,11 @@ abstract class _$$_ComboMaterialItemDtoCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_ComboMaterialItemDtoCopyWithImpl<$Res>
-    extends _$ComboMaterialItemDtoCopyWithImpl<$Res, _$_ComboMaterialItemDto>
-    implements _$$_ComboMaterialItemDtoCopyWith<$Res> {
-  __$$_ComboMaterialItemDtoCopyWithImpl(_$_ComboMaterialItemDto _value,
-      $Res Function(_$_ComboMaterialItemDto) _then)
+class __$$ComboMaterialItemDtoImplCopyWithImpl<$Res>
+    extends _$ComboMaterialItemDtoCopyWithImpl<$Res, _$ComboMaterialItemDtoImpl>
+    implements _$$ComboMaterialItemDtoImplCopyWith<$Res> {
+  __$$ComboMaterialItemDtoImplCopyWithImpl(_$ComboMaterialItemDtoImpl _value,
+      $Res Function(_$ComboMaterialItemDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -341,7 +341,7 @@ class __$$_ComboMaterialItemDtoCopyWithImpl<$Res>
     Object? hidePrice = null,
     Object? taxClassification = null,
   }) {
-    return _then(_$_ComboMaterialItemDto(
+    return _then(_$ComboMaterialItemDtoImpl(
       productId: null == productId
           ? _value.productId
           : productId // ignore: cast_nullable_to_non_nullable
@@ -448,8 +448,8 @@ class __$$_ComboMaterialItemDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_ComboMaterialItemDto extends _ComboMaterialItemDto {
-  const _$_ComboMaterialItemDto(
+class _$ComboMaterialItemDtoImpl extends _ComboMaterialItemDto {
+  const _$ComboMaterialItemDtoImpl(
       {@JsonKey(name: 'productID', defaultValue: '') required this.productId,
       @JsonKey(name: 'parentID', defaultValue: '') required this.parentId,
       @JsonKey(name: 'setNo', defaultValue: '') required this.setNo,
@@ -488,8 +488,8 @@ class _$_ComboMaterialItemDto extends _ComboMaterialItemDto {
       required this.taxClassification})
       : super._();
 
-  factory _$_ComboMaterialItemDto.fromJson(Map<String, dynamic> json) =>
-      _$$_ComboMaterialItemDtoFromJson(json);
+  factory _$ComboMaterialItemDtoImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ComboMaterialItemDtoImplFromJson(json);
 
   @override
   @JsonKey(name: 'productID', defaultValue: '')
@@ -573,10 +573,10 @@ class _$_ComboMaterialItemDto extends _ComboMaterialItemDto {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ComboMaterialItemDto &&
+            other is _$ComboMaterialItemDtoImpl &&
             (identical(other.productId, productId) ||
                 other.productId == productId) &&
             (identical(other.parentId, parentId) ||
@@ -656,13 +656,14 @@ class _$_ComboMaterialItemDto extends _ComboMaterialItemDto {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ComboMaterialItemDtoCopyWith<_$_ComboMaterialItemDto> get copyWith =>
-      __$$_ComboMaterialItemDtoCopyWithImpl<_$_ComboMaterialItemDto>(
-          this, _$identity);
+  _$$ComboMaterialItemDtoImplCopyWith<_$ComboMaterialItemDtoImpl>
+      get copyWith =>
+          __$$ComboMaterialItemDtoImplCopyWithImpl<_$ComboMaterialItemDtoImpl>(
+              this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_ComboMaterialItemDtoToJson(
+    return _$$ComboMaterialItemDtoImplToJson(
       this,
     );
   }
@@ -711,11 +712,11 @@ abstract class _ComboMaterialItemDto extends ComboMaterialItemDto {
       @JsonKey(name: 'hidePrice', defaultValue: false)
       required final bool hidePrice,
       @JsonKey(name: 'taxClassification', defaultValue: '')
-      required final String taxClassification}) = _$_ComboMaterialItemDto;
+      required final String taxClassification}) = _$ComboMaterialItemDtoImpl;
   const _ComboMaterialItemDto._() : super._();
 
   factory _ComboMaterialItemDto.fromJson(Map<String, dynamic> json) =
-      _$_ComboMaterialItemDto.fromJson;
+      _$ComboMaterialItemDtoImpl.fromJson;
 
   @override
   @JsonKey(name: 'productID', defaultValue: '')
@@ -794,6 +795,6 @@ abstract class _ComboMaterialItemDto extends ComboMaterialItemDto {
   String get taxClassification;
   @override
   @JsonKey(ignore: true)
-  _$$_ComboMaterialItemDtoCopyWith<_$_ComboMaterialItemDto> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$ComboMaterialItemDtoImplCopyWith<_$ComboMaterialItemDtoImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }

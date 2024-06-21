@@ -12,7 +12,7 @@ part of 'price_override_exception.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$PriceException {
@@ -69,25 +69,25 @@ class _$PriceExceptionCopyWithImpl<$Res, $Val extends PriceException>
 }
 
 /// @nodoc
-abstract class _$$_PriceNotFoundCopyWith<$Res> {
-  factory _$$_PriceNotFoundCopyWith(
-          _$_PriceNotFound value, $Res Function(_$_PriceNotFound) then) =
-      __$$_PriceNotFoundCopyWithImpl<$Res>;
+abstract class _$$PriceNotFoundImplCopyWith<$Res> {
+  factory _$$PriceNotFoundImplCopyWith(
+          _$PriceNotFoundImpl value, $Res Function(_$PriceNotFoundImpl) then) =
+      __$$PriceNotFoundImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_PriceNotFoundCopyWithImpl<$Res>
-    extends _$PriceExceptionCopyWithImpl<$Res, _$_PriceNotFound>
-    implements _$$_PriceNotFoundCopyWith<$Res> {
-  __$$_PriceNotFoundCopyWithImpl(
-      _$_PriceNotFound _value, $Res Function(_$_PriceNotFound) _then)
+class __$$PriceNotFoundImplCopyWithImpl<$Res>
+    extends _$PriceExceptionCopyWithImpl<$Res, _$PriceNotFoundImpl>
+    implements _$$PriceNotFoundImplCopyWith<$Res> {
+  __$$PriceNotFoundImplCopyWithImpl(
+      _$PriceNotFoundImpl _value, $Res Function(_$PriceNotFoundImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_PriceNotFound implements _PriceNotFound {
-  const _$_PriceNotFound();
+class _$PriceNotFoundImpl implements _PriceNotFound {
+  const _$PriceNotFoundImpl();
 
   @override
   String toString() {
@@ -95,9 +95,9 @@ class _$_PriceNotFound implements _PriceNotFound {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_PriceNotFound);
+        (other.runtimeType == runtimeType && other is _$PriceNotFoundImpl);
   }
 
   @override
@@ -161,5 +161,5 @@ class _$_PriceNotFound implements _PriceNotFound {
 }
 
 abstract class _PriceNotFound implements PriceException {
-  const factory _PriceNotFound() = _$_PriceNotFound;
+  const factory _PriceNotFound() = _$PriceNotFoundImpl;
 }

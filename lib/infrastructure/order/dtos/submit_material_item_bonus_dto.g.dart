@@ -6,15 +6,15 @@ part of 'submit_material_item_bonus_dto.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_SubmitMaterialItemBonusDto _$$_SubmitMaterialItemBonusDtoFromJson(
+_$SubmitMaterialItemBonusDtoImpl _$$SubmitMaterialItemBonusDtoImplFromJson(
         Map<String, dynamic> json) =>
-    _$_SubmitMaterialItemBonusDto(
+    _$SubmitMaterialItemBonusDtoImpl(
       materialNumber: json['materialNumber'] as String? ?? '',
-      qty: json['qty'] as int? ?? 0,
+      qty: (json['qty'] as num?)?.toInt() ?? 0,
     );
 
-Map<String, dynamic> _$$_SubmitMaterialItemBonusDtoToJson(
-        _$_SubmitMaterialItemBonusDto instance) =>
+Map<String, dynamic> _$$SubmitMaterialItemBonusDtoImplToJson(
+        _$SubmitMaterialItemBonusDtoImpl instance) =>
     <String, dynamic>{
       'materialNumber': instance.materialNumber,
       'qty': instance.qty,

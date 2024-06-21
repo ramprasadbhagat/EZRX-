@@ -12,7 +12,7 @@ part of 'combo_deal_sku_tier_dto.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 ComboDealSKUTierDto _$ComboDealSKUTierDtoFromJson(Map<String, dynamic> json) {
   return _ComboDealSKUTierDto.fromJson(json);
@@ -97,11 +97,11 @@ class _$ComboDealSKUTierDtoCopyWithImpl<$Res, $Val extends ComboDealSKUTierDto>
 }
 
 /// @nodoc
-abstract class _$$_ComboDealSKUTierDtoCopyWith<$Res>
+abstract class _$$ComboDealSKUTierDtoImplCopyWith<$Res>
     implements $ComboDealSKUTierDtoCopyWith<$Res> {
-  factory _$$_ComboDealSKUTierDtoCopyWith(_$_ComboDealSKUTierDto value,
-          $Res Function(_$_ComboDealSKUTierDto) then) =
-      __$$_ComboDealSKUTierDtoCopyWithImpl<$Res>;
+  factory _$$ComboDealSKUTierDtoImplCopyWith(_$ComboDealSKUTierDtoImpl value,
+          $Res Function(_$ComboDealSKUTierDtoImpl) then) =
+      __$$ComboDealSKUTierDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -118,11 +118,11 @@ abstract class _$$_ComboDealSKUTierDtoCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_ComboDealSKUTierDtoCopyWithImpl<$Res>
-    extends _$ComboDealSKUTierDtoCopyWithImpl<$Res, _$_ComboDealSKUTierDto>
-    implements _$$_ComboDealSKUTierDtoCopyWith<$Res> {
-  __$$_ComboDealSKUTierDtoCopyWithImpl(_$_ComboDealSKUTierDto _value,
-      $Res Function(_$_ComboDealSKUTierDto) _then)
+class __$$ComboDealSKUTierDtoImplCopyWithImpl<$Res>
+    extends _$ComboDealSKUTierDtoCopyWithImpl<$Res, _$ComboDealSKUTierDtoImpl>
+    implements _$$ComboDealSKUTierDtoImplCopyWith<$Res> {
+  __$$ComboDealSKUTierDtoImplCopyWithImpl(_$ComboDealSKUTierDtoImpl _value,
+      $Res Function(_$ComboDealSKUTierDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -133,7 +133,7 @@ class __$$_ComboDealSKUTierDtoCopyWithImpl<$Res>
     Object? minQty = null,
     Object? type = null,
   }) {
-    return _then(_$_ComboDealSKUTierDto(
+    return _then(_$ComboDealSKUTierDtoImpl(
       rate: null == rate
           ? _value.rate
           : rate // ignore: cast_nullable_to_non_nullable
@@ -156,8 +156,8 @@ class __$$_ComboDealSKUTierDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_ComboDealSKUTierDto extends _ComboDealSKUTierDto {
-  const _$_ComboDealSKUTierDto(
+class _$ComboDealSKUTierDtoImpl extends _ComboDealSKUTierDto {
+  const _$ComboDealSKUTierDtoImpl(
       {@StringToDoubleConverter()
       @JsonKey(name: 'rate', defaultValue: 0)
       required this.rate,
@@ -170,8 +170,8 @@ class _$_ComboDealSKUTierDto extends _ComboDealSKUTierDto {
       @JsonKey(name: 'type', defaultValue: '') required this.type})
       : super._();
 
-  factory _$_ComboDealSKUTierDto.fromJson(Map<String, dynamic> json) =>
-      _$$_ComboDealSKUTierDtoFromJson(json);
+  factory _$ComboDealSKUTierDtoImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ComboDealSKUTierDtoImplFromJson(json);
 
   @override
   @StringToDoubleConverter()
@@ -195,10 +195,10 @@ class _$_ComboDealSKUTierDto extends _ComboDealSKUTierDto {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ComboDealSKUTierDto &&
+            other is _$ComboDealSKUTierDtoImpl &&
             (identical(other.rate, rate) || other.rate == rate) &&
             (identical(other.conditionNumber, conditionNumber) ||
                 other.conditionNumber == conditionNumber) &&
@@ -214,13 +214,13 @@ class _$_ComboDealSKUTierDto extends _ComboDealSKUTierDto {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ComboDealSKUTierDtoCopyWith<_$_ComboDealSKUTierDto> get copyWith =>
-      __$$_ComboDealSKUTierDtoCopyWithImpl<_$_ComboDealSKUTierDto>(
+  _$$ComboDealSKUTierDtoImplCopyWith<_$ComboDealSKUTierDtoImpl> get copyWith =>
+      __$$ComboDealSKUTierDtoImplCopyWithImpl<_$ComboDealSKUTierDtoImpl>(
           this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_ComboDealSKUTierDtoToJson(
+    return _$$ComboDealSKUTierDtoImplToJson(
       this,
     );
   }
@@ -238,11 +238,11 @@ abstract class _ComboDealSKUTierDto extends ComboDealSKUTierDto {
       @JsonKey(name: 'minQty', defaultValue: 0)
       required final int minQty,
       @JsonKey(name: 'type', defaultValue: '')
-      required final String type}) = _$_ComboDealSKUTierDto;
+      required final String type}) = _$ComboDealSKUTierDtoImpl;
   const _ComboDealSKUTierDto._() : super._();
 
   factory _ComboDealSKUTierDto.fromJson(Map<String, dynamic> json) =
-      _$_ComboDealSKUTierDto.fromJson;
+      _$ComboDealSKUTierDtoImpl.fromJson;
 
   @override
   @StringToDoubleConverter()
@@ -261,6 +261,6 @@ abstract class _ComboDealSKUTierDto extends ComboDealSKUTierDto {
   String get type;
   @override
   @JsonKey(ignore: true)
-  _$$_ComboDealSKUTierDtoCopyWith<_$_ComboDealSKUTierDto> get copyWith =>
+  _$$ComboDealSKUTierDtoImplCopyWith<_$ComboDealSKUTierDtoImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

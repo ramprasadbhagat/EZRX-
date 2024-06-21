@@ -6,13 +6,14 @@ part of 'maintenance_item_dto.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_MaintenanceItemDto _$$_MaintenanceItemDtoFromJson(
+_$MaintenanceItemDtoImpl _$$MaintenanceItemDtoImplFromJson(
         Map<String, dynamic> json) =>
-    _$_MaintenanceItemDto(
+    _$MaintenanceItemDtoImpl(
       id: json['id'] as String? ?? '',
       name: json['name'] as String? ?? '',
       displayName: json['displayName'] as String? ?? '',
-      maxNumberOfItem: getMaximumOfItem(json, 'maxNumberOfItem') as int? ?? 0,
+      maxNumberOfItem:
+          (getMaximumOfItem(json, 'maxNumberOfItem') as num?)?.toInt() ?? 0,
       banners: (getValueList(json, 'banners') as List<dynamic>?)
               ?.map((e) =>
                   MaintenanceBannerDto.fromJson(e as Map<String, dynamic>))
@@ -20,9 +21,9 @@ _$_MaintenanceItemDto _$$_MaintenanceItemDtoFromJson(
           [],
     );
 
-_$_MaintenanceBannerDto _$$_MaintenanceBannerDtoFromJson(
+_$MaintenanceBannerDtoImpl _$$MaintenanceBannerDtoImplFromJson(
         Map<String, dynamic> json) =>
-    _$_MaintenanceBannerDto(
+    _$MaintenanceBannerDtoImpl(
       id: json['id'] as String? ?? '',
       name: json['name'] as String? ?? '',
       template: getName(json, 'template') as String? ?? '',
@@ -43,8 +44,8 @@ _$_MaintenanceBannerDto _$$_MaintenanceBannerDtoFromJson(
       loginType: getValue(json, 'login') as String? ?? '',
     );
 
-Map<String, dynamic> _$$_MaintenanceBannerDtoToJson(
-        _$_MaintenanceBannerDto instance) =>
+Map<String, dynamic> _$$MaintenanceBannerDtoImplToJson(
+        _$MaintenanceBannerDtoImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
@@ -60,29 +61,31 @@ Map<String, dynamic> _$$_MaintenanceBannerDtoToJson(
       'login': instance.loginType,
     };
 
-_$_ApplicableModulesDto _$$_ApplicableModulesDtoFromJson(
+_$ApplicableModulesDtoImpl _$$ApplicableModulesDtoImplFromJson(
         Map<String, dynamic> json) =>
-    _$_ApplicableModulesDto(
+    _$ApplicableModulesDtoImpl(
       id: json['id'] as String? ?? '',
       name: json['name'] as String? ?? '',
       displayName: json['displayName'] as String? ?? '',
     );
 
-Map<String, dynamic> _$$_ApplicableModulesDtoToJson(
-        _$_ApplicableModulesDto instance) =>
+Map<String, dynamic> _$$ApplicableModulesDtoImplToJson(
+        _$ApplicableModulesDtoImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
       'displayName': instance.displayName,
     };
 
-_$_PublishedDateDto _$$_PublishedDateDtoFromJson(Map<String, dynamic> json) =>
-    _$_PublishedDateDto(
+_$PublishedDateDtoImpl _$$PublishedDateDtoImplFromJson(
+        Map<String, dynamic> json) =>
+    _$PublishedDateDtoImpl(
       isoValue: json['isoValue'] as String? ?? '',
       formattedDateValue: json['formattedDateValue'] as String? ?? '',
     );
 
-Map<String, dynamic> _$$_PublishedDateDtoToJson(_$_PublishedDateDto instance) =>
+Map<String, dynamic> _$$PublishedDateDtoImplToJson(
+        _$PublishedDateDtoImpl instance) =>
     <String, dynamic>{
       'isoValue': instance.isoValue,
       'formattedDateValue': instance.formattedDateValue,

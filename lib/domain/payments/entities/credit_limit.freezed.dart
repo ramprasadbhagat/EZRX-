@@ -12,7 +12,7 @@ part of 'credit_limit.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$CreditLimit {
@@ -86,11 +86,11 @@ class _$CreditLimitCopyWithImpl<$Res, $Val extends CreditLimit>
 }
 
 /// @nodoc
-abstract class _$$_CreditLimitCopyWith<$Res>
+abstract class _$$CreditLimitImplCopyWith<$Res>
     implements $CreditLimitCopyWith<$Res> {
-  factory _$$_CreditLimitCopyWith(
-          _$_CreditLimit value, $Res Function(_$_CreditLimit) then) =
-      __$$_CreditLimitCopyWithImpl<$Res>;
+  factory _$$CreditLimitImplCopyWith(
+          _$CreditLimitImpl value, $Res Function(_$CreditLimitImpl) then) =
+      __$$CreditLimitImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -102,11 +102,11 @@ abstract class _$$_CreditLimitCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_CreditLimitCopyWithImpl<$Res>
-    extends _$CreditLimitCopyWithImpl<$Res, _$_CreditLimit>
-    implements _$$_CreditLimitCopyWith<$Res> {
-  __$$_CreditLimitCopyWithImpl(
-      _$_CreditLimit _value, $Res Function(_$_CreditLimit) _then)
+class __$$CreditLimitImplCopyWithImpl<$Res>
+    extends _$CreditLimitCopyWithImpl<$Res, _$CreditLimitImpl>
+    implements _$$CreditLimitImplCopyWith<$Res> {
+  __$$CreditLimitImplCopyWithImpl(
+      _$CreditLimitImpl _value, $Res Function(_$CreditLimitImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -118,7 +118,7 @@ class __$$_CreditLimitCopyWithImpl<$Res>
     Object? creditExposure = null,
     Object? creditBalance = null,
   }) {
-    return _then(_$_CreditLimit(
+    return _then(_$CreditLimitImpl(
       customerCode: null == customerCode
           ? _value.customerCode
           : customerCode // ignore: cast_nullable_to_non_nullable
@@ -145,8 +145,8 @@ class __$$_CreditLimitCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_CreditLimit extends _CreditLimit {
-  const _$_CreditLimit(
+class _$CreditLimitImpl extends _CreditLimit {
+  const _$CreditLimitImpl(
       {required this.customerCode,
       required this.currency,
       required this.creditLimit,
@@ -171,10 +171,10 @@ class _$_CreditLimit extends _CreditLimit {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_CreditLimit &&
+            other is _$CreditLimitImpl &&
             (identical(other.customerCode, customerCode) ||
                 other.customerCode == customerCode) &&
             (identical(other.currency, currency) ||
@@ -194,8 +194,8 @@ class _$_CreditLimit extends _CreditLimit {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_CreditLimitCopyWith<_$_CreditLimit> get copyWith =>
-      __$$_CreditLimitCopyWithImpl<_$_CreditLimit>(this, _$identity);
+  _$$CreditLimitImplCopyWith<_$CreditLimitImpl> get copyWith =>
+      __$$CreditLimitImplCopyWithImpl<_$CreditLimitImpl>(this, _$identity);
 }
 
 abstract class _CreditLimit extends CreditLimit {
@@ -204,7 +204,7 @@ abstract class _CreditLimit extends CreditLimit {
       required final Currency currency,
       required final StringValue creditLimit,
       required final StringValue creditExposure,
-      required final StringValue creditBalance}) = _$_CreditLimit;
+      required final StringValue creditBalance}) = _$CreditLimitImpl;
   const _CreditLimit._() : super._();
 
   @override
@@ -219,6 +219,6 @@ abstract class _CreditLimit extends CreditLimit {
   StringValue get creditBalance;
   @override
   @JsonKey(ignore: true)
-  _$$_CreditLimitCopyWith<_$_CreditLimit> get copyWith =>
+  _$$CreditLimitImplCopyWith<_$CreditLimitImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

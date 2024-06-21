@@ -12,7 +12,7 @@ part of 'combo_deal.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$ComboDeal {
@@ -105,10 +105,11 @@ class _$ComboDealCopyWithImpl<$Res, $Val extends ComboDeal>
 }
 
 /// @nodoc
-abstract class _$$_ComboDealCopyWith<$Res> implements $ComboDealCopyWith<$Res> {
-  factory _$$_ComboDealCopyWith(
-          _$_ComboDeal value, $Res Function(_$_ComboDeal) then) =
-      __$$_ComboDealCopyWithImpl<$Res>;
+abstract class _$$ComboDealImplCopyWith<$Res>
+    implements $ComboDealCopyWith<$Res> {
+  factory _$$ComboDealImplCopyWith(
+          _$ComboDealImpl value, $Res Function(_$ComboDealImpl) then) =
+      __$$ComboDealImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -124,11 +125,11 @@ abstract class _$$_ComboDealCopyWith<$Res> implements $ComboDealCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_ComboDealCopyWithImpl<$Res>
-    extends _$ComboDealCopyWithImpl<$Res, _$_ComboDeal>
-    implements _$$_ComboDealCopyWith<$Res> {
-  __$$_ComboDealCopyWithImpl(
-      _$_ComboDeal _value, $Res Function(_$_ComboDeal) _then)
+class __$$ComboDealImplCopyWithImpl<$Res>
+    extends _$ComboDealCopyWithImpl<$Res, _$ComboDealImpl>
+    implements _$$ComboDealImplCopyWith<$Res> {
+  __$$ComboDealImplCopyWithImpl(
+      _$ComboDealImpl _value, $Res Function(_$ComboDealImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -141,7 +142,7 @@ class __$$_ComboDealCopyWithImpl<$Res>
     Object? materialComboDeals = null,
     Object? flexiTierRule = null,
   }) {
-    return _then(_$_ComboDeal(
+    return _then(_$ComboDealImpl(
       groupDeal: null == groupDeal
           ? _value.groupDeal
           : groupDeal // ignore: cast_nullable_to_non_nullable
@@ -172,8 +173,8 @@ class __$$_ComboDealCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_ComboDeal extends _ComboDeal {
-  const _$_ComboDeal(
+class _$ComboDealImpl extends _ComboDeal {
+  const _$ComboDealImpl(
       {required this.groupDeal,
       required final List<ComboDealSKUTier> flexiSKUTier,
       required final List<ComboDealQtyTier> flexiQtyTier,
@@ -236,10 +237,10 @@ class _$_ComboDeal extends _ComboDeal {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ComboDeal &&
+            other is _$ComboDealImpl &&
             (identical(other.groupDeal, groupDeal) ||
                 other.groupDeal == groupDeal) &&
             const DeepCollectionEquality()
@@ -267,8 +268,8 @@ class _$_ComboDeal extends _ComboDeal {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ComboDealCopyWith<_$_ComboDeal> get copyWith =>
-      __$$_ComboDealCopyWithImpl<_$_ComboDeal>(this, _$identity);
+  _$$ComboDealImplCopyWith<_$ComboDealImpl> get copyWith =>
+      __$$ComboDealImplCopyWithImpl<_$ComboDealImpl>(this, _$identity);
 }
 
 abstract class _ComboDeal extends ComboDeal {
@@ -278,7 +279,7 @@ abstract class _ComboDeal extends ComboDeal {
       required final List<ComboDealQtyTier> flexiQtyTier,
       required final List<ComboDealAmountTier> flexiAmountTier,
       required final List<ComboDealMaterialSet> materialComboDeals,
-      required final List<ComboDealTierRule> flexiTierRule}) = _$_ComboDeal;
+      required final List<ComboDealTierRule> flexiTierRule}) = _$ComboDealImpl;
   const _ComboDeal._() : super._();
 
   @override
@@ -295,6 +296,6 @@ abstract class _ComboDeal extends ComboDeal {
   List<ComboDealTierRule> get flexiTierRule;
   @override
   @JsonKey(ignore: true)
-  _$$_ComboDealCopyWith<_$_ComboDeal> get copyWith =>
+  _$$ComboDealImplCopyWith<_$ComboDealImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

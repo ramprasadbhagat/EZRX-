@@ -12,7 +12,7 @@ part of 'admin_po_attachment_filter_dto.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 AdminPoAttachmentFilterDto _$AdminPoAttachmentFilterDtoFromJson(
     Map<String, dynamic> json) {
@@ -113,12 +113,12 @@ class _$AdminPoAttachmentFilterDtoCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_AdminPoAttachmentFilterDtoCopyWith<$Res>
+abstract class _$$AdminPoAttachmentFilterDtoImplCopyWith<$Res>
     implements $AdminPoAttachmentFilterDtoCopyWith<$Res> {
-  factory _$$_AdminPoAttachmentFilterDtoCopyWith(
-          _$_AdminPoAttachmentFilterDto value,
-          $Res Function(_$_AdminPoAttachmentFilterDto) then) =
-      __$$_AdminPoAttachmentFilterDtoCopyWithImpl<$Res>;
+  factory _$$AdminPoAttachmentFilterDtoImplCopyWith(
+          _$AdminPoAttachmentFilterDtoImpl value,
+          $Res Function(_$AdminPoAttachmentFilterDtoImpl) then) =
+      __$$AdminPoAttachmentFilterDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -137,13 +137,13 @@ abstract class _$$_AdminPoAttachmentFilterDtoCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_AdminPoAttachmentFilterDtoCopyWithImpl<$Res>
+class __$$AdminPoAttachmentFilterDtoImplCopyWithImpl<$Res>
     extends _$AdminPoAttachmentFilterDtoCopyWithImpl<$Res,
-        _$_AdminPoAttachmentFilterDto>
-    implements _$$_AdminPoAttachmentFilterDtoCopyWith<$Res> {
-  __$$_AdminPoAttachmentFilterDtoCopyWithImpl(
-      _$_AdminPoAttachmentFilterDto _value,
-      $Res Function(_$_AdminPoAttachmentFilterDto) _then)
+        _$AdminPoAttachmentFilterDtoImpl>
+    implements _$$AdminPoAttachmentFilterDtoImplCopyWith<$Res> {
+  __$$AdminPoAttachmentFilterDtoImplCopyWithImpl(
+      _$AdminPoAttachmentFilterDtoImpl _value,
+      $Res Function(_$AdminPoAttachmentFilterDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -156,7 +156,7 @@ class __$$_AdminPoAttachmentFilterDtoCopyWithImpl<$Res>
     Object? toDate = null,
     Object? fromDate = null,
   }) {
-    return _then(_$_AdminPoAttachmentFilterDto(
+    return _then(_$AdminPoAttachmentFilterDtoImpl(
       orderNumber: null == orderNumber
           ? _value.orderNumber
           : orderNumber // ignore: cast_nullable_to_non_nullable
@@ -187,8 +187,8 @@ class __$$_AdminPoAttachmentFilterDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_AdminPoAttachmentFilterDto extends _AdminPoAttachmentFilterDto {
-  _$_AdminPoAttachmentFilterDto(
+class _$AdminPoAttachmentFilterDtoImpl extends _AdminPoAttachmentFilterDto {
+  _$AdminPoAttachmentFilterDtoImpl(
       {@JsonKey(name: 'orderNumber', defaultValue: '', toJson: overrideToJson)
       required this.orderNumber,
       @JsonKey(name: 'exRxNo', defaultValue: '', toJson: overrideToJson)
@@ -203,8 +203,9 @@ class _$_AdminPoAttachmentFilterDto extends _AdminPoAttachmentFilterDto {
       required this.fromDate})
       : super._();
 
-  factory _$_AdminPoAttachmentFilterDto.fromJson(Map<String, dynamic> json) =>
-      _$$_AdminPoAttachmentFilterDtoFromJson(json);
+  factory _$AdminPoAttachmentFilterDtoImpl.fromJson(
+          Map<String, dynamic> json) =>
+      _$$AdminPoAttachmentFilterDtoImplFromJson(json);
 
   @override
   @JsonKey(name: 'orderNumber', defaultValue: '', toJson: overrideToJson)
@@ -231,10 +232,10 @@ class _$_AdminPoAttachmentFilterDto extends _AdminPoAttachmentFilterDto {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_AdminPoAttachmentFilterDto &&
+            other is _$AdminPoAttachmentFilterDtoImpl &&
             (identical(other.orderNumber, orderNumber) ||
                 other.orderNumber == orderNumber) &&
             (identical(other.exRxNo, exRxNo) || other.exRxNo == exRxNo) &&
@@ -254,13 +255,13 @@ class _$_AdminPoAttachmentFilterDto extends _AdminPoAttachmentFilterDto {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_AdminPoAttachmentFilterDtoCopyWith<_$_AdminPoAttachmentFilterDto>
-      get copyWith => __$$_AdminPoAttachmentFilterDtoCopyWithImpl<
-          _$_AdminPoAttachmentFilterDto>(this, _$identity);
+  _$$AdminPoAttachmentFilterDtoImplCopyWith<_$AdminPoAttachmentFilterDtoImpl>
+      get copyWith => __$$AdminPoAttachmentFilterDtoImplCopyWithImpl<
+          _$AdminPoAttachmentFilterDtoImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_AdminPoAttachmentFilterDtoToJson(
+    return _$$AdminPoAttachmentFilterDtoImplToJson(
       this,
     );
   }
@@ -279,11 +280,11 @@ abstract class _AdminPoAttachmentFilterDto extends AdminPoAttachmentFilterDto {
       @JsonKey(name: 'toDate', defaultValue: '', toJson: overrideToJson)
       required final String toDate,
       @JsonKey(name: 'fromDate', defaultValue: '', toJson: overrideToJson)
-      required final String fromDate}) = _$_AdminPoAttachmentFilterDto;
+      required final String fromDate}) = _$AdminPoAttachmentFilterDtoImpl;
   _AdminPoAttachmentFilterDto._() : super._();
 
   factory _AdminPoAttachmentFilterDto.fromJson(Map<String, dynamic> json) =
-      _$_AdminPoAttachmentFilterDto.fromJson;
+      _$AdminPoAttachmentFilterDtoImpl.fromJson;
 
   @override
   @JsonKey(name: 'orderNumber', defaultValue: '', toJson: overrideToJson)
@@ -305,6 +306,6 @@ abstract class _AdminPoAttachmentFilterDto extends AdminPoAttachmentFilterDto {
   String get fromDate;
   @override
   @JsonKey(ignore: true)
-  _$$_AdminPoAttachmentFilterDtoCopyWith<_$_AdminPoAttachmentFilterDto>
+  _$$AdminPoAttachmentFilterDtoImplCopyWith<_$AdminPoAttachmentFilterDtoImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

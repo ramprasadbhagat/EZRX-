@@ -6,17 +6,17 @@ part of 'order_history_details_order_items_details_dto.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_OrderHistoryDetailsOrderItemDetailsDto
-    _$$_OrderHistoryDetailsOrderItemDetailsDtoFromJson(
+_$OrderHistoryDetailsOrderItemDetailsDtoImpl
+    _$$OrderHistoryDetailsOrderItemDetailsDtoImplFromJson(
             Map<String, dynamic> json) =>
-        _$_OrderHistoryDetailsOrderItemDetailsDto(
+        _$OrderHistoryDetailsOrderItemDetailsDtoImpl(
           discountCode: json['DiscountCode'] as String? ?? '',
           discountDescription: json['DiscountDescription'] as String? ?? '',
           rate: json['Rate'] as String? ?? '',
         );
 
-Map<String, dynamic> _$$_OrderHistoryDetailsOrderItemDetailsDtoToJson(
-        _$_OrderHistoryDetailsOrderItemDetailsDto instance) =>
+Map<String, dynamic> _$$OrderHistoryDetailsOrderItemDetailsDtoImplToJson(
+        _$OrderHistoryDetailsOrderItemDetailsDtoImpl instance) =>
     <String, dynamic>{
       'DiscountCode': instance.discountCode,
       'DiscountDescription': instance.discountDescription,

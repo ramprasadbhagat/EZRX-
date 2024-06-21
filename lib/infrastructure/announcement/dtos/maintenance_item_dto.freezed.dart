@@ -12,7 +12,7 @@ part of 'maintenance_item_dto.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 MaintenanceItemDto _$MaintenanceItemDtoFromJson(Map<String, dynamic> json) {
   return _MaintenanceItemDto.fromJson(json);
@@ -99,11 +99,11 @@ class _$MaintenanceItemDtoCopyWithImpl<$Res, $Val extends MaintenanceItemDto>
 }
 
 /// @nodoc
-abstract class _$$_MaintenanceItemDtoCopyWith<$Res>
+abstract class _$$MaintenanceItemDtoImplCopyWith<$Res>
     implements $MaintenanceItemDtoCopyWith<$Res> {
-  factory _$$_MaintenanceItemDtoCopyWith(_$_MaintenanceItemDto value,
-          $Res Function(_$_MaintenanceItemDto) then) =
-      __$$_MaintenanceItemDtoCopyWithImpl<$Res>;
+  factory _$$MaintenanceItemDtoImplCopyWith(_$MaintenanceItemDtoImpl value,
+          $Res Function(_$MaintenanceItemDtoImpl) then) =
+      __$$MaintenanceItemDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -118,11 +118,11 @@ abstract class _$$_MaintenanceItemDtoCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_MaintenanceItemDtoCopyWithImpl<$Res>
-    extends _$MaintenanceItemDtoCopyWithImpl<$Res, _$_MaintenanceItemDto>
-    implements _$$_MaintenanceItemDtoCopyWith<$Res> {
-  __$$_MaintenanceItemDtoCopyWithImpl(
-      _$_MaintenanceItemDto _value, $Res Function(_$_MaintenanceItemDto) _then)
+class __$$MaintenanceItemDtoImplCopyWithImpl<$Res>
+    extends _$MaintenanceItemDtoCopyWithImpl<$Res, _$MaintenanceItemDtoImpl>
+    implements _$$MaintenanceItemDtoImplCopyWith<$Res> {
+  __$$MaintenanceItemDtoImplCopyWithImpl(_$MaintenanceItemDtoImpl _value,
+      $Res Function(_$MaintenanceItemDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -134,7 +134,7 @@ class __$$_MaintenanceItemDtoCopyWithImpl<$Res>
     Object? maxNumberOfItem = null,
     Object? banners = null,
   }) {
-    return _then(_$_MaintenanceItemDto(
+    return _then(_$MaintenanceItemDtoImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -161,8 +161,8 @@ class __$$_MaintenanceItemDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable(createToJson: false)
-class _$_MaintenanceItemDto extends _MaintenanceItemDto {
-  const _$_MaintenanceItemDto(
+class _$MaintenanceItemDtoImpl extends _MaintenanceItemDto {
+  const _$MaintenanceItemDtoImpl(
       {@JsonKey(name: 'id', defaultValue: '') required this.id,
       @JsonKey(name: 'name', defaultValue: '') required this.name,
       @JsonKey(name: 'displayName', defaultValue: '') required this.displayName,
@@ -174,8 +174,8 @@ class _$_MaintenanceItemDto extends _MaintenanceItemDto {
       : _banners = banners,
         super._();
 
-  factory _$_MaintenanceItemDto.fromJson(Map<String, dynamic> json) =>
-      _$$_MaintenanceItemDtoFromJson(json);
+  factory _$MaintenanceItemDtoImpl.fromJson(Map<String, dynamic> json) =>
+      _$$MaintenanceItemDtoImplFromJson(json);
 
   @override
   @JsonKey(name: 'id', defaultValue: '')
@@ -205,10 +205,10 @@ class _$_MaintenanceItemDto extends _MaintenanceItemDto {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_MaintenanceItemDto &&
+            other is _$MaintenanceItemDtoImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.displayName, displayName) ||
@@ -226,8 +226,8 @@ class _$_MaintenanceItemDto extends _MaintenanceItemDto {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_MaintenanceItemDtoCopyWith<_$_MaintenanceItemDto> get copyWith =>
-      __$$_MaintenanceItemDtoCopyWithImpl<_$_MaintenanceItemDto>(
+  _$$MaintenanceItemDtoImplCopyWith<_$MaintenanceItemDtoImpl> get copyWith =>
+      __$$MaintenanceItemDtoImplCopyWithImpl<_$MaintenanceItemDtoImpl>(
           this, _$identity);
 }
 
@@ -242,11 +242,11 @@ abstract class _MaintenanceItemDto extends MaintenanceItemDto {
       required final int maxNumberOfItem,
       @JsonKey(name: 'banners', defaultValue: [], readValue: getValueList)
       required final List<MaintenanceBannerDto>
-          banners}) = _$_MaintenanceItemDto;
+          banners}) = _$MaintenanceItemDtoImpl;
   const _MaintenanceItemDto._() : super._();
 
   factory _MaintenanceItemDto.fromJson(Map<String, dynamic> json) =
-      _$_MaintenanceItemDto.fromJson;
+      _$MaintenanceItemDtoImpl.fromJson;
 
   @override
   @JsonKey(name: 'id', defaultValue: '')
@@ -266,7 +266,7 @@ abstract class _MaintenanceItemDto extends MaintenanceItemDto {
   List<MaintenanceBannerDto> get banners;
   @override
   @JsonKey(ignore: true)
-  _$$_MaintenanceItemDtoCopyWith<_$_MaintenanceItemDto> get copyWith =>
+  _$$MaintenanceItemDtoImplCopyWith<_$MaintenanceItemDtoImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -425,11 +425,11 @@ class _$MaintenanceBannerDtoCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_MaintenanceBannerDtoCopyWith<$Res>
+abstract class _$$MaintenanceBannerDtoImplCopyWith<$Res>
     implements $MaintenanceBannerDtoCopyWith<$Res> {
-  factory _$$_MaintenanceBannerDtoCopyWith(_$_MaintenanceBannerDto value,
-          $Res Function(_$_MaintenanceBannerDto) then) =
-      __$$_MaintenanceBannerDtoCopyWithImpl<$Res>;
+  factory _$$MaintenanceBannerDtoImplCopyWith(_$MaintenanceBannerDtoImpl value,
+          $Res Function(_$MaintenanceBannerDtoImpl) then) =
+      __$$MaintenanceBannerDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -460,11 +460,11 @@ abstract class _$$_MaintenanceBannerDtoCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_MaintenanceBannerDtoCopyWithImpl<$Res>
-    extends _$MaintenanceBannerDtoCopyWithImpl<$Res, _$_MaintenanceBannerDto>
-    implements _$$_MaintenanceBannerDtoCopyWith<$Res> {
-  __$$_MaintenanceBannerDtoCopyWithImpl(_$_MaintenanceBannerDto _value,
-      $Res Function(_$_MaintenanceBannerDto) _then)
+class __$$MaintenanceBannerDtoImplCopyWithImpl<$Res>
+    extends _$MaintenanceBannerDtoCopyWithImpl<$Res, _$MaintenanceBannerDtoImpl>
+    implements _$$MaintenanceBannerDtoImplCopyWith<$Res> {
+  __$$MaintenanceBannerDtoImplCopyWithImpl(_$MaintenanceBannerDtoImpl _value,
+      $Res Function(_$MaintenanceBannerDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -482,7 +482,7 @@ class __$$_MaintenanceBannerDtoCopyWithImpl<$Res>
     Object? enableCrossButton = null,
     Object? loginType = null,
   }) {
-    return _then(_$_MaintenanceBannerDto(
+    return _then(_$MaintenanceBannerDtoImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -533,8 +533,8 @@ class __$$_MaintenanceBannerDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_MaintenanceBannerDto extends _MaintenanceBannerDto {
-  const _$_MaintenanceBannerDto(
+class _$MaintenanceBannerDtoImpl extends _MaintenanceBannerDto {
+  const _$MaintenanceBannerDtoImpl(
       {@JsonKey(name: 'id', defaultValue: '') required this.id,
       @JsonKey(name: 'name', defaultValue: '') required this.name,
       @JsonKey(name: 'template', defaultValue: '', readValue: getName)
@@ -560,8 +560,8 @@ class _$_MaintenanceBannerDto extends _MaintenanceBannerDto {
       : _applicableModules = applicableModules,
         super._();
 
-  factory _$_MaintenanceBannerDto.fromJson(Map<String, dynamic> json) =>
-      _$$_MaintenanceBannerDtoFromJson(json);
+  factory _$MaintenanceBannerDtoImpl.fromJson(Map<String, dynamic> json) =>
+      _$$MaintenanceBannerDtoImplFromJson(json);
 
   @override
   @JsonKey(name: 'id', defaultValue: '')
@@ -613,10 +613,10 @@ class _$_MaintenanceBannerDto extends _MaintenanceBannerDto {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_MaintenanceBannerDto &&
+            other is _$MaintenanceBannerDtoImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.template, template) ||
@@ -656,13 +656,14 @@ class _$_MaintenanceBannerDto extends _MaintenanceBannerDto {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_MaintenanceBannerDtoCopyWith<_$_MaintenanceBannerDto> get copyWith =>
-      __$$_MaintenanceBannerDtoCopyWithImpl<_$_MaintenanceBannerDto>(
-          this, _$identity);
+  _$$MaintenanceBannerDtoImplCopyWith<_$MaintenanceBannerDtoImpl>
+      get copyWith =>
+          __$$MaintenanceBannerDtoImplCopyWithImpl<_$MaintenanceBannerDtoImpl>(
+              this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_MaintenanceBannerDtoToJson(
+    return _$$MaintenanceBannerDtoImplToJson(
       this,
     );
   }
@@ -693,11 +694,11 @@ abstract class _MaintenanceBannerDto extends MaintenanceBannerDto {
           readValue: getBooleanValue)
       required final bool enableCrossButton,
       @JsonKey(name: 'login', defaultValue: '', readValue: getValue)
-      required final String loginType}) = _$_MaintenanceBannerDto;
+      required final String loginType}) = _$MaintenanceBannerDtoImpl;
   const _MaintenanceBannerDto._() : super._();
 
   factory _MaintenanceBannerDto.fromJson(Map<String, dynamic> json) =
-      _$_MaintenanceBannerDto.fromJson;
+      _$MaintenanceBannerDtoImpl.fromJson;
 
   @override
   @JsonKey(name: 'id', defaultValue: '')
@@ -737,8 +738,8 @@ abstract class _MaintenanceBannerDto extends MaintenanceBannerDto {
   String get loginType;
   @override
   @JsonKey(ignore: true)
-  _$$_MaintenanceBannerDtoCopyWith<_$_MaintenanceBannerDto> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$MaintenanceBannerDtoImplCopyWith<_$MaintenanceBannerDtoImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 ApplicableModulesDto _$ApplicableModulesDtoFromJson(Map<String, dynamic> json) {
@@ -808,11 +809,11 @@ class _$ApplicableModulesDtoCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_ApplicableModulesDtoCopyWith<$Res>
+abstract class _$$ApplicableModulesDtoImplCopyWith<$Res>
     implements $ApplicableModulesDtoCopyWith<$Res> {
-  factory _$$_ApplicableModulesDtoCopyWith(_$_ApplicableModulesDto value,
-          $Res Function(_$_ApplicableModulesDto) then) =
-      __$$_ApplicableModulesDtoCopyWithImpl<$Res>;
+  factory _$$ApplicableModulesDtoImplCopyWith(_$ApplicableModulesDtoImpl value,
+          $Res Function(_$ApplicableModulesDtoImpl) then) =
+      __$$ApplicableModulesDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -822,11 +823,11 @@ abstract class _$$_ApplicableModulesDtoCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_ApplicableModulesDtoCopyWithImpl<$Res>
-    extends _$ApplicableModulesDtoCopyWithImpl<$Res, _$_ApplicableModulesDto>
-    implements _$$_ApplicableModulesDtoCopyWith<$Res> {
-  __$$_ApplicableModulesDtoCopyWithImpl(_$_ApplicableModulesDto _value,
-      $Res Function(_$_ApplicableModulesDto) _then)
+class __$$ApplicableModulesDtoImplCopyWithImpl<$Res>
+    extends _$ApplicableModulesDtoCopyWithImpl<$Res, _$ApplicableModulesDtoImpl>
+    implements _$$ApplicableModulesDtoImplCopyWith<$Res> {
+  __$$ApplicableModulesDtoImplCopyWithImpl(_$ApplicableModulesDtoImpl _value,
+      $Res Function(_$ApplicableModulesDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -836,7 +837,7 @@ class __$$_ApplicableModulesDtoCopyWithImpl<$Res>
     Object? name = null,
     Object? displayName = null,
   }) {
-    return _then(_$_ApplicableModulesDto(
+    return _then(_$ApplicableModulesDtoImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -855,16 +856,16 @@ class __$$_ApplicableModulesDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_ApplicableModulesDto extends _ApplicableModulesDto {
-  const _$_ApplicableModulesDto(
+class _$ApplicableModulesDtoImpl extends _ApplicableModulesDto {
+  const _$ApplicableModulesDtoImpl(
       {@JsonKey(name: 'id', defaultValue: '') required this.id,
       @JsonKey(name: 'name', defaultValue: '') required this.name,
       @JsonKey(name: 'displayName', defaultValue: '')
       required this.displayName})
       : super._();
 
-  factory _$_ApplicableModulesDto.fromJson(Map<String, dynamic> json) =>
-      _$$_ApplicableModulesDtoFromJson(json);
+  factory _$ApplicableModulesDtoImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ApplicableModulesDtoImplFromJson(json);
 
   @override
   @JsonKey(name: 'id', defaultValue: '')
@@ -882,10 +883,10 @@ class _$_ApplicableModulesDto extends _ApplicableModulesDto {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ApplicableModulesDto &&
+            other is _$ApplicableModulesDtoImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.displayName, displayName) ||
@@ -899,13 +900,14 @@ class _$_ApplicableModulesDto extends _ApplicableModulesDto {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ApplicableModulesDtoCopyWith<_$_ApplicableModulesDto> get copyWith =>
-      __$$_ApplicableModulesDtoCopyWithImpl<_$_ApplicableModulesDto>(
-          this, _$identity);
+  _$$ApplicableModulesDtoImplCopyWith<_$ApplicableModulesDtoImpl>
+      get copyWith =>
+          __$$ApplicableModulesDtoImplCopyWithImpl<_$ApplicableModulesDtoImpl>(
+              this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_ApplicableModulesDtoToJson(
+    return _$$ApplicableModulesDtoImplToJson(
       this,
     );
   }
@@ -916,11 +918,11 @@ abstract class _ApplicableModulesDto extends ApplicableModulesDto {
       {@JsonKey(name: 'id', defaultValue: '') required final String id,
       @JsonKey(name: 'name', defaultValue: '') required final String name,
       @JsonKey(name: 'displayName', defaultValue: '')
-      required final String displayName}) = _$_ApplicableModulesDto;
+      required final String displayName}) = _$ApplicableModulesDtoImpl;
   const _ApplicableModulesDto._() : super._();
 
   factory _ApplicableModulesDto.fromJson(Map<String, dynamic> json) =
-      _$_ApplicableModulesDto.fromJson;
+      _$ApplicableModulesDtoImpl.fromJson;
 
   @override
   @JsonKey(name: 'id', defaultValue: '')
@@ -933,8 +935,8 @@ abstract class _ApplicableModulesDto extends ApplicableModulesDto {
   String get displayName;
   @override
   @JsonKey(ignore: true)
-  _$$_ApplicableModulesDtoCopyWith<_$_ApplicableModulesDto> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$ApplicableModulesDtoImplCopyWith<_$ApplicableModulesDtoImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 PublishedDateDto _$PublishedDateDtoFromJson(Map<String, dynamic> json) {
@@ -996,11 +998,11 @@ class _$PublishedDateDtoCopyWithImpl<$Res, $Val extends PublishedDateDto>
 }
 
 /// @nodoc
-abstract class _$$_PublishedDateDtoCopyWith<$Res>
+abstract class _$$PublishedDateDtoImplCopyWith<$Res>
     implements $PublishedDateDtoCopyWith<$Res> {
-  factory _$$_PublishedDateDtoCopyWith(
-          _$_PublishedDateDto value, $Res Function(_$_PublishedDateDto) then) =
-      __$$_PublishedDateDtoCopyWithImpl<$Res>;
+  factory _$$PublishedDateDtoImplCopyWith(_$PublishedDateDtoImpl value,
+          $Res Function(_$PublishedDateDtoImpl) then) =
+      __$$PublishedDateDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -1010,11 +1012,11 @@ abstract class _$$_PublishedDateDtoCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_PublishedDateDtoCopyWithImpl<$Res>
-    extends _$PublishedDateDtoCopyWithImpl<$Res, _$_PublishedDateDto>
-    implements _$$_PublishedDateDtoCopyWith<$Res> {
-  __$$_PublishedDateDtoCopyWithImpl(
-      _$_PublishedDateDto _value, $Res Function(_$_PublishedDateDto) _then)
+class __$$PublishedDateDtoImplCopyWithImpl<$Res>
+    extends _$PublishedDateDtoCopyWithImpl<$Res, _$PublishedDateDtoImpl>
+    implements _$$PublishedDateDtoImplCopyWith<$Res> {
+  __$$PublishedDateDtoImplCopyWithImpl(_$PublishedDateDtoImpl _value,
+      $Res Function(_$PublishedDateDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1023,7 +1025,7 @@ class __$$_PublishedDateDtoCopyWithImpl<$Res>
     Object? isoValue = null,
     Object? formattedDateValue = null,
   }) {
-    return _then(_$_PublishedDateDto(
+    return _then(_$PublishedDateDtoImpl(
       isoValue: null == isoValue
           ? _value.isoValue
           : isoValue // ignore: cast_nullable_to_non_nullable
@@ -1038,15 +1040,15 @@ class __$$_PublishedDateDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_PublishedDateDto extends _PublishedDateDto {
-  const _$_PublishedDateDto(
+class _$PublishedDateDtoImpl extends _PublishedDateDto {
+  const _$PublishedDateDtoImpl(
       {@JsonKey(name: 'isoValue', defaultValue: '') required this.isoValue,
       @JsonKey(name: 'formattedDateValue', defaultValue: '')
       required this.formattedDateValue})
       : super._();
 
-  factory _$_PublishedDateDto.fromJson(Map<String, dynamic> json) =>
-      _$$_PublishedDateDtoFromJson(json);
+  factory _$PublishedDateDtoImpl.fromJson(Map<String, dynamic> json) =>
+      _$$PublishedDateDtoImplFromJson(json);
 
   @override
   @JsonKey(name: 'isoValue', defaultValue: '')
@@ -1061,10 +1063,10 @@ class _$_PublishedDateDto extends _PublishedDateDto {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_PublishedDateDto &&
+            other is _$PublishedDateDtoImpl &&
             (identical(other.isoValue, isoValue) ||
                 other.isoValue == isoValue) &&
             (identical(other.formattedDateValue, formattedDateValue) ||
@@ -1078,12 +1080,13 @@ class _$_PublishedDateDto extends _PublishedDateDto {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_PublishedDateDtoCopyWith<_$_PublishedDateDto> get copyWith =>
-      __$$_PublishedDateDtoCopyWithImpl<_$_PublishedDateDto>(this, _$identity);
+  _$$PublishedDateDtoImplCopyWith<_$PublishedDateDtoImpl> get copyWith =>
+      __$$PublishedDateDtoImplCopyWithImpl<_$PublishedDateDtoImpl>(
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_PublishedDateDtoToJson(
+    return _$$PublishedDateDtoImplToJson(
       this,
     );
   }
@@ -1094,11 +1097,11 @@ abstract class _PublishedDateDto extends PublishedDateDto {
       {@JsonKey(name: 'isoValue', defaultValue: '')
       required final String isoValue,
       @JsonKey(name: 'formattedDateValue', defaultValue: '')
-      required final String formattedDateValue}) = _$_PublishedDateDto;
+      required final String formattedDateValue}) = _$PublishedDateDtoImpl;
   const _PublishedDateDto._() : super._();
 
   factory _PublishedDateDto.fromJson(Map<String, dynamic> json) =
-      _$_PublishedDateDto.fromJson;
+      _$PublishedDateDtoImpl.fromJson;
 
   @override
   @JsonKey(name: 'isoValue', defaultValue: '')
@@ -1108,6 +1111,6 @@ abstract class _PublishedDateDto extends PublishedDateDto {
   String get formattedDateValue;
   @override
   @JsonKey(ignore: true)
-  _$$_PublishedDateDtoCopyWith<_$_PublishedDateDto> get copyWith =>
+  _$$PublishedDateDtoImplCopyWith<_$PublishedDateDtoImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

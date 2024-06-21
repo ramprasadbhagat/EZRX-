@@ -12,7 +12,7 @@ part of 'announcement_info_details.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$AnnouncementInfoDetails {
@@ -129,11 +129,12 @@ class _$AnnouncementInfoDetailsCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_AnnouncementInfoDetailsCopyWith<$Res>
+abstract class _$$AnnouncementInfoDetailsImplCopyWith<$Res>
     implements $AnnouncementInfoDetailsCopyWith<$Res> {
-  factory _$$_AnnouncementInfoDetailsCopyWith(_$_AnnouncementInfoDetails value,
-          $Res Function(_$_AnnouncementInfoDetails) then) =
-      __$$_AnnouncementInfoDetailsCopyWithImpl<$Res>;
+  factory _$$AnnouncementInfoDetailsImplCopyWith(
+          _$AnnouncementInfoDetailsImpl value,
+          $Res Function(_$AnnouncementInfoDetailsImpl) then) =
+      __$$AnnouncementInfoDetailsImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -151,12 +152,13 @@ abstract class _$$_AnnouncementInfoDetailsCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_AnnouncementInfoDetailsCopyWithImpl<$Res>
+class __$$AnnouncementInfoDetailsImplCopyWithImpl<$Res>
     extends _$AnnouncementInfoDetailsCopyWithImpl<$Res,
-        _$_AnnouncementInfoDetails>
-    implements _$$_AnnouncementInfoDetailsCopyWith<$Res> {
-  __$$_AnnouncementInfoDetailsCopyWithImpl(_$_AnnouncementInfoDetails _value,
-      $Res Function(_$_AnnouncementInfoDetails) _then)
+        _$AnnouncementInfoDetailsImpl>
+    implements _$$AnnouncementInfoDetailsImplCopyWith<$Res> {
+  __$$AnnouncementInfoDetailsImplCopyWithImpl(
+      _$AnnouncementInfoDetailsImpl _value,
+      $Res Function(_$AnnouncementInfoDetailsImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -174,7 +176,7 @@ class __$$_AnnouncementInfoDetailsCopyWithImpl<$Res>
     Object? releaseDate = null,
     Object? documents = null,
   }) {
-    return _then(_$_AnnouncementInfoDetails(
+    return _then(_$AnnouncementInfoDetailsImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -225,8 +227,8 @@ class __$$_AnnouncementInfoDetailsCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_AnnouncementInfoDetails extends _AnnouncementInfoDetails {
-  const _$_AnnouncementInfoDetails(
+class _$AnnouncementInfoDetailsImpl extends _AnnouncementInfoDetails {
+  const _$AnnouncementInfoDetailsImpl(
       {required this.id,
       required this.title,
       required this.content,
@@ -275,10 +277,10 @@ class _$_AnnouncementInfoDetails extends _AnnouncementInfoDetails {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_AnnouncementInfoDetails &&
+            other is _$AnnouncementInfoDetailsImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.title, title) || other.title == title) &&
             (identical(other.content, content) || other.content == content) &&
@@ -315,25 +317,25 @@ class _$_AnnouncementInfoDetails extends _AnnouncementInfoDetails {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_AnnouncementInfoDetailsCopyWith<_$_AnnouncementInfoDetails>
-      get copyWith =>
-          __$$_AnnouncementInfoDetailsCopyWithImpl<_$_AnnouncementInfoDetails>(
-              this, _$identity);
+  _$$AnnouncementInfoDetailsImplCopyWith<_$AnnouncementInfoDetailsImpl>
+      get copyWith => __$$AnnouncementInfoDetailsImplCopyWithImpl<
+          _$AnnouncementInfoDetailsImpl>(this, _$identity);
 }
 
 abstract class _AnnouncementInfoDetails extends AnnouncementInfoDetails {
   const factory _AnnouncementInfoDetails(
-      {required final String id,
-      required final String title,
-      required final HtmlContent content,
-      required final String summary,
-      required final String thumbnail,
-      required final DateTimeStringValue publishedDate,
-      required final String manufacturer,
-      required final String source,
-      required final String tag,
-      required final DateTimeStringValue releaseDate,
-      required final List<Attachment> documents}) = _$_AnnouncementInfoDetails;
+          {required final String id,
+          required final String title,
+          required final HtmlContent content,
+          required final String summary,
+          required final String thumbnail,
+          required final DateTimeStringValue publishedDate,
+          required final String manufacturer,
+          required final String source,
+          required final String tag,
+          required final DateTimeStringValue releaseDate,
+          required final List<Attachment> documents}) =
+      _$AnnouncementInfoDetailsImpl;
   const _AnnouncementInfoDetails._() : super._();
 
   @override
@@ -360,6 +362,6 @@ abstract class _AnnouncementInfoDetails extends AnnouncementInfoDetails {
   List<Attachment> get documents;
   @override
   @JsonKey(ignore: true)
-  _$$_AnnouncementInfoDetailsCopyWith<_$_AnnouncementInfoDetails>
+  _$$AnnouncementInfoDetailsImplCopyWith<_$AnnouncementInfoDetailsImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

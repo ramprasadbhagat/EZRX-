@@ -12,7 +12,7 @@ part of 'material_item_bonus.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$MaterialItemBonus {
@@ -124,11 +124,11 @@ class _$MaterialItemBonusCopyWithImpl<$Res, $Val extends MaterialItemBonus>
 }
 
 /// @nodoc
-abstract class _$$_MaterialItemBonusCopyWith<$Res>
+abstract class _$$MaterialItemBonusImplCopyWith<$Res>
     implements $MaterialItemBonusCopyWith<$Res> {
-  factory _$$_MaterialItemBonusCopyWith(_$_MaterialItemBonus value,
-          $Res Function(_$_MaterialItemBonus) then) =
-      __$$_MaterialItemBonusCopyWithImpl<$Res>;
+  factory _$$MaterialItemBonusImplCopyWith(_$MaterialItemBonusImpl value,
+          $Res Function(_$MaterialItemBonusImpl) then) =
+      __$$MaterialItemBonusImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -147,11 +147,11 @@ abstract class _$$_MaterialItemBonusCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_MaterialItemBonusCopyWithImpl<$Res>
-    extends _$MaterialItemBonusCopyWithImpl<$Res, _$_MaterialItemBonus>
-    implements _$$_MaterialItemBonusCopyWith<$Res> {
-  __$$_MaterialItemBonusCopyWithImpl(
-      _$_MaterialItemBonus _value, $Res Function(_$_MaterialItemBonus) _then)
+class __$$MaterialItemBonusImplCopyWithImpl<$Res>
+    extends _$MaterialItemBonusCopyWithImpl<$Res, _$MaterialItemBonusImpl>
+    implements _$$MaterialItemBonusImplCopyWith<$Res> {
+  __$$MaterialItemBonusImplCopyWithImpl(_$MaterialItemBonusImpl _value,
+      $Res Function(_$MaterialItemBonusImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -167,7 +167,7 @@ class __$$_MaterialItemBonusCopyWithImpl<$Res>
     Object? additionalBonusFlag = null,
     Object? bonusOverrideFlag = null,
   }) {
-    return _then(_$_MaterialItemBonus(
+    return _then(_$MaterialItemBonusImpl(
       materialInfo: null == materialInfo
           ? _value.materialInfo
           : materialInfo // ignore: cast_nullable_to_non_nullable
@@ -210,8 +210,8 @@ class __$$_MaterialItemBonusCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_MaterialItemBonus extends _MaterialItemBonus {
-  const _$_MaterialItemBonus(
+class _$MaterialItemBonusImpl extends _MaterialItemBonus {
+  const _$MaterialItemBonusImpl(
       {required this.materialInfo,
       required this.qty,
       required this.comment,
@@ -248,10 +248,10 @@ class _$_MaterialItemBonus extends _MaterialItemBonus {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_MaterialItemBonus &&
+            other is _$MaterialItemBonusImpl &&
             (identical(other.materialInfo, materialInfo) ||
                 other.materialInfo == materialInfo) &&
             (identical(other.qty, qty) || other.qty == qty) &&
@@ -285,8 +285,8 @@ class _$_MaterialItemBonus extends _MaterialItemBonus {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_MaterialItemBonusCopyWith<_$_MaterialItemBonus> get copyWith =>
-      __$$_MaterialItemBonusCopyWithImpl<_$_MaterialItemBonus>(
+  _$$MaterialItemBonusImplCopyWith<_$MaterialItemBonusImpl> get copyWith =>
+      __$$MaterialItemBonusImplCopyWithImpl<_$MaterialItemBonusImpl>(
           this, _$identity);
 }
 
@@ -300,7 +300,7 @@ abstract class _MaterialItemBonus extends MaterialItemBonus {
       required final String inStock,
       required final int remainingQty,
       required final bool additionalBonusFlag,
-      required final bool bonusOverrideFlag}) = _$_MaterialItemBonus;
+      required final bool bonusOverrideFlag}) = _$MaterialItemBonusImpl;
   const _MaterialItemBonus._() : super._();
 
   @override
@@ -323,6 +323,6 @@ abstract class _MaterialItemBonus extends MaterialItemBonus {
   bool get bonusOverrideFlag;
   @override
   @JsonKey(ignore: true)
-  _$$_MaterialItemBonusCopyWith<_$_MaterialItemBonus> get copyWith =>
+  _$$MaterialItemBonusImplCopyWith<_$MaterialItemBonusImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

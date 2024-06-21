@@ -12,7 +12,7 @@ part of 'customer_code_information.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$CustomerInformation {
@@ -64,22 +64,22 @@ class _$CustomerInformationCopyWithImpl<$Res, $Val extends CustomerInformation>
 }
 
 /// @nodoc
-abstract class _$$_CustomerInformationCopyWith<$Res>
+abstract class _$$CustomerInformationImplCopyWith<$Res>
     implements $CustomerInformationCopyWith<$Res> {
-  factory _$$_CustomerInformationCopyWith(_$_CustomerInformation value,
-          $Res Function(_$_CustomerInformation) then) =
-      __$$_CustomerInformationCopyWithImpl<$Res>;
+  factory _$$CustomerInformationImplCopyWith(_$CustomerInformationImpl value,
+          $Res Function(_$CustomerInformationImpl) then) =
+      __$$CustomerInformationImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({int shipToCount, List<CustomerCodeInfo> soldToInformation});
 }
 
 /// @nodoc
-class __$$_CustomerInformationCopyWithImpl<$Res>
-    extends _$CustomerInformationCopyWithImpl<$Res, _$_CustomerInformation>
-    implements _$$_CustomerInformationCopyWith<$Res> {
-  __$$_CustomerInformationCopyWithImpl(_$_CustomerInformation _value,
-      $Res Function(_$_CustomerInformation) _then)
+class __$$CustomerInformationImplCopyWithImpl<$Res>
+    extends _$CustomerInformationCopyWithImpl<$Res, _$CustomerInformationImpl>
+    implements _$$CustomerInformationImplCopyWith<$Res> {
+  __$$CustomerInformationImplCopyWithImpl(_$CustomerInformationImpl _value,
+      $Res Function(_$CustomerInformationImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -88,7 +88,7 @@ class __$$_CustomerInformationCopyWithImpl<$Res>
     Object? shipToCount = null,
     Object? soldToInformation = null,
   }) {
-    return _then(_$_CustomerInformation(
+    return _then(_$CustomerInformationImpl(
       shipToCount: null == shipToCount
           ? _value.shipToCount
           : shipToCount // ignore: cast_nullable_to_non_nullable
@@ -103,8 +103,8 @@ class __$$_CustomerInformationCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_CustomerInformation extends _CustomerInformation {
-  const _$_CustomerInformation(
+class _$CustomerInformationImpl extends _CustomerInformation {
+  const _$CustomerInformationImpl(
       {required this.shipToCount,
       required final List<CustomerCodeInfo> soldToInformation})
       : _soldToInformation = soldToInformation,
@@ -127,10 +127,10 @@ class _$_CustomerInformation extends _CustomerInformation {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_CustomerInformation &&
+            other is _$CustomerInformationImpl &&
             (identical(other.shipToCount, shipToCount) ||
                 other.shipToCount == shipToCount) &&
             const DeepCollectionEquality()
@@ -144,8 +144,8 @@ class _$_CustomerInformation extends _CustomerInformation {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_CustomerInformationCopyWith<_$_CustomerInformation> get copyWith =>
-      __$$_CustomerInformationCopyWithImpl<_$_CustomerInformation>(
+  _$$CustomerInformationImplCopyWith<_$CustomerInformationImpl> get copyWith =>
+      __$$CustomerInformationImplCopyWithImpl<_$CustomerInformationImpl>(
           this, _$identity);
 }
 
@@ -153,7 +153,7 @@ abstract class _CustomerInformation extends CustomerInformation {
   const factory _CustomerInformation(
           {required final int shipToCount,
           required final List<CustomerCodeInfo> soldToInformation}) =
-      _$_CustomerInformation;
+      _$CustomerInformationImpl;
   const _CustomerInformation._() : super._();
 
   @override
@@ -162,6 +162,6 @@ abstract class _CustomerInformation extends CustomerInformation {
   List<CustomerCodeInfo> get soldToInformation;
   @override
   @JsonKey(ignore: true)
-  _$$_CustomerInformationCopyWith<_$_CustomerInformation> get copyWith =>
+  _$$CustomerInformationImplCopyWith<_$CustomerInformationImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

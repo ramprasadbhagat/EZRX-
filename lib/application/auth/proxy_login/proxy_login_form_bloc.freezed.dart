@@ -12,7 +12,7 @@ part of 'proxy_login_form_bloc.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$ProxyLoginFormEvent {
@@ -83,25 +83,25 @@ class _$ProxyLoginFormEventCopyWithImpl<$Res, $Val extends ProxyLoginFormEvent>
 }
 
 /// @nodoc
-abstract class _$$_InitializedCopyWith<$Res> {
-  factory _$$_InitializedCopyWith(
-          _$_Initialized value, $Res Function(_$_Initialized) then) =
-      __$$_InitializedCopyWithImpl<$Res>;
+abstract class _$$InitializedImplCopyWith<$Res> {
+  factory _$$InitializedImplCopyWith(
+          _$InitializedImpl value, $Res Function(_$InitializedImpl) then) =
+      __$$InitializedImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_InitializedCopyWithImpl<$Res>
-    extends _$ProxyLoginFormEventCopyWithImpl<$Res, _$_Initialized>
-    implements _$$_InitializedCopyWith<$Res> {
-  __$$_InitializedCopyWithImpl(
-      _$_Initialized _value, $Res Function(_$_Initialized) _then)
+class __$$InitializedImplCopyWithImpl<$Res>
+    extends _$ProxyLoginFormEventCopyWithImpl<$Res, _$InitializedImpl>
+    implements _$$InitializedImplCopyWith<$Res> {
+  __$$InitializedImplCopyWithImpl(
+      _$InitializedImpl _value, $Res Function(_$InitializedImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_Initialized implements _Initialized {
-  const _$_Initialized();
+class _$InitializedImpl implements _Initialized {
+  const _$InitializedImpl();
 
   @override
   String toString() {
@@ -109,9 +109,9 @@ class _$_Initialized implements _Initialized {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_Initialized);
+        (other.runtimeType == runtimeType && other is _$InitializedImpl);
   }
 
   @override
@@ -189,24 +189,24 @@ class _$_Initialized implements _Initialized {
 }
 
 abstract class _Initialized implements ProxyLoginFormEvent {
-  const factory _Initialized() = _$_Initialized;
+  const factory _Initialized() = _$InitializedImpl;
 }
 
 /// @nodoc
-abstract class _$$_UsernameChangedCopyWith<$Res> {
-  factory _$$_UsernameChangedCopyWith(
-          _$_UsernameChanged value, $Res Function(_$_UsernameChanged) then) =
-      __$$_UsernameChangedCopyWithImpl<$Res>;
+abstract class _$$UsernameChangedImplCopyWith<$Res> {
+  factory _$$UsernameChangedImplCopyWith(_$UsernameChangedImpl value,
+          $Res Function(_$UsernameChangedImpl) then) =
+      __$$UsernameChangedImplCopyWithImpl<$Res>;
   @useResult
   $Res call({String usernameStr});
 }
 
 /// @nodoc
-class __$$_UsernameChangedCopyWithImpl<$Res>
-    extends _$ProxyLoginFormEventCopyWithImpl<$Res, _$_UsernameChanged>
-    implements _$$_UsernameChangedCopyWith<$Res> {
-  __$$_UsernameChangedCopyWithImpl(
-      _$_UsernameChanged _value, $Res Function(_$_UsernameChanged) _then)
+class __$$UsernameChangedImplCopyWithImpl<$Res>
+    extends _$ProxyLoginFormEventCopyWithImpl<$Res, _$UsernameChangedImpl>
+    implements _$$UsernameChangedImplCopyWith<$Res> {
+  __$$UsernameChangedImplCopyWithImpl(
+      _$UsernameChangedImpl _value, $Res Function(_$UsernameChangedImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -214,7 +214,7 @@ class __$$_UsernameChangedCopyWithImpl<$Res>
   $Res call({
     Object? usernameStr = null,
   }) {
-    return _then(_$_UsernameChanged(
+    return _then(_$UsernameChangedImpl(
       null == usernameStr
           ? _value.usernameStr
           : usernameStr // ignore: cast_nullable_to_non_nullable
@@ -225,8 +225,8 @@ class __$$_UsernameChangedCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_UsernameChanged implements _UsernameChanged {
-  const _$_UsernameChanged(this.usernameStr);
+class _$UsernameChangedImpl implements _UsernameChanged {
+  const _$UsernameChangedImpl(this.usernameStr);
 
   @override
   final String usernameStr;
@@ -237,10 +237,10 @@ class _$_UsernameChanged implements _UsernameChanged {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_UsernameChanged &&
+            other is _$UsernameChangedImpl &&
             (identical(other.usernameStr, usernameStr) ||
                 other.usernameStr == usernameStr));
   }
@@ -251,8 +251,9 @@ class _$_UsernameChanged implements _UsernameChanged {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_UsernameChangedCopyWith<_$_UsernameChanged> get copyWith =>
-      __$$_UsernameChangedCopyWithImpl<_$_UsernameChanged>(this, _$identity);
+  _$$UsernameChangedImplCopyWith<_$UsernameChangedImpl> get copyWith =>
+      __$$UsernameChangedImplCopyWithImpl<_$UsernameChangedImpl>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -326,20 +327,21 @@ class _$_UsernameChanged implements _UsernameChanged {
 }
 
 abstract class _UsernameChanged implements ProxyLoginFormEvent {
-  const factory _UsernameChanged(final String usernameStr) = _$_UsernameChanged;
+  const factory _UsernameChanged(final String usernameStr) =
+      _$UsernameChangedImpl;
 
   String get usernameStr;
   @JsonKey(ignore: true)
-  _$$_UsernameChangedCopyWith<_$_UsernameChanged> get copyWith =>
+  _$$UsernameChangedImplCopyWith<_$UsernameChangedImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_LoginWithADButtonPressedCopyWith<$Res> {
-  factory _$$_LoginWithADButtonPressedCopyWith(
-          _$_LoginWithADButtonPressed value,
-          $Res Function(_$_LoginWithADButtonPressed) then) =
-      __$$_LoginWithADButtonPressedCopyWithImpl<$Res>;
+abstract class _$$LoginWithADButtonPressedImplCopyWith<$Res> {
+  factory _$$LoginWithADButtonPressedImplCopyWith(
+          _$LoginWithADButtonPressedImpl value,
+          $Res Function(_$LoginWithADButtonPressedImpl) then) =
+      __$$LoginWithADButtonPressedImplCopyWithImpl<$Res>;
   @useResult
   $Res call({User user});
 
@@ -347,11 +349,13 @@ abstract class _$$_LoginWithADButtonPressedCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_LoginWithADButtonPressedCopyWithImpl<$Res>
-    extends _$ProxyLoginFormEventCopyWithImpl<$Res, _$_LoginWithADButtonPressed>
-    implements _$$_LoginWithADButtonPressedCopyWith<$Res> {
-  __$$_LoginWithADButtonPressedCopyWithImpl(_$_LoginWithADButtonPressed _value,
-      $Res Function(_$_LoginWithADButtonPressed) _then)
+class __$$LoginWithADButtonPressedImplCopyWithImpl<$Res>
+    extends _$ProxyLoginFormEventCopyWithImpl<$Res,
+        _$LoginWithADButtonPressedImpl>
+    implements _$$LoginWithADButtonPressedImplCopyWith<$Res> {
+  __$$LoginWithADButtonPressedImplCopyWithImpl(
+      _$LoginWithADButtonPressedImpl _value,
+      $Res Function(_$LoginWithADButtonPressedImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -359,7 +363,7 @@ class __$$_LoginWithADButtonPressedCopyWithImpl<$Res>
   $Res call({
     Object? user = null,
   }) {
-    return _then(_$_LoginWithADButtonPressed(
+    return _then(_$LoginWithADButtonPressedImpl(
       user: null == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
@@ -378,8 +382,8 @@ class __$$_LoginWithADButtonPressedCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_LoginWithADButtonPressed implements _LoginWithADButtonPressed {
-  const _$_LoginWithADButtonPressed({required this.user});
+class _$LoginWithADButtonPressedImpl implements _LoginWithADButtonPressed {
+  const _$LoginWithADButtonPressedImpl({required this.user});
 
   @override
   final User user;
@@ -390,10 +394,10 @@ class _$_LoginWithADButtonPressed implements _LoginWithADButtonPressed {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_LoginWithADButtonPressed &&
+            other is _$LoginWithADButtonPressedImpl &&
             (identical(other.user, user) || other.user == user));
   }
 
@@ -403,9 +407,9 @@ class _$_LoginWithADButtonPressed implements _LoginWithADButtonPressed {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_LoginWithADButtonPressedCopyWith<_$_LoginWithADButtonPressed>
-      get copyWith => __$$_LoginWithADButtonPressedCopyWithImpl<
-          _$_LoginWithADButtonPressed>(this, _$identity);
+  _$$LoginWithADButtonPressedImplCopyWith<_$LoginWithADButtonPressedImpl>
+      get copyWith => __$$LoginWithADButtonPressedImplCopyWithImpl<
+          _$LoginWithADButtonPressedImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -480,11 +484,11 @@ class _$_LoginWithADButtonPressed implements _LoginWithADButtonPressed {
 
 abstract class _LoginWithADButtonPressed implements ProxyLoginFormEvent {
   const factory _LoginWithADButtonPressed({required final User user}) =
-      _$_LoginWithADButtonPressed;
+      _$LoginWithADButtonPressedImpl;
 
   User get user;
   @JsonKey(ignore: true)
-  _$$_LoginWithADButtonPressedCopyWith<_$_LoginWithADButtonPressed>
+  _$$LoginWithADButtonPressedImplCopyWith<_$LoginWithADButtonPressedImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -554,11 +558,11 @@ class _$ProxyLoginFormStateCopyWithImpl<$Res, $Val extends ProxyLoginFormState>
 }
 
 /// @nodoc
-abstract class _$$_ProxyLoginFormStateCopyWith<$Res>
+abstract class _$$ProxyLoginFormStateImplCopyWith<$Res>
     implements $ProxyLoginFormStateCopyWith<$Res> {
-  factory _$$_ProxyLoginFormStateCopyWith(_$_ProxyLoginFormState value,
-          $Res Function(_$_ProxyLoginFormState) then) =
-      __$$_ProxyLoginFormStateCopyWithImpl<$Res>;
+  factory _$$ProxyLoginFormStateImplCopyWith(_$ProxyLoginFormStateImpl value,
+          $Res Function(_$ProxyLoginFormStateImpl) then) =
+      __$$ProxyLoginFormStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -569,11 +573,11 @@ abstract class _$$_ProxyLoginFormStateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_ProxyLoginFormStateCopyWithImpl<$Res>
-    extends _$ProxyLoginFormStateCopyWithImpl<$Res, _$_ProxyLoginFormState>
-    implements _$$_ProxyLoginFormStateCopyWith<$Res> {
-  __$$_ProxyLoginFormStateCopyWithImpl(_$_ProxyLoginFormState _value,
-      $Res Function(_$_ProxyLoginFormState) _then)
+class __$$ProxyLoginFormStateImplCopyWithImpl<$Res>
+    extends _$ProxyLoginFormStateCopyWithImpl<$Res, _$ProxyLoginFormStateImpl>
+    implements _$$ProxyLoginFormStateImplCopyWith<$Res> {
+  __$$ProxyLoginFormStateImplCopyWithImpl(_$ProxyLoginFormStateImpl _value,
+      $Res Function(_$ProxyLoginFormStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -584,7 +588,7 @@ class __$$_ProxyLoginFormStateCopyWithImpl<$Res>
     Object? isSubmitting = null,
     Object? authFailureOrSuccessOption = null,
   }) {
-    return _then(_$_ProxyLoginFormState(
+    return _then(_$ProxyLoginFormStateImpl(
       username: null == username
           ? _value.username
           : username // ignore: cast_nullable_to_non_nullable
@@ -607,8 +611,8 @@ class __$$_ProxyLoginFormStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_ProxyLoginFormState implements _ProxyLoginFormState {
-  const _$_ProxyLoginFormState(
+class _$ProxyLoginFormStateImpl implements _ProxyLoginFormState {
+  const _$ProxyLoginFormStateImpl(
       {required this.username,
       required this.showErrorMessages,
       required this.isSubmitting,
@@ -629,10 +633,10 @@ class _$_ProxyLoginFormState implements _ProxyLoginFormState {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ProxyLoginFormState &&
+            other is _$ProxyLoginFormStateImpl &&
             (identical(other.username, username) ||
                 other.username == username) &&
             (identical(other.showErrorMessages, showErrorMessages) ||
@@ -652,8 +656,8 @@ class _$_ProxyLoginFormState implements _ProxyLoginFormState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ProxyLoginFormStateCopyWith<_$_ProxyLoginFormState> get copyWith =>
-      __$$_ProxyLoginFormStateCopyWithImpl<_$_ProxyLoginFormState>(
+  _$$ProxyLoginFormStateImplCopyWith<_$ProxyLoginFormStateImpl> get copyWith =>
+      __$$ProxyLoginFormStateImplCopyWithImpl<_$ProxyLoginFormStateImpl>(
           this, _$identity);
 }
 
@@ -663,7 +667,7 @@ abstract class _ProxyLoginFormState implements ProxyLoginFormState {
       required final bool showErrorMessages,
       required final bool isSubmitting,
       required final Option<Either<ApiFailure, dynamic>>
-          authFailureOrSuccessOption}) = _$_ProxyLoginFormState;
+          authFailureOrSuccessOption}) = _$ProxyLoginFormStateImpl;
 
   @override
   Username get username;
@@ -675,6 +679,6 @@ abstract class _ProxyLoginFormState implements ProxyLoginFormState {
   Option<Either<ApiFailure, dynamic>> get authFailureOrSuccessOption;
   @override
   @JsonKey(ignore: true)
-  _$$_ProxyLoginFormStateCopyWith<_$_ProxyLoginFormState> get copyWith =>
+  _$$ProxyLoginFormStateImplCopyWith<_$ProxyLoginFormStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -12,7 +12,7 @@ part of 'material_filter_dto.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 MaterialFilterDto _$MaterialFilterDtoFromJson(Map<String, dynamic> json) {
   return _MaterialFilterDto.fromJson(json);
@@ -84,11 +84,11 @@ class _$MaterialFilterDtoCopyWithImpl<$Res, $Val extends MaterialFilterDto>
 }
 
 /// @nodoc
-abstract class _$$_MaterialFilterDtoCopyWith<$Res>
+abstract class _$$MaterialFilterDtoImplCopyWith<$Res>
     implements $MaterialFilterDtoCopyWith<$Res> {
-  factory _$$_MaterialFilterDtoCopyWith(_$_MaterialFilterDto value,
-          $Res Function(_$_MaterialFilterDto) then) =
-      __$$_MaterialFilterDtoCopyWithImpl<$Res>;
+  factory _$$MaterialFilterDtoImplCopyWith(_$MaterialFilterDtoImpl value,
+          $Res Function(_$MaterialFilterDtoImpl) then) =
+      __$$MaterialFilterDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -101,11 +101,11 @@ abstract class _$$_MaterialFilterDtoCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_MaterialFilterDtoCopyWithImpl<$Res>
-    extends _$MaterialFilterDtoCopyWithImpl<$Res, _$_MaterialFilterDto>
-    implements _$$_MaterialFilterDtoCopyWith<$Res> {
-  __$$_MaterialFilterDtoCopyWithImpl(
-      _$_MaterialFilterDto _value, $Res Function(_$_MaterialFilterDto) _then)
+class __$$MaterialFilterDtoImplCopyWithImpl<$Res>
+    extends _$MaterialFilterDtoCopyWithImpl<$Res, _$MaterialFilterDtoImpl>
+    implements _$$MaterialFilterDtoImplCopyWith<$Res> {
+  __$$MaterialFilterDtoImplCopyWithImpl(_$MaterialFilterDtoImpl _value,
+      $Res Function(_$MaterialFilterDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -115,7 +115,7 @@ class __$$_MaterialFilterDtoCopyWithImpl<$Res>
     Object? countryList = null,
     Object? brandList = null,
   }) {
-    return _then(_$_MaterialFilterDto(
+    return _then(_$MaterialFilterDtoImpl(
       manufactureList: null == manufactureList
           ? _value._manufactureList
           : manufactureList // ignore: cast_nullable_to_non_nullable
@@ -134,8 +134,8 @@ class __$$_MaterialFilterDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_MaterialFilterDto extends _MaterialFilterDto {
-  const _$_MaterialFilterDto(
+class _$MaterialFilterDtoImpl extends _MaterialFilterDto {
+  const _$MaterialFilterDtoImpl(
       {@JsonKey(name: 'ManufactureList', defaultValue: <String>[])
       required final List<String> manufactureList,
       @JsonKey(name: 'CountryList', defaultValue: <MaterialFilterCountryDto>[])
@@ -147,8 +147,8 @@ class _$_MaterialFilterDto extends _MaterialFilterDto {
         _brandList = brandList,
         super._();
 
-  factory _$_MaterialFilterDto.fromJson(Map<String, dynamic> json) =>
-      _$$_MaterialFilterDtoFromJson(json);
+  factory _$MaterialFilterDtoImpl.fromJson(Map<String, dynamic> json) =>
+      _$$MaterialFilterDtoImplFromJson(json);
 
   final List<String> _manufactureList;
   @override
@@ -183,10 +183,10 @@ class _$_MaterialFilterDto extends _MaterialFilterDto {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_MaterialFilterDto &&
+            other is _$MaterialFilterDtoImpl &&
             const DeepCollectionEquality()
                 .equals(other._manufactureList, _manufactureList) &&
             const DeepCollectionEquality()
@@ -206,13 +206,13 @@ class _$_MaterialFilterDto extends _MaterialFilterDto {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_MaterialFilterDtoCopyWith<_$_MaterialFilterDto> get copyWith =>
-      __$$_MaterialFilterDtoCopyWithImpl<_$_MaterialFilterDto>(
+  _$$MaterialFilterDtoImplCopyWith<_$MaterialFilterDtoImpl> get copyWith =>
+      __$$MaterialFilterDtoImplCopyWithImpl<_$MaterialFilterDtoImpl>(
           this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_MaterialFilterDtoToJson(
+    return _$$MaterialFilterDtoImplToJson(
       this,
     );
   }
@@ -225,11 +225,11 @@ abstract class _MaterialFilterDto extends MaterialFilterDto {
       @JsonKey(name: 'CountryList', defaultValue: <MaterialFilterCountryDto>[])
       required final List<MaterialFilterCountryDto> countryList,
       @JsonKey(name: 'BrandList', defaultValue: <String>[])
-      required final List<String> brandList}) = _$_MaterialFilterDto;
+      required final List<String> brandList}) = _$MaterialFilterDtoImpl;
   const _MaterialFilterDto._() : super._();
 
   factory _MaterialFilterDto.fromJson(Map<String, dynamic> json) =
-      _$_MaterialFilterDto.fromJson;
+      _$MaterialFilterDtoImpl.fromJson;
 
   @override
   @JsonKey(name: 'ManufactureList', defaultValue: <String>[])
@@ -242,7 +242,7 @@ abstract class _MaterialFilterDto extends MaterialFilterDto {
   List<String> get brandList;
   @override
   @JsonKey(ignore: true)
-  _$$_MaterialFilterDtoCopyWith<_$_MaterialFilterDto> get copyWith =>
+  _$$MaterialFilterDtoImplCopyWith<_$MaterialFilterDtoImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -306,12 +306,12 @@ class _$MaterialFilterCountryDtoCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_MaterialFilterCountryDtoCopyWith<$Res>
+abstract class _$$MaterialFilterCountryDtoImplCopyWith<$Res>
     implements $MaterialFilterCountryDtoCopyWith<$Res> {
-  factory _$$_MaterialFilterCountryDtoCopyWith(
-          _$_MaterialFilterCountryDto value,
-          $Res Function(_$_MaterialFilterCountryDto) then) =
-      __$$_MaterialFilterCountryDtoCopyWithImpl<$Res>;
+  factory _$$MaterialFilterCountryDtoImplCopyWith(
+          _$MaterialFilterCountryDtoImpl value,
+          $Res Function(_$MaterialFilterCountryDtoImpl) then) =
+      __$$MaterialFilterCountryDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -320,12 +320,13 @@ abstract class _$$_MaterialFilterCountryDtoCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_MaterialFilterCountryDtoCopyWithImpl<$Res>
+class __$$MaterialFilterCountryDtoImplCopyWithImpl<$Res>
     extends _$MaterialFilterCountryDtoCopyWithImpl<$Res,
-        _$_MaterialFilterCountryDto>
-    implements _$$_MaterialFilterCountryDtoCopyWith<$Res> {
-  __$$_MaterialFilterCountryDtoCopyWithImpl(_$_MaterialFilterCountryDto _value,
-      $Res Function(_$_MaterialFilterCountryDto) _then)
+        _$MaterialFilterCountryDtoImpl>
+    implements _$$MaterialFilterCountryDtoImplCopyWith<$Res> {
+  __$$MaterialFilterCountryDtoImplCopyWithImpl(
+      _$MaterialFilterCountryDtoImpl _value,
+      $Res Function(_$MaterialFilterCountryDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -334,7 +335,7 @@ class __$$_MaterialFilterCountryDtoCopyWithImpl<$Res>
     Object? code = null,
     Object? name = null,
   }) {
-    return _then(_$_MaterialFilterCountryDto(
+    return _then(_$MaterialFilterCountryDtoImpl(
       code: null == code
           ? _value.code
           : code // ignore: cast_nullable_to_non_nullable
@@ -349,14 +350,14 @@ class __$$_MaterialFilterCountryDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_MaterialFilterCountryDto extends _MaterialFilterCountryDto {
-  const _$_MaterialFilterCountryDto(
+class _$MaterialFilterCountryDtoImpl extends _MaterialFilterCountryDto {
+  const _$MaterialFilterCountryDtoImpl(
       {@JsonKey(name: 'Code', defaultValue: '') required this.code,
       @JsonKey(name: 'Name', defaultValue: '') required this.name})
       : super._();
 
-  factory _$_MaterialFilterCountryDto.fromJson(Map<String, dynamic> json) =>
-      _$$_MaterialFilterCountryDtoFromJson(json);
+  factory _$MaterialFilterCountryDtoImpl.fromJson(Map<String, dynamic> json) =>
+      _$$MaterialFilterCountryDtoImplFromJson(json);
 
   @override
   @JsonKey(name: 'Code', defaultValue: '')
@@ -371,10 +372,10 @@ class _$_MaterialFilterCountryDto extends _MaterialFilterCountryDto {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_MaterialFilterCountryDto &&
+            other is _$MaterialFilterCountryDtoImpl &&
             (identical(other.code, code) || other.code == code) &&
             (identical(other.name, name) || other.name == name));
   }
@@ -386,13 +387,13 @@ class _$_MaterialFilterCountryDto extends _MaterialFilterCountryDto {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_MaterialFilterCountryDtoCopyWith<_$_MaterialFilterCountryDto>
-      get copyWith => __$$_MaterialFilterCountryDtoCopyWithImpl<
-          _$_MaterialFilterCountryDto>(this, _$identity);
+  _$$MaterialFilterCountryDtoImplCopyWith<_$MaterialFilterCountryDtoImpl>
+      get copyWith => __$$MaterialFilterCountryDtoImplCopyWithImpl<
+          _$MaterialFilterCountryDtoImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_MaterialFilterCountryDtoToJson(
+    return _$$MaterialFilterCountryDtoImplToJson(
       this,
     );
   }
@@ -402,11 +403,11 @@ abstract class _MaterialFilterCountryDto extends MaterialFilterCountryDto {
   const factory _MaterialFilterCountryDto(
       {@JsonKey(name: 'Code', defaultValue: '') required final String code,
       @JsonKey(name: 'Name', defaultValue: '')
-      required final String name}) = _$_MaterialFilterCountryDto;
+      required final String name}) = _$MaterialFilterCountryDtoImpl;
   const _MaterialFilterCountryDto._() : super._();
 
   factory _MaterialFilterCountryDto.fromJson(Map<String, dynamic> json) =
-      _$_MaterialFilterCountryDto.fromJson;
+      _$MaterialFilterCountryDtoImpl.fromJson;
 
   @override
   @JsonKey(name: 'Code', defaultValue: '')
@@ -416,6 +417,6 @@ abstract class _MaterialFilterCountryDto extends MaterialFilterCountryDto {
   String get name;
   @override
   @JsonKey(ignore: true)
-  _$$_MaterialFilterCountryDtoCopyWith<_$_MaterialFilterCountryDto>
+  _$$MaterialFilterCountryDtoImplCopyWith<_$MaterialFilterCountryDtoImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

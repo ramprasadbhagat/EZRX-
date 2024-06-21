@@ -12,7 +12,7 @@ part of 'submit_material_item_bonus.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$SubmitMaterialItemBonus {
@@ -64,23 +64,25 @@ class _$SubmitMaterialItemBonusCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_SubmitMaterialItemBonusCopyWith<$Res>
+abstract class _$$SubmitMaterialItemBonusImplCopyWith<$Res>
     implements $SubmitMaterialItemBonusCopyWith<$Res> {
-  factory _$$_SubmitMaterialItemBonusCopyWith(_$_SubmitMaterialItemBonus value,
-          $Res Function(_$_SubmitMaterialItemBonus) then) =
-      __$$_SubmitMaterialItemBonusCopyWithImpl<$Res>;
+  factory _$$SubmitMaterialItemBonusImplCopyWith(
+          _$SubmitMaterialItemBonusImpl value,
+          $Res Function(_$SubmitMaterialItemBonusImpl) then) =
+      __$$SubmitMaterialItemBonusImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({MaterialNumber materialNumber, int qty});
 }
 
 /// @nodoc
-class __$$_SubmitMaterialItemBonusCopyWithImpl<$Res>
+class __$$SubmitMaterialItemBonusImplCopyWithImpl<$Res>
     extends _$SubmitMaterialItemBonusCopyWithImpl<$Res,
-        _$_SubmitMaterialItemBonus>
-    implements _$$_SubmitMaterialItemBonusCopyWith<$Res> {
-  __$$_SubmitMaterialItemBonusCopyWithImpl(_$_SubmitMaterialItemBonus _value,
-      $Res Function(_$_SubmitMaterialItemBonus) _then)
+        _$SubmitMaterialItemBonusImpl>
+    implements _$$SubmitMaterialItemBonusImplCopyWith<$Res> {
+  __$$SubmitMaterialItemBonusImplCopyWithImpl(
+      _$SubmitMaterialItemBonusImpl _value,
+      $Res Function(_$SubmitMaterialItemBonusImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -89,7 +91,7 @@ class __$$_SubmitMaterialItemBonusCopyWithImpl<$Res>
     Object? materialNumber = null,
     Object? qty = null,
   }) {
-    return _then(_$_SubmitMaterialItemBonus(
+    return _then(_$SubmitMaterialItemBonusImpl(
       materialNumber: null == materialNumber
           ? _value.materialNumber
           : materialNumber // ignore: cast_nullable_to_non_nullable
@@ -104,8 +106,9 @@ class __$$_SubmitMaterialItemBonusCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_SubmitMaterialItemBonus implements _SubmitMaterialItemBonus {
-  _$_SubmitMaterialItemBonus({required this.materialNumber, required this.qty});
+class _$SubmitMaterialItemBonusImpl implements _SubmitMaterialItemBonus {
+  _$SubmitMaterialItemBonusImpl(
+      {required this.materialNumber, required this.qty});
 
   @override
   final MaterialNumber materialNumber;
@@ -118,10 +121,10 @@ class _$_SubmitMaterialItemBonus implements _SubmitMaterialItemBonus {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_SubmitMaterialItemBonus &&
+            other is _$SubmitMaterialItemBonusImpl &&
             (identical(other.materialNumber, materialNumber) ||
                 other.materialNumber == materialNumber) &&
             (identical(other.qty, qty) || other.qty == qty));
@@ -133,16 +136,15 @@ class _$_SubmitMaterialItemBonus implements _SubmitMaterialItemBonus {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_SubmitMaterialItemBonusCopyWith<_$_SubmitMaterialItemBonus>
-      get copyWith =>
-          __$$_SubmitMaterialItemBonusCopyWithImpl<_$_SubmitMaterialItemBonus>(
-              this, _$identity);
+  _$$SubmitMaterialItemBonusImplCopyWith<_$SubmitMaterialItemBonusImpl>
+      get copyWith => __$$SubmitMaterialItemBonusImplCopyWithImpl<
+          _$SubmitMaterialItemBonusImpl>(this, _$identity);
 }
 
 abstract class _SubmitMaterialItemBonus implements SubmitMaterialItemBonus {
   factory _SubmitMaterialItemBonus(
       {required final MaterialNumber materialNumber,
-      required final int qty}) = _$_SubmitMaterialItemBonus;
+      required final int qty}) = _$SubmitMaterialItemBonusImpl;
 
   @override
   MaterialNumber get materialNumber;
@@ -150,6 +152,6 @@ abstract class _SubmitMaterialItemBonus implements SubmitMaterialItemBonus {
   int get qty;
   @override
   @JsonKey(ignore: true)
-  _$$_SubmitMaterialItemBonusCopyWith<_$_SubmitMaterialItemBonus>
+  _$$SubmitMaterialItemBonusImplCopyWith<_$SubmitMaterialItemBonusImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

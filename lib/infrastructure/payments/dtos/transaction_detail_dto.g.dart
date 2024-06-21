@@ -6,9 +6,9 @@ part of 'transaction_detail_dto.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_TransactionDetailDto _$$_TransactionDetailDtoFromJson(
+_$TransactionDetailDtoImpl _$$TransactionDetailDtoImplFromJson(
         Map<String, dynamic> json) =>
-    _$_TransactionDetailDto(
+    _$TransactionDetailDtoImpl(
       id: json['id'] as String? ?? '',
       reference: json['reference'] as String? ?? '',
       invoices: (json['invoices'] as List<dynamic>?)
@@ -27,8 +27,8 @@ _$_TransactionDetailDto _$$_TransactionDetailDtoFromJson(
       vaNumber: _mappingVaNumber(json, 'vaNumber') as String? ?? '',
     );
 
-Map<String, dynamic> _$$_TransactionDetailDtoToJson(
-        _$_TransactionDetailDto instance) =>
+Map<String, dynamic> _$$TransactionDetailDtoImplToJson(
+        _$TransactionDetailDtoImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'reference': instance.reference,

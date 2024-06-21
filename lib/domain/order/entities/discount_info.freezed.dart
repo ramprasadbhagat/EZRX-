@@ -12,7 +12,7 @@ part of 'discount_info.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$DiscountInfo {
@@ -69,22 +69,22 @@ class _$DiscountInfoCopyWithImpl<$Res, $Val extends DiscountInfo>
 }
 
 /// @nodoc
-abstract class _$$_DiscountInfoCopyWith<$Res>
+abstract class _$$DiscountInfoImplCopyWith<$Res>
     implements $DiscountInfoCopyWith<$Res> {
-  factory _$$_DiscountInfoCopyWith(
-          _$_DiscountInfo value, $Res Function(_$_DiscountInfo) then) =
-      __$$_DiscountInfoCopyWithImpl<$Res>;
+  factory _$$DiscountInfoImplCopyWith(
+          _$DiscountInfoImpl value, $Res Function(_$DiscountInfoImpl) then) =
+      __$$DiscountInfoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({DiscountType type, int minQty, double rate});
 }
 
 /// @nodoc
-class __$$_DiscountInfoCopyWithImpl<$Res>
-    extends _$DiscountInfoCopyWithImpl<$Res, _$_DiscountInfo>
-    implements _$$_DiscountInfoCopyWith<$Res> {
-  __$$_DiscountInfoCopyWithImpl(
-      _$_DiscountInfo _value, $Res Function(_$_DiscountInfo) _then)
+class __$$DiscountInfoImplCopyWithImpl<$Res>
+    extends _$DiscountInfoCopyWithImpl<$Res, _$DiscountInfoImpl>
+    implements _$$DiscountInfoImplCopyWith<$Res> {
+  __$$DiscountInfoImplCopyWithImpl(
+      _$DiscountInfoImpl _value, $Res Function(_$DiscountInfoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -94,7 +94,7 @@ class __$$_DiscountInfoCopyWithImpl<$Res>
     Object? minQty = null,
     Object? rate = null,
   }) {
-    return _then(_$_DiscountInfo(
+    return _then(_$DiscountInfoImpl(
       type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
@@ -113,8 +113,8 @@ class __$$_DiscountInfoCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_DiscountInfo extends _DiscountInfo {
-  const _$_DiscountInfo(
+class _$DiscountInfoImpl extends _DiscountInfo {
+  const _$DiscountInfoImpl(
       {required this.type, required this.minQty, required this.rate})
       : super._();
 
@@ -131,10 +131,10 @@ class _$_DiscountInfo extends _DiscountInfo {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_DiscountInfo &&
+            other is _$DiscountInfoImpl &&
             (identical(other.type, type) || other.type == type) &&
             (identical(other.minQty, minQty) || other.minQty == minQty) &&
             (identical(other.rate, rate) || other.rate == rate));
@@ -146,15 +146,15 @@ class _$_DiscountInfo extends _DiscountInfo {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_DiscountInfoCopyWith<_$_DiscountInfo> get copyWith =>
-      __$$_DiscountInfoCopyWithImpl<_$_DiscountInfo>(this, _$identity);
+  _$$DiscountInfoImplCopyWith<_$DiscountInfoImpl> get copyWith =>
+      __$$DiscountInfoImplCopyWithImpl<_$DiscountInfoImpl>(this, _$identity);
 }
 
 abstract class _DiscountInfo extends DiscountInfo {
   const factory _DiscountInfo(
       {required final DiscountType type,
       required final int minQty,
-      required final double rate}) = _$_DiscountInfo;
+      required final double rate}) = _$DiscountInfoImpl;
   const _DiscountInfo._() : super._();
 
   @override
@@ -165,6 +165,6 @@ abstract class _DiscountInfo extends DiscountInfo {
   double get rate;
   @override
   @JsonKey(ignore: true)
-  _$$_DiscountInfoCopyWith<_$_DiscountInfo> get copyWith =>
+  _$$DiscountInfoImplCopyWith<_$DiscountInfoImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

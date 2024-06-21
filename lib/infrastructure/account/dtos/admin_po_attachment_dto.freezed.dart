@@ -12,7 +12,7 @@ part of 'admin_po_attachment_dto.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 AdminPoAttachmentDto _$AdminPoAttachmentDtoFromJson(Map<String, dynamic> json) {
   return _AdminPoAttachmentDto.fromJson(json);
@@ -151,11 +151,11 @@ class _$AdminPoAttachmentDtoCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_AdminPoAttachmentDtoCopyWith<$Res>
+abstract class _$$AdminPoAttachmentDtoImplCopyWith<$Res>
     implements $AdminPoAttachmentDtoCopyWith<$Res> {
-  factory _$$_AdminPoAttachmentDtoCopyWith(_$_AdminPoAttachmentDto value,
-          $Res Function(_$_AdminPoAttachmentDto) then) =
-      __$$_AdminPoAttachmentDtoCopyWithImpl<$Res>;
+  factory _$$AdminPoAttachmentDtoImplCopyWith(_$AdminPoAttachmentDtoImpl value,
+          $Res Function(_$AdminPoAttachmentDtoImpl) then) =
+      __$$AdminPoAttachmentDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -185,11 +185,11 @@ abstract class _$$_AdminPoAttachmentDtoCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_AdminPoAttachmentDtoCopyWithImpl<$Res>
-    extends _$AdminPoAttachmentDtoCopyWithImpl<$Res, _$_AdminPoAttachmentDto>
-    implements _$$_AdminPoAttachmentDtoCopyWith<$Res> {
-  __$$_AdminPoAttachmentDtoCopyWithImpl(_$_AdminPoAttachmentDto _value,
-      $Res Function(_$_AdminPoAttachmentDto) _then)
+class __$$AdminPoAttachmentDtoImplCopyWithImpl<$Res>
+    extends _$AdminPoAttachmentDtoCopyWithImpl<$Res, _$AdminPoAttachmentDtoImpl>
+    implements _$$AdminPoAttachmentDtoImplCopyWith<$Res> {
+  __$$AdminPoAttachmentDtoImplCopyWithImpl(_$AdminPoAttachmentDtoImpl _value,
+      $Res Function(_$AdminPoAttachmentDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -206,7 +206,7 @@ class __$$_AdminPoAttachmentDtoCopyWithImpl<$Res>
     Object? shipToCode = null,
     Object? tempOrderNumber = null,
   }) {
-    return _then(_$_AdminPoAttachmentDto(
+    return _then(_$AdminPoAttachmentDtoImpl(
       salesOrderNumber: null == salesOrderNumber
           ? _value.salesOrderNumber
           : salesOrderNumber // ignore: cast_nullable_to_non_nullable
@@ -253,8 +253,8 @@ class __$$_AdminPoAttachmentDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_AdminPoAttachmentDto extends _AdminPoAttachmentDto {
-  const _$_AdminPoAttachmentDto(
+class _$AdminPoAttachmentDtoImpl extends _AdminPoAttachmentDto {
+  const _$AdminPoAttachmentDtoImpl(
       {@JsonKey(
           name: 'salesOrderNumber', defaultValue: '', toJson: overrideToJson)
       required this.salesOrderNumber,
@@ -280,8 +280,8 @@ class _$_AdminPoAttachmentDto extends _AdminPoAttachmentDto {
       required this.tempOrderNumber})
       : super._();
 
-  factory _$_AdminPoAttachmentDto.fromJson(Map<String, dynamic> json) =>
-      _$$_AdminPoAttachmentDtoFromJson(json);
+  factory _$AdminPoAttachmentDtoImpl.fromJson(Map<String, dynamic> json) =>
+      _$$AdminPoAttachmentDtoImplFromJson(json);
 
   @override
   @JsonKey(name: 'salesOrderNumber', defaultValue: '', toJson: overrideToJson)
@@ -321,10 +321,10 @@ class _$_AdminPoAttachmentDto extends _AdminPoAttachmentDto {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_AdminPoAttachmentDto &&
+            other is _$AdminPoAttachmentDtoImpl &&
             (identical(other.salesOrderNumber, salesOrderNumber) ||
                 other.salesOrderNumber == salesOrderNumber) &&
             (identical(other.ezrxReferenceNumber, ezrxReferenceNumber) ||
@@ -365,13 +365,14 @@ class _$_AdminPoAttachmentDto extends _AdminPoAttachmentDto {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_AdminPoAttachmentDtoCopyWith<_$_AdminPoAttachmentDto> get copyWith =>
-      __$$_AdminPoAttachmentDtoCopyWithImpl<_$_AdminPoAttachmentDto>(
-          this, _$identity);
+  _$$AdminPoAttachmentDtoImplCopyWith<_$AdminPoAttachmentDtoImpl>
+      get copyWith =>
+          __$$AdminPoAttachmentDtoImplCopyWithImpl<_$AdminPoAttachmentDtoImpl>(
+              this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_AdminPoAttachmentDtoToJson(
+    return _$$AdminPoAttachmentDtoImplToJson(
       this,
     );
   }
@@ -401,11 +402,11 @@ abstract class _AdminPoAttachmentDto extends AdminPoAttachmentDto {
       required final String shipToCode,
       @JsonKey(
           name: 'tempOrderNumber', defaultValue: '', toJson: overrideToJson)
-      required final String tempOrderNumber}) = _$_AdminPoAttachmentDto;
+      required final String tempOrderNumber}) = _$AdminPoAttachmentDtoImpl;
   const _AdminPoAttachmentDto._() : super._();
 
   factory _AdminPoAttachmentDto.fromJson(Map<String, dynamic> json) =
-      _$_AdminPoAttachmentDto.fromJson;
+      _$AdminPoAttachmentDtoImpl.fromJson;
 
   @override
   @JsonKey(name: 'salesOrderNumber', defaultValue: '', toJson: overrideToJson)
@@ -440,6 +441,6 @@ abstract class _AdminPoAttachmentDto extends AdminPoAttachmentDto {
   String get tempOrderNumber;
   @override
   @JsonKey(ignore: true)
-  _$$_AdminPoAttachmentDtoCopyWith<_$_AdminPoAttachmentDto> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$AdminPoAttachmentDtoImplCopyWith<_$AdminPoAttachmentDtoImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }

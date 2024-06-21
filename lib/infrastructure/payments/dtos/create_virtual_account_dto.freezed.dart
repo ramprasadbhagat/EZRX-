@@ -12,7 +12,7 @@ part of 'create_virtual_account_dto.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 CreateVirtualAccountDto _$CreateVirtualAccountDtoFromJson(
     Map<String, dynamic> json) {
@@ -137,11 +137,12 @@ class _$CreateVirtualAccountDtoCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_CreateVirtualAccountDtoCopyWith<$Res>
+abstract class _$$CreateVirtualAccountDtoImplCopyWith<$Res>
     implements $CreateVirtualAccountDtoCopyWith<$Res> {
-  factory _$$_CreateVirtualAccountDtoCopyWith(_$_CreateVirtualAccountDto value,
-          $Res Function(_$_CreateVirtualAccountDto) then) =
-      __$$_CreateVirtualAccountDtoCopyWithImpl<$Res>;
+  factory _$$CreateVirtualAccountDtoImplCopyWith(
+          _$CreateVirtualAccountDtoImpl value,
+          $Res Function(_$CreateVirtualAccountDtoImpl) then) =
+      __$$CreateVirtualAccountDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -163,12 +164,13 @@ abstract class _$$_CreateVirtualAccountDtoCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_CreateVirtualAccountDtoCopyWithImpl<$Res>
+class __$$CreateVirtualAccountDtoImplCopyWithImpl<$Res>
     extends _$CreateVirtualAccountDtoCopyWithImpl<$Res,
-        _$_CreateVirtualAccountDto>
-    implements _$$_CreateVirtualAccountDtoCopyWith<$Res> {
-  __$$_CreateVirtualAccountDtoCopyWithImpl(_$_CreateVirtualAccountDto _value,
-      $Res Function(_$_CreateVirtualAccountDto) _then)
+        _$CreateVirtualAccountDtoImpl>
+    implements _$$CreateVirtualAccountDtoImplCopyWith<$Res> {
+  __$$CreateVirtualAccountDtoImplCopyWithImpl(
+      _$CreateVirtualAccountDtoImpl _value,
+      $Res Function(_$CreateVirtualAccountDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -183,7 +185,7 @@ class __$$_CreateVirtualAccountDtoCopyWithImpl<$Res>
     Object? createdOn = null,
     Object? paidOn = null,
   }) {
-    return _then(_$_CreateVirtualAccountDto(
+    return _then(_$CreateVirtualAccountDtoImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -222,8 +224,8 @@ class __$$_CreateVirtualAccountDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_CreateVirtualAccountDto extends _CreateVirtualAccountDto {
-  const _$_CreateVirtualAccountDto(
+class _$CreateVirtualAccountDtoImpl extends _CreateVirtualAccountDto {
+  const _$CreateVirtualAccountDtoImpl(
       {@JsonKey(name: 'id', defaultValue: '') required this.id,
       @JsonKey(name: 'invoices', defaultValue: [])
       required final List<TransactionInvoiceDto> invoices,
@@ -240,8 +242,8 @@ class _$_CreateVirtualAccountDto extends _CreateVirtualAccountDto {
       : _invoices = invoices,
         super._();
 
-  factory _$_CreateVirtualAccountDto.fromJson(Map<String, dynamic> json) =>
-      _$$_CreateVirtualAccountDtoFromJson(json);
+  factory _$CreateVirtualAccountDtoImpl.fromJson(Map<String, dynamic> json) =>
+      _$$CreateVirtualAccountDtoImplFromJson(json);
 
   @override
   @JsonKey(name: 'id', defaultValue: '')
@@ -280,10 +282,10 @@ class _$_CreateVirtualAccountDto extends _CreateVirtualAccountDto {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_CreateVirtualAccountDto &&
+            other is _$CreateVirtualAccountDtoImpl &&
             (identical(other.id, id) || other.id == id) &&
             const DeepCollectionEquality().equals(other._invoices, _invoices) &&
             (identical(other.amountPayable, amountPayable) ||
@@ -314,14 +316,13 @@ class _$_CreateVirtualAccountDto extends _CreateVirtualAccountDto {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_CreateVirtualAccountDtoCopyWith<_$_CreateVirtualAccountDto>
-      get copyWith =>
-          __$$_CreateVirtualAccountDtoCopyWithImpl<_$_CreateVirtualAccountDto>(
-              this, _$identity);
+  _$$CreateVirtualAccountDtoImplCopyWith<_$CreateVirtualAccountDtoImpl>
+      get copyWith => __$$CreateVirtualAccountDtoImplCopyWithImpl<
+          _$CreateVirtualAccountDtoImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_CreateVirtualAccountDtoToJson(
+    return _$$CreateVirtualAccountDtoImplToJson(
       this,
     );
   }
@@ -342,11 +343,11 @@ abstract class _CreateVirtualAccountDto extends CreateVirtualAccountDto {
       @JsonKey(name: 'createdOn', defaultValue: '', readValue: createdOnDate)
       required final String createdOn,
       @JsonKey(name: 'paidOn', defaultValue: '', readValue: createdOnDate)
-      required final String paidOn}) = _$_CreateVirtualAccountDto;
+      required final String paidOn}) = _$CreateVirtualAccountDtoImpl;
   const _CreateVirtualAccountDto._() : super._();
 
   factory _CreateVirtualAccountDto.fromJson(Map<String, dynamic> json) =
-      _$_CreateVirtualAccountDto.fromJson;
+      _$CreateVirtualAccountDtoImpl.fromJson;
 
   @override
   @JsonKey(name: 'id', defaultValue: '')
@@ -374,6 +375,6 @@ abstract class _CreateVirtualAccountDto extends CreateVirtualAccountDto {
   String get paidOn;
   @override
   @JsonKey(ignore: true)
-  _$$_CreateVirtualAccountDtoCopyWith<_$_CreateVirtualAccountDto>
+  _$$CreateVirtualAccountDtoImplCopyWith<_$CreateVirtualAccountDtoImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

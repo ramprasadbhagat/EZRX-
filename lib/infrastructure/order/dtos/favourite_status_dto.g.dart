@@ -6,14 +6,14 @@ part of 'favourite_status_dto.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_FavouriteStatusDto _$$_FavouriteStatusDtoFromJson(
+_$FavouriteStatusDtoImpl _$$FavouriteStatusDtoImplFromJson(
         Map<String, dynamic> json) =>
-    _$_FavouriteStatusDto(
+    _$FavouriteStatusDtoImpl(
       isFavourite: json['isFavourite'] as bool? ?? false,
     );
 
-Map<String, dynamic> _$$_FavouriteStatusDtoToJson(
-        _$_FavouriteStatusDto instance) =>
+Map<String, dynamic> _$$FavouriteStatusDtoImplToJson(
+        _$FavouriteStatusDtoImpl instance) =>
     <String, dynamic>{
       'isFavourite': instance.isFavourite,
     };

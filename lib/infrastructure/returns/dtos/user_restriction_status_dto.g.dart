@@ -6,9 +6,9 @@ part of 'user_restriction_status_dto.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_UserRestrictionStatusDto _$$_UserRestrictionStatusDtoFromJson(
+_$UserRestrictionStatusDtoImpl _$$UserRestrictionStatusDtoImplFromJson(
         Map<String, dynamic> json) =>
-    _$_UserRestrictionStatusDto(
+    _$UserRestrictionStatusDtoImpl(
       userRestrictionStatus:
           _userRestrictionOverride(json, 'approverRightStatus') as String? ??
               '',
@@ -18,8 +18,8 @@ _$_UserRestrictionStatusDto _$$_UserRestrictionStatusDtoFromJson(
               false,
     );
 
-Map<String, dynamic> _$$_UserRestrictionStatusDtoToJson(
-        _$_UserRestrictionStatusDto instance) =>
+Map<String, dynamic> _$$UserRestrictionStatusDtoImplToJson(
+        _$UserRestrictionStatusDtoImpl instance) =>
     <String, dynamic>{
       'approverRightStatus': instance.userRestrictionStatus,
       'approvalLimitStatus': instance.userReturnApprovalLimit,

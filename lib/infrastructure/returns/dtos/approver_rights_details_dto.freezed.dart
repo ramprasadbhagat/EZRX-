@@ -12,7 +12,7 @@ part of 'approver_rights_details_dto.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 ApproverRightsDetailsDto _$ApproverRightsDetailsDtoFromJson(
     Map<String, dynamic> json) {
@@ -138,12 +138,12 @@ class _$ApproverRightsDetailsDtoCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_ApproverRightsDetailsDtoCopyWith<$Res>
+abstract class _$$ApproverRightsDetailsDtoImplCopyWith<$Res>
     implements $ApproverRightsDetailsDtoCopyWith<$Res> {
-  factory _$$_ApproverRightsDetailsDtoCopyWith(
-          _$_ApproverRightsDetailsDto value,
-          $Res Function(_$_ApproverRightsDetailsDto) then) =
-      __$$_ApproverRightsDetailsDtoCopyWithImpl<$Res>;
+  factory _$$ApproverRightsDetailsDtoImplCopyWith(
+          _$ApproverRightsDetailsDtoImpl value,
+          $Res Function(_$ApproverRightsDetailsDtoImpl) then) =
+      __$$ApproverRightsDetailsDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -160,12 +160,13 @@ abstract class _$$_ApproverRightsDetailsDtoCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_ApproverRightsDetailsDtoCopyWithImpl<$Res>
+class __$$ApproverRightsDetailsDtoImplCopyWithImpl<$Res>
     extends _$ApproverRightsDetailsDtoCopyWithImpl<$Res,
-        _$_ApproverRightsDetailsDto>
-    implements _$$_ApproverRightsDetailsDtoCopyWith<$Res> {
-  __$$_ApproverRightsDetailsDtoCopyWithImpl(_$_ApproverRightsDetailsDto _value,
-      $Res Function(_$_ApproverRightsDetailsDto) _then)
+        _$ApproverRightsDetailsDtoImpl>
+    implements _$$ApproverRightsDetailsDtoImplCopyWith<$Res> {
+  __$$ApproverRightsDetailsDtoImplCopyWithImpl(
+      _$ApproverRightsDetailsDtoImpl _value,
+      $Res Function(_$ApproverRightsDetailsDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -182,7 +183,7 @@ class __$$_ApproverRightsDetailsDtoCopyWithImpl<$Res>
     Object? materialNumber = null,
     Object? uuid = null,
   }) {
-    return _then(_$_ApproverRightsDetailsDto(
+    return _then(_$ApproverRightsDetailsDtoImpl(
       salesOrg: null == salesOrg
           ? _value.salesOrg
           : salesOrg // ignore: cast_nullable_to_non_nullable
@@ -229,32 +230,28 @@ class __$$_ApproverRightsDetailsDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_ApproverRightsDetailsDto extends _ApproverRightsDetailsDto {
-  const _$_ApproverRightsDetailsDto(
-      {@JsonKey(name: 'salesOrg', defaultValue: '')
-          required this.salesOrg,
-      @JsonKey(name: 'principal', defaultValue: '')
-          required this.principal,
+class _$ApproverRightsDetailsDtoImpl extends _ApproverRightsDetailsDto {
+  const _$ApproverRightsDetailsDtoImpl(
+      {@JsonKey(name: 'salesOrg', defaultValue: '') required this.salesOrg,
+      @JsonKey(name: 'principal', defaultValue: '') required this.principal,
       @JsonKey(name: 'industryCode1', defaultValue: '')
-          required this.industryCode1,
+      required this.industryCode1,
       @JsonKey(name: 'industryCode2', defaultValue: '')
-          required this.industryCode2,
+      required this.industryCode2,
       @JsonKey(name: 'industryCode3', defaultValue: '')
-          required this.industryCode3,
+      required this.industryCode3,
       @JsonKey(name: 'industryCode4', defaultValue: '')
-          required this.industryCode4,
+      required this.industryCode4,
       @JsonKey(name: 'industryCode5', defaultValue: '')
-          required this.industryCode5,
-      @JsonKey(name: 'plant', defaultValue: '')
-          required this.plant,
+      required this.industryCode5,
+      @JsonKey(name: 'plant', defaultValue: '') required this.plant,
       @JsonKey(name: 'materialNumber', defaultValue: '')
-          required this.materialNumber,
-      @JsonKey(name: 'uuid', defaultValue: '')
-          required this.uuid})
+      required this.materialNumber,
+      @JsonKey(name: 'uuid', defaultValue: '') required this.uuid})
       : super._();
 
-  factory _$_ApproverRightsDetailsDto.fromJson(Map<String, dynamic> json) =>
-      _$$_ApproverRightsDetailsDtoFromJson(json);
+  factory _$ApproverRightsDetailsDtoImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ApproverRightsDetailsDtoImplFromJson(json);
 
   @override
   @JsonKey(name: 'salesOrg', defaultValue: '')
@@ -293,10 +290,10 @@ class _$_ApproverRightsDetailsDto extends _ApproverRightsDetailsDto {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ApproverRightsDetailsDto &&
+            other is _$ApproverRightsDetailsDtoImpl &&
             (identical(other.salesOrg, salesOrg) ||
                 other.salesOrg == salesOrg) &&
             (identical(other.principal, principal) ||
@@ -335,13 +332,13 @@ class _$_ApproverRightsDetailsDto extends _ApproverRightsDetailsDto {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ApproverRightsDetailsDtoCopyWith<_$_ApproverRightsDetailsDto>
-      get copyWith => __$$_ApproverRightsDetailsDtoCopyWithImpl<
-          _$_ApproverRightsDetailsDto>(this, _$identity);
+  _$$ApproverRightsDetailsDtoImplCopyWith<_$ApproverRightsDetailsDtoImpl>
+      get copyWith => __$$ApproverRightsDetailsDtoImplCopyWithImpl<
+          _$ApproverRightsDetailsDtoImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_ApproverRightsDetailsDtoToJson(
+    return _$$ApproverRightsDetailsDtoImplToJson(
       this,
     );
   }
@@ -350,29 +347,28 @@ class _$_ApproverRightsDetailsDto extends _ApproverRightsDetailsDto {
 abstract class _ApproverRightsDetailsDto extends ApproverRightsDetailsDto {
   const factory _ApproverRightsDetailsDto(
       {@JsonKey(name: 'salesOrg', defaultValue: '')
-          required final String salesOrg,
+      required final String salesOrg,
       @JsonKey(name: 'principal', defaultValue: '')
-          required final String principal,
+      required final String principal,
       @JsonKey(name: 'industryCode1', defaultValue: '')
-          required final String industryCode1,
+      required final String industryCode1,
       @JsonKey(name: 'industryCode2', defaultValue: '')
-          required final String industryCode2,
+      required final String industryCode2,
       @JsonKey(name: 'industryCode3', defaultValue: '')
-          required final String industryCode3,
+      required final String industryCode3,
       @JsonKey(name: 'industryCode4', defaultValue: '')
-          required final String industryCode4,
+      required final String industryCode4,
       @JsonKey(name: 'industryCode5', defaultValue: '')
-          required final String industryCode5,
-      @JsonKey(name: 'plant', defaultValue: '')
-          required final String plant,
+      required final String industryCode5,
+      @JsonKey(name: 'plant', defaultValue: '') required final String plant,
       @JsonKey(name: 'materialNumber', defaultValue: '')
-          required final String materialNumber,
+      required final String materialNumber,
       @JsonKey(name: 'uuid', defaultValue: '')
-          required final String uuid}) = _$_ApproverRightsDetailsDto;
+      required final String uuid}) = _$ApproverRightsDetailsDtoImpl;
   const _ApproverRightsDetailsDto._() : super._();
 
   factory _ApproverRightsDetailsDto.fromJson(Map<String, dynamic> json) =
-      _$_ApproverRightsDetailsDto.fromJson;
+      _$ApproverRightsDetailsDtoImpl.fromJson;
 
   @override
   @JsonKey(name: 'salesOrg', defaultValue: '')
@@ -406,6 +402,6 @@ abstract class _ApproverRightsDetailsDto extends ApproverRightsDetailsDto {
   String get uuid;
   @override
   @JsonKey(ignore: true)
-  _$$_ApproverRightsDetailsDtoCopyWith<_$_ApproverRightsDetailsDto>
+  _$$ApproverRightsDetailsDtoImplCopyWith<_$ApproverRightsDetailsDtoImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

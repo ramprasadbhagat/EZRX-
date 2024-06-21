@@ -12,7 +12,7 @@ part of 'customer_invoice_dto.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 CustomerInvoiceDto _$CustomerInvoiceDtoFromJson(Map<String, dynamic> json) {
   return _CustomerInvoiceDto.fromJson(json);
@@ -199,11 +199,11 @@ class _$CustomerInvoiceDtoCopyWithImpl<$Res, $Val extends CustomerInvoiceDto>
 }
 
 /// @nodoc
-abstract class _$$_CustomerInvoiceDtoCopyWith<$Res>
+abstract class _$$CustomerInvoiceDtoImplCopyWith<$Res>
     implements $CustomerInvoiceDtoCopyWith<$Res> {
-  factory _$$_CustomerInvoiceDtoCopyWith(_$_CustomerInvoiceDto value,
-          $Res Function(_$_CustomerInvoiceDto) then) =
-      __$$_CustomerInvoiceDtoCopyWithImpl<$Res>;
+  factory _$$CustomerInvoiceDtoImplCopyWith(_$CustomerInvoiceDtoImpl value,
+          $Res Function(_$CustomerInvoiceDtoImpl) then) =
+      __$$CustomerInvoiceDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -233,11 +233,11 @@ abstract class _$$_CustomerInvoiceDtoCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_CustomerInvoiceDtoCopyWithImpl<$Res>
-    extends _$CustomerInvoiceDtoCopyWithImpl<$Res, _$_CustomerInvoiceDto>
-    implements _$$_CustomerInvoiceDtoCopyWith<$Res> {
-  __$$_CustomerInvoiceDtoCopyWithImpl(
-      _$_CustomerInvoiceDto _value, $Res Function(_$_CustomerInvoiceDto) _then)
+class __$$CustomerInvoiceDtoImplCopyWithImpl<$Res>
+    extends _$CustomerInvoiceDtoCopyWithImpl<$Res, _$CustomerInvoiceDtoImpl>
+    implements _$$CustomerInvoiceDtoImplCopyWith<$Res> {
+  __$$CustomerInvoiceDtoImplCopyWithImpl(_$CustomerInvoiceDtoImpl _value,
+      $Res Function(_$CustomerInvoiceDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -261,7 +261,7 @@ class __$$_CustomerInvoiceDtoCopyWithImpl<$Res>
     Object? paymentAmount = null,
     Object? salesOrg = null,
   }) {
-    return _then(_$_CustomerInvoiceDto(
+    return _then(_$CustomerInvoiceDtoImpl(
       accountingDocExternalReference: null == accountingDocExternalReference
           ? _value.accountingDocExternalReference
           : accountingDocExternalReference // ignore: cast_nullable_to_non_nullable
@@ -336,8 +336,8 @@ class __$$_CustomerInvoiceDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_CustomerInvoiceDto extends _CustomerInvoiceDto {
-  const _$_CustomerInvoiceDto(
+class _$CustomerInvoiceDtoImpl extends _CustomerInvoiceDto {
+  const _$CustomerInvoiceDtoImpl(
       {@JsonKey(name: 'accountingDocExternalReference', defaultValue: '')
       required this.accountingDocExternalReference,
       @JsonKey(name: 'accountingDocument', defaultValue: '')
@@ -368,8 +368,8 @@ class _$_CustomerInvoiceDto extends _CustomerInvoiceDto {
       @JsonKey(name: 'salesOrg', defaultValue: '') required this.salesOrg})
       : super._();
 
-  factory _$_CustomerInvoiceDto.fromJson(Map<String, dynamic> json) =>
-      _$$_CustomerInvoiceDtoFromJson(json);
+  factory _$CustomerInvoiceDtoImpl.fromJson(Map<String, dynamic> json) =>
+      _$$CustomerInvoiceDtoImplFromJson(json);
 
   @override
   @JsonKey(name: 'accountingDocExternalReference', defaultValue: '')
@@ -429,10 +429,10 @@ class _$_CustomerInvoiceDto extends _CustomerInvoiceDto {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_CustomerInvoiceDto &&
+            other is _$CustomerInvoiceDtoImpl &&
             (identical(other.accountingDocExternalReference,
                     accountingDocExternalReference) ||
                 other.accountingDocExternalReference ==
@@ -496,13 +496,13 @@ class _$_CustomerInvoiceDto extends _CustomerInvoiceDto {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_CustomerInvoiceDtoCopyWith<_$_CustomerInvoiceDto> get copyWith =>
-      __$$_CustomerInvoiceDtoCopyWithImpl<_$_CustomerInvoiceDto>(
+  _$$CustomerInvoiceDtoImplCopyWith<_$CustomerInvoiceDtoImpl> get copyWith =>
+      __$$CustomerInvoiceDtoImplCopyWithImpl<_$CustomerInvoiceDtoImpl>(
           this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_CustomerInvoiceDtoToJson(
+    return _$$CustomerInvoiceDtoImplToJson(
       this,
     );
   }
@@ -541,11 +541,11 @@ abstract class _CustomerInvoiceDto extends CustomerInvoiceDto {
       @JsonKey(name: 'paymentAmount', defaultValue: '')
       required final String paymentAmount,
       @JsonKey(name: 'salesOrg', defaultValue: '')
-      required final String salesOrg}) = _$_CustomerInvoiceDto;
+      required final String salesOrg}) = _$CustomerInvoiceDtoImpl;
   const _CustomerInvoiceDto._() : super._();
 
   factory _CustomerInvoiceDto.fromJson(Map<String, dynamic> json) =
-      _$_CustomerInvoiceDto.fromJson;
+      _$CustomerInvoiceDtoImpl.fromJson;
 
   @override
   @JsonKey(name: 'accountingDocExternalReference', defaultValue: '')
@@ -600,6 +600,6 @@ abstract class _CustomerInvoiceDto extends CustomerInvoiceDto {
   String get salesOrg;
   @override
   @JsonKey(ignore: true)
-  _$$_CustomerInvoiceDtoCopyWith<_$_CustomerInvoiceDto> get copyWith =>
+  _$$CustomerInvoiceDtoImplCopyWith<_$CustomerInvoiceDtoImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

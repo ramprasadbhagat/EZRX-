@@ -6,9 +6,9 @@ part of 'user_restrictions_dto.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_UserRestrictionsDto _$$_UserRestrictionsDtoFromJson(
+_$UserRestrictionsDtoImpl _$$UserRestrictionsDtoImplFromJson(
         Map<String, dynamic> json) =>
-    _$_UserRestrictionsDto(
+    _$UserRestrictionsDtoImpl(
       approverRights: ApproverRightsDto.fromJson(
           json['approverRights'] as Map<String, dynamic>),
       approverLimits: (json['returnApprovalLimit'] as List<dynamic>?)
@@ -18,8 +18,8 @@ _$_UserRestrictionsDto _$$_UserRestrictionsDtoFromJson(
           [],
     );
 
-Map<String, dynamic> _$$_UserRestrictionsDtoToJson(
-        _$_UserRestrictionsDto instance) =>
+Map<String, dynamic> _$$UserRestrictionsDtoImplToJson(
+        _$UserRestrictionsDtoImpl instance) =>
     <String, dynamic>{
       'approverRights': instance.approverRights.toJson(),
       'returnApprovalLimit':

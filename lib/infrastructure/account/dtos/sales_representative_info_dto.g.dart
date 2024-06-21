@@ -6,10 +6,10 @@ part of 'sales_representative_info_dto.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_SalesRepresentativeInfoDto _$$_SalesRepresentativeInfoDtoFromJson(
+_$SalesRepresentativeInfoDtoImpl _$$SalesRepresentativeInfoDtoImplFromJson(
         Map<String, dynamic> json) =>
-    _$_SalesRepresentativeInfoDto(
-      count: json['count'] as int,
+    _$SalesRepresentativeInfoDtoImpl(
+      count: (json['count'] as num).toInt(),
       uniquePrincipalGroups: (json['uniquePrincipalGroup'] as List<dynamic>)
           .map((e) => e as String)
           .toList(),
@@ -22,8 +22,8 @@ _$_SalesRepresentativeInfoDto _$$_SalesRepresentativeInfoDtoFromJson(
               .toList(),
     );
 
-Map<String, dynamic> _$$_SalesRepresentativeInfoDtoToJson(
-        _$_SalesRepresentativeInfoDto instance) =>
+Map<String, dynamic> _$$SalesRepresentativeInfoDtoImplToJson(
+        _$SalesRepresentativeInfoDtoImpl instance) =>
     <String, dynamic>{
       'count': instance.count,
       'uniquePrincipalGroup': instance.uniquePrincipalGroups,

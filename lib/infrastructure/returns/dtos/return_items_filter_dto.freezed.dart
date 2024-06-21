@@ -12,7 +12,7 @@ part of 'return_items_filter_dto.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 ReturnItemsFilterDto _$ReturnItemsFilterDtoFromJson(Map<String, dynamic> json) {
   return _ReturnItemsFilterDto.fromJson(json);
@@ -73,11 +73,11 @@ class _$ReturnItemsFilterDtoCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_ReturnItemsFilterDtoCopyWith<$Res>
+abstract class _$$ReturnItemsFilterDtoImplCopyWith<$Res>
     implements $ReturnItemsFilterDtoCopyWith<$Res> {
-  factory _$$_ReturnItemsFilterDtoCopyWith(_$_ReturnItemsFilterDto value,
-          $Res Function(_$_ReturnItemsFilterDto) then) =
-      __$$_ReturnItemsFilterDtoCopyWithImpl<$Res>;
+  factory _$$ReturnItemsFilterDtoImplCopyWith(_$ReturnItemsFilterDtoImpl value,
+          $Res Function(_$ReturnItemsFilterDtoImpl) then) =
+      __$$ReturnItemsFilterDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -86,11 +86,11 @@ abstract class _$$_ReturnItemsFilterDtoCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_ReturnItemsFilterDtoCopyWithImpl<$Res>
-    extends _$ReturnItemsFilterDtoCopyWithImpl<$Res, _$_ReturnItemsFilterDto>
-    implements _$$_ReturnItemsFilterDtoCopyWith<$Res> {
-  __$$_ReturnItemsFilterDtoCopyWithImpl(_$_ReturnItemsFilterDto _value,
-      $Res Function(_$_ReturnItemsFilterDto) _then)
+class __$$ReturnItemsFilterDtoImplCopyWithImpl<$Res>
+    extends _$ReturnItemsFilterDtoCopyWithImpl<$Res, _$ReturnItemsFilterDtoImpl>
+    implements _$$ReturnItemsFilterDtoImplCopyWith<$Res> {
+  __$$ReturnItemsFilterDtoImplCopyWithImpl(_$ReturnItemsFilterDtoImpl _value,
+      $Res Function(_$ReturnItemsFilterDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -99,7 +99,7 @@ class __$$_ReturnItemsFilterDtoCopyWithImpl<$Res>
     Object? dateFrom = null,
     Object? dateTo = null,
   }) {
-    return _then(_$_ReturnItemsFilterDto(
+    return _then(_$ReturnItemsFilterDtoImpl(
       dateFrom: null == dateFrom
           ? _value.dateFrom
           : dateFrom // ignore: cast_nullable_to_non_nullable
@@ -114,14 +114,14 @@ class __$$_ReturnItemsFilterDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_ReturnItemsFilterDto extends _ReturnItemsFilterDto {
-  const _$_ReturnItemsFilterDto(
+class _$ReturnItemsFilterDtoImpl extends _ReturnItemsFilterDto {
+  const _$ReturnItemsFilterDtoImpl(
       {@JsonKey(name: 'dateFrom', defaultValue: '') required this.dateFrom,
       @JsonKey(name: 'dateTo', defaultValue: '') required this.dateTo})
       : super._();
 
-  factory _$_ReturnItemsFilterDto.fromJson(Map<String, dynamic> json) =>
-      _$$_ReturnItemsFilterDtoFromJson(json);
+  factory _$ReturnItemsFilterDtoImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ReturnItemsFilterDtoImplFromJson(json);
 
   @override
   @JsonKey(name: 'dateFrom', defaultValue: '')
@@ -136,10 +136,10 @@ class _$_ReturnItemsFilterDto extends _ReturnItemsFilterDto {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ReturnItemsFilterDto &&
+            other is _$ReturnItemsFilterDtoImpl &&
             (identical(other.dateFrom, dateFrom) ||
                 other.dateFrom == dateFrom) &&
             (identical(other.dateTo, dateTo) || other.dateTo == dateTo));
@@ -152,13 +152,14 @@ class _$_ReturnItemsFilterDto extends _ReturnItemsFilterDto {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ReturnItemsFilterDtoCopyWith<_$_ReturnItemsFilterDto> get copyWith =>
-      __$$_ReturnItemsFilterDtoCopyWithImpl<_$_ReturnItemsFilterDto>(
-          this, _$identity);
+  _$$ReturnItemsFilterDtoImplCopyWith<_$ReturnItemsFilterDtoImpl>
+      get copyWith =>
+          __$$ReturnItemsFilterDtoImplCopyWithImpl<_$ReturnItemsFilterDtoImpl>(
+              this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_ReturnItemsFilterDtoToJson(
+    return _$$ReturnItemsFilterDtoImplToJson(
       this,
     );
   }
@@ -169,11 +170,11 @@ abstract class _ReturnItemsFilterDto extends ReturnItemsFilterDto {
       {@JsonKey(name: 'dateFrom', defaultValue: '')
       required final String dateFrom,
       @JsonKey(name: 'dateTo', defaultValue: '')
-      required final String dateTo}) = _$_ReturnItemsFilterDto;
+      required final String dateTo}) = _$ReturnItemsFilterDtoImpl;
   const _ReturnItemsFilterDto._() : super._();
 
   factory _ReturnItemsFilterDto.fromJson(Map<String, dynamic> json) =
-      _$_ReturnItemsFilterDto.fromJson;
+      _$ReturnItemsFilterDtoImpl.fromJson;
 
   @override
   @JsonKey(name: 'dateFrom', defaultValue: '')
@@ -183,6 +184,6 @@ abstract class _ReturnItemsFilterDto extends ReturnItemsFilterDto {
   String get dateTo;
   @override
   @JsonKey(ignore: true)
-  _$$_ReturnItemsFilterDtoCopyWith<_$_ReturnItemsFilterDto> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$ReturnItemsFilterDtoImplCopyWith<_$ReturnItemsFilterDtoImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }

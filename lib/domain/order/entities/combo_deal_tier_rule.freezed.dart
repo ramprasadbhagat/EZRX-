@@ -12,7 +12,7 @@ part of 'combo_deal_tier_rule.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$ComboDealTierRule {
@@ -107,11 +107,11 @@ class _$ComboDealTierRuleCopyWithImpl<$Res, $Val extends ComboDealTierRule>
 }
 
 /// @nodoc
-abstract class _$$_ComboDealTierRuleCopyWith<$Res>
+abstract class _$$ComboDealTierRuleImplCopyWith<$Res>
     implements $ComboDealTierRuleCopyWith<$Res> {
-  factory _$$_ComboDealTierRuleCopyWith(_$_ComboDealTierRule value,
-          $Res Function(_$_ComboDealTierRule) then) =
-      __$$_ComboDealTierRuleCopyWithImpl<$Res>;
+  factory _$$ComboDealTierRuleImplCopyWith(_$ComboDealTierRuleImpl value,
+          $Res Function(_$ComboDealTierRuleImpl) then) =
+      __$$ComboDealTierRuleImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -126,11 +126,11 @@ abstract class _$$_ComboDealTierRuleCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_ComboDealTierRuleCopyWithImpl<$Res>
-    extends _$ComboDealTierRuleCopyWithImpl<$Res, _$_ComboDealTierRule>
-    implements _$$_ComboDealTierRuleCopyWith<$Res> {
-  __$$_ComboDealTierRuleCopyWithImpl(
-      _$_ComboDealTierRule _value, $Res Function(_$_ComboDealTierRule) _then)
+class __$$ComboDealTierRuleImplCopyWithImpl<$Res>
+    extends _$ComboDealTierRuleCopyWithImpl<$Res, _$ComboDealTierRuleImpl>
+    implements _$$ComboDealTierRuleImplCopyWith<$Res> {
+  __$$ComboDealTierRuleImplCopyWithImpl(_$ComboDealTierRuleImpl _value,
+      $Res Function(_$ComboDealTierRuleImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -145,7 +145,7 @@ class __$$_ComboDealTierRuleCopyWithImpl<$Res>
     Object? type = null,
     Object? minQty = null,
   }) {
-    return _then(_$_ComboDealTierRule(
+    return _then(_$ComboDealTierRuleImpl(
       rate: null == rate
           ? _value.rate
           : rate // ignore: cast_nullable_to_non_nullable
@@ -184,8 +184,8 @@ class __$$_ComboDealTierRuleCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_ComboDealTierRule extends _ComboDealTierRule {
-  const _$_ComboDealTierRule(
+class _$ComboDealTierRuleImpl extends _ComboDealTierRule {
+  const _$ComboDealTierRuleImpl(
       {required this.rate,
       required this.conditionNumber,
       required this.minTotalAmount,
@@ -219,10 +219,10 @@ class _$_ComboDealTierRule extends _ComboDealTierRule {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ComboDealTierRule &&
+            other is _$ComboDealTierRuleImpl &&
             (identical(other.rate, rate) || other.rate == rate) &&
             (identical(other.conditionNumber, conditionNumber) ||
                 other.conditionNumber == conditionNumber) &&
@@ -253,8 +253,8 @@ class _$_ComboDealTierRule extends _ComboDealTierRule {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ComboDealTierRuleCopyWith<_$_ComboDealTierRule> get copyWith =>
-      __$$_ComboDealTierRuleCopyWithImpl<_$_ComboDealTierRule>(
+  _$$ComboDealTierRuleImplCopyWith<_$ComboDealTierRuleImpl> get copyWith =>
+      __$$ComboDealTierRuleImplCopyWithImpl<_$ComboDealTierRuleImpl>(
           this, _$identity);
 }
 
@@ -267,7 +267,7 @@ abstract class _ComboDealTierRule extends ComboDealTierRule {
       required final double maxTotalAmount,
       required final String maxTotalCurrency,
       required final DiscountType type,
-      required final int minQty}) = _$_ComboDealTierRule;
+      required final int minQty}) = _$ComboDealTierRuleImpl;
   const _ComboDealTierRule._() : super._();
 
   @override
@@ -288,6 +288,6 @@ abstract class _ComboDealTierRule extends ComboDealTierRule {
   int get minQty;
   @override
   @JsonKey(ignore: true)
-  _$$_ComboDealTierRuleCopyWith<_$_ComboDealTierRule> get copyWith =>
+  _$$ComboDealTierRuleImplCopyWith<_$ComboDealTierRuleImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

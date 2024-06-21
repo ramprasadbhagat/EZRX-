@@ -12,7 +12,7 @@ part of 'bill_to_dto.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 BillToDto _$BillToDtoFromJson(Map<String, dynamic> json) {
   return _BillToDto.fromJson(json);
@@ -367,10 +367,11 @@ class _$BillToDtoCopyWithImpl<$Res, $Val extends BillToDto>
 }
 
 /// @nodoc
-abstract class _$$_BillToDtoCopyWith<$Res> implements $BillToDtoCopyWith<$Res> {
-  factory _$$_BillToDtoCopyWith(
-          _$_BillToDto value, $Res Function(_$_BillToDto) then) =
-      __$$_BillToDtoCopyWithImpl<$Res>;
+abstract class _$$BillToDtoImplCopyWith<$Res>
+    implements $BillToDtoCopyWith<$Res> {
+  factory _$$BillToDtoImplCopyWith(
+          _$BillToDtoImpl value, $Res Function(_$BillToDtoImpl) then) =
+      __$$BillToDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -423,11 +424,11 @@ abstract class _$$_BillToDtoCopyWith<$Res> implements $BillToDtoCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_BillToDtoCopyWithImpl<$Res>
-    extends _$BillToDtoCopyWithImpl<$Res, _$_BillToDto>
-    implements _$$_BillToDtoCopyWith<$Res> {
-  __$$_BillToDtoCopyWithImpl(
-      _$_BillToDto _value, $Res Function(_$_BillToDto) _then)
+class __$$BillToDtoImplCopyWithImpl<$Res>
+    extends _$BillToDtoCopyWithImpl<$Res, _$BillToDtoImpl>
+    implements _$$BillToDtoImplCopyWith<$Res> {
+  __$$BillToDtoImplCopyWithImpl(
+      _$BillToDtoImpl _value, $Res Function(_$BillToDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -472,7 +473,7 @@ class __$$_BillToDtoCopyWithImpl<$Res>
     Object? customerLocalGroup = null,
     Object? emailAddresses = null,
   }) {
-    return _then(_$_BillToDto(
+    return _then(_$BillToDtoImpl(
       billToCustomerCode: null == billToCustomerCode
           ? _value.billToCustomerCode
           : billToCustomerCode // ignore: cast_nullable_to_non_nullable
@@ -631,8 +632,8 @@ class __$$_BillToDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_BillToDto extends _BillToDto {
-  const _$_BillToDto(
+class _$BillToDtoImpl extends _BillToDto {
+  const _$BillToDtoImpl(
       {@JsonKey(name: 'billToCustomerCode', defaultValue: '')
       required this.billToCustomerCode,
       @JsonKey(name: 'defaulBillToAddress', defaultValue: true)
@@ -685,8 +686,8 @@ class _$_BillToDto extends _BillToDto {
       : _emailAddresses = emailAddresses,
         super._();
 
-  factory _$_BillToDto.fromJson(Map<String, dynamic> json) =>
-      _$$_BillToDtoFromJson(json);
+  factory _$BillToDtoImpl.fromJson(Map<String, dynamic> json) =>
+      _$$BillToDtoImplFromJson(json);
 
   @override
   @JsonKey(name: 'billToCustomerCode', defaultValue: '')
@@ -814,10 +815,10 @@ class _$_BillToDto extends _BillToDto {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_BillToDto &&
+            other is _$BillToDtoImpl &&
             (identical(other.billToCustomerCode, billToCustomerCode) ||
                 other.billToCustomerCode == billToCustomerCode) &&
             (identical(other.defaulBillToAddress, defaulBillToAddress) ||
@@ -929,12 +930,12 @@ class _$_BillToDto extends _BillToDto {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_BillToDtoCopyWith<_$_BillToDto> get copyWith =>
-      __$$_BillToDtoCopyWithImpl<_$_BillToDto>(this, _$identity);
+  _$$BillToDtoImplCopyWith<_$BillToDtoImpl> get copyWith =>
+      __$$BillToDtoImplCopyWithImpl<_$BillToDtoImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_BillToDtoToJson(
+    return _$$BillToDtoImplToJson(
       this,
     );
   }
@@ -1001,11 +1002,11 @@ abstract class _BillToDto extends BillToDto {
       @JsonKey(name: 'customerLocalGroup', defaultValue: '')
       required final String customerLocalGroup,
       @JsonKey(name: 'emailAddresses', defaultValue: <String>[])
-      required final List<String> emailAddresses}) = _$_BillToDto;
+      required final List<String> emailAddresses}) = _$BillToDtoImpl;
   const _BillToDto._() : super._();
 
   factory _BillToDto.fromJson(Map<String, dynamic> json) =
-      _$_BillToDto.fromJson;
+      _$BillToDtoImpl.fromJson;
 
   @override
   @JsonKey(name: 'billToCustomerCode', defaultValue: '')
@@ -1123,6 +1124,6 @@ abstract class _BillToDto extends BillToDto {
   List<String> get emailAddresses;
   @override
   @JsonKey(ignore: true)
-  _$$_BillToDtoCopyWith<_$_BillToDto> get copyWith =>
+  _$$BillToDtoImplCopyWith<_$BillToDtoImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

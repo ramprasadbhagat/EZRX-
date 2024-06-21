@@ -12,7 +12,7 @@ part of 'return_summary_filter.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$ReturnSummaryFilter {
@@ -93,11 +93,11 @@ class _$ReturnSummaryFilterCopyWithImpl<$Res, $Val extends ReturnSummaryFilter>
 }
 
 /// @nodoc
-abstract class _$$_ReturnSummaryFilterCopyWith<$Res>
+abstract class _$$ReturnSummaryFilterImplCopyWith<$Res>
     implements $ReturnSummaryFilterCopyWith<$Res> {
-  factory _$$_ReturnSummaryFilterCopyWith(_$_ReturnSummaryFilter value,
-          $Res Function(_$_ReturnSummaryFilter) then) =
-      __$$_ReturnSummaryFilterCopyWithImpl<$Res>;
+  factory _$$ReturnSummaryFilterImplCopyWith(_$ReturnSummaryFilterImpl value,
+          $Res Function(_$ReturnSummaryFilterImpl) then) =
+      __$$ReturnSummaryFilterImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -110,11 +110,11 @@ abstract class _$$_ReturnSummaryFilterCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_ReturnSummaryFilterCopyWithImpl<$Res>
-    extends _$ReturnSummaryFilterCopyWithImpl<$Res, _$_ReturnSummaryFilter>
-    implements _$$_ReturnSummaryFilterCopyWith<$Res> {
-  __$$_ReturnSummaryFilterCopyWithImpl(_$_ReturnSummaryFilter _value,
-      $Res Function(_$_ReturnSummaryFilter) _then)
+class __$$ReturnSummaryFilterImplCopyWithImpl<$Res>
+    extends _$ReturnSummaryFilterCopyWithImpl<$Res, _$ReturnSummaryFilterImpl>
+    implements _$$ReturnSummaryFilterImplCopyWith<$Res> {
+  __$$ReturnSummaryFilterImplCopyWithImpl(_$ReturnSummaryFilterImpl _value,
+      $Res Function(_$ReturnSummaryFilterImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -127,7 +127,7 @@ class __$$_ReturnSummaryFilterCopyWithImpl<$Res>
     Object? refundTotalFrom = null,
     Object? sortBy = null,
   }) {
-    return _then(_$_ReturnSummaryFilter(
+    return _then(_$ReturnSummaryFilterImpl(
       requestId: null == requestId
           ? _value.requestId
           : requestId // ignore: cast_nullable_to_non_nullable
@@ -158,8 +158,8 @@ class __$$_ReturnSummaryFilterCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_ReturnSummaryFilter extends _ReturnSummaryFilter {
-  _$_ReturnSummaryFilter(
+class _$ReturnSummaryFilterImpl extends _ReturnSummaryFilter {
+  _$ReturnSummaryFilterImpl(
       {required this.requestId,
       required this.dateFrom,
       required this.dateTo,
@@ -187,10 +187,10 @@ class _$_ReturnSummaryFilter extends _ReturnSummaryFilter {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ReturnSummaryFilter &&
+            other is _$ReturnSummaryFilterImpl &&
             (identical(other.requestId, requestId) ||
                 other.requestId == requestId) &&
             (identical(other.dateFrom, dateFrom) ||
@@ -210,8 +210,8 @@ class _$_ReturnSummaryFilter extends _ReturnSummaryFilter {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ReturnSummaryFilterCopyWith<_$_ReturnSummaryFilter> get copyWith =>
-      __$$_ReturnSummaryFilterCopyWithImpl<_$_ReturnSummaryFilter>(
+  _$$ReturnSummaryFilterImplCopyWith<_$ReturnSummaryFilterImpl> get copyWith =>
+      __$$ReturnSummaryFilterImplCopyWithImpl<_$ReturnSummaryFilterImpl>(
           this, _$identity);
 }
 
@@ -222,7 +222,7 @@ abstract class _ReturnSummaryFilter extends ReturnSummaryFilter {
       required final DateTimeStringValue dateTo,
       required final RangeValue refundTotalTo,
       required final RangeValue refundTotalFrom,
-      required final StatusType sortBy}) = _$_ReturnSummaryFilter;
+      required final StatusType sortBy}) = _$ReturnSummaryFilterImpl;
   _ReturnSummaryFilter._() : super._();
 
   @override
@@ -239,6 +239,6 @@ abstract class _ReturnSummaryFilter extends ReturnSummaryFilter {
   StatusType get sortBy;
   @override
   @JsonKey(ignore: true)
-  _$$_ReturnSummaryFilterCopyWith<_$_ReturnSummaryFilter> get copyWith =>
+  _$$ReturnSummaryFilterImplCopyWith<_$ReturnSummaryFilterImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

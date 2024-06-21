@@ -6,9 +6,9 @@ part of 'all_credits_filter_dto.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_AllCreditsFilterDto _$$_AllCreditsFilterDtoFromJson(
+_$AllCreditsFilterDtoImpl _$$AllCreditsFilterDtoImplFromJson(
         Map<String, dynamic> json) =>
-    _$_AllCreditsFilterDto(
+    _$AllCreditsFilterDtoImpl(
       documentDateFrom: json['documentDateFrom'] as String? ?? '',
       documentDateTo: json['documentDateTo'] as String? ?? '',
       amountValueFrom: json['amountValueFrom'] as String? ?? '',
@@ -17,8 +17,8 @@ _$_AllCreditsFilterDto _$$_AllCreditsFilterDtoFromJson(
       searchKey: json['accountingDocument'] as String? ?? '',
     );
 
-Map<String, dynamic> _$$_AllCreditsFilterDtoToJson(
-        _$_AllCreditsFilterDto instance) =>
+Map<String, dynamic> _$$AllCreditsFilterDtoImplToJson(
+        _$AllCreditsFilterDtoImpl instance) =>
     <String, dynamic>{
       'documentDateFrom': instance.documentDateFrom,
       'documentDateTo': instance.documentDateTo,

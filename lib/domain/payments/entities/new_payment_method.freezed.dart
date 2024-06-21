@@ -12,7 +12,7 @@ part of 'new_payment_method.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$NewPaymentMethod {
@@ -64,11 +64,11 @@ class _$NewPaymentMethodCopyWithImpl<$Res, $Val extends NewPaymentMethod>
 }
 
 /// @nodoc
-abstract class _$$_NewPaymentMethodCopyWith<$Res>
+abstract class _$$NewPaymentMethodImplCopyWith<$Res>
     implements $NewPaymentMethodCopyWith<$Res> {
-  factory _$$_NewPaymentMethodCopyWith(
-          _$_NewPaymentMethod value, $Res Function(_$_NewPaymentMethod) then) =
-      __$$_NewPaymentMethodCopyWithImpl<$Res>;
+  factory _$$NewPaymentMethodImplCopyWith(_$NewPaymentMethodImpl value,
+          $Res Function(_$NewPaymentMethodImpl) then) =
+      __$$NewPaymentMethodImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -76,11 +76,11 @@ abstract class _$$_NewPaymentMethodCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_NewPaymentMethodCopyWithImpl<$Res>
-    extends _$NewPaymentMethodCopyWithImpl<$Res, _$_NewPaymentMethod>
-    implements _$$_NewPaymentMethodCopyWith<$Res> {
-  __$$_NewPaymentMethodCopyWithImpl(
-      _$_NewPaymentMethod _value, $Res Function(_$_NewPaymentMethod) _then)
+class __$$NewPaymentMethodImplCopyWithImpl<$Res>
+    extends _$NewPaymentMethodCopyWithImpl<$Res, _$NewPaymentMethodImpl>
+    implements _$$NewPaymentMethodImplCopyWith<$Res> {
+  __$$NewPaymentMethodImplCopyWithImpl(_$NewPaymentMethodImpl _value,
+      $Res Function(_$NewPaymentMethodImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -89,7 +89,7 @@ class __$$_NewPaymentMethodCopyWithImpl<$Res>
     Object? paymentMethod = null,
     Object? options = null,
   }) {
-    return _then(_$_NewPaymentMethod(
+    return _then(_$NewPaymentMethodImpl(
       paymentMethod: null == paymentMethod
           ? _value.paymentMethod
           : paymentMethod // ignore: cast_nullable_to_non_nullable
@@ -104,8 +104,8 @@ class __$$_NewPaymentMethodCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_NewPaymentMethod extends _NewPaymentMethod {
-  const _$_NewPaymentMethod(
+class _$NewPaymentMethodImpl extends _NewPaymentMethod {
+  const _$NewPaymentMethodImpl(
       {required this.paymentMethod,
       required final List<PaymentMethodOption> options})
       : _options = options,
@@ -127,10 +127,10 @@ class _$_NewPaymentMethod extends _NewPaymentMethod {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_NewPaymentMethod &&
+            other is _$NewPaymentMethodImpl &&
             (identical(other.paymentMethod, paymentMethod) ||
                 other.paymentMethod == paymentMethod) &&
             const DeepCollectionEquality().equals(other._options, _options));
@@ -143,14 +143,16 @@ class _$_NewPaymentMethod extends _NewPaymentMethod {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_NewPaymentMethodCopyWith<_$_NewPaymentMethod> get copyWith =>
-      __$$_NewPaymentMethodCopyWithImpl<_$_NewPaymentMethod>(this, _$identity);
+  _$$NewPaymentMethodImplCopyWith<_$NewPaymentMethodImpl> get copyWith =>
+      __$$NewPaymentMethodImplCopyWithImpl<_$NewPaymentMethodImpl>(
+          this, _$identity);
 }
 
 abstract class _NewPaymentMethod extends NewPaymentMethod {
   const factory _NewPaymentMethod(
-      {required final PaymentMethodValue paymentMethod,
-      required final List<PaymentMethodOption> options}) = _$_NewPaymentMethod;
+          {required final PaymentMethodValue paymentMethod,
+          required final List<PaymentMethodOption> options}) =
+      _$NewPaymentMethodImpl;
   const _NewPaymentMethod._() : super._();
 
   @override
@@ -159,6 +161,6 @@ abstract class _NewPaymentMethod extends NewPaymentMethod {
   List<PaymentMethodOption> get options;
   @override
   @JsonKey(ignore: true)
-  _$$_NewPaymentMethodCopyWith<_$_NewPaymentMethod> get copyWith =>
+  _$$NewPaymentMethodImplCopyWith<_$NewPaymentMethodImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -6,11 +6,11 @@ part of 'announcement_article_info_dto.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_AnnouncementArticleInfoDto _$$_AnnouncementArticleInfoDtoFromJson(
+_$AnnouncementArticleInfoDtoImpl _$$AnnouncementArticleInfoDtoImplFromJson(
         Map<String, dynamic> json) =>
-    _$_AnnouncementArticleInfoDto(
+    _$AnnouncementArticleInfoDtoImpl(
       endCursor: getEndCursorValue(json, 'pageInfo') as String? ?? '',
-      total: json['total'] as int? ?? 0,
+      total: (json['total'] as num?)?.toInt() ?? 0,
       announcementList: (json['results'] as List<dynamic>?)
               ?.map((e) => AnnouncementArticleItemDto.fromJson(
                   e as Map<String, dynamic>))
@@ -18,17 +18,17 @@ _$_AnnouncementArticleInfoDto _$$_AnnouncementArticleInfoDtoFromJson(
           [],
     );
 
-Map<String, dynamic> _$$_AnnouncementArticleInfoDtoToJson(
-        _$_AnnouncementArticleInfoDto instance) =>
+Map<String, dynamic> _$$AnnouncementArticleInfoDtoImplToJson(
+        _$AnnouncementArticleInfoDtoImpl instance) =>
     <String, dynamic>{
       'pageInfo': instance.endCursor,
       'total': instance.total,
       'results': instance.announcementList.map((e) => e.toJson()).toList(),
     };
 
-_$_AnnouncementArticleItemDto _$$_AnnouncementArticleItemDtoFromJson(
+_$AnnouncementArticleItemDtoImpl _$$AnnouncementArticleItemDtoImplFromJson(
         Map<String, dynamic> json) =>
-    _$_AnnouncementArticleItemDto(
+    _$AnnouncementArticleItemDtoImpl(
       id: json['id'] as String? ?? '',
       title: getValue(json, 'title') as String,
       summary: getValue(json, 'summary') as String,
@@ -50,8 +50,8 @@ _$_AnnouncementArticleItemDto _$$_AnnouncementArticleItemDtoFromJson(
       pinToTop: readPinToTop(json, 'pinToTop') as bool,
     );
 
-Map<String, dynamic> _$$_AnnouncementArticleItemDtoToJson(
-        _$_AnnouncementArticleItemDto instance) =>
+Map<String, dynamic> _$$AnnouncementArticleItemDtoImplToJson(
+        _$AnnouncementArticleItemDtoImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'title': instance.title,
@@ -68,14 +68,16 @@ Map<String, dynamic> _$$_AnnouncementArticleItemDtoToJson(
       'pinToTop': instance.pinToTop,
     };
 
-_$_BranchAndIc4Dto _$$_BranchAndIc4DtoFromJson(Map<String, dynamic> json) =>
-    _$_BranchAndIc4Dto(
+_$BranchAndIc4DtoImpl _$$BranchAndIc4DtoImplFromJson(
+        Map<String, dynamic> json) =>
+    _$BranchAndIc4DtoImpl(
       id: json['id'] as String? ?? '',
       name: json['name'] as String? ?? '',
       displayName: json['displayName'] as String? ?? '',
     );
 
-Map<String, dynamic> _$$_BranchAndIc4DtoToJson(_$_BranchAndIc4Dto instance) =>
+Map<String, dynamic> _$$BranchAndIc4DtoImplToJson(
+        _$BranchAndIc4DtoImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'name': instance.name,

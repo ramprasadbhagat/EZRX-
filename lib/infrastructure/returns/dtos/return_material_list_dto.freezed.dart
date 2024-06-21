@@ -12,7 +12,7 @@ part of 'return_material_list_dto.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 ReturnMaterialListDto _$ReturnMaterialListDtoFromJson(
     Map<String, dynamic> json) {
@@ -46,13 +46,14 @@ abstract class $ReturnMaterialListDtoCopyWith<$Res> {
   @useResult
   $Res call(
       {@JsonKey(
-          name: 'materialBasicInformation', defaultValue: <
-              MaterialBasicInformationDto>[])
-          List<MaterialBasicInformationDto> basicInformations,
+          name: 'materialBasicInformation',
+          defaultValue: <MaterialBasicInformationDto>[])
+      List<MaterialBasicInformationDto> basicInformations,
       @JsonKey(
-          name: 'materials', fromJson: _mappingReturnMaterial, defaultValue: <
-              ReturnMaterialDto>[])
-          List<ReturnMaterialDto> items});
+          name: 'materials',
+          fromJson: _mappingReturnMaterial,
+          defaultValue: <ReturnMaterialDto>[])
+      List<ReturnMaterialDto> items});
 }
 
 /// @nodoc
@@ -86,30 +87,33 @@ class _$ReturnMaterialListDtoCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_ReturnMaterialListDtoCopyWith<$Res>
+abstract class _$$ReturnMaterialListDtoImplCopyWith<$Res>
     implements $ReturnMaterialListDtoCopyWith<$Res> {
-  factory _$$_ReturnMaterialListDtoCopyWith(_$_ReturnMaterialListDto value,
-          $Res Function(_$_ReturnMaterialListDto) then) =
-      __$$_ReturnMaterialListDtoCopyWithImpl<$Res>;
+  factory _$$ReturnMaterialListDtoImplCopyWith(
+          _$ReturnMaterialListDtoImpl value,
+          $Res Function(_$ReturnMaterialListDtoImpl) then) =
+      __$$ReturnMaterialListDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
       {@JsonKey(
-          name: 'materialBasicInformation', defaultValue: <
-              MaterialBasicInformationDto>[])
-          List<MaterialBasicInformationDto> basicInformations,
+          name: 'materialBasicInformation',
+          defaultValue: <MaterialBasicInformationDto>[])
+      List<MaterialBasicInformationDto> basicInformations,
       @JsonKey(
-          name: 'materials', fromJson: _mappingReturnMaterial, defaultValue: <
-              ReturnMaterialDto>[])
-          List<ReturnMaterialDto> items});
+          name: 'materials',
+          fromJson: _mappingReturnMaterial,
+          defaultValue: <ReturnMaterialDto>[])
+      List<ReturnMaterialDto> items});
 }
 
 /// @nodoc
-class __$$_ReturnMaterialListDtoCopyWithImpl<$Res>
-    extends _$ReturnMaterialListDtoCopyWithImpl<$Res, _$_ReturnMaterialListDto>
-    implements _$$_ReturnMaterialListDtoCopyWith<$Res> {
-  __$$_ReturnMaterialListDtoCopyWithImpl(_$_ReturnMaterialListDto _value,
-      $Res Function(_$_ReturnMaterialListDto) _then)
+class __$$ReturnMaterialListDtoImplCopyWithImpl<$Res>
+    extends _$ReturnMaterialListDtoCopyWithImpl<$Res,
+        _$ReturnMaterialListDtoImpl>
+    implements _$$ReturnMaterialListDtoImplCopyWith<$Res> {
+  __$$ReturnMaterialListDtoImplCopyWithImpl(_$ReturnMaterialListDtoImpl _value,
+      $Res Function(_$ReturnMaterialListDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -118,7 +122,7 @@ class __$$_ReturnMaterialListDtoCopyWithImpl<$Res>
     Object? basicInformations = null,
     Object? items = null,
   }) {
-    return _then(_$_ReturnMaterialListDto(
+    return _then(_$ReturnMaterialListDtoImpl(
       basicInformations: null == basicInformations
           ? _value._basicInformations
           : basicInformations // ignore: cast_nullable_to_non_nullable
@@ -133,22 +137,23 @@ class __$$_ReturnMaterialListDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_ReturnMaterialListDto extends _ReturnMaterialListDto {
-  const _$_ReturnMaterialListDto(
+class _$ReturnMaterialListDtoImpl extends _ReturnMaterialListDto {
+  const _$ReturnMaterialListDtoImpl(
       {@JsonKey(
-          name: 'materialBasicInformation', defaultValue: <
-              MaterialBasicInformationDto>[])
-          required final List<MaterialBasicInformationDto> basicInformations,
+          name: 'materialBasicInformation',
+          defaultValue: <MaterialBasicInformationDto>[])
+      required final List<MaterialBasicInformationDto> basicInformations,
       @JsonKey(
-          name: 'materials', fromJson: _mappingReturnMaterial, defaultValue: <
-              ReturnMaterialDto>[])
-          required final List<ReturnMaterialDto> items})
+          name: 'materials',
+          fromJson: _mappingReturnMaterial,
+          defaultValue: <ReturnMaterialDto>[])
+      required final List<ReturnMaterialDto> items})
       : _basicInformations = basicInformations,
         _items = items,
         super._();
 
-  factory _$_ReturnMaterialListDto.fromJson(Map<String, dynamic> json) =>
-      _$$_ReturnMaterialListDtoFromJson(json);
+  factory _$ReturnMaterialListDtoImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ReturnMaterialListDtoImplFromJson(json);
 
   final List<MaterialBasicInformationDto> _basicInformations;
   @override
@@ -180,10 +185,10 @@ class _$_ReturnMaterialListDto extends _ReturnMaterialListDto {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ReturnMaterialListDto &&
+            other is _$ReturnMaterialListDtoImpl &&
             const DeepCollectionEquality()
                 .equals(other._basicInformations, _basicInformations) &&
             const DeepCollectionEquality().equals(other._items, _items));
@@ -199,13 +204,13 @@ class _$_ReturnMaterialListDto extends _ReturnMaterialListDto {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ReturnMaterialListDtoCopyWith<_$_ReturnMaterialListDto> get copyWith =>
-      __$$_ReturnMaterialListDtoCopyWithImpl<_$_ReturnMaterialListDto>(
-          this, _$identity);
+  _$$ReturnMaterialListDtoImplCopyWith<_$ReturnMaterialListDtoImpl>
+      get copyWith => __$$ReturnMaterialListDtoImplCopyWithImpl<
+          _$ReturnMaterialListDtoImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_ReturnMaterialListDtoToJson(
+    return _$$ReturnMaterialListDtoImplToJson(
       this,
     );
   }
@@ -213,19 +218,20 @@ class _$_ReturnMaterialListDto extends _ReturnMaterialListDto {
 
 abstract class _ReturnMaterialListDto extends ReturnMaterialListDto {
   const factory _ReturnMaterialListDto(
-      {@JsonKey(
-          name: 'materialBasicInformation', defaultValue: <
-              MaterialBasicInformationDto>[])
+          {@JsonKey(
+              name: 'materialBasicInformation',
+              defaultValue: <MaterialBasicInformationDto>[])
           required final List<MaterialBasicInformationDto> basicInformations,
-      @JsonKey(
-          name: 'materials', fromJson: _mappingReturnMaterial, defaultValue: <
-              ReturnMaterialDto>[])
-          required final List<ReturnMaterialDto>
-              items}) = _$_ReturnMaterialListDto;
+          @JsonKey(
+              name: 'materials',
+              fromJson: _mappingReturnMaterial,
+              defaultValue: <ReturnMaterialDto>[])
+          required final List<ReturnMaterialDto> items}) =
+      _$ReturnMaterialListDtoImpl;
   const _ReturnMaterialListDto._() : super._();
 
   factory _ReturnMaterialListDto.fromJson(Map<String, dynamic> json) =
-      _$_ReturnMaterialListDto.fromJson;
+      _$ReturnMaterialListDtoImpl.fromJson;
 
   @override
   @JsonKey(
@@ -240,6 +246,6 @@ abstract class _ReturnMaterialListDto extends ReturnMaterialListDto {
   List<ReturnMaterialDto> get items;
   @override
   @JsonKey(ignore: true)
-  _$$_ReturnMaterialListDtoCopyWith<_$_ReturnMaterialListDto> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$ReturnMaterialListDtoImplCopyWith<_$ReturnMaterialListDtoImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }

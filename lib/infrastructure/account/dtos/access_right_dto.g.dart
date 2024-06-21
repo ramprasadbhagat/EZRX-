@@ -6,8 +6,8 @@ part of 'access_right_dto.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_AccessRightDto _$$_AccessRightDtoFromJson(Map<String, dynamic> json) =>
-    _$_AccessRightDto(
+_$AccessRightDtoImpl _$$AccessRightDtoImplFromJson(Map<String, dynamic> json) =>
+    _$AccessRightDtoImpl(
       users: json['Users'] as bool? ?? false,
       orders: json['Orders'] as bool? ?? false,
       promos: json['Promos'] as bool? ?? false,
@@ -19,7 +19,8 @@ _$_AccessRightDto _$$_AccessRightDtoFromJson(Map<String, dynamic> json) =>
       adminPOAttachment: json['AdminPOAttachment'] as bool? ?? false,
     );
 
-Map<String, dynamic> _$$_AccessRightDtoToJson(_$_AccessRightDto instance) =>
+Map<String, dynamic> _$$AccessRightDtoImplToJson(
+        _$AccessRightDtoImpl instance) =>
     <String, dynamic>{
       'Users': instance.users,
       'Orders': instance.orders,

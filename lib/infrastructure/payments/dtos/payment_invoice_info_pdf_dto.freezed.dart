@@ -12,7 +12,7 @@ part of 'payment_invoice_info_pdf_dto.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 PaymentInvoiceInfoPdfDto _$PaymentInvoiceInfoPdfDtoFromJson(
     Map<String, dynamic> json) {
@@ -190,12 +190,12 @@ class _$PaymentInvoiceInfoPdfDtoCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_PaymentInvoiceInfoPdfDtoCopyWith<$Res>
+abstract class _$$PaymentInvoiceInfoPdfDtoImplCopyWith<$Res>
     implements $PaymentInvoiceInfoPdfDtoCopyWith<$Res> {
-  factory _$$_PaymentInvoiceInfoPdfDtoCopyWith(
-          _$_PaymentInvoiceInfoPdfDto value,
-          $Res Function(_$_PaymentInvoiceInfoPdfDto) then) =
-      __$$_PaymentInvoiceInfoPdfDtoCopyWithImpl<$Res>;
+  factory _$$PaymentInvoiceInfoPdfDtoImplCopyWith(
+          _$PaymentInvoiceInfoPdfDtoImpl value,
+          $Res Function(_$PaymentInvoiceInfoPdfDtoImpl) then) =
+      __$$PaymentInvoiceInfoPdfDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -221,12 +221,13 @@ abstract class _$$_PaymentInvoiceInfoPdfDtoCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_PaymentInvoiceInfoPdfDtoCopyWithImpl<$Res>
+class __$$PaymentInvoiceInfoPdfDtoImplCopyWithImpl<$Res>
     extends _$PaymentInvoiceInfoPdfDtoCopyWithImpl<$Res,
-        _$_PaymentInvoiceInfoPdfDto>
-    implements _$$_PaymentInvoiceInfoPdfDtoCopyWith<$Res> {
-  __$$_PaymentInvoiceInfoPdfDtoCopyWithImpl(_$_PaymentInvoiceInfoPdfDto _value,
-      $Res Function(_$_PaymentInvoiceInfoPdfDto) _then)
+        _$PaymentInvoiceInfoPdfDtoImpl>
+    implements _$$PaymentInvoiceInfoPdfDtoImplCopyWith<$Res> {
+  __$$PaymentInvoiceInfoPdfDtoImplCopyWithImpl(
+      _$PaymentInvoiceInfoPdfDtoImpl _value,
+      $Res Function(_$PaymentInvoiceInfoPdfDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -249,7 +250,7 @@ class __$$_PaymentInvoiceInfoPdfDtoCopyWithImpl<$Res>
     Object? pleaseNote = null,
     Object? header = null,
   }) {
-    return _then(_$_PaymentInvoiceInfoPdfDto(
+    return _then(_$PaymentInvoiceInfoPdfDtoImpl(
       valueDate: null == valueDate
           ? _value.valueDate
           : valueDate // ignore: cast_nullable_to_non_nullable
@@ -320,8 +321,8 @@ class __$$_PaymentInvoiceInfoPdfDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_PaymentInvoiceInfoPdfDto extends _PaymentInvoiceInfoPdfDto {
-  const _$_PaymentInvoiceInfoPdfDto(
+class _$PaymentInvoiceInfoPdfDtoImpl extends _PaymentInvoiceInfoPdfDto {
+  const _$PaymentInvoiceInfoPdfDtoImpl(
       {@JsonKey(name: 'valueDate', defaultValue: '') required this.valueDate,
       @JsonKey(name: 'paymentID', defaultValue: '') required this.paymentID,
       @JsonKey(name: 'zzAdvice', defaultValue: '') required this.zzAdvice,
@@ -349,8 +350,8 @@ class _$_PaymentInvoiceInfoPdfDto extends _PaymentInvoiceInfoPdfDto {
         _paymentItems = paymentItems,
         super._();
 
-  factory _$_PaymentInvoiceInfoPdfDto.fromJson(Map<String, dynamic> json) =>
-      _$$_PaymentInvoiceInfoPdfDtoFromJson(json);
+  factory _$PaymentInvoiceInfoPdfDtoImpl.fromJson(Map<String, dynamic> json) =>
+      _$$PaymentInvoiceInfoPdfDtoImplFromJson(json);
 
   @override
   @JsonKey(name: 'valueDate', defaultValue: '')
@@ -419,10 +420,10 @@ class _$_PaymentInvoiceInfoPdfDto extends _PaymentInvoiceInfoPdfDto {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_PaymentInvoiceInfoPdfDto &&
+            other is _$PaymentInvoiceInfoPdfDtoImpl &&
             (identical(other.valueDate, valueDate) ||
                 other.valueDate == valueDate) &&
             (identical(other.paymentID, paymentID) ||
@@ -479,13 +480,13 @@ class _$_PaymentInvoiceInfoPdfDto extends _PaymentInvoiceInfoPdfDto {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_PaymentInvoiceInfoPdfDtoCopyWith<_$_PaymentInvoiceInfoPdfDto>
-      get copyWith => __$$_PaymentInvoiceInfoPdfDtoCopyWithImpl<
-          _$_PaymentInvoiceInfoPdfDto>(this, _$identity);
+  _$$PaymentInvoiceInfoPdfDtoImplCopyWith<_$PaymentInvoiceInfoPdfDtoImpl>
+      get copyWith => __$$PaymentInvoiceInfoPdfDtoImplCopyWithImpl<
+          _$PaymentInvoiceInfoPdfDtoImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_PaymentInvoiceInfoPdfDtoToJson(
+    return _$$PaymentInvoiceInfoPdfDtoImplToJson(
       this,
     );
   }
@@ -521,11 +522,11 @@ abstract class _PaymentInvoiceInfoPdfDto extends PaymentInvoiceInfoPdfDto {
       @JsonKey(name: 'pleaseNote', defaultValue: '')
       required final String pleaseNote,
       @JsonKey(name: 'header', defaultValue: '')
-      required final String header}) = _$_PaymentInvoiceInfoPdfDto;
+      required final String header}) = _$PaymentInvoiceInfoPdfDtoImpl;
   const _PaymentInvoiceInfoPdfDto._() : super._();
 
   factory _PaymentInvoiceInfoPdfDto.fromJson(Map<String, dynamic> json) =
-      _$_PaymentInvoiceInfoPdfDto.fromJson;
+      _$PaymentInvoiceInfoPdfDtoImpl.fromJson;
 
   @override
   @JsonKey(name: 'valueDate', defaultValue: '')
@@ -577,6 +578,6 @@ abstract class _PaymentInvoiceInfoPdfDto extends PaymentInvoiceInfoPdfDto {
   String get header;
   @override
   @JsonKey(ignore: true)
-  _$$_PaymentInvoiceInfoPdfDtoCopyWith<_$_PaymentInvoiceInfoPdfDto>
+  _$$PaymentInvoiceInfoPdfDtoImplCopyWith<_$PaymentInvoiceInfoPdfDtoImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

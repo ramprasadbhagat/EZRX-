@@ -12,7 +12,7 @@ part of 'bill_to_name.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$BillToName {
@@ -75,22 +75,22 @@ class _$BillToNameCopyWithImpl<$Res, $Val extends BillToName>
 }
 
 /// @nodoc
-abstract class _$$_BillToNameCopyWith<$Res>
+abstract class _$$BillToNameImplCopyWith<$Res>
     implements $BillToNameCopyWith<$Res> {
-  factory _$$_BillToNameCopyWith(
-          _$_BillToName value, $Res Function(_$_BillToName) then) =
-      __$$_BillToNameCopyWithImpl<$Res>;
+  factory _$$BillToNameImplCopyWith(
+          _$BillToNameImpl value, $Res Function(_$BillToNameImpl) then) =
+      __$$BillToNameImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String name1, String name2, String name3, String name4});
 }
 
 /// @nodoc
-class __$$_BillToNameCopyWithImpl<$Res>
-    extends _$BillToNameCopyWithImpl<$Res, _$_BillToName>
-    implements _$$_BillToNameCopyWith<$Res> {
-  __$$_BillToNameCopyWithImpl(
-      _$_BillToName _value, $Res Function(_$_BillToName) _then)
+class __$$BillToNameImplCopyWithImpl<$Res>
+    extends _$BillToNameCopyWithImpl<$Res, _$BillToNameImpl>
+    implements _$$BillToNameImplCopyWith<$Res> {
+  __$$BillToNameImplCopyWithImpl(
+      _$BillToNameImpl _value, $Res Function(_$BillToNameImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -101,7 +101,7 @@ class __$$_BillToNameCopyWithImpl<$Res>
     Object? name3 = null,
     Object? name4 = null,
   }) {
-    return _then(_$_BillToName(
+    return _then(_$BillToNameImpl(
       name1: null == name1
           ? _value.name1
           : name1 // ignore: cast_nullable_to_non_nullable
@@ -124,8 +124,8 @@ class __$$_BillToNameCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_BillToName extends _BillToName {
-  const _$_BillToName(
+class _$BillToNameImpl extends _BillToName {
+  const _$BillToNameImpl(
       {required this.name1,
       required this.name2,
       required this.name3,
@@ -142,10 +142,10 @@ class _$_BillToName extends _BillToName {
   final String name4;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_BillToName &&
+            other is _$BillToNameImpl &&
             (identical(other.name1, name1) || other.name1 == name1) &&
             (identical(other.name2, name2) || other.name2 == name2) &&
             (identical(other.name3, name3) || other.name3 == name3) &&
@@ -158,8 +158,8 @@ class _$_BillToName extends _BillToName {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_BillToNameCopyWith<_$_BillToName> get copyWith =>
-      __$$_BillToNameCopyWithImpl<_$_BillToName>(this, _$identity);
+  _$$BillToNameImplCopyWith<_$BillToNameImpl> get copyWith =>
+      __$$BillToNameImplCopyWithImpl<_$BillToNameImpl>(this, _$identity);
 }
 
 abstract class _BillToName extends BillToName {
@@ -167,7 +167,7 @@ abstract class _BillToName extends BillToName {
       {required final String name1,
       required final String name2,
       required final String name3,
-      required final String name4}) = _$_BillToName;
+      required final String name4}) = _$BillToNameImpl;
   const _BillToName._() : super._();
 
   @override
@@ -180,6 +180,6 @@ abstract class _BillToName extends BillToName {
   String get name4;
   @override
   @JsonKey(ignore: true)
-  _$$_BillToNameCopyWith<_$_BillToName> get copyWith =>
+  _$$BillToNameImplCopyWith<_$BillToNameImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

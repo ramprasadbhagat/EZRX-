@@ -12,7 +12,7 @@ part of 'faq_info_dto.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 FAQInfoDto _$FAQInfoDtoFromJson(Map<String, dynamic> json) {
   return _FAQInfoDto.fromJson(json);
@@ -75,11 +75,11 @@ class _$FAQInfoDtoCopyWithImpl<$Res, $Val extends FAQInfoDto>
 }
 
 /// @nodoc
-abstract class _$$_FAQInfoDtoCopyWith<$Res>
+abstract class _$$FAQInfoDtoImplCopyWith<$Res>
     implements $FAQInfoDtoCopyWith<$Res> {
-  factory _$$_FAQInfoDtoCopyWith(
-          _$_FAQInfoDto value, $Res Function(_$_FAQInfoDto) then) =
-      __$$_FAQInfoDtoCopyWithImpl<$Res>;
+  factory _$$FAQInfoDtoImplCopyWith(
+          _$FAQInfoDtoImpl value, $Res Function(_$FAQInfoDtoImpl) then) =
+      __$$FAQInfoDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -91,11 +91,11 @@ abstract class _$$_FAQInfoDtoCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_FAQInfoDtoCopyWithImpl<$Res>
-    extends _$FAQInfoDtoCopyWithImpl<$Res, _$_FAQInfoDto>
-    implements _$$_FAQInfoDtoCopyWith<$Res> {
-  __$$_FAQInfoDtoCopyWithImpl(
-      _$_FAQInfoDto _value, $Res Function(_$_FAQInfoDto) _then)
+class __$$FAQInfoDtoImplCopyWithImpl<$Res>
+    extends _$FAQInfoDtoCopyWithImpl<$Res, _$FAQInfoDtoImpl>
+    implements _$$FAQInfoDtoImplCopyWith<$Res> {
+  __$$FAQInfoDtoImplCopyWithImpl(
+      _$FAQInfoDtoImpl _value, $Res Function(_$FAQInfoDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -104,7 +104,7 @@ class __$$_FAQInfoDtoCopyWithImpl<$Res>
     Object? endCursor = null,
     Object? faqList = null,
   }) {
-    return _then(_$_FAQInfoDto(
+    return _then(_$FAQInfoDtoImpl(
       endCursor: null == endCursor
           ? _value.endCursor
           : endCursor // ignore: cast_nullable_to_non_nullable
@@ -119,8 +119,8 @@ class __$$_FAQInfoDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_FAQInfoDto extends _FAQInfoDto {
-  const _$_FAQInfoDto(
+class _$FAQInfoDtoImpl extends _FAQInfoDto {
+  const _$FAQInfoDtoImpl(
       {@JsonKey(
           name: 'pageInfo', defaultValue: '', readValue: getEndCursorValue)
       required this.endCursor,
@@ -129,8 +129,8 @@ class _$_FAQInfoDto extends _FAQInfoDto {
       : _faqList = faqList,
         super._();
 
-  factory _$_FAQInfoDto.fromJson(Map<String, dynamic> json) =>
-      _$$_FAQInfoDtoFromJson(json);
+  factory _$FAQInfoDtoImpl.fromJson(Map<String, dynamic> json) =>
+      _$$FAQInfoDtoImplFromJson(json);
 
   @override
   @JsonKey(name: 'pageInfo', defaultValue: '', readValue: getEndCursorValue)
@@ -150,10 +150,10 @@ class _$_FAQInfoDto extends _FAQInfoDto {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_FAQInfoDto &&
+            other is _$FAQInfoDtoImpl &&
             (identical(other.endCursor, endCursor) ||
                 other.endCursor == endCursor) &&
             const DeepCollectionEquality().equals(other._faqList, _faqList));
@@ -167,12 +167,12 @@ class _$_FAQInfoDto extends _FAQInfoDto {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_FAQInfoDtoCopyWith<_$_FAQInfoDto> get copyWith =>
-      __$$_FAQInfoDtoCopyWithImpl<_$_FAQInfoDto>(this, _$identity);
+  _$$FAQInfoDtoImplCopyWith<_$FAQInfoDtoImpl> get copyWith =>
+      __$$FAQInfoDtoImplCopyWithImpl<_$FAQInfoDtoImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_FAQInfoDtoToJson(
+    return _$$FAQInfoDtoImplToJson(
       this,
     );
   }
@@ -184,11 +184,11 @@ abstract class _FAQInfoDto extends FAQInfoDto {
           name: 'pageInfo', defaultValue: '', readValue: getEndCursorValue)
       required final String endCursor,
       @JsonKey(name: 'results', defaultValue: <FAQItemDto>[])
-      required final List<FAQItemDto> faqList}) = _$_FAQInfoDto;
+      required final List<FAQItemDto> faqList}) = _$FAQInfoDtoImpl;
   const _FAQInfoDto._() : super._();
 
   factory _FAQInfoDto.fromJson(Map<String, dynamic> json) =
-      _$_FAQInfoDto.fromJson;
+      _$FAQInfoDtoImpl.fromJson;
 
   @override
   @JsonKey(name: 'pageInfo', defaultValue: '', readValue: getEndCursorValue)
@@ -198,6 +198,6 @@ abstract class _FAQInfoDto extends FAQInfoDto {
   List<FAQItemDto> get faqList;
   @override
   @JsonKey(ignore: true)
-  _$$_FAQInfoDtoCopyWith<_$_FAQInfoDto> get copyWith =>
+  _$$FAQInfoDtoImplCopyWith<_$FAQInfoDtoImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

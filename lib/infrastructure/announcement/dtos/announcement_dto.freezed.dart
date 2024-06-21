@@ -12,7 +12,7 @@ part of 'announcement_dto.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 AnnouncementDto _$AnnouncementDtoFromJson(Map<String, dynamic> json) {
   return _AnnouncementDto.fromJson(json);
@@ -157,11 +157,11 @@ class _$AnnouncementDtoCopyWithImpl<$Res, $Val extends AnnouncementDto>
 }
 
 /// @nodoc
-abstract class _$$_AnnouncementDtoCopyWith<$Res>
+abstract class _$$AnnouncementDtoImplCopyWith<$Res>
     implements $AnnouncementDtoCopyWith<$Res> {
-  factory _$$_AnnouncementDtoCopyWith(
-          _$_AnnouncementDto value, $Res Function(_$_AnnouncementDto) then) =
-      __$$_AnnouncementDtoCopyWithImpl<$Res>;
+  factory _$$AnnouncementDtoImplCopyWith(_$AnnouncementDtoImpl value,
+          $Res Function(_$AnnouncementDtoImpl) then) =
+      __$$AnnouncementDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -184,11 +184,11 @@ abstract class _$$_AnnouncementDtoCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_AnnouncementDtoCopyWithImpl<$Res>
-    extends _$AnnouncementDtoCopyWithImpl<$Res, _$_AnnouncementDto>
-    implements _$$_AnnouncementDtoCopyWith<$Res> {
-  __$$_AnnouncementDtoCopyWithImpl(
-      _$_AnnouncementDto _value, $Res Function(_$_AnnouncementDto) _then)
+class __$$AnnouncementDtoImplCopyWithImpl<$Res>
+    extends _$AnnouncementDtoCopyWithImpl<$Res, _$AnnouncementDtoImpl>
+    implements _$$AnnouncementDtoImplCopyWith<$Res> {
+  __$$AnnouncementDtoImplCopyWithImpl(
+      _$AnnouncementDtoImpl _value, $Res Function(_$AnnouncementDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -207,7 +207,7 @@ class __$$_AnnouncementDtoCopyWithImpl<$Res>
     Object? loginType = null,
     Object? isCrossButton = null,
   }) {
-    return _then(_$_AnnouncementDto(
+    return _then(_$AnnouncementDtoImpl(
       active: null == active
           ? _value.active
           : active // ignore: cast_nullable_to_non_nullable
@@ -262,8 +262,8 @@ class __$$_AnnouncementDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable(createToJson: false)
-class _$_AnnouncementDto extends _AnnouncementDto {
-  const _$_AnnouncementDto(
+class _$AnnouncementDtoImpl extends _AnnouncementDto {
+  const _$AnnouncementDtoImpl(
       {@JsonKey(name: 'active', defaultValue: false) required this.active,
       @JsonKey(name: 'descriptionList', defaultValue: [])
       required final List<AnnouncementMessageDto> descriptionList,
@@ -286,8 +286,8 @@ class _$_AnnouncementDto extends _AnnouncementDto {
         _moduleName = moduleName,
         super._();
 
-  factory _$_AnnouncementDto.fromJson(Map<String, dynamic> json) =>
-      _$$_AnnouncementDtoFromJson(json);
+  factory _$AnnouncementDtoImpl.fromJson(Map<String, dynamic> json) =>
+      _$$AnnouncementDtoImplFromJson(json);
 
   @override
   @JsonKey(name: 'active', defaultValue: false)
@@ -345,10 +345,10 @@ class _$_AnnouncementDto extends _AnnouncementDto {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_AnnouncementDto &&
+            other is _$AnnouncementDtoImpl &&
             (identical(other.active, active) || other.active == active) &&
             const DeepCollectionEquality()
                 .equals(other._descriptionList, _descriptionList) &&
@@ -390,8 +390,9 @@ class _$_AnnouncementDto extends _AnnouncementDto {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_AnnouncementDtoCopyWith<_$_AnnouncementDto> get copyWith =>
-      __$$_AnnouncementDtoCopyWithImpl<_$_AnnouncementDto>(this, _$identity);
+  _$$AnnouncementDtoImplCopyWith<_$AnnouncementDtoImpl> get copyWith =>
+      __$$AnnouncementDtoImplCopyWithImpl<_$AnnouncementDtoImpl>(
+          this, _$identity);
 }
 
 abstract class _AnnouncementDto extends AnnouncementDto {
@@ -415,11 +416,11 @@ abstract class _AnnouncementDto extends AnnouncementDto {
       @JsonKey(name: 'loginType', defaultValue: '')
       required final String loginType,
       @JsonKey(name: 'isCrossButton', defaultValue: false)
-      required final bool isCrossButton}) = _$_AnnouncementDto;
+      required final bool isCrossButton}) = _$AnnouncementDtoImpl;
   const _AnnouncementDto._() : super._();
 
   factory _AnnouncementDto.fromJson(Map<String, dynamic> json) =
-      _$_AnnouncementDto.fromJson;
+      _$AnnouncementDtoImpl.fromJson;
 
   @override
   @JsonKey(name: 'active', defaultValue: false)
@@ -460,7 +461,7 @@ abstract class _AnnouncementDto extends AnnouncementDto {
   bool get isCrossButton;
   @override
   @JsonKey(ignore: true)
-  _$$_AnnouncementDtoCopyWith<_$_AnnouncementDto> get copyWith =>
+  _$$AnnouncementDtoImplCopyWith<_$AnnouncementDtoImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -532,11 +533,12 @@ class _$AnnouncementMessageDtoCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_AnnouncementMessageDtoCopyWith<$Res>
+abstract class _$$AnnouncementMessageDtoImplCopyWith<$Res>
     implements $AnnouncementMessageDtoCopyWith<$Res> {
-  factory _$$_AnnouncementMessageDtoCopyWith(_$_AnnouncementMessageDto value,
-          $Res Function(_$_AnnouncementMessageDto) then) =
-      __$$_AnnouncementMessageDtoCopyWithImpl<$Res>;
+  factory _$$AnnouncementMessageDtoImplCopyWith(
+          _$AnnouncementMessageDtoImpl value,
+          $Res Function(_$AnnouncementMessageDtoImpl) then) =
+      __$$AnnouncementMessageDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -546,12 +548,13 @@ abstract class _$$_AnnouncementMessageDtoCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_AnnouncementMessageDtoCopyWithImpl<$Res>
+class __$$AnnouncementMessageDtoImplCopyWithImpl<$Res>
     extends _$AnnouncementMessageDtoCopyWithImpl<$Res,
-        _$_AnnouncementMessageDto>
-    implements _$$_AnnouncementMessageDtoCopyWith<$Res> {
-  __$$_AnnouncementMessageDtoCopyWithImpl(_$_AnnouncementMessageDto _value,
-      $Res Function(_$_AnnouncementMessageDto) _then)
+        _$AnnouncementMessageDtoImpl>
+    implements _$$AnnouncementMessageDtoImplCopyWith<$Res> {
+  __$$AnnouncementMessageDtoImplCopyWithImpl(
+      _$AnnouncementMessageDtoImpl _value,
+      $Res Function(_$AnnouncementMessageDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -561,7 +564,7 @@ class __$$_AnnouncementMessageDtoCopyWithImpl<$Res>
     Object? language = null,
     Object? announcement = null,
   }) {
-    return _then(_$_AnnouncementMessageDto(
+    return _then(_$AnnouncementMessageDtoImpl(
       languageCode: null == languageCode
           ? _value.languageCode
           : languageCode // ignore: cast_nullable_to_non_nullable
@@ -580,8 +583,8 @@ class __$$_AnnouncementMessageDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_AnnouncementMessageDto extends _AnnouncementMessageDto {
-  const _$_AnnouncementMessageDto(
+class _$AnnouncementMessageDtoImpl extends _AnnouncementMessageDto {
+  const _$AnnouncementMessageDtoImpl(
       {@JsonKey(name: 'languageCode', defaultValue: '')
       required this.languageCode,
       @JsonKey(name: 'language', defaultValue: '') required this.language,
@@ -589,8 +592,8 @@ class _$_AnnouncementMessageDto extends _AnnouncementMessageDto {
       required this.announcement})
       : super._();
 
-  factory _$_AnnouncementMessageDto.fromJson(Map<String, dynamic> json) =>
-      _$$_AnnouncementMessageDtoFromJson(json);
+  factory _$AnnouncementMessageDtoImpl.fromJson(Map<String, dynamic> json) =>
+      _$$AnnouncementMessageDtoImplFromJson(json);
 
   @override
   @JsonKey(name: 'languageCode', defaultValue: '')
@@ -608,10 +611,10 @@ class _$_AnnouncementMessageDto extends _AnnouncementMessageDto {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_AnnouncementMessageDto &&
+            other is _$AnnouncementMessageDtoImpl &&
             (identical(other.languageCode, languageCode) ||
                 other.languageCode == languageCode) &&
             (identical(other.language, language) ||
@@ -628,13 +631,13 @@ class _$_AnnouncementMessageDto extends _AnnouncementMessageDto {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_AnnouncementMessageDtoCopyWith<_$_AnnouncementMessageDto> get copyWith =>
-      __$$_AnnouncementMessageDtoCopyWithImpl<_$_AnnouncementMessageDto>(
-          this, _$identity);
+  _$$AnnouncementMessageDtoImplCopyWith<_$AnnouncementMessageDtoImpl>
+      get copyWith => __$$AnnouncementMessageDtoImplCopyWithImpl<
+          _$AnnouncementMessageDtoImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_AnnouncementMessageDtoToJson(
+    return _$$AnnouncementMessageDtoImplToJson(
       this,
     );
   }
@@ -647,11 +650,11 @@ abstract class _AnnouncementMessageDto extends AnnouncementMessageDto {
       @JsonKey(name: 'language', defaultValue: '')
       required final String language,
       @JsonKey(name: 'announcement', defaultValue: '')
-      required final String announcement}) = _$_AnnouncementMessageDto;
+      required final String announcement}) = _$AnnouncementMessageDtoImpl;
   const _AnnouncementMessageDto._() : super._();
 
   factory _AnnouncementMessageDto.fromJson(Map<String, dynamic> json) =
-      _$_AnnouncementMessageDto.fromJson;
+      _$AnnouncementMessageDtoImpl.fromJson;
 
   @override
   @JsonKey(name: 'languageCode', defaultValue: '')
@@ -664,6 +667,6 @@ abstract class _AnnouncementMessageDto extends AnnouncementMessageDto {
   String get announcement;
   @override
   @JsonKey(ignore: true)
-  _$$_AnnouncementMessageDtoCopyWith<_$_AnnouncementMessageDto> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$AnnouncementMessageDtoImplCopyWith<_$AnnouncementMessageDtoImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }

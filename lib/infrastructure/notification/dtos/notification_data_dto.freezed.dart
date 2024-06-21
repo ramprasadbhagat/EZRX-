@@ -12,7 +12,7 @@ part of 'notification_data_dto.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 NotificationDataDto _$NotificationDataDtoFromJson(Map<String, dynamic> json) {
   return _NotificationDataDto.fromJson(json);
@@ -147,11 +147,11 @@ class _$NotificationDataDtoCopyWithImpl<$Res, $Val extends NotificationDataDto>
 }
 
 /// @nodoc
-abstract class _$$_NotificationDataDtoCopyWith<$Res>
+abstract class _$$NotificationDataDtoImplCopyWith<$Res>
     implements $NotificationDataDtoCopyWith<$Res> {
-  factory _$$_NotificationDataDtoCopyWith(_$_NotificationDataDto value,
-          $Res Function(_$_NotificationDataDto) then) =
-      __$$_NotificationDataDtoCopyWithImpl<$Res>;
+  factory _$$NotificationDataDtoImplCopyWith(_$NotificationDataDtoImpl value,
+          $Res Function(_$NotificationDataDtoImpl) then) =
+      __$$NotificationDataDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -172,11 +172,11 @@ abstract class _$$_NotificationDataDtoCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_NotificationDataDtoCopyWithImpl<$Res>
-    extends _$NotificationDataDtoCopyWithImpl<$Res, _$_NotificationDataDto>
-    implements _$$_NotificationDataDtoCopyWith<$Res> {
-  __$$_NotificationDataDtoCopyWithImpl(_$_NotificationDataDto _value,
-      $Res Function(_$_NotificationDataDto) _then)
+class __$$NotificationDataDtoImplCopyWithImpl<$Res>
+    extends _$NotificationDataDtoCopyWithImpl<$Res, _$NotificationDataDtoImpl>
+    implements _$$NotificationDataDtoImplCopyWith<$Res> {
+  __$$NotificationDataDtoImplCopyWithImpl(_$NotificationDataDtoImpl _value,
+      $Res Function(_$NotificationDataDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -194,7 +194,7 @@ class __$$_NotificationDataDtoCopyWithImpl<$Res>
     Object? paymentBatchAdditionalInfo = null,
     Object? isMarketPlace = null,
   }) {
-    return _then(_$_NotificationDataDto(
+    return _then(_$NotificationDataDtoImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -245,8 +245,8 @@ class __$$_NotificationDataDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_NotificationDataDto extends _NotificationDataDto {
-  const _$_NotificationDataDto(
+class _$NotificationDataDtoImpl extends _NotificationDataDto {
+  const _$NotificationDataDtoImpl(
       {@JsonKey(name: 'id', defaultValue: 0) required this.id,
       @JsonKey(name: 'type', defaultValue: '') required this.type,
       @JsonKey(name: 'title', defaultValue: '') required this.title,
@@ -264,8 +264,8 @@ class _$_NotificationDataDto extends _NotificationDataDto {
       required this.isMarketPlace})
       : super._();
 
-  factory _$_NotificationDataDto.fromJson(Map<String, dynamic> json) =>
-      _$$_NotificationDataDtoFromJson(json);
+  factory _$NotificationDataDtoImpl.fromJson(Map<String, dynamic> json) =>
+      _$$NotificationDataDtoImplFromJson(json);
 
   @override
   @JsonKey(name: 'id', defaultValue: 0)
@@ -307,10 +307,10 @@ class _$_NotificationDataDto extends _NotificationDataDto {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_NotificationDataDto &&
+            other is _$NotificationDataDtoImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.type, type) || other.type == type) &&
             (identical(other.title, title) || other.title == title) &&
@@ -352,13 +352,13 @@ class _$_NotificationDataDto extends _NotificationDataDto {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_NotificationDataDtoCopyWith<_$_NotificationDataDto> get copyWith =>
-      __$$_NotificationDataDtoCopyWithImpl<_$_NotificationDataDto>(
+  _$$NotificationDataDtoImplCopyWith<_$NotificationDataDtoImpl> get copyWith =>
+      __$$NotificationDataDtoImplCopyWithImpl<_$NotificationDataDtoImpl>(
           this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_NotificationDataDtoToJson(
+    return _$$NotificationDataDtoImplToJson(
       this,
     );
   }
@@ -383,11 +383,11 @@ abstract class _NotificationDataDto extends NotificationDataDto {
       @JsonKey(name: 'paymentBatchAdditionalInfo', defaultValue: '')
       required final String paymentBatchAdditionalInfo,
       @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
-      required final bool isMarketPlace}) = _$_NotificationDataDto;
+      required final bool isMarketPlace}) = _$NotificationDataDtoImpl;
   const _NotificationDataDto._() : super._();
 
   factory _NotificationDataDto.fromJson(Map<String, dynamic> json) =
-      _$_NotificationDataDto.fromJson;
+      _$NotificationDataDtoImpl.fromJson;
 
   @override
   @JsonKey(name: 'id', defaultValue: 0)
@@ -424,6 +424,6 @@ abstract class _NotificationDataDto extends NotificationDataDto {
   bool get isMarketPlace;
   @override
   @JsonKey(ignore: true)
-  _$$_NotificationDataDtoCopyWith<_$_NotificationDataDto> get copyWith =>
+  _$$NotificationDataDtoImplCopyWith<_$NotificationDataDtoImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

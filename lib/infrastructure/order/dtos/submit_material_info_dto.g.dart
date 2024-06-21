@@ -10,7 +10,7 @@ _$SubmitMaterialInfoDtoImpl _$$SubmitMaterialInfoDtoImplFromJson(
         Map<String, dynamic> json) =>
     _$SubmitMaterialInfoDtoImpl(
       materialNumber: json['materialNumber'] as String? ?? '',
-      qty: json['qty'] as int? ?? 0,
+      qty: (json['qty'] as num?)?.toInt() ?? 0,
       bonuses: (json['bonuses'] as List<dynamic>?)
               ?.map((e) => SubmitMaterialItemBonusDto.fromJson(
                   e as Map<String, dynamic>))

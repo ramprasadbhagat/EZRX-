@@ -12,7 +12,7 @@ part of 'bill_to_address.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$BillToAddress {
@@ -100,11 +100,11 @@ class _$BillToAddressCopyWithImpl<$Res, $Val extends BillToAddress>
 }
 
 /// @nodoc
-abstract class _$$_BillToAddressCopyWith<$Res>
+abstract class _$$BillToAddressImplCopyWith<$Res>
     implements $BillToAddressCopyWith<$Res> {
-  factory _$$_BillToAddressCopyWith(
-          _$_BillToAddress value, $Res Function(_$_BillToAddress) then) =
-      __$$_BillToAddressCopyWithImpl<$Res>;
+  factory _$$BillToAddressImplCopyWith(
+          _$BillToAddressImpl value, $Res Function(_$BillToAddressImpl) then) =
+      __$$BillToAddressImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -118,11 +118,11 @@ abstract class _$$_BillToAddressCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_BillToAddressCopyWithImpl<$Res>
-    extends _$BillToAddressCopyWithImpl<$Res, _$_BillToAddress>
-    implements _$$_BillToAddressCopyWith<$Res> {
-  __$$_BillToAddressCopyWithImpl(
-      _$_BillToAddress _value, $Res Function(_$_BillToAddress) _then)
+class __$$BillToAddressImplCopyWithImpl<$Res>
+    extends _$BillToAddressCopyWithImpl<$Res, _$BillToAddressImpl>
+    implements _$$BillToAddressImplCopyWith<$Res> {
+  __$$BillToAddressImplCopyWithImpl(
+      _$BillToAddressImpl _value, $Res Function(_$BillToAddressImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -136,7 +136,7 @@ class __$$_BillToAddressCopyWithImpl<$Res>
     Object? city1 = null,
     Object? city2 = null,
   }) {
-    return _then(_$_BillToAddress(
+    return _then(_$BillToAddressImpl(
       street: null == street
           ? _value.street
           : street // ignore: cast_nullable_to_non_nullable
@@ -171,8 +171,8 @@ class __$$_BillToAddressCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_BillToAddress extends _BillToAddress {
-  const _$_BillToAddress(
+class _$BillToAddressImpl extends _BillToAddress {
+  const _$BillToAddressImpl(
       {required this.street,
       required this.street2,
       required this.street3,
@@ -198,10 +198,10 @@ class _$_BillToAddress extends _BillToAddress {
   final String city2;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_BillToAddress &&
+            other is _$BillToAddressImpl &&
             (identical(other.street, street) || other.street == street) &&
             (identical(other.street2, street2) || other.street2 == street2) &&
             (identical(other.street3, street3) || other.street3 == street3) &&
@@ -218,8 +218,8 @@ class _$_BillToAddress extends _BillToAddress {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_BillToAddressCopyWith<_$_BillToAddress> get copyWith =>
-      __$$_BillToAddressCopyWithImpl<_$_BillToAddress>(this, _$identity);
+  _$$BillToAddressImplCopyWith<_$BillToAddressImpl> get copyWith =>
+      __$$BillToAddressImplCopyWithImpl<_$BillToAddressImpl>(this, _$identity);
 }
 
 abstract class _BillToAddress extends BillToAddress {
@@ -230,7 +230,7 @@ abstract class _BillToAddress extends BillToAddress {
       required final String street4,
       required final String street5,
       required final String city1,
-      required final String city2}) = _$_BillToAddress;
+      required final String city2}) = _$BillToAddressImpl;
   const _BillToAddress._() : super._();
 
   @override
@@ -249,6 +249,6 @@ abstract class _BillToAddress extends BillToAddress {
   String get city2;
   @override
   @JsonKey(ignore: true)
-  _$$_BillToAddressCopyWith<_$_BillToAddress> get copyWith =>
+  _$$BillToAddressImplCopyWith<_$BillToAddressImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

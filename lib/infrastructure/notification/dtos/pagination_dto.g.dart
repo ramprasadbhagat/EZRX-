@@ -6,14 +6,14 @@ part of 'pagination_dto.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_PaginationDto _$$_PaginationDtoFromJson(Map<String, dynamic> json) =>
-    _$_PaginationDto(
-      totalItem: json['totalItem'] as int? ?? 0,
-      totalPage: json['totalPage'] as int? ?? 0,
-      totalUnread: json['totalUnread'] as int? ?? 0,
+_$PaginationDtoImpl _$$PaginationDtoImplFromJson(Map<String, dynamic> json) =>
+    _$PaginationDtoImpl(
+      totalItem: (json['totalItem'] as num?)?.toInt() ?? 0,
+      totalPage: (json['totalPage'] as num?)?.toInt() ?? 0,
+      totalUnread: (json['totalUnread'] as num?)?.toInt() ?? 0,
     );
 
-Map<String, dynamic> _$$_PaginationDtoToJson(_$_PaginationDto instance) =>
+Map<String, dynamic> _$$PaginationDtoImplToJson(_$PaginationDtoImpl instance) =>
     <String, dynamic>{
       'totalItem': instance.totalItem,
       'totalPage': instance.totalPage,

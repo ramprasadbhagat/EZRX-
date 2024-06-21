@@ -6,8 +6,8 @@ part of 'credit_limit_dto.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_CreditLimitDto _$$_CreditLimitDtoFromJson(Map<String, dynamic> json) =>
-    _$_CreditLimitDto(
+_$CreditLimitDtoImpl _$$CreditLimitDtoImplFromJson(Map<String, dynamic> json) =>
+    _$CreditLimitDtoImpl(
       customerCode: json['partner'] as String? ?? '',
       currency: json['currency'] as String? ?? '',
       creditLimit: json['creditLimit'] as String? ?? '',
@@ -15,7 +15,8 @@ _$_CreditLimitDto _$$_CreditLimitDtoFromJson(Map<String, dynamic> json) =>
       creditBalance: json['creditBalance'] as String? ?? '',
     );
 
-Map<String, dynamic> _$$_CreditLimitDtoToJson(_$_CreditLimitDto instance) =>
+Map<String, dynamic> _$$CreditLimitDtoImplToJson(
+        _$CreditLimitDtoImpl instance) =>
     <String, dynamic>{
       'partner': instance.customerCode,
       'currency': instance.currency,

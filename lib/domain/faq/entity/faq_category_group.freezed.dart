@@ -12,7 +12,7 @@ part of 'faq_category_group.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$FAQCategoryGroup {
@@ -63,22 +63,22 @@ class _$FAQCategoryGroupCopyWithImpl<$Res, $Val extends FAQCategoryGroup>
 }
 
 /// @nodoc
-abstract class _$$_FAQCategoryGroupCopyWith<$Res>
+abstract class _$$FAQCategoryGroupImplCopyWith<$Res>
     implements $FAQCategoryGroupCopyWith<$Res> {
-  factory _$$_FAQCategoryGroupCopyWith(
-          _$_FAQCategoryGroup value, $Res Function(_$_FAQCategoryGroup) then) =
-      __$$_FAQCategoryGroupCopyWithImpl<$Res>;
+  factory _$$FAQCategoryGroupImplCopyWith(_$FAQCategoryGroupImpl value,
+          $Res Function(_$FAQCategoryGroupImpl) then) =
+      __$$FAQCategoryGroupImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String displayName, List<FAQItem> faqItem});
 }
 
 /// @nodoc
-class __$$_FAQCategoryGroupCopyWithImpl<$Res>
-    extends _$FAQCategoryGroupCopyWithImpl<$Res, _$_FAQCategoryGroup>
-    implements _$$_FAQCategoryGroupCopyWith<$Res> {
-  __$$_FAQCategoryGroupCopyWithImpl(
-      _$_FAQCategoryGroup _value, $Res Function(_$_FAQCategoryGroup) _then)
+class __$$FAQCategoryGroupImplCopyWithImpl<$Res>
+    extends _$FAQCategoryGroupCopyWithImpl<$Res, _$FAQCategoryGroupImpl>
+    implements _$$FAQCategoryGroupImplCopyWith<$Res> {
+  __$$FAQCategoryGroupImplCopyWithImpl(_$FAQCategoryGroupImpl _value,
+      $Res Function(_$FAQCategoryGroupImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -87,7 +87,7 @@ class __$$_FAQCategoryGroupCopyWithImpl<$Res>
     Object? displayName = null,
     Object? faqItem = null,
   }) {
-    return _then(_$_FAQCategoryGroup(
+    return _then(_$FAQCategoryGroupImpl(
       displayName: null == displayName
           ? _value.displayName
           : displayName // ignore: cast_nullable_to_non_nullable
@@ -102,8 +102,8 @@ class __$$_FAQCategoryGroupCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_FAQCategoryGroup implements _FAQCategoryGroup {
-  _$_FAQCategoryGroup(
+class _$FAQCategoryGroupImpl implements _FAQCategoryGroup {
+  _$FAQCategoryGroupImpl(
       {required this.displayName, required final List<FAQItem> faqItem})
       : _faqItem = faqItem;
 
@@ -123,10 +123,10 @@ class _$_FAQCategoryGroup implements _FAQCategoryGroup {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_FAQCategoryGroup &&
+            other is _$FAQCategoryGroupImpl &&
             (identical(other.displayName, displayName) ||
                 other.displayName == displayName) &&
             const DeepCollectionEquality().equals(other._faqItem, _faqItem));
@@ -139,14 +139,15 @@ class _$_FAQCategoryGroup implements _FAQCategoryGroup {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_FAQCategoryGroupCopyWith<_$_FAQCategoryGroup> get copyWith =>
-      __$$_FAQCategoryGroupCopyWithImpl<_$_FAQCategoryGroup>(this, _$identity);
+  _$$FAQCategoryGroupImplCopyWith<_$FAQCategoryGroupImpl> get copyWith =>
+      __$$FAQCategoryGroupImplCopyWithImpl<_$FAQCategoryGroupImpl>(
+          this, _$identity);
 }
 
 abstract class _FAQCategoryGroup implements FAQCategoryGroup {
   factory _FAQCategoryGroup(
       {required final String displayName,
-      required final List<FAQItem> faqItem}) = _$_FAQCategoryGroup;
+      required final List<FAQItem> faqItem}) = _$FAQCategoryGroupImpl;
 
   @override
   String get displayName;
@@ -154,6 +155,6 @@ abstract class _FAQCategoryGroup implements FAQCategoryGroup {
   List<FAQItem> get faqItem;
   @override
   @JsonKey(ignore: true)
-  _$$_FAQCategoryGroupCopyWith<_$_FAQCategoryGroup> get copyWith =>
+  _$$FAQCategoryGroupImplCopyWith<_$FAQCategoryGroupImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

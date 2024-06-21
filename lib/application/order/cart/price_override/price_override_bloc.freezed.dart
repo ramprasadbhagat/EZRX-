@@ -12,7 +12,7 @@ part of 'price_override_bloc.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$PriceOverrideEvent {
@@ -112,25 +112,25 @@ class _$PriceOverrideEventCopyWithImpl<$Res, $Val extends PriceOverrideEvent>
 }
 
 /// @nodoc
-abstract class _$$_InitializedCopyWith<$Res> {
-  factory _$$_InitializedCopyWith(
-          _$_Initialized value, $Res Function(_$_Initialized) then) =
-      __$$_InitializedCopyWithImpl<$Res>;
+abstract class _$$InitializedImplCopyWith<$Res> {
+  factory _$$InitializedImplCopyWith(
+          _$InitializedImpl value, $Res Function(_$InitializedImpl) then) =
+      __$$InitializedImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_InitializedCopyWithImpl<$Res>
-    extends _$PriceOverrideEventCopyWithImpl<$Res, _$_Initialized>
-    implements _$$_InitializedCopyWith<$Res> {
-  __$$_InitializedCopyWithImpl(
-      _$_Initialized _value, $Res Function(_$_Initialized) _then)
+class __$$InitializedImplCopyWithImpl<$Res>
+    extends _$PriceOverrideEventCopyWithImpl<$Res, _$InitializedImpl>
+    implements _$$InitializedImplCopyWith<$Res> {
+  __$$InitializedImplCopyWithImpl(
+      _$InitializedImpl _value, $Res Function(_$InitializedImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_Initialized implements _Initialized {
-  const _$_Initialized();
+class _$InitializedImpl implements _Initialized {
+  const _$InitializedImpl();
 
   @override
   String toString() {
@@ -138,9 +138,9 @@ class _$_Initialized implements _Initialized {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_Initialized);
+        (other.runtimeType == runtimeType && other is _$InitializedImpl);
   }
 
   @override
@@ -247,14 +247,14 @@ class _$_Initialized implements _Initialized {
 }
 
 abstract class _Initialized implements PriceOverrideEvent {
-  const factory _Initialized() = _$_Initialized;
+  const factory _Initialized() = _$InitializedImpl;
 }
 
 /// @nodoc
-abstract class _$$_SetProductCopyWith<$Res> {
-  factory _$$_SetProductCopyWith(
-          _$_SetProduct value, $Res Function(_$_SetProduct) then) =
-      __$$_SetProductCopyWithImpl<$Res>;
+abstract class _$$SetProductImplCopyWith<$Res> {
+  factory _$$SetProductImplCopyWith(
+          _$SetProductImpl value, $Res Function(_$SetProductImpl) then) =
+      __$$SetProductImplCopyWithImpl<$Res>;
   @useResult
   $Res call({PriceAggregate item});
 
@@ -262,11 +262,11 @@ abstract class _$$_SetProductCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_SetProductCopyWithImpl<$Res>
-    extends _$PriceOverrideEventCopyWithImpl<$Res, _$_SetProduct>
-    implements _$$_SetProductCopyWith<$Res> {
-  __$$_SetProductCopyWithImpl(
-      _$_SetProduct _value, $Res Function(_$_SetProduct) _then)
+class __$$SetProductImplCopyWithImpl<$Res>
+    extends _$PriceOverrideEventCopyWithImpl<$Res, _$SetProductImpl>
+    implements _$$SetProductImplCopyWith<$Res> {
+  __$$SetProductImplCopyWithImpl(
+      _$SetProductImpl _value, $Res Function(_$SetProductImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -274,7 +274,7 @@ class __$$_SetProductCopyWithImpl<$Res>
   $Res call({
     Object? item = null,
   }) {
-    return _then(_$_SetProduct(
+    return _then(_$SetProductImpl(
       item: null == item
           ? _value.item
           : item // ignore: cast_nullable_to_non_nullable
@@ -293,8 +293,8 @@ class __$$_SetProductCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_SetProduct implements _SetProduct {
-  const _$_SetProduct({required this.item});
+class _$SetProductImpl implements _SetProduct {
+  const _$SetProductImpl({required this.item});
 
   @override
   final PriceAggregate item;
@@ -305,10 +305,10 @@ class _$_SetProduct implements _SetProduct {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_SetProduct &&
+            other is _$SetProductImpl &&
             (identical(other.item, item) || other.item == item));
   }
 
@@ -318,8 +318,8 @@ class _$_SetProduct implements _SetProduct {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_SetProductCopyWith<_$_SetProduct> get copyWith =>
-      __$$_SetProductCopyWithImpl<_$_SetProduct>(this, _$identity);
+  _$$SetProductImplCopyWith<_$SetProductImpl> get copyWith =>
+      __$$SetProductImplCopyWithImpl<_$SetProductImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -423,29 +423,29 @@ class _$_SetProduct implements _SetProduct {
 
 abstract class _SetProduct implements PriceOverrideEvent {
   const factory _SetProduct({required final PriceAggregate item}) =
-      _$_SetProduct;
+      _$SetProductImpl;
 
   PriceAggregate get item;
   @JsonKey(ignore: true)
-  _$$_SetProductCopyWith<_$_SetProduct> get copyWith =>
+  _$$SetProductImplCopyWith<_$SetProductImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_OnPriceValueChangeCopyWith<$Res> {
-  factory _$$_OnPriceValueChangeCopyWith(_$_OnPriceValueChange value,
-          $Res Function(_$_OnPriceValueChange) then) =
-      __$$_OnPriceValueChangeCopyWithImpl<$Res>;
+abstract class _$$OnPriceValueChangeImplCopyWith<$Res> {
+  factory _$$OnPriceValueChangeImplCopyWith(_$OnPriceValueChangeImpl value,
+          $Res Function(_$OnPriceValueChangeImpl) then) =
+      __$$OnPriceValueChangeImplCopyWithImpl<$Res>;
   @useResult
   $Res call({String newPrice});
 }
 
 /// @nodoc
-class __$$_OnPriceValueChangeCopyWithImpl<$Res>
-    extends _$PriceOverrideEventCopyWithImpl<$Res, _$_OnPriceValueChange>
-    implements _$$_OnPriceValueChangeCopyWith<$Res> {
-  __$$_OnPriceValueChangeCopyWithImpl(
-      _$_OnPriceValueChange _value, $Res Function(_$_OnPriceValueChange) _then)
+class __$$OnPriceValueChangeImplCopyWithImpl<$Res>
+    extends _$PriceOverrideEventCopyWithImpl<$Res, _$OnPriceValueChangeImpl>
+    implements _$$OnPriceValueChangeImplCopyWith<$Res> {
+  __$$OnPriceValueChangeImplCopyWithImpl(_$OnPriceValueChangeImpl _value,
+      $Res Function(_$OnPriceValueChangeImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -453,7 +453,7 @@ class __$$_OnPriceValueChangeCopyWithImpl<$Res>
   $Res call({
     Object? newPrice = null,
   }) {
-    return _then(_$_OnPriceValueChange(
+    return _then(_$OnPriceValueChangeImpl(
       newPrice: null == newPrice
           ? _value.newPrice
           : newPrice // ignore: cast_nullable_to_non_nullable
@@ -464,8 +464,8 @@ class __$$_OnPriceValueChangeCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_OnPriceValueChange implements _OnPriceValueChange {
-  const _$_OnPriceValueChange({required this.newPrice});
+class _$OnPriceValueChangeImpl implements _OnPriceValueChange {
+  const _$OnPriceValueChangeImpl({required this.newPrice});
 
   @override
   final String newPrice;
@@ -476,10 +476,10 @@ class _$_OnPriceValueChange implements _OnPriceValueChange {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_OnPriceValueChange &&
+            other is _$OnPriceValueChangeImpl &&
             (identical(other.newPrice, newPrice) ||
                 other.newPrice == newPrice));
   }
@@ -490,8 +490,8 @@ class _$_OnPriceValueChange implements _OnPriceValueChange {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_OnPriceValueChangeCopyWith<_$_OnPriceValueChange> get copyWith =>
-      __$$_OnPriceValueChangeCopyWithImpl<_$_OnPriceValueChange>(
+  _$$OnPriceValueChangeImplCopyWith<_$OnPriceValueChangeImpl> get copyWith =>
+      __$$OnPriceValueChangeImplCopyWithImpl<_$OnPriceValueChangeImpl>(
           this, _$identity);
 
   @override
@@ -596,29 +596,31 @@ class _$_OnPriceValueChange implements _OnPriceValueChange {
 
 abstract class _OnPriceValueChange implements PriceOverrideEvent {
   const factory _OnPriceValueChange({required final String newPrice}) =
-      _$_OnPriceValueChange;
+      _$OnPriceValueChangeImpl;
 
   String get newPrice;
   @JsonKey(ignore: true)
-  _$$_OnPriceValueChangeCopyWith<_$_OnPriceValueChange> get copyWith =>
+  _$$OnPriceValueChangeImplCopyWith<_$OnPriceValueChangeImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_OnDiscountValueChangedCopyWith<$Res> {
-  factory _$$_OnDiscountValueChangedCopyWith(_$_OnDiscountValueChanged value,
-          $Res Function(_$_OnDiscountValueChanged) then) =
-      __$$_OnDiscountValueChangedCopyWithImpl<$Res>;
+abstract class _$$OnDiscountValueChangedImplCopyWith<$Res> {
+  factory _$$OnDiscountValueChangedImplCopyWith(
+          _$OnDiscountValueChangedImpl value,
+          $Res Function(_$OnDiscountValueChangedImpl) then) =
+      __$$OnDiscountValueChangedImplCopyWithImpl<$Res>;
   @useResult
   $Res call({String newValue});
 }
 
 /// @nodoc
-class __$$_OnDiscountValueChangedCopyWithImpl<$Res>
-    extends _$PriceOverrideEventCopyWithImpl<$Res, _$_OnDiscountValueChanged>
-    implements _$$_OnDiscountValueChangedCopyWith<$Res> {
-  __$$_OnDiscountValueChangedCopyWithImpl(_$_OnDiscountValueChanged _value,
-      $Res Function(_$_OnDiscountValueChanged) _then)
+class __$$OnDiscountValueChangedImplCopyWithImpl<$Res>
+    extends _$PriceOverrideEventCopyWithImpl<$Res, _$OnDiscountValueChangedImpl>
+    implements _$$OnDiscountValueChangedImplCopyWith<$Res> {
+  __$$OnDiscountValueChangedImplCopyWithImpl(
+      _$OnDiscountValueChangedImpl _value,
+      $Res Function(_$OnDiscountValueChangedImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -626,7 +628,7 @@ class __$$_OnDiscountValueChangedCopyWithImpl<$Res>
   $Res call({
     Object? newValue = null,
   }) {
-    return _then(_$_OnDiscountValueChanged(
+    return _then(_$OnDiscountValueChangedImpl(
       newValue: null == newValue
           ? _value.newValue
           : newValue // ignore: cast_nullable_to_non_nullable
@@ -637,8 +639,8 @@ class __$$_OnDiscountValueChangedCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_OnDiscountValueChanged implements _OnDiscountValueChanged {
-  const _$_OnDiscountValueChanged({required this.newValue});
+class _$OnDiscountValueChangedImpl implements _OnDiscountValueChanged {
+  const _$OnDiscountValueChangedImpl({required this.newValue});
 
   @override
   final String newValue;
@@ -649,10 +651,10 @@ class _$_OnDiscountValueChanged implements _OnDiscountValueChanged {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_OnDiscountValueChanged &&
+            other is _$OnDiscountValueChangedImpl &&
             (identical(other.newValue, newValue) ||
                 other.newValue == newValue));
   }
@@ -663,9 +665,9 @@ class _$_OnDiscountValueChanged implements _OnDiscountValueChanged {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_OnDiscountValueChangedCopyWith<_$_OnDiscountValueChanged> get copyWith =>
-      __$$_OnDiscountValueChangedCopyWithImpl<_$_OnDiscountValueChanged>(
-          this, _$identity);
+  _$$OnDiscountValueChangedImplCopyWith<_$OnDiscountValueChangedImpl>
+      get copyWith => __$$OnDiscountValueChangedImplCopyWithImpl<
+          _$OnDiscountValueChangedImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -769,29 +771,29 @@ class _$_OnDiscountValueChanged implements _OnDiscountValueChanged {
 
 abstract class _OnDiscountValueChanged implements PriceOverrideEvent {
   const factory _OnDiscountValueChanged({required final String newValue}) =
-      _$_OnDiscountValueChanged;
+      _$OnDiscountValueChangedImpl;
 
   String get newValue;
   @JsonKey(ignore: true)
-  _$$_OnDiscountValueChangedCopyWith<_$_OnDiscountValueChanged> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$OnDiscountValueChangedImplCopyWith<_$OnDiscountValueChangedImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_OnRemarksValueChangeCopyWith<$Res> {
-  factory _$$_OnRemarksValueChangeCopyWith(_$_OnRemarksValueChange value,
-          $Res Function(_$_OnRemarksValueChange) then) =
-      __$$_OnRemarksValueChangeCopyWithImpl<$Res>;
+abstract class _$$OnRemarksValueChangeImplCopyWith<$Res> {
+  factory _$$OnRemarksValueChangeImplCopyWith(_$OnRemarksValueChangeImpl value,
+          $Res Function(_$OnRemarksValueChangeImpl) then) =
+      __$$OnRemarksValueChangeImplCopyWithImpl<$Res>;
   @useResult
   $Res call({String newRemarks});
 }
 
 /// @nodoc
-class __$$_OnRemarksValueChangeCopyWithImpl<$Res>
-    extends _$PriceOverrideEventCopyWithImpl<$Res, _$_OnRemarksValueChange>
-    implements _$$_OnRemarksValueChangeCopyWith<$Res> {
-  __$$_OnRemarksValueChangeCopyWithImpl(_$_OnRemarksValueChange _value,
-      $Res Function(_$_OnRemarksValueChange) _then)
+class __$$OnRemarksValueChangeImplCopyWithImpl<$Res>
+    extends _$PriceOverrideEventCopyWithImpl<$Res, _$OnRemarksValueChangeImpl>
+    implements _$$OnRemarksValueChangeImplCopyWith<$Res> {
+  __$$OnRemarksValueChangeImplCopyWithImpl(_$OnRemarksValueChangeImpl _value,
+      $Res Function(_$OnRemarksValueChangeImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -799,7 +801,7 @@ class __$$_OnRemarksValueChangeCopyWithImpl<$Res>
   $Res call({
     Object? newRemarks = null,
   }) {
-    return _then(_$_OnRemarksValueChange(
+    return _then(_$OnRemarksValueChangeImpl(
       newRemarks: null == newRemarks
           ? _value.newRemarks
           : newRemarks // ignore: cast_nullable_to_non_nullable
@@ -810,8 +812,8 @@ class __$$_OnRemarksValueChangeCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_OnRemarksValueChange implements _OnRemarksValueChange {
-  const _$_OnRemarksValueChange({required this.newRemarks});
+class _$OnRemarksValueChangeImpl implements _OnRemarksValueChange {
+  const _$OnRemarksValueChangeImpl({required this.newRemarks});
 
   @override
   final String newRemarks;
@@ -822,10 +824,10 @@ class _$_OnRemarksValueChange implements _OnRemarksValueChange {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_OnRemarksValueChange &&
+            other is _$OnRemarksValueChangeImpl &&
             (identical(other.newRemarks, newRemarks) ||
                 other.newRemarks == newRemarks));
   }
@@ -836,9 +838,10 @@ class _$_OnRemarksValueChange implements _OnRemarksValueChange {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_OnRemarksValueChangeCopyWith<_$_OnRemarksValueChange> get copyWith =>
-      __$$_OnRemarksValueChangeCopyWithImpl<_$_OnRemarksValueChange>(
-          this, _$identity);
+  _$$OnRemarksValueChangeImplCopyWith<_$OnRemarksValueChangeImpl>
+      get copyWith =>
+          __$$OnRemarksValueChangeImplCopyWithImpl<_$OnRemarksValueChangeImpl>(
+              this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -942,34 +945,34 @@ class _$_OnRemarksValueChange implements _OnRemarksValueChange {
 
 abstract class _OnRemarksValueChange implements PriceOverrideEvent {
   const factory _OnRemarksValueChange({required final String newRemarks}) =
-      _$_OnRemarksValueChange;
+      _$OnRemarksValueChangeImpl;
 
   String get newRemarks;
   @JsonKey(ignore: true)
-  _$$_OnRemarksValueChangeCopyWith<_$_OnRemarksValueChange> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$OnRemarksValueChangeImplCopyWith<_$OnRemarksValueChangeImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_ValidateInputFieldsCopyWith<$Res> {
-  factory _$$_ValidateInputFieldsCopyWith(_$_ValidateInputFields value,
-          $Res Function(_$_ValidateInputFields) then) =
-      __$$_ValidateInputFieldsCopyWithImpl<$Res>;
+abstract class _$$ValidateInputFieldsImplCopyWith<$Res> {
+  factory _$$ValidateInputFieldsImplCopyWith(_$ValidateInputFieldsImpl value,
+          $Res Function(_$ValidateInputFieldsImpl) then) =
+      __$$ValidateInputFieldsImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_ValidateInputFieldsCopyWithImpl<$Res>
-    extends _$PriceOverrideEventCopyWithImpl<$Res, _$_ValidateInputFields>
-    implements _$$_ValidateInputFieldsCopyWith<$Res> {
-  __$$_ValidateInputFieldsCopyWithImpl(_$_ValidateInputFields _value,
-      $Res Function(_$_ValidateInputFields) _then)
+class __$$ValidateInputFieldsImplCopyWithImpl<$Res>
+    extends _$PriceOverrideEventCopyWithImpl<$Res, _$ValidateInputFieldsImpl>
+    implements _$$ValidateInputFieldsImplCopyWith<$Res> {
+  __$$ValidateInputFieldsImplCopyWithImpl(_$ValidateInputFieldsImpl _value,
+      $Res Function(_$ValidateInputFieldsImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_ValidateInputFields implements _ValidateInputFields {
-  const _$_ValidateInputFields();
+class _$ValidateInputFieldsImpl implements _ValidateInputFields {
+  const _$ValidateInputFieldsImpl();
 
   @override
   String toString() {
@@ -977,9 +980,10 @@ class _$_ValidateInputFields implements _ValidateInputFields {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_ValidateInputFields);
+        (other.runtimeType == runtimeType &&
+            other is _$ValidateInputFieldsImpl);
   }
 
   @override
@@ -1086,13 +1090,14 @@ class _$_ValidateInputFields implements _ValidateInputFields {
 }
 
 abstract class _ValidateInputFields implements PriceOverrideEvent {
-  const factory _ValidateInputFields() = _$_ValidateInputFields;
+  const factory _ValidateInputFields() = _$ValidateInputFieldsImpl;
 }
 
 /// @nodoc
-abstract class _$$_FetchCopyWith<$Res> {
-  factory _$$_FetchCopyWith(_$_Fetch value, $Res Function(_$_Fetch) then) =
-      __$$_FetchCopyWithImpl<$Res>;
+abstract class _$$FetchImplCopyWith<$Res> {
+  factory _$$FetchImplCopyWith(
+          _$FetchImpl value, $Res Function(_$FetchImpl) then) =
+      __$$FetchImplCopyWithImpl<$Res>;
   @useResult
   $Res call(
       {SalesOrganisation salesOrganisation, CustomerCodeInfo customerCodeInfo});
@@ -1102,10 +1107,11 @@ abstract class _$$_FetchCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_FetchCopyWithImpl<$Res>
-    extends _$PriceOverrideEventCopyWithImpl<$Res, _$_Fetch>
-    implements _$$_FetchCopyWith<$Res> {
-  __$$_FetchCopyWithImpl(_$_Fetch _value, $Res Function(_$_Fetch) _then)
+class __$$FetchImplCopyWithImpl<$Res>
+    extends _$PriceOverrideEventCopyWithImpl<$Res, _$FetchImpl>
+    implements _$$FetchImplCopyWith<$Res> {
+  __$$FetchImplCopyWithImpl(
+      _$FetchImpl _value, $Res Function(_$FetchImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1114,7 +1120,7 @@ class __$$_FetchCopyWithImpl<$Res>
     Object? salesOrganisation = null,
     Object? customerCodeInfo = null,
   }) {
-    return _then(_$_Fetch(
+    return _then(_$FetchImpl(
       salesOrganisation: null == salesOrganisation
           ? _value.salesOrganisation
           : salesOrganisation // ignore: cast_nullable_to_non_nullable
@@ -1145,8 +1151,8 @@ class __$$_FetchCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_Fetch implements _Fetch {
-  const _$_Fetch(
+class _$FetchImpl implements _Fetch {
+  const _$FetchImpl(
       {required this.salesOrganisation, required this.customerCodeInfo});
 
   @override
@@ -1160,10 +1166,10 @@ class _$_Fetch implements _Fetch {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Fetch &&
+            other is _$FetchImpl &&
             (identical(other.salesOrganisation, salesOrganisation) ||
                 other.salesOrganisation == salesOrganisation) &&
             (identical(other.customerCodeInfo, customerCodeInfo) ||
@@ -1177,8 +1183,8 @@ class _$_Fetch implements _Fetch {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_FetchCopyWith<_$_Fetch> get copyWith =>
-      __$$_FetchCopyWithImpl<_$_Fetch>(this, _$identity);
+  _$$FetchImplCopyWith<_$FetchImpl> get copyWith =>
+      __$$FetchImplCopyWithImpl<_$FetchImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -1283,12 +1289,12 @@ class _$_Fetch implements _Fetch {
 abstract class _Fetch implements PriceOverrideEvent {
   const factory _Fetch(
       {required final SalesOrganisation salesOrganisation,
-      required final CustomerCodeInfo customerCodeInfo}) = _$_Fetch;
+      required final CustomerCodeInfo customerCodeInfo}) = _$FetchImpl;
 
   SalesOrganisation get salesOrganisation;
   CustomerCodeInfo get customerCodeInfo;
   @JsonKey(ignore: true)
-  _$$_FetchCopyWith<_$_Fetch> get copyWith =>
+  _$$FetchImplCopyWith<_$FetchImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -1368,11 +1374,11 @@ class _$PriceOverrideStateCopyWithImpl<$Res, $Val extends PriceOverrideState>
 }
 
 /// @nodoc
-abstract class _$$_PriceOverrideStateCopyWith<$Res>
+abstract class _$$PriceOverrideStateImplCopyWith<$Res>
     implements $PriceOverrideStateCopyWith<$Res> {
-  factory _$$_PriceOverrideStateCopyWith(_$_PriceOverrideState value,
-          $Res Function(_$_PriceOverrideState) then) =
-      __$$_PriceOverrideStateCopyWithImpl<$Res>;
+  factory _$$PriceOverrideStateImplCopyWith(_$PriceOverrideStateImpl value,
+          $Res Function(_$PriceOverrideStateImpl) then) =
+      __$$PriceOverrideStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -1386,11 +1392,11 @@ abstract class _$$_PriceOverrideStateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_PriceOverrideStateCopyWithImpl<$Res>
-    extends _$PriceOverrideStateCopyWithImpl<$Res, _$_PriceOverrideState>
-    implements _$$_PriceOverrideStateCopyWith<$Res> {
-  __$$_PriceOverrideStateCopyWithImpl(
-      _$_PriceOverrideState _value, $Res Function(_$_PriceOverrideState) _then)
+class __$$PriceOverrideStateImplCopyWithImpl<$Res>
+    extends _$PriceOverrideStateCopyWithImpl<$Res, _$PriceOverrideStateImpl>
+    implements _$$PriceOverrideStateImplCopyWith<$Res> {
+  __$$PriceOverrideStateImplCopyWithImpl(_$PriceOverrideStateImpl _value,
+      $Res Function(_$PriceOverrideStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1401,7 +1407,7 @@ class __$$_PriceOverrideStateCopyWithImpl<$Res>
     Object? showErrorMessages = null,
     Object? apiFailureOrSuccessOption = null,
   }) {
-    return _then(_$_PriceOverrideState(
+    return _then(_$PriceOverrideStateImpl(
       item: null == item
           ? _value.item
           : item // ignore: cast_nullable_to_non_nullable
@@ -1424,8 +1430,8 @@ class __$$_PriceOverrideStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_PriceOverrideState extends _PriceOverrideState {
-  const _$_PriceOverrideState(
+class _$PriceOverrideStateImpl extends _PriceOverrideState {
+  const _$PriceOverrideStateImpl(
       {required this.item,
       required this.isFetching,
       required this.showErrorMessages,
@@ -1447,10 +1453,10 @@ class _$_PriceOverrideState extends _PriceOverrideState {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_PriceOverrideState &&
+            other is _$PriceOverrideStateImpl &&
             (identical(other.item, item) || other.item == item) &&
             (identical(other.isFetching, isFetching) ||
                 other.isFetching == isFetching) &&
@@ -1468,8 +1474,8 @@ class _$_PriceOverrideState extends _PriceOverrideState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_PriceOverrideStateCopyWith<_$_PriceOverrideState> get copyWith =>
-      __$$_PriceOverrideStateCopyWithImpl<_$_PriceOverrideState>(
+  _$$PriceOverrideStateImplCopyWith<_$PriceOverrideStateImpl> get copyWith =>
+      __$$PriceOverrideStateImplCopyWithImpl<_$PriceOverrideStateImpl>(
           this, _$identity);
 }
 
@@ -1479,7 +1485,7 @@ abstract class _PriceOverrideState extends PriceOverrideState {
       required final bool isFetching,
       required final bool showErrorMessages,
       required final Option<Either<ApiFailure, dynamic>>
-          apiFailureOrSuccessOption}) = _$_PriceOverrideState;
+          apiFailureOrSuccessOption}) = _$PriceOverrideStateImpl;
   const _PriceOverrideState._() : super._();
 
   @override
@@ -1492,6 +1498,6 @@ abstract class _PriceOverrideState extends PriceOverrideState {
   Option<Either<ApiFailure, dynamic>> get apiFailureOrSuccessOption;
   @override
   @JsonKey(ignore: true)
-  _$$_PriceOverrideStateCopyWith<_$_PriceOverrideState> get copyWith =>
+  _$$PriceOverrideStateImplCopyWith<_$PriceOverrideStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

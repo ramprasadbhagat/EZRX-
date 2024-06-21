@@ -12,7 +12,7 @@ part of 'price_bundle_dto.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 PriceBundleDto _$PriceBundleDtoFromJson(Map<String, dynamic> json) {
   return _PriceBundleDto.fromJson(json);
@@ -45,16 +45,12 @@ abstract class $PriceBundleDtoCopyWith<$Res> {
       _$PriceBundleDtoCopyWithImpl<$Res, PriceBundleDto>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'bundleName', defaultValue: '')
-          String name,
-      @JsonKey(name: 'bundleCode', defaultValue: '')
-          String code,
-      @JsonKey(name: 'conditions', defaultValue: '')
-          String conditions,
-      @JsonKey(name: 'bonusEligible', defaultValue: false)
-          bool bonusEligible,
+      {@JsonKey(name: 'bundleName', defaultValue: '') String name,
+      @JsonKey(name: 'bundleCode', defaultValue: '') String code,
+      @JsonKey(name: 'conditions', defaultValue: '') String conditions,
+      @JsonKey(name: 'bonusEligible', defaultValue: false) bool bonusEligible,
       @JsonKey(name: 'bundleInformation', defaultValue: <PriceBundleItemDto>[])
-          List<PriceBundleItemDto> information});
+      List<PriceBundleItemDto> information});
 }
 
 /// @nodoc
@@ -102,32 +98,28 @@ class _$PriceBundleDtoCopyWithImpl<$Res, $Val extends PriceBundleDto>
 }
 
 /// @nodoc
-abstract class _$$_PriceBundleDtoCopyWith<$Res>
+abstract class _$$PriceBundleDtoImplCopyWith<$Res>
     implements $PriceBundleDtoCopyWith<$Res> {
-  factory _$$_PriceBundleDtoCopyWith(
-          _$_PriceBundleDto value, $Res Function(_$_PriceBundleDto) then) =
-      __$$_PriceBundleDtoCopyWithImpl<$Res>;
+  factory _$$PriceBundleDtoImplCopyWith(_$PriceBundleDtoImpl value,
+          $Res Function(_$PriceBundleDtoImpl) then) =
+      __$$PriceBundleDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'bundleName', defaultValue: '')
-          String name,
-      @JsonKey(name: 'bundleCode', defaultValue: '')
-          String code,
-      @JsonKey(name: 'conditions', defaultValue: '')
-          String conditions,
-      @JsonKey(name: 'bonusEligible', defaultValue: false)
-          bool bonusEligible,
+      {@JsonKey(name: 'bundleName', defaultValue: '') String name,
+      @JsonKey(name: 'bundleCode', defaultValue: '') String code,
+      @JsonKey(name: 'conditions', defaultValue: '') String conditions,
+      @JsonKey(name: 'bonusEligible', defaultValue: false) bool bonusEligible,
       @JsonKey(name: 'bundleInformation', defaultValue: <PriceBundleItemDto>[])
-          List<PriceBundleItemDto> information});
+      List<PriceBundleItemDto> information});
 }
 
 /// @nodoc
-class __$$_PriceBundleDtoCopyWithImpl<$Res>
-    extends _$PriceBundleDtoCopyWithImpl<$Res, _$_PriceBundleDto>
-    implements _$$_PriceBundleDtoCopyWith<$Res> {
-  __$$_PriceBundleDtoCopyWithImpl(
-      _$_PriceBundleDto _value, $Res Function(_$_PriceBundleDto) _then)
+class __$$PriceBundleDtoImplCopyWithImpl<$Res>
+    extends _$PriceBundleDtoCopyWithImpl<$Res, _$PriceBundleDtoImpl>
+    implements _$$PriceBundleDtoImplCopyWith<$Res> {
+  __$$PriceBundleDtoImplCopyWithImpl(
+      _$PriceBundleDtoImpl _value, $Res Function(_$PriceBundleDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -139,7 +131,7 @@ class __$$_PriceBundleDtoCopyWithImpl<$Res>
     Object? bonusEligible = null,
     Object? information = null,
   }) {
-    return _then(_$_PriceBundleDto(
+    return _then(_$PriceBundleDtoImpl(
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -166,23 +158,20 @@ class __$$_PriceBundleDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_PriceBundleDto extends _PriceBundleDto {
-  const _$_PriceBundleDto(
-      {@JsonKey(name: 'bundleName', defaultValue: '')
-          required this.name,
-      @JsonKey(name: 'bundleCode', defaultValue: '')
-          required this.code,
-      @JsonKey(name: 'conditions', defaultValue: '')
-          required this.conditions,
+class _$PriceBundleDtoImpl extends _PriceBundleDto {
+  const _$PriceBundleDtoImpl(
+      {@JsonKey(name: 'bundleName', defaultValue: '') required this.name,
+      @JsonKey(name: 'bundleCode', defaultValue: '') required this.code,
+      @JsonKey(name: 'conditions', defaultValue: '') required this.conditions,
       @JsonKey(name: 'bonusEligible', defaultValue: false)
-          required this.bonusEligible,
+      required this.bonusEligible,
       @JsonKey(name: 'bundleInformation', defaultValue: <PriceBundleItemDto>[])
-          required final List<PriceBundleItemDto> information})
+      required final List<PriceBundleItemDto> information})
       : _information = information,
         super._();
 
-  factory _$_PriceBundleDto.fromJson(Map<String, dynamic> json) =>
-      _$$_PriceBundleDtoFromJson(json);
+  factory _$PriceBundleDtoImpl.fromJson(Map<String, dynamic> json) =>
+      _$$PriceBundleDtoImplFromJson(json);
 
   @override
   @JsonKey(name: 'bundleName', defaultValue: '')
@@ -211,10 +200,10 @@ class _$_PriceBundleDto extends _PriceBundleDto {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_PriceBundleDto &&
+            other is _$PriceBundleDtoImpl &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.code, code) || other.code == code) &&
             (identical(other.conditions, conditions) ||
@@ -233,12 +222,13 @@ class _$_PriceBundleDto extends _PriceBundleDto {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_PriceBundleDtoCopyWith<_$_PriceBundleDto> get copyWith =>
-      __$$_PriceBundleDtoCopyWithImpl<_$_PriceBundleDto>(this, _$identity);
+  _$$PriceBundleDtoImplCopyWith<_$PriceBundleDtoImpl> get copyWith =>
+      __$$PriceBundleDtoImplCopyWithImpl<_$PriceBundleDtoImpl>(
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_PriceBundleDtoToJson(
+    return _$$PriceBundleDtoImplToJson(
       this,
     );
   }
@@ -247,20 +237,19 @@ class _$_PriceBundleDto extends _PriceBundleDto {
 abstract class _PriceBundleDto extends PriceBundleDto {
   const factory _PriceBundleDto(
       {@JsonKey(name: 'bundleName', defaultValue: '')
-          required final String name,
-      @JsonKey(name: 'bundleCode', defaultValue: '')
-          required final String code,
+      required final String name,
+      @JsonKey(name: 'bundleCode', defaultValue: '') required final String code,
       @JsonKey(name: 'conditions', defaultValue: '')
-          required final String conditions,
+      required final String conditions,
       @JsonKey(name: 'bonusEligible', defaultValue: false)
-          required final bool bonusEligible,
+      required final bool bonusEligible,
       @JsonKey(name: 'bundleInformation', defaultValue: <PriceBundleItemDto>[])
-          required final List<PriceBundleItemDto>
-              information}) = _$_PriceBundleDto;
+      required final List<PriceBundleItemDto>
+          information}) = _$PriceBundleDtoImpl;
   const _PriceBundleDto._() : super._();
 
   factory _PriceBundleDto.fromJson(Map<String, dynamic> json) =
-      _$_PriceBundleDto.fromJson;
+      _$PriceBundleDtoImpl.fromJson;
 
   @override
   @JsonKey(name: 'bundleName', defaultValue: '')
@@ -279,7 +268,7 @@ abstract class _PriceBundleDto extends PriceBundleDto {
   List<PriceBundleItemDto> get information;
   @override
   @JsonKey(ignore: true)
-  _$$_PriceBundleDtoCopyWith<_$_PriceBundleDto> get copyWith =>
+  _$$PriceBundleDtoImplCopyWith<_$PriceBundleDtoImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -357,11 +346,11 @@ class _$PriceBundleItemDtoCopyWithImpl<$Res, $Val extends PriceBundleItemDto>
 }
 
 /// @nodoc
-abstract class _$$_PriceBundleItemDtoCopyWith<$Res>
+abstract class _$$PriceBundleItemDtoImplCopyWith<$Res>
     implements $PriceBundleItemDtoCopyWith<$Res> {
-  factory _$$_PriceBundleItemDtoCopyWith(_$_PriceBundleItemDto value,
-          $Res Function(_$_PriceBundleItemDto) then) =
-      __$$_PriceBundleItemDtoCopyWithImpl<$Res>;
+  factory _$$PriceBundleItemDtoImplCopyWith(_$PriceBundleItemDtoImpl value,
+          $Res Function(_$PriceBundleItemDtoImpl) then) =
+      __$$PriceBundleItemDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -372,11 +361,11 @@ abstract class _$$_PriceBundleItemDtoCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_PriceBundleItemDtoCopyWithImpl<$Res>
-    extends _$PriceBundleItemDtoCopyWithImpl<$Res, _$_PriceBundleItemDto>
-    implements _$$_PriceBundleItemDtoCopyWith<$Res> {
-  __$$_PriceBundleItemDtoCopyWithImpl(
-      _$_PriceBundleItemDto _value, $Res Function(_$_PriceBundleItemDto) _then)
+class __$$PriceBundleItemDtoImplCopyWithImpl<$Res>
+    extends _$PriceBundleItemDtoCopyWithImpl<$Res, _$PriceBundleItemDtoImpl>
+    implements _$$PriceBundleItemDtoImplCopyWith<$Res> {
+  __$$PriceBundleItemDtoImplCopyWithImpl(_$PriceBundleItemDtoImpl _value,
+      $Res Function(_$PriceBundleItemDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -387,7 +376,7 @@ class __$$_PriceBundleItemDtoCopyWithImpl<$Res>
     Object? quantity = null,
     Object? rate = null,
   }) {
-    return _then(_$_PriceBundleItemDto(
+    return _then(_$PriceBundleItemDtoImpl(
       type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
@@ -410,16 +399,16 @@ class __$$_PriceBundleItemDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_PriceBundleItemDto extends _PriceBundleItemDto {
-  const _$_PriceBundleItemDto(
+class _$PriceBundleItemDtoImpl extends _PriceBundleItemDto {
+  const _$PriceBundleItemDtoImpl(
       {@JsonKey(name: 'type', defaultValue: '') required this.type,
       @JsonKey(name: 'sequence', defaultValue: 0) required this.sequence,
       @JsonKey(name: 'quantity', defaultValue: 0) required this.quantity,
       @JsonKey(name: 'rate', defaultValue: 0) required this.rate})
       : super._();
 
-  factory _$_PriceBundleItemDto.fromJson(Map<String, dynamic> json) =>
-      _$$_PriceBundleItemDtoFromJson(json);
+  factory _$PriceBundleItemDtoImpl.fromJson(Map<String, dynamic> json) =>
+      _$$PriceBundleItemDtoImplFromJson(json);
 
   @override
   @JsonKey(name: 'type', defaultValue: '')
@@ -440,10 +429,10 @@ class _$_PriceBundleItemDto extends _PriceBundleItemDto {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_PriceBundleItemDto &&
+            other is _$PriceBundleItemDtoImpl &&
             (identical(other.type, type) || other.type == type) &&
             (identical(other.sequence, sequence) ||
                 other.sequence == sequence) &&
@@ -459,13 +448,13 @@ class _$_PriceBundleItemDto extends _PriceBundleItemDto {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_PriceBundleItemDtoCopyWith<_$_PriceBundleItemDto> get copyWith =>
-      __$$_PriceBundleItemDtoCopyWithImpl<_$_PriceBundleItemDto>(
+  _$$PriceBundleItemDtoImplCopyWith<_$PriceBundleItemDtoImpl> get copyWith =>
+      __$$PriceBundleItemDtoImplCopyWithImpl<_$PriceBundleItemDtoImpl>(
           this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_PriceBundleItemDtoToJson(
+    return _$$PriceBundleItemDtoImplToJson(
       this,
     );
   }
@@ -473,18 +462,15 @@ class _$_PriceBundleItemDto extends _PriceBundleItemDto {
 
 abstract class _PriceBundleItemDto extends PriceBundleItemDto {
   const factory _PriceBundleItemDto(
-      {@JsonKey(name: 'type', defaultValue: '')
-          required final String type,
-      @JsonKey(name: 'sequence', defaultValue: 0)
-          required final int sequence,
-      @JsonKey(name: 'quantity', defaultValue: 0)
-          required final int quantity,
+      {@JsonKey(name: 'type', defaultValue: '') required final String type,
+      @JsonKey(name: 'sequence', defaultValue: 0) required final int sequence,
+      @JsonKey(name: 'quantity', defaultValue: 0) required final int quantity,
       @JsonKey(name: 'rate', defaultValue: 0)
-          required final double rate}) = _$_PriceBundleItemDto;
+      required final double rate}) = _$PriceBundleItemDtoImpl;
   const _PriceBundleItemDto._() : super._();
 
   factory _PriceBundleItemDto.fromJson(Map<String, dynamic> json) =
-      _$_PriceBundleItemDto.fromJson;
+      _$PriceBundleItemDtoImpl.fromJson;
 
   @override
   @JsonKey(name: 'type', defaultValue: '')
@@ -500,6 +486,6 @@ abstract class _PriceBundleItemDto extends PriceBundleItemDto {
   double get rate;
   @override
   @JsonKey(ignore: true)
-  _$$_PriceBundleItemDtoCopyWith<_$_PriceBundleItemDto> get copyWith =>
+  _$$PriceBundleItemDtoImplCopyWith<_$PriceBundleItemDtoImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

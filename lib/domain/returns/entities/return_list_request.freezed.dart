@@ -12,7 +12,7 @@ part of 'return_list_request.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$ReturnListRequest {
@@ -117,11 +117,11 @@ class _$ReturnListRequestCopyWithImpl<$Res, $Val extends ReturnListRequest>
 }
 
 /// @nodoc
-abstract class _$$_ReturnListRequestCopyWith<$Res>
+abstract class _$$ReturnListRequestImplCopyWith<$Res>
     implements $ReturnListRequestCopyWith<$Res> {
-  factory _$$_ReturnListRequestCopyWith(_$_ReturnListRequest value,
-          $Res Function(_$_ReturnListRequest) then) =
-      __$$_ReturnListRequestCopyWithImpl<$Res>;
+  factory _$$ReturnListRequestImplCopyWith(_$ReturnListRequestImpl value,
+          $Res Function(_$ReturnListRequestImpl) then) =
+      __$$ReturnListRequestImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -139,11 +139,11 @@ abstract class _$$_ReturnListRequestCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_ReturnListRequestCopyWithImpl<$Res>
-    extends _$ReturnListRequestCopyWithImpl<$Res, _$_ReturnListRequest>
-    implements _$$_ReturnListRequestCopyWith<$Res> {
-  __$$_ReturnListRequestCopyWithImpl(
-      _$_ReturnListRequest _value, $Res Function(_$_ReturnListRequest) _then)
+class __$$ReturnListRequestImplCopyWithImpl<$Res>
+    extends _$ReturnListRequestCopyWithImpl<$Res, _$ReturnListRequestImpl>
+    implements _$$ReturnListRequestImplCopyWith<$Res> {
+  __$$ReturnListRequestImplCopyWithImpl(_$ReturnListRequestImpl _value,
+      $Res Function(_$ReturnListRequestImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -158,7 +158,7 @@ class __$$_ReturnListRequestCopyWithImpl<$Res>
     Object? filter = null,
     Object? searchKey = null,
   }) {
-    return _then(_$_ReturnListRequest(
+    return _then(_$ReturnListRequestImpl(
       customerCode: null == customerCode
           ? _value.customerCode
           : customerCode // ignore: cast_nullable_to_non_nullable
@@ -197,8 +197,8 @@ class __$$_ReturnListRequestCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_ReturnListRequest extends _ReturnListRequest {
-  const _$_ReturnListRequest(
+class _$ReturnListRequestImpl extends _ReturnListRequest {
+  const _$ReturnListRequestImpl(
       {required this.customerCode,
       required this.salesOrg,
       required this.shipToInfo,
@@ -232,10 +232,10 @@ class _$_ReturnListRequest extends _ReturnListRequest {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ReturnListRequest &&
+            other is _$ReturnListRequestImpl &&
             (identical(other.customerCode, customerCode) ||
                 other.customerCode == customerCode) &&
             (identical(other.salesOrg, salesOrg) ||
@@ -258,8 +258,8 @@ class _$_ReturnListRequest extends _ReturnListRequest {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ReturnListRequestCopyWith<_$_ReturnListRequest> get copyWith =>
-      __$$_ReturnListRequestCopyWithImpl<_$_ReturnListRequest>(
+  _$$ReturnListRequestImplCopyWith<_$ReturnListRequestImpl> get copyWith =>
+      __$$ReturnListRequestImplCopyWithImpl<_$ReturnListRequestImpl>(
           this, _$identity);
 }
 
@@ -272,7 +272,7 @@ abstract class _ReturnListRequest extends ReturnListRequest {
       required final int first,
       required final int after,
       required final ReturnFilter filter,
-      required final SearchKey searchKey}) = _$_ReturnListRequest;
+      required final SearchKey searchKey}) = _$ReturnListRequestImpl;
   const _ReturnListRequest._() : super._();
 
   @override
@@ -293,6 +293,6 @@ abstract class _ReturnListRequest extends ReturnListRequest {
   SearchKey get searchKey;
   @override
   @JsonKey(ignore: true)
-  _$$_ReturnListRequestCopyWith<_$_ReturnListRequest> get copyWith =>
+  _$$ReturnListRequestImplCopyWith<_$ReturnListRequestImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

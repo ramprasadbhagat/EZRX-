@@ -6,10 +6,10 @@ part of 'notification_data_dto.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_NotificationDataDto _$$_NotificationDataDtoFromJson(
+_$NotificationDataDtoImpl _$$NotificationDataDtoImplFromJson(
         Map<String, dynamic> json) =>
-    _$_NotificationDataDto(
-      id: json['id'] as int? ?? 0,
+    _$NotificationDataDtoImpl(
+      id: (json['id'] as num?)?.toInt() ?? 0,
       type: json['type'] as String? ?? '',
       title: json['title'] as String? ?? '',
       description: json['description'] as String? ?? '',
@@ -20,11 +20,12 @@ _$_NotificationDataDto _$$_NotificationDataDtoFromJson(
       paymentNumber: json['paymentNumber'] as String? ?? '',
       paymentBatchAdditionalInfo:
           json['paymentBatchAdditionalInfo'] as String? ?? '',
-      isMarketPlace: json['isMarketPlace'] as bool? ?? false,
+      isMarketPlace:
+          mappingIsMarketPlace(json, 'isMarketPlace') as bool? ?? false,
     );
 
-Map<String, dynamic> _$$_NotificationDataDtoToJson(
-        _$_NotificationDataDto instance) =>
+Map<String, dynamic> _$$NotificationDataDtoImplToJson(
+        _$NotificationDataDtoImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'type': instance.type,

@@ -6,14 +6,14 @@ part of 'ez_point_token_response_dto.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_EZPointTokenResponseDto _$$_EZPointTokenResponseDtoFromJson(
+_$EZPointTokenResponseDtoImpl _$$EZPointTokenResponseDtoImplFromJson(
         Map<String, dynamic> json) =>
-    _$_EZPointTokenResponseDto(
+    _$EZPointTokenResponseDtoImpl(
       ezPointToken: json['ezPointToken'] as String? ?? '',
     );
 
-Map<String, dynamic> _$$_EZPointTokenResponseDtoToJson(
-        _$_EZPointTokenResponseDto instance) =>
+Map<String, dynamic> _$$EZPointTokenResponseDtoImplToJson(
+        _$EZPointTokenResponseDtoImpl instance) =>
     <String, dynamic>{
       'ezPointToken': instance.ezPointToken,
     };

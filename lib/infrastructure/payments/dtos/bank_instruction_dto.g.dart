@@ -6,9 +6,9 @@ part of 'bank_instruction_dto.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_BankInstructionDTO _$$_BankInstructionDTOFromJson(
+_$BankInstructionDTOImpl _$$BankInstructionDTOImplFromJson(
         Map<String, dynamic> json) =>
-    _$_BankInstructionDTO(
+    _$BankInstructionDTOImpl(
       bank: json['bank'] as String? ?? '',
       transferMethods: (json['transferMethods'] as List<dynamic>?)
               ?.map(
@@ -17,16 +17,17 @@ _$_BankInstructionDTO _$$_BankInstructionDTOFromJson(
           [],
     );
 
-Map<String, dynamic> _$$_BankInstructionDTOToJson(
-        _$_BankInstructionDTO instance) =>
+Map<String, dynamic> _$$BankInstructionDTOImplToJson(
+        _$BankInstructionDTOImpl instance) =>
     <String, dynamic>{
       'bank': instance.bank,
       'transferMethods':
           instance.transferMethods.map((e) => e.toJson()).toList(),
     };
 
-_$_TransferMethodDTO _$$_TransferMethodDTOFromJson(Map<String, dynamic> json) =>
-    _$_TransferMethodDTO(
+_$TransferMethodDTOImpl _$$TransferMethodDTOImplFromJson(
+        Map<String, dynamic> json) =>
+    _$TransferMethodDTOImpl(
       title: json['title'] as String? ?? '',
       paymentInstructions: (json['paymentInstructions'] as List<dynamic>?)
               ?.map((e) =>
@@ -35,17 +36,17 @@ _$_TransferMethodDTO _$$_TransferMethodDTOFromJson(Map<String, dynamic> json) =>
           [],
     );
 
-Map<String, dynamic> _$$_TransferMethodDTOToJson(
-        _$_TransferMethodDTO instance) =>
+Map<String, dynamic> _$$TransferMethodDTOImplToJson(
+        _$TransferMethodDTOImpl instance) =>
     <String, dynamic>{
       'title': instance.title,
       'paymentInstructions':
           instance.paymentInstructions.map((e) => e.toJson()).toList(),
     };
 
-_$_InstructionDetailsDTO _$$_InstructionDetailsDTOFromJson(
+_$InstructionDetailsDTOImpl _$$InstructionDetailsDTOImplFromJson(
         Map<String, dynamic> json) =>
-    _$_InstructionDetailsDTO(
+    _$InstructionDetailsDTOImpl(
       instructionType: json['instructionType'] as String? ?? '',
       instructions: (json['instructions'] as List<dynamic>?)
               ?.map((e) => e as String)
@@ -53,8 +54,8 @@ _$_InstructionDetailsDTO _$$_InstructionDetailsDTOFromJson(
           [],
     );
 
-Map<String, dynamic> _$$_InstructionDetailsDTOToJson(
-        _$_InstructionDetailsDTO instance) =>
+Map<String, dynamic> _$$InstructionDetailsDTOImplToJson(
+        _$InstructionDetailsDTOImpl instance) =>
     <String, dynamic>{
       'instructionType': instance.instructionType,
       'instructions': instance.instructions,

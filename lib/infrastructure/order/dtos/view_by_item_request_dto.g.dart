@@ -6,9 +6,9 @@ part of 'view_by_item_request_dto.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_ViewByItemRequestDto _$$_ViewByItemRequestDtoFromJson(
+_$ViewByItemRequestDtoImpl _$$ViewByItemRequestDtoImplFromJson(
         Map<String, dynamic> json) =>
-    _$_ViewByItemRequestDto(
+    _$ViewByItemRequestDtoImpl(
       salesOrg: (json['salesOrg'] as List<dynamic>?)
               ?.map((e) => e as String)
               .toList() ??
@@ -18,8 +18,8 @@ _$_ViewByItemRequestDto _$$_ViewByItemRequestDtoFromJson(
               ?.map((e) => e as String)
               .toList() ??
           [],
-      pageSize: json['first'] as int? ?? 0,
-      offset: json['after'] as int? ?? 0,
+      pageSize: (json['first'] as num?)?.toInt() ?? 0,
+      offset: (json['after'] as num?)?.toInt() ?? 0,
       language: json['language'] as String? ?? '',
       searchKey: json['searchKey'] as String? ?? '',
       orderNumber: json['orderNumber'] as String? ?? '',
@@ -30,12 +30,12 @@ _$_ViewByItemRequestDto _$$_ViewByItemRequestDtoFromJson(
       dateTo: json['toDate'] as String? ?? '',
       dateFrom: json['fromDate'] as String? ?? '',
       isOptimised: json['isOptimised'] as bool? ?? true,
-      orderType: json['orderType'] as int?,
+      orderType: (json['orderType'] as num?)?.toInt(),
       isDetailsPage: json['isDetailsPage'] as bool? ?? false,
     );
 
-Map<String, dynamic> _$$_ViewByItemRequestDtoToJson(
-    _$_ViewByItemRequestDto instance) {
+Map<String, dynamic> _$$ViewByItemRequestDtoImplToJson(
+    _$ViewByItemRequestDtoImpl instance) {
   final val = <String, dynamic>{
     'salesOrg': instance.salesOrg,
     'soldTo': instance.soldTo,

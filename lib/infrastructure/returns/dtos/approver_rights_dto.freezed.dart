@@ -12,7 +12,7 @@ part of 'approver_rights_dto.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 ApproverRightsDto _$ApproverRightsDtoFromJson(Map<String, dynamic> json) {
   return _AddReturnApprovalLimitDto.fromJson(json);
@@ -82,12 +82,12 @@ class _$ApproverRightsDtoCopyWithImpl<$Res, $Val extends ApproverRightsDto>
 }
 
 /// @nodoc
-abstract class _$$_AddReturnApprovalLimitDtoCopyWith<$Res>
+abstract class _$$AddReturnApprovalLimitDtoImplCopyWith<$Res>
     implements $ApproverRightsDtoCopyWith<$Res> {
-  factory _$$_AddReturnApprovalLimitDtoCopyWith(
-          _$_AddReturnApprovalLimitDto value,
-          $Res Function(_$_AddReturnApprovalLimitDto) then) =
-      __$$_AddReturnApprovalLimitDtoCopyWithImpl<$Res>;
+  factory _$$AddReturnApprovalLimitDtoImplCopyWith(
+          _$AddReturnApprovalLimitDtoImpl value,
+          $Res Function(_$AddReturnApprovalLimitDtoImpl) then) =
+      __$$AddReturnApprovalLimitDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -102,12 +102,13 @@ abstract class _$$_AddReturnApprovalLimitDtoCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_AddReturnApprovalLimitDtoCopyWithImpl<$Res>
-    extends _$ApproverRightsDtoCopyWithImpl<$Res, _$_AddReturnApprovalLimitDto>
-    implements _$$_AddReturnApprovalLimitDtoCopyWith<$Res> {
-  __$$_AddReturnApprovalLimitDtoCopyWithImpl(
-      _$_AddReturnApprovalLimitDto _value,
-      $Res Function(_$_AddReturnApprovalLimitDto) _then)
+class __$$AddReturnApprovalLimitDtoImplCopyWithImpl<$Res>
+    extends _$ApproverRightsDtoCopyWithImpl<$Res,
+        _$AddReturnApprovalLimitDtoImpl>
+    implements _$$AddReturnApprovalLimitDtoImplCopyWith<$Res> {
+  __$$AddReturnApprovalLimitDtoImplCopyWithImpl(
+      _$AddReturnApprovalLimitDtoImpl _value,
+      $Res Function(_$AddReturnApprovalLimitDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -116,7 +117,7 @@ class __$$_AddReturnApprovalLimitDtoCopyWithImpl<$Res>
     Object? usernames = null,
     Object? approverRights = null,
   }) {
-    return _then(_$_AddReturnApprovalLimitDto(
+    return _then(_$AddReturnApprovalLimitDtoImpl(
       usernames: null == usernames
           ? _value._usernames
           : usernames // ignore: cast_nullable_to_non_nullable
@@ -131,8 +132,8 @@ class __$$_AddReturnApprovalLimitDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_AddReturnApprovalLimitDto extends _AddReturnApprovalLimitDto {
-  const _$_AddReturnApprovalLimitDto(
+class _$AddReturnApprovalLimitDtoImpl extends _AddReturnApprovalLimitDto {
+  const _$AddReturnApprovalLimitDtoImpl(
       {@JsonKey(
           name: 'rawMetaData',
           defaultValue: <String>[],
@@ -145,8 +146,8 @@ class _$_AddReturnApprovalLimitDto extends _AddReturnApprovalLimitDto {
         _approverRights = approverRights,
         super._();
 
-  factory _$_AddReturnApprovalLimitDto.fromJson(Map<String, dynamic> json) =>
-      _$$_AddReturnApprovalLimitDtoFromJson(json);
+  factory _$AddReturnApprovalLimitDtoImpl.fromJson(Map<String, dynamic> json) =>
+      _$$AddReturnApprovalLimitDtoImplFromJson(json);
 
   final List<String> _usernames;
   @override
@@ -175,10 +176,10 @@ class _$_AddReturnApprovalLimitDto extends _AddReturnApprovalLimitDto {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_AddReturnApprovalLimitDto &&
+            other is _$AddReturnApprovalLimitDtoImpl &&
             const DeepCollectionEquality()
                 .equals(other._usernames, _usernames) &&
             const DeepCollectionEquality()
@@ -195,13 +196,13 @@ class _$_AddReturnApprovalLimitDto extends _AddReturnApprovalLimitDto {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_AddReturnApprovalLimitDtoCopyWith<_$_AddReturnApprovalLimitDto>
-      get copyWith => __$$_AddReturnApprovalLimitDtoCopyWithImpl<
-          _$_AddReturnApprovalLimitDto>(this, _$identity);
+  _$$AddReturnApprovalLimitDtoImplCopyWith<_$AddReturnApprovalLimitDtoImpl>
+      get copyWith => __$$AddReturnApprovalLimitDtoImplCopyWithImpl<
+          _$AddReturnApprovalLimitDtoImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_AddReturnApprovalLimitDtoToJson(
+    return _$$AddReturnApprovalLimitDtoImplToJson(
       this,
     );
   }
@@ -218,11 +219,11 @@ abstract class _AddReturnApprovalLimitDto extends ApproverRightsDto {
               name: 'approverRights',
               defaultValue: <ApproverRightsDetailsDto>[])
           required final List<ApproverRightsDetailsDto> approverRights}) =
-      _$_AddReturnApprovalLimitDto;
+      _$AddReturnApprovalLimitDtoImpl;
   const _AddReturnApprovalLimitDto._() : super._();
 
   factory _AddReturnApprovalLimitDto.fromJson(Map<String, dynamic> json) =
-      _$_AddReturnApprovalLimitDto.fromJson;
+      _$AddReturnApprovalLimitDtoImpl.fromJson;
 
   @override
   @JsonKey(
@@ -235,6 +236,6 @@ abstract class _AddReturnApprovalLimitDto extends ApproverRightsDto {
   List<ApproverRightsDetailsDto> get approverRights;
   @override
   @JsonKey(ignore: true)
-  _$$_AddReturnApprovalLimitDtoCopyWith<_$_AddReturnApprovalLimitDto>
+  _$$AddReturnApprovalLimitDtoImplCopyWith<_$AddReturnApprovalLimitDtoImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

@@ -12,7 +12,7 @@ part of 'return_items_filter.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$ReturnItemsFilter {
@@ -64,11 +64,11 @@ class _$ReturnItemsFilterCopyWithImpl<$Res, $Val extends ReturnItemsFilter>
 }
 
 /// @nodoc
-abstract class _$$_ReturnItemsFilterCopyWith<$Res>
+abstract class _$$ReturnItemsFilterImplCopyWith<$Res>
     implements $ReturnItemsFilterCopyWith<$Res> {
-  factory _$$_ReturnItemsFilterCopyWith(_$_ReturnItemsFilter value,
-          $Res Function(_$_ReturnItemsFilter) then) =
-      __$$_ReturnItemsFilterCopyWithImpl<$Res>;
+  factory _$$ReturnItemsFilterImplCopyWith(_$ReturnItemsFilterImpl value,
+          $Res Function(_$ReturnItemsFilterImpl) then) =
+      __$$ReturnItemsFilterImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -76,11 +76,11 @@ abstract class _$$_ReturnItemsFilterCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_ReturnItemsFilterCopyWithImpl<$Res>
-    extends _$ReturnItemsFilterCopyWithImpl<$Res, _$_ReturnItemsFilter>
-    implements _$$_ReturnItemsFilterCopyWith<$Res> {
-  __$$_ReturnItemsFilterCopyWithImpl(
-      _$_ReturnItemsFilter _value, $Res Function(_$_ReturnItemsFilter) _then)
+class __$$ReturnItemsFilterImplCopyWithImpl<$Res>
+    extends _$ReturnItemsFilterCopyWithImpl<$Res, _$ReturnItemsFilterImpl>
+    implements _$$ReturnItemsFilterImplCopyWith<$Res> {
+  __$$ReturnItemsFilterImplCopyWithImpl(_$ReturnItemsFilterImpl _value,
+      $Res Function(_$ReturnItemsFilterImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -89,7 +89,7 @@ class __$$_ReturnItemsFilterCopyWithImpl<$Res>
     Object? invoiceDateFrom = null,
     Object? invoiceDateTo = null,
   }) {
-    return _then(_$_ReturnItemsFilter(
+    return _then(_$ReturnItemsFilterImpl(
       invoiceDateFrom: null == invoiceDateFrom
           ? _value.invoiceDateFrom
           : invoiceDateFrom // ignore: cast_nullable_to_non_nullable
@@ -104,8 +104,8 @@ class __$$_ReturnItemsFilterCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_ReturnItemsFilter extends _ReturnItemsFilter {
-  _$_ReturnItemsFilter(
+class _$ReturnItemsFilterImpl extends _ReturnItemsFilter {
+  _$ReturnItemsFilterImpl(
       {required this.invoiceDateFrom, required this.invoiceDateTo})
       : super._();
 
@@ -120,10 +120,10 @@ class _$_ReturnItemsFilter extends _ReturnItemsFilter {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ReturnItemsFilter &&
+            other is _$ReturnItemsFilterImpl &&
             (identical(other.invoiceDateFrom, invoiceDateFrom) ||
                 other.invoiceDateFrom == invoiceDateFrom) &&
             (identical(other.invoiceDateTo, invoiceDateTo) ||
@@ -136,15 +136,16 @@ class _$_ReturnItemsFilter extends _ReturnItemsFilter {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ReturnItemsFilterCopyWith<_$_ReturnItemsFilter> get copyWith =>
-      __$$_ReturnItemsFilterCopyWithImpl<_$_ReturnItemsFilter>(
+  _$$ReturnItemsFilterImplCopyWith<_$ReturnItemsFilterImpl> get copyWith =>
+      __$$ReturnItemsFilterImplCopyWithImpl<_$ReturnItemsFilterImpl>(
           this, _$identity);
 }
 
 abstract class _ReturnItemsFilter extends ReturnItemsFilter {
   factory _ReturnItemsFilter(
-      {required final DateTimeStringValue invoiceDateFrom,
-      required final DateTimeStringValue invoiceDateTo}) = _$_ReturnItemsFilter;
+          {required final DateTimeStringValue invoiceDateFrom,
+          required final DateTimeStringValue invoiceDateTo}) =
+      _$ReturnItemsFilterImpl;
   _ReturnItemsFilter._() : super._();
 
   @override
@@ -153,6 +154,6 @@ abstract class _ReturnItemsFilter extends ReturnItemsFilter {
   DateTimeStringValue get invoiceDateTo;
   @override
   @JsonKey(ignore: true)
-  _$$_ReturnItemsFilterCopyWith<_$_ReturnItemsFilter> get copyWith =>
+  _$$ReturnItemsFilterImplCopyWith<_$ReturnItemsFilterImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

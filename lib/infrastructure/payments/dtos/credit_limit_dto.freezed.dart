@@ -12,7 +12,7 @@ part of 'credit_limit_dto.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 CreditLimitDto _$CreditLimitDtoFromJson(Map<String, dynamic> json) {
   return _CreditLimitDto.fromJson(json);
@@ -96,11 +96,11 @@ class _$CreditLimitDtoCopyWithImpl<$Res, $Val extends CreditLimitDto>
 }
 
 /// @nodoc
-abstract class _$$_CreditLimitDtoCopyWith<$Res>
+abstract class _$$CreditLimitDtoImplCopyWith<$Res>
     implements $CreditLimitDtoCopyWith<$Res> {
-  factory _$$_CreditLimitDtoCopyWith(
-          _$_CreditLimitDto value, $Res Function(_$_CreditLimitDto) then) =
-      __$$_CreditLimitDtoCopyWithImpl<$Res>;
+  factory _$$CreditLimitDtoImplCopyWith(_$CreditLimitDtoImpl value,
+          $Res Function(_$CreditLimitDtoImpl) then) =
+      __$$CreditLimitDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -112,11 +112,11 @@ abstract class _$$_CreditLimitDtoCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_CreditLimitDtoCopyWithImpl<$Res>
-    extends _$CreditLimitDtoCopyWithImpl<$Res, _$_CreditLimitDto>
-    implements _$$_CreditLimitDtoCopyWith<$Res> {
-  __$$_CreditLimitDtoCopyWithImpl(
-      _$_CreditLimitDto _value, $Res Function(_$_CreditLimitDto) _then)
+class __$$CreditLimitDtoImplCopyWithImpl<$Res>
+    extends _$CreditLimitDtoCopyWithImpl<$Res, _$CreditLimitDtoImpl>
+    implements _$$CreditLimitDtoImplCopyWith<$Res> {
+  __$$CreditLimitDtoImplCopyWithImpl(
+      _$CreditLimitDtoImpl _value, $Res Function(_$CreditLimitDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -128,7 +128,7 @@ class __$$_CreditLimitDtoCopyWithImpl<$Res>
     Object? creditExposure = null,
     Object? creditBalance = null,
   }) {
-    return _then(_$_CreditLimitDto(
+    return _then(_$CreditLimitDtoImpl(
       customerCode: null == customerCode
           ? _value.customerCode
           : customerCode // ignore: cast_nullable_to_non_nullable
@@ -155,8 +155,8 @@ class __$$_CreditLimitDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_CreditLimitDto extends _CreditLimitDto {
-  const _$_CreditLimitDto(
+class _$CreditLimitDtoImpl extends _CreditLimitDto {
+  const _$CreditLimitDtoImpl(
       {@JsonKey(name: 'partner', defaultValue: '') required this.customerCode,
       @JsonKey(name: 'currency', defaultValue: '') required this.currency,
       @JsonKey(name: 'creditLimit', defaultValue: '') required this.creditLimit,
@@ -166,8 +166,8 @@ class _$_CreditLimitDto extends _CreditLimitDto {
       required this.creditBalance})
       : super._();
 
-  factory _$_CreditLimitDto.fromJson(Map<String, dynamic> json) =>
-      _$$_CreditLimitDtoFromJson(json);
+  factory _$CreditLimitDtoImpl.fromJson(Map<String, dynamic> json) =>
+      _$$CreditLimitDtoImplFromJson(json);
 
   @override
   @JsonKey(name: 'partner', defaultValue: '')
@@ -191,10 +191,10 @@ class _$_CreditLimitDto extends _CreditLimitDto {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_CreditLimitDto &&
+            other is _$CreditLimitDtoImpl &&
             (identical(other.customerCode, customerCode) ||
                 other.customerCode == customerCode) &&
             (identical(other.currency, currency) ||
@@ -215,12 +215,13 @@ class _$_CreditLimitDto extends _CreditLimitDto {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_CreditLimitDtoCopyWith<_$_CreditLimitDto> get copyWith =>
-      __$$_CreditLimitDtoCopyWithImpl<_$_CreditLimitDto>(this, _$identity);
+  _$$CreditLimitDtoImplCopyWith<_$CreditLimitDtoImpl> get copyWith =>
+      __$$CreditLimitDtoImplCopyWithImpl<_$CreditLimitDtoImpl>(
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_CreditLimitDtoToJson(
+    return _$$CreditLimitDtoImplToJson(
       this,
     );
   }
@@ -237,11 +238,11 @@ abstract class _CreditLimitDto extends CreditLimitDto {
       @JsonKey(name: 'creditExposure', defaultValue: '')
       required final String creditExposure,
       @JsonKey(name: 'creditBalance', defaultValue: '')
-      required final String creditBalance}) = _$_CreditLimitDto;
+      required final String creditBalance}) = _$CreditLimitDtoImpl;
   const _CreditLimitDto._() : super._();
 
   factory _CreditLimitDto.fromJson(Map<String, dynamic> json) =
-      _$_CreditLimitDto.fromJson;
+      _$CreditLimitDtoImpl.fromJson;
 
   @override
   @JsonKey(name: 'partner', defaultValue: '')
@@ -260,6 +261,6 @@ abstract class _CreditLimitDto extends CreditLimitDto {
   String get creditBalance;
   @override
   @JsonKey(ignore: true)
-  _$$_CreditLimitDtoCopyWith<_$_CreditLimitDto> get copyWith =>
+  _$$CreditLimitDtoImplCopyWith<_$CreditLimitDtoImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

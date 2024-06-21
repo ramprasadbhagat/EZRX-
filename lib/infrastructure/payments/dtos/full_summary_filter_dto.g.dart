@@ -6,9 +6,9 @@ part of 'full_summary_filter_dto.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_FullSummaryFilterDto _$$_FullSummaryFilterDtoFromJson(
+_$FullSummaryFilterDtoImpl _$$FullSummaryFilterDtoImplFromJson(
         Map<String, dynamic> json) =>
-    _$_FullSummaryFilterDto(
+    _$FullSummaryFilterDtoImpl(
       dueDateFrom: json['dueDateFrom'] as String? ?? '',
       dueDateTo: json['dueDateTo'] as String? ?? '',
       documentDateFrom: json['documentDateFrom'] as String? ?? '',
@@ -17,8 +17,8 @@ _$_FullSummaryFilterDto _$$_FullSummaryFilterDtoFromJson(
       searchKey: json['accountingDocument'] as String? ?? '',
     );
 
-Map<String, dynamic> _$$_FullSummaryFilterDtoToJson(
-        _$_FullSummaryFilterDto instance) =>
+Map<String, dynamic> _$$FullSummaryFilterDtoImplToJson(
+        _$FullSummaryFilterDtoImpl instance) =>
     <String, dynamic>{
       'dueDateFrom': instance.dueDateFrom,
       'dueDateTo': instance.dueDateTo,

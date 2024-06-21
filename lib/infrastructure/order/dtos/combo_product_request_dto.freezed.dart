@@ -12,7 +12,7 @@ part of 'combo_product_request_dto.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 ComboProductRequestDto _$ComboProductRequestDtoFromJson(
     Map<String, dynamic> json) {
@@ -264,11 +264,12 @@ class _$ComboProductRequestDtoCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_ComboProductRequestDtoCopyWith<$Res>
+abstract class _$$ComboProductRequestDtoImplCopyWith<$Res>
     implements $ComboProductRequestDtoCopyWith<$Res> {
-  factory _$$_ComboProductRequestDtoCopyWith(_$_ComboProductRequestDto value,
-          $Res Function(_$_ComboProductRequestDto) then) =
-      __$$_ComboProductRequestDtoCopyWithImpl<$Res>;
+  factory _$$ComboProductRequestDtoImplCopyWith(
+          _$ComboProductRequestDtoImpl value,
+          $Res Function(_$ComboProductRequestDtoImpl) then) =
+      __$$ComboProductRequestDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -306,12 +307,13 @@ abstract class _$$_ComboProductRequestDtoCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_ComboProductRequestDtoCopyWithImpl<$Res>
+class __$$ComboProductRequestDtoImplCopyWithImpl<$Res>
     extends _$ComboProductRequestDtoCopyWithImpl<$Res,
-        _$_ComboProductRequestDto>
-    implements _$$_ComboProductRequestDtoCopyWith<$Res> {
-  __$$_ComboProductRequestDtoCopyWithImpl(_$_ComboProductRequestDto _value,
-      $Res Function(_$_ComboProductRequestDto) _then)
+        _$ComboProductRequestDtoImpl>
+    implements _$$ComboProductRequestDtoImplCopyWith<$Res> {
+  __$$ComboProductRequestDtoImplCopyWithImpl(
+      _$ComboProductRequestDtoImpl _value,
+      $Res Function(_$ComboProductRequestDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -342,7 +344,7 @@ class __$$_ComboProductRequestDtoCopyWithImpl<$Res>
     Object? comboDeal = null,
     Object? finalIndividualPrice = null,
   }) {
-    return _then(_$_ComboProductRequestDto(
+    return _then(_$ComboProductRequestDtoImpl(
       productId: null == productId
           ? _value.productId
           : productId // ignore: cast_nullable_to_non_nullable
@@ -445,8 +447,8 @@ class __$$_ComboProductRequestDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_ComboProductRequestDto extends _ComboProductRequestDto {
-  const _$_ComboProductRequestDto(
+class _$ComboProductRequestDtoImpl extends _ComboProductRequestDto {
+  const _$ComboProductRequestDtoImpl(
       {@JsonKey(name: 'ProductID', defaultValue: '') required this.productId,
       @JsonKey(name: 'ParentID', defaultValue: '') required this.parentId,
       @JsonKey(name: 'SetNo', defaultValue: '') required this.setNo,
@@ -483,8 +485,8 @@ class _$_ComboProductRequestDto extends _ComboProductRequestDto {
       required this.finalIndividualPrice})
       : super._();
 
-  factory _$_ComboProductRequestDto.fromJson(Map<String, dynamic> json) =>
-      _$$_ComboProductRequestDtoFromJson(json);
+  factory _$ComboProductRequestDtoImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ComboProductRequestDtoImplFromJson(json);
 
   @override
   @JsonKey(name: 'ProductID', defaultValue: '')
@@ -565,10 +567,10 @@ class _$_ComboProductRequestDto extends _ComboProductRequestDto {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ComboProductRequestDto &&
+            other is _$ComboProductRequestDtoImpl &&
             (identical(other.productId, productId) ||
                 other.productId == productId) &&
             (identical(other.parentId, parentId) ||
@@ -646,13 +648,13 @@ class _$_ComboProductRequestDto extends _ComboProductRequestDto {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ComboProductRequestDtoCopyWith<_$_ComboProductRequestDto> get copyWith =>
-      __$$_ComboProductRequestDtoCopyWithImpl<_$_ComboProductRequestDto>(
-          this, _$identity);
+  _$$ComboProductRequestDtoImplCopyWith<_$ComboProductRequestDtoImpl>
+      get copyWith => __$$ComboProductRequestDtoImplCopyWithImpl<
+          _$ComboProductRequestDtoImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_ComboProductRequestDtoToJson(
+    return _$$ComboProductRequestDtoImplToJson(
       this,
     );
   }
@@ -699,11 +701,12 @@ abstract class _ComboProductRequestDto extends ComboProductRequestDto {
       required final bool isComboEligible,
       @JsonKey(name: 'ComboDeals') final PriceComboDealRequestDto comboDeal,
       @JsonKey(name: 'FinalIndividualPrice', defaultValue: 0.0)
-      required final double finalIndividualPrice}) = _$_ComboProductRequestDto;
+      required final double
+          finalIndividualPrice}) = _$ComboProductRequestDtoImpl;
   const _ComboProductRequestDto._() : super._();
 
   factory _ComboProductRequestDto.fromJson(Map<String, dynamic> json) =
-      _$_ComboProductRequestDto.fromJson;
+      _$ComboProductRequestDtoImpl.fromJson;
 
   @override
   @JsonKey(name: 'ProductID', defaultValue: '')
@@ -779,6 +782,6 @@ abstract class _ComboProductRequestDto extends ComboProductRequestDto {
   double get finalIndividualPrice;
   @override
   @JsonKey(ignore: true)
-  _$$_ComboProductRequestDtoCopyWith<_$_ComboProductRequestDto> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$ComboProductRequestDtoImplCopyWith<_$ComboProductRequestDtoImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }

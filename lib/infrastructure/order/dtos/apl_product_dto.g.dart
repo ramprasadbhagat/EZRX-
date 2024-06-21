@@ -6,15 +6,15 @@ part of 'apl_product_dto.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_AplProductDto _$$_AplProductDtoFromJson(Map<String, dynamic> json) =>
-    _$_AplProductDto(
+_$AplProductDtoImpl _$$AplProductDtoImplFromJson(Map<String, dynamic> json) =>
+    _$AplProductDtoImpl(
       type: json['type'] as String? ?? '',
       itemNumber: json['itemNumber'] as String? ?? '',
       parentItemNumber: json['parentItemNumber'] as String? ?? '',
       materialNumber: json['material'] as String? ?? '',
       finalPriceTotal: (json['netValue'] as num?)?.toDouble() ?? 0,
       finalPrice: (json['productPriceNetValue'] as num?)?.toDouble() ?? 0,
-      productQty: json['productQty'] as int? ?? 0,
+      productQty: (json['productQty'] as num?)?.toInt() ?? 0,
       taxValue: (json['taxValue'] as num?)?.toDouble() ?? 0,
       aplPromotions: (json['promotions'] as List<dynamic>?)
               ?.map((e) => AplPromotionsDto.fromJson(e as Map<String, dynamic>))
@@ -22,7 +22,7 @@ _$_AplProductDto _$$_AplProductDtoFromJson(Map<String, dynamic> json) =>
           [],
     );
 
-Map<String, dynamic> _$$_AplProductDtoToJson(_$_AplProductDto instance) =>
+Map<String, dynamic> _$$AplProductDtoImplToJson(_$AplProductDtoImpl instance) =>
     <String, dynamic>{
       'type': instance.type,
       'itemNumber': instance.itemNumber,

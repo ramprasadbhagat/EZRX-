@@ -12,7 +12,7 @@ part of 'tncdate_dto.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 TncDateDto _$TncDateDtoFromJson(Map<String, dynamic> json) {
   return _TncDateDto.fromJson(json);
@@ -61,22 +61,22 @@ class _$TncDateDtoCopyWithImpl<$Res, $Val extends TncDateDto>
 }
 
 /// @nodoc
-abstract class _$$_TncDateDtoCopyWith<$Res>
+abstract class _$$TncDateDtoImplCopyWith<$Res>
     implements $TncDateDtoCopyWith<$Res> {
-  factory _$$_TncDateDtoCopyWith(
-          _$_TncDateDto value, $Res Function(_$_TncDateDto) then) =
-      __$$_TncDateDtoCopyWithImpl<$Res>;
+  factory _$$TncDateDtoImplCopyWith(
+          _$TncDateDtoImpl value, $Res Function(_$TncDateDtoImpl) then) =
+      __$$TncDateDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String date});
 }
 
 /// @nodoc
-class __$$_TncDateDtoCopyWithImpl<$Res>
-    extends _$TncDateDtoCopyWithImpl<$Res, _$_TncDateDto>
-    implements _$$_TncDateDtoCopyWith<$Res> {
-  __$$_TncDateDtoCopyWithImpl(
-      _$_TncDateDto _value, $Res Function(_$_TncDateDto) _then)
+class __$$TncDateDtoImplCopyWithImpl<$Res>
+    extends _$TncDateDtoCopyWithImpl<$Res, _$TncDateDtoImpl>
+    implements _$$TncDateDtoImplCopyWith<$Res> {
+  __$$TncDateDtoImplCopyWithImpl(
+      _$TncDateDtoImpl _value, $Res Function(_$TncDateDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -84,7 +84,7 @@ class __$$_TncDateDtoCopyWithImpl<$Res>
   $Res call({
     Object? date = null,
   }) {
-    return _then(_$_TncDateDto(
+    return _then(_$TncDateDtoImpl(
       date: null == date
           ? _value.date
           : date // ignore: cast_nullable_to_non_nullable
@@ -95,11 +95,11 @@ class __$$_TncDateDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable(createToJson: false)
-class _$_TncDateDto extends _TncDateDto {
-  const _$_TncDateDto({required this.date}) : super._();
+class _$TncDateDtoImpl extends _TncDateDto {
+  const _$TncDateDtoImpl({required this.date}) : super._();
 
-  factory _$_TncDateDto.fromJson(Map<String, dynamic> json) =>
-      _$$_TncDateDtoFromJson(json);
+  factory _$TncDateDtoImpl.fromJson(Map<String, dynamic> json) =>
+      _$$TncDateDtoImplFromJson(json);
 
   @override
   final String date;
@@ -110,10 +110,10 @@ class _$_TncDateDto extends _TncDateDto {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_TncDateDto &&
+            other is _$TncDateDtoImpl &&
             (identical(other.date, date) || other.date == date));
   }
 
@@ -124,21 +124,21 @@ class _$_TncDateDto extends _TncDateDto {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_TncDateDtoCopyWith<_$_TncDateDto> get copyWith =>
-      __$$_TncDateDtoCopyWithImpl<_$_TncDateDto>(this, _$identity);
+  _$$TncDateDtoImplCopyWith<_$TncDateDtoImpl> get copyWith =>
+      __$$TncDateDtoImplCopyWithImpl<_$TncDateDtoImpl>(this, _$identity);
 }
 
 abstract class _TncDateDto extends TncDateDto {
-  const factory _TncDateDto({required final String date}) = _$_TncDateDto;
+  const factory _TncDateDto({required final String date}) = _$TncDateDtoImpl;
   const _TncDateDto._() : super._();
 
   factory _TncDateDto.fromJson(Map<String, dynamic> json) =
-      _$_TncDateDto.fromJson;
+      _$TncDateDtoImpl.fromJson;
 
   @override
   String get date;
   @override
   @JsonKey(ignore: true)
-  _$$_TncDateDtoCopyWith<_$_TncDateDto> get copyWith =>
+  _$$TncDateDtoImplCopyWith<_$TncDateDtoImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

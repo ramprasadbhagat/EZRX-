@@ -12,7 +12,7 @@ part of 'create_virtual_account.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$CreateVirtualAccount {
@@ -118,11 +118,11 @@ class _$CreateVirtualAccountCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_CreateVirtualAccountCopyWith<$Res>
+abstract class _$$CreateVirtualAccountImplCopyWith<$Res>
     implements $CreateVirtualAccountCopyWith<$Res> {
-  factory _$$_CreateVirtualAccountCopyWith(_$_CreateVirtualAccount value,
-          $Res Function(_$_CreateVirtualAccount) then) =
-      __$$_CreateVirtualAccountCopyWithImpl<$Res>;
+  factory _$$CreateVirtualAccountImplCopyWith(_$CreateVirtualAccountImpl value,
+          $Res Function(_$CreateVirtualAccountImpl) then) =
+      __$$CreateVirtualAccountImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -140,11 +140,11 @@ abstract class _$$_CreateVirtualAccountCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_CreateVirtualAccountCopyWithImpl<$Res>
-    extends _$CreateVirtualAccountCopyWithImpl<$Res, _$_CreateVirtualAccount>
-    implements _$$_CreateVirtualAccountCopyWith<$Res> {
-  __$$_CreateVirtualAccountCopyWithImpl(_$_CreateVirtualAccount _value,
-      $Res Function(_$_CreateVirtualAccount) _then)
+class __$$CreateVirtualAccountImplCopyWithImpl<$Res>
+    extends _$CreateVirtualAccountCopyWithImpl<$Res, _$CreateVirtualAccountImpl>
+    implements _$$CreateVirtualAccountImplCopyWith<$Res> {
+  __$$CreateVirtualAccountImplCopyWithImpl(_$CreateVirtualAccountImpl _value,
+      $Res Function(_$CreateVirtualAccountImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -159,7 +159,7 @@ class __$$_CreateVirtualAccountCopyWithImpl<$Res>
     Object? createdOn = null,
     Object? paidOn = null,
   }) {
-    return _then(_$_CreateVirtualAccount(
+    return _then(_$CreateVirtualAccountImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -198,8 +198,8 @@ class __$$_CreateVirtualAccountCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_CreateVirtualAccount extends _CreateVirtualAccount {
-  const _$_CreateVirtualAccount(
+class _$CreateVirtualAccountImpl extends _CreateVirtualAccount {
+  const _$CreateVirtualAccountImpl(
       {required this.id,
       required final List<PaymentItem> invoices,
       required this.amountPayable,
@@ -240,10 +240,10 @@ class _$_CreateVirtualAccount extends _CreateVirtualAccount {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_CreateVirtualAccount &&
+            other is _$CreateVirtualAccountImpl &&
             (identical(other.id, id) || other.id == id) &&
             const DeepCollectionEquality().equals(other._invoices, _invoices) &&
             (identical(other.amountPayable, amountPayable) ||
@@ -273,9 +273,10 @@ class _$_CreateVirtualAccount extends _CreateVirtualAccount {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_CreateVirtualAccountCopyWith<_$_CreateVirtualAccount> get copyWith =>
-      __$$_CreateVirtualAccountCopyWithImpl<_$_CreateVirtualAccount>(
-          this, _$identity);
+  _$$CreateVirtualAccountImplCopyWith<_$CreateVirtualAccountImpl>
+      get copyWith =>
+          __$$CreateVirtualAccountImplCopyWithImpl<_$CreateVirtualAccountImpl>(
+              this, _$identity);
 }
 
 abstract class _CreateVirtualAccount extends CreateVirtualAccount {
@@ -287,7 +288,7 @@ abstract class _CreateVirtualAccount extends CreateVirtualAccount {
       required final PaymentDetails paymentDetails,
       required final StringValue paymentMethodDisplay,
       required final DateTimeStringValue createdOn,
-      required final DateTimeStringValue paidOn}) = _$_CreateVirtualAccount;
+      required final DateTimeStringValue paidOn}) = _$CreateVirtualAccountImpl;
   const _CreateVirtualAccount._() : super._();
 
   @override
@@ -308,6 +309,6 @@ abstract class _CreateVirtualAccount extends CreateVirtualAccount {
   DateTimeStringValue get paidOn;
   @override
   @JsonKey(ignore: true)
-  _$$_CreateVirtualAccountCopyWith<_$_CreateVirtualAccount> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$CreateVirtualAccountImplCopyWith<_$CreateVirtualAccountImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }

@@ -12,7 +12,7 @@ part of 'announcement.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$Announcement {
@@ -137,11 +137,11 @@ class _$AnnouncementCopyWithImpl<$Res, $Val extends Announcement>
 }
 
 /// @nodoc
-abstract class _$$_AnnouncementCopyWith<$Res>
+abstract class _$$AnnouncementImplCopyWith<$Res>
     implements $AnnouncementCopyWith<$Res> {
-  factory _$$_AnnouncementCopyWith(
-          _$_Announcement value, $Res Function(_$_Announcement) then) =
-      __$$_AnnouncementCopyWithImpl<$Res>;
+  factory _$$AnnouncementImplCopyWith(
+          _$AnnouncementImpl value, $Res Function(_$AnnouncementImpl) then) =
+      __$$AnnouncementImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -160,11 +160,11 @@ abstract class _$$_AnnouncementCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_AnnouncementCopyWithImpl<$Res>
-    extends _$AnnouncementCopyWithImpl<$Res, _$_Announcement>
-    implements _$$_AnnouncementCopyWith<$Res> {
-  __$$_AnnouncementCopyWithImpl(
-      _$_Announcement _value, $Res Function(_$_Announcement) _then)
+class __$$AnnouncementImplCopyWithImpl<$Res>
+    extends _$AnnouncementCopyWithImpl<$Res, _$AnnouncementImpl>
+    implements _$$AnnouncementImplCopyWith<$Res> {
+  __$$AnnouncementImplCopyWithImpl(
+      _$AnnouncementImpl _value, $Res Function(_$AnnouncementImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -183,7 +183,7 @@ class __$$_AnnouncementCopyWithImpl<$Res>
     Object? loginType = null,
     Object? isCrossButton = null,
   }) {
-    return _then(_$_Announcement(
+    return _then(_$AnnouncementImpl(
       active: null == active
           ? _value.active
           : active // ignore: cast_nullable_to_non_nullable
@@ -238,8 +238,8 @@ class __$$_AnnouncementCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_Announcement extends _Announcement {
-  const _$_Announcement(
+class _$AnnouncementImpl extends _Announcement {
+  const _$AnnouncementImpl(
       {required this.active,
       required final List<AnnouncementMessage> descriptionList,
       required this.startTime,
@@ -299,10 +299,10 @@ class _$_Announcement extends _Announcement {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Announcement &&
+            other is _$AnnouncementImpl &&
             (identical(other.active, active) || other.active == active) &&
             const DeepCollectionEquality()
                 .equals(other._descriptionList, _descriptionList) &&
@@ -343,8 +343,8 @@ class _$_Announcement extends _Announcement {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_AnnouncementCopyWith<_$_Announcement> get copyWith =>
-      __$$_AnnouncementCopyWithImpl<_$_Announcement>(this, _$identity);
+  _$$AnnouncementImplCopyWith<_$AnnouncementImpl> get copyWith =>
+      __$$AnnouncementImplCopyWithImpl<_$AnnouncementImpl>(this, _$identity);
 }
 
 abstract class _Announcement extends Announcement {
@@ -360,7 +360,7 @@ abstract class _Announcement extends Announcement {
       required final bool isModuleSpecific,
       required final List<AnnouncementDislayModule> moduleName,
       required final AnnouncementDislayTime loginType,
-      required final bool isCrossButton}) = _$_Announcement;
+      required final bool isCrossButton}) = _$AnnouncementImpl;
   const _Announcement._() : super._();
 
   @override
@@ -389,7 +389,7 @@ abstract class _Announcement extends Announcement {
   bool get isCrossButton;
   @override
   @JsonKey(ignore: true)
-  _$$_AnnouncementCopyWith<_$_Announcement> get copyWith =>
+  _$$AnnouncementImplCopyWith<_$AnnouncementImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -448,22 +448,22 @@ class _$AnnouncementMessageCopyWithImpl<$Res, $Val extends AnnouncementMessage>
 }
 
 /// @nodoc
-abstract class _$$_AnnouncementMessageCopyWith<$Res>
+abstract class _$$AnnouncementMessageImplCopyWith<$Res>
     implements $AnnouncementMessageCopyWith<$Res> {
-  factory _$$_AnnouncementMessageCopyWith(_$_AnnouncementMessage value,
-          $Res Function(_$_AnnouncementMessage) then) =
-      __$$_AnnouncementMessageCopyWithImpl<$Res>;
+  factory _$$AnnouncementMessageImplCopyWith(_$AnnouncementMessageImpl value,
+          $Res Function(_$AnnouncementMessageImpl) then) =
+      __$$AnnouncementMessageImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String languageCode, String language, String announcement});
 }
 
 /// @nodoc
-class __$$_AnnouncementMessageCopyWithImpl<$Res>
-    extends _$AnnouncementMessageCopyWithImpl<$Res, _$_AnnouncementMessage>
-    implements _$$_AnnouncementMessageCopyWith<$Res> {
-  __$$_AnnouncementMessageCopyWithImpl(_$_AnnouncementMessage _value,
-      $Res Function(_$_AnnouncementMessage) _then)
+class __$$AnnouncementMessageImplCopyWithImpl<$Res>
+    extends _$AnnouncementMessageCopyWithImpl<$Res, _$AnnouncementMessageImpl>
+    implements _$$AnnouncementMessageImplCopyWith<$Res> {
+  __$$AnnouncementMessageImplCopyWithImpl(_$AnnouncementMessageImpl _value,
+      $Res Function(_$AnnouncementMessageImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -473,7 +473,7 @@ class __$$_AnnouncementMessageCopyWithImpl<$Res>
     Object? language = null,
     Object? announcement = null,
   }) {
-    return _then(_$_AnnouncementMessage(
+    return _then(_$AnnouncementMessageImpl(
       languageCode: null == languageCode
           ? _value.languageCode
           : languageCode // ignore: cast_nullable_to_non_nullable
@@ -492,8 +492,8 @@ class __$$_AnnouncementMessageCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_AnnouncementMessage extends _AnnouncementMessage {
-  const _$_AnnouncementMessage(
+class _$AnnouncementMessageImpl extends _AnnouncementMessage {
+  const _$AnnouncementMessageImpl(
       {required this.languageCode,
       required this.language,
       required this.announcement})
@@ -512,10 +512,10 @@ class _$_AnnouncementMessage extends _AnnouncementMessage {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_AnnouncementMessage &&
+            other is _$AnnouncementMessageImpl &&
             (identical(other.languageCode, languageCode) ||
                 other.languageCode == languageCode) &&
             (identical(other.language, language) ||
@@ -531,8 +531,8 @@ class _$_AnnouncementMessage extends _AnnouncementMessage {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_AnnouncementMessageCopyWith<_$_AnnouncementMessage> get copyWith =>
-      __$$_AnnouncementMessageCopyWithImpl<_$_AnnouncementMessage>(
+  _$$AnnouncementMessageImplCopyWith<_$AnnouncementMessageImpl> get copyWith =>
+      __$$AnnouncementMessageImplCopyWithImpl<_$AnnouncementMessageImpl>(
           this, _$identity);
 }
 
@@ -540,7 +540,7 @@ abstract class _AnnouncementMessage extends AnnouncementMessage {
   const factory _AnnouncementMessage(
       {required final String languageCode,
       required final String language,
-      required final String announcement}) = _$_AnnouncementMessage;
+      required final String announcement}) = _$AnnouncementMessageImpl;
   const _AnnouncementMessage._() : super._();
 
   @override
@@ -551,6 +551,6 @@ abstract class _AnnouncementMessage extends AnnouncementMessage {
   String get announcement;
   @override
   @JsonKey(ignore: true)
-  _$$_AnnouncementMessageCopyWith<_$_AnnouncementMessage> get copyWith =>
+  _$$AnnouncementMessageImplCopyWith<_$AnnouncementMessageImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

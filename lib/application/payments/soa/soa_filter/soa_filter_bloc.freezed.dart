@@ -12,7 +12,7 @@ part of 'soa_filter_bloc.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$SoaFilterEvent {
@@ -87,25 +87,25 @@ class _$SoaFilterEventCopyWithImpl<$Res, $Val extends SoaFilterEvent>
 }
 
 /// @nodoc
-abstract class _$$_InitializedCopyWith<$Res> {
-  factory _$$_InitializedCopyWith(
-          _$_Initialized value, $Res Function(_$_Initialized) then) =
-      __$$_InitializedCopyWithImpl<$Res>;
+abstract class _$$InitializedImplCopyWith<$Res> {
+  factory _$$InitializedImplCopyWith(
+          _$InitializedImpl value, $Res Function(_$InitializedImpl) then) =
+      __$$InitializedImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_InitializedCopyWithImpl<$Res>
-    extends _$SoaFilterEventCopyWithImpl<$Res, _$_Initialized>
-    implements _$$_InitializedCopyWith<$Res> {
-  __$$_InitializedCopyWithImpl(
-      _$_Initialized _value, $Res Function(_$_Initialized) _then)
+class __$$InitializedImplCopyWithImpl<$Res>
+    extends _$SoaFilterEventCopyWithImpl<$Res, _$InitializedImpl>
+    implements _$$InitializedImplCopyWith<$Res> {
+  __$$InitializedImplCopyWithImpl(
+      _$InitializedImpl _value, $Res Function(_$InitializedImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_Initialized implements _Initialized {
-  const _$_Initialized();
+class _$InitializedImpl implements _Initialized {
+  const _$InitializedImpl();
 
   @override
   String toString() {
@@ -113,9 +113,9 @@ class _$_Initialized implements _Initialized {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_Initialized);
+        (other.runtimeType == runtimeType && other is _$InitializedImpl);
   }
 
   @override
@@ -197,14 +197,14 @@ class _$_Initialized implements _Initialized {
 }
 
 abstract class _Initialized implements SoaFilterEvent {
-  const factory _Initialized() = _$_Initialized;
+  const factory _Initialized() = _$InitializedImpl;
 }
 
 /// @nodoc
-abstract class _$$_SetFilterCopyWith<$Res> {
-  factory _$$_SetFilterCopyWith(
-          _$_SetFilter value, $Res Function(_$_SetFilter) then) =
-      __$$_SetFilterCopyWithImpl<$Res>;
+abstract class _$$SetFilterImplCopyWith<$Res> {
+  factory _$$SetFilterImplCopyWith(
+          _$SetFilterImpl value, $Res Function(_$SetFilterImpl) then) =
+      __$$SetFilterImplCopyWithImpl<$Res>;
   @useResult
   $Res call({SoaFilter soaFilter});
 
@@ -212,11 +212,11 @@ abstract class _$$_SetFilterCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_SetFilterCopyWithImpl<$Res>
-    extends _$SoaFilterEventCopyWithImpl<$Res, _$_SetFilter>
-    implements _$$_SetFilterCopyWith<$Res> {
-  __$$_SetFilterCopyWithImpl(
-      _$_SetFilter _value, $Res Function(_$_SetFilter) _then)
+class __$$SetFilterImplCopyWithImpl<$Res>
+    extends _$SoaFilterEventCopyWithImpl<$Res, _$SetFilterImpl>
+    implements _$$SetFilterImplCopyWith<$Res> {
+  __$$SetFilterImplCopyWithImpl(
+      _$SetFilterImpl _value, $Res Function(_$SetFilterImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -224,7 +224,7 @@ class __$$_SetFilterCopyWithImpl<$Res>
   $Res call({
     Object? soaFilter = null,
   }) {
-    return _then(_$_SetFilter(
+    return _then(_$SetFilterImpl(
       null == soaFilter
           ? _value.soaFilter
           : soaFilter // ignore: cast_nullable_to_non_nullable
@@ -243,8 +243,8 @@ class __$$_SetFilterCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_SetFilter implements _SetFilter {
-  const _$_SetFilter(this.soaFilter);
+class _$SetFilterImpl implements _SetFilter {
+  const _$SetFilterImpl(this.soaFilter);
 
   @override
   final SoaFilter soaFilter;
@@ -255,10 +255,10 @@ class _$_SetFilter implements _SetFilter {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_SetFilter &&
+            other is _$SetFilterImpl &&
             (identical(other.soaFilter, soaFilter) ||
                 other.soaFilter == soaFilter));
   }
@@ -269,8 +269,8 @@ class _$_SetFilter implements _SetFilter {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_SetFilterCopyWith<_$_SetFilter> get copyWith =>
-      __$$_SetFilterCopyWithImpl<_$_SetFilter>(this, _$identity);
+  _$$SetFilterImplCopyWith<_$SetFilterImpl> get copyWith =>
+      __$$SetFilterImplCopyWithImpl<_$SetFilterImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -348,29 +348,29 @@ class _$_SetFilter implements _SetFilter {
 }
 
 abstract class _SetFilter implements SoaFilterEvent {
-  const factory _SetFilter(final SoaFilter soaFilter) = _$_SetFilter;
+  const factory _SetFilter(final SoaFilter soaFilter) = _$SetFilterImpl;
 
   SoaFilter get soaFilter;
   @JsonKey(ignore: true)
-  _$$_SetFilterCopyWith<_$_SetFilter> get copyWith =>
+  _$$SetFilterImplCopyWith<_$SetFilterImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_ChangeToDateCopyWith<$Res> {
-  factory _$$_ChangeToDateCopyWith(
-          _$_ChangeToDate value, $Res Function(_$_ChangeToDate) then) =
-      __$$_ChangeToDateCopyWithImpl<$Res>;
+abstract class _$$ChangeToDateImplCopyWith<$Res> {
+  factory _$$ChangeToDateImplCopyWith(
+          _$ChangeToDateImpl value, $Res Function(_$ChangeToDateImpl) then) =
+      __$$ChangeToDateImplCopyWithImpl<$Res>;
   @useResult
   $Res call({DateTimeStringValue toDate});
 }
 
 /// @nodoc
-class __$$_ChangeToDateCopyWithImpl<$Res>
-    extends _$SoaFilterEventCopyWithImpl<$Res, _$_ChangeToDate>
-    implements _$$_ChangeToDateCopyWith<$Res> {
-  __$$_ChangeToDateCopyWithImpl(
-      _$_ChangeToDate _value, $Res Function(_$_ChangeToDate) _then)
+class __$$ChangeToDateImplCopyWithImpl<$Res>
+    extends _$SoaFilterEventCopyWithImpl<$Res, _$ChangeToDateImpl>
+    implements _$$ChangeToDateImplCopyWith<$Res> {
+  __$$ChangeToDateImplCopyWithImpl(
+      _$ChangeToDateImpl _value, $Res Function(_$ChangeToDateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -378,7 +378,7 @@ class __$$_ChangeToDateCopyWithImpl<$Res>
   $Res call({
     Object? toDate = null,
   }) {
-    return _then(_$_ChangeToDate(
+    return _then(_$ChangeToDateImpl(
       null == toDate
           ? _value.toDate
           : toDate // ignore: cast_nullable_to_non_nullable
@@ -389,8 +389,8 @@ class __$$_ChangeToDateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_ChangeToDate implements _ChangeToDate {
-  const _$_ChangeToDate(this.toDate);
+class _$ChangeToDateImpl implements _ChangeToDate {
+  const _$ChangeToDateImpl(this.toDate);
 
   @override
   final DateTimeStringValue toDate;
@@ -401,10 +401,10 @@ class _$_ChangeToDate implements _ChangeToDate {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ChangeToDate &&
+            other is _$ChangeToDateImpl &&
             (identical(other.toDate, toDate) || other.toDate == toDate));
   }
 
@@ -414,8 +414,8 @@ class _$_ChangeToDate implements _ChangeToDate {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ChangeToDateCopyWith<_$_ChangeToDate> get copyWith =>
-      __$$_ChangeToDateCopyWithImpl<_$_ChangeToDate>(this, _$identity);
+  _$$ChangeToDateImplCopyWith<_$ChangeToDateImpl> get copyWith =>
+      __$$ChangeToDateImplCopyWithImpl<_$ChangeToDateImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -494,29 +494,29 @@ class _$_ChangeToDate implements _ChangeToDate {
 
 abstract class _ChangeToDate implements SoaFilterEvent {
   const factory _ChangeToDate(final DateTimeStringValue toDate) =
-      _$_ChangeToDate;
+      _$ChangeToDateImpl;
 
   DateTimeStringValue get toDate;
   @JsonKey(ignore: true)
-  _$$_ChangeToDateCopyWith<_$_ChangeToDate> get copyWith =>
+  _$$ChangeToDateImplCopyWith<_$ChangeToDateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_changeFormDateCopyWith<$Res> {
-  factory _$$_changeFormDateCopyWith(
-          _$_changeFormDate value, $Res Function(_$_changeFormDate) then) =
-      __$$_changeFormDateCopyWithImpl<$Res>;
+abstract class _$$changeFormDateImplCopyWith<$Res> {
+  factory _$$changeFormDateImplCopyWith(_$changeFormDateImpl value,
+          $Res Function(_$changeFormDateImpl) then) =
+      __$$changeFormDateImplCopyWithImpl<$Res>;
   @useResult
   $Res call({DateTimeStringValue formDate});
 }
 
 /// @nodoc
-class __$$_changeFormDateCopyWithImpl<$Res>
-    extends _$SoaFilterEventCopyWithImpl<$Res, _$_changeFormDate>
-    implements _$$_changeFormDateCopyWith<$Res> {
-  __$$_changeFormDateCopyWithImpl(
-      _$_changeFormDate _value, $Res Function(_$_changeFormDate) _then)
+class __$$changeFormDateImplCopyWithImpl<$Res>
+    extends _$SoaFilterEventCopyWithImpl<$Res, _$changeFormDateImpl>
+    implements _$$changeFormDateImplCopyWith<$Res> {
+  __$$changeFormDateImplCopyWithImpl(
+      _$changeFormDateImpl _value, $Res Function(_$changeFormDateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -524,7 +524,7 @@ class __$$_changeFormDateCopyWithImpl<$Res>
   $Res call({
     Object? formDate = null,
   }) {
-    return _then(_$_changeFormDate(
+    return _then(_$changeFormDateImpl(
       null == formDate
           ? _value.formDate
           : formDate // ignore: cast_nullable_to_non_nullable
@@ -535,8 +535,8 @@ class __$$_changeFormDateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_changeFormDate implements _changeFormDate {
-  const _$_changeFormDate(this.formDate);
+class _$changeFormDateImpl implements _changeFormDate {
+  const _$changeFormDateImpl(this.formDate);
 
   @override
   final DateTimeStringValue formDate;
@@ -547,10 +547,10 @@ class _$_changeFormDate implements _changeFormDate {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_changeFormDate &&
+            other is _$changeFormDateImpl &&
             (identical(other.formDate, formDate) ||
                 other.formDate == formDate));
   }
@@ -561,8 +561,9 @@ class _$_changeFormDate implements _changeFormDate {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_changeFormDateCopyWith<_$_changeFormDate> get copyWith =>
-      __$$_changeFormDateCopyWithImpl<_$_changeFormDate>(this, _$identity);
+  _$$changeFormDateImplCopyWith<_$changeFormDateImpl> get copyWith =>
+      __$$changeFormDateImplCopyWithImpl<_$changeFormDateImpl>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -641,11 +642,11 @@ class _$_changeFormDate implements _changeFormDate {
 
 abstract class _changeFormDate implements SoaFilterEvent {
   const factory _changeFormDate(final DateTimeStringValue formDate) =
-      _$_changeFormDate;
+      _$changeFormDateImpl;
 
   DateTimeStringValue get formDate;
   @JsonKey(ignore: true)
-  _$$_changeFormDateCopyWith<_$_changeFormDate> get copyWith =>
+  _$$changeFormDateImplCopyWith<_$changeFormDateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -702,11 +703,11 @@ class _$SoaFilterStateCopyWithImpl<$Res, $Val extends SoaFilterState>
 }
 
 /// @nodoc
-abstract class _$$_InitialCopyWith<$Res>
+abstract class _$$InitialImplCopyWith<$Res>
     implements $SoaFilterStateCopyWith<$Res> {
-  factory _$$_InitialCopyWith(
-          _$_Initial value, $Res Function(_$_Initial) then) =
-      __$$_InitialCopyWithImpl<$Res>;
+  factory _$$InitialImplCopyWith(
+          _$InitialImpl value, $Res Function(_$InitialImpl) then) =
+      __$$InitialImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({SoaFilter filter});
@@ -716,10 +717,11 @@ abstract class _$$_InitialCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_InitialCopyWithImpl<$Res>
-    extends _$SoaFilterStateCopyWithImpl<$Res, _$_Initial>
-    implements _$$_InitialCopyWith<$Res> {
-  __$$_InitialCopyWithImpl(_$_Initial _value, $Res Function(_$_Initial) _then)
+class __$$InitialImplCopyWithImpl<$Res>
+    extends _$SoaFilterStateCopyWithImpl<$Res, _$InitialImpl>
+    implements _$$InitialImplCopyWith<$Res> {
+  __$$InitialImplCopyWithImpl(
+      _$InitialImpl _value, $Res Function(_$InitialImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -727,7 +729,7 @@ class __$$_InitialCopyWithImpl<$Res>
   $Res call({
     Object? filter = null,
   }) {
-    return _then(_$_Initial(
+    return _then(_$InitialImpl(
       filter: null == filter
           ? _value.filter
           : filter // ignore: cast_nullable_to_non_nullable
@@ -738,8 +740,8 @@ class __$$_InitialCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_Initial implements _Initial {
-  const _$_Initial({required this.filter});
+class _$InitialImpl implements _Initial {
+  const _$InitialImpl({required this.filter});
 
   @override
   final SoaFilter filter;
@@ -750,10 +752,10 @@ class _$_Initial implements _Initial {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Initial &&
+            other is _$InitialImpl &&
             (identical(other.filter, filter) || other.filter == filter));
   }
 
@@ -763,17 +765,17 @@ class _$_Initial implements _Initial {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_InitialCopyWith<_$_Initial> get copyWith =>
-      __$$_InitialCopyWithImpl<_$_Initial>(this, _$identity);
+  _$$InitialImplCopyWith<_$InitialImpl> get copyWith =>
+      __$$InitialImplCopyWithImpl<_$InitialImpl>(this, _$identity);
 }
 
 abstract class _Initial implements SoaFilterState {
-  const factory _Initial({required final SoaFilter filter}) = _$_Initial;
+  const factory _Initial({required final SoaFilter filter}) = _$InitialImpl;
 
   @override
   SoaFilter get filter;
   @override
   @JsonKey(ignore: true)
-  _$$_InitialCopyWith<_$_Initial> get copyWith =>
+  _$$InitialImplCopyWith<_$InitialImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

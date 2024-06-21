@@ -12,7 +12,7 @@ part of 'payment_in_progress_dto.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 PaymentInProgressDto _$PaymentInProgressDtoFromJson(Map<String, dynamic> json) {
   return _PaymentInProgressDto.fromJson(json);
@@ -64,22 +64,22 @@ class _$PaymentInProgressDtoCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_PaymentInProgressDtoCopyWith<$Res>
+abstract class _$$PaymentInProgressDtoImplCopyWith<$Res>
     implements $PaymentInProgressDtoCopyWith<$Res> {
-  factory _$$_PaymentInProgressDtoCopyWith(_$_PaymentInProgressDto value,
-          $Res Function(_$_PaymentInProgressDto) then) =
-      __$$_PaymentInProgressDtoCopyWithImpl<$Res>;
+  factory _$$PaymentInProgressDtoImplCopyWith(_$PaymentInProgressDtoImpl value,
+          $Res Function(_$PaymentInProgressDtoImpl) then) =
+      __$$PaymentInProgressDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({@JsonKey(name: 'amount', defaultValue: '') String amount});
 }
 
 /// @nodoc
-class __$$_PaymentInProgressDtoCopyWithImpl<$Res>
-    extends _$PaymentInProgressDtoCopyWithImpl<$Res, _$_PaymentInProgressDto>
-    implements _$$_PaymentInProgressDtoCopyWith<$Res> {
-  __$$_PaymentInProgressDtoCopyWithImpl(_$_PaymentInProgressDto _value,
-      $Res Function(_$_PaymentInProgressDto) _then)
+class __$$PaymentInProgressDtoImplCopyWithImpl<$Res>
+    extends _$PaymentInProgressDtoCopyWithImpl<$Res, _$PaymentInProgressDtoImpl>
+    implements _$$PaymentInProgressDtoImplCopyWith<$Res> {
+  __$$PaymentInProgressDtoImplCopyWithImpl(_$PaymentInProgressDtoImpl _value,
+      $Res Function(_$PaymentInProgressDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -87,7 +87,7 @@ class __$$_PaymentInProgressDtoCopyWithImpl<$Res>
   $Res call({
     Object? amount = null,
   }) {
-    return _then(_$_PaymentInProgressDto(
+    return _then(_$PaymentInProgressDtoImpl(
       amount: null == amount
           ? _value.amount
           : amount // ignore: cast_nullable_to_non_nullable
@@ -98,13 +98,13 @@ class __$$_PaymentInProgressDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_PaymentInProgressDto extends _PaymentInProgressDto {
-  _$_PaymentInProgressDto(
+class _$PaymentInProgressDtoImpl extends _PaymentInProgressDto {
+  _$PaymentInProgressDtoImpl(
       {@JsonKey(name: 'amount', defaultValue: '') required this.amount})
       : super._();
 
-  factory _$_PaymentInProgressDto.fromJson(Map<String, dynamic> json) =>
-      _$$_PaymentInProgressDtoFromJson(json);
+  factory _$PaymentInProgressDtoImpl.fromJson(Map<String, dynamic> json) =>
+      _$$PaymentInProgressDtoImplFromJson(json);
 
   @override
   @JsonKey(name: 'amount', defaultValue: '')
@@ -116,10 +116,10 @@ class _$_PaymentInProgressDto extends _PaymentInProgressDto {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_PaymentInProgressDto &&
+            other is _$PaymentInProgressDtoImpl &&
             (identical(other.amount, amount) || other.amount == amount));
   }
 
@@ -130,13 +130,14 @@ class _$_PaymentInProgressDto extends _PaymentInProgressDto {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_PaymentInProgressDtoCopyWith<_$_PaymentInProgressDto> get copyWith =>
-      __$$_PaymentInProgressDtoCopyWithImpl<_$_PaymentInProgressDto>(
-          this, _$identity);
+  _$$PaymentInProgressDtoImplCopyWith<_$PaymentInProgressDtoImpl>
+      get copyWith =>
+          __$$PaymentInProgressDtoImplCopyWithImpl<_$PaymentInProgressDtoImpl>(
+              this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_PaymentInProgressDtoToJson(
+    return _$$PaymentInProgressDtoImplToJson(
       this,
     );
   }
@@ -145,17 +146,17 @@ class _$_PaymentInProgressDto extends _PaymentInProgressDto {
 abstract class _PaymentInProgressDto extends PaymentInProgressDto {
   factory _PaymentInProgressDto(
       {@JsonKey(name: 'amount', defaultValue: '')
-      required final String amount}) = _$_PaymentInProgressDto;
+      required final String amount}) = _$PaymentInProgressDtoImpl;
   _PaymentInProgressDto._() : super._();
 
   factory _PaymentInProgressDto.fromJson(Map<String, dynamic> json) =
-      _$_PaymentInProgressDto.fromJson;
+      _$PaymentInProgressDtoImpl.fromJson;
 
   @override
   @JsonKey(name: 'amount', defaultValue: '')
   String get amount;
   @override
   @JsonKey(ignore: true)
-  _$$_PaymentInProgressDtoCopyWith<_$_PaymentInProgressDto> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$PaymentInProgressDtoImplCopyWith<_$PaymentInProgressDtoImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }

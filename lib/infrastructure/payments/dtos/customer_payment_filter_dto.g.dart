@@ -6,17 +6,17 @@ part of 'customer_payment_filter_dto.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_CustomerPaymentFilterDto _$$_CustomerPaymentFilterDtoFromJson(
+_$CustomerPaymentFilterDtoImpl _$$CustomerPaymentFilterDtoImplFromJson(
         Map<String, dynamic> json) =>
-    _$_CustomerPaymentFilterDto(
+    _$CustomerPaymentFilterDtoImpl(
       paymentBatchAdditionalInfo:
           json['paymentBatchAdditionalInfo'] as String? ?? '',
       createdDateToday: json['createdDateToday'] as String? ?? '',
       createdDateYesterday: json['createdDateYesterday'] as String? ?? '',
     );
 
-Map<String, dynamic> _$$_CustomerPaymentFilterDtoToJson(
-        _$_CustomerPaymentFilterDto instance) =>
+Map<String, dynamic> _$$CustomerPaymentFilterDtoImplToJson(
+        _$CustomerPaymentFilterDtoImpl instance) =>
     <String, dynamic>{
       'paymentBatchAdditionalInfo': instance.paymentBatchAdditionalInfo,
       'createdDateToday': instance.createdDateToday,

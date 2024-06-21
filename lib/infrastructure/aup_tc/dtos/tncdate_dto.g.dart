@@ -6,7 +6,7 @@ part of 'tncdate_dto.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_TncDateDto _$$_TncDateDtoFromJson(Map<String, dynamic> json) =>
-    _$_TncDateDto(
+_$TncDateDtoImpl _$$TncDateDtoImplFromJson(Map<String, dynamic> json) =>
+    _$TncDateDtoImpl(
       date: json['date'] as String,
     );

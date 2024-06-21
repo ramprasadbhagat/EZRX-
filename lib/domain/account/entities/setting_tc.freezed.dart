@@ -12,7 +12,7 @@ part of 'setting_tc.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$SettingTc {
@@ -56,21 +56,22 @@ class _$SettingTcCopyWithImpl<$Res, $Val extends SettingTc>
 }
 
 /// @nodoc
-abstract class _$$_SettingTcCopyWith<$Res> implements $SettingTcCopyWith<$Res> {
-  factory _$$_SettingTcCopyWith(
-          _$_SettingTc value, $Res Function(_$_SettingTc) then) =
-      __$$_SettingTcCopyWithImpl<$Res>;
+abstract class _$$SettingTcImplCopyWith<$Res>
+    implements $SettingTcCopyWith<$Res> {
+  factory _$$SettingTcImplCopyWith(
+          _$SettingTcImpl value, $Res Function(_$SettingTcImpl) then) =
+      __$$SettingTcImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({bool acceptTC});
 }
 
 /// @nodoc
-class __$$_SettingTcCopyWithImpl<$Res>
-    extends _$SettingTcCopyWithImpl<$Res, _$_SettingTc>
-    implements _$$_SettingTcCopyWith<$Res> {
-  __$$_SettingTcCopyWithImpl(
-      _$_SettingTc _value, $Res Function(_$_SettingTc) _then)
+class __$$SettingTcImplCopyWithImpl<$Res>
+    extends _$SettingTcCopyWithImpl<$Res, _$SettingTcImpl>
+    implements _$$SettingTcImplCopyWith<$Res> {
+  __$$SettingTcImplCopyWithImpl(
+      _$SettingTcImpl _value, $Res Function(_$SettingTcImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -78,7 +79,7 @@ class __$$_SettingTcCopyWithImpl<$Res>
   $Res call({
     Object? acceptTC = null,
   }) {
-    return _then(_$_SettingTc(
+    return _then(_$SettingTcImpl(
       acceptTC: null == acceptTC
           ? _value.acceptTC
           : acceptTC // ignore: cast_nullable_to_non_nullable
@@ -89,8 +90,8 @@ class __$$_SettingTcCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_SettingTc extends _SettingTc {
-  const _$_SettingTc({required this.acceptTC}) : super._();
+class _$SettingTcImpl extends _SettingTc {
+  const _$SettingTcImpl({required this.acceptTC}) : super._();
 
   @override
   final bool acceptTC;
@@ -101,10 +102,10 @@ class _$_SettingTc extends _SettingTc {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_SettingTc &&
+            other is _$SettingTcImpl &&
             (identical(other.acceptTC, acceptTC) ||
                 other.acceptTC == acceptTC));
   }
@@ -115,18 +116,18 @@ class _$_SettingTc extends _SettingTc {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_SettingTcCopyWith<_$_SettingTc> get copyWith =>
-      __$$_SettingTcCopyWithImpl<_$_SettingTc>(this, _$identity);
+  _$$SettingTcImplCopyWith<_$SettingTcImpl> get copyWith =>
+      __$$SettingTcImplCopyWithImpl<_$SettingTcImpl>(this, _$identity);
 }
 
 abstract class _SettingTc extends SettingTc {
-  const factory _SettingTc({required final bool acceptTC}) = _$_SettingTc;
+  const factory _SettingTc({required final bool acceptTC}) = _$SettingTcImpl;
   const _SettingTc._() : super._();
 
   @override
   bool get acceptTC;
   @override
   @JsonKey(ignore: true)
-  _$$_SettingTcCopyWith<_$_SettingTc> get copyWith =>
+  _$$SettingTcImplCopyWith<_$SettingTcImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -12,7 +12,7 @@ part of 'request_counter_offer_details.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$RequestCounterOfferDetails {
@@ -82,12 +82,12 @@ class _$RequestCounterOfferDetailsCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_RequestCounterOfferDetailsCopyWith<$Res>
+abstract class _$$RequestCounterOfferDetailsImplCopyWith<$Res>
     implements $RequestCounterOfferDetailsCopyWith<$Res> {
-  factory _$$_RequestCounterOfferDetailsCopyWith(
-          _$_RequestCounterOfferDetails value,
-          $Res Function(_$_RequestCounterOfferDetails) then) =
-      __$$_RequestCounterOfferDetailsCopyWithImpl<$Res>;
+  factory _$$RequestCounterOfferDetailsImplCopyWith(
+          _$RequestCounterOfferDetailsImpl value,
+          $Res Function(_$RequestCounterOfferDetailsImpl) then) =
+      __$$RequestCounterOfferDetailsImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -98,13 +98,13 @@ abstract class _$$_RequestCounterOfferDetailsCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_RequestCounterOfferDetailsCopyWithImpl<$Res>
+class __$$RequestCounterOfferDetailsImplCopyWithImpl<$Res>
     extends _$RequestCounterOfferDetailsCopyWithImpl<$Res,
-        _$_RequestCounterOfferDetails>
-    implements _$$_RequestCounterOfferDetailsCopyWith<$Res> {
-  __$$_RequestCounterOfferDetailsCopyWithImpl(
-      _$_RequestCounterOfferDetails _value,
-      $Res Function(_$_RequestCounterOfferDetails) _then)
+        _$RequestCounterOfferDetailsImpl>
+    implements _$$RequestCounterOfferDetailsImplCopyWith<$Res> {
+  __$$RequestCounterOfferDetailsImplCopyWithImpl(
+      _$RequestCounterOfferDetailsImpl _value,
+      $Res Function(_$RequestCounterOfferDetailsImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -115,7 +115,7 @@ class __$$_RequestCounterOfferDetailsCopyWithImpl<$Res>
     Object? counterOfferCurrency = null,
     Object? comment = null,
   }) {
-    return _then(_$_RequestCounterOfferDetails(
+    return _then(_$RequestCounterOfferDetailsImpl(
       counterOfferPrice: null == counterOfferPrice
           ? _value.counterOfferPrice
           : counterOfferPrice // ignore: cast_nullable_to_non_nullable
@@ -138,8 +138,8 @@ class __$$_RequestCounterOfferDetailsCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_RequestCounterOfferDetails extends _RequestCounterOfferDetails {
-  const _$_RequestCounterOfferDetails(
+class _$RequestCounterOfferDetailsImpl extends _RequestCounterOfferDetails {
+  const _$RequestCounterOfferDetailsImpl(
       {required this.counterOfferPrice,
       required this.discountOverridePercentage,
       required this.counterOfferCurrency,
@@ -161,10 +161,10 @@ class _$_RequestCounterOfferDetails extends _RequestCounterOfferDetails {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_RequestCounterOfferDetails &&
+            other is _$RequestCounterOfferDetailsImpl &&
             (identical(other.counterOfferPrice, counterOfferPrice) ||
                 other.counterOfferPrice == counterOfferPrice) &&
             (identical(other.discountOverridePercentage,
@@ -183,9 +183,9 @@ class _$_RequestCounterOfferDetails extends _RequestCounterOfferDetails {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_RequestCounterOfferDetailsCopyWith<_$_RequestCounterOfferDetails>
-      get copyWith => __$$_RequestCounterOfferDetailsCopyWithImpl<
-          _$_RequestCounterOfferDetails>(this, _$identity);
+  _$$RequestCounterOfferDetailsImplCopyWith<_$RequestCounterOfferDetailsImpl>
+      get copyWith => __$$RequestCounterOfferDetailsImplCopyWithImpl<
+          _$RequestCounterOfferDetailsImpl>(this, _$identity);
 }
 
 abstract class _RequestCounterOfferDetails extends RequestCounterOfferDetails {
@@ -193,7 +193,7 @@ abstract class _RequestCounterOfferDetails extends RequestCounterOfferDetails {
       {required final CounterOfferValue counterOfferPrice,
       required final CounterOfferDiscountValue discountOverridePercentage,
       required final Currency counterOfferCurrency,
-      required final StringValue comment}) = _$_RequestCounterOfferDetails;
+      required final StringValue comment}) = _$RequestCounterOfferDetailsImpl;
   const _RequestCounterOfferDetails._() : super._();
 
   @override
@@ -206,6 +206,6 @@ abstract class _RequestCounterOfferDetails extends RequestCounterOfferDetails {
   StringValue get comment;
   @override
   @JsonKey(ignore: true)
-  _$$_RequestCounterOfferDetailsCopyWith<_$_RequestCounterOfferDetails>
+  _$$RequestCounterOfferDetailsImplCopyWith<_$RequestCounterOfferDetailsImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

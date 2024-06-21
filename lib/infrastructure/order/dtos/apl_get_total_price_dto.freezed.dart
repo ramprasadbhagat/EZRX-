@@ -12,7 +12,7 @@ part of 'apl_get_total_price_dto.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 AplGetTotalPriceDto _$AplGetTotalPriceDtoFromJson(Map<String, dynamic> json) {
   return _AplGetTotalPriceDto.fromJson(json);
@@ -80,11 +80,11 @@ class _$AplGetTotalPriceDtoCopyWithImpl<$Res, $Val extends AplGetTotalPriceDto>
 }
 
 /// @nodoc
-abstract class _$$_AplGetTotalPriceDtoCopyWith<$Res>
+abstract class _$$AplGetTotalPriceDtoImplCopyWith<$Res>
     implements $AplGetTotalPriceDtoCopyWith<$Res> {
-  factory _$$_AplGetTotalPriceDtoCopyWith(_$_AplGetTotalPriceDto value,
-          $Res Function(_$_AplGetTotalPriceDto) then) =
-      __$$_AplGetTotalPriceDtoCopyWithImpl<$Res>;
+  factory _$$AplGetTotalPriceDtoImplCopyWith(_$AplGetTotalPriceDtoImpl value,
+          $Res Function(_$AplGetTotalPriceDtoImpl) then) =
+      __$$AplGetTotalPriceDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -94,11 +94,11 @@ abstract class _$$_AplGetTotalPriceDtoCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_AplGetTotalPriceDtoCopyWithImpl<$Res>
-    extends _$AplGetTotalPriceDtoCopyWithImpl<$Res, _$_AplGetTotalPriceDto>
-    implements _$$_AplGetTotalPriceDtoCopyWith<$Res> {
-  __$$_AplGetTotalPriceDtoCopyWithImpl(_$_AplGetTotalPriceDto _value,
-      $Res Function(_$_AplGetTotalPriceDto) _then)
+class __$$AplGetTotalPriceDtoImplCopyWithImpl<$Res>
+    extends _$AplGetTotalPriceDtoCopyWithImpl<$Res, _$AplGetTotalPriceDtoImpl>
+    implements _$$AplGetTotalPriceDtoImplCopyWith<$Res> {
+  __$$AplGetTotalPriceDtoImplCopyWithImpl(_$AplGetTotalPriceDtoImpl _value,
+      $Res Function(_$AplGetTotalPriceDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -108,7 +108,7 @@ class __$$_AplGetTotalPriceDtoCopyWithImpl<$Res>
     Object? tax = null,
     Object? deliveryFee = null,
   }) {
-    return _then(_$_AplGetTotalPriceDto(
+    return _then(_$AplGetTotalPriceDtoImpl(
       grandTotal: null == grandTotal
           ? _value.grandTotal
           : grandTotal // ignore: cast_nullable_to_non_nullable
@@ -127,15 +127,15 @@ class __$$_AplGetTotalPriceDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_AplGetTotalPriceDto extends _AplGetTotalPriceDto {
-  const _$_AplGetTotalPriceDto(
+class _$AplGetTotalPriceDtoImpl extends _AplGetTotalPriceDto {
+  const _$AplGetTotalPriceDtoImpl(
       {@JsonKey(name: 'TotalPrice', defaultValue: 0) required this.grandTotal,
       @JsonKey(name: 'Tax', defaultValue: 0) required this.tax,
       @JsonKey(name: 'DeliveryFee', defaultValue: 0) required this.deliveryFee})
       : super._();
 
-  factory _$_AplGetTotalPriceDto.fromJson(Map<String, dynamic> json) =>
-      _$$_AplGetTotalPriceDtoFromJson(json);
+  factory _$AplGetTotalPriceDtoImpl.fromJson(Map<String, dynamic> json) =>
+      _$$AplGetTotalPriceDtoImplFromJson(json);
 
   @override
   @JsonKey(name: 'TotalPrice', defaultValue: 0)
@@ -153,10 +153,10 @@ class _$_AplGetTotalPriceDto extends _AplGetTotalPriceDto {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_AplGetTotalPriceDto &&
+            other is _$AplGetTotalPriceDtoImpl &&
             (identical(other.grandTotal, grandTotal) ||
                 other.grandTotal == grandTotal) &&
             (identical(other.tax, tax) || other.tax == tax) &&
@@ -171,13 +171,13 @@ class _$_AplGetTotalPriceDto extends _AplGetTotalPriceDto {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_AplGetTotalPriceDtoCopyWith<_$_AplGetTotalPriceDto> get copyWith =>
-      __$$_AplGetTotalPriceDtoCopyWithImpl<_$_AplGetTotalPriceDto>(
+  _$$AplGetTotalPriceDtoImplCopyWith<_$AplGetTotalPriceDtoImpl> get copyWith =>
+      __$$AplGetTotalPriceDtoImplCopyWithImpl<_$AplGetTotalPriceDtoImpl>(
           this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_AplGetTotalPriceDtoToJson(
+    return _$$AplGetTotalPriceDtoImplToJson(
       this,
     );
   }
@@ -189,11 +189,11 @@ abstract class _AplGetTotalPriceDto extends AplGetTotalPriceDto {
       required final int grandTotal,
       @JsonKey(name: 'Tax', defaultValue: 0) required final int tax,
       @JsonKey(name: 'DeliveryFee', defaultValue: 0)
-      required final int deliveryFee}) = _$_AplGetTotalPriceDto;
+      required final int deliveryFee}) = _$AplGetTotalPriceDtoImpl;
   const _AplGetTotalPriceDto._() : super._();
 
   factory _AplGetTotalPriceDto.fromJson(Map<String, dynamic> json) =
-      _$_AplGetTotalPriceDto.fromJson;
+      _$AplGetTotalPriceDtoImpl.fromJson;
 
   @override
   @JsonKey(name: 'TotalPrice', defaultValue: 0)
@@ -206,6 +206,6 @@ abstract class _AplGetTotalPriceDto extends AplGetTotalPriceDto {
   int get deliveryFee;
   @override
   @JsonKey(ignore: true)
-  _$$_AplGetTotalPriceDtoCopyWith<_$_AplGetTotalPriceDto> get copyWith =>
+  _$$AplGetTotalPriceDtoImplCopyWith<_$AplGetTotalPriceDtoImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

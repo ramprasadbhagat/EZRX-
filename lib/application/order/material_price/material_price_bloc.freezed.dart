@@ -12,7 +12,7 @@ part of 'material_price_bloc.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$MaterialPriceEvent {
@@ -115,10 +115,10 @@ class _$MaterialPriceEventCopyWithImpl<$Res, $Val extends MaterialPriceEvent>
 }
 
 /// @nodoc
-abstract class _$$_InitializedCopyWith<$Res> {
-  factory _$$_InitializedCopyWith(
-          _$_Initialized value, $Res Function(_$_Initialized) then) =
-      __$$_InitializedCopyWithImpl<$Res>;
+abstract class _$$InitializedImplCopyWith<$Res> {
+  factory _$$InitializedImplCopyWith(
+          _$InitializedImpl value, $Res Function(_$InitializedImpl) then) =
+      __$$InitializedImplCopyWithImpl<$Res>;
   @useResult
   $Res call(
       {CustomerCodeInfo customerCodeInfo,
@@ -133,11 +133,11 @@ abstract class _$$_InitializedCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_InitializedCopyWithImpl<$Res>
-    extends _$MaterialPriceEventCopyWithImpl<$Res, _$_Initialized>
-    implements _$$_InitializedCopyWith<$Res> {
-  __$$_InitializedCopyWithImpl(
-      _$_Initialized _value, $Res Function(_$_Initialized) _then)
+class __$$InitializedImplCopyWithImpl<$Res>
+    extends _$MaterialPriceEventCopyWithImpl<$Res, _$InitializedImpl>
+    implements _$$InitializedImplCopyWith<$Res> {
+  __$$InitializedImplCopyWithImpl(
+      _$InitializedImpl _value, $Res Function(_$InitializedImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -148,7 +148,7 @@ class __$$_InitializedCopyWithImpl<$Res>
     Object? salesConfigs = null,
     Object? shipToInfo = null,
   }) {
-    return _then(_$_Initialized(
+    return _then(_$InitializedImpl(
       customerCodeInfo: null == customerCodeInfo
           ? _value.customerCodeInfo
           : customerCodeInfo // ignore: cast_nullable_to_non_nullable
@@ -204,8 +204,8 @@ class __$$_InitializedCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_Initialized implements _Initialized {
-  const _$_Initialized(
+class _$InitializedImpl implements _Initialized {
+  const _$InitializedImpl(
       {required this.customerCodeInfo,
       required this.salesOrganisation,
       required this.salesConfigs,
@@ -226,10 +226,10 @@ class _$_Initialized implements _Initialized {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Initialized &&
+            other is _$InitializedImpl &&
             (identical(other.customerCodeInfo, customerCodeInfo) ||
                 other.customerCodeInfo == customerCodeInfo) &&
             (identical(other.salesOrganisation, salesOrganisation) ||
@@ -247,8 +247,8 @@ class _$_Initialized implements _Initialized {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_InitializedCopyWith<_$_Initialized> get copyWith =>
-      __$$_InitializedCopyWithImpl<_$_Initialized>(this, _$identity);
+  _$$InitializedImplCopyWith<_$InitializedImpl> get copyWith =>
+      __$$InitializedImplCopyWithImpl<_$InitializedImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -361,30 +361,32 @@ abstract class _Initialized implements MaterialPriceEvent {
       {required final CustomerCodeInfo customerCodeInfo,
       required final SalesOrganisation salesOrganisation,
       required final SalesOrganisationConfigs salesConfigs,
-      required final ShipToInfo shipToInfo}) = _$_Initialized;
+      required final ShipToInfo shipToInfo}) = _$InitializedImpl;
 
   CustomerCodeInfo get customerCodeInfo;
   SalesOrganisation get salesOrganisation;
   SalesOrganisationConfigs get salesConfigs;
   ShipToInfo get shipToInfo;
   @JsonKey(ignore: true)
-  _$$_InitializedCopyWith<_$_Initialized> get copyWith =>
+  _$$InitializedImplCopyWith<_$InitializedImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_FetchCopyWith<$Res> {
-  factory _$$_FetchCopyWith(_$_Fetch value, $Res Function(_$_Fetch) then) =
-      __$$_FetchCopyWithImpl<$Res>;
+abstract class _$$FetchImplCopyWith<$Res> {
+  factory _$$FetchImplCopyWith(
+          _$FetchImpl value, $Res Function(_$FetchImpl) then) =
+      __$$FetchImplCopyWithImpl<$Res>;
   @useResult
   $Res call({List<MaterialInfo> materials, bool comboDealEligible});
 }
 
 /// @nodoc
-class __$$_FetchCopyWithImpl<$Res>
-    extends _$MaterialPriceEventCopyWithImpl<$Res, _$_Fetch>
-    implements _$$_FetchCopyWith<$Res> {
-  __$$_FetchCopyWithImpl(_$_Fetch _value, $Res Function(_$_Fetch) _then)
+class __$$FetchImplCopyWithImpl<$Res>
+    extends _$MaterialPriceEventCopyWithImpl<$Res, _$FetchImpl>
+    implements _$$FetchImplCopyWith<$Res> {
+  __$$FetchImplCopyWithImpl(
+      _$FetchImpl _value, $Res Function(_$FetchImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -393,7 +395,7 @@ class __$$_FetchCopyWithImpl<$Res>
     Object? materials = null,
     Object? comboDealEligible = null,
   }) {
-    return _then(_$_Fetch(
+    return _then(_$FetchImpl(
       materials: null == materials
           ? _value._materials
           : materials // ignore: cast_nullable_to_non_nullable
@@ -408,8 +410,8 @@ class __$$_FetchCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_Fetch implements _Fetch {
-  const _$_Fetch(
+class _$FetchImpl implements _Fetch {
+  const _$FetchImpl(
       {required final List<MaterialInfo> materials,
       required this.comboDealEligible})
       : _materials = materials;
@@ -431,10 +433,10 @@ class _$_Fetch implements _Fetch {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Fetch &&
+            other is _$FetchImpl &&
             const DeepCollectionEquality()
                 .equals(other._materials, _materials) &&
             (identical(other.comboDealEligible, comboDealEligible) ||
@@ -448,8 +450,8 @@ class _$_Fetch implements _Fetch {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_FetchCopyWith<_$_Fetch> get copyWith =>
-      __$$_FetchCopyWithImpl<_$_Fetch>(this, _$identity);
+  _$$FetchImplCopyWith<_$FetchImpl> get copyWith =>
+      __$$FetchImplCopyWithImpl<_$FetchImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -557,30 +559,31 @@ class _$_Fetch implements _Fetch {
 abstract class _Fetch implements MaterialPriceEvent {
   const factory _Fetch(
       {required final List<MaterialInfo> materials,
-      required final bool comboDealEligible}) = _$_Fetch;
+      required final bool comboDealEligible}) = _$FetchImpl;
 
   List<MaterialInfo> get materials;
   bool get comboDealEligible;
   @JsonKey(ignore: true)
-  _$$_FetchCopyWith<_$_Fetch> get copyWith =>
+  _$$FetchImplCopyWith<_$FetchImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_FetchPriceCartProductCopyWith<$Res> {
-  factory _$$_FetchPriceCartProductCopyWith(_$_FetchPriceCartProduct value,
-          $Res Function(_$_FetchPriceCartProduct) then) =
-      __$$_FetchPriceCartProductCopyWithImpl<$Res>;
+abstract class _$$FetchPriceCartProductImplCopyWith<$Res> {
+  factory _$$FetchPriceCartProductImplCopyWith(
+          _$FetchPriceCartProductImpl value,
+          $Res Function(_$FetchPriceCartProductImpl) then) =
+      __$$FetchPriceCartProductImplCopyWithImpl<$Res>;
   @useResult
   $Res call({List<MaterialInfo> products, bool comboDealEligible});
 }
 
 /// @nodoc
-class __$$_FetchPriceCartProductCopyWithImpl<$Res>
-    extends _$MaterialPriceEventCopyWithImpl<$Res, _$_FetchPriceCartProduct>
-    implements _$$_FetchPriceCartProductCopyWith<$Res> {
-  __$$_FetchPriceCartProductCopyWithImpl(_$_FetchPriceCartProduct _value,
-      $Res Function(_$_FetchPriceCartProduct) _then)
+class __$$FetchPriceCartProductImplCopyWithImpl<$Res>
+    extends _$MaterialPriceEventCopyWithImpl<$Res, _$FetchPriceCartProductImpl>
+    implements _$$FetchPriceCartProductImplCopyWith<$Res> {
+  __$$FetchPriceCartProductImplCopyWithImpl(_$FetchPriceCartProductImpl _value,
+      $Res Function(_$FetchPriceCartProductImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -589,7 +592,7 @@ class __$$_FetchPriceCartProductCopyWithImpl<$Res>
     Object? products = null,
     Object? comboDealEligible = null,
   }) {
-    return _then(_$_FetchPriceCartProduct(
+    return _then(_$FetchPriceCartProductImpl(
       products: null == products
           ? _value._products
           : products // ignore: cast_nullable_to_non_nullable
@@ -604,8 +607,8 @@ class __$$_FetchPriceCartProductCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_FetchPriceCartProduct implements _FetchPriceCartProduct {
-  const _$_FetchPriceCartProduct(
+class _$FetchPriceCartProductImpl implements _FetchPriceCartProduct {
+  const _$FetchPriceCartProductImpl(
       {required final List<MaterialInfo> products,
       required this.comboDealEligible})
       : _products = products;
@@ -627,10 +630,10 @@ class _$_FetchPriceCartProduct implements _FetchPriceCartProduct {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_FetchPriceCartProduct &&
+            other is _$FetchPriceCartProductImpl &&
             const DeepCollectionEquality().equals(other._products, _products) &&
             (identical(other.comboDealEligible, comboDealEligible) ||
                 other.comboDealEligible == comboDealEligible));
@@ -643,9 +646,9 @@ class _$_FetchPriceCartProduct implements _FetchPriceCartProduct {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_FetchPriceCartProductCopyWith<_$_FetchPriceCartProduct> get copyWith =>
-      __$$_FetchPriceCartProductCopyWithImpl<_$_FetchPriceCartProduct>(
-          this, _$identity);
+  _$$FetchPriceCartProductImplCopyWith<_$FetchPriceCartProductImpl>
+      get copyWith => __$$FetchPriceCartProductImplCopyWithImpl<
+          _$FetchPriceCartProductImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -753,21 +756,21 @@ class _$_FetchPriceCartProduct implements _FetchPriceCartProduct {
 abstract class _FetchPriceCartProduct implements MaterialPriceEvent {
   const factory _FetchPriceCartProduct(
       {required final List<MaterialInfo> products,
-      required final bool comboDealEligible}) = _$_FetchPriceCartProduct;
+      required final bool comboDealEligible}) = _$FetchPriceCartProductImpl;
 
   List<MaterialInfo> get products;
   bool get comboDealEligible;
   @JsonKey(ignore: true)
-  _$$_FetchPriceCartProductCopyWith<_$_FetchPriceCartProduct> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$FetchPriceCartProductImplCopyWith<_$FetchPriceCartProductImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_FetchPriceForZDP5MaterialsCopyWith<$Res> {
-  factory _$$_FetchPriceForZDP5MaterialsCopyWith(
-          _$_FetchPriceForZDP5Materials value,
-          $Res Function(_$_FetchPriceForZDP5Materials) then) =
-      __$$_FetchPriceForZDP5MaterialsCopyWithImpl<$Res>;
+abstract class _$$FetchPriceForZDP5MaterialsImplCopyWith<$Res> {
+  factory _$$FetchPriceForZDP5MaterialsImplCopyWith(
+          _$FetchPriceForZDP5MaterialsImpl value,
+          $Res Function(_$FetchPriceForZDP5MaterialsImpl) then) =
+      __$$FetchPriceForZDP5MaterialsImplCopyWithImpl<$Res>;
   @useResult
   $Res call({MaterialInfo materialInfo});
 
@@ -775,13 +778,13 @@ abstract class _$$_FetchPriceForZDP5MaterialsCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_FetchPriceForZDP5MaterialsCopyWithImpl<$Res>
+class __$$FetchPriceForZDP5MaterialsImplCopyWithImpl<$Res>
     extends _$MaterialPriceEventCopyWithImpl<$Res,
-        _$_FetchPriceForZDP5Materials>
-    implements _$$_FetchPriceForZDP5MaterialsCopyWith<$Res> {
-  __$$_FetchPriceForZDP5MaterialsCopyWithImpl(
-      _$_FetchPriceForZDP5Materials _value,
-      $Res Function(_$_FetchPriceForZDP5Materials) _then)
+        _$FetchPriceForZDP5MaterialsImpl>
+    implements _$$FetchPriceForZDP5MaterialsImplCopyWith<$Res> {
+  __$$FetchPriceForZDP5MaterialsImplCopyWithImpl(
+      _$FetchPriceForZDP5MaterialsImpl _value,
+      $Res Function(_$FetchPriceForZDP5MaterialsImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -789,7 +792,7 @@ class __$$_FetchPriceForZDP5MaterialsCopyWithImpl<$Res>
   $Res call({
     Object? materialInfo = null,
   }) {
-    return _then(_$_FetchPriceForZDP5Materials(
+    return _then(_$FetchPriceForZDP5MaterialsImpl(
       materialInfo: null == materialInfo
           ? _value.materialInfo
           : materialInfo // ignore: cast_nullable_to_non_nullable
@@ -808,8 +811,8 @@ class __$$_FetchPriceForZDP5MaterialsCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_FetchPriceForZDP5Materials implements _FetchPriceForZDP5Materials {
-  const _$_FetchPriceForZDP5Materials({required this.materialInfo});
+class _$FetchPriceForZDP5MaterialsImpl implements _FetchPriceForZDP5Materials {
+  const _$FetchPriceForZDP5MaterialsImpl({required this.materialInfo});
 
   @override
   final MaterialInfo materialInfo;
@@ -820,10 +823,10 @@ class _$_FetchPriceForZDP5Materials implements _FetchPriceForZDP5Materials {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_FetchPriceForZDP5Materials &&
+            other is _$FetchPriceForZDP5MaterialsImpl &&
             (identical(other.materialInfo, materialInfo) ||
                 other.materialInfo == materialInfo));
   }
@@ -834,9 +837,9 @@ class _$_FetchPriceForZDP5Materials implements _FetchPriceForZDP5Materials {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_FetchPriceForZDP5MaterialsCopyWith<_$_FetchPriceForZDP5Materials>
-      get copyWith => __$$_FetchPriceForZDP5MaterialsCopyWithImpl<
-          _$_FetchPriceForZDP5Materials>(this, _$identity);
+  _$$FetchPriceForZDP5MaterialsImplCopyWith<_$FetchPriceForZDP5MaterialsImpl>
+      get copyWith => __$$FetchPriceForZDP5MaterialsImplCopyWithImpl<
+          _$FetchPriceForZDP5MaterialsImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -944,11 +947,11 @@ class _$_FetchPriceForZDP5Materials implements _FetchPriceForZDP5Materials {
 abstract class _FetchPriceForZDP5Materials implements MaterialPriceEvent {
   const factory _FetchPriceForZDP5Materials(
           {required final MaterialInfo materialInfo}) =
-      _$_FetchPriceForZDP5Materials;
+      _$FetchPriceForZDP5MaterialsImpl;
 
   MaterialInfo get materialInfo;
   @JsonKey(ignore: true)
-  _$$_FetchPriceForZDP5MaterialsCopyWith<_$_FetchPriceForZDP5Materials>
+  _$$FetchPriceForZDP5MaterialsImplCopyWith<_$FetchPriceForZDP5MaterialsImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -1071,11 +1074,11 @@ class _$MaterialPriceStateCopyWithImpl<$Res, $Val extends MaterialPriceState>
 }
 
 /// @nodoc
-abstract class _$$_MaterialPriceStateCopyWith<$Res>
+abstract class _$$MaterialPriceStateImplCopyWith<$Res>
     implements $MaterialPriceStateCopyWith<$Res> {
-  factory _$$_MaterialPriceStateCopyWith(_$_MaterialPriceState value,
-          $Res Function(_$_MaterialPriceState) then) =
-      __$$_MaterialPriceStateCopyWithImpl<$Res>;
+  factory _$$MaterialPriceStateImplCopyWith(_$MaterialPriceStateImpl value,
+          $Res Function(_$MaterialPriceStateImpl) then) =
+      __$$MaterialPriceStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -1097,11 +1100,11 @@ abstract class _$$_MaterialPriceStateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_MaterialPriceStateCopyWithImpl<$Res>
-    extends _$MaterialPriceStateCopyWithImpl<$Res, _$_MaterialPriceState>
-    implements _$$_MaterialPriceStateCopyWith<$Res> {
-  __$$_MaterialPriceStateCopyWithImpl(
-      _$_MaterialPriceState _value, $Res Function(_$_MaterialPriceState) _then)
+class __$$MaterialPriceStateImplCopyWithImpl<$Res>
+    extends _$MaterialPriceStateCopyWithImpl<$Res, _$MaterialPriceStateImpl>
+    implements _$$MaterialPriceStateImplCopyWith<$Res> {
+  __$$MaterialPriceStateImplCopyWithImpl(_$MaterialPriceStateImpl _value,
+      $Res Function(_$MaterialPriceStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1114,7 +1117,7 @@ class __$$_MaterialPriceStateCopyWithImpl<$Res>
     Object? materialPrice = null,
     Object? isFetching = null,
   }) {
-    return _then(_$_MaterialPriceState(
+    return _then(_$MaterialPriceStateImpl(
       customerCodeInfo: null == customerCodeInfo
           ? _value.customerCodeInfo
           : customerCodeInfo // ignore: cast_nullable_to_non_nullable
@@ -1145,8 +1148,8 @@ class __$$_MaterialPriceStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_MaterialPriceState extends _MaterialPriceState {
-  const _$_MaterialPriceState(
+class _$MaterialPriceStateImpl extends _MaterialPriceState {
+  const _$MaterialPriceStateImpl(
       {required this.customerCodeInfo,
       required this.salesOrganisation,
       required this.salesConfigs,
@@ -1181,10 +1184,10 @@ class _$_MaterialPriceState extends _MaterialPriceState {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_MaterialPriceState &&
+            other is _$MaterialPriceStateImpl &&
             (identical(other.customerCodeInfo, customerCodeInfo) ||
                 other.customerCodeInfo == customerCodeInfo) &&
             (identical(other.salesOrganisation, salesOrganisation) ||
@@ -1212,8 +1215,8 @@ class _$_MaterialPriceState extends _MaterialPriceState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_MaterialPriceStateCopyWith<_$_MaterialPriceState> get copyWith =>
-      __$$_MaterialPriceStateCopyWithImpl<_$_MaterialPriceState>(
+  _$$MaterialPriceStateImplCopyWith<_$MaterialPriceStateImpl> get copyWith =>
+      __$$MaterialPriceStateImplCopyWithImpl<_$MaterialPriceStateImpl>(
           this, _$identity);
 }
 
@@ -1224,7 +1227,7 @@ abstract class _MaterialPriceState extends MaterialPriceState {
       required final SalesOrganisationConfigs salesConfigs,
       required final ShipToInfo shipToInfo,
       required final Map<MaterialNumber, Price> materialPrice,
-      required final bool isFetching}) = _$_MaterialPriceState;
+      required final bool isFetching}) = _$MaterialPriceStateImpl;
   const _MaterialPriceState._() : super._();
 
   @override
@@ -1241,6 +1244,6 @@ abstract class _MaterialPriceState extends MaterialPriceState {
   bool get isFetching;
   @override
   @JsonKey(ignore: true)
-  _$$_MaterialPriceStateCopyWith<_$_MaterialPriceState> get copyWith =>
+  _$$MaterialPriceStateImplCopyWith<_$MaterialPriceStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -12,7 +12,7 @@ part of 'ship_to_dto.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 ShipToDto _$ShipToDtoFromJson(Map<String, dynamic> json) {
   return _ShipToDto.fromJson(json);
@@ -260,10 +260,11 @@ class _$ShipToDtoCopyWithImpl<$Res, $Val extends ShipToDto>
 }
 
 /// @nodoc
-abstract class _$$_ShipToDtoCopyWith<$Res> implements $ShipToDtoCopyWith<$Res> {
-  factory _$$_ShipToDtoCopyWith(
-          _$_ShipToDto value, $Res Function(_$_ShipToDto) then) =
-      __$$_ShipToDtoCopyWithImpl<$Res>;
+abstract class _$$ShipToDtoImplCopyWith<$Res>
+    implements $ShipToDtoCopyWith<$Res> {
+  factory _$$ShipToDtoImplCopyWith(
+          _$ShipToDtoImpl value, $Res Function(_$ShipToDtoImpl) then) =
+      __$$ShipToDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -300,11 +301,11 @@ abstract class _$$_ShipToDtoCopyWith<$Res> implements $ShipToDtoCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_ShipToDtoCopyWithImpl<$Res>
-    extends _$ShipToDtoCopyWithImpl<$Res, _$_ShipToDto>
-    implements _$$_ShipToDtoCopyWith<$Res> {
-  __$$_ShipToDtoCopyWithImpl(
-      _$_ShipToDto _value, $Res Function(_$_ShipToDto) _then)
+class __$$ShipToDtoImplCopyWithImpl<$Res>
+    extends _$ShipToDtoCopyWithImpl<$Res, _$ShipToDtoImpl>
+    implements _$$ShipToDtoImplCopyWith<$Res> {
+  __$$ShipToDtoImplCopyWithImpl(
+      _$ShipToDtoImpl _value, $Res Function(_$ShipToDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -336,7 +337,7 @@ class __$$_ShipToDtoCopyWithImpl<$Res>
     Object? targetCustomerType = null,
     Object? customerBlock = null,
   }) {
-    return _then(_$_ShipToDto(
+    return _then(_$ShipToDtoImpl(
       shipToCustomerCode: null == shipToCustomerCode
           ? _value.shipToCustomerCode
           : shipToCustomerCode // ignore: cast_nullable_to_non_nullable
@@ -443,8 +444,8 @@ class __$$_ShipToDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_ShipToDto extends _ShipToDto {
-  const _$_ShipToDto(
+class _$ShipToDtoImpl extends _ShipToDto {
+  const _$ShipToDtoImpl(
       {@JsonKey(name: 'shipToCustomerCode', defaultValue: '')
       required this.shipToCustomerCode,
       @JsonKey(name: 'defaultShipToAddress', defaultValue: true)
@@ -480,8 +481,8 @@ class _$_ShipToDto extends _ShipToDto {
       : _licenseDtoList = licenseDtoList,
         super._();
 
-  factory _$_ShipToDto.fromJson(Map<String, dynamic> json) =>
-      _$$_ShipToDtoFromJson(json);
+  factory _$ShipToDtoImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ShipToDtoImplFromJson(json);
 
   @override
   @JsonKey(name: 'shipToCustomerCode', defaultValue: '')
@@ -571,10 +572,10 @@ class _$_ShipToDto extends _ShipToDto {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ShipToDto &&
+            other is _$ShipToDtoImpl &&
             (identical(other.shipToCustomerCode, shipToCustomerCode) ||
                 other.shipToCustomerCode == shipToCustomerCode) &&
             (identical(other.defaultShipToAddress, defaultShipToAddress) ||
@@ -645,12 +646,12 @@ class _$_ShipToDto extends _ShipToDto {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ShipToDtoCopyWith<_$_ShipToDto> get copyWith =>
-      __$$_ShipToDtoCopyWithImpl<_$_ShipToDto>(this, _$identity);
+  _$$ShipToDtoImplCopyWith<_$ShipToDtoImpl> get copyWith =>
+      __$$ShipToDtoImplCopyWithImpl<_$ShipToDtoImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_ShipToDtoToJson(
+    return _$$ShipToDtoImplToJson(
       this,
     );
   }
@@ -691,11 +692,11 @@ abstract class _ShipToDto extends ShipToDto {
       @JsonKey(name: 'targetCustomerType', defaultValue: '')
       required final String targetCustomerType,
       @JsonKey(name: 'customerBlock', defaultValue: '')
-      required final String customerBlock}) = _$_ShipToDto;
+      required final String customerBlock}) = _$ShipToDtoImpl;
   const _ShipToDto._() : super._();
 
   factory _ShipToDto.fromJson(Map<String, dynamic> json) =
-      _$_ShipToDto.fromJson;
+      _$ShipToDtoImpl.fromJson;
 
   @override
   @JsonKey(name: 'shipToCustomerCode', defaultValue: '')
@@ -774,6 +775,6 @@ abstract class _ShipToDto extends ShipToDto {
   String get customerBlock;
   @override
   @JsonKey(ignore: true)
-  _$$_ShipToDtoCopyWith<_$_ShipToDto> get copyWith =>
+  _$$ShipToDtoImplCopyWith<_$ShipToDtoImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

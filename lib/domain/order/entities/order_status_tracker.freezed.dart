@@ -12,7 +12,7 @@ part of 'order_status_tracker.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$OrderStatusTracker {
@@ -100,11 +100,11 @@ class _$OrderStatusTrackerCopyWithImpl<$Res, $Val extends OrderStatusTracker>
 }
 
 /// @nodoc
-abstract class _$$_OrderStatusTrackerCopyWith<$Res>
+abstract class _$$OrderStatusTrackerImplCopyWith<$Res>
     implements $OrderStatusTrackerCopyWith<$Res> {
-  factory _$$_OrderStatusTrackerCopyWith(_$_OrderStatusTracker value,
-          $Res Function(_$_OrderStatusTracker) then) =
-      __$$_OrderStatusTrackerCopyWithImpl<$Res>;
+  factory _$$OrderStatusTrackerImplCopyWith(_$OrderStatusTrackerImpl value,
+          $Res Function(_$OrderStatusTrackerImpl) then) =
+      __$$OrderStatusTrackerImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -118,11 +118,11 @@ abstract class _$$_OrderStatusTrackerCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_OrderStatusTrackerCopyWithImpl<$Res>
-    extends _$OrderStatusTrackerCopyWithImpl<$Res, _$_OrderStatusTracker>
-    implements _$$_OrderStatusTrackerCopyWith<$Res> {
-  __$$_OrderStatusTrackerCopyWithImpl(
-      _$_OrderStatusTracker _value, $Res Function(_$_OrderStatusTracker) _then)
+class __$$OrderStatusTrackerImplCopyWithImpl<$Res>
+    extends _$OrderStatusTrackerCopyWithImpl<$Res, _$OrderStatusTrackerImpl>
+    implements _$$OrderStatusTrackerImplCopyWith<$Res> {
+  __$$OrderStatusTrackerImplCopyWithImpl(_$OrderStatusTrackerImpl _value,
+      $Res Function(_$OrderStatusTrackerImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -136,7 +136,7 @@ class __$$_OrderStatusTrackerCopyWithImpl<$Res>
     Object? updateTimeStamp = null,
     Object? preformedAt = null,
   }) {
-    return _then(_$_OrderStatusTracker(
+    return _then(_$OrderStatusTrackerImpl(
       action: null == action
           ? _value.action
           : action // ignore: cast_nullable_to_non_nullable
@@ -171,8 +171,8 @@ class __$$_OrderStatusTrackerCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_OrderStatusTracker extends _OrderStatusTracker {
-  _$_OrderStatusTracker(
+class _$OrderStatusTrackerImpl extends _OrderStatusTracker {
+  _$OrderStatusTrackerImpl(
       {required this.action,
       required this.stepName,
       required this.stepStage,
@@ -203,10 +203,10 @@ class _$_OrderStatusTracker extends _OrderStatusTracker {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_OrderStatusTracker &&
+            other is _$OrderStatusTrackerImpl &&
             (identical(other.action, action) || other.action == action) &&
             (identical(other.stepName, stepName) ||
                 other.stepName == stepName) &&
@@ -227,20 +227,21 @@ class _$_OrderStatusTracker extends _OrderStatusTracker {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_OrderStatusTrackerCopyWith<_$_OrderStatusTracker> get copyWith =>
-      __$$_OrderStatusTrackerCopyWithImpl<_$_OrderStatusTracker>(
+  _$$OrderStatusTrackerImplCopyWith<_$OrderStatusTrackerImpl> get copyWith =>
+      __$$OrderStatusTrackerImplCopyWithImpl<_$OrderStatusTrackerImpl>(
           this, _$identity);
 }
 
 abstract class _OrderStatusTracker extends OrderStatusTracker {
   factory _OrderStatusTracker(
-      {required final String action,
-      required final String stepName,
-      required final String stepStage,
-      required final String state,
-      required final StatusType status,
-      required final DateTimeStringValue updateTimeStamp,
-      required final DateTimeStringValue preformedAt}) = _$_OrderStatusTracker;
+          {required final String action,
+          required final String stepName,
+          required final String stepStage,
+          required final String state,
+          required final StatusType status,
+          required final DateTimeStringValue updateTimeStamp,
+          required final DateTimeStringValue preformedAt}) =
+      _$OrderStatusTrackerImpl;
   _OrderStatusTracker._() : super._();
 
   @override
@@ -259,6 +260,6 @@ abstract class _OrderStatusTracker extends OrderStatusTracker {
   DateTimeStringValue get preformedAt;
   @override
   @JsonKey(ignore: true)
-  _$$_OrderStatusTrackerCopyWith<_$_OrderStatusTracker> get copyWith =>
+  _$$OrderStatusTrackerImplCopyWith<_$OrderStatusTrackerImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

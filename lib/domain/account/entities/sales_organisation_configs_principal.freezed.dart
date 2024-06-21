@@ -12,7 +12,7 @@ part of 'sales_organisation_configs_principal.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$SalesOrganisationConfigsPrincipal {
@@ -66,25 +66,25 @@ class _$SalesOrganisationConfigsPrincipalCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_SalesOrganisationConfigsPrincipalCopyWith<$Res>
+abstract class _$$SalesOrganisationConfigsPrincipalImplCopyWith<$Res>
     implements $SalesOrganisationConfigsPrincipalCopyWith<$Res> {
-  factory _$$_SalesOrganisationConfigsPrincipalCopyWith(
-          _$_SalesOrganisationConfigsPrincipal value,
-          $Res Function(_$_SalesOrganisationConfigsPrincipal) then) =
-      __$$_SalesOrganisationConfigsPrincipalCopyWithImpl<$Res>;
+  factory _$$SalesOrganisationConfigsPrincipalImplCopyWith(
+          _$SalesOrganisationConfigsPrincipalImpl value,
+          $Res Function(_$SalesOrganisationConfigsPrincipalImpl) then) =
+      __$$SalesOrganisationConfigsPrincipalImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({DateTimeStringValue date, PrincipalCode principalCode});
 }
 
 /// @nodoc
-class __$$_SalesOrganisationConfigsPrincipalCopyWithImpl<$Res>
+class __$$SalesOrganisationConfigsPrincipalImplCopyWithImpl<$Res>
     extends _$SalesOrganisationConfigsPrincipalCopyWithImpl<$Res,
-        _$_SalesOrganisationConfigsPrincipal>
-    implements _$$_SalesOrganisationConfigsPrincipalCopyWith<$Res> {
-  __$$_SalesOrganisationConfigsPrincipalCopyWithImpl(
-      _$_SalesOrganisationConfigsPrincipal _value,
-      $Res Function(_$_SalesOrganisationConfigsPrincipal) _then)
+        _$SalesOrganisationConfigsPrincipalImpl>
+    implements _$$SalesOrganisationConfigsPrincipalImplCopyWith<$Res> {
+  __$$SalesOrganisationConfigsPrincipalImplCopyWithImpl(
+      _$SalesOrganisationConfigsPrincipalImpl _value,
+      $Res Function(_$SalesOrganisationConfigsPrincipalImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -93,7 +93,7 @@ class __$$_SalesOrganisationConfigsPrincipalCopyWithImpl<$Res>
     Object? date = null,
     Object? principalCode = null,
   }) {
-    return _then(_$_SalesOrganisationConfigsPrincipal(
+    return _then(_$SalesOrganisationConfigsPrincipalImpl(
       date: null == date
           ? _value.date
           : date // ignore: cast_nullable_to_non_nullable
@@ -108,9 +108,9 @@ class __$$_SalesOrganisationConfigsPrincipalCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_SalesOrganisationConfigsPrincipal
+class _$SalesOrganisationConfigsPrincipalImpl
     extends _SalesOrganisationConfigsPrincipal {
-  const _$_SalesOrganisationConfigsPrincipal(
+  const _$SalesOrganisationConfigsPrincipalImpl(
       {required this.date, required this.principalCode})
       : super._();
 
@@ -125,10 +125,10 @@ class _$_SalesOrganisationConfigsPrincipal
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_SalesOrganisationConfigsPrincipal &&
+            other is _$SalesOrganisationConfigsPrincipalImpl &&
             (identical(other.date, date) || other.date == date) &&
             (identical(other.principalCode, principalCode) ||
                 other.principalCode == principalCode));
@@ -140,10 +140,10 @@ class _$_SalesOrganisationConfigsPrincipal
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_SalesOrganisationConfigsPrincipalCopyWith<
-          _$_SalesOrganisationConfigsPrincipal>
-      get copyWith => __$$_SalesOrganisationConfigsPrincipalCopyWithImpl<
-          _$_SalesOrganisationConfigsPrincipal>(this, _$identity);
+  _$$SalesOrganisationConfigsPrincipalImplCopyWith<
+          _$SalesOrganisationConfigsPrincipalImpl>
+      get copyWith => __$$SalesOrganisationConfigsPrincipalImplCopyWithImpl<
+          _$SalesOrganisationConfigsPrincipalImpl>(this, _$identity);
 }
 
 abstract class _SalesOrganisationConfigsPrincipal
@@ -151,7 +151,7 @@ abstract class _SalesOrganisationConfigsPrincipal
   const factory _SalesOrganisationConfigsPrincipal(
           {required final DateTimeStringValue date,
           required final PrincipalCode principalCode}) =
-      _$_SalesOrganisationConfigsPrincipal;
+      _$SalesOrganisationConfigsPrincipalImpl;
   const _SalesOrganisationConfigsPrincipal._() : super._();
 
   @override
@@ -160,7 +160,7 @@ abstract class _SalesOrganisationConfigsPrincipal
   PrincipalCode get principalCode;
   @override
   @JsonKey(ignore: true)
-  _$$_SalesOrganisationConfigsPrincipalCopyWith<
-          _$_SalesOrganisationConfigsPrincipal>
+  _$$SalesOrganisationConfigsPrincipalImplCopyWith<
+          _$SalesOrganisationConfigsPrincipalImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

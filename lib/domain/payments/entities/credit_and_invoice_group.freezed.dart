@@ -12,7 +12,7 @@ part of 'credit_and_invoice_group.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$CreditAndInvoiceGroup {
@@ -64,22 +64,24 @@ class _$CreditAndInvoiceGroupCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_CreditAndInvoiceGroupCopyWith<$Res>
+abstract class _$$CreditAndInvoiceGroupImplCopyWith<$Res>
     implements $CreditAndInvoiceGroupCopyWith<$Res> {
-  factory _$$_CreditAndInvoiceGroupCopyWith(_$_CreditAndInvoiceGroup value,
-          $Res Function(_$_CreditAndInvoiceGroup) then) =
-      __$$_CreditAndInvoiceGroupCopyWithImpl<$Res>;
+  factory _$$CreditAndInvoiceGroupImplCopyWith(
+          _$CreditAndInvoiceGroupImpl value,
+          $Res Function(_$CreditAndInvoiceGroupImpl) then) =
+      __$$CreditAndInvoiceGroupImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({DateTimeStringValue dueDate, List<CreditAndInvoiceItem> items});
 }
 
 /// @nodoc
-class __$$_CreditAndInvoiceGroupCopyWithImpl<$Res>
-    extends _$CreditAndInvoiceGroupCopyWithImpl<$Res, _$_CreditAndInvoiceGroup>
-    implements _$$_CreditAndInvoiceGroupCopyWith<$Res> {
-  __$$_CreditAndInvoiceGroupCopyWithImpl(_$_CreditAndInvoiceGroup _value,
-      $Res Function(_$_CreditAndInvoiceGroup) _then)
+class __$$CreditAndInvoiceGroupImplCopyWithImpl<$Res>
+    extends _$CreditAndInvoiceGroupCopyWithImpl<$Res,
+        _$CreditAndInvoiceGroupImpl>
+    implements _$$CreditAndInvoiceGroupImplCopyWith<$Res> {
+  __$$CreditAndInvoiceGroupImplCopyWithImpl(_$CreditAndInvoiceGroupImpl _value,
+      $Res Function(_$CreditAndInvoiceGroupImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -88,7 +90,7 @@ class __$$_CreditAndInvoiceGroupCopyWithImpl<$Res>
     Object? dueDate = null,
     Object? items = null,
   }) {
-    return _then(_$_CreditAndInvoiceGroup(
+    return _then(_$CreditAndInvoiceGroupImpl(
       dueDate: null == dueDate
           ? _value.dueDate
           : dueDate // ignore: cast_nullable_to_non_nullable
@@ -103,8 +105,8 @@ class __$$_CreditAndInvoiceGroupCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_CreditAndInvoiceGroup implements _CreditAndInvoiceGroup {
-  _$_CreditAndInvoiceGroup(
+class _$CreditAndInvoiceGroupImpl implements _CreditAndInvoiceGroup {
+  _$CreditAndInvoiceGroupImpl(
       {required this.dueDate, required final List<CreditAndInvoiceItem> items})
       : _items = items;
 
@@ -124,10 +126,10 @@ class _$_CreditAndInvoiceGroup implements _CreditAndInvoiceGroup {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_CreditAndInvoiceGroup &&
+            other is _$CreditAndInvoiceGroupImpl &&
             (identical(other.dueDate, dueDate) || other.dueDate == dueDate) &&
             const DeepCollectionEquality().equals(other._items, _items));
   }
@@ -139,16 +141,16 @@ class _$_CreditAndInvoiceGroup implements _CreditAndInvoiceGroup {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_CreditAndInvoiceGroupCopyWith<_$_CreditAndInvoiceGroup> get copyWith =>
-      __$$_CreditAndInvoiceGroupCopyWithImpl<_$_CreditAndInvoiceGroup>(
-          this, _$identity);
+  _$$CreditAndInvoiceGroupImplCopyWith<_$CreditAndInvoiceGroupImpl>
+      get copyWith => __$$CreditAndInvoiceGroupImplCopyWithImpl<
+          _$CreditAndInvoiceGroupImpl>(this, _$identity);
 }
 
 abstract class _CreditAndInvoiceGroup implements CreditAndInvoiceGroup {
   factory _CreditAndInvoiceGroup(
           {required final DateTimeStringValue dueDate,
           required final List<CreditAndInvoiceItem> items}) =
-      _$_CreditAndInvoiceGroup;
+      _$CreditAndInvoiceGroupImpl;
 
   @override
   DateTimeStringValue get dueDate;
@@ -156,6 +158,6 @@ abstract class _CreditAndInvoiceGroup implements CreditAndInvoiceGroup {
   List<CreditAndInvoiceItem> get items;
   @override
   @JsonKey(ignore: true)
-  _$$_CreditAndInvoiceGroupCopyWith<_$_CreditAndInvoiceGroup> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$CreditAndInvoiceGroupImplCopyWith<_$CreditAndInvoiceGroupImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }

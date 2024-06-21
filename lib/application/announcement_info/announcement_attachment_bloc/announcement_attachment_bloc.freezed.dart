@@ -12,7 +12,7 @@ part of 'announcement_attachment_bloc.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$AnnouncementAttachmentEvent {
@@ -78,25 +78,25 @@ class _$AnnouncementAttachmentEventCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_InitializedCopyWith<$Res> {
-  factory _$$_InitializedCopyWith(
-          _$_Initialized value, $Res Function(_$_Initialized) then) =
-      __$$_InitializedCopyWithImpl<$Res>;
+abstract class _$$InitializedImplCopyWith<$Res> {
+  factory _$$InitializedImplCopyWith(
+          _$InitializedImpl value, $Res Function(_$InitializedImpl) then) =
+      __$$InitializedImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_InitializedCopyWithImpl<$Res>
-    extends _$AnnouncementAttachmentEventCopyWithImpl<$Res, _$_Initialized>
-    implements _$$_InitializedCopyWith<$Res> {
-  __$$_InitializedCopyWithImpl(
-      _$_Initialized _value, $Res Function(_$_Initialized) _then)
+class __$$InitializedImplCopyWithImpl<$Res>
+    extends _$AnnouncementAttachmentEventCopyWithImpl<$Res, _$InitializedImpl>
+    implements _$$InitializedImplCopyWith<$Res> {
+  __$$InitializedImplCopyWithImpl(
+      _$InitializedImpl _value, $Res Function(_$InitializedImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_Initialized implements _Initialized {
-  const _$_Initialized();
+class _$InitializedImpl implements _Initialized {
+  const _$InitializedImpl();
 
   @override
   String toString() {
@@ -104,9 +104,9 @@ class _$_Initialized implements _Initialized {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_Initialized);
+        (other.runtimeType == runtimeType && other is _$InitializedImpl);
   }
 
   @override
@@ -176,24 +176,24 @@ class _$_Initialized implements _Initialized {
 }
 
 abstract class _Initialized implements AnnouncementAttachmentEvent {
-  const factory _Initialized() = _$_Initialized;
+  const factory _Initialized() = _$InitializedImpl;
 }
 
 /// @nodoc
-abstract class _$$_DownloadFileCopyWith<$Res> {
-  factory _$$_DownloadFileCopyWith(
-          _$_DownloadFile value, $Res Function(_$_DownloadFile) then) =
-      __$$_DownloadFileCopyWithImpl<$Res>;
+abstract class _$$DownloadFileImplCopyWith<$Res> {
+  factory _$$DownloadFileImplCopyWith(
+          _$DownloadFileImpl value, $Res Function(_$DownloadFileImpl) then) =
+      __$$DownloadFileImplCopyWithImpl<$Res>;
   @useResult
   $Res call({Attachment url});
 }
 
 /// @nodoc
-class __$$_DownloadFileCopyWithImpl<$Res>
-    extends _$AnnouncementAttachmentEventCopyWithImpl<$Res, _$_DownloadFile>
-    implements _$$_DownloadFileCopyWith<$Res> {
-  __$$_DownloadFileCopyWithImpl(
-      _$_DownloadFile _value, $Res Function(_$_DownloadFile) _then)
+class __$$DownloadFileImplCopyWithImpl<$Res>
+    extends _$AnnouncementAttachmentEventCopyWithImpl<$Res, _$DownloadFileImpl>
+    implements _$$DownloadFileImplCopyWith<$Res> {
+  __$$DownloadFileImplCopyWithImpl(
+      _$DownloadFileImpl _value, $Res Function(_$DownloadFileImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -201,7 +201,7 @@ class __$$_DownloadFileCopyWithImpl<$Res>
   $Res call({
     Object? url = null,
   }) {
-    return _then(_$_DownloadFile(
+    return _then(_$DownloadFileImpl(
       url: null == url
           ? _value.url
           : url // ignore: cast_nullable_to_non_nullable
@@ -212,8 +212,8 @@ class __$$_DownloadFileCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_DownloadFile implements _DownloadFile {
-  const _$_DownloadFile({required this.url});
+class _$DownloadFileImpl implements _DownloadFile {
+  const _$DownloadFileImpl({required this.url});
 
   @override
   final Attachment url;
@@ -224,10 +224,10 @@ class _$_DownloadFile implements _DownloadFile {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_DownloadFile &&
+            other is _$DownloadFileImpl &&
             (identical(other.url, url) || other.url == url));
   }
 
@@ -237,8 +237,8 @@ class _$_DownloadFile implements _DownloadFile {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_DownloadFileCopyWith<_$_DownloadFile> get copyWith =>
-      __$$_DownloadFileCopyWithImpl<_$_DownloadFile>(this, _$identity);
+  _$$DownloadFileImplCopyWith<_$DownloadFileImpl> get copyWith =>
+      __$$DownloadFileImplCopyWithImpl<_$DownloadFileImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -305,11 +305,11 @@ class _$_DownloadFile implements _DownloadFile {
 
 abstract class _DownloadFile implements AnnouncementAttachmentEvent {
   const factory _DownloadFile({required final Attachment url}) =
-      _$_DownloadFile;
+      _$DownloadFileImpl;
 
   Attachment get url;
   @JsonKey(ignore: true)
-  _$$_DownloadFileCopyWith<_$_DownloadFile> get copyWith =>
+  _$$DownloadFileImplCopyWith<_$DownloadFileImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -368,12 +368,12 @@ class _$AnnouncementAttachmentStateCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_AnnouncementAttachmentStateCopyWith<$Res>
+abstract class _$$AnnouncementAttachmentStateImplCopyWith<$Res>
     implements $AnnouncementAttachmentStateCopyWith<$Res> {
-  factory _$$_AnnouncementAttachmentStateCopyWith(
-          _$_AnnouncementAttachmentState value,
-          $Res Function(_$_AnnouncementAttachmentState) then) =
-      __$$_AnnouncementAttachmentStateCopyWithImpl<$Res>;
+  factory _$$AnnouncementAttachmentStateImplCopyWith(
+          _$AnnouncementAttachmentStateImpl value,
+          $Res Function(_$AnnouncementAttachmentStateImpl) then) =
+      __$$AnnouncementAttachmentStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -382,13 +382,13 @@ abstract class _$$_AnnouncementAttachmentStateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_AnnouncementAttachmentStateCopyWithImpl<$Res>
+class __$$AnnouncementAttachmentStateImplCopyWithImpl<$Res>
     extends _$AnnouncementAttachmentStateCopyWithImpl<$Res,
-        _$_AnnouncementAttachmentState>
-    implements _$$_AnnouncementAttachmentStateCopyWith<$Res> {
-  __$$_AnnouncementAttachmentStateCopyWithImpl(
-      _$_AnnouncementAttachmentState _value,
-      $Res Function(_$_AnnouncementAttachmentState) _then)
+        _$AnnouncementAttachmentStateImpl>
+    implements _$$AnnouncementAttachmentStateImplCopyWith<$Res> {
+  __$$AnnouncementAttachmentStateImplCopyWithImpl(
+      _$AnnouncementAttachmentStateImpl _value,
+      $Res Function(_$AnnouncementAttachmentStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -397,7 +397,7 @@ class __$$_AnnouncementAttachmentStateCopyWithImpl<$Res>
     Object? isDownloading = null,
     Object? failureOrSuccessOption = null,
   }) {
-    return _then(_$_AnnouncementAttachmentState(
+    return _then(_$AnnouncementAttachmentStateImpl(
       isDownloading: null == isDownloading
           ? _value.isDownloading
           : isDownloading // ignore: cast_nullable_to_non_nullable
@@ -412,8 +412,8 @@ class __$$_AnnouncementAttachmentStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_AnnouncementAttachmentState extends _AnnouncementAttachmentState {
-  const _$_AnnouncementAttachmentState(
+class _$AnnouncementAttachmentStateImpl extends _AnnouncementAttachmentState {
+  const _$AnnouncementAttachmentStateImpl(
       {required this.isDownloading, required this.failureOrSuccessOption})
       : super._();
 
@@ -428,10 +428,10 @@ class _$_AnnouncementAttachmentState extends _AnnouncementAttachmentState {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_AnnouncementAttachmentState &&
+            other is _$AnnouncementAttachmentStateImpl &&
             (identical(other.isDownloading, isDownloading) ||
                 other.isDownloading == isDownloading) &&
             (identical(other.failureOrSuccessOption, failureOrSuccessOption) ||
@@ -445,9 +445,9 @@ class _$_AnnouncementAttachmentState extends _AnnouncementAttachmentState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_AnnouncementAttachmentStateCopyWith<_$_AnnouncementAttachmentState>
-      get copyWith => __$$_AnnouncementAttachmentStateCopyWithImpl<
-          _$_AnnouncementAttachmentState>(this, _$identity);
+  _$$AnnouncementAttachmentStateImplCopyWith<_$AnnouncementAttachmentStateImpl>
+      get copyWith => __$$AnnouncementAttachmentStateImplCopyWithImpl<
+          _$AnnouncementAttachmentStateImpl>(this, _$identity);
 }
 
 abstract class _AnnouncementAttachmentState
@@ -455,7 +455,7 @@ abstract class _AnnouncementAttachmentState
   const factory _AnnouncementAttachmentState(
       {required final bool isDownloading,
       required final Option<Either<ApiFailure, dynamic>>
-          failureOrSuccessOption}) = _$_AnnouncementAttachmentState;
+          failureOrSuccessOption}) = _$AnnouncementAttachmentStateImpl;
   const _AnnouncementAttachmentState._() : super._();
 
   @override
@@ -464,6 +464,6 @@ abstract class _AnnouncementAttachmentState
   Option<Either<ApiFailure, dynamic>> get failureOrSuccessOption;
   @override
   @JsonKey(ignore: true)
-  _$$_AnnouncementAttachmentStateCopyWith<_$_AnnouncementAttachmentState>
+  _$$AnnouncementAttachmentStateImplCopyWith<_$AnnouncementAttachmentStateImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

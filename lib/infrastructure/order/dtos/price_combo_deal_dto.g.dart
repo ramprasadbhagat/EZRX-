@@ -6,8 +6,9 @@ part of 'price_combo_deal_dto.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_PriceComboDealDto _$$_PriceComboDealDtoFromJson(Map<String, dynamic> json) =>
-    _$_PriceComboDealDto(
+_$PriceComboDealDtoImpl _$$PriceComboDealDtoImplFromJson(
+        Map<String, dynamic> json) =>
+    _$PriceComboDealDtoImpl(
       isEligible: json['eligible'] as bool? ?? false,
       flexibleGroup: json['flexibleGroup'] as String? ?? '',
       salesDeal: json['salesDeal'] as String? ?? '',
@@ -17,8 +18,8 @@ _$_PriceComboDealDto _$$_PriceComboDealDtoFromJson(Map<String, dynamic> json) =>
               json['category'] as Map<String, dynamic>),
     );
 
-Map<String, dynamic> _$$_PriceComboDealDtoToJson(
-        _$_PriceComboDealDto instance) =>
+Map<String, dynamic> _$$PriceComboDealDtoImplToJson(
+        _$PriceComboDealDtoImpl instance) =>
     <String, dynamic>{
       'eligible': instance.isEligible,
       'flexibleGroup': instance.flexibleGroup,
@@ -26,17 +27,17 @@ Map<String, dynamic> _$$_PriceComboDealDtoToJson(
       'category': instance.category.toJson(),
     };
 
-_$_PriceComboDealCategoryDto _$$_PriceComboDealCategoryDtoFromJson(
+_$PriceComboDealCategoryDtoImpl _$$PriceComboDealCategoryDtoImplFromJson(
         Map<String, dynamic> json) =>
-    _$_PriceComboDealCategoryDto(
+    _$PriceComboDealCategoryDtoImpl(
       type: json['type'] as String? ?? '',
       value:
           (json['value'] as List<dynamic>?)?.map((e) => e as String).toList() ??
               [],
     );
 
-Map<String, dynamic> _$$_PriceComboDealCategoryDtoToJson(
-        _$_PriceComboDealCategoryDto instance) =>
+Map<String, dynamic> _$$PriceComboDealCategoryDtoImplToJson(
+        _$PriceComboDealCategoryDtoImpl instance) =>
     <String, dynamic>{
       'type': instance.type,
       'value': instance.value,

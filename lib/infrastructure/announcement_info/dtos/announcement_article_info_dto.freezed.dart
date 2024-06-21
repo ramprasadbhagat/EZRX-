@@ -12,7 +12,7 @@ part of 'announcement_article_info_dto.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 AnnouncementArticleInfoDto _$AnnouncementArticleInfoDtoFromJson(
     Map<String, dynamic> json) {
@@ -87,12 +87,12 @@ class _$AnnouncementArticleInfoDtoCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_AnnouncementArticleInfoDtoCopyWith<$Res>
+abstract class _$$AnnouncementArticleInfoDtoImplCopyWith<$Res>
     implements $AnnouncementArticleInfoDtoCopyWith<$Res> {
-  factory _$$_AnnouncementArticleInfoDtoCopyWith(
-          _$_AnnouncementArticleInfoDto value,
-          $Res Function(_$_AnnouncementArticleInfoDto) then) =
-      __$$_AnnouncementArticleInfoDtoCopyWithImpl<$Res>;
+  factory _$$AnnouncementArticleInfoDtoImplCopyWith(
+          _$AnnouncementArticleInfoDtoImpl value,
+          $Res Function(_$AnnouncementArticleInfoDtoImpl) then) =
+      __$$AnnouncementArticleInfoDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -105,13 +105,13 @@ abstract class _$$_AnnouncementArticleInfoDtoCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_AnnouncementArticleInfoDtoCopyWithImpl<$Res>
+class __$$AnnouncementArticleInfoDtoImplCopyWithImpl<$Res>
     extends _$AnnouncementArticleInfoDtoCopyWithImpl<$Res,
-        _$_AnnouncementArticleInfoDto>
-    implements _$$_AnnouncementArticleInfoDtoCopyWith<$Res> {
-  __$$_AnnouncementArticleInfoDtoCopyWithImpl(
-      _$_AnnouncementArticleInfoDto _value,
-      $Res Function(_$_AnnouncementArticleInfoDto) _then)
+        _$AnnouncementArticleInfoDtoImpl>
+    implements _$$AnnouncementArticleInfoDtoImplCopyWith<$Res> {
+  __$$AnnouncementArticleInfoDtoImplCopyWithImpl(
+      _$AnnouncementArticleInfoDtoImpl _value,
+      $Res Function(_$AnnouncementArticleInfoDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -121,7 +121,7 @@ class __$$_AnnouncementArticleInfoDtoCopyWithImpl<$Res>
     Object? total = null,
     Object? announcementList = null,
   }) {
-    return _then(_$_AnnouncementArticleInfoDto(
+    return _then(_$AnnouncementArticleInfoDtoImpl(
       endCursor: null == endCursor
           ? _value.endCursor
           : endCursor // ignore: cast_nullable_to_non_nullable
@@ -140,8 +140,8 @@ class __$$_AnnouncementArticleInfoDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_AnnouncementArticleInfoDto extends _AnnouncementArticleInfoDto {
-  const _$_AnnouncementArticleInfoDto(
+class _$AnnouncementArticleInfoDtoImpl extends _AnnouncementArticleInfoDto {
+  const _$AnnouncementArticleInfoDtoImpl(
       {@JsonKey(
           name: 'pageInfo', defaultValue: '', readValue: getEndCursorValue)
       required this.endCursor,
@@ -151,8 +151,9 @@ class _$_AnnouncementArticleInfoDto extends _AnnouncementArticleInfoDto {
       : _announcementList = announcementList,
         super._();
 
-  factory _$_AnnouncementArticleInfoDto.fromJson(Map<String, dynamic> json) =>
-      _$$_AnnouncementArticleInfoDtoFromJson(json);
+  factory _$AnnouncementArticleInfoDtoImpl.fromJson(
+          Map<String, dynamic> json) =>
+      _$$AnnouncementArticleInfoDtoImplFromJson(json);
 
   @override
   @JsonKey(name: 'pageInfo', defaultValue: '', readValue: getEndCursorValue)
@@ -176,10 +177,10 @@ class _$_AnnouncementArticleInfoDto extends _AnnouncementArticleInfoDto {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_AnnouncementArticleInfoDto &&
+            other is _$AnnouncementArticleInfoDtoImpl &&
             (identical(other.endCursor, endCursor) ||
                 other.endCursor == endCursor) &&
             (identical(other.total, total) || other.total == total) &&
@@ -195,13 +196,13 @@ class _$_AnnouncementArticleInfoDto extends _AnnouncementArticleInfoDto {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_AnnouncementArticleInfoDtoCopyWith<_$_AnnouncementArticleInfoDto>
-      get copyWith => __$$_AnnouncementArticleInfoDtoCopyWithImpl<
-          _$_AnnouncementArticleInfoDto>(this, _$identity);
+  _$$AnnouncementArticleInfoDtoImplCopyWith<_$AnnouncementArticleInfoDtoImpl>
+      get copyWith => __$$AnnouncementArticleInfoDtoImplCopyWithImpl<
+          _$AnnouncementArticleInfoDtoImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_AnnouncementArticleInfoDtoToJson(
+    return _$$AnnouncementArticleInfoDtoImplToJson(
       this,
     );
   }
@@ -216,11 +217,11 @@ abstract class _AnnouncementArticleInfoDto extends AnnouncementArticleInfoDto {
           @JsonKey(
               name: 'results', defaultValue: <AnnouncementArticleItemDto>[])
           required final List<AnnouncementArticleItemDto> announcementList}) =
-      _$_AnnouncementArticleInfoDto;
+      _$AnnouncementArticleInfoDtoImpl;
   const _AnnouncementArticleInfoDto._() : super._();
 
   factory _AnnouncementArticleInfoDto.fromJson(Map<String, dynamic> json) =
-      _$_AnnouncementArticleInfoDto.fromJson;
+      _$AnnouncementArticleInfoDtoImpl.fromJson;
 
   @override
   @JsonKey(name: 'pageInfo', defaultValue: '', readValue: getEndCursorValue)
@@ -233,7 +234,7 @@ abstract class _AnnouncementArticleInfoDto extends AnnouncementArticleInfoDto {
   List<AnnouncementArticleItemDto> get announcementList;
   @override
   @JsonKey(ignore: true)
-  _$$_AnnouncementArticleInfoDtoCopyWith<_$_AnnouncementArticleInfoDto>
+  _$$AnnouncementArticleInfoDtoImplCopyWith<_$AnnouncementArticleInfoDtoImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -391,12 +392,12 @@ class _$AnnouncementArticleItemDtoCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_AnnouncementArticleItemDtoCopyWith<$Res>
+abstract class _$$AnnouncementArticleItemDtoImplCopyWith<$Res>
     implements $AnnouncementArticleItemDtoCopyWith<$Res> {
-  factory _$$_AnnouncementArticleItemDtoCopyWith(
-          _$_AnnouncementArticleItemDto value,
-          $Res Function(_$_AnnouncementArticleItemDto) then) =
-      __$$_AnnouncementArticleItemDtoCopyWithImpl<$Res>;
+  factory _$$AnnouncementArticleItemDtoImplCopyWith(
+          _$AnnouncementArticleItemDtoImpl value,
+          $Res Function(_$AnnouncementArticleItemDtoImpl) then) =
+      __$$AnnouncementArticleItemDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -420,13 +421,13 @@ abstract class _$$_AnnouncementArticleItemDtoCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_AnnouncementArticleItemDtoCopyWithImpl<$Res>
+class __$$AnnouncementArticleItemDtoImplCopyWithImpl<$Res>
     extends _$AnnouncementArticleItemDtoCopyWithImpl<$Res,
-        _$_AnnouncementArticleItemDto>
-    implements _$$_AnnouncementArticleItemDtoCopyWith<$Res> {
-  __$$_AnnouncementArticleItemDtoCopyWithImpl(
-      _$_AnnouncementArticleItemDto _value,
-      $Res Function(_$_AnnouncementArticleItemDto) _then)
+        _$AnnouncementArticleItemDtoImpl>
+    implements _$$AnnouncementArticleItemDtoImplCopyWith<$Res> {
+  __$$AnnouncementArticleItemDtoImplCopyWithImpl(
+      _$AnnouncementArticleItemDtoImpl _value,
+      $Res Function(_$AnnouncementArticleItemDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -446,7 +447,7 @@ class __$$_AnnouncementArticleItemDtoCopyWithImpl<$Res>
     Object? documentsList = null,
     Object? pinToTop = null,
   }) {
-    return _then(_$_AnnouncementArticleItemDto(
+    return _then(_$AnnouncementArticleItemDtoImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -505,8 +506,8 @@ class __$$_AnnouncementArticleItemDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_AnnouncementArticleItemDto extends _AnnouncementArticleItemDto {
-  const _$_AnnouncementArticleItemDto(
+class _$AnnouncementArticleItemDtoImpl extends _AnnouncementArticleItemDto {
+  const _$AnnouncementArticleItemDtoImpl(
       {@JsonKey(name: 'id', defaultValue: '') required this.id,
       @JsonKey(name: 'title', readValue: getValue) required this.title,
       @JsonKey(name: 'summary', readValue: getValue) required this.summary,
@@ -533,8 +534,9 @@ class _$_AnnouncementArticleItemDto extends _AnnouncementArticleItemDto {
         _documentsList = documentsList,
         super._();
 
-  factory _$_AnnouncementArticleItemDto.fromJson(Map<String, dynamic> json) =>
-      _$$_AnnouncementArticleItemDtoFromJson(json);
+  factory _$AnnouncementArticleItemDtoImpl.fromJson(
+          Map<String, dynamic> json) =>
+      _$$AnnouncementArticleItemDtoImplFromJson(json);
 
   @override
   @JsonKey(name: 'id', defaultValue: '')
@@ -600,10 +602,10 @@ class _$_AnnouncementArticleItemDto extends _AnnouncementArticleItemDto {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_AnnouncementArticleItemDto &&
+            other is _$AnnouncementArticleItemDtoImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.title, title) || other.title == title) &&
             (identical(other.summary, summary) || other.summary == summary) &&
@@ -647,13 +649,13 @@ class _$_AnnouncementArticleItemDto extends _AnnouncementArticleItemDto {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_AnnouncementArticleItemDtoCopyWith<_$_AnnouncementArticleItemDto>
-      get copyWith => __$$_AnnouncementArticleItemDtoCopyWithImpl<
-          _$_AnnouncementArticleItemDto>(this, _$identity);
+  _$$AnnouncementArticleItemDtoImplCopyWith<_$AnnouncementArticleItemDtoImpl>
+      get copyWith => __$$AnnouncementArticleItemDtoImplCopyWithImpl<
+          _$AnnouncementArticleItemDtoImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_AnnouncementArticleItemDtoToJson(
+    return _$$AnnouncementArticleItemDtoImplToJson(
       this,
     );
   }
@@ -683,11 +685,11 @@ abstract class _AnnouncementArticleItemDto extends AnnouncementArticleItemDto {
       @JsonKey(name: 'documents', readValue: getDocumentsList)
       required final List<String> documentsList,
       @JsonKey(name: 'pinToTop', readValue: readPinToTop)
-      required final bool pinToTop}) = _$_AnnouncementArticleItemDto;
+      required final bool pinToTop}) = _$AnnouncementArticleItemDtoImpl;
   const _AnnouncementArticleItemDto._() : super._();
 
   factory _AnnouncementArticleItemDto.fromJson(Map<String, dynamic> json) =
-      _$_AnnouncementArticleItemDto.fromJson;
+      _$AnnouncementArticleItemDtoImpl.fromJson;
 
   @override
   @JsonKey(name: 'id', defaultValue: '')
@@ -730,7 +732,7 @@ abstract class _AnnouncementArticleItemDto extends AnnouncementArticleItemDto {
   bool get pinToTop;
   @override
   @JsonKey(ignore: true)
-  _$$_AnnouncementArticleItemDtoCopyWith<_$_AnnouncementArticleItemDto>
+  _$$AnnouncementArticleItemDtoImplCopyWith<_$AnnouncementArticleItemDtoImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -800,11 +802,11 @@ class _$BranchAndIc4InfoDtoCopyWithImpl<$Res, $Val extends BranchAndIc4InfoDto>
 }
 
 /// @nodoc
-abstract class _$$_BranchAndIc4DtoCopyWith<$Res>
+abstract class _$$BranchAndIc4DtoImplCopyWith<$Res>
     implements $BranchAndIc4InfoDtoCopyWith<$Res> {
-  factory _$$_BranchAndIc4DtoCopyWith(
-          _$_BranchAndIc4Dto value, $Res Function(_$_BranchAndIc4Dto) then) =
-      __$$_BranchAndIc4DtoCopyWithImpl<$Res>;
+  factory _$$BranchAndIc4DtoImplCopyWith(_$BranchAndIc4DtoImpl value,
+          $Res Function(_$BranchAndIc4DtoImpl) then) =
+      __$$BranchAndIc4DtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -814,11 +816,11 @@ abstract class _$$_BranchAndIc4DtoCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_BranchAndIc4DtoCopyWithImpl<$Res>
-    extends _$BranchAndIc4InfoDtoCopyWithImpl<$Res, _$_BranchAndIc4Dto>
-    implements _$$_BranchAndIc4DtoCopyWith<$Res> {
-  __$$_BranchAndIc4DtoCopyWithImpl(
-      _$_BranchAndIc4Dto _value, $Res Function(_$_BranchAndIc4Dto) _then)
+class __$$BranchAndIc4DtoImplCopyWithImpl<$Res>
+    extends _$BranchAndIc4InfoDtoCopyWithImpl<$Res, _$BranchAndIc4DtoImpl>
+    implements _$$BranchAndIc4DtoImplCopyWith<$Res> {
+  __$$BranchAndIc4DtoImplCopyWithImpl(
+      _$BranchAndIc4DtoImpl _value, $Res Function(_$BranchAndIc4DtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -828,7 +830,7 @@ class __$$_BranchAndIc4DtoCopyWithImpl<$Res>
     Object? name = null,
     Object? displayName = null,
   }) {
-    return _then(_$_BranchAndIc4Dto(
+    return _then(_$BranchAndIc4DtoImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -847,16 +849,16 @@ class __$$_BranchAndIc4DtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_BranchAndIc4Dto extends _BranchAndIc4Dto {
-  const _$_BranchAndIc4Dto(
+class _$BranchAndIc4DtoImpl extends _BranchAndIc4Dto {
+  const _$BranchAndIc4DtoImpl(
       {@JsonKey(name: 'id', defaultValue: '') required this.id,
       @JsonKey(name: 'name', defaultValue: '') required this.name,
       @JsonKey(name: 'displayName', defaultValue: '')
       required this.displayName})
       : super._();
 
-  factory _$_BranchAndIc4Dto.fromJson(Map<String, dynamic> json) =>
-      _$$_BranchAndIc4DtoFromJson(json);
+  factory _$BranchAndIc4DtoImpl.fromJson(Map<String, dynamic> json) =>
+      _$$BranchAndIc4DtoImplFromJson(json);
 
   @override
   @JsonKey(name: 'id', defaultValue: '')
@@ -874,10 +876,10 @@ class _$_BranchAndIc4Dto extends _BranchAndIc4Dto {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_BranchAndIc4Dto &&
+            other is _$BranchAndIc4DtoImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.displayName, displayName) ||
@@ -891,12 +893,13 @@ class _$_BranchAndIc4Dto extends _BranchAndIc4Dto {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_BranchAndIc4DtoCopyWith<_$_BranchAndIc4Dto> get copyWith =>
-      __$$_BranchAndIc4DtoCopyWithImpl<_$_BranchAndIc4Dto>(this, _$identity);
+  _$$BranchAndIc4DtoImplCopyWith<_$BranchAndIc4DtoImpl> get copyWith =>
+      __$$BranchAndIc4DtoImplCopyWithImpl<_$BranchAndIc4DtoImpl>(
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_BranchAndIc4DtoToJson(
+    return _$$BranchAndIc4DtoImplToJson(
       this,
     );
   }
@@ -907,11 +910,11 @@ abstract class _BranchAndIc4Dto extends BranchAndIc4InfoDto {
       {@JsonKey(name: 'id', defaultValue: '') required final String id,
       @JsonKey(name: 'name', defaultValue: '') required final String name,
       @JsonKey(name: 'displayName', defaultValue: '')
-      required final String displayName}) = _$_BranchAndIc4Dto;
+      required final String displayName}) = _$BranchAndIc4DtoImpl;
   const _BranchAndIc4Dto._() : super._();
 
   factory _BranchAndIc4Dto.fromJson(Map<String, dynamic> json) =
-      _$_BranchAndIc4Dto.fromJson;
+      _$BranchAndIc4DtoImpl.fromJson;
 
   @override
   @JsonKey(name: 'id', defaultValue: '')
@@ -924,6 +927,6 @@ abstract class _BranchAndIc4Dto extends BranchAndIc4InfoDto {
   String get displayName;
   @override
   @JsonKey(ignore: true)
-  _$$_BranchAndIc4DtoCopyWith<_$_BranchAndIc4Dto> get copyWith =>
+  _$$BranchAndIc4DtoImplCopyWith<_$BranchAndIc4DtoImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

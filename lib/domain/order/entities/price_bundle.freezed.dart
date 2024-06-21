@@ -12,7 +12,7 @@ part of 'price_bundle.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$PriceBundle {
@@ -86,11 +86,11 @@ class _$PriceBundleCopyWithImpl<$Res, $Val extends PriceBundle>
 }
 
 /// @nodoc
-abstract class _$$_PriceBundleCopyWith<$Res>
+abstract class _$$PriceBundleImplCopyWith<$Res>
     implements $PriceBundleCopyWith<$Res> {
-  factory _$$_PriceBundleCopyWith(
-          _$_PriceBundle value, $Res Function(_$_PriceBundle) then) =
-      __$$_PriceBundleCopyWithImpl<$Res>;
+  factory _$$PriceBundleImplCopyWith(
+          _$PriceBundleImpl value, $Res Function(_$PriceBundleImpl) then) =
+      __$$PriceBundleImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -102,11 +102,11 @@ abstract class _$$_PriceBundleCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_PriceBundleCopyWithImpl<$Res>
-    extends _$PriceBundleCopyWithImpl<$Res, _$_PriceBundle>
-    implements _$$_PriceBundleCopyWith<$Res> {
-  __$$_PriceBundleCopyWithImpl(
-      _$_PriceBundle _value, $Res Function(_$_PriceBundle) _then)
+class __$$PriceBundleImplCopyWithImpl<$Res>
+    extends _$PriceBundleCopyWithImpl<$Res, _$PriceBundleImpl>
+    implements _$$PriceBundleImplCopyWith<$Res> {
+  __$$PriceBundleImplCopyWithImpl(
+      _$PriceBundleImpl _value, $Res Function(_$PriceBundleImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -118,7 +118,7 @@ class __$$_PriceBundleCopyWithImpl<$Res>
     Object? bonusEligible = null,
     Object? information = null,
   }) {
-    return _then(_$_PriceBundle(
+    return _then(_$PriceBundleImpl(
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -145,8 +145,8 @@ class __$$_PriceBundleCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_PriceBundle extends _PriceBundle {
-  const _$_PriceBundle(
+class _$PriceBundleImpl extends _PriceBundle {
+  const _$PriceBundleImpl(
       {required this.name,
       required this.code,
       required this.conditions,
@@ -177,10 +177,10 @@ class _$_PriceBundle extends _PriceBundle {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_PriceBundle &&
+            other is _$PriceBundleImpl &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.code, code) || other.code == code) &&
             (identical(other.conditions, conditions) ||
@@ -198,8 +198,8 @@ class _$_PriceBundle extends _PriceBundle {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_PriceBundleCopyWith<_$_PriceBundle> get copyWith =>
-      __$$_PriceBundleCopyWithImpl<_$_PriceBundle>(this, _$identity);
+  _$$PriceBundleImplCopyWith<_$PriceBundleImpl> get copyWith =>
+      __$$PriceBundleImplCopyWithImpl<_$PriceBundleImpl>(this, _$identity);
 }
 
 abstract class _PriceBundle extends PriceBundle {
@@ -208,7 +208,7 @@ abstract class _PriceBundle extends PriceBundle {
       required final String code,
       required final String conditions,
       required final bool bonusEligible,
-      required final List<PriceBundleItem> information}) = _$_PriceBundle;
+      required final List<PriceBundleItem> information}) = _$PriceBundleImpl;
   const _PriceBundle._() : super._();
 
   @override
@@ -223,7 +223,7 @@ abstract class _PriceBundle extends PriceBundle {
   List<PriceBundleItem> get information;
   @override
   @JsonKey(ignore: true)
-  _$$_PriceBundleCopyWith<_$_PriceBundle> get copyWith =>
+  _$$PriceBundleImplCopyWith<_$PriceBundleImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -288,22 +288,22 @@ class _$PriceBundleItemCopyWithImpl<$Res, $Val extends PriceBundleItem>
 }
 
 /// @nodoc
-abstract class _$$_PriceBundleItemCopyWith<$Res>
+abstract class _$$PriceBundleItemImplCopyWith<$Res>
     implements $PriceBundleItemCopyWith<$Res> {
-  factory _$$_PriceBundleItemCopyWith(
-          _$_PriceBundleItem value, $Res Function(_$_PriceBundleItem) then) =
-      __$$_PriceBundleItemCopyWithImpl<$Res>;
+  factory _$$PriceBundleItemImplCopyWith(_$PriceBundleItemImpl value,
+          $Res Function(_$PriceBundleItemImpl) then) =
+      __$$PriceBundleItemImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String type, int sequence, int quantity, double rate});
 }
 
 /// @nodoc
-class __$$_PriceBundleItemCopyWithImpl<$Res>
-    extends _$PriceBundleItemCopyWithImpl<$Res, _$_PriceBundleItem>
-    implements _$$_PriceBundleItemCopyWith<$Res> {
-  __$$_PriceBundleItemCopyWithImpl(
-      _$_PriceBundleItem _value, $Res Function(_$_PriceBundleItem) _then)
+class __$$PriceBundleItemImplCopyWithImpl<$Res>
+    extends _$PriceBundleItemCopyWithImpl<$Res, _$PriceBundleItemImpl>
+    implements _$$PriceBundleItemImplCopyWith<$Res> {
+  __$$PriceBundleItemImplCopyWithImpl(
+      _$PriceBundleItemImpl _value, $Res Function(_$PriceBundleItemImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -314,7 +314,7 @@ class __$$_PriceBundleItemCopyWithImpl<$Res>
     Object? quantity = null,
     Object? rate = null,
   }) {
-    return _then(_$_PriceBundleItem(
+    return _then(_$PriceBundleItemImpl(
       type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
@@ -337,8 +337,8 @@ class __$$_PriceBundleItemCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_PriceBundleItem extends _PriceBundleItem {
-  const _$_PriceBundleItem(
+class _$PriceBundleItemImpl extends _PriceBundleItem {
+  const _$PriceBundleItemImpl(
       {required this.type,
       required this.sequence,
       required this.quantity,
@@ -360,10 +360,10 @@ class _$_PriceBundleItem extends _PriceBundleItem {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_PriceBundleItem &&
+            other is _$PriceBundleItemImpl &&
             (identical(other.type, type) || other.type == type) &&
             (identical(other.sequence, sequence) ||
                 other.sequence == sequence) &&
@@ -378,8 +378,9 @@ class _$_PriceBundleItem extends _PriceBundleItem {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_PriceBundleItemCopyWith<_$_PriceBundleItem> get copyWith =>
-      __$$_PriceBundleItemCopyWithImpl<_$_PriceBundleItem>(this, _$identity);
+  _$$PriceBundleItemImplCopyWith<_$PriceBundleItemImpl> get copyWith =>
+      __$$PriceBundleItemImplCopyWithImpl<_$PriceBundleItemImpl>(
+          this, _$identity);
 }
 
 abstract class _PriceBundleItem extends PriceBundleItem {
@@ -387,7 +388,7 @@ abstract class _PriceBundleItem extends PriceBundleItem {
       {required final String type,
       required final int sequence,
       required final int quantity,
-      required final double rate}) = _$_PriceBundleItem;
+      required final double rate}) = _$PriceBundleItemImpl;
   const _PriceBundleItem._() : super._();
 
   @override
@@ -400,6 +401,6 @@ abstract class _PriceBundleItem extends PriceBundleItem {
   double get rate;
   @override
   @JsonKey(ignore: true)
-  _$$_PriceBundleItemCopyWith<_$_PriceBundleItem> get copyWith =>
+  _$$PriceBundleItemImplCopyWith<_$PriceBundleItemImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

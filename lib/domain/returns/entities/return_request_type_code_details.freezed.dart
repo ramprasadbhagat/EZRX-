@@ -12,7 +12,7 @@ part of 'return_request_type_code_details.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$ReturnRequestTypeCodeDetails {
@@ -66,25 +66,25 @@ class _$ReturnRequestTypeCodeDetailsCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_ReturnRequestTypeCodeDetailsCopyWith<$Res>
+abstract class _$$ReturnRequestTypeCodeDetailsImplCopyWith<$Res>
     implements $ReturnRequestTypeCodeDetailsCopyWith<$Res> {
-  factory _$$_ReturnRequestTypeCodeDetailsCopyWith(
-          _$_ReturnRequestTypeCodeDetails value,
-          $Res Function(_$_ReturnRequestTypeCodeDetails) then) =
-      __$$_ReturnRequestTypeCodeDetailsCopyWithImpl<$Res>;
+  factory _$$ReturnRequestTypeCodeDetailsImplCopyWith(
+          _$ReturnRequestTypeCodeDetailsImpl value,
+          $Res Function(_$ReturnRequestTypeCodeDetailsImpl) then) =
+      __$$ReturnRequestTypeCodeDetailsImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String returnCode, String returnDescription});
 }
 
 /// @nodoc
-class __$$_ReturnRequestTypeCodeDetailsCopyWithImpl<$Res>
+class __$$ReturnRequestTypeCodeDetailsImplCopyWithImpl<$Res>
     extends _$ReturnRequestTypeCodeDetailsCopyWithImpl<$Res,
-        _$_ReturnRequestTypeCodeDetails>
-    implements _$$_ReturnRequestTypeCodeDetailsCopyWith<$Res> {
-  __$$_ReturnRequestTypeCodeDetailsCopyWithImpl(
-      _$_ReturnRequestTypeCodeDetails _value,
-      $Res Function(_$_ReturnRequestTypeCodeDetails) _then)
+        _$ReturnRequestTypeCodeDetailsImpl>
+    implements _$$ReturnRequestTypeCodeDetailsImplCopyWith<$Res> {
+  __$$ReturnRequestTypeCodeDetailsImplCopyWithImpl(
+      _$ReturnRequestTypeCodeDetailsImpl _value,
+      $Res Function(_$ReturnRequestTypeCodeDetailsImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -93,7 +93,7 @@ class __$$_ReturnRequestTypeCodeDetailsCopyWithImpl<$Res>
     Object? returnCode = null,
     Object? returnDescription = null,
   }) {
-    return _then(_$_ReturnRequestTypeCodeDetails(
+    return _then(_$ReturnRequestTypeCodeDetailsImpl(
       returnCode: null == returnCode
           ? _value.returnCode
           : returnCode // ignore: cast_nullable_to_non_nullable
@@ -108,8 +108,8 @@ class __$$_ReturnRequestTypeCodeDetailsCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_ReturnRequestTypeCodeDetails extends _ReturnRequestTypeCodeDetails {
-  const _$_ReturnRequestTypeCodeDetails(
+class _$ReturnRequestTypeCodeDetailsImpl extends _ReturnRequestTypeCodeDetails {
+  const _$ReturnRequestTypeCodeDetailsImpl(
       {required this.returnCode, required this.returnDescription})
       : super._();
 
@@ -124,10 +124,10 @@ class _$_ReturnRequestTypeCodeDetails extends _ReturnRequestTypeCodeDetails {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ReturnRequestTypeCodeDetails &&
+            other is _$ReturnRequestTypeCodeDetailsImpl &&
             (identical(other.returnCode, returnCode) ||
                 other.returnCode == returnCode) &&
             (identical(other.returnDescription, returnDescription) ||
@@ -140,9 +140,10 @@ class _$_ReturnRequestTypeCodeDetails extends _ReturnRequestTypeCodeDetails {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ReturnRequestTypeCodeDetailsCopyWith<_$_ReturnRequestTypeCodeDetails>
-      get copyWith => __$$_ReturnRequestTypeCodeDetailsCopyWithImpl<
-          _$_ReturnRequestTypeCodeDetails>(this, _$identity);
+  _$$ReturnRequestTypeCodeDetailsImplCopyWith<
+          _$ReturnRequestTypeCodeDetailsImpl>
+      get copyWith => __$$ReturnRequestTypeCodeDetailsImplCopyWithImpl<
+          _$ReturnRequestTypeCodeDetailsImpl>(this, _$identity);
 }
 
 abstract class _ReturnRequestTypeCodeDetails
@@ -150,7 +151,7 @@ abstract class _ReturnRequestTypeCodeDetails
   const factory _ReturnRequestTypeCodeDetails(
           {required final String returnCode,
           required final String returnDescription}) =
-      _$_ReturnRequestTypeCodeDetails;
+      _$ReturnRequestTypeCodeDetailsImpl;
   const _ReturnRequestTypeCodeDetails._() : super._();
 
   @override
@@ -159,6 +160,7 @@ abstract class _ReturnRequestTypeCodeDetails
   String get returnDescription;
   @override
   @JsonKey(ignore: true)
-  _$$_ReturnRequestTypeCodeDetailsCopyWith<_$_ReturnRequestTypeCodeDetails>
+  _$$ReturnRequestTypeCodeDetailsImplCopyWith<
+          _$ReturnRequestTypeCodeDetailsImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

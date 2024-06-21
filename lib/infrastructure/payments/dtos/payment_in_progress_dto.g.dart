@@ -6,14 +6,14 @@ part of 'payment_in_progress_dto.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_PaymentInProgressDto _$$_PaymentInProgressDtoFromJson(
+_$PaymentInProgressDtoImpl _$$PaymentInProgressDtoImplFromJson(
         Map<String, dynamic> json) =>
-    _$_PaymentInProgressDto(
+    _$PaymentInProgressDtoImpl(
       amount: json['amount'] as String? ?? '',
     );
 
-Map<String, dynamic> _$$_PaymentInProgressDtoToJson(
-        _$_PaymentInProgressDto instance) =>
+Map<String, dynamic> _$$PaymentInProgressDtoImplToJson(
+        _$PaymentInProgressDtoImpl instance) =>
     <String, dynamic>{
       'amount': instance.amount,
     };

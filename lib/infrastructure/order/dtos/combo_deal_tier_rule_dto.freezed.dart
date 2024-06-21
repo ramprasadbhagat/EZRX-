@@ -12,7 +12,7 @@ part of 'combo_deal_tier_rule_dto.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 ComboDealTierRuleDto _$ComboDealTierRuleDtoFromJson(Map<String, dynamic> json) {
   return _ComboDealTierRuleDto.fromJson(json);
@@ -136,11 +136,11 @@ class _$ComboDealTierRuleDtoCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_ComboDealTierRuleDtoCopyWith<$Res>
+abstract class _$$ComboDealTierRuleDtoImplCopyWith<$Res>
     implements $ComboDealTierRuleDtoCopyWith<$Res> {
-  factory _$$_ComboDealTierRuleDtoCopyWith(_$_ComboDealTierRuleDto value,
-          $Res Function(_$_ComboDealTierRuleDto) then) =
-      __$$_ComboDealTierRuleDtoCopyWithImpl<$Res>;
+  factory _$$ComboDealTierRuleDtoImplCopyWith(_$ComboDealTierRuleDtoImpl value,
+          $Res Function(_$ComboDealTierRuleDtoImpl) then) =
+      __$$ComboDealTierRuleDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -166,11 +166,11 @@ abstract class _$$_ComboDealTierRuleDtoCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_ComboDealTierRuleDtoCopyWithImpl<$Res>
-    extends _$ComboDealTierRuleDtoCopyWithImpl<$Res, _$_ComboDealTierRuleDto>
-    implements _$$_ComboDealTierRuleDtoCopyWith<$Res> {
-  __$$_ComboDealTierRuleDtoCopyWithImpl(_$_ComboDealTierRuleDto _value,
-      $Res Function(_$_ComboDealTierRuleDto) _then)
+class __$$ComboDealTierRuleDtoImplCopyWithImpl<$Res>
+    extends _$ComboDealTierRuleDtoCopyWithImpl<$Res, _$ComboDealTierRuleDtoImpl>
+    implements _$$ComboDealTierRuleDtoImplCopyWith<$Res> {
+  __$$ComboDealTierRuleDtoImplCopyWithImpl(_$ComboDealTierRuleDtoImpl _value,
+      $Res Function(_$ComboDealTierRuleDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -185,7 +185,7 @@ class __$$_ComboDealTierRuleDtoCopyWithImpl<$Res>
     Object? type = null,
     Object? minQty = null,
   }) {
-    return _then(_$_ComboDealTierRuleDto(
+    return _then(_$ComboDealTierRuleDtoImpl(
       rate: null == rate
           ? _value.rate
           : rate // ignore: cast_nullable_to_non_nullable
@@ -224,8 +224,8 @@ class __$$_ComboDealTierRuleDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_ComboDealTierRuleDto extends _ComboDealTierRuleDto {
-  const _$_ComboDealTierRuleDto(
+class _$ComboDealTierRuleDtoImpl extends _ComboDealTierRuleDto {
+  const _$ComboDealTierRuleDtoImpl(
       {@StringToDoubleConverter()
       @JsonKey(name: 'rate', defaultValue: 0)
       required this.rate,
@@ -247,8 +247,8 @@ class _$_ComboDealTierRuleDto extends _ComboDealTierRuleDto {
       required this.minQty})
       : super._();
 
-  factory _$_ComboDealTierRuleDto.fromJson(Map<String, dynamic> json) =>
-      _$$_ComboDealTierRuleDtoFromJson(json);
+  factory _$ComboDealTierRuleDtoImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ComboDealTierRuleDtoImplFromJson(json);
 
   @override
   @StringToDoubleConverter()
@@ -285,10 +285,10 @@ class _$_ComboDealTierRuleDto extends _ComboDealTierRuleDto {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ComboDealTierRuleDto &&
+            other is _$ComboDealTierRuleDtoImpl &&
             (identical(other.rate, rate) || other.rate == rate) &&
             (identical(other.conditionNumber, conditionNumber) ||
                 other.conditionNumber == conditionNumber) &&
@@ -320,13 +320,14 @@ class _$_ComboDealTierRuleDto extends _ComboDealTierRuleDto {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ComboDealTierRuleDtoCopyWith<_$_ComboDealTierRuleDto> get copyWith =>
-      __$$_ComboDealTierRuleDtoCopyWithImpl<_$_ComboDealTierRuleDto>(
-          this, _$identity);
+  _$$ComboDealTierRuleDtoImplCopyWith<_$ComboDealTierRuleDtoImpl>
+      get copyWith =>
+          __$$ComboDealTierRuleDtoImplCopyWithImpl<_$ComboDealTierRuleDtoImpl>(
+              this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_ComboDealTierRuleDtoToJson(
+    return _$$ComboDealTierRuleDtoImplToJson(
       this,
     );
   }
@@ -352,11 +353,11 @@ abstract class _ComboDealTierRuleDto extends ComboDealTierRuleDto {
       @JsonKey(name: 'type', defaultValue: '') required final String type,
       @StringToIntConverter()
       @JsonKey(name: 'minQty', defaultValue: 0)
-      required final int minQty}) = _$_ComboDealTierRuleDto;
+      required final int minQty}) = _$ComboDealTierRuleDtoImpl;
   const _ComboDealTierRuleDto._() : super._();
 
   factory _ComboDealTierRuleDto.fromJson(Map<String, dynamic> json) =
-      _$_ComboDealTierRuleDto.fromJson;
+      _$ComboDealTierRuleDtoImpl.fromJson;
 
   @override
   @StringToDoubleConverter()
@@ -388,6 +389,6 @@ abstract class _ComboDealTierRuleDto extends ComboDealTierRuleDto {
   int get minQty;
   @override
   @JsonKey(ignore: true)
-  _$$_ComboDealTierRuleDtoCopyWith<_$_ComboDealTierRuleDto> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$ComboDealTierRuleDtoImplCopyWith<_$ComboDealTierRuleDtoImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }

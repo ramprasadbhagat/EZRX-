@@ -12,7 +12,7 @@ part of 'price_combo_deal_dto.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 PriceComboDealDto _$PriceComboDealDtoFromJson(Map<String, dynamic> json) {
   return _PriceComboDealDto.fromJson(json);
@@ -98,11 +98,11 @@ class _$PriceComboDealDtoCopyWithImpl<$Res, $Val extends PriceComboDealDto>
 }
 
 /// @nodoc
-abstract class _$$_PriceComboDealDtoCopyWith<$Res>
+abstract class _$$PriceComboDealDtoImplCopyWith<$Res>
     implements $PriceComboDealDtoCopyWith<$Res> {
-  factory _$$_PriceComboDealDtoCopyWith(_$_PriceComboDealDto value,
-          $Res Function(_$_PriceComboDealDto) then) =
-      __$$_PriceComboDealDtoCopyWithImpl<$Res>;
+  factory _$$PriceComboDealDtoImplCopyWith(_$PriceComboDealDtoImpl value,
+          $Res Function(_$PriceComboDealDtoImpl) then) =
+      __$$PriceComboDealDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -116,11 +116,11 @@ abstract class _$$_PriceComboDealDtoCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_PriceComboDealDtoCopyWithImpl<$Res>
-    extends _$PriceComboDealDtoCopyWithImpl<$Res, _$_PriceComboDealDto>
-    implements _$$_PriceComboDealDtoCopyWith<$Res> {
-  __$$_PriceComboDealDtoCopyWithImpl(
-      _$_PriceComboDealDto _value, $Res Function(_$_PriceComboDealDto) _then)
+class __$$PriceComboDealDtoImplCopyWithImpl<$Res>
+    extends _$PriceComboDealDtoCopyWithImpl<$Res, _$PriceComboDealDtoImpl>
+    implements _$$PriceComboDealDtoImplCopyWith<$Res> {
+  __$$PriceComboDealDtoImplCopyWithImpl(_$PriceComboDealDtoImpl _value,
+      $Res Function(_$PriceComboDealDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -131,7 +131,7 @@ class __$$_PriceComboDealDtoCopyWithImpl<$Res>
     Object? salesDeal = null,
     Object? category = null,
   }) {
-    return _then(_$_PriceComboDealDto(
+    return _then(_$PriceComboDealDtoImpl(
       isEligible: null == isEligible
           ? _value.isEligible
           : isEligible // ignore: cast_nullable_to_non_nullable
@@ -154,20 +154,18 @@ class __$$_PriceComboDealDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_PriceComboDealDto extends _PriceComboDealDto {
-  const _$_PriceComboDealDto(
-      {@JsonKey(name: 'eligible', defaultValue: false)
-          required this.isEligible,
+class _$PriceComboDealDtoImpl extends _PriceComboDealDto {
+  const _$PriceComboDealDtoImpl(
+      {@JsonKey(name: 'eligible', defaultValue: false) required this.isEligible,
       @JsonKey(name: 'flexibleGroup', defaultValue: '')
-          required this.flexibleGroup,
-      @JsonKey(name: 'salesDeal', defaultValue: '')
-          required this.salesDeal,
+      required this.flexibleGroup,
+      @JsonKey(name: 'salesDeal', defaultValue: '') required this.salesDeal,
       @JsonKey(name: 'category')
-          this.category = PriceComboDealCategoryDto.empty})
+      this.category = PriceComboDealCategoryDto.empty})
       : super._();
 
-  factory _$_PriceComboDealDto.fromJson(Map<String, dynamic> json) =>
-      _$$_PriceComboDealDtoFromJson(json);
+  factory _$PriceComboDealDtoImpl.fromJson(Map<String, dynamic> json) =>
+      _$$PriceComboDealDtoImplFromJson(json);
 
   @override
   @JsonKey(name: 'eligible', defaultValue: false)
@@ -188,10 +186,10 @@ class _$_PriceComboDealDto extends _PriceComboDealDto {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_PriceComboDealDto &&
+            other is _$PriceComboDealDtoImpl &&
             (identical(other.isEligible, isEligible) ||
                 other.isEligible == isEligible) &&
             (identical(other.flexibleGroup, flexibleGroup) ||
@@ -210,13 +208,13 @@ class _$_PriceComboDealDto extends _PriceComboDealDto {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_PriceComboDealDtoCopyWith<_$_PriceComboDealDto> get copyWith =>
-      __$$_PriceComboDealDtoCopyWithImpl<_$_PriceComboDealDto>(
+  _$$PriceComboDealDtoImplCopyWith<_$PriceComboDealDtoImpl> get copyWith =>
+      __$$PriceComboDealDtoImplCopyWithImpl<_$PriceComboDealDtoImpl>(
           this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_PriceComboDealDtoToJson(
+    return _$$PriceComboDealDtoImplToJson(
       this,
     );
   }
@@ -225,17 +223,17 @@ class _$_PriceComboDealDto extends _PriceComboDealDto {
 abstract class _PriceComboDealDto extends PriceComboDealDto {
   const factory _PriceComboDealDto(
       {@JsonKey(name: 'eligible', defaultValue: false)
-          required final bool isEligible,
+      required final bool isEligible,
       @JsonKey(name: 'flexibleGroup', defaultValue: '')
-          required final String flexibleGroup,
+      required final String flexibleGroup,
       @JsonKey(name: 'salesDeal', defaultValue: '')
-          required final String salesDeal,
+      required final String salesDeal,
       @JsonKey(name: 'category')
-          final PriceComboDealCategoryDto category}) = _$_PriceComboDealDto;
+      final PriceComboDealCategoryDto category}) = _$PriceComboDealDtoImpl;
   const _PriceComboDealDto._() : super._();
 
   factory _PriceComboDealDto.fromJson(Map<String, dynamic> json) =
-      _$_PriceComboDealDto.fromJson;
+      _$PriceComboDealDtoImpl.fromJson;
 
   @override
   @JsonKey(name: 'eligible', defaultValue: false)
@@ -251,7 +249,7 @@ abstract class _PriceComboDealDto extends PriceComboDealDto {
   PriceComboDealCategoryDto get category;
   @override
   @JsonKey(ignore: true)
-  _$$_PriceComboDealDtoCopyWith<_$_PriceComboDealDto> get copyWith =>
+  _$$PriceComboDealDtoImplCopyWith<_$PriceComboDealDtoImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -315,12 +313,12 @@ class _$PriceComboDealCategoryDtoCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_PriceComboDealCategoryDtoCopyWith<$Res>
+abstract class _$$PriceComboDealCategoryDtoImplCopyWith<$Res>
     implements $PriceComboDealCategoryDtoCopyWith<$Res> {
-  factory _$$_PriceComboDealCategoryDtoCopyWith(
-          _$_PriceComboDealCategoryDto value,
-          $Res Function(_$_PriceComboDealCategoryDto) then) =
-      __$$_PriceComboDealCategoryDtoCopyWithImpl<$Res>;
+  factory _$$PriceComboDealCategoryDtoImplCopyWith(
+          _$PriceComboDealCategoryDtoImpl value,
+          $Res Function(_$PriceComboDealCategoryDtoImpl) then) =
+      __$$PriceComboDealCategoryDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -329,13 +327,13 @@ abstract class _$$_PriceComboDealCategoryDtoCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_PriceComboDealCategoryDtoCopyWithImpl<$Res>
+class __$$PriceComboDealCategoryDtoImplCopyWithImpl<$Res>
     extends _$PriceComboDealCategoryDtoCopyWithImpl<$Res,
-        _$_PriceComboDealCategoryDto>
-    implements _$$_PriceComboDealCategoryDtoCopyWith<$Res> {
-  __$$_PriceComboDealCategoryDtoCopyWithImpl(
-      _$_PriceComboDealCategoryDto _value,
-      $Res Function(_$_PriceComboDealCategoryDto) _then)
+        _$PriceComboDealCategoryDtoImpl>
+    implements _$$PriceComboDealCategoryDtoImplCopyWith<$Res> {
+  __$$PriceComboDealCategoryDtoImplCopyWithImpl(
+      _$PriceComboDealCategoryDtoImpl _value,
+      $Res Function(_$PriceComboDealCategoryDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -344,7 +342,7 @@ class __$$_PriceComboDealCategoryDtoCopyWithImpl<$Res>
     Object? type = null,
     Object? value = null,
   }) {
-    return _then(_$_PriceComboDealCategoryDto(
+    return _then(_$PriceComboDealCategoryDtoImpl(
       type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
@@ -359,17 +357,16 @@ class __$$_PriceComboDealCategoryDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_PriceComboDealCategoryDto extends _PriceComboDealCategoryDto {
-  const _$_PriceComboDealCategoryDto(
-      {@JsonKey(name: 'type', defaultValue: '')
-          required this.type,
+class _$PriceComboDealCategoryDtoImpl extends _PriceComboDealCategoryDto {
+  const _$PriceComboDealCategoryDtoImpl(
+      {@JsonKey(name: 'type', defaultValue: '') required this.type,
       @JsonKey(name: 'value', defaultValue: <String>[])
-          required final List<String> value})
+      required final List<String> value})
       : _value = value,
         super._();
 
-  factory _$_PriceComboDealCategoryDto.fromJson(Map<String, dynamic> json) =>
-      _$$_PriceComboDealCategoryDtoFromJson(json);
+  factory _$PriceComboDealCategoryDtoImpl.fromJson(Map<String, dynamic> json) =>
+      _$$PriceComboDealCategoryDtoImplFromJson(json);
 
   @override
   @JsonKey(name: 'type', defaultValue: '')
@@ -389,10 +386,10 @@ class _$_PriceComboDealCategoryDto extends _PriceComboDealCategoryDto {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_PriceComboDealCategoryDto &&
+            other is _$PriceComboDealCategoryDtoImpl &&
             (identical(other.type, type) || other.type == type) &&
             const DeepCollectionEquality().equals(other._value, _value));
   }
@@ -405,13 +402,13 @@ class _$_PriceComboDealCategoryDto extends _PriceComboDealCategoryDto {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_PriceComboDealCategoryDtoCopyWith<_$_PriceComboDealCategoryDto>
-      get copyWith => __$$_PriceComboDealCategoryDtoCopyWithImpl<
-          _$_PriceComboDealCategoryDto>(this, _$identity);
+  _$$PriceComboDealCategoryDtoImplCopyWith<_$PriceComboDealCategoryDtoImpl>
+      get copyWith => __$$PriceComboDealCategoryDtoImplCopyWithImpl<
+          _$PriceComboDealCategoryDtoImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_PriceComboDealCategoryDtoToJson(
+    return _$$PriceComboDealCategoryDtoImplToJson(
       this,
     );
   }
@@ -419,14 +416,13 @@ class _$_PriceComboDealCategoryDto extends _PriceComboDealCategoryDto {
 
 abstract class _PriceComboDealCategoryDto extends PriceComboDealCategoryDto {
   const factory _PriceComboDealCategoryDto(
-      {@JsonKey(name: 'type', defaultValue: '')
-          required final String type,
+      {@JsonKey(name: 'type', defaultValue: '') required final String type,
       @JsonKey(name: 'value', defaultValue: <String>[])
-          required final List<String> value}) = _$_PriceComboDealCategoryDto;
+      required final List<String> value}) = _$PriceComboDealCategoryDtoImpl;
   const _PriceComboDealCategoryDto._() : super._();
 
   factory _PriceComboDealCategoryDto.fromJson(Map<String, dynamic> json) =
-      _$_PriceComboDealCategoryDto.fromJson;
+      _$PriceComboDealCategoryDtoImpl.fromJson;
 
   @override
   @JsonKey(name: 'type', defaultValue: '')
@@ -436,6 +432,6 @@ abstract class _PriceComboDealCategoryDto extends PriceComboDealCategoryDto {
   List<String> get value;
   @override
   @JsonKey(ignore: true)
-  _$$_PriceComboDealCategoryDtoCopyWith<_$_PriceComboDealCategoryDto>
+  _$$PriceComboDealCategoryDtoImplCopyWith<_$PriceComboDealCategoryDtoImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

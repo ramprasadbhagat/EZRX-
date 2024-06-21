@@ -12,7 +12,7 @@ part of 'principal_data.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$PrincipalData {
@@ -63,22 +63,22 @@ class _$PrincipalDataCopyWithImpl<$Res, $Val extends PrincipalData>
 }
 
 /// @nodoc
-abstract class _$$_PrincipalDataCopyWith<$Res>
+abstract class _$$PrincipalDataImplCopyWith<$Res>
     implements $PrincipalDataCopyWith<$Res> {
-  factory _$$_PrincipalDataCopyWith(
-          _$_PrincipalData value, $Res Function(_$_PrincipalData) then) =
-      __$$_PrincipalDataCopyWithImpl<$Res>;
+  factory _$$PrincipalDataImplCopyWith(
+          _$PrincipalDataImpl value, $Res Function(_$PrincipalDataImpl) then) =
+      __$$PrincipalDataImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({PrincipalName principalName, PrincipalCode principalCode});
 }
 
 /// @nodoc
-class __$$_PrincipalDataCopyWithImpl<$Res>
-    extends _$PrincipalDataCopyWithImpl<$Res, _$_PrincipalData>
-    implements _$$_PrincipalDataCopyWith<$Res> {
-  __$$_PrincipalDataCopyWithImpl(
-      _$_PrincipalData _value, $Res Function(_$_PrincipalData) _then)
+class __$$PrincipalDataImplCopyWithImpl<$Res>
+    extends _$PrincipalDataCopyWithImpl<$Res, _$PrincipalDataImpl>
+    implements _$$PrincipalDataImplCopyWith<$Res> {
+  __$$PrincipalDataImplCopyWithImpl(
+      _$PrincipalDataImpl _value, $Res Function(_$PrincipalDataImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -87,7 +87,7 @@ class __$$_PrincipalDataCopyWithImpl<$Res>
     Object? principalName = null,
     Object? principalCode = null,
   }) {
-    return _then(_$_PrincipalData(
+    return _then(_$PrincipalDataImpl(
       principalName: null == principalName
           ? _value.principalName
           : principalName // ignore: cast_nullable_to_non_nullable
@@ -102,8 +102,8 @@ class __$$_PrincipalDataCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_PrincipalData extends _PrincipalData {
-  const _$_PrincipalData(
+class _$PrincipalDataImpl extends _PrincipalData {
+  const _$PrincipalDataImpl(
       {required this.principalName, required this.principalCode})
       : super._();
 
@@ -118,10 +118,10 @@ class _$_PrincipalData extends _PrincipalData {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_PrincipalData &&
+            other is _$PrincipalDataImpl &&
             (identical(other.principalName, principalName) ||
                 other.principalName == principalName) &&
             (identical(other.principalCode, principalCode) ||
@@ -134,14 +134,14 @@ class _$_PrincipalData extends _PrincipalData {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_PrincipalDataCopyWith<_$_PrincipalData> get copyWith =>
-      __$$_PrincipalDataCopyWithImpl<_$_PrincipalData>(this, _$identity);
+  _$$PrincipalDataImplCopyWith<_$PrincipalDataImpl> get copyWith =>
+      __$$PrincipalDataImplCopyWithImpl<_$PrincipalDataImpl>(this, _$identity);
 }
 
 abstract class _PrincipalData extends PrincipalData {
   const factory _PrincipalData(
       {required final PrincipalName principalName,
-      required final PrincipalCode principalCode}) = _$_PrincipalData;
+      required final PrincipalCode principalCode}) = _$PrincipalDataImpl;
   const _PrincipalData._() : super._();
 
   @override
@@ -150,6 +150,6 @@ abstract class _PrincipalData extends PrincipalData {
   PrincipalCode get principalCode;
   @override
   @JsonKey(ignore: true)
-  _$$_PrincipalDataCopyWith<_$_PrincipalData> get copyWith =>
+  _$$PrincipalDataImplCopyWith<_$PrincipalDataImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

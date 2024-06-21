@@ -6,9 +6,9 @@ part of 'available_credit_filter_dto.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_AvailableCreditFilterDto _$$_AvailableCreditFilterDtoFromJson(
+_$AvailableCreditFilterDtoImpl _$$AvailableCreditFilterDtoImplFromJson(
         Map<String, dynamic> json) =>
-    _$_AvailableCreditFilterDto(
+    _$AvailableCreditFilterDtoImpl(
       documentDateFrom: json['documentDateFrom'] as String? ?? '',
       documentDateTo: json['documentDateTo'] as String? ?? '',
       amountInTransactionCurrencyFrom:
@@ -17,8 +17,8 @@ _$_AvailableCreditFilterDto _$$_AvailableCreditFilterDtoFromJson(
           json['amountInTransactionCurrencyTo'] as String? ?? '',
     );
 
-Map<String, dynamic> _$$_AvailableCreditFilterDtoToJson(
-        _$_AvailableCreditFilterDto instance) =>
+Map<String, dynamic> _$$AvailableCreditFilterDtoImplToJson(
+        _$AvailableCreditFilterDtoImpl instance) =>
     <String, dynamic>{
       'documentDateFrom': instance.documentDateFrom,
       'documentDateTo': instance.documentDateTo,

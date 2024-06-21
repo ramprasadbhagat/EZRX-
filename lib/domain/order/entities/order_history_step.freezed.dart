@@ -12,7 +12,7 @@ part of 'order_history_step.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$OrderHistoryStep {
@@ -100,11 +100,11 @@ class _$OrderHistoryStepCopyWithImpl<$Res, $Val extends OrderHistoryStep>
 }
 
 /// @nodoc
-abstract class _$$_OrderHistoryStepCopyWith<$Res>
+abstract class _$$OrderHistoryStepImplCopyWith<$Res>
     implements $OrderHistoryStepCopyWith<$Res> {
-  factory _$$_OrderHistoryStepCopyWith(
-          _$_OrderHistoryStep value, $Res Function(_$_OrderHistoryStep) then) =
-      __$$_OrderHistoryStepCopyWithImpl<$Res>;
+  factory _$$OrderHistoryStepImplCopyWith(_$OrderHistoryStepImpl value,
+          $Res Function(_$OrderHistoryStepImpl) then) =
+      __$$OrderHistoryStepImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -118,11 +118,11 @@ abstract class _$$_OrderHistoryStepCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_OrderHistoryStepCopyWithImpl<$Res>
-    extends _$OrderHistoryStepCopyWithImpl<$Res, _$_OrderHistoryStep>
-    implements _$$_OrderHistoryStepCopyWith<$Res> {
-  __$$_OrderHistoryStepCopyWithImpl(
-      _$_OrderHistoryStep _value, $Res Function(_$_OrderHistoryStep) _then)
+class __$$OrderHistoryStepImplCopyWithImpl<$Res>
+    extends _$OrderHistoryStepCopyWithImpl<$Res, _$OrderHistoryStepImpl>
+    implements _$$OrderHistoryStepImplCopyWith<$Res> {
+  __$$OrderHistoryStepImplCopyWithImpl(_$OrderHistoryStepImpl _value,
+      $Res Function(_$OrderHistoryStepImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -136,7 +136,7 @@ class __$$_OrderHistoryStepCopyWithImpl<$Res>
     Object? subSteps = null,
     Object? state = null,
   }) {
-    return _then(_$_OrderHistoryStep(
+    return _then(_$OrderHistoryStepImpl(
       dateString: null == dateString
           ? _value.dateString
           : dateString // ignore: cast_nullable_to_non_nullable
@@ -171,8 +171,8 @@ class __$$_OrderHistoryStepCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_OrderHistoryStep extends _OrderHistoryStep {
-  const _$_OrderHistoryStep(
+class _$OrderHistoryStepImpl extends _OrderHistoryStep {
+  const _$OrderHistoryStepImpl(
       {required this.dateString,
       required this.timeString,
       required this.icon,
@@ -210,10 +210,10 @@ class _$_OrderHistoryStep extends _OrderHistoryStep {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_OrderHistoryStep &&
+            other is _$OrderHistoryStepImpl &&
             (identical(other.dateString, dateString) ||
                 other.dateString == dateString) &&
             (identical(other.timeString, timeString) ||
@@ -233,8 +233,9 @@ class _$_OrderHistoryStep extends _OrderHistoryStep {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_OrderHistoryStepCopyWith<_$_OrderHistoryStep> get copyWith =>
-      __$$_OrderHistoryStepCopyWithImpl<_$_OrderHistoryStep>(this, _$identity);
+  _$$OrderHistoryStepImplCopyWith<_$OrderHistoryStepImpl> get copyWith =>
+      __$$OrderHistoryStepImplCopyWithImpl<_$OrderHistoryStepImpl>(
+          this, _$identity);
 }
 
 abstract class _OrderHistoryStep extends OrderHistoryStep {
@@ -245,7 +246,7 @@ abstract class _OrderHistoryStep extends OrderHistoryStep {
       required final String title,
       required final String subTitle,
       required final List<OrderStatusTracker> subSteps,
-      required final OrderHistoryStepStates state}) = _$_OrderHistoryStep;
+      required final OrderHistoryStepStates state}) = _$OrderHistoryStepImpl;
   const _OrderHistoryStep._() : super._();
 
   @override
@@ -264,6 +265,6 @@ abstract class _OrderHistoryStep extends OrderHistoryStep {
   OrderHistoryStepStates get state;
   @override
   @JsonKey(ignore: true)
-  _$$_OrderHistoryStepCopyWith<_$_OrderHistoryStep> get copyWith =>
+  _$$OrderHistoryStepImplCopyWith<_$OrderHistoryStepImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

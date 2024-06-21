@@ -12,7 +12,7 @@ part of 'approval_limits_dto.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 ApprovalLimitsDto _$ApprovalLimitsDtoFromJson(Map<String, dynamic> json) {
   return _ApprovalLimitsDto.fromJson(json);
@@ -96,11 +96,11 @@ class _$ApprovalLimitsDtoCopyWithImpl<$Res, $Val extends ApprovalLimitsDto>
 }
 
 /// @nodoc
-abstract class _$$_ApprovalLimitsDtoCopyWith<$Res>
+abstract class _$$ApprovalLimitsDtoImplCopyWith<$Res>
     implements $ApprovalLimitsDtoCopyWith<$Res> {
-  factory _$$_ApprovalLimitsDtoCopyWith(_$_ApprovalLimitsDto value,
-          $Res Function(_$_ApprovalLimitsDto) then) =
-      __$$_ApprovalLimitsDtoCopyWithImpl<$Res>;
+  factory _$$ApprovalLimitsDtoImplCopyWith(_$ApprovalLimitsDtoImpl value,
+          $Res Function(_$ApprovalLimitsDtoImpl) then) =
+      __$$ApprovalLimitsDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -112,11 +112,11 @@ abstract class _$$_ApprovalLimitsDtoCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_ApprovalLimitsDtoCopyWithImpl<$Res>
-    extends _$ApprovalLimitsDtoCopyWithImpl<$Res, _$_ApprovalLimitsDto>
-    implements _$$_ApprovalLimitsDtoCopyWith<$Res> {
-  __$$_ApprovalLimitsDtoCopyWithImpl(
-      _$_ApprovalLimitsDto _value, $Res Function(_$_ApprovalLimitsDto) _then)
+class __$$ApprovalLimitsDtoImplCopyWithImpl<$Res>
+    extends _$ApprovalLimitsDtoCopyWithImpl<$Res, _$ApprovalLimitsDtoImpl>
+    implements _$$ApprovalLimitsDtoImplCopyWith<$Res> {
+  __$$ApprovalLimitsDtoImplCopyWithImpl(_$ApprovalLimitsDtoImpl _value,
+      $Res Function(_$ApprovalLimitsDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -128,7 +128,7 @@ class __$$_ApprovalLimitsDtoCopyWithImpl<$Res>
     Object? username = null,
     Object? uuid = null,
   }) {
-    return _then(_$_ApprovalLimitsDto(
+    return _then(_$ApprovalLimitsDtoImpl(
       salesOrg: null == salesOrg
           ? _value.salesOrg
           : salesOrg // ignore: cast_nullable_to_non_nullable
@@ -155,8 +155,8 @@ class __$$_ApprovalLimitsDtoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_ApprovalLimitsDto extends _ApprovalLimitsDto {
-  const _$_ApprovalLimitsDto(
+class _$ApprovalLimitsDtoImpl extends _ApprovalLimitsDto {
+  const _$ApprovalLimitsDtoImpl(
       {@JsonKey(name: 'salesOrg', defaultValue: '') required this.salesOrg,
       @JsonKey(name: 'valueLowerLimit', defaultValue: 0)
       required this.valueLowerLimit,
@@ -166,8 +166,8 @@ class _$_ApprovalLimitsDto extends _ApprovalLimitsDto {
       @JsonKey(name: 'uuid', defaultValue: '') required this.uuid})
       : super._();
 
-  factory _$_ApprovalLimitsDto.fromJson(Map<String, dynamic> json) =>
-      _$$_ApprovalLimitsDtoFromJson(json);
+  factory _$ApprovalLimitsDtoImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ApprovalLimitsDtoImplFromJson(json);
 
   @override
   @JsonKey(name: 'salesOrg', defaultValue: '')
@@ -191,10 +191,10 @@ class _$_ApprovalLimitsDto extends _ApprovalLimitsDto {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ApprovalLimitsDto &&
+            other is _$ApprovalLimitsDtoImpl &&
             (identical(other.salesOrg, salesOrg) ||
                 other.salesOrg == salesOrg) &&
             (identical(other.valueLowerLimit, valueLowerLimit) ||
@@ -214,13 +214,13 @@ class _$_ApprovalLimitsDto extends _ApprovalLimitsDto {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ApprovalLimitsDtoCopyWith<_$_ApprovalLimitsDto> get copyWith =>
-      __$$_ApprovalLimitsDtoCopyWithImpl<_$_ApprovalLimitsDto>(
+  _$$ApprovalLimitsDtoImplCopyWith<_$ApprovalLimitsDtoImpl> get copyWith =>
+      __$$ApprovalLimitsDtoImplCopyWithImpl<_$ApprovalLimitsDtoImpl>(
           this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_ApprovalLimitsDtoToJson(
+    return _$$ApprovalLimitsDtoImplToJson(
       this,
     );
   }
@@ -237,11 +237,11 @@ abstract class _ApprovalLimitsDto extends ApprovalLimitsDto {
       @JsonKey(name: 'username', defaultValue: '')
       required final String username,
       @JsonKey(name: 'uuid', defaultValue: '')
-      required final String uuid}) = _$_ApprovalLimitsDto;
+      required final String uuid}) = _$ApprovalLimitsDtoImpl;
   const _ApprovalLimitsDto._() : super._();
 
   factory _ApprovalLimitsDto.fromJson(Map<String, dynamic> json) =
-      _$_ApprovalLimitsDto.fromJson;
+      _$ApprovalLimitsDtoImpl.fromJson;
 
   @override
   @JsonKey(name: 'salesOrg', defaultValue: '')
@@ -260,6 +260,6 @@ abstract class _ApprovalLimitsDto extends ApprovalLimitsDto {
   String get uuid;
   @override
   @JsonKey(ignore: true)
-  _$$_ApprovalLimitsDtoCopyWith<_$_ApprovalLimitsDto> get copyWith =>
+  _$$ApprovalLimitsDtoImplCopyWith<_$ApprovalLimitsDtoImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -6,9 +6,9 @@ part of 'apl_simulator_order_dto.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_AplSimulatorOrderDto _$$_AplSimulatorOrderDtoFromJson(
+_$AplSimulatorOrderDtoImpl _$$AplSimulatorOrderDtoImplFromJson(
         Map<String, dynamic> json) =>
-    _$_AplSimulatorOrderDto(
+    _$AplSimulatorOrderDtoImpl(
       totalPriceWithoutTax: (json['beforeTax'] as num?)?.toDouble() ?? 0,
       smallOrderFee: (json['deliveryFee'] as num?)?.toDouble() ?? 0,
       grandTotal: (json['netTotalValue'] as num?)?.toDouble() ?? 0,
@@ -20,8 +20,8 @@ _$_AplSimulatorOrderDto _$$_AplSimulatorOrderDtoFromJson(
           [],
     );
 
-Map<String, dynamic> _$$_AplSimulatorOrderDtoToJson(
-        _$_AplSimulatorOrderDto instance) =>
+Map<String, dynamic> _$$AplSimulatorOrderDtoImplToJson(
+        _$AplSimulatorOrderDtoImpl instance) =>
     <String, dynamic>{
       'beforeTax': instance.totalPriceWithoutTax,
       'deliveryFee': instance.smallOrderFee,

@@ -12,7 +12,7 @@ part of 'customer_open_item.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$CustomerOpenItem {
@@ -242,11 +242,11 @@ class _$CustomerOpenItemCopyWithImpl<$Res, $Val extends CustomerOpenItem>
 }
 
 /// @nodoc
-abstract class _$$_CustomerOpenItemCopyWith<$Res>
+abstract class _$$CustomerOpenItemImplCopyWith<$Res>
     implements $CustomerOpenItemCopyWith<$Res> {
-  factory _$$_CustomerOpenItemCopyWith(
-          _$_CustomerOpenItem value, $Res Function(_$_CustomerOpenItem) then) =
-      __$$_CustomerOpenItemCopyWithImpl<$Res>;
+  factory _$$CustomerOpenItemImplCopyWith(_$CustomerOpenItemImpl value,
+          $Res Function(_$CustomerOpenItemImpl) then) =
+      __$$CustomerOpenItemImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -280,11 +280,11 @@ abstract class _$$_CustomerOpenItemCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_CustomerOpenItemCopyWithImpl<$Res>
-    extends _$CustomerOpenItemCopyWithImpl<$Res, _$_CustomerOpenItem>
-    implements _$$_CustomerOpenItemCopyWith<$Res> {
-  __$$_CustomerOpenItemCopyWithImpl(
-      _$_CustomerOpenItem _value, $Res Function(_$_CustomerOpenItem) _then)
+class __$$CustomerOpenItemImplCopyWithImpl<$Res>
+    extends _$CustomerOpenItemCopyWithImpl<$Res, _$CustomerOpenItemImpl>
+    implements _$$CustomerOpenItemImplCopyWith<$Res> {
+  __$$CustomerOpenItemImplCopyWithImpl(_$CustomerOpenItemImpl _value,
+      $Res Function(_$CustomerOpenItemImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -318,7 +318,7 @@ class __$$_CustomerOpenItemCopyWithImpl<$Res>
     Object? orderId = null,
     Object? postingDate = null,
   }) {
-    return _then(_$_CustomerOpenItem(
+    return _then(_$CustomerOpenItemImpl(
       status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
@@ -433,8 +433,8 @@ class __$$_CustomerOpenItemCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_CustomerOpenItem extends _CustomerOpenItem {
-  _$_CustomerOpenItem(
+class _$CustomerOpenItemImpl extends _CustomerOpenItem {
+  _$CustomerOpenItemImpl(
       {required this.status,
       required this.accountingDocument,
       required this.netDueDate,
@@ -525,10 +525,10 @@ class _$_CustomerOpenItem extends _CustomerOpenItem {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_CustomerOpenItem &&
+            other is _$CustomerOpenItemImpl &&
             (identical(other.status, status) || other.status == status) &&
             (identical(other.accountingDocument, accountingDocument) ||
                 other.accountingDocument == accountingDocument) &&
@@ -621,8 +621,9 @@ class _$_CustomerOpenItem extends _CustomerOpenItem {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_CustomerOpenItemCopyWith<_$_CustomerOpenItem> get copyWith =>
-      __$$_CustomerOpenItemCopyWithImpl<_$_CustomerOpenItem>(this, _$identity);
+  _$$CustomerOpenItemImplCopyWith<_$CustomerOpenItemImpl> get copyWith =>
+      __$$CustomerOpenItemImplCopyWithImpl<_$CustomerOpenItemImpl>(
+          this, _$identity);
 }
 
 abstract class _CustomerOpenItem extends CustomerOpenItem {
@@ -653,7 +654,7 @@ abstract class _CustomerOpenItem extends CustomerOpenItem {
       required final String companyCode,
       required final double openAmountInTransCrcy,
       required final StringValue orderId,
-      required final DateTimeStringValue postingDate}) = _$_CustomerOpenItem;
+      required final DateTimeStringValue postingDate}) = _$CustomerOpenItemImpl;
   _CustomerOpenItem._() : super._();
 
   @override
@@ -712,6 +713,6 @@ abstract class _CustomerOpenItem extends CustomerOpenItem {
   DateTimeStringValue get postingDate;
   @override
   @JsonKey(ignore: true)
-  _$$_CustomerOpenItemCopyWith<_$_CustomerOpenItem> get copyWith =>
+  _$$CustomerOpenItemImplCopyWith<_$CustomerOpenItemImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

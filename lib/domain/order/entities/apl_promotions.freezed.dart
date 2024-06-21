@@ -12,7 +12,7 @@ part of 'apl_promotions.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$AplPromotions {
@@ -63,22 +63,22 @@ class _$AplPromotionsCopyWithImpl<$Res, $Val extends AplPromotions>
 }
 
 /// @nodoc
-abstract class _$$_AplPromotionsCopyWith<$Res>
+abstract class _$$AplPromotionsImplCopyWith<$Res>
     implements $AplPromotionsCopyWith<$Res> {
-  factory _$$_AplPromotionsCopyWith(
-          _$_AplPromotions value, $Res Function(_$_AplPromotions) then) =
-      __$$_AplPromotionsCopyWithImpl<$Res>;
+  factory _$$AplPromotionsImplCopyWith(
+          _$AplPromotionsImpl value, $Res Function(_$AplPromotionsImpl) then) =
+      __$$AplPromotionsImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({double discountValue, DiscountType discountTypeValue});
 }
 
 /// @nodoc
-class __$$_AplPromotionsCopyWithImpl<$Res>
-    extends _$AplPromotionsCopyWithImpl<$Res, _$_AplPromotions>
-    implements _$$_AplPromotionsCopyWith<$Res> {
-  __$$_AplPromotionsCopyWithImpl(
-      _$_AplPromotions _value, $Res Function(_$_AplPromotions) _then)
+class __$$AplPromotionsImplCopyWithImpl<$Res>
+    extends _$AplPromotionsCopyWithImpl<$Res, _$AplPromotionsImpl>
+    implements _$$AplPromotionsImplCopyWith<$Res> {
+  __$$AplPromotionsImplCopyWithImpl(
+      _$AplPromotionsImpl _value, $Res Function(_$AplPromotionsImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -87,7 +87,7 @@ class __$$_AplPromotionsCopyWithImpl<$Res>
     Object? discountValue = null,
     Object? discountTypeValue = null,
   }) {
-    return _then(_$_AplPromotions(
+    return _then(_$AplPromotionsImpl(
       discountValue: null == discountValue
           ? _value.discountValue
           : discountValue // ignore: cast_nullable_to_non_nullable
@@ -102,8 +102,8 @@ class __$$_AplPromotionsCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_AplPromotions extends _AplPromotions {
-  const _$_AplPromotions(
+class _$AplPromotionsImpl extends _AplPromotions {
+  const _$AplPromotionsImpl(
       {required this.discountValue, required this.discountTypeValue})
       : super._();
 
@@ -118,10 +118,10 @@ class _$_AplPromotions extends _AplPromotions {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_AplPromotions &&
+            other is _$AplPromotionsImpl &&
             (identical(other.discountValue, discountValue) ||
                 other.discountValue == discountValue) &&
             (identical(other.discountTypeValue, discountTypeValue) ||
@@ -135,14 +135,14 @@ class _$_AplPromotions extends _AplPromotions {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_AplPromotionsCopyWith<_$_AplPromotions> get copyWith =>
-      __$$_AplPromotionsCopyWithImpl<_$_AplPromotions>(this, _$identity);
+  _$$AplPromotionsImplCopyWith<_$AplPromotionsImpl> get copyWith =>
+      __$$AplPromotionsImplCopyWithImpl<_$AplPromotionsImpl>(this, _$identity);
 }
 
 abstract class _AplPromotions extends AplPromotions {
   const factory _AplPromotions(
       {required final double discountValue,
-      required final DiscountType discountTypeValue}) = _$_AplPromotions;
+      required final DiscountType discountTypeValue}) = _$AplPromotionsImpl;
   const _AplPromotions._() : super._();
 
   @override
@@ -151,6 +151,6 @@ abstract class _AplPromotions extends AplPromotions {
   DiscountType get discountTypeValue;
   @override
   @JsonKey(ignore: true)
-  _$$_AplPromotionsCopyWith<_$_AplPromotions> get copyWith =>
+  _$$AplPromotionsImplCopyWith<_$AplPromotionsImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
