@@ -194,7 +194,7 @@ class _SubStatusSection extends StatelessWidget {
                 Expanded(
                   child: _DateTimeWidget(
                     dateString: step.preformedAt.dateString,
-                    timeString: step.preformedAt.timeWithTimeZone,
+                    timeString: step.preformedAt.time12HoursString,
                     state: OrderHistoryStepStates.inactive,
                   ),
                 ),
