@@ -375,9 +375,8 @@ class OrderEligibilityState with _$OrderEligibilityState {
     if (cartItems.zpMaterialOnly.isEmpty) return true;
     if (zpSmallOrderFeeEnable) return true;
 
-    if (isIntSalesRepWithSmallOrderFeeForCustomer &&
-        atLeastOneZPItemInStockRequired) {
-      return false;
+    if (atLeastOneZPItemInStockRequired) {
+      return true;
     }
 
     if (isIntSalesRepWithSmallOrderFeeForCustomer) {

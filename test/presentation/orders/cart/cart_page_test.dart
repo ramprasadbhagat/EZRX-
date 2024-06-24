@@ -3510,6 +3510,58 @@ void main() {
         verifyNever(() => autoRouterMock.pushNamed('orders/cart/checkout'));
       });
 
+      testWidgets(
+          'Do not show MOV check error if cart contain only OOS item and enableSmallOrderFee is ON',
+          (tester) async {
+        final cartProduct = [
+          mockCartItems.first.copyWith(
+            tenderContract: TenderContract.empty(),
+            stockInfoList: [
+              StockInfo.empty().copyWith(
+                inStock: MaterialInStock('No'),
+              ),
+            ],
+          ),
+        ];
+
+        when(() => orderEligibilityBlocMock.state).thenReturn(
+          OrderEligibilityState.initial().copyWith(
+            cartItems: cartProduct,
+            salesOrg: fakeSGSalesOrganisation,
+            configs: fakeSGSalesOrgConfigs.copyWith(
+              enableSmallOrderFee: true,
+              smallOrderFee: 10,
+              sapMinOrderAmount: 10,
+              smallOrderFeeUserRoles: [
+                RoleType.clientUser().smallOrderFeeRole,
+                RoleType.clientAdmin().smallOrderFeeRole,
+              ],
+            ),
+            showErrorMessage: true,
+            user: User.empty().copyWith(
+              role: Role.empty().copyWith(
+                type: RoleType('internal_sales_rep'),
+              ),
+            ),
+          ),
+        );
+
+        when(() => cartBloc.state).thenReturn(
+          CartState.initial().copyWith(
+            cartProducts: cartProduct,
+          ),
+        );
+
+        await tester.pumpWidget(getWidget());
+        await tester.pumpAndSettle();
+        final movWarning = find.text(
+          'Please ensure that the order value satisfies the minimum order value of {mov}'
+              .tr(namedArgs: {'mov': 'SGD 10.00'}),
+        );
+
+        expect(movWarning, findsNothing);
+      });
+
       testWidgets('BillToInfo test when enablebillto is false', (tester) async {
         final cartState = CartState.initial().copyWith(
           cartProducts: <PriceAggregate>[
