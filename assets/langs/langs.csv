@@ -1542,7 +1542,7 @@ This allows you to take pictures and scan codes,This allows you to take pictures
 "Don't allow","Don't allow",ไม่อนุญาต,不允許,အထည့်မည်မျိုးချိ,Không cho phép,មិនទាន់,Tidak diizinkan,허용하지 않기
 Allow,Allow,อนุญาต,允許,ချိမျိုးချိ,Cho phép,ទាន់,Diizinkan,허용하기
 Registration number,Registration number,หมายเลขทะเบียน,註冊號碼,မှတ်ပုံတင်နံပါတ်,Số đăng ký,លេខចុះឈ្មោះ,Nomor Registrasi,등록 번호
-Arrival at customer site,Arrival at customer site,มาถึงสถานที่ลูกค้า,到達客戶地點,သည်သူဌေးကြီးရောက်ရှိ,Đến nơi khách hàng,មកដល់កន្លែងរបស់អតិថិជន,Tiba di lokasi pelanggan,고객 현장 도착
+Arrival At Destination,Arrival At Destination,มาถึงสถานที่ลูกค้า,到達客戶地點,သည်သူဌေးကြီးရောက်ရှိ,Đã đến điểm khách hàng,មកដល់កន្លែងរបស់អតិថិជន,Tiba di lokasi pelanggan,고객 현장 도착
 Partial RUD,Partial RUD,การส่งคืนบางส่วน,部分退貨,ပစိတ်တပ်ဆိုင်း,RUD một phần,RUD ផ្នែកមួយ,RUD Sebagian,부분적 RUD
 Full RUD,Full RUD,การส่งคืนทั้งหมด,全數退貨,ပြီးလ पूर्ण,RUD đầy đủ,RUD ពេញមួយ,RUD Lengkap,전체 RUD
 Redelivery,Redelivery,การส่งคืนใหม่,重新配送,ပুনःပို့ဆောင်ခြင်း,Giao hàng lại,ដឹកជញ្ជូនឡើងវិញ,Pengiriman Ulang,재배송
@@ -1560,3 +1560,14 @@ Your account creation is incomplete. Please contact the local customer service t
 Redirecting to homepage in {remainingSeconds} seconds,Redirecting to homepage in {remainingSeconds} seconds,กำลังเปลี่ยนเส้นทางไปยังหน้าแรกในอีก {remainingSeconds} วินาที,將在 {remainingSeconds} 秒後重定向到首頁,{remainingSeconds} စက္ကန့်အတွင်း နေအိမ်စာမျက်နှာသို့ ပြန်လည်သွားမည်,Chuyển hướng đến trang chủ trong {remainingSeconds} giây,កំពុងបញ្ចូនទៅទំព័រដើមក្នុងរយៈពេល {remainingSeconds} វិនាទី,Mengarahkan ke beranda dalam {remainingSeconds} detik,{remainingSeconds}초 후에 홈페이지로 이동합니다
 Set a new password,Set a new password,ตั้งรหัสผ่านใหม่,設置新密碼,စကားဝှက်အသစ်ထည့်ပါ,Đặt mật khẩu mới,កំណត់ពាក្យសម្ងាត់ថ្មី,Atur kata sandi baru,새 비밀번호 설정
 This account is blocked,This account is blocked,บัญชีนี้ถูกบล็อก,此帳戶已被封鎖,ဤအကောင့်ကို ပိတ်ထားသည်,Tài khoản này đã bị khóa,គណនីនេះត្រូវបានបិទ,Akun ini diblokir,이 계정은 차단되었습니다
+Arrival at customer site,Arrival at customer site,มาถึงสถานที่ลูกค้า,到達客戶地點,သည်သူဌေးကြီးရောက်ရှိ,Đã đến điểm khách hàng,មកដល់កន្លែងរបស់អតិថិជន,Tiba di lokasi pelanggan,고객 현장 도착
+"Arrival at Crossdock","Arrival at Crossdock", "มาถึงที่ครอสด็อค", "到達越庫轉運", "Crossdock သို့ရောက်ရှိ", "Đã đến Crossdock", "ការមកដល់នៅ Crossdock", "Tiba di Crossdock", "크로스독 도착"
+"Arrival at pickup location","Arrival at pickup location", "มาถึงที่จุดรับ", "到達上車地點", "လာယူမည့်နေရာသို့ ရောက်ရှိသည်။", "Đã đến điểm lấy hàng", "មកដល់ទីតាំងទទួល", "Tiba di lokasi penjemputan", "픽업 장소 도착"
+"Full Delivery","Full Delivery", "จัดส่งเต็ม", "全程交付", "Delivery အပြည့်", "Giao hàng đầy đủ", "ការដឹកជញ្ជូនពេញ", "Pengiriman Penuh", "전체 배송"
+"No Collection","No Collection", "ไม่มีการสะสม", "暫無收藏", "စုစည်းမှုမရှိပါ။", "Chưa lấy hàng", "គ្មានការប្រមូល", "Tidak Ada Pengumpulan", "수집 없음"
+"Out for Collection","Out for Collection", "ออกมาเพื่อสะสม", "外出收藏", "Collection အတွက် ထွက်", "Đang lấy hàng", "ចេញសម្រាប់ការប្រមូល", "Keluar untuk Pengumpulan", "수집 중"
+"POD Handover","POD Handover", "การส่งมอบ POD", "POD 移交", "POD လက်ဆင့်ကမ်း", "Chuyển giao POD", "ការប្រគល់ POD", "Serah Terima POD", "POD 인계"
+"Receive at Crossdock/Platforms","Receive at Crossdock/Platforms", "รับที่ Crossdock/แพลตฟอร์ม", "在越庫/平台接收", "Crossdock/ Platforms တွင် လက်ခံပါ။", "Nhận tại Crossdock/Nền tảng", "ទទួលនៅ Crossdock/Platforms", "Menerima di Crossdock/Platform", "크로스독/플랫폼에서 수령"
+"Redelivery - 1st Attempt","Redelivery - 1st Attempt", "การส่งซ้ำ - ความพยายามครั้งที่ 1", "再次投遞 - 第一次嘗試", "ပြန်လည်ပေးပို့ခြင်း - ပထမကြိုးစားမှု", "Giao lại - Lần 1", "ការដឹកជញ្ជូនឡើងវិញ - ការប៉ុនប៉ងលើកទី 1", "Pengiriman ulang - Percobaan pertama", "재배송 - 첫 번째 시도"
+"Redelivery - 2nd Attempt","Redelivery - 2nd Attempt", "การส่งซ้ำ - ความพยายามครั้งที่ 2", "重新投遞 - 第二次嘗試", "ပြန်လည်ပေးပို့ခြင်း - ဒုတိယကြိုးစားမှု", "Giao lại - Lần 2", "ការដឹកជញ្ជូនឡើងវិញ - ការប៉ុនប៉ងទី 2", "Pengiriman ulang - Percobaan kedua", "재배송 - 두 번째 시도"
+"Redelivery - 3rd Attempt","Redelivery - 3rd Attempt", "การส่งซ้ำ - ความพยายามครั้งที่ 3", "再次投遞 - 第三次嘗試", "ပြန်လည်ပေးပို့ခြင်း - တတိယမြောက် ကြိုးစားမှု", "Giao lại - Lần 3", "ការដឹកជញ្ជូនឡើងវិញ - ការប៉ុនប៉ងទី 3", "Pengiriman ulang - Percobaan ketiga", "재배송 - 세 번째 시도"
