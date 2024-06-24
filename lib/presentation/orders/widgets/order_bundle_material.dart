@@ -103,7 +103,7 @@ class BundleItemMaterial extends StatelessWidget {
                       ),
                       const SizedBox(height: 1),
                       Text(
-                        orderItem.materialDescription,
+                        orderItem.defaultMaterialDescription,
                         style: Theme.of(context)
                             .textTheme
                             .labelMedium

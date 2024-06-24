@@ -129,10 +129,10 @@ class MaterialInfo with _$MaterialInfo {
     return enableTaxDisplay ? '${'Total Tax: '.tr()}$tax%' : '';
   }
 
-  String get displayDescription => materialDescription.isNotEmpty
-      ? materialDescription
+  String get displayDescription => defaultMaterialDescription.isNotEmpty
+      ? defaultMaterialDescription
       : data.isNotEmpty
-          ? data.first.displayDescription
+          ? data.first.defaultMaterialDescription
           : '';
 
   bool get isSpecialOrderTypeMaterial => isSampleMaterial || isFOCMaterial;
@@ -233,10 +233,6 @@ class MaterialData with _$MaterialData {
         itemRegistrationNumber: ItemRegistrationNumber(''),
         isMarketPlace: false,
       );
-
-  String get displayDescription => materialDescription.isTrimmedValueNotEmpty
-      ? materialDescription.getOrDefaultValue('')
-      : defaultMaterialDescription;
 
   MaterialInfo get toMaterialInfo => MaterialInfo.empty().copyWith(
         materialNumber: materialNumber,

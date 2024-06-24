@@ -170,7 +170,7 @@ class _ProductTile extends StatelessWidget {
                           Padding(
                             padding: const EdgeInsets.symmetric(vertical: 2.0),
                             child: Text(
-                              product.materialDescription,
+                              product.defaultMaterialDescription,
                               style: Theme.of(context).textTheme.labelSmall,
                               maxLines: 2,
                               overflow: TextOverflow.ellipsis,

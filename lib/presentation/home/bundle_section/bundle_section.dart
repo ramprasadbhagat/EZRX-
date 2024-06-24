@@ -69,7 +69,8 @@ class BundleSection extends StatelessWidget {
           listener: (context, state) => state.apiFailureOrSuccessOption.fold(
             () => {},
             (either) => either.fold(
-              (failure) => ErrorUtils.handleStockInfoApiFailure(context, failure),
+              (failure) =>
+                  ErrorUtils.handleStockInfoApiFailure(context, failure),
               (_) => {},
             ),
           ),
@@ -248,7 +249,7 @@ class _BundleSectionItem extends StatelessWidget {
         TrackingProps.clickAt:
             RouterUtils.buildRouteTrackingName(context.router.currentPath),
         TrackingProps.isBundle: true,
-        TrackingProps.productName: materialInfo.displayDescription,
+        TrackingProps.productName: materialInfo.defaultMaterialDescription,
         TrackingProps.productNumber: materialInfo.materialNumber.displayMatNo,
         TrackingProps.productManufacturer: materialInfo.getManufactured,
         TrackingProps.section: 'Bundles',
@@ -260,7 +261,7 @@ class _BundleSectionItem extends StatelessWidget {
         TrackingProps.clickAt:
             RouterUtils.buildRouteTrackingName(context.router.currentPath),
         TrackingProps.isBundle: true,
-        TrackingProps.productName: materialInfo.displayDescription,
+        TrackingProps.productName: materialInfo.defaultMaterialDescription,
         TrackingProps.productNumber: materialInfo.materialNumber.displayMatNo,
         TrackingProps.productManufacturer: materialInfo.getManufactured,
       },

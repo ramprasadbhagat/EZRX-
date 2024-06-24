@@ -24,6 +24,8 @@ mixin _$OrderHistoryItemDto {
   String get materialNumber => throw _privateConstructorUsedError;
   @JsonKey(name: 'MaterialDescription', defaultValue: '')
   String get materialDescription => throw _privateConstructorUsedError;
+  @JsonKey(name: 'DefaultMaterialDescription', defaultValue: '')
+  String get defaultMaterialDescription => throw _privateConstructorUsedError;
   @JsonKey(name: 'Qty', defaultValue: 0)
   int get qty => throw _privateConstructorUsedError;
   @JsonKey(name: 'UnitPrice', defaultValue: 0.0)
@@ -126,6 +128,8 @@ abstract class $OrderHistoryItemDtoCopyWith<$Res> {
       {@JsonKey(name: 'MaterialCode', defaultValue: '') String materialNumber,
       @JsonKey(name: 'MaterialDescription', defaultValue: '')
       String materialDescription,
+      @JsonKey(name: 'DefaultMaterialDescription', defaultValue: '')
+      String defaultMaterialDescription,
       @JsonKey(name: 'Qty', defaultValue: 0) int qty,
       @JsonKey(name: 'UnitPrice', defaultValue: 0.0) double unitPrice,
       @JsonKey(name: 'mrp', defaultValue: 0.0) double originPrice,
@@ -198,6 +202,7 @@ class _$OrderHistoryItemDtoCopyWithImpl<$Res, $Val extends OrderHistoryItemDto>
   $Res call({
     Object? materialNumber = null,
     Object? materialDescription = null,
+    Object? defaultMaterialDescription = null,
     Object? qty = null,
     Object? unitPrice = null,
     Object? originPrice = null,
@@ -249,6 +254,10 @@ class _$OrderHistoryItemDtoCopyWithImpl<$Res, $Val extends OrderHistoryItemDto>
       materialDescription: null == materialDescription
           ? _value.materialDescription
           : materialDescription // ignore: cast_nullable_to_non_nullable
+              as String,
+      defaultMaterialDescription: null == defaultMaterialDescription
+          ? _value.defaultMaterialDescription
+          : defaultMaterialDescription // ignore: cast_nullable_to_non_nullable
               as String,
       qty: null == qty
           ? _value.qty
@@ -434,6 +443,8 @@ abstract class _$$OrderHistoryItemDtoImplCopyWith<$Res>
       {@JsonKey(name: 'MaterialCode', defaultValue: '') String materialNumber,
       @JsonKey(name: 'MaterialDescription', defaultValue: '')
       String materialDescription,
+      @JsonKey(name: 'DefaultMaterialDescription', defaultValue: '')
+      String defaultMaterialDescription,
       @JsonKey(name: 'Qty', defaultValue: 0) int qty,
       @JsonKey(name: 'UnitPrice', defaultValue: 0.0) double unitPrice,
       @JsonKey(name: 'mrp', defaultValue: 0.0) double originPrice,
@@ -504,6 +515,7 @@ class __$$OrderHistoryItemDtoImplCopyWithImpl<$Res>
   $Res call({
     Object? materialNumber = null,
     Object? materialDescription = null,
+    Object? defaultMaterialDescription = null,
     Object? qty = null,
     Object? unitPrice = null,
     Object? originPrice = null,
@@ -555,6 +567,10 @@ class __$$OrderHistoryItemDtoImplCopyWithImpl<$Res>
       materialDescription: null == materialDescription
           ? _value.materialDescription
           : materialDescription // ignore: cast_nullable_to_non_nullable
+              as String,
+      defaultMaterialDescription: null == defaultMaterialDescription
+          ? _value.defaultMaterialDescription
+          : defaultMaterialDescription // ignore: cast_nullable_to_non_nullable
               as String,
       qty: null == qty
           ? _value.qty
@@ -736,6 +752,8 @@ class _$OrderHistoryItemDtoImpl extends _OrderHistoryItemDto {
       required this.materialNumber,
       @JsonKey(name: 'MaterialDescription', defaultValue: '')
       required this.materialDescription,
+      @JsonKey(name: 'DefaultMaterialDescription', defaultValue: '')
+      required this.defaultMaterialDescription,
       @JsonKey(name: 'Qty', defaultValue: 0) required this.qty,
       @JsonKey(name: 'UnitPrice', defaultValue: 0.0) required this.unitPrice,
       @JsonKey(name: 'mrp', defaultValue: 0.0) required this.originPrice,
@@ -811,6 +829,9 @@ class _$OrderHistoryItemDtoImpl extends _OrderHistoryItemDto {
   @override
   @JsonKey(name: 'MaterialDescription', defaultValue: '')
   final String materialDescription;
+  @override
+  @JsonKey(name: 'DefaultMaterialDescription', defaultValue: '')
+  final String defaultMaterialDescription;
   @override
   @JsonKey(name: 'Qty', defaultValue: 0)
   final int qty;
@@ -947,7 +968,7 @@ class _$OrderHistoryItemDtoImpl extends _OrderHistoryItemDto {
 
   @override
   String toString() {
-    return 'OrderHistoryItemDto(materialNumber: $materialNumber, materialDescription: $materialDescription, qty: $qty, unitPrice: $unitPrice, originPrice: $originPrice, totalPrice: $totalPrice, status: $status, deliveryDate: $deliveryDate, orderNumber: $orderNumber, createdDate: $createdDate, orderBy: $orderBy, orderType: $orderType, batch: $batch, isBonusMaterial: $isBonusMaterial, telephoneNumber: $telephoneNumber, invoiceNumber: $invoiceNumber, pOReference: $pOReference, manufactureName: $manufactureName, governmentMaterialCode: $governmentMaterialCode, itemRegistrationNumber: $itemRegistrationNumber, expiryDate: $expiryDate, requestedDeliveryDate: $requestedDeliveryDate, specialInstruction: $specialInstruction, tax: $tax, eZRXNumber: $eZRXNumber, orderHistoryItemPoAttachments: $orderHistoryItemPoAttachments, promoStatus: $promoStatus, isCounterOffer: $isCounterOffer, isBundle: $isBundle, lineNumber: $lineNumber, principalCode: $principalCode, hidePrice: $hidePrice, referenceNotes: $referenceNotes, isMarketPlace: $isMarketPlace, tenderContractNumber: $tenderContractNumber, tenderContractReference: $tenderContractReference, tenderOrderReason: $tenderOrderReason, tenderPriceUnit: $tenderPriceUnit, tenderPrice: $tenderPrice, isTenderExpired: $isTenderExpired, isCovid: $isCovid, totalUnitPrice: $totalUnitPrice, totalTax: $totalTax, taxRate: $taxRate)';
+    return 'OrderHistoryItemDto(materialNumber: $materialNumber, materialDescription: $materialDescription, defaultMaterialDescription: $defaultMaterialDescription, qty: $qty, unitPrice: $unitPrice, originPrice: $originPrice, totalPrice: $totalPrice, status: $status, deliveryDate: $deliveryDate, orderNumber: $orderNumber, createdDate: $createdDate, orderBy: $orderBy, orderType: $orderType, batch: $batch, isBonusMaterial: $isBonusMaterial, telephoneNumber: $telephoneNumber, invoiceNumber: $invoiceNumber, pOReference: $pOReference, manufactureName: $manufactureName, governmentMaterialCode: $governmentMaterialCode, itemRegistrationNumber: $itemRegistrationNumber, expiryDate: $expiryDate, requestedDeliveryDate: $requestedDeliveryDate, specialInstruction: $specialInstruction, tax: $tax, eZRXNumber: $eZRXNumber, orderHistoryItemPoAttachments: $orderHistoryItemPoAttachments, promoStatus: $promoStatus, isCounterOffer: $isCounterOffer, isBundle: $isBundle, lineNumber: $lineNumber, principalCode: $principalCode, hidePrice: $hidePrice, referenceNotes: $referenceNotes, isMarketPlace: $isMarketPlace, tenderContractNumber: $tenderContractNumber, tenderContractReference: $tenderContractReference, tenderOrderReason: $tenderOrderReason, tenderPriceUnit: $tenderPriceUnit, tenderPrice: $tenderPrice, isTenderExpired: $isTenderExpired, isCovid: $isCovid, totalUnitPrice: $totalUnitPrice, totalTax: $totalTax, taxRate: $taxRate)';
   }
 
   @override
@@ -959,6 +980,9 @@ class _$OrderHistoryItemDtoImpl extends _OrderHistoryItemDto {
                 other.materialNumber == materialNumber) &&
             (identical(other.materialDescription, materialDescription) ||
                 other.materialDescription == materialDescription) &&
+            (identical(other.defaultMaterialDescription, defaultMaterialDescription) ||
+                other.defaultMaterialDescription ==
+                    defaultMaterialDescription) &&
             (identical(other.qty, qty) || other.qty == qty) &&
             (identical(other.unitPrice, unitPrice) ||
                 other.unitPrice == unitPrice) &&
@@ -1021,22 +1045,14 @@ class _$OrderHistoryItemDtoImpl extends _OrderHistoryItemDto {
                 other.isMarketPlace == isMarketPlace) &&
             (identical(other.tenderContractNumber, tenderContractNumber) ||
                 other.tenderContractNumber == tenderContractNumber) &&
-            (identical(
-                    other.tenderContractReference, tenderContractReference) ||
-                other.tenderContractReference == tenderContractReference) &&
-            (identical(other.tenderOrderReason, tenderOrderReason) ||
-                other.tenderOrderReason == tenderOrderReason) &&
-            (identical(other.tenderPriceUnit, tenderPriceUnit) ||
-                other.tenderPriceUnit == tenderPriceUnit) &&
-            (identical(other.tenderPrice, tenderPrice) ||
-                other.tenderPrice == tenderPrice) &&
-            (identical(other.isTenderExpired, isTenderExpired) ||
-                other.isTenderExpired == isTenderExpired) &&
+            (identical(other.tenderContractReference, tenderContractReference) || other.tenderContractReference == tenderContractReference) &&
+            (identical(other.tenderOrderReason, tenderOrderReason) || other.tenderOrderReason == tenderOrderReason) &&
+            (identical(other.tenderPriceUnit, tenderPriceUnit) || other.tenderPriceUnit == tenderPriceUnit) &&
+            (identical(other.tenderPrice, tenderPrice) || other.tenderPrice == tenderPrice) &&
+            (identical(other.isTenderExpired, isTenderExpired) || other.isTenderExpired == isTenderExpired) &&
             (identical(other.isCovid, isCovid) || other.isCovid == isCovid) &&
-            (identical(other.totalUnitPrice, totalUnitPrice) ||
-                other.totalUnitPrice == totalUnitPrice) &&
-            (identical(other.totalTax, totalTax) ||
-                other.totalTax == totalTax) &&
+            (identical(other.totalUnitPrice, totalUnitPrice) || other.totalUnitPrice == totalUnitPrice) &&
+            (identical(other.totalTax, totalTax) || other.totalTax == totalTax) &&
             (identical(other.taxRate, taxRate) || other.taxRate == taxRate));
   }
 
@@ -1046,6 +1062,7 @@ class _$OrderHistoryItemDtoImpl extends _OrderHistoryItemDto {
         runtimeType,
         materialNumber,
         materialDescription,
+        defaultMaterialDescription,
         qty,
         unitPrice,
         originPrice,
@@ -1111,6 +1128,8 @@ abstract class _OrderHistoryItemDto extends OrderHistoryItemDto {
       required final String materialNumber,
       @JsonKey(name: 'MaterialDescription', defaultValue: '')
       required final String materialDescription,
+      @JsonKey(name: 'DefaultMaterialDescription', defaultValue: '')
+      required final String defaultMaterialDescription,
       @JsonKey(name: 'Qty', defaultValue: 0) required final int qty,
       @JsonKey(name: 'UnitPrice', defaultValue: 0.0)
       required final double unitPrice,
@@ -1201,6 +1220,9 @@ abstract class _OrderHistoryItemDto extends OrderHistoryItemDto {
   @override
   @JsonKey(name: 'MaterialDescription', defaultValue: '')
   String get materialDescription;
+  @override
+  @JsonKey(name: 'DefaultMaterialDescription', defaultValue: '')
+  String get defaultMaterialDescription;
   @override
   @JsonKey(name: 'Qty', defaultValue: 0)
   int get qty;

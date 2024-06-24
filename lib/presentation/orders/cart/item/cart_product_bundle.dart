@@ -297,7 +297,7 @@ class _MaterialDetails extends StatelessWidget {
             ],
           ),
           Text(
-            cartItem.materialDescription,
+            cartItem.defaultMaterialDescription,
             key: WidgetKeys.cartItemProductMaterialDescription,
             style: Theme.of(context)
                 .textTheme

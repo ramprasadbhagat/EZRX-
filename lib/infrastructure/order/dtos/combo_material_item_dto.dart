@@ -18,42 +18,44 @@ class ComboMaterialItemDto with _$ComboMaterialItemDto {
     @JsonKey(name: 'setNo', defaultValue: '') required String setNo,
     @JsonKey(name: 'quantity', defaultValue: 0) required int quantity,
     @JsonKey(name: 'ttemSource', defaultValue: 'EZRX')
-        required String itemSource,
+    required String itemSource,
     @JsonKey(name: 'rate', defaultValue: 0) required double rate,
     @JsonKey(name: 'conditionNumber', defaultValue: '')
-        required String conditionNumber,
+    required String conditionNumber,
     @JsonKey(name: 'mandatory', defaultValue: false) required bool mandatory,
     @JsonKey(name: 'suffix', defaultValue: '') required String suffix,
     @JsonKey(name: 'materialDescription', defaultValue: '')
-        required String materialDescription,
+    required String materialDescription,
+    @JsonKey(name: 'defaultMaterialDescription', defaultValue: '')
+    required String defaultMaterialDescription,
     @JsonKey(name: 'principalName', defaultValue: '')
-        required String principalName,
+    required String principalName,
     @JsonKey(name: 'listPrice', defaultValue: 0.0) required double listPrice,
     @JsonKey(name: 'ttemCheck', defaultValue: false) required bool itemCheck,
     @JsonKey(name: 'principalCode', defaultValue: '')
-        required String principalCode,
+    required String principalCode,
     @JsonKey(name: 'valid', defaultValue: false) required bool valid,
     @JsonKey(name: 'type', defaultValue: '') required String type,
     @JsonKey(name: 'comboDealType', defaultValue: '')
-        required String comboDealType,
+    required String comboDealType,
     @JsonKey(name: 'isComboEligible', defaultValue: false)
-        required bool isComboEligible,
+    required bool isComboEligible,
     @JsonKey(name: 'finalIndividualPrice', defaultValue: 0.0)
-        required double finalIndividualPrice,
+    required double finalIndividualPrice,
     @JsonKey(name: 'materialNumber', defaultValue: 'EN')
-        required String materialNumber,
+    required String materialNumber,
     @JsonKey(name: 'taxM1', defaultValue: '') required String taxM1,
     @JsonKey(name: 'taxes', readValue: handleTax) required double tax,
     @JsonKey(name: 'isFOCMaterial', defaultValue: false)
-        required bool isFOCMaterial,
+    required bool isFOCMaterial,
     @JsonKey(name: 'hidePrice', defaultValue: false) required bool hidePrice,
     @JsonKey(name: 'taxClassification', defaultValue: '')
-        required String taxClassification,
+    required String taxClassification,
   }) = _ComboMaterialItemDto;
 
   MaterialInfo get toMaterialInfo {
     return MaterialInfo.empty().copyWith(
-      materialDescription: materialDescription,
+      materialDescription: defaultMaterialDescription,
       materialNumber: MaterialNumber(productId),
       parentID: parentId,
       taxClassification: MaterialTaxClassification(taxClassification),
@@ -83,7 +85,7 @@ class ComboMaterialItemDto with _$ComboMaterialItemDto {
         principalName: PrincipalName(principalName),
         principalCode: PrincipalCode(principalCode),
       ),
-      materialDescription: materialDescription,
+      materialDescription: defaultMaterialDescription,
       minQty: 0,
       conditionNumber: conditionNumber,
       mandatory: mandatory,

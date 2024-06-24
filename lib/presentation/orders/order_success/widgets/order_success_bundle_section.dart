@@ -110,8 +110,7 @@ class _BundleTile extends StatelessWidget {
                 ),
                 const SizedBox(height: 8),
                 ...viewByOrdersGroup.viewByOrderItem
-                    .map((e) => _BundleMaterialTile(orderItem: e))
-                    ,
+                    .map((e) => _BundleMaterialTile(orderItem: e)),
                 const SizedBox(height: 8),
                 Wrap(
                   crossAxisAlignment: WrapCrossAlignment.center,
@@ -194,7 +193,7 @@ class _BundleMaterialTile extends StatelessWidget {
                   ],
                 ),
                 Text(
-                  orderItem.materialDescription,
+                  orderItem.defaultMaterialDescription,
                   style: Theme.of(context)
                       .textTheme
                       .labelMedium

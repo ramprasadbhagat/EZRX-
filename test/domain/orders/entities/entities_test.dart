@@ -230,10 +230,15 @@ void main() {
       () async {
         final materialInfo = MaterialInfo.empty().copyWith(
           materialDescription: 'It is a good material',
+          data: [
+            MaterialData.empty().copyWith(
+              defaultMaterialDescription: 'It is a good material(Default)',
+            ),
+          ],
         );
 
         final result = materialInfo.displayDescription;
-        expect(result, 'It is a good material');
+        expect(result, 'It is a good material(Default)');
       },
     );
   });

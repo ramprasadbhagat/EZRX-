@@ -19,6 +19,7 @@ mixin _$OrderHistoryDetailsOrderItem {
   OrderItemType get type => throw _privateConstructorUsedError;
   MaterialNumber get materialNumber => throw _privateConstructorUsedError;
   String get materialDescription => throw _privateConstructorUsedError;
+  String get defaultMaterialDescription => throw _privateConstructorUsedError;
   int get qty => throw _privateConstructorUsedError;
   double get unitPrice => throw _privateConstructorUsedError;
   double get originPrice => throw _privateConstructorUsedError;
@@ -74,6 +75,7 @@ abstract class $OrderHistoryDetailsOrderItemCopyWith<$Res> {
       {OrderItemType type,
       MaterialNumber materialNumber,
       String materialDescription,
+      String defaultMaterialDescription,
       int qty,
       double unitPrice,
       double originPrice,
@@ -133,6 +135,7 @@ class _$OrderHistoryDetailsOrderItemCopyWithImpl<$Res,
     Object? type = null,
     Object? materialNumber = null,
     Object? materialDescription = null,
+    Object? defaultMaterialDescription = null,
     Object? qty = null,
     Object? unitPrice = null,
     Object? originPrice = null,
@@ -179,6 +182,10 @@ class _$OrderHistoryDetailsOrderItemCopyWithImpl<$Res,
       materialDescription: null == materialDescription
           ? _value.materialDescription
           : materialDescription // ignore: cast_nullable_to_non_nullable
+              as String,
+      defaultMaterialDescription: null == defaultMaterialDescription
+          ? _value.defaultMaterialDescription
+          : defaultMaterialDescription // ignore: cast_nullable_to_non_nullable
               as String,
       qty: null == qty
           ? _value.qty
@@ -378,6 +385,7 @@ abstract class _$$OrderHistoryDetailsOrderItemImplCopyWith<$Res>
       {OrderItemType type,
       MaterialNumber materialNumber,
       String materialDescription,
+      String defaultMaterialDescription,
       int qty,
       double unitPrice,
       double originPrice,
@@ -442,6 +450,7 @@ class __$$OrderHistoryDetailsOrderItemImplCopyWithImpl<$Res>
     Object? type = null,
     Object? materialNumber = null,
     Object? materialDescription = null,
+    Object? defaultMaterialDescription = null,
     Object? qty = null,
     Object? unitPrice = null,
     Object? originPrice = null,
@@ -488,6 +497,10 @@ class __$$OrderHistoryDetailsOrderItemImplCopyWithImpl<$Res>
       materialDescription: null == materialDescription
           ? _value.materialDescription
           : materialDescription // ignore: cast_nullable_to_non_nullable
+              as String,
+      defaultMaterialDescription: null == defaultMaterialDescription
+          ? _value.defaultMaterialDescription
+          : defaultMaterialDescription // ignore: cast_nullable_to_non_nullable
               as String,
       qty: null == qty
           ? _value.qty
@@ -632,6 +645,7 @@ class _$OrderHistoryDetailsOrderItemImpl extends _OrderHistoryDetailsOrderItem {
       {required this.type,
       required this.materialNumber,
       required this.materialDescription,
+      required this.defaultMaterialDescription,
       required this.qty,
       required this.unitPrice,
       required this.originPrice,
@@ -674,6 +688,8 @@ class _$OrderHistoryDetailsOrderItemImpl extends _OrderHistoryDetailsOrderItem {
   final MaterialNumber materialNumber;
   @override
   final String materialDescription;
+  @override
+  final String defaultMaterialDescription;
   @override
   final int qty;
   @override
@@ -749,7 +765,7 @@ class _$OrderHistoryDetailsOrderItemImpl extends _OrderHistoryDetailsOrderItem {
 
   @override
   String toString() {
-    return 'OrderHistoryDetailsOrderItem(type: $type, materialNumber: $materialNumber, materialDescription: $materialDescription, qty: $qty, unitPrice: $unitPrice, originPrice: $originPrice, totalPrice: $totalPrice, tax: $tax, sAPStatus: $sAPStatus, plannedDeliveryDate: $plannedDeliveryDate, pickedQuantity: $pickedQuantity, batch: $batch, expiryDate: $expiryDate, lineReferenceNotes: $lineReferenceNotes, lineNumber: $lineNumber, isTenderContractMaterial: $isTenderContractMaterial, details: $details, tenderContractDetails: $tenderContractDetails, principalData: $principalData, productImages: $productImages, governmentMaterialCode: $governmentMaterialCode, materialStockInfo: $materialStockInfo, priceAggregate: $priceAggregate, productType: $productType, parentId: $parentId, material: $material, promoStatus: $promoStatus, isCounterOffer: $isCounterOffer, hidePrice: $hidePrice, isMarketPlace: $isMarketPlace, isCovid: $isCovid, invoiceNumber: $invoiceNumber, itemRegistrationNumber: $itemRegistrationNumber, totalUnitPrice: $totalUnitPrice, totalTax: $totalTax, taxRate: $taxRate)';
+    return 'OrderHistoryDetailsOrderItem(type: $type, materialNumber: $materialNumber, materialDescription: $materialDescription, defaultMaterialDescription: $defaultMaterialDescription, qty: $qty, unitPrice: $unitPrice, originPrice: $originPrice, totalPrice: $totalPrice, tax: $tax, sAPStatus: $sAPStatus, plannedDeliveryDate: $plannedDeliveryDate, pickedQuantity: $pickedQuantity, batch: $batch, expiryDate: $expiryDate, lineReferenceNotes: $lineReferenceNotes, lineNumber: $lineNumber, isTenderContractMaterial: $isTenderContractMaterial, details: $details, tenderContractDetails: $tenderContractDetails, principalData: $principalData, productImages: $productImages, governmentMaterialCode: $governmentMaterialCode, materialStockInfo: $materialStockInfo, priceAggregate: $priceAggregate, productType: $productType, parentId: $parentId, material: $material, promoStatus: $promoStatus, isCounterOffer: $isCounterOffer, hidePrice: $hidePrice, isMarketPlace: $isMarketPlace, isCovid: $isCovid, invoiceNumber: $invoiceNumber, itemRegistrationNumber: $itemRegistrationNumber, totalUnitPrice: $totalUnitPrice, totalTax: $totalTax, taxRate: $taxRate)';
   }
 
   @override
@@ -762,6 +778,9 @@ class _$OrderHistoryDetailsOrderItemImpl extends _OrderHistoryDetailsOrderItem {
                 other.materialNumber == materialNumber) &&
             (identical(other.materialDescription, materialDescription) ||
                 other.materialDescription == materialDescription) &&
+            (identical(other.defaultMaterialDescription, defaultMaterialDescription) ||
+                other.defaultMaterialDescription ==
+                    defaultMaterialDescription) &&
             (identical(other.qty, qty) || other.qty == qty) &&
             (identical(other.unitPrice, unitPrice) ||
                 other.unitPrice == unitPrice) &&
@@ -783,8 +802,7 @@ class _$OrderHistoryDetailsOrderItemImpl extends _OrderHistoryDetailsOrderItem {
                 other.lineReferenceNotes == lineReferenceNotes) &&
             (identical(other.lineNumber, lineNumber) ||
                 other.lineNumber == lineNumber) &&
-            (identical(
-                    other.isTenderContractMaterial, isTenderContractMaterial) ||
+            (identical(other.isTenderContractMaterial, isTenderContractMaterial) ||
                 other.isTenderContractMaterial == isTenderContractMaterial) &&
             const DeepCollectionEquality().equals(other._details, _details) &&
             (identical(other.tenderContractDetails, tenderContractDetails) ||
@@ -820,8 +838,7 @@ class _$OrderHistoryDetailsOrderItemImpl extends _OrderHistoryDetailsOrderItem {
                 other.itemRegistrationNumber == itemRegistrationNumber) &&
             (identical(other.totalUnitPrice, totalUnitPrice) ||
                 other.totalUnitPrice == totalUnitPrice) &&
-            (identical(other.totalTax, totalTax) ||
-                other.totalTax == totalTax) &&
+            (identical(other.totalTax, totalTax) || other.totalTax == totalTax) &&
             (identical(other.taxRate, taxRate) || other.taxRate == taxRate));
   }
 
@@ -831,6 +848,7 @@ class _$OrderHistoryDetailsOrderItemImpl extends _OrderHistoryDetailsOrderItem {
         type,
         materialNumber,
         materialDescription,
+        defaultMaterialDescription,
         qty,
         unitPrice,
         originPrice,
@@ -881,6 +899,7 @@ abstract class _OrderHistoryDetailsOrderItem
       {required final OrderItemType type,
       required final MaterialNumber materialNumber,
       required final String materialDescription,
+      required final String defaultMaterialDescription,
       required final int qty,
       required final double unitPrice,
       required final double originPrice,
@@ -922,6 +941,8 @@ abstract class _OrderHistoryDetailsOrderItem
   MaterialNumber get materialNumber;
   @override
   String get materialDescription;
+  @override
+  String get defaultMaterialDescription;
   @override
   int get qty;
   @override

@@ -97,7 +97,7 @@ class _ViewByOrderItemTile extends StatelessWidget {
                           Padding(
                             padding: const EdgeInsets.symmetric(vertical: 2.0),
                             child: Text(
-                              orderHistoryItem.materialDescription,
+                              orderHistoryItem.defaultMaterialDescription,
                               key: WidgetKeys.viewOrderByItemTileTitle,
                               style: Theme.of(context)
                                   .textTheme
@@ -170,7 +170,7 @@ class _ViewByOrderItemTile extends StatelessWidget {
                 priceComponent: PriceComponent(
                   type: PriceStyle.tenderViewOrderByItemPrice,
                   price: orderHistoryItem.itemTotalNetPrice(
-                      context.read<EligibilityBloc>().state.salesOrg.isID,
+                    context.read<EligibilityBloc>().state.salesOrg.isID,
                   ),
                   salesOrgConfig:
                       context.read<EligibilityBloc>().state.salesOrgConfigs,

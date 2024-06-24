@@ -537,7 +537,7 @@ void main() async {
                   fakeBundleMaterials.first.copyWith(quantity: MaterialQty(10)),
                 ],
                 bundleCode: fakeBundle.materialNumber.getValue(),
-                bundleName: BundleName(fakeBundle.materialDescription),
+                bundleName: BundleName(fakeBundle.defaultMaterialDescription),
               ),
             ),
           ),

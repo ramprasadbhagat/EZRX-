@@ -19,6 +19,8 @@ _$ComboMaterialItemDtoImpl _$$ComboMaterialItemDtoImplFromJson(
       mandatory: json['mandatory'] as bool? ?? false,
       suffix: json['suffix'] as String? ?? '',
       materialDescription: json['materialDescription'] as String? ?? '',
+      defaultMaterialDescription:
+          json['defaultMaterialDescription'] as String? ?? '',
       principalName: json['principalName'] as String? ?? '',
       listPrice: (json['listPrice'] as num?)?.toDouble() ?? 0.0,
       itemCheck: json['ttemCheck'] as bool? ?? false,
@@ -50,6 +52,7 @@ Map<String, dynamic> _$$ComboMaterialItemDtoImplToJson(
       'mandatory': instance.mandatory,
       'suffix': instance.suffix,
       'materialDescription': instance.materialDescription,
+      'defaultMaterialDescription': instance.defaultMaterialDescription,
       'principalName': instance.principalName,
       'listPrice': instance.listPrice,
       'ttemCheck': instance.itemCheck,

@@ -12,6 +12,8 @@ _$OrderHistoryDetailsOrderItemDtoImpl
           type: json['Type'] as String? ?? '',
           materialNumber: json['MaterialCode'] as String,
           materialDescription: json['MaterialDescription'] as String? ?? '',
+          defaultMaterialDescription:
+              json['DefaultMaterialDescription'] as String? ?? '',
           qty: (json['Qty'] as num?)?.toInt() ?? 0,
           unitPrice: (json['UnitPrice'] as num?)?.toDouble() ?? 0.0,
           originPrice: (json['mrp'] as num?)?.toDouble() ?? 0.0,
@@ -61,6 +63,7 @@ Map<String, dynamic> _$$OrderHistoryDetailsOrderItemDtoImplToJson(
       'Type': instance.type,
       'MaterialCode': instance.materialNumber,
       'MaterialDescription': instance.materialDescription,
+      'DefaultMaterialDescription': instance.defaultMaterialDescription,
       'Qty': instance.qty,
       'UnitPrice': instance.unitPrice,
       'mrp': instance.originPrice,

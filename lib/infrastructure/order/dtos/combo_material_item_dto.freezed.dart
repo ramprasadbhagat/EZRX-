@@ -40,6 +40,8 @@ mixin _$ComboMaterialItemDto {
   String get suffix => throw _privateConstructorUsedError;
   @JsonKey(name: 'materialDescription', defaultValue: '')
   String get materialDescription => throw _privateConstructorUsedError;
+  @JsonKey(name: 'defaultMaterialDescription', defaultValue: '')
+  String get defaultMaterialDescription => throw _privateConstructorUsedError;
   @JsonKey(name: 'principalName', defaultValue: '')
   String get principalName => throw _privateConstructorUsedError;
   @JsonKey(name: 'listPrice', defaultValue: 0.0)
@@ -96,6 +98,8 @@ abstract class $ComboMaterialItemDtoCopyWith<$Res> {
       @JsonKey(name: 'suffix', defaultValue: '') String suffix,
       @JsonKey(name: 'materialDescription', defaultValue: '')
       String materialDescription,
+      @JsonKey(name: 'defaultMaterialDescription', defaultValue: '')
+      String defaultMaterialDescription,
       @JsonKey(name: 'principalName', defaultValue: '') String principalName,
       @JsonKey(name: 'listPrice', defaultValue: 0.0) double listPrice,
       @JsonKey(name: 'ttemCheck', defaultValue: false) bool itemCheck,
@@ -141,6 +145,7 @@ class _$ComboMaterialItemDtoCopyWithImpl<$Res,
     Object? mandatory = null,
     Object? suffix = null,
     Object? materialDescription = null,
+    Object? defaultMaterialDescription = null,
     Object? principalName = null,
     Object? listPrice = null,
     Object? itemCheck = null,
@@ -197,6 +202,10 @@ class _$ComboMaterialItemDtoCopyWithImpl<$Res,
       materialDescription: null == materialDescription
           ? _value.materialDescription
           : materialDescription // ignore: cast_nullable_to_non_nullable
+              as String,
+      defaultMaterialDescription: null == defaultMaterialDescription
+          ? _value.defaultMaterialDescription
+          : defaultMaterialDescription // ignore: cast_nullable_to_non_nullable
               as String,
       principalName: null == principalName
           ? _value.principalName
@@ -283,6 +292,8 @@ abstract class _$$ComboMaterialItemDtoImplCopyWith<$Res>
       @JsonKey(name: 'suffix', defaultValue: '') String suffix,
       @JsonKey(name: 'materialDescription', defaultValue: '')
       String materialDescription,
+      @JsonKey(name: 'defaultMaterialDescription', defaultValue: '')
+      String defaultMaterialDescription,
       @JsonKey(name: 'principalName', defaultValue: '') String principalName,
       @JsonKey(name: 'listPrice', defaultValue: 0.0) double listPrice,
       @JsonKey(name: 'ttemCheck', defaultValue: false) bool itemCheck,
@@ -325,6 +336,7 @@ class __$$ComboMaterialItemDtoImplCopyWithImpl<$Res>
     Object? mandatory = null,
     Object? suffix = null,
     Object? materialDescription = null,
+    Object? defaultMaterialDescription = null,
     Object? principalName = null,
     Object? listPrice = null,
     Object? itemCheck = null,
@@ -381,6 +393,10 @@ class __$$ComboMaterialItemDtoImplCopyWithImpl<$Res>
       materialDescription: null == materialDescription
           ? _value.materialDescription
           : materialDescription // ignore: cast_nullable_to_non_nullable
+              as String,
+      defaultMaterialDescription: null == defaultMaterialDescription
+          ? _value.defaultMaterialDescription
+          : defaultMaterialDescription // ignore: cast_nullable_to_non_nullable
               as String,
       principalName: null == principalName
           ? _value.principalName
@@ -463,6 +479,8 @@ class _$ComboMaterialItemDtoImpl extends _ComboMaterialItemDto {
       @JsonKey(name: 'suffix', defaultValue: '') required this.suffix,
       @JsonKey(name: 'materialDescription', defaultValue: '')
       required this.materialDescription,
+      @JsonKey(name: 'defaultMaterialDescription', defaultValue: '')
+      required this.defaultMaterialDescription,
       @JsonKey(name: 'principalName', defaultValue: '')
       required this.principalName,
       @JsonKey(name: 'listPrice', defaultValue: 0.0) required this.listPrice,
@@ -522,6 +540,9 @@ class _$ComboMaterialItemDtoImpl extends _ComboMaterialItemDto {
   @JsonKey(name: 'materialDescription', defaultValue: '')
   final String materialDescription;
   @override
+  @JsonKey(name: 'defaultMaterialDescription', defaultValue: '')
+  final String defaultMaterialDescription;
+  @override
   @JsonKey(name: 'principalName', defaultValue: '')
   final String principalName;
   @override
@@ -569,7 +590,7 @@ class _$ComboMaterialItemDtoImpl extends _ComboMaterialItemDto {
 
   @override
   String toString() {
-    return 'ComboMaterialItemDto(productId: $productId, parentId: $parentId, setNo: $setNo, quantity: $quantity, itemSource: $itemSource, rate: $rate, conditionNumber: $conditionNumber, mandatory: $mandatory, suffix: $suffix, materialDescription: $materialDescription, principalName: $principalName, listPrice: $listPrice, itemCheck: $itemCheck, principalCode: $principalCode, valid: $valid, type: $type, comboDealType: $comboDealType, isComboEligible: $isComboEligible, finalIndividualPrice: $finalIndividualPrice, materialNumber: $materialNumber, taxM1: $taxM1, tax: $tax, isFOCMaterial: $isFOCMaterial, hidePrice: $hidePrice, taxClassification: $taxClassification)';
+    return 'ComboMaterialItemDto(productId: $productId, parentId: $parentId, setNo: $setNo, quantity: $quantity, itemSource: $itemSource, rate: $rate, conditionNumber: $conditionNumber, mandatory: $mandatory, suffix: $suffix, materialDescription: $materialDescription, defaultMaterialDescription: $defaultMaterialDescription, principalName: $principalName, listPrice: $listPrice, itemCheck: $itemCheck, principalCode: $principalCode, valid: $valid, type: $type, comboDealType: $comboDealType, isComboEligible: $isComboEligible, finalIndividualPrice: $finalIndividualPrice, materialNumber: $materialNumber, taxM1: $taxM1, tax: $tax, isFOCMaterial: $isFOCMaterial, hidePrice: $hidePrice, taxClassification: $taxClassification)';
   }
 
   @override
@@ -594,6 +615,10 @@ class _$ComboMaterialItemDtoImpl extends _ComboMaterialItemDto {
             (identical(other.suffix, suffix) || other.suffix == suffix) &&
             (identical(other.materialDescription, materialDescription) ||
                 other.materialDescription == materialDescription) &&
+            (identical(other.defaultMaterialDescription,
+                    defaultMaterialDescription) ||
+                other.defaultMaterialDescription ==
+                    defaultMaterialDescription) &&
             (identical(other.principalName, principalName) ||
                 other.principalName == principalName) &&
             (identical(other.listPrice, listPrice) ||
@@ -636,6 +661,7 @@ class _$ComboMaterialItemDtoImpl extends _ComboMaterialItemDto {
         mandatory,
         suffix,
         materialDescription,
+        defaultMaterialDescription,
         principalName,
         listPrice,
         itemCheck,
@@ -687,6 +713,8 @@ abstract class _ComboMaterialItemDto extends ComboMaterialItemDto {
       @JsonKey(name: 'suffix', defaultValue: '') required final String suffix,
       @JsonKey(name: 'materialDescription', defaultValue: '')
       required final String materialDescription,
+      @JsonKey(name: 'defaultMaterialDescription', defaultValue: '')
+      required final String defaultMaterialDescription,
       @JsonKey(name: 'principalName', defaultValue: '')
       required final String principalName,
       @JsonKey(name: 'listPrice', defaultValue: 0.0)
@@ -748,6 +776,9 @@ abstract class _ComboMaterialItemDto extends ComboMaterialItemDto {
   @override
   @JsonKey(name: 'materialDescription', defaultValue: '')
   String get materialDescription;
+  @override
+  @JsonKey(name: 'defaultMaterialDescription', defaultValue: '')
+  String get defaultMaterialDescription;
   @override
   @JsonKey(name: 'principalName', defaultValue: '')
   String get principalName;

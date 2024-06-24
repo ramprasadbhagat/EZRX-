@@ -76,8 +76,7 @@ class _BundleGridItem extends StatelessWidget {
               ),
             ),
             ...materialInfo.listingVisibleMaterial
-                .map((e) => _BundleMaterial(materialData: e))
-                ,
+                .map((e) => _BundleMaterial(materialData: e)),
             if (materialInfo.isMaterialHiddenOnListing)
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 9),
@@ -153,7 +152,7 @@ class _BundleMaterial extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.symmetric(vertical: 2),
             child: Text(
-              materialData.displayDescription,
+              materialData.defaultMaterialDescription,
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
               style:

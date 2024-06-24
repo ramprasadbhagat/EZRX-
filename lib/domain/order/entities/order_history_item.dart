@@ -19,6 +19,7 @@ class OrderHistoryItem with _$OrderHistoryItem {
   factory OrderHistoryItem({
     required MaterialNumber materialNumber,
     required String materialDescription,
+    required String defaultMaterialDescription,
     required int qty,
     required double unitPrice,
     required double originPrice,
@@ -66,6 +67,7 @@ class OrderHistoryItem with _$OrderHistoryItem {
   factory OrderHistoryItem.empty() => OrderHistoryItem(
         materialNumber: MaterialNumber(''),
         materialDescription: '',
+        defaultMaterialDescription: '',
         qty: 0,
         unitPrice: 0.0,
         originPrice: 0.0,

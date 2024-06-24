@@ -155,7 +155,7 @@ class _PreOrderBundleMaterialTile extends StatelessWidget {
               ),
               const SizedBox(height: 2),
               Text(
-                bundleMaterial.materialDescription,
+                bundleMaterial.defaultMaterialDescription,
                 key: WidgetKeys.cartItemProductMaterialDescription,
                 style: Theme.of(context)
                     .textTheme

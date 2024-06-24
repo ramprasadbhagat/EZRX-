@@ -117,7 +117,7 @@ class _MaterialItem extends StatelessWidget {
               ],
             )
           : const SizedBox.shrink(),
-      title: orderItem.materialDescription,
+      title: orderItem.defaultMaterialDescription,
       quantity: '${orderItem.qty}',
       isQuantityBelowImage: false,
       isQuantityRequired: false,

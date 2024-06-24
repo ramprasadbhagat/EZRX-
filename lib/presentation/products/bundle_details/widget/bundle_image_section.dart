@@ -61,10 +61,10 @@ class _BundleImageSection extends StatelessWidget {
                                   ?.copyWith(color: ZPColors.darkGray),
                             ),
                             _OutlineText(
-                              selectedMaterial.displayDescription,
+                              selectedMaterial.defaultMaterialDescription,
                               style: Theme.of(context).textTheme.labelSmall,
                               key: WidgetKeys.bundleMaterialItemDescription(
-                                selectedMaterial.displayDescription,
+                                selectedMaterial.defaultMaterialDescription,
                               ),
                               maxLines: 2,
                               overflow: TextOverflow.ellipsis,

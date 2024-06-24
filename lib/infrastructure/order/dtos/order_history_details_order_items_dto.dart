@@ -24,6 +24,8 @@ class OrderHistoryDetailsOrderItemDto with _$OrderHistoryDetailsOrderItemDto {
     @JsonKey(name: 'MaterialCode') required String materialNumber,
     @JsonKey(name: 'MaterialDescription', defaultValue: '')
     required String materialDescription,
+    @JsonKey(name: 'DefaultMaterialDescription', defaultValue: '')
+    required String defaultMaterialDescription,
     @JsonKey(name: 'Qty', defaultValue: 0) required int qty,
     @JsonKey(name: 'UnitPrice', defaultValue: 0.0) required double unitPrice,
     @JsonKey(name: 'mrp', defaultValue: 0.0) required double originPrice,
@@ -86,6 +88,8 @@ class OrderHistoryDetailsOrderItemDto with _$OrderHistoryDetailsOrderItemDto {
       type: orderHistoryDetailsOrderItem.type.getOrCrash(),
       materialNumber: orderHistoryDetailsOrderItem.materialNumber.displayMatNo,
       materialDescription: orderHistoryDetailsOrderItem.materialDescription,
+      defaultMaterialDescription:
+          orderHistoryDetailsOrderItem.defaultMaterialDescription,
       qty: orderHistoryDetailsOrderItem.qty,
       unitPrice: orderHistoryDetailsOrderItem.unitPrice,
       originPrice: orderHistoryDetailsOrderItem.originPrice,
@@ -137,6 +141,7 @@ class OrderHistoryDetailsOrderItemDto with _$OrderHistoryDetailsOrderItemDto {
       type: OrderItemType(type),
       materialNumber: MaterialNumber(materialNumber),
       materialDescription: materialDescription,
+      defaultMaterialDescription: defaultMaterialDescription,
       qty: qty,
       unitPrice: unitPrice,
       originPrice: originPrice,

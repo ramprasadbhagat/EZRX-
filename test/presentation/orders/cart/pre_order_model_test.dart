@@ -752,7 +752,7 @@ void main() async {
                 ),
               )
               .data,
-          equals(bundleMaterial.materialDescription),
+          equals(bundleMaterial.defaultMaterialDescription),
         );
         expect(
           tester

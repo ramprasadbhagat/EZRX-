@@ -289,7 +289,7 @@ class BuyAgainButton extends StatelessWidget {
       trackMixpanelEvent(
         TrackingEvents.buyAgainClicked,
         props: {
-          TrackingProps.productName: item.materialDescription,
+          TrackingProps.productName: item.defaultMaterialDescription,
           TrackingProps.productNumber: item.materialNumber.displayMatNo,
           TrackingProps.productManufacturer:
               item.principalData.principalName.name,
@@ -300,7 +300,7 @@ class BuyAgainButton extends StatelessWidget {
       trackClevertapEvent(
         TrackingEvents.reorderClicked,
         props: {
-          TrackingProps.productName: item.materialDescription,
+          TrackingProps.productName: item.defaultMaterialDescription,
           TrackingProps.productNumber: item.materialNumber.displayMatNo,
           TrackingProps.productManufacturer:
               item.principalData.principalName.name,

@@ -189,7 +189,7 @@ class _BundleMaterialListTileState extends State<_BundleMaterialListTile> {
               ),
               const SizedBox(height: 5),
               Text(
-                widget.materialInfo.displayDescription,
+                widget.materialInfo.defaultMaterialDescription,
                 style: Theme.of(context).textTheme.labelSmall,
               ),
               StockInfoWidget(
@@ -468,7 +468,7 @@ class _BundleSheetFooter extends StatelessWidget {
       bundle: Bundle.empty().copyWith(
         materials: state.selectedMaterialInfo(materialInCart),
         bundleCode: state.materialInfo.materialNumber.getValue(),
-        bundleName: BundleName(state.materialInfo.materialDescription),
+        bundleName: BundleName(state.materialInfo.defaultMaterialDescription),
       ),
     );
 

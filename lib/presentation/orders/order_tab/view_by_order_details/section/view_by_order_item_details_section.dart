@@ -112,7 +112,7 @@ class _OrderItemTile extends StatelessWidget {
               : TenderContractSection(
                   tenderContract: orderItem.orderItemTenderContract,
                 ),
-      materialDescription: orderItem.materialDescription,
+      materialDescription: orderItem.defaultMaterialDescription,
       priceComponentSubtitle: orderItem.isBonus
           ? const SizedBox.shrink()
           : Wrap(
