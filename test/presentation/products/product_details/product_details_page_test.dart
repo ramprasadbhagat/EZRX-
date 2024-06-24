@@ -3872,6 +3872,86 @@ void main() {
               find.byKey(WidgetKeys.addToCartErrorSection);
           expect(addToCartErrorSection, findsNothing);
         });
+
+        testWidgets(
+            'Show notification if material is expiring soon once the expiry date is < = 365 days',
+            (tester) async {
+          when(() => productDetailMockBloc.state).thenReturn(
+            ProductDetailState.initial().copyWith(
+              productDetailAggregate: ProductDetailAggregate.empty().copyWith(
+                stockInfo: stockInfo.copyWith(
+                  expiryDate: DateTimeStringValue('2024-11-30'),
+                ),
+                materialInfo: materialInfo.copyWith(
+                  hasValidTenderContract: true,
+                  hasMandatoryTenderContract: true,
+                  isMarketPlace: false,
+                ),
+              ),
+            ),
+          );
+          when(() => eligibilityBlocMock.state).thenReturn(
+            EligibilityState.initial().copyWith(
+              salesOrgConfigs:
+                  fakeVNSalesOrgConfigs.copyWith(expiryDateDisplay: true),
+              salesOrganisation: fakeVNSalesOrganisation,
+            ),
+          );
+          when(() => tenderContractDetailBlocMock.state).thenReturn(
+            TenderContractDetailState.initial().copyWith(
+              tenderContractList: tenderContractList,
+              tenderContractEnable: true,
+              selectedTenderContract: tenderContractList.first,
+            ),
+          );
+          await tester.pumpWidget(getScopedWidget());
+          await tester.pumpAndSettle();
+
+          expect(
+            find.textContaining('Material expires soon', findRichText: true),
+            findsOneWidget,
+          );
+        });
+
+        testWidgets(
+            'Do not show notification if material is not expiring soon once the expiry date is >= 365 days',
+            (tester) async {
+          when(() => productDetailMockBloc.state).thenReturn(
+            ProductDetailState.initial().copyWith(
+              productDetailAggregate: ProductDetailAggregate.empty().copyWith(
+                stockInfo: stockInfo.copyWith(
+                  expiryDate: DateTimeStringValue('2030-11-30'),
+                ),
+                materialInfo: materialInfo.copyWith(
+                  hasValidTenderContract: true,
+                  hasMandatoryTenderContract: true,
+                  isMarketPlace: false,
+                ),
+              ),
+            ),
+          );
+          when(() => eligibilityBlocMock.state).thenReturn(
+            EligibilityState.initial().copyWith(
+              salesOrgConfigs:
+                  fakeVNSalesOrgConfigs.copyWith(expiryDateDisplay: true),
+              salesOrganisation: fakeVNSalesOrganisation,
+            ),
+          );
+          when(() => tenderContractDetailBlocMock.state).thenReturn(
+            TenderContractDetailState.initial().copyWith(
+              tenderContractList: tenderContractList,
+              tenderContractEnable: true,
+              selectedTenderContract: tenderContractList.first,
+            ),
+          );
+          await tester.pumpWidget(getScopedWidget());
+          await tester.pumpAndSettle();
+
+          expect(
+            find.textContaining('Material expires soon', findRichText: true),
+            findsNothing,
+          );
+        });
       });
     },
   );

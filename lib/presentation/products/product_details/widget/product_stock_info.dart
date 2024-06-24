@@ -27,6 +27,7 @@ class ProductStockInfo extends StatelessWidget {
           current.isDetailAndStockFetching != previous.isDetailAndStockFetching,
       builder: (context, state) {
         final stockInfo = state.productDetailAggregate.stockInfo;
+        final materialInfo = state.productDetailAggregate.materialInfo;
 
         if (state.isDetailAndStockFetching) {
           return SizedBox(
@@ -41,12 +42,13 @@ class ProductStockInfo extends StatelessWidget {
           children: [
             StockInfoWidget(
               stockInfo: stockInfo,
-              materialInfo: state.productDetailAggregate.materialInfo,
+              materialInfo: materialInfo,
               showToolTip: true,
+              showOverrideExpiryDate: stockInfo.isExpireSoon,
             ),
             _MaterialExpiresSoonTag(
               stockInfo: stockInfo,
-              materialInfo: state.productDetailAggregate.materialInfo,
+              materialInfo: materialInfo,
             ),
           ],
         );

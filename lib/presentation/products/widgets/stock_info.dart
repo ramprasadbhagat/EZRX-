@@ -13,11 +13,12 @@ class StockInfoWidget extends StatelessWidget {
   final StockInfo stockInfo;
   final MaterialInfo materialInfo;
   final bool showToolTip;
-
+  final bool showOverrideExpiryDate;
   const StockInfoWidget({
     required this.stockInfo,
     required this.materialInfo,
     this.showToolTip = false,
+    this.showOverrideExpiryDate = false,
     super.key,
   });
 
@@ -26,7 +27,8 @@ class StockInfoWidget extends StatelessWidget {
     final eligibilityState = context.read<EligibilityBloc>().state;
     final enableBatchNumber =
         eligibilityState.salesOrgConfigs.enableBatchNumber;
-    if (eligibilityState.salesOrgConfigs.displayStockInfo) {
+    if (eligibilityState.salesOrgConfigs.displayStockInfo ||
+        showOverrideExpiryDate) {
       return Padding(
         padding: const EdgeInsets.symmetric(vertical: 1),
         child: RichText(
@@ -42,7 +44,8 @@ class StockInfoWidget extends StatelessWidget {
                   text:
                       '${context.tr('Batch')}: ${stockInfo.displayBatchNumber(isMarketPlace: materialInfo.isMarketPlace)}',
                 ),
-              if (eligibilityState.salesOrgConfigs.expiryDateDisplay) ...[
+              if (eligibilityState.salesOrgConfigs.expiryDateDisplay ||
+                  showOverrideExpiryDate) ...[
                 if (enableBatchNumber) const TextSpan(text: ' - '),
                 TextSpan(
                   text:
