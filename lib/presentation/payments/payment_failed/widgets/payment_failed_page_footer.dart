@@ -26,6 +26,7 @@ class _PaymentFailedPageFooter extends StatelessWidget {
       child: SafeArea(
         top: false,
         child: ElevatedButton(
+          key: WidgetKeys.paymentSummaryRouteButton,
           onPressed: () => context.router.push(
             PaymentSummaryPageRoute(isMarketPlace: context.isMPPayment),
           ),

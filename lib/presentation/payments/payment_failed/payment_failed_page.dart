@@ -32,7 +32,7 @@ class PaymentFailedPage extends StatelessWidget {
           title: Text(context.tr('Payment request failed')),
           leadingWidget: IconButton(
             key: WidgetKeys.closeButton,
-            onPressed: () => context.router.pop,
+            onPressed: () => context.router.pop(),
             icon: const Icon(Icons.close, color: ZPColors.neutralsBlack),
           ),
         ),
