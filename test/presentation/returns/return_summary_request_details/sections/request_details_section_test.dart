@@ -35,6 +35,7 @@ import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/returns/return_summary_request_details/return_request_details.dart';
 import 'package:ezrxmobile/presentation/returns/return_summary_request_details/widgets/return_status_section.dart';
 import 'package:ezrxmobile/presentation/returns/widgets/return_item_card.dart';
+import 'package:ezrxmobile/presentation/returns/widgets/return_override_info_icon.dart';
 import 'package:ezrxmobile/presentation/returns/widgets/return_summary_item_price.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
@@ -1072,6 +1073,7 @@ void main() {
               requestInformation.returnRequestInformationList.first.copyWith(
                 prsfd: Prsfd('B'),
                 status: status,
+                initialQuantity: 0,
                 bonusInformation: [
                   requestInformation.returnRequestInformationList.first
                       .copyWith(
@@ -1108,6 +1110,7 @@ void main() {
                 prsfd: Prsfd('B'),
                 status: status,
                 overrideValue: 0,
+                initialQuantity: 0,
                 bonusInformation: [
                   requestInformation.returnRequestInformationList.first
                       .copyWith(
@@ -1317,6 +1320,55 @@ void main() {
           ),
         ),
       ).called(1);
+    });
+    testWidgets('Display Quantity override tag for bonus item', (tester) async {
+      final bonusItem = ReturnRequestInformation.empty().copyWith(
+        initialQuantity: 10,
+        returnQuantity: 5,
+        status: StatusType('APPROVED'),
+      );
+      when(() => mockReturnDetailsByRequestBloc.state).thenReturn(
+        ReturnDetailsByRequestState.initial().copyWith(
+          requestInformation: [
+            ReturnRequestInformation.empty().copyWith(
+              bonusInformation: [bonusItem],
+            ),
+          ],
+        ),
+      );
+      await tester.pumpWidget(getWUT());
+      await tester.pumpAndSettle();
+      final scrollList = find.byKey(WidgetKeys.returnRequestDetailScrollList);
+      expect(
+        scrollList,
+        findsOneWidget,
+      );
+      await tester.dragUntilVisible(
+        find.byType(RequestItemSection),
+        scrollList,
+        const Offset(0, -1000),
+      );
+      await tester.pumpAndSettle();
+      final expandBtn = find.byKey(WidgetKeys.returnExpandableSection);
+      expect(expandBtn, findsOneWidget);
+      await tester.tap(expandBtn);
+      await tester.pumpAndSettle();
+      await tester.drag(scrollList, const Offset(0, -1500));
+      await tester.pumpAndSettle();
+      expect(
+        find.byKey(
+          WidgetKeys.returnItemDetailBonusItem,
+        ),
+        findsOneWidget,
+      );
+      final quantityOverrideApprovedTag = find.byType(ReturnOverrideInfoIcon);
+      expect(quantityOverrideApprovedTag, findsOneWidget);
+      await tester.tap(quantityOverrideApprovedTag);
+      await tester.pumpAndSettle();
+      expect(
+        find.text('Request Return quantity : <${bonusItem.initialQuantity}>'),
+        findsOne,
+      );
     });
   });
 }

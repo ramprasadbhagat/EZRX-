@@ -68,6 +68,7 @@ class RequestInformationQuery {
       returnQuantity
       unitPrice
       totalPrice
+      initialQuantity
       overrideValue
       materialNumber
       materialDescription

@@ -246,8 +246,9 @@ class ReturnListItemCard extends StatelessWidget {
                   Row(
                     children: [
                       Expanded(
-                        child: Row(
+                        child: Column(
                           mainAxisSize: MainAxisSize.min,
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
                               '${context.tr('Qty')}: ${data.returnQuantity}',
@@ -258,7 +259,10 @@ class ReturnListItemCard extends StatelessWidget {
                                 showApproverUpdated)
                               Flexible(
                                 child: Padding(
-                                  padding: const EdgeInsets.only(left: 4.0),
+                                  padding: const EdgeInsets.only(
+                                    top: 4.0,
+                                    bottom: 4.0,
+                                  ),
                                   child: ReturnOverrideInfoIcon.quantity(
                                     context: context,
                                     initialQuantity: data.initialQuantity,
@@ -278,10 +282,13 @@ class ReturnListItemCard extends StatelessWidget {
                           ),
                           if (data.isApprovedCounterOffer &&
                               showApproverUpdated)
-                            ReturnOverrideInfoIcon.price(
-                              context: context,
-                              price: data.userOverrideValue.toString(),
-                              displaySubContent: data.isApproverOverride,
+                            Padding(
+                              padding: const EdgeInsets.only(bottom: 4.0),
+                              child: ReturnOverrideInfoIcon.price(
+                                context: context,
+                                price: data.userOverrideValue.toString(),
+                                displaySubContent: data.isApproverOverride,
+                              ),
                             ),
                         ],
                       ),

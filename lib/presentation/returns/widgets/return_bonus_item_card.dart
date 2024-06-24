@@ -123,9 +123,20 @@ class _ReturnBonusItemSection extends StatelessWidget {
                               ],
                             ),
                           ),
-                          Text(
-                            '${context.tr('Qty')}: ${bonusItem.returnQuantity} ',
-                            style: Theme.of(context).textTheme.bodySmall,
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              Text(
+                                '${context.tr('Qty')}: ${bonusItem.returnQuantity} ',
+                                style: Theme.of(context).textTheme.bodySmall,
+                              ),
+                              const SizedBox(height: 5),
+                              if (bonusItem.isApprovedQuantityOverride)
+                                ReturnOverrideInfoIcon.quantity(
+                                  context: context,
+                                  initialQuantity: bonusItem.initialQuantity,
+                                ),
+                            ],
                           ),
                         ],
                       ),

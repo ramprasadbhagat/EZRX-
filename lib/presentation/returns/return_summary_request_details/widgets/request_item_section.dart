@@ -50,17 +50,20 @@ class RequestItemSection extends StatelessWidget {
               ),
             ),
             ...returnDetailsByRequestState.requestInformation.mapIndexed(
-              (index, item) => ReturnItemCard(
-                key: WidgetKeys.returnRequestDetailMaterial(index),
-                returnRequestInformation: item,
-                downloadingAttachments:
-                    returnDetailsByRequestState.downloadingAttachments,
-                downloadAttachment: (attachment) =>
-                    context.read<ReturnDetailsByRequestBloc>().add(
-                          ReturnDetailsByRequestEvent.downloadFile(
-                            file: attachment,
+              (index, item) => Padding(
+                padding: const EdgeInsets.only(bottom: 10.0),
+                child: ReturnItemCard(
+                  key: WidgetKeys.returnRequestDetailMaterial(index),
+                  returnRequestInformation: item,
+                  downloadingAttachments:
+                      returnDetailsByRequestState.downloadingAttachments,
+                  downloadAttachment: (attachment) =>
+                      context.read<ReturnDetailsByRequestBloc>().add(
+                            ReturnDetailsByRequestEvent.downloadFile(
+                              file: attachment,
+                            ),
                           ),
-                        ),
+                ),
               ),
             ),
           ],

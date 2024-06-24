@@ -54,7 +54,8 @@ class ReturnRequestSummaryByItemDetails extends StatelessWidget {
             (either) => either.fold(
               (failure) => ErrorUtils.handleApiFailure(context, failure),
               (_) => CustomSnackBar(
-                messageText: context.tr('The attachments downloaded successfully'),
+                messageText:
+                    context.tr('The attachments downloaded successfully'),
               ).show(context),
             ),
           );
