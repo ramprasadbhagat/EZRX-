@@ -54,13 +54,14 @@ parameters:
   - name: device_name 
     type: string 
     displayName: Test Device
-    default: 'Google Pixel 8 Pro-14.0'
+    default: 'Pixel 7 Pro-13'
     values:
-      - 'Google Pixel 8 Pro-14.0'
-      - 'Google Pixel 6-12.0'
-      - 'Samsung Galaxy S23-13.0'
-      - 'Samsung Galaxy S21 Plus-11.0'
-      - 'OnePlus 9-11.0'   
+      - 'Pixel 7 Pro-13'
+      - 'Galaxy S21 5G-12'
+      - 'Vivo Y20g-11'
+      - 'Redmi Note 9-10'
+      - 'Huawei Mate 20 Pro-9'
+      - 'Galaxy S9-8'
 
   - name: agentpool 
     type: string
@@ -98,10 +99,10 @@ stages:
       env: 
         AZURE_STORAGE_CONNECTION_STRING: '$(AZURE_STORAGE_CONNECTION_STRING)'
 
-- stage: BuildApplication 
+- stage: BuildApplicationStage 
   displayName: Build Application 
   jobs: 
-  - job: BuildApplication
+  - job: BuildApplicationJob
     displayName: Build Application 
     steps:  
       - task: Bash@3
@@ -143,6 +144,7 @@ stages:
             echo "key.jks copied to $(Build.SourcesDirectory)/android/app/ezrxkey.jks"  
 
       - task: Bash@3
+        displayName: Build test suite apk
         inputs: 
           targetType: 'inline' 
           script: | 
@@ -160,18 +162,30 @@ stages:
               exit 1
             fi            
             popd
-          
-        displayName: Build Application      
 
-      - task: PublishBuildArtifacts@1
-        displayName: Publish build android test suits artifacts
+      - task: Bash@3
+        displayName: Upload test suite apk
+        name: uploadApk
         inputs: 
-          pathToPublish: '$(System.DefaultWorkingDirectory)/build/app/outputs/apk/androidTest/uat/debug/app-uat-debug-androidTest.apk'
-          artifactName: androidTestFile
+          targetType: 'inline' 
+          script: | 
+            LAMBDATEST_CREDENTIALS=$LAMBDATEST_USERNAME:$LAMBDATEST_ACCESSKEY
+            echo -e "\n"
+            echo 'Uploading the test suite to Lambdatest from $(System.DefaultWorkingDirectory)/build/app/outputs/apk/androidTest/uat/debug/app-uat-debug-androidTest.apk :'
+            cmd="curl --location -u $LAMBDATEST_CREDENTIALS -X POST "https://manual-api.lambdatest.com/app/uploadFramework" -F "appFile=@$(System.DefaultWorkingDirectory)/build/app/outputs/apk/androidTest/uat/debug/app-uat-debug-androidTest.apk" -F "type=espresso-android""
+            test_suite_url=`$cmd | sed -n 's/.*"app_id":"\([^"]*\)".*/\1/p'`
+            echo -e "\n"
+            echo "test_suite_url : " $test_suite_url
+            echo "##vso[task.setvariable variable=test_suite_url;isOutput=true]$test_suite_url"   
+        env: 
+          LAMBDATEST_USERNAME: '$(LAMBDATEST_USERNAME)'
+          LAMBDATEST_ACCESSKEY: '$(LAMBDATEST_ACCESSKEY)'
 
 - stage: AndroidUATRegressionJob
-  dependsOn: [BuildApplication]
+  dependsOn: [BuildApplicationStage]
   displayName: Android UAT Regression Job
+  variables:
+    test_suite_url: $[ stageDependencies.BuildApplicationStage.BuildApplicationJob.outputs['uploadApk.test_suite_url'] ]
   jobs:
   - ${{ each testFile in parameters }}: 
       - job: RunIntegrationTest${{ testFile.Key }}
@@ -182,12 +196,6 @@ stages:
         pool:   
           name: ${{ parameters.agentpool }}
         steps:
-        - task: DownloadBuildArtifacts@1
-          inputs:
-            buildType: 'current'
-            artifactName: androidTestFile
-            downloadPath: '$(System.ArtifactsDirectory)'     
-
         - task: DownloadSecureFile@1
           name: localprop
           displayName: Download local properties file
@@ -239,14 +247,12 @@ stages:
                 exit 1
               fi
               popd
-          displayName: Build Test Suite    
+          displayName: Build Android APK    
 
         - task: Bash@3
           inputs:
             targetType: 'inline'
             script: |
-              BROWSERSTACK_CREDENTIALS=$BROWSERSTACK_USERNAME:$BROWSERSTACK_ACCESSKEY
-
               test_file=${{ testFile.Key }}
               region=${{ parameters.region }}
               testSuite=("integration_test/$region/$test_file.dart" "${region^^}")
@@ -255,87 +261,37 @@ stages:
               echo "GeoLocation:" "$region"
               echo "Using device:" "${{ parameters.device_name }}"
 
-              check_parallel (){
-                random_number=$((1 + RANDOM % 30))
-                sleep $random_number
-                check_parallel="curl -k -u $BROWSERSTACK_CREDENTIALS -X GET "https://api-cloud.browserstack.com/app-automate/plan.json" "
-                parallel_res=`$check_parallel`
-                parallel_in_use=$(echo $parallel_res | jq '.parallel_sessions_running' )
-                max_parallel=$(echo $parallel_res | jq '.parallel_sessions_max_allowed' )
-                echo "We currently used all the parallel: $parallel_in_use / $max_parallel"
-              }
-              check_parallel
-
-              while  [ "$parallel_in_use" -eq "$max_parallel" ]; do echo "We currently used all the parallel: $parallel_in_use / $max_parallel, will sleep 30s"; sleep 30; check_parallel;  done
-              
               echo -e "\n"
-              echo 'Uploading the App to Browserstack from $(System.DefaultWorkingDirectory)/build/app/outputs/apk/uat/debug/app-uat-debug.apk :'
+              echo 'Uploading the App to Lambdatest from $(System.DefaultWorkingDirectory)/build/app/outputs/apk/uat/debug/app-uat-debug.apk :'
 
-              cmd="curl -u $BROWSERSTACK_CREDENTIALS -X POST "https://api-cloud.browserstack.com/app-automate/flutter-integration-tests/v2/android/app" -F "file=@$(System.DefaultWorkingDirectory)/build/app/outputs/apk/uat/debug/app-uat-debug.apk" -F "custom_id=${{ testFile.Key }}""
-              app_url=`$cmd | sed -En 's/.*"app_url":"([^"]*).*/\1/p'`
-              echo -e "\n"
+              cmd="curl --location -u $LAMBDATEST_CREDENTIALS -X POST "https://manual-api.lambdatest.com/app/uploadFramework" -F "appFile=@$(System.DefaultWorkingDirectory)/build/app/outputs/apk/uat/debug/app-uat-debug.apk" -F "type=espresso-android""
+              app_url=`$cmd | sed -n 's/.*"app_id":"\([^"]*\)".*/\1/p'`
               echo "app_url : " $app_url
+              echo "test_suite_url : " $(test_suite_url)
 
               echo -e "\n"
-              echo 'Uploading the test suite to Browserstack from $(System.ArtifactsDirectory)/androidTestFile/app-uat-debug-androidTest.apk :'
+              echo "Staring the Test execution on Lambdatest :"
 
-              cmd="curl -u $BROWSERSTACK_CREDENTIALS -X POST "https://api-cloud.browserstack.com/app-automate/flutter-integration-tests/v2/android/test-suite" -F "file=@$(System.ArtifactsDirectory)/androidTestFile/app-uat-debug-androidTest.apk" -F "custom_id=${{ testFile.Key }}""
-              test_suite_url=`$cmd | sed -En 's/.*"test_suite_url":"([^"]*).*/\1/p'` 
-              echo -e "\n"
-              echo "test_suite_url : " $test_suite_url
+              val=$(curl --location -X POST 'https://mobile-api.lambdatest.com/framework/v1/flutter/build' \
+              -H 'Content-Type: application/json' \
+              -u $LAMBDATEST_CREDENTIALS \
+              -d '{"app": "'"${app_url}"'", "testSuite": "'"$(test_suite_url)"'", "device": ["'"${{ parameters.device_name }}"'"], "build": "'"${testSuite[0]}"'", "geoLocation":"'"${testSuite[1]}"'", "queueTimeout": 10800, "idleTimeout": 150, "testTimeout": 7200, "deviceLog":true, "network":true, "autoGrantPermissions":true, "projectName":"eZRxPlus"}')
 
-              echo -e "\n"
-              echo "Staring the Test execution on Browserstack :"
+              result_build_id=$(echo $val | sed -E 's/.*"buildId":\["([^"]*)".*/\1/')
 
-              val=""
-              if [ $IS_GEOLOCATION_ENABLED == 'Yes' ]
-              then
-                val=$(curl -X POST 'https://api-cloud.browserstack.com/app-automate/flutter-integration-tests/v2/android/build' \
-                --header 'Content-Type: application/json' \
-                -u $BROWSERSTACK_CREDENTIALS \
-                -d '{"app": "'"$app_url"'", "testSuite": "'"$test_suite_url"'", "geoLocation":"'"${testSuite[1]}}"'" , "buildTag": "'"$testSuite[0]"'", "project":"eZRxPlus", "autoGrantPermissions":"true", "deviceLogs":"true", "networkLogs":"true", "devices": ["'"${{ parameters.device_name }}"'"]}' )
-              else
-                val=$(curl -X POST 'https://api-cloud.browserstack.com/app-automate/flutter-integration-tests/v2/android/build' \
-                --header 'Content-Type: application/json' \
-                -u $BROWSERSTACK_CREDENTIALS \
-                -d '{"app": "'"$app_url"'", "testSuite": "'"$test_suite_url"'", "buildTag": "'"$testSuite[0]"'", "project":"eZRxPlus", "autoGrantPermissions":"true", "deviceLogs":"true", "networkLogs":"true",  "devices": ["'"${{ parameters.device_name }}"'"]}' )
-              fi
-
-              result_build_id=$(echo $val | sed 's/{.*"build_id":"*\([0-9a-zA-Z]*\)"*,*.*}/\1/')
-              
+              echo "val : " $val
               echo "Build_Id : " $result_build_id
-
-              while echo "$result_build_id" | grep -q "BROWSERSTACK_ALL_PARALLELS_IN_USE"; do
-                val=""
-                if [ $IS_GEOLOCATION_ENABLED == 'Yes' ]
-                then
-                  val=$(curl -X POST 'https://api-cloud.browserstack.com/app-automate/flutter-integration-tests/v2/android/build' \
-                  --header 'Content-Type: application/json' \
-                  -u $BROWSERSTACK_CREDENTIALS \
-                  -d '{"app": "'"$app_url"'", "testSuite": "'"$test_suite_url"'", "geoLocation":"'"${testSuite[1]}}"'" , "buildTag": "'"$testSuite[0]"'", "project":"eZRxPlus", "autoGrantPermissions":"true", "deviceLogs":"true", "networkLogs":"true", "devices": ["'"${{ parameters.device_name }}"'"]}' )
-                else
-                  val=$(curl -X POST 'https://api-cloud.browserstack.com/app-automate/flutter-integration-tests/v2/android/build' \
-                  --header 'Content-Type: application/json' \
-                  -u $BROWSERSTACK_CREDENTIALS \
-                  -d '{"app": "'"$app_url"'", "testSuite": "'"$test_suite_url"'", "buildTag": "'"$testSuite[0]"'", "project":"eZRxPlus", "autoGrantPermissions":"true", "deviceLogs":"true", "networkLogs":"true",  "devices": ["'"${{ parameters.device_name }}"'"]}' )
-                fi
-                result_build_id=$(echo $val | sed 's/{.*"build_id":"*\([0-9a-zA-Z]*\)"*,*.*}/\1/')
-                echo "Build_Id : " $result_build_id                  
-                sleep 30 
-              done
               
               buildStatus="running"
               buildMonitorStart=$SECONDS
               maxTime=${{ parameters.max_test_time }} # Max test time should not be above 5 minutes. (Yet apply, if want to do this please use ENV Param instead)
 
-              while [ "$buildStatus" == "running" ];
+              while [ "$buildStatus" == "running" ] || [ "$buildStatus" == "queued" ];
               do
-                cmd="curl -X GET "https://api-cloud.browserstack.com/app-automate/flutter-integration-tests/v2/android/builds/${result_build_id}" -u $BROWSERSTACK_CREDENTIALS "
-                buildStatus=`$cmd | sed -En 's/.*"status":"([^"]*).*/\1/p'`
-                sessionId=`$cmd | sed -En 's/.*"id":"([^"]*).*/\1/p'`
-                echo "Build URL https://app-automate.browserstack.com/dashboard/v2/builds/${result_build_id}"
+                buildCmd="curl --location -u $LAMBDATEST_CREDENTIALS -X GET "https://mobile-api.lambdatest.com/mobile-automation/api/v1/builds/${result_build_id}""
+                buildStatus=`$buildCmd | sed -n 's/.*"status_ind":"\([^"]*\)".*/\1/p'`
+                
                 echo "The Current status of the run is : " $buildStatus
-                echo "The Session Id of the run is : " $sessionId
                 monitorTime=$(( SECONDS - buildMonitorStart ))
                 echo "Monitor Time : " $monitorTime
                 echo "Max Time : " $maxTime
@@ -344,7 +300,8 @@ stages:
                   buildStatus="error"
                 fi
               done
-              buildDetails=https://app-automate.browserstack.com/dashboard/v2/builds/"${result_build_id}"
+
+              buildDetails=https://appautomation.lambdatest.com/build?searchtxt="${result_build_id}"
 
               duration=$(( SECONDS - start ))
 
@@ -355,22 +312,24 @@ stages:
 
               echo "Build Status : " ${buildStatus}
 
-              echo "Build Details Link : " ${buildDetails}
+              echo "Build Details URL : "${buildDetails}
+
+              # sessionCmd="curl --location -u $LAMBDATEST_CREDENTIALS -X GET "https://mobile-api.lambdatest.com/mobile-automation/api/v1/sessions?build_id=${result_build_id}""
+              # testId=`$sessionCmd | sed -n 's/.*"test_id":"\([^"]*\)".*/\1/p'`
+              # echo "Test ID Details URL : https://appautomation.lambdatest.com/test?testID="${testId}
 
               echo -e "\n"
               echo "The total time taken for the test execution in seconds is :" $duration                     
 
               file_without_intergration=$(echo ${test_file} | cut -d '/' -f 2-)
- 
-              echo "##vso[task.setvariable variable=buildDetails]$buildDetails"   
+  
+              echo "##vso[task.setvariable variable=buildDetails]$buildDetails"
               echo "##vso[task.setvariable variable=result_build_id]$result_build_id" 
               echo "##vso[task.setvariable variable=file_without_intergration]$file_without_intergration"   
 
-          displayName: Upload App and Test to BrowserStack and wait for result
+          displayName: Upload App and Test to Lambdatest and wait for result
           env: 
-            BROWSERSTACK_USERNAME: '$(BROWSERSTACK_USERNAME)'
-            BROWSERSTACK_ACCESSKEY: '$(BROWSERSTACK_ACCESSKEY)'
-            ENABLE_GEOLOCATION: '$(ENABLE_GEOLOCATION)'
+            LAMBDATEST_CREDENTIALS: '$(LAMBDATEST_CREDENTIALS)'
 
         - task: AzureCLI@2
           displayName: Edit PushNotification Template
@@ -378,27 +337,26 @@ stages:
             azureSubscription: 'devops-dd-sc'
             scriptType: 'bash'
             scriptLocation: 'inlineScript'
-            inlineScript: |                                          
-              BROWSERSTACK_CREDENTIALS=$BROWSERSTACK_USERNAME:$BROWSERSTACK_ACCESSKEY
+            inlineScript: |
+              buildDetails=$(buildDetails)
               result_build_id=$(result_build_id)
               test_file=$(file_without_intergration)
-              buildDetails=$(buildDetails)
               echo $test_file
-              total_cases=$(curl -X GET "https://api-cloud.browserstack.com/app-automate/flutter-integration-tests/v2/android/builds/${result_build_id}" -u $BROWSERSTACK_CREDENTIALS | jq '.devices[].sessions[].testcases.count')
+              total_cases=$(curl --location -u $LAMBDATEST_CREDENTIALS -X GET "https://mobile-api.lambdatest.com/mobile-automation/api/v1/framework/builds/${result_build_id}/report/?encoder=true" | sed -n '/tests="/s/.*tests="\([0-9]*\)".*/\1/p')
               echo "Total Cases: $total_cases"
-              passed_cases=$(curl -X GET "https://api-cloud.browserstack.com/app-automate/flutter-integration-tests/v2/android/builds/${result_build_id}" -u $BROWSERSTACK_CREDENTIALS | jq '.devices[].sessions[].testcases.status.passed')
-              echo "Total Cases Passed: $passed_cases"
+              failures_cases=$(curl --location -u $LAMBDATEST_CREDENTIALS -X GET "https://mobile-api.lambdatest.com/mobile-automation/api/v1/framework/builds/${result_build_id}/report/?encoder=true" | sed -n '/failures="/s/.*failures="\([0-9]*\)".*/\1/p')
+              echo "Total Cases failure: $failures_cases"
 
               az storage blob download --container-name devops-operations --file $(System.DefaultWorkingDirectory)/.azure-pipelines/template.html --name ezrxplus-mobile-msteams/template$(Build.BuildId) 
 
-              if [ -n "$total_cases" ] && [ -n "$passed_cases" ]; then
+              if [ -n "$total_cases" ] && [ -n "$failures_cases" ]; then
                 if [ "$total_cases" -eq "0" ]; then 
                   avg=0
                   echo "set avg: $avg cause Devision Error"
                   sed -i "s|${test_file}_per|${avg}%|g" .azure-pipelines/template.html 
                   sed -i "s|${test_file}_link|$buildDetails|g" .azure-pipelines/template.html 
                 else
-                  avg=$(python3 -c "print(int(( $passed_cases / $total_cases)*100))")
+                  avg=$(python3 -c "print(int((($total_cases - $failures_cases) / $total_cases)*100))")
                   sed -i "s|${test_file}_link|$buildDetails|g" .azure-pipelines/template.html 
                   sed -i "s|${test_file}_per|${avg}%|g" .azure-pipelines/template.html 
                   echo "current avg: $avg"
@@ -413,9 +371,7 @@ stages:
               cat .azure-pipelines/template.html
           env: 
             AZURE_STORAGE_CONNECTION_STRING: '$(AZURE_STORAGE_CONNECTION_STRING)'
-            BROWSERSTACK_USERNAME: '$(BROWSERSTACK_USERNAME)'
-            BROWSERSTACK_ACCESSKEY: '$(BROWSERSTACK_ACCESSKEY)'
-            ENABLE_GEOLOCATION: '$(ENABLE_GEOLOCATION)'
+            LAMBDATEST_CREDENTIALS: '$(LAMBDATEST_CREDENTIALS)'
 
         - task: Bash@3
           displayName: Read Integration Test Report
@@ -535,9 +491,9 @@ stages:
           branch_name="$(Build.SourceBranchName)"
           TITLE="Integration For ${{ parameters.region }} Triggered By $username on $branch_name Fail"
 
-          curl --location --request POST '$(MICROSOFT_TEAMS_BUILD_CHANNEL)' \
-          --header 'Content-Type: text/plain' \
-          --data-raw '{
+          curl -X POST '$(MICROSOFT_TEAMS_BUILD_CHANNEL)' \
+          -H 'Content-Type: text/plain' \
+          -d '{
             "@type": "MessageCard",
             "@context": "http://schema.org/extensions",
             "summary": "Integration For ${{ parameters.region }} Fail",

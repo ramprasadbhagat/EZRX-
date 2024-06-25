@@ -10,7 +10,7 @@ EXTERNALSALESREPRETURN := 'external_sales_rep/external_sales_rep_user_return.dar
 SALESORGCONFIG := 'reset_sales_org_config.sh'
 
 clean_ios:
-	@cd ios && rm -rf Pods && rm Podfile.lock && fvm flutter pub get && pod install && cd ..
+	@cd ios && rm -rf Pods && rm -f Podfile.lock && fvm flutter pub get && pod install && cd ..
 run_test:
 	@fvm flutter analyze --fatal-infos --fatal-warnings
 	@dcm analyze lib --fatal-style --fatal-performance --fatal-warnings
