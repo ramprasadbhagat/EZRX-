@@ -22,7 +22,9 @@ class DatadogService {
     datadogSdk: DatadogSdk.instance,
   );
 
-  final logConfiguration = DatadogLoggerConfiguration();
+  final logConfiguration = DatadogLoggerConfiguration(
+    customConsoleLogFunction: null,
+  );
 
   Future<void> init() async {
     final version = await packageInfoService.getVersion();

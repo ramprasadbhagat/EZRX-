@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:dio/dio.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter_pretty_dio_logger/flutter_pretty_dio_logger.dart';
 import 'package:universal_io/io.dart';
 
 class HttpService {
@@ -27,7 +28,19 @@ class HttpService {
     );
     _dio.interceptors.addAll([
       ...interceptors,
-      if (enableLog) LogInterceptor(requestBody: true, responseBody: true),
+      if (enableLog)
+        PrettyDioLogger(
+          requestHeader: true,
+          queryParameters: true,
+          requestBody: true,
+          responseHeader: true,
+          responseBody: true,
+          error: true,
+          showProcessingTime: true,
+          showCUrl: false,
+          convertFormData: true,
+          canShowLog: kDebugMode,
+        ),
     ]);
   }
 

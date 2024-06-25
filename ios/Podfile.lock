@@ -8,7 +8,7 @@ PODS:
     - Flutter
   - connectivity_plus (0.0.1):
     - Flutter
-    - ReachabilitySwift
+    - FlutterMacOS
   - cunning_document_scanner (1.0.0):
     - Flutter
   - datadog_flutter_plugin (0.0.1):
@@ -308,7 +308,6 @@ PODS:
   - PromisesObjC (2.4.0)
   - PromisesSwift (2.4.0):
     - PromisesObjC (= 2.4.0)
-  - ReachabilitySwift (5.2.3)
   - scandit-datacapture-frameworks-barcode (6.24.0):
     - scandit-datacapture-frameworks-core (= 6.24.0)
     - ScanditBarcodeCapture (= 6.24.0)
@@ -336,14 +335,7 @@ PODS:
   - SwiftyGif (5.4.5)
   - url_launcher_ios (0.0.1):
     - Flutter
-  - video_player_avfoundation (0.0.1):
-    - Flutter
-    - FlutterMacOS
   - wakelock (0.0.1):
-    - Flutter
-  - wakelock_plus (0.0.1):
-    - Flutter
-  - webview_flutter_wkwebview (0.0.1):
     - Flutter
   - YMChat (1.18.0)
   - ymchat_flutter (0.0.1):
@@ -353,7 +345,7 @@ PODS:
 DEPENDENCIES:
   - app_links (from `.symlinks/plugins/app_links/ios`)
   - clevertap_plugin (from `.symlinks/plugins/clevertap_plugin/ios`)
-  - connectivity_plus (from `.symlinks/plugins/connectivity_plus/ios`)
+  - connectivity_plus (from `.symlinks/plugins/connectivity_plus/darwin`)
   - cunning_document_scanner (from `.symlinks/plugins/cunning_document_scanner/ios`)
   - datadog_flutter_plugin (from `.symlinks/plugins/datadog_flutter_plugin/ios`)
   - device_info_plus (from `.symlinks/plugins/device_info_plus/ios`)
@@ -385,10 +377,7 @@ DEPENDENCIES:
   - shared_preferences_foundation (from `.symlinks/plugins/shared_preferences_foundation/darwin`)
   - sqflite (from `.symlinks/plugins/sqflite/darwin`)
   - url_launcher_ios (from `.symlinks/plugins/url_launcher_ios/ios`)
-  - video_player_avfoundation (from `.symlinks/plugins/video_player_avfoundation/darwin`)
   - wakelock (from `.symlinks/plugins/wakelock/ios`)
-  - wakelock_plus (from `.symlinks/plugins/wakelock_plus/ios`)
-  - webview_flutter_wkwebview (from `.symlinks/plugins/webview_flutter_wkwebview/ios`)
   - ymchat_flutter (from `.symlinks/plugins/ymchat_flutter/ios`)
 
 SPEC REPOS:
@@ -427,7 +416,6 @@ SPEC REPOS:
     - PLCrashReporter
     - PromisesObjC
     - PromisesSwift
-    - ReachabilitySwift
     - scandit-datacapture-frameworks-barcode
     - scandit-datacapture-frameworks-core
     - ScanditBarcodeCapture
@@ -442,7 +430,7 @@ EXTERNAL SOURCES:
   clevertap_plugin:
     :path: ".symlinks/plugins/clevertap_plugin/ios"
   connectivity_plus:
-    :path: ".symlinks/plugins/connectivity_plus/ios"
+    :path: ".symlinks/plugins/connectivity_plus/darwin"
   cunning_document_scanner:
     :path: ".symlinks/plugins/cunning_document_scanner/ios"
   datadog_flutter_plugin:
@@ -505,14 +493,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/sqflite/darwin"
   url_launcher_ios:
     :path: ".symlinks/plugins/url_launcher_ios/ios"
-  video_player_avfoundation:
-    :path: ".symlinks/plugins/video_player_avfoundation/darwin"
   wakelock:
     :path: ".symlinks/plugins/wakelock/ios"
-  wakelock_plus:
-    :path: ".symlinks/plugins/wakelock_plus/ios"
-  webview_flutter_wkwebview:
-    :path: ".symlinks/plugins/webview_flutter_wkwebview/ios"
   ymchat_flutter:
     :path: ".symlinks/plugins/ymchat_flutter/ios"
 
@@ -520,7 +502,7 @@ SPEC CHECKSUMS:
   app_links: e70ca16b4b0f88253b3b3660200d4a10b4ea9795
   CleverTap-iOS-SDK: 78ea6d752d84918f0426f7b3959777d862bcb348
   clevertap_plugin: 81d30133ce84661238d3dc02d1321e15cfe46e12
-  connectivity_plus: 07c49e96d7fc92bc9920617b83238c4d178b446a
+  connectivity_plus: ddd7f30999e1faaef5967c23d5b6d503d10434db
   cunning_document_scanner: 7cb9bd173f7cc7b11696dde98d01492187fc3a67
   datadog_flutter_plugin: cecd0430743a2a35e065c1367bb2a43d2c7b5290
   DatadogCore: 362ac6fb821444c45a9abb6cd0fe99c4ef8c109c
@@ -580,7 +562,6 @@ SPEC CHECKSUMS:
   printing: 233e1b73bd1f4a05615548e9b5a324c98588640b
   PromisesObjC: f5707f49cb48b9636751c5b2e7d227e43fba9f47
   PromisesSwift: 9d77319bbe72ebf6d872900551f7eeba9bce2851
-  ReachabilitySwift: 7f151ff156cea1481a8411701195ac6a984f4979
   scandit-datacapture-frameworks-barcode: c7f9ef80d8e2459c0b2ee4d28033166166c8a47c
   scandit-datacapture-frameworks-core: fe3e888d31b8330468b5bd8085a9511cb439491e
   scandit_flutter_datacapture_barcode: 20fd764a5b5c2df3e1b71da1021b2ab5a4dc4831
@@ -592,10 +573,7 @@ SPEC CHECKSUMS:
   sqflite: 673a0e54cc04b7d6dba8d24fb8095b31c3a99eec
   SwiftyGif: 706c60cf65fa2bc5ee0313beece843c8eb8194d4
   url_launcher_ios: 5334b05cef931de560670eeae103fd3e431ac3fe
-  video_player_avfoundation: 7c6c11d8470e1675df7397027218274b6d2360b3
   wakelock: d0fc7c864128eac40eba1617cb5264d9c940b46f
-  wakelock_plus: 78ec7c5b202cab7761af8e2b2b3d0671be6c4ae1
-  webview_flutter_wkwebview: be0f0d33777f1bfd0c9fdcb594786704dbf65f36
   YMChat: df0f677b33bdf6f07aa8c475403efe15738a3582
   ymchat_flutter: e42ffa7f01bbca9e33506a173130a0924399d7fe
 
