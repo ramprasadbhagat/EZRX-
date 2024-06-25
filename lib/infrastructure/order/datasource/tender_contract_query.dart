@@ -19,6 +19,7 @@ class TenderContractQuery {
             announcementLetterNumber
             isNearToExpire
             contractPaymentTerm
+            tenderUnitPrice
           }
         }
       }    

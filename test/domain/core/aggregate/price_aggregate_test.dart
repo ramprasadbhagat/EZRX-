@@ -317,6 +317,7 @@ void main() {
         final customPriceAggregate = emptyPriceAggregate.copyWith(
           tenderContract: TenderContract.empty().copyWith(
             tenderPrice: TenderPrice('40'),
+            tenderUnitPrice: TenderPrice('20'),
             pricingUnit: 2,
           ),
           price: emptyPrice.copyWith(
@@ -339,6 +340,7 @@ void main() {
         final customPriceAggregate = emptyPriceAggregate.copyWith(
           tenderContract: TenderContract.empty().copyWith(
             tenderPrice: TenderPrice('40'),
+            tenderUnitPrice: TenderPrice('20'),
             pricingUnit: 2,
           ),
         );
@@ -385,6 +387,7 @@ void main() {
         final customPriceAggregate = emptyPriceAggregate.copyWith(
           tenderContract: TenderContract.empty().copyWith(
             tenderPrice: TenderPrice('40'),
+            tenderUnitPrice: TenderPrice('20'),
             pricingUnit: 2,
           ),
           price: emptyPrice.copyWith(
@@ -408,6 +411,7 @@ void main() {
         final customPriceAggregate = emptyPriceAggregate.copyWith(
           tenderContract: TenderContract.empty().copyWith(
             tenderPrice: TenderPrice('40'),
+            tenderUnitPrice: TenderPrice('20'),
             pricingUnit: 2,
           ),
           price: emptyPrice.copyWith(
@@ -431,6 +435,7 @@ void main() {
         final customPriceAggregate = emptyPriceAggregate.copyWith(
           tenderContract: TenderContract.empty().copyWith(
             tenderPrice: TenderPrice('40'),
+            tenderUnitPrice: TenderPrice('20'),
             pricingUnit: 2,
           ),
           price: emptyPrice.copyWith(
@@ -451,6 +456,7 @@ void main() {
         final customPriceAggregate = emptyPriceAggregate.copyWith(
           tenderContract: TenderContract.empty().copyWith(
             tenderPrice: TenderPrice('20'),
+            tenderUnitPrice: TenderPrice('10'),
             pricingUnit: 2,
           ),
           price: emptyPrice.copyWith(

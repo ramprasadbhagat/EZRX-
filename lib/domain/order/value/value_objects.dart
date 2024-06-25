@@ -449,6 +449,8 @@ class TenderPrice extends ValueObject<String> {
 
   double get tenderPrice => totalPriceStringAsFixed(value.getOrElse(() => '0'));
 
+  String get displayTenderPrice => value.getOrElse(() => '0');
+
   const TenderPrice._(this.value);
 }
 

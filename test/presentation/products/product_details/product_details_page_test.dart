@@ -3295,7 +3295,7 @@ void main() {
             find.descendant(
               of: contractItem,
               matching: find.text(
-                'VND 952,380,952.00',
+                'VND 95,238.10',
                 findRichText: true,
               ),
             ),

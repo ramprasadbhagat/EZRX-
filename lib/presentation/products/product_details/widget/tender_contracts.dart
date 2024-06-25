@@ -232,8 +232,8 @@ class _TenderContractsState extends State<TenderContracts> {
                               padding: const EdgeInsets.only(bottom: 8.0),
                               child: PriceComponent(
                                 type: PriceStyle.tenderPrice,
-                                price: currentContract.tenderPrice
-                                    .getOrDefaultValue(''),
+                                price: currentContract
+                                    .tenderUnitPrice.displayTenderPrice,
                                 salesOrgConfig: context
                                     .read<EligibilityBloc>()
                                     .state

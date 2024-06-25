@@ -24,6 +24,7 @@ _$TenderContractDtoImpl _$$TenderContractDtoImplFromJson(
       announcementLetterNumber: json['announcementLetterNumber'] as String,
       isNearToExpire: json['isNearToExpire'] as bool,
       contractPaymentTerm: json['contractPaymentTerm'] as String,
+      tenderUnitPrice: json['tenderUnitPrice'] as String,
     );
 
 Map<String, dynamic> _$$TenderContractDtoImplToJson(
@@ -44,4 +45,5 @@ Map<String, dynamic> _$$TenderContractDtoImplToJson(
       'announcementLetterNumber': instance.announcementLetterNumber,
       'isNearToExpire': instance.isNearToExpire,
       'contractPaymentTerm': instance.contractPaymentTerm,
+      'tenderUnitPrice': instance.tenderUnitPrice,
     };

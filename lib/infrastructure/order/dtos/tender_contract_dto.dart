@@ -29,27 +29,32 @@ class TenderContractDto with _$TenderContractDto {
     required String announcementLetterNumber,
     @JsonKey(name: 'isNearToExpire') required bool isNearToExpire,
     @JsonKey(name: 'contractPaymentTerm') required String contractPaymentTerm,
+    @JsonKey(name: 'tenderUnitPrice') required String tenderUnitPrice,
   }) = _TenderContractDto;
 
   factory TenderContractDto.fromDomain(TenderContract tenderContract) {
     return TenderContractDto(
-      contractNumber: tenderContract.contractNumber.getOrCrash(),
-      contractItemNumber: tenderContract.contractItemNumber.getOrCrash(),
-      contractReference: tenderContract.contractReference.getOrCrash(),
-      tenderOrderReason: tenderContract.tenderOrderReason.getOrCrash(),
-      tenderVisaNumber: tenderContract.tenderVisaNumber.getOrCrash(),
-      salesDistrict: tenderContract.salesDistrict.getOrCrash(),
+      contractNumber: tenderContract.contractNumber.getOrDefaultValue(''),
+      contractItemNumber:
+          tenderContract.contractItemNumber.getOrDefaultValue(''),
+      contractReference: tenderContract.contractReference.getOrDefaultValue(''),
+      tenderOrderReason: tenderContract.tenderOrderReason.getOrDefaultValue(''),
+      tenderVisaNumber: tenderContract.tenderVisaNumber.getOrDefaultValue(''),
+      salesDistrict: tenderContract.salesDistrict.getOrDefaultValue(''),
       tenderPackageDescription:
-          tenderContract.tenderPackageDescription.getOrCrash(),
-      tenderPrice: tenderContract.tenderPrice.getOrCrash(),
+          tenderContract.tenderPackageDescription.getOrDefaultValue(''),
+      tenderPrice: tenderContract.tenderPrice.getOrDefaultValue(''),
       pricingUnit: tenderContract.pricingUnit,
       remainingTenderQuantity: tenderContract.remainingTenderQuantity,
       contractQuantity: tenderContract.contractQuantity,
-      contractExpiryDate: tenderContract.contractExpiryDate.getOrCrash(),
+      contractExpiryDate:
+          tenderContract.contractExpiryDate.getOrDefaultValue(''),
       announcementLetterNumber:
-          tenderContract.announcementLetterNumber.getOrCrash(),
+          tenderContract.announcementLetterNumber.getOrDefaultValue(''),
       isNearToExpire: tenderContract.isNearToExpire,
-      contractPaymentTerm: tenderContract.contractPaymentTerm.getOrCrash(),
+      contractPaymentTerm:
+          tenderContract.contractPaymentTerm.getOrDefaultValue(''),
+      tenderUnitPrice: tenderContract.tenderUnitPrice.getOrDefaultValue(''),
     );
   }
 
@@ -74,6 +79,7 @@ class TenderContractDto with _$TenderContractDto {
       isNearToExpire: isNearToExpire,
       isTenderExpired: false,
       contractPaymentTerm: StringValue(contractPaymentTerm),
+      tenderUnitPrice: TenderPrice(tenderUnitPrice),
     );
   }
 

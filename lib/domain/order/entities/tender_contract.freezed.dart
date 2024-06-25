@@ -38,6 +38,7 @@ mixin _$TenderContract {
   bool get isNearToExpire => throw _privateConstructorUsedError;
   StringValue get contractPaymentTerm => throw _privateConstructorUsedError;
   bool get isTenderExpired => throw _privateConstructorUsedError;
+  TenderPrice get tenderUnitPrice => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $TenderContractCopyWith<TenderContract> get copyWith =>
@@ -66,7 +67,8 @@ abstract class $TenderContractCopyWith<$Res> {
       TenderContractNumber announcementLetterNumber,
       bool isNearToExpire,
       StringValue contractPaymentTerm,
-      bool isTenderExpired});
+      bool isTenderExpired,
+      TenderPrice tenderUnitPrice});
 }
 
 /// @nodoc
@@ -98,6 +100,7 @@ class _$TenderContractCopyWithImpl<$Res, $Val extends TenderContract>
     Object? isNearToExpire = null,
     Object? contractPaymentTerm = null,
     Object? isTenderExpired = null,
+    Object? tenderUnitPrice = null,
   }) {
     return _then(_value.copyWith(
       contractNumber: null == contractNumber
@@ -164,6 +167,10 @@ class _$TenderContractCopyWithImpl<$Res, $Val extends TenderContract>
           ? _value.isTenderExpired
           : isTenderExpired // ignore: cast_nullable_to_non_nullable
               as bool,
+      tenderUnitPrice: null == tenderUnitPrice
+          ? _value.tenderUnitPrice
+          : tenderUnitPrice // ignore: cast_nullable_to_non_nullable
+              as TenderPrice,
     ) as $Val);
   }
 }
@@ -192,7 +199,8 @@ abstract class _$$TenderContractImplCopyWith<$Res>
       TenderContractNumber announcementLetterNumber,
       bool isNearToExpire,
       StringValue contractPaymentTerm,
-      bool isTenderExpired});
+      bool isTenderExpired,
+      TenderPrice tenderUnitPrice});
 }
 
 /// @nodoc
@@ -222,6 +230,7 @@ class __$$TenderContractImplCopyWithImpl<$Res>
     Object? isNearToExpire = null,
     Object? contractPaymentTerm = null,
     Object? isTenderExpired = null,
+    Object? tenderUnitPrice = null,
   }) {
     return _then(_$TenderContractImpl(
       contractNumber: null == contractNumber
@@ -288,6 +297,10 @@ class __$$TenderContractImplCopyWithImpl<$Res>
           ? _value.isTenderExpired
           : isTenderExpired // ignore: cast_nullable_to_non_nullable
               as bool,
+      tenderUnitPrice: null == tenderUnitPrice
+          ? _value.tenderUnitPrice
+          : tenderUnitPrice // ignore: cast_nullable_to_non_nullable
+              as TenderPrice,
     ));
   }
 }
@@ -311,7 +324,8 @@ class _$TenderContractImpl extends _TenderContract {
       required this.announcementLetterNumber,
       required this.isNearToExpire,
       required this.contractPaymentTerm,
-      required this.isTenderExpired})
+      required this.isTenderExpired,
+      required this.tenderUnitPrice})
       : super._();
 
   @override
@@ -346,10 +360,12 @@ class _$TenderContractImpl extends _TenderContract {
   final StringValue contractPaymentTerm;
   @override
   final bool isTenderExpired;
+  @override
+  final TenderPrice tenderUnitPrice;
 
   @override
   String toString() {
-    return 'TenderContract(contractNumber: $contractNumber, contractItemNumber: $contractItemNumber, contractReference: $contractReference, tenderOrderReason: $tenderOrderReason, tenderVisaNumber: $tenderVisaNumber, salesDistrict: $salesDistrict, tenderPackageDescription: $tenderPackageDescription, tenderPrice: $tenderPrice, pricingUnit: $pricingUnit, remainingTenderQuantity: $remainingTenderQuantity, contractQuantity: $contractQuantity, contractExpiryDate: $contractExpiryDate, announcementLetterNumber: $announcementLetterNumber, isNearToExpire: $isNearToExpire, contractPaymentTerm: $contractPaymentTerm, isTenderExpired: $isTenderExpired)';
+    return 'TenderContract(contractNumber: $contractNumber, contractItemNumber: $contractItemNumber, contractReference: $contractReference, tenderOrderReason: $tenderOrderReason, tenderVisaNumber: $tenderVisaNumber, salesDistrict: $salesDistrict, tenderPackageDescription: $tenderPackageDescription, tenderPrice: $tenderPrice, pricingUnit: $pricingUnit, remainingTenderQuantity: $remainingTenderQuantity, contractQuantity: $contractQuantity, contractExpiryDate: $contractExpiryDate, announcementLetterNumber: $announcementLetterNumber, isNearToExpire: $isNearToExpire, contractPaymentTerm: $contractPaymentTerm, isTenderExpired: $isTenderExpired, tenderUnitPrice: $tenderUnitPrice)';
   }
 
   @override
@@ -391,7 +407,9 @@ class _$TenderContractImpl extends _TenderContract {
             (identical(other.contractPaymentTerm, contractPaymentTerm) ||
                 other.contractPaymentTerm == contractPaymentTerm) &&
             (identical(other.isTenderExpired, isTenderExpired) ||
-                other.isTenderExpired == isTenderExpired));
+                other.isTenderExpired == isTenderExpired) &&
+            (identical(other.tenderUnitPrice, tenderUnitPrice) ||
+                other.tenderUnitPrice == tenderUnitPrice));
   }
 
   @override
@@ -412,7 +430,8 @@ class _$TenderContractImpl extends _TenderContract {
       announcementLetterNumber,
       isNearToExpire,
       contractPaymentTerm,
-      isTenderExpired);
+      isTenderExpired,
+      tenderUnitPrice);
 
   @JsonKey(ignore: true)
   @override
@@ -439,7 +458,8 @@ abstract class _TenderContract extends TenderContract {
       required final TenderContractNumber announcementLetterNumber,
       required final bool isNearToExpire,
       required final StringValue contractPaymentTerm,
-      required final bool isTenderExpired}) = _$TenderContractImpl;
+      required final bool isTenderExpired,
+      required final TenderPrice tenderUnitPrice}) = _$TenderContractImpl;
   const _TenderContract._() : super._();
 
   @override
@@ -474,6 +494,8 @@ abstract class _TenderContract extends TenderContract {
   StringValue get contractPaymentTerm;
   @override
   bool get isTenderExpired;
+  @override
+  TenderPrice get tenderUnitPrice;
   @override
   @JsonKey(ignore: true)
   _$$TenderContractImplCopyWith<_$TenderContractImpl> get copyWith =>

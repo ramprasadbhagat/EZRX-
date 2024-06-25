@@ -133,6 +133,8 @@ void main() {
     tenderOrderReason: TenderContractReason('730'),
     contractNumber: TenderContractNumber.tenderContractNumber('fake-Number'),
     tenderPrice: TenderPrice('11832000'),
+    tenderUnitPrice: TenderPrice('118320'),
+    pricingUnit: 100,
     contractReference: StringValue('fake-Reference'),
     salesDistrict: StringValue('fake-SalesDistrict'),
     announcementLetterNumber: TenderContractNumber.announcementLetterNumber(
@@ -3382,7 +3384,7 @@ void main() {
           find.descendant(
             of: tenderContractSection,
             matching: find.text(
-              'VND 11,832,000.00',
+              'VND 118,320.00',
               findRichText: true,
             ),
           ),

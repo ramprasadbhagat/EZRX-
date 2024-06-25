@@ -17,7 +17,8 @@
           "contractExpiryDate": "99991231",
           "announcementLetterNumber": "VAT 10% - 8%",
           "isNearToExpire": false,
-          "contractPaymentTerm": "E002"
+          "contractPaymentTerm": "E002",
+          "tenderUnitPrice": "95238.0952"
         },
         {
           "contractNumber": "0040011432",
@@ -34,7 +35,8 @@
           "contractExpiryDate": "20221231",
           "announcementLetterNumber": "VAT 10% - 8%",
           "isNearToExpire": true,
-          "contractPaymentTerm": "E013"
+          "contractPaymentTerm": "E013",
+          "tenderUnitPrice": "120917.9"
         },
         {
           "contractNumber": "0040013848",
@@ -51,7 +53,8 @@
           "contractExpiryDate": "99991231",
           "announcementLetterNumber": "",
           "isNearToExpire": false,
-          "contractPaymentTerm": "E013"
+          "contractPaymentTerm": "E013",
+          "tenderUnitPrice": "95238.0952"
         }
       ]
     }

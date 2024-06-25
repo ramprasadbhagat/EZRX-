@@ -50,6 +50,8 @@ mixin _$TenderContractDto {
   bool get isNearToExpire => throw _privateConstructorUsedError;
   @JsonKey(name: 'contractPaymentTerm')
   String get contractPaymentTerm => throw _privateConstructorUsedError;
+  @JsonKey(name: 'tenderUnitPrice')
+  String get tenderUnitPrice => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -80,7 +82,8 @@ abstract class $TenderContractDtoCopyWith<$Res> {
       @JsonKey(name: 'announcementLetterNumber')
       String announcementLetterNumber,
       @JsonKey(name: 'isNearToExpire') bool isNearToExpire,
-      @JsonKey(name: 'contractPaymentTerm') String contractPaymentTerm});
+      @JsonKey(name: 'contractPaymentTerm') String contractPaymentTerm,
+      @JsonKey(name: 'tenderUnitPrice') String tenderUnitPrice});
 }
 
 /// @nodoc
@@ -111,6 +114,7 @@ class _$TenderContractDtoCopyWithImpl<$Res, $Val extends TenderContractDto>
     Object? announcementLetterNumber = null,
     Object? isNearToExpire = null,
     Object? contractPaymentTerm = null,
+    Object? tenderUnitPrice = null,
   }) {
     return _then(_value.copyWith(
       contractNumber: null == contractNumber
@@ -173,6 +177,10 @@ class _$TenderContractDtoCopyWithImpl<$Res, $Val extends TenderContractDto>
           ? _value.contractPaymentTerm
           : contractPaymentTerm // ignore: cast_nullable_to_non_nullable
               as String,
+      tenderUnitPrice: null == tenderUnitPrice
+          ? _value.tenderUnitPrice
+          : tenderUnitPrice // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
@@ -202,7 +210,8 @@ abstract class _$$TenderContractDtoImplCopyWith<$Res>
       @JsonKey(name: 'announcementLetterNumber')
       String announcementLetterNumber,
       @JsonKey(name: 'isNearToExpire') bool isNearToExpire,
-      @JsonKey(name: 'contractPaymentTerm') String contractPaymentTerm});
+      @JsonKey(name: 'contractPaymentTerm') String contractPaymentTerm,
+      @JsonKey(name: 'tenderUnitPrice') String tenderUnitPrice});
 }
 
 /// @nodoc
@@ -231,6 +240,7 @@ class __$$TenderContractDtoImplCopyWithImpl<$Res>
     Object? announcementLetterNumber = null,
     Object? isNearToExpire = null,
     Object? contractPaymentTerm = null,
+    Object? tenderUnitPrice = null,
   }) {
     return _then(_$TenderContractDtoImpl(
       contractNumber: null == contractNumber
@@ -293,6 +303,10 @@ class __$$TenderContractDtoImplCopyWithImpl<$Res>
           ? _value.contractPaymentTerm
           : contractPaymentTerm // ignore: cast_nullable_to_non_nullable
               as String,
+      tenderUnitPrice: null == tenderUnitPrice
+          ? _value.tenderUnitPrice
+          : tenderUnitPrice // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -318,7 +332,8 @@ class _$TenderContractDtoImpl extends _TenderContractDto {
       @JsonKey(name: 'announcementLetterNumber')
       required this.announcementLetterNumber,
       @JsonKey(name: 'isNearToExpire') required this.isNearToExpire,
-      @JsonKey(name: 'contractPaymentTerm') required this.contractPaymentTerm})
+      @JsonKey(name: 'contractPaymentTerm') required this.contractPaymentTerm,
+      @JsonKey(name: 'tenderUnitPrice') required this.tenderUnitPrice})
       : super._();
 
   factory _$TenderContractDtoImpl.fromJson(Map<String, dynamic> json) =>
@@ -369,10 +384,13 @@ class _$TenderContractDtoImpl extends _TenderContractDto {
   @override
   @JsonKey(name: 'contractPaymentTerm')
   final String contractPaymentTerm;
+  @override
+  @JsonKey(name: 'tenderUnitPrice')
+  final String tenderUnitPrice;
 
   @override
   String toString() {
-    return 'TenderContractDto(contractNumber: $contractNumber, contractItemNumber: $contractItemNumber, contractReference: $contractReference, tenderOrderReason: $tenderOrderReason, tenderVisaNumber: $tenderVisaNumber, salesDistrict: $salesDistrict, tenderPackageDescription: $tenderPackageDescription, tenderPrice: $tenderPrice, pricingUnit: $pricingUnit, remainingTenderQuantity: $remainingTenderQuantity, contractQuantity: $contractQuantity, contractExpiryDate: $contractExpiryDate, announcementLetterNumber: $announcementLetterNumber, isNearToExpire: $isNearToExpire, contractPaymentTerm: $contractPaymentTerm)';
+    return 'TenderContractDto(contractNumber: $contractNumber, contractItemNumber: $contractItemNumber, contractReference: $contractReference, tenderOrderReason: $tenderOrderReason, tenderVisaNumber: $tenderVisaNumber, salesDistrict: $salesDistrict, tenderPackageDescription: $tenderPackageDescription, tenderPrice: $tenderPrice, pricingUnit: $pricingUnit, remainingTenderQuantity: $remainingTenderQuantity, contractQuantity: $contractQuantity, contractExpiryDate: $contractExpiryDate, announcementLetterNumber: $announcementLetterNumber, isNearToExpire: $isNearToExpire, contractPaymentTerm: $contractPaymentTerm, tenderUnitPrice: $tenderUnitPrice)';
   }
 
   @override
@@ -412,7 +430,9 @@ class _$TenderContractDtoImpl extends _TenderContractDto {
             (identical(other.isNearToExpire, isNearToExpire) ||
                 other.isNearToExpire == isNearToExpire) &&
             (identical(other.contractPaymentTerm, contractPaymentTerm) ||
-                other.contractPaymentTerm == contractPaymentTerm));
+                other.contractPaymentTerm == contractPaymentTerm) &&
+            (identical(other.tenderUnitPrice, tenderUnitPrice) ||
+                other.tenderUnitPrice == tenderUnitPrice));
   }
 
   @JsonKey(ignore: true)
@@ -433,7 +453,8 @@ class _$TenderContractDtoImpl extends _TenderContractDto {
       contractExpiryDate,
       announcementLetterNumber,
       isNearToExpire,
-      contractPaymentTerm);
+      contractPaymentTerm,
+      tenderUnitPrice);
 
   @JsonKey(ignore: true)
   @override
@@ -474,7 +495,9 @@ abstract class _TenderContractDto extends TenderContractDto {
       required final String announcementLetterNumber,
       @JsonKey(name: 'isNearToExpire') required final bool isNearToExpire,
       @JsonKey(name: 'contractPaymentTerm')
-      required final String contractPaymentTerm}) = _$TenderContractDtoImpl;
+      required final String contractPaymentTerm,
+      @JsonKey(name: 'tenderUnitPrice')
+      required final String tenderUnitPrice}) = _$TenderContractDtoImpl;
   const _TenderContractDto._() : super._();
 
   factory _TenderContractDto.fromJson(Map<String, dynamic> json) =
@@ -525,6 +548,9 @@ abstract class _TenderContractDto extends TenderContractDto {
   @override
   @JsonKey(name: 'contractPaymentTerm')
   String get contractPaymentTerm;
+  @override
+  @JsonKey(name: 'tenderUnitPrice')
+  String get tenderUnitPrice;
   @override
   @JsonKey(ignore: true)
   _$$TenderContractDtoImplCopyWith<_$TenderContractDtoImpl> get copyWith =>

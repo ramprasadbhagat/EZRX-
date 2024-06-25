@@ -16,6 +16,7 @@ query ($request: TenderContractDetailsRequest!) {
       announcementLetterNumber
       isNearToExpire
       contractPaymentTerm
+      tenderUnitPrice
     }
   }
 }

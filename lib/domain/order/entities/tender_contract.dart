@@ -26,6 +26,7 @@ class TenderContract with _$TenderContract {
     required bool isNearToExpire,
     required StringValue contractPaymentTerm,
     required bool isTenderExpired,
+    required TenderPrice tenderUnitPrice,
   }) = _TenderContract;
 
   factory TenderContract.empty() => TenderContract(
@@ -46,6 +47,7 @@ class TenderContract with _$TenderContract {
         isNearToExpire: false,
         isTenderExpired: false,
         contractPaymentTerm: StringValue(''),
+        tenderUnitPrice: TenderPrice('0'),
       );
 
   factory TenderContract.noContract() => TenderContract.empty().copyWith(
@@ -63,9 +65,6 @@ class TenderContract with _$TenderContract {
           tenderContact.contractReference,
         ),
       );
-
-  double get tenderPriceByPricingUnit =>
-      pricingUnit == 0 ? 0 : tenderPrice.tenderPrice / pricingUnit;
 
   bool get isNotEmpty => this != TenderContract.empty();
 

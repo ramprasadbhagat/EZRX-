@@ -231,8 +231,8 @@ class PriceAggregate with _$PriceAggregate {
   double get finalPrice {
     var finalPrice = 0.0;
 
-    if (tenderContract.tenderPrice.tenderPrice != 0) {
-      finalPrice = tenderContract.tenderPriceByPricingUnit;
+    if (tenderContract.tenderUnitPrice.tenderPrice != 0) {
+      finalPrice = tenderContract.tenderUnitPrice.tenderPrice;
     } else if (isSpecialOrderTypeNotTH) {
       finalPrice = 0.0;
     } else if (price.isDiscountEligible && !isSpecialOrderType) {
