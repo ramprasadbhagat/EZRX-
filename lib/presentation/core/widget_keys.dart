@@ -1148,6 +1148,11 @@ class WidgetKeys {
   static const Key confirmPasswordToggle = Key('confirmPasswordToggle');
   static const Key changePasswordButton = Key('changePasswordButton');
   static const Key changePasswordForm = Key('changePasswordForm');
+  static const Key resetPasswordPageHeadingForFirstTimeLogin =
+      Key('resetPasswordPageHeadingForFirstTimeLogin');
+  static const Key resetPasswordPageBodyText = Key('resetPasswordPageBodyText');
+  static const Key resetPasswordPageBodyTextForFirstLogin =
+      Key('resetPasswordPageBodyTextForFirstLogin');
   static Key obscureIcon(bool isVisible) => Key('obscureIcon$isVisible');
 
   //============================================================

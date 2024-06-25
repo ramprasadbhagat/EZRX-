@@ -1,7 +1,10 @@
+import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/auth/entities/reset_password.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
+import 'package:ezrxmobile/domain/core/error/api_failures.dart';
+import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/auth/datasource/change_password_local.dart';
 import 'package:ezrxmobile/infrastructure/auth/datasource/change_password_remote.dart';
@@ -182,7 +185,7 @@ void main() {
             resetPasswordToken: 'fake-token',
             username: 'fake-username',
           ),
-        ).thenThrow((invocation) => Exception('fake-error'));
+        ).thenThrow(Exception('fake-error'));
 
         final result = await repository.resetPassword(
           token: StringValue('fake-token'),
@@ -190,6 +193,98 @@ void main() {
           username: Username('fake-username'),
         );
         expect(result.isLeft(), true);
+        expect(
+          result,
+          Left<ApiFailure, ResetPassword>(
+            FailureHandler.handleFailure(Exception('fake-error')),
+          ),
+        );
+      },
+    );
+
+    test(
+      'Allow user to change Password For First Time with mock',
+      () async {
+        when(() => configMock.appFlavor)
+            .thenAnswer((invocation) => Flavor.mock);
+
+        when(() => localDataSourceMock.changePasswordForFirstTime())
+            .thenAnswer((invocation) async => ResetPassword.empty());
+
+        final newPassword = Password.login('new');
+        final result = await repository.changePasswordForFirstTime(
+          newPassword: newPassword,
+        );
+        expect(result.isRight(), true);
+        expect(result, Right(ResetPassword.empty()));
+      },
+    );
+
+    test(
+      'failed user to Change Password For First Time with mock',
+      () async {
+        when(() => configMock.appFlavor)
+            .thenAnswer((invocation) => Flavor.mock);
+
+        when(() => localDataSourceMock.changePasswordForFirstTime())
+            .thenThrow(Exception('fake-error'));
+
+        final newPassword = Password.login('old');
+        final result = await repository.changePasswordForFirstTime(
+          newPassword: newPassword,
+        );
+        expect(result.isLeft(), true);
+        expect(
+          result,
+          Left<ApiFailure, ResetPassword>(
+            FailureHandler.handleFailure(Exception('fake-error')),
+          ),
+        );
+      },
+    );
+
+    test(
+      'failed user to Change Password For First Time with uat',
+      () async {
+        final newPassword = Password.login('old');
+        when(() => configMock.appFlavor).thenAnswer((invocation) => Flavor.uat);
+
+        when(
+          () => remoteDataSourceMock.changePasswordForFirstTime(
+            newPassword: newPassword.getOrCrash(),
+          ),
+        ).thenThrow(Exception('fake-error'));
+
+        final result = await repository.changePasswordForFirstTime(
+          newPassword: newPassword,
+        );
+        expect(result.isLeft(), true);
+        expect(
+          result,
+          Left<ApiFailure, ResetPassword>(
+            FailureHandler.handleFailure(Exception('fake-error')),
+          ),
+        );
+      },
+    );
+
+    test(
+      'Allow user to Change Password For First Time with uat',
+      () async {
+        when(() => configMock.appFlavor).thenAnswer((invocation) => Flavor.uat);
+
+        when(
+          () => remoteDataSourceMock.changePasswordForFirstTime(
+            newPassword: 'new',
+          ),
+        ).thenAnswer((invocation) async => ResetPassword.empty());
+
+        final newPassword = Password.login('new');
+        final result = await repository.changePasswordForFirstTime(
+          newPassword: newPassword,
+        );
+        expect(result.isRight(), true);
+        expect(result, Right(ResetPassword.empty()));
       },
     );
   });

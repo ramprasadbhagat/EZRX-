@@ -65,6 +65,7 @@ class _ResetPasswordSuccessBodyContent extends StatelessWidget {
           child: Text(
             context.tr('You have successfully changed \n your password.'),
             textAlign: TextAlign.center,
+            key: WidgetKeys.resetPasswordPageBodyText,
             style: Theme.of(context).textTheme.titleMedium,
           ),
         ),
@@ -158,6 +159,7 @@ class _CountDownSectionState extends State<CountDownSection> {
           'remainingSeconds': remainingSeconds.toString(),
         },
       ),
+      key: WidgetKeys.resetPasswordPageBodyTextForFirstLogin,
       textAlign: TextAlign.center,
       style: Theme.of(context).textTheme.titleMedium,
     );

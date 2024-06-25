@@ -383,6 +383,82 @@ void main() {
         ResetPasswordState.initial(),
       ],
     );
+    blocTest(
+      'Change Password For First Time Success test',
+      build: () => ResetPasswordBloc(
+        changePasswordRepository: mockRepository,
+      ),
+      setUp: () {
+        when(
+          () => mockRepository.changePasswordForFirstTime(
+            newPassword: fakePassword,
+          ),
+        ).thenAnswer(
+          (invocation) async => Right(ResetPassword.empty()),
+        );
+      },
+      seed: () => ResetPasswordState.initial().copyWith(
+        newPassword: fakePassword,
+        confirmPassword: fakePassword,
+        resetPasswordCred: resetPasswordCred,
+      ),
+      act: (ResetPasswordBloc bloc) => bloc.add(
+        const ResetPasswordEvent.changePasswordForFirstTime(),
+      ),
+      expect: () => [
+        ResetPasswordState.initial().copyWith(
+          newPassword: fakePassword,
+          confirmPassword: fakePassword,
+          resetPasswordCred: resetPasswordCred,
+          isSubmitting: true,
+        ),
+        ResetPasswordState.initial(),
+      ],
+    );
+
+    blocTest(
+      'Change Password For First Time failure test',
+      build: () => ResetPasswordBloc(
+        changePasswordRepository: mockRepository,
+      ),
+      setUp: () {
+        when(
+          () => mockRepository.changePasswordForFirstTime(
+            newPassword: fakePassword,
+          ),
+        ).thenAnswer(
+          (invocation) async => const Left(
+            ApiFailure.other('fake-error'),
+          ),
+        );
+      },
+      seed: () => ResetPasswordState.initial().copyWith(
+        newPassword: fakePassword,
+        confirmPassword: fakePassword,
+        resetPasswordCred: resetPasswordCred,
+      ),
+      act: (ResetPasswordBloc bloc) => bloc.add(
+        const ResetPasswordEvent.changePasswordForFirstTime(),
+      ),
+      expect: () => [
+        ResetPasswordState.initial().copyWith(
+          newPassword: fakePassword,
+          confirmPassword: fakePassword,
+          resetPasswordCred: resetPasswordCred,
+          isSubmitting: true,
+        ),
+        ResetPasswordState.initial().copyWith(
+          newPassword: fakePassword,
+          confirmPassword: fakePassword,
+          resetPasswordCred: resetPasswordCred,
+          passwordResetFailureOrSuccessOption: optionOf(
+            const Left(
+              ApiFailure.other('fake-error'),
+            ),
+          ),
+        ),
+      ],
+    );
 
     blocTest(
       'clear test',

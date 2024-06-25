@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:bloc_test/bloc_test.dart';
+import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/config.dart';
@@ -25,11 +26,13 @@ class AuthBlocMock extends MockBloc<AuthEvent, AuthState> implements AuthBloc {}
 
 class MaterialPageXMock extends Mock implements MaterialPageX {}
 
+class MockUserBloc extends MockBloc<UserEvent, UserState> implements UserBloc {}
+
 final locator = GetIt.instance;
 
 void main() {
   late AppRouter autoRouterMock;
-
+  late UserBloc mockUserBloc;
   late AnnouncementBloc announcementBlocMock;
 
   late AuthBloc authBlocMock;
@@ -44,6 +47,7 @@ void main() {
 
       announcementBlocMock = AnnouncementBlocMock();
       authBlocMock = AuthBlocMock();
+      mockUserBloc = MockUserBloc();
       when(() => autoRouterMock.stack).thenReturn([MaterialPageXMock()]);
       when(() => announcementBlocMock.state)
           .thenReturn(AnnouncementState.initial());
@@ -51,9 +55,10 @@ void main() {
           .thenReturn('reset_password_success');
 
       when(() => authBlocMock.state).thenReturn(const AuthState.initial());
+      when(() => mockUserBloc.state).thenReturn(UserState.initial());
     });
 
-    Widget getWidget() {
+    Widget getWidget({bool isFirstLogin = false}) {
       return WidgetUtils.getScopedWidget(
         autoRouterMock: autoRouterMock,
         routeName: ResetPasswordSuccessRoute.name,
@@ -65,8 +70,11 @@ void main() {
           BlocProvider<AuthBloc>(
             create: (context) => authBlocMock,
           ),
+          BlocProvider<UserBloc>(
+            create: (context) => mockUserBloc,
+          ),
         ],
-        child: const ResetPasswordSuccess(),
+        child: ResetPasswordSuccess(isFirstLogin: isFirstLogin),
       );
     }
 
@@ -79,13 +87,38 @@ void main() {
       final newPasswordSavedText = find.text('New password saved!');
       final passwordChangeSuccess =
           find.text('You have successfully changed \n your password.');
+      final resetPasswordPageBodyTextForFirstLogin =
+          find.byKey(WidgetKeys.resetPasswordPageBodyTextForFirstLogin);
       final loginButton = find.byKey(WidgetKeys.changePasswordButton);
 
       expect(logo, findsOneWidget);
+      expect(resetPasswordPageBodyTextForFirstLogin, findsNothing);
       expect(newPasswordSavedText, findsOneWidget);
       expect(passwordChangeSuccess, findsOneWidget);
 
       expect(loginButton, findsOneWidget);
+    });
+
+    testWidgets(
+        'test ResetPasswordSuccess load widgets for the first time login',
+        (WidgetTester tester) async {
+      await tester.pumpWidget(getWidget(isFirstLogin: true));
+      await tester.pumpAndSettle();
+
+      final logo = find.byType(Logo);
+      final newPasswordSavedText = find.text('New password saved!');
+      final passwordChangeSuccess =
+          find.text('You have successfully changed \n your password.');
+      final resetPasswordPageBodyTextForFirstLogin =
+          find.byKey(WidgetKeys.resetPasswordPageBodyTextForFirstLogin);
+      final loginButton = find.byKey(WidgetKeys.changePasswordButton);
+
+      expect(logo, findsNothing);
+      expect(resetPasswordPageBodyTextForFirstLogin, findsOneWidget);
+      expect(newPasswordSavedText, findsOneWidget);
+      expect(passwordChangeSuccess, findsNothing);
+
+      expect(loginButton, findsNothing);
     });
 
     testWidgets('test Login Button on pressed', (tester) async {
@@ -102,6 +135,35 @@ void main() {
       ).thenAnswer((invocation) => true);
       verify(
         () => autoRouterMock.popUntilRouteWithName(LoginPageRoute.name),
+      ).called(1);
+    });
+
+    testWidgets('test auto route after 5 seconds for the first time login',
+        (tester) async {
+      when(
+        () => autoRouterMock.replaceAll([
+          const SplashPageRoute(),
+          const HomeNavigationTabbarRoute(),
+        ]),
+      ).thenAnswer(
+        (_) => Future.value(),
+      );
+      await tester.pumpWidget(getWidget(isFirstLogin: true));
+      await tester.pumpAndSettle();
+
+      final loginButton = find.byKey(WidgetKeys.changePasswordButton);
+
+      expect(loginButton, findsNothing);
+      await tester.pumpAndSettle(const Duration(seconds: 6));
+
+      verify(
+        () => mockUserBloc.add(const UserEvent.fetch()),
+      ).called(1);
+      verify(
+        () => autoRouterMock.replaceAll([
+          const SplashPageRoute(),
+          const HomeNavigationTabbarRoute(),
+        ]),
       ).called(1);
     });
   });

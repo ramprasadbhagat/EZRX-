@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
@@ -10,6 +11,7 @@ import 'package:ezrxmobile/domain/auth/entities/reset_password_cred.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/presentation/auth/reset_password/reset_password_page.dart';
+import 'package:ezrxmobile/presentation/core/logo.dart';
 import 'package:ezrxmobile/presentation/core/password_validation.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
@@ -74,7 +76,7 @@ void main() {
           .thenReturn(EligibilityState.initial());
     });
 
-    Widget getWidget() {
+    Widget getWidget({bool isFirstLogin = false}) {
       return WidgetUtils.getScopedWidget(
         autoRouterMock: autoRouterMock,
         routeName: ForgetPasswordPageRoute.name,
@@ -93,11 +95,12 @@ void main() {
             create: (context) => eligibilityBlocMock,
           ),
         ],
-        child: const Scaffold(body: ResetPasswordPage()),
+        child: Scaffold(body: ResetPasswordPage(isFirstLogin: isFirstLogin)),
       );
     }
 
-    testWidgets('Test all widgets visibility', (WidgetTester tester) async {
+    testWidgets('Test all widgets visibility for Reset password via deeplink',
+        (WidgetTester tester) async {
       await tester.pumpWidget(getWidget());
       await tester.pumpAndSettle();
       await tester.dragUntilVisible(
@@ -106,6 +109,10 @@ void main() {
         const Offset(0.0, -500),
       );
       await tester.pumpAndSettle();
+
+      final logo = find.byType(Logo);
+      final resetPasswordPageHeadingForFirstTimeLogin =
+          find.byKey(WidgetKeys.resetPasswordPageHeadingForFirstTimeLogin);
       final newPasswordField = find.byKey(WidgetKeys.newPasswordTextField);
       final newPasswordHintText = find.text('Enter your new password');
       final confirmPasswordField = find.byKey(WidgetKeys.confirmPasswordField);
@@ -127,6 +134,8 @@ void main() {
       final resetPasswordButton = find.byKey(WidgetKeys.resetPasswordButton);
       final backToLoginButton = find.byKey(WidgetKeys.loginSubmitButton);
 
+      expect(logo, findsOneWidget);
+      expect(resetPasswordPageHeadingForFirstTimeLogin, findsNothing);
       expect(newPasswordField, findsOneWidget);
       expect(newPasswordHintText, findsOneWidget);
       expect(confirmPasswordField, findsOneWidget);
@@ -139,7 +148,82 @@ void main() {
       expect(specialChar, findsOneWidget);
       expect(twoRepeatingChars, findsOneWidget);
       expect(resetPasswordButton, findsOneWidget);
+      expect(
+        find.descendant(
+          of: resetPasswordButton,
+          matching: find.text('Reset Password'.tr()),
+        ),
+        findsOneWidget,
+      );
       expect(backToLoginButton, findsOneWidget);
+    });
+
+    testWidgets(
+        'Test all widgets visibility for Reset password for First time login',
+        (WidgetTester tester) async {
+      await tester.pumpWidget(getWidget(isFirstLogin: true));
+      await tester.pumpAndSettle();
+      await tester.dragUntilVisible(
+        find.byType(PasswordValidation),
+        find.byType(ListView),
+        const Offset(0.0, -500),
+      );
+      await tester.pumpAndSettle();
+
+      final logo = find.byType(Logo);
+      final resetPasswordPageHeadingForFirstTimeLogin =
+          find.byKey(WidgetKeys.resetPasswordPageHeadingForFirstTimeLogin);
+      final newPasswordField = find.byKey(WidgetKeys.newPasswordTextField);
+      final newPasswordHintText = find.text('Enter your new password');
+      final confirmPasswordField = find.byKey(WidgetKeys.confirmPasswordField);
+      final confirmPasswordHintText =
+          find.text('Enter your new password again');
+      final passwordValidationTitle =
+          find.text('Your new password should have :');
+      final minTenChars = find.text('Minimum length of 10 characters');
+      final oneUpperCase =
+          find.text('At least 1 Upper case character (A to Z)');
+      final oneLoweCase = find.text('At least 1 Lower case character (a to z)');
+      final numericChar = find.text('At least a numeric character (0 to 9)');
+      final specialChar = find.text(
+        'At least one special character from the list (i.e. _ , # , ? , ! , @ , \$ , % , ^ , & , *, - )',
+      );
+      final twoRepeatingChars = find.text(
+        'New password cannot contain more than 2 consecutive characters from username and/or name of the user',
+      );
+      final resetPasswordButton = find.byKey(WidgetKeys.resetPasswordButton);
+      final backToLoginButton = find.byKey(WidgetKeys.loginSubmitButton);
+
+      expect(logo, findsNothing);
+      expect(resetPasswordPageHeadingForFirstTimeLogin, findsOneWidget);
+      expect(newPasswordField, findsOneWidget);
+      expect(newPasswordHintText, findsOneWidget);
+      expect(confirmPasswordField, findsOneWidget);
+      expect(confirmPasswordHintText, findsOneWidget);
+      expect(passwordValidationTitle, findsOneWidget);
+      expect(minTenChars, findsOneWidget);
+      expect(oneUpperCase, findsOneWidget);
+      expect(oneLoweCase, findsOneWidget);
+      expect(numericChar, findsOneWidget);
+      expect(specialChar, findsOneWidget);
+      expect(twoRepeatingChars, findsOneWidget);
+      expect(resetPasswordButton, findsOneWidget);
+      expect(
+        find.descendant(
+          of: resetPasswordButton,
+          matching: find.text('Reset Password'.tr()),
+        ),
+        findsNothing,
+      );
+
+      expect(
+        find.descendant(
+          of: resetPasswordButton,
+          matching: find.text('Update password'.tr()),
+        ),
+        findsOneWidget,
+      );
+      expect(backToLoginButton, findsNothing);
     });
 
     testWidgets(
@@ -321,6 +405,31 @@ void main() {
         verify(
           () => autoRouterMock.replace(
             ResetPasswordSuccessRoute(),
+          ),
+        ).called(1);
+      },
+    );
+
+    testWidgets(
+      'Test reset Password Submit success',
+      (tester) async {
+        final expectedState = [
+          ResetPasswordState.initial().copyWith(isSubmitting: true),
+          ResetPasswordState.initial(),
+        ];
+        when(
+          () => autoRouterMock.replace(
+            ResetPasswordSuccessRoute(isFirstLogin: true),
+          ),
+        ).thenAnswer(
+          (_) => Future.value(),
+        );
+        whenListen(resetPasswordBlocMock, Stream.fromIterable(expectedState));
+        await tester.pumpWidget(getWidget(isFirstLogin: true));
+        await tester.pumpAndSettle();
+        verify(
+          () => autoRouterMock.replace(
+            ResetPasswordSuccessRoute(isFirstLogin: true),
           ),
         ).called(1);
       },

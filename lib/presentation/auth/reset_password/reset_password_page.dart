@@ -60,6 +60,7 @@ class _ResetPasswordPageBody extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 24),
           child: Text(
             context.tr('Set a new password'),
+            key: WidgetKeys.resetPasswordPageHeadingForFirstTimeLogin,
             style: Theme.of(context).textTheme.labelLarge!.copyWith(
                   fontWeight: FontWeight.w700,
                 ),
