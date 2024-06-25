@@ -662,7 +662,7 @@ void main() {
         },
       );
       testWidgets('Display For ID market', (tester) async {
-        await tester.binding.setSurfaceSize(const Size(480, 900));
+        await tester.binding.setSurfaceSize(const Size(600, 900));
         tester.view.devicePixelRatio = 1;
         await tester.pumpWidget(getWidget());
         await tester.pump();

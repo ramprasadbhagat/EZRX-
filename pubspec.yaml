@@ -29,13 +29,13 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_driver:
+    sdk: flutter
   google_fonts: ^6.2.1
   get_it: ^7.7.0
   flutter_bloc: ^8.1.5
   bloc_concurrency: ^0.2.5
   auto_route: ^5.0.2
-  equatable: ^2.0.5
-  rxdart: ^0.27.7
   dio: ^5.4.3+1
   json_annotation: ^4.9.0
   freezed_annotation: ^2.2.0
@@ -53,18 +53,17 @@ dependencies:
   firebase_remote_config: ^4.4.7
   flutter_local_notifications: ^17.1.2
   flutter_secure_storage: ^9.2.2
-  flutter_layout_grid: ^2.0.7
-  http: ^1.2.1
   permission_handler: ^11.3.1
   device_info_plus: ^10.1.0
   package_info_plus: ^8.0.0
   intl: ^0.19.0
   easy_localization: ^3.0.7
-  easy_localization_loader:
-    git: https://github.com/easyhour/easy_localization_loader
+  easy_localization_loader: ^2.0.2
   upgrader: ^10.3.0
-  shared_preferences: ^2.2.3
   local_auth: ^2.2.0
+  #Use for custom message display in local auth, if not will got dependencies linter issue
+  local_auth_android: ^1.0.40
+  local_auth_darwin: ^1.3.1
   sizer: ^2.0.15
   smooth_page_indicator: ^1.1.0
   shimmer: ^3.0.0
@@ -72,7 +71,6 @@ dependencies:
   flutter_inappwebview: ^6.0.0
   scandit_flutter_datacapture_barcode: 6.24.0
   loading_indicator: ^3.1.1
-  file: ^7.0.0
   badges: ^3.1.2
   flutter_slidable: ^3.1.0
   encrypt: ^5.0.3
@@ -88,25 +86,23 @@ dependencies:
       url: https://github.com/Ramkrishna-egov/open_file.git
       ref: patch-1
   path_provider: ^2.1.3
+  path: ^1.9.0
   collection: ^1.18.0
   cunning_document_scanner: ^1.2.2
   file_picker: ^8.0.3
   intl_phone_number_input: ^0.7.4
+  flutter_svg: ^1.1.6
+  connectivity_plus: ^6.0.3
   #for web
   universal_io: ^2.2.2
   mixpanel_flutter: ^2.3.1
-  visibility_detector: ^0.4.0+2
   clevertap_plugin: ^2.4.0
-  flutter_html_all: ^3.0.0-beta.2
+  flutter_html: ^3.0.0-beta.2
   loading_animation_widget: ^1.2.1
   datadog_flutter_plugin: ^2.5.0
   datadog_tracking_http_client: ^2.2.0
   app_links: ^6.1.1
   flutter_cached_pdfview: ^0.4.2
-
-  # The following adds the Cupertino Icons font to your application.
-  # Use with the CupertinoIcons class for iOS style icons.
-  cupertino_icons: ^1.0.8
   url_launcher: ^6.2.6
   ymchat_flutter: ^2.13.0
   dropdown_button2: ^2.3.9
@@ -127,10 +123,15 @@ dev_dependencies:
   hive_generator: ^2.0.1
   bloc_test: ^9.1.7
   mocktail: ^1.0.3
+  #Use for zephyr report
+  test_api: ^0.7.0
+  #Use for mock webview
+  plugin_platform_interface: ^2.1.8
   http_mock_adapter: ^0.6.1
-  dart_code_metrics_presets: ^2.12.0
   #Use this for mock flutter_cache_manager (CachedNetworkImage)
   sqflite_common_ffi: ^2.3.3
+  file: ^7.0.0
+  visibility_detector: ^0.4.0+2
 
 dependency_overrides:
   ffi: ^2.1.2
@@ -143,8 +144,8 @@ dependency_overrides:
   #Cloning because of library haven't support to lastest version, will remove when library version upgrade
   scandit_flutter_datacapture_core:
     path: ./local_library/scandit_flutter_datacapture_core
-  #Override this library cause this issue with latest flutter_inappwebview version https://github.com/pichillilorenzo/flutter_inappwebview/issues/2139
-  #Change this when newer version of the library to be released
+  # #Override this library cause this issue with latest flutter_inappwebview version https://github.com/pichillilorenzo/flutter_inappwebview/issues/2139
+  # #Change this when newer version of the library to be released
   flutter_inappwebview_android:
     git:
       url: https://github.com/holzgeist/flutter_inappwebview

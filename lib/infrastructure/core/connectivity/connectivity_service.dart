@@ -10,10 +10,13 @@ class ConnectivityService {
 
   Stream<bool> get getStream => _connectivityStreamController.stream;
 
-  void handleConnectivity(ConnectivityResult connectivityResult) {
+  void handleConnectivity(List<ConnectivityResult> connectivityResult) {
     _connectivityStreamController.add(
-      connectivityResult == ConnectivityResult.mobile ||
-          connectivityResult == ConnectivityResult.wifi,
+      connectivityResult.any(
+        (connectivity) =>
+            connectivity == ConnectivityResult.mobile ||
+            connectivity == ConnectivityResult.wifi,
+      ),
     );
   }
 }

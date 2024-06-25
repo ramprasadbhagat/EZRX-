@@ -10,6 +10,11 @@ variables:
   - group: "eZRx plus CICD"
 
 jobs:
+- job: FlutterVersion
+  displayName: 'Version flutter'
+  steps:
+  - bash: flutter doctor -v
+
 - job: FlutterAnalyze
   displayName: 'Analyze flutter'
   steps:
@@ -52,6 +57,14 @@ jobs:
       DCM_CI_KEY: '$(DCM_CI_KEY)'
       DCM_LICENSE_EMAIL: '$(DCM_LICENSE_EMAIL)'
       
+- job: DCMCheckDependencies
+  displayName: 'DCM Check Dependencies'
+  steps:
+  - bash: dcm check-dependencies lib test integration_test --ignored-packages auto_route_generator,flutter_launcher_icons,flutter_native_splash,json_serializable,hive_generator,scandit_flutter_datacapture_core --ci-key=$DCM_CI_KEY --email=$DCM_LICENSE_EMAIL --fatal-found
+    env:
+      DCM_CI_KEY: '$(DCM_CI_KEY)'
+      DCM_LICENSE_EMAIL: '$(DCM_LICENSE_EMAIL)'
+
 - job: TestApplication
   displayName: Test application
   steps:

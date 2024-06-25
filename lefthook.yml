@@ -29,6 +29,8 @@ pre-push:
       run: dcm check-unused-code lib --fatal-unused
     check-unused-files:
       run: dcm check-unused-files lib --fatal-unused
+    check-dependencies:
+      run: dcm check-dependencies lib test --ignored-packages auto_route_generator,flutter_launcher_icons,flutter_native_splash,json_serializable,hive_generator,scandit_flutter_datacapture_core --fatal-found
     test-application:
       run: fvm flutter test test/application
     test-domain:
