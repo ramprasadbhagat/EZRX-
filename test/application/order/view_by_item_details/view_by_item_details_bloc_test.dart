@@ -17,6 +17,7 @@ import 'package:ezrxmobile/application/order/view_by_item_details/view_by_item_d
 import 'package:ezrxmobile/infrastructure/order/datasource/order_status_tracker/order_status_tracker_local.dart';
 
 import '../../../common_mock_data/sales_org_config_mock/fake_my_sales_org_config.dart';
+import '../../../common_mock_data/sales_org_config_mock/fake_vn_sales_org_config.dart';
 import '../../../common_mock_data/user_mock.dart';
 import '../../../common_mock_data/customer_code_mock.dart';
 import '../../../common_mock_data/sales_organsiation_mock.dart';
@@ -30,6 +31,7 @@ void main() {
   WidgetsFlutterBinding.ensureInitialized();
   late OrderHistory orderHistory;
   late OrderHistory orderHistoryForFetchStatus;
+  late OrderHistory orderHistoryForEmptyInvoiceNumber;
   late OrderStatusTrackerRepository orderStatusTrackerRepositoryMock;
   late ViewByItemRepository viewByItemRepositoryMock;
   late List<OrderStatusTracker> fakeOrderStatusTracker;
@@ -54,6 +56,18 @@ void main() {
                     'Delivered - partial rejection',
                   ),
                   invoiceNumber: fakeInvoiceNumber,
+                ),
+              )
+              .toList(),
+        );
+        orderHistoryForEmptyInvoiceNumber = orderHistory.copyWith(
+          orderHistoryItems: orderHistory.orderHistoryItems
+              .map(
+                (e) => e.copyWith(
+                  status: OrderStepValue(
+                    'Delivered - partial rejection',
+                  ),
+                  invoiceNumber: StringValue(''),
                 ),
               )
               .toList(),
@@ -536,6 +550,213 @@ void main() {
               .toList(),
         );
       });
+
+      blocTest<ViewByItemDetailsBloc, ViewByItemDetailsState>(
+        'For "fetchOrderHistoryDetails" Event with zyllem status and disableDeliveryDate is enable',
+        build: () => ViewByItemDetailsBloc(
+          orderStatusTrackerRepository: orderStatusTrackerRepositoryMock,
+          viewByItemRepository: viewByItemRepositoryMock,
+        ),
+        seed: () => ViewByItemDetailsState.initial().copyWith(
+          customerCodeInfo: fakeCustomerCodeInfo,
+          salesOrgConfig: fakeVNSalesOrgConfigs,
+          salesOrganisation: fakeVNSalesOrganisation,
+          user: fakeRootAdminUser,
+        ),
+        setUp: () {
+          when(
+            () => (viewByItemRepositoryMock.getViewByItemDetails(
+              soldTo: fakeCustomerCodeInfo,
+              salesOrgConfig: fakeVNSalesOrgConfigs,
+              salesOrganisation: fakeVNSalesOrganisation,
+              user: fakeRootAdminUser,
+              searchKey: SearchKey(
+                fakeOrderHistoryItem.orderNumber.getOrDefaultValue(''),
+              ),
+            )),
+          ).thenAnswer(
+            (invocation) async => Right(orderHistoryForFetchStatus),
+          );
+
+          when(
+            () => (viewByItemRepositoryMock.getOrdersInvoiceData(
+              orderNumbers: orderHistoryForFetchStatus.orderHistoryItems
+                  .map((e) => e.orderNumber)
+                  .toList(),
+            )),
+          ).thenAnswer(
+            (invocation) async => const Left(fakeError),
+          );
+
+          when(
+            () => orderStatusTrackerRepositoryMock.getOrderStatusTracker(
+              invoiceNumber: orderHistoryForFetchStatus
+                  .orderHistoryItems.first.invoiceNumber,
+            ),
+          ).thenAnswer(
+            (invocation) async => Right(fakeOrderStatusTracker),
+          );
+        },
+        act: (bloc) => bloc.add(
+          ViewByItemDetailsEvent.fetchOrderHistoryDetails(
+            orderNumber: fakeOrderHistoryItem.orderNumber,
+            lineNumber: fakeOrderHistoryItem.lineNumber,
+          ),
+        ),
+        expect: () {
+          return [
+            ViewByItemDetailsState.initial().copyWith(
+              customerCodeInfo: fakeCustomerCodeInfo,
+              salesOrgConfig: fakeVNSalesOrgConfigs,
+              salesOrganisation: fakeVNSalesOrganisation,
+              user: fakeRootAdminUser,
+              isDetailsLoading: true,
+            ),
+            ViewByItemDetailsState.initial().copyWith(
+              customerCodeInfo: fakeCustomerCodeInfo,
+              salesOrgConfig: fakeVNSalesOrgConfigs,
+              salesOrganisation: fakeVNSalesOrganisation,
+              user: fakeRootAdminUser,
+              orderHistory: orderHistoryForFetchStatus,
+              orderHistoryItem:
+                  orderHistoryForFetchStatus.orderHistoryItems.first,
+              failureOrSuccessOption:
+                  optionOf(Right(orderHistoryForFetchStatus)),
+            ),
+            ViewByItemDetailsState.initial().copyWith(
+              customerCodeInfo: fakeCustomerCodeInfo,
+              salesOrgConfig: fakeVNSalesOrgConfigs,
+              salesOrganisation: fakeVNSalesOrganisation,
+              user: fakeRootAdminUser,
+              orderHistory: orderHistoryForFetchStatus,
+              orderHistoryItem:
+                  orderHistoryForFetchStatus.orderHistoryItems.first,
+              isLoading: true,
+            ),
+            ViewByItemDetailsState.initial().copyWith(
+              customerCodeInfo: fakeCustomerCodeInfo,
+              salesOrgConfig: fakeVNSalesOrgConfigs,
+              salesOrganisation: fakeVNSalesOrganisation,
+              user: fakeRootAdminUser,
+              orderHistory: orderHistoryForFetchStatus,
+              orderHistoryItem:
+                  orderHistoryForFetchStatus.orderHistoryItems.first,
+              failureOrSuccessOption: optionOf(const Left(fakeError)),
+            ),
+            ViewByItemDetailsState.initial().copyWith(
+              customerCodeInfo: fakeCustomerCodeInfo,
+              salesOrgConfig: fakeVNSalesOrgConfigs,
+              salesOrganisation: fakeVNSalesOrganisation,
+              user: fakeRootAdminUser,
+              orderHistory: orderHistoryForFetchStatus,
+              orderHistoryItem:
+                  orderHistoryForFetchStatus.orderHistoryItems.first,
+              isLoading: true,
+              failureOrSuccessOption: optionOf(const Left(fakeError)),
+            ),
+            ViewByItemDetailsState.initial().copyWith(
+              customerCodeInfo: fakeCustomerCodeInfo,
+              salesOrgConfig: fakeVNSalesOrgConfigs,
+              salesOrganisation: fakeVNSalesOrganisation,
+              user: fakeRootAdminUser,
+              orderHistory: orderHistoryForFetchStatus,
+              orderHistoryStatuses: fakeOrderStatusTracker,
+              orderHistoryItem:
+                  orderHistoryForFetchStatus.orderHistoryItems.first,
+              failureOrSuccessOption: none(),
+            ),
+          ];
+        },
+      );
+
+      blocTest<ViewByItemDetailsBloc, ViewByItemDetailsState>(
+        'For "fetchOrderHistoryDetails" Event without zyllem status when invoiceNumber is empty',
+        build: () => ViewByItemDetailsBloc(
+          orderStatusTrackerRepository: orderStatusTrackerRepositoryMock,
+          viewByItemRepository: viewByItemRepositoryMock,
+        ),
+        seed: () => ViewByItemDetailsState.initial().copyWith(
+          customerCodeInfo: fakeCustomerCodeInfo,
+          salesOrgConfig: fakeVNSalesOrgConfigs,
+          salesOrganisation: fakeVNSalesOrganisation,
+          user: fakeRootAdminUser,
+        ),
+        setUp: () {
+          when(
+            () => (viewByItemRepositoryMock.getViewByItemDetails(
+              soldTo: fakeCustomerCodeInfo,
+              salesOrgConfig: fakeVNSalesOrgConfigs,
+              salesOrganisation: fakeVNSalesOrganisation,
+              user: fakeRootAdminUser,
+              searchKey: SearchKey(
+                fakeOrderHistoryItem.orderNumber.getOrDefaultValue(''),
+              ),
+            )),
+          ).thenAnswer(
+            (invocation) async => Right(
+              orderHistoryForEmptyInvoiceNumber,
+            ),
+          );
+
+          when(
+            () => (viewByItemRepositoryMock.getOrdersInvoiceData(
+              orderNumbers: orderHistoryForEmptyInvoiceNumber.orderHistoryItems
+                  .map((e) => e.orderNumber)
+                  .toList(),
+            )),
+          ).thenAnswer(
+            (invocation) async => const Left(fakeError),
+          );
+        },
+        act: (bloc) => bloc.add(
+          ViewByItemDetailsEvent.fetchOrderHistoryDetails(
+            orderNumber: fakeOrderHistoryItem.orderNumber,
+            lineNumber: fakeOrderHistoryItem.lineNumber,
+          ),
+        ),
+        expect: () {
+          return [
+            ViewByItemDetailsState.initial().copyWith(
+              customerCodeInfo: fakeCustomerCodeInfo,
+              salesOrgConfig: fakeVNSalesOrgConfigs,
+              salesOrganisation: fakeVNSalesOrganisation,
+              user: fakeRootAdminUser,
+              isDetailsLoading: true,
+            ),
+            ViewByItemDetailsState.initial().copyWith(
+              customerCodeInfo: fakeCustomerCodeInfo,
+              salesOrgConfig: fakeVNSalesOrgConfigs,
+              salesOrganisation: fakeVNSalesOrganisation,
+              user: fakeRootAdminUser,
+              orderHistory: orderHistoryForEmptyInvoiceNumber,
+              orderHistoryItem:
+                  orderHistoryForEmptyInvoiceNumber.orderHistoryItems.first,
+              failureOrSuccessOption:
+                  optionOf(Right(orderHistoryForEmptyInvoiceNumber)),
+            ),
+            ViewByItemDetailsState.initial().copyWith(
+              customerCodeInfo: fakeCustomerCodeInfo,
+              salesOrgConfig: fakeVNSalesOrgConfigs,
+              salesOrganisation: fakeVNSalesOrganisation,
+              user: fakeRootAdminUser,
+              orderHistory: orderHistoryForEmptyInvoiceNumber,
+              orderHistoryItem:
+                  orderHistoryForEmptyInvoiceNumber.orderHistoryItems.first,
+              isLoading: true,
+            ),
+            ViewByItemDetailsState.initial().copyWith(
+              customerCodeInfo: fakeCustomerCodeInfo,
+              salesOrgConfig: fakeVNSalesOrgConfigs,
+              salesOrganisation: fakeVNSalesOrganisation,
+              user: fakeRootAdminUser,
+              orderHistory: orderHistoryForEmptyInvoiceNumber,
+              orderHistoryItem:
+                  orderHistoryForEmptyInvoiceNumber.orderHistoryItems.first,
+              failureOrSuccessOption: optionOf(const Left(fakeError)),
+            ),
+          ];
+        },
+      );
     },
   );
 }
