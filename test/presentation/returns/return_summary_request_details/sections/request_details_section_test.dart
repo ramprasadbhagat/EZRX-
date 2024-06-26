@@ -1355,13 +1355,12 @@ void main() {
       await tester.pumpAndSettle();
       await tester.drag(scrollList, const Offset(0, -1500));
       await tester.pumpAndSettle();
-      expect(
-        find.byKey(
+      final quantityOverrideApprovedTag = find.descendant(
+        of: find.byKey(
           WidgetKeys.returnItemDetailBonusItem,
         ),
-        findsOneWidget,
+        matching: find.byType(ReturnOverrideInfoIcon),
       );
-      final quantityOverrideApprovedTag = find.byType(ReturnOverrideInfoIcon);
       expect(quantityOverrideApprovedTag, findsOneWidget);
       await tester.tap(quantityOverrideApprovedTag);
       await tester.pumpAndSettle();
@@ -1369,6 +1368,48 @@ void main() {
         find.text('Request Return quantity : <${bonusItem.initialQuantity}>'),
         findsOne,
       );
+    });
+    testWidgets('No Quantity override tag is shown when intialQuantity is zero',
+        (tester) async {
+      final bonusItem = ReturnRequestInformation.empty().copyWith(
+        initialQuantity: 0,
+        status: StatusType('failed'),
+      );
+      when(() => mockReturnDetailsByRequestBloc.state).thenReturn(
+        ReturnDetailsByRequestState.initial().copyWith(
+          requestInformation: [
+            ReturnRequestInformation.empty().copyWith(
+              bonusInformation: [bonusItem],
+            ),
+          ],
+        ),
+      );
+      await tester.pumpWidget(getWUT());
+      await tester.pumpAndSettle();
+      final scrollList = find.byKey(WidgetKeys.returnRequestDetailScrollList);
+      expect(
+        scrollList,
+        findsOneWidget,
+      );
+      await tester.dragUntilVisible(
+        find.byType(RequestItemSection),
+        scrollList,
+        const Offset(0, -1000),
+      );
+      await tester.pumpAndSettle();
+      final expandBtn = find.byKey(WidgetKeys.returnExpandableSection);
+      expect(expandBtn, findsOneWidget);
+      await tester.tap(expandBtn);
+      await tester.pumpAndSettle();
+      await tester.drag(scrollList, const Offset(0, -1500));
+      await tester.pumpAndSettle();
+      final quantityOverrideApprovedTag = find.descendant(
+        of: find.byKey(
+          WidgetKeys.returnItemDetailBonusItem,
+        ),
+        matching: find.byType(ReturnOverrideInfoIcon),
+      );
+      expect(quantityOverrideApprovedTag, findsNothing);
     });
   });
 }
