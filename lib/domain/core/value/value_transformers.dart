@@ -675,11 +675,7 @@ String getCountryFlag(String country) {
 String getOosMaterialTag(bool value) => value ? 'OOS-Preorder' : 'Out of stock';
 
 Color getOosMaterialTagColor(bool value) =>
-    value ? ZPColors.warning : ZPColors.lightGray;
-
-Color getOosMaterialTagLabelColor(bool value) {
-  return value ? ZPColors.darkerGrey : ZPColors.black;
-}
+    value ? ZPColors.lightYellowColor : ZPColors.lightGray;
 
 String getOosTag() => 'Out of stock';
 

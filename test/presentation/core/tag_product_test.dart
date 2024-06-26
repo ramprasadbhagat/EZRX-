@@ -45,7 +45,7 @@ void main() {
               ProductTag.preOrderTag(
                 label: 'OOS-Preorder',
                 labelColor: ZPColors.extraLightGrey4,
-                backgroundColor: ZPColors.warning,
+                backgroundColor: ZPColors.lightYellowColor,
               ),
               ProductTag.covidTag(),
               ProductTag.onOfferTag(),
@@ -83,7 +83,7 @@ void main() {
               .color;
 
       expect(titleTag, findsOneWidget);
-      expect(backgroundColorTag, ZPColors.warning);
+      expect(backgroundColorTag, ZPColors.lightYellowColor);
     });
 
     testWidgets('Display tag Covid', (tester) async {

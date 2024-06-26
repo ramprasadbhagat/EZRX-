@@ -62,10 +62,10 @@ class MaterialGridItem extends StatelessWidget {
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            OfferLabel(
+                            StockLabel(
                               materialInfo: materialInfo,
                             ),
-                            StockLabel(
+                            OfferLabel(
                               materialInfo: materialInfo,
                             ),
                             ComboOfferLabel(
@@ -115,6 +115,12 @@ class MaterialGridItem extends StatelessWidget {
                       ],
                     ),
                   ),
+                ),
+                const Divider(
+                  color: ZPColors.lightGrey,
+                  indent: 0,
+                  endIndent: 0,
+                  height: 1,
                 ),
                 Expanded(
                   flex: 3,

@@ -5,6 +5,7 @@ import 'package:ezrxmobile/domain/core/value/constants.dart';
 import 'package:ezrxmobile/domain/core/value/value_transformers.dart';
 import 'package:ezrxmobile/domain/core/value/value_validators.dart';
 import 'package:ezrxmobile/domain/order/value/value_transformers.dart';
+import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 
 @immutable
@@ -335,8 +336,7 @@ class OosMaterial extends ValueObject<bool> {
   Color get oosMaterialTagColor =>
       getOosMaterialTagColor(value.getOrElse(() => false));
 
-  Color get oosMaterialTagLabelColor =>
-      getOosMaterialTagLabelColor(value.getOrElse(() => false));
+  Color get oosMaterialTagLabelColor => ZPColors.black;
 
   String productTag(bool isValidated) => isValidated ? oosMaterialTag : oosTag;
 
