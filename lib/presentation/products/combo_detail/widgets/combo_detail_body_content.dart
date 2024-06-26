@@ -2,7 +2,9 @@ part of 'package:ezrxmobile/presentation/products/combo_detail/combo_detail_page
 
 class _ComboDetailBodyContent extends StatelessWidget {
   final bool haveFixedMaterials;
-  const _ComboDetailBodyContent({this.haveFixedMaterials = false});
+  const _ComboDetailBodyContent({
+    this.haveFixedMaterials = false,
+  });
 
   @override
   Widget build(BuildContext context) {

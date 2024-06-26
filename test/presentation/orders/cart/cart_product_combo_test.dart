@@ -479,6 +479,7 @@ void main() {
               principles: [''],
               comboMaterialsCurrentQuantity:
                   cartItem.comboMaterialsCurrentQuantity,
+              parentMaterialNumber: cartItem.materialInfo.materialNumber,
             ),
           ),
         ).called(1);

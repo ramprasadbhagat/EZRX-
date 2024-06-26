@@ -43,7 +43,8 @@ mixin _$ComboDealMaterialDetailEvent {
     required TResult Function(
             ComboDeal comboDeal,
             Map<MaterialNumber, int> comboMaterialsCurrentQuantity,
-            List<String> principles)
+            List<String> principles,
+            MaterialNumber parentMaterialNumber)
         fetchComboDealPrincipal,
     required TResult Function(ComboDeal comboDeal, List<String> principles)
         loadMoreComboDealPrincipal,
@@ -75,7 +76,8 @@ mixin _$ComboDealMaterialDetailEvent {
     TResult? Function(
             ComboDeal comboDeal,
             Map<MaterialNumber, int> comboMaterialsCurrentQuantity,
-            List<String> principles)?
+            List<String> principles,
+            MaterialNumber parentMaterialNumber)?
         fetchComboDealPrincipal,
     TResult? Function(ComboDeal comboDeal, List<String> principles)?
         loadMoreComboDealPrincipal,
@@ -107,7 +109,8 @@ mixin _$ComboDealMaterialDetailEvent {
     TResult Function(
             ComboDeal comboDeal,
             Map<MaterialNumber, int> comboMaterialsCurrentQuantity,
-            List<String> principles)?
+            List<String> principles,
+            MaterialNumber parentMaterialNumber)?
         fetchComboDealPrincipal,
     TResult Function(ComboDeal comboDeal, List<String> principles)?
         loadMoreComboDealPrincipal,
@@ -379,7 +382,8 @@ class _$InitializeImpl implements _Initialize {
     required TResult Function(
             ComboDeal comboDeal,
             Map<MaterialNumber, int> comboMaterialsCurrentQuantity,
-            List<String> principles)
+            List<String> principles,
+            MaterialNumber parentMaterialNumber)
         fetchComboDealPrincipal,
     required TResult Function(ComboDeal comboDeal, List<String> principles)
         loadMoreComboDealPrincipal,
@@ -415,7 +419,8 @@ class _$InitializeImpl implements _Initialize {
     TResult? Function(
             ComboDeal comboDeal,
             Map<MaterialNumber, int> comboMaterialsCurrentQuantity,
-            List<String> principles)?
+            List<String> principles,
+            MaterialNumber parentMaterialNumber)?
         fetchComboDealPrincipal,
     TResult? Function(ComboDeal comboDeal, List<String> principles)?
         loadMoreComboDealPrincipal,
@@ -451,7 +456,8 @@ class _$InitializeImpl implements _Initialize {
     TResult Function(
             ComboDeal comboDeal,
             Map<MaterialNumber, int> comboMaterialsCurrentQuantity,
-            List<String> principles)?
+            List<String> principles,
+            MaterialNumber parentMaterialNumber)?
         fetchComboDealPrincipal,
     TResult Function(ComboDeal comboDeal, List<String> principles)?
         loadMoreComboDealPrincipal,
@@ -677,7 +683,8 @@ class _$InitFromCartComboDealItemsImpl implements _InitFromCartComboDealItems {
     required TResult Function(
             ComboDeal comboDeal,
             Map<MaterialNumber, int> comboMaterialsCurrentQuantity,
-            List<String> principles)
+            List<String> principles,
+            MaterialNumber parentMaterialNumber)
         fetchComboDealPrincipal,
     required TResult Function(ComboDeal comboDeal, List<String> principles)
         loadMoreComboDealPrincipal,
@@ -712,7 +719,8 @@ class _$InitFromCartComboDealItemsImpl implements _InitFromCartComboDealItems {
     TResult? Function(
             ComboDeal comboDeal,
             Map<MaterialNumber, int> comboMaterialsCurrentQuantity,
-            List<String> principles)?
+            List<String> principles,
+            MaterialNumber parentMaterialNumber)?
         fetchComboDealPrincipal,
     TResult? Function(ComboDeal comboDeal, List<String> principles)?
         loadMoreComboDealPrincipal,
@@ -747,7 +755,8 @@ class _$InitFromCartComboDealItemsImpl implements _InitFromCartComboDealItems {
     TResult Function(
             ComboDeal comboDeal,
             Map<MaterialNumber, int> comboMaterialsCurrentQuantity,
-            List<String> principles)?
+            List<String> principles,
+            MaterialNumber parentMaterialNumber)?
         fetchComboDealPrincipal,
     TResult Function(ComboDeal comboDeal, List<String> principles)?
         loadMoreComboDealPrincipal,
@@ -942,7 +951,8 @@ class _$SetPriceInfoImpl implements _SetPriceInfo {
     required TResult Function(
             ComboDeal comboDeal,
             Map<MaterialNumber, int> comboMaterialsCurrentQuantity,
-            List<String> principles)
+            List<String> principles,
+            MaterialNumber parentMaterialNumber)
         fetchComboDealPrincipal,
     required TResult Function(ComboDeal comboDeal, List<String> principles)
         loadMoreComboDealPrincipal,
@@ -977,7 +987,8 @@ class _$SetPriceInfoImpl implements _SetPriceInfo {
     TResult? Function(
             ComboDeal comboDeal,
             Map<MaterialNumber, int> comboMaterialsCurrentQuantity,
-            List<String> principles)?
+            List<String> principles,
+            MaterialNumber parentMaterialNumber)?
         fetchComboDealPrincipal,
     TResult? Function(ComboDeal comboDeal, List<String> principles)?
         loadMoreComboDealPrincipal,
@@ -1012,7 +1023,8 @@ class _$SetPriceInfoImpl implements _SetPriceInfo {
     TResult Function(
             ComboDeal comboDeal,
             Map<MaterialNumber, int> comboMaterialsCurrentQuantity,
-            List<String> principles)?
+            List<String> principles,
+            MaterialNumber parentMaterialNumber)?
         fetchComboDealPrincipal,
     TResult Function(ComboDeal comboDeal, List<String> principles)?
         loadMoreComboDealPrincipal,
@@ -1206,7 +1218,8 @@ class _$UpdateItemQuantityImpl implements _UpdateItemQuantity {
     required TResult Function(
             ComboDeal comboDeal,
             Map<MaterialNumber, int> comboMaterialsCurrentQuantity,
-            List<String> principles)
+            List<String> principles,
+            MaterialNumber parentMaterialNumber)
         fetchComboDealPrincipal,
     required TResult Function(ComboDeal comboDeal, List<String> principles)
         loadMoreComboDealPrincipal,
@@ -1241,7 +1254,8 @@ class _$UpdateItemQuantityImpl implements _UpdateItemQuantity {
     TResult? Function(
             ComboDeal comboDeal,
             Map<MaterialNumber, int> comboMaterialsCurrentQuantity,
-            List<String> principles)?
+            List<String> principles,
+            MaterialNumber parentMaterialNumber)?
         fetchComboDealPrincipal,
     TResult? Function(ComboDeal comboDeal, List<String> principles)?
         loadMoreComboDealPrincipal,
@@ -1276,7 +1290,8 @@ class _$UpdateItemQuantityImpl implements _UpdateItemQuantity {
     TResult Function(
             ComboDeal comboDeal,
             Map<MaterialNumber, int> comboMaterialsCurrentQuantity,
-            List<String> principles)?
+            List<String> principles,
+            MaterialNumber parentMaterialNumber)?
         fetchComboDealPrincipal,
     TResult Function(ComboDeal comboDeal, List<String> principles)?
         loadMoreComboDealPrincipal,
@@ -1463,7 +1478,8 @@ class _$UpdateItemSelectionImpl implements _UpdateItemSelection {
     required TResult Function(
             ComboDeal comboDeal,
             Map<MaterialNumber, int> comboMaterialsCurrentQuantity,
-            List<String> principles)
+            List<String> principles,
+            MaterialNumber parentMaterialNumber)
         fetchComboDealPrincipal,
     required TResult Function(ComboDeal comboDeal, List<String> principles)
         loadMoreComboDealPrincipal,
@@ -1498,7 +1514,8 @@ class _$UpdateItemSelectionImpl implements _UpdateItemSelection {
     TResult? Function(
             ComboDeal comboDeal,
             Map<MaterialNumber, int> comboMaterialsCurrentQuantity,
-            List<String> principles)?
+            List<String> principles,
+            MaterialNumber parentMaterialNumber)?
         fetchComboDealPrincipal,
     TResult? Function(ComboDeal comboDeal, List<String> principles)?
         loadMoreComboDealPrincipal,
@@ -1533,7 +1550,8 @@ class _$UpdateItemSelectionImpl implements _UpdateItemSelection {
     TResult Function(
             ComboDeal comboDeal,
             Map<MaterialNumber, int> comboMaterialsCurrentQuantity,
-            List<String> principles)?
+            List<String> principles,
+            MaterialNumber parentMaterialNumber)?
         fetchComboDealPrincipal,
     TResult Function(ComboDeal comboDeal, List<String> principles)?
         loadMoreComboDealPrincipal,
@@ -1763,7 +1781,8 @@ class _$FetchComboDealDetailImpl implements _FetchComboDealDetail {
     required TResult Function(
             ComboDeal comboDeal,
             Map<MaterialNumber, int> comboMaterialsCurrentQuantity,
-            List<String> principles)
+            List<String> principles,
+            MaterialNumber parentMaterialNumber)
         fetchComboDealPrincipal,
     required TResult Function(ComboDeal comboDeal, List<String> principles)
         loadMoreComboDealPrincipal,
@@ -1799,7 +1818,8 @@ class _$FetchComboDealDetailImpl implements _FetchComboDealDetail {
     TResult? Function(
             ComboDeal comboDeal,
             Map<MaterialNumber, int> comboMaterialsCurrentQuantity,
-            List<String> principles)?
+            List<String> principles,
+            MaterialNumber parentMaterialNumber)?
         fetchComboDealPrincipal,
     TResult? Function(ComboDeal comboDeal, List<String> principles)?
         loadMoreComboDealPrincipal,
@@ -1835,7 +1855,8 @@ class _$FetchComboDealDetailImpl implements _FetchComboDealDetail {
     TResult Function(
             ComboDeal comboDeal,
             Map<MaterialNumber, int> comboMaterialsCurrentQuantity,
-            List<String> principles)?
+            List<String> principles,
+            MaterialNumber parentMaterialNumber)?
         fetchComboDealPrincipal,
     TResult Function(ComboDeal comboDeal, List<String> principles)?
         loadMoreComboDealPrincipal,
@@ -2025,7 +2046,8 @@ class _$SearchImpl implements _Search {
     required TResult Function(
             ComboDeal comboDeal,
             Map<MaterialNumber, int> comboMaterialsCurrentQuantity,
-            List<String> principles)
+            List<String> principles,
+            MaterialNumber parentMaterialNumber)
         fetchComboDealPrincipal,
     required TResult Function(ComboDeal comboDeal, List<String> principles)
         loadMoreComboDealPrincipal,
@@ -2060,7 +2082,8 @@ class _$SearchImpl implements _Search {
     TResult? Function(
             ComboDeal comboDeal,
             Map<MaterialNumber, int> comboMaterialsCurrentQuantity,
-            List<String> principles)?
+            List<String> principles,
+            MaterialNumber parentMaterialNumber)?
         fetchComboDealPrincipal,
     TResult? Function(ComboDeal comboDeal, List<String> principles)?
         loadMoreComboDealPrincipal,
@@ -2095,7 +2118,8 @@ class _$SearchImpl implements _Search {
     TResult Function(
             ComboDeal comboDeal,
             Map<MaterialNumber, int> comboMaterialsCurrentQuantity,
-            List<String> principles)?
+            List<String> principles,
+            MaterialNumber parentMaterialNumber)?
         fetchComboDealPrincipal,
     TResult Function(ComboDeal comboDeal, List<String> principles)?
         loadMoreComboDealPrincipal,
@@ -2281,7 +2305,8 @@ class _$CartContainsCurrentComboImpl implements _CartContainsCurrentCombo {
     required TResult Function(
             ComboDeal comboDeal,
             Map<MaterialNumber, int> comboMaterialsCurrentQuantity,
-            List<String> principles)
+            List<String> principles,
+            MaterialNumber parentMaterialNumber)
         fetchComboDealPrincipal,
     required TResult Function(ComboDeal comboDeal, List<String> principles)
         loadMoreComboDealPrincipal,
@@ -2316,7 +2341,8 @@ class _$CartContainsCurrentComboImpl implements _CartContainsCurrentCombo {
     TResult? Function(
             ComboDeal comboDeal,
             Map<MaterialNumber, int> comboMaterialsCurrentQuantity,
-            List<String> principles)?
+            List<String> principles,
+            MaterialNumber parentMaterialNumber)?
         fetchComboDealPrincipal,
     TResult? Function(ComboDeal comboDeal, List<String> principles)?
         loadMoreComboDealPrincipal,
@@ -2351,7 +2377,8 @@ class _$CartContainsCurrentComboImpl implements _CartContainsCurrentCombo {
     TResult Function(
             ComboDeal comboDeal,
             Map<MaterialNumber, int> comboMaterialsCurrentQuantity,
-            List<String> principles)?
+            List<String> principles,
+            MaterialNumber parentMaterialNumber)?
         fetchComboDealPrincipal,
     TResult Function(ComboDeal comboDeal, List<String> principles)?
         loadMoreComboDealPrincipal,
@@ -2509,7 +2536,8 @@ class _$ClearSearchImpl implements _ClearSearch {
     required TResult Function(
             ComboDeal comboDeal,
             Map<MaterialNumber, int> comboMaterialsCurrentQuantity,
-            List<String> principles)
+            List<String> principles,
+            MaterialNumber parentMaterialNumber)
         fetchComboDealPrincipal,
     required TResult Function(ComboDeal comboDeal, List<String> principles)
         loadMoreComboDealPrincipal,
@@ -2544,7 +2572,8 @@ class _$ClearSearchImpl implements _ClearSearch {
     TResult? Function(
             ComboDeal comboDeal,
             Map<MaterialNumber, int> comboMaterialsCurrentQuantity,
-            List<String> principles)?
+            List<String> principles,
+            MaterialNumber parentMaterialNumber)?
         fetchComboDealPrincipal,
     TResult? Function(ComboDeal comboDeal, List<String> principles)?
         loadMoreComboDealPrincipal,
@@ -2579,7 +2608,8 @@ class _$ClearSearchImpl implements _ClearSearch {
     TResult Function(
             ComboDeal comboDeal,
             Map<MaterialNumber, int> comboMaterialsCurrentQuantity,
-            List<String> principles)?
+            List<String> principles,
+            MaterialNumber parentMaterialNumber)?
         fetchComboDealPrincipal,
     TResult Function(ComboDeal comboDeal, List<String> principles)?
         loadMoreComboDealPrincipal,
@@ -2677,7 +2707,8 @@ abstract class _$$FetchComboDealPrincipalImplCopyWith<$Res> {
   $Res call(
       {ComboDeal comboDeal,
       Map<MaterialNumber, int> comboMaterialsCurrentQuantity,
-      List<String> principles});
+      List<String> principles,
+      MaterialNumber parentMaterialNumber});
 
   $ComboDealCopyWith<$Res> get comboDeal;
 }
@@ -2698,6 +2729,7 @@ class __$$FetchComboDealPrincipalImplCopyWithImpl<$Res>
     Object? comboDeal = null,
     Object? comboMaterialsCurrentQuantity = null,
     Object? principles = null,
+    Object? parentMaterialNumber = null,
   }) {
     return _then(_$FetchComboDealPrincipalImpl(
       comboDeal: null == comboDeal
@@ -2712,6 +2744,10 @@ class __$$FetchComboDealPrincipalImplCopyWithImpl<$Res>
           ? _value._principles
           : principles // ignore: cast_nullable_to_non_nullable
               as List<String>,
+      parentMaterialNumber: null == parentMaterialNumber
+          ? _value.parentMaterialNumber
+          : parentMaterialNumber // ignore: cast_nullable_to_non_nullable
+              as MaterialNumber,
     ));
   }
 
@@ -2730,7 +2766,8 @@ class _$FetchComboDealPrincipalImpl implements _FetchComboDealPrincipal {
   const _$FetchComboDealPrincipalImpl(
       {required this.comboDeal,
       required final Map<MaterialNumber, int> comboMaterialsCurrentQuantity,
-      required final List<String> principles})
+      required final List<String> principles,
+      required this.parentMaterialNumber})
       : _comboMaterialsCurrentQuantity = comboMaterialsCurrentQuantity,
         _principles = principles;
 
@@ -2754,8 +2791,11 @@ class _$FetchComboDealPrincipalImpl implements _FetchComboDealPrincipal {
   }
 
   @override
+  final MaterialNumber parentMaterialNumber;
+
+  @override
   String toString() {
-    return 'ComboDealMaterialDetailEvent.fetchComboDealPrincipal(comboDeal: $comboDeal, comboMaterialsCurrentQuantity: $comboMaterialsCurrentQuantity, principles: $principles)';
+    return 'ComboDealMaterialDetailEvent.fetchComboDealPrincipal(comboDeal: $comboDeal, comboMaterialsCurrentQuantity: $comboMaterialsCurrentQuantity, principles: $principles, parentMaterialNumber: $parentMaterialNumber)';
   }
 
   @override
@@ -2769,7 +2809,9 @@ class _$FetchComboDealPrincipalImpl implements _FetchComboDealPrincipal {
                 other._comboMaterialsCurrentQuantity,
                 _comboMaterialsCurrentQuantity) &&
             const DeepCollectionEquality()
-                .equals(other._principles, _principles));
+                .equals(other._principles, _principles) &&
+            (identical(other.parentMaterialNumber, parentMaterialNumber) ||
+                other.parentMaterialNumber == parentMaterialNumber));
   }
 
   @override
@@ -2777,7 +2819,8 @@ class _$FetchComboDealPrincipalImpl implements _FetchComboDealPrincipal {
       runtimeType,
       comboDeal,
       const DeepCollectionEquality().hash(_comboMaterialsCurrentQuantity),
-      const DeepCollectionEquality().hash(_principles));
+      const DeepCollectionEquality().hash(_principles),
+      parentMaterialNumber);
 
   @JsonKey(ignore: true)
   @override
@@ -2814,14 +2857,15 @@ class _$FetchComboDealPrincipalImpl implements _FetchComboDealPrincipal {
     required TResult Function(
             ComboDeal comboDeal,
             Map<MaterialNumber, int> comboMaterialsCurrentQuantity,
-            List<String> principles)
+            List<String> principles,
+            MaterialNumber parentMaterialNumber)
         fetchComboDealPrincipal,
     required TResult Function(ComboDeal comboDeal, List<String> principles)
         loadMoreComboDealPrincipal,
     required TResult Function() clearSelectedItem,
   }) {
-    return fetchComboDealPrincipal(
-        comboDeal, comboMaterialsCurrentQuantity, principles);
+    return fetchComboDealPrincipal(comboDeal, comboMaterialsCurrentQuantity,
+        principles, parentMaterialNumber);
   }
 
   @override
@@ -2850,14 +2894,15 @@ class _$FetchComboDealPrincipalImpl implements _FetchComboDealPrincipal {
     TResult? Function(
             ComboDeal comboDeal,
             Map<MaterialNumber, int> comboMaterialsCurrentQuantity,
-            List<String> principles)?
+            List<String> principles,
+            MaterialNumber parentMaterialNumber)?
         fetchComboDealPrincipal,
     TResult? Function(ComboDeal comboDeal, List<String> principles)?
         loadMoreComboDealPrincipal,
     TResult? Function()? clearSelectedItem,
   }) {
-    return fetchComboDealPrincipal?.call(
-        comboDeal, comboMaterialsCurrentQuantity, principles);
+    return fetchComboDealPrincipal?.call(comboDeal,
+        comboMaterialsCurrentQuantity, principles, parentMaterialNumber);
   }
 
   @override
@@ -2886,7 +2931,8 @@ class _$FetchComboDealPrincipalImpl implements _FetchComboDealPrincipal {
     TResult Function(
             ComboDeal comboDeal,
             Map<MaterialNumber, int> comboMaterialsCurrentQuantity,
-            List<String> principles)?
+            List<String> principles,
+            MaterialNumber parentMaterialNumber)?
         fetchComboDealPrincipal,
     TResult Function(ComboDeal comboDeal, List<String> principles)?
         loadMoreComboDealPrincipal,
@@ -2894,8 +2940,8 @@ class _$FetchComboDealPrincipalImpl implements _FetchComboDealPrincipal {
     required TResult orElse(),
   }) {
     if (fetchComboDealPrincipal != null) {
-      return fetchComboDealPrincipal(
-          comboDeal, comboMaterialsCurrentQuantity, principles);
+      return fetchComboDealPrincipal(comboDeal, comboMaterialsCurrentQuantity,
+          principles, parentMaterialNumber);
     }
     return orElse();
   }
@@ -2974,13 +3020,16 @@ class _$FetchComboDealPrincipalImpl implements _FetchComboDealPrincipal {
 abstract class _FetchComboDealPrincipal
     implements ComboDealMaterialDetailEvent {
   const factory _FetchComboDealPrincipal(
-      {required final ComboDeal comboDeal,
-      required final Map<MaterialNumber, int> comboMaterialsCurrentQuantity,
-      required final List<String> principles}) = _$FetchComboDealPrincipalImpl;
+          {required final ComboDeal comboDeal,
+          required final Map<MaterialNumber, int> comboMaterialsCurrentQuantity,
+          required final List<String> principles,
+          required final MaterialNumber parentMaterialNumber}) =
+      _$FetchComboDealPrincipalImpl;
 
   ComboDeal get comboDeal;
   Map<MaterialNumber, int> get comboMaterialsCurrentQuantity;
   List<String> get principles;
+  MaterialNumber get parentMaterialNumber;
   @JsonKey(ignore: true)
   _$$FetchComboDealPrincipalImplCopyWith<_$FetchComboDealPrincipalImpl>
       get copyWith => throw _privateConstructorUsedError;
@@ -3107,7 +3156,8 @@ class _$LoadMoreComboDealPrincipalImpl implements _LoadMoreComboDealPrincipal {
     required TResult Function(
             ComboDeal comboDeal,
             Map<MaterialNumber, int> comboMaterialsCurrentQuantity,
-            List<String> principles)
+            List<String> principles,
+            MaterialNumber parentMaterialNumber)
         fetchComboDealPrincipal,
     required TResult Function(ComboDeal comboDeal, List<String> principles)
         loadMoreComboDealPrincipal,
@@ -3142,7 +3192,8 @@ class _$LoadMoreComboDealPrincipalImpl implements _LoadMoreComboDealPrincipal {
     TResult? Function(
             ComboDeal comboDeal,
             Map<MaterialNumber, int> comboMaterialsCurrentQuantity,
-            List<String> principles)?
+            List<String> principles,
+            MaterialNumber parentMaterialNumber)?
         fetchComboDealPrincipal,
     TResult? Function(ComboDeal comboDeal, List<String> principles)?
         loadMoreComboDealPrincipal,
@@ -3177,7 +3228,8 @@ class _$LoadMoreComboDealPrincipalImpl implements _LoadMoreComboDealPrincipal {
     TResult Function(
             ComboDeal comboDeal,
             Map<MaterialNumber, int> comboMaterialsCurrentQuantity,
-            List<String> principles)?
+            List<String> principles,
+            MaterialNumber parentMaterialNumber)?
         fetchComboDealPrincipal,
     TResult Function(ComboDeal comboDeal, List<String> principles)?
         loadMoreComboDealPrincipal,
@@ -3339,7 +3391,8 @@ class _$ClearSelectedItemImpl implements _ClearSelectedItem {
     required TResult Function(
             ComboDeal comboDeal,
             Map<MaterialNumber, int> comboMaterialsCurrentQuantity,
-            List<String> principles)
+            List<String> principles,
+            MaterialNumber parentMaterialNumber)
         fetchComboDealPrincipal,
     required TResult Function(ComboDeal comboDeal, List<String> principles)
         loadMoreComboDealPrincipal,
@@ -3374,7 +3427,8 @@ class _$ClearSelectedItemImpl implements _ClearSelectedItem {
     TResult? Function(
             ComboDeal comboDeal,
             Map<MaterialNumber, int> comboMaterialsCurrentQuantity,
-            List<String> principles)?
+            List<String> principles,
+            MaterialNumber parentMaterialNumber)?
         fetchComboDealPrincipal,
     TResult? Function(ComboDeal comboDeal, List<String> principles)?
         loadMoreComboDealPrincipal,
@@ -3409,7 +3463,8 @@ class _$ClearSelectedItemImpl implements _ClearSelectedItem {
     TResult Function(
             ComboDeal comboDeal,
             Map<MaterialNumber, int> comboMaterialsCurrentQuantity,
-            List<String> principles)?
+            List<String> principles,
+            MaterialNumber parentMaterialNumber)?
         fetchComboDealPrincipal,
     TResult Function(ComboDeal comboDeal, List<String> principles)?
         loadMoreComboDealPrincipal,

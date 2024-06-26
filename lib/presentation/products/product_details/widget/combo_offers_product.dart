@@ -141,7 +141,6 @@ class ComboOffersProduct extends StatelessWidget {
                                 contain: overrideQuantity.isNotEmpty,
                               ),
                             );
-
                         if (priceComboDeal?.category.type.isMaterialNumber ??
                             false) {
                           context.read<ComboDealMaterialDetailBloc>().add(
@@ -158,15 +157,15 @@ class ComboOffersProduct extends StatelessWidget {
                               .read<ProductDetailBloc>()
                               .state
                               .productDetailAggregate;
-
                           final principalCode = productDetailAggregate
                               .materialInfo.principalData.principalCode
                               .getOrDefaultValue('');
-
                           context.read<ComboDealMaterialDetailBloc>().add(
                                 ComboDealMaterialDetailEvent
                                     .fetchComboDealPrincipal(
                                   comboDeal: comboDeal,
+                                  parentMaterialNumber: productDetailAggregate
+                                      .materialInfo.materialNumber,
                                   principles: [principalCode],
                                   comboMaterialsCurrentQuantity:
                                       overrideQuantity,
@@ -174,7 +173,9 @@ class ComboOffersProduct extends StatelessWidget {
                               );
                         }
 
-                        context.navigateTo(const ComboDetailPageRoute());
+                        context.navigateTo(
+                          const ComboDetailPageRoute(),
+                        );
                       },
                       child: Text(
                         context.tr('Get combo deal'),

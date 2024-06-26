@@ -43,6 +43,7 @@ class ComboDealMaterialDetailEvent with _$ComboDealMaterialDetailEvent {
     required ComboDeal comboDeal,
     required Map<MaterialNumber, int> comboMaterialsCurrentQuantity,
     required List<String> principles,
+    required MaterialNumber parentMaterialNumber,
   }) = _FetchComboDealPrincipal;
 
   const factory ComboDealMaterialDetailEvent.loadMoreComboDealPrincipal({

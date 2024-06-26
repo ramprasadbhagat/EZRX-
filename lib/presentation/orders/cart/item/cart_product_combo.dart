@@ -116,13 +116,17 @@ class CartProductCombo extends StatelessWidget {
                                 .fetchComboDealPrincipal(
                               comboDeal: comboDeal,
                               principles: [principalCode],
+                              parentMaterialNumber:
+                                  cartItem.materialInfo.materialNumber,
                               comboMaterialsCurrentQuantity:
                                   cartItem.comboMaterialsCurrentQuantity,
                             ),
                           );
                         }
 
-                        context.navigateTo(const ComboDetailPageRoute());
+                        context.navigateTo(
+                          const ComboDetailPageRoute(),
+                        );
                       },
                       icon: const Icon(
                         Icons.edit_outlined,
@@ -186,17 +190,15 @@ class CartProductCombo extends StatelessWidget {
                       valueText: context.tr('Combo suspended'),
                     ),
                   const SizedBox(height: 8),
-                  ...cartItem.comboMaterials
-                      .map(
-                        (e) => CartProductComboItem(
-                          key: WidgetKeys.cartItemProductTile(
-                            e.materialInfo.materialNumber.displayMatNo,
-                          ),
-                          comboMaterialItem: e,
-                          comboScheme: _comboScheme,
-                        ),
-                      )
-                      ,
+                  ...cartItem.comboMaterials.map(
+                    (e) => CartProductComboItem(
+                      key: WidgetKeys.cartItemProductTile(
+                        e.materialInfo.materialNumber.displayMatNo,
+                      ),
+                      comboMaterialItem: e,
+                      comboScheme: _comboScheme,
+                    ),
+                  ),
                 ],
               ),
             ),

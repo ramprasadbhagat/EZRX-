@@ -197,7 +197,9 @@ void main() {
             .productImages
             .first;
     mockComboDeal = (await ComboDealLocalDataSource().getComboDealList()).first;
-    registerFallbackValue(const ComboDetailPageRoute());
+    registerFallbackValue(
+      const ComboDetailPageRoute(),
+    );
     zpMaterialDetail = ProductDetailAggregate.empty().copyWith(
       materialInfo: materialInfo.copyWith(isMarketPlace: false),
       stockInfo: stockInfo,

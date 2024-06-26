@@ -1072,7 +1072,6 @@ void _initComboDealAndNavigate({
           contain: overrideQuantity.isNotEmpty,
         ),
       );
-
   if (price.comboDeal.category.type.isMaterialNumber) {
     context.read<ComboDealMaterialDetailBloc>().add(
           ComboDealMaterialDetailEvent.fetchComboDealDetail(
@@ -1084,20 +1083,22 @@ void _initComboDealAndNavigate({
   } else {
     final productDetailAggregate =
         context.read<ProductDetailBloc>().state.productDetailAggregate;
-
     final principalCode = productDetailAggregate
         .materialInfo.principalData.principalCode
         .getOrDefaultValue('');
-
     context.read<ComboDealMaterialDetailBloc>().add(
           ComboDealMaterialDetailEvent.fetchComboDealPrincipal(
             comboDeal: comboDeal,
             principles: [principalCode],
+            parentMaterialNumber:
+                productDetailAggregate.materialInfo.materialNumber,
             comboMaterialsCurrentQuantity: overrideQuantity,
           ),
         );
   }
-  context.navigateTo(const ComboDetailPageRoute());
+  context.navigateTo(
+    const ComboDetailPageRoute(),
+  );
 }
 
 void _showDetailsPage({

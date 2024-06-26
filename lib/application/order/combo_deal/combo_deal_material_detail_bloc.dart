@@ -385,7 +385,6 @@ class ComboDealMaterialDetailBloc
                   .toList()
                   .mapByMaterialNumber,
             );
-
             emit(
               state.copyWith(
                 items: items,
@@ -407,6 +406,9 @@ class ComboDealMaterialDetailBloc
                   items[materialStockInfo.materialNumber] = material.copyWith(
                     stockInfo: materialStockInfo.stockInfos.first,
                     stockInfoList: materialStockInfo.stockInfos,
+                    materialInfo: material.materialInfo.copyWith(
+                      parentID: e.parentMaterialNumber.getOrDefaultValue(''),
+                    ),
                   );
                 }
               }
@@ -468,10 +470,14 @@ class ComboDealMaterialDetailBloc
             );
           },
           (materialResponse) async {
+            final parentMaterialNumber =
+                state.items.values.first.materialInfo.parentID;
             final newItems = materialResponse.products
                 .map(
                   (material) => PriceAggregate.empty().copyWith(
-                    materialInfo: material,
+                    materialInfo: material.copyWith(
+                      parentID: parentMaterialNumber,
+                    ),
                     salesOrgConfig: state.salesConfigs,
                     comboDeal: e.comboDeal,
                   ),
@@ -555,7 +561,7 @@ class ComboDealMaterialDetailBloc
         await stockInfoRepository.getStockInfoList(
       customerCodeInfo: state.customerCodeInfo,
       salesOrganisation: state.salesOrganisation,
-      materials: materialsInfo.map((e) => e.materialNumber).toList(), 
+      materials: materialsInfo.map((e) => e.materialNumber).toList(),
       shipToInfo: state.shipToInfo,
     );
 
