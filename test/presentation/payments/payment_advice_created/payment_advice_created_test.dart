@@ -315,8 +315,8 @@ void main() {
         ),
       );
       when(
-        () => autoRouterMock.pushNamed<Uri>('payments/payments_webview'),
-      ).thenAnswer((invocation) => Future(() => Uri()));
+        () => autoRouterMock.push<Uri>(const PaymentWebviewPageRoute()),
+      ).thenAnswer((_) async => Uri());
       await tester.pumpWidget(getWidget());
       await tester.pump();
       expect(paymentGatewayAdviceMessage, findsOneWidget);
@@ -348,7 +348,7 @@ void main() {
       await tester.tap(payButton);
       await tester.pump(const Duration(seconds: 1));
       verify(
-        () => autoRouterMock.pushNamed<Uri>('payments/payments_webview'),
+        () => autoRouterMock.push<Uri>(const PaymentWebviewPageRoute()),
       ).called(1);
       await tester.pump(const Duration(seconds: 1));
     });
@@ -369,8 +369,8 @@ void main() {
         ),
       );
       when(
-        () => autoRouterMock.pushNamed('payments/payments_webview'),
-      ).thenAnswer((invocation) => Future(() => null));
+        () => autoRouterMock.push<Uri>(const PaymentWebviewPageRoute()),
+      ).thenAnswer((_) async => Uri());
       await tester.pumpWidget(getWidget());
       await tester.pump();
       expect(paymentAdviceNextStep, findsOneWidget);

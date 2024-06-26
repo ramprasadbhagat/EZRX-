@@ -1,4 +1,5 @@
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
+import 'package:ezrxmobile/application/payments/new_payment/new_payment_bloc.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/payments/payment_failed/payment_failed_page.dart';
@@ -16,6 +17,7 @@ void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   late AppRouter autoRouterMock;
   late EligibilityBloc eligibilityBlocMock;
+  late NewPaymentBloc newPaymentBloc;
   final isMarketPlaceVariant = ValueVariant<bool>({true, false});
 
   setUpAll(() async {
@@ -25,8 +27,10 @@ void main() {
   setUp(() {
     autoRouterMock = locator<AppRouter>();
     eligibilityBlocMock = EligibilityBlocMock();
+    newPaymentBloc = NewPaymentBlocMock();
     when(() => eligibilityBlocMock.state)
         .thenReturn(EligibilityState.initial());
+    when(() => newPaymentBloc.state).thenReturn(NewPaymentState.initial());
   });
 
   Widget getWidget({bool isMarketPlace = false}) => WidgetUtils.getScopedWidget(
@@ -37,6 +41,9 @@ void main() {
         providers: [
           BlocProvider<EligibilityBloc>(
             create: (context) => eligibilityBlocMock,
+          ),
+          BlocProvider<NewPaymentBloc>(
+            create: (context) => newPaymentBloc,
           ),
         ],
         child: PaymentFailedPage(isMarketPlace: isMarketPlace),

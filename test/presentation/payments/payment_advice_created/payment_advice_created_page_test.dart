@@ -802,8 +802,9 @@ void main() {
             'https://uat-my.ezrx.com/my-account/thankyou?TxnStatus=53616c7465645f5f8e5e0ca2b58a806b94a4ebbf208dfa4b0d88785a87b5d51c&paymentId=53616c7465645f5fe091adf59597a72a5abfd6acc86a3ab61711eb2bbde29eb142069eb826b994521f0f6f6aef1b0b39&transactionReference=53616c7465645f5f1848629ba40e99bbaa51def8fee526d27b1aa47b0db74a940b88ea79ee309de40f5853a2fe8a4eba&isCancelled=false&serviceID=53616c7465645f5f4359c1513d51facdf3714b241e1968387b451b21e5096e25',
           );
           final paymentStatus = PaymentStatusDto.fromUri(fakeUrl).toDomain;
-          when(() => autoRouterMock.pushNamed<Uri>('payments/payments_webview'))
-              .thenAnswer((invocation) => Future.value(fakeUrl));
+          when(
+            () => autoRouterMock.push<Uri>(const PaymentWebviewPageRoute()),
+          ).thenAnswer((_) async => fakeUrl);
           when(
             () => autoRouterMock.pushAndPopUntil(
               PaymentCompletedPageRoute(
@@ -819,7 +820,7 @@ void main() {
           await tester.tap(buttonFinder);
           await tester.pumpAndSettle();
           verify(
-            () => autoRouterMock.pushNamed<Uri>('payments/payments_webview'),
+            () => autoRouterMock.push<Uri>(const PaymentWebviewPageRoute()),
           ).called(1);
           verify(
             () => trackMixpanelEvent(
@@ -852,15 +853,16 @@ void main() {
       );
 
       testWidgets('On Tap Pay Now Button But Cannot Get Url', (tester) async {
-        when(() => autoRouterMock.pushNamed<Uri>('payments/payments_webview'))
-            .thenAnswer((invocation) => Future.value());
+        when(
+          () => autoRouterMock.push<Uri>(const PaymentWebviewPageRoute()),
+        ).thenAnswer((_) => Future.value());
 
         await tester.pumpWidget(getWidget());
         await tester.pump();
         final buttonFinder = find.byKey(WidgetKeys.payButton);
         await tester.tap(buttonFinder);
         await tester.pumpAndSettle();
-        verify(() => autoRouterMock.pushNamed<Uri>('payments/payments_webview'))
+        verify(() => autoRouterMock.push<Uri>(const PaymentWebviewPageRoute()))
             .called(1);
         verify(
           () => trackMixpanelEvent(

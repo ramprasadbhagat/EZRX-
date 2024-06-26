@@ -3644,6 +3644,7 @@ mixin _$NewPaymentState {
   bool get isFetchingPrincipalCutoffs => throw _privateConstructorUsedError;
   PrincipalCutoffs get principalCutoffs => throw _privateConstructorUsedError;
   bool get isMarketPlace => throw _privateConstructorUsedError;
+  bool get isUpdatePaymentGateway => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $NewPaymentStateCopyWith<NewPaymentState> get copyWith =>
@@ -3677,7 +3678,8 @@ abstract class $NewPaymentStateCopyWith<$Res> {
       CreateVirtualAccount createVirtualAccount,
       bool isFetchingPrincipalCutoffs,
       PrincipalCutoffs principalCutoffs,
-      bool isMarketPlace});
+      bool isMarketPlace,
+      bool isUpdatePaymentGateway});
 
   $PaymentInfoCopyWith<$Res> get paymentInfo;
   $PaymentInvoiceInfoPdfCopyWith<$Res> get paymentInvoiceInfoPdf;
@@ -3724,6 +3726,7 @@ class _$NewPaymentStateCopyWithImpl<$Res, $Val extends NewPaymentState>
     Object? isFetchingPrincipalCutoffs = null,
     Object? principalCutoffs = null,
     Object? isMarketPlace = null,
+    Object? isUpdatePaymentGateway = null,
   }) {
     return _then(_value.copyWith(
       paymentInfo: null == paymentInfo
@@ -3809,6 +3812,10 @@ class _$NewPaymentStateCopyWithImpl<$Res, $Val extends NewPaymentState>
       isMarketPlace: null == isMarketPlace
           ? _value.isMarketPlace
           : isMarketPlace // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isUpdatePaymentGateway: null == isUpdatePaymentGateway
+          ? _value.isUpdatePaymentGateway
+          : isUpdatePaymentGateway // ignore: cast_nullable_to_non_nullable
               as bool,
     ) as $Val);
   }
@@ -3918,7 +3925,8 @@ abstract class _$$NewPaymentStateImplCopyWith<$Res>
       CreateVirtualAccount createVirtualAccount,
       bool isFetchingPrincipalCutoffs,
       PrincipalCutoffs principalCutoffs,
-      bool isMarketPlace});
+      bool isMarketPlace,
+      bool isUpdatePaymentGateway});
 
   @override
   $PaymentInfoCopyWith<$Res> get paymentInfo;
@@ -3972,6 +3980,7 @@ class __$$NewPaymentStateImplCopyWithImpl<$Res>
     Object? isFetchingPrincipalCutoffs = null,
     Object? principalCutoffs = null,
     Object? isMarketPlace = null,
+    Object? isUpdatePaymentGateway = null,
   }) {
     return _then(_$NewPaymentStateImpl(
       paymentInfo: null == paymentInfo
@@ -4058,6 +4067,10 @@ class __$$NewPaymentStateImplCopyWithImpl<$Res>
           ? _value.isMarketPlace
           : isMarketPlace // ignore: cast_nullable_to_non_nullable
               as bool,
+      isUpdatePaymentGateway: null == isUpdatePaymentGateway
+          ? _value.isUpdatePaymentGateway
+          : isUpdatePaymentGateway // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -4086,7 +4099,8 @@ class _$NewPaymentStateImpl extends _NewPaymentState {
       required this.createVirtualAccount,
       required this.isFetchingPrincipalCutoffs,
       required this.principalCutoffs,
-      required this.isMarketPlace})
+      required this.isMarketPlace,
+      required this.isUpdatePaymentGateway})
       : _selectedInvoices = selectedInvoices,
         _selectedCredits = selectedCredits,
         _paymentMethods = paymentMethods,
@@ -4153,10 +4167,12 @@ class _$NewPaymentStateImpl extends _NewPaymentState {
   final PrincipalCutoffs principalCutoffs;
   @override
   final bool isMarketPlace;
+  @override
+  final bool isUpdatePaymentGateway;
 
   @override
   String toString() {
-    return 'NewPaymentState(paymentInfo: $paymentInfo, failureOrSuccessOption: $failureOrSuccessOption, isLoading: $isLoading, selectedInvoices: $selectedInvoices, selectedCredits: $selectedCredits, isFetchingInvoiceInfoPdf: $isFetchingInvoiceInfoPdf, paymentInvoiceInfoPdf: $paymentInvoiceInfoPdf, isSavingInvoicePdf: $isSavingInvoicePdf, isFetchingPaymentMethod: $isFetchingPaymentMethod, paymentMethods: $paymentMethods, selectedPaymentMethod: $selectedPaymentMethod, salesOrganisation: $salesOrganisation, customerCodeInfo: $customerCodeInfo, shipToInfo: $shipToInfo, user: $user, isCreatingVirtualAccount: $isCreatingVirtualAccount, createVirtualAccountFailed: $createVirtualAccountFailed, createVirtualAccount: $createVirtualAccount, isFetchingPrincipalCutoffs: $isFetchingPrincipalCutoffs, principalCutoffs: $principalCutoffs, isMarketPlace: $isMarketPlace)';
+    return 'NewPaymentState(paymentInfo: $paymentInfo, failureOrSuccessOption: $failureOrSuccessOption, isLoading: $isLoading, selectedInvoices: $selectedInvoices, selectedCredits: $selectedCredits, isFetchingInvoiceInfoPdf: $isFetchingInvoiceInfoPdf, paymentInvoiceInfoPdf: $paymentInvoiceInfoPdf, isSavingInvoicePdf: $isSavingInvoicePdf, isFetchingPaymentMethod: $isFetchingPaymentMethod, paymentMethods: $paymentMethods, selectedPaymentMethod: $selectedPaymentMethod, salesOrganisation: $salesOrganisation, customerCodeInfo: $customerCodeInfo, shipToInfo: $shipToInfo, user: $user, isCreatingVirtualAccount: $isCreatingVirtualAccount, createVirtualAccountFailed: $createVirtualAccountFailed, createVirtualAccount: $createVirtualAccount, isFetchingPrincipalCutoffs: $isFetchingPrincipalCutoffs, principalCutoffs: $principalCutoffs, isMarketPlace: $isMarketPlace, isUpdatePaymentGateway: $isUpdatePaymentGateway)';
   }
 
   @override
@@ -4193,10 +4209,10 @@ class _$NewPaymentStateImpl extends _NewPaymentState {
             (identical(other.shipToInfo, shipToInfo) ||
                 other.shipToInfo == shipToInfo) &&
             (identical(other.user, user) || other.user == user) &&
-            (identical(other.isCreatingVirtualAccount, isCreatingVirtualAccount) ||
+            (identical(
+                    other.isCreatingVirtualAccount, isCreatingVirtualAccount) ||
                 other.isCreatingVirtualAccount == isCreatingVirtualAccount) &&
-            (identical(other.createVirtualAccountFailed,
-                    createVirtualAccountFailed) ||
+            (identical(other.createVirtualAccountFailed, createVirtualAccountFailed) ||
                 other.createVirtualAccountFailed ==
                     createVirtualAccountFailed) &&
             (identical(other.createVirtualAccount, createVirtualAccount) ||
@@ -4208,7 +4224,9 @@ class _$NewPaymentStateImpl extends _NewPaymentState {
             (identical(other.principalCutoffs, principalCutoffs) ||
                 other.principalCutoffs == principalCutoffs) &&
             (identical(other.isMarketPlace, isMarketPlace) ||
-                other.isMarketPlace == isMarketPlace));
+                other.isMarketPlace == isMarketPlace) &&
+            (identical(other.isUpdatePaymentGateway, isUpdatePaymentGateway) ||
+                other.isUpdatePaymentGateway == isUpdatePaymentGateway));
   }
 
   @override
@@ -4234,7 +4252,8 @@ class _$NewPaymentStateImpl extends _NewPaymentState {
         createVirtualAccount,
         isFetchingPrincipalCutoffs,
         principalCutoffs,
-        isMarketPlace
+        isMarketPlace,
+        isUpdatePaymentGateway
       ]);
 
   @JsonKey(ignore: true)
@@ -4267,7 +4286,8 @@ abstract class _NewPaymentState extends NewPaymentState {
       required final CreateVirtualAccount createVirtualAccount,
       required final bool isFetchingPrincipalCutoffs,
       required final PrincipalCutoffs principalCutoffs,
-      required final bool isMarketPlace}) = _$NewPaymentStateImpl;
+      required final bool isMarketPlace,
+      required final bool isUpdatePaymentGateway}) = _$NewPaymentStateImpl;
   const _NewPaymentState._() : super._();
 
   @override
@@ -4312,6 +4332,8 @@ abstract class _NewPaymentState extends NewPaymentState {
   PrincipalCutoffs get principalCutoffs;
   @override
   bool get isMarketPlace;
+  @override
+  bool get isUpdatePaymentGateway;
   @override
   @JsonKey(ignore: true)
   _$$NewPaymentStateImplCopyWith<_$NewPaymentStateImpl> get copyWith =>

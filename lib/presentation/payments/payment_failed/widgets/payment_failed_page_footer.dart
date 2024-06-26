@@ -25,16 +25,34 @@ class _PaymentFailedPageFooter extends StatelessWidget {
       width: double.infinity,
       child: SafeArea(
         top: false,
-        child: ElevatedButton(
-          key: WidgetKeys.paymentSummaryRouteButton,
-          onPressed: () => context.router.push(
-            PaymentSummaryPageRoute(isMarketPlace: context.isMPPayment),
-          ),
-          child: Text(
-            context.tr(
-              context.isMPPayment ? 'MP Payment summary' : 'Payment summary',
-            ),
-          ),
+        child: BlocBuilder<NewPaymentBloc, NewPaymentState>(
+          buildWhen: (previous, current) =>
+              previous.isUpdatePaymentGateway != current.isUpdatePaymentGateway,
+          builder: (context, state) {
+            final isLoading = state.isUpdatePaymentGateway;
+
+            return ElevatedButton(
+              key: WidgetKeys.paymentSummaryRouteButton,
+              onPressed: isLoading
+                  ? null
+                  : () => context.router.push(
+                        PaymentSummaryPageRoute(
+                          isMarketPlace: context.isMPPayment,
+                        ),
+                      ),
+              child: LoadingShimmer.withChild(
+                enabled: isLoading,
+                center: false,
+                child: Text(
+                  context.tr(
+                    context.isMPPayment
+                        ? 'MP Payment summary'
+                        : 'Payment summary',
+                  ),
+                ),
+              ),
+            );
+          },
         ),
       ),
     );

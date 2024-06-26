@@ -185,12 +185,16 @@ class NewPaymentBloc extends Bloc<NewPaymentEvent, NewPaymentState> {
       },
       updatePaymentGateway: (_UpdatePaymentGateway e) async {
         if (state.salesOrganisation.salesOrg.needUpdatePaymentGateway) {
+          emit(state.copyWith(isUpdatePaymentGateway: true));
+
           await newPaymentRepository.updatePaymentGateway(
             salesOrganisation: state.salesOrganisation,
             customerCodeInfo: state.customerCodeInfo,
             isMarketPlace: state.isMarketPlace,
             paymentStatus: e.paymentStatus,
           );
+
+          emit(state.copyWith(isUpdatePaymentGateway: false));
         }
       },
       fetchInvoiceInfoPdf: (_FetchInvoiceInfoPdf e) async {

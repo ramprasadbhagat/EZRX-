@@ -26,6 +26,7 @@ class NewPaymentState with _$NewPaymentState {
     required bool isFetchingPrincipalCutoffs,
     required PrincipalCutoffs principalCutoffs,
     required bool isMarketPlace,
+    required bool isUpdatePaymentGateway,
   }) = _NewPaymentState;
 
   factory NewPaymentState.initial() => NewPaymentState(
@@ -50,6 +51,7 @@ class NewPaymentState with _$NewPaymentState {
         isFetchingPrincipalCutoffs: false,
         principalCutoffs: PrincipalCutoffs.empty(),
         isMarketPlace: false,
+        isUpdatePaymentGateway: false,
       );
 
   double get amountTotal =>

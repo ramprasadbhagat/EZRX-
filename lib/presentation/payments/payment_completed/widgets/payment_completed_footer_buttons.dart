@@ -5,23 +5,39 @@ class _PaymentSummaryButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
-      key: WidgetKeys.paymentSummaryRouteButton,
-      onPressed: () => context.router.push(
-        PaymentSummaryPageRoute(
-          isMarketPlace: context.isMPPayment,
-        ),
-      ),
-      child: FittedBox(
-        child: Text(
-          context.tr(
-            context.isMPPayment ? 'MP Payment summary' : 'Payment summary',
-          ),
-          style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                color: ZPColors.white,
+    return BlocBuilder<NewPaymentBloc, NewPaymentState>(
+      buildWhen: (previous, current) =>
+          previous.isUpdatePaymentGateway != current.isUpdatePaymentGateway,
+      builder: (context, state) {
+        final isLoading = state.isUpdatePaymentGateway;
+
+        return ElevatedButton(
+          key: WidgetKeys.paymentSummaryRouteButton,
+          onPressed: isLoading
+              ? null
+              : () => context.router.push(
+                    PaymentSummaryPageRoute(
+                      isMarketPlace: context.isMPPayment,
+                    ),
+                  ),
+          child: LoadingShimmer.withChild(
+            enabled: isLoading,
+            center: false,
+            child: FittedBox(
+              child: Text(
+                context.tr(
+                  context.isMPPayment
+                      ? 'MP Payment summary'
+                      : 'Payment summary',
+                ),
+                style: Theme.of(context).textTheme.labelMedium?.copyWith(
+                      color: ZPColors.white,
+                    ),
               ),
-        ),
-      ),
+            ),
+          ),
+        );
+      },
     );
   }
 }

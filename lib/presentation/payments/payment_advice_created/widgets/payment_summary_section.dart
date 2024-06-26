@@ -139,7 +139,7 @@ class _PaymentSummarySection extends StatelessWidget {
               child: const PaymentWebviewPage(),
             ),
           )
-        : await context.router.pushNamed('payments/payments_webview');
+        : await context.router.push(const PaymentWebviewPageRoute());
 
     /// * Document: https://zuelligpharma.atlassian.net/wiki/spaces/EZRX/pages/293306636/MB+-+UPDATE+PAYMENT+GATEWAY+LOGIC
     /// If payment is successful (Received redirect url with

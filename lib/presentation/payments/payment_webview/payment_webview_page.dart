@@ -84,6 +84,7 @@ class _WebviewBody extends StatefulWidget {
 
 class _WebviewBodyState extends State<_WebviewBody> {
   NewPaymentState get _newPaymentState => context.read<NewPaymentBloc>().state;
+  bool isPop = false;
 
   Future<void> _initMobileViewport(InAppWebViewController controller) async {
     await controller.evaluateJavascript(
@@ -206,7 +207,8 @@ class _WebviewBodyState extends State<_WebviewBody> {
           TrackingProps.paymentGatewaySuccess: isPaymentSuccess,
         },
       );
-      if (isPaymentSuccess) {
+      if (isPaymentSuccess && !isPop) {
+        isPop = true;
         unawaited(
           router.pop(
             uri,
