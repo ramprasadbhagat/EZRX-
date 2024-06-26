@@ -44,7 +44,16 @@ class AccountSummaryRemoteDataSource {
         },
       ),
     );
-    _exceptionChecker(property: 'outstandingBalance', res: res);
+    dataSourceExceptionHandler.handleExceptionChecker(
+      res: res,
+      onCustomExceptionHandler: (res) {
+        _accountSummaryExceptionChecker(
+          res: res,
+          property: 'outstandingBalance',
+        );
+      },
+    );
+
     final data = res.data['data']['outstandingBalance']['results'];
     if (data.isNotEmpty) {
       final result = <OutstandingBalance>[];
@@ -79,7 +88,12 @@ class AccountSummaryRemoteDataSource {
         },
       ),
     );
-    _exceptionChecker(property: 'creditLimit', res: res);
+    dataSourceExceptionHandler.handleExceptionChecker(
+      res: res,
+      onCustomExceptionHandler: (res) {
+        _accountSummaryExceptionChecker(res: res, property: 'creditLimit');
+      },
+    );
     final data = res.data['data']['creditLimit']['results'];
     if (data.isNotEmpty) {
       final result = <CreditLimit>[];
@@ -93,19 +107,12 @@ class AccountSummaryRemoteDataSource {
     }
   }
 
-  void _exceptionChecker({
+  void _accountSummaryExceptionChecker({
     required String property,
     required Response<dynamic> res,
   }) {
     final data = res.data;
-    if (data['errors'] != null && data['errors'].isNotEmpty) {
-      throw ServerException(message: data['errors'][0]['message']);
-    } else if (res.statusCode != 200) {
-      throw ServerException(
-        code: res.statusCode ?? 0,
-        message: res.statusMessage ?? '',
-      );
-    } else if (data['data'] == null ||
+    if (data['data'] == null ||
         data['data'][property] == null ||
         data['data'][property]['results'] == null) {
       throw ServerException(message: 'Some thing went wrong');

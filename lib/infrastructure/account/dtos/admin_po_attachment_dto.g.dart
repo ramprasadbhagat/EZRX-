@@ -24,14 +24,14 @@ _$AdminPoAttachmentDtoImpl _$$AdminPoAttachmentDtoImplFromJson(
 Map<String, dynamic> _$$AdminPoAttachmentDtoImplToJson(
         _$AdminPoAttachmentDtoImpl instance) =>
     <String, dynamic>{
-      'salesOrderNumber': overrideToJson(instance.salesOrderNumber),
-      'ezrxReferenceNumber': overrideToJson(instance.ezrxReferenceNumber),
-      'createdBy': overrideToJson(instance.createdBy),
-      'createdTime': overrideToJson(instance.createdTime),
-      'documentUrl': overrideToJson(instance.documentUrl),
-      'documentName': overrideToJson(instance.documentName),
-      'salesOrg': overrideToJson(instance.salesOrg),
-      'soldToCode': overrideToJson(instance.soldToCode),
-      'shipToCode': overrideToJson(instance.shipToCode),
-      'tempOrderNumber': overrideToJson(instance.tempOrderNumber),
+      'salesOrderNumber': valueOrNullToJson(instance.salesOrderNumber),
+      'ezrxReferenceNumber': valueOrNullToJson(instance.ezrxReferenceNumber),
+      'createdBy': valueOrNullToJson(instance.createdBy),
+      'createdTime': valueOrNullToJson(instance.createdTime),
+      'documentUrl': valueOrNullToJson(instance.documentUrl),
+      'documentName': valueOrNullToJson(instance.documentName),
+      'salesOrg': valueOrNullToJson(instance.salesOrg),
+      'soldToCode': valueOrNullToJson(instance.soldToCode),
+      'shipToCode': valueOrNullToJson(instance.shipToCode),
+      'tempOrderNumber': valueOrNullToJson(instance.tempOrderNumber),
     };

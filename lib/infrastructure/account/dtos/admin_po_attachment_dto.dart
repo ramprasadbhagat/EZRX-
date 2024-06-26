@@ -1,4 +1,5 @@
 import 'package:ezrxmobile/domain/account/entities/admin_po_attachment.dart';
+import 'package:ezrxmobile/infrastructure/core/common/json_key_converter.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'admin_po_attachment_dto.freezed.dart';
@@ -11,63 +12,63 @@ class AdminPoAttachmentDto with _$AdminPoAttachmentDto {
     @JsonKey(
       name: 'salesOrderNumber',
       defaultValue: '',
-      toJson: overrideToJson,
+      toJson: valueOrNullToJson,
     )
-        required String salesOrderNumber,
+    required String salesOrderNumber,
     @JsonKey(
       name: 'ezrxReferenceNumber',
       defaultValue: '',
-      toJson: overrideToJson,
+      toJson: valueOrNullToJson,
     )
-        required String ezrxReferenceNumber,
+    required String ezrxReferenceNumber,
     @JsonKey(
       name: 'createdBy',
       defaultValue: '',
-      toJson: overrideToJson,
+      toJson: valueOrNullToJson,
     )
-        required String createdBy,
+    required String createdBy,
     @JsonKey(
       name: 'createdTime',
       defaultValue: '',
-      toJson: overrideToJson,
+      toJson: valueOrNullToJson,
     )
-        required String createdTime,
+    required String createdTime,
     @JsonKey(
       name: 'documentUrl',
       defaultValue: '',
-      toJson: overrideToJson,
+      toJson: valueOrNullToJson,
     )
-        required String documentUrl,
+    required String documentUrl,
     @JsonKey(
       name: 'documentName',
       defaultValue: '',
-      toJson: overrideToJson,
+      toJson: valueOrNullToJson,
     )
-        required String documentName,
+    required String documentName,
     @JsonKey(
       name: 'salesOrg',
       defaultValue: '',
-      toJson: overrideToJson,
+      toJson: valueOrNullToJson,
     )
-        required String salesOrg,
+    required String salesOrg,
     @JsonKey(
       name: 'soldToCode',
       defaultValue: '',
-      toJson: overrideToJson,
+      toJson: valueOrNullToJson,
     )
-        required String soldToCode,
+    required String soldToCode,
     @JsonKey(
       name: 'shipToCode',
       defaultValue: '',
-      toJson: overrideToJson,
+      toJson: valueOrNullToJson,
     )
-        required String shipToCode,
+    required String shipToCode,
     @JsonKey(
       name: 'tempOrderNumber',
       defaultValue: '',
-      toJson: overrideToJson,
+      toJson: valueOrNullToJson,
     )
-        required String tempOrderNumber,
+    required String tempOrderNumber,
   }) = _AdminPoAttachmentDto;
 
   factory AdminPoAttachmentDto.fromJson(Map<String, dynamic> json) =>
@@ -103,5 +104,3 @@ class AdminPoAttachmentDto with _$AdminPoAttachmentDto {
         tempOrderNumber: tempOrderNumber,
       );
 }
-
-dynamic overrideToJson(String value) => value.isNotEmpty ? value : null;

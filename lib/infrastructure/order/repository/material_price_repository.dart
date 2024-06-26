@@ -11,6 +11,7 @@ import 'package:ezrxmobile/domain/order/repository/i_material_price_repository.d
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/material_price_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/material_price_remote.dart';
+import 'package:ezrxmobile/infrastructure/order/dtos/price_dto.dart';
 
 class MaterialPriceRepository implements IMaterialPriceRepository {
   final Config config;
@@ -126,6 +127,92 @@ class MaterialPriceRepository implements IMaterialPriceRepository {
       return Right(
         price,
       );
+    } catch (e) {
+      return Left(FailureHandler.handleFailure(e));
+    }
+  }
+
+  @override
+  Future<Either<ApiFailure, Price>> getMaterialPriceWithOverride({
+    required CustomerCodeInfo customerCodeInfo,
+    required SalesOrganisation salesOrganisation,
+    required Price price,
+    required ShipToInfo shipToInfo,
+  }) async {
+    if (config.appFlavor == Flavor.mock) {
+      try {
+        final priceData = await localDataSource.getPriceList();
+
+        return price.zdp8Override.isValid()
+            ? Right(
+                priceData.first.copyWith(materialNumber: price.materialNumber),
+              )
+            : Right(
+                priceData
+                    .firstWhere(
+                      (element) =>
+                          element.materialNumber == price.materialNumber,
+                      orElse: () => priceData.first,
+                    )
+                    .copyWith(materialNumber: price.materialNumber),
+              );
+      } catch (e) {
+        return Left(
+          FailureHandler.handleFailure(e),
+        );
+      }
+    }
+    try {
+      final salesOrgCode = salesOrganisation.salesOrg.getOrCrash();
+      final customerCode = customerCodeInfo.customerCodeSoldTo;
+      final shipToCode = shipToInfo.shipToCustomerCode;
+
+      final priceData = await remoteDataSource.getMaterialOverridePriceList(
+        salesOrgCode: salesOrgCode,
+        customerCode: customerCode,
+        materialQuery: PriceDto.fromDomain(price).overrideQuery,
+        shipToCode: shipToCode,
+      );
+
+      return Right(priceData.first);
+    } catch (e) {
+      return Left(FailureHandler.handleFailure(e));
+    }
+  }
+
+  @override
+  Future<Either<ApiFailure, Price>> getMaterialPriceWithZdp5Discount({
+    required SalesOrganisation salesOrganisation,
+    required CustomerCodeInfo customerCodeInfo,
+    required ShipToInfo shipToInfo,
+    required Price price,
+    required bool exceedQuantity,
+  }) async {
+    if (config.appFlavor == Flavor.mock) {
+      try {
+        final priceData = await localDataSource.getPriceList();
+
+        return Right(priceData.first);
+      } catch (e) {
+        return Left(
+          FailureHandler.handleFailure(e),
+        );
+      }
+    }
+    try {
+      final salesOrgCode = salesOrganisation.salesOrg.getOrCrash();
+      final customerCode = customerCodeInfo.customerCodeSoldTo;
+      final shipToCode = shipToInfo.shipToCustomerCode;
+
+      final priceData = await remoteDataSource.getMaterialOverridePriceList(
+        salesOrgCode: salesOrgCode,
+        customerCode: customerCode,
+        shipToCode: shipToCode,
+        materialQuery: PriceDto.fromDomain(price)
+            .materialQueryWithExceedQty(exceedQuantity),
+      );
+
+      return Right(priceData.first);
     } catch (e) {
       return Left(FailureHandler.handleFailure(e));
     }

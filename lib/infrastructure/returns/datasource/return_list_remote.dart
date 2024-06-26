@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/core/attachment_files/entities/attachment_file_buffer.dart';
-import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_item.dart';
 import 'package:ezrxmobile/infrastructure/core/firebase/remote_config.dart';
@@ -48,7 +47,7 @@ class ReturnListRemoteDataSource {
           },
         ),
       );
-      _returnRequestTypeCodeExceptionChecker(res: res);
+      dataSourceExceptionHandler.handleExceptionChecker(res: res);
 
       return List<Map<String, dynamic>>.from(
         res.data['data']['requestsByItems']['returnRequestsByItems'],
@@ -90,7 +89,7 @@ class ReturnListRemoteDataSource {
           },
         ),
       );
-      _returnRequestTypeCodeExceptionChecker(res: res);
+      dataSourceExceptionHandler.handleExceptionChecker(res: res);
 
       return List<Map<String, dynamic>>.from(
         res.data['data']['requestsByUserV3']['returnRequests'],
@@ -117,7 +116,7 @@ class ReturnListRemoteDataSource {
           ),
           headers: {'salesorg': salesOrg},
         );
-        _returnRequestTypeCodeExceptionChecker(res: res);
+        dataSourceExceptionHandler.handleExceptionChecker(res: res);
 
         return res.data['data']['requestsByItemsExcel']['url'];
       },
@@ -141,18 +140,5 @@ class ReturnListRemoteDataSource {
         );
       },
     );
-  }
-
-  void _returnRequestTypeCodeExceptionChecker({
-    required Response<dynamic> res,
-  }) {
-    if (dataSourceExceptionHandler.isServerResponseError(res: res)) {
-      throw ServerException(message: res.data['errors'][0]['message']);
-    } else if (res.statusCode != 200) {
-      throw ServerException(
-        code: res.statusCode ?? 0,
-        message: res.statusMessage ?? '',
-      );
-    }
   }
 }

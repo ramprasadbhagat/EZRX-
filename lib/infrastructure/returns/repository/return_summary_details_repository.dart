@@ -13,15 +13,15 @@ class ReturnSummaryDetailsRepository
     implements IReturnSummaryDetailsRepository {
   final Config config;
   final ReturnSummaryDetailsRequestInformationLocal
-      returnSummaryDetailsRequestInformationLocal;
+      returnRequestInformationLocalDataSource;
   final ReturnSummaryDetailsRequestInformationRemote
-      returnSummaryDetailsRequestInformationRemote;
+      returnRequestInformationRemoteDataSource;
   final DeviceStorage deviceStorage;
 
   ReturnSummaryDetailsRepository({
     required this.config,
-    required this.returnSummaryDetailsRequestInformationLocal,
-    required this.returnSummaryDetailsRequestInformationRemote,
+    required this.returnRequestInformationLocalDataSource,
+    required this.returnRequestInformationRemoteDataSource,
     required this.deviceStorage,
   });
 
@@ -32,8 +32,8 @@ class ReturnSummaryDetailsRepository
     if (config.appFlavor == Flavor.mock) {
       try {
         final returnRequestInformation =
-            await returnSummaryDetailsRequestInformationLocal
-                .getRequestInformation();
+            await returnRequestInformationLocalDataSource
+                .getReturnRequestInformation();
 
         return Right(returnRequestInformation);
       } catch (e) {
@@ -42,8 +42,8 @@ class ReturnSummaryDetailsRepository
     }
     try {
       final returnRequestInformation =
-          await returnSummaryDetailsRequestInformationRemote
-              .getRequestInformation(
+          await returnRequestInformationRemoteDataSource
+              .getReturnRequestInformation(
         returnRequestId: returnRequestId.requestId,
         market: deviceStorage.currentMarket(),
       );

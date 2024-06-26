@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/infrastructure/core/common/json_key_converter.dart';
-import 'package:ezrxmobile/infrastructure/order/datasource/discount_override_local.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/material_price_local.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/price_dto.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:flutter/material.dart';
@@ -10,21 +10,21 @@ import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  late DiscountOverrideLocalDataSource localDataSource;
+  late MaterialPriceLocalDataSource localDataSource;
   locator.registerSingleton<Config>(Config()..appFlavor = Flavor.mock);
 
   setUpAll(
     () {
       WidgetsFlutterBinding.ensureInitialized();
-      localDataSource = DiscountOverrideLocalDataSource();
+      localDataSource = MaterialPriceLocalDataSource();
     },
   );
 
   group(
-    'Discount Override',
+    'Material Price',
     () {
       test(
-        'Get Material Override Price List',
+        'Get Material Price List',
         () async {
           final res = json.decode(
             await rootBundle

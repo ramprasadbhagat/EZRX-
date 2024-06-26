@@ -1,3 +1,4 @@
+import 'package:ezrxmobile/infrastructure/core/common/json_key_readvalue_helper.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import 'package:ezrxmobile/domain/returns/entities/user_restriction_status.dart';
@@ -13,15 +14,15 @@ class UserRestrictionStatusDto with _$UserRestrictionStatusDto {
     @JsonKey(
       name: 'approverRightStatus',
       defaultValue: '',
-      readValue: _userRestrictionOverride,
+      readValue: JsonReadValueHelper.readUserRestrictionOverride,
     )
-        required String userRestrictionStatus,
+    required String userRestrictionStatus,
     @JsonKey(
       name: 'approvalLimitStatus',
       defaultValue: false,
-      readValue: _userReturnApprovalLimitOverride,
+      readValue: JsonReadValueHelper.readUserReturnApprovalLimitOverride,
     )
-        required bool userReturnApprovalLimit,
+    required bool userReturnApprovalLimit,
   }) = _UserRestrictionStatusDto;
 
   UserRestrictionStatus toDomain() {
@@ -34,13 +35,3 @@ class UserRestrictionStatusDto with _$UserRestrictionStatusDto {
   factory UserRestrictionStatusDto.fromJson(Map<String, dynamic> json) =>
       _$UserRestrictionStatusDtoFromJson(json);
 }
-
-String _userRestrictionOverride(Map json, String _) =>
-    json['addRestriction']?['status'] ??
-    json['deleteRestriction']?['status'] ??
-    '';
-
-bool _userReturnApprovalLimitOverride(Map json, String _) =>
-    json['addReturnApprovalLimit']?['status'] ??
-    json['deleteReturnApprovalLimit']?['status'] ??
-    false;

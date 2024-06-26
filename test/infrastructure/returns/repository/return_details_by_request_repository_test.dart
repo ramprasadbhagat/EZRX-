@@ -1,30 +1,24 @@
 import 'package:ezrxmobile/domain/returns/entities/request_information.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_requests_id.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/device_storage.dart';
-import 'package:ezrxmobile/infrastructure/returns/datasource/return_details_by_request_local.dart';
-import 'package:ezrxmobile/infrastructure/returns/datasource/return_details_by_request_remote.dart';
-import 'package:ezrxmobile/infrastructure/returns/repository/return_details_by_request_repository.dart';
+import 'package:ezrxmobile/infrastructure/returns/datasource/return_summary_details_local.dart';
+import 'package:ezrxmobile/infrastructure/returns/datasource/return_summary_details_remote.dart';
+import 'package:ezrxmobile/infrastructure/returns/repository/return_summary_details_repository.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:ezrxmobile/config.dart';
 
 import '../../../common_mock_data/mock_other.dart';
-
-class ReturnSummaryDetailsByRequestLocalMock extends Mock
-    implements ReturnSummaryDetailsByRequestLocal {}
-
-class ReturnSummaryDetailsByRequestRemoteMock extends Mock
-    implements ReturnSummaryDetailsByRequestRemote {}
+import 'return_summary_details_repository_test.dart';
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
-  late ReturnDetailsByRequestRepository repository;
+  late ReturnSummaryDetailsRepository repository;
   late Config configMock;
-  late ReturnSummaryDetailsByRequestLocal
-      returnSummaryDetailsByRequestLocalMock;
-
-  late ReturnSummaryDetailsByRequestRemote
-      returnSummaryDetailsByRequestRemoteMock;
+  late ReturnSummaryDetailsRequestInformationLocal
+      returnSummaryDetailsRequestInformationLocal;
+  late ReturnSummaryDetailsRequestInformationRemote
+      returnSummaryDetailsRequestInformationRemote;
   late RequestInformation successResult;
   final errorMock = Exception('fake-error');
   const fakeId = 'mock-id';
@@ -35,20 +29,20 @@ void main() {
     () async {
       deviceStorage = DeviceStorageMock();
       configMock = ConfigMock();
-      returnSummaryDetailsByRequestLocalMock =
-          ReturnSummaryDetailsByRequestLocalMock();
-      returnSummaryDetailsByRequestRemoteMock =
-          ReturnSummaryDetailsByRequestRemoteMock();
-      repository = ReturnDetailsByRequestRepository(
+      returnSummaryDetailsRequestInformationLocal =
+          ReturnSummaryLocalDataSourceMock();
+      returnSummaryDetailsRequestInformationRemote =
+          ReturnSummaryRemoteDataSourceMock();
+      repository = ReturnSummaryDetailsRepository(
         config: configMock,
-        returnSummaryDetailsByRequestLocal:
-            returnSummaryDetailsByRequestLocalMock,
-        returnSummaryDetailsByRequestRemote:
-            returnSummaryDetailsByRequestRemoteMock,
+        returnRequestInformationLocalDataSource:
+            returnSummaryDetailsRequestInformationLocal,
+        returnRequestInformationRemoteDataSource:
+            returnSummaryDetailsRequestInformationRemote,
         deviceStorage: deviceStorage,
       );
-      successResult = await ReturnSummaryDetailsByRequestLocal()
-          .getReturnSummaryDetailsByRequest();
+      successResult = await ReturnSummaryDetailsRequestInformationLocal()
+          .getReturnRequestInformation();
     },
   );
 
@@ -60,12 +54,12 @@ void main() {
         () async {
           when(() => configMock.appFlavor).thenReturn(Flavor.mock);
           when(
-            () => returnSummaryDetailsByRequestLocalMock
-                .getReturnSummaryDetailsByRequest(),
+            () => returnSummaryDetailsRequestInformationLocal
+                .getReturnRequestInformation(),
           ).thenAnswer(
             (_) async => successResult,
           );
-          final result = await repository.getReturnSummaryDetailsByRequest(
+          final result = await repository.getReturnInformation(
             returnRequestId: ReturnRequestsId(requestId: fakeId),
           );
           expect(result.isRight(), true);
@@ -81,10 +75,10 @@ void main() {
         () async {
           when(() => configMock.appFlavor).thenReturn(Flavor.mock);
           when(
-            () => returnSummaryDetailsByRequestLocalMock
-                .getReturnSummaryDetailsByRequest(),
+            () => returnSummaryDetailsRequestInformationLocal
+                .getReturnRequestInformation(),
           ).thenThrow(errorMock);
-          final result = await repository.getReturnSummaryDetailsByRequest(
+          final result = await repository.getReturnInformation(
             returnRequestId: ReturnRequestsId(requestId: fakeId),
           );
           expect(result.isLeft(), true);
@@ -97,15 +91,15 @@ void main() {
           when(() => deviceStorage.currentMarket()).thenReturn(fakeMarket);
           when(() => configMock.appFlavor).thenReturn(Flavor.uat);
           when(
-            () => returnSummaryDetailsByRequestRemoteMock
-                .getReturnSummaryDetailsByRequest(
+            () => returnSummaryDetailsRequestInformationRemote
+                .getReturnRequestInformation(
               returnRequestId: fakeId,
               market: fakeMarket,
             ),
           ).thenAnswer(
             (_) async => successResult,
           );
-          final result = await repository.getReturnSummaryDetailsByRequest(
+          final result = await repository.getReturnInformation(
             returnRequestId: ReturnRequestsId(requestId: fakeId),
           );
           expect(result.isRight(), true);
@@ -122,13 +116,13 @@ void main() {
           when(() => deviceStorage.currentMarket()).thenReturn(fakeMarket);
           when(() => configMock.appFlavor).thenReturn(Flavor.uat);
           when(
-            () => returnSummaryDetailsByRequestRemoteMock
-                .getReturnSummaryDetailsByRequest(
+            () => returnSummaryDetailsRequestInformationRemote
+                .getReturnRequestInformation(
               returnRequestId: fakeId,
               market: fakeMarket,
             ),
           ).thenThrow(errorMock);
-          final result = await repository.getReturnSummaryDetailsByRequest(
+          final result = await repository.getReturnInformation(
             returnRequestId: ReturnRequestsId(requestId: fakeId),
           );
           expect(result.isLeft(), true);

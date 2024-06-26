@@ -19,11 +19,8 @@ mixin _$PoAttachmentEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function(
-            List<PoDocuments> files, AttachmentType attachmentType)
-        downloadFile,
-    required TResult Function(PoDocuments files, AttachmentType attachmentType)
-        openFile,
+    required TResult Function(List<PoDocuments> files) downloadFile,
+    required TResult Function(PoDocuments files) openFile,
     required TResult Function(List<PoDocuments> uploadedPODocument,
             UploadOptionType uploadOptionType, User user)
         uploadFile,
@@ -33,10 +30,8 @@ mixin _$PoAttachmentEvent {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function(List<PoDocuments> files, AttachmentType attachmentType)?
-        downloadFile,
-    TResult? Function(PoDocuments files, AttachmentType attachmentType)?
-        openFile,
+    TResult? Function(List<PoDocuments> files)? downloadFile,
+    TResult? Function(PoDocuments files)? openFile,
     TResult? Function(List<PoDocuments> uploadedPODocument,
             UploadOptionType uploadOptionType, User user)?
         uploadFile,
@@ -46,10 +41,8 @@ mixin _$PoAttachmentEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function(List<PoDocuments> files, AttachmentType attachmentType)?
-        downloadFile,
-    TResult Function(PoDocuments files, AttachmentType attachmentType)?
-        openFile,
+    TResult Function(List<PoDocuments> files)? downloadFile,
+    TResult Function(PoDocuments files)? openFile,
     TResult Function(List<PoDocuments> uploadedPODocument,
             UploadOptionType uploadOptionType, User user)?
         uploadFile,
@@ -144,11 +137,8 @@ class _$InitializedImpl implements _Initialized {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function(
-            List<PoDocuments> files, AttachmentType attachmentType)
-        downloadFile,
-    required TResult Function(PoDocuments files, AttachmentType attachmentType)
-        openFile,
+    required TResult Function(List<PoDocuments> files) downloadFile,
+    required TResult Function(PoDocuments files) openFile,
     required TResult Function(List<PoDocuments> uploadedPODocument,
             UploadOptionType uploadOptionType, User user)
         uploadFile,
@@ -161,10 +151,8 @@ class _$InitializedImpl implements _Initialized {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function(List<PoDocuments> files, AttachmentType attachmentType)?
-        downloadFile,
-    TResult? Function(PoDocuments files, AttachmentType attachmentType)?
-        openFile,
+    TResult? Function(List<PoDocuments> files)? downloadFile,
+    TResult? Function(PoDocuments files)? openFile,
     TResult? Function(List<PoDocuments> uploadedPODocument,
             UploadOptionType uploadOptionType, User user)?
         uploadFile,
@@ -177,10 +165,8 @@ class _$InitializedImpl implements _Initialized {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function(List<PoDocuments> files, AttachmentType attachmentType)?
-        downloadFile,
-    TResult Function(PoDocuments files, AttachmentType attachmentType)?
-        openFile,
+    TResult Function(List<PoDocuments> files)? downloadFile,
+    TResult Function(PoDocuments files)? openFile,
     TResult Function(List<PoDocuments> uploadedPODocument,
             UploadOptionType uploadOptionType, User user)?
         uploadFile,
@@ -244,7 +230,7 @@ abstract class _$$DownloadFileImplCopyWith<$Res> {
           _$DownloadFileImpl value, $Res Function(_$DownloadFileImpl) then) =
       __$$DownloadFileImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({List<PoDocuments> files, AttachmentType attachmentType});
+  $Res call({List<PoDocuments> files});
 }
 
 /// @nodoc
@@ -259,17 +245,12 @@ class __$$DownloadFileImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? files = null,
-    Object? attachmentType = null,
   }) {
     return _then(_$DownloadFileImpl(
       files: null == files
           ? _value._files
           : files // ignore: cast_nullable_to_non_nullable
               as List<PoDocuments>,
-      attachmentType: null == attachmentType
-          ? _value.attachmentType
-          : attachmentType // ignore: cast_nullable_to_non_nullable
-              as AttachmentType,
     ));
   }
 }
@@ -277,9 +258,7 @@ class __$$DownloadFileImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$DownloadFileImpl implements _DownloadFile {
-  const _$DownloadFileImpl(
-      {required final List<PoDocuments> files,
-      this.attachmentType = AttachmentType.downloadPOAttachment})
+  const _$DownloadFileImpl({required final List<PoDocuments> files})
       : _files = files;
 
   final List<PoDocuments> _files;
@@ -291,12 +270,8 @@ class _$DownloadFileImpl implements _DownloadFile {
   }
 
   @override
-  @JsonKey()
-  final AttachmentType attachmentType;
-
-  @override
   String toString() {
-    return 'PoAttachmentEvent.downloadFile(files: $files, attachmentType: $attachmentType)';
+    return 'PoAttachmentEvent.downloadFile(files: $files)';
   }
 
   @override
@@ -304,14 +279,12 @@ class _$DownloadFileImpl implements _DownloadFile {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$DownloadFileImpl &&
-            const DeepCollectionEquality().equals(other._files, _files) &&
-            (identical(other.attachmentType, attachmentType) ||
-                other.attachmentType == attachmentType));
+            const DeepCollectionEquality().equals(other._files, _files));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(_files), attachmentType);
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(_files));
 
   @JsonKey(ignore: true)
   @override
@@ -323,43 +296,36 @@ class _$DownloadFileImpl implements _DownloadFile {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function(
-            List<PoDocuments> files, AttachmentType attachmentType)
-        downloadFile,
-    required TResult Function(PoDocuments files, AttachmentType attachmentType)
-        openFile,
+    required TResult Function(List<PoDocuments> files) downloadFile,
+    required TResult Function(PoDocuments files) openFile,
     required TResult Function(List<PoDocuments> uploadedPODocument,
             UploadOptionType uploadOptionType, User user)
         uploadFile,
     required TResult Function(PoDocuments file) deleteFile,
   }) {
-    return downloadFile(files, attachmentType);
+    return downloadFile(files);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function(List<PoDocuments> files, AttachmentType attachmentType)?
-        downloadFile,
-    TResult? Function(PoDocuments files, AttachmentType attachmentType)?
-        openFile,
+    TResult? Function(List<PoDocuments> files)? downloadFile,
+    TResult? Function(PoDocuments files)? openFile,
     TResult? Function(List<PoDocuments> uploadedPODocument,
             UploadOptionType uploadOptionType, User user)?
         uploadFile,
     TResult? Function(PoDocuments file)? deleteFile,
   }) {
-    return downloadFile?.call(files, attachmentType);
+    return downloadFile?.call(files);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function(List<PoDocuments> files, AttachmentType attachmentType)?
-        downloadFile,
-    TResult Function(PoDocuments files, AttachmentType attachmentType)?
-        openFile,
+    TResult Function(List<PoDocuments> files)? downloadFile,
+    TResult Function(PoDocuments files)? openFile,
     TResult Function(List<PoDocuments> uploadedPODocument,
             UploadOptionType uploadOptionType, User user)?
         uploadFile,
@@ -367,7 +333,7 @@ class _$DownloadFileImpl implements _DownloadFile {
     required TResult orElse(),
   }) {
     if (downloadFile != null) {
-      return downloadFile(files, attachmentType);
+      return downloadFile(files);
     }
     return orElse();
   }
@@ -414,12 +380,10 @@ class _$DownloadFileImpl implements _DownloadFile {
 }
 
 abstract class _DownloadFile implements PoAttachmentEvent {
-  const factory _DownloadFile(
-      {required final List<PoDocuments> files,
-      final AttachmentType attachmentType}) = _$DownloadFileImpl;
+  const factory _DownloadFile({required final List<PoDocuments> files}) =
+      _$DownloadFileImpl;
 
   List<PoDocuments> get files;
-  AttachmentType get attachmentType;
   @JsonKey(ignore: true)
   _$$DownloadFileImplCopyWith<_$DownloadFileImpl> get copyWith =>
       throw _privateConstructorUsedError;
@@ -431,7 +395,7 @@ abstract class _$$OpenFileImplCopyWith<$Res> {
           _$OpenFileImpl value, $Res Function(_$OpenFileImpl) then) =
       __$$OpenFileImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({PoDocuments files, AttachmentType attachmentType});
+  $Res call({PoDocuments files});
 
   $PoDocumentsCopyWith<$Res> get files;
 }
@@ -448,17 +412,12 @@ class __$$OpenFileImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? files = null,
-    Object? attachmentType = null,
   }) {
     return _then(_$OpenFileImpl(
       files: null == files
           ? _value.files
           : files // ignore: cast_nullable_to_non_nullable
               as PoDocuments,
-      attachmentType: null == attachmentType
-          ? _value.attachmentType
-          : attachmentType // ignore: cast_nullable_to_non_nullable
-              as AttachmentType,
     ));
   }
 
@@ -474,19 +433,14 @@ class __$$OpenFileImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$OpenFileImpl implements _OpenFile {
-  const _$OpenFileImpl(
-      {required this.files,
-      this.attachmentType = AttachmentType.downloadPOAttachment});
+  const _$OpenFileImpl({required this.files});
 
   @override
   final PoDocuments files;
-  @override
-  @JsonKey()
-  final AttachmentType attachmentType;
 
   @override
   String toString() {
-    return 'PoAttachmentEvent.openFile(files: $files, attachmentType: $attachmentType)';
+    return 'PoAttachmentEvent.openFile(files: $files)';
   }
 
   @override
@@ -494,13 +448,11 @@ class _$OpenFileImpl implements _OpenFile {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$OpenFileImpl &&
-            (identical(other.files, files) || other.files == files) &&
-            (identical(other.attachmentType, attachmentType) ||
-                other.attachmentType == attachmentType));
+            (identical(other.files, files) || other.files == files));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, files, attachmentType);
+  int get hashCode => Object.hash(runtimeType, files);
 
   @JsonKey(ignore: true)
   @override
@@ -512,43 +464,36 @@ class _$OpenFileImpl implements _OpenFile {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function(
-            List<PoDocuments> files, AttachmentType attachmentType)
-        downloadFile,
-    required TResult Function(PoDocuments files, AttachmentType attachmentType)
-        openFile,
+    required TResult Function(List<PoDocuments> files) downloadFile,
+    required TResult Function(PoDocuments files) openFile,
     required TResult Function(List<PoDocuments> uploadedPODocument,
             UploadOptionType uploadOptionType, User user)
         uploadFile,
     required TResult Function(PoDocuments file) deleteFile,
   }) {
-    return openFile(files, attachmentType);
+    return openFile(files);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function(List<PoDocuments> files, AttachmentType attachmentType)?
-        downloadFile,
-    TResult? Function(PoDocuments files, AttachmentType attachmentType)?
-        openFile,
+    TResult? Function(List<PoDocuments> files)? downloadFile,
+    TResult? Function(PoDocuments files)? openFile,
     TResult? Function(List<PoDocuments> uploadedPODocument,
             UploadOptionType uploadOptionType, User user)?
         uploadFile,
     TResult? Function(PoDocuments file)? deleteFile,
   }) {
-    return openFile?.call(files, attachmentType);
+    return openFile?.call(files);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function(List<PoDocuments> files, AttachmentType attachmentType)?
-        downloadFile,
-    TResult Function(PoDocuments files, AttachmentType attachmentType)?
-        openFile,
+    TResult Function(List<PoDocuments> files)? downloadFile,
+    TResult Function(PoDocuments files)? openFile,
     TResult Function(List<PoDocuments> uploadedPODocument,
             UploadOptionType uploadOptionType, User user)?
         uploadFile,
@@ -556,7 +501,7 @@ class _$OpenFileImpl implements _OpenFile {
     required TResult orElse(),
   }) {
     if (openFile != null) {
-      return openFile(files, attachmentType);
+      return openFile(files);
     }
     return orElse();
   }
@@ -603,12 +548,9 @@ class _$OpenFileImpl implements _OpenFile {
 }
 
 abstract class _OpenFile implements PoAttachmentEvent {
-  const factory _OpenFile(
-      {required final PoDocuments files,
-      final AttachmentType attachmentType}) = _$OpenFileImpl;
+  const factory _OpenFile({required final PoDocuments files}) = _$OpenFileImpl;
 
   PoDocuments get files;
-  AttachmentType get attachmentType;
   @JsonKey(ignore: true)
   _$$OpenFileImplCopyWith<_$OpenFileImpl> get copyWith =>
       throw _privateConstructorUsedError;
@@ -725,11 +667,8 @@ class _$UpLoadFileImpl implements _UpLoadFile {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function(
-            List<PoDocuments> files, AttachmentType attachmentType)
-        downloadFile,
-    required TResult Function(PoDocuments files, AttachmentType attachmentType)
-        openFile,
+    required TResult Function(List<PoDocuments> files) downloadFile,
+    required TResult Function(PoDocuments files) openFile,
     required TResult Function(List<PoDocuments> uploadedPODocument,
             UploadOptionType uploadOptionType, User user)
         uploadFile,
@@ -742,10 +681,8 @@ class _$UpLoadFileImpl implements _UpLoadFile {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function(List<PoDocuments> files, AttachmentType attachmentType)?
-        downloadFile,
-    TResult? Function(PoDocuments files, AttachmentType attachmentType)?
-        openFile,
+    TResult? Function(List<PoDocuments> files)? downloadFile,
+    TResult? Function(PoDocuments files)? openFile,
     TResult? Function(List<PoDocuments> uploadedPODocument,
             UploadOptionType uploadOptionType, User user)?
         uploadFile,
@@ -758,10 +695,8 @@ class _$UpLoadFileImpl implements _UpLoadFile {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function(List<PoDocuments> files, AttachmentType attachmentType)?
-        downloadFile,
-    TResult Function(PoDocuments files, AttachmentType attachmentType)?
-        openFile,
+    TResult Function(List<PoDocuments> files)? downloadFile,
+    TResult Function(PoDocuments files)? openFile,
     TResult Function(List<PoDocuments> uploadedPODocument,
             UploadOptionType uploadOptionType, User user)?
         uploadFile,
@@ -904,11 +839,8 @@ class _$DeleteFileImpl implements _DeleteFile {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function(
-            List<PoDocuments> files, AttachmentType attachmentType)
-        downloadFile,
-    required TResult Function(PoDocuments files, AttachmentType attachmentType)
-        openFile,
+    required TResult Function(List<PoDocuments> files) downloadFile,
+    required TResult Function(PoDocuments files) openFile,
     required TResult Function(List<PoDocuments> uploadedPODocument,
             UploadOptionType uploadOptionType, User user)
         uploadFile,
@@ -921,10 +853,8 @@ class _$DeleteFileImpl implements _DeleteFile {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function(List<PoDocuments> files, AttachmentType attachmentType)?
-        downloadFile,
-    TResult? Function(PoDocuments files, AttachmentType attachmentType)?
-        openFile,
+    TResult? Function(List<PoDocuments> files)? downloadFile,
+    TResult? Function(PoDocuments files)? openFile,
     TResult? Function(List<PoDocuments> uploadedPODocument,
             UploadOptionType uploadOptionType, User user)?
         uploadFile,
@@ -937,10 +867,8 @@ class _$DeleteFileImpl implements _DeleteFile {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function(List<PoDocuments> files, AttachmentType attachmentType)?
-        downloadFile,
-    TResult Function(PoDocuments files, AttachmentType attachmentType)?
-        openFile,
+    TResult Function(List<PoDocuments> files)? downloadFile,
+    TResult Function(PoDocuments files)? openFile,
     TResult Function(List<PoDocuments> uploadedPODocument,
             UploadOptionType uploadOptionType, User user)?
         uploadFile,

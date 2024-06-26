@@ -14,7 +14,8 @@ _$BundleDtoImpl _$$BundleDtoImplFromJson(Map<String, dynamic> json) =>
               ?.map((e) => BundleInfoDto.fromJson(e as Map<String, dynamic>))
               .toList() ??
           [],
-      materials: (handleEmptyMaterialList(json, 'materials') as List<dynamic>)
+      materials: (JsonReadValueHelper.handleEmptyMaterialList(json, 'materials')
+              as List<dynamic>)
           .map((e) => MaterialDto.fromJson(e as Map<String, dynamic>))
           .toList(),
       conditions: json['conditions'] as String? ?? '',

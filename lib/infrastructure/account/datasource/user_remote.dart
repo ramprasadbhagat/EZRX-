@@ -5,7 +5,6 @@ import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/setting_tc.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/error/user_exception.dart';
-import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/user_query_mutation.dart';
 import 'package:ezrxmobile/infrastructure/account/dtos/user_dto.dart';
@@ -43,22 +42,18 @@ class UserRemoteDataSource {
           'variables': {'id': userId, 'ignoreCustomerCode': true},
         }),
       );
-      _userExceptionChecker(res: res);
-
+      dataSourceExceptionHandler.handleExceptionChecker(
+        res: res,
+        onCustomExceptionHandler: _userExceptionChecker,
+      );
+      
       return UserDto.fromJson(res.data['data']['user']).toDomain();
     });
   }
 
-  void _userExceptionChecker({required Response<dynamic> res}) {
-    if (dataSourceExceptionHandler.isServerResponseError(res: res)) {
-      throw ServerException(message: res.data['errors'][0]['message']);
-    } else if (res.statusCode == 404) {
+  void _userExceptionChecker(Response<dynamic> res) {
+    if (res.statusCode == 404) {
       throw const UserException.userNotFound();
-    } else if (res.statusCode != 200) {
-      throw ServerException(
-        code: res.statusCode ?? 0,
-        message: res.statusMessage ?? '',
-      );
     }
   }
 
@@ -74,7 +69,10 @@ class UserRemoteDataSource {
           },
         }),
       );
-      _userExceptionChecker(res: res);
+      dataSourceExceptionHandler.handleExceptionChecker(
+        res: res,
+        onCustomExceptionHandler: _userExceptionChecker,
+      );
 
       return SettingTcDto.fromJson(res.data['data']).toDomain();
     });
@@ -90,7 +88,10 @@ class UserRemoteDataSource {
           'variables': {'isAcceptMPTC': value},
         }),
       );
-      _userExceptionChecker(res: res);
+      dataSourceExceptionHandler.handleExceptionChecker(
+        res: res,
+        onCustomExceptionHandler: _userExceptionChecker,
+      );
 
       return SettingTcDto.fromJson(res.data['data']).toDomain();
     });
@@ -123,7 +124,10 @@ class UserRemoteDataSource {
             },
           ),
         );
-        _userExceptionChecker(res: res);
+        dataSourceExceptionHandler.handleExceptionChecker(
+        res: res,
+        onCustomExceptionHandler: _userExceptionChecker,
+      );
 
         return UserDto.fromJson(res.data['data']['updateUser']['user'])
             .toDomain();

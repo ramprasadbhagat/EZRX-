@@ -159,7 +159,7 @@ void main() {
         );
         expect(bundlesListFinder, findsNothing);
         final bundlesListItemFinder = find.byKey(
-          WidgetKeys.bundlesListItem,
+          WidgetKeys.materialListBundleCard,
         );
         expect(bundlesListItemFinder, findsNothing);
       },
@@ -195,7 +195,7 @@ void main() {
         );
         expect(bundlesListFinder, findsOneWidget);
         final bundlesListItemFinder = find.byKey(
-          WidgetKeys.bundlesListItem,
+          WidgetKeys.materialListBundleCard,
         );
         expect(bundlesListItemFinder, findsOneWidget);
       },

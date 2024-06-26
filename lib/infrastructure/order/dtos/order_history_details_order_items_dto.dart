@@ -8,7 +8,7 @@ import 'package:ezrxmobile/domain/order/entities/order_history_details_tender_co
 import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
-import 'package:ezrxmobile/infrastructure/core/common/json_key_converter.dart';
+import 'package:ezrxmobile/infrastructure/core/common/json_key_readvalue_helper.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/order_history_details_order_items_details_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/order_history_details_order_items_tender_contract_details_dto.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -44,7 +44,7 @@ class OrderHistoryDetailsOrderItemDto with _$OrderHistoryDetailsOrderItemDto {
     @JsonKey(
       name: 'IsTenderContractMaterial',
       defaultValue: false,
-      readValue: boolStringFormatCheck,
+      readValue: JsonReadValueHelper.readBoolStringFormat,
     )
     required bool isTenderContractMaterial,
     @JsonKey(name: 'ParentID', defaultValue: '') required String parentId,
@@ -55,7 +55,7 @@ class OrderHistoryDetailsOrderItemDto with _$OrderHistoryDetailsOrderItemDto {
     required List<OrderHistoryDetailsOrderItemDetailsDto> details,
     @JsonKey(
       name: 'TenderContractDetails',
-      readValue: orderHistoryDetailsOrderItemTenderContractDetailsOverride,
+      readValue: JsonReadValueHelper.readValueMapDynamic,
     )
     required OrderHistoryDetailsTenderContractDto tenderContractDetails,
     @JsonKey(name: 'PrincipalName', defaultValue: '')
@@ -66,20 +66,27 @@ class OrderHistoryDetailsOrderItemDto with _$OrderHistoryDetailsOrderItemDto {
     required String governmentMaterialCode,
     @JsonKey(name: 'ItemRegistrationNumber', defaultValue: '')
     required String itemRegistrationNumber,
-    @JsonKey(name: 'ProductType', readValue: _getProductType)
+    @JsonKey(
+      name: 'ProductType',
+      readValue: JsonReadValueHelper.readProductType,
+    )
     required String productType,
     @JsonKey(name: 'promoStatus', defaultValue: false)
     required bool promosStatus,
     @JsonKey(name: 'isCounterOffer', defaultValue: false)
     required bool isCounterOffer,
     @JsonKey(name: 'HidePrice', defaultValue: false) required bool hidePrice,
-    @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+    @JsonKey(
+      defaultValue: false,
+      readValue: JsonReadValueHelper.mappingIsMarketPlace,
+    )
     required bool isMarketPlace,
     @JsonKey(name: 'isCovid', defaultValue: false) required bool isCovid,
     @JsonKey(name: 'TotalUnitPrice', defaultValue: 0.0)
     required double totalUnitPrice,
     @JsonKey(name: 'TotalTax', defaultValue: 0.0) required double totalTax,
-    @JsonKey(name: 'TaxRate', readValue: handleTax) required double taxRate,
+    @JsonKey(name: 'TaxRate', readValue: JsonReadValueHelper.handleTax)
+    required double taxRate,
   }) = _OrderHistoryDetailsOrderItemDto;
   factory OrderHistoryDetailsOrderItemDto.fromDomain(
     OrderHistoryDetailsOrderItem orderHistoryDetailsOrderItem,
@@ -158,7 +165,7 @@ class OrderHistoryDetailsOrderItemDto with _$OrderHistoryDetailsOrderItemDto {
       parentId: parentId,
       details: details.map((e) => e.toDomain()).toList(),
       tenderContractDetails: OrderHistoryDetailsTenderContract(
-        contractNumber: TenderContractNumber.tenderContractNumber(
+        contractNumber: TenderContractNumber(
           tenderContractDetails.contractNumber,
         ),
         orderReason: TenderContractReason(tenderContractDetails.orderReason),
@@ -200,14 +207,3 @@ class OrderHistoryDetailsOrderItemDto with _$OrderHistoryDetailsOrderItemDto {
   factory OrderHistoryDetailsOrderItemDto.fromJson(Map<String, dynamic> json) =>
       _$OrderHistoryDetailsOrderItemDtoFromJson(json);
 }
-
-Map<String, dynamic> orderHistoryDetailsOrderItemTenderContractDetailsOverride(
-  Map json,
-  String key,
-) =>
-    json[key] ?? {};
-bool boolStringFormatCheck(Map json, String key) =>
-    json[key] == null || json[key] == '' ? false : json[key];
-
-String _getProductType(Map json, String key) =>
-    json[key] == null || json[key] == '' ? 'material' : json[key];

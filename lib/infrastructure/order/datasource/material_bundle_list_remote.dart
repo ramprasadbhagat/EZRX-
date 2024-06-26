@@ -1,8 +1,6 @@
 import 'dart:convert';
 
-import 'package:dio/dio.dart';
 import 'package:ezrxmobile/config.dart';
-import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/infrastructure/core/common/json_key_converter.dart';
@@ -42,7 +40,7 @@ class MaterialBundleListRemoteDataSource {
           },
         }),
       );
-      _materialBundleListExceptionChecker(res: res);
+      dataSourceExceptionHandler.handleExceptionChecker(res: res);
 
       return List.from(
         makeResponseCamelCase(
@@ -72,7 +70,7 @@ class MaterialBundleListRemoteDataSource {
           },
         }),
       );
-      _materialBundleListExceptionChecker(res: res);
+      dataSourceExceptionHandler.handleExceptionChecker(res: res);
 
       return List.from(
         makeResponseCamelCase(
@@ -80,16 +78,5 @@ class MaterialBundleListRemoteDataSource {
         ),
       ).map((e) => MaterialDto.fromJson(e).toDomain()).toList();
     });
-  }
-
-  void _materialBundleListExceptionChecker({required Response<dynamic> res}) {
-    if (dataSourceExceptionHandler.isServerResponseError(res: res)) {
-      throw ServerException(message: res.data['errors'][0]['message']);
-    } else if (res.statusCode != 200) {
-      throw ServerException(
-        code: res.statusCode ?? 0,
-        message: res.statusMessage ?? '',
-      );
-    }
   }
 }

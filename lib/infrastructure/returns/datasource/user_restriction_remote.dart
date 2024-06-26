@@ -1,8 +1,6 @@
 import 'dart:convert';
 
-import 'package:dio/dio.dart';
 import 'package:ezrxmobile/config.dart';
-import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_approval_and_approver_rights.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
@@ -49,7 +47,7 @@ class UserRestrictionRemoteDataSource {
         }),
       );
 
-      _userRestrictionExceptionChecker(res: res);
+      dataSourceExceptionHandler.handleExceptionChecker(res: res);
 
       return UserRestrictionListDto.fromJson(
         res.data['data']['approverRights'],
@@ -81,7 +79,7 @@ class UserRestrictionRemoteDataSource {
         data: jsonEncode({'query': queryData, 'variables': request}),
       );
 
-      _userRestrictionExceptionChecker(res: res);
+      dataSourceExceptionHandler.handleExceptionChecker(res: res);
 
       final finalData = res.data['data'];
 
@@ -116,7 +114,7 @@ class UserRestrictionRemoteDataSource {
         }),
       );
 
-      _userRestrictionExceptionChecker(res: res);
+      dataSourceExceptionHandler.handleExceptionChecker(res: res);
 
       final finalData = res.data['data'];
 
@@ -147,7 +145,7 @@ class UserRestrictionRemoteDataSource {
         }),
       );
 
-      _userRestrictionExceptionChecker(res: res);
+      dataSourceExceptionHandler.handleExceptionChecker(res: res);
 
       final finalData = res.data['data'];
 
@@ -178,7 +176,7 @@ class UserRestrictionRemoteDataSource {
         }),
       );
 
-      _userRestrictionExceptionChecker(res: res);
+      dataSourceExceptionHandler.handleExceptionChecker(res: res);
 
       final finalData = res.data['data'];
 
@@ -207,22 +205,11 @@ class UserRestrictionRemoteDataSource {
         }),
       );
 
-      _userRestrictionExceptionChecker(res: res);
+      dataSourceExceptionHandler.handleExceptionChecker(res: res);
 
       final finalData = res.data['data'];
 
       return UserRestrictionStatusDto.fromJson(finalData).toDomain();
     });
-  }
-
-  void _userRestrictionExceptionChecker({required Response<dynamic> res}) {
-    if (dataSourceExceptionHandler.isServerResponseError(res: res)) {
-      throw ServerException(message: res.data['errors'][0]['message']);
-    } else if (res.statusCode != 200) {
-      throw ServerException(
-        code: res.statusCode ?? 0,
-        message: res.statusMessage ?? '',
-      );
-    }
   }
 }

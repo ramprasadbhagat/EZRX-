@@ -27,10 +27,10 @@ Map<String, dynamic> _$$ComboDealMaterialSetDtoImplToJson(
 _$ComboDealMaterialDtoImpl _$$ComboDealMaterialDtoImplFromJson(
         Map<String, dynamic> json) =>
     _$ComboDealMaterialDtoImpl(
-      minQty: _readValue(json, 'minQty') == null
+      minQty: JsonReadValueHelper.handleMinQty(json, 'minQty') == null
           ? 0
-          : const StringToIntConverter()
-              .fromJson(_readValue(json, 'minQty') as String),
+          : const StringToIntConverter().fromJson(
+              JsonReadValueHelper.handleMinQty(json, 'minQty') as String),
       materialNumber: json['materialNumber'] as String? ?? '',
       rate: json['rate'] == null
           ? 0

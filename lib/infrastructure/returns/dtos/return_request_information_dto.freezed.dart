@@ -91,7 +91,8 @@ mixin _$ReturnRequestInformationDto {
   @JsonKey(name: 'priceOverrideTrail', defaultValue: <PriceOverrideTrailDto>[])
   List<PriceOverrideTrailDto> get priceOverrideTrail =>
       throw _privateConstructorUsedError;
-  @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+  @JsonKey(
+      defaultValue: false, readValue: JsonReadValueHelper.mappingIsMarketPlace)
   bool get isMarketPlace => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -156,7 +157,9 @@ abstract class $ReturnRequestInformationDtoCopyWith<$Res> {
       @JsonKey(
           name: 'priceOverrideTrail', defaultValue: <PriceOverrideTrailDto>[])
       List<PriceOverrideTrailDto> priceOverrideTrail,
-      @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+      @JsonKey(
+          defaultValue: false,
+          readValue: JsonReadValueHelper.mappingIsMarketPlace)
       bool isMarketPlace});
 }
 
@@ -402,7 +405,9 @@ abstract class _$$ReturnRequestInformationDtoImplCopyWith<$Res>
       @JsonKey(
           name: 'priceOverrideTrail', defaultValue: <PriceOverrideTrailDto>[])
       List<PriceOverrideTrailDto> priceOverrideTrail,
-      @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+      @JsonKey(
+          defaultValue: false,
+          readValue: JsonReadValueHelper.mappingIsMarketPlace)
       bool isMarketPlace});
 }
 
@@ -649,7 +654,9 @@ class _$ReturnRequestInformationDtoImpl extends _ReturnRequestInformationDto {
       @JsonKey(
           name: 'priceOverrideTrail', defaultValue: <PriceOverrideTrailDto>[])
       required final List<PriceOverrideTrailDto> priceOverrideTrail,
-      @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+      @JsonKey(
+          defaultValue: false,
+          readValue: JsonReadValueHelper.mappingIsMarketPlace)
       required this.isMarketPlace})
       : _imageUrl = imageUrl,
         _attachments = attachments,
@@ -794,7 +801,8 @@ class _$ReturnRequestInformationDtoImpl extends _ReturnRequestInformationDto {
   }
 
   @override
-  @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+  @JsonKey(
+      defaultValue: false, readValue: JsonReadValueHelper.mappingIsMarketPlace)
   final bool isMarketPlace;
 
   @override
@@ -990,7 +998,9 @@ abstract class _ReturnRequestInformationDto
       @JsonKey(
           name: 'priceOverrideTrail', defaultValue: <PriceOverrideTrailDto>[])
       required final List<PriceOverrideTrailDto> priceOverrideTrail,
-      @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+      @JsonKey(
+          defaultValue: false,
+          readValue: JsonReadValueHelper.mappingIsMarketPlace)
       required final bool isMarketPlace}) = _$ReturnRequestInformationDtoImpl;
   _ReturnRequestInformationDto._() : super._();
 
@@ -1097,7 +1107,8 @@ abstract class _ReturnRequestInformationDto
   @JsonKey(name: 'priceOverrideTrail', defaultValue: <PriceOverrideTrailDto>[])
   List<PriceOverrideTrailDto> get priceOverrideTrail;
   @override
-  @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+  @JsonKey(
+      defaultValue: false, readValue: JsonReadValueHelper.mappingIsMarketPlace)
   bool get isMarketPlace;
   @override
   @JsonKey(ignore: true)

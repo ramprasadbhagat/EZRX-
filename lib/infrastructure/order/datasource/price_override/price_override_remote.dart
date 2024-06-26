@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/error/price_override_exception.dart';
-import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:ezrxmobile/infrastructure/core/common/json_key_converter.dart';
@@ -47,7 +46,10 @@ class PriceOverrideRemoteDataSource {
         }),
       );
 
-      _priceOverrideExceptionChecker(res: priceList);
+      dataSourceExceptionHandler.handleExceptionChecker(
+        res: priceList,
+        onCustomExceptionHandler: _priceOverrideExceptionChecker,
+      );
       final finalData = priceList.data['data']['price'];
 
       return List.from(makeResponseCamelCase(jsonEncode(finalData)))
@@ -57,17 +59,12 @@ class PriceOverrideRemoteDataSource {
     });
   }
 
-  void _priceOverrideExceptionChecker({required Response<dynamic> res}) {
-    if (res.statusCode != 200) {
-      throw ServerException(
-        code: res.statusCode ?? 0,
-        message: res.statusMessage ?? '',
-      );
-    } else if (dataSourceExceptionHandler.isServerResponseError(res: res)) {
-      throw ServerException(message: res.data['errors'][0]['message']);
-    } else if (res.data['data']['price'] == null ||
-        res.data['data']['price'].isEmpty) {
-      throw const PriceException.priceNotFound();
+  void _priceOverrideExceptionChecker(Response<dynamic> res) {
+    if (res.data['data'] != null && res.data['data'].isNotEmpty) {
+      if (res.data['data']?['price'] == null ||
+          (res.data['data']?['price'] ?? []).isEmpty) {
+        throw const PriceException.priceNotFound();
+      }
     }
   }
 }

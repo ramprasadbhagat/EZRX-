@@ -118,7 +118,6 @@ void main() {
 
       final result = await poAttachmentRepository.downloadFiles(
         files: [PoDocuments.empty().copyWith(name: fakeFileName, url: fakeUrl)],
-        attachmentType: AttachmentType.downloadAttachment,
       );
       expect(
         result.isRight(),
@@ -141,7 +140,6 @@ void main() {
             url: fakeUrl,
           ),
         ],
-        attachmentType: AttachmentType.downloadAttachment,
       );
       expect(
         result.isLeft(),
@@ -175,7 +173,6 @@ void main() {
 
       final result = await poAttachmentRepository.downloadFiles(
         files: [PoDocuments.empty().copyWith(name: fakeFileName, url: fakeUrl)],
-        attachmentType: AttachmentType.downloadPOAttachment,
       );
       expect(
         result.isRight(),
@@ -199,7 +196,6 @@ void main() {
 
       final result = await poAttachmentRepository.downloadFiles(
         files: [PoDocuments.empty().copyWith(name: fakeFileName, url: fakeUrl)],
-        attachmentType: AttachmentType.downloadAttachment,
       );
       expect(
         result.isLeft(),
@@ -230,7 +226,6 @@ void main() {
 
       final result = await poAttachmentRepository.openFile(
         files: PoDocuments.empty().copyWith(name: fakeFileName, url: fakeUrl),
-        attachmentType: AttachmentType.downloadAttachment,
       );
       expect(
         result.isRight(),
@@ -260,7 +255,6 @@ void main() {
 
       final result = await poAttachmentRepository.openFile(
         files: PoDocuments.empty().copyWith(name: fakeFileName, url: fakeUrl),
-        attachmentType: AttachmentType.downloadAttachment,
       );
       expect(
         result.isRight(),
@@ -280,7 +274,6 @@ void main() {
 
       final result = await poAttachmentRepository.openFile(
         files: PoDocuments.empty().copyWith(name: fakeFileName, url: fakeUrl),
-        attachmentType: AttachmentType.downloadPOAttachment,
       );
       expect(
         result.isLeft(),
@@ -300,7 +293,6 @@ void main() {
 
       final result = await poAttachmentRepository.openFile(
         files: PoDocuments.empty().copyWith(name: fakeFileName, url: fakeUrl),
-        attachmentType: AttachmentType.downloadPOAttachment,
       );
       expect(
         result.isLeft(),
@@ -331,7 +323,6 @@ void main() {
 
       final result = await poAttachmentRepository.openFile(
         files: PoDocuments.empty().copyWith(name: fakeFileName, url: fakeUrl),
-        attachmentType: AttachmentType.downloadPOAttachment,
       );
       expect(
         result.isLeft(),
@@ -368,7 +359,6 @@ void main() {
 
       final result = await poAttachmentRepository.openFile(
         files: PoDocuments.empty().copyWith(name: fakeFileName, url: fakeUrl),
-        attachmentType: AttachmentType.downloadPOAttachment,
       );
       expect(
         result.isLeft(),

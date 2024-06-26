@@ -21,7 +21,9 @@ _$RequestInformationHeaderDtoImpl _$$RequestInformationHeaderDtoImplFromJson(
       bapiStatus: json['bapiStatus'] as String? ?? '',
       totalItemCount: json['totalItemCount'] as String? ?? '',
       isMarketPlace:
-          mappingIsMarketPlace(json, 'isMarketPlace') as bool? ?? false,
+          JsonReadValueHelper.mappingIsMarketPlace(json, 'isMarketPlace')
+                  as bool? ??
+              false,
     );
 
 Map<String, dynamic> _$$RequestInformationHeaderDtoImplToJson(

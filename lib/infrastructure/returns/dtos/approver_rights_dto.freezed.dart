@@ -23,7 +23,7 @@ mixin _$ApproverRightsDto {
   @JsonKey(
       name: 'rawMetaData',
       defaultValue: <String>[],
-      readValue: rawMetaDataOverride)
+      readValue: JsonReadValueHelper.readRawMetaDataOverride)
   List<String> get usernames => throw _privateConstructorUsedError;
   @JsonKey(name: 'approverRights', defaultValue: <ApproverRightsDetailsDto>[])
   List<ApproverRightsDetailsDto> get approverRights =>
@@ -45,7 +45,7 @@ abstract class $ApproverRightsDtoCopyWith<$Res> {
       {@JsonKey(
           name: 'rawMetaData',
           defaultValue: <String>[],
-          readValue: rawMetaDataOverride)
+          readValue: JsonReadValueHelper.readRawMetaDataOverride)
       List<String> usernames,
       @JsonKey(
           name: 'approverRights', defaultValue: <ApproverRightsDetailsDto>[])
@@ -94,7 +94,7 @@ abstract class _$$AddReturnApprovalLimitDtoImplCopyWith<$Res>
       {@JsonKey(
           name: 'rawMetaData',
           defaultValue: <String>[],
-          readValue: rawMetaDataOverride)
+          readValue: JsonReadValueHelper.readRawMetaDataOverride)
       List<String> usernames,
       @JsonKey(
           name: 'approverRights', defaultValue: <ApproverRightsDetailsDto>[])
@@ -137,7 +137,7 @@ class _$AddReturnApprovalLimitDtoImpl extends _AddReturnApprovalLimitDto {
       {@JsonKey(
           name: 'rawMetaData',
           defaultValue: <String>[],
-          readValue: rawMetaDataOverride)
+          readValue: JsonReadValueHelper.readRawMetaDataOverride)
       required final List<String> usernames,
       @JsonKey(
           name: 'approverRights', defaultValue: <ApproverRightsDetailsDto>[])
@@ -154,7 +154,7 @@ class _$AddReturnApprovalLimitDtoImpl extends _AddReturnApprovalLimitDto {
   @JsonKey(
       name: 'rawMetaData',
       defaultValue: <String>[],
-      readValue: rawMetaDataOverride)
+      readValue: JsonReadValueHelper.readRawMetaDataOverride)
   List<String> get usernames {
     if (_usernames is EqualUnmodifiableListView) return _usernames;
     // ignore: implicit_dynamic_type
@@ -213,7 +213,7 @@ abstract class _AddReturnApprovalLimitDto extends ApproverRightsDto {
           {@JsonKey(
               name: 'rawMetaData',
               defaultValue: <String>[],
-              readValue: rawMetaDataOverride)
+              readValue: JsonReadValueHelper.readRawMetaDataOverride)
           required final List<String> usernames,
           @JsonKey(
               name: 'approverRights',
@@ -229,7 +229,7 @@ abstract class _AddReturnApprovalLimitDto extends ApproverRightsDto {
   @JsonKey(
       name: 'rawMetaData',
       defaultValue: <String>[],
-      readValue: rawMetaDataOverride)
+      readValue: JsonReadValueHelper.readRawMetaDataOverride)
   List<String> get usernames;
   @override
   @JsonKey(name: 'approverRights', defaultValue: <ApproverRightsDetailsDto>[])

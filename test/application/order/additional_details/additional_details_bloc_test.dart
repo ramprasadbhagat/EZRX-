@@ -416,11 +416,11 @@ void main() {
         seed: () => AdditionalDetailsState.initial().copyWith(
           deliveryInfoData: DeliveryInfoData.empty().copyWith(
             poDocuments: [
-              PoDocuments(
+              PoDocuments.empty().copyWith(
                 name: 'fake-name1',
                 url: 'fake-name1',
               ),
-              PoDocuments(
+              PoDocuments.empty().copyWith(
                 name: 'fake-name2',
                 url: 'fake-name2',
               ),

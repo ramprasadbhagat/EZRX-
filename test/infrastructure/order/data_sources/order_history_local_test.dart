@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:ezrxmobile/config.dart';
+import 'package:ezrxmobile/infrastructure/core/common/json_key_converter.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/view_by_item_local.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/order_history_dto.dart';
 import 'package:ezrxmobile/locator.dart';
@@ -38,7 +39,11 @@ void main() {
 
           expect(
             result,
-            OrderHistoryDto.fromJson(finalData).toDomain(),
+            OrderHistoryDto.fromJson(
+              makeResponseCamelCase(
+                jsonEncode(finalData),
+              ),
+            ).toDomain(),
           );
         },
       );

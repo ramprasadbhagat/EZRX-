@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:dio/dio.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
 import 'package:ezrxmobile/infrastructure/announcement_info/dtos/announcement_article_info_dto.dart';
@@ -46,7 +45,7 @@ class ArticleInfoRemoteDataSource {
           'variables': variableData,
         }),
       );
-      _articleInfoExceptionChecker(res: res);
+      exceptionHandler.handleExceptionChecker(res: res);
       if (res.data['data']['search'] == null ||
           res.data['data']['search'].isEmpty) {
         throw OtherException();
@@ -84,7 +83,8 @@ class ArticleInfoRemoteDataSource {
           'variables': variableData,
         }),
       );
-      _articleInfoExceptionChecker(res: res);
+      //TODO: Consider to move to custom exception
+      exceptionHandler.handleExceptionChecker(res: res);
       if (res.data['data']['search'] == null ||
           res.data['data']['search'].isEmpty) {
         throw OtherException();
@@ -93,16 +93,5 @@ class ArticleInfoRemoteDataSource {
       return AnnouncementArticleInfoDto.fromJson(res.data['data']['search'])
           .toDomain;
     });
-  }
-
-  void _articleInfoExceptionChecker({required Response<dynamic> res}) {
-    if (exceptionHandler.isServerResponseError(res: res)) {
-      throw ServerException(message: res.data['errors'][0]['message']);
-    } else if (res.statusCode != 200) {
-      throw ServerException(
-        code: res.statusCode ?? 0,
-        message: res.statusMessage ?? '',
-      );
-    }
   }
 }

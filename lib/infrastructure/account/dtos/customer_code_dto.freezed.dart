@@ -82,7 +82,8 @@ mixin _$CustomerCodeDto {
   String get floor => throw _privateConstructorUsedError;
   @JsonKey(name: 'houseNumber1', defaultValue: '')
   String get houseNumber1 => throw _privateConstructorUsedError;
-  @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+  @JsonKey(
+      defaultValue: false, readValue: JsonReadValueHelper.mappingIsMarketPlace)
   bool get isMarketPlace => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -137,7 +138,9 @@ abstract class $CustomerCodeDtoCopyWith<$Res> {
       @JsonKey(name: 'country', defaultValue: '') String country,
       @JsonKey(name: 'floor', defaultValue: '') String floor,
       @JsonKey(name: 'houseNumber1', defaultValue: '') String houseNumber1,
-      @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+      @JsonKey(
+          defaultValue: false,
+          readValue: JsonReadValueHelper.mappingIsMarketPlace)
       bool isMarketPlace});
 }
 
@@ -368,7 +371,9 @@ abstract class _$$CustomerCodeDtoImplCopyWith<$Res>
       @JsonKey(name: 'country', defaultValue: '') String country,
       @JsonKey(name: 'floor', defaultValue: '') String floor,
       @JsonKey(name: 'houseNumber1', defaultValue: '') String houseNumber1,
-      @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+      @JsonKey(
+          defaultValue: false,
+          readValue: JsonReadValueHelper.mappingIsMarketPlace)
       bool isMarketPlace});
 }
 
@@ -597,7 +602,9 @@ class _$CustomerCodeDtoImpl extends _CustomerCodeDto {
       @JsonKey(name: 'floor', defaultValue: '') required this.floor,
       @JsonKey(name: 'houseNumber1', defaultValue: '')
       required this.houseNumber1,
-      @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+      @JsonKey(
+          defaultValue: false,
+          readValue: JsonReadValueHelper.mappingIsMarketPlace)
       required this.isMarketPlace})
       : _shipToInfos = shipToInfos,
         _billToInfos = billToInfos,
@@ -726,7 +733,8 @@ class _$CustomerCodeDtoImpl extends _CustomerCodeDto {
   @JsonKey(name: 'houseNumber1', defaultValue: '')
   final String houseNumber1;
   @override
-  @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+  @JsonKey(
+      defaultValue: false, readValue: JsonReadValueHelper.mappingIsMarketPlace)
   final bool isMarketPlace;
 
   @override
@@ -892,7 +900,9 @@ abstract class _CustomerCodeDto extends CustomerCodeDto {
       @JsonKey(name: 'floor', defaultValue: '') required final String floor,
       @JsonKey(name: 'houseNumber1', defaultValue: '')
       required final String houseNumber1,
-      @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+      @JsonKey(
+          defaultValue: false,
+          readValue: JsonReadValueHelper.mappingIsMarketPlace)
       required final bool isMarketPlace}) = _$CustomerCodeDtoImpl;
   const _CustomerCodeDto._() : super._();
 
@@ -993,7 +1003,8 @@ abstract class _CustomerCodeDto extends CustomerCodeDto {
   @JsonKey(name: 'houseNumber1', defaultValue: '')
   String get houseNumber1;
   @override
-  @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+  @JsonKey(
+      defaultValue: false, readValue: JsonReadValueHelper.mappingIsMarketPlace)
   bool get isMarketPlace;
   @override
   @JsonKey(ignore: true)

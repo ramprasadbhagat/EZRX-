@@ -1,4 +1,5 @@
 import 'package:ezrxmobile/domain/payments/entities/available_credit_filter.dart';
+import 'package:ezrxmobile/infrastructure/core/common/json_key_converter.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'available_credit_filter_dto.freezed.dart';
@@ -36,19 +37,6 @@ class AvailableCreditFilterDto with _$AvailableCreditFilterDto {
   factory AvailableCreditFilterDto.fromJson(Map<String, dynamic> json) =>
       _$AvailableCreditFilterDtoFromJson(json);
 
-  Map<String, String> _mapData({
-    required String field,
-    required String date,
-    required String type,
-  }) {
-    final dataMap = <String, String>{};
-    dataMap.putIfAbsent('field', () => field);
-    dataMap.putIfAbsent('value', () => date);
-    dataMap.putIfAbsent('type', () => type);
-
-    return dataMap;
-  }
-
   List<Map<String, String>> get toMapList {
     final filterMap = <Map<String, String>>[];
     if (documentDateFrom.isNotEmpty &&
@@ -56,14 +44,14 @@ class AvailableCreditFilterDto with _$AvailableCreditFilterDto {
         documentDateTo.isNotEmpty &&
         documentDateTo != '-') {
       filterMap.add(
-        _mapData(
+        mapFilterFieldData(
           field: 'documentDate',
           date: documentDateFrom,
           type: 'ge',
         ),
       );
       filterMap.add(
-        _mapData(
+        mapFilterFieldData(
           field: 'documentDate',
           date: documentDateTo,
           type: 'le',
@@ -73,14 +61,14 @@ class AvailableCreditFilterDto with _$AvailableCreditFilterDto {
     if (amountInTransactionCurrencyFrom.isNotEmpty &&
         amountInTransactionCurrencyTo.isNotEmpty) {
       filterMap.add(
-        _mapData(
+        mapFilterFieldData(
           field: 'openAmountInTransCrcy',
           date: '-$amountInTransactionCurrencyTo',
           type: 'ge',
         ),
       );
       filterMap.add(
-        _mapData(
+        mapFilterFieldData(
           field: 'openAmountInTransCrcy',
           date: '-$amountInTransactionCurrencyFrom',
           type: 'le',

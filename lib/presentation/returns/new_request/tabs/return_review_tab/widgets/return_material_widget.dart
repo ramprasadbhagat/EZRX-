@@ -57,18 +57,20 @@ class _ReturnMaterialWidget extends StatelessWidget {
           ),
           ExpandableSection(
             expanded: true,
-            children: [
-              MaterialDetailsSection(
-                key: WidgetKeys.newRequestStep3MaterialDetail,
-                data: item,
-              ),
-              _MaterialReturnDetailsSection(
-                detail: itemDetail,
-              ),
-              _BonusItemSection(
-                items: bonusItems,
-              ),
-            ],
+            child: Column(
+              children: [
+                MaterialDetailsSection(
+                  key: WidgetKeys.newRequestStep3MaterialDetail,
+                  data: item,
+                ),
+                _MaterialReturnDetailsSection(
+                  detail: itemDetail,
+                ),
+                _BonusItemSection(
+                  items: bonusItems,
+                ),
+              ],
+            ),
           ),
         ],
       ),

@@ -1,8 +1,6 @@
 import 'dart:convert';
 
-import 'package:dio/dio.dart';
 import 'package:ezrxmobile/config.dart';
-import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
 import 'package:ezrxmobile/domain/payments/entities/download_payment_attachments.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
@@ -39,26 +37,13 @@ class EInvoiceRemoteDataSource {
           data,
         ),
       );
-      _exceptionChecker(res: res);
+      exceptionHandler.handleExceptionChecker(res: res);
       if (res.data['data'] == null || res.data['data'].isEmpty) {
         return DownloadPaymentAttachment.empty();
       }
 
       return ECreditInvoiceDto.fromJson(res.data['data'][0]).toDomain();
     });
-  }
-
-  void _exceptionChecker({
-    required Response<dynamic> res,
-  }) {
-    if (exceptionHandler.isServerResponseError(res: res)) {
-      throw ServerException(message: res.data['errors'][0]['message']);
-    } else if (res.statusCode != 200) {
-      throw ServerException(
-        code: res.statusCode ?? 0,
-        message: res.statusMessage ?? '',
-      );
-    }
   }
 
   Map<String, dynamic> _getData({

@@ -63,7 +63,7 @@ mixin _$CartProductDto {
   @JsonKey(name: 'bonusMaterials', defaultValue: <BonusSampleItemDto>[])
   List<BonusSampleItemDto> get bonusMaterials =>
       throw _privateConstructorUsedError;
-  @JsonKey(name: 'taxes', readValue: handleTax)
+  @JsonKey(name: 'taxes', readValue: JsonReadValueHelper.handleTax)
   double get tax => throw _privateConstructorUsedError;
   @JsonKey(name: 'hidePrice', defaultValue: false)
   bool get hidePrice => throw _privateConstructorUsedError;
@@ -78,7 +78,8 @@ mixin _$CartProductDto {
       throw _privateConstructorUsedError; //maximumQty auto set to maximum limit if we get null from response
   @JsonKey(name: 'maximumQty', defaultValue: 99999)
   int get maximumQty => throw _privateConstructorUsedError;
-  @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+  @JsonKey(
+      defaultValue: false, readValue: JsonReadValueHelper.mappingIsMarketPlace)
   bool get isMarketPlace => throw _privateConstructorUsedError;
   @JsonKey(name: 'defaultMaterialDescription', defaultValue: '')
   String get defaultMaterialDescription => throw _privateConstructorUsedError;
@@ -148,7 +149,8 @@ abstract class $CartProductDtoCopyWith<$Res> {
       List<MaterialDto> bundleMaterials,
       @JsonKey(name: 'bonusMaterials', defaultValue: <BonusSampleItemDto>[])
       List<BonusSampleItemDto> bonusMaterials,
-      @JsonKey(name: 'taxes', readValue: handleTax) double tax,
+      @JsonKey(name: 'taxes', readValue: JsonReadValueHelper.handleTax)
+      double tax,
       @JsonKey(name: 'hidePrice', defaultValue: false) bool hidePrice,
       @JsonKey(name: 'suspensionStatus', defaultValue: false) bool isSuspended,
       @JsonKey(name: 'principalCutoffStatus', defaultValue: false)
@@ -157,7 +159,9 @@ abstract class $CartProductDtoCopyWith<$Res> {
       @JsonKey(name: 'comboMaterials', defaultValue: [])
       List<ComboMaterialItemDto> comboMaterials,
       @JsonKey(name: 'maximumQty', defaultValue: 99999) int maximumQty,
-      @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+      @JsonKey(
+          defaultValue: false,
+          readValue: JsonReadValueHelper.mappingIsMarketPlace)
       bool isMarketPlace,
       @JsonKey(name: 'defaultMaterialDescription', defaultValue: '')
       String defaultMaterialDescription,
@@ -458,7 +462,8 @@ abstract class _$$CartProductDtoImplCopyWith<$Res>
       List<MaterialDto> bundleMaterials,
       @JsonKey(name: 'bonusMaterials', defaultValue: <BonusSampleItemDto>[])
       List<BonusSampleItemDto> bonusMaterials,
-      @JsonKey(name: 'taxes', readValue: handleTax) double tax,
+      @JsonKey(name: 'taxes', readValue: JsonReadValueHelper.handleTax)
+      double tax,
       @JsonKey(name: 'hidePrice', defaultValue: false) bool hidePrice,
       @JsonKey(name: 'suspensionStatus', defaultValue: false) bool isSuspended,
       @JsonKey(name: 'principalCutoffStatus', defaultValue: false)
@@ -467,7 +472,9 @@ abstract class _$$CartProductDtoImplCopyWith<$Res>
       @JsonKey(name: 'comboMaterials', defaultValue: [])
       List<ComboMaterialItemDto> comboMaterials,
       @JsonKey(name: 'maximumQty', defaultValue: 99999) int maximumQty,
-      @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+      @JsonKey(
+          defaultValue: false,
+          readValue: JsonReadValueHelper.mappingIsMarketPlace)
       bool isMarketPlace,
       @JsonKey(name: 'defaultMaterialDescription', defaultValue: '')
       String defaultMaterialDescription,
@@ -752,7 +759,8 @@ class _$CartProductDtoImpl extends _CartProductDto {
       required final List<MaterialDto> bundleMaterials,
       @JsonKey(name: 'bonusMaterials', defaultValue: <BonusSampleItemDto>[])
       required final List<BonusSampleItemDto> bonusMaterials,
-      @JsonKey(name: 'taxes', readValue: handleTax) required this.tax,
+      @JsonKey(name: 'taxes', readValue: JsonReadValueHelper.handleTax)
+      required this.tax,
       @JsonKey(name: 'hidePrice', defaultValue: false) required this.hidePrice,
       @JsonKey(name: 'suspensionStatus', defaultValue: false)
       required this.isSuspended,
@@ -763,7 +771,9 @@ class _$CartProductDtoImpl extends _CartProductDto {
       required final List<ComboMaterialItemDto> comboMaterials,
       @JsonKey(name: 'maximumQty', defaultValue: 99999)
       required this.maximumQty,
-      @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+      @JsonKey(
+          defaultValue: false,
+          readValue: JsonReadValueHelper.mappingIsMarketPlace)
       required this.isMarketPlace,
       @JsonKey(name: 'defaultMaterialDescription', defaultValue: '')
       required this.defaultMaterialDescription,
@@ -869,7 +879,7 @@ class _$CartProductDtoImpl extends _CartProductDto {
   }
 
   @override
-  @JsonKey(name: 'taxes', readValue: handleTax)
+  @JsonKey(name: 'taxes', readValue: JsonReadValueHelper.handleTax)
   final double tax;
   @override
   @JsonKey(name: 'hidePrice', defaultValue: false)
@@ -897,7 +907,8 @@ class _$CartProductDtoImpl extends _CartProductDto {
   @JsonKey(name: 'maximumQty', defaultValue: 99999)
   final int maximumQty;
   @override
-  @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+  @JsonKey(
+      defaultValue: false, readValue: JsonReadValueHelper.mappingIsMarketPlace)
   final bool isMarketPlace;
   @override
   @JsonKey(name: 'defaultMaterialDescription', defaultValue: '')
@@ -1125,7 +1136,8 @@ abstract class _CartProductDto extends CartProductDto {
       required final List<MaterialDto> bundleMaterials,
       @JsonKey(name: 'bonusMaterials', defaultValue: <BonusSampleItemDto>[])
       required final List<BonusSampleItemDto> bonusMaterials,
-      @JsonKey(name: 'taxes', readValue: handleTax) required final double tax,
+      @JsonKey(name: 'taxes', readValue: JsonReadValueHelper.handleTax)
+      required final double tax,
       @JsonKey(name: 'hidePrice', defaultValue: false)
       required final bool hidePrice,
       @JsonKey(name: 'suspensionStatus', defaultValue: false)
@@ -1137,7 +1149,9 @@ abstract class _CartProductDto extends CartProductDto {
       required final List<ComboMaterialItemDto> comboMaterials,
       @JsonKey(name: 'maximumQty', defaultValue: 99999)
       required final int maximumQty,
-      @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+      @JsonKey(
+          defaultValue: false,
+          readValue: JsonReadValueHelper.mappingIsMarketPlace)
       required final bool isMarketPlace,
       @JsonKey(name: 'defaultMaterialDescription', defaultValue: '')
       required final String defaultMaterialDescription,
@@ -1230,7 +1244,7 @@ abstract class _CartProductDto extends CartProductDto {
   @JsonKey(name: 'bonusMaterials', defaultValue: <BonusSampleItemDto>[])
   List<BonusSampleItemDto> get bonusMaterials;
   @override
-  @JsonKey(name: 'taxes', readValue: handleTax)
+  @JsonKey(name: 'taxes', readValue: JsonReadValueHelper.handleTax)
   double get tax;
   @override
   @JsonKey(name: 'hidePrice', defaultValue: false)
@@ -1251,7 +1265,8 @@ abstract class _CartProductDto extends CartProductDto {
   @JsonKey(name: 'maximumQty', defaultValue: 99999)
   int get maximumQty;
   @override
-  @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+  @JsonKey(
+      defaultValue: false, readValue: JsonReadValueHelper.mappingIsMarketPlace)
   bool get isMarketPlace;
   @override
   @JsonKey(name: 'defaultMaterialDescription', defaultValue: '')

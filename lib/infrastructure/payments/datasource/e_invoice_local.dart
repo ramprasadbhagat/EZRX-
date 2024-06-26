@@ -7,6 +7,8 @@ import 'package:flutter/services.dart';
 class EInvoiceLocalDataSource {
   EInvoiceLocalDataSource();
 
+//Because DCM code duplication check code structure, but here we difference assets path so we ignore it
+//ignore: code-duplication
   Future<DownloadPaymentAttachment> getEInvoice() async {
     final res = json.decode(
       await rootBundle.loadString(

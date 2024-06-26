@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:ezrxmobile/domain/order/entities/invoice_data.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history.dart';
+import 'package:ezrxmobile/infrastructure/core/common/json_key_converter.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/invoice_data_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/order_history_dto.dart';
 import 'package:flutter/services.dart';
@@ -16,7 +17,11 @@ class ViewByItemLocalDataSource {
     final finalData =
         data['data']['orderHistoryFetchByItems']['OrderHistory'][0];
 
-    return OrderHistoryDto.fromJson(finalData).toDomain();
+    return OrderHistoryDto.fromJson(
+      makeResponseCamelCase(
+        jsonEncode(finalData),
+      ),
+    ).toDomain();
   }
 
   Future<List<InvoiceData>> getInvoiceDataForOrders() async {

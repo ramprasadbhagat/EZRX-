@@ -7,6 +7,6 @@ class ReturnDetailsByRequestEvent with _$ReturnDetailsByRequestEvent {
     required String returnId,
   }) = _Fetch;
   const factory ReturnDetailsByRequestEvent.downloadFile({
-    required ReturnRequestAttachment file,
+    required PoDocuments file,
   }) = _DownloadFile;
 }

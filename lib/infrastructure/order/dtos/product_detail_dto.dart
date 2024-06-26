@@ -7,7 +7,7 @@ import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
 import 'package:ezrxmobile/domain/order/entities/request_counter_offer_details.dart';
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
-import 'package:ezrxmobile/infrastructure/core/common/json_key_converter.dart';
+import 'package:ezrxmobile/infrastructure/core/common/json_key_readvalue_helper.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'product_detail_dto.freezed.dart';
@@ -52,7 +52,10 @@ class ProductDetailDto with _$ProductDetailDto {
     required bool promoStatus,
     @JsonKey(name: 'suspensionStatus', defaultValue: false)
     required bool isSuspended,
-    @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+    @JsonKey(
+      defaultValue: false,
+      readValue: JsonReadValueHelper.mappingIsMarketPlace,
+    )
     required bool isMarketPlace,
     @JsonKey(name: 'hasMandatoryTenderContract', defaultValue: false)
     required bool hasMandatoryTenderContract,
@@ -81,8 +84,8 @@ class ProductDetailDto with _$ProductDetailDto {
           countryName: StringValue(countryName),
         ),
         ean: '',
-        materialGroup2: MaterialGroup.two(''),
-        materialGroup4: MaterialGroup.four(''),
+        materialGroup2: MaterialGroup(''),
+        materialGroup4: MaterialGroup(''),
         isSampleMaterial: false,
         hasValidTenderContract: hasValidTenderContract,
         hasMandatoryTenderContract: hasMandatoryTenderContract,

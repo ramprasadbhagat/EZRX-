@@ -8,9 +8,14 @@ import 'package:flutter/services.dart';
 class MaterialListLocalDataSource {
   MaterialListLocalDataSource();
 
-  Future<MaterialResponse> getProductList() async {
+  Future<MaterialResponse> getProductList({
+    bool isComboDealMaterials = false,
+  }) async {
+    final dataPath = isComboDealMaterials
+        ? 'getComboDealDetailForPrincipleResponseK5.json'
+        : 'getAllProductsResponse.json';
     final data = json.decode(
-      await rootBundle.loadString('assets/json/getAllProductsResponse.json'),
+      await rootBundle.loadString('assets/json/$dataPath'),
     );
 
     final finalData =
@@ -29,18 +34,5 @@ class MaterialListLocalDataSource {
         makeResponseCamelCase(jsonEncode(data['data']['GetProductDetails']));
 
     return MaterialDto.fromJson(finalData).toDomain();
-  }
-
-  Future<MaterialResponse> getComboDealMaterialsPrincipalCode() async {
-    final data = json.decode(
-      await rootBundle.loadString(
-        'assets/json/getComboDealDetailForPrincipleResponseK5.json',
-      ),
-    );
-
-    final finalData =
-        makeResponseCamelCase(jsonEncode(data['data']['GetAllProducts']));
-
-    return MaterialResponseDto.fromJson(finalData).toDomain();
   }
 }

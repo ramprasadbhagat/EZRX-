@@ -40,7 +40,7 @@ _$CartProductDtoImpl _$$CartProductDtoImplFromJson(Map<String, dynamic> json) =>
                   (e) => BonusSampleItemDto.fromJson(e as Map<String, dynamic>))
               .toList() ??
           [],
-      tax: (handleTax(json, 'taxes') as num).toDouble(),
+      tax: (JsonReadValueHelper.handleTax(json, 'taxes') as num).toDouble(),
       hidePrice: json['hidePrice'] as bool? ?? false,
       isSuspended: json['suspensionStatus'] as bool? ?? false,
       isPrincipalSuspended: json['principalCutoffStatus'] as bool? ?? false,
@@ -55,7 +55,9 @@ _$CartProductDtoImpl _$$CartProductDtoImplFromJson(Map<String, dynamic> json) =>
           [],
       maximumQty: (json['maximumQty'] as num?)?.toInt() ?? 99999,
       isMarketPlace:
-          mappingIsMarketPlace(json, 'isMarketPlace') as bool? ?? false,
+          JsonReadValueHelper.mappingIsMarketPlace(json, 'isMarketPlace')
+                  as bool? ??
+              false,
       defaultMaterialDescription:
           json['defaultMaterialDescription'] as String? ?? '',
       materialGroup4: json['materialGroup4'] as String? ?? '',

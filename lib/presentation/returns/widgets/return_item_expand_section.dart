@@ -12,8 +12,8 @@ class _ReturnItemExpandSection extends StatelessWidget {
     required this.downloadAttachment,
   });
   final ReturnRequestInformation returnRequestInformation;
-  final List<ReturnRequestAttachment> downloadingAttachments;
-  final Function(ReturnRequestAttachment) downloadAttachment;
+  final List<PoDocuments> downloadingAttachments;
+  final Function(PoDocuments) downloadAttachment;
 
   @override
   Widget build(BuildContext context) {
@@ -126,8 +126,8 @@ class _ReturnDetailsSection extends StatelessWidget {
     this.isBonusDetails = false,
   });
   final ReturnRequestInformation requestInformation;
-  final List<ReturnRequestAttachment> downloadingAttachments;
-  final Function(ReturnRequestAttachment) downloadAttachment;
+  final List<PoDocuments> downloadingAttachments;
+  final Function(PoDocuments) downloadAttachment;
   final bool isBonusDetails;
   @override
   Widget build(BuildContext context) {
@@ -188,8 +188,8 @@ class _ApprovalDetailsSection extends StatelessWidget {
     this.isBonusDetails = false,
   });
   final ReturnRequestInformation requestInformation;
-  final List<ReturnRequestAttachment> downloadingAttachments;
-  final Function(ReturnRequestAttachment) downloadAttachment;
+  final List<PoDocuments> downloadingAttachments;
+  final Function(PoDocuments) downloadAttachment;
   final bool isBonusDetails;
 
   @override
@@ -229,7 +229,7 @@ class _ApprovalDetailsSection extends StatelessWidget {
               _ReturnAttachmentSection(
                 downloadingAttachments: downloadingAttachments,
                 downloadAttachment: downloadAttachment,
-                attachments: const <ReturnRequestAttachment>[],
+                attachments: const <PoDocuments>[],
               ),
               const Divider(
                 indent: 0,
@@ -250,9 +250,9 @@ class _ReturnAttachmentSection extends StatelessWidget {
     required this.downloadingAttachments,
     required this.downloadAttachment,
   });
-  final List<ReturnRequestAttachment> attachments;
-  final List<ReturnRequestAttachment> downloadingAttachments;
-  final Function(ReturnRequestAttachment) downloadAttachment;
+  final List<PoDocuments> attachments;
+  final List<PoDocuments> downloadingAttachments;
+  final Function(PoDocuments) downloadAttachment;
 
   @override
   Widget build(BuildContext context) {

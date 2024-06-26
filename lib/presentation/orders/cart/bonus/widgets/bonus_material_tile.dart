@@ -2,6 +2,7 @@ import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
+import 'package:ezrxmobile/presentation/orders/cart/bonus/widgets/bonus_item_quantity_section.dart';
 import 'package:ezrxmobile/presentation/products/widgets/stock_info.dart';
 import 'package:flutter/material.dart';
 
@@ -13,8 +14,6 @@ import 'package:ezrxmobile/presentation/core/custom_card.dart';
 import 'package:ezrxmobile/presentation/core/product_image.dart';
 
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
-
-import 'package:ezrxmobile/presentation/orders/create_order/cart_item_quantity_input.dart';
 
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 
@@ -85,7 +84,7 @@ class BonusMaterialTile extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Expanded(
-                      child: _MaterialQuantitySection(
+                      child: BonusItemQuantitySection(
                         bonusItem: bonusMaterial,
                         cartProduct: cartProduct,
                       ),
@@ -131,107 +130,6 @@ class _MaterialImageSection extends StatelessWidget {
   }
 }
 
-class _MaterialQuantitySection extends StatefulWidget {
-  final MaterialInfo bonusItem;
-  final PriceAggregate cartProduct;
-  const _MaterialQuantitySection({
-    required this.bonusItem,
-    required this.cartProduct,
-  });
-
-  @override
-  State<_MaterialQuantitySection> createState() =>
-      _MaterialQuantitySectionState();
-}
-
-class _MaterialQuantitySectionState extends State<_MaterialQuantitySection> {
-  final _controller = TextEditingController();
-
-  @override
-  void initState() {
-    _controller.value = TextEditingValue(
-      text: '0',
-      selection: TextSelection.collapsed(
-        offset: _controller.selection.base.offset,
-      ),
-    );
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<CartBloc, CartState>(
-      buildWhen: (previous, current) =>
-          previous.upsertBonusItemInProgressHashCode !=
-          current.upsertBonusItemInProgressHashCode,
-      builder: (context, state) {
-        final isBonusMaterialLoading =
-            state.upsertBonusItemInProgressHashCode.contains(
-          widget.bonusItem
-              .copyWith(
-                parentID: widget.cartProduct.materialInfo.materialNumber
-                    .getOrDefaultValue(''),
-                quantity: widget.cartProduct.totalCartProductBonusQty(
-                  context
-                      .read<BonusMaterialBloc>()
-                      .state
-                      .bonusItemID(widget.bonusItem.materialNumber),
-                  widget.bonusItem.quantity,
-                ),
-                type: MaterialInfoType(''),
-              )
-              .hashCode,
-        );
-
-        return Padding(
-          padding: const EdgeInsets.only(top: 8.0),
-          child: CartItemQuantityInput(
-            height: 40,
-            isEnabled: !isBonusMaterialLoading,
-            quantityAddKey: WidgetKeys.increaseQuantityKey,
-            quantityDeleteKey: WidgetKeys.decreaseQuantityKey,
-            quantityTextKey: WidgetKeys.quantityInputTextKey,
-            controller: _controller,
-            onFieldChange: (value) => context.read<BonusMaterialBloc>().add(
-                  BonusMaterialEvent.updateBonusItemQuantity(
-                    updatedBonusItem: widget.bonusItem.copyWith(
-                      quantity: MaterialQty(value),
-                    ),
-                  ),
-                ),
-            minusPressed: (k) => context.read<BonusMaterialBloc>().add(
-                  BonusMaterialEvent.updateBonusItemQuantity(
-                    updatedBonusItem: widget.bonusItem.copyWith(
-                      quantity: MaterialQty(k),
-                    ),
-                  ),
-                ),
-            addPressed: (k) => context.read<BonusMaterialBloc>().add(
-                  BonusMaterialEvent.updateBonusItemQuantity(
-                    updatedBonusItem: widget.bonusItem.copyWith(
-                      quantity: MaterialQty(k),
-                    ),
-                  ),
-                ),
-            onSubmit: (value) => context.read<BonusMaterialBloc>().add(
-                  BonusMaterialEvent.updateBonusItemQuantity(
-                    updatedBonusItem: widget.bonusItem.copyWith(
-                      quantity: MaterialQty(value),
-                    ),
-                  ),
-                ),
-          ),
-        );
-      },
-    );
-  }
-}
 
 class _CartIcon extends StatelessWidget {
   final MaterialInfo bonusItem;

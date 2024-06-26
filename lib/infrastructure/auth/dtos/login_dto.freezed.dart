@@ -20,9 +20,11 @@ LoginDto _$LoginDtoFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$LoginDto {
-  @JsonKey(name: 'eZRxJWT', readValue: _convertAccessToken)
+  @JsonKey(name: 'eZRxJWT', readValue: JsonReadValueHelper.convertAccessToken)
   String get access => throw _privateConstructorUsedError;
-  @JsonKey(name: 'eZRxRefreshJWT', readValue: _convertRefreshToken)
+  @JsonKey(
+      name: 'eZRxRefreshJWT',
+      readValue: JsonReadValueHelper.convertRefreshToken)
   String get refresh => throw _privateConstructorUsedError;
   @JsonKey(name: 'user')
   UserDto get user => throw _privateConstructorUsedError;
@@ -39,8 +41,12 @@ abstract class $LoginDtoCopyWith<$Res> {
       _$LoginDtoCopyWithImpl<$Res, LoginDto>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'eZRxJWT', readValue: _convertAccessToken) String access,
-      @JsonKey(name: 'eZRxRefreshJWT', readValue: _convertRefreshToken)
+      {@JsonKey(
+          name: 'eZRxJWT', readValue: JsonReadValueHelper.convertAccessToken)
+      String access,
+      @JsonKey(
+          name: 'eZRxRefreshJWT',
+          readValue: JsonReadValueHelper.convertRefreshToken)
       String refresh,
       @JsonKey(name: 'user') UserDto user});
 
@@ -98,8 +104,12 @@ abstract class _$$LoginDtoImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'eZRxJWT', readValue: _convertAccessToken) String access,
-      @JsonKey(name: 'eZRxRefreshJWT', readValue: _convertRefreshToken)
+      {@JsonKey(
+          name: 'eZRxJWT', readValue: JsonReadValueHelper.convertAccessToken)
+      String access,
+      @JsonKey(
+          name: 'eZRxRefreshJWT',
+          readValue: JsonReadValueHelper.convertRefreshToken)
       String refresh,
       @JsonKey(name: 'user') UserDto user});
 
@@ -143,9 +153,12 @@ class __$$LoginDtoImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$LoginDtoImpl extends _LoginDto {
   const _$LoginDtoImpl(
-      {@JsonKey(name: 'eZRxJWT', readValue: _convertAccessToken)
+      {@JsonKey(
+          name: 'eZRxJWT', readValue: JsonReadValueHelper.convertAccessToken)
       required this.access,
-      @JsonKey(name: 'eZRxRefreshJWT', readValue: _convertRefreshToken)
+      @JsonKey(
+          name: 'eZRxRefreshJWT',
+          readValue: JsonReadValueHelper.convertRefreshToken)
       required this.refresh,
       @JsonKey(name: 'user') this.user = UserDto.emptyUserDto})
       : super._();
@@ -154,10 +167,12 @@ class _$LoginDtoImpl extends _LoginDto {
       _$$LoginDtoImplFromJson(json);
 
   @override
-  @JsonKey(name: 'eZRxJWT', readValue: _convertAccessToken)
+  @JsonKey(name: 'eZRxJWT', readValue: JsonReadValueHelper.convertAccessToken)
   final String access;
   @override
-  @JsonKey(name: 'eZRxRefreshJWT', readValue: _convertRefreshToken)
+  @JsonKey(
+      name: 'eZRxRefreshJWT',
+      readValue: JsonReadValueHelper.convertRefreshToken)
   final String refresh;
   @override
   @JsonKey(name: 'user')
@@ -198,9 +213,12 @@ class _$LoginDtoImpl extends _LoginDto {
 
 abstract class _LoginDto extends LoginDto {
   const factory _LoginDto(
-      {@JsonKey(name: 'eZRxJWT', readValue: _convertAccessToken)
+      {@JsonKey(
+          name: 'eZRxJWT', readValue: JsonReadValueHelper.convertAccessToken)
       required final String access,
-      @JsonKey(name: 'eZRxRefreshJWT', readValue: _convertRefreshToken)
+      @JsonKey(
+          name: 'eZRxRefreshJWT',
+          readValue: JsonReadValueHelper.convertRefreshToken)
       required final String refresh,
       @JsonKey(name: 'user') final UserDto user}) = _$LoginDtoImpl;
   const _LoginDto._() : super._();
@@ -209,10 +227,12 @@ abstract class _LoginDto extends LoginDto {
       _$LoginDtoImpl.fromJson;
 
   @override
-  @JsonKey(name: 'eZRxJWT', readValue: _convertAccessToken)
+  @JsonKey(name: 'eZRxJWT', readValue: JsonReadValueHelper.convertAccessToken)
   String get access;
   @override
-  @JsonKey(name: 'eZRxRefreshJWT', readValue: _convertRefreshToken)
+  @JsonKey(
+      name: 'eZRxRefreshJWT',
+      readValue: JsonReadValueHelper.convertRefreshToken)
   String get refresh;
   @override
   @JsonKey(name: 'user')

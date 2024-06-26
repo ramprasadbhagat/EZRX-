@@ -20,11 +20,20 @@ ContactUsDetailsDto _$ContactUsDetailsDtoFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$ContactUsDetailsDto {
-  @JsonKey(name: 'content', readValue: readValue, defaultValue: '')
+  @JsonKey(
+      name: 'content',
+      readValue: JsonReadValueHelper.readValueString,
+      defaultValue: '')
   String get content => throw _privateConstructorUsedError;
-  @JsonKey(name: 'preloginSendToEmail', readValue: readValue, defaultValue: '')
+  @JsonKey(
+      name: 'preloginSendToEmail',
+      readValue: JsonReadValueHelper.readValueString,
+      defaultValue: '')
   String get preloginSendToEmail => throw _privateConstructorUsedError;
-  @JsonKey(name: 'postloginSendToEmail', readValue: readValue, defaultValue: '')
+  @JsonKey(
+      name: 'postloginSendToEmail',
+      readValue: JsonReadValueHelper.readValueString,
+      defaultValue: '')
   String get postloginSendToEmail => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -40,13 +49,20 @@ abstract class $ContactUsDetailsDtoCopyWith<$Res> {
       _$ContactUsDetailsDtoCopyWithImpl<$Res, ContactUsDetailsDto>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'content', readValue: readValue, defaultValue: '')
+      {@JsonKey(
+          name: 'content',
+          readValue: JsonReadValueHelper.readValueString,
+          defaultValue: '')
       String content,
       @JsonKey(
-          name: 'preloginSendToEmail', readValue: readValue, defaultValue: '')
+          name: 'preloginSendToEmail',
+          readValue: JsonReadValueHelper.readValueString,
+          defaultValue: '')
       String preloginSendToEmail,
       @JsonKey(
-          name: 'postloginSendToEmail', readValue: readValue, defaultValue: '')
+          name: 'postloginSendToEmail',
+          readValue: JsonReadValueHelper.readValueString,
+          defaultValue: '')
       String postloginSendToEmail});
 }
 
@@ -93,13 +109,20 @@ abstract class _$$ContactUsDetailsDtoImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'content', readValue: readValue, defaultValue: '')
+      {@JsonKey(
+          name: 'content',
+          readValue: JsonReadValueHelper.readValueString,
+          defaultValue: '')
       String content,
       @JsonKey(
-          name: 'preloginSendToEmail', readValue: readValue, defaultValue: '')
+          name: 'preloginSendToEmail',
+          readValue: JsonReadValueHelper.readValueString,
+          defaultValue: '')
       String preloginSendToEmail,
       @JsonKey(
-          name: 'postloginSendToEmail', readValue: readValue, defaultValue: '')
+          name: 'postloginSendToEmail',
+          readValue: JsonReadValueHelper.readValueString,
+          defaultValue: '')
       String postloginSendToEmail});
 }
 
@@ -139,13 +162,20 @@ class __$$ContactUsDetailsDtoImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$ContactUsDetailsDtoImpl extends _ContactUsDetailsDto {
   const _$ContactUsDetailsDtoImpl(
-      {@JsonKey(name: 'content', readValue: readValue, defaultValue: '')
+      {@JsonKey(
+          name: 'content',
+          readValue: JsonReadValueHelper.readValueString,
+          defaultValue: '')
       required this.content,
       @JsonKey(
-          name: 'preloginSendToEmail', readValue: readValue, defaultValue: '')
+          name: 'preloginSendToEmail',
+          readValue: JsonReadValueHelper.readValueString,
+          defaultValue: '')
       required this.preloginSendToEmail,
       @JsonKey(
-          name: 'postloginSendToEmail', readValue: readValue, defaultValue: '')
+          name: 'postloginSendToEmail',
+          readValue: JsonReadValueHelper.readValueString,
+          defaultValue: '')
       required this.postloginSendToEmail})
       : super._();
 
@@ -153,13 +183,22 @@ class _$ContactUsDetailsDtoImpl extends _ContactUsDetailsDto {
       _$$ContactUsDetailsDtoImplFromJson(json);
 
   @override
-  @JsonKey(name: 'content', readValue: readValue, defaultValue: '')
+  @JsonKey(
+      name: 'content',
+      readValue: JsonReadValueHelper.readValueString,
+      defaultValue: '')
   final String content;
   @override
-  @JsonKey(name: 'preloginSendToEmail', readValue: readValue, defaultValue: '')
+  @JsonKey(
+      name: 'preloginSendToEmail',
+      readValue: JsonReadValueHelper.readValueString,
+      defaultValue: '')
   final String preloginSendToEmail;
   @override
-  @JsonKey(name: 'postloginSendToEmail', readValue: readValue, defaultValue: '')
+  @JsonKey(
+      name: 'postloginSendToEmail',
+      readValue: JsonReadValueHelper.readValueString,
+      defaultValue: '')
   final String postloginSendToEmail;
 
   @override
@@ -201,13 +240,20 @@ class _$ContactUsDetailsDtoImpl extends _ContactUsDetailsDto {
 
 abstract class _ContactUsDetailsDto extends ContactUsDetailsDto {
   const factory _ContactUsDetailsDto(
-      {@JsonKey(name: 'content', readValue: readValue, defaultValue: '')
+      {@JsonKey(
+          name: 'content',
+          readValue: JsonReadValueHelper.readValueString,
+          defaultValue: '')
       required final String content,
       @JsonKey(
-          name: 'preloginSendToEmail', readValue: readValue, defaultValue: '')
+          name: 'preloginSendToEmail',
+          readValue: JsonReadValueHelper.readValueString,
+          defaultValue: '')
       required final String preloginSendToEmail,
       @JsonKey(
-          name: 'postloginSendToEmail', readValue: readValue, defaultValue: '')
+          name: 'postloginSendToEmail',
+          readValue: JsonReadValueHelper.readValueString,
+          defaultValue: '')
       required final String postloginSendToEmail}) = _$ContactUsDetailsDtoImpl;
   const _ContactUsDetailsDto._() : super._();
 
@@ -215,13 +261,22 @@ abstract class _ContactUsDetailsDto extends ContactUsDetailsDto {
       _$ContactUsDetailsDtoImpl.fromJson;
 
   @override
-  @JsonKey(name: 'content', readValue: readValue, defaultValue: '')
+  @JsonKey(
+      name: 'content',
+      readValue: JsonReadValueHelper.readValueString,
+      defaultValue: '')
   String get content;
   @override
-  @JsonKey(name: 'preloginSendToEmail', readValue: readValue, defaultValue: '')
+  @JsonKey(
+      name: 'preloginSendToEmail',
+      readValue: JsonReadValueHelper.readValueString,
+      defaultValue: '')
   String get preloginSendToEmail;
   @override
-  @JsonKey(name: 'postloginSendToEmail', readValue: readValue, defaultValue: '')
+  @JsonKey(
+      name: 'postloginSendToEmail',
+      readValue: JsonReadValueHelper.readValueString,
+      defaultValue: '')
   String get postloginSendToEmail;
   @override
   @JsonKey(ignore: true)

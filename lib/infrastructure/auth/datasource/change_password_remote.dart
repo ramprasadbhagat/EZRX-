@@ -1,9 +1,7 @@
 import 'dart:convert';
 
-import 'package:dio/dio.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/auth/entities/reset_password.dart';
-import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
 import 'package:ezrxmobile/infrastructure/auth/datasource/auth_query_mutation.dart';
 import 'package:ezrxmobile/infrastructure/auth/dtos/reset_password_dto.dart';
@@ -43,9 +41,7 @@ class ChangePasswordRemoteDataSource {
         ),
       );
 
-      _exceptionChecker(
-        res: res,
-      );
+      dataSourceExceptionHandler.handleExceptionChecker(res: res);
 
       return ResetPasswordDto.fromJson(res.data['data']['changePassword'])
           .toDomain();
@@ -73,9 +69,7 @@ class ChangePasswordRemoteDataSource {
         ),
       );
 
-      _exceptionChecker(
-        res: res,
-      );
+      dataSourceExceptionHandler.handleExceptionChecker(res: res);
 
       return ResetPasswordDto.fromJson(res.data['data']['resetPasswordV3'])
           .toDomain();
@@ -99,24 +93,11 @@ class ChangePasswordRemoteDataSource {
         ),
       );
 
-      _exceptionChecker(
-        res: res,
-      );
+      dataSourceExceptionHandler.handleExceptionChecker(res: res);
 
       return ResetPasswordDto.fromJson(
         res.data['data']['changePasswordFirstTime'],
       ).toDomain();
     });
-  }
-
-  void _exceptionChecker({required Response<dynamic> res}) {
-    if (dataSourceExceptionHandler.isServerResponseError(res: res)) {
-      throw ServerException(message: res.data['errors'][0]['message']);
-    } else if (res.statusCode != 200) {
-      throw ServerException(
-        code: res.statusCode ?? 0,
-        message: res.statusMessage ?? '',
-      );
-    }
   }
 }

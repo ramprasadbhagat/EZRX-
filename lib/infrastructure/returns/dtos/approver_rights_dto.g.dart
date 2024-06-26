@@ -9,10 +9,12 @@ part of 'approver_rights_dto.dart';
 _$AddReturnApprovalLimitDtoImpl _$$AddReturnApprovalLimitDtoImplFromJson(
         Map<String, dynamic> json) =>
     _$AddReturnApprovalLimitDtoImpl(
-      usernames: (rawMetaDataOverride(json, 'rawMetaData') as List<dynamic>?)
-              ?.map((e) => e as String)
-              .toList() ??
-          [],
+      usernames:
+          (JsonReadValueHelper.readRawMetaDataOverride(json, 'rawMetaData')
+                      as List<dynamic>?)
+                  ?.map((e) => e as String)
+                  .toList() ??
+              [],
       approverRights: (json['approverRights'] as List<dynamic>?)
               ?.map((e) =>
                   ApproverRightsDetailsDto.fromJson(e as Map<String, dynamic>))

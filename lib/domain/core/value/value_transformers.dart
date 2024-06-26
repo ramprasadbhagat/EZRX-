@@ -904,6 +904,7 @@ String getViewByItemTitle(int value) {
   }
 }
 
+//ignore: code-duplication
 String getViewByOrderHistoryTitle(int value) {
   switch (value) {
     case 0:

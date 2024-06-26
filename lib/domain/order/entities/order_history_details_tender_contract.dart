@@ -26,7 +26,7 @@ class OrderHistoryDetailsTenderContract
 
   factory OrderHistoryDetailsTenderContract.empty() =>
       OrderHistoryDetailsTenderContract(
-        contractNumber: TenderContractNumber.tenderContractNumber(''),
+        contractNumber: TenderContractNumber(''),
         orderReason: TenderContractReason(''),
         price: '',
         priceUnit: 0,

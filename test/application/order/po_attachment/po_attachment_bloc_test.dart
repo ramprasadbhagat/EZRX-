@@ -22,11 +22,11 @@ class MockFile extends Mock implements File {}
 
 void main() {
   late PoAttachmentRepository poAttachmentRepository;
-  final fakePoDocument = PoDocuments(
+  final fakePoDocument = PoDocuments.empty().copyWith(
     name: 'fake-file',
     url: 'fake-url',
   );
-  final fakePoDocument1 = PoDocuments(
+  final fakePoDocument1 = PoDocuments.empty().copyWith(
     name: 'fake-file-1',
     url: 'fake-url-1',
   );
@@ -91,7 +91,6 @@ void main() {
           when(
             () => poAttachmentRepository.downloadFiles(
               files: [fakePoDocument1],
-              attachmentType: AttachmentType.downloadPOAttachment,
             ),
           ).thenAnswer(
             (invocation) async => const Left(
@@ -129,7 +128,6 @@ void main() {
           when(
             () => poAttachmentRepository.downloadFiles(
               files: [fakePoDocument1],
-              attachmentType: AttachmentType.downloadPOAttachment,
             ),
           ).thenAnswer(
             (invocation) async => Right(file),
@@ -204,7 +202,6 @@ void main() {
           when(
             () => poAttachmentRepository.openFile(
               files: fakePoDocument1,
-              attachmentType: AttachmentType.downloadPOAttachment,
             ),
           ).thenAnswer(
             (invocation) async => const Left(
@@ -243,7 +240,6 @@ void main() {
           when(
             () => poAttachmentRepository.openFile(
               files: fakePoDocument1,
-              attachmentType: AttachmentType.downloadPOAttachment,
             ),
           ).thenAnswer(
             (invocation) async => Right(

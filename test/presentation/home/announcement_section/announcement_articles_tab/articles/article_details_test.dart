@@ -80,7 +80,7 @@ void main() {
         await tester.dragFrom(const Offset(100, 500), const Offset(100, -10));
         await tester.pump(const Duration(seconds: 4));
         final scrollToTopArrowIcon =
-            find.byKey(WidgetKeys.materialDetailsFloatingButton);
+            find.byKey(WidgetKeys.scrollToTopFloatingButton);
         final htmlBodyFinder = find.byType(Html);
         expect(htmlBodyFinder, findsOneWidget);
         await tester.drag(

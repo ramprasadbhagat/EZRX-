@@ -60,12 +60,11 @@ class TenderContractDto with _$TenderContractDto {
 
   TenderContract toDomain() {
     return TenderContract(
-      contractNumber: TenderContractNumber.tenderContractNumber(contractNumber),
-      contractItemNumber:
-          TenderContractNumber.tenderContractItemNumber(contractItemNumber),
+      contractNumber: TenderContractNumber(contractNumber),
+      contractItemNumber: TenderContractNumber(contractItemNumber),
       contractReference: StringValue(contractReference),
       tenderOrderReason: TenderContractReason(tenderOrderReason),
-      tenderVisaNumber: TenderContractNumber.tenderVisaNumber(tenderVisaNumber),
+      tenderVisaNumber: TenderContractNumber(tenderVisaNumber),
       salesDistrict: StringValue(salesDistrict),
       tenderPackageDescription: StringValue(tenderPackageDescription),
       tenderPrice: TenderPrice(tenderPrice),
@@ -73,7 +72,7 @@ class TenderContractDto with _$TenderContractDto {
       remainingTenderQuantity: remainingTenderQuantity,
       contractQuantity: contractQuantity,
       contractExpiryDate: DateTimeStringValue(contractExpiryDate),
-      announcementLetterNumber: TenderContractNumber.announcementLetterNumber(
+      announcementLetterNumber: TenderContractNumber(
         announcementLetterNumber,
       ),
       isNearToExpire: isNearToExpire,

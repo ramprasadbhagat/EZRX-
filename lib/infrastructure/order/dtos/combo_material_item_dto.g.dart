@@ -33,7 +33,7 @@ _$ComboMaterialItemDtoImpl _$$ComboMaterialItemDtoImplFromJson(
           (json['finalIndividualPrice'] as num?)?.toDouble() ?? 0.0,
       materialNumber: json['materialNumber'] as String? ?? 'EN',
       taxM1: json['taxM1'] as String? ?? '',
-      tax: (handleTax(json, 'taxes') as num).toDouble(),
+      tax: (JsonReadValueHelper.handleTax(json, 'taxes') as num).toDouble(),
       isFOCMaterial: json['isFOCMaterial'] as bool? ?? false,
       hidePrice: json['hidePrice'] as bool? ?? false,
       taxClassification: json['taxClassification'] as String? ?? '',

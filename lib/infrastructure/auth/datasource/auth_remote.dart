@@ -4,7 +4,6 @@ import 'package:dio/dio.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/auth/entities/login.dart';
 import 'package:ezrxmobile/domain/auth/error/auth_exception.dart';
-import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
 import 'package:ezrxmobile/infrastructure/auth/datasource/auth_query_mutation.dart';
 import 'package:ezrxmobile/infrastructure/auth/dtos/login_dto.dart';
@@ -48,7 +47,12 @@ class AuthRemoteDataSource {
           },
         ),
       );
-      _authExceptionChecker(res: res, jsonKey: 'loginV4');
+      dataSourceExceptionHandler.handleExceptionChecker(
+        res: res,
+        onCustomExceptionHandler: (res) {
+          _authExceptionChecker(res: res, jsonKey: 'loginV4');
+        },
+      );
 
       return LoginDto.fromJson(res.data['data']['loginV4']).toDomain();
     });
@@ -80,7 +84,12 @@ class AuthRemoteDataSource {
         ),
       );
 
-      _authExceptionChecker(res: res, jsonKey: 'loginV4');
+      dataSourceExceptionHandler.handleExceptionChecker(
+        res: res,
+        onCustomExceptionHandler: (res) {
+          _authExceptionChecker(res: res, jsonKey: 'loginV4');
+        },
+      );
 
       return LoginDto.fromJson(res.data['data']['loginV4']).toDomain();
     });
@@ -103,10 +112,15 @@ class AuthRemoteDataSource {
         ),
       );
 
-      _authExceptionChecker(
+      dataSourceExceptionHandler.handleExceptionChecker(
         res: res,
-        jsonKey: 'proxyLoginV3',
-        isProxyLogin: true,
+        onCustomExceptionHandler: (res) {
+          _authExceptionChecker(
+            res: res,
+            jsonKey: 'proxyLoginV3',
+            isProxyLogin: true,
+          );
+        },
       );
 
       return LoginDto.fromJson(res.data['data']['proxyLoginV3']).toDomain();
@@ -130,7 +144,12 @@ class AuthRemoteDataSource {
         ),
       );
 
-      _authExceptionChecker(res: res, jsonKey: 'getAccessToken');
+      dataSourceExceptionHandler.handleExceptionChecker(
+        res: res,
+        onCustomExceptionHandler: (res) {
+          _authExceptionChecker(res: res, jsonKey: 'getAccessToken');
+        },
+      );
 
       return LoginDto.fromJson(res.data['data']['getAccessToken']).toDomain();
     });
@@ -141,31 +160,18 @@ class AuthRemoteDataSource {
     required String jsonKey,
     bool isProxyLogin = false,
   }) {
-    if (res.statusCode != 200) {
-      throw ServerException(
-        code: res.statusCode ?? 0,
-        message: res.statusMessage ?? '',
-      );
-    }
+    if (res.data['data'] != null && res.data['data'].isNotEmpty) {
+      final jsonData = res.data['data'][jsonKey];
 
-    if (dataSourceExceptionHandler.isServerResponseError(res: res)) {
-      throw ServerException(message: res.data['errors'][0]['message']);
-    }
-
-    final jsonData = res.data['data'][jsonKey];
-
-    if (jsonData['authenticated'] == false) {
-      throw isProxyLogin
-          ? const AuthException.accountBlocked()
-          : const AuthException.invalidEmailAndPasswordCombination();
-    }
-
-    if (jsonData['isAccountLocked'] == true) {
-      throw const AuthException.accountLocked();
-    }
-
-    if (jsonData['isAccountExpired'] == true) {
-      throw const AuthException.accountExpired();
+      if (jsonData['authenticated'] == false) {
+        throw isProxyLogin
+            ? const AuthException.accountBlocked()
+            : const AuthException.invalidEmailAndPasswordCombination();
+      } else if (jsonData['isAccountLocked'] == true) {
+        throw const AuthException.accountLocked();
+      } else if (jsonData['isAccountExpired'] == true) {
+        throw const AuthException.accountExpired();
+      }
     }
   }
 }

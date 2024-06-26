@@ -11,6 +11,37 @@ import 'package:flutter/services.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/cart_product_dto.dart';
 import 'package:ezrxmobile/domain/order/entities/apl_simulator_order.dart';
 
+enum UpsertCartLocalType {
+  upsertCart,
+  upsertCartItems,
+  upsertCartItemsComboOffer,
+  upsertCartItemsReorder,
+}
+
+extension on UpsertCartLocalType {
+  String get mockDataPath {
+    switch (this) {
+      case UpsertCartLocalType.upsertCart:
+        return 'upsertQueryResponse.json';
+      case UpsertCartLocalType.upsertCartItems:
+        return 'upsertItemsQueryResponse.json';
+      case UpsertCartLocalType.upsertCartItemsComboOffer:
+        return 'upsertCartItemsWithComboOffersResponse.json';
+      case UpsertCartLocalType.upsertCartItemsReorder:
+        return 'upsertCartItemsWithReorderMaterialsResponse.json';
+    }
+  }
+
+  String get jsonDataKey {
+    switch (this) {
+      case UpsertCartLocalType.upsertCart:
+        return 'upsertCart';
+      default:
+        return 'upsertCartItems';
+    }
+  }
+}
+
 class CartLocalDataSource {
   CartLocalDataSource();
 
@@ -25,48 +56,13 @@ class CartLocalDataSource {
         .toDomain();
   }
 
-  Future<List<PriceAggregate>> upsertCart() async {
+  Future<List<PriceAggregate>> upsertCart({
+    UpsertCartLocalType type = UpsertCartLocalType.upsertCart,
+  }) async {
     final data = json.decode(
-      await rootBundle.loadString('assets/json/upsertQueryResponse.json'),
+      await rootBundle.loadString('assets/json/${type.mockDataPath}'),
     );
-    final products = data['data']['upsertCart']['EzRxItems'];
-
-    return List.from(makeResponseCamelCase(jsonEncode(products)))
-        .map((e) => CartProductDto.fromJson(e).toDomain)
-        .toList();
-  }
-
-  Future<List<PriceAggregate>> upsertCartItems() async {
-    final data = json.decode(
-      await rootBundle.loadString('assets/json/upsertItemsQueryResponse.json'),
-    );
-    final products = data['data']['upsertCartItems']['EzRxItems'];
-
-    return List.from(makeResponseCamelCase(jsonEncode(products)))
-        .map((e) => CartProductDto.fromJson(e).toDomain)
-        .toList();
-  }
-
-  Future<List<PriceAggregate>> upsertCartItemsWithComboOffers() async {
-    final data = json.decode(
-      await rootBundle.loadString(
-        'assets/json/upsertCartItemsWithComboOffersResponse.json',
-      ),
-    );
-    final products = data['data']['upsertCartItems']['EzRxItems'];
-
-    return List.from(makeResponseCamelCase(jsonEncode(products)))
-        .map((e) => CartProductDto.fromJson(e).toDomain)
-        .toList();
-  }
-
-  Future<List<PriceAggregate>> upsertCartItemsWithReorderMaterials() async {
-    final data = json.decode(
-      await rootBundle.loadString(
-        'assets/json/upsertCartItemsWithReorderMaterialsResponse.json',
-      ),
-    );
-    final products = data['data']['upsertCartItems']['EzRxItems'];
+    final products = data['data'][type.jsonDataKey]['EzRxItems'];
 
     return List.from(makeResponseCamelCase(jsonEncode(products)))
         .map((e) => CartProductDto.fromJson(e).toDomain)

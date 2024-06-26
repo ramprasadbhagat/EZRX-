@@ -12,9 +12,9 @@ part 'order_history_dto.g.dart';
 class OrderHistoryDto with _$OrderHistoryDto {
   const OrderHistoryDto._();
   const factory OrderHistoryDto({
-    @JsonKey(name: 'OrderBasicInformation')
+    @JsonKey(name: 'orderBasicInformation')
         required OrderHistoryBasicInfoDto orderBasicInformation,
-    @JsonKey(name: 'OrderItems') required List<OrderHistoryItemDto> orderItems,
+    @JsonKey(name: 'orderItems') required List<OrderHistoryItemDto> orderItems,
   }) = _OrderHistoryDto;
   factory OrderHistoryDto.fromDomain(
     OrderHistory orderHistory,

@@ -15,8 +15,9 @@ run_test:
 	@fvm flutter analyze --fatal-infos --fatal-warnings
 	@dcm analyze lib --fatal-style --fatal-performance --fatal-warnings
 	@dcm check-parameters lib --fatal-found
+	@dcm check-code-duplication lib --fatal-found
 	@dcm check-unused-code lib --fatal-unused
-	@dcm check-dependencies lib test --ignored-packages auto_route_generator,flutter_launcher_icons,flutter_native_splash,json_serializable,hive_generator,scandit_flutter_datacapture_core --fatal-found
+	@dcm check-dependencies lib test integration_test --ignored-packages auto_route_generator,flutter_launcher_icons,flutter_native_splash,json_serializable,hive_generator,scandit_flutter_datacapture_core --fatal-found
 	@dcm check-unused-files lib --fatal-unused
 	@fvm flutter test --coverage && genhtml coverage/lcov.info -o coverage/html && open coverage/html/index.html
 run_uat_test:

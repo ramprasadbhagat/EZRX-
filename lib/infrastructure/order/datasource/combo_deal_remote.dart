@@ -1,8 +1,6 @@
 import 'dart:convert';
 
-import 'package:dio/dio.dart';
 import 'package:ezrxmobile/config.dart';
-import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
 import 'package:ezrxmobile/domain/order/entities/combo_deal.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
@@ -47,7 +45,7 @@ class ComboDealRemoteDataSource {
           'variables': variables,
         }),
       );
-      _comboDealExceptionChecker(res: res);
+      dataSourceExceptionHandler.handleExceptionChecker(res: res);
       final combos = res.data['data']['comboDealForMaterials'];
 
       return List.from(combos)
@@ -79,21 +77,11 @@ class ComboDealRemoteDataSource {
           'variables': variables,
         }),
       );
-      _comboDealExceptionChecker(res: res);
+      dataSourceExceptionHandler.handleExceptionChecker(res: res);
+
       final combo = res.data['data']['comboDealForPrincMatGrp'];
 
       return ComboDealDto.fromJson(combo).toDomain;
     });
-  }
-
-  void _comboDealExceptionChecker({required Response<dynamic> res}) {
-    if (dataSourceExceptionHandler.isServerResponseError(res: res)) {
-      throw ServerException(message: res.data['errors'][0]['message']);
-    } else if (res.statusCode != 200) {
-      throw ServerException(
-        code: res.statusCode ?? 0,
-        message: res.statusMessage ?? '',
-      );
-    }
   }
 }

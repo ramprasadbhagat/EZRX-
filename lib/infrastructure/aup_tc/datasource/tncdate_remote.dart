@@ -1,4 +1,3 @@
-import 'package:dio/dio.dart';
 import 'package:ezrxmobile/domain/aup_tc/entities/tncdate.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
@@ -21,26 +20,17 @@ class AcceptanceDateRemoteDataSource {
         url: '/api/tncdate',
         data: {},
       );
-      _tncExceptionChecker(res: res);
-      if (res.data['date'].isEmpty) {
-        throw OtherException(message: '');
-      }
+
+      exceptionHandler.handleExceptionChecker(
+        res: res,
+        onCustomExceptionHandler: (res) {
+          if (res.data['date'] != null &&res.data['date'].isEmpty) {
+            throw OtherException(message: '');
+          }
+        },
+      );
 
       return TncDateDto.fromJson(res.data).toDomain();
     });
-  }
-
-  void _tncExceptionChecker({required Response<dynamic> res}) {
-    if (exceptionHandler.isServerResponseError(
-      res: res,
-      additionalCondition: res.data['date'] == null,
-    )) {
-      throw ServerException(message: res.data['errors'][0]['message']);
-    } else if (res.statusCode != 200) {
-      throw ServerException(
-        code: res.statusCode ?? 0,
-        message: res.statusMessage ?? '',
-      );
-    }
   }
 }

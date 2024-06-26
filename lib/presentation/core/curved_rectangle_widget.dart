@@ -133,6 +133,7 @@ class _CurvedRectangle extends CustomPainter {
     _paintCurvedRectangle(canvas, size, newPaint);
   }
 
+  //ignore: code-duplication
   @override
   bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
 }

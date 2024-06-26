@@ -20,7 +20,10 @@ FAQInfoDto _$FAQInfoDtoFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$FAQInfoDto {
-  @JsonKey(name: 'pageInfo', defaultValue: '', readValue: getEndCursorValue)
+  @JsonKey(
+      name: 'pageInfo',
+      defaultValue: '',
+      readValue: JsonReadValueHelper.readEndCursorValue)
   String get endCursor => throw _privateConstructorUsedError;
   @JsonKey(name: 'results', defaultValue: <FAQItemDto>[])
   List<FAQItemDto> get faqList => throw _privateConstructorUsedError;
@@ -39,7 +42,9 @@ abstract class $FAQInfoDtoCopyWith<$Res> {
   @useResult
   $Res call(
       {@JsonKey(
-          name: 'pageInfo', defaultValue: '', readValue: getEndCursorValue)
+          name: 'pageInfo',
+          defaultValue: '',
+          readValue: JsonReadValueHelper.readEndCursorValue)
       String endCursor,
       @JsonKey(name: 'results', defaultValue: <FAQItemDto>[])
       List<FAQItemDto> faqList});
@@ -84,7 +89,9 @@ abstract class _$$FAQInfoDtoImplCopyWith<$Res>
   @useResult
   $Res call(
       {@JsonKey(
-          name: 'pageInfo', defaultValue: '', readValue: getEndCursorValue)
+          name: 'pageInfo',
+          defaultValue: '',
+          readValue: JsonReadValueHelper.readEndCursorValue)
       String endCursor,
       @JsonKey(name: 'results', defaultValue: <FAQItemDto>[])
       List<FAQItemDto> faqList});
@@ -122,7 +129,9 @@ class __$$FAQInfoDtoImplCopyWithImpl<$Res>
 class _$FAQInfoDtoImpl extends _FAQInfoDto {
   const _$FAQInfoDtoImpl(
       {@JsonKey(
-          name: 'pageInfo', defaultValue: '', readValue: getEndCursorValue)
+          name: 'pageInfo',
+          defaultValue: '',
+          readValue: JsonReadValueHelper.readEndCursorValue)
       required this.endCursor,
       @JsonKey(name: 'results', defaultValue: <FAQItemDto>[])
       required final List<FAQItemDto> faqList})
@@ -133,7 +142,10 @@ class _$FAQInfoDtoImpl extends _FAQInfoDto {
       _$$FAQInfoDtoImplFromJson(json);
 
   @override
-  @JsonKey(name: 'pageInfo', defaultValue: '', readValue: getEndCursorValue)
+  @JsonKey(
+      name: 'pageInfo',
+      defaultValue: '',
+      readValue: JsonReadValueHelper.readEndCursorValue)
   final String endCursor;
   final List<FAQItemDto> _faqList;
   @override
@@ -181,7 +193,9 @@ class _$FAQInfoDtoImpl extends _FAQInfoDto {
 abstract class _FAQInfoDto extends FAQInfoDto {
   const factory _FAQInfoDto(
       {@JsonKey(
-          name: 'pageInfo', defaultValue: '', readValue: getEndCursorValue)
+          name: 'pageInfo',
+          defaultValue: '',
+          readValue: JsonReadValueHelper.readEndCursorValue)
       required final String endCursor,
       @JsonKey(name: 'results', defaultValue: <FAQItemDto>[])
       required final List<FAQItemDto> faqList}) = _$FAQInfoDtoImpl;
@@ -191,7 +205,10 @@ abstract class _FAQInfoDto extends FAQInfoDto {
       _$FAQInfoDtoImpl.fromJson;
 
   @override
-  @JsonKey(name: 'pageInfo', defaultValue: '', readValue: getEndCursorValue)
+  @JsonKey(
+      name: 'pageInfo',
+      defaultValue: '',
+      readValue: JsonReadValueHelper.readEndCursorValue)
   String get endCursor;
   @override
   @JsonKey(name: 'results', defaultValue: <FAQItemDto>[])

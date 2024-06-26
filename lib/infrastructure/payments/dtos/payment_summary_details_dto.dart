@@ -1,6 +1,7 @@
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_item.dart';
 import 'package:ezrxmobile/domain/payments/value/value_object.dart';
+import 'package:ezrxmobile/infrastructure/core/common/json_key_readvalue_helper.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import 'package:ezrxmobile/domain/payments/entities/payment_summary_details.dart';
@@ -16,7 +17,11 @@ class PaymentSummaryDetailsDto with _$PaymentSummaryDetailsDto {
 
   const factory PaymentSummaryDetailsDto({
     @JsonKey(name: 'paymentID', defaultValue: '') required String paymentID,
-    @JsonKey(name: 'valueDate', defaultValue: '', readValue: paymentDate)
+    @JsonKey(
+      name: 'valueDate',
+      defaultValue: '',
+      readValue: JsonReadValueHelper.createdAtDate,
+    )
     required String valueDate,
     @JsonKey(name: 'paymentAmount', defaultValue: 0.0)
     required double paymentAmount,
@@ -47,7 +52,11 @@ class PaymentSummaryDetailsDto with _$PaymentSummaryDetailsDto {
     @JsonKey(name: 'customId', defaultValue: '') required String customId,
     @JsonKey(name: 'bankIdentification', defaultValue: '')
     required String bankIdentification,
-    @JsonKey(name: 'createdDate', defaultValue: '', readValue: createdAtDate)
+    @JsonKey(
+      name: 'createdDate',
+      defaultValue: '',
+      readValue: JsonReadValueHelper.createdAtDate,
+    )
     required String createdDate,
     @JsonKey(name: 'zzAdvice', defaultValue: '') required String zzAdvice,
     @JsonKey(name: 'adviceExpiry', defaultValue: '')
@@ -139,12 +148,6 @@ class PaymentSummaryDetailsDto with _$PaymentSummaryDetailsDto {
   factory PaymentSummaryDetailsDto.fromJson(Map<String, dynamic> json) =>
       _$PaymentSummaryDetailsDtoFromJson(json);
 }
-
-String createdAtDate(Map json, String key) =>
-    json[key]?.replaceAll('-', '') ?? '';
-
-String paymentDate(Map json, String key) =>
-    json[key]?.replaceAll('-', '') ?? '';
 
 Map<String, dynamic> _filterByToJson(
   String paymentID,

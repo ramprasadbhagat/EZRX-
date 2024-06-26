@@ -50,7 +50,8 @@ mixin _$ReturnItemDto {
   String get expiry => throw _privateConstructorUsedError;
   @JsonKey(name: 'prsfd', defaultValue: '')
   String get prsfd => throw _privateConstructorUsedError;
-  @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+  @JsonKey(
+      defaultValue: false, readValue: JsonReadValueHelper.mappingIsMarketPlace)
   bool get isMarketPlace => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -82,7 +83,9 @@ abstract class $ReturnItemDtoCopyWith<$Res> {
       @JsonKey(name: 'outsidePolicy', defaultValue: false) bool outsidePolicy,
       @JsonKey(name: 'expiry', defaultValue: '') String expiry,
       @JsonKey(name: 'prsfd', defaultValue: '') String prsfd,
-      @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+      @JsonKey(
+          defaultValue: false,
+          readValue: JsonReadValueHelper.mappingIsMarketPlace)
       bool isMarketPlace});
 }
 
@@ -210,7 +213,9 @@ abstract class _$$ReturnItemDtoImplCopyWith<$Res>
       @JsonKey(name: 'outsidePolicy', defaultValue: false) bool outsidePolicy,
       @JsonKey(name: 'expiry', defaultValue: '') String expiry,
       @JsonKey(name: 'prsfd', defaultValue: '') String prsfd,
-      @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+      @JsonKey(
+          defaultValue: false,
+          readValue: JsonReadValueHelper.mappingIsMarketPlace)
       bool isMarketPlace});
 }
 
@@ -335,7 +340,9 @@ class _$ReturnItemDtoImpl extends _ReturnItemDto {
       required this.outsidePolicy,
       @JsonKey(name: 'expiry', defaultValue: '') required this.expiry,
       @JsonKey(name: 'prsfd', defaultValue: '') required this.prsfd,
-      @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+      @JsonKey(
+          defaultValue: false,
+          readValue: JsonReadValueHelper.mappingIsMarketPlace)
       required this.isMarketPlace})
       : super._();
 
@@ -388,7 +395,8 @@ class _$ReturnItemDtoImpl extends _ReturnItemDto {
   @JsonKey(name: 'prsfd', defaultValue: '')
   final String prsfd;
   @override
-  @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+  @JsonKey(
+      defaultValue: false, readValue: JsonReadValueHelper.mappingIsMarketPlace)
   final bool isMarketPlace;
 
   @override
@@ -495,7 +503,9 @@ abstract class _ReturnItemDto extends ReturnItemDto {
       required final bool outsidePolicy,
       @JsonKey(name: 'expiry', defaultValue: '') required final String expiry,
       @JsonKey(name: 'prsfd', defaultValue: '') required final String prsfd,
-      @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+      @JsonKey(
+          defaultValue: false,
+          readValue: JsonReadValueHelper.mappingIsMarketPlace)
       required final bool isMarketPlace}) = _$ReturnItemDtoImpl;
   const _ReturnItemDto._() : super._();
 
@@ -548,7 +558,8 @@ abstract class _ReturnItemDto extends ReturnItemDto {
   @JsonKey(name: 'prsfd', defaultValue: '')
   String get prsfd;
   @override
-  @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+  @JsonKey(
+      defaultValue: false, readValue: JsonReadValueHelper.mappingIsMarketPlace)
   bool get isMarketPlace;
   @override
   @JsonKey(ignore: true)

@@ -18,6 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$PoDocuments {
   String get url => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
+  FileSize get size => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $PoDocumentsCopyWith<PoDocuments> get copyWith =>
@@ -30,7 +31,7 @@ abstract class $PoDocumentsCopyWith<$Res> {
           PoDocuments value, $Res Function(PoDocuments) then) =
       _$PoDocumentsCopyWithImpl<$Res, PoDocuments>;
   @useResult
-  $Res call({String url, String name});
+  $Res call({String url, String name, FileSize size});
 }
 
 /// @nodoc
@@ -48,6 +49,7 @@ class _$PoDocumentsCopyWithImpl<$Res, $Val extends PoDocuments>
   $Res call({
     Object? url = null,
     Object? name = null,
+    Object? size = null,
   }) {
     return _then(_value.copyWith(
       url: null == url
@@ -58,6 +60,10 @@ class _$PoDocumentsCopyWithImpl<$Res, $Val extends PoDocuments>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
+      size: null == size
+          ? _value.size
+          : size // ignore: cast_nullable_to_non_nullable
+              as FileSize,
     ) as $Val);
   }
 }
@@ -70,7 +76,7 @@ abstract class _$$PoDocumentsImplCopyWith<$Res>
       __$$PoDocumentsImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String url, String name});
+  $Res call({String url, String name, FileSize size});
 }
 
 /// @nodoc
@@ -86,6 +92,7 @@ class __$$PoDocumentsImplCopyWithImpl<$Res>
   $Res call({
     Object? url = null,
     Object? name = null,
+    Object? size = null,
   }) {
     return _then(_$PoDocumentsImpl(
       url: null == url
@@ -96,6 +103,10 @@ class __$$PoDocumentsImplCopyWithImpl<$Res>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
+      size: null == size
+          ? _value.size
+          : size // ignore: cast_nullable_to_non_nullable
+              as FileSize,
     ));
   }
 }
@@ -103,16 +114,19 @@ class __$$PoDocumentsImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$PoDocumentsImpl extends _PoDocuments {
-  _$PoDocumentsImpl({required this.url, required this.name}) : super._();
+  _$PoDocumentsImpl({required this.url, required this.name, required this.size})
+      : super._();
 
   @override
   final String url;
   @override
   final String name;
+  @override
+  final FileSize size;
 
   @override
   String toString() {
-    return 'PoDocuments(url: $url, name: $name)';
+    return 'PoDocuments(url: $url, name: $name, size: $size)';
   }
 
   @override
@@ -121,11 +135,12 @@ class _$PoDocumentsImpl extends _PoDocuments {
         (other.runtimeType == runtimeType &&
             other is _$PoDocumentsImpl &&
             (identical(other.url, url) || other.url == url) &&
-            (identical(other.name, name) || other.name == name));
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.size, size) || other.size == size));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, url, name);
+  int get hashCode => Object.hash(runtimeType, url, name, size);
 
   @JsonKey(ignore: true)
   @override
@@ -137,13 +152,16 @@ class _$PoDocumentsImpl extends _PoDocuments {
 abstract class _PoDocuments extends PoDocuments {
   factory _PoDocuments(
       {required final String url,
-      required final String name}) = _$PoDocumentsImpl;
+      required final String name,
+      required final FileSize size}) = _$PoDocumentsImpl;
   _PoDocuments._() : super._();
 
   @override
   String get url;
   @override
   String get name;
+  @override
+  FileSize get size;
   @override
   @JsonKey(ignore: true)
   _$$PoDocumentsImplCopyWith<_$PoDocumentsImpl> get copyWith =>

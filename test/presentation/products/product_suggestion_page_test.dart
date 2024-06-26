@@ -15,7 +15,7 @@ import 'package:ezrxmobile/domain/order/entities/product_suggestion_history.dart
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/clevertap/clevertap_service.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
-import 'package:ezrxmobile/infrastructure/order/datasource/product_search_local.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/material_list_local.dart';
 import 'package:ezrxmobile/presentation/core/custom_search_bar.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
@@ -60,7 +60,7 @@ void main() {
     locator.registerLazySingleton(() => AppRouter());
     autoRouterMock = locator<AppRouter>();
     materialSearchResults =
-        (await ProductSearchLocalDataSource().getSearchedProductList())
+        (await MaterialListLocalDataSource().getProductList())
             .products;
   });
 

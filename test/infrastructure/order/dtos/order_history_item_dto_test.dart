@@ -1,3 +1,6 @@
+import 'dart:convert';
+
+import 'package:ezrxmobile/infrastructure/core/common/json_key_converter.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/order_history_item_dto.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -44,7 +47,11 @@ void main() {
 
     test('Test fromDomain', () {
       final configsDto = OrderHistoryItemDto.fromDomain(
-        OrderHistoryItemDto.fromJson(data).toDomain(),
+        OrderHistoryItemDto.fromJson(
+          makeResponseCamelCase(
+            jsonEncode(data),
+          ),
+        ).toDomain(),
       );
       expect(configsDto.materialNumber, 'fake-code');
     });

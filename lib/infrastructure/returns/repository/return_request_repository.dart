@@ -1,9 +1,5 @@
-import 'dart:io';
-import 'dart:math';
-
 import 'package:ezrxmobile/application/returns/new_request/attachments/return_request_attachment_bloc.dart';
 import 'package:ezrxmobile/config.dart';
-import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:dartz/dartz.dart';
@@ -11,8 +7,9 @@ import 'package:ezrxmobile/domain/returns/entities/add_request_params.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_material_list.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_materials_params.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/device_storage.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/po_document_local.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/po_document_remote.dart';
 import 'package:ezrxmobile/infrastructure/returns/dtos/return_materials_params_dto.dart';
-import 'package:ezrxmobile/domain/returns/entities/return_request_attachment.dart';
 import 'package:ezrxmobile/domain/returns/repository/i_return_request_repository.dart';
 import 'package:ezrxmobile/infrastructure/core/common/device_info.dart';
 import 'package:ezrxmobile/infrastructure/core/common/file_path_helper.dart';
@@ -26,9 +23,6 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/foundation.dart';
 import 'package:permission_handler/permission_handler.dart';
 
-const int _fileSizeLimitMB = 20;
-const int _maxUpload = 10;
-
 class ReturnRequestRepository extends IReturnRequestRepository {
   final Config config;
   final ReturnRequestLocalDataSource localDataSource;
@@ -38,6 +32,8 @@ class ReturnRequestRepository extends IReturnRequestRepository {
   final FilePickerService filePickerService;
   final FileSystemHelper fileSystemHelper;
   final DeviceStorage deviceStorage;
+  final PoDocumentRemoteDataSource poDocumentRemoteDataSource;
+  final PoDocumentLocalDataSource poDocumentLocalDataSource;
 
   ReturnRequestRepository({
     required this.config,
@@ -48,6 +44,8 @@ class ReturnRequestRepository extends IReturnRequestRepository {
     required this.filePickerService,
     required this.fileSystemHelper,
     required this.deviceStorage,
+    required this.poDocumentRemoteDataSource,
+    required this.poDocumentLocalDataSource,
   });
 
   @override
@@ -161,132 +159,6 @@ class ReturnRequestRepository extends IReturnRequestRepository {
       return const Left(
         ApiFailure.invalidFileFormat(),
       );
-    }
-  }
-
-  @override
-  Future<Either<ApiFailure, List<ReturnRequestAttachment>>> uploadFiles({
-    required List<PlatformFile> files,
-    required User user,
-  }) async {
-    if (config.appFlavor == Flavor.mock) {
-      try {
-        final response = await localDataSource.uploadFile();
-
-        return Right([response]);
-      } catch (e) {
-        return Left(FailureHandler.handleFailure(e));
-      }
-    }
-    try {
-      if (files.length > _maxUpload) {
-        return const Left(
-          ApiFailure.uploadCountExcideLimit(),
-        );
-      }
-      final biggerFile = files.where(
-        (PlatformFile file) => file.size > (_fileSizeLimitMB * pow(1024, 2)),
-      );
-      if (biggerFile.isNotEmpty) {
-        return const Left(
-          ApiFailure.uploadedFileSizeExceed(),
-        );
-      }
-      final upLoadedFiles = Future.wait(
-        files.map(
-          (file) async => await remoteDataSource.uploadFile(
-            file: fileSystemHelper.toMultipartFile(
-              name: file.name,
-              path: file.path ?? '',
-            ),
-            userName: user.username.getOrCrash(),
-          ),
-        ),
-      );
-
-      return Right(await upLoadedFiles);
-    } catch (e) {
-      return Left(FailureHandler.handleFailure(e));
-    }
-  }
-
-  @override
-  Future<Either<ApiFailure, bool>> deleteFile({
-    required String filePath,
-  }) async {
-    if (config.appFlavor == Flavor.mock) {
-      try {
-        final response = await localDataSource.deleteFile();
-
-        return Right(response);
-      } catch (e) {
-        return Left(
-          FailureHandler.handleFailure(e),
-        );
-      }
-    }
-    try {
-      final response = await remoteDataSource.deleteFile(
-        filePath: filePath,
-      );
-
-      return Right(response);
-    } catch (e) {
-      return Left(
-        FailureHandler.handleFailure(e),
-      );
-    }
-  }
-
-  @override
-  Future<Either<ApiFailure, PermissionStatus>> getDownloadPermission() async {
-    try {
-      if (defaultTargetPlatform == TargetPlatform.iOS) {
-        return const Right(PermissionStatus.granted);
-      }
-      if (await deviceInfo.checkIfDeviceIsAndroidWithSDK33()) {
-        return const Right(PermissionStatus.granted);
-      }
-
-      final permissionStatus =
-          await permissionService.requestStoragePermission();
-
-      return permissionStatus == PermissionStatus.granted ||
-              permissionStatus == PermissionStatus.limited
-          ? Right(permissionStatus)
-          : const Left(ApiFailure.storagePermissionFailed());
-    } catch (e) {
-      return Left(
-        FailureHandler.handleFailure(e),
-      );
-    }
-  }
-
-  @override
-  Future<Either<ApiFailure, File>> downloadFile({
-    required ReturnRequestAttachment file,
-  }) async {
-    if (config.appFlavor == Flavor.mock) {
-      try {
-        final localFile = await localDataSource.downloadFile();
-        final downloadedFile = await fileSystemHelper.getDownloadedFile(
-          localFile,
-        );
-
-        return Right(downloadedFile);
-      } catch (e) {
-        return Left(FailureHandler.handleFailure(e));
-      }
-    }
-    try {
-      final localFile = await remoteDataSource.downloadFile(file);
-      final downloadedFile = await fileSystemHelper.getDownloadedFile(
-        localFile,
-      );
-
-      return Right(downloadedFile);
-    } catch (e) {
-      return Left(FailureHandler.handleFailure(e));
     }
   }
 

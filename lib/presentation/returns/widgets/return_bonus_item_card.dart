@@ -8,8 +8,8 @@ class _ReturnBonusItemSection extends StatelessWidget {
     required this.downloadAttachment,
   });
   final ReturnRequestInformation bonusItem;
-  final List<ReturnRequestAttachment> downloadingAttachments;
-  final Function(ReturnRequestAttachment) downloadAttachment;
+  final List<PoDocuments> downloadingAttachments;
+  final Function(PoDocuments) downloadAttachment;
   final bool isExpandable;
 
   @override
@@ -174,8 +174,8 @@ class _ReturnBonusExpandSection extends StatelessWidget {
     required this.downloadAttachment,
   });
   final ReturnRequestInformation requestInformation;
-  final List<ReturnRequestAttachment> downloadingAttachments;
-  final Function(ReturnRequestAttachment) downloadAttachment;
+  final List<PoDocuments> downloadingAttachments;
+  final Function(PoDocuments) downloadAttachment;
 
   @override
   Widget build(BuildContext context) {

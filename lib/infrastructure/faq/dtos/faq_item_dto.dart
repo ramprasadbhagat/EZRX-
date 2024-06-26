@@ -1,5 +1,6 @@
 import 'package:ezrxmobile/domain/faq/entity/faq_item.dart';
 import 'package:ezrxmobile/domain/faq/value/value_object.dart';
+import 'package:ezrxmobile/infrastructure/core/common/json_key_readvalue_helper.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 part 'faq_item_dto.freezed.dart';
 part 'faq_item_dto.g.dart';
@@ -10,9 +11,11 @@ class FAQItemDto with _$FAQItemDto {
 
   const factory FAQItemDto({
     required String name,
-    @JsonKey(name: 'answer', readValue: getAnswer) required String answer,
-    @JsonKey(name: 'question', readValue: getQuestion) required String question,
-    @JsonKey(name: 'category', readValue: getCategory)
+    @JsonKey(name: 'answer', readValue: JsonReadValueHelper.readValueString)
+    required String answer,
+    @JsonKey(name: 'question', readValue: JsonReadValueHelper.readValueString)
+    required String question,
+    @JsonKey(name: 'category', readValue: JsonReadValueHelper.readCategory)
     required String displayName,
   }) = _FAQItemDto;
 
@@ -25,7 +28,3 @@ class FAQItemDto with _$FAQItemDto {
         category: FAQCategory(displayName),
       );
 }
-
-String getQuestion(Map json, String key) => json[key]?['value'] ?? '';
-String getAnswer(Map json, String key) => json[key]?['value'] ?? '';
-String getCategory(Map json, String key) => json[key]?['displayName'] ?? '';

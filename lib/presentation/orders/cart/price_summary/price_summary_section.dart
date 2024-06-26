@@ -42,7 +42,7 @@ class PriceSummarySection extends StatelessWidget {
                       color: ZPColors.neutralsBlack,
                     ),
               ),
-              _DisplayPrice(
+              PriceDisplayWidget(
                 priceComponent: PriceComponent(
                   salesOrgConfig: salesOrgConfig,
                   price: cartState.zpSubTotalHidePriceMaterial.toString(),
@@ -64,7 +64,7 @@ class PriceSummarySection extends StatelessWidget {
                       color: ZPColors.neutralsBlack,
                     ),
               ),
-              _DisplayPrice(
+              PriceDisplayWidget(
                 priceComponent: PriceComponent(
                   salesOrgConfig: salesOrgConfig,
                   price: cartState.mpSubTotalHidePriceMaterial.toString(),
@@ -90,7 +90,7 @@ class PriceSummarySection extends StatelessWidget {
                     ),
               ),
             ),
-            _DisplayPrice(
+            PriceDisplayWidget(
               priceComponent: PriceComponent(
                 salesOrgConfig: salesOrgConfig,
                 price: context.router.current.name == CheckoutPageRoute.name
@@ -125,7 +125,7 @@ class PriceSummarySection extends StatelessWidget {
                     color: ZPColors.neutralsBlack,
                   ),
             ),
-            _DisplayPrice(
+            PriceDisplayWidget(
               priceComponent: PriceComponent(
                 key: WidgetKeys.checkoutSummaryGrandTotalPrice,
                 salesOrgConfig: salesOrgConfig,
@@ -151,7 +151,7 @@ class PriceSummarySection extends StatelessWidget {
                       color: ZPColors.neutralsBlack,
                     ),
               ),
-              _DisplayPrice(
+              PriceDisplayWidget(
                 priceComponent: PriceComponent(
                   salesOrgConfig: salesOrgConfig,
                   price: context.router.current.name == CheckoutPageRoute.name
@@ -189,7 +189,7 @@ class _TaxWidget extends StatelessWidget {
                     color: ZPColors.neutralsBlack,
                   ),
             ),
-            _DisplayPrice(
+            PriceDisplayWidget(
               priceComponent: PriceComponent(
                 key: WidgetKeys.checkoutSummaryTaxPrice,
                 salesOrgConfig: salesOrgConfig,
@@ -208,34 +208,6 @@ class _TaxWidget extends StatelessWidget {
                 ),
           ),
       ],
-    );
-  }
-}
-
-class _DisplayPrice extends StatelessWidget {
-  const _DisplayPrice({
-    required this.priceComponent,
-  });
-
-  final PriceComponent priceComponent;
-
-  @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<CartBloc, CartState>(
-      buildWhen: (previous, current) =>
-          previous.aplSimulatorOrder != current.aplSimulatorOrder,
-      builder: (context, state) {
-        if (state.isAplProductLoading) {
-          return SizedBox(
-            width: Responsive.isLargerThan(context, Breakpoint.desktop)
-                ? MediaQuery.of(context).size.width * 0.2
-                : MediaQuery.of(context).size.width * 0.3,
-            child: LoadingShimmer.tile(),
-          );
-        }
-
-        return priceComponent;
-      },
     );
   }
 }

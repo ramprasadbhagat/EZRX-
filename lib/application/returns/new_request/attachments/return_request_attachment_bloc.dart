@@ -2,7 +2,8 @@ import 'dart:async';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:dartz/dartz.dart';
-import 'package:ezrxmobile/domain/returns/entities/return_request_attachment.dart';
+import 'package:ezrxmobile/domain/order/entities/order_history_details_po_documents.dart';
+import 'package:ezrxmobile/domain/order/repository/i_po_attachment_repository.dart';
 import 'package:ezrxmobile/domain/returns/repository/i_return_request_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -14,8 +15,11 @@ part 'return_request_attachment_bloc.freezed.dart';
 class ReturnRequestAttachmentBloc
     extends Bloc<ReturnRequestAttachmentEvent, ReturnRequestAttachmentState> {
   final IReturnRequestRepository returnRequestRepository;
+  final IpoAttachmentRepository poAttachmentRepository;
+
   ReturnRequestAttachmentBloc({
     required this.returnRequestRepository,
+    required this.poAttachmentRepository,
   }) : super(ReturnRequestAttachmentState.initial()) {
     on<ReturnRequestAttachmentEvent>(_onEvent);
   }
@@ -32,7 +36,7 @@ class ReturnRequestAttachmentBloc
             isFetching: true,
             failureOrSuccessOption: none(),
             returnUuid: e.returnUuid,
-            uploadedFiles: <ReturnRequestAttachment>[],
+            uploadedFiles: <PoDocuments>[],
             fileOperationMode: FileOperationMode.upload,
           ),
         );
@@ -70,7 +74,7 @@ class ReturnRequestAttachmentBloc
                   return;
                 }
                 final uploadFilesFailureOrSuccess =
-                    await returnRequestRepository.uploadFiles(
+                    await poAttachmentRepository.uploadFiles(
                   files: files,
                   user: e.user,
                 );
@@ -80,7 +84,7 @@ class ReturnRequestAttachmentBloc
                       failureOrSuccessOption:
                           optionOf(uploadFilesFailureOrSuccess),
                       isFetching: false,
-                      uploadedFiles: <ReturnRequestAttachment>[],
+                      uploadedFiles: <PoDocuments>[],
                       fileOperationMode: FileOperationMode.none,
                     ),
                   ),
@@ -108,7 +112,7 @@ class ReturnRequestAttachmentBloc
           ),
         );
         final deleteFilesFailureOrSuccess =
-            await returnRequestRepository.deleteFile(
+            await poAttachmentRepository.deleteFile(
           filePath: e.file.name,
         );
         emit(
@@ -128,7 +132,7 @@ class ReturnRequestAttachmentBloc
           ),
         );
         final failureOrSuccessPermission =
-            await returnRequestRepository.getDownloadPermission();
+            await poAttachmentRepository.downloadPermission();
         await failureOrSuccessPermission.fold(
           (failure) async => emit(
             state.copyWith(
@@ -137,12 +141,12 @@ class ReturnRequestAttachmentBloc
             ),
           ),
           (success) async {
-            final failureOrSuccess = await returnRequestRepository.downloadFile(
-              file: e.file,
+            await poAttachmentRepository.downloadFiles(
+              files: [e.file],
             );
             emit(
               state.copyWith(
-                failureOrSuccessOption: optionOf(failureOrSuccess),
+                failureOrSuccessOption: none(),
                 fileOperationMode: FileOperationMode.none,
                 isFetching: false,
               ),

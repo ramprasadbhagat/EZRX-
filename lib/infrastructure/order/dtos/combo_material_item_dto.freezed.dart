@@ -64,7 +64,7 @@ mixin _$ComboMaterialItemDto {
   String get materialNumber => throw _privateConstructorUsedError;
   @JsonKey(name: 'taxM1', defaultValue: '')
   String get taxM1 => throw _privateConstructorUsedError;
-  @JsonKey(name: 'taxes', readValue: handleTax)
+  @JsonKey(name: 'taxes', readValue: JsonReadValueHelper.handleTax)
   double get tax => throw _privateConstructorUsedError;
   @JsonKey(name: 'isFOCMaterial', defaultValue: false)
   bool get isFOCMaterial => throw _privateConstructorUsedError;
@@ -114,7 +114,8 @@ abstract class $ComboMaterialItemDtoCopyWith<$Res> {
       @JsonKey(name: 'materialNumber', defaultValue: 'EN')
       String materialNumber,
       @JsonKey(name: 'taxM1', defaultValue: '') String taxM1,
-      @JsonKey(name: 'taxes', readValue: handleTax) double tax,
+      @JsonKey(name: 'taxes', readValue: JsonReadValueHelper.handleTax)
+      double tax,
       @JsonKey(name: 'isFOCMaterial', defaultValue: false) bool isFOCMaterial,
       @JsonKey(name: 'hidePrice', defaultValue: false) bool hidePrice,
       @JsonKey(name: 'taxClassification', defaultValue: '')
@@ -308,7 +309,8 @@ abstract class _$$ComboMaterialItemDtoImplCopyWith<$Res>
       @JsonKey(name: 'materialNumber', defaultValue: 'EN')
       String materialNumber,
       @JsonKey(name: 'taxM1', defaultValue: '') String taxM1,
-      @JsonKey(name: 'taxes', readValue: handleTax) double tax,
+      @JsonKey(name: 'taxes', readValue: JsonReadValueHelper.handleTax)
+      double tax,
       @JsonKey(name: 'isFOCMaterial', defaultValue: false) bool isFOCMaterial,
       @JsonKey(name: 'hidePrice', defaultValue: false) bool hidePrice,
       @JsonKey(name: 'taxClassification', defaultValue: '')
@@ -498,7 +500,8 @@ class _$ComboMaterialItemDtoImpl extends _ComboMaterialItemDto {
       @JsonKey(name: 'materialNumber', defaultValue: 'EN')
       required this.materialNumber,
       @JsonKey(name: 'taxM1', defaultValue: '') required this.taxM1,
-      @JsonKey(name: 'taxes', readValue: handleTax) required this.tax,
+      @JsonKey(name: 'taxes', readValue: JsonReadValueHelper.handleTax)
+      required this.tax,
       @JsonKey(name: 'isFOCMaterial', defaultValue: false)
       required this.isFOCMaterial,
       @JsonKey(name: 'hidePrice', defaultValue: false) required this.hidePrice,
@@ -576,7 +579,7 @@ class _$ComboMaterialItemDtoImpl extends _ComboMaterialItemDto {
   @JsonKey(name: 'taxM1', defaultValue: '')
   final String taxM1;
   @override
-  @JsonKey(name: 'taxes', readValue: handleTax)
+  @JsonKey(name: 'taxes', readValue: JsonReadValueHelper.handleTax)
   final double tax;
   @override
   @JsonKey(name: 'isFOCMaterial', defaultValue: false)
@@ -734,7 +737,8 @@ abstract class _ComboMaterialItemDto extends ComboMaterialItemDto {
       @JsonKey(name: 'materialNumber', defaultValue: 'EN')
       required final String materialNumber,
       @JsonKey(name: 'taxM1', defaultValue: '') required final String taxM1,
-      @JsonKey(name: 'taxes', readValue: handleTax) required final double tax,
+      @JsonKey(name: 'taxes', readValue: JsonReadValueHelper.handleTax)
+      required final double tax,
       @JsonKey(name: 'isFOCMaterial', defaultValue: false)
       required final bool isFOCMaterial,
       @JsonKey(name: 'hidePrice', defaultValue: false)
@@ -813,7 +817,7 @@ abstract class _ComboMaterialItemDto extends ComboMaterialItemDto {
   @JsonKey(name: 'taxM1', defaultValue: '')
   String get taxM1;
   @override
-  @JsonKey(name: 'taxes', readValue: handleTax)
+  @JsonKey(name: 'taxes', readValue: JsonReadValueHelper.handleTax)
   double get tax;
   @override
   @JsonKey(name: 'isFOCMaterial', defaultValue: false)

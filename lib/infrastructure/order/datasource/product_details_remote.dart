@@ -1,8 +1,6 @@
 import 'dart:convert';
 
-import 'package:dio/dio.dart';
 import 'package:ezrxmobile/config.dart';
-import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/product_meta_data.dart';
@@ -56,7 +54,7 @@ class ProductDetailRemoteDataSource {
           'variables': variables,
         }),
       );
-      _exceptionChecker(res: res);
+      dataSourceExceptionHandler.handleExceptionChecker(res: res);
       final finalData = res.data['data']['materialDetails'];
 
       return ProductDetailDto.fromJson(finalData).toDomain();
@@ -98,7 +96,7 @@ class ProductDetailRemoteDataSource {
           'variables': variables,
         }),
       );
-      _exceptionChecker(res: res);
+      dataSourceExceptionHandler.handleExceptionChecker(res: res);
       final finalData = makeResponseCamelCase(
         jsonEncode(res.data['data']['GetAllProducts']['Products']),
       );
@@ -130,20 +128,10 @@ class ProductDetailRemoteDataSource {
         },
       ),
     );
-    _exceptionChecker(res: res);
+    dataSourceExceptionHandler.handleExceptionChecker(res: res);
+
     final data = res.data['data']['getProduct'];
 
     return ProductMetaDataDto.fromJson(data).toDomain;
-  }
-
-  void _exceptionChecker({required Response<dynamic> res}) {
-    if (dataSourceExceptionHandler.isServerResponseError(res: res)) {
-      throw ServerException(message: res.data['errors'][0]['message']);
-    } else if (res.statusCode != 200) {
-      throw ServerException(
-        code: res.statusCode ?? 0,
-        message: res.statusMessage ?? '',
-      );
-    }
   }
 }

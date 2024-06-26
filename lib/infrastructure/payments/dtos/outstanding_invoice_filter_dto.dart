@@ -1,4 +1,5 @@
 import 'package:ezrxmobile/domain/payments/entities/outstanding_invoice_filter.dart';
+import 'package:ezrxmobile/infrastructure/core/common/json_key_converter.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'outstanding_invoice_filter_dto.freezed.dart';
@@ -67,19 +68,6 @@ class OutstandingInvoiceFilterDto with _$OutstandingInvoiceFilterDto {
   factory OutstandingInvoiceFilterDto.fromJson(Map<String, dynamic> json) =>
       _$OutstandingInvoiceFilterDtoFromJson(json);
 
-  Map<String, String> _mapData({
-    required String field,
-    required String date,
-    required String type,
-  }) {
-    final dataMap = <String, String>{};
-    dataMap.putIfAbsent('field', () => field);
-    dataMap.putIfAbsent('value', () => date);
-    dataMap.putIfAbsent('type', () => type);
-
-    return dataMap;
-  }
-
   List<Map<String, String>> get toMapList {
     final filterMap = <Map<String, String>>[];
     if (dueDateFrom.isNotEmpty &&
@@ -87,14 +75,14 @@ class OutstandingInvoiceFilterDto with _$OutstandingInvoiceFilterDto {
         dueDateTo.isNotEmpty &&
         dueDateTo != '-') {
       filterMap.add(
-        _mapData(
+        mapFilterFieldData(
           field: 'netDueDate',
           date: dueDateFrom,
           type: 'ge',
         ),
       );
       filterMap.add(
-        _mapData(
+        mapFilterFieldData(
           field: 'netDueDate',
           date: dueDateTo,
           type: 'le',
@@ -106,14 +94,14 @@ class OutstandingInvoiceFilterDto with _$OutstandingInvoiceFilterDto {
         documentDateTo.isNotEmpty &&
         documentDateTo != '-') {
       filterMap.add(
-        _mapData(
+        mapFilterFieldData(
           field: 'postingDate',
           date: documentDateFrom,
           type: 'ge',
         ),
       );
       filterMap.add(
-        _mapData(
+        mapFilterFieldData(
           field: 'postingDate',
           date: documentDateTo,
           type: 'le',
@@ -123,14 +111,14 @@ class OutstandingInvoiceFilterDto with _$OutstandingInvoiceFilterDto {
     if (amountInTransactionCurrencyFrom.isNotEmpty &&
         amountInTransactionCurrencyTo.isNotEmpty) {
       filterMap.add(
-        _mapData(
+        mapFilterFieldData(
           field: 'openAmountInTransCrcy',
           date: amountInTransactionCurrencyFrom,
           type: 'ge',
         ),
       );
       filterMap.add(
-        _mapData(
+        mapFilterFieldData(
           field: 'openAmountInTransCrcy',
           date: amountInTransactionCurrencyTo,
           type: 'le',

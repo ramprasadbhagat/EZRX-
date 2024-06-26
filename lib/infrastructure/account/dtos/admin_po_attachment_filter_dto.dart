@@ -1,4 +1,5 @@
 import 'package:ezrxmobile/domain/account/entities/admin_po_attachment_filter.dart';
+import 'package:ezrxmobile/infrastructure/core/common/json_key_converter.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'admin_po_attachment_filter_dto.freezed.dart';
@@ -11,39 +12,39 @@ class AdminPoAttachmentFilterDto with _$AdminPoAttachmentFilterDto {
     @JsonKey(
       name: 'orderNumber',
       defaultValue: '',
-      toJson: overrideToJson,
+      toJson: valueOrNullToJson,
     )
-        required String orderNumber,
+    required String orderNumber,
     @JsonKey(
       name: 'exRxNo',
       defaultValue: '',
-      toJson: overrideToJson,
+      toJson: valueOrNullToJson,
     )
-        required String exRxNo,
+    required String exRxNo,
     @JsonKey(
       name: 'salesOrg',
       defaultValue: '',
-      toJson: overrideToJson,
+      toJson: valueOrNullToJson,
     )
-        required String salesOrg,
+    required String salesOrg,
     @JsonKey(
       name: 'soldTo',
       defaultValue: '',
-      toJson: overrideToJson,
+      toJson: valueOrNullToJson,
     )
-        required String soldTo,
+    required String soldTo,
     @JsonKey(
       name: 'toDate',
       defaultValue: '',
-      toJson: overrideToJson,
+      toJson: valueOrNullToJson,
     )
-        required String toDate,
+    required String toDate,
     @JsonKey(
       name: 'fromDate',
       defaultValue: '',
-      toJson: overrideToJson,
+      toJson: valueOrNullToJson,
     )
-        required String fromDate,
+    required String fromDate,
   }) = _AdminPoAttachmentFilterDto;
 
   factory AdminPoAttachmentFilterDto.fromJson(Map<String, dynamic> json) =>
@@ -62,5 +63,3 @@ class AdminPoAttachmentFilterDto with _$AdminPoAttachmentFilterDto {
     );
   }
 }
-
-dynamic overrideToJson(String value) => value.isNotEmpty ? value : null;

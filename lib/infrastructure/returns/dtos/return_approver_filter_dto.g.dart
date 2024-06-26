@@ -28,12 +28,12 @@ Map<String, dynamic> _$$ReturnApproverFilterDtoImplToJson(
     }
   }
 
-  writeNotNull('returnId', valueTojson(instance.returnId));
-  writeNotNull('soldTo', valueTojson(instance.soldTo));
-  writeNotNull('shipTo', valueTojson(instance.shipTo));
-  writeNotNull('createdBy', valueTojson(instance.createdBy));
+  writeNotNull('returnId', valueOrNullToJson(instance.returnId));
+  writeNotNull('soldTo', valueOrNullToJson(instance.soldTo));
+  writeNotNull('shipTo', valueOrNullToJson(instance.shipTo));
+  writeNotNull('createdBy', valueOrNullToJson(instance.createdBy));
   val['dateTo'] = instance.dateTo;
   val['dateFrom'] = instance.dateFrom;
-  writeNotNull('status', valueTojson(instance.status));
+  writeNotNull('status', valueOrNullToJson(instance.status));
   return val;
 }

@@ -20,55 +20,55 @@ OrderHistoryItemDto _$OrderHistoryItemDtoFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$OrderHistoryItemDto {
-  @JsonKey(name: 'MaterialCode', defaultValue: '')
+  @JsonKey(name: 'materialCode', defaultValue: '')
   String get materialNumber => throw _privateConstructorUsedError;
-  @JsonKey(name: 'MaterialDescription', defaultValue: '')
+  @JsonKey(name: 'materialDescription', defaultValue: '')
   String get materialDescription => throw _privateConstructorUsedError;
-  @JsonKey(name: 'DefaultMaterialDescription', defaultValue: '')
+  @JsonKey(name: 'defaultMaterialDescription', defaultValue: '')
   String get defaultMaterialDescription => throw _privateConstructorUsedError;
-  @JsonKey(name: 'Qty', defaultValue: 0)
+  @JsonKey(name: 'qty', defaultValue: 0)
   int get qty => throw _privateConstructorUsedError;
-  @JsonKey(name: 'UnitPrice', defaultValue: 0.0)
+  @JsonKey(name: 'unitPrice', defaultValue: 0.0)
   double get unitPrice => throw _privateConstructorUsedError;
   @JsonKey(name: 'mrp', defaultValue: 0.0)
   double get originPrice => throw _privateConstructorUsedError;
-  @JsonKey(name: 'TotalPrice', defaultValue: 0.0)
+  @JsonKey(name: 'totalPrice', defaultValue: 0.0)
   double get totalPrice => throw _privateConstructorUsedError;
-  @JsonKey(name: 'Status', defaultValue: '')
+  @JsonKey(name: 'status', defaultValue: '')
   String get status => throw _privateConstructorUsedError;
-  @JsonKey(name: 'DeliveryDate', defaultValue: '')
+  @JsonKey(name: 'deliveryDate', defaultValue: '')
   String get deliveryDate => throw _privateConstructorUsedError;
-  @JsonKey(name: 'OrderNumber', defaultValue: '')
+  @JsonKey(name: 'orderNumber', defaultValue: '')
   String get orderNumber => throw _privateConstructorUsedError;
-  @JsonKey(readValue: _createdDateTimeReadValue)
+  @JsonKey(readValue: JsonReadValueHelper.readCreatedDateTimeValue)
   String get createdDate => throw _privateConstructorUsedError;
-  @JsonKey(name: 'OrderBy', defaultValue: '')
+  @JsonKey(name: 'orderBy', defaultValue: '')
   String get orderBy => throw _privateConstructorUsedError;
-  @JsonKey(name: 'OrderType', defaultValue: '')
+  @JsonKey(name: 'orderType', defaultValue: '')
   String get orderType => throw _privateConstructorUsedError;
-  @JsonKey(name: 'Batch', defaultValue: '')
+  @JsonKey(name: 'batch', defaultValue: '')
   String get batch => throw _privateConstructorUsedError;
-  @JsonKey(name: 'IsBonusMaterial', defaultValue: false)
+  @JsonKey(name: 'isBonusMaterial', defaultValue: false)
   bool get isBonusMaterial => throw _privateConstructorUsedError;
-  @JsonKey(name: 'TelephoneNumber', defaultValue: '')
+  @JsonKey(name: 'telephoneNumber', defaultValue: '')
   String get telephoneNumber => throw _privateConstructorUsedError;
-  @JsonKey(name: 'InvoiceNumber', defaultValue: '')
+  @JsonKey(name: 'invoiceNumber', defaultValue: '')
   String get invoiceNumber => throw _privateConstructorUsedError;
-  @JsonKey(name: 'POReference', defaultValue: '')
+  @JsonKey(name: 'pOReference', defaultValue: '')
   String get pOReference => throw _privateConstructorUsedError;
-  @JsonKey(name: 'ManufactureName', defaultValue: '')
+  @JsonKey(name: 'manufactureName', defaultValue: '')
   String get manufactureName => throw _privateConstructorUsedError;
-  @JsonKey(name: 'GovernmentMaterialCode', defaultValue: '')
+  @JsonKey(name: 'governmentMaterialCode', defaultValue: '')
   String get governmentMaterialCode => throw _privateConstructorUsedError;
-  @JsonKey(name: 'ItemRegistrationNumber', defaultValue: '')
+  @JsonKey(name: 'itemRegistrationNumber', defaultValue: '')
   String get itemRegistrationNumber => throw _privateConstructorUsedError;
-  @JsonKey(name: 'ExpiryDate', defaultValue: '')
+  @JsonKey(name: 'expiryDate', defaultValue: '')
   String get expiryDate => throw _privateConstructorUsedError;
-  @JsonKey(name: 'RequestedDeliveryDate', defaultValue: '')
+  @JsonKey(name: 'requestedDeliveryDate', defaultValue: '')
   String get requestedDeliveryDate => throw _privateConstructorUsedError;
-  @JsonKey(name: 'SpecialInstructions', defaultValue: '')
+  @JsonKey(name: 'specialInstructions', defaultValue: '')
   String get specialInstruction => throw _privateConstructorUsedError;
-  @JsonKey(name: 'Tax', defaultValue: 0.0)
+  @JsonKey(name: 'tax', defaultValue: 0.0)
   double get tax => throw _privateConstructorUsedError;
   @JsonKey(name: 'EZRXNumber', defaultValue: '')
   String get eZRXNumber => throw _privateConstructorUsedError;
@@ -79,37 +79,38 @@ mixin _$OrderHistoryItemDto {
   bool get promoStatus => throw _privateConstructorUsedError;
   @JsonKey(name: 'isCounterOffer', defaultValue: false)
   bool get isCounterOffer => throw _privateConstructorUsedError;
-  @JsonKey(name: 'IsBundle', defaultValue: false)
+  @JsonKey(name: 'isBundle', defaultValue: false)
   bool get isBundle => throw _privateConstructorUsedError;
-  @JsonKey(name: 'LineNumber', defaultValue: '')
+  @JsonKey(name: 'lineNumber', defaultValue: '')
   String get lineNumber => throw _privateConstructorUsedError;
-  @JsonKey(name: 'PrincipalCode', defaultValue: '')
+  @JsonKey(name: 'principalCode', defaultValue: '')
   String get principalCode => throw _privateConstructorUsedError;
-  @JsonKey(name: 'HidePrice', defaultValue: false)
+  @JsonKey(name: 'hidePrice', defaultValue: false)
   bool get hidePrice => throw _privateConstructorUsedError;
   @JsonKey(name: 'referenceNotes', defaultValue: '')
   String get referenceNotes => throw _privateConstructorUsedError;
-  @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+  @JsonKey(
+      defaultValue: false, readValue: JsonReadValueHelper.mappingIsMarketPlace)
   bool get isMarketPlace => throw _privateConstructorUsedError;
-  @JsonKey(name: 'TenderContractNumber', defaultValue: '')
+  @JsonKey(name: 'tenderContractNumber', defaultValue: '')
   String get tenderContractNumber => throw _privateConstructorUsedError;
-  @JsonKey(name: 'TenderContractReference', defaultValue: '')
+  @JsonKey(name: 'tenderContractReference', defaultValue: '')
   String get tenderContractReference => throw _privateConstructorUsedError;
-  @JsonKey(name: 'TenderOrderReason', defaultValue: '')
+  @JsonKey(name: 'tenderOrderReason', defaultValue: '')
   String get tenderOrderReason => throw _privateConstructorUsedError;
-  @JsonKey(name: 'TenderPriceUnit', defaultValue: 0)
+  @JsonKey(name: 'tenderPriceUnit', defaultValue: 0)
   int get tenderPriceUnit => throw _privateConstructorUsedError;
-  @JsonKey(name: 'TenderPrice', defaultValue: '')
+  @JsonKey(name: 'tenderPrice', defaultValue: '')
   String get tenderPrice => throw _privateConstructorUsedError;
   @JsonKey(name: 'isTenderExpire', defaultValue: false)
   bool get isTenderExpired => throw _privateConstructorUsedError;
   @JsonKey(name: 'isCovid', defaultValue: false)
   bool get isCovid => throw _privateConstructorUsedError;
-  @JsonKey(name: 'TotalUnitPrice', defaultValue: 0.0)
+  @JsonKey(name: 'totalUnitPrice', defaultValue: 0.0)
   double get totalUnitPrice => throw _privateConstructorUsedError;
-  @JsonKey(name: 'TotalTax', defaultValue: 0.0)
+  @JsonKey(name: 'totalTax', defaultValue: 0.0)
   double get totalTax => throw _privateConstructorUsedError;
-  @JsonKey(name: 'TaxRate', readValue: handleTax)
+  @JsonKey(name: 'taxRate', readValue: JsonReadValueHelper.handleTax)
   double get taxRate => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -125,66 +126,70 @@ abstract class $OrderHistoryItemDtoCopyWith<$Res> {
       _$OrderHistoryItemDtoCopyWithImpl<$Res, OrderHistoryItemDto>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'MaterialCode', defaultValue: '') String materialNumber,
-      @JsonKey(name: 'MaterialDescription', defaultValue: '')
+      {@JsonKey(name: 'materialCode', defaultValue: '') String materialNumber,
+      @JsonKey(name: 'materialDescription', defaultValue: '')
       String materialDescription,
-      @JsonKey(name: 'DefaultMaterialDescription', defaultValue: '')
+      @JsonKey(name: 'defaultMaterialDescription', defaultValue: '')
       String defaultMaterialDescription,
-      @JsonKey(name: 'Qty', defaultValue: 0) int qty,
-      @JsonKey(name: 'UnitPrice', defaultValue: 0.0) double unitPrice,
+      @JsonKey(name: 'qty', defaultValue: 0) int qty,
+      @JsonKey(name: 'unitPrice', defaultValue: 0.0) double unitPrice,
       @JsonKey(name: 'mrp', defaultValue: 0.0) double originPrice,
-      @JsonKey(name: 'TotalPrice', defaultValue: 0.0) double totalPrice,
-      @JsonKey(name: 'Status', defaultValue: '') String status,
-      @JsonKey(name: 'DeliveryDate', defaultValue: '') String deliveryDate,
-      @JsonKey(name: 'OrderNumber', defaultValue: '') String orderNumber,
-      @JsonKey(readValue: _createdDateTimeReadValue) String createdDate,
-      @JsonKey(name: 'OrderBy', defaultValue: '') String orderBy,
-      @JsonKey(name: 'OrderType', defaultValue: '') String orderType,
-      @JsonKey(name: 'Batch', defaultValue: '') String batch,
-      @JsonKey(name: 'IsBonusMaterial', defaultValue: false)
+      @JsonKey(name: 'totalPrice', defaultValue: 0.0) double totalPrice,
+      @JsonKey(name: 'status', defaultValue: '') String status,
+      @JsonKey(name: 'deliveryDate', defaultValue: '') String deliveryDate,
+      @JsonKey(name: 'orderNumber', defaultValue: '') String orderNumber,
+      @JsonKey(readValue: JsonReadValueHelper.readCreatedDateTimeValue)
+      String createdDate,
+      @JsonKey(name: 'orderBy', defaultValue: '') String orderBy,
+      @JsonKey(name: 'orderType', defaultValue: '') String orderType,
+      @JsonKey(name: 'batch', defaultValue: '') String batch,
+      @JsonKey(name: 'isBonusMaterial', defaultValue: false)
       bool isBonusMaterial,
-      @JsonKey(name: 'TelephoneNumber', defaultValue: '')
+      @JsonKey(name: 'telephoneNumber', defaultValue: '')
       String telephoneNumber,
-      @JsonKey(name: 'InvoiceNumber', defaultValue: '') String invoiceNumber,
-      @JsonKey(name: 'POReference', defaultValue: '') String pOReference,
-      @JsonKey(name: 'ManufactureName', defaultValue: '')
+      @JsonKey(name: 'invoiceNumber', defaultValue: '') String invoiceNumber,
+      @JsonKey(name: 'pOReference', defaultValue: '') String pOReference,
+      @JsonKey(name: 'manufactureName', defaultValue: '')
       String manufactureName,
-      @JsonKey(name: 'GovernmentMaterialCode', defaultValue: '')
+      @JsonKey(name: 'governmentMaterialCode', defaultValue: '')
       String governmentMaterialCode,
-      @JsonKey(name: 'ItemRegistrationNumber', defaultValue: '')
+      @JsonKey(name: 'itemRegistrationNumber', defaultValue: '')
       String itemRegistrationNumber,
-      @JsonKey(name: 'ExpiryDate', defaultValue: '') String expiryDate,
-      @JsonKey(name: 'RequestedDeliveryDate', defaultValue: '')
+      @JsonKey(name: 'expiryDate', defaultValue: '') String expiryDate,
+      @JsonKey(name: 'requestedDeliveryDate', defaultValue: '')
       String requestedDeliveryDate,
-      @JsonKey(name: 'SpecialInstructions', defaultValue: '')
+      @JsonKey(name: 'specialInstructions', defaultValue: '')
       String specialInstruction,
-      @JsonKey(name: 'Tax', defaultValue: 0.0) double tax,
+      @JsonKey(name: 'tax', defaultValue: 0.0) double tax,
       @JsonKey(name: 'EZRXNumber', defaultValue: '') String eZRXNumber,
       @JsonKey(name: 'poAttachment', defaultValue: <PoDocumentsDto>[])
       List<PoDocumentsDto> orderHistoryItemPoAttachments,
       @JsonKey(name: 'promoStatus', defaultValue: false) bool promoStatus,
       @JsonKey(name: 'isCounterOffer', defaultValue: false) bool isCounterOffer,
-      @JsonKey(name: 'IsBundle', defaultValue: false) bool isBundle,
-      @JsonKey(name: 'LineNumber', defaultValue: '') String lineNumber,
-      @JsonKey(name: 'PrincipalCode', defaultValue: '') String principalCode,
-      @JsonKey(name: 'HidePrice', defaultValue: false) bool hidePrice,
+      @JsonKey(name: 'isBundle', defaultValue: false) bool isBundle,
+      @JsonKey(name: 'lineNumber', defaultValue: '') String lineNumber,
+      @JsonKey(name: 'principalCode', defaultValue: '') String principalCode,
+      @JsonKey(name: 'hidePrice', defaultValue: false) bool hidePrice,
       @JsonKey(name: 'referenceNotes', defaultValue: '') String referenceNotes,
-      @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+      @JsonKey(
+          defaultValue: false,
+          readValue: JsonReadValueHelper.mappingIsMarketPlace)
       bool isMarketPlace,
-      @JsonKey(name: 'TenderContractNumber', defaultValue: '')
+      @JsonKey(name: 'tenderContractNumber', defaultValue: '')
       String tenderContractNumber,
-      @JsonKey(name: 'TenderContractReference', defaultValue: '')
+      @JsonKey(name: 'tenderContractReference', defaultValue: '')
       String tenderContractReference,
-      @JsonKey(name: 'TenderOrderReason', defaultValue: '')
+      @JsonKey(name: 'tenderOrderReason', defaultValue: '')
       String tenderOrderReason,
-      @JsonKey(name: 'TenderPriceUnit', defaultValue: 0) int tenderPriceUnit,
-      @JsonKey(name: 'TenderPrice', defaultValue: '') String tenderPrice,
+      @JsonKey(name: 'tenderPriceUnit', defaultValue: 0) int tenderPriceUnit,
+      @JsonKey(name: 'tenderPrice', defaultValue: '') String tenderPrice,
       @JsonKey(name: 'isTenderExpire', defaultValue: false)
       bool isTenderExpired,
       @JsonKey(name: 'isCovid', defaultValue: false) bool isCovid,
-      @JsonKey(name: 'TotalUnitPrice', defaultValue: 0.0) double totalUnitPrice,
-      @JsonKey(name: 'TotalTax', defaultValue: 0.0) double totalTax,
-      @JsonKey(name: 'TaxRate', readValue: handleTax) double taxRate});
+      @JsonKey(name: 'totalUnitPrice', defaultValue: 0.0) double totalUnitPrice,
+      @JsonKey(name: 'totalTax', defaultValue: 0.0) double totalTax,
+      @JsonKey(name: 'taxRate', readValue: JsonReadValueHelper.handleTax)
+      double taxRate});
 }
 
 /// @nodoc
@@ -440,66 +445,70 @@ abstract class _$$OrderHistoryItemDtoImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'MaterialCode', defaultValue: '') String materialNumber,
-      @JsonKey(name: 'MaterialDescription', defaultValue: '')
+      {@JsonKey(name: 'materialCode', defaultValue: '') String materialNumber,
+      @JsonKey(name: 'materialDescription', defaultValue: '')
       String materialDescription,
-      @JsonKey(name: 'DefaultMaterialDescription', defaultValue: '')
+      @JsonKey(name: 'defaultMaterialDescription', defaultValue: '')
       String defaultMaterialDescription,
-      @JsonKey(name: 'Qty', defaultValue: 0) int qty,
-      @JsonKey(name: 'UnitPrice', defaultValue: 0.0) double unitPrice,
+      @JsonKey(name: 'qty', defaultValue: 0) int qty,
+      @JsonKey(name: 'unitPrice', defaultValue: 0.0) double unitPrice,
       @JsonKey(name: 'mrp', defaultValue: 0.0) double originPrice,
-      @JsonKey(name: 'TotalPrice', defaultValue: 0.0) double totalPrice,
-      @JsonKey(name: 'Status', defaultValue: '') String status,
-      @JsonKey(name: 'DeliveryDate', defaultValue: '') String deliveryDate,
-      @JsonKey(name: 'OrderNumber', defaultValue: '') String orderNumber,
-      @JsonKey(readValue: _createdDateTimeReadValue) String createdDate,
-      @JsonKey(name: 'OrderBy', defaultValue: '') String orderBy,
-      @JsonKey(name: 'OrderType', defaultValue: '') String orderType,
-      @JsonKey(name: 'Batch', defaultValue: '') String batch,
-      @JsonKey(name: 'IsBonusMaterial', defaultValue: false)
+      @JsonKey(name: 'totalPrice', defaultValue: 0.0) double totalPrice,
+      @JsonKey(name: 'status', defaultValue: '') String status,
+      @JsonKey(name: 'deliveryDate', defaultValue: '') String deliveryDate,
+      @JsonKey(name: 'orderNumber', defaultValue: '') String orderNumber,
+      @JsonKey(readValue: JsonReadValueHelper.readCreatedDateTimeValue)
+      String createdDate,
+      @JsonKey(name: 'orderBy', defaultValue: '') String orderBy,
+      @JsonKey(name: 'orderType', defaultValue: '') String orderType,
+      @JsonKey(name: 'batch', defaultValue: '') String batch,
+      @JsonKey(name: 'isBonusMaterial', defaultValue: false)
       bool isBonusMaterial,
-      @JsonKey(name: 'TelephoneNumber', defaultValue: '')
+      @JsonKey(name: 'telephoneNumber', defaultValue: '')
       String telephoneNumber,
-      @JsonKey(name: 'InvoiceNumber', defaultValue: '') String invoiceNumber,
-      @JsonKey(name: 'POReference', defaultValue: '') String pOReference,
-      @JsonKey(name: 'ManufactureName', defaultValue: '')
+      @JsonKey(name: 'invoiceNumber', defaultValue: '') String invoiceNumber,
+      @JsonKey(name: 'pOReference', defaultValue: '') String pOReference,
+      @JsonKey(name: 'manufactureName', defaultValue: '')
       String manufactureName,
-      @JsonKey(name: 'GovernmentMaterialCode', defaultValue: '')
+      @JsonKey(name: 'governmentMaterialCode', defaultValue: '')
       String governmentMaterialCode,
-      @JsonKey(name: 'ItemRegistrationNumber', defaultValue: '')
+      @JsonKey(name: 'itemRegistrationNumber', defaultValue: '')
       String itemRegistrationNumber,
-      @JsonKey(name: 'ExpiryDate', defaultValue: '') String expiryDate,
-      @JsonKey(name: 'RequestedDeliveryDate', defaultValue: '')
+      @JsonKey(name: 'expiryDate', defaultValue: '') String expiryDate,
+      @JsonKey(name: 'requestedDeliveryDate', defaultValue: '')
       String requestedDeliveryDate,
-      @JsonKey(name: 'SpecialInstructions', defaultValue: '')
+      @JsonKey(name: 'specialInstructions', defaultValue: '')
       String specialInstruction,
-      @JsonKey(name: 'Tax', defaultValue: 0.0) double tax,
+      @JsonKey(name: 'tax', defaultValue: 0.0) double tax,
       @JsonKey(name: 'EZRXNumber', defaultValue: '') String eZRXNumber,
       @JsonKey(name: 'poAttachment', defaultValue: <PoDocumentsDto>[])
       List<PoDocumentsDto> orderHistoryItemPoAttachments,
       @JsonKey(name: 'promoStatus', defaultValue: false) bool promoStatus,
       @JsonKey(name: 'isCounterOffer', defaultValue: false) bool isCounterOffer,
-      @JsonKey(name: 'IsBundle', defaultValue: false) bool isBundle,
-      @JsonKey(name: 'LineNumber', defaultValue: '') String lineNumber,
-      @JsonKey(name: 'PrincipalCode', defaultValue: '') String principalCode,
-      @JsonKey(name: 'HidePrice', defaultValue: false) bool hidePrice,
+      @JsonKey(name: 'isBundle', defaultValue: false) bool isBundle,
+      @JsonKey(name: 'lineNumber', defaultValue: '') String lineNumber,
+      @JsonKey(name: 'principalCode', defaultValue: '') String principalCode,
+      @JsonKey(name: 'hidePrice', defaultValue: false) bool hidePrice,
       @JsonKey(name: 'referenceNotes', defaultValue: '') String referenceNotes,
-      @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+      @JsonKey(
+          defaultValue: false,
+          readValue: JsonReadValueHelper.mappingIsMarketPlace)
       bool isMarketPlace,
-      @JsonKey(name: 'TenderContractNumber', defaultValue: '')
+      @JsonKey(name: 'tenderContractNumber', defaultValue: '')
       String tenderContractNumber,
-      @JsonKey(name: 'TenderContractReference', defaultValue: '')
+      @JsonKey(name: 'tenderContractReference', defaultValue: '')
       String tenderContractReference,
-      @JsonKey(name: 'TenderOrderReason', defaultValue: '')
+      @JsonKey(name: 'tenderOrderReason', defaultValue: '')
       String tenderOrderReason,
-      @JsonKey(name: 'TenderPriceUnit', defaultValue: 0) int tenderPriceUnit,
-      @JsonKey(name: 'TenderPrice', defaultValue: '') String tenderPrice,
+      @JsonKey(name: 'tenderPriceUnit', defaultValue: 0) int tenderPriceUnit,
+      @JsonKey(name: 'tenderPrice', defaultValue: '') String tenderPrice,
       @JsonKey(name: 'isTenderExpire', defaultValue: false)
       bool isTenderExpired,
       @JsonKey(name: 'isCovid', defaultValue: false) bool isCovid,
-      @JsonKey(name: 'TotalUnitPrice', defaultValue: 0.0) double totalUnitPrice,
-      @JsonKey(name: 'TotalTax', defaultValue: 0.0) double totalTax,
-      @JsonKey(name: 'TaxRate', readValue: handleTax) double taxRate});
+      @JsonKey(name: 'totalUnitPrice', defaultValue: 0.0) double totalUnitPrice,
+      @JsonKey(name: 'totalTax', defaultValue: 0.0) double totalTax,
+      @JsonKey(name: 'taxRate', readValue: JsonReadValueHelper.handleTax)
+      double taxRate});
 }
 
 /// @nodoc
@@ -748,43 +757,44 @@ class __$$OrderHistoryItemDtoImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$OrderHistoryItemDtoImpl extends _OrderHistoryItemDto {
   const _$OrderHistoryItemDtoImpl(
-      {@JsonKey(name: 'MaterialCode', defaultValue: '')
+      {@JsonKey(name: 'materialCode', defaultValue: '')
       required this.materialNumber,
-      @JsonKey(name: 'MaterialDescription', defaultValue: '')
+      @JsonKey(name: 'materialDescription', defaultValue: '')
       required this.materialDescription,
-      @JsonKey(name: 'DefaultMaterialDescription', defaultValue: '')
+      @JsonKey(name: 'defaultMaterialDescription', defaultValue: '')
       required this.defaultMaterialDescription,
-      @JsonKey(name: 'Qty', defaultValue: 0) required this.qty,
-      @JsonKey(name: 'UnitPrice', defaultValue: 0.0) required this.unitPrice,
+      @JsonKey(name: 'qty', defaultValue: 0) required this.qty,
+      @JsonKey(name: 'unitPrice', defaultValue: 0.0) required this.unitPrice,
       @JsonKey(name: 'mrp', defaultValue: 0.0) required this.originPrice,
-      @JsonKey(name: 'TotalPrice', defaultValue: 0.0) required this.totalPrice,
-      @JsonKey(name: 'Status', defaultValue: '') required this.status,
-      @JsonKey(name: 'DeliveryDate', defaultValue: '')
+      @JsonKey(name: 'totalPrice', defaultValue: 0.0) required this.totalPrice,
+      @JsonKey(name: 'status', defaultValue: '') required this.status,
+      @JsonKey(name: 'deliveryDate', defaultValue: '')
       required this.deliveryDate,
-      @JsonKey(name: 'OrderNumber', defaultValue: '') required this.orderNumber,
-      @JsonKey(readValue: _createdDateTimeReadValue) required this.createdDate,
-      @JsonKey(name: 'OrderBy', defaultValue: '') required this.orderBy,
-      @JsonKey(name: 'OrderType', defaultValue: '') required this.orderType,
-      @JsonKey(name: 'Batch', defaultValue: '') required this.batch,
-      @JsonKey(name: 'IsBonusMaterial', defaultValue: false)
+      @JsonKey(name: 'orderNumber', defaultValue: '') required this.orderNumber,
+      @JsonKey(readValue: JsonReadValueHelper.readCreatedDateTimeValue)
+      required this.createdDate,
+      @JsonKey(name: 'orderBy', defaultValue: '') required this.orderBy,
+      @JsonKey(name: 'orderType', defaultValue: '') required this.orderType,
+      @JsonKey(name: 'batch', defaultValue: '') required this.batch,
+      @JsonKey(name: 'isBonusMaterial', defaultValue: false)
       required this.isBonusMaterial,
-      @JsonKey(name: 'TelephoneNumber', defaultValue: '')
+      @JsonKey(name: 'telephoneNumber', defaultValue: '')
       required this.telephoneNumber,
-      @JsonKey(name: 'InvoiceNumber', defaultValue: '')
+      @JsonKey(name: 'invoiceNumber', defaultValue: '')
       required this.invoiceNumber,
-      @JsonKey(name: 'POReference', defaultValue: '') required this.pOReference,
-      @JsonKey(name: 'ManufactureName', defaultValue: '')
+      @JsonKey(name: 'pOReference', defaultValue: '') required this.pOReference,
+      @JsonKey(name: 'manufactureName', defaultValue: '')
       required this.manufactureName,
-      @JsonKey(name: 'GovernmentMaterialCode', defaultValue: '')
+      @JsonKey(name: 'governmentMaterialCode', defaultValue: '')
       required this.governmentMaterialCode,
-      @JsonKey(name: 'ItemRegistrationNumber', defaultValue: '')
+      @JsonKey(name: 'itemRegistrationNumber', defaultValue: '')
       required this.itemRegistrationNumber,
-      @JsonKey(name: 'ExpiryDate', defaultValue: '') required this.expiryDate,
-      @JsonKey(name: 'RequestedDeliveryDate', defaultValue: '')
+      @JsonKey(name: 'expiryDate', defaultValue: '') required this.expiryDate,
+      @JsonKey(name: 'requestedDeliveryDate', defaultValue: '')
       required this.requestedDeliveryDate,
-      @JsonKey(name: 'SpecialInstructions', defaultValue: '')
+      @JsonKey(name: 'specialInstructions', defaultValue: '')
       required this.specialInstruction,
-      @JsonKey(name: 'Tax', defaultValue: 0.0) required this.tax,
+      @JsonKey(name: 'tax', defaultValue: 0.0) required this.tax,
       @JsonKey(name: 'EZRXNumber', defaultValue: '') required this.eZRXNumber,
       @JsonKey(name: 'poAttachment', defaultValue: <PoDocumentsDto>[])
       required final List<PoDocumentsDto> orderHistoryItemPoAttachments,
@@ -792,31 +802,34 @@ class _$OrderHistoryItemDtoImpl extends _OrderHistoryItemDto {
       required this.promoStatus,
       @JsonKey(name: 'isCounterOffer', defaultValue: false)
       required this.isCounterOffer,
-      @JsonKey(name: 'IsBundle', defaultValue: false) required this.isBundle,
-      @JsonKey(name: 'LineNumber', defaultValue: '') required this.lineNumber,
-      @JsonKey(name: 'PrincipalCode', defaultValue: '')
+      @JsonKey(name: 'isBundle', defaultValue: false) required this.isBundle,
+      @JsonKey(name: 'lineNumber', defaultValue: '') required this.lineNumber,
+      @JsonKey(name: 'principalCode', defaultValue: '')
       required this.principalCode,
-      @JsonKey(name: 'HidePrice', defaultValue: false) required this.hidePrice,
+      @JsonKey(name: 'hidePrice', defaultValue: false) required this.hidePrice,
       @JsonKey(name: 'referenceNotes', defaultValue: '')
       required this.referenceNotes,
-      @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+      @JsonKey(
+          defaultValue: false,
+          readValue: JsonReadValueHelper.mappingIsMarketPlace)
       required this.isMarketPlace,
-      @JsonKey(name: 'TenderContractNumber', defaultValue: '')
+      @JsonKey(name: 'tenderContractNumber', defaultValue: '')
       required this.tenderContractNumber,
-      @JsonKey(name: 'TenderContractReference', defaultValue: '')
+      @JsonKey(name: 'tenderContractReference', defaultValue: '')
       required this.tenderContractReference,
-      @JsonKey(name: 'TenderOrderReason', defaultValue: '')
+      @JsonKey(name: 'tenderOrderReason', defaultValue: '')
       required this.tenderOrderReason,
-      @JsonKey(name: 'TenderPriceUnit', defaultValue: 0)
+      @JsonKey(name: 'tenderPriceUnit', defaultValue: 0)
       required this.tenderPriceUnit,
-      @JsonKey(name: 'TenderPrice', defaultValue: '') required this.tenderPrice,
+      @JsonKey(name: 'tenderPrice', defaultValue: '') required this.tenderPrice,
       @JsonKey(name: 'isTenderExpire', defaultValue: false)
       required this.isTenderExpired,
       @JsonKey(name: 'isCovid', defaultValue: false) required this.isCovid,
-      @JsonKey(name: 'TotalUnitPrice', defaultValue: 0.0)
+      @JsonKey(name: 'totalUnitPrice', defaultValue: 0.0)
       required this.totalUnitPrice,
-      @JsonKey(name: 'TotalTax', defaultValue: 0.0) required this.totalTax,
-      @JsonKey(name: 'TaxRate', readValue: handleTax) required this.taxRate})
+      @JsonKey(name: 'totalTax', defaultValue: 0.0) required this.totalTax,
+      @JsonKey(name: 'taxRate', readValue: JsonReadValueHelper.handleTax)
+      required this.taxRate})
       : _orderHistoryItemPoAttachments = orderHistoryItemPoAttachments,
         super._();
 
@@ -824,79 +837,79 @@ class _$OrderHistoryItemDtoImpl extends _OrderHistoryItemDto {
       _$$OrderHistoryItemDtoImplFromJson(json);
 
   @override
-  @JsonKey(name: 'MaterialCode', defaultValue: '')
+  @JsonKey(name: 'materialCode', defaultValue: '')
   final String materialNumber;
   @override
-  @JsonKey(name: 'MaterialDescription', defaultValue: '')
+  @JsonKey(name: 'materialDescription', defaultValue: '')
   final String materialDescription;
   @override
-  @JsonKey(name: 'DefaultMaterialDescription', defaultValue: '')
+  @JsonKey(name: 'defaultMaterialDescription', defaultValue: '')
   final String defaultMaterialDescription;
   @override
-  @JsonKey(name: 'Qty', defaultValue: 0)
+  @JsonKey(name: 'qty', defaultValue: 0)
   final int qty;
   @override
-  @JsonKey(name: 'UnitPrice', defaultValue: 0.0)
+  @JsonKey(name: 'unitPrice', defaultValue: 0.0)
   final double unitPrice;
   @override
   @JsonKey(name: 'mrp', defaultValue: 0.0)
   final double originPrice;
   @override
-  @JsonKey(name: 'TotalPrice', defaultValue: 0.0)
+  @JsonKey(name: 'totalPrice', defaultValue: 0.0)
   final double totalPrice;
   @override
-  @JsonKey(name: 'Status', defaultValue: '')
+  @JsonKey(name: 'status', defaultValue: '')
   final String status;
   @override
-  @JsonKey(name: 'DeliveryDate', defaultValue: '')
+  @JsonKey(name: 'deliveryDate', defaultValue: '')
   final String deliveryDate;
   @override
-  @JsonKey(name: 'OrderNumber', defaultValue: '')
+  @JsonKey(name: 'orderNumber', defaultValue: '')
   final String orderNumber;
   @override
-  @JsonKey(readValue: _createdDateTimeReadValue)
+  @JsonKey(readValue: JsonReadValueHelper.readCreatedDateTimeValue)
   final String createdDate;
   @override
-  @JsonKey(name: 'OrderBy', defaultValue: '')
+  @JsonKey(name: 'orderBy', defaultValue: '')
   final String orderBy;
   @override
-  @JsonKey(name: 'OrderType', defaultValue: '')
+  @JsonKey(name: 'orderType', defaultValue: '')
   final String orderType;
   @override
-  @JsonKey(name: 'Batch', defaultValue: '')
+  @JsonKey(name: 'batch', defaultValue: '')
   final String batch;
   @override
-  @JsonKey(name: 'IsBonusMaterial', defaultValue: false)
+  @JsonKey(name: 'isBonusMaterial', defaultValue: false)
   final bool isBonusMaterial;
   @override
-  @JsonKey(name: 'TelephoneNumber', defaultValue: '')
+  @JsonKey(name: 'telephoneNumber', defaultValue: '')
   final String telephoneNumber;
   @override
-  @JsonKey(name: 'InvoiceNumber', defaultValue: '')
+  @JsonKey(name: 'invoiceNumber', defaultValue: '')
   final String invoiceNumber;
   @override
-  @JsonKey(name: 'POReference', defaultValue: '')
+  @JsonKey(name: 'pOReference', defaultValue: '')
   final String pOReference;
   @override
-  @JsonKey(name: 'ManufactureName', defaultValue: '')
+  @JsonKey(name: 'manufactureName', defaultValue: '')
   final String manufactureName;
   @override
-  @JsonKey(name: 'GovernmentMaterialCode', defaultValue: '')
+  @JsonKey(name: 'governmentMaterialCode', defaultValue: '')
   final String governmentMaterialCode;
   @override
-  @JsonKey(name: 'ItemRegistrationNumber', defaultValue: '')
+  @JsonKey(name: 'itemRegistrationNumber', defaultValue: '')
   final String itemRegistrationNumber;
   @override
-  @JsonKey(name: 'ExpiryDate', defaultValue: '')
+  @JsonKey(name: 'expiryDate', defaultValue: '')
   final String expiryDate;
   @override
-  @JsonKey(name: 'RequestedDeliveryDate', defaultValue: '')
+  @JsonKey(name: 'requestedDeliveryDate', defaultValue: '')
   final String requestedDeliveryDate;
   @override
-  @JsonKey(name: 'SpecialInstructions', defaultValue: '')
+  @JsonKey(name: 'specialInstructions', defaultValue: '')
   final String specialInstruction;
   @override
-  @JsonKey(name: 'Tax', defaultValue: 0.0)
+  @JsonKey(name: 'tax', defaultValue: 0.0)
   final double tax;
   @override
   @JsonKey(name: 'EZRXNumber', defaultValue: '')
@@ -918,37 +931,38 @@ class _$OrderHistoryItemDtoImpl extends _OrderHistoryItemDto {
   @JsonKey(name: 'isCounterOffer', defaultValue: false)
   final bool isCounterOffer;
   @override
-  @JsonKey(name: 'IsBundle', defaultValue: false)
+  @JsonKey(name: 'isBundle', defaultValue: false)
   final bool isBundle;
   @override
-  @JsonKey(name: 'LineNumber', defaultValue: '')
+  @JsonKey(name: 'lineNumber', defaultValue: '')
   final String lineNumber;
   @override
-  @JsonKey(name: 'PrincipalCode', defaultValue: '')
+  @JsonKey(name: 'principalCode', defaultValue: '')
   final String principalCode;
   @override
-  @JsonKey(name: 'HidePrice', defaultValue: false)
+  @JsonKey(name: 'hidePrice', defaultValue: false)
   final bool hidePrice;
   @override
   @JsonKey(name: 'referenceNotes', defaultValue: '')
   final String referenceNotes;
   @override
-  @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+  @JsonKey(
+      defaultValue: false, readValue: JsonReadValueHelper.mappingIsMarketPlace)
   final bool isMarketPlace;
   @override
-  @JsonKey(name: 'TenderContractNumber', defaultValue: '')
+  @JsonKey(name: 'tenderContractNumber', defaultValue: '')
   final String tenderContractNumber;
   @override
-  @JsonKey(name: 'TenderContractReference', defaultValue: '')
+  @JsonKey(name: 'tenderContractReference', defaultValue: '')
   final String tenderContractReference;
   @override
-  @JsonKey(name: 'TenderOrderReason', defaultValue: '')
+  @JsonKey(name: 'tenderOrderReason', defaultValue: '')
   final String tenderOrderReason;
   @override
-  @JsonKey(name: 'TenderPriceUnit', defaultValue: 0)
+  @JsonKey(name: 'tenderPriceUnit', defaultValue: 0)
   final int tenderPriceUnit;
   @override
-  @JsonKey(name: 'TenderPrice', defaultValue: '')
+  @JsonKey(name: 'tenderPrice', defaultValue: '')
   final String tenderPrice;
   @override
   @JsonKey(name: 'isTenderExpire', defaultValue: false)
@@ -957,13 +971,13 @@ class _$OrderHistoryItemDtoImpl extends _OrderHistoryItemDto {
   @JsonKey(name: 'isCovid', defaultValue: false)
   final bool isCovid;
   @override
-  @JsonKey(name: 'TotalUnitPrice', defaultValue: 0.0)
+  @JsonKey(name: 'totalUnitPrice', defaultValue: 0.0)
   final double totalUnitPrice;
   @override
-  @JsonKey(name: 'TotalTax', defaultValue: 0.0)
+  @JsonKey(name: 'totalTax', defaultValue: 0.0)
   final double totalTax;
   @override
-  @JsonKey(name: 'TaxRate', readValue: handleTax)
+  @JsonKey(name: 'taxRate', readValue: JsonReadValueHelper.handleTax)
   final double taxRate;
 
   @override
@@ -1124,51 +1138,51 @@ class _$OrderHistoryItemDtoImpl extends _OrderHistoryItemDto {
 
 abstract class _OrderHistoryItemDto extends OrderHistoryItemDto {
   const factory _OrderHistoryItemDto(
-      {@JsonKey(name: 'MaterialCode', defaultValue: '')
+      {@JsonKey(name: 'materialCode', defaultValue: '')
       required final String materialNumber,
-      @JsonKey(name: 'MaterialDescription', defaultValue: '')
+      @JsonKey(name: 'materialDescription', defaultValue: '')
       required final String materialDescription,
-      @JsonKey(name: 'DefaultMaterialDescription', defaultValue: '')
+      @JsonKey(name: 'defaultMaterialDescription', defaultValue: '')
       required final String defaultMaterialDescription,
-      @JsonKey(name: 'Qty', defaultValue: 0) required final int qty,
-      @JsonKey(name: 'UnitPrice', defaultValue: 0.0)
+      @JsonKey(name: 'qty', defaultValue: 0) required final int qty,
+      @JsonKey(name: 'unitPrice', defaultValue: 0.0)
       required final double unitPrice,
       @JsonKey(name: 'mrp', defaultValue: 0.0)
       required final double originPrice,
-      @JsonKey(name: 'TotalPrice', defaultValue: 0.0)
+      @JsonKey(name: 'totalPrice', defaultValue: 0.0)
       required final double totalPrice,
-      @JsonKey(name: 'Status', defaultValue: '') required final String status,
-      @JsonKey(name: 'DeliveryDate', defaultValue: '')
+      @JsonKey(name: 'status', defaultValue: '') required final String status,
+      @JsonKey(name: 'deliveryDate', defaultValue: '')
       required final String deliveryDate,
-      @JsonKey(name: 'OrderNumber', defaultValue: '')
+      @JsonKey(name: 'orderNumber', defaultValue: '')
       required final String orderNumber,
-      @JsonKey(readValue: _createdDateTimeReadValue)
+      @JsonKey(readValue: JsonReadValueHelper.readCreatedDateTimeValue)
       required final String createdDate,
-      @JsonKey(name: 'OrderBy', defaultValue: '') required final String orderBy,
-      @JsonKey(name: 'OrderType', defaultValue: '')
+      @JsonKey(name: 'orderBy', defaultValue: '') required final String orderBy,
+      @JsonKey(name: 'orderType', defaultValue: '')
       required final String orderType,
-      @JsonKey(name: 'Batch', defaultValue: '') required final String batch,
-      @JsonKey(name: 'IsBonusMaterial', defaultValue: false)
+      @JsonKey(name: 'batch', defaultValue: '') required final String batch,
+      @JsonKey(name: 'isBonusMaterial', defaultValue: false)
       required final bool isBonusMaterial,
-      @JsonKey(name: 'TelephoneNumber', defaultValue: '')
+      @JsonKey(name: 'telephoneNumber', defaultValue: '')
       required final String telephoneNumber,
-      @JsonKey(name: 'InvoiceNumber', defaultValue: '')
+      @JsonKey(name: 'invoiceNumber', defaultValue: '')
       required final String invoiceNumber,
-      @JsonKey(name: 'POReference', defaultValue: '')
+      @JsonKey(name: 'pOReference', defaultValue: '')
       required final String pOReference,
-      @JsonKey(name: 'ManufactureName', defaultValue: '')
+      @JsonKey(name: 'manufactureName', defaultValue: '')
       required final String manufactureName,
-      @JsonKey(name: 'GovernmentMaterialCode', defaultValue: '')
+      @JsonKey(name: 'governmentMaterialCode', defaultValue: '')
       required final String governmentMaterialCode,
-      @JsonKey(name: 'ItemRegistrationNumber', defaultValue: '')
+      @JsonKey(name: 'itemRegistrationNumber', defaultValue: '')
       required final String itemRegistrationNumber,
-      @JsonKey(name: 'ExpiryDate', defaultValue: '')
+      @JsonKey(name: 'expiryDate', defaultValue: '')
       required final String expiryDate,
-      @JsonKey(name: 'RequestedDeliveryDate', defaultValue: '')
+      @JsonKey(name: 'requestedDeliveryDate', defaultValue: '')
       required final String requestedDeliveryDate,
-      @JsonKey(name: 'SpecialInstructions', defaultValue: '')
+      @JsonKey(name: 'specialInstructions', defaultValue: '')
       required final String specialInstruction,
-      @JsonKey(name: 'Tax', defaultValue: 0.0) required final double tax,
+      @JsonKey(name: 'tax', defaultValue: 0.0) required final double tax,
       @JsonKey(name: 'EZRXNumber', defaultValue: '')
       required final String eZRXNumber,
       @JsonKey(name: 'poAttachment', defaultValue: <PoDocumentsDto>[])
@@ -1177,37 +1191,39 @@ abstract class _OrderHistoryItemDto extends OrderHistoryItemDto {
       required final bool promoStatus,
       @JsonKey(name: 'isCounterOffer', defaultValue: false)
       required final bool isCounterOffer,
-      @JsonKey(name: 'IsBundle', defaultValue: false)
+      @JsonKey(name: 'isBundle', defaultValue: false)
       required final bool isBundle,
-      @JsonKey(name: 'LineNumber', defaultValue: '')
+      @JsonKey(name: 'lineNumber', defaultValue: '')
       required final String lineNumber,
-      @JsonKey(name: 'PrincipalCode', defaultValue: '')
+      @JsonKey(name: 'principalCode', defaultValue: '')
       required final String principalCode,
-      @JsonKey(name: 'HidePrice', defaultValue: false)
+      @JsonKey(name: 'hidePrice', defaultValue: false)
       required final bool hidePrice,
       @JsonKey(name: 'referenceNotes', defaultValue: '')
       required final String referenceNotes,
-      @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+      @JsonKey(
+          defaultValue: false,
+          readValue: JsonReadValueHelper.mappingIsMarketPlace)
       required final bool isMarketPlace,
-      @JsonKey(name: 'TenderContractNumber', defaultValue: '')
+      @JsonKey(name: 'tenderContractNumber', defaultValue: '')
       required final String tenderContractNumber,
-      @JsonKey(name: 'TenderContractReference', defaultValue: '')
+      @JsonKey(name: 'tenderContractReference', defaultValue: '')
       required final String tenderContractReference,
-      @JsonKey(name: 'TenderOrderReason', defaultValue: '')
+      @JsonKey(name: 'tenderOrderReason', defaultValue: '')
       required final String tenderOrderReason,
-      @JsonKey(name: 'TenderPriceUnit', defaultValue: 0)
+      @JsonKey(name: 'tenderPriceUnit', defaultValue: 0)
       required final int tenderPriceUnit,
-      @JsonKey(name: 'TenderPrice', defaultValue: '')
+      @JsonKey(name: 'tenderPrice', defaultValue: '')
       required final String tenderPrice,
       @JsonKey(name: 'isTenderExpire', defaultValue: false)
       required final bool isTenderExpired,
       @JsonKey(name: 'isCovid', defaultValue: false)
       required final bool isCovid,
-      @JsonKey(name: 'TotalUnitPrice', defaultValue: 0.0)
+      @JsonKey(name: 'totalUnitPrice', defaultValue: 0.0)
       required final double totalUnitPrice,
-      @JsonKey(name: 'TotalTax', defaultValue: 0.0)
+      @JsonKey(name: 'totalTax', defaultValue: 0.0)
       required final double totalTax,
-      @JsonKey(name: 'TaxRate', readValue: handleTax)
+      @JsonKey(name: 'taxRate', readValue: JsonReadValueHelper.handleTax)
       required final double taxRate}) = _$OrderHistoryItemDtoImpl;
   const _OrderHistoryItemDto._() : super._();
 
@@ -1215,79 +1231,79 @@ abstract class _OrderHistoryItemDto extends OrderHistoryItemDto {
       _$OrderHistoryItemDtoImpl.fromJson;
 
   @override
-  @JsonKey(name: 'MaterialCode', defaultValue: '')
+  @JsonKey(name: 'materialCode', defaultValue: '')
   String get materialNumber;
   @override
-  @JsonKey(name: 'MaterialDescription', defaultValue: '')
+  @JsonKey(name: 'materialDescription', defaultValue: '')
   String get materialDescription;
   @override
-  @JsonKey(name: 'DefaultMaterialDescription', defaultValue: '')
+  @JsonKey(name: 'defaultMaterialDescription', defaultValue: '')
   String get defaultMaterialDescription;
   @override
-  @JsonKey(name: 'Qty', defaultValue: 0)
+  @JsonKey(name: 'qty', defaultValue: 0)
   int get qty;
   @override
-  @JsonKey(name: 'UnitPrice', defaultValue: 0.0)
+  @JsonKey(name: 'unitPrice', defaultValue: 0.0)
   double get unitPrice;
   @override
   @JsonKey(name: 'mrp', defaultValue: 0.0)
   double get originPrice;
   @override
-  @JsonKey(name: 'TotalPrice', defaultValue: 0.0)
+  @JsonKey(name: 'totalPrice', defaultValue: 0.0)
   double get totalPrice;
   @override
-  @JsonKey(name: 'Status', defaultValue: '')
+  @JsonKey(name: 'status', defaultValue: '')
   String get status;
   @override
-  @JsonKey(name: 'DeliveryDate', defaultValue: '')
+  @JsonKey(name: 'deliveryDate', defaultValue: '')
   String get deliveryDate;
   @override
-  @JsonKey(name: 'OrderNumber', defaultValue: '')
+  @JsonKey(name: 'orderNumber', defaultValue: '')
   String get orderNumber;
   @override
-  @JsonKey(readValue: _createdDateTimeReadValue)
+  @JsonKey(readValue: JsonReadValueHelper.readCreatedDateTimeValue)
   String get createdDate;
   @override
-  @JsonKey(name: 'OrderBy', defaultValue: '')
+  @JsonKey(name: 'orderBy', defaultValue: '')
   String get orderBy;
   @override
-  @JsonKey(name: 'OrderType', defaultValue: '')
+  @JsonKey(name: 'orderType', defaultValue: '')
   String get orderType;
   @override
-  @JsonKey(name: 'Batch', defaultValue: '')
+  @JsonKey(name: 'batch', defaultValue: '')
   String get batch;
   @override
-  @JsonKey(name: 'IsBonusMaterial', defaultValue: false)
+  @JsonKey(name: 'isBonusMaterial', defaultValue: false)
   bool get isBonusMaterial;
   @override
-  @JsonKey(name: 'TelephoneNumber', defaultValue: '')
+  @JsonKey(name: 'telephoneNumber', defaultValue: '')
   String get telephoneNumber;
   @override
-  @JsonKey(name: 'InvoiceNumber', defaultValue: '')
+  @JsonKey(name: 'invoiceNumber', defaultValue: '')
   String get invoiceNumber;
   @override
-  @JsonKey(name: 'POReference', defaultValue: '')
+  @JsonKey(name: 'pOReference', defaultValue: '')
   String get pOReference;
   @override
-  @JsonKey(name: 'ManufactureName', defaultValue: '')
+  @JsonKey(name: 'manufactureName', defaultValue: '')
   String get manufactureName;
   @override
-  @JsonKey(name: 'GovernmentMaterialCode', defaultValue: '')
+  @JsonKey(name: 'governmentMaterialCode', defaultValue: '')
   String get governmentMaterialCode;
   @override
-  @JsonKey(name: 'ItemRegistrationNumber', defaultValue: '')
+  @JsonKey(name: 'itemRegistrationNumber', defaultValue: '')
   String get itemRegistrationNumber;
   @override
-  @JsonKey(name: 'ExpiryDate', defaultValue: '')
+  @JsonKey(name: 'expiryDate', defaultValue: '')
   String get expiryDate;
   @override
-  @JsonKey(name: 'RequestedDeliveryDate', defaultValue: '')
+  @JsonKey(name: 'requestedDeliveryDate', defaultValue: '')
   String get requestedDeliveryDate;
   @override
-  @JsonKey(name: 'SpecialInstructions', defaultValue: '')
+  @JsonKey(name: 'specialInstructions', defaultValue: '')
   String get specialInstruction;
   @override
-  @JsonKey(name: 'Tax', defaultValue: 0.0)
+  @JsonKey(name: 'tax', defaultValue: 0.0)
   double get tax;
   @override
   @JsonKey(name: 'EZRXNumber', defaultValue: '')
@@ -1302,37 +1318,38 @@ abstract class _OrderHistoryItemDto extends OrderHistoryItemDto {
   @JsonKey(name: 'isCounterOffer', defaultValue: false)
   bool get isCounterOffer;
   @override
-  @JsonKey(name: 'IsBundle', defaultValue: false)
+  @JsonKey(name: 'isBundle', defaultValue: false)
   bool get isBundle;
   @override
-  @JsonKey(name: 'LineNumber', defaultValue: '')
+  @JsonKey(name: 'lineNumber', defaultValue: '')
   String get lineNumber;
   @override
-  @JsonKey(name: 'PrincipalCode', defaultValue: '')
+  @JsonKey(name: 'principalCode', defaultValue: '')
   String get principalCode;
   @override
-  @JsonKey(name: 'HidePrice', defaultValue: false)
+  @JsonKey(name: 'hidePrice', defaultValue: false)
   bool get hidePrice;
   @override
   @JsonKey(name: 'referenceNotes', defaultValue: '')
   String get referenceNotes;
   @override
-  @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+  @JsonKey(
+      defaultValue: false, readValue: JsonReadValueHelper.mappingIsMarketPlace)
   bool get isMarketPlace;
   @override
-  @JsonKey(name: 'TenderContractNumber', defaultValue: '')
+  @JsonKey(name: 'tenderContractNumber', defaultValue: '')
   String get tenderContractNumber;
   @override
-  @JsonKey(name: 'TenderContractReference', defaultValue: '')
+  @JsonKey(name: 'tenderContractReference', defaultValue: '')
   String get tenderContractReference;
   @override
-  @JsonKey(name: 'TenderOrderReason', defaultValue: '')
+  @JsonKey(name: 'tenderOrderReason', defaultValue: '')
   String get tenderOrderReason;
   @override
-  @JsonKey(name: 'TenderPriceUnit', defaultValue: 0)
+  @JsonKey(name: 'tenderPriceUnit', defaultValue: 0)
   int get tenderPriceUnit;
   @override
-  @JsonKey(name: 'TenderPrice', defaultValue: '')
+  @JsonKey(name: 'tenderPrice', defaultValue: '')
   String get tenderPrice;
   @override
   @JsonKey(name: 'isTenderExpire', defaultValue: false)
@@ -1341,13 +1358,13 @@ abstract class _OrderHistoryItemDto extends OrderHistoryItemDto {
   @JsonKey(name: 'isCovid', defaultValue: false)
   bool get isCovid;
   @override
-  @JsonKey(name: 'TotalUnitPrice', defaultValue: 0.0)
+  @JsonKey(name: 'totalUnitPrice', defaultValue: 0.0)
   double get totalUnitPrice;
   @override
-  @JsonKey(name: 'TotalTax', defaultValue: 0.0)
+  @JsonKey(name: 'totalTax', defaultValue: 0.0)
   double get totalTax;
   @override
-  @JsonKey(name: 'TaxRate', readValue: handleTax)
+  @JsonKey(name: 'taxRate', readValue: JsonReadValueHelper.handleTax)
   double get taxRate;
   @override
   @JsonKey(ignore: true)

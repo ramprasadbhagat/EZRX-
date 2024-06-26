@@ -8,30 +8,30 @@ import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
-import 'package:ezrxmobile/infrastructure/order/repository/discount_override_repository.dart';
+import 'package:ezrxmobile/infrastructure/order/repository/material_price_repository.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
-class DiscountOverrideRepositoryMock extends Mock
-    implements DiscountOverrideRepository {}
+class MaterialPriceRepositoryMock extends Mock
+    implements MaterialPriceRepository {}
 
 void main() {
-  late DiscountOverrideRepository discountOverrideRepositoryMock;
+  late MaterialPriceRepository materialPriceRepositoryMock;
 
   group('Testing discount override bloc', () {
     setUp(
       () {
-        discountOverrideRepositoryMock = DiscountOverrideRepositoryMock();
+        materialPriceRepositoryMock = MaterialPriceRepositoryMock();
       },
     );
     blocTest<DiscountOverrideBloc, DiscountOverrideState>(
       'fetch the override discount',
       build: () => DiscountOverrideBloc(
-        repository: discountOverrideRepositoryMock,
+        repository: materialPriceRepositoryMock,
       ),
       setUp: () {
         when(
-          () => discountOverrideRepositoryMock.getMaterialPriceWithOverride(
+          () => materialPriceRepositoryMock.getMaterialPriceWithOverride(
             customerCodeInfo: CustomerCodeInfo.empty(),
             salesOrganisation: SalesOrganisation.empty(),
             price: Price.empty(),
@@ -68,11 +68,11 @@ void main() {
     blocTest<DiscountOverrideBloc, DiscountOverrideState>(
       'update the override discount',
       build: () => DiscountOverrideBloc(
-        repository: discountOverrideRepositoryMock,
+        repository: materialPriceRepositoryMock,
       ),
       setUp: () {
         when(
-          () => discountOverrideRepositoryMock.getMaterialPriceWithOverride(
+          () => materialPriceRepositoryMock.getMaterialPriceWithOverride(
             customerCodeInfo: CustomerCodeInfo.empty(),
             salesOrganisation: SalesOrganisation.empty(),
             price: Price.empty(),
@@ -102,11 +102,11 @@ void main() {
     blocTest<DiscountOverrideBloc, DiscountOverrideState>(
       'failed to fetch the override discount',
       build: () => DiscountOverrideBloc(
-        repository: discountOverrideRepositoryMock,
+        repository: materialPriceRepositoryMock,
       ),
       setUp: () {
         when(
-          () => discountOverrideRepositoryMock.getMaterialPriceWithOverride(
+          () => materialPriceRepositoryMock.getMaterialPriceWithOverride(
             customerCodeInfo: CustomerCodeInfo.empty(),
             salesOrganisation: SalesOrganisation.empty(),
             price: Price.empty(),

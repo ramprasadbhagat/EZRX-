@@ -178,7 +178,7 @@ void main() {
           expect(announcementInfoDetailsPage, findsOneWidget);
           await tester.pump();
           final scrollToTopArrowIcon =
-              find.byKey(WidgetKeys.materialDetailsFloatingButton);
+              find.byKey(WidgetKeys.scrollToTopFloatingButton);
           final customScrollView =
               find.byKey(WidgetKeys.announcementInfoDetailList);
           await tester.drag(

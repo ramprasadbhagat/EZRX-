@@ -20,10 +20,10 @@ _$AdminPoAttachmentFilterDtoImpl _$$AdminPoAttachmentFilterDtoImplFromJson(
 Map<String, dynamic> _$$AdminPoAttachmentFilterDtoImplToJson(
         _$AdminPoAttachmentFilterDtoImpl instance) =>
     <String, dynamic>{
-      'orderNumber': overrideToJson(instance.orderNumber),
-      'exRxNo': overrideToJson(instance.exRxNo),
-      'salesOrg': overrideToJson(instance.salesOrg),
-      'soldTo': overrideToJson(instance.soldTo),
-      'toDate': overrideToJson(instance.toDate),
-      'fromDate': overrideToJson(instance.fromDate),
+      'orderNumber': valueOrNullToJson(instance.orderNumber),
+      'exRxNo': valueOrNullToJson(instance.exRxNo),
+      'salesOrg': valueOrNullToJson(instance.salesOrg),
+      'soldTo': valueOrNullToJson(instance.soldTo),
+      'toDate': valueOrNullToJson(instance.toDate),
+      'fromDate': valueOrNullToJson(instance.fromDate),
     };

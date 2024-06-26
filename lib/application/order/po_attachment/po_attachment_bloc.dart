@@ -45,7 +45,6 @@ class PoAttachmentBloc extends Bloc<PoAttachmentEvent, PoAttachmentState> {
           (_) async {
             final failureOrSuccess = await poAttachmentRepository.downloadFiles(
               files: e.files,
-              attachmentType: e.attachmentType,
             );
             emit(
               state.copyWith(
@@ -76,7 +75,6 @@ class PoAttachmentBloc extends Bloc<PoAttachmentEvent, PoAttachmentState> {
           (_) async {
             final failureOrSuccess = await poAttachmentRepository.openFile(
               files: e.files,
-              attachmentType: e.attachmentType,
             );
             failureOrSuccess.fold(
               (failure) => emit(

@@ -20,7 +20,7 @@ RoleDto _$RoleDtoFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$RoleDto {
-  @JsonKey(name: 'id', readValue: _convertRoleId)
+  @JsonKey(name: 'id', readValue: JsonReadValueHelper.convertRoleId)
   String get id => throw _privateConstructorUsedError;
   @JsonKey(name: 'name', defaultValue: '')
   String get name => throw _privateConstructorUsedError;
@@ -40,7 +40,8 @@ abstract class $RoleDtoCopyWith<$Res> {
       _$RoleDtoCopyWithImpl<$Res, RoleDto>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'id', readValue: _convertRoleId) String id,
+      {@JsonKey(name: 'id', readValue: JsonReadValueHelper.convertRoleId)
+      String id,
       @JsonKey(name: 'name', defaultValue: '') String name,
       @JsonKey(name: 'type', defaultValue: '') String type,
       @JsonKey(name: 'description', defaultValue: '') String description});
@@ -93,7 +94,8 @@ abstract class _$$RoleDtoImplCopyWith<$Res> implements $RoleDtoCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'id', readValue: _convertRoleId) String id,
+      {@JsonKey(name: 'id', readValue: JsonReadValueHelper.convertRoleId)
+      String id,
       @JsonKey(name: 'name', defaultValue: '') String name,
       @JsonKey(name: 'type', defaultValue: '') String type,
       @JsonKey(name: 'description', defaultValue: '') String description});
@@ -140,7 +142,8 @@ class __$$RoleDtoImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$RoleDtoImpl extends _RoleDto {
   const _$RoleDtoImpl(
-      {@JsonKey(name: 'id', readValue: _convertRoleId) required this.id,
+      {@JsonKey(name: 'id', readValue: JsonReadValueHelper.convertRoleId)
+      required this.id,
       @JsonKey(name: 'name', defaultValue: '') required this.name,
       @JsonKey(name: 'type', defaultValue: '') required this.type,
       @JsonKey(name: 'description', defaultValue: '')
@@ -151,7 +154,7 @@ class _$RoleDtoImpl extends _RoleDto {
       _$$RoleDtoImplFromJson(json);
 
   @override
-  @JsonKey(name: 'id', readValue: _convertRoleId)
+  @JsonKey(name: 'id', readValue: JsonReadValueHelper.convertRoleId)
   final String id;
   @override
   @JsonKey(name: 'name', defaultValue: '')
@@ -200,7 +203,8 @@ class _$RoleDtoImpl extends _RoleDto {
 
 abstract class _RoleDto extends RoleDto {
   const factory _RoleDto(
-      {@JsonKey(name: 'id', readValue: _convertRoleId) required final String id,
+      {@JsonKey(name: 'id', readValue: JsonReadValueHelper.convertRoleId)
+      required final String id,
       @JsonKey(name: 'name', defaultValue: '') required final String name,
       @JsonKey(name: 'type', defaultValue: '') required final String type,
       @JsonKey(name: 'description', defaultValue: '')
@@ -210,7 +214,7 @@ abstract class _RoleDto extends RoleDto {
   factory _RoleDto.fromJson(Map<String, dynamic> json) = _$RoleDtoImpl.fromJson;
 
   @override
-  @JsonKey(name: 'id', readValue: _convertRoleId)
+  @JsonKey(name: 'id', readValue: JsonReadValueHelper.convertRoleId)
   String get id;
   @override
   @JsonKey(name: 'name', defaultValue: '')

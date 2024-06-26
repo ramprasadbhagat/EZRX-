@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:ezrxmobile/domain/order/entities/order_history_details_po_documents.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/market_place/market_place_seller_title.dart';
 
@@ -26,7 +27,6 @@ import 'package:ezrxmobile/application/product_image/product_image_bloc.dart';
 import 'package:ezrxmobile/application/returns/usage_code/usage_code_bloc.dart';
 import 'package:ezrxmobile/application/returns/new_request/new_request_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
-import 'package:ezrxmobile/domain/returns/entities/return_request_attachment.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/usage_code_local.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/return_request_local.dart';
 import 'package:ezrxmobile/presentation/returns/new_request/widgets/expandable_info.dart';
@@ -94,9 +94,9 @@ void main() {
       assignmentNumber: fakeReturnMaterial.assignmentNumber,
       itemNumber: fakeReturnMaterial.itemNumber,
       uploadedFiles: [
-        ReturnRequestAttachment.empty().copyWith(
+        PoDocuments.empty().copyWith(
           name: 'fake_name',
-          path: 'fake_path',
+          url: 'fake_path',
           size: FileSize(1),
         ),
       ],
@@ -468,9 +468,9 @@ void main() {
       verify(
         () => returnRequestAttachmentBlocMock.add(
           ReturnRequestAttachmentEvent.downloadFile(
-            file: ReturnRequestAttachment.empty().copyWith(
+            file: PoDocuments.empty().copyWith(
               name: 'fake_name',
-              path: 'fake_path',
+              url: 'fake_path',
               size: FileSize(1),
             ),
           ),

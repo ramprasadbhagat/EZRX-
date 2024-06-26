@@ -1,3 +1,6 @@
+import 'dart:convert';
+
+import 'package:ezrxmobile/infrastructure/core/common/json_key_converter.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/order_history_basic_info_dto.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -19,14 +22,14 @@ void main() {
     });
     test('Test toDomain', () {
       final configs = OrderHistoryBasicInfoDto.fromJson(
-        data,
+        makeResponseCamelCase(jsonEncode(data)),
       ).toDomain();
       expect(configs.companyName.getOrCrash(), 'fake-companyname');
     });
 
     test('Test fromDomain', () {
       final configs = OrderHistoryBasicInfoDto.fromJson(
-        data,
+        makeResponseCamelCase(jsonEncode(data)),
       ).toDomain();
       // final res = OrderHistoryBasicInfoDto.fromDomain(configs);
       expect(configs.companyName.getOrCrash(), 'fake-companyname');

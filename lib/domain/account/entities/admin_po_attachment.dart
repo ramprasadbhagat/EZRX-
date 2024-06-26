@@ -1,4 +1,5 @@
 import 'package:ezrxmobile/domain/order/entities/order_history_details_po_documents.dart';
+import 'package:ezrxmobile/domain/returns/value/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'admin_po_attachment.freezed.dart';
@@ -23,5 +24,6 @@ class AdminPoAttachment with _$AdminPoAttachment {
   PoDocuments get pooDocuments => PoDocuments(
         name: documentName,
         url: documentUrl,
+        size: FileSize(0),
       );
 }

@@ -1,6 +1,6 @@
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/order/entities/order_history_details_po_documents.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
-import 'package:ezrxmobile/domain/returns/entities/return_request_attachment.dart';
 import 'package:ezrxmobile/domain/returns/value/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 part 'return_request_information.freezed.dart';
@@ -25,7 +25,7 @@ class ReturnRequestInformation with _$ReturnRequestInformation {
     required String materialGroup,
     required List<String> imageUrl,
     required List<String> attachments,
-    required List<ReturnRequestAttachment> attachmentUrl,
+    required List<PoDocuments> attachmentUrl,
     required DateTimeStringValue createdDate,
     required String principal,
     required PrincipalName principalName,
@@ -54,7 +54,7 @@ class ReturnRequestInformation with _$ReturnRequestInformation {
         comment: StringValue(''),
         createdDate: DateTimeStringValue(''),
         imageUrl: [],
-        attachmentUrl: <ReturnRequestAttachment>[],
+        attachmentUrl: <PoDocuments>[],
         invoiceDate: DateTimeStringValue(''),
         invoiceNo: '',
         materialDescription: '',
@@ -93,6 +93,8 @@ class ReturnRequestInformation with _$ReturnRequestInformation {
   String get displayNAIfBapiStatusIsNotSuccess =>
       bapiStatus.isSuccess ? bapiSalesDocNumber : 'NA';
 
+//We're ignore this file separate with return material
+//ignore: code-duplication
   bool displayOutSidePolicy(bool allowReturnsOutsidePolicy) =>
       outsidePolicy && allowReturnsOutsidePolicy;
 

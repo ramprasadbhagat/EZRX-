@@ -122,7 +122,7 @@ class _MaterialDetails extends StatelessWidget {
                 comboItem: comboItem,
                 totalQuantityUnit: state.totalQuantityUnit,
               ),
-              _MaterialQuantitySection(
+              _ComboMaterialQuantitySection(
                 comboItem: comboItem,
                 comboDealMaterial: comboDealMaterial,
               ),

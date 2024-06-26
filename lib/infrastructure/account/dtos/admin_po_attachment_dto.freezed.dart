@@ -20,26 +20,27 @@ AdminPoAttachmentDto _$AdminPoAttachmentDtoFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$AdminPoAttachmentDto {
-  @JsonKey(name: 'salesOrderNumber', defaultValue: '', toJson: overrideToJson)
+  @JsonKey(
+      name: 'salesOrderNumber', defaultValue: '', toJson: valueOrNullToJson)
   String get salesOrderNumber => throw _privateConstructorUsedError;
   @JsonKey(
-      name: 'ezrxReferenceNumber', defaultValue: '', toJson: overrideToJson)
+      name: 'ezrxReferenceNumber', defaultValue: '', toJson: valueOrNullToJson)
   String get ezrxReferenceNumber => throw _privateConstructorUsedError;
-  @JsonKey(name: 'createdBy', defaultValue: '', toJson: overrideToJson)
+  @JsonKey(name: 'createdBy', defaultValue: '', toJson: valueOrNullToJson)
   String get createdBy => throw _privateConstructorUsedError;
-  @JsonKey(name: 'createdTime', defaultValue: '', toJson: overrideToJson)
+  @JsonKey(name: 'createdTime', defaultValue: '', toJson: valueOrNullToJson)
   String get createdTime => throw _privateConstructorUsedError;
-  @JsonKey(name: 'documentUrl', defaultValue: '', toJson: overrideToJson)
+  @JsonKey(name: 'documentUrl', defaultValue: '', toJson: valueOrNullToJson)
   String get documentUrl => throw _privateConstructorUsedError;
-  @JsonKey(name: 'documentName', defaultValue: '', toJson: overrideToJson)
+  @JsonKey(name: 'documentName', defaultValue: '', toJson: valueOrNullToJson)
   String get documentName => throw _privateConstructorUsedError;
-  @JsonKey(name: 'salesOrg', defaultValue: '', toJson: overrideToJson)
+  @JsonKey(name: 'salesOrg', defaultValue: '', toJson: valueOrNullToJson)
   String get salesOrg => throw _privateConstructorUsedError;
-  @JsonKey(name: 'soldToCode', defaultValue: '', toJson: overrideToJson)
+  @JsonKey(name: 'soldToCode', defaultValue: '', toJson: valueOrNullToJson)
   String get soldToCode => throw _privateConstructorUsedError;
-  @JsonKey(name: 'shipToCode', defaultValue: '', toJson: overrideToJson)
+  @JsonKey(name: 'shipToCode', defaultValue: '', toJson: valueOrNullToJson)
   String get shipToCode => throw _privateConstructorUsedError;
-  @JsonKey(name: 'tempOrderNumber', defaultValue: '', toJson: overrideToJson)
+  @JsonKey(name: 'tempOrderNumber', defaultValue: '', toJson: valueOrNullToJson)
   String get tempOrderNumber => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -56,27 +57,30 @@ abstract class $AdminPoAttachmentDtoCopyWith<$Res> {
   @useResult
   $Res call(
       {@JsonKey(
-          name: 'salesOrderNumber', defaultValue: '', toJson: overrideToJson)
+          name: 'salesOrderNumber', defaultValue: '', toJson: valueOrNullToJson)
       String salesOrderNumber,
       @JsonKey(
-          name: 'ezrxReferenceNumber', defaultValue: '', toJson: overrideToJson)
+          name: 'ezrxReferenceNumber',
+          defaultValue: '',
+          toJson: valueOrNullToJson)
       String ezrxReferenceNumber,
-      @JsonKey(name: 'createdBy', defaultValue: '', toJson: overrideToJson)
+      @JsonKey(name: 'createdBy', defaultValue: '', toJson: valueOrNullToJson)
       String createdBy,
-      @JsonKey(name: 'createdTime', defaultValue: '', toJson: overrideToJson)
+      @JsonKey(name: 'createdTime', defaultValue: '', toJson: valueOrNullToJson)
       String createdTime,
-      @JsonKey(name: 'documentUrl', defaultValue: '', toJson: overrideToJson)
+      @JsonKey(name: 'documentUrl', defaultValue: '', toJson: valueOrNullToJson)
       String documentUrl,
-      @JsonKey(name: 'documentName', defaultValue: '', toJson: overrideToJson)
+      @JsonKey(
+          name: 'documentName', defaultValue: '', toJson: valueOrNullToJson)
       String documentName,
-      @JsonKey(name: 'salesOrg', defaultValue: '', toJson: overrideToJson)
+      @JsonKey(name: 'salesOrg', defaultValue: '', toJson: valueOrNullToJson)
       String salesOrg,
-      @JsonKey(name: 'soldToCode', defaultValue: '', toJson: overrideToJson)
+      @JsonKey(name: 'soldToCode', defaultValue: '', toJson: valueOrNullToJson)
       String soldToCode,
-      @JsonKey(name: 'shipToCode', defaultValue: '', toJson: overrideToJson)
+      @JsonKey(name: 'shipToCode', defaultValue: '', toJson: valueOrNullToJson)
       String shipToCode,
       @JsonKey(
-          name: 'tempOrderNumber', defaultValue: '', toJson: overrideToJson)
+          name: 'tempOrderNumber', defaultValue: '', toJson: valueOrNullToJson)
       String tempOrderNumber});
 }
 
@@ -160,27 +164,30 @@ abstract class _$$AdminPoAttachmentDtoImplCopyWith<$Res>
   @useResult
   $Res call(
       {@JsonKey(
-          name: 'salesOrderNumber', defaultValue: '', toJson: overrideToJson)
+          name: 'salesOrderNumber', defaultValue: '', toJson: valueOrNullToJson)
       String salesOrderNumber,
       @JsonKey(
-          name: 'ezrxReferenceNumber', defaultValue: '', toJson: overrideToJson)
+          name: 'ezrxReferenceNumber',
+          defaultValue: '',
+          toJson: valueOrNullToJson)
       String ezrxReferenceNumber,
-      @JsonKey(name: 'createdBy', defaultValue: '', toJson: overrideToJson)
+      @JsonKey(name: 'createdBy', defaultValue: '', toJson: valueOrNullToJson)
       String createdBy,
-      @JsonKey(name: 'createdTime', defaultValue: '', toJson: overrideToJson)
+      @JsonKey(name: 'createdTime', defaultValue: '', toJson: valueOrNullToJson)
       String createdTime,
-      @JsonKey(name: 'documentUrl', defaultValue: '', toJson: overrideToJson)
+      @JsonKey(name: 'documentUrl', defaultValue: '', toJson: valueOrNullToJson)
       String documentUrl,
-      @JsonKey(name: 'documentName', defaultValue: '', toJson: overrideToJson)
+      @JsonKey(
+          name: 'documentName', defaultValue: '', toJson: valueOrNullToJson)
       String documentName,
-      @JsonKey(name: 'salesOrg', defaultValue: '', toJson: overrideToJson)
+      @JsonKey(name: 'salesOrg', defaultValue: '', toJson: valueOrNullToJson)
       String salesOrg,
-      @JsonKey(name: 'soldToCode', defaultValue: '', toJson: overrideToJson)
+      @JsonKey(name: 'soldToCode', defaultValue: '', toJson: valueOrNullToJson)
       String soldToCode,
-      @JsonKey(name: 'shipToCode', defaultValue: '', toJson: overrideToJson)
+      @JsonKey(name: 'shipToCode', defaultValue: '', toJson: valueOrNullToJson)
       String shipToCode,
       @JsonKey(
-          name: 'tempOrderNumber', defaultValue: '', toJson: overrideToJson)
+          name: 'tempOrderNumber', defaultValue: '', toJson: valueOrNullToJson)
       String tempOrderNumber});
 }
 
@@ -256,27 +263,30 @@ class __$$AdminPoAttachmentDtoImplCopyWithImpl<$Res>
 class _$AdminPoAttachmentDtoImpl extends _AdminPoAttachmentDto {
   const _$AdminPoAttachmentDtoImpl(
       {@JsonKey(
-          name: 'salesOrderNumber', defaultValue: '', toJson: overrideToJson)
+          name: 'salesOrderNumber', defaultValue: '', toJson: valueOrNullToJson)
       required this.salesOrderNumber,
       @JsonKey(
-          name: 'ezrxReferenceNumber', defaultValue: '', toJson: overrideToJson)
+          name: 'ezrxReferenceNumber',
+          defaultValue: '',
+          toJson: valueOrNullToJson)
       required this.ezrxReferenceNumber,
-      @JsonKey(name: 'createdBy', defaultValue: '', toJson: overrideToJson)
+      @JsonKey(name: 'createdBy', defaultValue: '', toJson: valueOrNullToJson)
       required this.createdBy,
-      @JsonKey(name: 'createdTime', defaultValue: '', toJson: overrideToJson)
+      @JsonKey(name: 'createdTime', defaultValue: '', toJson: valueOrNullToJson)
       required this.createdTime,
-      @JsonKey(name: 'documentUrl', defaultValue: '', toJson: overrideToJson)
+      @JsonKey(name: 'documentUrl', defaultValue: '', toJson: valueOrNullToJson)
       required this.documentUrl,
-      @JsonKey(name: 'documentName', defaultValue: '', toJson: overrideToJson)
+      @JsonKey(
+          name: 'documentName', defaultValue: '', toJson: valueOrNullToJson)
       required this.documentName,
-      @JsonKey(name: 'salesOrg', defaultValue: '', toJson: overrideToJson)
+      @JsonKey(name: 'salesOrg', defaultValue: '', toJson: valueOrNullToJson)
       required this.salesOrg,
-      @JsonKey(name: 'soldToCode', defaultValue: '', toJson: overrideToJson)
+      @JsonKey(name: 'soldToCode', defaultValue: '', toJson: valueOrNullToJson)
       required this.soldToCode,
-      @JsonKey(name: 'shipToCode', defaultValue: '', toJson: overrideToJson)
+      @JsonKey(name: 'shipToCode', defaultValue: '', toJson: valueOrNullToJson)
       required this.shipToCode,
       @JsonKey(
-          name: 'tempOrderNumber', defaultValue: '', toJson: overrideToJson)
+          name: 'tempOrderNumber', defaultValue: '', toJson: valueOrNullToJson)
       required this.tempOrderNumber})
       : super._();
 
@@ -284,35 +294,36 @@ class _$AdminPoAttachmentDtoImpl extends _AdminPoAttachmentDto {
       _$$AdminPoAttachmentDtoImplFromJson(json);
 
   @override
-  @JsonKey(name: 'salesOrderNumber', defaultValue: '', toJson: overrideToJson)
+  @JsonKey(
+      name: 'salesOrderNumber', defaultValue: '', toJson: valueOrNullToJson)
   final String salesOrderNumber;
   @override
   @JsonKey(
-      name: 'ezrxReferenceNumber', defaultValue: '', toJson: overrideToJson)
+      name: 'ezrxReferenceNumber', defaultValue: '', toJson: valueOrNullToJson)
   final String ezrxReferenceNumber;
   @override
-  @JsonKey(name: 'createdBy', defaultValue: '', toJson: overrideToJson)
+  @JsonKey(name: 'createdBy', defaultValue: '', toJson: valueOrNullToJson)
   final String createdBy;
   @override
-  @JsonKey(name: 'createdTime', defaultValue: '', toJson: overrideToJson)
+  @JsonKey(name: 'createdTime', defaultValue: '', toJson: valueOrNullToJson)
   final String createdTime;
   @override
-  @JsonKey(name: 'documentUrl', defaultValue: '', toJson: overrideToJson)
+  @JsonKey(name: 'documentUrl', defaultValue: '', toJson: valueOrNullToJson)
   final String documentUrl;
   @override
-  @JsonKey(name: 'documentName', defaultValue: '', toJson: overrideToJson)
+  @JsonKey(name: 'documentName', defaultValue: '', toJson: valueOrNullToJson)
   final String documentName;
   @override
-  @JsonKey(name: 'salesOrg', defaultValue: '', toJson: overrideToJson)
+  @JsonKey(name: 'salesOrg', defaultValue: '', toJson: valueOrNullToJson)
   final String salesOrg;
   @override
-  @JsonKey(name: 'soldToCode', defaultValue: '', toJson: overrideToJson)
+  @JsonKey(name: 'soldToCode', defaultValue: '', toJson: valueOrNullToJson)
   final String soldToCode;
   @override
-  @JsonKey(name: 'shipToCode', defaultValue: '', toJson: overrideToJson)
+  @JsonKey(name: 'shipToCode', defaultValue: '', toJson: valueOrNullToJson)
   final String shipToCode;
   @override
-  @JsonKey(name: 'tempOrderNumber', defaultValue: '', toJson: overrideToJson)
+  @JsonKey(name: 'tempOrderNumber', defaultValue: '', toJson: valueOrNullToJson)
   final String tempOrderNumber;
 
   @override
@@ -381,27 +392,30 @@ class _$AdminPoAttachmentDtoImpl extends _AdminPoAttachmentDto {
 abstract class _AdminPoAttachmentDto extends AdminPoAttachmentDto {
   const factory _AdminPoAttachmentDto(
       {@JsonKey(
-          name: 'salesOrderNumber', defaultValue: '', toJson: overrideToJson)
+          name: 'salesOrderNumber', defaultValue: '', toJson: valueOrNullToJson)
       required final String salesOrderNumber,
       @JsonKey(
-          name: 'ezrxReferenceNumber', defaultValue: '', toJson: overrideToJson)
+          name: 'ezrxReferenceNumber',
+          defaultValue: '',
+          toJson: valueOrNullToJson)
       required final String ezrxReferenceNumber,
-      @JsonKey(name: 'createdBy', defaultValue: '', toJson: overrideToJson)
+      @JsonKey(name: 'createdBy', defaultValue: '', toJson: valueOrNullToJson)
       required final String createdBy,
-      @JsonKey(name: 'createdTime', defaultValue: '', toJson: overrideToJson)
+      @JsonKey(name: 'createdTime', defaultValue: '', toJson: valueOrNullToJson)
       required final String createdTime,
-      @JsonKey(name: 'documentUrl', defaultValue: '', toJson: overrideToJson)
+      @JsonKey(name: 'documentUrl', defaultValue: '', toJson: valueOrNullToJson)
       required final String documentUrl,
-      @JsonKey(name: 'documentName', defaultValue: '', toJson: overrideToJson)
+      @JsonKey(
+          name: 'documentName', defaultValue: '', toJson: valueOrNullToJson)
       required final String documentName,
-      @JsonKey(name: 'salesOrg', defaultValue: '', toJson: overrideToJson)
+      @JsonKey(name: 'salesOrg', defaultValue: '', toJson: valueOrNullToJson)
       required final String salesOrg,
-      @JsonKey(name: 'soldToCode', defaultValue: '', toJson: overrideToJson)
+      @JsonKey(name: 'soldToCode', defaultValue: '', toJson: valueOrNullToJson)
       required final String soldToCode,
-      @JsonKey(name: 'shipToCode', defaultValue: '', toJson: overrideToJson)
+      @JsonKey(name: 'shipToCode', defaultValue: '', toJson: valueOrNullToJson)
       required final String shipToCode,
       @JsonKey(
-          name: 'tempOrderNumber', defaultValue: '', toJson: overrideToJson)
+          name: 'tempOrderNumber', defaultValue: '', toJson: valueOrNullToJson)
       required final String tempOrderNumber}) = _$AdminPoAttachmentDtoImpl;
   const _AdminPoAttachmentDto._() : super._();
 
@@ -409,35 +423,36 @@ abstract class _AdminPoAttachmentDto extends AdminPoAttachmentDto {
       _$AdminPoAttachmentDtoImpl.fromJson;
 
   @override
-  @JsonKey(name: 'salesOrderNumber', defaultValue: '', toJson: overrideToJson)
+  @JsonKey(
+      name: 'salesOrderNumber', defaultValue: '', toJson: valueOrNullToJson)
   String get salesOrderNumber;
   @override
   @JsonKey(
-      name: 'ezrxReferenceNumber', defaultValue: '', toJson: overrideToJson)
+      name: 'ezrxReferenceNumber', defaultValue: '', toJson: valueOrNullToJson)
   String get ezrxReferenceNumber;
   @override
-  @JsonKey(name: 'createdBy', defaultValue: '', toJson: overrideToJson)
+  @JsonKey(name: 'createdBy', defaultValue: '', toJson: valueOrNullToJson)
   String get createdBy;
   @override
-  @JsonKey(name: 'createdTime', defaultValue: '', toJson: overrideToJson)
+  @JsonKey(name: 'createdTime', defaultValue: '', toJson: valueOrNullToJson)
   String get createdTime;
   @override
-  @JsonKey(name: 'documentUrl', defaultValue: '', toJson: overrideToJson)
+  @JsonKey(name: 'documentUrl', defaultValue: '', toJson: valueOrNullToJson)
   String get documentUrl;
   @override
-  @JsonKey(name: 'documentName', defaultValue: '', toJson: overrideToJson)
+  @JsonKey(name: 'documentName', defaultValue: '', toJson: valueOrNullToJson)
   String get documentName;
   @override
-  @JsonKey(name: 'salesOrg', defaultValue: '', toJson: overrideToJson)
+  @JsonKey(name: 'salesOrg', defaultValue: '', toJson: valueOrNullToJson)
   String get salesOrg;
   @override
-  @JsonKey(name: 'soldToCode', defaultValue: '', toJson: overrideToJson)
+  @JsonKey(name: 'soldToCode', defaultValue: '', toJson: valueOrNullToJson)
   String get soldToCode;
   @override
-  @JsonKey(name: 'shipToCode', defaultValue: '', toJson: overrideToJson)
+  @JsonKey(name: 'shipToCode', defaultValue: '', toJson: valueOrNullToJson)
   String get shipToCode;
   @override
-  @JsonKey(name: 'tempOrderNumber', defaultValue: '', toJson: overrideToJson)
+  @JsonKey(name: 'tempOrderNumber', defaultValue: '', toJson: valueOrNullToJson)
   String get tempOrderNumber;
   @override
   @JsonKey(ignore: true)

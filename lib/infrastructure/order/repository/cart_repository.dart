@@ -27,7 +27,6 @@ import 'package:ezrxmobile/infrastructure/order/datasource/stock_info_remote.dar
 import 'package:ezrxmobile/infrastructure/order/dtos/cart_product_request_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/combo_product_request_dto.dart';
 
-import 'package:ezrxmobile/infrastructure/order/datasource/discount_override_remote.dart';
 import 'package:ezrxmobile/domain/order/entities/apl_simulator_order.dart';
 
 class CartRepository implements ICartRepository {
@@ -36,7 +35,6 @@ class CartRepository implements ICartRepository {
   final CartRemoteDataSource cartRemoteDataSource;
   final StockInfoLocalDataSource stockInfoLocalDataSource;
   final StockInfoRemoteDataSource stockInfoRemoteDataSource;
-  final DiscountOverrideRemoteDataSource discountOverrideRemoteDataSource;
   final MixpanelService mixpanelService;
   final DeviceStorage deviceStorage;
   final MaterialBannerStorage materialBannerStorage;
@@ -45,7 +43,6 @@ class CartRepository implements ICartRepository {
     required this.config,
     required this.stockInfoLocalDataSource,
     required this.stockInfoRemoteDataSource,
-    required this.discountOverrideRemoteDataSource,
     required this.mixpanelService,
     required this.cartLocalDataSource,
     required this.cartRemoteDataSource,
@@ -383,8 +380,9 @@ class CartRepository implements ICartRepository {
   }) async {
     if (config.appFlavor == Flavor.mock) {
       try {
-        final productList =
-            await cartLocalDataSource.upsertCartItemsWithReorderMaterials();
+        final productList = await cartLocalDataSource.upsertCart(
+          type: UpsertCartLocalType.upsertCartItemsReorder,
+        );
 
         return Right(productList);
       } catch (e) {
@@ -438,7 +436,9 @@ class CartRepository implements ICartRepository {
   }) async {
     if (config.appFlavor == Flavor.mock) {
       try {
-        final productList = await cartLocalDataSource.upsertCartItems();
+        final productList = await cartLocalDataSource.upsertCart(
+          type: UpsertCartLocalType.upsertCartItems,
+        );
 
         return Right(productList);
       } catch (e) {
@@ -543,8 +543,9 @@ class CartRepository implements ICartRepository {
   }) async {
     if (config.appFlavor == Flavor.mock) {
       try {
-        final productList =
-            await cartLocalDataSource.upsertCartItemsWithComboOffers();
+        final productList = await cartLocalDataSource.upsertCart(
+          type: UpsertCartLocalType.upsertCartItemsComboOffer,
+        );
 
         return Right(productList);
       } catch (e) {
@@ -654,8 +655,9 @@ class CartRepository implements ICartRepository {
   }) async {
     if (config.appFlavor == Flavor.mock) {
       try {
-        final productList =
-            await cartLocalDataSource.upsertCartItemsWithReorderMaterials();
+        final productList = await cartLocalDataSource.upsertCart(
+          type: UpsertCartLocalType.upsertCartItemsReorder,
+        );
 
         return Right(productList);
       } catch (e) {

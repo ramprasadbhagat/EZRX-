@@ -22,7 +22,7 @@ class AccountSummaryTabRobot extends CommonRobot {
   final _statusLabel = find.byKey(WidgetKeys.invoiceItemStatus);
   final _summaryId = find.byKey(WidgetKeys.invoiceCreditItemId);
   final _summaryExpandableSection =
-      find.byKey(WidgetKeys.summaryExpandableSection);
+      find.byKey(WidgetKeys.expandableSection);
   final _newPaymentButtonFinder = find.byKey(WidgetKeys.newPaymentButton);
   final _govNumber = find.byKey(WidgetKeys.governmentNumber);
 

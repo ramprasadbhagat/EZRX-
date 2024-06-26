@@ -101,7 +101,10 @@ class _InvoiceCreditItem extends StatelessWidget {
                   : PriceStyle.commonPrice,
               price: data.amountInTransactionCurrency.toString(),
             ),
-            _ExpandableSection(
+            ExpandableSection(
+              expandedTitle: 'Hide Debit/Credit Ref. Number(s)',
+              collapseTitle: 'Show Debit/Credit Ref. Number(s)',
+              haveDivider: true,
               child: Padding(
                 key: WidgetKeys.summaryExpandableSectionDetails,
                 padding: const EdgeInsets.only(top: 8.0),

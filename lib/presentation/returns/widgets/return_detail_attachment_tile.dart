@@ -1,4 +1,4 @@
-import 'package:ezrxmobile/domain/returns/entities/return_request_attachment.dart';
+import 'package:ezrxmobile/domain/order/entities/order_history_details_po_documents.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
@@ -12,7 +12,7 @@ class ReturnDetailAttachmentTile extends StatelessWidget {
     required this.tapDownload,
   });
 
-  final ReturnRequestAttachment attachment;
+  final PoDocuments attachment;
   final bool isDownloading;
   final VoidCallback tapDownload;
 

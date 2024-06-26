@@ -1,9 +1,6 @@
 import 'dart:convert';
-
-import 'package:dio/dio.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/admin_po_attachment.dart';
-import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/admin_po_attachment_query_mutation.dart';
 import 'package:ezrxmobile/infrastructure/account/dtos/admin_po_attachment_dto.dart';
@@ -43,25 +40,13 @@ class AdminPoAttachmentRemoteDataSource {
           'variables': variables,
         }),
       );
-      _getPoAttachmentExceptionChecker(res: res);
+      dataSourceExceptionHandler.handleExceptionChecker(res: res);
+
       final finalData = res.data['data']['getPOAttachment'];
 
       return List.from(finalData)
           .map((e) => AdminPoAttachmentDto.fromJson(e).toDomain())
           .toList();
     });
-  }
-
-  void _getPoAttachmentExceptionChecker({
-    required Response<dynamic> res,
-  }) {
-    if (dataSourceExceptionHandler.isServerResponseError(res: res)) {
-      throw ServerException(message: res.data['errors'][0]['message']);
-    } else if (res.statusCode != 200) {
-      throw ServerException(
-        code: res.statusCode ?? 0,
-        message: res.statusMessage ?? '',
-      );
-    }
   }
 }

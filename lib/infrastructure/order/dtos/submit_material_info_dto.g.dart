@@ -19,7 +19,8 @@ _$SubmitMaterialInfoDtoImpl _$$SubmitMaterialInfoDtoImplFromJson(
       comment: json['Comment'] as String? ?? '',
       parentId: json['ParentID'] as String? ?? '',
       materialItemOverride: MaterialItemOverrideDto.fromJson(
-          materialItemReadValue(json, 'override') as Map<String, dynamic>),
+          JsonReadValueHelper.readValueMapDynamic(json, 'override')
+              as Map<String, dynamic>),
       productType: json['ProductType'] as String? ?? '',
       price: (json['price'] as num?)?.toDouble() ?? 0,
       tax: (json['tax'] as num?)?.toDouble() ?? 0,
@@ -32,7 +33,8 @@ _$SubmitMaterialInfoDtoImpl _$$SubmitMaterialInfoDtoImplFromJson(
       batch: json['batch'] as String? ?? '',
       isCounterOffer: json['isCounterOffer'] as bool? ?? false,
       contract: SubmitTenderContractDto.fromJson(
-          materialItemReadValue(json, 'contract') as Map<String, dynamic>),
+          JsonReadValueHelper.readValueMapDynamic(json, 'contract')
+              as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$SubmitMaterialInfoDtoImplToJson(

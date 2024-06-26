@@ -94,7 +94,7 @@ void main() {
     );
     fakeMaterialResponse = await MaterialListLocalDataSource().getProductList();
     fakeComboDealMaterialResponse = await MaterialListLocalDataSource()
-        .getComboDealMaterialsPrincipalCode();
+        .getProductList(isComboDealMaterials: true);
   });
 
   group('Material List Repository Test', () {
@@ -286,8 +286,9 @@ void main() {
       test('=> get locally for principal code fail', () async {
         when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
         when(
-          () =>
-              materialListLocalDataSource.getComboDealMaterialsPrincipalCode(),
+          () => materialListLocalDataSource.getProductList(
+            isComboDealMaterials: true,
+          ),
         ).thenThrow((invocation) async => MockException());
 
         final result = await materialListRepository.getComboDealMaterials(
@@ -309,8 +310,9 @@ void main() {
       test('=> get locally for principal code success', () async {
         when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
         when(
-          () =>
-              materialListLocalDataSource.getComboDealMaterialsPrincipalCode(),
+          () => materialListLocalDataSource.getProductList(
+            isComboDealMaterials: true,
+          ),
         ).thenAnswer((invocation) async => fakeComboDealMaterialResponse);
 
         final result = await materialListRepository.getComboDealMaterials(

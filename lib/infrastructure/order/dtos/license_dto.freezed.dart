@@ -27,10 +27,14 @@ mixin _$LicenseDto {
   @JsonKey(name: 'licenseNumber', defaultValue: '')
   String get licenseNumber => throw _privateConstructorUsedError;
   @JsonKey(
-      name: 'validFrom', defaultValue: '', readValue: dateTimeStringFormatCheck)
+      name: 'validFrom',
+      defaultValue: '',
+      readValue: JsonReadValueHelper.readDateTimeStringFormat)
   String get validFrom => throw _privateConstructorUsedError;
   @JsonKey(
-      name: 'validTo', defaultValue: '', readValue: dateTimeStringFormatCheck)
+      name: 'validTo',
+      defaultValue: '',
+      readValue: JsonReadValueHelper.readDateTimeStringFormat)
   String get validTo => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -53,12 +57,12 @@ abstract class $LicenseDtoCopyWith<$Res> {
       @JsonKey(
           name: 'validFrom',
           defaultValue: '',
-          readValue: dateTimeStringFormatCheck)
+          readValue: JsonReadValueHelper.readDateTimeStringFormat)
       String validFrom,
       @JsonKey(
           name: 'validTo',
           defaultValue: '',
-          readValue: dateTimeStringFormatCheck)
+          readValue: JsonReadValueHelper.readDateTimeStringFormat)
       String validTo});
 }
 
@@ -122,12 +126,12 @@ abstract class _$$licenseDtoImplCopyWith<$Res>
       @JsonKey(
           name: 'validFrom',
           defaultValue: '',
-          readValue: dateTimeStringFormatCheck)
+          readValue: JsonReadValueHelper.readDateTimeStringFormat)
       String validFrom,
       @JsonKey(
           name: 'validTo',
           defaultValue: '',
-          readValue: dateTimeStringFormatCheck)
+          readValue: JsonReadValueHelper.readDateTimeStringFormat)
       String validTo});
 }
 
@@ -186,12 +190,12 @@ class _$licenseDtoImpl extends _licenseDto {
       @JsonKey(
           name: 'validFrom',
           defaultValue: '',
-          readValue: dateTimeStringFormatCheck)
+          readValue: JsonReadValueHelper.readDateTimeStringFormat)
       required this.validFrom,
       @JsonKey(
           name: 'validTo',
           defaultValue: '',
-          readValue: dateTimeStringFormatCheck)
+          readValue: JsonReadValueHelper.readDateTimeStringFormat)
       required this.validTo})
       : super._();
 
@@ -209,11 +213,15 @@ class _$licenseDtoImpl extends _licenseDto {
   final String licenseNumber;
   @override
   @JsonKey(
-      name: 'validFrom', defaultValue: '', readValue: dateTimeStringFormatCheck)
+      name: 'validFrom',
+      defaultValue: '',
+      readValue: JsonReadValueHelper.readDateTimeStringFormat)
   final String validFrom;
   @override
   @JsonKey(
-      name: 'validTo', defaultValue: '', readValue: dateTimeStringFormatCheck)
+      name: 'validTo',
+      defaultValue: '',
+      readValue: JsonReadValueHelper.readDateTimeStringFormat)
   final String validTo;
 
   @override
@@ -267,12 +275,12 @@ abstract class _licenseDto extends LicenseDto {
       @JsonKey(
           name: 'validFrom',
           defaultValue: '',
-          readValue: dateTimeStringFormatCheck)
+          readValue: JsonReadValueHelper.readDateTimeStringFormat)
       required final String validFrom,
       @JsonKey(
           name: 'validTo',
           defaultValue: '',
-          readValue: dateTimeStringFormatCheck)
+          readValue: JsonReadValueHelper.readDateTimeStringFormat)
       required final String validTo}) = _$licenseDtoImpl;
   const _licenseDto._() : super._();
 
@@ -290,11 +298,15 @@ abstract class _licenseDto extends LicenseDto {
   String get licenseNumber;
   @override
   @JsonKey(
-      name: 'validFrom', defaultValue: '', readValue: dateTimeStringFormatCheck)
+      name: 'validFrom',
+      defaultValue: '',
+      readValue: JsonReadValueHelper.readDateTimeStringFormat)
   String get validFrom;
   @override
   @JsonKey(
-      name: 'validTo', defaultValue: '', readValue: dateTimeStringFormatCheck)
+      name: 'validTo',
+      defaultValue: '',
+      readValue: JsonReadValueHelper.readDateTimeStringFormat)
   String get validTo;
   @override
   @JsonKey(ignore: true)

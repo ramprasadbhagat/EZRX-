@@ -1,7 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
-import 'package:ezrxmobile/application/order/order_eligibility/order_eligibility_bloc.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/order/entities/bundle.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
@@ -15,7 +14,7 @@ import 'package:ezrxmobile/presentation/core/price_component.dart';
 import 'package:ezrxmobile/presentation/core/product_tag.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/core/pre_order_label.dart';
-import 'package:ezrxmobile/presentation/orders/create_order/cart_item_quantity_input.dart';
+import 'package:ezrxmobile/presentation/orders/cart/item/cart_bundle_item_quantity_section.dart';
 import 'package:ezrxmobile/presentation/products/widgets/stock_info.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
@@ -316,250 +315,12 @@ class _MaterialDetails extends StatelessWidget {
                   color: ZPColors.neutralsGrey1,
                 ),
           ),
-          _MaterialQuantitySection(
+          CartBundleItemQuantitySection(
             cartItem: cartItem,
             bundle: bundle,
           ),
         ],
       ),
-    );
-  }
-}
-
-class _MaterialQuantitySection extends StatefulWidget {
-  final MaterialInfo cartItem;
-  final Bundle bundle;
-  const _MaterialQuantitySection({
-    required this.cartItem,
-    required this.bundle,
-  });
-
-  @override
-  State<_MaterialQuantitySection> createState() =>
-      _MaterialQuantitySectionState();
-}
-
-class _MaterialQuantitySectionState extends State<_MaterialQuantitySection> {
-  final _controller = TextEditingController();
-
-  String get _qty => widget.cartItem.quantity.intValue.toString();
-
-  @override
-  void initState() {
-    _controller.value = TextEditingValue(
-      text: _qty,
-      selection: TextSelection.collapsed(
-        offset: _controller.selection.base.offset,
-      ),
-    );
-    super.initState();
-  }
-
-  @override
-  void didUpdateWidget(covariant _MaterialQuantitySection oldWidget) {
-    super.didUpdateWidget(oldWidget);
-    if (_qty != _controller.text) {
-      _controller.text = _qty;
-      _controller.selection = TextSelection.collapsed(
-        offset: widget.cartItem.quantity.getOrDefaultValue(0).toString().length,
-      );
-    }
-  }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final totalQuantityOfProductBundle = context
-        .read<CartBloc>()
-        .state
-        .findItemById(MaterialNumber(widget.bundle.bundleCode))
-        .bundle
-        .totalQty;
-
-    //Bundle minimum quantity is the first quantity which is sorted with respect to sequence.
-    final bundleMinQty = totalQuantityOfProductBundle >
-            widget.bundle.minimumQuantityBundleMaterial.quantity
-        ? 1
-        : totalQuantityOfProductBundle;
-
-    return Column(
-      children: [
-        Row(
-          children: [
-            Expanded(
-              child: CartItemQuantityInput(
-                isEnabled: true,
-                quantityAddKey: WidgetKeys.increaseQuantityKey,
-                quantityDeleteKey: WidgetKeys.decreaseQuantityKey,
-                quantityTextKey: WidgetKeys.quantityInputTextKey,
-                controller: _controller,
-                onFieldChange: (value) {},
-                minusPressed: (k) => _callCartUpsertItemsEvent(quantity: k),
-                addPressed: (k) => _callCartUpsertItemsEvent(quantity: k),
-                onSubmit: (value) => _callCartUpsertItemsEvent(quantity: value),
-                isLoading: context.read<CartBloc>().state.isUpserting &&
-                    _qty != _controller.text,
-                minimumQty: bundleMinQty,
-              ),
-            ),
-            IconButton(
-              key: WidgetKeys.cartItemProductDeleteButton,
-              onPressed: () => _showConfirmRemove(context),
-              icon: const Icon(Icons.delete_outlined),
-            ),
-          ],
-        ),
-        if (!widget.cartItem.inStock &&
-            context
-                .read<OrderEligibilityBloc>()
-                .state
-                .displayInvalidOOSOnCartItem)
-          ErrorTextWithIcon(
-            valueText: context.tr('Material out of stock'),
-          ),
-      ],
-    );
-  }
-
-  void _showConfirmRemove(BuildContext context) {
-    showModalBottomSheet(
-      context: context,
-      isScrollControlled: true,
-      enableDrag: false,
-      useSafeArea: true,
-      builder: (_) {
-        return Wrap(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(
-                20,
-              ),
-              child: Column(
-                children: [
-                  Text(
-                    context.tr('Remove item from bundle?'),
-                    style: Theme.of(context)
-                        .textTheme
-                        .labelLarge
-                        ?.copyWith(color: ZPColors.primary, fontSize: 20),
-                  ),
-                  const SizedBox(
-                    height: 8,
-                  ),
-                  Text(
-                    context.tr(
-                      'Removing items from the bundle may result in price changes.',
-                    ),
-                    style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                          color: ZPColors.extraLightGrey4,
-                        ),
-                  ),
-                  const SizedBox(
-                    height: 40,
-                  ),
-                  _ConfirmButton(confirmFunction: _callCartUpsertItemsEvent),
-                ],
-              ),
-            ),
-          ],
-        );
-      },
-    );
-  }
-
-  void _callCartUpsertItemsEvent({
-    required int quantity,
-  }) {
-    context.read<CartBloc>().add(
-          CartEvent.upsertCartItems(
-            priceAggregate: PriceAggregate.empty().copyWith(
-              materialInfo: MaterialInfo.empty().copyWith(
-                materialNumber: MaterialNumber(
-                  widget.bundle.bundleCode,
-                ),
-              ),
-              bundle: Bundle.empty().copyWith(
-                materials: [
-                  widget.cartItem.copyWith(quantity: MaterialQty(quantity)),
-                ],
-                bundleCode: widget.bundle.bundleCode,
-              ),
-            ),
-          ),
-        );
-  }
-}
-
-class _ConfirmButton extends StatelessWidget {
-  final Function({required int quantity}) confirmFunction;
-  const _ConfirmButton({required this.confirmFunction});
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Expanded(
-          child: ElevatedButton(
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-            style: Theme.of(context).elevatedButtonTheme.style!.copyWith(
-                  backgroundColor: const WidgetStatePropertyAll(
-                    ZPColors.white,
-                  ),
-                  shape: const WidgetStatePropertyAll(
-                    RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(8),
-                      ),
-                      side: BorderSide(color: ZPColors.primary),
-                    ),
-                  ),
-                ),
-            child: Text(
-              context.tr('Cancel'),
-              style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                    color: ZPColors.primary,
-                  ),
-            ),
-          ),
-        ),
-        const SizedBox(
-          width: 16.0,
-        ),
-        Expanded(
-          child: ElevatedButton(
-            onPressed: () {
-              confirmFunction(quantity: 0);
-              Navigator.of(context).pop();
-            },
-            style: Theme.of(context).elevatedButtonTheme.style!.copyWith(
-                  backgroundColor: const WidgetStatePropertyAll(
-                    ZPColors.primary,
-                  ),
-                  shape: const WidgetStatePropertyAll(
-                    RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(8),
-                      ),
-                      side: BorderSide(color: ZPColors.primary),
-                    ),
-                  ),
-                ),
-            child: Text(
-              context.tr('Remove'),
-              style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                    color: ZPColors.white,
-                  ),
-            ),
-          ),
-        ),
-      ],
     );
   }
 }

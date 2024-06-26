@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/material_list_local.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/stock_info_repository.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:bloc_test/bloc_test.dart';
@@ -13,7 +14,6 @@ import 'package:ezrxmobile/domain/core/aggregate/product_detail_aggregate.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/stock_info_local.dart';
 import 'package:ezrxmobile/domain/core/product_images/entities/product_images.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/favourite_repository.dart';
-import 'package:ezrxmobile/infrastructure/order/datasource/product_search_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/product_details_local.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/product_details_repository.dart';
 import 'package:ezrxmobile/application/order/product_detail/details/product_detail_bloc.dart';
@@ -68,7 +68,7 @@ void main() {
     mockMaterialInfo = await ProductDetailLocalDataSource().getProductDetails();
     mockStockInfo = (await StockInfoLocalDataSource().getStockInfoList()).first;
     fakeMaterialInfoList =
-        await ProductSearchLocalDataSource().getSearchedProductList();
+        await MaterialListLocalDataSource().getProductList();
     fakeMaterialInfo = fakeMaterialInfoList.products
         .where(
           (element) => element.data.isNotEmpty,

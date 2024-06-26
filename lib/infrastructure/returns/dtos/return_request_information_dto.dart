@@ -2,6 +2,7 @@ import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_request_information.dart';
 import 'package:ezrxmobile/domain/returns/value/value_objects.dart';
+import 'package:ezrxmobile/infrastructure/core/common/json_key_readvalue_helper.dart';
 import 'package:ezrxmobile/infrastructure/core/common/json_key_converter.dart';
 import 'package:ezrxmobile/infrastructure/returns/dtos/return_attachment_dto.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -71,7 +72,10 @@ class ReturnRequestInformationDto with _$ReturnRequestInformationDto {
       defaultValue: <PriceOverrideTrailDto>[],
     )
     required List<PriceOverrideTrailDto> priceOverrideTrail,
-    @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+    @JsonKey(
+      defaultValue: false,
+      readValue: JsonReadValueHelper.mappingIsMarketPlace,
+    )
     required bool isMarketPlace,
   }) = _ReturnRequestInformationDto;
 

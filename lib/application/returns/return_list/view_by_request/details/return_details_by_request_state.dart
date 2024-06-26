@@ -7,8 +7,8 @@ class ReturnDetailsByRequestState with _$ReturnDetailsByRequestState {
     required Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
     required List<ReturnRequestInformation> requestInformation,
     required ReturnRequestInformationHeader requestInformationHeader,
-    required List<ReturnRequestAttachment> downloadingAttachments,
-    required ReturnRequestAttachment downloadedAttachment,
+    required List<PoDocuments> downloadingAttachments,
+    required PoDocuments downloadedAttachment,
     required Option<Either<ApiFailure, dynamic>> downloadFailureOrSuccessOption,
   }) = _ReturnSummaryDetailsState;
 
@@ -17,8 +17,8 @@ class ReturnDetailsByRequestState with _$ReturnDetailsByRequestState {
         isLoading: false,
         requestInformation: <ReturnRequestInformation>[],
         requestInformationHeader: ReturnRequestInformationHeader.empty(),
-        downloadingAttachments: <ReturnRequestAttachment>[],
-        downloadedAttachment: ReturnRequestAttachment.empty(),
+        downloadingAttachments: <PoDocuments>[],
+        downloadedAttachment: PoDocuments.empty(),
         downloadFailureOrSuccessOption: none(),
       );
 }

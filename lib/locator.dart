@@ -250,8 +250,6 @@ import 'package:ezrxmobile/infrastructure/order/datasource/cart/cart_remote_data
 import 'package:ezrxmobile/infrastructure/order/datasource/combo_deal_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/combo_deal_query_mutation.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/combo_deal_remote.dart';
-import 'package:ezrxmobile/infrastructure/order/datasource/discount_override_local.dart';
-import 'package:ezrxmobile/infrastructure/order/datasource/discount_override_remote.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/favourite_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/favourite_query.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/favourite_remote.dart';
@@ -297,8 +295,6 @@ import 'package:ezrxmobile/infrastructure/order/datasource/po_document_remote.da
 import 'package:ezrxmobile/infrastructure/order/datasource/price_override/price_override_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/price_override/price_override_query_mutation.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/price_override/price_override_remote.dart';
-import 'package:ezrxmobile/infrastructure/order/datasource/product_search_local.dart';
-import 'package:ezrxmobile/infrastructure/order/datasource/product_search_remote.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/stock_info_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/stock_info_query.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/stock_info_remote.dart';
@@ -312,7 +308,6 @@ import 'package:ezrxmobile/infrastructure/order/datasource/view_by_order_details
 import 'package:ezrxmobile/infrastructure/order/datasource/view_by_order_details_query_mutation.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/view_by_order_details_remote.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/combo_deal_repository.dart';
-import 'package:ezrxmobile/infrastructure/order/repository/discount_override_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/favourite_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/material_bundle_list_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/material_filter_repository.dart';
@@ -374,8 +369,6 @@ import 'package:ezrxmobile/infrastructure/payments/repository/payment_in_progres
 import 'package:ezrxmobile/infrastructure/payments/repository/payment_summary_details_repository.dart';
 import 'package:ezrxmobile/infrastructure/payments/repository/payment_summary_repository.dart';
 import 'package:ezrxmobile/infrastructure/payments/repository/soa_repository.dart';
-import 'package:ezrxmobile/infrastructure/returns/datasource/approver_return_request_information_local.dart';
-import 'package:ezrxmobile/infrastructure/returns/datasource/approver_return_request_information_remote.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/approver_return_request_query.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/approver_return_requests_local.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/approver_return_requests_remote.dart';
@@ -383,8 +376,6 @@ import 'package:ezrxmobile/infrastructure/returns/datasource/policy_configuratio
 import 'package:ezrxmobile/infrastructure/returns/datasource/policy_configuration_query_mutation.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/policy_configuration_remote.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/request_information_query.dart';
-import 'package:ezrxmobile/infrastructure/returns/datasource/return_details_by_request_local.dart';
-import 'package:ezrxmobile/infrastructure/returns/datasource/return_details_by_request_remote.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/return_list_local.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/return_list_remote.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/return_query.dart';
@@ -404,7 +395,6 @@ import 'package:ezrxmobile/infrastructure/returns/datasource/user_restriction_mu
 import 'package:ezrxmobile/infrastructure/returns/datasource/user_restriction_remote.dart';
 import 'package:ezrxmobile/infrastructure/returns/repository/policy_configuration_repository.dart';
 import 'package:ezrxmobile/infrastructure/returns/repository/return_approver_repository.dart';
-import 'package:ezrxmobile/infrastructure/returns/repository/return_details_by_request_repository.dart';
 import 'package:ezrxmobile/infrastructure/returns/repository/return_list_repository.dart';
 import 'package:ezrxmobile/infrastructure/returns/repository/return_request_repository.dart';
 import 'package:ezrxmobile/infrastructure/returns/repository/return_request_type_code_repository.dart';
@@ -1576,34 +1566,10 @@ void setupLocator() {
     ),
   );
 
-  //============================================================
-  //  Discount Override
-  //
-  //============================================================
-
-  locator.registerLazySingleton(() => DiscountOverrideLocalDataSource());
-
-  locator.registerLazySingleton(
-    () => DiscountOverrideRemoteDataSource(
-      httpService: locator<HttpService>(),
-      queryMutation: locator<MaterialPriceQueryMutation>(),
-      config: locator<Config>(),
-      dataSourceExceptionHandler: locator<DataSourceExceptionHandler>(),
-    ),
-  );
-
-  locator.registerLazySingleton(
-    () => DiscountOverrideRepository(
-      config: locator<Config>(),
-      localDataSource: locator<DiscountOverrideLocalDataSource>(),
-      remoteDataSource: locator<DiscountOverrideRemoteDataSource>(),
-    ),
-  );
-
   // Using registerFactory here because we need multiple instances of DiscountOverrideBloc
   locator.registerFactory(
     () => DiscountOverrideBloc(
-      repository: locator<DiscountOverrideRepository>(),
+      repository: locator<MaterialPriceRepository>(),
     ),
   );
 
@@ -1728,8 +1694,6 @@ void setupLocator() {
       config: locator<Config>(),
       stockInfoLocalDataSource: locator<StockInfoLocalDataSource>(),
       stockInfoRemoteDataSource: locator<StockInfoRemoteDataSource>(),
-      discountOverrideRemoteDataSource:
-          locator<DiscountOverrideRemoteDataSource>(),
       cartLocalDataSource: locator<CartLocalDataSource>(),
       cartRemoteDataSource: locator<CartRemoteDataSource>(),
       deviceStorage: locator<DeviceStorage>(),
@@ -1824,6 +1788,24 @@ void setupLocator() {
   );
 
   //============================================================
+  //  Return Request Information
+  //
+  //============================================================
+
+  locator.registerLazySingleton(
+    () => ReturnSummaryDetailsRequestInformationLocal(),
+  );
+  locator.registerLazySingleton(
+    () => ReturnSummaryDetailsRequestInformationRemote(
+      config: locator<Config>(),
+      httpService: locator<HttpService>(),
+      dataSourceExceptionHandler: locator<DataSourceExceptionHandler>(),
+      requestInformationQuery: locator<RequestInformationQuery>(),
+      remoteConfigService: locator<RemoteConfigService>(),
+    ),
+  );
+
+  //============================================================
   //  Return Approver Actions
   //
   //============================================================
@@ -1845,18 +1827,6 @@ void setupLocator() {
       dataSourceExceptionHandler: locator<DataSourceExceptionHandler>(),
     ),
   );
-  locator.registerLazySingleton(
-    () => ApproverReturnRequestInformationLocal(),
-  );
-  locator.registerLazySingleton(
-    () => ApproverReturnRequestInformationRemote(
-      config: locator<Config>(),
-      httpService: locator<HttpService>(),
-      dataSourceExceptionHandler: locator<DataSourceExceptionHandler>(),
-      approverReturnRequestInformationQuery: locator<RequestInformationQuery>(),
-      remoteConfigService: locator<RemoteConfigService>(),
-    ),
-  );
 
   locator.registerLazySingleton(
     () => ReturnApproverRepository(
@@ -1864,9 +1834,9 @@ void setupLocator() {
       returnRequestLocalDataSource: locator<ApproverReturnRequestsLocal>(),
       returnRequestRemoteDataSource: locator<ApproverReturnRequestsRemote>(),
       returnRequestInformationLocalDataSource:
-          locator<ApproverReturnRequestInformationLocal>(),
+          locator<ReturnSummaryDetailsRequestInformationLocal>(),
       returnRequestInformationRemoteDataSource:
-          locator<ApproverReturnRequestInformationRemote>(),
+          locator<ReturnSummaryDetailsRequestInformationRemote>(),
       deviceStorage: locator<DeviceStorage>(),
     ),
   );
@@ -2099,6 +2069,7 @@ void setupLocator() {
       config: locator<Config>(),
       httpService: locator<HttpService>(),
       paymentItemQuery: locator<PaymentItemQuery>(),
+      paymentSummaryQuery: locator<PaymentSummaryQuery>(),
       dataSourceExceptionHandler: locator<DataSourceExceptionHandler>(),
     ),
   );
@@ -2180,15 +2151,11 @@ void setupLocator() {
   //============================================================
 
   locator.registerLazySingleton(
-    () => ReturnSummaryDetailsRequestInformationLocal(),
-  );
-
-  locator.registerLazySingleton(
     () => ReturnSummaryDetailsRepository(
       config: locator<Config>(),
-      returnSummaryDetailsRequestInformationLocal:
+      returnRequestInformationLocalDataSource:
           locator<ReturnSummaryDetailsRequestInformationLocal>(),
-      returnSummaryDetailsRequestInformationRemote:
+      returnRequestInformationRemoteDataSource:
           locator<ReturnSummaryDetailsRequestInformationRemote>(),
       deviceStorage: locator<DeviceStorage>(),
     ),
@@ -2198,16 +2165,7 @@ void setupLocator() {
     () => ReturnSummaryDetailsBloc(
       returnSummaryDetailsRepository: locator<ReturnSummaryDetailsRepository>(),
       returnRequestRepository: locator<ReturnRequestRepository>(),
-    ),
-  );
-
-  locator.registerLazySingleton(
-    () => ReturnSummaryDetailsRequestInformationRemote(
-      config: locator<Config>(),
-      httpService: locator<HttpService>(),
-      requestInformationQuery: locator<RequestInformationQuery>(),
-      dataSourceExceptionHandler: locator<DataSourceExceptionHandler>(),
-      remoteConfigService: locator<RemoteConfigService>(),
+      poAttachmentRepository: locator<PoAttachmentRepository>(),
     ),
   );
 
@@ -2218,34 +2176,10 @@ void setupLocator() {
 
   locator.registerLazySingleton(
     () => ReturnDetailsByRequestBloc(
-      returnDetailsByRequestRepository:
-          locator<ReturnDetailsByRequestRepository>(),
+      returnRequestInformationRepository:
+          locator<ReturnSummaryDetailsRepository>(),
       returnRequestRepository: locator<ReturnRequestRepository>(),
-    ),
-  );
-
-  locator.registerLazySingleton(
-    () => ReturnSummaryDetailsByRequestLocal(),
-  );
-
-  locator.registerLazySingleton(
-    () => ReturnSummaryDetailsByRequestRemote(
-      config: locator<Config>(),
-      httpService: locator<HttpService>(),
-      requestInformationQuery: locator<RequestInformationQuery>(),
-      dataSourceExceptionHandler: locator<DataSourceExceptionHandler>(),
-      remoteConfigService: locator<RemoteConfigService>(),
-    ),
-  );
-
-  locator.registerLazySingleton(
-    () => ReturnDetailsByRequestRepository(
-      config: locator<Config>(),
-      returnSummaryDetailsByRequestLocal:
-          locator<ReturnSummaryDetailsByRequestLocal>(),
-      returnSummaryDetailsByRequestRemote:
-          locator<ReturnSummaryDetailsByRequestRemote>(),
-      deviceStorage: locator<DeviceStorage>(),
+      poAttachmentRepository: locator<PoAttachmentRepository>(),
     ),
   );
 
@@ -2544,22 +2478,11 @@ void setupLocator() {
   //
   //============================================================
 
-  locator.registerLazySingleton(() => ProductSearchLocalDataSource());
-  locator.registerLazySingleton(
-    () => ProductSearchRemoteDataSource(
-      config: locator<Config>(),
-      dataSourceExceptionHandler: locator<DataSourceExceptionHandler>(),
-      httpService: locator<HttpService>(),
-      materialListQuery: locator<ProductsQuery>(),
-      remoteConfigService: locator<RemoteConfigService>(),
-    ),
-  );
-
   locator.registerLazySingleton(
     () => ProductSearchRepository(
       config: locator<Config>(),
-      localDataSource: locator<ProductSearchLocalDataSource>(),
-      remoteDataSource: locator<ProductSearchRemoteDataSource>(),
+      materialListLocalDataSource: locator<MaterialListLocalDataSource>(),
+      materialListRemoteDataSource: locator<MaterialListRemoteDataSource>(),
       productSuggestionHistoryStorage:
           locator<ProductSuggestionHistoryStorage>(),
       deviceStorage: locator<DeviceStorage>(),
@@ -2921,6 +2844,8 @@ void setupLocator() {
       filePickerService: locator<FilePickerService>(),
       fileSystemHelper: locator<FileSystemHelper>(),
       deviceStorage: locator<DeviceStorage>(),
+      poDocumentRemoteDataSource: locator<PoDocumentRemoteDataSource>(),
+      poDocumentLocalDataSource: locator<PoDocumentLocalDataSource>(),
     ),
   );
   locator.registerLazySingleton(
@@ -2940,6 +2865,7 @@ void setupLocator() {
   locator.registerLazySingleton(
     () => ReturnRequestAttachmentBloc(
       returnRequestRepository: locator<ReturnRequestRepository>(),
+      poAttachmentRepository: locator<PoAttachmentRepository>(),
     ),
   );
 

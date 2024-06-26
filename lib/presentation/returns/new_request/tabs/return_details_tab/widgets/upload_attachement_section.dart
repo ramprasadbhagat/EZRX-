@@ -176,7 +176,7 @@ class _AttachmentUploadOptionPickerState
   }
 }
 
-class _UploadedFileList extends StatelessWidget {
+class _UploadedFileList extends StatelessWidget with BottomsheetMixin {
   const _UploadedFileList({
     required this.data,
   });
@@ -195,74 +195,58 @@ class _UploadedFileList extends StatelessWidget {
               Text(
                 '${'Attachments'.tr()}:',
               ),
-              ...data.uploadedFiles
-                  .map(
-                    (file) => Container(
-                      margin: const EdgeInsets.only(top: 8),
-                      padding: const EdgeInsets.only(
-                        left: 12,
-                      ),
-                      decoration: const BoxDecoration(
-                        color: ZPColors.extraLightGray,
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(8),
-                        ),
-                      ),
-                      child: Row(
-                        children: [
-                          Expanded(
-                            child: Text(
-                              '${file.name} - ${file.size.displayText}',
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodySmall
-                                  ?.copyWith(
+              ...data.uploadedFiles.map(
+                (file) => Container(
+                  margin: const EdgeInsets.only(top: 8),
+                  padding: const EdgeInsets.only(
+                    left: 12,
+                  ),
+                  decoration: const BoxDecoration(
+                    color: ZPColors.extraLightGray,
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(8),
+                    ),
+                  ),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: Text(
+                          '${file.name} - ${file.size.displayText}',
+                          style:
+                              Theme.of(context).textTheme.bodySmall?.copyWith(
                                     color: ZPColors.darkerGreen,
                                   ),
-                            ),
-                          ),
-                          IconButton(
-                            icon: const Icon(Icons.delete_outline_outlined),
-                            padding: const EdgeInsets.all(0.0),
-                            onPressed: () async {
-                              final confirmed =
-                                  await _showConfirmBottomSheet(context);
-                              if ((confirmed ?? false) && context.mounted) {
-                                context.read<ReturnRequestAttachmentBloc>().add(
-                                      ReturnRequestAttachmentEvent.deleteFile(
-                                        file: file,
-                                      ),
-                                    );
-                                context.read<NewRequestBloc>().add(
-                                      NewRequestEvent.toggleFiles(
-                                        files: [file],
-                                        included: false,
-                                        uuid: data.uuid,
-                                      ),
-                                    );
-                              }
-                            },
-                          ),
-                        ],
+                        ),
                       ),
-                    ),
-                  )
-                  ,
+                      IconButton(
+                        icon: const Icon(Icons.delete_outline_outlined),
+                        padding: const EdgeInsets.all(0.0),
+                        onPressed: () async {
+                          final confirmed = await showConfirmBottomSheet(
+                            context: context,
+                          );
+                          if ((confirmed ?? false) && context.mounted) {
+                            context.read<ReturnRequestAttachmentBloc>().add(
+                                  ReturnRequestAttachmentEvent.deleteFile(
+                                    file: file,
+                                  ),
+                                );
+                            context.read<NewRequestBloc>().add(
+                                  NewRequestEvent.toggleFiles(
+                                    files: [file],
+                                    included: false,
+                                    uuid: data.uuid,
+                                  ),
+                                );
+                          }
+                        },
+                      ),
+                    ],
+                  ),
+                ),
+              ),
             ],
           )
         : const SizedBox.shrink();
-  }
-
-  Future<bool?> _showConfirmBottomSheet(BuildContext context) {
-    return showModalBottomSheet<bool>(
-      context: context,
-      isScrollControlled: true,
-      enableDrag: false,
-      builder: (_) => const ConfirmBottomSheet(
-        title: 'Remove item?',
-        content: 'This action cannot be undone',
-        confirmButtonText: 'Remove',
-      ),
-    );
   }
 }

@@ -40,7 +40,8 @@ mixin _$NotificationDataDto {
   String get paymentNumber => throw _privateConstructorUsedError;
   @JsonKey(name: 'paymentBatchAdditionalInfo', defaultValue: '')
   String get paymentBatchAdditionalInfo => throw _privateConstructorUsedError;
-  @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+  @JsonKey(
+      defaultValue: false, readValue: JsonReadValueHelper.mappingIsMarketPlace)
   bool get isMarketPlace => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -68,7 +69,9 @@ abstract class $NotificationDataDtoCopyWith<$Res> {
       @JsonKey(name: 'paymentNumber', defaultValue: '') String paymentNumber,
       @JsonKey(name: 'paymentBatchAdditionalInfo', defaultValue: '')
       String paymentBatchAdditionalInfo,
-      @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+      @JsonKey(
+          defaultValue: false,
+          readValue: JsonReadValueHelper.mappingIsMarketPlace)
       bool isMarketPlace});
 }
 
@@ -167,7 +170,9 @@ abstract class _$$NotificationDataDtoImplCopyWith<$Res>
       @JsonKey(name: 'paymentNumber', defaultValue: '') String paymentNumber,
       @JsonKey(name: 'paymentBatchAdditionalInfo', defaultValue: '')
       String paymentBatchAdditionalInfo,
-      @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+      @JsonKey(
+          defaultValue: false,
+          readValue: JsonReadValueHelper.mappingIsMarketPlace)
       bool isMarketPlace});
 }
 
@@ -260,7 +265,9 @@ class _$NotificationDataDtoImpl extends _NotificationDataDto {
       required this.paymentNumber,
       @JsonKey(name: 'paymentBatchAdditionalInfo', defaultValue: '')
       required this.paymentBatchAdditionalInfo,
-      @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+      @JsonKey(
+          defaultValue: false,
+          readValue: JsonReadValueHelper.mappingIsMarketPlace)
       required this.isMarketPlace})
       : super._();
 
@@ -298,7 +305,8 @@ class _$NotificationDataDtoImpl extends _NotificationDataDto {
   @JsonKey(name: 'paymentBatchAdditionalInfo', defaultValue: '')
   final String paymentBatchAdditionalInfo;
   @override
-  @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+  @JsonKey(
+      defaultValue: false, readValue: JsonReadValueHelper.mappingIsMarketPlace)
   final bool isMarketPlace;
 
   @override
@@ -382,7 +390,9 @@ abstract class _NotificationDataDto extends NotificationDataDto {
       required final String paymentNumber,
       @JsonKey(name: 'paymentBatchAdditionalInfo', defaultValue: '')
       required final String paymentBatchAdditionalInfo,
-      @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+      @JsonKey(
+          defaultValue: false,
+          readValue: JsonReadValueHelper.mappingIsMarketPlace)
       required final bool isMarketPlace}) = _$NotificationDataDtoImpl;
   const _NotificationDataDto._() : super._();
 
@@ -420,7 +430,8 @@ abstract class _NotificationDataDto extends NotificationDataDto {
   @JsonKey(name: 'paymentBatchAdditionalInfo', defaultValue: '')
   String get paymentBatchAdditionalInfo;
   @override
-  @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+  @JsonKey(
+      defaultValue: false, readValue: JsonReadValueHelper.mappingIsMarketPlace)
   bool get isMarketPlace;
   @override
   @JsonKey(ignore: true)

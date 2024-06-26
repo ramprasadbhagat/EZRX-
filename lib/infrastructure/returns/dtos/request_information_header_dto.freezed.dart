@@ -43,7 +43,8 @@ mixin _$RequestInformationHeaderDto {
   String get bapiStatus => throw _privateConstructorUsedError;
   @JsonKey(name: 'totalItemCount', defaultValue: '')
   String get totalItemCount => throw _privateConstructorUsedError;
-  @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+  @JsonKey(
+      defaultValue: false, readValue: JsonReadValueHelper.mappingIsMarketPlace)
   bool get isMarketPlace => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -74,7 +75,9 @@ abstract class $RequestInformationHeaderDtoCopyWith<$Res> {
       @JsonKey(name: 'createdBy', defaultValue: '') String createdBy,
       @JsonKey(name: 'bapiStatus', defaultValue: '') String bapiStatus,
       @JsonKey(name: 'totalItemCount', defaultValue: '') String totalItemCount,
-      @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+      @JsonKey(
+          defaultValue: false,
+          readValue: JsonReadValueHelper.mappingIsMarketPlace)
       bool isMarketPlace});
 }
 
@@ -181,7 +184,9 @@ abstract class _$$RequestInformationHeaderDtoImplCopyWith<$Res>
       @JsonKey(name: 'createdBy', defaultValue: '') String createdBy,
       @JsonKey(name: 'bapiStatus', defaultValue: '') String bapiStatus,
       @JsonKey(name: 'totalItemCount', defaultValue: '') String totalItemCount,
-      @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+      @JsonKey(
+          defaultValue: false,
+          readValue: JsonReadValueHelper.mappingIsMarketPlace)
       bool isMarketPlace});
 }
 
@@ -282,7 +287,9 @@ class _$RequestInformationHeaderDtoImpl extends _RequestInformationHeaderDto {
       @JsonKey(name: 'bapiStatus', defaultValue: '') required this.bapiStatus,
       @JsonKey(name: 'totalItemCount', defaultValue: '')
       required this.totalItemCount,
-      @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+      @JsonKey(
+          defaultValue: false,
+          readValue: JsonReadValueHelper.mappingIsMarketPlace)
       required this.isMarketPlace})
       : super._();
 
@@ -324,7 +331,8 @@ class _$RequestInformationHeaderDtoImpl extends _RequestInformationHeaderDto {
   @JsonKey(name: 'totalItemCount', defaultValue: '')
   final String totalItemCount;
   @override
-  @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+  @JsonKey(
+      defaultValue: false, readValue: JsonReadValueHelper.mappingIsMarketPlace)
   final bool isMarketPlace;
 
   @override
@@ -416,7 +424,9 @@ abstract class _RequestInformationHeaderDto
       required final String bapiStatus,
       @JsonKey(name: 'totalItemCount', defaultValue: '')
       required final String totalItemCount,
-      @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+      @JsonKey(
+          defaultValue: false,
+          readValue: JsonReadValueHelper.mappingIsMarketPlace)
       required final bool isMarketPlace}) = _$RequestInformationHeaderDtoImpl;
   _RequestInformationHeaderDto._() : super._();
 
@@ -457,7 +467,8 @@ abstract class _RequestInformationHeaderDto
   @JsonKey(name: 'totalItemCount', defaultValue: '')
   String get totalItemCount;
   @override
-  @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+  @JsonKey(
+      defaultValue: false, readValue: JsonReadValueHelper.mappingIsMarketPlace)
   bool get isMarketPlace;
   @override
   @JsonKey(ignore: true)

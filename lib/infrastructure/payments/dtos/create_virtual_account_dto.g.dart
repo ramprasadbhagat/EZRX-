@@ -20,8 +20,10 @@ _$CreateVirtualAccountDtoImpl _$$CreateVirtualAccountDtoImplFromJson(
       paymentDetails: PaymentDetailsDto.fromJson(
           json['paymentDetails'] as Map<String, dynamic>),
       paymentMethodDisplay: json['paymentMethodDisplay'] as String? ?? '',
-      createdOn: createdOnDate(json, 'createdOn') as String? ?? '',
-      paidOn: createdOnDate(json, 'paidOn') as String? ?? '',
+      createdOn:
+          JsonReadValueHelper.createdAtDate(json, 'createdOn') as String? ?? '',
+      paidOn:
+          JsonReadValueHelper.createdAtDate(json, 'paidOn') as String? ?? '',
     );
 
 Map<String, dynamic> _$$CreateVirtualAccountDtoImplToJson(

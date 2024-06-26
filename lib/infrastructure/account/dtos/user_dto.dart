@@ -14,6 +14,7 @@ import 'package:ezrxmobile/infrastructure/account/dtos/access_right_dto.dart';
 import 'package:ezrxmobile/infrastructure/account/dtos/payment_advice_expiry_notification_dto.dart';
 import 'package:ezrxmobile/infrastructure/account/dtos/role_dto.dart';
 import 'package:ezrxmobile/infrastructure/account/dtos/sales_organisation_dto.dart';
+import 'package:ezrxmobile/infrastructure/core/common/json_key_readvalue_helper.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'user_dto.freezed.dart';
@@ -45,7 +46,7 @@ class UserDto with _$UserDto {
     required bool mobileNotifications,
     @JsonKey(
       name: 'languagePreference',
-      readValue: handleEmptyLanguagePreference,
+      readValue: JsonReadValueHelper.handleEmptyLanguagePreference,
     )
     required String languagePreference,
     @JsonKey(name: 'enableOrderType', defaultValue: false)
@@ -71,12 +72,12 @@ class UserDto with _$UserDto {
     required List<PaymentAdviceExpiryNotificationDto> paymentNotification,
     @JsonKey(
       name: 'preferredLanguage',
-      readValue: handleEmptyLanguagePreference,
+      readValue: JsonReadValueHelper.handleEmptyLanguagePreference,
     )
     required String preferredLanguage,
     @JsonKey(
       name: 'supportedLanguages',
-      readValue: handleSupportedLanguages,
+      readValue: JsonReadValueHelper.handleSupportedLanguages,
       defaultValue: <String>[],
     )
     required List<String> supportedLanguages,
@@ -84,7 +85,7 @@ class UserDto with _$UserDto {
     required String mobileNumber,
     @JsonKey(
       name: 'acceptMPTC',
-      readValue: handleMarketPlaceTnCAcceptance,
+      readValue: JsonReadValueHelper.handleMarketPlaceTnCAcceptance,
     )
     required String acceptMPTC,
     @JsonKey(name: 'isFirstLogin', defaultValue: false)

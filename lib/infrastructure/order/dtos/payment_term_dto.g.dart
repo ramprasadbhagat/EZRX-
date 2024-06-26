@@ -8,10 +8,11 @@ part of 'payment_term_dto.dart';
 
 _$PaymentTermDtoImpl _$$PaymentTermDtoImplFromJson(Map<String, dynamic> json) =>
     _$PaymentTermDtoImpl(
-      paymentTermCode: json['paymentTermCode'] as String,
-      paymentTermRanking: (json['paymentTermRanking'] as num).toInt(),
-      paymentTermDescription: json['paymentTermDescription'] as String,
-      paymentTermSubranking: (json['paymentTermSubranking'] as num).toInt(),
+      paymentTermCode: json['paymentTermCode'] as String? ?? '',
+      paymentTermRanking: (json['paymentTermRanking'] as num?)?.toInt() ?? 0,
+      paymentTermDescription: json['paymentTermDescription'] as String? ?? '',
+      paymentTermSubranking:
+          (json['paymentTermSubranking'] as num?)?.toInt() ?? 0,
     );
 
 Map<String, dynamic> _$$PaymentTermDtoImplToJson(

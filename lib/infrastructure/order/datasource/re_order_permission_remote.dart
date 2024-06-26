@@ -1,8 +1,6 @@
 import 'dart:convert';
 
-import 'package:dio/dio.dart';
 import 'package:ezrxmobile/config.dart';
-import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
 import 'package:ezrxmobile/domain/order/entities/re_order_permission.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
@@ -54,22 +52,11 @@ class ReOrderPermissionRemoteDataSource {
         ),
       );
 
-      _exceptionChecker(res: res);
+      dataSourceExceptionHandler.handleExceptionChecker(res: res);
 
       return ReOrderPermissionDto.fromJson(
         res.data['data']['validCustomerMaterials'],
       ).toDomain;
     });
-  }
-
-  void _exceptionChecker({required Response<dynamic> res}) {
-    if (dataSourceExceptionHandler.isServerResponseError(res: res)) {
-      throw ServerException(message: res.data['errors'][0]['message']);
-    } else if (res.statusCode != 200) {
-      throw ServerException(
-        code: res.statusCode ?? 0,
-        message: res.statusMessage ?? '',
-      );
-    }
   }
 }

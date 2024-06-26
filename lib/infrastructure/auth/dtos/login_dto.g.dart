@@ -8,8 +8,9 @@ part of 'login_dto.dart';
 
 _$LoginDtoImpl _$$LoginDtoImplFromJson(Map<String, dynamic> json) =>
     _$LoginDtoImpl(
-      access: _convertAccessToken(json, 'eZRxJWT') as String,
-      refresh: _convertRefreshToken(json, 'eZRxRefreshJWT') as String,
+      access: JsonReadValueHelper.convertAccessToken(json, 'eZRxJWT') as String,
+      refresh: JsonReadValueHelper.convertRefreshToken(json, 'eZRxRefreshJWT')
+          as String,
       user: json['user'] == null
           ? UserDto.emptyUserDto
           : UserDto.fromJson(json['user'] as Map<String, dynamic>),

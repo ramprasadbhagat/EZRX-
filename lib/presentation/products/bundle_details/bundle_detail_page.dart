@@ -18,6 +18,7 @@ import 'package:ezrxmobile/presentation/core/market_place/market_place_rectangle
 import 'package:ezrxmobile/presentation/core/product_image.dart';
 import 'package:ezrxmobile/presentation/core/responsive.dart';
 import 'package:ezrxmobile/presentation/core/product_tag.dart';
+import 'package:ezrxmobile/presentation/core/scroll_to_top_widget.dart';
 import 'package:ezrxmobile/presentation/core/svg_image.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/orders/cart/cart_button.dart';
@@ -77,16 +78,6 @@ class _BundleDetailPageState extends State<BundleDetailPage> {
     });
   }
 
-  void _scrollToTop() {
-    if (_scrollController.hasClients) {
-      _scrollController.animateTo(
-        0.0,
-        duration: const Duration(milliseconds: 500),
-        curve: Curves.easeInOut,
-      );
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return BlocProvider<ProductDetailBloc>(
@@ -118,18 +109,10 @@ class _BundleDetailPageState extends State<BundleDetailPage> {
             ),
           ],
         ),
-        floatingActionButton: !_isScrollAtInitialPosition
-            ? FloatingActionButton(
-                key: WidgetKeys.materialDetailsFloatingButton,
-                onPressed: () => _scrollToTop(),
-                mini: true,
-                backgroundColor: ZPColors.secondaryMustard,
-                child: const Icon(
-                  Icons.expand_less,
-                  color: ZPColors.black,
-                ),
-              )
-            : const SizedBox.shrink(),
+        floatingActionButton: ScrollToTopWidget(
+          scrollController: _scrollController,
+          isVisible: !_isScrollAtInitialPosition,
+        ),
         body: ListView(
           controller: _scrollController,
           key: WidgetKeys.scrollList,
@@ -185,11 +168,10 @@ class _BundleDetails extends StatelessWidget {
       buildWhen: (previous, current) =>
           previous.productDetailAggregate.materialInfo !=
               current.productDetailAggregate.materialInfo ||
-          previous.isDetailAndStockFetching !=
-              current.isDetailAndStockFetching,
+          previous.isDetailAndStockFetching != current.isDetailAndStockFetching,
       builder: (context, state) {
         final material = state.productDetailAggregate.materialInfo;
-    
+
         return Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
           child: Column(
@@ -257,12 +239,9 @@ class _BundleDetails extends StatelessWidget {
               state.isDetailAndStockFetching
                   ? SizedBox(width: 100, child: LoadingShimmer.tile())
                   : PriceComponent(
-                      salesOrgConfig: context
-                          .read<EligibilityBloc>()
-                          .state
-                          .salesOrgConfigs,
-                      price: material
-                          .bundle.minimumQuantityBundleMaterial.rate
+                      salesOrgConfig:
+                          context.read<EligibilityBloc>().state.salesOrgConfigs,
+                      price: material.bundle.minimumQuantityBundleMaterial.rate
                           .toString(),
                       type: PriceStyle.bundlePrice,
                       trailingText: context.tr('per item'),

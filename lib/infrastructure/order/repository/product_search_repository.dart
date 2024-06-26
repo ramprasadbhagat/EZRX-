@@ -17,21 +17,21 @@ import 'package:ezrxmobile/domain/order/repository/i_product_search_repository.d
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/device_storage.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/product_suggestion_history_storage.dart';
-import 'package:ezrxmobile/infrastructure/order/datasource/product_search_local.dart';
-import 'package:ezrxmobile/infrastructure/order/datasource/product_search_remote.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/material_list_local.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/material_list_remote.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/product_suggestion_history_dto.dart';
 
 class ProductSearchRepository implements IProductSearchRepository {
   final Config config;
-  final ProductSearchLocalDataSource localDataSource;
-  final ProductSearchRemoteDataSource remoteDataSource;
+final MaterialListLocalDataSource materialListLocalDataSource;
+  final MaterialListRemoteDataSource materialListRemoteDataSource;
   final ProductSuggestionHistoryStorage productSuggestionHistoryStorage;
   final DeviceStorage deviceStorage;
 
   ProductSearchRepository({
     required this.config,
-    required this.localDataSource,
-    required this.remoteDataSource,
+    required this.materialListLocalDataSource,
+    required this.materialListRemoteDataSource,
     required this.productSuggestionHistoryStorage,
     required this.deviceStorage,
   });
@@ -53,7 +53,7 @@ class ProductSearchRepository implements IProductSearchRepository {
     final shipToCode = shipToInfo.shipToCustomerCode;
     if (config.appFlavor == Flavor.mock) {
       try {
-        final productList = await localDataSource.getSearchedProductList();
+        final productList = await materialListLocalDataSource.getProductList();
 
         return Right(productList);
       } catch (e) {
@@ -63,7 +63,7 @@ class ProductSearchRepository implements IProductSearchRepository {
     try {
       await saveSearchHistory(searchKey);
 
-      final materialList = await remoteDataSource.getSearchedMaterialList(
+      final materialList = await materialListRemoteDataSource.getSearchedMaterialList(
         customerCode: customerCode,
         salesOrgCode: salesOrg,
         gimmickMaterial: user.role.type.isSalesRepRole
@@ -122,7 +122,7 @@ class ProductSearchRepository implements IProductSearchRepository {
     final shipToCode = shipToInfo.shipToCustomerCode;
     if (config.appFlavor == Flavor.mock) {
       try {
-        final productList = await localDataSource.getSearchedProductList();
+        final productList = await materialListLocalDataSource.getProductList();
 
         return Right(productList.products.first);
       } catch (e) {
@@ -130,7 +130,7 @@ class ProductSearchRepository implements IProductSearchRepository {
       }
     }
     try {
-      final materialList = await remoteDataSource.getSearchedMaterialList(
+      final materialList = await materialListRemoteDataSource.getSearchedMaterialList(
         customerCode: customerCode,
         salesOrgCode: salesOrg,
         gimmickMaterial: user.role.type.isSalesRepRole

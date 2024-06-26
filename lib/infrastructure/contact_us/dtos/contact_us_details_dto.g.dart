@@ -9,11 +9,16 @@ part of 'contact_us_details_dto.dart';
 _$ContactUsDetailsDtoImpl _$$ContactUsDetailsDtoImplFromJson(
         Map<String, dynamic> json) =>
     _$ContactUsDetailsDtoImpl(
-      content: readValue(json, 'content') as String? ?? '',
+      content:
+          JsonReadValueHelper.readValueString(json, 'content') as String? ?? '',
       preloginSendToEmail:
-          readValue(json, 'preloginSendToEmail') as String? ?? '',
+          JsonReadValueHelper.readValueString(json, 'preloginSendToEmail')
+                  as String? ??
+              '',
       postloginSendToEmail:
-          readValue(json, 'postloginSendToEmail') as String? ?? '',
+          JsonReadValueHelper.readValueString(json, 'postloginSendToEmail')
+                  as String? ??
+              '',
     );
 
 Map<String, dynamic> _$$ContactUsDetailsDtoImplToJson(

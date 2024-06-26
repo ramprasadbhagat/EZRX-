@@ -12,6 +12,8 @@ import 'package:ezrxmobile/domain/order/entities/order_history_details_po_docume
 
 part 'order_history_item.freezed.dart';
 
+//We're separate order history item with order history details so that's why we ignore this file
+//ignore_for_file: code-duplication
 @freezed
 class OrderHistoryItem with _$OrderHistoryItem {
   const OrderHistoryItem._();
@@ -100,9 +102,8 @@ class OrderHistoryItem with _$OrderHistoryItem {
         principalData: PrincipalData.empty(),
         referenceNotes: StringValue(''),
         isMarketPlace: false,
-        tenderContractNumber: TenderContractNumber.tenderContractNumber(''),
-        tenderContractReference:
-            TenderContractNumber.tenderContractReference(''),
+        tenderContractNumber: TenderContractNumber(''),
+        tenderContractReference: TenderContractNumber(''),
         tenderPriceUnit: 0,
         tenderPrice: TenderPrice('0'),
         tenderOrderReason: TenderContractReason(''),

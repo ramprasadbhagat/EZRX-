@@ -1,9 +1,7 @@
 import 'dart:convert';
 
-import 'package:dio/dio.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/notification_settings.dart';
-import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/notification_settings_mutation.dart';
 import 'package:ezrxmobile/infrastructure/account/dtos/notification_settings_response_dto.dart';
@@ -23,23 +21,22 @@ class NotificationSettingsRemoteDataSource {
   });
 
   Future<NotificationSettings> getNotificationSettings() async {
-        return await dataSourceExceptionHandler.handle(() async {
+    return await dataSourceExceptionHandler.handle(() async {
+      final queryData = notificationSettingsMutation.getNotificationSettings();
 
-    final queryData = notificationSettingsMutation.getNotificationSettings();
+      final res = await httpService.request(
+        method: 'POST',
+        url: '${config.urlConstants}license',
+        data: jsonEncode({
+          'query': queryData,
+        }),
+      );
+      dataSourceExceptionHandler.handleExceptionChecker(res: res);
 
-    final res = await httpService.request(
-      method: 'POST',
-      url: '${config.urlConstants}license',
-      data: jsonEncode({
-        'query': queryData,
-      }),
-    );
-    _exceptionChecker(res: res);
+      final finalData = res.data['data']['getNotificationSettings']['settings'];
 
-    final finalData = res.data['data']['getNotificationSettings']['settings'];
-
-    return NotificationSettingsResponseDto.fromJson(finalData).toDomain;
-        });
+      return NotificationSettingsResponseDto.fromJson(finalData).toDomain;
+    });
   }
 
   Future<NotificationSettings> setNotificationSettings({
@@ -66,21 +63,10 @@ class NotificationSettingsRemoteDataSource {
         'variables': variables,
       }),
     );
-    _exceptionChecker(res: res);
+    dataSourceExceptionHandler.handleExceptionChecker(res: res);
 
     final finalData = res.data['data']['setNotificationSettings']['settings'];
 
     return NotificationSettingsResponseDto.fromJson(finalData).toDomain;
-  }
-
-  void _exceptionChecker({required Response<dynamic> res}) {
-    if (dataSourceExceptionHandler.isServerResponseError(res: res)) {
-      throw ServerException(message: res.data['errors'][0]['message']);
-    } else if (res.statusCode != 200) {
-      throw ServerException(
-        code: res.statusCode ?? 0,
-        message: res.statusMessage ?? '',
-      );
-    }
   }
 }

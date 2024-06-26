@@ -40,29 +40,25 @@ class ContactUsDetailsRemoteDataSource {
         }),
         headers: {'X-GQL-Token': token},
       );
-      _contactUsDetailsExceptionChecker(
+      exceptionHandler.handleExceptionChecker(
         res: res,
+        onCustomExceptionHandler: _contactUsDetailsExceptionChecker,
       );
 
       return ContactUsDetailsDto.fromJson(res.data['data']['item']).toDomain;
     });
   }
 
-  void _contactUsDetailsExceptionChecker({
-    required Response<dynamic> res,
-  }) {
-    if (exceptionHandler.isServerResponseError(res: res)) {
-      throw ServerException(message: res.data['errors'][0]['message']);
-    } else if (res.statusCode != 200) {
-      throw ServerException(
-        code: res.statusCode ?? 0,
-        message: res.statusMessage ?? '',
-      );
-    } else if (res.data['data']['item'] == null ||
-        res.data['data']['item'].isEmpty) {
-      throw OtherException(
-        message: 'Contact Us Details is either null or empty!',
-      );
+  void _contactUsDetailsExceptionChecker(
+    Response<dynamic> res,
+  ) {
+    if (res.data['data'] != null && res.data['data'].isNotEmpty) {
+      if (res.data['data']['item'] == null ||
+          (res.data['data']['item'] ?? []).isEmpty) {
+        throw OtherException(
+          message: 'Contact Us Details is either null or empty!',
+        );
+      }
     }
   }
 }

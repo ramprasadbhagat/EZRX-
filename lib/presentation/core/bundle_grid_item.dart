@@ -1,11 +1,37 @@
-part of 'package:ezrxmobile/presentation/products/products_tab.dart';
+import 'package:auto_route/auto_route.dart';
+import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/domain/order/entities/material_info.dart';
+import 'package:ezrxmobile/infrastructure/core/common/clevertap_helper.dart';
+import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
+import 'package:ezrxmobile/infrastructure/core/common/tracking_events.dart';
+import 'package:ezrxmobile/infrastructure/core/common/tracking_properties.dart';
+import 'package:ezrxmobile/presentation/core/custom_card.dart';
+import 'package:ezrxmobile/presentation/core/market_place/market_place_logo.dart';
+import 'package:ezrxmobile/presentation/core/product_image.dart';
+import 'package:ezrxmobile/presentation/core/product_tag.dart';
+import 'package:ezrxmobile/presentation/core/responsive.dart';
+import 'package:ezrxmobile/presentation/core/widget_keys.dart';
+import 'package:ezrxmobile/presentation/routes/router.gr.dart';
+import 'package:ezrxmobile/presentation/theme/colors.dart';
+import 'package:ezrxmobile/presentation/utils/router_utils.dart';
+import 'package:flutter/material.dart';
 
-class _BundleGridItem extends StatelessWidget {
+class BundleGridItem extends StatelessWidget {
   final MaterialInfo materialInfo;
+  final bool isHomeTab;
 
-  const _BundleGridItem({
+  const BundleGridItem({
+    super.key,
     required this.materialInfo,
+    this.isHomeTab = false,
   });
+
+  bool get _canDisplayMoreMaterials => isHomeTab
+      ? materialInfo.listingVisibleMaterial.length > 2
+      : materialInfo.isMaterialHiddenOnListing;
+
+  int get _materialLengthSkip =>
+      isHomeTab ? 2 : materialInfo.listingVisibleMaterial.length;
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +42,11 @@ class _BundleGridItem extends StatelessWidget {
         key: WidgetKeys.materialListBundleCard,
         margin: const EdgeInsets.all(10),
         padding: const EdgeInsets.all(0),
+        width: Responsive.isMobile(context)
+            ? MediaQuery.of(context).size.width * 0.85
+            : MediaQuery.of(context).size.width * 0.4,
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             ColoredBox(
               color: ZPColors.blueTagColor,
@@ -44,6 +74,7 @@ class _BundleGridItem extends StatelessWidget {
                                   .textTheme
                                   .bodySmall
                                   ?.copyWith(color: ZPColors.neutralsGrey1),
+                              key: WidgetKeys.bundlesNumber,
                             ),
                           ],
                         ),
@@ -53,6 +84,7 @@ class _BundleGridItem extends StatelessWidget {
                           style: Theme.of(context).textTheme.labelSmall,
                           maxLines: 2,
                           overflow: TextOverflow.ellipsis,
+                          key: WidgetKeys.bundlesDescription,
                         ),
                         const SizedBox(height: 3),
                         Text(
@@ -67,6 +99,7 @@ class _BundleGridItem extends StatelessWidget {
                                   ),
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
+                          key: WidgetKeys.bundlesManufactured,
                         ),
                         const SizedBox(height: 3),
                       ],
@@ -76,12 +109,32 @@ class _BundleGridItem extends StatelessWidget {
               ),
             ),
             ...materialInfo.listingVisibleMaterial
-                .map((e) => _BundleMaterial(materialData: e)),
-            if (materialInfo.isMaterialHiddenOnListing)
+                .take(_materialLengthSkip)
+                .map(
+                  (e) => isHomeTab
+                      ? Padding(
+                          padding: const EdgeInsets.only(
+                            left: 20,
+                            top: 5,
+                          ),
+                          child: Text(
+                            '\u2022  ${e.materialDescription.getOrDefaultValue('')}',
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        )
+                      : _BundleMaterial(materialData: e),
+                ),
+            if (_canDisplayMoreMaterials)
               Padding(
-                padding: const EdgeInsets.symmetric(vertical: 9),
+                key: WidgetKeys.bundleMaterialCount(
+                  materialInfo.bundle.bundleCode,
+                ),
+                padding: const EdgeInsets.symmetric(vertical: 9).copyWith(
+                  left: isHomeTab ? 30 : 0,
+                ),
                 child: Text(
-                  '+ ${materialInfo.data.skip(materialInfo.listingVisibleMaterial.length).length} materials',
+                  '+ ${materialInfo.data.skip(_materialLengthSkip).length} materials',
                   style: Theme.of(context).textTheme.bodySmall,
                   maxLines: 1,
                 ),
@@ -99,7 +152,7 @@ class _BundleGridItem extends StatelessWidget {
         TrackingProps.clickAt:
             RouterUtils.buildRouteTrackingName(context.router.currentPath),
         TrackingProps.isBundle: true,
-        TrackingProps.productName: materialInfo.displayDescription,
+        TrackingProps.productName: materialInfo.defaultMaterialDescription,
         TrackingProps.productNumber: materialInfo.materialNumber.displayMatNo,
         TrackingProps.productManufacturer: materialInfo.getManufactured,
         TrackingProps.section: 'All product',
@@ -112,7 +165,7 @@ class _BundleGridItem extends StatelessWidget {
         TrackingProps.clickAt:
             RouterUtils.buildRouteTrackingName(context.router.currentPath),
         TrackingProps.isBundle: true,
-        TrackingProps.productName: materialInfo.displayDescription,
+        TrackingProps.productName: materialInfo.defaultMaterialDescription,
         TrackingProps.productNumber: materialInfo.materialNumber.displayMatNo,
         TrackingProps.productManufacturer: materialInfo.getManufactured,
       },

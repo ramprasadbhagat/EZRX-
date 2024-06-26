@@ -56,7 +56,7 @@ mixin _$OrderHistoryDetailsOrderItemDto {
   @JsonKey(
       name: 'IsTenderContractMaterial',
       defaultValue: false,
-      readValue: boolStringFormatCheck)
+      readValue: JsonReadValueHelper.readBoolStringFormat)
   bool get isTenderContractMaterial => throw _privateConstructorUsedError;
   @JsonKey(name: 'ParentID', defaultValue: '')
   String get parentId => throw _privateConstructorUsedError;
@@ -66,7 +66,7 @@ mixin _$OrderHistoryDetailsOrderItemDto {
       throw _privateConstructorUsedError;
   @JsonKey(
       name: 'TenderContractDetails',
-      readValue: orderHistoryDetailsOrderItemTenderContractDetailsOverride)
+      readValue: JsonReadValueHelper.readValueMapDynamic)
   OrderHistoryDetailsTenderContractDto get tenderContractDetails =>
       throw _privateConstructorUsedError;
   @JsonKey(name: 'PrincipalName', defaultValue: '')
@@ -77,7 +77,7 @@ mixin _$OrderHistoryDetailsOrderItemDto {
   String get governmentMaterialCode => throw _privateConstructorUsedError;
   @JsonKey(name: 'ItemRegistrationNumber', defaultValue: '')
   String get itemRegistrationNumber => throw _privateConstructorUsedError;
-  @JsonKey(name: 'ProductType', readValue: _getProductType)
+  @JsonKey(name: 'ProductType', readValue: JsonReadValueHelper.readProductType)
   String get productType => throw _privateConstructorUsedError;
   @JsonKey(name: 'promoStatus', defaultValue: false)
   bool get promosStatus => throw _privateConstructorUsedError;
@@ -85,7 +85,8 @@ mixin _$OrderHistoryDetailsOrderItemDto {
   bool get isCounterOffer => throw _privateConstructorUsedError;
   @JsonKey(name: 'HidePrice', defaultValue: false)
   bool get hidePrice => throw _privateConstructorUsedError;
-  @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+  @JsonKey(
+      defaultValue: false, readValue: JsonReadValueHelper.mappingIsMarketPlace)
   bool get isMarketPlace => throw _privateConstructorUsedError;
   @JsonKey(name: 'isCovid', defaultValue: false)
   bool get isCovid => throw _privateConstructorUsedError;
@@ -93,7 +94,7 @@ mixin _$OrderHistoryDetailsOrderItemDto {
   double get totalUnitPrice => throw _privateConstructorUsedError;
   @JsonKey(name: 'TotalTax', defaultValue: 0.0)
   double get totalTax => throw _privateConstructorUsedError;
-  @JsonKey(name: 'TaxRate', readValue: handleTax)
+  @JsonKey(name: 'TaxRate', readValue: JsonReadValueHelper.handleTax)
   double get taxRate => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -134,7 +135,7 @@ abstract class $OrderHistoryDetailsOrderItemDtoCopyWith<$Res> {
       @JsonKey(
           name: 'IsTenderContractMaterial',
           defaultValue: false,
-          readValue: boolStringFormatCheck)
+          readValue: JsonReadValueHelper.readBoolStringFormat)
       bool isTenderContractMaterial,
       @JsonKey(name: 'ParentID', defaultValue: '') String parentId,
       @JsonKey(
@@ -143,7 +144,7 @@ abstract class $OrderHistoryDetailsOrderItemDtoCopyWith<$Res> {
       List<OrderHistoryDetailsOrderItemDetailsDto> details,
       @JsonKey(
           name: 'TenderContractDetails',
-          readValue: orderHistoryDetailsOrderItemTenderContractDetailsOverride)
+          readValue: JsonReadValueHelper.readValueMapDynamic)
       OrderHistoryDetailsTenderContractDto tenderContractDetails,
       @JsonKey(name: 'PrincipalName', defaultValue: '') String principalName,
       @JsonKey(name: 'PrincipalCode', defaultValue: '') String principalCode,
@@ -151,17 +152,21 @@ abstract class $OrderHistoryDetailsOrderItemDtoCopyWith<$Res> {
       String governmentMaterialCode,
       @JsonKey(name: 'ItemRegistrationNumber', defaultValue: '')
       String itemRegistrationNumber,
-      @JsonKey(name: 'ProductType', readValue: _getProductType)
+      @JsonKey(
+          name: 'ProductType', readValue: JsonReadValueHelper.readProductType)
       String productType,
       @JsonKey(name: 'promoStatus', defaultValue: false) bool promosStatus,
       @JsonKey(name: 'isCounterOffer', defaultValue: false) bool isCounterOffer,
       @JsonKey(name: 'HidePrice', defaultValue: false) bool hidePrice,
-      @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+      @JsonKey(
+          defaultValue: false,
+          readValue: JsonReadValueHelper.mappingIsMarketPlace)
       bool isMarketPlace,
       @JsonKey(name: 'isCovid', defaultValue: false) bool isCovid,
       @JsonKey(name: 'TotalUnitPrice', defaultValue: 0.0) double totalUnitPrice,
       @JsonKey(name: 'TotalTax', defaultValue: 0.0) double totalTax,
-      @JsonKey(name: 'TaxRate', readValue: handleTax) double taxRate});
+      @JsonKey(name: 'TaxRate', readValue: JsonReadValueHelper.handleTax)
+      double taxRate});
 
   $OrderHistoryDetailsTenderContractDtoCopyWith<$Res> get tenderContractDetails;
 }
@@ -394,7 +399,7 @@ abstract class _$$OrderHistoryDetailsOrderItemDtoImplCopyWith<$Res>
       @JsonKey(
           name: 'IsTenderContractMaterial',
           defaultValue: false,
-          readValue: boolStringFormatCheck)
+          readValue: JsonReadValueHelper.readBoolStringFormat)
       bool isTenderContractMaterial,
       @JsonKey(name: 'ParentID', defaultValue: '') String parentId,
       @JsonKey(
@@ -403,7 +408,7 @@ abstract class _$$OrderHistoryDetailsOrderItemDtoImplCopyWith<$Res>
       List<OrderHistoryDetailsOrderItemDetailsDto> details,
       @JsonKey(
           name: 'TenderContractDetails',
-          readValue: orderHistoryDetailsOrderItemTenderContractDetailsOverride)
+          readValue: JsonReadValueHelper.readValueMapDynamic)
       OrderHistoryDetailsTenderContractDto tenderContractDetails,
       @JsonKey(name: 'PrincipalName', defaultValue: '') String principalName,
       @JsonKey(name: 'PrincipalCode', defaultValue: '') String principalCode,
@@ -411,17 +416,21 @@ abstract class _$$OrderHistoryDetailsOrderItemDtoImplCopyWith<$Res>
       String governmentMaterialCode,
       @JsonKey(name: 'ItemRegistrationNumber', defaultValue: '')
       String itemRegistrationNumber,
-      @JsonKey(name: 'ProductType', readValue: _getProductType)
+      @JsonKey(
+          name: 'ProductType', readValue: JsonReadValueHelper.readProductType)
       String productType,
       @JsonKey(name: 'promoStatus', defaultValue: false) bool promosStatus,
       @JsonKey(name: 'isCounterOffer', defaultValue: false) bool isCounterOffer,
       @JsonKey(name: 'HidePrice', defaultValue: false) bool hidePrice,
-      @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+      @JsonKey(
+          defaultValue: false,
+          readValue: JsonReadValueHelper.mappingIsMarketPlace)
       bool isMarketPlace,
       @JsonKey(name: 'isCovid', defaultValue: false) bool isCovid,
       @JsonKey(name: 'TotalUnitPrice', defaultValue: 0.0) double totalUnitPrice,
       @JsonKey(name: 'TotalTax', defaultValue: 0.0) double totalTax,
-      @JsonKey(name: 'TaxRate', readValue: handleTax) double taxRate});
+      @JsonKey(name: 'TaxRate', readValue: JsonReadValueHelper.handleTax)
+      double taxRate});
 
   @override
   $OrderHistoryDetailsTenderContractDtoCopyWith<$Res> get tenderContractDetails;
@@ -640,7 +649,7 @@ class _$OrderHistoryDetailsOrderItemDtoImpl
       @JsonKey(
           name: 'IsTenderContractMaterial',
           defaultValue: false,
-          readValue: boolStringFormatCheck)
+          readValue: JsonReadValueHelper.readBoolStringFormat)
       required this.isTenderContractMaterial,
       @JsonKey(name: 'ParentID', defaultValue: '') required this.parentId,
       @JsonKey(
@@ -649,33 +658,35 @@ class _$OrderHistoryDetailsOrderItemDtoImpl
       required final List<OrderHistoryDetailsOrderItemDetailsDto> details,
       @JsonKey(
           name: 'TenderContractDetails',
-          readValue: orderHistoryDetailsOrderItemTenderContractDetailsOverride)
+          readValue: JsonReadValueHelper.readValueMapDynamic)
       required this.tenderContractDetails,
       @JsonKey(
           name: 'PrincipalName', defaultValue: '')
       required this.principalName,
-      @JsonKey(
-          name: 'PrincipalCode', defaultValue: '')
+      @JsonKey(name: 'PrincipalCode', defaultValue: '')
       required this.principalCode,
-      @JsonKey(
-          name: 'GovernmentMaterialCode', defaultValue: '')
+      @JsonKey(name: 'GovernmentMaterialCode', defaultValue: '')
       required this.governmentMaterialCode,
       @JsonKey(name: 'ItemRegistrationNumber', defaultValue: '')
       required this.itemRegistrationNumber,
-      @JsonKey(name: 'ProductType', readValue: _getProductType)
+      @JsonKey(
+          name: 'ProductType', readValue: JsonReadValueHelper.readProductType)
       required this.productType,
       @JsonKey(name: 'promoStatus', defaultValue: false)
       required this.promosStatus,
       @JsonKey(name: 'isCounterOffer', defaultValue: false)
       required this.isCounterOffer,
       @JsonKey(name: 'HidePrice', defaultValue: false) required this.hidePrice,
-      @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+      @JsonKey(
+          defaultValue: false,
+          readValue: JsonReadValueHelper.mappingIsMarketPlace)
       required this.isMarketPlace,
       @JsonKey(name: 'isCovid', defaultValue: false) required this.isCovid,
       @JsonKey(name: 'TotalUnitPrice', defaultValue: 0.0)
       required this.totalUnitPrice,
       @JsonKey(name: 'TotalTax', defaultValue: 0.0) required this.totalTax,
-      @JsonKey(name: 'TaxRate', readValue: handleTax) required this.taxRate})
+      @JsonKey(name: 'TaxRate', readValue: JsonReadValueHelper.handleTax)
+      required this.taxRate})
       : _details = details,
         super._();
 
@@ -735,7 +746,7 @@ class _$OrderHistoryDetailsOrderItemDtoImpl
   @JsonKey(
       name: 'IsTenderContractMaterial',
       defaultValue: false,
-      readValue: boolStringFormatCheck)
+      readValue: JsonReadValueHelper.readBoolStringFormat)
   final bool isTenderContractMaterial;
   @override
   @JsonKey(name: 'ParentID', defaultValue: '')
@@ -753,7 +764,7 @@ class _$OrderHistoryDetailsOrderItemDtoImpl
   @override
   @JsonKey(
       name: 'TenderContractDetails',
-      readValue: orderHistoryDetailsOrderItemTenderContractDetailsOverride)
+      readValue: JsonReadValueHelper.readValueMapDynamic)
   final OrderHistoryDetailsTenderContractDto tenderContractDetails;
   @override
   @JsonKey(name: 'PrincipalName', defaultValue: '')
@@ -768,7 +779,7 @@ class _$OrderHistoryDetailsOrderItemDtoImpl
   @JsonKey(name: 'ItemRegistrationNumber', defaultValue: '')
   final String itemRegistrationNumber;
   @override
-  @JsonKey(name: 'ProductType', readValue: _getProductType)
+  @JsonKey(name: 'ProductType', readValue: JsonReadValueHelper.readProductType)
   final String productType;
   @override
   @JsonKey(name: 'promoStatus', defaultValue: false)
@@ -780,7 +791,8 @@ class _$OrderHistoryDetailsOrderItemDtoImpl
   @JsonKey(name: 'HidePrice', defaultValue: false)
   final bool hidePrice;
   @override
-  @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+  @JsonKey(
+      defaultValue: false, readValue: JsonReadValueHelper.mappingIsMarketPlace)
   final bool isMarketPlace;
   @override
   @JsonKey(name: 'isCovid', defaultValue: false)
@@ -792,7 +804,7 @@ class _$OrderHistoryDetailsOrderItemDtoImpl
   @JsonKey(name: 'TotalTax', defaultValue: 0.0)
   final double totalTax;
   @override
-  @JsonKey(name: 'TaxRate', readValue: handleTax)
+  @JsonKey(name: 'TaxRate', readValue: JsonReadValueHelper.handleTax)
   final double taxRate;
 
   @override
@@ -956,7 +968,7 @@ abstract class _OrderHistoryDetailsOrderItemDto
       @JsonKey(
           name: 'IsTenderContractMaterial',
           defaultValue: false,
-          readValue: boolStringFormatCheck)
+          readValue: JsonReadValueHelper.readBoolStringFormat)
       required final bool isTenderContractMaterial,
       @JsonKey(name: 'ParentID', defaultValue: '')
       required final String parentId,
@@ -966,7 +978,7 @@ abstract class _OrderHistoryDetailsOrderItemDto
       required final List<OrderHistoryDetailsOrderItemDetailsDto> details,
       @JsonKey(
           name: 'TenderContractDetails',
-          readValue: orderHistoryDetailsOrderItemTenderContractDetailsOverride)
+          readValue: JsonReadValueHelper.readValueMapDynamic)
       required final OrderHistoryDetailsTenderContractDto tenderContractDetails,
       @JsonKey(name: 'PrincipalName', defaultValue: '')
       required final String principalName,
@@ -976,7 +988,8 @@ abstract class _OrderHistoryDetailsOrderItemDto
       required final String governmentMaterialCode,
       @JsonKey(name: 'ItemRegistrationNumber', defaultValue: '')
       required final String itemRegistrationNumber,
-      @JsonKey(name: 'ProductType', readValue: _getProductType)
+      @JsonKey(
+          name: 'ProductType', readValue: JsonReadValueHelper.readProductType)
       required final String productType,
       @JsonKey(name: 'promoStatus', defaultValue: false)
       required final bool promosStatus,
@@ -984,7 +997,9 @@ abstract class _OrderHistoryDetailsOrderItemDto
       required final bool isCounterOffer,
       @JsonKey(name: 'HidePrice', defaultValue: false)
       required final bool hidePrice,
-      @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+      @JsonKey(
+          defaultValue: false,
+          readValue: JsonReadValueHelper.mappingIsMarketPlace)
       required final bool isMarketPlace,
       @JsonKey(name: 'isCovid', defaultValue: false)
       required final bool isCovid,
@@ -992,7 +1007,7 @@ abstract class _OrderHistoryDetailsOrderItemDto
       required final double totalUnitPrice,
       @JsonKey(name: 'TotalTax', defaultValue: 0.0)
       required final double totalTax,
-      @JsonKey(name: 'TaxRate', readValue: handleTax)
+      @JsonKey(name: 'TaxRate', readValue: JsonReadValueHelper.handleTax)
       required final double taxRate}) = _$OrderHistoryDetailsOrderItemDtoImpl;
   const _OrderHistoryDetailsOrderItemDto._() : super._();
 
@@ -1051,7 +1066,7 @@ abstract class _OrderHistoryDetailsOrderItemDto
   @JsonKey(
       name: 'IsTenderContractMaterial',
       defaultValue: false,
-      readValue: boolStringFormatCheck)
+      readValue: JsonReadValueHelper.readBoolStringFormat)
   bool get isTenderContractMaterial;
   @override
   @JsonKey(name: 'ParentID', defaultValue: '')
@@ -1063,7 +1078,7 @@ abstract class _OrderHistoryDetailsOrderItemDto
   @override
   @JsonKey(
       name: 'TenderContractDetails',
-      readValue: orderHistoryDetailsOrderItemTenderContractDetailsOverride)
+      readValue: JsonReadValueHelper.readValueMapDynamic)
   OrderHistoryDetailsTenderContractDto get tenderContractDetails;
   @override
   @JsonKey(name: 'PrincipalName', defaultValue: '')
@@ -1078,7 +1093,7 @@ abstract class _OrderHistoryDetailsOrderItemDto
   @JsonKey(name: 'ItemRegistrationNumber', defaultValue: '')
   String get itemRegistrationNumber;
   @override
-  @JsonKey(name: 'ProductType', readValue: _getProductType)
+  @JsonKey(name: 'ProductType', readValue: JsonReadValueHelper.readProductType)
   String get productType;
   @override
   @JsonKey(name: 'promoStatus', defaultValue: false)
@@ -1090,7 +1105,8 @@ abstract class _OrderHistoryDetailsOrderItemDto
   @JsonKey(name: 'HidePrice', defaultValue: false)
   bool get hidePrice;
   @override
-  @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+  @JsonKey(
+      defaultValue: false, readValue: JsonReadValueHelper.mappingIsMarketPlace)
   bool get isMarketPlace;
   @override
   @JsonKey(name: 'isCovid', defaultValue: false)
@@ -1102,7 +1118,7 @@ abstract class _OrderHistoryDetailsOrderItemDto
   @JsonKey(name: 'TotalTax', defaultValue: 0.0)
   double get totalTax;
   @override
-  @JsonKey(name: 'TaxRate', readValue: handleTax)
+  @JsonKey(name: 'TaxRate', readValue: JsonReadValueHelper.handleTax)
   double get taxRate;
   @override
   @JsonKey(ignore: true)

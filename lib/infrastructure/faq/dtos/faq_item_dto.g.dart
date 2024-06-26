@@ -9,9 +9,9 @@ part of 'faq_item_dto.dart';
 _$FAQItemDtoImpl _$$FAQItemDtoImplFromJson(Map<String, dynamic> json) =>
     _$FAQItemDtoImpl(
       name: json['name'] as String,
-      answer: getAnswer(json, 'answer') as String,
-      question: getQuestion(json, 'question') as String,
-      displayName: getCategory(json, 'category') as String,
+      answer: JsonReadValueHelper.readValueString(json, 'answer') as String,
+      question: JsonReadValueHelper.readValueString(json, 'question') as String,
+      displayName: JsonReadValueHelper.readCategory(json, 'category') as String,
     );
 
 Map<String, dynamic> _$$FAQItemDtoImplToJson(_$FAQItemDtoImpl instance) =>

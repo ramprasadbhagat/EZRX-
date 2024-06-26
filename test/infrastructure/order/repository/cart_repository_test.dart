@@ -22,7 +22,6 @@ import 'package:ezrxmobile/infrastructure/order/datasource/stock_info_remote.dar
 import 'package:ezrxmobile/infrastructure/order/dtos/cart_product_request_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/combo_product_request_dto.dart';
 import 'package:ezrxmobile/domain/order/entities/request_counter_offer_details.dart';
-import 'package:ezrxmobile/infrastructure/order/datasource/discount_override_remote.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/cart/cart_local_datasource.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/cart/cart_remote_datasource.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -42,9 +41,6 @@ class CartLocalDataSourceMock extends Mock implements CartLocalDataSource {}
 
 class CartRemoteDataSourceMock extends Mock implements CartRemoteDataSource {}
 
-class DiscountOverrideRemoteDataSourceMock extends Mock
-    implements DiscountOverrideRemoteDataSource {}
-
 class StockInfoLocalDataSourceMock extends Mock
     implements StockInfoLocalDataSource {}
 
@@ -56,7 +52,6 @@ void main() {
   late StockInfoLocalDataSourceMock stockInfoLocalDataSource;
   late StockInfoRemoteDataSourceMock stockInfoRemoteDataSource;
   late CartLocalDataSourceMock cartLocalDataSourceMock;
-  late DiscountOverrideRemoteDataSource discountOverrideRemoteDataSourceMock;
   late CartRepository cartRepository;
   late MixpanelService mixpanelService;
   late CartRemoteDataSource cartRemoteDataSource;
@@ -101,8 +96,6 @@ void main() {
     stockInfoLocalDataSource = StockInfoLocalDataSourceMock();
     stockInfoRemoteDataSource = StockInfoRemoteDataSourceMock();
     cartLocalDataSourceMock = CartLocalDataSourceMock();
-    discountOverrideRemoteDataSourceMock =
-        DiscountOverrideRemoteDataSourceMock();
     mixpanelService = MixpanelServiceMock();
     cartRemoteDataSource = CartRemoteDataSourceMock();
     deviceStorageMock = DeviceStorageMock();
@@ -111,7 +104,6 @@ void main() {
     cartRepository = CartRepository(
       mixpanelService: mixpanelService,
       cartLocalDataSource: cartLocalDataSourceMock,
-      discountOverrideRemoteDataSource: discountOverrideRemoteDataSourceMock,
       config: mockConfig,
       stockInfoLocalDataSource: stockInfoLocalDataSource,
       stockInfoRemoteDataSource: stockInfoRemoteDataSource,
@@ -120,8 +112,10 @@ void main() {
       materialBannerStorage: materialBannerStorageMock,
     );
 
-    fakeCartProductsWithCombo
-        .addAll(await CartLocalDataSource().upsertCartItemsWithComboOffers());
+    fakeCartProductsWithCombo.addAll(
+      await CartLocalDataSource()
+          .upsertCart(type: UpsertCartLocalType.upsertCartItemsComboOffer),
+    );
     aplSimulatorOrder = await CartLocalDataSource().aplSimulateOrder();
     aplSimulatorGetTotalPrice = await CartLocalDataSource().aplGetTotalPrice();
 
@@ -425,7 +419,9 @@ void main() {
     test('addHistoryItemsToCart test - Local success', () async {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
       when(
-        () => cartLocalDataSourceMock.upsertCartItemsWithReorderMaterials(),
+        () => cartLocalDataSourceMock.upsertCart(
+          type: UpsertCartLocalType.upsertCartItemsReorder,
+        ),
       ).thenAnswer(
         (invocation) async => fakeCartProducts,
       );
@@ -448,7 +444,9 @@ void main() {
     test('addHistoryItemsToCart test - Local Failure', () async {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
       when(
-        () => cartLocalDataSourceMock.upsertCartItemsWithReorderMaterials(),
+        () => cartLocalDataSourceMock.upsertCart(
+          type: UpsertCartLocalType.upsertCartItemsReorder,
+        ),
       ).thenThrow(
         fakeException,
       );
@@ -472,7 +470,9 @@ void main() {
     test('upsertCartItemsWithComboOffers test local success', () async {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
       when(
-        () => cartLocalDataSourceMock.upsertCartItemsWithComboOffers(),
+        () => cartLocalDataSourceMock.upsertCart(
+          type: UpsertCartLocalType.upsertCartItemsComboOffer,
+        ),
       ).thenAnswer(
         (invocation) async => fakeCartProductsWithCombo,
       );
@@ -488,7 +488,9 @@ void main() {
 
     test('upsertCartItemsWithComboOffers test local failure', () async {
       when(
-        () => cartLocalDataSourceMock.upsertCartItemsWithComboOffers(),
+        () => cartLocalDataSourceMock.upsertCart(
+          type: UpsertCartLocalType.upsertCartItemsComboOffer,
+        ),
       ).thenThrow(
         (invocation) async => MockException(),
       );
@@ -732,7 +734,9 @@ void main() {
     test('updateCartWithProductDetermination test local success', () async {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
       when(
-        () => cartLocalDataSourceMock.upsertCartItemsWithReorderMaterials(),
+        () => cartLocalDataSourceMock.upsertCart(
+          type: UpsertCartLocalType.upsertCartItemsReorder,
+        ),
       ).thenAnswer(
         (invocation) async => fakeCartProducts,
       );
@@ -752,7 +756,9 @@ void main() {
     test('updateCartWithProductDetermination test local failure', () async {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
       when(
-        () => cartLocalDataSourceMock.upsertCartItemsWithReorderMaterials(),
+        () => cartLocalDataSourceMock.upsertCart(
+          type: UpsertCartLocalType.upsertCartItemsReorder,
+        ),
       ).thenThrow(
         fakeException,
       );
@@ -813,7 +819,9 @@ void main() {
     test('updateCartWithProductDetermination test local failure', () async {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
       when(
-        () => cartLocalDataSourceMock.upsertCartItemsWithReorderMaterials(),
+        () => cartLocalDataSourceMock.upsertCart(
+          type: UpsertCartLocalType.upsertCartItemsReorder,
+        ),
       ).thenThrow(
         fakeException,
       );
@@ -840,8 +848,7 @@ void main() {
                 ...e.existingProductDealBonus,
               ],
             )
-            .flattened
-            ,
+            .flattened,
       ];
 
       when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
@@ -892,8 +899,7 @@ void main() {
                 ...e.existingProductDealBonus,
               ],
             )
-            .flattened
-            ,
+            .flattened,
       ];
 
       when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
@@ -1035,7 +1041,9 @@ void main() {
 
     test('upsertCartItems local test failure', () async {
       when(
-        () => cartLocalDataSourceMock.upsertCartItems(),
+        () => cartLocalDataSourceMock.upsertCart(
+          type: UpsertCartLocalType.upsertCartItems,
+        ),
       ).thenThrow(
         (invocation) async => MockException(),
       );
@@ -1053,7 +1061,9 @@ void main() {
     test('upsertCartItems local test success', () async {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
       when(
-        () => cartLocalDataSourceMock.upsertCartItems(),
+        () => cartLocalDataSourceMock.upsertCart(
+          type: UpsertCartLocalType.upsertCartItems,
+        ),
       ).thenAnswer(
         (invocation) async => fakeCartProducts,
       );

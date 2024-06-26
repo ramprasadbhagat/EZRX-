@@ -31,7 +31,9 @@ _$ProductDetailDtoImpl _$$ProductDetailDtoImplFromJson(
       promoStatus: json['promoStatus'] as bool? ?? false,
       isSuspended: json['suspensionStatus'] as bool? ?? false,
       isMarketPlace:
-          mappingIsMarketPlace(json, 'isMarketPlace') as bool? ?? false,
+          JsonReadValueHelper.mappingIsMarketPlace(json, 'isMarketPlace')
+                  as bool? ??
+              false,
       hasMandatoryTenderContract:
           json['hasMandatoryTenderContract'] as bool? ?? false,
       hasValidTenderContract: json['hasValidTenderContract'] as bool? ?? false,

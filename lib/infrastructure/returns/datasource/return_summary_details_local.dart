@@ -7,7 +7,7 @@ import 'package:flutter/services.dart';
 class ReturnSummaryDetailsRequestInformationLocal {
   ReturnSummaryDetailsRequestInformationLocal();
 
-  Future<RequestInformation> getRequestInformation() async {
+  Future<RequestInformation> getReturnRequestInformation() async {
     final res = json.decode(
       await rootBundle.loadString(
         'assets/json/returnRequestInformationV2Response.json',

@@ -1,8 +1,6 @@
 import 'dart:convert';
 
-import 'package:dio/dio.dart';
 import 'package:ezrxmobile/config.dart';
-import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 import 'package:ezrxmobile/infrastructure/payments/datasource/payment_summary_query.dart';
@@ -55,7 +53,9 @@ class PaymentSummaryRemoteDataSource {
         },
       ),
     );
-    _exceptionChecker(response: res);
+    dataSourceExceptionHandler.handleExceptionChecker(
+      res: res,
+    );
     final data = res.data['data']['customerPayment']['customerPaymentResponse'];
 
     return List.from(data)
@@ -81,29 +81,14 @@ class PaymentSummaryRemoteDataSource {
           },
         ),
       );
-      _exceptionChecker(response: response, property: 'listTransactions');
+      dataSourceExceptionHandler.handleExceptionChecker(
+        res: response,
+        property: 'listTransactions',
+      );
 
       return List<Map<String, dynamic>>.from(
         response.data['data']['listTransactions']['TxnSummary'],
       ).map((e) => TransactionItemDto.fromJson(e).toDomain()).toList();
     });
-  }
-
-  void _exceptionChecker({
-    required Response<dynamic> response,
-    String? property,
-  }) {
-    final data = response.data;
-    if (data['errors'] != null && data['errors'].isNotEmpty) {
-      throw ServerException(message: data['errors'][0]['message']);
-    } else if (response.statusCode != 200) {
-      throw ServerException(
-        code: response.statusCode ?? 0,
-        message: response.statusMessage ?? '',
-      );
-    } else if (data['data'] == null ||
-        (property != null && data['data'][property] == null)) {
-      throw ServerException(message: 'Some thing went wrong');
-    }
   }
 }

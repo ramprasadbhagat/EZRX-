@@ -4,38 +4,41 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/application/returns/return_list/view_by_request/details/return_details_by_request_bloc.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
+import 'package:ezrxmobile/domain/order/entities/order_history_details_po_documents.dart';
 import 'package:ezrxmobile/domain/returns/entities/request_information.dart';
-import 'package:ezrxmobile/domain/returns/entities/return_request_attachment.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_request_information.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_request_information_header.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_requests_id.dart';
-import 'package:ezrxmobile/infrastructure/returns/repository/return_details_by_request_repository.dart';
+import 'package:ezrxmobile/infrastructure/order/repository/po_attachment_repository.dart';
+import 'package:ezrxmobile/infrastructure/returns/repository/return_summary_details_repository.dart';
 import 'package:ezrxmobile/infrastructure/returns/repository/return_request_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:permission_handler/permission_handler.dart';
 
-class ReturnDetailsByRequestRepositoryMock extends Mock
-    implements ReturnDetailsByRequestRepository {}
+import '../../../../../presentation/orders/core/po_attachment_test.dart';
+
+class ReturnRequestInformationRepositoryMock extends Mock
+    implements ReturnSummaryDetailsRepository {}
 
 class MockReturnRequestRepository extends Mock
     implements ReturnRequestRepository {}
 
-class FakeFile extends Fake implements File {}
-
 void main() {
-  late ReturnDetailsByRequestRepository returnDetailsByRequestRepository;
+  late ReturnSummaryDetailsRepository returnRequestInformationRepository;
   late ReturnRequestRepository mockReturnRequestRepository;
   late ReturnRequestsId fakeReturnRequestsId;
   late RequestInformation fakeRequestInformation;
-  late FakeFile fakeFile;
+  late PoAttachmentRepository poAttachmentRepository;
+  final file = [File('')];
 
   setUpAll(() async {
     WidgetsFlutterBinding.ensureInitialized();
-    returnDetailsByRequestRepository = ReturnDetailsByRequestRepositoryMock();
+    returnRequestInformationRepository =
+        ReturnRequestInformationRepositoryMock();
     mockReturnRequestRepository = MockReturnRequestRepository();
-    fakeFile = FakeFile();
+    poAttachmentRepository = PoAttachmentRepositoryMock();
   });
   setUp(() {
     fakeReturnRequestsId = ReturnRequestsId(requestId: '12345');
@@ -51,8 +54,10 @@ void main() {
       blocTest(
         'Initialize',
         build: () => ReturnDetailsByRequestBloc(
-          returnDetailsByRequestRepository: returnDetailsByRequestRepository,
+          returnRequestInformationRepository:
+              returnRequestInformationRepository,
           returnRequestRepository: mockReturnRequestRepository,
+          poAttachmentRepository: poAttachmentRepository,
         ),
         act: (ReturnDetailsByRequestBloc bloc) =>
             bloc.add(const ReturnDetailsByRequestEvent.initialized()),
@@ -65,13 +70,13 @@ void main() {
     blocTest(
       'fetch -> Return Details By Request Bloc fail',
       build: () => ReturnDetailsByRequestBloc(
-        returnDetailsByRequestRepository: returnDetailsByRequestRepository,
+        returnRequestInformationRepository: returnRequestInformationRepository,
         returnRequestRepository: mockReturnRequestRepository,
+        poAttachmentRepository: poAttachmentRepository,
       ),
       setUp: () {
         when(
-          () =>
-              returnDetailsByRequestRepository.getReturnSummaryDetailsByRequest(
+          () => returnRequestInformationRepository.getReturnInformation(
             returnRequestId: fakeReturnRequestsId,
           ),
         ).thenAnswer(
@@ -101,13 +106,13 @@ void main() {
     blocTest(
       'fetch -> Return Details By Request Bloc Success',
       build: () => ReturnDetailsByRequestBloc(
-        returnDetailsByRequestRepository: returnDetailsByRequestRepository,
+        returnRequestInformationRepository: returnRequestInformationRepository,
         returnRequestRepository: mockReturnRequestRepository,
+        poAttachmentRepository: poAttachmentRepository,
       ),
       setUp: () {
         when(
-          () =>
-              returnDetailsByRequestRepository.getReturnSummaryDetailsByRequest(
+          () => returnRequestInformationRepository.getReturnInformation(
             returnRequestId: fakeReturnRequestsId,
           ),
         ).thenAnswer(
@@ -136,20 +141,19 @@ void main() {
   });
 
   group('Download -', () {
-    final attachment1 =
-        ReturnRequestAttachment.empty().copyWith(path: 'fake-url-1');
-    final attachment2 =
-        ReturnRequestAttachment.empty().copyWith(path: 'fake-url-2');
+    final attachment1 = PoDocuments.empty().copyWith(url: 'fake-url-1');
+    final attachment2 = PoDocuments.empty().copyWith(url: 'fake-url-2');
 
     blocTest(
       'Get permission failed',
       build: () => ReturnDetailsByRequestBloc(
-        returnDetailsByRequestRepository: returnDetailsByRequestRepository,
+        returnRequestInformationRepository: returnRequestInformationRepository,
         returnRequestRepository: mockReturnRequestRepository,
+        poAttachmentRepository: poAttachmentRepository,
       ),
       setUp: () {
         when(
-          () => mockReturnRequestRepository.getDownloadPermission(),
+          () => poAttachmentRepository.downloadPermission(),
         ).thenAnswer((_) async => const Left(ApiFailure.other('mock-error')));
       },
       act: (ReturnDetailsByRequestBloc bloc) => bloc.add(
@@ -171,15 +175,16 @@ void main() {
     blocTest(
       'Download failed',
       build: () => ReturnDetailsByRequestBloc(
-        returnDetailsByRequestRepository: returnDetailsByRequestRepository,
+        returnRequestInformationRepository: returnRequestInformationRepository,
         returnRequestRepository: mockReturnRequestRepository,
+        poAttachmentRepository: poAttachmentRepository,
       ),
       setUp: () {
         when(
-          () => mockReturnRequestRepository.getDownloadPermission(),
+          () => poAttachmentRepository.downloadPermission(),
         ).thenAnswer((_) async => const Right(PermissionStatus.granted));
         when(
-          () => mockReturnRequestRepository.downloadFile(file: attachment1),
+          () => poAttachmentRepository.downloadFiles(files: [attachment1]),
         ).thenAnswer((_) async => const Left(ApiFailure.other('mock-error')));
       },
       seed: () => ReturnDetailsByRequestState.initial().copyWith(
@@ -193,7 +198,7 @@ void main() {
       expect: () => [
         ReturnDetailsByRequestState.initial().copyWith(
           downloadingAttachments: [attachment2, attachment1],
-          downloadedAttachment: ReturnRequestAttachment.empty(),
+          downloadedAttachment: PoDocuments.empty(),
           downloadFailureOrSuccessOption: none(),
         ),
         ReturnDetailsByRequestState.initial().copyWith(
@@ -208,16 +213,17 @@ void main() {
     blocTest(
       'Download success',
       build: () => ReturnDetailsByRequestBloc(
-        returnDetailsByRequestRepository: returnDetailsByRequestRepository,
+        returnRequestInformationRepository: returnRequestInformationRepository,
         returnRequestRepository: mockReturnRequestRepository,
+        poAttachmentRepository: poAttachmentRepository,
       ),
       setUp: () {
         when(
-          () => mockReturnRequestRepository.getDownloadPermission(),
+          () => poAttachmentRepository.downloadPermission(),
         ).thenAnswer((_) async => const Right(PermissionStatus.granted));
         when(
-          () => mockReturnRequestRepository.downloadFile(file: attachment1),
-        ).thenAnswer((_) async => Right(fakeFile));
+          () => poAttachmentRepository.downloadFiles(files: [attachment1]),
+        ).thenAnswer((_) async => Right(file));
       },
       seed: () => ReturnDetailsByRequestState.initial().copyWith(
         downloadingAttachments: [attachment2],
@@ -230,13 +236,13 @@ void main() {
       expect: () => [
         ReturnDetailsByRequestState.initial().copyWith(
           downloadingAttachments: [attachment2, attachment1],
-          downloadedAttachment: ReturnRequestAttachment.empty(),
+          downloadedAttachment: PoDocuments.empty(),
           downloadFailureOrSuccessOption: none(),
         ),
         ReturnDetailsByRequestState.initial().copyWith(
           downloadingAttachments: [attachment2],
           downloadedAttachment: attachment1,
-          downloadFailureOrSuccessOption: optionOf(Right(fakeFile)),
+          downloadFailureOrSuccessOption: optionOf(Right(file)),
         ),
       ],
     );

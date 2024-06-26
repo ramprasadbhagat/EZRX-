@@ -43,7 +43,7 @@ mixin _$OrderHistoryDetailsDto {
   String get type => throw _privateConstructorUsedError;
   @JsonKey(name: 'TelephoneNumber', defaultValue: '')
   String get telephoneNumber => throw _privateConstructorUsedError;
-  @JsonKey(readValue: _createdDateTimeReadValue)
+  @JsonKey(readValue: JsonReadValueHelper.readCreatedDateTimeValue)
   String get createdDate => throw _privateConstructorUsedError;
   @JsonKey(name: 'EZRXNumber', defaultValue: '')
   String get eZRXNumber => throw _privateConstructorUsedError;
@@ -69,23 +69,26 @@ mixin _$OrderHistoryDetailsDto {
   String get invoiceNumber => throw _privateConstructorUsedError;
   @JsonKey(name: 'OrderReason', defaultValue: '')
   String get orderReason => throw _privateConstructorUsedError;
-  @JsonKey(name: 'OrderItems', readValue: orderItemOverride)
+  @JsonKey(name: 'OrderItems', readValue: JsonReadValueHelper.readList)
   List<OrderHistoryDetailsOrderItemDto> get orderHistoryDetailsOrderItem =>
       throw _privateConstructorUsedError;
-  @JsonKey(name: 'PaymentTerm', readValue: paymentTermOverride)
+  @JsonKey(
+      name: 'PaymentTerm', readValue: JsonReadValueHelper.readValueMapDynamic)
   OrderHistoryDetailsPaymentTermDto get orderHistoryDetailsPaymentTerm =>
       throw _privateConstructorUsedError;
-  @JsonKey(name: 'SpecialInstructions', readValue: specialInstructionOverride)
+  @JsonKey(
+      name: 'SpecialInstructions', readValue: JsonReadValueHelper.readString)
   String get orderHistoryDetailsSpecialInstructions =>
       throw _privateConstructorUsedError;
-  @JsonKey(name: 'PODocuments', readValue: poDocumentOverride)
+  @JsonKey(name: 'PODocuments', readValue: JsonReadValueHelper.readList)
   List<PoDocumentsDto> get orderHistoryDetailsPoDocuments =>
       throw _privateConstructorUsedError;
   @JsonKey(name: 'ItmCount', defaultValue: 0)
   int get itemCount => throw _privateConstructorUsedError;
-  @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+  @JsonKey(
+      defaultValue: false, readValue: JsonReadValueHelper.mappingIsMarketPlace)
   bool get isMarketPlace => throw _privateConstructorUsedError;
-  @JsonKey(name: 'TaxRate', readValue: handleTax)
+  @JsonKey(name: 'TaxRate', readValue: JsonReadValueHelper.handleTax)
   double get taxRate => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -116,7 +119,8 @@ abstract class $OrderHistoryDetailsDtoCopyWith<$Res> {
       @JsonKey(name: 'Type', defaultValue: '') String type,
       @JsonKey(name: 'TelephoneNumber', defaultValue: '')
       String telephoneNumber,
-      @JsonKey(readValue: _createdDateTimeReadValue) String createdDate,
+      @JsonKey(readValue: JsonReadValueHelper.readCreatedDateTimeValue)
+      String createdDate,
       @JsonKey(name: 'EZRXNumber', defaultValue: '') String eZRXNumber,
       @JsonKey(name: 'OrderBy', defaultValue: '') String orderBy,
       @JsonKey(name: 'ReferenceNotes', defaultValue: '') String referenceNotes,
@@ -129,19 +133,25 @@ abstract class $OrderHistoryDetailsDtoCopyWith<$Res> {
       @JsonKey(name: 'SoldToAddress', defaultValue: '') String soldToAddress,
       @JsonKey(name: 'InvoiceNumber', defaultValue: '') String invoiceNumber,
       @JsonKey(name: 'OrderReason', defaultValue: '') String orderReason,
-      @JsonKey(name: 'OrderItems', readValue: orderItemOverride)
+      @JsonKey(name: 'OrderItems', readValue: JsonReadValueHelper.readList)
       List<OrderHistoryDetailsOrderItemDto> orderHistoryDetailsOrderItem,
-      @JsonKey(name: 'PaymentTerm', readValue: paymentTermOverride)
+      @JsonKey(
+          name: 'PaymentTerm',
+          readValue: JsonReadValueHelper.readValueMapDynamic)
       OrderHistoryDetailsPaymentTermDto orderHistoryDetailsPaymentTerm,
       @JsonKey(
-          name: 'SpecialInstructions', readValue: specialInstructionOverride)
+          name: 'SpecialInstructions',
+          readValue: JsonReadValueHelper.readString)
       String orderHistoryDetailsSpecialInstructions,
-      @JsonKey(name: 'PODocuments', readValue: poDocumentOverride)
+      @JsonKey(name: 'PODocuments', readValue: JsonReadValueHelper.readList)
       List<PoDocumentsDto> orderHistoryDetailsPoDocuments,
       @JsonKey(name: 'ItmCount', defaultValue: 0) int itemCount,
-      @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+      @JsonKey(
+          defaultValue: false,
+          readValue: JsonReadValueHelper.mappingIsMarketPlace)
       bool isMarketPlace,
-      @JsonKey(name: 'TaxRate', readValue: handleTax) double taxRate});
+      @JsonKey(name: 'TaxRate', readValue: JsonReadValueHelper.handleTax)
+      double taxRate});
 
   $OrderHistoryDetailsPaymentTermDtoCopyWith<$Res>
       get orderHistoryDetailsPaymentTerm;
@@ -359,7 +369,8 @@ abstract class _$$OrderHistoryDetailsDtoImplCopyWith<$Res>
       @JsonKey(name: 'Type', defaultValue: '') String type,
       @JsonKey(name: 'TelephoneNumber', defaultValue: '')
       String telephoneNumber,
-      @JsonKey(readValue: _createdDateTimeReadValue) String createdDate,
+      @JsonKey(readValue: JsonReadValueHelper.readCreatedDateTimeValue)
+      String createdDate,
       @JsonKey(name: 'EZRXNumber', defaultValue: '') String eZRXNumber,
       @JsonKey(name: 'OrderBy', defaultValue: '') String orderBy,
       @JsonKey(name: 'ReferenceNotes', defaultValue: '') String referenceNotes,
@@ -372,19 +383,25 @@ abstract class _$$OrderHistoryDetailsDtoImplCopyWith<$Res>
       @JsonKey(name: 'SoldToAddress', defaultValue: '') String soldToAddress,
       @JsonKey(name: 'InvoiceNumber', defaultValue: '') String invoiceNumber,
       @JsonKey(name: 'OrderReason', defaultValue: '') String orderReason,
-      @JsonKey(name: 'OrderItems', readValue: orderItemOverride)
+      @JsonKey(name: 'OrderItems', readValue: JsonReadValueHelper.readList)
       List<OrderHistoryDetailsOrderItemDto> orderHistoryDetailsOrderItem,
-      @JsonKey(name: 'PaymentTerm', readValue: paymentTermOverride)
+      @JsonKey(
+          name: 'PaymentTerm',
+          readValue: JsonReadValueHelper.readValueMapDynamic)
       OrderHistoryDetailsPaymentTermDto orderHistoryDetailsPaymentTerm,
       @JsonKey(
-          name: 'SpecialInstructions', readValue: specialInstructionOverride)
+          name: 'SpecialInstructions',
+          readValue: JsonReadValueHelper.readString)
       String orderHistoryDetailsSpecialInstructions,
-      @JsonKey(name: 'PODocuments', readValue: poDocumentOverride)
+      @JsonKey(name: 'PODocuments', readValue: JsonReadValueHelper.readList)
       List<PoDocumentsDto> orderHistoryDetailsPoDocuments,
       @JsonKey(name: 'ItmCount', defaultValue: 0) int itemCount,
-      @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+      @JsonKey(
+          defaultValue: false,
+          readValue: JsonReadValueHelper.mappingIsMarketPlace)
       bool isMarketPlace,
-      @JsonKey(name: 'TaxRate', readValue: handleTax) double taxRate});
+      @JsonKey(name: 'TaxRate', readValue: JsonReadValueHelper.handleTax)
+      double taxRate});
 
   @override
   $OrderHistoryDetailsPaymentTermDtoCopyWith<$Res>
@@ -586,7 +603,8 @@ class _$OrderHistoryDetailsDtoImpl extends _OrderHistoryDetailsDto {
       @JsonKey(name: 'Type', defaultValue: '') required this.type,
       @JsonKey(name: 'TelephoneNumber', defaultValue: '')
       required this.telephoneNumber,
-      @JsonKey(readValue: _createdDateTimeReadValue) required this.createdDate,
+      @JsonKey(readValue: JsonReadValueHelper.readCreatedDateTimeValue)
+      required this.createdDate,
       @JsonKey(name: 'EZRXNumber', defaultValue: '') required this.eZRXNumber,
       @JsonKey(name: 'OrderBy', defaultValue: '') required this.orderBy,
       @JsonKey(name: 'ReferenceNotes', defaultValue: '')
@@ -603,20 +621,26 @@ class _$OrderHistoryDetailsDtoImpl extends _OrderHistoryDetailsDto {
       @JsonKey(name: 'InvoiceNumber', defaultValue: '')
       required this.invoiceNumber,
       @JsonKey(name: 'OrderReason', defaultValue: '') required this.orderReason,
-      @JsonKey(name: 'OrderItems', readValue: orderItemOverride)
+      @JsonKey(name: 'OrderItems', readValue: JsonReadValueHelper.readList)
       required final List<OrderHistoryDetailsOrderItemDto>
           orderHistoryDetailsOrderItem,
-      @JsonKey(name: 'PaymentTerm', readValue: paymentTermOverride)
+      @JsonKey(
+          name: 'PaymentTerm',
+          readValue: JsonReadValueHelper.readValueMapDynamic)
       required this.orderHistoryDetailsPaymentTerm,
       @JsonKey(
-          name: 'SpecialInstructions', readValue: specialInstructionOverride)
+          name: 'SpecialInstructions',
+          readValue: JsonReadValueHelper.readString)
       required this.orderHistoryDetailsSpecialInstructions,
-      @JsonKey(name: 'PODocuments', readValue: poDocumentOverride)
+      @JsonKey(name: 'PODocuments', readValue: JsonReadValueHelper.readList)
       required final List<PoDocumentsDto> orderHistoryDetailsPoDocuments,
       @JsonKey(name: 'ItmCount', defaultValue: 0) required this.itemCount,
-      @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+      @JsonKey(
+          defaultValue: false,
+          readValue: JsonReadValueHelper.mappingIsMarketPlace)
       required this.isMarketPlace,
-      @JsonKey(name: 'TaxRate', readValue: handleTax) required this.taxRate})
+      @JsonKey(name: 'TaxRate', readValue: JsonReadValueHelper.handleTax)
+      required this.taxRate})
       : _orderHistoryDetailsOrderItem = orderHistoryDetailsOrderItem,
         _orderHistoryDetailsPoDocuments = orderHistoryDetailsPoDocuments,
         super._();
@@ -658,7 +682,7 @@ class _$OrderHistoryDetailsDtoImpl extends _OrderHistoryDetailsDto {
   @JsonKey(name: 'TelephoneNumber', defaultValue: '')
   final String telephoneNumber;
   @override
-  @JsonKey(readValue: _createdDateTimeReadValue)
+  @JsonKey(readValue: JsonReadValueHelper.readCreatedDateTimeValue)
   final String createdDate;
   @override
   @JsonKey(name: 'EZRXNumber', defaultValue: '')
@@ -698,7 +722,7 @@ class _$OrderHistoryDetailsDtoImpl extends _OrderHistoryDetailsDto {
   final String orderReason;
   final List<OrderHistoryDetailsOrderItemDto> _orderHistoryDetailsOrderItem;
   @override
-  @JsonKey(name: 'OrderItems', readValue: orderItemOverride)
+  @JsonKey(name: 'OrderItems', readValue: JsonReadValueHelper.readList)
   List<OrderHistoryDetailsOrderItemDto> get orderHistoryDetailsOrderItem {
     if (_orderHistoryDetailsOrderItem is EqualUnmodifiableListView)
       return _orderHistoryDetailsOrderItem;
@@ -707,14 +731,16 @@ class _$OrderHistoryDetailsDtoImpl extends _OrderHistoryDetailsDto {
   }
 
   @override
-  @JsonKey(name: 'PaymentTerm', readValue: paymentTermOverride)
+  @JsonKey(
+      name: 'PaymentTerm', readValue: JsonReadValueHelper.readValueMapDynamic)
   final OrderHistoryDetailsPaymentTermDto orderHistoryDetailsPaymentTerm;
   @override
-  @JsonKey(name: 'SpecialInstructions', readValue: specialInstructionOverride)
+  @JsonKey(
+      name: 'SpecialInstructions', readValue: JsonReadValueHelper.readString)
   final String orderHistoryDetailsSpecialInstructions;
   final List<PoDocumentsDto> _orderHistoryDetailsPoDocuments;
   @override
-  @JsonKey(name: 'PODocuments', readValue: poDocumentOverride)
+  @JsonKey(name: 'PODocuments', readValue: JsonReadValueHelper.readList)
   List<PoDocumentsDto> get orderHistoryDetailsPoDocuments {
     if (_orderHistoryDetailsPoDocuments is EqualUnmodifiableListView)
       return _orderHistoryDetailsPoDocuments;
@@ -726,10 +752,11 @@ class _$OrderHistoryDetailsDtoImpl extends _OrderHistoryDetailsDto {
   @JsonKey(name: 'ItmCount', defaultValue: 0)
   final int itemCount;
   @override
-  @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+  @JsonKey(
+      defaultValue: false, readValue: JsonReadValueHelper.mappingIsMarketPlace)
   final bool isMarketPlace;
   @override
-  @JsonKey(name: 'TaxRate', readValue: handleTax)
+  @JsonKey(name: 'TaxRate', readValue: JsonReadValueHelper.handleTax)
   final double taxRate;
 
   @override
@@ -882,7 +909,7 @@ abstract class _OrderHistoryDetailsDto extends OrderHistoryDetailsDto {
       @JsonKey(name: 'Type', defaultValue: '') required final String type,
       @JsonKey(name: 'TelephoneNumber', defaultValue: '')
       required final String telephoneNumber,
-      @JsonKey(readValue: _createdDateTimeReadValue)
+      @JsonKey(readValue: JsonReadValueHelper.readCreatedDateTimeValue)
       required final String createdDate,
       @JsonKey(name: 'EZRXNumber', defaultValue: '')
       required final String eZRXNumber,
@@ -905,21 +932,26 @@ abstract class _OrderHistoryDetailsDto extends OrderHistoryDetailsDto {
       required final String invoiceNumber,
       @JsonKey(name: 'OrderReason', defaultValue: '')
       required final String orderReason,
-      @JsonKey(name: 'OrderItems', readValue: orderItemOverride)
+      @JsonKey(name: 'OrderItems', readValue: JsonReadValueHelper.readList)
       required final List<OrderHistoryDetailsOrderItemDto>
           orderHistoryDetailsOrderItem,
-      @JsonKey(name: 'PaymentTerm', readValue: paymentTermOverride)
+      @JsonKey(
+          name: 'PaymentTerm',
+          readValue: JsonReadValueHelper.readValueMapDynamic)
       required final OrderHistoryDetailsPaymentTermDto
           orderHistoryDetailsPaymentTerm,
       @JsonKey(
-          name: 'SpecialInstructions', readValue: specialInstructionOverride)
+          name: 'SpecialInstructions',
+          readValue: JsonReadValueHelper.readString)
       required final String orderHistoryDetailsSpecialInstructions,
-      @JsonKey(name: 'PODocuments', readValue: poDocumentOverride)
+      @JsonKey(name: 'PODocuments', readValue: JsonReadValueHelper.readList)
       required final List<PoDocumentsDto> orderHistoryDetailsPoDocuments,
       @JsonKey(name: 'ItmCount', defaultValue: 0) required final int itemCount,
-      @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+      @JsonKey(
+          defaultValue: false,
+          readValue: JsonReadValueHelper.mappingIsMarketPlace)
       required final bool isMarketPlace,
-      @JsonKey(name: 'TaxRate', readValue: handleTax)
+      @JsonKey(name: 'TaxRate', readValue: JsonReadValueHelper.handleTax)
       required final double taxRate}) = _$OrderHistoryDetailsDtoImpl;
   const _OrderHistoryDetailsDto._() : super._();
 
@@ -960,7 +992,7 @@ abstract class _OrderHistoryDetailsDto extends OrderHistoryDetailsDto {
   @JsonKey(name: 'TelephoneNumber', defaultValue: '')
   String get telephoneNumber;
   @override
-  @JsonKey(readValue: _createdDateTimeReadValue)
+  @JsonKey(readValue: JsonReadValueHelper.readCreatedDateTimeValue)
   String get createdDate;
   @override
   @JsonKey(name: 'EZRXNumber', defaultValue: '')
@@ -999,25 +1031,28 @@ abstract class _OrderHistoryDetailsDto extends OrderHistoryDetailsDto {
   @JsonKey(name: 'OrderReason', defaultValue: '')
   String get orderReason;
   @override
-  @JsonKey(name: 'OrderItems', readValue: orderItemOverride)
+  @JsonKey(name: 'OrderItems', readValue: JsonReadValueHelper.readList)
   List<OrderHistoryDetailsOrderItemDto> get orderHistoryDetailsOrderItem;
   @override
-  @JsonKey(name: 'PaymentTerm', readValue: paymentTermOverride)
+  @JsonKey(
+      name: 'PaymentTerm', readValue: JsonReadValueHelper.readValueMapDynamic)
   OrderHistoryDetailsPaymentTermDto get orderHistoryDetailsPaymentTerm;
   @override
-  @JsonKey(name: 'SpecialInstructions', readValue: specialInstructionOverride)
+  @JsonKey(
+      name: 'SpecialInstructions', readValue: JsonReadValueHelper.readString)
   String get orderHistoryDetailsSpecialInstructions;
   @override
-  @JsonKey(name: 'PODocuments', readValue: poDocumentOverride)
+  @JsonKey(name: 'PODocuments', readValue: JsonReadValueHelper.readList)
   List<PoDocumentsDto> get orderHistoryDetailsPoDocuments;
   @override
   @JsonKey(name: 'ItmCount', defaultValue: 0)
   int get itemCount;
   @override
-  @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+  @JsonKey(
+      defaultValue: false, readValue: JsonReadValueHelper.mappingIsMarketPlace)
   bool get isMarketPlace;
   @override
-  @JsonKey(name: 'TaxRate', readValue: handleTax)
+  @JsonKey(name: 'TaxRate', readValue: JsonReadValueHelper.handleTax)
   double get taxRate;
   @override
   @JsonKey(ignore: true)

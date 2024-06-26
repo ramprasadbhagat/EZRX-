@@ -8,7 +8,7 @@ import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
 import 'package:ezrxmobile/domain/order/entities/request_counter_offer_details.dart';
 import 'package:ezrxmobile/domain/order/entities/tender_contract.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
-import 'package:ezrxmobile/infrastructure/core/common/json_key_converter.dart';
+import 'package:ezrxmobile/infrastructure/core/common/json_key_readvalue_helper.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/bundle_info_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/combo_material_item_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/material_dto.dart';
@@ -62,7 +62,8 @@ class CartProductDto with _$CartProductDto {
     required List<MaterialDto> bundleMaterials,
     @JsonKey(name: 'bonusMaterials', defaultValue: <BonusSampleItemDto>[])
     required List<BonusSampleItemDto> bonusMaterials,
-    @JsonKey(name: 'taxes', readValue: handleTax) required double tax,
+    @JsonKey(name: 'taxes', readValue: JsonReadValueHelper.handleTax)
+    required double tax,
     @JsonKey(name: 'hidePrice', defaultValue: false) required bool hidePrice,
     @JsonKey(name: 'suspensionStatus', defaultValue: false)
     required bool isSuspended,
@@ -75,7 +76,10 @@ class CartProductDto with _$CartProductDto {
     required List<ComboMaterialItemDto> comboMaterials,
     //maximumQty auto set to maximum limit if we get null from response
     @JsonKey(name: 'maximumQty', defaultValue: 99999) required int maximumQty,
-    @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+    @JsonKey(
+      defaultValue: false,
+      readValue: JsonReadValueHelper.mappingIsMarketPlace,
+    )
     required bool isMarketPlace,
     @JsonKey(name: 'defaultMaterialDescription', defaultValue: '')
     required String defaultMaterialDescription,
@@ -103,8 +107,7 @@ class CartProductDto with _$CartProductDto {
   ) {
     return CartProductDto(
       genericMaterialName: cartItemDetails.materialInfo.genericMaterialName,
-      itemRegistrationNumber:
-          cartItemDetails.materialInfo.getIRN.getValue(),
+      itemRegistrationNumber: cartItemDetails.materialInfo.getIRN.getValue(),
       materialDescription: cartItemDetails.materialInfo.materialDescription,
       materialNumber: cartItemDetails.materialInfo.materialNumber.getOrCrash(),
       parentID: cartItemDetails.materialInfo.parentID,
@@ -203,8 +206,8 @@ class CartProductDto with _$CartProductDto {
       isSuspended: isSuspended,
       isPrincipalSuspended: isPrincipalSuspended,
       isMarketPlace: isMarketPlace,
-      materialGroup2: MaterialGroup.two(materialGroup2),
-      materialGroup4: MaterialGroup.four(materialGroup4),
+      materialGroup2: MaterialGroup(materialGroup2),
+      materialGroup4: MaterialGroup(materialGroup4),
       hasMandatoryTenderContract: hasMandatoryTenderContract,
       hasValidTenderContract: hasValidTenderContract,
     );
@@ -237,7 +240,7 @@ class CartProductDto with _$CartProductDto {
       tenderContract: TenderContract.empty().copyWith(
         tenderOrderReason: TenderContractReason(tenderOrderReason),
         contractNumber:
-            TenderContractNumber.tenderContractItemNumber(tenderContractNumber),
+            TenderContractNumber(tenderContractNumber),
         isTenderExpired: isTenderExpired,
       ),
       isCovid: isCovid,

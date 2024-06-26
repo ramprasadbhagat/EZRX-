@@ -99,6 +99,7 @@ class _Triangle extends CustomClipper<Path> {
     return path;
   }
 
+  //ignore: code-duplication
   @override
   bool shouldReclip(covariant CustomClipper<Path> oldClipper) => false;
 }

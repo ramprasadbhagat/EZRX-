@@ -23,8 +23,9 @@ _$TransactionDetailDtoImpl _$$TransactionDetailDtoImplFromJson(
       createdOn: json['createdOn'] as String? ?? '',
       bankId: json['bankId'] as String? ?? '',
       paidOn: json['paidOn'] as String? ?? '',
-      vaName: _mappingVaName(json, 'vaName') as String? ?? '',
-      vaNumber: _mappingVaNumber(json, 'vaNumber') as String? ?? '',
+      vaName: JsonReadValueHelper.readVaName(json, 'vaName') as String? ?? '',
+      vaNumber:
+          JsonReadValueHelper.readVaNumber(json, 'vaNumber') as String? ?? '',
     );
 
 Map<String, dynamic> _$$TransactionDetailDtoImplToJson(

@@ -33,8 +33,8 @@ _$UserDtoImpl _$$UserDtoImplFromJson(Map<String, dynamic> json) =>
               json['accessRight'] as Map<String, dynamic>),
       emailNotifications: json['emailNotifications'] as bool? ?? false,
       mobileNotifications: json['mobileNotifications'] as bool? ?? false,
-      languagePreference:
-          handleEmptyLanguagePreference(json, 'languagePreference') as String,
+      languagePreference: JsonReadValueHelper.handleEmptyLanguagePreference(
+          json, 'languagePreference') as String,
       enableOrderType: json['enableOrderType'] as bool? ?? false,
       acceptPrivacyPolicy: json['acceptTC'] as bool? ?? true,
       hasBonusOverride: json['hasBonusOverride'] as bool? ?? false,
@@ -49,15 +49,17 @@ _$UserDtoImpl _$$UserDtoImplFromJson(Map<String, dynamic> json) =>
                   e as Map<String, dynamic>))
               .toList() ??
           [],
-      preferredLanguage:
-          handleEmptyLanguagePreference(json, 'preferredLanguage') as String,
-      supportedLanguages: (handleSupportedLanguages(json, 'supportedLanguages')
-                  as List<dynamic>?)
+      preferredLanguage: JsonReadValueHelper.handleEmptyLanguagePreference(
+          json, 'preferredLanguage') as String,
+      supportedLanguages: (JsonReadValueHelper.handleSupportedLanguages(
+                  json, 'supportedLanguages') as List<dynamic>?)
               ?.map((e) => e as String)
               .toList() ??
           [],
       mobileNumber: json['MobileNumber'] as String? ?? '',
-      acceptMPTC: handleMarketPlaceTnCAcceptance(json, 'acceptMPTC') as String,
+      acceptMPTC:
+          JsonReadValueHelper.handleMarketPlaceTnCAcceptance(json, 'acceptMPTC')
+              as String,
       isFirstLogin: json['isFirstLogin'] as bool? ?? false,
     );
 

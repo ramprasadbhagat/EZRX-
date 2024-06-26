@@ -1,8 +1,6 @@
 import 'dart:convert';
 
-import 'package:dio/dio.dart';
 import 'package:ezrxmobile/config.dart';
-import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details.dart';
 import 'package:ezrxmobile/infrastructure/core/firebase/remote_config.dart';
@@ -56,7 +54,7 @@ class ViewByOrderDetailsRemoteDataSource {
         }),
       );
 
-      _orderHistoryDetailsExceptionChecker(res: res);
+      dataSourceExceptionHandler.handleExceptionChecker(res: res);
 
       if (res.data['data']['orderHistoryV3']['orderHeaders'].isEmpty) {
         return OrderHistoryDetails.empty();
@@ -99,7 +97,7 @@ class ViewByOrderDetailsRemoteDataSource {
         }),
       );
 
-      _orderHistoryDetailsExceptionChecker(res: res);
+      dataSourceExceptionHandler.handleExceptionChecker(res: res);
 
       final rawOrderHistories =
           res.data['data']['orderHistoryV3']['orderHeaders'];
@@ -112,16 +110,5 @@ class ViewByOrderDetailsRemoteDataSource {
 
       return <OrderHistoryDetails>[];
     });
-  }
-
-  void _orderHistoryDetailsExceptionChecker({required Response<dynamic> res}) {
-    if (res.statusCode != 200) {
-      throw ServerException(
-        code: res.statusCode ?? 0,
-        message: res.statusMessage ?? '',
-      );
-    } else if (dataSourceExceptionHandler.isServerResponseError(res: res)) {
-      throw ServerException(message: res.data['errors'][0]['message']);
-    }
   }
 }

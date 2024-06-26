@@ -7,230 +7,260 @@ resources:
 pool: dnd-azdevops-flutter
 
 variables:
-  - group: "eZRx plus CICD"
+  - group: 'eZRx plus CICD'
 
 jobs:
-- job: FlutterVersion
-  displayName: 'Version flutter'
-  steps:
-  - bash: flutter doctor -v
+  - job: FlutterAnalyze
+    displayName: 'Analyze flutter'
+    steps:
+      - task: Bash@3
+        inputs:
+          targetType: 'inline'
+          script: flutter doctor -v
+        displayName: Flutter Version
 
-- job: FlutterAnalyze
-  displayName: 'Analyze flutter'
-  steps:
-  - bash: flutter analyze --fatal-infos --fatal-warnings
+      - task: Bash@3
+        inputs:
+          targetType: 'inline'
+          script: flutter analyze --fatal-infos --fatal-warnings
+        displayName: Flutter Analyze
 
-- job: DCMVersion
-  displayName: 'DCM Version'
-  steps:
-  - bash: dcm --version
+  - job: DCMAnalyse
+    displayName: 'DCM Analyse'
+    steps:
+      - task: Bash@3
+        inputs:
+          targetType: 'inline'
+          script: dcm --version
+        displayName: DCM Version
 
-- job: DCMAnalyse
-  displayName: 'DCM Analyse'
-  steps:
-  - bash: dcm analyze lib --ci-key=$DCM_CI_KEY --email=$DCM_LICENSE_EMAIL --fatal-style --fatal-performance --fatal-warnings
-    env:
-      DCM_CI_KEY: '$(DCM_CI_KEY)'
-      DCM_LICENSE_EMAIL: '$(DCM_LICENSE_EMAIL)'
+      - task: Bash@3
+        inputs:
+          targetType: 'inline'
+          script: dcm analyze lib --ci-key=$DCM_CI_KEY --email=$DCM_LICENSE_EMAIL --fatal-style --fatal-performance --fatal-warnings
+        displayName: DCM Analyse
 
-- job: DCMCheckParameters
-  displayName: 'DCM Check Parameters'
-  steps:
-  - bash: dcm check-parameters lib --ci-key=$DCM_CI_KEY --email=$DCM_LICENSE_EMAIL --fatal-found
-    env:
-      DCM_CI_KEY: '$(DCM_CI_KEY)'
-      DCM_LICENSE_EMAIL: '$(DCM_LICENSE_EMAIL)'
+  - job: DCMCheckParameters
+    displayName: 'DCM Check Parameters'
+    steps:
+      - bash: dcm check-parameters lib --ci-key=$DCM_CI_KEY --email=$DCM_LICENSE_EMAIL --fatal-found
 
-- job: DCMCheckUnusedCode
-  displayName: 'DCM Check Unused Code'
-  steps:
-  - bash: dcm check-unused-code lib --ci-key=$DCM_CI_KEY --email=$DCM_LICENSE_EMAIL --fatal-unused
-    env:
-      DCM_CI_KEY: '$(DCM_CI_KEY)'
-      DCM_LICENSE_EMAIL: '$(DCM_LICENSE_EMAIL)'
+  - job: DCMCheckUnusedFiles
+    displayName: 'DCM Check Unused Files'
+    steps:
+      - bash: dcm check-unused-files lib --ci-key=$DCM_CI_KEY --email=$DCM_LICENSE_EMAIL --fatal-unused
 
-- job: DCMCheckUnusedFiles
-  displayName: 'DCM Check Unused Files'
-  steps:
-  - bash: dcm check-unused-files lib --ci-key=$DCM_CI_KEY --email=$DCM_LICENSE_EMAIL --fatal-unused
-    env:
-      DCM_CI_KEY: '$(DCM_CI_KEY)'
-      DCM_LICENSE_EMAIL: '$(DCM_LICENSE_EMAIL)'
-      
-- job: DCMCheckDependencies
-  displayName: 'DCM Check Dependencies'
-  steps:
-  - bash: dcm check-dependencies lib test integration_test --ignored-packages auto_route_generator,flutter_launcher_icons,flutter_native_splash,json_serializable,hive_generator,scandit_flutter_datacapture_core --ci-key=$DCM_CI_KEY --email=$DCM_LICENSE_EMAIL --fatal-found
-    env:
-      DCM_CI_KEY: '$(DCM_CI_KEY)'
-      DCM_LICENSE_EMAIL: '$(DCM_LICENSE_EMAIL)'
+  - job: DCMCheckUnusedCode
+    displayName: 'DCM Check Unused Code'
+    steps:
+      - task: Bash@3
+        inputs:
+          targetType: 'inline'
+          script: flutter pub get
+        displayName: Flutter Pub Get
 
-- job: TestApplication
-  displayName: Test application
-  steps:
-  - bash: flutter test test/application
+      - task: Bash@3
+        inputs:
+          targetType: 'inline'
+          script: dcm check-unused-code lib --ci-key=$DCM_CI_KEY --email=$DCM_LICENSE_EMAIL --fatal-unused
+        displayName: DCM Check Unused Code
 
-- job: TestDomain
-  displayName: Test domain
-  steps:
-  - bash: flutter test test/domain
+  - job: DCMCheckCodeDuplication
+    displayName: 'DCM Check Code Duplication'
+    steps:
+      - task: Bash@3
+        inputs:
+          targetType: 'inline'
+          script: flutter pub get
+        displayName: Flutter Pub Get
 
-- job: TestInfrastructureAccount
-  displayName: Test infrastructure -> account
-  steps:
-  - bash: flutter test test/infrastructure/account
+      - task: Bash@3
+        inputs:
+          targetType: 'inline'
+          script: dcm check-code-duplication lib --ci-key=$DCM_CI_KEY --email=$DCM_LICENSE_EMAIL --fatal-found
+        displayName: DCM Check Code Duplication
 
-- job: TestInfrastructureAnnouncement
-  displayName: Test infrastructure -> announcement
-  steps:
-  - bash: flutter test test/infrastructure/announcement
+  - job: DCMCheckDependencies
+    displayName: 'DCM Check Dependencies'
+    steps:
+      - task: Bash@3
+        inputs:
+          targetType: 'inline'
+          script: flutter pub get
+        displayName: Flutter Pub Get
 
-- job: TestInfrastructureAupTc
-  displayName: Test infrastructure -> aup_tc
-  steps:
-  - bash: flutter test test/infrastructure/aup_tc
+      - task: Bash@3
+        inputs:
+          targetType: 'inline'
+          script: dcm check-dependencies lib test integration_test --ignored-packages auto_route_generator,flutter_launcher_icons,flutter_native_splash,json_serializable,hive_generator,scandit_flutter_datacapture_core --ci-key=$DCM_CI_KEY --email=$DCM_LICENSE_EMAIL --fatal-found
+        displayName: DCM Check Dependencies
 
-- job: TestInfrastructureAboutUs
-  displayName: Test infrastructure -> about_us
-  steps:
-  - bash: flutter test test/infrastructure/about_us
+  - job: TestApplication
+    displayName: Test application
+    steps:
+      - bash: flutter test test/application
 
-- job: TestInfrastructureAnnouncementInfo
-  displayName: Test infrastructure -> announcement_info
-  steps:
-  - bash: flutter test test/infrastructure/announcement_info
+  - job: TestDomain
+    displayName: Test domain
+    steps:
+      - bash: flutter test test/domain
 
-- job: TestInfrastructureArticle_info
-  displayName: Test infrastructure -> article_info
-  steps:
-  - bash: flutter test test/infrastructure/article_info
+  - job: TestInfrastructureAccount
+    displayName: Test infrastructure -> account
+    steps:
+      - bash: flutter test test/infrastructure/account
 
-- job: TestInfrastructureContactUs
-  displayName: Test infrastructure -> contact_us
-  steps:
-  - bash: flutter test test/infrastructure/contact_us
+  - job: TestInfrastructureAnnouncement
+    displayName: Test infrastructure -> announcement
+    steps:
+      - bash: flutter test test/infrastructure/announcement
 
-- job: TestInfrastructureAuth
-  displayName: Test infrastructure -> auth
-  steps:
-  - bash: flutter test test/infrastructure/auth
+  - job: TestInfrastructureAupTc
+    displayName: Test infrastructure -> aup_tc
+    steps:
+      - bash: flutter test test/infrastructure/aup_tc
 
-- job: TestInfrastructureBanner
-  displayName: Test infrastructure -> banner
-  steps:
-  - bash: flutter test test/infrastructure/banner
+  - job: TestInfrastructureAboutUs
+    displayName: Test infrastructure -> about_us
+    steps:
+      - bash: flutter test test/infrastructure/about_us
 
-- job: TestInfrastructurePayments
-  displayName: Test infrastructure -> payments
-  steps:
-  - bash: flutter test test/infrastructure/payments
+  - job: TestInfrastructureAnnouncementInfo
+    displayName: Test infrastructure -> announcement_info
+    steps:
+      - bash: flutter test test/infrastructure/announcement_info
 
-- job: TestInfrastructureOrder
-  displayName: Test infrastructure -> order
-  steps:
-  - bash: flutter test test/infrastructure/order
+  - job: TestInfrastructureArticle_info
+    displayName: Test infrastructure -> article_info
+    steps:
+      - bash: flutter test test/infrastructure/article_info
 
-- job: TestInfrastructureReturns
-  displayName: Test infrastructure -> returns
-  steps:
-  - bash: flutter test test/infrastructure/returns
+  - job: TestInfrastructureContactUs
+    displayName: Test infrastructure -> contact_us
+    steps:
+      - bash: flutter test test/infrastructure/contact_us
 
-- job: TestInfrastructureChatbot
-  displayName: Test infrastructure -> chatbot
-  steps:
-  - bash: flutter test test/infrastructure/chatbot
+  - job: TestInfrastructureAuth
+    displayName: Test infrastructure -> auth
+    steps:
+      - bash: flutter test test/infrastructure/auth
 
-- job: TestInfrastructureCore
-  displayName: Test infrastructure -> core
-  steps:
-  - bash: flutter test test/infrastructure/core
+  - job: TestInfrastructureBanner
+    displayName: Test infrastructure -> banner
+    steps:
+      - bash: flutter test test/infrastructure/banner
 
-- job: TestInfrastructureNotification
-  displayName: Test infrastructure -> notification
-  steps:
-  - bash: flutter test test/infrastructure/notification
+  - job: TestInfrastructurePayments
+    displayName: Test infrastructure -> payments
+    steps:
+      - bash: flutter test test/infrastructure/payments
 
-- job: TestInfrastructureFaq
-  displayName: Test infrastructure -> faq
-  steps:
-  - bash: flutter test test/infrastructure/faq
+  - job: TestInfrastructureOrder
+    displayName: Test infrastructure -> order
+    steps:
+      - bash: flutter test test/infrastructure/order
 
-- job: TestInfrastructureDeepLinking
-  displayName: Test infrastructure -> deep_linking
-  steps:
-  - bash: flutter test test/infrastructure/deep_linking
+  - job: TestInfrastructureReturns
+    displayName: Test infrastructure -> returns
+    steps:
+      - bash: flutter test test/infrastructure/returns
 
-- job: TestPresentationAccount
-  displayName: Test presentation -> account
-  steps:
-  - bash: flutter test test/presentation/account
+  - job: TestInfrastructureChatbot
+    displayName: Test infrastructure -> chatbot
+    steps:
+      - bash: flutter test test/infrastructure/chatbot
 
-- job: TestPresentationAnnouncement
-  displayName: Test presentation -> announcement
-  steps:
-  - bash: flutter test test/presentation/announcement
+  - job: TestInfrastructureCore
+    displayName: Test infrastructure -> core
+    steps:
+      - bash: flutter test test/infrastructure/core
 
-- job: TestPresentationAupTc
-  displayName: Test presentation -> aup_tc_test
-  steps:
-  - bash: flutter test test/presentation/aup_tc_test
+  - job: TestInfrastructureNotification
+    displayName: Test infrastructure -> notification
+    steps:
+      - bash: flutter test test/infrastructure/notification
 
-- job: TestPresentationAuth
-  displayName: Test presentation -> auth
-  steps:
-  - bash: flutter test test/presentation/auth
+  - job: TestInfrastructureFaq
+    displayName: Test infrastructure -> faq
+    steps:
+      - bash: flutter test test/infrastructure/faq
 
-- job: TestPresentationHome
-  displayName: Test presentation -> home
-  steps:
-  - bash: flutter test test/presentation/home
+  - job: TestInfrastructureDeepLinking
+    displayName: Test infrastructure -> deep_linking
+    steps:
+      - bash: flutter test test/infrastructure/deep_linking
 
-- job: TestPresentationIntro
-  displayName: Test presentation -> intro
-  steps:
-  - bash: flutter test test/presentation/intro
+  - job: TestPresentationAccount
+    displayName: Test presentation -> account
+    steps:
+      - bash: flutter test test/presentation/account
 
-- job: TestPresentationMore
-  displayName: Test presentation -> more
-  steps:
-  - bash: flutter test test/presentation/more
+  - job: TestPresentationAnnouncement
+    displayName: Test presentation -> announcement
+    steps:
+      - bash: flutter test test/presentation/announcement
 
-- job: TestPresentationOrderHistory
-  displayName: Test presentation -> order-history
-  steps:
-  - bash: flutter test test/presentation/order_history
+  - job: TestPresentationAupTc
+    displayName: Test presentation -> aup_tc_test
+    steps:
+      - bash: flutter test test/presentation/aup_tc_test
 
-- job: TestPresentationOrders
-  displayName: Test presentation -> orders
-  steps:
-  - bash: flutter test test/presentation/orders
+  - job: TestPresentationAuth
+    displayName: Test presentation -> auth
+    steps:
+      - bash: flutter test test/presentation/auth
 
-- job: TestPresentationReturns
-  displayName: Test presentation -> returns
-  steps:
-  - bash: flutter test test/presentation/returns
+  - job: TestPresentationHome
+    displayName: Test presentation -> home
+    steps:
+      - bash: flutter test test/presentation/home
 
-- job: TestPresentationPayments
-  displayName: Test presentation -> payments
-  steps:
-  - bash: flutter test test/presentation/payments
+  - job: TestPresentationIntro
+    displayName: Test presentation -> intro
+    steps:
+      - bash: flutter test test/presentation/intro
 
-- job: TestPresentationProducts
-  displayName: Test presentation -> products
-  steps:
-  - bash: flutter test test/presentation/products
+  - job: TestPresentationMore
+    displayName: Test presentation -> more
+    steps:
+      - bash: flutter test test/presentation/more
 
-- job: TestPresentationNotification
-  displayName: Test presentation -> notification
-  steps:
-  - bash: flutter test test/presentation/notification
+  - job: TestPresentationOrderHistory
+    displayName: Test presentation -> order-history
+    steps:
+      - bash: flutter test test/presentation/order_history
 
-- job: TestPresentationFAQ
-  displayName: Test presentation -> faq
-  steps:
-  - bash: flutter test test/presentation/faq
+  - job: TestPresentationOrders
+    displayName: Test presentation -> orders
+    steps:
+      - bash: flutter test test/presentation/orders
 
-- job: TestPresentationCore
-  displayName: Test presentation -> core
-  steps:
-  - bash: flutter test test/presentation/core
+  - job: TestPresentationReturns
+    displayName: Test presentation -> returns
+    steps:
+      - bash: flutter test test/presentation/returns
+
+  - job: TestPresentationPayments
+    displayName: Test presentation -> payments
+    steps:
+      - bash: flutter test test/presentation/payments
+
+  - job: TestPresentationProducts
+    displayName: Test presentation -> products
+    steps:
+      - bash: flutter test test/presentation/products
+
+  - job: TestPresentationNotification
+    displayName: Test presentation -> notification
+    steps:
+      - bash: flutter test test/presentation/notification
+
+  - job: TestPresentationFAQ
+    displayName: Test presentation -> faq
+    steps:
+      - bash: flutter test test/presentation/faq
+
+  - job: TestPresentationCore
+    displayName: Test presentation -> core
+    steps:
+      - bash: flutter test test/presentation/core

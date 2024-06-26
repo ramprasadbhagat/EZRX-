@@ -21,17 +21,17 @@ AdminPoAttachmentFilterDto _$AdminPoAttachmentFilterDtoFromJson(
 
 /// @nodoc
 mixin _$AdminPoAttachmentFilterDto {
-  @JsonKey(name: 'orderNumber', defaultValue: '', toJson: overrideToJson)
+  @JsonKey(name: 'orderNumber', defaultValue: '', toJson: valueOrNullToJson)
   String get orderNumber => throw _privateConstructorUsedError;
-  @JsonKey(name: 'exRxNo', defaultValue: '', toJson: overrideToJson)
+  @JsonKey(name: 'exRxNo', defaultValue: '', toJson: valueOrNullToJson)
   String get exRxNo => throw _privateConstructorUsedError;
-  @JsonKey(name: 'salesOrg', defaultValue: '', toJson: overrideToJson)
+  @JsonKey(name: 'salesOrg', defaultValue: '', toJson: valueOrNullToJson)
   String get salesOrg => throw _privateConstructorUsedError;
-  @JsonKey(name: 'soldTo', defaultValue: '', toJson: overrideToJson)
+  @JsonKey(name: 'soldTo', defaultValue: '', toJson: valueOrNullToJson)
   String get soldTo => throw _privateConstructorUsedError;
-  @JsonKey(name: 'toDate', defaultValue: '', toJson: overrideToJson)
+  @JsonKey(name: 'toDate', defaultValue: '', toJson: valueOrNullToJson)
   String get toDate => throw _privateConstructorUsedError;
-  @JsonKey(name: 'fromDate', defaultValue: '', toJson: overrideToJson)
+  @JsonKey(name: 'fromDate', defaultValue: '', toJson: valueOrNullToJson)
   String get fromDate => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -48,17 +48,18 @@ abstract class $AdminPoAttachmentFilterDtoCopyWith<$Res> {
           AdminPoAttachmentFilterDto>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'orderNumber', defaultValue: '', toJson: overrideToJson)
+      {@JsonKey(
+          name: 'orderNumber', defaultValue: '', toJson: valueOrNullToJson)
       String orderNumber,
-      @JsonKey(name: 'exRxNo', defaultValue: '', toJson: overrideToJson)
+      @JsonKey(name: 'exRxNo', defaultValue: '', toJson: valueOrNullToJson)
       String exRxNo,
-      @JsonKey(name: 'salesOrg', defaultValue: '', toJson: overrideToJson)
+      @JsonKey(name: 'salesOrg', defaultValue: '', toJson: valueOrNullToJson)
       String salesOrg,
-      @JsonKey(name: 'soldTo', defaultValue: '', toJson: overrideToJson)
+      @JsonKey(name: 'soldTo', defaultValue: '', toJson: valueOrNullToJson)
       String soldTo,
-      @JsonKey(name: 'toDate', defaultValue: '', toJson: overrideToJson)
+      @JsonKey(name: 'toDate', defaultValue: '', toJson: valueOrNullToJson)
       String toDate,
-      @JsonKey(name: 'fromDate', defaultValue: '', toJson: overrideToJson)
+      @JsonKey(name: 'fromDate', defaultValue: '', toJson: valueOrNullToJson)
       String fromDate});
 }
 
@@ -122,17 +123,18 @@ abstract class _$$AdminPoAttachmentFilterDtoImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'orderNumber', defaultValue: '', toJson: overrideToJson)
+      {@JsonKey(
+          name: 'orderNumber', defaultValue: '', toJson: valueOrNullToJson)
       String orderNumber,
-      @JsonKey(name: 'exRxNo', defaultValue: '', toJson: overrideToJson)
+      @JsonKey(name: 'exRxNo', defaultValue: '', toJson: valueOrNullToJson)
       String exRxNo,
-      @JsonKey(name: 'salesOrg', defaultValue: '', toJson: overrideToJson)
+      @JsonKey(name: 'salesOrg', defaultValue: '', toJson: valueOrNullToJson)
       String salesOrg,
-      @JsonKey(name: 'soldTo', defaultValue: '', toJson: overrideToJson)
+      @JsonKey(name: 'soldTo', defaultValue: '', toJson: valueOrNullToJson)
       String soldTo,
-      @JsonKey(name: 'toDate', defaultValue: '', toJson: overrideToJson)
+      @JsonKey(name: 'toDate', defaultValue: '', toJson: valueOrNullToJson)
       String toDate,
-      @JsonKey(name: 'fromDate', defaultValue: '', toJson: overrideToJson)
+      @JsonKey(name: 'fromDate', defaultValue: '', toJson: valueOrNullToJson)
       String fromDate});
 }
 
@@ -189,17 +191,18 @@ class __$$AdminPoAttachmentFilterDtoImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$AdminPoAttachmentFilterDtoImpl extends _AdminPoAttachmentFilterDto {
   _$AdminPoAttachmentFilterDtoImpl(
-      {@JsonKey(name: 'orderNumber', defaultValue: '', toJson: overrideToJson)
+      {@JsonKey(
+          name: 'orderNumber', defaultValue: '', toJson: valueOrNullToJson)
       required this.orderNumber,
-      @JsonKey(name: 'exRxNo', defaultValue: '', toJson: overrideToJson)
+      @JsonKey(name: 'exRxNo', defaultValue: '', toJson: valueOrNullToJson)
       required this.exRxNo,
-      @JsonKey(name: 'salesOrg', defaultValue: '', toJson: overrideToJson)
+      @JsonKey(name: 'salesOrg', defaultValue: '', toJson: valueOrNullToJson)
       required this.salesOrg,
-      @JsonKey(name: 'soldTo', defaultValue: '', toJson: overrideToJson)
+      @JsonKey(name: 'soldTo', defaultValue: '', toJson: valueOrNullToJson)
       required this.soldTo,
-      @JsonKey(name: 'toDate', defaultValue: '', toJson: overrideToJson)
+      @JsonKey(name: 'toDate', defaultValue: '', toJson: valueOrNullToJson)
       required this.toDate,
-      @JsonKey(name: 'fromDate', defaultValue: '', toJson: overrideToJson)
+      @JsonKey(name: 'fromDate', defaultValue: '', toJson: valueOrNullToJson)
       required this.fromDate})
       : super._();
 
@@ -208,22 +211,22 @@ class _$AdminPoAttachmentFilterDtoImpl extends _AdminPoAttachmentFilterDto {
       _$$AdminPoAttachmentFilterDtoImplFromJson(json);
 
   @override
-  @JsonKey(name: 'orderNumber', defaultValue: '', toJson: overrideToJson)
+  @JsonKey(name: 'orderNumber', defaultValue: '', toJson: valueOrNullToJson)
   final String orderNumber;
   @override
-  @JsonKey(name: 'exRxNo', defaultValue: '', toJson: overrideToJson)
+  @JsonKey(name: 'exRxNo', defaultValue: '', toJson: valueOrNullToJson)
   final String exRxNo;
   @override
-  @JsonKey(name: 'salesOrg', defaultValue: '', toJson: overrideToJson)
+  @JsonKey(name: 'salesOrg', defaultValue: '', toJson: valueOrNullToJson)
   final String salesOrg;
   @override
-  @JsonKey(name: 'soldTo', defaultValue: '', toJson: overrideToJson)
+  @JsonKey(name: 'soldTo', defaultValue: '', toJson: valueOrNullToJson)
   final String soldTo;
   @override
-  @JsonKey(name: 'toDate', defaultValue: '', toJson: overrideToJson)
+  @JsonKey(name: 'toDate', defaultValue: '', toJson: valueOrNullToJson)
   final String toDate;
   @override
-  @JsonKey(name: 'fromDate', defaultValue: '', toJson: overrideToJson)
+  @JsonKey(name: 'fromDate', defaultValue: '', toJson: valueOrNullToJson)
   final String fromDate;
 
   @override
@@ -269,17 +272,18 @@ class _$AdminPoAttachmentFilterDtoImpl extends _AdminPoAttachmentFilterDto {
 
 abstract class _AdminPoAttachmentFilterDto extends AdminPoAttachmentFilterDto {
   factory _AdminPoAttachmentFilterDto(
-      {@JsonKey(name: 'orderNumber', defaultValue: '', toJson: overrideToJson)
+      {@JsonKey(
+          name: 'orderNumber', defaultValue: '', toJson: valueOrNullToJson)
       required final String orderNumber,
-      @JsonKey(name: 'exRxNo', defaultValue: '', toJson: overrideToJson)
+      @JsonKey(name: 'exRxNo', defaultValue: '', toJson: valueOrNullToJson)
       required final String exRxNo,
-      @JsonKey(name: 'salesOrg', defaultValue: '', toJson: overrideToJson)
+      @JsonKey(name: 'salesOrg', defaultValue: '', toJson: valueOrNullToJson)
       required final String salesOrg,
-      @JsonKey(name: 'soldTo', defaultValue: '', toJson: overrideToJson)
+      @JsonKey(name: 'soldTo', defaultValue: '', toJson: valueOrNullToJson)
       required final String soldTo,
-      @JsonKey(name: 'toDate', defaultValue: '', toJson: overrideToJson)
+      @JsonKey(name: 'toDate', defaultValue: '', toJson: valueOrNullToJson)
       required final String toDate,
-      @JsonKey(name: 'fromDate', defaultValue: '', toJson: overrideToJson)
+      @JsonKey(name: 'fromDate', defaultValue: '', toJson: valueOrNullToJson)
       required final String fromDate}) = _$AdminPoAttachmentFilterDtoImpl;
   _AdminPoAttachmentFilterDto._() : super._();
 
@@ -287,22 +291,22 @@ abstract class _AdminPoAttachmentFilterDto extends AdminPoAttachmentFilterDto {
       _$AdminPoAttachmentFilterDtoImpl.fromJson;
 
   @override
-  @JsonKey(name: 'orderNumber', defaultValue: '', toJson: overrideToJson)
+  @JsonKey(name: 'orderNumber', defaultValue: '', toJson: valueOrNullToJson)
   String get orderNumber;
   @override
-  @JsonKey(name: 'exRxNo', defaultValue: '', toJson: overrideToJson)
+  @JsonKey(name: 'exRxNo', defaultValue: '', toJson: valueOrNullToJson)
   String get exRxNo;
   @override
-  @JsonKey(name: 'salesOrg', defaultValue: '', toJson: overrideToJson)
+  @JsonKey(name: 'salesOrg', defaultValue: '', toJson: valueOrNullToJson)
   String get salesOrg;
   @override
-  @JsonKey(name: 'soldTo', defaultValue: '', toJson: overrideToJson)
+  @JsonKey(name: 'soldTo', defaultValue: '', toJson: valueOrNullToJson)
   String get soldTo;
   @override
-  @JsonKey(name: 'toDate', defaultValue: '', toJson: overrideToJson)
+  @JsonKey(name: 'toDate', defaultValue: '', toJson: valueOrNullToJson)
   String get toDate;
   @override
-  @JsonKey(name: 'fromDate', defaultValue: '', toJson: overrideToJson)
+  @JsonKey(name: 'fromDate', defaultValue: '', toJson: valueOrNullToJson)
   String get fromDate;
   @override
   @JsonKey(ignore: true)

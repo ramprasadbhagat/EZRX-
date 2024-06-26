@@ -76,12 +76,15 @@ void main() {
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.mock);
     locator.registerFactory<AppRouter>(() => AutoRouteMock());
     autoRouter = locator<AppRouter>();
-    mockCartBundleItems = await CartLocalDataSource().upsertCartItems();
+    mockCartBundleItems = await CartLocalDataSource().upsertCart(
+      type: UpsertCartLocalType.upsertCartItems,
+    );
     cartItemMock =
         (await CartLocalDataSource().getAddedToCartProductList()).cartProducts;
-    fakeComboMaterialItems =
-        (await CartLocalDataSource().upsertCartItemsWithComboOffers())
-            .comboMaterialItemList;
+    fakeComboMaterialItems = (await CartLocalDataSource().upsertCart(
+      type: UpsertCartLocalType.upsertCartItemsComboOffer,
+    ))
+        .comboMaterialItemList;
   });
 
   RouteData fakeRouteData(String name) => RouteData(

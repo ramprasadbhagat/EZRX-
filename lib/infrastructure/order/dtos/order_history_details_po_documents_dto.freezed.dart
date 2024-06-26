@@ -20,11 +20,16 @@ PoDocumentsDto _$PoDocumentsDtoFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$PoDocumentsDto {
-  @JsonKey(name: 'url', defaultValue: '', readValue: _readUrl)
+  @JsonKey(
+      name: 'url', defaultValue: '', readValue: JsonReadValueHelper.readUrl)
   String get url => throw _privateConstructorUsedError;
-  @JsonKey(name: 'name', defaultValue: '', readValue: _readName)
+  @JsonKey(
+      name: 'name',
+      defaultValue: '',
+      readValue: JsonReadValueHelper.readFileName)
   String get name => throw _privateConstructorUsedError;
-  @JsonKey(name: 'path', defaultValue: '', readValue: _readUrl)
+  @JsonKey(
+      name: 'path', defaultValue: '', readValue: JsonReadValueHelper.readUrl)
   String get path => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -40,10 +45,18 @@ abstract class $PoDocumentsDtoCopyWith<$Res> {
       _$PoDocumentsDtoCopyWithImpl<$Res, PoDocumentsDto>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'url', defaultValue: '', readValue: _readUrl) String url,
-      @JsonKey(name: 'name', defaultValue: '', readValue: _readName)
+      {@JsonKey(
+          name: 'url', defaultValue: '', readValue: JsonReadValueHelper.readUrl)
+      String url,
+      @JsonKey(
+          name: 'name',
+          defaultValue: '',
+          readValue: JsonReadValueHelper.readFileName)
       String name,
-      @JsonKey(name: 'path', defaultValue: '', readValue: _readUrl)
+      @JsonKey(
+          name: 'path',
+          defaultValue: '',
+          readValue: JsonReadValueHelper.readUrl)
       String path});
 }
 
@@ -90,10 +103,18 @@ abstract class _$$PoDocumentsDtoImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'url', defaultValue: '', readValue: _readUrl) String url,
-      @JsonKey(name: 'name', defaultValue: '', readValue: _readName)
+      {@JsonKey(
+          name: 'url', defaultValue: '', readValue: JsonReadValueHelper.readUrl)
+      String url,
+      @JsonKey(
+          name: 'name',
+          defaultValue: '',
+          readValue: JsonReadValueHelper.readFileName)
       String name,
-      @JsonKey(name: 'path', defaultValue: '', readValue: _readUrl)
+      @JsonKey(
+          name: 'path',
+          defaultValue: '',
+          readValue: JsonReadValueHelper.readUrl)
       String path});
 }
 
@@ -133,11 +154,18 @@ class __$$PoDocumentsDtoImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$PoDocumentsDtoImpl extends _PoDocumentsDto {
   const _$PoDocumentsDtoImpl(
-      {@JsonKey(name: 'url', defaultValue: '', readValue: _readUrl)
+      {@JsonKey(
+          name: 'url', defaultValue: '', readValue: JsonReadValueHelper.readUrl)
       required this.url,
-      @JsonKey(name: 'name', defaultValue: '', readValue: _readName)
+      @JsonKey(
+          name: 'name',
+          defaultValue: '',
+          readValue: JsonReadValueHelper.readFileName)
       required this.name,
-      @JsonKey(name: 'path', defaultValue: '', readValue: _readUrl)
+      @JsonKey(
+          name: 'path',
+          defaultValue: '',
+          readValue: JsonReadValueHelper.readUrl)
       required this.path})
       : super._();
 
@@ -145,13 +173,18 @@ class _$PoDocumentsDtoImpl extends _PoDocumentsDto {
       _$$PoDocumentsDtoImplFromJson(json);
 
   @override
-  @JsonKey(name: 'url', defaultValue: '', readValue: _readUrl)
+  @JsonKey(
+      name: 'url', defaultValue: '', readValue: JsonReadValueHelper.readUrl)
   final String url;
   @override
-  @JsonKey(name: 'name', defaultValue: '', readValue: _readName)
+  @JsonKey(
+      name: 'name',
+      defaultValue: '',
+      readValue: JsonReadValueHelper.readFileName)
   final String name;
   @override
-  @JsonKey(name: 'path', defaultValue: '', readValue: _readUrl)
+  @JsonKey(
+      name: 'path', defaultValue: '', readValue: JsonReadValueHelper.readUrl)
   final String path;
 
   @override
@@ -190,11 +223,18 @@ class _$PoDocumentsDtoImpl extends _PoDocumentsDto {
 
 abstract class _PoDocumentsDto extends PoDocumentsDto {
   const factory _PoDocumentsDto(
-      {@JsonKey(name: 'url', defaultValue: '', readValue: _readUrl)
+      {@JsonKey(
+          name: 'url', defaultValue: '', readValue: JsonReadValueHelper.readUrl)
       required final String url,
-      @JsonKey(name: 'name', defaultValue: '', readValue: _readName)
+      @JsonKey(
+          name: 'name',
+          defaultValue: '',
+          readValue: JsonReadValueHelper.readFileName)
       required final String name,
-      @JsonKey(name: 'path', defaultValue: '', readValue: _readUrl)
+      @JsonKey(
+          name: 'path',
+          defaultValue: '',
+          readValue: JsonReadValueHelper.readUrl)
       required final String path}) = _$PoDocumentsDtoImpl;
   const _PoDocumentsDto._() : super._();
 
@@ -202,13 +242,18 @@ abstract class _PoDocumentsDto extends PoDocumentsDto {
       _$PoDocumentsDtoImpl.fromJson;
 
   @override
-  @JsonKey(name: 'url', defaultValue: '', readValue: _readUrl)
+  @JsonKey(
+      name: 'url', defaultValue: '', readValue: JsonReadValueHelper.readUrl)
   String get url;
   @override
-  @JsonKey(name: 'name', defaultValue: '', readValue: _readName)
+  @JsonKey(
+      name: 'name',
+      defaultValue: '',
+      readValue: JsonReadValueHelper.readFileName)
   String get name;
   @override
-  @JsonKey(name: 'path', defaultValue: '', readValue: _readUrl)
+  @JsonKey(
+      name: 'path', defaultValue: '', readValue: JsonReadValueHelper.readUrl)
   String get path;
   @override
   @JsonKey(ignore: true)

@@ -1,5 +1,6 @@
 import 'package:ezrxmobile/domain/announcement_info/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/infrastructure/core/common/json_key_readvalue_helper.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:ezrxmobile/domain/announcement_info/entities/announcement_article_info.dart';
 
@@ -11,11 +12,15 @@ class AnnouncementArticleInfoDto with _$AnnouncementArticleInfoDto {
   const AnnouncementArticleInfoDto._();
 
   const factory AnnouncementArticleInfoDto({
-    @JsonKey(name: 'pageInfo', defaultValue: '', readValue: getEndCursorValue)
-        required String endCursor,
+    @JsonKey(
+      name: 'pageInfo',
+      defaultValue: '',
+      readValue: JsonReadValueHelper.readEndCursorValue,
+    )
+    required String endCursor,
     @JsonKey(name: 'total', defaultValue: 0) required int total,
     @JsonKey(name: 'results', defaultValue: <AnnouncementArticleItemDto>[])
-        required List<AnnouncementArticleItemDto> announcementList,
+    required List<AnnouncementArticleItemDto> announcementList,
   }) = _AnnouncementArticleInfoDto;
 
   AnnouncementArticleInfo get toDomain => AnnouncementArticleInfo(
@@ -34,25 +39,42 @@ class AnnouncementArticleItemDto with _$AnnouncementArticleItemDto {
 
   const factory AnnouncementArticleItemDto({
     @JsonKey(name: 'id', defaultValue: '') required String id,
-    @JsonKey(name: 'title', readValue: getValue) required String title,
-    @JsonKey(name: 'summary', readValue: getValue) required String summary,
-    @JsonKey(name: 'thumbnail', readValue: getSrcValue)
-        required String thumbnail,
-    @JsonKey(name: 'content', readValue: getContent) required String content,
-    @JsonKey(name: 'publishedDate', readValue: getDateValue)
-        required String publishedDate,
-    @JsonKey(name: 'releaseDate', readValue: getDateValue)
-        required String releaseDate,
-    @JsonKey(name: 'branch', readValue: getBranchNames)
-        required List<BranchAndIc4InfoDto> branchInfo,
-    @JsonKey(name: 'iC4', readValue: getIC4Names)
-        required List<BranchAndIc4InfoDto> iC4Info,
-    @JsonKey(name: 'tag', readValue: readTag) required String tag,
-    @JsonKey(name: 'manufacturer', readValue: getValue)
-        required String manufacturer,
-    @JsonKey(name: 'documents', readValue: getDocumentsList)
-        required List<String> documentsList,
-    @JsonKey(name: 'pinToTop', readValue: readPinToTop) required bool pinToTop,
+    @JsonKey(name: 'title', readValue: JsonReadValueHelper.readValueString)
+    required String title,
+    @JsonKey(name: 'summary', readValue: JsonReadValueHelper.readValueString)
+    required String summary,
+    @JsonKey(name: 'thumbnail', readValue: JsonReadValueHelper.readSrcValue)
+    required String thumbnail,
+    @JsonKey(name: 'content', readValue: JsonReadValueHelper.readValueString)
+    required String content,
+    @JsonKey(
+      name: 'publishedDate',
+      readValue: JsonReadValueHelper.readValueDateISO,
+    )
+    required String publishedDate,
+    @JsonKey(
+      name: 'releaseDate',
+      readValue: JsonReadValueHelper.readValueDateISO,
+    )
+    required String releaseDate,
+    @JsonKey(name: 'branch', readValue: JsonReadValueHelper.readValueList)
+    required List<BranchAndIc4InfoDto> branchInfo,
+    @JsonKey(name: 'iC4', readValue: JsonReadValueHelper.readValueList)
+    required List<BranchAndIc4InfoDto> iC4Info,
+    @JsonKey(name: 'tag', readValue: JsonReadValueHelper.readTag)
+    required String tag,
+    @JsonKey(
+      name: 'manufacturer',
+      readValue: JsonReadValueHelper.readValueString,
+    )
+    required String manufacturer,
+    @JsonKey(
+      name: 'documents',
+      readValue: JsonReadValueHelper.readDocumentsList,
+    )
+    required List<String> documentsList,
+    @JsonKey(name: 'pinToTop', readValue: JsonReadValueHelper.readPinToTop)
+    required bool pinToTop,
   }) = _AnnouncementArticleItemDto;
 
   factory AnnouncementArticleItemDto.fromJson(Map<String, dynamic> json) =>
@@ -94,31 +116,3 @@ class BranchAndIc4InfoDto with _$BranchAndIc4InfoDto {
         name: name,
       );
 }
-
-String getValue(Map json, String key) =>
-    json[key] != null ? json[key]['value'] ?? '' : '';
-
-String getSrcValue(Map json, String key) =>
-    json[key]?['jsonValue']?['value']?['src'] ?? json[key]?['src'] ?? '';
-
-List<dynamic> getBranchNames(Map json, String key) => json[key]?['value'] ?? [];
-
-List<dynamic> getIC4Names(Map json, String key) => json[key]?['value'] ?? [];
-
-String getContent(Map json, String key) => json[key]?['value'] ?? '';
-
-String getDateValue(Map json, String key) =>
-    json[key] != null ? json[key]['isoValue'] ?? '' : '';
-
-String getEndCursorValue(Map json, String key) => json[key]?['endCursor'] ?? '';
-
-String readTag(Map json, String key) =>
-    json[key]?['value']?['displayName'] ?? '';
-
-List<dynamic> getDocumentsList(Map json, String _) {
-  final urlList = json['documents']?['jsonValue'] ?? [];
-
-  return urlList.map((e) => e['url'] ?? '').toList();
-}
-
-bool readPinToTop(Map json, String key) => json[key]?['boolValue'] ?? false;

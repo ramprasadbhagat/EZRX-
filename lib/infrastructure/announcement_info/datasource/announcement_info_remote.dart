@@ -48,9 +48,11 @@ class AnnouncementInfoRemoteDataSource {
           'variables': variableData,
         }),
       );
-      _announcementInfoExceptionChecker(
+      exceptionHandler.handleExceptionChecker(
         res: res,
-        label: 'search',
+        onCustomExceptionHandler: (res) {
+          _announcementInfoExceptionChecker(res: res, label: 'search');
+        },
       );
 
       return AnnouncementArticleInfoDto.fromJson(res.data['data']['search'])
@@ -77,9 +79,11 @@ class AnnouncementInfoRemoteDataSource {
           'variables': variableData,
         }),
       );
-      _announcementInfoExceptionChecker(
+      exceptionHandler.handleExceptionChecker(
         res: res,
-        label: 'item',
+        onCustomExceptionHandler: (res) {
+          _announcementInfoExceptionChecker(res: res, label: 'item');
+        },
       );
 
       return AnnouncementInfoDetailsDto.fromJson(res.data['data']['item'])
@@ -91,20 +95,15 @@ class AnnouncementInfoRemoteDataSource {
     required Response<dynamic> res,
     required String label,
   }) {
-    if (exceptionHandler.isServerResponseError(res: res)) {
-      throw ServerException(message: res.data['errors'][0]['message']);
-    } else if (res.statusCode != 200) {
-      throw ServerException(
-        code: res.statusCode ?? 0,
-        message: res.statusMessage ?? '',
-      );
-    } else if (res.data['data'][label] == null ||
-        res.data['data'][label].isEmpty) {
-      throw OtherException(
-        message: label == 'item'
-            ? 'Announcement Details is either null or empty!'
-            : 'Error while fetching announcement list!',
-      );
+    if (res.data['data'] != null && res.data['data'].isNotEmpty) {
+      if (res.data['data'][label] == null ||
+          (res.data['data'][label] ?? []).isEmpty) {
+        throw OtherException(
+          message: label == 'item'
+              ? 'Announcement Details is either null or empty!'
+              : 'Error while fetching announcement list!',
+        );
+      }
     }
   }
 }

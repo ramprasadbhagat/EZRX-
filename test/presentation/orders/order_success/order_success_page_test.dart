@@ -1011,7 +1011,7 @@ void main() {
                     Price.empty().copyWith(finalTotalPrice: MaterialPrice(100)),
                 materialInfo: MaterialInfo.empty().copyWith(
                   materialNumber: MaterialNumber('1234'),
-                  materialGroup4: MaterialGroup.four('6A1'),
+                  materialGroup4: MaterialGroup('6A1'),
                   isMarketPlace: true,
                 ),
               ),

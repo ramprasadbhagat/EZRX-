@@ -1,8 +1,6 @@
 import 'dart:convert';
 
-import 'package:dio/dio.dart';
 import 'package:ezrxmobile/config.dart';
-import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
 import 'package:ezrxmobile/domain/payments/entities/create_virtual_account.dart';
 import 'package:ezrxmobile/domain/payments/entities/customer_open_item.dart';
@@ -108,8 +106,10 @@ class NewPaymentRemoteDataSource {
         },
       ),
     );
-    _exceptionChecker(property: 'addCustomerPayment', res: res);
-
+    dataSourceExceptionHandler.handleExceptionChecker(
+      res: res,
+      property: 'addCustomerPayment',
+    );
     final paymentInfo =
         PaymentInfoDto.fromJson(res.data['data']['addCustomerPayment'])
             .toDomain(baseUrl: baseUrl);
@@ -150,7 +150,10 @@ class NewPaymentRemoteDataSource {
         },
       ),
     );
-    _exceptionChecker(property: 'updatePaymentGateway', res: res);
+    dataSourceExceptionHandler.handleExceptionChecker(
+      res: res,
+      property: 'updatePaymentGateway',
+    );
   }
 
   Future<List<CustomerOpenItem>> getCustomerOpenItems({
@@ -191,7 +194,10 @@ class NewPaymentRemoteDataSource {
         },
       ),
     );
-    _exceptionChecker(property: 'customerOpenItems', res: res);
+    dataSourceExceptionHandler.handleExceptionChecker(
+      res: res,
+      property: 'customerOpenItems',
+    );
     final data =
         res.data['data']['customerOpenItems']['customerOpenItemsResponse'];
 
@@ -235,7 +241,10 @@ class NewPaymentRemoteDataSource {
         },
       ),
     );
-    _exceptionChecker(property: 'paymentInvoicePdf', res: res);
+    dataSourceExceptionHandler.handleExceptionChecker(
+      res: res,
+      property: 'paymentInvoicePdf',
+    );
     final data = res.data['data']['paymentInvoicePdf'];
 
     return PaymentInvoiceInfoPdfDto.fromJson(data).toDomain();
@@ -260,8 +269,10 @@ class NewPaymentRemoteDataSource {
         },
       ),
     );
-    _exceptionChecker(property: 'availablePaymentMethods', res: res);
-
+    dataSourceExceptionHandler.handleExceptionChecker(
+      res: res,
+      property: 'availablePaymentMethods',
+    );
     final paymentMethodList = res.data['data']['availablePaymentMethods'] ?? [];
 
     return List.from(paymentMethodList)
@@ -295,7 +306,10 @@ class NewPaymentRemoteDataSource {
         },
       ),
     );
-    _exceptionChecker(property: 'createVirtualAccount', res: res);
+    dataSourceExceptionHandler.handleExceptionChecker(
+      res: res,
+      property: 'createVirtualAccount',
+    );
 
     return CreateVirtualAccountDto.fromJson(
       res.data['data']['createVirtualAccount'],
@@ -321,27 +335,13 @@ class NewPaymentRemoteDataSource {
         },
       ),
     );
-    _exceptionChecker(property: 'getPrincipalCutoffs', res: res);
+    dataSourceExceptionHandler.handleExceptionChecker(
+      res: res,
+      property: 'getPrincipalCutoffs',
+    );
 
     return PrincipalCutoffsDto.fromJson(
       res.data['data']['getPrincipalCutoffs'],
     ).toDomain();
-  }
-
-  void _exceptionChecker({
-    required String property,
-    required Response<dynamic> res,
-  }) {
-    final data = res.data;
-    if (data['errors'] != null && data['errors'].isNotEmpty) {
-      throw ServerException(message: data['errors'][0]['message']);
-    } else if (res.statusCode != 200) {
-      throw ServerException(
-        code: res.statusCode ?? 0,
-        message: res.statusMessage ?? '',
-      );
-    } else if (data['data'] == null || data['data'][property] == null) {
-      throw ServerException(message: 'Some thing went wrong');
-    }
   }
 }

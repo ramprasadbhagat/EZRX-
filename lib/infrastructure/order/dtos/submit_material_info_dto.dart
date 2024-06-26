@@ -3,6 +3,7 @@ import 'package:ezrxmobile/domain/order/entities/material_item_override.dart';
 import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
 import 'package:ezrxmobile/domain/order/entities/submit_material_info.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
+import 'package:ezrxmobile/infrastructure/core/common/json_key_readvalue_helper.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/material_item_override_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/submit_material_item_bonus_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/submit_tender_contract_dto.dart';
@@ -27,7 +28,7 @@ class SubmitMaterialInfoDto with _$SubmitMaterialInfoDto {
     @JsonKey(
       name: 'override',
       toJson: overrideTojson,
-      readValue: materialItemReadValue,
+      readValue: JsonReadValueHelper.readValueMapDynamic,
       includeIfNull: false,
     )
     required MaterialItemOverrideDto materialItemOverride,
@@ -57,7 +58,7 @@ class SubmitMaterialInfoDto with _$SubmitMaterialInfoDto {
     required bool isCounterOffer,
     @JsonKey(
       name: 'contract',
-      readValue: materialItemReadValue,
+      readValue: JsonReadValueHelper.readValueMapDynamic,
       toJson: overridecontractJson,
       includeIfNull: false,
     )
@@ -125,8 +126,6 @@ class SubmitMaterialInfoDto with _$SubmitMaterialInfoDto {
   factory SubmitMaterialInfoDto.fromJson(Map<String, dynamic> json) =>
       _$SubmitMaterialInfoDtoFromJson(json);
 }
-
-Map materialItemReadValue(Map json, String key) => json[key] ?? {};
 
 dynamic overrideTojson(MaterialItemOverrideDto value) {
   if (value.percentageOverride.isEmpty &&

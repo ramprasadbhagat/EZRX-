@@ -8,11 +8,11 @@ part 'payment_term_dto.g.dart';
 class PaymentTermDto with _$PaymentTermDto {
   const PaymentTermDto._();
   const factory PaymentTermDto({
-    @JsonKey(name: 'paymentTermCode') required String paymentTermCode,
-    @JsonKey(name: 'paymentTermRanking') required int paymentTermRanking,
-    @JsonKey(name: 'paymentTermDescription')
+    @JsonKey(name: 'paymentTermCode',defaultValue: '') required String paymentTermCode,
+    @JsonKey(name: 'paymentTermRanking',defaultValue: 0) required int paymentTermRanking,
+    @JsonKey(name: 'paymentTermDescription',defaultValue: '')
         required String paymentTermDescription,
-    @JsonKey(name: 'paymentTermSubranking') required int paymentTermSubranking,
+    @JsonKey(name: 'paymentTermSubranking',defaultValue: 0) required int paymentTermSubranking,
   }) = _PaymentTermDto;
 
   factory PaymentTermDto.fromDomain(PaymentTerm paymentTerm) {

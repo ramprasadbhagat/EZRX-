@@ -3,7 +3,7 @@ import 'package:ezrxmobile/domain/order/entities/order_history_item.dart';
 import 'package:ezrxmobile/domain/core/product_images/entities/product_images.dart';
 import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
-import 'package:ezrxmobile/infrastructure/core/common/json_key_converter.dart';
+import 'package:ezrxmobile/infrastructure/core/common/json_key_readvalue_helper.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import 'package:ezrxmobile/infrastructure/order/dtos/order_history_details_po_documents_dto.dart';
@@ -15,43 +15,44 @@ part 'order_history_item_dto.g.dart';
 class OrderHistoryItemDto with _$OrderHistoryItemDto {
   const OrderHistoryItemDto._();
   const factory OrderHistoryItemDto({
-    @JsonKey(name: 'MaterialCode', defaultValue: '')
+    @JsonKey(name: 'materialCode', defaultValue: '')
     required String materialNumber,
-    @JsonKey(name: 'MaterialDescription', defaultValue: '')
+    @JsonKey(name: 'materialDescription', defaultValue: '')
     required String materialDescription,
-    @JsonKey(name: 'DefaultMaterialDescription', defaultValue: '')
+    @JsonKey(name: 'defaultMaterialDescription', defaultValue: '')
     required String defaultMaterialDescription,
-    @JsonKey(name: 'Qty', defaultValue: 0) required int qty,
-    @JsonKey(name: 'UnitPrice', defaultValue: 0.0) required double unitPrice,
+    @JsonKey(name: 'qty', defaultValue: 0) required int qty,
+    @JsonKey(name: 'unitPrice', defaultValue: 0.0) required double unitPrice,
     @JsonKey(name: 'mrp', defaultValue: 0.0) required double originPrice,
-    @JsonKey(name: 'TotalPrice', defaultValue: 0.0) required double totalPrice,
-    @JsonKey(name: 'Status', defaultValue: '') required String status,
-    @JsonKey(name: 'DeliveryDate', defaultValue: '')
+    @JsonKey(name: 'totalPrice', defaultValue: 0.0) required double totalPrice,
+    @JsonKey(name: 'status', defaultValue: '') required String status,
+    @JsonKey(name: 'deliveryDate', defaultValue: '')
     required String deliveryDate,
-    @JsonKey(name: 'OrderNumber', defaultValue: '') required String orderNumber,
-    @JsonKey(readValue: _createdDateTimeReadValue) required String createdDate,
-    @JsonKey(name: 'OrderBy', defaultValue: '') required String orderBy,
-    @JsonKey(name: 'OrderType', defaultValue: '') required String orderType,
-    @JsonKey(name: 'Batch', defaultValue: '') required String batch,
-    @JsonKey(name: 'IsBonusMaterial', defaultValue: false)
+    @JsonKey(name: 'orderNumber', defaultValue: '') required String orderNumber,
+    @JsonKey(readValue: JsonReadValueHelper.readCreatedDateTimeValue)
+    required String createdDate,
+    @JsonKey(name: 'orderBy', defaultValue: '') required String orderBy,
+    @JsonKey(name: 'orderType', defaultValue: '') required String orderType,
+    @JsonKey(name: 'batch', defaultValue: '') required String batch,
+    @JsonKey(name: 'isBonusMaterial', defaultValue: false)
     required bool isBonusMaterial,
-    @JsonKey(name: 'TelephoneNumber', defaultValue: '')
+    @JsonKey(name: 'telephoneNumber', defaultValue: '')
     required String telephoneNumber,
-    @JsonKey(name: 'InvoiceNumber', defaultValue: '')
+    @JsonKey(name: 'invoiceNumber', defaultValue: '')
     required String invoiceNumber,
-    @JsonKey(name: 'POReference', defaultValue: '') required String pOReference,
-    @JsonKey(name: 'ManufactureName', defaultValue: '')
+    @JsonKey(name: 'pOReference', defaultValue: '') required String pOReference,
+    @JsonKey(name: 'manufactureName', defaultValue: '')
     required String manufactureName,
-    @JsonKey(name: 'GovernmentMaterialCode', defaultValue: '')
+    @JsonKey(name: 'governmentMaterialCode', defaultValue: '')
     required String governmentMaterialCode,
-    @JsonKey(name: 'ItemRegistrationNumber', defaultValue: '')
+    @JsonKey(name: 'itemRegistrationNumber', defaultValue: '')
     required String itemRegistrationNumber,
-    @JsonKey(name: 'ExpiryDate', defaultValue: '') required String expiryDate,
-    @JsonKey(name: 'RequestedDeliveryDate', defaultValue: '')
+    @JsonKey(name: 'expiryDate', defaultValue: '') required String expiryDate,
+    @JsonKey(name: 'requestedDeliveryDate', defaultValue: '')
     required String requestedDeliveryDate,
-    @JsonKey(name: 'SpecialInstructions', defaultValue: '')
+    @JsonKey(name: 'specialInstructions', defaultValue: '')
     required String specialInstruction,
-    @JsonKey(name: 'Tax', defaultValue: 0.0) required double tax,
+    @JsonKey(name: 'tax', defaultValue: 0.0) required double tax,
     @JsonKey(name: 'EZRXNumber', defaultValue: '') required String eZRXNumber,
     @JsonKey(name: 'poAttachment', defaultValue: <PoDocumentsDto>[])
     required List<PoDocumentsDto> orderHistoryItemPoAttachments,
@@ -59,31 +60,35 @@ class OrderHistoryItemDto with _$OrderHistoryItemDto {
     required bool promoStatus,
     @JsonKey(name: 'isCounterOffer', defaultValue: false)
     required bool isCounterOffer,
-    @JsonKey(name: 'IsBundle', defaultValue: false) required bool isBundle,
-    @JsonKey(name: 'LineNumber', defaultValue: '') required String lineNumber,
-    @JsonKey(name: 'PrincipalCode', defaultValue: '')
+    @JsonKey(name: 'isBundle', defaultValue: false) required bool isBundle,
+    @JsonKey(name: 'lineNumber', defaultValue: '') required String lineNumber,
+    @JsonKey(name: 'principalCode', defaultValue: '')
     required String principalCode,
-    @JsonKey(name: 'HidePrice', defaultValue: false) required bool hidePrice,
+    @JsonKey(name: 'hidePrice', defaultValue: false) required bool hidePrice,
     @JsonKey(name: 'referenceNotes', defaultValue: '')
     required String referenceNotes,
-    @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+    @JsonKey(
+      defaultValue: false,
+      readValue: JsonReadValueHelper.mappingIsMarketPlace,
+    )
     required bool isMarketPlace,
-    @JsonKey(name: 'TenderContractNumber', defaultValue: '')
+    @JsonKey(name: 'tenderContractNumber', defaultValue: '')
     required String tenderContractNumber,
-    @JsonKey(name: 'TenderContractReference', defaultValue: '')
+    @JsonKey(name: 'tenderContractReference', defaultValue: '')
     required String tenderContractReference,
-    @JsonKey(name: 'TenderOrderReason', defaultValue: '')
+    @JsonKey(name: 'tenderOrderReason', defaultValue: '')
     required String tenderOrderReason,
-    @JsonKey(name: 'TenderPriceUnit', defaultValue: 0)
+    @JsonKey(name: 'tenderPriceUnit', defaultValue: 0)
     required int tenderPriceUnit,
-    @JsonKey(name: 'TenderPrice', defaultValue: '') required String tenderPrice,
+    @JsonKey(name: 'tenderPrice', defaultValue: '') required String tenderPrice,
     @JsonKey(name: 'isTenderExpire', defaultValue: false)
     required bool isTenderExpired,
     @JsonKey(name: 'isCovid', defaultValue: false) required bool isCovid,
-    @JsonKey(name: 'TotalUnitPrice', defaultValue: 0.0)
+    @JsonKey(name: 'totalUnitPrice', defaultValue: 0.0)
     required double totalUnitPrice,
-    @JsonKey(name: 'TotalTax', defaultValue: 0.0) required double totalTax,
-    @JsonKey(name: 'TaxRate', readValue: handleTax) required double taxRate,
+    @JsonKey(name: 'totalTax', defaultValue: 0.0) required double totalTax,
+    @JsonKey(name: 'taxRate', readValue: JsonReadValueHelper.handleTax)
+    required double taxRate,
   }) = _OrderHistoryItemDto;
 
   factory OrderHistoryItemDto.fromDomain(OrderHistoryItem orderHistoryItem) {
@@ -186,10 +191,8 @@ class OrderHistoryItemDto with _$OrderHistoryItemDto {
       hidePrice: hidePrice,
       referenceNotes: StringValue(referenceNotes),
       isMarketPlace: isMarketPlace,
-      tenderContractNumber:
-          TenderContractNumber.tenderContractNumber(tenderContractNumber),
-      tenderContractReference:
-          TenderContractNumber.tenderContractReference(tenderContractReference),
+      tenderContractNumber: TenderContractNumber(tenderContractNumber),
+      tenderContractReference: TenderContractNumber(tenderContractReference),
       tenderPriceUnit: tenderPriceUnit,
       tenderPrice: TenderPrice(tenderPrice),
       tenderOrderReason: TenderContractReason(tenderOrderReason),
@@ -203,13 +206,4 @@ class OrderHistoryItemDto with _$OrderHistoryItemDto {
 
   factory OrderHistoryItemDto.fromJson(Map<String, dynamic> json) =>
       _$OrderHistoryItemDtoFromJson(json);
-}
-
-String _createdDateTimeReadValue(Map json, String _) {
-  final createdDate = json['CreatedDate'] ?? '';
-  final createdTime = json['CreatedTime'] ?? '';
-
-  // Concatenation is necessary to convert 'createdDate' and 'createdTime' into
-  // the 'yyyyMMddHHmmss' format.
-  return '$createdDate$createdTime';
 }

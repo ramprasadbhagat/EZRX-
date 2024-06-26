@@ -6,7 +6,7 @@ import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/account/dtos/bill_to_dto.dart';
 import 'package:ezrxmobile/infrastructure/account/dtos/ship_to_dto.dart';
-import 'package:ezrxmobile/infrastructure/core/common/json_key_converter.dart';
+import 'package:ezrxmobile/infrastructure/core/common/json_key_readvalue_helper.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'customer_code_dto.freezed.dart';
@@ -60,7 +60,10 @@ class CustomerCodeDto with _$CustomerCodeDto {
     @JsonKey(name: 'floor', defaultValue: '') required String floor,
     @JsonKey(name: 'houseNumber1', defaultValue: '')
     required String houseNumber1,
-    @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+    @JsonKey(
+      defaultValue: false,
+      readValue: JsonReadValueHelper.mappingIsMarketPlace,
+    )
     required bool isMarketPlace,
   }) = _CustomerCodeDto;
 

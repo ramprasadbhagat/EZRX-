@@ -112,9 +112,11 @@ class _ReturnDetailsSectionState extends State<_ReturnDetailsSection> {
                         text: widget.requestInformationHeader.requestID,
                       ),
                     ).then((value) {
-                      setState(() {
-                        isCopied = !isCopied;
-                      });
+                      if (context.mounted) {
+                        setState(() {
+                          isCopied = !isCopied;
+                        });
+                      }
                     });
                   }
                 },

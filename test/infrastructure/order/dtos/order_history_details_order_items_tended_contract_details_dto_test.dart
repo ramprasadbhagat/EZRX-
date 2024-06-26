@@ -19,7 +19,7 @@ void main() {
 
       expect(
         configs.contractNumber,
-        TenderContractNumber.tenderContractNumber('7615757'),
+        TenderContractNumber('7615757'),
       );
     });
 

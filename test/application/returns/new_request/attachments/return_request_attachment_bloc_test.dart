@@ -5,8 +5,9 @@ import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/application/returns/new_request/attachments/return_request_attachment_bloc.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
-import 'package:ezrxmobile/domain/returns/entities/return_request_attachment.dart';
-import 'package:ezrxmobile/infrastructure/returns/datasource/return_request_local.dart';
+import 'package:ezrxmobile/domain/order/entities/order_history_details_po_documents.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/po_document_local.dart';
+import 'package:ezrxmobile/infrastructure/order/repository/po_attachment_repository.dart';
 import 'package:ezrxmobile/infrastructure/returns/repository/return_request_repository.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
@@ -15,6 +16,7 @@ import 'package:mocktail/mocktail.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 import '../../../../common_mock_data/user_mock.dart';
+import '../../../../presentation/orders/core/po_attachment_test.dart';
 
 class ReturnRequestRepositoryMock extends Mock
     implements ReturnRequestRepository {}
@@ -23,7 +25,7 @@ void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   late ReturnRequestRepository returnRequestRepository;
   Config().appFlavor = Flavor.mock;
-  late ReturnRequestAttachment fakeUploadedFiles;
+  late PoDocuments fakeUploadedFiles;
   const fakeReturnUUID = 'fake-return_uuid';
   const fakeAssignmentNumber = 'fake-assignment_number';
   const fakeUploadOptionType = UploadOptionType.file;
@@ -33,16 +35,18 @@ void main() {
     size: 10,
   );
   final fakeFile = File('fake-path');
-  late List<ReturnRequestAttachment> fakeListFile;
+  late List<PoDocuments> fakeListFile;
+  late PoAttachmentRepository poAttachmentRepository;
 
   group(
     'Return Request Attachment',
     () {
       setUp(() async {
         returnRequestRepository = ReturnRequestRepositoryMock();
-        fakeUploadedFiles = await ReturnRequestLocalDataSource().uploadFile();
+        poAttachmentRepository = PoAttachmentRepositoryMock();
+        fakeUploadedFiles = await PoDocumentLocalDataSource().fileUpload();
         fakeUploadedFiles = fakeUploadedFiles.copyWith(
-          name: fakeUploadedFiles.path,
+          name: fakeUploadedFiles.url,
         );
         fakeListFile = [fakeUploadedFiles];
         WidgetsFlutterBinding.ensureInitialized();
@@ -52,6 +56,7 @@ void main() {
         'Test "initialized" event',
         build: () => ReturnRequestAttachmentBloc(
           returnRequestRepository: returnRequestRepository,
+          poAttachmentRepository: poAttachmentRepository,
         ),
         act: (bloc) => bloc.add(
           const ReturnRequestAttachmentEvent.initialized(),
@@ -65,6 +70,7 @@ void main() {
         'Test "uploadFile" success happy case',
         build: () => ReturnRequestAttachmentBloc(
           returnRequestRepository: returnRequestRepository,
+          poAttachmentRepository: poAttachmentRepository,
         ),
         act: (bloc) => bloc.add(
           ReturnRequestAttachmentEvent.uploadFile(
@@ -90,7 +96,7 @@ void main() {
             (invocation) async => Right([fakePlatformFile]),
           );
           when(
-            () => returnRequestRepository.uploadFiles(
+            () => poAttachmentRepository.uploadFiles(
               files: [fakePlatformFile],
               user: fakeClientUser,
             ),
@@ -115,6 +121,7 @@ void main() {
         'Test "uploadFile" permission failed',
         build: () => ReturnRequestAttachmentBloc(
           returnRequestRepository: returnRequestRepository,
+          poAttachmentRepository: poAttachmentRepository,
         ),
         act: (bloc) => bloc.add(
           ReturnRequestAttachmentEvent.uploadFile(
@@ -150,6 +157,7 @@ void main() {
         'Test "uploadFile" pick file failure',
         build: () => ReturnRequestAttachmentBloc(
           returnRequestRepository: returnRequestRepository,
+          poAttachmentRepository: poAttachmentRepository,
         ),
         act: (bloc) => bloc.add(
           ReturnRequestAttachmentEvent.uploadFile(
@@ -175,7 +183,7 @@ void main() {
             (invocation) async => Right([fakePlatformFile]),
           );
           when(
-            () => returnRequestRepository.uploadFiles(
+            () => poAttachmentRepository.uploadFiles(
               files: [fakePlatformFile],
               user: fakeClientUser,
             ),
@@ -200,6 +208,7 @@ void main() {
         'Test "uploadFile" upload failure',
         build: () => ReturnRequestAttachmentBloc(
           returnRequestRepository: returnRequestRepository,
+          poAttachmentRepository: poAttachmentRepository,
         ),
         act: (bloc) => bloc.add(
           ReturnRequestAttachmentEvent.uploadFile(
@@ -243,6 +252,7 @@ void main() {
         'Test "uploadFile" pick file success but return empty',
         build: () => ReturnRequestAttachmentBloc(
           returnRequestRepository: returnRequestRepository,
+          poAttachmentRepository: poAttachmentRepository,
         ),
         act: (bloc) => bloc.add(
           ReturnRequestAttachmentEvent.uploadFile(
@@ -284,14 +294,15 @@ void main() {
         'Test "deleteFile" event',
         build: () => ReturnRequestAttachmentBloc(
           returnRequestRepository: returnRequestRepository,
+          poAttachmentRepository: poAttachmentRepository,
         ),
         act: (bloc) => bloc.add(
           ReturnRequestAttachmentEvent.deleteFile(file: fakeUploadedFiles),
         ),
         setUp: () {
           when(
-            () => returnRequestRepository.deleteFile(
-              filePath: fakeUploadedFiles.path,
+            () => poAttachmentRepository.deleteFile(
+              filePath: fakeUploadedFiles.url,
             ),
           ).thenAnswer(
             (invocation) async => const Right(true),
@@ -312,20 +323,22 @@ void main() {
         'Test "downloadFile" event success',
         build: () => ReturnRequestAttachmentBloc(
           returnRequestRepository: returnRequestRepository,
+          poAttachmentRepository: poAttachmentRepository,
         ),
         act: (bloc) => bloc.add(
           ReturnRequestAttachmentEvent.downloadFile(file: fakeUploadedFiles),
         ),
         setUp: () {
           when(
-            () => returnRequestRepository.getDownloadPermission(),
+            () => poAttachmentRepository.downloadPermission(),
           ).thenAnswer(
             (invocation) async => const Right(PermissionStatus.granted),
           );
           when(
-            () => returnRequestRepository.downloadFile(file: fakeUploadedFiles),
+            () => poAttachmentRepository
+                .downloadFiles(files: [fakeUploadedFiles]),
           ).thenAnswer(
-            (invocation) async => Right(fakeFile),
+            (invocation) async => Right([fakeFile]),
           );
         },
         expect: () => [
@@ -334,7 +347,7 @@ void main() {
             fileOperationMode: FileOperationMode.download,
           ),
           ReturnRequestAttachmentState.initial().copyWith(
-            failureOrSuccessOption: optionOf(Right(fakeFile)),
+            failureOrSuccessOption: none(),
             fileOperationMode: FileOperationMode.none,
           ),
         ],
@@ -344,13 +357,14 @@ void main() {
         'Test "downloadFile" event failure',
         build: () => ReturnRequestAttachmentBloc(
           returnRequestRepository: returnRequestRepository,
+          poAttachmentRepository: poAttachmentRepository,
         ),
         act: (bloc) => bloc.add(
           ReturnRequestAttachmentEvent.downloadFile(file: fakeUploadedFiles),
         ),
         setUp: () {
           when(
-            () => returnRequestRepository.getDownloadPermission(),
+            () => poAttachmentRepository.downloadPermission(),
           ).thenAnswer(
             (invocation) async => const Left(fakeApiFailure),
           );
@@ -370,6 +384,7 @@ void main() {
       test('Test moreThanOneUploaded', () {
         final bloc = ReturnRequestAttachmentBloc(
           returnRequestRepository: returnRequestRepository,
+          poAttachmentRepository: poAttachmentRepository,
         );
         bloc.emit(
           ReturnRequestAttachmentState.initial().copyWith(

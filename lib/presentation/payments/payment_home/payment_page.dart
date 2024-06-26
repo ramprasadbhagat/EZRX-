@@ -199,7 +199,18 @@ class _NewPaymentButton extends StatelessWidget {
             ),
           );
         } else {
-          _showConfirmBottomSheet(context);
+          showModalBottomSheet<bool>(
+            context: context,
+            enableDrag: false,
+            builder: (_) => ConfirmBottomSheet(
+              key: WidgetKeys.confirmBottomSheet,
+              title: 'We are closed for payment',
+              content:
+                  "We are unable to proceed with the payment during the month's end. Please try again the following month. Thank you",
+              confirmButtonText: 'Close',
+              displayCancelButton: false,
+            ),
+          );
         }
       },
       child: Container(
@@ -218,21 +229,6 @@ class _NewPaymentButton extends StatelessWidget {
         child: SafeArea(
           child: NewPaymentButton.elevated(),
         ),
-      ),
-    );
-  }
-
-  Future<bool?> _showConfirmBottomSheet(BuildContext context) {
-    return showModalBottomSheet<bool>(
-      context: context,
-      enableDrag: false,
-      builder: (_) => ConfirmBottomSheet(
-        key: WidgetKeys.confirmBottomSheet,
-        title: 'We are closed for payment',
-        content:
-            "We are unable to proceed with the payment during the month's end. Please try again the following month. Thank you",
-        confirmButtonText: 'Close',
-        displayCancelButton: false,
       ),
     );
   }

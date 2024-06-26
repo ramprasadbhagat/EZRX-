@@ -11,7 +11,8 @@ _$PaymentDetailsDtoImpl _$$PaymentDetailsDtoImplFromJson(
     _$PaymentDetailsDtoImpl(
       vaNumber: json['vaNumber'] as String? ?? '',
       vaName: json['vaName'] as String? ?? '',
-      expiresAt: expiresAtDate(json, 'expiresAt') as String? ?? '',
+      expiresAt:
+          JsonReadValueHelper.createdAtDate(json, 'expiresAt') as String? ?? '',
     );
 
 Map<String, dynamic> _$$PaymentDetailsDtoImplToJson(

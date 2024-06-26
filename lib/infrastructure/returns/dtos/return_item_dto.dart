@@ -2,7 +2,7 @@ import 'package:ezrxmobile/domain/core/product_images/entities/product_images.da
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_item.dart';
-import 'package:ezrxmobile/infrastructure/core/common/json_key_converter.dart';
+import 'package:ezrxmobile/infrastructure/core/common/json_key_readvalue_helper.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import 'package:ezrxmobile/domain/returns/value/value_objects.dart';
@@ -35,7 +35,10 @@ class ReturnItemDto with _$ReturnItemDto {
     required bool outsidePolicy,
     @JsonKey(name: 'expiry', defaultValue: '') required String expiry,
     @JsonKey(name: 'prsfd', defaultValue: '') required String prsfd,
-    @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+    @JsonKey(
+      defaultValue: false,
+      readValue: JsonReadValueHelper.mappingIsMarketPlace,
+    )
     required bool isMarketPlace,
   }) = _ReturnItemDto;
 

@@ -35,7 +35,7 @@ mixin _$SubmitMaterialInfoDto {
   @JsonKey(
       name: 'override',
       toJson: overrideTojson,
-      readValue: materialItemReadValue,
+      readValue: JsonReadValueHelper.readValueMapDynamic,
       includeIfNull: false)
   MaterialItemOverrideDto get materialItemOverride =>
       throw _privateConstructorUsedError;
@@ -69,7 +69,7 @@ mixin _$SubmitMaterialInfoDto {
   bool get isCounterOffer => throw _privateConstructorUsedError;
   @JsonKey(
       name: 'contract',
-      readValue: materialItemReadValue,
+      readValue: JsonReadValueHelper.readValueMapDynamic,
       toJson: overridecontractJson,
       includeIfNull: false)
   SubmitTenderContractDto get contract => throw _privateConstructorUsedError;
@@ -96,7 +96,7 @@ abstract class $SubmitMaterialInfoDtoCopyWith<$Res> {
       @JsonKey(
           name: 'override',
           toJson: overrideTojson,
-          readValue: materialItemReadValue,
+          readValue: JsonReadValueHelper.readValueMapDynamic,
           includeIfNull: false)
       MaterialItemOverrideDto materialItemOverride,
       @JsonKey(name: 'ProductType', defaultValue: '') String productType,
@@ -117,7 +117,7 @@ abstract class $SubmitMaterialInfoDtoCopyWith<$Res> {
       @JsonKey(name: 'isCounterOffer', defaultValue: false) bool isCounterOffer,
       @JsonKey(
           name: 'contract',
-          readValue: materialItemReadValue,
+          readValue: JsonReadValueHelper.readValueMapDynamic,
           toJson: overridecontractJson,
           includeIfNull: false)
       SubmitTenderContractDto contract});
@@ -272,7 +272,7 @@ abstract class _$$SubmitMaterialInfoDtoImplCopyWith<$Res>
       @JsonKey(
           name: 'override',
           toJson: overrideTojson,
-          readValue: materialItemReadValue,
+          readValue: JsonReadValueHelper.readValueMapDynamic,
           includeIfNull: false)
       MaterialItemOverrideDto materialItemOverride,
       @JsonKey(name: 'ProductType', defaultValue: '') String productType,
@@ -293,7 +293,7 @@ abstract class _$$SubmitMaterialInfoDtoImplCopyWith<$Res>
       @JsonKey(name: 'isCounterOffer', defaultValue: false) bool isCounterOffer,
       @JsonKey(
           name: 'contract',
-          readValue: materialItemReadValue,
+          readValue: JsonReadValueHelper.readValueMapDynamic,
           toJson: overridecontractJson,
           includeIfNull: false)
       SubmitTenderContractDto contract});
@@ -426,7 +426,7 @@ class _$SubmitMaterialInfoDtoImpl extends _SubmitMaterialInfoDto {
       @JsonKey(
           name: 'override',
           toJson: overrideTojson,
-          readValue: materialItemReadValue,
+          readValue: JsonReadValueHelper.readValueMapDynamic,
           includeIfNull: false)
       required this.materialItemOverride,
       @JsonKey(name: 'ProductType', defaultValue: '') required this.productType,
@@ -452,7 +452,7 @@ class _$SubmitMaterialInfoDtoImpl extends _SubmitMaterialInfoDto {
       required this.isCounterOffer,
       @JsonKey(
           name: 'contract',
-          readValue: materialItemReadValue,
+          readValue: JsonReadValueHelper.readValueMapDynamic,
           toJson: overridecontractJson,
           includeIfNull: false)
       required this.contract})
@@ -487,7 +487,7 @@ class _$SubmitMaterialInfoDtoImpl extends _SubmitMaterialInfoDto {
   @JsonKey(
       name: 'override',
       toJson: overrideTojson,
-      readValue: materialItemReadValue,
+      readValue: JsonReadValueHelper.readValueMapDynamic,
       includeIfNull: false)
   final MaterialItemOverrideDto materialItemOverride;
   @override
@@ -532,7 +532,7 @@ class _$SubmitMaterialInfoDtoImpl extends _SubmitMaterialInfoDto {
   @override
   @JsonKey(
       name: 'contract',
-      readValue: materialItemReadValue,
+      readValue: JsonReadValueHelper.readValueMapDynamic,
       toJson: overridecontractJson,
       includeIfNull: false)
   final SubmitTenderContractDto contract;
@@ -629,7 +629,7 @@ abstract class _SubmitMaterialInfoDto extends SubmitMaterialInfoDto {
       @JsonKey(
           name: 'override',
           toJson: overrideTojson,
-          readValue: materialItemReadValue,
+          readValue: JsonReadValueHelper.readValueMapDynamic,
           includeIfNull: false)
       required final MaterialItemOverrideDto materialItemOverride,
       @JsonKey(name: 'ProductType', defaultValue: '')
@@ -657,7 +657,7 @@ abstract class _SubmitMaterialInfoDto extends SubmitMaterialInfoDto {
       required final bool isCounterOffer,
       @JsonKey(
           name: 'contract',
-          readValue: materialItemReadValue,
+          readValue: JsonReadValueHelper.readValueMapDynamic,
           toJson: overridecontractJson,
           includeIfNull: false)
       required final SubmitTenderContractDto
@@ -686,7 +686,7 @@ abstract class _SubmitMaterialInfoDto extends SubmitMaterialInfoDto {
   @JsonKey(
       name: 'override',
       toJson: overrideTojson,
-      readValue: materialItemReadValue,
+      readValue: JsonReadValueHelper.readValueMapDynamic,
       includeIfNull: false)
   MaterialItemOverrideDto get materialItemOverride;
   @override
@@ -731,7 +731,7 @@ abstract class _SubmitMaterialInfoDto extends SubmitMaterialInfoDto {
   @override
   @JsonKey(
       name: 'contract',
-      readValue: materialItemReadValue,
+      readValue: JsonReadValueHelper.readValueMapDynamic,
       toJson: overridecontractJson,
       includeIfNull: false)
   SubmitTenderContractDto get contract;

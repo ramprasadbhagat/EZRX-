@@ -54,7 +54,8 @@ mixin _$ReturnMaterialDto {
   bool get outsidePolicy => throw _privateConstructorUsedError;
   @JsonKey(name: 'targetQuantity', defaultValue: '')
   String get targetQuantity => throw _privateConstructorUsedError;
-  @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+  @JsonKey(
+      defaultValue: false, readValue: JsonReadValueHelper.mappingIsMarketPlace)
   bool get isMarketPlace => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -93,7 +94,9 @@ abstract class $ReturnMaterialDtoCopyWith<$Res> {
       List<ReturnMaterialDto> bonusItems,
       @JsonKey(name: 'outsidePolicy', defaultValue: false) bool outsidePolicy,
       @JsonKey(name: 'targetQuantity', defaultValue: '') String targetQuantity,
-      @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+      @JsonKey(
+          defaultValue: false,
+          readValue: JsonReadValueHelper.mappingIsMarketPlace)
       bool isMarketPlace});
 }
 
@@ -238,7 +241,9 @@ abstract class _$$ReturnMaterialDtoImplCopyWith<$Res>
       List<ReturnMaterialDto> bonusItems,
       @JsonKey(name: 'outsidePolicy', defaultValue: false) bool outsidePolicy,
       @JsonKey(name: 'targetQuantity', defaultValue: '') String targetQuantity,
-      @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+      @JsonKey(
+          defaultValue: false,
+          readValue: JsonReadValueHelper.mappingIsMarketPlace)
       bool isMarketPlace});
 }
 
@@ -380,7 +385,9 @@ class _$ReturnMaterialDtoImpl extends _ReturnMaterialDto {
       required this.outsidePolicy,
       @JsonKey(name: 'targetQuantity', defaultValue: '')
       required this.targetQuantity,
-      @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+      @JsonKey(
+          defaultValue: false,
+          readValue: JsonReadValueHelper.mappingIsMarketPlace)
       required this.isMarketPlace})
       : _bonusItems = bonusItems,
         super._();
@@ -446,7 +453,8 @@ class _$ReturnMaterialDtoImpl extends _ReturnMaterialDto {
   @JsonKey(name: 'targetQuantity', defaultValue: '')
   final String targetQuantity;
   @override
-  @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+  @JsonKey(
+      defaultValue: false, readValue: JsonReadValueHelper.mappingIsMarketPlace)
   final bool isMarketPlace;
 
   @override
@@ -571,7 +579,9 @@ abstract class _ReturnMaterialDto extends ReturnMaterialDto {
       required final bool outsidePolicy,
       @JsonKey(name: 'targetQuantity', defaultValue: '')
       required final String targetQuantity,
-      @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+      @JsonKey(
+          defaultValue: false,
+          readValue: JsonReadValueHelper.mappingIsMarketPlace)
       required final bool isMarketPlace}) = _$ReturnMaterialDtoImpl;
   const _ReturnMaterialDto._() : super._();
 
@@ -630,7 +640,8 @@ abstract class _ReturnMaterialDto extends ReturnMaterialDto {
   @JsonKey(name: 'targetQuantity', defaultValue: '')
   String get targetQuantity;
   @override
-  @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+  @JsonKey(
+      defaultValue: false, readValue: JsonReadValueHelper.mappingIsMarketPlace)
   bool get isMarketPlace;
   @override
   @JsonKey(ignore: true)

@@ -1,5 +1,6 @@
 import 'package:ezrxmobile/domain/order/entities/bundle.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
+import 'package:ezrxmobile/infrastructure/core/common/json_key_readvalue_helper.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/bundle_info_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/material_dto.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -15,12 +16,15 @@ class BundleDto with _$BundleDto {
     @JsonKey(name: 'bundleName', defaultValue: '') required String bundleName,
     @JsonKey(name: 'bundleCode', defaultValue: '') required String bundleCode,
     @JsonKey(name: 'bundleInformation', defaultValue: <BundleInfoDto>[])
-        required List<BundleInfoDto> bundleInformation,
-    @JsonKey(name: 'materials', readValue: handleEmptyMaterialList)
-        required List<MaterialDto> materials,
+    required List<BundleInfoDto> bundleInformation,
+    @JsonKey(
+      name: 'materials',
+      readValue: JsonReadValueHelper.handleEmptyMaterialList,
+    )
+    required List<MaterialDto> materials,
     @JsonKey(name: 'conditions', defaultValue: '') required String conditions,
     @JsonKey(name: 'bonusEligible', defaultValue: false)
-        required bool bonusEligible,
+    required bool bonusEligible,
   }) = _BundleDto;
 
   Bundle toDomain() {
@@ -50,12 +54,4 @@ class BundleDto with _$BundleDto {
 
   factory BundleDto.fromJson(Map<String, dynamic> json) =>
       _$BundleDtoFromJson(json);
-}
-
-List handleEmptyMaterialList(Map json, String key) {
-  if (json[key] == null || json[key].isEmpty) {
-    return [];
-  }
-
-  return json[key];
 }

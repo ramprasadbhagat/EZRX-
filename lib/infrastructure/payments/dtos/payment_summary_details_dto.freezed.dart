@@ -23,7 +23,10 @@ PaymentSummaryDetailsDto _$PaymentSummaryDetailsDtoFromJson(
 mixin _$PaymentSummaryDetailsDto {
   @JsonKey(name: 'paymentID', defaultValue: '')
   String get paymentID => throw _privateConstructorUsedError;
-  @JsonKey(name: 'valueDate', defaultValue: '', readValue: paymentDate)
+  @JsonKey(
+      name: 'valueDate',
+      defaultValue: '',
+      readValue: JsonReadValueHelper.createdAtDate)
   String get valueDate => throw _privateConstructorUsedError;
   @JsonKey(name: 'paymentAmount', defaultValue: 0.0)
   double get paymentAmount => throw _privateConstructorUsedError;
@@ -59,7 +62,10 @@ mixin _$PaymentSummaryDetailsDto {
   String get customId => throw _privateConstructorUsedError;
   @JsonKey(name: 'bankIdentification', defaultValue: '')
   String get bankIdentification => throw _privateConstructorUsedError;
-  @JsonKey(name: 'createdDate', defaultValue: '', readValue: createdAtDate)
+  @JsonKey(
+      name: 'createdDate',
+      defaultValue: '',
+      readValue: JsonReadValueHelper.createdAtDate)
   String get createdDate => throw _privateConstructorUsedError;
   @JsonKey(name: 'zzAdvice', defaultValue: '')
   String get zzAdvice => throw _privateConstructorUsedError;
@@ -86,7 +92,10 @@ abstract class $PaymentSummaryDetailsDtoCopyWith<$Res> {
   @useResult
   $Res call(
       {@JsonKey(name: 'paymentID', defaultValue: '') String paymentID,
-      @JsonKey(name: 'valueDate', defaultValue: '', readValue: paymentDate)
+      @JsonKey(
+          name: 'valueDate',
+          defaultValue: '',
+          readValue: JsonReadValueHelper.createdAtDate)
       String valueDate,
       @JsonKey(name: 'paymentAmount', defaultValue: 0.0) double paymentAmount,
       @JsonKey(name: 'transactionCurrency', defaultValue: '')
@@ -113,7 +122,10 @@ abstract class $PaymentSummaryDetailsDtoCopyWith<$Res> {
       @JsonKey(name: 'customId', defaultValue: '') String customId,
       @JsonKey(name: 'bankIdentification', defaultValue: '')
       String bankIdentification,
-      @JsonKey(name: 'createdDate', defaultValue: '', readValue: createdAtDate)
+      @JsonKey(
+          name: 'createdDate',
+          defaultValue: '',
+          readValue: JsonReadValueHelper.createdAtDate)
       String createdDate,
       @JsonKey(name: 'zzAdvice', defaultValue: '') String zzAdvice,
       @JsonKey(name: 'adviceExpiry', defaultValue: '') String adviceExpiry,
@@ -280,7 +292,10 @@ abstract class _$$PaymentSummaryDetailsDtoImplCopyWith<$Res>
   @useResult
   $Res call(
       {@JsonKey(name: 'paymentID', defaultValue: '') String paymentID,
-      @JsonKey(name: 'valueDate', defaultValue: '', readValue: paymentDate)
+      @JsonKey(
+          name: 'valueDate',
+          defaultValue: '',
+          readValue: JsonReadValueHelper.createdAtDate)
       String valueDate,
       @JsonKey(name: 'paymentAmount', defaultValue: 0.0) double paymentAmount,
       @JsonKey(name: 'transactionCurrency', defaultValue: '')
@@ -307,7 +322,10 @@ abstract class _$$PaymentSummaryDetailsDtoImplCopyWith<$Res>
       @JsonKey(name: 'customId', defaultValue: '') String customId,
       @JsonKey(name: 'bankIdentification', defaultValue: '')
       String bankIdentification,
-      @JsonKey(name: 'createdDate', defaultValue: '', readValue: createdAtDate)
+      @JsonKey(
+          name: 'createdDate',
+          defaultValue: '',
+          readValue: JsonReadValueHelper.createdAtDate)
       String createdDate,
       @JsonKey(name: 'zzAdvice', defaultValue: '') String zzAdvice,
       @JsonKey(name: 'adviceExpiry', defaultValue: '') String adviceExpiry,
@@ -467,7 +485,10 @@ class __$$PaymentSummaryDetailsDtoImplCopyWithImpl<$Res>
 class _$PaymentSummaryDetailsDtoImpl extends _PaymentSummaryDetailsDto {
   const _$PaymentSummaryDetailsDtoImpl(
       {@JsonKey(name: 'paymentID', defaultValue: '') required this.paymentID,
-      @JsonKey(name: 'valueDate', defaultValue: '', readValue: paymentDate)
+      @JsonKey(
+          name: 'valueDate',
+          defaultValue: '',
+          readValue: JsonReadValueHelper.createdAtDate)
       required this.valueDate,
       @JsonKey(name: 'paymentAmount', defaultValue: 0.0)
       required this.paymentAmount,
@@ -498,7 +519,10 @@ class _$PaymentSummaryDetailsDtoImpl extends _PaymentSummaryDetailsDto {
       @JsonKey(name: 'customId', defaultValue: '') required this.customId,
       @JsonKey(name: 'bankIdentification', defaultValue: '')
       required this.bankIdentification,
-      @JsonKey(name: 'createdDate', defaultValue: '', readValue: createdAtDate)
+      @JsonKey(
+          name: 'createdDate',
+          defaultValue: '',
+          readValue: JsonReadValueHelper.createdAtDate)
       required this.createdDate,
       @JsonKey(name: 'zzAdvice', defaultValue: '') required this.zzAdvice,
       @JsonKey(name: 'adviceExpiry', defaultValue: '')
@@ -518,7 +542,10 @@ class _$PaymentSummaryDetailsDtoImpl extends _PaymentSummaryDetailsDto {
   @JsonKey(name: 'paymentID', defaultValue: '')
   final String paymentID;
   @override
-  @JsonKey(name: 'valueDate', defaultValue: '', readValue: paymentDate)
+  @JsonKey(
+      name: 'valueDate',
+      defaultValue: '',
+      readValue: JsonReadValueHelper.createdAtDate)
   final String valueDate;
   @override
   @JsonKey(name: 'paymentAmount', defaultValue: 0.0)
@@ -572,7 +599,10 @@ class _$PaymentSummaryDetailsDtoImpl extends _PaymentSummaryDetailsDto {
   @JsonKey(name: 'bankIdentification', defaultValue: '')
   final String bankIdentification;
   @override
-  @JsonKey(name: 'createdDate', defaultValue: '', readValue: createdAtDate)
+  @JsonKey(
+      name: 'createdDate',
+      defaultValue: '',
+      readValue: JsonReadValueHelper.createdAtDate)
   final String createdDate;
   @override
   @JsonKey(name: 'zzAdvice', defaultValue: '')
@@ -708,7 +738,10 @@ abstract class _PaymentSummaryDetailsDto extends PaymentSummaryDetailsDto {
   const factory _PaymentSummaryDetailsDto(
       {@JsonKey(name: 'paymentID', defaultValue: '')
       required final String paymentID,
-      @JsonKey(name: 'valueDate', defaultValue: '', readValue: paymentDate)
+      @JsonKey(
+          name: 'valueDate',
+          defaultValue: '',
+          readValue: JsonReadValueHelper.createdAtDate)
       required final String valueDate,
       @JsonKey(name: 'paymentAmount', defaultValue: 0.0)
       required final double paymentAmount,
@@ -741,7 +774,10 @@ abstract class _PaymentSummaryDetailsDto extends PaymentSummaryDetailsDto {
       required final String customId,
       @JsonKey(name: 'bankIdentification', defaultValue: '')
       required final String bankIdentification,
-      @JsonKey(name: 'createdDate', defaultValue: '', readValue: createdAtDate)
+      @JsonKey(
+          name: 'createdDate',
+          defaultValue: '',
+          readValue: JsonReadValueHelper.createdAtDate)
       required final String createdDate,
       @JsonKey(name: 'zzAdvice', defaultValue: '')
       required final String zzAdvice,
@@ -761,7 +797,10 @@ abstract class _PaymentSummaryDetailsDto extends PaymentSummaryDetailsDto {
   @JsonKey(name: 'paymentID', defaultValue: '')
   String get paymentID;
   @override
-  @JsonKey(name: 'valueDate', defaultValue: '', readValue: paymentDate)
+  @JsonKey(
+      name: 'valueDate',
+      defaultValue: '',
+      readValue: JsonReadValueHelper.createdAtDate)
   String get valueDate;
   @override
   @JsonKey(name: 'paymentAmount', defaultValue: 0.0)
@@ -815,7 +854,10 @@ abstract class _PaymentSummaryDetailsDto extends PaymentSummaryDetailsDto {
   @JsonKey(name: 'bankIdentification', defaultValue: '')
   String get bankIdentification;
   @override
-  @JsonKey(name: 'createdDate', defaultValue: '', readValue: createdAtDate)
+  @JsonKey(
+      name: 'createdDate',
+      defaultValue: '',
+      readValue: JsonReadValueHelper.createdAtDate)
   String get createdDate;
   @override
   @JsonKey(name: 'zzAdvice', defaultValue: '')

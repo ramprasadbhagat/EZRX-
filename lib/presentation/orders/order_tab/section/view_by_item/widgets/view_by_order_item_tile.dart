@@ -41,7 +41,7 @@ class _ViewByOrderItemTile extends StatelessWidget {
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  _ImageBox(
+                  ImageBoxWidget(
                     materialNumber: orderHistoryItem.materialNumber,
                     isCovidItem: orderHistoryItem.isCovid,
                     showOfferTag: orderHistoryItem.isOfferItem,
@@ -215,47 +215,6 @@ class _Subtitle extends StatelessWidget {
           ),
         priceComponent,
       ],
-    );
-  }
-}
-
-class _ImageBox extends StatelessWidget {
-  const _ImageBox({
-    required this.materialNumber,
-    required this.isCovidItem,
-    required this.showOfferTag,
-    required this.showBundleTag,
-  });
-
-  final bool isCovidItem;
-  final bool showOfferTag;
-  final bool showBundleTag;
-  final MaterialNumber materialNumber;
-
-  @override
-  Widget build(BuildContext context) {
-    return CustomCard(
-      showBorder: true,
-      showShadow: false,
-      clipBehavior: Clip.antiAlias,
-      margin: const EdgeInsets.fromLTRB(0, 7, 8, 0),
-      child: Stack(
-        children: [
-          ProductImage(
-            materialNumber: materialNumber,
-            fit: BoxFit.fitHeight,
-            width: 80,
-            height: 80,
-          ),
-          if (showOfferTag) ProductTag.onOfferIcon(),
-          if (showBundleTag) ProductTag.bundleOfferIcon(),
-          if (isCovidItem)
-            Positioned(
-              top: MediaQuery.of(context).size.height * 0.055,
-              child: const CovidTag(),
-            ),
-        ],
-      ),
     );
   }
 }

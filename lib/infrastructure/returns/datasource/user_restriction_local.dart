@@ -9,6 +9,28 @@ import 'package:ezrxmobile/infrastructure/returns/dtos/user_restriction_status_d
 
 import 'package:ezrxmobile/domain/returns/entities/user_restriction_status.dart';
 
+enum UserRestrictionType {
+  addApprovalLimit,
+  configureUser,
+  deleteApprovalLimit,
+  deleteApprovalRight,
+}
+
+extension on UserRestrictionType {
+  String get mockDataPath {
+    switch (this) {
+      case UserRestrictionType.addApprovalLimit:
+        return 'getAddUserRestrictionDetails.json';
+      case UserRestrictionType.configureUser:
+        return 'getConfigureUserRestrictionDetails.json';
+      case UserRestrictionType.deleteApprovalLimit:
+        return 'getDeleteReturnApprovalLimit.json';
+      case UserRestrictionType.deleteApprovalRight:
+        return 'getDeleteUserRestriction.json';
+    }
+  }
+}
+
 class UserRestrictionLocalDataSource {
   Future<UserRestrictionListDto> fetch() async {
     await Future.delayed(const Duration(seconds: 3));
@@ -30,39 +52,12 @@ class UserRestrictionLocalDataSource {
     return UserRestrictionsDto.fromJson(finalData).toDomain();
   }
 
-  Future<UserRestrictionStatus> addApprovalLimit() async {
+  Future<UserRestrictionStatus> getUserRestrictionStatus({
+    UserRestrictionType type = UserRestrictionType.configureUser,
+  }) async {
     final data = json.decode(
       await rootBundle
-          .loadString('assets/json/getAddUserRestrictionDetails.json'),
-    );
-    final finalData = data['data'];
-
-    return UserRestrictionStatusDto.fromJson(finalData).toDomain();
-  }
-
-  Future<UserRestrictionStatus> configureUserRestriction() async {
-    final data = json.decode(
-      await rootBundle
-          .loadString('assets/json/getConfigureUserRestrictionDetails.json'),
-    );
-    final finalData = data['data'];
-
-    return UserRestrictionStatusDto.fromJson(finalData).toDomain();
-  }
-
-  Future<UserRestrictionStatus> deleteApprovalRights() async {
-    final data = json.decode(
-      await rootBundle.loadString('assets/json/getDeleteUserRestriction.json'),
-    );
-    final finalData = data['data'];
-
-    return UserRestrictionStatusDto.fromJson(finalData).toDomain();
-  }
-
-  Future<UserRestrictionStatus> deleteApprovalLimit() async {
-    final data = json.decode(
-      await rootBundle
-          .loadString('assets/json/getDeleteReturnApprovalLimit.json'),
+          .loadString('assets/json/${type.mockDataPath}'),
     );
     final finalData = data['data'];
 

@@ -1,6 +1,4 @@
-import 'dart:async';
-
-import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
+import 'package:ezrxmobile/presentation/core/load_more_indicator.dart';
 import 'package:ezrxmobile/presentation/core/responsive.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
@@ -98,7 +96,7 @@ class _ScrollableGridViewState<T> extends State<ScrollableGridView<T>> {
           if (widget.isLoading)
             SliverToBoxAdapter(
               key: WidgetKeys.loadMoreLoader,
-              child: _LoadingMoreIndicator(
+              child: LoadingMoreIndicator(
                 controller: _scrollController,
               ),
             ),
@@ -115,37 +113,5 @@ class _ScrollableGridViewState<T> extends State<ScrollableGridView<T>> {
     }
 
     return 1 / 1.8;
-  }
-}
-
-class _LoadingMoreIndicator extends StatelessWidget {
-  const _LoadingMoreIndicator({
-    required this.controller,
-  });
-
-  final ScrollController controller;
-
-  @override
-  Widget build(BuildContext context) {
-    return Builder(
-      builder: (context) {
-        Timer(
-          const Duration(milliseconds: 50),
-          () {
-            if (controller.hasClients) {
-              controller.jumpTo(controller.position.maxScrollExtent);
-            }
-          },
-        );
-
-        return Container(
-          alignment: Alignment.center,
-          padding: const EdgeInsets.symmetric(
-            vertical: 10,
-          ),
-          child: LoadingShimmer.circular(),
-        );
-      },
-    );
   }
 }

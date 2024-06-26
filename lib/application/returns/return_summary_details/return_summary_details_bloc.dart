@@ -2,7 +2,8 @@ import 'dart:async';
 
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
-import 'package:ezrxmobile/domain/returns/entities/return_request_attachment.dart';
+import 'package:ezrxmobile/domain/order/entities/order_history_details_po_documents.dart';
+import 'package:ezrxmobile/domain/order/repository/i_po_attachment_repository.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_request_information.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_request_information_header.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_requests_id.dart';
@@ -19,9 +20,12 @@ class ReturnSummaryDetailsBloc
     extends Bloc<ReturnSummaryDetailsEvent, ReturnSummaryDetailsState> {
   final IReturnSummaryDetailsRepository returnSummaryDetailsRepository;
   final IReturnRequestRepository returnRequestRepository;
+  final IpoAttachmentRepository poAttachmentRepository;
+
   ReturnSummaryDetailsBloc({
     required this.returnSummaryDetailsRepository,
     required this.returnRequestRepository,
+    required this.poAttachmentRepository,
   }) : super(ReturnSummaryDetailsState.initial()) {
     on<ReturnSummaryDetailsEvent>(_onEvent);
   }
@@ -73,13 +77,13 @@ class ReturnSummaryDetailsBloc
         emit(
           state.copyWith(
             downloadFailureOrSuccessOption: none(),
-            downloadedAttachment: ReturnRequestAttachment.empty(),
+            downloadedAttachment: PoDocuments.empty(),
             downloadingAttachments: [...state.downloadingAttachments, e.file],
           ),
         );
 
         final failureOrSuccessPermission =
-            await returnRequestRepository.getDownloadPermission();
+            await poAttachmentRepository.downloadPermission();
 
         await failureOrSuccessPermission.fold(
           (failure) async => emit(
@@ -92,8 +96,8 @@ class ReturnSummaryDetailsBloc
             ),
           ),
           (success) async {
-            final failureOrSuccess = await returnRequestRepository.downloadFile(
-              file: e.file,
+            final failureOrSuccess = await poAttachmentRepository.downloadFiles(
+              files: [e.file],
             );
 
             emit(

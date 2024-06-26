@@ -2,7 +2,7 @@ import 'package:ezrxmobile/domain/order/entities/combo_material_item.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
-import 'package:ezrxmobile/infrastructure/core/common/json_key_converter.dart';
+import 'package:ezrxmobile/infrastructure/core/common/json_key_readvalue_helper.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/price_combo_deal_dto.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 part 'combo_material_item_dto.freezed.dart';
@@ -45,7 +45,8 @@ class ComboMaterialItemDto with _$ComboMaterialItemDto {
     @JsonKey(name: 'materialNumber', defaultValue: 'EN')
     required String materialNumber,
     @JsonKey(name: 'taxM1', defaultValue: '') required String taxM1,
-    @JsonKey(name: 'taxes', readValue: handleTax) required double tax,
+    @JsonKey(name: 'taxes', readValue: JsonReadValueHelper.handleTax)
+    required double tax,
     @JsonKey(name: 'isFOCMaterial', defaultValue: false)
     required bool isFOCMaterial,
     @JsonKey(name: 'hidePrice', defaultValue: false) required bool hidePrice,

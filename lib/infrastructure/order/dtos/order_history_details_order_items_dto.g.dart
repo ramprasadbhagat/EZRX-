@@ -26,10 +26,9 @@ _$OrderHistoryDetailsOrderItemDtoImpl
           expiryDate: json['ExpiryDate'] as String? ?? '',
           lineReferenceNotes: json['LineReferenceNotes'] as String? ?? '',
           lineNumber: json['LineNumber'] as String? ?? '',
-          isTenderContractMaterial:
-              boolStringFormatCheck(json, 'IsTenderContractMaterial')
-                      as bool? ??
-                  false,
+          isTenderContractMaterial: JsonReadValueHelper.readBoolStringFormat(
+                  json, 'IsTenderContractMaterial') as bool? ??
+              false,
           parentId: json['ParentID'] as String? ?? '',
           details: (json['Details'] as List<dynamic>?)
                   ?.map((e) => OrderHistoryDetailsOrderItemDetailsDto.fromJson(
@@ -37,7 +36,7 @@ _$OrderHistoryDetailsOrderItemDtoImpl
                   .toList() ??
               [],
           tenderContractDetails: OrderHistoryDetailsTenderContractDto.fromJson(
-              orderHistoryDetailsOrderItemTenderContractDetailsOverride(
+              JsonReadValueHelper.readValueMapDynamic(
                   json, 'TenderContractDetails') as Map<String, dynamic>),
           principalName: json['PrincipalName'] as String? ?? '',
           principalCode: json['PrincipalCode'] as String? ?? '',
@@ -45,16 +44,20 @@ _$OrderHistoryDetailsOrderItemDtoImpl
               json['GovernmentMaterialCode'] as String? ?? '',
           itemRegistrationNumber:
               json['ItemRegistrationNumber'] as String? ?? '',
-          productType: _getProductType(json, 'ProductType') as String,
+          productType: JsonReadValueHelper.readProductType(json, 'ProductType')
+              as String,
           promosStatus: json['promoStatus'] as bool? ?? false,
           isCounterOffer: json['isCounterOffer'] as bool? ?? false,
           hidePrice: json['HidePrice'] as bool? ?? false,
           isMarketPlace:
-              mappingIsMarketPlace(json, 'isMarketPlace') as bool? ?? false,
+              JsonReadValueHelper.mappingIsMarketPlace(json, 'isMarketPlace')
+                      as bool? ??
+                  false,
           isCovid: json['isCovid'] as bool? ?? false,
           totalUnitPrice: (json['TotalUnitPrice'] as num?)?.toDouble() ?? 0.0,
           totalTax: (json['TotalTax'] as num?)?.toDouble() ?? 0.0,
-          taxRate: (handleTax(json, 'TaxRate') as num).toDouble(),
+          taxRate: (JsonReadValueHelper.handleTax(json, 'TaxRate') as num)
+              .toDouble(),
         );
 
 Map<String, dynamic> _$$OrderHistoryDetailsOrderItemDtoImplToJson(

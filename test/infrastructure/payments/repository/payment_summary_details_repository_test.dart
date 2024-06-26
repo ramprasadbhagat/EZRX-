@@ -536,7 +536,9 @@ void main() {
         'Currency PH Bank-in: Pending ',
         () async {
           final paymentSummaryDetails = await PaymentItemLocalDataSource()
-              .getPaymentSummaryDetailsPHBankIn();
+              .getPaymentSummaryDetailsByPaymentId(
+            PaymentItemLocalDataSource.phBankInId,
+          );
 
           expect(
             paymentSummaryDetails.status,
@@ -547,8 +549,10 @@ void main() {
       test(
         'Currency SG: Pending ',
         () async {
-          final paymentSummaryDetails =
-              await PaymentItemLocalDataSource().getPaymentSummaryDetailsSG();
+          final paymentSummaryDetails = await PaymentItemLocalDataSource()
+              .getPaymentSummaryDetailsByPaymentId(
+            PaymentItemLocalDataSource.sgQrCodeId,
+          );
 
           expect(
             paymentSummaryDetails.status,
@@ -560,7 +564,9 @@ void main() {
         'Currency Other Payment Gateway: In Progress ',
         () async {
           final paymentSummaryDetails = await PaymentItemLocalDataSource()
-              .getPaymentSummaryDetailsPHPayment();
+              .getPaymentSummaryDetailsByPaymentId(
+            PaymentItemLocalDataSource.phPaymentGatewayId,
+          );
 
           expect(
             paymentSummaryDetails.status,

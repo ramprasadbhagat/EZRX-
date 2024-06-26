@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
+import 'package:ezrxmobile/presentation/orders/order_tab/widgets/filter_section_label.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -74,7 +75,7 @@ class _FilterList extends StatelessWidget {
         children: [
           const SizedBox(height: 12),
           if (context.read<EligibilityBloc>().state.marketPlaceEligible) ...[
-            const _FilterSectionLabel('Show history'),
+            const FilterSectionLabel('Show history'),
             const SizedBox(height: 12),
             Padding(
               padding: _defaultPadding
@@ -83,38 +84,20 @@ class _FilterList extends StatelessWidget {
             ),
             const SizedBox(height: 20),
           ],
-          const _FilterSectionLabel('Order date'),
+          const FilterSectionLabel('Order date'),
           const SizedBox(height: 12),
           const Padding(
             padding: _defaultPadding,
             child: _ViewByItemFilterDateRangePicker(),
           ),
           const SizedBox(height: 20),
-          const _FilterSectionLabel('Status'),
+          const FilterSectionLabel('Status'),
           const SizedBox(height: 12),
           const Padding(
             padding: _defaultPadding,
             child: _ViewByItemFilterStatusPicker(),
           ),
         ],
-      ),
-    );
-  }
-}
-
-class _FilterSectionLabel extends StatelessWidget {
-  final String text;
-  const _FilterSectionLabel(this.text);
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: _defaultPadding,
-      child: Text(
-        context.tr(text),
-        style: Theme.of(context).textTheme.labelMedium?.copyWith(
-              color: ZPColors.neutralsBlack,
-            ),
       ),
     );
   }

@@ -37,12 +37,4 @@ class ReturnFilterDto with _$ReturnFilterDto {
 
   factory ReturnFilterDto.fromJson(Map<String, dynamic> json) =>
       _$ReturnFilterDtoFromJson(json);
-
-  Map<String, dynamic> toMap() => toJson()
-    ..removeWhere(
-      (key, value) =>
-          ((key == 'dateFrom' || key == 'dateTo') && value == '-') ||
-          (value is String && value.isEmpty) ||
-          (value is List && value.isEmpty),
-    );
 }

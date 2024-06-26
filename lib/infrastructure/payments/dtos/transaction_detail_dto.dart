@@ -1,5 +1,6 @@
 import 'package:ezrxmobile/domain/payments/entities/payment_summary_details.dart';
 import 'package:ezrxmobile/domain/payments/value/value_object.dart';
+import 'package:ezrxmobile/infrastructure/core/common/json_key_readvalue_helper.dart';
 import 'package:ezrxmobile/infrastructure/payments/dtos/transaction_invoice_dto.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
@@ -11,38 +12,32 @@ part 'transaction_detail_dto.g.dart';
 class TransactionDetailDto with _$TransactionDetailDto {
   const TransactionDetailDto._();
   const factory TransactionDetailDto({
-    @JsonKey(name: 'id', defaultValue: '')
-        required String id,
-    @JsonKey(name: 'reference', defaultValue: '')
-        required String reference,
+    @JsonKey(name: 'id', defaultValue: '') required String id,
+    @JsonKey(name: 'reference', defaultValue: '') required String reference,
     @JsonKey(name: 'invoices', defaultValue: <TransactionInvoiceDto>[])
-        required List<TransactionInvoiceDto> invoices,
+    required List<TransactionInvoiceDto> invoices,
     @JsonKey(name: 'amountPayable', defaultValue: 0.0)
-        required double amountPayable,
-    @JsonKey(name: 'status', defaultValue: '')
-        required String status,
+    required double amountPayable,
+    @JsonKey(name: 'status', defaultValue: '') required String status,
     @JsonKey(name: 'paymentDocument', defaultValue: '')
-        required String paymentDocument,
+    required String paymentDocument,
     @JsonKey(name: 'paymentMethodDisplay', defaultValue: '')
-        required String paymentMethodDisplay,
-    @JsonKey(name: 'createdOn', defaultValue: '')
-        required String createdOn,
-    @JsonKey(name: 'bankId', defaultValue: '')
-        required String bankId,
-    @JsonKey(name: 'paidOn', defaultValue: '')
-        required String paidOn,
+    required String paymentMethodDisplay,
+    @JsonKey(name: 'createdOn', defaultValue: '') required String createdOn,
+    @JsonKey(name: 'bankId', defaultValue: '') required String bankId,
+    @JsonKey(name: 'paidOn', defaultValue: '') required String paidOn,
     @JsonKey(
       name: 'vaName',
       defaultValue: '',
-      readValue: _mappingVaName,
+      readValue: JsonReadValueHelper.readVaName,
     )
-        required String vaName,
+    required String vaName,
     @JsonKey(
       name: 'vaNumber',
       defaultValue: '',
-      readValue: _mappingVaNumber,
+      readValue: JsonReadValueHelper.readVaNumber,
     )
-        required String vaNumber,
+    required String vaNumber,
   }) = _TransactionDetailDto;
 
   PaymentSummaryDetails toDomain() {
@@ -64,8 +59,3 @@ class TransactionDetailDto with _$TransactionDetailDto {
   factory TransactionDetailDto.fromJson(Map<String, dynamic> json) =>
       _$TransactionDetailDtoFromJson(json);
 }
-
-String _mappingVaName(Map json, String _) =>
-    json['paymentDetails']?['vaName'] ?? '';
-String _mappingVaNumber(Map json, String _) =>
-    json['paymentDetails']?['vaNumber'] ?? '';

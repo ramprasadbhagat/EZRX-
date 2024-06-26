@@ -8,7 +8,7 @@ part of 'role_dto.dart';
 
 _$RoleDtoImpl _$$RoleDtoImplFromJson(Map<String, dynamic> json) =>
     _$RoleDtoImpl(
-      id: _convertRoleId(json, 'id') as String,
+      id: JsonReadValueHelper.convertRoleId(json, 'id') as String,
       name: json['name'] as String? ?? '',
       type: json['type'] as String? ?? '',
       description: json['description'] as String? ?? '',

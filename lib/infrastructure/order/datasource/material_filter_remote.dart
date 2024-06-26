@@ -1,8 +1,6 @@
 import 'dart:convert';
 
-import 'package:dio/dio.dart';
 import 'package:ezrxmobile/config.dart';
-import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
 import 'package:ezrxmobile/domain/order/entities/material_filter.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
@@ -51,21 +49,13 @@ class MaterialFilterRemoteDataSource {
         }),
       );
 
-      _materialFilterExceptionChecker(res: resMaterialFilters);
+      dataSourceExceptionHandler.handleExceptionChecker(
+        res: resMaterialFilters,
+      );
+
       final finalData = resMaterialFilters.data['data']['GetFilterList'];
 
       return MaterialFilterDto.fromJson(finalData).toDomain();
     });
-  }
-
-  void _materialFilterExceptionChecker({required Response<dynamic> res}) {
-    if (dataSourceExceptionHandler.isServerResponseError(res: res)) {
-      throw ServerException(message: res.data['errors'][0]['message']);
-    } else if (res.statusCode != 200) {
-      throw ServerException(
-        code: res.statusCode ?? 0,
-        message: res.statusMessage ?? '',
-      );
-    }
   }
 }

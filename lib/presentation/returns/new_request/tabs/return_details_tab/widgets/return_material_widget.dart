@@ -1,6 +1,6 @@
 part of 'package:ezrxmobile/presentation/returns/new_request/tabs/return_details_tab/return_details_tab.dart';
 
-class _ReturnMaterialWidget extends StatelessWidget {
+class _ReturnMaterialWidget extends StatelessWidget with BottomsheetMixin {
   final ReturnMaterial item;
   final ReturnItemDetails detail;
   const _ReturnMaterialWidget({
@@ -94,7 +94,9 @@ class _ReturnMaterialWidget extends StatelessWidget {
   }
 
   Future _removeItem(BuildContext context, int itemsLength) async {
-    final confirmed = await _showConfirmBottomSheet(context);
+    final confirmed = await showConfirmBottomSheet(
+      context: context,
+    );
     if (confirmed ?? false) {
       if (itemsLength == 1) {
         if (context.mounted) {
@@ -111,19 +113,6 @@ class _ReturnMaterialWidget extends StatelessWidget {
             );
       }
     }
-  }
-
-  Future<bool?> _showConfirmBottomSheet(BuildContext context) {
-    return showModalBottomSheet<bool>(
-      context: context,
-      isScrollControlled: true,
-      enableDrag: false,
-      builder: (_) => const ConfirmBottomSheet(
-        title: 'Remove item?',
-        content: 'This action cannot be undone',
-        confirmButtonText: 'Remove',
-      ),
-    );
   }
 }
 

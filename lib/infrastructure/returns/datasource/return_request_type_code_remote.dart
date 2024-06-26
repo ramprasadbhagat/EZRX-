@@ -1,8 +1,6 @@
 import 'dart:convert';
 
-import 'package:dio/dio.dart';
 import 'package:ezrxmobile/config.dart';
-import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_request_type_code_details.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
@@ -42,24 +40,12 @@ class ReturnRequestTypeCodeRemoteDataSource {
           'variables': variables,
         }),
       );
-      _returnRequestTypeCodeExceptionChecker(res: res);
+
+      dataSourceExceptionHandler.handleExceptionChecker(res: res);
 
       return List.from(res.data['data']['typeOfRequest'])
           .map((e) => ReturnRequestTypeCodeDetailsDto.fromJson(e).toDomain())
           .toList();
     });
-  }
-
-  void _returnRequestTypeCodeExceptionChecker({
-    required Response<dynamic> res,
-  }) {
-    if (dataSourceExceptionHandler.isServerResponseError(res: res)) {
-      throw ServerException(message: res.data['errors'][0]['message']);
-    } else if (res.statusCode != 200) {
-      throw ServerException(
-        code: res.statusCode ?? 0,
-        message: res.statusMessage ?? '',
-      );
-    }
   }
 }

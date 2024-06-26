@@ -60,7 +60,8 @@ mixin _$ProductDetailDto {
   bool get promoStatus => throw _privateConstructorUsedError;
   @JsonKey(name: 'suspensionStatus', defaultValue: false)
   bool get isSuspended => throw _privateConstructorUsedError;
-  @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+  @JsonKey(
+      defaultValue: false, readValue: JsonReadValueHelper.mappingIsMarketPlace)
   bool get isMarketPlace => throw _privateConstructorUsedError;
   @JsonKey(name: 'hasMandatoryTenderContract', defaultValue: false)
   bool get hasMandatoryTenderContract => throw _privateConstructorUsedError;
@@ -107,7 +108,9 @@ abstract class $ProductDetailDtoCopyWith<$Res> {
       @JsonKey(name: 'promoType', defaultValue: '') String promoType,
       @JsonKey(name: 'promoStatus', defaultValue: false) bool promoStatus,
       @JsonKey(name: 'suspensionStatus', defaultValue: false) bool isSuspended,
-      @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+      @JsonKey(
+          defaultValue: false,
+          readValue: JsonReadValueHelper.mappingIsMarketPlace)
       bool isMarketPlace,
       @JsonKey(name: 'hasMandatoryTenderContract', defaultValue: false)
       bool hasMandatoryTenderContract,
@@ -285,7 +288,9 @@ abstract class _$$ProductDetailDtoImplCopyWith<$Res>
       @JsonKey(name: 'promoType', defaultValue: '') String promoType,
       @JsonKey(name: 'promoStatus', defaultValue: false) bool promoStatus,
       @JsonKey(name: 'suspensionStatus', defaultValue: false) bool isSuspended,
-      @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+      @JsonKey(
+          defaultValue: false,
+          readValue: JsonReadValueHelper.mappingIsMarketPlace)
       bool isMarketPlace,
       @JsonKey(name: 'hasMandatoryTenderContract', defaultValue: false)
       bool hasMandatoryTenderContract,
@@ -464,7 +469,9 @@ class _$ProductDetailDtoImpl extends _ProductDetailDto {
       required this.promoStatus,
       @JsonKey(name: 'suspensionStatus', defaultValue: false)
       required this.isSuspended,
-      @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+      @JsonKey(
+          defaultValue: false,
+          readValue: JsonReadValueHelper.mappingIsMarketPlace)
       required this.isMarketPlace,
       @JsonKey(name: 'hasMandatoryTenderContract', defaultValue: false)
       required this.hasMandatoryTenderContract,
@@ -536,7 +543,8 @@ class _$ProductDetailDtoImpl extends _ProductDetailDto {
   @JsonKey(name: 'suspensionStatus', defaultValue: false)
   final bool isSuspended;
   @override
-  @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+  @JsonKey(
+      defaultValue: false, readValue: JsonReadValueHelper.mappingIsMarketPlace)
   final bool isMarketPlace;
   @override
   @JsonKey(name: 'hasMandatoryTenderContract', defaultValue: false)
@@ -691,7 +699,9 @@ abstract class _ProductDetailDto extends ProductDetailDto {
       required final bool promoStatus,
       @JsonKey(name: 'suspensionStatus', defaultValue: false)
       required final bool isSuspended,
-      @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+      @JsonKey(
+          defaultValue: false,
+          readValue: JsonReadValueHelper.mappingIsMarketPlace)
       required final bool isMarketPlace,
       @JsonKey(name: 'hasMandatoryTenderContract', defaultValue: false)
       required final bool hasMandatoryTenderContract,
@@ -763,7 +773,8 @@ abstract class _ProductDetailDto extends ProductDetailDto {
   @JsonKey(name: 'suspensionStatus', defaultValue: false)
   bool get isSuspended;
   @override
-  @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+  @JsonKey(
+      defaultValue: false, readValue: JsonReadValueHelper.mappingIsMarketPlace)
   bool get isMarketPlace;
   @override
   @JsonKey(name: 'hasMandatoryTenderContract', defaultValue: false)

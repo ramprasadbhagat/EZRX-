@@ -1,6 +1,6 @@
 part of 'package:ezrxmobile/presentation/returns/new_request/new_request_page.dart';
 
-class _PreviousButton extends StatelessWidget {
+class _PreviousButton extends StatelessWidget with BottomsheetMixin {
   final TabController tabController;
   final int step;
 
@@ -15,7 +15,12 @@ class _PreviousButton extends StatelessWidget {
         ? IconButton(
             key: WidgetKeys.closeButton,
             onPressed: () async {
-              final confirmed = await _showConfirmBottomSheet(context);
+              final confirmed = await showConfirmBottomSheet(
+                context: context,
+                title: 'Leave page?',
+                content: 'Any unsaved information will be lost',
+                confirmButtonText: 'Leave',
+              );
               if (confirmed ?? false) {
                 if (context.mounted) await context.router.pop();
               }
@@ -35,18 +40,5 @@ class _PreviousButton extends StatelessWidget {
             },
             icon: const Icon(Icons.chevron_left),
           );
-  }
-
-  Future<bool?> _showConfirmBottomSheet(BuildContext context) {
-    return showModalBottomSheet<bool>(
-      context: context,
-      isScrollControlled: true,
-      enableDrag: false,
-      builder: (_) => const ConfirmBottomSheet(
-        title: 'Leave page?',
-        content: 'Any unsaved information will be lost',
-        confirmButtonText: 'Leave',
-      ),
-    );
   }
 }

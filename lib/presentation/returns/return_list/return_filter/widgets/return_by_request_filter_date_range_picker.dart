@@ -1,5 +1,6 @@
 part of 'package:ezrxmobile/presentation/returns/return_list/return_filter/return_by_request_filter_page.dart';
 
+//ignore_for_file: code-duplication
 class _RequestDateRangePicker extends StatelessWidget {
   const _RequestDateRangePicker();
 

@@ -1,3 +1,4 @@
+import 'package:ezrxmobile/domain/returns/value/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 part 'order_history_details_po_documents.freezed.dart';
 
@@ -7,10 +8,12 @@ class PoDocuments with _$PoDocuments {
   factory PoDocuments({
     required String url,
     required String name,
+    required FileSize size,
   }) = _PoDocuments;
   factory PoDocuments.empty() => PoDocuments(
         url: '',
         name: '',
+        size: FileSize(0),
       );
 }
 

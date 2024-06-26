@@ -1,5 +1,6 @@
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_details.dart';
+import 'package:ezrxmobile/infrastructure/core/common/json_key_readvalue_helper.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'payment_details_dto.freezed.dart';
@@ -12,8 +13,12 @@ class PaymentDetailsDto with _$PaymentDetailsDto {
   const factory PaymentDetailsDto({
     @JsonKey(name: 'vaNumber', defaultValue: '') required String vaNumber,
     @JsonKey(name: 'vaName', defaultValue: '') required String vaName,
-    @JsonKey(name: 'expiresAt', defaultValue: '', readValue: expiresAtDate)
-        required String expiresAt,
+    @JsonKey(
+      name: 'expiresAt',
+      defaultValue: '',
+      readValue: JsonReadValueHelper.createdAtDate,
+    )
+    required String expiresAt,
   }) = _PaymentDetailsDto;
 
   PaymentDetails toDomain() {
@@ -27,6 +32,3 @@ class PaymentDetailsDto with _$PaymentDetailsDto {
   factory PaymentDetailsDto.fromJson(Map<String, dynamic> json) =>
       _$PaymentDetailsDtoFromJson(json);
 }
-
-String expiresAtDate(Map json, String key) =>
-    json[key]?.replaceAll('-', '') ?? '';

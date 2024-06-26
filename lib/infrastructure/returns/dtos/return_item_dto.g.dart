@@ -25,7 +25,9 @@ _$ReturnItemDtoImpl _$$ReturnItemDtoImplFromJson(Map<String, dynamic> json) =>
       expiry: json['expiry'] as String? ?? '',
       prsfd: json['prsfd'] as String? ?? '',
       isMarketPlace:
-          mappingIsMarketPlace(json, 'isMarketPlace') as bool? ?? false,
+          JsonReadValueHelper.mappingIsMarketPlace(json, 'isMarketPlace')
+                  as bool? ??
+              false,
     );
 
 Map<String, dynamic> _$$ReturnItemDtoImplToJson(_$ReturnItemDtoImpl instance) =>

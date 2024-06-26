@@ -40,7 +40,10 @@ class OrderStatusTrackerRemoteDataSource {
           'variables': variables,
         }),
       );
-      _orderStatusTrackerExceptionChecker(res: res);
+      dataSourceExceptionHandler.handleExceptionChecker(
+        res: res,
+        onCustomExceptionHandler: _orderStatusTrackerExceptionChecker,
+      );
       final statusData = res.data['data']['zyllemStatusV2']['Entry'];
 
       return List.from(statusData)
@@ -49,15 +52,8 @@ class OrderStatusTrackerRemoteDataSource {
     });
   }
 
-  void _orderStatusTrackerExceptionChecker({required Response<dynamic> res}) {
-    if (dataSourceExceptionHandler.isServerResponseError(res: res)) {
-      throw ServerException(message: res.data['errors'][0]['message']);
-    } else if (res.statusCode != 200) {
-      throw ServerException(
-        code: res.statusCode ?? 0,
-        message: res.statusMessage ?? '',
-      );
-    } else if (List.from(res.data['data']['zyllemStatusV2']['Entry']).isEmpty) {
+  void _orderStatusTrackerExceptionChecker(Response<dynamic> res) {
+    if (List.from((res.data['data']?['zyllemStatusV2']?['Entry']) ?? []).isEmpty) {
       throw ServerException(message: 'Error on fetch status');
     }
   }

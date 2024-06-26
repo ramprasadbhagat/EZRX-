@@ -18,14 +18,14 @@ import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/order/entities/order_history_details_po_documents.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/domain/returns/entities/request_information.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_item.dart';
-import 'package:ezrxmobile/domain/returns/entities/return_request_attachment.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_request_information.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_request_information_header.dart';
 import 'package:ezrxmobile/domain/returns/value/value_objects.dart';
-import 'package:ezrxmobile/infrastructure/returns/datasource/return_details_by_request_local.dart';
+import 'package:ezrxmobile/infrastructure/returns/datasource/return_summary_details_local.dart';
 import 'package:ezrxmobile/presentation/core/custom_card.dart';
 import 'package:ezrxmobile/presentation/core/market_place/market_place_seller_with_logo.dart';
 import 'package:ezrxmobile/presentation/returns/return_summary_request_details/widgets/request_item_section.dart';
@@ -108,8 +108,8 @@ void main() {
     },
   );
 
-  final requestAttachment = ReturnRequestAttachment(
-    path: 'fake-path',
+  final requestAttachment = PoDocuments(
+    url: 'fake-path',
     name: 'fake-name',
     size: FileSize(256),
   );
@@ -120,8 +120,8 @@ void main() {
     locator.registerLazySingleton(() => AppRouter());
     locator.registerLazySingleton(() => mockSalesOrgBloc);
     locator.registerLazySingleton(() => mockCustomerCodeBloc);
-    requestInformation = await ReturnSummaryDetailsByRequestLocal()
-        .getReturnSummaryDetailsByRequest();
+    requestInformation = await ReturnSummaryDetailsRequestInformationLocal()
+        .getReturnRequestInformation();
   });
   setUp(() async {
     mockSalesOrgBloc = MockSalesOrgBloc();
@@ -1232,14 +1232,14 @@ void main() {
     testWidgets('Return item section test download success', (tester) async {
       final expectedReturnDetailsState = [
         ReturnDetailsByRequestState.initial().copyWith(
-          downloadedAttachment: ReturnRequestAttachment.empty(),
+          downloadedAttachment: PoDocuments.empty(),
         ),
         ReturnDetailsByRequestState.initial().copyWith(
           downloadedAttachment: requestAttachment,
           downloadFailureOrSuccessOption: none(),
         ),
         ReturnDetailsByRequestState.initial().copyWith(
-          downloadedAttachment: ReturnRequestAttachment.empty(),
+          downloadedAttachment: PoDocuments.empty(),
         ),
         ReturnDetailsByRequestState.initial().copyWith(
           downloadedAttachment: requestAttachment,
@@ -1258,7 +1258,7 @@ void main() {
     testWidgets('Return item section test download fail', (tester) async {
       final expectedReturnDetailsState = [
         ReturnDetailsByRequestState.initial().copyWith(
-          downloadedAttachment: ReturnRequestAttachment.empty(),
+          downloadedAttachment: PoDocuments.empty(),
         ),
         ReturnDetailsByRequestState.initial().copyWith(
           downloadedAttachment: requestAttachment,

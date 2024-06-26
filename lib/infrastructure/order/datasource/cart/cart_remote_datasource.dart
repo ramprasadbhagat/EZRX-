@@ -4,7 +4,6 @@ import 'package:dio/dio.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/error/cart_exception.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
-import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
 import 'package:ezrxmobile/domain/order/entities/apl_simulator_order.dart';
 import 'package:ezrxmobile/domain/order/entities/cart.dart';
@@ -51,7 +50,9 @@ class CartRemoteDataSource {
           },
         ),
       );
-      _exceptionChecker(res: res);
+        _cartExceptionChecker(
+        res: res,
+      );
 
       final cart = res.data['data']['cart'] ?? {};
 
@@ -72,7 +73,9 @@ class CartRemoteDataSource {
         ),
       );
 
-      _exceptionChecker(res: res);
+      _cartExceptionChecker(
+        res: res,
+      );
     });
   }
 
@@ -100,7 +103,9 @@ class CartRemoteDataSource {
         ),
       );
 
-      _exceptionChecker(res: res);
+       _cartExceptionChecker(
+        res: res,
+      );
 
       final productList = res.data['data'][requestParams['Type'] == 'bundle'
               ? 'upsertCartItems'
@@ -135,8 +140,9 @@ class CartRemoteDataSource {
         ),
       );
 
-      _exceptionChecker(res: res);
-
+        _cartExceptionChecker(
+        res: res,
+      );
       final productList =
           res.data['data']['upsertCartItems']['EzRxItems'] ?? [];
 
@@ -171,8 +177,10 @@ class CartRemoteDataSource {
         ),
       );
 
-      _exceptionChecker(res: res);
-
+       _cartExceptionChecker(
+        res: res,
+      );
+      
       return AplSimulatorOrderDto.fromJson(res.data['data']['aplSimulateOrder'])
           .toDomain;
     });
@@ -204,8 +212,9 @@ class CartRemoteDataSource {
           },
         ),
       );
-
-      _exceptionChecker(res: res);
+      _cartExceptionChecker(
+        res: res,
+      );
 
       return AplGetTotalPriceDto.fromJson(res.data['data']['AplGetTotalPrice'])
           .toDomain;
@@ -214,24 +223,28 @@ class CartRemoteDataSource {
 
   //Note* 'no cart found' error message is received when the cart is empty hence
   //we do not show any error message to the user.
-  void _exceptionChecker({required Response<dynamic> res}) {
-    if (dataSourceExceptionHandler.isServerResponseError(res: res)) {
-      final message = res.data['errors'][0]['message'].toString().toLowerCase();
-      switch (message) {
-        case 'shiptoaddress changed from existing cart. delete the cart and then add new item':
-          throw const CartException.cartHasDifferentAddress();
-        case 'no cart found':
-          return;
-        case "can't add normal product with animal health product":
-        case "can't add animal health product with normal product":
-          throw const CartException.addAnimalHealthWithNormalProductToCart();
-        default:
-          throw ServerException(message: res.data['errors'][0]['message']);
-      }
-    } else if (res.statusCode != 200) {
-      throw ServerException(
-        code: res.statusCode ?? 0,
-        message: res.statusMessage ?? '',
+  void _cartExceptionChecker({required Response<dynamic> res}) {
+    final message = res.data['errors'] != null && res.data['errors'].isNotEmpty
+        ? res.data['errors'][0]['message'].toString().toLowerCase()
+        : '';
+
+    if (message == 'no cart found') {
+      return;
+    } else {
+      dataSourceExceptionHandler.handleExceptionChecker(
+        res: res,
+        onCustomExceptionHandler: (_) {
+          switch (message) {
+            case 'shiptoaddress changed from existing cart. delete the cart and then add new item':
+              throw const CartException.cartHasDifferentAddress();
+            case 'no cart found':
+              break;
+            case "can't add normal product with animal health product":
+            case "can't add animal health product with normal product":
+              throw const CartException
+                  .addAnimalHealthWithNormalProductToCart();
+          }
+        },
       );
     }
   }

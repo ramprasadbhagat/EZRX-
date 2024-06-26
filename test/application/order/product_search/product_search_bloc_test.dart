@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/material_list_local.dart';
 import 'package:flutter/material.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:mocktail/mocktail.dart';
@@ -12,7 +13,6 @@ import 'package:ezrxmobile/domain/order/entities/material_filter.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/order/entities/product_suggestion_history.dart';
 import 'package:ezrxmobile/domain/order/repository/i_product_search_repository.dart';
-import 'package:ezrxmobile/infrastructure/order/datasource/product_search_local.dart';
 import 'package:ezrxmobile/application/order/product_search/product_search_bloc.dart';
 
 import '../../../common_mock_data/user_mock.dart';
@@ -53,7 +53,7 @@ void main() {
       config: config,
     );
     materialResponse =
-        await ProductSearchLocalDataSource().getSearchedProductList();
+        await MaterialListLocalDataSource().getProductList();
     fakeResponse1 = MaterialResponse(
       count: 50,
       products: List.generate(

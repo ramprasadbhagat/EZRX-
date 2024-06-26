@@ -51,9 +51,6 @@ class ReturnItem with _$ReturnItem {
         isMarketPlace: false,
       );
 
-  bool displayOutSidePolicy(bool allowReturnsOutsidePolicy) =>
-      outsidePolicy && allowReturnsOutsidePolicy;
-
   String get displayBatch => isMarketPlace ? 'NA' : batch;
 
   String get displayExpiryDate => isMarketPlace ? 'NA' : expiry.dateOrNaString;

@@ -271,7 +271,7 @@ void main() {
 
       final expandButton = find.descendant(
         of: itemCard,
-        matching: find.byKey(WidgetKeys.summaryExpandableSection),
+        matching: find.byKey(WidgetKeys.expandableSection),
       );
       final referenceList = find.descendant(
         of: itemCard,
@@ -412,7 +412,7 @@ void main() {
 
       final expandButton = find.descendant(
         of: itemCard,
-        matching: find.byKey(WidgetKeys.summaryExpandableSection),
+        matching: find.byKey(WidgetKeys.expandableSection),
       );
       final referenceList = find.descendant(
         of: itemCard,

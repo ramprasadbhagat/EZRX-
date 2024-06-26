@@ -1,4 +1,3 @@
-import 'package:ezrxmobile/domain/order/entities/material_item_bonus.dart';
 import 'package:ezrxmobile/domain/order/entities/submit_material_item_bonus.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -27,15 +26,6 @@ class SubmitMaterialItemBonusDto with _$SubmitMaterialItemBonusDto {
     return SubmitMaterialItemBonusDto(
       materialNumber: bonus.materialNumber.getOrDefaultValue(''),
       qty: bonus.qty.getOrCrash(),
-    );
-  }
-
-  factory SubmitMaterialItemBonusDto.fromOfferBonus(
-    MaterialItemBonus bonus,
-  ) {
-    return SubmitMaterialItemBonusDto(
-      materialNumber: bonus.materialNumber.getOrDefaultValue(''),
-      qty: bonus.qty,
     );
   }
 

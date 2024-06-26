@@ -24,7 +24,7 @@ class ReturnSummaryDetailsRequestInformationRemote {
     required this.remoteConfigService,
   });
 
-  Future<RequestInformation> getRequestInformation({
+  Future<RequestInformation> getReturnRequestInformation({
     required String returnRequestId,
     required String market,
   }) async {
@@ -44,26 +44,23 @@ class ReturnSummaryDetailsRequestInformationRemote {
         },
       ),
     );
-    _returnSummaryDetailsRequestInformationChecker(res: res);
+    dataSourceExceptionHandler.handleExceptionChecker(
+      res: res,
+      onCustomExceptionHandler: _returnSummaryDetailsRequestInformationChecker,
+    );
+
     final data = res.data['data']['requestInformationV2'];
 
     return RequestInformationDto.fromJson(data).toDomain();
   }
 
-  void _returnSummaryDetailsRequestInformationChecker({
-    required Response<dynamic> res,
-  }) {
+  void _returnSummaryDetailsRequestInformationChecker(
+    Response<dynamic> res,
+  ) {
     final data = res.data;
-    if (data['errors'] != null && data['errors'].isNotEmpty) {
-      throw ServerException(message: data['errors'][0]['message']);
-    } else if (res.statusCode != 200) {
-      throw ServerException(
-        code: res.statusCode ?? 0,
-        message: res.statusMessage ?? '',
-      );
-    } else if (data['data'] == null) {
-      throw ServerException(message: 'Some thing went wrong');
-    } else if (data['data']['requestInformationV2'] == null) {
+    if (data['data'] == null ||
+        data['data'].isEmpty ||
+        data['data']?['requestInformationV2'] == null) {
       throw ServerException(message: 'Some thing went wrong');
     }
   }

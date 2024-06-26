@@ -158,11 +158,14 @@ void main() {
     autoRouterMock = AutoRouteMock();
     mockCartItemWithAllType =
         (await CartLocalDataSource().getAddedToCartProductList()).cartProducts;
-    mockCartBundleItems = await CartLocalDataSource().upsertCartItems();
+    mockCartBundleItems = await CartLocalDataSource().upsertCart(
+      type: UpsertCartLocalType.upsertCartItems,
+    );
     mockCartItems = (await CartLocalDataSource().upsertCart());
-    fakeComboMaterialItems =
-        (await CartLocalDataSource().upsertCartItemsWithComboOffers())
-            .comboMaterialItemList;
+    fakeComboMaterialItems = (await CartLocalDataSource().upsertCart(
+      type: UpsertCartLocalType.upsertCartItemsComboOffer,
+    ))
+        .comboMaterialItemList;
     aplSimulatorOrder = await CartLocalDataSource().aplGetTotalPrice();
     config = locator<Config>();
   });
@@ -1584,7 +1587,7 @@ void main() {
               PriceAggregate.empty().copyWith(
                 materialInfo: MaterialInfo.empty().copyWith(
                   materialNumber: MaterialNumber('1234'),
-                  materialGroup4: MaterialGroup.four('6A1'),
+                  materialGroup4: MaterialGroup('6A1'),
                 ),
               ),
             ],
@@ -1600,7 +1603,7 @@ void main() {
               PriceAggregate.empty().copyWith(
                 materialInfo: MaterialInfo.empty().copyWith(
                   materialNumber: MaterialNumber('1234'),
-                  materialGroup4: MaterialGroup.four('6A1'),
+                  materialGroup4: MaterialGroup('6A1'),
                 ),
               ),
             ],
@@ -4647,8 +4650,7 @@ void main() {
           final mockItem = mockCartItems.first.copyWith(
             tenderContract: TenderContract.empty().copyWith(
               tenderOrderReason: TenderContractReason('730'),
-              contractNumber:
-                  TenderContractNumber.tenderContractNumber('fake-Number'),
+              contractNumber: TenderContractNumber('fake-Number'),
               tenderPrice: TenderPrice('11832000'),
               contractReference: StringValue('fake-Reference'),
               isTenderExpired: true,
@@ -4696,8 +4698,7 @@ void main() {
           final mockItem = mockCartItems.first.copyWith(
             tenderContract: TenderContract.empty().copyWith(
               tenderOrderReason: TenderContractReason('730'),
-              contractNumber:
-                  TenderContractNumber.tenderContractNumber('fake-Number'),
+              contractNumber: TenderContractNumber('fake-Number'),
               tenderPrice: TenderPrice('11832000'),
               contractReference: StringValue('fake-Reference'),
               remainingTenderQuantity: 1,

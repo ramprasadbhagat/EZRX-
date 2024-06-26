@@ -27,7 +27,8 @@ mixin _$BundleDto {
   @JsonKey(name: 'bundleInformation', defaultValue: <BundleInfoDto>[])
   List<BundleInfoDto> get bundleInformation =>
       throw _privateConstructorUsedError;
-  @JsonKey(name: 'materials', readValue: handleEmptyMaterialList)
+  @JsonKey(
+      name: 'materials', readValue: JsonReadValueHelper.handleEmptyMaterialList)
   List<MaterialDto> get materials => throw _privateConstructorUsedError;
   @JsonKey(name: 'conditions', defaultValue: '')
   String get conditions => throw _privateConstructorUsedError;
@@ -50,7 +51,9 @@ abstract class $BundleDtoCopyWith<$Res> {
       @JsonKey(name: 'bundleCode', defaultValue: '') String bundleCode,
       @JsonKey(name: 'bundleInformation', defaultValue: <BundleInfoDto>[])
       List<BundleInfoDto> bundleInformation,
-      @JsonKey(name: 'materials', readValue: handleEmptyMaterialList)
+      @JsonKey(
+          name: 'materials',
+          readValue: JsonReadValueHelper.handleEmptyMaterialList)
       List<MaterialDto> materials,
       @JsonKey(name: 'conditions', defaultValue: '') String conditions,
       @JsonKey(name: 'bonusEligible', defaultValue: false) bool bonusEligible});
@@ -118,7 +121,9 @@ abstract class _$$BundleDtoImplCopyWith<$Res>
       @JsonKey(name: 'bundleCode', defaultValue: '') String bundleCode,
       @JsonKey(name: 'bundleInformation', defaultValue: <BundleInfoDto>[])
       List<BundleInfoDto> bundleInformation,
-      @JsonKey(name: 'materials', readValue: handleEmptyMaterialList)
+      @JsonKey(
+          name: 'materials',
+          readValue: JsonReadValueHelper.handleEmptyMaterialList)
       List<MaterialDto> materials,
       @JsonKey(name: 'conditions', defaultValue: '') String conditions,
       @JsonKey(name: 'bonusEligible', defaultValue: false) bool bonusEligible});
@@ -179,7 +184,9 @@ class _$BundleDtoImpl extends _BundleDto {
       @JsonKey(name: 'bundleCode', defaultValue: '') required this.bundleCode,
       @JsonKey(name: 'bundleInformation', defaultValue: <BundleInfoDto>[])
       required final List<BundleInfoDto> bundleInformation,
-      @JsonKey(name: 'materials', readValue: handleEmptyMaterialList)
+      @JsonKey(
+          name: 'materials',
+          readValue: JsonReadValueHelper.handleEmptyMaterialList)
       required final List<MaterialDto> materials,
       @JsonKey(name: 'conditions', defaultValue: '') required this.conditions,
       @JsonKey(name: 'bonusEligible', defaultValue: false)
@@ -209,7 +216,8 @@ class _$BundleDtoImpl extends _BundleDto {
 
   final List<MaterialDto> _materials;
   @override
-  @JsonKey(name: 'materials', readValue: handleEmptyMaterialList)
+  @JsonKey(
+      name: 'materials', readValue: JsonReadValueHelper.handleEmptyMaterialList)
   List<MaterialDto> get materials {
     if (_materials is EqualUnmodifiableListView) return _materials;
     // ignore: implicit_dynamic_type
@@ -280,7 +288,9 @@ abstract class _BundleDto extends BundleDto {
       required final String bundleCode,
       @JsonKey(name: 'bundleInformation', defaultValue: <BundleInfoDto>[])
       required final List<BundleInfoDto> bundleInformation,
-      @JsonKey(name: 'materials', readValue: handleEmptyMaterialList)
+      @JsonKey(
+          name: 'materials',
+          readValue: JsonReadValueHelper.handleEmptyMaterialList)
       required final List<MaterialDto> materials,
       @JsonKey(name: 'conditions', defaultValue: '')
       required final String conditions,
@@ -301,7 +311,8 @@ abstract class _BundleDto extends BundleDto {
   @JsonKey(name: 'bundleInformation', defaultValue: <BundleInfoDto>[])
   List<BundleInfoDto> get bundleInformation;
   @override
-  @JsonKey(name: 'materials', readValue: handleEmptyMaterialList)
+  @JsonKey(
+      name: 'materials', readValue: JsonReadValueHelper.handleEmptyMaterialList)
   List<MaterialDto> get materials;
   @override
   @JsonKey(name: 'conditions', defaultValue: '')

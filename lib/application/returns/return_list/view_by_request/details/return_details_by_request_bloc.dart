@@ -1,13 +1,14 @@
 import 'package:dartz/dartz.dart';
+import 'package:ezrxmobile/domain/order/entities/order_history_details_po_documents.dart';
+import 'package:ezrxmobile/domain/order/repository/i_po_attachment_repository.dart';
+import 'package:ezrxmobile/domain/returns/repository/i_return_summary_details_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_requests_id.dart';
-import 'package:ezrxmobile/domain/returns/entities/return_request_attachment.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_request_information.dart';
 import 'package:ezrxmobile/domain/returns/repository/i_return_request_repository.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_request_information_header.dart';
-import 'package:ezrxmobile/domain/returns/repository/i_return_details_by_request_repository.dart';
 
 part 'return_details_by_request_event.dart';
 part 'return_details_by_request_state.dart';
@@ -15,12 +16,14 @@ part 'return_details_by_request_bloc.freezed.dart';
 
 class ReturnDetailsByRequestBloc
     extends Bloc<ReturnDetailsByRequestEvent, ReturnDetailsByRequestState> {
-  final IReturnDetailsByRequestRepository returnDetailsByRequestRepository;
+  final IReturnSummaryDetailsRepository returnRequestInformationRepository;
   final IReturnRequestRepository returnRequestRepository;
+  final IpoAttachmentRepository poAttachmentRepository;
 
   ReturnDetailsByRequestBloc({
-    required this.returnDetailsByRequestRepository,
+    required this.returnRequestInformationRepository,
     required this.returnRequestRepository,
+    required this.poAttachmentRepository,
   }) : super(ReturnDetailsByRequestState.initial()) {
     on<ReturnDetailsByRequestEvent>(_onEvent);
   }
@@ -40,8 +43,7 @@ class ReturnDetailsByRequestBloc
         );
 
         final returnInformationFailureOrSuccess =
-            await returnDetailsByRequestRepository
-                .getReturnSummaryDetailsByRequest(
+            await returnRequestInformationRepository.getReturnInformation(
           returnRequestId: ReturnRequestsId(requestId: e.returnId),
         );
         await returnInformationFailureOrSuccess.fold(
@@ -70,12 +72,12 @@ class ReturnDetailsByRequestBloc
         emit(
           state.copyWith(
             downloadFailureOrSuccessOption: none(),
-            downloadedAttachment: ReturnRequestAttachment.empty(),
+            downloadedAttachment: PoDocuments.empty(),
             downloadingAttachments: [...state.downloadingAttachments, e.file],
           ),
         );
         final failureOrSuccessPermission =
-            await returnRequestRepository.getDownloadPermission();
+            await poAttachmentRepository.downloadPermission();
         await failureOrSuccessPermission.fold(
           (_) async => emit(
             state.copyWith(
@@ -87,8 +89,8 @@ class ReturnDetailsByRequestBloc
             ),
           ),
           (success) async {
-            final failureOrSuccess = await returnRequestRepository.downloadFile(
-              file: e.file,
+            final failureOrSuccess = await poAttachmentRepository.downloadFiles(
+              files: [e.file],
             );
 
             emit(

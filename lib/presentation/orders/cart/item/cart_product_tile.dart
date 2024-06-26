@@ -20,6 +20,7 @@ import 'package:ezrxmobile/presentation/orders/cart/item/cart_product_tile_widge
 import 'package:ezrxmobile/presentation/orders/cart/override/request_counter_offer_bottom_sheet.dart';
 import 'package:ezrxmobile/presentation/core/item_tax.dart';
 import 'package:ezrxmobile/presentation/core/pre_order_label.dart';
+import 'package:ezrxmobile/presentation/orders/create_order/cart_item_quantity_input.dart';
 import 'package:ezrxmobile/presentation/products/widgets/offer_label.dart';
 import 'package:ezrxmobile/presentation/products/widgets/stock_info.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
@@ -28,13 +29,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 
-import 'package:ezrxmobile/presentation/orders/create_order/cart_item_quantity_input.dart';
 
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 
 import 'package:ezrxmobile/presentation/orders/cart/bonus/bonus_items_sheet.dart';
 
 part 'package:ezrxmobile/presentation/orders/cart/item/cart_product_tile_widgets/invalid_material_message.dart';
+
+part 'package:ezrxmobile/presentation/orders/cart/item/cart_product_tile_widgets/cart_material_item_quantity_section.dart';
 
 class CartProductTile extends StatelessWidget {
   final PriceAggregate cartItem;
@@ -342,7 +344,7 @@ class _MaterialDetails extends StatelessWidget {
           GovtListPriceComponent(
             price: cartItem.display(PriceType.listPrice),
           ),
-          _MaterialQuantitySection(
+          CartMaterialItemQuantitySection(
             cartItem: cartItem,
             isInvalidCartItem: isInvalidCartItem,
           ),
@@ -362,135 +364,6 @@ class _MaterialDetails extends StatelessWidget {
                       .toString(),
                 },
               ),
-            ),
-        ],
-      ),
-    );
-  }
-}
-
-class _MaterialQuantitySection extends StatefulWidget {
-  final PriceAggregate cartItem;
-  final bool isInvalidCartItem;
-
-  const _MaterialQuantitySection({
-    required this.cartItem,
-    required this.isInvalidCartItem,
-  });
-
-  @override
-  State<_MaterialQuantitySection> createState() =>
-      _MaterialQuantitySectionState();
-}
-
-class _MaterialQuantitySectionState extends State<_MaterialQuantitySection> {
-  final _controller = TextEditingController();
-
-  String get _qty => widget.cartItem.quantity.toString();
-  Timer? _timer;
-  final FocusNode _focusNode = FocusNode();
-
-  @override
-  void initState() {
-    _controller.value = TextEditingValue(
-      text: _qty,
-      selection: TextSelection.collapsed(
-        offset: _controller.selection.base.offset,
-      ),
-    );
-    _focusNode.addListener(_onFocusChange);
-    super.initState();
-  }
-
-  void _onFocusChange() {
-    if (_focusNode.hasFocus) return;
-    _timer?.cancel();
-    context.read<CartBloc>().add(
-          CartEvent.upsertCart(
-            priceAggregate: widget.cartItem.copyWith(
-              quantity: int.tryParse(_controller.text) ?? 1,
-            ),
-          ),
-        );
-  }
-
-  @override
-  void didUpdateWidget(covariant _MaterialQuantitySection oldWidget) {
-    super.didUpdateWidget(oldWidget);
-    if (_qty != _controller.text) {
-      _controller.text = _qty;
-      _controller.selection = TextSelection.collapsed(
-        offset: widget.cartItem.quantity.toString().length,
-      );
-    }
-  }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    _focusNode.dispose();
-    _timer?.cancel();
-    super.dispose();
-  }
-
-  void _onTextChanged(int quantity) {
-    _timer?.cancel();
-    _timer = Timer(
-      Duration(
-        milliseconds: locator<Config>().autoSearchTimeout,
-      ),
-      () => context.read<CartBloc>().add(
-            CartEvent.upsertCart(
-              priceAggregate: widget.cartItem.copyWith(
-                quantity: quantity,
-              ),
-            ),
-          ),
-    );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(top: 4),
-      child: Column(
-        children: [
-          Focus(
-            focusNode: _focusNode,
-            child: CartItemQuantityInput(
-              height: 48,
-              isEnabled: !widget.isInvalidCartItem,
-              quantityAddKey: WidgetKeys.increaseQuantityKey,
-              quantityDeleteKey: WidgetKeys.decreaseQuantityKey,
-              quantityTextKey: WidgetKeys.quantityInputTextKey,
-              controller: _controller,
-              onFieldChange: (value) => _onTextChanged(value),
-              minusPressed: (k) {
-                context.read<CartBloc>().add(
-                      CartEvent.upsertCart(
-                        priceAggregate: widget.cartItem.copyWith(
-                          quantity: k,
-                        ),
-                      ),
-                    );
-              },
-              addPressed: (k) {
-                context.read<CartBloc>().add(
-                      CartEvent.upsertCart(
-                        priceAggregate: widget.cartItem.copyWith(
-                          quantity: k,
-                        ),
-                      ),
-                    );
-              },
-              onSubmit: (value) {},
-              isLoading: context.read<CartBloc>().state.isUpserting &&
-                  !widget.isInvalidCartItem,
-            ),
-          ),
-          if (!context.read<CartBloc>().state.priceUnderLoadingShimmer)
-            _InvalidMaterialMessage(
-              cartItem: widget.cartItem,
             ),
         ],
       ),

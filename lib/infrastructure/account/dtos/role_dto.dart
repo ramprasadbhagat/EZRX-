@@ -1,4 +1,5 @@
 import 'package:ezrxmobile/domain/account/entities/role.dart';
+import 'package:ezrxmobile/infrastructure/core/common/json_key_readvalue_helper.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'role_dto.freezed.dart';
@@ -9,7 +10,8 @@ class RoleDto with _$RoleDto {
   const RoleDto._();
 
   const factory RoleDto({
-    @JsonKey(name: 'id', readValue: _convertRoleId) required String id,
+    @JsonKey(name: 'id', readValue: JsonReadValueHelper.convertRoleId)
+    required String id,
     @JsonKey(name: 'name', defaultValue: '') required String name,
     @JsonKey(name: 'type', defaultValue: '') required String type,
     @JsonKey(name: 'description', defaultValue: '') required String description,
@@ -33,6 +35,3 @@ class RoleDto with _$RoleDto {
   factory RoleDto.fromJson(Map<String, dynamic> json) =>
       _$RoleDtoFromJson(json);
 }
-
-// Need toString() here because in User object received from login API, the roleId is int, not String
-String _convertRoleId(Map json, String key) => (json[key] ?? '').toString();

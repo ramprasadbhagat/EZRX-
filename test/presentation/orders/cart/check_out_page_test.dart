@@ -131,13 +131,13 @@ void main() {
 
   final fakeTenderContract = TenderContract.empty().copyWith(
     tenderOrderReason: TenderContractReason('730'),
-    contractNumber: TenderContractNumber.tenderContractNumber('fake-Number'),
+    contractNumber: TenderContractNumber('fake-Number'),
     tenderPrice: TenderPrice('11832000'),
     tenderUnitPrice: TenderPrice('118320'),
     pricingUnit: 100,
     contractReference: StringValue('fake-Reference'),
     salesDistrict: StringValue('fake-SalesDistrict'),
-    announcementLetterNumber: TenderContractNumber.announcementLetterNumber(
+    announcementLetterNumber: TenderContractNumber(
       'fake-AnnouncementLetterNo',
     ),
     remainingTenderQuantity: 10,
@@ -148,7 +148,9 @@ void main() {
     locator.registerSingleton<MixpanelService>(MixpanelServiceMock());
 
     autoRouterMock = locator<AutoRouteMock>();
-    mockCartBundleItems = await CartLocalDataSource().upsertCartItems();
+    mockCartBundleItems = await CartLocalDataSource().upsertCart(
+      type: UpsertCartLocalType.upsertCartItems,
+    );
     mockCartItems =
         (await CartLocalDataSource().getAddedToCartProductList()).cartProducts;
     aplSimulatorOrder = await CartLocalDataSource().aplSimulateOrder();

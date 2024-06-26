@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/presentation/core/expandable_section.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -24,9 +25,7 @@ import 'package:ezrxmobile/presentation/payments/extension.dart';
 import 'package:ezrxmobile/presentation/payments/widgets/new_payment_button.dart';
 import 'package:ezrxmobile/presentation/payments/widgets/payment_module.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
-import 'package:ezrxmobile/presentation/theme/colors.dart';
 
-part 'package:ezrxmobile/presentation/payments/full_summary/widgets/expandable_section.dart';
 part 'package:ezrxmobile/presentation/payments/full_summary/widgets/invoice_credit_item.dart';
 
 class FullSummaryPage extends StatefulWidget {

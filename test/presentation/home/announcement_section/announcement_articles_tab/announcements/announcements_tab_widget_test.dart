@@ -266,7 +266,7 @@ void main() {
               find.byKey(Key(announcementInfo.announcementList.first.id));
           expect(itemKey, findsOneWidget);
           final scrollToTopArrowIcon =
-              find.byKey(WidgetKeys.scrollToTopArrowIcon);
+              find.byKey(WidgetKeys.scrollToTopFloatingButton);
           expect(scrollToTopArrowIcon, findsNothing);
         },
       );
@@ -289,7 +289,7 @@ void main() {
               find.byKey(Key(announcementInfo.announcementList.first.id));
           expect(itemKey, findsOneWidget);
           final scrollToTopArrowIcon =
-              find.byKey(WidgetKeys.scrollToTopArrowIcon);
+              find.byKey(WidgetKeys.scrollToTopFloatingButton);
           expect(scrollToTopArrowIcon, findsNothing);
 
           await tester.dragUntilVisible(
@@ -328,7 +328,7 @@ void main() {
               find.byKey(Key(announcementInfo.announcementList.first.id));
           expect(itemKey, findsOneWidget);
           final scrollToTopArrowIcon =
-              find.byKey(WidgetKeys.scrollToTopArrowIcon);
+              find.byKey(WidgetKeys.scrollToTopFloatingButton);
           expect(scrollToTopArrowIcon, findsNothing);
           final scrollWidget = find.byWidgetPredicate((w) => w is ScrollList);
           expect(scrollWidget, findsOneWidget);
@@ -378,7 +378,7 @@ void main() {
               find.byKey(Key(announcementInfo.announcementList.first.id));
           expect(itemKey, findsOneWidget);
           final scrollToTopArrowIcon =
-              find.byKey(WidgetKeys.scrollToTopArrowIcon);
+              find.byKey(WidgetKeys.scrollToTopFloatingButton);
           expect(scrollToTopArrowIcon, findsNothing);
           final itemKey2 =
               find.byKey(Key(announcementInfo.announcementList[3].id));
@@ -424,7 +424,7 @@ void main() {
           await tester.pumpAndSettle();
           expect(itemKey, findsOneWidget);
           final scrollToTopArrowIcon =
-              find.byKey(WidgetKeys.scrollToTopArrowIcon);
+              find.byKey(WidgetKeys.scrollToTopFloatingButton);
           expect(scrollToTopArrowIcon, findsOneWidget);
           await tester.tap(itemKey);
           verify(

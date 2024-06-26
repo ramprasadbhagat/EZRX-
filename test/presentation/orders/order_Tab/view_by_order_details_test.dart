@@ -2777,10 +2777,8 @@ void main() {
 
     testWidgets('Display tender information when collapsed', (tester) async {
       final fakeTenderOrderReason = TenderContractReason('730');
-      final fakeTenderContractNumber =
-          TenderContractNumber.tenderContractNumber('0040026522');
-      final fakeTenderContractReference =
-          TenderContractNumber.tenderContractReference('HCM-01234');
+      final fakeTenderContractNumber = TenderContractNumber('0040026522');
+      final fakeTenderContractReference = TenderContractNumber('HCM-01234');
       final fakeTenderPrice = TenderPrice('11832000');
 
       when(() => viewByOrderDetailsBlocMock.state).thenReturn(
@@ -2852,10 +2850,8 @@ void main() {
         'Do not display tender information when Tender Order Reason is empty',
         (tester) async {
       final fakeTenderOrderReason = TenderContractReason('');
-      final fakeTenderContractNumber =
-          TenderContractNumber.tenderContractNumber('');
-      final fakeTenderContractReference =
-          TenderContractNumber.tenderContractReference('');
+      final fakeTenderContractNumber = TenderContractNumber('');
+      final fakeTenderContractReference = TenderContractNumber('');
       final fakeTenderPrice = TenderPrice('');
 
       when(() => viewByOrderDetailsBlocMock.state).thenReturn(

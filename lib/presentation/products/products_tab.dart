@@ -9,14 +9,11 @@ import 'package:ezrxmobile/infrastructure/core/common/clevertap_helper.dart';
 import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
 import 'package:ezrxmobile/infrastructure/core/common/tracking_events.dart';
 import 'package:ezrxmobile/infrastructure/core/common/tracking_properties.dart';
+import 'package:ezrxmobile/presentation/core/bundle_grid_item.dart';
 import 'package:ezrxmobile/presentation/core/custom_app_bar.dart';
-import 'package:ezrxmobile/presentation/core/custom_card.dart';
 import 'package:ezrxmobile/presentation/core/license_expired_banner.dart';
-import 'package:ezrxmobile/presentation/core/market_place/market_place_logo.dart';
 import 'package:ezrxmobile/presentation/core/no_record.dart';
-import 'package:ezrxmobile/presentation/core/product_image.dart';
 import 'package:ezrxmobile/presentation/core/scrollable_grid_view.dart';
-import 'package:ezrxmobile/presentation/core/product_tag.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/home/selector/customer_code_selector.dart';
 import 'package:ezrxmobile/presentation/home/widgets/product_loading_shimmer.dart';
@@ -32,7 +29,6 @@ import 'package:ezrxmobile/presentation/utils/router_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-part 'package:ezrxmobile/presentation/products/widgets/bundle_grid_item.dart';
 
 class ProductsTab extends StatelessWidget {
   const ProductsTab({super.key});
@@ -126,7 +122,7 @@ class ProductsTab extends StatelessWidget {
                                           onFavouriteTap: () =>
                                               onFavouriteTap(context, item),
                                         )
-                                      : _BundleGridItem(materialInfo: item),
+                                      : BundleGridItem(materialInfo: item),
                             ),
                           ),
                   ),

@@ -1,9 +1,7 @@
 import 'dart:convert';
 
-import 'package:dio/dio.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/bank_beneficiary.dart';
-import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/bank_beneficiary_query_mutation.dart';
 import 'package:ezrxmobile/infrastructure/account/dtos/bank_beneficiary_dto.dart';
@@ -40,22 +38,11 @@ class BankBeneficiaryRemoteDataSource {
           },
         ),
       );
-      _bankBeneficiaryExceptionChecker(res: res);
+      dataSourceExceptionHandler.handleExceptionChecker(res: res);
 
       return List.from(res.data['data']['bankBeneficiary'])
           .map((e) => BankBeneficiaryDto.fromJson(e).toDomain())
           .toList();
     });
-  }
-
-  void _bankBeneficiaryExceptionChecker({required Response<dynamic> res}) {
-    if (dataSourceExceptionHandler.isServerResponseError(res: res)) {
-      throw ServerException(message: res.data['errors'][0]['message']);
-    } else if (res.statusCode != 200) {
-      throw ServerException(
-        code: res.statusCode ?? 0,
-        message: res.statusMessage ?? '',
-      );
-    }
   }
 }

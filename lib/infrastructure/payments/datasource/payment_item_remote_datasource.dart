@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:dio/dio.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_item.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_summary_details.dart';
@@ -9,6 +8,7 @@ import 'package:ezrxmobile/infrastructure/payments/datasource/payment_item_query
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
+import 'package:ezrxmobile/infrastructure/payments/datasource/payment_summary_query.dart';
 import 'package:ezrxmobile/infrastructure/payments/dtos/payment_item_dto.dart';
 import 'package:ezrxmobile/infrastructure/payments/dtos/payment_summary_details_dto.dart';
 import 'package:ezrxmobile/infrastructure/payments/dtos/transaction_detail_dto.dart';
@@ -16,6 +16,7 @@ import 'package:ezrxmobile/infrastructure/payments/dtos/transaction_detail_dto.d
 class PaymentItemRemoteDataSource {
   HttpService httpService;
   PaymentItemQuery paymentItemQuery;
+  PaymentSummaryQuery paymentSummaryQuery;
   DataSourceExceptionHandler dataSourceExceptionHandler;
   Config config;
 
@@ -24,6 +25,7 @@ class PaymentItemRemoteDataSource {
     required this.dataSourceExceptionHandler,
     required this.httpService,
     required this.paymentItemQuery,
+    required this.paymentSummaryQuery,
   });
 
   Future<List<PaymentItem>> getPaymentItemList({
@@ -55,7 +57,9 @@ class PaymentItemRemoteDataSource {
         },
       ),
     );
-    _exceptionChecker(response: res);
+    dataSourceExceptionHandler.handleExceptionChecker(
+      res: res,
+    );
     final data = res.data['data']['paymentItems'];
 
     return List.from(data)
@@ -69,7 +73,7 @@ class PaymentItemRemoteDataSource {
     required Map<String, dynamic> filterBy,
     required bool isMarketPlace,
   }) async {
-    final queryData = paymentItemQuery.getPaymentSummaryQuery();
+    final queryData = paymentSummaryQuery.getPaymentSummaryQuery();
 
     final request = {
       'customerCode': customerCode,
@@ -90,7 +94,9 @@ class PaymentItemRemoteDataSource {
         },
       ),
     );
-    _exceptionChecker(response: res);
+    dataSourceExceptionHandler.handleExceptionChecker(
+      res: res,
+    );
     final data = res.data['data']['customerPayment']['customerPaymentResponse'];
     if (data == null || data.isEmpty) return PaymentSummaryDetails.empty();
 
@@ -134,7 +140,9 @@ class PaymentItemRemoteDataSource {
         },
       ),
     );
-    _exceptionChecker(response: res);
+    dataSourceExceptionHandler.handleExceptionChecker(
+      res: res,
+    );
     final data = res.data['data']['deleteCustomerPayment'];
 
     if (data != null) {
@@ -170,7 +178,9 @@ class PaymentItemRemoteDataSource {
         },
       ),
     );
-    _exceptionChecker(response: res);
+    dataSourceExceptionHandler.handleExceptionChecker(
+      res: res,
+    );
     final data = res.data['data']['getTransaction'];
     if (data == null || data.isEmpty) return PaymentSummaryDetails.empty();
 
@@ -199,26 +209,11 @@ class PaymentItemRemoteDataSource {
         },
       ),
     );
-    _exceptionChecker(response: res, property: 'cancelVirtualAccount');
-
+    dataSourceExceptionHandler.handleExceptionChecker(
+      res: res,
+      property: 'cancelVirtualAccount',
+    );
+    
     return res.data['data']['cancelVirtualAccount']['id']?.toString() ?? '';
-  }
-
-  void _exceptionChecker({
-    required Response<dynamic> response,
-    String? property,
-  }) {
-    final data = response.data;
-    if (data['errors'] != null && data['errors'].isNotEmpty) {
-      throw ServerException(message: data['errors'][0]['message']);
-    } else if (response.statusCode != 200) {
-      throw ServerException(
-        code: response.statusCode ?? 0,
-        message: response.statusMessage ?? '',
-      );
-    } else if (data['data'] == null ||
-        (property != null && data['data'][property] == null)) {
-      throw ServerException(message: 'Some thing went wrong');
-    }
   }
 }

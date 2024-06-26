@@ -1,4 +1,5 @@
 import 'package:ezrxmobile/domain/returns/entities/approver_rights.dart';
+import 'package:ezrxmobile/infrastructure/core/common/json_key_readvalue_helper.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import 'package:ezrxmobile/infrastructure/returns/dtos/approver_rights_details_dto.dart';
@@ -13,10 +14,14 @@ class ApproverRightsDto with _$ApproverRightsDto {
   const ApproverRightsDto._();
 
   const factory ApproverRightsDto({
-    @JsonKey(name: 'rawMetaData', defaultValue: <String>[], readValue: rawMetaDataOverride)
-        required List<String> usernames,
+    @JsonKey(
+      name: 'rawMetaData',
+      defaultValue: <String>[],
+      readValue: JsonReadValueHelper.readRawMetaDataOverride,
+    )
+    required List<String> usernames,
     @JsonKey(name: 'approverRights', defaultValue: <ApproverRightsDetailsDto>[])
-        required List<ApproverRightsDetailsDto> approverRights,
+    required List<ApproverRightsDetailsDto> approverRights,
   }) = _AddReturnApprovalLimitDto;
 
   ApproverRights toDomain() {
@@ -29,6 +34,3 @@ class ApproverRightsDto with _$ApproverRightsDto {
   factory ApproverRightsDto.fromJson(Map<String, dynamic> json) =>
       _$ApproverRightsDtoFromJson(json);
 }
-
-List<dynamic> rawMetaDataOverride(Map json, String key) =>
-    json[key]['usernames'] ?? [];

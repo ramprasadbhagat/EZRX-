@@ -71,7 +71,7 @@ void main() {
   final bundleAddToCartSheetSubmitButton =
       find.byKey(WidgetKeys.bundleAddToCartSheetSubmitButton);
   final materialDetailsFloatingButton =
-      find.byKey(WidgetKeys.materialDetailsFloatingButton);
+      find.byKey(WidgetKeys.scrollToTopFloatingButton);
 
   /////////////////////////////////////////////////////////////////////////////
 

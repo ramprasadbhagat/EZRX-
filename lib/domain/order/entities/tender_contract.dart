@@ -30,11 +30,11 @@ class TenderContract with _$TenderContract {
   }) = _TenderContract;
 
   factory TenderContract.empty() => TenderContract(
-        contractNumber: TenderContractNumber.tenderContractNumber(''),
-        contractItemNumber: TenderContractNumber.tenderContractItemNumber(''),
+        contractNumber: TenderContractNumber(''),
+        contractItemNumber: TenderContractNumber(''),
         contractReference: StringValue(''),
         tenderOrderReason: TenderContractReason(''),
-        tenderVisaNumber: TenderContractNumber.tenderVisaNumber(''),
+        tenderVisaNumber: TenderContractNumber(''),
         salesDistrict: StringValue(''),
         tenderPackageDescription: StringValue(''),
         tenderPrice: TenderPrice('0'),
@@ -42,8 +42,7 @@ class TenderContract with _$TenderContract {
         remainingTenderQuantity: 0,
         contractQuantity: 0,
         contractExpiryDate: DateTimeStringValue(''),
-        announcementLetterNumber:
-            TenderContractNumber.announcementLetterNumber(''),
+        announcementLetterNumber: TenderContractNumber(''),
         isNearToExpire: false,
         isTenderExpired: false,
         contractPaymentTerm: StringValue(''),
@@ -51,7 +50,7 @@ class TenderContract with _$TenderContract {
       );
 
   factory TenderContract.noContract() => TenderContract.empty().copyWith(
-        contractNumber: TenderContractNumber.tenderContractNumber(
+        contractNumber: TenderContractNumber(
           'No contract (Price remains same)',
         ),
       );

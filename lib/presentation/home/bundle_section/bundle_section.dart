@@ -1,27 +1,16 @@
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
-import 'package:ezrxmobile/infrastructure/core/common/clevertap_helper.dart';
-import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
-import 'package:ezrxmobile/infrastructure/core/common/tracking_events.dart';
-import 'package:ezrxmobile/infrastructure/core/common/tracking_properties.dart';
-import 'package:ezrxmobile/presentation/core/market_place/market_place_logo.dart';
-import 'package:ezrxmobile/presentation/utils/router_utils.dart';
+import 'package:ezrxmobile/presentation/core/bundle_grid_item.dart';
 import 'package:flutter/material.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:easy_localization/easy_localization.dart';
-import 'package:ezrxmobile/presentation/theme/colors.dart';
-import 'package:ezrxmobile/presentation/core/responsive.dart';
-import 'package:ezrxmobile/presentation/core/custom_card.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/core/section_tile.dart';
-import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/material_filter.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
-import 'package:ezrxmobile/presentation/core/product_tag.dart';
 
 class BundleSection extends StatelessWidget {
   const BundleSection({
@@ -103,8 +92,9 @@ class BundleSection extends StatelessWidget {
                                 scrollDirection: Axis.horizontal,
                                 children: state.materialList
                                     .map(
-                                      (e) => _BundleSectionItem(
+                                      (e) => BundleGridItem(
                                         materialInfo: e,
+                                        isHomeTab: true,
                                       ),
                                     )
                                     .toList(),
@@ -128,145 +118,5 @@ class BundleSection extends StatelessWidget {
           ),
         );
     context.navigateTo(const ProductsTabRoute());
-  }
-}
-
-class _BundleSectionItem extends StatelessWidget {
-  const _BundleSectionItem({required this.materialInfo});
-  final MaterialInfo materialInfo;
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () => _bundleOnTap(context, materialInfo),
-      child: CustomCard(
-        margin: const EdgeInsets.all(8),
-        width: Responsive.isMobile(context)
-            ? MediaQuery.of(context).size.width * 0.85
-            : MediaQuery.of(context).size.width * 0.4,
-        child: Column(
-          key: WidgetKeys.bundlesListItem,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            ColoredBox(
-              color: ZPColors.blueTagColor,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  ProductTag.bundleOffer(),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 15.0,
-                      vertical: 10.0,
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          children: [
-                            if (materialInfo.isMarketPlace) ...[
-                              MarketPlaceLogo.small(),
-                              const SizedBox(width: 4),
-                            ],
-                            Text(
-                              materialInfo.bundle.bundleCode,
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodySmall
-                                  ?.copyWith(color: ZPColors.neutralsGrey1),
-                              key: WidgetKeys.bundlesNumber,
-                            ),
-                          ],
-                        ),
-                        Text(
-                          materialInfo.bundle.bundleName.getOrDefaultValue(''),
-                          style: Theme.of(context).textTheme.labelSmall,
-                          key: WidgetKeys.bundlesDescription,
-                        ),
-                        Text(
-                          (materialInfo.manufacturerPrefix.isNotEmpty
-                                  ? '${context.tr(materialInfo.manufacturerPrefix)}: '
-                                  : '') +
-                              materialInfo.getManufactured,
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                          style:
-                              Theme.of(context).textTheme.bodySmall?.copyWith(
-                                    color: ZPColors.neutralsGrey1,
-                                  ),
-                          key: WidgetKeys.bundlesManufactured,
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            const SizedBox(height: 10),
-            ...materialInfo.listingVisibleMaterial.take(2).map(
-              (e) {
-                return Padding(
-                  padding: const EdgeInsets.only(
-                    left: 20,
-                    top: 5,
-                  ),
-                  child: Text(
-                    '\u2022  ${e.materialDescription.getOrDefaultValue('')}',
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                );
-              },
-            ),
-            materialInfo.listingVisibleMaterial.length > 2
-                ? Padding(
-                    padding: const EdgeInsets.only(
-                      left: 30,
-                      top: 5,
-                      bottom: 10,
-                    ),
-                    child: Text(
-                      '+ ${materialInfo.data.skip(2).length} ${context.tr('materials')}',
-                      key: WidgetKeys.bundleMaterialCount(
-                        materialInfo.bundle.bundleCode,
-                      ),
-                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                            color: ZPColors.darkerGrey,
-                          ),
-                    ),
-                  )
-                : const SizedBox.shrink(),
-          ],
-        ),
-      ),
-    );
-  }
-
-  void _bundleOnTap(BuildContext context, MaterialInfo materialInfo) {
-    trackMixpanelEvent(
-      TrackingEvents.productItemClicked,
-      props: {
-        TrackingProps.clickAt:
-            RouterUtils.buildRouteTrackingName(context.router.currentPath),
-        TrackingProps.isBundle: true,
-        TrackingProps.productName: materialInfo.defaultMaterialDescription,
-        TrackingProps.productNumber: materialInfo.materialNumber.displayMatNo,
-        TrackingProps.productManufacturer: materialInfo.getManufactured,
-        TrackingProps.section: 'Bundles',
-      },
-    );
-    trackClevertapEvent(
-      TrackingEvents.productItemClicked,
-      props: {
-        TrackingProps.clickAt:
-            RouterUtils.buildRouteTrackingName(context.router.currentPath),
-        TrackingProps.isBundle: true,
-        TrackingProps.productName: materialInfo.defaultMaterialDescription,
-        TrackingProps.productNumber: materialInfo.materialNumber.displayMatNo,
-        TrackingProps.productManufacturer: materialInfo.getManufactured,
-      },
-    );
-
-    context.router.push(BundleDetailPageRoute(materialInfo: materialInfo));
   }
 }

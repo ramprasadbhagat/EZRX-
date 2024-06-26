@@ -22,8 +22,8 @@ mixin _$ReturnRequestAttachmentEvent {
     required TResult Function(String assignmentNumber, String returnUuid,
             UploadOptionType uploadOptionType, User user)
         uploadFile,
-    required TResult Function(ReturnRequestAttachment file) deleteFile,
-    required TResult Function(ReturnRequestAttachment file) downloadFile,
+    required TResult Function(PoDocuments file) deleteFile,
+    required TResult Function(PoDocuments file) downloadFile,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -32,8 +32,8 @@ mixin _$ReturnRequestAttachmentEvent {
     TResult? Function(String assignmentNumber, String returnUuid,
             UploadOptionType uploadOptionType, User user)?
         uploadFile,
-    TResult? Function(ReturnRequestAttachment file)? deleteFile,
-    TResult? Function(ReturnRequestAttachment file)? downloadFile,
+    TResult? Function(PoDocuments file)? deleteFile,
+    TResult? Function(PoDocuments file)? downloadFile,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -42,8 +42,8 @@ mixin _$ReturnRequestAttachmentEvent {
     TResult Function(String assignmentNumber, String returnUuid,
             UploadOptionType uploadOptionType, User user)?
         uploadFile,
-    TResult Function(ReturnRequestAttachment file)? deleteFile,
-    TResult Function(ReturnRequestAttachment file)? downloadFile,
+    TResult Function(PoDocuments file)? deleteFile,
+    TResult Function(PoDocuments file)? downloadFile,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -137,8 +137,8 @@ class _$InitializedImpl implements _Initialized {
     required TResult Function(String assignmentNumber, String returnUuid,
             UploadOptionType uploadOptionType, User user)
         uploadFile,
-    required TResult Function(ReturnRequestAttachment file) deleteFile,
-    required TResult Function(ReturnRequestAttachment file) downloadFile,
+    required TResult Function(PoDocuments file) deleteFile,
+    required TResult Function(PoDocuments file) downloadFile,
   }) {
     return initialized();
   }
@@ -150,8 +150,8 @@ class _$InitializedImpl implements _Initialized {
     TResult? Function(String assignmentNumber, String returnUuid,
             UploadOptionType uploadOptionType, User user)?
         uploadFile,
-    TResult? Function(ReturnRequestAttachment file)? deleteFile,
-    TResult? Function(ReturnRequestAttachment file)? downloadFile,
+    TResult? Function(PoDocuments file)? deleteFile,
+    TResult? Function(PoDocuments file)? downloadFile,
   }) {
     return initialized?.call();
   }
@@ -163,8 +163,8 @@ class _$InitializedImpl implements _Initialized {
     TResult Function(String assignmentNumber, String returnUuid,
             UploadOptionType uploadOptionType, User user)?
         uploadFile,
-    TResult Function(ReturnRequestAttachment file)? deleteFile,
-    TResult Function(ReturnRequestAttachment file)? downloadFile,
+    TResult Function(PoDocuments file)? deleteFile,
+    TResult Function(PoDocuments file)? downloadFile,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -329,8 +329,8 @@ class _$UpLoadFileImpl implements _UpLoadFile {
     required TResult Function(String assignmentNumber, String returnUuid,
             UploadOptionType uploadOptionType, User user)
         uploadFile,
-    required TResult Function(ReturnRequestAttachment file) deleteFile,
-    required TResult Function(ReturnRequestAttachment file) downloadFile,
+    required TResult Function(PoDocuments file) deleteFile,
+    required TResult Function(PoDocuments file) downloadFile,
   }) {
     return uploadFile(assignmentNumber, returnUuid, uploadOptionType, user);
   }
@@ -342,8 +342,8 @@ class _$UpLoadFileImpl implements _UpLoadFile {
     TResult? Function(String assignmentNumber, String returnUuid,
             UploadOptionType uploadOptionType, User user)?
         uploadFile,
-    TResult? Function(ReturnRequestAttachment file)? deleteFile,
-    TResult? Function(ReturnRequestAttachment file)? downloadFile,
+    TResult? Function(PoDocuments file)? deleteFile,
+    TResult? Function(PoDocuments file)? downloadFile,
   }) {
     return uploadFile?.call(
         assignmentNumber, returnUuid, uploadOptionType, user);
@@ -356,8 +356,8 @@ class _$UpLoadFileImpl implements _UpLoadFile {
     TResult Function(String assignmentNumber, String returnUuid,
             UploadOptionType uploadOptionType, User user)?
         uploadFile,
-    TResult Function(ReturnRequestAttachment file)? deleteFile,
-    TResult Function(ReturnRequestAttachment file)? downloadFile,
+    TResult Function(PoDocuments file)? deleteFile,
+    TResult Function(PoDocuments file)? downloadFile,
     required TResult orElse(),
   }) {
     if (uploadFile != null) {
@@ -426,9 +426,9 @@ abstract class _$$DeleteFileImplCopyWith<$Res> {
           _$DeleteFileImpl value, $Res Function(_$DeleteFileImpl) then) =
       __$$DeleteFileImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({ReturnRequestAttachment file});
+  $Res call({PoDocuments file});
 
-  $ReturnRequestAttachmentCopyWith<$Res> get file;
+  $PoDocumentsCopyWith<$Res> get file;
 }
 
 /// @nodoc
@@ -448,14 +448,14 @@ class __$$DeleteFileImplCopyWithImpl<$Res>
       file: null == file
           ? _value.file
           : file // ignore: cast_nullable_to_non_nullable
-              as ReturnRequestAttachment,
+              as PoDocuments,
     ));
   }
 
   @override
   @pragma('vm:prefer-inline')
-  $ReturnRequestAttachmentCopyWith<$Res> get file {
-    return $ReturnRequestAttachmentCopyWith<$Res>(_value.file, (value) {
+  $PoDocumentsCopyWith<$Res> get file {
+    return $PoDocumentsCopyWith<$Res>(_value.file, (value) {
       return _then(_value.copyWith(file: value));
     });
   }
@@ -467,7 +467,7 @@ class _$DeleteFileImpl implements _DeleteFile {
   const _$DeleteFileImpl({required this.file});
 
   @override
-  final ReturnRequestAttachment file;
+  final PoDocuments file;
 
   @override
   String toString() {
@@ -498,8 +498,8 @@ class _$DeleteFileImpl implements _DeleteFile {
     required TResult Function(String assignmentNumber, String returnUuid,
             UploadOptionType uploadOptionType, User user)
         uploadFile,
-    required TResult Function(ReturnRequestAttachment file) deleteFile,
-    required TResult Function(ReturnRequestAttachment file) downloadFile,
+    required TResult Function(PoDocuments file) deleteFile,
+    required TResult Function(PoDocuments file) downloadFile,
   }) {
     return deleteFile(file);
   }
@@ -511,8 +511,8 @@ class _$DeleteFileImpl implements _DeleteFile {
     TResult? Function(String assignmentNumber, String returnUuid,
             UploadOptionType uploadOptionType, User user)?
         uploadFile,
-    TResult? Function(ReturnRequestAttachment file)? deleteFile,
-    TResult? Function(ReturnRequestAttachment file)? downloadFile,
+    TResult? Function(PoDocuments file)? deleteFile,
+    TResult? Function(PoDocuments file)? downloadFile,
   }) {
     return deleteFile?.call(file);
   }
@@ -524,8 +524,8 @@ class _$DeleteFileImpl implements _DeleteFile {
     TResult Function(String assignmentNumber, String returnUuid,
             UploadOptionType uploadOptionType, User user)?
         uploadFile,
-    TResult Function(ReturnRequestAttachment file)? deleteFile,
-    TResult Function(ReturnRequestAttachment file)? downloadFile,
+    TResult Function(PoDocuments file)? deleteFile,
+    TResult Function(PoDocuments file)? downloadFile,
     required TResult orElse(),
   }) {
     if (deleteFile != null) {
@@ -573,10 +573,10 @@ class _$DeleteFileImpl implements _DeleteFile {
 }
 
 abstract class _DeleteFile implements ReturnRequestAttachmentEvent {
-  const factory _DeleteFile({required final ReturnRequestAttachment file}) =
+  const factory _DeleteFile({required final PoDocuments file}) =
       _$DeleteFileImpl;
 
-  ReturnRequestAttachment get file;
+  PoDocuments get file;
   @JsonKey(ignore: true)
   _$$DeleteFileImplCopyWith<_$DeleteFileImpl> get copyWith =>
       throw _privateConstructorUsedError;
@@ -588,9 +588,9 @@ abstract class _$$DownloadFileImplCopyWith<$Res> {
           _$DownloadFileImpl value, $Res Function(_$DownloadFileImpl) then) =
       __$$DownloadFileImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({ReturnRequestAttachment file});
+  $Res call({PoDocuments file});
 
-  $ReturnRequestAttachmentCopyWith<$Res> get file;
+  $PoDocumentsCopyWith<$Res> get file;
 }
 
 /// @nodoc
@@ -610,14 +610,14 @@ class __$$DownloadFileImplCopyWithImpl<$Res>
       file: null == file
           ? _value.file
           : file // ignore: cast_nullable_to_non_nullable
-              as ReturnRequestAttachment,
+              as PoDocuments,
     ));
   }
 
   @override
   @pragma('vm:prefer-inline')
-  $ReturnRequestAttachmentCopyWith<$Res> get file {
-    return $ReturnRequestAttachmentCopyWith<$Res>(_value.file, (value) {
+  $PoDocumentsCopyWith<$Res> get file {
+    return $PoDocumentsCopyWith<$Res>(_value.file, (value) {
       return _then(_value.copyWith(file: value));
     });
   }
@@ -629,7 +629,7 @@ class _$DownloadFileImpl implements _DownloadFile {
   const _$DownloadFileImpl({required this.file});
 
   @override
-  final ReturnRequestAttachment file;
+  final PoDocuments file;
 
   @override
   String toString() {
@@ -660,8 +660,8 @@ class _$DownloadFileImpl implements _DownloadFile {
     required TResult Function(String assignmentNumber, String returnUuid,
             UploadOptionType uploadOptionType, User user)
         uploadFile,
-    required TResult Function(ReturnRequestAttachment file) deleteFile,
-    required TResult Function(ReturnRequestAttachment file) downloadFile,
+    required TResult Function(PoDocuments file) deleteFile,
+    required TResult Function(PoDocuments file) downloadFile,
   }) {
     return downloadFile(file);
   }
@@ -673,8 +673,8 @@ class _$DownloadFileImpl implements _DownloadFile {
     TResult? Function(String assignmentNumber, String returnUuid,
             UploadOptionType uploadOptionType, User user)?
         uploadFile,
-    TResult? Function(ReturnRequestAttachment file)? deleteFile,
-    TResult? Function(ReturnRequestAttachment file)? downloadFile,
+    TResult? Function(PoDocuments file)? deleteFile,
+    TResult? Function(PoDocuments file)? downloadFile,
   }) {
     return downloadFile?.call(file);
   }
@@ -686,8 +686,8 @@ class _$DownloadFileImpl implements _DownloadFile {
     TResult Function(String assignmentNumber, String returnUuid,
             UploadOptionType uploadOptionType, User user)?
         uploadFile,
-    TResult Function(ReturnRequestAttachment file)? deleteFile,
-    TResult Function(ReturnRequestAttachment file)? downloadFile,
+    TResult Function(PoDocuments file)? deleteFile,
+    TResult Function(PoDocuments file)? downloadFile,
     required TResult orElse(),
   }) {
     if (downloadFile != null) {
@@ -735,10 +735,10 @@ class _$DownloadFileImpl implements _DownloadFile {
 }
 
 abstract class _DownloadFile implements ReturnRequestAttachmentEvent {
-  const factory _DownloadFile({required final ReturnRequestAttachment file}) =
+  const factory _DownloadFile({required final PoDocuments file}) =
       _$DownloadFileImpl;
 
-  ReturnRequestAttachment get file;
+  PoDocuments get file;
   @JsonKey(ignore: true)
   _$$DownloadFileImplCopyWith<_$DownloadFileImpl> get copyWith =>
       throw _privateConstructorUsedError;
@@ -748,8 +748,7 @@ abstract class _DownloadFile implements ReturnRequestAttachmentEvent {
 mixin _$ReturnRequestAttachmentState {
   bool get isFetching => throw _privateConstructorUsedError;
   String get returnUuid => throw _privateConstructorUsedError;
-  List<ReturnRequestAttachment> get uploadedFiles =>
-      throw _privateConstructorUsedError;
+  List<PoDocuments> get uploadedFiles => throw _privateConstructorUsedError;
   FileOperationMode get fileOperationMode => throw _privateConstructorUsedError;
   Option<Either<ApiFailure, dynamic>> get failureOrSuccessOption =>
       throw _privateConstructorUsedError;
@@ -770,7 +769,7 @@ abstract class $ReturnRequestAttachmentStateCopyWith<$Res> {
   $Res call(
       {bool isFetching,
       String returnUuid,
-      List<ReturnRequestAttachment> uploadedFiles,
+      List<PoDocuments> uploadedFiles,
       FileOperationMode fileOperationMode,
       Option<Either<ApiFailure, dynamic>> failureOrSuccessOption});
 }
@@ -807,7 +806,7 @@ class _$ReturnRequestAttachmentStateCopyWithImpl<$Res,
       uploadedFiles: null == uploadedFiles
           ? _value.uploadedFiles
           : uploadedFiles // ignore: cast_nullable_to_non_nullable
-              as List<ReturnRequestAttachment>,
+              as List<PoDocuments>,
       fileOperationMode: null == fileOperationMode
           ? _value.fileOperationMode
           : fileOperationMode // ignore: cast_nullable_to_non_nullable
@@ -832,7 +831,7 @@ abstract class _$$ReturnRequestAttachmentStateImplCopyWith<$Res>
   $Res call(
       {bool isFetching,
       String returnUuid,
-      List<ReturnRequestAttachment> uploadedFiles,
+      List<PoDocuments> uploadedFiles,
       FileOperationMode fileOperationMode,
       Option<Either<ApiFailure, dynamic>> failureOrSuccessOption});
 }
@@ -868,7 +867,7 @@ class __$$ReturnRequestAttachmentStateImplCopyWithImpl<$Res>
       uploadedFiles: null == uploadedFiles
           ? _value._uploadedFiles
           : uploadedFiles // ignore: cast_nullable_to_non_nullable
-              as List<ReturnRequestAttachment>,
+              as List<PoDocuments>,
       fileOperationMode: null == fileOperationMode
           ? _value.fileOperationMode
           : fileOperationMode // ignore: cast_nullable_to_non_nullable
@@ -887,7 +886,7 @@ class _$ReturnRequestAttachmentStateImpl extends _ReturnRequestAttachmentState {
   const _$ReturnRequestAttachmentStateImpl(
       {required this.isFetching,
       required this.returnUuid,
-      required final List<ReturnRequestAttachment> uploadedFiles,
+      required final List<PoDocuments> uploadedFiles,
       required this.fileOperationMode,
       required this.failureOrSuccessOption})
       : _uploadedFiles = uploadedFiles,
@@ -897,9 +896,9 @@ class _$ReturnRequestAttachmentStateImpl extends _ReturnRequestAttachmentState {
   final bool isFetching;
   @override
   final String returnUuid;
-  final List<ReturnRequestAttachment> _uploadedFiles;
+  final List<PoDocuments> _uploadedFiles;
   @override
-  List<ReturnRequestAttachment> get uploadedFiles {
+  List<PoDocuments> get uploadedFiles {
     if (_uploadedFiles is EqualUnmodifiableListView) return _uploadedFiles;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_uploadedFiles);
@@ -955,7 +954,7 @@ abstract class _ReturnRequestAttachmentState
   const factory _ReturnRequestAttachmentState(
       {required final bool isFetching,
       required final String returnUuid,
-      required final List<ReturnRequestAttachment> uploadedFiles,
+      required final List<PoDocuments> uploadedFiles,
       required final FileOperationMode fileOperationMode,
       required final Option<Either<ApiFailure, dynamic>>
           failureOrSuccessOption}) = _$ReturnRequestAttachmentStateImpl;
@@ -966,7 +965,7 @@ abstract class _ReturnRequestAttachmentState
   @override
   String get returnUuid;
   @override
-  List<ReturnRequestAttachment> get uploadedFiles;
+  List<PoDocuments> get uploadedFiles;
   @override
   FileOperationMode get fileOperationMode;
   @override

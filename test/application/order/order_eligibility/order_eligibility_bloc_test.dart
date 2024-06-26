@@ -35,7 +35,8 @@ void main() {
       });
       setUp(
         () async {
-          fakeCartItem = (await CartLocalDataSource().upsertCartItems())[0];
+          fakeCartItem = (await CartLocalDataSource()
+              .upsertCart(type: UpsertCartLocalType.upsertCartItems))[0];
           initializedState = OrderEligibilityState.initial().copyWith(
             user: fakeExternalSalesRepUser,
             salesOrg: fakeKHSalesOrganisation,

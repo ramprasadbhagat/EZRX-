@@ -1,6 +1,7 @@
 import 'package:ezrxmobile/domain/announcement/entities/maintenance_item.dart';
 import 'package:ezrxmobile/domain/announcement/value/value_objects.dart';
 import 'package:ezrxmobile/domain/banner/value/value_objects.dart';
+import 'package:ezrxmobile/infrastructure/core/common/json_key_readvalue_helper.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'maintenance_item_dto.freezed.dart';
@@ -15,10 +16,18 @@ class MaintenanceItemDto with _$MaintenanceItemDto {
     @JsonKey(name: 'id', defaultValue: '') required String id,
     @JsonKey(name: 'name', defaultValue: '') required String name,
     @JsonKey(name: 'displayName', defaultValue: '') required String displayName,
-    @JsonKey(name: 'maxNumberOfItem', defaultValue: 0, readValue: getMaximumOfItem)
-        required int maxNumberOfItem,
-    @JsonKey(name: 'banners', defaultValue: [], readValue: getValueList)
-        required List<MaintenanceBannerDto> banners,
+    @JsonKey(
+      name: 'maxNumberOfItem',
+      defaultValue: 0,
+      readValue: JsonReadValueHelper.readMaximumOfItem,
+    )
+    required int maxNumberOfItem,
+    @JsonKey(
+      name: 'banners',
+      defaultValue: [],
+      readValue: JsonReadValueHelper.readValueList,
+    )
+    required List<MaintenanceBannerDto> banners,
   }) = _MaintenanceItemDto;
 
   MaintenanceItem get toDomain => MaintenanceItem.empty().copyWith(
@@ -39,22 +48,50 @@ class MaintenanceBannerDto with _$MaintenanceBannerDto {
   const factory MaintenanceBannerDto({
     @JsonKey(name: 'id', defaultValue: '') required String id,
     @JsonKey(name: 'name', defaultValue: '') required String name,
-    @JsonKey(name: 'template', defaultValue: '', readValue: getName)
-        required String template,
+    @JsonKey(
+      name: 'template',
+      defaultValue: '',
+      readValue: JsonReadValueHelper.readName,
+    )
+    required String template,
     @JsonKey(name: 'displayName', defaultValue: '') required String displayName,
-    @JsonKey(name: 'content', defaultValue: '', readValue: getValue)
-        required String content,
+    @JsonKey(
+      name: 'content',
+      defaultValue: '',
+      readValue: JsonReadValueHelper.readValueString,
+    )
+    required String content,
     @JsonKey(name: 'publishedDate') required PublishedDateDto publishedDate,
-    @JsonKey(name: 'hyperlink', defaultValue: '', readValue: getHyperLink)
-        required String hyperlink,
-    @JsonKey(name: 'type', defaultValue: '', readValue: getValue)
-        required String type,
-    @JsonKey(name: 'applicableModules', defaultValue: [], readValue: getValueList)
-        required List<ApplicableModulesDto> applicableModules,
-    @JsonKey(name: 'enableCrossButton', defaultValue: false, readValue: getBooleanValue)
-        required bool enableCrossButton,
-    @JsonKey(name: 'login', defaultValue: '', readValue: getValue)
-        required String loginType,
+    @JsonKey(
+      name: 'hyperlink',
+      defaultValue: '',
+      readValue: JsonReadValueHelper.readHyperLink,
+    )
+    required String hyperlink,
+    @JsonKey(
+      name: 'type',
+      defaultValue: '',
+      readValue: JsonReadValueHelper.readValueString,
+    )
+    required String type,
+    @JsonKey(
+      name: 'applicableModules',
+      defaultValue: [],
+      readValue: JsonReadValueHelper.readValueList,
+    )
+    required List<ApplicableModulesDto> applicableModules,
+    @JsonKey(
+      name: 'enableCrossButton',
+      defaultValue: false,
+      readValue: JsonReadValueHelper.readValueBoolean,
+    )
+    required bool enableCrossButton,
+    @JsonKey(
+      name: 'login',
+      defaultValue: '',
+      readValue: JsonReadValueHelper.readValueString,
+    )
+    required String loginType,
   }) = _MaintenanceBannerDto;
 
   MaintenanceBanner get toDomain => MaintenanceBanner.empty().copyWith(
@@ -101,22 +138,9 @@ class PublishedDateDto with _$PublishedDateDto {
   const factory PublishedDateDto({
     @JsonKey(name: 'isoValue', defaultValue: '') required String isoValue,
     @JsonKey(name: 'formattedDateValue', defaultValue: '')
-        required String formattedDateValue,
+    required String formattedDateValue,
   }) = _PublishedDateDto;
 
   factory PublishedDateDto.fromJson(Map<String, dynamic> json) =>
       _$PublishedDateDtoFromJson(json);
 }
-
-int getMaximumOfItem(Map json, String key) => json[key]?['intValue'] ?? 0;
-
-String getValue(Map json, String key) => json[key]?['value'] ?? '';
-
-String getHyperLink(Map json, String key) =>
-    json[key]?['jsonValue']['value']['href'] ?? '';
-
-bool getBooleanValue(Map json, String key) => json[key]?['value'] ?? false;
-
-List<dynamic> getValueList(Map json, String key) => json[key]?['value'] ?? [];
-
-String getName(Map json, String key) => json[key]?['name'] ?? '';

@@ -1,6 +1,6 @@
 import 'package:ezrxmobile/domain/order/entities/license_info.dart';
+import 'package:ezrxmobile/infrastructure/core/common/json_key_readvalue_helper.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:intl/intl.dart';
 
 part 'license_dto.freezed.dart';
 part 'license_dto.g.dart';
@@ -11,13 +11,21 @@ class LicenseDto with _$LicenseDto {
   const factory LicenseDto({
     @JsonKey(name: 'licenceType', defaultValue: '') required String licenceType,
     @JsonKey(name: 'licenseDescription', defaultValue: '')
-        required String licenseDescription,
+    required String licenseDescription,
     @JsonKey(name: 'licenseNumber', defaultValue: '')
-        required String licenseNumber,
-    @JsonKey(name: 'validFrom', defaultValue: '', readValue: dateTimeStringFormatCheck)
-        required String validFrom,
-    @JsonKey(name: 'validTo', defaultValue: '', readValue: dateTimeStringFormatCheck)
-        required String validTo,
+    required String licenseNumber,
+    @JsonKey(
+      name: 'validFrom',
+      defaultValue: '',
+      readValue: JsonReadValueHelper.readDateTimeStringFormat,
+    )
+    required String validFrom,
+    @JsonKey(
+      name: 'validTo',
+      defaultValue: '',
+      readValue: JsonReadValueHelper.readDateTimeStringFormat,
+    )
+    required String validTo,
   }) = _licenseDto;
 
   factory LicenseDto.fromDomain(LicenseInfo licenseInfo) {
@@ -43,8 +51,3 @@ class LicenseDto with _$LicenseDto {
   factory LicenseDto.fromJson(Map<String, dynamic> json) =>
       _$LicenseDtoFromJson(json);
 }
-
-String dateTimeStringFormatCheck(Map json, String key) =>
-    (json[key] ?? '').isNotEmpty
-        ? DateFormat('yMMMMd').format(DateTime.parse(json[key]))
-        : '';

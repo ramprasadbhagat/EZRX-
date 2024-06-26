@@ -8,19 +8,19 @@ import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_approver_filter.dart';
 import 'package:ezrxmobile/domain/returns/repository/i_return_approver_repository.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/device_storage.dart';
-import 'package:ezrxmobile/infrastructure/returns/datasource/approver_return_request_information_local.dart';
-import 'package:ezrxmobile/infrastructure/returns/datasource/approver_return_request_information_remote.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/approver_return_requests_local.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/approver_return_requests_remote.dart';
+import 'package:ezrxmobile/infrastructure/returns/datasource/return_summary_details_local.dart';
+import 'package:ezrxmobile/infrastructure/returns/datasource/return_summary_details_remote.dart';
 import 'package:ezrxmobile/infrastructure/returns/dtos/return_approver_filter_dto.dart';
 
 class ReturnApproverRepository implements IReturnApproverRepository {
   final Config config;
   final ApproverReturnRequestsLocal returnRequestLocalDataSource;
   final ApproverReturnRequestsRemote returnRequestRemoteDataSource;
-  final ApproverReturnRequestInformationLocal
+  final ReturnSummaryDetailsRequestInformationLocal
       returnRequestInformationLocalDataSource;
-  final ApproverReturnRequestInformationRemote
+  final ReturnSummaryDetailsRequestInformationRemote
       returnRequestInformationRemoteDataSource;
   final DeviceStorage deviceStorage;
 
@@ -43,7 +43,7 @@ class ReturnApproverRepository implements IReturnApproverRepository {
           returnRequestIds
               .map(
                 (e) async => await returnRequestInformationLocalDataSource
-                    .getApproverReturnRequestInformation(),
+                    .getReturnRequestInformation(),
               )
               .toList(),
         );
@@ -58,7 +58,7 @@ class ReturnApproverRepository implements IReturnApproverRepository {
         returnRequestIds
             .map(
               (e) async => await returnRequestInformationRemoteDataSource
-                  .getApproverReturnRequestInformation(
+                  .getReturnRequestInformation(
                 returnRequestId: e.requestId,
                 market: deviceStorage.currentMarket(),
               ),

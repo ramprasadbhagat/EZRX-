@@ -241,7 +241,11 @@ void main() {
 
   test('addApprovalLimit local data source success', () async {
     when(() => configMock.appFlavor).thenReturn(Flavor.mock);
-    when(() => userRestrictionLocalDataSource.addApprovalLimit()).thenAnswer(
+    when(
+      () => userRestrictionLocalDataSource.getUserRestrictionStatus(
+        type: UserRestrictionType.addApprovalLimit,
+      ),
+    ).thenAnswer(
       (invocation) async => UserRestrictionStatus.empty().copyWith(
         approvalLimitStatus: true,
       ),
@@ -262,8 +266,11 @@ void main() {
 
   test('addApprovalLimit local data source fail', () async {
     when(() => configMock.appFlavor).thenReturn(Flavor.mock);
-    when(() => userRestrictionLocalDataSource.addApprovalLimit())
-        .thenThrow((invocation) async => MockException());
+    when(
+      () => userRestrictionLocalDataSource.getUserRestrictionStatus(
+        type: UserRestrictionType.addApprovalLimit,
+      ),
+    ).thenThrow((invocation) async => MockException());
 
     final result = await userRestrictionRepository.addApprovalLimit(
       approverLimits: ApprovalLimits(
@@ -371,8 +378,9 @@ void main() {
 
   test('addApproverRights local data source success', () async {
     when(() => configMock.appFlavor).thenReturn(Flavor.mock);
-    when(() => userRestrictionLocalDataSource.configureUserRestriction())
-        .thenAnswer(
+    when(
+      () => userRestrictionLocalDataSource.getUserRestrictionStatus(),
+    ).thenAnswer(
       (invocation) async => UserRestrictionStatus.empty()
           .copyWith(approverRightsStatus: 'fake-status'),
     );
@@ -402,8 +410,9 @@ void main() {
 
   test('addApproverRights local data source fail', () async {
     when(() => configMock.appFlavor).thenReturn(Flavor.mock);
-    when(() => userRestrictionLocalDataSource.configureUserRestriction())
-        .thenThrow((invocation) async => MockException());
+    when(
+      () => userRestrictionLocalDataSource.getUserRestrictionStatus(),
+    ).thenThrow((invocation) async => MockException());
 
     final result = await userRestrictionRepository.configureUserRestriction(
       approverRights: ApproverRights.empty().copyWith(
@@ -472,7 +481,11 @@ void main() {
 
   test('deleteApprovalLimit local data source success', () async {
     when(() => configMock.appFlavor).thenReturn(Flavor.mock);
-    when(() => userRestrictionLocalDataSource.deleteApprovalLimit()).thenAnswer(
+    when(
+      () => userRestrictionLocalDataSource.getUserRestrictionStatus(
+        type: UserRestrictionType.deleteApprovalLimit,
+      ),
+    ).thenAnswer(
       (invocation) async => UserRestrictionStatus.empty().copyWith(
         approvalLimitStatus: true,
       ),
@@ -493,8 +506,11 @@ void main() {
 
   test('deleteApprovalLimit local data source fail', () async {
     when(() => configMock.appFlavor).thenReturn(Flavor.uat);
-    when(() => userRestrictionLocalDataSource.deleteApprovalLimit())
-        .thenThrow((invocation) async => MockException());
+    when(
+      () => userRestrictionLocalDataSource.getUserRestrictionStatus(
+        type: UserRestrictionType.deleteApprovalLimit,
+      ),
+    ).thenThrow((invocation) async => MockException());
 
     final result = await userRestrictionRepository.deleteApprovalLimit(
       approverLimits: ApprovalLimits(
@@ -560,8 +576,11 @@ void main() {
 
   test('deleteApproverRights local data source success', () async {
     when(() => configMock.appFlavor).thenReturn(Flavor.mock);
-    when(() => userRestrictionLocalDataSource.deleteApprovalRights())
-        .thenAnswer(
+    when(
+      () => userRestrictionLocalDataSource.getUserRestrictionStatus(
+        type: UserRestrictionType.deleteApprovalRight,
+      ),
+    ).thenAnswer(
       (invocation) async => UserRestrictionStatus.empty()
           .copyWith(approverRightsStatus: 'fake-status'),
     );
@@ -582,8 +601,11 @@ void main() {
 
   test('deleteApproverRights local data source fail', () async {
     when(() => configMock.appFlavor).thenReturn(Flavor.uat);
-    when(() => userRestrictionLocalDataSource.deleteApprovalRights())
-        .thenThrow((invocation) async => MockException());
+    when(
+      () => userRestrictionLocalDataSource.getUserRestrictionStatus(
+        type: UserRestrictionType.deleteApprovalRight,
+      ),
+    ).thenThrow((invocation) async => MockException());
 
     final result = await userRestrictionRepository.deleteApprovalRights(
       approverRights: ApproverRights.empty().copyWith(

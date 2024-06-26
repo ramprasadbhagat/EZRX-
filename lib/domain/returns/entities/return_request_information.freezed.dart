@@ -32,8 +32,7 @@ mixin _$ReturnRequestInformation {
   String get materialGroup => throw _privateConstructorUsedError;
   List<String> get imageUrl => throw _privateConstructorUsedError;
   List<String> get attachments => throw _privateConstructorUsedError;
-  List<ReturnRequestAttachment> get attachmentUrl =>
-      throw _privateConstructorUsedError;
+  List<PoDocuments> get attachmentUrl => throw _privateConstructorUsedError;
   DateTimeStringValue get createdDate => throw _privateConstructorUsedError;
   String get principal => throw _privateConstructorUsedError;
   PrincipalName get principalName => throw _privateConstructorUsedError;
@@ -81,7 +80,7 @@ abstract class $ReturnRequestInformationCopyWith<$Res> {
       String materialGroup,
       List<String> imageUrl,
       List<String> attachments,
-      List<ReturnRequestAttachment> attachmentUrl,
+      List<PoDocuments> attachmentUrl,
       DateTimeStringValue createdDate,
       String principal,
       PrincipalName principalName,
@@ -216,7 +215,7 @@ class _$ReturnRequestInformationCopyWithImpl<$Res,
       attachmentUrl: null == attachmentUrl
           ? _value.attachmentUrl
           : attachmentUrl // ignore: cast_nullable_to_non_nullable
-              as List<ReturnRequestAttachment>,
+              as List<PoDocuments>,
       createdDate: null == createdDate
           ? _value.createdDate
           : createdDate // ignore: cast_nullable_to_non_nullable
@@ -311,7 +310,7 @@ abstract class _$$ReturnRequestInformationImplCopyWith<$Res>
       String materialGroup,
       List<String> imageUrl,
       List<String> attachments,
-      List<ReturnRequestAttachment> attachmentUrl,
+      List<PoDocuments> attachmentUrl,
       DateTimeStringValue createdDate,
       String principal,
       PrincipalName principalName,
@@ -445,7 +444,7 @@ class __$$ReturnRequestInformationImplCopyWithImpl<$Res>
       attachmentUrl: null == attachmentUrl
           ? _value._attachmentUrl
           : attachmentUrl // ignore: cast_nullable_to_non_nullable
-              as List<ReturnRequestAttachment>,
+              as List<PoDocuments>,
       createdDate: null == createdDate
           ? _value.createdDate
           : createdDate // ignore: cast_nullable_to_non_nullable
@@ -534,7 +533,7 @@ class _$ReturnRequestInformationImpl extends _ReturnRequestInformation {
       required this.materialGroup,
       required final List<String> imageUrl,
       required final List<String> attachments,
-      required final List<ReturnRequestAttachment> attachmentUrl,
+      required final List<PoDocuments> attachmentUrl,
       required this.createdDate,
       required this.principal,
       required this.principalName,
@@ -602,9 +601,9 @@ class _$ReturnRequestInformationImpl extends _ReturnRequestInformation {
     return EqualUnmodifiableListView(_attachments);
   }
 
-  final List<ReturnRequestAttachment> _attachmentUrl;
+  final List<PoDocuments> _attachmentUrl;
   @override
-  List<ReturnRequestAttachment> get attachmentUrl {
+  List<PoDocuments> get attachmentUrl {
     if (_attachmentUrl is EqualUnmodifiableListView) return _attachmentUrl;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_attachmentUrl);
@@ -793,7 +792,7 @@ abstract class _ReturnRequestInformation extends ReturnRequestInformation {
       required final String materialGroup,
       required final List<String> imageUrl,
       required final List<String> attachments,
-      required final List<ReturnRequestAttachment> attachmentUrl,
+      required final List<PoDocuments> attachmentUrl,
       required final DateTimeStringValue createdDate,
       required final String principal,
       required final PrincipalName principalName,
@@ -845,7 +844,7 @@ abstract class _ReturnRequestInformation extends ReturnRequestInformation {
   @override
   List<String> get attachments;
   @override
-  List<ReturnRequestAttachment> get attachmentUrl;
+  List<PoDocuments> get attachmentUrl;
   @override
   DateTimeStringValue get createdDate;
   @override

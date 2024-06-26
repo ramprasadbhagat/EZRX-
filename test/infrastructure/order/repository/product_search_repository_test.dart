@@ -6,8 +6,8 @@ import 'package:ezrxmobile/domain/order/entities/product_suggestion_history.dart
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/device_storage.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/product_suggestion_history_storage.dart';
-import 'package:ezrxmobile/infrastructure/order/datasource/product_search_local.dart';
-import 'package:ezrxmobile/infrastructure/order/datasource/product_search_remote.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/material_list_local.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/material_list_remote.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/product_suggestion_history_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/product_search_repository.dart';
 
@@ -21,14 +21,9 @@ import '../../../common_mock_data/mock_other.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_my_sales_org_config.dart';
 import '../../../common_mock_data/sales_organsiation_mock.dart';
 import '../../../common_mock_data/user_mock.dart';
+import 'material_list_repository_test.dart';
 
 class MockConfig extends Mock implements Config {}
-
-class ProductSearchLocalDataSourceMock extends Mock
-    implements ProductSearchLocalDataSource {}
-
-class ProductSearchRemoteDataSourceMock extends Mock
-    implements ProductSearchRemoteDataSource {}
 
 class ProductSuggestionHistoryStorageMock extends Mock
     implements ProductSuggestionHistoryStorage {}
@@ -38,8 +33,8 @@ void main() async {
   late Config mockConfig;
   late ProductSearchRepository repository;
   late ProductSuggestionHistoryStorage storage;
-  late ProductSearchLocalDataSource localDataSource;
-  late ProductSearchRemoteDataSource remoteDataSource;
+  late MaterialListLocalDataSource localDataSource;
+  late MaterialListRemoteDataSource remoteDataSource;
   late DeviceStorage deviceStorage;
 
   const fakeException = 'fake-exception';
@@ -47,21 +42,21 @@ void main() async {
   const fakePageSize = 10;
   const fakeOffset = 10;
   final fakeMaterialResponse =
-      await ProductSearchLocalDataSource().getSearchedProductList();
+      await MaterialListLocalDataSource().getProductList();
   const fakeMarket = 'fake-market';
   const pageSize = 24;
 
   setUp(() async {
     mockConfig = MockConfig();
-    localDataSource = ProductSearchLocalDataSourceMock();
-    remoteDataSource = ProductSearchRemoteDataSourceMock();
+    localDataSource = MaterialListLocalDataSourceMock();
+    remoteDataSource = MaterialListRemoteDataSourceMock();
     storage = ProductSuggestionHistoryStorageMock();
     deviceStorage = DeviceStorageMock();
     repository = ProductSearchRepository(
       config: mockConfig,
       productSuggestionHistoryStorage: storage,
-      localDataSource: localDataSource,
-      remoteDataSource: remoteDataSource,
+      materialListLocalDataSource: localDataSource,
+      materialListRemoteDataSource: remoteDataSource,
       deviceStorage: deviceStorage,
     );
   });
@@ -114,7 +109,7 @@ void main() async {
       const fakeEanNumber = 'fake-ean-number';
       test('Failure in local', () async {
         when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
-        when(() => localDataSource.getSearchedProductList())
+        when(() => localDataSource.getProductList())
             .thenThrow(fakeException);
 
         final result = await repository.getScanProduct(
@@ -132,7 +127,7 @@ void main() async {
 
       test('Success in local', () async {
         when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
-        when(() => localDataSource.getSearchedProductList())
+        when(() => localDataSource.getProductList())
             .thenAnswer((_) async => fakeMaterialResponse);
 
         final result = await repository.getScanProduct(
@@ -251,7 +246,7 @@ void main() async {
     group('Search product list -', () {
       test('Failure in local', () async {
         when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
-        when(() => localDataSource.getSearchedProductList())
+        when(() => localDataSource.getProductList())
             .thenThrow(fakeException);
 
         final result = await repository.searchProductList(
@@ -271,7 +266,7 @@ void main() async {
 
       test('Success in local', () async {
         when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
-        when(() => localDataSource.getSearchedProductList())
+        when(() => localDataSource.getProductList())
             .thenAnswer((_) async => fakeMaterialResponse);
         final result = await repository.searchProductList(
           salesOrganization: fakeSalesOrganisation,

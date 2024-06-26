@@ -91,7 +91,10 @@ class UserRestrictionRepository extends IUserRestrictionRepository {
 
     if (config.appFlavor == Flavor.mock) {
       try {
-        final addUserRestriction = await localDataSource.addApprovalLimit();
+        final addUserRestriction =
+            await localDataSource.getUserRestrictionStatus(
+          type: UserRestrictionType.addApprovalLimit,
+        );
 
         return Right(addUserRestriction);
       } catch (e) {
@@ -123,7 +126,7 @@ class UserRestrictionRepository extends IUserRestrictionRepository {
     if (config.appFlavor == Flavor.mock) {
       try {
         final configureUserRestriction =
-            await localDataSource.configureUserRestriction();
+            await localDataSource.getUserRestrictionStatus();
 
         return Right(configureUserRestriction);
       } catch (e) {
@@ -149,8 +152,10 @@ class UserRestrictionRepository extends IUserRestrictionRepository {
   }) async {
     if (config.appFlavor == Flavor.mock) {
       try {
-        await localDataSource.deleteApprovalRights();
-
+        await localDataSource.getUserRestrictionStatus(
+          type: UserRestrictionType.deleteApprovalRight,
+        );
+        
         return const Right(true);
       } catch (e) {
         return Left(FailureHandler.handleFailure(e));
@@ -179,7 +184,10 @@ class UserRestrictionRepository extends IUserRestrictionRepository {
   }) async {
     if (config.appFlavor == Flavor.mock) {
       try {
-        final deleteApprovalLimit = await localDataSource.deleteApprovalLimit();
+        final deleteApprovalLimit =
+            await localDataSource.getUserRestrictionStatus(
+          type: UserRestrictionType.deleteApprovalLimit,
+        );
 
         return Right(deleteApprovalLimit);
       } catch (e) {

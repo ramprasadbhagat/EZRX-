@@ -9,6 +9,10 @@ import 'package:flutter/services.dart';
 import 'package:ezrxmobile/infrastructure/payments/dtos/payment_item_dto.dart';
 
 class PaymentItemLocalDataSource {
+  static const String sgQrCodeId = '213';
+  static const String phPaymentGatewayId = '214';
+  static const String phBankInId = '215';
+
   PaymentItemLocalDataSource();
 
   Future<List<PaymentItem>> getPaymentItems() async {
@@ -23,65 +27,31 @@ class PaymentItemLocalDataSource {
         .toList();
   }
 
+  Future<dynamic> get _getPaymentSummaryDetailsJson async {
+    final data = json.decode(
+      await rootBundle.loadString(
+        'assets/json/paymentSummaryListResponse.json',
+      ),
+    );
+
+    return data['data']['customerPayment']['customerPaymentResponse'];
+  }
+
   Future<PaymentSummaryDetails> getPaymentSummaryDetails() async {
-    final data = json.decode(
-      await rootBundle.loadString(
-        'assets/json/paymentSummaryListResponse.json',
-      ),
-    );
+    final data = await _getPaymentSummaryDetailsJson;
 
     return PaymentSummaryDetailsDto.fromJson(
-      data['data']['customerPayment']['customerPaymentResponse'][0],
+      data[0],
     ).toDomain();
   }
 
-  Future<PaymentSummaryDetails> getPaymentSummaryDetailsSG() async {
-    final data = json.decode(
-      await rootBundle.loadString(
-        'assets/json/paymentSummaryListResponse.json',
-      ),
-    );
-    final list = data['data']['customerPayment']['customerPaymentResponse'];
+  Future<PaymentSummaryDetails> getPaymentSummaryDetailsByPaymentId(
+    String paymentId,
+  ) async {
+    final data = await _getPaymentSummaryDetailsJson;
 
-    final payment = list.firstWhere(
-      (element) => element['paymentID'] == '213',
-      orElse: () => PaymentSummaryDetails.empty(),
-    );
-
-    return PaymentSummaryDetailsDto.fromJson(
-      payment,
-    ).toDomain();
-  }
-
-  Future<PaymentSummaryDetails> getPaymentSummaryDetailsPHPayment() async {
-    final data = json.decode(
-      await rootBundle.loadString(
-        'assets/json/paymentSummaryListResponse.json',
-      ),
-    );
-    final list = data['data']['customerPayment']['customerPaymentResponse'];
-
-    final payment = list.firstWhere(
-      (element) => element['paymentID'] == '214',
-      orElse: () => PaymentSummaryDetails.empty(),
-    );
-
-    return PaymentSummaryDetailsDto.fromJson(
-      payment,
-    ).toDomain();
-  }
-
-  Future<PaymentSummaryDetails> getPaymentSummaryDetailsPHBankIn() async {
-    final data = json.decode(
-      await rootBundle.loadString(
-        'assets/json/paymentSummaryListResponse.json',
-      ),
-    );
-
-    final list = data['data']['customerPayment']['customerPaymentResponse'];
-
-    final payment = (list as List).firstWhere(
-      (element) => element['paymentID'] == '215',
+    final payment = data.firstWhere(
+      (element) => element['paymentID'] == paymentId,
       orElse: () => PaymentSummaryDetails.empty(),
     );
 

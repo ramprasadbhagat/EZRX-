@@ -8,6 +8,7 @@ import 'package:ezrxmobile/presentation/core/custom_image.dart';
 import 'package:ezrxmobile/presentation/core/custom_slidable.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
 import 'package:ezrxmobile/presentation/core/pre_order_label.dart';
+import 'package:ezrxmobile/presentation/orders/cart/item/cart_bonus_item_quantity_section.dart';
 import 'package:ezrxmobile/presentation/products/widgets/stock_info.dart';
 import 'package:flutter/material.dart';
 
@@ -15,8 +16,6 @@ import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
-
-import 'package:ezrxmobile/presentation/orders/create_order/cart_item_quantity_input.dart';
 
 import 'package:ezrxmobile/domain/order/entities/bonus_sample_item.dart';
 
@@ -191,93 +190,11 @@ class _MaterialDetails extends StatelessWidget {
             materialInfo: cartProduct.materialInfo,
             stockInfo: bonusItem.stockInfo,
           ),
-          _MaterialQuantitySection(
+          CartBonusItemQuantitySection(
             bonusItem: bonusItem,
             cartProduct: cartProduct,
           ),
         ],
-      ),
-    );
-  }
-}
-
-class _MaterialQuantitySection extends StatefulWidget {
-  final PriceAggregate cartProduct;
-  final BonusSampleItem bonusItem;
-  const _MaterialQuantitySection({
-    required this.bonusItem,
-    required this.cartProduct,
-  });
-
-  @override
-  State<_MaterialQuantitySection> createState() =>
-      _MaterialQuantitySectionState();
-}
-
-class _MaterialQuantitySectionState extends State<_MaterialQuantitySection> {
-  final _controller = TextEditingController();
-
-  @override
-  void initState() {
-    _controller.value = TextEditingValue(
-      text: widget.bonusItem.qty.getOrDefaultValue(0).toString(),
-      selection: TextSelection.collapsed(
-        offset: _controller.selection.base.offset,
-      ),
-    );
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
-
-  String get _qty => widget.bonusItem.qty.getOrDefaultValue(0).toString();
-
-  @override
-  void didUpdateWidget(covariant _MaterialQuantitySection oldWidget) {
-    super.didUpdateWidget(oldWidget);
-    if (_qty != _controller.text) {
-      _controller.text = _qty;
-      _controller.selection = TextSelection.collapsed(offset: _qty.length);
-    }
-  }
-
-  void _upsertCart(BuildContext context, int qty) =>
-      context.read<CartBloc>().add(
-            CartEvent.addBonusToCartItem(
-              bonusMaterial: MaterialInfo.empty().copyWith(
-                materialNumber: widget.bonusItem.materialNumber,
-                parentID: widget.cartProduct.materialInfo.materialNumber
-                    .getOrDefaultValue(''),
-                quantity: MaterialQty(qty),
-                type: widget.bonusItem.type,
-              ),
-              counterOfferDetails: RequestCounterOfferDetails.empty(),
-              bonusItemId: widget.bonusItem.itemId,
-            ),
-          );
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(top: 4),
-      child: CartItemQuantityInput(
-        isEnabled:
-            context.read<EligibilityBloc>().state.isBonusSampleItemVisible &&
-                widget.cartProduct.bonusPriceOverrideEligible,
-        quantityAddKey: WidgetKeys.bonusOfferItemAddKey,
-        quantityDeleteKey: WidgetKeys.bonusOfferItemDeleteKey,
-        quantityTextKey: WidgetKeys.bonusOfferItemInputKey,
-        controller: _controller,
-        isLoading: context.read<CartBloc>().state.isUpserting,
-        onFieldChange: (value) {},
-        minusPressed: (k) => _upsertCart(context, k),
-        addPressed: (k) => _upsertCart(context, k),
-        onSubmit: (value) => _upsertCart(context, value),
-        maximumQty: 99999,
       ),
     );
   }

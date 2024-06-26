@@ -38,7 +38,7 @@ class HomeRobot extends CommonRobot {
   final bundlesNumberID = find.byKey(WidgetKeys.bundlesNumber);
   final bundlesDescription = find.byKey(WidgetKeys.bundlesDescription);
   final bundlesManufactured = find.byKey(WidgetKeys.bundlesManufactured);
-  final bundlesItem = find.byKey(WidgetKeys.bundlesListItem);
+  final bundlesItem = find.byKey(WidgetKeys.materialListBundleCard);
   final recentlyOrderedList = find.byKey(WidgetKeys.listRecentlyOrdered);
   final browseProductsList = find.byKey(WidgetKeys.browseProductsList);
   final announcementsList = find.byKey(WidgetKeys.announcementsList);

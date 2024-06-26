@@ -6,11 +6,11 @@ void main() {
   late PoAttachmentState mockState;
   group('Bundle Add To Cart State test', () {
     setUpAll(() {
-      final fakePoDocument = PoDocuments(
+      final fakePoDocument = PoDocuments.empty().copyWith(
         name: 'fake-file',
         url: 'fake-url',
       );
-      final fakePoDocument1 = PoDocuments(
+      final fakePoDocument1 = PoDocuments.empty().copyWith(
         name: 'fake-file-1',
         url: 'fake-url-1',
       );

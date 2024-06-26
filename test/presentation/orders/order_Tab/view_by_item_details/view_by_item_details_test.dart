@@ -155,12 +155,10 @@ void main() {
           expiryDate: DateTimeStringValue('2023-10-04'),
           invoiceNumber: StringValue('123456'),
           telephoneNumber: fakePhoneNumber,
-          tenderContractNumber:
-              TenderContractNumber.tenderContractNumber('0040026522'),
+          tenderContractNumber: TenderContractNumber('0040026522'),
           tenderOrderReason: TenderContractReason('730'),
           tenderPrice: TenderPrice('11832000'),
-          tenderContractReference:
-              TenderContractNumber.tenderContractReference('HCM-01234'),
+          tenderContractReference: TenderContractNumber('HCM-01234'),
         );
 
     customerLicense =
@@ -2435,8 +2433,7 @@ void main() {
 
     testWidgets('Display tender information when collapsed', (tester) async {
       final fakeTenderOrderReason = TenderContractReason('730');
-      final fakeTenderContractNumber =
-          TenderContractNumber.tenderContractNumber('0040026522');
+      final fakeTenderContractNumber = TenderContractNumber('0040026522');
       final orderHistoryList = mockViewByItemsOrderHistory.copyWith(
         orderHistoryItems: [
           fakeOrderHistoryItem,

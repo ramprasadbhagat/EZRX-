@@ -5,10 +5,9 @@ import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/order_eligibility/order_eligibility_bloc.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/utils/string_utils.dart';
-import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
-import 'package:ezrxmobile/presentation/core/responsive.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
+import 'package:ezrxmobile/presentation/orders/cart/widget/price_display_widget.dart';
 import 'package:ezrxmobile/presentation/orders/cart/widget/small_order_fee_section.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
@@ -48,7 +47,7 @@ class PriceSummaryTile extends StatelessWidget {
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              _DisplayPrice(
+              PriceDisplayWidget(
                 priceComponent: PriceComponent(
                   key: WidgetKeys.priceSummaryGrandTotal,
                   salesOrgConfig:

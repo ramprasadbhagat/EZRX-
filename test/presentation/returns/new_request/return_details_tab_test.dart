@@ -7,12 +7,12 @@ import 'package:ezrxmobile/application/returns/new_request/new_request_bloc.dart
 import 'package:ezrxmobile/application/returns/usage_code/usage_code_bloc.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/order/entities/order_history_details_po_documents.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/domain/returns/entities/invoice_details.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_item_details.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_material.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_material_list.dart';
-import 'package:ezrxmobile/domain/returns/entities/return_request_attachment.dart';
 import 'package:ezrxmobile/domain/returns/entities/usage.dart';
 import 'package:ezrxmobile/domain/returns/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/return_request_local.dart';
@@ -1443,7 +1443,7 @@ void main() {
           NewRequestEvent.toggleFiles(
             included: true,
             uuid: fakeReturnMaterial.uuid,
-            files: <ReturnRequestAttachment>[],
+            files: <PoDocuments>[],
           ),
         ),
       ).called(2);
@@ -1510,9 +1510,9 @@ void main() {
       );
     });
     testWidgets(' => attachment Delete test', (WidgetTester tester) async {
-      final attachment = ReturnRequestAttachment(
+      final attachment = PoDocuments(
         name: 'fake-file',
-        path: 'fake-path',
+        url: 'fake-path',
         size: FileSize(1),
       );
       when(() => newRequestBlocMock.state).thenReturn(
@@ -1573,7 +1573,7 @@ void main() {
           NewRequestEvent.toggleFiles(
             included: false,
             uuid: fakeReturnMaterial.uuid,
-            files: <ReturnRequestAttachment>[attachment],
+            files: <PoDocuments>[attachment],
           ),
         ),
       ).called(1);

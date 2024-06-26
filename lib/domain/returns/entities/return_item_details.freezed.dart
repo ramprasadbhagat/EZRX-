@@ -23,8 +23,7 @@ mixin _$ReturnItemDetails {
   ReturnQuantity get returnQuantity => throw _privateConstructorUsedError;
   RangeValue get unitPrice => throw _privateConstructorUsedError;
   Usage get usage => throw _privateConstructorUsedError;
-  List<ReturnRequestAttachment> get uploadedFiles =>
-      throw _privateConstructorUsedError;
+  List<PoDocuments> get uploadedFiles => throw _privateConstructorUsedError;
   Remarks get remarks => throw _privateConstructorUsedError;
   bool get outsidePolicy => throw _privateConstructorUsedError;
   CounterOfferValue get priceOverride => throw _privateConstructorUsedError;
@@ -51,7 +50,7 @@ abstract class $ReturnItemDetailsCopyWith<$Res> {
       ReturnQuantity returnQuantity,
       RangeValue unitPrice,
       Usage usage,
-      List<ReturnRequestAttachment> uploadedFiles,
+      List<PoDocuments> uploadedFiles,
       Remarks remarks,
       bool outsidePolicy,
       CounterOfferValue priceOverride,
@@ -122,7 +121,7 @@ class _$ReturnItemDetailsCopyWithImpl<$Res, $Val extends ReturnItemDetails>
       uploadedFiles: null == uploadedFiles
           ? _value.uploadedFiles
           : uploadedFiles // ignore: cast_nullable_to_non_nullable
-              as List<ReturnRequestAttachment>,
+              as List<PoDocuments>,
       remarks: null == remarks
           ? _value.remarks
           : remarks // ignore: cast_nullable_to_non_nullable
@@ -175,7 +174,7 @@ abstract class _$$ReturnItemDetailsImplCopyWith<$Res>
       ReturnQuantity returnQuantity,
       RangeValue unitPrice,
       Usage usage,
-      List<ReturnRequestAttachment> uploadedFiles,
+      List<PoDocuments> uploadedFiles,
       Remarks remarks,
       bool outsidePolicy,
       CounterOfferValue priceOverride,
@@ -245,7 +244,7 @@ class __$$ReturnItemDetailsImplCopyWithImpl<$Res>
       uploadedFiles: null == uploadedFiles
           ? _value._uploadedFiles
           : uploadedFiles // ignore: cast_nullable_to_non_nullable
-              as List<ReturnRequestAttachment>,
+              as List<PoDocuments>,
       remarks: null == remarks
           ? _value.remarks
           : remarks // ignore: cast_nullable_to_non_nullable
@@ -285,7 +284,7 @@ class _$ReturnItemDetailsImpl extends _ReturnItemDetails {
       required this.returnQuantity,
       required this.unitPrice,
       required this.usage,
-      required final List<ReturnRequestAttachment> uploadedFiles,
+      required final List<PoDocuments> uploadedFiles,
       required this.remarks,
       required this.outsidePolicy,
       required this.priceOverride,
@@ -309,9 +308,9 @@ class _$ReturnItemDetailsImpl extends _ReturnItemDetails {
   final RangeValue unitPrice;
   @override
   final Usage usage;
-  final List<ReturnRequestAttachment> _uploadedFiles;
+  final List<PoDocuments> _uploadedFiles;
   @override
-  List<ReturnRequestAttachment> get uploadedFiles {
+  List<PoDocuments> get uploadedFiles {
     if (_uploadedFiles is EqualUnmodifiableListView) return _uploadedFiles;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_uploadedFiles);
@@ -402,7 +401,7 @@ abstract class _ReturnItemDetails extends ReturnItemDetails {
       required final ReturnQuantity returnQuantity,
       required final RangeValue unitPrice,
       required final Usage usage,
-      required final List<ReturnRequestAttachment> uploadedFiles,
+      required final List<PoDocuments> uploadedFiles,
       required final Remarks remarks,
       required final bool outsidePolicy,
       required final CounterOfferValue priceOverride,
@@ -426,7 +425,7 @@ abstract class _ReturnItemDetails extends ReturnItemDetails {
   @override
   Usage get usage;
   @override
-  List<ReturnRequestAttachment> get uploadedFiles;
+  List<PoDocuments> get uploadedFiles;
   @override
   Remarks get remarks;
   @override

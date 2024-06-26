@@ -44,13 +44,16 @@ mixin _$MaterialDto {
   bool get hasValidTenderContract => throw _privateConstructorUsedError;
   @JsonKey(name: 'hasMandatoryTenderContract', defaultValue: false)
   bool get hasMandatoryTenderContract => throw _privateConstructorUsedError;
-  @JsonKey(name: 'taxes', readValue: handleTax)
+  @JsonKey(name: 'taxes', readValue: JsonReadValueHelper.handleTax)
   double get taxes => throw _privateConstructorUsedError;
   @JsonKey(name: 'defaultMaterialDescription', defaultValue: '')
   String get defaultMaterialDescription => throw _privateConstructorUsedError;
   @JsonKey(name: 'isFOCMaterial', defaultValue: false)
   bool get isFOCMaterial => throw _privateConstructorUsedError;
-  @JsonKey(name: 'quantity', defaultValue: 0, readValue: _validateQantity)
+  @JsonKey(
+      name: 'quantity',
+      defaultValue: 0,
+      readValue: JsonReadValueHelper.handlevalidateQuantity)
   int get quantity => throw _privateConstructorUsedError;
   @JsonKey(name: 'remarks', defaultValue: '')
   String get remarks => throw _privateConstructorUsedError;
@@ -58,7 +61,9 @@ mixin _$MaterialDto {
   String get genericMaterialName => throw _privateConstructorUsedError;
   @JsonKey(name: 'ean', defaultValue: '')
   String get ean => throw _privateConstructorUsedError;
-  @JsonKey(name: 'bundleInformation', readValue: _nullCheck)
+  @JsonKey(
+      name: 'bundleInformation',
+      readValue: JsonReadValueHelper.readValueMapDynamic)
   BundleDto get bundle =>
       throw _privateConstructorUsedError; // new field from v3
   @JsonKey(name: 'code', defaultValue: '')
@@ -94,7 +99,8 @@ mixin _$MaterialDto {
   List<BundleDto> get bundles => throw _privateConstructorUsedError;
   @JsonKey(name: 'suspensionStatus', defaultValue: false)
   bool get isSuspended => throw _privateConstructorUsedError;
-  @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+  @JsonKey(
+      defaultValue: false, readValue: JsonReadValueHelper.mappingIsMarketPlace)
   bool get isMarketPlace => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -130,17 +136,23 @@ abstract class $MaterialDtoCopyWith<$Res> {
       bool hasValidTenderContract,
       @JsonKey(name: 'hasMandatoryTenderContract', defaultValue: false)
       bool hasMandatoryTenderContract,
-      @JsonKey(name: 'taxes', readValue: handleTax) double taxes,
+      @JsonKey(name: 'taxes', readValue: JsonReadValueHelper.handleTax)
+      double taxes,
       @JsonKey(name: 'defaultMaterialDescription', defaultValue: '')
       String defaultMaterialDescription,
       @JsonKey(name: 'isFOCMaterial', defaultValue: false) bool isFOCMaterial,
-      @JsonKey(name: 'quantity', defaultValue: 0, readValue: _validateQantity)
+      @JsonKey(
+          name: 'quantity',
+          defaultValue: 0,
+          readValue: JsonReadValueHelper.handlevalidateQuantity)
       int quantity,
       @JsonKey(name: 'remarks', defaultValue: '') String remarks,
       @JsonKey(name: 'genericMaterialName', defaultValue: '')
       String genericMaterialName,
       @JsonKey(name: 'ean', defaultValue: '') String ean,
-      @JsonKey(name: 'bundleInformation', readValue: _nullCheck)
+      @JsonKey(
+          name: 'bundleInformation',
+          readValue: JsonReadValueHelper.readValueMapDynamic)
       BundleDto bundle,
       @JsonKey(name: 'code', defaultValue: '') String code,
       @JsonKey(name: 'name', defaultValue: '') String name,
@@ -160,7 +172,9 @@ abstract class $MaterialDtoCopyWith<$Res> {
       @JsonKey(name: 'bundles', defaultValue: <BundleDto>[])
       List<BundleDto> bundles,
       @JsonKey(name: 'suspensionStatus', defaultValue: false) bool isSuspended,
-      @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+      @JsonKey(
+          defaultValue: false,
+          readValue: JsonReadValueHelper.mappingIsMarketPlace)
       bool isMarketPlace});
 
   $BundleDtoCopyWith<$Res> get bundle;
@@ -402,17 +416,23 @@ abstract class _$$MaterialDtoImplCopyWith<$Res>
       bool hasValidTenderContract,
       @JsonKey(name: 'hasMandatoryTenderContract', defaultValue: false)
       bool hasMandatoryTenderContract,
-      @JsonKey(name: 'taxes', readValue: handleTax) double taxes,
+      @JsonKey(name: 'taxes', readValue: JsonReadValueHelper.handleTax)
+      double taxes,
       @JsonKey(name: 'defaultMaterialDescription', defaultValue: '')
       String defaultMaterialDescription,
       @JsonKey(name: 'isFOCMaterial', defaultValue: false) bool isFOCMaterial,
-      @JsonKey(name: 'quantity', defaultValue: 0, readValue: _validateQantity)
+      @JsonKey(
+          name: 'quantity',
+          defaultValue: 0,
+          readValue: JsonReadValueHelper.handlevalidateQuantity)
       int quantity,
       @JsonKey(name: 'remarks', defaultValue: '') String remarks,
       @JsonKey(name: 'genericMaterialName', defaultValue: '')
       String genericMaterialName,
       @JsonKey(name: 'ean', defaultValue: '') String ean,
-      @JsonKey(name: 'bundleInformation', readValue: _nullCheck)
+      @JsonKey(
+          name: 'bundleInformation',
+          readValue: JsonReadValueHelper.readValueMapDynamic)
       BundleDto bundle,
       @JsonKey(name: 'code', defaultValue: '') String code,
       @JsonKey(name: 'name', defaultValue: '') String name,
@@ -432,7 +452,9 @@ abstract class _$$MaterialDtoImplCopyWith<$Res>
       @JsonKey(name: 'bundles', defaultValue: <BundleDto>[])
       List<BundleDto> bundles,
       @JsonKey(name: 'suspensionStatus', defaultValue: false) bool isSuspended,
-      @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+      @JsonKey(
+          defaultValue: false,
+          readValue: JsonReadValueHelper.mappingIsMarketPlace)
       bool isMarketPlace});
 
   @override
@@ -663,18 +685,24 @@ class _$MaterialDtoImpl extends _MaterialDto {
       required this.hasValidTenderContract,
       @JsonKey(name: 'hasMandatoryTenderContract', defaultValue: false)
       required this.hasMandatoryTenderContract,
-      @JsonKey(name: 'taxes', readValue: handleTax) required this.taxes,
+      @JsonKey(name: 'taxes', readValue: JsonReadValueHelper.handleTax)
+      required this.taxes,
       @JsonKey(name: 'defaultMaterialDescription', defaultValue: '')
       required this.defaultMaterialDescription,
       @JsonKey(name: 'isFOCMaterial', defaultValue: false)
       required this.isFOCMaterial,
-      @JsonKey(name: 'quantity', defaultValue: 0, readValue: _validateQantity)
+      @JsonKey(
+          name: 'quantity',
+          defaultValue: 0,
+          readValue: JsonReadValueHelper.handlevalidateQuantity)
       required this.quantity,
       @JsonKey(name: 'remarks', defaultValue: '') required this.remarks,
       @JsonKey(name: 'genericMaterialName', defaultValue: '')
       required this.genericMaterialName,
       @JsonKey(name: 'ean', defaultValue: '') required this.ean,
-      @JsonKey(name: 'bundleInformation', readValue: _nullCheck)
+      @JsonKey(
+          name: 'bundleInformation',
+          readValue: JsonReadValueHelper.readValueMapDynamic)
       required this.bundle,
       @JsonKey(name: 'code', defaultValue: '') required this.code,
       @JsonKey(name: 'name', defaultValue: '') required this.name,
@@ -701,7 +729,9 @@ class _$MaterialDtoImpl extends _MaterialDto {
       required final List<BundleDto> bundles,
       @JsonKey(name: 'suspensionStatus', defaultValue: false)
       required this.isSuspended,
-      @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+      @JsonKey(
+          defaultValue: false,
+          readValue: JsonReadValueHelper.mappingIsMarketPlace)
       required this.isMarketPlace})
       : _data = data,
         _bundles = bundles,
@@ -747,7 +777,7 @@ class _$MaterialDtoImpl extends _MaterialDto {
   @JsonKey(name: 'hasMandatoryTenderContract', defaultValue: false)
   final bool hasMandatoryTenderContract;
   @override
-  @JsonKey(name: 'taxes', readValue: handleTax)
+  @JsonKey(name: 'taxes', readValue: JsonReadValueHelper.handleTax)
   final double taxes;
   @override
   @JsonKey(name: 'defaultMaterialDescription', defaultValue: '')
@@ -756,7 +786,10 @@ class _$MaterialDtoImpl extends _MaterialDto {
   @JsonKey(name: 'isFOCMaterial', defaultValue: false)
   final bool isFOCMaterial;
   @override
-  @JsonKey(name: 'quantity', defaultValue: 0, readValue: _validateQantity)
+  @JsonKey(
+      name: 'quantity',
+      defaultValue: 0,
+      readValue: JsonReadValueHelper.handlevalidateQuantity)
   final int quantity;
   @override
   @JsonKey(name: 'remarks', defaultValue: '')
@@ -768,7 +801,9 @@ class _$MaterialDtoImpl extends _MaterialDto {
   @JsonKey(name: 'ean', defaultValue: '')
   final String ean;
   @override
-  @JsonKey(name: 'bundleInformation', readValue: _nullCheck)
+  @JsonKey(
+      name: 'bundleInformation',
+      readValue: JsonReadValueHelper.readValueMapDynamic)
   final BundleDto bundle;
 // new field from v3
   @override
@@ -832,7 +867,8 @@ class _$MaterialDtoImpl extends _MaterialDto {
   @JsonKey(name: 'suspensionStatus', defaultValue: false)
   final bool isSuspended;
   @override
-  @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+  @JsonKey(
+      defaultValue: false, readValue: JsonReadValueHelper.mappingIsMarketPlace)
   final bool isMarketPlace;
 
   @override
@@ -996,18 +1032,24 @@ abstract class _MaterialDto extends MaterialDto {
       required final bool hasValidTenderContract,
       @JsonKey(name: 'hasMandatoryTenderContract', defaultValue: false)
       required final bool hasMandatoryTenderContract,
-      @JsonKey(name: 'taxes', readValue: handleTax) required final double taxes,
+      @JsonKey(name: 'taxes', readValue: JsonReadValueHelper.handleTax)
+      required final double taxes,
       @JsonKey(name: 'defaultMaterialDescription', defaultValue: '')
       required final String defaultMaterialDescription,
       @JsonKey(name: 'isFOCMaterial', defaultValue: false)
       required final bool isFOCMaterial,
-      @JsonKey(name: 'quantity', defaultValue: 0, readValue: _validateQantity)
+      @JsonKey(
+          name: 'quantity',
+          defaultValue: 0,
+          readValue: JsonReadValueHelper.handlevalidateQuantity)
       required final int quantity,
       @JsonKey(name: 'remarks', defaultValue: '') required final String remarks,
       @JsonKey(name: 'genericMaterialName', defaultValue: '')
       required final String genericMaterialName,
       @JsonKey(name: 'ean', defaultValue: '') required final String ean,
-      @JsonKey(name: 'bundleInformation', readValue: _nullCheck)
+      @JsonKey(
+          name: 'bundleInformation',
+          readValue: JsonReadValueHelper.readValueMapDynamic)
       required final BundleDto bundle,
       @JsonKey(name: 'code', defaultValue: '') required final String code,
       @JsonKey(name: 'name', defaultValue: '') required final String name,
@@ -1037,7 +1079,9 @@ abstract class _MaterialDto extends MaterialDto {
       required final List<BundleDto> bundles,
       @JsonKey(name: 'suspensionStatus', defaultValue: false)
       required final bool isSuspended,
-      @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+      @JsonKey(
+          defaultValue: false,
+          readValue: JsonReadValueHelper.mappingIsMarketPlace)
       required final bool isMarketPlace}) = _$MaterialDtoImpl;
   const _MaterialDto._() : super._();
 
@@ -1081,7 +1125,7 @@ abstract class _MaterialDto extends MaterialDto {
   @JsonKey(name: 'hasMandatoryTenderContract', defaultValue: false)
   bool get hasMandatoryTenderContract;
   @override
-  @JsonKey(name: 'taxes', readValue: handleTax)
+  @JsonKey(name: 'taxes', readValue: JsonReadValueHelper.handleTax)
   double get taxes;
   @override
   @JsonKey(name: 'defaultMaterialDescription', defaultValue: '')
@@ -1090,7 +1134,10 @@ abstract class _MaterialDto extends MaterialDto {
   @JsonKey(name: 'isFOCMaterial', defaultValue: false)
   bool get isFOCMaterial;
   @override
-  @JsonKey(name: 'quantity', defaultValue: 0, readValue: _validateQantity)
+  @JsonKey(
+      name: 'quantity',
+      defaultValue: 0,
+      readValue: JsonReadValueHelper.handlevalidateQuantity)
   int get quantity;
   @override
   @JsonKey(name: 'remarks', defaultValue: '')
@@ -1102,7 +1149,9 @@ abstract class _MaterialDto extends MaterialDto {
   @JsonKey(name: 'ean', defaultValue: '')
   String get ean;
   @override
-  @JsonKey(name: 'bundleInformation', readValue: _nullCheck)
+  @JsonKey(
+      name: 'bundleInformation',
+      readValue: JsonReadValueHelper.readValueMapDynamic)
   BundleDto get bundle;
   @override // new field from v3
   @JsonKey(name: 'code', defaultValue: '')
@@ -1152,7 +1201,8 @@ abstract class _MaterialDto extends MaterialDto {
   @JsonKey(name: 'suspensionStatus', defaultValue: false)
   bool get isSuspended;
   @override
-  @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+  @JsonKey(
+      defaultValue: false, readValue: JsonReadValueHelper.mappingIsMarketPlace)
   bool get isMarketPlace;
   @override
   @JsonKey(ignore: true)
@@ -1166,7 +1216,10 @@ MaterialDataDto _$MaterialDataDtoFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$MaterialDataDto {
-  @JsonKey(name: 'code', defaultValue: '', readValue: materialNumberReadValue)
+  @JsonKey(
+      name: 'code',
+      defaultValue: '',
+      readValue: JsonReadValueHelper.readMaterialNumberValue)
   String get code => throw _privateConstructorUsedError;
   @JsonKey(name: 'manufactured', defaultValue: '')
   String get manufactured => throw _privateConstructorUsedError;
@@ -1180,7 +1233,8 @@ mixin _$MaterialDataDto {
   String get governmentMaterialCode => throw _privateConstructorUsedError;
   @JsonKey(name: 'itemRegistrationNumber', defaultValue: '')
   String get itemRegistrationNumber => throw _privateConstructorUsedError;
-  @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+  @JsonKey(
+      defaultValue: false, readValue: JsonReadValueHelper.mappingIsMarketPlace)
   bool get isMarketPlace => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -1197,7 +1251,9 @@ abstract class $MaterialDataDtoCopyWith<$Res> {
   @useResult
   $Res call(
       {@JsonKey(
-          name: 'code', defaultValue: '', readValue: materialNumberReadValue)
+          name: 'code',
+          defaultValue: '',
+          readValue: JsonReadValueHelper.readMaterialNumberValue)
       String code,
       @JsonKey(name: 'manufactured', defaultValue: '') String manufactured,
       @JsonKey(name: 'materialDescription', defaultValue: '')
@@ -1210,7 +1266,9 @@ abstract class $MaterialDataDtoCopyWith<$Res> {
       String governmentMaterialCode,
       @JsonKey(name: 'itemRegistrationNumber', defaultValue: '')
       String itemRegistrationNumber,
-      @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+      @JsonKey(
+          defaultValue: false,
+          readValue: JsonReadValueHelper.mappingIsMarketPlace)
       bool isMarketPlace});
 }
 
@@ -1283,7 +1341,9 @@ abstract class _$$MaterialDataDtoImplCopyWith<$Res>
   @useResult
   $Res call(
       {@JsonKey(
-          name: 'code', defaultValue: '', readValue: materialNumberReadValue)
+          name: 'code',
+          defaultValue: '',
+          readValue: JsonReadValueHelper.readMaterialNumberValue)
       String code,
       @JsonKey(name: 'manufactured', defaultValue: '') String manufactured,
       @JsonKey(name: 'materialDescription', defaultValue: '')
@@ -1296,7 +1356,9 @@ abstract class _$$MaterialDataDtoImplCopyWith<$Res>
       String governmentMaterialCode,
       @JsonKey(name: 'itemRegistrationNumber', defaultValue: '')
       String itemRegistrationNumber,
-      @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+      @JsonKey(
+          defaultValue: false,
+          readValue: JsonReadValueHelper.mappingIsMarketPlace)
       bool isMarketPlace});
 }
 
@@ -1362,7 +1424,9 @@ class __$$MaterialDataDtoImplCopyWithImpl<$Res>
 class _$MaterialDataDtoImpl extends _MaterialDataDto {
   _$MaterialDataDtoImpl(
       {@JsonKey(
-          name: 'code', defaultValue: '', readValue: materialNumberReadValue)
+          name: 'code',
+          defaultValue: '',
+          readValue: JsonReadValueHelper.readMaterialNumberValue)
       required this.code,
       @JsonKey(name: 'manufactured', defaultValue: '')
       required this.manufactured,
@@ -1376,7 +1440,9 @@ class _$MaterialDataDtoImpl extends _MaterialDataDto {
       required this.governmentMaterialCode,
       @JsonKey(name: 'itemRegistrationNumber', defaultValue: '')
       required this.itemRegistrationNumber,
-      @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+      @JsonKey(
+          defaultValue: false,
+          readValue: JsonReadValueHelper.mappingIsMarketPlace)
       required this.isMarketPlace})
       : super._();
 
@@ -1384,7 +1450,10 @@ class _$MaterialDataDtoImpl extends _MaterialDataDto {
       _$$MaterialDataDtoImplFromJson(json);
 
   @override
-  @JsonKey(name: 'code', defaultValue: '', readValue: materialNumberReadValue)
+  @JsonKey(
+      name: 'code',
+      defaultValue: '',
+      readValue: JsonReadValueHelper.readMaterialNumberValue)
   final String code;
   @override
   @JsonKey(name: 'manufactured', defaultValue: '')
@@ -1405,7 +1474,8 @@ class _$MaterialDataDtoImpl extends _MaterialDataDto {
   @JsonKey(name: 'itemRegistrationNumber', defaultValue: '')
   final String itemRegistrationNumber;
   @override
-  @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+  @JsonKey(
+      defaultValue: false, readValue: JsonReadValueHelper.mappingIsMarketPlace)
   final bool isMarketPlace;
 
   @override
@@ -1468,7 +1538,9 @@ class _$MaterialDataDtoImpl extends _MaterialDataDto {
 abstract class _MaterialDataDto extends MaterialDataDto {
   factory _MaterialDataDto(
       {@JsonKey(
-          name: 'code', defaultValue: '', readValue: materialNumberReadValue)
+          name: 'code',
+          defaultValue: '',
+          readValue: JsonReadValueHelper.readMaterialNumberValue)
       required final String code,
       @JsonKey(name: 'manufactured', defaultValue: '')
       required final String manufactured,
@@ -1482,7 +1554,9 @@ abstract class _MaterialDataDto extends MaterialDataDto {
       required final String governmentMaterialCode,
       @JsonKey(name: 'itemRegistrationNumber', defaultValue: '')
       required final String itemRegistrationNumber,
-      @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+      @JsonKey(
+          defaultValue: false,
+          readValue: JsonReadValueHelper.mappingIsMarketPlace)
       required final bool isMarketPlace}) = _$MaterialDataDtoImpl;
   _MaterialDataDto._() : super._();
 
@@ -1490,7 +1564,10 @@ abstract class _MaterialDataDto extends MaterialDataDto {
       _$MaterialDataDtoImpl.fromJson;
 
   @override
-  @JsonKey(name: 'code', defaultValue: '', readValue: materialNumberReadValue)
+  @JsonKey(
+      name: 'code',
+      defaultValue: '',
+      readValue: JsonReadValueHelper.readMaterialNumberValue)
   String get code;
   @override
   @JsonKey(name: 'manufactured', defaultValue: '')
@@ -1511,7 +1588,8 @@ abstract class _MaterialDataDto extends MaterialDataDto {
   @JsonKey(name: 'itemRegistrationNumber', defaultValue: '')
   String get itemRegistrationNumber;
   @override
-  @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+  @JsonKey(
+      defaultValue: false, readValue: JsonReadValueHelper.mappingIsMarketPlace)
   bool get isMarketPlace;
   @override
   @JsonKey(ignore: true)

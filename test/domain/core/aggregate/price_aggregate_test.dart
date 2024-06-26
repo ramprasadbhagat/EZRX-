@@ -1055,7 +1055,7 @@ void main() {
       () {
         final customPriceAggregate = emptyPriceAggregate.copyWith(
           materialInfo: emptyMaterialInfo.copyWith(
-            materialGroup4: MaterialGroup.four('6A1'),
+            materialGroup4: MaterialGroup('6A1'),
           ),
         );
         expect(
@@ -2607,8 +2607,7 @@ void main() {
       () {
     final customPriceAggregate = emptyPriceAggregate.copyWith(
       tenderContract: emptyTenderContract.copyWith(
-        contractNumber:
-            TenderContractNumber.tenderContractNumber('fake-contract-number'),
+        contractNumber: TenderContractNumber('fake-contract-number'),
       ),
       salesOrgConfig: fakeVNSalesOrgConfigs,
     );
@@ -2662,14 +2661,14 @@ void main() {
     test('tenderContractSubmitted', () {
       final firstAggregate = PriceAggregate.empty().copyWith(
         tenderContract: TenderContract.empty().copyWith(
-          contractNumber: TenderContractNumber.tenderContractNumber(
+          contractNumber: TenderContractNumber(
             'fake-contract-number-1',
           ),
         ),
       );
       final lastAggregate = PriceAggregate.empty().copyWith(
         tenderContract: TenderContract.empty().copyWith(
-          contractNumber: TenderContractNumber.tenderContractNumber(
+          contractNumber: TenderContractNumber(
             'fake-contract-number-2',
           ),
         ),

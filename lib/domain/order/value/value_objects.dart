@@ -200,11 +200,7 @@ class MaterialGroup extends ValueObject<String> {
   @override
   final Either<ValueFailure<String>, String> value;
 
-  factory MaterialGroup.two(String input) {
-    return MaterialGroup._(Right(input));
-  }
-
-  factory MaterialGroup.four(String input) {
+  factory MaterialGroup(String input) {
     return MaterialGroup._(Right(input));
   }
 
@@ -458,23 +454,7 @@ class TenderContractNumber extends ValueObject<String> {
   @override
   final Either<ValueFailure<String>, String> value;
 
-  factory TenderContractNumber.tenderContractNumber(String input) {
-    return TenderContractNumber._(Right(input));
-  }
-
-  factory TenderContractNumber.tenderContractItemNumber(String input) {
-    return TenderContractNumber._(Right(input));
-  }
-
-  factory TenderContractNumber.tenderVisaNumber(String input) {
-    return TenderContractNumber._(Right(input));
-  }
-
-  factory TenderContractNumber.announcementLetterNumber(String input) {
-    return TenderContractNumber._(Right(input));
-  }
-
-  factory TenderContractNumber.tenderContractReference(String input) {
+    factory TenderContractNumber(String input) {
     return TenderContractNumber._(Right(input));
   }
 

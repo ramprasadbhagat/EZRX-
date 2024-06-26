@@ -50,7 +50,6 @@ class PoAttachmentRepository implements IpoAttachmentRepository {
   @override
   Future<Either<ApiFailure, List<File>>> downloadFiles({
     required List<PoDocuments> files,
-    required AttachmentType attachmentType,
   }) async {
     if (config.appFlavor == Flavor.mock) {
       try {
@@ -96,7 +95,6 @@ class PoAttachmentRepository implements IpoAttachmentRepository {
   @override
   Future<Either<ApiFailure, OpenResult>> openFile({
     required PoDocuments files,
-    required AttachmentType attachmentType,
   }) async {
     if (config.appFlavor == Flavor.mock) {
       try {

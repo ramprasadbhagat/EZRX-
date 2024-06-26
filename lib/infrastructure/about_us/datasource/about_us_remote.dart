@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:dio/dio.dart';
 import 'package:ezrxmobile/domain/about_us/entities/about_us.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
@@ -37,7 +36,7 @@ class AboutUsRemoteDataSource {
         'variables': variableData,
       }),
     );
-    _aboutUsExceptionChecker(res: res);
+    exceptionHandler.handleExceptionChecker(res: res);
     final finalData =
         res.data['data']?['item']?['components'] as Map<String, dynamic>?;
     final templateList = (finalData?['value'] ?? []) as List;
@@ -46,16 +45,5 @@ class AboutUsRemoteDataSource {
     }
 
     return AboutUsDto.fromJson(finalData ?? {}).toDomain();
-  }
-
-  void _aboutUsExceptionChecker({required Response<dynamic> res}) {
-    if (exceptionHandler.isServerResponseError(res: res)) {
-      throw ServerException(message: res.data['errors'][0]['message']);
-    } else if (res.statusCode != 200) {
-      throw ServerException(
-        code: res.statusCode ?? 0,
-        message: res.statusMessage ?? '',
-      );
-    }
   }
 }

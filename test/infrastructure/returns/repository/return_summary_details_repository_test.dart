@@ -36,11 +36,12 @@ void main() {
         ReturnSummaryRemoteDataSourceMock();
     deviceStorage = DeviceStorageMock();
     config = ConfigMock();
+
     returnSummaryDetailsRepository = ReturnSummaryDetailsRepository(
       config: config,
-      returnSummaryDetailsRequestInformationLocal:
+      returnRequestInformationLocalDataSource:
           returnSummaryDetailsRequestInformationLocal,
-      returnSummaryDetailsRequestInformationRemote:
+      returnRequestInformationRemoteDataSource:
           returnSummaryDetailsRequestInformationRemote,
       deviceStorage: deviceStorage,
     );
@@ -50,8 +51,8 @@ void main() {
     test('=> getReturnInformation locally success', () async {
       when(() => config.appFlavor).thenReturn(Flavor.mock);
       when(
-        () =>
-            returnSummaryDetailsRequestInformationLocal.getRequestInformation(),
+        () => returnSummaryDetailsRequestInformationLocal
+            .getReturnRequestInformation(),
       ).thenAnswer(
         (invocation) async => RequestInformation.empty(),
       );
@@ -65,8 +66,8 @@ void main() {
     test('=> getReturnInformation locally failed', () async {
       when(() => config.appFlavor).thenReturn(Flavor.mock);
       when(
-        () =>
-            returnSummaryDetailsRequestInformationLocal.getRequestInformation(),
+        () => returnSummaryDetailsRequestInformationLocal
+            .getReturnRequestInformation(),
       ).thenThrow((invocation) async => MockException());
 
       final result = await returnSummaryDetailsRepository.getReturnInformation(
@@ -79,8 +80,8 @@ void main() {
       when(() => deviceStorage.currentMarket()).thenReturn(fakeMarket);
       when(() => config.appFlavor).thenReturn(Flavor.uat);
       when(
-        () =>
-            returnSummaryDetailsRequestInformationRemote.getRequestInformation(
+        () => returnSummaryDetailsRequestInformationRemote
+            .getReturnRequestInformation(
           returnRequestId: 'mock_id',
           market: fakeMarket,
         ),
@@ -98,8 +99,8 @@ void main() {
       when(() => deviceStorage.currentMarket()).thenReturn(fakeMarket);
       when(() => config.appFlavor).thenReturn(Flavor.uat);
       when(
-        () =>
-            returnSummaryDetailsRequestInformationRemote.getRequestInformation(
+        () => returnSummaryDetailsRequestInformationRemote
+            .getReturnRequestInformation(
           returnRequestId: 'mock_id',
           market: fakeMarket,
         ),

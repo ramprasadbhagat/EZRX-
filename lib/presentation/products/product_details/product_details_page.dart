@@ -32,6 +32,7 @@ import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dar
 import 'package:ezrxmobile/presentation/core/market_place/market_place_rectangle_logo.dart';
 import 'package:ezrxmobile/presentation/core/product_price_label.dart';
 import 'package:ezrxmobile/presentation/core/responsive.dart';
+import 'package:ezrxmobile/presentation/core/scroll_to_top_widget.dart';
 import 'package:ezrxmobile/presentation/core/status_label.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/orders/cart/add_to_cart/add_to_cart_error_section.dart';
@@ -114,16 +115,6 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
     });
   }
 
-  void _scrollToTop() {
-    if (_scrollController.hasClients) {
-      _scrollController.animateTo(
-        0.0,
-        duration: const Duration(milliseconds: 500),
-        curve: Curves.easeInOut,
-      );
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     final eligibilityState = context.read<EligibilityBloc>().state;
@@ -184,18 +175,10 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
             customerBlockedOrSuspended:
                 eligibilityState.customerBlockOrSuspended,
           ),
-          floatingActionButton: !_isScrollAtInitialPosition
-              ? FloatingActionButton(
-                  key: WidgetKeys.materialDetailsFloatingButton,
-                  onPressed: () => _scrollToTop(),
-                  mini: true,
-                  backgroundColor: ZPColors.secondaryMustard,
-                  child: const Icon(
-                    Icons.expand_less,
-                    color: ZPColors.black,
-                  ),
-                )
-              : const SizedBox.shrink(),
+          floatingActionButton: ScrollToTopWidget(
+            scrollController: _scrollController,
+            isVisible: !_isScrollAtInitialPosition,
+          ),
           body: ListView(
             key: WidgetKeys.scrollList,
             controller: _scrollController,

@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:auto_route/auto_route.dart';
 import 'package:collection/collection.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -17,13 +15,13 @@ import 'package:ezrxmobile/domain/order/entities/material_price_detail.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/presentation/core/address_info_section.dart';
-import 'package:ezrxmobile/presentation/core/confirm_bottom_sheet.dart';
 import 'package:ezrxmobile/presentation/core/custom_card.dart';
 import 'package:ezrxmobile/presentation/core/custom_image.dart';
 import 'package:ezrxmobile/presentation/core/custom_search_bar.dart';
 import 'package:ezrxmobile/presentation/core/edge_checkbox.dart';
 import 'package:ezrxmobile/presentation/core/info_label.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
+import 'package:ezrxmobile/presentation/core/mixin/bottomsheet_mixin.dart';
 import 'package:ezrxmobile/presentation/core/no_record.dart';
 import 'package:ezrxmobile/presentation/core/payer_information.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
@@ -44,7 +42,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 part 'package:ezrxmobile/presentation/products/combo_detail/widgets/total_combo_count.dart';
 part 'package:ezrxmobile/presentation/products/combo_detail/widgets/combo_product_tile.dart';
 part 'package:ezrxmobile/presentation/products/combo_detail/widgets/material_details_section.dart';
-part 'package:ezrxmobile/presentation/products/combo_detail/widgets/material_quantity_selection.dart';
+part 'package:ezrxmobile/presentation/products/combo_detail/widgets/combo_material_quantity_selection.dart';
 part 'package:ezrxmobile/presentation/products/combo_detail/widgets/material_details.dart';
 part 'package:ezrxmobile/presentation/products/combo_detail/widgets/item_sub_total_section.dart';
 part 'package:ezrxmobile/presentation/products/combo_detail/widgets/combo_requirement_section.dart';
@@ -53,7 +51,7 @@ part 'package:ezrxmobile/presentation/products/combo_detail/widgets/combo_detail
 part 'package:ezrxmobile/presentation/products/combo_detail/widgets/combo_detail_body_content.dart';
 part 'package:ezrxmobile/presentation/products/combo_detail/widgets/combo_detail_delete_from_cart_button.dart';
 
-class ComboDetailPage extends StatelessWidget {
+class ComboDetailPage extends StatelessWidget with BottomsheetMixin {
   const ComboDetailPage({super.key});
 
   @override
@@ -88,7 +86,13 @@ class ComboDetailPage extends StatelessWidget {
               ),
               iconSize: 14,
               onPressed: () async {
-                final confirmed = await _showConfirmBottomSheet(context);
+                final confirmed = await showConfirmBottomSheet(
+                  context: context,
+                  title: 'Leave page?',
+                  content:
+                      'Any existing items in your combo selection will be cleared.',
+                  confirmButtonText: 'Leave',
+                );
                 if (confirmed ?? false) {
                   if (context.mounted) context.router.navigateBack();
                 }
@@ -147,19 +151,6 @@ class ComboDetailPage extends StatelessWidget {
           ),
         );
       },
-    );
-  }
-
-  Future<bool?> _showConfirmBottomSheet(BuildContext context) {
-    return showModalBottomSheet<bool>(
-      context: context,
-      isScrollControlled: true,
-      enableDrag: false,
-      builder: (_) => const ConfirmBottomSheet(
-        title: 'Leave page?',
-        content: 'Any existing items in your combo selection will be cleared.',
-        confirmButtonText: 'Leave',
-      ),
     );
   }
 }

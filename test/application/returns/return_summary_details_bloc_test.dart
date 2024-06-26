@@ -4,11 +4,12 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/application/returns/return_summary_details/return_summary_details_bloc.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
+import 'package:ezrxmobile/domain/order/entities/order_history_details_po_documents.dart';
 import 'package:ezrxmobile/domain/returns/entities/request_information.dart';
-import 'package:ezrxmobile/domain/returns/entities/return_request_attachment.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_request_information.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_request_information_header.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_requests_id.dart';
+import 'package:ezrxmobile/infrastructure/order/repository/po_attachment_repository.dart';
 import 'package:ezrxmobile/infrastructure/returns/repository/return_request_repository.dart';
 import 'package:ezrxmobile/infrastructure/returns/repository/return_summary_details_repository.dart';
 import 'package:flutter/material.dart';
@@ -16,23 +17,25 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:permission_handler/permission_handler.dart';
 
+import '../../presentation/orders/core/po_attachment_test.dart';
+
 class MockReturnSummaryDetailsRepository extends Mock
     implements ReturnSummaryDetailsRepository {}
 
 class MockReturnRequestRepository extends Mock
     implements ReturnRequestRepository {}
 
-class FakeFile extends Fake implements File {}
-
 void main() {
   late MockReturnSummaryDetailsRepository mockReturnSummaryDetailsRepository;
   late ReturnRequestRepository mockReturnRequestRepository;
-  final fakeFile = FakeFile();
+  late PoAttachmentRepository poAttachmentRepository;
+  final file = [File('')];
 
   setUpAll(() async {
     WidgetsFlutterBinding.ensureInitialized();
     mockReturnSummaryDetailsRepository = MockReturnSummaryDetailsRepository();
     mockReturnRequestRepository = MockReturnRequestRepository();
+    poAttachmentRepository = PoAttachmentRepositoryMock();
   });
 
   group('Return Summary Details Test -', () {
@@ -41,6 +44,7 @@ void main() {
       build: () => ReturnSummaryDetailsBloc(
         returnSummaryDetailsRepository: mockReturnSummaryDetailsRepository,
         returnRequestRepository: mockReturnRequestRepository,
+        poAttachmentRepository: poAttachmentRepository,
       ),
       act: (ReturnSummaryDetailsBloc bloc) =>
           bloc.add(const ReturnSummaryDetailsEvent.initialized()),
@@ -52,6 +56,7 @@ void main() {
       build: () => ReturnSummaryDetailsBloc(
         returnSummaryDetailsRepository: mockReturnSummaryDetailsRepository,
         returnRequestRepository: mockReturnRequestRepository,
+        poAttachmentRepository: poAttachmentRepository,
       ),
       setUp: () {
         when(
@@ -84,6 +89,7 @@ void main() {
       build: () => ReturnSummaryDetailsBloc(
         returnSummaryDetailsRepository: mockReturnSummaryDetailsRepository,
         returnRequestRepository: mockReturnRequestRepository,
+        poAttachmentRepository: poAttachmentRepository,
       ),
       setUp: () {
         when(
@@ -114,20 +120,19 @@ void main() {
     );
 
     group('Download -', () {
-      final attachment1 =
-          ReturnRequestAttachment.empty().copyWith(path: 'fake-url-1');
-      final attachment2 =
-          ReturnRequestAttachment.empty().copyWith(path: 'fake-url-2');
+      final attachment1 = PoDocuments.empty().copyWith(url: 'fake-url-1');
+      final attachment2 = PoDocuments.empty().copyWith(url: 'fake-url-2');
 
       blocTest(
         'Get permission failed',
         build: () => ReturnSummaryDetailsBloc(
           returnSummaryDetailsRepository: mockReturnSummaryDetailsRepository,
           returnRequestRepository: mockReturnRequestRepository,
+          poAttachmentRepository: poAttachmentRepository,
         ),
         setUp: () {
           when(
-            () => mockReturnRequestRepository.getDownloadPermission(),
+            () => poAttachmentRepository.downloadPermission(),
           ).thenAnswer((_) async => const Left(ApiFailure.other('mock-error')));
         },
         act: (ReturnSummaryDetailsBloc bloc) => bloc.add(
@@ -151,13 +156,14 @@ void main() {
         build: () => ReturnSummaryDetailsBloc(
           returnSummaryDetailsRepository: mockReturnSummaryDetailsRepository,
           returnRequestRepository: mockReturnRequestRepository,
+          poAttachmentRepository: poAttachmentRepository,
         ),
         setUp: () {
           when(
-            () => mockReturnRequestRepository.getDownloadPermission(),
+            () => poAttachmentRepository.downloadPermission(),
           ).thenAnswer((_) async => const Right(PermissionStatus.granted));
           when(
-            () => mockReturnRequestRepository.downloadFile(file: attachment1),
+            () => poAttachmentRepository.downloadFiles(files: [attachment1]),
           ).thenAnswer((_) async => const Left(ApiFailure.other('mock-error')));
         },
         seed: () => ReturnSummaryDetailsState.initial().copyWith(
@@ -171,7 +177,7 @@ void main() {
         expect: () => [
           ReturnSummaryDetailsState.initial().copyWith(
             downloadingAttachments: [attachment2, attachment1],
-            downloadedAttachment: ReturnRequestAttachment.empty(),
+            downloadedAttachment: PoDocuments.empty(),
             downloadFailureOrSuccessOption: none(),
           ),
           ReturnSummaryDetailsState.initial().copyWith(
@@ -188,14 +194,15 @@ void main() {
         build: () => ReturnSummaryDetailsBloc(
           returnSummaryDetailsRepository: mockReturnSummaryDetailsRepository,
           returnRequestRepository: mockReturnRequestRepository,
+          poAttachmentRepository: poAttachmentRepository,
         ),
         setUp: () {
           when(
-            () => mockReturnRequestRepository.getDownloadPermission(),
+            () => poAttachmentRepository.downloadPermission(),
           ).thenAnswer((_) async => const Right(PermissionStatus.granted));
           when(
-            () => mockReturnRequestRepository.downloadFile(file: attachment1),
-          ).thenAnswer((_) async => Right(fakeFile));
+            () => poAttachmentRepository.downloadFiles(files: [attachment1]),
+          ).thenAnswer((_) async => Right(file));
         },
         seed: () => ReturnSummaryDetailsState.initial().copyWith(
           downloadingAttachments: [attachment2],
@@ -208,13 +215,13 @@ void main() {
         expect: () => [
           ReturnSummaryDetailsState.initial().copyWith(
             downloadingAttachments: [attachment2, attachment1],
-            downloadedAttachment: ReturnRequestAttachment.empty(),
+            downloadedAttachment: PoDocuments.empty(),
             downloadFailureOrSuccessOption: none(),
           ),
           ReturnSummaryDetailsState.initial().copyWith(
             downloadingAttachments: [attachment2],
             downloadedAttachment: attachment1,
-            downloadFailureOrSuccessOption: optionOf(Right(fakeFile)),
+            downloadFailureOrSuccessOption: optionOf(Right(file)),
           ),
         ],
       );

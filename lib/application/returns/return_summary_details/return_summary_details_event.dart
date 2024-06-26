@@ -7,6 +7,6 @@ class ReturnSummaryDetailsEvent with _$ReturnSummaryDetailsEvent {
     required ReturnRequestsId returnId,
   }) = _Fetch;
     const factory ReturnSummaryDetailsEvent.downloadFile({
-    required ReturnRequestAttachment file,
+    required PoDocuments file,
   }) = _DownloadFile;
 }

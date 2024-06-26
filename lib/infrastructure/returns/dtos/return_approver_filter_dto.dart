@@ -1,4 +1,5 @@
 import 'package:ezrxmobile/domain/returns/entities/return_approver_filter.dart';
+import 'package:ezrxmobile/infrastructure/core/common/json_key_converter.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'return_approver_filter_dto.freezed.dart';
@@ -11,47 +12,47 @@ class ReturnApproverFilterDto with _$ReturnApproverFilterDto {
       name: 'returnId',
       defaultValue: '',
       includeIfNull: false,
-      toJson: valueTojson,
+      toJson: valueOrNullToJson,
     )
-        required String returnId,
+    required String returnId,
     @JsonKey(
       name: 'soldTo',
       defaultValue: '',
       includeIfNull: false,
-      toJson: valueTojson,
+      toJson: valueOrNullToJson,
     )
-        required String soldTo,
+    required String soldTo,
     @JsonKey(
       name: 'shipTo',
       defaultValue: '',
       includeIfNull: false,
-      toJson: valueTojson,
+      toJson: valueOrNullToJson,
     )
-        required String shipTo,
+    required String shipTo,
     @JsonKey(
       name: 'createdBy',
       defaultValue: '',
       includeIfNull: false,
-      toJson: valueTojson,
+      toJson: valueOrNullToJson,
     )
-        required String createdBy,
+    required String createdBy,
     @JsonKey(
       name: 'dateTo',
       defaultValue: '',
     )
-        required String dateTo,
+    required String dateTo,
     @JsonKey(
       name: 'dateFrom',
       defaultValue: '',
     )
-        required String dateFrom,
+    required String dateFrom,
     @JsonKey(
       name: 'status',
       defaultValue: '',
       includeIfNull: false,
-      toJson: valueTojson,
+      toJson: valueOrNullToJson,
     )
-        required String status,
+    required String status,
   }) = _ReturnApproverFilterDto;
 
   factory ReturnApproverFilterDto.fromDomain(
@@ -71,5 +72,3 @@ class ReturnApproverFilterDto with _$ReturnApproverFilterDto {
   factory ReturnApproverFilterDto.fromJson(Map<String, dynamic> json) =>
       _$ReturnApproverFilterDtoFromJson(json);
 }
-
-dynamic valueTojson(String value) => value.isNotEmpty ? value : null;

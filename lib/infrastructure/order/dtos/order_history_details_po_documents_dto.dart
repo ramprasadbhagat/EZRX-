@@ -1,3 +1,5 @@
+import 'package:ezrxmobile/domain/returns/value/value_objects.dart';
+import 'package:ezrxmobile/infrastructure/core/common/json_key_readvalue_helper.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import 'package:ezrxmobile/domain/order/entities/order_history_details_po_documents.dart';
@@ -9,12 +11,24 @@ part 'order_history_details_po_documents_dto.g.dart';
 class PoDocumentsDto with _$PoDocumentsDto {
   const PoDocumentsDto._();
   const factory PoDocumentsDto({
-    @JsonKey(name: 'url', defaultValue: '', readValue: _readUrl)
-        required String url,
-    @JsonKey(name: 'name', defaultValue: '', readValue: _readName)
-        required String name,
-    @JsonKey(name: 'path', defaultValue: '', readValue: _readUrl)
-        required String path,
+    @JsonKey(
+      name: 'url',
+      defaultValue: '',
+      readValue: JsonReadValueHelper.readUrl,
+    )
+    required String url,
+    @JsonKey(
+      name: 'name',
+      defaultValue: '',
+      readValue: JsonReadValueHelper.readFileName,
+    )
+    required String name,
+    @JsonKey(
+      name: 'path',
+      defaultValue: '',
+      readValue: JsonReadValueHelper.readUrl,
+    )
+    required String path,
   }) = _PoDocumentsDto;
   factory PoDocumentsDto.fromDomain(
     PoDocuments orderHistoryDetailsPODocuments,
@@ -30,6 +44,7 @@ class PoDocumentsDto with _$PoDocumentsDto {
     return PoDocuments(
       url: url,
       name: name,
+      size: FileSize(0),
     );
   }
 
@@ -38,8 +53,3 @@ class PoDocumentsDto with _$PoDocumentsDto {
   ) =>
       _$PoDocumentsDtoFromJson(json);
 }
-
-String _readUrl(Map json, String key) => json['Url'] ?? json[key] ?? '';
-
-String _readName(Map json, String key) =>
-    json[key] ?? json['Name'] ?? json['filename'] ?? '';

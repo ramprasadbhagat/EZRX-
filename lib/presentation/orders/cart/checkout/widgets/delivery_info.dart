@@ -41,7 +41,7 @@ class _DeliveryInfo extends StatelessWidget {
               bottom: BorderSide(color: ZPColors.extraLightGrey2),
             ),
             children: [
-              _TextFormField(
+              _CheckoutTextFormField(
                 labelText: 'PO reference',
                 keyText: 'pOReferenceKey',
                 hintText: config.poNumberRequired.poReferenceHintText,
@@ -53,7 +53,7 @@ class _DeliveryInfo extends StatelessWidget {
               ),
               if (config.enableFutureDeliveryDay) const _RequestDeliveryDate(),
               if (config.enableReferenceNote)
-                _TextFormField(
+                _CheckoutTextFormField(
                   labelText: 'Reference note',
                   keyText: 'referenceNoteKey',
                   hintText: 'Enter reference note (Optional)',
@@ -70,7 +70,7 @@ class _DeliveryInfo extends StatelessWidget {
                       focusNodes[DeliveryInfoLabel.paymentTerm] ?? FocusNode(),
                 ),
               if (config.enableMobileNumber)
-                _TextFormField(
+                _CheckoutTextFormField(
                   labelText: 'Contact person',
                   keyText: 'contactPersonKey',
                   hintText: 'Enter contact person name',
@@ -81,7 +81,7 @@ class _DeliveryInfo extends StatelessWidget {
                       FocusNode(),
                 ),
               if (config.enableMobileNumber)
-                _TextFormField(
+                _CheckoutTextFormField(
                   labelText: 'Contact number',
                   keyText: 'contactNumberKey',
                   hintText: 'Enter contact person number',
@@ -96,7 +96,7 @@ class _DeliveryInfo extends StatelessWidget {
                       focusNodes[DeliveryInfoLabel.mobileNumber] ?? FocusNode(),
                 ),
               if (config.enableSpecialInstructions)
-                _TextFormField(
+                _CheckoutTextFormField(
                   labelText: 'Delivery instructions',
                   keyText: 'deliveryInstructionKey',
                   hintText: 'Enter delivery instructions(Optional)',
@@ -117,7 +117,7 @@ class _DeliveryInfo extends StatelessWidget {
   }
 }
 
-class _TextFormField extends StatefulWidget {
+class _CheckoutTextFormField extends StatefulWidget {
   final String labelText;
   final String keyText;
   final String hintText;
@@ -128,7 +128,7 @@ class _TextFormField extends StatefulWidget {
   final int? maxLength;
   final List<TextInputFormatter>? inputFormatters;
 
-  const _TextFormField({
+  const _CheckoutTextFormField({
     required this.labelText,
     required this.keyText,
     required this.label,
@@ -141,10 +141,10 @@ class _TextFormField extends StatefulWidget {
   });
 
   @override
-  State<_TextFormField> createState() => _TextFormFieldState();
+  State<_CheckoutTextFormField> createState() => _CheckoutTextFormFieldState();
 }
 
-class _TextFormFieldState extends State<_TextFormField> {
+class _CheckoutTextFormFieldState extends State<_CheckoutTextFormField> {
   final _controller = TextEditingController();
 
   @override
@@ -160,7 +160,7 @@ class _TextFormFieldState extends State<_TextFormField> {
   }
 
   @override
-  void didUpdateWidget(covariant _TextFormField oldWidget) {
+  void didUpdateWidget(covariant _CheckoutTextFormField oldWidget) {
     super.didUpdateWidget(oldWidget);
     //This check is required for keyboard with Chinese character to work
     //This prevent _updateValue() called every time the data is updated, only update

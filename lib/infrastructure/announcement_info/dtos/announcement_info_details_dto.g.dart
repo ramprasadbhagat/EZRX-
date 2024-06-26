@@ -10,16 +10,26 @@ _$AnnouncementInfoDetailsDtoImpl _$$AnnouncementInfoDetailsDtoImplFromJson(
         Map<String, dynamic> json) =>
     _$AnnouncementInfoDetailsDtoImpl(
       id: json['id'] as String? ?? '',
-      title: readValue(json, 'title') as String? ?? '',
-      content: readValue(json, 'content') as String? ?? '',
+      title:
+          JsonReadValueHelper.readValueString(json, 'title') as String? ?? '',
+      content:
+          JsonReadValueHelper.readValueString(json, 'content') as String? ?? '',
       summary: json['summary'] as String? ?? '',
-      thumbnail: readSrc(json, 'thumbnail') as String? ?? '',
-      publishedDate: readIso(json, 'publishedDate') as String? ?? '',
-      releaseDate: readIso(json, 'releaseDate') as String,
-      manufacturer: readValue(json, 'manufacturer') as String? ?? '',
-      source: readValue(json, 'source') as String? ?? '',
-      tag: readTag(json, 'tag') as String,
-      documentsList: (getDocumentsList(json, 'documents') as List<dynamic>)
+      thumbnail:
+          JsonReadValueHelper.readSrcValue(json, 'thumbnail') as String? ?? '',
+      publishedDate: JsonReadValueHelper.readValueDateISO(json, 'publishedDate')
+              as String? ??
+          '',
+      releaseDate:
+          JsonReadValueHelper.readValueDateISO(json, 'releaseDate') as String,
+      manufacturer: JsonReadValueHelper.readValueString(json, 'manufacturer')
+              as String? ??
+          '',
+      source:
+          JsonReadValueHelper.readValueString(json, 'source') as String? ?? '',
+      tag: JsonReadValueHelper.readTagName(json, 'tag') as String,
+      documentsList: (JsonReadValueHelper.readDocumentsList(json, 'documents')
+              as List<dynamic>)
           .map((e) => e as String)
           .toList(),
     );

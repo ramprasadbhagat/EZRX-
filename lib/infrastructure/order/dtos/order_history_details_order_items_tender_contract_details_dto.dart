@@ -49,7 +49,7 @@ class OrderHistoryDetailsTenderContractDto
 
   OrderHistoryDetailsTenderContract toDomain() {
     return OrderHistoryDetailsTenderContract(
-      contractNumber: TenderContractNumber.tenderContractNumber(contractNumber),
+      contractNumber: TenderContractNumber(contractNumber),
       orderReason: TenderContractReason(contractReference),
       price: price,
       priceUnit: priceUnit,

@@ -53,14 +53,16 @@ class _ReturnMaterialInfo extends StatelessWidget {
             totalPrice: data.totalPrice.getOrDefaultValue(0),
           ),
           ExpandableSection(
-            key: WidgetKeys.expandableSection,
             expanded: false,
-            children: [
-              MaterialDetailsSection(
+            child: Column(
+              children: [
+                MaterialDetailsSection(
                 data: data,
               ),
-            ],
+              ],
+            ),
           ),
+          
           _BonusItemSection(
             items: data.bonusItemsBelongToZPorMP,
           ),

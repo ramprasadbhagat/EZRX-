@@ -45,7 +45,9 @@ mixin _$UserDto {
   bool get emailNotifications => throw _privateConstructorUsedError;
   @JsonKey(name: 'mobileNotifications', defaultValue: false)
   bool get mobileNotifications => throw _privateConstructorUsedError;
-  @JsonKey(name: 'languagePreference', readValue: handleEmptyLanguagePreference)
+  @JsonKey(
+      name: 'languagePreference',
+      readValue: JsonReadValueHelper.handleEmptyLanguagePreference)
   String get languagePreference => throw _privateConstructorUsedError;
   @JsonKey(name: 'enableOrderType', defaultValue: false)
   bool get enableOrderType => throw _privateConstructorUsedError;
@@ -68,16 +70,20 @@ mixin _$UserDto {
       defaultValue: <PaymentAdviceExpiryNotificationDto>[])
   List<PaymentAdviceExpiryNotificationDto> get paymentNotification =>
       throw _privateConstructorUsedError;
-  @JsonKey(name: 'preferredLanguage', readValue: handleEmptyLanguagePreference)
+  @JsonKey(
+      name: 'preferredLanguage',
+      readValue: JsonReadValueHelper.handleEmptyLanguagePreference)
   String get preferredLanguage => throw _privateConstructorUsedError;
   @JsonKey(
       name: 'supportedLanguages',
-      readValue: handleSupportedLanguages,
+      readValue: JsonReadValueHelper.handleSupportedLanguages,
       defaultValue: <String>[])
   List<String> get supportedLanguages => throw _privateConstructorUsedError;
   @JsonKey(name: 'MobileNumber', defaultValue: '')
   String get mobileNumber => throw _privateConstructorUsedError;
-  @JsonKey(name: 'acceptMPTC', readValue: handleMarketPlaceTnCAcceptance)
+  @JsonKey(
+      name: 'acceptMPTC',
+      readValue: JsonReadValueHelper.handleMarketPlaceTnCAcceptance)
   String get acceptMPTC => throw _privateConstructorUsedError;
   @JsonKey(name: 'isFirstLogin', defaultValue: false)
   bool get isFirstLogin => throw _privateConstructorUsedError;
@@ -110,7 +116,8 @@ abstract class $UserDtoCopyWith<$Res> {
       @JsonKey(name: 'mobileNotifications', defaultValue: false)
       bool mobileNotifications,
       @JsonKey(
-          name: 'languagePreference', readValue: handleEmptyLanguagePreference)
+          name: 'languagePreference',
+          readValue: JsonReadValueHelper.handleEmptyLanguagePreference)
       String languagePreference,
       @JsonKey(name: 'enableOrderType', defaultValue: false)
       bool enableOrderType,
@@ -131,15 +138,18 @@ abstract class $UserDtoCopyWith<$Res> {
           defaultValue: <PaymentAdviceExpiryNotificationDto>[])
       List<PaymentAdviceExpiryNotificationDto> paymentNotification,
       @JsonKey(
-          name: 'preferredLanguage', readValue: handleEmptyLanguagePreference)
+          name: 'preferredLanguage',
+          readValue: JsonReadValueHelper.handleEmptyLanguagePreference)
       String preferredLanguage,
       @JsonKey(
           name: 'supportedLanguages',
-          readValue: handleSupportedLanguages,
+          readValue: JsonReadValueHelper.handleSupportedLanguages,
           defaultValue: <String>[])
       List<String> supportedLanguages,
       @JsonKey(name: 'MobileNumber', defaultValue: '') String mobileNumber,
-      @JsonKey(name: 'acceptMPTC', readValue: handleMarketPlaceTnCAcceptance)
+      @JsonKey(
+          name: 'acceptMPTC',
+          readValue: JsonReadValueHelper.handleMarketPlaceTnCAcceptance)
       String acceptMPTC,
       @JsonKey(name: 'isFirstLogin', defaultValue: false) bool isFirstLogin});
 
@@ -342,7 +352,8 @@ abstract class _$$UserDtoImplCopyWith<$Res> implements $UserDtoCopyWith<$Res> {
       @JsonKey(name: 'mobileNotifications', defaultValue: false)
       bool mobileNotifications,
       @JsonKey(
-          name: 'languagePreference', readValue: handleEmptyLanguagePreference)
+          name: 'languagePreference',
+          readValue: JsonReadValueHelper.handleEmptyLanguagePreference)
       String languagePreference,
       @JsonKey(name: 'enableOrderType', defaultValue: false)
       bool enableOrderType,
@@ -363,15 +374,18 @@ abstract class _$$UserDtoImplCopyWith<$Res> implements $UserDtoCopyWith<$Res> {
           defaultValue: <PaymentAdviceExpiryNotificationDto>[])
       List<PaymentAdviceExpiryNotificationDto> paymentNotification,
       @JsonKey(
-          name: 'preferredLanguage', readValue: handleEmptyLanguagePreference)
+          name: 'preferredLanguage',
+          readValue: JsonReadValueHelper.handleEmptyLanguagePreference)
       String preferredLanguage,
       @JsonKey(
           name: 'supportedLanguages',
-          readValue: handleSupportedLanguages,
+          readValue: JsonReadValueHelper.handleSupportedLanguages,
           defaultValue: <String>[])
       List<String> supportedLanguages,
       @JsonKey(name: 'MobileNumber', defaultValue: '') String mobileNumber,
-      @JsonKey(name: 'acceptMPTC', readValue: handleMarketPlaceTnCAcceptance)
+      @JsonKey(
+          name: 'acceptMPTC',
+          readValue: JsonReadValueHelper.handleMarketPlaceTnCAcceptance)
       String acceptMPTC,
       @JsonKey(name: 'isFirstLogin', defaultValue: false) bool isFirstLogin});
 
@@ -556,7 +570,8 @@ class _$UserDtoImpl extends _UserDto {
       @JsonKey(name: 'mobileNotifications', defaultValue: false)
       required this.mobileNotifications,
       @JsonKey(
-          name: 'languagePreference', readValue: handleEmptyLanguagePreference)
+          name: 'languagePreference',
+          readValue: JsonReadValueHelper.handleEmptyLanguagePreference)
       required this.languagePreference,
       @JsonKey(name: 'enableOrderType', defaultValue: false)
       required this.enableOrderType,
@@ -580,16 +595,19 @@ class _$UserDtoImpl extends _UserDto {
       required final List<PaymentAdviceExpiryNotificationDto>
           paymentNotification,
       @JsonKey(
-          name: 'preferredLanguage', readValue: handleEmptyLanguagePreference)
+          name: 'preferredLanguage',
+          readValue: JsonReadValueHelper.handleEmptyLanguagePreference)
       required this.preferredLanguage,
       @JsonKey(
           name: 'supportedLanguages',
-          readValue: handleSupportedLanguages,
+          readValue: JsonReadValueHelper.handleSupportedLanguages,
           defaultValue: <String>[])
       required final List<String> supportedLanguages,
       @JsonKey(name: 'MobileNumber', defaultValue: '')
       required this.mobileNumber,
-      @JsonKey(name: 'acceptMPTC', readValue: handleMarketPlaceTnCAcceptance)
+      @JsonKey(
+          name: 'acceptMPTC',
+          readValue: JsonReadValueHelper.handleMarketPlaceTnCAcceptance)
       required this.acceptMPTC,
       @JsonKey(name: 'isFirstLogin', defaultValue: false)
       required this.isFirstLogin})
@@ -653,7 +671,9 @@ class _$UserDtoImpl extends _UserDto {
   @JsonKey(name: 'mobileNotifications', defaultValue: false)
   final bool mobileNotifications;
   @override
-  @JsonKey(name: 'languagePreference', readValue: handleEmptyLanguagePreference)
+  @JsonKey(
+      name: 'languagePreference',
+      readValue: JsonReadValueHelper.handleEmptyLanguagePreference)
   final String languagePreference;
   @override
   @JsonKey(name: 'enableOrderType', defaultValue: false)
@@ -692,13 +712,15 @@ class _$UserDtoImpl extends _UserDto {
   }
 
   @override
-  @JsonKey(name: 'preferredLanguage', readValue: handleEmptyLanguagePreference)
+  @JsonKey(
+      name: 'preferredLanguage',
+      readValue: JsonReadValueHelper.handleEmptyLanguagePreference)
   final String preferredLanguage;
   final List<String> _supportedLanguages;
   @override
   @JsonKey(
       name: 'supportedLanguages',
-      readValue: handleSupportedLanguages,
+      readValue: JsonReadValueHelper.handleSupportedLanguages,
       defaultValue: <String>[])
   List<String> get supportedLanguages {
     if (_supportedLanguages is EqualUnmodifiableListView)
@@ -711,7 +733,9 @@ class _$UserDtoImpl extends _UserDto {
   @JsonKey(name: 'MobileNumber', defaultValue: '')
   final String mobileNumber;
   @override
-  @JsonKey(name: 'acceptMPTC', readValue: handleMarketPlaceTnCAcceptance)
+  @JsonKey(
+      name: 'acceptMPTC',
+      readValue: JsonReadValueHelper.handleMarketPlaceTnCAcceptance)
   final String acceptMPTC;
   @override
   @JsonKey(name: 'isFirstLogin', defaultValue: false)
@@ -852,7 +876,8 @@ abstract class _UserDto extends UserDto {
       @JsonKey(name: 'mobileNotifications', defaultValue: false)
       required final bool mobileNotifications,
       @JsonKey(
-          name: 'languagePreference', readValue: handleEmptyLanguagePreference)
+          name: 'languagePreference',
+          readValue: JsonReadValueHelper.handleEmptyLanguagePreference)
       required final String languagePreference,
       @JsonKey(name: 'enableOrderType', defaultValue: false)
       required final bool enableOrderType,
@@ -876,16 +901,19 @@ abstract class _UserDto extends UserDto {
       required final List<PaymentAdviceExpiryNotificationDto>
           paymentNotification,
       @JsonKey(
-          name: 'preferredLanguage', readValue: handleEmptyLanguagePreference)
+          name: 'preferredLanguage',
+          readValue: JsonReadValueHelper.handleEmptyLanguagePreference)
       required final String preferredLanguage,
       @JsonKey(
           name: 'supportedLanguages',
-          readValue: handleSupportedLanguages,
+          readValue: JsonReadValueHelper.handleSupportedLanguages,
           defaultValue: <String>[])
       required final List<String> supportedLanguages,
       @JsonKey(name: 'MobileNumber', defaultValue: '')
       required final String mobileNumber,
-      @JsonKey(name: 'acceptMPTC', readValue: handleMarketPlaceTnCAcceptance)
+      @JsonKey(
+          name: 'acceptMPTC',
+          readValue: JsonReadValueHelper.handleMarketPlaceTnCAcceptance)
       required final String acceptMPTC,
       @JsonKey(name: 'isFirstLogin', defaultValue: false)
       required final bool isFirstLogin}) = _$UserDtoImpl;
@@ -930,7 +958,9 @@ abstract class _UserDto extends UserDto {
   @JsonKey(name: 'mobileNotifications', defaultValue: false)
   bool get mobileNotifications;
   @override
-  @JsonKey(name: 'languagePreference', readValue: handleEmptyLanguagePreference)
+  @JsonKey(
+      name: 'languagePreference',
+      readValue: JsonReadValueHelper.handleEmptyLanguagePreference)
   String get languagePreference;
   @override
   @JsonKey(name: 'enableOrderType', defaultValue: false)
@@ -962,19 +992,23 @@ abstract class _UserDto extends UserDto {
       defaultValue: <PaymentAdviceExpiryNotificationDto>[])
   List<PaymentAdviceExpiryNotificationDto> get paymentNotification;
   @override
-  @JsonKey(name: 'preferredLanguage', readValue: handleEmptyLanguagePreference)
+  @JsonKey(
+      name: 'preferredLanguage',
+      readValue: JsonReadValueHelper.handleEmptyLanguagePreference)
   String get preferredLanguage;
   @override
   @JsonKey(
       name: 'supportedLanguages',
-      readValue: handleSupportedLanguages,
+      readValue: JsonReadValueHelper.handleSupportedLanguages,
       defaultValue: <String>[])
   List<String> get supportedLanguages;
   @override
   @JsonKey(name: 'MobileNumber', defaultValue: '')
   String get mobileNumber;
   @override
-  @JsonKey(name: 'acceptMPTC', readValue: handleMarketPlaceTnCAcceptance)
+  @JsonKey(
+      name: 'acceptMPTC',
+      readValue: JsonReadValueHelper.handleMarketPlaceTnCAcceptance)
   String get acceptMPTC;
   @override
   @JsonKey(name: 'isFirstLogin', defaultValue: false)

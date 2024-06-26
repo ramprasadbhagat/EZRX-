@@ -1,8 +1,6 @@
 import 'dart:convert';
 
-import 'package:dio/dio.dart';
 import 'package:ezrxmobile/config.dart';
-import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
 import 'package:ezrxmobile/domain/order/entities/payment_term.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
@@ -49,7 +47,10 @@ class PaymentTermsRemoteDataSource {
         }),
       );
 
-      _paymentTermsExceptionChecker(res: resAvailablePaymentTerms);
+      dataSourceExceptionHandler.handleExceptionChecker(
+        res: resAvailablePaymentTerms,
+      );
+
       final finalData =
           resAvailablePaymentTerms.data['data']['availablePaymentTerm'];
 
@@ -57,16 +58,5 @@ class PaymentTermsRemoteDataSource {
           .map((e) => PaymentTermDto.fromJson(e).toDomain())
           .toList();
     });
-  }
-
-  void _paymentTermsExceptionChecker({required Response<dynamic> res}) {
-    if (dataSourceExceptionHandler.isServerResponseError(res: res)) {
-      throw ServerException(message: res.data['errors'][0]['message']);
-    } else if (res.statusCode != 200) {
-      throw ServerException(
-        code: res.statusCode ?? 0,
-        message: res.statusMessage ?? '',
-      );
-    }
   }
 }

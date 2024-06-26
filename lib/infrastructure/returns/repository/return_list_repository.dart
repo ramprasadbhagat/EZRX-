@@ -15,6 +15,7 @@ import 'package:ezrxmobile/domain/returns/entities/return_item.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_list_request.dart';
 import 'package:ezrxmobile/domain/returns/repository/i_return_list_repository.dart';
 import 'package:ezrxmobile/infrastructure/core/common/device_info.dart';
+import 'package:ezrxmobile/infrastructure/core/common/extensions.dart';
 import 'package:ezrxmobile/infrastructure/core/common/file_path_helper.dart';
 import 'package:ezrxmobile/infrastructure/core/common/permission_service.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/device_storage.dart';
@@ -75,9 +76,12 @@ class ReturnListRepository extends IReturnListRepository {
         appliedFilter: appliedFilter,
         searchKey: searchKey,
       );
+      final returnListRequestDto =
+          ReturnListRequestDto.fromDomain(returnListByItemRequest);
       final returnList = await remoteDataSource.fetchReturnByItems(
-        requestParams:
-            ReturnListRequestDto.fromDomain(returnListByItemRequest).toMap(),
+        requestParams: returnListRequestDto
+            .toJson()
+            .excludeEmptyString(returnListRequestDto.filterQuery.toJson()),
         market: deviceStorage.currentMarket(),
       );
 
@@ -120,9 +124,13 @@ class ReturnListRepository extends IReturnListRepository {
         appliedFilter: appliedFilter,
         searchKey: searchKey,
       );
+      final returnListRequestDto =
+          ReturnListRequestDto.fromDomain(returnListByRequest);
+
       final returnList = await remoteDataSource.fetchReturnByRequest(
-        requestParams:
-            ReturnListRequestDto.fromDomain(returnListByRequest).toMap(),
+        requestParams: returnListRequestDto
+            .toJson()
+            .excludeEmptyString(returnListRequestDto.filterQuery.toJson()),
         market: deviceStorage.currentMarket(),
       );
 
@@ -188,11 +196,14 @@ class ReturnListRepository extends IReturnListRepository {
         searchKey: searchKey,
       );
 
+      final returnExcelListRequestDto =
+          ReturnExcelListRequestDto.fromDomain(returnExcelListByItemRequest);
+
       final fileUrl = await remoteDataSource.getFileUrl(
         salesOrg: salesOrg.getOrCrash(),
-        requestParams:
-            ReturnExcelListRequestDto.fromDomain(returnExcelListByItemRequest)
-                .toMap(),
+        requestParams: returnExcelListRequestDto
+            .toJson()
+            .excludeEmptyString(returnExcelListRequestDto.filterQuery.toJson()),
       );
 
       return Right(fileUrl);

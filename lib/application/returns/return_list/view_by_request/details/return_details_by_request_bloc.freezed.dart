@@ -20,21 +20,21 @@ mixin _$ReturnDetailsByRequestEvent {
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
     required TResult Function(String returnId) fetch,
-    required TResult Function(ReturnRequestAttachment file) downloadFile,
+    required TResult Function(PoDocuments file) downloadFile,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
     TResult? Function(String returnId)? fetch,
-    TResult? Function(ReturnRequestAttachment file)? downloadFile,
+    TResult? Function(PoDocuments file)? downloadFile,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
     TResult Function(String returnId)? fetch,
-    TResult Function(ReturnRequestAttachment file)? downloadFile,
+    TResult Function(PoDocuments file)? downloadFile,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -123,7 +123,7 @@ class _$InitializedImpl implements _Initialized {
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
     required TResult Function(String returnId) fetch,
-    required TResult Function(ReturnRequestAttachment file) downloadFile,
+    required TResult Function(PoDocuments file) downloadFile,
   }) {
     return initialized();
   }
@@ -133,7 +133,7 @@ class _$InitializedImpl implements _Initialized {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
     TResult? Function(String returnId)? fetch,
-    TResult? Function(ReturnRequestAttachment file)? downloadFile,
+    TResult? Function(PoDocuments file)? downloadFile,
   }) {
     return initialized?.call();
   }
@@ -143,7 +143,7 @@ class _$InitializedImpl implements _Initialized {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
     TResult Function(String returnId)? fetch,
-    TResult Function(ReturnRequestAttachment file)? downloadFile,
+    TResult Function(PoDocuments file)? downloadFile,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -258,7 +258,7 @@ class _$FetchImpl implements _Fetch {
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
     required TResult Function(String returnId) fetch,
-    required TResult Function(ReturnRequestAttachment file) downloadFile,
+    required TResult Function(PoDocuments file) downloadFile,
   }) {
     return fetch(returnId);
   }
@@ -268,7 +268,7 @@ class _$FetchImpl implements _Fetch {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
     TResult? Function(String returnId)? fetch,
-    TResult? Function(ReturnRequestAttachment file)? downloadFile,
+    TResult? Function(PoDocuments file)? downloadFile,
   }) {
     return fetch?.call(returnId);
   }
@@ -278,7 +278,7 @@ class _$FetchImpl implements _Fetch {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
     TResult Function(String returnId)? fetch,
-    TResult Function(ReturnRequestAttachment file)? downloadFile,
+    TResult Function(PoDocuments file)? downloadFile,
     required TResult orElse(),
   }) {
     if (fetch != null) {
@@ -337,9 +337,9 @@ abstract class _$$DownloadFileImplCopyWith<$Res> {
           _$DownloadFileImpl value, $Res Function(_$DownloadFileImpl) then) =
       __$$DownloadFileImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({ReturnRequestAttachment file});
+  $Res call({PoDocuments file});
 
-  $ReturnRequestAttachmentCopyWith<$Res> get file;
+  $PoDocumentsCopyWith<$Res> get file;
 }
 
 /// @nodoc
@@ -359,14 +359,14 @@ class __$$DownloadFileImplCopyWithImpl<$Res>
       file: null == file
           ? _value.file
           : file // ignore: cast_nullable_to_non_nullable
-              as ReturnRequestAttachment,
+              as PoDocuments,
     ));
   }
 
   @override
   @pragma('vm:prefer-inline')
-  $ReturnRequestAttachmentCopyWith<$Res> get file {
-    return $ReturnRequestAttachmentCopyWith<$Res>(_value.file, (value) {
+  $PoDocumentsCopyWith<$Res> get file {
+    return $PoDocumentsCopyWith<$Res>(_value.file, (value) {
       return _then(_value.copyWith(file: value));
     });
   }
@@ -378,7 +378,7 @@ class _$DownloadFileImpl implements _DownloadFile {
   const _$DownloadFileImpl({required this.file});
 
   @override
-  final ReturnRequestAttachment file;
+  final PoDocuments file;
 
   @override
   String toString() {
@@ -407,7 +407,7 @@ class _$DownloadFileImpl implements _DownloadFile {
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
     required TResult Function(String returnId) fetch,
-    required TResult Function(ReturnRequestAttachment file) downloadFile,
+    required TResult Function(PoDocuments file) downloadFile,
   }) {
     return downloadFile(file);
   }
@@ -417,7 +417,7 @@ class _$DownloadFileImpl implements _DownloadFile {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
     TResult? Function(String returnId)? fetch,
-    TResult? Function(ReturnRequestAttachment file)? downloadFile,
+    TResult? Function(PoDocuments file)? downloadFile,
   }) {
     return downloadFile?.call(file);
   }
@@ -427,7 +427,7 @@ class _$DownloadFileImpl implements _DownloadFile {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
     TResult Function(String returnId)? fetch,
-    TResult Function(ReturnRequestAttachment file)? downloadFile,
+    TResult Function(PoDocuments file)? downloadFile,
     required TResult orElse(),
   }) {
     if (downloadFile != null) {
@@ -472,10 +472,10 @@ class _$DownloadFileImpl implements _DownloadFile {
 }
 
 abstract class _DownloadFile implements ReturnDetailsByRequestEvent {
-  const factory _DownloadFile({required final ReturnRequestAttachment file}) =
+  const factory _DownloadFile({required final PoDocuments file}) =
       _$DownloadFileImpl;
 
-  ReturnRequestAttachment get file;
+  PoDocuments get file;
   @JsonKey(ignore: true)
   _$$DownloadFileImplCopyWith<_$DownloadFileImpl> get copyWith =>
       throw _privateConstructorUsedError;
@@ -490,10 +490,9 @@ mixin _$ReturnDetailsByRequestState {
       throw _privateConstructorUsedError;
   ReturnRequestInformationHeader get requestInformationHeader =>
       throw _privateConstructorUsedError;
-  List<ReturnRequestAttachment> get downloadingAttachments =>
+  List<PoDocuments> get downloadingAttachments =>
       throw _privateConstructorUsedError;
-  ReturnRequestAttachment get downloadedAttachment =>
-      throw _privateConstructorUsedError;
+  PoDocuments get downloadedAttachment => throw _privateConstructorUsedError;
   Option<Either<ApiFailure, dynamic>> get downloadFailureOrSuccessOption =>
       throw _privateConstructorUsedError;
 
@@ -515,12 +514,12 @@ abstract class $ReturnDetailsByRequestStateCopyWith<$Res> {
       Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
       List<ReturnRequestInformation> requestInformation,
       ReturnRequestInformationHeader requestInformationHeader,
-      List<ReturnRequestAttachment> downloadingAttachments,
-      ReturnRequestAttachment downloadedAttachment,
+      List<PoDocuments> downloadingAttachments,
+      PoDocuments downloadedAttachment,
       Option<Either<ApiFailure, dynamic>> downloadFailureOrSuccessOption});
 
   $ReturnRequestInformationHeaderCopyWith<$Res> get requestInformationHeader;
-  $ReturnRequestAttachmentCopyWith<$Res> get downloadedAttachment;
+  $PoDocumentsCopyWith<$Res> get downloadedAttachment;
 }
 
 /// @nodoc
@@ -565,11 +564,11 @@ class _$ReturnDetailsByRequestStateCopyWithImpl<$Res,
       downloadingAttachments: null == downloadingAttachments
           ? _value.downloadingAttachments
           : downloadingAttachments // ignore: cast_nullable_to_non_nullable
-              as List<ReturnRequestAttachment>,
+              as List<PoDocuments>,
       downloadedAttachment: null == downloadedAttachment
           ? _value.downloadedAttachment
           : downloadedAttachment // ignore: cast_nullable_to_non_nullable
-              as ReturnRequestAttachment,
+              as PoDocuments,
       downloadFailureOrSuccessOption: null == downloadFailureOrSuccessOption
           ? _value.downloadFailureOrSuccessOption
           : downloadFailureOrSuccessOption // ignore: cast_nullable_to_non_nullable
@@ -588,9 +587,8 @@ class _$ReturnDetailsByRequestStateCopyWithImpl<$Res,
 
   @override
   @pragma('vm:prefer-inline')
-  $ReturnRequestAttachmentCopyWith<$Res> get downloadedAttachment {
-    return $ReturnRequestAttachmentCopyWith<$Res>(_value.downloadedAttachment,
-        (value) {
+  $PoDocumentsCopyWith<$Res> get downloadedAttachment {
+    return $PoDocumentsCopyWith<$Res>(_value.downloadedAttachment, (value) {
       return _then(_value.copyWith(downloadedAttachment: value) as $Val);
     });
   }
@@ -610,14 +608,14 @@ abstract class _$$ReturnSummaryDetailsStateImplCopyWith<$Res>
       Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
       List<ReturnRequestInformation> requestInformation,
       ReturnRequestInformationHeader requestInformationHeader,
-      List<ReturnRequestAttachment> downloadingAttachments,
-      ReturnRequestAttachment downloadedAttachment,
+      List<PoDocuments> downloadingAttachments,
+      PoDocuments downloadedAttachment,
       Option<Either<ApiFailure, dynamic>> downloadFailureOrSuccessOption});
 
   @override
   $ReturnRequestInformationHeaderCopyWith<$Res> get requestInformationHeader;
   @override
-  $ReturnRequestAttachmentCopyWith<$Res> get downloadedAttachment;
+  $PoDocumentsCopyWith<$Res> get downloadedAttachment;
 }
 
 /// @nodoc
@@ -661,11 +659,11 @@ class __$$ReturnSummaryDetailsStateImplCopyWithImpl<$Res>
       downloadingAttachments: null == downloadingAttachments
           ? _value._downloadingAttachments
           : downloadingAttachments // ignore: cast_nullable_to_non_nullable
-              as List<ReturnRequestAttachment>,
+              as List<PoDocuments>,
       downloadedAttachment: null == downloadedAttachment
           ? _value.downloadedAttachment
           : downloadedAttachment // ignore: cast_nullable_to_non_nullable
-              as ReturnRequestAttachment,
+              as PoDocuments,
       downloadFailureOrSuccessOption: null == downloadFailureOrSuccessOption
           ? _value.downloadFailureOrSuccessOption
           : downloadFailureOrSuccessOption // ignore: cast_nullable_to_non_nullable
@@ -682,7 +680,7 @@ class _$ReturnSummaryDetailsStateImpl implements _ReturnSummaryDetailsState {
       required this.failureOrSuccessOption,
       required final List<ReturnRequestInformation> requestInformation,
       required this.requestInformationHeader,
-      required final List<ReturnRequestAttachment> downloadingAttachments,
+      required final List<PoDocuments> downloadingAttachments,
       required this.downloadedAttachment,
       required this.downloadFailureOrSuccessOption})
       : _requestInformation = requestInformation,
@@ -703,9 +701,9 @@ class _$ReturnSummaryDetailsStateImpl implements _ReturnSummaryDetailsState {
 
   @override
   final ReturnRequestInformationHeader requestInformationHeader;
-  final List<ReturnRequestAttachment> _downloadingAttachments;
+  final List<PoDocuments> _downloadingAttachments;
   @override
-  List<ReturnRequestAttachment> get downloadingAttachments {
+  List<PoDocuments> get downloadingAttachments {
     if (_downloadingAttachments is EqualUnmodifiableListView)
       return _downloadingAttachments;
     // ignore: implicit_dynamic_type
@@ -713,7 +711,7 @@ class _$ReturnSummaryDetailsStateImpl implements _ReturnSummaryDetailsState {
   }
 
   @override
-  final ReturnRequestAttachment downloadedAttachment;
+  final PoDocuments downloadedAttachment;
   @override
   final Option<Either<ApiFailure, dynamic>> downloadFailureOrSuccessOption;
 
@@ -772,8 +770,8 @@ abstract class _ReturnSummaryDetailsState
       required final Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
       required final List<ReturnRequestInformation> requestInformation,
       required final ReturnRequestInformationHeader requestInformationHeader,
-      required final List<ReturnRequestAttachment> downloadingAttachments,
-      required final ReturnRequestAttachment downloadedAttachment,
+      required final List<PoDocuments> downloadingAttachments,
+      required final PoDocuments downloadedAttachment,
       required final Option<Either<ApiFailure, dynamic>>
           downloadFailureOrSuccessOption}) = _$ReturnSummaryDetailsStateImpl;
 
@@ -786,9 +784,9 @@ abstract class _ReturnSummaryDetailsState
   @override
   ReturnRequestInformationHeader get requestInformationHeader;
   @override
-  List<ReturnRequestAttachment> get downloadingAttachments;
+  List<PoDocuments> get downloadingAttachments;
   @override
-  ReturnRequestAttachment get downloadedAttachment;
+  PoDocuments get downloadedAttachment;
   @override
   Option<Either<ApiFailure, dynamic>> get downloadFailureOrSuccessOption;
   @override

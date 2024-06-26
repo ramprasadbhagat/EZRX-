@@ -1,5 +1,7 @@
 part of 'package:ezrxmobile/presentation/returns/return_list/return_by_item_filter/return_by_item_filter_page.dart';
 
+//TODO(Hob): Will fix the duplicate when we apply single filter same with payment
+//ignore_for_file: code-duplication
 class _RequestAmountRangeInput extends StatelessWidget {
   const _RequestAmountRangeInput();
 

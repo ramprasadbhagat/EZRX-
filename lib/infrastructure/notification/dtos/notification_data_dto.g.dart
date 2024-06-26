@@ -21,7 +21,9 @@ _$NotificationDataDtoImpl _$$NotificationDataDtoImplFromJson(
       paymentBatchAdditionalInfo:
           json['paymentBatchAdditionalInfo'] as String? ?? '',
       isMarketPlace:
-          mappingIsMarketPlace(json, 'isMarketPlace') as bool? ?? false,
+          JsonReadValueHelper.mappingIsMarketPlace(json, 'isMarketPlace')
+                  as bool? ??
+              false,
     );
 
 Map<String, dynamic> _$$NotificationDataDtoImplToJson(

@@ -8,6 +8,7 @@ import 'package:ezrxmobile/domain/returns/entities/return_filter.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_item.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_list_request.dart';
 import 'package:ezrxmobile/infrastructure/core/common/device_info.dart';
+import 'package:ezrxmobile/infrastructure/core/common/extensions.dart';
 import 'package:ezrxmobile/infrastructure/core/common/file_path_helper.dart';
 import 'package:ezrxmobile/infrastructure/core/common/permission_service.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/device_storage.dart';
@@ -96,9 +97,17 @@ void main() {
       permissionService: permissionService,
       deviceStorage: deviceStorage,
     );
-    inputParams = ReturnListRequestDto.fromDomain(returnListRequest).toMap();
-    returnExcelRequestParams =
-        ReturnExcelListRequestDto.fromDomain(returnExcelListRequest).toMap();
+    final returnListRequestDto =
+        ReturnListRequestDto.fromDomain(returnListRequest);
+    inputParams = returnListRequestDto
+        .toJson()
+        .excludeEmptyString(returnListRequestDto.filterQuery.toJson());
+        
+    final returnExcelRequestDto =
+        ReturnExcelListRequestDto.fromDomain(returnExcelListRequest);
+    returnExcelRequestParams = returnExcelRequestDto
+        .toJson()
+        .excludeEmptyString(returnExcelRequestDto.filterQuery.toJson());
   });
 
   group(

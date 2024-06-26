@@ -484,11 +484,10 @@ void main() {
 
     testWidgets('Display tender information when collapsed', (tester) async {
       final fakeTenderOrderReason = TenderContractReason('fake-Reason');
-      final fakeTenderContractNumber =
-          TenderContractNumber.tenderContractNumber('fake-Number');
+      final fakeTenderContractNumber = TenderContractNumber('fake-Number');
       final fakeTenderPrice = TenderPrice('11832000');
       final fakeTenderContractReference =
-          TenderContractNumber.tenderContractReference('fake-Reference');
+          TenderContractNumber('fake-Reference');
       final orderHistoryList = orderHistory.copyWith(
         orderHistoryItems: [
           orderHistory.orderHistoryItems
@@ -549,11 +548,10 @@ void main() {
 
     testWidgets('Display tender information when expanded', (tester) async {
       final fakeTenderOrderReason = TenderContractReason('fake-Reason');
-      final fakeTenderContractNumber =
-          TenderContractNumber.tenderContractNumber('fake-Number');
+      final fakeTenderContractNumber = TenderContractNumber('fake-Number');
       final fakeTenderPrice = TenderPrice('11832000');
       final fakeTenderContractReference =
-          TenderContractNumber.tenderContractReference('fake-Reference');
+          TenderContractNumber('fake-Reference');
       final orderHistoryList = orderHistory.copyWith(
         orderHistoryItems: [
           orderHistory.orderHistoryItems

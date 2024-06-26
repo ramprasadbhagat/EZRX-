@@ -17,7 +17,6 @@ class WidgetKeys {
   static const Key customSnackBar = Key('customSnackBar');
   static const Key customSnackBarMessage = Key('customSnackBarMessage');
   static const Key snackBarDismissButton = Key('snackBarDismissButton');
-  static const Key scrollToTopArrowIcon = Key('scrollToTopArrowIconKey');
   static const Key nextButton = Key('nextButton');
   static const Key nextButtonID = Key('nextButtonID');
   static const Key backButton = Key('backButton');
@@ -76,6 +75,8 @@ class WidgetKeys {
       Key('orderItemPriceStrikeThrough');
   static const Key dontAllowAlertDialog = Key('dontAllowAlertDialog');
   static const Key allowAlertDialog = Key('allowAlertDialog');
+  static const Key scrollToTopFloatingButton =
+      Key('scrollToTopFloatingButton');
 
   //============================================================
   //  PRE-ORDER-MODAL
@@ -166,7 +167,6 @@ class WidgetKeys {
   static const Key bundlesManufactured = Key('bundlesManufactured');
   static const Key bundlesList = Key('bundlesList');
   static const Key bundlesBody = Key('bundlesBody');
-  static const Key bundlesListItem = Key('bundlesListItem');
   static const Key listRecentlyOrdered = Key('listRecentlyOrdered');
   static const Key materialDescriptionRecentlyOrdered =
       Key('materialDescriptionRecentlyOrdered');
@@ -210,7 +210,6 @@ class WidgetKeys {
       Key('loginOnBehalfLoginButtonKey');
   static const Key loginOnBehalfCancelButtonKey =
       Key('loginOnBehalfCancelButtonKey');
-  static const Key aboutUsFloatingButton = Key('aboutUsFloatingButton');
   static const Key announcementArticleTile = Key('announcementArticleTile');
 
   //  Change Delivery Address BottomSheet
@@ -910,8 +909,6 @@ class WidgetKeys {
   static const Key materialDetailsPageBack = Key('materialDetailsPageBack');
   static const Key materialDetailsPageCartIcon =
       Key('materialDetailsPageCartIcon');
-  static const Key materialDetailsFloatingButton =
-      Key('materialDetailsFloatingButton');
   static const Key materialDetailsCarousel = Key('materialDetailsCarousel');
   static const Key materialDetailsImageCounter =
       Key('materialDetailsImageCounter');

@@ -49,7 +49,10 @@ class PolicyConfigurationRemoteDataSource {
           ),
         );
 
-        _policyConfigExceptionChecker(res: response);
+        dataSourceExceptionHandler.handleExceptionChecker(
+          res: response,
+          onCustomExceptionHandler: _policyConfigExceptionChecker,
+        );
 
         return List.from(response.data['data']['policies'])
             .map((e) => PolicyConfigurationDto.fromJson(e).toDomain())
@@ -76,7 +79,10 @@ class PolicyConfigurationRemoteDataSource {
             },
           ),
         );
-        _policyConfigExceptionChecker(res: response);
+        dataSourceExceptionHandler.handleExceptionChecker(
+          res: response,
+          onCustomExceptionHandler: _policyConfigExceptionChecker,
+        );
 
         return PolicyConfigurationDto.fromJson(
           response.data['data']['deletePolicy'],
@@ -126,7 +132,10 @@ class PolicyConfigurationRemoteDataSource {
           ),
         );
 
-        _policyConfigExceptionChecker(res: response);
+        dataSourceExceptionHandler.handleExceptionChecker(
+          res: response,
+          onCustomExceptionHandler: _policyConfigExceptionChecker,
+        );
 
         return PolicyConfigurationDto.fromJson(
           response.data['data']['addPolicy'],
@@ -135,38 +144,33 @@ class PolicyConfigurationRemoteDataSource {
     );
   }
 
-  void _policyConfigExceptionChecker({required Response<dynamic> res}) {
-    if (res.statusCode != 200) {
-      throw ServerException(
-        code: res.statusCode ?? 0,
-        message: res.statusMessage ?? '',
-      );
-    } else if (dataSourceExceptionHandler.isServerResponseError(res: res)) {
-      throw ServerException(message: res.data['errors'][0]['message']);
-    } else if (res.data['data']['deletePolicy'] != null) {
-      if (res.data['data']['deletePolicy']['status'] != null) {
-        if (res.data['data']['deletePolicy']['status'] !=
-            'data deleted successfully') {
+  void _policyConfigExceptionChecker(Response<dynamic> res) {
+    if (res.data['data'] != null && res.data['data']?.isNotEmpty) {
+      if (res.data['data']?['deletePolicy'] != null) {
+        if (res.data['data']?['deletePolicy']?['status'] != null) {
+          if (res.data['data']['deletePolicy']['status'] !=
+              'data deleted successfully') {
+            throw ServerException(
+              message: res.data['data']['deletePolicy']['status'],
+            );
+          }
+        } else {
+          throw ServerException(message: 'data not deleted');
+        }
+      } else if (res.data['data']?['addPolicy'] != null) {
+        if (res.data['data']?['addPolicy']?['status'] != null) {
+          if (res.data['data']['addPolicy']['status'] !=
+              'Successfully added the Policy Configuration') {
+            throw ServerException(
+              message: res.data['data']['addPolicy']['status'],
+            );
+          }
+        } else {
           throw ServerException(
-            message: res.data['data']['deletePolicy']['status'],
+            message:
+                'Policy Configuration is already there for the given Principal Code',
           );
         }
-      } else {
-        throw ServerException(message: 'data not deleted');
-      }
-    } else if (res.data['data']['addPolicy'] != null) {
-      if (res.data['data']['addPolicy']['status'] != null) {
-        if (res.data['data']['addPolicy']['status'] !=
-            'Successfully added the Policy Configuration') {
-          throw ServerException(
-            message: res.data['data']['addPolicy']['status'],
-          );
-        }
-      } else {
-        throw ServerException(
-          message:
-              'Policy Configuration is already there for the given Principal Code',
-        );
       }
     }
   }

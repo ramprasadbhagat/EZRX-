@@ -17,7 +17,7 @@ class SubmitTenderContract with _$SubmitTenderContract {
   }) = _SubmitTenderContract;
 
   factory SubmitTenderContract.empty() => SubmitTenderContract(
-        contractNumber: TenderContractNumber.tenderContractNumber(''),
+        contractNumber: TenderContractNumber(''),
         contractLineItemNumber: '',
         contractPrice: 0.0,
         contractUnitOfMeasurement: 0,

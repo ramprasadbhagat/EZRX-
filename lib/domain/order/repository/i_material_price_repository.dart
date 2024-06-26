@@ -24,4 +24,18 @@ abstract class IMaterialPriceRepository {
     required MaterialNumber materialNumber,
     required bool exceedQty,
   });
+  Future<Either<ApiFailure, Price>> getMaterialPriceWithOverride({
+    required CustomerCodeInfo customerCodeInfo,
+    required SalesOrganisation salesOrganisation,
+    required ShipToInfo shipToInfo,
+    required Price price,
+  });
+
+  Future<Either<ApiFailure, Price>> getMaterialPriceWithZdp5Discount({
+    required SalesOrganisation salesOrganisation,
+    required CustomerCodeInfo customerCodeInfo,
+    required ShipToInfo shipToInfo,
+    required Price price,
+    required bool exceedQuantity,
+  });
 }

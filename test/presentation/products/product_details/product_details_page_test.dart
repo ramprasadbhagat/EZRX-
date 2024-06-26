@@ -610,7 +610,7 @@ void main() {
         );
         await tester.pumpAndSettle();
         final materialDetailsFloatingButton =
-            find.byKey(WidgetKeys.materialDetailsFloatingButton);
+            find.byKey(WidgetKeys.scrollToTopFloatingButton);
         expect(
           materialDetailsFloatingButton,
           findsOneWidget,

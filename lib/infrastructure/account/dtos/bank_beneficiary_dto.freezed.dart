@@ -22,25 +22,25 @@ BankBeneficiaryDto _$BankBeneficiaryDtoFromJson(Map<String, dynamic> json) {
 mixin _$BankBeneficiaryDto {
   @JsonKey(name: 'salesOrg', defaultValue: '')
   String get salesOrg => throw _privateConstructorUsedError;
-  @JsonKey(name: 'bankAccount', defaultValue: '', toJson: valueTojson)
+  @JsonKey(name: 'bankAccount', defaultValue: '', toJson: valueOrNullToJson)
   String get bankAccount => throw _privateConstructorUsedError;
-  @JsonKey(name: 'bankAddress', defaultValue: '', toJson: valueTojson)
+  @JsonKey(name: 'bankAddress', defaultValue: '', toJson: valueOrNullToJson)
   String get bankAddress => throw _privateConstructorUsedError;
-  @JsonKey(name: 'bankCode', defaultValue: '', toJson: valueTojson)
+  @JsonKey(name: 'bankCode', defaultValue: '', toJson: valueOrNullToJson)
   String get bankCode => throw _privateConstructorUsedError;
-  @JsonKey(name: 'bankName', defaultValue: '', toJson: valueTojson)
+  @JsonKey(name: 'bankName', defaultValue: '', toJson: valueOrNullToJson)
   String get bankName => throw _privateConstructorUsedError;
-  @JsonKey(name: 'beneficiaryName', defaultValue: '', toJson: valueTojson)
+  @JsonKey(name: 'beneficiaryName', defaultValue: '', toJson: valueOrNullToJson)
   String get beneficiaryName => throw _privateConstructorUsedError;
-  @JsonKey(name: 'branch', defaultValue: '', toJson: valueTojson)
+  @JsonKey(name: 'branch', defaultValue: '', toJson: valueOrNullToJson)
   String get branch => throw _privateConstructorUsedError;
-  @JsonKey(name: 'emailId', defaultValue: '', toJson: valueTojson)
+  @JsonKey(name: 'emailId', defaultValue: '', toJson: valueOrNullToJson)
   String get emailId => throw _privateConstructorUsedError;
-  @JsonKey(name: 'hdbcSwiftCode', defaultValue: '', toJson: valueTojson)
+  @JsonKey(name: 'hdbcSwiftCode', defaultValue: '', toJson: valueOrNullToJson)
   String get hdbcSwiftCode => throw _privateConstructorUsedError;
-  @JsonKey(name: 'payNowUen', defaultValue: '', toJson: valueTojson)
+  @JsonKey(name: 'payNowUen', defaultValue: '', toJson: valueOrNullToJson)
   String get payNowUen => throw _privateConstructorUsedError;
-  @JsonKey(name: 'salesDistrict', defaultValue: '', toJson: valueTojson)
+  @JsonKey(name: 'salesDistrict', defaultValue: '', toJson: valueOrNullToJson)
   String get salesDistrict => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -57,25 +57,28 @@ abstract class $BankBeneficiaryDtoCopyWith<$Res> {
   @useResult
   $Res call(
       {@JsonKey(name: 'salesOrg', defaultValue: '') String salesOrg,
-      @JsonKey(name: 'bankAccount', defaultValue: '', toJson: valueTojson)
+      @JsonKey(name: 'bankAccount', defaultValue: '', toJson: valueOrNullToJson)
       String bankAccount,
-      @JsonKey(name: 'bankAddress', defaultValue: '', toJson: valueTojson)
+      @JsonKey(name: 'bankAddress', defaultValue: '', toJson: valueOrNullToJson)
       String bankAddress,
-      @JsonKey(name: 'bankCode', defaultValue: '', toJson: valueTojson)
+      @JsonKey(name: 'bankCode', defaultValue: '', toJson: valueOrNullToJson)
       String bankCode,
-      @JsonKey(name: 'bankName', defaultValue: '', toJson: valueTojson)
+      @JsonKey(name: 'bankName', defaultValue: '', toJson: valueOrNullToJson)
       String bankName,
-      @JsonKey(name: 'beneficiaryName', defaultValue: '', toJson: valueTojson)
+      @JsonKey(
+          name: 'beneficiaryName', defaultValue: '', toJson: valueOrNullToJson)
       String beneficiaryName,
-      @JsonKey(name: 'branch', defaultValue: '', toJson: valueTojson)
+      @JsonKey(name: 'branch', defaultValue: '', toJson: valueOrNullToJson)
       String branch,
-      @JsonKey(name: 'emailId', defaultValue: '', toJson: valueTojson)
+      @JsonKey(name: 'emailId', defaultValue: '', toJson: valueOrNullToJson)
       String emailId,
-      @JsonKey(name: 'hdbcSwiftCode', defaultValue: '', toJson: valueTojson)
+      @JsonKey(
+          name: 'hdbcSwiftCode', defaultValue: '', toJson: valueOrNullToJson)
       String hdbcSwiftCode,
-      @JsonKey(name: 'payNowUen', defaultValue: '', toJson: valueTojson)
+      @JsonKey(name: 'payNowUen', defaultValue: '', toJson: valueOrNullToJson)
       String payNowUen,
-      @JsonKey(name: 'salesDistrict', defaultValue: '', toJson: valueTojson)
+      @JsonKey(
+          name: 'salesDistrict', defaultValue: '', toJson: valueOrNullToJson)
       String salesDistrict});
 }
 
@@ -163,25 +166,28 @@ abstract class _$$BankBeneficiaryDtoImplCopyWith<$Res>
   @useResult
   $Res call(
       {@JsonKey(name: 'salesOrg', defaultValue: '') String salesOrg,
-      @JsonKey(name: 'bankAccount', defaultValue: '', toJson: valueTojson)
+      @JsonKey(name: 'bankAccount', defaultValue: '', toJson: valueOrNullToJson)
       String bankAccount,
-      @JsonKey(name: 'bankAddress', defaultValue: '', toJson: valueTojson)
+      @JsonKey(name: 'bankAddress', defaultValue: '', toJson: valueOrNullToJson)
       String bankAddress,
-      @JsonKey(name: 'bankCode', defaultValue: '', toJson: valueTojson)
+      @JsonKey(name: 'bankCode', defaultValue: '', toJson: valueOrNullToJson)
       String bankCode,
-      @JsonKey(name: 'bankName', defaultValue: '', toJson: valueTojson)
+      @JsonKey(name: 'bankName', defaultValue: '', toJson: valueOrNullToJson)
       String bankName,
-      @JsonKey(name: 'beneficiaryName', defaultValue: '', toJson: valueTojson)
+      @JsonKey(
+          name: 'beneficiaryName', defaultValue: '', toJson: valueOrNullToJson)
       String beneficiaryName,
-      @JsonKey(name: 'branch', defaultValue: '', toJson: valueTojson)
+      @JsonKey(name: 'branch', defaultValue: '', toJson: valueOrNullToJson)
       String branch,
-      @JsonKey(name: 'emailId', defaultValue: '', toJson: valueTojson)
+      @JsonKey(name: 'emailId', defaultValue: '', toJson: valueOrNullToJson)
       String emailId,
-      @JsonKey(name: 'hdbcSwiftCode', defaultValue: '', toJson: valueTojson)
+      @JsonKey(
+          name: 'hdbcSwiftCode', defaultValue: '', toJson: valueOrNullToJson)
       String hdbcSwiftCode,
-      @JsonKey(name: 'payNowUen', defaultValue: '', toJson: valueTojson)
+      @JsonKey(name: 'payNowUen', defaultValue: '', toJson: valueOrNullToJson)
       String payNowUen,
-      @JsonKey(name: 'salesDistrict', defaultValue: '', toJson: valueTojson)
+      @JsonKey(
+          name: 'salesDistrict', defaultValue: '', toJson: valueOrNullToJson)
       String salesDistrict});
 }
 
@@ -262,25 +268,28 @@ class __$$BankBeneficiaryDtoImplCopyWithImpl<$Res>
 class _$BankBeneficiaryDtoImpl extends _BankBeneficiaryDto {
   const _$BankBeneficiaryDtoImpl(
       {@JsonKey(name: 'salesOrg', defaultValue: '') required this.salesOrg,
-      @JsonKey(name: 'bankAccount', defaultValue: '', toJson: valueTojson)
+      @JsonKey(name: 'bankAccount', defaultValue: '', toJson: valueOrNullToJson)
       required this.bankAccount,
-      @JsonKey(name: 'bankAddress', defaultValue: '', toJson: valueTojson)
+      @JsonKey(name: 'bankAddress', defaultValue: '', toJson: valueOrNullToJson)
       required this.bankAddress,
-      @JsonKey(name: 'bankCode', defaultValue: '', toJson: valueTojson)
+      @JsonKey(name: 'bankCode', defaultValue: '', toJson: valueOrNullToJson)
       required this.bankCode,
-      @JsonKey(name: 'bankName', defaultValue: '', toJson: valueTojson)
+      @JsonKey(name: 'bankName', defaultValue: '', toJson: valueOrNullToJson)
       required this.bankName,
-      @JsonKey(name: 'beneficiaryName', defaultValue: '', toJson: valueTojson)
+      @JsonKey(
+          name: 'beneficiaryName', defaultValue: '', toJson: valueOrNullToJson)
       required this.beneficiaryName,
-      @JsonKey(name: 'branch', defaultValue: '', toJson: valueTojson)
+      @JsonKey(name: 'branch', defaultValue: '', toJson: valueOrNullToJson)
       required this.branch,
-      @JsonKey(name: 'emailId', defaultValue: '', toJson: valueTojson)
+      @JsonKey(name: 'emailId', defaultValue: '', toJson: valueOrNullToJson)
       required this.emailId,
-      @JsonKey(name: 'hdbcSwiftCode', defaultValue: '', toJson: valueTojson)
+      @JsonKey(
+          name: 'hdbcSwiftCode', defaultValue: '', toJson: valueOrNullToJson)
       required this.hdbcSwiftCode,
-      @JsonKey(name: 'payNowUen', defaultValue: '', toJson: valueTojson)
+      @JsonKey(name: 'payNowUen', defaultValue: '', toJson: valueOrNullToJson)
       required this.payNowUen,
-      @JsonKey(name: 'salesDistrict', defaultValue: '', toJson: valueTojson)
+      @JsonKey(
+          name: 'salesDistrict', defaultValue: '', toJson: valueOrNullToJson)
       required this.salesDistrict})
       : super._();
 
@@ -291,34 +300,34 @@ class _$BankBeneficiaryDtoImpl extends _BankBeneficiaryDto {
   @JsonKey(name: 'salesOrg', defaultValue: '')
   final String salesOrg;
   @override
-  @JsonKey(name: 'bankAccount', defaultValue: '', toJson: valueTojson)
+  @JsonKey(name: 'bankAccount', defaultValue: '', toJson: valueOrNullToJson)
   final String bankAccount;
   @override
-  @JsonKey(name: 'bankAddress', defaultValue: '', toJson: valueTojson)
+  @JsonKey(name: 'bankAddress', defaultValue: '', toJson: valueOrNullToJson)
   final String bankAddress;
   @override
-  @JsonKey(name: 'bankCode', defaultValue: '', toJson: valueTojson)
+  @JsonKey(name: 'bankCode', defaultValue: '', toJson: valueOrNullToJson)
   final String bankCode;
   @override
-  @JsonKey(name: 'bankName', defaultValue: '', toJson: valueTojson)
+  @JsonKey(name: 'bankName', defaultValue: '', toJson: valueOrNullToJson)
   final String bankName;
   @override
-  @JsonKey(name: 'beneficiaryName', defaultValue: '', toJson: valueTojson)
+  @JsonKey(name: 'beneficiaryName', defaultValue: '', toJson: valueOrNullToJson)
   final String beneficiaryName;
   @override
-  @JsonKey(name: 'branch', defaultValue: '', toJson: valueTojson)
+  @JsonKey(name: 'branch', defaultValue: '', toJson: valueOrNullToJson)
   final String branch;
   @override
-  @JsonKey(name: 'emailId', defaultValue: '', toJson: valueTojson)
+  @JsonKey(name: 'emailId', defaultValue: '', toJson: valueOrNullToJson)
   final String emailId;
   @override
-  @JsonKey(name: 'hdbcSwiftCode', defaultValue: '', toJson: valueTojson)
+  @JsonKey(name: 'hdbcSwiftCode', defaultValue: '', toJson: valueOrNullToJson)
   final String hdbcSwiftCode;
   @override
-  @JsonKey(name: 'payNowUen', defaultValue: '', toJson: valueTojson)
+  @JsonKey(name: 'payNowUen', defaultValue: '', toJson: valueOrNullToJson)
   final String payNowUen;
   @override
-  @JsonKey(name: 'salesDistrict', defaultValue: '', toJson: valueTojson)
+  @JsonKey(name: 'salesDistrict', defaultValue: '', toJson: valueOrNullToJson)
   final String salesDistrict;
 
   @override
@@ -388,25 +397,28 @@ abstract class _BankBeneficiaryDto extends BankBeneficiaryDto {
   const factory _BankBeneficiaryDto(
       {@JsonKey(name: 'salesOrg', defaultValue: '')
       required final String salesOrg,
-      @JsonKey(name: 'bankAccount', defaultValue: '', toJson: valueTojson)
+      @JsonKey(name: 'bankAccount', defaultValue: '', toJson: valueOrNullToJson)
       required final String bankAccount,
-      @JsonKey(name: 'bankAddress', defaultValue: '', toJson: valueTojson)
+      @JsonKey(name: 'bankAddress', defaultValue: '', toJson: valueOrNullToJson)
       required final String bankAddress,
-      @JsonKey(name: 'bankCode', defaultValue: '', toJson: valueTojson)
+      @JsonKey(name: 'bankCode', defaultValue: '', toJson: valueOrNullToJson)
       required final String bankCode,
-      @JsonKey(name: 'bankName', defaultValue: '', toJson: valueTojson)
+      @JsonKey(name: 'bankName', defaultValue: '', toJson: valueOrNullToJson)
       required final String bankName,
-      @JsonKey(name: 'beneficiaryName', defaultValue: '', toJson: valueTojson)
+      @JsonKey(
+          name: 'beneficiaryName', defaultValue: '', toJson: valueOrNullToJson)
       required final String beneficiaryName,
-      @JsonKey(name: 'branch', defaultValue: '', toJson: valueTojson)
+      @JsonKey(name: 'branch', defaultValue: '', toJson: valueOrNullToJson)
       required final String branch,
-      @JsonKey(name: 'emailId', defaultValue: '', toJson: valueTojson)
+      @JsonKey(name: 'emailId', defaultValue: '', toJson: valueOrNullToJson)
       required final String emailId,
-      @JsonKey(name: 'hdbcSwiftCode', defaultValue: '', toJson: valueTojson)
+      @JsonKey(
+          name: 'hdbcSwiftCode', defaultValue: '', toJson: valueOrNullToJson)
       required final String hdbcSwiftCode,
-      @JsonKey(name: 'payNowUen', defaultValue: '', toJson: valueTojson)
+      @JsonKey(name: 'payNowUen', defaultValue: '', toJson: valueOrNullToJson)
       required final String payNowUen,
-      @JsonKey(name: 'salesDistrict', defaultValue: '', toJson: valueTojson)
+      @JsonKey(
+          name: 'salesDistrict', defaultValue: '', toJson: valueOrNullToJson)
       required final String salesDistrict}) = _$BankBeneficiaryDtoImpl;
   const _BankBeneficiaryDto._() : super._();
 
@@ -417,34 +429,34 @@ abstract class _BankBeneficiaryDto extends BankBeneficiaryDto {
   @JsonKey(name: 'salesOrg', defaultValue: '')
   String get salesOrg;
   @override
-  @JsonKey(name: 'bankAccount', defaultValue: '', toJson: valueTojson)
+  @JsonKey(name: 'bankAccount', defaultValue: '', toJson: valueOrNullToJson)
   String get bankAccount;
   @override
-  @JsonKey(name: 'bankAddress', defaultValue: '', toJson: valueTojson)
+  @JsonKey(name: 'bankAddress', defaultValue: '', toJson: valueOrNullToJson)
   String get bankAddress;
   @override
-  @JsonKey(name: 'bankCode', defaultValue: '', toJson: valueTojson)
+  @JsonKey(name: 'bankCode', defaultValue: '', toJson: valueOrNullToJson)
   String get bankCode;
   @override
-  @JsonKey(name: 'bankName', defaultValue: '', toJson: valueTojson)
+  @JsonKey(name: 'bankName', defaultValue: '', toJson: valueOrNullToJson)
   String get bankName;
   @override
-  @JsonKey(name: 'beneficiaryName', defaultValue: '', toJson: valueTojson)
+  @JsonKey(name: 'beneficiaryName', defaultValue: '', toJson: valueOrNullToJson)
   String get beneficiaryName;
   @override
-  @JsonKey(name: 'branch', defaultValue: '', toJson: valueTojson)
+  @JsonKey(name: 'branch', defaultValue: '', toJson: valueOrNullToJson)
   String get branch;
   @override
-  @JsonKey(name: 'emailId', defaultValue: '', toJson: valueTojson)
+  @JsonKey(name: 'emailId', defaultValue: '', toJson: valueOrNullToJson)
   String get emailId;
   @override
-  @JsonKey(name: 'hdbcSwiftCode', defaultValue: '', toJson: valueTojson)
+  @JsonKey(name: 'hdbcSwiftCode', defaultValue: '', toJson: valueOrNullToJson)
   String get hdbcSwiftCode;
   @override
-  @JsonKey(name: 'payNowUen', defaultValue: '', toJson: valueTojson)
+  @JsonKey(name: 'payNowUen', defaultValue: '', toJson: valueOrNullToJson)
   String get payNowUen;
   @override
-  @JsonKey(name: 'salesDistrict', defaultValue: '', toJson: valueTojson)
+  @JsonKey(name: 'salesDistrict', defaultValue: '', toJson: valueOrNullToJson)
   String get salesDistrict;
   @override
   @JsonKey(ignore: true)

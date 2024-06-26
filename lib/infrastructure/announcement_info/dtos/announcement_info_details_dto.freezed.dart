@@ -23,25 +23,43 @@ AnnouncementInfoDetailsDto _$AnnouncementInfoDetailsDtoFromJson(
 mixin _$AnnouncementInfoDetailsDto {
   @JsonKey(name: 'id', defaultValue: '')
   String get id => throw _privateConstructorUsedError;
-  @JsonKey(name: 'title', readValue: readValue, defaultValue: '')
+  @JsonKey(
+      name: 'title',
+      readValue: JsonReadValueHelper.readValueString,
+      defaultValue: '')
   String get title => throw _privateConstructorUsedError;
-  @JsonKey(name: 'content', readValue: readValue, defaultValue: '')
+  @JsonKey(
+      name: 'content',
+      readValue: JsonReadValueHelper.readValueString,
+      defaultValue: '')
   String get content => throw _privateConstructorUsedError;
   @JsonKey(name: 'summary', defaultValue: '')
   String get summary => throw _privateConstructorUsedError;
-  @JsonKey(name: 'thumbnail', readValue: readSrc, defaultValue: '')
+  @JsonKey(
+      name: 'thumbnail',
+      readValue: JsonReadValueHelper.readSrcValue,
+      defaultValue: '')
   String get thumbnail => throw _privateConstructorUsedError;
-  @JsonKey(name: 'publishedDate', readValue: readIso, defaultValue: '')
+  @JsonKey(
+      name: 'publishedDate',
+      readValue: JsonReadValueHelper.readValueDateISO,
+      defaultValue: '')
   String get publishedDate => throw _privateConstructorUsedError;
-  @JsonKey(name: 'releaseDate', readValue: readIso)
+  @JsonKey(name: 'releaseDate', readValue: JsonReadValueHelper.readValueDateISO)
   String get releaseDate => throw _privateConstructorUsedError;
-  @JsonKey(name: 'manufacturer', readValue: readValue, defaultValue: '')
+  @JsonKey(
+      name: 'manufacturer',
+      readValue: JsonReadValueHelper.readValueString,
+      defaultValue: '')
   String get manufacturer => throw _privateConstructorUsedError;
-  @JsonKey(name: 'source', readValue: readValue, defaultValue: '')
+  @JsonKey(
+      name: 'source',
+      readValue: JsonReadValueHelper.readValueString,
+      defaultValue: '')
   String get source => throw _privateConstructorUsedError;
-  @JsonKey(name: 'tag', readValue: readTag)
+  @JsonKey(name: 'tag', readValue: JsonReadValueHelper.readTagName)
   String get tag => throw _privateConstructorUsedError;
-  @JsonKey(name: 'documents', readValue: getDocumentsList)
+  @JsonKey(name: 'documents', readValue: JsonReadValueHelper.readDocumentsList)
   List<String> get documentsList => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -59,22 +77,44 @@ abstract class $AnnouncementInfoDetailsDtoCopyWith<$Res> {
   @useResult
   $Res call(
       {@JsonKey(name: 'id', defaultValue: '') String id,
-      @JsonKey(name: 'title', readValue: readValue, defaultValue: '')
+      @JsonKey(
+          name: 'title',
+          readValue: JsonReadValueHelper.readValueString,
+          defaultValue: '')
       String title,
-      @JsonKey(name: 'content', readValue: readValue, defaultValue: '')
+      @JsonKey(
+          name: 'content',
+          readValue: JsonReadValueHelper.readValueString,
+          defaultValue: '')
       String content,
       @JsonKey(name: 'summary', defaultValue: '') String summary,
-      @JsonKey(name: 'thumbnail', readValue: readSrc, defaultValue: '')
+      @JsonKey(
+          name: 'thumbnail',
+          readValue: JsonReadValueHelper.readSrcValue,
+          defaultValue: '')
       String thumbnail,
-      @JsonKey(name: 'publishedDate', readValue: readIso, defaultValue: '')
+      @JsonKey(
+          name: 'publishedDate',
+          readValue: JsonReadValueHelper.readValueDateISO,
+          defaultValue: '')
       String publishedDate,
-      @JsonKey(name: 'releaseDate', readValue: readIso) String releaseDate,
-      @JsonKey(name: 'manufacturer', readValue: readValue, defaultValue: '')
+      @JsonKey(
+          name: 'releaseDate', readValue: JsonReadValueHelper.readValueDateISO)
+      String releaseDate,
+      @JsonKey(
+          name: 'manufacturer',
+          readValue: JsonReadValueHelper.readValueString,
+          defaultValue: '')
       String manufacturer,
-      @JsonKey(name: 'source', readValue: readValue, defaultValue: '')
+      @JsonKey(
+          name: 'source',
+          readValue: JsonReadValueHelper.readValueString,
+          defaultValue: '')
       String source,
-      @JsonKey(name: 'tag', readValue: readTag) String tag,
-      @JsonKey(name: 'documents', readValue: getDocumentsList)
+      @JsonKey(name: 'tag', readValue: JsonReadValueHelper.readTagName)
+      String tag,
+      @JsonKey(
+          name: 'documents', readValue: JsonReadValueHelper.readDocumentsList)
       List<String> documentsList});
 }
 
@@ -164,22 +204,44 @@ abstract class _$$AnnouncementInfoDetailsDtoImplCopyWith<$Res>
   @useResult
   $Res call(
       {@JsonKey(name: 'id', defaultValue: '') String id,
-      @JsonKey(name: 'title', readValue: readValue, defaultValue: '')
+      @JsonKey(
+          name: 'title',
+          readValue: JsonReadValueHelper.readValueString,
+          defaultValue: '')
       String title,
-      @JsonKey(name: 'content', readValue: readValue, defaultValue: '')
+      @JsonKey(
+          name: 'content',
+          readValue: JsonReadValueHelper.readValueString,
+          defaultValue: '')
       String content,
       @JsonKey(name: 'summary', defaultValue: '') String summary,
-      @JsonKey(name: 'thumbnail', readValue: readSrc, defaultValue: '')
+      @JsonKey(
+          name: 'thumbnail',
+          readValue: JsonReadValueHelper.readSrcValue,
+          defaultValue: '')
       String thumbnail,
-      @JsonKey(name: 'publishedDate', readValue: readIso, defaultValue: '')
+      @JsonKey(
+          name: 'publishedDate',
+          readValue: JsonReadValueHelper.readValueDateISO,
+          defaultValue: '')
       String publishedDate,
-      @JsonKey(name: 'releaseDate', readValue: readIso) String releaseDate,
-      @JsonKey(name: 'manufacturer', readValue: readValue, defaultValue: '')
+      @JsonKey(
+          name: 'releaseDate', readValue: JsonReadValueHelper.readValueDateISO)
+      String releaseDate,
+      @JsonKey(
+          name: 'manufacturer',
+          readValue: JsonReadValueHelper.readValueString,
+          defaultValue: '')
       String manufacturer,
-      @JsonKey(name: 'source', readValue: readValue, defaultValue: '')
+      @JsonKey(
+          name: 'source',
+          readValue: JsonReadValueHelper.readValueString,
+          defaultValue: '')
       String source,
-      @JsonKey(name: 'tag', readValue: readTag) String tag,
-      @JsonKey(name: 'documents', readValue: getDocumentsList)
+      @JsonKey(name: 'tag', readValue: JsonReadValueHelper.readTagName)
+      String tag,
+      @JsonKey(
+          name: 'documents', readValue: JsonReadValueHelper.readDocumentsList)
       List<String> documentsList});
 }
 
@@ -262,23 +324,44 @@ class __$$AnnouncementInfoDetailsDtoImplCopyWithImpl<$Res>
 class _$AnnouncementInfoDetailsDtoImpl extends _AnnouncementInfoDetailsDto {
   const _$AnnouncementInfoDetailsDtoImpl(
       {@JsonKey(name: 'id', defaultValue: '') required this.id,
-      @JsonKey(name: 'title', readValue: readValue, defaultValue: '')
+      @JsonKey(
+          name: 'title',
+          readValue: JsonReadValueHelper.readValueString,
+          defaultValue: '')
       required this.title,
-      @JsonKey(name: 'content', readValue: readValue, defaultValue: '')
+      @JsonKey(
+          name: 'content',
+          readValue: JsonReadValueHelper.readValueString,
+          defaultValue: '')
       required this.content,
       @JsonKey(name: 'summary', defaultValue: '') required this.summary,
-      @JsonKey(name: 'thumbnail', readValue: readSrc, defaultValue: '')
+      @JsonKey(
+          name: 'thumbnail',
+          readValue: JsonReadValueHelper.readSrcValue,
+          defaultValue: '')
       required this.thumbnail,
-      @JsonKey(name: 'publishedDate', readValue: readIso, defaultValue: '')
+      @JsonKey(
+          name: 'publishedDate',
+          readValue: JsonReadValueHelper.readValueDateISO,
+          defaultValue: '')
       required this.publishedDate,
-      @JsonKey(name: 'releaseDate', readValue: readIso)
+      @JsonKey(
+          name: 'releaseDate', readValue: JsonReadValueHelper.readValueDateISO)
       required this.releaseDate,
-      @JsonKey(name: 'manufacturer', readValue: readValue, defaultValue: '')
+      @JsonKey(
+          name: 'manufacturer',
+          readValue: JsonReadValueHelper.readValueString,
+          defaultValue: '')
       required this.manufacturer,
-      @JsonKey(name: 'source', readValue: readValue, defaultValue: '')
+      @JsonKey(
+          name: 'source',
+          readValue: JsonReadValueHelper.readValueString,
+          defaultValue: '')
       required this.source,
-      @JsonKey(name: 'tag', readValue: readTag) required this.tag,
-      @JsonKey(name: 'documents', readValue: getDocumentsList)
+      @JsonKey(name: 'tag', readValue: JsonReadValueHelper.readTagName)
+      required this.tag,
+      @JsonKey(
+          name: 'documents', readValue: JsonReadValueHelper.readDocumentsList)
       required final List<String> documentsList})
       : _documentsList = documentsList,
         super._();
@@ -291,35 +374,53 @@ class _$AnnouncementInfoDetailsDtoImpl extends _AnnouncementInfoDetailsDto {
   @JsonKey(name: 'id', defaultValue: '')
   final String id;
   @override
-  @JsonKey(name: 'title', readValue: readValue, defaultValue: '')
+  @JsonKey(
+      name: 'title',
+      readValue: JsonReadValueHelper.readValueString,
+      defaultValue: '')
   final String title;
   @override
-  @JsonKey(name: 'content', readValue: readValue, defaultValue: '')
+  @JsonKey(
+      name: 'content',
+      readValue: JsonReadValueHelper.readValueString,
+      defaultValue: '')
   final String content;
   @override
   @JsonKey(name: 'summary', defaultValue: '')
   final String summary;
   @override
-  @JsonKey(name: 'thumbnail', readValue: readSrc, defaultValue: '')
+  @JsonKey(
+      name: 'thumbnail',
+      readValue: JsonReadValueHelper.readSrcValue,
+      defaultValue: '')
   final String thumbnail;
   @override
-  @JsonKey(name: 'publishedDate', readValue: readIso, defaultValue: '')
+  @JsonKey(
+      name: 'publishedDate',
+      readValue: JsonReadValueHelper.readValueDateISO,
+      defaultValue: '')
   final String publishedDate;
   @override
-  @JsonKey(name: 'releaseDate', readValue: readIso)
+  @JsonKey(name: 'releaseDate', readValue: JsonReadValueHelper.readValueDateISO)
   final String releaseDate;
   @override
-  @JsonKey(name: 'manufacturer', readValue: readValue, defaultValue: '')
+  @JsonKey(
+      name: 'manufacturer',
+      readValue: JsonReadValueHelper.readValueString,
+      defaultValue: '')
   final String manufacturer;
   @override
-  @JsonKey(name: 'source', readValue: readValue, defaultValue: '')
+  @JsonKey(
+      name: 'source',
+      readValue: JsonReadValueHelper.readValueString,
+      defaultValue: '')
   final String source;
   @override
-  @JsonKey(name: 'tag', readValue: readTag)
+  @JsonKey(name: 'tag', readValue: JsonReadValueHelper.readTagName)
   final String tag;
   final List<String> _documentsList;
   @override
-  @JsonKey(name: 'documents', readValue: getDocumentsList)
+  @JsonKey(name: 'documents', readValue: JsonReadValueHelper.readDocumentsList)
   List<String> get documentsList {
     if (_documentsList is EqualUnmodifiableListView) return _documentsList;
     // ignore: implicit_dynamic_type
@@ -388,23 +489,44 @@ class _$AnnouncementInfoDetailsDtoImpl extends _AnnouncementInfoDetailsDto {
 abstract class _AnnouncementInfoDetailsDto extends AnnouncementInfoDetailsDto {
   const factory _AnnouncementInfoDetailsDto(
       {@JsonKey(name: 'id', defaultValue: '') required final String id,
-      @JsonKey(name: 'title', readValue: readValue, defaultValue: '')
+      @JsonKey(
+          name: 'title',
+          readValue: JsonReadValueHelper.readValueString,
+          defaultValue: '')
       required final String title,
-      @JsonKey(name: 'content', readValue: readValue, defaultValue: '')
+      @JsonKey(
+          name: 'content',
+          readValue: JsonReadValueHelper.readValueString,
+          defaultValue: '')
       required final String content,
       @JsonKey(name: 'summary', defaultValue: '') required final String summary,
-      @JsonKey(name: 'thumbnail', readValue: readSrc, defaultValue: '')
+      @JsonKey(
+          name: 'thumbnail',
+          readValue: JsonReadValueHelper.readSrcValue,
+          defaultValue: '')
       required final String thumbnail,
-      @JsonKey(name: 'publishedDate', readValue: readIso, defaultValue: '')
+      @JsonKey(
+          name: 'publishedDate',
+          readValue: JsonReadValueHelper.readValueDateISO,
+          defaultValue: '')
       required final String publishedDate,
-      @JsonKey(name: 'releaseDate', readValue: readIso)
+      @JsonKey(
+          name: 'releaseDate', readValue: JsonReadValueHelper.readValueDateISO)
       required final String releaseDate,
-      @JsonKey(name: 'manufacturer', readValue: readValue, defaultValue: '')
+      @JsonKey(
+          name: 'manufacturer',
+          readValue: JsonReadValueHelper.readValueString,
+          defaultValue: '')
       required final String manufacturer,
-      @JsonKey(name: 'source', readValue: readValue, defaultValue: '')
+      @JsonKey(
+          name: 'source',
+          readValue: JsonReadValueHelper.readValueString,
+          defaultValue: '')
       required final String source,
-      @JsonKey(name: 'tag', readValue: readTag) required final String tag,
-      @JsonKey(name: 'documents', readValue: getDocumentsList)
+      @JsonKey(name: 'tag', readValue: JsonReadValueHelper.readTagName)
+      required final String tag,
+      @JsonKey(
+          name: 'documents', readValue: JsonReadValueHelper.readDocumentsList)
       required final List<String>
           documentsList}) = _$AnnouncementInfoDetailsDtoImpl;
   const _AnnouncementInfoDetailsDto._() : super._();
@@ -416,34 +538,52 @@ abstract class _AnnouncementInfoDetailsDto extends AnnouncementInfoDetailsDto {
   @JsonKey(name: 'id', defaultValue: '')
   String get id;
   @override
-  @JsonKey(name: 'title', readValue: readValue, defaultValue: '')
+  @JsonKey(
+      name: 'title',
+      readValue: JsonReadValueHelper.readValueString,
+      defaultValue: '')
   String get title;
   @override
-  @JsonKey(name: 'content', readValue: readValue, defaultValue: '')
+  @JsonKey(
+      name: 'content',
+      readValue: JsonReadValueHelper.readValueString,
+      defaultValue: '')
   String get content;
   @override
   @JsonKey(name: 'summary', defaultValue: '')
   String get summary;
   @override
-  @JsonKey(name: 'thumbnail', readValue: readSrc, defaultValue: '')
+  @JsonKey(
+      name: 'thumbnail',
+      readValue: JsonReadValueHelper.readSrcValue,
+      defaultValue: '')
   String get thumbnail;
   @override
-  @JsonKey(name: 'publishedDate', readValue: readIso, defaultValue: '')
+  @JsonKey(
+      name: 'publishedDate',
+      readValue: JsonReadValueHelper.readValueDateISO,
+      defaultValue: '')
   String get publishedDate;
   @override
-  @JsonKey(name: 'releaseDate', readValue: readIso)
+  @JsonKey(name: 'releaseDate', readValue: JsonReadValueHelper.readValueDateISO)
   String get releaseDate;
   @override
-  @JsonKey(name: 'manufacturer', readValue: readValue, defaultValue: '')
+  @JsonKey(
+      name: 'manufacturer',
+      readValue: JsonReadValueHelper.readValueString,
+      defaultValue: '')
   String get manufacturer;
   @override
-  @JsonKey(name: 'source', readValue: readValue, defaultValue: '')
+  @JsonKey(
+      name: 'source',
+      readValue: JsonReadValueHelper.readValueString,
+      defaultValue: '')
   String get source;
   @override
-  @JsonKey(name: 'tag', readValue: readTag)
+  @JsonKey(name: 'tag', readValue: JsonReadValueHelper.readTagName)
   String get tag;
   @override
-  @JsonKey(name: 'documents', readValue: getDocumentsList)
+  @JsonKey(name: 'documents', readValue: JsonReadValueHelper.readDocumentsList)
   List<String> get documentsList;
   @override
   @JsonKey(ignore: true)

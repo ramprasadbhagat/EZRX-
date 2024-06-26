@@ -38,7 +38,7 @@ class SubmitTenderContractDto with _$SubmitTenderContractDto {
 
   SubmitTenderContract toDomain() {
     return SubmitTenderContract(
-      contractNumber: TenderContractNumber.tenderContractNumber(contractNumber),
+      contractNumber: TenderContractNumber(contractNumber),
       contractLineItemNumber: contractLineItemNumber,
       contractPrice: contractPrice,
       contractUnitOfMeasurement: contractUnitOfMeasurement,

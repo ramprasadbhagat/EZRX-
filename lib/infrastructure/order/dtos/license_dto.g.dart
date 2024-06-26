@@ -11,8 +11,12 @@ _$licenseDtoImpl _$$licenseDtoImplFromJson(Map<String, dynamic> json) =>
       licenceType: json['licenceType'] as String? ?? '',
       licenseDescription: json['licenseDescription'] as String? ?? '',
       licenseNumber: json['licenseNumber'] as String? ?? '',
-      validFrom: dateTimeStringFormatCheck(json, 'validFrom') as String? ?? '',
-      validTo: dateTimeStringFormatCheck(json, 'validTo') as String? ?? '',
+      validFrom: JsonReadValueHelper.readDateTimeStringFormat(json, 'validFrom')
+              as String? ??
+          '',
+      validTo: JsonReadValueHelper.readDateTimeStringFormat(json, 'validTo')
+              as String? ??
+          '',
     );
 
 Map<String, dynamic> _$$licenseDtoImplToJson(_$licenseDtoImpl instance) =>

@@ -90,20 +90,4 @@ class ProductsQuery {
     }
     ''';
   }
-
-  String addFavouriteMutation() {
-    return '''
-      mutation addFavouriteMaterial(\$materialNumber: String!){
-        addFavouriteMaterial(materialNumber:\$materialNumber)
-          }
-    ''';
-  }
-
-  String removeFavouriteMutation() {
-    return '''
-      mutation removeFavouriteMaterial(\$materialNumber: String!){
-        removeFavouriteMaterial(materialNumber:\$materialNumber)
-      }
-    ''';
-  }
 }

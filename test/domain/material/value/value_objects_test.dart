@@ -116,7 +116,7 @@ void main() {
         () async {
       const input = '55';
       final tenderContractNumber =
-          TenderContractNumber.tenderContractNumber(input);
+          TenderContractNumber(input);
       final result = tenderContractNumber.displayTenderContractNumber;
       expect(result, '55');
     });
@@ -125,7 +125,7 @@ void main() {
         () async {
       const input = '';
       final tenderContractNumber =
-          TenderContractNumber.tenderContractNumber(input);
+          TenderContractNumber(input);
       final result = tenderContractNumber.displayTenderContractNumber;
       expect(result, 'NA');
     });
@@ -134,7 +134,7 @@ void main() {
         () async {
       const input = '55';
       final tenderContractNumber =
-          TenderContractNumber.tenderContractItemNumber(input);
+          TenderContractNumber(input);
       final result = tenderContractNumber.displayTenderContractItemNumber;
       expect(result, '55');
     });
@@ -143,7 +143,7 @@ void main() {
         () async {
       const input = '';
       final tenderContractNumber =
-          TenderContractNumber.tenderContractItemNumber(input);
+          TenderContractNumber(input);
       final result = tenderContractNumber.displayTenderContractItemNumber;
       expect(result, 'NA');
     });
@@ -151,7 +151,7 @@ void main() {
     test('should return value if Tender Contract visa Number have valid value',
         () async {
       const input = '0000000124655';
-      final tenderContractNumber = TenderContractNumber.tenderVisaNumber(input);
+      final tenderContractNumber = TenderContractNumber(input);
       final result = tenderContractNumber.displayTenderVisaNumber;
       expect(result, '124655');
     });
@@ -159,7 +159,7 @@ void main() {
     test('should return NA if Tender Contract visa Number have empty value',
         () async {
       const input = '';
-      final tenderContractNumber = TenderContractNumber.tenderVisaNumber(input);
+      final tenderContractNumber = TenderContractNumber(input);
       final result = tenderContractNumber.displayTenderVisaNumber;
       expect(result, 'NA');
     });
@@ -169,7 +169,7 @@ void main() {
         () async {
       const input = '0000000124655';
       final tenderContractNumber =
-          TenderContractNumber.announcementLetterNumber(input);
+          TenderContractNumber(input);
       final result = tenderContractNumber.displayAnnouncementLetterNumber;
       expect(result, '124655');
     });
@@ -179,7 +179,7 @@ void main() {
         () async {
       const input = '';
       final tenderContractNumber =
-          TenderContractNumber.announcementLetterNumber(input);
+          TenderContractNumber(input);
       final result = tenderContractNumber.displayAnnouncementLetterNumber;
       expect(result, 'NA');
     });

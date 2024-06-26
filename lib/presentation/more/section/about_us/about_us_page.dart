@@ -1,4 +1,5 @@
 import 'package:ezrxmobile/presentation/core/custom_app_bar.dart';
+import 'package:ezrxmobile/presentation/core/scroll_to_top_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -45,16 +46,6 @@ class _AboutUsPageState extends State<AboutUsPage> {
       _isScrollAtInitialPosition = _scrollController.initialScrollOffset ==
           _scrollController.position.pixels;
     });
-  }
-
-  void _scrollToTop() {
-    if (_scrollController.hasClients) {
-      _scrollController.animateTo(
-        0.0,
-        duration: const Duration(milliseconds: 500),
-        curve: Curves.easeInOut,
-      );
-    }
   }
 
   @override
@@ -128,18 +119,10 @@ class _AboutUsPageState extends State<AboutUsPage> {
           );
         },
       ),
-      floatingActionButton: !_isScrollAtInitialPosition
-          ? FloatingActionButton(
-              key: WidgetKeys.aboutUsFloatingButton,
-              onPressed: () => _scrollToTop(),
-              mini: true,
-              backgroundColor: ZPColors.secondaryMustard,
-              child: const Icon(
-                Icons.expand_less,
-                color: ZPColors.black,
-              ),
-            )
-          : null,
+      floatingActionButton: ScrollToTopWidget(
+        scrollController: _scrollController,
+        isVisible: !_isScrollAtInitialPosition,
+      ),
     );
   }
 }

@@ -95,7 +95,9 @@ void main() {
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.mock);
     locator.registerLazySingleton<MixpanelService>(() => MixpanelServiceMock());
     paymentSummaryDetails =
-        await PaymentItemLocalDataSource().getPaymentSummaryDetailsPHPayment();
+        await PaymentItemLocalDataSource().getPaymentSummaryDetailsByPaymentId(
+      PaymentItemLocalDataSource.phPaymentGatewayId,
+    );
     paymentSummaryList = [
       PaymentSummaryDetails.empty().copyWith(
         paymentAmount: 200,

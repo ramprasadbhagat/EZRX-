@@ -57,7 +57,7 @@ void main() {
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.uat);
     autoRouterMock = locator<AppRouter>();
     final mockData = await ReturnSummaryDetailsRequestInformationLocal()
-        .getRequestInformation();
+        .getReturnRequestInformation();
     requestInformationMock = mockData.returnRequestInformationList.first;
     returnRequestInformationHeader = mockData.requestInformationHeader;
   });

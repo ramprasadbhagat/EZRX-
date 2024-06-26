@@ -119,7 +119,7 @@ final mockZmgCartItemList = <PriceAggregate>[
     materialInfo: MaterialInfo.empty().copyWith(
       materialNumber: MaterialNumber('000000000023168459'),
       materialDescription: ' Triglyceride Mosys D',
-      materialGroup2: MaterialGroup.two('004'),
+      materialGroup2: MaterialGroup('004'),
       principalData: PrincipalData.empty().copyWith(
         principalName: PrincipalName('台灣拜耳股份有限公司'),
       ),
@@ -139,7 +139,7 @@ final mockZmgCartItemList = <PriceAggregate>[
     materialInfo: MaterialInfo.empty().copyWith(
       materialNumber: MaterialNumber('000000000023168460'),
       materialDescription: ' Triglyceride Mosys D',
-      materialGroup2: MaterialGroup.two('004'),
+      materialGroup2: MaterialGroup('004'),
       principalData: PrincipalData.empty().copyWith(
         principalName: PrincipalName('台灣拜耳股份有限公司'),
       ),

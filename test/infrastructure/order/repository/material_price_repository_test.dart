@@ -1,4 +1,5 @@
 import 'package:ezrxmobile/config.dart';
+import 'package:ezrxmobile/infrastructure/order/dtos/price_dto.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
@@ -10,11 +11,11 @@ import 'package:ezrxmobile/infrastructure/order/datasource/material_price_local.
 import 'package:ezrxmobile/infrastructure/order/datasource/material_price_remote.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/material_price_repository.dart';
 
+import '../../../common_mock_data/customer_code_mock.dart';
 import '../../../common_mock_data/mock_other.dart';
 import '../../../common_mock_data/sales_organsiation_mock.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_sg_sales_org_config.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_vn_sales_org_config.dart';
-
 
 class MaterialPriceLocalDataSourceMock extends Mock
     implements MaterialPriceLocalDataSource {}
@@ -37,6 +38,11 @@ void main() {
     MaterialNumber('1'),
     MaterialNumber('2'),
   ];
+  final fakePrice = Price.empty().copyWith(
+    priceOverride: PriceOverrideValue(70.0),
+    zdp8Override: Zdp8OverrideValue(12.0),
+    materialNumber: MaterialNumber('123456'),
+  );
 
   setUpAll(() {
     mockConfig = ConfigMock();
@@ -215,6 +221,244 @@ void main() {
     expect(
       result.isLeft(),
       true,
+    );
+  });
+
+  group('materialPriceRepository should - ', () {
+    test('get discountOverride successfully locally ', () async {
+      when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
+      when(() => materialPriceLocalDataSource.getPriceList())
+          .thenAnswer((invocation) async => <Price>[]);
+
+      final result = await materialPriceRepository.getMaterialPriceWithOverride(
+        customerCodeInfo: fakeCustomerCodeInfo,
+        shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
+        salesOrganisation: fakeSalesOrganisation,
+        price: fakePrice,
+      );
+      expect(
+        result.isRight(),
+        false,
+      );
+    });
+    test('get discountOverride fail locally ', () async {
+      when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
+      when(() => materialPriceLocalDataSource.getPriceList())
+          .thenThrow((invocation) async => MockException());
+
+      final result = await materialPriceRepository.getMaterialPriceWithOverride(
+        customerCodeInfo: fakeCustomerCodeInfo,
+        shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
+        salesOrganisation: fakeSalesOrganisation,
+        price: fakePrice,
+      );
+      expect(
+        result.isLeft(),
+        true,
+      );
+    });
+    test('get discountOverride successfully remote ', () async {
+      when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
+      when(
+        () => materialPriceRemoteDataSource.getMaterialOverridePriceList(
+          salesOrgCode: fakeSalesOrganisation.salesOrg.getOrCrash(),
+          customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
+          shipToCode: fakeCustomerCodeInfo.shipToInfos.first.shipToCustomerCode,
+          materialQuery: PriceDto.fromDomain(
+            fakePrice,
+          ).overrideQuery,
+        ),
+      ).thenAnswer(
+        (invocation) async => [fakePrice],
+      );
+
+      final result = await materialPriceRepository.getMaterialPriceWithOverride(
+        customerCodeInfo: fakeCustomerCodeInfo,
+        shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
+        salesOrganisation: fakeSalesOrganisation,
+        price: fakePrice,
+      );
+      expect(
+        result.isRight(),
+        true,
+      );
+    });
+    test('get discountOverride fail remote ', () async {
+      when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
+      when(
+        () => materialPriceRemoteDataSource.getMaterialOverridePriceList(
+          salesOrgCode: fakeSalesOrganisation.salesOrg.getOrCrash(),
+          customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
+          shipToCode: fakeCustomerCodeInfo.shipToInfos.first.shipToCustomerCode,
+          materialQuery: PriceDto.fromDomain(
+            fakePrice,
+          ).overrideQuery,
+        ),
+      ).thenThrow((invocation) async => MockException());
+
+      final result = await materialPriceRepository.getMaterialPriceWithOverride(
+        customerCodeInfo: fakeCustomerCodeInfo,
+        shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
+        salesOrganisation: fakeSalesOrganisation,
+        price: fakePrice,
+      );
+      expect(
+        result.isLeft(),
+        true,
+      );
+    });
+
+    test(
+        'get discountOverride successfully locally with condition zdp8Override valid',
+        () async {
+      when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
+      when(() => materialPriceLocalDataSource.getPriceList())
+          .thenAnswer((invocation) async => <Price>[Price.empty()]);
+
+      final result = await materialPriceRepository.getMaterialPriceWithOverride(
+        customerCodeInfo: fakeCustomerCodeInfo,
+        shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
+        salesOrganisation: fakeSalesOrganisation,
+        price: fakePrice,
+      );
+      expect(
+        result.isRight(),
+        true,
+      );
+    });
+
+    test(
+        'get discountOverride successfully locally with condition zdp8Override inValid',
+        () async {
+      when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
+      when(() => materialPriceLocalDataSource.getPriceList())
+          .thenAnswer((invocation) async => <Price>[Price.empty()]);
+
+      final result = await materialPriceRepository.getMaterialPriceWithOverride(
+        customerCodeInfo: fakeCustomerCodeInfo,
+        shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
+        salesOrganisation: fakeSalesOrganisation,
+        price: fakePrice,
+      );
+      expect(
+        result.isRight(),
+        true,
+      );
+    });
+
+    test(
+        'get discountOverride successfully locally with condition element and price material number same',
+        () async {
+      when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
+      when(() => materialPriceLocalDataSource.getPriceList()).thenAnswer(
+        (invocation) async => <Price>[fakePrice],
+      );
+
+      final result = await materialPriceRepository.getMaterialPriceWithOverride(
+        customerCodeInfo: fakeCustomerCodeInfo,
+        shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
+        salesOrganisation: fakeSalesOrganisation,
+        price: fakePrice,
+      );
+      expect(
+        result.isRight(),
+        true,
+      );
+    });
+
+    test(
+      'get Material Price With Zdp5 Discount locally',
+      () async {
+        when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
+        when(() => materialPriceLocalDataSource.getPriceList()).thenAnswer(
+          (invocation) async => [fakePrice],
+        );
+        final result =
+            await materialPriceRepository.getMaterialPriceWithZdp5Discount(
+          customerCodeInfo: fakeCustomerCodeInfo,
+          shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
+          salesOrganisation: fakeSalesOrganisation,
+          price: fakePrice,
+          exceedQuantity: true,
+        );
+        expect(result.isRight(), true);
+      },
+    );
+
+    test(
+      'get Material Price With Zdp5 Discount locally failure',
+      () async {
+        when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
+        when(() => materialPriceLocalDataSource.getPriceList()).thenThrow(
+          (invocation) async => MockException(),
+        );
+        final result =
+            await materialPriceRepository.getMaterialPriceWithZdp5Discount(
+          customerCodeInfo: fakeCustomerCodeInfo,
+          shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
+          salesOrganisation: fakeSalesOrganisation,
+          price: fakePrice,
+          exceedQuantity: true,
+        );
+        expect(result.isLeft(), true);
+      },
+    );
+    test(
+      'get Material Price With Zdp5 Discount remote',
+      () async {
+        when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
+        when(
+          () => materialPriceRemoteDataSource.getMaterialOverridePriceList(
+            salesOrgCode: fakeSalesOrganisation.salesOrg.getOrCrash(),
+            customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
+            shipToCode:
+                fakeCustomerCodeInfo.shipToInfos.first.shipToCustomerCode,
+            materialQuery: PriceDto.fromDomain(
+              fakePrice,
+            ).materialQueryWithExceedQty(true),
+          ),
+        ).thenAnswer(
+          (invocation) async => [fakePrice],
+        );
+        final result =
+            await materialPriceRepository.getMaterialPriceWithZdp5Discount(
+          customerCodeInfo: fakeCustomerCodeInfo,
+          shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
+          salesOrganisation: fakeSalesOrganisation,
+          price: fakePrice,
+          exceedQuantity: true,
+        );
+        expect(result.isRight(), true);
+      },
+    );
+
+    test(
+      'get Material Price With Zdp5 Discount remote failure',
+      () async {
+        when(() => mockConfig.appFlavor).thenReturn(Flavor.uat);
+        when(
+          () => materialPriceRemoteDataSource.getMaterialOverridePriceList(
+            salesOrgCode: fakeSalesOrganisation.salesOrg.getOrCrash(),
+            customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
+            shipToCode:
+                fakeCustomerCodeInfo.shipToInfos.first.shipToCustomerCode,
+            materialQuery: PriceDto.fromDomain(
+              fakePrice,
+            ).materialQueryWithExceedQty(true),
+          ),
+        ).thenThrow(
+          (invocation) async => Exception('fake-error'),
+        );
+        final result =
+            await materialPriceRepository.getMaterialPriceWithZdp5Discount(
+          customerCodeInfo: fakeCustomerCodeInfo,
+          shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
+          salesOrganisation: fakeSalesOrganisation,
+          price: fakePrice,
+          exceedQuantity: true,
+        );
+        expect(result.isLeft(), true);
+      },
     );
   });
 }

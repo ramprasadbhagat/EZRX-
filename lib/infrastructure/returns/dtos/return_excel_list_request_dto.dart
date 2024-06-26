@@ -40,8 +40,4 @@ class ReturnExcelListRequestDto with _$ReturnExcelListRequestDto {
 
   factory ReturnExcelListRequestDto.fromJson(Map<String, dynamic> json) =>
       _$ReturnExcelListRequestDtoFromJson(json);
-
-  Map<String, dynamic> toMap() => toJson()
-    ..removeWhere((key, value) => value is String && value.isEmpty)
-    ..addAll(filterQuery.toMap());
 }

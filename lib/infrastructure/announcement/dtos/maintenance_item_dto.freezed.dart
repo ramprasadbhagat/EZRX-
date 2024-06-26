@@ -27,9 +27,14 @@ mixin _$MaintenanceItemDto {
   @JsonKey(name: 'displayName', defaultValue: '')
   String get displayName => throw _privateConstructorUsedError;
   @JsonKey(
-      name: 'maxNumberOfItem', defaultValue: 0, readValue: getMaximumOfItem)
+      name: 'maxNumberOfItem',
+      defaultValue: 0,
+      readValue: JsonReadValueHelper.readMaximumOfItem)
   int get maxNumberOfItem => throw _privateConstructorUsedError;
-  @JsonKey(name: 'banners', defaultValue: [], readValue: getValueList)
+  @JsonKey(
+      name: 'banners',
+      defaultValue: [],
+      readValue: JsonReadValueHelper.readValueList)
   List<MaintenanceBannerDto> get banners => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -48,9 +53,14 @@ abstract class $MaintenanceItemDtoCopyWith<$Res> {
       @JsonKey(name: 'name', defaultValue: '') String name,
       @JsonKey(name: 'displayName', defaultValue: '') String displayName,
       @JsonKey(
-          name: 'maxNumberOfItem', defaultValue: 0, readValue: getMaximumOfItem)
+          name: 'maxNumberOfItem',
+          defaultValue: 0,
+          readValue: JsonReadValueHelper.readMaximumOfItem)
       int maxNumberOfItem,
-      @JsonKey(name: 'banners', defaultValue: [], readValue: getValueList)
+      @JsonKey(
+          name: 'banners',
+          defaultValue: [],
+          readValue: JsonReadValueHelper.readValueList)
       List<MaintenanceBannerDto> banners});
 }
 
@@ -111,9 +121,14 @@ abstract class _$$MaintenanceItemDtoImplCopyWith<$Res>
       @JsonKey(name: 'name', defaultValue: '') String name,
       @JsonKey(name: 'displayName', defaultValue: '') String displayName,
       @JsonKey(
-          name: 'maxNumberOfItem', defaultValue: 0, readValue: getMaximumOfItem)
+          name: 'maxNumberOfItem',
+          defaultValue: 0,
+          readValue: JsonReadValueHelper.readMaximumOfItem)
       int maxNumberOfItem,
-      @JsonKey(name: 'banners', defaultValue: [], readValue: getValueList)
+      @JsonKey(
+          name: 'banners',
+          defaultValue: [],
+          readValue: JsonReadValueHelper.readValueList)
       List<MaintenanceBannerDto> banners});
 }
 
@@ -167,9 +182,14 @@ class _$MaintenanceItemDtoImpl extends _MaintenanceItemDto {
       @JsonKey(name: 'name', defaultValue: '') required this.name,
       @JsonKey(name: 'displayName', defaultValue: '') required this.displayName,
       @JsonKey(
-          name: 'maxNumberOfItem', defaultValue: 0, readValue: getMaximumOfItem)
+          name: 'maxNumberOfItem',
+          defaultValue: 0,
+          readValue: JsonReadValueHelper.readMaximumOfItem)
       required this.maxNumberOfItem,
-      @JsonKey(name: 'banners', defaultValue: [], readValue: getValueList)
+      @JsonKey(
+          name: 'banners',
+          defaultValue: [],
+          readValue: JsonReadValueHelper.readValueList)
       required final List<MaintenanceBannerDto> banners})
       : _banners = banners,
         super._();
@@ -188,11 +208,16 @@ class _$MaintenanceItemDtoImpl extends _MaintenanceItemDto {
   final String displayName;
   @override
   @JsonKey(
-      name: 'maxNumberOfItem', defaultValue: 0, readValue: getMaximumOfItem)
+      name: 'maxNumberOfItem',
+      defaultValue: 0,
+      readValue: JsonReadValueHelper.readMaximumOfItem)
   final int maxNumberOfItem;
   final List<MaintenanceBannerDto> _banners;
   @override
-  @JsonKey(name: 'banners', defaultValue: [], readValue: getValueList)
+  @JsonKey(
+      name: 'banners',
+      defaultValue: [],
+      readValue: JsonReadValueHelper.readValueList)
   List<MaintenanceBannerDto> get banners {
     if (_banners is EqualUnmodifiableListView) return _banners;
     // ignore: implicit_dynamic_type
@@ -233,16 +258,21 @@ class _$MaintenanceItemDtoImpl extends _MaintenanceItemDto {
 
 abstract class _MaintenanceItemDto extends MaintenanceItemDto {
   const factory _MaintenanceItemDto(
-      {@JsonKey(name: 'id', defaultValue: '') required final String id,
-      @JsonKey(name: 'name', defaultValue: '') required final String name,
-      @JsonKey(name: 'displayName', defaultValue: '')
-      required final String displayName,
-      @JsonKey(
-          name: 'maxNumberOfItem', defaultValue: 0, readValue: getMaximumOfItem)
-      required final int maxNumberOfItem,
-      @JsonKey(name: 'banners', defaultValue: [], readValue: getValueList)
-      required final List<MaintenanceBannerDto>
-          banners}) = _$MaintenanceItemDtoImpl;
+          {@JsonKey(name: 'id', defaultValue: '') required final String id,
+          @JsonKey(name: 'name', defaultValue: '') required final String name,
+          @JsonKey(name: 'displayName', defaultValue: '')
+          required final String displayName,
+          @JsonKey(
+              name: 'maxNumberOfItem',
+              defaultValue: 0,
+              readValue: JsonReadValueHelper.readMaximumOfItem)
+          required final int maxNumberOfItem,
+          @JsonKey(
+              name: 'banners',
+              defaultValue: [],
+              readValue: JsonReadValueHelper.readValueList)
+          required final List<MaintenanceBannerDto> banners}) =
+      _$MaintenanceItemDtoImpl;
   const _MaintenanceItemDto._() : super._();
 
   factory _MaintenanceItemDto.fromJson(Map<String, dynamic> json) =
@@ -259,10 +289,15 @@ abstract class _MaintenanceItemDto extends MaintenanceItemDto {
   String get displayName;
   @override
   @JsonKey(
-      name: 'maxNumberOfItem', defaultValue: 0, readValue: getMaximumOfItem)
+      name: 'maxNumberOfItem',
+      defaultValue: 0,
+      readValue: JsonReadValueHelper.readMaximumOfItem)
   int get maxNumberOfItem;
   @override
-  @JsonKey(name: 'banners', defaultValue: [], readValue: getValueList)
+  @JsonKey(
+      name: 'banners',
+      defaultValue: [],
+      readValue: JsonReadValueHelper.readValueList)
   List<MaintenanceBannerDto> get banners;
   @override
   @JsonKey(ignore: true)
@@ -280,27 +315,45 @@ mixin _$MaintenanceBannerDto {
   String get id => throw _privateConstructorUsedError;
   @JsonKey(name: 'name', defaultValue: '')
   String get name => throw _privateConstructorUsedError;
-  @JsonKey(name: 'template', defaultValue: '', readValue: getName)
+  @JsonKey(
+      name: 'template',
+      defaultValue: '',
+      readValue: JsonReadValueHelper.readName)
   String get template => throw _privateConstructorUsedError;
   @JsonKey(name: 'displayName', defaultValue: '')
   String get displayName => throw _privateConstructorUsedError;
-  @JsonKey(name: 'content', defaultValue: '', readValue: getValue)
+  @JsonKey(
+      name: 'content',
+      defaultValue: '',
+      readValue: JsonReadValueHelper.readValueString)
   String get content => throw _privateConstructorUsedError;
   @JsonKey(name: 'publishedDate')
   PublishedDateDto get publishedDate => throw _privateConstructorUsedError;
-  @JsonKey(name: 'hyperlink', defaultValue: '', readValue: getHyperLink)
+  @JsonKey(
+      name: 'hyperlink',
+      defaultValue: '',
+      readValue: JsonReadValueHelper.readHyperLink)
   String get hyperlink => throw _privateConstructorUsedError;
-  @JsonKey(name: 'type', defaultValue: '', readValue: getValue)
+  @JsonKey(
+      name: 'type',
+      defaultValue: '',
+      readValue: JsonReadValueHelper.readValueString)
   String get type => throw _privateConstructorUsedError;
-  @JsonKey(name: 'applicableModules', defaultValue: [], readValue: getValueList)
+  @JsonKey(
+      name: 'applicableModules',
+      defaultValue: [],
+      readValue: JsonReadValueHelper.readValueList)
   List<ApplicableModulesDto> get applicableModules =>
       throw _privateConstructorUsedError;
   @JsonKey(
       name: 'enableCrossButton',
       defaultValue: false,
-      readValue: getBooleanValue)
+      readValue: JsonReadValueHelper.readValueBoolean)
   bool get enableCrossButton => throw _privateConstructorUsedError;
-  @JsonKey(name: 'login', defaultValue: '', readValue: getValue)
+  @JsonKey(
+      name: 'login',
+      defaultValue: '',
+      readValue: JsonReadValueHelper.readValueString)
   String get loginType => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -318,24 +371,42 @@ abstract class $MaintenanceBannerDtoCopyWith<$Res> {
   $Res call(
       {@JsonKey(name: 'id', defaultValue: '') String id,
       @JsonKey(name: 'name', defaultValue: '') String name,
-      @JsonKey(name: 'template', defaultValue: '', readValue: getName)
+      @JsonKey(
+          name: 'template',
+          defaultValue: '',
+          readValue: JsonReadValueHelper.readName)
       String template,
       @JsonKey(name: 'displayName', defaultValue: '') String displayName,
-      @JsonKey(name: 'content', defaultValue: '', readValue: getValue)
+      @JsonKey(
+          name: 'content',
+          defaultValue: '',
+          readValue: JsonReadValueHelper.readValueString)
       String content,
       @JsonKey(name: 'publishedDate') PublishedDateDto publishedDate,
-      @JsonKey(name: 'hyperlink', defaultValue: '', readValue: getHyperLink)
-      String hyperlink,
-      @JsonKey(name: 'type', defaultValue: '', readValue: getValue) String type,
       @JsonKey(
-          name: 'applicableModules', defaultValue: [], readValue: getValueList)
+          name: 'hyperlink',
+          defaultValue: '',
+          readValue: JsonReadValueHelper.readHyperLink)
+      String hyperlink,
+      @JsonKey(
+          name: 'type',
+          defaultValue: '',
+          readValue: JsonReadValueHelper.readValueString)
+      String type,
+      @JsonKey(
+          name: 'applicableModules',
+          defaultValue: [],
+          readValue: JsonReadValueHelper.readValueList)
       List<ApplicableModulesDto> applicableModules,
       @JsonKey(
           name: 'enableCrossButton',
           defaultValue: false,
-          readValue: getBooleanValue)
+          readValue: JsonReadValueHelper.readValueBoolean)
       bool enableCrossButton,
-      @JsonKey(name: 'login', defaultValue: '', readValue: getValue)
+      @JsonKey(
+          name: 'login',
+          defaultValue: '',
+          readValue: JsonReadValueHelper.readValueString)
       String loginType});
 
   $PublishedDateDtoCopyWith<$Res> get publishedDate;
@@ -435,24 +506,42 @@ abstract class _$$MaintenanceBannerDtoImplCopyWith<$Res>
   $Res call(
       {@JsonKey(name: 'id', defaultValue: '') String id,
       @JsonKey(name: 'name', defaultValue: '') String name,
-      @JsonKey(name: 'template', defaultValue: '', readValue: getName)
+      @JsonKey(
+          name: 'template',
+          defaultValue: '',
+          readValue: JsonReadValueHelper.readName)
       String template,
       @JsonKey(name: 'displayName', defaultValue: '') String displayName,
-      @JsonKey(name: 'content', defaultValue: '', readValue: getValue)
+      @JsonKey(
+          name: 'content',
+          defaultValue: '',
+          readValue: JsonReadValueHelper.readValueString)
       String content,
       @JsonKey(name: 'publishedDate') PublishedDateDto publishedDate,
-      @JsonKey(name: 'hyperlink', defaultValue: '', readValue: getHyperLink)
-      String hyperlink,
-      @JsonKey(name: 'type', defaultValue: '', readValue: getValue) String type,
       @JsonKey(
-          name: 'applicableModules', defaultValue: [], readValue: getValueList)
+          name: 'hyperlink',
+          defaultValue: '',
+          readValue: JsonReadValueHelper.readHyperLink)
+      String hyperlink,
+      @JsonKey(
+          name: 'type',
+          defaultValue: '',
+          readValue: JsonReadValueHelper.readValueString)
+      String type,
+      @JsonKey(
+          name: 'applicableModules',
+          defaultValue: [],
+          readValue: JsonReadValueHelper.readValueList)
       List<ApplicableModulesDto> applicableModules,
       @JsonKey(
           name: 'enableCrossButton',
           defaultValue: false,
-          readValue: getBooleanValue)
+          readValue: JsonReadValueHelper.readValueBoolean)
       bool enableCrossButton,
-      @JsonKey(name: 'login', defaultValue: '', readValue: getValue)
+      @JsonKey(
+          name: 'login',
+          defaultValue: '',
+          readValue: JsonReadValueHelper.readValueString)
       String loginType});
 
   @override
@@ -537,25 +626,42 @@ class _$MaintenanceBannerDtoImpl extends _MaintenanceBannerDto {
   const _$MaintenanceBannerDtoImpl(
       {@JsonKey(name: 'id', defaultValue: '') required this.id,
       @JsonKey(name: 'name', defaultValue: '') required this.name,
-      @JsonKey(name: 'template', defaultValue: '', readValue: getName)
+      @JsonKey(
+          name: 'template',
+          defaultValue: '',
+          readValue: JsonReadValueHelper.readName)
       required this.template,
       @JsonKey(name: 'displayName', defaultValue: '') required this.displayName,
-      @JsonKey(name: 'content', defaultValue: '', readValue: getValue)
+      @JsonKey(
+          name: 'content',
+          defaultValue: '',
+          readValue: JsonReadValueHelper.readValueString)
       required this.content,
       @JsonKey(name: 'publishedDate') required this.publishedDate,
-      @JsonKey(name: 'hyperlink', defaultValue: '', readValue: getHyperLink)
+      @JsonKey(
+          name: 'hyperlink',
+          defaultValue: '',
+          readValue: JsonReadValueHelper.readHyperLink)
       required this.hyperlink,
-      @JsonKey(name: 'type', defaultValue: '', readValue: getValue)
+      @JsonKey(
+          name: 'type',
+          defaultValue: '',
+          readValue: JsonReadValueHelper.readValueString)
       required this.type,
       @JsonKey(
-          name: 'applicableModules', defaultValue: [], readValue: getValueList)
+          name: 'applicableModules',
+          defaultValue: [],
+          readValue: JsonReadValueHelper.readValueList)
       required final List<ApplicableModulesDto> applicableModules,
       @JsonKey(
           name: 'enableCrossButton',
           defaultValue: false,
-          readValue: getBooleanValue)
+          readValue: JsonReadValueHelper.readValueBoolean)
       required this.enableCrossButton,
-      @JsonKey(name: 'login', defaultValue: '', readValue: getValue)
+      @JsonKey(
+          name: 'login',
+          defaultValue: '',
+          readValue: JsonReadValueHelper.readValueString)
       required this.loginType})
       : _applicableModules = applicableModules,
         super._();
@@ -570,26 +676,41 @@ class _$MaintenanceBannerDtoImpl extends _MaintenanceBannerDto {
   @JsonKey(name: 'name', defaultValue: '')
   final String name;
   @override
-  @JsonKey(name: 'template', defaultValue: '', readValue: getName)
+  @JsonKey(
+      name: 'template',
+      defaultValue: '',
+      readValue: JsonReadValueHelper.readName)
   final String template;
   @override
   @JsonKey(name: 'displayName', defaultValue: '')
   final String displayName;
   @override
-  @JsonKey(name: 'content', defaultValue: '', readValue: getValue)
+  @JsonKey(
+      name: 'content',
+      defaultValue: '',
+      readValue: JsonReadValueHelper.readValueString)
   final String content;
   @override
   @JsonKey(name: 'publishedDate')
   final PublishedDateDto publishedDate;
   @override
-  @JsonKey(name: 'hyperlink', defaultValue: '', readValue: getHyperLink)
+  @JsonKey(
+      name: 'hyperlink',
+      defaultValue: '',
+      readValue: JsonReadValueHelper.readHyperLink)
   final String hyperlink;
   @override
-  @JsonKey(name: 'type', defaultValue: '', readValue: getValue)
+  @JsonKey(
+      name: 'type',
+      defaultValue: '',
+      readValue: JsonReadValueHelper.readValueString)
   final String type;
   final List<ApplicableModulesDto> _applicableModules;
   @override
-  @JsonKey(name: 'applicableModules', defaultValue: [], readValue: getValueList)
+  @JsonKey(
+      name: 'applicableModules',
+      defaultValue: [],
+      readValue: JsonReadValueHelper.readValueList)
   List<ApplicableModulesDto> get applicableModules {
     if (_applicableModules is EqualUnmodifiableListView)
       return _applicableModules;
@@ -601,10 +722,13 @@ class _$MaintenanceBannerDtoImpl extends _MaintenanceBannerDto {
   @JsonKey(
       name: 'enableCrossButton',
       defaultValue: false,
-      readValue: getBooleanValue)
+      readValue: JsonReadValueHelper.readValueBoolean)
   final bool enableCrossButton;
   @override
-  @JsonKey(name: 'login', defaultValue: '', readValue: getValue)
+  @JsonKey(
+      name: 'login',
+      defaultValue: '',
+      readValue: JsonReadValueHelper.readValueString)
   final String loginType;
 
   @override
@@ -673,27 +797,44 @@ abstract class _MaintenanceBannerDto extends MaintenanceBannerDto {
   const factory _MaintenanceBannerDto(
       {@JsonKey(name: 'id', defaultValue: '') required final String id,
       @JsonKey(name: 'name', defaultValue: '') required final String name,
-      @JsonKey(name: 'template', defaultValue: '', readValue: getName)
+      @JsonKey(
+          name: 'template',
+          defaultValue: '',
+          readValue: JsonReadValueHelper.readName)
       required final String template,
       @JsonKey(name: 'displayName', defaultValue: '')
       required final String displayName,
-      @JsonKey(name: 'content', defaultValue: '', readValue: getValue)
+      @JsonKey(
+          name: 'content',
+          defaultValue: '',
+          readValue: JsonReadValueHelper.readValueString)
       required final String content,
       @JsonKey(name: 'publishedDate')
       required final PublishedDateDto publishedDate,
-      @JsonKey(name: 'hyperlink', defaultValue: '', readValue: getHyperLink)
+      @JsonKey(
+          name: 'hyperlink',
+          defaultValue: '',
+          readValue: JsonReadValueHelper.readHyperLink)
       required final String hyperlink,
-      @JsonKey(name: 'type', defaultValue: '', readValue: getValue)
+      @JsonKey(
+          name: 'type',
+          defaultValue: '',
+          readValue: JsonReadValueHelper.readValueString)
       required final String type,
       @JsonKey(
-          name: 'applicableModules', defaultValue: [], readValue: getValueList)
+          name: 'applicableModules',
+          defaultValue: [],
+          readValue: JsonReadValueHelper.readValueList)
       required final List<ApplicableModulesDto> applicableModules,
       @JsonKey(
           name: 'enableCrossButton',
           defaultValue: false,
-          readValue: getBooleanValue)
+          readValue: JsonReadValueHelper.readValueBoolean)
       required final bool enableCrossButton,
-      @JsonKey(name: 'login', defaultValue: '', readValue: getValue)
+      @JsonKey(
+          name: 'login',
+          defaultValue: '',
+          readValue: JsonReadValueHelper.readValueString)
       required final String loginType}) = _$MaintenanceBannerDtoImpl;
   const _MaintenanceBannerDto._() : super._();
 
@@ -707,34 +848,52 @@ abstract class _MaintenanceBannerDto extends MaintenanceBannerDto {
   @JsonKey(name: 'name', defaultValue: '')
   String get name;
   @override
-  @JsonKey(name: 'template', defaultValue: '', readValue: getName)
+  @JsonKey(
+      name: 'template',
+      defaultValue: '',
+      readValue: JsonReadValueHelper.readName)
   String get template;
   @override
   @JsonKey(name: 'displayName', defaultValue: '')
   String get displayName;
   @override
-  @JsonKey(name: 'content', defaultValue: '', readValue: getValue)
+  @JsonKey(
+      name: 'content',
+      defaultValue: '',
+      readValue: JsonReadValueHelper.readValueString)
   String get content;
   @override
   @JsonKey(name: 'publishedDate')
   PublishedDateDto get publishedDate;
   @override
-  @JsonKey(name: 'hyperlink', defaultValue: '', readValue: getHyperLink)
+  @JsonKey(
+      name: 'hyperlink',
+      defaultValue: '',
+      readValue: JsonReadValueHelper.readHyperLink)
   String get hyperlink;
   @override
-  @JsonKey(name: 'type', defaultValue: '', readValue: getValue)
+  @JsonKey(
+      name: 'type',
+      defaultValue: '',
+      readValue: JsonReadValueHelper.readValueString)
   String get type;
   @override
-  @JsonKey(name: 'applicableModules', defaultValue: [], readValue: getValueList)
+  @JsonKey(
+      name: 'applicableModules',
+      defaultValue: [],
+      readValue: JsonReadValueHelper.readValueList)
   List<ApplicableModulesDto> get applicableModules;
   @override
   @JsonKey(
       name: 'enableCrossButton',
       defaultValue: false,
-      readValue: getBooleanValue)
+      readValue: JsonReadValueHelper.readValueBoolean)
   bool get enableCrossButton;
   @override
-  @JsonKey(name: 'login', defaultValue: '', readValue: getValue)
+  @JsonKey(
+      name: 'login',
+      defaultValue: '',
+      readValue: JsonReadValueHelper.readValueString)
   String get loginType;
   @override
   @JsonKey(ignore: true)

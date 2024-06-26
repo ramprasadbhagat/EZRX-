@@ -1368,7 +1368,7 @@ void main() {
                   salesOrgConfig: fakeVNSalesOrgConfigs,
                   tenderContract: TenderContract.empty().copyWith(
                     tenderOrderReason: TenderContractReason('730'),
-                    contractNumber: TenderContractNumber.tenderContractNumber(
+                    contractNumber: TenderContractNumber(
                       'fake-Number',
                     ),
                     tenderPrice: TenderPrice('11832000'),
@@ -1406,7 +1406,7 @@ void main() {
                   salesOrgConfig: fakeVNSalesOrgConfigs,
                   tenderContract: TenderContract.empty().copyWith(
                     tenderOrderReason: TenderContractReason('730'),
-                    contractNumber: TenderContractNumber.tenderContractNumber(
+                    contractNumber: TenderContractNumber(
                       'fake-Number',
                     ),
                     tenderPrice: TenderPrice('11832000'),
@@ -1437,7 +1437,7 @@ void main() {
                 cartItem.copyWith(
                   tenderContract: TenderContract.empty().copyWith(
                     tenderOrderReason: TenderContractReason('730'),
-                    contractNumber: TenderContractNumber.tenderContractNumber(
+                    contractNumber: TenderContractNumber(
                       'fake-Number',
                     ),
                     tenderPrice: TenderPrice('11832000'),
@@ -1445,8 +1445,7 @@ void main() {
                     pricingUnit: 100,
                     contractReference: StringValue('fake-Reference'),
                     salesDistrict: StringValue('fake-SalesDistrict'),
-                    announcementLetterNumber:
-                        TenderContractNumber.announcementLetterNumber(
+                    announcementLetterNumber: TenderContractNumber(
                       'fake-AnnouncementLetterNumber',
                     ),
                   ),

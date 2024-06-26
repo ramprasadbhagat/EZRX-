@@ -10,10 +10,10 @@ class ReturnRequestAttachmentEvent with _$ReturnRequestAttachmentEvent {
     required User user,
   }) = _UpLoadFile;
   const factory ReturnRequestAttachmentEvent.deleteFile({
-    required ReturnRequestAttachment file,
+    required PoDocuments file,
   }) = _DeleteFile;
   const factory ReturnRequestAttachmentEvent.downloadFile({
-    required ReturnRequestAttachment file,
+    required PoDocuments file,
   }) = _DownloadFile;
 }
 

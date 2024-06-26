@@ -1,6 +1,6 @@
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/order/entities/order_history_details_po_documents.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
-import 'package:ezrxmobile/domain/returns/entities/return_request_attachment.dart';
 import 'package:ezrxmobile/domain/returns/entities/usage.dart';
 import 'package:ezrxmobile/domain/returns/value/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -19,7 +19,7 @@ class ReturnItemDetails with _$ReturnItemDetails {
     required ReturnQuantity returnQuantity,
     required RangeValue unitPrice,
     required Usage usage,
-    required List<ReturnRequestAttachment> uploadedFiles,
+    required List<PoDocuments> uploadedFiles,
     required Remarks remarks,
     required bool outsidePolicy,
     required CounterOfferValue priceOverride,
@@ -36,7 +36,7 @@ class ReturnItemDetails with _$ReturnItemDetails {
         returnQuantity: ReturnQuantity(''),
         unitPrice: RangeValue(''),
         usage: Usage.empty(),
-        uploadedFiles: <ReturnRequestAttachment>[],
+        uploadedFiles: <PoDocuments>[],
         remarks: Remarks(''),
         outsidePolicy: false,
         priceOverride: CounterOfferValue(''),

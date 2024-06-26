@@ -41,9 +41,15 @@ mixin _$TransactionDetailDto {
   String get bankId => throw _privateConstructorUsedError;
   @JsonKey(name: 'paidOn', defaultValue: '')
   String get paidOn => throw _privateConstructorUsedError;
-  @JsonKey(name: 'vaName', defaultValue: '', readValue: _mappingVaName)
+  @JsonKey(
+      name: 'vaName',
+      defaultValue: '',
+      readValue: JsonReadValueHelper.readVaName)
   String get vaName => throw _privateConstructorUsedError;
-  @JsonKey(name: 'vaNumber', defaultValue: '', readValue: _mappingVaNumber)
+  @JsonKey(
+      name: 'vaNumber',
+      defaultValue: '',
+      readValue: JsonReadValueHelper.readVaNumber)
   String get vaNumber => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -72,9 +78,15 @@ abstract class $TransactionDetailDtoCopyWith<$Res> {
       @JsonKey(name: 'createdOn', defaultValue: '') String createdOn,
       @JsonKey(name: 'bankId', defaultValue: '') String bankId,
       @JsonKey(name: 'paidOn', defaultValue: '') String paidOn,
-      @JsonKey(name: 'vaName', defaultValue: '', readValue: _mappingVaName)
+      @JsonKey(
+          name: 'vaName',
+          defaultValue: '',
+          readValue: JsonReadValueHelper.readVaName)
       String vaName,
-      @JsonKey(name: 'vaNumber', defaultValue: '', readValue: _mappingVaNumber)
+      @JsonKey(
+          name: 'vaNumber',
+          defaultValue: '',
+          readValue: JsonReadValueHelper.readVaNumber)
       String vaNumber});
 }
 
@@ -180,9 +192,15 @@ abstract class _$$TransactionDetailDtoImplCopyWith<$Res>
       @JsonKey(name: 'createdOn', defaultValue: '') String createdOn,
       @JsonKey(name: 'bankId', defaultValue: '') String bankId,
       @JsonKey(name: 'paidOn', defaultValue: '') String paidOn,
-      @JsonKey(name: 'vaName', defaultValue: '', readValue: _mappingVaName)
+      @JsonKey(
+          name: 'vaName',
+          defaultValue: '',
+          readValue: JsonReadValueHelper.readVaName)
       String vaName,
-      @JsonKey(name: 'vaNumber', defaultValue: '', readValue: _mappingVaNumber)
+      @JsonKey(
+          name: 'vaNumber',
+          defaultValue: '',
+          readValue: JsonReadValueHelper.readVaNumber)
       String vaNumber});
 }
 
@@ -281,9 +299,15 @@ class _$TransactionDetailDtoImpl extends _TransactionDetailDto {
       @JsonKey(name: 'createdOn', defaultValue: '') required this.createdOn,
       @JsonKey(name: 'bankId', defaultValue: '') required this.bankId,
       @JsonKey(name: 'paidOn', defaultValue: '') required this.paidOn,
-      @JsonKey(name: 'vaName', defaultValue: '', readValue: _mappingVaName)
+      @JsonKey(
+          name: 'vaName',
+          defaultValue: '',
+          readValue: JsonReadValueHelper.readVaName)
       required this.vaName,
-      @JsonKey(name: 'vaNumber', defaultValue: '', readValue: _mappingVaNumber)
+      @JsonKey(
+          name: 'vaNumber',
+          defaultValue: '',
+          readValue: JsonReadValueHelper.readVaNumber)
       required this.vaNumber})
       : _invoices = invoices,
         super._();
@@ -328,10 +352,16 @@ class _$TransactionDetailDtoImpl extends _TransactionDetailDto {
   @JsonKey(name: 'paidOn', defaultValue: '')
   final String paidOn;
   @override
-  @JsonKey(name: 'vaName', defaultValue: '', readValue: _mappingVaName)
+  @JsonKey(
+      name: 'vaName',
+      defaultValue: '',
+      readValue: JsonReadValueHelper.readVaName)
   final String vaName;
   @override
-  @JsonKey(name: 'vaNumber', defaultValue: '', readValue: _mappingVaNumber)
+  @JsonKey(
+      name: 'vaNumber',
+      defaultValue: '',
+      readValue: JsonReadValueHelper.readVaNumber)
   final String vaNumber;
 
   @override
@@ -415,9 +445,15 @@ abstract class _TransactionDetailDto extends TransactionDetailDto {
       required final String createdOn,
       @JsonKey(name: 'bankId', defaultValue: '') required final String bankId,
       @JsonKey(name: 'paidOn', defaultValue: '') required final String paidOn,
-      @JsonKey(name: 'vaName', defaultValue: '', readValue: _mappingVaName)
+      @JsonKey(
+          name: 'vaName',
+          defaultValue: '',
+          readValue: JsonReadValueHelper.readVaName)
       required final String vaName,
-      @JsonKey(name: 'vaNumber', defaultValue: '', readValue: _mappingVaNumber)
+      @JsonKey(
+          name: 'vaNumber',
+          defaultValue: '',
+          readValue: JsonReadValueHelper.readVaNumber)
       required final String vaNumber}) = _$TransactionDetailDtoImpl;
   const _TransactionDetailDto._() : super._();
 
@@ -455,10 +491,16 @@ abstract class _TransactionDetailDto extends TransactionDetailDto {
   @JsonKey(name: 'paidOn', defaultValue: '')
   String get paidOn;
   @override
-  @JsonKey(name: 'vaName', defaultValue: '', readValue: _mappingVaName)
+  @JsonKey(
+      name: 'vaName',
+      defaultValue: '',
+      readValue: JsonReadValueHelper.readVaName)
   String get vaName;
   @override
-  @JsonKey(name: 'vaNumber', defaultValue: '', readValue: _mappingVaNumber)
+  @JsonKey(
+      name: 'vaNumber',
+      defaultValue: '',
+      readValue: JsonReadValueHelper.readVaNumber)
   String get vaNumber;
   @override
   @JsonKey(ignore: true)

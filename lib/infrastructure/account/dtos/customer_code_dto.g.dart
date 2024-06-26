@@ -53,7 +53,9 @@ _$CustomerCodeDtoImpl _$$CustomerCodeDtoImplFromJson(
       floor: json['floor'] as String? ?? '',
       houseNumber1: json['houseNumber1'] as String? ?? '',
       isMarketPlace:
-          mappingIsMarketPlace(json, 'isMarketPlace') as bool? ?? false,
+          JsonReadValueHelper.mappingIsMarketPlace(json, 'isMarketPlace')
+                  as bool? ??
+              false,
     );
 
 Map<String, dynamic> _$$CustomerCodeDtoImplToJson(

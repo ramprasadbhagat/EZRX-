@@ -1121,8 +1121,7 @@ void main() {
               tenderContract: TenderContract.empty().copyWith(
                 contractPaymentTerm: StringValue('fake-payment-term'),
                 tenderOrderReason: TenderContractReason('fake-reason'),
-                contractNumber:
-                    TenderContractNumber.tenderContractNumber('fake-number'),
+                contractNumber: TenderContractNumber('fake-number'),
               ),
             ),
           )

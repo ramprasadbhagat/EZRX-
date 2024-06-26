@@ -77,7 +77,7 @@ void main() {
           data: data,
         );
 
-        final result = await remoteDataSource.getRequestInformation(
+        final result = await remoteDataSource.getReturnRequestInformation(
           returnRequestId: 'mock_id',
           market: fakeMarket,
         );
@@ -113,7 +113,7 @@ void main() {
         );
 
         await remoteDataSource
-            .getRequestInformation(
+            .getReturnRequestInformation(
           returnRequestId: 'mock_id',
           market: fakeMarket,
         )
@@ -152,7 +152,7 @@ void main() {
         );
 
         await remoteDataSource
-            .getRequestInformation(
+            .getReturnRequestInformation(
           returnRequestId: 'mock_id',
           market: fakeMarket,
         )
@@ -188,7 +188,7 @@ void main() {
         );
 
         await remoteDataSource
-            .getRequestInformation(
+            .getReturnRequestInformation(
           returnRequestId: 'mock_id',
           market: fakeMarket,
         )
@@ -226,7 +226,7 @@ void main() {
         );
 
         await remoteDataSource
-            .getRequestInformation(
+            .getReturnRequestInformation(
           returnRequestId: 'mock_id',
           market: fakeMarket,
         )

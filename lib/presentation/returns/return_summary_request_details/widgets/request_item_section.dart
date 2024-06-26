@@ -1,7 +1,7 @@
 import 'package:collection/collection.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/returns/return_list/view_by_request/details/return_details_by_request_bloc.dart';
-import 'package:ezrxmobile/domain/returns/entities/return_request_attachment.dart';
+import 'package:ezrxmobile/domain/order/entities/order_history_details_po_documents.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
@@ -22,7 +22,7 @@ class RequestItemSection extends StatelessWidget {
         ReturnDetailsByRequestState>(
       listenWhen: (previous, current) =>
           previous.downloadedAttachment != current.downloadedAttachment &&
-          current.downloadedAttachment != ReturnRequestAttachment.empty(),
+          current.downloadedAttachment != PoDocuments.empty(),
       listener: (context, state) {
         state.downloadFailureOrSuccessOption.fold(
           () {},

@@ -12,11 +12,9 @@ import 'package:permission_handler/permission_handler.dart';
 abstract class IpoAttachmentRepository {
   Future<Either<ApiFailure, List<File>>> downloadFiles({
     required List<PoDocuments> files,
-    required AttachmentType attachmentType,
   });
   Future<Either<ApiFailure, OpenResult>> openFile({
     required PoDocuments files,
-    required AttachmentType attachmentType,
   });
   Future<Either<ApiFailure, List<PoDocuments>>> uploadFiles({
     required List<PlatformFile> files,

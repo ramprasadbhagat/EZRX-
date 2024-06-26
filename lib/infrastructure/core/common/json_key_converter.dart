@@ -19,23 +19,20 @@ dynamic makeResponseCamelCase(String resp) {
   return jsonDecode(camelCaseJsonKeys);
 }
 
-double handleTax(Map json, String key) {
-  final taxList = json[key] ?? [];
+dynamic valueOrNullToJson(String value) => value.isNotEmpty ? value : null;
 
-  if (taxList.isEmpty) {
-    return 0.0;
+  Map<String, String> mapFilterFieldData({
+    required String field,
+    required String date,
+    required String type,
+  }) {
+    final dataMap = <String, String>{};
+    dataMap.putIfAbsent('field', () => field);
+    dataMap.putIfAbsent('value', () => date);
+    dataMap.putIfAbsent('type', () => type);
+
+    return dataMap;
   }
-
-  return double.tryParse(taxList.first) ?? 0.0;
-}
-
-bool mappingIsMarketPlace(Map json, String _) {
-  final parsedJson = makeResponseCamelCase(jsonEncode(json));
-  if (parsedJson['isMarketPlace'] != null) return parsedJson['isMarketPlace'];
-  if (parsedJson['isMarketplace'] != null) return parsedJson['isMarketplace'];
-
-  return false;
-}
 
 class StringToDoubleConverter extends JsonConverter<double, String> {
   const StringToDoubleConverter();

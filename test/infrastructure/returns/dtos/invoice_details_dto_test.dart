@@ -1,8 +1,8 @@
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
+import 'package:ezrxmobile/domain/order/entities/order_history_details_po_documents.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/domain/returns/entities/invoice_details.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_item_details.dart';
-import 'package:ezrxmobile/domain/returns/entities/return_request_attachment.dart';
 import 'package:ezrxmobile/domain/returns/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/returns/dtos/invoice_details_dto.dart';
 import 'package:flutter/widgets.dart';
@@ -19,7 +19,7 @@ void main() {
           batch: '',
           itemNumber: '',
           materialNumber: MaterialNumber('123'),
-          uploadedFiles: <ReturnRequestAttachment>[],
+          uploadedFiles: <PoDocuments>[],
           returnQuantity: ReturnQuantity('1'),
           returnReason: 'fake-reason',
         ),

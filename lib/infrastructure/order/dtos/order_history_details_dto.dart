@@ -1,7 +1,7 @@
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
-import 'package:ezrxmobile/infrastructure/core/common/json_key_converter.dart';
+import 'package:ezrxmobile/infrastructure/core/common/json_key_readvalue_helper.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/order_history_details_order_items_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/order_history_details_payment_term_dto.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/order_history_details_po_documents_dto.dart';
@@ -30,7 +30,8 @@ class OrderHistoryDetailsDto with _$OrderHistoryDetailsDto {
     @JsonKey(name: 'Type', defaultValue: '') required String type,
     @JsonKey(name: 'TelephoneNumber', defaultValue: '')
     required String telephoneNumber,
-    @JsonKey(readValue: _createdDateTimeReadValue) required String createdDate,
+    @JsonKey(readValue: JsonReadValueHelper.readCreatedDateTimeValue)
+    required String createdDate,
     @JsonKey(name: 'EZRXNumber', defaultValue: '') required String eZRXNumber,
     @JsonKey(name: 'OrderBy', defaultValue: '') required String orderBy,
     @JsonKey(name: 'ReferenceNotes', defaultValue: '')
@@ -47,21 +48,31 @@ class OrderHistoryDetailsDto with _$OrderHistoryDetailsDto {
     @JsonKey(name: 'InvoiceNumber', defaultValue: '')
     required String invoiceNumber,
     @JsonKey(name: 'OrderReason', defaultValue: '') required String orderReason,
-    @JsonKey(name: 'OrderItems', readValue: orderItemOverride)
+    @JsonKey(name: 'OrderItems', readValue: JsonReadValueHelper.readList)
     required List<OrderHistoryDetailsOrderItemDto> orderHistoryDetailsOrderItem,
-    @JsonKey(name: 'PaymentTerm', readValue: paymentTermOverride)
+    @JsonKey(
+      name: 'PaymentTerm',
+      readValue: JsonReadValueHelper.readValueMapDynamic,
+    )
     required OrderHistoryDetailsPaymentTermDto orderHistoryDetailsPaymentTerm,
-    @JsonKey(name: 'SpecialInstructions', readValue: specialInstructionOverride)
+    @JsonKey(
+      name: 'SpecialInstructions',
+      readValue: JsonReadValueHelper.readString,
+    )
     required String orderHistoryDetailsSpecialInstructions,
     @JsonKey(
       name: 'PODocuments',
-      readValue: poDocumentOverride,
+      readValue: JsonReadValueHelper.readList,
     )
     required List<PoDocumentsDto> orderHistoryDetailsPoDocuments,
     @JsonKey(name: 'ItmCount', defaultValue: 0) required int itemCount,
-    @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+    @JsonKey(
+      defaultValue: false,
+      readValue: JsonReadValueHelper.mappingIsMarketPlace,
+    )
     required bool isMarketPlace,
-    @JsonKey(name: 'TaxRate', readValue: handleTax) required double taxRate,
+    @JsonKey(name: 'TaxRate', readValue: JsonReadValueHelper.handleTax)
+    required double taxRate,
   }) = _OrderHistoryDetailsDto;
   factory OrderHistoryDetailsDto.fromDomain(
     OrderHistoryDetails orderHistoryDetails,
@@ -155,22 +166,4 @@ class OrderHistoryDetailsDto with _$OrderHistoryDetailsDto {
 
   factory OrderHistoryDetailsDto.fromJson(Map<String, dynamic> json) =>
       _$OrderHistoryDetailsDtoFromJson(json);
-}
-
-List poDocumentOverride(Map json, String key) => json[key] ?? [];
-
-Map<String, dynamic> paymentTermOverride(Map json, String key) =>
-    json[key] ?? {};
-
-String specialInstructionOverride(Map json, String key) => json[key] ?? '';
-
-List orderItemOverride(Map json, String key) => json[key] ?? [];
-
-String _createdDateTimeReadValue(Map json, String _) {
-  final createdDate = json['CreatedDate'] ?? '';
-  final createdTime = json['CreatedTime'] ?? '';
-
-  // Concatenation is necessary to convert 'createdDate' and 'createdTime' into
-  // the 'yyyyMMddHHmmss' format.
-  return '$createdDate$createdTime';
 }

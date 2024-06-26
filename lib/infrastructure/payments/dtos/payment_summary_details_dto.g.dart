@@ -10,7 +10,8 @@ _$PaymentSummaryDetailsDtoImpl _$$PaymentSummaryDetailsDtoImplFromJson(
         Map<String, dynamic> json) =>
     _$PaymentSummaryDetailsDtoImpl(
       paymentID: json['paymentID'] as String? ?? '',
-      valueDate: paymentDate(json, 'valueDate') as String? ?? '',
+      valueDate:
+          JsonReadValueHelper.createdAtDate(json, 'valueDate') as String? ?? '',
       paymentAmount: (json['paymentAmount'] as num?)?.toDouble() ?? 0.0,
       transactionCurrency: json['transactionCurrency'] as String? ?? '',
       paymentDocument: json['paymentDocument'] as String? ?? '',
@@ -28,7 +29,9 @@ _$PaymentSummaryDetailsDtoImpl _$$PaymentSummaryDetailsDtoImplFromJson(
       paymentCardTypeName: json['paymentCardTypeName'] as String? ?? '',
       customId: json['customId'] as String? ?? '',
       bankIdentification: json['bankIdentification'] as String? ?? '',
-      createdDate: createdAtDate(json, 'createdDate') as String? ?? '',
+      createdDate:
+          JsonReadValueHelper.createdAtDate(json, 'createdDate') as String? ??
+              '',
       zzAdvice: json['zzAdvice'] as String? ?? '',
       adviceExpiry: json['adviceExpiry'] as String? ?? '',
       accountingDocExternalReference:

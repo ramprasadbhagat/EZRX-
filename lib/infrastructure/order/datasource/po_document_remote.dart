@@ -2,10 +2,10 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:ezrxmobile/config.dart';
-import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
 import 'package:ezrxmobile/domain/core/attachment_files/entities/attachment_file_buffer.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details_po_documents.dart';
+import 'package:ezrxmobile/domain/returns/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/po_document_query.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/order_history_details_po_documents_dto.dart';
@@ -34,7 +34,10 @@ class PoDocumentRemoteDataSource {
         data: {'url': imgUrl},
         responseType: ResponseType.bytes,
       );
-      _fileDownloadExceptionChecker(res: res);
+      dataSourceExceptionHandler.handleExceptionChecker(
+        res: res,
+        additionalCondition: res.data is List && res.data.isEmpty,
+      );
 
       return AttachmentFileBuffer(
         name: name,
@@ -43,21 +46,11 @@ class PoDocumentRemoteDataSource {
     });
   }
 
-  void _fileDownloadExceptionChecker({required Response<dynamic> res}) {
-    if (res.data is List && res.data.isEmpty) {
-      throw ServerException(message: res.data['errors'][0]['message']);
-    } else if (res.statusCode != 200) {
-      throw ServerException(
-        code: res.statusCode ?? 0,
-        message: res.statusMessage ?? '',
-      );
-    }
-  }
-
   Future<PoDocuments> fileUpload({
     required MultipartFile file,
     required String userName,
   }) async {
+
     return await dataSourceExceptionHandler.handle(() async {
       final res = await httpService.request(
         method: 'POST',
@@ -67,9 +60,11 @@ class PoDocumentRemoteDataSource {
           'userName': userName,
         }),
       );
-      _fileUploadExceptionChecker(res: res);
+      dataSourceExceptionHandler.handleExceptionChecker(res: res);
 
-      return PoDocumentsDto.fromJson(res.data).toDomain();
+      return PoDocumentsDto.fromJson(res.data)
+          .toDomain()
+          .copyWith(size: FileSize(file.length));
     });
   }
 
@@ -90,22 +85,9 @@ class PoDocumentRemoteDataSource {
           'variables': variables,
         }),
       );
-      _fileUploadExceptionChecker(
-        res: res,
-      );
-
+      dataSourceExceptionHandler.handleExceptionChecker(res: res);
+      
       return res.data['data']['deleteFile']['isDeleted'] as bool;
     });
-  }
-
-  void _fileUploadExceptionChecker({required Response<dynamic> res}) {
-    if (dataSourceExceptionHandler.isServerResponseError(res: res)) {
-      throw ServerException(message: res.data['errors'][0]['message']);
-    } else if (res.statusCode != 200) {
-      throw ServerException(
-        code: res.statusCode ?? 0,
-        message: res.statusMessage ?? '',
-      );
-    }
   }
 }

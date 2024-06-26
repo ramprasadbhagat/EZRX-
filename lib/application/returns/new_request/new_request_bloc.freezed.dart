@@ -29,7 +29,7 @@ mixin _$NewRequestEvent {
             bool isChangeMaterialCounterOffer)
         updateRequestCounterOffer,
     required TResult Function(
-            String uuid, List<ReturnRequestAttachment> files, bool included)
+            String uuid, List<PoDocuments> files, bool included)
         toggleFiles,
     required TResult Function(int step) validateStep,
     required TResult Function(String returnReference) returnReferenceChanged,
@@ -50,8 +50,7 @@ mixin _$NewRequestEvent {
     TResult? Function(CounterOfferValue counterOfferValue, String uuid,
             bool isChangeMaterialCounterOffer)?
         updateRequestCounterOffer,
-    TResult? Function(
-            String uuid, List<ReturnRequestAttachment> files, bool included)?
+    TResult? Function(String uuid, List<PoDocuments> files, bool included)?
         toggleFiles,
     TResult? Function(int step)? validateStep,
     TResult? Function(String returnReference)? returnReferenceChanged,
@@ -70,8 +69,7 @@ mixin _$NewRequestEvent {
     TResult Function(CounterOfferValue counterOfferValue, String uuid,
             bool isChangeMaterialCounterOffer)?
         updateRequestCounterOffer,
-    TResult Function(
-            String uuid, List<ReturnRequestAttachment> files, bool included)?
+    TResult Function(String uuid, List<PoDocuments> files, bool included)?
         toggleFiles,
     TResult Function(int step)? validateStep,
     TResult Function(String returnReference)? returnReferenceChanged,
@@ -232,7 +230,7 @@ class _$InitializedImpl implements _Initialized {
             bool isChangeMaterialCounterOffer)
         updateRequestCounterOffer,
     required TResult Function(
-            String uuid, List<ReturnRequestAttachment> files, bool included)
+            String uuid, List<PoDocuments> files, bool included)
         toggleFiles,
     required TResult Function(int step) validateStep,
     required TResult Function(String returnReference) returnReferenceChanged,
@@ -256,8 +254,7 @@ class _$InitializedImpl implements _Initialized {
     TResult? Function(CounterOfferValue counterOfferValue, String uuid,
             bool isChangeMaterialCounterOffer)?
         updateRequestCounterOffer,
-    TResult? Function(
-            String uuid, List<ReturnRequestAttachment> files, bool included)?
+    TResult? Function(String uuid, List<PoDocuments> files, bool included)?
         toggleFiles,
     TResult? Function(int step)? validateStep,
     TResult? Function(String returnReference)? returnReferenceChanged,
@@ -279,8 +276,7 @@ class _$InitializedImpl implements _Initialized {
     TResult Function(CounterOfferValue counterOfferValue, String uuid,
             bool isChangeMaterialCounterOffer)?
         updateRequestCounterOffer,
-    TResult Function(
-            String uuid, List<ReturnRequestAttachment> files, bool included)?
+    TResult Function(String uuid, List<PoDocuments> files, bool included)?
         toggleFiles,
     TResult Function(int step)? validateStep,
     TResult Function(String returnReference)? returnReferenceChanged,
@@ -468,7 +464,7 @@ class _$ToggleReturnItemImpl implements _ToggleReturnItem {
             bool isChangeMaterialCounterOffer)
         updateRequestCounterOffer,
     required TResult Function(
-            String uuid, List<ReturnRequestAttachment> files, bool included)
+            String uuid, List<PoDocuments> files, bool included)
         toggleFiles,
     required TResult Function(int step) validateStep,
     required TResult Function(String returnReference) returnReferenceChanged,
@@ -492,8 +488,7 @@ class _$ToggleReturnItemImpl implements _ToggleReturnItem {
     TResult? Function(CounterOfferValue counterOfferValue, String uuid,
             bool isChangeMaterialCounterOffer)?
         updateRequestCounterOffer,
-    TResult? Function(
-            String uuid, List<ReturnRequestAttachment> files, bool included)?
+    TResult? Function(String uuid, List<PoDocuments> files, bool included)?
         toggleFiles,
     TResult? Function(int step)? validateStep,
     TResult? Function(String returnReference)? returnReferenceChanged,
@@ -515,8 +510,7 @@ class _$ToggleReturnItemImpl implements _ToggleReturnItem {
     TResult Function(CounterOfferValue counterOfferValue, String uuid,
             bool isChangeMaterialCounterOffer)?
         updateRequestCounterOffer,
-    TResult Function(
-            String uuid, List<ReturnRequestAttachment> files, bool included)?
+    TResult Function(String uuid, List<PoDocuments> files, bool included)?
         toggleFiles,
     TResult Function(int step)? validateStep,
     TResult Function(String returnReference)? returnReferenceChanged,
@@ -706,7 +700,7 @@ class _$ToggleBonusItemImpl implements _ToggleBonusItem {
             bool isChangeMaterialCounterOffer)
         updateRequestCounterOffer,
     required TResult Function(
-            String uuid, List<ReturnRequestAttachment> files, bool included)
+            String uuid, List<PoDocuments> files, bool included)
         toggleFiles,
     required TResult Function(int step) validateStep,
     required TResult Function(String returnReference) returnReferenceChanged,
@@ -730,8 +724,7 @@ class _$ToggleBonusItemImpl implements _ToggleBonusItem {
     TResult? Function(CounterOfferValue counterOfferValue, String uuid,
             bool isChangeMaterialCounterOffer)?
         updateRequestCounterOffer,
-    TResult? Function(
-            String uuid, List<ReturnRequestAttachment> files, bool included)?
+    TResult? Function(String uuid, List<PoDocuments> files, bool included)?
         toggleFiles,
     TResult? Function(int step)? validateStep,
     TResult? Function(String returnReference)? returnReferenceChanged,
@@ -753,8 +746,7 @@ class _$ToggleBonusItemImpl implements _ToggleBonusItem {
     TResult Function(CounterOfferValue counterOfferValue, String uuid,
             bool isChangeMaterialCounterOffer)?
         updateRequestCounterOffer,
-    TResult Function(
-            String uuid, List<ReturnRequestAttachment> files, bool included)?
+    TResult Function(String uuid, List<PoDocuments> files, bool included)?
         toggleFiles,
     TResult Function(int step)? validateStep,
     TResult Function(String returnReference)? returnReferenceChanged,
@@ -936,7 +928,7 @@ class _$AdditionInfoChangedImpl implements _AdditionInfoChanged {
             bool isChangeMaterialCounterOffer)
         updateRequestCounterOffer,
     required TResult Function(
-            String uuid, List<ReturnRequestAttachment> files, bool included)
+            String uuid, List<PoDocuments> files, bool included)
         toggleFiles,
     required TResult Function(int step) validateStep,
     required TResult Function(String returnReference) returnReferenceChanged,
@@ -960,8 +952,7 @@ class _$AdditionInfoChangedImpl implements _AdditionInfoChanged {
     TResult? Function(CounterOfferValue counterOfferValue, String uuid,
             bool isChangeMaterialCounterOffer)?
         updateRequestCounterOffer,
-    TResult? Function(
-            String uuid, List<ReturnRequestAttachment> files, bool included)?
+    TResult? Function(String uuid, List<PoDocuments> files, bool included)?
         toggleFiles,
     TResult? Function(int step)? validateStep,
     TResult? Function(String returnReference)? returnReferenceChanged,
@@ -983,8 +974,7 @@ class _$AdditionInfoChangedImpl implements _AdditionInfoChanged {
     TResult Function(CounterOfferValue counterOfferValue, String uuid,
             bool isChangeMaterialCounterOffer)?
         updateRequestCounterOffer,
-    TResult Function(
-            String uuid, List<ReturnRequestAttachment> files, bool included)?
+    TResult Function(String uuid, List<PoDocuments> files, bool included)?
         toggleFiles,
     TResult Function(int step)? validateStep,
     TResult Function(String returnReference)? returnReferenceChanged,
@@ -1183,7 +1173,7 @@ class _$UpdateRequestCounterOfferImpl implements _UpdateRequestCounterOffer {
             bool isChangeMaterialCounterOffer)
         updateRequestCounterOffer,
     required TResult Function(
-            String uuid, List<ReturnRequestAttachment> files, bool included)
+            String uuid, List<PoDocuments> files, bool included)
         toggleFiles,
     required TResult Function(int step) validateStep,
     required TResult Function(String returnReference) returnReferenceChanged,
@@ -1208,8 +1198,7 @@ class _$UpdateRequestCounterOfferImpl implements _UpdateRequestCounterOffer {
     TResult? Function(CounterOfferValue counterOfferValue, String uuid,
             bool isChangeMaterialCounterOffer)?
         updateRequestCounterOffer,
-    TResult? Function(
-            String uuid, List<ReturnRequestAttachment> files, bool included)?
+    TResult? Function(String uuid, List<PoDocuments> files, bool included)?
         toggleFiles,
     TResult? Function(int step)? validateStep,
     TResult? Function(String returnReference)? returnReferenceChanged,
@@ -1232,8 +1221,7 @@ class _$UpdateRequestCounterOfferImpl implements _UpdateRequestCounterOffer {
     TResult Function(CounterOfferValue counterOfferValue, String uuid,
             bool isChangeMaterialCounterOffer)?
         updateRequestCounterOffer,
-    TResult Function(
-            String uuid, List<ReturnRequestAttachment> files, bool included)?
+    TResult Function(String uuid, List<PoDocuments> files, bool included)?
         toggleFiles,
     TResult Function(int step)? validateStep,
     TResult Function(String returnReference)? returnReferenceChanged,
@@ -1338,7 +1326,7 @@ abstract class _$$ToggleFilesImplCopyWith<$Res> {
           _$ToggleFilesImpl value, $Res Function(_$ToggleFilesImpl) then) =
       __$$ToggleFilesImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({String uuid, List<ReturnRequestAttachment> files, bool included});
+  $Res call({String uuid, List<PoDocuments> files, bool included});
 }
 
 /// @nodoc
@@ -1364,7 +1352,7 @@ class __$$ToggleFilesImplCopyWithImpl<$Res>
       files: null == files
           ? _value._files
           : files // ignore: cast_nullable_to_non_nullable
-              as List<ReturnRequestAttachment>,
+              as List<PoDocuments>,
       included: null == included
           ? _value.included
           : included // ignore: cast_nullable_to_non_nullable
@@ -1378,15 +1366,15 @@ class __$$ToggleFilesImplCopyWithImpl<$Res>
 class _$ToggleFilesImpl implements _ToggleFiles {
   const _$ToggleFilesImpl(
       {required this.uuid,
-      required final List<ReturnRequestAttachment> files,
+      required final List<PoDocuments> files,
       required this.included})
       : _files = files;
 
   @override
   final String uuid;
-  final List<ReturnRequestAttachment> _files;
+  final List<PoDocuments> _files;
   @override
-  List<ReturnRequestAttachment> get files {
+  List<PoDocuments> get files {
     if (_files is EqualUnmodifiableListView) return _files;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_files);
@@ -1435,7 +1423,7 @@ class _$ToggleFilesImpl implements _ToggleFiles {
             bool isChangeMaterialCounterOffer)
         updateRequestCounterOffer,
     required TResult Function(
-            String uuid, List<ReturnRequestAttachment> files, bool included)
+            String uuid, List<PoDocuments> files, bool included)
         toggleFiles,
     required TResult Function(int step) validateStep,
     required TResult Function(String returnReference) returnReferenceChanged,
@@ -1459,8 +1447,7 @@ class _$ToggleFilesImpl implements _ToggleFiles {
     TResult? Function(CounterOfferValue counterOfferValue, String uuid,
             bool isChangeMaterialCounterOffer)?
         updateRequestCounterOffer,
-    TResult? Function(
-            String uuid, List<ReturnRequestAttachment> files, bool included)?
+    TResult? Function(String uuid, List<PoDocuments> files, bool included)?
         toggleFiles,
     TResult? Function(int step)? validateStep,
     TResult? Function(String returnReference)? returnReferenceChanged,
@@ -1482,8 +1469,7 @@ class _$ToggleFilesImpl implements _ToggleFiles {
     TResult Function(CounterOfferValue counterOfferValue, String uuid,
             bool isChangeMaterialCounterOffer)?
         updateRequestCounterOffer,
-    TResult Function(
-            String uuid, List<ReturnRequestAttachment> files, bool included)?
+    TResult Function(String uuid, List<PoDocuments> files, bool included)?
         toggleFiles,
     TResult Function(int step)? validateStep,
     TResult Function(String returnReference)? returnReferenceChanged,
@@ -1569,11 +1555,11 @@ class _$ToggleFilesImpl implements _ToggleFiles {
 abstract class _ToggleFiles implements NewRequestEvent {
   const factory _ToggleFiles(
       {required final String uuid,
-      required final List<ReturnRequestAttachment> files,
+      required final List<PoDocuments> files,
       required final bool included}) = _$ToggleFilesImpl;
 
   String get uuid;
-  List<ReturnRequestAttachment> get files;
+  List<PoDocuments> get files;
   bool get included;
   @JsonKey(ignore: true)
   _$$ToggleFilesImplCopyWith<_$ToggleFilesImpl> get copyWith =>
@@ -1655,7 +1641,7 @@ class _$ValidateStepImpl implements _ValidateStep {
             bool isChangeMaterialCounterOffer)
         updateRequestCounterOffer,
     required TResult Function(
-            String uuid, List<ReturnRequestAttachment> files, bool included)
+            String uuid, List<PoDocuments> files, bool included)
         toggleFiles,
     required TResult Function(int step) validateStep,
     required TResult Function(String returnReference) returnReferenceChanged,
@@ -1679,8 +1665,7 @@ class _$ValidateStepImpl implements _ValidateStep {
     TResult? Function(CounterOfferValue counterOfferValue, String uuid,
             bool isChangeMaterialCounterOffer)?
         updateRequestCounterOffer,
-    TResult? Function(
-            String uuid, List<ReturnRequestAttachment> files, bool included)?
+    TResult? Function(String uuid, List<PoDocuments> files, bool included)?
         toggleFiles,
     TResult? Function(int step)? validateStep,
     TResult? Function(String returnReference)? returnReferenceChanged,
@@ -1702,8 +1687,7 @@ class _$ValidateStepImpl implements _ValidateStep {
     TResult Function(CounterOfferValue counterOfferValue, String uuid,
             bool isChangeMaterialCounterOffer)?
         updateRequestCounterOffer,
-    TResult Function(
-            String uuid, List<ReturnRequestAttachment> files, bool included)?
+    TResult Function(String uuid, List<PoDocuments> files, bool included)?
         toggleFiles,
     TResult Function(int step)? validateStep,
     TResult Function(String returnReference)? returnReferenceChanged,
@@ -1874,7 +1858,7 @@ class _$ReturnReferenceChangedImpl implements _ReturnReferenceChanged {
             bool isChangeMaterialCounterOffer)
         updateRequestCounterOffer,
     required TResult Function(
-            String uuid, List<ReturnRequestAttachment> files, bool included)
+            String uuid, List<PoDocuments> files, bool included)
         toggleFiles,
     required TResult Function(int step) validateStep,
     required TResult Function(String returnReference) returnReferenceChanged,
@@ -1898,8 +1882,7 @@ class _$ReturnReferenceChangedImpl implements _ReturnReferenceChanged {
     TResult? Function(CounterOfferValue counterOfferValue, String uuid,
             bool isChangeMaterialCounterOffer)?
         updateRequestCounterOffer,
-    TResult? Function(
-            String uuid, List<ReturnRequestAttachment> files, bool included)?
+    TResult? Function(String uuid, List<PoDocuments> files, bool included)?
         toggleFiles,
     TResult? Function(int step)? validateStep,
     TResult? Function(String returnReference)? returnReferenceChanged,
@@ -1921,8 +1904,7 @@ class _$ReturnReferenceChangedImpl implements _ReturnReferenceChanged {
     TResult Function(CounterOfferValue counterOfferValue, String uuid,
             bool isChangeMaterialCounterOffer)?
         updateRequestCounterOffer,
-    TResult Function(
-            String uuid, List<ReturnRequestAttachment> files, bool included)?
+    TResult Function(String uuid, List<PoDocuments> files, bool included)?
         toggleFiles,
     TResult Function(int step)? validateStep,
     TResult Function(String returnReference)? returnReferenceChanged,
@@ -2095,7 +2077,7 @@ class _$SpecialInstructionsChangedImpl implements _SpecialInstructionsChanged {
             bool isChangeMaterialCounterOffer)
         updateRequestCounterOffer,
     required TResult Function(
-            String uuid, List<ReturnRequestAttachment> files, bool included)
+            String uuid, List<PoDocuments> files, bool included)
         toggleFiles,
     required TResult Function(int step) validateStep,
     required TResult Function(String returnReference) returnReferenceChanged,
@@ -2119,8 +2101,7 @@ class _$SpecialInstructionsChangedImpl implements _SpecialInstructionsChanged {
     TResult? Function(CounterOfferValue counterOfferValue, String uuid,
             bool isChangeMaterialCounterOffer)?
         updateRequestCounterOffer,
-    TResult? Function(
-            String uuid, List<ReturnRequestAttachment> files, bool included)?
+    TResult? Function(String uuid, List<PoDocuments> files, bool included)?
         toggleFiles,
     TResult? Function(int step)? validateStep,
     TResult? Function(String returnReference)? returnReferenceChanged,
@@ -2142,8 +2123,7 @@ class _$SpecialInstructionsChangedImpl implements _SpecialInstructionsChanged {
     TResult Function(CounterOfferValue counterOfferValue, String uuid,
             bool isChangeMaterialCounterOffer)?
         updateRequestCounterOffer,
-    TResult Function(
-            String uuid, List<ReturnRequestAttachment> files, bool included)?
+    TResult Function(String uuid, List<PoDocuments> files, bool included)?
         toggleFiles,
     TResult Function(int step)? validateStep,
     TResult Function(String returnReference)? returnReferenceChanged,
@@ -2339,7 +2319,7 @@ class _$SubmitImpl implements _Submit {
             bool isChangeMaterialCounterOffer)
         updateRequestCounterOffer,
     required TResult Function(
-            String uuid, List<ReturnRequestAttachment> files, bool included)
+            String uuid, List<PoDocuments> files, bool included)
         toggleFiles,
     required TResult Function(int step) validateStep,
     required TResult Function(String returnReference) returnReferenceChanged,
@@ -2363,8 +2343,7 @@ class _$SubmitImpl implements _Submit {
     TResult? Function(CounterOfferValue counterOfferValue, String uuid,
             bool isChangeMaterialCounterOffer)?
         updateRequestCounterOffer,
-    TResult? Function(
-            String uuid, List<ReturnRequestAttachment> files, bool included)?
+    TResult? Function(String uuid, List<PoDocuments> files, bool included)?
         toggleFiles,
     TResult? Function(int step)? validateStep,
     TResult? Function(String returnReference)? returnReferenceChanged,
@@ -2386,8 +2365,7 @@ class _$SubmitImpl implements _Submit {
     TResult Function(CounterOfferValue counterOfferValue, String uuid,
             bool isChangeMaterialCounterOffer)?
         updateRequestCounterOffer,
-    TResult Function(
-            String uuid, List<ReturnRequestAttachment> files, bool included)?
+    TResult Function(String uuid, List<PoDocuments> files, bool included)?
         toggleFiles,
     TResult Function(int step)? validateStep,
     TResult Function(String returnReference)? returnReferenceChanged,
@@ -2569,7 +2547,7 @@ class _$updateSelectedTypeImpl implements _updateSelectedType {
             bool isChangeMaterialCounterOffer)
         updateRequestCounterOffer,
     required TResult Function(
-            String uuid, List<ReturnRequestAttachment> files, bool included)
+            String uuid, List<PoDocuments> files, bool included)
         toggleFiles,
     required TResult Function(int step) validateStep,
     required TResult Function(String returnReference) returnReferenceChanged,
@@ -2593,8 +2571,7 @@ class _$updateSelectedTypeImpl implements _updateSelectedType {
     TResult? Function(CounterOfferValue counterOfferValue, String uuid,
             bool isChangeMaterialCounterOffer)?
         updateRequestCounterOffer,
-    TResult? Function(
-            String uuid, List<ReturnRequestAttachment> files, bool included)?
+    TResult? Function(String uuid, List<PoDocuments> files, bool included)?
         toggleFiles,
     TResult? Function(int step)? validateStep,
     TResult? Function(String returnReference)? returnReferenceChanged,
@@ -2616,8 +2593,7 @@ class _$updateSelectedTypeImpl implements _updateSelectedType {
     TResult Function(CounterOfferValue counterOfferValue, String uuid,
             bool isChangeMaterialCounterOffer)?
         updateRequestCounterOffer,
-    TResult Function(
-            String uuid, List<ReturnRequestAttachment> files, bool included)?
+    TResult Function(String uuid, List<PoDocuments> files, bool included)?
         toggleFiles,
     TResult Function(int step)? validateStep,
     TResult Function(String returnReference)? returnReferenceChanged,

@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:dio/dio.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
 import 'package:ezrxmobile/domain/order/entities/order_encryption.dart';
@@ -40,27 +39,23 @@ class OrderRemoteDataSource {
           'variables': variables,
         }),
       );
-      _orderExceptionChecker(res: res);
-      if (res.data['data']['submitOrder'] == null) {
-        throw const OrderException.submitOrderDataIsEmpty();
-      }
+      exceptionHandler.handleExceptionChecker(
+        res: res,
+        onCustomExceptionHandler: (res) {
+          if (res.data['data'] != null &&
+              res.data['data'].isNotEmpty &&
+              res.data['data']['submitOrder'] == null) {
+            throw const OrderException.submitOrderDataIsEmpty();
+          }
+        },
+      );
+
       final submitOrderResponse =
           SubmitOrderResponseDto.fromJson(res.data['data']['submitOrder']);
       _submitOrderExceptionChecker(submitOrderResponse: submitOrderResponse);
 
       return submitOrderResponse.toDomain();
     });
-  }
-
-  void _orderExceptionChecker({required Response<dynamic> res}) {
-    if (exceptionHandler.isServerResponseError(res: res)) {
-      throw ServerException(message: res.data['errors'][0]['message']);
-    } else if (res.statusCode != 200) {
-      throw ServerException(
-        code: res.statusCode ?? 0,
-        message: res.statusMessage ?? '',
-      );
-    }
   }
 
   void _submitOrderExceptionChecker({

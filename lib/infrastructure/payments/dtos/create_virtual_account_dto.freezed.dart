@@ -34,9 +34,15 @@ mixin _$CreateVirtualAccountDto {
   PaymentDetailsDto get paymentDetails => throw _privateConstructorUsedError;
   @JsonKey(name: 'paymentMethodDisplay', defaultValue: '')
   String get paymentMethodDisplay => throw _privateConstructorUsedError;
-  @JsonKey(name: 'createdOn', defaultValue: '', readValue: createdOnDate)
+  @JsonKey(
+      name: 'createdOn',
+      defaultValue: '',
+      readValue: JsonReadValueHelper.createdAtDate)
   String get createdOn => throw _privateConstructorUsedError;
-  @JsonKey(name: 'paidOn', defaultValue: '', readValue: createdOnDate)
+  @JsonKey(
+      name: 'paidOn',
+      defaultValue: '',
+      readValue: JsonReadValueHelper.createdAtDate)
   String get paidOn => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -60,9 +66,15 @@ abstract class $CreateVirtualAccountDtoCopyWith<$Res> {
       @JsonKey(name: 'paymentDetails') PaymentDetailsDto paymentDetails,
       @JsonKey(name: 'paymentMethodDisplay', defaultValue: '')
       String paymentMethodDisplay,
-      @JsonKey(name: 'createdOn', defaultValue: '', readValue: createdOnDate)
+      @JsonKey(
+          name: 'createdOn',
+          defaultValue: '',
+          readValue: JsonReadValueHelper.createdAtDate)
       String createdOn,
-      @JsonKey(name: 'paidOn', defaultValue: '', readValue: createdOnDate)
+      @JsonKey(
+          name: 'paidOn',
+          defaultValue: '',
+          readValue: JsonReadValueHelper.createdAtDate)
       String paidOn});
 
   $PaymentDetailsDtoCopyWith<$Res> get paymentDetails;
@@ -154,9 +166,15 @@ abstract class _$$CreateVirtualAccountDtoImplCopyWith<$Res>
       @JsonKey(name: 'paymentDetails') PaymentDetailsDto paymentDetails,
       @JsonKey(name: 'paymentMethodDisplay', defaultValue: '')
       String paymentMethodDisplay,
-      @JsonKey(name: 'createdOn', defaultValue: '', readValue: createdOnDate)
+      @JsonKey(
+          name: 'createdOn',
+          defaultValue: '',
+          readValue: JsonReadValueHelper.createdAtDate)
       String createdOn,
-      @JsonKey(name: 'paidOn', defaultValue: '', readValue: createdOnDate)
+      @JsonKey(
+          name: 'paidOn',
+          defaultValue: '',
+          readValue: JsonReadValueHelper.createdAtDate)
       String paidOn});
 
   @override
@@ -235,9 +253,15 @@ class _$CreateVirtualAccountDtoImpl extends _CreateVirtualAccountDto {
       @JsonKey(name: 'paymentDetails') required this.paymentDetails,
       @JsonKey(name: 'paymentMethodDisplay', defaultValue: '')
       required this.paymentMethodDisplay,
-      @JsonKey(name: 'createdOn', defaultValue: '', readValue: createdOnDate)
+      @JsonKey(
+          name: 'createdOn',
+          defaultValue: '',
+          readValue: JsonReadValueHelper.createdAtDate)
       required this.createdOn,
-      @JsonKey(name: 'paidOn', defaultValue: '', readValue: createdOnDate)
+      @JsonKey(
+          name: 'paidOn',
+          defaultValue: '',
+          readValue: JsonReadValueHelper.createdAtDate)
       required this.paidOn})
       : _invoices = invoices,
         super._();
@@ -270,10 +294,16 @@ class _$CreateVirtualAccountDtoImpl extends _CreateVirtualAccountDto {
   @JsonKey(name: 'paymentMethodDisplay', defaultValue: '')
   final String paymentMethodDisplay;
   @override
-  @JsonKey(name: 'createdOn', defaultValue: '', readValue: createdOnDate)
+  @JsonKey(
+      name: 'createdOn',
+      defaultValue: '',
+      readValue: JsonReadValueHelper.createdAtDate)
   final String createdOn;
   @override
-  @JsonKey(name: 'paidOn', defaultValue: '', readValue: createdOnDate)
+  @JsonKey(
+      name: 'paidOn',
+      defaultValue: '',
+      readValue: JsonReadValueHelper.createdAtDate)
   final String paidOn;
 
   @override
@@ -340,9 +370,15 @@ abstract class _CreateVirtualAccountDto extends CreateVirtualAccountDto {
       required final PaymentDetailsDto paymentDetails,
       @JsonKey(name: 'paymentMethodDisplay', defaultValue: '')
       required final String paymentMethodDisplay,
-      @JsonKey(name: 'createdOn', defaultValue: '', readValue: createdOnDate)
+      @JsonKey(
+          name: 'createdOn',
+          defaultValue: '',
+          readValue: JsonReadValueHelper.createdAtDate)
       required final String createdOn,
-      @JsonKey(name: 'paidOn', defaultValue: '', readValue: createdOnDate)
+      @JsonKey(
+          name: 'paidOn',
+          defaultValue: '',
+          readValue: JsonReadValueHelper.createdAtDate)
       required final String paidOn}) = _$CreateVirtualAccountDtoImpl;
   const _CreateVirtualAccountDto._() : super._();
 
@@ -368,10 +404,16 @@ abstract class _CreateVirtualAccountDto extends CreateVirtualAccountDto {
   @JsonKey(name: 'paymentMethodDisplay', defaultValue: '')
   String get paymentMethodDisplay;
   @override
-  @JsonKey(name: 'createdOn', defaultValue: '', readValue: createdOnDate)
+  @JsonKey(
+      name: 'createdOn',
+      defaultValue: '',
+      readValue: JsonReadValueHelper.createdAtDate)
   String get createdOn;
   @override
-  @JsonKey(name: 'paidOn', defaultValue: '', readValue: createdOnDate)
+  @JsonKey(
+      name: 'paidOn',
+      defaultValue: '',
+      readValue: JsonReadValueHelper.createdAtDate)
   String get paidOn;
   @override
   @JsonKey(ignore: true)

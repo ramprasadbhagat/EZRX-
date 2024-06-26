@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:ezrxmobile/config.dart';
-import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
 import 'package:ezrxmobile/domain/core/value/value_transformers.dart';
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
@@ -47,23 +46,26 @@ class StockInfoRemoteDataSource {
         }),
       );
 
-      _exceptionChecker(res: res);
-
+      dataSourceExceptionHandler.handleExceptionChecker(
+        res: res,
+        onCustomExceptionHandler: _stockInfoExceptionChecker,
+      );
+      
       return List.from(res.data['data']['getStockInformationLists'])
           .map((e) => MaterialStockInfoDto.fromJson(e).toDomain())
           .toList();
     });
   }
 
-  void _exceptionChecker({required Response<dynamic> res}) {
-    if (dataSourceExceptionHandler.isServerResponseError(res: res)) {
-      final errorMessage = res.data['errors'][0]['message'];
-      isEqualsIgnoreCase(
-        errorMessage,
-        'something went wrong in the stock information API',
-      )
-          ? throw StockInfoException()
-          : throw ServerException(message: errorMessage);
+  void _stockInfoExceptionChecker(Response<dynamic> res) {
+    final isStockInfoError = res.data['errors'] != null &&
+        res.data['errors'].isNotEmpty &&
+        isEqualsIgnoreCase(
+          res.data['errors'][0]['message'],
+          'something went wrong in the stock information API',
+        );
+    if (isStockInfoError) {
+      throw StockInfoException();
     } else if (res.statusCode != 200) {
       throw StockInfoException();
     }

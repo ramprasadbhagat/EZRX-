@@ -8,15 +8,16 @@ import 'package:ezrxmobile/domain/core/value/value_transformers.dart';
 import 'package:ezrxmobile/domain/returns/entities/request_information.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_approver_filter.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_requests_id.dart';
-import 'package:ezrxmobile/infrastructure/returns/datasource/approver_return_request_information_local.dart';
-import 'package:ezrxmobile/infrastructure/returns/datasource/approver_return_request_information_remote.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/approver_return_requests_local.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/approver_return_requests_remote.dart';
+import 'package:ezrxmobile/infrastructure/returns/datasource/return_summary_details_local.dart';
+import 'package:ezrxmobile/infrastructure/returns/datasource/return_summary_details_remote.dart';
 import 'package:ezrxmobile/infrastructure/returns/repository/return_approver_repository.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
 import '../../../common_mock_data/mock_other.dart';
+import 'return_summary_details_repository_test.dart';
 
 class ApproverReturnRequestsLocalMock extends Mock
     implements ApproverReturnRequestsLocal {}
@@ -24,21 +25,15 @@ class ApproverReturnRequestsLocalMock extends Mock
 class ApproverReturnRequestsRemoteMock extends Mock
     implements ApproverReturnRequestsRemote {}
 
-class ApproverReturnRequestInformationLocalMock extends Mock
-    implements ApproverReturnRequestInformationLocal {}
-
-class ApproverReturnRequestInformationRemoteMock extends Mock
-    implements ApproverReturnRequestInformationRemote {}
-
 void main() {
   late ReturnApproverRepository returnApproverRepository;
   late Config mockConfig;
   late ApproverReturnRequestsLocal approverReturnRequestsLocalMock;
   late ApproverReturnRequestsRemote approverReturnRequestsRemoteMock;
-  late ApproverReturnRequestInformationLocal
-      approverReturnRequestInformationLocalMock;
-  late ApproverReturnRequestInformationRemote
-      approverReturnRequestInformationRemoteMock;
+  late ReturnSummaryDetailsRequestInformationLocal
+      returnSummaryDetailsRequestInformationLocal;
+  late ReturnSummaryDetailsRequestInformationRemote
+      returnSummaryDetailsRequestInformationRemote;
   late DeviceStorageMock deviceStorageMock;
 
   late ReturnApproverFilter returnApproverFilter;
@@ -62,17 +57,17 @@ void main() {
     mockConfig = ConfigMock();
     approverReturnRequestsLocalMock = ApproverReturnRequestsLocalMock();
     approverReturnRequestsRemoteMock = ApproverReturnRequestsRemoteMock();
-    approverReturnRequestInformationLocalMock =
-        ApproverReturnRequestInformationLocalMock();
-    approverReturnRequestInformationRemoteMock =
-        ApproverReturnRequestInformationRemoteMock();
+    returnSummaryDetailsRequestInformationLocal =
+        ReturnSummaryLocalDataSourceMock();
+    returnSummaryDetailsRequestInformationRemote =
+        ReturnSummaryRemoteDataSourceMock();
 
     returnApproverRepository = ReturnApproverRepository(
       config: mockConfig,
       returnRequestInformationLocalDataSource:
-          approverReturnRequestInformationLocalMock,
+          returnSummaryDetailsRequestInformationLocal,
       returnRequestInformationRemoteDataSource:
-          approverReturnRequestInformationRemoteMock,
+          returnSummaryDetailsRequestInformationRemote,
       returnRequestLocalDataSource: approverReturnRequestsLocalMock,
       returnRequestRemoteDataSource: approverReturnRequestsRemoteMock,
       deviceStorage: deviceStorageMock,
@@ -222,8 +217,8 @@ void main() {
         () async {
           when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
           when(
-            () => approverReturnRequestInformationLocalMock
-                .getApproverReturnRequestInformation(),
+            () => returnSummaryDetailsRequestInformationLocal
+                .getReturnRequestInformation(),
           ).thenAnswer(
             (invocation) async => RequestInformation.empty(),
           );
@@ -245,8 +240,8 @@ void main() {
         () async {
           when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
           when(
-            () => approverReturnRequestInformationLocalMock
-                .getApproverReturnRequestInformation(),
+            () => returnSummaryDetailsRequestInformationLocal
+                .getReturnRequestInformation(),
           ).thenThrow(const ApiFailure.serverTimeout());
 
           final result = await returnApproverRepository.getReturnInformation(
@@ -267,8 +262,8 @@ void main() {
           when(() => deviceStorageMock.currentMarket()).thenReturn(fakeMarket);
           when(() => mockConfig.appFlavor).thenReturn(Flavor.dev);
           when(
-            () => approverReturnRequestInformationRemoteMock
-                .getApproverReturnRequestInformation(
+            () => returnSummaryDetailsRequestInformationRemote
+                .getReturnRequestInformation(
               returnRequestId: 'fake-requestId',
               market: fakeMarket,
             ),
@@ -294,8 +289,8 @@ void main() {
           when(() => deviceStorageMock.currentMarket()).thenReturn(fakeMarket);
           when(() => mockConfig.appFlavor).thenReturn(Flavor.dev);
           when(
-            () => approverReturnRequestInformationRemoteMock
-                .getApproverReturnRequestInformation(
+            () => returnSummaryDetailsRequestInformationRemote
+                .getReturnRequestInformation(
               returnRequestId: 'fake-requestId',
               market: fakeMarket,
             ),

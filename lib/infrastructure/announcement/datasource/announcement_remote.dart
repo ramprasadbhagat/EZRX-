@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:dio/dio.dart';
 import 'package:ezrxmobile/domain/announcement/entities/announcement.dart';
 import 'package:ezrxmobile/domain/announcement/entities/maintenance_item.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
@@ -31,7 +30,8 @@ class AnnouncementRemoteDataSource {
             'query': queryMutation.getAnnouncementsQuery(),
           }),
         );
-        _announcementExceptionChecker(res: res);
+        exceptionHandler.handleExceptionChecker(res: res);
+        //TODO: Consider to move to custom exception
         if (res.data['data']['getAnnouncements'] == null ||
             res.data['data']['getAnnouncements'].isEmpty) {
           throw OtherException(message: '');
@@ -60,21 +60,10 @@ class AnnouncementRemoteDataSource {
             },
           }),
         );
-        _announcementExceptionChecker(res: res);
+        exceptionHandler.handleExceptionChecker(res: res);
 
         return MaintenanceItemDto.fromJson(res.data['data']['item']).toDomain;
       },
     );
-  }
-
-  void _announcementExceptionChecker({required Response<dynamic> res}) {
-    if (exceptionHandler.isServerResponseError(res: res)) {
-      throw ServerException(message: res.data['errors'][0]['message']);
-    } else if (res.statusCode != 200) {
-      throw ServerException(
-        code: res.statusCode ?? 0,
-        message: res.statusMessage ?? '',
-      );
-    }
   }
 }

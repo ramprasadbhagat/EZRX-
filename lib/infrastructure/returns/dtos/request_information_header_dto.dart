@@ -2,7 +2,7 @@ import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_request_information_header.dart';
 import 'package:ezrxmobile/domain/returns/value/value_objects.dart';
-import 'package:ezrxmobile/infrastructure/core/common/json_key_converter.dart';
+import 'package:ezrxmobile/infrastructure/core/common/json_key_readvalue_helper.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 part 'request_information_header_dto.freezed.dart';
 part 'request_information_header_dto.g.dart';
@@ -25,7 +25,10 @@ class RequestInformationHeaderDto with _$RequestInformationHeaderDto {
     @JsonKey(name: 'bapiStatus', defaultValue: '') required String bapiStatus,
     @JsonKey(name: 'totalItemCount', defaultValue: '')
     required String totalItemCount,
-    @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+    @JsonKey(
+      defaultValue: false,
+      readValue: JsonReadValueHelper.mappingIsMarketPlace,
+    )
     required bool isMarketPlace,
   }) = _RequestInformationHeaderDto;
 

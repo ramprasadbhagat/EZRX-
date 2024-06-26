@@ -21,11 +21,11 @@ FAQItemDto _$FAQItemDtoFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$FAQItemDto {
   String get name => throw _privateConstructorUsedError;
-  @JsonKey(name: 'answer', readValue: getAnswer)
+  @JsonKey(name: 'answer', readValue: JsonReadValueHelper.readValueString)
   String get answer => throw _privateConstructorUsedError;
-  @JsonKey(name: 'question', readValue: getQuestion)
+  @JsonKey(name: 'question', readValue: JsonReadValueHelper.readValueString)
   String get question => throw _privateConstructorUsedError;
-  @JsonKey(name: 'category', readValue: getCategory)
+  @JsonKey(name: 'category', readValue: JsonReadValueHelper.readCategory)
   String get displayName => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -42,9 +42,12 @@ abstract class $FAQItemDtoCopyWith<$Res> {
   @useResult
   $Res call(
       {String name,
-      @JsonKey(name: 'answer', readValue: getAnswer) String answer,
-      @JsonKey(name: 'question', readValue: getQuestion) String question,
-      @JsonKey(name: 'category', readValue: getCategory) String displayName});
+      @JsonKey(name: 'answer', readValue: JsonReadValueHelper.readValueString)
+      String answer,
+      @JsonKey(name: 'question', readValue: JsonReadValueHelper.readValueString)
+      String question,
+      @JsonKey(name: 'category', readValue: JsonReadValueHelper.readCategory)
+      String displayName});
 }
 
 /// @nodoc
@@ -96,9 +99,12 @@ abstract class _$$FAQItemDtoImplCopyWith<$Res>
   @useResult
   $Res call(
       {String name,
-      @JsonKey(name: 'answer', readValue: getAnswer) String answer,
-      @JsonKey(name: 'question', readValue: getQuestion) String question,
-      @JsonKey(name: 'category', readValue: getCategory) String displayName});
+      @JsonKey(name: 'answer', readValue: JsonReadValueHelper.readValueString)
+      String answer,
+      @JsonKey(name: 'question', readValue: JsonReadValueHelper.readValueString)
+      String question,
+      @JsonKey(name: 'category', readValue: JsonReadValueHelper.readCategory)
+      String displayName});
 }
 
 /// @nodoc
@@ -143,9 +149,11 @@ class __$$FAQItemDtoImplCopyWithImpl<$Res>
 class _$FAQItemDtoImpl extends _FAQItemDto {
   const _$FAQItemDtoImpl(
       {required this.name,
-      @JsonKey(name: 'answer', readValue: getAnswer) required this.answer,
-      @JsonKey(name: 'question', readValue: getQuestion) required this.question,
-      @JsonKey(name: 'category', readValue: getCategory)
+      @JsonKey(name: 'answer', readValue: JsonReadValueHelper.readValueString)
+      required this.answer,
+      @JsonKey(name: 'question', readValue: JsonReadValueHelper.readValueString)
+      required this.question,
+      @JsonKey(name: 'category', readValue: JsonReadValueHelper.readCategory)
       required this.displayName})
       : super._();
 
@@ -155,13 +163,13 @@ class _$FAQItemDtoImpl extends _FAQItemDto {
   @override
   final String name;
   @override
-  @JsonKey(name: 'answer', readValue: getAnswer)
+  @JsonKey(name: 'answer', readValue: JsonReadValueHelper.readValueString)
   final String answer;
   @override
-  @JsonKey(name: 'question', readValue: getQuestion)
+  @JsonKey(name: 'question', readValue: JsonReadValueHelper.readValueString)
   final String question;
   @override
-  @JsonKey(name: 'category', readValue: getCategory)
+  @JsonKey(name: 'category', readValue: JsonReadValueHelper.readCategory)
   final String displayName;
 
   @override
@@ -204,11 +212,11 @@ class _$FAQItemDtoImpl extends _FAQItemDto {
 abstract class _FAQItemDto extends FAQItemDto {
   const factory _FAQItemDto(
       {required final String name,
-      @JsonKey(name: 'answer', readValue: getAnswer)
+      @JsonKey(name: 'answer', readValue: JsonReadValueHelper.readValueString)
       required final String answer,
-      @JsonKey(name: 'question', readValue: getQuestion)
+      @JsonKey(name: 'question', readValue: JsonReadValueHelper.readValueString)
       required final String question,
-      @JsonKey(name: 'category', readValue: getCategory)
+      @JsonKey(name: 'category', readValue: JsonReadValueHelper.readCategory)
       required final String displayName}) = _$FAQItemDtoImpl;
   const _FAQItemDto._() : super._();
 
@@ -218,13 +226,13 @@ abstract class _FAQItemDto extends FAQItemDto {
   @override
   String get name;
   @override
-  @JsonKey(name: 'answer', readValue: getAnswer)
+  @JsonKey(name: 'answer', readValue: JsonReadValueHelper.readValueString)
   String get answer;
   @override
-  @JsonKey(name: 'question', readValue: getQuestion)
+  @JsonKey(name: 'question', readValue: JsonReadValueHelper.readValueString)
   String get question;
   @override
-  @JsonKey(name: 'category', readValue: getCategory)
+  @JsonKey(name: 'category', readValue: JsonReadValueHelper.readCategory)
   String get displayName;
   @override
   @JsonKey(ignore: true)

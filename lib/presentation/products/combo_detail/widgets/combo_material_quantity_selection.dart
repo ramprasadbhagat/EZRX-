@@ -1,27 +1,28 @@
 part of 'package:ezrxmobile/presentation/products/combo_detail/combo_detail_page.dart';
 
-class _MaterialQuantitySection extends StatefulWidget {
+class _ComboMaterialQuantitySection extends StatefulWidget {
   final PriceAggregate comboItem;
   final ComboDealMaterial comboDealMaterial;
-  const _MaterialQuantitySection({
+  const _ComboMaterialQuantitySection({
     required this.comboItem,
     required this.comboDealMaterial,
   });
 
   @override
-  State<_MaterialQuantitySection> createState() =>
-      _MaterialQuantitySectionState();
+  State<_ComboMaterialQuantitySection> createState() =>
+      _ComboMaterialQuantitySectionState();
 }
 
-class _MaterialQuantitySectionState extends State<_MaterialQuantitySection> {
-  final _controller = TextEditingController();
+class _ComboMaterialQuantitySectionState
+    extends State<_ComboMaterialQuantitySection> {
+  final _qtyController = TextEditingController();
 
   @override
   void initState() {
-    _controller.value = TextEditingValue(
+    _qtyController.value = TextEditingValue(
       text: _qty,
       selection: TextSelection.collapsed(
-        offset: _controller.selection.base.offset,
+        offset: _qtyController.selection.base.offset,
       ),
     );
     super.initState();
@@ -30,17 +31,17 @@ class _MaterialQuantitySectionState extends State<_MaterialQuantitySection> {
   String get _qty => widget.comboItem.quantity.toString();
 
   @override
-  void didUpdateWidget(covariant _MaterialQuantitySection oldWidget) {
+  void didUpdateWidget(covariant _ComboMaterialQuantitySection oldWidget) {
     super.didUpdateWidget(oldWidget);
-    if (_qty != _controller.text) {
-      _controller.text = _qty;
-      _controller.selection = TextSelection.collapsed(offset: _qty.length);
+    if (_qty != _qtyController.text) {
+      _qtyController.text = _qty;
+      _qtyController.selection = TextSelection.collapsed(offset: _qty.length);
     }
   }
 
   @override
   void dispose() {
-    _controller.dispose();
+    _qtyController.dispose();
     super.dispose();
   }
 
@@ -58,7 +59,7 @@ class _MaterialQuantitySectionState extends State<_MaterialQuantitySection> {
           quantityDeleteKey: WidgetKeys.decreaseQuantityKey,
           quantityTextKey: WidgetKeys.quantityInputTextKey,
           minimumQty: widget.comboDealMaterial.minQty,
-          controller: _controller,
+          controller: _qtyController,
           onFieldChange: (quantity) {
             bloc.add(
               ComboDealMaterialDetailEvent.updateItemQuantity(

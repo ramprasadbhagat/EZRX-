@@ -1,5 +1,6 @@
 import 'package:ezrxmobile/domain/order/entities/combo_deal_material.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
+import 'package:ezrxmobile/infrastructure/core/common/json_key_readvalue_helper.dart';
 import 'package:ezrxmobile/infrastructure/core/common/json_key_converter.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -13,7 +14,7 @@ class ComboDealMaterialSetDto with _$ComboDealMaterialSetDto {
   const factory ComboDealMaterialSetDto({
     @JsonKey(name: 'setNo', defaultValue: '') required String setNo,
     @JsonKey(name: 'materials', defaultValue: [])
-        required List<ComboDealMaterialDto> materials,
+    required List<ComboDealMaterialDto> materials,
   }) = _ComboDealMaterialSetDto;
 
   factory ComboDealMaterialSetDto.fromJson(Map<String, dynamic> json) =>
@@ -41,16 +42,20 @@ class ComboDealMaterialDto with _$ComboDealMaterialDto {
 
   const factory ComboDealMaterialDto({
     @StringToIntConverter()
-    @JsonKey(name: 'minQty', defaultValue: 0, readValue: _readValue)
-        required int minQty,
+    @JsonKey(
+      name: 'minQty',
+      defaultValue: 0,
+      readValue: JsonReadValueHelper.handleMinQty,
+    )
+    required int minQty,
     @JsonKey(name: 'materialNumber', defaultValue: '')
-        required String materialNumber,
+    required String materialNumber,
     @StringToDoubleConverter()
     @JsonKey(name: 'rate', defaultValue: 0)
-        required double rate,
+    required double rate,
     @JsonKey(name: 'type', defaultValue: '') required String type,
     @JsonKey(name: 'conditionNumber', defaultValue: '')
-        required String conditionNumber,
+    required String conditionNumber,
     @JsonKey(name: 'mandatory', defaultValue: false) required bool mandatory,
     @JsonKey(name: 'suffix', defaultValue: '') required String suffix,
   }) = _ComboDealMaterialDto;
@@ -78,10 +83,4 @@ class ComboDealMaterialDto with _$ComboDealMaterialDto {
         mandatory: domain.mandatory,
         suffix: domain.suffix.stringValue,
       );
-}
-
-String _readValue(Map json, String key) {
-  final value = double.tryParse(json[key]) ?? 0.0;
-
-  return value > 0.0 ? json[key] : '1.0';
 }

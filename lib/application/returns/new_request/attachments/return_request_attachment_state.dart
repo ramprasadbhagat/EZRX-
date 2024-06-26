@@ -6,7 +6,7 @@ class ReturnRequestAttachmentState with _$ReturnRequestAttachmentState {
   const factory ReturnRequestAttachmentState({
     required bool isFetching,
     required String returnUuid,
-    required List<ReturnRequestAttachment> uploadedFiles,
+    required List<PoDocuments> uploadedFiles,
     required FileOperationMode fileOperationMode,
     required Option<Either<ApiFailure, dynamic>> failureOrSuccessOption,
   }) = _ReturnRequestAttachmentState;
@@ -14,7 +14,7 @@ class ReturnRequestAttachmentState with _$ReturnRequestAttachmentState {
       ReturnRequestAttachmentState(
         isFetching: false,
         returnUuid: '',
-        uploadedFiles: <ReturnRequestAttachment>[],
+        uploadedFiles: <PoDocuments>[],
         fileOperationMode: FileOperationMode.none,
         failureOrSuccessOption: none(),
       );

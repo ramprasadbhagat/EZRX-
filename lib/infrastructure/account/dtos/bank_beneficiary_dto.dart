@@ -2,6 +2,7 @@ import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/account/entities/bank_beneficiary.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/infrastructure/core/common/json_key_converter.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'bank_beneficiary_dto.freezed.dart';
@@ -17,25 +18,25 @@ class BankBeneficiaryDto with _$BankBeneficiaryDto {
       defaultValue: '',
     )
         required String salesOrg,
-    @JsonKey(name: 'bankAccount', defaultValue: '', toJson: valueTojson)
+    @JsonKey(name: 'bankAccount', defaultValue: '', toJson: valueOrNullToJson)
         required String bankAccount,
-    @JsonKey(name: 'bankAddress', defaultValue: '', toJson: valueTojson)
+    @JsonKey(name: 'bankAddress', defaultValue: '', toJson: valueOrNullToJson)
         required String bankAddress,
-    @JsonKey(name: 'bankCode', defaultValue: '', toJson: valueTojson)
+    @JsonKey(name: 'bankCode', defaultValue: '', toJson: valueOrNullToJson)
         required String bankCode,
-    @JsonKey(name: 'bankName', defaultValue: '', toJson: valueTojson)
+    @JsonKey(name: 'bankName', defaultValue: '', toJson: valueOrNullToJson)
         required String bankName,
-    @JsonKey(name: 'beneficiaryName', defaultValue: '', toJson: valueTojson)
+    @JsonKey(name: 'beneficiaryName', defaultValue: '', toJson: valueOrNullToJson)
         required String beneficiaryName,
-    @JsonKey(name: 'branch', defaultValue: '', toJson: valueTojson)
+    @JsonKey(name: 'branch', defaultValue: '', toJson: valueOrNullToJson)
         required String branch,
-    @JsonKey(name: 'emailId', defaultValue: '', toJson: valueTojson)
+    @JsonKey(name: 'emailId', defaultValue: '', toJson: valueOrNullToJson)
         required String emailId,
-    @JsonKey(name: 'hdbcSwiftCode', defaultValue: '', toJson: valueTojson)
+    @JsonKey(name: 'hdbcSwiftCode', defaultValue: '', toJson: valueOrNullToJson)
         required String hdbcSwiftCode,
-    @JsonKey(name: 'payNowUen', defaultValue: '', toJson: valueTojson)
+    @JsonKey(name: 'payNowUen', defaultValue: '', toJson: valueOrNullToJson)
         required String payNowUen,
-    @JsonKey(name: 'salesDistrict', defaultValue: '', toJson: valueTojson)
+    @JsonKey(name: 'salesDistrict', defaultValue: '', toJson: valueOrNullToJson)
         required String salesDistrict,
   }) = _BankBeneficiaryDto;
 
@@ -78,5 +79,3 @@ class BankBeneficiaryDto with _$BankBeneficiaryDto {
   factory BankBeneficiaryDto.fromJson(Map<String, dynamic> json) =>
       _$BankBeneficiaryDtoFromJson(json);
 }
-
-dynamic valueTojson(String value) => value.isNotEmpty ? value : '';

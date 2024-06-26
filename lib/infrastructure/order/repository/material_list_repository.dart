@@ -134,7 +134,7 @@ class MaterialListRepository implements IMaterialListRepository {
     if (config.appFlavor == Flavor.mock) {
       try {
         final materialListData = await materialListLocalDataSource
-            .getComboDealMaterialsPrincipalCode();
+            .getProductList(isComboDealMaterials: true);
 
         return Right(materialListData);
       } catch (e) {

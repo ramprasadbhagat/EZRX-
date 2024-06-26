@@ -13,12 +13,16 @@ _$MaintenanceItemDtoImpl _$$MaintenanceItemDtoImplFromJson(
       name: json['name'] as String? ?? '',
       displayName: json['displayName'] as String? ?? '',
       maxNumberOfItem:
-          (getMaximumOfItem(json, 'maxNumberOfItem') as num?)?.toInt() ?? 0,
-      banners: (getValueList(json, 'banners') as List<dynamic>?)
-              ?.map((e) =>
-                  MaintenanceBannerDto.fromJson(e as Map<String, dynamic>))
-              .toList() ??
-          [],
+          (JsonReadValueHelper.readMaximumOfItem(json, 'maxNumberOfItem')
+                      as num?)
+                  ?.toInt() ??
+              0,
+      banners:
+          (JsonReadValueHelper.readValueList(json, 'banners') as List<dynamic>?)
+                  ?.map((e) =>
+                      MaintenanceBannerDto.fromJson(e as Map<String, dynamic>))
+                  .toList() ??
+              [],
     );
 
 _$MaintenanceBannerDtoImpl _$$MaintenanceBannerDtoImplFromJson(
@@ -26,22 +30,28 @@ _$MaintenanceBannerDtoImpl _$$MaintenanceBannerDtoImplFromJson(
     _$MaintenanceBannerDtoImpl(
       id: json['id'] as String? ?? '',
       name: json['name'] as String? ?? '',
-      template: getName(json, 'template') as String? ?? '',
+      template: JsonReadValueHelper.readName(json, 'template') as String? ?? '',
       displayName: json['displayName'] as String? ?? '',
-      content: getValue(json, 'content') as String? ?? '',
+      content:
+          JsonReadValueHelper.readValueString(json, 'content') as String? ?? '',
       publishedDate: PublishedDateDto.fromJson(
           json['publishedDate'] as Map<String, dynamic>),
-      hyperlink: getHyperLink(json, 'hyperlink') as String? ?? '',
-      type: getValue(json, 'type') as String? ?? '',
+      hyperlink:
+          JsonReadValueHelper.readHyperLink(json, 'hyperlink') as String? ?? '',
+      type: JsonReadValueHelper.readValueString(json, 'type') as String? ?? '',
       applicableModules:
-          (getValueList(json, 'applicableModules') as List<dynamic>?)
+          (JsonReadValueHelper.readValueList(json, 'applicableModules')
+                      as List<dynamic>?)
                   ?.map((e) =>
                       ApplicableModulesDto.fromJson(e as Map<String, dynamic>))
                   .toList() ??
               [],
       enableCrossButton:
-          getBooleanValue(json, 'enableCrossButton') as bool? ?? false,
-      loginType: getValue(json, 'login') as String? ?? '',
+          JsonReadValueHelper.readValueBoolean(json, 'enableCrossButton')
+                  as bool? ??
+              false,
+      loginType:
+          JsonReadValueHelper.readValueString(json, 'login') as String? ?? '',
     );
 
 Map<String, dynamic> _$$MaintenanceBannerDtoImplToJson(

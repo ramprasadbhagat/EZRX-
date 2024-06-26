@@ -238,7 +238,7 @@ void main() {
         defaultScrollOffset,
       );
       await tester.pumpAndSettle();
-      expect(find.byKey(WidgetKeys.aboutUsFloatingButton), findsOneWidget);
+      expect(find.byKey(WidgetKeys.scrollToTopFloatingButton), findsOneWidget);
     });
   });
 }

@@ -56,8 +56,8 @@ class MaterialQueryInfo with _$MaterialQueryInfo {
   }) =>
       MaterialQueryInfo(
         value: orderHistoryItem.materialNumber,
-        materialGroup2: MaterialGroup.two(''),
-        materialGroup4: MaterialGroup.four(''),
+        materialGroup2: MaterialGroup(''),
+        materialGroup4: MaterialGroup(''),
         qty: MaterialQty(
           orderHistoryItem.qty,
         ),
@@ -69,8 +69,8 @@ class MaterialQueryInfo with _$MaterialQueryInfo {
   factory MaterialQueryInfo.empty() => MaterialQueryInfo(
         value: MaterialNumber(''),
         qty: MaterialQty(0),
-        materialGroup2: MaterialGroup.two(''),
-        materialGroup4: MaterialGroup.four(''),
+        materialGroup2: MaterialGroup(''),
+        materialGroup4: MaterialGroup(''),
         description: 'NA',
         principalName: 'NA',
         tenderContract: TenderContract.empty(),
@@ -81,8 +81,8 @@ class MaterialQueryInfo with _$MaterialQueryInfo {
   }) =>
       MaterialQueryInfo(
         value: orderHistoryDetailsOrderItem.materialNumber,
-        materialGroup2: MaterialGroup.two(''),
-        materialGroup4: MaterialGroup.four(''),
+        materialGroup2: MaterialGroup(''),
+        materialGroup4: MaterialGroup(''),
         qty: MaterialQty(
           orderHistoryDetailsOrderItem.qty,
         ),

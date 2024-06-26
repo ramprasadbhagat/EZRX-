@@ -21,13 +21,13 @@ OrderHistoryBasicInfoDto _$OrderHistoryBasicInfoDtoFromJson(
 
 /// @nodoc
 mixin _$OrderHistoryBasicInfoDto {
-  @JsonKey(name: 'SoldTo')
+  @JsonKey(name: 'soldTo')
   String get soldTo => throw _privateConstructorUsedError;
-  @JsonKey(name: 'ShipTo')
+  @JsonKey(name: 'shipTo')
   String get shipTo => throw _privateConstructorUsedError;
-  @JsonKey(name: 'CompanyName')
+  @JsonKey(name: 'companyName')
   String get companyName => throw _privateConstructorUsedError;
-  @JsonKey(name: 'PaymentTerm')
+  @JsonKey(name: 'paymentTerm')
   PaymentTermDto get paymentTerm => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -43,10 +43,10 @@ abstract class $OrderHistoryBasicInfoDtoCopyWith<$Res> {
       _$OrderHistoryBasicInfoDtoCopyWithImpl<$Res, OrderHistoryBasicInfoDto>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'SoldTo') String soldTo,
-      @JsonKey(name: 'ShipTo') String shipTo,
-      @JsonKey(name: 'CompanyName') String companyName,
-      @JsonKey(name: 'PaymentTerm') PaymentTermDto paymentTerm});
+      {@JsonKey(name: 'soldTo') String soldTo,
+      @JsonKey(name: 'shipTo') String shipTo,
+      @JsonKey(name: 'companyName') String companyName,
+      @JsonKey(name: 'paymentTerm') PaymentTermDto paymentTerm});
 
   $PaymentTermDtoCopyWith<$Res> get paymentTerm;
 }
@@ -109,10 +109,10 @@ abstract class _$$OrderHistoryBasicInfoDtoImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'SoldTo') String soldTo,
-      @JsonKey(name: 'ShipTo') String shipTo,
-      @JsonKey(name: 'CompanyName') String companyName,
-      @JsonKey(name: 'PaymentTerm') PaymentTermDto paymentTerm});
+      {@JsonKey(name: 'soldTo') String soldTo,
+      @JsonKey(name: 'shipTo') String shipTo,
+      @JsonKey(name: 'companyName') String companyName,
+      @JsonKey(name: 'paymentTerm') PaymentTermDto paymentTerm});
 
   @override
   $PaymentTermDtoCopyWith<$Res> get paymentTerm;
@@ -161,26 +161,26 @@ class __$$OrderHistoryBasicInfoDtoImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$OrderHistoryBasicInfoDtoImpl extends _OrderHistoryBasicInfoDto {
   const _$OrderHistoryBasicInfoDtoImpl(
-      {@JsonKey(name: 'SoldTo') required this.soldTo,
-      @JsonKey(name: 'ShipTo') required this.shipTo,
-      @JsonKey(name: 'CompanyName') required this.companyName,
-      @JsonKey(name: 'PaymentTerm') required this.paymentTerm})
+      {@JsonKey(name: 'soldTo') required this.soldTo,
+      @JsonKey(name: 'shipTo') required this.shipTo,
+      @JsonKey(name: 'companyName') required this.companyName,
+      @JsonKey(name: 'paymentTerm') required this.paymentTerm})
       : super._();
 
   factory _$OrderHistoryBasicInfoDtoImpl.fromJson(Map<String, dynamic> json) =>
       _$$OrderHistoryBasicInfoDtoImplFromJson(json);
 
   @override
-  @JsonKey(name: 'SoldTo')
+  @JsonKey(name: 'soldTo')
   final String soldTo;
   @override
-  @JsonKey(name: 'ShipTo')
+  @JsonKey(name: 'shipTo')
   final String shipTo;
   @override
-  @JsonKey(name: 'CompanyName')
+  @JsonKey(name: 'companyName')
   final String companyName;
   @override
-  @JsonKey(name: 'PaymentTerm')
+  @JsonKey(name: 'paymentTerm')
   final PaymentTermDto paymentTerm;
 
   @override
@@ -223,10 +223,10 @@ class _$OrderHistoryBasicInfoDtoImpl extends _OrderHistoryBasicInfoDto {
 
 abstract class _OrderHistoryBasicInfoDto extends OrderHistoryBasicInfoDto {
   const factory _OrderHistoryBasicInfoDto(
-          {@JsonKey(name: 'SoldTo') required final String soldTo,
-          @JsonKey(name: 'ShipTo') required final String shipTo,
-          @JsonKey(name: 'CompanyName') required final String companyName,
-          @JsonKey(name: 'PaymentTerm')
+          {@JsonKey(name: 'soldTo') required final String soldTo,
+          @JsonKey(name: 'shipTo') required final String shipTo,
+          @JsonKey(name: 'companyName') required final String companyName,
+          @JsonKey(name: 'paymentTerm')
           required final PaymentTermDto paymentTerm}) =
       _$OrderHistoryBasicInfoDtoImpl;
   const _OrderHistoryBasicInfoDto._() : super._();
@@ -235,193 +235,19 @@ abstract class _OrderHistoryBasicInfoDto extends OrderHistoryBasicInfoDto {
       _$OrderHistoryBasicInfoDtoImpl.fromJson;
 
   @override
-  @JsonKey(name: 'SoldTo')
+  @JsonKey(name: 'soldTo')
   String get soldTo;
   @override
-  @JsonKey(name: 'ShipTo')
+  @JsonKey(name: 'shipTo')
   String get shipTo;
   @override
-  @JsonKey(name: 'CompanyName')
+  @JsonKey(name: 'companyName')
   String get companyName;
   @override
-  @JsonKey(name: 'PaymentTerm')
+  @JsonKey(name: 'paymentTerm')
   PaymentTermDto get paymentTerm;
   @override
   @JsonKey(ignore: true)
   _$$OrderHistoryBasicInfoDtoImplCopyWith<_$OrderHistoryBasicInfoDtoImpl>
       get copyWith => throw _privateConstructorUsedError;
-}
-
-PaymentTermDto _$PaymentTermDtoFromJson(Map<String, dynamic> json) {
-  return _PaymentTermDto.fromJson(json);
-}
-
-/// @nodoc
-mixin _$PaymentTermDto {
-  @JsonKey(name: 'PaymentTermCode')
-  String get paymentTermCode => throw _privateConstructorUsedError;
-  @JsonKey(name: 'PaymentTermDescription')
-  String get paymentTermDescription => throw _privateConstructorUsedError;
-
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
-  $PaymentTermDtoCopyWith<PaymentTermDto> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $PaymentTermDtoCopyWith<$Res> {
-  factory $PaymentTermDtoCopyWith(
-          PaymentTermDto value, $Res Function(PaymentTermDto) then) =
-      _$PaymentTermDtoCopyWithImpl<$Res, PaymentTermDto>;
-  @useResult
-  $Res call(
-      {@JsonKey(name: 'PaymentTermCode') String paymentTermCode,
-      @JsonKey(name: 'PaymentTermDescription') String paymentTermDescription});
-}
-
-/// @nodoc
-class _$PaymentTermDtoCopyWithImpl<$Res, $Val extends PaymentTermDto>
-    implements $PaymentTermDtoCopyWith<$Res> {
-  _$PaymentTermDtoCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? paymentTermCode = null,
-    Object? paymentTermDescription = null,
-  }) {
-    return _then(_value.copyWith(
-      paymentTermCode: null == paymentTermCode
-          ? _value.paymentTermCode
-          : paymentTermCode // ignore: cast_nullable_to_non_nullable
-              as String,
-      paymentTermDescription: null == paymentTermDescription
-          ? _value.paymentTermDescription
-          : paymentTermDescription // ignore: cast_nullable_to_non_nullable
-              as String,
-    ) as $Val);
-  }
-}
-
-/// @nodoc
-abstract class _$$PaymentTermDtoImplCopyWith<$Res>
-    implements $PaymentTermDtoCopyWith<$Res> {
-  factory _$$PaymentTermDtoImplCopyWith(_$PaymentTermDtoImpl value,
-          $Res Function(_$PaymentTermDtoImpl) then) =
-      __$$PaymentTermDtoImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call(
-      {@JsonKey(name: 'PaymentTermCode') String paymentTermCode,
-      @JsonKey(name: 'PaymentTermDescription') String paymentTermDescription});
-}
-
-/// @nodoc
-class __$$PaymentTermDtoImplCopyWithImpl<$Res>
-    extends _$PaymentTermDtoCopyWithImpl<$Res, _$PaymentTermDtoImpl>
-    implements _$$PaymentTermDtoImplCopyWith<$Res> {
-  __$$PaymentTermDtoImplCopyWithImpl(
-      _$PaymentTermDtoImpl _value, $Res Function(_$PaymentTermDtoImpl) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? paymentTermCode = null,
-    Object? paymentTermDescription = null,
-  }) {
-    return _then(_$PaymentTermDtoImpl(
-      paymentTermCode: null == paymentTermCode
-          ? _value.paymentTermCode
-          : paymentTermCode // ignore: cast_nullable_to_non_nullable
-              as String,
-      paymentTermDescription: null == paymentTermDescription
-          ? _value.paymentTermDescription
-          : paymentTermDescription // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
-}
-
-/// @nodoc
-@JsonSerializable()
-class _$PaymentTermDtoImpl extends _PaymentTermDto {
-  const _$PaymentTermDtoImpl(
-      {@JsonKey(name: 'PaymentTermCode') required this.paymentTermCode,
-      @JsonKey(name: 'PaymentTermDescription')
-      required this.paymentTermDescription})
-      : super._();
-
-  factory _$PaymentTermDtoImpl.fromJson(Map<String, dynamic> json) =>
-      _$$PaymentTermDtoImplFromJson(json);
-
-  @override
-  @JsonKey(name: 'PaymentTermCode')
-  final String paymentTermCode;
-  @override
-  @JsonKey(name: 'PaymentTermDescription')
-  final String paymentTermDescription;
-
-  @override
-  String toString() {
-    return 'PaymentTermDto(paymentTermCode: $paymentTermCode, paymentTermDescription: $paymentTermDescription)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$PaymentTermDtoImpl &&
-            (identical(other.paymentTermCode, paymentTermCode) ||
-                other.paymentTermCode == paymentTermCode) &&
-            (identical(other.paymentTermDescription, paymentTermDescription) ||
-                other.paymentTermDescription == paymentTermDescription));
-  }
-
-  @JsonKey(ignore: true)
-  @override
-  int get hashCode =>
-      Object.hash(runtimeType, paymentTermCode, paymentTermDescription);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$PaymentTermDtoImplCopyWith<_$PaymentTermDtoImpl> get copyWith =>
-      __$$PaymentTermDtoImplCopyWithImpl<_$PaymentTermDtoImpl>(
-          this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$PaymentTermDtoImplToJson(
-      this,
-    );
-  }
-}
-
-abstract class _PaymentTermDto extends PaymentTermDto {
-  const factory _PaymentTermDto(
-      {@JsonKey(name: 'PaymentTermCode') required final String paymentTermCode,
-      @JsonKey(name: 'PaymentTermDescription')
-      required final String paymentTermDescription}) = _$PaymentTermDtoImpl;
-  const _PaymentTermDto._() : super._();
-
-  factory _PaymentTermDto.fromJson(Map<String, dynamic> json) =
-      _$PaymentTermDtoImpl.fromJson;
-
-  @override
-  @JsonKey(name: 'PaymentTermCode')
-  String get paymentTermCode;
-  @override
-  @JsonKey(name: 'PaymentTermDescription')
-  String get paymentTermDescription;
-  @override
-  @JsonKey(ignore: true)
-  _$$PaymentTermDtoImplCopyWith<_$PaymentTermDtoImpl> get copyWith =>
-      throw _privateConstructorUsedError;
 }

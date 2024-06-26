@@ -1,4 +1,4 @@
-import 'package:ezrxmobile/domain/returns/entities/return_request_attachment.dart';
+import 'package:ezrxmobile/domain/order/entities/order_history_details_po_documents.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'return_attachment_dto.freezed.dart';
@@ -13,9 +13,9 @@ class ReturnAttachmentDto with _$ReturnAttachmentDto {
     @JsonKey(name: 'fileUrl', defaultValue: '') required String fileUrl,
   }) = _ReturnAttachmentDto;
 
-  ReturnRequestAttachment toDomain() {
-    return ReturnRequestAttachment.empty().copyWith(
-      path: fileUrl,
+  PoDocuments toDomain() {
+    return PoDocuments.empty().copyWith(
+      url: fileUrl,
       name: fileName,
     );
   }

@@ -5,7 +5,7 @@ import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
 import 'package:ezrxmobile/domain/order/entities/request_counter_offer_details.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
-import 'package:ezrxmobile/infrastructure/core/common/json_key_converter.dart';
+import 'package:ezrxmobile/infrastructure/core/common/json_key_readvalue_helper.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/bundle_dto.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -41,18 +41,26 @@ class MaterialDto with _$MaterialDto {
     required bool hasValidTenderContract,
     @JsonKey(name: 'hasMandatoryTenderContract', defaultValue: false)
     required bool hasMandatoryTenderContract,
-    @JsonKey(name: 'taxes', readValue: handleTax) required double taxes,
+    @JsonKey(name: 'taxes', readValue: JsonReadValueHelper.handleTax)
+    required double taxes,
     @JsonKey(name: 'defaultMaterialDescription', defaultValue: '')
     required String defaultMaterialDescription,
     @JsonKey(name: 'isFOCMaterial', defaultValue: false)
     required bool isFOCMaterial,
-    @JsonKey(name: 'quantity', defaultValue: 0, readValue: _validateQantity)
+    @JsonKey(
+      name: 'quantity',
+      defaultValue: 0,
+      readValue: JsonReadValueHelper.handlevalidateQuantity,
+    )
     required int quantity,
     @JsonKey(name: 'remarks', defaultValue: '') required String remarks,
     @JsonKey(name: 'genericMaterialName', defaultValue: '')
     required String genericMaterialName,
     @JsonKey(name: 'ean', defaultValue: '') required String ean,
-    @JsonKey(name: 'bundleInformation', readValue: _nullCheck)
+    @JsonKey(
+      name: 'bundleInformation',
+      readValue: JsonReadValueHelper.readValueMapDynamic,
+    )
     required BundleDto bundle,
 
     // new field from v3
@@ -94,7 +102,10 @@ class MaterialDto with _$MaterialDto {
     required List<BundleDto> bundles,
     @JsonKey(name: 'suspensionStatus', defaultValue: false)
     required bool isSuspended,
-    @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+    @JsonKey(
+      defaultValue: false,
+      readValue: JsonReadValueHelper.mappingIsMarketPlace,
+    )
     required bool isMarketPlace,
   }) = _MaterialDto;
 
@@ -159,8 +170,8 @@ class MaterialDto with _$MaterialDto {
       taxClassification: MaterialTaxClassification(taxClassification),
       itemRegistrationNumber: ItemRegistrationNumber(itemRegistrationNumber),
       unitOfMeasurement: StringValue(unitOfMeasurement),
-      materialGroup2: MaterialGroup.two(materialGroup2),
-      materialGroup4: MaterialGroup.four(materialGroup4),
+      materialGroup2: MaterialGroup(materialGroup2),
+      materialGroup4: MaterialGroup(materialGroup4),
       isSampleMaterial: isSampleMaterial,
       hidePrice: hidePrice,
       hasValidTenderContract: hasValidTenderContract,
@@ -209,22 +220,16 @@ class MaterialDto with _$MaterialDto {
       _$MaterialDtoFromJson(json);
 }
 
-int _validateQantity(Map json, String key) {
-  return (json[key] ?? 0) > 0
-      ? json[key]
-      : (json['qty'] ?? 0) > 0
-          ? json['qty']
-          : 0;
-}
-
-Map<String, dynamic> _nullCheck(Map json, String key) => json[key] ?? {};
-
 @freezed
 class MaterialDataDto with _$MaterialDataDto {
   const MaterialDataDto._();
 
   factory MaterialDataDto({
-    @JsonKey(name: 'code', defaultValue: '', readValue: materialNumberReadValue)
+    @JsonKey(
+      name: 'code',
+      defaultValue: '',
+      readValue: JsonReadValueHelper.readMaterialNumberValue,
+    )
     required String code,
     @JsonKey(name: 'manufactured', defaultValue: '')
     required String manufactured,
@@ -238,7 +243,10 @@ class MaterialDataDto with _$MaterialDataDto {
     required String governmentMaterialCode,
     @JsonKey(name: 'itemRegistrationNumber', defaultValue: '')
     required String itemRegistrationNumber,
-    @JsonKey(defaultValue: false, readValue: mappingIsMarketPlace)
+    @JsonKey(
+      defaultValue: false,
+      readValue: JsonReadValueHelper.mappingIsMarketPlace,
+    )
     required bool isMarketPlace,
   }) = _MaterialDataDto;
 
@@ -273,9 +281,6 @@ class MaterialDataDto with _$MaterialDataDto {
 
   ProductImages toProductImage() => ProductImages.empty();
 }
-
-String materialNumberReadValue(Map json, String key) =>
-    json[key] ?? json['materialCode'];
 
 @freezed
 class MaterialResponseDto with _$MaterialResponseDto {

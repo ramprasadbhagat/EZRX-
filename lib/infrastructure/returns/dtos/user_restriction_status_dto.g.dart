@@ -9,12 +9,12 @@ part of 'user_restriction_status_dto.dart';
 _$UserRestrictionStatusDtoImpl _$$UserRestrictionStatusDtoImplFromJson(
         Map<String, dynamic> json) =>
     _$UserRestrictionStatusDtoImpl(
-      userRestrictionStatus:
-          _userRestrictionOverride(json, 'approverRightStatus') as String? ??
-              '',
+      userRestrictionStatus: JsonReadValueHelper.readUserRestrictionOverride(
+              json, 'approverRightStatus') as String? ??
+          '',
       userReturnApprovalLimit:
-          _userReturnApprovalLimitOverride(json, 'approvalLimitStatus')
-                  as bool? ??
+          JsonReadValueHelper.readUserReturnApprovalLimitOverride(
+                  json, 'approvalLimitStatus') as bool? ??
               false,
     );
 

@@ -20,10 +20,10 @@ OrderHistoryDto _$OrderHistoryDtoFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$OrderHistoryDto {
-  @JsonKey(name: 'OrderBasicInformation')
+  @JsonKey(name: 'orderBasicInformation')
   OrderHistoryBasicInfoDto get orderBasicInformation =>
       throw _privateConstructorUsedError;
-  @JsonKey(name: 'OrderItems')
+  @JsonKey(name: 'orderItems')
   List<OrderHistoryItemDto> get orderItems =>
       throw _privateConstructorUsedError;
 
@@ -40,9 +40,9 @@ abstract class $OrderHistoryDtoCopyWith<$Res> {
       _$OrderHistoryDtoCopyWithImpl<$Res, OrderHistoryDto>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'OrderBasicInformation')
+      {@JsonKey(name: 'orderBasicInformation')
       OrderHistoryBasicInfoDto orderBasicInformation,
-      @JsonKey(name: 'OrderItems') List<OrderHistoryItemDto> orderItems});
+      @JsonKey(name: 'orderItems') List<OrderHistoryItemDto> orderItems});
 
   $OrderHistoryBasicInfoDtoCopyWith<$Res> get orderBasicInformation;
 }
@@ -94,9 +94,9 @@ abstract class _$$OrderHistoryDtoImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'OrderBasicInformation')
+      {@JsonKey(name: 'orderBasicInformation')
       OrderHistoryBasicInfoDto orderBasicInformation,
-      @JsonKey(name: 'OrderItems') List<OrderHistoryItemDto> orderItems});
+      @JsonKey(name: 'orderItems') List<OrderHistoryItemDto> orderItems});
 
   @override
   $OrderHistoryBasicInfoDtoCopyWith<$Res> get orderBasicInformation;
@@ -133,9 +133,9 @@ class __$$OrderHistoryDtoImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$OrderHistoryDtoImpl extends _OrderHistoryDto {
   const _$OrderHistoryDtoImpl(
-      {@JsonKey(name: 'OrderBasicInformation')
+      {@JsonKey(name: 'orderBasicInformation')
       required this.orderBasicInformation,
-      @JsonKey(name: 'OrderItems')
+      @JsonKey(name: 'orderItems')
       required final List<OrderHistoryItemDto> orderItems})
       : _orderItems = orderItems,
         super._();
@@ -144,11 +144,11 @@ class _$OrderHistoryDtoImpl extends _OrderHistoryDto {
       _$$OrderHistoryDtoImplFromJson(json);
 
   @override
-  @JsonKey(name: 'OrderBasicInformation')
+  @JsonKey(name: 'orderBasicInformation')
   final OrderHistoryBasicInfoDto orderBasicInformation;
   final List<OrderHistoryItemDto> _orderItems;
   @override
-  @JsonKey(name: 'OrderItems')
+  @JsonKey(name: 'orderItems')
   List<OrderHistoryItemDto> get orderItems {
     if (_orderItems is EqualUnmodifiableListView) return _orderItems;
     // ignore: implicit_dynamic_type
@@ -193,9 +193,9 @@ class _$OrderHistoryDtoImpl extends _OrderHistoryDto {
 
 abstract class _OrderHistoryDto extends OrderHistoryDto {
   const factory _OrderHistoryDto(
-          {@JsonKey(name: 'OrderBasicInformation')
+          {@JsonKey(name: 'orderBasicInformation')
           required final OrderHistoryBasicInfoDto orderBasicInformation,
-          @JsonKey(name: 'OrderItems')
+          @JsonKey(name: 'orderItems')
           required final List<OrderHistoryItemDto> orderItems}) =
       _$OrderHistoryDtoImpl;
   const _OrderHistoryDto._() : super._();
@@ -204,10 +204,10 @@ abstract class _OrderHistoryDto extends OrderHistoryDto {
       _$OrderHistoryDtoImpl.fromJson;
 
   @override
-  @JsonKey(name: 'OrderBasicInformation')
+  @JsonKey(name: 'orderBasicInformation')
   OrderHistoryBasicInfoDto get orderBasicInformation;
   @override
-  @JsonKey(name: 'OrderItems')
+  @JsonKey(name: 'orderItems')
   List<OrderHistoryItemDto> get orderItems;
   @override
   @JsonKey(ignore: true)

@@ -28,7 +28,7 @@ class NewRequestEvent with _$NewRequestEvent {
 
   const factory NewRequestEvent.toggleFiles({
     required String uuid,
-    required List<ReturnRequestAttachment> files,
+    required List<PoDocuments> files,
     required bool included,
   }) = _ToggleFiles;
 

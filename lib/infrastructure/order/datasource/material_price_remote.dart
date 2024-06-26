@@ -53,7 +53,7 @@ class MaterialPriceRemoteDataSource {
           'variables': variables,
         }),
       );
-      _materialPriceExceptionChecker(res: res);
+      dataSourceExceptionHandler.handleExceptionChecker(res: res);
       final priceData = res.data['data']['price'];
 
       return List.from(makeResponseCamelCase(jsonEncode(priceData)))
@@ -89,7 +89,7 @@ class MaterialPriceRemoteDataSource {
           'variables': variables,
         }),
       );
-      _materialPriceExceptionChecker(res: res);
+      dataSourceExceptionHandler.handleExceptionChecker(res: res);
       final priceData = res.data['data']['price'][0];
 
       return PriceDto.fromJson(makeResponseCamelCase(jsonEncode(priceData)))
@@ -124,7 +124,7 @@ class MaterialPriceRemoteDataSource {
           'variables': variables,
         }),
       );
-      _materialPriceExceptionChecker(res: res);
+      dataSourceExceptionHandler.handleExceptionChecker(res: res);
 
       if (res.data['data']['price']?.isEmpty ?? true) {
         return Price.empty();
@@ -136,14 +136,47 @@ class MaterialPriceRemoteDataSource {
     });
   }
 
-  void _materialPriceExceptionChecker({required Response<dynamic> res}) {
-    if (dataSourceExceptionHandler.isServerResponseError(res: res)) {
-      throw ServerException(message: res.data['errors'][0]['message']);
-    } else if (res.statusCode != 200) {
-      throw ServerException(
-        code: res.statusCode ?? 0,
-        message: res.statusMessage ?? '',
+  Future<List<Price>> getMaterialOverridePriceList({
+    required String salesOrgCode,
+    required String customerCode,
+    required Map<String, dynamic> materialQuery,
+    required String shipToCode,
+  }) async {
+    return await dataSourceExceptionHandler.handle(() async {
+      final queryData = queryMutation.getMaterialPrice();
+      final variables = {
+        'salesOrganisation': salesOrgCode,
+        'customer': customerCode,
+        'request': [materialQuery],
+        'shipToCode': shipToCode,
+      };
+
+      final res = await httpService.request(
+        method: 'POST',
+        url: '${config.urlConstants}pricing',
+        data: jsonEncode({
+          'query': queryData,
+          'variables': variables,
+        }),
       );
+      dataSourceExceptionHandler.handleExceptionChecker(
+        res: res,
+        onCustomExceptionHandler: _materialPriceExceptionChecker,
+      );
+
+      final priceData = res.data['data']['price'];
+
+      return List.from(makeResponseCamelCase(jsonEncode(priceData)))
+          .map((e) => PriceDto.fromJson(e).toDomain())
+          .toList();
+    });
+  }
+
+  void _materialPriceExceptionChecker(Response<dynamic> res) {
+    if (res.data['data'] != null && res.data['data'].isNotEmpty) {
+      if (List.from(res.data['data']?['price'] ?? []).isEmpty) {
+        throw ServerException(message: 'Error on fetch Price');
+      }
     }
   }
 }

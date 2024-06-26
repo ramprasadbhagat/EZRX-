@@ -24,7 +24,10 @@ mixin _$PaymentDetailsDto {
   String get vaNumber => throw _privateConstructorUsedError;
   @JsonKey(name: 'vaName', defaultValue: '')
   String get vaName => throw _privateConstructorUsedError;
-  @JsonKey(name: 'expiresAt', defaultValue: '', readValue: expiresAtDate)
+  @JsonKey(
+      name: 'expiresAt',
+      defaultValue: '',
+      readValue: JsonReadValueHelper.createdAtDate)
   String get expiresAt => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -42,7 +45,10 @@ abstract class $PaymentDetailsDtoCopyWith<$Res> {
   $Res call(
       {@JsonKey(name: 'vaNumber', defaultValue: '') String vaNumber,
       @JsonKey(name: 'vaName', defaultValue: '') String vaName,
-      @JsonKey(name: 'expiresAt', defaultValue: '', readValue: expiresAtDate)
+      @JsonKey(
+          name: 'expiresAt',
+          defaultValue: '',
+          readValue: JsonReadValueHelper.createdAtDate)
       String expiresAt});
 }
 
@@ -91,7 +97,10 @@ abstract class _$$PaymentDetailsDtoImplCopyWith<$Res>
   $Res call(
       {@JsonKey(name: 'vaNumber', defaultValue: '') String vaNumber,
       @JsonKey(name: 'vaName', defaultValue: '') String vaName,
-      @JsonKey(name: 'expiresAt', defaultValue: '', readValue: expiresAtDate)
+      @JsonKey(
+          name: 'expiresAt',
+          defaultValue: '',
+          readValue: JsonReadValueHelper.createdAtDate)
       String expiresAt});
 }
 
@@ -133,7 +142,10 @@ class _$PaymentDetailsDtoImpl extends _PaymentDetailsDto {
   const _$PaymentDetailsDtoImpl(
       {@JsonKey(name: 'vaNumber', defaultValue: '') required this.vaNumber,
       @JsonKey(name: 'vaName', defaultValue: '') required this.vaName,
-      @JsonKey(name: 'expiresAt', defaultValue: '', readValue: expiresAtDate)
+      @JsonKey(
+          name: 'expiresAt',
+          defaultValue: '',
+          readValue: JsonReadValueHelper.createdAtDate)
       required this.expiresAt})
       : super._();
 
@@ -147,7 +159,10 @@ class _$PaymentDetailsDtoImpl extends _PaymentDetailsDto {
   @JsonKey(name: 'vaName', defaultValue: '')
   final String vaName;
   @override
-  @JsonKey(name: 'expiresAt', defaultValue: '', readValue: expiresAtDate)
+  @JsonKey(
+      name: 'expiresAt',
+      defaultValue: '',
+      readValue: JsonReadValueHelper.createdAtDate)
   final String expiresAt;
 
   @override
@@ -191,7 +206,10 @@ abstract class _PaymentDetailsDto extends PaymentDetailsDto {
       {@JsonKey(name: 'vaNumber', defaultValue: '')
       required final String vaNumber,
       @JsonKey(name: 'vaName', defaultValue: '') required final String vaName,
-      @JsonKey(name: 'expiresAt', defaultValue: '', readValue: expiresAtDate)
+      @JsonKey(
+          name: 'expiresAt',
+          defaultValue: '',
+          readValue: JsonReadValueHelper.createdAtDate)
       required final String expiresAt}) = _$PaymentDetailsDtoImpl;
   const _PaymentDetailsDto._() : super._();
 
@@ -205,7 +223,10 @@ abstract class _PaymentDetailsDto extends PaymentDetailsDto {
   @JsonKey(name: 'vaName', defaultValue: '')
   String get vaName;
   @override
-  @JsonKey(name: 'expiresAt', defaultValue: '', readValue: expiresAtDate)
+  @JsonKey(
+      name: 'expiresAt',
+      defaultValue: '',
+      readValue: JsonReadValueHelper.createdAtDate)
   String get expiresAt;
   @override
   @JsonKey(ignore: true)

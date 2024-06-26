@@ -345,4 +345,170 @@ void main() {
       });
     },
   );
+
+  group(
+    'Discount Override',
+    () {
+      test(
+        'Get Material Override Price List',
+        () async {
+          final variables = {
+            'salesOrganisation': '',
+            'customer': '',
+            'request': [{}],
+            'shipToCode': '',
+          };
+          final res = json.decode(
+            await rootBundle
+                .loadString('assets/json/getMaterialPriceResponse.json'),
+          );
+
+          final finalData = res['data']['price'];
+
+          dioAdapter.onPost(
+            '/api/pricing',
+            (server) => server.reply(
+              200,
+              res,
+              delay: const Duration(seconds: 1),
+            ),
+            headers: {'Content-Type': 'application/json; charset=utf-8'},
+            data: jsonEncode({
+              'query': remoteDataSource.queryMutation.getMaterialPrice(),
+              'variables': variables,
+            }),
+          );
+
+          final result = await remoteDataSource.getMaterialOverridePriceList(
+            customerCode: '',
+            materialQuery: {},
+            salesOrgCode: '',
+            shipToCode: '',
+          );
+
+          expect(
+            result,
+            List.from(makeResponseCamelCase(jsonEncode(finalData)))
+                .map((e) => PriceDto.fromJson(e).toDomain())
+                .toList(),
+          );
+        },
+      );
+
+      test(
+        'Status not 200',
+        () async {
+          dioAdapter.onPost(
+            '/api/pricing',
+            (server) => server.reply(
+              204,
+              {'data': []},
+              delay: const Duration(seconds: 1),
+            ),
+            headers: {'Content-Type': 'application/json; charset=utf-8'},
+            data: jsonEncode({
+              'query': remoteDataSource.queryMutation.getMaterialPrice(),
+              'variables': {
+                'salesOrganisation': '',
+                'customer': '',
+                'request': [{}],
+                'shipToCode': '',
+              },
+            }),
+          );
+
+          await remoteDataSource
+              .getMaterialOverridePriceList(
+            customerCode: '',
+            materialQuery: {},
+            salesOrgCode: '',
+            shipToCode: '',
+          )
+              .onError((error, _) async {
+            expect(error, isA<ServerException>());
+            return Future.value(<MockPrice>[]);
+          });
+        },
+      );
+
+      test(
+        'response with error',
+        () async {
+          dioAdapter.onPost(
+            '/api/pricing',
+            (server) => server.reply(
+              200,
+              {
+                'data': null,
+                'errors': [
+                  {'message': 'fake-error'},
+                ],
+              },
+              delay: const Duration(seconds: 1),
+            ),
+            headers: {'Content-Type': 'application/json; charset=utf-8'},
+            data: jsonEncode({
+              'query': remoteDataSource.queryMutation.getMaterialPrice(),
+              'variables': {
+                'salesOrganisation': '',
+                'customer': '',
+                'request': [{}],
+                'shipToCode': '',
+              },
+            }),
+          );
+
+          await remoteDataSource
+              .getMaterialOverridePriceList(
+            customerCode: '',
+            materialQuery: {},
+            salesOrgCode: '',
+            shipToCode: '',
+          )
+              .onError((error, _) async {
+            expect(error, isA<ServerException>());
+            return Future.value(<MockPrice>[]);
+          });
+        },
+      );
+
+      test(
+        'List Empty',
+        () async {
+          dioAdapter.onPost(
+            '/api/pricing',
+            (server) => server.reply(
+              200,
+              {
+                'data': {'price': []},
+              },
+              delay: const Duration(seconds: 1),
+            ),
+            headers: {'Content-Type': 'application/json; charset=utf-8'},
+            data: jsonEncode({
+              'query': remoteDataSource.queryMutation.getMaterialPrice(),
+              'variables': {
+                'salesOrganisation': '',
+                'customer': '',
+                'request': [{}],
+                'shipToCode': '',
+              },
+            }),
+          );
+
+          await remoteDataSource
+              .getMaterialOverridePriceList(
+            customerCode: '',
+            materialQuery: {},
+            salesOrgCode: '',
+            shipToCode: '',
+          )
+              .onError((error, _) async {
+            expect(error, isA<ServerException>());
+            return Future.value(<MockPrice>[]);
+          });
+        },
+      );
+    },
+  );
 }

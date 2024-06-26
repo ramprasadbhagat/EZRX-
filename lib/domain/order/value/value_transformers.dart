@@ -233,6 +233,8 @@ List<OrderHistoryStep> getOrderHistorySteps({
   return result.reversed.toList();
 }
 
+//We're separate with paymentStatus on core value object so we're ignore this
+//ignore: code-duplication
 String getOrderSAPStatus(String status) {
   switch (status.toLowerCase()) {
     case 'order creating':

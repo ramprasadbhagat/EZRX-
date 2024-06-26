@@ -8,7 +8,9 @@ part of 'faq_info_dto.dart';
 
 _$FAQInfoDtoImpl _$$FAQInfoDtoImplFromJson(Map<String, dynamic> json) =>
     _$FAQInfoDtoImpl(
-      endCursor: getEndCursorValue(json, 'pageInfo') as String? ?? '',
+      endCursor:
+          JsonReadValueHelper.readEndCursorValue(json, 'pageInfo') as String? ??
+              '',
       faqList: (json['results'] as List<dynamic>?)
               ?.map((e) => FAQItemDto.fromJson(e as Map<String, dynamic>))
               .toList() ??

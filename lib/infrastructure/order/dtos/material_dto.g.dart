@@ -21,16 +21,20 @@ _$MaterialDtoImpl _$$MaterialDtoImplFromJson(Map<String, dynamic> json) =>
       hasValidTenderContract: json['hasValidTenderContract'] as bool? ?? false,
       hasMandatoryTenderContract:
           json['hasMandatoryTenderContract'] as bool? ?? false,
-      taxes: (handleTax(json, 'taxes') as num).toDouble(),
+      taxes: (JsonReadValueHelper.handleTax(json, 'taxes') as num).toDouble(),
       defaultMaterialDescription:
           json['defaultMaterialDescription'] as String? ?? '',
       isFOCMaterial: json['isFOCMaterial'] as bool? ?? false,
-      quantity: (_validateQantity(json, 'quantity') as num?)?.toInt() ?? 0,
+      quantity:
+          (JsonReadValueHelper.handlevalidateQuantity(json, 'quantity') as num?)
+                  ?.toInt() ??
+              0,
       remarks: json['remarks'] as String? ?? '',
       genericMaterialName: json['genericMaterialName'] as String? ?? '',
       ean: json['ean'] as String? ?? '',
       bundle: BundleDto.fromJson(
-          _nullCheck(json, 'bundleInformation') as Map<String, dynamic>),
+          JsonReadValueHelper.readValueMapDynamic(json, 'bundleInformation')
+              as Map<String, dynamic>),
       code: json['code'] as String? ?? '',
       name: json['name'] as String? ?? '',
       principalCode: json['principalCode'] as String? ?? '',
@@ -53,7 +57,9 @@ _$MaterialDtoImpl _$$MaterialDtoImplFromJson(Map<String, dynamic> json) =>
           [],
       isSuspended: json['suspensionStatus'] as bool? ?? false,
       isMarketPlace:
-          mappingIsMarketPlace(json, 'isMarketPlace') as bool? ?? false,
+          JsonReadValueHelper.mappingIsMarketPlace(json, 'isMarketPlace')
+                  as bool? ??
+              false,
     );
 
 Map<String, dynamic> _$$MaterialDtoImplToJson(_$MaterialDtoImpl instance) =>
@@ -99,7 +105,9 @@ Map<String, dynamic> _$$MaterialDtoImplToJson(_$MaterialDtoImpl instance) =>
 _$MaterialDataDtoImpl _$$MaterialDataDtoImplFromJson(
         Map<String, dynamic> json) =>
     _$MaterialDataDtoImpl(
-      code: materialNumberReadValue(json, 'code') as String? ?? '',
+      code: JsonReadValueHelper.readMaterialNumberValue(json, 'code')
+              as String? ??
+          '',
       manufactured: json['manufactured'] as String? ?? '',
       materialDescription: json['materialDescription'] as String? ?? '',
       defaultMaterialDescription:
@@ -108,7 +116,9 @@ _$MaterialDataDtoImpl _$$MaterialDataDtoImplFromJson(
       governmentMaterialCode: json['governmentMaterialCode'] as String? ?? '',
       itemRegistrationNumber: json['itemRegistrationNumber'] as String? ?? '',
       isMarketPlace:
-          mappingIsMarketPlace(json, 'isMarketPlace') as bool? ?? false,
+          JsonReadValueHelper.mappingIsMarketPlace(json, 'isMarketPlace')
+                  as bool? ??
+              false,
     );
 
 Map<String, dynamic> _$$MaterialDataDtoImplToJson(

@@ -45,7 +45,9 @@ void main() {
           UserRestrictionStatusDto.fromJson(jsonResult).toDomain();
 
       final resultFromDataSource =
-          await UserRestrictionLocalDataSource().addApprovalLimit();
+          await UserRestrictionLocalDataSource().getUserRestrictionStatus(
+        type: UserRestrictionType.addApprovalLimit,
+      );
 
       expect(resultFromDataSource, expectedResult);
     });
@@ -59,7 +61,7 @@ void main() {
           UserRestrictionStatusDto.fromJson(jsonResult).toDomain();
 
       final resultFromDataSource =
-          await UserRestrictionLocalDataSource().configureUserRestriction();
+          await UserRestrictionLocalDataSource().getUserRestrictionStatus();
 
       expect(resultFromDataSource, expectedResult);
     });
@@ -73,7 +75,9 @@ void main() {
           UserRestrictionStatusDto.fromJson(jsonResult).toDomain();
 
       final resultFromDataSource =
-          await UserRestrictionLocalDataSource().deleteApprovalRights();
+          await UserRestrictionLocalDataSource().getUserRestrictionStatus(
+        type: UserRestrictionType.deleteApprovalRight,
+      );
 
       expect(resultFromDataSource, expectedResult);
     });
@@ -87,7 +91,9 @@ void main() {
           UserRestrictionStatusDto.fromJson(jsonResult).toDomain();
 
       final resultFromDataSource =
-          await UserRestrictionLocalDataSource().deleteApprovalLimit();
+          await UserRestrictionLocalDataSource().getUserRestrictionStatus(
+        type: UserRestrictionType.deleteApprovalLimit,
+      );
 
       expect(resultFromDataSource, expectedResult);
     });

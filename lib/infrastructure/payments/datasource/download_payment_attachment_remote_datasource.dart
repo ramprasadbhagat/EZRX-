@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:ezrxmobile/config.dart';
-import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 
@@ -60,7 +59,7 @@ class DownloadPaymentAttachmentRemoteDataSource {
         },
       ),
     );
-    _approverReturnRequestInformationExceptionChecker(res: res);
+    dataSourceExceptionHandler.handleExceptionChecker(res: res);
     final data = res.data['data']['customerDocumentHeaderExcel'];
 
     return DownloadPaymentAttachmentDto.fromJson(data).toDomain();
@@ -91,7 +90,7 @@ class DownloadPaymentAttachmentRemoteDataSource {
         },
       ),
     );
-    _approverReturnRequestInformationExceptionChecker(res: res);
+    dataSourceExceptionHandler.handleExceptionChecker(res: res);
     final data = res.data['data']['customerPaymentExcel'];
 
     return DownloadPaymentAttachmentDto.fromJson(data).toDomain();
@@ -107,7 +106,10 @@ class DownloadPaymentAttachmentRemoteDataSource {
         data: {'url': fileUrl},
         responseType: ResponseType.bytes,
       );
-      _fileDownloadExceptionChecker(res: res);
+      dataSourceExceptionHandler.handleExceptionChecker(
+        res: res,
+        additionalCondition: res.data is List && res.data.isEmpty,
+      );
 
       return AttachmentFileBuffer(
         name: Uri.parse(fileUrl).pathSegments.last,
@@ -126,7 +128,7 @@ class DownloadPaymentAttachmentRemoteDataSource {
         {'ecn_number': eCreditNumber},
       ),
     );
-    _approverReturnRequestInformationExceptionChecker(res: res);
+    dataSourceExceptionHandler.handleExceptionChecker(res: res);
 
     if (res.data['data'] == null || res.data['data'].isEmpty) {
       return DownloadPaymentAttachment.empty();
@@ -145,7 +147,10 @@ class DownloadPaymentAttachmentRemoteDataSource {
         data: {'url': fileUrl},
         responseType: ResponseType.bytes,
       );
-      _fileDownloadExceptionChecker(res: res);
+       dataSourceExceptionHandler.handleExceptionChecker(
+        res: res,
+        additionalCondition: res.data is List && res.data.isEmpty,
+      );
 
       return AttachmentFileBuffer(
         name: Uri.parse(fileUrl).pathSegments.last,
@@ -164,36 +169,15 @@ class DownloadPaymentAttachmentRemoteDataSource {
         data: {'url': fileUrl},
         responseType: ResponseType.bytes,
       );
-      _fileDownloadExceptionChecker(res: res);
+      dataSourceExceptionHandler.handleExceptionChecker(
+        res: res,
+        additionalCondition: res.data is List && res.data.isEmpty,
+      );
 
       return AttachmentFileBuffer(
         name: Uri.parse(fileUrl).pathSegments.last,
         buffer: res.data,
       );
     });
-  }
-
-  void _approverReturnRequestInformationExceptionChecker({
-    required Response<dynamic> res,
-  }) {
-    if (dataSourceExceptionHandler.isServerResponseError(res: res)) {
-      throw ServerException(message: res.data['errors'][0]['message']);
-    } else if (res.statusCode != 200) {
-      throw ServerException(
-        code: res.statusCode ?? 0,
-        message: res.statusMessage ?? '',
-      );
-    }
-  }
-
-  void _fileDownloadExceptionChecker({required Response<dynamic> res}) {
-    if (res.data is List && res.data.isEmpty) {
-      throw ServerException(message: res.data['errors'][0]['message']);
-    } else if (res.statusCode != 200) {
-      throw ServerException(
-        code: res.statusCode ?? 0,
-        message: res.statusMessage ?? '',
-      );
-    }
   }
 }

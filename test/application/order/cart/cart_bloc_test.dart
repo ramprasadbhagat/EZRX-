@@ -188,7 +188,9 @@ void main() {
     cartProducts = await CartLocalDataSource().getAddedToCartProductList();
 
     comboUpdateCartProductList = [
-      (await CartLocalDataSource().upsertCartItemsWithComboOffers()).last,
+      (await CartLocalDataSource()
+              .upsertCart(type: UpsertCartLocalType.upsertCartItemsComboOffer))
+          .last,
     ];
 
     comboMaterialItem = comboUpdateCartProductList.first.comboMaterials.last;
@@ -4374,7 +4376,7 @@ void main() {
                 )
                 .toList(),
           );
-          expect(cartBlocState.zmgMaterialsQty(MaterialGroup.two('')), 0);
+          expect(cartBlocState.zmgMaterialsQty(MaterialGroup('')), 0);
         },
       );
 

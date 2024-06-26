@@ -24,12 +24,12 @@ mixin _$UserRestrictionStatusDto {
   @JsonKey(
       name: 'approverRightStatus',
       defaultValue: '',
-      readValue: _userRestrictionOverride)
+      readValue: JsonReadValueHelper.readUserRestrictionOverride)
   String get userRestrictionStatus => throw _privateConstructorUsedError;
   @JsonKey(
       name: 'approvalLimitStatus',
       defaultValue: false,
-      readValue: _userReturnApprovalLimitOverride)
+      readValue: JsonReadValueHelper.readUserReturnApprovalLimitOverride)
   bool get userReturnApprovalLimit => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -48,12 +48,12 @@ abstract class $UserRestrictionStatusDtoCopyWith<$Res> {
       {@JsonKey(
           name: 'approverRightStatus',
           defaultValue: '',
-          readValue: _userRestrictionOverride)
+          readValue: JsonReadValueHelper.readUserRestrictionOverride)
       String userRestrictionStatus,
       @JsonKey(
           name: 'approvalLimitStatus',
           defaultValue: false,
-          readValue: _userReturnApprovalLimitOverride)
+          readValue: JsonReadValueHelper.readUserReturnApprovalLimitOverride)
       bool userReturnApprovalLimit});
 }
 
@@ -100,12 +100,12 @@ abstract class _$$UserRestrictionStatusDtoImplCopyWith<$Res>
       {@JsonKey(
           name: 'approverRightStatus',
           defaultValue: '',
-          readValue: _userRestrictionOverride)
+          readValue: JsonReadValueHelper.readUserRestrictionOverride)
       String userRestrictionStatus,
       @JsonKey(
           name: 'approvalLimitStatus',
           defaultValue: false,
-          readValue: _userReturnApprovalLimitOverride)
+          readValue: JsonReadValueHelper.readUserReturnApprovalLimitOverride)
       bool userReturnApprovalLimit});
 }
 
@@ -145,12 +145,12 @@ class _$UserRestrictionStatusDtoImpl extends _UserRestrictionStatusDto {
       {@JsonKey(
           name: 'approverRightStatus',
           defaultValue: '',
-          readValue: _userRestrictionOverride)
+          readValue: JsonReadValueHelper.readUserRestrictionOverride)
       required this.userRestrictionStatus,
       @JsonKey(
           name: 'approvalLimitStatus',
           defaultValue: false,
-          readValue: _userReturnApprovalLimitOverride)
+          readValue: JsonReadValueHelper.readUserReturnApprovalLimitOverride)
       required this.userReturnApprovalLimit})
       : super._();
 
@@ -161,13 +161,13 @@ class _$UserRestrictionStatusDtoImpl extends _UserRestrictionStatusDto {
   @JsonKey(
       name: 'approverRightStatus',
       defaultValue: '',
-      readValue: _userRestrictionOverride)
+      readValue: JsonReadValueHelper.readUserRestrictionOverride)
   final String userRestrictionStatus;
   @override
   @JsonKey(
       name: 'approvalLimitStatus',
       defaultValue: false,
-      readValue: _userReturnApprovalLimitOverride)
+      readValue: JsonReadValueHelper.readUserReturnApprovalLimitOverride)
   final bool userReturnApprovalLimit;
 
   @override
@@ -209,17 +209,17 @@ class _$UserRestrictionStatusDtoImpl extends _UserRestrictionStatusDto {
 
 abstract class _UserRestrictionStatusDto extends UserRestrictionStatusDto {
   const factory _UserRestrictionStatusDto(
-          {@JsonKey(
-              name: 'approverRightStatus',
-              defaultValue: '',
-              readValue: _userRestrictionOverride)
-          required final String userRestrictionStatus,
-          @JsonKey(
-              name: 'approvalLimitStatus',
-              defaultValue: false,
-              readValue: _userReturnApprovalLimitOverride)
-          required final bool userReturnApprovalLimit}) =
-      _$UserRestrictionStatusDtoImpl;
+      {@JsonKey(
+          name: 'approverRightStatus',
+          defaultValue: '',
+          readValue: JsonReadValueHelper.readUserRestrictionOverride)
+      required final String userRestrictionStatus,
+      @JsonKey(
+          name: 'approvalLimitStatus',
+          defaultValue: false,
+          readValue: JsonReadValueHelper.readUserReturnApprovalLimitOverride)
+      required final bool
+          userReturnApprovalLimit}) = _$UserRestrictionStatusDtoImpl;
   const _UserRestrictionStatusDto._() : super._();
 
   factory _UserRestrictionStatusDto.fromJson(Map<String, dynamic> json) =
@@ -229,13 +229,13 @@ abstract class _UserRestrictionStatusDto extends UserRestrictionStatusDto {
   @JsonKey(
       name: 'approverRightStatus',
       defaultValue: '',
-      readValue: _userRestrictionOverride)
+      readValue: JsonReadValueHelper.readUserRestrictionOverride)
   String get userRestrictionStatus;
   @override
   @JsonKey(
       name: 'approvalLimitStatus',
       defaultValue: false,
-      readValue: _userReturnApprovalLimitOverride)
+      readValue: JsonReadValueHelper.readUserReturnApprovalLimitOverride)
   bool get userReturnApprovalLimit;
   @override
   @JsonKey(ignore: true)

@@ -32,7 +32,9 @@ _$ReturnMaterialDtoImpl _$$ReturnMaterialDtoImplFromJson(
       outsidePolicy: json['outsidePolicy'] as bool? ?? false,
       targetQuantity: json['targetQuantity'] as String? ?? '',
       isMarketPlace:
-          mappingIsMarketPlace(json, 'isMarketPlace') as bool? ?? false,
+          JsonReadValueHelper.mappingIsMarketPlace(json, 'isMarketPlace')
+                  as bool? ??
+              false,
     );
 
 Map<String, dynamic> _$$ReturnMaterialDtoImplToJson(

@@ -64,7 +64,7 @@ void main() async {
             ),
           );
           final finalData = data['data']['upsertCartItems']['EzRxItems'];
-          final result = await localDataSource.upsertCartItemsWithComboOffers();
+          final result = await localDataSource.upsertCart(type: UpsertCartLocalType.upsertCartItemsComboOffer);
 
           expect(
             result,

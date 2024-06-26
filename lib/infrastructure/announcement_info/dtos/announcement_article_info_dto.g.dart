@@ -9,7 +9,9 @@ part of 'announcement_article_info_dto.dart';
 _$AnnouncementArticleInfoDtoImpl _$$AnnouncementArticleInfoDtoImplFromJson(
         Map<String, dynamic> json) =>
     _$AnnouncementArticleInfoDtoImpl(
-      endCursor: getEndCursorValue(json, 'pageInfo') as String? ?? '',
+      endCursor:
+          JsonReadValueHelper.readEndCursorValue(json, 'pageInfo') as String? ??
+              '',
       total: (json['total'] as num?)?.toInt() ?? 0,
       announcementList: (json['results'] as List<dynamic>?)
               ?.map((e) => AnnouncementArticleItemDto.fromJson(
@@ -30,24 +32,29 @@ _$AnnouncementArticleItemDtoImpl _$$AnnouncementArticleItemDtoImplFromJson(
         Map<String, dynamic> json) =>
     _$AnnouncementArticleItemDtoImpl(
       id: json['id'] as String? ?? '',
-      title: getValue(json, 'title') as String,
-      summary: getValue(json, 'summary') as String,
-      thumbnail: getSrcValue(json, 'thumbnail') as String,
-      content: getContent(json, 'content') as String,
-      publishedDate: getDateValue(json, 'publishedDate') as String,
-      releaseDate: getDateValue(json, 'releaseDate') as String,
-      branchInfo: (getBranchNames(json, 'branch') as List<dynamic>)
+      title: JsonReadValueHelper.readValueString(json, 'title') as String,
+      summary: JsonReadValueHelper.readValueString(json, 'summary') as String,
+      thumbnail: JsonReadValueHelper.readSrcValue(json, 'thumbnail') as String,
+      content: JsonReadValueHelper.readValueString(json, 'content') as String,
+      publishedDate:
+          JsonReadValueHelper.readValueDateISO(json, 'publishedDate') as String,
+      releaseDate:
+          JsonReadValueHelper.readValueDateISO(json, 'releaseDate') as String,
+      branchInfo: (JsonReadValueHelper.readValueList(json, 'branch')
+              as List<dynamic>)
           .map((e) => BranchAndIc4InfoDto.fromJson(e as Map<String, dynamic>))
           .toList(),
-      iC4Info: (getIC4Names(json, 'iC4') as List<dynamic>)
+      iC4Info: (JsonReadValueHelper.readValueList(json, 'iC4') as List<dynamic>)
           .map((e) => BranchAndIc4InfoDto.fromJson(e as Map<String, dynamic>))
           .toList(),
-      tag: readTag(json, 'tag') as String,
-      manufacturer: getValue(json, 'manufacturer') as String,
-      documentsList: (getDocumentsList(json, 'documents') as List<dynamic>)
+      tag: JsonReadValueHelper.readTag(json, 'tag') as String,
+      manufacturer:
+          JsonReadValueHelper.readValueString(json, 'manufacturer') as String,
+      documentsList: (JsonReadValueHelper.readDocumentsList(json, 'documents')
+              as List<dynamic>)
           .map((e) => e as String)
           .toList(),
-      pinToTop: readPinToTop(json, 'pinToTop') as bool,
+      pinToTop: JsonReadValueHelper.readPinToTop(json, 'pinToTop') as bool,
     );
 
 Map<String, dynamic> _$$AnnouncementArticleItemDtoImplToJson(

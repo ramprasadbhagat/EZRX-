@@ -1,5 +1,6 @@
 import 'package:ezrxmobile/domain/announcement_info/value/value_objects.dart';
 import 'package:ezrxmobile/domain/contact_us/entities/contact_us_details.dart';
+import 'package:ezrxmobile/infrastructure/core/common/json_key_readvalue_helper.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'contact_us_details_dto.freezed.dart';
@@ -10,12 +11,24 @@ class ContactUsDetailsDto with _$ContactUsDetailsDto {
   const ContactUsDetailsDto._();
 
   const factory ContactUsDetailsDto({
-    @JsonKey(name: 'content', readValue: readValue, defaultValue: '')
-        required String content,
-    @JsonKey(name: 'preloginSendToEmail', readValue: readValue, defaultValue: '')
-        required String preloginSendToEmail,
-    @JsonKey(name: 'postloginSendToEmail', readValue: readValue, defaultValue: '')
-        required String postloginSendToEmail,
+    @JsonKey(
+      name: 'content',
+      readValue: JsonReadValueHelper.readValueString,
+      defaultValue: '',
+    )
+    required String content,
+    @JsonKey(
+      name: 'preloginSendToEmail',
+      readValue: JsonReadValueHelper.readValueString,
+      defaultValue: '',
+    )
+    required String preloginSendToEmail,
+    @JsonKey(
+      name: 'postloginSendToEmail',
+      readValue: JsonReadValueHelper.readValueString,
+      defaultValue: '',
+    )
+    required String postloginSendToEmail,
   }) = _ContactUsDetailsDto;
 
   ContactUsDetails get toDomain => ContactUsDetails(
@@ -27,5 +40,3 @@ class ContactUsDetailsDto with _$ContactUsDetailsDto {
   factory ContactUsDetailsDto.fromJson(Map<String, dynamic> json) =>
       _$ContactUsDetailsDtoFromJson(json);
 }
-
-String readValue(Map json, String key) => json[key]['value'] ?? '';
