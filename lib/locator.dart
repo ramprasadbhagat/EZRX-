@@ -535,18 +535,6 @@ void setupLocator() {
     ),
   );
 
-  locator.registerLazySingleton(
-    () => HttpService(
-      config: locator<Config>(),
-      interceptors: [
-        locator<AuthInterceptor>(),
-        locator<PerformanceInterceptor>(),
-        locator<DatadogInterceptor>(),
-      ],
-    ),
-    instanceName: 'eZReachHttpService',
-  );
-
   locator.registerLazySingleton(() => DataSourceExceptionHandler());
 
   locator.registerLazySingleton(() => LocalAuthentication());
