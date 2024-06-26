@@ -84,6 +84,7 @@ import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/bundle.dart';
+import 'package:ezrxmobile/domain/order/entities/material_filter.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/order_document_type.dart';
 import 'package:ezrxmobile/domain/order/entities/payment_customer_information.dart';
@@ -658,6 +659,30 @@ void main() {
       await getWidget(tester);
       await tester.pump();
       verify(() => autoRouterMock.push(const IntroPageRoute())).called(1);
+    });
+
+    testWidgets('Should reset products filter', (tester) async {
+      when(() => materialListBlocMock.state).thenReturn(
+        MaterialListState.initial().copyWith(
+          selectedMaterialFilter:
+              MaterialFilter.empty().copyWith(isFavourite: true),
+        ),
+      );
+
+      final expectedStates = [
+        EligibilityState.initial().copyWith(
+          shipToInfo: fakeShipToInfo,
+        ),
+      ];
+      whenListen(eligibilityBlocMock, Stream.fromIterable(expectedStates));
+
+      await getWidget(tester);
+      await tester.pump();
+
+      verify(
+        () =>
+            materialFilterBlocMock.add(const MaterialFilterEvent.resetFilter()),
+      ).called(1);
     });
 
     testWidgets('When Intro Bloc is listener and showTermsAndCondition == true',
