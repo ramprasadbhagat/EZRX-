@@ -1908,7 +1908,7 @@ void main() {
         await tester.pump();
 
         final movWarning = find.text(
-          'Please ensure that the order value satisfies the minimum order value of {mov}'
+          'Please ensure that minimum order value is at least {mov}'
               .tr(namedArgs: {'mov': 'MYR 100.00'}),
         );
 
@@ -2926,7 +2926,7 @@ void main() {
         await tester.pumpAndSettle();
 
         final movWarning = find.text(
-          'Please ensure that the order value satisfies the minimum order value of {mov}'
+          'Please ensure that minimum order value is at least {mov}'
               .tr(namedArgs: {'mov': 'MYR 100.00'}),
         );
 
@@ -3450,7 +3450,7 @@ void main() {
         await tester.pumpWidget(getWidget());
         await tester.pumpAndSettle();
         final movWarning = find.text(
-          'Please ensure that the order value satisfies the minimum order value of {mov}'
+          'Please ensure that minimum order value is at least {mov}'
               .tr(namedArgs: {'mov': 'SGD 100.00'}),
         );
 
@@ -3500,7 +3500,7 @@ void main() {
         await tester.pumpWidget(getWidget());
         await tester.pumpAndSettle();
         final movWarning = find.text(
-          'Please ensure that the order value satisfies the minimum order value of {mov}'
+          'Please ensure that minimum order value is at least {mov}'
               .tr(namedArgs: {'mov': 'SGD 100.00'}),
         );
 
@@ -3558,7 +3558,7 @@ void main() {
         await tester.pumpWidget(getWidget());
         await tester.pumpAndSettle();
         final movWarning = find.text(
-          'Please ensure that the order value satisfies the minimum order value of {mov}'
+          'Please ensure that minimum order value is at least {mov}'
               .tr(namedArgs: {'mov': 'SGD 10.00'}),
         );
 
@@ -4127,7 +4127,7 @@ void main() {
           await tester.pumpAndSettle();
 
           final classicMOVErrorMessage =
-              'Please ensure that the order value satisfies the minimum order value of {mov}'
+              'Please ensure that minimum order value is at least {mov}'
                   .tr(
             namedArgs: {
               'mov': StringUtils.displayPrice(
@@ -4592,7 +4592,7 @@ void main() {
           await tester.pumpAndSettle();
 
           final classicMOVErrorMessage =
-              'Please ensure that the order value satisfies the minimum order value of {mov}'
+              'Please ensure that minimum order value is at least {mov}'
                   .tr(
             namedArgs: {
               'mov': StringUtils.displayPrice(
@@ -4630,7 +4630,7 @@ void main() {
           await tester.pumpAndSettle();
 
           final classicMOVErrorMessage =
-              'Please ensure that the order value satisfies the minimum order value of {mov}'
+              'Please ensure that minimum order value is at least {mov}'
                   .tr(
             namedArgs: {
               'mov': StringUtils.displayPrice(

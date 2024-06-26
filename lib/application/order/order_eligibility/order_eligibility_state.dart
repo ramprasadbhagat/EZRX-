@@ -44,7 +44,7 @@ class OrderEligibilityState with _$OrderEligibilityState {
           StringUtils.displayPrice(configs, configs.mpMinOrderAmount);
 
       if (!cartItems.containMPMaterial) {
-        return 'Please ensure that the order value satisfies the minimum order value of $displayMinOrderAmount';
+        return 'Please ensure that minimum order value is at least $displayMinOrderAmount';
       }
       if (cartItems.containInvalidTenderContractMaterial) {
         return 'Tender Contract is no longer available for one or few item(s). Please remove to continue.';
@@ -286,7 +286,7 @@ class OrderEligibilityState with _$OrderEligibilityState {
     );
 
     var errorMessage = TRObject(
-      'Please ensure that the order value satisfies the minimum order value of {mov}',
+      'Please ensure that minimum order value is at least {mov}',
       arguments: {'mov': displayZPMinOrderAmount},
     );
 

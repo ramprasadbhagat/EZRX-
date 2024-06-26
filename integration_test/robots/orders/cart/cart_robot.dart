@@ -133,7 +133,7 @@ class CartRobot {
   }) {
     expect(
       find.text(
-        'Please ensure that the order value satisfies the minimum order value of {mov}'
+        'Please ensure that minimum order value is at least {mov}'
             .tr(
           namedArgs: {
             'mov': minimumOrderAmount,

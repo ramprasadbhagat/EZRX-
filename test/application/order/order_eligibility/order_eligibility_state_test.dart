@@ -557,7 +557,7 @@ void main() {
           expect(
             stateWithMPMaterial.movNotEligibleMessage,
             const TRObject(
-              'Please ensure that the order value satisfies the minimum order value of {mov}',
+              'Please ensure that minimum order value is at least {mov}',
               arguments: {'mov': 'MYR 300.00'},
             ),
           );
