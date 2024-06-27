@@ -4,18 +4,16 @@ import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/order_eligibility/order_eligibility_bloc.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
-import 'package:ezrxmobile/domain/utils/string_utils.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/orders/cart/widget/price_display_widget.dart';
-import 'package:ezrxmobile/presentation/orders/cart/widget/small_order_fee_section.dart';
+import 'package:ezrxmobile/presentation/orders/cart/widget/small_order_fee.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 part 'package:ezrxmobile/presentation/orders/cart/price_summary/price_summary_section.dart';
-part 'package:ezrxmobile/presentation/orders/cart/price_summary/price_summary_small_order_fee.dart';
 
 class PriceSummaryTile extends StatelessWidget {
   final CartState cartState;

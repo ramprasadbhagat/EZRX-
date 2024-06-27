@@ -43,6 +43,7 @@ class _OrderSuccessSummary extends StatelessWidget {
                 PriceComponent(
                   salesOrgConfig: eligibilityState.salesOrgConfigs,
                   price: '${orderHistoryDetailList.zpOrderOnly.subtotal}',
+                  type: PriceStyle.summaryPrice,
                 ),
               ],
             ),
@@ -62,6 +63,7 @@ class _OrderSuccessSummary extends StatelessWidget {
                 PriceComponent(
                   salesOrgConfig: eligibilityState.salesOrgConfigs,
                   price: '${orderHistoryDetailList.mpOrderOnly.subtotal}',
+                  type: PriceStyle.summaryPrice,
                 ),
               ],
             ),
@@ -83,6 +85,7 @@ class _OrderSuccessSummary extends StatelessWidget {
               PriceComponent(
                 salesOrgConfig: eligibilityState.salesOrgConfigs,
                 price: '${orderHistoryDetailList.subtotal}',
+                type: PriceStyle.summaryPrice,
               ),
             ],
           ),
@@ -102,29 +105,17 @@ class _OrderSuccessSummary extends StatelessWidget {
                   PriceComponent(
                     salesOrgConfig: eligibilityState.salesOrgConfigs,
                     price: orderHistoryDetailList.totalTax.toString(),
+                    type: PriceStyle.summaryPrice,
                   ),
                 ],
               ),
             ),
           if (orderEligibilityState.smallOrderFeeApplied)
-            SmallOrderFee(orderEligibilityState: orderEligibilityState),
-          if (eligibilityState.salesOrg.showManualFee)
-            Padding(
-              padding: const EdgeInsets.only(top: 8),
-              child: Row(
-                key: WidgetKeys.orderSummaryManualFee,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    '${context.tr('Manual fee')}:',
-                    style: Theme.of(context).textTheme.titleSmall,
-                  ),
-                  PriceComponent(
-                    salesOrgConfig: eligibilityState.salesOrgConfigs,
-                    price: orderHistoryDetailList.manualFee.toString(),
-                  ),
-                ],
-              ),
+            SmallOrderFee(
+              value: orderEligibilityState.showSmallOrderFeeForID
+                  ? orderHistoryDetailList.smallOrderFee
+                  : orderEligibilityState.smallOrderFee,
+              showMessage: false,
             ),
           const Divider(
             indent: 0,
@@ -143,6 +134,7 @@ class _OrderSuccessSummary extends StatelessWidget {
               PriceComponent(
                 salesOrgConfig: eligibilityState.salesOrgConfigs,
                 price: orderHistoryDetailList.grandTotal.toStringAsFixed(2),
+                type: PriceStyle.grandTotalPrice,
               ),
             ],
           ),

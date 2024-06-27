@@ -413,6 +413,19 @@ class OrderEligibilityState with _$OrderEligibilityState {
     final mpSAPMOV =
         StringUtils.displayPrice(configs, configs.mpSAPMinOrderAmount);
 
+    if (showSmallOrderFeeForID) {
+      return TRObject(
+        'A small order fee applies to orders with ZP in-stock items that are under the minimum order value of {smallOrderFee} for ZP subtotal.',
+        arguments: {
+          'smallOrderFee': StringUtils.priceComponentDisplayPrice(
+            configs,
+            salesOrg.salesOrg.smallOrderThreshold,
+            false,
+          ),
+        },
+      );
+    }
+
     if (zpSmallOrderFeeApplied && mpSmallOrderFeeApplied) {
       return TRObject(
         'A small order fee applies to orders with ZP and MP in-stock items separately that are under the minimum order value of {zpSmallOrderFee} ZP subtotal & {mpSmallOrderFee} for MP subtotal.',
@@ -434,8 +447,12 @@ class OrderEligibilityState with _$OrderEligibilityState {
     }
   }
 
+  bool get showSmallOrderFeeForID => salesOrg.salesOrg.showSmallOrderFee;
+
   bool get smallOrderFeeApplied =>
-      zpSmallOrderFeeApplied || mpSmallOrderFeeApplied;
+      zpSmallOrderFeeApplied ||
+      mpSmallOrderFeeApplied ||
+      showSmallOrderFeeForID;
 
   double get smallOrderFee => zpSmallOrderFee + mpSmallOrderFee;
 

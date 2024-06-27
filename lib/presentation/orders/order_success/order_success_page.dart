@@ -38,7 +38,7 @@ import 'package:ezrxmobile/presentation/core/tender_contract_section.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/core/item_tax.dart';
 import 'package:ezrxmobile/presentation/orders/cart/widget/market_place_delivery_tile.dart';
-import 'package:ezrxmobile/presentation/orders/cart/widget/small_order_fee_section.dart';
+import 'package:ezrxmobile/presentation/orders/cart/widget/small_order_fee.dart';
 import 'package:ezrxmobile/presentation/orders/order_success/widgets/order_success_attachment_section.dart';
 import 'package:ezrxmobile/presentation/orders/order_tab/widgets/order_item_price.dart';
 import 'package:ezrxmobile/presentation/orders/widgets/price_not_available_message.dart';

@@ -178,8 +178,7 @@ class CartRobot {
   }
 
   String get getSmallOrderFeeValue {
-    final smallOrderFeeFinder =
-        find.byKey(WidgetKeys.checkoutSummarySmallOrderFeePrice);
+    final smallOrderFeeFinder = find.byKey(WidgetKeys.smallOrderFeePrice);
     return tester.widget<PriceComponent>(smallOrderFeeFinder).price;
   }
 

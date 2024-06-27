@@ -17,10 +17,6 @@ import 'package:ezrxmobile/application/order/view_by_order/view_by_order_bloc.da
 import 'package:ezrxmobile/application/order/view_by_order_details/view_by_order_details_bloc.dart';
 import 'package:ezrxmobile/application/product_image/product_image_bloc.dart';
 import 'package:ezrxmobile/config.dart';
-import 'package:ezrxmobile/domain/account/entities/role.dart';
-import 'package:ezrxmobile/domain/account/entities/user.dart';
-import 'package:ezrxmobile/domain/account/value/value_objects.dart';
-import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
@@ -39,7 +35,6 @@ import 'package:ezrxmobile/domain/order/entities/view_by_item_filter.dart';
 import 'package:ezrxmobile/domain/order/entities/view_by_order_filter.dart';
 import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
-import 'package:ezrxmobile/domain/utils/string_utils.dart';
 import 'package:ezrxmobile/infrastructure/core/clevertap/clevertap_service.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/cart/cart_local_datasource.dart';
@@ -106,11 +101,6 @@ void main() {
   late PaymentCustomerInformationBloc paymentCustomerInformationBlocMock;
   late List<OrderHistoryDetails> fakeOrderHistoryList;
   late AplSimulatorOrder aplSimulatorOrderMock;
-
-  final fakeUser = User.empty().copyWith(
-    username: Username('fake-user'),
-    role: Role.empty().copyWith(type: RoleType('client_user')),
-  );
 
   setUpAll(
     () async {
@@ -997,18 +987,11 @@ void main() {
       });
 
       testWidgets('Show Small Order Fee For ID Market', (tester) async {
+        const smallOrderFee = 12499;
         when(() => orderEligibilityBlocMock.state).thenReturn(
           OrderEligibilityState.initial().copyWith(
             cartItems: [
               PriceAggregate.empty().copyWith(
-                stockInfoList: [
-                  StockInfo.empty().copyWith(
-                    stockQuantity: 10,
-                    inStock: MaterialInStock('Yes'),
-                  ),
-                ],
-                price:
-                    Price.empty().copyWith(finalTotalPrice: MaterialPrice(100)),
                 materialInfo: MaterialInfo.empty().copyWith(
                   materialNumber: MaterialNumber('1234'),
                   materialGroup4: MaterialGroup('6A1'),
@@ -1016,24 +999,21 @@ void main() {
                 ),
               ),
             ],
-            user: fakeUser,
-            configs: fakeIDSalesOrgConfigs.copyWith(
-              enableSmallOrderFee: true,
-              enableMPSmallOrderFee: true,
-              mpSmallOrderFeeUserRoles: ['Client User'],
-              mpSAPMinOrderAmount: 1000,
-            ),
+            configs: fakeIDSalesOrgConfigs,
+            salesOrg: fakeIDSalesOrganisation,
           ),
         );
         when(() => orderSummaryBlocMock.state).thenAnswer(
           (invocation) => OrderSummaryState.initial().copyWith(
-            orderHistoryDetailsList: fakeOrderHistoryDetailsListWithStock,
+            orderHistoryDetailsList: [
+              fakeOrderHistoryDetailsListWithStock.first
+                  .copyWith(deliveryFee: smallOrderFee.toDouble()),
+            ],
           ),
         );
         await tester.pumpWidget(getWidget());
         await tester.pump();
-        final smallFeeSection =
-            find.byKey(WidgetKeys.checkoutSummarySmallOrderFee);
+        final smallFeeSection = find.byKey(WidgetKeys.smallOrderFeeSection);
         final scrollList = find.byKey(WidgetKeys.scrollList);
         await tester.dragUntilVisible(
           smallFeeSection,
@@ -1044,46 +1024,17 @@ void main() {
         expect(
           find.descendant(
             of: smallFeeSection,
-            matching: find.text('Small order fee'.tr()),
-          ),
-          findsOneWidget,
-        );
-      });
-
-      testWidgets('Show Manual Fee For ID Market', (tester) async {
-        when(() => eligibilityBlocMock.state).thenReturn(
-          EligibilityState.initial().copyWith(
-            salesOrganisation: fakeIDSalesOrganisation,
-            salesOrgConfigs: fakeIDSalesOrgConfigs,
-          ),
-        );
-        when(() => orderSummaryBlocMock.state).thenAnswer(
-          (invocation) => OrderSummaryState.initial().copyWith(
-            orderHistoryDetailsList: fakeOrderHistoryDetailsListWithStock,
-          ),
-        );
-        await tester.pumpWidget(getWidget());
-        await tester.pump();
-        final manualFeeSection = find.byKey(WidgetKeys.orderSummaryManualFee);
-        expect(manualFeeSection, findsOneWidget);
-        expect(
-          find.descendant(
-            of: manualFeeSection,
-            matching: find.text('${'Manual fee'.tr()}:'),
-          ),
-          findsOneWidget,
-        );
-        expect(
-          find.descendant(
-            of: manualFeeSection,
             matching: find.text(
-              StringUtils.priceComponentDisplayPrice(
-                fakeIDSalesOrgConfigs,
-                fakeOrderHistoryDetails.manualFee,
-                false,
-              ),
-              findRichText: true,
+              '${'Small order fee'}:'.tr(),
             ),
+          ),
+          findsOneWidget,
+        );
+
+        expect(
+          find.descendant(
+            of: smallFeeSection,
+            matching: priceComponent(smallOrderFee.priceFormattedForID),
           ),
           findsOneWidget,
         );

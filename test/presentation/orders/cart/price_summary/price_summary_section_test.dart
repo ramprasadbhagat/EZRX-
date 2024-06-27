@@ -899,7 +899,7 @@ void main() {
         await tester.pumpAndSettle();
 
         expect(
-          find.byKey(WidgetKeys.checkoutSummarySmallOrderFee),
+          find.byKey(WidgetKeys.smallOrderFeeSection),
           findsNothing,
         );
       });
@@ -930,7 +930,7 @@ void main() {
 
         expect(
           find.descendant(
-            of: find.byKey(WidgetKeys.checkoutSummarySmallOrderFee),
+            of: find.byKey(WidgetKeys.smallOrderFeeSection),
             matching: find.text(
               'MYR ${smallOrderFee.toStringAsFixed(2)}',
               findRichText: true,
@@ -980,7 +980,7 @@ void main() {
 
         expect(
           find.descendant(
-            of: find.byKey(WidgetKeys.checkoutSummarySmallOrderFee),
+            of: find.byKey(WidgetKeys.smallOrderFeeSection),
             matching: find.text(
               'MYR ${smallOrderFee.toStringAsFixed(2)}',
               findRichText: true,
@@ -1009,10 +1009,14 @@ void main() {
         );
 
         when(() => cartBloc.state).thenReturn(cartState);
-        when(() => eligibilityBloc.state).thenReturn(
-          EligibilityState.initial().copyWith(
-            salesOrganisation: fakeIDSalesOrganisation,
-            salesOrgConfigs: fakeIDSalesOrgConfigs,
+        when(() => orderEligibilityBloc.state).thenReturn(
+          OrderEligibilityState.initial().copyWith(
+            configs: fakeIDSalesOrgConfigs,
+            salesOrg: fakeIDSalesOrganisation,
+            user: fakeClientUser,
+            cartItems: [
+              inStockMaterial,
+            ],
           ),
         );
 

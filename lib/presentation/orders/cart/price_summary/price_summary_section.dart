@@ -103,10 +103,12 @@ class PriceSummarySection extends StatelessWidget {
         ),
         if (salesOrgConfig.displaySubtotalTaxBreakdown)
           _TaxWidget(cartState: cartState),
-        if (cartState.salesOrganisation.salesOrg.showSmallOrderFee)
-          _AplSmallOrderFee(cartState: cartState)
-        else if (orderEligibilityState.smallOrderFeeApplied)
-          SmallOrderFee(orderEligibilityState: orderEligibilityState),
+        if (orderEligibilityState.smallOrderFeeApplied)
+          SmallOrderFee(
+            value: orderEligibilityState.showSmallOrderFeeForID
+                ? cartState.aplSimulatorOrder.smallOrderFee
+                : orderEligibilityState.smallOrderFee,
+          ),
         const SizedBox(height: 4.0),
         const Divider(
           thickness: 1,

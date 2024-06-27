@@ -10,43 +10,23 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SmallOrderFee extends StatelessWidget {
-  final OrderEligibilityState orderEligibilityState;
+  final double value;
+  final bool showMessage;
 
   const SmallOrderFee({
     super.key,
-    required this.orderEligibilityState,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    final messageObject = orderEligibilityState.smallOrderFeeAppliedMessage;
-
-    return SmallOrderFeeSection(
-      value: orderEligibilityState.smallOrderFee,
-      message: context.tr(
-        messageObject.message,
-        namedArgs: messageObject.arguments,
-      ),
-    );
-  }
-}
-
-class SmallOrderFeeSection extends StatelessWidget {
-  final double value;
-  final String message;
-
-  const SmallOrderFeeSection({
-    super.key,
     required this.value,
-    required this.message,
+    this.showMessage = true,
   });
 
   @override
   Widget build(BuildContext context) {
     final eligibilityState = context.read<EligibilityBloc>().state;
+    final messageObject =
+        context.read<OrderEligibilityBloc>().state.smallOrderFeeAppliedMessage;
 
     return Column(
-      key: WidgetKeys.checkoutSummarySmallOrderFee,
+      key: WidgetKeys.smallOrderFeeSection,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const SizedBox(height: 8.0),
@@ -54,14 +34,14 @@ class SmallOrderFeeSection extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              context.tr('Small order fee'),
+              '${context.tr('Small order fee')}:',
               style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                     color: ZPColors.neutralsBlack,
                   ),
             ),
             PriceDisplayWidget(
               priceComponent: PriceComponent(
-                key: WidgetKeys.checkoutSummarySmallOrderFeePrice,
+                key: WidgetKeys.smallOrderFeePrice,
                 salesOrgConfig: eligibilityState.salesOrgConfigs,
                 price: value.toString(),
                 type: PriceStyle.summaryPrice,
@@ -69,9 +49,12 @@ class SmallOrderFeeSection extends StatelessWidget {
             ),
           ],
         ),
-        if (value > 0)
+        if (showMessage && value > 0)
           InfoLabel(
-            textValue: message,
+            textValue: context.tr(
+              messageObject.message,
+              namedArgs: messageObject.arguments,
+            ),
             margin: const EdgeInsets.symmetric(vertical: 5),
             padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 8),
             mainColor: ZPColors.blueAccent,

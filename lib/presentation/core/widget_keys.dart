@@ -577,6 +577,12 @@ class WidgetKeys {
   static const Key finalTotalPriceWithTax = Key('finalTotalPriceWithTax');
 
   //============================================================
+  //  Small order fee keys
+  //============================================================
+  static const Key smallOrderFeeSection = Key('smallOrderFeeSection');
+  static const Key smallOrderFeePrice = Key('smallOrderFeePrice');
+
+  //============================================================
   //  Quantity Input Widget Keys
   //============================================================
   static const Key increaseQuantityKey = Key('increaseQuantityKey');
@@ -744,12 +750,8 @@ class WidgetKeys {
   static const Key checkoutSummaryMPSubTotal = Key('checkoutSummaryMPSubTotal');
   static const Key checkoutSummarySubTotal = Key('checkoutSummarySubTotal');
   static const Key checkoutSummaryStampDuty = Key('checkoutSummaryStampDuty');
-  static const Key checkoutSummarySmallOrderFee =
-      Key('checkoutSummarySmallOrderFee');
   static const Key checkoutSummaryTax = Key('checkoutSummaryTax');
   static const Key checkoutSummaryTaxPrice = Key('checkoutSummaryTaxPrice');
-  static const Key checkoutSummarySmallOrderFeePrice =
-      Key('checkoutSummarySmallOrderFeePrice');
   static const Key checkoutSummaryGrandTotal = Key('checkoutSummaryGrandTotal');
   static const Key checkoutSummaryGrandTotalPrice =
       Key('checkoutSummaryGrandTotalPrice');

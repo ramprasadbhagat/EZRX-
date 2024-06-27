@@ -235,7 +235,7 @@ class CheckoutRobot {
 
   Future<void> verifySmallOrderFeeLabel(String price) =>
       _verifyOrderSummaryComponent(
-        find.byKey(WidgetKeys.checkoutSummarySmallOrderFee),
+        find.byKey(WidgetKeys.smallOrderFeeSection),
         price,
       );
 
@@ -686,8 +686,7 @@ class CheckoutRobot {
   }
 
   String get getSmallOrderFeeValue {
-    final smallOrderFeeFinder =
-        find.byKey(WidgetKeys.checkoutSummarySmallOrderFeePrice);
+    final smallOrderFeeFinder = find.byKey(WidgetKeys.smallOrderFeePrice);
     return tester.widget<PriceComponent>(smallOrderFeeFinder.at(0)).price;
   }
 

@@ -2394,6 +2394,15 @@ void main() {
           ),
         );
 
+        when(() => orderEligibilityBlocMock.state).thenReturn(
+          OrderEligibilityState.initial().copyWith(
+            configs: fakeIDSalesOrgConfigs,
+            user: fakeClientUser,
+            cartItems: mockCartItems,
+            salesOrg: fakeIDSalesOrganisation,
+          ),
+        );
+
         when(() => cartBloc.state).thenReturn(
           CartState.initial().copyWith(
             salesOrganisation: fakeIDSalesOrganisation,
@@ -2412,7 +2421,7 @@ void main() {
         expect(find.byKey(WidgetKeys.priceSummarySheet), findsOneWidget);
         expect(find.byKey(WidgetKeys.checkoutSummarySubTotal), findsOneWidget);
         expect(
-          find.byKey(WidgetKeys.checkoutSummarySmallOrderFee),
+          find.byKey(WidgetKeys.smallOrderFeeSection),
           findsOneWidget,
         );
         expect(
@@ -2424,7 +2433,7 @@ void main() {
         final checkoutSummaryGrandTotalPrice =
             find.byKey(WidgetKeys.checkoutSummaryGrandTotalPrice);
         final checkoutSummarySmallOrderFeePrice =
-            find.byKey(WidgetKeys.checkoutSummarySmallOrderFeePrice);
+            find.byKey(WidgetKeys.smallOrderFeePrice);
         expect(
           (tester.widget(checkoutSummarySmallOrderFeePrice) as PriceComponent)
               .price,
@@ -4127,8 +4136,7 @@ void main() {
           await tester.pumpAndSettle();
 
           final classicMOVErrorMessage =
-              'Please ensure that minimum order value is at least {mov}'
-                  .tr(
+              'Please ensure that minimum order value is at least {mov}'.tr(
             namedArgs: {
               'mov': StringUtils.displayPrice(
                 salesOrgConfig,
@@ -4592,8 +4600,7 @@ void main() {
           await tester.pumpAndSettle();
 
           final classicMOVErrorMessage =
-              'Please ensure that minimum order value is at least {mov}'
-                  .tr(
+              'Please ensure that minimum order value is at least {mov}'.tr(
             namedArgs: {
               'mov': StringUtils.displayPrice(
                 salesOrgConfig,
@@ -4630,8 +4637,7 @@ void main() {
           await tester.pumpAndSettle();
 
           final classicMOVErrorMessage =
-              'Please ensure that minimum order value is at least {mov}'
-                  .tr(
+              'Please ensure that minimum order value is at least {mov}'.tr(
             namedArgs: {
               'mov': StringUtils.displayPrice(
                 salesOrgConfig,

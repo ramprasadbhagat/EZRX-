@@ -31,7 +31,7 @@ class OrderPriceSummaryRobot {
       );
 
   void verifySmallOrderFeeLabel(String price) => _verifyPriceLabel(
-        find.byKey(WidgetKeys.checkoutSummarySmallOrderFee),
+        find.byKey(WidgetKeys.smallOrderFeeSection),
         price,
       );
 

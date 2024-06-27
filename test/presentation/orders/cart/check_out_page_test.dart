@@ -183,7 +183,7 @@ void main() {
   ///////////////////////////Finder//////////////////////////////////////////
   final checkoutSummaryTax = find.byKey(WidgetKeys.checkoutSummaryTax);
   final checkoutSummarySmallOrderFee =
-      find.byKey(WidgetKeys.checkoutSummarySmallOrderFee);
+      find.byKey(WidgetKeys.smallOrderFeeSection);
   final checkoutSummaryGrandTotalPrice =
       find.byKey(WidgetKeys.checkoutSummaryGrandTotalPrice);
   final checkoutSummaryTaxPrice =
@@ -2632,23 +2632,33 @@ void main() {
         final currentSalesOrganisation = fakeEmptySalesOrganisation.copyWith(
           salesOrg: currentSalesOrgConfigVariant.salesOrg,
         );
-        when(() => eligibilityBloc.state).thenReturn(
-          EligibilityState.initial().copyWith(
-            salesOrgConfigs: currentSalesOrgConfigVariant,
-            salesOrganisation: currentSalesOrganisation,
+
+        final cartProducts = [
+          mockCartItems.first.copyWith(
+            salesOrgConfig: currentSalesOrgConfigVariant,
+            quantity: 1,
           ),
+        ];
+        final orderEligibilityState = OrderEligibilityState.initial().copyWith(
+          configs: currentSalesOrgConfigVariant,
+          cartItems: cartProducts,
+          salesOrg: currentSalesOrganisation,
+        );
+        when(() => orderEligibilityBlocMock.state).thenReturn(
+          orderEligibilityState,
         );
         when(() => cartBloc.state).thenReturn(
           CartState.initial().copyWith(
             config: currentSalesOrgConfigVariant,
             salesOrganisation: currentSalesOrganisation,
-            cartProducts: [
-              mockCartItems.first.copyWith(
-                salesOrgConfig: currentSalesOrgConfigVariant,
-                quantity: 1,
-              ),
-            ],
+            cartProducts: cartProducts,
             aplSimulatorOrder: aplSimulatorOrder,
+          ),
+        );
+        when(() => eligibilityBloc.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrgConfigs: currentSalesOrgConfigVariant,
+            salesOrganisation: currentSalesOrganisation,
           ),
         );
 
@@ -2699,12 +2709,12 @@ void main() {
         );
         expect(
           checkoutSummarySmallOrderFee,
-          currentSalesOrgConfigVariant.salesOrg.showSmallOrderFee
+          orderEligibilityState.smallOrderFeeApplied
               ? findsOneWidget
               : findsNothing,
         );
         final checkoutSummarySmallOrderFeePriceFinder = find.descendant(
-          of: find.byKey(WidgetKeys.checkoutSummarySmallOrderFee),
+          of: find.byKey(WidgetKeys.smallOrderFeeSection),
           matching: find.text(
             StringUtils.priceComponentDisplayPrice(
               currentSalesOrgConfigVariant,
@@ -2751,6 +2761,7 @@ void main() {
       },
       variant: salesOrgConfigVariant,
     );
+
     testWidgets(
       '=> test Checkout Bonus stock tag',
       (tester) async {
