@@ -7,11 +7,9 @@ pre-commit:
     - ref: v3
   commands:
     pretty:
-      glob: "*.dart"
+      glob: '*.dart'
       exclude: '(^|/)(freezed|g|gr)\.dart$'
       run: fvm dart format {staged_files} && git add {staged_files}
-    validate:
-      run: fvm flutter pub run .githooks/branch_name_check.dart
 
 pre-push:
   parallel: true
@@ -19,67 +17,7 @@ pre-push:
     - ref: main
     - ref: v3
   commands:
-    flutter-analyze:
-      run: fvm flutter analyze --fatal-infos --fatal-warnings
-    dcm-analyze:
-      run: dcm analyze lib --fatal-style --fatal-performance --fatal-warnings
-    check-parameters:
-      run: dcm check-parameters lib --fatal-found
-    check-code-duplication:
-      run: dcm code-duplication lib --fatal-found
-    check-unused-code:
-      run: dcm check-unused-code lib --fatal-unused
-    check-unused-files:
-      run: dcm check-unused-files lib --fatal-unused
-    check-dependencies:
-      run: dcm check-dependencies lib test integration_test --ignored-packages auto_route_generator,flutter_launcher_icons,flutter_native_splash,json_serializable,hive_generator,scandit_flutter_datacapture_core --fatal-found
-    test-application:
-      run: fvm flutter test test/application
-    test-domain:
-      run: fvm flutter test test/domain
-    test-infrastructure-account:
-      run: fvm flutter test test/infrastructure/account
-    test-infrastructure-announcement:
-      run: fvm flutter test test/infrastructure/announcement
-    test-infrastructure-auptc:
-      run: fvm flutter test test/infrastructure/aup_tc
-    test-infrastructure-auth:
-      run: fvm flutter test test/infrastructure/auth
-    test-infrastructure-banner:
-      run: fvm flutter test test/infrastructure/banner
-    test-infrastructure-payments:
-      run: fvm flutter test test/infrastructure/payments
-    test-infrastructure-order:
-      run: fvm flutter test test/infrastructure/order
-    test-infrastructure-returns:
-      run: fvm flutter test test/infrastructure/returns
-    test-infrastructure-chatbot:
-      run: fvm flutter test test/infrastructure/chatbot
-    test-presentation-account:
-      run: fvm flutter test test/presentation/account
-    test-presentation-announcement:
-      run: fvm flutter test test/presentation/announcement
-    test-presentation-auptctest:
-      run: fvm flutter test test/presentation/aup_tc_test
-    test-presentation-auth:
-      run: fvm flutter test test/presentation/auth
-    test-presentation-home:
-      run: fvm flutter test test/presentation/home
-    test-presentation-more:
-      run: fvm flutter test test/presentation/more
-    test-presentation-orderhistory:
-      run: fvm flutter test test/presentation/order_history
-    test-presentation-orders:
-      run: fvm flutter test test/presentation/orders
-    test-presentation-returns:
-      run: fvm flutter test test/presentation/returns
-    test-presentation-payments:
-      run: fvm flutter test test/presentation/payments
-    test-presentation-products:
-      run: fvm flutter test test/presentation/products
-    test-presentation-notification:
-      run: fvm flutter test test/presentation/notification
-    test-presentation-faq:
-      run: fvm flutter test test/presentation/faq
-    test-presentation-core:
-      run: fvm flutter test test/presentation/core
+    branch-name-validate:
+      run: bash scripts/branch_name_validate.sh
+    code_analyze:
+      run: make run_analyze

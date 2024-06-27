@@ -25,6 +25,13 @@ jobs:
           script: flutter analyze --fatal-infos --fatal-warnings
         displayName: Flutter Analyze
 
+  - job: BranchNameValidate
+    displayName: 'Branch Name Validate'
+    steps:
+      - bash: bash scripts/branch_name_validate.sh
+        env:
+          CI_BRANCH_NAME: '$(System.PullRequest.SourceBranch)'
+
   - job: DCMAnalyse
     displayName: 'DCM Analyse'
     steps:
