@@ -29,6 +29,7 @@ class ReturnItem with _$ReturnItem {
     required ProductImages productImages,
     required Prsfd prsfd,
     required bool isMarketPlace,
+    required String lineNumber,
   }) = _ReturnItem;
 
   factory ReturnItem.empty() => ReturnItem(
@@ -49,6 +50,7 @@ class ReturnItem with _$ReturnItem {
         productImages: ProductImages.empty(),
         prsfd: Prsfd(''),
         isMarketPlace: false,
+        lineNumber: '',
       );
 
   String get displayBatch => isMarketPlace ? 'NA' : batch;

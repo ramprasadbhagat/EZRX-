@@ -66,6 +66,7 @@ import 'package:ezrxmobile/application/returns/new_request/return_items/return_i
 import 'package:ezrxmobile/application/returns/policy_configuration/policy_configuration_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_list/view_by_item/return_list_by_item_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_list/view_by_item/view_by_item_filter/view_by_item_return_filter_bloc.dart';
+import 'package:ezrxmobile/application/returns/return_list/view_by_request/details/return_details_by_request_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_list/view_by_request/return_list_by_request_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_request_type_code/return_request_type_code_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_summary_details/return_summary_details_bloc.dart';
@@ -436,6 +437,10 @@ class ReturnListByItemBlocMock
 class ReturnListByRequestBlocMock
     extends MockBloc<ReturnListByRequestEvent, ReturnListByRequestState>
     implements ReturnListByRequestBloc {}
+
+class ReturnDetailsByRequestBlocMock
+    extends MockBloc<ReturnDetailsByRequestEvent, ReturnDetailsByRequestState>
+    implements ReturnDetailsByRequestBloc {}
 
 class ReturnItemsBlocMock extends MockBloc<ReturnItemsEvent, ReturnItemsState>
     implements ReturnItemsBloc {}

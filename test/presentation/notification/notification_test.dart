@@ -8,7 +8,7 @@ import 'package:ezrxmobile/application/notification/notification_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_item_details/view_by_item_details_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_order_details/view_by_order_details_bloc.dart';
 import 'package:ezrxmobile/application/payments/payment_summary_details/payment_summary_details_bloc.dart';
-import 'package:ezrxmobile/application/returns/return_summary_details/return_summary_details_bloc.dart';
+import 'package:ezrxmobile/application/returns/return_list/view_by_request/details/return_details_by_request_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_information.dart';
 import 'package:ezrxmobile/domain/account/entities/role.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
@@ -18,6 +18,7 @@ import 'package:ezrxmobile/domain/notification/entities/notification.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_summary_details.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/customer_code_local.dart';
 import 'package:ezrxmobile/infrastructure/notification/datasource/notification_local.dart';
+import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/market_place/market_place_icon.dart';
 import 'package:ezrxmobile/presentation/core/no_record.dart';
 import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
@@ -27,51 +28,14 @@ import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
 
 import '../../common_mock_data/customer_code_mock.dart';
+import '../../common_mock_data/mock_bloc.dart';
 import '../../common_mock_data/sales_org_config_mock/fake_my_sales_org_config.dart';
 import '../../common_mock_data/sales_organsiation_mock.dart';
 import '../../common_mock_data/user_mock.dart';
 import '../../utils/widget_utils.dart';
-
-class UserBlocMock extends MockBloc<UserEvent, UserState> implements UserBloc {}
-
-class CustomerCodeBlocMock
-    extends MockBloc<CustomerCodeEvent, CustomerCodeState>
-    implements CustomerCodeBloc {}
-
-class ReturnSummaryDetailsBlocMock
-    extends MockBloc<ReturnSummaryDetailsEvent, ReturnSummaryDetailsState>
-    implements ReturnSummaryDetailsBloc {}
-
-class EligibilityBlocMock extends MockBloc<EligibilityEvent, EligibilityState>
-    implements EligibilityBloc {}
-
-class PaymentSummaryDetailsBlocMock
-    extends MockBloc<PaymentSummaryDetailsEvent, PaymentSummaryDetailsState>
-    implements PaymentSummaryDetailsBloc {}
-
-class ViewByOrderDetailBlocMock
-    extends MockBloc<ViewByOrderDetailsEvent, ViewByOrderDetailsState>
-    implements ViewByOrderDetailsBloc {}
-
-class ViewByItemDetailBlocMock
-    extends MockBloc<ViewByItemDetailsEvent, ViewByItemDetailsState>
-    implements ViewByItemDetailsBloc {}
-
-class AutoRouterMock extends Mock implements AppRouter {}
-
-class MockNotificationBloc
-    extends MockBloc<NotificationEvent, NotificationState>
-    implements NotificationBloc {}
-
-class AnnouncementBlocMock
-    extends MockBloc<AnnouncementEvent, AnnouncementState>
-    implements AnnouncementBloc {}
-
-final locator = GetIt.instance;
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
@@ -84,7 +48,7 @@ void main() {
   late NotificationBloc notificationBlocMock;
   late Notifications notifications;
   late CustomerInformation customerInformationMock;
-  late ReturnSummaryDetailsBloc returnSummaryDetailsBlocMock;
+  late ReturnDetailsByRequestBloc returnDetailsByRequestBlocMock;
   late PaymentSummaryDetailsBloc paymentSummaryDetailsBlockMock;
   late ViewByOrderDetailsBloc viewByOrderDetailsBlocMock;
   late ViewByItemDetailsBloc viewByItemDetailsBlocMock;
@@ -103,11 +67,11 @@ void main() {
       customerCodeBlocMock = CustomerCodeBlocMock();
       eligibilityBlocMock = EligibilityBlocMock();
       paymentSummaryDetailsBlockMock = PaymentSummaryDetailsBlocMock();
-      notificationBlocMock = MockNotificationBloc();
-      returnSummaryDetailsBlocMock = ReturnSummaryDetailsBlocMock();
+      notificationBlocMock = NotificationBlocMock();
+      returnDetailsByRequestBlocMock = ReturnDetailsByRequestBlocMock();
       eligibilityBlocMock = EligibilityBlocMock();
-      viewByItemDetailsBlocMock = ViewByItemDetailBlocMock();
-      viewByOrderDetailsBlocMock = ViewByOrderDetailBlocMock();
+      viewByItemDetailsBlocMock = ViewByItemDetailsBlocMock();
+      viewByOrderDetailsBlocMock = ViewByOrderDetailsBlocMock();
       when(() => announcementBlocMock.state)
           .thenReturn(AnnouncementState.initial());
       when(() => eligibilityBlocMock.state)
@@ -123,6 +87,8 @@ void main() {
           .thenReturn(ViewByItemDetailsState.initial());
       when(() => viewByOrderDetailsBlocMock.state)
           .thenReturn(ViewByOrderDetailsState.initial());
+      when(() => returnDetailsByRequestBlocMock.state)
+          .thenReturn(ReturnDetailsByRequestState.initial());
     });
     Widget getScopedWidget() {
       return WidgetUtils.getScopedWidget(
@@ -139,8 +105,8 @@ void main() {
           BlocProvider<NotificationBloc>(
             create: (context) => notificationBlocMock,
           ),
-          BlocProvider<ReturnSummaryDetailsBloc>(
-            create: (context) => returnSummaryDetailsBlocMock,
+          BlocProvider<ReturnDetailsByRequestBloc>(
+            create: (context) => returnDetailsByRequestBlocMock,
           ),
           BlocProvider<EligibilityBloc>(
             create: (context) => eligibilityBlocMock,
@@ -357,6 +323,48 @@ void main() {
           autoRouterMock.current.name ==
               'ReturnRequestSummaryByItemDetailsRoute',
           false,
+        );
+      },
+    );
+
+    testWidgets(
+      'Should navigate to Return request detail when eligible',
+      (tester) async {
+        final returnNotification = notifications.notificationData
+            .firstWhere((e) => e.isReturnEligible);
+        when(() => notificationBlocMock.state).thenReturn(
+          NotificationState.initial().copyWith.notificationList(
+            notificationData: [returnNotification],
+          ),
+        );
+
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrgConfigs: fakeMYSalesOrgConfigs,
+            user: fakeRootAdminUser,
+          ),
+        );
+
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pump();
+        final itemKey = find.byKey(
+          WidgetKeys.genericKey(key: returnNotification.description),
+        );
+        expect(itemKey, findsOneWidget);
+        await tester.tap(itemKey);
+        await tester.pumpAndSettle();
+
+        verify(
+          () => returnDetailsByRequestBlocMock.add(
+            ReturnDetailsByRequestEvent.fetch(
+              returnId: returnNotification.returnRequestId.requestId,
+            ),
+          ),
+        ).called(1);
+
+        expect(
+          autoRouterMock.currentPath,
+          const ReturnRequestDetailsRoute().path,
         );
       },
     );

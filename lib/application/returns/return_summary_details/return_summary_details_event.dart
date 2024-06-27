@@ -4,7 +4,7 @@ part of 'return_summary_details_bloc.dart';
 class ReturnSummaryDetailsEvent with _$ReturnSummaryDetailsEvent {
   const factory ReturnSummaryDetailsEvent.initialized() = _Initialized;
   const factory ReturnSummaryDetailsEvent.fetch({
-    required ReturnRequestsId returnId,
+    required ReturnItem returnItem,
   }) = _Fetch;
     const factory ReturnSummaryDetailsEvent.downloadFile({
     required PoDocuments file,

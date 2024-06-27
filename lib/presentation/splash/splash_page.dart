@@ -69,9 +69,9 @@ import 'package:ezrxmobile/application/returns/approver_actions/return_approver_
 import 'package:ezrxmobile/application/returns/new_request/return_items/return_items_bloc.dart';
 import 'package:ezrxmobile/application/returns/policy_configuration/policy_configuration_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_list/view_by_item/return_list_by_item_bloc.dart';
+import 'package:ezrxmobile/application/returns/return_list/view_by_request/details/return_details_by_request_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_list/view_by_request/return_list_by_request_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_request_type_code/return_request_type_code_bloc.dart';
-import 'package:ezrxmobile/application/returns/return_summary_details/return_summary_details_bloc.dart';
 import 'package:ezrxmobile/application/returns/usage_code/usage_code_bloc.dart';
 import 'package:ezrxmobile/application/returns/user_restriction/user_restriction_list_bloc.dart';
 import 'package:ezrxmobile/config.dart';
@@ -976,11 +976,13 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
               },
               redirectReturnDetail: (returnId) {
                 if (eligibilityState.isReturnsEnable) {
-                  context.read<ReturnSummaryDetailsBloc>().add(
-                        ReturnSummaryDetailsEvent.fetch(returnId: returnId),
+                  context.read<ReturnDetailsByRequestBloc>().add(
+                        ReturnDetailsByRequestEvent.fetch(
+                          returnId: returnId.requestId,
+                        ),
                       );
-                  context.router
-                      .push(const ReturnRequestSummaryByItemDetailsRoute());
+                  //Navigate to return Detail Page
+                  context.router.push(const ReturnRequestDetailsRoute());
                 } else {
                   noAccessSnackbar.show(context);
                 }

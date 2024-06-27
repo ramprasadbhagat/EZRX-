@@ -8,8 +8,8 @@ import 'package:ezrxmobile/domain/order/entities/order_history_details_po_docume
 import 'package:ezrxmobile/domain/returns/entities/request_information.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_request_information.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_request_information_header.dart';
-import 'package:ezrxmobile/domain/returns/entities/return_requests_id.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/po_attachment_repository.dart';
+import 'package:ezrxmobile/domain/returns/entities/return_item.dart';
 import 'package:ezrxmobile/infrastructure/returns/repository/return_request_repository.dart';
 import 'package:ezrxmobile/infrastructure/returns/repository/return_summary_details_repository.dart';
 import 'package:flutter/material.dart';
@@ -30,6 +30,8 @@ void main() {
   late ReturnRequestRepository mockReturnRequestRepository;
   late PoAttachmentRepository poAttachmentRepository;
   final file = [File('')];
+  final fakeReturnItem =
+      ReturnItem.empty().copyWith(invoiceID: 'fake-invoice-id');
 
   setUpAll(() async {
     WidgetsFlutterBinding.ensureInitialized();
@@ -61,15 +63,13 @@ void main() {
       setUp: () {
         when(
           () => mockReturnSummaryDetailsRepository.getReturnInformation(
-            returnRequestId: ReturnRequestsId(requestId: 'mock_id'),
+            returnItem: fakeReturnItem,
           ),
-        ).thenAnswer(
-          (invocation) async => Right(RequestInformation.empty()),
-        );
+        ).thenAnswer((_) async => Right(RequestInformation.empty()));
       },
       act: (ReturnSummaryDetailsBloc bloc) => bloc.add(
         ReturnSummaryDetailsEvent.fetch(
-          returnId: ReturnRequestsId(requestId: 'mock_id'),
+          returnItem: fakeReturnItem,
         ),
       ),
       expect: () => [
@@ -94,17 +94,13 @@ void main() {
       setUp: () {
         when(
           () => mockReturnSummaryDetailsRepository.getReturnInformation(
-            returnRequestId: ReturnRequestsId(requestId: 'mock_id'),
+            returnItem: fakeReturnItem,
           ),
-        ).thenAnswer(
-          (invocation) async => const Left(
-            ApiFailure.other('mock-error'),
-          ),
-        );
+        ).thenAnswer((_) async => const Left(ApiFailure.other('mock-error')));
       },
       act: (ReturnSummaryDetailsBloc bloc) => bloc.add(
         ReturnSummaryDetailsEvent.fetch(
-          returnId: ReturnRequestsId(requestId: 'mock_id'),
+          returnItem: fakeReturnItem,
         ),
       ),
       expect: () => [

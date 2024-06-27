@@ -5,7 +5,6 @@ import 'package:ezrxmobile/application/returns/return_summary_details/return_sum
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_filter.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_item.dart';
-import 'package:ezrxmobile/domain/returns/entities/return_requests_id.dart';
 import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
 import 'package:ezrxmobile/infrastructure/core/common/tracking_events.dart';
 import 'package:ezrxmobile/infrastructure/core/common/tracking_properties.dart';
@@ -154,12 +153,10 @@ class _ReturnItem extends StatelessWidget {
                         ),
                       },
                     );
-                    context.read<ReturnSummaryDetailsBloc>().add(
-                          ReturnSummaryDetailsEvent.fetch(
-                            returnId:
-                                ReturnRequestsId(requestId: data.requestId),
-                          ),
-                        );
+                    context
+                        .read<ReturnSummaryDetailsBloc>()
+                        .add(ReturnSummaryDetailsEvent.fetch(returnItem: data));
+
                     context.router.push(
                       const ReturnRequestSummaryByItemDetailsRoute(),
                     );

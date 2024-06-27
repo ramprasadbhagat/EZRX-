@@ -22,6 +22,7 @@ class ReturnQuery {
               expiry
               outsidePolicy
               ${enableMarketplace ? 'isMarketPlace' : ''}
+              lineItemNumber
             }
           }
           totalCount

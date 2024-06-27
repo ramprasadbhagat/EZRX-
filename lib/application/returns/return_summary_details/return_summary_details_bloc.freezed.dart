@@ -19,21 +19,21 @@ mixin _$ReturnSummaryDetailsEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function(ReturnRequestsId returnId) fetch,
+    required TResult Function(ReturnItem returnItem) fetch,
     required TResult Function(PoDocuments file) downloadFile,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function(ReturnRequestsId returnId)? fetch,
+    TResult? Function(ReturnItem returnItem)? fetch,
     TResult? Function(PoDocuments file)? downloadFile,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function(ReturnRequestsId returnId)? fetch,
+    TResult Function(ReturnItem returnItem)? fetch,
     TResult Function(PoDocuments file)? downloadFile,
     required TResult orElse(),
   }) =>
@@ -120,7 +120,7 @@ class _$InitializedImpl implements _Initialized {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function(ReturnRequestsId returnId) fetch,
+    required TResult Function(ReturnItem returnItem) fetch,
     required TResult Function(PoDocuments file) downloadFile,
   }) {
     return initialized();
@@ -130,7 +130,7 @@ class _$InitializedImpl implements _Initialized {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function(ReturnRequestsId returnId)? fetch,
+    TResult? Function(ReturnItem returnItem)? fetch,
     TResult? Function(PoDocuments file)? downloadFile,
   }) {
     return initialized?.call();
@@ -140,7 +140,7 @@ class _$InitializedImpl implements _Initialized {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function(ReturnRequestsId returnId)? fetch,
+    TResult Function(ReturnItem returnItem)? fetch,
     TResult Function(PoDocuments file)? downloadFile,
     required TResult orElse(),
   }) {
@@ -195,9 +195,9 @@ abstract class _$$FetchImplCopyWith<$Res> {
           _$FetchImpl value, $Res Function(_$FetchImpl) then) =
       __$$FetchImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({ReturnRequestsId returnId});
+  $Res call({ReturnItem returnItem});
 
-  $ReturnRequestsIdCopyWith<$Res> get returnId;
+  $ReturnItemCopyWith<$Res> get returnItem;
 }
 
 /// @nodoc
@@ -211,21 +211,21 @@ class __$$FetchImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? returnId = null,
+    Object? returnItem = null,
   }) {
     return _then(_$FetchImpl(
-      returnId: null == returnId
-          ? _value.returnId
-          : returnId // ignore: cast_nullable_to_non_nullable
-              as ReturnRequestsId,
+      returnItem: null == returnItem
+          ? _value.returnItem
+          : returnItem // ignore: cast_nullable_to_non_nullable
+              as ReturnItem,
     ));
   }
 
   @override
   @pragma('vm:prefer-inline')
-  $ReturnRequestsIdCopyWith<$Res> get returnId {
-    return $ReturnRequestsIdCopyWith<$Res>(_value.returnId, (value) {
-      return _then(_value.copyWith(returnId: value));
+  $ReturnItemCopyWith<$Res> get returnItem {
+    return $ReturnItemCopyWith<$Res>(_value.returnItem, (value) {
+      return _then(_value.copyWith(returnItem: value));
     });
   }
 }
@@ -233,14 +233,14 @@ class __$$FetchImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$FetchImpl implements _Fetch {
-  const _$FetchImpl({required this.returnId});
+  const _$FetchImpl({required this.returnItem});
 
   @override
-  final ReturnRequestsId returnId;
+  final ReturnItem returnItem;
 
   @override
   String toString() {
-    return 'ReturnSummaryDetailsEvent.fetch(returnId: $returnId)';
+    return 'ReturnSummaryDetailsEvent.fetch(returnItem: $returnItem)';
   }
 
   @override
@@ -248,12 +248,12 @@ class _$FetchImpl implements _Fetch {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$FetchImpl &&
-            (identical(other.returnId, returnId) ||
-                other.returnId == returnId));
+            (identical(other.returnItem, returnItem) ||
+                other.returnItem == returnItem));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, returnId);
+  int get hashCode => Object.hash(runtimeType, returnItem);
 
   @JsonKey(ignore: true)
   @override
@@ -265,32 +265,32 @@ class _$FetchImpl implements _Fetch {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function(ReturnRequestsId returnId) fetch,
+    required TResult Function(ReturnItem returnItem) fetch,
     required TResult Function(PoDocuments file) downloadFile,
   }) {
-    return fetch(returnId);
+    return fetch(returnItem);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function(ReturnRequestsId returnId)? fetch,
+    TResult? Function(ReturnItem returnItem)? fetch,
     TResult? Function(PoDocuments file)? downloadFile,
   }) {
-    return fetch?.call(returnId);
+    return fetch?.call(returnItem);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function(ReturnRequestsId returnId)? fetch,
+    TResult Function(ReturnItem returnItem)? fetch,
     TResult Function(PoDocuments file)? downloadFile,
     required TResult orElse(),
   }) {
     if (fetch != null) {
-      return fetch(returnId);
+      return fetch(returnItem);
     }
     return orElse();
   }
@@ -331,10 +331,9 @@ class _$FetchImpl implements _Fetch {
 }
 
 abstract class _Fetch implements ReturnSummaryDetailsEvent {
-  const factory _Fetch({required final ReturnRequestsId returnId}) =
-      _$FetchImpl;
+  const factory _Fetch({required final ReturnItem returnItem}) = _$FetchImpl;
 
-  ReturnRequestsId get returnId;
+  ReturnItem get returnItem;
   @JsonKey(ignore: true)
   _$$FetchImplCopyWith<_$FetchImpl> get copyWith =>
       throw _privateConstructorUsedError;
@@ -415,7 +414,7 @@ class _$DownloadFileImpl implements _DownloadFile {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialized,
-    required TResult Function(ReturnRequestsId returnId) fetch,
+    required TResult Function(ReturnItem returnItem) fetch,
     required TResult Function(PoDocuments file) downloadFile,
   }) {
     return downloadFile(file);
@@ -425,7 +424,7 @@ class _$DownloadFileImpl implements _DownloadFile {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initialized,
-    TResult? Function(ReturnRequestsId returnId)? fetch,
+    TResult? Function(ReturnItem returnItem)? fetch,
     TResult? Function(PoDocuments file)? downloadFile,
   }) {
     return downloadFile?.call(file);
@@ -435,7 +434,7 @@ class _$DownloadFileImpl implements _DownloadFile {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialized,
-    TResult Function(ReturnRequestsId returnId)? fetch,
+    TResult Function(ReturnItem returnItem)? fetch,
     TResult Function(PoDocuments file)? downloadFile,
     required TResult orElse(),
   }) {

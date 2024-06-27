@@ -76,7 +76,7 @@ void main() {
       ),
       setUp: () {
         when(
-          () => returnRequestInformationRepository.getReturnInformation(
+          () => returnRequestInformationRepository.getReturnRequestById(
             returnRequestId: fakeReturnRequestsId,
           ),
         ).thenAnswer(
@@ -112,7 +112,7 @@ void main() {
       ),
       setUp: () {
         when(
-          () => returnRequestInformationRepository.getReturnInformation(
+          () => returnRequestInformationRepository.getReturnRequestById(
             returnRequestId: fakeReturnRequestsId,
           ),
         ).thenAnswer(

@@ -59,7 +59,7 @@ void main() {
           ).thenAnswer(
             (_) async => successResult,
           );
-          final result = await repository.getReturnInformation(
+          final result = await repository.getReturnRequestById(
             returnRequestId: ReturnRequestsId(requestId: fakeId),
           );
           expect(result.isRight(), true);
@@ -78,7 +78,7 @@ void main() {
             () => returnSummaryDetailsRequestInformationLocal
                 .getReturnRequestInformation(),
           ).thenThrow(errorMock);
-          final result = await repository.getReturnInformation(
+          final result = await repository.getReturnRequestById(
             returnRequestId: ReturnRequestsId(requestId: fakeId),
           );
           expect(result.isLeft(), true);
@@ -99,7 +99,7 @@ void main() {
           ).thenAnswer(
             (_) async => successResult,
           );
-          final result = await repository.getReturnInformation(
+          final result = await repository.getReturnRequestById(
             returnRequestId: ReturnRequestsId(requestId: fakeId),
           );
           expect(result.isRight(), true);
@@ -122,7 +122,7 @@ void main() {
               market: fakeMarket,
             ),
           ).thenThrow(errorMock);
-          final result = await repository.getReturnInformation(
+          final result = await repository.getReturnRequestById(
             returnRequestId: ReturnRequestsId(requestId: fakeId),
           );
           expect(result.isLeft(), true);

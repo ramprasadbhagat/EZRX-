@@ -43,7 +43,7 @@ class ReturnDetailsByRequestBloc
         );
 
         final returnInformationFailureOrSuccess =
-            await returnRequestInformationRepository.getReturnInformation(
+            await returnRequestInformationRepository.getReturnRequestById(
           returnRequestId: ReturnRequestsId(requestId: e.returnId),
         );
         await returnInformationFailureOrSuccess.fold(

@@ -40,6 +40,8 @@ class ReturnItemDto with _$ReturnItemDto {
       readValue: JsonReadValueHelper.mappingIsMarketPlace,
     )
     required bool isMarketPlace,
+    @JsonKey(name: 'lineItemNumber', defaultValue: '')
+    required String lineItemNumber,
   }) = _ReturnItemDto;
 
   factory ReturnItemDto.fromDomain(
@@ -62,6 +64,7 @@ class ReturnItemDto with _$ReturnItemDto {
       expiry: returnItem.expiry.getOrCrash(),
       prsfd: returnItem.prsfd.getOrDefaultValue(''),
       isMarketPlace: returnItem.isMarketPlace,
+      lineItemNumber: returnItem.lineNumber,
     );
   }
 
@@ -84,6 +87,7 @@ class ReturnItemDto with _$ReturnItemDto {
       productImages: ProductImages.empty(),
       prsfd: Prsfd(prsfd),
       isMarketPlace: isMarketPlace,
+      lineNumber: lineItemNumber,
     );
   }
 

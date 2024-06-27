@@ -93,6 +93,8 @@ query requestInformationV2($request: requestInformationRequest!) {
 
 variable :{
   "request": {
-    "requestID": "EZRE-260123000411"
+    "requestID": "EZRE-260123000411",
+    "invoiceID": "1100001356",
+    "lineItemNumber": "000010"
   }
 }

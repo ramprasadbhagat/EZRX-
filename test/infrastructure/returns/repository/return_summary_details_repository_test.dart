@@ -1,7 +1,7 @@
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/returns/entities/request_information.dart';
-import 'package:ezrxmobile/domain/returns/entities/return_requests_id.dart';
+import 'package:ezrxmobile/domain/returns/entities/return_item.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/device_storage.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/return_summary_details_local.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/return_summary_details_remote.dart';
@@ -27,6 +27,11 @@ void main() {
   late DeviceStorage deviceStorage;
 
   const fakeMarket = 'fake-market';
+  final fakeReturnItem = ReturnItem.empty().copyWith(
+    requestId: 'fake-request-id',
+    invoiceID: 'fake-invoice-id',
+    lineNumber: 'fake-line-number',
+  );
 
   setUpAll(() async {
     TestWidgetsFlutterBinding.ensureInitialized();
@@ -58,7 +63,7 @@ void main() {
       );
 
       final result = await returnSummaryDetailsRepository.getReturnInformation(
-        returnRequestId: ReturnRequestsId(requestId: 'mock_id'),
+        returnItem: fakeReturnItem,
       );
       expect(result.isRight(), true);
     });
@@ -71,7 +76,7 @@ void main() {
       ).thenThrow((invocation) async => MockException());
 
       final result = await returnSummaryDetailsRepository.getReturnInformation(
-        returnRequestId: ReturnRequestsId(requestId: 'mock_id'),
+        returnItem: fakeReturnItem,
       );
       expect(result.isLeft(), true);
     });
@@ -82,7 +87,9 @@ void main() {
       when(
         () => returnSummaryDetailsRequestInformationRemote
             .getReturnRequestInformation(
-          returnRequestId: 'mock_id',
+          returnRequestId: fakeReturnItem.requestId,
+          invoiceId: fakeReturnItem.invoiceID,
+          lineNumber: fakeReturnItem.lineNumber,
           market: fakeMarket,
         ),
       ).thenAnswer(
@@ -90,7 +97,7 @@ void main() {
       );
 
       final result = await returnSummaryDetailsRepository.getReturnInformation(
-        returnRequestId: ReturnRequestsId(requestId: 'mock_id'),
+        returnItem: fakeReturnItem,
       );
       expect(result.isRight(), true);
     });
@@ -101,13 +108,15 @@ void main() {
       when(
         () => returnSummaryDetailsRequestInformationRemote
             .getReturnRequestInformation(
-          returnRequestId: 'mock_id',
+          returnRequestId: fakeReturnItem.requestId,
+          invoiceId: fakeReturnItem.invoiceID,
+          lineNumber: fakeReturnItem.lineNumber,
           market: fakeMarket,
         ),
       ).thenThrow((invocation) async => MockException());
 
       final result = await returnSummaryDetailsRepository.getReturnInformation(
-        returnRequestId: ReturnRequestsId(requestId: 'mock_id'),
+        returnItem: fakeReturnItem,
       );
       expect(result.isLeft(), true);
     });

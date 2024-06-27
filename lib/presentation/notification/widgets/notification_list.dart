@@ -87,13 +87,13 @@ class _NotificationList extends StatelessWidget {
     final eligibilityState = context.read<EligibilityBloc>().state;
     //Event call for Return Detail Page
     if (notificationData.isReturnEligible && eligibilityState.isReturnsEnable) {
-      context.read<ReturnSummaryDetailsBloc>().add(
-            ReturnSummaryDetailsEvent.fetch(
-              returnId: notificationData.returnRequestId,
+       context.read<ReturnDetailsByRequestBloc>().add(
+            ReturnDetailsByRequestEvent.fetch(
+              returnId: notificationData.returnRequestId.requestId,
             ),
           );
       //Navigate to return Detail Page
-      context.router.push(const ReturnRequestSummaryByItemDetailsRoute());
+      context.router.push(const ReturnRequestDetailsRoute());
     }
     //Event call for Order Detail Page
     else if (notificationData.isOrderEligible &&

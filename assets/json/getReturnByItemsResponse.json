@@ -20,7 +20,8 @@
                             "customerName": "RSD HOSPITALS SDN BHD (SJMC)",
                             "batch": "XAF068",
                             "outsidePolicy": true,
-                            "expiry": "20170531"
+                            "expiry": "20170531",
+                            "lineItemNumber": "0000011"
                         },
                         {
                             "prsfd": "X",
@@ -37,7 +38,8 @@
                             "customerName": "RSD HOSPITALS SDN BHD (SJMC)",
                             "batch": "XAF068",
                             "outsidePolicy": false,
-                            "expiry": "20170531"
+                            "expiry": "20170531",
+                            "lineItemNumber": "0000010"
                         },
                         {
                             "prsfd": "X",
@@ -55,7 +57,8 @@
                             "batch": "C10527042",
                             "outsidePolicy": false,
                             "expiry": "20251101",
-                            "isMarketPlace": true
+                            "isMarketPlace": true,
+                            "lineItemNumber": "0000010"
                         },
                         {
                             "prsfd": "X",
@@ -72,7 +75,8 @@
                             "customerName": "RSD HOSPITALS SDN BHD (SJMC)",
                             "batch": "XAF068",
                             "outsidePolicy": false,
-                            "expiry": "20170531"
+                            "expiry": "20170531",
+                            "lineItemNumber": "0000020"
                         },
                         {
                             "prsfd": "X",
@@ -89,7 +93,8 @@
                             "customerName": "RSD HOSPITALS SDN BHD (SJMC)",
                             "batch": "XAF068",
                             "outsidePolicy": false,
-                            "expiry": "20170531"
+                            "expiry": "20170531",
+                            "lineItemNumber": "0000030"
                         }
                     ]
                 },
@@ -111,7 +116,8 @@
                             "customerName": "RSD HOSPITALS SDN BHD (SJMC)",
                             "batch": "XAF068",
                             "outsidePolicy": false,
-                            "expiry": "20170531"
+                            "expiry": "20170531",
+                            "lineItemNumber": "0000010"
                         },
                         {
                             "prsfd": "X",
@@ -128,7 +134,8 @@
                             "customerName": "RSD HOSPITALS SDN BHD (SJMC)",
                             "batch": "XAF068",
                             "outsidePolicy": false,
-                            "expiry": "20170531"
+                            "expiry": "20170531",
+                            "lineItemNumber": "0000011"
                         }
                     ]
                 },
@@ -150,7 +157,8 @@
                             "customerName": "RSD HOSPITALS SDN BHD (SJMC)",
                             "batch": "XAF068",
                             "outsidePolicy": false,
-                            "expiry": "20170531"
+                            "expiry": "20170531",
+                            "lineItemNumber": "0000010"
                         },
                         {
                             "prsfd": "X",
@@ -167,7 +175,8 @@
                             "customerName": "RSD HOSPITALS SDN BHD (SJMC)",
                             "batch": "XAF068",
                             "outsidePolicy": false,
-                            "expiry": "20170531"
+                            "expiry": "20170531",
+                            "lineItemNumber": "0000011"
                         }
                     ]
                 },
@@ -189,7 +198,8 @@
                             "customerName": "RSD HOSPITALS SDN BHD (SJMC)",
                             "batch": "C10527042",
                             "outsidePolicy": false,
-                            "expiry": "20251101"
+                            "expiry": "20251101",
+                            "lineItemNumber": "0000010"
                         }
                     ]
                 }

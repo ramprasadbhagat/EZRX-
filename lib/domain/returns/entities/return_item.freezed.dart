@@ -33,6 +33,7 @@ mixin _$ReturnItem {
   ProductImages get productImages => throw _privateConstructorUsedError;
   Prsfd get prsfd => throw _privateConstructorUsedError;
   bool get isMarketPlace => throw _privateConstructorUsedError;
+  String get lineNumber => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ReturnItemCopyWith<ReturnItem> get copyWith =>
@@ -62,7 +63,8 @@ abstract class $ReturnItemCopyWith<$Res> {
       DateTimeStringValue expiry,
       ProductImages productImages,
       Prsfd prsfd,
-      bool isMarketPlace});
+      bool isMarketPlace,
+      String lineNumber});
 
   $ProductImagesCopyWith<$Res> get productImages;
 }
@@ -97,6 +99,7 @@ class _$ReturnItemCopyWithImpl<$Res, $Val extends ReturnItem>
     Object? productImages = null,
     Object? prsfd = null,
     Object? isMarketPlace = null,
+    Object? lineNumber = null,
   }) {
     return _then(_value.copyWith(
       requestId: null == requestId
@@ -167,6 +170,10 @@ class _$ReturnItemCopyWithImpl<$Res, $Val extends ReturnItem>
           ? _value.isMarketPlace
           : isMarketPlace // ignore: cast_nullable_to_non_nullable
               as bool,
+      lineNumber: null == lineNumber
+          ? _value.lineNumber
+          : lineNumber // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 
@@ -204,7 +211,8 @@ abstract class _$$ReturnItemImplCopyWith<$Res>
       DateTimeStringValue expiry,
       ProductImages productImages,
       Prsfd prsfd,
-      bool isMarketPlace});
+      bool isMarketPlace,
+      String lineNumber});
 
   @override
   $ProductImagesCopyWith<$Res> get productImages;
@@ -238,6 +246,7 @@ class __$$ReturnItemImplCopyWithImpl<$Res>
     Object? productImages = null,
     Object? prsfd = null,
     Object? isMarketPlace = null,
+    Object? lineNumber = null,
   }) {
     return _then(_$ReturnItemImpl(
       requestId: null == requestId
@@ -308,6 +317,10 @@ class __$$ReturnItemImplCopyWithImpl<$Res>
           ? _value.isMarketPlace
           : isMarketPlace // ignore: cast_nullable_to_non_nullable
               as bool,
+      lineNumber: null == lineNumber
+          ? _value.lineNumber
+          : lineNumber // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -332,7 +345,8 @@ class _$ReturnItemImpl extends _ReturnItem {
       required this.expiry,
       required this.productImages,
       required this.prsfd,
-      required this.isMarketPlace})
+      required this.isMarketPlace,
+      required this.lineNumber})
       : super._();
 
   @override
@@ -369,10 +383,12 @@ class _$ReturnItemImpl extends _ReturnItem {
   final Prsfd prsfd;
   @override
   final bool isMarketPlace;
+  @override
+  final String lineNumber;
 
   @override
   String toString() {
-    return 'ReturnItem(requestId: $requestId, requestDate: $requestDate, itemQty: $itemQty, totalPrice: $totalPrice, status: $status, materialNumber: $materialNumber, materialName: $materialName, defaultMaterialDescription: $defaultMaterialDescription, orderNumber: $orderNumber, invoiceID: $invoiceID, customerName: $customerName, batch: $batch, outsidePolicy: $outsidePolicy, expiry: $expiry, productImages: $productImages, prsfd: $prsfd, isMarketPlace: $isMarketPlace)';
+    return 'ReturnItem(requestId: $requestId, requestDate: $requestDate, itemQty: $itemQty, totalPrice: $totalPrice, status: $status, materialNumber: $materialNumber, materialName: $materialName, defaultMaterialDescription: $defaultMaterialDescription, orderNumber: $orderNumber, invoiceID: $invoiceID, customerName: $customerName, batch: $batch, outsidePolicy: $outsidePolicy, expiry: $expiry, productImages: $productImages, prsfd: $prsfd, isMarketPlace: $isMarketPlace, lineNumber: $lineNumber)';
   }
 
   @override
@@ -410,7 +426,9 @@ class _$ReturnItemImpl extends _ReturnItem {
                 other.productImages == productImages) &&
             (identical(other.prsfd, prsfd) || other.prsfd == prsfd) &&
             (identical(other.isMarketPlace, isMarketPlace) ||
-                other.isMarketPlace == isMarketPlace));
+                other.isMarketPlace == isMarketPlace) &&
+            (identical(other.lineNumber, lineNumber) ||
+                other.lineNumber == lineNumber));
   }
 
   @override
@@ -432,7 +450,8 @@ class _$ReturnItemImpl extends _ReturnItem {
       expiry,
       productImages,
       prsfd,
-      isMarketPlace);
+      isMarketPlace,
+      lineNumber);
 
   @JsonKey(ignore: true)
   @override
@@ -459,7 +478,8 @@ abstract class _ReturnItem extends ReturnItem {
       required final DateTimeStringValue expiry,
       required final ProductImages productImages,
       required final Prsfd prsfd,
-      required final bool isMarketPlace}) = _$ReturnItemImpl;
+      required final bool isMarketPlace,
+      required final String lineNumber}) = _$ReturnItemImpl;
   const _ReturnItem._() : super._();
 
   @override
@@ -496,6 +516,8 @@ abstract class _ReturnItem extends ReturnItem {
   Prsfd get prsfd;
   @override
   bool get isMarketPlace;
+  @override
+  String get lineNumber;
   @override
   @JsonKey(ignore: true)
   _$$ReturnItemImplCopyWith<_$ReturnItemImpl> get copyWith =>

@@ -62,6 +62,8 @@ void main() {
           'variables': {
             'request': {
               'requestID': 'mock_id',
+              'invoiceID': 'mock-invoice-id',
+              'lineItemNumber': 'mock-line-number',
             },
           },
         });
@@ -71,7 +73,6 @@ void main() {
           (server) => server.reply(
             200,
             res,
-            delay: const Duration(seconds: 1),
           ),
           headers: {'Content-Type': 'application/json; charset=utf-8'},
           data: data,
@@ -79,6 +80,8 @@ void main() {
 
         final result = await remoteDataSource.getReturnRequestInformation(
           returnRequestId: 'mock_id',
+          invoiceId: 'mock-invoice-id',
+          lineNumber: 'mock-line-number',
           market: fakeMarket,
         );
 
@@ -95,7 +98,8 @@ void main() {
               .getReturnInformationQuery(fakeConfigValue),
           'variables': {
             'request': {
-              'invoiceID': 'mock_id',
+              'invoiceID': 'mock-invoice-id',
+              'lineItemNumber': 'mock-line-number',
               'requestID': 'mock_id',
             },
           },
@@ -106,7 +110,6 @@ void main() {
           (server) => server.reply(
             204,
             {'data': []},
-            delay: const Duration(seconds: 1),
           ),
           headers: {'Content-Type': 'application/json; charset=utf-8'},
           data: data,
@@ -115,6 +118,8 @@ void main() {
         await remoteDataSource
             .getReturnRequestInformation(
           returnRequestId: 'mock_id',
+          invoiceId: 'mock-invoice-id',
+          lineNumber: 'mock-line-number',
           market: fakeMarket,
         )
             .onError((error, stackTrace) async {
@@ -129,7 +134,8 @@ void main() {
               .getReturnInformationQuery(fakeConfigValue),
           'variables': {
             'request': {
-              'invoiceID': 'mock_id',
+              'invoiceID': 'mock-invoice-id',
+              'lineItemNumber': 'mock-line-number',
               'requestID': 'mock_id',
             },
           },
@@ -145,7 +151,6 @@ void main() {
                 {'message': 'fake-error'},
               ],
             },
-            delay: const Duration(seconds: 1),
           ),
           headers: {'Content-Type': 'application/json; charset=utf-8'},
           data: data,
@@ -154,6 +159,8 @@ void main() {
         await remoteDataSource
             .getReturnRequestInformation(
           returnRequestId: 'mock_id',
+          invoiceId: 'mock-invoice-id',
+          lineNumber: 'mock-line-number',
           market: fakeMarket,
         )
             .onError((error, stackTrace) async {
@@ -168,7 +175,8 @@ void main() {
               .getReturnInformationQuery(fakeConfigValue),
           'variables': {
             'request': {
-              'invoiceID': 'mock_id',
+              'invoiceID': 'mock-invoice-id',
+              'lineItemNumber': 'mock-line-number',
               'requestID': 'mock_id',
             },
           },
@@ -181,7 +189,6 @@ void main() {
             {
               'data': null,
             },
-            delay: const Duration(seconds: 1),
           ),
           headers: {'Content-Type': 'application/json; charset=utf-8'},
           data: data,
@@ -190,6 +197,8 @@ void main() {
         await remoteDataSource
             .getReturnRequestInformation(
           returnRequestId: 'mock_id',
+          invoiceId: 'mock-invoice-id',
+          lineNumber: 'mock-line-number',
           market: fakeMarket,
         )
             .onError((error, stackTrace) async {
@@ -206,7 +215,8 @@ void main() {
               .getReturnInformationQuery(fakeConfigValue),
           'variables': {
             'request': {
-              'invoiceID': 'mock_id',
+              'invoiceID': 'mock-invoice-id',
+              'lineItemNumber': 'mock-line-number',
               'requestID': 'mock_id',
             },
           },
@@ -219,7 +229,6 @@ void main() {
             {
               'data': {'requestInformationV2': null},
             },
-            delay: const Duration(seconds: 1),
           ),
           headers: {'Content-Type': 'application/json; charset=utf-8'},
           data: data,
@@ -228,6 +237,8 @@ void main() {
         await remoteDataSource
             .getReturnRequestInformation(
           returnRequestId: 'mock_id',
+          invoiceId: 'mock-invoice-id',
+          lineNumber: 'mock-line-number',
           market: fakeMarket,
         )
             .onError((error, stackTrace) async {

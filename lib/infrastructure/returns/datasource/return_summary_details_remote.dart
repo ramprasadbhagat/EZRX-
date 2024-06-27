@@ -26,6 +26,8 @@ class ReturnSummaryDetailsRequestInformationRemote {
 
   Future<RequestInformation> getReturnRequestInformation({
     required String returnRequestId,
+    String invoiceId = '',
+    String lineNumber = '',
     required String market,
   }) async {
     final res = await httpService.request(
@@ -39,6 +41,8 @@ class ReturnSummaryDetailsRequestInformationRemote {
           'variables': {
             'request': {
               'requestID': returnRequestId,
+              if (invoiceId.isNotEmpty) 'invoiceID': invoiceId,
+              if (lineNumber.isNotEmpty) 'lineItemNumber': lineNumber,
             },
           },
         },

@@ -6,7 +6,7 @@ import 'package:ezrxmobile/application/deep_linking/deep_linking_bloc.dart';
 import 'package:ezrxmobile/application/notification/notification_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_order_details/view_by_order_details_bloc.dart';
 import 'package:ezrxmobile/application/payments/payment_summary_details/payment_summary_details_bloc.dart';
-import 'package:ezrxmobile/application/returns/return_summary_details/return_summary_details_bloc.dart';
+import 'package:ezrxmobile/application/returns/return_list/view_by_request/details/return_details_by_request_bloc.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/notification/entities/notification_data.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_summary_details.dart';
