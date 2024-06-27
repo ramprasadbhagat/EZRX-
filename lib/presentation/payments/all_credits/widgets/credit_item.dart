@@ -12,13 +12,12 @@ class _CreditsItem extends StatelessWidget {
     final isIDMarket = context.read<EligibilityBloc>().state.isIDMarket;
 
     return CustomCard(
-      padding: const EdgeInsets.symmetric(
-        vertical: 10,
-      ),
-      child: ListTile(
+      padding: const EdgeInsets.all(16),
+      margin: const EdgeInsets.only(bottom: 24),
+      child: InkWell(
         key: WidgetKeys.creditsItemTile,
         onTap: !isIDMarket ? () => _onItemClick(context) : null,
-        title: Column(
+        child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
@@ -46,43 +45,29 @@ class _CreditsItem extends StatelessWidget {
               ],
             ),
             if (context.read<EligibilityBloc>().state.salesOrg.showGovNumber)
-              Padding(
-                padding: const EdgeInsets.only(bottom: 2.0),
-                child: Text(
-                  '${context.tr('Gov. no')} ${creditItem.documentReferenceID.displayDashIfEmpty}',
-                  key: WidgetKeys.governmentNumber,
-                  style: Theme.of(context).textTheme.labelSmall,
-                ),
+              Text(
+                '${context.tr('Gov. no')} ${creditItem.documentReferenceID.displayDashIfEmpty}',
+                key: WidgetKeys.governmentNumber,
+                style: Theme.of(context).textTheme.labelSmall,
               ),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 8),
+              child: Text(
+                creditItem.accountingDocumentType,
+                style: Theme.of(context).textTheme.bodyMedium,
+              ),
+            ),
+            PriceComponent(
+              salesOrgConfig:
+                  context.read<EligibilityBloc>().state.salesOrgConfigs,
+              price: creditItem.convertIfAmountInTransactionCurrencyIsNegative
+                  .toString(),
+              priceLabelStyle: Theme.of(context).textTheme.titleSmall!.copyWith(
+                    color: ZPColors.primary,
+                    fontWeight: FontWeight.bold,
+                  ),
+            ),
           ],
-        ),
-        subtitle: Padding(
-          padding: const EdgeInsets.only(
-            top: 8,
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(bottom: 8.0),
-                child: Text(
-                  creditItem.accountingDocumentType,
-                  style: Theme.of(context).textTheme.bodyMedium,
-                ),
-              ),
-              PriceComponent(
-                salesOrgConfig:
-                    context.read<EligibilityBloc>().state.salesOrgConfigs,
-                price: creditItem.convertIfAmountInTransactionCurrencyIsNegative
-                    .toString(),
-                priceLabelStyle:
-                    Theme.of(context).textTheme.titleSmall!.copyWith(
-                          color: ZPColors.primary,
-                          fontWeight: FontWeight.bold,
-                        ),
-              ),
-            ],
-          ),
         ),
       ),
     );

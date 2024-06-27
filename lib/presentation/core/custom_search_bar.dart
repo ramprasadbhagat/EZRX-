@@ -85,18 +85,18 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
       inputFormatters: widget.inputFormatters,
       style: Theme.of(context).textTheme.titleMedium?.copyWith(height: 1.5),
       decoration: InputDecoration(
+        contentPadding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
         fillColor: widget.backgroundColor,
+        suffixIconConstraints: const BoxConstraints(
+          maxHeight: 36,
+          maxWidth: 36,
+        ),
         suffixIcon: controller.text.isEmpty
             ? widget.searchSuffixIcon ??
                 IconButton(
                   key: WidgetKeys.searchIconKey,
-                  icon: const Icon(
-                    Icons.search,
-                    size: 22,
-                  ),
-                  splashRadius: 22,
-                  visualDensity:
-                      const VisualDensity(horizontal: -4, vertical: -4),
+                  icon: const Icon(Icons.search),
+                  iconSize: 20,
                   onPressed: () => _onSearch(
                     context,
                     controller.text,
@@ -104,9 +104,9 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
                 )
             : IconButton(
                 key: WidgetKeys.clearIconKey,
+                iconSize: 20,
                 icon: const Icon(
                   Icons.cancel_rounded,
-                  size: 24,
                   color: ZPColors.backgroundCloseButtonSnackBar,
                 ),
                 onPressed: () {

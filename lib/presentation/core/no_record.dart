@@ -157,6 +157,14 @@ class NoRecordFound extends StatelessWidget {
         svgImage: SvgImage.shoppingCart,
       );
 
+  factory NoRecordFound.allCredits({required bool isSearching}) => isSearching
+      ? const NoRecordFound()
+      : const NoRecordFound(
+          title: 'No credit to show',
+          subTitle: 'Credits issued on eZRx+ will be shown here',
+          svgImage: SvgImage.emptyBox,
+        );
+
   @override
   Widget build(BuildContext context) {
     return Padding(

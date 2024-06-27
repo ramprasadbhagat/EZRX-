@@ -16,7 +16,6 @@ class _CreditGroup extends StatelessWidget {
         if (showDivider)
           const Divider(
             indent: 0,
-            height: 20,
             endIndent: 0,
             color: ZPColors.lightGray2,
           ),
@@ -26,7 +25,7 @@ class _CreditGroup extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
-                padding: const EdgeInsets.symmetric(vertical: 20.0),
+                padding: const EdgeInsets.symmetric(vertical: 24.0),
                 child: Text(
                   '${context.tr('Created on')} ${data.dueDate.dateString}',
                   key: WidgetKeys.creditCreatedOn,

@@ -12,7 +12,7 @@ class AmountFromFilter extends StatefulWidget {
   const AmountFromFilter({
     required this.amountFrom,
     required this.onAmountFromChanged,
-    this.decoration ,
+    this.decoration,
     super.key,
   });
 
@@ -52,15 +52,16 @@ class _AmountFromFilterState extends State<AmountFromFilter> {
         fieldKey: WidgetKeys.amountValueFrom,
         controller: controller,
         onChanged: widget.onAmountFromChanged,
-        decoration: widget.decoration ?? InputDecoration(
-          hintText: context.tr('Amount from'),
-          hintStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
-                color: ZPColors.darkGray,
-              ),
-          labelStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
-                color: ZPColors.darkGray,
-              ),
-        ),
+        decoration: widget.decoration ??
+            InputDecoration(
+              hintText: context.tr('Amount from'),
+              hintStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
+                    color: ZPColors.darkGray,
+                  ),
+              labelStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
+                    color: ZPColors.darkGray,
+                  ),
+            ),
       ),
     );
   }

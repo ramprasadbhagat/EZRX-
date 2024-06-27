@@ -79,15 +79,14 @@ class _AllCreditsPageState extends State<AllCreditsPage> {
                 previous.isLoading != current.isLoading,
             builder: (context, state) {
               return ScrollList<CreditAndInvoiceGroup>(
-                noRecordFoundWidget: const NoRecordFound(
-                  title: 'No credit found',
+                noRecordFoundWidget: NoRecordFound.allCredits(
+                  isSearching: !state.appliedFilter.searchKey.isValueEmpty,
                 ),
                 controller: _controller,
                 onRefresh: () =>
                     context.allCreditsBloc(widget.isMarketPlace).add(
                           AllCreditsEvent.fetch(
-                            appliedFilter:
-                                AllCreditsFilter.defaultFilter(),
+                            appliedFilter: AllCreditsFilter.defaultFilter(),
                           ),
                         ),
                 onLoadingMore: () =>

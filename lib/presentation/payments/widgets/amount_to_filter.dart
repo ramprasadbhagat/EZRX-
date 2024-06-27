@@ -51,12 +51,16 @@ class _AmountToFilterState extends State<AmountToFilter> {
         fieldKey: WidgetKeys.amountValueTo,
         controller: controller,
         onChanged: widget.onAmountToChanged,
-        decoration: widget.decoration ?? InputDecoration(
-          labelText: context.tr('Amount to'),
-          hintStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
-                color: ZPColors.darkGray,
-              ),
-        ),
+        decoration: widget.decoration ??
+            InputDecoration(
+              hintText: context.tr('Amount to'),
+              hintStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
+                    color: ZPColors.darkGray,
+                  ),
+              labelStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
+                    color: ZPColors.darkGray,
+                  ),
+            ),
       ),
     );
   }

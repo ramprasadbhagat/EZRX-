@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/domain/core/value/constants.dart';
+import 'package:ezrxmobile/presentation/core/no_record.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
 import 'package:ezrxmobile/presentation/core/status_label.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
@@ -65,16 +66,10 @@ class AccountCreditsRobot extends CommonRobot {
 
   void verifyNoCreditFound() {
     expect(_itemTile, findsNothing);
-    expect(find.byKey(WidgetKeys.noRecordsFoundSearchIcon), findsOneWidget);
-    expect(find.text('No credit found'.tr()), findsOneWidget);
-    expect(
-      find.text(noRecordFoundDefaultSubTitle),
-      findsOneWidget,
-    );
+    expect(find.byType(NoRecordFound), findsOne);
   }
 
-  bool get noCreditFound =>
-      find.text('No credit found'.tr()).evaluate().isNotEmpty;
+  bool get noCreditFound => _itemTile.evaluate().isEmpty;
 
   void verifyCreditItem(String searchKey, String status, String price) {
     _verifyCreditItemId(searchKey);

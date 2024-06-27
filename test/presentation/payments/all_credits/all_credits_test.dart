@@ -3,6 +3,7 @@ import 'package:ezrxmobile/application/payments/download_e_credit/download_e_cre
 import 'package:ezrxmobile/application/payments/new_payment/new_payment_bloc.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/market_place/market_place_logo.dart';
+import 'package:ezrxmobile/presentation/core/no_record.dart';
 import 'package:flutter/material.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:ezrxmobile/config.dart';
@@ -416,6 +417,68 @@ void main() {
       expect(
         autoRouterMock.currentPath,
         CreditDetailsPageRoute(isMarketPlace: true).path,
+      );
+    });
+
+    testWidgets('Show no record found when search key is empty',
+        (tester) async {
+      when(() => allCreditsBlocMock.state).thenReturn(
+        AllCreditsState.initial().copyWith.appliedFilter(
+              filterOption: FilterOption.amountRange(),
+              amountValueFrom: RangeValue('0'),
+              amountValueTo: RangeValue('1'),
+            ),
+      );
+      await tester.pumpWidget(getWidget());
+      await tester.pumpAndSettle();
+
+      final noRecordWidget = find.byType(NoRecordFound);
+      expect(creditsItemTile, findsNothing);
+      expect(noRecordWidget, findsOne);
+      expect(
+        find.descendant(
+          of: noRecordWidget,
+          matching: find.text('No credit to show'),
+        ),
+        findsOne,
+      );
+      expect(
+        find.descendant(
+          of: noRecordWidget,
+          matching: find.text('Credits issued on eZRx+ will be shown here.'),
+        ),
+        findsOne,
+      );
+    });
+
+    testWidgets('Show no record found when search key is not empty',
+        (tester) async {
+      when(() => allCreditsBlocMock.state).thenReturn(
+        AllCreditsState.initial().copyWith.appliedFilter(
+              searchKey: SearchKey('fake-key'),
+            ),
+      );
+      await tester.pumpWidget(getWidget());
+      await tester.pumpAndSettle();
+
+      final noRecordWidget = find.byType(NoRecordFound);
+      expect(creditsItemTile, findsNothing);
+      expect(noRecordWidget, findsOne);
+      expect(
+        find.descendant(
+          of: noRecordWidget,
+          matching: find.text("That didn't match anything"),
+        ),
+        findsOne,
+      );
+      expect(
+        find.descendant(
+          of: noRecordWidget,
+          matching: find.text(
+            'Try adjusting your search or filter selection to find what you’re looking for.',
+          ),
+        ),
+        findsOne,
       );
     });
   });
