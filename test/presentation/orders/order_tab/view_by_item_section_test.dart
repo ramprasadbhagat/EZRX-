@@ -29,6 +29,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
+import '../../../../integration_test/robots/common/extension.dart';
 import '../../../common_mock_data/customer_code_mock.dart';
 import '../../../common_mock_data/mock_bloc.dart';
 import '../../../common_mock_data/mock_other.dart';
@@ -36,6 +37,7 @@ import '../../../common_mock_data/sales_org_config_mock/fake_id_sales_org_config
 import '../../../common_mock_data/sales_org_config_mock/fake_my_sales_org_config.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_th_sales_org_config.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_tw_sales_org_config.dart';
+import '../../../common_mock_data/sales_org_config_variant_mock.dart';
 import '../../../common_mock_data/sales_organsiation_mock.dart';
 import '../../../common_mock_data/user_mock.dart';
 import '../../../utils/widget_utils.dart';
@@ -728,7 +730,8 @@ void main() {
       expect(find.text('FREE', findRichText: true), findsOneWidget);
     });
 
-    testWidgets('Do not display "FREE" for zero price in Indo market', (tester) async {
+    testWidgets('Do not display "FREE" for zero price in Indo market',
+        (tester) async {
       when(() => eligibilityBlocMock.state).thenReturn(
         EligibilityState.initial().copyWith(
           salesOrganisation: fakeTHSalesOrganisation.copyWith(
@@ -755,5 +758,57 @@ void main() {
 
       expect(find.text('IDR 0', findRichText: true), findsOneWidget);
     });
+
+    testWidgets(
+      'display totalPrice for view by order item tile',
+      (tester) async {
+        final currentSalesOrgConfigVariant =
+            salesOrgConfigVariant.currentValue ?? fakeIDSalesOrgConfigs;
+
+        final currentSalesOrg = currentSalesOrgConfigVariant.salesOrg;
+
+        final currentSalesOrganisation = fakeEmptySalesOrganisation.copyWith(
+          salesOrg: currentSalesOrg,
+        );
+
+        final currency = currentSalesOrgConfigVariant.currency.code;
+        const totalPrice = 20.0;
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrganisation: currentSalesOrganisation,
+            salesOrgConfigs: currentSalesOrgConfigVariant,
+          ),
+        );
+
+        when(() => mockViewByItemsBloc.state).thenReturn(
+          ViewByItemsState.initial().copyWith(
+            isFetching: false,
+            orderHistory: orderHistory.copyWith(
+              orderHistoryItems: [
+                fakeOrderHistoryItems.first.copyWith(
+                  totalPrice: totalPrice,
+                ),
+              ],
+            ),
+          ),
+        );
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pumpAndSettle();
+
+        expect(
+          find.descendant(
+            of: find.byKey(WidgetKeys.viewByOrderGrandTotalKey),
+            matching: find.textContaining(
+              currentSalesOrg.isID
+                  ? totalPrice.priceDisplayForID(currency)
+                  : totalPrice.priceDisplay(currency),
+              findRichText: true,
+            ),
+          ),
+          findsOneWidget,
+        );
+      },
+      variant: salesOrgConfigVariant,
+    );
   });
 }

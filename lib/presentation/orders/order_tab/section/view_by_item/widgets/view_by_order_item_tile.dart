@@ -168,8 +168,9 @@ class _ViewByOrderItemTile extends StatelessWidget {
               child: _Subtitle(
                 quantity: orderHistoryItem.qty.toString(),
                 priceComponent: PriceComponent(
+                  key: WidgetKeys.viewByOrderGrandTotalKey,
                   type: PriceStyle.tenderViewOrderByItemPrice,
-                  price: orderHistoryItem.itemTotalNetPrice(
+                  price: orderHistoryItem.totalNetPrice(
                     context.read<EligibilityBloc>().state.salesOrg.isID,
                   ),
                   salesOrgConfig:
