@@ -192,7 +192,9 @@ Future<void> runAppWithCrashlyticsAndLocalization() async {
   final configuration = locator<DatadogService>().configuration;
   await DatadogSdk.runApp(
     configuration,
-    TrackingConsent.granted,
+    locator<Config>().enableDatadog
+        ? TrackingConsent.granted
+        : TrackingConsent.notGranted,
     () {
       runApp(
         EasyLocalization(

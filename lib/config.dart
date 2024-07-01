@@ -244,6 +244,8 @@ class Config {
 
   DatadogSite get datadogSite => DatadogSite.eu1;
 
+  bool get enableDatadog => appFlavor == Flavor.prod;
+
   String get datadogClientToken {
     switch (appFlavor) {
       case Flavor.dev:
