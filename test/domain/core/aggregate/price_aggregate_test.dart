@@ -527,53 +527,6 @@ void main() {
     );
 
     test(
-      'getNewPrice from PriceAggregate for isExempt',
-      () {
-        final customPriceAggregate = emptyPriceAggregate.copyWith(
-          price: emptyPrice.copyWith(finalPrice: MaterialPrice(20.0)),
-          materialInfo: emptyMaterialInfo.copyWith(
-            taxClassification: MaterialTaxClassification('Exempt'),
-          ),
-        );
-        expect(
-          customPriceAggregate.getNewPrice(),
-          customPriceAggregate.price.finalPrice.getOrCrash(),
-        );
-      },
-    );
-
-    test(
-      'getNewPrice from PriceAggregate for isNoTax',
-      () {
-        final customPriceAggregate = emptyPriceAggregate.copyWith(
-          price: emptyPrice.copyWith(finalPrice: MaterialPrice(20.0)),
-          materialInfo: emptyMaterialInfo.copyWith(
-            taxClassification: MaterialTaxClassification('noTax'),
-          ),
-          salesOrgConfig: fakeMYSalesOrgConfigs,
-        );
-        expect(
-          customPriceAggregate.getNewPrice(),
-          customPriceAggregate.price.finalPrice.getOrCrash() /
-              (1 + customPriceAggregate.salesOrgConfig.vatValue),
-        );
-      },
-    );
-
-    test(
-      'getNewPrice from PriceAggregate',
-      () {
-        final customPriceAggregate = emptyPriceAggregate.copyWith(
-          price: emptyPrice.copyWith(finalPrice: MaterialPrice(20.0)),
-        );
-        expect(
-          customPriceAggregate.getNewPrice(),
-          customPriceAggregate.price.finalPrice.getOrCrash() / 1,
-        );
-      },
-    );
-
-    test(
       'display from PriceAggregate for finalPrice isUnavailable',
       () {
         final customPriceAggregate = emptyPriceAggregate.copyWith(
@@ -1951,7 +1904,7 @@ void main() {
               principalCode: PrincipalCode('100822'),
             ),
             tax: 5.0,
-            taxClassification: MaterialTaxClassification('noTax'),
+            taxClassification: MaterialTaxClassification('Product : No Tax'),
           ),
           salesOrgConfig: fakeIDSalesOrgConfigs,
         );

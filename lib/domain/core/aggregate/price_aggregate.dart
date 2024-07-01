@@ -403,14 +403,6 @@ class PriceAggregate with _$PriceAggregate {
       )
       .rate;
 
-  double getNewPrice() => !materialInfo.taxClassification.isNoTax
-      ? price.finalPrice.getOrCrash()
-      : ((price.finalPrice.getOrCrash()) /
-          (1 +
-              (materialInfo.taxClassification.isNoTax
-                  ? salesOrgConfig.vatValue
-                  : 0)));
-
   String get displayZdp5Price {
     return price.tiers
         .firstWhere(

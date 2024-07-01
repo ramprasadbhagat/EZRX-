@@ -90,7 +90,7 @@ void main() {
 
   group('MaterialTaxClassification Name Value Object', () {
     test('should return true when there is no Tax', () {
-      const input = 'noTax';
+      const input = 'Product : No Tax';
       final valObj = MaterialTaxClassification(input);
       final result = valObj.isNoTax;
       expect(result, true);
