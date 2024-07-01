@@ -132,6 +132,7 @@ class CustomerSearchPage extends StatelessWidget {
                             height: 25.0,
                             width: 25.0,
                             child: SvgPicture.asset(
+                              key: WidgetKeys.countryFlag,
                               state.salesOrg.countryFlag,
                               fit: BoxFit.fill,
                             ),

@@ -478,6 +478,25 @@ void main() {
       );
     });
 
+    testWidgets('The app bar should display the HK flag.', (tester) async {
+      when(() => customerCodeBlocMock.state).thenReturn(
+        CustomerCodeState.initial().copyWith(
+          isFetching: false,
+          customerCodeList: [customerInformationMock.soldToInformation.last],
+        ),
+      );
+      when(() => salesOrgBlocMock.state).thenReturn(
+        SalesOrgState.initial().copyWith(
+          salesOrganisation:
+              SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('1700')),
+        ),
+      );
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pumpAndSettle();
+      final customerFlag = find.byKey(WidgetKeys.countryFlag);
+      expect(customerFlag, findsOneWidget);
+    });
+
     //TODO: Fix customer search widget because change flow of select customer code
 
     // testWidgets('Clear Customer code Search', (tester) async {

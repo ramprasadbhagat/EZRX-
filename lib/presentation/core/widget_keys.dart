@@ -230,6 +230,7 @@ class WidgetKeys {
   static Key customerDeliveryAddressOption(String shipToName) =>
       Key('customerDeliveryAddressOption$shipToName');
   static const Key customerCode = Key('customerCode');
+  static const Key countryFlag = Key('countryFlag');
 
   //============================================================
   //  ShipToSearch page Keys
