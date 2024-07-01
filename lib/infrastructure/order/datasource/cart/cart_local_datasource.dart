@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
+import 'package:ezrxmobile/domain/order/entities/apl_get_total_price.dart';
 import 'package:ezrxmobile/domain/order/entities/cart.dart';
 import 'package:ezrxmobile/infrastructure/core/common/json_key_converter.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/apl_get_total_price_dto.dart';
@@ -78,7 +79,7 @@ class CartLocalDataSource {
     return AplSimulatorOrderDto.fromJson(aplSimulatorOrder).toDomain;
   }
 
-  Future<AplSimulatorOrder> aplGetTotalPrice() async {
+  Future<AplGetTotalPrice> aplGetTotalPrice() async {
     final data = json.decode(
       await rootBundle.loadString('assets/json/aplGetTotalPriceResponse.json'),
     );

@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 
 import 'package:ezrxmobile/domain/core/product_images/entities/product_images.dart';
+import 'package:ezrxmobile/domain/order/entities/apl_get_total_price.dart';
 import 'package:ezrxmobile/domain/order/entities/apl_product.dart';
 import 'package:ezrxmobile/domain/order/entities/combo_material_item.dart';
 import 'package:ezrxmobile/domain/order/entities/price_tier.dart';
@@ -4479,21 +4480,44 @@ void main() {
 
       test('grandTotalDisplayed getter', () {
         const smallOrderFee = 13.5;
+        const grandTotalOnCart = 999;
+        const grandTotalOnCheckout = 990;
+        //on checkout for ID
         expect(
           CartState.initial()
               .copyWith(
                 salesOrganisation: fakeIDSalesOrganisation,
-                aplSimulatorOrder:
-                    AplSimulatorOrder.empty().copyWith(grandTotal: 999),
+                aplSimulatorOrder: AplSimulatorOrder.empty()
+                    .copyWith(grandTotal: grandTotalOnCheckout.toDouble()),
               )
-              .grandTotalDisplayed(smallOrderFee: smallOrderFee),
-          999,
+              .grandTotalPriceDisplayed(
+                smallOrderFee: smallOrderFee,
+                displayIDPriceOnCheckout: true,
+              ),
+          grandTotalOnCheckout,
+        );
+
+        //on cart for ID
+        expect(
+          CartState.initial()
+              .copyWith(
+                salesOrganisation: fakeIDSalesOrganisation,
+                aplGetTotalPrice: AplGetTotalPrice.empty()
+                    .copyWith(grandTotal: grandTotalOnCart),
+              )
+              .grandTotalPriceDisplayed(
+                smallOrderFee: smallOrderFee,
+                displayIDPriceOnCheckout: false,
+              ),
+          grandTotalOnCart,
         );
 
         expect(
           CartState.initial().copyWith(
             cartProducts: [priceAggregates.first.copyWith(price: prices.first)],
-          ).grandTotalDisplayed(smallOrderFee: smallOrderFee),
+          ).grandTotalPriceDisplayed(
+            smallOrderFee: smallOrderFee,
+          ),
           273.6 + smallOrderFee,
         );
       });
@@ -5108,8 +5132,38 @@ void main() {
           );
         },
       );
+
       test(
-        'Testing CartBloc checkoutSubTotalHidePriceMaterial for ID',
+        'Testing CartBloc checkoutSubTotalHidePriceMaterial for ID - on cart page',
+        () {
+          const qty = 2;
+          const finalPrice = 100.0;
+          const listPrice = 120.0;
+          final item = PriceAggregate.empty().copyWith(
+            price: Price.empty().copyWith(
+              finalPrice: MaterialPrice(finalPrice),
+              lastPrice: MaterialPrice(listPrice),
+              finalTotalPrice: MaterialPrice(finalPrice * qty),
+            ),
+            quantity: qty,
+            materialInfo: MaterialInfo.empty().copyWith(hidePrice: false),
+          );
+          final cartBlocState = CartState.initial().copyWith(
+            cartProducts: [item],
+            aplGetTotalPrice: AplGetTotalPrice.empty()
+                .copyWith(grandTotal: (finalPrice * qty).toInt()),
+            config: fakeIDSalesOrgConfigs,
+            salesOrganisation: fakeIDSalesOrganisation,
+          );
+          expect(
+            cartBlocState.subTotalPriceDisplay(),
+            item.finalPriceTotal.toString(),
+          );
+        },
+      );
+
+      test(
+        'Testing CartBloc checkoutSubTotalHidePriceMaterial for ID - on checkout page',
         () {
           final cartBlocState = CartState.initial().copyWith(
             cartProducts: [
@@ -5120,26 +5174,54 @@ void main() {
             salesOrganisation: fakeIDSalesOrganisation,
           );
           expect(
-            cartBlocState.checkoutSubTotalHidePriceMaterial,
-            aplSimulatorOrder.totalPriceWithoutTax,
+            cartBlocState.subTotalPriceDisplay(
+              displayIDPriceOnCheckout: true,
+            ),
+            aplSimulatorOrder.totalPriceWithoutTax.toString(),
           );
         },
       );
 
       test(
-        'Testing CartBloc checkoutSubTotalHidePriceMaterial for Other then ID',
+        'Testing CartBloc checkoutSubTotalHidePriceMaterial for Other then ID where displaySubtotalTaxBreakdown as false',
+        () {
+          const qty = 2;
+          const finalPrice = 100.0;
+          const listPrice = 120.0;
+          final item = PriceAggregate.empty().copyWith(
+            price: Price.empty().copyWith(
+              finalPrice: MaterialPrice(finalPrice),
+              lastPrice: MaterialPrice(listPrice),
+              finalTotalPrice: MaterialPrice(finalPrice * qty),
+            ),
+            quantity: qty,
+            materialInfo: MaterialInfo.empty().copyWith(hidePrice: false),
+          );
+          final cartBlocState = CartState.initial().copyWith(
+            cartProducts: [item],
+            config: fakeMYSalesOrgConfigs,
+            salesOrganisation: fakeMYSalesOrganisation,
+          );
+          expect(
+            cartBlocState.subTotalPriceDisplay(),
+            cartBlocState.totalMaterialsPriceHidePriceWithTax.toString(),
+          );
+        },
+      );
+
+      test(
+        'Testing CartBloc checkoutSubTotalHidePriceMaterial for Other then ID where displaySubtotalTaxBreakdown as true',
         () {
           final cartBlocState = CartState.initial().copyWith(
             cartProducts: [
               priceAggregates.first,
             ],
-            aplSimulatorOrder: aplSimulatorOrder,
-            config: fakeMYSalesOrgConfigs,
-            salesOrganisation: fakeMYSalesOrganisation,
+            config: fakeKHSalesOrgConfigs,
+            salesOrganisation: fakeKHSalesOrganisation,
           );
           expect(
-            cartBlocState.checkoutSubTotalHidePriceMaterial,
-            cartBlocState.subTotalHidePriceMaterial,
+            cartBlocState.subTotalPriceDisplay(),
+            cartBlocState.totalMaterialsPriceHidePrice.toString(),
           );
         },
       );
@@ -5381,8 +5463,8 @@ void main() {
         () {
           final cartBlocState = CartState.initial().copyWith(
             salesOrganisation: fakeIDSalesOrganisation,
-            aplSimulatorOrder:
-                AplSimulatorOrder.empty().copyWith(smallOrderFee: 2000),
+            aplGetTotalPrice:
+                AplGetTotalPrice.empty().copyWith(smallOrderFee: 2000),
           );
           expect(cartBlocState.showSmallOrderFeeBottomSheet, true);
         },

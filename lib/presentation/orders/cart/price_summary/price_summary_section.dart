@@ -17,6 +17,8 @@ class PriceSummarySection extends StatelessWidget {
     final salesOrgConfig =
         context.read<EligibilityBloc>().state.salesOrgConfigs;
     final orderEligibilityState = context.read<OrderEligibilityBloc>().state;
+    final isCheckoutPage =
+        context.router.current.name == CheckoutPageRoute.name;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -93,9 +95,9 @@ class PriceSummarySection extends StatelessWidget {
             PriceDisplayWidget(
               priceComponent: PriceComponent(
                 salesOrgConfig: salesOrgConfig,
-                price: context.router.current.name == CheckoutPageRoute.name
-                    ? cartState.checkoutSubTotalHidePriceMaterial.toString()
-                    : cartState.subTotalHidePriceMaterial.toString(),
+                price: cartState.subTotalPriceDisplay(
+                  displayIDPriceOnCheckout: isCheckoutPage,
+                ),
                 type: PriceStyle.summaryPrice,
               ),
             ),
@@ -106,7 +108,10 @@ class PriceSummarySection extends StatelessWidget {
         if (orderEligibilityState.smallOrderFeeApplied)
           SmallOrderFee(
             value: orderEligibilityState.showSmallOrderFeeForID
-                ? cartState.aplSimulatorOrder.smallOrderFee
+                ? cartState.aplSmallOrderFees(
+                    displayIDPriceOnCheckout:
+                        context.router.current.name == CheckoutPageRoute.name,
+                  )
                 : orderEligibilityState.smallOrderFee,
           ),
         const SizedBox(height: 4.0),
@@ -132,8 +137,9 @@ class PriceSummarySection extends StatelessWidget {
                 key: WidgetKeys.checkoutSummaryGrandTotalPrice,
                 salesOrgConfig: salesOrgConfig,
                 price: cartState
-                    .grandTotalDisplayed(
+                    .grandTotalPriceDisplayed(
                       smallOrderFee: orderEligibilityState.smallOrderFee,
+                      displayIDPriceOnCheckout: isCheckoutPage,
                     )
                     .toString(),
                 type: PriceStyle.totalPrice,
@@ -156,9 +162,9 @@ class PriceSummarySection extends StatelessWidget {
               PriceDisplayWidget(
                 priceComponent: PriceComponent(
                   salesOrgConfig: salesOrgConfig,
-                  price: context.router.current.name == CheckoutPageRoute.name
-                      ? cartState.checkoutTotalSaving.toString()
-                      : cartState.cartTotalSaving.toString(),
+                  price: cartState.totalSavingDisplayed(
+                    displayPriceOnCheckout: isCheckoutPage,
+                  ),
                   type: PriceStyle.summaryPrice,
                 ),
               ),
@@ -195,7 +201,10 @@ class _TaxWidget extends StatelessWidget {
               priceComponent: PriceComponent(
                 key: WidgetKeys.checkoutSummaryTaxPrice,
                 salesOrgConfig: salesOrgConfig,
-                price: cartState.totalTax.toString(),
+                price: cartState.totalTaxDisplayed(
+                  displayIDPriceOnCheckout:
+                      context.router.current.name == CheckoutPageRoute.name,
+                ),
                 type: PriceStyle.summaryPrice,
               ),
             ),

@@ -3046,6 +3046,16 @@ void main() {
       await tester.pump();
 
       final materialKey = find.byKey(WidgetKeys.cartItemProductMaterialNumber);
+
+      final scrollListFinder = find.byKey(WidgetKeys.checkoutScrollList);
+      expect(scrollListFinder, findsOneWidget);
+
+      await tester.dragUntilVisible(
+        materialKey,
+        scrollListFinder,
+        const Offset(0.0, -500.0),
+      );
+      await tester.pumpAndSettle();
       expect(materialKey, findsOneWidget);
 
       final priceNotAvailableFinder = find.descendant(

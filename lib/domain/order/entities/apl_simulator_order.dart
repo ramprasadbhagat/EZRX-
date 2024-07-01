@@ -16,7 +16,6 @@ class AplSimulatorOrder with _$AplSimulatorOrder {
     required double totalTax,
     required double totalDiscountValue,
     required List<AplProduct> aplProducts,
-    
   }) = _AplSimulatorOrder;
 
   factory AplSimulatorOrder.empty() => const AplSimulatorOrder(
@@ -27,6 +26,8 @@ class AplSimulatorOrder with _$AplSimulatorOrder {
         totalDiscountValue: 0,
         aplProducts: <AplProduct>[],
       );
+
+  double get subTotalPriceInclTax => totalPriceWithoutTax + totalTax;
 
   List<AplProduct> productDeterminationList(
     List<PriceAggregate> currentCartItems,

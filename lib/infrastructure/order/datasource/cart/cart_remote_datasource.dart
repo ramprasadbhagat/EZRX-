@@ -5,6 +5,7 @@ import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/error/cart_exception.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
+import 'package:ezrxmobile/domain/order/entities/apl_get_total_price.dart';
 import 'package:ezrxmobile/domain/order/entities/apl_simulator_order.dart';
 import 'package:ezrxmobile/domain/order/entities/cart.dart';
 import 'package:ezrxmobile/infrastructure/core/common/json_key_converter.dart';
@@ -186,7 +187,7 @@ class CartRemoteDataSource {
     });
   }
 
-  Future<AplSimulatorOrder> aplGetTotalPrice({
+  Future<AplGetTotalPrice> aplGetTotalPrice({
     required double totalPrice,
     required String salesOrgCode,
     required String customerCode,

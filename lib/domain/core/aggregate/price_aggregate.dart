@@ -359,6 +359,22 @@ class PriceAggregate with _$PriceAggregate {
 
   double get finalPriceTotalWithTax => finalPriceTotal + itemTax;
 
+  double get finalPriceTotalWithTaxForCheckout => salesOrgConfig.salesOrg.isID
+      ? (aplFinalPriceTotal + itemTaxForCheckout)
+      : finalPriceTotalWithTax;
+
+  double get itemTaxForCheckout {
+    if (salesOrgConfig.salesOrg.isID) {
+      return materialInfo.tax;
+    }
+
+    return (finalPriceTotal * itemTaxPercent) / 100;
+  }
+
+  String get itemUnitPriceForCheckout => salesOrgConfig.salesOrg.isID
+      ? price.finalPrice.getOrDefaultValue(0).toString()
+      : display(PriceType.finalPrice);
+
   double get itemTaxPercent {
     if (materialInfo.taxClassification.isNoTax) {
       return 0.0;

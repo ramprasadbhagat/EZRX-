@@ -1,4 +1,5 @@
 import 'package:bloc_test/bloc_test.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
@@ -21,10 +22,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
+import '../../../../../../integration_test/robots/common/extension.dart';
 import '../../../../../common_mock_data/sales_org_config_mock/fake_id_sales_org_config.dart';
 import '../../../../../common_mock_data/sales_org_config_mock/fake_my_sales_org_config.dart';
 import '../../../../../common_mock_data/sales_org_config_mock/fake_th_sales_org_config.dart';
+import '../../../../../common_mock_data/sales_org_config_variant_mock.dart';
 import '../../../../../common_mock_data/sales_organsiation_mock.dart';
+import '../../../../../utils/common_methods.dart';
 import '../../../../../utils/widget_utils.dart';
 
 class CartBlocMock extends MockBloc<CartEvent, CartState> implements CartBloc {}
@@ -229,6 +233,116 @@ void main() {
       );
     });
 
+    testWidgets(
+      'Find Material tax Breakdown with unit price for all market',
+      (tester) async {
+        final currentSalesOrgConfigVariant =
+            salesOrgConfigVariant.currentValue ?? fakeIDSalesOrgConfigs;
+        final hideItemTax =
+            !currentSalesOrgConfigVariant.displayItemTaxBreakdown;
+
+        final currentSalesOrg = currentSalesOrgConfigVariant.salesOrg;
+
+        final currentSalesOrganisation = fakeEmptySalesOrganisation.copyWith(
+          salesOrg: currentSalesOrg,
+        );
+        final currency = currentSalesOrgConfigVariant.currency.code;
+        final finalPrice = MaterialPrice(100);
+
+        const unitPrice = 100.0;
+        const quantity = 2;
+        final taxRate = currentSalesOrg.isMaterialTax
+            ? 10.0
+            : currentSalesOrgConfigVariant.vatValue.toDouble();
+        const totalTax = 10.0;
+        const totalPrice = unitPrice * quantity + totalTax;
+        final cartItem = PriceAggregate.empty().copyWith(
+          price: Price.empty().copyWith(
+            finalPrice: finalPrice,
+          ),
+          salesOrgConfig: currentSalesOrgConfigVariant,
+          materialInfo: MaterialInfo.empty().copyWith(
+            materialNumber: MaterialNumber('fake-material'),
+            type: MaterialInfoType('material'),
+            tax: totalTax,
+            quantity: MaterialQty(quantity),
+          ),
+          quantity: quantity,
+        );
+
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            salesOrganisation: currentSalesOrganisation,
+            salesOrgConfigs: currentSalesOrgConfigVariant,
+          ),
+        );
+
+        await tester.pumpWidget(getScopedWidget(cartItem));
+        await tester.pumpAndSettle();
+
+        final itemTaxFinder = find.byKey(WidgetKeys.itemTax);
+
+        if (hideItemTax) {
+          expect(itemTaxFinder, findsNothing);
+          return;
+        }
+
+        expect(itemTaxFinder, findsOneWidget);
+
+        expect(
+          find.descendant(
+            of: itemTaxFinder,
+            matching: priceComponent(
+              currentSalesOrg.isID
+                  ? totalTax.priceDisplayForID(currency)
+                  : ((finalPrice.getValue() *
+                              quantity *
+                              (currentSalesOrg.isMaterialTax
+                                  ? totalTax
+                                  : currentSalesOrgConfigVariant.vatValue)) /
+                          100)
+                      .priceDisplay(currency),
+            ),
+          ),
+          findsOneWidget,
+        );
+        final itemTaxPercentage = find.byKey(WidgetKeys.itemTaxPercentage);
+        expect(
+          find.descendant(
+            of: itemTaxFinder,
+            matching: itemTaxPercentage,
+          ),
+          findsOneWidget,
+        );
+        expect(
+          tester.widget<Text>(itemTaxPercentage).data,
+          ' ($taxRate% ${'tax'.tr()})',
+        );
+
+        find.descendant(
+          of: itemTaxFinder,
+          matching: find.descendant(
+            of: find.byKey(WidgetKeys.finalTotalPriceWithTax),
+            matching: priceComponent(
+              currentSalesOrg.isID
+                  ? totalPrice.priceDisplayForID(currency)
+                  : totalPrice.priceDisplay(currency),
+            ),
+          ),
+        );
+
+        find.descendant(
+          of: find.byKey(WidgetKeys.cartItemProductUnitPrice),
+          matching: priceComponent(
+            currentSalesOrg.isID
+                ? finalPrice.getOrDefaultValue(0).priceDisplayForID(currency)
+                : cartItem.display(PriceType.finalPrice),
+          ),
+        );
+      },
+      variant: salesOrgConfigVariant,
+    );
+
     testWidgets('Show Stock Info When Config Enabled', (tester) async {
       when(() => eligibilityBlocMock.state).thenReturn(
         EligibilityState.initial().copyWith(
@@ -294,8 +408,7 @@ void main() {
       expect(promotionTextFinder, findsNothing);
     });
 
-    testWidgets('Show IRN when enableIRN is true',
-        (tester) async {
+    testWidgets('Show IRN when enableIRN is true', (tester) async {
       const iRNNumber = '12C 234/11';
 
       final cartItem = PriceAggregate.empty().copyWith(
@@ -321,8 +434,7 @@ void main() {
       expect(find.textContaining(iRNNumber), findsOneWidget);
     });
 
-    testWidgets('Do not show IRN when enableIRN is false',
-        (tester) async {
+    testWidgets('Do not show IRN when enableIRN is false', (tester) async {
       const iRNNumber = '12C 234/11';
 
       final cartItem = PriceAggregate.empty().copyWith(

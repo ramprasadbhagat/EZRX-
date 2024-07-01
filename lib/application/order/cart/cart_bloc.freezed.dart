@@ -7001,6 +7001,7 @@ mixin _$CartState {
       throw _privateConstructorUsedError;
   List<int> get upsertBonusItemInProgressHashCode =>
       throw _privateConstructorUsedError;
+  AplGetTotalPrice get aplGetTotalPrice => throw _privateConstructorUsedError;
   AplSimulatorOrder get aplSimulatorOrder => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -7036,6 +7037,7 @@ abstract class $CartStateCopyWith<$Res> {
       User user,
       Map<MaterialNumber, ProductMetaData> additionInfo,
       List<int> upsertBonusItemInProgressHashCode,
+      AplGetTotalPrice aplGetTotalPrice,
       AplSimulatorOrder aplSimulatorOrder});
 
   $SalesOrganisationCopyWith<$Res> get salesOrganisation;
@@ -7043,6 +7045,7 @@ abstract class $CartStateCopyWith<$Res> {
   $ShipToInfoCopyWith<$Res> get shipToInfo;
   $SalesOrganisationConfigsCopyWith<$Res> get config;
   $UserCopyWith<$Res> get user;
+  $AplGetTotalPriceCopyWith<$Res> get aplGetTotalPrice;
   $AplSimulatorOrderCopyWith<$Res> get aplSimulatorOrder;
 }
 
@@ -7081,6 +7084,7 @@ class _$CartStateCopyWithImpl<$Res, $Val extends CartState>
     Object? user = null,
     Object? additionInfo = null,
     Object? upsertBonusItemInProgressHashCode = null,
+    Object? aplGetTotalPrice = null,
     Object? aplSimulatorOrder = null,
   }) {
     return _then(_value.copyWith(
@@ -7173,6 +7177,10 @@ class _$CartStateCopyWithImpl<$Res, $Val extends CartState>
           ? _value.upsertBonusItemInProgressHashCode
           : upsertBonusItemInProgressHashCode // ignore: cast_nullable_to_non_nullable
               as List<int>,
+      aplGetTotalPrice: null == aplGetTotalPrice
+          ? _value.aplGetTotalPrice
+          : aplGetTotalPrice // ignore: cast_nullable_to_non_nullable
+              as AplGetTotalPrice,
       aplSimulatorOrder: null == aplSimulatorOrder
           ? _value.aplSimulatorOrder
           : aplSimulatorOrder // ignore: cast_nullable_to_non_nullable
@@ -7222,6 +7230,14 @@ class _$CartStateCopyWithImpl<$Res, $Val extends CartState>
 
   @override
   @pragma('vm:prefer-inline')
+  $AplGetTotalPriceCopyWith<$Res> get aplGetTotalPrice {
+    return $AplGetTotalPriceCopyWith<$Res>(_value.aplGetTotalPrice, (value) {
+      return _then(_value.copyWith(aplGetTotalPrice: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
   $AplSimulatorOrderCopyWith<$Res> get aplSimulatorOrder {
     return $AplSimulatorOrderCopyWith<$Res>(_value.aplSimulatorOrder, (value) {
       return _then(_value.copyWith(aplSimulatorOrder: value) as $Val);
@@ -7260,6 +7276,7 @@ abstract class _$$CartStateImplCopyWith<$Res>
       User user,
       Map<MaterialNumber, ProductMetaData> additionInfo,
       List<int> upsertBonusItemInProgressHashCode,
+      AplGetTotalPrice aplGetTotalPrice,
       AplSimulatorOrder aplSimulatorOrder});
 
   @override
@@ -7272,6 +7289,8 @@ abstract class _$$CartStateImplCopyWith<$Res>
   $SalesOrganisationConfigsCopyWith<$Res> get config;
   @override
   $UserCopyWith<$Res> get user;
+  @override
+  $AplGetTotalPriceCopyWith<$Res> get aplGetTotalPrice;
   @override
   $AplSimulatorOrderCopyWith<$Res> get aplSimulatorOrder;
 }
@@ -7309,6 +7328,7 @@ class __$$CartStateImplCopyWithImpl<$Res>
     Object? user = null,
     Object? additionInfo = null,
     Object? upsertBonusItemInProgressHashCode = null,
+    Object? aplGetTotalPrice = null,
     Object? aplSimulatorOrder = null,
   }) {
     return _then(_$CartStateImpl(
@@ -7401,6 +7421,10 @@ class __$$CartStateImplCopyWithImpl<$Res>
           ? _value._upsertBonusItemInProgressHashCode
           : upsertBonusItemInProgressHashCode // ignore: cast_nullable_to_non_nullable
               as List<int>,
+      aplGetTotalPrice: null == aplGetTotalPrice
+          ? _value.aplGetTotalPrice
+          : aplGetTotalPrice // ignore: cast_nullable_to_non_nullable
+              as AplGetTotalPrice,
       aplSimulatorOrder: null == aplSimulatorOrder
           ? _value.aplSimulatorOrder
           : aplSimulatorOrder // ignore: cast_nullable_to_non_nullable
@@ -7435,6 +7459,7 @@ class _$CartStateImpl extends _CartState {
       required this.user,
       required final Map<MaterialNumber, ProductMetaData> additionInfo,
       required final List<int> upsertBonusItemInProgressHashCode,
+      required this.aplGetTotalPrice,
       required this.aplSimulatorOrder})
       : _cartProducts = cartProducts,
         _additionInfo = additionInfo,
@@ -7505,11 +7530,13 @@ class _$CartStateImpl extends _CartState {
   }
 
   @override
+  final AplGetTotalPrice aplGetTotalPrice;
+  @override
   final AplSimulatorOrder aplSimulatorOrder;
 
   @override
   String toString() {
-    return 'CartState(cartProducts: $cartProducts, apiFailureOrSuccessOption: $apiFailureOrSuccessOption, updateFailureOrSuccessOption: $updateFailureOrSuccessOption, isFetching: $isFetching, isClearing: $isClearing, isFetchingBonus: $isFetchingBonus, isFetchingCartProductDetail: $isFetchingCartProductDetail, isUpserting: $isUpserting, isMappingPrice: $isMappingPrice, isUpdatingStock: $isUpdatingStock, isBuyAgain: $isBuyAgain, isAplProductLoading: $isAplProductLoading, isDeleteCombo: $isDeleteCombo, isTenderContractLoading: $isTenderContractLoading, isUpdateProductDetermination: $isUpdateProductDetermination, salesOrganisation: $salesOrganisation, customerCodeInfo: $customerCodeInfo, shipToInfo: $shipToInfo, config: $config, user: $user, additionInfo: $additionInfo, upsertBonusItemInProgressHashCode: $upsertBonusItemInProgressHashCode, aplSimulatorOrder: $aplSimulatorOrder)';
+    return 'CartState(cartProducts: $cartProducts, apiFailureOrSuccessOption: $apiFailureOrSuccessOption, updateFailureOrSuccessOption: $updateFailureOrSuccessOption, isFetching: $isFetching, isClearing: $isClearing, isFetchingBonus: $isFetchingBonus, isFetchingCartProductDetail: $isFetchingCartProductDetail, isUpserting: $isUpserting, isMappingPrice: $isMappingPrice, isUpdatingStock: $isUpdatingStock, isBuyAgain: $isBuyAgain, isAplProductLoading: $isAplProductLoading, isDeleteCombo: $isDeleteCombo, isTenderContractLoading: $isTenderContractLoading, isUpdateProductDetermination: $isUpdateProductDetermination, salesOrganisation: $salesOrganisation, customerCodeInfo: $customerCodeInfo, shipToInfo: $shipToInfo, config: $config, user: $user, additionInfo: $additionInfo, upsertBonusItemInProgressHashCode: $upsertBonusItemInProgressHashCode, aplGetTotalPrice: $aplGetTotalPrice, aplSimulatorOrder: $aplSimulatorOrder)';
   }
 
   @override
@@ -7563,6 +7590,7 @@ class _$CartStateImpl extends _CartState {
             const DeepCollectionEquality().equals(
                 other._upsertBonusItemInProgressHashCode,
                 _upsertBonusItemInProgressHashCode) &&
+            (identical(other.aplGetTotalPrice, aplGetTotalPrice) || other.aplGetTotalPrice == aplGetTotalPrice) &&
             (identical(other.aplSimulatorOrder, aplSimulatorOrder) || other.aplSimulatorOrder == aplSimulatorOrder));
   }
 
@@ -7591,6 +7619,7 @@ class _$CartStateImpl extends _CartState {
         user,
         const DeepCollectionEquality().hash(_additionInfo),
         const DeepCollectionEquality().hash(_upsertBonusItemInProgressHashCode),
+        aplGetTotalPrice,
         aplSimulatorOrder
       ]);
 
@@ -7627,6 +7656,7 @@ abstract class _CartState extends CartState {
       required final User user,
       required final Map<MaterialNumber, ProductMetaData> additionInfo,
       required final List<int> upsertBonusItemInProgressHashCode,
+      required final AplGetTotalPrice aplGetTotalPrice,
       required final AplSimulatorOrder aplSimulatorOrder}) = _$CartStateImpl;
   const _CartState._() : super._();
 
@@ -7674,6 +7704,8 @@ abstract class _CartState extends CartState {
   Map<MaterialNumber, ProductMetaData> get additionInfo;
   @override
   List<int> get upsertBonusItemInProgressHashCode;
+  @override
+  AplGetTotalPrice get aplGetTotalPrice;
   @override
   AplSimulatorOrder get aplSimulatorOrder;
   @override

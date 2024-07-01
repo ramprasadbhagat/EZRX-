@@ -1,4 +1,4 @@
-import 'package:ezrxmobile/domain/order/entities/apl_simulator_order.dart';
+import 'package:ezrxmobile/domain/order/entities/apl_get_total_price.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 part 'apl_get_total_price_dto.freezed.dart';
 part 'apl_get_total_price_dto.g.dart';
@@ -11,23 +11,23 @@ class AplGetTotalPriceDto with _$AplGetTotalPriceDto {
       name: 'TotalPrice',
       defaultValue: 0,
     )
-        required int grandTotal,
+    required int grandTotal,
     @JsonKey(
       name: 'Tax',
       defaultValue: 0,
     )
-        required int tax,
+    required int tax,
     @JsonKey(
       name: 'DeliveryFee',
       defaultValue: 0,
     )
-        required int deliveryFee,
+    required int deliveryFee,
   }) = _AplGetTotalPriceDto;
 
-  AplSimulatorOrder get toDomain => AplSimulatorOrder.empty().copyWith(
-        grandTotal: double.tryParse(grandTotal.toString()) ?? 0,
-        totalTax: double.tryParse(tax.toString()) ?? 0,
-        smallOrderFee: double.tryParse(deliveryFee.toString()) ?? 0,
+  AplGetTotalPrice get toDomain => AplGetTotalPrice.empty().copyWith(
+        grandTotal: grandTotal,
+        totalTax: tax,
+        smallOrderFee: deliveryFee,
       );
 
   factory AplGetTotalPriceDto.fromJson(Map<String, dynamic> json) =>

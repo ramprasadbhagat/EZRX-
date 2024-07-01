@@ -30,7 +30,10 @@ class _CheckoutFooterSection extends StatelessWidget {
           height: 1,
           color: ZPColors.extraLightGrey2,
         ),
-        PriceSummaryTile(cartState: cartState),
+        PriceSummaryTile(
+          cartState: cartState,
+          isCheckoutPage: context.router.current.name == CheckoutPageRoute.name,
+        ),
         if (context
             .read<OrderEligibilityBloc>()
             .state
@@ -64,7 +67,7 @@ class _CheckoutFooterSection extends StatelessWidget {
                               orderEligibilityState.mpSmallOrderFee,
                           zpSmallOrderFee:
                               orderEligibilityState.zpSmallOrderFee,
-                          totalTax: cartState.totalTax,
+                          totalTax: cartState.totalTaxForSubmission,
                           data: context
                               .read<AdditionalDetailsBloc>()
                               .state
@@ -135,7 +138,10 @@ class _CheckoutFooterSection extends StatelessWidget {
                               ),
                             },
                           );
-                          ErrorUtils.handleStockInfoApiFailure(context, failure);
+                          ErrorUtils.handleStockInfoApiFailure(
+                            context,
+                            failure,
+                          );
                         },
                         (_) {},
                       ),

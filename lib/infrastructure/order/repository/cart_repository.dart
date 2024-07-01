@@ -10,6 +10,7 @@ import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/order/entities/apl_get_total_price.dart';
 import 'package:ezrxmobile/domain/order/entities/cart.dart';
 import 'package:ezrxmobile/domain/order/entities/cart_product_request.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
@@ -609,8 +610,7 @@ class CartRepository implements ICartRepository {
   }
 
   @override
-  Future<Either<ApiFailure, AplSimulatorOrder>>
-      fetchGrandTotalPriceForIdMarket({
+  Future<Either<ApiFailure, AplGetTotalPrice>> fetchGrandTotalPriceForIdMarket({
     required List<MaterialNumber> materialNumbers,
     required SalesOrganisation salesOrganisation,
     required CustomerCodeInfo customerCodeInfo,
@@ -618,9 +618,9 @@ class CartRepository implements ICartRepository {
   }) async {
     if (config.appFlavor == Flavor.mock) {
       try {
-        final aplSimulatorOrder = await cartLocalDataSource.aplGetTotalPrice();
+        final aplGetTotalPrice = await cartLocalDataSource.aplGetTotalPrice();
 
-        return Right(aplSimulatorOrder);
+        return Right(aplGetTotalPrice);
       } catch (e) {
         return Left(FailureHandler.handleFailure(e));
       }

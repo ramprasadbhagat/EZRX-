@@ -17,10 +17,12 @@ part 'package:ezrxmobile/presentation/orders/cart/price_summary/price_summary_se
 
 class PriceSummaryTile extends StatelessWidget {
   final CartState cartState;
+  final bool isCheckoutPage;
 
   const PriceSummaryTile({
     super.key,
     required this.cartState,
+    this.isCheckoutPage = false,
   });
 
   @override
@@ -51,11 +53,12 @@ class PriceSummaryTile extends StatelessWidget {
                   salesOrgConfig:
                       context.read<EligibilityBloc>().state.salesOrgConfigs,
                   price: cartState
-                      .grandTotalDisplayed(
+                      .grandTotalPriceDisplayed(
                         smallOrderFee: context
                             .read<OrderEligibilityBloc>()
                             .state
                             .smallOrderFee,
+                        displayIDPriceOnCheckout: isCheckoutPage,
                       )
                       .toString(),
                   title: '${context.tr('Grand total')}: ',

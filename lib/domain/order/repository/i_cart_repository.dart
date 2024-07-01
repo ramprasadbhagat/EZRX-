@@ -7,6 +7,7 @@ import 'package:ezrxmobile/domain/banner/entities/ez_reach_banner.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/order/entities/apl_get_total_price.dart';
 import 'package:ezrxmobile/domain/order/entities/apl_simulator_order.dart';
 import 'package:ezrxmobile/domain/order/entities/cart.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
@@ -87,8 +88,7 @@ abstract class ICartRepository {
     required CustomerCodeInfo customerCodeInfo,
   });
 
-  Future<Either<ApiFailure, AplSimulatorOrder>>
-      fetchGrandTotalPriceForIdMarket({
+  Future<Either<ApiFailure, AplGetTotalPrice>> fetchGrandTotalPriceForIdMarket({
     required List<MaterialNumber> materialNumbers,
     required double totalPrice,
     required SalesOrganisation salesOrganisation,

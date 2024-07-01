@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:ezrxmobile/domain/order/entities/apl_get_total_price.dart';
 import 'package:ezrxmobile/domain/order/entities/cart.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/device_storage.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/material_banner_storage.dart';
@@ -56,7 +57,7 @@ void main() {
   late MixpanelService mixpanelService;
   late CartRemoteDataSource cartRemoteDataSource;
   late AplSimulatorOrder aplSimulatorOrder;
-  late AplSimulatorOrder aplSimulatorGetTotalPrice;
+  late AplGetTotalPrice aplGetTotalPrice;
   late DeviceStorage deviceStorageMock;
   late MaterialBannerStorage materialBannerStorageMock;
   const mockMarket = 'mockMarket';
@@ -117,7 +118,7 @@ void main() {
           .upsertCart(type: UpsertCartLocalType.upsertCartItemsComboOffer),
     );
     aplSimulatorOrder = await CartLocalDataSource().aplSimulateOrder();
-    aplSimulatorGetTotalPrice = await CartLocalDataSource().aplGetTotalPrice();
+    aplGetTotalPrice = await CartLocalDataSource().aplGetTotalPrice();
 
     when(
       () => stockInfoLocalDataSource.getMaterialStockInfoList(),
@@ -648,7 +649,7 @@ void main() {
       when(
         () => cartLocalDataSourceMock.aplGetTotalPrice(),
       ).thenAnswer(
-        (invocation) async => aplSimulatorGetTotalPrice,
+        (invocation) async => aplGetTotalPrice,
       );
 
       final result = await cartRepository.fetchGrandTotalPriceForIdMarket(
@@ -658,7 +659,7 @@ void main() {
         totalPrice: 1000,
       );
 
-      expect(result, Right(aplSimulatorGetTotalPrice));
+      expect(result, Right(aplGetTotalPrice));
     });
 
     test('fetchGrandTotalPriceForIdMarket test local failure', () async {
@@ -691,7 +692,7 @@ void main() {
           totalPrice: 1000,
         ),
       ).thenAnswer(
-        (invocation) async => aplSimulatorGetTotalPrice,
+        (invocation) async => aplGetTotalPrice,
       );
 
       final result = await cartRepository.fetchGrandTotalPriceForIdMarket(
@@ -701,7 +702,7 @@ void main() {
         totalPrice: 1000,
       );
 
-      expect(result, Right(aplSimulatorGetTotalPrice));
+      expect(result, Right(aplGetTotalPrice));
     });
 
     test('fetchGrandTotalPriceForIdMarket test remote failure', () async {

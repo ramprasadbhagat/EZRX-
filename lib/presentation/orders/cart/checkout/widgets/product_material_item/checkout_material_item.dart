@@ -181,7 +181,7 @@ class _ProductDetails extends StatelessWidget {
                 child: PriceComponent(
                   salesOrgConfig:
                       context.read<EligibilityBloc>().state.salesOrgConfigs,
-                  price: cartItem.display(PriceType.finalPrice),
+                  price: cartItem.itemUnitPriceForCheckout,
                   type: PriceStyle.cartMaterialUnitPrice,
                 ),
               ),
@@ -262,8 +262,9 @@ class _QuantityAndPrice extends StatelessWidget {
                   ),
                   if (cartItem.showTaxBreakDown)
                     ItemTax(
-                      finalPriceTotalWithTax: cartItem.finalPriceTotalWithTax,
-                      itemTax: cartItem.itemTax,
+                      finalPriceTotalWithTax:
+                          cartItem.finalPriceTotalWithTaxForCheckout,
+                      itemTax: cartItem.itemTaxForCheckout,
                       itemTaxPercent: cartItem.itemTaxPercentPadded,
                     ),
                 ],

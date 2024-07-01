@@ -10,6 +10,7 @@ import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/error/tr_object.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/order/entities/apl_get_total_price.dart';
 import 'package:ezrxmobile/domain/order/entities/apl_product.dart';
 import 'package:ezrxmobile/domain/order/entities/apl_simulator_order.dart';
 import 'package:ezrxmobile/domain/order/entities/bonus_sample_item.dart';
@@ -960,7 +961,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
           state.copyWith(
             apiFailureOrSuccessOption: none(),
             isAplProductLoading: true,
-            aplSimulatorOrder: AplSimulatorOrder.empty(),
+            aplGetTotalPrice: AplGetTotalPrice.empty(),
           ),
         );
 
@@ -979,11 +980,11 @@ class CartBloc extends Bloc<CartEvent, CartState> {
               isAplProductLoading: false,
             ),
           ),
-          (aplSimulatorOrder) => emit(
+          (aplGetTotalPrice) => emit(
             state.copyWith(
               apiFailureOrSuccessOption: none(),
               isAplProductLoading: false,
-              aplSimulatorOrder: aplSimulatorOrder,
+              aplGetTotalPrice: aplGetTotalPrice,
             ),
           ),
         );

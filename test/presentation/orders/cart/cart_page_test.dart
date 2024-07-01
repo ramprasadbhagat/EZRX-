@@ -4,6 +4,7 @@ import 'package:ezrxmobile/application/account/customer_license_bloc/customer_li
 import 'package:ezrxmobile/application/order/po_attachment/po_attachment_bloc.dart';
 import 'package:ezrxmobile/application/order/tender_contract/tender_contract_list_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation_configs.dart';
+import 'package:ezrxmobile/domain/order/entities/apl_get_total_price.dart';
 import 'package:ezrxmobile/domain/order/entities/delivery_info_data.dart';
 import 'package:ezrxmobile/domain/order/entities/tender_contract.dart';
 import 'package:ezrxmobile/domain/utils/string_utils.dart';
@@ -24,7 +25,6 @@ import 'package:ezrxmobile/application/order/payment_customer_information/paymen
 import 'package:ezrxmobile/application/product_image/product_image_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
-import 'package:ezrxmobile/domain/order/entities/apl_simulator_order.dart';
 import 'package:ezrxmobile/domain/order/entities/bonus_sample_item.dart';
 import 'package:ezrxmobile/domain/order/entities/combo_material_item.dart';
 import 'package:ezrxmobile/domain/order/entities/payment_customer_information.dart';
@@ -120,7 +120,7 @@ void main() {
   late List<PriceAggregate> mockCartItems;
   late List<PriceAggregate> mockCartBundleItems;
   late List<ComboMaterialItem> fakeComboMaterialItems;
-  late AplSimulatorOrder aplSimulatorOrder;
+  late AplGetTotalPrice aplGetTotalPrice;
   late PaymentCustomerInformationBloc paymentCustomerInformationMock;
   late List<PriceAggregate> mockCartItemWithAllType;
   late Config config;
@@ -166,7 +166,7 @@ void main() {
       type: UpsertCartLocalType.upsertCartItemsComboOffer,
     ))
         .comboMaterialItemList;
-    aplSimulatorOrder = await CartLocalDataSource().aplGetTotalPrice();
+    aplGetTotalPrice = await CartLocalDataSource().aplGetTotalPrice();
     config = locator<Config>();
   });
   setUp(
@@ -2407,7 +2407,7 @@ void main() {
           CartState.initial().copyWith(
             salesOrganisation: fakeIDSalesOrganisation,
             cartProducts: mockCartItems,
-            aplSimulatorOrder: aplSimulatorOrder,
+            aplGetTotalPrice: aplGetTotalPrice,
           ),
         );
 
@@ -2437,16 +2437,16 @@ void main() {
         expect(
           (tester.widget(checkoutSummarySmallOrderFeePrice) as PriceComponent)
               .price,
-          aplSimulatorOrder.smallOrderFee.toString(),
+          aplGetTotalPrice.smallOrderFee.toDouble().toString(),
         );
         expect(
           (tester.widget(checkoutSummaryTaxPrice) as PriceComponent).price,
-          aplSimulatorOrder.totalTax.toString(),
+          aplGetTotalPrice.totalTax.toString(),
         );
         expect(
           (tester.widget(checkoutSummaryGrandTotalPrice) as PriceComponent)
               .price,
-          aplSimulatorOrder.grandTotal.toString(),
+          aplGetTotalPrice.grandTotal.toString(),
         );
       });
       testWidgets(
@@ -2981,7 +2981,7 @@ void main() {
                 salesOrg: currentSalesOrgVariant,
               ),
               cartProducts: mockCartItems,
-              aplSimulatorOrder: aplSimulatorOrder,
+              aplGetTotalPrice: aplGetTotalPrice,
             ),
           );
 
@@ -4006,8 +4006,8 @@ void main() {
                   cartProducts: [
                     PriceAggregate.empty(),
                   ],
-                  aplSimulatorOrder:
-                      AplSimulatorOrder.empty().copyWith(smallOrderFee: 2000),
+                  aplGetTotalPrice:
+                      aplGetTotalPrice.copyWith(smallOrderFee: 2000),
                   salesOrganisation: fakeIDSalesOrganisation,
                 ),
               );
@@ -4038,8 +4038,8 @@ void main() {
                   cartProducts: [
                     PriceAggregate.empty(),
                   ],
-                  aplSimulatorOrder:
-                      AplSimulatorOrder.empty().copyWith(smallOrderFee: 2000),
+                  aplGetTotalPrice:
+                      aplGetTotalPrice.copyWith(smallOrderFee: 2000),
                   salesOrganisation: fakeIDSalesOrganisation,
                 ),
               );

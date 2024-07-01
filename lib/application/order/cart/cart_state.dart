@@ -27,6 +27,7 @@ class CartState with _$CartState {
     required User user,
     required Map<MaterialNumber, ProductMetaData> additionInfo,
     required List<int> upsertBonusItemInProgressHashCode,
+    required AplGetTotalPrice aplGetTotalPrice,
     required AplSimulatorOrder aplSimulatorOrder,
   }) = _CartState;
 
@@ -54,6 +55,7 @@ class CartState with _$CartState {
         isDeleteCombo: false,
         aplSimulatorOrder: AplSimulatorOrder.empty(),
         isAplProductLoading: false,
+        aplGetTotalPrice: AplGetTotalPrice.empty(),
       );
 
   bool get containFocMaterial =>
@@ -200,7 +202,7 @@ class CartState with _$CartState {
                 ),
       );
 
-  double get totalTax =>
+  double get totalTaxForSubmission =>
       _isID ? aplSimulatorOrder.totalTax : taxMaterial + taxCombo + taxBundle;
 
   bool get _isID => salesOrganisation.salesOrg.isID;
@@ -257,14 +259,6 @@ class CartState with _$CartState {
           totalComboPriceWithTax +
           totalMaterialsPriceHidePriceWithTax;
 
-  //This getter is used for displaying grandTotal value in cart, checkout page
-  double grandTotalDisplayed({double smallOrderFee = 0}) => _isID
-      ? aplSimulatorOrder.grandTotal
-      : totalBundlePriceWithTax +
-          totalComboPriceWithTax +
-          totalMaterialsPriceHidePriceWithTax +
-          smallOrderFee;
-
   //This getter is used for displaying subtotal value in
   // cart and for Order Submission
   double get mpSubTotalHidePriceMaterial =>
@@ -281,10 +275,81 @@ class CartState with _$CartState {
       ? aplSimulatorOrder.totalPriceWithoutTax
       : totalBundlesPrice + totalComboPrice + totalMaterialsPriceHidePrice;
 
-  //This getter is used for displaying subtotal value in checkout page
-  double get checkoutSubTotalHidePriceMaterial => _isID
-      ? aplSimulatorOrder.totalPriceWithoutTax
-      : subTotalHidePriceMaterial;
+  double _getSubtotalForID(bool displayIDPriceOnCheckout) {
+    if (displayIDPriceOnCheckout) {
+      return config.displaySubtotalTaxBreakdown
+          ? aplSimulatorOrder.totalPriceWithoutTax
+          : aplSimulatorOrder.subTotalPriceInclTax;
+    }
+
+    return config.displaySubtotalTaxBreakdown
+        ? totalBundlesPrice + totalComboPrice + totalMaterialsPriceHidePrice
+        : aplGetTotalPrice.subtotalPriceInclTax;
+  }
+
+  double _getSubtotalForNonID() {
+    return config.displaySubtotalTaxBreakdown
+        ? totalBundlesPrice + totalComboPrice + totalMaterialsPriceHidePrice
+        : totalBundlePriceWithTax +
+            totalComboPriceWithTax +
+            totalMaterialsPriceHidePriceWithTax;
+  }
+
+//********These below prices we display on cart & checkout except small order fees for other market except ID */
+  String subTotalPriceDisplay({bool displayIDPriceOnCheckout = false}) => (_isID
+          ? _getSubtotalForID(displayIDPriceOnCheckout)
+          : _getSubtotalForNonID())
+      .toString();
+
+  double aplSmallOrderFees({bool displayIDPriceOnCheckout = false}) =>
+      displayIDPriceOnCheckout
+          ? aplSimulatorOrder.smallOrderFee
+          : aplGetTotalPrice.smallOrderFee.toDouble();
+
+  String totalTaxDisplayed({bool displayIDPriceOnCheckout = false}) {
+    if (_isID && !displayIDPriceOnCheckout) {
+      return aplGetTotalPrice.totalTax.toString();
+    }
+
+    return totalTaxForSubmission.toString();
+  }
+
+  //This getter is used for displaying grandTotal value in cart, checkout page
+  num grandTotalPriceDisplayed({
+    double smallOrderFee = 0,
+    bool displayIDPriceOnCheckout = false,
+  }) {
+    //For ID checkout page, We take aplGetTotalPrice.grandTotal as grand total price
+    if (_isID && displayIDPriceOnCheckout) {
+      return aplSimulatorOrder.grandTotal;
+    }
+    //For ID cart page, We take aplGetTotalPrice.grandTotal as grand total price
+    if (_isID) {
+      return aplGetTotalPrice.grandTotal;
+    }
+
+    return totalBundlePriceWithTax +
+        totalComboPriceWithTax +
+        totalMaterialsPriceHidePriceWithTax +
+        smallOrderFee;
+  }
+
+  //Todo : Need to implement for other market, Implemented only for ID market
+  String totalSavingDisplayed({bool displayPriceOnCheckout = false}) {
+    var totalSaving = 0.0;
+    if (_isID && displayPriceOnCheckout) {
+      totalSaving = aplSimulatorOrder.totalDiscountValue;
+    } else if (_isID) {
+      totalSaving = NumUtils.roundToPlaces(
+        cartProducts.fold(0, (sum, e) => sum + e.savingAmount),
+        0,
+      );
+    }
+
+    return totalSaving.toString();
+  }
+
+//********These above prices we display on cart & checkout except small order fees for other market except ID */
 
   double get materialLevelFinalPriceWithTaxForFullTax => cartProducts
       .where(
@@ -399,18 +464,6 @@ class CartState with _$CartState {
 
   String get taxTitlePercent =>
       config.salesOrg.isMaterialTax ? '' : ' $totalTaxPercent%';
-
-  //Todo : Need to implement for other market, Implemented only for ID market
-  double get checkoutTotalSaving => salesOrganisation.salesOrg.isID
-      ? aplSimulatorOrder.totalDiscountValue
-      : 0;
-
-  double get cartTotalSaving => salesOrganisation.salesOrg.isID
-      ? NumUtils.roundToPlaces(
-          cartProducts.fold(0, (sum, e) => sum + e.savingAmount),
-          0,
-        )
-      : 0;
 
   List<BonusSampleItem> productBonusList(MaterialNumber material) =>
       cartProducts
@@ -534,5 +587,5 @@ class CartState with _$CartState {
 
   bool get showSmallOrderFeeBottomSheet =>
       salesOrganisation.salesOrg.showSmallOrderFee &&
-      aplSimulatorOrder.smallOrderFee > 0;
+      aplGetTotalPrice.smallOrderFee > 0;
 }

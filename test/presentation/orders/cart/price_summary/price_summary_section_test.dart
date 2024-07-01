@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:ezrxmobile/application/order/order_eligibility/order_eligibility_bloc.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
+import 'package:ezrxmobile/domain/order/entities/apl_get_total_price.dart';
 import 'package:ezrxmobile/domain/order/entities/apl_simulator_order.dart';
 import 'package:ezrxmobile/domain/order/entities/combo_material_item.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
@@ -45,13 +46,12 @@ void main() {
   const listPrice = 123.0;
   const finalPrice = 99.32;
   const qty = 2;
-  final aplSimulatorOrder = AplSimulatorOrder.empty().copyWith(
-    totalDiscountValue: 100000,
-  );
+  late AplSimulatorOrder aplSimulatorOrder;
   final item = PriceAggregate.empty().copyWith(
     price: Price.empty().copyWith(
       finalPrice: MaterialPrice(finalPrice),
       lastPrice: MaterialPrice(listPrice),
+      finalTotalPrice: MaterialPrice(finalPrice * qty),
     ),
     quantity: qty,
   );
@@ -79,6 +79,7 @@ void main() {
     mockCartBundleItems = await CartLocalDataSource().upsertCart(
       type: UpsertCartLocalType.upsertCartItems,
     );
+    aplSimulatorOrder = await CartLocalDataSource().aplSimulateOrder();
     cartItemMock =
         (await CartLocalDataSource().getAddedToCartProductList()).cartProducts;
     fakeComboMaterialItems = (await CartLocalDataSource().upsertCart(
@@ -111,11 +112,11 @@ void main() {
       when(() => eligibilityBloc.state).thenReturn(EligibilityState.initial());
       when(() => autoRouter.current).thenReturn(fakeRouteData(''));
       when(() => cartStateMock.cartProducts).thenReturn([]);
-      when(() => cartStateMock.checkoutSubTotalHidePriceMaterial).thenReturn(0);
+      // when(() => cartStateMock.checkoutSubTotalHidePriceMaterial).thenReturn(0);
       when(() => cartStateMock.subTotalHidePriceMaterial).thenReturn(0);
-      when(() => cartStateMock.grandTotalDisplayed()).thenReturn(0);
-      when(() => cartStateMock.checkoutTotalSaving).thenReturn(0);
-      when(() => cartStateMock.cartTotalSaving).thenReturn(0);
+      when(() => cartStateMock.grandTotalPriceDisplayed()).thenReturn(0);
+      when(() => cartStateMock.totalSavingDisplayed()).thenReturn('0');
+      when(() => cartStateMock.subTotalPriceDisplay()).thenReturn('0');
       when(() => cartStateMock.salesOrganisation)
           .thenReturn(fakeMYSalesOrganisation);
     },
@@ -857,7 +858,7 @@ void main() {
 
       testWidgets('- When small order fee is applied', (tester) async {
         when(
-          () => cartStateMock.grandTotalDisplayed(
+          () => cartStateMock.grandTotalPriceDisplayed(
             smallOrderFee: fakeMYSalesOrgConfigsWithSmallOrderFee.smallOrderFee,
           ),
         ).thenReturn(900);
@@ -908,8 +909,9 @@ void main() {
         final smallOrderFee =
             fakeMYSalesOrgConfigsWithSmallOrderFee.smallOrderFee;
         when(
-          () => cartStateMock.grandTotalDisplayed(
+          () => cartStateMock.grandTotalPriceDisplayed(
             smallOrderFee: smallOrderFee,
+            displayIDPriceOnCheckout: false,
           ),
         ).thenReturn(900);
         when(() => eligibilityBloc.state).thenReturn(
@@ -955,7 +957,9 @@ void main() {
             fakeMYSalesOrgConfigsWithSmallOrderFee.smallOrderFee +
                 fakeMYSalesOrgConfigsWithSmallOrderFee.mpSmallOrderFee;
         when(
-          () => cartStateMock.grandTotalDisplayed(smallOrderFee: smallOrderFee),
+          () => cartStateMock.grandTotalPriceDisplayed(
+            smallOrderFee: smallOrderFee,
+          ),
         ).thenReturn(900);
         when(() => eligibilityBloc.state).thenReturn(
           EligibilityState.initial().copyWith(
@@ -1004,8 +1008,8 @@ void main() {
         final cartState = CartState.initial().copyWith(
           cartProducts: [item],
           salesOrganisation: fakeIDSalesOrganisation,
-          aplSimulatorOrder:
-              AplSimulatorOrder.empty().copyWith(smallOrderFee: 2000),
+          aplGetTotalPrice:
+              AplGetTotalPrice.empty().copyWith(smallOrderFee: 2000),
         );
 
         when(() => cartBloc.state).thenReturn(cartState);
