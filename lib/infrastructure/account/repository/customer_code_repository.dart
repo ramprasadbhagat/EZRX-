@@ -54,58 +54,33 @@ class CustomerCodeRepository implements ICustomerCodeRepository {
         return Left(FailureHandler.handleFailure(e));
       }
     }
-    final futureResults = <List<CustomerCodeInfo>>[];
-    Object? exception;
-    var shipToCount = 0;
-    await Future.wait(
-      customerCodes.map(
-        (customerCode) async {
-          try {
-            final response = user.role.type.isSalesRepRole
-                ? await remoteDataSource.getSalesRepCustomerCodeList(
-                    request: CustomerCodeSearchDto(
-                      salesOrg: salesOrg,
-                      first: pageSize,
-                      filterBlockCustomer: hideCustomer,
-                      after: offset,
-                      searchKey: customerCode,
-                    ),
-                  )
-                : await remoteDataSource.getCustomerCodeList(
-                    salesOrg: salesOrg,
-                    customerCode: customerCode,
-                    hideCustomer: hideCustomer,
-                    pageSize: pageSize,
-                    offset: offset,
-                    market: deviceStorage.currentMarket(),
-                  );
-            futureResults.add(response.soldToInformation);
-            shipToCount += response.shipToCount;
-          } catch (e) {
-            //for single calls, we will capture error
-            //for clubbed concurrent calls, we will not capture any error
-            if (customerCodes.length == 1) {
-              exception = e;
-            }
-          }
-        },
-      ),
-    );
+    try {
+      final customerCodeString = customerCodes.join(',');
+      final customerInformation = user.role.type.isSalesRepRole
+          ? await remoteDataSource.getSalesRepCustomerCodeList(
+              request: CustomerCodeSearchDto(
+                salesOrg: salesOrg,
+                first: pageSize,
+                filterBlockCustomer: hideCustomer,
+                after: offset,
+                searchKey: customerCodeString,
+              ),
+            )
+          : await remoteDataSource.getCustomerCodeList(
+              salesOrg: salesOrg,
+              customerCode: customerCodeString,
+              hideCustomer: hideCustomer,
+              pageSize: pageSize,
+              offset: offset,
+              market: deviceStorage.currentMarket(),
+            );
 
-    if (customerCodes.length == 1 && exception != null) {
-      return Left(FailureHandler.handleFailure(exception!));
+      return Right(customerInformation);
+    } catch (e) {
+      return Left(
+        FailureHandler.handleFailure(e),
+      );
     }
-
-    final customerCodeList = <CustomerCodeInfo>[
-      ...futureResults.expand((codeList) => codeList),
-    ];
-
-    return Right(
-      CustomerInformation(
-        shipToCount: shipToCount,
-        soldToInformation: customerCodeList,
-      ),
-    );
   }
 
   @override
