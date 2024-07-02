@@ -44,19 +44,11 @@ import 'package:ezrxmobile/application/order/view_by_item_details/view_by_item_d
 import 'package:ezrxmobile/application/order/view_by_order/view_by_order_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_order/view_by_order_filter/view_by_order_filter_bloc.dart';
 import 'package:ezrxmobile/application/order/view_by_order_details/view_by_order_details_bloc.dart';
-import 'package:ezrxmobile/application/payments/account_summary/account_summary_bloc.dart';
-import 'package:ezrxmobile/application/payments/all_credits/all_credits_bloc.dart';
-import 'package:ezrxmobile/application/payments/all_invoices/all_invoices_bloc.dart';
 import 'package:ezrxmobile/application/payments/credit_and_invoice_details/credit_and_invoice_details_bloc.dart';
 import 'package:ezrxmobile/application/payments/download_payment_attachments/download_payment_attachments_bloc.dart';
-import 'package:ezrxmobile/application/payments/full_summary/full_summary_bloc.dart';
 import 'package:ezrxmobile/application/payments/new_payment/available_credits/available_credits_bloc.dart';
 import 'package:ezrxmobile/application/payments/new_payment/outstanding_invoices/outstanding_invoices_bloc.dart';
-import 'package:ezrxmobile/application/payments/payment_in_progress/payment_in_progress_bloc.dart';
-import 'package:ezrxmobile/application/payments/payment_summary/filter/payment_summary_filter_bloc.dart';
-import 'package:ezrxmobile/application/payments/payment_summary/payment_summary_bloc.dart';
 import 'package:ezrxmobile/application/payments/payment_summary_details/payment_summary_details_bloc.dart';
-import 'package:ezrxmobile/application/payments/soa/soa_bloc.dart';
 import 'package:ezrxmobile/application/product_image/product_image_bloc.dart';
 import 'package:ezrxmobile/application/returns/approver_actions/filter/return_approver_filter_bloc.dart';
 import 'package:ezrxmobile/application/returns/approver_actions/return_approver_bloc.dart';
@@ -120,7 +112,6 @@ void main() {
   late CustomerCodeBloc customerCodeBlocMock;
   late SalesRepBloc salesRepBlocMock;
   late AupTcBloc aupTcBlocMock;
-  late ZPAccountSummaryBloc accountSummaryMock;
   late CartBloc cartBlocMock;
   late PaymentCustomerInformationBloc paymentCustomerInformationBlocMock;
   late PaymentTermBloc paymentTermBlocMock;
@@ -158,31 +149,25 @@ void main() {
   final chatBotBloc = ChatBotMockBloc();
   late MaterialPriceBloc mockMaterialPriceBloc;
   late CreditAndInvoiceDetailsBloc creditAndInvoiceDetailsBloc;
-  late ZPAllInvoicesBloc allInvoicesBlocMock;
-  late ZPAllCreditsBloc allCreditsBlocMock;
   late ViewByOrderFilterBloc viewByOrderFilterBlocMock;
-  late PaymentSummaryDetailsBloc paymentSummaryDetailsBlocMock;
   late ProductSearchBloc productSearchBlocMock;
   late ReturnListByRequestBloc returnListByRequestBlocMock;
   late DownloadPaymentAttachmentsBloc downloadPaymentAttachmentsBlocMock;
-  late ZPPaymentSummaryBloc paymentSummaryBlocMock;
-  late ZPSoaBloc soaBlocMock;
   late AdditionalDetailsBloc additionalDetailsBlocMock;
-  late ZPPaymentInProgressBloc paymentInProgressBlocMock;
   late ComboDealMaterialDetailBloc comboDealMaterialDetailBlocMock;
   late OrderSummaryBloc orderSummaryBlocMock;
   late AvailableCreditsBloc availableCreditsBlocMock;
   late OutstandingInvoicesBloc outstandingInvoicesBlocMock;
   late ReturnItemsBloc returnItemsBlocMock;
-  late PaymentSummaryFilterBloc paymentSummaryFilterBlocMock;
   late ReOrderPermissionBloc reOrderPermissionBlocMock;
   late ArticlesInfoBloc articlesInfoBlocMock;
-  late ZPFullSummaryBloc fullSummaryBlocMock;
   late ArticlesInfoFilterBloc articlesInfoFilterBlocMock;
   late CustomerLicenseBloc customerLicenseBlocMock;
   late AnnouncementFilterBloc announcementFilterBlocMock;
   late PoAttachmentBloc poAttachmentBlocMock;
   late CustomerCodeConfig customerCodeConfig;
+  late PaymentSummaryDetailsBloc paymentSummaryDetailsBlocMock;
+
   final fakeSalesOrganisation =
       SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('2601'));
 
@@ -226,10 +211,8 @@ void main() {
   group('Splash Screen', () {
     setUp(() {
       customerCodeBlocMock = CustomerCodeBlocMock();
-      fullSummaryBlocMock = ZPFullSummaryBlocMock();
       authBlocMock = AuthBlocMock();
       userBlocMock = UserBlocMock();
-      accountSummaryMock = ZPAccountSummaryBlocMock();
       salesOrgBlocMock = SalesOrgBlocMock();
       orderDocumentTypeMock = OrderDocumentTypeBlocMock();
       salesRepBlocMock = SalesRepBlocMock();
@@ -263,23 +246,16 @@ void main() {
       mockNotificationBloc = NotificationBlocMock();
       aboutUsBlocMock = AboutUsBlocMock();
       mockPriceOverrideBloc = PriceOverrideBlocMock();
-      allInvoicesBlocMock = ZPAllInvoicesBlocMock();
-      allCreditsBlocMock = ZPAllCreditsBlocMock();
       viewByOrderFilterBlocMock = ViewByOrderFilterBlocMock();
-      paymentSummaryDetailsBlocMock = PaymentSummaryDetailsBlocMock();
       productSearchBlocMock = ProductSearchBlocMock();
       returnListByRequestBlocMock = ReturnListByRequestBlocMock();
       downloadPaymentAttachmentsBlocMock = DownloadPaymentAttachmentsBlocMock();
-      paymentSummaryBlocMock = ZPPaymentSummaryBlocMock();
-      soaBlocMock = ZPSoaBlocMock();
       additionalDetailsBlocMock = AdditionalDetailsBlocMock();
-      paymentInProgressBlocMock = ZPPaymentInProgressBlocMock();
       comboDealMaterialDetailBlocMock = ComboDealMaterialDetailBlocMock();
       orderSummaryBlocMock = OrderSummaryBlocMock();
       availableCreditsBlocMock = AvailableCreditsBlocMock();
       outstandingInvoicesBlocMock = OutstandingInvoicesBlocMock();
       returnItemsBlocMock = ReturnItemsBlocMock();
-      paymentSummaryFilterBlocMock = PaymentSummaryFilterBlocMock();
       reOrderPermissionBlocMock = ReOrderPermissionBlocMock();
       articlesInfoBlocMock = ArticlesInfoBlocMock();
       productImageBloc = ProductImageBlocMock();
@@ -288,10 +264,9 @@ void main() {
       announcementFilterBlocMock = AnnouncementFilterBlocMock();
       resetPasswordBlocMock = ResetPasswordBlocMock();
       poAttachmentBlocMock = PoAttachmentBlocMock();
+      paymentSummaryDetailsBlocMock = PaymentSummaryDetailsBlocMock();
 
       when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial());
-      when(() => fullSummaryBlocMock.state)
-          .thenReturn(FullSummaryState.initial());
       when(() => settingBlocMock.state).thenReturn(SettingState.initial());
       when(() => orderDocumentTypeMock.state).thenReturn(
         OrderDocumentTypeState.initial().copyWith(
@@ -301,8 +276,6 @@ void main() {
       );
       when(() => authBlocMock.state).thenReturn(const AuthState.initial());
 
-      when(() => accountSummaryMock.state)
-          .thenReturn(AccountSummaryState.initial());
       when(() => userBlocMock.state).thenReturn(UserState.initial());
       when(() => customerCodeBlocMock.state)
           .thenReturn(CustomerCodeState.initial());
@@ -363,27 +336,16 @@ void main() {
       when(() => mockPriceOverrideBloc.state)
           .thenReturn(PriceOverrideState.initial());
       when(() => chatBotBloc.state).thenReturn(ChatBotState.initial());
-      when(() => allInvoicesBlocMock.state)
-          .thenReturn(AllInvoicesState.initial());
-      when(() => allCreditsBlocMock.state)
-          .thenReturn(AllCreditsState.initial());
       when(() => viewByOrderFilterBlocMock.state)
           .thenReturn(ViewByOrderFilterState.initial());
-      when(() => paymentSummaryDetailsBlocMock.state)
-          .thenReturn(PaymentSummaryDetailsState.initial());
       when(() => productSearchBlocMock.state)
           .thenReturn(ProductSearchState.initial());
       when(() => returnListByRequestBlocMock.state)
           .thenReturn(ReturnListByRequestState.initial());
       when(() => downloadPaymentAttachmentsBlocMock.state)
           .thenReturn(DownloadPaymentAttachmentsState.initial());
-      when(() => paymentSummaryBlocMock.state)
-          .thenReturn(PaymentSummaryState.initial());
-      when(() => soaBlocMock.state).thenReturn(SoaState.initial());
       when(() => additionalDetailsBlocMock.state)
           .thenReturn(AdditionalDetailsState.initial());
-      when(() => paymentInProgressBlocMock.state)
-          .thenReturn(PaymentInProgressState.initial());
       when(() => comboDealMaterialDetailBlocMock.state)
           .thenReturn(ComboDealMaterialDetailState.initial());
       when(() => orderSummaryBlocMock.state)
@@ -394,8 +356,6 @@ void main() {
           .thenReturn(OutstandingInvoicesState.initial());
       when(() => returnItemsBlocMock.state)
           .thenReturn(ReturnItemsState.initial());
-      when(() => paymentSummaryFilterBlocMock.state)
-          .thenReturn(PaymentSummaryFilterState.initial());
       when(() => reOrderPermissionBlocMock.state)
           .thenReturn(ReOrderPermissionState.initial());
       when(() => articlesInfoBlocMock.state)
@@ -412,6 +372,8 @@ void main() {
           .thenReturn(AnnouncementFilterState.initial());
       when(() => poAttachmentBlocMock.state)
           .thenReturn(PoAttachmentState.initial());
+      when(() => paymentSummaryDetailsBlocMock.state)
+          .thenReturn(PaymentSummaryDetailsState.initial());
     });
 
     Future getWidget(tester) async {
@@ -431,9 +393,6 @@ void main() {
             ),
             BlocProvider<UserRestrictionListBloc>(
               create: (context) => userRestrictionListBlocMock,
-            ),
-            BlocProvider<ZPFullSummaryBloc>(
-              create: (context) => fullSummaryBlocMock,
             ),
             BlocProvider<SalesRepBloc>(create: (context) => salesRepBlocMock),
             BlocProvider<AupTcBloc>(create: (context) => aupTcBlocMock),
@@ -489,9 +448,6 @@ void main() {
             BlocProvider<SettingBloc>(
               create: (context) => settingBlocMock,
             ),
-            BlocProvider<ZPAccountSummaryBloc>(
-              create: (context) => accountSummaryMock,
-            ),
             BlocProvider<ViewByItemFilterBloc>(
               create: (context) => mockOrderHistoryFilterBloc,
             ),
@@ -527,12 +483,6 @@ void main() {
             BlocProvider<PriceOverrideBloc>(
               create: (context) => mockPriceOverrideBloc,
             ),
-            BlocProvider<ZPAllInvoicesBloc>(
-              create: (context) => allInvoicesBlocMock,
-            ),
-            BlocProvider<ZPAllCreditsBloc>(
-              create: (context) => allCreditsBlocMock,
-            ),
             BlocProvider<ViewByOrderFilterBloc>(
               create: (context) => viewByOrderFilterBlocMock,
             ),
@@ -548,17 +498,8 @@ void main() {
             BlocProvider<DownloadPaymentAttachmentsBloc>(
               create: (context) => downloadPaymentAttachmentsBlocMock,
             ),
-            BlocProvider<ZPPaymentSummaryBloc>(
-              create: (context) => paymentSummaryBlocMock,
-            ),
-            BlocProvider<ZPSoaBloc>(
-              create: (context) => soaBlocMock,
-            ),
             BlocProvider<AdditionalDetailsBloc>(
               create: (context) => additionalDetailsBlocMock,
-            ),
-            BlocProvider<ZPPaymentInProgressBloc>(
-              create: (context) => paymentInProgressBlocMock,
             ),
             BlocProvider<ComboDealMaterialDetailBloc>(
               create: (context) => comboDealMaterialDetailBlocMock,
@@ -574,9 +515,6 @@ void main() {
             ),
             BlocProvider<ReturnItemsBloc>(
               create: (context) => returnItemsBlocMock,
-            ),
-            BlocProvider<PaymentSummaryFilterBloc>(
-              create: (context) => paymentSummaryFilterBlocMock,
             ),
             BlocProvider<ReOrderPermissionBloc>(
               create: (context) => reOrderPermissionBlocMock,

@@ -231,6 +231,10 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     final router = locator<AppRouter>();
 
+    /*TODO(Hob): Will consider to move BlocProvider of Payment Module to PaymentPage
+    Initialize for reduce bloc scope and auto dispose when payment page dispose
+    when we ready to refactor bloc scope */
+
     return MultiBlocProvider(
       providers: [
         BlocProvider<AuthBloc>(

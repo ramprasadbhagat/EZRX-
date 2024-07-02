@@ -1,5 +1,13 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/application/payments/all_credits/all_credits_bloc.dart';
+import 'package:ezrxmobile/application/payments/all_invoices/all_invoices_bloc.dart';
+import 'package:ezrxmobile/application/payments/full_summary/full_summary_bloc.dart';
+import 'package:ezrxmobile/application/payments/payment_summary/filter/payment_summary_filter_bloc.dart';
+import 'package:ezrxmobile/application/payments/payment_summary/payment_summary_bloc.dart';
+import 'package:ezrxmobile/domain/payments/entities/all_credits_filter.dart';
+import 'package:ezrxmobile/domain/payments/entities/all_invoices_filter.dart';
+import 'package:ezrxmobile/domain/payments/entities/full_summary_filter.dart';
 import 'package:ezrxmobile/infrastructure/core/common/tracking_events.dart';
 import 'package:ezrxmobile/infrastructure/core/common/tracking_properties.dart';
 import 'package:ezrxmobile/presentation/payments/extension.dart';
@@ -50,13 +58,252 @@ part 'widgets/payment_total_credit.dart';
 part 'widgets/payment_total_invoice.dart';
 part 'widgets/payment_item_card.dart';
 
-class PaymentPage extends StatelessWidget {
+class PaymentPage extends StatefulWidget {
   final bool isMarketPlace;
 
   const PaymentPage({
     super.key,
     required this.isMarketPlace,
   });
+
+  @override
+  State<PaymentPage> createState() => _PaymentPageState();
+}
+
+class _PaymentPageState extends State<PaymentPage> {
+  @override
+  void initState() {
+    _initializePaymentModule();
+    super.initState();
+  }
+
+  void _initializePaymentModule() {
+    final state = context.read<EligibilityBloc>().state;
+
+    if (widget.isMarketPlace) {
+      //============================================================
+      // MP Payment Home
+      //
+      //============================================================
+
+      context.read<MPAccountSummaryBloc>().add(
+            AccountSummaryEvent.fetchInvoiceSummary(
+              custCode: state.customerCodeInfo.customerCodeSoldTo,
+              salesOrg: state.salesOrganisation.salesOrg,
+            ),
+          );
+
+      context.read<MPAccountSummaryBloc>().add(
+            AccountSummaryEvent.fetchCreditSummary(
+              custCode: state.customerCodeInfo.customerCodeSoldTo,
+              salesOrg: state.salesOrganisation.salesOrg,
+            ),
+          );
+
+      context.read<MPPaymentInProgressBloc>().add(
+            PaymentInProgressEvent.fetch(
+              salesOrganization: state.salesOrganisation,
+              customerCodeInfo: state.customerCodeInfo,
+            ),
+          );
+
+      context.read<MPSoaBloc>().add(
+            SoaEvent.fetch(
+              customerCodeInfo: state.customerCodeInfo,
+              salesOrg: state.salesOrg,
+            ),
+          );
+
+      //============================================================
+      // ZP Account Summary
+      //
+      //============================================================
+
+      context.read<MPAllInvoicesBloc>()
+        ..add(
+          AllInvoicesEvent.initialized(
+            salesOrganisation: state.salesOrganisation,
+            customerCodeInfo: state.customerCodeInfo,
+          ),
+        )
+        ..add(
+          AllInvoicesEvent.fetch(
+            appliedFilter: AllInvoicesFilter.defaultFilter(),
+          ),
+        );
+
+      context.read<MPAllCreditsBloc>()
+        ..add(
+          AllCreditsEvent.initialized(
+            salesOrganisation: state.salesOrganisation,
+            customerCodeInfo: state.customerCodeInfo,
+          ),
+        )
+        ..add(
+          AllCreditsEvent.fetch(
+            appliedFilter: AllCreditsFilter.defaultFilter(),
+          ),
+        );
+
+      context.read<MPFullSummaryBloc>()
+        ..add(
+          FullSummaryEvent.initialized(
+            salesOrganisation: state.salesOrganisation,
+            customerCodeInfo: state.customerCodeInfo,
+          ),
+        )
+        ..add(
+          FullSummaryEvent.fetch(
+            appliedFilter: FullSummaryFilter.defaultFilter(),
+          ),
+        );
+
+      //============================================================
+      // MP Payment Summary
+      //
+      //============================================================
+
+      context.read<MPPaymentSummaryBloc>()
+        ..add(
+          PaymentSummaryEvent.initialized(
+            salesOrganization: state.salesOrganisation,
+            customerCodeInfo: state.customerCodeInfo,
+          ),
+        )
+        ..add(
+          PaymentSummaryEvent.fetch(
+            appliedFilter:
+                context.read<MPPaymentSummaryBloc>().state.appliedFilter,
+          ),
+        );
+    } else {
+      //============================================================
+      // ZP Payment Home
+      //
+      //============================================================
+
+      context.read<ZPAccountSummaryBloc>().add(
+            AccountSummaryEvent.fetchInvoiceSummary(
+              custCode: state.customerCodeInfo.customerCodeSoldTo,
+              salesOrg: state.salesOrganisation.salesOrg,
+            ),
+          );
+
+      context.read<ZPAccountSummaryBloc>().add(
+            AccountSummaryEvent.fetchCreditSummary(
+              custCode: state.customerCodeInfo.customerCodeSoldTo,
+              salesOrg: state.salesOrganisation.salesOrg,
+            ),
+          );
+
+      context.read<ZPPaymentInProgressBloc>().add(
+            PaymentInProgressEvent.fetch(
+              salesOrganization: state.salesOrganisation,
+              customerCodeInfo: state.customerCodeInfo,
+            ),
+          );
+
+      context.read<ZPSoaBloc>().add(
+            SoaEvent.fetch(
+              customerCodeInfo: state.customerCodeInfo,
+              salesOrg: state.salesOrg,
+            ),
+          );
+
+      //============================================================
+      // ZP Account Summary
+      //
+      //============================================================
+
+      context.read<ZPAllInvoicesBloc>()
+        ..add(
+          AllInvoicesEvent.initialized(
+            salesOrganisation: state.salesOrganisation,
+            customerCodeInfo: state.customerCodeInfo,
+          ),
+        )
+        ..add(
+          AllInvoicesEvent.fetch(
+            appliedFilter: AllInvoicesFilter.defaultFilter(),
+          ),
+        );
+
+      context.read<ZPAllCreditsBloc>()
+        ..add(
+          AllCreditsEvent.initialized(
+            salesOrganisation: state.salesOrganisation,
+            customerCodeInfo: state.customerCodeInfo,
+          ),
+        )
+        ..add(
+          AllCreditsEvent.fetch(
+            appliedFilter: AllCreditsFilter.defaultFilter(),
+          ),
+        );
+
+      context.read<ZPFullSummaryBloc>()
+        ..add(
+          FullSummaryEvent.initialized(
+            salesOrganisation: state.salesOrganisation,
+            customerCodeInfo: state.customerCodeInfo,
+          ),
+        )
+        ..add(
+          FullSummaryEvent.fetch(
+            appliedFilter: FullSummaryFilter.defaultFilter(),
+          ),
+        );
+
+      //============================================================
+      // ZP Payment Summary
+      //
+      //============================================================
+
+      context.read<ZPPaymentSummaryBloc>()
+        ..add(
+          PaymentSummaryEvent.initialized(
+            salesOrganization: state.salesOrganisation,
+            customerCodeInfo: state.customerCodeInfo,
+          ),
+        )
+        ..add(
+          PaymentSummaryEvent.fetch(
+            appliedFilter:
+                context.read<ZPPaymentSummaryBloc>().state.appliedFilter,
+          ),
+        );
+    }
+
+    //============================================================
+    // Payment Summary Filter
+    //
+    //============================================================
+
+    context.read<PaymentSummaryFilterBloc>().add(
+          PaymentSummaryFilterEvent.initialized(
+            salesOrg: state.salesOrg,
+          ),
+        );
+
+    //============================================================
+    // New Payment
+    //
+    //============================================================
+
+    context.read<AvailableCreditsBloc>().add(
+          AvailableCreditsEvent.initialized(
+            salesOrganization: state.salesOrganisation,
+            customerCodeInfo: state.customerCodeInfo,
+          ),
+        );
+
+    context.read<OutstandingInvoicesBloc>().add(
+          OutstandingInvoicesEvent.initialized(
+            salesOrganisation: state.salesOrganisation,
+            customerCodeInfo: state.customerCodeInfo,
+          ),
+        );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -82,13 +329,13 @@ class PaymentPage extends StatelessWidget {
         context.read<EligibilityBloc>().state.salesOrgConfigs;
 
     return PaymentModule(
-      isMarketPlace: isMarketPlace,
+      isMarketPlace: widget.isMarketPlace,
       child: Scaffold(
         key: WidgetKeys.paymentsTabPage,
         appBar: CustomAppBar.commonAppBar(
           key: WidgetKeys.paymentHomeAppBar,
           title: Text(
-            context.tr(isMarketPlace ? 'MP Payments' : 'Payments'),
+            context.tr(widget.isMarketPlace ? 'MP Payments' : 'Payments'),
           ),
           customerBlockedOrSuspended:
               context.read<EligibilityBloc>().state.customerBlockOrSuspended,
@@ -125,26 +372,26 @@ class PaymentPage extends StatelessWidget {
   void _refreshPayment(BuildContext context) {
     final eligibilityState = context.read<EligibilityBloc>().state;
 
-    context.paymentInProgressBloc(isMarketPlace).add(
+    context.paymentInProgressBloc(widget.isMarketPlace).add(
           PaymentInProgressEvent.fetch(
             salesOrganization: eligibilityState.salesOrganisation,
             customerCodeInfo: eligibilityState.customerCodeInfo,
           ),
         );
-    context.accountSummaryBloc(isMarketPlace).add(
+    context.accountSummaryBloc(widget.isMarketPlace).add(
           AccountSummaryEvent.fetchInvoiceSummary(
             custCode: eligibilityState.customerCodeInfo.customerCodeSoldTo,
             salesOrg: eligibilityState.salesOrganisation.salesOrg,
           ),
         );
 
-    context.accountSummaryBloc(isMarketPlace).add(
+    context.accountSummaryBloc(widget.isMarketPlace).add(
           AccountSummaryEvent.fetchCreditSummary(
             custCode: eligibilityState.customerCodeInfo.customerCodeSoldTo,
             salesOrg: eligibilityState.salesOrganisation.salesOrg,
           ),
         );
-    context.soaBloc(isMarketPlace).add(
+    context.soaBloc(widget.isMarketPlace).add(
           SoaEvent.fetch(
             customerCodeInfo: eligibilityState.customerCodeInfo,
             salesOrg: eligibilityState.salesOrg,

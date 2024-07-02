@@ -5,12 +5,18 @@ import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart
 import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/payments/account_summary/account_summary_bloc.dart';
+import 'package:ezrxmobile/application/payments/all_credits/all_credits_bloc.dart';
+import 'package:ezrxmobile/application/payments/all_invoices/all_invoices_bloc.dart';
 import 'package:ezrxmobile/application/payments/download_payment_attachments/download_payment_attachments_bloc.dart';
+import 'package:ezrxmobile/application/payments/full_summary/full_summary_bloc.dart';
 import 'package:ezrxmobile/application/payments/new_payment/available_credits/available_credits_bloc.dart';
 import 'package:ezrxmobile/application/payments/new_payment/available_credits/filter/available_credit_filter_bloc.dart';
 import 'package:ezrxmobile/application/payments/new_payment/new_payment_bloc.dart';
 import 'package:ezrxmobile/application/payments/new_payment/outstanding_invoices/outstanding_invoices_bloc.dart';
 import 'package:ezrxmobile/application/payments/payment_in_progress/payment_in_progress_bloc.dart';
+import 'package:ezrxmobile/application/payments/payment_summary/filter/payment_summary_filter_bloc.dart';
+import 'package:ezrxmobile/application/payments/payment_summary/payment_summary_bloc.dart';
+import 'package:ezrxmobile/application/payments/payment_summary_details/payment_summary_details_bloc.dart';
 import 'package:ezrxmobile/application/payments/soa/soa_bloc.dart';
 import 'package:ezrxmobile/application/payments/soa/soa_filter/soa_filter_bloc.dart';
 import 'package:ezrxmobile/config.dart';
@@ -19,10 +25,14 @@ import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/domain/payments/entities/all_credits_filter.dart';
+import 'package:ezrxmobile/domain/payments/entities/all_invoices_filter.dart';
 import 'package:ezrxmobile/domain/payments/entities/available_credit_filter.dart';
 import 'package:ezrxmobile/domain/payments/entities/credit_limit.dart';
+import 'package:ezrxmobile/domain/payments/entities/full_summary_filter.dart';
 import 'package:ezrxmobile/domain/payments/entities/outstanding_balance.dart';
 import 'package:ezrxmobile/domain/payments/entities/outstanding_invoice_filter.dart';
+import 'package:ezrxmobile/domain/payments/entities/payment_summary_filter.dart';
 import 'package:ezrxmobile/domain/payments/entities/principal_cutoffs.dart';
 import 'package:ezrxmobile/domain/payments/entities/soa.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
@@ -69,6 +79,17 @@ void main() {
   late SoaFilterBloc soaFilterBlocMock;
   const fakeError = ApiFailure.other('fake-error');
   late List<Soa> soaList;
+  late ZPFullSummaryBloc fullSummaryBlocMock;
+  late MPFullSummaryBloc mpFullSummaryBlocMock;
+  late ZPAllInvoicesBloc allInvoicesBlocMock;
+  late MPAllInvoicesBloc mpAllInvoicesBlocMock;
+  late ZPAllCreditsBloc allCreditsBlocMock;
+  late MPAllCreditsBloc mpAllCreditsBlocMock;
+  late ZPPaymentSummaryBloc paymentSummaryBlocMock;
+  late MPPaymentSummaryBloc mpPaymentSummaryBlocMock;
+
+  late PaymentSummaryFilterBloc paymentSummaryFilterBlocMock;
+  late PaymentSummaryDetailsBloc paymentSummaryDetailsBlocMock;
 
   //////////////////////Finder/////////////////////////////
 
@@ -136,6 +157,17 @@ void main() {
     mpSoaBloc = MPSoaBlocMock();
     mpAccountSummaryBloc = MPAccountSummaryBlocMock();
     mpPaymentInProgressBloc = MPPaymentInProgressBlocMock();
+    fullSummaryBlocMock = ZPFullSummaryBlocMock();
+    allInvoicesBlocMock = ZPAllInvoicesBlocMock();
+    allCreditsBlocMock = ZPAllCreditsBlocMock();
+    paymentSummaryBlocMock = ZPPaymentSummaryBlocMock();
+    paymentSummaryFilterBlocMock = PaymentSummaryFilterBlocMock();
+    paymentSummaryDetailsBlocMock = PaymentSummaryDetailsBlocMock();
+    mpFullSummaryBlocMock = MPFullSummaryBlocMock();
+    mpAllInvoicesBlocMock = MPAllInvoicesBlocMock();
+    mpAllCreditsBlocMock = MPAllCreditsBlocMock();
+    mpPaymentSummaryBlocMock = MPPaymentSummaryBlocMock();
+
     when(() => announcementBlocMock.state)
         .thenReturn(AnnouncementState.initial());
     when(() => paymentInProgressBloc.state)
@@ -168,6 +200,25 @@ void main() {
         .thenReturn(AccountSummaryState.initial());
     when(() => mpPaymentInProgressBloc.state)
         .thenReturn(PaymentInProgressState.initial());
+    when(() => fullSummaryBlocMock.state)
+        .thenReturn(FullSummaryState.initial());
+    when(() => allInvoicesBlocMock.state)
+        .thenReturn(AllInvoicesState.initial());
+    when(() => allCreditsBlocMock.state).thenReturn(AllCreditsState.initial());
+    when(() => paymentSummaryBlocMock.state)
+        .thenReturn(PaymentSummaryState.initial());
+    when(() => paymentSummaryFilterBlocMock.state)
+        .thenReturn(PaymentSummaryFilterState.initial());
+    when(() => paymentSummaryDetailsBlocMock.state)
+        .thenReturn(PaymentSummaryDetailsState.initial());
+    when(() => mpFullSummaryBlocMock.state)
+        .thenReturn(FullSummaryState.initial());
+    when(() => mpAllInvoicesBlocMock.state)
+        .thenReturn(AllInvoicesState.initial());
+    when(() => mpAllCreditsBlocMock.state)
+        .thenReturn(AllCreditsState.initial());
+    when(() => mpPaymentSummaryBlocMock.state)
+        .thenReturn(PaymentSummaryState.initial());
   });
 
   //////////////////////////////Finder//////////////////////////////////////
@@ -225,10 +276,502 @@ void main() {
         ),
         BlocProvider<AuthBloc>(create: (context) => authBlocMock),
         BlocProvider<SoaFilterBloc>(create: (context) => soaFilterBlocMock),
+        BlocProvider<ZPFullSummaryBloc>(
+          create: (context) => fullSummaryBlocMock,
+        ),
+        BlocProvider<MPFullSummaryBloc>(
+          create: (context) => mpFullSummaryBlocMock,
+        ),
+        BlocProvider<ZPAllInvoicesBloc>(
+          create: (context) => allInvoicesBlocMock,
+        ),
+        BlocProvider<MPAllInvoicesBloc>(
+          create: (context) => mpAllInvoicesBlocMock,
+        ),
+        BlocProvider<ZPAllCreditsBloc>(
+          create: (context) => allCreditsBlocMock,
+        ),
+        BlocProvider<MPAllCreditsBloc>(
+          create: (context) => mpAllCreditsBlocMock,
+        ),
+        BlocProvider<ZPPaymentSummaryBloc>(
+          create: (context) => paymentSummaryBlocMock,
+        ),
+        BlocProvider<MPPaymentSummaryBloc>(
+          create: (context) => mpPaymentSummaryBlocMock,
+        ),
+        BlocProvider<PaymentSummaryFilterBloc>(
+          create: (context) => paymentSummaryFilterBlocMock,
+        ),
+        BlocProvider<PaymentSummaryDetailsBloc>(
+          create: (context) => paymentSummaryDetailsBlocMock,
+        ),
       ],
       child: PaymentPage(isMarketPlace: isMarketPlace),
     );
   }
+
+  group('Payment Home Initialize', () {
+    testWidgets('Check payment home initialize for ZP Payment',
+        (WidgetTester tester) async {
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrganisation: fakeMYSalesOrganisation,
+          salesOrgConfigs: fakeMYSalesOrgConfigs,
+          customerCodeInfo: fakeCustomerCodeInfo,
+          shipToInfo: fakeShipToInfo,
+          user: fakeClientUser,
+        ),
+      );
+      await tester.pumpWidget(getWidget());
+      await tester.pump();
+      expect(paymentHome, findsOneWidget);
+      expect(appBar, findsOneWidget);
+      expect(paymentHomeOptionMenu, findsOneWidget);
+      expect(accountSummaryMenu, findsOneWidget);
+      expect(paymentSummaryMenu, findsOneWidget);
+      expect(statementOfAccountsMenu, findsOneWidget);
+      expect(claimsMenu, findsNothing);
+
+      //ZP Payment
+      verify(
+        () => accountSummaryBlocMock.add(
+          AccountSummaryEvent.fetchInvoiceSummary(
+            custCode: fakeCustomerCodeInfo.customerCodeSoldTo,
+            salesOrg: fakeMYSalesOrganisation.salesOrg,
+          ),
+        ),
+      ).called(1);
+      verify(
+        () => accountSummaryBlocMock.add(
+          AccountSummaryEvent.fetchCreditSummary(
+            custCode: fakeCustomerCodeInfo.customerCodeSoldTo,
+            salesOrg: fakeMYSalesOrganisation.salesOrg,
+          ),
+        ),
+      ).called(1);
+      verify(
+        () => paymentInProgressBloc.add(
+          PaymentInProgressEvent.fetch(
+            customerCodeInfo: fakeCustomerCodeInfo,
+            salesOrganization: fakeMYSalesOrganisation,
+          ),
+        ),
+      ).called(1);
+      verify(
+        () => soaBloc.add(
+          SoaEvent.fetch(
+            customerCodeInfo: fakeCustomerCodeInfo,
+            salesOrg: fakeMYSalesOrganisation.salesOrg,
+          ),
+        ),
+      ).called(1);
+
+      verify(
+        () => allInvoicesBlocMock.add(
+          AllInvoicesEvent.initialized(
+            customerCodeInfo: fakeCustomerCodeInfo,
+            salesOrganisation: fakeMYSalesOrganisation,
+          ),
+        ),
+      ).called(1);
+      verify(
+        () => allInvoicesBlocMock.add(
+          AllInvoicesEvent.fetch(
+            appliedFilter: AllInvoicesFilter.defaultFilter(),
+          ),
+        ),
+      ).called(1);
+
+      verify(
+        () => allCreditsBlocMock.add(
+          AllCreditsEvent.initialized(
+            customerCodeInfo: fakeCustomerCodeInfo,
+            salesOrganisation: fakeMYSalesOrganisation,
+          ),
+        ),
+      ).called(1);
+      verify(
+        () => allCreditsBlocMock.add(
+          AllCreditsEvent.fetch(
+            appliedFilter: AllCreditsFilter.defaultFilter(),
+          ),
+        ),
+      ).called(1);
+
+      verify(
+        () => fullSummaryBlocMock.add(
+          FullSummaryEvent.initialized(
+            customerCodeInfo: fakeCustomerCodeInfo,
+            salesOrganisation: fakeMYSalesOrganisation,
+          ),
+        ),
+      ).called(1);
+      verify(
+        () => fullSummaryBlocMock.add(
+          FullSummaryEvent.fetch(
+            appliedFilter: FullSummaryFilter.defaultFilter(),
+          ),
+        ),
+      ).called(1);
+
+      verify(
+        () => paymentSummaryBlocMock.add(
+          PaymentSummaryEvent.initialized(
+            customerCodeInfo: fakeCustomerCodeInfo,
+            salesOrganization: fakeMYSalesOrganisation,
+          ),
+        ),
+      ).called(1);
+      verify(
+        () => paymentSummaryBlocMock.add(
+          PaymentSummaryEvent.fetch(
+            appliedFilter: PaymentSummaryFilter.defaultFilter(),
+          ),
+        ),
+      ).called(1);
+
+      verify(
+        () => paymentSummaryFilterBlocMock.add(
+          PaymentSummaryFilterEvent.initialized(
+            salesOrg: fakeMYSalesOrganisation.salesOrg,
+          ),
+        ),
+      ).called(1);
+
+      //MP Payment
+      verifyNever(
+        () => mpAccountSummaryBloc.add(
+          AccountSummaryEvent.fetchInvoiceSummary(
+            custCode: fakeCustomerCodeInfo.customerCodeSoldTo,
+            salesOrg: fakeMYSalesOrganisation.salesOrg,
+          ),
+        ),
+      );
+      verifyNever(
+        () => mpAccountSummaryBloc.add(
+          AccountSummaryEvent.fetchCreditSummary(
+            custCode: fakeCustomerCodeInfo.customerCodeSoldTo,
+            salesOrg: fakeMYSalesOrganisation.salesOrg,
+          ),
+        ),
+      );
+      verifyNever(
+        () => mpPaymentInProgressBloc.add(
+          PaymentInProgressEvent.fetch(
+            customerCodeInfo: fakeCustomerCodeInfo,
+            salesOrganization: fakeMYSalesOrganisation,
+          ),
+        ),
+      );
+      verifyNever(
+        () => mpSoaBloc.add(
+          SoaEvent.fetch(
+            customerCodeInfo: fakeCustomerCodeInfo,
+            salesOrg: fakeMYSalesOrganisation.salesOrg,
+          ),
+        ),
+      );
+
+      verifyNever(
+        () => mpAllInvoicesBlocMock.add(
+          AllInvoicesEvent.initialized(
+            customerCodeInfo: fakeCustomerCodeInfo,
+            salesOrganisation: fakeMYSalesOrganisation,
+          ),
+        ),
+      );
+      verifyNever(
+        () => mpAllInvoicesBlocMock.add(
+          AllInvoicesEvent.fetch(
+            appliedFilter: AllInvoicesFilter.defaultFilter(),
+          ),
+        ),
+      );
+
+      verifyNever(
+        () => mpAllCreditsBlocMock.add(
+          AllCreditsEvent.initialized(
+            customerCodeInfo: fakeCustomerCodeInfo,
+            salesOrganisation: fakeMYSalesOrganisation,
+          ),
+        ),
+      );
+      verifyNever(
+        () => mpAllCreditsBlocMock.add(
+          AllCreditsEvent.fetch(
+            appliedFilter: AllCreditsFilter.defaultFilter(),
+          ),
+        ),
+      );
+
+      verifyNever(
+        () => mpFullSummaryBlocMock.add(
+          FullSummaryEvent.initialized(
+            customerCodeInfo: fakeCustomerCodeInfo,
+            salesOrganisation: fakeMYSalesOrganisation,
+          ),
+        ),
+      );
+      verifyNever(
+        () => mpFullSummaryBlocMock.add(
+          FullSummaryEvent.fetch(
+            appliedFilter: FullSummaryFilter.defaultFilter(),
+          ),
+        ),
+      );
+
+      verifyNever(
+        () => mpPaymentSummaryBlocMock.add(
+          PaymentSummaryEvent.initialized(
+            customerCodeInfo: fakeCustomerCodeInfo,
+            salesOrganization: fakeMYSalesOrganisation,
+          ),
+        ),
+      );
+      verifyNever(
+        () => mpPaymentSummaryBlocMock.add(
+          PaymentSummaryEvent.fetch(
+            appliedFilter: PaymentSummaryFilter.defaultFilter(),
+          ),
+        ),
+      );
+
+      verifyNever(
+        () => paymentSummaryFilterBlocMock.add(
+          PaymentSummaryFilterEvent.initialized(
+            salesOrg: fakeMYSalesOrganisation.salesOrg,
+          ),
+        ),
+      );
+    });
+
+    testWidgets('Check payment home initialize for MP Payment',
+        (WidgetTester tester) async {
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrganisation: fakeMYSalesOrganisation,
+          salesOrgConfigs: fakeMYSalesOrgConfigs,
+          customerCodeInfo: fakeMarketPlaceCustomerCode,
+          shipToInfo: fakeShipToInfo,
+          user: fakeClientUserAccessMarketPlace,
+        ),
+      );
+      await tester.pumpWidget(getWidget(isMarketPlace: true));
+      await tester.pump();
+      expect(paymentHome, findsOneWidget);
+      expect(appBar, findsOneWidget);
+      expect(paymentHomeOptionMenu, findsOneWidget);
+      expect(accountSummaryMenu, findsOneWidget);
+      expect(paymentSummaryMenu, findsOneWidget);
+      expect(statementOfAccountsMenu, findsOneWidget);
+      expect(claimsMenu, findsNothing);
+
+      //MP Payment
+      verify(
+        () => mpAccountSummaryBloc.add(
+          AccountSummaryEvent.fetchInvoiceSummary(
+            custCode: fakeMarketPlaceCustomerCode.customerCodeSoldTo,
+            salesOrg: fakeMYSalesOrganisation.salesOrg,
+          ),
+        ),
+      ).called(1);
+      verify(
+        () => mpAccountSummaryBloc.add(
+          AccountSummaryEvent.fetchCreditSummary(
+            custCode: fakeMarketPlaceCustomerCode.customerCodeSoldTo,
+            salesOrg: fakeMYSalesOrganisation.salesOrg,
+          ),
+        ),
+      ).called(1);
+      verify(
+        () => mpPaymentInProgressBloc.add(
+          PaymentInProgressEvent.fetch(
+            customerCodeInfo: fakeMarketPlaceCustomerCode,
+            salesOrganization: fakeMYSalesOrganisation,
+          ),
+        ),
+      ).called(1);
+      verify(
+        () => mpSoaBloc.add(
+          SoaEvent.fetch(
+            customerCodeInfo: fakeMarketPlaceCustomerCode,
+            salesOrg: fakeMYSalesOrganisation.salesOrg,
+          ),
+        ),
+      ).called(1);
+
+      verify(
+        () => mpAllInvoicesBlocMock.add(
+          AllInvoicesEvent.initialized(
+            customerCodeInfo: fakeMarketPlaceCustomerCode,
+            salesOrganisation: fakeMYSalesOrganisation,
+          ),
+        ),
+      ).called(1);
+      verify(
+        () => mpAllInvoicesBlocMock.add(
+          AllInvoicesEvent.fetch(
+            appliedFilter: AllInvoicesFilter.defaultFilter(),
+          ),
+        ),
+      ).called(1);
+
+      verify(
+        () => mpAllCreditsBlocMock.add(
+          AllCreditsEvent.initialized(
+            customerCodeInfo: fakeMarketPlaceCustomerCode,
+            salesOrganisation: fakeMYSalesOrganisation,
+          ),
+        ),
+      ).called(1);
+      verify(
+        () => mpAllCreditsBlocMock.add(
+          AllCreditsEvent.fetch(
+            appliedFilter: AllCreditsFilter.defaultFilter(),
+          ),
+        ),
+      ).called(1);
+
+      verify(
+        () => mpFullSummaryBlocMock.add(
+          FullSummaryEvent.initialized(
+            customerCodeInfo: fakeMarketPlaceCustomerCode,
+            salesOrganisation: fakeMYSalesOrganisation,
+          ),
+        ),
+      ).called(1);
+      verify(
+        () => mpFullSummaryBlocMock.add(
+          FullSummaryEvent.fetch(
+            appliedFilter: FullSummaryFilter.defaultFilter(),
+          ),
+        ),
+      ).called(1);
+
+      verify(
+        () => mpPaymentSummaryBlocMock.add(
+          PaymentSummaryEvent.initialized(
+            customerCodeInfo: fakeMarketPlaceCustomerCode,
+            salesOrganization: fakeMYSalesOrganisation,
+          ),
+        ),
+      ).called(1);
+      verify(
+        () => mpPaymentSummaryBlocMock.add(
+          PaymentSummaryEvent.fetch(
+            appliedFilter: PaymentSummaryFilter.defaultFilter(),
+          ),
+        ),
+      ).called(1);
+
+      verify(
+        () => paymentSummaryFilterBlocMock.add(
+          PaymentSummaryFilterEvent.initialized(
+            salesOrg: fakeMYSalesOrganisation.salesOrg,
+          ),
+        ),
+      ).called(1);
+
+      //ZP Payment
+      verifyNever(
+        () => accountSummaryBlocMock.add(
+          AccountSummaryEvent.fetchInvoiceSummary(
+            custCode: fakeMarketPlaceCustomerCode.customerCodeSoldTo,
+            salesOrg: fakeMYSalesOrganisation.salesOrg,
+          ),
+        ),
+      );
+      verifyNever(
+        () => accountSummaryBlocMock.add(
+          AccountSummaryEvent.fetchCreditSummary(
+            custCode: fakeMarketPlaceCustomerCode.customerCodeSoldTo,
+            salesOrg: fakeMYSalesOrganisation.salesOrg,
+          ),
+        ),
+      );
+      verifyNever(
+        () => paymentInProgressBloc.add(
+          PaymentInProgressEvent.fetch(
+            customerCodeInfo: fakeMarketPlaceCustomerCode,
+            salesOrganization: fakeMYSalesOrganisation,
+          ),
+        ),
+      );
+      verifyNever(
+        () => soaBloc.add(
+          SoaEvent.fetch(
+            customerCodeInfo: fakeMarketPlaceCustomerCode,
+            salesOrg: fakeMYSalesOrganisation.salesOrg,
+          ),
+        ),
+      );
+
+      verifyNever(
+        () => allInvoicesBlocMock.add(
+          AllInvoicesEvent.initialized(
+            customerCodeInfo: fakeMarketPlaceCustomerCode,
+            salesOrganisation: fakeMYSalesOrganisation,
+          ),
+        ),
+      );
+      verifyNever(
+        () => allInvoicesBlocMock.add(
+          AllInvoicesEvent.fetch(
+            appliedFilter: AllInvoicesFilter.defaultFilter(),
+          ),
+        ),
+      );
+
+      verifyNever(
+        () => allCreditsBlocMock.add(
+          AllCreditsEvent.initialized(
+            customerCodeInfo: fakeMarketPlaceCustomerCode,
+            salesOrganisation: fakeMYSalesOrganisation,
+          ),
+        ),
+      );
+      verifyNever(
+        () => allCreditsBlocMock.add(
+          AllCreditsEvent.fetch(
+            appliedFilter: AllCreditsFilter.defaultFilter(),
+          ),
+        ),
+      );
+
+      verifyNever(
+        () => fullSummaryBlocMock.add(
+          FullSummaryEvent.initialized(
+            customerCodeInfo: fakeMarketPlaceCustomerCode,
+            salesOrganisation: fakeMYSalesOrganisation,
+          ),
+        ),
+      );
+      verifyNever(
+        () => fullSummaryBlocMock.add(
+          FullSummaryEvent.fetch(
+            appliedFilter: FullSummaryFilter.defaultFilter(),
+          ),
+        ),
+      );
+
+      verifyNever(
+        () => paymentSummaryBlocMock.add(
+          PaymentSummaryEvent.initialized(
+            customerCodeInfo: fakeMarketPlaceCustomerCode,
+            salesOrganization: fakeMYSalesOrganisation,
+          ),
+        ),
+      );
+      verifyNever(
+        () => paymentSummaryBlocMock.add(
+          PaymentSummaryEvent.fetch(
+            appliedFilter: PaymentSummaryFilter.defaultFilter(),
+          ),
+        ),
+      );
+    });
+  });
 
   group('Payment Home Option menu check', () {
     testWidgets('Check payment option menu noClaim',
@@ -976,13 +1519,6 @@ void main() {
     testWidgets('ZP payment', (WidgetTester tester) async {
       await tester.pumpWidget(getWidget());
       await tester.pumpAndSettle();
-      await tester.fling(paymentHome, const Offset(0.0, 300.0), 800.0);
-      await tester.pump();
-      expect(
-        find.byType(RefreshProgressIndicator),
-        findsOneWidget,
-      );
-      await tester.pumpAndSettle();
       verify(
         () => soaBloc.add(
           SoaEvent.fetch(
@@ -1018,17 +1554,26 @@ void main() {
           ),
         ),
       ).called(1);
-    });
 
-    testWidgets('MP payment', (WidgetTester tester) async {
-      await tester.pumpWidget(getWidget(isMarketPlace: true));
-      await tester.pumpAndSettle();
       await tester.fling(paymentHome, const Offset(0.0, 300.0), 800.0);
       await tester.pump();
       expect(
         find.byType(RefreshProgressIndicator),
         findsOneWidget,
       );
+      await tester.pumpAndSettle();
+      verify(
+        () => soaBloc.add(
+          SoaEvent.fetch(
+            customerCodeInfo: CustomerCodeInfo.empty(),
+            salesOrg: SalesOrg(''),
+          ),
+        ),
+      ).called(1);
+    });
+
+    testWidgets('MP payment', (WidgetTester tester) async {
+      await tester.pumpWidget(getWidget(isMarketPlace: true));
       await tester.pumpAndSettle();
       verify(
         () => mpSoaBloc.add(
@@ -1062,6 +1607,22 @@ void main() {
           PaymentInProgressEvent.fetch(
             customerCodeInfo: CustomerCodeInfo.empty(),
             salesOrganization: SalesOrganisation.empty(),
+          ),
+        ),
+      ).called(1);
+
+      await tester.fling(paymentHome, const Offset(0.0, 300.0), 800.0);
+      await tester.pump();
+      expect(
+        find.byType(RefreshProgressIndicator),
+        findsOneWidget,
+      );
+      await tester.pumpAndSettle();
+      verify(
+        () => mpSoaBloc.add(
+          SoaEvent.fetch(
+            customerCodeInfo: CustomerCodeInfo.empty(),
+            salesOrg: SalesOrg(''),
           ),
         ),
       ).called(1);
