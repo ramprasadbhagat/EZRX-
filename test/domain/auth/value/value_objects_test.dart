@@ -957,7 +957,7 @@ void main() {
     test(
       'SaleOrg for HK market',
       () {
-        const input = '2001';
+        const input = '1700';
         final salesOrg = SalesOrg(input);
         final result = AppMarket('hk');
         expect(result.salesOrg, salesOrg);

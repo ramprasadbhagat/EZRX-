@@ -5,6 +5,7 @@ import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/infrastructure/core/firebase/push_notification.dart';
 import 'package:ezrxmobile/infrastructure/core/firebase/remote_config.dart';
 import 'package:ezrxmobile/infrastructure/core/clevertap/clevertap_service.dart';
+import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/device_storage.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
@@ -34,3 +35,5 @@ class RemoteConfigServiceMock extends Mock implements RemoteConfigService {}
 
 class PushNotificationServiceMock extends Mock
     implements PushNotificationService {}
+
+class HTTPServiceMock extends Mock implements HttpService {}

@@ -136,6 +136,11 @@ void main() {
     );
 
     test(
+      'should return HK when get country with SalesOrg 1700',
+      () => expect(SalesOrg('1700').country, 'HK'),
+    );
+
+    test(
       'cutOffTime should return 15h for SG',
       () {
         const input = '2601';

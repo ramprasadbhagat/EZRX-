@@ -75,9 +75,6 @@ class _CarouselBannerState extends State<CarouselBanner> {
               previous.banner != current.banner ||
               previous.isLoading != current.isLoading,
           builder: (context, state) {
-            if (state.banner.isEmpty) {
-              return const SizedBox.shrink();
-            }
             // eZReach banner for mobile
             // W 856 * H 550
             // eZReach banner for Desktop
@@ -86,86 +83,91 @@ class _CarouselBannerState extends State<CarouselBanner> {
             final ratio =
                 Responsive.isMobile(context) ? (550 / 856) : (420 / 1440);
             final bannerHeight = MediaQuery.of(context).size.width * ratio;
+            final elibilityState = context.read<EligibilityBloc>().state;
 
             return Stack(
               children: [
                 SizedBox(
                   height: bannerHeight,
                   child: LoadingShimmer.withChild(
-                    enabled: state.isLoading,
-                    child: PageView.builder(
-                      key: WidgetKeys.homeBanner,
-                      onPageChanged: (index) {
-                        final bannerPosition = index % state.banner.length;
+                    enabled: state.isLoading || !elibilityState.haveShipTo,
+                    child: state.banner.isEmpty
+                        ? Image.asset(
+                            elibilityState.salesOrg.defaultBannerPath,
+                            fit: BoxFit.fill,
+                          )
+                        : PageView.builder(
+                            key: WidgetKeys.homeBanner,
+                            onPageChanged: (index) {
+                              final bannerPosition =
+                                  index % state.banner.length;
 
-                        _trackBannerChangeEvent(
-                          context: context,
-                          index: bannerPosition,
-                        );
-                      },
-                      controller: _controller,
-                      allowImplicitScrolling: true,
-                      itemBuilder: (_, index) {
-                        final bannerPosition = index % state.banner.length;
-
-                        return CarouselBannerTile(
-                          key: Key(
-                            state.banner[bannerPosition].id.toString(),
-                          ),
-                          bannerPosition: bannerPosition,
-                          banner: state.banner[bannerPosition],
-                        );
-                      },
-                    ),
-                  ),
-                ),
-                state.banner.isNotEmpty
-                    ? Positioned(
-                        bottom: 12,
-                        child: Container(
-                          width: MediaQuery.of(context).size.width,
-                          alignment: Alignment.center,
-                          child: SmoothPageIndicator(
+                              _trackBannerChangeEvent(
+                                context: context,
+                                index: bannerPosition,
+                              );
+                            },
                             controller: _controller,
-                            onDotClicked: (index) =>
-                                _controller.jumpToPage(index),
-                            count: state.banner.length,
-                            effect: ExpandingDotsEffect(
-                              dotHeight:
-                                  MediaQuery.of(context).size.width * 0.02,
-                              dotWidth:
-                                  MediaQuery.of(context).size.width * 0.02,
-                              dotColor: ZPColors.translucentWhite,
-                              activeDotColor: ZPColors.white,
-                            ),
+                            allowImplicitScrolling: true,
+                            itemBuilder: (_, index) {
+                              final bannerPosition =
+                                  index % state.banner.length;
+
+                              return CarouselBannerTile(
+                                key: Key(
+                                  state.banner[bannerPosition].id.toString(),
+                                ),
+                                bannerPosition: bannerPosition,
+                                banner: state.banner[bannerPosition],
+                              );
+                            },
                           ),
+                  ),
+                ),
+                if (state.banner.isNotEmpty) ...[
+                  Positioned(
+                    bottom: 12,
+                    child: Container(
+                      width: MediaQuery.of(context).size.width,
+                      alignment: Alignment.center,
+                      child: SmoothPageIndicator(
+                        controller: _controller,
+                        onDotClicked: (index) => _controller.jumpToPage(index),
+                        count: state.banner.length,
+                        effect: ExpandingDotsEffect(
+                          dotHeight: MediaQuery.of(context).size.width * 0.02,
+                          dotWidth: MediaQuery.of(context).size.width * 0.02,
+                          dotColor: ZPColors.translucentWhite,
+                          activeDotColor: ZPColors.white,
                         ),
-                      )
-                    : const SizedBox.shrink(),
-                Positioned(
-                  left: 12,
-                  child: Container(
-                    height: bannerHeight,
-                    alignment: Alignment.center,
-                    child: _CircleButton(
-                      key: WidgetKeys.previousBannerIcon,
-                      iconData: Icons.chevron_left,
-                      onTap: previousPage,
+                      ),
                     ),
                   ),
-                ),
-                Positioned(
-                  right: 12,
-                  child: Container(
-                    height: bannerHeight,
-                    alignment: Alignment.center,
-                    child: _CircleButton(
-                      key: WidgetKeys.nextBannerIcon,
-                      iconData: Icons.chevron_right,
-                      onTap: nextPage,
+                  Positioned(
+                    left: 12,
+                    child: Container(
+                      height: bannerHeight,
+                      alignment: Alignment.center,
+                      child: _CircleButton(
+                        key: WidgetKeys.previousBannerIcon,
+                        iconData: Icons.chevron_left,
+                        onTap: previousPage,
+                      ),
                     ),
                   ),
-                ),
+                  Positioned(
+                    right: 12,
+                    child: Container(
+                      height: bannerHeight,
+                      alignment: Alignment.center,
+                      child: _CircleButton(
+                        key: WidgetKeys.nextBannerIcon,
+                        iconData: Icons.chevron_right,
+                        onTap: nextPage,
+                      ),
+                    ),
+                  ),
+                ],
               ],
             );
           },

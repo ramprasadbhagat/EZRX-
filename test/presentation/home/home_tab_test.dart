@@ -634,6 +634,7 @@ void main() {
             EligibilityState.initial().copyWith(
               user: fakeClientUserAccessMarketPlace,
               customerCodeInfo: fakeMarketPlaceCustomerCode,
+              shipToInfo: fakeShipToInfo,
             ),
           );
 
@@ -1218,6 +1219,7 @@ void main() {
           EligibilityState.initial().copyWith(
             customerCodeInfo: fakeCustomerCodeInfo,
             salesOrgConfigs: fakeIDSalesOrgConfigs,
+            shipToInfo: fakeShipToInfo,
           ),
         );
 

@@ -15,6 +15,7 @@ class AppMarket extends ValueObject<String> {
 
   static final supportMarkets = [
     AppMarket('kh'),
+    AppMarket('hk'),
     AppMarket('id'),
     AppMarket('my'),
     AppMarket('mm'),
@@ -23,7 +24,6 @@ class AppMarket extends ValueObject<String> {
     AppMarket('tw'),
     AppMarket('th'),
     AppMarket('vn'),
-    AppMarket('hk'),
   ];
 
   factory AppMarket(String input) {

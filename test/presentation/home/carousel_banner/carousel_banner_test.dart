@@ -2,21 +2,17 @@ import 'package:auto_route/auto_route.dart';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
-import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
-import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
-import 'package:ezrxmobile/application/auth/auth_bloc.dart';
 import 'package:ezrxmobile/application/banner/banner_bloc.dart';
 import 'package:ezrxmobile/config.dart';
-import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
+import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/banner/entities/ez_reach_banner.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
-import 'package:ezrxmobile/infrastructure/account/repository/user_repository.dart';
-import 'package:ezrxmobile/infrastructure/banner/repository/banner_repository.dart';
 
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/locator.dart';
+import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/home/banners/carousel_banner/carousel_banner.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
@@ -25,40 +21,18 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:visibility_detector/visibility_detector.dart';
+import '../../../common_mock_data/customer_code_mock.dart';
+import '../../../common_mock_data/mock_bloc.dart';
+import '../../../common_mock_data/mock_other.dart';
+import '../../../common_mock_data/sales_organsiation_mock.dart';
+import '../../../common_mock_data/user_mock.dart';
 import '../../../utils/widget_utils.dart';
-
-class MockHTTPService extends Mock implements HttpService {}
-
-class MockBannerBloc extends MockBloc<BannerEvent, BannerState>
-    implements BannerBloc {}
-
-class MockEligibilityBloc extends MockBloc<EligibilityEvent, EligibilityState>
-    implements EligibilityBloc {}
-
-class MockCustomerCodeBloc
-    extends MockBloc<CustomerCodeEvent, CustomerCodeState>
-    implements CustomerCodeBloc {}
-
-class MockBannerRepository extends Mock implements BannerRepository {}
-
-class MockSalesOrgBloc extends MockBloc<SalesOrgEvent, SalesOrgState>
-    implements SalesOrgBloc {}
-
-class MockUserRepo extends Mock implements UserRepository {}
-
-class MockAuthBloc extends MockBloc<AuthEvent, AuthState> implements AuthBloc {}
-
-class MockMixpanelService extends Mock implements MixpanelService {}
 
 void main() {
   late BannerBloc mockBannerBloc;
-  late AuthBloc mockAuthBloc;
-  late MockHTTPService mockHTTPService;
-  late SalesOrgBloc mockSalesOrgBloc;
+  late HTTPServiceMock mockHTTPService;
   late AppRouter autoRouterMock;
   late EligibilityBloc mockEligibilityBloc;
-  late CustomerCodeBloc mockCustomerCodeBloc;
 
   const mockUrl = 'mock-image-urls';
   // const mockUrlLink = 'www.google.com';
@@ -77,23 +51,17 @@ void main() {
 
   setUpAll(() async {
     TestWidgetsFlutterBinding.ensureInitialized();
-    mockAuthBloc = MockAuthBloc();
-    mockSalesOrgBloc = MockSalesOrgBloc();
-    mockBannerBloc = MockBannerBloc();
+
+    mockBannerBloc = BannerBlocMock();
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.mock);
     locator.registerLazySingleton(() => AppRouter());
-    locator.registerLazySingleton(() => mockAuthBloc);
     locator.registerFactory(() => mockBannerBloc);
-    locator.registerLazySingleton(() => mockSalesOrgBloc);
-    locator.registerLazySingleton(() => mockCustomerCodeBloc);
-    locator.registerLazySingleton<MixpanelService>(() => MockMixpanelService());
+    locator.registerLazySingleton<MixpanelService>(() => MixpanelServiceMock());
     autoRouterMock = locator<AppRouter>();
-    mockHTTPService = MockHTTPService();
-    mockEligibilityBloc = MockEligibilityBloc();
-    mockCustomerCodeBloc = MockCustomerCodeBloc();
-    locator.registerLazySingleton<HttpService>(
-      () => mockHTTPService,
-    );
+    mockHTTPService = HTTPServiceMock();
+    mockEligibilityBloc = EligibilityBlocMock();
+
+    locator.registerLazySingleton<HttpService>(() => mockHTTPService);
 
     final imageData =
         await rootBundle.load('assets/images/data/banner_image_data');
@@ -120,18 +88,13 @@ void main() {
       ),
     );
   });
-  final fakeCustomerCodeInfo =
-      CustomerCodeInfo.empty().copyWith(customerCodeSoldTo: '00001234');
 
   group('Carousel Banner', () {
     setUp(() {
-      when(() => mockAuthBloc.state).thenReturn(const AuthState.initial());
-      when(() => mockSalesOrgBloc.state).thenReturn(SalesOrgState.initial());
       when(() => mockBannerBloc.state).thenReturn(BannerState.initial());
-      when(() => mockEligibilityBloc.state)
-          .thenReturn(EligibilityState.initial());
-      when(() => mockCustomerCodeBloc.state)
-          .thenReturn(CustomerCodeState.initial());
+      when(() => mockEligibilityBloc.state).thenReturn(
+        EligibilityState.initial().copyWith(shipToInfo: fakeShipToInfo),
+      );
     });
 
     RouteDataScope getWUT() {
@@ -140,11 +103,6 @@ void main() {
         usingLocalization: true,
         providers: [
           BlocProvider<BannerBloc>(create: (context) => mockBannerBloc),
-          BlocProvider<CustomerCodeBloc>(
-            create: (context) => mockCustomerCodeBloc,
-          ),
-          BlocProvider<AuthBloc>(create: (context) => mockAuthBloc),
-          BlocProvider<SalesOrgBloc>(create: (context) => mockSalesOrgBloc),
           BlocProvider<EligibilityBloc>(
             create: (context) => mockEligibilityBloc,
           ),
@@ -155,12 +113,13 @@ void main() {
 
     testWidgets('CarouselBanner test - when customer code changed - Success',
         (tester) async {
-      VisibilityDetectorController.instance.updateInterval = Duration.zero;
       final expectedCustomerCodeInfo = [
         EligibilityState.initial().copyWith(isLoadingCustomerCode: true),
         EligibilityState.initial().copyWith(
-          customerCodeInfo: fakeCustomerCodeInfo,
+          salesOrganisation: fakeMYSalesOrganisation,
+          user: fakeClient,
           isLoadingCustomerCode: false,
+          shipToInfo: fakeShipToInfo,
         ),
       ];
       whenListen(
@@ -169,21 +128,42 @@ void main() {
       );
 
       await tester.pumpWidget(getWUT());
-      await tester.pumpAndSettle();
+      await tester.pump();
       verify(
         () => mockBannerBloc.add(
           BannerEvent.fetch(
-            salesOrganisation: mockEligibilityBloc.state.salesOrganisation,
+            salesOrganisation: fakeMYSalesOrganisation,
             bannerType: 'banner_carousel',
-            country: mockEligibilityBloc.state.salesOrg.country,
+            country: fakeMYSalesOrganisation.salesOrg.country,
             isPreSalesOrg: false,
-            role: mockEligibilityBloc.state.user.role.type.getEZReachRoleType,
-            branchCode: fakeCustomerCodeInfo.shipToInfos.first.plant,
-            targetCustomerType:
-                fakeCustomerCodeInfo.shipToInfos.first.targetCustomerType,
+            role: fakeClient.role.type.getEZReachRoleType,
+            branchCode: '',
+            targetCustomerType: '',
           ),
         ),
       ).called(1);
+    });
+
+    testWidgets('CarouselBanner test - show loading when shipTo is loading',
+        (tester) async {
+      when(
+        () => mockEligibilityBloc.state,
+      ).thenReturn(
+        EligibilityState.initial().copyWith(
+          isLoadingCustomerCode: false,
+          shipToInfo: ShipToInfo.empty(),
+        ),
+      );
+
+      await tester.pumpWidget(getWUT());
+      await tester.pump();
+      expect(
+        find.descendant(
+          of: find.byType(CarouselBanner),
+          matching: find.byType(LoadingShimmer),
+        ),
+        findsOne,
+      );
     });
 
     //commented test case reason:

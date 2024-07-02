@@ -268,6 +268,12 @@ String helpAndSupportLanguageCode(String country) {
   }
 }
 
+String getDefaultBannerPath(String country) {
+  final localizedBanner = ['KH', 'MM', 'TW', 'VN', 'TH', 'ID'];
+
+  return 'assets/images/default_banners/${localizedBanner.contains(country) ? country.toLowerCase() : 'en'}.png';
+}
+
 //  Possible role
 //  'internal_sales_rep'
 //  'external_sales_rep'

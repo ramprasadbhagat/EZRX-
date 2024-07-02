@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
-import '../../../presentation/home/carousel_banner/carousel_banner_test.dart';
+import '../../../common_mock_data/mock_other.dart';
 
 void main() {
   group('AcceptanceDateRemoteDataSource should - ', () {
@@ -17,7 +17,7 @@ void main() {
 
     setUpAll(() {
       WidgetsFlutterBinding.ensureInitialized();
-      httpService = MockHTTPService();
+      httpService = HTTPServiceMock();
       dataSourceExceptionHandler = DataSourceExceptionHandler();
       tncRemote = AcceptanceDateRemoteDataSource(
         httpService: httpService,

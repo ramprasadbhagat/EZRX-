@@ -47,6 +47,8 @@ class SalesOrg extends ValueObject<String> {
     return helpAndSupportLanguageCode(country);
   }
 
+  String get defaultBannerPath => getDefaultBannerPath(country);
+
   String get country {
     return salesOrgCountry(value.getOrElse(() => ''));
   }
