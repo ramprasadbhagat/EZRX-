@@ -98,6 +98,14 @@ String getTenderContractNumber(String text) {
       : 'Contract: $text';
 }
 
+String displayDateTimeStringIgnoringTimezone(String text, String format) {
+  final dateTimeWithoutTimeZoneOffset =
+      text.replaceAll(RegExp(r'\+\d{2}:\d{2}$'), '');
+  final parsedDate = DateTime.tryParse(dateTimeWithoutTimeZoneOffset);
+
+  return parsedDate == null ? text : DateFormat(format).format(parsedDate);
+}
+
 String displayDateTimeString(
   String text,
   String format,

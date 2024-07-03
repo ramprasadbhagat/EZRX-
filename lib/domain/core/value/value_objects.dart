@@ -131,6 +131,11 @@ class DateTimeStringValue extends ValueObject<String> {
         DateTimeFormatString.displayDateFormat,
       );
 
+  String get dateStringIgnoreTimezone => displayDateTimeStringIgnoringTimezone(
+        _valueOrEmpty,
+        DateTimeFormatString.displayDateFormat,
+      );
+
   String get simpleDateString => displayDateTimeString(
         _valueOrEmpty,
         DateTimeFormatString.displaySimpleDateFormat,
@@ -144,7 +149,8 @@ class DateTimeStringValue extends ValueObject<String> {
   String get dateTimeWithTimeZone =>
       '$dateTime12HoursString ${getTimeZoneAbbreviation(dateTime.timeZoneOffset)}';
 
-  String get time12HoursString => displayDateTimeString(
+  String get time12HoursStringIgnoreTimezone =>
+      displayDateTimeStringIgnoringTimezone(
         _valueOrEmpty,
         DateTimeFormatString.displayTime12HoursFormat,
       );
