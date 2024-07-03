@@ -101,7 +101,9 @@ class OrderSuccessPage extends StatelessWidget {
               CustomSnackBar(
                 messageText: context.tr('Order submitted'),
               ).show(context);
-              context.read<CartBloc>().add(const CartEvent.clearCart());
+              context
+                  .read<CartBloc>()
+                  .add(const CartEvent.fetchProductsAddedToCart());
             }
           },
           child: const _BodyContent(),

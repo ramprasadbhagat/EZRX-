@@ -1107,7 +1107,7 @@ void main() {
         );
         verify(
           () => cartBlocMock.add(
-            const CartEvent.clearCart(),
+            const CartEvent.fetchProductsAddedToCart(),
           ),
         ).called(1);
       });
