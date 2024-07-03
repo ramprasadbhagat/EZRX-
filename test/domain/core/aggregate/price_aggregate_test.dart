@@ -2710,5 +2710,29 @@ void main() {
         StockInfo.empty(),
       );
     });
+    test('test bonusMaterialPriceAggregate getter', () {
+      final bonusMaterialPriceAggregate = item.bonusSampleItems
+          .map(
+            (e) => PriceAggregate.empty().copyWith(
+              materialInfo: MaterialInfo.empty().copyWith(
+                type: e.type,
+                materialNumber: e.materialNumber,
+                materialDescription: e.materialDescription,
+                defaultMaterialDescription: e.materialDescription,
+                principalData: e.principalData,
+                itemRegistrationNumber: e.itemRegistrationNumber,
+              ),
+              salesOrgConfig: item.salesOrgConfig,
+              stockInfoList: [e.stockInfo],
+              quantity: e.qty.intValue,
+            ),
+          )
+          .toList();
+
+      expect(
+        item.bonusMaterialPriceAggregate,
+        bonusMaterialPriceAggregate,
+      );
+    });
   });
 }

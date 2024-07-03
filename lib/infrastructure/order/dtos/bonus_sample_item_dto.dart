@@ -35,9 +35,7 @@ class BonusSampleItemDto with _$BonusSampleItemDto {
   BonusSampleItem toDomain() {
     return BonusSampleItem(
       qty: MaterialQty(qty),
-      materialDescription: materialDescription.isNotEmpty
-          ? materialDescription
-          : defaultMaterialDescription,
+      materialDescription: defaultMaterialDescription,
       materialNumber: MaterialNumber(materialNumber),
       principalData: PrincipalData(
         principalCode: PrincipalCode(principalCode),
@@ -60,7 +58,7 @@ class BonusSampleItemDto with _$BonusSampleItemDto {
       principalName: bonus.principalData.principalName.getOrCrash(),
       itemId: bonus.itemId.getOrCrash(),
       type: bonus.type.getOrCrash(),
-      defaultMaterialDescription: '',
+      defaultMaterialDescription: bonus.materialDescription,
       itemRegistrationNumber:
           bonus.itemRegistrationNumber.getOrDefaultValue(''),
     );

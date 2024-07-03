@@ -918,6 +918,7 @@ class PriceAggregate with _$PriceAggregate {
             type: e.type,
             materialNumber: e.materialNumber,
             materialDescription: e.materialDescription,
+            defaultMaterialDescription: e.materialDescription,
             principalData: e.principalData,
             itemRegistrationNumber: e.itemRegistrationNumber,
           ),
