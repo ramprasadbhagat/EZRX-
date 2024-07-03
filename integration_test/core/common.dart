@@ -14,7 +14,10 @@ Future<void> runAppForTesting(
 }) async {
   Hive.resetAdapters();
   await locator.reset(dispose: true);
-  await initialSetup(flavor: flavor);
+  await initialSetup(
+    flavor: flavor,
+    bypassNotificationPermission: true,
+  );
   await runAppWithCrashlyticsAndLocalization();
   test.setUpTestLocator();
   await tester.pump();

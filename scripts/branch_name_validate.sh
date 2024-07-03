@@ -23,7 +23,7 @@ get_commit_branch() {
 is_valid_branch_name() {
   local commitBranch="$1"
   echo "$commitBranch"
-  local pattern="^(refs\/heads\/(ref|feat|fix|tdd|hotfix|chore)\/(EZRX|RXUAT)-[0-9]+-([0-9a-zA-Z._-]{10,})+$)"
+  local pattern="^(refs\/heads\/(ref|feat|fix|tdd|hotfix|chore|testcase)\/(EZRX|RXUAT)-[0-9]+-([0-9a-zA-Z._-]{10,})+$)"
   [[ $commitBranch =~ $pattern ]]
 }
 

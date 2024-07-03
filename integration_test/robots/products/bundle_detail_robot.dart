@@ -39,9 +39,10 @@ class BundleDetailRobot extends CommonRobot {
 
   Future<void> enterMaterialQty(String materialNumber, int qty) async {
     final textField = find.descendant(
-      of: find.byKey(WidgetKeys.bundleMaterialItem(materialNumber)),
+      of: find.byKey(WidgetKeys.bundleMaterialDetails(materialNumber)),
       matching: find.byKey(WidgetKeys.bundleQuantityTextKey),
     );
+    await scrollEnsureFinderVisible(textField);
     await tester.tap(textField);
     await tester.enterText(textField, qty.toString());
     await tester.pumpAndSettle();
@@ -95,6 +96,23 @@ class BundleDetailRobot extends CommonRobot {
 
   void verifyAddBundleBottomSheet({bool isVisible = true}) =>
       expect(sheetAddToCart, isVisible ? findsOneWidget : findsNothing);
+
+  @override
+  Future<void> scrollEnsureFinderVisible(
+    Finder finder, {
+    int maxIteration = 50,
+    reversed = false,
+  }) async {
+    await tester.dragUntilVisible(
+      finder,
+      find.descendant(
+        of: find.byKey(WidgetKeys.bundleDetailPage),
+        matching: find.byKey(WidgetKeys.scrollList),
+      ),
+      Offset(0.0, reversed ? 200 : -200),
+    );
+    await tester.pump();
+  }
 
   Future<void> verifyBundleMaterialExpiryDateAndBatchNo({
     List<StockInfo> stockInfoList = const <StockInfo>[],

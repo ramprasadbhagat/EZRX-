@@ -132,7 +132,10 @@ import 'package:ezrxmobile/infrastructure/core/local_storage/product_suggestion_
 
 final _crashlytics = locator<FirebaseCrashlyticsService>().crashlytics;
 
-Future<void> initialSetup({required Flavor flavor}) async {
+Future<void> initialSetup({
+  required Flavor flavor,
+  bool bypassNotificationPermission = false,
+}) async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
 
@@ -140,6 +143,8 @@ Future<void> initialSetup({required Flavor flavor}) async {
 
   final config = locator<Config>();
   config.appFlavor = flavor;
+  //TODO(Hob): Will remove this when lambda support auto grant permission
+  config.bypassNotificationPermission = bypassNotificationPermission;
 
   await Firebase.initializeApp(options: kIsWeb ? config.firebaseOptions : null);
 
@@ -190,6 +195,7 @@ Future<void> initialSetup({required Flavor flavor}) async {
 
 Future<void> runAppWithCrashlyticsAndLocalization() async {
   final configuration = locator<DatadogService>().configuration;
+
   await DatadogSdk.runApp(
     configuration,
     locator<Config>().enableDatadog

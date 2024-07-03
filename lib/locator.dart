@@ -510,6 +510,16 @@ void setupLocator() {
       performanceMonitorService: locator<PerformanceMonitorService>(),
     ),
   );
+
+  //Datadog
+  locator.registerLazySingleton(
+    () => DatadogService(
+      packageInfoService: locator<PackageInfoService>(),
+      config: locator<Config>(),
+      deviceStorage: locator<DeviceStorage>(),
+    ),
+  );
+
   locator.registerLazySingleton(
     () => DatadogInterceptor(datadogService: locator<DatadogService>()),
   );
@@ -1871,15 +1881,6 @@ void setupLocator() {
   locator.registerLazySingleton(
     () => MixpanelRepository(
       mixpanelService: locator<MixpanelService>(),
-    ),
-  );
-
-  //Datadog
-  locator.registerLazySingleton(
-    () => DatadogService(
-      packageInfoService: locator<PackageInfoService>(),
-      config: locator<Config>(),
-      deviceStorage: locator<DeviceStorage>(),
     ),
   );
 

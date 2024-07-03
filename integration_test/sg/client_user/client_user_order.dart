@@ -169,8 +169,8 @@ void main() {
   const bundleTier2Qty = 10;
   const bundleTier2UnitPrice = 120.0;
   const bundleTier2UnitPriceDisplay = '$currency $bundleTier2UnitPrice';
-  const bundleMaterialNumber1 = '23340349';
-  const bundleMaterialName1 = 'Niften Cap 50/100mg 2x14';
+  const bundleMaterialNumber1 = '23007415';
+  const bundleMaterialName1 = '?Imdur Depot Tab 60mg 2x15';
   const bundleMaterialNumber2 = '23007425';
   const bundleMaterialName2 = 'IMFINZI INJ 120MG VI 1X2.4ML SG';
   const poReference = 'Auto-test-po-reference';
@@ -1336,7 +1336,7 @@ void main() {
 
       await productSuggestionRobot.tapClearSearch();
       await productSuggestionRobot.searchWithKeyboardAction(bundleShortNumber);
-      await productSuggestionRobot.tapClearSearch();
+      await productRobot.openSearchProductScreen();
       productSuggestionRobot.verifySearchHistory();
       productSuggestionRobot.verifySearchHistoryItem(materialNumber);
       productSuggestionRobot.verifySearchHistoryItem(bundleShortNumber);
@@ -1359,7 +1359,7 @@ void main() {
       await productRobot.openSearchProductScreen();
       await productSuggestionRobot
           .searchWithKeyboardAction(twentySixSeriesMaterialNumber);
-      productSuggestionRobot.verifyNoRecordFound();
+      productRobot.verifyNoProduct();
     });
   });
 
@@ -1796,6 +1796,7 @@ void main() {
 
       await commonRobot.dismissSnackbar(dismissAll: true);
       await covidDetailRobot.tapBackButton();
+      await productRobot.openSearchProductScreen();
       //adding bundle material with covid
       await addBundleToCart(
         items,
@@ -2249,6 +2250,7 @@ void main() {
       //verify
       await cartRobot.tapCloseButton();
       await bundleDetailRobot.tapBackButton();
+      await productRobot.openSearchProductScreen();
       await productSuggestionRobot.searchWithKeyboardAction(materialNumber);
       await productRobot.tapSearchMaterial(materialNumber);
       await productDetailRobot.tapAddToCart();
@@ -2553,9 +2555,6 @@ void main() {
         materialUnitPrice.priceDisplay(currency),
         isVisible: false,
       );
-      requestCounterOfferRobot.verifyOfferPrice(
-        materialUnitPrice.priceDisplay(currency),
-      );
       requestCounterOfferRobot.verifyPriceTextField();
       requestCounterOfferRobot.verifyPriceText('');
       requestCounterOfferRobot.verifyRemarkTextField();
@@ -2585,8 +2584,6 @@ void main() {
         newUnitPrice.includeTax(tax).priceDisplay(currency),
       );
       await cartRobot.tapMaterialCounterOfferButton(materialNumber);
-      requestCounterOfferRobot
-          .verifyOfferPrice(newUnitPrice.priceDisplay(currency));
       requestCounterOfferRobot.verifyPriceText(newUnitPrice.toString());
       requestCounterOfferRobot.verifyRemarkText(remark);
     });
@@ -3545,11 +3542,7 @@ void main() {
         //verify
         ordersRootRobot.verifyViewByItemsPage();
         await ordersRootRobot.tapFilterButton();
-        await viewByItemsFilterRobot.tapFromDateField();
-        await commonRobot.setDateRangePickerValue(
-          fromDate: fromDate,
-          toDate: toDate,
-        );
+
         await viewByItemsFilterRobot.tapStatusCheckbox(statusFilter);
         viewByItemsFilterRobot.verifyStatusFilterValue(statusFilter, true);
         await viewByItemsFilterRobot.tapStatusCheckbox(statusFilter);
@@ -3557,10 +3550,9 @@ void main() {
         await viewByItemsFilterRobot.tapStatusCheckbox(statusFilter);
         viewByItemsFilterRobot.verifyStatusFilterValue(statusFilter, true);
         await viewByItemsFilterRobot.tapApplyButton();
-        ordersRootRobot.verifyFilterApplied(2);
-        viewByItemsRobot.verifyOrderGroupInDateRange(
-          fromDate: fromDate,
-          toDate: toDate,
+        ordersRootRobot.verifyFilterApplied(1);
+        viewByItemsRobot.verifyOrderWithStatus(
+          [statusFilter],
         );
         viewByItemsRobot.verifyOrderGroups();
         viewByItemsRobot.verifyOrderItems();

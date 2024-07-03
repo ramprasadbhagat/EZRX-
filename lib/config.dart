@@ -22,6 +22,7 @@ class Config {
   int autoSearchTimeout = 1500;
   int maximumCartQuantity = 99999;
   String customScheme = 'ezrx://';
+  bool bypassNotificationPermission = false;
 
   String get domain {
     switch (appFlavor) {
