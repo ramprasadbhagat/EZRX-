@@ -23,23 +23,22 @@ class ShowOfferDialogWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Padding(
-        padding: const EdgeInsets.symmetric(
-          vertical: 10,
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            const _AvailableOfferHeader(),
-            _AvailableOfferList(
-              bonusMaterialList: bonusMaterialList,
-              priceTiersList: priceTiersList,
-              materialInfo: materialInfo,
-            ),
-            const _CloseButton(),
-          ],
-        ),
+    return Padding(
+      padding: const EdgeInsets.symmetric(
+        vertical: 10,
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          const _AvailableOfferHeader(),
+          _AvailableOfferList(
+            bonusMaterialList: bonusMaterialList,
+            priceTiersList: priceTiersList,
+            materialInfo: materialInfo,
+          ),
+          const _CloseButton(),
+        ],
       ),
     );
   }
@@ -80,14 +79,16 @@ class _AvailableOfferList extends StatelessWidget {
         !(materialInfo.isPnGPrinciple &&
             context.read<EligibilityBloc>().state.isMYExternalSalesRepUser);
 
-    return ListView(
-      padding: const EdgeInsets.symmetric(horizontal: 15),
-      shrinkWrap: true,
-      children: [
-        if (showTierPrice)
-          ...priceTiersList.map((e) => _PriceTierItem(item: e)),
-        ...bonusMaterialList.map((e) => _BonusMaterialItem(item: e)),
-      ],
+    return Flexible(
+      child: ListView(
+        padding: const EdgeInsets.symmetric(horizontal: 15),
+        shrinkWrap: true,
+        children: [
+          if (showTierPrice)
+            ...priceTiersList.map((e) => _PriceTierItem(item: e)),
+          ...bonusMaterialList.map((e) => _BonusMaterialItem(item: e)),
+        ],
+      ),
     );
   }
 }
