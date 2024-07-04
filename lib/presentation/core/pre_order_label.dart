@@ -6,18 +6,21 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class PreOrderLabel extends StatelessWidget {
   final StockInfo stockInfo;
-  const PreOrderLabel({super.key, required this.stockInfo});
+  final EdgeInsets? padding;
+
+  const PreOrderLabel({super.key, required this.stockInfo, this.padding});
 
   @override
   Widget build(BuildContext context) {
     final eligibilityState = context.read<EligibilityBloc>().state;
 
-    return stockInfo.displayPreOrderLabel &&
-            !eligibilityState.salesOrgConfigs.hideStockDisplay
-        ? StatusLabel(
-            status: eligibilityState.outOfStockProductStatus,
-            valueColor:
-                eligibilityState.outOfStockProductStatus.displayStatusTextColor,
+    return stockInfo.displayPreOrderLabel && !eligibilityState.salesOrgConfigs.hideStockDisplay
+        ? Padding(
+            padding: padding ?? const EdgeInsets.only(),
+            child: StatusLabel(
+              status: eligibilityState.outOfStockProductStatus,
+              valueColor: eligibilityState.outOfStockProductStatus.displayStatusTextColor,
+            ),
           )
         : const SizedBox.shrink();
   }

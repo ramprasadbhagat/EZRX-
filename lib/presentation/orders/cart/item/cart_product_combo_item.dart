@@ -5,6 +5,7 @@ import 'package:ezrxmobile/domain/order/entities/combo_deal.dart';
 import 'package:ezrxmobile/domain/order/entities/combo_material_item.dart';
 import 'package:ezrxmobile/presentation/core/custom_card.dart';
 import 'package:ezrxmobile/presentation/core/custom_image.dart';
+import 'package:ezrxmobile/presentation/core/pre_order_label.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
 import 'package:ezrxmobile/presentation/products/combo_detail/widgets/discount_tag_widget.dart';
 
@@ -15,6 +16,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
+
 
 class CartProductComboItem extends StatelessWidget {
   final ComboMaterialItem comboMaterialItem;
@@ -87,6 +89,7 @@ class _ComboSubTotalSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.end,
       children: [
@@ -190,6 +193,7 @@ class _MaterialDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return Expanded(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -204,6 +208,10 @@ class _MaterialDetails extends StatelessWidget {
                 style: Theme.of(context).textTheme.bodySmall?.copyWith(
                       color: ZPColors.darkGray,
                     ),
+              ),
+              PreOrderLabel(
+                padding: const EdgeInsets.only(left: 4),
+                stockInfo: comboMaterialItem.materialInfo.productStockInfo,
               ),
               const SizedBox(
                 width: 4,
