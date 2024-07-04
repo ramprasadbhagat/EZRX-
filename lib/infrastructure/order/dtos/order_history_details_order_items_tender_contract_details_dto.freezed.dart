@@ -21,27 +21,27 @@ OrderHistoryDetailsTenderContractDto
 
 /// @nodoc
 mixin _$OrderHistoryDetailsTenderContractDto {
-  @JsonKey(name: 'ContractNumber', defaultValue: '')
+  @JsonKey(name: 'contractNumber', defaultValue: '')
   String get contractNumber => throw _privateConstructorUsedError;
-  @JsonKey(name: 'ContractReference', defaultValue: '')
+  @JsonKey(name: 'contractReference', defaultValue: '')
   String get contractReference => throw _privateConstructorUsedError;
-  @JsonKey(name: 'Price', defaultValue: '')
+  @JsonKey(name: 'price', defaultValue: '')
   String get price => throw _privateConstructorUsedError;
-  @JsonKey(name: 'PriceUnit', defaultValue: 0)
+  @JsonKey(name: 'priceUnit', defaultValue: 0)
   int get priceUnit => throw _privateConstructorUsedError;
-  @JsonKey(name: 'ContractQuantity', defaultValue: 0)
+  @JsonKey(name: 'contractQuantity', defaultValue: 0)
   int get contractQuantity => throw _privateConstructorUsedError;
-  @JsonKey(name: 'RemainingQuantity', defaultValue: 0)
+  @JsonKey(name: 'remainingQuantity', defaultValue: 0)
   int get remainingQuantity => throw _privateConstructorUsedError;
   @JsonKey(name: 'isTenderExpire', defaultValue: false)
   bool get isTenderExpired => throw _privateConstructorUsedError;
-  @JsonKey(name: 'ExpiryDate', defaultValue: '')
+  @JsonKey(name: 'expiryDate', defaultValue: '')
   String get expiryDate => throw _privateConstructorUsedError;
-  @JsonKey(name: 'OrderReason', defaultValue: '')
+  @JsonKey(name: 'orderReason', defaultValue: '')
   String get orderReason => throw _privateConstructorUsedError;
-  @JsonKey(name: 'VisaNumber', defaultValue: '')
+  @JsonKey(name: 'visaNumber', defaultValue: '')
   String get visaNumber => throw _privateConstructorUsedError;
-  @JsonKey(name: 'AnnouncementLetterNumber', defaultValue: '')
+  @JsonKey(name: 'announcementLetterNumber', defaultValue: '')
   String get announcementLetterNumber => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -60,20 +60,20 @@ abstract class $OrderHistoryDetailsTenderContractDtoCopyWith<$Res> {
           OrderHistoryDetailsTenderContractDto>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'ContractNumber', defaultValue: '') String contractNumber,
-      @JsonKey(name: 'ContractReference', defaultValue: '')
+      {@JsonKey(name: 'contractNumber', defaultValue: '') String contractNumber,
+      @JsonKey(name: 'contractReference', defaultValue: '')
       String contractReference,
-      @JsonKey(name: 'Price', defaultValue: '') String price,
-      @JsonKey(name: 'PriceUnit', defaultValue: 0) int priceUnit,
-      @JsonKey(name: 'ContractQuantity', defaultValue: 0) int contractQuantity,
-      @JsonKey(name: 'RemainingQuantity', defaultValue: 0)
+      @JsonKey(name: 'price', defaultValue: '') String price,
+      @JsonKey(name: 'priceUnit', defaultValue: 0) int priceUnit,
+      @JsonKey(name: 'contractQuantity', defaultValue: 0) int contractQuantity,
+      @JsonKey(name: 'remainingQuantity', defaultValue: 0)
       int remainingQuantity,
       @JsonKey(name: 'isTenderExpire', defaultValue: false)
       bool isTenderExpired,
-      @JsonKey(name: 'ExpiryDate', defaultValue: '') String expiryDate,
-      @JsonKey(name: 'OrderReason', defaultValue: '') String orderReason,
-      @JsonKey(name: 'VisaNumber', defaultValue: '') String visaNumber,
-      @JsonKey(name: 'AnnouncementLetterNumber', defaultValue: '')
+      @JsonKey(name: 'expiryDate', defaultValue: '') String expiryDate,
+      @JsonKey(name: 'orderReason', defaultValue: '') String orderReason,
+      @JsonKey(name: 'visaNumber', defaultValue: '') String visaNumber,
+      @JsonKey(name: 'announcementLetterNumber', defaultValue: '')
       String announcementLetterNumber});
 }
 
@@ -162,20 +162,20 @@ abstract class _$$OrderHistoryDetailsTenderContractDtoImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'ContractNumber', defaultValue: '') String contractNumber,
-      @JsonKey(name: 'ContractReference', defaultValue: '')
+      {@JsonKey(name: 'contractNumber', defaultValue: '') String contractNumber,
+      @JsonKey(name: 'contractReference', defaultValue: '')
       String contractReference,
-      @JsonKey(name: 'Price', defaultValue: '') String price,
-      @JsonKey(name: 'PriceUnit', defaultValue: 0) int priceUnit,
-      @JsonKey(name: 'ContractQuantity', defaultValue: 0) int contractQuantity,
-      @JsonKey(name: 'RemainingQuantity', defaultValue: 0)
+      @JsonKey(name: 'price', defaultValue: '') String price,
+      @JsonKey(name: 'priceUnit', defaultValue: 0) int priceUnit,
+      @JsonKey(name: 'contractQuantity', defaultValue: 0) int contractQuantity,
+      @JsonKey(name: 'remainingQuantity', defaultValue: 0)
       int remainingQuantity,
       @JsonKey(name: 'isTenderExpire', defaultValue: false)
       bool isTenderExpired,
-      @JsonKey(name: 'ExpiryDate', defaultValue: '') String expiryDate,
-      @JsonKey(name: 'OrderReason', defaultValue: '') String orderReason,
-      @JsonKey(name: 'VisaNumber', defaultValue: '') String visaNumber,
-      @JsonKey(name: 'AnnouncementLetterNumber', defaultValue: '')
+      @JsonKey(name: 'expiryDate', defaultValue: '') String expiryDate,
+      @JsonKey(name: 'orderReason', defaultValue: '') String orderReason,
+      @JsonKey(name: 'visaNumber', defaultValue: '') String visaNumber,
+      @JsonKey(name: 'announcementLetterNumber', defaultValue: '')
       String announcementLetterNumber});
 }
 
@@ -258,22 +258,22 @@ class __$$OrderHistoryDetailsTenderContractDtoImplCopyWithImpl<$Res>
 class _$OrderHistoryDetailsTenderContractDtoImpl
     extends _OrderHistoryDetailsTenderContractDto {
   const _$OrderHistoryDetailsTenderContractDtoImpl(
-      {@JsonKey(name: 'ContractNumber', defaultValue: '')
+      {@JsonKey(name: 'contractNumber', defaultValue: '')
       required this.contractNumber,
-      @JsonKey(name: 'ContractReference', defaultValue: '')
+      @JsonKey(name: 'contractReference', defaultValue: '')
       required this.contractReference,
-      @JsonKey(name: 'Price', defaultValue: '') required this.price,
-      @JsonKey(name: 'PriceUnit', defaultValue: 0) required this.priceUnit,
-      @JsonKey(name: 'ContractQuantity', defaultValue: 0)
+      @JsonKey(name: 'price', defaultValue: '') required this.price,
+      @JsonKey(name: 'priceUnit', defaultValue: 0) required this.priceUnit,
+      @JsonKey(name: 'contractQuantity', defaultValue: 0)
       required this.contractQuantity,
-      @JsonKey(name: 'RemainingQuantity', defaultValue: 0)
+      @JsonKey(name: 'remainingQuantity', defaultValue: 0)
       required this.remainingQuantity,
       @JsonKey(name: 'isTenderExpire', defaultValue: false)
       required this.isTenderExpired,
-      @JsonKey(name: 'ExpiryDate', defaultValue: '') required this.expiryDate,
-      @JsonKey(name: 'OrderReason', defaultValue: '') required this.orderReason,
-      @JsonKey(name: 'VisaNumber', defaultValue: '') required this.visaNumber,
-      @JsonKey(name: 'AnnouncementLetterNumber', defaultValue: '')
+      @JsonKey(name: 'expiryDate', defaultValue: '') required this.expiryDate,
+      @JsonKey(name: 'orderReason', defaultValue: '') required this.orderReason,
+      @JsonKey(name: 'visaNumber', defaultValue: '') required this.visaNumber,
+      @JsonKey(name: 'announcementLetterNumber', defaultValue: '')
       required this.announcementLetterNumber})
       : super._();
 
@@ -282,37 +282,37 @@ class _$OrderHistoryDetailsTenderContractDtoImpl
       _$$OrderHistoryDetailsTenderContractDtoImplFromJson(json);
 
   @override
-  @JsonKey(name: 'ContractNumber', defaultValue: '')
+  @JsonKey(name: 'contractNumber', defaultValue: '')
   final String contractNumber;
   @override
-  @JsonKey(name: 'ContractReference', defaultValue: '')
+  @JsonKey(name: 'contractReference', defaultValue: '')
   final String contractReference;
   @override
-  @JsonKey(name: 'Price', defaultValue: '')
+  @JsonKey(name: 'price', defaultValue: '')
   final String price;
   @override
-  @JsonKey(name: 'PriceUnit', defaultValue: 0)
+  @JsonKey(name: 'priceUnit', defaultValue: 0)
   final int priceUnit;
   @override
-  @JsonKey(name: 'ContractQuantity', defaultValue: 0)
+  @JsonKey(name: 'contractQuantity', defaultValue: 0)
   final int contractQuantity;
   @override
-  @JsonKey(name: 'RemainingQuantity', defaultValue: 0)
+  @JsonKey(name: 'remainingQuantity', defaultValue: 0)
   final int remainingQuantity;
   @override
   @JsonKey(name: 'isTenderExpire', defaultValue: false)
   final bool isTenderExpired;
   @override
-  @JsonKey(name: 'ExpiryDate', defaultValue: '')
+  @JsonKey(name: 'expiryDate', defaultValue: '')
   final String expiryDate;
   @override
-  @JsonKey(name: 'OrderReason', defaultValue: '')
+  @JsonKey(name: 'orderReason', defaultValue: '')
   final String orderReason;
   @override
-  @JsonKey(name: 'VisaNumber', defaultValue: '')
+  @JsonKey(name: 'visaNumber', defaultValue: '')
   final String visaNumber;
   @override
-  @JsonKey(name: 'AnnouncementLetterNumber', defaultValue: '')
+  @JsonKey(name: 'announcementLetterNumber', defaultValue: '')
   final String announcementLetterNumber;
 
   @override
@@ -384,25 +384,25 @@ class _$OrderHistoryDetailsTenderContractDtoImpl
 abstract class _OrderHistoryDetailsTenderContractDto
     extends OrderHistoryDetailsTenderContractDto {
   const factory _OrderHistoryDetailsTenderContractDto(
-      {@JsonKey(name: 'ContractNumber', defaultValue: '')
+      {@JsonKey(name: 'contractNumber', defaultValue: '')
       required final String contractNumber,
-      @JsonKey(name: 'ContractReference', defaultValue: '')
+      @JsonKey(name: 'contractReference', defaultValue: '')
       required final String contractReference,
-      @JsonKey(name: 'Price', defaultValue: '') required final String price,
-      @JsonKey(name: 'PriceUnit', defaultValue: 0) required final int priceUnit,
-      @JsonKey(name: 'ContractQuantity', defaultValue: 0)
+      @JsonKey(name: 'price', defaultValue: '') required final String price,
+      @JsonKey(name: 'priceUnit', defaultValue: 0) required final int priceUnit,
+      @JsonKey(name: 'contractQuantity', defaultValue: 0)
       required final int contractQuantity,
-      @JsonKey(name: 'RemainingQuantity', defaultValue: 0)
+      @JsonKey(name: 'remainingQuantity', defaultValue: 0)
       required final int remainingQuantity,
       @JsonKey(name: 'isTenderExpire', defaultValue: false)
       required final bool isTenderExpired,
-      @JsonKey(name: 'ExpiryDate', defaultValue: '')
+      @JsonKey(name: 'expiryDate', defaultValue: '')
       required final String expiryDate,
-      @JsonKey(name: 'OrderReason', defaultValue: '')
+      @JsonKey(name: 'orderReason', defaultValue: '')
       required final String orderReason,
-      @JsonKey(name: 'VisaNumber', defaultValue: '')
+      @JsonKey(name: 'visaNumber', defaultValue: '')
       required final String visaNumber,
-      @JsonKey(name: 'AnnouncementLetterNumber', defaultValue: '')
+      @JsonKey(name: 'announcementLetterNumber', defaultValue: '')
       required final String
           announcementLetterNumber}) = _$OrderHistoryDetailsTenderContractDtoImpl;
   const _OrderHistoryDetailsTenderContractDto._() : super._();
@@ -412,37 +412,37 @@ abstract class _OrderHistoryDetailsTenderContractDto
       _$OrderHistoryDetailsTenderContractDtoImpl.fromJson;
 
   @override
-  @JsonKey(name: 'ContractNumber', defaultValue: '')
+  @JsonKey(name: 'contractNumber', defaultValue: '')
   String get contractNumber;
   @override
-  @JsonKey(name: 'ContractReference', defaultValue: '')
+  @JsonKey(name: 'contractReference', defaultValue: '')
   String get contractReference;
   @override
-  @JsonKey(name: 'Price', defaultValue: '')
+  @JsonKey(name: 'price', defaultValue: '')
   String get price;
   @override
-  @JsonKey(name: 'PriceUnit', defaultValue: 0)
+  @JsonKey(name: 'priceUnit', defaultValue: 0)
   int get priceUnit;
   @override
-  @JsonKey(name: 'ContractQuantity', defaultValue: 0)
+  @JsonKey(name: 'contractQuantity', defaultValue: 0)
   int get contractQuantity;
   @override
-  @JsonKey(name: 'RemainingQuantity', defaultValue: 0)
+  @JsonKey(name: 'remainingQuantity', defaultValue: 0)
   int get remainingQuantity;
   @override
   @JsonKey(name: 'isTenderExpire', defaultValue: false)
   bool get isTenderExpired;
   @override
-  @JsonKey(name: 'ExpiryDate', defaultValue: '')
+  @JsonKey(name: 'expiryDate', defaultValue: '')
   String get expiryDate;
   @override
-  @JsonKey(name: 'OrderReason', defaultValue: '')
+  @JsonKey(name: 'orderReason', defaultValue: '')
   String get orderReason;
   @override
-  @JsonKey(name: 'VisaNumber', defaultValue: '')
+  @JsonKey(name: 'visaNumber', defaultValue: '')
   String get visaNumber;
   @override
-  @JsonKey(name: 'AnnouncementLetterNumber', defaultValue: '')
+  @JsonKey(name: 'announcementLetterNumber', defaultValue: '')
   String get announcementLetterNumber;
   @override
   @JsonKey(ignore: true)

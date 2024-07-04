@@ -1,3 +1,6 @@
+import 'dart:convert';
+
+import 'package:ezrxmobile/infrastructure/core/common/json_key_converter.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/order_history_details_order_items_dto.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -33,7 +36,7 @@ void main() {
     test('Test fromDomain', () {
       final configs = OrderHistoryDetailsOrderItemDto.fromDomain(
         OrderHistoryDetailsOrderItemDto.fromJson(
-          data,
+          makeResponseCamelCase(jsonEncode(data)),
         ).toDomain(),
       );
 
@@ -47,15 +50,15 @@ void main() {
     test('Test tojson', () {
       final configs = OrderHistoryDetailsOrderItemDto.fromDomain(
         OrderHistoryDetailsOrderItemDto.fromJson(
-          data,
+          makeResponseCamelCase(jsonEncode(data)),
         ).toDomain(),
       ).toJson();
 
-      expect(configs['Batch'], 'fake-batch');
-      expect(configs['HidePrice'], true);
-      expect(configs['TotalUnitPrice'], 200.0);
-      expect(configs['TotalTax'], 0.0);
-      expect(configs['TaxRate'], 0.0);
+      expect(configs['batch'], 'fake-batch');
+      expect(configs['hidePrice'], true);
+      expect(configs['totalUnitPrice'], 200.0);
+      expect(configs['totalTax'], 0.0);
+      expect(configs['taxRate'], 0.0);
     });
   });
 }

@@ -70,7 +70,7 @@ mixin _$OrderHistoryItemDto {
   String get specialInstruction => throw _privateConstructorUsedError;
   @JsonKey(name: 'tax', defaultValue: 0.0)
   double get tax => throw _privateConstructorUsedError;
-  @JsonKey(name: 'EZRXNumber', defaultValue: '')
+  @JsonKey(name: 'eZRXNumber', defaultValue: '')
   String get eZRXNumber => throw _privateConstructorUsedError;
   @JsonKey(name: 'poAttachment', defaultValue: <PoDocumentsDto>[])
   List<PoDocumentsDto> get orderHistoryItemPoAttachments =>
@@ -161,7 +161,7 @@ abstract class $OrderHistoryItemDtoCopyWith<$Res> {
       @JsonKey(name: 'specialInstructions', defaultValue: '')
       String specialInstruction,
       @JsonKey(name: 'tax', defaultValue: 0.0) double tax,
-      @JsonKey(name: 'EZRXNumber', defaultValue: '') String eZRXNumber,
+      @JsonKey(name: 'eZRXNumber', defaultValue: '') String eZRXNumber,
       @JsonKey(name: 'poAttachment', defaultValue: <PoDocumentsDto>[])
       List<PoDocumentsDto> orderHistoryItemPoAttachments,
       @JsonKey(name: 'promoStatus', defaultValue: false) bool promoStatus,
@@ -480,7 +480,7 @@ abstract class _$$OrderHistoryItemDtoImplCopyWith<$Res>
       @JsonKey(name: 'specialInstructions', defaultValue: '')
       String specialInstruction,
       @JsonKey(name: 'tax', defaultValue: 0.0) double tax,
-      @JsonKey(name: 'EZRXNumber', defaultValue: '') String eZRXNumber,
+      @JsonKey(name: 'eZRXNumber', defaultValue: '') String eZRXNumber,
       @JsonKey(name: 'poAttachment', defaultValue: <PoDocumentsDto>[])
       List<PoDocumentsDto> orderHistoryItemPoAttachments,
       @JsonKey(name: 'promoStatus', defaultValue: false) bool promoStatus,
@@ -795,7 +795,7 @@ class _$OrderHistoryItemDtoImpl extends _OrderHistoryItemDto {
       @JsonKey(name: 'specialInstructions', defaultValue: '')
       required this.specialInstruction,
       @JsonKey(name: 'tax', defaultValue: 0.0) required this.tax,
-      @JsonKey(name: 'EZRXNumber', defaultValue: '') required this.eZRXNumber,
+      @JsonKey(name: 'eZRXNumber', defaultValue: '') required this.eZRXNumber,
       @JsonKey(name: 'poAttachment', defaultValue: <PoDocumentsDto>[])
       required final List<PoDocumentsDto> orderHistoryItemPoAttachments,
       @JsonKey(name: 'promoStatus', defaultValue: false)
@@ -912,7 +912,7 @@ class _$OrderHistoryItemDtoImpl extends _OrderHistoryItemDto {
   @JsonKey(name: 'tax', defaultValue: 0.0)
   final double tax;
   @override
-  @JsonKey(name: 'EZRXNumber', defaultValue: '')
+  @JsonKey(name: 'eZRXNumber', defaultValue: '')
   final String eZRXNumber;
   final List<PoDocumentsDto> _orderHistoryItemPoAttachments;
   @override
@@ -1183,7 +1183,7 @@ abstract class _OrderHistoryItemDto extends OrderHistoryItemDto {
       @JsonKey(name: 'specialInstructions', defaultValue: '')
       required final String specialInstruction,
       @JsonKey(name: 'tax', defaultValue: 0.0) required final double tax,
-      @JsonKey(name: 'EZRXNumber', defaultValue: '')
+      @JsonKey(name: 'eZRXNumber', defaultValue: '')
       required final String eZRXNumber,
       @JsonKey(name: 'poAttachment', defaultValue: <PoDocumentsDto>[])
       required final List<PoDocumentsDto> orderHistoryItemPoAttachments,
@@ -1306,7 +1306,7 @@ abstract class _OrderHistoryItemDto extends OrderHistoryItemDto {
   @JsonKey(name: 'tax', defaultValue: 0.0)
   double get tax;
   @override
-  @JsonKey(name: 'EZRXNumber', defaultValue: '')
+  @JsonKey(name: 'eZRXNumber', defaultValue: '')
   String get eZRXNumber;
   @override
   @JsonKey(name: 'poAttachment', defaultValue: <PoDocumentsDto>[])

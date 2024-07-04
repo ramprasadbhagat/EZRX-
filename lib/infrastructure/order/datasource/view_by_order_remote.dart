@@ -4,6 +4,7 @@ import 'dart:core';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
 import 'package:ezrxmobile/domain/order/entities/view_by_order.dart';
+import 'package:ezrxmobile/infrastructure/core/common/json_key_converter.dart';
 import 'package:ezrxmobile/infrastructure/core/firebase/remote_config.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/view_by_order_details_query_mutation.dart';
@@ -72,8 +73,12 @@ class ViewByOrderRemoteDataSource {
         return ViewByOrder.empty();
       }
 
+      final finalData = makeResponseCamelCase(
+        jsonEncode(res.data['data']['orderHistoryV3']),
+      );
+
       return ViewByOrderDto.fromJson(
-        res.data['data']['orderHistoryV3'],
+        finalData,
       ).toDomain();
     });
   }

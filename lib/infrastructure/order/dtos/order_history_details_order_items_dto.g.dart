@@ -9,91 +9,91 @@ part of 'order_history_details_order_items_dto.dart';
 _$OrderHistoryDetailsOrderItemDtoImpl
     _$$OrderHistoryDetailsOrderItemDtoImplFromJson(Map<String, dynamic> json) =>
         _$OrderHistoryDetailsOrderItemDtoImpl(
-          type: json['Type'] as String? ?? '',
-          materialNumber: json['MaterialCode'] as String,
-          materialDescription: json['MaterialDescription'] as String? ?? '',
+          type: json['type'] as String? ?? '',
+          materialNumber: json['materialCode'] as String,
+          materialDescription: json['materialDescription'] as String? ?? '',
           defaultMaterialDescription:
-              json['DefaultMaterialDescription'] as String? ?? '',
-          qty: (json['Qty'] as num?)?.toInt() ?? 0,
-          unitPrice: (json['UnitPrice'] as num?)?.toDouble() ?? 0.0,
+              json['defaultMaterialDescription'] as String? ?? '',
+          qty: (json['qty'] as num?)?.toInt() ?? 0,
+          unitPrice: (json['unitPrice'] as num?)?.toDouble() ?? 0.0,
           originPrice: (json['mrp'] as num?)?.toDouble() ?? 0.0,
-          totalPrice: (json['TotalPrice'] as num?)?.toDouble() ?? 0.0,
-          tax: (json['Tax'] as num?)?.toDouble() ?? 0.0,
-          sAPStatus: json['SAPStatus'] as String? ?? '',
-          plannedDeliveryDate: json['PlannedDeliveryDate'] as String? ?? '',
-          pickedQuantity: (json['PickedQuantity'] as num?)?.toInt() ?? 0,
-          batch: json['Batch'] as String? ?? '',
-          expiryDate: json['ExpiryDate'] as String? ?? '',
-          lineReferenceNotes: json['LineReferenceNotes'] as String? ?? '',
-          lineNumber: json['LineNumber'] as String? ?? '',
+          totalPrice: (json['totalPrice'] as num?)?.toDouble() ?? 0.0,
+          tax: (json['tax'] as num?)?.toDouble() ?? 0.0,
+          sAPStatus: json['sAPStatus'] as String? ?? '',
+          plannedDeliveryDate: json['plannedDeliveryDate'] as String? ?? '',
+          pickedQuantity: (json['pickedQuantity'] as num?)?.toInt() ?? 0,
+          batch: json['batch'] as String? ?? '',
+          expiryDate: json['expiryDate'] as String? ?? '',
+          lineReferenceNotes: json['lineReferenceNotes'] as String? ?? '',
+          lineNumber: json['lineNumber'] as String? ?? '',
           isTenderContractMaterial: JsonReadValueHelper.readBoolStringFormat(
-                  json, 'IsTenderContractMaterial') as bool? ??
+                  json, 'isTenderContractMaterial') as bool? ??
               false,
-          parentId: json['ParentID'] as String? ?? '',
-          details: (json['Details'] as List<dynamic>?)
+          parentId: json['parentID'] as String? ?? '',
+          details: (json['details'] as List<dynamic>?)
                   ?.map((e) => OrderHistoryDetailsOrderItemDetailsDto.fromJson(
                       e as Map<String, dynamic>))
                   .toList() ??
               [],
           tenderContractDetails: OrderHistoryDetailsTenderContractDto.fromJson(
               JsonReadValueHelper.readValueMapDynamic(
-                  json, 'TenderContractDetails') as Map<String, dynamic>),
-          principalName: json['PrincipalName'] as String? ?? '',
-          principalCode: json['PrincipalCode'] as String? ?? '',
+                  json, 'tenderContractDetails') as Map<String, dynamic>),
+          principalName: json['principalName'] as String? ?? '',
+          principalCode: json['principalCode'] as String? ?? '',
           governmentMaterialCode:
-              json['GovernmentMaterialCode'] as String? ?? '',
+              json['governmentMaterialCode'] as String? ?? '',
           itemRegistrationNumber:
-              json['ItemRegistrationNumber'] as String? ?? '',
-          productType: JsonReadValueHelper.readProductType(json, 'ProductType')
+              json['itemRegistrationNumber'] as String? ?? '',
+          productType: JsonReadValueHelper.readProductType(json, 'productType')
               as String,
           promosStatus: json['promoStatus'] as bool? ?? false,
           isCounterOffer: json['isCounterOffer'] as bool? ?? false,
-          hidePrice: json['HidePrice'] as bool? ?? false,
+          hidePrice: json['hidePrice'] as bool? ?? false,
           isMarketPlace:
               JsonReadValueHelper.mappingIsMarketPlace(json, 'isMarketPlace')
                       as bool? ??
                   false,
           isCovid: json['isCovid'] as bool? ?? false,
-          totalUnitPrice: (json['TotalUnitPrice'] as num?)?.toDouble() ?? 0.0,
-          totalTax: (json['TotalTax'] as num?)?.toDouble() ?? 0.0,
-          taxRate: (JsonReadValueHelper.handleTax(json, 'TaxRate') as num)
+          totalUnitPrice: (json['totalUnitPrice'] as num?)?.toDouble() ?? 0.0,
+          totalTax: (json['totalTax'] as num?)?.toDouble() ?? 0.0,
+          taxRate: (JsonReadValueHelper.handleTax(json, 'taxRate') as num)
               .toDouble(),
         );
 
 Map<String, dynamic> _$$OrderHistoryDetailsOrderItemDtoImplToJson(
         _$OrderHistoryDetailsOrderItemDtoImpl instance) =>
     <String, dynamic>{
-      'Type': instance.type,
-      'MaterialCode': instance.materialNumber,
-      'MaterialDescription': instance.materialDescription,
-      'DefaultMaterialDescription': instance.defaultMaterialDescription,
-      'Qty': instance.qty,
-      'UnitPrice': instance.unitPrice,
+      'type': instance.type,
+      'materialCode': instance.materialNumber,
+      'materialDescription': instance.materialDescription,
+      'defaultMaterialDescription': instance.defaultMaterialDescription,
+      'qty': instance.qty,
+      'unitPrice': instance.unitPrice,
       'mrp': instance.originPrice,
-      'TotalPrice': instance.totalPrice,
-      'Tax': instance.tax,
-      'SAPStatus': instance.sAPStatus,
-      'PlannedDeliveryDate': instance.plannedDeliveryDate,
-      'PickedQuantity': instance.pickedQuantity,
-      'Batch': instance.batch,
-      'ExpiryDate': instance.expiryDate,
-      'LineReferenceNotes': instance.lineReferenceNotes,
-      'LineNumber': instance.lineNumber,
-      'IsTenderContractMaterial': instance.isTenderContractMaterial,
-      'ParentID': instance.parentId,
-      'Details': instance.details.map((e) => e.toJson()).toList(),
-      'TenderContractDetails': instance.tenderContractDetails.toJson(),
-      'PrincipalName': instance.principalName,
-      'PrincipalCode': instance.principalCode,
-      'GovernmentMaterialCode': instance.governmentMaterialCode,
-      'ItemRegistrationNumber': instance.itemRegistrationNumber,
-      'ProductType': instance.productType,
+      'totalPrice': instance.totalPrice,
+      'tax': instance.tax,
+      'sAPStatus': instance.sAPStatus,
+      'plannedDeliveryDate': instance.plannedDeliveryDate,
+      'pickedQuantity': instance.pickedQuantity,
+      'batch': instance.batch,
+      'expiryDate': instance.expiryDate,
+      'lineReferenceNotes': instance.lineReferenceNotes,
+      'lineNumber': instance.lineNumber,
+      'isTenderContractMaterial': instance.isTenderContractMaterial,
+      'parentID': instance.parentId,
+      'details': instance.details.map((e) => e.toJson()).toList(),
+      'tenderContractDetails': instance.tenderContractDetails.toJson(),
+      'principalName': instance.principalName,
+      'principalCode': instance.principalCode,
+      'governmentMaterialCode': instance.governmentMaterialCode,
+      'itemRegistrationNumber': instance.itemRegistrationNumber,
+      'productType': instance.productType,
       'promoStatus': instance.promosStatus,
       'isCounterOffer': instance.isCounterOffer,
-      'HidePrice': instance.hidePrice,
+      'hidePrice': instance.hidePrice,
       'isMarketPlace': instance.isMarketPlace,
       'isCovid': instance.isCovid,
-      'TotalUnitPrice': instance.totalUnitPrice,
-      'TotalTax': instance.totalTax,
-      'TaxRate': instance.taxRate,
+      'totalUnitPrice': instance.totalUnitPrice,
+      'totalTax': instance.totalTax,
+      'taxRate': instance.taxRate,
     };

@@ -5,6 +5,7 @@ import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_details.dart';
+import 'package:ezrxmobile/infrastructure/core/common/json_key_converter.dart';
 import 'package:ezrxmobile/infrastructure/core/firebase/remote_config.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/view_by_order_details_query_mutation.dart';
@@ -96,7 +97,9 @@ void main() {
         expect(
           result,
           OrderHistoryDetailsDto.fromJson(
-            res['data']['orderHistoryV3']['orderHeaders'][0],
+            makeResponseCamelCase(
+              jsonEncode(res['data']['orderHistoryV3']['orderHeaders'][0]),
+            ),
           ).toDomain(),
         );
       });
@@ -207,7 +210,13 @@ void main() {
         );
         final expectedResult = (jsonResult['data']['orderHistoryV3']
                 ['orderHeaders'] as List<dynamic>)
-            .map((e) => OrderHistoryDetailsDto.fromJson(e).toDomain())
+            .map(
+              (e) => OrderHistoryDetailsDto.fromJson(
+                makeResponseCamelCase(
+                  jsonEncode(e),
+                ),
+              ).toDomain(),
+            )
             .toList();
 
         dioAdapter.onPost(

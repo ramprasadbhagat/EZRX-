@@ -810,5 +810,25 @@ void main() {
       },
       variant: salesOrgConfigVariant,
     );
+
+    testWidgets('Display Ordered on text', (tester) async {
+      when(() => mockViewByItemsBloc.state).thenReturn(
+        ViewByItemsState.initial().copyWith(
+          isFetching: false,
+          orderHistory: orderHistory.copyWith(
+            orderHistoryItems: fakeOrderHistoryItems,
+          ),
+        ),
+      );
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pumpAndSettle();
+
+      expect(
+        find.text(
+          'Ordered on ${fakeOrderHistoryItems.first.createdDate.dateString}',
+        ),
+        findsOneWidget,
+      );
+    });
   });
 }

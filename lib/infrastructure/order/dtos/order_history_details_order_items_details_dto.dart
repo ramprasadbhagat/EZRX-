@@ -8,11 +8,11 @@ class OrderHistoryDetailsOrderItemDetailsDto
     with _$OrderHistoryDetailsOrderItemDetailsDto {
   const OrderHistoryDetailsOrderItemDetailsDto._();
   const factory OrderHistoryDetailsOrderItemDetailsDto({
-    @JsonKey(name: 'DiscountCode', defaultValue: '')
+    @JsonKey(name: 'discountCode', defaultValue: '')
         required String discountCode,
-    @JsonKey(name: 'DiscountDescription', defaultValue: '')
+    @JsonKey(name: 'discountDescription', defaultValue: '')
         required String discountDescription,
-    @JsonKey(name: 'Rate', defaultValue: '') required String rate,
+    @JsonKey(name: 'rate', defaultValue: '') required String rate,
   }) = _OrderHistoryDetailsOrderItemDetailsDto;
   factory OrderHistoryDetailsOrderItemDetailsDto.fromDomain(
     OrderHistoryDetailsOrderItemDetails details,

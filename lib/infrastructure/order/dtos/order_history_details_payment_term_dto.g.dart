@@ -10,14 +10,14 @@ _$OrderHistoryDetailsPaymentTermDtoImpl
     _$$OrderHistoryDetailsPaymentTermDtoImplFromJson(
             Map<String, dynamic> json) =>
         _$OrderHistoryDetailsPaymentTermDtoImpl(
-          paymentTermCode: json['PaymentTermCode'] as String? ?? '',
+          paymentTermCode: json['paymentTermCode'] as String? ?? '',
           paymentTermDescription:
-              json['PaymentTermDescription'] as String? ?? '',
+              json['paymentTermDescription'] as String? ?? '',
         );
 
 Map<String, dynamic> _$$OrderHistoryDetailsPaymentTermDtoImplToJson(
         _$OrderHistoryDetailsPaymentTermDtoImpl instance) =>
     <String, dynamic>{
-      'PaymentTermCode': instance.paymentTermCode,
-      'PaymentTermDescription': instance.paymentTermDescription,
+      'paymentTermCode': instance.paymentTermCode,
+      'paymentTermDescription': instance.paymentTermDescription,
     };

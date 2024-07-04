@@ -53,7 +53,7 @@ class OrderHistoryItemDto with _$OrderHistoryItemDto {
     @JsonKey(name: 'specialInstructions', defaultValue: '')
     required String specialInstruction,
     @JsonKey(name: 'tax', defaultValue: 0.0) required double tax,
-    @JsonKey(name: 'EZRXNumber', defaultValue: '') required String eZRXNumber,
+    @JsonKey(name: 'eZRXNumber', defaultValue: '') required String eZRXNumber,
     @JsonKey(name: 'poAttachment', defaultValue: <PoDocumentsDto>[])
     required List<PoDocumentsDto> orderHistoryItemPoAttachments,
     @JsonKey(name: 'promoStatus', defaultValue: false)

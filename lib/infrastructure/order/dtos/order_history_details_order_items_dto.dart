@@ -20,54 +20,54 @@ part 'order_history_details_order_items_dto.g.dart';
 class OrderHistoryDetailsOrderItemDto with _$OrderHistoryDetailsOrderItemDto {
   const OrderHistoryDetailsOrderItemDto._();
   const factory OrderHistoryDetailsOrderItemDto({
-    @JsonKey(name: 'Type', defaultValue: '') required String type,
-    @JsonKey(name: 'MaterialCode') required String materialNumber,
-    @JsonKey(name: 'MaterialDescription', defaultValue: '')
+    @JsonKey(name: 'type', defaultValue: '') required String type,
+    @JsonKey(name: 'materialCode') required String materialNumber,
+    @JsonKey(name: 'materialDescription', defaultValue: '')
     required String materialDescription,
-    @JsonKey(name: 'DefaultMaterialDescription', defaultValue: '')
+    @JsonKey(name: 'defaultMaterialDescription', defaultValue: '')
     required String defaultMaterialDescription,
-    @JsonKey(name: 'Qty', defaultValue: 0) required int qty,
-    @JsonKey(name: 'UnitPrice', defaultValue: 0.0) required double unitPrice,
+    @JsonKey(name: 'qty', defaultValue: 0) required int qty,
+    @JsonKey(name: 'unitPrice', defaultValue: 0.0) required double unitPrice,
     @JsonKey(name: 'mrp', defaultValue: 0.0) required double originPrice,
-    @JsonKey(name: 'TotalPrice', defaultValue: 0.0) required double totalPrice,
-    @JsonKey(name: 'Tax', defaultValue: 0.0) required double tax,
-    @JsonKey(name: 'SAPStatus', defaultValue: '') required String sAPStatus,
-    @JsonKey(name: 'PlannedDeliveryDate', defaultValue: '')
+    @JsonKey(name: 'totalPrice', defaultValue: 0.0) required double totalPrice,
+    @JsonKey(name: 'tax', defaultValue: 0.0) required double tax,
+    @JsonKey(name: 'sAPStatus', defaultValue: '') required String sAPStatus,
+    @JsonKey(name: 'plannedDeliveryDate', defaultValue: '')
     required String plannedDeliveryDate,
-    @JsonKey(name: 'PickedQuantity', defaultValue: 0)
+    @JsonKey(name: 'pickedQuantity', defaultValue: 0)
     required int pickedQuantity,
-    @JsonKey(name: 'Batch', defaultValue: '') required String batch,
-    @JsonKey(name: 'ExpiryDate', defaultValue: '') required String expiryDate,
-    @JsonKey(name: 'LineReferenceNotes', defaultValue: '')
+    @JsonKey(name: 'batch', defaultValue: '') required String batch,
+    @JsonKey(name: 'expiryDate', defaultValue: '') required String expiryDate,
+    @JsonKey(name: 'lineReferenceNotes', defaultValue: '')
     required String lineReferenceNotes,
-    @JsonKey(name: 'LineNumber', defaultValue: '') required String lineNumber,
+    @JsonKey(name: 'lineNumber', defaultValue: '') required String lineNumber,
     @JsonKey(
-      name: 'IsTenderContractMaterial',
+      name: 'isTenderContractMaterial',
       defaultValue: false,
       readValue: JsonReadValueHelper.readBoolStringFormat,
     )
     required bool isTenderContractMaterial,
-    @JsonKey(name: 'ParentID', defaultValue: '') required String parentId,
+    @JsonKey(name: 'parentID', defaultValue: '') required String parentId,
     @JsonKey(
-      name: 'Details',
+      name: 'details',
       defaultValue: <OrderHistoryDetailsOrderItemDetailsDto>[],
     )
     required List<OrderHistoryDetailsOrderItemDetailsDto> details,
     @JsonKey(
-      name: 'TenderContractDetails',
+      name: 'tenderContractDetails',
       readValue: JsonReadValueHelper.readValueMapDynamic,
     )
     required OrderHistoryDetailsTenderContractDto tenderContractDetails,
-    @JsonKey(name: 'PrincipalName', defaultValue: '')
+    @JsonKey(name: 'principalName', defaultValue: '')
     required String principalName,
-    @JsonKey(name: 'PrincipalCode', defaultValue: '')
+    @JsonKey(name: 'principalCode', defaultValue: '')
     required String principalCode,
-    @JsonKey(name: 'GovernmentMaterialCode', defaultValue: '')
+    @JsonKey(name: 'governmentMaterialCode', defaultValue: '')
     required String governmentMaterialCode,
-    @JsonKey(name: 'ItemRegistrationNumber', defaultValue: '')
+    @JsonKey(name: 'itemRegistrationNumber', defaultValue: '')
     required String itemRegistrationNumber,
     @JsonKey(
-      name: 'ProductType',
+      name: 'productType',
       readValue: JsonReadValueHelper.readProductType,
     )
     required String productType,
@@ -75,17 +75,17 @@ class OrderHistoryDetailsOrderItemDto with _$OrderHistoryDetailsOrderItemDto {
     required bool promosStatus,
     @JsonKey(name: 'isCounterOffer', defaultValue: false)
     required bool isCounterOffer,
-    @JsonKey(name: 'HidePrice', defaultValue: false) required bool hidePrice,
+    @JsonKey(name: 'hidePrice', defaultValue: false) required bool hidePrice,
     @JsonKey(
       defaultValue: false,
       readValue: JsonReadValueHelper.mappingIsMarketPlace,
     )
     required bool isMarketPlace,
     @JsonKey(name: 'isCovid', defaultValue: false) required bool isCovid,
-    @JsonKey(name: 'TotalUnitPrice', defaultValue: 0.0)
+    @JsonKey(name: 'totalUnitPrice', defaultValue: 0.0)
     required double totalUnitPrice,
-    @JsonKey(name: 'TotalTax', defaultValue: 0.0) required double totalTax,
-    @JsonKey(name: 'TaxRate', readValue: JsonReadValueHelper.handleTax)
+    @JsonKey(name: 'totalTax', defaultValue: 0.0) required double totalTax,
+    @JsonKey(name: 'taxRate', readValue: JsonReadValueHelper.handleTax)
     required double taxRate,
   }) = _OrderHistoryDetailsOrderItemDto;
   factory OrderHistoryDetailsOrderItemDto.fromDomain(

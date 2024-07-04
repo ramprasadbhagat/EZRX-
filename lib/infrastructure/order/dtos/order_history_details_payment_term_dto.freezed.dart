@@ -21,9 +21,9 @@ OrderHistoryDetailsPaymentTermDto _$OrderHistoryDetailsPaymentTermDtoFromJson(
 
 /// @nodoc
 mixin _$OrderHistoryDetailsPaymentTermDto {
-  @JsonKey(name: 'PaymentTermCode', defaultValue: '')
+  @JsonKey(name: 'paymentTermCode', defaultValue: '')
   String get paymentTermCode => throw _privateConstructorUsedError;
-  @JsonKey(name: 'PaymentTermDescription', defaultValue: '')
+  @JsonKey(name: 'paymentTermDescription', defaultValue: '')
   String get paymentTermDescription => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -41,9 +41,9 @@ abstract class $OrderHistoryDetailsPaymentTermDtoCopyWith<$Res> {
           OrderHistoryDetailsPaymentTermDto>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'PaymentTermCode', defaultValue: '')
+      {@JsonKey(name: 'paymentTermCode', defaultValue: '')
       String paymentTermCode,
-      @JsonKey(name: 'PaymentTermDescription', defaultValue: '')
+      @JsonKey(name: 'paymentTermDescription', defaultValue: '')
       String paymentTermDescription});
 }
 
@@ -87,9 +87,9 @@ abstract class _$$OrderHistoryDetailsPaymentTermDtoImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'PaymentTermCode', defaultValue: '')
+      {@JsonKey(name: 'paymentTermCode', defaultValue: '')
       String paymentTermCode,
-      @JsonKey(name: 'PaymentTermDescription', defaultValue: '')
+      @JsonKey(name: 'paymentTermDescription', defaultValue: '')
       String paymentTermDescription});
 }
 
@@ -127,9 +127,9 @@ class __$$OrderHistoryDetailsPaymentTermDtoImplCopyWithImpl<$Res>
 class _$OrderHistoryDetailsPaymentTermDtoImpl
     extends _OrderHistoryDetailsPaymentTermDto {
   const _$OrderHistoryDetailsPaymentTermDtoImpl(
-      {@JsonKey(name: 'PaymentTermCode', defaultValue: '')
+      {@JsonKey(name: 'paymentTermCode', defaultValue: '')
       required this.paymentTermCode,
-      @JsonKey(name: 'PaymentTermDescription', defaultValue: '')
+      @JsonKey(name: 'paymentTermDescription', defaultValue: '')
       required this.paymentTermDescription})
       : super._();
 
@@ -138,10 +138,10 @@ class _$OrderHistoryDetailsPaymentTermDtoImpl
       _$$OrderHistoryDetailsPaymentTermDtoImplFromJson(json);
 
   @override
-  @JsonKey(name: 'PaymentTermCode', defaultValue: '')
+  @JsonKey(name: 'paymentTermCode', defaultValue: '')
   final String paymentTermCode;
   @override
-  @JsonKey(name: 'PaymentTermDescription', defaultValue: '')
+  @JsonKey(name: 'paymentTermDescription', defaultValue: '')
   final String paymentTermDescription;
 
   @override
@@ -184,9 +184,9 @@ class _$OrderHistoryDetailsPaymentTermDtoImpl
 abstract class _OrderHistoryDetailsPaymentTermDto
     extends OrderHistoryDetailsPaymentTermDto {
   const factory _OrderHistoryDetailsPaymentTermDto(
-          {@JsonKey(name: 'PaymentTermCode', defaultValue: '')
+          {@JsonKey(name: 'paymentTermCode', defaultValue: '')
           required final String paymentTermCode,
-          @JsonKey(name: 'PaymentTermDescription', defaultValue: '')
+          @JsonKey(name: 'paymentTermDescription', defaultValue: '')
           required final String paymentTermDescription}) =
       _$OrderHistoryDetailsPaymentTermDtoImpl;
   const _OrderHistoryDetailsPaymentTermDto._() : super._();
@@ -196,10 +196,10 @@ abstract class _OrderHistoryDetailsPaymentTermDto
       _$OrderHistoryDetailsPaymentTermDtoImpl.fromJson;
 
   @override
-  @JsonKey(name: 'PaymentTermCode', defaultValue: '')
+  @JsonKey(name: 'paymentTermCode', defaultValue: '')
   String get paymentTermCode;
   @override
-  @JsonKey(name: 'PaymentTermDescription', defaultValue: '')
+  @JsonKey(name: 'paymentTermDescription', defaultValue: '')
   String get paymentTermDescription;
   @override
   @JsonKey(ignore: true)

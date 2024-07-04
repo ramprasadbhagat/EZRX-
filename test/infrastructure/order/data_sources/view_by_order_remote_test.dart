@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
+import 'package:ezrxmobile/infrastructure/core/common/json_key_converter.dart';
 import 'package:ezrxmobile/infrastructure/core/firebase/remote_config.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/view_by_order_details_query_mutation.dart';
@@ -103,7 +104,9 @@ void main() {
         expect(
           result,
           ViewByOrderDto.fromJson(
-            res['data']['orderHistoryV3'],
+            makeResponseCamelCase(
+              jsonEncode(res['data']['orderHistoryV3']),
+            ),
           ).toDomain(),
         );
       });

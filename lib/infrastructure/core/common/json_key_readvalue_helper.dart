@@ -35,8 +35,8 @@ class JsonReadValueHelper {
       json[key] ?? json['Name'] ?? json['filename'] ?? '';
 
   static String readCreatedDateTimeValue(Map json, String _) {
-    final createdDate = json['CreatedDate'] ?? json['createdDate'] ?? '';
-    final createdTime = json['CreatedTime'] ?? json['createdTime'] ?? '';
+    final createdDate = json['createdDate'] ?? '';
+    final createdTime = json['createdTime'] ?? '';
 
     // Concatenation is necessary to convert 'createdDate' and 'createdTime' into
     // the 'yyyyMMddHHmmss' format.

@@ -25,8 +25,8 @@ void main() {
         'OrderType': 'fake-type',
         'OrderNumber': 'fake-number',
         'EZRXNumber': '',
-        'CreatedDate': '',
-        'CreatedTime': 'fake-time',
+        'CreatedDate': '20240703',
+        'CreatedTime': '010101',
         'OrderBy': '',
         'PurchaseOrderType': '',
         'DefaultMaterialDescription': ' PE MAB MG HIL-7R-M21            1S',
@@ -54,6 +54,7 @@ void main() {
         ).toDomain(),
       );
       expect(configsDto.materialNumber, 'fake-code');
+      expect(configsDto.createdDate, '03 Jul 2024');
     });
 
     // test('Test toJson', () {

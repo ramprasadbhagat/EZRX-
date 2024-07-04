@@ -22,11 +22,11 @@ OrderHistoryDetailsOrderItemDetailsDto
 
 /// @nodoc
 mixin _$OrderHistoryDetailsOrderItemDetailsDto {
-  @JsonKey(name: 'DiscountCode', defaultValue: '')
+  @JsonKey(name: 'discountCode', defaultValue: '')
   String get discountCode => throw _privateConstructorUsedError;
-  @JsonKey(name: 'DiscountDescription', defaultValue: '')
+  @JsonKey(name: 'discountDescription', defaultValue: '')
   String get discountDescription => throw _privateConstructorUsedError;
-  @JsonKey(name: 'Rate', defaultValue: '')
+  @JsonKey(name: 'rate', defaultValue: '')
   String get rate => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -45,10 +45,10 @@ abstract class $OrderHistoryDetailsOrderItemDetailsDtoCopyWith<$Res> {
           OrderHistoryDetailsOrderItemDetailsDto>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'DiscountCode', defaultValue: '') String discountCode,
-      @JsonKey(name: 'DiscountDescription', defaultValue: '')
+      {@JsonKey(name: 'discountCode', defaultValue: '') String discountCode,
+      @JsonKey(name: 'discountDescription', defaultValue: '')
       String discountDescription,
-      @JsonKey(name: 'Rate', defaultValue: '') String rate});
+      @JsonKey(name: 'rate', defaultValue: '') String rate});
 }
 
 /// @nodoc
@@ -96,10 +96,10 @@ abstract class _$$OrderHistoryDetailsOrderItemDetailsDtoImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'DiscountCode', defaultValue: '') String discountCode,
-      @JsonKey(name: 'DiscountDescription', defaultValue: '')
+      {@JsonKey(name: 'discountCode', defaultValue: '') String discountCode,
+      @JsonKey(name: 'discountDescription', defaultValue: '')
       String discountDescription,
-      @JsonKey(name: 'Rate', defaultValue: '') String rate});
+      @JsonKey(name: 'rate', defaultValue: '') String rate});
 }
 
 /// @nodoc
@@ -141,11 +141,11 @@ class __$$OrderHistoryDetailsOrderItemDetailsDtoImplCopyWithImpl<$Res>
 class _$OrderHistoryDetailsOrderItemDetailsDtoImpl
     extends _OrderHistoryDetailsOrderItemDetailsDto {
   const _$OrderHistoryDetailsOrderItemDetailsDtoImpl(
-      {@JsonKey(name: 'DiscountCode', defaultValue: '')
+      {@JsonKey(name: 'discountCode', defaultValue: '')
       required this.discountCode,
-      @JsonKey(name: 'DiscountDescription', defaultValue: '')
+      @JsonKey(name: 'discountDescription', defaultValue: '')
       required this.discountDescription,
-      @JsonKey(name: 'Rate', defaultValue: '') required this.rate})
+      @JsonKey(name: 'rate', defaultValue: '') required this.rate})
       : super._();
 
   factory _$OrderHistoryDetailsOrderItemDetailsDtoImpl.fromJson(
@@ -153,13 +153,13 @@ class _$OrderHistoryDetailsOrderItemDetailsDtoImpl
       _$$OrderHistoryDetailsOrderItemDetailsDtoImplFromJson(json);
 
   @override
-  @JsonKey(name: 'DiscountCode', defaultValue: '')
+  @JsonKey(name: 'discountCode', defaultValue: '')
   final String discountCode;
   @override
-  @JsonKey(name: 'DiscountDescription', defaultValue: '')
+  @JsonKey(name: 'discountDescription', defaultValue: '')
   final String discountDescription;
   @override
-  @JsonKey(name: 'Rate', defaultValue: '')
+  @JsonKey(name: 'rate', defaultValue: '')
   final String rate;
 
   @override
@@ -204,11 +204,11 @@ class _$OrderHistoryDetailsOrderItemDetailsDtoImpl
 abstract class _OrderHistoryDetailsOrderItemDetailsDto
     extends OrderHistoryDetailsOrderItemDetailsDto {
   const factory _OrderHistoryDetailsOrderItemDetailsDto(
-          {@JsonKey(name: 'DiscountCode', defaultValue: '')
+          {@JsonKey(name: 'discountCode', defaultValue: '')
           required final String discountCode,
-          @JsonKey(name: 'DiscountDescription', defaultValue: '')
+          @JsonKey(name: 'discountDescription', defaultValue: '')
           required final String discountDescription,
-          @JsonKey(name: 'Rate', defaultValue: '')
+          @JsonKey(name: 'rate', defaultValue: '')
           required final String rate}) =
       _$OrderHistoryDetailsOrderItemDetailsDtoImpl;
   const _OrderHistoryDetailsOrderItemDetailsDto._() : super._();
@@ -218,13 +218,13 @@ abstract class _OrderHistoryDetailsOrderItemDetailsDto
       _$OrderHistoryDetailsOrderItemDetailsDtoImpl.fromJson;
 
   @override
-  @JsonKey(name: 'DiscountCode', defaultValue: '')
+  @JsonKey(name: 'discountCode', defaultValue: '')
   String get discountCode;
   @override
-  @JsonKey(name: 'DiscountDescription', defaultValue: '')
+  @JsonKey(name: 'discountDescription', defaultValue: '')
   String get discountDescription;
   @override
-  @JsonKey(name: 'Rate', defaultValue: '')
+  @JsonKey(name: 'rate', defaultValue: '')
   String get rate;
   @override
   @JsonKey(ignore: true)

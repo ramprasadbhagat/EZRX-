@@ -9,9 +9,9 @@ class OrderHistoryDetailsPaymentTermDto
     with _$OrderHistoryDetailsPaymentTermDto {
   const OrderHistoryDetailsPaymentTermDto._();
   const factory OrderHistoryDetailsPaymentTermDto({
-    @JsonKey(name: 'PaymentTermCode', defaultValue: '')
+    @JsonKey(name: 'paymentTermCode', defaultValue: '')
         required String paymentTermCode,
-    @JsonKey(name: 'PaymentTermDescription', defaultValue: '')
+    @JsonKey(name: 'paymentTermDescription', defaultValue: '')
         required String paymentTermDescription,
   }) = _OrderHistoryDetailsPaymentTermDto;
   factory OrderHistoryDetailsPaymentTermDto.fromDomain(

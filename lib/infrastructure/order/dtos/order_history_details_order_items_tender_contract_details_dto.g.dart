@@ -10,32 +10,32 @@ _$OrderHistoryDetailsTenderContractDtoImpl
     _$$OrderHistoryDetailsTenderContractDtoImplFromJson(
             Map<String, dynamic> json) =>
         _$OrderHistoryDetailsTenderContractDtoImpl(
-          contractNumber: json['ContractNumber'] as String? ?? '',
-          contractReference: json['ContractReference'] as String? ?? '',
-          price: json['Price'] as String? ?? '',
-          priceUnit: (json['PriceUnit'] as num?)?.toInt() ?? 0,
-          contractQuantity: (json['ContractQuantity'] as num?)?.toInt() ?? 0,
-          remainingQuantity: (json['RemainingQuantity'] as num?)?.toInt() ?? 0,
+          contractNumber: json['contractNumber'] as String? ?? '',
+          contractReference: json['contractReference'] as String? ?? '',
+          price: json['price'] as String? ?? '',
+          priceUnit: (json['priceUnit'] as num?)?.toInt() ?? 0,
+          contractQuantity: (json['contractQuantity'] as num?)?.toInt() ?? 0,
+          remainingQuantity: (json['remainingQuantity'] as num?)?.toInt() ?? 0,
           isTenderExpired: json['isTenderExpire'] as bool? ?? false,
-          expiryDate: json['ExpiryDate'] as String? ?? '',
-          orderReason: json['OrderReason'] as String? ?? '',
-          visaNumber: json['VisaNumber'] as String? ?? '',
+          expiryDate: json['expiryDate'] as String? ?? '',
+          orderReason: json['orderReason'] as String? ?? '',
+          visaNumber: json['visaNumber'] as String? ?? '',
           announcementLetterNumber:
-              json['AnnouncementLetterNumber'] as String? ?? '',
+              json['announcementLetterNumber'] as String? ?? '',
         );
 
 Map<String, dynamic> _$$OrderHistoryDetailsTenderContractDtoImplToJson(
         _$OrderHistoryDetailsTenderContractDtoImpl instance) =>
     <String, dynamic>{
-      'ContractNumber': instance.contractNumber,
-      'ContractReference': instance.contractReference,
-      'Price': instance.price,
-      'PriceUnit': instance.priceUnit,
-      'ContractQuantity': instance.contractQuantity,
-      'RemainingQuantity': instance.remainingQuantity,
+      'contractNumber': instance.contractNumber,
+      'contractReference': instance.contractReference,
+      'price': instance.price,
+      'priceUnit': instance.priceUnit,
+      'contractQuantity': instance.contractQuantity,
+      'remainingQuantity': instance.remainingQuantity,
       'isTenderExpire': instance.isTenderExpired,
-      'ExpiryDate': instance.expiryDate,
-      'OrderReason': instance.orderReason,
-      'VisaNumber': instance.visaNumber,
-      'AnnouncementLetterNumber': instance.announcementLetterNumber,
+      'expiryDate': instance.expiryDate,
+      'orderReason': instance.orderReason,
+      'visaNumber': instance.visaNumber,
+      'announcementLetterNumber': instance.announcementLetterNumber,
     };

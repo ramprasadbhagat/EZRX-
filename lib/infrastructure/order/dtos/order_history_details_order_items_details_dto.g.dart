@@ -10,15 +10,15 @@ _$OrderHistoryDetailsOrderItemDetailsDtoImpl
     _$$OrderHistoryDetailsOrderItemDetailsDtoImplFromJson(
             Map<String, dynamic> json) =>
         _$OrderHistoryDetailsOrderItemDetailsDtoImpl(
-          discountCode: json['DiscountCode'] as String? ?? '',
-          discountDescription: json['DiscountDescription'] as String? ?? '',
-          rate: json['Rate'] as String? ?? '',
+          discountCode: json['discountCode'] as String? ?? '',
+          discountDescription: json['discountDescription'] as String? ?? '',
+          rate: json['rate'] as String? ?? '',
         );
 
 Map<String, dynamic> _$$OrderHistoryDetailsOrderItemDetailsDtoImplToJson(
         _$OrderHistoryDetailsOrderItemDetailsDtoImpl instance) =>
     <String, dynamic>{
-      'DiscountCode': instance.discountCode,
-      'DiscountDescription': instance.discountDescription,
-      'Rate': instance.rate,
+      'discountCode': instance.discountCode,
+      'discountDescription': instance.discountDescription,
+      'rate': instance.rate,
     };

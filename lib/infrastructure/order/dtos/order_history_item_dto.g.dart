@@ -37,7 +37,7 @@ _$OrderHistoryItemDtoImpl _$$OrderHistoryItemDtoImplFromJson(
       requestedDeliveryDate: json['requestedDeliveryDate'] as String? ?? '',
       specialInstruction: json['specialInstructions'] as String? ?? '',
       tax: (json['tax'] as num?)?.toDouble() ?? 0.0,
-      eZRXNumber: json['EZRXNumber'] as String? ?? '',
+      eZRXNumber: json['eZRXNumber'] as String? ?? '',
       orderHistoryItemPoAttachments: (json['poAttachment'] as List<dynamic>?)
               ?.map((e) => PoDocumentsDto.fromJson(e as Map<String, dynamic>))
               .toList() ??
@@ -94,7 +94,7 @@ Map<String, dynamic> _$$OrderHistoryItemDtoImplToJson(
       'requestedDeliveryDate': instance.requestedDeliveryDate,
       'specialInstructions': instance.specialInstruction,
       'tax': instance.tax,
-      'EZRXNumber': instance.eZRXNumber,
+      'eZRXNumber': instance.eZRXNumber,
       'poAttachment': instance.orderHistoryItemPoAttachments
           .map((e) => e.toJson())
           .toList(),

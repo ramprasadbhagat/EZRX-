@@ -1,3 +1,6 @@
+import 'dart:convert';
+
+import 'package:ezrxmobile/infrastructure/core/common/json_key_converter.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/order_history_details_order_items_details_dto.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -17,7 +20,7 @@ void main() {
     test('Test fromDomain', () {
       final configs = OrderHistoryDetailsOrderItemDetailsDto.fromDomain(
         OrderHistoryDetailsOrderItemDetailsDto.fromJson(
-          data,
+          makeResponseCamelCase(jsonEncode(data)),
         ).toDomain(),
       );
 
@@ -27,11 +30,11 @@ void main() {
     test('Test tojson', () {
       final configs = OrderHistoryDetailsOrderItemDetailsDto.fromDomain(
         OrderHistoryDetailsOrderItemDetailsDto.fromJson(
-          data,
+          makeResponseCamelCase(jsonEncode(data)),
         ).toDomain(),
       ).toJson();
 
-      expect(configs['Rate'], 'fake-rate');
+      expect(configs['rate'], 'fake-rate');
     });
   });
 }

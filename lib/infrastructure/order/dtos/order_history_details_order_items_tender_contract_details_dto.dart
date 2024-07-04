@@ -10,22 +10,22 @@ class OrderHistoryDetailsTenderContractDto
     with _$OrderHistoryDetailsTenderContractDto {
   const OrderHistoryDetailsTenderContractDto._();
   const factory OrderHistoryDetailsTenderContractDto({
-    @JsonKey(name: 'ContractNumber', defaultValue: '')
+    @JsonKey(name: 'contractNumber', defaultValue: '')
     required String contractNumber,
-    @JsonKey(name: 'ContractReference', defaultValue: '')
+    @JsonKey(name: 'contractReference', defaultValue: '')
     required String contractReference,
-    @JsonKey(name: 'Price', defaultValue: '') required String price,
-    @JsonKey(name: 'PriceUnit', defaultValue: 0) required int priceUnit,
-    @JsonKey(name: 'ContractQuantity', defaultValue: 0)
+    @JsonKey(name: 'price', defaultValue: '') required String price,
+    @JsonKey(name: 'priceUnit', defaultValue: 0) required int priceUnit,
+    @JsonKey(name: 'contractQuantity', defaultValue: 0)
     required int contractQuantity,
-    @JsonKey(name: 'RemainingQuantity', defaultValue: 0)
+    @JsonKey(name: 'remainingQuantity', defaultValue: 0)
     required int remainingQuantity,
     @JsonKey(name: 'isTenderExpire', defaultValue: false)
     required bool isTenderExpired,
-    @JsonKey(name: 'ExpiryDate', defaultValue: '') required String expiryDate,
-    @JsonKey(name: 'OrderReason', defaultValue: '') required String orderReason,
-    @JsonKey(name: 'VisaNumber', defaultValue: '') required String visaNumber,
-    @JsonKey(name: 'AnnouncementLetterNumber', defaultValue: '')
+    @JsonKey(name: 'expiryDate', defaultValue: '') required String expiryDate,
+    @JsonKey(name: 'orderReason', defaultValue: '') required String orderReason,
+    @JsonKey(name: 'visaNumber', defaultValue: '') required String visaNumber,
+    @JsonKey(name: 'announcementLetterNumber', defaultValue: '')
     required String announcementLetterNumber,
   }) = _OrderHistoryDetailsTenderContractDto;
   factory OrderHistoryDetailsTenderContractDto.fromDomain(
