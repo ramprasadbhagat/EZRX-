@@ -4,6 +4,7 @@ import 'package:ezrxmobile/domain/core/attachment_files/entities/attachment_file
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
 import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/payments/entities/all_credits_filter.dart';
 import 'package:ezrxmobile/domain/payments/entities/all_invoices_filter.dart';
 import 'package:ezrxmobile/domain/payments/entities/download_payment_attachments.dart';
@@ -419,6 +420,38 @@ void main() {
         );
       });
 
+      test(
+        'fetch Payment Summary Url success remote for ID',
+        () async {
+          mockConfig.appFlavor = Flavor.uat;
+          final filter = PaymentSummaryFilter.defaultFilter()
+              .copyWith(filterStatuses: [FilterStatus('in progress')]);
+          when(
+            () => remoteDataSource.getPaymentSummaryFileDownloadUrl(
+              customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
+              salesOrg: fakeIDSalesOrganisation.salesOrg.getOrCrash(),
+              filterBy:
+                  PaymentSummaryFilterDto.fromDomainForID(filter).toMapList,
+              isMarketPlace: false,
+            ),
+          ).thenAnswer(
+            (invocation) async => downloadPaymentAttachment,
+          );
+
+          final result =
+              await downloadPaymentAttachmentRepository.fetchPaymentSummaryUrl(
+            customerCodeInfo: fakeCustomerCodeInfo,
+            salesOrganization: fakeIDSalesOrganisation,
+            paymentSummaryFilter: filter,
+            isMarketPlace: false,
+          );
+          expect(
+            result,
+            Right(downloadPaymentAttachment),
+          );
+        },
+      );
+
       test('fetch Payment Summary Url failure remote', () async {
         mockConfig.appFlavor = Flavor.uat;
         when(
@@ -442,6 +475,36 @@ void main() {
           Left(FailureHandler.handleFailure(fakeError)),
         );
       });
+
+      test(
+        'fetch Payment Summary Url failure remote for ID',
+        () async {
+          mockConfig.appFlavor = Flavor.uat;
+          final filter = PaymentSummaryFilter.defaultFilter()
+              .copyWith(filterStatuses: [FilterStatus('in progress')]);
+          when(
+            () => remoteDataSource.getPaymentSummaryFileDownloadUrl(
+              customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
+              salesOrg: fakeIDSalesOrganisation.salesOrg.getOrCrash(),
+              filterBy:
+                  PaymentSummaryFilterDto.fromDomainForID(filter).toMapList,
+              isMarketPlace: false,
+            ),
+          ).thenThrow(fakeError);
+
+          final result =
+              await downloadPaymentAttachmentRepository.fetchPaymentSummaryUrl(
+            customerCodeInfo: fakeCustomerCodeInfo,
+            salesOrganization: fakeIDSalesOrganisation,
+            paymentSummaryFilter: filter,
+            isMarketPlace: false,
+          );
+          expect(
+            result,
+            Left(FailureHandler.handleFailure(fakeError)),
+          );
+        },
+      );
     });
 
     group('Download Permission tests', () {
