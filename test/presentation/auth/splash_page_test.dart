@@ -1458,6 +1458,47 @@ void main() {
         verify(() => autoRouterMock.push(const ScanMaterialInfoRoute()))
             .called(1);
       });
+
+      testWidgets(
+          'paymentSummaryDetailsBloc & creditAndInvoiceDetailsBloc call initialized independently',
+          (tester) async {
+        final expectedStates = [
+          EligibilityState.initial(),
+          EligibilityState.initial().copyWith(
+            shipToInfo: fakeShipToInfo,
+            customerCodeInfo: fakeCustomerCodeInfo,
+            salesOrganisation: fakeTWSalesOrganisation,
+            user: fakeUser,
+          ),
+        ];
+        whenListen(
+          eligibilityBlocMock,
+          Stream.fromIterable(expectedStates),
+        );
+
+        await getWidget(tester);
+        await tester.pump();
+
+        verify(
+          () => paymentSummaryDetailsBlocMock.add(
+            PaymentSummaryDetailsEvent.initialized(
+              customerCodeInfo: fakeCustomerCodeInfo,
+              salesOrganization: fakeTWSalesOrganisation,
+              shipToInfo: fakeShipToInfo,
+              user: fakeUser,
+            ),
+          ),
+        ).called(1);
+
+        verify(
+          () => creditAndInvoiceDetailsBloc.add(
+            CreditAndInvoiceDetailsEvent.initialized(
+              customerCodeInfo: fakeCustomerCodeInfo,
+              salesOrganisation: fakeTWSalesOrganisation,
+            ),
+          ),
+        ).called(1);
+      });
     });
   });
 }

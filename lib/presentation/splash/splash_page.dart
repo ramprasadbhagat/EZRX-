@@ -771,6 +771,23 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                     ),
                   );
 
+              //Initialize for deeplink cases
+              context.read<PaymentSummaryDetailsBloc>().add(
+                    PaymentSummaryDetailsEvent.initialized(
+                      salesOrganization: state.salesOrganisation,
+                      customerCodeInfo: state.customerCodeInfo,
+                      user: state.user,
+                      shipToInfo: state.shipToInfo,
+                    ),
+                  );
+
+              context.read<CreditAndInvoiceDetailsBloc>().add(
+                    CreditAndInvoiceDetailsEvent.initialized(
+                      salesOrganisation: state.salesOrganisation,
+                      customerCodeInfo: state.customerCodeInfo,
+                    ),
+                  );
+
               final enableReturn = state.isReturnsEnable;
 
               if (!enableReturn) return;
@@ -811,23 +828,6 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                     PolicyConfigurationEvent.fetch(
                       salesOrganisation: state.salesOrganisation,
                       searchKey: '',
-                    ),
-                  );
-
-              //Initialize for deeplink cases
-              context.read<PaymentSummaryDetailsBloc>().add(
-                    PaymentSummaryDetailsEvent.initialized(
-                      salesOrganization: state.salesOrganisation,
-                      customerCodeInfo: state.customerCodeInfo,
-                      user: state.user,
-                      shipToInfo: state.shipToInfo,
-                    ),
-                  );
-
-              context.read<CreditAndInvoiceDetailsBloc>().add(
-                    CreditAndInvoiceDetailsEvent.initialized(
-                      salesOrganisation: state.salesOrganisation,
-                      customerCodeInfo: state.customerCodeInfo,
                     ),
                   );
             }
