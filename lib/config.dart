@@ -1,4 +1,5 @@
 import 'package:datadog_flutter_plugin/datadog_flutter_plugin.dart';
+import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:scandit_flutter_datacapture_barcode/scandit_flutter_datacapture_barcode.dart';
 
@@ -496,6 +497,15 @@ class Config {
       case Flavor.uat:
       default:
         return '100777';
+    }
+  }
+
+  List<AppMarket> get supportedMarkets {
+    switch (appFlavor) {
+      case Flavor.prod:
+        return AppMarket.prodSupportedMarkets;
+      default:
+        return AppMarket.supportMarkets;
     }
   }
 }

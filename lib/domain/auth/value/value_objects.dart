@@ -26,6 +26,9 @@ class AppMarket extends ValueObject<String> {
     AppMarket('vn'),
   ];
 
+  static List<AppMarket> prodSupportedMarkets = supportMarkets.toList()
+    ..remove(AppMarket('hk'));
+
   factory AppMarket(String input) {
     return AppMarket._(validateStringNotEmpty(input));
   }

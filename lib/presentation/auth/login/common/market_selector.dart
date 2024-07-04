@@ -3,7 +3,9 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
 import 'package:ezrxmobile/application/auth/login/login_form_bloc.dart';
 import 'package:ezrxmobile/application/chatbot/chat_bot_bloc.dart';
+import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
+import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:flutter/material.dart';
 
@@ -20,7 +22,7 @@ class MarketSelector extends StatefulWidget {
 }
 
 class _MarketSelectorState extends State<MarketSelector> {
-  final markets = AppMarket.supportMarkets;
+  final markets = locator<Config>().supportedMarkets;
 
   @override
   void initState() {
