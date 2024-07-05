@@ -52,12 +52,6 @@ class AnnouncementBloc extends Bloc<AnnouncementEvent, AnnouncementState> {
         );
       },
       getMaintenanceBanners: (e) async {
-        if (e.salesOrg.isMaintenanceBannersDisabled) {
-          emit(state.copyWith(maintenanceItem: MaintenanceItem.empty()));
-
-          return;
-        }
-
         emit(state.copyWith(isLoading: true));
         final failureOrSuccess =
             await announcementRepository.getMaintenanceBanners(

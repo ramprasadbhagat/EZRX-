@@ -180,8 +180,6 @@ class SalesOrg extends ValueObject<String> {
 
   bool get checkMOVonSubTotal => isTH || isSg;
 
-  bool get isMaintenanceBannersDisabled => isID;
-
   String get maintenanceBannerPathId =>
       countryToMaintenanceBannerPathId(country);
 
