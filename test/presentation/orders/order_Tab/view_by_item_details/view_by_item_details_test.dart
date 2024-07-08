@@ -2673,6 +2673,60 @@ void main() {
       );
       expect(find.textContaining(iRNNumber), findsNothing);
     });
+
+    testWidgets(
+        'Display Tender tag and offer tag for tender material when offer is applied',
+        (tester) async {
+      final orderHistoryList = mockViewByItemsOrderHistory.copyWith(
+        orderHistoryItems: [
+          fakeOrderHistoryItem.copyWith(
+            promoStatus: true,
+            isBundle: false,
+          ),
+        ],
+      );
+      when(() => viewByItemDetailsBlocMock.state).thenReturn(
+        ViewByItemDetailsState.initial()
+            .copyWith(orderHistory: orderHistoryList),
+      );
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pumpAndSettle();
+      await tester.dragUntilVisible(
+        find.byType(OtherItemDetailsSection),
+        find.byKey(WidgetKeys.scrollList),
+        const Offset(0, -300),
+      );
+      final historyTile = find.byKey(WidgetKeys.genericKey(key: '0'));
+      expect(historyTile, findsOneWidget);
+      final offerTag = find.byKey(WidgetKeys.offerTag);
+      expect(offerTag, findsOneWidget);
+      final tenderTag = find.byKey(WidgetKeys.tenderTagForProductTile);
+      expect(tenderTag, findsOneWidget);
+    });
+
+    testWidgets('Display Tender tag if material is ordered with tender',
+        (tester) async {
+      final orderHistoryList = mockViewByItemsOrderHistory.copyWith(
+        orderHistoryItems: [
+          fakeOrderHistoryItem,
+        ],
+      );
+      when(() => viewByItemDetailsBlocMock.state).thenReturn(
+        ViewByItemDetailsState.initial()
+            .copyWith(orderHistory: orderHistoryList),
+      );
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pumpAndSettle();
+      await tester.dragUntilVisible(
+        find.byType(OtherItemDetailsSection),
+        find.byKey(WidgetKeys.scrollList),
+        const Offset(0, -300),
+      );
+      final historyTile = find.byKey(WidgetKeys.genericKey(key: '0'));
+      expect(historyTile, findsOneWidget);
+      final tenderTag = find.byKey(WidgetKeys.tenderTagForProductTile);
+      expect(tenderTag, findsOneWidget);
+    });
   });
 
   group('Item material - ', () {

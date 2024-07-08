@@ -75,8 +75,8 @@ class WidgetKeys {
       Key('orderItemPriceStrikeThrough');
   static const Key dontAllowAlertDialog = Key('dontAllowAlertDialog');
   static const Key allowAlertDialog = Key('allowAlertDialog');
-  static const Key scrollToTopFloatingButton =
-      Key('scrollToTopFloatingButton');
+  static const Key scrollToTopFloatingButton = Key('scrollToTopFloatingButton');
+  static const Key tenderTagForProductTile = Key('tenderTagForProductTile');
 
   //============================================================
   //  PRE-ORDER-MODAL

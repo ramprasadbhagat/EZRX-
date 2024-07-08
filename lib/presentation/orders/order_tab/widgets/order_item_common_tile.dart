@@ -24,6 +24,7 @@ class OrderItemCommonTile extends StatelessWidget {
   final Widget batchExpiryDate;
   final String sellerName;
   final StatusType statusTag;
+  final bool showTenderTag;
   const OrderItemCommonTile({
     super.key,
     this.onTap,
@@ -42,6 +43,7 @@ class OrderItemCommonTile extends StatelessWidget {
     required this.tenderContractSection,
     required this.batchExpiryDate,
     required this.statusTag,
+    required this.showTenderTag,
   });
 
   @override
@@ -68,6 +70,7 @@ class OrderItemCommonTile extends StatelessWidget {
                     isCovidItem: isCovidItem,
                     showOfferTag: showOfferTag,
                     showBundleTag: showBundleTag,
+                    showTenderTag: showTenderTag,
                   ),
                   Expanded(
                     child: Padding(

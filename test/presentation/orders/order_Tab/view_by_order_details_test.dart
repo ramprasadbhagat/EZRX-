@@ -2965,5 +2965,75 @@ void main() {
 
       expect(find.textContaining(iRNNumber), findsNothing);
     });
+
+    testWidgets(
+        'Display Tender tag and offer tag for tender material when offer is applied',
+        (tester) async {
+      final fakeTenderOrderReason = TenderContractReason('730');
+      final fakeTenderContractNumber = TenderContractNumber('0040026522');
+      final fakeTenderContractReference = TenderContractNumber('HCM-01234');
+      final fakeTenderPrice = TenderPrice('11832000');
+      when(() => viewByOrderDetailsBlocMock.state).thenReturn(
+        ViewByOrderDetailsState.initial().copyWith(
+          orderHistoryDetails: OrderHistoryDetails.empty().copyWith(
+            orderHistoryDetailsOrderItem: [
+              fakeOrderHistoryItem.copyWith(
+                tenderContractDetails:
+                    OrderHistoryDetailsTenderContract.empty().copyWith(
+                  contractNumber: fakeTenderContractNumber,
+                  contractReference: fakeTenderContractReference.getValue(),
+                  price: fakeTenderPrice.getValue(),
+                  orderReason: fakeTenderOrderReason,
+                ),
+                promoStatus: true,
+              ),
+            ],
+          ),
+        ),
+      );
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pumpAndSettle();
+      final detail = find.byType(OrderItemDetailsSection);
+      await tester.dragUntilVisible(
+        find.byType(OrderItemDetailsSection),
+        find.byKey(WidgetKeys.scrollList),
+        const Offset(0, -550),
+      );
+      expect(detail, findsOneWidget);
+      final offerTag = find.byKey(WidgetKeys.offerTag);
+      expect(offerTag, findsOneWidget);
+      final tenderTag = find.byKey(WidgetKeys.tenderTagForProductTile);
+      expect(tenderTag, findsOneWidget);
+    });
+
+    testWidgets('Display Tender tag if material is ordered with tender',
+        (tester) async {
+      final fakeTenderContractNumber = TenderContractNumber('0040026522');
+      when(() => viewByOrderDetailsBlocMock.state).thenReturn(
+        ViewByOrderDetailsState.initial().copyWith(
+          orderHistoryDetails: OrderHistoryDetails.empty().copyWith(
+            orderHistoryDetailsOrderItem: [
+              fakeOrderHistoryItem.copyWith(
+                tenderContractDetails:
+                    OrderHistoryDetailsTenderContract.empty().copyWith(
+                  contractNumber: fakeTenderContractNumber,
+                ),
+              ),
+            ],
+          ),
+        ),
+      );
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pumpAndSettle();
+      final detail = find.byType(OrderItemDetailsSection);
+      await tester.dragUntilVisible(
+        find.byType(OrderItemDetailsSection),
+        find.byKey(WidgetKeys.scrollList),
+        const Offset(0, -550),
+      );
+      expect(detail, findsOneWidget);
+      final tenderTag = find.byKey(WidgetKeys.tenderTagForProductTile);
+      expect(tenderTag, findsOneWidget);
+    });
   });
 }

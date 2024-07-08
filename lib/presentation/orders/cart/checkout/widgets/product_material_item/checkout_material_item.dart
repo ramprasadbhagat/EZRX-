@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
+import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
 import 'package:ezrxmobile/presentation/core/covid_tag.dart';
 import 'package:ezrxmobile/presentation/core/custom_card.dart';
@@ -9,6 +10,7 @@ import 'package:ezrxmobile/presentation/core/govt_list_price_component.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
 import 'package:ezrxmobile/presentation/core/responsive.dart';
+import 'package:ezrxmobile/presentation/core/tender_tag_for_product_tile.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/orders/cart/item/cart_product_tile_widgets/cart_product_tender_contract_section.dart';
 import 'package:ezrxmobile/presentation/core/item_tax.dart';
@@ -77,6 +79,8 @@ class _ProductImageSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final eligibilityState = context.read<EligibilityBloc>().state;
+
     return Stack(
       children: [
         CustomCard(
@@ -102,6 +106,16 @@ class _ProductImageSection extends StatelessWidget {
           const Positioned(
             bottom: 20,
             child: CovidTag(),
+          ),
+        if (cartProduct.tenderContract.isNotEmpty)
+          Positioned(
+            bottom: context.read<MaterialPriceBloc>().state.displayOfferTag(
+                      cartProduct.materialInfo,
+                      eligibilityState.user,
+                    )
+                ? 13
+                : null,
+            child: const TenderTagForProductTile(),
           ),
       ],
     );

@@ -1585,6 +1585,107 @@ void main() {
             findsOneWidget,
           );
         });
+
+        testWidgets('Do not display List price strike through for tender order',
+            (tester) async {
+          when(() => eligibilityBloc.state).thenReturn(
+            EligibilityState.initial().copyWith(
+              salesOrgConfigs: fakeVNSalesOrgConfigs,
+              salesOrganisation: fakeVNSalesOrganisation,
+            ),
+          );
+          when(() => cartBloc.state).thenReturn(
+            CartState.initial().copyWith(
+              cartProducts: [
+                cartItem.copyWith(
+                  salesOrgConfig: fakeVNSalesOrgConfigs,
+                  tenderContract: TenderContract.empty().copyWith(
+                    tenderOrderReason: TenderContractReason('730'),
+                    contractNumber: TenderContractNumber(
+                      'fake-Number',
+                    ),
+                    tenderPrice: TenderPrice('11832000'),
+                    contractReference: StringValue('fake-Reference'),
+                  ),
+                  price: Price.empty().copyWith(
+                    finalPrice: MaterialPrice(11832000),
+                    lastPrice: MaterialPrice(11833000),
+                  ),
+                ),
+              ],
+            ),
+          );
+          await tester.pumpWidget(getWidget());
+          await tester.pump();
+          final cartItemCutOffListPrice =
+              find.byKey(WidgetKeys.cartItemCutOffListPrice);
+          expect(cartItemCutOffListPrice, findsNothing);
+        });
+        testWidgets(
+            'Display Tender tag and offer tag if material has offer and ordered with tender',
+            (tester) async {
+          when(() => eligibilityBloc.state).thenReturn(
+            EligibilityState.initial().copyWith(
+              salesOrgConfigs: fakeVNSalesOrgConfigs,
+              salesOrganisation: fakeVNSalesOrganisation,
+            ),
+          );
+          when(() => cartBloc.state).thenReturn(
+            CartState.initial().copyWith(
+              cartProducts: [
+                cartItem.copyWith(
+                  salesOrgConfig: fakeVNSalesOrgConfigs,
+                  tenderContract: TenderContract.empty().copyWith(
+                    tenderOrderReason: TenderContractReason('730'),
+                    contractNumber: TenderContractNumber(
+                      'fake-Number',
+                    ),
+                    tenderPrice: TenderPrice('11832000'),
+                    contractReference: StringValue('fake-Reference'),
+                  ),
+                  price: Price.empty().copyWith(
+                    finalPrice: MaterialPrice(11832000),
+                    lastPrice: MaterialPrice(11833000),
+                  ),
+                ),
+              ],
+            ),
+          );
+          await tester.pumpWidget(getWidget());
+          await tester.pump();
+          final offerTag = find.byKey(WidgetKeys.offerTag);
+          expect(offerTag, findsOneWidget);
+          final tenderTag = find.byKey(WidgetKeys.tenderTagForProductTile);
+          expect(tenderTag, findsOneWidget);
+        });
+
+        testWidgets('Display Tender tag if material is ordered with tender',
+            (tester) async {
+          when(() => eligibilityBloc.state).thenReturn(
+            EligibilityState.initial().copyWith(
+              salesOrgConfigs: fakeVNSalesOrgConfigs,
+              salesOrganisation: fakeVNSalesOrganisation,
+            ),
+          );
+          when(() => cartBloc.state).thenReturn(
+            CartState.initial().copyWith(
+              cartProducts: [
+                cartItem.copyWith(
+                  salesOrgConfig: fakeVNSalesOrgConfigs,
+                  tenderContract: TenderContract.empty().copyWith(
+                    contractNumber: TenderContractNumber(
+                      'fake-Number',
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          );
+          await tester.pumpWidget(getWidget());
+          await tester.pump();
+          final tenderTag = find.byKey(WidgetKeys.tenderTagForProductTile);
+          expect(tenderTag, findsOneWidget);
+        });
       });
     },
   );

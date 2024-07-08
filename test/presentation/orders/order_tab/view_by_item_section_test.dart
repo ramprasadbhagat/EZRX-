@@ -830,5 +830,59 @@ void main() {
         findsOneWidget,
       );
     });
+
+    testWidgets(
+        'Display Tender tag and offer tag for tender material when offer is applied',
+        (tester) async {
+      final fakeTenderOrderReason = TenderContractReason('fake-Reason');
+      final fakeTenderContractNumber = TenderContractNumber('fake-Number');
+      final fakeTenderPrice = TenderPrice('11832000');
+      final fakeTenderContractReference =
+          TenderContractNumber('fake-Reference');
+      final orderHistoryList = orderHistory.copyWith(
+        orderHistoryItems: [
+          orderHistory.orderHistoryItems
+              .firstWhere((e) => e.tenderOrderReason.isNotEmpty)
+              .copyWith(
+                tenderContractNumber: fakeTenderContractNumber,
+                tenderOrderReason: fakeTenderOrderReason,
+                tenderPrice: fakeTenderPrice,
+                tenderContractReference: fakeTenderContractReference,
+                promoStatus: true,
+                isBundle: false,
+              ),
+        ],
+      );
+      when(() => mockViewByItemsBloc.state).thenReturn(
+        ViewByItemsState.initial().copyWith(orderHistory: orderHistoryList),
+      );
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pumpAndSettle();
+      final offerTag = find.byKey(WidgetKeys.offerTag);
+      expect(offerTag, findsOneWidget);
+      final tenderTag = find.byKey(WidgetKeys.tenderTagForProductTile);
+      expect(tenderTag, findsOneWidget);
+    });
+
+    testWidgets('Display Tender tag if material is ordered with tender',
+        (tester) async {
+      final fakeTenderContractNumber = TenderContractNumber('fake-Number');
+      final orderHistoryList = orderHistory.copyWith(
+        orderHistoryItems: [
+          orderHistory.orderHistoryItems
+              .firstWhere((e) => e.tenderOrderReason.isNotEmpty)
+              .copyWith(
+                tenderContractNumber: fakeTenderContractNumber,
+              ),
+        ],
+      );
+      when(() => mockViewByItemsBloc.state).thenReturn(
+        ViewByItemsState.initial().copyWith(orderHistory: orderHistoryList),
+      );
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pumpAndSettle();
+      final tenderTag = find.byKey(WidgetKeys.tenderTagForProductTile);
+      expect(tenderTag, findsOneWidget);
+    });
   });
 }

@@ -44,17 +44,20 @@ class ViewByItemOrderItemTile extends StatelessWidget {
       quantity: orderHistoryItem.qty.toString(),
       materialNumber: orderHistoryItem.materialNumber,
       materialDescription: orderHistoryItem.defaultMaterialDescription,
-      tenderContractSection: orderHistoryItem.tenderOrderReason.isNotEmpty
-          ? TenderContractSection(
-              tenderContract: orderHistoryItem.orderItemTenderContract,
-            )
-          : const SizedBox.shrink(),
+      tenderContractSection:
+          orderHistoryItem.tenderContractNumber.isContractNumberNotEmpty
+              ? TenderContractSection(
+                  tenderContract: orderHistoryItem.orderItemTenderContract,
+                )
+              : const SizedBox.shrink(),
       statusTag: eligibilityState.salesOrg.isID
           ? StatusType('')
           : orderHistoryItem.productTag,
       isCovidItem: orderHistoryItem.isCovid,
       showOfferTag: orderHistoryItem.isOfferItem,
       showBundleTag: orderHistoryItem.isBundle,
+      showTenderTag:
+          orderHistoryItem.tenderContractNumber.isContractNumberNotEmpty,
     );
   }
 }

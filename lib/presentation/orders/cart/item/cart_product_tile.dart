@@ -16,6 +16,7 @@ import 'package:ezrxmobile/presentation/core/error_text_with_icon.dart';
 import 'package:ezrxmobile/presentation/core/govt_list_price_component.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
+import 'package:ezrxmobile/presentation/core/tender_tag_for_product_tile.dart';
 import 'package:ezrxmobile/presentation/orders/cart/item/cart_product_tile_widgets/cart_product_tender_contract_section.dart';
 import 'package:ezrxmobile/presentation/orders/cart/override/request_counter_offer_bottom_sheet.dart';
 import 'package:ezrxmobile/presentation/core/item_tax.dart';
@@ -28,7 +29,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
-
 
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 
@@ -475,6 +475,8 @@ class _MaterialImageSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final eligibilityState = context.read<EligibilityBloc>().state;
+
     return Stack(
       children: [
         BlocBuilder<CartBloc, CartState>(
@@ -504,6 +506,16 @@ class _MaterialImageSection extends StatelessWidget {
           const Positioned(
             bottom: 20,
             child: CovidTag(),
+          ),
+        if (cartProduct.tenderContract.isNotEmpty)
+          Positioned(
+            bottom: context.read<MaterialPriceBloc>().state.displayOfferTag(
+                      cartProduct.materialInfo,
+                      eligibilityState.user,
+                    )
+                ? 13
+                : null,
+            child: const TenderTagForProductTile(),
           ),
       ],
     );

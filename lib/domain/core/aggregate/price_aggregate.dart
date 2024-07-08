@@ -212,11 +212,19 @@ class PriceAggregate with _$PriceAggregate {
     return value;
   }
 
-  bool get promoStatus => tenderContract.isNotEmpty
-      ? false
-      : materialInfo.promoStatus ||
-          price.tiers.isNotEmpty ||
-          price.bonuses.isNotEmpty;
+  bool get promoStatus {
+    if (tenderContract.isNotEmpty && bonuses.isNotEmpty) {
+      return true;
+    }
+
+    if (tenderContract.isNotEmpty) {
+      return false;
+    }
+
+    return materialInfo.promoStatus ||
+        price.tiers.isNotEmpty ||
+        price.bonuses.isNotEmpty;
+  }
 
   double get listPrice {
     return NumUtils.roundToPlaces(vatCalculation(price.lastPrice.getOrCrash()));
@@ -859,12 +867,26 @@ class PriceAggregate with _$PriceAggregate {
       materialInfo.hidePrice ||
       materialInfo.isFOCMaterial;
 
-  bool get displayCutOffListPrice =>
-      (price.isCounterOfferRequested && !materialInfo.hidePrice) ||
-      (price.zdp5MaxQuota.isValidValue &&
-          price.zdp5RemainingQuota.isValidValue &&
-          materialInfo.quantity.intValue >= 2) ||
-      showMaterialListPrice;
+  bool get displayCutOffListPrice {
+    // Check if tenderContract is not empty
+    if (tenderContract.isNotEmpty) {
+      return false;
+    }
+
+    // Check if counter offer is requested and the price should not be hidden
+    if (price.isCounterOfferRequested && !materialInfo.hidePrice) {
+      return true;
+    }
+
+    // Check if zdp5MaxQuota and zdp5RemainingQuota have valid values and material quantity is at least 2
+    if (price.zdp5MaxQuota.isValidValue &&
+        price.zdp5RemainingQuota.isValidValue &&
+        materialInfo.quantity.intValue >= 2) {
+      return true;
+    }
+
+    return showMaterialListPrice;
+  }
 
   int get stockQuantity => productStockInfo.stockQuantity;
 

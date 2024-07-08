@@ -3,6 +3,7 @@ import 'package:ezrxmobile/presentation/core/covid_tag.dart';
 import 'package:ezrxmobile/presentation/core/custom_card.dart';
 import 'package:ezrxmobile/presentation/core/product_image.dart';
 import 'package:ezrxmobile/presentation/core/product_tag.dart';
+import 'package:ezrxmobile/presentation/core/tender_tag_for_product_tile.dart';
 import 'package:flutter/material.dart';
 
 class ImageBoxWidget extends StatelessWidget {
@@ -12,12 +13,14 @@ class ImageBoxWidget extends StatelessWidget {
     required this.isCovidItem,
     required this.showOfferTag,
     required this.showBundleTag,
+    required this.showTenderTag,
   });
 
   final bool isCovidItem;
   final bool showOfferTag;
   final bool showBundleTag;
   final MaterialNumber materialNumber;
+  final bool showTenderTag;
 
   @override
   Widget build(BuildContext context) {
@@ -40,6 +43,11 @@ class ImageBoxWidget extends StatelessWidget {
             Positioned(
               top: MediaQuery.of(context).size.height * 0.055,
               child: const CovidTag(),
+            ),
+          if (showTenderTag)
+            Positioned(
+              bottom: showOfferTag ? 13 : null,
+              child: const TenderTagForProductTile(),
             ),
         ],
       ),

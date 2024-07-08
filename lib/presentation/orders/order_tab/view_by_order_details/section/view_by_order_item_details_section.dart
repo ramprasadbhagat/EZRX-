@@ -160,6 +160,8 @@ class _OrderItemTile extends StatelessWidget {
         taxPercentage: orderItem.taxRate,
         isTopAlignment: true,
       ),
+      showTenderTag: orderItem
+          .orderItemTenderContract.contractNumber.isContractNumberNotEmpty,
     );
   }
 

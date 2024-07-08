@@ -2571,6 +2571,30 @@ void main() {
     );
   });
 
+  test(
+      '=> toSubmitMaterialInfo should return promoStatus true if tender contract has bonus offer and it is applied',
+      () {
+    final customPriceAggregate = emptyPriceAggregate.copyWith(
+      tenderContract: emptyTenderContract.copyWith(
+        contractNumber: TenderContractNumber('fake-contract-number'),
+      ),
+      bonusSampleItems: [
+        BonusSampleItem.empty().copyWith(
+          itemId: StringValue('123'),
+          materialNumber: MaterialNumber('fake-bonus1'),
+          qty: MaterialQty(2),
+          type: MaterialInfoType('Deals'),
+        ),
+      ],
+      salesOrgConfig: fakeVNSalesOrgConfigs,
+    );
+
+    expect(
+      customPriceAggregate.toSubmitMaterialInfo().promoStatus,
+      true,
+    );
+  });
+
   group('Price Aggregate List Test -', () {
     test('Sort to display in cart page & checkout page', () {
       final materials = fakePriceAggregateList

@@ -46,6 +46,8 @@ class _ViewByOrderItemTile extends StatelessWidget {
                     isCovidItem: orderHistoryItem.isCovid,
                     showOfferTag: orderHistoryItem.isOfferItem,
                     showBundleTag: orderHistoryItem.isBundle,
+                    showTenderTag: orderHistoryItem
+                        .tenderContractNumber.isContractNumberNotEmpty,
                   ),
                   Expanded(
                     child: Padding(
@@ -178,7 +180,7 @@ class _ViewByOrderItemTile extends StatelessWidget {
                 ),
               ),
             ),
-            if (orderHistoryItem.tenderOrderReason.isNotEmpty)
+            if (orderHistoryItem.tenderContractNumber.isContractNumberNotEmpty)
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 12),
                 child: TenderContractSection(

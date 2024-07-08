@@ -4,9 +4,12 @@ import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart
 import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/material_price/material_price_bloc.dart';
 import 'package:ezrxmobile/domain/core/aggregate/price_aggregate.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/apl_simulator_order.dart';
 import 'package:ezrxmobile/domain/order/entities/material_info.dart';
 import 'package:ezrxmobile/domain/order/entities/price.dart';
+import 'package:ezrxmobile/domain/order/entities/principal_data.dart';
+import 'package:ezrxmobile/domain/order/entities/tender_contract.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/cart/cart_local_datasource.dart';
 import 'package:ezrxmobile/locator.dart';
@@ -27,6 +30,7 @@ import '../../../../../common_mock_data/sales_org_config_mock/fake_id_sales_org_
 import '../../../../../common_mock_data/sales_org_config_mock/fake_my_sales_org_config.dart';
 import '../../../../../common_mock_data/sales_org_config_mock/fake_th_sales_org_config.dart';
 import '../../../../../common_mock_data/sales_org_config_variant_mock.dart';
+import '../../../../../common_mock_data/sales_org_config_mock/fake_vn_sales_org_config.dart';
 import '../../../../../common_mock_data/sales_organsiation_mock.dart';
 import '../../../../../utils/common_methods.dart';
 import '../../../../../utils/widget_utils.dart';
@@ -459,5 +463,109 @@ void main() {
 
       expect(find.textContaining(iRNNumber), findsNothing);
     });
+  });
+
+  testWidgets('Do not display List price strike through for tender order',
+      (tester) async {
+    when(() => eligibilityBlocMock.state).thenReturn(
+      EligibilityState.initial().copyWith(
+        salesOrgConfigs: fakeVNSalesOrgConfigs,
+        salesOrganisation: fakeVNSalesOrganisation,
+      ),
+    );
+    final cartItem = PriceAggregate.empty().copyWith(
+      salesOrgConfig: fakeVNSalesOrgConfigs,
+      tenderContract: TenderContract.empty().copyWith(
+        tenderOrderReason: TenderContractReason('730'),
+        contractNumber: TenderContractNumber(
+          'fake-Number',
+        ),
+        tenderPrice: TenderPrice('11832000'),
+        contractReference: StringValue('fake-Reference'),
+      ),
+      price: Price.empty().copyWith(
+        finalPrice: MaterialPrice(11832000),
+        lastPrice: MaterialPrice(11833000),
+      ),
+    );
+    await tester.pumpWidget(getScopedWidget(cartItem));
+    await tester.pump();
+    final cartItemCutOffListPrice =
+        find.byKey(WidgetKeys.materialListPriceStrikeThrough);
+    expect(cartItemCutOffListPrice, findsNothing);
+  });
+  testWidgets(
+      'Display Tender tag and offer tag if material has offer and ordered with tender',
+      (tester) async {
+    final mockPriceList = <MaterialNumber, Price>{};
+    mockPriceList.putIfAbsent(
+      MaterialNumber('000000000023168451'),
+      () => Price.empty().copyWith(
+        finalPrice: MaterialPrice(4.5),
+      ),
+    );
+    when(() => eligibilityBlocMock.state).thenReturn(
+      EligibilityState.initial().copyWith(
+        salesOrgConfigs: fakeVNSalesOrgConfigs,
+        salesOrganisation: fakeVNSalesOrganisation,
+      ),
+    );
+    when(() => materialPriceBlocMock.state).thenReturn(
+      MaterialPriceState.initial().copyWith(
+        materialPrice: mockPriceList,
+      ),
+    );
+    final cartItem = PriceAggregate.empty().copyWith(
+      salesOrgConfig: fakeVNSalesOrgConfigs,
+      tenderContract: TenderContract.empty().copyWith(
+        tenderOrderReason: TenderContractReason('730'),
+        contractNumber: TenderContractNumber(
+          'fake-Number',
+        ),
+        tenderPrice: TenderPrice('11832000'),
+        contractReference: StringValue('fake-Reference'),
+      ),
+      price: Price.empty().copyWith(
+        finalPrice: MaterialPrice(11832000),
+        lastPrice: MaterialPrice(11833000),
+      ),
+      materialInfo: MaterialInfo.empty().copyWith(
+        type: MaterialInfoType('material'),
+        materialNumber: MaterialNumber('000000000023168451'),
+        materialDescription: ' Triglyceride Mosys D',
+        principalData: PrincipalData.empty().copyWith(
+          principalName: PrincipalName('台灣拜耳股份有限公司'),
+        ),
+        quantity: MaterialQty(2),
+      ),
+    );
+    await tester.pumpWidget(getScopedWidget(cartItem));
+    await tester.pump();
+    final offerTag = find.byKey(WidgetKeys.offerTag);
+    expect(offerTag, findsOneWidget);
+    final tenderTag = find.byKey(WidgetKeys.tenderTagForProductTile);
+    expect(tenderTag, findsOneWidget);
+  });
+
+  testWidgets('Display Tender tag if material is ordered with tender',
+      (tester) async {
+    when(() => eligibilityBlocMock.state).thenReturn(
+      EligibilityState.initial().copyWith(
+        salesOrgConfigs: fakeVNSalesOrgConfigs,
+        salesOrganisation: fakeVNSalesOrganisation,
+      ),
+    );
+    final cartItem = PriceAggregate.empty().copyWith(
+      salesOrgConfig: fakeVNSalesOrgConfigs,
+      tenderContract: TenderContract.empty().copyWith(
+        contractNumber: TenderContractNumber(
+          'fake-Number',
+        ),
+      ),
+    );
+    await tester.pumpWidget(getScopedWidget(cartItem));
+    await tester.pump();
+    final tenderTag = find.byKey(WidgetKeys.tenderTagForProductTile);
+    expect(tenderTag, findsOneWidget);
   });
 }
