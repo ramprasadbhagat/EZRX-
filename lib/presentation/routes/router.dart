@@ -14,7 +14,6 @@ import 'package:ezrxmobile/presentation/home/announcement_section/announcement_a
 import 'package:ezrxmobile/presentation/intro/intro_page.dart';
 import 'package:ezrxmobile/presentation/notification/notification_tab.dart';
 import 'package:ezrxmobile/presentation/more/section/about_us/about_us_page.dart';
-import 'package:ezrxmobile/presentation/account/admin_po_attachment/admin_po_attachment_page.dart';
 import 'package:ezrxmobile/presentation/orders/cart/checkout/checkout_page.dart';
 import 'package:ezrxmobile/presentation/orders/cart/small_order_fee_modal/small_order_fee_modal.dart';
 import 'package:ezrxmobile/presentation/orders/order_success/order_success_page.dart';
@@ -306,10 +305,6 @@ import 'package:flutter/material.dart';
     AutoRoute(
       path: 'payments/payment_failed',
       page: PaymentFailedPage,
-    ),
-    AutoRoute(
-      path: 'admin_po_attachment',
-      page: AdminPoAttachmentPage,
     ),
     CustomRoute(
       path: 'intro_page',

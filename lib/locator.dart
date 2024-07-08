@@ -9,8 +9,6 @@ import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_rep/sales_rep_bloc.dart';
 import 'package:ezrxmobile/application/account/settings/setting_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
-import 'package:ezrxmobile/application/admin_po_attachment/admin_po_attachment_bloc.dart';
-import 'package:ezrxmobile/application/admin_po_attachment/filter/admin_po_attachment_filter_bloc.dart';
 import 'package:ezrxmobile/application/announcement/announcement_bloc.dart';
 import 'package:ezrxmobile/application/announcement_info/announcement_attachment_bloc/announcement_attachment_bloc.dart';
 import 'package:ezrxmobile/application/announcement_info/announcement_filter/announcement_filter_bloc.dart';
@@ -109,9 +107,6 @@ import 'package:ezrxmobile/infrastructure/about_us/datasource/about_us_local.dar
 import 'package:ezrxmobile/infrastructure/about_us/datasource/about_us_query_mutation.dart';
 import 'package:ezrxmobile/infrastructure/about_us/datasource/about_us_remote.dart';
 import 'package:ezrxmobile/infrastructure/about_us/repository/about_us_repository.dart';
-import 'package:ezrxmobile/infrastructure/account/datasource/admin_po_attachment_local.dart';
-import 'package:ezrxmobile/infrastructure/account/datasource/admin_po_attachment_query_mutation.dart';
-import 'package:ezrxmobile/infrastructure/account/datasource/admin_po_attachment_remote.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/bank_beneficiary_local.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/bank_beneficiary_query_mutation.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/bank_beneficiary_remote.dart';
@@ -145,7 +140,6 @@ import 'package:ezrxmobile/infrastructure/account/datasource/update_sales_org_re
 import 'package:ezrxmobile/infrastructure/account/datasource/user_local.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/user_query_mutation.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/user_remote.dart';
-import 'package:ezrxmobile/infrastructure/account/repository/admin_po_attachment_repository.dart';
 import 'package:ezrxmobile/infrastructure/account/repository/bank_beneficiary_repository.dart';
 import 'package:ezrxmobile/infrastructure/account/repository/contact_us_repository.dart';
 import 'package:ezrxmobile/infrastructure/account/repository/customer_code_repository.dart';
@@ -2161,50 +2155,6 @@ void setupLocator() {
       repository: locator<DeepLinkingRepository>(),
       chatBotService: locator<ChatBotService>(),
     ),
-  );
-
-  //============================================================
-  //  Admin Po Attachment
-  //============================================================
-
-  locator.registerLazySingleton(
-    () => AdminPoAttachmentLocalDataSource(),
-  );
-  locator.registerLazySingleton(
-    () => AdminPoAttachmentQueryMutation(),
-  );
-
-  locator.registerLazySingleton(
-    () => AdminPoAttachmentRemoteDataSource(
-      config: locator<Config>(),
-      adminPoAttachmentQueryMutation: locator<AdminPoAttachmentQueryMutation>(),
-      dataSourceExceptionHandler: locator<DataSourceExceptionHandler>(),
-      httpService: locator<HttpService>(),
-    ),
-  );
-
-  locator.registerLazySingleton(
-    () => AdminPoAttachmentRepository(
-      config: locator<Config>(),
-      localDataSource: locator<AdminPoAttachmentLocalDataSource>(),
-      remoteDataSource: locator<AdminPoAttachmentRemoteDataSource>(),
-    ),
-  );
-
-  locator.registerLazySingleton(
-    () => AdminPoAttachmentBloc(
-      repository: locator<AdminPoAttachmentRepository>(),
-      config: locator<Config>(),
-    ),
-  );
-
-  //============================================================
-  //  Po Attachment Filter
-  //
-  //============================================================
-
-  locator.registerLazySingleton(
-    () => AdminPoAttachmentFilterBloc(),
   );
 
   //============================================================
