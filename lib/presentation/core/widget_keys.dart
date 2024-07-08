@@ -623,6 +623,8 @@ class WidgetKeys {
           : Key('preOrderMaterial$materialNumber');
   static Key preOrderBundle(String bundleCode) =>
       Key('preOrderBundle$bundleCode');
+  static Key preOrderCombo(String comboDealId) =>
+      Key('preOrderCombo$comboDealId');
 
   static const Key preOrderMaterialQty = Key('preOrderMaterialQty');
   static const Key bonusOfferItemAddKey = Key('bonusOfferItemAddKey');

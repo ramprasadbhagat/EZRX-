@@ -23,6 +23,17 @@ class _PreOrderScrollSection extends StatelessWidget {
           itemBuilder: (_, index) {
             final item = preOrderItems[index];
 
+            if (item.materialInfo.type.typeCombo) {
+              return Column(
+                children: [
+                  if (index != 0) const SizedBox(height: _itemSpacing,),
+                  _PreOrderComboTile(
+                    cartItem: item,
+                  ),
+                ],
+              );
+            }
+
             if (item.materialInfo.type.typeBundle) {
               return Column(
                 children: [

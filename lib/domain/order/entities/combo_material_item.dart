@@ -154,3 +154,8 @@ class ComboMaterialItem with _$ComboMaterialItem {
     );
   }
 }
+
+extension PriceAggregateExtension on List<ComboMaterialItem> {
+  List<ComboMaterialItem> get getOutOfStockComboMaterialList =>
+      where((element) => !element.materialInfo.inStock).toList();
+}

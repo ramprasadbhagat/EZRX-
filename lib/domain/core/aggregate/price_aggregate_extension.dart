@@ -103,7 +103,7 @@ extension PriceAggregateExtension on List<PriceAggregate> {
 
   List<PriceAggregate> get preOrderItems =>
       expand((e) => [e, ...e.bonusMaterialPriceAggregate])
-          .where((e) => e.isPreOrder && (!e.materialInfo.type.typeCombo))
+          .where((e) => e.isPreOrder)
           .toList();
 
   List<PriceAggregate> get priceAggregateWithDiscountedCount => map((item) {
