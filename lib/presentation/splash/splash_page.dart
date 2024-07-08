@@ -57,7 +57,6 @@ import 'package:ezrxmobile/application/product_image/product_image_bloc.dart';
 import 'package:ezrxmobile/application/returns/approver_actions/filter/return_approver_filter_bloc.dart';
 import 'package:ezrxmobile/application/returns/approver_actions/return_approver_bloc.dart';
 import 'package:ezrxmobile/application/returns/new_request/return_items/return_items_bloc.dart';
-import 'package:ezrxmobile/application/returns/policy_configuration/policy_configuration_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_list/view_by_item/return_list_by_item_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_list/view_by_request/details/return_details_by_request_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_list/view_by_request/return_list_by_request_bloc.dart';
@@ -821,13 +820,6 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
               context.read<UserRestrictionListBloc>().add(
                     UserRestrictionListEvent.fetch(
                       salesOrg: state.salesOrganisation.salesOrg,
-                    ),
-                  );
-              // Policy Configuration fetch event
-              context.read<PolicyConfigurationBloc>().add(
-                    PolicyConfigurationEvent.fetch(
-                      salesOrganisation: state.salesOrganisation,
-                      searchKey: '',
                     ),
                   );
             }

@@ -58,9 +58,7 @@ import 'package:ezrxmobile/presentation/returns/new_request/new_request_success/
 import 'package:ezrxmobile/presentation/returns/new_request/tabs/return_details_tab/return_details_tab.dart';
 import 'package:ezrxmobile/presentation/returns/new_request/tabs/return_items_tab/return_items_tab.dart';
 import 'package:ezrxmobile/presentation/returns/new_request/tabs/return_review_tab/return_review_tab.dart';
-import 'package:ezrxmobile/presentation/returns/policy_configuration/add_policy_configuration.dart';
 import 'package:ezrxmobile/presentation/returns/approver_actions/approver_actions.dart';
-import 'package:ezrxmobile/presentation/returns/policy_configuration/policy_configuration.dart';
 import 'package:ezrxmobile/presentation/returns/return_list/return_by_item_page.dart';
 import 'package:ezrxmobile/presentation/returns/return_list/return_by_request_page.dart';
 import 'package:ezrxmobile/presentation/returns/return_list/return_root/return_root.dart';
@@ -104,14 +102,6 @@ import 'package:flutter/material.dart';
     AutoRoute(
       path: 'returns/user_restrictions',
       page: UserRestrictionListPage,
-    ),
-    AutoRoute(
-      path: 'returns/policy_configuration',
-      page: PolicyConfigurationPage,
-    ),
-    AutoRoute(
-      path: 'returns/add_policy_config',
-      page: AddPolicyConfiguration,
     ),
     AutoRoute(
       path: 'web_view',

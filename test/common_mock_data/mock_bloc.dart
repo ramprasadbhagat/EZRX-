@@ -63,7 +63,6 @@ import 'package:ezrxmobile/application/returns/approver_actions/filter/return_ap
 import 'package:ezrxmobile/application/returns/approver_actions/return_approver_bloc.dart';
 import 'package:ezrxmobile/application/returns/new_request/return_items/filter/return_items_filter_bloc.dart';
 import 'package:ezrxmobile/application/returns/new_request/return_items/return_items_bloc.dart';
-import 'package:ezrxmobile/application/returns/policy_configuration/policy_configuration_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_list/view_by_item/return_list_by_item_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_list/view_by_item/view_by_item_filter/view_by_item_return_filter_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_list/view_by_request/details/return_details_by_request_bloc.dart';
@@ -149,10 +148,6 @@ class IntroBlocMock extends MockBloc<IntroEvent, IntroState>
 class ResetPasswordBlocMock
     extends MockBloc<ResetPasswordEvent, ResetPasswordState>
     implements ResetPasswordBloc {}
-
-class PolicyConfigurationListBlocMock
-    extends MockBloc<PolicyConfigurationEvent, PolicyConfigurationState>
-    implements PolicyConfigurationBloc {}
 
 class CustomerLicenseBlocMock
     extends MockBloc<CustomerLicenseEvent, CustomerLicenseState>
