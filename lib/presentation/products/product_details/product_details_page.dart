@@ -30,6 +30,7 @@ import 'package:ezrxmobile/presentation/core/info_label.dart';
 import 'package:ezrxmobile/presentation/core/license_expired_banner.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/market_place/market_place_rectangle_logo.dart';
+import 'package:ezrxmobile/presentation/core/price_component.dart';
 import 'package:ezrxmobile/presentation/core/product_price_label.dart';
 import 'package:ezrxmobile/presentation/core/responsive.dart';
 import 'package:ezrxmobile/presentation/core/scroll_to_top_widget.dart';
@@ -325,6 +326,7 @@ class _BodyContent extends StatelessWidget {
                   ),
                   ProductPriceLabel(
                     materialInfo: materialInfo,
+                    type: PriceStyle.productPrice,
                   ),
                 ],
               ),
@@ -361,6 +363,7 @@ class _BodyContent extends StatelessWidget {
 
 class _Description extends StatelessWidget {
   final MaterialInfo materialInfo;
+
   const _Description({
     required this.materialInfo,
   });

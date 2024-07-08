@@ -20,8 +20,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ProductPriceLabel extends StatelessWidget {
   final MaterialInfo materialInfo;
+  final PriceStyle type;
 
-  const ProductPriceLabel({super.key, required this.materialInfo});
+  const ProductPriceLabel({
+    super.key,
+    required this.materialInfo,
+    this.type = PriceStyle.commonPrice,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -74,7 +79,7 @@ class ProductPriceLabel extends StatelessWidget {
                   salesOrgConfig: salesOrgConfig,
                 ),
               PriceComponent(
-                type: PriceStyle.commonPrice,
+                type: type,
                 key: WidgetKeys.currentPrice,
                 price: priceAggregate.tireItemPriceDisplay
                     ? priceAggregate.displayZdp5Price

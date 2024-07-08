@@ -120,6 +120,7 @@ class PriceComponent extends StatelessWidget {
 enum PriceStyle {
   commonPrice,
   bundlePrice,
+  productPrice,
   bundleAddToCartPrice,
   bundleCartPrice,
   bundleActiveOfferPrice,
@@ -162,6 +163,7 @@ Color _priceTextColor(PriceStyle type) {
     case PriceStyle.tenderViewOrderByItemPrice:
     case PriceStyle.tenderPrice:
     case PriceStyle.tenderCartPrice:
+    case PriceStyle.productPrice:
       return ZPColors.primary;
 
     case PriceStyle.summaryPrice:
@@ -263,6 +265,7 @@ TextStyle _priceStyle(BuildContext context, PriceStyle type) {
       priceTextStyle = Theme.of(context).textTheme.labelMedium;
       break;
     case PriceStyle.bundlePrice:
+    case PriceStyle.productPrice:
       priceTextStyle = Theme.of(context).textTheme.labelLarge?.copyWith(
             fontSize: 24,
           );
@@ -405,6 +408,11 @@ TextStyle _currencyCodeTextStyle(BuildContext context, PriceStyle type) {
       return Theme.of(context).textTheme.bodySmall!.copyWith(
             color: ZPColors.darkGray,
             fontSize: 14,
+          );
+    case PriceStyle.productPrice:
+      return Theme.of(context).textTheme.titleLarge!.copyWith(
+            color: ZPColors.primary,
+            fontSize: 24,
           );
     case PriceStyle.returnBonusPrice:
     case PriceStyle.bundleCartPrice:

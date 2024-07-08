@@ -37,37 +37,36 @@ class _MaterialDetailsToggleState extends State<MaterialDetailsToggle> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              AnimatedCrossFade(
-                firstChild: ShaderMask(
-                  shaderCallback: (Rect bounds) {
-                    return LinearGradient(
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter,
-                      colors: [
-                        ZPColors.white.withOpacity(1.0),
-                        ZPColors.white.withOpacity(0.0),
-                      ],
-                      stops: const [0.5, 1.0],
-                    ).createShader(bounds);
-                  },
-                  blendMode: BlendMode.dstIn,
-                  child: SizedBox(
-                    height: 100,
-                    child: SingleChildScrollView(
-                      physics: const NeverScrollableScrollPhysics(),
-                      child: _MaterialDetails(
+              AnimatedSwitcher(
+                duration: const Duration(milliseconds: 100),
+                child: !expanded
+                    ? ShaderMask(
+                        shaderCallback: (Rect bounds) {
+                          return LinearGradient(
+                            begin: Alignment.topCenter,
+                            end: Alignment.bottomCenter,
+                            colors: [
+                              ZPColors.white.withOpacity(1.0),
+                              ZPColors.white.withOpacity(0.0),
+                            ],
+                            stops: const [0.5, 1.0],
+                          ).createShader(bounds);
+                        },
+                        blendMode: BlendMode.dstIn,
+                        child: SizedBox(
+                          height: 100,
+                          child: SingleChildScrollView(
+                            physics: const NeverScrollableScrollPhysics(),
+                            child: _MaterialDetails(
+                              productDetailAggregate:
+                                  state.productDetailAggregate,
+                            ),
+                          ),
+                        ),
+                      )
+                    : _MaterialDetails(
                         productDetailAggregate: state.productDetailAggregate,
                       ),
-                    ),
-                  ),
-                ),
-                secondChild: _MaterialDetails(
-                  productDetailAggregate: state.productDetailAggregate,
-                ),
-                crossFadeState: expanded
-                    ? CrossFadeState.showSecond
-                    : CrossFadeState.showFirst,
-                duration: const Duration(milliseconds: 100),
               ),
               Row(
                 key: WidgetKeys.materialDetailsPromoSeeMore,
@@ -136,6 +135,7 @@ class _MaterialDetails extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         _HtmlContent(
+          key: WidgetKeys.materialDetailsDescription,
           title: 'Material description',
           data: productDetailAggregate.materialInfo.productImages.description,
         ),
