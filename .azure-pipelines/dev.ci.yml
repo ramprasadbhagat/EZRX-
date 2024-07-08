@@ -102,6 +102,21 @@ jobs:
           script: dcm check-dependencies lib test integration_test --ignored-packages auto_route_generator,flutter_launcher_icons,flutter_native_splash,json_serializable,hive_generator,scandit_flutter_datacapture_core --ci-key=$DCM_CI_KEY --email=$DCM_LICENSE_EMAIL --fatal-found
         displayName: DCM Check Dependencies
 
+  - job: DCMCheckExportCompleteness
+    displayName: 'DCM Check Export Completeness'
+    steps:
+      - task: Bash@3
+        inputs:
+          targetType: 'inline'
+          script: flutter pub get
+        displayName: Flutter Pub Get
+
+      - task: Bash@3
+        inputs:
+          targetType: 'inline'
+          script: dcm check-exports-completeness lib test integration_test --ci-key=$DCM_CI_KEY --email=$DCM_LICENSE_EMAIL --fatal-found
+        displayName: DCM Check Export Completeness
+
   - job: TestApplication
     displayName: Test application
     steps:

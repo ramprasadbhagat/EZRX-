@@ -70,7 +70,7 @@ dependencies:
   shimmer: ^3.0.0
   cached_network_image: ^3.3.1
   flutter_inappwebview: ^6.0.0
-  scandit_flutter_datacapture_barcode: 6.24.0
+  scandit_flutter_datacapture_barcode: ^6.25.0
   loading_indicator: ^3.1.1
   badges: ^3.1.2
   flutter_slidable: ^3.1.0
@@ -142,9 +142,6 @@ dependency_overrides:
   # Because freezed need analyze 6.5.0 have meta 1.15.0 and flutter_test need 1.12.0
   meta: 1.12.0
   pdf_widget_wrapper: 1.0.4
-  #Cloning because of library haven't support to lastest version, will remove when library version upgrade
-  scandit_flutter_datacapture_core:
-    path: ./local_library/scandit_flutter_datacapture_core
   # #Override this library cause this issue with latest flutter_inappwebview version https://github.com/pichillilorenzo/flutter_inappwebview/issues/2139
   # #Change this when newer version of the library to be released
   flutter_inappwebview_android:

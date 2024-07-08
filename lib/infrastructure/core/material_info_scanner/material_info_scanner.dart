@@ -36,7 +36,7 @@ class MaterialInfoScanner {
   RectangularViewfinder get _rectangularViewfinder =>
       _overlay.viewfinder as RectangularViewfinder;
 
-  SizeWithUnit get _scanArea => const SizeWithUnit(
+  SizeWithUnit get _scanArea => SizeWithUnit(
         DoubleWithUnit(0.9, MeasureUnit.fraction),
         DoubleWithUnit(0.1, MeasureUnit.fraction),
       );
