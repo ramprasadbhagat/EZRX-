@@ -59,6 +59,7 @@ class _CheckoutProductMaterialWithBonus extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      key: WidgetKeys.checkoutMaterialWithBonusItem,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         if (isDifferentSeller)

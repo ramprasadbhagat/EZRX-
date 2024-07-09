@@ -9,6 +9,7 @@ class _ManufacturerName extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
+      key: WidgetKeys.cartPrincipalLabel,
       children: [
         if (cartProduct.isMarketPlace)
           const Padding(

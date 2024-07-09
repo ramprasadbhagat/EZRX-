@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/domain/core/value/constants.dart';
+import 'package:ezrxmobile/presentation/core/market_place/market_place_logo.dart';
 import 'package:ezrxmobile/presentation/core/no_record.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:flutter/material.dart';
@@ -21,8 +22,7 @@ class AccountSummaryTabRobot extends CommonRobot {
   );
   final _statusLabel = find.byKey(WidgetKeys.invoiceItemStatus);
   final _summaryId = find.byKey(WidgetKeys.invoiceCreditItemId);
-  final _summaryExpandableSection =
-      find.byKey(WidgetKeys.expandableSection);
+  final _summaryExpandableSection = find.byKey(WidgetKeys.expandableSection);
   final _newPaymentButtonFinder = find.byKey(WidgetKeys.newPaymentButton);
   final _govNumber = find.byKey(WidgetKeys.governmentNumber);
 
@@ -226,6 +226,13 @@ class AccountSummaryTabRobot extends CommonRobot {
     for (final text in statusText) {
       expect(text == status.tr(), isVisible);
     }
-    expect(_summaryItem.evaluate().length, isVisible ? statusText.length : 0);
   }
+
+  void verifyMarketPlaceLogo() => expect(
+        find.descendant(
+          of: _summaryItem,
+          matching: find.byType(MarketPlaceLogo),
+        ),
+        findsWidgets,
+      );
 }

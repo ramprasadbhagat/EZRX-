@@ -64,7 +64,7 @@ class InvoiceDetailsPage extends StatelessWidget {
                       key: WidgetKeys.loaderImage,
                     )
                   : ListView(
-                      key: WidgetKeys.invoiceDetailsPageListView,
+                      key: WidgetKeys.scrollList,
                       children: <Widget>[
                         InvoiceDetailsSection(
                           invoiceItem: state.basicInfo,

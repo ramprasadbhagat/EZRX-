@@ -112,7 +112,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
               const StockInfoBanner(),
               Expanded(
                 child: CustomScrollView(
-                  key: WidgetKeys.checkoutScrollList,
+                  key: WidgetKeys.scrollList,
                   slivers: [
                     SliverToBoxAdapter(
                       child: AddressInfoSection.greenBackground(

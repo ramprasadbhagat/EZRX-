@@ -117,6 +117,16 @@ class NewPaymentStep1Robot {
     await tester.pumpAndSettle(const Duration(seconds: 1));
   }
 
+  void verifyFilterApplied(int count) {
+    expect(
+      find.descendant(
+        of: filterBadge,
+        matching: find.text(count.toString()),
+      ),
+      findsOneWidget,
+    );
+  }
+
   Future<void> clickDocumentDateField() async {
     await tester.tap(fromDocumentDateField);
     await tester.pumpAndSettle();
@@ -180,15 +190,7 @@ class NewPaymentStep1Robot {
       findsOneWidget,
     );
     expect(
-      find.text(
-        currentTime
-            .subtract(
-              const Duration(
-                days: 90,
-              ),
-            )
-            .displayDate,
-      ),
+      find.text(currentTime.subtract(const Duration(days: 90)).displayDate),
       findsOneWidget,
     );
   }

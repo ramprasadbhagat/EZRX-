@@ -15,6 +15,7 @@ class _ReturnMaterialWidget extends StatelessWidget with BottomsheetMixin {
           current.getReturnItemDetails(item.uuid),
       builder: (context, state) {
         return CustomCard(
+          key: WidgetKeys.returnRequestMaterialCard(item.uuid),
           showBorder: true,
           showShadow: false,
           clipBehavior: Clip.antiAlias,

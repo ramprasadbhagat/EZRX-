@@ -2,10 +2,10 @@ import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-class ViewByItemsFilterRobot {
-  final WidgetTester tester;
+import '../../common/common_robot.dart';
 
-  ViewByItemsFilterRobot(this.tester);
+class ViewByItemsFilterRobot extends CommonRobot {
+  ViewByItemsFilterRobot(super.tester);
 
   final fromDateFilter = find.byKey(WidgetKeys.viewByItemsFilterFromDateKey);
   final toDateFilter = find.byKey(WidgetKeys.viewByItemsFilterToDateKey);
@@ -47,6 +47,26 @@ class ViewByItemsFilterRobot {
     );
   }
 
+  void verifyOrderTypeFilter({bool isVisible = true}) {
+    expect(
+      find.byKey(WidgetKeys.filterRadioTile('All', true)),
+      isVisible ? findsOne : findsNothing,
+    );
+    expect(
+      find.byKey(WidgetKeys.filterRadioTile('ZP items', false)),
+      isVisible ? findsOne : findsNothing,
+    );
+    expect(
+      find.byKey(WidgetKeys.filterRadioTile('MP items', false)),
+      isVisible ? findsOne : findsNothing,
+    );
+  }
+
+  Future<void> tapOrderTypeFilter(String type) async {
+    await tester.tap(find.byKey(WidgetKeys.filterRadioTile(type, false)));
+    await tester.pumpAndSettle();
+  }
+
   void verifyApplyButton() {
     expect(applyButton, findsOneWidget);
   }
@@ -76,7 +96,9 @@ class ViewByItemsFilterRobot {
   }
 
   Future<void> tapStatusCheckbox(String name) async {
-    await tester.tap(find.widgetWithText(CheckboxListTile, name));
+    final widget = find.widgetWithText(CheckboxListTile, name);
+    await scrollEnsureFinderVisible(widget);
+    await tester.tap(widget);
     await tester.pump();
   }
 

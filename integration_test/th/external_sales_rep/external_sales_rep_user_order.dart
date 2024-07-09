@@ -1042,7 +1042,7 @@ void main() {
       await productSuggestionRobot
           .searchWithKeyboardAction(materialNumberForGimmick);
       productSuggestionRobot.verifyNoRecordFound();
-      await productSuggestionRobot.tapToBackButton();
+      await productSuggestionRobot.tapToBackScreen();
 
       // logout because doing login on behalf
       await commonRobot.navigateToScreen(NavigationTab.more);
@@ -2360,7 +2360,7 @@ void main() {
       bonusSampleRobot.verifySheet(isVisible: false);
       await cartRobot.tapCloseButton();
       await productDetailRobot.tapBackButton();
-      await productSuggestionRobot.tapToBackButton();
+      await productSuggestionRobot.tapToBackScreen();
 
       // logout because doing login on behalf
       await commonRobot.navigateToScreen(NavigationTab.more);

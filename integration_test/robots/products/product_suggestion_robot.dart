@@ -1,4 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/presentation/core/market_place/market_place_logo.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/products/clear_product_search_suggestion_history.dart';
 import 'package:flutter/material.dart';
@@ -34,7 +35,7 @@ class ProductSuggestionRobot extends CommonRobot {
 
   void verifyNoRecordFound({bool isVisible = true}) {
     expect(
-      find.text('That didn’t match anything'.tr()),
+      find.text("That didn't match anything".tr()),
       isVisible ? findsOneWidget : findsNothing,
     );
     expect(
@@ -109,11 +110,11 @@ class ProductSuggestionRobot extends CommonRobot {
     await tester.pumpUntilVisible(noSearchHistory);
   }
 
-  Future<void> tapToBackButton() async {
-    // Find the leading icon using the default icon (typically the back button)
-    final backButton = find.byIcon(Icons.arrow_back);
-    expect(backButton, findsOneWidget);
-    await tester.tap(backButton);
-    await tester.pumpAndSettle();
-  }
+  void verifyMarketPlaceLogo(String materialNumber) => expect(
+        find.descendant(
+          of: find.byKey(WidgetKeys.searchedProduct(materialNumber)),
+          matching: find.byType(MarketPlaceLogo),
+        ),
+        findsOneWidget,
+      );
 }

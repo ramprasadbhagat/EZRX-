@@ -60,25 +60,13 @@ class BonusMaterialInfo extends StatelessWidget {
             data.defaultMaterialDescription,
             style: Theme.of(context).textTheme.labelMedium,
           ),
-          Wrap(
-            children: [
-              Text(
-                '${context.tr('Batch')}: ${data.displayBatch} - ',
-                style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                      color: ZPColors.darkGray,
-                      fontSize: 12,
-                    ),
-                key: WidgetKeys.itemBatchKey,
-              ),
-              Text(
-                '${context.tr('Expires')}: ${data.displayExpiryDate}',
-                style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                      color: ZPColors.darkGray,
-                      fontSize: 12,
-                    ),
-                key: WidgetKeys.itemExpiresKey,
-              ),
-            ],
+          Text(
+            '${context.tr('Batch')}: ${data.displayBatch} - ${context.tr('Expires')}: ${data.displayExpiryDate}',
+            style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                  color: ZPColors.darkGray,
+                  fontSize: 12,
+                ),
+            key: WidgetKeys.returnBatchAndExpires,
           ),
           const SizedBox(
             height: 8,

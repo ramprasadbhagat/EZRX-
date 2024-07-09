@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/presentation/core/balance_text_row.dart';
+import 'package:ezrxmobile/presentation/core/market_place/market_place_rectangle_logo.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -227,4 +228,7 @@ class PaymentSummaryDetailRobot extends CommonRobot {
             widget.key == WidgetKeys.priceComponent &&
             widget.text.toPlainText().contains(price),
       );
+
+  void verifyMarketPlaceLogo() =>
+      expect(find.byType(MarketPlaceRectangleLogo), findsOne);
 }

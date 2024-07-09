@@ -1,7 +1,10 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/config.dart';
+import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/custom_search_bar.dart';
+import 'package:ezrxmobile/presentation/core/market_place/market_place_seller_title.dart';
+import 'package:ezrxmobile/presentation/core/market_place/market_place_seller_with_logo.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/orders/cart/cart_button.dart';
 import 'package:flutter/material.dart';
@@ -28,6 +31,7 @@ class CommonRobot {
   final payerInformationVn = find.byKey(WidgetKeys.payerInformation);
   final licenseExpiredBanner = find.byKey(WidgetKeys.licenseExpiredBanner);
   final viewLicenseButton = find.byKey(WidgetKeys.viewLicenseButton);
+  final scrollList = find.byKey(WidgetKeys.scrollList);
 
   Future<void> setDateRangePickerValue({
     required DateTime fromDate,
@@ -121,7 +125,7 @@ class CommonRobot {
   }
 
   Future<void> pullToRefresh() async {
-    await tester.drag(find.byKey(WidgetKeys.scrollList), const Offset(0, 500));
+    await tester.drag(scrollList.last, const Offset(0, 500));
     await tester.pumpAndSettle();
   }
 
@@ -301,18 +305,17 @@ class CommonRobot {
   }
 
   Future<void> tapToBackScreen() async {
-    await tester.tap(find.byType(BackButton));
+    await tester.tap(find.byType(BackButton).last);
     await tester.pumpAndSettle();
   }
 
   Future<void> scrollEnsureFinderVisible(
     Finder finder, {
-    int maxIteration = 50,
-    reversed = false,
+    bool reversed = false,
   }) async {
     await tester.dragUntilVisible(
       finder,
-      find.byKey(WidgetKeys.scrollList),
+      scrollList.last,
       Offset(0.0, reversed ? 200 : -200),
     );
     await tester.pump();
@@ -404,7 +407,7 @@ class CommonRobot {
       '${'Try adjusting your search or filter selection to find what you’re looking for'.tr()}.';
 
   //============================================================
-  //  Expiry date info bottomsheet
+  //   Liecense Expired banner
   //============================================================
 
   void findLicenseExpiredBanner() {
@@ -427,5 +430,45 @@ class CommonRobot {
   Future<void> tapViewLicenseButton() async {
     await tester.tap(viewLicenseButton);
     await tester.pumpAndSettle();
+  }
+
+  //============================================================
+  //   Stock info
+  //============================================================
+  void verifyStockInfo(StockInfo stockInfo, Finder finder) => expect(
+        find.descendant(
+          of: finder,
+          matching: find.textContaining(
+            '${'Batch'.tr()}: ${stockInfo.batch.displayNAIfEmpty} - ${'Expires'.tr()}: ${stockInfo.expiryDate.dateTimeOrNaString}',
+            findRichText: true,
+          ),
+        ),
+        findsOne,
+      );
+
+  //============================================================
+  //   Marketplace
+  //============================================================
+  void verifyMarketPlaceLogoWithSeller(
+    String seller, {
+    bool isVisible = true,
+  }) =>
+      expect(
+        find.descendant(
+          of: find.byType(MarketPlaceSellerWithLogo),
+          matching: find.text(seller),
+        ),
+        isVisible ? findsOne : findsNothing,
+      );
+
+  Future<void> verifySellerNameText(String text, Finder descendatFinder) async {
+    final label = find.descendant(
+      of: descendatFinder,
+      matching: find.byWidgetPredicate(
+        (w) => w is MarketPlaceSellerTitle && w.sellerName == text,
+      ),
+    );
+    await scrollEnsureFinderVisible(label);
+    expect(label, findsOne);
   }
 }

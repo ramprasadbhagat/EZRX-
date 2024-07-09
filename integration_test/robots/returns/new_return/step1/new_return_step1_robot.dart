@@ -1,20 +1,22 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/domain/core/value/constants.dart';
+import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
+import 'package:ezrxmobile/presentation/core/market_place/market_place_logo.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
 import 'package:ezrxmobile/presentation/core/product_image.dart';
 import 'package:ezrxmobile/presentation/core/status_label.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/returns/new_request/widgets/bonus_material_info.dart';
+import 'package:ezrxmobile/presentation/returns/new_request/widgets/material_info_widget.dart';
 import 'package:ezrxmobile/presentation/returns/new_request/widgets/return_item_price.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+import '../../../common/common_robot.dart';
 import '../../../common/extension.dart';
 
-class NewReturnStep1Robot {
-  final WidgetTester tester;
-
-  NewReturnStep1Robot(this.tester);
+class NewReturnStep1Robot extends CommonRobot {
+  NewReturnStep1Robot(super.tester);
 
   final searchItem = find.byKey(WidgetKeys.newRequestSearchItem);
   final filterIcon = find.byKey(WidgetKeys.newRequestFilterIcon);
@@ -31,16 +33,12 @@ class NewReturnStep1Robot {
   final fromInvoiceDateField = find.byKey(
     WidgetKeys.fromInvoiceDateField,
   );
-  final searchBar = find.byKey(WidgetKeys.genericKey(key: ''));
   final item = find.byKey(WidgetKeys.newReturnItem);
   final applyButton = find.byKey(WidgetKeys.filterApplyButton);
   final resetButton = find.byKey(WidgetKeys.filterResetButton);
   final closeSummaryInfoNewRequestPage =
       find.byKey(WidgetKeys.closeSummaryInfoNewRequestPage);
-  final searchIcon = find.byKey(WidgetKeys.searchIconKey);
   final closeStep1 = find.byKey(WidgetKeys.closeButton);
-
-  final clearIcon = find.byKey(WidgetKeys.clearIconKey);
   final cannotMoveToNextStep = find.byKey(WidgetKeys.cannotMoveToNextStep);
   final step2Title = find.byKey(WidgetKeys.newRequestStep2Title);
   final expandableSection = find.byKey(WidgetKeys.expandableSection);
@@ -221,14 +219,6 @@ class NewReturnStep1Robot {
     expect(item, findsNothing);
   }
 
-  Future<void> verifySnackbarVisible() async {
-    expect(find.byKey(WidgetKeys.customSnackBar), findsOneWidget);
-    expect(
-      tester.widget<Text>(find.byKey(WidgetKeys.customSnackBarMessage)).data,
-      equals('Please enter at least 2 characters.'.tr()),
-    );
-  }
-
   Future<void> pressCloseButtonToolbar() async {
     await tester.tap(closeStep1);
     await tester.pumpAndSettle();
@@ -306,20 +296,54 @@ class NewReturnStep1Robot {
       ),
       findsAtLeastNWidgets(1),
     );
-    // Verify batch
+    // Verify batch & Expires
     expect(
       find.byWidgetPredicate(
-        (widget) => widget is Text && widget.key == WidgetKeys.itemBatchKey,
+        (widget) =>
+            widget is Text && widget.key == WidgetKeys.returnBatchAndExpires,
       ),
       findsAtLeastNWidgets(1),
     );
-    //Verify Expires
-    expect(
-      find.byWidgetPredicate(
-        (widget) => widget is Text && widget.key == WidgetKeys.itemExpiresKey,
+  }
+
+  void verifyItemMarketPlaceLogo({required int index}) => expect(
+        find.descendant(
+          of: item.at(index),
+          matching: find.byType(MarketPlaceLogo),
+        ),
+        findsOne,
+      );
+
+  void verifyItemBatchExpiryDate(StockInfo stockInfo, {required int index}) =>
+      verifyStockInfo(
+        stockInfo,
+        find.descendant(
+          of: item.at(index),
+          matching: find.byType(MaterialInfoWidget),
+        ),
+      );
+
+  void verifyItemBonusBatchExpiryDate(
+    StockInfo stockInfo, {
+    required int index,
+  }) =>
+      verifyStockInfo(
+        stockInfo,
+        find.descendant(
+          of: item.at(index),
+          matching: find.byType(BonusMaterialInfo),
+        ),
+      );
+
+  String getItemUUID({required int index}) {
+    final returnItemWidget = tester.widget<MaterialInfoWidget>(
+      find.descendant(
+        of: item.at(index),
+        matching: find.byType(MaterialInfoWidget),
       ),
-      findsAtLeastNWidgets(1),
     );
+
+    return returnItemWidget.data.uuid;
   }
 
   void verifyDetailCollapsed(bool isCollapsed) {
@@ -355,4 +379,15 @@ class NewReturnStep1Robot {
     await tester.tap(expandableSection.first);
     await tester.pump();
   }
+
+  void verifyMaterialCannotFromSameSellerErrorMessage({
+    bool isVisible = true,
+  }) =>
+      expect(
+        find.text(
+          'Please note that ZP and MP products cannot be returned together. Additionally, MP products must be from the same seller in each request.'
+              .tr(),
+        ),
+        isVisible ? findsOne : findsNothing,
+      );
 }

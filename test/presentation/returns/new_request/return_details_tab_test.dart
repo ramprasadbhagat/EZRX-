@@ -16,6 +16,7 @@ import 'package:ezrxmobile/domain/returns/entities/return_material_list.dart';
 import 'package:ezrxmobile/domain/returns/entities/usage.dart';
 import 'package:ezrxmobile/domain/returns/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/return_request_local.dart';
+import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/confirm_bottom_sheet.dart';
 import 'package:ezrxmobile/presentation/core/custom_card.dart';
 import 'package:ezrxmobile/presentation/core/custom_numeric_text_field.dart';
@@ -32,48 +33,18 @@ import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 
+import '../../../common_mock_data/mock_bloc.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_my_sales_org_config.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_th_sales_org_config.dart';
 import '../../../common_mock_data/sales_organsiation_mock.dart';
 import '../../../common_mock_data/user_mock.dart';
 import '../../../utils/widget_utils.dart';
-
-class UserBlocMock extends MockBloc<UserEvent, UserState> implements UserBloc {}
-
-class CustomerCodeBlocMock
-    extends MockBloc<CustomerCodeEvent, CustomerCodeState>
-    implements CustomerCodeBloc {}
-
-class NewRequestMockBloc extends MockBloc<NewRequestEvent, NewRequestState>
-    implements NewRequestBloc {}
-
-class SalesOrgMockBloc extends MockBloc<SalesOrgEvent, SalesOrgState>
-    implements SalesOrgBloc {}
-
-class UsageCodeBlocMock extends MockBloc<UsageCodeEvent, UsageCodeState>
-    implements UsageCodeBloc {}
-
-class ProductImageBlocMock
-    extends MockBloc<ProductImageEvent, ProductImageState>
-    implements ProductImageBloc {}
-
-class ReturnRequestAttachmentBlocMock
-    extends MockBloc<ReturnRequestAttachmentEvent, ReturnRequestAttachmentState>
-    implements ReturnRequestAttachmentBloc {}
-
-class EligibilityBlocMock extends MockBloc<EligibilityEvent, EligibilityState>
-    implements EligibilityBloc {}
-
-class AutoRouterMock extends Mock implements AppRouter {}
-
-final locator = GetIt.instance;
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
@@ -81,7 +52,7 @@ void main() {
   late UserBloc userBlocMock;
   late AppRouter autoRouterMock;
   late CustomerCodeBloc customerCodeBlocMock;
-  final salesOrgBlocMock = SalesOrgMockBloc();
+  final salesOrgBlocMock = SalesOrgBlocMock();
   late EligibilityBloc eligibilityBlocMock;
   late NewRequestBloc newRequestBlocMock;
   final usageCodeBlocMock = UsageCodeBlocMock();
@@ -135,7 +106,7 @@ void main() {
   //////////////////////Finder///////////////////////////////////////////////
   final newRequestStep2RemoveIcon =
       find.byKey(WidgetKeys.newRequestStep2RemoveIcon);
-  final returnDetailsListView = find.byKey(WidgetKeys.returnDetailsListView);
+  final returnDetailsListView = find.byKey(WidgetKeys.scrollList);
   final confirmBottomSheetConfirmButton =
       find.byKey(WidgetKeys.confirmBottomSheetConfirmButton);
   final materialBonusDetailsSection =
@@ -221,7 +192,7 @@ void main() {
       expect(toggleIncludeBonusButton, findsOneWidget);
       await tester.dragUntilVisible(
         toggleIncludeBonusButton,
-        find.byKey(WidgetKeys.returnDetailsListView),
+        find.byKey(WidgetKeys.scrollList),
         const Offset(0, 100),
       );
       await tester.pumpAndSettle();
@@ -1130,17 +1101,7 @@ void main() {
         find.descendant(
           of: find.byType(MaterialInfoWidget),
           matching: find.text(
-            'Batch: ${fakeReturnMaterial.displayBatch} - ',
-          ),
-        ),
-        findsOneWidget,
-      );
-
-      expect(
-        find.descendant(
-          of: find.byType(MaterialInfoWidget),
-          matching: find.text(
-            'Expires: ${fakeReturnMaterial.displayExpiryDate}',
+            'Batch: ${fakeReturnMaterial.displayBatch} - Expires: ${fakeReturnMaterial.displayExpiryDate}',
           ),
         ),
         findsOneWidget,
@@ -1254,7 +1215,7 @@ void main() {
         findsWidgets,
       );
       await tester.fling(
-        find.byKey(WidgetKeys.returnDetailsListView),
+        find.byKey(WidgetKeys.scrollList),
         const Offset(0.0, -1000.0),
         1000.0,
       );
@@ -1348,7 +1309,7 @@ void main() {
         findsWidgets,
       );
       await tester.fling(
-        find.byKey(WidgetKeys.returnDetailsListView),
+        find.byKey(WidgetKeys.scrollList),
         const Offset(0.0, -1000.0),
         1000.0,
       );

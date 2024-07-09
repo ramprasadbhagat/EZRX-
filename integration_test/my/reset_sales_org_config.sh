@@ -3,16 +3,37 @@
 echo -e "\n"
 echo "Presetting sales org config for MY."
 
-loginApiResponse=$(curl -s --location 'https://uat-my.ezrx.com/api/license' \
+endpoint=https://uat-my.ezrx.com/api/license
+
+marketplaceUsername=mpmyclientuser
+marketplacePassword=St@ysafe01
+
+adminUsername=myrootadmin
+adminPassword=St@ysafe01
+
+### Reset Marketplace term and condition acceptance status
+
+loginApiResponse=$(curl -s --location $endpoint \
 --header 'Content-Type: application/json' \
---data '{"variables": { "input": { "username": "myrootadmin", "password": "St@ysafe01" } }, "query": "query LoginV4($input: loginV4Input!) { loginV4(input: $input) { eZRxJWT } }"}')
+--data '{"variables": { "input": { "username": "'${marketplaceUsername}'", "password": "'$marketplacePassword'" } }, "query": "query LoginV4($input: loginV4Input!) { loginV4(input: $input) { eZRxJWT } }"}')
 response=$(echo $loginApiResponse | sed -e 's/^.*"eZRxJWT":"\([^"]*\)".*$/\1/')
-updateSalesorgconfigMutationReq=$(curl --location 'https://uat-my.ezrx.com/api/license' \
+curl --location $endpoint \
+--header 'Authorization: Bearer v2 '"$response" \
+--header 'content-type: application/json; charset=UTF-8' \
+--data '{"query":"      mutation updateAcceptanceStatus($isAcceptMPTC: Int!) {\n\n        updateAcceptanceStatus(isAcceptMPTC: $isAcceptMPTC)\n\n    }\n    ","variables":{"isAcceptMPTC":0}}'
+
+### Reset Sales org config
+
+loginApiResponse=$(curl -s --location $endpoint \
+--header 'Content-Type: application/json' \
+--data '{"variables": { "input": { "username": "'$adminUsername'", "password": "'$adminPassword'" } }, "query": "query LoginV4($input: loginV4Input!) { loginV4(input: $input) { eZRxJWT } }"}')
+response=$(echo $loginApiResponse | sed -e 's/^.*"eZRxJWT":"\([^"]*\)".*$/\1/')
+updateSalesorgconfigMutationReq=$(curl --location $endpoint \
 --header 'Content-Type: application/json' \
 --header 'Authorization: Bearer v2 '"$response" \
 --data '
 {
-  "query": "mutation updateSalesorgconfigMutation($input: UpdateSalesOrgConfigInput!) {updateSalesOrgConfig(input: $input) {    salesOrgConfig {        salesOrgCode        ponRequired        priceOverride        expiryDateDisplay        enableBatchNumber        currency        netPriceOverride                enableVat        enableZDP5                materialWithoutPrice        enableZDP8Override        displayOrderDiscount        enableIRN        enableTaxClassification        disableBundles        disableProcessingStatus        enableCollectiveNumber        enableGimmickMaterial        hideStockDisplay        showPOAttachment        disableDeliveryDate        enableTaxAtTotalLevelOnly        enableGreenDelivery        greenDeliveryDelayInDays        greenDeliveryUserRole        minOrderAmount        hideCustomer        disableOrderType        vatValue        enableSpecialInstructions        enableReferenceNote        enableMobileNumber        enablePaymentTerms        enableGMC        enableListPrice        enableDefaultMD        disablePaymentTermsDisplay        enableBillTo        enableOHPrice        addOosMaterials        oosValue        enableRemarks        enableTaxDisplay        enableGMN        enableMarketPlace        }    }}       ",
+  "query": "mutation updateSalesorgconfigMutation($input: UpdateSalesOrgConfigInput!) {updateSalesOrgConfig(input: $input) {    salesOrgConfig {        salesOrgCode        ponRequired        priceOverride        expiryDateDisplay        enableBatchNumber        currency        netPriceOverride                enableVat        enableZDP5                materialWithoutPrice        enableZDP8Override        displayOrderDiscount        enableIRN        enableTaxClassification        disableBundles        disableProcessingStatus        enableCollectiveNumber        enableGimmickMaterial        hideStockDisplay        showPOAttachment        disableDeliveryDate        enableTaxAtTotalLevelOnly        enableGreenDelivery        greenDeliveryDelayInDays        greenDeliveryUserRole        minOrderAmount        hideCustomer        disableOrderType        vatValue        enableSpecialInstructions        enableReferenceNote        enableMobileNumber        enablePaymentTerms        enableGMC        enableListPrice        enableDefaultMD        disablePaymentTermsDisplay        enableBillTo        enableOHPrice        addOosMaterials        oosValue        enableRemarks        enableTaxDisplay        enableGMN        enableMarketPlace        mpMinOrderAmount        }    }}       ",
   "variables": {
     "input": {
       "id": 4,
@@ -102,7 +123,8 @@ updateSalesorgconfigMutationReq=$(curl --location 'https://uat-my.ezrx.com/api/l
         "enableComboDeals": false,
         "authorizedsalesRep": [],
         "comboDealsUserRole": null,
-        "mpMinOrderAmount": "0"
+        "enableMarketPlace": true,
+        "mpMinOrderAmount": "400"
       }
     }
   }

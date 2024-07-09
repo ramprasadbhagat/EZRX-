@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/domain/core/value/constants.dart';
+import 'package:ezrxmobile/presentation/core/market_place/market_place_logo.dart';
 import 'package:ezrxmobile/presentation/core/no_record.dart';
 import 'package:ezrxmobile/presentation/core/scale_button.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
@@ -113,6 +114,14 @@ class AccountInvoiceRobot extends CommonRobot {
       );
     }
   }
+
+  void verifyMarketPlaceLogo() => expect(
+        find.descendant(
+          of: invoiceItem,
+          matching: find.byType(MarketPlaceLogo),
+        ),
+        findsWidgets,
+      );
 
   void verifyItemsWithSearchKey(String searchKey) {
     verifyItems();

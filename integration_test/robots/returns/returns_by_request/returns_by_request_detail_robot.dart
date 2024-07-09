@@ -1,16 +1,18 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/presentation/core/balance_text_row.dart';
+import 'package:ezrxmobile/presentation/core/market_place/market_place_logo.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-class ReturnsByRequestDetailRobot {
-  final WidgetTester tester;
+import '../../common/common_robot.dart';
 
-  ReturnsByRequestDetailRobot(this.tester);
+class ReturnsByRequestDetailRobot extends CommonRobot {
+  ReturnsByRequestDetailRobot(super.tester);
 
-  final scrollView = find.byKey(WidgetKeys.returnRequestDetailScrollList);
   final showDetailButton = find.byKey(WidgetKeys.returnDetailShowDetailButton);
+  late Finder _verifyingItem;
 
   void verifyReturnIdVisible(
     String returnId,
@@ -115,13 +117,18 @@ class ReturnsByRequestDetailRobot {
     );
   }
 
+  void verifyROCreationFailedMessage() => expect(
+        find.byKey(WidgetKeys.returnRequestROCreationFailedMessage),
+        findsOne,
+      );
+
   Future<void> verifyMaterialVisible({
     required int index,
     required String materialNumber,
   }) async {
-    await tester.dragUntilVisible(
+    await scrollEnsureFinderVisible(
       find.descendant(
-        of: _materialWidget(0),
+        of: _materialWidget(index),
         matching: find.byWidgetPredicate(
           (widget) =>
               widget.key == WidgetKeys.commonTileItemLabel &&
@@ -129,22 +136,47 @@ class ReturnsByRequestDetailRobot {
               widget.data == materialNumber,
         ),
       ),
-      scrollView,
-      const Offset(0.0, -200),
     );
   }
 
-  Future<void> verifyMaterialDetailCollapsed(
-    int index,
-    bool isCollapsed,
-  ) async {
-    await tester.dragUntilVisible(
-      showDetailButton.at(index),
-      scrollView,
-      const Offset(0.0, -200),
+  Future<void> startVerifyMaterial({
+    required int qty,
+    required String materialNumber,
+    required String price,
+  }) async {
+    _verifyingItem = find.byKey(
+      WidgetKeys.returnItemDetailMaterial(
+        materialNumber,
+        qty.toString(),
+        price,
+      ),
     );
-    await tester.pump();
+    await scrollEnsureFinderVisible(
+      find.descendant(
+        of: _verifyingItem,
+        matching: find.byWidgetPredicate(
+          (widget) =>
+              widget.key == WidgetKeys.commonTileItemLabel &&
+              widget is Text &&
+              widget.data == materialNumber,
+        ),
+      ),
+    );
   }
+
+  void verifyMarketPlaceLogo() => expect(
+        find.descendant(
+          of: _verifyingItem,
+          matching: find.byType(MarketPlaceLogo),
+        ),
+        findsOne,
+      );
+
+  void verifyBatchExpiryDate(StockInfo stockInfo) =>
+      verifyStockInfo(stockInfo, _verifyingItem);
+
+  Future<void> verifyMaterialDetailCollapsed(int index, bool isCollapsed) =>
+      scrollEnsureFinderVisible(showDetailButton.at(index));
 
   Future<void> tapShowDetailButton(int index) async {
     await tester.tap(showDetailButton.at(index));

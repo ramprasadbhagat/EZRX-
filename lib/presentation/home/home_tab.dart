@@ -78,6 +78,7 @@ class HomeTab extends StatelessWidget {
                       ),
                     ),
                 child: SingleChildScrollView(
+                  key: WidgetKeys.scrollList,
                   physics: const AlwaysScrollableScrollPhysics(),
                   child: Column(
                     children: [

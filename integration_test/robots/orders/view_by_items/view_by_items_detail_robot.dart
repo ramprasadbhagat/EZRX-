@@ -1,4 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/presentation/core/address_info_section.dart';
 import 'package:ezrxmobile/presentation/core/balance_text_row.dart';
 import 'package:ezrxmobile/presentation/core/product_image.dart';
@@ -135,12 +136,21 @@ class ViewByItemsDetailRobot extends CommonRobot {
     _verifyItemComponent(qtyLabel);
   }
 
-  Future<void> verifyManufacturerName(String manufacturerName) async {
+  Future<void> verifyManufacturerName(
+    String manufacturerName, {
+    bool isVisible = true,
+  }) async {
     await scrollEnsureFinderVisible(addressSection);
-    final manufacturerFinder =
-        find.byKey(WidgetKeys.manufacturerMaterials).first;
-    await scrollEnsureFinderVisible(manufacturerFinder);
-    expect(tester.widget<Text>(manufacturerFinder).data, manufacturerName);
+    final manufacturerFinder = find.byKey(WidgetKeys.manufacturerMaterials);
+    if (!isVisible) {
+      expect(manufacturerFinder, findsNothing);
+    } else {
+      await scrollEnsureFinderVisible(manufacturerFinder.first);
+      expect(
+        tester.widget<Text>(manufacturerFinder.first).data,
+        manufacturerName,
+      );
+    }
   }
 
   void verifyMaterialNumber(String materialNumber) => _verifyItemComponent(
@@ -166,6 +176,9 @@ class ViewByItemsDetailRobot extends CommonRobot {
   void verifyBundleTag() => _verifyItemComponent(bundleTag);
 
   void verifyFreePrice() => _verifyItemComponent(freePrice);
+
+  void verifyBatchExpiryDate(StockInfo stockInfo) =>
+      verifyStockInfo(stockInfo, itemDetailSection);
 
   void _verifyItemComponent(Finder finder) => expect(
         find.descendant(of: itemDetailSection, matching: finder),

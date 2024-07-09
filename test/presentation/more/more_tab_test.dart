@@ -619,7 +619,7 @@ void main() {
         final userGuideTileFinder = find.byKey(WidgetKeys.userGuideTile);
         await tester.dragUntilVisible(
           userGuideTileFinder,
-          find.byKey(WidgetKeys.moreTapListContent),
+          find.byKey(WidgetKeys.scrollList),
           const Offset(0, -500),
         );
         await tester.pumpAndSettle();
@@ -677,7 +677,7 @@ void main() {
       final aupTile = find.byKey(WidgetKeys.acceptableUsePolicy);
       await tester.dragUntilVisible(
         aupTile,
-        find.byKey(WidgetKeys.moreTapListContent),
+        find.byKey(WidgetKeys.scrollList),
         const Offset(0, -500),
       );
       expect(aupTile, findsOne);

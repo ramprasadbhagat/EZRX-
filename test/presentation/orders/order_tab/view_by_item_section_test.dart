@@ -18,7 +18,7 @@ import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/view_by_item_local.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
-import 'package:ezrxmobile/presentation/core/market_place/market_place_icon.dart';
+import 'package:ezrxmobile/presentation/core/market_place/market_place_logo.dart';
 import 'package:ezrxmobile/presentation/core/no_record.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
 import 'package:ezrxmobile/presentation/core/queue_number_info_icon.dart';
@@ -438,7 +438,7 @@ void main() {
       expect(
         find.descendant(
           of: historyTile,
-          matching: find.byType(MarketPlaceIcon),
+          matching: find.byType(MarketPlaceLogo),
         ),
         findsOneWidget,
       );

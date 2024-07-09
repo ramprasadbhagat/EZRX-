@@ -1,10 +1,17 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
+import 'package:ezrxmobile/presentation/core/switch_widget.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
+import 'package:ezrxmobile/presentation/returns/new_request/widgets/bonus_material_info.dart';
+import 'package:ezrxmobile/presentation/returns/new_request/widgets/material_info_widget.dart';
+
 import 'package:flutter_test/flutter_test.dart';
 
-class NewReturnStep2Robot {
-  final WidgetTester tester;
-  NewReturnStep2Robot(this.tester);
+import '../../../common/common_robot.dart';
+
+class NewReturnStep2Robot extends CommonRobot {
+  NewReturnStep2Robot(super.tester);
+
   final newRequestStep2ItemImage =
       find.byKey(WidgetKeys.newRequestStep2ItemImage);
   final newRequestStep2ItemproductImage = find.byKey(WidgetKeys.productImage);
@@ -14,24 +21,19 @@ class NewReturnStep2Robot {
       find.byKey(WidgetKeys.newRequestStep2DetailsSection);
   final newRequestStep2BonusItemSection =
       find.byKey(WidgetKeys.bonusItemSection);
-  Finder newRequestStep2BalanceQuantityTextField(uuid) =>
+  Finder returnQtyField(uuid) =>
       find.byKey(WidgetKeys.returnQuantityField(uuid));
   Finder bonusQuantityField(uuid) =>
       find.byKey(WidgetKeys.bonusQuantityField(uuid));
-  Finder materialQuantityField(uuid) =>
-      find.byKey(WidgetKeys.materialQuantityField(uuid));
   final nextButton = find.byKey(WidgetKeys.nextButton);
   final newRequestStep2ReasonDropdown =
       find.byKey(WidgetKeys.newRequestStep2ReasonDropdown);
-  Finder newRequestStepsDropdownItem(option) =>
-      find.byKey(WidgetKeys.newRequestStepsDropdownItem(option));
   final newRequestStep2RemoveIcon =
       find.byKey(WidgetKeys.newRequestStep2RemoveIcon);
   final confirmBottomSheetConfirmButton =
       find.byKey(WidgetKeys.confirmBottomSheetConfirmButton);
-  final materialReturnDetailsSection =
-      find.byKey(WidgetKeys.materialReturnDetailsSection);
-  final bonusItemSection = find.byKey(WidgetKeys.bonusItemSection);
+  final includeBonusButton = find.byKey(WidgetKeys.toggleIncludeBonusButton);
+  late Finder _verifyingItem;
 
   void verifyReturnDetailDisplayed(String materialNumber, String materialName) {
     expect(find.text(materialNumber), findsAtLeastNWidgets(1));
@@ -55,61 +57,99 @@ class NewReturnStep2Robot {
     expect(newRequestStep2BonusItemSection, findsWidgets);
   }
 
-  bool _hasBonusSection(String uuid) {
-    return tester.widgetList(bonusQuantityField(uuid)).isNotEmpty;
+  List<String> getBonusUUIDList(String uuid) {
+    final material = find.byKey(WidgetKeys.returnRequestMaterialCard(uuid));
+    final bonuses = tester
+        .widget<MaterialInfoWidget>(
+          find.descendant(
+            of: material,
+            matching: find.byType(MaterialInfoWidget),
+          ),
+        )
+        .data
+        .bonusItems;
+
+    return bonuses.map((e) => e.uuid).toList();
   }
 
-  Future<void> _dragTo(Finder finder) async {
-    await tester.dragUntilVisible(
-      finder,
-      find.byKey(
-        WidgetKeys.returnDetailsListView,
-      ),
-      const Offset(0, -200),
+  bool _bonusIncluded(String uuid) {
+    final switchButton = find.descendant(
+      of: find.byKey(WidgetKeys.returnRequestMaterialCard(uuid)),
+      matching: includeBonusButton,
     );
+
+    return tester.widgetList<SwitchWidget>(switchButton).firstOrNull?.value ??
+        false;
+  }
+
+  Future<void> startVerifyItem(String uuid, {bool reversed = false}) async {
+    _verifyingItem = find.byKey(WidgetKeys.returnRequestMaterialCard(uuid));
+    await scrollEnsureFinderVisible(_verifyingItem, reversed: reversed);
+  }
+
+  void verifyMaterialBatchExpiryDate(StockInfo stockInfo) => verifyStockInfo(
+        stockInfo,
+        find.descendant(
+          of: _verifyingItem,
+          matching: find.byType(MaterialInfoWidget),
+        ),
+      );
+
+  Future<void> startVerifyBonusItem(String bonusUuid) async {
+    _verifyingItem = find.byKey(WidgetKeys.returnRequestBonusCard(bonusUuid));
+    await scrollEnsureFinderVisible(_verifyingItem);
+  }
+
+  Future<void> tapIncludeBonus() async {
+    final switchButton = find.descendant(
+      of: _verifyingItem,
+      matching: includeBonusButton,
+    );
+    await tester.tap(switchButton);
     await tester.pumpAndSettle();
   }
 
+  void verifyBonusBatchExpiryDate(StockInfo stockInfo) => verifyStockInfo(
+        stockInfo,
+        find.descendant(
+          of: _verifyingItem,
+          matching: find.byType(BonusMaterialInfo),
+        ),
+      );
+
   Future<void> enterReturnQuantity(String returnQuantity, String uuid) async {
-    final materialTextField = find.descendant(
-      of: materialQuantityField(uuid),
-      matching: newRequestStep2BalanceQuantityTextField(uuid),
-    );
-    await _dragTo(materialTextField);
-    if (!_hasBonusSection(uuid)) {
-      await tester.enterText(materialTextField, returnQuantity);
+    final materialTextField = returnQtyField(uuid);
+    await scrollEnsureFinderVisible(materialTextField);
+    await tester.tap(materialTextField);
+    await tester.enterText(materialTextField, returnQuantity);
+    await tester.testTextInput.receiveAction(TextInputAction.done);
+    await tester.pumpAndSettle();
+    if (!_bonusIncluded(uuid)) return;
+    for (final bonusUUID in getBonusUUIDList(uuid)) {
+      final bonusTextField = returnQtyField(bonusUUID);
+      await scrollEnsureFinderVisible(bonusTextField);
+      await tester.tap(bonusTextField);
+      await tester.enterText(bonusTextField, returnQuantity);
       await tester.testTextInput.receiveAction(TextInputAction.done);
       await tester.pumpAndSettle();
-      return;
-    } else {
-      final bonusTextField = find.descendant(
-        of: bonusQuantityField(uuid),
-        matching: newRequestStep2BalanceQuantityTextField(uuid),
-      );
-      await tester.enterText(materialTextField, returnQuantity);
-      await tester.pumpAndSettle();
-      await _dragTo(bonusTextField);
-      await tester.enterText(bonusTextField, returnQuantity);
-      await tester.pumpAndSettle();
-      await _dragTo(materialTextField);
-      return;
     }
+    await scrollEnsureFinderVisible(materialTextField, reversed: true);
   }
 
   Future<void> selectReturnType(String returnType, String uuid) async {
     final materialReturnType = find.byKey(WidgetKeys.selectByRadio(returnType));
-    await _dragTo(materialReturnType);
-    if (!_hasBonusSection(uuid)) {
+    await scrollEnsureFinderVisible(materialReturnType);
+    if (!_bonusIncluded(uuid)) {
       await tester.tap(materialReturnType.first);
       await tester.pumpAndSettle();
       return;
     } else {
       await tester.tap(materialReturnType.first);
       await tester.pumpAndSettle();
-      await _dragTo(materialReturnType.last);
+      await scrollEnsureFinderVisible(materialReturnType.last);
       await tester.tap(materialReturnType.last);
       await tester.pumpAndSettle();
-      await _dragTo(materialReturnType.first);
+      await scrollEnsureFinderVisible(materialReturnType.first);
       return;
     }
   }
@@ -120,9 +160,9 @@ class NewReturnStep2Robot {
   ) async {
     final bonusTextField = find.descendant(
       of: bonusQuantityField(uuid),
-      matching: newRequestStep2BalanceQuantityTextField(uuid),
+      matching: returnQtyField(uuid),
     );
-    await _dragTo(bonusTextField);
+    await scrollEnsureFinderVisible(bonusTextField);
 
     await tester.enterText(bonusTextField, returnQuantity);
     await tester.testTextInput.receiveAction(TextInputAction.done);
@@ -135,9 +175,9 @@ class NewReturnStep2Robot {
   ) async {
     final bonusTextField = find.descendant(
       of: bonusQuantityField(uuid),
-      matching: newRequestStep2BalanceQuantityTextField(uuid),
+      matching: returnQtyField(uuid),
     );
-    await _dragTo(bonusTextField);
+    await scrollEnsureFinderVisible(bonusTextField);
 
     await tester.tap(newRequestStep2ReasonDropdown);
     await tester.pumpAndSettle();
@@ -158,34 +198,23 @@ class NewReturnStep2Robot {
   }
 
   Future<void> selectReason(String reason, String uuid) async {
-    final materialTextField = find.descendant(
-      of: materialQuantityField(uuid),
-      matching: newRequestStep2BalanceQuantityTextField(uuid),
-    );
-    if (!_hasBonusSection(uuid)) {
-      await _dragTo(materialTextField);
-      expect(newRequestStep2ReasonDropdown, findsOneWidget);
-      await tester.tap(newRequestStep2ReasonDropdown);
+    final materialDropdown = find.byKey(WidgetKeys.returnReasonDropdown(uuid));
+    await scrollEnsureFinderVisible(materialDropdown);
+    await tester.tap(materialDropdown);
+    await tester.pumpAndSettle();
+    await tester.tap(find.text(reason).last);
+    await tester.pumpAndSettle();
+    if (!_bonusIncluded(uuid)) return;
+    for (final bonusUUID in getBonusUUIDList(uuid)) {
+      final bonusTextField =
+          find.byKey(WidgetKeys.returnReasonDropdown(bonusUUID));
+      await scrollEnsureFinderVisible(bonusTextField);
+      await tester.tap(bonusTextField);
       await tester.pumpAndSettle();
-      await tester.tap(find.text(reason));
-      await tester.pumpAndSettle();
-    } else {
-      final bonusTextField = find.descendant(
-        of: bonusQuantityField(uuid),
-        matching: newRequestStep2BalanceQuantityTextField(uuid),
-      );
-      await _dragTo(materialTextField);
-      expect(newRequestStep2ReasonDropdown, findsAtLeastNWidgets(2));
-      await tester.tap(newRequestStep2ReasonDropdown.first);
-      await tester.pumpAndSettle();
-      await tester.tap(find.text(reason));
-      await tester.pumpAndSettle();
-      await _dragTo(bonusTextField);
-      await tester.tap(newRequestStep2ReasonDropdown.last);
-      await tester.pumpAndSettle();
-      await tester.tap(find.text(reason));
+      await tester.tap(find.text(reason).last);
       await tester.pumpAndSettle();
     }
+    await scrollEnsureFinderVisible(materialDropdown, reversed: true);
   }
 
   void verifyNextToStep3(String materialNumber, String materialName) {

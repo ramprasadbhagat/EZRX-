@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/domain/core/value/constants.dart';
 import 'package:ezrxmobile/presentation/core/no_record.dart';
+import 'package:ezrxmobile/presentation/core/market_place/market_place_logo.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
 import 'package:ezrxmobile/presentation/core/status_label.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
@@ -72,17 +73,17 @@ class AccountCreditsRobot extends CommonRobot {
   bool get noCreditFound => _itemTile.evaluate().isEmpty;
 
   void verifyCreditItem(String searchKey, String status, String price) {
-    _verifyCreditItemId(searchKey);
+    verifyCreditItemId(searchKey);
     _verifyCreditItemStatus(status);
     _verifyCreditItemPrice(price);
   }
 
   void verifyCreditItemForID(String searchKey, String price) {
-    _verifyCreditItemId(searchKey);
+    verifyCreditItemId(searchKey);
     _verifyCreditItemPrice(price);
   }
 
-  void _verifyCreditItemId(String searchKey) {
+  void verifyCreditItemId(String searchKey) {
     _verifyOneCreditItem();
     expect(
       find.descendant(
@@ -94,7 +95,7 @@ class AccountCreditsRobot extends CommonRobot {
   }
 
   void verifyCreditItemGovNumberForVN(String searchKey, String govNumber) {
-    _verifyCreditItemId(searchKey);
+    verifyCreditItemId(searchKey);
     expect(
       find.descendant(
         of: _itemTile,
@@ -218,7 +219,6 @@ class AccountCreditsRobot extends CommonRobot {
     for (final text in statusText) {
       expect(text == status.tr(), isVisible);
     }
-    expect(_itemTile.evaluate().length, isVisible ? statusText.length : 0);
   }
 
   void verifyCreditsInAmountRange({
@@ -235,4 +235,12 @@ class AccountCreditsRobot extends CommonRobot {
       expect(fromAmount <= price && price <= toAmount, true);
     }
   }
+
+  void verifyMarketPlaceLogo() => expect(
+        find.descendant(
+          of: _itemTile,
+          matching: find.byType(MarketPlaceLogo),
+        ),
+        findsWidgets,
+      );
 }

@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
+import 'package:ezrxmobile/presentation/core/market_place/market_place_logo.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -36,6 +37,20 @@ class OOSPreOrderRobot {
   Future<void> tapContinueButton() async {
     await tester.tap(continueButton);
     await tester.pumpAndSettle();
+  }
+
+  void verifyManufacturerLabel(String name, {bool isMarketPlace = false}) {
+    final widget = find.descendant(
+      of: bottomSheet,
+      matching: find.byKey(WidgetKeys.cartPrincipalLabel),
+    );
+    expect(find.descendant(of: widget, matching: find.text(name)), findsOne);
+    if (isMarketPlace) {
+      expect(
+        find.descendant(of: widget, matching: find.byType(MarketPlaceLogo)),
+        findsOne,
+      );
+    }
   }
 
   void verifyWarningMessage() {

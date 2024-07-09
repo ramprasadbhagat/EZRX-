@@ -921,7 +921,7 @@ void main() {
               find.byKey(WidgetKeys.returnDetailShowDetailButton);
           await tester.dragUntilVisible(
             showButtonFinder,
-            find.byKey(WidgetKeys.returnRequestDetailScrollList),
+            find.byKey(WidgetKeys.scrollList),
             const Offset(0, 1000),
           );
           await tester.pumpAndSettle();

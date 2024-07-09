@@ -1,6 +1,8 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/presentation/core/market_place/market_place_logo.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
+import 'package:ezrxmobile/presentation/orders/cart/widget/market_place_delivery_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -11,6 +13,9 @@ class OrderSuccessRobot extends CommonRobot {
   OrderSuccessRobot(super.tester);
 
   late Finder _verifyingItem;
+  final orderIdText = find.byKey(WidgetKeys.orderSuccessOrderId);
+  final zpOrderIdSection = find.byKey(WidgetKeys.orderSuccessZPOrderNumbers);
+  final mpOrderIdSection = find.byKey(WidgetKeys.orderSuccessMPOrderNumbers);
 
   void verifyPage() {
     expect(find.byKey(WidgetKeys.orderSuccess), findsOneWidget);
@@ -98,11 +103,59 @@ class OrderSuccessRobot extends CommonRobot {
   }
 
   void verifyOrderId() {
-    expect(find.byKey(WidgetKeys.orderSuccessOrderId), findsOneWidget);
+    expect(orderIdText, findsOneWidget);
+  }
+
+  void verifyMarketPlaceOrderId(int zpOrderCount, int mpOrderCount) {
+    expect(
+      find.descendant(of: zpOrderIdSection, matching: orderIdText),
+      findsNWidgets(zpOrderCount),
+    );
+    expect(
+      find.descendant(of: mpOrderIdSection, matching: orderIdText),
+      findsNWidgets(mpOrderCount),
+    );
+  }
+
+  Future<void> tapFirstZPOrderId() async {
+    await tester.tap(
+      find.descendant(of: zpOrderIdSection, matching: orderIdText).first,
+    );
+    await tester.pumpAndSettle();
+  }
+
+  Future<void> tapFirstMPOrderId() async {
+    await tester.tap(
+      find.descendant(of: mpOrderIdSection, matching: orderIdText).first,
+    );
+    await tester.pumpAndSettle();
+  }
+
+  Future<void> verifyMarketPlaceDeliveryInfo(List<String> sellers) async {
+    final widget = find.byType(MarketPlaceDeliveryExpansionTile);
+    await scrollEnsureFinderVisible(widget);
+    expect(widget, findsOne);
+    for (final text in sellers) {
+      await verifySellerNameText(text, widget);
+    }
   }
 
   Future<void> verifyOrderSummarySection() => scrollEnsureFinderVisible(
         find.byKey(WidgetKeys.orderSuccessOrderSummarySection),
+      );
+
+  Future<void> verifyMPSubTotal(String price) => scrollEnsureFinderVisible(
+        find.descendant(
+          of: find.byKey(WidgetKeys.checkoutSummaryMPSubTotal),
+          matching: find.text(price, findRichText: true),
+        ),
+      );
+
+  Future<void> verifyZPSubTotal(String price) => scrollEnsureFinderVisible(
+        find.descendant(
+          of: find.byKey(WidgetKeys.checkoutSummaryZPSubTotal),
+          matching: find.text(price, findRichText: true),
+        ),
       );
 
   Future<void> verifySubTotal(String price) => scrollEnsureFinderVisible(
@@ -149,12 +202,31 @@ class OrderSuccessRobot extends CommonRobot {
     expect(tester.widget<Text>(label).data, contains(qty.toString()));
   }
 
-  Future<void> startVerifyMaterial({required int index}) async {
-    final materialSection = find.byKey(WidgetKeys.orderSuccessZPItemsSection);
+  Future<void> verifyMarketPlaceSection() async {
+    final sectionTitle = find.byKey(WidgetKeys.cartMPProductSectionLabel);
+    await scrollEnsureFinderVisible(sectionTitle);
+    expect(sectionTitle, findsOne);
+  }
+
+  Future<void> verifySellerName(String text) => verifySellerNameText(
+        text,
+        find.byKey(WidgetKeys.orderSuccessMPItemsSection),
+      );
+
+  Future<void> startVerifyMaterial({
+    required int index,
+    bool isMarketPlace = false,
+  }) async {
+    final materialSection = find.byKey(
+      isMarketPlace
+          ? WidgetKeys.orderSuccessMPItemsSection
+          : WidgetKeys.orderSuccessZPItemsSection,
+    );
     await scrollEnsureFinderVisible(materialSection);
-    await tester.pumpUntilVisible(_material(index));
-    await scrollEnsureFinderVisible(_material(index));
-    _verifyingItem = _material(index);
+    final material =
+        find.descendant(of: materialSection, matching: _material(index));
+    await scrollEnsureFinderVisible(material);
+    _verifyingItem = material;
   }
 
   void verifyMaterialNumber(
@@ -272,6 +344,16 @@ class OrderSuccessRobot extends CommonRobot {
   Future<void> startVerifyBundle(String bundleNumber) async {
     await scrollEnsureFinderVisible(_bundle(bundleNumber));
     _verifyingItem = _bundle(bundleNumber);
+  }
+
+  void verifyBundleMarketPlaceLogo() {
+    expect(
+      find.descendant(
+        of: _verifyingItem,
+        matching: find.byType(MarketPlaceLogo),
+      ),
+      findsOneWidget,
+    );
   }
 
   void verifyBundleRate(int qty, String rate) {

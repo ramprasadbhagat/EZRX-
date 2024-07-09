@@ -1,13 +1,15 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/presentation/core/balance_text_row.dart';
 import 'package:ezrxmobile/presentation/core/common_tile_item.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-class AccountCreditDetailsRobot {
-  final WidgetTester _tester;
-  AccountCreditDetailsRobot(this._tester);
+import '../../../common/common_robot.dart';
+
+class AccountCreditDetailsRobot extends CommonRobot {
+  AccountCreditDetailsRobot(super.tester);
 
   //Finder
   final Finder _itemDetailsTile = find.byKey(WidgetKeys.creditDetailsTile);
@@ -19,8 +21,8 @@ class AccountCreditDetailsRobot {
   }
 
   Future<void> tapCloseButton() async {
-    await _tester.tap(find.byKey(WidgetKeys.closeButton));
-    await _tester.pumpAndSettle();
+    await tester.tap(find.byKey(WidgetKeys.closeButton));
+    await tester.pumpAndSettle();
   }
 
   void verifyCreditDetailId(String searchKey) {
@@ -155,23 +157,24 @@ class AccountCreditDetailsRobot {
   }
 
   Future<void> tapDownLoadECreditButton() async {
-    await _tester.tap(_downloadECreditButton);
-    await _tester.pumpAndSettle();
+    await tester.tap(_downloadECreditButton);
+    await tester.pumpAndSettle();
   }
 
   Future<void> verifyReturnMaterial(
     String materialNumber,
     int quantity,
     String unitPrice,
-    String totalPrice,
-  ) async {
+    String totalPrice, {
+    StockInfo? stockInfo,
+  }) async {
     final returnMaterialFinder = find.byWidgetPredicate(
       (widget) =>
           widget is CommonTileItem &&
           widget.label == materialNumber &&
           widget.quantity == quantity.toString(),
     );
-    await _scrollDown(returnMaterialFinder);
+    await scrollEnsureFinderVisible(returnMaterialFinder);
     expect(
       returnMaterialFinder,
       findsAtLeastNWidgets(1),
@@ -190,6 +193,9 @@ class AccountCreditDetailsRobot {
       ),
       findsAtLeastNWidgets(1),
     );
+    if (stockInfo != null) {
+      verifyStockInfo(stockInfo, returnMaterialFinder);
+    }
   }
 
   Future<void> verifyFreeMaterial(
@@ -204,7 +210,7 @@ class AccountCreditDetailsRobot {
           widget.label == materialNumber &&
           widget.quantity == quantity.toString(),
     );
-    await _scrollDown(returnMaterialFinder);
+    await scrollEnsureFinderVisible(returnMaterialFinder);
     expect(
       returnMaterialFinder,
       findsAtLeastNWidgets(1),
@@ -232,15 +238,12 @@ class AccountCreditDetailsRobot {
             widget.text.toPlainText().contains(price),
       );
 
-  Future<void> _scrollDown(
-    Finder finder,
-  ) async {
-    await _tester.dragUntilVisible(
-      finder,
-      find.byKey(WidgetKeys.scrollList),
-      const Offset(0, -100),
-    );
-    expect(finder, findsOneWidget);
-    await _tester.pump();
+  Future<void> verifyMarketPlaceSection() async {
+    final section = find.byKey(WidgetKeys.cartMPProductSectionLabel);
+    await scrollEnsureFinderVisible(section);
+    expect(section, findsOne);
   }
+
+  Future<void> verifyMarketPlaceSeller(String name) =>
+      verifySellerNameText(name, find.byKey(WidgetKeys.scrollList));
 }

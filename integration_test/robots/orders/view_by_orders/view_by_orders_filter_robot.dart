@@ -33,6 +33,26 @@ class ViewByOrdersFilterRobot {
     );
   }
 
+  void verifyOrderTypeFilter({bool isVisible = true}) {
+    expect(
+      find.byKey(WidgetKeys.filterRadioTile('All', true)),
+      isVisible ? findsOne : findsNothing,
+    );
+    expect(
+      find.byKey(WidgetKeys.filterRadioTile('ZP orders', false)),
+      isVisible ? findsOne : findsNothing,
+    );
+    expect(
+      find.byKey(WidgetKeys.filterRadioTile('MP orders', false)),
+      isVisible ? findsOne : findsNothing,
+    );
+  }
+
+  Future<void> tapOrderTypeFilter(String type) async {
+    await tester.tap(find.byKey(WidgetKeys.filterRadioTile(type, false)));
+    await tester.pumpAndSettle();
+  }
+
   void verifyApplyButtonVisible() {
     expect(applyButton, findsOneWidget);
   }

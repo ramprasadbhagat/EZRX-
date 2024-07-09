@@ -22,6 +22,7 @@ class _ReturnMaterialWidget extends StatelessWidget {
       padding: const EdgeInsets.all(16),
       margin: const EdgeInsets.only(top: 12),
       child: Column(
+        key: WidgetKeys.returnRequestMaterialCard(item.uuid),
         children: [
           if (item.displayOutSidePolicy(
             context

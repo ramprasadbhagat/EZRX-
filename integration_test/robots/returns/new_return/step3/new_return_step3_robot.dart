@@ -1,11 +1,17 @@
+import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
+import 'package:ezrxmobile/presentation/returns/new_request/tabs/return_review_tab/return_review_tab.dart';
+import 'package:ezrxmobile/presentation/returns/new_request/widgets/bonus_material_info.dart';
+import 'package:ezrxmobile/presentation/returns/new_request/widgets/material_info_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-class NewReturnStep3Robot {
-  final WidgetTester tester;
-  NewReturnStep3Robot(this.tester);
+import '../../../common/common_robot.dart';
 
+class NewReturnStep3Robot extends CommonRobot {
+  NewReturnStep3Robot(super.tester);
+
+  final page = find.byType(ReturnReviewTab);
   final submitButton = find.byKey(WidgetKeys.submitButton);
   final returnReferenceField = find.byKey(WidgetKeys.returnReferenceField);
   final specialInstructionsField =
@@ -17,12 +23,13 @@ class NewReturnStep3Robot {
       find.byKey(WidgetKeys.newRequestSuccessMessage);
   final newReturnBonusDetailsCard =
       find.byKey(WidgetKeys.newReturnBonusDetailsCard);
+  late Finder _verifyingItem;
 
   void verifyStep3Visible() {
     expect(returnReferenceField, findsOneWidget);
     expect(specialInstructionsField, findsOneWidget);
     expect(submitButton, findsOneWidget);
-    expect(newRequestStep3MaterialDetail, findsOneWidget);
+    expect(newRequestStep3MaterialDetail, findsWidgets);
     expect(returnFor, findsOneWidget);
   }
 
@@ -58,4 +65,36 @@ class NewReturnStep3Robot {
         .toPlainText();
     expect(grandTotalSuccessPage, equals(grandTotal));
   }
+
+  Future<void> startVerifyItem(String uuid) async {
+    _verifyingItem = find.descendant(
+      of: page,
+      matching: find.byKey(WidgetKeys.returnRequestMaterialCard(uuid)),
+    );
+    await scrollEnsureFinderVisible(_verifyingItem);
+  }
+
+  void verifyMaterialBatchExpiryDate(StockInfo stockInfo) => verifyStockInfo(
+        stockInfo,
+        find.descendant(
+          of: _verifyingItem,
+          matching: find.byType(MaterialInfoWidget),
+        ),
+      );
+
+  Future<void> startVerifyBonusItem(String bonusUuid) async {
+    _verifyingItem = find.descendant(
+      of: page,
+      matching: find.byKey(WidgetKeys.returnRequestBonusCard(bonusUuid)),
+    );
+    await scrollEnsureFinderVisible(_verifyingItem);
+  }
+
+  void verifyBonusBatchExpiryDate(StockInfo stockInfo) => verifyStockInfo(
+        stockInfo,
+        find.descendant(
+          of: _verifyingItem,
+          matching: find.byType(BonusMaterialInfo),
+        ),
+      );
 }

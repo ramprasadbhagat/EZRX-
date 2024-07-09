@@ -7,6 +7,9 @@ CLIENTUSERPAYMENT := 'client_user/client_user_payment.dart'
 CLIENTUSERRETURN := 'client_user/client_user_return.dart'
 EXTERNALSALESREPORDER := 'external_sales_rep/external_sales_rep_user_order.dart'
 EXTERNALSALESREPRETURN := 'external_sales_rep/external_sales_rep_user_return.dart'
+MARKETPLACEUSERORDER := 'market_place_user/market_place_user_order.dart'
+MARKETPLACEUSERPAYMENT := 'market_place_user/market_place_user_payment.dart'
+MARKETPLACEUSERRETURN := 'market_place_user/market_place_user_return.dart'
 SALESORGCONFIG := 'reset_sales_org_config.sh'
 
 clean_ios:
@@ -107,6 +110,12 @@ run_my_external_order_test:
 	@fvm flutter drive --flavor uat --driver=test_driver/integration_driver.dart --target=integration_test/my/${EXTERNALSALESREPORDER}
 run_my_external_return_test:
 	@fvm flutter drive --flavor uat --driver=test_driver/integration_driver.dart --target=integration_test/my/${EXTERNALSALESREPRETURN}
+run_my_market_place_order_test:
+	@fvm flutter drive --flavor uat --driver=test_driver/integration_driver.dart --target=integration_test/my/${MARKETPLACEUSERORDER}
+run_my_market_place_return_test:
+	@fvm flutter drive --flavor uat --driver=test_driver/integration_driver.dart --target=integration_test/my/${MARKETPLACEUSERRETURN}
+run_my_market_place_payment_test:
+	@fvm flutter drive --flavor uat --driver=test_driver/integration_driver.dart --target=integration_test/my/${MARKETPLACEUSERPAYMENT} 
 run_ph_payment_summary_client_test:
 	@fvm flutter drive --flavor uat --driver=test_driver/integration_driver.dart --target=integration_test/ph/payments/payment_summary/${CLIENTUSER}
 run_ph_client_order_test:

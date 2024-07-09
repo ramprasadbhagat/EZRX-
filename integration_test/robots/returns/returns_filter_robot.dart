@@ -37,6 +37,26 @@ abstract class ReturnsFilterRobot {
     }
   }
 
+  void verifyReturnTypeFilter({bool isVisible = true}) {
+    expect(
+      find.byKey(WidgetKeys.filterRadioTile('All', true)),
+      isVisible ? findsOne : findsNothing,
+    );
+    expect(
+      find.byKey(WidgetKeys.filterRadioTile('ZP items', false)),
+      isVisible ? findsOne : findsNothing,
+    );
+    expect(
+      find.byKey(WidgetKeys.filterRadioTile('MP items', false)),
+      isVisible ? findsOne : findsNothing,
+    );
+  }
+
+  Future<void> tapReturnTypeFilter(String type) async {
+    await tester.tap(find.byKey(WidgetKeys.filterRadioTile(type, false)));
+    await tester.pumpAndSettle();
+  }
+
   Future<void> enterFromAmount(String text) async {
     await tester.tap(fromAmountFilter);
     await tester.pump();

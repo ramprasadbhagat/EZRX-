@@ -340,8 +340,7 @@ void main() {
         WidgetKeys.loaderImage,
       );
       expect(loaderImage, findsOneWidget);
-      final viewByOrderDetailsPageListView =
-          find.byKey(WidgetKeys.invoiceDetailsPageListView);
+      final viewByOrderDetailsPageListView = find.byKey(WidgetKeys.scrollList);
       expect(viewByOrderDetailsPageListView, findsNothing);
     });
 
@@ -369,8 +368,7 @@ void main() {
       );
       expect(loaderImage, findsNothing);
 
-      final viewByOrderDetailsPageListView =
-          find.byKey(WidgetKeys.invoiceDetailsPageListView);
+      final viewByOrderDetailsPageListView = find.byKey(WidgetKeys.scrollList);
       expect(viewByOrderDetailsPageListView, findsOneWidget);
     });
 
@@ -390,7 +388,7 @@ void main() {
 
       await getWidget(tester);
       await tester.pump();
-      expect(find.byKey(WidgetKeys.invoiceDetailsPageListView), findsOneWidget);
+      expect(find.byKey(WidgetKeys.scrollList), findsOneWidget);
       expect(find.byType(InvoiceDetailsSection), findsOneWidget);
       expect(find.byType(OrderNumberSection), findsOneWidget);
       expect(find.textContaining('Order number'), findsOneWidget);
@@ -411,7 +409,7 @@ void main() {
 
       await getWidget(tester);
       await tester.pumpAndSettle();
-      expect(find.byKey(WidgetKeys.invoiceDetailsPageListView), findsOneWidget);
+      expect(find.byKey(WidgetKeys.scrollList), findsOneWidget);
       expect(find.byType(InvoiceDetailsSection), findsOneWidget);
       expect(find.byType(OrderNumberSection), findsOneWidget);
       expect(find.textContaining('Order number'), findsOneWidget);
@@ -540,7 +538,7 @@ void main() {
           ),
         ).called(1);
         expect(
-          find.byKey(WidgetKeys.invoiceDetailsPageListView),
+          find.byKey(WidgetKeys.scrollList),
           findsOneWidget,
         );
         expect(find.byType(InvoiceSummary), findsOneWidget);
@@ -742,7 +740,7 @@ void main() {
             Key(invoiceDetail.batchNumber.getOrDefaultValue('')),
           ),
           find.byKey(
-            WidgetKeys.invoiceDetailsPageListView,
+            WidgetKeys.scrollList,
           ),
           const Offset(0.0, -500),
         );
@@ -875,7 +873,7 @@ void main() {
             Key(invoiceDetail.batchNumber.getOrDefaultValue('')),
           ),
           find.byKey(
-            WidgetKeys.invoiceDetailsPageListView,
+            WidgetKeys.scrollList,
           ),
           const Offset(0.0, -1000),
         );
@@ -948,7 +946,7 @@ void main() {
       );
       await getWidget(tester, isMarketPlace: true);
       await tester.pumpAndSettle();
-      final scrollList = find.byKey(WidgetKeys.invoiceDetailsPageListView);
+      final scrollList = find.byKey(WidgetKeys.scrollList);
       final mpLogo = find.byType(MarketPlaceTitleWithLogo);
       await tester.dragUntilVisible(
         mpLogo,

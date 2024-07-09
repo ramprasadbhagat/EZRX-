@@ -1,4 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/presentation/core/balance_text_row.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/orders/order_tab/view_by_order_details/section/view_by_order_summary_section.dart';
@@ -195,6 +196,9 @@ class ViewByOrdersDetailRobot extends CommonRobot {
         ),
         findsOneWidget,
       );
+
+  void verifyBatchExpiryDate(StockInfo stockInfo) =>
+      verifyStockInfo(stockInfo, _verifyingItem);
 
   Future<void> startVerifyBundle(String bundleNumber) async {
     final bundle = find.byKey(WidgetKeys.cartItemBundleTile(bundleNumber));

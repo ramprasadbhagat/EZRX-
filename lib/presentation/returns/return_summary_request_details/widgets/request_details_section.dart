@@ -237,6 +237,7 @@ class _ROSection extends StatelessWidget {
               borderRadius: BorderRadius.all(Radius.circular(8)),
               color: ZPColors.lightRedStatusColor,
             ),
+            key: WidgetKeys.returnRequestROCreationFailedMessage,
             child: Text(
               'RO creation for at least one material has failed. Please recreate your return request to proceed.'
                   .tr(),

@@ -57,7 +57,7 @@ class ReturnRequestDetails extends StatelessWidget {
                     ),
                   )
                 : ListView(
-                    key: WidgetKeys.returnRequestDetailScrollList,
+                    key: WidgetKeys.scrollList,
                     children: [
                       RequestDetailsSection(
                         requestInformation: state.requestInformation,

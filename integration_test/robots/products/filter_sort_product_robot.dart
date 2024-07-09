@@ -183,4 +183,9 @@ class FilterSortProductRobot extends CommonRobot {
     verifyRadioSort('Price: High to low', false);
     verifyFilterManufacturerVisible();
   }
+
+  void verifyMarketPlaceFilter({bool isVisible = true}) => expect(
+        find.byKey(WidgetKeys.showProductCheckbox('Marketplace items')),
+        isVisible ? findsOneWidget : findsNothing,
+      );
 }

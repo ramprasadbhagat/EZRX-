@@ -20,7 +20,11 @@ class _CartPageInfoLabel extends StatelessWidget {
                 ),
                 child: Column(
                   children: [
-                    if (state.displayMovWarning) _MOVText(state: state),
+                    if (state.displayMovWarning)
+                      _MOVText(
+                        key: WidgetKeys.cartMOVMessage,
+                        state: state,
+                      ),
                     if (state.displayInvalidItemsWarning)
                       _ErrorText(
                         text: context.tr(
@@ -89,6 +93,7 @@ class _MOVText extends StatelessWidget {
   final OrderEligibilityState state;
   const _MOVText({
     required this.state,
+    super.key,
   });
 
   @override

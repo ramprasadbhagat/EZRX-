@@ -40,7 +40,7 @@ class PaymentMethodTab extends StatelessWidget {
           .read<NewPaymentBloc>()
           .add(const NewPaymentEvent.fetchAvailablePaymentMethods()),
       child: ListView(
-        key: WidgetKeys.paymentMethodListView,
+        key: WidgetKeys.scrollList,
         children: [
           if (!saleOrg.isID) const _NoteAnnouncement(),
           DetailsInfoSection(

@@ -33,7 +33,9 @@ class _AmountFromFilterState extends State<AmountFromFilter> {
   void didUpdateWidget(covariant AmountFromFilter oldWidget) {
     if (oldWidget.amountFrom != widget.amountFrom &&
         widget.amountFrom.isEmpty) {
-      controller.clear();
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        controller.clear();
+      });
     }
     super.didUpdateWidget(oldWidget);
   }

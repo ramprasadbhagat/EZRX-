@@ -25,6 +25,20 @@ class OrderPriceSummaryRobot {
     await tester.pumpAndSettle();
   }
 
+  void verifyMPSubTotalLabel(String price, {bool isVisible = true}) =>
+      _verifyPriceLabel(
+        find.byKey(WidgetKeys.checkoutSummaryMPSubTotal),
+        price,
+        isVisible: isVisible,
+      );
+
+  void verifyZPSubTotalLabel(String price, {bool isVisible = true}) =>
+      _verifyPriceLabel(
+        find.byKey(WidgetKeys.checkoutSummaryZPSubTotal),
+        price,
+        isVisible: isVisible,
+      );
+
   void verifySubTotalLabel(String price) => _verifyPriceLabel(
         find.byKey(WidgetKeys.checkoutSummarySubTotal),
         price,
@@ -56,13 +70,13 @@ class OrderPriceSummaryRobot {
     }
   }
 
-  void _verifyPriceLabel(Finder finder, String price) {
+  void _verifyPriceLabel(Finder finder, String price, {bool isVisible = true}) {
     expect(
       find.descendant(
         of: find.descendant(of: bottomSheet, matching: finder),
         matching: find.textContaining(price, findRichText: true),
       ),
-      findsOneWidget,
+      isVisible ? findsOneWidget : findsNothing,
     );
   }
 }

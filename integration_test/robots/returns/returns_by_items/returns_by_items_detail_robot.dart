@@ -1,4 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
+import 'package:ezrxmobile/presentation/core/market_place/market_place_logo.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/returns/return_summary_by_item_details/return_summary_by_item_details.dart';
 import 'package:ezrxmobile/presentation/returns/widgets/return_item_card.dart';
@@ -15,6 +17,7 @@ class ReturnsByItemsDetailRobot extends CommonRobot {
   final showDetailButtonFoBonus =
       find.byKey(WidgetKeys.returnDetailShowDetailButton);
   final _page = find.byType(ReturnRequestSummaryByItemDetails);
+  late Finder _verifyingItem;
 
   void verifyPage() {
     expect(_page, findsOneWidget);
@@ -112,17 +115,27 @@ class ReturnsByItemsDetailRobot extends CommonRobot {
   }
 
   void verifyMaterialVisible(String materialNumber, int qty, String price) {
-    expect(
-      find.byKey(
-        WidgetKeys.returnItemDetailMaterial(
-          materialNumber,
-          qty.toString(),
-          price,
-        ),
+    final material = find.byKey(
+      WidgetKeys.returnItemDetailMaterial(
+        materialNumber,
+        qty.toString(),
+        price,
       ),
-      findsOneWidget,
     );
+    _verifyingItem = material;
+    expect(_verifyingItem, findsOneWidget);
   }
+
+  void verifyMarketPlaceLogo() => expect(
+        find.descendant(
+          of: _verifyingItem,
+          matching: find.byType(MarketPlaceLogo),
+        ),
+        findsOne,
+      );
+
+  void verifyBatchExpiryDate(StockInfo stockInfo) =>
+      verifyStockInfo(stockInfo, _verifyingItem);
 
   void verifyMaterialVisibleWithBonus(
     String materialNumber,

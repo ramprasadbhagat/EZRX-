@@ -12,6 +12,7 @@ class MoreRobot extends CommonRobot {
   final profileTile = find.byKey(WidgetKeys.profileTile);
   final contactUsTile = find.byKey(WidgetKeys.contactUsTile);
   final paymentsTile = find.byKey(WidgetKeys.paymentsTile);
+  final marketplacePaymentTile = find.byKey(WidgetKeys.mpPaymentsTile);
   final newRequestFloatingButton =
       find.byKey(WidgetKeys.returnByItemsNewRequestButton);
   final paymentTile = find.byKey(WidgetKeys.paymentsTile);
@@ -20,7 +21,6 @@ class MoreRobot extends CommonRobot {
   final logout = find.byKey(WidgetKeys.logOutTile);
   final announcementArticleTile =
       find.byKey(WidgetKeys.announcementArticleTile);
-  final scrollList = find.byKey(WidgetKeys.moreTapListContent);
 
   void findReturnsTile({bool isVisible = true}) {
     expect(returnsTile, isVisible ? findsOneWidget : findsNothing);
@@ -91,7 +91,8 @@ class MoreRobot extends CommonRobot {
     expect(find.byKey(WidgetKeys.moreScreen), findsOneWidget);
   }
 
-  Future<void> verifyLoginOnBehalfTile() => _dragToVerify(loginOnBehalf);
+  Future<void> verifyLoginOnBehalfTile() =>
+      scrollEnsureFinderVisible(loginOnBehalf);
 
   Future<void> tapLoginOnBehalfTile() async {
     await tester.tap(loginOnBehalf);
@@ -99,27 +100,27 @@ class MoreRobot extends CommonRobot {
   }
 
   Future<void> verifyAnnouncementArticleTile() =>
-      _dragToVerify(announcementArticleTile);
+      scrollEnsureFinderVisible(announcementArticleTile);
 
   Future<void> tapAnnouncementArticleTile() async {
     await tester.tap(announcementArticleTile);
     await tester.pumpAndSettle();
   }
 
-  Future<void> findLogout() => _dragToVerify(logout);
+  Future<void> findLogout() => scrollEnsureFinderVisible(logout);
 
   Future<void> tapLogout() async {
     await tester.tap(logout);
     await tester.pumpAndSettle();
   }
 
-  Future<void> _dragToVerify(Finder finder) async {
-    await tester.dragUntilVisible(
-      finder,
-      find.byKey(WidgetKeys.moreTapListContent),
-      const Offset(0, -250),
-    );
-    await tester.pump();
-    expect(finder, findsOneWidget);
+  void verifyMarketPlacePaymentTile({bool isVisible = true}) => expect(
+        marketplacePaymentTile,
+        isVisible ? findsOne : findsNothing,
+      );
+
+  Future<void> tapMarketPlacePaymentTile() async {
+    await tester.tap(marketplacePaymentTile);
+    await tester.pumpAndSettle();
   }
 }

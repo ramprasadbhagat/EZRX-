@@ -40,7 +40,7 @@ class ReturnReviewTab extends StatelessWidget {
           previous.invoiceDetails != current.invoiceDetails,
       builder: (context, state) {
         return SingleChildScrollView(
-          key: WidgetKeys.returnReviewTabBodyKey,
+          key: WidgetKeys.scrollList,
           child: Padding(
             padding: const EdgeInsets.symmetric(
               horizontal: 20.0,

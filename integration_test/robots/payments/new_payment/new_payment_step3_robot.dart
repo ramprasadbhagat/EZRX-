@@ -5,14 +5,14 @@ import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+import '../../common/common_robot.dart';
 import '../../common/extension.dart';
 
-class NewPaymentStep3Robot {
-  final WidgetTester tester;
-  NewPaymentStep3Robot(this.tester);
-  final generatePaymentAdviceButton = find.byKey(
-    WidgetKeys.generatePaymentAdvice,
-  );
+class NewPaymentStep3Robot extends CommonRobot {
+  NewPaymentStep3Robot(super.tester);
+
+  final generatePaymentAdviceButton =
+      find.byKey(WidgetKeys.generatePaymentAdvice);
   final payButton = find.byKey(WidgetKeys.payButton);
   final radioPaymentGateway = find.byKey(WidgetKeys.paymentMethodRadio);
   final paymentWebviewPage = find.byKey(WidgetKeys.paymentWebviewPage);
@@ -152,12 +152,7 @@ class NewPaymentStep3Robot {
           widget is RichText &&
           widget.text.toPlainText().contains(address),
     );
-    await tester.dragUntilVisible(
-      addressWidget,
-      find.byKey(WidgetKeys.paymentMethodListView),
-      const Offset(0, -200),
-    );
-    await tester.pumpAndSettle();
+    await scrollEnsureFinderVisible(addressWidget);
     expect(
       addressWidget,
       findsOneWidget,
@@ -189,7 +184,7 @@ class NewPaymentStep3Robot {
     final firstItem = invoiceCreditTile.evaluate().length > 1
         ? invoiceCreditTile.first
         : invoiceCreditTile;
-    await _scrollUntilVisible(firstItem);
+    await scrollEnsureFinderVisible(firstItem);
     expect(
       find.descendant(
         of: firstItem,
@@ -254,14 +249,5 @@ class NewPaymentStep3Robot {
           .price,
     );
     expect(totalAmount.priceFormattedForID, invoicePrice.priceFormattedForID);
-  }
-
-  Future<void> _scrollUntilVisible(Finder finder) async {
-    await tester.dragUntilVisible(
-      finder,
-      find.byKey(WidgetKeys.paymentMethodListView),
-      const Offset(0.0, -200),
-    );
-    await tester.pump();
   }
 }

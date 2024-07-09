@@ -60,15 +60,7 @@ class _ViewByOrderItemTile extends StatelessWidget {
                               if (orderHistoryItem.isMarketPlace)
                                 Row(
                                   children: [
-                                    DecoratedBox(
-                                      decoration: BoxDecoration(
-                                        shape: BoxShape.circle,
-                                        border: Border.all(
-                                          color: ZPColors.orangeChipColor,
-                                        ),
-                                      ),
-                                      child: const MarketPlaceIcon(),
-                                    ),
+                                    MarketPlaceLogo.medium(),
                                     const SizedBox(width: 8),
                                   ],
                                 ),
@@ -145,6 +137,7 @@ class _ViewByOrderItemTile extends StatelessWidget {
                             ),
                         children: [
                           WidgetSpan(
+                            alignment: PlaceholderAlignment.middle,
                             child: orderHistoryItem.status.isInQueue
                                 ? const QueueNumberInfoIcon()
                                 : const SizedBox.shrink(),

@@ -13,7 +13,7 @@ class _ViewByOrderFilterHistoryTypePicker extends StatelessWidget {
           return ListTileTheme(
             horizontalTitleGap: 2,
             child: RadioListTile<MaterialOriginFilter>(
-              key: WidgetKeys.viewByOrderFilterRadioTitle(
+              key: WidgetKeys.filterRadioTile(
                 type.titleViewByOrder,
                 state.filter.orderHistoryType == type,
               ),

@@ -42,7 +42,6 @@ class WidgetKeys {
       Key('cancelCovidMaterialAddToCart');
   static const Key proceedCovidMaterialAddToCart =
       Key('proceedCovidMaterialAddToCart');
-  static const Key moreTapListContent = Key('moreTapListContent');
   static const closeAnnouncementBanner = Key('closeAnnouncementBanner');
   static const announcementBanner = Key('announcementBanner');
   static const Key settingTile = Key('settingTile');
@@ -181,6 +180,7 @@ class WidgetKeys {
   static Key bundleMaterialCount(String title) =>
       Key('bundleMaterialCount$title');
   static const Key availableOfferList = Key('availableOfferList');
+  static const Key exploreMarketPlaceButton = Key('exploreMarketPlaceButton');
   //============================================================
   //  MORE TAB BAR
   //============================================================
@@ -408,8 +408,6 @@ class WidgetKeys {
   static const Key itemQtyKey = Key('itemQtyKey');
   static const Key itemTotalPriceKey = Key('itemTotalPriceKey');
   static const Key itemBonusTagKey = Key('itemBonusTagKey');
-  static const Key itemBatchKey = Key('itemBatchKey');
-  static const Key itemExpiresKey = Key('itemExpiresKey');
   static const Key cannotMoveToNextStep = Key('cannotMoveToNextStep');
 
   // step2
@@ -425,6 +423,10 @@ class WidgetKeys {
       Key('newRequestStep2ReasonDropdown');
   static Key newRequestStepsDropdownItem(String option) =>
       Key('newRequestStep2ReasonDropdownItem_$option');
+  static Key returnRequestMaterialCard(String uuid) =>
+      Key('returnRequestMaterialCard$uuid');
+  static Key returnRequestBonusCard(String uuid) =>
+      Key('returnRequestBonusCard$uuid');
   static Key materialQuantityField(String uuid) =>
       Key('materialQuantityField_$uuid');
   static Key bonusQuantityField(String uuid) => Key('bonusQuantityField$uuid');
@@ -515,8 +517,6 @@ class WidgetKeys {
   //============================================================
   //  Returns by request detail
   //============================================================
-  static const Key returnRequestDetailScrollList =
-      Key('returnRequestDetailScrollList');
   static const Key returnRequestDetailSubTotal =
       Key('returnRequestDetailSubTotal');
   static const Key returnRequestDetailGrandTotal =
@@ -532,6 +532,8 @@ class WidgetKeys {
   static const Key returnSummaryInfoBottomSheet =
       Key('returnSummaryInfoBottomSheet');
   static const Key returnBonusItemCard = Key('returnBonusItemCard');
+  static const Key returnRequestROCreationFailedMessage =
+      Key('returnRequestROCreationFailedMessage');
 
   //============================================================
   //============================================================
@@ -730,6 +732,7 @@ class WidgetKeys {
   static const Key marketplaceDeliveryInfoSheet =
       Key('marketplaceDeliveryInfoSheet');
   static const Key editTenderContractButton = Key('editTenderContractButton');
+  static const Key cartMOVMessage = Key('cartMOVMessage');
 
   //============================================================
   //  Checkout Page Keys
@@ -747,7 +750,6 @@ class WidgetKeys {
       Key('poAttachmentOption$option');
   static const Key poAttachmentUploadBottomsheet =
       Key('poAttachmentUploadBottomsheet');
-  static const Key checkoutScrollList = Key('checkoutScrollList');
   static const Key checkoutDeliveryArrowButton =
       Key('checkoutDeliveryArrowButton');
   static const Key checkoutSummaryZPSubTotal = Key('checkoutSummaryZPSubTotal');
@@ -771,6 +773,8 @@ class WidgetKeys {
   static const Key bonusProductDetail = Key('bonusProductDetail');
   static Key promotionLabel(String materialNumber) =>
       Key('promotionLabel$materialNumber');
+  static const Key checkoutMaterialWithBonusItem =
+      Key('checkoutMaterialWithBonusItem');
 
   //============================================================
   //  Material List
@@ -1189,7 +1193,6 @@ class WidgetKeys {
   static const Key specialInstructionsField = Key('specialInstructionsField');
   static const Key fromInvoiceDateField = Key('fromInvoiceDateField');
   static const Key toInvoiceDateField = Key('toInvoiceDateField');
-  static const Key returnDetailsListView = Key('returnDetailsListView');
   static const Key returnItemsFilter = Key('returnItemsFilter');
   static const Key invalidSelectedReturnItemError =
       Key('invalidSelectedReturnItemError');
@@ -1197,7 +1200,6 @@ class WidgetKeys {
       Key('invalidSelectedReturnItemErrorMsg');
   static const Key toggleIncludeBonusButton = Key('toggleIncludeBonusButton');
   static const Key returnDetailsSectionKey = Key('returnDetailsSection');
-  static const Key returnReviewTabBodyKey = Key('returnReviewTabBody');
   static const Key returnBonusItemSection = Key('returnBonusItemSection');
   static const Key returnExpandableSection = Key('returnExpandableSection');
   static const Key materialBonusDetailsSection =
@@ -1301,6 +1303,8 @@ class WidgetKeys {
   //============================================================
   static const Key priceText = Key('priceText');
   static const Key checkAllWidget = Key('checkAllWidget');
+  static const Key creditGreaterThanInvoiceWarning =
+      Key('creditGreaterThanInvoiceAmountWarning');
   //step 1
   static const Key outstandingInvoicesPage = Key('outstandingInvoicesPage');
   static const Key textOutstanding = Key('textOutstanding');
@@ -1333,7 +1337,6 @@ class WidgetKeys {
   static const Key invoiceCreditItemAmount = Key('invoiceCreditItemAmount');
   static const Key bankInInstructionNote = Key('bankInInstructionNote');
   static const Key bankInfoTile = Key('bankInInfoTile');
-  static const Key paymentMethodListView = Key('paymentMethodListView');
 
   //===========================================================
   //  Account summary
@@ -1382,8 +1385,6 @@ class WidgetKeys {
   //============================================================
   static Key invoiceOrderNumber(String orderNumber) =>
       Key('invoiceOrderNumber$orderNumber');
-  static const Key invoiceDetailsPageListView =
-      Key('invoiceDetailsPageListView');
   static const Key downloadEInvoiceButton = Key('downloadEInvoiceButton');
   static const Key downloadECreditButton = Key('downloadECreditButton');
   static const Key downloadEInvoiceloadingAnimationWidget =
@@ -1515,8 +1516,6 @@ class WidgetKeys {
       Key('materialListPriceStrikeThrough');
   static const Key viewByItemsOrderDetailsReferenceNote =
       Key('viewByItemsOrderDetailsReferenceNote');
-  static Key viewByOrderFilterRadioTitle(String name, bool isSelected) =>
-      Key('viewByOrderFilterRadioTitle$name$isSelected');
   static Key viewByItemDetailOtherItemExpandSection =
       const Key('viewByItemDetailOtherItemExpandSection');
   static const Key viewByItemsOrderDetailOrderOrQueueNumber =
@@ -1718,6 +1717,7 @@ class WidgetKeys {
   static const Key privacyCheckBox = Key('privacyCheckBox');
   static const Key tncDialogAcceptButton = Key('auptcAcceptButton');
   static const Key tncDialogCancelButton = Key('tncDialogCancelButton');
+  static const Key consentAllWarningMessage = Key('consentAllWarningMessage');
 
   //============================================================
   //  EDI banner

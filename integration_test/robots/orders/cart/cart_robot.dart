@@ -2,25 +2,23 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/presentation/core/bonus_tag.dart';
 import 'package:ezrxmobile/presentation/core/custom_image.dart';
+import 'package:ezrxmobile/presentation/core/market_place/market_place_logo.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
 import 'package:ezrxmobile/presentation/core/status_label.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+import '../../common/common_robot.dart';
 import '../../common/extension.dart';
 
-class CartRobot {
-  final WidgetTester tester;
-
-  CartRobot(this.tester);
+class CartRobot extends CommonRobot {
+  CartRobot(super.tester);
 
   final cartPage = find.byKey(WidgetKeys.cartPage);
-  final scrollList = find.byKey(WidgetKeys.scrollList);
   final browseProductButton = find.byKey(WidgetKeys.startBrowsingProducts);
   final checkoutButton = find.byKey(WidgetKeys.checkoutButton);
   final clearCartButton = find.byKey(WidgetKeys.cartClearButton);
-  final defaultScrollOffset = const Offset(0, -200);
   final defaultSwipeOffset = const Offset(-100, -60);
   final swipeDeleteButton = find.byKey(WidgetKeys.cartItemSwipeDeleteButton);
   final counterOfferButton = find.byKey(WidgetKeys.counterOfferPriceButtonKey);
@@ -101,6 +99,16 @@ class CartRobot {
     await tester.pumpAndSettle();
   }
 
+  Future<void> verifyMarketPlaceSection({bool isVisible = true}) async {
+    final sectionTitle = find.byKey(WidgetKeys.cartMPProductSectionLabel);
+    if (isVisible) {
+      await scrollEnsureFinderVisible(sectionTitle);
+      expect(sectionTitle, findsOne);
+    } else {
+      expect(sectionTitle, findsNothing);
+    }
+  }
+
   void verifyManufacturerName(String text) {
     expect(
       find.descendant(
@@ -110,6 +118,9 @@ class CartRobot {
       findsOneWidget,
     );
   }
+
+  Future<void> verifySellerName(String text) =>
+      verifySellerNameText(text, find.byKey(WidgetKeys.cartMPProductSection));
 
   void verifyCheckoutButton() {
     expect(checkoutButton, findsOneWidget);
@@ -142,6 +153,40 @@ class CartRobot {
       ),
       isVisible ? findsOneWidget : findsNothing,
     );
+  }
+
+  void verifyMarketPlaceMOVWarningMessage({
+    String zpMOV = '',
+    String mpMOV = '',
+    required bool isVisible,
+  }) {
+    final textWidget = find.byKey(WidgetKeys.cartMOVMessage);
+    if (isVisible) {
+      var errorMessage = '';
+
+      if (zpMOV.isNotEmpty && mpMOV.isNotEmpty) {
+        errorMessage = tr(
+          'Please ensure that minimum order value is at least {zpMOV} for ZP subtotal & {mpMOV} for MP subtotal.',
+          namedArgs: {'zpMOV': zpMOV, 'mpMOV': mpMOV},
+        );
+      } else if (zpMOV.isNotEmpty) {
+        errorMessage = tr(
+          'Please ensure that minimum order value is at least {mov} for ZP subtotal.',
+          namedArgs: {'mov': zpMOV},
+        );
+      } else {
+        errorMessage = tr(
+          'Please ensure that minimum order value is at least {mov} for MP subtotal.',
+          namedArgs: {'mov': mpMOV},
+        );
+      }
+      expect(
+        find.descendant(of: textWidget, matching: find.text(errorMessage)),
+        findsOne,
+      );
+    } else {
+      expect(textWidget, findsNothing);
+    }
   }
 
   void verifyCartQty(int qty) {
@@ -216,10 +261,12 @@ class CartRobot {
   //  Material
   //============================================================
 
-  Future<void> verifyMaterial(String materialNumber) async {
+  Future<void> verifyMaterial(
+    String materialNumber, {
+    bool reversed = false,
+  }) async {
     final material = _materialItem(materialNumber);
-    await tester.dragUntilVisible(material, scrollList, defaultScrollOffset);
-    await tester.pump();
+    await scrollEnsureFinderVisible(material, reversed: reversed);
     expect(material, findsOneWidget);
   }
 
@@ -476,9 +523,18 @@ class CartRobot {
 
   Future<void> verifyBundle(String bundleNumber) async {
     final bundle = _bundleItem(bundleNumber);
-    await tester.dragUntilVisible(bundle, scrollList, defaultScrollOffset);
-    await tester.pump();
+    await scrollEnsureFinderVisible(bundle);
     expect(bundle, findsOneWidget);
+  }
+
+  void verifyBundleMarketPlaceLogo(String bundleNumber) {
+    expect(
+      find.descendant(
+        of: _bundleItem(bundleNumber),
+        matching: find.byType(MarketPlaceLogo),
+      ),
+      findsOneWidget,
+    );
   }
 
   void verifyBundleNumber(String bundleNumber) {
@@ -560,8 +616,7 @@ class CartRobot {
     String materialNumber,
   ) async {
     final material = _bundleMaterial(bundleNumber, materialNumber);
-    await tester.dragUntilVisible(material, scrollList, defaultScrollOffset);
-    await tester.pump();
+    await scrollEnsureFinderVisible(material);
     expect(material, findsOneWidget);
   }
 
@@ -722,8 +777,7 @@ class CartRobot {
     String bonusMaterialNumber,
   ) async {
     final bonus = _bonusItem(materialNumber, bonusMaterialNumber);
-    await tester.dragUntilVisible(bonus, scrollList, defaultScrollOffset);
-    await tester.pump();
+    await scrollEnsureFinderVisible(bonus);
     expect(bonus, findsOneWidget);
   }
 

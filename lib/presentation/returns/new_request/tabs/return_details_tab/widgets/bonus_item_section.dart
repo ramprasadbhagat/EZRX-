@@ -25,6 +25,7 @@ class _BonusItemSection extends StatelessWidget {
                     final detail = state.getReturnItemDetails(bonusItem.uuid);
 
                     return Column(
+                      key: WidgetKeys.returnRequestBonusCard(bonusItem.uuid),
                       children: [
                         _MaterialBonusInfoSection(
                           returnItem: returnItem,

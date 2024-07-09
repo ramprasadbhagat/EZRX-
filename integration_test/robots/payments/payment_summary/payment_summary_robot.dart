@@ -1,4 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/presentation/core/market_place/market_place_logo.dart';
 import 'package:ezrxmobile/presentation/core/no_record.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
@@ -105,6 +106,11 @@ class PaymentSummaryRobot {
 
   void verifyNewPaymentButtonVisible() {
     expect(newPaymentButton, findsOneWidget);
+  }
+
+  Future<void> tapNewPaymentButton() async {
+    await tester.tap(newPaymentButton);
+    await tester.pumpAndSettle();
   }
 
   void verifyNoRecordFoundVisible() {
@@ -231,8 +237,11 @@ class PaymentSummaryRobot {
     );
   }
 
-  void verifyStatusNonContains(String valueExpected) {
-    final customerCode = find.textContaining(valueExpected);
-    expect(customerCode, findsNothing);
-  }
+  void verifyMarketPlaceLogo() => expect(
+        find.descendant(
+          of: item,
+          matching: find.byType(MarketPlaceLogo),
+        ),
+        findsWidgets,
+      );
 }

@@ -471,4 +471,3 @@ class AnnouncementInfoBlocMock
     extends MockBloc<AnnouncementInfoEvent, AnnouncementInfoState>
     implements AnnouncementInfoBloc {}
 ////////////////////////////////////////////////////////////////////////////////
-

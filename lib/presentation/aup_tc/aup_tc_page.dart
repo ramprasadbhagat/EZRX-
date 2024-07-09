@@ -313,6 +313,7 @@ class AcceptButton extends StatelessWidget {
                           if (userState.isLoading) return;
                           if (!state.userConsentAll) {
                             CustomSnackBar(
+                              key: WidgetKeys.consentAllWarningMessage,
                               messageText: context.tr(
                                 'You need to read and accept full Terms of use and Privacy Policy before continue.',
                               ),

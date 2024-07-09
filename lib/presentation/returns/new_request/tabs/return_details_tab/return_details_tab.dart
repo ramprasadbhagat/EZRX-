@@ -54,7 +54,7 @@ class ReturnDetailsTab extends StatelessWidget {
           previous.selectedItems != current.selectedItems,
       builder: (context, state) {
         return ListView(
-          key: WidgetKeys.returnDetailsListView,
+          key: WidgetKeys.scrollList,
           padding: const EdgeInsets.symmetric(
             horizontal: 16,
           ),

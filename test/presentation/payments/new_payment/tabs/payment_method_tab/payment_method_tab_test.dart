@@ -209,7 +209,7 @@ void main() {
         await tester.pumpWidget(getWidget());
         await tester.pump();
         await tester.fling(
-          find.byKey(WidgetKeys.paymentMethodListView),
+          find.byKey(WidgetKeys.scrollList),
           const Offset(0.0, 300.0),
           800.0,
         );

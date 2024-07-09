@@ -33,6 +33,15 @@ parameters:
     default: false
   - name: external_sales_rep_user_return
     type: boolean
+    default: false  
+  - name: market_place_user_order
+    type: boolean
+    default: false
+  - name: market_place_user_return
+    type: boolean
+    default: false
+  - name: market_place_user_payment
+    type: boolean
     default: false
 
   - name: schedule

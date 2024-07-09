@@ -3,16 +3,18 @@ import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/presentation/core/address_info_section.dart';
 import 'package:ezrxmobile/presentation/core/bonus_tag.dart';
 import 'package:ezrxmobile/presentation/core/custom_image.dart';
+import 'package:ezrxmobile/presentation/core/market_place/market_place_logo.dart';
 import 'package:ezrxmobile/presentation/core/price_component.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/orders/cart/checkout/widgets/po_upload_attachment_section.dart';
+import 'package:ezrxmobile/presentation/orders/cart/widget/market_place_delivery_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-class CheckoutRobot {
-  final WidgetTester tester;
+import '../../common/common_robot.dart';
 
-  CheckoutRobot(this.tester);
+class CheckoutRobot extends CommonRobot {
+  CheckoutRobot(super.tester);
 
   final page = find.byKey(WidgetKeys.checkoutPage);
   final placeOrderButton = find.byKey(WidgetKeys.checkoutButton);
@@ -50,7 +52,7 @@ class CheckoutRobot {
 
   Future<void> tapDeliveryInformationArrowButton() async {
     final button = find.byKey(WidgetKeys.checkoutDeliveryArrowButton);
-    await _scrollUntilVisible(button, reversed: true);
+    await scrollEnsureFinderVisible(button, reversed: true);
     await tester.tap(button);
     await tester.pumpAndSettle();
   }
@@ -184,16 +186,31 @@ class CheckoutRobot {
     bool isVisible,
   ) async {
     if (isVisible) {
-      await _scrollUntilVisible(finder);
+      await scrollEnsureFinderVisible(finder);
     } else {
       expect(finder, findsNothing);
     }
   }
 
+  Future<void> verifyMarketPlaceDeliveryInfo(List<String> sellers) async {
+    final widget = find.byType(MarketPlaceDeliveryExpansionTile);
+    await scrollEnsureFinderVisible(widget);
+    expect(widget, findsOne);
+    for (final text in sellers) {
+      await verifySellerNameText(text, widget);
+    }
+  }
+
   Future<void> verifyYoursItemLabel(int qty) async {
     final label = find.byKey(WidgetKeys.checkoutItemsTotalQty);
-    await _scrollUntilVisible(label);
+    await scrollEnsureFinderVisible(label);
     expect(tester.widget<Text>(label).data, contains(qty.toString()));
+  }
+
+  Future<void> verifyMarketPlaceSection() async {
+    final sectionTitle = find.byKey(WidgetKeys.cartMPProductSectionLabel);
+    await scrollEnsureFinderVisible(sectionTitle);
+    expect(sectionTitle, findsOne);
   }
 
   void verifyStickyTotalQty(int qty) {
@@ -233,6 +250,18 @@ class CheckoutRobot {
         price,
       );
 
+  Future<void> verifyMPSubTotalLabel(String price) =>
+      _verifyOrderSummaryComponent(
+        find.byKey(WidgetKeys.checkoutSummaryMPSubTotal),
+        price,
+      );
+
+  Future<void> verifyZPSubTotalLabel(String price) =>
+      _verifyOrderSummaryComponent(
+        find.byKey(WidgetKeys.checkoutSummaryZPSubTotal),
+        price,
+      );
+
   Future<void> verifySmallOrderFeeLabel(String price) =>
       _verifyOrderSummaryComponent(
         find.byKey(WidgetKeys.smallOrderFeeSection),
@@ -256,7 +285,7 @@ class CheckoutRobot {
       );
 
   Future<void> _verifyOrderSummaryComponent(Finder label, String price) async {
-    await _scrollUntilVisible(label);
+    await scrollEnsureFinderVisible(label);
     expect(
       find.descendant(
         of: label,
@@ -271,7 +300,7 @@ class CheckoutRobot {
   //============================================================
 
   Future<void> verifyMaterialPrincipal(String principalName) =>
-      _scrollUntilVisible(
+      scrollEnsureFinderVisible(
         find.byWidgetPredicate(
           (widget) =>
               widget.key == WidgetKeys.cartPrincipalLabel &&
@@ -280,8 +309,13 @@ class CheckoutRobot {
         ),
       );
 
+  Future<void> verifySellerName(String text) => verifySellerNameText(
+        text,
+        find.byKey(WidgetKeys.checkoutMaterialWithBonusItem),
+      );
+
   Future<void> verifyMaterial(String materialNumber) =>
-      _scrollUntilVisible(_material(materialNumber));
+      scrollEnsureFinderVisible(_material(materialNumber));
 
   void verifyMaterialQty(String materialNumber, int qty) {
     final qtyLabel = find.descendant(
@@ -369,7 +403,7 @@ class CheckoutRobot {
   //============================================================
 
   Future<void> verifyBundle(String bundleNumber) =>
-      _scrollUntilVisible(_bundle(bundleNumber));
+      scrollEnsureFinderVisible(_bundle(bundleNumber));
 
   void verifyBundleName(String bundleNumber, String bundleName) {
     final label = find.descendant(
@@ -379,6 +413,16 @@ class CheckoutRobot {
     expect(
       tester.widget<RichText>(label).text.toPlainText(),
       contains(bundleName),
+    );
+  }
+
+  void verifyBundleMarketPlaceLogo(String bundleNumber) {
+    expect(
+      find.descendant(
+        of: _bundle(bundleNumber),
+        matching: find.byType(MarketPlaceLogo),
+      ),
+      findsOneWidget,
     );
   }
 
@@ -396,7 +440,7 @@ class CheckoutRobot {
   }
 
   Future<void> verifyBundleItem(String bundleNumber, String materialNumber) =>
-      _scrollUntilVisible(_bundleItem(bundleNumber, materialNumber));
+      scrollEnsureFinderVisible(_bundleItem(bundleNumber, materialNumber));
 
   void verifyBundleItemQty(
     String bundleNumber,
@@ -486,7 +530,7 @@ class CheckoutRobot {
     String materialNumber,
     String bonusMaterialNumber,
   ) =>
-      _scrollUntilVisible(
+      scrollEnsureFinderVisible(
         _bonusItem(materialNumber, bonusMaterialNumber),
       );
 
@@ -563,19 +607,6 @@ class CheckoutRobot {
 
   Finder _bonusItem(String materialNumber, String bonusMaterialNumber) =>
       find.byKey(WidgetKeys.cartItemBonus(materialNumber, bonusMaterialNumber));
-
-  Future<void> _scrollUntilVisible(
-    Finder finder, {
-    bool reversed = false,
-  }) async {
-    await tester.dragUntilVisible(
-      finder,
-      find.byKey(WidgetKeys.checkoutScrollList),
-      Offset(0, reversed ? 200 : -200.0),
-    );
-    expect(finder, findsOneWidget);
-    await tester.pump();
-  }
 
   void verifyPriceNotAvailableForAtLeastOneItem() {
     expect(

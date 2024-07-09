@@ -173,7 +173,7 @@ void main() {
       await tester.pumpWidget(getScopedWidget());
       await tester.pumpAndSettle();
       expect(
-        find.byKey(WidgetKeys.returnReviewTabBodyKey),
+        find.byKey(WidgetKeys.scrollList),
         findsOneWidget,
       );
       expect(
@@ -458,7 +458,7 @@ void main() {
         findsWidgets,
       );
       await tester.fling(
-        find.byKey(WidgetKeys.returnReviewTabBodyKey),
+        find.byKey(WidgetKeys.scrollList),
         const Offset(0.0, -1000.0),
         1000.0,
       );
@@ -1141,7 +1141,7 @@ void main() {
             findsOneWidget,
           );
           await tester.fling(
-            find.byKey(WidgetKeys.returnReviewTabBodyKey),
+            find.byKey(WidgetKeys.scrollList),
             const Offset(0.0, -1000.0),
             1000.0,
           );

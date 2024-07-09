@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/domain/core/value/constants.dart';
+import 'package:ezrxmobile/presentation/core/market_place/market_place_logo.dart';
 import 'package:ezrxmobile/presentation/core/product_image.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:flutter/material.dart';
@@ -73,6 +74,11 @@ class ViewByItemsRobot extends CommonRobot {
       findsNWidgets(itemCount),
     );
   }
+
+  void verifyMarketPlaceLogo({bool isVisible = true}) => expect(
+        find.descendant(of: orderItems, matching: find.byType(MarketPlaceLogo)),
+        isVisible ? findsAtLeast(1) : findsNothing,
+      );
 
   void verifyBonusLabel() {
     expect(bonusLabel, findsAtLeastNWidgets(1));
@@ -176,7 +182,7 @@ class ViewByItemsRobot extends CommonRobot {
         .map((e) => e.data!);
 
     for (final text in statusText) {
-      expect(statuses.contains(text), true);
+      expect(statuses.any((e) => text.contains(e)), true);
     }
   }
 

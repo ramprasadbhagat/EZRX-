@@ -62,6 +62,7 @@ class _NewPaymentFooter extends StatelessWidget {
                   ),
                 if (state.negativeAmount)
                   InfoLabel(
+                    key: WidgetKeys.creditGreaterThanInvoiceWarning,
                     margin: EdgeInsets.zero,
                     mainColor: ZPColors.errorSnackBarColor,
                     textValue: context.tr(

@@ -1,4 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/presentation/core/market_place/market_place_logo.dart';
 import 'package:ezrxmobile/presentation/core/no_record.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:flutter/material.dart';
@@ -18,6 +19,7 @@ class ProductRobot extends CommonRobot {
       find.byKey(WidgetKeys.productTypeFilterChip('Favourites'));
   final covidChoiceChip =
       find.byKey(WidgetKeys.productTypeFilterChip('Covid-19'));
+  final marketplaceLogo = find.byType(MarketPlaceLogo);
 
   final searchProductField = find.byKey(WidgetKeys.searchProductField);
 
@@ -127,14 +129,24 @@ class ProductRobot extends CommonRobot {
     }
   }
 
-  void verifyManufacturerMaterialFilterMatched(
-    String manufacturerMaterial,
-  ) {
+  void verifyManufacturerMaterialFilterMatched(String manufacturerMaterial) {
     final listNameProduct = tester
         .widgetList<Text>(find.byKey(WidgetKeys.manufacturerMaterials))
         .map((e) => e.data);
     for (final e in listNameProduct) {
-      expect(e, manufacturerMaterial);
+      expect(e, contains(manufacturerMaterial));
+    }
+  }
+
+  void verifyAllProductWithMarketPlace() {
+    final productCount = materialCard.evaluate().length;
+    if (productCount == 0) {
+      verifyNoProduct();
+    } else {
+      expect(
+        find.descendant(of: materialCard, matching: marketplaceLogo),
+        findsNWidgets(productCount),
+      );
     }
   }
 

@@ -36,7 +36,7 @@ class MoreTab extends StatelessWidget {
         key: WidgetKeys.moreScreen,
         currentPath: const MoreTabRoute().path,
         child: ListView(
-          key: WidgetKeys.moreTapListContent,
+          key: WidgetKeys.scrollList,
           children: [
             const ProfileTile(),
             const SizedBox(height: 10),

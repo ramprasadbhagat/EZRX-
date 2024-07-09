@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/domain/core/value/constants.dart';
+import 'package:ezrxmobile/presentation/core/market_place/market_place_rectangle_logo.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -106,6 +107,14 @@ class ReturnsByRequestRobot {
       findsAtLeastNWidgets(1),
     );
   }
+
+  void verifyMarketPlaceLogo({bool isVisible = true}) => expect(
+        find.descendant(
+          of: item,
+          matching: find.byType(MarketPlaceRectangleLogo),
+        ),
+        isVisible ? findsWidgets : findsNothing,
+      );
 
   void verifyReturnGroupInDateRangeVisible({
     required DateTime fromDate,

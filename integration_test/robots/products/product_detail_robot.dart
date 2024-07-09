@@ -1,5 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/presentation/core/status_label.dart';
+import 'package:ezrxmobile/presentation/core/market_place/market_place_logo.dart';
+import 'package:ezrxmobile/presentation/core/market_place/market_place_rectangle_logo.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/products/available_offers/show_offer_dialog_widget.dart';
 import 'package:ezrxmobile/presentation/products/product_details/product_details_page.dart';
@@ -130,6 +132,9 @@ class ProductDetailRobot extends CommonRobot {
   void verifyProductFavoriteIconDisplayed() {
     expect(find.byKey(WidgetKeys.favoritesIcon).first, findsOneWidget);
   }
+
+  void verifyMarketPlaceLogo() =>
+      expect(find.byType(MarketPlaceRectangleLogo), findsOneWidget);
 
   void verifyProductNameDisplayed() {
     expect(
@@ -315,6 +320,11 @@ class ProductDetailRobot extends CommonRobot {
     );
   }
 
+  void verifySellerDisplayed(String value) => expect(
+        find.byKey(WidgetKeys.balanceTextRow('Sold by seller'.tr(), value)),
+        findsOneWidget,
+      );
+
   void verifyUnitOfMeasurementLabelDisplayed(String value) {
     expect(
       find.byKey(
@@ -461,9 +471,9 @@ class ProductDetailRobot extends CommonRobot {
     await tester.pumpAndSettle();
   }
 
-  Future<void> openAvailableOffers() async {
+  Future<void> openAvailableOffers({bool scrollRequired = true}) async {
     final availableOffer = find.byKey(WidgetKeys.availableOffersTile);
-    await scrollEnsureFinderVisible(availableOffer);
+    if (scrollRequired) await scrollEnsureFinderVisible(availableOffer);
     await tester.tap(availableOffer);
     await tester.pumpAndSettle();
   }
@@ -549,6 +559,14 @@ class ProductDetailRobot extends CommonRobot {
     await scrollEnsureFinderVisible(similarProduct);
     expect(relatedMaterialCard, findsWidgets);
   }
+
+  void verifyRelatedProductMPLogo() => expect(
+        find.descendant(
+          of: relatedMaterialCard,
+          matching: find.byType(MarketPlaceLogo),
+        ),
+        findsNWidgets(relatedMaterialCard.evaluate().length),
+      );
 
   Future<void> dragMaterialDetailsInfoTileDisplayed() async {
     await tester.dragUntilVisible(

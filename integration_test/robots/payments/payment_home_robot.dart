@@ -45,10 +45,15 @@ class PaymentHomeRobot extends CommonRobot {
     await tester.pumpAndSettle();
   }
 
-  Future<void> navigateToPaymentSummaryScreen() async {
-    await tester.tap(
-      find.byKey(WidgetKeys.sectionTileIcon('Payment summary'.tr())),
+  Future<void> navigateToPaymentSummaryScreen({
+    bool isMarketPlace = false,
+  }) async {
+    final section = find.byKey(
+      WidgetKeys.sectionTileIcon(
+        (isMarketPlace ? 'MP Payment summary' : 'Payment summary').tr(),
+      ),
     );
+    await tester.tap(section);
     await tester.pumpAndSettle();
   }
 

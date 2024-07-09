@@ -71,6 +71,7 @@ class _FilterList extends StatelessWidget {
     return Scrollbar(
       thumbVisibility: true,
       child: ListView(
+        key: WidgetKeys.scrollList,
         shrinkWrap: true,
         children: [
           const SizedBox(height: 12),

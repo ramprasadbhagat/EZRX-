@@ -346,7 +346,8 @@ class CartBloc extends Bloc<CartEvent, CartState> {
             final isCustomerCodeDifferent = cart.cartCustomerCode !=
                 state.customerCodeInfo.customerCodeSoldTo;
 
-            if (isCustomerCodeDifferent || isShipToCodeDifferent) {
+            if ((isCustomerCodeDifferent || isShipToCodeDifferent) &&
+                !isClosed) {
               add(const _ClearCart());
 
               return;
@@ -365,7 +366,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
                 isFetching: false,
               ),
             );
-            if (priceAggregateAddedToCartList.isNotEmpty) {
+            if (priceAggregateAddedToCartList.isNotEmpty && !isClosed) {
               add(
                 _GetDetailsProductsAddedToCart(
                   cartProducts: priceAggregateAddedToCartList,

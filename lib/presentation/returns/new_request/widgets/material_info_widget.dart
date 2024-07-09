@@ -48,25 +48,13 @@ class MaterialInfoWidget extends StatelessWidget {
             overflow: TextOverflow.ellipsis,
             key: WidgetKeys.itemTitleKey,
           ),
-          Wrap(
-            children: [
-              Text(
-                '${context.tr('Batch')}: ${data.displayBatch} - ',
-                style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                      color: ZPColors.darkGray,
-                      fontSize: 12,
-                    ),
-                key: WidgetKeys.itemBatchKey,
-              ),
-              Text(
-                '${context.tr('Expires')}: ${data.displayExpiryDate}',
-                style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                      color: ZPColors.darkGray,
-                      fontSize: 12,
-                    ),
-                key: WidgetKeys.itemExpiresKey,
-              ),
-            ],
+          Text(
+            '${context.tr('Batch')}: ${data.displayBatch} - ${context.tr('Expires')}: ${data.displayExpiryDate}',
+            style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                  color: ZPColors.darkGray,
+                  fontSize: 12,
+                ),
+            key: WidgetKeys.returnBatchAndExpires,
           ),
           ReturnItemPrice(data: data),
         ],

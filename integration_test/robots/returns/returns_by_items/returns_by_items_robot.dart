@@ -1,18 +1,18 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/domain/core/value/constants.dart';
+import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
+import 'package:ezrxmobile/presentation/core/market_place/market_place_logo.dart';
 import 'package:ezrxmobile/presentation/core/product_image.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+import '../../common/common_robot.dart';
 import '../../common/extension.dart';
 
-class ReturnsByItemsRobot {
-  final WidgetTester tester;
+class ReturnsByItemsRobot extends CommonRobot {
+  ReturnsByItemsRobot(super.tester);
 
-  ReturnsByItemsRobot(this.tester);
-
-  final searchBar = find.byKey(WidgetKeys.returnByItemsSearchBar);
   final exportReturnByItem = find.byKey(WidgetKeys.exportReturnByItem);
   final filterButton = find.byKey(WidgetKeys.returnByItemsFilterButton);
   final newRequestButton = find.byKey(WidgetKeys.returnByItemsNewRequestButton);
@@ -129,6 +129,20 @@ class ReturnsByItemsRobot {
     );
   }
 
+  void verifyMarketPlaceLogo({bool isVisible = true}) => expect(
+        find.descendant(
+          of: item,
+          matching: find.byType(MarketPlaceLogo),
+        ),
+        isVisible ? findsWidgets : findsNothing,
+      );
+
+  void verifyBatchExpiryDate({
+    required StockInfo stockInfo,
+    required int index,
+  }) =>
+      verifyStockInfo(stockInfo, item.at(index));
+
   void verifyNoRecordFoundVisible() {
     expect(item, findsNothing);
     expect(find.byKey(WidgetKeys.noRecordsFoundSearchIcon), findsOneWidget);
@@ -233,6 +247,17 @@ class ReturnsByItemsRobot {
 
   Future<void> tapFirstReturn() async {
     await tester.tap(item.first);
+    await tester.pumpAndSettle();
+  }
+
+  Future<void> tapReturnWithMaterialNumber(String materialNumber) async {
+    final materialNumberLabel = find.byWidgetPredicate(
+      (w) =>
+          w.key == WidgetKeys.commonTileItemLabel &&
+          w is Text &&
+          w.data!.contains(materialNumber),
+    );
+    await tester.tap(find.descendant(of: item, matching: materialNumberLabel));
     await tester.pumpAndSettle();
   }
 

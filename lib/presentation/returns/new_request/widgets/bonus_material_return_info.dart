@@ -3,6 +3,7 @@ import 'package:ezrxmobile/application/returns/usage_code/usage_code_bloc.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_item_details.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_material.dart';
 import 'package:ezrxmobile/presentation/core/balance_text_row.dart';
+import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/returns/new_request/widgets/bonus_material_info.dart';
 import 'package:ezrxmobile/presentation/returns/new_request/widgets/upload_file_list.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
@@ -21,6 +22,7 @@ class BonusMaterialReturnInfo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      key: WidgetKeys.returnRequestBonusCard(returnMaterial.uuid),
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         BonusMaterialInfo(

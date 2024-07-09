@@ -1,14 +1,15 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/domain/order/entities/stock_info.dart';
 import 'package:ezrxmobile/presentation/core/balance_text_row.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/payments/invoice_details/invoice_details.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-class AccountInvoiceDetailRobot {
-  final WidgetTester tester;
+import '../../../common/common_robot.dart';
 
-  AccountInvoiceDetailRobot(this.tester);
+class AccountInvoiceDetailRobot extends CommonRobot {
+  AccountInvoiceDetailRobot(super.tester);
 
   late Finder _verifyingMaterial;
 
@@ -136,16 +137,23 @@ class AccountInvoiceDetailRobot {
     );
   }
 
+  Future<void> verifyMarketPlaceSection() async {
+    final section = find.byKey(WidgetKeys.cartMPProductSectionLabel);
+    await scrollEnsureFinderVisible(section);
+    expect(section, findsOne);
+  }
+
+  Future<void> verifyMarketPlaceSeller(String name) =>
+      verifySellerNameText(name, find.byKey(WidgetKeys.scrollList));
+
   Future<void> verifyMaterial(int groupIndex, int index) async {
     _verifyingMaterial = _material(groupIndex, index);
-    await tester.dragUntilVisible(
-      _verifyingMaterial,
-      find.byKey(WidgetKeys.invoiceDetailsPageListView),
-      const Offset(0, -200),
-    );
-    await tester.pump();
+    await scrollEnsureFinderVisible(_verifyingMaterial);
     expect(_verifyingMaterial, findsOneWidget);
   }
+
+  void verifyMaterialBatchExpiryDate(StockInfo stockInfo) =>
+      verifyStockInfo(stockInfo, _verifyingMaterial);
 
   void verifyMaterialNumber(String materialNumber) {
     final label = find.descendant(
@@ -160,12 +168,7 @@ class AccountInvoiceDetailRobot {
       of: _verifyingMaterial,
       matching: find.byKey(WidgetKeys.cartItemProductQty),
     );
-    await tester.dragUntilVisible(
-      label,
-      find.byKey(WidgetKeys.invoiceDetailsPageListView),
-      const Offset(0, -200),
-    );
-    await tester.pumpAndSettle();
+    await scrollEnsureFinderVisible(label);
     expect(tester.widget<Text>(label).data, contains(qty.toString()));
   }
 

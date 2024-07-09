@@ -793,15 +793,15 @@ void main() {
       await tester.pumpAndSettle();
       expect(find.text('Show history'), findsNothing);
       expect(
-        find.byKey(WidgetKeys.viewByOrderFilterRadioTitle('All', true)),
+        find.byKey(WidgetKeys.filterRadioTile('All', true)),
         findsNothing,
       );
       expect(
-        find.byKey(WidgetKeys.viewByOrderFilterRadioTitle('ZP orders', false)),
+        find.byKey(WidgetKeys.filterRadioTile('ZP orders', false)),
         findsNothing,
       );
       expect(
-        find.byKey(WidgetKeys.viewByOrderFilterRadioTitle('MP orders', false)),
+        find.byKey(WidgetKeys.filterRadioTile('MP orders', false)),
         findsNothing,
       );
     });
@@ -819,20 +819,20 @@ void main() {
       await tester.pumpAndSettle();
       expect(find.text('Show history'), findsOneWidget);
       expect(
-        find.byKey(WidgetKeys.viewByOrderFilterRadioTitle('All', true)),
+        find.byKey(WidgetKeys.filterRadioTile('All', true)),
         findsOneWidget,
       );
       expect(
-        find.byKey(WidgetKeys.viewByOrderFilterRadioTitle('ZP orders', false)),
+        find.byKey(WidgetKeys.filterRadioTile('ZP orders', false)),
         findsOneWidget,
       );
       expect(
-        find.byKey(WidgetKeys.viewByOrderFilterRadioTitle('MP orders', false)),
+        find.byKey(WidgetKeys.filterRadioTile('MP orders', false)),
         findsOneWidget,
       );
 
       await tester.tap(
-        find.byKey(WidgetKeys.viewByOrderFilterRadioTitle('MP orders', false)),
+        find.byKey(WidgetKeys.filterRadioTile('MP orders', false)),
       );
       verify(
         () => viewByOrderFilterBlocMock.add(

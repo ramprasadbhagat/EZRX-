@@ -26,6 +26,7 @@ import 'package:ezrxmobile/domain/returns/entities/return_request_information.da
 import 'package:ezrxmobile/domain/returns/entities/return_request_information_header.dart';
 import 'package:ezrxmobile/domain/returns/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/returns/datasource/return_summary_details_local.dart';
+import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/custom_card.dart';
 import 'package:ezrxmobile/presentation/core/market_place/market_place_seller_with_logo.dart';
 import 'package:ezrxmobile/presentation/returns/return_summary_request_details/widgets/request_item_section.dart';
@@ -41,50 +42,12 @@ import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
 
+import '../../../../common_mock_data/mock_bloc.dart';
 import '../../../../common_mock_data/sales_org_config_mock/fake_my_sales_org_config.dart';
 import '../../../../common_mock_data/sales_organsiation_mock.dart';
 import '../../../../utils/widget_utils.dart';
-
-class MockUserBloc extends MockBloc<UserEvent, UserState> implements UserBloc {}
-
-class MockAuthBloc extends MockBloc<AuthEvent, AuthState> implements AuthBloc {}
-
-class ReturnListByRequestBlocMock
-    extends MockBloc<ReturnListByRequestEvent, ReturnListByRequestState>
-    implements ReturnListByRequestBloc {}
-
-class MockSalesOrgBloc extends MockBloc<SalesOrgEvent, SalesOrgState>
-    implements SalesOrgBloc {}
-
-class MockAnnouncementBloc
-    extends MockBloc<AnnouncementEvent, AnnouncementState>
-    implements AnnouncementBloc {}
-
-class MockCustomerCodeBloc
-    extends MockBloc<CustomerCodeEvent, CustomerCodeState>
-    implements CustomerCodeBloc {}
-
-class AutoRouterMock extends Mock implements AppRouter {}
-
-class MockProductImageBloc
-    extends MockBloc<ProductImageEvent, ProductImageState>
-    implements ProductImageBloc {}
-
-class MockEligibilityBloc extends MockBloc<EligibilityEvent, EligibilityState>
-    implements EligibilityBloc {}
-
-class MockReturnDetailsByRequestBloc
-    extends MockBloc<ReturnDetailsByRequestEvent, ReturnDetailsByRequestState>
-    implements ReturnDetailsByRequestBloc {}
-
-class MockPoAttachmentBloc
-    extends MockBloc<PoAttachmentEvent, PoAttachmentState>
-    implements PoAttachmentBloc {}
-
-final locator = GetIt.instance;
 
 void main() {
   late SalesOrgBloc mockSalesOrgBloc;
@@ -124,17 +87,17 @@ void main() {
         .getReturnRequestInformation();
   });
   setUp(() async {
-    mockSalesOrgBloc = MockSalesOrgBloc();
-    mockUserBloc = MockUserBloc();
+    mockSalesOrgBloc = SalesOrgBlocMock();
+    mockUserBloc = UserBlocMock();
     autoRouterMock = locator<AppRouter>();
-    mockCustomerCodeBloc = MockCustomerCodeBloc();
-    mockAuthBloc = MockAuthBloc();
-    mockAnnouncementBloc = MockAnnouncementBloc();
-    mockReturnDetailsByRequestBloc = MockReturnDetailsByRequestBloc();
-    mockProductImageBloc = MockProductImageBloc();
+    mockCustomerCodeBloc = CustomerCodeBlocMock();
+    mockAuthBloc = AuthBlocMock();
+    mockAnnouncementBloc = AnnouncementBlocMock();
+    mockReturnDetailsByRequestBloc = ReturnDetailsByRequestBlocMock();
+    mockProductImageBloc = ProductImageBlocMock();
     mockReturnListByRequestBloc = ReturnListByRequestBlocMock();
-    mockPoAttachmentBloc = MockPoAttachmentBloc();
-    eligibilityBlocMock = MockEligibilityBloc();
+    mockPoAttachmentBloc = PoAttachmentBlocMock();
+    eligibilityBlocMock = EligibilityBlocMock();
   });
 
   /////////////////////Finder///////////////////////////////////////////////////
@@ -303,7 +266,7 @@ void main() {
           find.byKey(WidgetKeys.returnDetailShowDetailButton);
       await tester.dragUntilVisible(
         showButtonFinder,
-        find.byKey(WidgetKeys.returnRequestDetailScrollList),
+        find.byKey(WidgetKeys.scrollList),
         const Offset(0, 1000),
       );
       await tester.pumpAndSettle();
@@ -347,7 +310,7 @@ void main() {
           find.byKey(WidgetKeys.returnDetailShowDetailButton);
       await tester.dragUntilVisible(
         showButtonFinder,
-        find.byKey(WidgetKeys.returnRequestDetailScrollList),
+        find.byKey(WidgetKeys.scrollList),
         const Offset(0, 1000),
       );
       await tester.pumpAndSettle();
@@ -378,7 +341,7 @@ void main() {
           find.byKey(WidgetKeys.returnDetailShowDetailButton);
       await tester.dragUntilVisible(
         showButtonFinder,
-        find.byKey(WidgetKeys.returnRequestDetailScrollList),
+        find.byKey(WidgetKeys.scrollList),
         const Offset(0, 1000),
       );
       await tester.pumpAndSettle();
@@ -413,7 +376,7 @@ void main() {
       await tester.pumpAndSettle();
       await tester.fling(
         find.byKey(
-          WidgetKeys.returnRequestDetailScrollList,
+          WidgetKeys.scrollList,
         ),
         const Offset(0.0, -1000.0),
         1000.0,
@@ -427,7 +390,7 @@ void main() {
       expect(hideBonusDetail, findsOneWidget);
       await tester.fling(
         find.byKey(
-          WidgetKeys.returnRequestDetailScrollList,
+          WidgetKeys.scrollList,
         ),
         const Offset(0.0, -1000.0),
         1000.0,
@@ -537,7 +500,7 @@ void main() {
         );
         await tester.dragUntilVisible(
           showHideButton,
-          find.byKey(WidgetKeys.returnRequestDetailScrollList),
+          find.byKey(WidgetKeys.scrollList),
           const Offset(0, -200),
         );
         await tester.pumpAndSettle();
@@ -610,7 +573,7 @@ void main() {
           find.byKey(WidgetKeys.returnDetailShowDetailButton);
       await tester.dragUntilVisible(
         showButtonFinder,
-        find.byKey(WidgetKeys.returnRequestDetailScrollList),
+        find.byKey(WidgetKeys.scrollList),
         const Offset(0, 1000),
       );
       await tester.pumpAndSettle();
@@ -657,7 +620,7 @@ void main() {
       final itemSummaryPriceFinder = find.byType(ReturnSummaryItemPrice);
       await tester.dragUntilVisible(
         itemSummaryPriceFinder,
-        find.byKey(WidgetKeys.returnRequestDetailScrollList),
+        find.byKey(WidgetKeys.scrollList),
         const Offset(0.0, -500.0),
       );
       expect(itemSummaryPriceFinder, findsOneWidget);
@@ -667,7 +630,7 @@ void main() {
       expect(itemPriceFinder, findsOneWidget);
       expect(itemPriceInfoIconFinder, findsOneWidget);
       await tester.fling(
-        find.byKey(WidgetKeys.returnRequestDetailScrollList),
+        find.byKey(WidgetKeys.scrollList),
         const Offset(0.0, -1000.0),
         1000.0,
       );
@@ -720,7 +683,7 @@ void main() {
       expect(itemQuantityFinder, findsOneWidget);
       expect(itemQuantityInfoIconFinder, findsOneWidget);
       await tester.fling(
-        find.byKey(WidgetKeys.returnRequestDetailScrollList),
+        find.byKey(WidgetKeys.scrollList),
         const Offset(0.0, -1000.0),
         1000.0,
       );
@@ -796,7 +759,7 @@ void main() {
       await tester.tap(showDetailButtonFinder);
       await tester.pumpAndSettle();
       await tester.fling(
-        find.byKey(WidgetKeys.returnRequestDetailScrollList),
+        find.byKey(WidgetKeys.scrollList),
         const Offset(0.0, -1000.0),
         1000.0,
       );
@@ -843,7 +806,7 @@ void main() {
         await tester.tap(showDetailButtonFinder);
         await tester.pumpAndSettle();
         await tester.fling(
-          find.byKey(WidgetKeys.returnRequestDetailScrollList),
+          find.byKey(WidgetKeys.scrollList),
           const Offset(0.0, -1000.0),
           1000.0,
         );
@@ -902,7 +865,7 @@ void main() {
         await tester.tap(showDetailButtonFinder);
         await tester.pumpAndSettle();
         await tester.fling(
-          find.byKey(WidgetKeys.returnRequestDetailScrollList),
+          find.byKey(WidgetKeys.scrollList),
           const Offset(0.0, -1000.0),
           1000.0,
         );
@@ -962,7 +925,7 @@ void main() {
         await tester.pumpWidget(getWUT());
         await tester.pump();
         await tester.fling(
-          find.byKey(WidgetKeys.returnRequestDetailScrollList),
+          find.byKey(WidgetKeys.scrollList),
           const Offset(0.0, -1000.0),
           1000.0,
         );
@@ -1022,7 +985,7 @@ void main() {
         await tester.pumpWidget(getWUT());
         await tester.pump();
         await tester.fling(
-          find.byKey(WidgetKeys.returnRequestDetailScrollList),
+          find.byKey(WidgetKeys.scrollList),
           const Offset(0.0, -1000.0),
           1000.0,
         );
@@ -1088,7 +1051,7 @@ void main() {
         await tester.pumpWidget(getWUT());
         await tester.pump();
         await tester.fling(
-          find.byKey(WidgetKeys.returnRequestDetailScrollList),
+          find.byKey(WidgetKeys.scrollList),
           const Offset(0.0, -1000.0),
           1000.0,
         );
@@ -1125,7 +1088,7 @@ void main() {
         await tester.pumpWidget(getWUT());
         await tester.pump();
         await tester.fling(
-          find.byKey(WidgetKeys.returnRequestDetailScrollList),
+          find.byKey(WidgetKeys.scrollList),
           const Offset(0.0, -1000.0),
           1000.0,
         );
@@ -1160,7 +1123,7 @@ void main() {
         await tester.pumpWidget(getWUT());
         await tester.pump();
         await tester.fling(
-          find.byKey(WidgetKeys.returnRequestDetailScrollList),
+          find.byKey(WidgetKeys.scrollList),
           const Offset(0.0, -1000.0),
           1000.0,
         );
@@ -1289,7 +1252,7 @@ void main() {
       );
       await tester.pumpWidget(getWUT());
       await tester.pumpAndSettle();
-      final scrollList = find.byKey(WidgetKeys.returnRequestDetailScrollList);
+      final scrollList = find.byKey(WidgetKeys.scrollList);
       expect(
         scrollList,
         findsOneWidget,
@@ -1338,7 +1301,7 @@ void main() {
       );
       await tester.pumpWidget(getWUT());
       await tester.pumpAndSettle();
-      final scrollList = find.byKey(WidgetKeys.returnRequestDetailScrollList);
+      final scrollList = find.byKey(WidgetKeys.scrollList);
       expect(
         scrollList,
         findsOneWidget,
@@ -1386,7 +1349,7 @@ void main() {
       );
       await tester.pumpWidget(getWUT());
       await tester.pumpAndSettle();
-      final scrollList = find.byKey(WidgetKeys.returnRequestDetailScrollList);
+      final scrollList = find.byKey(WidgetKeys.scrollList);
       expect(
         scrollList,
         findsOneWidget,

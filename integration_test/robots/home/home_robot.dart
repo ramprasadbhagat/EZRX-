@@ -1,6 +1,8 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/presentation/core/market_place/market_place_logo.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/home/banners/carousel_banner/carousel_banner.dart';
+import 'package:ezrxmobile/presentation/home/widgets/explore_marketplace_banner.dart';
 import 'package:ezrxmobile/presentation/home/widgets/quick_access_menu.dart';
 import 'package:ezrxmobile/presentation/orders/cart/cart_button.dart';
 import 'package:flutter/material.dart';
@@ -51,12 +53,17 @@ class HomeRobot extends CommonRobot {
   final productNumber = find.byKey(WidgetKeys.materialNumberText);
   final productFavoriteIcon = find.byKey(WidgetKeys.favoritesIcon);
   final searchByProductField = find.byKey(WidgetKeys.searchProductField);
-  final listView = find.byType(SingleChildScrollView).last;
   final homeBanner = find.byKey(WidgetKeys.homeBanner);
   final customerCodeSelectShipTo =
       find.byKey(WidgetKeys.customerCodeSelectShipTo);
   final comboOffer = find.byKey(WidgetKeys.combodealsBody);
   final exploreComboDeal = find.byKey(WidgetKeys.exploreComboDealsButtton);
+  final exploreMarketPlaceBanner = find.byType(ExploreMarketPlaceBanner);
+  final exploreMarketPlaceButton =
+      find.byKey(WidgetKeys.exploreMarketPlaceButton);
+  final marketplaceLogo = find.byType(MarketPlaceLogo);
+  final marketplacePaymentQuickAccess =
+      find.byKey(WidgetKeys.homeQuickAccessMPPaymentsMenu);
 
   void verify() {
     expect(homeTab, findsOneWidget);
@@ -93,7 +100,7 @@ class HomeRobot extends CommonRobot {
   }
 
   Future<void> findBrowseProductsIcon() async {
-    await _scrollEnsureVisible(browseProductIcon);
+    await scrollEnsureFinderVisible(browseProductIcon);
     expect(browseProductIcon, findsOneWidget);
   }
 
@@ -109,7 +116,7 @@ class HomeRobot extends CommonRobot {
   }
 
   Future<void> findAnnouncementsIcon() async {
-    await _scrollEnsureVisible(announcementIcon);
+    await scrollEnsureFinderVisible(announcementIcon);
     expect(announcementIcon, findsOneWidget);
   }
 
@@ -139,7 +146,7 @@ class HomeRobot extends CommonRobot {
   }
 
   Future<void> findRecentlyOrderIcon() async {
-    await _scrollEnsureVisible(recentlyOrder);
+    await scrollEnsureFinderVisible(recentlyOrder);
     expect(recentlyOrder, findsOneWidget);
   }
 
@@ -147,6 +154,18 @@ class HomeRobot extends CommonRobot {
     final iconArrow =
         find.byKey(WidgetKeys.sectionTileIcon('Recently ordered'.tr()));
     await tester.tap(iconArrow);
+    await tester.pumpAndSettle();
+  }
+
+  void verifyMarketPlaceIcon() => expect(
+        find.descendant(of: recentlyOrderedList, matching: marketplaceLogo),
+        findsWidgets,
+      );
+
+  Future<void> tapFirstMarketPlaceIcon() async {
+    await tester.tap(
+      find.descendant(of: recentlyOrderedList.first, matching: marketplaceLogo),
+    );
     await tester.pumpAndSettle();
   }
 
@@ -168,7 +187,7 @@ class HomeRobot extends CommonRobot {
 
   Future<void> tapBundlesIcon() async {
     final iconArrow = find.byKey(WidgetKeys.sectionTileIcon('Bundles'.tr()));
-    await _scrollEnsureVisible(iconArrow);
+    await scrollEnsureFinderVisible(iconArrow);
     await tester.tap(iconArrow);
     await tester.pumpAndSettle();
   }
@@ -259,7 +278,7 @@ class HomeRobot extends CommonRobot {
 
   Future<void> tapOnFirstBundle() async {
     final firstBundle = bundlesItem.first;
-    await _scrollEnsureVisible(firstBundle);
+    await scrollEnsureFinderVisible(firstBundle);
     await tester.tap(firstBundle);
     await tester.pumpAndSettle();
   }
@@ -269,7 +288,7 @@ class HomeRobot extends CommonRobot {
   }
 
   Future<void> verifyDisplayBundlesNumber() async {
-    await _scrollEnsureVisible(bundlesNumberID.first);
+    await scrollEnsureFinderVisible(bundlesNumberID.first);
     expect(bundlesNumberID, findsWidgets);
   }
 
@@ -402,13 +421,18 @@ class HomeRobot extends CommonRobot {
     return info.data ?? '';
   }
 
-  Future<void> _scrollEnsureVisible(Finder finder) async {
-    await tester.dragUntilVisible(
-      finder,
-      listView,
-      const Offset(0, -250),
-    );
-    await tester.pump();
+  void verifyExploreMarketPlaceBanner({bool isVisible = true}) {
+    if (isVisible) {
+      expect(exploreMarketPlaceBanner, findsOneWidget);
+      expect(exploreMarketPlaceButton, findsOneWidget);
+    } else {
+      expect(exploreMarketPlaceBanner, findsNothing);
+    }
+  }
+
+  Future<void> tapExploreMarketPlaceButton() async {
+    await tester.tap(exploreMarketPlaceButton);
+    await tester.pumpAndSettle();
   }
 
   Future<bool> isCustomerCodeNotSelected(String shipToCode) async {
@@ -423,6 +447,16 @@ class HomeRobot extends CommonRobot {
   Future<void> tapExploreComboDeal() async {
     expect(exploreComboDeal, findsOneWidget);
     await tester.tap(exploreComboDeal);
+    await tester.pumpAndSettle();
+  }
+
+  void verifyMarketPlacePaymentQuickAccess({bool isVisible = true}) => expect(
+        marketplacePaymentQuickAccess,
+        isVisible ? findsOne : findsNothing,
+      );
+
+  Future<void> tapMarketPlacePaymentQuickAccess() async {
+    await tester.tap(marketplacePaymentQuickAccess);
     await tester.pumpAndSettle();
   }
 }

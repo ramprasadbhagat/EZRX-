@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
@@ -41,6 +42,7 @@ class ExploreMarketPlaceBanner extends StatelessWidget {
           ),
           const SizedBox(height: 8),
           ElevatedButton(
+            key: WidgetKeys.exploreMarketPlaceButton,
             onPressed: () {
               context.read<MaterialListBloc>().add(
                     MaterialListEvent.fetch(

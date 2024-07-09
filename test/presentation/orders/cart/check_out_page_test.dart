@@ -604,8 +604,9 @@ void main() {
         final deliveryInformationTextFinder =
             find.textContaining('Delivery information'.tr());
         expect(deliveryInformationTextFinder, findsOneWidget);
-        final checkoutScrollListFinder =
-            find.byKey(WidgetKeys.checkoutScrollList);
+        final checkoutScrollListFinder = find.byKey(WidgetKeys.scrollList);
+        final checkoutDeliveryArrowButtonFinder =
+            find.byKey(WidgetKeys.checkoutDeliveryArrowButton);
         expect(checkoutDeliveryArrowButtonFinder, findsOneWidget);
         final pOReferenceKeyFinder =
             find.byKey(WidgetKeys.genericKey(key: 'pOReferenceKey'));
@@ -766,8 +767,7 @@ void main() {
         final deliveryInformationTextFinder =
             find.textContaining('Delivery information'.tr());
         expect(deliveryInformationTextFinder, findsOneWidget);
-        final checkoutScrollListFinder =
-            find.byKey(WidgetKeys.checkoutScrollList);
+        final checkoutScrollListFinder = find.byKey(WidgetKeys.scrollList);
         final deliveryDateFinder = find.byKey(WidgetKeys.deliveryDate);
         expect(deliveryDateFinder, findsOneWidget);
         expect(
@@ -1040,8 +1040,7 @@ void main() {
 
         final checkoutPageFinder = find.byKey(WidgetKeys.checkoutPage);
         expect(checkoutPageFinder, findsOneWidget);
-        final checkoutScrollListFinder =
-            find.byKey(WidgetKeys.checkoutScrollList);
+        final checkoutScrollListFinder = find.byKey(WidgetKeys.scrollList);
         final addressInfoSectionFinder = find.byType(AddressInfoSection);
         expect(checkoutScrollListFinder, findsOneWidget);
         expect(addressInfoSectionFinder, findsOneWidget);
@@ -1110,8 +1109,7 @@ void main() {
         await tester.pump();
         final checkoutPageFinder = find.byKey(WidgetKeys.checkoutPage);
         expect(checkoutPageFinder, findsOneWidget);
-        final checkoutScrollListFinder =
-            find.byKey(WidgetKeys.checkoutScrollList);
+        final checkoutScrollListFinder = find.byKey(WidgetKeys.scrollList);
         final addressInfoSectionFinder = find.byType(AddressInfoSection);
         expect(checkoutScrollListFinder, findsOneWidget);
         expect(addressInfoSectionFinder, findsOneWidget);
@@ -1187,8 +1185,7 @@ void main() {
 
         final checkoutPageFinder = find.byKey(WidgetKeys.checkoutPage);
         expect(checkoutPageFinder, findsOneWidget);
-        final checkoutScrollListFinder =
-            find.byKey(WidgetKeys.checkoutScrollList);
+        final checkoutScrollListFinder = find.byKey(WidgetKeys.scrollList);
         final addressInfoSectionFinder = find.byType(AddressInfoSection);
         expect(checkoutScrollListFinder, findsOneWidget);
         expect(addressInfoSectionFinder, findsOneWidget);
@@ -1243,8 +1240,7 @@ void main() {
 
         final checkoutPageFinder = find.byKey(WidgetKeys.checkoutPage);
         expect(checkoutPageFinder, findsOneWidget);
-        final checkoutScrollListFinder =
-            find.byKey(WidgetKeys.checkoutScrollList);
+        final checkoutScrollListFinder = find.byKey(WidgetKeys.scrollList);
         final addressInfoSectionFinder = find.byType(AddressInfoSection);
         expect(addressInfoSectionFinder, findsOneWidget);
         expect(checkoutScrollListFinder, findsOneWidget);
@@ -1639,7 +1635,7 @@ void main() {
         final poAttachmentUploadKey = find.byType(PoAttachmentUpload);
         await tester.dragUntilVisible(
           poAttachmentUploadKey,
-          find.byKey(WidgetKeys.checkoutScrollList),
+          find.byKey(WidgetKeys.scrollList),
           const Offset(0.0, -200.0),
         );
         await tester.pump();
@@ -1802,7 +1798,7 @@ void main() {
         expect(uploadAttachmentKeyKey, findsOneWidget);
         final itemDeleteButtonKey = find.byIcon(Icons.delete_outline_outlined);
         expect(itemDeleteButtonKey, findsOneWidget);
-        final scrollListFinder = find.byKey(WidgetKeys.checkoutScrollList);
+        final scrollListFinder = find.byKey(WidgetKeys.scrollList);
         expect(scrollListFinder, findsOneWidget);
 
         await tester.dragUntilVisible(
@@ -2462,7 +2458,7 @@ void main() {
       await tester.pumpWidget(getScopedWidget());
       await tester.pumpAndSettle();
 
-      final scrollListFinder = find.byKey(WidgetKeys.checkoutScrollList);
+      final scrollListFinder = find.byKey(WidgetKeys.scrollList);
       expect(scrollListFinder, findsOneWidget);
 
       final taxValue = find.textContaining(
@@ -2548,7 +2544,7 @@ void main() {
       await tester.pumpWidget(getScopedWidget());
       await tester.pumpAndSettle();
 
-      final scrollListFinder = find.byKey(WidgetKeys.checkoutScrollList);
+      final scrollListFinder = find.byKey(WidgetKeys.scrollList);
       expect(scrollListFinder, findsOneWidget);
 
       final subTotalTextFinder = find.descendant(
@@ -2665,7 +2661,7 @@ void main() {
         await tester.pumpWidget(getScopedWidget());
         await tester.pump();
 
-        final scrollListFinder = find.byKey(WidgetKeys.checkoutScrollList);
+        final scrollListFinder = find.byKey(WidgetKeys.scrollList);
         expect(scrollListFinder, findsOneWidget);
 
         final subTotalTextFinder = find.descendant(
@@ -2795,7 +2791,7 @@ void main() {
         await tester.pumpWidget(getScopedWidget());
         await tester.pump();
         await tester.fling(
-          find.byKey(WidgetKeys.checkoutScrollList),
+          find.byKey(WidgetKeys.scrollList),
           const Offset(0.0, -1000.0),
           1000.0,
         );
@@ -2845,7 +2841,7 @@ void main() {
         await tester.pumpWidget(getScopedWidget());
         await tester.pump();
         await tester.fling(
-          find.byKey(WidgetKeys.checkoutScrollList),
+          find.byKey(WidgetKeys.scrollList),
           const Offset(0.0, -1000.0),
           1000.0,
         );
@@ -2899,7 +2895,7 @@ void main() {
         await tester.pumpWidget(getScopedWidget());
         await tester.pump();
         await tester.fling(
-          find.byKey(WidgetKeys.checkoutScrollList),
+          find.byKey(WidgetKeys.scrollList),
           const Offset(0.0, -1000.0),
           1000.0,
         );
@@ -3047,7 +3043,7 @@ void main() {
 
       final materialKey = find.byKey(WidgetKeys.cartItemProductMaterialNumber);
 
-      final scrollListFinder = find.byKey(WidgetKeys.checkoutScrollList);
+      final scrollListFinder = find.byKey(WidgetKeys.scrollList);
       expect(scrollListFinder, findsOneWidget);
 
       await tester.dragUntilVisible(
@@ -3091,7 +3087,7 @@ void main() {
       await tester.pumpWidget(getScopedWidget());
       await tester.pumpAndSettle();
 
-      final scrollListFinder = find.byKey(WidgetKeys.checkoutScrollList);
+      final scrollListFinder = find.byKey(WidgetKeys.scrollList);
       expect(scrollListFinder, findsOneWidget);
 
       await tester.dragUntilVisible(
@@ -3124,7 +3120,7 @@ void main() {
       await tester.pumpWidget(getScopedWidget());
       await tester.pumpAndSettle();
 
-      final scrollListFinder = find.byKey(WidgetKeys.checkoutScrollList);
+      final scrollListFinder = find.byKey(WidgetKeys.scrollList);
       expect(scrollListFinder, findsOneWidget);
       await tester.dragUntilVisible(
         find.byType(MarketPlaceDeliveryExpansionTile),
@@ -3165,7 +3161,7 @@ void main() {
       await tester.pumpWidget(getScopedWidget());
       await tester.pumpAndSettle();
 
-      final scrollList = find.byKey(WidgetKeys.checkoutScrollList);
+      final scrollList = find.byKey(WidgetKeys.scrollList);
       final bundleTile =
           find.byKey(WidgetKeys.cartItemBundleTile(mpBundle.bundle.bundleCode));
       await tester.dragUntilVisible(
@@ -3314,7 +3310,7 @@ void main() {
         await tester.pumpWidget(getScopedWidget());
         await tester.pumpAndSettle();
         final checkOutItems = find.byType(CheckoutMaterialItem);
-        final scrollList = find.byKey(WidgetKeys.checkoutScrollList);
+        final scrollList = find.byKey(WidgetKeys.scrollList);
         await tester.dragUntilVisible(
           checkOutItems,
           scrollList,
@@ -3366,7 +3362,7 @@ void main() {
         await tester.pumpAndSettle();
 
         final checkOutItems = find.byType(CheckoutMaterialItem);
-        final scrollList = find.byKey(WidgetKeys.checkoutScrollList);
+        final scrollList = find.byKey(WidgetKeys.scrollList);
         await tester.dragUntilVisible(
           checkOutItems,
           scrollList,
