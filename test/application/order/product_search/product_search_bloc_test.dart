@@ -31,7 +31,7 @@ void main() {
 
   final customerCodeInfo = CustomerCodeInfo.empty();
   final shipToInfo = ShipToInfo.empty();
-  final searchKey = SearchKey('fake-text');
+  final searchKey = SearchKey.search('fake-text');
 
   late MaterialResponse materialResponse;
   late MaterialResponse fakeResponse1;
@@ -39,9 +39,9 @@ void main() {
   late Config config;
   final searchKeys = ProductSuggestionHistory(
     searchKeyList: [
-      SearchKey('searchKey1'),
-      SearchKey('searchKey2'),
-      SearchKey('searchKey3'),
+      SearchKey.search('searchKey1'),
+      SearchKey.search('searchKey2'),
+      SearchKey.search('searchKey3'),
     ],
   );
 
@@ -124,7 +124,7 @@ void main() {
               salesOrgConfig: fakeMYSalesOrgConfigs,
               customerCodeInfo: customerCodeInfo,
               shipToInfo: shipToInfo,
-              searchKey: SearchKey('diff-search-key'),
+              searchKey: SearchKey.search('diff-search-key'),
               pageSize: config.pageSize,
               offset: 0,
               materialFilter: MaterialFilter.empty(),
@@ -134,7 +134,7 @@ void main() {
 
           when(
             () => productSearchRepository.saveSearchHistory(
-              SearchKey('diff-search-key'),
+              SearchKey.search('diff-search-key'),
             ),
           ).thenAnswer((_) async => const Right(null));
           return productSearchBloc;
@@ -152,7 +152,7 @@ void main() {
             configs: fakeMYSalesOrgConfigs,
             customerCodeInfo: customerCodeInfo,
             shipToInfo: shipToInfo,
-            searchKey: SearchKey('diff-search-key'),
+            searchKey: SearchKey.search('diff-search-key'),
             suggestedProductList: <MaterialInfo>[],
             isSearching: true,
             canLoadMore: true,
@@ -168,7 +168,7 @@ void main() {
             suggestedProductList: materialResponse.products,
             isSearching: false,
             canLoadMore: true,
-            searchKey: SearchKey('diff-search-key'),
+            searchKey: SearchKey.search('diff-search-key'),
             user: fakeClientUser,
           ),
           ProductSearchState.initial().copyWith(
@@ -180,7 +180,7 @@ void main() {
             suggestedProductList: materialResponse.products,
             isSearching: false,
             canLoadMore: true,
-            searchKey: SearchKey('diff-search-key'),
+            searchKey: SearchKey.search('diff-search-key'),
             user: fakeClientUser,
           ),
         ],
@@ -193,7 +193,7 @@ void main() {
           configs: fakeMYSalesOrgConfigs,
           customerCodeInfo: customerCodeInfo,
           shipToInfo: shipToInfo,
-          searchKey: SearchKey(''),
+          searchKey: SearchKey.empty(),
           user: fakeClientUser,
         ),
         build: () {
@@ -272,7 +272,7 @@ void main() {
           configs: fakeMYSalesOrgConfigs,
           customerCodeInfo: customerCodeInfo,
           shipToInfo: shipToInfo,
-          searchKey: SearchKey(''),
+          searchKey: SearchKey.empty(),
           user: fakeClientUser,
         ),
         build: () {
@@ -530,7 +530,7 @@ void main() {
             customerCodeInfo: customerCodeInfo,
             salesOrganization: fakeMYSalesOrganisation,
             shipToInfo: shipToInfo,
-            searchKey: SearchKey.search(''),
+            searchKey: SearchKey.empty(),
             apiFailureOrSuccessOption: none(),
             canLoadMore: false,
             suggestedProductList: <MaterialInfo>[],
@@ -540,7 +540,7 @@ void main() {
             customerCodeInfo: customerCodeInfo,
             salesOrganization: fakeMYSalesOrganisation,
             shipToInfo: shipToInfo,
-            searchKey: SearchKey.search(''),
+            searchKey: SearchKey.empty(),
             apiFailureOrSuccessOption: none(),
             canLoadMore: false,
             suggestedProductList: <MaterialInfo>[],

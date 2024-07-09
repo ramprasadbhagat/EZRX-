@@ -55,7 +55,7 @@ class _OutstandingInvoicesSearchBar extends StatelessWidget {
             appliedFilter: searchKey.isEmpty
                 ? OutstandingInvoiceFilter.defaultFilter()
                 : OutstandingInvoiceFilter.empty(),
-            searchKey: SearchKey.searchFilter(searchKey),
+            searchKey: SearchKey.search(searchKey),
             isMarketPlace: context.isMPPayment,
           ),
         );

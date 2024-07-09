@@ -138,7 +138,7 @@ class _InvoiceNumber extends StatelessWidget {
                                       appliedFilter:
                                           AllInvoicesFilter.defaultFilter()
                                               .copyWith(
-                                        searchKey: SearchKey.searchFilter(
+                                        searchKey: SearchKey.search(
                                           invoiceNumber,
                                         ),
                                       ),

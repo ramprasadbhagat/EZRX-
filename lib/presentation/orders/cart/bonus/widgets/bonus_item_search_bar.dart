@@ -2,6 +2,7 @@ part of 'package:ezrxmobile/presentation/orders/cart/bonus/bonus_items_sheet.dar
 
 class _BonusItemSearchBar extends StatelessWidget {
   final PriceAggregate cartItem;
+
   const _BonusItemSearchBar({required this.cartItem});
 
   @override
@@ -17,7 +18,6 @@ class _BonusItemSearchBar extends StatelessWidget {
               cartItem: cartItem,
               context: context,
               searchKey: '',
-              onClear: true,
             ),
             onSearchChanged: (value) => _search(
               cartItem: cartItem,
@@ -31,7 +31,7 @@ class _BonusItemSearchBar extends StatelessWidget {
               searchKey: value,
             ),
             initialValue: state.searchKey.searchValueOrEmpty,
-            customValidator: (value) => SearchKey.searchFilter(value).isValid(),
+            customValidator: (value) => SearchKey.search(value).isValid(),
           ),
         );
       },
@@ -42,9 +42,7 @@ class _BonusItemSearchBar extends StatelessWidget {
     required BuildContext context,
     required String searchKey,
     required PriceAggregate cartItem,
-    bool onClear = false,
   }) {
-    if (!onClear && searchKey.isEmpty) return;
     context.read<BonusMaterialBloc>().add(
           BonusMaterialEvent.fetch(
             salesOrganisation:
@@ -57,7 +55,7 @@ class _BonusItemSearchBar extends StatelessWidget {
             user: context.read<EligibilityBloc>().state.user,
             isGimmickMaterialEnabled:
                 context.read<EligibilityBloc>().state.isGimmickMaterialEnabled,
-            searchKey: SearchKey.searchFilter(searchKey),
+            searchKey: SearchKey.search(searchKey),
           ),
         );
   }

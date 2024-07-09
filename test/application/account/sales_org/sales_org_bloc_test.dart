@@ -245,14 +245,14 @@ void main() {
       ),
       act: (bloc) => bloc.add(
         SalesOrgEvent.searchSalesOrg(
-          searchKey: SearchKey(fakeSalesOrg.getOrCrash()),
+          searchKey: SearchKey.search(fakeSalesOrg.getOrCrash()),
           salesOrgList: fakeSalesOrgList,
         ),
       ),
       expect: () => [
         SalesOrgState.initial().copyWith(
           availableSalesOrg: fakeSalesOrgList,
-          searchKey: SearchKey(fakeSalesOrg.getOrCrash()),
+          searchKey: SearchKey.search(fakeSalesOrg.getOrCrash()),
         ),
       ],
     );

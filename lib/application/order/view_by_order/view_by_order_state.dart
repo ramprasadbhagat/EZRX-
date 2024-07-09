@@ -28,7 +28,7 @@ class ViewByOrderState with _$ViewByOrderState {
         canLoadMore: true,
         isFetching: false,
         nextPageIndex: 0,
-        searchKey: SearchKey.searchFilter(''),
+        searchKey: SearchKey.empty(),
         failureOrSuccessOption: none(),
         appliedFilter: ViewByOrdersFilter.empty(),
         shipToInfo: ShipToInfo.empty(),

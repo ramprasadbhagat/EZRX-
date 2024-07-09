@@ -114,14 +114,14 @@ void main() {
         when(() => faqBlocMock.state).thenReturn(
           FaqState.initial().copyWith(
             isFetching: false,
-            searchKey: SearchKey(''),
+            searchKey: SearchKey.empty(),
             selectedCategory: FAQCategory(''),
           ),
         );
         final expectedStates = [
           FaqState.initial().copyWith(
             faqInfo: faqList,
-            searchKey: SearchKey('Order created'),
+            searchKey: SearchKey.search('Order created'),
             selectedCategory: FAQCategory('All'),
           ),
         ];
@@ -139,7 +139,7 @@ void main() {
         when(() => faqBlocMock.state).thenReturn(
           FaqState.initial().copyWith(
             faqInfo: faqList,
-            searchKey: SearchKey('Order created'),
+            searchKey: SearchKey.search('Order created'),
             isFetching: false,
           ),
         );
@@ -158,7 +158,7 @@ void main() {
 
         await tester.pump();
         final result = find.text(
-          'Search results for: ${SearchKey('Order created').getOrDefaultValue('')}',
+          'Search results for: ${SearchKey.search('Order created').getOrDefaultValue('')}',
         );
         expect(result, findsOneWidget);
       },
@@ -449,7 +449,7 @@ void main() {
             canLoadMore: true,
             isFetching: false,
             selectedCategory: FAQCategory('All'),
-            searchKey: SearchKey('like'),
+            searchKey: SearchKey.search('like'),
           ),
         );
 
@@ -477,8 +477,8 @@ void main() {
         );
         verify(
           () => faqBlocMock.add(
-            const FaqEvent.updatedSearchFaq(
-              searchKey: '',
+            FaqEvent.updateSearchKey(
+              searchKey: SearchKey.empty(),
             ),
           ),
         ).called(1);
@@ -498,7 +498,7 @@ void main() {
         final expectedStates = [
           FaqState.initial().copyWith(
             faqInfo: faqList,
-            searchKey: SearchKey('Order created'),
+            searchKey: SearchKey.search('Order created'),
             selectedCategory: FAQCategory('All'),
           ),
         ];

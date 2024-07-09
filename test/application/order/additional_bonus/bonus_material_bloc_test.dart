@@ -81,7 +81,7 @@ void main() {
             principalData: fakePrincipalData,
             salesOrgConfig: fakeMYSalesOrgConfigs,
             user: fakeRootAdminUser,
-            searchKey: SearchKey('fake-searchKey'),
+            searchKey: SearchKey.search('fake-searchKey'),
           ),
         ).thenAnswer(
           (_) async => Right(fakeMaterialListData),
@@ -109,28 +109,28 @@ void main() {
           salesOrganisation: fakeMYSalesOrganisation,
           shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
           user: fakeRootAdminUser,
-          searchKey: SearchKey('fake-searchKey'),
+          searchKey: SearchKey.search('fake-searchKey'),
         ),
       ),
       expect: () => [
         BonusMaterialState.initial().copyWith(
           isFetching: true,
-          searchKey: SearchKey('fake-searchKey'),
+          searchKey: SearchKey.search('fake-searchKey'),
         ),
         BonusMaterialState.initial().copyWith(
           bonusItemList: fakeMaterialListData.products,
           failureOrSuccessOption: optionOf(Right(fakeMaterialListData)),
-          searchKey: SearchKey('fake-searchKey'),
+          searchKey: SearchKey.search('fake-searchKey'),
         ),
         BonusMaterialState.initial().copyWith(
           isUpdatingStock: true,
           bonusItemList: fakeMaterialListData.products,
           failureOrSuccessOption: optionOf(Right(fakeMaterialListData)),
-          searchKey: SearchKey('fake-searchKey'),
+          searchKey: SearchKey.search('fake-searchKey'),
         ),
         BonusMaterialState.initial().copyWith(
           bonusItemList: fakeMaterialListData.products,
-          searchKey: SearchKey('fake-searchKey'),
+          searchKey: SearchKey.search('fake-searchKey'),
         ),
       ],
     );
@@ -155,7 +155,7 @@ void main() {
             principalData: fakePrincipalData,
             salesOrgConfig: fakeMYSalesOrgConfigs,
             user: fakeRootAdminUser,
-            searchKey: SearchKey('fake-searchKey'),
+            searchKey: SearchKey.search('fake-searchKey'),
           ),
         ).thenAnswer(
           (_) async => const Left(fakeError),
@@ -170,16 +170,16 @@ void main() {
           salesOrganisation: fakeMYSalesOrganisation,
           shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
           user: fakeRootAdminUser,
-          searchKey: SearchKey('fake-searchKey'),
+          searchKey: SearchKey.search('fake-searchKey'),
         ),
       ),
       expect: () => [
         BonusMaterialState.initial().copyWith(
           isFetching: true,
-          searchKey: SearchKey('fake-searchKey'),
+          searchKey: SearchKey.search('fake-searchKey'),
         ),
         BonusMaterialState.initial().copyWith(
-          searchKey: SearchKey('fake-searchKey'),
+          searchKey: SearchKey.search('fake-searchKey'),
           failureOrSuccessOption: optionOf(const Left(fakeError)),
         ),
       ],
@@ -209,7 +209,7 @@ void main() {
             principalData: fakePrincipalData,
             salesOrgConfig: fakeMYSalesOrgConfigs,
             user: fakeRootAdminUser,
-            searchKey: SearchKey(''),
+            searchKey: SearchKey.empty(),
           ),
         ).thenAnswer(
           (_) async => Right(fakeMaterialListData),
@@ -293,7 +293,7 @@ void main() {
             principalData: fakePrincipalData,
             salesOrgConfig: fakeMYSalesOrgConfigs,
             user: fakeRootAdminUser,
-            searchKey: SearchKey(''),
+            searchKey: SearchKey.empty(),
           ),
         ).thenAnswer(
           (_) async => const Left(fakeError),
@@ -559,7 +559,7 @@ void main() {
     ),
     seed: () => BonusMaterialState.initial().copyWith(
       bonusItemList: fakeMaterialListData.products,
-      searchKey: SearchKey('fake-search-key'),
+      searchKey: SearchKey.search('fake-search-key'),
     ),
     act: (BonusMaterialBloc bloc) => bloc.add(
       BonusMaterialEvent.fetch(
@@ -570,7 +570,7 @@ void main() {
         salesOrganisation: fakeMYSalesOrganisation,
         shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
         user: fakeRootAdminUser,
-        searchKey: SearchKey.searchFilter(''),
+        searchKey: SearchKey.empty(),
       ),
     ),
     expect: () => [BonusMaterialState.initial()],

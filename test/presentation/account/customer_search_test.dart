@@ -173,7 +173,7 @@ void main() {
         Stream.fromIterable(
           [
             CustomerCodeState.initial().copyWith(
-              searchKey: SearchKey(''),
+              searchKey: SearchKey.empty(),
               isSearchActive: false,
               isFetching: false,
               apiFailureOrSuccessOption: none(),
@@ -182,7 +182,7 @@ void main() {
               ],
             ),
             CustomerCodeState.initial().copyWith(
-              searchKey: SearchKey('GSK'),
+              searchKey: SearchKey.search('GSK'),
               isSearchActive: true,
               isFetching: true,
               apiFailureOrSuccessOption: none(),
@@ -502,7 +502,7 @@ void main() {
     // testWidgets('Clear Customer code Search', (tester) async {
     //   when(() => customerCodeBlocMock.state).thenReturn(
     //     CustomerCodeState.initial().copyWith(
-    //       searchKey: SearchKey('GSK'),
+    //       searchKey: SearchKey.search('GSK'),
     //       isSearchActive: true,
     //       isFetching: false,
     //       customerCodeInfo: CustomerCodeInfo.empty()
@@ -609,11 +609,11 @@ void main() {
     //         isFetching: false,
     //         customerCodeList: [],
     //         apiFailureOrSuccessOption: none(),
-    //         searchKey: SearchKey('')),
+    //         searchKey: SearchKey.empty()),
     //     CustomerCodeState.initial().copyWith(
     //       isFetching: false,
     //       customerCodeList: [],
-    //       searchKey: SearchKey('GSK'),
+    //       searchKey: SearchKey.search('GSK'),
     //       apiFailureOrSuccessOption: optionOf(
     //         const Left(
     //           ApiFailure.other('fake-error'),
@@ -649,7 +649,7 @@ void main() {
     //       isFetching: false,
     //       customerCodeList: [],
     //       apiFailureOrSuccessOption: none(),
-    //       searchKey: SearchKey('')),);
+    //       searchKey: SearchKey.empty()),);
 
     //   await tester.runAsync(() async {
     //     await tester.pumpWidget(getScopedWidget());
@@ -676,7 +676,7 @@ void main() {
     //       isFetching: false,
     //       customerCodeList: [],
     //       apiFailureOrSuccessOption: none(),
-    //       searchKey: SearchKey('')),);
+    //       searchKey: SearchKey.empty()),);
 
     //   await tester.runAsync(() async {
     //     await tester.pumpWidget(getScopedWidget());
@@ -704,11 +704,11 @@ void main() {
     //         isFetching: false,
     //         customerCodeList: [],
     //         apiFailureOrSuccessOption: none(),
-    //         searchKey: SearchKey('')),
+    //         searchKey: SearchKey.empty()),
     //     CustomerCodeState.initial().copyWith(
     //       isFetching: false,
     //       customerCodeList: [],
-    //       searchKey: SearchKey('12'),
+    //       searchKey: SearchKey.search('12'),
     //       apiFailureOrSuccessOption: optionOf(
     //         const Left(
     //           ApiFailure.other('fake-error'),

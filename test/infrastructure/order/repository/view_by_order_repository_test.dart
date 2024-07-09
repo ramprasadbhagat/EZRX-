@@ -36,7 +36,7 @@ void main() {
 
   const fakeSort = 'desc';
   const fakeOrderBy = 'datetime';
-  final fakeSearchKey = SearchKey('');
+  final fakeSearchKey = SearchKey.empty();
   final fakeFilter = ViewByOrdersFilter.empty();
   const fakePageSize = 10;
   const fakeOffSet = 0;

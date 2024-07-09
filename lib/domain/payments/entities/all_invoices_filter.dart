@@ -32,7 +32,7 @@ class AllInvoicesFilter with _$AllInvoicesFilter {
         amountValueFrom: RangeValue(''),
         amountValueTo: RangeValue(''),
         filterStatuses: <String>[],
-        searchKey: SearchKey(''),
+        searchKey: SearchKey.empty(),
         filterOption: FilterOption(''),
       );
 
@@ -52,12 +52,12 @@ class AllInvoicesFilter with _$AllInvoicesFilter {
         amountValueFrom: RangeValue(''),
         amountValueTo: RangeValue(''),
         filterStatuses: <String>[],
-        searchKey: SearchKey(''),
+        searchKey: SearchKey.empty(),
         filterOption: FilterOption.documentDate(),
       );
 
   AllInvoicesFilter get excludeSearch => copyWith(
-        searchKey: SearchKey(''),
+        searchKey: SearchKey.empty(),
       );
 
   DateTimeRange get getDueDateFilterDateRange => DateTimeRange(

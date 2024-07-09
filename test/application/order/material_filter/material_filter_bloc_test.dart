@@ -368,7 +368,7 @@ void main() {
       ),
       expect: () => [
         MaterialFilterState.initial().copyWith(
-          searchKey: SearchKey.searchFilter('fake-search-key'),
+          searchKey: SearchKey.search('fake-search-key'),
         ),
       ],
     );

@@ -21,7 +21,7 @@ class BonusMaterialState with _$BonusMaterialState {
         isFetching: false,
         isUpdatingStock: false,
         isBonusQtyValidated: true,
-        searchKey: SearchKey.searchFilter(''),
+        searchKey: SearchKey.empty(),
         addedBonusItemsList: <BonusSampleItem>[],
       );
 

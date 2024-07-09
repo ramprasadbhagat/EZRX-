@@ -89,7 +89,7 @@ class CreditAndInvoiceDetailsBloc
           salesOrganisation: state.salesOrganisation,
           customerCodeInfo: state.customerCodeInfo,
           filter: AllInvoicesFilter.defaultFilter().copyWith(
-            searchKey: SearchKey(event.invoiceId),
+            searchKey: SearchKey.search(event.invoiceId),
           ),
           pageSize: 1,
           offset: 0,

@@ -182,7 +182,7 @@ void main() {
         (tester) async {
       when(() => mockViewByItemsBloc.state).thenReturn(
         ViewByItemsState.initial().copyWith(
-          searchKey: SearchKey('fake_key'),
+          searchKey: SearchKey.search('fake_key'),
         ),
       );
       await tester.pumpWidget(getScopedWidget());
@@ -299,7 +299,7 @@ void main() {
         () => mockViewByItemsBloc.add(
           ViewByItemsEvent.fetch(
             viewByItemFilter: ViewByItemFilter.empty(),
-            searchKey: SearchKey(''),
+            searchKey: SearchKey.empty(),
           ),
         ),
       ).called(1);

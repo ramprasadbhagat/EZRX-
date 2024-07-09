@@ -37,7 +37,7 @@ class ReturnListByItemBloc
       add(
         _Fetch(
           appliedFilter: ReturnFilter.empty(),
-          searchKey: SearchKey(''),
+          searchKey: SearchKey.empty(),
         ),
       );
     });

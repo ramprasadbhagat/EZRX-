@@ -33,7 +33,7 @@ class MaterialListState with _$MaterialListState {
         isFetching: false,
         isScanFromBarcode: false,
         nextPageIndex: 0,
-        searchKey: SearchKey(''),
+        searchKey: SearchKey.empty(),
         selectedMaterialFilter: MaterialFilter.empty(),
       );
 

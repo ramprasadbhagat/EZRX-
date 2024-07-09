@@ -15,7 +15,7 @@ class _ProductSearchSection extends StatefulWidget {
 
 class _ProductSearchSectionState extends State<_ProductSearchSection> {
   late ProductSearchBloc _productSearchBloc;
-  SearchKey _searchKey = SearchKey.searchFilter('');
+  SearchKey _searchKey = SearchKey.empty();
   @override
   void initState() {
     super.initState();

@@ -30,7 +30,7 @@ class _PaymentSummarySearchBar extends StatelessWidget {
             searchValue: value,
             context: context,
           ),
-          customValidator: (value) => SearchKey.searchFilter(value).isValid(),
+          customValidator: (value) => SearchKey.search(value).isValid(),
           onClear: () => _fetchPaymentSummary(
             searchValue: '',
             context: context,
@@ -43,20 +43,14 @@ class _PaymentSummarySearchBar extends StatelessWidget {
   void _fetchPaymentSummary({
     required String searchValue,
     required BuildContext context,
-  }) {
-    final bloc = context.paymentSummaryBloc(context.isMPPayment);
-    final currenSearchValue =
-        bloc.state.appliedFilter.searchKey.getOrDefaultValue('');
-    if (currenSearchValue != searchValue) {
-      bloc.add(
-        PaymentSummaryEvent.fetch(
-          appliedFilter: searchValue.isEmpty
-              ? PaymentSummaryFilter.defaultFilter()
-              : PaymentSummaryFilter.empty().copyWith(
-                  searchKey: SearchKey.searchFilter(searchValue),
-                ),
-        ),
-      );
-    }
-  }
+  }) =>
+      context.paymentSummaryBloc(context.isMPPayment).add(
+            PaymentSummaryEvent.fetch(
+              appliedFilter: searchValue.isEmpty
+                  ? PaymentSummaryFilter.defaultFilter()
+                  : PaymentSummaryFilter.empty().copyWith(
+                      searchKey: SearchKey.search(searchValue),
+                    ),
+            ),
+          );
 }

@@ -28,7 +28,7 @@ class AllCreditsFilter with _$AllCreditsFilter {
         amountValueFrom: RangeValue(''),
         amountValueTo: RangeValue(''),
         filterStatuses: <String>[],
-        searchKey: SearchKey(''),
+        searchKey: SearchKey.empty(),
         filterOption: FilterOption(''),
       );
 
@@ -46,7 +46,7 @@ class AllCreditsFilter with _$AllCreditsFilter {
         amountValueFrom: RangeValue(''),
         amountValueTo: RangeValue(''),
         filterStatuses: <String>[],
-        searchKey: SearchKey(''),
+        searchKey: SearchKey.empty(),
         filterOption: FilterOption.documentDate(),
       );
 
@@ -79,6 +79,6 @@ class AllCreditsFilter with _$AllCreditsFilter {
   bool get anyFilterApplied => appliedFilterCount > 0;
 
   AllCreditsFilter get excludeSearch => copyWith(
-        searchKey: SearchKey(''),
+        searchKey: SearchKey.empty(),
       );
 }

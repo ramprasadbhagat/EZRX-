@@ -17,7 +17,7 @@ class ReturnSummaryFilter with _$ReturnSummaryFilter {
   }) = _ReturnSummaryFilter;
 
   factory ReturnSummaryFilter.empty() => ReturnSummaryFilter(
-        requestId: SearchKey.searchFilter(''),
+        requestId: SearchKey.empty(),
         refundTotalTo: RangeValue(''),
         refundTotalFrom: RangeValue(''),
         dateFrom: DateTimeStringValue(

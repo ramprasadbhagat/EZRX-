@@ -58,7 +58,7 @@ class SalesOrgSearch extends StatelessWidget {
                   onClear: () => context.read<SalesOrgBloc>().add(
                         SalesOrgEvent.searchSalesOrg(
                           salesOrgList: avialableSalesOrgList,
-                          searchKey: SearchKey.search(''),
+                          searchKey: SearchKey.empty(),
                         ),
                       ),
                   customValidator: (value) => true,

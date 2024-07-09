@@ -29,7 +29,7 @@ class CustomerCodeSelector extends StatelessWidget {
               ? null
               : () {
                   context.read<CustomerCodeBloc>().add(
-                        const CustomerCodeEvent.deletedSearch(),
+                        const CustomerCodeEvent.fetch(),
                       );
                   context.router.pushNamed('customer_search');
                 },

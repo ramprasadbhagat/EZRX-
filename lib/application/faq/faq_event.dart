@@ -12,7 +12,7 @@ class FaqEvent with _$FaqEvent {
   const factory FaqEvent.filterByFaqCategory({
     required FAQCategory selectedCategory,
   }) = _FilterByFaqCategory;
-  const factory FaqEvent.updatedSearchFaq({
-    required String searchKey,
+  const factory FaqEvent.updateSearchKey({
+    required SearchKey searchKey,
   }) = _UpdatedSearchFaq;
 }

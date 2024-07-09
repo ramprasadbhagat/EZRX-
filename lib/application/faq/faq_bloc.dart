@@ -56,7 +56,7 @@ class FaqBloc extends Bloc<FaqEvent, FaqState> {
               isFetching: false,
               apiFailureOrSuccessOption: optionOf(failureOrSuccessOption),
               selectedCategory: FAQCategory('All'),
-              searchKey: SearchKey.searchFilter(''),
+              searchKey: SearchKey.empty(),
               canLoadMore: faqInfo.faqList.length > config.pageSize,
             ),
           ),
@@ -106,12 +106,10 @@ class FaqBloc extends Bloc<FaqEvent, FaqState> {
           ),
         );
       },
-      updatedSearchFaq: (e) {
-        emit(
-          state.copyWith(
-            searchKey: SearchKey.searchFilter(e.searchKey),
-          ),
-        );
+      updateSearchKey: (e) {
+        if (!e.searchKey.isValid()) return;
+
+        emit(state.copyWith(searchKey: e.searchKey));
       },
     );
   }

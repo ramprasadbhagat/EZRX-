@@ -52,7 +52,7 @@ void main() {
     ),
   ];
   final salesOrgState = SalesOrgState.initial().copyWith(
-    searchKey: SearchKey(''),
+    searchKey: SearchKey.empty(),
     availableSalesOrg: availableSalesOrgList,
   );
   TestWidgetsFlutterBinding.ensureInitialized();
@@ -155,7 +155,7 @@ void main() {
       verify(
         () => salesOrgBlocMock.add(
           SalesOrgEvent.searchSalesOrg(
-            searchKey: SearchKey('2501'),
+            searchKey: SearchKey.search('2501'),
             salesOrgList: availableSalesOrgList,
           ),
         ),
@@ -179,7 +179,7 @@ void main() {
       verify(
         () => salesOrgBlocMock.add(
           SalesOrgEvent.searchSalesOrg(
-            searchKey: SearchKey('2502'),
+            searchKey: SearchKey.search('2502'),
             salesOrgList: availableSalesOrgList,
           ),
         ),

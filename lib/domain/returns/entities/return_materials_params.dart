@@ -29,7 +29,7 @@ class ReturnMaterialsParams with _$ReturnMaterialsParams {
         pageSize: 0,
         offset: 0,
         filter: ReturnItemsFilter.empty(),
-        searchKey: SearchKey(''),
+        searchKey: SearchKey.empty(),
         language: '',
         user: User.empty(),
       );

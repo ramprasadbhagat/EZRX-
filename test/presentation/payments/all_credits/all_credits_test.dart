@@ -455,7 +455,7 @@ void main() {
         (tester) async {
       when(() => allCreditsBlocMock.state).thenReturn(
         AllCreditsState.initial().copyWith.appliedFilter(
-              searchKey: SearchKey('fake-key'),
+              searchKey: SearchKey.search('fake-key'),
             ),
       );
       await tester.pumpWidget(getWidget());

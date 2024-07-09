@@ -28,7 +28,7 @@ void main() {
       CustomerCodeInfo.empty().copyWith(customerCodeSoldTo: 'mockCustomerCode');
   final mockAppliedFilter = ReturnFilter.empty()
       .copyWith(returnDateFrom: DateTimeStringValue('20233108'));
-  final mockSearchKey = SearchKey('searchKey');
+  final mockSearchKey = SearchKey.search('searchKey');
   final mockReturnItemList = <ReturnItem>[
     ReturnItem.empty().copyWith(
       requestId: '01',
@@ -217,7 +217,7 @@ void main() {
             offset: 0,
             pageSize: config.pageSize,
             salesOrg: mockSalesOrg,
-            searchKey: SearchKey(''),
+            searchKey: SearchKey.empty(),
             shipToInfo: mockShipInfo,
             user: mockUser,
           ),
@@ -272,7 +272,7 @@ void main() {
             offset: 0,
             pageSize: config.pageSize,
             salesOrg: mockSalesOrg,
-            searchKey: SearchKey(''),
+            searchKey: SearchKey.empty(),
             shipToInfo: mockShipInfo,
             user: mockUser,
           ),
@@ -467,7 +467,7 @@ void main() {
         act: (bloc) => bloc.add(
           ReturnListByRequestEvent.fetch(
             appliedFilter: mockAppliedFilter,
-            searchKey: SearchKey.searchFilter('1'),
+            searchKey: SearchKey.search('1'),
           ),
         ),
         expect: () => [],

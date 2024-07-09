@@ -77,7 +77,7 @@ void main() {
     when(() => productSearchBlocMock.state).thenReturn(
       ProductSearchState.initial().copyWith(
         productSuggestionHistory: ProductSuggestionHistory.empty()
-            .copyWith(searchKeyList: [SearchKey('test-search')]),
+            .copyWith(searchKeyList: [SearchKey.search('test-search')]),
       ),
     );
     when(() => eligibilityBloc.state).thenReturn(
@@ -136,7 +136,7 @@ void main() {
       final expectedState = <ProductSearchState>[
         ProductSearchState.initial().copyWith(
           productSuggestionHistory: ProductSuggestionHistory.empty()
-              .copyWith(searchKeyList: [SearchKey('test-search')]),
+              .copyWith(searchKeyList: [SearchKey.search('test-search')]),
         ),
       ];
       whenListen(productSearchBlocMock, Stream.fromIterable(expectedState));
@@ -218,7 +218,7 @@ void main() {
         when(() => productSearchBlocMock.state).thenReturn(
           ProductSearchState.initial().copyWith(
             suggestedProductList: [marketPlaceMaterial],
-            searchKey: SearchKey(fakeSearchText),
+            searchKey: SearchKey.search(fakeSearchText),
           ),
         );
         await tester.pumpWidget(getWidget());
@@ -244,7 +244,7 @@ void main() {
         when(() => productSearchBlocMock.state).thenReturn(
           ProductSearchState.initial().copyWith(
             suggestedProductList: [nonMarketPlaceMaterial],
-            searchKey: SearchKey(fakeSearchText),
+            searchKey: SearchKey.search(fakeSearchText),
           ),
         );
         await tester.pumpWidget(getWidget());
@@ -272,7 +272,7 @@ void main() {
         final expectedState = <ProductSearchState>[
           ProductSearchState.initial(),
           ProductSearchState.initial().copyWith(
-            searchKey: SearchKey('test-search'),
+            searchKey: SearchKey.search('test-search'),
             suggestedProductList: <MaterialInfo>[
               MaterialInfo.empty().copyWith(
                 materialNumber: MaterialNumber('fake-material-number'),
@@ -306,7 +306,7 @@ void main() {
           final expectedState = [
             ProductSearchState.initial(),
             ProductSearchState.initial().copyWith(
-              searchKey: SearchKey('test-search'),
+              searchKey: SearchKey.search('test-search'),
               suggestedProductList: <MaterialInfo>[
                 MaterialInfo.empty().copyWith(
                   materialNumber: MaterialNumber('fake-material-number'),

@@ -57,8 +57,8 @@ void main() {
 
   setUp(() {
     fakeOutstandingInvoiceFilter = OutstandingInvoiceFilter.defaultFilter();
-    fakeSearchKey = SearchKey.searchFilter('ab');
-    fakeInvalidSearchKey = SearchKey.searchFilter('a');
+    fakeSearchKey = SearchKey.search('ab');
+    fakeInvalidSearchKey = SearchKey.search('a');
     pageSize = config.pageSize;
   });
 

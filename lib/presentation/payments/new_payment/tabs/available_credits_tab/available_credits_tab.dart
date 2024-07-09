@@ -88,7 +88,7 @@ class AvailableCreditsTab extends StatelessWidget {
                                 AvailableCreditsEvent.fetch(
                                   appliedFilter:
                                       AvailableCreditFilter.defaultFilter(),
-                                  searchKey: SearchKey.searchFilter(''),
+                                  searchKey: SearchKey.empty(),
                                   isMarketPlace: context.isMPPayment,
                                 ),
                               );

@@ -88,7 +88,7 @@ class OrderNumberSection extends StatelessWidget {
                       onPressed: () => context.read<ViewByOrderBloc>().add(
                             ViewByOrderEvent.fetch(
                               filter: ViewByOrdersFilter.empty(),
-                              searchKey: SearchKey.searchFilter(
+                              searchKey: SearchKey.search(
                                 orderHistoryItem.orderNumber
                                     .getOrDefaultValue(''),
                               ),

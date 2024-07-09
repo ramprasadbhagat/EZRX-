@@ -48,14 +48,14 @@ void main() {
   group('ComboDealMaterialDetailState', () {
     test(' => searchableList when searchKey is empty', () {
       final state = ComboDealMaterialDetailState.initial().copyWith(
-        searchKey: SearchKey(''),
+        searchKey: SearchKey.empty(),
         items: items,
       );
       expect(state.searchableList, items);
     });
     test(' => searchableList when searchKey is not empty', () {
       final state = ComboDealMaterialDetailState.initial().copyWith(
-        searchKey: SearchKey('*****'),
+        searchKey: SearchKey.search('*****'),
         items: items,
       );
       expect(state.searchableList, {});
@@ -77,7 +77,7 @@ void main() {
           ),
       };
       final state = ComboDealMaterialDetailState.initial().copyWith(
-        searchKey: SearchKey('190'),
+        searchKey: SearchKey.search('190'),
         items: items,
       );
       expect(state.searchableList, {});

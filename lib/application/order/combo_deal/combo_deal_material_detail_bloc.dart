@@ -212,7 +212,7 @@ class ComboDealMaterialDetailBloc
             items: items,
             isFetchingComboInfo: true,
             isFetchingPrice: true,
-            searchKey: SearchKey.search(''),
+            searchKey: SearchKey.empty(),
           ),
         );
 
@@ -283,16 +283,14 @@ class ComboDealMaterialDetailBloc
       clearSearch: (_) {
         emit(
           state.copyWith(
-            searchKey: SearchKey.search(''),
+            searchKey: SearchKey.empty(),
           ),
         );
       },
       search: (e) {
-        emit(
-          state.copyWith(
-            searchKey: e.searchKey,
-          ),
-        );
+        if (!e.searchKey.isValid()) return;
+
+        emit(state.copyWith(searchKey: e.searchKey));
       },
       cartContainsCurrentCombo: (e) {
         emit(
@@ -310,7 +308,7 @@ class ComboDealMaterialDetailBloc
             items: {},
             isFetchingComboInfo: true,
             isFetchingPrice: true,
-            searchKey: SearchKey.search(''),
+            searchKey: SearchKey.empty(),
             nextPageIndex: 0,
             canLoadMore: true,
             materialCount: 0,

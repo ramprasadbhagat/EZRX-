@@ -27,7 +27,7 @@ class ReturnListByItemState with _$ReturnListByItemState {
         canLoadMore: true,
         returnItemList: <ReturnItem>[],
         appliedFilter: ReturnFilter.empty(),
-        searchKey: SearchKey.searchFilter(''),
+        searchKey: SearchKey.empty(),
         isDownloadInProgress: false,
       );
 }

@@ -181,11 +181,11 @@ class _UserRestrictionListSearchState extends State<UserRestrictionListSearch> {
       builder: (context, snapshot) {
         return CustomSearchBar(
           key: WidgetKeys.genericKey(
-            key: (SearchKey(snapshot.searchKey)).searchValueOrEmpty,
+            key: (SearchKey.search(snapshot.searchKey)).searchValueOrEmpty,
           ),
           enabled: !snapshot.isFetching,
-          initialValue: (SearchKey(snapshot.searchKey)).searchValueOrEmpty,
-          customValidator: (value) => SearchKey.searchFilter(value).isValid(),
+          initialValue: (SearchKey.search(snapshot.searchKey)).searchValueOrEmpty,
+          customValidator: (value) => SearchKey.search(value).isValid(),
           onSearchSubmitted: (value) {},
           onClear: () => userRestrictionListBloc.add(
             const UserRestrictionListEvent.updateSearchKey(''),

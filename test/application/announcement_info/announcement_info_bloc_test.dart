@@ -236,13 +236,13 @@ void main() {
       ),
       act: (AnnouncementInfoBloc bloc) => bloc
         ..add(
-          const AnnouncementInfoEvent.updateSearchKey(
-            searchKey: 'fake_searchKey',
+          AnnouncementInfoEvent.updateSearchKey(
+            searchKey: SearchKey.search('fake_searchKey'),
           ),
         ),
       expect: () => [
         announcementInfoState.copyWith(
-          searchKey: SearchKey.searchFilter('fake_searchKey'),
+          searchKey: SearchKey.search('fake_searchKey'),
         ),
       ],
     );
@@ -278,7 +278,7 @@ void main() {
       () {
         final announcementInfo = announcementInfoState.copyWith(
           announcementInfo: announcementInfoMock,
-          searchKey: SearchKey(
+          searchKey: SearchKey.search(
             announcementInfoMock.announcementList.first.title.toLowerCase(),
           ),
         );

@@ -178,9 +178,9 @@ void main() {
           pageSize: 10,
           offset: 0,
           orderHistoryFilter: mockOrderHistoryFilter.copyWith(
-              materialSearch: SearchKey('fake_materialSearch'),
-              principalSearch: SearchKey('fake_principalSearch'),
-              poNumber: SearchKey('fake_poReference'),
+              materialSearch: SearchKey.search('fake_materialSearch'),
+              principalSearch: SearchKey.search('fake_principalSearch'),
+              poNumber: SearchKey.search('fake_poReference'),
               orderId: SearchKey(
                 'fake_orderNumber',
               )));

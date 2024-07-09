@@ -27,7 +27,7 @@ class _AvailableCreditsSearchBar extends StatelessWidget {
           inputFormatters: <TextInputFormatter>[
             FilteringTextInputFormatter.digitsOnly,
           ],
-          customValidator: (value) => SearchKey.searchFilter(value).isValid(),
+          customValidator: (value) => SearchKey.search(value).isValid(),
           enabled: !state.isLoading,
           onClear: () => _search(
             context: context,
@@ -49,7 +49,7 @@ class _AvailableCreditsSearchBar extends StatelessWidget {
             appliedFilter: searchKey.isEmpty
                 ? AvailableCreditFilter.defaultFilter()
                 : AvailableCreditFilter.empty(),
-            searchKey: SearchKey.searchFilter(searchKey),
+            searchKey: SearchKey.search(searchKey),
             isMarketPlace: context.isMPPayment,
           ),
         );

@@ -21,7 +21,7 @@ mixin _$FaqEvent {
     required TResult Function(SalesOrg salesOrg) getFaq,
     required TResult Function(SalesOrg salesOrg) loadMoreAFaq,
     required TResult Function(FAQCategory selectedCategory) filterByFaqCategory,
-    required TResult Function(String searchKey) updatedSearchFaq,
+    required TResult Function(SearchKey searchKey) updateSearchKey,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -29,7 +29,7 @@ mixin _$FaqEvent {
     TResult? Function(SalesOrg salesOrg)? getFaq,
     TResult? Function(SalesOrg salesOrg)? loadMoreAFaq,
     TResult? Function(FAQCategory selectedCategory)? filterByFaqCategory,
-    TResult? Function(String searchKey)? updatedSearchFaq,
+    TResult? Function(SearchKey searchKey)? updateSearchKey,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -37,7 +37,7 @@ mixin _$FaqEvent {
     TResult Function(SalesOrg salesOrg)? getFaq,
     TResult Function(SalesOrg salesOrg)? loadMoreAFaq,
     TResult Function(FAQCategory selectedCategory)? filterByFaqCategory,
-    TResult Function(String searchKey)? updatedSearchFaq,
+    TResult Function(SearchKey searchKey)? updateSearchKey,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -46,7 +46,7 @@ mixin _$FaqEvent {
     required TResult Function(_GetFaq value) getFaq,
     required TResult Function(_LoadMoreFaq value) loadMoreAFaq,
     required TResult Function(_FilterByFaqCategory value) filterByFaqCategory,
-    required TResult Function(_UpdatedSearchFaq value) updatedSearchFaq,
+    required TResult Function(_UpdatedSearchFaq value) updateSearchKey,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -54,7 +54,7 @@ mixin _$FaqEvent {
     TResult? Function(_GetFaq value)? getFaq,
     TResult? Function(_LoadMoreFaq value)? loadMoreAFaq,
     TResult? Function(_FilterByFaqCategory value)? filterByFaqCategory,
-    TResult? Function(_UpdatedSearchFaq value)? updatedSearchFaq,
+    TResult? Function(_UpdatedSearchFaq value)? updateSearchKey,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -62,7 +62,7 @@ mixin _$FaqEvent {
     TResult Function(_GetFaq value)? getFaq,
     TResult Function(_LoadMoreFaq value)? loadMoreAFaq,
     TResult Function(_FilterByFaqCategory value)? filterByFaqCategory,
-    TResult Function(_UpdatedSearchFaq value)? updatedSearchFaq,
+    TResult Function(_UpdatedSearchFaq value)? updateSearchKey,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -153,7 +153,7 @@ class _$GetFaqImpl implements _GetFaq {
     required TResult Function(SalesOrg salesOrg) getFaq,
     required TResult Function(SalesOrg salesOrg) loadMoreAFaq,
     required TResult Function(FAQCategory selectedCategory) filterByFaqCategory,
-    required TResult Function(String searchKey) updatedSearchFaq,
+    required TResult Function(SearchKey searchKey) updateSearchKey,
   }) {
     return getFaq(salesOrg);
   }
@@ -164,7 +164,7 @@ class _$GetFaqImpl implements _GetFaq {
     TResult? Function(SalesOrg salesOrg)? getFaq,
     TResult? Function(SalesOrg salesOrg)? loadMoreAFaq,
     TResult? Function(FAQCategory selectedCategory)? filterByFaqCategory,
-    TResult? Function(String searchKey)? updatedSearchFaq,
+    TResult? Function(SearchKey searchKey)? updateSearchKey,
   }) {
     return getFaq?.call(salesOrg);
   }
@@ -175,7 +175,7 @@ class _$GetFaqImpl implements _GetFaq {
     TResult Function(SalesOrg salesOrg)? getFaq,
     TResult Function(SalesOrg salesOrg)? loadMoreAFaq,
     TResult Function(FAQCategory selectedCategory)? filterByFaqCategory,
-    TResult Function(String searchKey)? updatedSearchFaq,
+    TResult Function(SearchKey searchKey)? updateSearchKey,
     required TResult orElse(),
   }) {
     if (getFaq != null) {
@@ -190,7 +190,7 @@ class _$GetFaqImpl implements _GetFaq {
     required TResult Function(_GetFaq value) getFaq,
     required TResult Function(_LoadMoreFaq value) loadMoreAFaq,
     required TResult Function(_FilterByFaqCategory value) filterByFaqCategory,
-    required TResult Function(_UpdatedSearchFaq value) updatedSearchFaq,
+    required TResult Function(_UpdatedSearchFaq value) updateSearchKey,
   }) {
     return getFaq(this);
   }
@@ -201,7 +201,7 @@ class _$GetFaqImpl implements _GetFaq {
     TResult? Function(_GetFaq value)? getFaq,
     TResult? Function(_LoadMoreFaq value)? loadMoreAFaq,
     TResult? Function(_FilterByFaqCategory value)? filterByFaqCategory,
-    TResult? Function(_UpdatedSearchFaq value)? updatedSearchFaq,
+    TResult? Function(_UpdatedSearchFaq value)? updateSearchKey,
   }) {
     return getFaq?.call(this);
   }
@@ -212,7 +212,7 @@ class _$GetFaqImpl implements _GetFaq {
     TResult Function(_GetFaq value)? getFaq,
     TResult Function(_LoadMoreFaq value)? loadMoreAFaq,
     TResult Function(_FilterByFaqCategory value)? filterByFaqCategory,
-    TResult Function(_UpdatedSearchFaq value)? updatedSearchFaq,
+    TResult Function(_UpdatedSearchFaq value)? updateSearchKey,
     required TResult orElse(),
   }) {
     if (getFaq != null) {
@@ -299,7 +299,7 @@ class _$LoadMoreFaqImpl implements _LoadMoreFaq {
     required TResult Function(SalesOrg salesOrg) getFaq,
     required TResult Function(SalesOrg salesOrg) loadMoreAFaq,
     required TResult Function(FAQCategory selectedCategory) filterByFaqCategory,
-    required TResult Function(String searchKey) updatedSearchFaq,
+    required TResult Function(SearchKey searchKey) updateSearchKey,
   }) {
     return loadMoreAFaq(salesOrg);
   }
@@ -310,7 +310,7 @@ class _$LoadMoreFaqImpl implements _LoadMoreFaq {
     TResult? Function(SalesOrg salesOrg)? getFaq,
     TResult? Function(SalesOrg salesOrg)? loadMoreAFaq,
     TResult? Function(FAQCategory selectedCategory)? filterByFaqCategory,
-    TResult? Function(String searchKey)? updatedSearchFaq,
+    TResult? Function(SearchKey searchKey)? updateSearchKey,
   }) {
     return loadMoreAFaq?.call(salesOrg);
   }
@@ -321,7 +321,7 @@ class _$LoadMoreFaqImpl implements _LoadMoreFaq {
     TResult Function(SalesOrg salesOrg)? getFaq,
     TResult Function(SalesOrg salesOrg)? loadMoreAFaq,
     TResult Function(FAQCategory selectedCategory)? filterByFaqCategory,
-    TResult Function(String searchKey)? updatedSearchFaq,
+    TResult Function(SearchKey searchKey)? updateSearchKey,
     required TResult orElse(),
   }) {
     if (loadMoreAFaq != null) {
@@ -336,7 +336,7 @@ class _$LoadMoreFaqImpl implements _LoadMoreFaq {
     required TResult Function(_GetFaq value) getFaq,
     required TResult Function(_LoadMoreFaq value) loadMoreAFaq,
     required TResult Function(_FilterByFaqCategory value) filterByFaqCategory,
-    required TResult Function(_UpdatedSearchFaq value) updatedSearchFaq,
+    required TResult Function(_UpdatedSearchFaq value) updateSearchKey,
   }) {
     return loadMoreAFaq(this);
   }
@@ -347,7 +347,7 @@ class _$LoadMoreFaqImpl implements _LoadMoreFaq {
     TResult? Function(_GetFaq value)? getFaq,
     TResult? Function(_LoadMoreFaq value)? loadMoreAFaq,
     TResult? Function(_FilterByFaqCategory value)? filterByFaqCategory,
-    TResult? Function(_UpdatedSearchFaq value)? updatedSearchFaq,
+    TResult? Function(_UpdatedSearchFaq value)? updateSearchKey,
   }) {
     return loadMoreAFaq?.call(this);
   }
@@ -358,7 +358,7 @@ class _$LoadMoreFaqImpl implements _LoadMoreFaq {
     TResult Function(_GetFaq value)? getFaq,
     TResult Function(_LoadMoreFaq value)? loadMoreAFaq,
     TResult Function(_FilterByFaqCategory value)? filterByFaqCategory,
-    TResult Function(_UpdatedSearchFaq value)? updatedSearchFaq,
+    TResult Function(_UpdatedSearchFaq value)? updateSearchKey,
     required TResult orElse(),
   }) {
     if (loadMoreAFaq != null) {
@@ -447,7 +447,7 @@ class _$FilterByFaqCategoryImpl implements _FilterByFaqCategory {
     required TResult Function(SalesOrg salesOrg) getFaq,
     required TResult Function(SalesOrg salesOrg) loadMoreAFaq,
     required TResult Function(FAQCategory selectedCategory) filterByFaqCategory,
-    required TResult Function(String searchKey) updatedSearchFaq,
+    required TResult Function(SearchKey searchKey) updateSearchKey,
   }) {
     return filterByFaqCategory(selectedCategory);
   }
@@ -458,7 +458,7 @@ class _$FilterByFaqCategoryImpl implements _FilterByFaqCategory {
     TResult? Function(SalesOrg salesOrg)? getFaq,
     TResult? Function(SalesOrg salesOrg)? loadMoreAFaq,
     TResult? Function(FAQCategory selectedCategory)? filterByFaqCategory,
-    TResult? Function(String searchKey)? updatedSearchFaq,
+    TResult? Function(SearchKey searchKey)? updateSearchKey,
   }) {
     return filterByFaqCategory?.call(selectedCategory);
   }
@@ -469,7 +469,7 @@ class _$FilterByFaqCategoryImpl implements _FilterByFaqCategory {
     TResult Function(SalesOrg salesOrg)? getFaq,
     TResult Function(SalesOrg salesOrg)? loadMoreAFaq,
     TResult Function(FAQCategory selectedCategory)? filterByFaqCategory,
-    TResult Function(String searchKey)? updatedSearchFaq,
+    TResult Function(SearchKey searchKey)? updateSearchKey,
     required TResult orElse(),
   }) {
     if (filterByFaqCategory != null) {
@@ -484,7 +484,7 @@ class _$FilterByFaqCategoryImpl implements _FilterByFaqCategory {
     required TResult Function(_GetFaq value) getFaq,
     required TResult Function(_LoadMoreFaq value) loadMoreAFaq,
     required TResult Function(_FilterByFaqCategory value) filterByFaqCategory,
-    required TResult Function(_UpdatedSearchFaq value) updatedSearchFaq,
+    required TResult Function(_UpdatedSearchFaq value) updateSearchKey,
   }) {
     return filterByFaqCategory(this);
   }
@@ -495,7 +495,7 @@ class _$FilterByFaqCategoryImpl implements _FilterByFaqCategory {
     TResult? Function(_GetFaq value)? getFaq,
     TResult? Function(_LoadMoreFaq value)? loadMoreAFaq,
     TResult? Function(_FilterByFaqCategory value)? filterByFaqCategory,
-    TResult? Function(_UpdatedSearchFaq value)? updatedSearchFaq,
+    TResult? Function(_UpdatedSearchFaq value)? updateSearchKey,
   }) {
     return filterByFaqCategory?.call(this);
   }
@@ -506,7 +506,7 @@ class _$FilterByFaqCategoryImpl implements _FilterByFaqCategory {
     TResult Function(_GetFaq value)? getFaq,
     TResult Function(_LoadMoreFaq value)? loadMoreAFaq,
     TResult Function(_FilterByFaqCategory value)? filterByFaqCategory,
-    TResult Function(_UpdatedSearchFaq value)? updatedSearchFaq,
+    TResult Function(_UpdatedSearchFaq value)? updateSearchKey,
     required TResult orElse(),
   }) {
     if (filterByFaqCategory != null) {
@@ -533,7 +533,7 @@ abstract class _$$UpdatedSearchFaqImplCopyWith<$Res> {
           $Res Function(_$UpdatedSearchFaqImpl) then) =
       __$$UpdatedSearchFaqImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({String searchKey});
+  $Res call({SearchKey searchKey});
 }
 
 /// @nodoc
@@ -553,7 +553,7 @@ class __$$UpdatedSearchFaqImplCopyWithImpl<$Res>
       searchKey: null == searchKey
           ? _value.searchKey
           : searchKey // ignore: cast_nullable_to_non_nullable
-              as String,
+              as SearchKey,
     ));
   }
 }
@@ -564,11 +564,11 @@ class _$UpdatedSearchFaqImpl implements _UpdatedSearchFaq {
   const _$UpdatedSearchFaqImpl({required this.searchKey});
 
   @override
-  final String searchKey;
+  final SearchKey searchKey;
 
   @override
   String toString() {
-    return 'FaqEvent.updatedSearchFaq(searchKey: $searchKey)';
+    return 'FaqEvent.updateSearchKey(searchKey: $searchKey)';
   }
 
   @override
@@ -596,9 +596,9 @@ class _$UpdatedSearchFaqImpl implements _UpdatedSearchFaq {
     required TResult Function(SalesOrg salesOrg) getFaq,
     required TResult Function(SalesOrg salesOrg) loadMoreAFaq,
     required TResult Function(FAQCategory selectedCategory) filterByFaqCategory,
-    required TResult Function(String searchKey) updatedSearchFaq,
+    required TResult Function(SearchKey searchKey) updateSearchKey,
   }) {
-    return updatedSearchFaq(searchKey);
+    return updateSearchKey(searchKey);
   }
 
   @override
@@ -607,9 +607,9 @@ class _$UpdatedSearchFaqImpl implements _UpdatedSearchFaq {
     TResult? Function(SalesOrg salesOrg)? getFaq,
     TResult? Function(SalesOrg salesOrg)? loadMoreAFaq,
     TResult? Function(FAQCategory selectedCategory)? filterByFaqCategory,
-    TResult? Function(String searchKey)? updatedSearchFaq,
+    TResult? Function(SearchKey searchKey)? updateSearchKey,
   }) {
-    return updatedSearchFaq?.call(searchKey);
+    return updateSearchKey?.call(searchKey);
   }
 
   @override
@@ -618,11 +618,11 @@ class _$UpdatedSearchFaqImpl implements _UpdatedSearchFaq {
     TResult Function(SalesOrg salesOrg)? getFaq,
     TResult Function(SalesOrg salesOrg)? loadMoreAFaq,
     TResult Function(FAQCategory selectedCategory)? filterByFaqCategory,
-    TResult Function(String searchKey)? updatedSearchFaq,
+    TResult Function(SearchKey searchKey)? updateSearchKey,
     required TResult orElse(),
   }) {
-    if (updatedSearchFaq != null) {
-      return updatedSearchFaq(searchKey);
+    if (updateSearchKey != null) {
+      return updateSearchKey(searchKey);
     }
     return orElse();
   }
@@ -633,9 +633,9 @@ class _$UpdatedSearchFaqImpl implements _UpdatedSearchFaq {
     required TResult Function(_GetFaq value) getFaq,
     required TResult Function(_LoadMoreFaq value) loadMoreAFaq,
     required TResult Function(_FilterByFaqCategory value) filterByFaqCategory,
-    required TResult Function(_UpdatedSearchFaq value) updatedSearchFaq,
+    required TResult Function(_UpdatedSearchFaq value) updateSearchKey,
   }) {
-    return updatedSearchFaq(this);
+    return updateSearchKey(this);
   }
 
   @override
@@ -644,9 +644,9 @@ class _$UpdatedSearchFaqImpl implements _UpdatedSearchFaq {
     TResult? Function(_GetFaq value)? getFaq,
     TResult? Function(_LoadMoreFaq value)? loadMoreAFaq,
     TResult? Function(_FilterByFaqCategory value)? filterByFaqCategory,
-    TResult? Function(_UpdatedSearchFaq value)? updatedSearchFaq,
+    TResult? Function(_UpdatedSearchFaq value)? updateSearchKey,
   }) {
-    return updatedSearchFaq?.call(this);
+    return updateSearchKey?.call(this);
   }
 
   @override
@@ -655,21 +655,21 @@ class _$UpdatedSearchFaqImpl implements _UpdatedSearchFaq {
     TResult Function(_GetFaq value)? getFaq,
     TResult Function(_LoadMoreFaq value)? loadMoreAFaq,
     TResult Function(_FilterByFaqCategory value)? filterByFaqCategory,
-    TResult Function(_UpdatedSearchFaq value)? updatedSearchFaq,
+    TResult Function(_UpdatedSearchFaq value)? updateSearchKey,
     required TResult orElse(),
   }) {
-    if (updatedSearchFaq != null) {
-      return updatedSearchFaq(this);
+    if (updateSearchKey != null) {
+      return updateSearchKey(this);
     }
     return orElse();
   }
 }
 
 abstract class _UpdatedSearchFaq implements FaqEvent {
-  const factory _UpdatedSearchFaq({required final String searchKey}) =
+  const factory _UpdatedSearchFaq({required final SearchKey searchKey}) =
       _$UpdatedSearchFaqImpl;
 
-  String get searchKey;
+  SearchKey get searchKey;
   @JsonKey(ignore: true)
   _$$UpdatedSearchFaqImplCopyWith<_$UpdatedSearchFaqImpl> get copyWith =>
       throw _privateConstructorUsedError;

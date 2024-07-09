@@ -32,7 +32,7 @@ class ViewByItemsState with _$ViewByItemsState {
         isFetchingInvoices: false,
         nextPageIndex: 0,
         failureOrSuccessOption: none(),
-        searchKey: SearchKey.searchFilter(''),
+        searchKey: SearchKey.empty(),
         appliedFilter: ViewByItemFilter.empty(),
       );
 }

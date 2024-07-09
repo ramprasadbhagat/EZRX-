@@ -336,7 +336,7 @@ void main() {
         () => returnItemsBlocMock.add(
           ReturnItemsEvent.fetch(
             appliedFilter: ReturnItemsFilter.init(),
-            searchKey: SearchKey.searchFilter(''),
+            searchKey: SearchKey.empty(),
           ),
         ),
       ).called(1);
@@ -395,7 +395,7 @@ void main() {
     testWidgets('=> Search Bar Test', (tester) async {
       when(() => returnItemsBlocMock.state).thenReturn(
         ReturnItemsState.initial().copyWith(
-          searchKey: SearchKey('12'),
+          searchKey: SearchKey.search('12'),
         ),
       );
       await tester.pumpWidget(getScopedWidget());
@@ -411,7 +411,7 @@ void main() {
         () => returnItemsBlocMock.add(
           ReturnItemsEvent.fetch(
             appliedFilter: ReturnItemsFilter.empty(),
-            searchKey: SearchKey.searchFilter('123'),
+            searchKey: SearchKey.search('123'),
           ),
         ),
       ).called(1);
@@ -421,7 +421,7 @@ void main() {
         () => returnItemsBlocMock.add(
           ReturnItemsEvent.fetch(
             appliedFilter: ReturnItemsFilter.empty(),
-            searchKey: SearchKey.searchFilter('1234'),
+            searchKey: SearchKey.search('1234'),
           ),
         ),
       ).called(1);
@@ -432,7 +432,7 @@ void main() {
         () => returnItemsBlocMock.add(
           ReturnItemsEvent.fetch(
             appliedFilter: ReturnItemsFilter.empty(),
-            searchKey: SearchKey.searchFilter(''),
+            searchKey: SearchKey.empty(),
           ),
         ),
       ).called(1);

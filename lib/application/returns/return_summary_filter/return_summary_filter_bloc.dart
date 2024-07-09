@@ -44,7 +44,7 @@ class ReturnSummaryFilterBloc
       returnIdChanged: (e) => emit(
         state.copyWith(
           returnSummaryFilter: state.returnSummaryFilter.copyWith(
-            requestId: SearchKey.searchFilter(e.returnId),
+            requestId: SearchKey.search(e.returnId),
           ),
           showErrorMessages: false,
         ),

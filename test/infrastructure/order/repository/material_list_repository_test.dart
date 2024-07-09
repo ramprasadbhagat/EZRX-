@@ -75,7 +75,7 @@ void main() {
   const fakeMarket = 'fake-market';
   late MaterialResponse fakeMaterialResponse;
   late MaterialResponse fakeComboDealMaterialResponse;
-  final fakeSearchKey = SearchKey.searchFilter('ab');
+  final fakeSearchKey = SearchKey.search('ab');
 
   setUpAll(() async {
     mockConfig = MockConfig();
@@ -514,7 +514,7 @@ void main() {
           principalData: fakePrincipleData,
           user: fakeExternalSalesRepUser,
           enableGimmickMaterial: false,
-          searchKey: SearchKey(''),
+          searchKey: SearchKey.empty(),
           offset: 0,
           pageSize: 10,
         );
@@ -538,7 +538,7 @@ void main() {
           principalData: fakePrincipleData,
           user: fakeExternalSalesRepUser,
           enableGimmickMaterial: false,
-          searchKey: SearchKey(''),
+          searchKey: SearchKey.empty(),
           offset: 0,
           pageSize: 10,
         );
@@ -588,7 +588,7 @@ void main() {
           principalData: fakePrincipleData,
           user: fakeExternalSalesRepUser,
           enableGimmickMaterial: false,
-          searchKey: SearchKey(''),
+          searchKey: SearchKey.empty(),
           offset: 0,
           pageSize: 10,
         );
@@ -640,7 +640,7 @@ void main() {
           principalData: fakePrincipleData,
           user: fakeExternalSalesRepUser,
           enableGimmickMaterial: false,
-          searchKey: SearchKey(''),
+          searchKey: SearchKey.empty(),
           offset: 0,
           pageSize: 10,
         );

@@ -13,7 +13,7 @@ class ArticlesInfoEvent with _$ArticlesInfoEvent {
   const factory ArticlesInfoEvent.loadMoreArticles() = _LoadMoreArticles;
 
   const factory ArticlesInfoEvent.setSearchKey({
-    required String searchKey,
+    required SearchKey searchKey,
   }) = _SetSearchKey;
 
   const factory ArticlesInfoEvent.setCategoryKey({

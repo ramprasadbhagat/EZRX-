@@ -150,7 +150,7 @@ void main() {
             salesOrganisation: fakeMYSalesOrganisation,
             customerCodeInfo: fakeCustomerCodeInfo,
             filter: AllInvoicesFilter.defaultFilter().copyWith(
-              searchKey: SearchKey(
+              searchKey: SearchKey.search(
                 creditAndInvoiceItemList.first.searchKey.getValue(),
               ),
             ),
@@ -201,7 +201,7 @@ void main() {
             salesOrganisation: fakeMYSalesOrganisation,
             customerCodeInfo: fakeCustomerCodeInfo,
             filter: AllInvoicesFilter.defaultFilter().copyWith(
-              searchKey: SearchKey(
+              searchKey: SearchKey.search(
                 creditAndInvoiceItemList.first.searchKey.getValue(),
               ),
             ),
@@ -240,7 +240,7 @@ void main() {
             salesOrganisation: fakeMYSalesOrganisation,
             customerCodeInfo: fakeCustomerCodeInfo,
             filter: AllInvoicesFilter.defaultFilter().copyWith(
-              searchKey: SearchKey(
+              searchKey: SearchKey.search(
                 creditAndInvoiceItemList.first.searchKey.getValue(),
               ),
             ),

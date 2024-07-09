@@ -49,9 +49,9 @@ class _DeliveryAddressSearchSection extends StatelessWidget {
             customValidator: (value) => SearchKey.search(value).isValid(),
             enabled: !state.isFetching,
             onClear: () {
-              context.read<CustomerCodeBloc>().add(
-                    const CustomerCodeEvent.deletedSearch(),
-                  );
+              context
+                  .read<CustomerCodeBloc>()
+                  .add(const CustomerCodeEvent.fetch());
             },
             initialValue: state.searchKey.getOrDefaultValue(''),
           );

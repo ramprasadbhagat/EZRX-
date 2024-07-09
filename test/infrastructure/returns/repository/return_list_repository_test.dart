@@ -57,7 +57,7 @@ void main() {
   final returnListByRequest = [ReturnItem.empty()];
   final errorMock = Exception('fake-error');
   final appliedFilterMock = ReturnFilter.empty();
-  final searchKeyMock = SearchKey('fake-search-key');
+  final searchKeyMock = SearchKey.search('fake-search-key');
   const fakeMarket = 'fake-market';
   final buffer = Uint8List.fromList([1, 2, 3, 4, 5]);
   final returnListRequest = ReturnListRequest.empty().copyWith(

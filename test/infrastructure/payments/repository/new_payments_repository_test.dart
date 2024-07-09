@@ -147,7 +147,7 @@ void main() {
           pageSize: pageSize,
           salesOrganisation:
               SalesOrganisation.empty().copyWith(salesOrg: fakeSalesOrg),
-          searchKey: SearchKey(''),
+          searchKey: SearchKey.empty(),
           isMarketPlace: true,
         );
         expect(
@@ -174,7 +174,7 @@ void main() {
           pageSize: pageSize,
           salesOrganisation:
               SalesOrganisation.empty().copyWith(salesOrg: fakeSalesOrg),
-          searchKey: SearchKey(''),
+          searchKey: SearchKey.empty(),
           isMarketPlace: true,
         );
         expect(
@@ -212,7 +212,7 @@ void main() {
           pageSize: pageSize,
           salesOrganisation:
               SalesOrganisation.empty().copyWith(salesOrg: fakeSalesOrg),
-          searchKey: SearchKey(''),
+          searchKey: SearchKey.empty(),
           isMarketPlace: true,
         );
         expect(
@@ -237,7 +237,7 @@ void main() {
           pageSize: pageSize,
           salesOrganisation:
               SalesOrganisation.empty().copyWith(salesOrg: fakeSalesOrg),
-          searchKey: SearchKey(''),
+          searchKey: SearchKey.empty(),
           isMarketPlace: true,
         );
         expect(
@@ -527,7 +527,7 @@ void main() {
           offset: offset,
           pageSize: pageSize,
           salesOrganisation: fakeIDSalesOrganisation,
-          searchKey: SearchKey(''),
+          searchKey: SearchKey.empty(),
           isMarketPlace: true,
         );
         expect(
@@ -561,7 +561,7 @@ void main() {
           pageSize: pageSize,
           salesOrganisation:
               SalesOrganisation.empty().copyWith(salesOrg: fakeSalesOrg),
-          searchKey: SearchKey('fake'),
+          searchKey: SearchKey.search('fake'),
           isMarketPlace: true,
         );
         expect(
@@ -595,7 +595,7 @@ void main() {
           pageSize: pageSize,
           salesOrganisation:
               SalesOrganisation.empty().copyWith(salesOrg: fakeSalesOrg),
-          searchKey: SearchKey('fake'),
+          searchKey: SearchKey.search('fake'),
           isMarketPlace: true,
         );
         expect(
@@ -627,7 +627,7 @@ void main() {
           pageSize: pageSize,
           salesOrganisation:
               SalesOrganisation.empty().copyWith(salesOrg: fakeSalesOrg),
-          searchKey: SearchKey('fake'),
+          searchKey: SearchKey.search('fake'),
           isMarketPlace: true,
         );
         expect(
@@ -659,7 +659,7 @@ void main() {
           pageSize: pageSize,
           salesOrganisation:
               SalesOrganisation.empty().copyWith(salesOrg: fakeSalesOrg),
-          searchKey: SearchKey('fake'),
+          searchKey: SearchKey.search('fake'),
           isMarketPlace: false,
         );
         expect(

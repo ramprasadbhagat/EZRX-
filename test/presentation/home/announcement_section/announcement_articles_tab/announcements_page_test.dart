@@ -133,8 +133,8 @@ void main() {
         await tester.pump(Duration(milliseconds: configMock.autoSearchTimeout));
         verify(
           () => announcementInfoBloc.add(
-            const AnnouncementInfoEvent.updateSearchKey(
-              searchKey: fakeKeyWord,
+            AnnouncementInfoEvent.updateSearchKey(
+              searchKey: SearchKey.search(fakeKeyWord),
             ),
           ),
         ).called(1);
@@ -160,8 +160,8 @@ void main() {
         await tester.testTextInput.receiveAction(TextInputAction.done);
         verify(
           () => announcementInfoBloc.add(
-            const AnnouncementInfoEvent.updateSearchKey(
-              searchKey: fakeKeyWord,
+            AnnouncementInfoEvent.updateSearchKey(
+              searchKey: SearchKey.search(fakeKeyWord),
             ),
           ),
         ).called(1);
@@ -171,7 +171,7 @@ void main() {
           (tester) async {
         when(() => announcementInfoBloc.state).thenReturn(
           AnnouncementInfoState.initial().copyWith(
-            searchKey: SearchKey.searchFilter(fakeKeyWord),
+            searchKey: SearchKey.search(fakeKeyWord),
           ),
         );
         await tester.pumpWidget(getWidget());
@@ -180,8 +180,8 @@ void main() {
         await tester.tap(find.byKey(WidgetKeys.clearIconKey));
         verify(
           () => announcementInfoBloc.add(
-            const AnnouncementInfoEvent.updateSearchKey(
-              searchKey: '',
+            AnnouncementInfoEvent.updateSearchKey(
+              searchKey: SearchKey.empty(),
             ),
           ),
         ).called(1);
@@ -206,7 +206,9 @@ void main() {
         await tester.pump(Duration(milliseconds: configMock.autoSearchTimeout));
         verify(
           () => articlesInfoBloc.add(
-            const ArticlesInfoEvent.setSearchKey(searchKey: fakeKeyWord),
+            ArticlesInfoEvent.setSearchKey(
+              searchKey: SearchKey.search(fakeKeyWord),
+            ),
           ),
         ).called(1);
       });
@@ -231,8 +233,8 @@ void main() {
         await tester.testTextInput.receiveAction(TextInputAction.done);
         verify(
           () => articlesInfoBloc.add(
-            const ArticlesInfoEvent.setSearchKey(
-              searchKey: fakeKeyWord,
+            ArticlesInfoEvent.setSearchKey(
+              searchKey: SearchKey.search(fakeKeyWord),
             ),
           ),
         ).called(1);
@@ -241,7 +243,7 @@ void main() {
       testWidgets('Articles Search Bar On Tap Clear Button', (tester) async {
         when(() => articlesInfoBloc.state).thenReturn(
           ArticlesInfoState.initial().copyWith(
-            searchKey: SearchKey.searchFilter(fakeKeyWord),
+            searchKey: SearchKey.search(fakeKeyWord),
           ),
         );
         await tester.pumpWidget(getWidget());
@@ -250,8 +252,8 @@ void main() {
         await tester.tap(find.byKey(WidgetKeys.clearIconKey));
         verify(
           () => articlesInfoBloc.add(
-            const ArticlesInfoEvent.setSearchKey(
-              searchKey: '',
+            ArticlesInfoEvent.setSearchKey(
+              searchKey: SearchKey.empty(),
             ),
           ),
         ).called(1);

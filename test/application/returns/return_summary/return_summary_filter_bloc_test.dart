@@ -36,7 +36,7 @@ void main() {
         getDateStringByDateTime(fakeToDate),
       ),
       sortBy: StatusType('Active'),
-      requestId: SearchKey.searchFilter('mock_id'),
+      requestId: SearchKey.search('mock_id'),
       refundTotalTo: RangeValue('100'),
       refundTotalFrom: RangeValue('1000'),
     );
@@ -67,7 +67,7 @@ void main() {
               getDateStringByDateTime(fakeToDate),
             ),
             sortBy: StatusType('Active'),
-            requestId: SearchKey.searchFilter('mock_id'),
+            requestId: SearchKey.search('mock_id'),
           ),
         ),
         act: (ReturnSummaryFilterBloc bloc) =>
@@ -82,7 +82,7 @@ void main() {
                 getDateStringByDateTime(fakeToDate),
               ),
               sortBy: StatusType('Active'),
-              requestId: SearchKey.searchFilter('mock_id'),
+              requestId: SearchKey.search('mock_id'),
             ),
             isSubmitting: true,
           ),
@@ -118,7 +118,7 @@ void main() {
         expect: () => [
           ReturnSummaryFilterState.initial().copyWith(
             returnSummaryFilter: returnSummaryFilter.copyWith(
-              requestId: SearchKey.searchFilter('mock_returnId'),
+              requestId: SearchKey.search('mock_returnId'),
             ),
             showErrorMessages: false,
           ),

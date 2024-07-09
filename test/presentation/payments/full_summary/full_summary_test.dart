@@ -46,7 +46,7 @@ void main() {
   late List<CreditAndInvoiceItem> fullSummaryList;
   late MixpanelService mixpanelServiceMock;
 
-  final fakeSearchKey = SearchKey('fake-search-key');
+  final fakeSearchKey = SearchKey.search('fake-search-key');
 
   setUpAll(() async {
     TestWidgetsFlutterBinding.ensureInitialized();

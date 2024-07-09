@@ -53,18 +53,9 @@ class SearchKey extends ValueObject<String> {
   @override
   final Either<ValueFailure<String>, String> value;
 
-  factory SearchKey(String input) {
-    return SearchKey._(right(input));
-  }
+  factory SearchKey.empty() => SearchKey._(right(''));
 
   factory SearchKey.search(String searchText) {
-    return SearchKey._(
-      validateStringNotEmpty(searchText)
-          .flatMap((input) => validateMinStringLength(input, 2)),
-    );
-  }
-
-  factory SearchKey.searchFilter(String searchText) {
     return SearchKey._(
       (validateStringIsEmpty(searchText).fold(
         (l) => validateMinStringLength(l.failedValue, 2),

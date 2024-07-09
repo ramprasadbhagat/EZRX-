@@ -389,7 +389,7 @@ void main() {
       );
     });
     testWidgets('reset filter by order', (tester) async {
-      final fakeSearchKey = SearchKey('test');
+      final fakeSearchKey = SearchKey.search('test');
       when(() => viewByOrderBlocMock.state).thenReturn(
         ViewByOrderState.initial().copyWith(
           appliedFilter: ViewByOrdersFilter.empty()
@@ -428,7 +428,7 @@ void main() {
 
     testWidgets('reset filter by items', (tester) async {
       await tester.binding.setSurfaceSize(const Size(480, 900));
-      final fakeSearchKey = SearchKey('test');
+      final fakeSearchKey = SearchKey.search('test');
       when(() => viewByItemsBlocMock.state).thenReturn(
         ViewByItemsState.initial().copyWith(
           appliedFilter: ViewByItemFilter.empty()
@@ -485,7 +485,7 @@ void main() {
         () => viewByOrderBlocMock.add(
           ViewByOrderEvent.fetch(
             filter: fakeFilter,
-            searchKey: SearchKey(''),
+            searchKey: SearchKey.empty(),
             isDetailsPage: false,
           ),
         ),
@@ -520,7 +520,7 @@ void main() {
         () => viewByItemsBlocMock.add(
           ViewByItemsEvent.fetch(
             viewByItemFilter: fakeFilter,
-            searchKey: SearchKey(''),
+            searchKey: SearchKey.empty(),
           ),
         ),
       );
@@ -860,7 +860,7 @@ void main() {
         () => viewByItemsBlocMock.add(
           ViewByItemsEvent.fetch(
             viewByItemFilter: ViewByItemFilter.empty(),
-            searchKey: SearchKey('dummy'),
+            searchKey: SearchKey.search('dummy'),
           ),
         ),
       );
@@ -880,7 +880,7 @@ void main() {
         () => viewByOrderBlocMock.add(
           ViewByOrderEvent.fetch(
             filter: ViewByOrdersFilter.empty(),
-            searchKey: SearchKey('dummy'),
+            searchKey: SearchKey.search('dummy'),
             isDetailsPage: false,
           ),
         ),

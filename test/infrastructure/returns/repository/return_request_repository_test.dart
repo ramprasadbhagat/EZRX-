@@ -75,7 +75,7 @@ void main() {
     pageSize: pageSizeMock,
     offset: offsetMock,
     filter: ReturnItemsFilter.empty(),
-    searchKey: SearchKey(''),
+    searchKey: SearchKey.empty(),
     language: fakeUserWithLanguageCode.preferredLanguage.languageCode,
     user: fakeUserWithLanguageCode,
   );

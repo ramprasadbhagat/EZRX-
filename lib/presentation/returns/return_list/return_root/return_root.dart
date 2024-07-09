@@ -60,13 +60,13 @@ class _ReturnRootState extends State<ReturnRoot> {
     context.read<ReturnListByItemBloc>().add(
           ReturnListByItemEvent.fetch(
             appliedFilter: ReturnFilter.empty(),
-            searchKey: SearchKey(''),
+            searchKey: SearchKey.empty(),
           ),
         );
     context.read<ReturnListByRequestBloc>().add(
           ReturnListByRequestEvent.fetch(
             appliedFilter: ReturnFilter.empty(),
-            searchKey: SearchKey(''),
+            searchKey: SearchKey.empty(),
           ),
         );
   }

@@ -1360,7 +1360,7 @@ void main() {
         () => allInvoicesBlocMock.add(
           AllInvoicesEvent.fetch(
             appliedFilter: AllInvoicesFilter.defaultFilter().copyWith(
-              searchKey: SearchKey.searchFilter(
+              searchKey: SearchKey.search(
                 fakeOrderHistoryItem.invoiceNumber.getOrDefaultValue(''),
               ),
             ),
@@ -1392,7 +1392,7 @@ void main() {
         ViewByOrderState.initial().copyWith(
           failureOrSuccessOption:
               optionOf(const Left(ApiFailure.other(failureMessage))),
-          searchKey: SearchKey.searchFilter('fake_searchKey'),
+          searchKey: SearchKey.search('fake_searchKey'),
         ),
       ];
       whenListen(
@@ -1449,7 +1449,7 @@ void main() {
         ViewByOrderState.initial().copyWith(
           failureOrSuccessOption: optionOf(Right(fakeOrder)),
           viewByOrderList: fakeOrder,
-          searchKey: SearchKey('fake_searchKey'),
+          searchKey: SearchKey.search('fake_searchKey'),
         ),
       ];
       whenListen(
@@ -1493,7 +1493,7 @@ void main() {
         () => viewByOrderBlocMock.add(
           ViewByOrderEvent.fetch(
             filter: ViewByOrdersFilter.empty(),
-            searchKey: SearchKey.searchFilter(
+            searchKey: SearchKey.search(
               fakeOrderHistoryItem.orderNumber.getOrDefaultValue(''),
             ),
             isDetailsPage: true,

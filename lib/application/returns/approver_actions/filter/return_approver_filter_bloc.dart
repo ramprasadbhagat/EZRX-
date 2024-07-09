@@ -51,7 +51,7 @@ class ReturnApproverFilterBloc
       createdByChanged: (_CreatedByChanged e) => emit(
         state.copyWith(
           approverReturnFilter: state.approverReturnFilter.copyWith(
-            createdBy: SearchKey.searchFilter(e.createdBy),
+            createdBy: SearchKey.search(e.createdBy),
           ),
           showErrorMessages: false,
         ),
@@ -59,7 +59,7 @@ class ReturnApproverFilterBloc
       returnIdChanged: (_ReturnIdChanged e) => emit(
         state.copyWith(
           approverReturnFilter: state.approverReturnFilter.copyWith(
-            returnId: SearchKey.searchFilter(e.returnId),
+            returnId: SearchKey.search(e.returnId),
           ),
           showErrorMessages: false,
         ),
@@ -67,7 +67,7 @@ class ReturnApproverFilterBloc
       shipToChanged: (_ShipToChanged e) => emit(
         state.copyWith(
           approverReturnFilter: state.approverReturnFilter.copyWith(
-            shipTo: SearchKey.searchFilter(e.shitTo),
+            shipTo: SearchKey.search(e.shitTo),
           ),
           showErrorMessages: false,
         ),
@@ -75,7 +75,7 @@ class ReturnApproverFilterBloc
       soldToChanged: (_SoldToChanged e) => emit(
         state.copyWith(
           approverReturnFilter: state.approverReturnFilter.copyWith(
-            soldTo: SearchKey.searchFilter(e.soldTo),
+            soldTo: SearchKey.search(e.soldTo),
           ),
           showErrorMessages: false,
         ),

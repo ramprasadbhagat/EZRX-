@@ -20,7 +20,7 @@ class MaterialFilterState with _$MaterialFilterState {
           manufactureMapOptions: <String, bool>{},
           brandList: <String>[],
         ),
-        searchKey: SearchKey.searchFilter(''),
+        searchKey: SearchKey.empty(),
         hasAccessToCovidMaterial: false,
         apiFailureOrSuccessOption: none(),
       );

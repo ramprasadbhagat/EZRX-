@@ -126,7 +126,7 @@ class ReturnItemsTab extends StatelessWidget {
                   onRefresh: () => context.read<ReturnItemsBloc>().add(
                         ReturnItemsEvent.fetch(
                           appliedFilter: ReturnItemsFilter.init(),
-                          searchKey: SearchKey.searchFilter(''),
+                          searchKey: SearchKey.empty(),
                         ),
                       ),
                   onLoadingMore: () {

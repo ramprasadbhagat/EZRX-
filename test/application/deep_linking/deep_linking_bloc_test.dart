@@ -360,7 +360,7 @@ void main() {
           () => repository.extractProductSearchKey(
             link: Uri(path: productListingLink),
           ),
-        ).thenReturn(Right(SearchKey(materialNumber.getValue())));
+        ).thenReturn(Right(SearchKey.search(materialNumber.getValue())));
       },
       seed: () => DeepLinkingState.linkPending(
         EzrxLink(productListingLink),
@@ -373,7 +373,7 @@ void main() {
       ),
       expect: () => [
         DeepLinkingState.redirectProductSuggestion(
-          SearchKey(materialNumber.getValue()),
+          SearchKey.search(materialNumber.getValue()),
         ),
       ],
     );

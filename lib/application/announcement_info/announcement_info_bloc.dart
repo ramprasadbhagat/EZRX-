@@ -12,13 +12,16 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'announcement_info_bloc.freezed.dart';
+
 part 'announcement_info_event.dart';
+
 part 'announcement_info_state.dart';
 
 class AnnouncementInfoBloc
     extends Bloc<AnnouncementInfoEvent, AnnouncementInfoState> {
   final IAnnouncementInfoRepository announcementInfoRepository;
   final Config config;
+
   AnnouncementInfoBloc({
     required this.announcementInfoRepository,
     required this.config,
@@ -46,7 +49,7 @@ class AnnouncementInfoBloc
             isLoading: true,
             apiFailureOrSuccessOption: none(),
             announcementInfo: AnnouncementArticleInfo.empty(),
-            searchKey: SearchKey.searchFilter(''),
+            searchKey: SearchKey.empty(),
           ),
         );
         final failureOrSuccess =
@@ -126,11 +129,10 @@ class AnnouncementInfoBloc
         );
       },
       updateSearchKey: (_UpdateSearchKey e) {
-        final eventSearchKey = SearchKey.searchFilter(e.searchKey);
-        if (eventSearchKey != state.searchKey && eventSearchKey.isValid()) {
+        if (e.searchKey.isValid()) {
           emit(
             state.copyWith(
-              searchKey: SearchKey.searchFilter(e.searchKey),
+              searchKey: e.searchKey,
             ),
           );
         }

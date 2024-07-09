@@ -55,7 +55,7 @@ void main() {
     documentDateFrom: DateTimeStringValue('20221011'),
     documentDateTo: DateTimeStringValue('20231011'),
     filterStatuses: ['Pending'],
-    searchKey: SearchKey('fake-search-key'),
+    searchKey: SearchKey.search('fake-search-key'),
     filterOption: FilterOption.documentDate(),
   );
   final allInvoicesFilter = AllInvoicesFilter(
@@ -66,7 +66,7 @@ void main() {
     dueDateFrom: DateTimeStringValue('20221011'),
     dueDateTo: DateTimeStringValue('20231011'),
     filterStatuses: ['Pending'],
-    searchKey: SearchKey('fake-search-key'),
+    searchKey: SearchKey.search('fake-search-key'),
     filterOption: FilterOption.documentDate(),
   );
   final fullSummaryFilter = FullSummaryFilter(
@@ -75,7 +75,7 @@ void main() {
     dueDateFrom: DateTimeStringValue('20221011'),
     dueDateTo: DateTimeStringValue('20231011'),
     filterStatuses: ['Open'],
-    searchKey: SearchKey('fake-search-key'),
+    searchKey: SearchKey.search('fake-search-key'),
     filterOption: FilterOption.documentDate(),
   );
   late NewPaymentBlocMock newPaymentBlocMock;
@@ -393,7 +393,7 @@ void main() {
 
     testWidgets('=> Test search Account summary invoice', (tester) async {
       final allInvoicesFilter = AllInvoicesFilter.empty().copyWith(
-        searchKey: SearchKey('12345'),
+        searchKey: SearchKey.search('12345'),
       );
       when(() => allInvoicesBlocMock.state).thenReturn(
         AllInvoicesState.initial().copyWith(
@@ -417,7 +417,7 @@ void main() {
         () => allInvoicesBlocMock.add(
           AllInvoicesEvent.fetch(
             appliedFilter: appliedFilterWithSearch.copyWith(
-              searchKey: SearchKey.searchFilter('1'),
+              searchKey: SearchKey.search('1'),
             ),
           ),
         ),
@@ -428,7 +428,7 @@ void main() {
         () => allInvoicesBlocMock.add(
           AllInvoicesEvent.fetch(
             appliedFilter: appliedFilterWithSearch.copyWith(
-              searchKey: SearchKey.searchFilter('123'),
+              searchKey: SearchKey.search('123'),
             ),
           ),
         ),
@@ -446,7 +446,7 @@ void main() {
     testWidgets('=> Test search build when Account summary invoice',
         (tester) async {
       final allInvoicesFilter = AllInvoicesFilter.defaultFilter().copyWith(
-        searchKey: SearchKey('12345'),
+        searchKey: SearchKey.search('12345'),
       );
       final expectedState = [
         AllInvoicesState.initial().copyWith(
@@ -466,7 +466,7 @@ void main() {
     });
     testWidgets('=> Test search Account summary credit', (tester) async {
       final allCreditsFilter = AllCreditsFilter.empty().copyWith(
-        searchKey: SearchKey('12345'),
+        searchKey: SearchKey.search('12345'),
       );
       when(() => allCreditsBlocMock.state).thenReturn(
         AllCreditsState.initial().copyWith(
@@ -491,7 +491,7 @@ void main() {
         () => allCreditsBlocMock.add(
           AllCreditsEvent.fetch(
             appliedFilter: appliedFilterWithSearch.copyWith(
-              searchKey: SearchKey.searchFilter('1'),
+              searchKey: SearchKey.search('1'),
             ),
           ),
         ),
@@ -502,7 +502,7 @@ void main() {
         () => allCreditsBlocMock.add(
           AllCreditsEvent.fetch(
             appliedFilter: appliedFilterWithSearch.copyWith(
-              searchKey: SearchKey.searchFilter('123'),
+              searchKey: SearchKey.search('123'),
             ),
           ),
         ),
@@ -521,7 +521,7 @@ void main() {
     testWidgets('=> Test search build when Account summary credit',
         (tester) async {
       final allCreditsFilter = AllCreditsFilter.defaultFilter().copyWith(
-        searchKey: SearchKey('12345'),
+        searchKey: SearchKey.search('12345'),
       );
       final expectedState = [
         AllCreditsState.initial().copyWith(
@@ -569,7 +569,7 @@ void main() {
         () => fullSummaryBlocMock.add(
           FullSummaryEvent.fetch(
             appliedFilter: appliedFilterWithSearch.copyWith(
-              searchKey: SearchKey.searchFilter('123'),
+              searchKey: SearchKey.search('123'),
             ),
           ),
         ),

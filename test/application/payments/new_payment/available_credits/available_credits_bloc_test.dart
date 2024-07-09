@@ -64,7 +64,7 @@ void main() {
               pageSize: config.pageSize,
               offset: 0,
               appliedFilter: AvailableCreditFilter.defaultFilter(),
-              searchKey: SearchKey.searchFilter('ab'),
+              searchKey: SearchKey.search('ab'),
               isMarketPlace: true,
             ),
           ).thenAnswer(
@@ -74,7 +74,7 @@ void main() {
         act: (bloc) => bloc.add(
           AvailableCreditsEvent.fetch(
             appliedFilter: AvailableCreditFilter.defaultFilter(),
-            searchKey: SearchKey.searchFilter('ab'),
+            searchKey: SearchKey.search('ab'),
             isMarketPlace: true,
           ),
         ),
@@ -97,7 +97,7 @@ void main() {
             customerCodeInfo: CustomerCodeInfo.empty().copyWith(
               customerCodeSoldTo: 'Fake-CustomerCode',
             ),
-            searchKey: SearchKey.searchFilter('ab'),
+            searchKey: SearchKey.search('ab'),
           ),
           AvailableCreditsState.initial().copyWith(
             failureOrSuccessOption:
@@ -108,7 +108,7 @@ void main() {
             customerCodeInfo: CustomerCodeInfo.empty().copyWith(
               customerCodeSoldTo: 'Fake-CustomerCode',
             ),
-            searchKey: SearchKey.searchFilter('ab'),
+            searchKey: SearchKey.search('ab'),
           ),
         ],
       );
@@ -131,7 +131,7 @@ void main() {
               pageSize: config.pageSize,
               offset: 0,
               appliedFilter: AvailableCreditFilter.defaultFilter(),
-              searchKey: SearchKey.searchFilter('ab'),
+              searchKey: SearchKey.search('ab'),
               isMarketPlace: false,
             ),
           ).thenAnswer((invocation) async => Right(openItems));
@@ -139,7 +139,7 @@ void main() {
         act: (bloc) => bloc.add(
           AvailableCreditsEvent.fetch(
             appliedFilter: AvailableCreditFilter.defaultFilter(),
-            searchKey: SearchKey.searchFilter('ab'),
+            searchKey: SearchKey.search('ab'),
             isMarketPlace: false,
           ),
         ),
@@ -162,7 +162,7 @@ void main() {
             customerCodeInfo: CustomerCodeInfo.empty().copyWith(
               customerCodeSoldTo: 'Fake-CustomerCode',
             ),
-            searchKey: SearchKey.searchFilter('ab'),
+            searchKey: SearchKey.search('ab'),
           ),
           AvailableCreditsState.initial().copyWith(
             items: openItems,
@@ -173,7 +173,7 @@ void main() {
             customerCodeInfo: CustomerCodeInfo.empty().copyWith(
               customerCodeSoldTo: 'Fake-CustomerCode',
             ),
-            searchKey: SearchKey.searchFilter('ab'),
+            searchKey: SearchKey.search('ab'),
           ),
         ],
       );
@@ -187,7 +187,7 @@ void main() {
         act: (bloc) => bloc.add(
           AvailableCreditsEvent.fetch(
             appliedFilter: AvailableCreditFilter.defaultFilter(),
-            searchKey: SearchKey.searchFilter('a'),
+            searchKey: SearchKey.search('a'),
             isMarketPlace: true,
           ),
         ),
@@ -213,7 +213,7 @@ void main() {
         act: (bloc) => bloc.add(
           AvailableCreditsEvent.fetch(
             appliedFilter: AvailableCreditFilter.defaultFilter(),
-            searchKey: SearchKey.searchFilter('ab'),
+            searchKey: SearchKey.search('ab'),
             isMarketPlace: true,
           ),
         ),
@@ -226,7 +226,7 @@ void main() {
           customerCodeInfo: CustomerCodeInfo.empty().copyWith(
             customerCodeSoldTo: 'Fake-CustomerCode',
           ),
-          searchKey: SearchKey.searchFilter('ab'),
+          searchKey: SearchKey.search('ab'),
         ),
         expect: () => [],
       );
@@ -259,7 +259,7 @@ void main() {
               pageSize: config.pageSize,
               offset: openItems.length,
               appliedFilter: AvailableCreditFilter.defaultFilter(),
-              searchKey: SearchKey.searchFilter(''),
+              searchKey: SearchKey.empty(),
               isMarketPlace: true,
             ),
           ).thenAnswer(
@@ -322,7 +322,7 @@ void main() {
               pageSize: config.pageSize,
               offset: openItems.length,
               appliedFilter: AvailableCreditFilter.defaultFilter(),
-              searchKey: SearchKey.searchFilter(''),
+              searchKey: SearchKey.empty(),
               isMarketPlace: false,
             ),
           ).thenAnswer((invocation) async => Right(openItems));

@@ -182,7 +182,7 @@ class MaterialFilterBloc
       },
       updateSearchKey: (e) async => emit(
         state.copyWith(
-          searchKey: SearchKey.searchFilter(e.searchKey),
+          searchKey: SearchKey.search(e.searchKey),
         ),
       ),
       initSelectedMaterialFilter: (e) {
@@ -219,7 +219,7 @@ class MaterialFilterBloc
               comboOffers: e.selectedMaterialFilter.comboOffers,
               isMarketPlace: e.selectedMaterialFilter.isMarketPlace,
             ),
-            searchKey: SearchKey.searchFilter(''),
+            searchKey: SearchKey.empty(),
           ),
         );
       },

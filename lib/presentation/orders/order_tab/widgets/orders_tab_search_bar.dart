@@ -2,6 +2,7 @@ part of 'package:ezrxmobile/presentation/orders/order_tab/orders_tab.dart';
 
 class _OrdersTabSearchBar extends StatelessWidget {
   final bool isFromViewByOrder;
+
   const _OrdersTabSearchBar({
     super.key,
     required this.isFromViewByOrder,
@@ -39,6 +40,7 @@ class _SummarySearchBar extends StatelessWidget {
   final bool isEnable;
   final bool isFromViewByOrder;
   final String searchKey;
+
   const _SummarySearchBar({
     required this.isEnable,
     required this.isFromViewByOrder,
@@ -60,11 +62,10 @@ class _SummarySearchBar extends StatelessWidget {
           context: context,
           searchKey: value,
         ),
-        customValidator: (value) => SearchKey.searchFilter(value).isValid(),
+        customValidator: (value) => SearchKey.search(value).isValid(),
         onClear: () => _search(
           context: context,
           searchKey: '',
-          onClear: true,
         ),
       ),
     );
@@ -73,7 +74,6 @@ class _SummarySearchBar extends StatelessWidget {
   void _search({
     required BuildContext context,
     required String searchKey,
-    bool onClear = false,
   }) {
     trackMixpanelEvent(
       TrackingEvents.orderDetailSearched,
@@ -90,9 +90,7 @@ class _SummarySearchBar extends StatelessWidget {
         ? context.read<ViewByOrderBloc>().add(
               ViewByOrderEvent.fetch(
                 filter: context.read<ViewByOrderBloc>().state.appliedFilter,
-                searchKey: onClear
-                    ? SearchKey.searchFilter(searchKey)
-                    : SearchKey.search(searchKey),
+                searchKey: SearchKey.search(searchKey),
                 isDetailsPage: false,
               ),
             )
@@ -100,9 +98,7 @@ class _SummarySearchBar extends StatelessWidget {
               ViewByItemsEvent.fetch(
                 viewByItemFilter:
                     context.read<ViewByItemsBloc>().state.appliedFilter,
-                searchKey: onClear
-                    ? SearchKey.searchFilter(searchKey)
-                    : SearchKey.search(searchKey),
+                searchKey: SearchKey.search(searchKey),
               ),
             );
   }

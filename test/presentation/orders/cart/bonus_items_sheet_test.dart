@@ -304,7 +304,7 @@ void main() {
                 .principalData,
             user: eligibilityState.user,
             isGimmickMaterialEnabled: false,
-            searchKey: SearchKey.searchFilter(''),
+            searchKey: SearchKey.empty(),
           ),
         ),
       ).called(1);
@@ -410,7 +410,7 @@ void main() {
             principalData: priceAggregate.materialInfo.principalData,
             user: eligibilityState.user,
             isGimmickMaterialEnabled: false,
-            searchKey: SearchKey.searchFilter('dummy-text'),
+            searchKey: SearchKey.search('dummy-text'),
           ),
         ),
       ).called(1);
@@ -450,7 +450,7 @@ void main() {
             principalData: priceAggregate.materialInfo.principalData,
             user: eligibilityState.user,
             isGimmickMaterialEnabled: false,
-            searchKey: SearchKey.searchFilter('dummy-text'),
+            searchKey: SearchKey.search('dummy-text'),
           ),
         ),
       ).called(1);

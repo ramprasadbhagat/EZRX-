@@ -54,6 +54,12 @@ abstract class AllCreditsBloc extends Bloc<AllCreditsEvent, AllCreditsState> {
     on<_Fetch>(
       (e, emit) async {
         if (!e.appliedFilter.searchKey.isValid()) return;
+
+        if (e.appliedFilter == state.appliedFilter &&
+            e.appliedFilter.searchKey.validateNotEmpty) {
+          return;
+        }
+
         emit(
           state.copyWith(
             failureOrSuccessOption: none(),

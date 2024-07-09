@@ -29,7 +29,7 @@ class ProductSuggestionHistoryDto with _$ProductSuggestionHistoryDto {
       _$ProductSuggestionHistoryDtoFromJson(json);
 
   ProductSuggestionHistory toDomain() => ProductSuggestionHistory(
-        searchKeyList: searchKeyList.map((e) => SearchKey(e)).toList(),
+        searchKeyList: searchKeyList.map((e) => SearchKey.search(e)).toList(),
       );
 
   List<String> getModifiedList(SearchKey searchKey) {

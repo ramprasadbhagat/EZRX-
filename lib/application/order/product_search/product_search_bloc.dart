@@ -173,7 +173,7 @@ class ProductSearchBloc extends Bloc<ProductSearchEvent, ProductSearchState> {
       (event, emit) {
         emit(
           state.copyWith(
-            searchKey: SearchKey.search(''),
+            searchKey: SearchKey.empty(),
             apiFailureOrSuccessOption: none(),
             canLoadMore: false,
             suggestedProductList: <MaterialInfo>[],

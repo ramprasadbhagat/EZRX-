@@ -23,7 +23,7 @@ class ReturnListByRequestState with _$ReturnListByRequestState {
         canLoadMore: true,
         returnItemList: <ReturnItem>[],
         appliedFilter: ReturnFilter.empty(),
-        searchKey: SearchKey.searchFilter(''),
+        searchKey: SearchKey.empty(),
         customerCodeInfo: CustomerCodeInfo.empty(),
         salesOrg: SalesOrg(''),
         shipInfo: ShipToInfo.empty(),

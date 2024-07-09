@@ -140,7 +140,7 @@ void main() {
           ReturnApproverFilterState.initial().copyWith(
             showErrorMessages: true,
             approverReturnFilter: ReturnApproverFilter.empty().copyWith(
-              returnId: SearchKey.searchFilter('1'),
+              returnId: SearchKey.search('1'),
             ),
           ),
         ];
@@ -176,7 +176,7 @@ void main() {
           ReturnApproverFilterState.initial().copyWith(
             showErrorMessages: true,
             approverReturnFilter: ReturnApproverFilter.empty().copyWith(
-              returnId: SearchKey.searchFilter('1'),
+              returnId: SearchKey.search('1'),
             ),
           ),
         ];
@@ -244,7 +244,7 @@ void main() {
             isSubmitting: true,
             showErrorMessages: true,
             approverReturnFilter: ReturnApproverFilter.empty().copyWith(
-              createdBy: SearchKey.searchFilter('1'),
+              createdBy: SearchKey.search('1'),
             ),
           ),
         ];
@@ -305,7 +305,7 @@ void main() {
           ReturnApproverFilterState.initial().copyWith(
             showErrorMessages: true,
             approverReturnFilter: ReturnApproverFilter.empty().copyWith(
-              shipTo: SearchKey.searchFilter('1'),
+              shipTo: SearchKey.search('1'),
             ),
           ),
         ];
@@ -366,7 +366,7 @@ void main() {
           ReturnApproverFilterState.initial().copyWith(
             showErrorMessages: true,
             approverReturnFilter: ReturnApproverFilter.empty().copyWith(
-              soldTo: SearchKey.searchFilter('1'),
+              soldTo: SearchKey.search('1'),
             ),
           ),
         ];

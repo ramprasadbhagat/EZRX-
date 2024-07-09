@@ -426,14 +426,14 @@ class _NewPaymentButton extends StatelessWidget {
           context.read<OutstandingInvoicesBloc>().add(
                 OutstandingInvoicesEvent.fetch(
                   appliedFilter: OutstandingInvoiceFilter.defaultFilter(),
-                  searchKey: SearchKey.searchFilter(''),
+                  searchKey: SearchKey.empty(),
                   isMarketPlace: context.isMPPayment,
                 ),
               );
           context.read<AvailableCreditsBloc>().add(
                 AvailableCreditsEvent.fetch(
                   appliedFilter: AvailableCreditFilter.defaultFilter(),
-                  searchKey: SearchKey.searchFilter(''),
+                  searchKey: SearchKey.empty(),
                   isMarketPlace: context.isMPPayment,
                 ),
               );

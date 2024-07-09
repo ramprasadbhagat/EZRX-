@@ -10,7 +10,7 @@ class AnnouncementInfoEvent with _$AnnouncementInfoEvent {
   const factory AnnouncementInfoEvent.fetch() = _Fetch;
   const factory AnnouncementInfoEvent.loadMore() = _LoadMore;
   const factory AnnouncementInfoEvent.updateSearchKey({
-    required String searchKey,
+    required SearchKey searchKey,
   }) = _UpdateSearchKey;
 
   const factory AnnouncementInfoEvent.setCategoryKey({

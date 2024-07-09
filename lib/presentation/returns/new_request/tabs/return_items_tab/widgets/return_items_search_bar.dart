@@ -27,11 +27,10 @@ class _ReturnItemsSearchBar extends StatelessWidget {
             context: context,
             searchKey: value,
           ),
-          customValidator: (value) => SearchKey.searchFilter(value).isValid(),
+          customValidator: (value) => SearchKey.search(value).isValid(),
           onClear: () => _search(
             context: context,
             searchKey: '',
-            onClear: true,
           ),
         ),
       );
@@ -39,14 +38,12 @@ class _ReturnItemsSearchBar extends StatelessWidget {
   void _search({
     required BuildContext context,
     required String searchKey,
-    bool onClear = false,
-  }) {
-    if (!onClear && searchKey.isEmpty) return;
-    context.read<ReturnItemsBloc>().add(
-          ReturnItemsEvent.fetch(
-            appliedFilter: context.read<ReturnItemsBloc>().state.appliedFilter,
-            searchKey: SearchKey.searchFilter(searchKey),
-          ),
-        );
-  }
+  }) =>
+      context.read<ReturnItemsBloc>().add(
+            ReturnItemsEvent.fetch(
+              appliedFilter:
+                  context.read<ReturnItemsBloc>().state.appliedFilter,
+              searchKey: SearchKey.search(searchKey),
+            ),
+          );
 }

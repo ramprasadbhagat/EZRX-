@@ -264,7 +264,7 @@ void main() {
       testWidgets('Return Root Page List By Item Search Bar ', (tester) async {
         when(() => mockReturnListByItemBloc.state).thenReturn(
           ReturnListByItemState.initial().copyWith(
-            searchKey: SearchKey('fake_search_key'),
+            searchKey: SearchKey.search('fake_search_key'),
           ),
         );
         await tester.pumpWidget(getWUT());
@@ -301,7 +301,7 @@ void main() {
           () => mockReturnListByItemBloc.add(
             ReturnListByItemEvent.fetch(
               appliedFilter: ReturnFilter.empty(),
-              searchKey: SearchKey.searchFilter('du'),
+              searchKey: SearchKey.search('du'),
             ),
           ),
         ).called(1);
@@ -321,7 +321,7 @@ void main() {
           () => mockReturnListByItemBloc.add(
             ReturnListByItemEvent.fetch(
               appliedFilter: ReturnFilter.empty(),
-              searchKey: SearchKey.searchFilter('dummy'),
+              searchKey: SearchKey.search('dummy'),
             ),
           ),
         ).called(1);
@@ -344,7 +344,7 @@ void main() {
           (tester) async {
         when(() => mockReturnListByRequestBloc.state).thenReturn(
           ReturnListByRequestState.initial().copyWith(
-            searchKey: SearchKey('fake_search_key'),
+            searchKey: SearchKey.search('fake_search_key'),
           ),
         );
         await tester.pumpWidget(getWUT());
@@ -381,7 +381,7 @@ void main() {
           () => mockReturnListByRequestBloc.add(
             ReturnListByRequestEvent.fetch(
               appliedFilter: ReturnFilter.empty(),
-              searchKey: SearchKey.searchFilter('dummy'),
+              searchKey: SearchKey.search('dummy'),
             ),
           ),
         ).called(1);
@@ -405,7 +405,7 @@ void main() {
           ReturnListByItemState.initial().copyWith(
             appliedFilter: ReturnFilter.empty()
                 .copyWith(returnStatusList: [StatusType('Pending')]),
-            searchKey: SearchKey('fake_search_key'),
+            searchKey: SearchKey.search('fake_search_key'),
           ),
         );
         await tester.pumpWidget(getWUT());
@@ -455,7 +455,7 @@ void main() {
           () => mockReturnListByItemBloc.add(
             ReturnListByItemEvent.fetch(
               appliedFilter: ReturnFilter.empty(),
-              searchKey: SearchKey('fake_search_key'),
+              searchKey: SearchKey.search('fake_search_key'),
             ),
           ),
         ).called(1);
@@ -469,7 +469,7 @@ void main() {
           ReturnListByRequestState.initial().copyWith(
             appliedFilter: ReturnFilter.empty()
                 .copyWith(returnStatusList: [StatusType('Pending')]),
-            searchKey: SearchKey('fake_search_key'),
+            searchKey: SearchKey.search('fake_search_key'),
           ),
         );
         await tester.tap(viewByRequest);
@@ -513,7 +513,7 @@ void main() {
           () => mockReturnListByRequestBloc.add(
             ReturnListByRequestEvent.fetch(
               appliedFilter: ReturnFilter.empty(),
-              searchKey: SearchKey('fake_search_key'),
+              searchKey: SearchKey.search('fake_search_key'),
             ),
           ),
         ).called(1);
@@ -524,7 +524,7 @@ void main() {
           ReturnListByItemState.initial().copyWith(
             appliedFilter: ReturnFilter.empty()
                 .copyWith(returnStatusList: [StatusType('Pending')]),
-            searchKey: SearchKey('fake_search_key'),
+            searchKey: SearchKey.search('fake_search_key'),
           ),
         );
         await tester.pumpWidget(getWUT());
@@ -618,7 +618,7 @@ void main() {
           ReturnListByRequestState.initial().copyWith(
             appliedFilter: ReturnFilter.empty()
                 .copyWith(returnStatusList: [StatusType('Pending')]),
-            searchKey: SearchKey('fake_search_key'),
+            searchKey: SearchKey.search('fake_search_key'),
           ),
         );
         await tester.pumpWidget(getWUT());

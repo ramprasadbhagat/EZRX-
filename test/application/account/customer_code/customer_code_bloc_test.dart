@@ -349,7 +349,7 @@ void main() {
       act: (CustomerCodeBloc bloc) {
         bloc.add(
           CustomerCodeEvent.search(
-            searchValue: SearchKey.searchFilter('fake-customer-code'),
+            searchValue: SearchKey.search('fake-customer-code'),
           ),
         );
       },
@@ -361,7 +361,7 @@ void main() {
           isSearchActive: true,
           isFetching: true,
           canLoadMore: false,
-          searchKey: SearchKey('fake-customer-code'),
+          searchKey: SearchKey.search('fake-customer-code'),
         ),
         CustomerCodeState.initial().copyWith(
           hideCustomer: false,
@@ -371,7 +371,7 @@ void main() {
             CustomerCodeInfo.empty()
                 .copyWith(customerCodeSoldTo: 'fake-customer-code'),
           ],
-          searchKey: SearchKey('fake-customer-code'),
+          searchKey: SearchKey.search('fake-customer-code'),
           canLoadMore: false,
           isSearchActive: true,
           isFetching: false,
@@ -410,7 +410,7 @@ void main() {
       act: (CustomerCodeBloc bloc) {
         bloc.add(
           CustomerCodeEvent.search(
-            searchValue: SearchKey.searchFilter('block-customer-code'),
+            searchValue: SearchKey.search('block-customer-code'),
           ),
         );
       },
@@ -422,14 +422,14 @@ void main() {
           isSearchActive: true,
           isFetching: true,
           canLoadMore: false,
-          searchKey: SearchKey('block-customer-code'),
+          searchKey: SearchKey.search('block-customer-code'),
         ),
         CustomerCodeState.initial().copyWith(
           hideCustomer: true,
           userInfo: fakeUser,
           selectedSalesOrg: fakeSaleOrg,
           customerCodeList: [],
-          searchKey: SearchKey('block-customer-code'),
+          searchKey: SearchKey.search('block-customer-code'),
           canLoadMore: false,
           isSearchActive: true,
           isFetching: false,
@@ -470,7 +470,7 @@ void main() {
       act: (CustomerCodeBloc bloc) {
         bloc.add(
           CustomerCodeEvent.search(
-            searchValue: SearchKey.searchFilter('fake-customer-code'),
+            searchValue: SearchKey.search('fake-customer-code'),
           ),
         );
       },
@@ -482,7 +482,7 @@ void main() {
           isSearchActive: true,
           isFetching: true,
           canLoadMore: false,
-          searchKey: SearchKey('fake-customer-code'),
+          searchKey: SearchKey.search('fake-customer-code'),
         ),
         CustomerCodeState.initial().copyWith(
           hideCustomer: false,
@@ -495,7 +495,7 @@ void main() {
             ),
           ),
           isFetching: false,
-          searchKey: SearchKey('fake-customer-code'),
+          searchKey: SearchKey.search('fake-customer-code'),
           canLoadMore: false,
           isSearchActive: true,
         ),
@@ -539,7 +539,7 @@ void main() {
       act: (CustomerCodeBloc bloc) {
         bloc.add(
           CustomerCodeEvent.search(
-            searchValue: SearchKey.searchFilter('fake-customer-code'),
+            searchValue: SearchKey.search('fake-customer-code'),
           ),
         );
       },
@@ -552,7 +552,7 @@ void main() {
           isSearchActive: true,
           isFetching: true,
           canLoadMore: false,
-          searchKey: SearchKey('fake-customer-code'),
+          searchKey: SearchKey.search('fake-customer-code'),
         ),
         CustomerCodeState.initial().copyWith(
           hideCustomer: false,
@@ -562,7 +562,7 @@ void main() {
             CustomerCodeInfo.empty()
                 .copyWith(customerCodeSoldTo: 'fake-customer-code'),
           ],
-          searchKey: SearchKey('fake-customer-code'),
+          searchKey: SearchKey.search('fake-customer-code'),
           canLoadMore: false,
           isFetching: false,
           isSearchActive: true,
@@ -601,7 +601,7 @@ void main() {
       act: (CustomerCodeBloc bloc) {
         bloc.add(
           CustomerCodeEvent.search(
-            searchValue: SearchKey.searchFilter('fake-customer-code'),
+            searchValue: SearchKey.search('fake-customer-code'),
           ),
         );
       },
@@ -613,7 +613,7 @@ void main() {
           isSearchActive: true,
           isFetching: true,
           canLoadMore: false,
-          searchKey: SearchKey('fake-customer-code'),
+          searchKey: SearchKey.search('fake-customer-code'),
         ),
         CustomerCodeState.initial().copyWith(
           hideCustomer: false,
@@ -625,7 +625,7 @@ void main() {
               ApiFailure.other('fake-error'),
             ),
           ),
-          searchKey: SearchKey('fake-customer-code'),
+          searchKey: SearchKey.search('fake-customer-code'),
           canLoadMore: false,
           isFetching: false,
           isSearchActive: true,
@@ -926,7 +926,7 @@ void main() {
     //       isFetching: false,
     //       canLoadMore: false,
     //       customerCodeList: [customerMockData.first],
-    //       searchKey: SearchKey('mockShippingAddress'),
+    //       searchKey: SearchKey.search('mockShippingAddress'),
     //     ),
     //   ],
     // );
@@ -980,7 +980,7 @@ void main() {
     //         isSearchActive: true,
     //         isFetching: false,
     //         customerCodeList: customerMockData,
-    //         searchKey: SearchKey('mockShippingAddress'),
+    //         searchKey: SearchKey.search('mockShippingAddress'),
     //       ),
     //     ],
     //   );

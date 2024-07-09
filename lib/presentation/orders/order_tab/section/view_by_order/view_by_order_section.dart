@@ -79,7 +79,7 @@ class ViewByOrdersPage extends StatelessWidget {
           onRefresh: () => context.read<ViewByOrderBloc>().add(
                 ViewByOrderEvent.fetch(
                   filter: ViewByOrdersFilter.empty(),
-                  searchKey: SearchKey.searchFilter(''),
+                  searchKey: SearchKey.empty(),
                   isDetailsPage: false,
                 ),
               ),

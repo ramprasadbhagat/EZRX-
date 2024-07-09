@@ -1081,7 +1081,7 @@ void main() {
           () => viewByOrderBlocMock.add(
             ViewByOrderEvent.fetch(
               filter: ViewByOrdersFilter.empty(),
-              searchKey: SearchKey.searchFilter(''),
+              searchKey: SearchKey.empty(),
               isDetailsPage: false,
             ),
           ),
@@ -1091,7 +1091,7 @@ void main() {
           () => viewByItemsBlocMock.add(
             ViewByItemsEvent.fetch(
               viewByItemFilter: ViewByItemFilter.empty(),
-              searchKey: SearchKey.searchFilter(''),
+              searchKey: SearchKey.empty(),
             ),
           ),
         ).called(1);

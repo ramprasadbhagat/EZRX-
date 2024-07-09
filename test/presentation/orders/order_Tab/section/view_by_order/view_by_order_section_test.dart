@@ -204,7 +204,7 @@ void main() {
         (tester) async {
       when(() => mockViewByOrderBloc.state).thenReturn(
         ViewByOrderState.initial().copyWith(
-          searchKey: SearchKey('fake_key'),
+          searchKey: SearchKey.search('fake_key'),
         ),
       );
       await tester.pumpWidget(getScopedWidget());
@@ -577,7 +577,7 @@ void main() {
           () => mockViewByOrderBloc.add(
             ViewByOrderEvent.fetch(
               filter: ViewByOrdersFilter.empty(),
-              searchKey: SearchKey.searchFilter(''),
+              searchKey: SearchKey.empty(),
               isDetailsPage: false,
             ),
           ),

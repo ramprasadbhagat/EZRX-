@@ -29,6 +29,6 @@ class ReturnListRequest with _$ReturnListRequest {
         first: 0,
         after: 0,
         filter: ReturnFilter.empty(),
-        searchKey: SearchKey(''),
+        searchKey: SearchKey.empty(),
       );
 }

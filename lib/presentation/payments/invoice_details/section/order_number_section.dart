@@ -112,7 +112,7 @@ class OrderNumberSection extends StatelessWidget {
                                       .add(
                                         ViewByOrderEvent.fetch(
                                           filter: ViewByOrdersFilter.empty(),
-                                          searchKey: SearchKey.searchFilter(
+                                          searchKey: SearchKey.search(
                                             orderNumber,
                                           ),
                                           isDetailsPage: true,

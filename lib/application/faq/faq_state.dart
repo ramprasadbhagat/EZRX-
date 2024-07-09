@@ -19,7 +19,7 @@ class FaqState with _$FaqState {
         canLoadMore: true,
         apiFailureOrSuccessOption: none(),
         selectedCategory: FAQCategory(''),
-        searchKey: SearchKey.searchFilter(''),
+        searchKey: SearchKey.empty(),
       );
   List<FAQItem> get selectedFaqItem => selectedCategory.isAll
       ? faqInfo.faqList

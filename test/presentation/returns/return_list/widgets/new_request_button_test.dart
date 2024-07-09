@@ -122,7 +122,7 @@ void main() {
       () => returnItemsBloc.add(
         ReturnItemsEvent.fetch(
           appliedFilter: ReturnItemsFilter.init(),
-          searchKey: SearchKey.searchFilter(''),
+          searchKey: SearchKey.empty(),
         ),
       ),
     ).called(1);

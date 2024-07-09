@@ -17,12 +17,15 @@ import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/article_info/repository/i_article_info_repository.dart';
 
 part 'articles_info_event.dart';
+
 part 'articles_info_state.dart';
+
 part 'articles_info_bloc.freezed.dart';
 
 class ArticlesInfoBloc extends Bloc<ArticlesInfoEvent, ArticlesInfoState> {
   final IArticleInfoRepository articleInfoRepository;
   final Config config;
+
   ArticlesInfoBloc({required this.articleInfoRepository, required this.config})
       : super(ArticlesInfoState.initial()) {
     on<ArticlesInfoEvent>(_onEvent);
@@ -131,11 +134,10 @@ class ArticlesInfoBloc extends Bloc<ArticlesInfoEvent, ArticlesInfoState> {
         );
       },
       setSearchKey: (e) {
-        final eventSearchKey = SearchKey.searchFilter(e.searchKey);
-        if (eventSearchKey != state.searchKey && eventSearchKey.isValid()) {
+        if (e.searchKey.isValid()) {
           emit(
             state.copyWith(
-              searchKey: SearchKey(e.searchKey),
+              searchKey: e.searchKey,
             ),
           );
         }

@@ -183,7 +183,8 @@ void main() {
         ),
         seed: () => AllCreditsState.initial().copyWith(
           appliedFilter: AllCreditsFilter.defaultFilter().copyWith(
-            searchKey: SearchKey('fake-search-key'),
+            searchKey: SearchKey.search('fake-search-key'),
+            amountValueTo: RangeValue('1'),
           ),
         ),
         setUp: () {
@@ -192,7 +193,7 @@ void main() {
               salesOrganisation: SalesOrganisation.empty(),
               customerCodeInfo: CustomerCodeInfo.empty(),
               filter: allCreditsFilter.copyWith(
-                searchKey: SearchKey('fake-search-key'),
+                searchKey: SearchKey.search('fake-search-key'),
               ),
               offset: 0,
               pageSize: config.pageSize,
@@ -205,7 +206,7 @@ void main() {
         act: (AllCreditsBloc bloc) => bloc.add(
           AllCreditsEvent.fetch(
             appliedFilter: AllCreditsFilter.defaultFilter().copyWith(
-              searchKey: SearchKey('fake-search-key'),
+              searchKey: SearchKey.search('fake-search-key'),
             ),
           ),
         ),
@@ -213,7 +214,7 @@ void main() {
           AllCreditsState.initial().copyWith(
             isLoading: true,
             appliedFilter: allCreditsFilter.copyWith(
-              searchKey: SearchKey('fake-search-key'),
+              searchKey: SearchKey.search('fake-search-key'),
             ),
           ),
           AllCreditsState.initial().copyWith(
@@ -221,7 +222,7 @@ void main() {
             failureOrSuccessOption: none(),
             canLoadMore: false,
             appliedFilter: allCreditsFilter.copyWith(
-              searchKey: SearchKey('fake-search-key'),
+              searchKey: SearchKey.search('fake-search-key'),
             ),
           ),
         ],

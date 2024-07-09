@@ -28,7 +28,7 @@ class PaymentSummaryFilter with _$PaymentSummaryFilter {
         amountValueFrom: RangeValue(''),
         amountValueTo: RangeValue(''),
         filterStatuses: <FilterStatus>[],
-        searchKey: SearchKey(''),
+        searchKey: SearchKey.empty(),
         filterOption: FilterOption(''),
       );
 
@@ -46,12 +46,12 @@ class PaymentSummaryFilter with _$PaymentSummaryFilter {
         amountValueFrom: RangeValue(''),
         amountValueTo: RangeValue(''),
         filterStatuses: <FilterStatus>[],
-        searchKey: SearchKey(''),
+        searchKey: SearchKey.empty(),
         filterOption: FilterOption.documentDate(),
       );
 
   PaymentSummaryFilter get excludeSearch => copyWith(
-        searchKey: SearchKey(''),
+        searchKey: SearchKey.empty(),
       );
 
   DateTimeRange get getCreatedDateFilterDateRange => DateTimeRange(

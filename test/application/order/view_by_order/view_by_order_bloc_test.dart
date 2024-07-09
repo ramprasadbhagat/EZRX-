@@ -27,7 +27,7 @@ void main() {
 
   const fakeSort = 'desc';
   const fakeOrderBy = 'datetime';
-  final searchKey = SearchKey('');
+  final searchKey = SearchKey.empty();
   final viewByOrdersFilter = ViewByOrdersFilter.empty();
   const offSet = 0;
   group(
@@ -350,7 +350,7 @@ void main() {
           act: (bloc) => bloc.add(
             ViewByOrderEvent.fetch(
               filter: viewByOrdersFilter,
-              searchKey: SearchKey.searchFilter('1'),
+              searchKey: SearchKey.search('1'),
               isDetailsPage: false,
             ),
           ),

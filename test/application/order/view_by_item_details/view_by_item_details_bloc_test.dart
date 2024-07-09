@@ -252,7 +252,7 @@ void main() {
               salesOrgConfig: fakeMYSalesOrgConfigs,
               salesOrganisation: fakeMYSalesOrganisation,
               user: fakeRootAdminUser,
-              searchKey: SearchKey(
+              searchKey: SearchKey.search(
                 fakeOrderHistoryItem.orderNumber.getOrDefaultValue(''),
               ),
             )),
@@ -335,7 +335,7 @@ void main() {
               salesOrgConfig: fakeMYSalesOrgConfigs,
               salesOrganisation: fakeMYSalesOrganisation,
               user: fakeRootAdminUser,
-              searchKey: SearchKey(
+              searchKey: SearchKey.search(
                 fakeOrderHistoryItem.orderNumber.getOrDefaultValue(''),
               ),
             )),
@@ -446,7 +446,7 @@ void main() {
               salesOrgConfig: seedState.salesOrgConfig,
               salesOrganisation: seedState.salesOrganisation,
               user: seedState.user,
-              searchKey: SearchKey(
+              searchKey: SearchKey.search(
                 fakeOrderHistoryItem.orderNumber.getOrDefaultValue(''),
               ),
             )),
@@ -570,7 +570,7 @@ void main() {
               salesOrgConfig: fakeVNSalesOrgConfigs,
               salesOrganisation: fakeVNSalesOrganisation,
               user: fakeRootAdminUser,
-              searchKey: SearchKey(
+              searchKey: SearchKey.search(
                 fakeOrderHistoryItem.orderNumber.getOrDefaultValue(''),
               ),
             )),
@@ -688,7 +688,7 @@ void main() {
               salesOrgConfig: fakeVNSalesOrgConfigs,
               salesOrganisation: fakeVNSalesOrganisation,
               user: fakeRootAdminUser,
-              searchKey: SearchKey(
+              searchKey: SearchKey.search(
                 fakeOrderHistoryItem.orderNumber.getOrDefaultValue(''),
               ),
             )),

@@ -27,7 +27,7 @@ class CustomerCodeState with _$CustomerCodeState {
         canLoadMore: true,
         isFetching: true,
         isSearchActive: false,
-        searchKey: SearchKey(''),
+        searchKey: SearchKey.empty(),
         customerCodeConfig: CustomerCodeConfig.empty(),
         configFailureOrSuccessOption: none(),
       );

@@ -397,7 +397,7 @@ void main() {
         final expectedreturnApproverFilterState = [
           ReturnApproverFilterState.initial().copyWith(
             approverReturnFilter: returnApproverFilter.copyWith(
-              returnId: SearchKey.searchFilter('test'),
+              returnId: SearchKey.search('test'),
             ),
             isSubmitting: true,
           ),
@@ -420,7 +420,7 @@ void main() {
             ReturnApproverEvent.fetch(
               user: User.empty(),
               approverReturnFilter: returnApproverFilter.copyWith(
-                returnId: SearchKey.searchFilter('test'),
+                returnId: SearchKey.search('test'),
               ),
             ),
           ),

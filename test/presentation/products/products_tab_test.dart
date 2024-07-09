@@ -904,7 +904,7 @@ void main() {
 
           when(() => materialListBlocMock.state).thenReturn(
             MaterialListState.initial().copyWith(
-              searchKey: SearchKey(fakeMaterial),
+              searchKey: SearchKey.search(fakeMaterial),
             ),
           );
 

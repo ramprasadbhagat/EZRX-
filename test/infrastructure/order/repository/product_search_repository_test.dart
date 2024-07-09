@@ -38,7 +38,7 @@ void main() async {
   late DeviceStorage deviceStorage;
 
   const fakeException = 'fake-exception';
-  final fakeSearchKey = SearchKey('fake');
+  final fakeSearchKey = SearchKey.search('fake');
   const fakePageSize = 10;
   const fakeOffset = 10;
   final fakeMaterialResponse =

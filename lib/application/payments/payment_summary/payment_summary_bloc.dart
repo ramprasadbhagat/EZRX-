@@ -60,6 +60,11 @@ abstract class PaymentSummaryBloc
       fetch: (e) async {
         if (!e.appliedFilter.searchKey.isValid()) return;
 
+        if (e.appliedFilter == state.appliedFilter &&
+            e.appliedFilter.searchKey.validateNotEmpty) {
+          return;
+        }
+
         emit(
           state.copyWith(
             isFetching: true,

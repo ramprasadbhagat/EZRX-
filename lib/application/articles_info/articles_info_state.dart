@@ -23,7 +23,7 @@ class ArticlesInfoState with _$ArticlesInfoState {
         isFetching: false,
         articleInfo: AnnouncementArticleInfo.empty(),
         canLoadMore: true,
-        searchKey: SearchKey(''),
+        searchKey: SearchKey.empty(),
         categoryKeyList: [],
         apiFailureOrSuccessOption: none(),
       );

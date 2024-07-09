@@ -448,13 +448,13 @@ void main() {
         config: config,
       ),
       act: (ArticlesInfoBloc bloc) => bloc.add(
-        const ArticlesInfoEvent.setSearchKey(
-          searchKey: 'fake_searchKey',
+        ArticlesInfoEvent.setSearchKey(
+          searchKey: SearchKey.search('fake_searchKey'),
         ),
       ),
       expect: () => [
         articlesInfoState.copyWith(
-          searchKey: SearchKey.searchFilter('fake_searchKey'),
+          searchKey: SearchKey.search('fake_searchKey'),
         ),
       ],
     );
@@ -491,7 +491,7 @@ void main() {
       () {
         final articlesInfo = articlesInfoState.copyWith(
           articleInfo: articleInfoMock,
-          searchKey: SearchKey(
+          searchKey: SearchKey.search(
             articleInfoMock.announcementList.first.title.toLowerCase(),
           ),
         );

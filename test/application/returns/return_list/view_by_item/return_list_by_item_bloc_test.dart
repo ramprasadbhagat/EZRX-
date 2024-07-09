@@ -61,7 +61,7 @@ void main() {
             shipToInfo: mockShipInfo,
             customerCode: mockCustomerCodeInfo,
             user: mockUser,
-            searchKey: SearchKey(''),
+            searchKey: SearchKey.empty(),
             offset: 0,
             pageSize: config.pageSize,
           ),
@@ -129,7 +129,7 @@ void main() {
             shipToInfo: mockShipInfo,
             customerCode: mockCustomerCodeInfo,
             user: mockUser,
-            searchKey: SearchKey(''),
+            searchKey: SearchKey.empty(),
             offset: 0,
             pageSize: config.pageSize,
           ),
@@ -140,7 +140,7 @@ void main() {
       act: (bloc) => bloc.add(
         ReturnListByItemEvent.fetch(
           appliedFilter: ReturnFilter.empty(),
-          searchKey: SearchKey(''),
+          searchKey: SearchKey.empty(),
         ),
       ),
       expect: () => [
@@ -184,7 +184,7 @@ void main() {
             shipToInfo: mockShipInfo,
             customerCode: mockCustomerCodeInfo,
             user: mockUser,
-            searchKey: SearchKey(''),
+            searchKey: SearchKey.empty(),
             offset: 0,
             pageSize: config.pageSize,
           ),
@@ -236,7 +236,7 @@ void main() {
             shipToInfo: mockShipInfo,
             customerCode: mockCustomerCodeInfo,
             user: mockUser,
-            searchKey: SearchKey(''),
+            searchKey: SearchKey.empty(),
             offset: 0,
             pageSize: config.pageSize,
           ),
@@ -286,7 +286,7 @@ void main() {
             salesOrg: mockSalesOrg,
             isViewByReturn: false,
             appliedFilter: ReturnFilter.empty(),
-            searchKey: SearchKey.searchFilter(''),
+            searchKey: SearchKey.empty(),
           ),
         ).thenAnswer((_) async => const Right('fake-url'));
         when(
@@ -378,7 +378,7 @@ void main() {
             salesOrg: mockSalesOrg,
             isViewByReturn: false,
             appliedFilter: ReturnFilter.empty(),
-            searchKey: SearchKey.searchFilter(''),
+            searchKey: SearchKey.empty(),
           ),
         ).thenAnswer((_) async => const Left(fakeApiFailure));
       },
@@ -423,7 +423,7 @@ void main() {
         when(
           () => returnListRepositoryMock.getFileUrl(
             appliedFilter: ReturnFilter.empty(),
-            searchKey: SearchKey.searchFilter(''),
+            searchKey: SearchKey.empty(),
             customerCodeInfo: mockCustomerCodeInfo,
             shipToInfo: mockShipInfo,
             user: mockUser,

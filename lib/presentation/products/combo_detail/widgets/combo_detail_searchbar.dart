@@ -20,6 +20,11 @@ class _ComboDetailSearchBar extends StatelessWidget {
             initialValue: state.searchKey.getOrDefaultValue(''),
             hintText: context.tr('Search product or code'),
             enabled: true,
+            onSearchChanged: (value) => bloc.add(
+              ComboDealMaterialDetailEvent.search(
+                searchKey: SearchKey.search(value),
+              ),
+            ),
             onSearchSubmitted: (value) => bloc.add(
               ComboDealMaterialDetailEvent.search(
                 searchKey: SearchKey.search(value),

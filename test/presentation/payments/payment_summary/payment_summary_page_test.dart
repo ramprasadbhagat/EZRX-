@@ -362,7 +362,7 @@ void main() {
         () => availableCreditsBlocMock.add(
           AvailableCreditsEvent.fetch(
             appliedFilter: AvailableCreditFilter.defaultFilter(),
-            searchKey: SearchKey.searchFilter(''),
+            searchKey: SearchKey.empty(),
             isMarketPlace: false,
           ),
         ),
@@ -562,7 +562,7 @@ void main() {
         () => paymentSummaryBloc.add(
           PaymentSummaryEvent.fetch(
             appliedFilter: appliedFilterWithSearch.copyWith(
-              searchKey: SearchKey.searchFilter('fake-keyword'),
+              searchKey: SearchKey.search('fake-keyword'),
             ),
           ),
         ),
@@ -591,7 +591,7 @@ void main() {
       await tester.pump(const Duration(seconds: 2));
       await tester.testTextInput.receiveAction(TextInputAction.done);
 
-      expect(SearchKey.searchFilter('fake-keyword').isValid(), true);
+      expect(SearchKey.search('fake-keyword').isValid(), true);
 
       final appliedFilterWithSearch = PaymentSummaryFilter.empty().copyWith(
         createdDateFrom: DateTimeStringValue(''),
@@ -602,7 +602,7 @@ void main() {
         () => paymentSummaryBloc.add(
           PaymentSummaryEvent.fetch(
             appliedFilter: appliedFilterWithSearch.copyWith(
-              searchKey: SearchKey.searchFilter('fake-keyword'),
+              searchKey: SearchKey.search('fake-keyword'),
             ),
           ),
         ),
@@ -611,7 +611,7 @@ void main() {
     testWidgets('Payment Summary search onClear Test', (tester) async {
       when(() => paymentSummaryBloc.state).thenReturn(
         PaymentSummaryState.initial().copyWith.appliedFilter(
-              searchKey: SearchKey.searchFilter('fake-keyword'),
+              searchKey: SearchKey.search('fake-keyword'),
             ),
       );
 
@@ -1001,7 +1001,7 @@ void main() {
         () => paymentSummaryBloc.add(
           PaymentSummaryEvent.fetch(
             appliedFilter: PaymentSummaryFilter.empty().copyWith(
-              searchKey: SearchKey.searchFilter('fake-keyword'),
+              searchKey: SearchKey.search('fake-keyword'),
             ),
           ),
         ),

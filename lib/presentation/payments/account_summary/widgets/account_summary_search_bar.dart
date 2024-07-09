@@ -91,11 +91,10 @@ class _SummarySearchBar extends StatelessWidget {
           context: context,
           searchKey: value,
         ),
-        customValidator: (value) => SearchKey.searchFilter(value).isValid(),
+        customValidator: (value) => SearchKey.search(value).isValid(),
         onClear: () => _fetch(
           context: context,
           searchKey: '',
-          onClear: true,
         ),
       ),
     );
@@ -104,40 +103,14 @@ class _SummarySearchBar extends StatelessWidget {
   void _fetch({
     required BuildContext context,
     required String searchKey,
-    bool onClear = false,
   }) {
-    //TODO: Will revisit this while enhancing the search implementation logic.
-    var previousSearchKey = SearchKey('');
-    if (context.tabsRouter.current.name == AllInvoicesPageRoute.name) {
-      previousSearchKey = context
-          .allInvoicesBloc(context.isMPPayment)
-          .state
-          .appliedFilter
-          .searchKey;
-    } else if (context.tabsRouter.current.name == AllCreditsPageRoute.name) {
-      previousSearchKey = context
-          .allCreditsBloc(context.isMPPayment)
-          .state
-          .appliedFilter
-          .searchKey;
-    } else {
-      previousSearchKey = context
-          .fullSummaryBloc(context.isMPPayment)
-          .state
-          .appliedFilter
-          .searchKey;
-    }
-
-    if (!onClear && searchKey.isEmpty ||
-        searchKey == previousSearchKey.getOrDefaultValue('')) return;
-
     if (context.tabsRouter.current.name == AllInvoicesPageRoute.name) {
       context.allInvoicesBloc(context.isMPPayment).add(
             AllInvoicesEvent.fetch(
               appliedFilter: searchKey.isEmpty
                   ? AllInvoicesFilter.defaultFilter()
                   : AllInvoicesFilter.empty().copyWith(
-                      searchKey: SearchKey.searchFilter(searchKey),
+                      searchKey: SearchKey.search(searchKey),
                     ),
             ),
           );
@@ -150,7 +123,7 @@ class _SummarySearchBar extends StatelessWidget {
               appliedFilter: searchKey.isEmpty
                   ? AllCreditsFilter.defaultFilter()
                   : AllCreditsFilter.empty().copyWith(
-                      searchKey: SearchKey.searchFilter(searchKey),
+                      searchKey: SearchKey.search(searchKey),
                     ),
             ),
           );
@@ -163,7 +136,7 @@ class _SummarySearchBar extends StatelessWidget {
               appliedFilter: searchKey.isEmpty
                   ? FullSummaryFilter.defaultFilter()
                   : FullSummaryFilter.empty().copyWith(
-                      searchKey: SearchKey.searchFilter(searchKey),
+                      searchKey: SearchKey.search(searchKey),
                     ),
             ),
           );

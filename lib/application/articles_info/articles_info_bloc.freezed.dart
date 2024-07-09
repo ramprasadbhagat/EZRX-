@@ -23,7 +23,7 @@ mixin _$ArticlesInfoEvent {
         initialize,
     required TResult Function() getArticles,
     required TResult Function() loadMoreArticles,
-    required TResult Function(String searchKey) setSearchKey,
+    required TResult Function(SearchKey searchKey) setSearchKey,
     required TResult Function(List<String> categoryKeyList) setCategoryKey,
   }) =>
       throw _privateConstructorUsedError;
@@ -33,7 +33,7 @@ mixin _$ArticlesInfoEvent {
         initialize,
     TResult? Function()? getArticles,
     TResult? Function()? loadMoreArticles,
-    TResult? Function(String searchKey)? setSearchKey,
+    TResult? Function(SearchKey searchKey)? setSearchKey,
     TResult? Function(List<String> categoryKeyList)? setCategoryKey,
   }) =>
       throw _privateConstructorUsedError;
@@ -43,7 +43,7 @@ mixin _$ArticlesInfoEvent {
         initialize,
     TResult Function()? getArticles,
     TResult Function()? loadMoreArticles,
-    TResult Function(String searchKey)? setSearchKey,
+    TResult Function(SearchKey searchKey)? setSearchKey,
     TResult Function(List<String> categoryKeyList)? setCategoryKey,
     required TResult orElse(),
   }) =>
@@ -203,7 +203,7 @@ class _$InitializeImpl implements _Initialize {
         initialize,
     required TResult Function() getArticles,
     required TResult Function() loadMoreArticles,
-    required TResult Function(String searchKey) setSearchKey,
+    required TResult Function(SearchKey searchKey) setSearchKey,
     required TResult Function(List<String> categoryKeyList) setCategoryKey,
   }) {
     return initialize(user, salesOrg, shipToInfo);
@@ -216,7 +216,7 @@ class _$InitializeImpl implements _Initialize {
         initialize,
     TResult? Function()? getArticles,
     TResult? Function()? loadMoreArticles,
-    TResult? Function(String searchKey)? setSearchKey,
+    TResult? Function(SearchKey searchKey)? setSearchKey,
     TResult? Function(List<String> categoryKeyList)? setCategoryKey,
   }) {
     return initialize?.call(user, salesOrg, shipToInfo);
@@ -229,7 +229,7 @@ class _$InitializeImpl implements _Initialize {
         initialize,
     TResult Function()? getArticles,
     TResult Function()? loadMoreArticles,
-    TResult Function(String searchKey)? setSearchKey,
+    TResult Function(SearchKey searchKey)? setSearchKey,
     TResult Function(List<String> categoryKeyList)? setCategoryKey,
     required TResult orElse(),
   }) {
@@ -337,7 +337,7 @@ class _$GetArticlesImpl implements _GetArticles {
         initialize,
     required TResult Function() getArticles,
     required TResult Function() loadMoreArticles,
-    required TResult Function(String searchKey) setSearchKey,
+    required TResult Function(SearchKey searchKey) setSearchKey,
     required TResult Function(List<String> categoryKeyList) setCategoryKey,
   }) {
     return getArticles();
@@ -350,7 +350,7 @@ class _$GetArticlesImpl implements _GetArticles {
         initialize,
     TResult? Function()? getArticles,
     TResult? Function()? loadMoreArticles,
-    TResult? Function(String searchKey)? setSearchKey,
+    TResult? Function(SearchKey searchKey)? setSearchKey,
     TResult? Function(List<String> categoryKeyList)? setCategoryKey,
   }) {
     return getArticles?.call();
@@ -363,7 +363,7 @@ class _$GetArticlesImpl implements _GetArticles {
         initialize,
     TResult Function()? getArticles,
     TResult Function()? loadMoreArticles,
-    TResult Function(String searchKey)? setSearchKey,
+    TResult Function(SearchKey searchKey)? setSearchKey,
     TResult Function(List<String> categoryKeyList)? setCategoryKey,
     required TResult orElse(),
   }) {
@@ -461,7 +461,7 @@ class _$LoadMoreArticlesImpl implements _LoadMoreArticles {
         initialize,
     required TResult Function() getArticles,
     required TResult Function() loadMoreArticles,
-    required TResult Function(String searchKey) setSearchKey,
+    required TResult Function(SearchKey searchKey) setSearchKey,
     required TResult Function(List<String> categoryKeyList) setCategoryKey,
   }) {
     return loadMoreArticles();
@@ -474,7 +474,7 @@ class _$LoadMoreArticlesImpl implements _LoadMoreArticles {
         initialize,
     TResult? Function()? getArticles,
     TResult? Function()? loadMoreArticles,
-    TResult? Function(String searchKey)? setSearchKey,
+    TResult? Function(SearchKey searchKey)? setSearchKey,
     TResult? Function(List<String> categoryKeyList)? setCategoryKey,
   }) {
     return loadMoreArticles?.call();
@@ -487,7 +487,7 @@ class _$LoadMoreArticlesImpl implements _LoadMoreArticles {
         initialize,
     TResult Function()? getArticles,
     TResult Function()? loadMoreArticles,
-    TResult Function(String searchKey)? setSearchKey,
+    TResult Function(SearchKey searchKey)? setSearchKey,
     TResult Function(List<String> categoryKeyList)? setCategoryKey,
     required TResult orElse(),
   }) {
@@ -548,7 +548,7 @@ abstract class _$$SetSearchKeyImplCopyWith<$Res> {
           _$SetSearchKeyImpl value, $Res Function(_$SetSearchKeyImpl) then) =
       __$$SetSearchKeyImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({String searchKey});
+  $Res call({SearchKey searchKey});
 }
 
 /// @nodoc
@@ -568,7 +568,7 @@ class __$$SetSearchKeyImplCopyWithImpl<$Res>
       searchKey: null == searchKey
           ? _value.searchKey
           : searchKey // ignore: cast_nullable_to_non_nullable
-              as String,
+              as SearchKey,
     ));
   }
 }
@@ -579,7 +579,7 @@ class _$SetSearchKeyImpl implements _SetSearchKey {
   const _$SetSearchKeyImpl({required this.searchKey});
 
   @override
-  final String searchKey;
+  final SearchKey searchKey;
 
   @override
   String toString() {
@@ -612,7 +612,7 @@ class _$SetSearchKeyImpl implements _SetSearchKey {
         initialize,
     required TResult Function() getArticles,
     required TResult Function() loadMoreArticles,
-    required TResult Function(String searchKey) setSearchKey,
+    required TResult Function(SearchKey searchKey) setSearchKey,
     required TResult Function(List<String> categoryKeyList) setCategoryKey,
   }) {
     return setSearchKey(searchKey);
@@ -625,7 +625,7 @@ class _$SetSearchKeyImpl implements _SetSearchKey {
         initialize,
     TResult? Function()? getArticles,
     TResult? Function()? loadMoreArticles,
-    TResult? Function(String searchKey)? setSearchKey,
+    TResult? Function(SearchKey searchKey)? setSearchKey,
     TResult? Function(List<String> categoryKeyList)? setCategoryKey,
   }) {
     return setSearchKey?.call(searchKey);
@@ -638,7 +638,7 @@ class _$SetSearchKeyImpl implements _SetSearchKey {
         initialize,
     TResult Function()? getArticles,
     TResult Function()? loadMoreArticles,
-    TResult Function(String searchKey)? setSearchKey,
+    TResult Function(SearchKey searchKey)? setSearchKey,
     TResult Function(List<String> categoryKeyList)? setCategoryKey,
     required TResult orElse(),
   }) {
@@ -690,10 +690,10 @@ class _$SetSearchKeyImpl implements _SetSearchKey {
 }
 
 abstract class _SetSearchKey implements ArticlesInfoEvent {
-  const factory _SetSearchKey({required final String searchKey}) =
+  const factory _SetSearchKey({required final SearchKey searchKey}) =
       _$SetSearchKeyImpl;
 
-  String get searchKey;
+  SearchKey get searchKey;
   @JsonKey(ignore: true)
   _$$SetSearchKeyImplCopyWith<_$SetSearchKeyImpl> get copyWith =>
       throw _privateConstructorUsedError;
@@ -777,7 +777,7 @@ class _$SetCategoryKeyImpl implements _SetCategoryKey {
         initialize,
     required TResult Function() getArticles,
     required TResult Function() loadMoreArticles,
-    required TResult Function(String searchKey) setSearchKey,
+    required TResult Function(SearchKey searchKey) setSearchKey,
     required TResult Function(List<String> categoryKeyList) setCategoryKey,
   }) {
     return setCategoryKey(categoryKeyList);
@@ -790,7 +790,7 @@ class _$SetCategoryKeyImpl implements _SetCategoryKey {
         initialize,
     TResult? Function()? getArticles,
     TResult? Function()? loadMoreArticles,
-    TResult? Function(String searchKey)? setSearchKey,
+    TResult? Function(SearchKey searchKey)? setSearchKey,
     TResult? Function(List<String> categoryKeyList)? setCategoryKey,
   }) {
     return setCategoryKey?.call(categoryKeyList);
@@ -803,7 +803,7 @@ class _$SetCategoryKeyImpl implements _SetCategoryKey {
         initialize,
     TResult Function()? getArticles,
     TResult Function()? loadMoreArticles,
-    TResult Function(String searchKey)? setSearchKey,
+    TResult Function(SearchKey searchKey)? setSearchKey,
     TResult Function(List<String> categoryKeyList)? setCategoryKey,
     required TResult orElse(),
   }) {

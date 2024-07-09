@@ -19,7 +19,7 @@ class _SearchBar extends StatelessWidget {
           onSearchSubmitted: (value) => context.read<MaterialFilterBloc>().add(
                 MaterialFilterEvent.updateSearchKey(value),
               ),
-          customValidator: (value) => SearchKey.searchFilter(value).isValid(),
+          customValidator: (value) => SearchKey.search(value).isValid(),
         );
       },
     );

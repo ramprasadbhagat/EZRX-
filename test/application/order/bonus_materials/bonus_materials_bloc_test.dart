@@ -246,7 +246,7 @@ void main() {
       //     expect: () => [
       //       BonusMaterialState.initial().copyWith(
       //         failureOrSuccessOption: none(),
-      //         searchKey: SearchKey('314'),
+      //         searchKey: SearchKey.search('314'),
       //         bonus: [],
       //         isStarting: false,
       //         isFetching: true,
@@ -254,7 +254,7 @@ void main() {
       //       BonusMaterialState.initial().copyWith(
       //         failureOrSuccessOption: none(),
       //         bonus: [MaterialInfo.empty()],
-      //         searchKey: SearchKey('314'),
+      //         searchKey: SearchKey.search('314'),
       //         isStarting: false,
       //         isFetching: false,
       //       )
@@ -299,7 +299,7 @@ void main() {
       //     expect: () => [
       //       BonusMaterialState.initial().copyWith(
       //         failureOrSuccessOption: none(),
-      //         searchKey: SearchKey('314'),
+      //         searchKey: SearchKey.search('314'),
       //         bonus: [],
       //         isStarting: false,
       //         isFetching: true,
@@ -311,7 +311,7 @@ void main() {
       //           ),
       //         ),
       //         bonus: [],
-      //         searchKey: SearchKey('314'),
+      //         searchKey: SearchKey.search('314'),
       //         isStarting: false,
       //         isFetching: false,
       //       ),
@@ -330,7 +330,7 @@ void main() {
       //     ),
       //     expect: () => [
       //       BonusMaterialState.initial().copyWith(
-      //         searchKey: SearchKey(''),
+      //         searchKey: SearchKey.empty(),
       //         bonus: [],
       //         isFetching: false,
       //         isStarting: true,

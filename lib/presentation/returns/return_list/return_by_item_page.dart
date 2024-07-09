@@ -60,7 +60,7 @@ class _ReturnByItemPageState extends State<ReturnByItemPage> {
               onRefresh: () => context.read<ReturnListByItemBloc>().add(
                     ReturnListByItemEvent.fetch(
                       appliedFilter: ReturnFilter.empty(),
-                      searchKey: SearchKey(''),
+                      searchKey: SearchKey.empty(),
                     ),
                   ),
               onLoadingMore: () => context.read<ReturnListByItemBloc>().add(

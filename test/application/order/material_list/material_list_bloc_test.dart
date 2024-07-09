@@ -43,7 +43,7 @@ void main() {
   late List<MaterialStockInfo> stockInfoList;
   late List addToFavouritesList;
   late List removeFavouritesList;
-  final fakeSearchKey = SearchKey.searchFilter('');
+  final fakeSearchKey = SearchKey.empty();
 
   late StockInfoRepository stockInfoRepositoryMock;
   final materialState = MaterialListState.initial().copyWith(

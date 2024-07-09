@@ -28,7 +28,7 @@ class FullSummaryFilter with _$FullSummaryFilter {
           '',
         ),
         filterStatuses: <String>[],
-        searchKey: SearchKey(''),
+        searchKey: SearchKey.empty(),
         filterOption: FilterOption(''),
       );
 
@@ -46,12 +46,12 @@ class FullSummaryFilter with _$FullSummaryFilter {
           getDateStringByDateTime(DateTime.now()),
         ),
         filterStatuses: <String>[],
-        searchKey: SearchKey(''),
+        searchKey: SearchKey.empty(),
         filterOption: FilterOption.documentDate(),
       );
 
   FullSummaryFilter get excludeSearch => copyWith(
-        searchKey: SearchKey(''),
+        searchKey: SearchKey.empty(),
       );
 
   DateTimeRange get getDueDateFilterDateRange => DateTimeRange(

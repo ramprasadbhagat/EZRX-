@@ -171,7 +171,7 @@ class _BodyContent extends StatelessWidget {
                               .read<EligibilityBloc>()
                               .state
                               .isGimmickMaterialEnabled,
-                          searchKey: SearchKey.searchFilter(''),
+                          searchKey: SearchKey.empty(),
                         ),
                       ),
                   onLoadingMore: () => context.read<BonusMaterialBloc>().add(

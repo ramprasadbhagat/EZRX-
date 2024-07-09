@@ -202,13 +202,13 @@ void main() {
         config: config,
       ),
       act: (FaqBloc bloc) => bloc.add(
-        const FaqEvent.updatedSearchFaq(
-          searchKey: 'mock_search',
+        FaqEvent.updateSearchKey(
+          searchKey: SearchKey.search('mock_search'),
         ),
       ),
       expect: () => [
         faqState.copyWith(
-          searchKey: SearchKey('mock_search'),
+          searchKey: SearchKey.search('mock_search'),
         ),
       ],
     );

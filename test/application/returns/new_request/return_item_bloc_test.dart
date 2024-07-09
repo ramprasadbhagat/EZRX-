@@ -80,7 +80,7 @@ void main() {
               pageSize: config.pageSize,
               offset: 0,
               filter: fakeReturnItemsFilter,
-              searchKey: SearchKey(''),
+              searchKey: SearchKey.empty(),
               language: initState.user.preferredLanguage.languageCode,
               user: fakeUserWithLanguageCode,
             ),
@@ -92,19 +92,19 @@ void main() {
       act: (bloc) => bloc.add(
         ReturnItemsEvent.fetch(
           appliedFilter: fakeReturnItemsFilter,
-          searchKey: SearchKey(''),
+          searchKey: SearchKey.empty(),
         ),
       ),
       expect: () => [
         initState.copyWith(
           isLoading: true,
           appliedFilter: fakeReturnItemsFilter,
-          searchKey: SearchKey(''),
+          searchKey: SearchKey.empty(),
         ),
         initState.copyWith(
           canLoadMore: false,
           appliedFilter: fakeReturnItemsFilter,
-          searchKey: SearchKey(''),
+          searchKey: SearchKey.empty(),
           items: fakeReturnMaterialList.items,
         ),
       ],
@@ -127,7 +127,7 @@ void main() {
               pageSize: config.pageSize,
               offset: 0,
               filter: fakeReturnItemsFilter,
-              searchKey: SearchKey(''),
+              searchKey: SearchKey.empty(),
               language: initState.user.preferredLanguage.languageCode,
               user: fakeUserWithLanguageCode,
             ),
@@ -139,18 +139,18 @@ void main() {
       act: (bloc) => bloc.add(
         ReturnItemsEvent.fetch(
           appliedFilter: fakeReturnItemsFilter,
-          searchKey: SearchKey(''),
+          searchKey: SearchKey.empty(),
         ),
       ),
       expect: () => [
         initState.copyWith(
           isLoading: true,
           appliedFilter: fakeReturnItemsFilter,
-          searchKey: SearchKey(''),
+          searchKey: SearchKey.empty(),
         ),
         initState.copyWith(
           appliedFilter: fakeReturnItemsFilter,
-          searchKey: SearchKey(''),
+          searchKey: SearchKey.empty(),
           failureOrSuccessOption:
               optionOf(const Left(ApiFailure.other('Fake-Error'))),
         ),
@@ -165,7 +165,7 @@ void main() {
       ),
       seed: () => initState.copyWith(
         appliedFilter: fakeReturnItemsFilter,
-        searchKey: SearchKey(''),
+        searchKey: SearchKey.empty(),
         items: fakeReturnMaterialList.items,
       ),
       setUp: () {
@@ -178,7 +178,7 @@ void main() {
               pageSize: config.pageSize,
               offset: fakeReturnMaterialList.items.length,
               filter: fakeReturnItemsFilter,
-              searchKey: SearchKey(''),
+              searchKey: SearchKey.empty(),
               language: initState.user.preferredLanguage.languageCode,
               user: fakeUserWithLanguageCode,
             ),
@@ -193,14 +193,14 @@ void main() {
       expect: () => [
         initState.copyWith(
           appliedFilter: fakeReturnItemsFilter,
-          searchKey: SearchKey(''),
+          searchKey: SearchKey.empty(),
           items: fakeReturnMaterialList.items,
           isLoading: true,
         ),
         initState.copyWith(
           canLoadMore: false,
           appliedFilter: fakeReturnItemsFilter,
-          searchKey: SearchKey(''),
+          searchKey: SearchKey.empty(),
           items: [
             ...fakeReturnMaterialList.items,
             ...fakeReturnMaterialList.items,
@@ -216,7 +216,7 @@ void main() {
       ),
       seed: () => initState.copyWith(
         appliedFilter: fakeReturnItemsFilter,
-        searchKey: SearchKey(''),
+        searchKey: SearchKey.empty(),
         items: fakeReturnMaterialList.items,
       ),
       setUp: () {
@@ -229,7 +229,7 @@ void main() {
               pageSize: config.pageSize,
               offset: fakeReturnMaterialList.items.length,
               filter: fakeReturnItemsFilter,
-              searchKey: SearchKey(''),
+              searchKey: SearchKey.empty(),
               language: initState.user.preferredLanguage.languageCode,
               user: fakeUserWithLanguageCode,
             ),
@@ -244,13 +244,13 @@ void main() {
       expect: () => [
         initState.copyWith(
           appliedFilter: fakeReturnItemsFilter,
-          searchKey: SearchKey(''),
+          searchKey: SearchKey.empty(),
           items: fakeReturnMaterialList.items,
           isLoading: true,
         ),
         initState.copyWith(
           appliedFilter: fakeReturnItemsFilter,
-          searchKey: SearchKey(''),
+          searchKey: SearchKey.empty(),
           items: fakeReturnMaterialList.items,
           failureOrSuccessOption:
               optionOf(const Left(ApiFailure.other('Fake-Error'))),

@@ -25,7 +25,7 @@ class _ListByRequestSearchBar extends StatelessWidget {
           keyword: value,
           context: context,
         ),
-        customValidator: (value) => SearchKey.searchFilter(value).isValid(),
+        customValidator: (value) => SearchKey.search(value).isValid(),
         onClear: () => _search(
           keyword: '',
           context: context,
@@ -47,7 +47,7 @@ class _ListByRequestSearchBar extends StatelessWidget {
     bloc.add(
       ReturnListByRequestEvent.fetch(
         appliedFilter: appliedFilter,
-        searchKey: SearchKey.searchFilter(keyword),
+        searchKey: SearchKey.search(keyword),
       ),
     );
   }

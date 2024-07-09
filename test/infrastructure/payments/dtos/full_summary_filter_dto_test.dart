@@ -24,7 +24,7 @@ void main() {
           documentDateFrom: fakeDocumentDateFrom,
           documentDateTo: fakeDocumentDateTo,
           filterStatuses: fakeFilterStatuses,
-          searchKey: SearchKey(fakeSearchKey),
+          searchKey: SearchKey.search(fakeSearchKey),
           filterOption: FilterOption(''),
         ),
       );
@@ -63,7 +63,7 @@ void main() {
           documentDateFrom: fakeDocumentDateFrom,
           documentDateTo: fakeDocumentDateTo,
           filterStatuses: fakeFilterStatuses,
-          searchKey: SearchKey(fakeSearchKey),
+          searchKey: SearchKey.search(fakeSearchKey),
           filterOption: FilterOption(''),
         ),
       );

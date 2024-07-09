@@ -105,7 +105,7 @@ class CustomerCodeBloc extends Bloc<CustomerCodeEvent, CustomerCodeState> {
           state.copyWith(
             isFetching: true,
             isSearchActive: false,
-            searchKey: SearchKey(e.searchText),
+            searchKey: SearchKey.empty(),
             customerCodeList: <CustomerCodeInfo>[],
             apiFailureOrSuccessOption: none(),
           ),
@@ -200,15 +200,6 @@ class CustomerCodeBloc extends Bloc<CustomerCodeEvent, CustomerCodeState> {
         },
       );
     });
-    on<_DeletedSearch>(
-      (event, emit) {
-        add(
-          _Fetch(
-            searchText: event.searchText,
-          ),
-        );
-      },
-    );
     on<_FetchCustomerCodeConfig>(
       (event, emit) async {
         emit(

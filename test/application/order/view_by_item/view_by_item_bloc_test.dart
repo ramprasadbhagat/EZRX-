@@ -31,7 +31,7 @@ void main() {
   late List<OrderHistoryItem> orderHistoryItemsListMock;
   final config = Config()..appFlavor = Flavor.mock;
   final fakeShipToInfo = fakeCustomerCodeInfo.shipToInfos.first;
-  final searchKey = SearchKey.searchFilter('');
+  final searchKey = SearchKey.empty();
   final viewByItemFilter = ViewByItemFilter.empty();
 
   const offSet = 0;
@@ -535,7 +535,7 @@ void main() {
         act: (bloc) => bloc.add(
           ViewByItemsEvent.fetch(
             viewByItemFilter: viewByItemFilter,
-            searchKey: SearchKey.searchFilter('1'),
+            searchKey: SearchKey.search('1'),
           ),
         ),
         expect: () => [],

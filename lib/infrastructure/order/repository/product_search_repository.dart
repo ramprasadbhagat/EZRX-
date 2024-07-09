@@ -170,7 +170,7 @@ final MaterialListLocalDataSource materialListLocalDataSource;
           .getModifiedList(searchKey);
 
       final updatedObject = ProductSuggestionHistory(
-        searchKeyList: searchKeyList.map((e) => SearchKey(e)).toList(),
+        searchKeyList: searchKeyList.map((e) => SearchKey.search(e)).toList(),
       );
       await productSuggestionHistoryStorage.putSearchKey(
         searchKeyList: ProductSuggestionHistoryDto.fromDomain(updatedObject),

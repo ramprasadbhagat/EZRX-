@@ -20,7 +20,7 @@ class AvailableCreditsState with _$AvailableCreditsState {
         canLoadMore: true,
         items: <CustomerOpenItem>[],
         appliedFilter: AvailableCreditFilter.defaultFilter(),
-        searchKey: SearchKey.searchFilter(''),
+        searchKey: SearchKey.empty(),
         customerCodeInfo: CustomerCodeInfo.empty(),
         salesOrganization: SalesOrganisation.empty(),
       );

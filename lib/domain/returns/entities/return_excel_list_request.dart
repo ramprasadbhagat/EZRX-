@@ -24,6 +24,6 @@ class ReturnExcelListRequest with _$ReturnExcelListRequest {
         shipToInfo: '',
         userName: Username(''),
         filter: ReturnFilter.empty(),
-        searchKey: SearchKey(''),
+        searchKey: SearchKey.empty(),
       );
 }

@@ -79,7 +79,7 @@ class _ReturnByRequestPageState extends State<ReturnByRequestPage> {
               onRefresh: () => context.read<ReturnListByRequestBloc>().add(
                     ReturnListByRequestEvent.fetch(
                       appliedFilter: ReturnFilter.empty(),
-                      searchKey: SearchKey(''),
+                      searchKey: SearchKey.empty(),
                     ),
                   ),
               onLoadingMore: () => context.read<ReturnListByRequestBloc>().add(

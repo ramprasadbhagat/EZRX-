@@ -8,9 +8,7 @@ class _SearchAnnouncement extends StatelessWidget {
     return BlocBuilder<AnnouncementInfoBloc, AnnouncementInfoState>(
       key: WidgetKeys.searchSectionTab('Announcements'),
       buildWhen: (previous, current) =>
-          previous.searchedAnnouncementList !=
-                  current.searchedAnnouncementList &&
-              previous.searchKey != current.searchKey ||
+          previous.searchKey != current.searchKey ||
           previous.isLoading != current.isLoading,
       builder: (context, state) {
         return CustomSearchBar(
@@ -19,18 +17,20 @@ class _SearchAnnouncement extends StatelessWidget {
           enabled: !state.isLoading,
           onSearchChanged: (value) => context.read<AnnouncementInfoBloc>().add(
                 AnnouncementInfoEvent.updateSearchKey(
-                  searchKey: value,
+                  searchKey: SearchKey.search(value),
                 ),
               ),
           onSearchSubmitted: (value) =>
               context.read<AnnouncementInfoBloc>().add(
                     AnnouncementInfoEvent.updateSearchKey(
-                      searchKey: value,
+                      searchKey: SearchKey.search(value),
                     ),
                   ),
-          customValidator: (value) => SearchKey.searchFilter(value).isValid(),
+          customValidator: (value) => SearchKey.search(value).isValid(),
           onClear: () => context.read<AnnouncementInfoBloc>().add(
-                const AnnouncementInfoEvent.updateSearchKey(searchKey: ''),
+                AnnouncementInfoEvent.updateSearchKey(
+                  searchKey: SearchKey.empty(),
+                ),
               ),
         );
       },

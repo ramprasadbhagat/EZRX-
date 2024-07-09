@@ -202,7 +202,7 @@ void main() {
         () => availableCreditsBlocMock.add(
           AvailableCreditsEvent.fetch(
             appliedFilter: AvailableCreditFilter.empty(),
-            searchKey: SearchKey.searchFilter(fakeSearchKey),
+            searchKey: SearchKey.search(fakeSearchKey),
             isMarketPlace: true,
           ),
         ),
@@ -234,7 +234,7 @@ void main() {
         () => availableCreditsBlocMock.add(
           AvailableCreditsEvent.fetch(
             appliedFilter: appliedFilterWithSearch,
-            searchKey: SearchKey.searchFilter(fakeSearchKey),
+            searchKey: SearchKey.search(fakeSearchKey),
             isMarketPlace: false,
           ),
         ),
@@ -254,7 +254,7 @@ void main() {
         () => availableCreditsBlocMock.add(
           AvailableCreditsEvent.fetch(
             appliedFilter: appliedFilterWithSearch,
-            searchKey: SearchKey.searchFilter(fakeSearchKey),
+            searchKey: SearchKey.search(fakeSearchKey),
             isMarketPlace: false,
           ),
         ),
@@ -286,7 +286,7 @@ void main() {
         () => availableCreditsBlocMock.add(
           AvailableCreditsEvent.fetch(
             appliedFilter: AvailableCreditFilter.defaultFilter(),
-            searchKey: SearchKey.searchFilter(''),
+            searchKey: SearchKey.empty(),
             isMarketPlace: false,
           ),
         ),
@@ -553,7 +553,7 @@ void main() {
         () => availableCreditsBlocMock.add(
           AvailableCreditsEvent.fetch(
             appliedFilter: creditFilter,
-            searchKey: SearchKey.searchFilter(''),
+            searchKey: SearchKey.empty(),
             isMarketPlace: false,
           ),
         ),
@@ -604,7 +604,7 @@ void main() {
         () => availableCreditsBlocMock.add(
           AvailableCreditsEvent.fetch(
             appliedFilter: AvailableCreditFilter.defaultFilter(),
-            searchKey: SearchKey.searchFilter(''),
+            searchKey: SearchKey.empty(),
             isMarketPlace: false,
           ),
         ),

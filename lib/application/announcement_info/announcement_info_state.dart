@@ -20,7 +20,7 @@ class AnnouncementInfoState with _$AnnouncementInfoState {
         salesOrg: SalesOrg(''),
         isLoading: false,
         canLoadMore: true,
-        searchKey: SearchKey.searchFilter(''),
+        searchKey: SearchKey.empty(),
         categoryKeyList: <String>[],
         announcementInfo: AnnouncementArticleInfo.empty(),
         apiFailureOrSuccessOption: none(),

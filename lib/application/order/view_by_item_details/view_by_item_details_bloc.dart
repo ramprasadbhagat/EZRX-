@@ -129,7 +129,7 @@ class ViewByItemDetailsBloc
         );
       },
       fetchOrderHistoryDetails: (e) async {
-        final searchKey = SearchKey(e.orderNumber.getOrDefaultValue(''));
+        final searchKey = SearchKey.search(e.orderNumber.getOrDefaultValue(''));
         if (searchKey.isInvalidSearchKey) return;
 
         emit(

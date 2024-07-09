@@ -427,7 +427,7 @@ void main() {
         () => viewByOrderBlocMock.add(
           ViewByOrderEvent.fetch(
             filter: ViewByOrdersFilter.empty(),
-            searchKey: SearchKey.searchFilter(
+            searchKey: SearchKey.search(
               'fake-id',
             ),
             isDetailsPage: true,
@@ -455,7 +455,7 @@ void main() {
           ViewByOrderState.initial().copyWith(
             failureOrSuccessOption: optionOf(const Right(unit)),
             viewByOrderList: fakeViewByOrder,
-            searchKey: SearchKey('test'),
+            searchKey: SearchKey.search('test'),
           ),
         ]),
       );
@@ -487,7 +487,7 @@ void main() {
           ViewByOrderState.initial().copyWith(
             failureOrSuccessOption:
                 optionOf(const Left(ApiFailure.other(failureMessage))),
-            searchKey: SearchKey.searchFilter('fake_searchKey'),
+            searchKey: SearchKey.search('fake_searchKey'),
           ),
         ]),
       );

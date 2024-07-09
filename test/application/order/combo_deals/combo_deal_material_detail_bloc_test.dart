@@ -420,13 +420,13 @@ void main() {
         config: config,
         stockInfoRepository: stockInfoRepositoryMock,
       ),
-      seed: () => initialState.copyWith(searchKey: SearchKey('dummy')),
+      seed: () => initialState.copyWith(searchKey: SearchKey.search('dummy')),
       act: (ComboDealMaterialDetailBloc bloc) => bloc.add(
         const ComboDealMaterialDetailEvent.clearSearch(),
       ),
       expect: () => [
         initialState.copyWith(
-          searchKey: SearchKey.search(''),
+          searchKey: SearchKey.empty(),
         ),
       ],
     );
@@ -442,12 +442,12 @@ void main() {
       seed: () => initialState,
       act: (ComboDealMaterialDetailBloc bloc) => bloc.add(
         ComboDealMaterialDetailEvent.search(
-          searchKey: SearchKey('dummy'),
+          searchKey: SearchKey.search('dummy'),
         ),
       ),
       expect: () => [
         initialState.copyWith(
-          searchKey: SearchKey('dummy'),
+          searchKey: SearchKey.search('dummy'),
         ),
       ],
     );

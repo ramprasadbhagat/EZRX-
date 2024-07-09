@@ -19,10 +19,10 @@ class ReturnApproverFilter with _$ReturnApproverFilter {
   }) = _ReturnApproverFilter;
 
   factory ReturnApproverFilter.empty() => ReturnApproverFilter(
-        returnId: SearchKey.searchFilter(''),
-        createdBy: SearchKey.searchFilter(''),
-        soldTo: SearchKey.searchFilter(''),
-        shipTo: SearchKey.searchFilter(''),
+        returnId: SearchKey.empty(),
+        createdBy: SearchKey.empty(),
+        soldTo: SearchKey.empty(),
+        shipTo: SearchKey.empty(),
         fromInvoiceDate: DateTimeStringValue(
           getDateStringByDateTime(
             DateTime.now().subtract(const Duration(days: 28)),

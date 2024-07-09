@@ -66,7 +66,7 @@ class ViewByItemsPage extends StatelessWidget {
             context.read<ViewByItemsBloc>().add(
                   ViewByItemsEvent.fetch(
                     viewByItemFilter: ViewByItemFilter.empty(),
-                    searchKey: SearchKey(''),
+                    searchKey: SearchKey.empty(),
                   ),
                 );
           },

@@ -34,7 +34,7 @@ void main() {
   late List<PaymentSummaryDetails> fakePaymentList;
   late List<PaymentSummaryDetails> fakeTransactionList;
   final fakeFilter = PaymentSummaryFilter.defaultFilter()
-      .copyWith(searchKey: SearchKey('FAKE_SEARCH_KEY'));
+      .copyWith(searchKey: SearchKey.search('FAKE_SEARCH_KEY'));
   final filterList = PaymentSummaryFilterDto.fromDomain(fakeFilter).toMapList;
 
   setUpAll(
