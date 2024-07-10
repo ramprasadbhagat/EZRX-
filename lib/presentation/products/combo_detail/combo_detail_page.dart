@@ -95,7 +95,7 @@ class ComboDetailPage extends StatelessWidget with BottomsheetMixin {
                   confirmButtonText: 'Leave',
                 );
                 if (confirmed ?? false) {
-                  if (context.mounted) context.router.navigateBack();
+                  if (context.mounted) await context.router.pop();
                 }
               },
             ),

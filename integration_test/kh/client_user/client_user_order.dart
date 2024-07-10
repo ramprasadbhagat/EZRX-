@@ -3372,6 +3372,23 @@ void main() {
     });
 
     group('Combo - ', () {
+      testWidgets('EZRX-24189 | Back to product detail page from combo detail page',
+              (tester) async {
+        await pumpAppWithHomeScreen(
+          tester,
+        );
+
+        await commonRobot.navigateToScreen(NavigationTab.products);
+        await browseProductFromEmptyCart();
+
+        await openAndVerifyComboDetail(tester, materialNumber: comboK21FixedMaterialNumber);
+        await homeRobot.tapMiniCartIcon();
+        await cartRobot.tapCloseButton();
+
+        await pressCloseButtonToolbar(tester);
+        expect(cartRobot.isCartPage, false);
+      });
+
       testWidgets('EZRX-T1862 | Verify Combo K1 in cart', (tester) async {
         await pumpAppWithHomeScreen(
           tester,
