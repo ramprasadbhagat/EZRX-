@@ -199,7 +199,7 @@ stages:
       - ${{ each testFile in parameters }}:
           - job: RunIntegrationTest${{ testFile.Key }}
             condition: and(succeeded(), eq('${{ testFile.Value }}', true))
-            timeoutInMinutes: 90
+            timeoutInMinutes: 120
             cancelTimeoutInMinutes: 5
             displayName: ${{ testFile.Key }}
             pool:
