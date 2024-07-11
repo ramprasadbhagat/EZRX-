@@ -38,7 +38,7 @@ class ContactUsRepository implements IContactUsRepository {
       final isSuccess = await remoteDataSource.submit(
         contactUsMap: ContactUsDto.fromDomain(contactUs).toJson(),
         country: appMarket.country,
-        sendToEmail: appMarket.contactUsEmail,
+        sendToEmail: config.getContactUsStaticEmail(appMarket.country),
       );
 
       return Right(isSuccess);

@@ -488,15 +488,6 @@ String countryArticlePath(String country) {
   return salesOrgCountryMap[country] ?? '';
 }
 
-String countryContactUsEmail(String country) {
-  switch (country) {
-    case 'ID':
-      return 'feedback@aplcare.com';
-    default:
-      return 'support@ezrxplus.com';
-  }
-}
-
 String countryContactUsItemId(String country) {
   final salesOrgCountryMap = {
     'MY': 'FD4EBB5A-7740-4354-91C7-98642E735337',

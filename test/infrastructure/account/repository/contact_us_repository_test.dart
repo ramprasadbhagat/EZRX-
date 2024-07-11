@@ -77,11 +77,13 @@ void main() {
 
     test('submit remote failed', () async {
       when(() => configMock.appFlavor).thenReturn(Flavor.uat);
+      when(() => configMock.getContactUsStaticEmail(fakeMarket.country))
+          .thenReturn('mock-email@a.com');
       when(
         () => remoteDataSourceMock.submit(
           contactUsMap: ContactUsDto.fromDomain(contactUsMock).toJson(),
           country: fakeMarket.country,
-          sendToEmail: fakeMarket.contactUsEmail,
+          sendToEmail: 'mock-email@a.com',
         ),
       ).thenThrow((invocation) async => MockException());
 
@@ -94,11 +96,13 @@ void main() {
 
     test('submit remote success', () async {
       when(() => configMock.appFlavor).thenReturn(Flavor.uat);
+      when(() => configMock.getContactUsStaticEmail(fakeMarket.country))
+          .thenReturn('mock-email@a.com');
       when(
         () => remoteDataSourceMock.submit(
           contactUsMap: ContactUsDto.fromDomain(contactUsMock).toJson(),
           country: fakeMarket.country,
-          sendToEmail: fakeMarket.contactUsEmail,
+          sendToEmail: 'mock-email@a.com',
         ),
       ).thenAnswer((invocation) async => true);
 

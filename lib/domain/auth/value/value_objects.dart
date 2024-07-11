@@ -50,8 +50,6 @@ class AppMarket extends ValueObject<String> {
 
   const AppMarket._(this.value);
 
-  String get contactUsEmail => countryContactUsEmail(country);
-
   String get contactUsItemId => countryContactUsItemId(country);
 
   Locale get announcementLocale =>
