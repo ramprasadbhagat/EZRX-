@@ -33,12 +33,19 @@ import 'package:ezrxmobile/presentation/core/custom_expansion_tile.dart'
     as custom;
 
 part 'package:ezrxmobile/presentation/account/customer_search/widgets/delivery_address_item.dart';
+
 part 'package:ezrxmobile/presentation/account/customer_search/widgets/ship_to_address_section.dart';
+
 part 'package:ezrxmobile/presentation/account/customer_search/widgets/delivery_address_search_section.dart';
+
 part 'package:ezrxmobile/presentation/account/customer_search/widgets/change_delivery_address.dart';
+
 part 'package:ezrxmobile/presentation/account/customer_search/widgets/ship_to_address_title.dart';
+
 part 'package:ezrxmobile/presentation/account/customer_search/widgets/ship_to_address_info.dart';
+
 part 'package:ezrxmobile/presentation/account/customer_search/widgets/show_default_tag.dart';
+
 part 'package:ezrxmobile/presentation/account/customer_search/widgets/title_section.dart';
 
 @RoutePage()
@@ -47,65 +54,59 @@ class CustomerSearchPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      key: WidgetKeys.customerSearchPage,
-      appBar: AppBar(
-        title: Text(
-          context.tr('Select delivery address'),
-          style: Theme.of(context).textTheme.labelLarge,
-        ),
-        centerTitle: false,
-        leading: BlocBuilder<EligibilityBloc, EligibilityState>(
-          buildWhen: (previous, current) =>
-              previous.haveCustomerCodeInfo != current.haveCustomerCodeInfo,
-          builder: (context, state) {
-            return PopScope(
-              canPop: state.haveCustomerCodeInfo,
-              child: state.haveCustomerCodeInfo
-                  ? IconButton(
+    return BlocBuilder<EligibilityBloc, EligibilityState>(
+      buildWhen: (previous, current) =>
+          previous.haveCustomerCodeInfo != current.haveCustomerCodeInfo,
+      builder: (_, eligibilityState) {
+        return Scaffold(
+          key: WidgetKeys.customerSearchPage,
+          appBar: AppBar(
+            title: Text(
+              context.tr('Select delivery address'),
+              style: Theme.of(context).textTheme.labelLarge,
+            ),
+            centerTitle: false,
+            automaticallyImplyLeading: eligibilityState.haveCustomerCodeInfo,
+            leading: eligibilityState.haveCustomerCodeInfo
+                ? PopScope(
+                    canPop: eligibilityState.haveCustomerCodeInfo,
+                    child: IconButton(
                       key: WidgetKeys.backButton,
                       icon: const Icon(Icons.arrow_back_ios_sharp),
                       onPressed: () => context.maybePop(),
-                    )
-                  : const SizedBox.shrink(),
-              onPopInvoked: (bool didPop) async {
-                if (didPop) return;
-
-                await SystemChannels.platform
-                    .invokeMethod('SystemNavigator.pop');
-              },
-            );
-          },
-        ),
-        actions: [
-          BlocConsumer<SalesOrgBloc, SalesOrgState>(
-            listenWhen: (previous, current) =>
-                (previous.isLoading != current.isLoading &&
-                    !current.isLoading) &&
-                (previous.salesOrganisation != SalesOrganisation.empty() &&
-                    previous.salesOrganisation != current.salesOrganisation),
-            listener: (context, state) {
-              context.read<EligibilityBloc>().add(
-                    EligibilityEvent.selectedCustomerCode(
-                      customerCodeInfo: CustomerCodeInfo.empty(),
-                      shipToInfo: ShipToInfo.empty(),
                     ),
-                  );
-            },
-            builder: (context, state) {
-              return BlocBuilder<SalesOrgBloc, SalesOrgState>(
-                buildWhen: (previous, current) {
-                  return previous.salesOrg != current.salesOrg;
-                },
-                builder: (context, state) {
-                  return GestureDetector(
-                    onTap: () {
-                      if (context
-                              .read<UserBloc>()
-                              .state
-                              .userSalesOrganisations
-                              .length >
-                          1) {
+                    onPopInvoked: (bool didPop) async {
+                      if (didPop) return;
+
+                      await SystemChannels.platform
+                          .invokeMethod('SystemNavigator.pop');
+                    },
+                  )
+                : null,
+            actions: [
+              if (eligibilityState.user.isMultiSalesOrgs)
+                BlocConsumer<SalesOrgBloc, SalesOrgState>(
+                  listenWhen: (previous, current) =>
+                      (previous.isLoading != current.isLoading &&
+                          !current.isLoading) &&
+                      (previous.salesOrganisation !=
+                              SalesOrganisation.empty() &&
+                          previous.salesOrganisation !=
+                              current.salesOrganisation),
+                  listener: (context, state) {
+                    context.read<EligibilityBloc>().add(
+                          EligibilityEvent.selectedCustomerCode(
+                            customerCodeInfo: CustomerCodeInfo.empty(),
+                            shipToInfo: ShipToInfo.empty(),
+                          ),
+                        );
+                  },
+                  buildWhen: (previous, current) {
+                    return previous.salesOrg != current.salesOrg;
+                  },
+                  builder: (context, state) {
+                    return InkWell(
+                      onTap: () {
                         context.read<SalesOrgBloc>().add(
                               SalesOrgEvent.fetchAvailableSalesOrg(
                                 avialableSalesOrgList: context
@@ -124,67 +125,69 @@ class CustomerSearchPage extends StatelessWidget {
                                 .userSalesOrganisations,
                           ),
                         );
-                      }
-                    },
-                    child: Column(
-                      children: [
-                        ClipOval(
-                          child: SizedBox(
-                            height: 25.0,
-                            width: 25.0,
-                            child: SvgPicture.asset(
-                              key: WidgetKeys.countryFlag,
-                              state.salesOrg.countryFlag,
-                              fit: BoxFit.fill,
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.only(right: 16.0),
+                        child: Column(
+                          children: [
+                            ClipOval(
+                              child: SizedBox(
+                                height: 25.0,
+                                width: 25.0,
+                                child: SvgPicture.asset(
+                                  key: WidgetKeys.countryFlag,
+                                  state.salesOrg.countryFlag,
+                                  fit: BoxFit.fill,
+                                ),
+                              ),
                             ),
-                          ),
+                            const SizedBox(height: 8),
+                            Text(
+                              '${state.salesOrg.buName} ${state.salesOrg.getOrDefaultValue('')}',
+                              style: Theme.of(context).textTheme.bodySmall,
+                              key: WidgetKeys.changeSalesOrgButton,
+                            ).tr(),
+                          ],
                         ),
-                        const SizedBox(height: 8),
-                        Text(
-                          '${state.salesOrg.buName} ${state.salesOrg.getOrDefaultValue('')}',
-                          style: Theme.of(context).textTheme.bodySmall,
-                          key: WidgetKeys.changeSalesOrgButton,
-                        ).tr(),
-                      ],
+                      ),
+                    );
+                  },
+                ),
+            ],
+          ),
+          body: Column(
+            children: [
+              AnnouncementWidget(
+                currentPath: context.router.currentPath,
+              ),
+              const _DeliveryAddressSearchSection(),
+              BlocConsumer<CustomerCodeBloc, CustomerCodeState>(
+                listenWhen: (previous, current) =>
+                    previous.apiFailureOrSuccessOption !=
+                    current.apiFailureOrSuccessOption,
+                listener: (context, state) {
+                  state.apiFailureOrSuccessOption.fold(
+                    () {},
+                    (either) => either.fold(
+                      (failure) {
+                        ErrorUtils.handleApiFailure(context, failure);
+                      },
+                      (_) {},
                     ),
                   );
                 },
-              );
-            },
+                buildWhen: (previous, current) =>
+                    previous.isFetching != current.isFetching,
+                builder: (context, state) {
+                  return _BodyContent(
+                    state: state,
+                  );
+                },
+              ),
+            ],
           ),
-        ],
-      ),
-      body: Column(
-        children: [
-          AnnouncementWidget(
-            currentPath: context.router.currentPath,
-          ),
-          const _DeliveryAddressSearchSection(),
-          BlocConsumer<CustomerCodeBloc, CustomerCodeState>(
-            listenWhen: (previous, current) =>
-                previous.apiFailureOrSuccessOption !=
-                current.apiFailureOrSuccessOption,
-            listener: (context, state) {
-              state.apiFailureOrSuccessOption.fold(
-                () {},
-                (either) => either.fold(
-                  (failure) {
-                    ErrorUtils.handleApiFailure(context, failure);
-                  },
-                  (_) {},
-                ),
-              );
-            },
-            buildWhen: (previous, current) =>
-                previous.isFetching != current.isFetching,
-            builder: (context, state) {
-              return _BodyContent(
-                state: state,
-              );
-            },
-          ),
-        ],
-      ),
+        );
+      },
     );
   }
 }

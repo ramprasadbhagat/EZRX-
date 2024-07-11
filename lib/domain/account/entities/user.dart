@@ -180,6 +180,8 @@ class User with _$User {
 
   bool get isCustomerWithPaymentsDisable =>
       role.type.isCustomer && disablePaymentAccess;
+
+  bool get isMultiSalesOrgs => userSalesOrganisations.length > 1;
 }
 
 enum _UserFile {

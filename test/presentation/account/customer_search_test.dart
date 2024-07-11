@@ -13,6 +13,7 @@ import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_information.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
+import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/customer_code_local.dart';
@@ -103,6 +104,12 @@ void main() {
   //   remarks: '',
   //   genericMaterialName: '',
   // );
+  final fakeUserWithMultiSalesOrgs = User.empty().copyWith(
+    userSalesOrganisations: [
+      fakeHKSalesOrganisation,
+      fakeIDSalesOrganisation,
+    ],
+  );
   late AuthBloc authBlocMock;
   late AnnouncementBloc announcementBlocMock;
   setUpAll(() async {
@@ -387,6 +394,9 @@ void main() {
     testWidgets(
         'Test have customer code list and change sale org should reset selected shipTo and customer code',
         (tester) async {
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(user: fakeUserWithMultiSalesOrgs),
+      );
       final expectedSalesOrgStates = [
         SalesOrgState.initial().copyWith(
           salesOrganisation: SalesOrganisation.empty().copyWith(
@@ -478,7 +488,38 @@ void main() {
       );
     });
 
+    testWidgets(
+        'The app bar should not display the flag if there is only one sales org',
+        (tester) async {
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          customerCodeInfo: fakeCustomerCodeInfo,
+          shipToInfo: fakeShipToInfo,
+        ),
+      );
+      when(() => customerCodeBlocMock.state).thenReturn(
+        CustomerCodeState.initial().copyWith(
+          isFetching: false,
+          customerCodeList: [fakeCustomerCodeInfo],
+        ),
+      );
+      when(() => salesOrgBlocMock.state).thenReturn(
+        SalesOrgState.initial().copyWith(
+          salesOrganisation: fakeHKSalesOrganisation,
+        ),
+      );
+
+      await tester.pumpWidget(getScopedWidget());
+      await tester.pump();
+
+      final customerFlag = find.byKey(WidgetKeys.countryFlag);
+      expect(customerFlag, findsNothing);
+    });
+
     testWidgets('The app bar should display the HK flag.', (tester) async {
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(user: fakeUserWithMultiSalesOrgs),
+      );
       when(() => customerCodeBlocMock.state).thenReturn(
         CustomerCodeState.initial().copyWith(
           isFetching: false,
@@ -487,8 +528,7 @@ void main() {
       );
       when(() => salesOrgBlocMock.state).thenReturn(
         SalesOrgState.initial().copyWith(
-          salesOrganisation:
-              SalesOrganisation.empty().copyWith(salesOrg: SalesOrg('1700')),
+          salesOrganisation: fakeHKSalesOrganisation,
         ),
       );
       await tester.pumpWidget(getScopedWidget());

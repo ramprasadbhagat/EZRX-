@@ -15,6 +15,7 @@ const _fakeIDSalesOrgId = '1900';
 const _fakeTHSalesOrgId = '2902';
 const _fakeKHSalesOrgId = '1500';
 const _fakeMMSalesOrgId = '2201';
+const _fakeHKSalesOrgId = '1700';
 
 final fakeSalesOrg = SalesOrg(_fakeSaleOrgId);
 final fakePHSalesOrg = SalesOrg(_fakePHSalesOrgId);
@@ -26,6 +27,7 @@ final fakeIDSalesOrg = SalesOrg(_fakeIDSalesOrgId);
 final fakeTHSalesOrg = SalesOrg(_fakeTHSalesOrgId);
 final fakeKHSalesOrg = SalesOrg(_fakeKHSalesOrgId);
 final fakeMMSalesOrg = SalesOrg(_fakeMMSalesOrgId);
+final fakeHKSalesOrg = SalesOrg(_fakeHKSalesOrgId);
 final fakePhMDISalesOrg = SalesOrg(_fakePhMDISalesOrgId);
 
 final fakeEmptySalesOrganisation = SalesOrganisation.empty();
@@ -65,6 +67,9 @@ final fakeTWSalesOrganisation =
 
 final fakeMMSalesOrganisation =
     SalesOrganisation.empty().copyWith(salesOrg: fakeMMSalesOrg);
+
+final fakeHKSalesOrganisation =
+    SalesOrganisation.empty().copyWith(salesOrg: fakeHKSalesOrg);
 
 final salesOrgVariant = ValueVariant<SalesOrg>(
   {
