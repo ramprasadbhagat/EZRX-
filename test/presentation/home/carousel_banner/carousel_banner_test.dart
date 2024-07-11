@@ -305,6 +305,40 @@ void main() {
       );
     });
 
+    testWidgets(
+        'Banner test 5 - Hide the next and previous buttons if there is only one banner',
+        (tester) async {
+      final bannerBloc = locator<BannerBloc>();
+      final mockState = BannerState.initial().copyWith(
+        banner: [
+          EZReachBanner.empty(),
+        ],
+        bannerFailureOrSuccessOption: optionOf(const Right('No API error')),
+      );
+      when(() => bannerBloc.stream).thenAnswer((invocation) {
+        return Stream.fromIterable([BannerState.initial(), mockState]);
+      });
+      when(() => bannerBloc.state).thenReturn(mockState);
+
+      await tester.pumpWidget(getWUT());
+      await tester.pump();
+
+      expect(
+        find.byKey(WidgetKeys.nextBannerIcon),
+        findsNothing,
+      );
+
+      expect(
+        find.byKey(WidgetKeys.previousBannerIcon),
+        findsNothing,
+      );
+
+      expect(
+        find.byKey(WidgetKeys.previousBannerIcon),
+        findsNothing,
+      );
+    });
+
     //commented test case reason:
     //since MixpanelService has changed we need to mock
     //the actual Mixpanel library class otherwise we will face this

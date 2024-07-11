@@ -581,12 +581,13 @@ class __$$BannerStateImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$BannerStateImpl implements _BannerState {
+class _$BannerStateImpl extends _BannerState {
   const _$BannerStateImpl(
       {required final List<EZReachBanner> banner,
       required this.bannerFailureOrSuccessOption,
       required this.isLoading})
-      : _banner = banner;
+      : _banner = banner,
+        super._();
 
   final List<EZReachBanner> _banner;
   @override
@@ -634,12 +635,13 @@ class _$BannerStateImpl implements _BannerState {
       __$$BannerStateImplCopyWithImpl<_$BannerStateImpl>(this, _$identity);
 }
 
-abstract class _BannerState implements BannerState {
+abstract class _BannerState extends BannerState {
   const factory _BannerState(
       {required final List<EZReachBanner> banner,
       required final Option<Either<ApiFailure, dynamic>>
           bannerFailureOrSuccessOption,
       required final bool isLoading}) = _$BannerStateImpl;
+  const _BannerState._() : super._();
 
   @override
   List<EZReachBanner> get banner;

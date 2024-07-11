@@ -57,7 +57,7 @@ class _CarouselBannerState extends State<CarouselBanner> {
         child: BlocConsumer<BannerBloc, BannerState>(
           listenWhen: (previous, current) => previous.banner != current.banner,
           listener: (context, state) {
-            if (state.banner.isNotEmpty) {
+            if (state.hasMultipleBanners) {
               startBannerScrollTimer();
               _trackBannerChangeEvent(context: context, index: 0);
             }
@@ -109,6 +109,9 @@ class _CarouselBannerState extends State<CarouselBanner> {
                             },
                             controller: _controller,
                             allowImplicitScrolling: true,
+                            physics: state.hasMultipleBanners
+                                ? const PageScrollPhysics()
+                                : const NeverScrollableScrollPhysics(),
                             itemBuilder: (_, index) {
                               final bannerPosition =
                                   index % state.banner.length;
@@ -124,7 +127,7 @@ class _CarouselBannerState extends State<CarouselBanner> {
                           ),
                   ),
                 ),
-                if (state.banner.isNotEmpty) ...[
+                if (state.hasMultipleBanners) ...[
                   Positioned(
                     bottom: 12,
                     child: Container(
