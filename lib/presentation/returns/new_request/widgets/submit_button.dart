@@ -18,6 +18,10 @@ class _SubmitButton extends StatelessWidget {
               TrackingEvents.returnRequestSuccess,
               props: state.mixpanelTrackingInfo(reasonList: reasonList),
             );
+            trackClevertapEvent(
+              TrackingEvents.returnRequestSuccess,
+              props: state.mixpanelTrackingInfo(reasonList: reasonList),
+            );
             context.router.popAndPush(const NewRequestSuccessfulPageRoute());
           },
           (either) => either.fold(

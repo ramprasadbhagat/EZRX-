@@ -17,6 +17,7 @@ import 'package:ezrxmobile/domain/returns/entities/invoice_details.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_item_details.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_material.dart';
 import 'package:ezrxmobile/domain/returns/value/value_objects.dart';
+import 'package:ezrxmobile/infrastructure/core/clevertap/clevertap_service.dart';
 import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
 import 'package:ezrxmobile/infrastructure/core/common/tracking_events.dart';
 import 'package:ezrxmobile/infrastructure/core/common/tracking_properties.dart';
@@ -71,6 +72,7 @@ void main() {
     );
     locator.registerLazySingleton(() => AppRouter());
     locator.registerLazySingleton<MixpanelService>(() => MixpanelServiceMock());
+    locator.registerSingleton<ClevertapService>(ClevertapServiceMock());
   });
 
   group('New Request page', () {
