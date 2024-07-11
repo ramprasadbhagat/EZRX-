@@ -55,6 +55,7 @@ part 'package:ezrxmobile/presentation/orders/cart/checkout/widgets/product_scrol
 part 'package:ezrxmobile/presentation/orders/cart/checkout/widgets/total_items.dart';
 part 'package:ezrxmobile/presentation/orders/cart/checkout/widgets/checkout_footer_section.dart';
 
+@RoutePage()
 class CheckoutPage extends StatefulWidget {
   const CheckoutPage({super.key});
 
@@ -102,7 +103,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
                 size: 16,
               ),
               onPressed: () {
-                context.router.navigateBack();
+                context.router.maybePop();
               },
             ),
           ),

@@ -39,7 +39,7 @@ import 'package:ezrxmobile/infrastructure/order/repository/view_by_item_reposito
 import 'package:ezrxmobile/infrastructure/order/repository/tender_contract_repository.dart';
 import 'package:ezrxmobile/infrastructure/order/repository/view_by_order_details_repository.dart';
 import 'package:ezrxmobile/locator.dart';
-import 'package:ezrxmobile/presentation/routes/router.gr.dart';
+import 'package:ezrxmobile/presentation/routes/router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';

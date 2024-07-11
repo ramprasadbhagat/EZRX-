@@ -42,6 +42,7 @@ part 'widgets/export_return_by_item.dart';
 
 part 'widgets/export_return_by_request.dart';
 
+@RoutePage()
 class ReturnRoot extends StatefulWidget {
   const ReturnRoot({super.key});
 

@@ -14,6 +14,7 @@ import 'package:ezrxmobile/application/articles_info/articles_info_bloc.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/domain/announcement_info/entities/announcement_article_info.dart';
 
+@RoutePage()
 class ArticlesTab extends StatefulWidget {
   const ArticlesTab({super.key});
 

@@ -90,7 +90,7 @@ class _OpenSettingsSection extends StatelessWidget {
               onPressed: () => type == PermissionType.camera
                   ? context.router
                       .popUntilRouteWithName(HomeNavigationTabbarRoute.name)
-                  : context.router.pop(),
+                  : context.router.maybePop(),
               child: Text(context.tr('Cancel')),
             ),
           ),
@@ -106,7 +106,7 @@ class _OpenSettingsSection extends StatelessWidget {
                 type == PermissionType.camera
                     ? router
                         .popUntilRouteWithName(HomeNavigationTabbarRoute.name)
-                    : router.pop();
+                    : router.maybePop();
               },
               child: Text('Open Settings'.tr()),
             ),

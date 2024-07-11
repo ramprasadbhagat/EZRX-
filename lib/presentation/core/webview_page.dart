@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+@RoutePage()
 class WebViewPage extends StatefulWidget {
   final String url;
   final String? initialFile;

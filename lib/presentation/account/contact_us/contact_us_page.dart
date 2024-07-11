@@ -29,6 +29,7 @@ part 'widgets/send_message_button.dart';
 part 'widgets/contact_us_form.dart';
 part 'widgets/contact_details.dart';
 
+@RoutePage()
 class ContactUsPage extends StatelessWidget {
   final AppMarket appMarket;
 

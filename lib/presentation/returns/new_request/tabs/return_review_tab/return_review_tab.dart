@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/presentation/core/expandable_section.dart';
 import 'package:ezrxmobile/presentation/core/market_place/market_place_seller_with_logo.dart';
@@ -30,6 +31,7 @@ part 'widgets/return_reference_field.dart';
 part 'widgets/material_return_details_section.dart';
 part 'widgets/bonus_item_section.dart';
 
+@RoutePage()
 class ReturnReviewTab extends StatelessWidget {
   const ReturnReviewTab({super.key});
 

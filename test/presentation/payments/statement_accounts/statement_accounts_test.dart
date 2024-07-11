@@ -32,7 +32,7 @@ import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/market_place/market_place_logo.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/payments/statement_accounts/statement_accounts.dart';
-import 'package:ezrxmobile/presentation/routes/router.gr.dart';
+import 'package:ezrxmobile/presentation/routes/router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';

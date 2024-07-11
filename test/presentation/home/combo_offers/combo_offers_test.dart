@@ -2,6 +2,8 @@ import 'package:auto_route/auto_route.dart';
 import 'package:ezrxmobile/application/order/material_filter/material_filter_bloc.dart';
 import 'package:ezrxmobile/infrastructure/core/package_info/package_info.dart';
 import 'package:ezrxmobile/presentation/home/combo_offers_section/combo_offers_section.dart';
+import 'package:ezrxmobile/presentation/routes/router.dart';
+import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:get_it/get_it.dart';
 import 'package:flutter/material.dart';
 import 'package:mocktail/mocktail.dart';
@@ -10,7 +12,6 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
-import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
@@ -44,8 +45,6 @@ class MaterialFilterBlocMock
     extends MockBloc<MaterialFilterEvent, MaterialFilterState>
     implements MaterialFilterBloc {}
 
-class MaterialPageXMock extends Mock implements MaterialPageX {}
-
 void main() {
   late CustomerCodeBloc customerCodeBlocMock;
   late AuthBloc authBlocMock;
@@ -57,12 +56,15 @@ void main() {
   late AppRouter autoRouterMock;
   final locator = GetIt.instance;
   final routeData = RouteData(
-    route: const RouteMatch(
-      name: 'HomeTabRoute',
-      segments: [],
-      path: 'home',
+    stackKey: const Key(''),
+    type: const RouteType.adaptive(),
+    route: RouteMatch(
+      segments: const [],
+      config: AutoRoute(
+        page: const PageInfo(HomeTabRoute.name),
+      ),
       stringMatch: 'home',
-      key: ValueKey('HomeTabRoute'),
+      key: const ValueKey('HomeTabRoute'),
     ),
     router: MockAppRouter(),
     pendingChildren: [],
@@ -71,7 +73,7 @@ void main() {
   setUpAll(() async {
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.mock);
     locator.registerLazySingleton(() => AppRouter());
-    registerFallbackValue(const PageRouteInfo('HomeTabRoute', path: 'home'));
+    registerFallbackValue(const PageRouteInfo('HomeTabRoute'));
     locator.registerFactory<MaterialListBloc>(() => materialListBlocMock);
     locator.registerLazySingleton(() => PackageInfoService());
   });

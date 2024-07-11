@@ -31,6 +31,7 @@ import 'package:ezrxmobile/presentation/theme/colors.dart';
 part 'package:ezrxmobile/presentation/payments/all_credits/widgets/credit_group.dart';
 part 'package:ezrxmobile/presentation/payments/all_credits/widgets/credit_item.dart';
 
+@RoutePage()
 class AllCreditsPage extends StatefulWidget {
   final bool isMarketPlace;
 

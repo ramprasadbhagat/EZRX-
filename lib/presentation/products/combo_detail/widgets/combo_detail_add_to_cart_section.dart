@@ -173,7 +173,7 @@ class _ComboDetailAddToCartSection extends StatelessWidget {
                 child: ElevatedButton(
                   key: WidgetKeys.cartShipToAddressSheetCloseButton,
                   onPressed: () {
-                    context.router.pop();
+                    context.router.maybePop();
                   },
                   child: Text(
                     context.tr('Close'),
@@ -202,8 +202,8 @@ class _CartPageCheckoutButton extends StatelessWidget {
                   !current.isUpserting ||
               previous.isClearing != current.isClearing &&
                   !current.isClearing) &&
-          (context.router.current.path == 'combo_detail' ||
-              (context.router.current.path == 'orders/cart' &&
+          (context.router.current.path == '/combo_detail' ||
+              (context.router.current.path == '/orders/cart' &&
                   previous.cartProducts != current.cartProducts)) &&
           !current.isDeleteCombo,
       listener: (context, state) {
@@ -211,7 +211,7 @@ class _CartPageCheckoutButton extends StatelessWidget {
           () {
             final comboDealMaterialDetailBloc =
                 context.read<ComboDealMaterialDetailBloc>();
-            if (context.router.current.path == 'combo_detail') {
+            if (context.router.current.path == '/combo_detail') {
               CustomSnackBar(
                 messageText: context.tr(
                   isUpdateCart

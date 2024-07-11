@@ -14,6 +14,7 @@ import 'package:ezrxmobile/presentation/core/info_label.dart';
 import 'package:ezrxmobile/presentation/core/market_place/market_place_seller_title.dart';
 import 'package:ezrxmobile/presentation/core/no_record.dart';
 import 'package:ezrxmobile/presentation/orders/cart/widget/market_place_delivery_tile.dart';
+import 'package:ezrxmobile/presentation/routes/router.dart';
 import 'package:flutter/material.dart';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:auto_route/auto_route.dart';
@@ -125,12 +126,16 @@ void main() {
   late List<PriceAggregate> mockCartItemWithAllType;
   late Config config;
   final routeData = RouteData(
-    route: const RouteMatch(
-      name: 'CartsPageRoute',
-      segments: ['orders', 'cart'],
-      path: 'orders/cart',
+    stackKey: const Key(''),
+    type: const RouteType.adaptive(),
+    route: RouteMatch(
+      segments: const ['orders', 'cart'],
       stringMatch: 'orders/cart',
-      key: ValueKey('CartsPageRoute'),
+      config: AutoRoute(
+        page: const PageInfo(CartPageRoute.name),
+        path: '/orders/cart',
+      ),
+      key: const ValueKey('CartsPageRoute'),
     ),
     router: AutoRouteMock(),
     pendingChildren: [],
@@ -138,12 +143,16 @@ void main() {
   late MixpanelService mixpanelService;
 
   final checkoutPageRouteData = RouteData(
-    route: const RouteMatch(
-      name: 'CheckoutPageRoute',
-      segments: ['orders', 'cart', 'checkout'],
-      path: 'orders/cart/checkout',
+    stackKey: const Key(''),
+    type: const RouteType.adaptive(),
+    route: RouteMatch(
+      segments: const ['orders', 'cart', 'checkout'],
       stringMatch: 'orders/cart/checkout',
-      key: ValueKey('CheckoutPageRoute'),
+      config: AutoRoute(
+        page: const PageInfo(CheckoutPageRoute.name),
+        path: 'orders/cart/checkout',
+      ),
+      key: const ValueKey('CheckoutPageRoute'),
     ),
     router: AutoRouteMock(),
     pendingChildren: [],
@@ -556,7 +565,8 @@ void main() {
       when(() => productImageBloc.state).thenReturn(
         ProductImageState.initial(),
       );
-      when(() => autoRouterMock.pop()).thenAnswer((invocation) async => true);
+      when(() => autoRouterMock.maybePop())
+          .thenAnswer((invocation) async => true);
       when(() => paymentCustomerInformationMock.state).thenReturn(
         PaymentCustomerInformationState.initial(),
       );
@@ -880,7 +890,7 @@ void main() {
             salesOrgConfigs: fakeMYSalesOrgConfigs,
           ),
         );
-        when(() => autoRouterMock.pushNamed('orders/cart/checkout'))
+        when(() => autoRouterMock.push(const CheckoutPageRoute()))
             .thenAnswer((invocation) => Future(() => checkoutPageRouteData));
         await tester.pumpWidget(getWidget());
 
@@ -904,7 +914,7 @@ void main() {
         final startBrowsingButton =
             find.byKey(WidgetKeys.startBrowsingProducts);
 
-        when(() => autoRouterMock.navigateNamed('main/products'))
+        when(() => autoRouterMock.navigateNamed('/main/products'))
             .thenAnswer((invocation) => Future(() => null));
 
         expect(startBrowsingButton, findsOneWidget);
@@ -915,7 +925,7 @@ void main() {
 
         await tester.pumpAndSettle();
 
-        verify(() => autoRouterMock.navigateNamed('main/products')).called(1);
+        verify(() => autoRouterMock.navigateNamed('/main/products')).called(1);
       });
 
       testWidgets('cart page Customer Code AccountSuspendedBanner ',
@@ -2650,7 +2660,7 @@ void main() {
             ),
           );
 
-          when(() => autoRouterMock.pushNamed('orders/cart/checkout'))
+          when(() => autoRouterMock.push(const CheckoutPageRoute()))
               .thenAnswer((invocation) => Future(() => checkoutPageRouteData));
 
           await tester.pumpWidget(getWidget());
@@ -2661,7 +2671,7 @@ void main() {
           await tester.pumpAndSettle();
           expect(find.byKey(WidgetKeys.preOrderModel), findsNothing);
 
-          verify(() => autoRouterMock.pushNamed('orders/cart/checkout'))
+          verify(() => autoRouterMock.push(const CheckoutPageRoute()))
               .called(1);
         },
       );
@@ -3425,7 +3435,7 @@ void main() {
       testWidgets(
           'Skip MOV check if cart contains any product with principal Ministry Of Health for SG market',
           (tester) async {
-        when(() => autoRouterMock.pushNamed('orders/cart/checkout'))
+        when(() => autoRouterMock.push(const CheckoutPageRoute()))
             .thenAnswer((invocation) => Future(() => checkoutPageRouteData));
         final mockMinistryOfHealthCartItem = mockCartItems.first.copyWith(
           materialInfo: MaterialInfo.empty().copyWith(
@@ -3469,7 +3479,7 @@ void main() {
         expect(checkoutButton, findsOneWidget);
         await tester.tap(checkoutButton);
         await tester.pumpAndSettle();
-        verify(() => autoRouterMock.pushNamed('orders/cart/checkout'))
+        verify(() => autoRouterMock.push(const CheckoutPageRoute()))
             .called(1);
       });
 
@@ -3481,7 +3491,7 @@ void main() {
             tenderContract: TenderContract.empty(),
           ),
         ];
-        when(() => autoRouterMock.pushNamed('orders/cart/checkout'))
+        when(() => autoRouterMock.pushNamed('/orders/cart/checkout'))
             .thenAnswer((invocation) => Future(() => checkoutPageRouteData));
 
         when(() => eligibilityBloc.state).thenReturn(
@@ -3519,7 +3529,7 @@ void main() {
         expect(checkoutButton, findsOneWidget);
         await tester.tap(checkoutButton);
         await tester.pumpAndSettle();
-        verifyNever(() => autoRouterMock.pushNamed('orders/cart/checkout'));
+        verifyNever(() => autoRouterMock.pushNamed('/orders/cart/checkout'));
       });
 
       testWidgets(
@@ -3654,7 +3664,7 @@ void main() {
         await tester.pumpAndSettle();
 
         verifyNever(
-          () => autoRouterMock.navigateBack(),
+          () => autoRouterMock.maybePop(),
         );
       });
 
@@ -3907,7 +3917,7 @@ void main() {
               (tester) async {
             when(() => autoRouterMock.push(const SmallOrderFeePageRoute()))
                 .thenAnswer((invocation) => Future.value(true));
-            when(() => autoRouterMock.pushNamed('orders/cart/checkout'))
+            when(() => autoRouterMock.push(const CheckoutPageRoute()))
                 .thenAnswer((_) => Future.value(true));
             when(() => cartBloc.state).thenReturn(
               CartState.initial().copyWith(cartProducts: [inStockMaterial]),
@@ -3922,7 +3932,7 @@ void main() {
             verify(
               () => autoRouterMock.push(const SmallOrderFeePageRoute()),
             ).called(1);
-            verify(() => autoRouterMock..pushNamed('orders/cart/checkout'))
+            verify(() => autoRouterMock..push(const CheckoutPageRoute()))
                 .called(1);
           });
         });
@@ -4021,7 +4031,7 @@ void main() {
                 () => autoRouterMock.push(const SmallOrderFeePageRoute()),
               ).called(1);
               verifyNever(
-                () => autoRouterMock.pushNamed('orders/cart/checkout'),
+                () => autoRouterMock.pushNamed('/orders/cart/checkout'),
               );
             },
           );
@@ -4029,7 +4039,7 @@ void main() {
           testWidgets(
             ' -> click checkout then show small order fee modal, click agree to checkout page',
             (WidgetTester tester) async {
-              when(() => autoRouterMock.pushNamed('orders/cart/checkout'))
+              when(() => autoRouterMock.push(const CheckoutPageRoute()))
                   .thenAnswer((invocation) => Future.value());
               when(() => autoRouterMock.push(const SmallOrderFeePageRoute()))
                   .thenAnswer((invocation) => Future.value(true));
@@ -4052,7 +4062,7 @@ void main() {
                 () => autoRouterMock.push(const SmallOrderFeePageRoute()),
               ).called(1);
 
-              verify(() => autoRouterMock.pushNamed('orders/cart/checkout'))
+              verify(() => autoRouterMock.push(const CheckoutPageRoute()))
                   .called(1);
             },
           );
@@ -4406,7 +4416,7 @@ void main() {
         });
 
         testWidgets('Display no record when list is empty', (tester) async {
-          when(() => autoRouterMock.navigateNamed('main/products'))
+          when(() => autoRouterMock.navigateNamed('/main/products'))
               .thenAnswer((async) => Future.value());
           when(() => cartBloc.state).thenReturn(
             CartState.initial().copyWith(cartProducts: <PriceAggregate>[]),
@@ -4440,7 +4450,8 @@ void main() {
           await tester.tap(browseButton);
           await tester.pumpAndSettle();
 
-          verify(() => autoRouterMock.navigateNamed('main/products')).called(1);
+          verify(() => autoRouterMock.navigateNamed('/main/products'))
+              .called(1);
         });
 
         testWidgets('Display exceed quantity message on ID market',

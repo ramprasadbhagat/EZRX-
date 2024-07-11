@@ -40,6 +40,7 @@ import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/presentation/auth/login/login_page.dart';
 import 'package:ezrxmobile/presentation/core/or_divider.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
+import 'package:ezrxmobile/presentation/routes/router.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/splash/splash_page.dart';
 import 'package:flutter/material.dart';

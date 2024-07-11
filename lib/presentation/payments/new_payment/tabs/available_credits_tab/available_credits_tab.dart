@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/payments/new_payment/available_credits/available_credits_bloc.dart';
 import 'package:ezrxmobile/application/payments/new_payment/available_credits/filter/available_credit_filter_bloc.dart';
@@ -27,6 +28,7 @@ import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dar
 
 part 'package:ezrxmobile/presentation/payments/new_payment/tabs/available_credits_tab/widgets/available_credits_search_bar.dart';
 
+@RoutePage()
 class AvailableCreditsTab extends StatelessWidget {
   const AvailableCreditsTab({super.key});
 

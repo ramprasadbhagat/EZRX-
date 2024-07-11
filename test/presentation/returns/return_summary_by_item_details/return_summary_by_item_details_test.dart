@@ -28,7 +28,7 @@ import 'package:ezrxmobile/presentation/returns/return_summary_by_item_details/r
 import 'package:ezrxmobile/presentation/returns/return_summary_by_item_details/widgets/return_summary_details_section.dart';
 import 'package:ezrxmobile/presentation/returns/widgets/return_item_card.dart';
 import 'package:ezrxmobile/presentation/returns/widgets/return_summary_item_price.dart';
-import 'package:ezrxmobile/presentation/routes/router.gr.dart';
+import 'package:ezrxmobile/presentation/routes/router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';

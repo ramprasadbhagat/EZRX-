@@ -3,6 +3,7 @@ import 'package:ezrxmobile/application/payments/new_payment/new_payment_bloc.dar
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/payments/payment_failed/payment_failed_page.dart';
+import 'package:ezrxmobile/presentation/routes/router.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -51,7 +52,7 @@ void main() {
 
   group('Payment failed page test =>', () {
     testWidgets('Should display appbar and pop when tap close', (tester) async {
-      when(() => autoRouterMock.pop()).thenAnswer((_) async => true);
+      when(() => autoRouterMock.maybePop()).thenAnswer((_) async => true);
       await tester.pumpWidget(getWidget());
       await tester.pumpAndSettle();
 
@@ -70,7 +71,7 @@ void main() {
       );
       await tester.tap(closeButton);
       await tester.pumpAndSettle();
-      verify(() => autoRouterMock.pop()).called(1);
+      verify(() => autoRouterMock.maybePop()).called(1);
     });
 
     testWidgets('Should display body with messages', (tester) async {

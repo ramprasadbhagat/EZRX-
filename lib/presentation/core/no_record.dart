@@ -150,7 +150,7 @@ class NoRecordFound extends StatelessWidget {
             minimumSize: const Size(double.maxFinite, 50),
           ),
           onPressed: () {
-            context.router.navigateNamed('main/products');
+            context.router.navigateNamed('/main/products');
           },
           child: Text(context.tr('Start browsing')),
         ),

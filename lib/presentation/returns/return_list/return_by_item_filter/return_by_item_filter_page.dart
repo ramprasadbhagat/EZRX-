@@ -47,7 +47,7 @@ class ReturnByItemFilterPage extends StatelessWidget {
               IconButton(
                 key: WidgetKeys.closeButton,
                 onPressed: () {
-                  context.router.pop();
+                  context.router.maybePop();
                 },
                 icon: const Icon(Icons.clear, color: ZPColors.black),
               ),

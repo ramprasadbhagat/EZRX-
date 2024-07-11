@@ -53,6 +53,7 @@ part 'package:ezrxmobile/presentation/orders/cart/widget/cart_page_info_label.da
 part 'package:ezrxmobile/presentation/orders/cart/widget/cart_page_invalid_items_banner.dart';
 part 'package:ezrxmobile/presentation/orders/cart/widget/cart_page_price_not_available_message.dart';
 
+@RoutePage()
 class CartPage extends StatefulWidget {
   final bool isReOrder;
   final DeliveryInfoData? deliveryInfo;
@@ -185,7 +186,7 @@ class _CartPageState extends State<CartPage> {
             //if product determination is failed user will be poped from checkout page to cart page
             if (state.isProductDeterminationFailed &&
                 context.router.current.name == CheckoutPageRoute.name) {
-              context.router.navigateBack();
+              context.router.maybePop();
             }
           },
         ),
@@ -342,7 +343,7 @@ class _CartPageState extends State<CartPage> {
                 );
           }
 
-          if (context.router.current.path == 'orders/cart' &&
+          if (context.router.current.path == '/orders/cart' &&
               errorMessage.isNotEmpty) {
             CustomSnackBar(
               messageText: context.tr(errorMessage),
@@ -368,7 +369,7 @@ class _CartPageState extends State<CartPage> {
                     Icons.close,
                   ),
                   onPressed: () => context.router.removeUntil(
-                    (route) => route.path != 'orders/cart',
+                    (route) => route.path != '/orders/cart',
                   ),
                 ),
                 actionWidget: state.cartProducts.isNotEmpty

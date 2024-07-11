@@ -10,6 +10,7 @@ import 'package:ezrxmobile/presentation/auth/forgot_password/widgets/back_to_log
 import 'package:ezrxmobile/presentation/auth/forgot_password/forgot_password_page.dart';
 import 'package:ezrxmobile/presentation/core/logo.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
+import 'package:ezrxmobile/presentation/routes/router.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -28,12 +29,15 @@ class AppRouterMock extends Mock implements AppRouter {}
 void main() {
   late AppRouter autoRouterMock;
   final routeData = RouteData(
-    route: const RouteMatch(
-      name: 'ForgetPasswordPageRoute',
-      segments: [],
-      path: 'forgot_password',
+    stackKey: const Key(''),
+    type: const RouteType.adaptive(),
+    route: RouteMatch(
+      segments: const [],
+      config: AutoRoute(
+        page: const PageInfo(ForgetPasswordPageRoute.name),
+      ),
       stringMatch: 'forgot_password',
-      key: ValueKey('ForgetPasswordPageRoute'),
+      key: const ValueKey('ForgetPasswordPageRoute'),
     ),
     router: MockAppRouter(),
     pendingChildren: [],
@@ -214,7 +218,8 @@ void main() {
         await tester.pumpAndSettle();
 
         verifyNever(
-          () => autoRouterMock.pushNamed('forgot_password_confirmation'),
+          () =>
+              autoRouterMock.push(const ForgetPasswordConfirmationPageRoute()),
         );
       });
 
@@ -242,7 +247,8 @@ void main() {
         await tester.pumpAndSettle();
 
         verifyNever(
-          () => autoRouterMock.pushNamed('forgot_password_confirmation'),
+          () =>
+              autoRouterMock.push(const ForgetPasswordConfirmationPageRoute()),
         );
       });
 
@@ -274,14 +280,20 @@ void main() {
             ),
           ),
         ];
+        when(
+          () =>
+              autoRouterMock.push(const ForgetPasswordConfirmationPageRoute()),
+        ).thenAnswer((_) async => true);
         whenListen(forgotPasswordBlocMock, Stream.fromIterable(expectedStates));
         await tester.pumpWidget(getWidget());
         await tester.pump();
         await tester.tap(find.text('Next'));
         await tester.pumpAndSettle();
 
-        verify(() => autoRouterMock.pushNamed('forgot_password_confirmation'))
-            .called(1);
+        verify(
+          () =>
+              autoRouterMock.push(const ForgetPasswordConfirmationPageRoute()),
+        ).called(1);
       });
       group(' -> BackToLogin', () {
         testWidgets(' -> navigates back to login page',

@@ -172,7 +172,7 @@ class _ButtonClose extends StatelessWidget {
                       storageType: storageType,
                     ),
                   );
-              context.popRoute();
+              context.maybePop();
             },
             child: Text(
               'Close'.tr(),

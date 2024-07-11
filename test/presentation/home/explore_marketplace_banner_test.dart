@@ -7,6 +7,7 @@ import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/order/entities/material_filter.dart';
 import 'package:ezrxmobile/infrastructure/core/package_info/package_info.dart';
 import 'package:ezrxmobile/presentation/home/widgets/explore_marketplace_banner.dart';
+import 'package:ezrxmobile/presentation/routes/router.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -28,7 +29,7 @@ class MaterialListBlocMock
     extends MockBloc<MaterialListEvent, MaterialListState>
     implements MaterialListBloc {}
 
-class MaterialPageXMock extends Mock implements MaterialPageX {}
+class MaterialPageXMock extends Mock implements AutoRoutePage {}
 
 void main() {
   late EligibilityBlocMock eligibilityBlocMock;
@@ -37,12 +38,15 @@ void main() {
   late AppRouter autoRouterMock;
   final locator = GetIt.instance;
   final routeData = RouteData(
-    route: const RouteMatch(
-      name: 'HomeTabRoute',
-      segments: [],
-      path: 'home',
+    stackKey: const Key(''),
+    type: const RouteType.adaptive(),
+    route: RouteMatch(
+      segments: const [],
       stringMatch: 'home',
-      key: ValueKey('HomeTabRoute'),
+      config: AutoRoute(
+        page: const PageInfo(HomeTabRoute.name),
+      ),
+      key: const ValueKey('HomeTabRoute'),
     ),
     router: MockAppRouter(),
     pendingChildren: [],
@@ -53,7 +57,7 @@ void main() {
     locator.registerLazySingleton(() => AppRouter());
     locator.registerLazySingleton(() => PackageInfoService());
     locator.registerLazySingleton(() => materialListBlocMock);
-    registerFallbackValue(const PageRouteInfo('HomeTabRoute', path: 'home'));
+    registerFallbackValue(const PageRouteInfo('HomeTabRoute'));
     materialListBlocMock = MaterialListBlocMock();
     salesOrgBlocMock = SalesOrgBlocMock();
     autoRouterMock = MockAppRouter();

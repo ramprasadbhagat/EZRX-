@@ -37,7 +37,7 @@ class SelectAttachmentBottomsheet extends StatelessWidget {
                   key: WidgetKeys.poAttachmentOption(option.name),
                   onTap: () {
                     onUploadOptionSelected(option);
-                    context.popRoute();
+                    context.maybePop();
                   },
                   leading: option.icon,
                   contentPadding: const EdgeInsets.symmetric(vertical: 12),
@@ -55,7 +55,7 @@ class SelectAttachmentBottomsheet extends StatelessWidget {
                   child: ElevatedButton(
                     key: WidgetKeys.closeAlertDialog,
                     onPressed: () {
-                      context.popRoute();
+                      context.maybePop();
                     },
                     child: Text(
                       context.tr('Close'),

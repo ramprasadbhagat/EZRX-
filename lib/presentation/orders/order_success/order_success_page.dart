@@ -58,6 +58,7 @@ part 'package:ezrxmobile/presentation/orders/order_success/widgets/order_success
 const _horizontalPadding = 12.0;
 const _verticalPadding = 12.0;
 
+@RoutePage()
 class OrderSuccessPage extends StatelessWidget {
   const OrderSuccessPage({super.key});
 
@@ -71,7 +72,9 @@ class OrderSuccessPage extends StatelessWidget {
           padding: const EdgeInsets.only(left: 18),
           key: WidgetKeys.closeButton,
           onPressed: () {
-            context.router.popUntilRouteWithPath('main');
+            context.router.popUntil((route) {
+              return route.settings.name == HomeNavigationTabbarRoute.name;
+            });
           },
           icon: const Icon(Icons.close),
         ),

@@ -7,6 +7,7 @@ import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/presentation/auth/reset_password_success/reset_password_success_page.dart';
 import 'package:ezrxmobile/presentation/core/logo.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
+import 'package:ezrxmobile/presentation/routes/router.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -24,7 +25,7 @@ class AppRouterMock extends Mock implements AppRouter {}
 
 class AuthBlocMock extends MockBloc<AuthEvent, AuthState> implements AuthBloc {}
 
-class MaterialPageXMock extends Mock implements MaterialPageX {}
+class MaterialPageXMock extends Mock implements AutoRoutePage {}
 
 class MockUserBloc extends MockBloc<UserEvent, UserState> implements UserBloc {}
 

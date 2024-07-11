@@ -23,6 +23,7 @@ import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/payments/new_payment/tabs/available_credits_tab/available_credit_payment_filter_page.dart';
 import 'package:ezrxmobile/presentation/payments/new_payment/tabs/available_credits_tab/available_credits_tab.dart';
 import 'package:ezrxmobile/presentation/payments/widgets/payment_module.dart';
+import 'package:ezrxmobile/presentation/routes/router.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -622,7 +623,7 @@ void main() {
           filter: creditFilter,
         ),
       );
-      when(() => autoRouterMock.pop()).thenAnswer(
+      when(() => autoRouterMock.maybePop()).thenAnswer(
         (invocation) => Future.value(true),
       );
       await tester.pumpWidget(getWidget());
@@ -630,7 +631,7 @@ void main() {
       await openFilterBottomSheet(tester);
       expect(find.byKey(WidgetKeys.closeButton), findsOneWidget);
       await tester.tap(find.byKey(WidgetKeys.closeButton));
-      verify(() => autoRouterMock.pop()).called(1);
+      verify(() => autoRouterMock.maybePop()).called(1);
     });
 
     testWidgets('tap reset filter button', (tester) async {

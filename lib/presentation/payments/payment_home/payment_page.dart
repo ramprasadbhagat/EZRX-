@@ -58,6 +58,7 @@ part 'widgets/payment_total_credit.dart';
 part 'widgets/payment_total_invoice.dart';
 part 'widgets/payment_item_card.dart';
 
+@RoutePage()
 class PaymentPage extends StatefulWidget {
   final bool isMarketPlace;
 

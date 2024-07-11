@@ -26,6 +26,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:ezrxmobile/domain/returns/entities/return_item.dart';
 
+@RoutePage()
 class ReturnByRequestPage extends StatefulWidget {
   const ReturnByRequestPage({super.key});
 

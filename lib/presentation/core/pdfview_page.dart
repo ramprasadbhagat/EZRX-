@@ -6,7 +6,9 @@ import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_cached_pdfview/flutter_cached_pdfview.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:auto_route/auto_route.dart';
 
+@RoutePage()
 class PdfViewPage extends StatelessWidget {
   final String url;
   final String titleText;

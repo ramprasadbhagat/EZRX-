@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/payments/bank_in_accounts/bank_in_accounts_bloc.dart';
 import 'package:ezrxmobile/domain/payments/entities/new_payment_method.dart';
@@ -28,6 +29,7 @@ part 'package:ezrxmobile/presentation/payments/new_payment/tabs/payment_method/w
 part 'package:ezrxmobile/presentation/payments/new_payment/tabs/payment_method/widgets/payment_option_item.dart';
 part 'package:ezrxmobile/presentation/payments/new_payment/tabs/payment_method/widgets/apl_payment_method.dart';
 
+@RoutePage()
 class PaymentMethodTab extends StatelessWidget {
   const PaymentMethodTab({super.key});
 

@@ -5,6 +5,7 @@ import 'package:ezrxmobile/application/order/cart/cart_bloc.dart';
 import 'package:ezrxmobile/application/order/order_eligibility/order_eligibility_bloc.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/orders/cart/small_order_fee_modal/small_order_fee_modal.dart';
+import 'package:ezrxmobile/presentation/routes/router.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -28,12 +29,15 @@ void main() async {
     eligibilityBloc = EligibilityBlocMock();
     orderEligibilityBloc = OrderEligibilityBlocMock();
     routeData = RouteData(
-      route: const RouteMatch(
-        name: 'HomeTabRoute',
-        segments: [],
-        path: 'home',
+      stackKey: const Key(''),
+      type: const RouteType.adaptive(),
+      route: RouteMatch(
+        segments: const [],
+        config: AutoRoute(
+          page: const PageInfo(HomeTabRoute.name),
+        ),
         stringMatch: 'home',
-        key: ValueKey('HomeTabRoute'),
+        key: const ValueKey('HomeTabRoute'),
       ),
       router: autoRouterMock,
       pendingChildren: [],
@@ -97,24 +101,24 @@ void main() async {
     testWidgets(
       '=> test cancel button tap',
       (tester) async {
-        when(() => autoRouterMock.pop())
+        when(() => autoRouterMock.maybePop())
             .thenAnswer((invocation) => Future.value(false));
         await tester.pumpWidget(getScopedWidget());
         await tester.pump();
         await tester.tap(find.byKey(WidgetKeys.cancelButton));
-        verify(() => autoRouterMock.pop()).called(1);
+        verify(() => autoRouterMock.maybePop()).called(1);
       },
     );
 
     testWidgets(
       '=> test agree button tap',
       (tester) async {
-        when(() => autoRouterMock.pop(true))
+        when(() => autoRouterMock.maybePop(true))
             .thenAnswer((invocation) => Future.value(false));
         await tester.pumpWidget(getScopedWidget());
         await tester.pump();
         await tester.tap(find.byKey(WidgetKeys.confirmButton));
-        verify(() => autoRouterMock.pop(true)).called(1);
+        verify(() => autoRouterMock.maybePop(true)).called(1);
       },
     );
   });

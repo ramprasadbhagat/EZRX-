@@ -12,9 +12,11 @@ import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:ezrxmobile/presentation/core/responsive.dart';
 import 'package:ezrxmobile/application/auth/forgot_password/forgot_password_bloc.dart';
 import 'package:ezrxmobile/presentation/auth/forgot_password/widgets/back_to_login_button.dart';
+import 'package:auto_route/auto_route.dart';
 
 part 'package:ezrxmobile/presentation/auth/forgot_password/widgets/email_send_to_you.dart';
 
+@RoutePage()
 class ForgetPasswordConfirmationPage extends StatelessWidget {
   const ForgetPasswordConfirmationPage({super.key});
 

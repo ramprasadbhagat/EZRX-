@@ -20,7 +20,7 @@ import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/camera_files_permission_bottomsheet.dart';
-import 'package:ezrxmobile/presentation/routes/router.gr.dart';
+import 'package:ezrxmobile/presentation/routes/router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
@@ -83,7 +83,7 @@ void main() {
 
       locator.registerSingleton<Config>(Config()..appFlavor = Flavor.mock);
       locator.registerFactory(() => AppRouter());
-      registerFallbackValue(const PageRouteInfo('HomeTabRoute', path: 'home'));
+      registerFallbackValue(const PageRouteInfo('HomeTabRoute'));
 
       autoRouterMock = locator<AppRouter>();
     },

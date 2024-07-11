@@ -1,228 +1,155 @@
 //ignore_for_file: unused-files
 import 'package:auto_route/auto_route.dart';
-import 'package:ezrxmobile/presentation/account/ez_point/ez_point_webview_page.dart';
-import 'package:ezrxmobile/presentation/account/sales_org_search.dart';
-import 'package:ezrxmobile/presentation/account/profile/profile_page.dart';
-import 'package:ezrxmobile/presentation/auth/forgot_password/forgot_password_confirmation_page.dart';
-import 'package:ezrxmobile/presentation/auth/forgot_password/forgot_password_page.dart';
-import 'package:ezrxmobile/presentation/auth/reset_password/reset_password_page.dart';
-import 'package:ezrxmobile/presentation/auth/reset_password_success/reset_password_success_page.dart';
-import 'package:ezrxmobile/presentation/core/pdfview_page.dart';
-import 'package:ezrxmobile/presentation/core/static_html_viewer.dart';
-import 'package:ezrxmobile/presentation/faq/faq.dart';
-import 'package:ezrxmobile/presentation/home/announcement_section/announcement_articles_tab/announcements/announcement_info_details_page.dart';
-import 'package:ezrxmobile/presentation/intro/intro_page.dart';
-import 'package:ezrxmobile/presentation/notification/notification_tab.dart';
-import 'package:ezrxmobile/presentation/more/section/about_us/about_us_page.dart';
-import 'package:ezrxmobile/presentation/orders/cart/checkout/checkout_page.dart';
-import 'package:ezrxmobile/presentation/orders/cart/small_order_fee_modal/small_order_fee_modal.dart';
-import 'package:ezrxmobile/presentation/orders/order_success/order_success_page.dart';
-import 'package:ezrxmobile/presentation/account/change_password/change_password_page.dart';
-import 'package:ezrxmobile/presentation/account/contact_us/contact_us_page.dart';
-import 'package:ezrxmobile/presentation/account/customer_search/customer_search.dart';
-import 'package:ezrxmobile/presentation/account/notification_settings/notification_settings_page.dart';
-import 'package:ezrxmobile/presentation/aup_tc/aup_tc_page.dart';
-import 'package:ezrxmobile/presentation/auth/login/login_page.dart';
-import 'package:ezrxmobile/presentation/core/webview_page.dart';
-import 'package:ezrxmobile/presentation/home/home_tab.dart';
-import 'package:ezrxmobile/presentation/home_tab.dart';
-import 'package:ezrxmobile/presentation/orders/cart/cart_page.dart';
-import 'package:ezrxmobile/presentation/orders/order_tab/orders_tab.dart';
-import 'package:ezrxmobile/presentation/orders/order_tab/section/view_by_item/view_by_item_section.dart';
-import 'package:ezrxmobile/presentation/orders/order_tab/section/view_by_order/view_by_order_section.dart';
-import 'package:ezrxmobile/presentation/orders/order_tab/view_by_item_details/view_by_item_details.dart';
-import 'package:ezrxmobile/presentation/orders/order_tab/view_by_order_details/view_by_order_details.dart';
-import 'package:ezrxmobile/presentation/payments/account_summary/account_summary_page.dart';
-import 'package:ezrxmobile/presentation/payments/all_credits/all_credits.dart';
-import 'package:ezrxmobile/presentation/payments/credit_details/credit_details.dart';
-import 'package:ezrxmobile/presentation/payments/full_summary/full_summary.dart';
-import 'package:ezrxmobile/presentation/payments/invoice_details/invoice_details.dart';
-import 'package:ezrxmobile/presentation/payments/new_payment/new_payment_page.dart';
-import 'package:ezrxmobile/presentation/payments/new_payment/tabs/available_credits_tab/available_credits_tab.dart';
-import 'package:ezrxmobile/presentation/payments/new_payment/tabs/outstanding_invoices_tab/outstanding_invoices_tab.dart';
-import 'package:ezrxmobile/presentation/payments/new_payment/tabs/payment_method/payment_method_tab.dart';
-import 'package:ezrxmobile/presentation/payments/payment_advice_created/payment_advice_created_page.dart';
-import 'package:ezrxmobile/presentation/payments/payment_completed/payment_completed_page.dart';
-import 'package:ezrxmobile/presentation/payments/payment_failed/payment_failed_page.dart';
-import 'package:ezrxmobile/presentation/payments/payment_home/payment_page.dart';
-import 'package:ezrxmobile/presentation/payments/payment_summary_details/payment_summary_details_screen.dart';
-import 'package:ezrxmobile/presentation/payments/statement_accounts/statement_accounts.dart';
-import 'package:ezrxmobile/presentation/payments/payment_webview/payment_webview_page.dart';
-import 'package:ezrxmobile/presentation/products/bundle_details/bundle_detail_page.dart';
-import 'package:ezrxmobile/presentation/products/combo_detail/combo_detail_page.dart';
-import 'package:ezrxmobile/presentation/products/product_details/product_details_page.dart';
-import 'package:ezrxmobile/presentation/returns/add_edit_user_restrictions.dart';
-import 'package:ezrxmobile/presentation/returns/new_request/new_request_page.dart';
-import 'package:ezrxmobile/presentation/returns/new_request/new_request_success/new_request_successful_page.dart';
-import 'package:ezrxmobile/presentation/returns/new_request/tabs/return_details_tab/return_details_tab.dart';
-import 'package:ezrxmobile/presentation/returns/new_request/tabs/return_items_tab/return_items_tab.dart';
-import 'package:ezrxmobile/presentation/returns/new_request/tabs/return_review_tab/return_review_tab.dart';
-import 'package:ezrxmobile/presentation/returns/approver_actions/approver_actions.dart';
-import 'package:ezrxmobile/presentation/returns/return_list/return_by_item_page.dart';
-import 'package:ezrxmobile/presentation/returns/return_list/return_by_request_page.dart';
-import 'package:ezrxmobile/presentation/returns/return_list/return_root/return_root.dart';
-import 'package:ezrxmobile/presentation/returns/return_summary_by_item_details/return_summary_by_item_details.dart';
-import 'package:ezrxmobile/presentation/returns/return_summary_request_details/return_request_details.dart';
-import 'package:ezrxmobile/presentation/returns/user_restriction_list.dart';
-import 'package:ezrxmobile/presentation/splash/splash_page.dart';
-import 'package:ezrxmobile/presentation/orders/create_order/scan_material_info.dart';
-import 'package:ezrxmobile/presentation/payments/all_invoices/all_invoices.dart';
-import 'package:ezrxmobile/presentation/payments/payment_summary/payment_summary_page.dart';
-import 'package:ezrxmobile/presentation/products/products_tab.dart';
-import 'package:ezrxmobile/presentation/more/more_tab.dart';
-import 'package:ezrxmobile/presentation/products/product_suggestion/product_suggestion_page.dart';
-import 'package:ezrxmobile/presentation/home/announcement_section/announcement_articles_tab/announcements_page.dart';
-import 'package:ezrxmobile/presentation/home/announcement_section/announcement_articles_tab/announcements/announcements_tab.dart';
-import 'package:ezrxmobile/presentation/home/announcement_section/announcement_articles_tab/articles/article_details.dart';
-import 'package:ezrxmobile/presentation/home/announcement_section/announcement_articles_tab/articles/articles_tab.dart';
+import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
 
 //ignore: unused-code
-@MaterialAutoRouter(
-  replaceInRouteName: 'Page,Route,Tab',
-  routes: <AutoRoute>[
-    AutoRoute(path: 'splash', page: SplashPage, initial: true),
-    AutoRoute(path: 'login', page: LoginPage),
-    AutoRoute(path: 'forgot_password', page: ForgetPasswordPage),
+@AutoRouterConfig(replaceInRouteName: 'Page,Route,Tab')
+class AppRouter extends $AppRouter {
+  @override
+  List<AutoRoute> get routes => [
+    AutoRoute(path: '/splash', page: SplashPageRoute.page, initial: true),
+    AutoRoute(path: '/login', page: LoginPageRoute.page),
+    AutoRoute(path: '/forgot_password', page: ForgetPasswordPageRoute.page),
     AutoRoute(
-      path: 'forgot_password_confirmation',
-      page: ForgetPasswordConfirmationPage,
+      path: '/forgot_password_confirmation',
+      page: ForgetPasswordConfirmationPageRoute.page,
     ),
     AutoRoute(
-      path: 'reset_password',
-      page: ResetPasswordPage,
+      path: '/reset_password',
+      page: ResetPasswordPageRoute.page,
     ),
     AutoRoute(
-      path: 'reset_password_success',
-      page: ResetPasswordSuccess,
+      path: '/reset_password_success',
+      page: ResetPasswordSuccessRoute.page,
     ),
     //AutoRoute(path: 'returns/request_return', page: RequestReturn),
-    AutoRoute(path: 'returns/approver_actions', page: ApproverActions),
+    AutoRoute(path: '/returns/approver_actions', page: ApproverActionsRoute.page),
     AutoRoute(
-      path: 'returns/user_restrictions',
-      page: UserRestrictionListPage,
+      path: '/returns/user_restrictions',
+      page: UserRestrictionListPageRoute.page,
     ),
     AutoRoute(
-      path: 'web_view',
-      page: WebViewPage,
+      path: '/web_view',
+      page: WebViewPageRoute.page,
     ),
     AutoRoute(
-      path: 'static_html_viewer',
-      page: StaticHtmlViewer,
+      path: '/static_html_viewer',
+      page: StaticHtmlViewerRoute.page,
     ),
     AutoRoute(
-      path: 'change_password',
-      page: ChangePasswordPage,
+      path: '/change_password',
+      page: ChangePasswordPageRoute.page,
     ),
     AutoRoute(
-      path: 'contact_us',
-      page: ContactUsPage,
+      path: '/contact_us',
+      page: ContactUsPageRoute.page,
     ),
     AutoRoute(
-      path: 'notification_settings',
-      page: NotificationSettingsPage,
+      path: '/notification_settings',
+      page: NotificationSettingsPageRoute.page,
     ),
     CustomRoute(
-      path: 'customer_search',
-      page: CustomerSearchPage,
+      path: '/customer_search',
+      page: CustomerSearchPageRoute.page,
       transitionsBuilder: TransitionsBuilders.slideBottom,
     ),
     CustomRoute(
-      path: 'terms_of_service',
-      page: AupTCPage,
+      path: '/terms_of_service',
+      page: AupTCPageRoute.page,
       transitionsBuilder: TransitionsBuilders.slideBottom,
     ),
     AutoRoute(
-      path: 'orders/cart',
-      page: CartPage,
+      path: '/orders/cart',
+      page: CartPageRoute.page,
     ),
     AutoRoute(
-      path: 'orders/cart/checkout',
-      page: CheckoutPage,
+      path: '/orders/cart/checkout',
+      page: CheckoutPageRoute.page,
     ),
     AutoRoute(
-      path: 'orders/order_confirmation',
-      page: OrderSuccessPage,
+      path: '/orders/order_confirmation',
+      page: OrderSuccessPageRoute.page,
     ),
     CustomRoute(
-      path: 'product_suggestion_page',
-      page: ProductSuggestionPage,
+      path: '/product_suggestion_page',
+      page: ProductSuggestionPageRoute.page,
       durationInMilliseconds: 0,
       reverseDurationInMilliseconds: 0,
     ),
     AutoRoute(
-      page: PaymentPage,
-      path: 'payments',
+      page: PaymentPageRoute.page,
+      path: '/payments',
     ),
     AutoRoute(
-      page: ProfilePage,
-      path: 'profile',
+      page: ProfilePageRoute.page,
+      path: '/profile',
     ),
     AutoRoute(
-      page: EZPointWebviewPage,
-      path: 'eZPoint',
+      page: EZPointWebviewPageRoute.page,
+      path: '/eZPoint',
     ),
     AutoRoute(
-      path: 'payments/payment_summary',
-      page: PaymentSummaryPage,
+      path: '/payments/payment_summary',
+      page: PaymentSummaryPageRoute.page,
     ),
     AutoRoute(
-      path: 'payments/invoice_credit',
-      page: AccountSummary,
+      path: '/payments/invoice_credit',
+      page: AccountSummaryRoute.page,
       children: [
         AutoRoute(
           path: 'all_invoices',
-          page: AllInvoicesPage,
+          page: AllInvoicesPageRoute.page,
         ),
         AutoRoute(
           path: 'all_credits',
-          page: AllCreditsPage,
+          page: AllCreditsPageRoute.page,
         ),
         AutoRoute(
           path: 'full_summary',
-          page: FullSummaryPage,
+          page: FullSummaryPageRoute.page,
         ),
       ],
     ),
     AutoRoute(
-      path: 'main',
-      page: HomeNavigationTabbar,
+      path: '/main',
+      page: HomeNavigationTabbarRoute.page,
       children: [
         AutoRoute(
-          page: HomeTab,
+          page: HomeTabRoute.page,
           path: 'home',
         ),
         AutoRoute(
-          page: ProductsTab,
+          page: ProductsTabRoute.page,
           path: 'products',
         ),
         AutoRoute(
-          page: OrdersTab,
+          page: OrdersTabRoute.page,
           path: 'orders_tab',
           children: [
             AutoRoute(
-              page: ViewByItemsPage,
+              page: ViewByItemsPageRoute.page,
               path: 'orders/view_by_items',
             ),
             AutoRoute(
-              page: ViewByOrdersPage,
+              page: ViewByOrdersPageRoute.page,
               path: 'orders/view_by_orders',
             ),
           ],
         ),
         AutoRoute(
-          page: MoreTab,
+          page: MoreTabRoute.page,
           path: 'more',
         ),
         AutoRoute(
-          page: NotificationTab,
+          page: NotificationTabRoute.page,
           path: 'notification_tab',
         ),
       ],
     ),
     AutoRoute(
-      path: 'pdf_view',
-      page: PdfViewPage,
+      path: '/pdf_view',
+      page: PdfViewPageRoute.page,
     ),
 
     // =========
@@ -230,181 +157,180 @@ import 'package:flutter/material.dart';
     // ========
 
     AutoRoute(
-      path: 'returns/add_edit_user_restriction',
-      page: AddEditUserRestrictionPage,
+      path: '/returns/add_edit_user_restriction',
+      page: AddEditUserRestrictionPageRoute.page,
     ),
     AutoRoute(
-      path: 'return_root',
-      page: ReturnRoot,
+      path: '/return_root',
+      page: ReturnRootRoute.page,
       children: [
         AutoRoute(
-          page: ReturnByItemPage,
+          page: ReturnByItemPageRoute.page,
           path: 'return_by_item',
           initial: true,
         ),
         AutoRoute(
-          page: ReturnByRequestPage,
+          page: ReturnByRequestPageRoute.page,
           path: 'return_by_request',
         ),
       ],
     ),
     AutoRoute(
-      path: 'payments/payment_summary/payment_summary_details',
-      page: PaymentSummaryDetailsPage,
+      path: '/payments/payment_summary/payment_summary_details',
+      page: PaymentSummaryDetailsPageRoute.page,
     ),
     AutoRoute(
-      path: 'orders/scan_material_info',
-      page: ScanMaterialInfo,
+      path: '/orders/scan_material_info',
+      page: ScanMaterialInfoRoute.page,
     ),
     AutoRoute(
-      path: 'announcement_info_details',
-      page: AnnouncementInfoDetailsPage,
+      path: '/announcement_info_details',
+      page: AnnouncementInfoDetailsPageRoute.page,
     ),
     AutoRoute(
-      path: 'payments/invoice_details',
-      page: InvoiceDetailsPage,
+      path: '/payments/invoice_details',
+      page: InvoiceDetailsPageRoute.page,
     ),
     AutoRoute(
-      path: 'payments/credit_details',
-      page: CreditDetailsPage,
-    ),
-    AutoRoute<Uri>(
-      path: 'payments/payments_webview',
-      page: PaymentWebviewPage,
+      path: '/payments/credit_details',
+      page: CreditDetailsPageRoute.page,
     ),
     AutoRoute(
-      path: 'payments/new_payment',
-      page: NewPaymentPage,
+      path: '/payments/payments_webview',
+      page: PaymentWebviewPageRoute.page,
+    ),
+    AutoRoute(
+      path: '/payments/new_payment',
+      page: NewPaymentPageRoute.page,
       children: [
         AutoRoute(
-          page: OutstandingInvoicesTab,
+          page: OutstandingInvoicesTabRoute.page,
           path: 'payments/new_payment/outstanding_invoices',
         ),
         AutoRoute(
-          page: AvailableCreditsTab,
+          page: AvailableCreditsTabRoute.page,
           path: 'payments/new_payment/available_credits',
         ),
         AutoRoute(
-          page: PaymentMethodTab,
+          page: PaymentMethodTabRoute.page,
           path: 'payments/new_payment/payment_method',
         ),
       ],
     ),
     AutoRoute(
-      path: 'payments/statement_accounts',
-      page: StatementAccountsPage,
+      path: '/payments/statement_accounts',
+      page: StatementAccountsPageRoute.page,
     ),
     AutoRoute(
-      path: 'payments/payment_advice_created',
-      page: PaymentAdviceCreatedPage,
+      path: '/payments/payment_advice_created',
+      page: PaymentAdviceCreatedPageRoute.page,
     ),
     AutoRoute(
-      path: 'payments/payment_completed',
-      page: PaymentCompletedPage,
+      path: '/payments/payment_completed',
+      page: PaymentCompletedPageRoute.page,
     ),
     AutoRoute(
-      path: 'payments/payment_failed',
-      page: PaymentFailedPage,
+      path: '/payments/payment_failed',
+      page: PaymentFailedPageRoute.page,
     ),
     CustomRoute(
-      path: 'intro_page',
-      page: IntroPage,
+      path: '/intro_page',
+      page: IntroPageRoute.page,
       transitionsBuilder: TransitionsBuilders.slideBottom,
     ),
     AutoRoute(
-      page: ViewByItemDetailsPage,
-      path: 'orders/view_by_item_details_page',
+      page: ViewByItemDetailsPageRoute.page,
+      path: '/orders/view_by_item_details_page',
     ),
     AutoRoute(
-      page: ViewByOrderDetailsPage,
-      path: 'orders/view_by_order_details_page',
+      page: ViewByOrderDetailsPageRoute.page,
+      path: '/orders/view_by_order_details_page',
     ),
     AutoRoute(
-      page: BundleDetailPage,
-      path: 'orders/bundle_detail_page',
+      page: BundleDetailPageRoute.page,
+      path: '/orders/bundle_detail_page',
     ),
     AutoRoute(
-      path: 'orders/material_details',
-      page: ProductDetailsPage,
+      path: '/orders/material_details',
+      page: ProductDetailsPageRoute.page,
     ),
     AutoRoute(
-      path: 'returns/return_summary_details_v3',
-      page: ReturnRequestSummaryByItemDetails,
+      path: '/returns/return_summary_details_v3',
+      page: ReturnRequestSummaryByItemDetailsRoute.page,
     ),
     AutoRoute(
-      path: 'announcements_page',
-      page: AnnouncementsPage,
+      path: '/announcements_page',
+      page: AnnouncementsPageRoute.page,
       children: [
         AutoRoute(
-          page: ArticlesTab,
+          page: ArticlesTabRoute.page,
           path: 'articles_tab',
         ),
         AutoRoute(
-          page: AnnouncementsTab,
+          page: AnnouncementsTabRoute.page,
           path: 'announcements_tab',
         ),
       ],
     ),
     AutoRoute(
-      path: 'article_details',
-      page: ArticleDetails,
+      path: '/article_details',
+      page: ArticleDetailsRoute.page,
     ),
     AutoRoute(
-      page: ReturnRequestDetails,
-      path: 'returns/return_summary_details_by_request',
+      page: ReturnRequestDetailsRoute.page,
+      path: '/returns/return_summary_details_by_request',
     ),
     AutoRoute(
-      page: SalesOrgSearch,
-      path: 'salesOrg_search',
+      page: SalesOrgSearchRoute.page,
+      path: '/salesOrg_search',
     ),
     AutoRoute(
-      page: FAQPage,
-      path: 'faq_page',
+      page: FAQPageRoute.page,
+      path: '/faq_page',
     ),
     AutoRoute(
-      page: NewRequestPage,
-      path: 'returns/new_request',
+      page: NewRequestPageRoute.page,
+      path: '/returns/new_request',
       children: [
         AutoRoute(
-          page: ReturnItemsTab,
+          page: ReturnItemsTabRoute.page,
           path: 'returns/new_request/return_items',
         ),
         AutoRoute(
-          page: ReturnDetailsTab,
+          page: ReturnDetailsTabRoute.page,
           path: 'returns/new_request/return_details',
         ),
         AutoRoute(
-          page: ReturnReviewTab,
+          page: ReturnReviewTabRoute.page,
           path: 'returns/new_request/return_review',
         ),
       ],
     ),
     AutoRoute(
-      page: NewRequestSuccessfulPage,
-      path: 'returns/new_request_successful',
+      page: NewRequestSuccessfulPageRoute.page,
+      path: '/returns/new_request_successful',
     ),
     AutoRoute(
-      page: AboutUsPage,
-      path: 'about_us',
+      page: AboutUsPageRoute.page,
+      path: '/about_us',
     ),
     AutoRoute(
-      page: ComboDetailPage,
-      path: 'combo_detail',
+      page: ComboDetailPageRoute.page,
+      path: '/combo_detail',
     ),
     CustomRoute(
-      path: 'small_order_fee',
-      page: SmallOrderFeePage,
+      path: '/small_order_fee',
+      page: SmallOrderFeePageRoute.page,
       customRouteBuilder: modalSheetBuilder,
       barrierDismissible: false,
     ),
-  ],
-)
-class $AppRouter {}
+  ];
+}
 
 Route<T> modalSheetBuilder<T>(
   BuildContext context,
   Widget child,
-  CustomPage<T> page,
+  AutoRoutePage<T> page,
 ) {
   return ModalBottomSheetRoute(
     settings: page,

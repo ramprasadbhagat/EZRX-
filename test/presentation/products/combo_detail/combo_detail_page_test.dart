@@ -39,6 +39,7 @@ import 'package:ezrxmobile/presentation/orders/cart/cart_page.dart';
 import 'package:ezrxmobile/presentation/orders/cart/item/cart_product_combo.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/cart_item_quantity_input.dart';
 import 'package:ezrxmobile/presentation/products/combo_detail/combo_detail_page.dart';
+import 'package:ezrxmobile/presentation/routes/router.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -85,7 +86,7 @@ class ComboDealMaterialDetailMockBloc
 
 class MockAppRouter extends Mock implements AppRouter {}
 
-class MaterialPageXMock extends Mock implements MaterialPageX {}
+class MaterialPageXMock extends Mock implements AutoRoutePage {}
 
 class MixpanelMock extends Mock implements Mixpanel {}
 
@@ -135,24 +136,31 @@ void main() {
   );
 
   final comboDetailRouteData = RouteData(
-    route: const RouteMatch(
-      name: 'ComboDetailPageRoute',
-      segments: [],
-      path: 'combo_detail',
+    stackKey: const Key(''),
+    type: const RouteType.adaptive(),
+    route: RouteMatch(
+      segments: const [],
+      config: AutoRoute(
+        page: const PageInfo(ComboDetailPageRoute.name),
+        path: '/combo_detail',
+      ),
       stringMatch: 'combo_detail',
-      key: ValueKey('ComboDetailPageRoute'),
+      key: const ValueKey('ComboDetailPageRoute'),
     ),
     router: MockAppRouter(),
     pendingChildren: [],
   );
 
   final cartRouteData = RouteData(
-    route: const RouteMatch(
-      name: 'CartPageRoute',
-      segments: [],
-      path: 'orders/cart',
+    stackKey: const Key(''),
+    type: const RouteType.adaptive(),
+    route: RouteMatch(
+      segments: const [],
+      config: AutoRoute(
+        page: const PageInfo(CartPageRoute.name),
+      ),
       stringMatch: 'orders/cart',
-      key: ValueKey('CartPageRoute'),
+      key: const ValueKey('CartPageRoute'),
     ),
     router: MockAppRouter(),
     pendingChildren: [],
@@ -385,7 +393,7 @@ void main() {
 
           expect(confirmButton, findsOneWidget);
 
-          when(() => autoRouterMock.pop())
+          when(() => autoRouterMock.maybePop())
               .thenAnswer((invocation) async => true);
 
           when(() => autoRouterMock.currentPath).thenReturn('fake-path');
@@ -686,7 +694,7 @@ void main() {
             ),
           );
 
-          when(() => autoRouterMock.pop())
+          when(() => autoRouterMock.maybePop())
               .thenAnswer((invocation) async => true);
 
           final expectedCartStates = Stream.fromIterable(
@@ -870,15 +878,15 @@ void main() {
           );
 
           when(() => autoRouterMock.stack).thenReturn([
-            MaterialPageX(
+            AutoRoutePage(
               routeData: cartRouteData,
               child: const CartPage(),
             ),
-            MaterialPageX(
+            AutoRoutePage(
               routeData: cartRouteData,
               child: const CartPage(),
             ),
-            MaterialPageX(
+            AutoRoutePage(
               routeData: comboDetailRouteData,
               child: const ComboDetailPage(),
             ),
@@ -886,7 +894,7 @@ void main() {
 
           when(() => autoRouterMock.current).thenReturn(comboDetailRouteData);
 
-          when(() => autoRouterMock.pop())
+          when(() => autoRouterMock.maybePop())
               .thenAnswer((invocation) async => true);
 
           final expectedCartStates = Stream.fromIterable(

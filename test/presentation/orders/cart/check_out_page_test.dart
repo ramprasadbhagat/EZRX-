@@ -60,6 +60,7 @@ import 'package:ezrxmobile/presentation/orders/cart/checkout/widgets/product_mat
 import 'package:ezrxmobile/presentation/orders/cart/item/cart_product_tile_widgets/cart_product_tender_contract_section.dart';
 import 'package:ezrxmobile/presentation/orders/cart/widget/market_place_delivery_tile.dart';
 import 'package:ezrxmobile/presentation/products/widgets/stock_info.dart';
+import 'package:ezrxmobile/presentation/routes/router.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -103,12 +104,16 @@ void main() {
   late CustomerLicenseBloc customerLicenseBlocMock;
   late PaymentCustomerInformationBloc paymentCustomerInformationBlocMock;
   final checkoutPageRouteRouteData = RouteData(
-    route: const RouteMatch(
-      name: CheckoutPageRoute.name,
-      segments: [],
-      path: 'orders/cart/checkout',
+    stackKey: const Key(''),
+    type: const RouteType.adaptive(),
+    route: RouteMatch(
+      segments: const [],
+      config: AutoRoute(
+        page: const PageInfo(CheckoutPageRoute.name),
+        //path: '/orders/cart/checkout',
+      ),
       stringMatch: 'orders/cart/checkout',
-      key: ValueKey('CheckoutPageRoute'),
+      key: const ValueKey('CheckoutPageRoute'),
     ),
     router: AutoRouteMock(),
     pendingChildren: [],
@@ -241,7 +246,7 @@ void main() {
         () => orderEligibilityBlocMock.state,
       ).thenReturn(OrderEligibilityState.initial());
       when(() => autoRouterMock.current).thenReturn(checkoutPageRouteRouteData);
-      when(() => autoRouterMock.pop()).thenAnswer((invocation) async => true);
+      when(() => autoRouterMock.maybePop()).thenAnswer((invocation) async => true);
       when(() => autoRouterMock.pushNamed(any()))
           .thenAnswer((invocation) async => null);
       when(() => paymentCustomerInformationBlocMock.state).thenReturn(
@@ -311,7 +316,7 @@ void main() {
         expect(closeButtonFinder, findsOneWidget);
         await tester.tap(closeButtonFinder);
         await tester.pump();
-        verify(() => autoRouterMock.navigateBack()).called(1);
+        verify(() => autoRouterMock.maybePop()).called(1);
       },
     );
 
@@ -338,7 +343,7 @@ void main() {
         expect(orderPriceSummarySheetCloseButtonFinder, findsOneWidget);
         await tester.tap(orderPriceSummarySheetCloseButtonFinder);
         await tester.pumpAndSettle();
-        verify(() => autoRouterMock.pop()).called(1);
+        verify(() => autoRouterMock.maybePop()).called(1);
       },
     );
     testWidgets(

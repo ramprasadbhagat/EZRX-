@@ -22,6 +22,7 @@ import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dar
 import 'package:ezrxmobile/presentation/core/market_place/market_place_logo.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/products/product_suggestion/product_suggestion_page.dart';
+import 'package:ezrxmobile/presentation/routes/router.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -377,7 +378,7 @@ void main() {
           final scanIconFinder = find.byKey(WidgetKeys.productScanCameraKey);
           expect(scanIconFinder, findsOneWidget);
           await tester.tap(scanIconFinder);
-          expect(autoRouterMock.current.path, 'orders/scan_material_info');
+          expect(autoRouterMock.current.path, '/orders/scan_material_info');
         },
       );
 

@@ -7,6 +7,7 @@ import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/bullet_widget.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/payments/payment_completed/payment_completed_page.dart';
+import 'package:ezrxmobile/presentation/routes/router.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -27,7 +28,7 @@ void main() {
     TestWidgetsFlutterBinding.ensureInitialized();
     locator.registerFactory(() => AppRouter());
     registerFallbackValue(
-      const PageRouteInfo(PaymentPageRoute.name, path: 'payments'),
+      const PageRouteInfo(PaymentPageRoute.name),
     );
     autoRouterMock = locator<AppRouter>();
     registerFallbackValue((Route route) {
@@ -163,8 +164,8 @@ void main() {
         expect(finder, findsWidgets);
         await tester.pumpAndSettle();
         expect(
-          autoRouterMock.currentPath,
-          PaymentSummaryPageRoute(isMarketPlace: isMarketPlace).path,
+          autoRouterMock.current.name,
+          PaymentSummaryPageRoute(isMarketPlace: isMarketPlace).routeName,
         );
         expect(
           (autoRouterMock.current.args as PaymentSummaryPageRouteArgs)
@@ -197,8 +198,8 @@ void main() {
         await tester.tap(accountSummaryButton);
         await tester.pumpAndSettle();
         expect(
-          autoRouterMock.current.path,
-          AccountSummaryRoute(isMarketPlace: isMarketPlace).path,
+          autoRouterMock.current.name,
+          AccountSummaryRoute(isMarketPlace: isMarketPlace).routeName,
         );
         expect(
           (autoRouterMock.current.args as AccountSummaryRouteArgs)
@@ -231,10 +232,10 @@ void main() {
         await tester.tap(accountSummaryButton);
         await tester.pumpAndSettle();
         expect(
-          autoRouterMock.current.path,
+          autoRouterMock.current.name,
           PaymentSummaryPageRoute(
             isMarketPlace: isMarketPlace,
-          ).path,
+          ).routeName,
         );
         expect(
           (autoRouterMock.current.args as PaymentSummaryPageRouteArgs)

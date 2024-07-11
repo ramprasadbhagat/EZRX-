@@ -30,6 +30,7 @@ part 'package:ezrxmobile/presentation/notification/widgets/delete_notifications_
 
 part 'package:ezrxmobile/presentation/notification/widgets/announcement_list.dart';
 
+@RoutePage()
 class NotificationTab extends StatelessWidget {
   const NotificationTab({super.key});
 

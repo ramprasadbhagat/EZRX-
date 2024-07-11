@@ -13,6 +13,7 @@ import 'package:ezrxmobile/infrastructure/core/common/tracking_properties.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/returns/return_list/widgets/new_request_button.dart';
+import 'package:ezrxmobile/presentation/routes/router.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -95,7 +96,7 @@ void main() {
   }
 
   testWidgets('New Request Button Test', (tester) async {
-    when(() => appRouter.pushNamed('returns/new_request'))
+    when(() => appRouter.push(const NewRequestPageRoute()))
         .thenAnswer((_) => Future.value());
     await tester.pumpWidget(getWidget());
     await tester.pump();
@@ -134,7 +135,7 @@ void main() {
       ),
     ).called(1);
     verify(
-      () => appRouter.pushNamed('returns/new_request'),
+      () => appRouter.push(const NewRequestPageRoute()),
     ).called(1);
   });
 }

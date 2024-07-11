@@ -41,6 +41,7 @@ part 'package:ezrxmobile/presentation/account/customer_search/widgets/ship_to_ad
 part 'package:ezrxmobile/presentation/account/customer_search/widgets/show_default_tag.dart';
 part 'package:ezrxmobile/presentation/account/customer_search/widgets/title_section.dart';
 
+@RoutePage()
 class CustomerSearchPage extends StatelessWidget {
   const CustomerSearchPage({super.key});
 
@@ -64,7 +65,7 @@ class CustomerSearchPage extends StatelessWidget {
                   ? IconButton(
                       key: WidgetKeys.backButton,
                       icon: const Icon(Icons.arrow_back_ios_sharp),
-                      onPressed: () => context.popRoute(),
+                      onPressed: () => context.maybePop(),
                     )
                   : const SizedBox.shrink(),
               onPopInvoked: (bool didPop) async {

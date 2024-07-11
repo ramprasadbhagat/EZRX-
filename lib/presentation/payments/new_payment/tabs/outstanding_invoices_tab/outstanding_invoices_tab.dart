@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/payments/new_payment/new_payment_bloc.dart';
@@ -30,6 +31,7 @@ import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dar
 
 part 'package:ezrxmobile/presentation/payments/new_payment/tabs/outstanding_invoices_tab/widgets/outstanding_invoices_search_bar.dart';
 
+@RoutePage()
 class OutstandingInvoicesTab extends StatelessWidget {
   const OutstandingInvoicesTab({super.key});
 

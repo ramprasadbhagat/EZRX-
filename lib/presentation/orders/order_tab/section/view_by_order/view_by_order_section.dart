@@ -41,6 +41,7 @@ part 'widgets/buy_again_button.dart';
 part 'widgets/view_by_order.dart';
 part 'widgets/view_by_order_group.dart';
 
+@RoutePage()
 class ViewByOrdersPage extends StatelessWidget {
   const ViewByOrdersPage({
     super.key,

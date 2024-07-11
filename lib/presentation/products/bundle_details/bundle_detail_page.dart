@@ -42,6 +42,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 part 'package:ezrxmobile/presentation/products/bundle_details/widget/bundle_image_section.dart';
 part 'package:ezrxmobile/presentation/products/bundle_details/widget/outline_text.dart';
 
+@RoutePage()
 class BundleDetailPage extends StatefulWidget {
   final MaterialInfo materialInfo;
   final EZReachBanner? banner;

@@ -13,7 +13,7 @@ import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/presentation/account/sales_org_search.dart';
-import 'package:ezrxmobile/presentation/routes/router.gr.dart';
+import 'package:ezrxmobile/presentation/routes/router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -32,8 +32,6 @@ class CustomerCodeBlocMock
     implements CustomerCodeBloc {}
 
 class CartBlocMock extends MockBloc<CartEvent, CartState> implements CartBloc {}
-
-class MockAppRouter extends Mock implements AppRouter {}
 
 class MockMixpanelService extends Mock implements MixpanelService {}
 

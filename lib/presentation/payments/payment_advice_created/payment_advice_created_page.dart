@@ -60,6 +60,7 @@ part 'package:ezrxmobile/presentation/payments/payment_advice_created/widgets/pa
 part 'package:ezrxmobile/presentation/payments/payment_advice_created/widgets/payment_va_failed.dart';
 part 'package:ezrxmobile/presentation/payments/payment_advice_created/widgets/payments_advice_message.dart';
 
+@RoutePage()
 class PaymentAdviceCreatedPage extends StatelessWidget {
   final bool isMarketPlace;
 

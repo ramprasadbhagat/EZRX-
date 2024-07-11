@@ -80,8 +80,8 @@ class _SummarySearchBar extends StatelessWidget {
       props: {
         TrackingProps.subTabFrom: RouterUtils.buildRouteTrackingName(
           isFromViewByOrder
-              ? const ViewByOrdersPageRoute().path
-              : const ViewByItemsPageRoute().path,
+              ? const ViewByOrdersPageRoute().routeName
+              : const ViewByItemsPageRoute().routeName,
         ),
         TrackingProps.keyword: searchKey,
       },

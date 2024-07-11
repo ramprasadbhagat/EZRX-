@@ -22,7 +22,7 @@ class _CounterOfferButtons extends StatelessWidget {
               child: OutlinedButton(
                 key: WidgetKeys.counterOfferCancelButton,
                 onPressed: () {
-                  context.router.pop();
+                  context.router.maybePop();
                 },
                 child: Text(context.tr('Cancel')),
               ),

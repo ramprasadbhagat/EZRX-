@@ -11,8 +11,8 @@ import 'package:ezrxmobile/domain/returns/entities/return_approver_filter.dart';
 
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/returns/approver_actions/filter_drawer.dart';
+import 'package:ezrxmobile/presentation/routes/router.dart';
 
-import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';

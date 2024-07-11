@@ -201,7 +201,9 @@ class _PaymentSummarySection extends StatelessWidget {
         },
       );
       if (context.mounted) {
-        context.router.popUntilRouteWithPath('payments');
+        context.router.popUntil((route) {
+          return route.settings.name == PaymentPageRoute.name;
+        });
       }
     }
   }

@@ -7,6 +7,7 @@ import 'package:ezrxmobile/infrastructure/payments/datasource/all_credits_and_in
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/market_place/market_place_logo.dart';
 import 'package:ezrxmobile/presentation/core/no_record.dart';
+import 'package:ezrxmobile/presentation/routes/router.dart';
 import 'package:flutter/material.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:ezrxmobile/config.dart';
@@ -452,8 +453,8 @@ void main() {
         ),
       ).called(1);
       expect(
-        autoRouterMock.currentPath,
-        InvoiceDetailsPageRoute(isMarketPlace: true).path,
+        autoRouterMock.current.name,
+        InvoiceDetailsPageRoute(isMarketPlace: true).routeName,
       );
     });
   });

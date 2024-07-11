@@ -22,6 +22,7 @@ import 'package:ezrxmobile/presentation/core/no_record.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/payments/full_summary/full_summary.dart';
 import 'package:ezrxmobile/presentation/payments/widgets/new_payment_button.dart';
+import 'package:ezrxmobile/presentation/routes/router.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -343,7 +344,7 @@ void main() {
           ),
         ),
       ).called(1);
-      expect(autoRouterMock.currentPath, 'payments/invoice_details');
+      expect(autoRouterMock.currentPath, '/payments/invoice_details');
     });
 
     testWidgets('Credit Item Display', (tester) async {
@@ -490,7 +491,7 @@ void main() {
           ),
         ),
       ).called(1);
-      expect(autoRouterMock.currentPath, 'payments/credit_details');
+      expect(autoRouterMock.currentPath, '/payments/credit_details');
     });
 
     testWidgets('Find Gov.No in full Summary', (tester) async {
@@ -561,8 +562,8 @@ void main() {
         ),
       ).called(1);
       expect(
-        autoRouterMock.currentPath,
-        InvoiceDetailsPageRoute(isMarketPlace: true).path,
+        autoRouterMock.current.name,
+        InvoiceDetailsPageRoute(isMarketPlace: true).routeName,
       );
     });
 
@@ -597,8 +598,8 @@ void main() {
         ),
       ).called(1);
       expect(
-        autoRouterMock.currentPath,
-        CreditDetailsPageRoute(isMarketPlace: true).path,
+        autoRouterMock.current.name,
+        CreditDetailsPageRoute(isMarketPlace: true).routeName,
       );
     });
   });

@@ -34,6 +34,7 @@ part 'package:ezrxmobile/presentation/payments/account_summary/widgets/export.da
 part 'package:ezrxmobile/presentation/payments/account_summary/widgets/account_summary_search_bar.dart';
 part 'package:ezrxmobile/presentation/payments/account_summary/widgets/filter_tune_icon.dart';
 
+@RoutePage()
 class AccountSummary extends StatelessWidget {
   final bool isMarketPlace;
 

@@ -10,6 +10,7 @@ import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 
+@RoutePage()
 class StaticHtmlViewer extends StatefulWidget {
   final String title;
   final String htmlPath;

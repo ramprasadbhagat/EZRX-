@@ -390,7 +390,7 @@ import 'package:ezrxmobile/infrastructure/returns/repository/return_request_type
 import 'package:ezrxmobile/infrastructure/returns/repository/return_summary_details_repository.dart';
 import 'package:ezrxmobile/infrastructure/returns/repository/usage_code_repository.dart';
 import 'package:ezrxmobile/infrastructure/returns/repository/user_restriction_repository.dart';
-import 'package:ezrxmobile/presentation/routes/router.gr.dart';
+import 'package:ezrxmobile/presentation/routes/router.dart';
 import 'package:ezrxmobile/presentation/routes/router_observer.dart';
 import 'package:ezrxmobile/presentation/splash/upgrader_localization_message.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';

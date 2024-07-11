@@ -4,6 +4,7 @@ import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/package_info/package_info.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/home/widgets/quick_access_menu.dart';
+import 'package:ezrxmobile/presentation/routes/router.dart';
 import 'package:get_it/get_it.dart';
 import 'package:flutter/material.dart';
 import 'package:mocktail/mocktail.dart';
@@ -12,7 +13,6 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ezrxmobile/application/auth/auth_bloc.dart';
-import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
@@ -42,7 +42,7 @@ class SalesOrgBlocMock extends MockBloc<SalesOrgEvent, SalesOrgState>
 
 class AuthBlocMock extends MockBloc<AuthEvent, AuthState> implements AuthBloc {}
 
-class MaterialPageXMock extends Mock implements MaterialPageX {}
+class MaterialPageXMock extends Mock implements AutoRoutePage {}
 
 void main() {
   late CustomerCodeBloc customerCodeBlocMock;

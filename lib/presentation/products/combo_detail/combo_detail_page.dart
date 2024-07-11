@@ -52,6 +52,7 @@ part 'package:ezrxmobile/presentation/products/combo_detail/widgets/combo_detail
 part 'package:ezrxmobile/presentation/products/combo_detail/widgets/combo_detail_body_content.dart';
 part 'package:ezrxmobile/presentation/products/combo_detail/widgets/combo_detail_delete_from_cart_button.dart';
 
+@RoutePage()
 class ComboDetailPage extends StatelessWidget with BottomsheetMixin {
   const ComboDetailPage({super.key});
 
@@ -95,7 +96,7 @@ class ComboDetailPage extends StatelessWidget with BottomsheetMixin {
                   confirmButtonText: 'Leave',
                 );
                 if (confirmed ?? false) {
-                  if (context.mounted) await context.router.pop();
+                  if (context.mounted) await context.router.maybePop();
                 }
               },
             ),

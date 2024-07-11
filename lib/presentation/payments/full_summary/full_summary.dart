@@ -28,6 +28,7 @@ import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 
 part 'package:ezrxmobile/presentation/payments/full_summary/widgets/invoice_credit_item.dart';
 
+@RoutePage()
 class FullSummaryPage extends StatefulWidget {
   final bool isMarketPlace;
 

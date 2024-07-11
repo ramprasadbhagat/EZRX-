@@ -18,6 +18,7 @@ import 'package:ezrxmobile/domain/account/entities/customer_license.dart';
 import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/customer_license_bloc/customer_license_bloc.dart';
+import 'package:auto_route/auto_route.dart';
 
 part 'package:ezrxmobile/presentation/account/profile/widgets/footer.dart';
 part 'package:ezrxmobile/presentation/account/profile/widgets/header.dart';
@@ -25,6 +26,7 @@ part 'package:ezrxmobile/presentation/account/profile/widgets/language_dropdown.
 part 'package:ezrxmobile/presentation/account/profile/widgets/user_details.dart';
 part 'package:ezrxmobile/presentation/account/profile/widgets/license_tile.dart';
 
+@RoutePage()
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
 

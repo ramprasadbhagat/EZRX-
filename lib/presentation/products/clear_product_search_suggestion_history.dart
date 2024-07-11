@@ -49,7 +49,7 @@ class _ClearDeliveryAddressSection extends StatelessWidget {
             child: OutlinedButton(
               key: WidgetKeys.cancelButton,
               onPressed: () async {
-                await context.router.pop();
+                await context.router.maybePop();
               },
               child: Text(
                 context.tr('Cancel'),
@@ -67,7 +67,7 @@ class _ClearDeliveryAddressSection extends StatelessWidget {
                       const ProductSearchEvent
                           .clearProductSearchSuggestionHistory(),
                     );
-                context.router.pop();
+                context.router.maybePop();
               },
               child: Text(
                 context.tr('Clear'),

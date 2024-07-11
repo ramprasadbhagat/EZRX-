@@ -64,6 +64,7 @@ import 'package:ezrxmobile/presentation/products/product_details/widget/combo_of
 part 'widget/product_image_section.dart';
 part 'widget/stock_quantity.dart';
 
+@RoutePage()
 class ProductDetailsPage extends StatefulWidget {
   final MaterialInfo materialInfo;
   final bool isEditTender;
@@ -689,7 +690,7 @@ class _FooterState extends State<_Footer> {
                                 () {
                                   if (!state.isUpserting &&
                                       context.router.current.path ==
-                                          'orders/material_details') {
+                                          '/orders/material_details') {
                                     _trackAddToCartSuccess(
                                       context,
                                       state,

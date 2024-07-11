@@ -16,7 +16,7 @@ import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/home/banners/carousel_banner/carousel_banner_tile.dart';
-import 'package:ezrxmobile/presentation/routes/router.gr.dart';
+import 'package:ezrxmobile/presentation/routes/router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -187,7 +187,7 @@ void main() {
           ),
         ),
       ).called(1);
-      expect(autoRouterMock.current.path, 'product_suggestion_page');
+      expect(autoRouterMock.current.path, '/product_suggestion_page');
     });
   });
 }

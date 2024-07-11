@@ -41,6 +41,7 @@ part 'package:ezrxmobile/presentation/payments/payment_summary_details/widgets/d
 part 'package:ezrxmobile/presentation/payments/payment_summary_details/widgets/payment_transfer_via_section.dart';
 part 'package:ezrxmobile/presentation/payments/payment_summary_details/widgets/qr_code_transfer_section.dart';
 
+@RoutePage()
 class PaymentSummaryDetailsPage extends StatelessWidget {
   final bool isMarketPlace;
 
@@ -77,7 +78,7 @@ class PaymentSummaryDetailsPage extends StatelessWidget {
             leadingWidget: IconButton(
               key: WidgetKeys.paymentSummaryDetailsBackButton,
               icon: const Icon(Icons.arrow_back_ios_sharp),
-              onPressed: () => context.router.pop(),
+              onPressed: () => context.router.maybePop(),
             ),
           ),
           bottomNavigationBar: const _PaymentAdviceButton(),

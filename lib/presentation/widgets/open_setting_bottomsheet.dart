@@ -41,7 +41,7 @@ class OpenSettingBottomSheet extends StatelessWidget {
                   child: OutlinedButton(
                     key: WidgetKeys.dontAllowAlertDialog,
                     onPressed: () {
-                      context.popRoute();
+                      context.maybePop();
                     },
                     child: Text(
                       context.tr("Don't allow"),
@@ -57,7 +57,7 @@ class OpenSettingBottomSheet extends StatelessWidget {
                       await openAppSettings();
 
                       if (context.mounted) {
-                        unawaited(context.popRoute());
+                        unawaited(context.maybePop());
                       }
                     },
                     child: Text(

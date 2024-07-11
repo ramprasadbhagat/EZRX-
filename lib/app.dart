@@ -73,7 +73,7 @@ import 'package:ezrxmobile/infrastructure/core/local_storage/material_banner_sto
 import 'package:ezrxmobile/infrastructure/core/local_storage/setting_storage.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/infrastructure/core/package_info/package_info.dart';
-import 'package:ezrxmobile/presentation/routes/router.gr.dart';
+import 'package:ezrxmobile/presentation/routes/router.dart';
 import 'package:ezrxmobile/application/returns/return_summary_filter/return_summary_filter_bloc.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/order_storage.dart';
 import 'package:universal_io/io.dart';

@@ -65,7 +65,7 @@ class _OrderSuccessMessage extends StatelessWidget {
                         ),
                     recognizer: TapGestureRecognizer()
                       ..onTap =
-                          () => context.router.navigateNamed('main/orders_tab'),
+                          () => context.router.navigateNamed('/main/orders_tab'),
                   ),
                 ],
               ),

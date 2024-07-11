@@ -29,7 +29,7 @@ class ComboOffersProduct extends StatelessWidget {
       listenWhen: (previous, current) =>
           previous.isFetching != current.isFetching &&
           !current.isFetching &&
-          context.router.current.path == 'orders/material_details',
+          context.router.current.path == '/orders/material_details',
       listener: (context, priceState) {
         final eligibilityBloc = context.read<EligibilityBloc>().state;
 

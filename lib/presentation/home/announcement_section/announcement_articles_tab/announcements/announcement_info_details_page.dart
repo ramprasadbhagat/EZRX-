@@ -30,6 +30,7 @@ part 'package:ezrxmobile/presentation/home/announcement_section/announcement_art
 part 'package:ezrxmobile/presentation/home/announcement_section/announcement_articles_tab/announcements/widgets/announcement_info_title_section.dart';
 part 'package:ezrxmobile/presentation/home/announcement_section/announcement_articles_tab/announcements/widgets/announcement_info_attachment_section.dart';
 
+@RoutePage()
 class AnnouncementInfoDetailsPage extends StatefulWidget {
   const AnnouncementInfoDetailsPage({super.key});
 
@@ -127,7 +128,7 @@ class _AnnouncementInfoDetailsPageState
                             if (!_isBackButtonEnableForAppbar)
                               IconButton(
                                 key: WidgetKeys.announcementDetailsBackButton,
-                                onPressed: () => context.router.pop(),
+                                onPressed: () => context.router.maybePop(),
                                 icon: const CircleAvatar(
                                   maxRadius: 13,
                                   backgroundColor:
@@ -163,7 +164,7 @@ class _AnnouncementInfoDetailsPageState
                                             key: WidgetKeys
                                                 .announcementDetailsBottomBackButtonKey,
                                             onPressed: () =>
-                                                context.router.pop(),
+                                                context.router.maybePop(),
                                             constraints: const BoxConstraints(),
                                             padding:
                                                 const EdgeInsets.only(top: 5),

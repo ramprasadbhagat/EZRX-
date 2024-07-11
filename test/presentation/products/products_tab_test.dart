@@ -37,6 +37,7 @@ import 'package:ezrxmobile/presentation/products/products_tab.dart';
 import 'package:ezrxmobile/presentation/products/widgets/filter_value_list.dart';
 import 'package:ezrxmobile/presentation/products/widgets/material_grid_item.dart';
 import 'package:ezrxmobile/presentation/products/widgets/search_and_filter.dart';
+import 'package:ezrxmobile/presentation/routes/router.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';

@@ -67,7 +67,7 @@ class _ReturnRequestSuccessMessage extends StatelessWidget {
                           ),
                       recognizer: TapGestureRecognizer()
                         ..onTap = () {
-                          context.router.pop();
+                          context.router.maybePop();
                         },
                     ),
                   ],

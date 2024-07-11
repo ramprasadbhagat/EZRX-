@@ -17,6 +17,7 @@ import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dar
 
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 
+@RoutePage()
 class ReturnRequestSummaryByItemDetails extends StatelessWidget {
   const ReturnRequestSummaryByItemDetails({
     super.key,

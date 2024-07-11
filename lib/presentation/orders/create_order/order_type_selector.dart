@@ -199,7 +199,7 @@ class _OrderTypeSelectorField extends StatelessWidget {
     BuildContext childContext,
     OrderDocumentType type,
   ) {
-    childContext.router.pop();
+    childContext.router.maybePop();
     final validationText = getValidationText(
       orderDocumentTypeState.selectedOrderType,
       type,
@@ -226,7 +226,7 @@ class _OrderTypeSelectorField extends StatelessWidget {
         title: validationText.first,
         description: validationText.last,
         onCancel: () {
-          context.router.pop();
+          context.router.maybePop();
         },
         onConfirmed: () {
           _onConfirm(context: context, isReason: isReason, i: type);

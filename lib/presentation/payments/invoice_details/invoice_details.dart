@@ -24,6 +24,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 part 'package:ezrxmobile/presentation/payments/invoice_details/widgets/order_item_count.dart';
 part 'package:ezrxmobile/presentation/payments/invoice_details/widgets/download_e_invoice_button.dart';
 
+@RoutePage()
 class InvoiceDetailsPage extends StatelessWidget {
   final bool isMarketPlace;
 

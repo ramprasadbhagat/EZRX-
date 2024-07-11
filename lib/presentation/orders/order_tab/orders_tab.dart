@@ -28,6 +28,7 @@ import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 part 'package:ezrxmobile/presentation/orders/order_tab/widgets/orders_tab_filter.dart';
 part 'package:ezrxmobile/presentation/orders/order_tab/widgets/orders_tab_search_bar.dart';
 
+@RoutePage()
 class OrdersTab extends StatelessWidget {
   const OrdersTab({super.key});
 

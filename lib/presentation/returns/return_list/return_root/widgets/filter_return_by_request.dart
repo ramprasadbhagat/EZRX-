@@ -55,7 +55,7 @@ class _FilterReturnByRequest extends StatelessWidget {
           TrackingEvents.returnRequestFiltered,
           props: {
             TrackingProps.subTabFrom: RouterUtils.buildRouteTrackingName(
-              const ReturnByRequestPageRoute().path,
+              const ReturnByRequestPageRoute().routeName,
             ),
             TrackingProps.filterUsed: value.trackingInfo,
           },

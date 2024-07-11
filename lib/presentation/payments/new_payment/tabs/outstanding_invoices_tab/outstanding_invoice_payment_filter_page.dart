@@ -38,7 +38,7 @@ class OutstandingInvoicePaymentFilterPage extends StatelessWidget {
               IconButton(
                 key: WidgetKeys.closeButton,
                 onPressed: () {
-                  context.router.pop();
+                  context.router.maybePop();
                 },
                 icon: const Icon(
                   Icons.clear,

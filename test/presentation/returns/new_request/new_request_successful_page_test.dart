@@ -10,7 +10,7 @@ import 'package:ezrxmobile/domain/returns/entities/return_material_list.dart';
 import 'package:ezrxmobile/presentation/core/market_place/market_place_seller_title.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/returns/new_request/new_request_success/new_request_successful_page.dart';
-import 'package:ezrxmobile/presentation/routes/router.gr.dart';
+import 'package:ezrxmobile/presentation/routes/router.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

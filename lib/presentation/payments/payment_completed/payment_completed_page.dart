@@ -19,6 +19,7 @@ part 'package:ezrxmobile/presentation/payments/payment_completed/widgets/payment
 part 'package:ezrxmobile/presentation/payments/payment_completed/widgets/payment_completed_message.dart';
 part 'package:ezrxmobile/presentation/payments/payment_completed/widgets/payment_completed_please_note.dart';
 
+@RoutePage()
 class PaymentCompletedPage extends StatelessWidget {
   final bool isMarketPlace;
 

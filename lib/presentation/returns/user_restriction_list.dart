@@ -22,6 +22,7 @@ import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 
+@RoutePage()
 class UserRestrictionListPage extends StatelessWidget {
   const UserRestrictionListPage({super.key});
 

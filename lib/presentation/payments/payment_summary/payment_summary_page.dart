@@ -53,6 +53,7 @@ part 'package:ezrxmobile/presentation/payments/payment_summary/widgets/payment_s
 part 'package:ezrxmobile/presentation/payments/payment_summary/widgets/payment_summary_reset_button.dart';
 part 'package:ezrxmobile/presentation/payments/payment_summary/widgets/payment_summary_search_bar.dart';
 
+@RoutePage()
 class PaymentSummaryPage extends StatefulWidget {
   final bool isMarketPlace;
 

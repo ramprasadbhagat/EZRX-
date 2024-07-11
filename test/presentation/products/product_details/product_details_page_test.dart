@@ -52,6 +52,7 @@ import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/orders/cart/add_to_cart/add_to_cart_error_section.dart';
 import 'package:ezrxmobile/presentation/products/product_details/product_details_page.dart';
 import 'package:ezrxmobile/presentation/products/product_details/widget/material_info.dart';
+import 'package:ezrxmobile/presentation/routes/router.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -128,12 +129,15 @@ void main() {
   );
 
   final routeData = RouteData(
-    route: const RouteMatch(
-      name: 'ProductDetailsPageRoute',
-      segments: ['orders', 'material_details'],
-      path: 'orders/material_details',
+    stackKey: const Key(''),
+    type: const RouteType.adaptive(),
+    route: RouteMatch(
+      segments: const ['orders', 'material_details'],
+      config: AutoRoute(
+        page: const PageInfo(ProductDetailsPageRoute.name),
+      ),
       stringMatch: 'orders/material_details',
-      key: ValueKey('ProductDetailsPageRoute'),
+      key: const ValueKey('ProductDetailsPageRoute'),
     ),
     router: AutoRouteMock(),
     pendingChildren: [],
@@ -395,7 +399,7 @@ void main() {
               .push(ProductDetailsPageRoute(materialInfo: materialInfo)),
         ).thenAnswer((invocation) => Future(() => null));
         when(
-          () => autoRouterMock.pop(),
+          () => autoRouterMock.maybePop(),
         ).thenAnswer((invocation) => Future(() => true));
 
         when(() => materialPriceMockBloc.state).thenReturn(
@@ -479,7 +483,7 @@ void main() {
               .push(ProductDetailsPageRoute(materialInfo: materialInfo)),
         ).thenAnswer((invocation) => Future(() => null));
         when(
-          () => autoRouterMock.pop(),
+          () => autoRouterMock.maybePop(),
         ).thenAnswer((invocation) => Future(() => true));
 
         when(() => materialPriceMockBloc.state).thenReturn(

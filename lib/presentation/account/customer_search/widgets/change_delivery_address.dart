@@ -71,7 +71,7 @@ class _ConfirmChangeDeliveryAddressSection extends StatelessWidget {
             child: OutlinedButton(
               key: WidgetKeys.cancelButton,
               onPressed: () async {
-                await context.router.pop();
+                await context.router.maybePop();
               },
               child: Text(
                 'Cancel'.tr(),

@@ -13,6 +13,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 
+@RoutePage()
 class SalesOrgSearch extends StatelessWidget {
   const SalesOrgSearch({
     super.key,
@@ -131,7 +132,7 @@ class _SalesOrgItem extends StatelessWidget {
                     salesOrganisation: salesOrganisation,
                   ),
                 );
-            context.router.pop();
+            context.router.maybePop();
           },
           contentPadding: EdgeInsets.zero,
           leading: ClipOval(

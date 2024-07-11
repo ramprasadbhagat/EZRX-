@@ -38,6 +38,7 @@ part 'package:ezrxmobile/presentation/payments/statement_accounts/widgets/filter
 part 'package:ezrxmobile/presentation/payments/statement_accounts/widgets/header.dart';
 part 'package:ezrxmobile/presentation/payments/statement_accounts/widgets/soa_tile.dart';
 
+@RoutePage()
 class StatementAccountsPage extends StatefulWidget {
   final bool isMarketPlace;
 

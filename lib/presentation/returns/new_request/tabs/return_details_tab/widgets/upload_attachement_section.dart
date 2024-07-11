@@ -172,7 +172,7 @@ class _AttachmentUploadOptionPickerState
             user: context.read<EligibilityBloc>().state.user,
           ),
         );
-    context.router.pop();
+    context.router.maybePop();
   }
 }
 

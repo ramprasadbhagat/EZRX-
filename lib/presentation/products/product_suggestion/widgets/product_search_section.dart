@@ -80,7 +80,7 @@ class _ProductSearchSectionState extends State<_ProductSearchSection> {
                         searchKey: SearchKey.search(value),
                       ),
                     );
-                context.router.navigateNamed('main/products');
+                context.router.navigateNamed('/main/products');
                 context.read<MaterialListBloc>()
                   ..add(
                     MaterialListEvent.updateSearchKey(

@@ -17,6 +17,7 @@ import 'package:ezrxmobile/application/auth/reset_password/reset_password_bloc.d
 part 'package:ezrxmobile/presentation/account/change_password/widgets/change_password_form.dart';
 part 'package:ezrxmobile/presentation/account/change_password//widgets/save_clear_changes_section.dart';
 
+@RoutePage()
 class ChangePasswordPage extends StatelessWidget {
   const ChangePasswordPage({super.key});
 
@@ -32,7 +33,7 @@ class ChangePasswordPage extends StatelessWidget {
             context
                 .read<ResetPasswordBloc>()
                 .add(const ResetPasswordEvent.clear());
-            context.router.pop();
+            context.router.maybePop();
           },
         ),
         customerBlockedOrSuspended:

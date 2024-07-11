@@ -8,7 +8,7 @@ import 'package:ezrxmobile/domain/returns/entities/return_filter.dart';
 import 'package:ezrxmobile/presentation/core/value_range_error.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/returns/return_list/return_filter/return_by_request_filter_page.dart';
-import 'package:ezrxmobile/presentation/routes/router.gr.dart';
+import 'package:ezrxmobile/presentation/routes/router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -111,14 +111,14 @@ void main() {
     });
 
     testWidgets('Close Button', (tester) async {
-      when(() => appRouter.pop())
+      when(() => appRouter.maybePop())
           .thenAnswer((invocation) => Future.value(true));
       await tester.pumpWidget(getWidgetToTest());
       await tester.pump();
       final closeButton = find.byKey(WidgetKeys.closeButton);
       expect(closeButton, findsOneWidget);
       await tester.tap(closeButton);
-      verify(() => appRouter.pop()).called(1);
+      verify(() => appRouter.maybePop()).called(1);
     });
 
     testWidgets('Show Value Range Error When Amount Range Invalid',

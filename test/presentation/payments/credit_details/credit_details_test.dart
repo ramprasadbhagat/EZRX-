@@ -16,7 +16,7 @@ import 'package:ezrxmobile/presentation/core/market_place/market_place_seller_ti
 import 'package:ezrxmobile/presentation/core/market_place/market_place_title_with_logo.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/payments/credit_details/credit_details.dart';
-import 'package:ezrxmobile/presentation/routes/router.gr.dart';
+import 'package:ezrxmobile/presentation/routes/router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';

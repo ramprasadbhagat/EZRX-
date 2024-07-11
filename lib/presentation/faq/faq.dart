@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/faq/faq_bloc.dart';
@@ -15,6 +16,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 part 'package:ezrxmobile/presentation/faq/widgets/category_chip.dart';
 part 'package:ezrxmobile/presentation/faq/widgets/faq_searchbar.dart';
 
+@RoutePage()
 class FAQPage extends StatelessWidget {
   const FAQPage({super.key});
 

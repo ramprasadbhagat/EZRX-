@@ -12,6 +12,7 @@ import 'package:ezrxmobile/presentation/auth/forgot_password/forgot_password_con
 import 'package:ezrxmobile/presentation/core/logo.dart';
 import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
+import 'package:ezrxmobile/presentation/routes/router.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';

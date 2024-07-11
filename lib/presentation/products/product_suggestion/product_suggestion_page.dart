@@ -27,6 +27,7 @@ part 'package:ezrxmobile/presentation/products/product_suggestion/widgets/produc
 part 'package:ezrxmobile/presentation/products/product_suggestion/widgets/product_suggestion_section.dart';
 part 'package:ezrxmobile/presentation/products/product_suggestion/widgets/product_search_section.dart';
 
+@RoutePage()
 class ProductSuggestionPage extends StatelessWidget {
   final String parentRoute;
 

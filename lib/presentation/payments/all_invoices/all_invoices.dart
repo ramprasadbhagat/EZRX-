@@ -28,6 +28,7 @@ import 'package:ezrxmobile/presentation/payments/widgets/payment_module.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 
+@RoutePage()
 class AllInvoicesPage extends StatefulWidget {
   final bool isMarketPlace;
 

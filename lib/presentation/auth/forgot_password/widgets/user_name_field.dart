@@ -20,7 +20,7 @@ class _UsernameField extends StatelessWidget {
           (either) => either.fold(
             (failure) => ErrorUtils.handleApiFailure(context, failure),
             (success) =>
-                context.router.pushNamed('forgot_password_confirmation'),
+                context.router.push(const ForgetPasswordConfirmationPageRoute()),
           ),
         );
       },

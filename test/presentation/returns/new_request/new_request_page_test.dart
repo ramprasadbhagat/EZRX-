@@ -25,6 +25,7 @@ import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/confirm_bottom_sheet.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/returns/new_request/new_request_page.dart';
+import 'package:ezrxmobile/presentation/routes/router.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -737,7 +738,7 @@ void main() {
           },
         ),
       ).called(1);
-      expect(autoRouterMock.current.path, 'returns/new_request_successful');
+      expect(autoRouterMock.current.path, '/returns/new_request_successful');
     });
 
     testWidgets(' => hide error if showErrorMessages is false',

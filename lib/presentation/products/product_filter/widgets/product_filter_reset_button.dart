@@ -34,7 +34,7 @@ class _ProductFilterResetButton extends StatelessWidget {
     final materialFilterBloc = context.read<MaterialFilterBloc>();
 
     if (selectedFilter == MaterialFilter.empty()) {
-      await context.router.pop(selectedFilter);
+      await context.router.maybePop(selectedFilter);
 
       return;
     }
@@ -49,7 +49,7 @@ class _ProductFilterResetButton extends StatelessWidget {
     );
 
     if (context.mounted) {
-      await context.router.pop(
+      await context.router.maybePop(
         materialFilterState.materialFilter,
       );
     }

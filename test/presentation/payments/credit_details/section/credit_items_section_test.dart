@@ -14,7 +14,7 @@ import 'package:ezrxmobile/presentation/core/item_tax.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/payments/credit_details/section/credit_items_section.dart';
 import 'package:ezrxmobile/presentation/payments/widgets/payment_module.dart';
-import 'package:ezrxmobile/presentation/routes/router.gr.dart';
+import 'package:ezrxmobile/presentation/routes/router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';

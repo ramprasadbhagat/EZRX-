@@ -127,7 +127,7 @@ class AddToCartErrorSection extends StatelessWidget {
                           child: OutlinedButton(
                             key: WidgetKeys.cancelCovidMaterialAddToCart,
                             onPressed: () =>
-                                state.isClearing ? null : context.router.pop(),
+                                state.isClearing ? null : context.router.maybePop(),
                             child: Text(
                               context.tr('Cancel'),
                               style: Theme.of(context)

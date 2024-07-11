@@ -4,6 +4,7 @@ import 'package:ezrxmobile/application/payments/new_payment/new_payment_bloc.dar
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/market_place/market_place_logo.dart';
 import 'package:ezrxmobile/presentation/core/no_record.dart';
+import 'package:ezrxmobile/presentation/routes/router.dart';
 import 'package:flutter/material.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:ezrxmobile/config.dart';
@@ -415,8 +416,8 @@ void main() {
         ),
       ).called(1);
       expect(
-        autoRouterMock.currentPath,
-        CreditDetailsPageRoute(isMarketPlace: true).path,
+        autoRouterMock.current.name,
+        CreditDetailsPageRoute(isMarketPlace: true).routeName,
       );
     });
 

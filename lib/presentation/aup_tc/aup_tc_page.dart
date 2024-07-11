@@ -22,6 +22,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
 
+@RoutePage()
 class AupTCPage extends StatelessWidget {
   final User user;
   final bool isMarketPlace;
@@ -277,7 +278,7 @@ class AcceptButton extends StatelessWidget {
                 pre.showMarketPlaceTnc != cur.showMarketPlaceTnc &&
                 !cur.showMarketPlaceTnc,
             listener: (context, _) {
-              context.navigateBack();
+              context.router.maybePop();
             },
           ),
       ],

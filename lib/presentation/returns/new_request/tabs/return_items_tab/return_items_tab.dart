@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/returns/new_request/new_request_bloc.dart';
@@ -32,6 +33,7 @@ part 'widgets/return_material_info.dart';
 part 'widgets/bonus_item_section.dart';
 part 'widgets/return_items_search_bar.dart';
 
+@RoutePage()
 class ReturnItemsTab extends StatelessWidget {
   const ReturnItemsTab({super.key});
 

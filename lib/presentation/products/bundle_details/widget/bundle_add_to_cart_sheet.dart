@@ -321,7 +321,7 @@ class _BundleSheetFooter extends StatelessWidget {
                       child: OutlinedButton(
                         key: WidgetKeys.cancelBundleMaterialAddToCart,
                         onPressed: () {
-                          context.router.pop();
+                          context.router.maybePop();
                         },
                         child: Text(context.tr('Cancel')),
                       ),
@@ -356,7 +356,7 @@ class _BundleSheetFooter extends StatelessWidget {
                                     _trackAddToCartFailure(context, failure),
                                 (_) {},
                               );
-                              context.router.pop();
+                              context.router.maybePop();
                             },
                           );
                         },

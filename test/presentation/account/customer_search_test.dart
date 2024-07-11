@@ -19,7 +19,7 @@ import 'package:ezrxmobile/infrastructure/account/datasource/customer_code_local
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/presentation/account/customer_search/customer_search.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
-import 'package:ezrxmobile/presentation/routes/router.gr.dart';
+import 'package:ezrxmobile/presentation/routes/router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -59,7 +59,7 @@ final customerCodeVariants = ValueVariant({...CustomerCodeVariant.values});
 
 class MockAppRouter extends Mock implements AppRouter {}
 
-class MaterialPageXMock extends Mock implements MaterialPageX {}
+class MaterialPageXMock extends Mock implements AutoRoutePage {}
 
 final locator = GetIt.instance;
 

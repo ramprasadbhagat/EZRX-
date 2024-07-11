@@ -26,6 +26,7 @@ import 'package:ezrxmobile/presentation/core/market_place/market_place_rectangle
 import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/payments/payment_summary_details/payment_summary_details_screen.dart';
+import 'package:ezrxmobile/presentation/routes/router.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -51,27 +52,35 @@ void main() {
   late PaymentSummaryDetails fakePaymentDetails;
   late PaymentSummaryDetails mockPaymentDetails;
   late PaymentInvoiceInfoPdf mockPaymentInvoiceInfoPdf;
-  late MaterialPageX paymentSummaryPageMock;
+  late AutoRoutePage paymentSummaryPageMock;
 
   final routeData = RouteData(
-    route: const RouteMatch(
-      name: 'PaymentSummaryDetailsPageRoute',
-      segments: ['payments', 'payment_summary', 'payment_summary_details'],
-      path: 'payments/payment_summary/payment_summary_details',
+    stackKey: const Key(''),
+    type: const RouteType.adaptive(),
+    route:  RouteMatch(
+      segments: const ['payments', 'payment_summary', 'payment_summary_details'],
+       config: AutoRoute(
+        page: const PageInfo(PaymentSummaryDetailsPageRoute.name),
+        path: '/payments/payment_summary/payment_summary_details',
+      ),
       stringMatch: 'payments/payment_summary/payment_summary_details',
-      key: ValueKey('PaymentSummaryDetailsPageRoute'),
+      key: const ValueKey('PaymentSummaryDetailsPageRoute'),
     ),
     router: AutoRouteMock(),
     pendingChildren: [],
   );
 
   final paymentSummaryRouteData = RouteData(
-    route: const RouteMatch(
-      name: 'PaymentSummaryPageRoute',
-      segments: ['payments', 'payment_summary'],
-      path: 'payments/payment_summary',
+    stackKey: const Key(''),
+    type: const RouteType.adaptive(),
+    route: RouteMatch(
+      segments: const ['payments', 'payment_summary'],
+      config: AutoRoute(
+        page: const PageInfo(PaymentSummaryPageRoute.name),
+        path: '/payments/payment_summary',
+      ),
       stringMatch: 'payments/payment_summary',
-      key: ValueKey('PaymentSummaryPageRoute'),
+      key: const ValueKey('PaymentSummaryPageRoute'),
     ),
     router: AutoRouteMock(),
     pendingChildren: [],
@@ -100,7 +109,7 @@ void main() {
     mockPaymentSummaryDetailsBloc = PaymentSummaryDetailsBlocMock();
     fakePaymentDetails = PaymentSummaryDetails.empty()
         .copyWith(status: FilterStatus('In Progress'));
-    paymentSummaryPageMock = MaterialPageX(
+    paymentSummaryPageMock = AutoRoutePage(
       routeData: paymentSummaryRouteData,
       child: const SizedBox(),
     );
@@ -489,7 +498,7 @@ void main() {
         ),
       );
       when(
-        () => autoRouterMock.pop(),
+        () => autoRouterMock.maybePop(),
       ).thenAnswer((invocation) async => false);
       when(() => mockPaymentSummaryDetailsBloc.state).thenReturn(
         PaymentSummaryDetailsState.initial().copyWith(

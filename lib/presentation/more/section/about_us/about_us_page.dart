@@ -1,5 +1,7 @@
+import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/presentation/core/custom_app_bar.dart';
 import 'package:ezrxmobile/presentation/core/scroll_to_top_widget.dart';
+import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -19,6 +21,7 @@ part 'package:ezrxmobile/presentation/more/section/about_us/widgets/who_we_are_s
 part 'package:ezrxmobile/presentation/more/section/about_us/widgets/our_partners_section.dart';
 part 'package:ezrxmobile/presentation/more/section/about_us/widgets/certifications_section.dart';
 
+@RoutePage()
 class AboutUsPage extends StatefulWidget {
   const AboutUsPage({super.key});
 
@@ -96,6 +99,7 @@ class _AboutUsPageState extends State<AboutUsPage> {
                       ),
                       _HeaderSection(
                         bannerTemplate: aboutUsInfo.banner,
+                        appMarket: state.salesOrg.appMarket,
                       ),
                       _OurCertificationsSection(
                         certifications: aboutUsInfo.certifications,
@@ -129,8 +133,10 @@ class _AboutUsPageState extends State<AboutUsPage> {
 
 class _HeaderSection extends StatelessWidget {
   final BannerTemplate bannerTemplate;
+  final AppMarket appMarket;
   const _HeaderSection({
     required this.bannerTemplate,
+    required this.appMarket,
   });
 
   @override
@@ -157,7 +163,8 @@ class _HeaderSection extends StatelessWidget {
           const SizedBox(height: 10),
           Center(
             child: ElevatedButton(
-              onPressed: () => context.router.pushNamed('contact_us'),
+              onPressed: () =>
+                  context.router.push(ContactUsPageRoute(appMarket: appMarket)),
               child: Text(bannerTemplate.buttonName),
             ),
           ),

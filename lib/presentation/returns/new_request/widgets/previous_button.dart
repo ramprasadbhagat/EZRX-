@@ -22,7 +22,7 @@ class _PreviousButton extends StatelessWidget with BottomsheetMixin {
                 confirmButtonText: 'Leave',
               );
               if (confirmed ?? false) {
-                if (context.mounted) await context.router.pop();
+                if (context.mounted) await context.router.maybePop();
               }
             },
             icon: const Icon(Icons.close),

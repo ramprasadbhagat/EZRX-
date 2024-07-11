@@ -86,6 +86,7 @@ import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/confirm_bottom_sheet.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/camera_files_permission_bottomsheet.dart';
+import 'package:ezrxmobile/presentation/routes/router.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/splash/splash_page.dart';
 import 'package:ezrxmobile/presentation/splash/upgrader_localization_message.dart';
@@ -1345,7 +1346,7 @@ void main() {
 
       testWidgets('Should show gallery permission denied bottom sheet',
           (tester) async {
-        when(() => autoRouterMock.pop()).thenAnswer((_) async => true);
+        when(() => autoRouterMock.maybePop()).thenAnswer((_) async => true);
         whenListen(
           scanMaterialInfoMockBloc,
           Stream.fromIterable([
@@ -1392,7 +1393,7 @@ void main() {
         );
         await tester.tap(cancelButton);
         await tester.pumpAndSettle();
-        verify(() => autoRouterMock.pop()).called(1);
+        verify(() => autoRouterMock.maybePop()).called(1);
       });
 
       testWidgets('Should show scan not found bottom sheet', (tester) async {

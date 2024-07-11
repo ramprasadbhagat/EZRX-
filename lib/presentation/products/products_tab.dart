@@ -30,6 +30,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 
+@RoutePage()
 class ProductsTab extends StatelessWidget {
   const ProductsTab({super.key});
 

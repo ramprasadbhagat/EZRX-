@@ -10,6 +10,7 @@ import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
 import 'package:ezrxmobile/infrastructure/core/common/tracking_events.dart';
 import 'package:ezrxmobile/infrastructure/core/common/tracking_properties.dart';
 import 'package:ezrxmobile/presentation/core/scale_button.dart';
+import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/utils/router_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -51,7 +52,7 @@ class NewRequestButton extends StatelessWidget {
                 salesOrg: eligibilityState.salesOrg,
               ),
             );
-        context.router.pushNamed('returns/new_request');
+        context.router.push(const NewRequestPageRoute());
       },
       scrollController: controller,
     );

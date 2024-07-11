@@ -48,7 +48,7 @@ class BundleMaterialDescription extends StatelessWidget {
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
-                onPressed: () => context.router.pop(),
+                onPressed: () => context.router.maybePop(),
                 child: Text(context.tr('Close')),
               ),
             ),

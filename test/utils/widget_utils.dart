@@ -1,6 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:ezrxmobile/presentation/routes/router.gr.dart';
+import 'package:ezrxmobile/presentation/routes/router.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -21,11 +21,14 @@ class WidgetUtils {
 
     return RouteDataScope(
       routeData: RouteData(
+        stackKey: const Key(''),
+        type: const RouteType.adaptive(),
         router: autoRouterMock,
         route: RouteMatch(
-          name: routeName ?? 'MaterialRootRoute',
           segments: const [''],
-          path: '',
+          config: AutoRoute(
+            page: PageInfo(routeName ?? 'MaterialRootRoute'),
+          ),
           stringMatch: '',
           key: ValueKey(routeName ?? 'MaterialRootRoute'),
         ),

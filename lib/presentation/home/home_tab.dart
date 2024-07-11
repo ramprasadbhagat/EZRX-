@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:ezrxmobile/application/account/customer_license_bloc/customer_license_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
@@ -25,6 +26,7 @@ import 'package:ezrxmobile/presentation/orders/recent_order/recent_order_section
 import 'package:ezrxmobile/presentation/home/bundle_section/bundle_section.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+@RoutePage()
 class HomeTab extends StatelessWidget {
   const HomeTab({super.key});
 
@@ -83,7 +85,7 @@ class HomeTab extends StatelessWidget {
                   child: Column(
                     children: [
                       AnnouncementWidget(
-                        currentPath: const HomeTabRoute().path,
+                        currentPath: const HomeTabRoute().routeName,
                         key: WidgetKeys.homeTabAnnouncementWidget,
                       ),
                       const LicenseExpiredBanner(),

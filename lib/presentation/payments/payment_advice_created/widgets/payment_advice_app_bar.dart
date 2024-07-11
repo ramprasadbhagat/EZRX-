@@ -17,7 +17,7 @@ class _PaymentAdviceAppBar extends StatelessWidget {
               key: WidgetKeys.closeButton,
               iconSize: 24,
               padding: EdgeInsets.zero,
-              onPressed: () => context.popRoute(),
+              onPressed: () => context.maybePop(),
               icon: const Icon(Icons.close, color: ZPColors.neutralsBlack),
             ),
           ),

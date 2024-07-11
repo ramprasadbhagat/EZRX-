@@ -28,7 +28,7 @@ import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/products/bundle_details/bundle_detail_page.dart';
 import 'package:ezrxmobile/presentation/products/bundle_details/widget/bundle_material_descriptions_sheet.dart';
-import 'package:ezrxmobile/presentation/routes/router.gr.dart';
+import 'package:ezrxmobile/presentation/routes/router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -138,7 +138,7 @@ void main() {
             .thenReturn(ProductDetailState.initial());
         when(() => bundleAddToCartBloc.state)
             .thenReturn(BundleAddToCartState.initial());
-        when(() => autoRouterMock.pop()).thenAnswer((invocation) async => true);
+        when(() => autoRouterMock.maybePop()).thenAnswer((invocation) async => true);
         when(() => autoRouterMock.popForced())
             .thenAnswer((invocation) async => true);
       });
@@ -396,7 +396,7 @@ void main() {
         );
         expect(closeButton, findsOneWidget);
         await tester.tap(closeButton);
-        verify(() => autoRouterMock.pop()).called(1);
+        verify(() => autoRouterMock.maybePop()).called(1);
       });
 
       testWidgets('test favourite', (tester) async {
@@ -583,7 +583,7 @@ void main() {
         );
         expect(cancelButton, findsOneWidget);
         await tester.tap(cancelButton);
-        verify(() => autoRouterMock.pop()).called(1);
+        verify(() => autoRouterMock.maybePop()).called(1);
       });
 
       testWidgets('on cart existing bundle item quantity test', (tester) async {
@@ -731,7 +731,7 @@ void main() {
         whenListen(cartMockBloc, expectedStates);
         await tester.tap(materialDetailsAddToCartButton);
         await tester.pumpAndSettle();
-        verify(() => autoRouterMock.pop()).called(1);
+        verify(() => autoRouterMock.maybePop()).called(1);
       });
 
       testWidgets('Test full bundle code displayed in bundle details page',

@@ -35,6 +35,7 @@ part 'package:ezrxmobile/presentation/orders/order_tab/section/view_by_item/widg
 part 'package:ezrxmobile/presentation/orders/order_tab/section/view_by_item/widgets/invoice_number.dart';
 part 'package:ezrxmobile/presentation/orders/order_tab/section/view_by_item/widgets/view_by_order_item_tile.dart';
 
+@RoutePage()
 class ViewByItemsPage extends StatelessWidget {
   const ViewByItemsPage({
     super.key,

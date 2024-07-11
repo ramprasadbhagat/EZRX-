@@ -16,6 +16,7 @@ import 'package:ezrxmobile/domain/utils/error_utils.dart';
 
 import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
 
+@RoutePage()
 class AddEditUserRestrictionPage extends StatelessWidget {
   final bool isEditing;
 
@@ -66,7 +67,7 @@ class AddEditUserRestrictionPage extends StatelessWidget {
                               .salesOrg,
                         ),
                       );
-                  context.router.pop();
+                  context.router.maybePop();
                 }
               },
               (either) => either.fold(
@@ -223,7 +224,7 @@ class _AddDeleteButton extends StatelessWidget {
                 ConfirmClearDialog.show(
                   context: context,
                   onCancel: () {
-                    context.router.pop();
+                    context.router.maybePop();
                   },
                   title: 'Confirm Delete'.tr(),
                   description: 'User Restriction Will be deleted'.tr(),
@@ -232,7 +233,7 @@ class _AddDeleteButton extends StatelessWidget {
                           const UserRestrictionDetailsEvent
                               .deleteUserRestriction(),
                         );
-                    context.router.pop();
+                    context.router.maybePop();
                   },
                   confirmText: 'Confirm',
                 );

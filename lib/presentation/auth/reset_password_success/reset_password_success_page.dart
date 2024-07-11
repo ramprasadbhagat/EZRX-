@@ -12,6 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+@RoutePage()
 class ResetPasswordSuccess extends StatelessWidget {
   final bool isFirstLogin;
   const ResetPasswordSuccess({super.key, this.isFirstLogin = false});

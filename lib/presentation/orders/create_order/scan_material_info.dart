@@ -8,6 +8,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:ezrxmobile/application/order/scan_material_info/scan_material_info_bloc.dart';
 
+@RoutePage()
 class ScanMaterialInfo extends StatefulWidget {
   const ScanMaterialInfo({super.key});
 
@@ -49,7 +50,7 @@ class _ScanMaterialInfoState extends State<ScanMaterialInfo>
       listenWhen: (previous, current) =>
           previous.isScanInProgress != current.isScanInProgress &&
           !current.isScanInProgress,
-      listener: (context, state) => context.router.pop(),
+      listener: (context, state) => context.router.maybePop(),
       child: Scaffold(
         body: Stack(
           children: [
@@ -116,7 +117,7 @@ class _ScannerBackButton extends StatelessWidget {
           context
               .read<ScanMaterialInfoBloc>()
               .add(const ScanMaterialInfoEvent.disableScan());
-          context.router.pop();
+          context.router.maybePop();
         },
         icon: const CircleAvatar(
           maxRadius: 16,

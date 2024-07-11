@@ -24,6 +24,7 @@ import 'package:ezrxmobile/presentation/core/no_record.dart';
 import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/notification/notification_tab.dart';
+import 'package:ezrxmobile/presentation/routes/router.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -363,8 +364,8 @@ void main() {
         ).called(1);
 
         expect(
-          autoRouterMock.currentPath,
-          const ReturnRequestDetailsRoute().path,
+          autoRouterMock.current.name,
+          const ReturnRequestDetailsRoute().routeName,
         );
       },
     );

@@ -121,7 +121,7 @@ class _FilterElement extends StatelessWidget {
       TrackingEvents.orderDetailFiltered,
       props: {
         TrackingProps.subTabFrom: RouterUtils.buildRouteTrackingName(
-          const ViewByItemsPageRoute().path,
+          const ViewByItemsPageRoute().routeName,
         ),
         TrackingProps.filterUsed: [
           '${filter.orderDateFrom.dateString} - ${filter.orderDateTo.dateString}',
@@ -145,7 +145,7 @@ class _FilterElement extends StatelessWidget {
       TrackingEvents.orderDetailFiltered,
       props: {
         TrackingProps.subTabFrom: RouterUtils.buildRouteTrackingName(
-          const ViewByOrdersPageRoute().path,
+          const ViewByOrdersPageRoute().routeName,
         ),
         TrackingProps.filterUsed: [
           '${filter.orderDateFrom.dateString} - ${filter.orderDateTo.dateString}',

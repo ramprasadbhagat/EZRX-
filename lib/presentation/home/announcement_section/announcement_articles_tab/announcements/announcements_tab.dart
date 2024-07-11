@@ -3,6 +3,7 @@ import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart
 import 'package:ezrxmobile/presentation/core/custom_card.dart';
 import 'package:ezrxmobile/presentation/core/scroll_to_top_widget.dart';
 import 'package:ezrxmobile/presentation/home/announcement_section/announcement_articles_tab/announcements/widgets/new_announcement_icon.dart';
+import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -17,6 +18,7 @@ import 'package:ezrxmobile/application/announcement_info/announcement_info_bloc.
 import 'package:ezrxmobile/domain/announcement_info/entities/announcement_article_info.dart';
 import 'package:ezrxmobile/application/announcement_info/announcement_info_details/announcement_info_details_bloc.dart';
 
+@RoutePage()
 class AnnouncementsTab extends StatefulWidget {
   const AnnouncementsTab({super.key});
 
@@ -110,7 +112,7 @@ class _AnnouncementsTabState extends State<AnnouncementsTab> {
                                       .salesOrg,
                                 ),
                               );
-                          context.router.pushNamed('announcement_info_details');
+                          context.router.push(const AnnouncementInfoDetailsPageRoute());
                         },
                       ),
                       items: state.searchedAnnouncementList,

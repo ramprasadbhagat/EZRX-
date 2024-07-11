@@ -13,6 +13,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 
+@RoutePage()
 class ReturnRequestDetails extends StatelessWidget {
   const ReturnRequestDetails({
     super.key,

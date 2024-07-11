@@ -44,6 +44,7 @@ part 'widgets/material_return_details_section.dart';
 part 'widgets/comment_field.dart';
 part 'widgets/upload_attachement_section.dart';
 
+@RoutePage()
 class ReturnDetailsTab extends StatelessWidget {
   const ReturnDetailsTab({super.key});
 

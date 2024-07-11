@@ -43,6 +43,7 @@ import 'package:ezrxmobile/presentation/core/section_tile.dart';
 import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/payments/payment_home/payment_page.dart';
+import 'package:ezrxmobile/presentation/routes/router.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -194,7 +195,7 @@ void main() {
     when(() => newPaymentBlocMock.state).thenReturn(NewPaymentState.initial());
     when(() => autoRouterMock.currentPath).thenReturn(PaymentPageRoute.name);
     when(() => autoRouterMock.stack).thenReturn([MaterialPageXMock()]);
-    when(() => autoRouterMock.pop()).thenAnswer((invocation) async => true);
+    when(() => autoRouterMock.maybePop()).thenAnswer((invocation) async => true);
     when(() => mpSoaBloc.state).thenReturn(SoaState.initial());
     when(() => mpAccountSummaryBloc.state)
         .thenReturn(AccountSummaryState.initial());

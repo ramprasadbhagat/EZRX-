@@ -72,6 +72,7 @@ part 'package:ezrxmobile/presentation/orders/order_tab/view_by_item_details/sect
 part 'package:ezrxmobile/presentation/orders/order_tab/view_by_item_details/section/invoice_number_section.dart';
 part 'package:ezrxmobile/presentation/orders/order_tab/view_by_item_details/section/order_number_section.dart';
 
+@RoutePage()
 class ViewByItemDetailsPage extends StatelessWidget {
   const ViewByItemDetailsPage({
     super.key,

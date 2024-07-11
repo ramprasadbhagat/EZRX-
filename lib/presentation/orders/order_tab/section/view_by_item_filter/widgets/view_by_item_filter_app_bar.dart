@@ -26,7 +26,7 @@ class _ViewByItemFilterAppBar extends StatelessWidget {
                         context.read<ViewByItemsBloc>().state.appliedFilter,
                   ),
                 );
-            context.router.pop();
+            context.router.maybePop();
           },
           icon: const Icon(
             Icons.clear,

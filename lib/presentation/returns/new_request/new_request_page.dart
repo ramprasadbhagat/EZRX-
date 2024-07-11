@@ -26,6 +26,7 @@ part 'package:ezrxmobile/presentation/returns/new_request/widgets/next_button.da
 part 'package:ezrxmobile/presentation/returns/new_request/widgets/previous_button.dart';
 part 'package:ezrxmobile/presentation/returns/new_request/widgets/submit_button.dart';
 
+@RoutePage()
 class NewRequestPage extends StatelessWidget {
   const NewRequestPage({super.key});
   final _tabs = const [
@@ -286,7 +287,7 @@ class NewRequestPage extends StatelessWidget {
                 child: ElevatedButton(
                   key: WidgetKeys.closeSummaryInfoNewRequestPage,
                   onPressed: () {
-                    context.router.pop();
+                    context.router.maybePop();
                   },
                   child: Text(
                     context.tr('Close'),

@@ -6,7 +6,7 @@ import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/products/product_search_entry.dart';
-import 'package:ezrxmobile/presentation/routes/router.gr.dart';
+import 'package:ezrxmobile/presentation/routes/router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -100,7 +100,7 @@ void main() {
         final textFieldFinder = find.byType(TextFormField);
         await tester.tap(textFieldFinder);
         await tester.pumpAndSettle();
-        expect(autoRouterMock.current.path, 'product_suggestion_page');
+        expect(autoRouterMock.current.path, '/product_suggestion_page');
       },
     );
 
@@ -114,7 +114,7 @@ void main() {
         );
         await tester.tap(findSuffixIcon);
         await tester.pumpAndSettle();
-        expect(autoRouterMock.current.path, 'orders/scan_material_info');
+        expect(autoRouterMock.current.path, '/orders/scan_material_info');
       },
     );
   });

@@ -19,7 +19,7 @@ class _BottomSection extends StatelessWidget {
               Expanded(
                 child: OutlinedButton(
                   key: WidgetKeys.preOrderModalCancelButton,
-                  onPressed: () => context.router.pop(),
+                  onPressed: () => context.router.maybePop(),
                   child: Text(
                     context.tr('Cancel'),
                     style: const TextStyle(color: ZPColors.primary),
@@ -30,7 +30,7 @@ class _BottomSection extends StatelessWidget {
               Expanded(
                 child: ElevatedButton(
                   key: WidgetKeys.preOrderModalContinueButton,
-                  onPressed: () => context.router.pop(true),
+                  onPressed: () => context.router.maybePop(true),
                   child: Text(
                     context.tr('Continue'),
                     style: const TextStyle(color: ZPColors.white),

@@ -10,7 +10,7 @@ import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/products/filter_by_page/filter_by_page.dart';
 import 'package:ezrxmobile/presentation/products/product_filter/product_filter_page.dart';
 import 'package:ezrxmobile/presentation/products/widgets/enum_material_filter.dart';
-import 'package:ezrxmobile/presentation/routes/router.gr.dart';
+import 'package:ezrxmobile/presentation/routes/router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';

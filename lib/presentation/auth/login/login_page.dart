@@ -7,7 +7,9 @@ import 'package:ezrxmobile/presentation/widgets/upgrade_alert_wrapper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
+import 'package:auto_route/auto_route.dart';
 
+@RoutePage()
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
 

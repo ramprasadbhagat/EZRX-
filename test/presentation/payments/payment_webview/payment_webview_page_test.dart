@@ -4,6 +4,7 @@ import 'package:ezrxmobile/application/payments/new_payment/new_payment_bloc.dar
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/payments/payment_webview/payment_webview_page.dart';
+import 'package:ezrxmobile/presentation/routes/router.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -28,7 +29,7 @@ void main() {
     TestWidgetsFlutterBinding.ensureInitialized();
     locator.registerFactory(() => AppRouter());
     registerFallbackValue(
-      const PageRouteInfo(PaymentPageRoute.name, path: 'payments'),
+      const PageRouteInfo(PaymentPageRoute.name),
     );
 
     autoRouterMock = locator<AppRouter>();

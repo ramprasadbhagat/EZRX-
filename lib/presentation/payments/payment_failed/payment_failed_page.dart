@@ -17,6 +17,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 part 'package:ezrxmobile/presentation/payments/payment_failed/widgets/payment_failed_page_footer.dart';
 part 'package:ezrxmobile/presentation/payments/payment_failed/widgets/payment_failed_page_body.dart';
 
+@RoutePage()
 class PaymentFailedPage extends StatelessWidget {
   final bool isMarketPlace;
 
@@ -34,7 +35,7 @@ class PaymentFailedPage extends StatelessWidget {
           title: Text(context.tr('Payment request failed')),
           leadingWidget: IconButton(
             key: WidgetKeys.closeButton,
-            onPressed: () => context.router.pop(),
+            onPressed: () => context.router.maybePop(),
             icon: const Icon(Icons.close, color: ZPColors.neutralsBlack),
           ),
         ),

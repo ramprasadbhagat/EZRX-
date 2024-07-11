@@ -15,9 +15,11 @@ import 'package:ezrxmobile/presentation/more/section/service_tile_section.dart';
 import 'package:ezrxmobile/presentation/more/section/settings_title_section.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:auto_route/auto_route.dart';
 
 part 'section/login_on_behalf/login_on_behalf.dart';
 
+@RoutePage()
 class MoreTab extends StatelessWidget {
   const MoreTab({super.key});
 
@@ -34,7 +36,7 @@ class MoreTab extends StatelessWidget {
       ),
       body: AnnouncementBanner(
         key: WidgetKeys.moreScreen,
-        currentPath: const MoreTabRoute().path,
+        currentPath: const MoreTabRoute().routeName,
         child: ListView(
           key: WidgetKeys.scrollList,
           children: [

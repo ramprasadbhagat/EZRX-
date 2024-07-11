@@ -2,6 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/application/payments/payment_summary/payment_summary_bloc.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_info.dart';
 import 'package:ezrxmobile/locator.dart';
+import 'package:ezrxmobile/presentation/routes/router.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:mocktail/mocktail.dart';
@@ -180,7 +181,7 @@ void main() {
           salesOrganisation: fakeSGSalesOrganisation,
         ),
       );
-      when(() => autoRouterMock.pop()).thenAnswer((invocation) async => true);
+      when(() => autoRouterMock.maybePop()).thenAnswer((invocation) async => true);
       await tester.pumpWidget(getWidget());
       await tester.pump();
       final closeButton = find.byKey(WidgetKeys.closeButton);

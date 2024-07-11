@@ -13,6 +13,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 
+@RoutePage()
 class PaymentWebviewPage extends StatelessWidget {
   const PaymentWebviewPage({super.key});
 
@@ -53,7 +54,7 @@ class PaymentWebviewPage extends StatelessWidget {
                     margin: const EdgeInsets.only(top: 12),
                     child: ElevatedButton(
                       onPressed: () {
-                        context.router.pop(Uri.parse(''));
+                        context.router.maybePop(Uri.parse(''));
                       },
                       child: Text(
                         context.tr('Close'),
@@ -210,7 +211,7 @@ class _WebviewBodyState extends State<_WebviewBody> {
       if (isPaymentSuccess && !isPop) {
         isPop = true;
         unawaited(
-          router.pop(
+          router.maybePop(
             uri,
           ),
         );

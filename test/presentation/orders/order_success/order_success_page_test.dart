@@ -51,6 +51,7 @@ import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/orders/cart/widget/market_place_delivery_tile.dart';
 import 'package:ezrxmobile/presentation/orders/order_success/order_success_page.dart';
 import 'package:ezrxmobile/presentation/orders/order_success/widgets/order_success_attachment_section.dart';
+import 'package:ezrxmobile/presentation/routes/router.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -457,7 +458,7 @@ void main() {
     testWidgets(
       'Order History navigation check',
       (tester) async {
-        when(() => autoRouterMock.navigateNamed('main/orders_tab'))
+        when(() => autoRouterMock.navigateNamed('/main/orders_tab'))
             .thenAnswer((invocation) => Future(() => null));
         when(() => orderSummaryBlocMock.state).thenReturn(
           OrderSummaryState.initial().copyWith(
@@ -471,7 +472,8 @@ void main() {
         );
         await tester.pumpAndSettle();
         expect(finder, findsOneWidget);
-        verify(() => autoRouterMock.navigateNamed('main/orders_tab')).called(1);
+        verify(() => autoRouterMock.navigateNamed('/main/orders_tab'))
+            .called(1);
         await tester.pumpAndSettle();
       },
     );
@@ -1042,16 +1044,13 @@ void main() {
     });
 
     testWidgets('Tap back button', (tester) async {
-      when(
-        () => autoRouterMock.popUntilRouteWithPath('main'),
-      ).thenAnswer((invocation) => Future(() => null));
+      when(() => autoRouterMock.popUntil(any()))
+          .thenAnswer((_) => Future(() => null));
       await tester.pumpWidget(getWidget());
       await tester.pump();
       await tester.tap(find.byKey(WidgetKeys.closeButton));
       await tester.pumpAndSettle();
-      verify(
-        () => autoRouterMock.popUntilRouteWithPath('main'),
-      ).called(1);
+      verify(() => autoRouterMock.popUntil(any())).called(1);
     });
 
     group('Confirm order -', () {

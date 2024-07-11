@@ -14,6 +14,8 @@ import 'package:ezrxmobile/presentation/core/market_place/market_place_logo.dart
 import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/home/bundle_section/bundle_section.dart';
+import 'package:ezrxmobile/presentation/routes/router.dart';
+import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:get_it/get_it.dart';
 import 'package:flutter/material.dart';
 import 'package:mocktail/mocktail.dart';
@@ -21,7 +23,6 @@ import 'package:ezrxmobile/config.dart';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
 
@@ -39,12 +40,15 @@ void main() {
   final locator = GetIt.instance;
   late MaterialResponse materialResponseMock;
   final routeData = RouteData(
-    route: const RouteMatch(
-      name: 'HomeTabRoute',
-      segments: [],
-      path: 'home',
+    stackKey: const Key(''),
+    type: const RouteType.adaptive(),
+    route: RouteMatch(
+      segments: const [],
       stringMatch: 'home',
-      key: ValueKey('HomeTabRoute'),
+      config: AutoRoute(
+        page: const PageInfo(HomeTabRoute.name),
+      ),
+      key: const ValueKey('HomeTabRoute'),
     ),
     router: AutoRouteMock(),
     pendingChildren: [],
@@ -63,7 +67,7 @@ void main() {
   setUpAll(() async {
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.mock);
     locator.registerLazySingleton(() => AppRouter());
-    registerFallbackValue(const PageRouteInfo('HomeTabRoute', path: 'home'));
+    registerFallbackValue(const PageRouteInfo('HomeTabRoute'));
     locator.registerSingleton<MixpanelService>(MixpanelServiceMock());
     locator.registerSingleton<ClevertapService>(ClevertapServiceMock());
     locator.registerFactory<MaterialListBloc>(() => materialListBlocMock);

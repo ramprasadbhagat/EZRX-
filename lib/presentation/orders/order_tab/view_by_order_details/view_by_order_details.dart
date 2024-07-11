@@ -29,6 +29,7 @@ import 'package:ezrxmobile/presentation/orders/order_tab/view_by_order_details/s
 part 'package:ezrxmobile/presentation/orders/order_tab/view_by_order_details/section/view_by_order_bundle_item_details_section.dart';
 part 'package:ezrxmobile/presentation/orders/order_tab/view_by_order_details/section/view_by_order_status_tracker.dart';
 
+@RoutePage()
 class ViewByOrderDetailsPage extends StatelessWidget {
   const ViewByOrderDetailsPage({
     super.key,

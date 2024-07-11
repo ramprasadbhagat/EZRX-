@@ -9,7 +9,7 @@ class _ComboDetailDeleteFromCartButton extends StatelessWidget {
       listenWhen: (previous, current) =>
           (previous.isDeleteCombo != current.isDeleteCombo &&
               current.isDeleteCombo) &&
-          (context.router.current.path == 'combo_detail'),
+          (context.router.current.path == '/combo_detail'),
       listener: (_, state) {
         state.apiFailureOrSuccessOption.fold(
           () {
@@ -35,7 +35,7 @@ class _ComboDetailDeleteFromCartButton extends StatelessWidget {
               );
 
             if (isDeleteFromCart) {
-              (context.router.pop());
+              (context.router.maybePop());
             } else {
               CustomSnackBar(
                 messageText: context.tr(

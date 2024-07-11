@@ -7,8 +7,8 @@ import 'package:ezrxmobile/infrastructure/core/firebase/remote_config.dart';
 import 'package:ezrxmobile/infrastructure/core/clevertap/clevertap_service.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/device_storage.dart';
+import 'package:ezrxmobile/presentation/routes/router.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/infrastructure/core/chatbot/chatbot_service.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/infrastructure/core/deep_linking/deep_linking_service.dart';
@@ -29,7 +29,7 @@ class FileMock extends Mock implements File {}
 
 class DeviceStorageMock extends Mock implements DeviceStorage {}
 
-class MaterialPageXMock extends Mock implements MaterialPageX {}
+class MaterialPageXMock extends Mock implements AutoRoutePage {}
 
 class RemoteConfigServiceMock extends Mock implements RemoteConfigService {}
 

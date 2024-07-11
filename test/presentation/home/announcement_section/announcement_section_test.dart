@@ -11,7 +11,7 @@ import 'package:ezrxmobile/infrastructure/announcement_info/datasource/announcem
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/home/announcement_section/announcement_section.dart';
-import 'package:ezrxmobile/presentation/routes/router.gr.dart';
+import 'package:ezrxmobile/presentation/routes/router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -122,7 +122,7 @@ void main() async {
       expect(announcementIconButton, findsOneWidget);
       await tester
           .tap(find.byKey(WidgetKeys.sectionTileIcon('Announcements'.tr())));
-      expect(autoRouterMock.current.path, 'announcements_page');
+      expect(autoRouterMock.current.path, '/announcements_page');
     });
 
     testWidgets('Item Tapped', (tester) async {
@@ -154,7 +154,7 @@ void main() async {
           ),
         ),
       ).called(1);
-      expect(autoRouterMock.current.path, 'announcement_info_details');
+      expect(autoRouterMock.current.path, '/announcement_info_details');
     });
   });
 }

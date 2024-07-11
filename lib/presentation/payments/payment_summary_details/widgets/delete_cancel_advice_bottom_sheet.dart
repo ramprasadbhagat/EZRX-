@@ -221,7 +221,7 @@ class _DeleteCancelAdviceButtons extends StatelessWidget {
             Expanded(
               child: OutlinedButton(
                 onPressed:
-                    state.isDeletingPayment ? null : () => context.router.pop(),
+                    state.isDeletingPayment ? null : () => context.router.maybePop(),
                 child: LoadingShimmer.withChild(
                   enabled: state.isDeletingPayment || state.isCancelingAdvice,
                   child: Text(
@@ -252,7 +252,7 @@ class _DeleteCancelAdviceButtons extends StatelessWidget {
                     context.read<PaymentSummaryDetailsBloc>().add(
                           const PaymentSummaryDetailsEvent.cancelAdvice(),
                         );
-                    context.router.pop();
+                    context.router.maybePop();
                   }
                 },
                 child: LoadingShimmer.withChild(

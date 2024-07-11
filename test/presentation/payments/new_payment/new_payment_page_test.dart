@@ -25,6 +25,7 @@ import 'package:ezrxmobile/presentation/core/info_label.dart';
 import 'package:ezrxmobile/presentation/core/market_place/market_place_icon.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/payments/new_payment/new_payment_page.dart';
+import 'package:ezrxmobile/presentation/routes/router.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -536,8 +537,8 @@ void main() async {
           () => newPaymentBlocMock.add(const NewPaymentEvent.pay()),
         ).called(1);
         expect(
-          autoRouterMock.currentPath,
-          PaymentAdviceCreatedPageRoute(isMarketPlace: true).path,
+          autoRouterMock.current.name,
+          PaymentAdviceCreatedPageRoute(isMarketPlace: true).routeName,
         );
         expect(
           (autoRouterMock.current.args as PaymentAdviceCreatedPageRouteArgs)
@@ -572,7 +573,7 @@ void main() async {
         );
         await tester.pumpWidget(getWidget());
         await tester.pumpAndSettle();
-        expect(autoRouterMock.currentPath, 'payments/payment_advice_created');
+        expect(autoRouterMock.currentPath, '/payments/payment_advice_created');
       });
 
       testWidgets('=> Test Previous button', (WidgetTester tester) async {

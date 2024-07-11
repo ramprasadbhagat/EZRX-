@@ -7,6 +7,7 @@ import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+@RoutePage()
 class SmallOrderFeePage extends StatelessWidget {
   const SmallOrderFeePage({super.key});
 
@@ -57,7 +58,7 @@ class SmallOrderFeePage extends StatelessWidget {
                 Expanded(
                   child: OutlinedButton(
                     key: WidgetKeys.cancelButton,
-                    onPressed: () => context.router.pop(),
+                    onPressed: () => context.router.maybePop(),
                     child: Text(
                       context.tr('Cancel'),
                       style: const TextStyle(color: ZPColors.primary),
@@ -68,7 +69,7 @@ class SmallOrderFeePage extends StatelessWidget {
                 Expanded(
                   child: ElevatedButton(
                     key: WidgetKeys.confirmButton,
-                    onPressed: () => context.router.pop(true),
+                    onPressed: () => context.router.maybePop(true),
                     child: Text(
                       context.tr('Agree'),
                       style: const TextStyle(color: ZPColors.white),

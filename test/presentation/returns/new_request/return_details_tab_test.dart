@@ -28,7 +28,7 @@ import 'package:ezrxmobile/presentation/returns/new_request/tabs/return_details_
 import 'package:ezrxmobile/presentation/returns/new_request/tabs/return_details_tab/widgets/return_counter_offer.dart';
 import 'package:ezrxmobile/presentation/returns/new_request/widgets/material_details_section.dart';
 import 'package:ezrxmobile/presentation/returns/new_request/widgets/material_info_widget.dart';
-import 'package:ezrxmobile/presentation/routes/router.gr.dart';
+import 'package:ezrxmobile/presentation/routes/router.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

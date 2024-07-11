@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/notification_settings/notification_settings_bloc.dart';
@@ -14,6 +15,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 part 'package:ezrxmobile/presentation/account/notification_settings/widgets/notification_setting_item.dart';
 part 'package:ezrxmobile/presentation/account/notification_settings/widgets/notification_setting_footer.dart';
 
+@RoutePage()
 class NotificationSettingsPage extends StatelessWidget {
   const NotificationSettingsPage({super.key});
 

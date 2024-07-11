@@ -60,7 +60,7 @@ class _DeleteComboButtons extends StatelessWidget {
         Expanded(
           child: OutlinedButton(
             onPressed: () {
-              context.router.pop();
+              context.router.maybePop();
             },
             child: Text(context.tr('Cancel')),
           ),
@@ -95,7 +95,7 @@ class _DeleteComboButtons extends StatelessWidget {
                       isDeleteCombo: true,
                     ),
                   );
-              context.router.pop();
+              context.router.maybePop();
             },
             child: Text(context.tr('Delete')),
           ),

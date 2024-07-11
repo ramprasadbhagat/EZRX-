@@ -40,6 +40,7 @@ part 'package:ezrxmobile/presentation/payments/new_payment/widgets/new_payment_f
 
 part 'package:ezrxmobile/presentation/payments/new_payment/widgets/select_all_section.dart';
 
+@RoutePage()
 class NewPaymentPage extends StatelessWidget {
   final bool isMarketPlace;
 

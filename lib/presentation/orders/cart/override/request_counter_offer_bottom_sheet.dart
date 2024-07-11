@@ -73,7 +73,7 @@ class RequestCounterOfferBottomSheet extends StatelessWidget {
                         overriddenProductPrice: state.item.price,
                       ),
                     );
-                context.router.pop();
+                context.router.maybePop();
               },
             ),
           );

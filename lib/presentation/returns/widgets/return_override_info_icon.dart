@@ -141,7 +141,7 @@ class _ReturnInfoBottomSheet extends StatelessWidget {
           ),
           ElevatedButton(
             onPressed: () {
-              context.router.pop();
+              context.router.maybePop();
             },
             child: Text(
               context.tr('Got it'),

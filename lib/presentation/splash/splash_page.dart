@@ -85,6 +85,7 @@ import 'package:ezrxmobile/presentation/orders/create_order/camera_files_permiss
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 
+@RoutePage()
 class SplashPage extends StatefulWidget {
   const SplashPage({super.key});
 

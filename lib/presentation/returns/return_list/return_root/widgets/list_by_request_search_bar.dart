@@ -41,7 +41,7 @@ class _ListByRequestSearchBar extends StatelessWidget {
       TrackingEvents.returnRequestSearched,
       props: {
         TrackingProps.keyword: keyword,
-        TrackingProps.subTabFrom: const ReturnByRequestPageRoute().path,
+        TrackingProps.subTabFrom: const ReturnByRequestPageRoute().routeName,
       },
     );
     bloc.add(

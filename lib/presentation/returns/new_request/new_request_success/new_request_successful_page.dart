@@ -36,6 +36,7 @@ part 'package:ezrxmobile/presentation/returns/new_request/new_request_success/wi
 part 'package:ezrxmobile/presentation/returns/new_request/new_request_success/widgets/expandable_return_details.dart';
 part 'package:ezrxmobile/presentation/returns/new_request/new_request_success/widgets/expandable_bonus_items.dart';
 
+@RoutePage()
 class NewRequestSuccessfulPage extends StatelessWidget {
   const NewRequestSuccessfulPage({super.key});
 
@@ -49,7 +50,7 @@ class NewRequestSuccessfulPage extends StatelessWidget {
         customerBlockedOrSuspended:
             context.read<EligibilityBloc>().state.customerBlockOrSuspended,
         leadingWidget: IconButton(
-          onPressed: () => context.router.pop(),
+          onPressed: () => context.router.maybePop(),
           icon: const Icon(Icons.close),
         ),
       ),

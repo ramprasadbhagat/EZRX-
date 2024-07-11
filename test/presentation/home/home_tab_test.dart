@@ -48,6 +48,7 @@ import 'package:ezrxmobile/presentation/home/widgets/explore_marketplace_banner.
 import 'package:ezrxmobile/presentation/home/widgets/quick_access_menu.dart';
 import 'package:ezrxmobile/presentation/home_tab.dart';
 import 'package:ezrxmobile/presentation/orders/recent_order/recent_order_section.dart';
+import 'package:ezrxmobile/presentation/routes/router.dart';
 
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
@@ -651,8 +652,8 @@ void main() {
           await tester.tap(icon);
           await tester.pumpAndSettle();
           expect(
-            autoRouterMock.currentPath,
-            PaymentPageRoute(isMarketPlace: true).path,
+            autoRouterMock.current.name,
+            PaymentPageRoute(isMarketPlace: true).routeName,
           );
         });
 

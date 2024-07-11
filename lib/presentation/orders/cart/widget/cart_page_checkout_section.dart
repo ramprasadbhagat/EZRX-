@@ -69,7 +69,7 @@ class _CartPageCheckoutSection extends StatelessWidget {
                 child: ElevatedButton(
                   key: WidgetKeys.cartShipToAddressSheetCloseButton,
                   onPressed: () {
-                    context.router.pop();
+                    context.router.maybePop();
                   },
                   child: Text(
                     context.tr('Close'),
@@ -210,6 +210,6 @@ class _CartPageCheckoutButton extends StatelessWidget {
             const CartEvent.updatePriceForIdMarket(),
           );
     }
-    context.router.pushNamed('orders/cart/checkout');
+    context.router.push(const CheckoutPageRoute());
   }
 }

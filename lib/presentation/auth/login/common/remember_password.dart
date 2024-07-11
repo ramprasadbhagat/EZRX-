@@ -3,6 +3,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/auth/forgot_password/forgot_password_bloc.dart';
 import 'package:ezrxmobile/application/auth/login/login_form_bloc.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
+import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -58,7 +59,7 @@ class RememberPassword extends StatelessWidget {
                 context.read<ForgotPasswordBloc>().add(
                       const ForgotPasswordEvent.initialized(),
                     );
-                context.router.pushNamed('forgot_password');
+                context.router.push(const ForgetPasswordPageRoute());
               },
             ),
           ],

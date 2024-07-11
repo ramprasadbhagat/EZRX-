@@ -42,7 +42,7 @@ class CustomBottomSheet extends StatelessWidget {
               actions: [
                 IconButton(
                   key: WidgetKeys.closeButton,
-                  onPressed: () => context.router.pop(),
+                  onPressed: () => context.router.maybePop(),
                   icon: const Icon(
                     Icons.clear,
                     color: ZPColors.primary,

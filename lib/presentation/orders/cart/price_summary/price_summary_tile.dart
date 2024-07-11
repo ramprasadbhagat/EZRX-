@@ -99,7 +99,7 @@ class PriceSummaryTile extends StatelessWidget {
               width: double.infinity,
               child: ElevatedButton(
                 key: WidgetKeys.closeButton,
-                onPressed: () => context.router.pop(),
+                onPressed: () => context.router.maybePop(),
                 child: Text(
                   context.tr('Close'),
                   style: Theme.of(context).textTheme.labelMedium?.copyWith(

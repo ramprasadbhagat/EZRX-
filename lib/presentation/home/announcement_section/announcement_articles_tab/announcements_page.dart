@@ -24,6 +24,7 @@ part 'articles/widgets/filter_article_bottomsheet.dart';
 part 'announcements/widgets/filter_announcement.dart';
 part 'announcements/widgets/filter_announcement_bottomsheet.dart';
 
+@RoutePage()
 class AnnouncementsPage extends StatelessWidget {
   const AnnouncementsPage({super.key});
 

@@ -19,6 +19,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 part 'package:ezrxmobile/presentation/auth/reset_password/widgets/reset_password_button.dart';
 part 'package:ezrxmobile/presentation/auth/reset_password/widgets/reset_password_form.dart';
 
+@RoutePage()
 class ResetPasswordPage extends StatelessWidget {
   final bool isFirstLogin;
   const ResetPasswordPage({super.key, this.isFirstLogin = false});

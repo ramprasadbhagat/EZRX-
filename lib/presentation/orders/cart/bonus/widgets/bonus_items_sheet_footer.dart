@@ -32,7 +32,7 @@ class BonusItemsSheetFooter extends StatelessWidget {
               children: [
                 ElevatedButton(
                   key: WidgetKeys.bonusSampleSheetCloseButton,
-                  onPressed: () => context.router.pop(),
+                  onPressed: () => context.router.maybePop(),
                   child: Text(
                     context.tr('Close'),
                     style: Theme.of(context).textTheme.labelMedium?.copyWith(

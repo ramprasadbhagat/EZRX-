@@ -9,6 +9,7 @@ import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dar
 import 'package:ezrxmobile/presentation/core/responsive.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/home/announcement_section/announcement_articles_tab/announcements/widgets/new_announcement_icon.dart';
+import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:ezrxmobile/presentation/core/section_tile.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
@@ -39,7 +40,7 @@ class AnnouncementSection extends StatelessWidget {
                 key: WidgetKeys.announcementIcon,
                 title: 'Announcements',
                 onTapIconButton: () =>
-                    context.router.pushNamed('announcements_page'),
+                    context.router.push(const AnnouncementsPageRoute()),
               ),
             ),
             ...state.announcementInfo.homePageAnnouncementList
@@ -67,7 +68,7 @@ class _AnnouncementSectionItem extends StatelessWidget {
                 salesOrg: context.read<EligibilityBloc>().state.salesOrg,
               ),
             );
-        context.router.pushNamed('announcement_info_details');
+        context.router.push(const AnnouncementInfoDetailsPageRoute());
       },
       child: CustomCard(
         margin: const EdgeInsets.all(8),

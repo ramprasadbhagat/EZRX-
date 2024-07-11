@@ -15,6 +15,7 @@ import 'package:flutter_html/flutter_html.dart';
 
 const offSet = 60.0;
 
+@RoutePage()
 class ArticleDetails extends StatefulWidget {
   final AnnouncementArticleItem article;
   const ArticleDetails({super.key, required this.article});
@@ -80,7 +81,7 @@ class _ArticleDetailsState extends State<ArticleDetails> {
                       ? const SizedBox.shrink()
                       : IconButton(
                           key: WidgetKeys.articleDetailsBackButtonKey,
-                          onPressed: () => context.router.pop(),
+                          onPressed: () => context.router.maybePop(),
                           icon: const CircleAvatar(
                             maxRadius: 16,
                             backgroundColor:
@@ -104,7 +105,7 @@ class _ArticleDetailsState extends State<ArticleDetails> {
                   leading: _isBackButtonEnableForAppbar
                       ? IconButton(
                           key: WidgetKeys.articleDetailsBottomBackButtonKey,
-                          onPressed: () => context.router.pop(),
+                          onPressed: () => context.router.maybePop(),
                           icon: const Icon(
                             Icons.arrow_back_ios_rounded,
                             size: 20,

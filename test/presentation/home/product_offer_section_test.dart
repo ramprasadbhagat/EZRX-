@@ -26,6 +26,7 @@ import 'package:ezrxmobile/presentation/core/pre_order_label.dart';
 import 'package:ezrxmobile/presentation/core/product_price_label.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/home/product_offer_section/product_offer_section.dart';
+import 'package:ezrxmobile/presentation/routes/router.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

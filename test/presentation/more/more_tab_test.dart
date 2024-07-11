@@ -6,6 +6,7 @@ import 'package:ezrxmobile/infrastructure/core/package_info/package_info.dart';
 import 'package:ezrxmobile/application/account/notification_settings/notification_settings_bloc.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/more/section/help_and_support_section.dart';
+import 'package:ezrxmobile/presentation/routes/router.dart';
 import 'package:flutter/material.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:ezrxmobile/config.dart';
@@ -470,7 +471,7 @@ void main() {
             ),
           ),
         ).called(1);
-        expect(autoRouterMock.current.path, 'eZPoint');
+        expect(autoRouterMock.current.path, '/eZPoint');
       },
     );
 
@@ -492,7 +493,7 @@ void main() {
             const NotificationSettingsEvent.fetch(),
           ),
         ).called(1);
-        expect(autoRouterMock.current.path, 'notification_settings');
+        expect(autoRouterMock.current.path, '/notification_settings');
       },
     );
     testWidgets(
@@ -652,8 +653,8 @@ void main() {
         await tester.pump();
 
         expect(
-          autoRouterMock.currentPath,
-          PaymentPageRoute(isMarketPlace: true).path,
+          autoRouterMock.current.name,
+          PaymentPageRoute(isMarketPlace: true).routeName,
         );
       });
 

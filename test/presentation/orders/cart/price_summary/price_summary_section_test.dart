@@ -13,6 +13,7 @@ import 'package:ezrxmobile/domain/utils/string_utils.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/cart/cart_local_datasource.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/orders/cart/price_summary/price_summary_tile.dart';
+import 'package:ezrxmobile/presentation/routes/router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -34,7 +35,7 @@ import '../../../../common_mock_data/sales_organsiation_mock.dart';
 import '../../../../common_mock_data/user_mock.dart';
 import '../../../../utils/widget_utils.dart';
 
-class MaterialPageXMock extends Mock implements MaterialPageX {}
+class MaterialPageXMock extends Mock implements AutoRoutePage {}
 
 class CartStateMock extends Mock implements CartState {}
 
@@ -89,12 +90,15 @@ void main() {
   });
 
   RouteData fakeRouteData(String name) => RouteData(
+    stackKey: const Key(''),
+        type: const RouteType.adaptive(),
         route: RouteMatch(
-          name: name,
           segments: const [],
-          path: '',
           stringMatch: '',
           key: ValueKey(name),
+          config: AutoRoute(
+            page: PageInfo(name),
+          ),
         ),
         router: autoRouter,
         pendingChildren: [],

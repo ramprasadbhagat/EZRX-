@@ -35,6 +35,7 @@ import 'package:ezrxmobile/presentation/core/market_place/market_place_icon.dart
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/payments/payment_advice_created/payment_advice_created_page.dart';
 import 'package:ezrxmobile/presentation/payments/payment_summary_details/payment_summary_details_screen.dart';
+import 'package:ezrxmobile/presentation/routes/router.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -856,6 +857,8 @@ void main() {
         when(
           () => autoRouterMock.push<Uri>(const PaymentWebviewPageRoute()),
         ).thenAnswer((_) => Future.value());
+        when(() => autoRouterMock.popUntil(any()))
+            .thenAnswer((_) => Future(() => null));
 
         await tester.pumpWidget(getWidget());
         await tester.pump();
@@ -875,11 +878,7 @@ void main() {
             },
           ),
         ).called(1);
-        verify(
-          () => autoRouterMock.popUntilRouteWithPath(
-            'payments',
-          ),
-        ).called(1);
+        verify(() => autoRouterMock.popUntil(any())).called(1);
       });
 
       testWidgets(
