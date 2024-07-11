@@ -58,6 +58,8 @@ class OrderEligibilityBloc
               state.displayInvalidItemsBanner,
         ),
       ),
+      selectDeliveryOption: (e) async =>
+          emit(state.copyWith(deliveryOption: e.value)),
     );
   }
 }

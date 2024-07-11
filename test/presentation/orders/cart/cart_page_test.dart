@@ -4757,6 +4757,261 @@ void main() {
           expect(orderEligibilityState.isCheckoutDisabled, true);
         });
       });
+
+      group('Delivery options', () {
+        final section = find.byKey(WidgetKeys.cartDeliveryOptionsSection);
+
+        testWidgets('Should hide if market is not HK', (tester) async {
+          when(() => cartBloc.state).thenReturn(
+            CartState.initial().copyWith(cartProducts: mockCartItems),
+          );
+          await tester.pumpWidget(getWidget());
+          await tester.pumpAndSettle();
+
+          expect(section, findsNothing);
+        });
+
+        testWidgets(
+            'Should show in HK market and select standard delivery by default',
+            (tester) async {
+          when(() => cartBloc.state).thenReturn(
+            CartState.initial().copyWith(cartProducts: mockCartItems),
+          );
+          when(() => eligibilityBloc.state).thenReturn(
+            EligibilityState.initial()
+                .copyWith(salesOrganisation: fakeHKSalesOrganisation),
+          );
+
+          await tester.pumpWidget(getWidget());
+          await tester.pumpAndSettle();
+
+          expect(section, findsOne);
+          expect(
+            find.descendant(
+              of: section,
+              matching: find.text('Delivery Options'),
+            ),
+            findsOne,
+          );
+          expect(
+            find.descendant(
+              of: section,
+              matching: find.text(
+                'We are unable to guarantee delivery TOMORROW if your order is placed between 04:00 and 06:00 PM',
+              ),
+            ),
+            findsOne,
+          );
+          final standardDeliveryCard = find.byKey(
+            WidgetKeys.cartDeliveryOptionCard('Standard delivery', true),
+          );
+          final requestDeliveryDateCard = find.byKey(
+            WidgetKeys.cartDeliveryOptionCard(
+              'Request delivery date',
+              false,
+            ),
+          );
+          final urgentDeliveryCard = find.byKey(
+            WidgetKeys.cartDeliveryOptionCard('Urgent delivery', false),
+          );
+          expect(
+            find.descendant(of: section, matching: standardDeliveryCard),
+            findsOne,
+          );
+          expect(
+            find.descendant(
+              of: standardDeliveryCard,
+              matching: find.text('Standard delivery'),
+            ),
+            findsOne,
+          );
+          expect(
+            find.descendant(
+              of: standardDeliveryCard,
+              matching: find.text('Receive your order in <5> business days.'),
+            ),
+            findsOne,
+          );
+          await tester.tap(standardDeliveryCard);
+          await tester.pumpAndSettle();
+          verify(
+            () => orderEligibilityBlocMock.add(
+              OrderEligibilityEvent.selectDeliveryOption(
+                DeliveryOption.standardDelivery(),
+              ),
+            ),
+          ).called(1);
+          expect(
+            find.descendant(of: section, matching: requestDeliveryDateCard),
+            findsOne,
+          );
+          expect(
+            find.descendant(
+              of: requestDeliveryDateCard,
+              matching: find.text('Request delivery date'),
+            ),
+            findsOne,
+          );
+          expect(
+            find.descendant(
+              of: requestDeliveryDateCard,
+              matching: find.text(
+                'Schedule your delivery date. Delivery can only be requested on available days on the calendar.',
+              ),
+            ),
+            findsOne,
+          );
+          await tester.dragUntilVisible(
+            requestDeliveryDateCard,
+            find.byKey(WidgetKeys.scrollList),
+            const Offset(0, -200),
+          );
+          await tester.pumpAndSettle();
+          await tester.tap(requestDeliveryDateCard);
+          await tester.pumpAndSettle();
+          verify(
+            () => orderEligibilityBlocMock.add(
+              OrderEligibilityEvent.selectDeliveryOption(
+                DeliveryOption.requestDeliveryDate(),
+              ),
+            ),
+          ).called(1);
+          expect(
+            find.descendant(of: section, matching: urgentDeliveryCard),
+            findsOne,
+          );
+          expect(
+            find.descendant(
+              of: urgentDeliveryCard,
+              matching: find.text('Urgent delivery'),
+            ),
+            findsOne,
+          );
+          expect(
+            find.descendant(
+              of: urgentDeliveryCard,
+              matching: find.text(
+                'Get your items delivered in the fastest time possible. Only available on business days.',
+              ),
+            ),
+            findsOne,
+          );
+          await tester.dragUntilVisible(
+            urgentDeliveryCard,
+            find.byKey(WidgetKeys.scrollList),
+            const Offset(0, -200),
+          );
+          await tester.pumpAndSettle();
+          await tester.tap(urgentDeliveryCard);
+          await tester.pumpAndSettle();
+          verify(
+            () => orderEligibilityBlocMock.add(
+              OrderEligibilityEvent.selectDeliveryOption(
+                DeliveryOption.urgentDelivery(),
+              ),
+            ),
+          ).called(1);
+        });
+
+        testWidgets('Should show date picker when select request delivery date',
+            (tester) async {
+          when(() => cartBloc.state).thenReturn(
+            CartState.initial().copyWith(cartProducts: mockCartItems),
+          );
+          when(() => orderEligibilityBlocMock.state).thenReturn(
+            OrderEligibilityState.initial().copyWith(
+              deliveryOption: DeliveryOption.requestDeliveryDate(),
+            ),
+          );
+          when(() => eligibilityBloc.state).thenReturn(
+            EligibilityState.initial()
+                .copyWith(salesOrganisation: fakeHKSalesOrganisation),
+          );
+          final requestDeliveryDateCard = find.byKey(
+            WidgetKeys.cartDeliveryOptionCard(
+              'Request delivery date',
+              true,
+            ),
+          );
+
+          await tester.pumpWidget(getWidget());
+          await tester.pumpAndSettle();
+          await tester.dragUntilVisible(
+            requestDeliveryDateCard,
+            find.byKey(WidgetKeys.scrollList),
+            const Offset(0, -200),
+          );
+          await tester.pumpAndSettle();
+          expect(requestDeliveryDateCard, findsOne);
+          expect(
+            find.descendant(
+              of: requestDeliveryDateCard,
+              matching: find.byKey(WidgetKeys.deliveryDate),
+            ),
+            findsOne,
+          );
+          await tester.tap(find.byKey(WidgetKeys.deliveryDate));
+          await tester.pumpAndSettle();
+          expect(find.byType(DatePickerDialog), findsOne);
+        });
+
+        testWidgets('Should show dropdown when select urgent delivery',
+            (tester) async {
+          when(() => cartBloc.state).thenReturn(
+            CartState.initial().copyWith(cartProducts: mockCartItems),
+          );
+          when(() => orderEligibilityBlocMock.state).thenReturn(
+            OrderEligibilityState.initial().copyWith(
+              deliveryOption: DeliveryOption.urgentDelivery(),
+            ),
+          );
+          when(() => eligibilityBloc.state).thenReturn(
+            EligibilityState.initial()
+                .copyWith(salesOrganisation: fakeHKSalesOrganisation),
+          );
+          final urgentDelivery = find.byKey(
+            WidgetKeys.cartDeliveryOptionCard(
+              'Urgent delivery',
+              true,
+            ),
+          );
+          final dropdown = find.byKey(WidgetKeys.cartUrgentDeliveryTimePicker);
+
+          await tester.pumpWidget(getWidget());
+          await tester.pumpAndSettle();
+          await tester.dragUntilVisible(
+            urgentDelivery,
+            find.byKey(WidgetKeys.scrollList),
+            const Offset(0, -100),
+          );
+          expect(urgentDelivery, findsOne);
+          expect(
+            find.descendant(of: urgentDelivery, matching: dropdown),
+            findsOne,
+          );
+          await tester.dragUntilVisible(
+            dropdown,
+            find.byKey(WidgetKeys.scrollList),
+            const Offset(0, -100),
+          );
+          await tester.pumpAndSettle();
+          await tester.tap(dropdown);
+          await tester.pumpAndSettle();
+          for (final option in [
+            'Today, 1PM - 6PM (order before 10:30 AM)',
+            'Tomorrow, 9AM - 12AM (order before 4PM)',
+            'Saturday, 9AM - 1PM (order before 4PM)',
+          ]) {
+            expect(
+              find.descendant(
+                of: find.byType(DropdownMenuItem<String>),
+                matching: find.text(option),
+              ),
+              findsOne,
+            );
+          }
+        });
+      });
     },
   );
 }

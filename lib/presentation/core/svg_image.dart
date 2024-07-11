@@ -41,4 +41,10 @@ abstract class SvgImage {
       '${_basePath}reset_password_success_logo.svg';
   static const String tenderIcon = '${_basePath}tender_icon.svg';
   static const String bundleOfferIcon = '${_basePath}bundle_offer_icon.svg';
+  static const String urgentDeliveryIcon =
+      '${_basePath}urgent_delivery_icon.svg';
+  static const String standardDeliveryIcon =
+      '${_basePath}standard_delivery_icon.svg';
+  static const String requestDateDeliveryIcon =
+      '${_basePath}request_date_delivery_icon.svg';
 }

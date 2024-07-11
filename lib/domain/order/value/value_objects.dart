@@ -454,7 +454,7 @@ class TenderContractNumber extends ValueObject<String> {
   @override
   final Either<ValueFailure<String>, String> value;
 
-    factory TenderContractNumber(String input) {
+  factory TenderContractNumber(String input) {
     return TenderContractNumber._(Right(input));
   }
 
@@ -884,4 +884,29 @@ class ItemRegistrationNumber extends ValueObject<String> {
   bool get isValidIRN => isNotEmpty && !isValueIsNotRequired;
 
   const ItemRegistrationNumber._(this.value);
+}
+
+class DeliveryOption extends ValueObject<String> {
+  @override
+  final Either<ValueFailure<String>, String> value;
+
+  factory DeliveryOption.standardDelivery() =>
+      DeliveryOption('standardDelivery');
+
+  factory DeliveryOption.requestDeliveryDate() =>
+      DeliveryOption('requestDeliveryDate');
+
+  factory DeliveryOption.urgentDelivery() => DeliveryOption('urgentDelivery');
+
+  factory DeliveryOption(String input) =>
+      DeliveryOption._(validateStringNotEmpty(input));
+
+  const DeliveryOption._(this.value);
+
+  String get title => getDeliveryOptionTitle(value.getOrElse(() => ''));
+
+  String get icon => getDeliveryOptionIcon(value.getOrElse(() => ''));
+
+  String get description =>
+      getDeliveryOptionDescription(value.getOrElse(() => ''));
 }

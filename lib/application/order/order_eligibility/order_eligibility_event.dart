@@ -18,6 +18,9 @@ class OrderEligibilityEvent with _$OrderEligibilityEvent {
     required double mpSubtotal,
     required double subTotal,
   }) = _Update;
+  const factory OrderEligibilityEvent.selectDeliveryOption(
+    DeliveryOption value,
+  ) = _SelectDeliveryOption;
 
   const factory OrderEligibilityEvent.validateOrderEligibility() =
       _ValidateOrderEligibility;

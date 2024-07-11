@@ -34,6 +34,7 @@ mixin _$OrderEligibilityEvent {
             double mpSubtotal,
             double subTotal)
         update,
+    required TResult Function(DeliveryOption value) selectDeliveryOption,
     required TResult Function() validateOrderEligibility,
   }) =>
       throw _privateConstructorUsedError;
@@ -55,6 +56,7 @@ mixin _$OrderEligibilityEvent {
             double mpSubtotal,
             double subTotal)?
         update,
+    TResult? Function(DeliveryOption value)? selectDeliveryOption,
     TResult? Function()? validateOrderEligibility,
   }) =>
       throw _privateConstructorUsedError;
@@ -76,6 +78,7 @@ mixin _$OrderEligibilityEvent {
             double mpSubtotal,
             double subTotal)?
         update,
+    TResult Function(DeliveryOption value)? selectDeliveryOption,
     TResult Function()? validateOrderEligibility,
     required TResult orElse(),
   }) =>
@@ -84,6 +87,7 @@ mixin _$OrderEligibilityEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_Update value) update,
+    required TResult Function(_SelectDeliveryOption value) selectDeliveryOption,
     required TResult Function(_ValidateOrderEligibility value)
         validateOrderEligibility,
   }) =>
@@ -92,6 +96,7 @@ mixin _$OrderEligibilityEvent {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_Update value)? update,
+    TResult? Function(_SelectDeliveryOption value)? selectDeliveryOption,
     TResult? Function(_ValidateOrderEligibility value)?
         validateOrderEligibility,
   }) =>
@@ -100,6 +105,7 @@ mixin _$OrderEligibilityEvent {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
     TResult Function(_Update value)? update,
+    TResult Function(_SelectDeliveryOption value)? selectDeliveryOption,
     TResult Function(_ValidateOrderEligibility value)? validateOrderEligibility,
     required TResult orElse(),
   }) =>
@@ -308,6 +314,7 @@ class _$InitializedImpl implements _Initialized {
             double mpSubtotal,
             double subTotal)
         update,
+    required TResult Function(DeliveryOption value) selectDeliveryOption,
     required TResult Function() validateOrderEligibility,
   }) {
     return initialized(
@@ -333,6 +340,7 @@ class _$InitializedImpl implements _Initialized {
             double mpSubtotal,
             double subTotal)?
         update,
+    TResult? Function(DeliveryOption value)? selectDeliveryOption,
     TResult? Function()? validateOrderEligibility,
   }) {
     return initialized?.call(
@@ -358,6 +366,7 @@ class _$InitializedImpl implements _Initialized {
             double mpSubtotal,
             double subTotal)?
         update,
+    TResult Function(DeliveryOption value)? selectDeliveryOption,
     TResult Function()? validateOrderEligibility,
     required TResult orElse(),
   }) {
@@ -373,6 +382,7 @@ class _$InitializedImpl implements _Initialized {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_Update value) update,
+    required TResult Function(_SelectDeliveryOption value) selectDeliveryOption,
     required TResult Function(_ValidateOrderEligibility value)
         validateOrderEligibility,
   }) {
@@ -384,6 +394,7 @@ class _$InitializedImpl implements _Initialized {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_Update value)? update,
+    TResult? Function(_SelectDeliveryOption value)? selectDeliveryOption,
     TResult? Function(_ValidateOrderEligibility value)?
         validateOrderEligibility,
   }) {
@@ -395,6 +406,7 @@ class _$InitializedImpl implements _Initialized {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
     TResult Function(_Update value)? update,
+    TResult Function(_SelectDeliveryOption value)? selectDeliveryOption,
     TResult Function(_ValidateOrderEligibility value)? validateOrderEligibility,
     required TResult orElse(),
   }) {
@@ -577,6 +589,7 @@ class _$UpdateImpl implements _Update {
             double mpSubtotal,
             double subTotal)
         update,
+    required TResult Function(DeliveryOption value) selectDeliveryOption,
     required TResult Function() validateOrderEligibility,
   }) {
     return update(
@@ -602,6 +615,7 @@ class _$UpdateImpl implements _Update {
             double mpSubtotal,
             double subTotal)?
         update,
+    TResult? Function(DeliveryOption value)? selectDeliveryOption,
     TResult? Function()? validateOrderEligibility,
   }) {
     return update?.call(
@@ -627,6 +641,7 @@ class _$UpdateImpl implements _Update {
             double mpSubtotal,
             double subTotal)?
         update,
+    TResult Function(DeliveryOption value)? selectDeliveryOption,
     TResult Function()? validateOrderEligibility,
     required TResult orElse(),
   }) {
@@ -642,6 +657,7 @@ class _$UpdateImpl implements _Update {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_Update value) update,
+    required TResult Function(_SelectDeliveryOption value) selectDeliveryOption,
     required TResult Function(_ValidateOrderEligibility value)
         validateOrderEligibility,
   }) {
@@ -653,6 +669,7 @@ class _$UpdateImpl implements _Update {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_Update value)? update,
+    TResult? Function(_SelectDeliveryOption value)? selectDeliveryOption,
     TResult? Function(_ValidateOrderEligibility value)?
         validateOrderEligibility,
   }) {
@@ -664,6 +681,7 @@ class _$UpdateImpl implements _Update {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
     TResult Function(_Update value)? update,
+    TResult Function(_SelectDeliveryOption value)? selectDeliveryOption,
     TResult Function(_ValidateOrderEligibility value)? validateOrderEligibility,
     required TResult orElse(),
   }) {
@@ -692,6 +710,199 @@ abstract class _Update implements OrderEligibilityEvent {
   @JsonKey(ignore: true)
   _$$UpdateImplCopyWith<_$UpdateImpl> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$SelectDeliveryOptionImplCopyWith<$Res> {
+  factory _$$SelectDeliveryOptionImplCopyWith(_$SelectDeliveryOptionImpl value,
+          $Res Function(_$SelectDeliveryOptionImpl) then) =
+      __$$SelectDeliveryOptionImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({DeliveryOption value});
+}
+
+/// @nodoc
+class __$$SelectDeliveryOptionImplCopyWithImpl<$Res>
+    extends _$OrderEligibilityEventCopyWithImpl<$Res,
+        _$SelectDeliveryOptionImpl>
+    implements _$$SelectDeliveryOptionImplCopyWith<$Res> {
+  __$$SelectDeliveryOptionImplCopyWithImpl(_$SelectDeliveryOptionImpl _value,
+      $Res Function(_$SelectDeliveryOptionImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? value = null,
+  }) {
+    return _then(_$SelectDeliveryOptionImpl(
+      null == value
+          ? _value.value
+          : value // ignore: cast_nullable_to_non_nullable
+              as DeliveryOption,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$SelectDeliveryOptionImpl implements _SelectDeliveryOption {
+  const _$SelectDeliveryOptionImpl(this.value);
+
+  @override
+  final DeliveryOption value;
+
+  @override
+  String toString() {
+    return 'OrderEligibilityEvent.selectDeliveryOption(value: $value)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$SelectDeliveryOptionImpl &&
+            (identical(other.value, value) || other.value == value));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, value);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$SelectDeliveryOptionImplCopyWith<_$SelectDeliveryOptionImpl>
+      get copyWith =>
+          __$$SelectDeliveryOptionImplCopyWithImpl<_$SelectDeliveryOptionImpl>(
+              this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(
+            User user,
+            SalesOrganisation salesOrg,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipInfo,
+            String orderType)
+        initialized,
+    required TResult Function(
+            List<PriceAggregate> cartItems,
+            String orderType,
+            double grandTotal,
+            double zpSubtotal,
+            double mpSubtotal,
+            double subTotal)
+        update,
+    required TResult Function(DeliveryOption value) selectDeliveryOption,
+    required TResult Function() validateOrderEligibility,
+  }) {
+    return selectDeliveryOption(value);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(
+            User user,
+            SalesOrganisation salesOrg,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipInfo,
+            String orderType)?
+        initialized,
+    TResult? Function(
+            List<PriceAggregate> cartItems,
+            String orderType,
+            double grandTotal,
+            double zpSubtotal,
+            double mpSubtotal,
+            double subTotal)?
+        update,
+    TResult? Function(DeliveryOption value)? selectDeliveryOption,
+    TResult? Function()? validateOrderEligibility,
+  }) {
+    return selectDeliveryOption?.call(value);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(
+            User user,
+            SalesOrganisation salesOrg,
+            SalesOrganisationConfigs configs,
+            CustomerCodeInfo customerCodeInfo,
+            ShipToInfo shipInfo,
+            String orderType)?
+        initialized,
+    TResult Function(
+            List<PriceAggregate> cartItems,
+            String orderType,
+            double grandTotal,
+            double zpSubtotal,
+            double mpSubtotal,
+            double subTotal)?
+        update,
+    TResult Function(DeliveryOption value)? selectDeliveryOption,
+    TResult Function()? validateOrderEligibility,
+    required TResult orElse(),
+  }) {
+    if (selectDeliveryOption != null) {
+      return selectDeliveryOption(value);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initialized value) initialized,
+    required TResult Function(_Update value) update,
+    required TResult Function(_SelectDeliveryOption value) selectDeliveryOption,
+    required TResult Function(_ValidateOrderEligibility value)
+        validateOrderEligibility,
+  }) {
+    return selectDeliveryOption(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initialized value)? initialized,
+    TResult? Function(_Update value)? update,
+    TResult? Function(_SelectDeliveryOption value)? selectDeliveryOption,
+    TResult? Function(_ValidateOrderEligibility value)?
+        validateOrderEligibility,
+  }) {
+    return selectDeliveryOption?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initialized value)? initialized,
+    TResult Function(_Update value)? update,
+    TResult Function(_SelectDeliveryOption value)? selectDeliveryOption,
+    TResult Function(_ValidateOrderEligibility value)? validateOrderEligibility,
+    required TResult orElse(),
+  }) {
+    if (selectDeliveryOption != null) {
+      return selectDeliveryOption(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _SelectDeliveryOption implements OrderEligibilityEvent {
+  const factory _SelectDeliveryOption(final DeliveryOption value) =
+      _$SelectDeliveryOptionImpl;
+
+  DeliveryOption get value;
+  @JsonKey(ignore: true)
+  _$$SelectDeliveryOptionImplCopyWith<_$SelectDeliveryOptionImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -752,6 +963,7 @@ class _$ValidateOrderEligibilityImpl implements _ValidateOrderEligibility {
             double mpSubtotal,
             double subTotal)
         update,
+    required TResult Function(DeliveryOption value) selectDeliveryOption,
     required TResult Function() validateOrderEligibility,
   }) {
     return validateOrderEligibility();
@@ -776,6 +988,7 @@ class _$ValidateOrderEligibilityImpl implements _ValidateOrderEligibility {
             double mpSubtotal,
             double subTotal)?
         update,
+    TResult? Function(DeliveryOption value)? selectDeliveryOption,
     TResult? Function()? validateOrderEligibility,
   }) {
     return validateOrderEligibility?.call();
@@ -800,6 +1013,7 @@ class _$ValidateOrderEligibilityImpl implements _ValidateOrderEligibility {
             double mpSubtotal,
             double subTotal)?
         update,
+    TResult Function(DeliveryOption value)? selectDeliveryOption,
     TResult Function()? validateOrderEligibility,
     required TResult orElse(),
   }) {
@@ -814,6 +1028,7 @@ class _$ValidateOrderEligibilityImpl implements _ValidateOrderEligibility {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_Update value) update,
+    required TResult Function(_SelectDeliveryOption value) selectDeliveryOption,
     required TResult Function(_ValidateOrderEligibility value)
         validateOrderEligibility,
   }) {
@@ -825,6 +1040,7 @@ class _$ValidateOrderEligibilityImpl implements _ValidateOrderEligibility {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_Update value)? update,
+    TResult? Function(_SelectDeliveryOption value)? selectDeliveryOption,
     TResult? Function(_ValidateOrderEligibility value)?
         validateOrderEligibility,
   }) {
@@ -836,6 +1052,7 @@ class _$ValidateOrderEligibilityImpl implements _ValidateOrderEligibility {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
     TResult Function(_Update value)? update,
+    TResult Function(_SelectDeliveryOption value)? selectDeliveryOption,
     TResult Function(_ValidateOrderEligibility value)? validateOrderEligibility,
     required TResult orElse(),
   }) {
@@ -858,6 +1075,7 @@ mixin _$OrderEligibilityState {
   double get grandTotal => throw _privateConstructorUsedError;
   CustomerCodeInfo get customerCodeInfo => throw _privateConstructorUsedError;
   ShipToInfo get shipInfo => throw _privateConstructorUsedError;
+  DeliveryOption get deliveryOption => throw _privateConstructorUsedError;
   String get orderType => throw _privateConstructorUsedError;
   User get user => throw _privateConstructorUsedError;
   double get zpSubtotal => throw _privateConstructorUsedError;
@@ -883,6 +1101,7 @@ abstract class $OrderEligibilityStateCopyWith<$Res> {
       double grandTotal,
       CustomerCodeInfo customerCodeInfo,
       ShipToInfo shipInfo,
+      DeliveryOption deliveryOption,
       String orderType,
       User user,
       double zpSubtotal,
@@ -917,6 +1136,7 @@ class _$OrderEligibilityStateCopyWithImpl<$Res,
     Object? grandTotal = null,
     Object? customerCodeInfo = null,
     Object? shipInfo = null,
+    Object? deliveryOption = null,
     Object? orderType = null,
     Object? user = null,
     Object? zpSubtotal = null,
@@ -949,6 +1169,10 @@ class _$OrderEligibilityStateCopyWithImpl<$Res,
           ? _value.shipInfo
           : shipInfo // ignore: cast_nullable_to_non_nullable
               as ShipToInfo,
+      deliveryOption: null == deliveryOption
+          ? _value.deliveryOption
+          : deliveryOption // ignore: cast_nullable_to_non_nullable
+              as DeliveryOption,
       orderType: null == orderType
           ? _value.orderType
           : orderType // ignore: cast_nullable_to_non_nullable
@@ -1033,6 +1257,7 @@ abstract class _$$OrderEligibilityStateImplCopyWith<$Res>
       double grandTotal,
       CustomerCodeInfo customerCodeInfo,
       ShipToInfo shipInfo,
+      DeliveryOption deliveryOption,
       String orderType,
       User user,
       double zpSubtotal,
@@ -1070,6 +1295,7 @@ class __$$OrderEligibilityStateImplCopyWithImpl<$Res>
     Object? grandTotal = null,
     Object? customerCodeInfo = null,
     Object? shipInfo = null,
+    Object? deliveryOption = null,
     Object? orderType = null,
     Object? user = null,
     Object? zpSubtotal = null,
@@ -1102,6 +1328,10 @@ class __$$OrderEligibilityStateImplCopyWithImpl<$Res>
           ? _value.shipInfo
           : shipInfo // ignore: cast_nullable_to_non_nullable
               as ShipToInfo,
+      deliveryOption: null == deliveryOption
+          ? _value.deliveryOption
+          : deliveryOption // ignore: cast_nullable_to_non_nullable
+              as DeliveryOption,
       orderType: null == orderType
           ? _value.orderType
           : orderType // ignore: cast_nullable_to_non_nullable
@@ -1140,6 +1370,7 @@ class _$OrderEligibilityStateImpl extends _OrderEligibilityState {
       required this.grandTotal,
       required this.customerCodeInfo,
       required this.shipInfo,
+      required this.deliveryOption,
       required this.orderType,
       required this.user,
       required this.zpSubtotal,
@@ -1168,6 +1399,8 @@ class _$OrderEligibilityStateImpl extends _OrderEligibilityState {
   @override
   final ShipToInfo shipInfo;
   @override
+  final DeliveryOption deliveryOption;
+  @override
   final String orderType;
   @override
   final User user;
@@ -1182,7 +1415,7 @@ class _$OrderEligibilityStateImpl extends _OrderEligibilityState {
 
   @override
   String toString() {
-    return 'OrderEligibilityState(cartItems: $cartItems, configs: $configs, salesOrg: $salesOrg, grandTotal: $grandTotal, customerCodeInfo: $customerCodeInfo, shipInfo: $shipInfo, orderType: $orderType, user: $user, zpSubtotal: $zpSubtotal, mpSubtotal: $mpSubtotal, subTotal: $subTotal, showErrorMessage: $showErrorMessage)';
+    return 'OrderEligibilityState(cartItems: $cartItems, configs: $configs, salesOrg: $salesOrg, grandTotal: $grandTotal, customerCodeInfo: $customerCodeInfo, shipInfo: $shipInfo, deliveryOption: $deliveryOption, orderType: $orderType, user: $user, zpSubtotal: $zpSubtotal, mpSubtotal: $mpSubtotal, subTotal: $subTotal, showErrorMessage: $showErrorMessage)';
   }
 
   @override
@@ -1201,6 +1434,8 @@ class _$OrderEligibilityStateImpl extends _OrderEligibilityState {
                 other.customerCodeInfo == customerCodeInfo) &&
             (identical(other.shipInfo, shipInfo) ||
                 other.shipInfo == shipInfo) &&
+            (identical(other.deliveryOption, deliveryOption) ||
+                other.deliveryOption == deliveryOption) &&
             (identical(other.orderType, orderType) ||
                 other.orderType == orderType) &&
             (identical(other.user, user) || other.user == user) &&
@@ -1223,6 +1458,7 @@ class _$OrderEligibilityStateImpl extends _OrderEligibilityState {
       grandTotal,
       customerCodeInfo,
       shipInfo,
+      deliveryOption,
       orderType,
       user,
       zpSubtotal,
@@ -1246,6 +1482,7 @@ abstract class _OrderEligibilityState extends OrderEligibilityState {
       required final double grandTotal,
       required final CustomerCodeInfo customerCodeInfo,
       required final ShipToInfo shipInfo,
+      required final DeliveryOption deliveryOption,
       required final String orderType,
       required final User user,
       required final double zpSubtotal,
@@ -1266,6 +1503,8 @@ abstract class _OrderEligibilityState extends OrderEligibilityState {
   CustomerCodeInfo get customerCodeInfo;
   @override
   ShipToInfo get shipInfo;
+  @override
+  DeliveryOption get deliveryOption;
   @override
   String get orderType;
   @override

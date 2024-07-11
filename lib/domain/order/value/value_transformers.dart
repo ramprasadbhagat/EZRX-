@@ -276,3 +276,35 @@ String getTenderOrderReasonTitle(String status) {
 
 bool checkIfValueIsNotRequired(String value) =>
     isEqualsIgnoreCase(value, 'NOT REQUIRED');
+
+String getDeliveryOptionTitle(String value) {
+  final result = {
+    'standardDelivery': 'Standard delivery',
+    'requestDeliveryDate': 'Request delivery date',
+    'urgentDelivery': 'Urgent delivery',
+  };
+
+  return result[value] ?? '';
+}
+
+String getDeliveryOptionIcon(String value) {
+  final result = {
+    'standardDelivery': SvgImage.standardDeliveryIcon,
+    'requestDeliveryDate': SvgImage.requestDateDeliveryIcon,
+    'urgentDelivery': SvgImage.urgentDeliveryIcon,
+  };
+
+  return result[value] ?? '';
+}
+
+String getDeliveryOptionDescription(String value) {
+  final result = {
+    'standardDelivery': 'Receive your order in <5> business days.',
+    'requestDeliveryDate':
+        'Schedule your delivery date. Delivery can only be requested on available days on the calendar.',
+    'urgentDelivery':
+        'Get your items delivered in the fastest time possible. Only available on business days.',
+  };
+
+  return result[value] ?? '';
+}
