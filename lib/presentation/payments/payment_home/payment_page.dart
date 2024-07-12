@@ -107,13 +107,14 @@ class _PaymentPageState extends State<PaymentPage> {
               customerCodeInfo: state.customerCodeInfo,
             ),
           );
-
-      context.read<MPSoaBloc>().add(
-            SoaEvent.fetch(
-              customerCodeInfo: state.customerCodeInfo,
-              salesOrg: state.salesOrg,
-            ),
-          );
+      if (state.salesOrgConfigs.statementOfAccountEnabled) {
+        context.read<MPSoaBloc>().add(
+              SoaEvent.fetch(
+                customerCodeInfo: state.customerCodeInfo,
+                salesOrg: state.salesOrg,
+              ),
+            );
+      }
 
       //============================================================
       // ZP Account Summary
@@ -203,13 +204,14 @@ class _PaymentPageState extends State<PaymentPage> {
               customerCodeInfo: state.customerCodeInfo,
             ),
           );
-
-      context.read<ZPSoaBloc>().add(
-            SoaEvent.fetch(
-              customerCodeInfo: state.customerCodeInfo,
-              salesOrg: state.salesOrg,
-            ),
-          );
+      if (state.salesOrgConfigs.statementOfAccountEnabled) {
+        context.read<ZPSoaBloc>().add(
+              SoaEvent.fetch(
+                customerCodeInfo: state.customerCodeInfo,
+                salesOrg: state.salesOrg,
+              ),
+            );
+      }
 
       //============================================================
       // ZP Account Summary
@@ -392,12 +394,14 @@ class _PaymentPageState extends State<PaymentPage> {
             salesOrg: eligibilityState.salesOrganisation.salesOrg,
           ),
         );
-    context.soaBloc(widget.isMarketPlace).add(
-          SoaEvent.fetch(
-            customerCodeInfo: eligibilityState.customerCodeInfo,
-            salesOrg: eligibilityState.salesOrg,
-          ),
-        );
+    if (eligibilityState.salesOrgConfigs.statementOfAccountEnabled) {
+      context.soaBloc(widget.isMarketPlace).add(
+            SoaEvent.fetch(
+              customerCodeInfo: eligibilityState.customerCodeInfo,
+              salesOrg: eligibilityState.salesOrg,
+            ),
+          );
+    }
   }
 }
 

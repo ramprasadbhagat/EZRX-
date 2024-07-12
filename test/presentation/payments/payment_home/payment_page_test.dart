@@ -195,7 +195,8 @@ void main() {
     when(() => newPaymentBlocMock.state).thenReturn(NewPaymentState.initial());
     when(() => autoRouterMock.currentPath).thenReturn(PaymentPageRoute.name);
     when(() => autoRouterMock.stack).thenReturn([MaterialPageXMock()]);
-    when(() => autoRouterMock.maybePop()).thenAnswer((invocation) async => true);
+    when(() => autoRouterMock.maybePop())
+        .thenAnswer((invocation) async => true);
     when(() => mpSoaBloc.state).thenReturn(SoaState.initial());
     when(() => mpAccountSummaryBloc.state)
         .thenReturn(AccountSummaryState.initial());
@@ -1518,6 +1519,11 @@ void main() {
 
   group('Refresh', () {
     testWidgets('ZP payment', (WidgetTester tester) async {
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrgConfigs: fakeMYSalesOrgConfigs,
+        ),
+      );
       await tester.pumpWidget(getWidget());
       await tester.pumpAndSettle();
       verify(
@@ -1573,7 +1579,70 @@ void main() {
       ).called(1);
     });
 
+    testWidgets(
+        'ZP payment when statementOfAccountEnabled is off in salesOrgConfig',
+        (WidgetTester tester) async {
+      await tester.pumpWidget(getWidget());
+      await tester.pumpAndSettle();
+      verifyNever(
+        () => soaBloc.add(
+          SoaEvent.fetch(
+            customerCodeInfo: CustomerCodeInfo.empty(),
+            salesOrg: SalesOrg(''),
+          ),
+        ),
+      );
+
+      verify(
+        () => accountSummaryBlocMock.add(
+          AccountSummaryEvent.fetchCreditSummary(
+            custCode: '',
+            salesOrg: SalesOrg(''),
+          ),
+        ),
+      ).called(1);
+
+      verify(
+        () => accountSummaryBlocMock.add(
+          AccountSummaryEvent.fetchInvoiceSummary(
+            custCode: '',
+            salesOrg: SalesOrg(''),
+          ),
+        ),
+      ).called(1);
+
+      verify(
+        () => paymentInProgressBloc.add(
+          PaymentInProgressEvent.fetch(
+            customerCodeInfo: CustomerCodeInfo.empty(),
+            salesOrganization: SalesOrganisation.empty(),
+          ),
+        ),
+      ).called(1);
+
+      await tester.fling(paymentHome, const Offset(0.0, 300.0), 800.0);
+      await tester.pump();
+      expect(
+        find.byType(RefreshProgressIndicator),
+        findsOneWidget,
+      );
+      await tester.pumpAndSettle();
+      verifyNever(
+        () => soaBloc.add(
+          SoaEvent.fetch(
+            customerCodeInfo: CustomerCodeInfo.empty(),
+            salesOrg: SalesOrg(''),
+          ),
+        ),
+      );
+    });
+
     testWidgets('MP payment', (WidgetTester tester) async {
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          salesOrgConfigs: fakeMYSalesOrgConfigs,
+        ),
+      );
       await tester.pumpWidget(getWidget(isMarketPlace: true));
       await tester.pumpAndSettle();
       verify(
@@ -1627,6 +1696,64 @@ void main() {
           ),
         ),
       ).called(1);
+    });
+
+    testWidgets(
+        'MP payment when statementOfAccountEnabled is off in salesOrgConfig',
+        (WidgetTester tester) async {
+      await tester.pumpWidget(getWidget(isMarketPlace: true));
+      await tester.pumpAndSettle();
+      verifyNever(
+        () => mpSoaBloc.add(
+          SoaEvent.fetch(
+            customerCodeInfo: CustomerCodeInfo.empty(),
+            salesOrg: SalesOrg(''),
+          ),
+        ),
+      );
+
+      verify(
+        () => mpAccountSummaryBloc.add(
+          AccountSummaryEvent.fetchCreditSummary(
+            custCode: '',
+            salesOrg: SalesOrg(''),
+          ),
+        ),
+      ).called(1);
+
+      verify(
+        () => mpAccountSummaryBloc.add(
+          AccountSummaryEvent.fetchInvoiceSummary(
+            custCode: '',
+            salesOrg: SalesOrg(''),
+          ),
+        ),
+      ).called(1);
+
+      verify(
+        () => mpPaymentInProgressBloc.add(
+          PaymentInProgressEvent.fetch(
+            customerCodeInfo: CustomerCodeInfo.empty(),
+            salesOrganization: SalesOrganisation.empty(),
+          ),
+        ),
+      ).called(1);
+
+      await tester.fling(paymentHome, const Offset(0.0, 300.0), 800.0);
+      await tester.pump();
+      expect(
+        find.byType(RefreshProgressIndicator),
+        findsOneWidget,
+      );
+      await tester.pumpAndSettle();
+      verifyNever(
+        () => mpSoaBloc.add(
+          SoaEvent.fetch(
+            customerCodeInfo: CustomerCodeInfo.empty(),
+            salesOrg: SalesOrg(''),
+          ),
+        ),
+      );
     });
   });
 }
