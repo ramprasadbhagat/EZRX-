@@ -11,7 +11,7 @@ class _RequestAmountRangeInput extends StatelessWidget {
       children: [
         const _AmountValueFromFilter(),
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 8),
+          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 10),
           child: Text(
             '-',
             style: Theme.of(context).textTheme.titleSmall,
@@ -25,6 +25,7 @@ class _RequestAmountRangeInput extends StatelessWidget {
 
 class _AmountValueToFilter extends StatelessWidget {
   const _AmountValueToFilter();
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<ViewByRequestReturnFilterBloc,
@@ -63,6 +64,7 @@ class _AmountValueToFilter extends StatelessWidget {
 
 class _AmountValueFromFilter extends StatelessWidget {
   const _AmountValueFromFilter();
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<ViewByRequestReturnFilterBloc,

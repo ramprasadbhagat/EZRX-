@@ -15,6 +15,7 @@ class DropdownWithLabel extends StatelessWidget {
     this.mandatory = false,
     required this.validator,
   });
+
   final Key fieldKey;
   final String labelText;
   final ValueChanged<String?> onChanged;
@@ -24,6 +25,7 @@ class DropdownWithLabel extends StatelessWidget {
   final bool mandatory;
   final List<DropdownMenuItem<String>> items;
   final String? Function(String?) validator;
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -51,8 +53,14 @@ class DropdownWithLabel extends StatelessWidget {
           isExpanded: true,
           decoration: InputDecoration(
             enabled: isEnabled,
-            contentPadding: const EdgeInsets.fromLTRB(12, 10, 12, 10),
-            hintText: hintText,
+            contentPadding: const EdgeInsets.fromLTRB(0, 10, 12, 10),
+          ),
+          hint: Text(
+            hintText,
+            style: Theme.of(context)
+                .textTheme
+                .titleMedium
+                ?.copyWith(color: ZPColors.lightGray),
           ),
           items: items,
           onChanged: onChanged,

@@ -12,7 +12,7 @@ class _RequestAmountRangeInput extends StatelessWidget {
       children: [
         const _AmountValueFromFilter(),
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 8),
+          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 10),
           child: Text(
             '-',
             style: Theme.of(context).textTheme.titleSmall,

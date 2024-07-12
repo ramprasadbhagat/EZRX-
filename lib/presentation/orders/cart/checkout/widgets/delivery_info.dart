@@ -2,6 +2,7 @@ part of 'package:ezrxmobile/presentation/orders/cart/checkout/checkout_page.dart
 
 class _DeliveryInfo extends StatelessWidget {
   final Map<DeliveryInfoLabel, FocusNode> focusNodes;
+
   const _DeliveryInfo({
     required this.focusNodes,
   });
@@ -338,9 +339,7 @@ class _PaymentTerm extends StatelessWidget {
                     focusNode: focusNode,
                     key: WidgetKeys.paymentTermDropdownKey,
                     isExpanded: true,
-                    decoration: InputDecoration(
-                      hintText: context.tr('Select one'),
-                    ),
+                    hint: Text(context.tr('Select one')),
                     icon: isLoading
                         ? const SizedBox(
                             height: 15,

@@ -158,7 +158,7 @@ class AllCreditsFilterBottomSheet extends StatelessWidget {
                               ),
                             ),
                             Padding(
-                              padding: const EdgeInsets.all(8),
+                              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 10),
                               child: Text(
                                 '-',
                                 style: Theme.of(context).textTheme.titleSmall,

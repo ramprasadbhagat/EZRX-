@@ -26,6 +26,7 @@ class CustomNumericTextField extends StatefulWidget {
     this.textAlign = TextAlign.start,
     this.style,
   });
+
   final Key fieldKey;
   final String? labelText;
   final TextEditingController? controller;
@@ -175,7 +176,10 @@ class _CustomNumericTextFieldState extends State<CustomNumericTextField> {
       keyboardType: widget.keyboardType,
       decoration: widget.decoration.copyWith(
         contentPadding: const EdgeInsets.fromLTRB(0, 10, 15, 10),
-        prefix: const SizedBox(width: 15),
+        prefixIcon: widget.decoration.prefixIcon ?? const SizedBox(width: 15),
+        prefixIconConstraints: widget.decoration.prefixIcon == null
+            ? const BoxConstraints(maxWidth: 15)
+            : null,
       ),
       onChanged: widget.onChanged,
       validator: (value) => widget.validator?.call(value),
