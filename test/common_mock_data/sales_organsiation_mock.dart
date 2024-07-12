@@ -29,7 +29,6 @@ final fakeKHSalesOrg = SalesOrg(_fakeKHSalesOrgId);
 final fakeMMSalesOrg = SalesOrg(_fakeMMSalesOrgId);
 final fakeHKSalesOrg = SalesOrg(_fakeHKSalesOrgId);
 final fakePhMDISalesOrg = SalesOrg(_fakePhMDISalesOrgId);
-final fakeHKSalesOrg = SalesOrg('1700');
 
 final fakeEmptySalesOrganisation = SalesOrganisation.empty();
 
