@@ -452,6 +452,26 @@ void main() {
       final result = roleType.isClientUser;
       expect(result, true);
     });
+
+    group('ezReach role -', () {
+      test('is salesRep when role is admin', () {
+        expect(RoleType('root_admin').getEZReachRoleType, 'salesrep');
+        expect(RoleType('zp_admin').getEZReachRoleType, 'salesrep');
+      });
+
+      test('is salesRep when role is sales rep', () {
+        expect(RoleType('internal_sales_rep').getEZReachRoleType, 'salesrep');
+        expect(RoleType('external_sales_rep').getEZReachRoleType, 'salesrep');
+      });
+
+      test('is customer by default', () {
+        expect(RoleType('client_admin').getEZReachRoleType, 'customer');
+        expect(RoleType('client_user').getEZReachRoleType, 'customer');
+        expect(RoleType('user').getEZReachRoleType, 'customer');
+        expect(RoleType('').getEZReachRoleType, 'customer');
+        expect(RoleType('return_approver').getEZReachRoleType, 'customer');
+      });
+    });
   });
 
   group('Currency value object', () {
