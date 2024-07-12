@@ -347,23 +347,6 @@ class WidgetKeys {
       Key('comboDealMaterialItemNextTierDiscount');
 
   //============================================================
-  //  PolicyConfiguration page Keys
-  //============================================================
-  static const Key policyConfigurationLoader = Key('LoaderImage');
-  static const Key policyConfigSearchBuilder = Key('policyConfigSearchBuilder');
-  static Key policyConfigurationSearch(String searchKey) =>
-      Key('policyConfigurationSearch$searchKey');
-
-  //============================================================
-  //  UserRestrictionList page Keys
-  //============================================================
-  static const Key userRestrictionListPage = Key('UserRestrictionListPage');
-  static const Key userRestrictionListLoader = Key('LoaderImage');
-  static const Key userRestrictionList = Key('userRestrictionList');
-  static Key userRestrictionTile(String userName) =>
-      Key('userRestrictionTile-$userName');
-
-  //============================================================
   //  SearchBar Keys
   //============================================================
   static const Key clearIconKey = Key('clearIconKey');

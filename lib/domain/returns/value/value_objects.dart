@@ -7,21 +7,6 @@ import 'package:ezrxmobile/domain/core/value/value_transformers.dart';
 import 'package:ezrxmobile/domain/core/value/value_validators.dart';
 import 'package:ezrxmobile/domain/returns/value/value_transformers.dart';
 
-class ApprovalLimit extends ValueObject<int> {
-  @override
-  final Either<ValueFailure<int>, int> value;
-
-  factory ApprovalLimit(int input) {
-    return ApprovalLimit._(Right(input));
-  }
-
-  String get parsedValue {
-    return value.getOrElse(() => 0).toString();
-  }
-
-  const ApprovalLimit._(this.value);
-}
-
 class RefundTotal extends ValueObject<String> {
   @override
   final Either<ValueFailure<String>, String> value;

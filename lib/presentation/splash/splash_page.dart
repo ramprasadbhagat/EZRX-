@@ -54,15 +54,11 @@ import 'package:ezrxmobile/application/payments/credit_and_invoice_details/credi
 import 'package:ezrxmobile/application/payments/download_payment_attachments/download_payment_attachments_bloc.dart';
 import 'package:ezrxmobile/application/payments/payment_summary_details/payment_summary_details_bloc.dart';
 import 'package:ezrxmobile/application/product_image/product_image_bloc.dart';
-import 'package:ezrxmobile/application/returns/approver_actions/filter/return_approver_filter_bloc.dart';
-import 'package:ezrxmobile/application/returns/approver_actions/return_approver_bloc.dart';
 import 'package:ezrxmobile/application/returns/new_request/return_items/return_items_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_list/view_by_item/return_list_by_item_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_list/view_by_request/details/return_details_by_request_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_list/view_by_request/return_list_by_request_bloc.dart';
-import 'package:ezrxmobile/application/returns/return_request_type_code/return_request_type_code_bloc.dart';
 import 'package:ezrxmobile/application/returns/usage_code/usage_code_bloc.dart';
-import 'package:ezrxmobile/application/returns/user_restriction/user_restriction_list_bloc.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
@@ -792,37 +788,13 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
 
               if (!enableReturn) return;
 
-              if (state.user.role.type.isReturnApproverAccount) {
-                context.read<ReturnApproverBloc>().add(
-                      ReturnApproverEvent.fetch(
-                        user: state.user,
-                        approverReturnFilter: context
-                            .read<ReturnApproverFilterBloc>()
-                            .state
-                            .approverReturnFilter,
-                      ),
-                    );
-              }
-
               context.read<UsageCodeBloc>().add(
                     UsageCodeEvent.fetch(
                       salesOrg: state.salesOrganisation.salesOrg,
                     ),
                   );
 
-              context.read<ReturnRequestTypeCodeBloc>().add(
-                    ReturnRequestTypeCodeEvent.fetch(
-                      salesOrganisation: state.salesOrganisation,
-                    ),
-                  );
-
               if (!state.user.role.type.hasReturnsAdminAccess) return;
-
-              context.read<UserRestrictionListBloc>().add(
-                    UserRestrictionListEvent.fetch(
-                      salesOrg: state.salesOrganisation.salesOrg,
-                    ),
-                  );
             }
             /**
              * TODO: Need to revisit when special order type will be implemented also we removed the isOrderTypeEnable dependency

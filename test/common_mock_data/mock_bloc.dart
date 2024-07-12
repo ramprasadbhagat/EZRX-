@@ -59,15 +59,12 @@ import 'package:ezrxmobile/application/payments/soa/soa_bloc.dart';
 import 'package:ezrxmobile/application/payments/soa/soa_filter/soa_filter_bloc.dart';
 import 'package:ezrxmobile/application/product_image/product_image_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
-import 'package:ezrxmobile/application/returns/approver_actions/filter/return_approver_filter_bloc.dart';
-import 'package:ezrxmobile/application/returns/approver_actions/return_approver_bloc.dart';
 import 'package:ezrxmobile/application/returns/new_request/return_items/filter/return_items_filter_bloc.dart';
 import 'package:ezrxmobile/application/returns/new_request/return_items/return_items_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_list/view_by_item/return_list_by_item_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_list/view_by_item/view_by_item_filter/view_by_item_return_filter_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_list/view_by_request/details/return_details_by_request_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_list/view_by_request/return_list_by_request_bloc.dart';
-import 'package:ezrxmobile/application/returns/return_request_type_code/return_request_type_code_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_summary_details/return_summary_details_bloc.dart';
 import 'package:ezrxmobile/application/returns/usage_code/usage_code_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
@@ -90,7 +87,6 @@ import 'package:ezrxmobile/application/payments/new_payment/outstanding_invoices
 import 'package:ezrxmobile/application/payments/download_payment_attachments/download_payment_attachments_bloc.dart';
 import 'package:ezrxmobile/application/payments/new_payment/available_credits/filter/available_credit_filter_bloc.dart';
 import 'package:ezrxmobile/application/payments/new_payment/outstanding_invoices/filter/outstanding_invoice_filter_bloc.dart';
-import 'package:ezrxmobile/application/returns/user_restriction/user_restriction_list_bloc.dart';
 
 class CustomerCodeBlocMock
     extends MockBloc<CustomerCodeEvent, CustomerCodeState>
@@ -131,10 +127,6 @@ class SalesRepBlocMock extends MockBloc<SalesRepEvent, SalesRepState>
 
 class PaymentTermBlocMock extends MockBloc<PaymentTermEvent, PaymentTermState>
     implements PaymentTermBloc {}
-
-class UserRestrictionListBlocMock
-    extends MockBloc<UserRestrictionListEvent, UserRestrictionListState>
-    implements UserRestrictionListBloc {}
 
 class SettingMockBloc extends MockBloc<SettingEvent, SettingState>
     implements SettingBloc {}
@@ -412,18 +404,6 @@ class ReturnRequestAttachmentBlocMock
 
 class UsageCodeBlocMock extends MockBloc<UsageCodeEvent, UsageCodeState>
     implements UsageCodeBloc {}
-
-class ReturnRequestTypeCodeBlocMock
-    extends MockBloc<ReturnRequestTypeCodeEvent, ReturnRequestTypeCodeState>
-    implements ReturnRequestTypeCodeBloc {}
-
-class ReturnApproverBlocMock
-    extends MockBloc<ReturnApproverEvent, ReturnApproverState>
-    implements ReturnApproverBloc {}
-
-class ReturnApproverFilterBlocMock
-    extends MockBloc<ReturnApproverFilterEvent, ReturnApproverFilterState>
-    implements ReturnApproverFilterBloc {}
 
 class ReturnListByItemBlocMock
     extends MockBloc<ReturnListByItemEvent, ReturnListByItemState>

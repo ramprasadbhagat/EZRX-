@@ -50,14 +50,10 @@ import 'package:ezrxmobile/application/payments/new_payment/available_credits/av
 import 'package:ezrxmobile/application/payments/new_payment/outstanding_invoices/outstanding_invoices_bloc.dart';
 import 'package:ezrxmobile/application/payments/payment_summary_details/payment_summary_details_bloc.dart';
 import 'package:ezrxmobile/application/product_image/product_image_bloc.dart';
-import 'package:ezrxmobile/application/returns/approver_actions/filter/return_approver_filter_bloc.dart';
-import 'package:ezrxmobile/application/returns/approver_actions/return_approver_bloc.dart';
 import 'package:ezrxmobile/application/returns/new_request/return_items/return_items_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_list/view_by_item/return_list_by_item_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_list/view_by_request/return_list_by_request_bloc.dart';
-import 'package:ezrxmobile/application/returns/return_request_type_code/return_request_type_code_bloc.dart';
 import 'package:ezrxmobile/application/returns/usage_code/usage_code_bloc.dart';
-import 'package:ezrxmobile/application/returns/user_restriction/user_restriction_list_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_config.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/full_name.dart';
@@ -118,9 +114,7 @@ void main() {
   late EligibilityBloc eligibilityBlocMock;
   late AppRouter autoRouterMock;
   late AboutUsBloc aboutUsBlocMock;
-  late UserRestrictionListBloc userRestrictionListBlocMock;
   late UsageCodeBloc usageCodeBlocMock;
-  late ReturnRequestTypeCodeBloc returnRequestTypeCodeBlocMock;
   late MaterialListBloc materialListBlocMock;
   late ScanMaterialInfoBloc scanMaterialInfoMockBloc;
   late SettingBloc settingBlocMock;
@@ -132,8 +126,6 @@ void main() {
   late LoginFormBloc loginFormBloc;
   late ProductImageBloc productImageBloc;
   late OrderDocumentTypeBloc orderDocumentTypeMock;
-  late ReturnApproverBloc returnApproverBlocMock;
-  late ReturnApproverFilterBlocMock returnApproverFilterBlocMock;
   late AnnouncementBloc announcementBlocMock;
   late AnnouncementInfoBloc announcementInfoBlocMock;
   late RemoteConfigService remoteConfigServiceMock;
@@ -219,15 +211,11 @@ void main() {
       cartBlocMock = CartBlocMock();
       paymentCustomerInformationBlocMock = PaymentCustomerInformationBlocMock();
       paymentTermBlocMock = PaymentTermBlocMock();
-      userRestrictionListBlocMock = UserRestrictionListBlocMock();
       eligibilityBlocMock = EligibilityBlocMock();
       autoRouterMock = locator<AppRouter>();
       usageCodeBlocMock = UsageCodeBlocMock();
-      returnRequestTypeCodeBlocMock = ReturnRequestTypeCodeBlocMock();
       materialListBlocMock = MaterialListBlocMock();
       materialFilterBlocMock = MaterialFilterBlocMock();
-      returnApproverBlocMock = ReturnApproverBlocMock();
-      returnApproverFilterBlocMock = ReturnApproverFilterBlocMock();
       announcementBlocMock = AnnouncementBlocMock();
       announcementInfoBlocMock = AnnouncementInfoBlocMock();
       deepLinkingBlocMock = DeepLinkingBlocMock();
@@ -287,22 +275,13 @@ void main() {
           .thenReturn(PaymentTermState.initial());
       when(() => eligibilityBlocMock.state)
           .thenReturn(EligibilityState.initial());
-      when(() => userRestrictionListBlocMock.state)
-          .thenReturn(UserRestrictionListState.initial());
       when(() => usageCodeBlocMock.state).thenReturn(UsageCodeState.initial());
-      when(() => returnRequestTypeCodeBlocMock.state)
-          .thenReturn(ReturnRequestTypeCodeState.initial());
       when(() => materialListBlocMock.state)
           .thenReturn(MaterialListState.initial());
       when(() => materialFilterBlocMock.state)
           .thenReturn(MaterialFilterState.initial());
-      when(() => returnApproverBlocMock.state)
-          .thenReturn(ReturnApproverState.initial());
       when(() => scanMaterialInfoMockBloc.state)
           .thenReturn(ScanMaterialInfoState.initial());
-
-      when(() => returnApproverFilterBlocMock.state)
-          .thenReturn(ReturnApproverFilterState.initial());
       when(() => announcementBlocMock.state)
           .thenReturn(AnnouncementState.initial());
       when(() => deepLinkingBlocMock.state)
@@ -387,9 +366,6 @@ void main() {
             BlocProvider<AboutUsBloc>(
               create: (context) => aboutUsBlocMock,
             ),
-            BlocProvider<UserRestrictionListBloc>(
-              create: (context) => userRestrictionListBlocMock,
-            ),
             BlocProvider<SalesRepBloc>(create: (context) => salesRepBlocMock),
             BlocProvider<AupTcBloc>(create: (context) => aupTcBlocMock),
             BlocProvider<CartBloc>(create: (context) => cartBlocMock),
@@ -408,20 +384,11 @@ void main() {
             BlocProvider<UsageCodeBloc>(
               create: (context) => usageCodeBlocMock,
             ),
-            BlocProvider<ReturnRequestTypeCodeBloc>(
-              create: (context) => returnRequestTypeCodeBlocMock,
-            ),
             BlocProvider<MaterialListBloc>(
               create: (context) => materialListBlocMock,
             ),
             BlocProvider<MaterialFilterBloc>(
               create: (context) => materialFilterBlocMock,
-            ),
-            BlocProvider<ReturnApproverBloc>(
-              create: (context) => returnApproverBlocMock,
-            ),
-            BlocProvider<ReturnApproverFilterBloc>(
-              create: (context) => returnApproverFilterBlocMock,
             ),
             BlocProvider<AnnouncementBloc>(
               create: (context) => announcementBlocMock,
@@ -857,13 +824,6 @@ void main() {
 
       await getWidget(tester);
       await tester.pumpAndSettle(const Duration(milliseconds: 500));
-      verify(
-        () => userRestrictionListBlocMock.add(
-          UserRestrictionListEvent.fetch(
-            salesOrg: fakeTWSalesOrganisation.salesOrg,
-          ),
-        ),
-      ).called(1);
 
       expect(find.byType(Scaffold), findsOneWidget);
     });
@@ -933,29 +893,6 @@ void main() {
             shipToInfo: eligibilityBlocMock.state.shipToInfo,
             selectedMaterialFilter: materialFilterBlocMock.state.materialFilter,
             user: fakeClientUser,
-          ),
-        ),
-      ).called(2);
-    });
-
-    testWidgets('Return Request Type fetch on Eligibility Change - Success',
-        (tester) async {
-      final expectedStates = [
-        EligibilityState.initial().copyWith(
-          salesOrganisation: salesOrgBlocMock.state.salesOrganisation.copyWith(
-            salesOrg: SalesOrg('123'),
-          ),
-        ),
-      ];
-      whenListen(eligibilityBlocMock, Stream.fromIterable(expectedStates));
-
-      await getWidget(tester);
-      await tester.pump();
-
-      verify(
-        () => returnRequestTypeCodeBlocMock.add(
-          ReturnRequestTypeCodeEvent.fetch(
-            salesOrganisation: salesOrgBlocMock.state.salesOrganisation,
           ),
         ),
       ).called(2);

@@ -50,9 +50,7 @@ import 'package:ezrxmobile/application/payments/payment_summary_details/payment_
 import 'package:ezrxmobile/application/payments/soa/soa_bloc.dart';
 import 'package:ezrxmobile/application/payments/soa/soa_filter/soa_filter_bloc.dart';
 import 'package:ezrxmobile/application/product_image/product_image_bloc.dart';
-import 'package:ezrxmobile/application/returns/approver_actions/filter/return_approver_filter_bloc.dart';
 import 'package:ezrxmobile/application/order/tender_contract/tender_contract_list_bloc.dart';
-import 'package:ezrxmobile/application/returns/approver_actions/return_approver_bloc.dart';
 import 'package:ezrxmobile/application/returns/new_request/attachments/return_request_attachment_bloc.dart';
 import 'package:ezrxmobile/application/returns/new_request/new_request_bloc.dart';
 import 'package:ezrxmobile/application/returns/new_request/return_items/filter/return_items_filter_bloc.dart';
@@ -101,7 +99,6 @@ import 'package:ezrxmobile/application/order/order_summary/order_summary_bloc.da
 import 'package:ezrxmobile/application/order/payment_customer_information/payment_customer_information_bloc.dart';
 import 'package:ezrxmobile/application/order/payment_term/payment_term_bloc.dart';
 import 'package:ezrxmobile/application/returns/usage_code/usage_code_bloc.dart';
-import 'package:ezrxmobile/application/returns/user_restriction/user_restriction_list_bloc.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/infrastructure/core/firebase/analytics.dart';
 import 'package:ezrxmobile/infrastructure/core/firebase/crashlytics.dart';
@@ -119,9 +116,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:sizer/sizer.dart';
 import 'package:upgrader/upgrader.dart';
-import 'package:ezrxmobile/application/returns/return_request_type_code/return_request_type_code_bloc.dart';
 import 'package:ezrxmobile/application/order/po_attachment/po_attachment_bloc.dart';
-import 'package:ezrxmobile/application/returns/user_restriction_details/user_restriction_details_bloc.dart';
 import 'package:scandit_flutter_datacapture_barcode/scandit_flutter_datacapture_barcode.dart';
 import 'package:ezrxmobile/infrastructure/core/material_info_scanner/material_info_scanner.dart';
 import 'package:wakelock/wakelock.dart';
@@ -260,9 +255,6 @@ class App extends StatelessWidget {
         BlocProvider<CustomerCodeBloc>(
           create: (context) => locator<CustomerCodeBloc>(),
         ),
-        BlocProvider<UserRestrictionListBloc>(
-          create: (context) => locator<UserRestrictionListBloc>(),
-        ),
         BlocProvider<EligibilityBloc>(
           create: (context) => locator<EligibilityBloc>(),
         ),
@@ -331,18 +323,6 @@ class App extends StatelessWidget {
         ),
         BlocProvider<UsageCodeBloc>(
           create: (context) => locator<UsageCodeBloc>(),
-        ),
-        BlocProvider<ReturnRequestTypeCodeBloc>(
-          create: (context) => locator<ReturnRequestTypeCodeBloc>(),
-        ),
-        BlocProvider<UserRestrictionDetailsBloc>(
-          create: (context) => locator<UserRestrictionDetailsBloc>(),
-        ),
-        BlocProvider<ReturnApproverBloc>(
-          create: (context) => locator<ReturnApproverBloc>(),
-        ),
-        BlocProvider<ReturnApproverFilterBloc>(
-          create: (context) => locator<ReturnApproverFilterBloc>(),
         ),
         BlocProvider<ComboDealListBloc>(
           create: (context) => locator<ComboDealListBloc>(),
