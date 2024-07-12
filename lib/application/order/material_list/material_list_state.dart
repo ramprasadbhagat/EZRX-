@@ -3,6 +3,7 @@ part of 'material_list_bloc.dart';
 @freezed
 class MaterialListState with _$MaterialListState {
   const MaterialListState._();
+
   const factory MaterialListState({
     required SalesOrganisation salesOrganisation,
     required SalesOrganisationConfigs configs,
@@ -39,5 +40,6 @@ class MaterialListState with _$MaterialListState {
 
   bool get isFilterSelected => selectedMaterialFilter != MaterialFilter.empty();
 
-  bool get displaySearchResult => isFilterSelected || searchKey.isValid();
+  bool get displaySearchResult =>
+      isFilterSelected || searchKey.validateNotEmpty;
 }

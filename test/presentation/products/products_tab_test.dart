@@ -233,6 +233,28 @@ void main() {
       );
 
       testWidgets(
+        '=> Should display "All Product" by default',
+        (tester) async {
+          final expectedState = [
+            MaterialListState.initial().copyWith(
+              isFetching: true,
+            ),
+            MaterialListState.initial().copyWith(
+              materialList: materialResponseMock.products,
+            ),
+          ];
+          whenListen(
+            materialListBlocMock,
+            Stream.fromIterable(expectedState),
+          );
+          await tester.pumpWidget(getScopedWidget());
+          await tester.pump();
+
+          expect(find.text('All products'), findsOneWidget);
+        },
+      );
+
+      testWidgets(
         '=> Test reload list',
         (tester) async {
           when(() => materialListBlocMock.state).thenReturn(
