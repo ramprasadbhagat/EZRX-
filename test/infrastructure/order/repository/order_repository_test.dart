@@ -51,6 +51,7 @@ import 'package:ezrxmobile/infrastructure/order/datasource/stock_info_remote.dar
 import 'package:ezrxmobile/infrastructure/order/datasource/material_list_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/view_by_order_details_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/view_by_order_details_remote.dart';
+import 'package:upgrader/upgrader.dart';
 
 import '../../../common_mock_data/customer_code_mock.dart';
 import '../../../common_mock_data/mock_other.dart';
@@ -115,6 +116,7 @@ void main() {
   late MaterialBannerStorage materialBannerStorageMock;
   late MixpanelService mixpanelService;
   late ClevertapService clevertapService;
+  final upgrader = Upgrader();
 
   setUpAll(() async {
     WidgetsFlutterBinding.ensureInitialized();
@@ -152,6 +154,7 @@ void main() {
       materialBannerStorage: materialBannerStorageMock,
       mixpanelService: mixpanelService,
       clevertapService: clevertapService,
+      upgrader: upgrader,
     );
     final materialListResponse =
         await MaterialListLocalDataSource().getProductList();
@@ -1616,6 +1619,11 @@ void main() {
                   item.requestedDeliveryDate.dateOrNaString,
               TrackingProps.lineNumber:
                   item.orderHistoryDetailsOrderItem.length,
+              TrackingProps.forceUpgradeVersionInfo:
+                  upgrader.state.versionInfo.toString(),
+              TrackingProps.forceUpgradeAlertTooSoon: upgrader.isTooSoon(),
+              TrackingProps.forceUpgradeIgnoredAlert:
+                  upgrader.alreadyIgnoredThisVersion(),
             },
           ),
         ).called(1);

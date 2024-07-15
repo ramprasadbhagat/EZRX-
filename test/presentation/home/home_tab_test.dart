@@ -55,6 +55,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
+import 'package:upgrader/upgrader.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 
 import '../../common_mock_data/customer_code_mock.dart';
@@ -125,6 +126,9 @@ void main() {
     bundles = (await MaterialListLocalDataSource().getProductList()).products;
     customerLicense =
         await CustomerLicenseLocalDataSource().getCustomerLicense();
+    locator.registerLazySingleton(
+      () => Upgrader(),
+    );
   });
 
   group('Home Tab Screen', () {

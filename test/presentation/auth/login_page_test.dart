@@ -49,6 +49,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
+import 'package:upgrader/upgrader.dart';
 
 import '../../utils/material_frame_wrapper.dart';
 import '../../utils/widget_utils.dart';
@@ -197,6 +198,9 @@ void main() {
       () => MixpanelService(config: locator<Config>()),
     );
     locator.registerLazySingleton(() => AppRouter());
+    locator.registerLazySingleton(
+      () => Upgrader(),
+    );
   });
 
   ///////////////////////////Finder/////////////////////////////////////////////

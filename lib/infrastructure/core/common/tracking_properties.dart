@@ -74,4 +74,12 @@ class TrackingProps {
   static String paymentGatewaySuccess = 'payment_gateway_success';
   static String searchMethod = 'search_method';
   static String searchResults = 'search_results';
+  static String screensPlaced = 'screens_placed';
+  static String forceUpgradeVersionInfo = 'force_upgrade_version_info';
+  static String forceUpgradePackageInfo = 'force_upgrade_package_info';
+  static String forceUpgradeShouldDisplayUpgrade =
+      'force_upgrade_should_display_upgrade';
+  static String forceUpgradeBlocked = 'force_upgrade_blocked';
+  static String forceUpgradeAlertTooSoon = 'force_upgrade_alert_too_soon';
+  static String forceUpgradeIgnoredAlert = 'force_upgrade_ignored_alert';
 }

@@ -61,4 +61,5 @@ class TrackingEvents {
       'Generate Payment Advice Success';
   static String generatePaymentAdviceFailed = 'Generate Payment Advice Failed';
   static String payNowClicked = 'Pay Now Clicked';
+  static String forceUpgradeCheck = 'Force Upgrade Check';
 }

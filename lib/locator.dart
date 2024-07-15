@@ -868,6 +868,7 @@ void setupLocator() {
       materialBannerStorage: locator<MaterialBannerStorage>(),
       mixpanelService: locator<MixpanelService>(),
       clevertapService: locator<ClevertapService>(),
+      upgrader: locator<Upgrader>(),
     ),
   );
 

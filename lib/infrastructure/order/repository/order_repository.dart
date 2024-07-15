@@ -35,6 +35,7 @@ import 'package:ezrxmobile/infrastructure/order/datasource/stock_info_remote.dar
 import 'package:ezrxmobile/infrastructure/order/datasource/view_by_order_details_local.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/view_by_order_details_remote.dart';
 import 'package:ezrxmobile/infrastructure/order/dtos/submit_order_dto.dart';
+import 'package:upgrader/upgrader.dart';
 
 class OrderRepository implements IOrderRepository {
   final Config config;
@@ -50,6 +51,7 @@ class OrderRepository implements IOrderRepository {
   final RemoteConfigService remoteConfigService;
   final MixpanelService mixpanelService;
   final ClevertapService clevertapService;
+  final Upgrader upgrader;
 
   OrderRepository({
     required this.config,
@@ -65,6 +67,7 @@ class OrderRepository implements IOrderRepository {
     required this.materialBannerStorage,
     required this.mixpanelService,
     required this.clevertapService,
+    required this.upgrader,
   });
 
   @override
@@ -242,6 +245,11 @@ class OrderRepository implements IOrderRepository {
             orderDetail.requestedDeliveryDate.dateOrNaString,
         TrackingProps.lineNumber:
             orderDetail.orderHistoryDetailsOrderItem.length,
+        TrackingProps.forceUpgradeVersionInfo:
+            upgrader.state.versionInfo.toString(),
+        TrackingProps.forceUpgradeAlertTooSoon: upgrader.isTooSoon(),
+        TrackingProps.forceUpgradeIgnoredAlert:
+            upgrader.alreadyIgnoredThisVersion(),
       },
     );
 
