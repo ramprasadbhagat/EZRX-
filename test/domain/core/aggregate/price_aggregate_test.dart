@@ -2597,8 +2597,8 @@ void main() {
 
   group('Price Aggregate List Test -', () {
     test('Sort to display in cart page & checkout page', () {
-      final materials = fakePriceAggregateList
-          .where((e) => e.materialInfo.type.typeMaterial)
+      final remainedItems = fakePriceAggregateList
+          .where((e) => !e.materialInfo.type.typeBundle && !e.materialInfo.type.typeCombo)
           .toList();
       final bundles = fakePriceAggregateList
           .where((e) => e.materialInfo.type.typeBundle)
@@ -2609,7 +2609,7 @@ void main() {
 
       expect(
         fakePriceAggregateList.sortToDisplay,
-        <PriceAggregate>[...combos, ...bundles, ...materials],
+        <PriceAggregate>[...combos, ...bundles, ...remainedItems],
       );
     });
 
@@ -2633,6 +2633,15 @@ void main() {
             .showManufacturerName(1),
         false,
       );
+
+      //EZRX-24264: do not group by manufacture when having deals item
+      final firstItem = fakePriceAggregateList[0]; // this is Material item of the same manufacturer
+      final secondItem = fakePriceAggregateList[1]; // this is Deals item of a different manufacturer
+      final thirdItem = fakePriceAggregateList[2]; // this is Material item of the same manufacturer
+      final items = <PriceAggregate>[firstItem, secondItem, thirdItem];
+      final sortedItems = items.sortToDisplay;
+
+      expect(sortedItems[0].materialInfo.getManufactured == sortedItems[1].materialInfo.getManufactured, true);
     });
 
     test('tenderContractSubmitted', () {

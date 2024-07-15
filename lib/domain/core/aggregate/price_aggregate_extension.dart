@@ -240,24 +240,29 @@ extension PriceAggregateExtension on List<PriceAggregate> {
   double get subtotalWithInStockOnly =>
       fold<double>(0, (sum, e) => sum + e.totalPriceWithInStockOnly);
 
-  List<PriceAggregate> get sortToDisplay => toList()
-    ..sort(
-      (a, b) => b.materialInfo.type.sortPriority
-          .compareTo(a.materialInfo.type.sortPriority),
-    )
-    ..sort((a, b) {
-      final aType = a.materialInfo.type;
-      final bType = b.materialInfo.type;
-      // If item is commercial material or bonus material
-      // => sort by manufacturer to ensure displaying group of item correctly
-      if ((aType.typeMaterial || aType.typeDealOrOverrideBonus) &&
-          aType == bType) {
-        return a.materialInfo.getManufactured
-            .compareTo(b.materialInfo.getManufactured);
-      }
+  List<PriceAggregate> get sortToDisplay {
+    return toList()
+      ..sort((a, b) {
+        final aType = a.materialInfo.type;
+        final bType = b.materialInfo.type;
 
-      return 0;
-    });
+        // First, compare by sortPriority
+        final priorityComparison = bType.sortPriority.compareTo(aType.sortPriority);
+        if (priorityComparison != 0) {
+          return priorityComparison;
+        }
+
+        // If sortPriority is the same, compare by manufacturer if both items are commercial or bonus materials
+        if ((aType.typeMaterial || aType.typeDealOrOverrideBonus) &&
+            (bType.typeMaterial || bType.typeDealOrOverrideBonus) &&
+            a.materialInfo.getManufactured.isNotEmpty &&
+            b.materialInfo.getManufactured.isNotEmpty) {
+          return a.materialInfo.getManufactured.compareTo(b.materialInfo.getManufactured);
+        }
+
+        return 0;
+      });
+  }
 
   bool showManufacturerName(int index) =>
       index == 0 ||
