@@ -333,10 +333,8 @@ class RoleType extends ValueObject<String> {
       isSalesRepRole ||
       isReturnRequestor;
 
-  // Admin will be considered as Sales rep when fetching banner from ezReach
-  // Following AC#5 in https://zuelligpharma.atlassian.net/browse/EZRX-21928
-  String get getEZReachRoleType =>
-      isSalesRepRole || hasAdminAccess ? 'salesrep' : 'customer';
+  // eZReach User role table: https://zuelligpharma.atlassian.net/browse/EZRX-21928
+  String get getEZReachRoleType => isCustomer ? 'customer' : 'salesrep';
 
   bool get canAccessMarketPlace =>
       isRootAdmin || isZPAdmin || isClientUser || isClientAdmin;

@@ -454,22 +454,22 @@ void main() {
     });
 
     group('ezReach role -', () {
-      test('is salesRep when role is admin', () {
+      test('is salesRep for all role except client', () {
         expect(RoleType('root_admin').getEZReachRoleType, 'salesrep');
         expect(RoleType('zp_admin').getEZReachRoleType, 'salesrep');
-      });
-
-      test('is salesRep when role is sales rep', () {
+        expect(RoleType('return_approver').getEZReachRoleType, 'salesrep');
+        expect(RoleType('return_admin').getEZReachRoleType, 'salesrep');
+        expect(RoleType('return_requestor').getEZReachRoleType, 'salesrep');
+        expect(RoleType('zp_admin_attachments').getEZReachRoleType, 'salesrep');
         expect(RoleType('internal_sales_rep').getEZReachRoleType, 'salesrep');
         expect(RoleType('external_sales_rep').getEZReachRoleType, 'salesrep');
+        expect(RoleType('').getEZReachRoleType, 'salesrep');
       });
 
-      test('is customer by default', () {
+      test('is customer only when role is client', () {
         expect(RoleType('client_admin').getEZReachRoleType, 'customer');
         expect(RoleType('client_user').getEZReachRoleType, 'customer');
         expect(RoleType('user').getEZReachRoleType, 'customer');
-        expect(RoleType('').getEZReachRoleType, 'customer');
-        expect(RoleType('return_approver').getEZReachRoleType, 'customer');
       });
     });
   });
