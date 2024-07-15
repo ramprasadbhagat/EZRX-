@@ -166,13 +166,6 @@ class _CartPageCheckoutButton extends StatelessWidget {
 
     if (!orderEligibilityState.isCheckoutDisabled) {
       FocusScope.of(context).requestFocus(FocusNode());
-      trackMixpanelEvent(
-        TrackingEvents.checkoutSuccess,
-        props: {
-          TrackingProps.grandTotal: cartState.subTotalPriceDisplay(),
-          TrackingProps.totalQty: cartState.totalCartCount,
-        },
-      );
       if (cartState.showSmallOrderFeeBottomSheet ||
           orderEligibilityState.smallOrderFee > 0) {
         final agreeToSmallOrderFee =
@@ -190,7 +183,9 @@ class _CartPageCheckoutButton extends StatelessWidget {
       trackMixpanelEvent(
         TrackingEvents.checkoutFailure,
         props: {
-          TrackingProps.grandTotal: cartState.subTotalPriceDisplay(),
+          TrackingProps.grandTotal: cartState.grandTotalPriceDisplayed(
+            smallOrderFee: orderEligibilityState.smallOrderFee,
+          ),
           TrackingProps.totalQty: cartState.totalCartCount,
           TrackingProps.errorMessage:
               orderEligibilityState.orderEligibleTrackingErrorMessage,
@@ -205,6 +200,19 @@ class _CartPageCheckoutButton extends StatelessWidget {
   }
 
   void _navigateToCheckout(BuildContext context, CartState cartState) {
+    final orderEligibilityState = context.read<OrderEligibilityBloc>().state;
+    trackMixpanelEvent(
+      TrackingEvents.checkoutSuccess,
+      props: {
+        TrackingProps.grandTotal: cartState.grandTotalPriceDisplayed(
+          smallOrderFee: orderEligibilityState.smallOrderFee,
+        ),
+        TrackingProps.totalQty: cartState.totalCartCount,
+        TrackingProps.cart:
+            cartState.cartProducts.cartMaterialInfoListForTrackEvent,
+      },
+    );
+
     if (cartState.salesOrganisation.salesOrg.isID) {
       context.read<CartBloc>().add(
             const CartEvent.updatePriceForIdMarket(),

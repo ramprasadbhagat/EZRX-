@@ -335,4 +335,43 @@ extension PriceAggregateExtension on List<PriceAggregate> {
         (element) =>
             element.materialInfo.principalData.principalCode.isMinistryOfHealth,
       );
+
+  List<Map<String, String>> get cartMaterialInfoListForTrackEvent {
+    final materialInfoList = <Map<String, String>>[];
+
+    for (final e in this) {
+      if (e.materialInfo.type.typeCombo) {
+        materialInfoList.addAll(
+          [
+            for (final comboMaterialItem in e.comboMaterials)
+              {
+                TrackingProps.productNumber:
+                    comboMaterialItem.productId.displayMatNo,
+                TrackingProps.productName:
+                    comboMaterialItem.materialDescription,
+              },
+          ],
+        );
+      } else if (e.materialInfo.type.typeBundle) {
+        materialInfoList.addAll(
+          [
+            for (final bundleMaterials in e.bundle.materials)
+              {
+                TrackingProps.productNumber:
+                    bundleMaterials.materialNumber.displayMatNo,
+                TrackingProps.productName: bundleMaterials.displayDescription,
+              },
+          ],
+        );
+      } else {
+        materialInfoList.add({
+          TrackingProps.productNumber:
+              e.materialInfo.materialNumber.displayMatNo,
+          TrackingProps.productName: e.materialInfo.displayDescription,
+        });
+      }
+    }
+
+    return materialInfoList;
+  }
 }

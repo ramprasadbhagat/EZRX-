@@ -24,6 +24,7 @@ class TrackingProps {
   static String lineNumber = 'line_number';
   static String unitPrice = 'unit_price';
   static String paymentMethod = 'payment_method';
+  static String cart = 'cart';
   //===========================================================
   //  Only Mixpanel track properties
   //===========================================================
@@ -60,7 +61,7 @@ class TrackingProps {
   static String requestDeliveryDate = 'request_delivery_date';
   static String step = 'step';
   static String stepName = 'step_name';
-  static String isSingle = 'is_single?';
+  static String isSingle = 'is_single';
   static String totalPrice = 'total_price';
   static String returnReason = 'reason_for_return';
   static String returnId = 'return_request_id';
