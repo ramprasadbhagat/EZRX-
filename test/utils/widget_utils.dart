@@ -15,6 +15,7 @@ class WidgetUtils {
     final bool usingLocalization = false,
     List<BlocProvider> providers = const <BlocProvider>[],
     String? routeName,
+    String path = '',
   }) {
     EasyLocalization.logger.enableLevels = [];
     EasyLocalization.logger.enableBuildModes = [];
@@ -28,6 +29,7 @@ class WidgetUtils {
           segments: const [''],
           config: AutoRoute(
             page: PageInfo(routeName ?? 'MaterialRootRoute'),
+            path: path,
           ),
           stringMatch: '',
           key: ValueKey(routeName ?? 'MaterialRootRoute'),

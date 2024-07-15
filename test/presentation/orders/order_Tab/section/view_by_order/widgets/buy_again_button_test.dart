@@ -42,6 +42,8 @@ void main() {
   final fakePhoneNumber = PhoneNumber('0987378484');
   final buyAgainButton = find.byType(OutlinedButton);
 
+  const path = '/orders/view_by_order_details';
+
   setUpAll(() async {
     mixpanelService = MixpanelServiceMock();
     clevertapService = ClevertapServiceMock();
@@ -72,6 +74,7 @@ void main() {
     Widget getScopedWidget(OrderHistoryDetails viewByOrderHistoryItem) {
       return WidgetUtils.getScopedWidget(
         autoRouterMock: autoRouterMock,
+        path: path,
         usingLocalization: true,
         useMediaQuery: false,
         routeName: ViewByOrderDetailsPageRoute.name,
@@ -254,7 +257,8 @@ void main() {
             TrackingProps.productName: '',
             TrackingProps.productNumber: 'NA',
             TrackingProps.productManufacturer: 'NA',
-            TrackingProps.clickAt: ' Page',
+            TrackingProps.clickAt:
+                'View By Order Details Page', //use direct value to verify,
           },
         ),
       ).called(1);
@@ -265,7 +269,8 @@ void main() {
             TrackingProps.productName: '',
             TrackingProps.productNumber: 'NA',
             TrackingProps.productManufacturer: 'NA',
-            TrackingProps.clickAt: ' Page',
+            TrackingProps.clickAt:
+                'View By Order Details Page', //use direct value to verify,
           },
         ),
       ).called(1);

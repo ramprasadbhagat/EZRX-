@@ -46,6 +46,8 @@ void main() {
   late ReturnItemsBloc returnItemsBloc;
   late NewRequestBloc newRequestBloc;
 
+  const path = '/returns/new_request';
+
   setUpAll(() {
     locator.registerLazySingleton(() => AppRouterMock());
     locator.registerLazySingleton<MixpanelService>(() => MixpanelServiceMock());
@@ -72,6 +74,7 @@ void main() {
   Widget getWidget() {
     return WidgetUtils.getScopedWidget(
       autoRouterMock: appRouter,
+      path: path,
       usingLocalization: true,
       providers: [
         BlocProvider<EligibilityBloc>(
@@ -108,7 +111,8 @@ void main() {
       () => trackMixpanelEvent(
         TrackingEvents.newReturnRequestClicked,
         props: {
-          TrackingProps.clickAt: ' Page',
+          TrackingProps.clickAt:
+              'New Request Page', //use direct value to verify
         },
       ),
     ).called(1);

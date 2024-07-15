@@ -11,6 +11,7 @@ import 'package:ezrxmobile/domain/order/entities/order_history_basic_info.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/customer_license_local.dart';
 import 'package:ezrxmobile/infrastructure/core/clevertap/clevertap_service.dart';
 import 'package:ezrxmobile/infrastructure/core/common/tracking_events.dart';
+import 'package:ezrxmobile/infrastructure/core/common/tracking_properties.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/payment_customer_information_local.dart';
 import 'package:ezrxmobile/presentation/core/item_tax.dart';
 import 'package:ezrxmobile/presentation/core/market_place/market_place_rectangle_logo.dart';
@@ -112,6 +113,7 @@ void main() {
   late ViewByOrderDetailsBloc viewByOrderDetailsBlocMock;
   late PoAttachmentBloc poAttachmentBlocMock;
   late MixpanelService mixpanelServiceMock;
+  late ClevertapService cleverTapServiceMock;
   late List<CreditAndInvoiceItem> fakeItemList;
   late ViewByOrder fakeOrder;
   late OrderHistory mockViewByItemsOrderHistory;
@@ -120,6 +122,7 @@ void main() {
   late PaymentCustomerInformationBloc paymentCustomerInformationBlocMock;
   late CustomerLicenseBloc customerLicenseBlocMock;
   late List<CustomerLicense> customerLicense;
+  const path = '/orders/view_by_item_details';
 
   const fakeCreatedDate = '20230412';
   final fakePhoneNumber = PhoneNumber('19877389922');
@@ -132,9 +135,10 @@ void main() {
 
     autoRouterMock = locator<AppRouter>();
     mixpanelServiceMock = MixpanelServiceMock();
+    cleverTapServiceMock = ClevertapServiceMock();
     reOrderPermissionBlocMock = ReOrderPermissionBlocMock();
     locator.registerFactory<MixpanelService>(() => mixpanelServiceMock);
-    locator.registerSingleton<ClevertapService>(ClevertapServiceMock());
+    locator.registerFactory<ClevertapService>(() => cleverTapServiceMock);
 
     locator.registerFactory<ReOrderPermissionBloc>(
       () => reOrderPermissionBlocMock,
@@ -169,6 +173,7 @@ void main() {
   Widget getScopedWidget() {
     return WidgetUtils.getScopedWidget(
       autoRouterMock: autoRouterMock,
+      path: path,
       usingLocalization: true,
       useMediaQuery: true,
       routeName: ViewByItemDetailsPageRoute.name,
@@ -306,7 +311,7 @@ void main() {
     );
     when(
       () => autoRouterMock.currentPath,
-    ).thenAnswer((_) => 'orders/view_by_item_details');
+    ).thenAnswer((_) => path);
   });
 
   group('Order History Details By Item Page', () {
@@ -836,6 +841,23 @@ void main() {
           () => mixpanelServiceMock.trackEvent(
             eventName: TrackingEvents.buyAgainClicked,
             properties: any(named: 'properties'),
+          ),
+        ).called(1);
+
+        verify(
+          () => cleverTapServiceMock.trackEvent(
+            eventName: TrackingEvents.reorderClicked,
+            properties: {
+              TrackingProps.productName:
+                  fakeOrderHistoryItem.defaultMaterialDescription,
+              TrackingProps.productNumber:
+                  fakeOrderHistoryItem.materialNumber.displayMatNo,
+              TrackingProps.productManufacturer: fakeOrderHistoryItem
+                  .principalData.principalName
+                  .getOrDefaultValue(''),
+              TrackingProps.clickAt:
+                  'View By Item Details Page', //use direct value to verify
+            },
           ),
         ).called(1);
 
