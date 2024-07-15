@@ -11,6 +11,7 @@ import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/repository/i_customer_code_repository.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/customer_code_local.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/customer_code_remote.dart';
 import 'package:ezrxmobile/infrastructure/account/dtos/account_selector_storage_dto.dart';
@@ -36,7 +37,7 @@ class CustomerCodeRepository implements ICustomerCodeRepository {
   @override
   Future<Either<ApiFailure, CustomerInformation>> getCustomerCode({
     required SalesOrganisation salesOrganisation,
-    required List<String> customerCodes,
+    required SearchKey searchKey,
     required bool hideCustomer,
     required User user,
     required int pageSize,
@@ -55,7 +56,6 @@ class CustomerCodeRepository implements ICustomerCodeRepository {
       }
     }
     try {
-      final customerCodeString = customerCodes.join(',');
       final customerInformation = user.role.type.isSalesRepRole
           ? await remoteDataSource.getSalesRepCustomerCodeList(
               request: CustomerCodeSearchDto(
@@ -63,12 +63,12 @@ class CustomerCodeRepository implements ICustomerCodeRepository {
                 first: pageSize,
                 filterBlockCustomer: hideCustomer,
                 after: offset,
-                searchKey: customerCodeString,
+                searchKey: searchKey.getValue(),
               ),
             )
           : await remoteDataSource.getCustomerCodeList(
               salesOrg: salesOrg,
-              customerCode: customerCodeString,
+              searchKey: searchKey.getValue(),
               hideCustomer: hideCustomer,
               pageSize: pageSize,
               offset: offset,

@@ -121,7 +121,7 @@ class EligibilityBloc extends Bloc<EligibilityEvent, EligibilityState> {
 
         final failureOrSuccess = await customerCodeRepository.getCustomerCode(
           salesOrganisation: state.salesOrganisation,
-          customerCodes: [lastSavedCustomerInfo.shippingAddress],
+          searchKey: SearchKey.search(lastSavedCustomerInfo.shippingAddress),
           hideCustomer: state.salesOrgConfigs.hideCustomer,
           user: state.user,
           pageSize: config.pageSize,
@@ -168,16 +168,9 @@ class EligibilityBloc extends Bloc<EligibilityEvent, EligibilityState> {
         );
       },
       fetchAndPreSelectCustomerCode: (e) async {
-        final finalCustomerCodeInfo = state.salesOrganisation.customerInfos;
-
         final failureOrSuccess = await customerCodeRepository.getCustomerCode(
           salesOrganisation: state.salesOrganisation,
-          customerCodes: finalCustomerCodeInfo
-              .map(
-                (customerItem) =>
-                    customerItem.customerCodeSoldTo.checkAllOrCustomerCode,
-              )
-              .toList(),
+          searchKey: SearchKey.empty(),
           hideCustomer: state.salesOrgConfigs.hideCustomer,
           user: state.user,
           pageSize: config.pageSize,

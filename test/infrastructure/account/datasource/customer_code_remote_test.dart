@@ -104,7 +104,7 @@ void main() {
           );
 
           final result = await remoteDataSource.getCustomerCodeList(
-            customerCode: mockCustomerCode,
+            searchKey: mockCustomerCode,
             salesOrg: '2203',
             pageSize: pageSize,
             hideCustomer: hideCustomer,
@@ -145,7 +145,7 @@ void main() {
           );
           await remoteDataSource
               .getCustomerCodeList(
-            customerCode: mockCustomerCode,
+            searchKey: mockCustomerCode,
             salesOrg: '2203',
             pageSize: pageSize,
             hideCustomer: hideCustomer,
@@ -182,7 +182,7 @@ void main() {
           );
           await remoteDataSource
               .getCustomerCodeList(
-            customerCode: mockCustomerCode,
+            searchKey: mockCustomerCode,
             salesOrg: '2203',
             pageSize: pageSize,
             hideCustomer: hideCustomer,

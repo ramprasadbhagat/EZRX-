@@ -181,7 +181,6 @@ void main() {
           [
             CustomerCodeState.initial().copyWith(
               searchKey: SearchKey.empty(),
-              isSearchActive: false,
               isFetching: false,
               apiFailureOrSuccessOption: none(),
               customerCodeList: [
@@ -190,7 +189,6 @@ void main() {
             ),
             CustomerCodeState.initial().copyWith(
               searchKey: SearchKey.search('GSK'),
-              isSearchActive: true,
               isFetching: true,
               apiFailureOrSuccessOption: none(),
               customerCodeList: [

@@ -8,11 +8,9 @@ class CustomerCodeEvent with _$CustomerCodeEvent {
     required SalesOrganisation selectedSalesOrg,
   }) = _Initialized;
 
-  const factory CustomerCodeEvent.fetch() = _Fetch;
-
-  const factory CustomerCodeEvent.search({
+  const factory CustomerCodeEvent.fetch({
     required SearchKey searchValue,
-  }) = _Search;
+  }) = _Fetch;
 
   const factory CustomerCodeEvent.loadMore() = _LoadMore;
 

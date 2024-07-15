@@ -27,7 +27,7 @@ class CustomerCodeRemoteDataSource {
   });
 
   Future<CustomerInformation> getCustomerCodeList({
-    required String customerCode,
+    required String searchKey,
     required String salesOrg,
     required bool hideCustomer,
     required int pageSize,
@@ -41,7 +41,7 @@ class CustomerCodeRemoteDataSource {
         );
 
         final variables = {
-          'searchKey': customerCode,
+          'searchKey': searchKey,
           'salesOrganisation': salesOrg,
           'first': pageSize,
           'after': offset,

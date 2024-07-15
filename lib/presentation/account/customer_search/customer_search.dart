@@ -212,7 +212,9 @@ class _BodyContent extends StatelessWidget {
               dismissOnDrag: true,
               onRefresh: () {
                 context.read<CustomerCodeBloc>().add(
-                      const CustomerCodeEvent.fetch(),
+                      CustomerCodeEvent.fetch(
+                        searchValue: SearchKey.empty(),
+                      ),
                     );
               },
               onLoadingMore: () {

@@ -14,7 +14,6 @@ class CustomerCodeState with _$CustomerCodeState {
     required Option<Either<ApiFailure, dynamic>> configFailureOrSuccessOption,
     required bool canLoadMore,
     required bool isFetching,
-    required bool isSearchActive,
     required SearchKey searchKey,
   }) = _CustomerCodeState;
 
@@ -26,7 +25,6 @@ class CustomerCodeState with _$CustomerCodeState {
         apiFailureOrSuccessOption: none(),
         canLoadMore: true,
         isFetching: true,
-        isSearchActive: false,
         searchKey: SearchKey.empty(),
         customerCodeConfig: CustomerCodeConfig.empty(),
         configFailureOrSuccessOption: none(),

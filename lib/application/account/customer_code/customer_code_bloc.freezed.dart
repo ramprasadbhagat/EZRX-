@@ -21,8 +21,7 @@ mixin _$CustomerCodeEvent {
     required TResult Function(bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)
         initialized,
-    required TResult Function() fetch,
-    required TResult Function(SearchKey searchValue) search,
+    required TResult Function(SearchKey searchValue) fetch,
     required TResult Function() loadMore,
     required TResult Function(CustomerCodeInfo customerCodeInfo)
         fetchCustomerCodeConfig,
@@ -33,8 +32,7 @@ mixin _$CustomerCodeEvent {
     TResult? Function(bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
         initialized,
-    TResult? Function()? fetch,
-    TResult? Function(SearchKey searchValue)? search,
+    TResult? Function(SearchKey searchValue)? fetch,
     TResult? Function()? loadMore,
     TResult? Function(CustomerCodeInfo customerCodeInfo)?
         fetchCustomerCodeConfig,
@@ -45,8 +43,7 @@ mixin _$CustomerCodeEvent {
     TResult Function(bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
         initialized,
-    TResult Function()? fetch,
-    TResult Function(SearchKey searchValue)? search,
+    TResult Function(SearchKey searchValue)? fetch,
     TResult Function()? loadMore,
     TResult Function(CustomerCodeInfo customerCodeInfo)?
         fetchCustomerCodeConfig,
@@ -57,7 +54,6 @@ mixin _$CustomerCodeEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_Fetch value) fetch,
-    required TResult Function(_Search value) search,
     required TResult Function(_LoadMore value) loadMore,
     required TResult Function(_FetchCustomerCodeConfig value)
         fetchCustomerCodeConfig,
@@ -67,7 +63,6 @@ mixin _$CustomerCodeEvent {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_Fetch value)? fetch,
-    TResult? Function(_Search value)? search,
     TResult? Function(_LoadMore value)? loadMore,
     TResult? Function(_FetchCustomerCodeConfig value)? fetchCustomerCodeConfig,
   }) =>
@@ -76,7 +71,6 @@ mixin _$CustomerCodeEvent {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
     TResult Function(_Fetch value)? fetch,
-    TResult Function(_Search value)? search,
     TResult Function(_LoadMore value)? loadMore,
     TResult Function(_FetchCustomerCodeConfig value)? fetchCustomerCodeConfig,
     required TResult orElse(),
@@ -212,8 +206,7 @@ class _$InitializedImpl implements _Initialized {
     required TResult Function(bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)
         initialized,
-    required TResult Function() fetch,
-    required TResult Function(SearchKey searchValue) search,
+    required TResult Function(SearchKey searchValue) fetch,
     required TResult Function() loadMore,
     required TResult Function(CustomerCodeInfo customerCodeInfo)
         fetchCustomerCodeConfig,
@@ -227,8 +220,7 @@ class _$InitializedImpl implements _Initialized {
     TResult? Function(bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
         initialized,
-    TResult? Function()? fetch,
-    TResult? Function(SearchKey searchValue)? search,
+    TResult? Function(SearchKey searchValue)? fetch,
     TResult? Function()? loadMore,
     TResult? Function(CustomerCodeInfo customerCodeInfo)?
         fetchCustomerCodeConfig,
@@ -242,8 +234,7 @@ class _$InitializedImpl implements _Initialized {
     TResult Function(bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
         initialized,
-    TResult Function()? fetch,
-    TResult Function(SearchKey searchValue)? search,
+    TResult Function(SearchKey searchValue)? fetch,
     TResult Function()? loadMore,
     TResult Function(CustomerCodeInfo customerCodeInfo)?
         fetchCustomerCodeConfig,
@@ -260,7 +251,6 @@ class _$InitializedImpl implements _Initialized {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_Fetch value) fetch,
-    required TResult Function(_Search value) search,
     required TResult Function(_LoadMore value) loadMore,
     required TResult Function(_FetchCustomerCodeConfig value)
         fetchCustomerCodeConfig,
@@ -273,7 +263,6 @@ class _$InitializedImpl implements _Initialized {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_Fetch value)? fetch,
-    TResult? Function(_Search value)? search,
     TResult? Function(_LoadMore value)? loadMore,
     TResult? Function(_FetchCustomerCodeConfig value)? fetchCustomerCodeConfig,
   }) {
@@ -285,7 +274,6 @@ class _$InitializedImpl implements _Initialized {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
     TResult Function(_Fetch value)? fetch,
-    TResult Function(_Search value)? search,
     TResult Function(_LoadMore value)? loadMore,
     TResult Function(_FetchCustomerCodeConfig value)? fetchCustomerCodeConfig,
     required TResult orElse(),
@@ -316,6 +304,8 @@ abstract class _$$FetchImplCopyWith<$Res> {
   factory _$$FetchImplCopyWith(
           _$FetchImpl value, $Res Function(_$FetchImpl) then) =
       __$$FetchImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({SearchKey searchValue});
 }
 
 /// @nodoc
@@ -325,26 +315,51 @@ class __$$FetchImplCopyWithImpl<$Res>
   __$$FetchImplCopyWithImpl(
       _$FetchImpl _value, $Res Function(_$FetchImpl) _then)
       : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? searchValue = null,
+  }) {
+    return _then(_$FetchImpl(
+      searchValue: null == searchValue
+          ? _value.searchValue
+          : searchValue // ignore: cast_nullable_to_non_nullable
+              as SearchKey,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$FetchImpl implements _Fetch {
-  const _$FetchImpl();
+  const _$FetchImpl({required this.searchValue});
+
+  @override
+  final SearchKey searchValue;
 
   @override
   String toString() {
-    return 'CustomerCodeEvent.fetch()';
+    return 'CustomerCodeEvent.fetch(searchValue: $searchValue)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$FetchImpl);
+        (other.runtimeType == runtimeType &&
+            other is _$FetchImpl &&
+            (identical(other.searchValue, searchValue) ||
+                other.searchValue == searchValue));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, searchValue);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$FetchImplCopyWith<_$FetchImpl> get copyWith =>
+      __$$FetchImplCopyWithImpl<_$FetchImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -352,13 +367,12 @@ class _$FetchImpl implements _Fetch {
     required TResult Function(bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)
         initialized,
-    required TResult Function() fetch,
-    required TResult Function(SearchKey searchValue) search,
+    required TResult Function(SearchKey searchValue) fetch,
     required TResult Function() loadMore,
     required TResult Function(CustomerCodeInfo customerCodeInfo)
         fetchCustomerCodeConfig,
   }) {
-    return fetch();
+    return fetch(searchValue);
   }
 
   @override
@@ -367,13 +381,12 @@ class _$FetchImpl implements _Fetch {
     TResult? Function(bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
         initialized,
-    TResult? Function()? fetch,
-    TResult? Function(SearchKey searchValue)? search,
+    TResult? Function(SearchKey searchValue)? fetch,
     TResult? Function()? loadMore,
     TResult? Function(CustomerCodeInfo customerCodeInfo)?
         fetchCustomerCodeConfig,
   }) {
-    return fetch?.call();
+    return fetch?.call(searchValue);
   }
 
   @override
@@ -382,15 +395,14 @@ class _$FetchImpl implements _Fetch {
     TResult Function(bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
         initialized,
-    TResult Function()? fetch,
-    TResult Function(SearchKey searchValue)? search,
+    TResult Function(SearchKey searchValue)? fetch,
     TResult Function()? loadMore,
     TResult Function(CustomerCodeInfo customerCodeInfo)?
         fetchCustomerCodeConfig,
     required TResult orElse(),
   }) {
     if (fetch != null) {
-      return fetch();
+      return fetch(searchValue);
     }
     return orElse();
   }
@@ -400,7 +412,6 @@ class _$FetchImpl implements _Fetch {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_Fetch value) fetch,
-    required TResult Function(_Search value) search,
     required TResult Function(_LoadMore value) loadMore,
     required TResult Function(_FetchCustomerCodeConfig value)
         fetchCustomerCodeConfig,
@@ -413,7 +424,6 @@ class _$FetchImpl implements _Fetch {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_Fetch value)? fetch,
-    TResult? Function(_Search value)? search,
     TResult? Function(_LoadMore value)? loadMore,
     TResult? Function(_FetchCustomerCodeConfig value)? fetchCustomerCodeConfig,
   }) {
@@ -425,7 +435,6 @@ class _$FetchImpl implements _Fetch {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
     TResult Function(_Fetch value)? fetch,
-    TResult Function(_Search value)? search,
     TResult Function(_LoadMore value)? loadMore,
     TResult Function(_FetchCustomerCodeConfig value)? fetchCustomerCodeConfig,
     required TResult orElse(),
@@ -438,168 +447,11 @@ class _$FetchImpl implements _Fetch {
 }
 
 abstract class _Fetch implements CustomerCodeEvent {
-  const factory _Fetch() = _$FetchImpl;
-}
-
-/// @nodoc
-abstract class _$$SearchImplCopyWith<$Res> {
-  factory _$$SearchImplCopyWith(
-          _$SearchImpl value, $Res Function(_$SearchImpl) then) =
-      __$$SearchImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({SearchKey searchValue});
-}
-
-/// @nodoc
-class __$$SearchImplCopyWithImpl<$Res>
-    extends _$CustomerCodeEventCopyWithImpl<$Res, _$SearchImpl>
-    implements _$$SearchImplCopyWith<$Res> {
-  __$$SearchImplCopyWithImpl(
-      _$SearchImpl _value, $Res Function(_$SearchImpl) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? searchValue = null,
-  }) {
-    return _then(_$SearchImpl(
-      searchValue: null == searchValue
-          ? _value.searchValue
-          : searchValue // ignore: cast_nullable_to_non_nullable
-              as SearchKey,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$SearchImpl implements _Search {
-  const _$SearchImpl({required this.searchValue});
-
-  @override
-  final SearchKey searchValue;
-
-  @override
-  String toString() {
-    return 'CustomerCodeEvent.search(searchValue: $searchValue)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$SearchImpl &&
-            (identical(other.searchValue, searchValue) ||
-                other.searchValue == searchValue));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, searchValue);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$SearchImplCopyWith<_$SearchImpl> get copyWith =>
-      __$$SearchImplCopyWithImpl<_$SearchImpl>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(bool hideCustomer, User userInfo,
-            SalesOrganisation selectedSalesOrg)
-        initialized,
-    required TResult Function() fetch,
-    required TResult Function(SearchKey searchValue) search,
-    required TResult Function() loadMore,
-    required TResult Function(CustomerCodeInfo customerCodeInfo)
-        fetchCustomerCodeConfig,
-  }) {
-    return search(searchValue);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(bool hideCustomer, User userInfo,
-            SalesOrganisation selectedSalesOrg)?
-        initialized,
-    TResult? Function()? fetch,
-    TResult? Function(SearchKey searchValue)? search,
-    TResult? Function()? loadMore,
-    TResult? Function(CustomerCodeInfo customerCodeInfo)?
-        fetchCustomerCodeConfig,
-  }) {
-    return search?.call(searchValue);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(bool hideCustomer, User userInfo,
-            SalesOrganisation selectedSalesOrg)?
-        initialized,
-    TResult Function()? fetch,
-    TResult Function(SearchKey searchValue)? search,
-    TResult Function()? loadMore,
-    TResult Function(CustomerCodeInfo customerCodeInfo)?
-        fetchCustomerCodeConfig,
-    required TResult orElse(),
-  }) {
-    if (search != null) {
-      return search(searchValue);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initialized value) initialized,
-    required TResult Function(_Fetch value) fetch,
-    required TResult Function(_Search value) search,
-    required TResult Function(_LoadMore value) loadMore,
-    required TResult Function(_FetchCustomerCodeConfig value)
-        fetchCustomerCodeConfig,
-  }) {
-    return search(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initialized value)? initialized,
-    TResult? Function(_Fetch value)? fetch,
-    TResult? Function(_Search value)? search,
-    TResult? Function(_LoadMore value)? loadMore,
-    TResult? Function(_FetchCustomerCodeConfig value)? fetchCustomerCodeConfig,
-  }) {
-    return search?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initialized value)? initialized,
-    TResult Function(_Fetch value)? fetch,
-    TResult Function(_Search value)? search,
-    TResult Function(_LoadMore value)? loadMore,
-    TResult Function(_FetchCustomerCodeConfig value)? fetchCustomerCodeConfig,
-    required TResult orElse(),
-  }) {
-    if (search != null) {
-      return search(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _Search implements CustomerCodeEvent {
-  const factory _Search({required final SearchKey searchValue}) = _$SearchImpl;
+  const factory _Fetch({required final SearchKey searchValue}) = _$FetchImpl;
 
   SearchKey get searchValue;
   @JsonKey(ignore: true)
-  _$$SearchImplCopyWith<_$SearchImpl> get copyWith =>
+  _$$FetchImplCopyWith<_$FetchImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -644,8 +496,7 @@ class _$LoadMoreImpl implements _LoadMore {
     required TResult Function(bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)
         initialized,
-    required TResult Function() fetch,
-    required TResult Function(SearchKey searchValue) search,
+    required TResult Function(SearchKey searchValue) fetch,
     required TResult Function() loadMore,
     required TResult Function(CustomerCodeInfo customerCodeInfo)
         fetchCustomerCodeConfig,
@@ -659,8 +510,7 @@ class _$LoadMoreImpl implements _LoadMore {
     TResult? Function(bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
         initialized,
-    TResult? Function()? fetch,
-    TResult? Function(SearchKey searchValue)? search,
+    TResult? Function(SearchKey searchValue)? fetch,
     TResult? Function()? loadMore,
     TResult? Function(CustomerCodeInfo customerCodeInfo)?
         fetchCustomerCodeConfig,
@@ -674,8 +524,7 @@ class _$LoadMoreImpl implements _LoadMore {
     TResult Function(bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
         initialized,
-    TResult Function()? fetch,
-    TResult Function(SearchKey searchValue)? search,
+    TResult Function(SearchKey searchValue)? fetch,
     TResult Function()? loadMore,
     TResult Function(CustomerCodeInfo customerCodeInfo)?
         fetchCustomerCodeConfig,
@@ -692,7 +541,6 @@ class _$LoadMoreImpl implements _LoadMore {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_Fetch value) fetch,
-    required TResult Function(_Search value) search,
     required TResult Function(_LoadMore value) loadMore,
     required TResult Function(_FetchCustomerCodeConfig value)
         fetchCustomerCodeConfig,
@@ -705,7 +553,6 @@ class _$LoadMoreImpl implements _LoadMore {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_Fetch value)? fetch,
-    TResult? Function(_Search value)? search,
     TResult? Function(_LoadMore value)? loadMore,
     TResult? Function(_FetchCustomerCodeConfig value)? fetchCustomerCodeConfig,
   }) {
@@ -717,7 +564,6 @@ class _$LoadMoreImpl implements _LoadMore {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
     TResult Function(_Fetch value)? fetch,
-    TResult Function(_Search value)? search,
     TResult Function(_LoadMore value)? loadMore,
     TResult Function(_FetchCustomerCodeConfig value)? fetchCustomerCodeConfig,
     required TResult orElse(),
@@ -814,8 +660,7 @@ class _$FetchCustomerCodeConfigImpl implements _FetchCustomerCodeConfig {
     required TResult Function(bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)
         initialized,
-    required TResult Function() fetch,
-    required TResult Function(SearchKey searchValue) search,
+    required TResult Function(SearchKey searchValue) fetch,
     required TResult Function() loadMore,
     required TResult Function(CustomerCodeInfo customerCodeInfo)
         fetchCustomerCodeConfig,
@@ -829,8 +674,7 @@ class _$FetchCustomerCodeConfigImpl implements _FetchCustomerCodeConfig {
     TResult? Function(bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
         initialized,
-    TResult? Function()? fetch,
-    TResult? Function(SearchKey searchValue)? search,
+    TResult? Function(SearchKey searchValue)? fetch,
     TResult? Function()? loadMore,
     TResult? Function(CustomerCodeInfo customerCodeInfo)?
         fetchCustomerCodeConfig,
@@ -844,8 +688,7 @@ class _$FetchCustomerCodeConfigImpl implements _FetchCustomerCodeConfig {
     TResult Function(bool hideCustomer, User userInfo,
             SalesOrganisation selectedSalesOrg)?
         initialized,
-    TResult Function()? fetch,
-    TResult Function(SearchKey searchValue)? search,
+    TResult Function(SearchKey searchValue)? fetch,
     TResult Function()? loadMore,
     TResult Function(CustomerCodeInfo customerCodeInfo)?
         fetchCustomerCodeConfig,
@@ -862,7 +705,6 @@ class _$FetchCustomerCodeConfigImpl implements _FetchCustomerCodeConfig {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
     required TResult Function(_Fetch value) fetch,
-    required TResult Function(_Search value) search,
     required TResult Function(_LoadMore value) loadMore,
     required TResult Function(_FetchCustomerCodeConfig value)
         fetchCustomerCodeConfig,
@@ -875,7 +717,6 @@ class _$FetchCustomerCodeConfigImpl implements _FetchCustomerCodeConfig {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initialized value)? initialized,
     TResult? Function(_Fetch value)? fetch,
-    TResult? Function(_Search value)? search,
     TResult? Function(_LoadMore value)? loadMore,
     TResult? Function(_FetchCustomerCodeConfig value)? fetchCustomerCodeConfig,
   }) {
@@ -887,7 +728,6 @@ class _$FetchCustomerCodeConfigImpl implements _FetchCustomerCodeConfig {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
     TResult Function(_Fetch value)? fetch,
-    TResult Function(_Search value)? search,
     TResult Function(_LoadMore value)? loadMore,
     TResult Function(_FetchCustomerCodeConfig value)? fetchCustomerCodeConfig,
     required TResult orElse(),
@@ -925,7 +765,6 @@ mixin _$CustomerCodeState {
       throw _privateConstructorUsedError;
   bool get canLoadMore => throw _privateConstructorUsedError;
   bool get isFetching => throw _privateConstructorUsedError;
-  bool get isSearchActive => throw _privateConstructorUsedError;
   SearchKey get searchKey => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -949,7 +788,6 @@ abstract class $CustomerCodeStateCopyWith<$Res> {
       Option<Either<ApiFailure, dynamic>> configFailureOrSuccessOption,
       bool canLoadMore,
       bool isFetching,
-      bool isSearchActive,
       SearchKey searchKey});
 
   $UserCopyWith<$Res> get userInfo;
@@ -979,7 +817,6 @@ class _$CustomerCodeStateCopyWithImpl<$Res, $Val extends CustomerCodeState>
     Object? configFailureOrSuccessOption = null,
     Object? canLoadMore = null,
     Object? isFetching = null,
-    Object? isSearchActive = null,
     Object? searchKey = null,
   }) {
     return _then(_value.copyWith(
@@ -1018,10 +855,6 @@ class _$CustomerCodeStateCopyWithImpl<$Res, $Val extends CustomerCodeState>
       isFetching: null == isFetching
           ? _value.isFetching
           : isFetching // ignore: cast_nullable_to_non_nullable
-              as bool,
-      isSearchActive: null == isSearchActive
-          ? _value.isSearchActive
-          : isSearchActive // ignore: cast_nullable_to_non_nullable
               as bool,
       searchKey: null == searchKey
           ? _value.searchKey
@@ -1074,7 +907,6 @@ abstract class _$$CustomerCodeStateImplCopyWith<$Res>
       Option<Either<ApiFailure, dynamic>> configFailureOrSuccessOption,
       bool canLoadMore,
       bool isFetching,
-      bool isSearchActive,
       SearchKey searchKey});
 
   @override
@@ -1105,7 +937,6 @@ class __$$CustomerCodeStateImplCopyWithImpl<$Res>
     Object? configFailureOrSuccessOption = null,
     Object? canLoadMore = null,
     Object? isFetching = null,
-    Object? isSearchActive = null,
     Object? searchKey = null,
   }) {
     return _then(_$CustomerCodeStateImpl(
@@ -1145,10 +976,6 @@ class __$$CustomerCodeStateImplCopyWithImpl<$Res>
           ? _value.isFetching
           : isFetching // ignore: cast_nullable_to_non_nullable
               as bool,
-      isSearchActive: null == isSearchActive
-          ? _value.isSearchActive
-          : isSearchActive // ignore: cast_nullable_to_non_nullable
-              as bool,
       searchKey: null == searchKey
           ? _value.searchKey
           : searchKey // ignore: cast_nullable_to_non_nullable
@@ -1170,7 +997,6 @@ class _$CustomerCodeStateImpl extends _CustomerCodeState {
       required this.configFailureOrSuccessOption,
       required this.canLoadMore,
       required this.isFetching,
-      required this.isSearchActive,
       required this.searchKey})
       : _customerCodeList = customerCodeList,
         super._();
@@ -1201,13 +1027,11 @@ class _$CustomerCodeStateImpl extends _CustomerCodeState {
   @override
   final bool isFetching;
   @override
-  final bool isSearchActive;
-  @override
   final SearchKey searchKey;
 
   @override
   String toString() {
-    return 'CustomerCodeState(hideCustomer: $hideCustomer, userInfo: $userInfo, selectedSalesOrg: $selectedSalesOrg, customerCodeList: $customerCodeList, customerCodeConfig: $customerCodeConfig, apiFailureOrSuccessOption: $apiFailureOrSuccessOption, configFailureOrSuccessOption: $configFailureOrSuccessOption, canLoadMore: $canLoadMore, isFetching: $isFetching, isSearchActive: $isSearchActive, searchKey: $searchKey)';
+    return 'CustomerCodeState(hideCustomer: $hideCustomer, userInfo: $userInfo, selectedSalesOrg: $selectedSalesOrg, customerCodeList: $customerCodeList, customerCodeConfig: $customerCodeConfig, apiFailureOrSuccessOption: $apiFailureOrSuccessOption, configFailureOrSuccessOption: $configFailureOrSuccessOption, canLoadMore: $canLoadMore, isFetching: $isFetching, searchKey: $searchKey)';
   }
 
   @override
@@ -1236,8 +1060,6 @@ class _$CustomerCodeStateImpl extends _CustomerCodeState {
                 other.canLoadMore == canLoadMore) &&
             (identical(other.isFetching, isFetching) ||
                 other.isFetching == isFetching) &&
-            (identical(other.isSearchActive, isSearchActive) ||
-                other.isSearchActive == isSearchActive) &&
             (identical(other.searchKey, searchKey) ||
                 other.searchKey == searchKey));
   }
@@ -1254,7 +1076,6 @@ class _$CustomerCodeStateImpl extends _CustomerCodeState {
       configFailureOrSuccessOption,
       canLoadMore,
       isFetching,
-      isSearchActive,
       searchKey);
 
   @JsonKey(ignore: true)
@@ -1278,7 +1099,6 @@ abstract class _CustomerCodeState extends CustomerCodeState {
           configFailureOrSuccessOption,
       required final bool canLoadMore,
       required final bool isFetching,
-      required final bool isSearchActive,
       required final SearchKey searchKey}) = _$CustomerCodeStateImpl;
   const _CustomerCodeState._() : super._();
 
@@ -1300,8 +1120,6 @@ abstract class _CustomerCodeState extends CustomerCodeState {
   bool get canLoadMore;
   @override
   bool get isFetching;
-  @override
-  bool get isSearchActive;
   @override
   SearchKey get searchKey;
   @override

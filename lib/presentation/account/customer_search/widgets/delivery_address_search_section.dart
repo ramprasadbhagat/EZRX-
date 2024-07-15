@@ -15,14 +15,14 @@ class _DeliveryAddressSearchSection extends StatelessWidget {
         ),
         onSearchChanged: (value) {
           context.read<CustomerCodeBloc>().add(
-                CustomerCodeEvent.search(
+                CustomerCodeEvent.fetch(
                   searchValue: SearchKey.search(value),
                 ),
               );
         },
         onSearchSubmitted: (value) {
           context.read<CustomerCodeBloc>().add(
-                CustomerCodeEvent.search(
+                CustomerCodeEvent.fetch(
                   searchValue: SearchKey.search(value),
                 ),
               );
@@ -30,7 +30,9 @@ class _DeliveryAddressSearchSection extends StatelessWidget {
         customValidator: (value) => SearchKey.search(value).isValid(),
         enabled: true,
         onClear: () {
-          context.read<CustomerCodeBloc>().add(const CustomerCodeEvent.fetch());
+          context.read<CustomerCodeBloc>().add(
+                CustomerCodeEvent.fetch(searchValue: SearchKey.empty()),
+              );
         },
         initialValue: initialSearchKey.searchValueOrEmpty,
       ),

@@ -6,6 +6,7 @@ import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_information.dart';
 import 'package:ezrxmobile/domain/account/entities/role.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_org_customer_info.dart';
+import 'package:ezrxmobile/domain/account/entities/sales_org_ship_to_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
@@ -31,18 +32,7 @@ void main() {
   final fakeSalesOrgCustomerInfos = [
     SalesOrgCustomerInfo(
       customerCodeSoldTo: CustomerCode('fake-customer-code'),
-      shipToInfos: [],
-    ),
-  ];
-
-  final fakeMultipleSalesOrgCustomerInfos = [
-    SalesOrgCustomerInfo(
-      customerCodeSoldTo: CustomerCode('fake-customer-code-1'),
-      shipToInfos: [],
-    ),
-    SalesOrgCustomerInfo(
-      customerCodeSoldTo: CustomerCode('fake-customer-code-2'),
-      shipToInfos: [],
+      shipToInfos: <SalesOrgShipToInfo>[],
     ),
   ];
 
@@ -53,11 +43,6 @@ void main() {
   final fakeSaleOrg = SalesOrganisation(
     salesOrg: SalesOrg('fake-1234'),
     customerInfos: fakeSalesOrgCustomerInfos,
-  );
-
-  final fakeSaleOrgWithMultipleCustomerInfo = SalesOrganisation(
-    salesOrg: SalesOrg('fake-1234'),
-    customerInfos: fakeMultipleSalesOrgCustomerInfos,
   );
 
   const apiFailure = ApiFailure.other('fake-error');
@@ -113,9 +98,9 @@ void main() {
         when(
           () => customerCodeMockRepo.getCustomerCode(
             salesOrganisation: fakeSaleOrg,
-            customerCodes: [
+            searchKey: SearchKey.search(
               fakeSalesOrgCustomerInfos.first.customerCodeSoldTo.getOrCrash(),
-            ],
+            ),
             hideCustomer: false,
             offset: 0,
             user: fakeUser,
@@ -129,14 +114,28 @@ void main() {
       },
       act: (CustomerCodeBloc bloc) {
         bloc.add(
-          const CustomerCodeEvent.fetch(),
+          CustomerCodeEvent.fetch(
+            searchValue: SearchKey.search(
+              fakeSalesOrgCustomerInfos.first.customerCodeSoldTo.getOrCrash(),
+            ),
+          ),
         );
       },
       expect: () => [
         CustomerCodeState.initial().copyWith(
-          hideCustomer: false,
           userInfo: fakeUser,
           selectedSalesOrg: fakeSaleOrg,
+          searchKey: SearchKey.search(
+            fakeSalesOrgCustomerInfos.first.customerCodeSoldTo.getOrCrash(),
+          ),
+          canLoadMore: false,
+        ),
+        CustomerCodeState.initial().copyWith(
+          userInfo: fakeUser,
+          selectedSalesOrg: fakeSaleOrg,
+          searchKey: SearchKey.search(
+            fakeSalesOrgCustomerInfos.first.customerCodeSoldTo.getOrCrash(),
+          ),
           apiFailureOrSuccessOption: optionOf(
             const Left(
               ApiFailure.other('fake-error'),
@@ -173,9 +172,9 @@ void main() {
                 ...fakeSalesOrgCustomerInfos,
               ],
             ),
-            customerCodes: [
+            searchKey: SearchKey.search(
               fakeSalesOrgCustomerInfos.first.customerCodeSoldTo.getOrCrash(),
-            ],
+            ),
             hideCustomer: false,
             offset: 0,
             user: fakeUser,
@@ -189,7 +188,11 @@ void main() {
       },
       act: (CustomerCodeBloc bloc) {
         bloc.add(
-          const CustomerCodeEvent.fetch(),
+          CustomerCodeEvent.fetch(
+            searchValue: SearchKey.search(
+              fakeSalesOrgCustomerInfos.first.customerCodeSoldTo.getOrCrash(),
+            ),
+          ),
         );
       },
       expect: () => [
@@ -202,7 +205,26 @@ void main() {
               ...fakeSalesOrgCustomerInfos,
             ],
           ),
+          searchKey: SearchKey.search(
+            fakeSalesOrgCustomerInfos.first.customerCodeSoldTo.getOrCrash(),
+          ),
+          customerCodeList: <CustomerCodeInfo>[],
+          apiFailureOrSuccessOption: none(),
+          canLoadMore: false,
+        ),
+        CustomerCodeState.initial().copyWith(
+          hideCustomer: false,
+          userInfo: fakeUser,
+          selectedSalesOrg: SalesOrganisation(
+            salesOrg: SalesOrg('2001'),
+            customerInfos: [
+              ...fakeSalesOrgCustomerInfos,
+            ],
+          ),
           isFetching: false,
+          searchKey: SearchKey.search(
+            fakeSalesOrgCustomerInfos.first.customerCodeSoldTo.getOrCrash(),
+          ),
           customerCodeList: customerMockData.soldToInformation,
           apiFailureOrSuccessOption: none(),
           canLoadMore: true,
@@ -245,12 +267,7 @@ void main() {
                 ...fakeSalesOrgCustomerInfos,
               ],
             ),
-            customerCodes: [
-              fakeSalesOrgCustomerInfos.first.customerCodeSoldTo.getOrCrash(),
-              fakeSalesOrgCustomerInfos.first.customerCodeSoldTo.getOrCrash(),
-              fakeSalesOrgCustomerInfos.first.customerCodeSoldTo.getOrCrash(),
-              fakeSalesOrgCustomerInfos.first.customerCodeSoldTo.getOrCrash(),
-            ],
+            searchKey: SearchKey.empty(),
             hideCustomer: false,
             offset: 0,
             user: fakeUser,
@@ -272,11 +289,28 @@ void main() {
       },
       act: (CustomerCodeBloc bloc) {
         bloc.add(
-          const CustomerCodeEvent.fetch(),
+          CustomerCodeEvent.fetch(searchValue: SearchKey.empty()),
         );
       },
       expect: () {
         return [
+          CustomerCodeState.initial().copyWith(
+            hideCustomer: false,
+            userInfo: fakeUser,
+            selectedSalesOrg: SalesOrganisation(
+              salesOrg: SalesOrg('2902'),
+              customerInfos: [
+                ...fakeSalesOrgCustomerInfos,
+                ...fakeSalesOrgCustomerInfos,
+                ...fakeSalesOrgCustomerInfos,
+                ...fakeSalesOrgCustomerInfos,
+              ],
+            ),
+            isFetching: true,
+            customerCodeList: <CustomerCodeInfo>[],
+            apiFailureOrSuccessOption: none(),
+            canLoadMore: false,
+          ),
           CustomerCodeState.initial().copyWith(
             hideCustomer: false,
             userInfo: fakeUser,
@@ -328,7 +362,7 @@ void main() {
         when(
           () => customerCodeMockRepo.getCustomerCode(
             salesOrganisation: fakeSaleOrg,
-            customerCodes: ['fake-customer-code'],
+            searchKey: SearchKey.search('fake-customer-code'),
             hideCustomer: false,
             offset: 0,
             user: fakeUser,
@@ -348,7 +382,7 @@ void main() {
       },
       act: (CustomerCodeBloc bloc) {
         bloc.add(
-          CustomerCodeEvent.search(
+          CustomerCodeEvent.fetch(
             searchValue: SearchKey.search('fake-customer-code'),
           ),
         );
@@ -358,7 +392,6 @@ void main() {
           hideCustomer: false,
           userInfo: fakeUser,
           selectedSalesOrg: fakeSaleOrg,
-          isSearchActive: true,
           isFetching: true,
           canLoadMore: false,
           searchKey: SearchKey.search('fake-customer-code'),
@@ -373,7 +406,6 @@ void main() {
           ],
           searchKey: SearchKey.search('fake-customer-code'),
           canLoadMore: false,
-          isSearchActive: true,
           isFetching: false,
         ),
       ],
@@ -395,7 +427,7 @@ void main() {
         when(
           () => customerCodeMockRepo.getCustomerCode(
             salesOrganisation: fakeSaleOrg,
-            customerCodes: ['block-customer-code'],
+            searchKey: SearchKey.search('block-customer-code'),
             hideCustomer: true,
             offset: 0,
             user: fakeUser,
@@ -409,7 +441,7 @@ void main() {
       },
       act: (CustomerCodeBloc bloc) {
         bloc.add(
-          CustomerCodeEvent.search(
+          CustomerCodeEvent.fetch(
             searchValue: SearchKey.search('block-customer-code'),
           ),
         );
@@ -419,7 +451,6 @@ void main() {
           hideCustomer: true,
           userInfo: fakeUser,
           selectedSalesOrg: fakeSaleOrg,
-          isSearchActive: true,
           isFetching: true,
           canLoadMore: false,
           searchKey: SearchKey.search('block-customer-code'),
@@ -428,10 +459,9 @@ void main() {
           hideCustomer: true,
           userInfo: fakeUser,
           selectedSalesOrg: fakeSaleOrg,
-          customerCodeList: [],
+          customerCodeList: <CustomerCodeInfo>[],
           searchKey: SearchKey.search('block-customer-code'),
           canLoadMore: false,
-          isSearchActive: true,
           isFetching: false,
         ),
       ],
@@ -453,9 +483,7 @@ void main() {
         when(
           () => customerCodeMockRepo.getCustomerCode(
             salesOrganisation: fakeSaleOrg,
-            customerCodes: [
-              'fake-customer-code',
-            ],
+            searchKey: SearchKey.search('fake-customer-code'),
             hideCustomer: false,
             offset: 0,
             user: fakeUser,
@@ -469,7 +497,7 @@ void main() {
       },
       act: (CustomerCodeBloc bloc) {
         bloc.add(
-          CustomerCodeEvent.search(
+          CustomerCodeEvent.fetch(
             searchValue: SearchKey.search('fake-customer-code'),
           ),
         );
@@ -479,7 +507,6 @@ void main() {
           hideCustomer: false,
           userInfo: fakeUser,
           selectedSalesOrg: fakeSaleOrg,
-          isSearchActive: true,
           isFetching: true,
           canLoadMore: false,
           searchKey: SearchKey.search('fake-customer-code'),
@@ -488,7 +515,7 @@ void main() {
           hideCustomer: false,
           userInfo: fakeUser,
           selectedSalesOrg: fakeSaleOrg,
-          customerCodeList: [],
+          customerCodeList: <CustomerCodeInfo>[],
           apiFailureOrSuccessOption: optionOf(
             const Left(
               ApiFailure.other('fake-error'),
@@ -497,7 +524,6 @@ void main() {
           isFetching: false,
           searchKey: SearchKey.search('fake-customer-code'),
           canLoadMore: false,
-          isSearchActive: true,
         ),
       ],
     );
@@ -518,7 +544,7 @@ void main() {
         when(
           () => customerCodeMockRepo.getCustomerCode(
             salesOrganisation: fakeSaleOrg,
-            customerCodes: ['fake-customer-code'],
+            searchKey: SearchKey.search('fake-customer-code'),
             hideCustomer: false,
             offset: 0,
             user: fakeUser,
@@ -538,7 +564,7 @@ void main() {
       },
       act: (CustomerCodeBloc bloc) {
         bloc.add(
-          CustomerCodeEvent.search(
+          CustomerCodeEvent.fetch(
             searchValue: SearchKey.search('fake-customer-code'),
           ),
         );
@@ -549,7 +575,6 @@ void main() {
           hideCustomer: false,
           userInfo: fakeUser,
           selectedSalesOrg: fakeSaleOrg,
-          isSearchActive: true,
           isFetching: true,
           canLoadMore: false,
           searchKey: SearchKey.search('fake-customer-code'),
@@ -565,7 +590,6 @@ void main() {
           searchKey: SearchKey.search('fake-customer-code'),
           canLoadMore: false,
           isFetching: false,
-          isSearchActive: true,
         ),
       ],
     );
@@ -586,7 +610,7 @@ void main() {
         when(
           () => customerCodeMockRepo.getCustomerCode(
             salesOrganisation: fakeSaleOrg,
-            customerCodes: ['fake-customer-code'],
+            searchKey: SearchKey.search('fake-customer-code'),
             hideCustomer: false,
             offset: 0,
             user: fakeUser,
@@ -600,7 +624,7 @@ void main() {
       },
       act: (CustomerCodeBloc bloc) {
         bloc.add(
-          CustomerCodeEvent.search(
+          CustomerCodeEvent.fetch(
             searchValue: SearchKey.search('fake-customer-code'),
           ),
         );
@@ -610,7 +634,6 @@ void main() {
           hideCustomer: false,
           userInfo: fakeUser,
           selectedSalesOrg: fakeSaleOrg,
-          isSearchActive: true,
           isFetching: true,
           canLoadMore: false,
           searchKey: SearchKey.search('fake-customer-code'),
@@ -619,7 +642,7 @@ void main() {
           hideCustomer: false,
           userInfo: fakeUser,
           selectedSalesOrg: fakeSaleOrg,
-          customerCodeList: [],
+          customerCodeList: <CustomerCodeInfo>[],
           apiFailureOrSuccessOption: optionOf(
             const Left(
               ApiFailure.other('fake-error'),
@@ -628,7 +651,6 @@ void main() {
           searchKey: SearchKey.search('fake-customer-code'),
           canLoadMore: false,
           isFetching: false,
-          isSearchActive: true,
         ),
       ],
     );
@@ -649,7 +671,7 @@ void main() {
         when(
           () => customerCodeMockRepo.getCustomerCode(
             salesOrganisation: fakeSaleOrg,
-            customerCodes: [''],
+            searchKey: SearchKey.empty(),
             hideCustomer: false,
             offset: 0,
             user: fakeUser,
@@ -695,121 +717,6 @@ void main() {
         final isApiSuccess = CustomerCodeState.initial().apiSuccess;
         expect(isApiSuccess, true);
       },
-    );
-
-    blocTest(
-      'Customer Code Fetch Success with finalCustomerCodeinfo length greater than one',
-      build: () => CustomerCodeBloc(
-        customerCodeRepository: customerCodeMockRepo,
-        config: config,
-      ),
-      seed: () => CustomerCodeState.initial().copyWith(
-        hideCustomer: false,
-        userInfo: fakeUser,
-        selectedSalesOrg: fakeSaleOrgWithMultipleCustomerInfo,
-      ),
-      setUp: () {
-        when(
-          () => customerCodeMockRepo.getCustomerCode(
-            salesOrganisation: fakeSaleOrgWithMultipleCustomerInfo,
-            customerCodes: [
-              fakeMultipleSalesOrgCustomerInfos[0]
-                  .customerCodeSoldTo
-                  .checkAllOrCustomerCode,
-              fakeMultipleSalesOrgCustomerInfos[1]
-                  .customerCodeSoldTo
-                  .checkAllOrCustomerCode,
-            ],
-            hideCustomer: false,
-            offset: 0,
-            user: fakeUser,
-            pageSize: config.pageSize,
-          ),
-        ).thenAnswer(
-          (invocation) async => Right(
-            customerMockData.copyWith(
-              shipToCount: 2,
-              soldToInformation: [
-                customerMockData.soldToInformation.first,
-                customerMockData.soldToInformation.first,
-              ],
-            ),
-          ),
-        );
-      },
-      act: (CustomerCodeBloc bloc) {
-        bloc.add(
-          const CustomerCodeEvent.fetch(),
-        );
-      },
-      expect: () => [
-        CustomerCodeState.initial().copyWith(
-          hideCustomer: false,
-          userInfo: fakeUser,
-          selectedSalesOrg: fakeSaleOrgWithMultipleCustomerInfo,
-          isFetching: false,
-          customerCodeList: [
-            customerMockData.soldToInformation.first,
-            customerMockData.soldToInformation.first,
-          ],
-          apiFailureOrSuccessOption: none(),
-          canLoadMore: false,
-        ),
-      ],
-      verify: (CustomerCodeBloc bloc) => expect(
-        bloc.state.customerCodeList,
-        [
-          customerMockData.soldToInformation.first,
-          customerMockData.soldToInformation.first,
-        ],
-      ),
-    );
-
-    blocTest(
-      'Customer Code Fetch Success with finalCustomerCodeinfo length is zero',
-      build: () => CustomerCodeBloc(
-        customerCodeRepository: customerCodeMockRepo,
-        config: config,
-      ),
-      seed: () => CustomerCodeState.initial().copyWith(
-        hideCustomer: false,
-        userInfo: fakeUser,
-        selectedSalesOrg: fakeSaleOrg,
-      ),
-      setUp: () {
-        when(
-          () => customerCodeMockRepo.getCustomerCode(
-            salesOrganisation: fakeSaleOrg,
-            customerCodes: [
-              fakeSalesOrgCustomerInfos[0]
-                  .customerCodeSoldTo
-                  .checkAllOrCustomerCode,
-            ],
-            hideCustomer: false,
-            offset: 0,
-            user: fakeUser,
-            pageSize: config.pageSize,
-          ),
-        ).thenAnswer(
-          (invocation) async => Right(CustomerInformation.empty()),
-        );
-      },
-      act: (CustomerCodeBloc bloc) {
-        bloc.add(
-          const CustomerCodeEvent.fetch(),
-        );
-      },
-      expect: () => [
-        CustomerCodeState.initial().copyWith(
-          hideCustomer: false,
-          userInfo: fakeUser,
-          selectedSalesOrg: fakeSaleOrg,
-          isFetching: false,
-          customerCodeList: [],
-          apiFailureOrSuccessOption: none(),
-          canLoadMore: false,
-        ),
-      ],
     );
 
     blocTest<CustomerCodeBloc, CustomerCodeState>(
@@ -922,7 +829,7 @@ void main() {
     //       hideCustomer: false,
     //       userInfo: fakeUser,
     //       selectedSalesOrg: fakeSaleOrg,
-    //       isSearchActive: true,
+    //
     //       isFetching: false,
     //       canLoadMore: false,
     //       customerCodeList: [customerMockData.first],
@@ -977,7 +884,7 @@ void main() {
     //         hideCustomer: false,
     //         userInfo: fakeUser,
     //         selectedSalesOrg: fakeSaleOrg,
-    //         isSearchActive: true,
+    //
     //         isFetching: false,
     //         customerCodeList: customerMockData,
     //         searchKey: SearchKey.search('mockShippingAddress'),

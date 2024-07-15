@@ -1,5 +1,6 @@
 import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
@@ -30,7 +31,9 @@ class CustomerCodeSelector extends StatelessWidget {
               ? null
               : () {
                   context.read<CustomerCodeBloc>().add(
-                        const CustomerCodeEvent.fetch(),
+                        CustomerCodeEvent.fetch(
+                          searchValue: SearchKey.empty(),
+                        ),
                       );
                   context.router.push(const CustomerSearchPageRoute());
                 },

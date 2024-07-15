@@ -9,6 +9,7 @@ import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/customer_code_local.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/customer_code_remote.dart';
 import 'package:ezrxmobile/infrastructure/account/dtos/account_selector_storage_dto.dart';
@@ -110,7 +111,7 @@ void main() {
 
       final result = await customerCodeRepository.getCustomerCode(
         salesOrganisation: mockSalesOrg,
-        customerCodes: [mockCustomerCode],
+        searchKey: SearchKey.search(mockCustomerCode),
         hideCustomer: hideCustomer,
         offset: offset,
         user: mockSalesRepUser,
@@ -129,7 +130,7 @@ void main() {
 
       final result = await customerCodeRepository.getCustomerCode(
         salesOrganisation: mockSalesOrg,
-        customerCodes: [mockCustomerCode],
+        searchKey: SearchKey.search(mockCustomerCode),
         hideCustomer: hideCustomer,
         offset: offset,
         user: mockSalesRepUser,
@@ -151,7 +152,7 @@ void main() {
 
       final result = await customerCodeRepository.getCustomerCode(
         salesOrganisation: mockSalesOrg,
-        customerCodes: [mockCustomerCode],
+        searchKey: SearchKey.search(mockCustomerCode),
         hideCustomer: hideCustomer,
         offset: offset,
         user: mockClientUser,
@@ -171,7 +172,7 @@ void main() {
 
       final result = await customerCodeRepository.getCustomerCode(
         salesOrganisation: mockSalesOrg,
-        customerCodes: [mockCustomerCode],
+        searchKey: SearchKey.search(mockCustomerCode),
         hideCustomer: hideCustomer,
         offset: offset,
         user: mockClientUser,
@@ -213,7 +214,7 @@ void main() {
 
       final result = await customerCodeRepository.getCustomerCode(
         salesOrganisation: mockSalesOrg,
-        customerCodes: customerCodeList,
+        searchKey: SearchKey.search(customerCodeList.join(',')),
         hideCustomer: hideCustomer,
         offset: offset,
         user: mockSalesRepUser,
@@ -252,7 +253,7 @@ void main() {
 
       final result = await customerCodeRepository.getCustomerCode(
         salesOrganisation: mockSalesOrg,
-        customerCodes: customerCodeList,
+        searchKey: SearchKey.search(customerCodeList.join(',')),
         hideCustomer: hideCustomer,
         offset: offset,
         user: mockSalesRepUser,
@@ -277,7 +278,7 @@ void main() {
       when(
         () => customerCodeRemoteDataSourceMock.getCustomerCodeList(
           salesOrg: mockSalesOrg.salesOrg.getOrCrash(),
-          customerCode: customerCodeList.join(','),
+          searchKey: customerCodeList.join(','),
           hideCustomer: hideCustomer,
           offset: offset,
           pageSize: pageSize,
@@ -295,7 +296,7 @@ void main() {
 
       final result = await customerCodeRepository.getCustomerCode(
         salesOrganisation: mockSalesOrg,
-        customerCodes: customerCodeList,
+        searchKey: SearchKey.search(customerCodeList.join(',')),
         hideCustomer: hideCustomer,
         offset: offset,
         user: mockClientUser,
@@ -316,7 +317,7 @@ void main() {
       when(
         () => customerCodeRemoteDataSourceMock.getCustomerCodeList(
           salesOrg: mockSalesOrg.salesOrg.getOrCrash(),
-          customerCode: customerCodeList.join(','),
+          searchKey: customerCodeList.join(','),
           hideCustomer: hideCustomer,
           offset: offset,
           pageSize: pageSize,
@@ -334,7 +335,7 @@ void main() {
 
       final result = await customerCodeRepository.getCustomerCode(
         salesOrganisation: mockSalesOrg,
-        customerCodes: customerCodeList,
+        searchKey: SearchKey.search(customerCodeList.join(',')),
         hideCustomer: hideCustomer,
         offset: offset,
         user: mockClientUser,
@@ -421,7 +422,7 @@ void main() {
 
       final result = await customerCodeRepository.getCustomerCode(
         salesOrganisation: mockSalesOrg,
-        customerCodes: [mockCustomerCode],
+        searchKey: SearchKey.search(mockCustomerCode),
         hideCustomer: hideCustomer,
         offset: offset,
         user: mockSalesRepUser,

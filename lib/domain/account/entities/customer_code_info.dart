@@ -120,4 +120,6 @@ extension CustomerCodeList on List<CustomerCodeInfo> {
   ShipToInfo get preSelectedShipToInfo => canPreSelectShipToCode
       ? preSelectedCustomerCodeInfo.shipToInfos.first
       : ShipToInfo.empty();
+
+  int get shipToCount => fold(0, (t, e) => t + e.shipToInfos.length);
 }

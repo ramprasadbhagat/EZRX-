@@ -6,11 +6,12 @@ import 'package:ezrxmobile/domain/account/entities/customer_code_information.dar
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
+import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 
 abstract class ICustomerCodeRepository {
   Future<Either<ApiFailure, CustomerInformation>> getCustomerCode({
     required SalesOrganisation salesOrganisation,
-    required List<String> customerCodes,
+    required SearchKey searchKey,
     required bool hideCustomer,
     required int offset,
     required User user,

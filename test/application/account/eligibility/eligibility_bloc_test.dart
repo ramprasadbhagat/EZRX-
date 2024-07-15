@@ -321,7 +321,7 @@ void main() {
         when(
           () => customerCodeRepositoryMock.getCustomerCode(
             salesOrganisation: fakeSaleOrg,
-            customerCodes: ['mockShippingAddress'],
+            searchKey: SearchKey.search('mockShippingAddress'),
             hideCustomer: false,
             offset: 0,
             user: fakeUser,
@@ -334,9 +334,9 @@ void main() {
         when(
           () => customerCodeRepositoryMock.getCustomerCode(
             salesOrganisation: fakeSaleOrg,
-            customerCodes: [
+            searchKey: SearchKey.search(
               fakeSalesOrgCustomerInfos.first.customerCodeSoldTo.getOrCrash(),
-            ],
+            ),
             hideCustomer: false,
             offset: 0,
             user: fakeUser,
@@ -489,7 +489,7 @@ void main() {
       when(
         () => customerCodeRepositoryMock.getCustomerCode(
           salesOrganisation: fakeSaleOrg,
-          customerCodes: ['mockShippingAddress'],
+          searchKey: SearchKey.search('mockShippingAddress'),
           hideCustomer: false,
           offset: 0,
           user: fakeUser,
@@ -552,7 +552,7 @@ void main() {
       when(
         () => customerCodeRepositoryMock.getCustomerCode(
           salesOrganisation: fakeSaleOrg,
-          customerCodes: ['mockShippingAddress'],
+          searchKey: SearchKey.search('mockShippingAddress'),
           hideCustomer: false,
           offset: 0,
           user: fakeUser,
@@ -617,7 +617,7 @@ void main() {
       when(
         () => customerCodeRepositoryMock.getCustomerCode(
           salesOrganisation: fakeSaleOrg,
-          customerCodes: ['0000002011'],
+          searchKey: SearchKey.search('0000002011'),
           hideCustomer: false,
           offset: 0,
           user: fakeUser,
