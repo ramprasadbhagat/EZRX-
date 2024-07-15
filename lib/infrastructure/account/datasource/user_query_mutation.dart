@@ -45,6 +45,7 @@ class UserQueryMutation {
             countryCode
             acceptTC
             isFirstLogin
+            isResetUserPassword
             optIn
             optInTimestamp
             hasPriceOverride

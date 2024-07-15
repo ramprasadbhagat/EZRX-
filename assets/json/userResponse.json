@@ -38,6 +38,7 @@
          "countryCode": "-",
          "acceptTC": true,
          "isFirstLogin": false,
+         "isResetUserPassword": false,
          "optIn": false,
          "optInTimestamp": "",
          "hasPriceOverride": false,

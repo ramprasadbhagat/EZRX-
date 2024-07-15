@@ -35,8 +35,5 @@ class UserState with _$UserState {
       isNotEmpty && !isLoginOnBehalf && !user.acceptPrivacyPolicy;
 
   bool get showResetPasswordScreen =>
-      isNotEmpty &&
-      !isLoginOnBehalf &&
-      user.acceptPrivacyPolicy &&
-      user.isFirstLogin;
+      isNotEmpty && !isLoginOnBehalf && user.eligibleForResetPassword;
 }

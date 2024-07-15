@@ -87,6 +87,8 @@ mixin _$UserDto {
   String get acceptMPTC => throw _privateConstructorUsedError;
   @JsonKey(name: 'isFirstLogin', defaultValue: false)
   bool get isFirstLogin => throw _privateConstructorUsedError;
+  @JsonKey(name: 'isResetUserPassword', defaultValue: false)
+  bool get isResetUserPassword => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -151,7 +153,9 @@ abstract class $UserDtoCopyWith<$Res> {
           name: 'acceptMPTC',
           readValue: JsonReadValueHelper.handleMarketPlaceTnCAcceptance)
       String acceptMPTC,
-      @JsonKey(name: 'isFirstLogin', defaultValue: false) bool isFirstLogin});
+      @JsonKey(name: 'isFirstLogin', defaultValue: false) bool isFirstLogin,
+      @JsonKey(name: 'isResetUserPassword', defaultValue: false)
+      bool isResetUserPassword});
 
   $RoleDtoCopyWith<$Res> get role;
   $AccessRightDtoCopyWith<$Res> get accessRight;
@@ -197,6 +201,7 @@ class _$UserDtoCopyWithImpl<$Res, $Val extends UserDto>
     Object? mobileNumber = null,
     Object? acceptMPTC = null,
     Object? isFirstLogin = null,
+    Object? isResetUserPassword = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -307,6 +312,10 @@ class _$UserDtoCopyWithImpl<$Res, $Val extends UserDto>
           ? _value.isFirstLogin
           : isFirstLogin // ignore: cast_nullable_to_non_nullable
               as bool,
+      isResetUserPassword: null == isResetUserPassword
+          ? _value.isResetUserPassword
+          : isResetUserPassword // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 
@@ -387,7 +396,9 @@ abstract class _$$UserDtoImplCopyWith<$Res> implements $UserDtoCopyWith<$Res> {
           name: 'acceptMPTC',
           readValue: JsonReadValueHelper.handleMarketPlaceTnCAcceptance)
       String acceptMPTC,
-      @JsonKey(name: 'isFirstLogin', defaultValue: false) bool isFirstLogin});
+      @JsonKey(name: 'isFirstLogin', defaultValue: false) bool isFirstLogin,
+      @JsonKey(name: 'isResetUserPassword', defaultValue: false)
+      bool isResetUserPassword});
 
   @override
   $RoleDtoCopyWith<$Res> get role;
@@ -433,6 +444,7 @@ class __$$UserDtoImplCopyWithImpl<$Res>
     Object? mobileNumber = null,
     Object? acceptMPTC = null,
     Object? isFirstLogin = null,
+    Object? isResetUserPassword = null,
   }) {
     return _then(_$UserDtoImpl(
       id: null == id
@@ -543,6 +555,10 @@ class __$$UserDtoImplCopyWithImpl<$Res>
           ? _value.isFirstLogin
           : isFirstLogin // ignore: cast_nullable_to_non_nullable
               as bool,
+      isResetUserPassword: null == isResetUserPassword
+          ? _value.isResetUserPassword
+          : isResetUserPassword // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -610,7 +626,9 @@ class _$UserDtoImpl extends _UserDto {
           readValue: JsonReadValueHelper.handleMarketPlaceTnCAcceptance)
       required this.acceptMPTC,
       @JsonKey(name: 'isFirstLogin', defaultValue: false)
-      required this.isFirstLogin})
+      required this.isFirstLogin,
+      @JsonKey(name: 'isResetUserPassword', defaultValue: false)
+      required this.isResetUserPassword})
       : _userSalesOrganisations = userSalesOrganisations,
         _salesOrganisations = salesOrganisations,
         _paymentNotification = paymentNotification,
@@ -740,10 +758,13 @@ class _$UserDtoImpl extends _UserDto {
   @override
   @JsonKey(name: 'isFirstLogin', defaultValue: false)
   final bool isFirstLogin;
+  @override
+  @JsonKey(name: 'isResetUserPassword', defaultValue: false)
+  final bool isResetUserPassword;
 
   @override
   String toString() {
-    return 'UserDto(id: $id, username: $username, email: $email, firstName: $firstName, lastName: $lastName, role: $role, customerCode: $customerCode, userSalesOrganisations: $userSalesOrganisations, salesOrganisations: $salesOrganisations, accessRight: $accessRight, emailNotifications: $emailNotifications, mobileNotifications: $mobileNotifications, languagePreference: $languagePreference, enableOrderType: $enableOrderType, acceptPrivacyPolicy: $acceptPrivacyPolicy, hasBonusOverride: $hasBonusOverride, disableCreateOrder: $disableCreateOrder, disableReturns: $disableReturns, disablePaymentAccess: $disablePaymentAccess, hasPriceOverride: $hasPriceOverride, disablePaymentNotification: $disablePaymentNotification, paymentNotification: $paymentNotification, preferredLanguage: $preferredLanguage, supportedLanguages: $supportedLanguages, mobileNumber: $mobileNumber, acceptMPTC: $acceptMPTC, isFirstLogin: $isFirstLogin)';
+    return 'UserDto(id: $id, username: $username, email: $email, firstName: $firstName, lastName: $lastName, role: $role, customerCode: $customerCode, userSalesOrganisations: $userSalesOrganisations, salesOrganisations: $salesOrganisations, accessRight: $accessRight, emailNotifications: $emailNotifications, mobileNotifications: $mobileNotifications, languagePreference: $languagePreference, enableOrderType: $enableOrderType, acceptPrivacyPolicy: $acceptPrivacyPolicy, hasBonusOverride: $hasBonusOverride, disableCreateOrder: $disableCreateOrder, disableReturns: $disableReturns, disablePaymentAccess: $disablePaymentAccess, hasPriceOverride: $hasPriceOverride, disablePaymentNotification: $disablePaymentNotification, paymentNotification: $paymentNotification, preferredLanguage: $preferredLanguage, supportedLanguages: $supportedLanguages, mobileNumber: $mobileNumber, acceptMPTC: $acceptMPTC, isFirstLogin: $isFirstLogin, isResetUserPassword: $isResetUserPassword)';
   }
 
   @override
@@ -803,7 +824,9 @@ class _$UserDtoImpl extends _UserDto {
             (identical(other.acceptMPTC, acceptMPTC) ||
                 other.acceptMPTC == acceptMPTC) &&
             (identical(other.isFirstLogin, isFirstLogin) ||
-                other.isFirstLogin == isFirstLogin));
+                other.isFirstLogin == isFirstLogin) &&
+            (identical(other.isResetUserPassword, isResetUserPassword) ||
+                other.isResetUserPassword == isResetUserPassword));
   }
 
   @JsonKey(ignore: true)
@@ -836,7 +859,8 @@ class _$UserDtoImpl extends _UserDto {
         const DeepCollectionEquality().hash(_supportedLanguages),
         mobileNumber,
         acceptMPTC,
-        isFirstLogin
+        isFirstLogin,
+        isResetUserPassword
       ]);
 
   @JsonKey(ignore: true)
@@ -916,7 +940,9 @@ abstract class _UserDto extends UserDto {
           readValue: JsonReadValueHelper.handleMarketPlaceTnCAcceptance)
       required final String acceptMPTC,
       @JsonKey(name: 'isFirstLogin', defaultValue: false)
-      required final bool isFirstLogin}) = _$UserDtoImpl;
+      required final bool isFirstLogin,
+      @JsonKey(name: 'isResetUserPassword', defaultValue: false)
+      required final bool isResetUserPassword}) = _$UserDtoImpl;
   const _UserDto._() : super._();
 
   factory _UserDto.fromJson(Map<String, dynamic> json) = _$UserDtoImpl.fromJson;
@@ -1013,6 +1039,9 @@ abstract class _UserDto extends UserDto {
   @override
   @JsonKey(name: 'isFirstLogin', defaultValue: false)
   bool get isFirstLogin;
+  @override
+  @JsonKey(name: 'isResetUserPassword', defaultValue: false)
+  bool get isResetUserPassword;
   @override
   @JsonKey(ignore: true)
   _$$UserDtoImplCopyWith<_$UserDtoImpl> get copyWith =>

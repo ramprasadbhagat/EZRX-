@@ -90,6 +90,8 @@ class UserDto with _$UserDto {
     required String acceptMPTC,
     @JsonKey(name: 'isFirstLogin', defaultValue: false)
     required bool isFirstLogin,
+    @JsonKey(name: 'isResetUserPassword', defaultValue: false)
+    required bool isResetUserPassword,
   }) = _UserDto;
 
   factory UserDto.fromDomain(User user) {
@@ -126,6 +128,7 @@ class UserDto with _$UserDto {
       supportedLanguages: <String>[],
       acceptMPTC: user.acceptMPTC.getOrDefaultValue(''),
       isFirstLogin: user.isFirstLogin,
+      isResetUserPassword: user.isResetUserPassword,
     );
   }
   static const emptyUserDto = UserDto(
@@ -154,6 +157,7 @@ class UserDto with _$UserDto {
     salesOrganisations: <String>[],
     acceptMPTC: '',
     isFirstLogin: false,
+    isResetUserPassword: false,
   );
 
   User toDomain() {
@@ -196,6 +200,7 @@ class UserDto with _$UserDto {
       supportedLanguages: supportedLanguages.map((e) => Language(e)).toList(),
       acceptMPTC: MarketPlaceTnCAcceptance(acceptMPTC),
       isFirstLogin: isFirstLogin,
+      isResetUserPassword: isResetUserPassword,
     );
   }
 

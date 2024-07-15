@@ -39,6 +39,7 @@ mixin _$User {
   PhoneNumber get mobileNumber => throw _privateConstructorUsedError;
   MarketPlaceTnCAcceptance get acceptMPTC => throw _privateConstructorUsedError;
   bool get isFirstLogin => throw _privateConstructorUsedError;
+  bool get isResetUserPassword => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $UserCopyWith<User> get copyWith => throw _privateConstructorUsedError;
@@ -71,7 +72,8 @@ abstract class $UserCopyWith<$Res> {
       List<Language> supportedLanguages,
       PhoneNumber mobileNumber,
       MarketPlaceTnCAcceptance acceptMPTC,
-      bool isFirstLogin});
+      bool isFirstLogin,
+      bool isResetUserPassword});
 
   $FullNameCopyWith<$Res> get fullName;
   $RoleCopyWith<$Res> get role;
@@ -114,6 +116,7 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
     Object? mobileNumber = null,
     Object? acceptMPTC = null,
     Object? isFirstLogin = null,
+    Object? isResetUserPassword = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -204,6 +207,10 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
           ? _value.isFirstLogin
           : isFirstLogin // ignore: cast_nullable_to_non_nullable
               as bool,
+      isResetUserPassword: null == isResetUserPassword
+          ? _value.isResetUserPassword
+          : isResetUserPassword // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 
@@ -269,7 +276,8 @@ abstract class _$$UserImplCopyWith<$Res> implements $UserCopyWith<$Res> {
       List<Language> supportedLanguages,
       PhoneNumber mobileNumber,
       MarketPlaceTnCAcceptance acceptMPTC,
-      bool isFirstLogin});
+      bool isFirstLogin,
+      bool isResetUserPassword});
 
   @override
   $FullNameCopyWith<$Res> get fullName;
@@ -313,6 +321,7 @@ class __$$UserImplCopyWithImpl<$Res>
     Object? mobileNumber = null,
     Object? acceptMPTC = null,
     Object? isFirstLogin = null,
+    Object? isResetUserPassword = null,
   }) {
     return _then(_$UserImpl(
       id: null == id
@@ -403,6 +412,10 @@ class __$$UserImplCopyWithImpl<$Res>
           ? _value.isFirstLogin
           : isFirstLogin // ignore: cast_nullable_to_non_nullable
               as bool,
+      isResetUserPassword: null == isResetUserPassword
+          ? _value.isResetUserPassword
+          : isResetUserPassword // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -432,7 +445,8 @@ class _$UserImpl extends _User {
       required final List<Language> supportedLanguages,
       required this.mobileNumber,
       required this.acceptMPTC,
-      required this.isFirstLogin})
+      required this.isFirstLogin,
+      required this.isResetUserPassword})
       : _userSalesOrganisations = userSalesOrganisations,
         _salesOrganisations = salesOrganisations,
         _supportedLanguages = supportedLanguages,
@@ -503,10 +517,12 @@ class _$UserImpl extends _User {
   final MarketPlaceTnCAcceptance acceptMPTC;
   @override
   final bool isFirstLogin;
+  @override
+  final bool isResetUserPassword;
 
   @override
   String toString() {
-    return 'User(id: $id, username: $username, email: $email, fullName: $fullName, role: $role, customerCode: $customerCode, userSalesOrganisations: $userSalesOrganisations, salesOrganisations: $salesOrganisations, accessRight: $accessRight, settings: $settings, acceptPrivacyPolicy: $acceptPrivacyPolicy, enableOrderType: $enableOrderType, hasBonusOverride: $hasBonusOverride, disableCreateOrder: $disableCreateOrder, disableReturns: $disableReturns, disablePaymentAccess: $disablePaymentAccess, hasPriceOverride: $hasPriceOverride, preferredLanguage: $preferredLanguage, supportedLanguages: $supportedLanguages, mobileNumber: $mobileNumber, acceptMPTC: $acceptMPTC, isFirstLogin: $isFirstLogin)';
+    return 'User(id: $id, username: $username, email: $email, fullName: $fullName, role: $role, customerCode: $customerCode, userSalesOrganisations: $userSalesOrganisations, salesOrganisations: $salesOrganisations, accessRight: $accessRight, settings: $settings, acceptPrivacyPolicy: $acceptPrivacyPolicy, enableOrderType: $enableOrderType, hasBonusOverride: $hasBonusOverride, disableCreateOrder: $disableCreateOrder, disableReturns: $disableReturns, disablePaymentAccess: $disablePaymentAccess, hasPriceOverride: $hasPriceOverride, preferredLanguage: $preferredLanguage, supportedLanguages: $supportedLanguages, mobileNumber: $mobileNumber, acceptMPTC: $acceptMPTC, isFirstLogin: $isFirstLogin, isResetUserPassword: $isResetUserPassword)';
   }
 
   @override
@@ -554,7 +570,9 @@ class _$UserImpl extends _User {
             (identical(other.acceptMPTC, acceptMPTC) ||
                 other.acceptMPTC == acceptMPTC) &&
             (identical(other.isFirstLogin, isFirstLogin) ||
-                other.isFirstLogin == isFirstLogin));
+                other.isFirstLogin == isFirstLogin) &&
+            (identical(other.isResetUserPassword, isResetUserPassword) ||
+                other.isResetUserPassword == isResetUserPassword));
   }
 
   @override
@@ -581,7 +599,8 @@ class _$UserImpl extends _User {
         const DeepCollectionEquality().hash(_supportedLanguages),
         mobileNumber,
         acceptMPTC,
-        isFirstLogin
+        isFirstLogin,
+        isResetUserPassword
       ]);
 
   @JsonKey(ignore: true)
@@ -614,7 +633,8 @@ abstract class _User extends User {
       required final List<Language> supportedLanguages,
       required final PhoneNumber mobileNumber,
       required final MarketPlaceTnCAcceptance acceptMPTC,
-      required final bool isFirstLogin}) = _$UserImpl;
+      required final bool isFirstLogin,
+      required final bool isResetUserPassword}) = _$UserImpl;
   const _User._() : super._();
 
   @override
@@ -661,6 +681,8 @@ abstract class _User extends User {
   MarketPlaceTnCAcceptance get acceptMPTC;
   @override
   bool get isFirstLogin;
+  @override
+  bool get isResetUserPassword;
   @override
   @JsonKey(ignore: true)
   _$$UserImplCopyWith<_$UserImpl> get copyWith =>

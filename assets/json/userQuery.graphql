@@ -37,6 +37,7 @@
             countryCode
             acceptTC
             isFirstLogin
+            isResetUserPassword
             optIn
             optInTimestamp
             hasPriceOverride

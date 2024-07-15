@@ -39,6 +39,7 @@ class User with _$User {
     required PhoneNumber mobileNumber,
     required MarketPlaceTnCAcceptance acceptMPTC,
     required bool isFirstLogin,
+    required bool isResetUserPassword,
   }) = _User;
 
   factory User.empty() => User(
@@ -69,7 +70,11 @@ class User with _$User {
         mobileNumber: PhoneNumber(''),
         acceptMPTC: MarketPlaceTnCAcceptance(''),
         isFirstLogin: false,
+        isResetUserPassword: false,
       );
+
+  bool get eligibleForResetPassword =>
+      acceptPrivacyPolicy && (isFirstLogin || isResetUserPassword);
 
   bool get userCanCreateOrder {
     // For Root / ZP admin the it will always return true

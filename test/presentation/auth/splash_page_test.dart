@@ -181,6 +181,25 @@ void main() {
     ),
   );
 
+  final valueVariantForResetPassword = ValueVariant<User>({
+    User.empty().copyWith(
+      isFirstLogin: false,
+      isResetUserPassword: false,
+    ),
+    User.empty().copyWith(
+      isFirstLogin: true,
+      isResetUserPassword: false,
+    ),
+    User.empty().copyWith(
+      isFirstLogin: false,
+      isResetUserPassword: true,
+    ),
+    User.empty().copyWith(
+      isFirstLogin: true,
+      isResetUserPassword: true,
+    ),
+  });
+
   setUpAll(() async {
     remoteConfigServiceMock = RemoteConfigServiceMock();
     locator.registerLazySingleton(() => MixpanelServiceMock());
@@ -1611,5 +1630,53 @@ void main() {
         );
       });
     });
+
+    testWidgets(
+      'open reset password page depend on eligibleResetPassword',
+      (tester) async {
+        final userVariant =
+            valueVariantForResetPassword.currentValue ?? User.empty();
+        final isFirstLogin = userVariant.isFirstLogin;
+        final isResetUserPassword = userVariant.isResetUserPassword;
+        final expectedStates = [
+          UserState.initial(),
+          UserState.initial().copyWith(
+            isLoginOnBehalf: false,
+            user: userVariant.copyWith(
+              acceptPrivacyPolicy: true,
+            ),
+          ),
+        ];
+        whenListen(userBlocMock, Stream.fromIterable(expectedStates));
+        when(
+          () => autoRouterMock.push(
+            ResetPasswordPageRoute(
+              isFirstLogin: true,
+            ),
+          ),
+        ).thenAnswer((_) async => true);
+        await getWidget(tester);
+        await tester.pump();
+
+        if (isFirstLogin || isResetUserPassword) {
+          verify(
+            () => autoRouterMock.push(
+              ResetPasswordPageRoute(
+                isFirstLogin: true,
+              ),
+            ),
+          ).called(1);
+        } else {
+          verifyNever(
+            () => autoRouterMock.push(
+              ResetPasswordPageRoute(
+                isFirstLogin: true,
+              ),
+            ),
+          );
+        }
+      },
+      variant: valueVariantForResetPassword,
+    );
   });
 }
