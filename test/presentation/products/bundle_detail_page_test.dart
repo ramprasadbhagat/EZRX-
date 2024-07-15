@@ -258,6 +258,12 @@ void main() {
 
         await tester.pumpWidget(getScopedWidget());
         await tester.pump();
+        await tester.dragUntilVisible(
+          find.byKey(WidgetKeys.bundleOfferPrice),
+          find.byKey(WidgetKeys.scrollList),
+          const Offset(0, -500),
+        );
+        await tester.pumpAndSettle();
         final price = find.text('SGD 200.00 per item', findRichText: true);
         expect(price, findsOneWidget);
       });
@@ -283,6 +289,11 @@ void main() {
 
         await tester.pumpWidget(getScopedWidget());
         await tester.pump();
+        await tester.dragUntilVisible(
+          find.byKey(WidgetKeys.bundleOfferPrice),
+          find.byKey(WidgetKeys.scrollList),
+          const Offset(0, -500),
+        );
         final balanceTextRowFinder = find.byType(BalanceTextRow);
         expect(balanceTextRowFinder, findsNWidgets(3));
         expect(
@@ -322,6 +333,11 @@ void main() {
         final carouselImageKeyFinder1 =
             find.byKey(const ValueKey('selectedbundle-material-1true'));
         expect(carouselImageKeyFinder1, findsOneWidget);
+        await tester.dragUntilVisible(
+          find.byKey(WidgetKeys.bundleOfferPrice),
+          find.byKey(WidgetKeys.scrollList),
+          const Offset(0, -500),
+        );
         await tester.tap(carouselImageKeyFinder1);
         verify(
           () => productDetailMockBloc.add(
@@ -371,6 +387,11 @@ void main() {
         );
         await tester.pumpWidget(getScopedWidget());
         await tester.pumpAndSettle();
+        await tester.dragUntilVisible(
+          find.byKey(WidgetKeys.bundleOfferPrice),
+          find.byKey(WidgetKeys.scrollList),
+          const Offset(0, -500),
+        );
         expect(bundleOfferMaterialInfo, findsOneWidget);
         await tester.tap(bundleOfferMaterialInfo.first);
         await tester.pumpAndSettle();
@@ -409,6 +430,11 @@ void main() {
         );
         await tester.pumpWidget(getScopedWidget());
         await tester.pumpAndSettle();
+        await tester.dragUntilVisible(
+          find.byKey(WidgetKeys.bundleOfferPrice),
+          find.byKey(WidgetKeys.scrollList),
+          const Offset(0, -500),
+        );
         expect(favoritesIcon, findsOneWidget);
         await tester.tap(favoritesIcon);
         verify(
@@ -436,6 +462,11 @@ void main() {
         );
         await tester.pumpWidget(getScopedWidget());
         await tester.pumpAndSettle();
+        await tester.dragUntilVisible(
+          find.byKey(WidgetKeys.bundleOfferPrice),
+          find.byKey(WidgetKeys.scrollList),
+          const Offset(0, -500),
+        );
         expect(favoritesIcon, findsOneWidget);
         await tester.tap(favoritesIcon);
         await tester.pumpWidget(getScopedWidget());

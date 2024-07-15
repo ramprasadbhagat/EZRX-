@@ -23,9 +23,9 @@ class _BundleImageSection extends StatelessWidget {
               children: [
                 ProductImage(
                   key: WidgetKeys.bundleImage,
-                  fit: BoxFit.contain,
+                  fit: BoxFit.fill,
                   materialNumber: selectedMaterial.materialNumber,
-                  height: MediaQuery.of(context).size.height * 0.30,
+                  height: MediaQuery.of(context).size.width * 414 / 494,
                   width: double.infinity,
                 ),
                 bundleMaterials.isNotEmpty

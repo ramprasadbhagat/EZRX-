@@ -32,7 +32,7 @@ class _ProductImageSection extends StatelessWidget {
                               .elementAt(productDetailState.selectedImageIndex)
                           : '',
                       fit: BoxFit.fill,
-                      height: MediaQuery.of(context).size.height * 0.30,
+                      height: MediaQuery.of(context).size.width * 414 / 494,
                       width: double.infinity,
                     ),
                     Positioned(

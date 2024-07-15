@@ -46,6 +46,7 @@ import 'package:ezrxmobile/infrastructure/order/datasource/tender_contract_local
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/list_price_strike_through_component.dart';
 import 'package:ezrxmobile/presentation/core/market_place/market_place_rectangle_logo.dart';
+import 'package:ezrxmobile/presentation/core/product_price_label.dart';
 import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
 import 'package:ezrxmobile/presentation/core/switch_widget.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
@@ -610,6 +611,9 @@ void main() {
           WidgetKeys.materialDetailsMaterialDescription,
         );
         expect(materialDetailsMaterialDescription, findsOneWidget);
+        await tester.ensureVisible(materialDetailsMaterialDescription);
+        await tester.pumpAndSettle();
+
         await tester.drag(
           materialDetailsMaterialDescription,
           const Offset(0.0, -1000),
@@ -2166,9 +2170,12 @@ void main() {
             findsOneWidget,
           );
 
-          await tester.tap(
-            find.byKey(WidgetKeys.materialDetailsInfoTile),
-          );
+          final materialDetailsInfoTileKey =
+              find.byKey(WidgetKeys.materialDetailsInfoTile);
+          await tester.ensureVisible(materialDetailsInfoTileKey);
+          await tester.pumpAndSettle();
+
+          await tester.tap(materialDetailsInfoTileKey);
           await tester.pumpAndSettle();
           expect(
             find.byKey(WidgetKeys.materialInfoDialog),
@@ -2206,9 +2213,12 @@ void main() {
             findsOneWidget,
           );
 
-          await tester.tap(
-            find.byKey(WidgetKeys.materialDetailsInfoTile),
-          );
+          final materialDetailsInfoTileKey =
+              find.byKey(WidgetKeys.materialDetailsInfoTile);
+          await tester.ensureVisible(materialDetailsInfoTileKey);
+          await tester.pumpAndSettle();
+
+          await tester.tap(materialDetailsInfoTileKey);
           await tester.pumpAndSettle();
           expect(
             find.byKey(WidgetKeys.materialInfoDialog),
@@ -2245,9 +2255,12 @@ void main() {
             findsOneWidget,
           );
 
-          await tester.tap(
-            find.byKey(WidgetKeys.materialDetailsInfoTile),
-          );
+          final materialDetailsInfoTileKey =
+              find.byKey(WidgetKeys.materialDetailsInfoTile);
+          await tester.ensureVisible(materialDetailsInfoTileKey);
+          await tester.pumpAndSettle();
+
+          await tester.tap(materialDetailsInfoTileKey);
           await tester.pumpAndSettle();
           expect(
             find.byKey(WidgetKeys.materialInfoDialog),
@@ -2284,9 +2297,12 @@ void main() {
             findsNothing,
           );
 
-          await tester.tap(
-            find.byKey(WidgetKeys.materialDetailsInfoTile),
-          );
+          final materialDetailsInfoTileKey =
+              find.byKey(WidgetKeys.materialDetailsInfoTile);
+          await tester.ensureVisible(materialDetailsInfoTileKey);
+          await tester.pumpAndSettle();
+
+          await tester.tap(materialDetailsInfoTileKey);
           await tester.pumpAndSettle();
           expect(
             find.byKey(WidgetKeys.materialInfoDialog),
@@ -2907,7 +2923,12 @@ void main() {
             ),
             findsOneWidget,
           );
-          await tester.tap(find.byType(MaterialInformation));
+
+          final materialInformationFinder = find.byType(MaterialInformation);
+          await tester.ensureVisible(materialInformationFinder);
+          await tester.pumpAndSettle();
+
+          await tester.tap(materialInformationFinder);
           await tester.pumpAndSettle();
           expect(
             find.byKey(
@@ -3198,6 +3219,12 @@ void main() {
             ),
             findsOneWidget,
           );
+          await tester.dragUntilVisible(
+            find.byType(ProductPriceLabel),
+            find.byKey(WidgetKeys.scrollList),
+            const Offset(0, -500),
+          );
+          await tester.pumpAndSettle();
           await tester.tap(tenderSwitch);
           await tester.pumpAndSettle();
           verify(
@@ -3528,6 +3555,12 @@ void main() {
             ),
             findsOneWidget,
           );
+          await tester.dragUntilVisible(
+            find.byType(ProductPriceLabel),
+            find.byKey(WidgetKeys.scrollList),
+            const Offset(0, -500),
+          );
+          await tester.pumpAndSettle();
           await tester.tap(tenderSwitch);
           await tester.pumpAndSettle();
 
