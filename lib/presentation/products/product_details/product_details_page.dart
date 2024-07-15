@@ -135,64 +135,79 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
       child: BlocProvider<TenderContractDetailBloc>(
         create: (context) => locator<TenderContractDetailBloc>(),
         child: Scaffold(
-          extendBodyBehindAppBar: true,
-          appBar: CustomAppBar.commonAppBar(
-            automaticallyImplyLeading: false,
-            backGroundColor: _isScrollAtInitialPosition
-                ? Colors.transparent
-                : ZPColors.white,
-            leadingWidget: IconButton(
-              onPressed: () => Navigator.pop(context),
-              icon: CircleAvatar(
-                maxRadius: 16,
-                backgroundColor: _isScrollAtInitialPosition
-                    ? ZPColors.darkGray
-                    : ZPColors.transparent,
-                child: Icon(
-                  Icons.chevron_left,
-                  color: _isScrollAtInitialPosition
-                      ? ZPColors.white
-                      : ZPColors.black,
-                  key: WidgetKeys.materialDetailsPageBack,
-                ),
-              ),
-            ),
-            actionWidget: [
-              Padding(
-                key: WidgetKeys.materialDetailsPageCartIcon,
-                padding: const EdgeInsets.all(10),
-                child: CartButton(
-                  backgroundCartColor: _isScrollAtInitialPosition
-                      ? ZPColors.darkGray
-                      : ZPColors.transparent,
-                  cartColor: _isScrollAtInitialPosition
-                      ? ZPColors.white
-                      : ZPColors.black,
-                  iconSize: 20,
-                  positionTop: -8,
-                  isPriceResetApplicable: true,
-                ),
-              ),
-            ],
-            customerBlockedOrSuspended:
-                eligibilityState.customerBlockOrSuspended,
-          ),
           floatingActionButton: ScrollToTopWidget(
             scrollController: _scrollController,
             isVisible: !_isScrollAtInitialPosition,
           ),
-          body: ListView(
+          body: CustomScrollView(
             key: WidgetKeys.scrollList,
             controller: _scrollController,
-            children: [
-              const LicenseExpiredBanner(),
-              const EdiUserBanner(),
-              const StockInfoBanner(),
-              const _ProductImageSection(),
-              _BodyContent(
-                isEditTender: widget.isEditTender,
+            slivers: [
+              BlocBuilder<ProductImageBloc, ProductImageState>(
+                buildWhen: (previous, current) =>
+                    previous.productImageMap != current.productImageMap,
+                builder: (context, productImageState) {
+                  final productImages = productImageState.getMaterialImage(
+                    widget.materialInfo.materialNumber,
+                  );
+
+                  return CustomAppBar.sliverAppBar(
+                    backGroundColor: _isScrollAtInitialPosition
+                        ? Colors.transparent
+                        : ZPColors.white,
+                    leadingWidget: IconButton(
+                      onPressed: () => Navigator.pop(context),
+                      icon: CircleAvatar(
+                        maxRadius: 16,
+                        backgroundColor: _isScrollAtInitialPosition
+                            ? ZPColors.darkGray
+                            : ZPColors.transparent,
+                        child: Icon(
+                          Icons.chevron_left,
+                          color: _isScrollAtInitialPosition
+                              ? ZPColors.white
+                              : ZPColors.black,
+                          key: WidgetKeys.materialDetailsPageBack,
+                        ),
+                      ),
+                    ),
+                    actionWidget: [
+                      Padding(
+                        key: WidgetKeys.materialDetailsPageCartIcon,
+                        padding: const EdgeInsets.all(10),
+                        child: CartButton(
+                          backgroundCartColor: _isScrollAtInitialPosition
+                              ? ZPColors.darkGray
+                              : ZPColors.transparent,
+                          cartColor: _isScrollAtInitialPosition
+                              ? ZPColors.white
+                              : ZPColors.black,
+                          iconSize: 20,
+                          positionTop: -8,
+                          isPriceResetApplicable: true,
+                        ),
+                      ),
+                    ],
+                    customerBlockedOrSuspended:
+                        eligibilityState.customerBlockOrSuspended,
+                    flexibleSpaceWidget: _ProductImageSection(
+                      productImage: productImages,
+                    ),
+                    expandedHeight: _getExpandedImageHeight(productImages),
+                  );
+                },
               ),
-              _SimilarProducts(),
+              SliverList.list(
+                children: [
+                  const LicenseExpiredBanner(),
+                  const StockInfoBanner(),
+                  const EdiUserBanner(),
+                  _BodyContent(
+                    isEditTender: widget.isEditTender,
+                  ),
+                  _SimilarProducts(),
+                ],
+              ),
             ],
           ),
           bottomNavigationBar: _Footer(
@@ -204,6 +219,12 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
       ),
     );
   }
+
+  double _getExpandedImageHeight(ProductImages productImages) =>
+      MediaQuery.of(context).size.width * 414 / 494 +
+      (productImages.hasMultipleImage
+          ? MediaQuery.of(context).size.height * 0.05
+          : 0);
 }
 
 class _SimilarProducts extends StatelessWidget {

@@ -20,9 +20,10 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final double titleSpacing;
   final double? toolBarHeight;
   final Color? boxShadowColor;
-
   final List<Widget> actionWidget;
   final Widget? title;
+  final bool isSliver;
+  final Widget? flexibleSpaceWidget;
   const CustomAppBar._({
     super.key,
     required this.automaticallyImplyLeading,
@@ -38,6 +39,8 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.leadingWidth,
     this.toolBarHeight,
     this.boxShadowColor,
+    this.isSliver = false,
+    this.flexibleSpaceWidget,
   });
 
   factory CustomAppBar.homeTabAppBar({
@@ -106,34 +109,93 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         titleSpacing: 0,
       );
 
+  factory CustomAppBar.sliverAppBar({
+    Widget? title,
+    required bool customerBlockedOrSuspended,
+    List<Widget> actionWidget = const [],
+    Color backGroundColor = ZPColors.white,
+    Widget? leadingWidget,
+    double titleSpacing = 10,
+    Key? key,
+    required Widget flexibleSpaceWidget,
+    required double expandedHeight,
+  }) =>
+      CustomAppBar._(
+        title: title,
+        automaticallyImplyLeading: false,
+        customerBlockedOrSuspended: customerBlockedOrSuspended,
+        isSearchBarVisible: false,
+        centreTitle: false,
+        actionWidget: actionWidget,
+        backGroundColor: backGroundColor,
+        leadingWidget: leadingWidget,
+        appBarHeight:
+            customerBlockedOrSuspended ? expandedHeight + 74 : expandedHeight,
+        key: key,
+        titleSpacing: titleSpacing,
+        isSliver: true,
+        flexibleSpaceWidget: flexibleSpaceWidget,
+        toolBarHeight:
+            customerBlockedOrSuspended ? kToolbarHeight + 10 : kToolbarHeight,
+      );
+
   @override
-  AppBar build(BuildContext context) {
-    return AppBar(
-      centerTitle: centreTitle,
-      titleSpacing: titleSpacing,
-      toolbarHeight: toolBarHeight,
-      leadingWidth: leadingWidth,
-      backgroundColor: backGroundColor,
-      automaticallyImplyLeading: automaticallyImplyLeading,
-      title: title,
-      actions: actionWidget,
-      leading: leadingWidget,
-      bottom: PreferredSize(
-        preferredSize: const Size.fromHeight(kToolbarHeight),
-        child: Column(
-          children: [
-            if (isSearchBarVisible)
-              _HomeProductSearchBar(
-                isCustomerBlocked: customerBlockedOrSuspended,
-                boxShadowColor: boxShadowColor,
-              ),
-            _CustomerBlockedBanner(
-              isCustomerBlocked: customerBlockedOrSuspended,
+  Widget build(BuildContext context) {
+    return isSliver
+        ? SliverAppBar(
+            centerTitle: centreTitle,
+            titleSpacing: titleSpacing,
+            leadingWidth: leadingWidth,
+            backgroundColor: backGroundColor,
+            automaticallyImplyLeading: automaticallyImplyLeading,
+            title: title,
+            actions: actionWidget,
+            leading: leadingWidget,
+            flexibleSpace: FlexibleSpaceBar(
+              background: flexibleSpaceWidget,
             ),
-          ],
-        ),
-      ),
-    );
+            pinned: true,
+            expandedHeight: appBarHeight,
+            collapsedHeight: toolBarHeight,
+            bottom: customerBlockedOrSuspended
+                ? PreferredSize(
+                    preferredSize: const Size.fromHeight(kToolbarHeight),
+                    child: Column(
+                      children: [
+                        _CustomerBlockedBanner(
+                          isCustomerBlocked: customerBlockedOrSuspended,
+                        ),
+                      ],
+                    ),
+                  )
+                : null,
+          )
+        : AppBar(
+            centerTitle: centreTitle,
+            titleSpacing: titleSpacing,
+            toolbarHeight: toolBarHeight,
+            leadingWidth: leadingWidth,
+            backgroundColor: backGroundColor,
+            automaticallyImplyLeading: automaticallyImplyLeading,
+            title: title,
+            actions: actionWidget,
+            leading: leadingWidget,
+            bottom: PreferredSize(
+              preferredSize: const Size.fromHeight(kToolbarHeight),
+              child: Column(
+                children: [
+                  if (isSearchBarVisible)
+                    _HomeProductSearchBar(
+                      isCustomerBlocked: customerBlockedOrSuspended,
+                      boxShadowColor: boxShadowColor,
+                    ),
+                  _CustomerBlockedBanner(
+                    isCustomerBlocked: customerBlockedOrSuspended,
+                  ),
+                ],
+              ),
+            ),
+          );
   }
 
   @override

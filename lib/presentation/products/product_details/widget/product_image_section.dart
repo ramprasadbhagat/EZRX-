@@ -1,7 +1,8 @@
 part of 'package:ezrxmobile/presentation/products/product_details/product_details_page.dart';
 
 class _ProductImageSection extends StatelessWidget {
-  const _ProductImageSection();
+  final ProductImages productImage;
+  const _ProductImageSection({required this.productImage});
 
   @override
   Widget build(BuildContext context) {
@@ -10,84 +11,76 @@ class _ProductImageSection extends StatelessWidget {
           previous.productDetailAggregate != current.productDetailAggregate ||
           previous.selectedImage != current.selectedImage,
       builder: (context, productDetailState) {
-        return BlocBuilder<ProductImageBloc, ProductImageState>(
-          buildWhen: (previous, current) =>
-              previous.productImageMap != current.productImageMap,
-          builder: (context, productImageState) {
-            final materialInfo =
-                productDetailState.productDetailAggregate.materialInfo;
-            final productImage = productImageState.getMaterialImage(
-              materialInfo.materialNumber,
-            );
+        final materialInfo =
+            productDetailState.productDetailAggregate.materialInfo;
 
-            return Column(
-              key: WidgetKeys.imageSectionProductDetail,
+        return Column(
+          key: WidgetKeys.imageSectionProductDetail,
+          children: [
+            Stack(
               children: [
-                Stack(
-                  children: [
-                    CustomImage(
-                      key: WidgetKeys.productImage,
-                      imageUrl: productImage.image.isNotEmpty
-                          ? productImage.image
-                              .elementAt(productDetailState.selectedImageIndex)
-                          : '',
-                      fit: BoxFit.fill,
-                      height: MediaQuery.of(context).size.width * 414 / 494,
-                      width: double.infinity,
-                    ),
-                    Positioned(
-                      bottom: 0,
-                      right: 10,
-                      left: 10,
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          if (materialInfo.isMarketPlace)
-                            const MarketPlaceRectangleLogo(),
-                          const Spacer(),
-                          if (productImage.image.isNotEmpty)
-                            Padding(
-                              padding: const EdgeInsets.symmetric(vertical: 4),
-                              child: ImageCounter(
-                                total: productImage.image.length,
-                                selected:
-                                    productDetailState.selectedImageIndex + 1,
-                              ),
-                            ),
-                        ],
-                      ),
-                    ),
-                    Positioned(
-                      top: 0,
-                      left: 0,
-                      child: Column(
-                        children: [
-                          if (materialInfo.hasValidTenderContract)
-                            const TenderTag(),
-                          CovidLabel(
-                            materialInfo: materialInfo,
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 16,
-                              vertical: 8,
-                            ),
-                            borderRadius: const BorderRadius.only(
-                              topRight: Radius.circular(20.0),
-                              bottomRight: Radius.circular(20.0),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
+                CustomImage(
+                  key: WidgetKeys.productImage,
+                  imageUrl: productImage.image.isNotEmpty
+                      ? productImage.image
+                          .elementAt(productDetailState.selectedImageIndex)
+                      : '',
+                  fit: BoxFit.fill,
+                  height: MediaQuery.of(context).size.width * 414 / 494,
+                  width: double.infinity,
                 ),
-                _ProductImages(
-                  productImage: productImage,
-                  selected: productDetailState.selectedImageIndex,
-                  state: productDetailState,
+                Positioned(
+                  bottom: 0,
+                  right: 10,
+                  left: 10,
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      if (materialInfo.isMarketPlace)
+                        const MarketPlaceRectangleLogo(),
+                      const Spacer(),
+                      if (productImage.image.isNotEmpty)
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 4),
+                          child: ImageCounter(
+                            total: productImage.image.length,
+                            selected: productDetailState.selectedImageIndex + 1,
+                          ),
+                        ),
+                    ],
+                  ),
+                ),
+                Positioned(
+                  top: 0,
+                  left: 0,
+                  child: Column(
+                    children: [
+                      if (materialInfo.hasValidTenderContract)
+                        const TenderTag(),
+                      CovidLabel(
+                        materialInfo: materialInfo,
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 16,
+                          vertical: 8,
+                        ),
+                        borderRadius: const BorderRadius.only(
+                          topRight: Radius.circular(20.0),
+                          bottomRight: Radius.circular(20.0),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ],
-            );
-          },
+            ),
+            Expanded(
+              child: _ProductImages(
+                productImage: productImage,
+                selected: productDetailState.selectedImageIndex,
+                state: productDetailState,
+              ),
+            ),
+          ],
         );
       },
     );
@@ -111,7 +104,6 @@ class _ProductImages extends StatelessWidget {
         : Container(
             key: WidgetKeys.materialDetailsCarousel,
             margin: const EdgeInsets.all(10),
-            height: MediaQuery.of(context).size.height * 0.05,
             child: productImage.image.isNotEmpty
                 ? ListView.builder(
                     scrollDirection: Axis.horizontal,
