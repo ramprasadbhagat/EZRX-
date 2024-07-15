@@ -77,14 +77,17 @@ class ReOrderPermissionBloc
               failureOrSuccessOption: optionOf(failureOrSuccess),
             ),
           ),
-          (reOrderPermission) {
-            final validMaterialNumbers =
-                reOrderPermission.validMaterials.map((e) => e.materialNumber);
+          (validMaterials) {
             final validOrderItem = e.orderHistoryDetailsOrderItems
                 .where(
-                  (item) =>
-                      validMaterialNumbers.contains(item.materialNumber) &&
-                      item.type.isMaterialTypeComm,
+                  (item) {
+                    final isValidMaterial = validMaterials.any(
+                      (e) =>
+                          e.materialNumber == item.materialNumber && e.isValid,
+                    );
+
+                    return isValidMaterial && item.type.isMaterialTypeComm;
+                  },
                 )
                 .map(
                   (item) => PriceAggregate.empty().copyWith(
@@ -120,9 +123,9 @@ class ReOrderPermissionBloc
         final tenderContract = reOrderItem.orderItemTenderContract;
 
         final failureOrSuccess =
-            await reOrderPermissionRepository.getReorderPermission(
+            await reOrderPermissionRepository.getReorderItemPermission(
           salesOrganisation: state.salesOrganisation,
-          materialNumbers: [reOrderItem.materialNumber],
+          materialNumber: reOrderItem.materialNumber,
           customerCodeInfo: state.customerCodeInfo,
           shipToInfo: state.shipToInfo,
           salesOrganisationConfigs: state.salesOrganisationConfigs,
@@ -136,18 +139,14 @@ class ReOrderPermissionBloc
               failureOrSuccessOption: optionOf(failureOrSuccess),
             ),
           ),
-          (reOrderPermission) {
-            final validMaterialNumbers =
-                reOrderPermission.validMaterials.map((e) => e.materialNumber);
-
+          (validMaterial) {
             add(
               ReOrderPermissionEvent.fetchPrice(
                 reorderItems: [
-                  if (validMaterialNumbers.contains(reOrderItem.materialNumber))
-                    PriceAggregate.empty().copyWith(
-                      materialInfo: validOrderItem,
-                      tenderContract: tenderContract,
-                    ),
+                  PriceAggregate.empty().copyWith(
+                    materialInfo: validOrderItem,
+                    tenderContract: tenderContract,
+                  ),
                 ],
               ),
             );

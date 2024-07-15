@@ -7,6 +7,7 @@ class ReOrderPermissionQuery {
             hidePrice
             materialNumber
             isGimmick
+            isValid
           }
         }
       }

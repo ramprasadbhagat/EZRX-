@@ -3,9 +3,10 @@
     "validCustomerMaterials": {
       "materials": [
         {
-          "hidePrice":false,
-          "materialNumber":"000000000023063780",
-          "isGimmick": false
+          "hidePrice": false,
+          "materialNumber": "000000000023063780",
+          "isGimmick": false,
+          "isValid": true
         }
       ]
     }

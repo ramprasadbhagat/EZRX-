@@ -26,6 +26,7 @@ _$ValidMaterialDtoImpl _$$ValidMaterialDtoImplFromJson(
     _$ValidMaterialDtoImpl(
       hidePrice: json['hidePrice'] as bool? ?? false,
       materialNumber: json['materialNumber'] as String? ?? '',
+      isValid: json['isValid'] as bool? ?? false,
     );
 
 Map<String, dynamic> _$$ValidMaterialDtoImplToJson(
@@ -33,4 +34,5 @@ Map<String, dynamic> _$$ValidMaterialDtoImplToJson(
     <String, dynamic>{
       'hidePrice': instance.hidePrice,
       'materialNumber': instance.materialNumber,
+      'isValid': instance.isValid,
     };

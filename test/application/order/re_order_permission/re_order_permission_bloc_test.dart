@@ -120,9 +120,7 @@ void main() async {
             user: fakeSalesRepUser,
             salesOrganisationConfigs: fakeMYSalesOrgConfigs,
           ),
-        ).thenAnswer(
-          (invocation) async => Right(mockReOrderPermission),
-        );
+        ).thenAnswer((_) async => Right(mockReOrderPermission.validMaterials));
       },
       act: (ReOrderPermissionBloc bloc) => bloc.add(
         ReOrderPermissionEvent.fetchOrder(
@@ -193,6 +191,63 @@ void main() async {
     );
 
     blocTest(
+      'Fetch order Reorder Permission success when item is not valid',
+      build: () => ReOrderPermissionBloc(
+        reOrderPermissionRepository: repository,
+        materialPriceRepository: priceRepository,
+      ),
+      seed: () => initializedState,
+      setUp: () {
+        when(
+          () => priceRepository.getMaterialPrice(
+            salesOrganisation: fakeMYSalesOrganisation,
+            shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
+            customerCodeInfo: fakeCustomerCodeInfo,
+            salesConfigs: fakeMYSalesOrgConfigs,
+            materialNumberList: [],
+            comboDealEligible: false,
+          ),
+        ).thenAnswer((_) async => const Right(<MaterialNumber, Price>{}));
+
+        when(
+          () => repository.getReorderPermission(
+            customerCodeInfo: fakeCustomerCodeInfo,
+            materialNumbers: fakeOrderHistoryDetailsOrderItems
+                .map((e) => e.materialNumber)
+                .toList(),
+            salesOrganisation: fakeMYSalesOrganisation,
+            shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
+            user: fakeSalesRepUser,
+            salesOrganisationConfigs: fakeMYSalesOrgConfigs,
+          ),
+        ).thenAnswer(
+          (_) async => Right(
+            mockReOrderPermission.validMaterials
+                .map((e) => e.copyWith(isValid: false))
+                .toList(),
+          ),
+        );
+      },
+      act: (ReOrderPermissionBloc bloc) => bloc.add(
+        ReOrderPermissionEvent.fetchOrder(
+          orderHistoryDetailsOrderItems: fakeOrderHistoryDetailsOrderItems,
+          orderNumberWillUpsert: fakeViewByOrder.orderHeaders.first.orderNumber,
+        ),
+      ),
+      expect: () => [
+        initializedState.copyWith(
+          isFetching: true,
+          orderNumberWillUpsert: fakeViewByOrder.orderHeaders.first.orderNumber,
+        ),
+        initializedState.copyWith(
+          isFetching: false,
+          validOrderItems: [],
+          orderNumberWillUpsert: fakeViewByOrder.orderHeaders.first.orderNumber,
+        ),
+      ],
+    );
+
+    blocTest(
       'Reset Order Number Will Upsert',
       build: () => ReOrderPermissionBloc(
         reOrderPermissionRepository: repository,
@@ -219,11 +274,10 @@ void main() async {
       seed: () => initializedState,
       setUp: () {
         when(
-          () => repository.getReorderPermission(
+          () => repository.getReorderItemPermission(
             customerCodeInfo: fakeCustomerCodeInfo,
-            materialNumbers: [
-              fakeViewByItemDetail.orderHistoryItems.first.materialNumber,
-            ],
+            materialNumber:
+                fakeViewByItemDetail.orderHistoryItems.first.materialNumber,
             salesOrganisation: fakeMYSalesOrganisation,
             shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
             user: fakeSalesRepUser,
@@ -269,9 +323,9 @@ void main() async {
           (_) async => Right({fakeOrderHistoryItem.materialNumber: fakePrice}),
         );
         when(
-          () => repository.getReorderPermission(
+          () => repository.getReorderItemPermission(
             customerCodeInfo: fakeCustomerCodeInfo,
-            materialNumbers: [fakeOrderHistoryItem.materialNumber],
+            materialNumber: fakeOrderHistoryItem.materialNumber,
             salesOrganisation: fakeMYSalesOrganisation,
             shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
             salesOrganisationConfigs: fakeMYSalesOrgConfigs,
@@ -279,12 +333,9 @@ void main() async {
           ),
         ).thenAnswer(
           (_) async => Right(
-            ReOrderPermission(
-              validMaterials: [
-                ValidMaterial.empty().copyWith(
-                  materialNumber: fakeOrderHistoryItem.materialNumber,
-                ),
-              ],
+            ValidMaterial.empty().copyWith(
+              materialNumber: fakeOrderHistoryItem.materialNumber,
+              isValid: true,
             ),
           ),
         );
@@ -333,9 +384,9 @@ void main() async {
           (_) async => Right({fakeOrderHistoryItem.materialNumber: fakePrice}),
         );
         when(
-          () => repository.getReorderPermission(
+          () => repository.getReorderItemPermission(
             customerCodeInfo: fakeCustomerCodeInfo,
-            materialNumbers: [fakeOrderHistoryItem.materialNumber],
+            materialNumber: fakeOrderHistoryItem.materialNumber,
             salesOrganisation: fakeMYSalesOrganisation,
             shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
             user: fakeSalesRepUser,
@@ -343,12 +394,9 @@ void main() async {
           ),
         ).thenAnswer(
           (_) async => Right(
-            ReOrderPermission(
-              validMaterials: [
-                ValidMaterial.empty().copyWith(
-                  materialNumber: fakeOrderHistoryItem.materialNumber,
-                ),
-              ],
+            ValidMaterial.empty().copyWith(
+              materialNumber: fakeOrderHistoryItem.materialNumber,
+              isValid: true,
             ),
           ),
         );
@@ -396,7 +444,7 @@ void main() async {
     );
 
     blocTest(
-      'Fetch item Reorder Permission success when item is not valid',
+      'Fetch item Reorder Permission success and fetch price failure',
       build: () => ReOrderPermissionBloc(
         reOrderPermissionRepository: repository,
         materialPriceRepository: priceRepository,
@@ -409,22 +457,26 @@ void main() async {
             shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
             customerCodeInfo: fakeCustomerCodeInfo,
             salesConfigs: fakeMYSalesOrgConfigs,
-            materialNumberList: [],
+            materialNumberList: [fakeOrderHistoryItem.materialNumber],
             comboDealEligible: false,
           ),
-        ).thenAnswer((_) async => const Right(<MaterialNumber, Price>{}));
-
+        ).thenAnswer((_) async => const Left(fakeError));
         when(
-          () => repository.getReorderPermission(
+          () => repository.getReorderItemPermission(
             customerCodeInfo: fakeCustomerCodeInfo,
-            materialNumbers: [fakeOrderHistoryItem.materialNumber],
+            materialNumber: fakeOrderHistoryItem.materialNumber,
             salesOrganisation: fakeMYSalesOrganisation,
             shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
-            user: fakeSalesRepUser,
             salesOrganisationConfigs: fakeMYSalesOrgConfigs,
+            user: fakeSalesRepUser,
           ),
         ).thenAnswer(
-          (_) async => Right(ReOrderPermission.empty()),
+          (_) async => Right(
+            ValidMaterial.empty().copyWith(
+              materialNumber: fakeOrderHistoryItem.materialNumber,
+              isValid: true,
+            ),
+          ),
         );
       },
       act: (ReOrderPermissionBloc bloc) => bloc.add(
@@ -434,68 +486,12 @@ void main() async {
         ),
       ),
       expect: () => [
-        initializedState.copyWith(
-          isFetching: true,
-        ),
+        initializedState.copyWith(isFetching: true),
         initializedState.copyWith(
           isFetching: false,
-          validOrderItems: [],
+          failureOrSuccessOption: optionOf(const Left(fakeError)),
         ),
       ],
     );
   });
-
-  blocTest(
-    'Fetch item Reorder Permission success and fetch price failure',
-    build: () => ReOrderPermissionBloc(
-      reOrderPermissionRepository: repository,
-      materialPriceRepository: priceRepository,
-    ),
-    seed: () => initializedState,
-    setUp: () {
-      when(
-        () => priceRepository.getMaterialPrice(
-          salesOrganisation: fakeMYSalesOrganisation,
-          shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
-          customerCodeInfo: fakeCustomerCodeInfo,
-          salesConfigs: fakeMYSalesOrgConfigs,
-          materialNumberList: [fakeOrderHistoryItem.materialNumber],
-          comboDealEligible: false,
-        ),
-      ).thenAnswer((_) async => const Left(fakeError));
-      when(
-        () => repository.getReorderPermission(
-          customerCodeInfo: fakeCustomerCodeInfo,
-          materialNumbers: [fakeOrderHistoryItem.materialNumber],
-          salesOrganisation: fakeMYSalesOrganisation,
-          shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
-          salesOrganisationConfigs: fakeMYSalesOrgConfigs,
-          user: fakeSalesRepUser,
-        ),
-      ).thenAnswer(
-        (_) async => Right(
-          ReOrderPermission(
-            validMaterials: [
-              ValidMaterial.empty().copyWith(
-                materialNumber: fakeOrderHistoryItem.materialNumber,
-              ),
-            ],
-          ),
-        ),
-      );
-    },
-    act: (ReOrderPermissionBloc bloc) => bloc.add(
-      ReOrderPermissionEvent.fetchItem(
-        item: fakeOrderHistoryItem,
-        orderHistoryDetail: fakeViewByItemDetail,
-      ),
-    ),
-    expect: () => [
-      initializedState.copyWith(isFetching: true),
-      initializedState.copyWith(
-        isFetching: false,
-        failureOrSuccessOption: optionOf(const Left(fakeError)),
-      ),
-    ],
-  );
 }

@@ -25,7 +25,7 @@ class ReOrderPermissionRepository implements IReOrderPermissionRepository {
   });
 
   @override
-  Future<Either<ApiFailure, ReOrderPermission>> getReorderPermission({
+  Future<Either<ApiFailure, List<ValidMaterial>>> getReorderPermission({
     required SalesOrganisation salesOrganisation,
     required List<MaterialNumber> materialNumbers,
     required CustomerCodeInfo customerCodeInfo,
@@ -33,32 +33,16 @@ class ReOrderPermissionRepository implements IReOrderPermissionRepository {
     required User user,
     required SalesOrganisationConfigs salesOrganisationConfigs,
   }) async {
-    if (config.appFlavor == Flavor.mock) {
-      try {
+    try {
+      if (config.appFlavor == Flavor.mock) {
         final reOrderPermission = await localDataSource.getPermission();
 
-        return Right(reOrderPermission);
-      } catch (e) {
-        return Left(
-          FailureHandler.handleFailure(e),
-        );
-      }
-    }
-
-    try {
-      // TODO: Revisit to remove this check once validCustomerMaterial API is ready for ID
-      if (salesOrganisation.salesOrg.isID) {
-        return Right(
-          ReOrderPermission(
-            validMaterials: materialNumbers
-                .map((e) => ValidMaterial.empty().copyWith(materialNumber: e))
-                .toList(),
-          ),
-        );
+        return Right(reOrderPermission.validMaterials);
       }
 
       final reOrderPermission = await remoteDataSource.getPermission(
-        materialNumbers: materialNumbers.map((e) => e.getValue()).toList(),
+        materialNumbers:
+            materialNumbers.map((e) => e.getValue()).toSet().toList(),
         customerCode: customerCodeInfo.customerCodeSoldTo,
         shipToCode: shipToInfo.shipToCustomerCode,
         salesOrg: salesOrganisation.salesOrg.getValue(),
@@ -66,18 +50,60 @@ class ReOrderPermissionRepository implements IReOrderPermissionRepository {
         isEnableGimmickMaterial: salesOrganisationConfigs.enableGimmickMaterial,
         userName: user.username.getValue(),
       );
-      final validMaterialNumbers =
-          reOrderPermission.validMaterials.map((e) => e.materialNumber);
+      final validMaterialNumberMap = {
+        for (final e in reOrderPermission.validMaterials) e.materialNumber: e,
+      };
+      final validMaterials = materialNumbers
+          .map(
+            (e) =>
+                validMaterialNumberMap[e] ??
+                ValidMaterial.empty().copyWith(materialNumber: e),
+          )
+          .toList();
 
-      if (materialNumbers.every((e) => !validMaterialNumbers.contains(e))) {
-        return const Left(ApiFailure.allReorderItemInvalid());
-      }
-
-      return Right(reOrderPermission);
+      return validMaterials.every((e) => !e.isValid)
+          ? const Left(ApiFailure.allReorderItemInvalid())
+          : Right(validMaterials);
     } catch (e) {
       return Left(
         FailureHandler.handleFailure(e),
       );
+    }
+  }
+
+  @override
+  Future<Either<ApiFailure, ValidMaterial>> getReorderItemPermission({
+    required SalesOrganisation salesOrganisation,
+    required MaterialNumber materialNumber,
+    required CustomerCodeInfo customerCodeInfo,
+    required ShipToInfo shipToInfo,
+    required User user,
+    required SalesOrganisationConfigs salesOrganisationConfigs,
+  }) async {
+    try {
+      if (config.appFlavor == Flavor.mock) {
+        final reOrderPermission = await localDataSource.getPermission();
+
+        return Right(reOrderPermission.validMaterials.first);
+      }
+
+      final reOrderPermission = await remoteDataSource.getPermission(
+        materialNumbers: [materialNumber.getValue()],
+        customerCode: customerCodeInfo.customerCodeSoldTo,
+        shipToCode: shipToInfo.shipToCustomerCode,
+        salesOrg: salesOrganisation.salesOrg.getValue(),
+        isSalesRepUser: user.role.type.isSalesRepRole,
+        isEnableGimmickMaterial: salesOrganisationConfigs.enableGimmickMaterial,
+        userName: user.username.getValue(),
+      );
+      final validMaterial = reOrderPermission.validMaterials.firstOrNull ??
+          ValidMaterial.empty().copyWith(materialNumber: materialNumber);
+
+      return validMaterial.isValid
+          ? Right(validMaterial)
+          : Left(ApiFailure.reorderItemInvalid(materialNumber.displayMatNo));
+    } catch (e) {
+      return Left(FailureHandler.handleFailure(e));
     }
   }
 }

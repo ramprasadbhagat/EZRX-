@@ -57,6 +57,7 @@ mixin _$ApiFailure {
     required TResult Function() uploadedFileSizeExceed,
     required TResult Function(String adviceNumber) paymentAdviceDeleteFailed,
     required TResult Function() allReorderItemInvalid,
+    required TResult Function(String materialNumber) reorderItemInvalid,
     required TResult Function(String maximumNumber) maximumCartQuantityExceed,
     required TResult Function() cartHasDifferentAddress,
     required TResult Function() articleannuncementTagFetchingError,
@@ -109,6 +110,7 @@ mixin _$ApiFailure {
     TResult? Function()? uploadedFileSizeExceed,
     TResult? Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult? Function()? allReorderItemInvalid,
+    TResult? Function(String materialNumber)? reorderItemInvalid,
     TResult? Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult? Function()? cartHasDifferentAddress,
     TResult? Function()? articleannuncementTagFetchingError,
@@ -161,6 +163,7 @@ mixin _$ApiFailure {
     TResult Function()? uploadedFileSizeExceed,
     TResult Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult Function()? allReorderItemInvalid,
+    TResult Function(String materialNumber)? reorderItemInvalid,
     TResult Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult Function()? cartHasDifferentAddress,
     TResult Function()? articleannuncementTagFetchingError,
@@ -231,6 +234,7 @@ mixin _$ApiFailure {
         paymentAdviceDeleteFailed,
     required TResult Function(_AllReorderItemInvalid value)
         allReorderItemInvalid,
+    required TResult Function(_ReorderItemInvalid value) reorderItemInvalid,
     required TResult Function(_MaximumCartQuantityExceed value)
         maximumCartQuantityExceed,
     required TResult Function(_CartHasDifferentAddress value)
@@ -298,6 +302,7 @@ mixin _$ApiFailure {
     TResult? Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
     TResult? Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult? Function(_ReorderItemInvalid value)? reorderItemInvalid,
     TResult? Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult? Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
@@ -361,6 +366,7 @@ mixin _$ApiFailure {
     TResult Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
     TResult Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult Function(_ReorderItemInvalid value)? reorderItemInvalid,
     TResult Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
@@ -500,6 +506,7 @@ class _$OtherImpl implements _Other {
     required TResult Function() uploadedFileSizeExceed,
     required TResult Function(String adviceNumber) paymentAdviceDeleteFailed,
     required TResult Function() allReorderItemInvalid,
+    required TResult Function(String materialNumber) reorderItemInvalid,
     required TResult Function(String maximumNumber) maximumCartQuantityExceed,
     required TResult Function() cartHasDifferentAddress,
     required TResult Function() articleannuncementTagFetchingError,
@@ -555,6 +562,7 @@ class _$OtherImpl implements _Other {
     TResult? Function()? uploadedFileSizeExceed,
     TResult? Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult? Function()? allReorderItemInvalid,
+    TResult? Function(String materialNumber)? reorderItemInvalid,
     TResult? Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult? Function()? cartHasDifferentAddress,
     TResult? Function()? articleannuncementTagFetchingError,
@@ -610,6 +618,7 @@ class _$OtherImpl implements _Other {
     TResult Function()? uploadedFileSizeExceed,
     TResult Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult Function()? allReorderItemInvalid,
+    TResult Function(String materialNumber)? reorderItemInvalid,
     TResult Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult Function()? cartHasDifferentAddress,
     TResult Function()? articleannuncementTagFetchingError,
@@ -686,6 +695,7 @@ class _$OtherImpl implements _Other {
         paymentAdviceDeleteFailed,
     required TResult Function(_AllReorderItemInvalid value)
         allReorderItemInvalid,
+    required TResult Function(_ReorderItemInvalid value) reorderItemInvalid,
     required TResult Function(_MaximumCartQuantityExceed value)
         maximumCartQuantityExceed,
     required TResult Function(_CartHasDifferentAddress value)
@@ -756,6 +766,7 @@ class _$OtherImpl implements _Other {
     TResult? Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
     TResult? Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult? Function(_ReorderItemInvalid value)? reorderItemInvalid,
     TResult? Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult? Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
@@ -822,6 +833,7 @@ class _$OtherImpl implements _Other {
     TResult Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
     TResult Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult Function(_ReorderItemInvalid value)? reorderItemInvalid,
     TResult Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
@@ -956,6 +968,7 @@ class _$ServerErrorImpl implements _ServerError {
     required TResult Function() uploadedFileSizeExceed,
     required TResult Function(String adviceNumber) paymentAdviceDeleteFailed,
     required TResult Function() allReorderItemInvalid,
+    required TResult Function(String materialNumber) reorderItemInvalid,
     required TResult Function(String maximumNumber) maximumCartQuantityExceed,
     required TResult Function() cartHasDifferentAddress,
     required TResult Function() articleannuncementTagFetchingError,
@@ -1011,6 +1024,7 @@ class _$ServerErrorImpl implements _ServerError {
     TResult? Function()? uploadedFileSizeExceed,
     TResult? Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult? Function()? allReorderItemInvalid,
+    TResult? Function(String materialNumber)? reorderItemInvalid,
     TResult? Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult? Function()? cartHasDifferentAddress,
     TResult? Function()? articleannuncementTagFetchingError,
@@ -1066,6 +1080,7 @@ class _$ServerErrorImpl implements _ServerError {
     TResult Function()? uploadedFileSizeExceed,
     TResult Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult Function()? allReorderItemInvalid,
+    TResult Function(String materialNumber)? reorderItemInvalid,
     TResult Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult Function()? cartHasDifferentAddress,
     TResult Function()? articleannuncementTagFetchingError,
@@ -1142,6 +1157,7 @@ class _$ServerErrorImpl implements _ServerError {
         paymentAdviceDeleteFailed,
     required TResult Function(_AllReorderItemInvalid value)
         allReorderItemInvalid,
+    required TResult Function(_ReorderItemInvalid value) reorderItemInvalid,
     required TResult Function(_MaximumCartQuantityExceed value)
         maximumCartQuantityExceed,
     required TResult Function(_CartHasDifferentAddress value)
@@ -1212,6 +1228,7 @@ class _$ServerErrorImpl implements _ServerError {
     TResult? Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
     TResult? Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult? Function(_ReorderItemInvalid value)? reorderItemInvalid,
     TResult? Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult? Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
@@ -1278,6 +1295,7 @@ class _$ServerErrorImpl implements _ServerError {
     TResult Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
     TResult Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult Function(_ReorderItemInvalid value)? reorderItemInvalid,
     TResult Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
@@ -1386,6 +1404,7 @@ class _$PoorConnectionImpl implements _PoorConnection {
     required TResult Function() uploadedFileSizeExceed,
     required TResult Function(String adviceNumber) paymentAdviceDeleteFailed,
     required TResult Function() allReorderItemInvalid,
+    required TResult Function(String materialNumber) reorderItemInvalid,
     required TResult Function(String maximumNumber) maximumCartQuantityExceed,
     required TResult Function() cartHasDifferentAddress,
     required TResult Function() articleannuncementTagFetchingError,
@@ -1441,6 +1460,7 @@ class _$PoorConnectionImpl implements _PoorConnection {
     TResult? Function()? uploadedFileSizeExceed,
     TResult? Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult? Function()? allReorderItemInvalid,
+    TResult? Function(String materialNumber)? reorderItemInvalid,
     TResult? Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult? Function()? cartHasDifferentAddress,
     TResult? Function()? articleannuncementTagFetchingError,
@@ -1496,6 +1516,7 @@ class _$PoorConnectionImpl implements _PoorConnection {
     TResult Function()? uploadedFileSizeExceed,
     TResult Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult Function()? allReorderItemInvalid,
+    TResult Function(String materialNumber)? reorderItemInvalid,
     TResult Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult Function()? cartHasDifferentAddress,
     TResult Function()? articleannuncementTagFetchingError,
@@ -1572,6 +1593,7 @@ class _$PoorConnectionImpl implements _PoorConnection {
         paymentAdviceDeleteFailed,
     required TResult Function(_AllReorderItemInvalid value)
         allReorderItemInvalid,
+    required TResult Function(_ReorderItemInvalid value) reorderItemInvalid,
     required TResult Function(_MaximumCartQuantityExceed value)
         maximumCartQuantityExceed,
     required TResult Function(_CartHasDifferentAddress value)
@@ -1642,6 +1664,7 @@ class _$PoorConnectionImpl implements _PoorConnection {
     TResult? Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
     TResult? Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult? Function(_ReorderItemInvalid value)? reorderItemInvalid,
     TResult? Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult? Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
@@ -1708,6 +1731,7 @@ class _$PoorConnectionImpl implements _PoorConnection {
     TResult Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
     TResult Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult Function(_ReorderItemInvalid value)? reorderItemInvalid,
     TResult Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
@@ -1811,6 +1835,7 @@ class _$ServerTimeoutImpl implements _ServerTimeout {
     required TResult Function() uploadedFileSizeExceed,
     required TResult Function(String adviceNumber) paymentAdviceDeleteFailed,
     required TResult Function() allReorderItemInvalid,
+    required TResult Function(String materialNumber) reorderItemInvalid,
     required TResult Function(String maximumNumber) maximumCartQuantityExceed,
     required TResult Function() cartHasDifferentAddress,
     required TResult Function() articleannuncementTagFetchingError,
@@ -1866,6 +1891,7 @@ class _$ServerTimeoutImpl implements _ServerTimeout {
     TResult? Function()? uploadedFileSizeExceed,
     TResult? Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult? Function()? allReorderItemInvalid,
+    TResult? Function(String materialNumber)? reorderItemInvalid,
     TResult? Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult? Function()? cartHasDifferentAddress,
     TResult? Function()? articleannuncementTagFetchingError,
@@ -1921,6 +1947,7 @@ class _$ServerTimeoutImpl implements _ServerTimeout {
     TResult Function()? uploadedFileSizeExceed,
     TResult Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult Function()? allReorderItemInvalid,
+    TResult Function(String materialNumber)? reorderItemInvalid,
     TResult Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult Function()? cartHasDifferentAddress,
     TResult Function()? articleannuncementTagFetchingError,
@@ -1997,6 +2024,7 @@ class _$ServerTimeoutImpl implements _ServerTimeout {
         paymentAdviceDeleteFailed,
     required TResult Function(_AllReorderItemInvalid value)
         allReorderItemInvalid,
+    required TResult Function(_ReorderItemInvalid value) reorderItemInvalid,
     required TResult Function(_MaximumCartQuantityExceed value)
         maximumCartQuantityExceed,
     required TResult Function(_CartHasDifferentAddress value)
@@ -2067,6 +2095,7 @@ class _$ServerTimeoutImpl implements _ServerTimeout {
     TResult? Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
     TResult? Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult? Function(_ReorderItemInvalid value)? reorderItemInvalid,
     TResult? Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult? Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
@@ -2133,6 +2162,7 @@ class _$ServerTimeoutImpl implements _ServerTimeout {
     TResult Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
     TResult Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult Function(_ReorderItemInvalid value)? reorderItemInvalid,
     TResult Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
@@ -2236,6 +2266,7 @@ class _$UserNotFoundImpl implements _UserNotFound {
     required TResult Function() uploadedFileSizeExceed,
     required TResult Function(String adviceNumber) paymentAdviceDeleteFailed,
     required TResult Function() allReorderItemInvalid,
+    required TResult Function(String materialNumber) reorderItemInvalid,
     required TResult Function(String maximumNumber) maximumCartQuantityExceed,
     required TResult Function() cartHasDifferentAddress,
     required TResult Function() articleannuncementTagFetchingError,
@@ -2291,6 +2322,7 @@ class _$UserNotFoundImpl implements _UserNotFound {
     TResult? Function()? uploadedFileSizeExceed,
     TResult? Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult? Function()? allReorderItemInvalid,
+    TResult? Function(String materialNumber)? reorderItemInvalid,
     TResult? Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult? Function()? cartHasDifferentAddress,
     TResult? Function()? articleannuncementTagFetchingError,
@@ -2346,6 +2378,7 @@ class _$UserNotFoundImpl implements _UserNotFound {
     TResult Function()? uploadedFileSizeExceed,
     TResult Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult Function()? allReorderItemInvalid,
+    TResult Function(String materialNumber)? reorderItemInvalid,
     TResult Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult Function()? cartHasDifferentAddress,
     TResult Function()? articleannuncementTagFetchingError,
@@ -2422,6 +2455,7 @@ class _$UserNotFoundImpl implements _UserNotFound {
         paymentAdviceDeleteFailed,
     required TResult Function(_AllReorderItemInvalid value)
         allReorderItemInvalid,
+    required TResult Function(_ReorderItemInvalid value) reorderItemInvalid,
     required TResult Function(_MaximumCartQuantityExceed value)
         maximumCartQuantityExceed,
     required TResult Function(_CartHasDifferentAddress value)
@@ -2492,6 +2526,7 @@ class _$UserNotFoundImpl implements _UserNotFound {
     TResult? Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
     TResult? Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult? Function(_ReorderItemInvalid value)? reorderItemInvalid,
     TResult? Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult? Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
@@ -2558,6 +2593,7 @@ class _$UserNotFoundImpl implements _UserNotFound {
     TResult Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
     TResult Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult Function(_ReorderItemInvalid value)? reorderItemInvalid,
     TResult Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
@@ -2665,6 +2701,7 @@ class _$MarketPlaceTnCAcceptanceErrorImpl
     required TResult Function() uploadedFileSizeExceed,
     required TResult Function(String adviceNumber) paymentAdviceDeleteFailed,
     required TResult Function() allReorderItemInvalid,
+    required TResult Function(String materialNumber) reorderItemInvalid,
     required TResult Function(String maximumNumber) maximumCartQuantityExceed,
     required TResult Function() cartHasDifferentAddress,
     required TResult Function() articleannuncementTagFetchingError,
@@ -2720,6 +2757,7 @@ class _$MarketPlaceTnCAcceptanceErrorImpl
     TResult? Function()? uploadedFileSizeExceed,
     TResult? Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult? Function()? allReorderItemInvalid,
+    TResult? Function(String materialNumber)? reorderItemInvalid,
     TResult? Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult? Function()? cartHasDifferentAddress,
     TResult? Function()? articleannuncementTagFetchingError,
@@ -2775,6 +2813,7 @@ class _$MarketPlaceTnCAcceptanceErrorImpl
     TResult Function()? uploadedFileSizeExceed,
     TResult Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult Function()? allReorderItemInvalid,
+    TResult Function(String materialNumber)? reorderItemInvalid,
     TResult Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult Function()? cartHasDifferentAddress,
     TResult Function()? articleannuncementTagFetchingError,
@@ -2851,6 +2890,7 @@ class _$MarketPlaceTnCAcceptanceErrorImpl
         paymentAdviceDeleteFailed,
     required TResult Function(_AllReorderItemInvalid value)
         allReorderItemInvalid,
+    required TResult Function(_ReorderItemInvalid value) reorderItemInvalid,
     required TResult Function(_MaximumCartQuantityExceed value)
         maximumCartQuantityExceed,
     required TResult Function(_CartHasDifferentAddress value)
@@ -2921,6 +2961,7 @@ class _$MarketPlaceTnCAcceptanceErrorImpl
     TResult? Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
     TResult? Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult? Function(_ReorderItemInvalid value)? reorderItemInvalid,
     TResult? Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult? Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
@@ -2987,6 +3028,7 @@ class _$MarketPlaceTnCAcceptanceErrorImpl
     TResult Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
     TResult Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult Function(_ReorderItemInvalid value)? reorderItemInvalid,
     TResult Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
@@ -3096,6 +3138,7 @@ class _$InvalidEmailAndPasswordCombinationImpl
     required TResult Function() uploadedFileSizeExceed,
     required TResult Function(String adviceNumber) paymentAdviceDeleteFailed,
     required TResult Function() allReorderItemInvalid,
+    required TResult Function(String materialNumber) reorderItemInvalid,
     required TResult Function(String maximumNumber) maximumCartQuantityExceed,
     required TResult Function() cartHasDifferentAddress,
     required TResult Function() articleannuncementTagFetchingError,
@@ -3151,6 +3194,7 @@ class _$InvalidEmailAndPasswordCombinationImpl
     TResult? Function()? uploadedFileSizeExceed,
     TResult? Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult? Function()? allReorderItemInvalid,
+    TResult? Function(String materialNumber)? reorderItemInvalid,
     TResult? Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult? Function()? cartHasDifferentAddress,
     TResult? Function()? articleannuncementTagFetchingError,
@@ -3206,6 +3250,7 @@ class _$InvalidEmailAndPasswordCombinationImpl
     TResult Function()? uploadedFileSizeExceed,
     TResult Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult Function()? allReorderItemInvalid,
+    TResult Function(String materialNumber)? reorderItemInvalid,
     TResult Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult Function()? cartHasDifferentAddress,
     TResult Function()? articleannuncementTagFetchingError,
@@ -3282,6 +3327,7 @@ class _$InvalidEmailAndPasswordCombinationImpl
         paymentAdviceDeleteFailed,
     required TResult Function(_AllReorderItemInvalid value)
         allReorderItemInvalid,
+    required TResult Function(_ReorderItemInvalid value) reorderItemInvalid,
     required TResult Function(_MaximumCartQuantityExceed value)
         maximumCartQuantityExceed,
     required TResult Function(_CartHasDifferentAddress value)
@@ -3352,6 +3398,7 @@ class _$InvalidEmailAndPasswordCombinationImpl
     TResult? Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
     TResult? Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult? Function(_ReorderItemInvalid value)? reorderItemInvalid,
     TResult? Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult? Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
@@ -3418,6 +3465,7 @@ class _$InvalidEmailAndPasswordCombinationImpl
     TResult Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
     TResult Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult Function(_ReorderItemInvalid value)? reorderItemInvalid,
     TResult Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
@@ -3522,6 +3570,7 @@ class _$AccountLockedImpl implements _AccountLocked {
     required TResult Function() uploadedFileSizeExceed,
     required TResult Function(String adviceNumber) paymentAdviceDeleteFailed,
     required TResult Function() allReorderItemInvalid,
+    required TResult Function(String materialNumber) reorderItemInvalid,
     required TResult Function(String maximumNumber) maximumCartQuantityExceed,
     required TResult Function() cartHasDifferentAddress,
     required TResult Function() articleannuncementTagFetchingError,
@@ -3577,6 +3626,7 @@ class _$AccountLockedImpl implements _AccountLocked {
     TResult? Function()? uploadedFileSizeExceed,
     TResult? Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult? Function()? allReorderItemInvalid,
+    TResult? Function(String materialNumber)? reorderItemInvalid,
     TResult? Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult? Function()? cartHasDifferentAddress,
     TResult? Function()? articleannuncementTagFetchingError,
@@ -3632,6 +3682,7 @@ class _$AccountLockedImpl implements _AccountLocked {
     TResult Function()? uploadedFileSizeExceed,
     TResult Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult Function()? allReorderItemInvalid,
+    TResult Function(String materialNumber)? reorderItemInvalid,
     TResult Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult Function()? cartHasDifferentAddress,
     TResult Function()? articleannuncementTagFetchingError,
@@ -3708,6 +3759,7 @@ class _$AccountLockedImpl implements _AccountLocked {
         paymentAdviceDeleteFailed,
     required TResult Function(_AllReorderItemInvalid value)
         allReorderItemInvalid,
+    required TResult Function(_ReorderItemInvalid value) reorderItemInvalid,
     required TResult Function(_MaximumCartQuantityExceed value)
         maximumCartQuantityExceed,
     required TResult Function(_CartHasDifferentAddress value)
@@ -3778,6 +3830,7 @@ class _$AccountLockedImpl implements _AccountLocked {
     TResult? Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
     TResult? Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult? Function(_ReorderItemInvalid value)? reorderItemInvalid,
     TResult? Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult? Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
@@ -3844,6 +3897,7 @@ class _$AccountLockedImpl implements _AccountLocked {
     TResult Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
     TResult Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult Function(_ReorderItemInvalid value)? reorderItemInvalid,
     TResult Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
@@ -3947,6 +4001,7 @@ class _$AccountExpiredImpl implements _AccountExpired {
     required TResult Function() uploadedFileSizeExceed,
     required TResult Function(String adviceNumber) paymentAdviceDeleteFailed,
     required TResult Function() allReorderItemInvalid,
+    required TResult Function(String materialNumber) reorderItemInvalid,
     required TResult Function(String maximumNumber) maximumCartQuantityExceed,
     required TResult Function() cartHasDifferentAddress,
     required TResult Function() articleannuncementTagFetchingError,
@@ -4002,6 +4057,7 @@ class _$AccountExpiredImpl implements _AccountExpired {
     TResult? Function()? uploadedFileSizeExceed,
     TResult? Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult? Function()? allReorderItemInvalid,
+    TResult? Function(String materialNumber)? reorderItemInvalid,
     TResult? Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult? Function()? cartHasDifferentAddress,
     TResult? Function()? articleannuncementTagFetchingError,
@@ -4057,6 +4113,7 @@ class _$AccountExpiredImpl implements _AccountExpired {
     TResult Function()? uploadedFileSizeExceed,
     TResult Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult Function()? allReorderItemInvalid,
+    TResult Function(String materialNumber)? reorderItemInvalid,
     TResult Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult Function()? cartHasDifferentAddress,
     TResult Function()? articleannuncementTagFetchingError,
@@ -4133,6 +4190,7 @@ class _$AccountExpiredImpl implements _AccountExpired {
         paymentAdviceDeleteFailed,
     required TResult Function(_AllReorderItemInvalid value)
         allReorderItemInvalid,
+    required TResult Function(_ReorderItemInvalid value) reorderItemInvalid,
     required TResult Function(_MaximumCartQuantityExceed value)
         maximumCartQuantityExceed,
     required TResult Function(_CartHasDifferentAddress value)
@@ -4203,6 +4261,7 @@ class _$AccountExpiredImpl implements _AccountExpired {
     TResult? Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
     TResult? Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult? Function(_ReorderItemInvalid value)? reorderItemInvalid,
     TResult? Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult? Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
@@ -4269,6 +4328,7 @@ class _$AccountExpiredImpl implements _AccountExpired {
     TResult Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
     TResult Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult Function(_ReorderItemInvalid value)? reorderItemInvalid,
     TResult Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
@@ -4372,6 +4432,7 @@ class _$TokenExpiredImpl implements _TokenExpired {
     required TResult Function() uploadedFileSizeExceed,
     required TResult Function(String adviceNumber) paymentAdviceDeleteFailed,
     required TResult Function() allReorderItemInvalid,
+    required TResult Function(String materialNumber) reorderItemInvalid,
     required TResult Function(String maximumNumber) maximumCartQuantityExceed,
     required TResult Function() cartHasDifferentAddress,
     required TResult Function() articleannuncementTagFetchingError,
@@ -4427,6 +4488,7 @@ class _$TokenExpiredImpl implements _TokenExpired {
     TResult? Function()? uploadedFileSizeExceed,
     TResult? Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult? Function()? allReorderItemInvalid,
+    TResult? Function(String materialNumber)? reorderItemInvalid,
     TResult? Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult? Function()? cartHasDifferentAddress,
     TResult? Function()? articleannuncementTagFetchingError,
@@ -4482,6 +4544,7 @@ class _$TokenExpiredImpl implements _TokenExpired {
     TResult Function()? uploadedFileSizeExceed,
     TResult Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult Function()? allReorderItemInvalid,
+    TResult Function(String materialNumber)? reorderItemInvalid,
     TResult Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult Function()? cartHasDifferentAddress,
     TResult Function()? articleannuncementTagFetchingError,
@@ -4558,6 +4621,7 @@ class _$TokenExpiredImpl implements _TokenExpired {
         paymentAdviceDeleteFailed,
     required TResult Function(_AllReorderItemInvalid value)
         allReorderItemInvalid,
+    required TResult Function(_ReorderItemInvalid value) reorderItemInvalid,
     required TResult Function(_MaximumCartQuantityExceed value)
         maximumCartQuantityExceed,
     required TResult Function(_CartHasDifferentAddress value)
@@ -4628,6 +4692,7 @@ class _$TokenExpiredImpl implements _TokenExpired {
     TResult? Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
     TResult? Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult? Function(_ReorderItemInvalid value)? reorderItemInvalid,
     TResult? Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult? Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
@@ -4694,6 +4759,7 @@ class _$TokenExpiredImpl implements _TokenExpired {
     TResult Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
     TResult Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult Function(_ReorderItemInvalid value)? reorderItemInvalid,
     TResult Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
@@ -4798,6 +4864,7 @@ class _$AuthenticationFailedImpl implements _AuthenticationFailed {
     required TResult Function() uploadedFileSizeExceed,
     required TResult Function(String adviceNumber) paymentAdviceDeleteFailed,
     required TResult Function() allReorderItemInvalid,
+    required TResult Function(String materialNumber) reorderItemInvalid,
     required TResult Function(String maximumNumber) maximumCartQuantityExceed,
     required TResult Function() cartHasDifferentAddress,
     required TResult Function() articleannuncementTagFetchingError,
@@ -4853,6 +4920,7 @@ class _$AuthenticationFailedImpl implements _AuthenticationFailed {
     TResult? Function()? uploadedFileSizeExceed,
     TResult? Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult? Function()? allReorderItemInvalid,
+    TResult? Function(String materialNumber)? reorderItemInvalid,
     TResult? Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult? Function()? cartHasDifferentAddress,
     TResult? Function()? articleannuncementTagFetchingError,
@@ -4908,6 +4976,7 @@ class _$AuthenticationFailedImpl implements _AuthenticationFailed {
     TResult Function()? uploadedFileSizeExceed,
     TResult Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult Function()? allReorderItemInvalid,
+    TResult Function(String materialNumber)? reorderItemInvalid,
     TResult Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult Function()? cartHasDifferentAddress,
     TResult Function()? articleannuncementTagFetchingError,
@@ -4984,6 +5053,7 @@ class _$AuthenticationFailedImpl implements _AuthenticationFailed {
         paymentAdviceDeleteFailed,
     required TResult Function(_AllReorderItemInvalid value)
         allReorderItemInvalid,
+    required TResult Function(_ReorderItemInvalid value) reorderItemInvalid,
     required TResult Function(_MaximumCartQuantityExceed value)
         maximumCartQuantityExceed,
     required TResult Function(_CartHasDifferentAddress value)
@@ -5054,6 +5124,7 @@ class _$AuthenticationFailedImpl implements _AuthenticationFailed {
     TResult? Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
     TResult? Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult? Function(_ReorderItemInvalid value)? reorderItemInvalid,
     TResult? Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult? Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
@@ -5120,6 +5191,7 @@ class _$AuthenticationFailedImpl implements _AuthenticationFailed {
     TResult Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
     TResult Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult Function(_ReorderItemInvalid value)? reorderItemInvalid,
     TResult Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
@@ -5228,6 +5300,7 @@ class _$ProxyLoginRolePermissionNotMatchImpl
     required TResult Function() uploadedFileSizeExceed,
     required TResult Function(String adviceNumber) paymentAdviceDeleteFailed,
     required TResult Function() allReorderItemInvalid,
+    required TResult Function(String materialNumber) reorderItemInvalid,
     required TResult Function(String maximumNumber) maximumCartQuantityExceed,
     required TResult Function() cartHasDifferentAddress,
     required TResult Function() articleannuncementTagFetchingError,
@@ -5283,6 +5356,7 @@ class _$ProxyLoginRolePermissionNotMatchImpl
     TResult? Function()? uploadedFileSizeExceed,
     TResult? Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult? Function()? allReorderItemInvalid,
+    TResult? Function(String materialNumber)? reorderItemInvalid,
     TResult? Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult? Function()? cartHasDifferentAddress,
     TResult? Function()? articleannuncementTagFetchingError,
@@ -5338,6 +5412,7 @@ class _$ProxyLoginRolePermissionNotMatchImpl
     TResult Function()? uploadedFileSizeExceed,
     TResult Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult Function()? allReorderItemInvalid,
+    TResult Function(String materialNumber)? reorderItemInvalid,
     TResult Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult Function()? cartHasDifferentAddress,
     TResult Function()? articleannuncementTagFetchingError,
@@ -5414,6 +5489,7 @@ class _$ProxyLoginRolePermissionNotMatchImpl
         paymentAdviceDeleteFailed,
     required TResult Function(_AllReorderItemInvalid value)
         allReorderItemInvalid,
+    required TResult Function(_ReorderItemInvalid value) reorderItemInvalid,
     required TResult Function(_MaximumCartQuantityExceed value)
         maximumCartQuantityExceed,
     required TResult Function(_CartHasDifferentAddress value)
@@ -5484,6 +5560,7 @@ class _$ProxyLoginRolePermissionNotMatchImpl
     TResult? Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
     TResult? Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult? Function(_ReorderItemInvalid value)? reorderItemInvalid,
     TResult? Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult? Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
@@ -5550,6 +5627,7 @@ class _$ProxyLoginRolePermissionNotMatchImpl
     TResult Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
     TResult Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult Function(_ReorderItemInvalid value)? reorderItemInvalid,
     TResult Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
@@ -5658,6 +5736,7 @@ class _$ProxyLoginZPTargetRoleNotMatchImpl
     required TResult Function() uploadedFileSizeExceed,
     required TResult Function(String adviceNumber) paymentAdviceDeleteFailed,
     required TResult Function() allReorderItemInvalid,
+    required TResult Function(String materialNumber) reorderItemInvalid,
     required TResult Function(String maximumNumber) maximumCartQuantityExceed,
     required TResult Function() cartHasDifferentAddress,
     required TResult Function() articleannuncementTagFetchingError,
@@ -5713,6 +5792,7 @@ class _$ProxyLoginZPTargetRoleNotMatchImpl
     TResult? Function()? uploadedFileSizeExceed,
     TResult? Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult? Function()? allReorderItemInvalid,
+    TResult? Function(String materialNumber)? reorderItemInvalid,
     TResult? Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult? Function()? cartHasDifferentAddress,
     TResult? Function()? articleannuncementTagFetchingError,
@@ -5768,6 +5848,7 @@ class _$ProxyLoginZPTargetRoleNotMatchImpl
     TResult Function()? uploadedFileSizeExceed,
     TResult Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult Function()? allReorderItemInvalid,
+    TResult Function(String materialNumber)? reorderItemInvalid,
     TResult Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult Function()? cartHasDifferentAddress,
     TResult Function()? articleannuncementTagFetchingError,
@@ -5844,6 +5925,7 @@ class _$ProxyLoginZPTargetRoleNotMatchImpl
         paymentAdviceDeleteFailed,
     required TResult Function(_AllReorderItemInvalid value)
         allReorderItemInvalid,
+    required TResult Function(_ReorderItemInvalid value) reorderItemInvalid,
     required TResult Function(_MaximumCartQuantityExceed value)
         maximumCartQuantityExceed,
     required TResult Function(_CartHasDifferentAddress value)
@@ -5914,6 +5996,7 @@ class _$ProxyLoginZPTargetRoleNotMatchImpl
     TResult? Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
     TResult? Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult? Function(_ReorderItemInvalid value)? reorderItemInvalid,
     TResult? Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult? Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
@@ -5980,6 +6063,7 @@ class _$ProxyLoginZPTargetRoleNotMatchImpl
     TResult Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
     TResult Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult Function(_ReorderItemInvalid value)? reorderItemInvalid,
     TResult Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
@@ -6088,6 +6172,7 @@ class _$ProxyLoginZPSalesOrgNotMatchImpl
     required TResult Function() uploadedFileSizeExceed,
     required TResult Function(String adviceNumber) paymentAdviceDeleteFailed,
     required TResult Function() allReorderItemInvalid,
+    required TResult Function(String materialNumber) reorderItemInvalid,
     required TResult Function(String maximumNumber) maximumCartQuantityExceed,
     required TResult Function() cartHasDifferentAddress,
     required TResult Function() articleannuncementTagFetchingError,
@@ -6143,6 +6228,7 @@ class _$ProxyLoginZPSalesOrgNotMatchImpl
     TResult? Function()? uploadedFileSizeExceed,
     TResult? Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult? Function()? allReorderItemInvalid,
+    TResult? Function(String materialNumber)? reorderItemInvalid,
     TResult? Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult? Function()? cartHasDifferentAddress,
     TResult? Function()? articleannuncementTagFetchingError,
@@ -6198,6 +6284,7 @@ class _$ProxyLoginZPSalesOrgNotMatchImpl
     TResult Function()? uploadedFileSizeExceed,
     TResult Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult Function()? allReorderItemInvalid,
+    TResult Function(String materialNumber)? reorderItemInvalid,
     TResult Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult Function()? cartHasDifferentAddress,
     TResult Function()? articleannuncementTagFetchingError,
@@ -6274,6 +6361,7 @@ class _$ProxyLoginZPSalesOrgNotMatchImpl
         paymentAdviceDeleteFailed,
     required TResult Function(_AllReorderItemInvalid value)
         allReorderItemInvalid,
+    required TResult Function(_ReorderItemInvalid value) reorderItemInvalid,
     required TResult Function(_MaximumCartQuantityExceed value)
         maximumCartQuantityExceed,
     required TResult Function(_CartHasDifferentAddress value)
@@ -6344,6 +6432,7 @@ class _$ProxyLoginZPSalesOrgNotMatchImpl
     TResult? Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
     TResult? Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult? Function(_ReorderItemInvalid value)? reorderItemInvalid,
     TResult? Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult? Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
@@ -6410,6 +6499,7 @@ class _$ProxyLoginZPSalesOrgNotMatchImpl
     TResult Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
     TResult Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult Function(_ReorderItemInvalid value)? reorderItemInvalid,
     TResult Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
@@ -6514,6 +6604,7 @@ class _$PasswordResetFailImpl implements _PasswordResetFail {
     required TResult Function() uploadedFileSizeExceed,
     required TResult Function(String adviceNumber) paymentAdviceDeleteFailed,
     required TResult Function() allReorderItemInvalid,
+    required TResult Function(String materialNumber) reorderItemInvalid,
     required TResult Function(String maximumNumber) maximumCartQuantityExceed,
     required TResult Function() cartHasDifferentAddress,
     required TResult Function() articleannuncementTagFetchingError,
@@ -6569,6 +6660,7 @@ class _$PasswordResetFailImpl implements _PasswordResetFail {
     TResult? Function()? uploadedFileSizeExceed,
     TResult? Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult? Function()? allReorderItemInvalid,
+    TResult? Function(String materialNumber)? reorderItemInvalid,
     TResult? Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult? Function()? cartHasDifferentAddress,
     TResult? Function()? articleannuncementTagFetchingError,
@@ -6624,6 +6716,7 @@ class _$PasswordResetFailImpl implements _PasswordResetFail {
     TResult Function()? uploadedFileSizeExceed,
     TResult Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult Function()? allReorderItemInvalid,
+    TResult Function(String materialNumber)? reorderItemInvalid,
     TResult Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult Function()? cartHasDifferentAddress,
     TResult Function()? articleannuncementTagFetchingError,
@@ -6700,6 +6793,7 @@ class _$PasswordResetFailImpl implements _PasswordResetFail {
         paymentAdviceDeleteFailed,
     required TResult Function(_AllReorderItemInvalid value)
         allReorderItemInvalid,
+    required TResult Function(_ReorderItemInvalid value) reorderItemInvalid,
     required TResult Function(_MaximumCartQuantityExceed value)
         maximumCartQuantityExceed,
     required TResult Function(_CartHasDifferentAddress value)
@@ -6770,6 +6864,7 @@ class _$PasswordResetFailImpl implements _PasswordResetFail {
     TResult? Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
     TResult? Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult? Function(_ReorderItemInvalid value)? reorderItemInvalid,
     TResult? Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult? Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
@@ -6836,6 +6931,7 @@ class _$PasswordResetFailImpl implements _PasswordResetFail {
     TResult Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
     TResult Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult Function(_ReorderItemInvalid value)? reorderItemInvalid,
     TResult Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
@@ -6942,6 +7038,7 @@ class _$DeviceNotSupportBiometricImpl implements _DeviceNotSupportBiometric {
     required TResult Function() uploadedFileSizeExceed,
     required TResult Function(String adviceNumber) paymentAdviceDeleteFailed,
     required TResult Function() allReorderItemInvalid,
+    required TResult Function(String materialNumber) reorderItemInvalid,
     required TResult Function(String maximumNumber) maximumCartQuantityExceed,
     required TResult Function() cartHasDifferentAddress,
     required TResult Function() articleannuncementTagFetchingError,
@@ -6997,6 +7094,7 @@ class _$DeviceNotSupportBiometricImpl implements _DeviceNotSupportBiometric {
     TResult? Function()? uploadedFileSizeExceed,
     TResult? Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult? Function()? allReorderItemInvalid,
+    TResult? Function(String materialNumber)? reorderItemInvalid,
     TResult? Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult? Function()? cartHasDifferentAddress,
     TResult? Function()? articleannuncementTagFetchingError,
@@ -7052,6 +7150,7 @@ class _$DeviceNotSupportBiometricImpl implements _DeviceNotSupportBiometric {
     TResult Function()? uploadedFileSizeExceed,
     TResult Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult Function()? allReorderItemInvalid,
+    TResult Function(String materialNumber)? reorderItemInvalid,
     TResult Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult Function()? cartHasDifferentAddress,
     TResult Function()? articleannuncementTagFetchingError,
@@ -7128,6 +7227,7 @@ class _$DeviceNotSupportBiometricImpl implements _DeviceNotSupportBiometric {
         paymentAdviceDeleteFailed,
     required TResult Function(_AllReorderItemInvalid value)
         allReorderItemInvalid,
+    required TResult Function(_ReorderItemInvalid value) reorderItemInvalid,
     required TResult Function(_MaximumCartQuantityExceed value)
         maximumCartQuantityExceed,
     required TResult Function(_CartHasDifferentAddress value)
@@ -7198,6 +7298,7 @@ class _$DeviceNotSupportBiometricImpl implements _DeviceNotSupportBiometric {
     TResult? Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
     TResult? Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult? Function(_ReorderItemInvalid value)? reorderItemInvalid,
     TResult? Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult? Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
@@ -7264,6 +7365,7 @@ class _$DeviceNotSupportBiometricImpl implements _DeviceNotSupportBiometric {
     TResult Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
     TResult Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult Function(_ReorderItemInvalid value)? reorderItemInvalid,
     TResult Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
@@ -7369,6 +7471,7 @@ class _$CannotCheckBiometricsImpl implements _CannotCheckBiometrics {
     required TResult Function() uploadedFileSizeExceed,
     required TResult Function(String adviceNumber) paymentAdviceDeleteFailed,
     required TResult Function() allReorderItemInvalid,
+    required TResult Function(String materialNumber) reorderItemInvalid,
     required TResult Function(String maximumNumber) maximumCartQuantityExceed,
     required TResult Function() cartHasDifferentAddress,
     required TResult Function() articleannuncementTagFetchingError,
@@ -7424,6 +7527,7 @@ class _$CannotCheckBiometricsImpl implements _CannotCheckBiometrics {
     TResult? Function()? uploadedFileSizeExceed,
     TResult? Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult? Function()? allReorderItemInvalid,
+    TResult? Function(String materialNumber)? reorderItemInvalid,
     TResult? Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult? Function()? cartHasDifferentAddress,
     TResult? Function()? articleannuncementTagFetchingError,
@@ -7479,6 +7583,7 @@ class _$CannotCheckBiometricsImpl implements _CannotCheckBiometrics {
     TResult Function()? uploadedFileSizeExceed,
     TResult Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult Function()? allReorderItemInvalid,
+    TResult Function(String materialNumber)? reorderItemInvalid,
     TResult Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult Function()? cartHasDifferentAddress,
     TResult Function()? articleannuncementTagFetchingError,
@@ -7555,6 +7660,7 @@ class _$CannotCheckBiometricsImpl implements _CannotCheckBiometrics {
         paymentAdviceDeleteFailed,
     required TResult Function(_AllReorderItemInvalid value)
         allReorderItemInvalid,
+    required TResult Function(_ReorderItemInvalid value) reorderItemInvalid,
     required TResult Function(_MaximumCartQuantityExceed value)
         maximumCartQuantityExceed,
     required TResult Function(_CartHasDifferentAddress value)
@@ -7625,6 +7731,7 @@ class _$CannotCheckBiometricsImpl implements _CannotCheckBiometrics {
     TResult? Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
     TResult? Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult? Function(_ReorderItemInvalid value)? reorderItemInvalid,
     TResult? Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult? Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
@@ -7691,6 +7798,7 @@ class _$CannotCheckBiometricsImpl implements _CannotCheckBiometrics {
     TResult Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
     TResult Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult Function(_ReorderItemInvalid value)? reorderItemInvalid,
     TResult Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
@@ -7796,6 +7904,7 @@ class _$NoSupportedBiometricsImpl implements _NoSupportedBiometrics {
     required TResult Function() uploadedFileSizeExceed,
     required TResult Function(String adviceNumber) paymentAdviceDeleteFailed,
     required TResult Function() allReorderItemInvalid,
+    required TResult Function(String materialNumber) reorderItemInvalid,
     required TResult Function(String maximumNumber) maximumCartQuantityExceed,
     required TResult Function() cartHasDifferentAddress,
     required TResult Function() articleannuncementTagFetchingError,
@@ -7851,6 +7960,7 @@ class _$NoSupportedBiometricsImpl implements _NoSupportedBiometrics {
     TResult? Function()? uploadedFileSizeExceed,
     TResult? Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult? Function()? allReorderItemInvalid,
+    TResult? Function(String materialNumber)? reorderItemInvalid,
     TResult? Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult? Function()? cartHasDifferentAddress,
     TResult? Function()? articleannuncementTagFetchingError,
@@ -7906,6 +8016,7 @@ class _$NoSupportedBiometricsImpl implements _NoSupportedBiometrics {
     TResult Function()? uploadedFileSizeExceed,
     TResult Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult Function()? allReorderItemInvalid,
+    TResult Function(String materialNumber)? reorderItemInvalid,
     TResult Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult Function()? cartHasDifferentAddress,
     TResult Function()? articleannuncementTagFetchingError,
@@ -7982,6 +8093,7 @@ class _$NoSupportedBiometricsImpl implements _NoSupportedBiometrics {
         paymentAdviceDeleteFailed,
     required TResult Function(_AllReorderItemInvalid value)
         allReorderItemInvalid,
+    required TResult Function(_ReorderItemInvalid value) reorderItemInvalid,
     required TResult Function(_MaximumCartQuantityExceed value)
         maximumCartQuantityExceed,
     required TResult Function(_CartHasDifferentAddress value)
@@ -8052,6 +8164,7 @@ class _$NoSupportedBiometricsImpl implements _NoSupportedBiometrics {
     TResult? Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
     TResult? Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult? Function(_ReorderItemInvalid value)? reorderItemInvalid,
     TResult? Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult? Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
@@ -8118,6 +8231,7 @@ class _$NoSupportedBiometricsImpl implements _NoSupportedBiometrics {
     TResult Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
     TResult Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult Function(_ReorderItemInvalid value)? reorderItemInvalid,
     TResult Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
@@ -8221,6 +8335,7 @@ class _$InvalidBiometricImpl implements _InvalidBiometric {
     required TResult Function() uploadedFileSizeExceed,
     required TResult Function(String adviceNumber) paymentAdviceDeleteFailed,
     required TResult Function() allReorderItemInvalid,
+    required TResult Function(String materialNumber) reorderItemInvalid,
     required TResult Function(String maximumNumber) maximumCartQuantityExceed,
     required TResult Function() cartHasDifferentAddress,
     required TResult Function() articleannuncementTagFetchingError,
@@ -8276,6 +8391,7 @@ class _$InvalidBiometricImpl implements _InvalidBiometric {
     TResult? Function()? uploadedFileSizeExceed,
     TResult? Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult? Function()? allReorderItemInvalid,
+    TResult? Function(String materialNumber)? reorderItemInvalid,
     TResult? Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult? Function()? cartHasDifferentAddress,
     TResult? Function()? articleannuncementTagFetchingError,
@@ -8331,6 +8447,7 @@ class _$InvalidBiometricImpl implements _InvalidBiometric {
     TResult Function()? uploadedFileSizeExceed,
     TResult Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult Function()? allReorderItemInvalid,
+    TResult Function(String materialNumber)? reorderItemInvalid,
     TResult Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult Function()? cartHasDifferentAddress,
     TResult Function()? articleannuncementTagFetchingError,
@@ -8407,6 +8524,7 @@ class _$InvalidBiometricImpl implements _InvalidBiometric {
         paymentAdviceDeleteFailed,
     required TResult Function(_AllReorderItemInvalid value)
         allReorderItemInvalid,
+    required TResult Function(_ReorderItemInvalid value) reorderItemInvalid,
     required TResult Function(_MaximumCartQuantityExceed value)
         maximumCartQuantityExceed,
     required TResult Function(_CartHasDifferentAddress value)
@@ -8477,6 +8595,7 @@ class _$InvalidBiometricImpl implements _InvalidBiometric {
     TResult? Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
     TResult? Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult? Function(_ReorderItemInvalid value)? reorderItemInvalid,
     TResult? Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult? Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
@@ -8543,6 +8662,7 @@ class _$InvalidBiometricImpl implements _InvalidBiometric {
     TResult Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
     TResult Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult Function(_ReorderItemInvalid value)? reorderItemInvalid,
     TResult Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
@@ -8648,6 +8768,7 @@ class _$PriceOverrideNotFoundImpl implements _PriceOverrideNotFound {
     required TResult Function() uploadedFileSizeExceed,
     required TResult Function(String adviceNumber) paymentAdviceDeleteFailed,
     required TResult Function() allReorderItemInvalid,
+    required TResult Function(String materialNumber) reorderItemInvalid,
     required TResult Function(String maximumNumber) maximumCartQuantityExceed,
     required TResult Function() cartHasDifferentAddress,
     required TResult Function() articleannuncementTagFetchingError,
@@ -8703,6 +8824,7 @@ class _$PriceOverrideNotFoundImpl implements _PriceOverrideNotFound {
     TResult? Function()? uploadedFileSizeExceed,
     TResult? Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult? Function()? allReorderItemInvalid,
+    TResult? Function(String materialNumber)? reorderItemInvalid,
     TResult? Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult? Function()? cartHasDifferentAddress,
     TResult? Function()? articleannuncementTagFetchingError,
@@ -8758,6 +8880,7 @@ class _$PriceOverrideNotFoundImpl implements _PriceOverrideNotFound {
     TResult Function()? uploadedFileSizeExceed,
     TResult Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult Function()? allReorderItemInvalid,
+    TResult Function(String materialNumber)? reorderItemInvalid,
     TResult Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult Function()? cartHasDifferentAddress,
     TResult Function()? articleannuncementTagFetchingError,
@@ -8834,6 +8957,7 @@ class _$PriceOverrideNotFoundImpl implements _PriceOverrideNotFound {
         paymentAdviceDeleteFailed,
     required TResult Function(_AllReorderItemInvalid value)
         allReorderItemInvalid,
+    required TResult Function(_ReorderItemInvalid value) reorderItemInvalid,
     required TResult Function(_MaximumCartQuantityExceed value)
         maximumCartQuantityExceed,
     required TResult Function(_CartHasDifferentAddress value)
@@ -8904,6 +9028,7 @@ class _$PriceOverrideNotFoundImpl implements _PriceOverrideNotFound {
     TResult? Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
     TResult? Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult? Function(_ReorderItemInvalid value)? reorderItemInvalid,
     TResult? Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult? Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
@@ -8970,6 +9095,7 @@ class _$PriceOverrideNotFoundImpl implements _PriceOverrideNotFound {
     TResult Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
     TResult Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult Function(_ReorderItemInvalid value)? reorderItemInvalid,
     TResult Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
@@ -9073,6 +9199,7 @@ class _$ProductOutOfStockImpl implements _ProductOutOfStock {
     required TResult Function() uploadedFileSizeExceed,
     required TResult Function(String adviceNumber) paymentAdviceDeleteFailed,
     required TResult Function() allReorderItemInvalid,
+    required TResult Function(String materialNumber) reorderItemInvalid,
     required TResult Function(String maximumNumber) maximumCartQuantityExceed,
     required TResult Function() cartHasDifferentAddress,
     required TResult Function() articleannuncementTagFetchingError,
@@ -9128,6 +9255,7 @@ class _$ProductOutOfStockImpl implements _ProductOutOfStock {
     TResult? Function()? uploadedFileSizeExceed,
     TResult? Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult? Function()? allReorderItemInvalid,
+    TResult? Function(String materialNumber)? reorderItemInvalid,
     TResult? Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult? Function()? cartHasDifferentAddress,
     TResult? Function()? articleannuncementTagFetchingError,
@@ -9183,6 +9311,7 @@ class _$ProductOutOfStockImpl implements _ProductOutOfStock {
     TResult Function()? uploadedFileSizeExceed,
     TResult Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult Function()? allReorderItemInvalid,
+    TResult Function(String materialNumber)? reorderItemInvalid,
     TResult Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult Function()? cartHasDifferentAddress,
     TResult Function()? articleannuncementTagFetchingError,
@@ -9259,6 +9388,7 @@ class _$ProductOutOfStockImpl implements _ProductOutOfStock {
         paymentAdviceDeleteFailed,
     required TResult Function(_AllReorderItemInvalid value)
         allReorderItemInvalid,
+    required TResult Function(_ReorderItemInvalid value) reorderItemInvalid,
     required TResult Function(_MaximumCartQuantityExceed value)
         maximumCartQuantityExceed,
     required TResult Function(_CartHasDifferentAddress value)
@@ -9329,6 +9459,7 @@ class _$ProductOutOfStockImpl implements _ProductOutOfStock {
     TResult? Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
     TResult? Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult? Function(_ReorderItemInvalid value)? reorderItemInvalid,
     TResult? Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult? Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
@@ -9395,6 +9526,7 @@ class _$ProductOutOfStockImpl implements _ProductOutOfStock {
     TResult Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
     TResult Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult Function(_ReorderItemInvalid value)? reorderItemInvalid,
     TResult Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
@@ -9500,6 +9632,7 @@ class _$PhotoPermissionFailedImpl implements _PhotoPermissionFailed {
     required TResult Function() uploadedFileSizeExceed,
     required TResult Function(String adviceNumber) paymentAdviceDeleteFailed,
     required TResult Function() allReorderItemInvalid,
+    required TResult Function(String materialNumber) reorderItemInvalid,
     required TResult Function(String maximumNumber) maximumCartQuantityExceed,
     required TResult Function() cartHasDifferentAddress,
     required TResult Function() articleannuncementTagFetchingError,
@@ -9555,6 +9688,7 @@ class _$PhotoPermissionFailedImpl implements _PhotoPermissionFailed {
     TResult? Function()? uploadedFileSizeExceed,
     TResult? Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult? Function()? allReorderItemInvalid,
+    TResult? Function(String materialNumber)? reorderItemInvalid,
     TResult? Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult? Function()? cartHasDifferentAddress,
     TResult? Function()? articleannuncementTagFetchingError,
@@ -9610,6 +9744,7 @@ class _$PhotoPermissionFailedImpl implements _PhotoPermissionFailed {
     TResult Function()? uploadedFileSizeExceed,
     TResult Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult Function()? allReorderItemInvalid,
+    TResult Function(String materialNumber)? reorderItemInvalid,
     TResult Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult Function()? cartHasDifferentAddress,
     TResult Function()? articleannuncementTagFetchingError,
@@ -9686,6 +9821,7 @@ class _$PhotoPermissionFailedImpl implements _PhotoPermissionFailed {
         paymentAdviceDeleteFailed,
     required TResult Function(_AllReorderItemInvalid value)
         allReorderItemInvalid,
+    required TResult Function(_ReorderItemInvalid value) reorderItemInvalid,
     required TResult Function(_MaximumCartQuantityExceed value)
         maximumCartQuantityExceed,
     required TResult Function(_CartHasDifferentAddress value)
@@ -9756,6 +9892,7 @@ class _$PhotoPermissionFailedImpl implements _PhotoPermissionFailed {
     TResult? Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
     TResult? Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult? Function(_ReorderItemInvalid value)? reorderItemInvalid,
     TResult? Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult? Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
@@ -9822,6 +9959,7 @@ class _$PhotoPermissionFailedImpl implements _PhotoPermissionFailed {
     TResult Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
     TResult Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult Function(_ReorderItemInvalid value)? reorderItemInvalid,
     TResult Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
@@ -9928,6 +10066,7 @@ class _$StoragePermissionFailedImpl implements _StoragePermissionFailed {
     required TResult Function() uploadedFileSizeExceed,
     required TResult Function(String adviceNumber) paymentAdviceDeleteFailed,
     required TResult Function() allReorderItemInvalid,
+    required TResult Function(String materialNumber) reorderItemInvalid,
     required TResult Function(String maximumNumber) maximumCartQuantityExceed,
     required TResult Function() cartHasDifferentAddress,
     required TResult Function() articleannuncementTagFetchingError,
@@ -9983,6 +10122,7 @@ class _$StoragePermissionFailedImpl implements _StoragePermissionFailed {
     TResult? Function()? uploadedFileSizeExceed,
     TResult? Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult? Function()? allReorderItemInvalid,
+    TResult? Function(String materialNumber)? reorderItemInvalid,
     TResult? Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult? Function()? cartHasDifferentAddress,
     TResult? Function()? articleannuncementTagFetchingError,
@@ -10038,6 +10178,7 @@ class _$StoragePermissionFailedImpl implements _StoragePermissionFailed {
     TResult Function()? uploadedFileSizeExceed,
     TResult Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult Function()? allReorderItemInvalid,
+    TResult Function(String materialNumber)? reorderItemInvalid,
     TResult Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult Function()? cartHasDifferentAddress,
     TResult Function()? articleannuncementTagFetchingError,
@@ -10114,6 +10255,7 @@ class _$StoragePermissionFailedImpl implements _StoragePermissionFailed {
         paymentAdviceDeleteFailed,
     required TResult Function(_AllReorderItemInvalid value)
         allReorderItemInvalid,
+    required TResult Function(_ReorderItemInvalid value) reorderItemInvalid,
     required TResult Function(_MaximumCartQuantityExceed value)
         maximumCartQuantityExceed,
     required TResult Function(_CartHasDifferentAddress value)
@@ -10184,6 +10326,7 @@ class _$StoragePermissionFailedImpl implements _StoragePermissionFailed {
     TResult? Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
     TResult? Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult? Function(_ReorderItemInvalid value)? reorderItemInvalid,
     TResult? Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult? Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
@@ -10250,6 +10393,7 @@ class _$StoragePermissionFailedImpl implements _StoragePermissionFailed {
     TResult Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
     TResult Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult Function(_ReorderItemInvalid value)? reorderItemInvalid,
     TResult Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
@@ -10353,6 +10497,7 @@ class _$InvalidFileFormatImpl implements _InvalidFileFormat {
     required TResult Function() uploadedFileSizeExceed,
     required TResult Function(String adviceNumber) paymentAdviceDeleteFailed,
     required TResult Function() allReorderItemInvalid,
+    required TResult Function(String materialNumber) reorderItemInvalid,
     required TResult Function(String maximumNumber) maximumCartQuantityExceed,
     required TResult Function() cartHasDifferentAddress,
     required TResult Function() articleannuncementTagFetchingError,
@@ -10408,6 +10553,7 @@ class _$InvalidFileFormatImpl implements _InvalidFileFormat {
     TResult? Function()? uploadedFileSizeExceed,
     TResult? Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult? Function()? allReorderItemInvalid,
+    TResult? Function(String materialNumber)? reorderItemInvalid,
     TResult? Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult? Function()? cartHasDifferentAddress,
     TResult? Function()? articleannuncementTagFetchingError,
@@ -10463,6 +10609,7 @@ class _$InvalidFileFormatImpl implements _InvalidFileFormat {
     TResult Function()? uploadedFileSizeExceed,
     TResult Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult Function()? allReorderItemInvalid,
+    TResult Function(String materialNumber)? reorderItemInvalid,
     TResult Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult Function()? cartHasDifferentAddress,
     TResult Function()? articleannuncementTagFetchingError,
@@ -10539,6 +10686,7 @@ class _$InvalidFileFormatImpl implements _InvalidFileFormat {
         paymentAdviceDeleteFailed,
     required TResult Function(_AllReorderItemInvalid value)
         allReorderItemInvalid,
+    required TResult Function(_ReorderItemInvalid value) reorderItemInvalid,
     required TResult Function(_MaximumCartQuantityExceed value)
         maximumCartQuantityExceed,
     required TResult Function(_CartHasDifferentAddress value)
@@ -10609,6 +10757,7 @@ class _$InvalidFileFormatImpl implements _InvalidFileFormat {
     TResult? Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
     TResult? Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult? Function(_ReorderItemInvalid value)? reorderItemInvalid,
     TResult? Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult? Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
@@ -10675,6 +10824,7 @@ class _$InvalidFileFormatImpl implements _InvalidFileFormat {
     TResult Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
     TResult Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult Function(_ReorderItemInvalid value)? reorderItemInvalid,
     TResult Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
@@ -10781,6 +10931,7 @@ class _$UploadCountExcideLimitImpl implements _UploadCountExcideLimit {
     required TResult Function() uploadedFileSizeExceed,
     required TResult Function(String adviceNumber) paymentAdviceDeleteFailed,
     required TResult Function() allReorderItemInvalid,
+    required TResult Function(String materialNumber) reorderItemInvalid,
     required TResult Function(String maximumNumber) maximumCartQuantityExceed,
     required TResult Function() cartHasDifferentAddress,
     required TResult Function() articleannuncementTagFetchingError,
@@ -10836,6 +10987,7 @@ class _$UploadCountExcideLimitImpl implements _UploadCountExcideLimit {
     TResult? Function()? uploadedFileSizeExceed,
     TResult? Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult? Function()? allReorderItemInvalid,
+    TResult? Function(String materialNumber)? reorderItemInvalid,
     TResult? Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult? Function()? cartHasDifferentAddress,
     TResult? Function()? articleannuncementTagFetchingError,
@@ -10891,6 +11043,7 @@ class _$UploadCountExcideLimitImpl implements _UploadCountExcideLimit {
     TResult Function()? uploadedFileSizeExceed,
     TResult Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult Function()? allReorderItemInvalid,
+    TResult Function(String materialNumber)? reorderItemInvalid,
     TResult Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult Function()? cartHasDifferentAddress,
     TResult Function()? articleannuncementTagFetchingError,
@@ -10967,6 +11120,7 @@ class _$UploadCountExcideLimitImpl implements _UploadCountExcideLimit {
         paymentAdviceDeleteFailed,
     required TResult Function(_AllReorderItemInvalid value)
         allReorderItemInvalid,
+    required TResult Function(_ReorderItemInvalid value) reorderItemInvalid,
     required TResult Function(_MaximumCartQuantityExceed value)
         maximumCartQuantityExceed,
     required TResult Function(_CartHasDifferentAddress value)
@@ -11037,6 +11191,7 @@ class _$UploadCountExcideLimitImpl implements _UploadCountExcideLimit {
     TResult? Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
     TResult? Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult? Function(_ReorderItemInvalid value)? reorderItemInvalid,
     TResult? Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult? Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
@@ -11103,6 +11258,7 @@ class _$UploadCountExcideLimitImpl implements _UploadCountExcideLimit {
     TResult Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
     TResult Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult Function(_ReorderItemInvalid value)? reorderItemInvalid,
     TResult Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
@@ -11206,6 +11362,7 @@ class _$InvalidDomainImpl implements _InvalidDomain {
     required TResult Function() uploadedFileSizeExceed,
     required TResult Function(String adviceNumber) paymentAdviceDeleteFailed,
     required TResult Function() allReorderItemInvalid,
+    required TResult Function(String materialNumber) reorderItemInvalid,
     required TResult Function(String maximumNumber) maximumCartQuantityExceed,
     required TResult Function() cartHasDifferentAddress,
     required TResult Function() articleannuncementTagFetchingError,
@@ -11261,6 +11418,7 @@ class _$InvalidDomainImpl implements _InvalidDomain {
     TResult? Function()? uploadedFileSizeExceed,
     TResult? Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult? Function()? allReorderItemInvalid,
+    TResult? Function(String materialNumber)? reorderItemInvalid,
     TResult? Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult? Function()? cartHasDifferentAddress,
     TResult? Function()? articleannuncementTagFetchingError,
@@ -11316,6 +11474,7 @@ class _$InvalidDomainImpl implements _InvalidDomain {
     TResult Function()? uploadedFileSizeExceed,
     TResult Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult Function()? allReorderItemInvalid,
+    TResult Function(String materialNumber)? reorderItemInvalid,
     TResult Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult Function()? cartHasDifferentAddress,
     TResult Function()? articleannuncementTagFetchingError,
@@ -11392,6 +11551,7 @@ class _$InvalidDomainImpl implements _InvalidDomain {
         paymentAdviceDeleteFailed,
     required TResult Function(_AllReorderItemInvalid value)
         allReorderItemInvalid,
+    required TResult Function(_ReorderItemInvalid value) reorderItemInvalid,
     required TResult Function(_MaximumCartQuantityExceed value)
         maximumCartQuantityExceed,
     required TResult Function(_CartHasDifferentAddress value)
@@ -11462,6 +11622,7 @@ class _$InvalidDomainImpl implements _InvalidDomain {
     TResult? Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
     TResult? Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult? Function(_ReorderItemInvalid value)? reorderItemInvalid,
     TResult? Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult? Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
@@ -11528,6 +11689,7 @@ class _$InvalidDomainImpl implements _InvalidDomain {
     TResult Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
     TResult Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult Function(_ReorderItemInvalid value)? reorderItemInvalid,
     TResult Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
@@ -11631,6 +11793,7 @@ class _$ProductDetailRouteImpl implements _ProductDetailRoute {
     required TResult Function() uploadedFileSizeExceed,
     required TResult Function(String adviceNumber) paymentAdviceDeleteFailed,
     required TResult Function() allReorderItemInvalid,
+    required TResult Function(String materialNumber) reorderItemInvalid,
     required TResult Function(String maximumNumber) maximumCartQuantityExceed,
     required TResult Function() cartHasDifferentAddress,
     required TResult Function() articleannuncementTagFetchingError,
@@ -11686,6 +11849,7 @@ class _$ProductDetailRouteImpl implements _ProductDetailRoute {
     TResult? Function()? uploadedFileSizeExceed,
     TResult? Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult? Function()? allReorderItemInvalid,
+    TResult? Function(String materialNumber)? reorderItemInvalid,
     TResult? Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult? Function()? cartHasDifferentAddress,
     TResult? Function()? articleannuncementTagFetchingError,
@@ -11741,6 +11905,7 @@ class _$ProductDetailRouteImpl implements _ProductDetailRoute {
     TResult Function()? uploadedFileSizeExceed,
     TResult Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult Function()? allReorderItemInvalid,
+    TResult Function(String materialNumber)? reorderItemInvalid,
     TResult Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult Function()? cartHasDifferentAddress,
     TResult Function()? articleannuncementTagFetchingError,
@@ -11817,6 +11982,7 @@ class _$ProductDetailRouteImpl implements _ProductDetailRoute {
         paymentAdviceDeleteFailed,
     required TResult Function(_AllReorderItemInvalid value)
         allReorderItemInvalid,
+    required TResult Function(_ReorderItemInvalid value) reorderItemInvalid,
     required TResult Function(_MaximumCartQuantityExceed value)
         maximumCartQuantityExceed,
     required TResult Function(_CartHasDifferentAddress value)
@@ -11887,6 +12053,7 @@ class _$ProductDetailRouteImpl implements _ProductDetailRoute {
     TResult? Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
     TResult? Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult? Function(_ReorderItemInvalid value)? reorderItemInvalid,
     TResult? Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult? Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
@@ -11953,6 +12120,7 @@ class _$ProductDetailRouteImpl implements _ProductDetailRoute {
     TResult Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
     TResult Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult Function(_ReorderItemInvalid value)? reorderItemInvalid,
     TResult Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
@@ -12056,6 +12224,7 @@ class _$OrderDetailRouteImpl implements _OrderDetailRoute {
     required TResult Function() uploadedFileSizeExceed,
     required TResult Function(String adviceNumber) paymentAdviceDeleteFailed,
     required TResult Function() allReorderItemInvalid,
+    required TResult Function(String materialNumber) reorderItemInvalid,
     required TResult Function(String maximumNumber) maximumCartQuantityExceed,
     required TResult Function() cartHasDifferentAddress,
     required TResult Function() articleannuncementTagFetchingError,
@@ -12111,6 +12280,7 @@ class _$OrderDetailRouteImpl implements _OrderDetailRoute {
     TResult? Function()? uploadedFileSizeExceed,
     TResult? Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult? Function()? allReorderItemInvalid,
+    TResult? Function(String materialNumber)? reorderItemInvalid,
     TResult? Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult? Function()? cartHasDifferentAddress,
     TResult? Function()? articleannuncementTagFetchingError,
@@ -12166,6 +12336,7 @@ class _$OrderDetailRouteImpl implements _OrderDetailRoute {
     TResult Function()? uploadedFileSizeExceed,
     TResult Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult Function()? allReorderItemInvalid,
+    TResult Function(String materialNumber)? reorderItemInvalid,
     TResult Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult Function()? cartHasDifferentAddress,
     TResult Function()? articleannuncementTagFetchingError,
@@ -12242,6 +12413,7 @@ class _$OrderDetailRouteImpl implements _OrderDetailRoute {
         paymentAdviceDeleteFailed,
     required TResult Function(_AllReorderItemInvalid value)
         allReorderItemInvalid,
+    required TResult Function(_ReorderItemInvalid value) reorderItemInvalid,
     required TResult Function(_MaximumCartQuantityExceed value)
         maximumCartQuantityExceed,
     required TResult Function(_CartHasDifferentAddress value)
@@ -12312,6 +12484,7 @@ class _$OrderDetailRouteImpl implements _OrderDetailRoute {
     TResult? Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
     TResult? Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult? Function(_ReorderItemInvalid value)? reorderItemInvalid,
     TResult? Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult? Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
@@ -12378,6 +12551,7 @@ class _$OrderDetailRouteImpl implements _OrderDetailRoute {
     TResult Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
     TResult Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult Function(_ReorderItemInvalid value)? reorderItemInvalid,
     TResult Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
@@ -12481,6 +12655,7 @@ class _$ReturnDetailRouteImpl implements _ReturnDetailRoute {
     required TResult Function() uploadedFileSizeExceed,
     required TResult Function(String adviceNumber) paymentAdviceDeleteFailed,
     required TResult Function() allReorderItemInvalid,
+    required TResult Function(String materialNumber) reorderItemInvalid,
     required TResult Function(String maximumNumber) maximumCartQuantityExceed,
     required TResult Function() cartHasDifferentAddress,
     required TResult Function() articleannuncementTagFetchingError,
@@ -12536,6 +12711,7 @@ class _$ReturnDetailRouteImpl implements _ReturnDetailRoute {
     TResult? Function()? uploadedFileSizeExceed,
     TResult? Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult? Function()? allReorderItemInvalid,
+    TResult? Function(String materialNumber)? reorderItemInvalid,
     TResult? Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult? Function()? cartHasDifferentAddress,
     TResult? Function()? articleannuncementTagFetchingError,
@@ -12591,6 +12767,7 @@ class _$ReturnDetailRouteImpl implements _ReturnDetailRoute {
     TResult Function()? uploadedFileSizeExceed,
     TResult Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult Function()? allReorderItemInvalid,
+    TResult Function(String materialNumber)? reorderItemInvalid,
     TResult Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult Function()? cartHasDifferentAddress,
     TResult Function()? articleannuncementTagFetchingError,
@@ -12667,6 +12844,7 @@ class _$ReturnDetailRouteImpl implements _ReturnDetailRoute {
         paymentAdviceDeleteFailed,
     required TResult Function(_AllReorderItemInvalid value)
         allReorderItemInvalid,
+    required TResult Function(_ReorderItemInvalid value) reorderItemInvalid,
     required TResult Function(_MaximumCartQuantityExceed value)
         maximumCartQuantityExceed,
     required TResult Function(_CartHasDifferentAddress value)
@@ -12737,6 +12915,7 @@ class _$ReturnDetailRouteImpl implements _ReturnDetailRoute {
     TResult? Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
     TResult? Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult? Function(_ReorderItemInvalid value)? reorderItemInvalid,
     TResult? Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult? Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
@@ -12803,6 +12982,7 @@ class _$ReturnDetailRouteImpl implements _ReturnDetailRoute {
     TResult Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
     TResult Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult Function(_ReorderItemInvalid value)? reorderItemInvalid,
     TResult Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
@@ -12906,6 +13086,7 @@ class _$PaymentDetailRouteImpl implements _PaymentDetailRoute {
     required TResult Function() uploadedFileSizeExceed,
     required TResult Function(String adviceNumber) paymentAdviceDeleteFailed,
     required TResult Function() allReorderItemInvalid,
+    required TResult Function(String materialNumber) reorderItemInvalid,
     required TResult Function(String maximumNumber) maximumCartQuantityExceed,
     required TResult Function() cartHasDifferentAddress,
     required TResult Function() articleannuncementTagFetchingError,
@@ -12961,6 +13142,7 @@ class _$PaymentDetailRouteImpl implements _PaymentDetailRoute {
     TResult? Function()? uploadedFileSizeExceed,
     TResult? Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult? Function()? allReorderItemInvalid,
+    TResult? Function(String materialNumber)? reorderItemInvalid,
     TResult? Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult? Function()? cartHasDifferentAddress,
     TResult? Function()? articleannuncementTagFetchingError,
@@ -13016,6 +13198,7 @@ class _$PaymentDetailRouteImpl implements _PaymentDetailRoute {
     TResult Function()? uploadedFileSizeExceed,
     TResult Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult Function()? allReorderItemInvalid,
+    TResult Function(String materialNumber)? reorderItemInvalid,
     TResult Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult Function()? cartHasDifferentAddress,
     TResult Function()? articleannuncementTagFetchingError,
@@ -13092,6 +13275,7 @@ class _$PaymentDetailRouteImpl implements _PaymentDetailRoute {
         paymentAdviceDeleteFailed,
     required TResult Function(_AllReorderItemInvalid value)
         allReorderItemInvalid,
+    required TResult Function(_ReorderItemInvalid value) reorderItemInvalid,
     required TResult Function(_MaximumCartQuantityExceed value)
         maximumCartQuantityExceed,
     required TResult Function(_CartHasDifferentAddress value)
@@ -13162,6 +13346,7 @@ class _$PaymentDetailRouteImpl implements _PaymentDetailRoute {
     TResult? Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
     TResult? Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult? Function(_ReorderItemInvalid value)? reorderItemInvalid,
     TResult? Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult? Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
@@ -13228,6 +13413,7 @@ class _$PaymentDetailRouteImpl implements _PaymentDetailRoute {
     TResult Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
     TResult Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult Function(_ReorderItemInvalid value)? reorderItemInvalid,
     TResult Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
@@ -13331,6 +13517,7 @@ class _$InvoiceDetailRouteImpl implements _InvoiceDetailRoute {
     required TResult Function() uploadedFileSizeExceed,
     required TResult Function(String adviceNumber) paymentAdviceDeleteFailed,
     required TResult Function() allReorderItemInvalid,
+    required TResult Function(String materialNumber) reorderItemInvalid,
     required TResult Function(String maximumNumber) maximumCartQuantityExceed,
     required TResult Function() cartHasDifferentAddress,
     required TResult Function() articleannuncementTagFetchingError,
@@ -13386,6 +13573,7 @@ class _$InvoiceDetailRouteImpl implements _InvoiceDetailRoute {
     TResult? Function()? uploadedFileSizeExceed,
     TResult? Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult? Function()? allReorderItemInvalid,
+    TResult? Function(String materialNumber)? reorderItemInvalid,
     TResult? Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult? Function()? cartHasDifferentAddress,
     TResult? Function()? articleannuncementTagFetchingError,
@@ -13441,6 +13629,7 @@ class _$InvoiceDetailRouteImpl implements _InvoiceDetailRoute {
     TResult Function()? uploadedFileSizeExceed,
     TResult Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult Function()? allReorderItemInvalid,
+    TResult Function(String materialNumber)? reorderItemInvalid,
     TResult Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult Function()? cartHasDifferentAddress,
     TResult Function()? articleannuncementTagFetchingError,
@@ -13517,6 +13706,7 @@ class _$InvoiceDetailRouteImpl implements _InvoiceDetailRoute {
         paymentAdviceDeleteFailed,
     required TResult Function(_AllReorderItemInvalid value)
         allReorderItemInvalid,
+    required TResult Function(_ReorderItemInvalid value) reorderItemInvalid,
     required TResult Function(_MaximumCartQuantityExceed value)
         maximumCartQuantityExceed,
     required TResult Function(_CartHasDifferentAddress value)
@@ -13587,6 +13777,7 @@ class _$InvoiceDetailRouteImpl implements _InvoiceDetailRoute {
     TResult? Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
     TResult? Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult? Function(_ReorderItemInvalid value)? reorderItemInvalid,
     TResult? Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult? Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
@@ -13653,6 +13844,7 @@ class _$InvoiceDetailRouteImpl implements _InvoiceDetailRoute {
     TResult Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
     TResult Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult Function(_ReorderItemInvalid value)? reorderItemInvalid,
     TResult Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
@@ -13756,6 +13948,7 @@ class _$LanguageChangeFailImpl implements _LanguageChangeFail {
     required TResult Function() uploadedFileSizeExceed,
     required TResult Function(String adviceNumber) paymentAdviceDeleteFailed,
     required TResult Function() allReorderItemInvalid,
+    required TResult Function(String materialNumber) reorderItemInvalid,
     required TResult Function(String maximumNumber) maximumCartQuantityExceed,
     required TResult Function() cartHasDifferentAddress,
     required TResult Function() articleannuncementTagFetchingError,
@@ -13811,6 +14004,7 @@ class _$LanguageChangeFailImpl implements _LanguageChangeFail {
     TResult? Function()? uploadedFileSizeExceed,
     TResult? Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult? Function()? allReorderItemInvalid,
+    TResult? Function(String materialNumber)? reorderItemInvalid,
     TResult? Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult? Function()? cartHasDifferentAddress,
     TResult? Function()? articleannuncementTagFetchingError,
@@ -13866,6 +14060,7 @@ class _$LanguageChangeFailImpl implements _LanguageChangeFail {
     TResult Function()? uploadedFileSizeExceed,
     TResult Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult Function()? allReorderItemInvalid,
+    TResult Function(String materialNumber)? reorderItemInvalid,
     TResult Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult Function()? cartHasDifferentAddress,
     TResult Function()? articleannuncementTagFetchingError,
@@ -13942,6 +14137,7 @@ class _$LanguageChangeFailImpl implements _LanguageChangeFail {
         paymentAdviceDeleteFailed,
     required TResult Function(_AllReorderItemInvalid value)
         allReorderItemInvalid,
+    required TResult Function(_ReorderItemInvalid value) reorderItemInvalid,
     required TResult Function(_MaximumCartQuantityExceed value)
         maximumCartQuantityExceed,
     required TResult Function(_CartHasDifferentAddress value)
@@ -14012,6 +14208,7 @@ class _$LanguageChangeFailImpl implements _LanguageChangeFail {
     TResult? Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
     TResult? Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult? Function(_ReorderItemInvalid value)? reorderItemInvalid,
     TResult? Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult? Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
@@ -14078,6 +14275,7 @@ class _$LanguageChangeFailImpl implements _LanguageChangeFail {
     TResult Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
     TResult Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult Function(_ReorderItemInvalid value)? reorderItemInvalid,
     TResult Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
@@ -14184,6 +14382,7 @@ class _$ScannedProductNotFoundImpl implements _ScannedProductNotFound {
     required TResult Function() uploadedFileSizeExceed,
     required TResult Function(String adviceNumber) paymentAdviceDeleteFailed,
     required TResult Function() allReorderItemInvalid,
+    required TResult Function(String materialNumber) reorderItemInvalid,
     required TResult Function(String maximumNumber) maximumCartQuantityExceed,
     required TResult Function() cartHasDifferentAddress,
     required TResult Function() articleannuncementTagFetchingError,
@@ -14239,6 +14438,7 @@ class _$ScannedProductNotFoundImpl implements _ScannedProductNotFound {
     TResult? Function()? uploadedFileSizeExceed,
     TResult? Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult? Function()? allReorderItemInvalid,
+    TResult? Function(String materialNumber)? reorderItemInvalid,
     TResult? Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult? Function()? cartHasDifferentAddress,
     TResult? Function()? articleannuncementTagFetchingError,
@@ -14294,6 +14494,7 @@ class _$ScannedProductNotFoundImpl implements _ScannedProductNotFound {
     TResult Function()? uploadedFileSizeExceed,
     TResult Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult Function()? allReorderItemInvalid,
+    TResult Function(String materialNumber)? reorderItemInvalid,
     TResult Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult Function()? cartHasDifferentAddress,
     TResult Function()? articleannuncementTagFetchingError,
@@ -14370,6 +14571,7 @@ class _$ScannedProductNotFoundImpl implements _ScannedProductNotFound {
         paymentAdviceDeleteFailed,
     required TResult Function(_AllReorderItemInvalid value)
         allReorderItemInvalid,
+    required TResult Function(_ReorderItemInvalid value) reorderItemInvalid,
     required TResult Function(_MaximumCartQuantityExceed value)
         maximumCartQuantityExceed,
     required TResult Function(_CartHasDifferentAddress value)
@@ -14440,6 +14642,7 @@ class _$ScannedProductNotFoundImpl implements _ScannedProductNotFound {
     TResult? Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
     TResult? Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult? Function(_ReorderItemInvalid value)? reorderItemInvalid,
     TResult? Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult? Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
@@ -14506,6 +14709,7 @@ class _$ScannedProductNotFoundImpl implements _ScannedProductNotFound {
     TResult Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
     TResult Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult Function(_ReorderItemInvalid value)? reorderItemInvalid,
     TResult Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
@@ -14639,6 +14843,7 @@ class _$CameraPermissionFailedImpl implements _CameraPermissionFailed {
     required TResult Function() uploadedFileSizeExceed,
     required TResult Function(String adviceNumber) paymentAdviceDeleteFailed,
     required TResult Function() allReorderItemInvalid,
+    required TResult Function(String materialNumber) reorderItemInvalid,
     required TResult Function(String maximumNumber) maximumCartQuantityExceed,
     required TResult Function() cartHasDifferentAddress,
     required TResult Function() articleannuncementTagFetchingError,
@@ -14694,6 +14899,7 @@ class _$CameraPermissionFailedImpl implements _CameraPermissionFailed {
     TResult? Function()? uploadedFileSizeExceed,
     TResult? Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult? Function()? allReorderItemInvalid,
+    TResult? Function(String materialNumber)? reorderItemInvalid,
     TResult? Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult? Function()? cartHasDifferentAddress,
     TResult? Function()? articleannuncementTagFetchingError,
@@ -14749,6 +14955,7 @@ class _$CameraPermissionFailedImpl implements _CameraPermissionFailed {
     TResult Function()? uploadedFileSizeExceed,
     TResult Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult Function()? allReorderItemInvalid,
+    TResult Function(String materialNumber)? reorderItemInvalid,
     TResult Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult Function()? cartHasDifferentAddress,
     TResult Function()? articleannuncementTagFetchingError,
@@ -14825,6 +15032,7 @@ class _$CameraPermissionFailedImpl implements _CameraPermissionFailed {
         paymentAdviceDeleteFailed,
     required TResult Function(_AllReorderItemInvalid value)
         allReorderItemInvalid,
+    required TResult Function(_ReorderItemInvalid value) reorderItemInvalid,
     required TResult Function(_MaximumCartQuantityExceed value)
         maximumCartQuantityExceed,
     required TResult Function(_CartHasDifferentAddress value)
@@ -14895,6 +15103,7 @@ class _$CameraPermissionFailedImpl implements _CameraPermissionFailed {
     TResult? Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
     TResult? Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult? Function(_ReorderItemInvalid value)? reorderItemInvalid,
     TResult? Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult? Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
@@ -14961,6 +15170,7 @@ class _$CameraPermissionFailedImpl implements _CameraPermissionFailed {
     TResult Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
     TResult Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult Function(_ReorderItemInvalid value)? reorderItemInvalid,
     TResult Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
@@ -15070,6 +15280,7 @@ class _$UserNameNotFoundImpl implements _UserNameNotFound {
     required TResult Function() uploadedFileSizeExceed,
     required TResult Function(String adviceNumber) paymentAdviceDeleteFailed,
     required TResult Function() allReorderItemInvalid,
+    required TResult Function(String materialNumber) reorderItemInvalid,
     required TResult Function(String maximumNumber) maximumCartQuantityExceed,
     required TResult Function() cartHasDifferentAddress,
     required TResult Function() articleannuncementTagFetchingError,
@@ -15125,6 +15336,7 @@ class _$UserNameNotFoundImpl implements _UserNameNotFound {
     TResult? Function()? uploadedFileSizeExceed,
     TResult? Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult? Function()? allReorderItemInvalid,
+    TResult? Function(String materialNumber)? reorderItemInvalid,
     TResult? Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult? Function()? cartHasDifferentAddress,
     TResult? Function()? articleannuncementTagFetchingError,
@@ -15180,6 +15392,7 @@ class _$UserNameNotFoundImpl implements _UserNameNotFound {
     TResult Function()? uploadedFileSizeExceed,
     TResult Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult Function()? allReorderItemInvalid,
+    TResult Function(String materialNumber)? reorderItemInvalid,
     TResult Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult Function()? cartHasDifferentAddress,
     TResult Function()? articleannuncementTagFetchingError,
@@ -15256,6 +15469,7 @@ class _$UserNameNotFoundImpl implements _UserNameNotFound {
         paymentAdviceDeleteFailed,
     required TResult Function(_AllReorderItemInvalid value)
         allReorderItemInvalid,
+    required TResult Function(_ReorderItemInvalid value) reorderItemInvalid,
     required TResult Function(_MaximumCartQuantityExceed value)
         maximumCartQuantityExceed,
     required TResult Function(_CartHasDifferentAddress value)
@@ -15326,6 +15540,7 @@ class _$UserNameNotFoundImpl implements _UserNameNotFound {
     TResult? Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
     TResult? Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult? Function(_ReorderItemInvalid value)? reorderItemInvalid,
     TResult? Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult? Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
@@ -15392,6 +15607,7 @@ class _$UserNameNotFoundImpl implements _UserNameNotFound {
     TResult Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
     TResult Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult Function(_ReorderItemInvalid value)? reorderItemInvalid,
     TResult Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
@@ -15495,6 +15711,7 @@ class _$AccountBlockedImpl implements _AccountBlocked {
     required TResult Function() uploadedFileSizeExceed,
     required TResult Function(String adviceNumber) paymentAdviceDeleteFailed,
     required TResult Function() allReorderItemInvalid,
+    required TResult Function(String materialNumber) reorderItemInvalid,
     required TResult Function(String maximumNumber) maximumCartQuantityExceed,
     required TResult Function() cartHasDifferentAddress,
     required TResult Function() articleannuncementTagFetchingError,
@@ -15550,6 +15767,7 @@ class _$AccountBlockedImpl implements _AccountBlocked {
     TResult? Function()? uploadedFileSizeExceed,
     TResult? Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult? Function()? allReorderItemInvalid,
+    TResult? Function(String materialNumber)? reorderItemInvalid,
     TResult? Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult? Function()? cartHasDifferentAddress,
     TResult? Function()? articleannuncementTagFetchingError,
@@ -15605,6 +15823,7 @@ class _$AccountBlockedImpl implements _AccountBlocked {
     TResult Function()? uploadedFileSizeExceed,
     TResult Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult Function()? allReorderItemInvalid,
+    TResult Function(String materialNumber)? reorderItemInvalid,
     TResult Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult Function()? cartHasDifferentAddress,
     TResult Function()? articleannuncementTagFetchingError,
@@ -15681,6 +15900,7 @@ class _$AccountBlockedImpl implements _AccountBlocked {
         paymentAdviceDeleteFailed,
     required TResult Function(_AllReorderItemInvalid value)
         allReorderItemInvalid,
+    required TResult Function(_ReorderItemInvalid value) reorderItemInvalid,
     required TResult Function(_MaximumCartQuantityExceed value)
         maximumCartQuantityExceed,
     required TResult Function(_CartHasDifferentAddress value)
@@ -15751,6 +15971,7 @@ class _$AccountBlockedImpl implements _AccountBlocked {
     TResult? Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
     TResult? Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult? Function(_ReorderItemInvalid value)? reorderItemInvalid,
     TResult? Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult? Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
@@ -15817,6 +16038,7 @@ class _$AccountBlockedImpl implements _AccountBlocked {
     TResult Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
     TResult Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult Function(_ReorderItemInvalid value)? reorderItemInvalid,
     TResult Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
@@ -15923,6 +16145,7 @@ class _$UploadedFileSizeExceedImpl implements _UploadedFileSizeExceed {
     required TResult Function() uploadedFileSizeExceed,
     required TResult Function(String adviceNumber) paymentAdviceDeleteFailed,
     required TResult Function() allReorderItemInvalid,
+    required TResult Function(String materialNumber) reorderItemInvalid,
     required TResult Function(String maximumNumber) maximumCartQuantityExceed,
     required TResult Function() cartHasDifferentAddress,
     required TResult Function() articleannuncementTagFetchingError,
@@ -15978,6 +16201,7 @@ class _$UploadedFileSizeExceedImpl implements _UploadedFileSizeExceed {
     TResult? Function()? uploadedFileSizeExceed,
     TResult? Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult? Function()? allReorderItemInvalid,
+    TResult? Function(String materialNumber)? reorderItemInvalid,
     TResult? Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult? Function()? cartHasDifferentAddress,
     TResult? Function()? articleannuncementTagFetchingError,
@@ -16033,6 +16257,7 @@ class _$UploadedFileSizeExceedImpl implements _UploadedFileSizeExceed {
     TResult Function()? uploadedFileSizeExceed,
     TResult Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult Function()? allReorderItemInvalid,
+    TResult Function(String materialNumber)? reorderItemInvalid,
     TResult Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult Function()? cartHasDifferentAddress,
     TResult Function()? articleannuncementTagFetchingError,
@@ -16109,6 +16334,7 @@ class _$UploadedFileSizeExceedImpl implements _UploadedFileSizeExceed {
         paymentAdviceDeleteFailed,
     required TResult Function(_AllReorderItemInvalid value)
         allReorderItemInvalid,
+    required TResult Function(_ReorderItemInvalid value) reorderItemInvalid,
     required TResult Function(_MaximumCartQuantityExceed value)
         maximumCartQuantityExceed,
     required TResult Function(_CartHasDifferentAddress value)
@@ -16179,6 +16405,7 @@ class _$UploadedFileSizeExceedImpl implements _UploadedFileSizeExceed {
     TResult? Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
     TResult? Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult? Function(_ReorderItemInvalid value)? reorderItemInvalid,
     TResult? Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult? Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
@@ -16245,6 +16472,7 @@ class _$UploadedFileSizeExceedImpl implements _UploadedFileSizeExceed {
     TResult Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
     TResult Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult Function(_ReorderItemInvalid value)? reorderItemInvalid,
     TResult Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
@@ -16378,6 +16606,7 @@ class _$PaymentAdviceDeleteFailedImpl implements _PaymentAdviceDeleteFailed {
     required TResult Function() uploadedFileSizeExceed,
     required TResult Function(String adviceNumber) paymentAdviceDeleteFailed,
     required TResult Function() allReorderItemInvalid,
+    required TResult Function(String materialNumber) reorderItemInvalid,
     required TResult Function(String maximumNumber) maximumCartQuantityExceed,
     required TResult Function() cartHasDifferentAddress,
     required TResult Function() articleannuncementTagFetchingError,
@@ -16433,6 +16662,7 @@ class _$PaymentAdviceDeleteFailedImpl implements _PaymentAdviceDeleteFailed {
     TResult? Function()? uploadedFileSizeExceed,
     TResult? Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult? Function()? allReorderItemInvalid,
+    TResult? Function(String materialNumber)? reorderItemInvalid,
     TResult? Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult? Function()? cartHasDifferentAddress,
     TResult? Function()? articleannuncementTagFetchingError,
@@ -16488,6 +16718,7 @@ class _$PaymentAdviceDeleteFailedImpl implements _PaymentAdviceDeleteFailed {
     TResult Function()? uploadedFileSizeExceed,
     TResult Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult Function()? allReorderItemInvalid,
+    TResult Function(String materialNumber)? reorderItemInvalid,
     TResult Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult Function()? cartHasDifferentAddress,
     TResult Function()? articleannuncementTagFetchingError,
@@ -16564,6 +16795,7 @@ class _$PaymentAdviceDeleteFailedImpl implements _PaymentAdviceDeleteFailed {
         paymentAdviceDeleteFailed,
     required TResult Function(_AllReorderItemInvalid value)
         allReorderItemInvalid,
+    required TResult Function(_ReorderItemInvalid value) reorderItemInvalid,
     required TResult Function(_MaximumCartQuantityExceed value)
         maximumCartQuantityExceed,
     required TResult Function(_CartHasDifferentAddress value)
@@ -16634,6 +16866,7 @@ class _$PaymentAdviceDeleteFailedImpl implements _PaymentAdviceDeleteFailed {
     TResult? Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
     TResult? Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult? Function(_ReorderItemInvalid value)? reorderItemInvalid,
     TResult? Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult? Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
@@ -16700,6 +16933,7 @@ class _$PaymentAdviceDeleteFailedImpl implements _PaymentAdviceDeleteFailed {
     TResult Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
     TResult Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult Function(_ReorderItemInvalid value)? reorderItemInvalid,
     TResult Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
@@ -16811,6 +17045,7 @@ class _$AllReorderItemInvalidImpl implements _AllReorderItemInvalid {
     required TResult Function() uploadedFileSizeExceed,
     required TResult Function(String adviceNumber) paymentAdviceDeleteFailed,
     required TResult Function() allReorderItemInvalid,
+    required TResult Function(String materialNumber) reorderItemInvalid,
     required TResult Function(String maximumNumber) maximumCartQuantityExceed,
     required TResult Function() cartHasDifferentAddress,
     required TResult Function() articleannuncementTagFetchingError,
@@ -16866,6 +17101,7 @@ class _$AllReorderItemInvalidImpl implements _AllReorderItemInvalid {
     TResult? Function()? uploadedFileSizeExceed,
     TResult? Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult? Function()? allReorderItemInvalid,
+    TResult? Function(String materialNumber)? reorderItemInvalid,
     TResult? Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult? Function()? cartHasDifferentAddress,
     TResult? Function()? articleannuncementTagFetchingError,
@@ -16921,6 +17157,7 @@ class _$AllReorderItemInvalidImpl implements _AllReorderItemInvalid {
     TResult Function()? uploadedFileSizeExceed,
     TResult Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult Function()? allReorderItemInvalid,
+    TResult Function(String materialNumber)? reorderItemInvalid,
     TResult Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult Function()? cartHasDifferentAddress,
     TResult Function()? articleannuncementTagFetchingError,
@@ -16997,6 +17234,7 @@ class _$AllReorderItemInvalidImpl implements _AllReorderItemInvalid {
         paymentAdviceDeleteFailed,
     required TResult Function(_AllReorderItemInvalid value)
         allReorderItemInvalid,
+    required TResult Function(_ReorderItemInvalid value) reorderItemInvalid,
     required TResult Function(_MaximumCartQuantityExceed value)
         maximumCartQuantityExceed,
     required TResult Function(_CartHasDifferentAddress value)
@@ -17067,6 +17305,7 @@ class _$AllReorderItemInvalidImpl implements _AllReorderItemInvalid {
     TResult? Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
     TResult? Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult? Function(_ReorderItemInvalid value)? reorderItemInvalid,
     TResult? Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult? Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
@@ -17133,6 +17372,7 @@ class _$AllReorderItemInvalidImpl implements _AllReorderItemInvalid {
     TResult Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
     TResult Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult Function(_ReorderItemInvalid value)? reorderItemInvalid,
     TResult Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
@@ -17157,6 +17397,471 @@ class _$AllReorderItemInvalidImpl implements _AllReorderItemInvalid {
 
 abstract class _AllReorderItemInvalid implements ApiFailure {
   const factory _AllReorderItemInvalid() = _$AllReorderItemInvalidImpl;
+}
+
+/// @nodoc
+abstract class _$$ReorderItemInvalidImplCopyWith<$Res> {
+  factory _$$ReorderItemInvalidImplCopyWith(_$ReorderItemInvalidImpl value,
+          $Res Function(_$ReorderItemInvalidImpl) then) =
+      __$$ReorderItemInvalidImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String materialNumber});
+}
+
+/// @nodoc
+class __$$ReorderItemInvalidImplCopyWithImpl<$Res>
+    extends _$ApiFailureCopyWithImpl<$Res, _$ReorderItemInvalidImpl>
+    implements _$$ReorderItemInvalidImplCopyWith<$Res> {
+  __$$ReorderItemInvalidImplCopyWithImpl(_$ReorderItemInvalidImpl _value,
+      $Res Function(_$ReorderItemInvalidImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? materialNumber = null,
+  }) {
+    return _then(_$ReorderItemInvalidImpl(
+      null == materialNumber
+          ? _value.materialNumber
+          : materialNumber // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$ReorderItemInvalidImpl implements _ReorderItemInvalid {
+  const _$ReorderItemInvalidImpl(this.materialNumber);
+
+  @override
+  final String materialNumber;
+
+  @override
+  String toString() {
+    return 'ApiFailure.reorderItemInvalid(materialNumber: $materialNumber)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ReorderItemInvalidImpl &&
+            (identical(other.materialNumber, materialNumber) ||
+                other.materialNumber == materialNumber));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, materialNumber);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$ReorderItemInvalidImplCopyWith<_$ReorderItemInvalidImpl> get copyWith =>
+      __$$ReorderItemInvalidImplCopyWithImpl<_$ReorderItemInvalidImpl>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String message) other,
+    required TResult Function(String message) serverError,
+    required TResult Function() poorConnection,
+    required TResult Function() serverTimeout,
+    required TResult Function() userNotFound,
+    required TResult Function() marketplaceTnCAcceptanceError,
+    required TResult Function() invalidEmailAndPasswordCombination,
+    required TResult Function() accountLocked,
+    required TResult Function() accountExpired,
+    required TResult Function() tokenExpired,
+    required TResult Function() authenticationFailed,
+    required TResult Function() proxyLoginRolePermissionNotMatch,
+    required TResult Function() proxyLoginZPTargetRoleNotMatch,
+    required TResult Function() proxyLoginZPSalesOrgNotMatch,
+    required TResult Function() passwordResetFail,
+    required TResult Function() deviceNotSupportBiometric,
+    required TResult Function() cannotCheckBiometrics,
+    required TResult Function() noSupportedBiometrics,
+    required TResult Function() invalidBiometric,
+    required TResult Function() priceOverrideNotFound,
+    required TResult Function() productOutOfStock,
+    required TResult Function() photoPermissionFailed,
+    required TResult Function() storagePermissionFailed,
+    required TResult Function() invalidFileFormat,
+    required TResult Function() uploadCountExcideLimit,
+    required TResult Function() invalidDomain,
+    required TResult Function() productDetailRoute,
+    required TResult Function() orderDetailRoute,
+    required TResult Function() returnDetailRoute,
+    required TResult Function() paymentDetailRoute,
+    required TResult Function() invoiceDetailRoute,
+    required TResult Function() languageChangeFail,
+    required TResult Function() scannedProductNotFound,
+    required TResult Function(bool permanentlyDenied) cameraPermissionFailed,
+    required TResult Function() userNameNotFound,
+    required TResult Function() accountBlocked,
+    required TResult Function() uploadedFileSizeExceed,
+    required TResult Function(String adviceNumber) paymentAdviceDeleteFailed,
+    required TResult Function() allReorderItemInvalid,
+    required TResult Function(String materialNumber) reorderItemInvalid,
+    required TResult Function(String maximumNumber) maximumCartQuantityExceed,
+    required TResult Function() cartHasDifferentAddress,
+    required TResult Function() articleannuncementTagFetchingError,
+    required TResult Function() attachmentDownloadError,
+    required TResult Function(String message) openDownloadedFileError,
+    required TResult Function() addAnimalHealthWithNormalProductToCart,
+    required TResult Function() missingzzHtmcs,
+    required TResult Function() stockInfoNotAvailable,
+    required TResult Function() accountCreationIncomplete,
+  }) {
+    return reorderItemInvalid(materialNumber);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String message)? other,
+    TResult? Function(String message)? serverError,
+    TResult? Function()? poorConnection,
+    TResult? Function()? serverTimeout,
+    TResult? Function()? userNotFound,
+    TResult? Function()? marketplaceTnCAcceptanceError,
+    TResult? Function()? invalidEmailAndPasswordCombination,
+    TResult? Function()? accountLocked,
+    TResult? Function()? accountExpired,
+    TResult? Function()? tokenExpired,
+    TResult? Function()? authenticationFailed,
+    TResult? Function()? proxyLoginRolePermissionNotMatch,
+    TResult? Function()? proxyLoginZPTargetRoleNotMatch,
+    TResult? Function()? proxyLoginZPSalesOrgNotMatch,
+    TResult? Function()? passwordResetFail,
+    TResult? Function()? deviceNotSupportBiometric,
+    TResult? Function()? cannotCheckBiometrics,
+    TResult? Function()? noSupportedBiometrics,
+    TResult? Function()? invalidBiometric,
+    TResult? Function()? priceOverrideNotFound,
+    TResult? Function()? productOutOfStock,
+    TResult? Function()? photoPermissionFailed,
+    TResult? Function()? storagePermissionFailed,
+    TResult? Function()? invalidFileFormat,
+    TResult? Function()? uploadCountExcideLimit,
+    TResult? Function()? invalidDomain,
+    TResult? Function()? productDetailRoute,
+    TResult? Function()? orderDetailRoute,
+    TResult? Function()? returnDetailRoute,
+    TResult? Function()? paymentDetailRoute,
+    TResult? Function()? invoiceDetailRoute,
+    TResult? Function()? languageChangeFail,
+    TResult? Function()? scannedProductNotFound,
+    TResult? Function(bool permanentlyDenied)? cameraPermissionFailed,
+    TResult? Function()? userNameNotFound,
+    TResult? Function()? accountBlocked,
+    TResult? Function()? uploadedFileSizeExceed,
+    TResult? Function(String adviceNumber)? paymentAdviceDeleteFailed,
+    TResult? Function()? allReorderItemInvalid,
+    TResult? Function(String materialNumber)? reorderItemInvalid,
+    TResult? Function(String maximumNumber)? maximumCartQuantityExceed,
+    TResult? Function()? cartHasDifferentAddress,
+    TResult? Function()? articleannuncementTagFetchingError,
+    TResult? Function()? attachmentDownloadError,
+    TResult? Function(String message)? openDownloadedFileError,
+    TResult? Function()? addAnimalHealthWithNormalProductToCart,
+    TResult? Function()? missingzzHtmcs,
+    TResult? Function()? stockInfoNotAvailable,
+    TResult? Function()? accountCreationIncomplete,
+  }) {
+    return reorderItemInvalid?.call(materialNumber);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String message)? other,
+    TResult Function(String message)? serverError,
+    TResult Function()? poorConnection,
+    TResult Function()? serverTimeout,
+    TResult Function()? userNotFound,
+    TResult Function()? marketplaceTnCAcceptanceError,
+    TResult Function()? invalidEmailAndPasswordCombination,
+    TResult Function()? accountLocked,
+    TResult Function()? accountExpired,
+    TResult Function()? tokenExpired,
+    TResult Function()? authenticationFailed,
+    TResult Function()? proxyLoginRolePermissionNotMatch,
+    TResult Function()? proxyLoginZPTargetRoleNotMatch,
+    TResult Function()? proxyLoginZPSalesOrgNotMatch,
+    TResult Function()? passwordResetFail,
+    TResult Function()? deviceNotSupportBiometric,
+    TResult Function()? cannotCheckBiometrics,
+    TResult Function()? noSupportedBiometrics,
+    TResult Function()? invalidBiometric,
+    TResult Function()? priceOverrideNotFound,
+    TResult Function()? productOutOfStock,
+    TResult Function()? photoPermissionFailed,
+    TResult Function()? storagePermissionFailed,
+    TResult Function()? invalidFileFormat,
+    TResult Function()? uploadCountExcideLimit,
+    TResult Function()? invalidDomain,
+    TResult Function()? productDetailRoute,
+    TResult Function()? orderDetailRoute,
+    TResult Function()? returnDetailRoute,
+    TResult Function()? paymentDetailRoute,
+    TResult Function()? invoiceDetailRoute,
+    TResult Function()? languageChangeFail,
+    TResult Function()? scannedProductNotFound,
+    TResult Function(bool permanentlyDenied)? cameraPermissionFailed,
+    TResult Function()? userNameNotFound,
+    TResult Function()? accountBlocked,
+    TResult Function()? uploadedFileSizeExceed,
+    TResult Function(String adviceNumber)? paymentAdviceDeleteFailed,
+    TResult Function()? allReorderItemInvalid,
+    TResult Function(String materialNumber)? reorderItemInvalid,
+    TResult Function(String maximumNumber)? maximumCartQuantityExceed,
+    TResult Function()? cartHasDifferentAddress,
+    TResult Function()? articleannuncementTagFetchingError,
+    TResult Function()? attachmentDownloadError,
+    TResult Function(String message)? openDownloadedFileError,
+    TResult Function()? addAnimalHealthWithNormalProductToCart,
+    TResult Function()? missingzzHtmcs,
+    TResult Function()? stockInfoNotAvailable,
+    TResult Function()? accountCreationIncomplete,
+    required TResult orElse(),
+  }) {
+    if (reorderItemInvalid != null) {
+      return reorderItemInvalid(materialNumber);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Other value) other,
+    required TResult Function(_ServerError value) serverError,
+    required TResult Function(_PoorConnection value) poorConnection,
+    required TResult Function(_ServerTimeout value) serverTimeout,
+    required TResult Function(_UserNotFound value) userNotFound,
+    required TResult Function(_MarketPlaceTnCAcceptanceError value)
+        marketplaceTnCAcceptanceError,
+    required TResult Function(_InvalidEmailAndPasswordCombination value)
+        invalidEmailAndPasswordCombination,
+    required TResult Function(_AccountLocked value) accountLocked,
+    required TResult Function(_AccountExpired value) accountExpired,
+    required TResult Function(_TokenExpired value) tokenExpired,
+    required TResult Function(_AuthenticationFailed value) authenticationFailed,
+    required TResult Function(_ProxyLoginRolePermissionNotMatch value)
+        proxyLoginRolePermissionNotMatch,
+    required TResult Function(_ProxyLoginZPTargetRoleNotMatch value)
+        proxyLoginZPTargetRoleNotMatch,
+    required TResult Function(_ProxyLoginZPSalesOrgNotMatch value)
+        proxyLoginZPSalesOrgNotMatch,
+    required TResult Function(_PasswordResetFail value) passwordResetFail,
+    required TResult Function(_DeviceNotSupportBiometric value)
+        deviceNotSupportBiometric,
+    required TResult Function(_CannotCheckBiometrics value)
+        cannotCheckBiometrics,
+    required TResult Function(_NoSupportedBiometrics value)
+        noSupportedBiometrics,
+    required TResult Function(_InvalidBiometric value) invalidBiometric,
+    required TResult Function(_PriceOverrideNotFound value)
+        priceOverrideNotFound,
+    required TResult Function(_ProductOutOfStock value) productOutOfStock,
+    required TResult Function(_PhotoPermissionFailed value)
+        photoPermissionFailed,
+    required TResult Function(_StoragePermissionFailed value)
+        storagePermissionFailed,
+    required TResult Function(_InvalidFileFormat value) invalidFileFormat,
+    required TResult Function(_UploadCountExcideLimit value)
+        uploadCountExcideLimit,
+    required TResult Function(_InvalidDomain value) invalidDomain,
+    required TResult Function(_ProductDetailRoute value) productDetailRoute,
+    required TResult Function(_OrderDetailRoute value) orderDetailRoute,
+    required TResult Function(_ReturnDetailRoute value) returnDetailRoute,
+    required TResult Function(_PaymentDetailRoute value) paymentDetailRoute,
+    required TResult Function(_InvoiceDetailRoute value) invoiceDetailRoute,
+    required TResult Function(_LanguageChangeFail value) languageChangeFail,
+    required TResult Function(_ScannedProductNotFound value)
+        scannedProductNotFound,
+    required TResult Function(_CameraPermissionFailed value)
+        cameraPermissionFailed,
+    required TResult Function(_UserNameNotFound value) userNameNotFound,
+    required TResult Function(_AccountBlocked value) accountBlocked,
+    required TResult Function(_UploadedFileSizeExceed value)
+        uploadedFileSizeExceed,
+    required TResult Function(_PaymentAdviceDeleteFailed value)
+        paymentAdviceDeleteFailed,
+    required TResult Function(_AllReorderItemInvalid value)
+        allReorderItemInvalid,
+    required TResult Function(_ReorderItemInvalid value) reorderItemInvalid,
+    required TResult Function(_MaximumCartQuantityExceed value)
+        maximumCartQuantityExceed,
+    required TResult Function(_CartHasDifferentAddress value)
+        cartHasDifferentAddress,
+    required TResult Function(_ArticleannuncementTagFetchingError value)
+        articleannuncementTagFetchingError,
+    required TResult Function(_AttachmentDownloadError value)
+        attachmentDownloadError,
+    required TResult Function(_OpenDownloadedFileError value)
+        openDownloadedFileError,
+    required TResult Function(_AddAnimalHealthWithNormalProductToCart value)
+        addAnimalHealthWithNormalProductToCart,
+    required TResult Function(_MissingzzHtmcs value) missingzzHtmcs,
+    required TResult Function(_StockInfoNotAvailable value)
+        stockInfoNotAvailable,
+    required TResult Function(_AccountCreationIncomplete value)
+        accountCreationIncomplete,
+  }) {
+    return reorderItemInvalid(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Other value)? other,
+    TResult? Function(_ServerError value)? serverError,
+    TResult? Function(_PoorConnection value)? poorConnection,
+    TResult? Function(_ServerTimeout value)? serverTimeout,
+    TResult? Function(_UserNotFound value)? userNotFound,
+    TResult? Function(_MarketPlaceTnCAcceptanceError value)?
+        marketplaceTnCAcceptanceError,
+    TResult? Function(_InvalidEmailAndPasswordCombination value)?
+        invalidEmailAndPasswordCombination,
+    TResult? Function(_AccountLocked value)? accountLocked,
+    TResult? Function(_AccountExpired value)? accountExpired,
+    TResult? Function(_TokenExpired value)? tokenExpired,
+    TResult? Function(_AuthenticationFailed value)? authenticationFailed,
+    TResult? Function(_ProxyLoginRolePermissionNotMatch value)?
+        proxyLoginRolePermissionNotMatch,
+    TResult? Function(_ProxyLoginZPTargetRoleNotMatch value)?
+        proxyLoginZPTargetRoleNotMatch,
+    TResult? Function(_ProxyLoginZPSalesOrgNotMatch value)?
+        proxyLoginZPSalesOrgNotMatch,
+    TResult? Function(_PasswordResetFail value)? passwordResetFail,
+    TResult? Function(_DeviceNotSupportBiometric value)?
+        deviceNotSupportBiometric,
+    TResult? Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
+    TResult? Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
+    TResult? Function(_InvalidBiometric value)? invalidBiometric,
+    TResult? Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
+    TResult? Function(_ProductOutOfStock value)? productOutOfStock,
+    TResult? Function(_PhotoPermissionFailed value)? photoPermissionFailed,
+    TResult? Function(_StoragePermissionFailed value)? storagePermissionFailed,
+    TResult? Function(_InvalidFileFormat value)? invalidFileFormat,
+    TResult? Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
+    TResult? Function(_InvalidDomain value)? invalidDomain,
+    TResult? Function(_ProductDetailRoute value)? productDetailRoute,
+    TResult? Function(_OrderDetailRoute value)? orderDetailRoute,
+    TResult? Function(_ReturnDetailRoute value)? returnDetailRoute,
+    TResult? Function(_PaymentDetailRoute value)? paymentDetailRoute,
+    TResult? Function(_InvoiceDetailRoute value)? invoiceDetailRoute,
+    TResult? Function(_LanguageChangeFail value)? languageChangeFail,
+    TResult? Function(_ScannedProductNotFound value)? scannedProductNotFound,
+    TResult? Function(_CameraPermissionFailed value)? cameraPermissionFailed,
+    TResult? Function(_UserNameNotFound value)? userNameNotFound,
+    TResult? Function(_AccountBlocked value)? accountBlocked,
+    TResult? Function(_UploadedFileSizeExceed value)? uploadedFileSizeExceed,
+    TResult? Function(_PaymentAdviceDeleteFailed value)?
+        paymentAdviceDeleteFailed,
+    TResult? Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult? Function(_ReorderItemInvalid value)? reorderItemInvalid,
+    TResult? Function(_MaximumCartQuantityExceed value)?
+        maximumCartQuantityExceed,
+    TResult? Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
+    TResult? Function(_ArticleannuncementTagFetchingError value)?
+        articleannuncementTagFetchingError,
+    TResult? Function(_AttachmentDownloadError value)? attachmentDownloadError,
+    TResult? Function(_OpenDownloadedFileError value)? openDownloadedFileError,
+    TResult? Function(_AddAnimalHealthWithNormalProductToCart value)?
+        addAnimalHealthWithNormalProductToCart,
+    TResult? Function(_MissingzzHtmcs value)? missingzzHtmcs,
+    TResult? Function(_StockInfoNotAvailable value)? stockInfoNotAvailable,
+    TResult? Function(_AccountCreationIncomplete value)?
+        accountCreationIncomplete,
+  }) {
+    return reorderItemInvalid?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Other value)? other,
+    TResult Function(_ServerError value)? serverError,
+    TResult Function(_PoorConnection value)? poorConnection,
+    TResult Function(_ServerTimeout value)? serverTimeout,
+    TResult Function(_UserNotFound value)? userNotFound,
+    TResult Function(_MarketPlaceTnCAcceptanceError value)?
+        marketplaceTnCAcceptanceError,
+    TResult Function(_InvalidEmailAndPasswordCombination value)?
+        invalidEmailAndPasswordCombination,
+    TResult Function(_AccountLocked value)? accountLocked,
+    TResult Function(_AccountExpired value)? accountExpired,
+    TResult Function(_TokenExpired value)? tokenExpired,
+    TResult Function(_AuthenticationFailed value)? authenticationFailed,
+    TResult Function(_ProxyLoginRolePermissionNotMatch value)?
+        proxyLoginRolePermissionNotMatch,
+    TResult Function(_ProxyLoginZPTargetRoleNotMatch value)?
+        proxyLoginZPTargetRoleNotMatch,
+    TResult Function(_ProxyLoginZPSalesOrgNotMatch value)?
+        proxyLoginZPSalesOrgNotMatch,
+    TResult Function(_PasswordResetFail value)? passwordResetFail,
+    TResult Function(_DeviceNotSupportBiometric value)?
+        deviceNotSupportBiometric,
+    TResult Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
+    TResult Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
+    TResult Function(_InvalidBiometric value)? invalidBiometric,
+    TResult Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
+    TResult Function(_ProductOutOfStock value)? productOutOfStock,
+    TResult Function(_PhotoPermissionFailed value)? photoPermissionFailed,
+    TResult Function(_StoragePermissionFailed value)? storagePermissionFailed,
+    TResult Function(_InvalidFileFormat value)? invalidFileFormat,
+    TResult Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
+    TResult Function(_InvalidDomain value)? invalidDomain,
+    TResult Function(_ProductDetailRoute value)? productDetailRoute,
+    TResult Function(_OrderDetailRoute value)? orderDetailRoute,
+    TResult Function(_ReturnDetailRoute value)? returnDetailRoute,
+    TResult Function(_PaymentDetailRoute value)? paymentDetailRoute,
+    TResult Function(_InvoiceDetailRoute value)? invoiceDetailRoute,
+    TResult Function(_LanguageChangeFail value)? languageChangeFail,
+    TResult Function(_ScannedProductNotFound value)? scannedProductNotFound,
+    TResult Function(_CameraPermissionFailed value)? cameraPermissionFailed,
+    TResult Function(_UserNameNotFound value)? userNameNotFound,
+    TResult Function(_AccountBlocked value)? accountBlocked,
+    TResult Function(_UploadedFileSizeExceed value)? uploadedFileSizeExceed,
+    TResult Function(_PaymentAdviceDeleteFailed value)?
+        paymentAdviceDeleteFailed,
+    TResult Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult Function(_ReorderItemInvalid value)? reorderItemInvalid,
+    TResult Function(_MaximumCartQuantityExceed value)?
+        maximumCartQuantityExceed,
+    TResult Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
+    TResult Function(_ArticleannuncementTagFetchingError value)?
+        articleannuncementTagFetchingError,
+    TResult Function(_AttachmentDownloadError value)? attachmentDownloadError,
+    TResult Function(_OpenDownloadedFileError value)? openDownloadedFileError,
+    TResult Function(_AddAnimalHealthWithNormalProductToCart value)?
+        addAnimalHealthWithNormalProductToCart,
+    TResult Function(_MissingzzHtmcs value)? missingzzHtmcs,
+    TResult Function(_StockInfoNotAvailable value)? stockInfoNotAvailable,
+    TResult Function(_AccountCreationIncomplete value)?
+        accountCreationIncomplete,
+    required TResult orElse(),
+  }) {
+    if (reorderItemInvalid != null) {
+      return reorderItemInvalid(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _ReorderItemInvalid implements ApiFailure {
+  const factory _ReorderItemInvalid(final String materialNumber) =
+      _$ReorderItemInvalidImpl;
+
+  String get materialNumber;
+  @JsonKey(ignore: true)
+  _$$ReorderItemInvalidImplCopyWith<_$ReorderItemInvalidImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -17266,6 +17971,7 @@ class _$MaximumCartQuantityExceedImpl implements _MaximumCartQuantityExceed {
     required TResult Function() uploadedFileSizeExceed,
     required TResult Function(String adviceNumber) paymentAdviceDeleteFailed,
     required TResult Function() allReorderItemInvalid,
+    required TResult Function(String materialNumber) reorderItemInvalid,
     required TResult Function(String maximumNumber) maximumCartQuantityExceed,
     required TResult Function() cartHasDifferentAddress,
     required TResult Function() articleannuncementTagFetchingError,
@@ -17321,6 +18027,7 @@ class _$MaximumCartQuantityExceedImpl implements _MaximumCartQuantityExceed {
     TResult? Function()? uploadedFileSizeExceed,
     TResult? Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult? Function()? allReorderItemInvalid,
+    TResult? Function(String materialNumber)? reorderItemInvalid,
     TResult? Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult? Function()? cartHasDifferentAddress,
     TResult? Function()? articleannuncementTagFetchingError,
@@ -17376,6 +18083,7 @@ class _$MaximumCartQuantityExceedImpl implements _MaximumCartQuantityExceed {
     TResult Function()? uploadedFileSizeExceed,
     TResult Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult Function()? allReorderItemInvalid,
+    TResult Function(String materialNumber)? reorderItemInvalid,
     TResult Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult Function()? cartHasDifferentAddress,
     TResult Function()? articleannuncementTagFetchingError,
@@ -17452,6 +18160,7 @@ class _$MaximumCartQuantityExceedImpl implements _MaximumCartQuantityExceed {
         paymentAdviceDeleteFailed,
     required TResult Function(_AllReorderItemInvalid value)
         allReorderItemInvalid,
+    required TResult Function(_ReorderItemInvalid value) reorderItemInvalid,
     required TResult Function(_MaximumCartQuantityExceed value)
         maximumCartQuantityExceed,
     required TResult Function(_CartHasDifferentAddress value)
@@ -17522,6 +18231,7 @@ class _$MaximumCartQuantityExceedImpl implements _MaximumCartQuantityExceed {
     TResult? Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
     TResult? Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult? Function(_ReorderItemInvalid value)? reorderItemInvalid,
     TResult? Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult? Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
@@ -17588,6 +18298,7 @@ class _$MaximumCartQuantityExceedImpl implements _MaximumCartQuantityExceed {
     TResult Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
     TResult Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult Function(_ReorderItemInvalid value)? reorderItemInvalid,
     TResult Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
@@ -17700,6 +18411,7 @@ class _$CartHasDifferentAddressImpl implements _CartHasDifferentAddress {
     required TResult Function() uploadedFileSizeExceed,
     required TResult Function(String adviceNumber) paymentAdviceDeleteFailed,
     required TResult Function() allReorderItemInvalid,
+    required TResult Function(String materialNumber) reorderItemInvalid,
     required TResult Function(String maximumNumber) maximumCartQuantityExceed,
     required TResult Function() cartHasDifferentAddress,
     required TResult Function() articleannuncementTagFetchingError,
@@ -17755,6 +18467,7 @@ class _$CartHasDifferentAddressImpl implements _CartHasDifferentAddress {
     TResult? Function()? uploadedFileSizeExceed,
     TResult? Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult? Function()? allReorderItemInvalid,
+    TResult? Function(String materialNumber)? reorderItemInvalid,
     TResult? Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult? Function()? cartHasDifferentAddress,
     TResult? Function()? articleannuncementTagFetchingError,
@@ -17810,6 +18523,7 @@ class _$CartHasDifferentAddressImpl implements _CartHasDifferentAddress {
     TResult Function()? uploadedFileSizeExceed,
     TResult Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult Function()? allReorderItemInvalid,
+    TResult Function(String materialNumber)? reorderItemInvalid,
     TResult Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult Function()? cartHasDifferentAddress,
     TResult Function()? articleannuncementTagFetchingError,
@@ -17886,6 +18600,7 @@ class _$CartHasDifferentAddressImpl implements _CartHasDifferentAddress {
         paymentAdviceDeleteFailed,
     required TResult Function(_AllReorderItemInvalid value)
         allReorderItemInvalid,
+    required TResult Function(_ReorderItemInvalid value) reorderItemInvalid,
     required TResult Function(_MaximumCartQuantityExceed value)
         maximumCartQuantityExceed,
     required TResult Function(_CartHasDifferentAddress value)
@@ -17956,6 +18671,7 @@ class _$CartHasDifferentAddressImpl implements _CartHasDifferentAddress {
     TResult? Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
     TResult? Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult? Function(_ReorderItemInvalid value)? reorderItemInvalid,
     TResult? Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult? Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
@@ -18022,6 +18738,7 @@ class _$CartHasDifferentAddressImpl implements _CartHasDifferentAddress {
     TResult Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
     TResult Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult Function(_ReorderItemInvalid value)? reorderItemInvalid,
     TResult Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
@@ -18130,6 +18847,7 @@ class _$ArticleannuncementTagFetchingErrorImpl
     required TResult Function() uploadedFileSizeExceed,
     required TResult Function(String adviceNumber) paymentAdviceDeleteFailed,
     required TResult Function() allReorderItemInvalid,
+    required TResult Function(String materialNumber) reorderItemInvalid,
     required TResult Function(String maximumNumber) maximumCartQuantityExceed,
     required TResult Function() cartHasDifferentAddress,
     required TResult Function() articleannuncementTagFetchingError,
@@ -18185,6 +18903,7 @@ class _$ArticleannuncementTagFetchingErrorImpl
     TResult? Function()? uploadedFileSizeExceed,
     TResult? Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult? Function()? allReorderItemInvalid,
+    TResult? Function(String materialNumber)? reorderItemInvalid,
     TResult? Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult? Function()? cartHasDifferentAddress,
     TResult? Function()? articleannuncementTagFetchingError,
@@ -18240,6 +18959,7 @@ class _$ArticleannuncementTagFetchingErrorImpl
     TResult Function()? uploadedFileSizeExceed,
     TResult Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult Function()? allReorderItemInvalid,
+    TResult Function(String materialNumber)? reorderItemInvalid,
     TResult Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult Function()? cartHasDifferentAddress,
     TResult Function()? articleannuncementTagFetchingError,
@@ -18316,6 +19036,7 @@ class _$ArticleannuncementTagFetchingErrorImpl
         paymentAdviceDeleteFailed,
     required TResult Function(_AllReorderItemInvalid value)
         allReorderItemInvalid,
+    required TResult Function(_ReorderItemInvalid value) reorderItemInvalid,
     required TResult Function(_MaximumCartQuantityExceed value)
         maximumCartQuantityExceed,
     required TResult Function(_CartHasDifferentAddress value)
@@ -18386,6 +19107,7 @@ class _$ArticleannuncementTagFetchingErrorImpl
     TResult? Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
     TResult? Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult? Function(_ReorderItemInvalid value)? reorderItemInvalid,
     TResult? Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult? Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
@@ -18452,6 +19174,7 @@ class _$ArticleannuncementTagFetchingErrorImpl
     TResult Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
     TResult Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult Function(_ReorderItemInvalid value)? reorderItemInvalid,
     TResult Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
@@ -18559,6 +19282,7 @@ class _$AttachmentDownloadErrorImpl implements _AttachmentDownloadError {
     required TResult Function() uploadedFileSizeExceed,
     required TResult Function(String adviceNumber) paymentAdviceDeleteFailed,
     required TResult Function() allReorderItemInvalid,
+    required TResult Function(String materialNumber) reorderItemInvalid,
     required TResult Function(String maximumNumber) maximumCartQuantityExceed,
     required TResult Function() cartHasDifferentAddress,
     required TResult Function() articleannuncementTagFetchingError,
@@ -18614,6 +19338,7 @@ class _$AttachmentDownloadErrorImpl implements _AttachmentDownloadError {
     TResult? Function()? uploadedFileSizeExceed,
     TResult? Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult? Function()? allReorderItemInvalid,
+    TResult? Function(String materialNumber)? reorderItemInvalid,
     TResult? Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult? Function()? cartHasDifferentAddress,
     TResult? Function()? articleannuncementTagFetchingError,
@@ -18669,6 +19394,7 @@ class _$AttachmentDownloadErrorImpl implements _AttachmentDownloadError {
     TResult Function()? uploadedFileSizeExceed,
     TResult Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult Function()? allReorderItemInvalid,
+    TResult Function(String materialNumber)? reorderItemInvalid,
     TResult Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult Function()? cartHasDifferentAddress,
     TResult Function()? articleannuncementTagFetchingError,
@@ -18745,6 +19471,7 @@ class _$AttachmentDownloadErrorImpl implements _AttachmentDownloadError {
         paymentAdviceDeleteFailed,
     required TResult Function(_AllReorderItemInvalid value)
         allReorderItemInvalid,
+    required TResult Function(_ReorderItemInvalid value) reorderItemInvalid,
     required TResult Function(_MaximumCartQuantityExceed value)
         maximumCartQuantityExceed,
     required TResult Function(_CartHasDifferentAddress value)
@@ -18815,6 +19542,7 @@ class _$AttachmentDownloadErrorImpl implements _AttachmentDownloadError {
     TResult? Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
     TResult? Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult? Function(_ReorderItemInvalid value)? reorderItemInvalid,
     TResult? Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult? Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
@@ -18881,6 +19609,7 @@ class _$AttachmentDownloadErrorImpl implements _AttachmentDownloadError {
     TResult Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
     TResult Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult Function(_ReorderItemInvalid value)? reorderItemInvalid,
     TResult Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
@@ -19013,6 +19742,7 @@ class _$OpenDownloadedFileErrorImpl implements _OpenDownloadedFileError {
     required TResult Function() uploadedFileSizeExceed,
     required TResult Function(String adviceNumber) paymentAdviceDeleteFailed,
     required TResult Function() allReorderItemInvalid,
+    required TResult Function(String materialNumber) reorderItemInvalid,
     required TResult Function(String maximumNumber) maximumCartQuantityExceed,
     required TResult Function() cartHasDifferentAddress,
     required TResult Function() articleannuncementTagFetchingError,
@@ -19068,6 +19798,7 @@ class _$OpenDownloadedFileErrorImpl implements _OpenDownloadedFileError {
     TResult? Function()? uploadedFileSizeExceed,
     TResult? Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult? Function()? allReorderItemInvalid,
+    TResult? Function(String materialNumber)? reorderItemInvalid,
     TResult? Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult? Function()? cartHasDifferentAddress,
     TResult? Function()? articleannuncementTagFetchingError,
@@ -19123,6 +19854,7 @@ class _$OpenDownloadedFileErrorImpl implements _OpenDownloadedFileError {
     TResult Function()? uploadedFileSizeExceed,
     TResult Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult Function()? allReorderItemInvalid,
+    TResult Function(String materialNumber)? reorderItemInvalid,
     TResult Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult Function()? cartHasDifferentAddress,
     TResult Function()? articleannuncementTagFetchingError,
@@ -19199,6 +19931,7 @@ class _$OpenDownloadedFileErrorImpl implements _OpenDownloadedFileError {
         paymentAdviceDeleteFailed,
     required TResult Function(_AllReorderItemInvalid value)
         allReorderItemInvalid,
+    required TResult Function(_ReorderItemInvalid value) reorderItemInvalid,
     required TResult Function(_MaximumCartQuantityExceed value)
         maximumCartQuantityExceed,
     required TResult Function(_CartHasDifferentAddress value)
@@ -19269,6 +20002,7 @@ class _$OpenDownloadedFileErrorImpl implements _OpenDownloadedFileError {
     TResult? Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
     TResult? Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult? Function(_ReorderItemInvalid value)? reorderItemInvalid,
     TResult? Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult? Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
@@ -19335,6 +20069,7 @@ class _$OpenDownloadedFileErrorImpl implements _OpenDownloadedFileError {
     TResult Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
     TResult Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult Function(_ReorderItemInvalid value)? reorderItemInvalid,
     TResult Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
@@ -19449,6 +20184,7 @@ class _$AddAnimalHealthWithNormalProductToCartImpl
     required TResult Function() uploadedFileSizeExceed,
     required TResult Function(String adviceNumber) paymentAdviceDeleteFailed,
     required TResult Function() allReorderItemInvalid,
+    required TResult Function(String materialNumber) reorderItemInvalid,
     required TResult Function(String maximumNumber) maximumCartQuantityExceed,
     required TResult Function() cartHasDifferentAddress,
     required TResult Function() articleannuncementTagFetchingError,
@@ -19504,6 +20240,7 @@ class _$AddAnimalHealthWithNormalProductToCartImpl
     TResult? Function()? uploadedFileSizeExceed,
     TResult? Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult? Function()? allReorderItemInvalid,
+    TResult? Function(String materialNumber)? reorderItemInvalid,
     TResult? Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult? Function()? cartHasDifferentAddress,
     TResult? Function()? articleannuncementTagFetchingError,
@@ -19559,6 +20296,7 @@ class _$AddAnimalHealthWithNormalProductToCartImpl
     TResult Function()? uploadedFileSizeExceed,
     TResult Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult Function()? allReorderItemInvalid,
+    TResult Function(String materialNumber)? reorderItemInvalid,
     TResult Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult Function()? cartHasDifferentAddress,
     TResult Function()? articleannuncementTagFetchingError,
@@ -19635,6 +20373,7 @@ class _$AddAnimalHealthWithNormalProductToCartImpl
         paymentAdviceDeleteFailed,
     required TResult Function(_AllReorderItemInvalid value)
         allReorderItemInvalid,
+    required TResult Function(_ReorderItemInvalid value) reorderItemInvalid,
     required TResult Function(_MaximumCartQuantityExceed value)
         maximumCartQuantityExceed,
     required TResult Function(_CartHasDifferentAddress value)
@@ -19705,6 +20444,7 @@ class _$AddAnimalHealthWithNormalProductToCartImpl
     TResult? Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
     TResult? Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult? Function(_ReorderItemInvalid value)? reorderItemInvalid,
     TResult? Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult? Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
@@ -19771,6 +20511,7 @@ class _$AddAnimalHealthWithNormalProductToCartImpl
     TResult Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
     TResult Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult Function(_ReorderItemInvalid value)? reorderItemInvalid,
     TResult Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
@@ -19875,6 +20616,7 @@ class _$MissingzzHtmcsImpl implements _MissingzzHtmcs {
     required TResult Function() uploadedFileSizeExceed,
     required TResult Function(String adviceNumber) paymentAdviceDeleteFailed,
     required TResult Function() allReorderItemInvalid,
+    required TResult Function(String materialNumber) reorderItemInvalid,
     required TResult Function(String maximumNumber) maximumCartQuantityExceed,
     required TResult Function() cartHasDifferentAddress,
     required TResult Function() articleannuncementTagFetchingError,
@@ -19930,6 +20672,7 @@ class _$MissingzzHtmcsImpl implements _MissingzzHtmcs {
     TResult? Function()? uploadedFileSizeExceed,
     TResult? Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult? Function()? allReorderItemInvalid,
+    TResult? Function(String materialNumber)? reorderItemInvalid,
     TResult? Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult? Function()? cartHasDifferentAddress,
     TResult? Function()? articleannuncementTagFetchingError,
@@ -19985,6 +20728,7 @@ class _$MissingzzHtmcsImpl implements _MissingzzHtmcs {
     TResult Function()? uploadedFileSizeExceed,
     TResult Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult Function()? allReorderItemInvalid,
+    TResult Function(String materialNumber)? reorderItemInvalid,
     TResult Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult Function()? cartHasDifferentAddress,
     TResult Function()? articleannuncementTagFetchingError,
@@ -20061,6 +20805,7 @@ class _$MissingzzHtmcsImpl implements _MissingzzHtmcs {
         paymentAdviceDeleteFailed,
     required TResult Function(_AllReorderItemInvalid value)
         allReorderItemInvalid,
+    required TResult Function(_ReorderItemInvalid value) reorderItemInvalid,
     required TResult Function(_MaximumCartQuantityExceed value)
         maximumCartQuantityExceed,
     required TResult Function(_CartHasDifferentAddress value)
@@ -20131,6 +20876,7 @@ class _$MissingzzHtmcsImpl implements _MissingzzHtmcs {
     TResult? Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
     TResult? Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult? Function(_ReorderItemInvalid value)? reorderItemInvalid,
     TResult? Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult? Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
@@ -20197,6 +20943,7 @@ class _$MissingzzHtmcsImpl implements _MissingzzHtmcs {
     TResult Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
     TResult Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult Function(_ReorderItemInvalid value)? reorderItemInvalid,
     TResult Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
@@ -20302,6 +21049,7 @@ class _$StockInfoNotAvailableImpl implements _StockInfoNotAvailable {
     required TResult Function() uploadedFileSizeExceed,
     required TResult Function(String adviceNumber) paymentAdviceDeleteFailed,
     required TResult Function() allReorderItemInvalid,
+    required TResult Function(String materialNumber) reorderItemInvalid,
     required TResult Function(String maximumNumber) maximumCartQuantityExceed,
     required TResult Function() cartHasDifferentAddress,
     required TResult Function() articleannuncementTagFetchingError,
@@ -20357,6 +21105,7 @@ class _$StockInfoNotAvailableImpl implements _StockInfoNotAvailable {
     TResult? Function()? uploadedFileSizeExceed,
     TResult? Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult? Function()? allReorderItemInvalid,
+    TResult? Function(String materialNumber)? reorderItemInvalid,
     TResult? Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult? Function()? cartHasDifferentAddress,
     TResult? Function()? articleannuncementTagFetchingError,
@@ -20412,6 +21161,7 @@ class _$StockInfoNotAvailableImpl implements _StockInfoNotAvailable {
     TResult Function()? uploadedFileSizeExceed,
     TResult Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult Function()? allReorderItemInvalid,
+    TResult Function(String materialNumber)? reorderItemInvalid,
     TResult Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult Function()? cartHasDifferentAddress,
     TResult Function()? articleannuncementTagFetchingError,
@@ -20488,6 +21238,7 @@ class _$StockInfoNotAvailableImpl implements _StockInfoNotAvailable {
         paymentAdviceDeleteFailed,
     required TResult Function(_AllReorderItemInvalid value)
         allReorderItemInvalid,
+    required TResult Function(_ReorderItemInvalid value) reorderItemInvalid,
     required TResult Function(_MaximumCartQuantityExceed value)
         maximumCartQuantityExceed,
     required TResult Function(_CartHasDifferentAddress value)
@@ -20558,6 +21309,7 @@ class _$StockInfoNotAvailableImpl implements _StockInfoNotAvailable {
     TResult? Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
     TResult? Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult? Function(_ReorderItemInvalid value)? reorderItemInvalid,
     TResult? Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult? Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
@@ -20624,6 +21376,7 @@ class _$StockInfoNotAvailableImpl implements _StockInfoNotAvailable {
     TResult Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
     TResult Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult Function(_ReorderItemInvalid value)? reorderItemInvalid,
     TResult Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
@@ -20730,6 +21483,7 @@ class _$AccountCreationIncompleteImpl implements _AccountCreationIncomplete {
     required TResult Function() uploadedFileSizeExceed,
     required TResult Function(String adviceNumber) paymentAdviceDeleteFailed,
     required TResult Function() allReorderItemInvalid,
+    required TResult Function(String materialNumber) reorderItemInvalid,
     required TResult Function(String maximumNumber) maximumCartQuantityExceed,
     required TResult Function() cartHasDifferentAddress,
     required TResult Function() articleannuncementTagFetchingError,
@@ -20785,6 +21539,7 @@ class _$AccountCreationIncompleteImpl implements _AccountCreationIncomplete {
     TResult? Function()? uploadedFileSizeExceed,
     TResult? Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult? Function()? allReorderItemInvalid,
+    TResult? Function(String materialNumber)? reorderItemInvalid,
     TResult? Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult? Function()? cartHasDifferentAddress,
     TResult? Function()? articleannuncementTagFetchingError,
@@ -20840,6 +21595,7 @@ class _$AccountCreationIncompleteImpl implements _AccountCreationIncomplete {
     TResult Function()? uploadedFileSizeExceed,
     TResult Function(String adviceNumber)? paymentAdviceDeleteFailed,
     TResult Function()? allReorderItemInvalid,
+    TResult Function(String materialNumber)? reorderItemInvalid,
     TResult Function(String maximumNumber)? maximumCartQuantityExceed,
     TResult Function()? cartHasDifferentAddress,
     TResult Function()? articleannuncementTagFetchingError,
@@ -20916,6 +21672,7 @@ class _$AccountCreationIncompleteImpl implements _AccountCreationIncomplete {
         paymentAdviceDeleteFailed,
     required TResult Function(_AllReorderItemInvalid value)
         allReorderItemInvalid,
+    required TResult Function(_ReorderItemInvalid value) reorderItemInvalid,
     required TResult Function(_MaximumCartQuantityExceed value)
         maximumCartQuantityExceed,
     required TResult Function(_CartHasDifferentAddress value)
@@ -20986,6 +21743,7 @@ class _$AccountCreationIncompleteImpl implements _AccountCreationIncomplete {
     TResult? Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
     TResult? Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult? Function(_ReorderItemInvalid value)? reorderItemInvalid,
     TResult? Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult? Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
@@ -21052,6 +21810,7 @@ class _$AccountCreationIncompleteImpl implements _AccountCreationIncomplete {
     TResult Function(_PaymentAdviceDeleteFailed value)?
         paymentAdviceDeleteFailed,
     TResult Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult Function(_ReorderItemInvalid value)? reorderItemInvalid,
     TResult Function(_MaximumCartQuantityExceed value)?
         maximumCartQuantityExceed,
     TResult Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,

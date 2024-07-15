@@ -186,6 +186,8 @@ mixin _$ValidMaterialDto {
   bool get hidePrice => throw _privateConstructorUsedError;
   @JsonKey(name: 'materialNumber', defaultValue: '')
   String get materialNumber => throw _privateConstructorUsedError;
+  @JsonKey(name: 'isValid', defaultValue: false)
+  bool get isValid => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -201,8 +203,8 @@ abstract class $ValidMaterialDtoCopyWith<$Res> {
   @useResult
   $Res call(
       {@JsonKey(name: 'hidePrice', defaultValue: false) bool hidePrice,
-      @JsonKey(name: 'materialNumber', defaultValue: '')
-      String materialNumber});
+      @JsonKey(name: 'materialNumber', defaultValue: '') String materialNumber,
+      @JsonKey(name: 'isValid', defaultValue: false) bool isValid});
 }
 
 /// @nodoc
@@ -220,6 +222,7 @@ class _$ValidMaterialDtoCopyWithImpl<$Res, $Val extends ValidMaterialDto>
   $Res call({
     Object? hidePrice = null,
     Object? materialNumber = null,
+    Object? isValid = null,
   }) {
     return _then(_value.copyWith(
       hidePrice: null == hidePrice
@@ -230,6 +233,10 @@ class _$ValidMaterialDtoCopyWithImpl<$Res, $Val extends ValidMaterialDto>
           ? _value.materialNumber
           : materialNumber // ignore: cast_nullable_to_non_nullable
               as String,
+      isValid: null == isValid
+          ? _value.isValid
+          : isValid // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -244,8 +251,8 @@ abstract class _$$ValidMaterialDtoImplCopyWith<$Res>
   @useResult
   $Res call(
       {@JsonKey(name: 'hidePrice', defaultValue: false) bool hidePrice,
-      @JsonKey(name: 'materialNumber', defaultValue: '')
-      String materialNumber});
+      @JsonKey(name: 'materialNumber', defaultValue: '') String materialNumber,
+      @JsonKey(name: 'isValid', defaultValue: false) bool isValid});
 }
 
 /// @nodoc
@@ -261,6 +268,7 @@ class __$$ValidMaterialDtoImplCopyWithImpl<$Res>
   $Res call({
     Object? hidePrice = null,
     Object? materialNumber = null,
+    Object? isValid = null,
   }) {
     return _then(_$ValidMaterialDtoImpl(
       hidePrice: null == hidePrice
@@ -271,6 +279,10 @@ class __$$ValidMaterialDtoImplCopyWithImpl<$Res>
           ? _value.materialNumber
           : materialNumber // ignore: cast_nullable_to_non_nullable
               as String,
+      isValid: null == isValid
+          ? _value.isValid
+          : isValid // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -281,7 +293,8 @@ class _$ValidMaterialDtoImpl extends _ValidMaterialDto {
   _$ValidMaterialDtoImpl(
       {@JsonKey(name: 'hidePrice', defaultValue: false) required this.hidePrice,
       @JsonKey(name: 'materialNumber', defaultValue: '')
-      required this.materialNumber})
+      required this.materialNumber,
+      @JsonKey(name: 'isValid', defaultValue: false) required this.isValid})
       : super._();
 
   factory _$ValidMaterialDtoImpl.fromJson(Map<String, dynamic> json) =>
@@ -293,10 +306,13 @@ class _$ValidMaterialDtoImpl extends _ValidMaterialDto {
   @override
   @JsonKey(name: 'materialNumber', defaultValue: '')
   final String materialNumber;
+  @override
+  @JsonKey(name: 'isValid', defaultValue: false)
+  final bool isValid;
 
   @override
   String toString() {
-    return 'ValidMaterialDto(hidePrice: $hidePrice, materialNumber: $materialNumber)';
+    return 'ValidMaterialDto(hidePrice: $hidePrice, materialNumber: $materialNumber, isValid: $isValid)';
   }
 
   @override
@@ -307,12 +323,14 @@ class _$ValidMaterialDtoImpl extends _ValidMaterialDto {
             (identical(other.hidePrice, hidePrice) ||
                 other.hidePrice == hidePrice) &&
             (identical(other.materialNumber, materialNumber) ||
-                other.materialNumber == materialNumber));
+                other.materialNumber == materialNumber) &&
+            (identical(other.isValid, isValid) || other.isValid == isValid));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, hidePrice, materialNumber);
+  int get hashCode =>
+      Object.hash(runtimeType, hidePrice, materialNumber, isValid);
 
   @JsonKey(ignore: true)
   @override
@@ -334,7 +352,9 @@ abstract class _ValidMaterialDto extends ValidMaterialDto {
       {@JsonKey(name: 'hidePrice', defaultValue: false)
       required final bool hidePrice,
       @JsonKey(name: 'materialNumber', defaultValue: '')
-      required final String materialNumber}) = _$ValidMaterialDtoImpl;
+      required final String materialNumber,
+      @JsonKey(name: 'isValid', defaultValue: false)
+      required final bool isValid}) = _$ValidMaterialDtoImpl;
   _ValidMaterialDto._() : super._();
 
   factory _ValidMaterialDto.fromJson(Map<String, dynamic> json) =
@@ -346,6 +366,9 @@ abstract class _ValidMaterialDto extends ValidMaterialDto {
   @override
   @JsonKey(name: 'materialNumber', defaultValue: '')
   String get materialNumber;
+  @override
+  @JsonKey(name: 'isValid', defaultValue: false)
+  bool get isValid;
   @override
   @JsonKey(ignore: true)
   _$$ValidMaterialDtoImplCopyWith<_$ValidMaterialDtoImpl> get copyWith =>

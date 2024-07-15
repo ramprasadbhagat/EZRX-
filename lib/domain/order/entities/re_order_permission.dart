@@ -19,10 +19,12 @@ class ValidMaterial with _$ValidMaterial {
   factory ValidMaterial({
     required bool hidePrice,
     required MaterialNumber materialNumber,
+    required bool isValid,
   }) = _ValidMaterial;
 
   factory ValidMaterial.empty() => ValidMaterial(
         hidePrice: false,
         materialNumber: MaterialNumber(''),
+        isValid: false,
       );
 }

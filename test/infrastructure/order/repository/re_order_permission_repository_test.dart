@@ -100,9 +100,10 @@ void main() {
           salesOrg: fakeSalesOrganisation.salesOrg.getOrCrash(),
           materialNumbers:
               fakeMaterialNumbers.map((e) => e.getOrCrash()).toList(),
-          isEnableGimmickMaterial: fakeSalesOrganisationConfigs.enableGimmickMaterial,
+          isEnableGimmickMaterial:
+              fakeSalesOrganisationConfigs.enableGimmickMaterial,
           isSalesRepUser: fakeSalesRepUser.role.type.isSalesRepRole,
-          userName: fakeSalesRepUser.username.getValue(), 
+          userName: fakeSalesRepUser.username.getValue(),
         ),
       ).thenThrow((invocation) async => MockException());
 
@@ -120,28 +121,6 @@ void main() {
       );
     });
 
-    test('=> not call remote API in ID market ', () async {
-      when(() => mockConfig.appFlavor).thenReturn(Flavor.dev);
-
-      final result = await reOrderPermissionRepository.getReorderPermission(
-        shipToInfo: fakeShipToInfo,
-        customerCodeInfo: fakeCustomerCodeInfo,
-        salesOrganisation: fakeIDSalesOrganisation,
-        materialNumbers: fakeMaterialNumbers,
-        user: fakeSalesRepUser,
-        salesOrganisationConfigs: fakeSalesOrganisationConfigs,
-      );
-
-      final expectedResult = ReOrderPermission(
-        validMaterials: fakeMaterialNumbers
-            .map((e) => ValidMaterial.empty().copyWith(materialNumber: e))
-            .toList(),
-      );
-
-      verifyZeroInteractions(reOrderPermissionRemoteDataSource);
-      expect(result, Right(expectedResult));
-    });
-
     test('=> get remotely success', () async {
       when(() => mockConfig.appFlavor).thenReturn(Flavor.dev);
       when(
@@ -154,7 +133,7 @@ void main() {
           isEnableGimmickMaterial:
               fakeSalesOrganisationConfigs.enableGimmickMaterial,
           isSalesRepUser: fakeSalesRepUser.role.type.isSalesRepRole,
-          userName: fakeSalesRepUser.username.getValue(),     
+          userName: fakeSalesRepUser.username.getValue(),
         ),
       ).thenAnswer(
         (invocation) async => getReorderPermissionResponseMock,
@@ -188,7 +167,7 @@ void main() {
           isEnableGimmickMaterial:
               fakeSalesOrganisationConfigs.enableGimmickMaterial,
           isSalesRepUser: fakeSalesRepUser.role.type.isSalesRepRole,
-          userName: fakeSalesRepUser.username.getValue(),    
+          userName: fakeSalesRepUser.username.getValue(),
         ),
       ).thenAnswer(
         (invocation) async => ReOrderPermission.empty(),
@@ -203,6 +182,142 @@ void main() {
         salesOrganisationConfigs: fakeSalesOrganisationConfigs,
       );
       expect(result, const Left(ApiFailure.allReorderItemInvalid()));
+    });
+  });
+
+  group('=> get Reorder item permission test', () {
+    test('=> get locally fail', () async {
+      when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
+      when(() => reOrderPermissionLocalDataSource.getPermission())
+          .thenThrow(MockException(message: 'fake'));
+
+      final result = await reOrderPermissionRepository.getReorderItemPermission(
+        shipToInfo: fakeShipToInfo,
+        customerCodeInfo: fakeCustomerCodeInfo,
+        salesOrganisation: fakeSalesOrganisation,
+        materialNumber: fakeMaterialNumbers.first,
+        user: fakeSalesRepUser,
+        salesOrganisationConfigs: fakeSalesOrganisationConfigs,
+      );
+      expect(result, const Left(ApiFailure.other('fake')));
+    });
+
+    test('=> get locally success', () async {
+      when(() => mockConfig.appFlavor).thenReturn(Flavor.mock);
+      when(() => reOrderPermissionLocalDataSource.getPermission()).thenAnswer(
+        (_) async => getReorderPermissionResponseMock,
+      );
+
+      final result = await reOrderPermissionRepository.getReorderItemPermission(
+        shipToInfo: fakeShipToInfo,
+        customerCodeInfo: fakeCustomerCodeInfo,
+        salesOrganisation: fakeSalesOrganisation,
+        materialNumber: fakeMaterialNumbers.first,
+        user: fakeSalesRepUser,
+        salesOrganisationConfigs: fakeSalesOrganisationConfigs,
+      );
+      expect(
+        result,
+        Right(getReorderPermissionResponseMock.validMaterials.first),
+      );
+    });
+
+    test('=> get remotely fail', () async {
+      when(() => mockConfig.appFlavor).thenReturn(Flavor.dev);
+      when(
+        () => reOrderPermissionRemoteDataSource.getPermission(
+          shipToCode: fakeShipToInfo.shipToCustomerCode,
+          customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
+          salesOrg: fakeSalesOrganisation.salesOrg.getOrCrash(),
+          materialNumbers: [fakeMaterialNumbers.first.getOrCrash()],
+          isEnableGimmickMaterial:
+              fakeSalesOrganisationConfigs.enableGimmickMaterial,
+          isSalesRepUser: fakeSalesRepUser.role.type.isSalesRepRole,
+          userName: fakeSalesRepUser.username.getValue(),
+        ),
+      ).thenThrow(MockException(message: 'fake'));
+
+      final result = await reOrderPermissionRepository.getReorderItemPermission(
+        shipToInfo: fakeShipToInfo,
+        customerCodeInfo: fakeCustomerCodeInfo,
+        salesOrganisation: fakeSalesOrganisation,
+        materialNumber: fakeMaterialNumbers.first,
+        user: fakeSalesRepUser,
+        salesOrganisationConfigs: fakeSalesOrganisationConfigs,
+      );
+      expect(result, const Left(ApiFailure.other('fake')));
+    });
+
+    test('=> get remotely success', () async {
+      when(() => mockConfig.appFlavor).thenReturn(Flavor.dev);
+      when(
+        () => reOrderPermissionRemoteDataSource.getPermission(
+          shipToCode: fakeShipToInfo.shipToCustomerCode,
+          customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
+          salesOrg: fakeSalesOrganisation.salesOrg.getOrCrash(),
+          materialNumbers: [fakeMaterialNumbers.first.getOrCrash()],
+          isEnableGimmickMaterial:
+              fakeSalesOrganisationConfigs.enableGimmickMaterial,
+          isSalesRepUser: fakeSalesRepUser.role.type.isSalesRepRole,
+          userName: fakeSalesRepUser.username.getValue(),
+        ),
+      ).thenAnswer((_) async => getReorderPermissionResponseMock);
+
+      final result = await reOrderPermissionRepository.getReorderItemPermission(
+        shipToInfo: fakeShipToInfo,
+        customerCodeInfo: fakeCustomerCodeInfo,
+        salesOrganisation: fakeSalesOrganisation,
+        materialNumber: fakeMaterialNumbers.first,
+        user: fakeSalesRepUser,
+        salesOrganisationConfigs: fakeSalesOrganisationConfigs,
+      );
+      expect(
+        result,
+        Right(getReorderPermissionResponseMock.validMaterials.first),
+      );
+    });
+
+    test(
+        '=> get remotely success and throw the exception when material is invalid',
+        () async {
+      when(() => mockConfig.appFlavor).thenReturn(Flavor.dev);
+      when(
+        () => reOrderPermissionRemoteDataSource.getPermission(
+          shipToCode: fakeShipToInfo.shipToCustomerCode,
+          customerCode: fakeCustomerCodeInfo.customerCodeSoldTo,
+          salesOrg: fakeSalesOrganisation.salesOrg.getOrCrash(),
+          materialNumbers: [fakeMaterialNumbers.first.getOrCrash()],
+          isEnableGimmickMaterial:
+              fakeSalesOrganisationConfigs.enableGimmickMaterial,
+          isSalesRepUser: fakeSalesRepUser.role.type.isSalesRepRole,
+          userName: fakeSalesRepUser.username.getValue(),
+        ),
+      ).thenAnswer(
+        (_) async => ReOrderPermission(
+          validMaterials: [
+            ValidMaterial.empty().copyWith(
+              materialNumber: fakeMaterialNumbers.first,
+            ),
+          ],
+        ),
+      );
+
+      final result = await reOrderPermissionRepository.getReorderItemPermission(
+        shipToInfo: fakeShipToInfo,
+        customerCodeInfo: fakeCustomerCodeInfo,
+        salesOrganisation: fakeSalesOrganisation,
+        materialNumber: fakeMaterialNumbers.first,
+        user: fakeSalesRepUser,
+        salesOrganisationConfigs: fakeSalesOrganisationConfigs,
+      );
+      expect(
+        result,
+        Left(
+          ApiFailure.reorderItemInvalid(
+            fakeMaterialNumbers.first.displayMatNo,
+          ),
+        ),
+      );
     });
   });
 }

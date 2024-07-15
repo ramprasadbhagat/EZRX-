@@ -10,7 +10,7 @@ class ReOrderPermissionDto with _$ReOrderPermissionDto {
   const ReOrderPermissionDto._();
   factory ReOrderPermissionDto({
     @JsonKey(name: 'materials', defaultValue: <ValidMaterial>[])
-        required List<ValidMaterialDto> validMaterials,
+    required List<ValidMaterialDto> validMaterials,
   }) = _ReOrderPermissionDto;
 
   factory ReOrderPermissionDto.fromJson(Map<String, dynamic> json) =>
@@ -27,7 +27,8 @@ class ValidMaterialDto with _$ValidMaterialDto {
   factory ValidMaterialDto({
     @JsonKey(name: 'hidePrice', defaultValue: false) required bool hidePrice,
     @JsonKey(name: 'materialNumber', defaultValue: '')
-        required String materialNumber,
+    required String materialNumber,
+    @JsonKey(name: 'isValid', defaultValue: false) required bool isValid,
   }) = _ValidMaterialDto;
 
   factory ValidMaterialDto.fromJson(Map<String, dynamic> json) =>
@@ -36,5 +37,6 @@ class ValidMaterialDto with _$ValidMaterialDto {
   ValidMaterial get toDomain => ValidMaterial(
         hidePrice: hidePrice,
         materialNumber: MaterialNumber(materialNumber),
+        isValid: isValid,
       );
 }

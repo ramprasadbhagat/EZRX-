@@ -146,6 +146,7 @@ abstract class _ReOrderPermission implements ReOrderPermission {
 mixin _$ValidMaterial {
   bool get hidePrice => throw _privateConstructorUsedError;
   MaterialNumber get materialNumber => throw _privateConstructorUsedError;
+  bool get isValid => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ValidMaterialCopyWith<ValidMaterial> get copyWith =>
@@ -158,7 +159,7 @@ abstract class $ValidMaterialCopyWith<$Res> {
           ValidMaterial value, $Res Function(ValidMaterial) then) =
       _$ValidMaterialCopyWithImpl<$Res, ValidMaterial>;
   @useResult
-  $Res call({bool hidePrice, MaterialNumber materialNumber});
+  $Res call({bool hidePrice, MaterialNumber materialNumber, bool isValid});
 }
 
 /// @nodoc
@@ -176,6 +177,7 @@ class _$ValidMaterialCopyWithImpl<$Res, $Val extends ValidMaterial>
   $Res call({
     Object? hidePrice = null,
     Object? materialNumber = null,
+    Object? isValid = null,
   }) {
     return _then(_value.copyWith(
       hidePrice: null == hidePrice
@@ -186,6 +188,10 @@ class _$ValidMaterialCopyWithImpl<$Res, $Val extends ValidMaterial>
           ? _value.materialNumber
           : materialNumber // ignore: cast_nullable_to_non_nullable
               as MaterialNumber,
+      isValid: null == isValid
+          ? _value.isValid
+          : isValid // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -198,7 +204,7 @@ abstract class _$$ValidMaterialImplCopyWith<$Res>
       __$$ValidMaterialImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({bool hidePrice, MaterialNumber materialNumber});
+  $Res call({bool hidePrice, MaterialNumber materialNumber, bool isValid});
 }
 
 /// @nodoc
@@ -214,6 +220,7 @@ class __$$ValidMaterialImplCopyWithImpl<$Res>
   $Res call({
     Object? hidePrice = null,
     Object? materialNumber = null,
+    Object? isValid = null,
   }) {
     return _then(_$ValidMaterialImpl(
       hidePrice: null == hidePrice
@@ -224,6 +231,10 @@ class __$$ValidMaterialImplCopyWithImpl<$Res>
           ? _value.materialNumber
           : materialNumber // ignore: cast_nullable_to_non_nullable
               as MaterialNumber,
+      isValid: null == isValid
+          ? _value.isValid
+          : isValid // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -231,16 +242,21 @@ class __$$ValidMaterialImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$ValidMaterialImpl implements _ValidMaterial {
-  _$ValidMaterialImpl({required this.hidePrice, required this.materialNumber});
+  _$ValidMaterialImpl(
+      {required this.hidePrice,
+      required this.materialNumber,
+      required this.isValid});
 
   @override
   final bool hidePrice;
   @override
   final MaterialNumber materialNumber;
+  @override
+  final bool isValid;
 
   @override
   String toString() {
-    return 'ValidMaterial(hidePrice: $hidePrice, materialNumber: $materialNumber)';
+    return 'ValidMaterial(hidePrice: $hidePrice, materialNumber: $materialNumber, isValid: $isValid)';
   }
 
   @override
@@ -251,11 +267,13 @@ class _$ValidMaterialImpl implements _ValidMaterial {
             (identical(other.hidePrice, hidePrice) ||
                 other.hidePrice == hidePrice) &&
             (identical(other.materialNumber, materialNumber) ||
-                other.materialNumber == materialNumber));
+                other.materialNumber == materialNumber) &&
+            (identical(other.isValid, isValid) || other.isValid == isValid));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, hidePrice, materialNumber);
+  int get hashCode =>
+      Object.hash(runtimeType, hidePrice, materialNumber, isValid);
 
   @JsonKey(ignore: true)
   @override
@@ -267,12 +285,15 @@ class _$ValidMaterialImpl implements _ValidMaterial {
 abstract class _ValidMaterial implements ValidMaterial {
   factory _ValidMaterial(
       {required final bool hidePrice,
-      required final MaterialNumber materialNumber}) = _$ValidMaterialImpl;
+      required final MaterialNumber materialNumber,
+      required final bool isValid}) = _$ValidMaterialImpl;
 
   @override
   bool get hidePrice;
   @override
   MaterialNumber get materialNumber;
+  @override
+  bool get isValid;
   @override
   @JsonKey(ignore: true)
   _$$ValidMaterialImplCopyWith<_$ValidMaterialImpl> get copyWith =>
