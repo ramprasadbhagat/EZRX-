@@ -87,7 +87,7 @@ class _NotificationList extends StatelessWidget {
     final eligibilityState = context.read<EligibilityBloc>().state;
     //Event call for Return Detail Page
     if (notificationData.isReturnEligible && eligibilityState.isReturnsEnable) {
-       context.read<ReturnDetailsByRequestBloc>().add(
+      context.read<ReturnDetailsByRequestBloc>().add(
             ReturnDetailsByRequestEvent.fetch(
               returnId: notificationData.returnRequestId.requestId,
             ),
@@ -133,7 +133,11 @@ class _NotificationList extends StatelessWidget {
           color: ZPColors.error,
         ),
         backgroundColor: ZPColors.errorSnackBarColor,
-        messageText: context.tr("You don't have access"),
+        messageText: context.tr(
+          notificationData.isOrderEligible
+              ? 'You do not have access to view this order'
+              : 'You don\'t have access',
+        ),
       ).show(context);
     }
   }

@@ -9,12 +9,14 @@ import 'package:ezrxmobile/application/order/view_by_item_details/view_by_item_d
 import 'package:ezrxmobile/application/order/view_by_order_details/view_by_order_details_bloc.dart';
 import 'package:ezrxmobile/application/payments/payment_summary_details/payment_summary_details_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_list/view_by_request/details/return_details_by_request_bloc.dart';
+import 'package:ezrxmobile/domain/account/entities/access_right.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_information.dart';
 import 'package:ezrxmobile/domain/account/entities/role.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/notification/entities/notification.dart';
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_summary_details.dart';
 import 'package:ezrxmobile/infrastructure/account/datasource/customer_code_local.dart';
 import 'package:ezrxmobile/infrastructure/notification/datasource/notification_local.dart';
@@ -292,7 +294,12 @@ void main() {
         );
         when(() => notificationBlocMock.state).thenReturn(
           NotificationState.initial().copyWith(
-            notificationList: notifications,
+            notificationList: Notifications.empty().copyWith(
+              notificationData: [
+                notifications.notificationData.first
+                    .copyWith(orderNumber: OrderNumber('')),
+              ],
+            ),
             isFetching: false,
             isReadNotification: true,
           ),
@@ -317,7 +324,7 @@ void main() {
         await tester.pumpAndSettle();
         expect(snackBarFinder, findsOneWidget);
         final msg = find.textContaining(
-          "You don't have access".tr(),
+          'You don\'t have access'.tr(),
         );
         expect(msg, findsOneWidget);
         expect(
@@ -646,5 +653,53 @@ void main() {
       await tester.pumpAndSettle();
       expect(find.byType(MarketPlaceIcon), findsNothing);
     });
+
+    testWidgets(
+      'Show snackbar disclaimer message when user does not have order history access',
+      (tester) async {
+        final fakeUser = User.empty().copyWith(
+          username: Username('fake-user'),
+          role: Role.empty().copyWith(
+            type: RoleType('client_user'),
+          ),
+          accessRight: AccessRight.empty().copyWith(orders: false),
+        );
+        when(() => notificationBlocMock.state).thenReturn(
+          NotificationState.initial().copyWith(
+            notificationList: Notifications.empty().copyWith(
+              notificationData: [
+                notifications.notificationData.first,
+              ],
+            ),
+            isFetching: false,
+            isReadNotification: true,
+          ),
+        );
+
+        when(() => eligibilityBlocMock.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            user: fakeUser,
+          ),
+        );
+
+        await tester.pumpWidget(getScopedWidget());
+        await tester.pump();
+        final itemKey = find.byKey(
+          WidgetKeys.genericKey(
+            key: notifications.notificationData.first.description,
+          ),
+        );
+        final snackBarFinder = find.byKey(WidgetKeys.customSnackBar);
+        expect(itemKey, findsOneWidget);
+        await tester.tap(itemKey);
+        await tester.pumpAndSettle();
+        expect(snackBarFinder, findsOneWidget);
+
+        final msg = find.textContaining(
+          'You do not have access to view this order'.tr(),
+        );
+        expect(msg, findsOneWidget);
+      },
+    );
   });
 }
