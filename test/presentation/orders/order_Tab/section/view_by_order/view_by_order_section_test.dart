@@ -394,7 +394,7 @@ void main() {
       );
       when(
         () => autoRouterMock.currentPath,
-      ).thenAnswer((invocation) => 'orders/view_by_order_details_page');
+      ).thenAnswer((invocation) => 'orders/view_by_order_details');
       when(
         () => autoRouterMock.push(
           CartPageRoute(
@@ -465,7 +465,7 @@ void main() {
       );
       when(
         () => autoRouterMock.currentPath,
-      ).thenAnswer((invocation) => 'orders/view_by_order_details_page');
+      ).thenAnswer((invocation) => 'orders/view_by_order_details');
 
       await tester.pumpWidget(getScopedWidget());
       await tester.pumpAndSettle();

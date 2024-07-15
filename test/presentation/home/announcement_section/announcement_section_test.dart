@@ -122,7 +122,7 @@ void main() async {
       expect(announcementIconButton, findsOneWidget);
       await tester
           .tap(find.byKey(WidgetKeys.sectionTileIcon('Announcements'.tr())));
-      expect(autoRouterMock.current.path, '/announcements_page');
+      expect(autoRouterMock.current.path, '/announcements');
     });
 
     testWidgets('Item Tapped', (tester) async {

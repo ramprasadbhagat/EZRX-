@@ -306,7 +306,7 @@ void main() {
     );
     when(
       () => autoRouterMock.currentPath,
-    ).thenAnswer((_) => 'orders/view_by_item_details_page');
+    ).thenAnswer((_) => 'orders/view_by_item_details');
   });
 
   group('Order History Details By Item Page', () {

@@ -199,7 +199,6 @@ void main() {
       verify(
         () => autoRouterMock.navigate(const ProductsTabRoute()),
       ).called(1);
-      // expect(autoRouterMock.current.path, 'products');
     });
   });
 }

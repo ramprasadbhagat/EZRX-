@@ -424,7 +424,7 @@ void main() {
       testWidgets('test unfavourite', (tester) async {
         when(
           () => autoRouterMock.currentPath,
-        ).thenAnswer((invocation) => 'orders/bundle_detail_page');
+        ).thenAnswer((invocation) => 'orders/bundle_detail');
         when(() => productDetailMockBloc.state).thenReturn(
           ProductDetailState.initial().copyWith(
             productDetailAggregate: ProductDetailAggregate.empty().copyWith(
@@ -665,7 +665,7 @@ void main() {
       testWidgets('upsertcart with bundle item test', (tester) async {
         when(
           () => autoRouterMock.currentPath,
-        ).thenAnswer((invocation) => 'orders/bundle_detail_page');
+        ).thenAnswer((invocation) => 'orders/bundle_detail');
 
         final expectedStates = Stream.fromIterable(
           [
@@ -702,7 +702,7 @@ void main() {
       testWidgets('upsertcart with bundle item fail test', (tester) async {
         when(
           () => autoRouterMock.currentPath,
-        ).thenAnswer((invocation) => 'orders/bundle_detail_page');
+        ).thenAnswer((invocation) => 'orders/bundle_detail');
 
         final expectedStates = Stream.fromIterable(
           [

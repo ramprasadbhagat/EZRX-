@@ -444,7 +444,7 @@ void main() {
         await tester.tap(itemKey);
         await tester.pumpAndSettle();
         expect(
-          autoRouterMock.current.name == 'view_by_order_details_page',
+          autoRouterMock.current.name == 'view_by_order_details',
           false,
         );
       },

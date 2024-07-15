@@ -100,7 +100,7 @@ void main() {
         final textFieldFinder = find.byType(TextFormField);
         await tester.tap(textFieldFinder);
         await tester.pumpAndSettle();
-        expect(autoRouterMock.current.path, '/product_suggestion_page');
+        expect(autoRouterMock.current.path, '/product_suggestion');
       },
     );
 
