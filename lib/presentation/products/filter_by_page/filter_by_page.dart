@@ -53,6 +53,7 @@ class FilterByPage extends StatelessWidget {
                         ),
                         child: ScrollList<String>(
                           isLoading: state.isFetching,
+                          dismissOnDrag: true,
                           itemBuilder: (_, index, item) {
                             return _ItemBuilder(
                               item: state.displayMaterialFilter,
@@ -77,6 +78,7 @@ class FilterByPage extends StatelessWidget {
                             ),
                             child: ScrollList<MaterialFilterCountry>(
                               isLoading: state.isFetching,
+                              dismissOnDrag: true,
                               itemBuilder: (_, index, item) {
                                 return _ItemBuilder(
                                   item: state.displayMaterialFilter,

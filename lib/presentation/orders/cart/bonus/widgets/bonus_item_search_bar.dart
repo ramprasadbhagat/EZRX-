@@ -7,34 +7,31 @@ class _BonusItemSearchBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<BonusMaterialBloc, BonusMaterialState>(
-      buildWhen: (previous, current) => previous.searchKey != current.searchKey,
-      builder: (context, state) {
-        return Padding(
-          padding: const EdgeInsets.only(top: 18, bottom: 8),
-          child: CustomSearchBar(
-            key: WidgetKeys.genericKey(key: state.searchKey.searchValueOrEmpty),
-            onClear: () => _search(
-              cartItem: cartItem,
-              context: context,
-              searchKey: '',
-            ),
-            onSearchChanged: (value) => _search(
-              cartItem: cartItem,
-              context: context,
-              searchKey: value,
-            ),
-            enabled: true,
-            onSearchSubmitted: (value) => _search(
-              cartItem: cartItem,
-              context: context,
-              searchKey: value,
-            ),
-            initialValue: state.searchKey.searchValueOrEmpty,
-            customValidator: (value) => SearchKey.search(value).isValid(),
-          ),
-        );
-      },
+    final initialSearchKey = context.read<BonusMaterialBloc>().state.searchKey;
+
+    return Padding(
+      padding: const EdgeInsets.only(top: 18, bottom: 8),
+      child: CustomSearchBar(
+        key: WidgetKeys.genericKey(key: initialSearchKey.searchValueOrEmpty),
+        onClear: () => _search(
+          cartItem: cartItem,
+          context: context,
+          searchKey: '',
+        ),
+        onSearchChanged: (value) => _search(
+          cartItem: cartItem,
+          context: context,
+          searchKey: value,
+        ),
+        enabled: true,
+        onSearchSubmitted: (value) => _search(
+          cartItem: cartItem,
+          context: context,
+          searchKey: value,
+        ),
+        initialValue: initialSearchKey.searchValueOrEmpty,
+        customValidator: (value) => SearchKey.search(value).isValid(),
+      ),
     );
   }
 

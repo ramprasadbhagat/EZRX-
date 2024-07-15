@@ -55,9 +55,7 @@ class AvailableCreditsTab extends StatelessWidget {
               previous.isLoading != current.isLoading,
           listener: (context, state) {
             state.failureOrSuccessOption.fold(
-              () {
-                FocusScope.of(context).requestFocus(FocusNode());
-              },
+              () {},
               (either) => either.fold(
                 (failure) {
                   ErrorUtils.handleApiFailure(context, failure);
@@ -84,6 +82,7 @@ class AvailableCreditsTab extends StatelessWidget {
                         noRecordFoundWidget: NoRecordFound.newPaymentCredits(
                           isSearchAndFilterEmpty: state.isSearchAndFilterEmpty,
                         ),
+                        dismissOnDrag: true,
                         controller: ScrollController(),
                         onRefresh: () {
                           context.read<AvailableCreditsBloc>().add(

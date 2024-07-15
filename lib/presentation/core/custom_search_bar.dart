@@ -91,29 +91,34 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
           maxHeight: 36,
           maxWidth: 36,
         ),
-        suffixIcon: controller.text.isEmpty
-            ? widget.searchSuffixIcon ??
-                IconButton(
-                  key: WidgetKeys.searchIconKey,
-                  icon: const Icon(Icons.search),
-                  iconSize: 20,
-                  onPressed: () => _onSearch(
-                    context,
-                    controller.text,
-                  ),
-                )
-            : IconButton(
-                key: WidgetKeys.clearIconKey,
-                iconSize: 20,
-                icon: const Icon(
-                  Icons.cancel_rounded,
-                  color: ZPColors.backgroundCloseButtonSnackBar,
-                ),
-                onPressed: () {
-                  widget.onClear.call();
-                  controller.clear();
-                },
-              ),
+        suffixIcon: ValueListenableBuilder(
+          valueListenable: controller,
+          builder: (context, value, _) {
+            return value.text.isEmpty
+                ? widget.searchSuffixIcon ??
+                    IconButton(
+                      key: WidgetKeys.searchIconKey,
+                      icon: const Icon(Icons.search),
+                      iconSize: 20,
+                      onPressed: () => _onSearch(
+                        context,
+                        controller.text,
+                      ),
+                    )
+                : IconButton(
+                    key: WidgetKeys.clearIconKey,
+                    iconSize: 20,
+                    icon: const Icon(
+                      Icons.cancel_rounded,
+                      color: ZPColors.backgroundCloseButtonSnackBar,
+                    ),
+                    onPressed: () {
+                      widget.onClear.call();
+                      controller.clear();
+                    },
+                  );
+          },
+        ),
         enabledBorder: widget.disableBorder ? InputBorder.none : null,
         focusedBorder: widget.disableBorder ? InputBorder.none : null,
         disabledBorder: widget.disableBorder ? InputBorder.none : null,
@@ -133,8 +138,13 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
   void _onSearch(
     BuildContext context,
     String value,
-  ) =>
-      widget.customValidator(value)
-          ? widget.onSearchSubmitted.call(value)
-          : _showSnackbar(context);
+  ) {
+    if (_debounce?.isActive ?? false) _debounce?.cancel();
+    if (widget.customValidator(value)) {
+      widget.onSearchSubmitted.call(value);
+
+      return;
+    }
+    _showSnackbar(context);
+  }
 }

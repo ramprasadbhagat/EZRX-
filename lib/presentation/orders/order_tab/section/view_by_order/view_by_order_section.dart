@@ -72,6 +72,7 @@ class ViewByOrdersPage extends StatelessWidget {
 
         return ScrollList<ViewByOrdersGroup>(
           key: WidgetKeys.viewByOrdersGroupList,
+          dismissOnDrag: true,
           controller: ScrollController(),
           noRecordFoundWidget: NoRecordFound.ordersHistory(
             context,

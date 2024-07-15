@@ -41,6 +41,7 @@ class _ComboDetailBodyContent extends StatelessWidget {
             noRecordFoundWidget: const NoRecordFound(
               svgImage: SvgImage.faqSearch,
             ),
+            dismissOnDrag: true,
             header: Column(
               children: [
                 if (haveFixedMaterials) ...[

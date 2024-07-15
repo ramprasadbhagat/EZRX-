@@ -76,6 +76,7 @@ class _ReturnByRequestPageState extends State<ReturnByRequestPage> {
               noRecordFoundWidget: NoRecordFound.returnItems(
                 isSearchKeyEmpty: state.searchKey.isValueEmpty,
               ),
+              dismissOnDrag: true,
               controller: _controller,
               onRefresh: () => context.read<ReturnListByRequestBloc>().add(
                     ReturnListByRequestEvent.fetch(

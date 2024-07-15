@@ -64,6 +64,7 @@ class _ArticlesTabState extends State<ArticlesTab> {
                       const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
                   child: ScrollList<AnnouncementArticleItem>(
                     controller: _scrollController,
+                    dismissOnDrag: true,
                     noRecordFoundWidget: NoRecordFound(
                       key: WidgetKeys.noArticleToShowKey,
                       title: context.tr('No articles to show'),

@@ -240,7 +240,26 @@ void main() {
           ),
         ),
       ).called(1);
-
+      final clearIcon = find.byKey(WidgetKeys.clearIconKey);
+      expect(clearIcon, findsOneWidget);
+      await tester.tap(clearIcon);
+      await tester.pumpAndSettle();
+      verify(
+        () => mixpanelServiceMock.trackEvent(
+          eventName: TrackingEvents.documentNumberSearched,
+          properties: null,
+        ),
+      ).called(1);
+      verify(
+        () => availableCreditsBlocMock.add(
+          AvailableCreditsEvent.fetch(
+            appliedFilter: AvailableCreditFilter.defaultFilter(),
+            searchKey: SearchKey.search(''),
+            isMarketPlace: false,
+          ),
+        ),
+      ).called(1);
+      await tester.enterText(textFormField, fakeSearchKey);
       final searchIcon = find.byKey(WidgetKeys.searchIconKey);
       expect(searchIcon, findsOneWidget);
       await tester.tap(searchIcon);

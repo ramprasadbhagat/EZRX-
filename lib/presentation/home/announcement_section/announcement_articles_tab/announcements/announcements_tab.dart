@@ -87,6 +87,7 @@ class _AnnouncementsTabState extends State<AnnouncementsTab> {
                     ),
                     child: ScrollList<AnnouncementArticleItem>(
                       key: WidgetKeys.announcementListKey,
+                      dismissOnDrag: true,
                       noRecordFoundWidget: NoRecordFound(
                         key: WidgetKeys.announcementNotFoundRecordKey,
                         title: context.tr('No Announcement found'),

@@ -56,6 +56,7 @@ class ViewByItemsPage extends StatelessWidget {
 
         return ScrollList<ViewByItemGroup>(
           controller: ScrollController(),
+          dismissOnDrag: true,
           noRecordFoundWidget: NoRecordFound.ordersHistory(
             context,
             state.searchKey.searchValueOrEmpty,

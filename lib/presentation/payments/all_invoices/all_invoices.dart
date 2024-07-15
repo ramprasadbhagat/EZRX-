@@ -81,6 +81,7 @@ class _AllInvoicesPageState extends State<AllInvoicesPage> {
                 noRecordFoundWidget: const NoRecordFound(
                   title: 'No invoice found',
                 ),
+                dismissOnDrag: true,
                 controller: _controller,
                 onRefresh: () =>
                     context.allInvoicesBloc(widget.isMarketPlace).add(

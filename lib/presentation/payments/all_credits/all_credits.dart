@@ -83,6 +83,7 @@ class _AllCreditsPageState extends State<AllCreditsPage> {
                 noRecordFoundWidget: NoRecordFound.allCredits(
                   isSearching: !state.appliedFilter.searchKey.isValueEmpty,
                 ),
+                dismissOnDrag: true,
                 controller: _controller,
                 onRefresh: () =>
                     context.allCreditsBloc(widget.isMarketPlace).add(

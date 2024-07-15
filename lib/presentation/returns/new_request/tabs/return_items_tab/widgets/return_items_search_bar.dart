@@ -4,36 +4,28 @@ class _ReturnItemsSearchBar extends StatelessWidget {
   const _ReturnItemsSearchBar({super.key});
 
   @override
-  Widget build(BuildContext context) =>
-      BlocConsumer<ReturnItemsBloc, ReturnItemsState>(
-        buildWhen: (previous, current) =>
-            previous.isLoading != current.isLoading ||
-            previous.searchKey != current.searchKey,
-        listener: (context, state) {
-          state.failureOrSuccessOption.fold(
-            () => FocusScope.of(context).requestFocus(FocusNode()),
-            (either) {},
-          );
-        },
-        builder: (context, state) => CustomSearchBar(
-          key: WidgetKeys.genericKey(key: state.searchKey.searchValueOrEmpty),
-          initialValue: state.searchKey.searchValueOrEmpty,
-          enabled: !state.isLoading,
-          onSearchChanged: (value) => _search(
-            context: context,
-            searchKey: value,
-          ),
-          onSearchSubmitted: (value) => _search(
-            context: context,
-            searchKey: value,
-          ),
-          customValidator: (value) => SearchKey.search(value).isValid(),
-          onClear: () => _search(
-            context: context,
-            searchKey: '',
-          ),
-        ),
-      );
+  Widget build(BuildContext context) {
+    final initialSearchKey = context.read<ReturnItemsBloc>().state.searchKey;
+
+    return CustomSearchBar(
+      key: WidgetKeys.genericKey(key: initialSearchKey.searchValueOrEmpty),
+      initialValue: initialSearchKey.searchValueOrEmpty,
+      enabled: true,
+      onSearchChanged: (value) => _search(
+        context: context,
+        searchKey: value,
+      ),
+      onSearchSubmitted: (value) => _search(
+        context: context,
+        searchKey: value,
+      ),
+      customValidator: (value) => SearchKey.search(value).isValid(),
+      onClear: () => _search(
+        context: context,
+        searchKey: '',
+      ),
+    );
+  }
 
   void _search({
     required BuildContext context,

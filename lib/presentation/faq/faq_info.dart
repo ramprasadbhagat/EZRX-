@@ -37,6 +37,7 @@ class FaqInfoPage extends StatelessWidget {
 
         return ScrollList<FAQCategoryGroup>(
           controller: ScrollController(),
+          dismissOnDrag: true,
           noRecordFoundWidget: const NoRecordFound(
             key: WidgetKeys.faqNotFoundRecordKey,
             title: "That didn't match anything",

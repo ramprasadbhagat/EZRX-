@@ -22,6 +22,8 @@ class SalesOrgSearch extends StatelessWidget {
   final List<SalesOrganisation> avialableSalesOrgList;
   @override
   Widget build(BuildContext context) {
+    final initialSearchKey = context.read<SalesOrgBloc>().state.searchKey;
+
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -29,49 +31,56 @@ class SalesOrgSearch extends StatelessWidget {
         ),
         centerTitle: false,
       ),
-      body: BlocBuilder<SalesOrgBloc, SalesOrgState>(
-        buildWhen: (previous, current) =>
-            previous.isLoading != current.isLoading ||
-            previous.salesOrgFailureOrSuccessOption !=
-                current.salesOrgFailureOrSuccessOption ||
-            previous.searchKey != current.searchKey,
-        builder: (context, state) {
-          return Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 16,
-                  vertical: 16,
-                ),
-                child: CustomSearchBar(
-                  key: WidgetKeys.genericKey(
-                    key: state.searchKey.searchValueOrEmpty,
-                  ),
-                  autofocus: true,
-                  initialValue: state.searchKey.getOrDefaultValue(''),
-                  enabled: !state.isLoading,
-                  onSearchChanged: (value) => context.read<SalesOrgBloc>().add(
-                        SalesOrgEvent.searchSalesOrg(
-                          salesOrgList: avialableSalesOrgList,
-                          searchKey: SearchKey.search(value),
-                        ),
-                      ),
-                  onClear: () => context.read<SalesOrgBloc>().add(
-                        SalesOrgEvent.searchSalesOrg(
-                          salesOrgList: avialableSalesOrgList,
-                          searchKey: SearchKey.empty(),
-                        ),
-                      ),
-                  customValidator: (value) => true,
-                  onSearchSubmitted: (value) {},
-                  hintText: 'Search sales org name or code',
-                ),
+      body: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(
+              horizontal: 16,
+              vertical: 16,
+            ),
+            child: CustomSearchBar(
+              key: WidgetKeys.genericKey(
+                key: initialSearchKey.searchValueOrEmpty,
               ),
-              Expanded(
-                child: ListView.builder(
+              autofocus: true,
+              initialValue: initialSearchKey.searchValueOrEmpty,
+              enabled: true,
+              onSearchChanged: (value) => context.read<SalesOrgBloc>().add(
+                    SalesOrgEvent.searchSalesOrg(
+                      salesOrgList: avialableSalesOrgList,
+                      searchKey: SearchKey.search(value),
+                    ),
+                  ),
+              onClear: () => context.read<SalesOrgBloc>().add(
+                    SalesOrgEvent.searchSalesOrg(
+                      salesOrgList: avialableSalesOrgList,
+                      searchKey: SearchKey.empty(),
+                    ),
+                  ),
+              customValidator: (value) => true,
+              onSearchSubmitted: (value) => context.read<SalesOrgBloc>().add(
+                    SalesOrgEvent.searchSalesOrg(
+                      salesOrgList: avialableSalesOrgList,
+                      searchKey: SearchKey.search(value),
+                    ),
+                  ),
+              hintText: 'Search sales org name or code',
+            ),
+          ),
+          Expanded(
+            child: BlocBuilder<SalesOrgBloc, SalesOrgState>(
+              buildWhen: (previous, current) =>
+                  previous.isLoading != current.isLoading ||
+                  previous.salesOrgFailureOrSuccessOption !=
+                      current.salesOrgFailureOrSuccessOption ||
+                  previous.searchKey != current.searchKey,
+              builder: (context, state) {
+                return ListView.builder(
                   padding: const EdgeInsets.symmetric(
                     horizontal: 16,
                   ),
+                  keyboardDismissBehavior:
+                      ScrollViewKeyboardDismissBehavior.onDrag,
                   itemCount: state.availableSalesOrg.length,
                   itemBuilder: (
                     context,
@@ -86,11 +95,11 @@ class SalesOrgSearch extends StatelessWidget {
                       ),
                     );
                   },
-                ),
-              ),
-            ],
-          );
-        },
+                );
+              },
+            ),
+          ),
+        ],
       ),
     );
   }

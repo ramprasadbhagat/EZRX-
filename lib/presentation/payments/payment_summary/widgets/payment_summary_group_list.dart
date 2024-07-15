@@ -29,6 +29,7 @@ class _PaymentSummaryGroupList extends StatelessWidget {
         noRecordFoundWidget: const NoRecordFound(
           title: 'No Payment Summary Found',
         ),
+        dismissOnDrag: true,
         controller: scrollController,
         onRefresh: () => context.paymentSummaryBloc(context.isMPPayment).add(
               PaymentSummaryEvent.fetch(

@@ -5,23 +5,23 @@ class _SearchBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<MaterialFilterBloc, MaterialFilterState>(
-      buildWhen: (previous, current) =>
-          previous.displayMaterialFilter != current.displayMaterialFilter,
-      builder: (context, state) {
-        return CustomSearchBar(
-          key: WidgetKeys.genericKey(key: state.searchKey.searchValueOrEmpty),
-          initialValue: state.searchKey.searchValueOrEmpty,
-          enabled: !state.isFetching,
-          onClear: () => context.read<MaterialFilterBloc>().add(
-                const MaterialFilterEvent.updateSearchKey(''),
-              ),
-          onSearchSubmitted: (value) => context.read<MaterialFilterBloc>().add(
-                MaterialFilterEvent.updateSearchKey(value),
-              ),
-          customValidator: (value) => SearchKey.search(value).isValid(),
-        );
-      },
+    final initialSearchKey =
+        context.read<MaterialFilterBloc>().state.searchKey.searchValueOrEmpty;
+
+    return CustomSearchBar(
+      key: WidgetKeys.genericKey(key: initialSearchKey),
+      initialValue: initialSearchKey,
+      enabled: true,
+      onClear: () => context.read<MaterialFilterBloc>().add(
+            const MaterialFilterEvent.updateSearchKey(''),
+          ),
+      onSearchSubmitted: (value) => context.read<MaterialFilterBloc>().add(
+            MaterialFilterEvent.updateSearchKey(value),
+          ),
+      onSearchChanged: (value) => context.read<MaterialFilterBloc>().add(
+            MaterialFilterEvent.updateSearchKey(value),
+          ),
+      customValidator: (value) => SearchKey.search(value).isValid(),
     );
   }
 }

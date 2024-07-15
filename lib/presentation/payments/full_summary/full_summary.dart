@@ -80,6 +80,7 @@ class _FullSummaryPageState extends State<FullSummaryPage> {
                   previous.isLoading != current.isLoading,
               builder: (context, state) {
                 return ScrollList<CreditAndInvoiceItem>(
+                  dismissOnDrag: true,
                   noRecordFoundWidget: NoRecordFound.fullSummary(
                     isSearchAndFilterEmpty: state.appliedFilter.isEmpty,
                   ),
@@ -87,8 +88,7 @@ class _FullSummaryPageState extends State<FullSummaryPage> {
                   onRefresh: () =>
                       context.fullSummaryBloc(widget.isMarketPlace).add(
                             FullSummaryEvent.fetch(
-                              appliedFilter:
-                                  FullSummaryFilter.defaultFilter(),
+                              appliedFilter: FullSummaryFilter.defaultFilter(),
                             ),
                           ),
                   onLoadingMore: () =>

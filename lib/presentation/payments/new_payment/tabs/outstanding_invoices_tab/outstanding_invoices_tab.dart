@@ -112,6 +112,7 @@ class OutstandingInvoicesTab extends StatelessWidget {
                         noRecordFoundWidget: NoRecordFound.newPaymentInvoices(
                           isSearchAndFilterEmpty: state.isSearchAndFilterEmpty,
                         ),
+                        dismissOnDrag: true,
                         controller: ScrollController(),
                         onRefresh: () {
                           context.read<OutstandingInvoicesBloc>().add(

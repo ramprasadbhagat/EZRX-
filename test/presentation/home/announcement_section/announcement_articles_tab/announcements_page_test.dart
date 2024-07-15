@@ -126,9 +126,7 @@ void main() {
         await tester.pump();
 
         final searchFieldFinder = find.byKey(
-          WidgetKeys.genericKey(
-            key: announcementInfoBloc.state.searchKey.searchValueOrEmpty,
-          ),
+          WidgetKeys.searchSectionTab('Announcements'),
         );
         await tester.enterText(searchFieldFinder, fakeKeyWord);
         await tester.pump(Duration(milliseconds: configMock.autoSearchTimeout));
@@ -153,9 +151,7 @@ void main() {
         await tester.pumpAndSettle();
 
         final searchFieldFinder = find.byKey(
-          WidgetKeys.genericKey(
-            key: announcementInfoBloc.state.searchKey.searchValueOrEmpty,
-          ),
+          WidgetKeys.searchSectionTab('Announcements'),
         );
         await tester.enterText(searchFieldFinder, fakeKeyWord);
         await tester.testTextInput.receiveAction(TextInputAction.done);
@@ -194,14 +190,13 @@ void main() {
         await tester.pumpWidget(getWidget());
         await tester.pump();
         await setUpWidgetArticleTab(tester);
-        expect(
-          find.byKey(WidgetKeys.searchSectionTab('Articles')),
-          findsOneWidget,
-        );
+
         final searchFieldFinder = find.byKey(
-          WidgetKeys.genericKey(
-            key: articlesInfoBloc.state.searchKey.searchValueOrEmpty,
-          ),
+          WidgetKeys.searchSectionTab('Articles'),
+        );
+        expect(
+          searchFieldFinder,
+          findsOneWidget,
         );
         await tester.enterText(searchFieldFinder, fakeKeyWord);
         await tester.pump(Duration(milliseconds: configMock.autoSearchTimeout));
@@ -226,9 +221,7 @@ void main() {
         await tester.pumpAndSettle();
         await setUpWidgetArticleTab(tester);
         final searchFieldFinder = find.byKey(
-          WidgetKeys.genericKey(
-            key: articlesInfoBloc.state.searchKey.searchValueOrEmpty,
-          ),
+          WidgetKeys.searchSectionTab('Articles'),
         );
         await tester.enterText(searchFieldFinder, fakeKeyWord);
         await tester.testTextInput.receiveAction(TextInputAction.done);

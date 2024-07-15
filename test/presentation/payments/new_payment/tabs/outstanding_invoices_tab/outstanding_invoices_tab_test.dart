@@ -183,7 +183,10 @@ void main() {
       await tester.pumpAndSettle();
 
       final searchIcon = find.byKey(WidgetKeys.searchIconKey);
-      expect(searchIcon, findsOneWidget);
+      expect(searchIcon, findsNothing);
+
+      final clearIcon = find.byKey(WidgetKeys.clearIconKey);
+      expect(clearIcon, findsOneWidget);
 
       verify(
         () => outstandingInvoicesBlocMock.add(

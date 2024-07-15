@@ -5,36 +5,28 @@ class _SearchArticle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ArticlesInfoBloc, ArticlesInfoState>(
+    final initialSearchKey = context.read<ArticlesInfoBloc>().state.searchKey;
+
+    return CustomSearchBar(
       key: WidgetKeys.searchSectionTab('Articles'),
-      buildWhen: (previous, current) =>
-          previous.isFetching != current.isFetching ||
-          previous.searchKey != current.searchKey,
-      builder: (context, state) {
-        return CustomSearchBar(
-          key: WidgetKeys.genericKey(
-            key: state.searchKey.searchValueOrEmpty,
+      enabled: true,
+      initialValue: initialSearchKey.searchValueOrEmpty,
+      onSearchChanged: (value) => context.read<ArticlesInfoBloc>().add(
+            ArticlesInfoEvent.setSearchKey(
+              searchKey: SearchKey.search(value),
+            ),
           ),
-          enabled: !state.isFetching,
-          initialValue: state.searchKey.searchValueOrEmpty,
-          onSearchChanged: (value) => context.read<ArticlesInfoBloc>().add(
-                ArticlesInfoEvent.setSearchKey(
-                  searchKey: SearchKey.search(value),
-                ),
-              ),
-          onSearchSubmitted: (value) => context.read<ArticlesInfoBloc>().add(
-                ArticlesInfoEvent.setSearchKey(
-                  searchKey: SearchKey.search(value),
-                ),
-              ),
-          customValidator: (value) => SearchKey.search(value).isValid(),
-          onClear: () => context.read<ArticlesInfoBloc>().add(
-                ArticlesInfoEvent.setSearchKey(
-                  searchKey: SearchKey.empty(),
-                ),
-              ),
-        );
-      },
+      onSearchSubmitted: (value) => context.read<ArticlesInfoBloc>().add(
+            ArticlesInfoEvent.setSearchKey(
+              searchKey: SearchKey.search(value),
+            ),
+          ),
+      customValidator: (value) => SearchKey.search(value).isValid(),
+      onClear: () => context.read<ArticlesInfoBloc>().add(
+            ArticlesInfoEvent.setSearchKey(
+              searchKey: SearchKey.empty(),
+            ),
+          ),
     );
   }
 }

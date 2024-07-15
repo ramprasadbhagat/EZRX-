@@ -5,37 +5,26 @@ class _AvailableCreditsSearchBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<AvailableCreditsBloc, AvailableCreditsState>(
-      buildWhen: (previous, current) => previous.isLoading != current.isLoading,
-      builder: (context, state) {
-        return CustomSearchBar(
-          key: WidgetKeys.genericKey(
-            key: state.searchKey.searchValueOrEmpty,
-          ),
-          onSearchChanged: (value) => _search(
-            context: context,
-            searchKey: value,
-          ),
-          onSearchSubmitted: (value) => _search(
-            context: context,
-            searchKey: value,
-          ),
-          hintText: context.tr(
-            context.isMPPayment ? 'Search by MP document number' : 'Search',
-          ),
-          keyboardType: TextInputType.number,
-          inputFormatters: <TextInputFormatter>[
-            FilteringTextInputFormatter.digitsOnly,
-          ],
-          customValidator: (value) => SearchKey.search(value).isValid(),
-          enabled: !state.isLoading,
-          onClear: () => _search(
-            context: context,
-            searchKey: '',
-          ),
-          initialValue: state.searchKey.searchValueOrEmpty,
-        );
-      },
+    final initialSearchKey =
+        context.read<AvailableCreditsBloc>().state.searchKey;
+
+    return CustomSearchBar(
+      key: WidgetKeys.genericKey(
+        key: initialSearchKey.searchValueOrEmpty,
+      ),
+      onSearchChanged: (value) => _search(context: context, searchKey: value),
+      onSearchSubmitted: (value) => _search(context: context, searchKey: value),
+      hintText: context.tr(
+        context.isMPPayment ? 'Search by MP document number' : 'Search',
+      ),
+      keyboardType: TextInputType.number,
+      inputFormatters: <TextInputFormatter>[
+        FilteringTextInputFormatter.digitsOnly,
+      ],
+      customValidator: (value) => SearchKey.search(value).isValid(),
+      enabled: true,
+      onClear: () => _search(context: context, searchKey: ''),
+      initialValue: initialSearchKey.searchValueOrEmpty,
     );
   }
 

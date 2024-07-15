@@ -121,6 +121,7 @@ class ReturnItemsTab extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 12),
                 child: ScrollList<ReturnMaterial>(
                   key: WidgetKeys.newRequestListItemAbleToReturn,
+                  dismissOnDrag: true,
                   noRecordFoundWidget: NoRecordFound.newReturnItems(
                     isSearchKeyEmpty: state.searchKey.isValueEmpty,
                   ),

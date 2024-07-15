@@ -11,38 +11,30 @@ class _OrdersTabSearchBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return isFromViewByOrder
-        ? BlocBuilder<ViewByOrderBloc, ViewByOrderState>(
-            buildWhen: (previous, current) =>
-                current.isFetching != previous.isFetching,
-            builder: (context, state) {
-              return _SummarySearchBar(
-                isEnable: !state.isFetching,
-                isFromViewByOrder: isFromViewByOrder,
-                searchKey: state.searchKey.searchValueOrEmpty,
-              );
-            },
+        ? _SummarySearchBar(
+            isFromViewByOrder: isFromViewByOrder,
+            searchKey: context
+                .read<ViewByOrderBloc>()
+                .state
+                .searchKey
+                .searchValueOrEmpty,
           )
-        : BlocBuilder<ViewByItemsBloc, ViewByItemsState>(
-            buildWhen: (previous, current) =>
-                previous.isFetching != current.isFetching,
-            builder: (context, state) {
-              return _SummarySearchBar(
-                isEnable: !state.isFetching,
-                searchKey: state.searchKey.searchValueOrEmpty,
-                isFromViewByOrder: isFromViewByOrder,
-              );
-            },
+        : _SummarySearchBar(
+            searchKey: context
+                .read<ViewByItemsBloc>()
+                .state
+                .searchKey
+                .searchValueOrEmpty,
+            isFromViewByOrder: isFromViewByOrder,
           );
   }
 }
 
 class _SummarySearchBar extends StatelessWidget {
-  final bool isEnable;
   final bool isFromViewByOrder;
   final String searchKey;
 
   const _SummarySearchBar({
-    required this.isEnable,
     required this.isFromViewByOrder,
     required this.searchKey,
   });
@@ -53,7 +45,7 @@ class _SummarySearchBar extends StatelessWidget {
       child: CustomSearchBar(
         key: WidgetKeys.genericKey(key: searchKey),
         initialValue: searchKey,
-        enabled: isEnable,
+        enabled: true,
         onSearchChanged: (value) => _search(
           context: context,
           searchKey: value,

@@ -209,6 +209,7 @@ class _BodyContent extends StatelessWidget {
           : ScrollList<CustomerCodeInfo>(
               controller: ScrollController(),
               key: WidgetKeys.customerCodeList,
+              dismissOnDrag: true,
               onRefresh: () {
                 context.read<CustomerCodeBloc>().add(
                       const CustomerCodeEvent.fetch(),

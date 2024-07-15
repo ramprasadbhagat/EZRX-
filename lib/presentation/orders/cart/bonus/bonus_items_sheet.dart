@@ -148,6 +148,7 @@ class _BodyContent extends StatelessWidget {
                         'Try adjusting the search or another product from cart',
                     svgImage: SvgImage.emptyBox,
                   ),
+                  dismissOnDrag: true,
                   controller: ScrollController(),
                   onRefresh: () => context.read<BonusMaterialBloc>().add(
                         BonusMaterialEvent.fetch(
