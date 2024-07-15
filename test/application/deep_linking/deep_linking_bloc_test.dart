@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/auth/entities/reset_password_cred.dart';
+import 'package:ezrxmobile/domain/order/entities/material_filter.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:bloc_test/bloc_test.dart';
@@ -25,6 +26,7 @@ class DeepLinkingRepositoryMock extends Mock
 void main() {
   late IDeepLinkingRepository repository;
   late ChatBotService chatBotService;
+  late MaterialFilter materialFilter;
   const fakeStream = Stream<EzrxLink>.empty();
   final fakeCustomerCode = fakeCustomerCodeInfo;
   final fakeShipToCode = fakeShipToInfo;
@@ -52,6 +54,7 @@ void main() {
   setUpAll(() {
     repository = DeepLinkingRepositoryMock();
     chatBotService = ChatBotServiceMock();
+    materialFilter = MaterialFilter.empty();
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.mock);
   });
 
@@ -107,6 +110,7 @@ void main() {
       DeepLinkingEvent.consumePendingLink(
         selectedCustomerCode: fakeCustomerCodeInfo,
         selectedShipTo: fakeShipToInfo,
+        materialFilter: materialFilter,
       ),
     ),
     expect: () => [],
@@ -125,6 +129,7 @@ void main() {
       DeepLinkingEvent.consumePendingLink(
         selectedCustomerCode: fakeCustomerCodeInfo,
         selectedShipTo: fakeShipToInfo,
+        materialFilter: materialFilter,
       ),
     ),
     expect: () => [const DeepLinkingState.error(fakeLinkInvalid)],
@@ -152,6 +157,7 @@ void main() {
       DeepLinkingEvent.consumePendingLink(
         selectedCustomerCode: fakeCustomerCodeInfo,
         selectedShipTo: fakeShipToInfo,
+        materialFilter: materialFilter,
       ),
     ),
     expect: () => [
@@ -182,6 +188,7 @@ void main() {
       DeepLinkingEvent.consumePendingLink(
         selectedCustomerCode: fakeCustomerCodeInfo,
         selectedShipTo: fakeShipToInfo,
+        materialFilter: materialFilter,
       ),
     ),
     expect: () => [
@@ -208,6 +215,7 @@ void main() {
         DeepLinkingEvent.consumePendingLink(
           selectedCustomerCode: fakeCustomerCode,
           selectedShipTo: fakeShipToCode,
+          materialFilter: materialFilter,
         ),
       ),
       expect: () => [
@@ -233,6 +241,7 @@ void main() {
         DeepLinkingEvent.consumePendingLink(
           selectedCustomerCode: fakeCustomerCode,
           selectedShipTo: fakeShipToCode,
+          materialFilter: materialFilter,
         ),
       ),
       expect: () => [
@@ -263,6 +272,7 @@ void main() {
         DeepLinkingEvent.consumePendingLink(
           selectedCustomerCode: fakeCustomerCode,
           selectedShipTo: fakeShipToCode,
+          materialFilter: materialFilter,
         ),
       ),
       expect: () => [
@@ -289,6 +299,7 @@ void main() {
         DeepLinkingEvent.consumePendingLink(
           selectedCustomerCode: fakeCustomerCode,
           selectedShipTo: fakeShipToCode,
+          materialFilter: materialFilter,
         ),
       ),
       expect: () => [
@@ -315,6 +326,7 @@ void main() {
         DeepLinkingEvent.consumePendingLink(
           selectedCustomerCode: fakeCustomerCode,
           selectedShipTo: fakeShipToCode,
+          materialFilter: materialFilter,
         ),
       ),
       expect: () => [
@@ -342,6 +354,7 @@ void main() {
         DeepLinkingEvent.consumePendingLink(
           selectedCustomerCode: fakeCustomerCode,
           selectedShipTo: fakeShipToCode,
+          materialFilter: materialFilter,
         ),
       ),
       expect: () => [
@@ -361,6 +374,12 @@ void main() {
             link: Uri(path: productListingLink),
           ),
         ).thenReturn(Right(SearchKey.search(materialNumber.getValue())));
+        when(
+          () => repository.extractMaterialFilter(
+            link: Uri(path: productListingLink),
+            materialFilter: materialFilter,
+          ),
+        ).thenReturn(Right(materialFilter));
       },
       seed: () => DeepLinkingState.linkPending(
         EzrxLink(productListingLink),
@@ -369,11 +388,13 @@ void main() {
         DeepLinkingEvent.consumePendingLink(
           selectedCustomerCode: fakeCustomerCode,
           selectedShipTo: fakeShipToCode,
+          materialFilter: materialFilter,
         ),
       ),
       expect: () => [
-        DeepLinkingState.redirectProductSuggestion(
+        DeepLinkingState.redirectProductsTab(
           SearchKey.search(materialNumber.getValue()),
+          materialFilter,
         ),
       ],
     );
@@ -398,6 +419,7 @@ void main() {
         DeepLinkingEvent.consumePendingLink(
           selectedCustomerCode: fakeCustomerCode,
           selectedShipTo: fakeShipToCode,
+          materialFilter: materialFilter,
         ),
       ),
       expect: () => [
@@ -429,6 +451,7 @@ void main() {
         DeepLinkingEvent.consumePendingLink(
           selectedCustomerCode: fakeCustomerCode,
           selectedShipTo: fakeShipToCode,
+          materialFilter: materialFilter,
         ),
       ),
       expect: () => [
@@ -459,6 +482,7 @@ void main() {
         DeepLinkingEvent.consumePendingLink(
           selectedCustomerCode: fakeCustomerCode,
           selectedShipTo: fakeShipToCode,
+          materialFilter: materialFilter,
         ),
       ),
       expect: () => [
@@ -481,6 +505,7 @@ void main() {
         DeepLinkingEvent.consumePendingLink(
           selectedCustomerCode: fakeCustomerCode,
           selectedShipTo: fakeShipToCode,
+          materialFilter: materialFilter,
         ),
       ),
       expect: () => [
@@ -513,6 +538,7 @@ void main() {
         DeepLinkingEvent.consumePendingLink(
           selectedCustomerCode: fakeCustomerCode,
           selectedShipTo: fakeShipToCode,
+          materialFilter: materialFilter,
         ),
       ),
       expect: () => [
@@ -551,6 +577,7 @@ void main() {
         DeepLinkingEvent.consumePendingLink(
           selectedCustomerCode: fakeCustomerCode,
           selectedShipTo: fakeShipToCode,
+          materialFilter: materialFilter,
         ),
       ),
       expect: () => [
@@ -583,6 +610,7 @@ void main() {
         DeepLinkingEvent.consumePendingLink(
           selectedCustomerCode: fakeCustomerCode,
           selectedShipTo: fakeShipToCode,
+          materialFilter: materialFilter,
         ),
       ),
       expect: () => [
@@ -610,6 +638,7 @@ void main() {
         DeepLinkingEvent.consumePendingLink(
           selectedCustomerCode: fakeCustomerCode,
           selectedShipTo: fakeShipToCode,
+          materialFilter: materialFilter,
         ),
       ),
       expect: () => [
@@ -640,6 +669,7 @@ void main() {
         DeepLinkingEvent.consumePendingLink(
           selectedCustomerCode: fakeCustomerCode,
           selectedShipTo: fakeShipToCode,
+          materialFilter: materialFilter,
         ),
       ),
       expect: () => [
@@ -670,6 +700,7 @@ void main() {
         DeepLinkingEvent.consumePendingLink(
           selectedCustomerCode: fakeCustomerCode,
           selectedShipTo: fakeShipToCode,
+          materialFilter: materialFilter,
         ),
       ),
       expect: () => [
@@ -691,6 +722,7 @@ void main() {
         DeepLinkingEvent.consumePendingLink(
           selectedCustomerCode: fakeCustomerCode,
           selectedShipTo: fakeShipToCode,
+          materialFilter: materialFilter,
         ),
       ),
       expect: () => [
@@ -726,6 +758,7 @@ void main() {
         DeepLinkingEvent.consumePendingLink(
           selectedCustomerCode: fakeCustomerCode,
           selectedShipTo: fakeShipToCode,
+          materialFilter: materialFilter,
         ),
       ),
       expect: () => [
@@ -758,6 +791,7 @@ void main() {
         DeepLinkingEvent.consumePendingLink(
           selectedCustomerCode: fakeCustomerCode,
           selectedShipTo: fakeShipToCode,
+          materialFilter: materialFilter,
         ),
       ),
       expect: () => [

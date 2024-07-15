@@ -1,7 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:ezrxmobile/application/deep_linking/deep_linking_bloc.dart';
 import 'package:ezrxmobile/application/order/material_filter/material_filter_bloc.dart';
-import 'package:ezrxmobile/application/order/product_search/product_search_bloc.dart';
+import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
 import 'package:ezrxmobile/domain/banner/entities/ez_reach_banner.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
@@ -61,18 +61,20 @@ class CarouselBannerTile extends StatelessWidget {
           );
         } else if (banner.keyword.isValid() && context.mounted) {
           locator<MixpanelService>().setBannerOrderFlow(banner);
-          context.read<ProductSearchBloc>().add(
-                ProductSearchEvent.searchProduct(
-                  searchKey: SearchKey.search(
-                    banner.keyword.getOrDefaultValue(''),
-                  ),
-                  materialFilter:
+          //to update search on product listing page
+          context.read<MaterialListBloc>().add(
+                MaterialListEvent.updateSearchKey(
+                  searchKey: banner.keyword.getOrDefaultValue(''),
+                ),
+              );
+          //to fetch materials
+          context.read<MaterialListBloc>().add(
+                MaterialListEvent.fetch(
+                  selectedMaterialFilter:
                       context.read<MaterialFilterBloc>().state.materialFilter,
                 ),
               );
-          await context.router.push(
-            ProductSuggestionPageRoute(parentRoute: context.routeData.path),
-          );
+          await context.navigateTo(const ProductsTabRoute());
         }
       },
       child: CustomImage(

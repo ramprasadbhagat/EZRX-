@@ -5,6 +5,7 @@ import 'package:ezrxmobile/domain/core/value/constants.dart';
 import 'package:ezrxmobile/domain/core/value/value_transformers.dart';
 import 'package:ezrxmobile/domain/core/value/value_validators.dart';
 import 'package:ezrxmobile/domain/order/value/value_transformers.dart';
+import 'package:ezrxmobile/presentation/products/widgets/enum_material_filter.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 
@@ -514,6 +515,41 @@ class EzrxLink extends ValueObject<String> {
   bool get isUserGuide => isUserGuideLink(uri.path);
 
   const EzrxLink._(this.value);
+}
+
+class EzrxLinkQueryParameter extends ValueObject<Map<String, String>> {
+  @override
+  final Either<ValueFailure<Map<String, String>>, Map<String, String>> value;
+
+  factory EzrxLinkQueryParameter(Map<String, String> input) {
+    return EzrxLinkQueryParameter._(validateMapNotEmpty(input));
+  }
+
+  String get extractMaterialNumber =>
+      getMaterialNumber(value.getOrElse(() => {}));
+
+  List<String> get manufacturerList =>
+      getManufacturerList(value.getOrElse(() => {}));
+
+  List<String> get countryList => getCountryList(value.getOrElse(() => {}));
+
+  bool get isFavorite => checkMaterialFavorite(value.getOrElse(() => {}));
+
+  Sort get sortBy => getSortBy(value.getOrElse(() => {}));
+
+  bool get isProductOffer => checkProductOffer(value.getOrElse(() => {}));
+
+  bool get isBundleOffer => checkBundleOffer(value.getOrElse(() => {}));
+
+  bool get isMarketPlace => checkMarketPlace(value.getOrElse(() => {}));
+
+  bool get isComboOffer => checkComboOffer(value.getOrElse(() => {}));
+
+  bool get isTender => checkTender(value.getOrElse(() => {}));
+
+  bool get isCovid => checkCovid(value.getOrElse(() => {}));
+
+  const EzrxLinkQueryParameter._(this.value);
 }
 
 class MaterialOriginFilter extends ValueObject<int> {

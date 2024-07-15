@@ -15,9 +15,10 @@ class DeepLinkingState with _$DeepLinkingState {
     MaterialNumber materialNumber, {
     EZReachBanner? banner,
   }) = _RedirectProductDetail;
-  const factory DeepLinkingState.redirectProductSuggestion(
+  const factory DeepLinkingState.redirectProductsTab(
     SearchKey searchKey,
-  ) = _RedirectProductSuggestion;
+    MaterialFilter materialFilter,
+  ) = _RedirectProductsTab;
   const factory DeepLinkingState.redirectOrderDetail(
     OrderNumber orderNumber,
   ) = _RedirectOrderDetail;

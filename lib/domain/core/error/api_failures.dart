@@ -51,6 +51,7 @@ class ApiFailure with _$ApiFailure {
   const factory ApiFailure.uploadCountExcideLimit() = _UploadCountExcideLimit;
 
   //deep link route failure
+  const factory ApiFailure.invalidDomain() = _InvalidDomain;
   const factory ApiFailure.productDetailRoute() = _ProductDetailRoute;
   const factory ApiFailure.orderDetailRoute() = _OrderDetailRoute;
   const factory ApiFailure.returnDetailRoute() = _ReturnDetailRoute;
@@ -129,6 +130,7 @@ extension ApiFailureExt on ApiFailure {
         ),
         uploadCountExcideLimit: (_) =>
             const TRObject('Number of files exceeds the criteria'),
+        invalidDomain: (_) => const TRObject("You don't have access"),
         productDetailRoute: (_) => const TRObject(
           'This product is not available on your account',
         ),

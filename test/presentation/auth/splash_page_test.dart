@@ -80,6 +80,7 @@ import 'package:ezrxmobile/infrastructure/account/datasource/customer_code_local
 import 'package:ezrxmobile/infrastructure/core/firebase/remote_config.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/confirm_bottom_sheet.dart';
+import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/orders/create_order/camera_files_permission_bottomsheet.dart';
 import 'package:ezrxmobile/presentation/routes/router.dart';
@@ -907,44 +908,6 @@ void main() {
       await tester.pump();
     });
 
-    testWidgets('When Redirecting History page - success', (tester) async {
-      final expectedDeeplinkStates = [
-        const DeepLinkingState.initial(),
-        DeepLinkingState.linkPending(
-          EzrxLink(Uri(path: '/history_details').toString()),
-        ),
-        DeepLinkingState.redirectOrderDetail(OrderNumber('fake-order-history')),
-      ];
-      whenListen(
-        deepLinkingBlocMock,
-        Stream.fromIterable(expectedDeeplinkStates),
-      );
-      await getWidget(tester);
-      await tester.pump();
-      verify(
-        () => deepLinkingBlocMock.add(
-          DeepLinkingEvent.consumePendingLink(
-            selectedCustomerCode: CustomerCodeInfo.empty(),
-            selectedShipTo: ShipToInfo.empty(),
-          ),
-        ),
-      ).called(1);
-    });
-    testWidgets('When Redirecting History page -failure ', (tester) async {
-      final expectedDeeplinkStates = [
-        const DeepLinkingState.error(ApiFailure.orderDetailRoute()),
-      ];
-      whenListen(
-        deepLinkingBlocMock,
-        Stream.fromIterable(expectedDeeplinkStates),
-      );
-      await getWidget(tester);
-      await tester.pumpAndSettle();
-      expect(
-        find.text('This order is not available on your account'),
-        findsOneWidget,
-      );
-    });
     testWidgets('When user Language Change', (tester) async {
       final expectedUserListStates = [
         UserState.initial().copyWith(
@@ -1428,6 +1391,224 @@ void main() {
             ),
           ),
         ).called(1);
+      });
+    });
+
+    group('redirect to page through url', () {
+      testWidgets('When Redirecting History page - success', (tester) async {
+        final expectedDeeplinkStates = [
+          const DeepLinkingState.initial(),
+          DeepLinkingState.linkPending(
+            EzrxLink(Uri(path: '/history_details').toString()),
+          ),
+          DeepLinkingState.redirectOrderDetail(
+            OrderNumber('fake-order-history'),
+          ),
+        ];
+        whenListen(
+          deepLinkingBlocMock,
+          Stream.fromIterable(expectedDeeplinkStates),
+        );
+        await getWidget(tester);
+        await tester.pump();
+        verify(
+          () => deepLinkingBlocMock.add(
+            DeepLinkingEvent.consumePendingLink(
+              selectedCustomerCode: CustomerCodeInfo.empty(),
+              selectedShipTo: ShipToInfo.empty(),
+              materialFilter: MaterialFilter.empty(),
+            ),
+          ),
+        ).called(1);
+      });
+      testWidgets('When Redirecting History page -failure ', (tester) async {
+        final expectedDeeplinkStates = [
+          const DeepLinkingState.error(ApiFailure.orderDetailRoute()),
+        ];
+        whenListen(
+          deepLinkingBlocMock,
+          Stream.fromIterable(expectedDeeplinkStates),
+        );
+        await getWidget(tester);
+        await tester.pumpAndSettle();
+        expect(
+          find.text('This order is not available on your account'),
+          findsOneWidget,
+        );
+      });
+
+      testWidgets(
+          'When Redirecting Products tab with manufacturer name search - success',
+          (tester) async {
+        final link = Uri.parse(
+          'https://uat-mm.ezrx.com/product-listing?manufacturer=Daiichi+Sankyo+%28Thailand%29+Ltd',
+        );
+        final parameters = EzrxLinkQueryParameter(link.queryParameters);
+        final searchKey = parameters.extractMaterialNumber;
+
+        final updatedMaterialFilter = materialFilterBlocMock
+            .state.materialFilter
+            .copyWith(manufactureListSelected: parameters.manufacturerList);
+
+        when(() => autoRouterMock.navigate(const ProductsTabRoute()))
+            .thenAnswer(
+          (_) => Future.value(),
+        );
+        final expectedDeepLinkStates = [
+          const DeepLinkingState.initial(),
+          DeepLinkingState.linkPending(
+            EzrxLink(link.toString()),
+          ),
+          DeepLinkingState.redirectProductsTab(
+            SearchKey.search(searchKey),
+            updatedMaterialFilter,
+          ),
+        ];
+        when(() => eligibilityBlocMock.state).thenAnswer(
+          (invocation) => EligibilityState.initial().copyWith(
+            shipToInfo: fakeShipToInfo,
+            customerCodeInfo: fakeCustomerCodeInfo,
+            salesOrganisation: fakeTWSalesOrganisation,
+            user: fakeUser.copyWith(
+              role: Role.empty().copyWith(type: RoleType('root_admin')),
+            ),
+          ),
+        );
+        whenListen(
+          deepLinkingBlocMock,
+          Stream.fromIterable(expectedDeepLinkStates),
+        );
+        await getWidget(tester);
+        await tester.pump();
+
+        verify(
+          () => materialListBlocMock.add(
+            const MaterialListEvent.updateSearchKey(searchKey: ''),
+          ),
+        ).called(1);
+
+        verify(
+          () => materialListBlocMock.add(
+            MaterialListEvent.fetch(
+              selectedMaterialFilter: updatedMaterialFilter,
+            ),
+          ),
+        ).called(1);
+
+        verify(
+          () => autoRouterMock.navigate(const ProductsTabRoute()),
+        ).called(1);
+      });
+
+      testWidgets(
+          'When Redirecting Products tab with unknown manufacturer name search - success',
+          (tester) async {
+        final link = Uri.parse(
+          'https://uat-mm.ezrx.com/product-listing?unknown=Daiichi+Sankyo+%28Thailand%29+Ltd',
+        );
+        final parameters = EzrxLinkQueryParameter(link.queryParameters);
+        final searchKey = parameters.extractMaterialNumber;
+
+        final updatedMaterialFilter = materialFilterBlocMock
+            .state.materialFilter
+            .copyWith(manufactureListSelected: parameters.manufacturerList);
+
+        when(() => autoRouterMock.navigate(const ProductsTabRoute()))
+            .thenAnswer(
+          (_) => Future.value(),
+        );
+        final expectedDeepLinkStates = [
+          const DeepLinkingState.initial(),
+          DeepLinkingState.linkPending(
+            EzrxLink(link.toString()),
+          ),
+          DeepLinkingState.redirectProductsTab(
+            SearchKey.search(searchKey),
+            updatedMaterialFilter,
+          ),
+        ];
+        when(() => eligibilityBlocMock.state).thenAnswer(
+          (invocation) => EligibilityState.initial().copyWith(
+            shipToInfo: fakeShipToInfo,
+            customerCodeInfo: fakeCustomerCodeInfo,
+            salesOrganisation: fakeTWSalesOrganisation,
+            user: fakeUser.copyWith(
+              role: Role.empty().copyWith(type: RoleType('root_admin')),
+            ),
+          ),
+        );
+        whenListen(
+          deepLinkingBlocMock,
+          Stream.fromIterable(expectedDeepLinkStates),
+        );
+        await getWidget(tester);
+        await tester.pump();
+
+        verify(
+          () => materialListBlocMock.add(
+            const MaterialListEvent.updateSearchKey(searchKey: ''),
+          ),
+        ).called(1);
+
+        verify(
+          () => materialListBlocMock.add(
+            MaterialListEvent.fetch(
+              selectedMaterialFilter: updatedMaterialFilter,
+            ),
+          ),
+        ).called(1);
+
+        verify(
+          () => autoRouterMock.navigate(const ProductsTabRoute()),
+        ).called(1);
+      });
+
+      testWidgets(
+          'Unable to Redirect to Products tab with manufacturer name search, if don\'t have access - success',
+          (tester) async {
+        final link = Uri.parse(
+          'https://uat-mm.ezrx.com/product-listing?manufacturer=Daiichi+Sankyo+%28Thailand%29+Ltd',
+        );
+        final parameters = EzrxLinkQueryParameter(link.queryParameters);
+        final searchKey = parameters.extractMaterialNumber;
+
+        final updatedMaterialFilter = materialFilterBlocMock
+            .state.materialFilter
+            .copyWith(manufactureListSelected: parameters.manufacturerList);
+
+        final expectedDeepLinkStates = [
+          const DeepLinkingState.initial(),
+          DeepLinkingState.linkPending(
+            EzrxLink(link.toString()),
+          ),
+          DeepLinkingState.redirectProductsTab(
+            SearchKey.search(searchKey),
+            updatedMaterialFilter,
+          ),
+        ];
+        whenListen(
+          deepLinkingBlocMock,
+          Stream.fromIterable(expectedDeepLinkStates),
+        );
+
+        when(() => eligibilityBlocMock.state).thenAnswer(
+          (invocation) => EligibilityState.initial().copyWith(
+            shipToInfo: fakeShipToInfo,
+            customerCodeInfo: fakeCustomerCodeInfo,
+            salesOrganisation: fakeTWSalesOrganisation,
+            user: fakeUser, //internal sales rep
+          ),
+        );
+        await getWidget(tester);
+        await tester.pumpAndSettle();
+
+        expect(
+          find.descendant(
+            of: find.byType(CustomSnackBar),
+            matching: find.text('You don\'t have access'),
+          ),
+          findsOneWidget,
+        );
       });
     });
   });

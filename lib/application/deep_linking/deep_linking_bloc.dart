@@ -8,6 +8,7 @@ import 'package:ezrxmobile/domain/banner/entities/ez_reach_banner.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/deep_linking/repository/i_deep_linking_repository.dart';
+import 'package:ezrxmobile/domain/order/entities/material_filter.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_summary_details.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_requests_id.dart';
@@ -144,17 +145,31 @@ class DeepLinkingBloc extends Bloc<DeepLinkingEvent, DeepLinkingState> {
                 ),
               );
             } else if (link.isProductListing) {
-              final failureOrSuccess = repository.extractProductSearchKey(
+              final failureOrSuccessSearchKey =
+                  repository.extractProductSearchKey(
                 link: link.uri,
               );
 
-              failureOrSuccess.fold(
+              failureOrSuccessSearchKey.fold(
                 (error) => emit(
                   DeepLinkingState.error(error),
                 ),
-                (searchKey) => emit(
-                  DeepLinkingState.redirectProductSuggestion(searchKey),
-                ),
+                (searchKey) {
+                  final failureOrSuccessMaterialFilter =
+                      repository.extractMaterialFilter(
+                    link: link.uri,
+                    materialFilter: event.materialFilter,
+                  );
+                  failureOrSuccessMaterialFilter.fold(
+                    (_) {},
+                    (materialFilter) => emit(
+                      DeepLinkingState.redirectProductsTab(
+                        searchKey,
+                        materialFilter,
+                      ),
+                    ),
+                  );
+                },
               );
             } else if (link.isOrderDetail) {
               final failureOrSuccess = repository.extractOrderNumber(

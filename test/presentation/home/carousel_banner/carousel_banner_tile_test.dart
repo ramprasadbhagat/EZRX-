@@ -11,12 +11,12 @@ import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/banner/entities/ez_reach_banner.dart';
 import 'package:ezrxmobile/domain/banner/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
-import 'package:ezrxmobile/domain/order/entities/material_filter.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/home/banners/carousel_banner/carousel_banner_tile.dart';
 import 'package:ezrxmobile/presentation/routes/router.dart';
+import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -74,13 +74,14 @@ void main() {
   const fakeKeyword = 'Test Keyword';
   const redirectionURL = 'https://test.com';
 
-  setUpAll(() async {
+  setUpAll(() {
     TestWidgetsFlutterBinding.ensureInitialized();
     WidgetsFlutterBinding.ensureInitialized();
     locator = GetIt.instance;
     locator.registerLazySingleton(
       () => mixpanelServiceMock,
     );
+    locator.registerLazySingleton(() => AutoRouterMock());
 
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.mock);
     locator.registerLazySingleton(() => AppRouter());
@@ -97,7 +98,7 @@ void main() {
     eligibilityBlocMock = EligibilityBlocMock();
     materialFilterBlocMock = MockMaterialFilterBloc();
     productSearchBlocMock = MockProductSearchBloc();
-    autoRouterMock = locator<AppRouter>();
+    autoRouterMock = locator<AutoRouterMock>();
 
     when(() => userBlocMock.state).thenReturn(UserState.initial());
     when(() => salesOrgBlocMock.state).thenReturn(SalesOrgState.initial());
@@ -132,6 +133,9 @@ void main() {
           ),
           BlocProvider<MaterialFilterBloc>(
             create: (context) => materialFilterBlocMock,
+          ),
+          BlocProvider<MaterialListBloc>(
+            create: (context) => materialListBloc,
           ),
         ],
         child: Material(
@@ -173,21 +177,29 @@ void main() {
     });
 
     testWidgets('Tap on banner and search keyword', (tester) async {
+      when(() => autoRouterMock.navigate(const ProductsTabRoute())).thenAnswer(
+        (_) => Future.value(),
+      );
       await tester.pumpWidget(getWUT(redirectionURL: ''));
       await tester.pump();
       final bannerTile = find.byType(CarouselBannerTile);
       await tester.tap(bannerTile);
       verify(
-        () => productSearchBlocMock.add(
-          ProductSearchEvent.searchProduct(
-            searchKey: SearchKey.search(
-              fakeKeyword,
-            ),
-            materialFilter: MaterialFilter.empty(),
+        () => materialListBloc.add(
+          const MaterialListEvent.updateSearchKey(searchKey: fakeKeyword),
+        ),
+      ).called(1);
+      verify(
+        () => materialListBloc.add(
+          MaterialListEvent.fetch(
+            selectedMaterialFilter: materialFilterBlocMock.state.materialFilter,
           ),
         ),
       ).called(1);
-      expect(autoRouterMock.current.path, '/product_suggestion_page');
+      verify(
+        () => autoRouterMock.navigate(const ProductsTabRoute()),
+      ).called(1);
+      // expect(autoRouterMock.current.path, 'products');
     });
   });
 }

@@ -840,6 +840,10 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                           selectedCustomerCode:
                               eligibilityState.customerCodeInfo,
                           selectedShipTo: eligibilityState.shipToInfo,
+                          materialFilter: context
+                              .read<MaterialFilterBloc>()
+                              .state
+                              .materialFilter,
                         ),
                       );
                 }
@@ -890,22 +894,22 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                   noAccessSnackbar.show(context);
                 }
               },
-              redirectProductSuggestion: (searchKey) {
+              redirectProductsTab: (searchKey, materialFilter) {
                 if (eligibilityState.user.userCanAccessProducts) {
-                  context.read<ProductSearchBloc>().add(
-                        ProductSearchEvent.searchProduct(
-                          searchKey: searchKey,
-                          materialFilter: context
-                              .read<MaterialFilterBloc>()
-                              .state
-                              .materialFilter,
-                        ),
-                      );
-                  context.router.push(
-                    ProductSuggestionPageRoute(
-                      parentRoute: context.router.current.path,
-                    ),
-                  );
+                  //to update search key and fetch on product listing page
+                  context.read<MaterialListBloc>()
+                    ..add(
+                      MaterialListEvent.updateSearchKey(
+                        searchKey: searchKey.getValue(),
+                      ),
+                    )
+                    ..add(
+                      MaterialListEvent.fetch(
+                        selectedMaterialFilter: materialFilter,
+                      ),
+                    );
+
+                  context.navigateTo(const ProductsTabRoute());
                 } else {
                   noAccessSnackbar.show(context);
                 }

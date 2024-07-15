@@ -10,5 +10,6 @@ class DeepLinkingEvent with _$DeepLinkingEvent {
   const factory DeepLinkingEvent.consumePendingLink({
     required CustomerCodeInfo selectedCustomerCode,
     required ShipToInfo selectedShipTo,
+    required MaterialFilter materialFilter,
   }) = _ConsumePendingLink;
 }

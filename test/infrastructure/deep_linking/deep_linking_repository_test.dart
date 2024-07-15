@@ -93,6 +93,16 @@ void main() {
       '$domain/product-listing?q=${materialNumber.getValue()}',
     );
     test('=> success', () async {
+      when(
+        () => deviceStorage.currentMarket(),
+      ).thenAnswer((_) => fakeMYSalesOrg.country.toLowerCase());
+
+      when(
+        () => mockConfig.baseUrl(
+          marketDomain: fakeMYSalesOrg.country.toLowerCase(),
+        ),
+      ).thenAnswer((_) => domain);
+
       final result = repository.extractProductSearchKey(
         link: materialListLink,
       );

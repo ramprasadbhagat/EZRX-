@@ -12,6 +12,7 @@ import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/deep_linking/repository/i_deep_linking_repository.dart';
+import 'package:ezrxmobile/domain/order/entities/material_filter.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/domain/payments/entities/payment_summary_details.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_requests_id.dart';
@@ -45,8 +46,49 @@ class DeepLinkingRepository implements IDeepLinkingRepository {
   @override
   Either<ApiFailure, SearchKey> extractProductSearchKey({
     required Uri link,
-  }) =>
-      Right(SearchKey.search(link.queryParameters['q'] ?? ''));
+  }) {
+    final parameters = EzrxLinkQueryParameter(link.queryParameters);
+    final searchKey = SearchKey.search(parameters.extractMaterialNumber);
+
+    return _validDomain(link)
+        ? Right(searchKey)
+        : const Left(ApiFailure.invalidDomain());
+  }
+
+  @override
+  Either<ApiFailure, MaterialFilter> extractMaterialFilter({
+    required Uri link,
+    required MaterialFilter materialFilter,
+  }) {
+    final parameters = EzrxLinkQueryParameter(link.queryParameters);
+
+    //updated selected country list
+    final countryListSelected = materialFilter.countryMapOptions.keys
+        .where(
+          (e) => parameters.countryList
+              .any((countryName) => countryName == e.name),
+        )
+        .toList();
+
+    final updatedMaterialFilter = MaterialFilter(
+      countryMapOptions: materialFilter.countryMapOptions,
+      manufactureMapOptions: materialFilter.manufactureMapOptions,
+      isFavourite: parameters.isFavorite,
+      isProductOffer: parameters.isProductOffer,
+      bundleOffers: parameters.isBundleOffer,
+      manufactureListSelected: parameters.manufacturerList,
+      countryListSelected: countryListSelected,
+      sortBy: parameters.sortBy,
+      isMarketPlace: parameters.isMarketPlace,
+      comboOffers: parameters.isComboOffer,
+      isTender: parameters.isTender,
+      hasAccessToCovidMaterial: materialFilter.hasAccessToCovidMaterial,
+      isCovidSelected: parameters.isCovid,
+      brandList: materialFilter.brandList,
+    );
+
+    return Right(updatedMaterialFilter);
+  }
 
   @override
   Either<ApiFailure, OrderNumber> extractOrderNumber({

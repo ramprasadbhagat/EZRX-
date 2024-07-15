@@ -8,6 +8,15 @@ Either<ValueFailure<String>, String> validateStringNotEmpty(String input) {
       : left(ValueFailure.empty(failedValue: input));
 }
 
+Either<ValueFailure<Map<String, String>>, Map<String, String>>
+    validateMapNotEmpty(
+  Map<String, String> input,
+) {
+  return input.isNotEmpty
+      ? right(input)
+      : left(ValueFailure.empty(failedValue: input));
+}
+
 Either<ValueFailure<String>, String> validateDateString(String input) {
   final dateTime = tryParseDateTime(input);
 

@@ -2,6 +2,7 @@ import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/value/constants.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
+import 'package:ezrxmobile/presentation/products/widgets/enum_material_filter.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:intl/intl.dart';
@@ -926,3 +927,61 @@ bool isEqualsIgnoreCase(String value, String matcher) =>
 
 bool isContainIgnoreCase(String value, String containValue) =>
     value.trim().toLowerCase().contains(containValue.trim().toLowerCase());
+
+//query params from deep linking
+
+//******************* common methods ****************************************/
+List<String> _getListFromQueryParameter(
+  Map<String, String> queryParameters,
+  String key,
+) =>
+    queryParameters[key]?.split('+') ?? [];
+
+bool _getBooleanFromQueryParameter(
+  Map<String, String> queryParameters,
+  String key,
+) =>
+    bool.tryParse(queryParameters[key] ?? 'false') ?? false;
+
+//******************* common methods ****************************************/
+
+String getMaterialNumber(Map<String, String> queryParameters) =>
+    queryParameters['q'] ?? '';
+
+List<String> getManufacturerList(Map<String, String> queryParameters) =>
+    _getListFromQueryParameter(queryParameters, 'manufacturer');
+
+List<String> getCountryList(Map<String, String> queryParameters) =>
+    _getListFromQueryParameter(queryParameters, 'country');
+
+bool checkMaterialFavorite(Map<String, String> queryParameters) =>
+    _getBooleanFromQueryParameter(queryParameters, 'favourite');
+
+bool checkProductOffer(Map<String, String> queryParameters) =>
+    _getBooleanFromQueryParameter(queryParameters, 'itemsWithOffers');
+
+bool checkBundleOffer(Map<String, String> queryParameters) =>
+    _getBooleanFromQueryParameter(queryParameters, 'bundleOffers');
+
+bool checkMarketPlace(Map<String, String> queryParameters) =>
+    _getBooleanFromQueryParameter(queryParameters, 'marketPlace');
+
+bool checkComboOffer(Map<String, String> queryParameters) =>
+    _getBooleanFromQueryParameter(queryParameters, 'combo');
+
+bool checkTender(Map<String, String> queryParameters) =>
+    _getBooleanFromQueryParameter(queryParameters, 'tender');
+
+bool checkCovid(Map<String, String> queryParameters) =>
+    _getBooleanFromQueryParameter(queryParameters, 'covid');
+
+Sort getSortBy(Map<String, String> queryParameters) {
+  final sortOptions = {
+    'price_asc': Sort.priceLowToHigh,
+    'price_desc': Sort.priceHighToLow,
+    'materialDescription_asc': Sort.az,
+    'materialDescription_desc': Sort.za,
+  };
+
+  return sortOptions[queryParameters['sort']] ?? Sort.az;
+}
