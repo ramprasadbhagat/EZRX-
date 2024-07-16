@@ -120,7 +120,7 @@ class _PaymentSummarySection extends StatelessWidget {
   ) async {
     Uri? uri;
     uri = state.salesOrganisation.salesOrg.isTH
-        ? await showDialog(
+        ? await showDialog<Uri?>(
             context: context,
             useSafeArea: false,
             barrierDismissible: false,
@@ -139,7 +139,7 @@ class _PaymentSummarySection extends StatelessWidget {
               child: const PaymentWebviewPage(),
             ),
           )
-        : await context.router.push(const PaymentWebviewPageRoute());
+        : await context.router.push<Uri?>(const PaymentWebviewPageRoute());
 
     /// * Document: https://zuelligpharma.atlassian.net/wiki/spaces/EZRX/pages/293306636/MB+-+UPDATE+PAYMENT+GATEWAY+LOGIC
     /// If payment is successful (Received redirect url with

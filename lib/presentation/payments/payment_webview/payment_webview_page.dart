@@ -13,7 +13,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 
-@RoutePage()
+@RoutePage<Uri?>()
 class PaymentWebviewPage extends StatelessWidget {
   const PaymentWebviewPage({super.key});
 
@@ -210,11 +210,7 @@ class _WebviewBodyState extends State<_WebviewBody> {
       );
       if (isPaymentSuccess && !isPop) {
         isPop = true;
-        unawaited(
-          router.maybePop(
-            uri,
-          ),
-        );
+        unawaited(router.maybePop(uri));
       }
     }
   }

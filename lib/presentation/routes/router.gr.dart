@@ -503,7 +503,7 @@ abstract class $AppRouter extends _i73.RootStackRouter {
       );
     },
     PaymentWebviewPageRoute.name: (routeData) {
-      return _i73.AutoRoutePage<dynamic>(
+      return _i73.AutoRoutePage<Uri?>(
         routeData: routeData,
         child: const _i46.PaymentWebviewPage(),
       );

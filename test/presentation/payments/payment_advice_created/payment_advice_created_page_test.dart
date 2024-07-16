@@ -804,7 +804,7 @@ void main() {
           );
           final paymentStatus = PaymentStatusDto.fromUri(fakeUrl).toDomain;
           when(
-            () => autoRouterMock.push<Uri>(const PaymentWebviewPageRoute()),
+            () => autoRouterMock.push<Uri?>(const PaymentWebviewPageRoute()),
           ).thenAnswer((_) async => fakeUrl);
           when(
             () => autoRouterMock.pushAndPopUntil(
@@ -821,7 +821,7 @@ void main() {
           await tester.tap(buttonFinder);
           await tester.pumpAndSettle();
           verify(
-            () => autoRouterMock.push<Uri>(const PaymentWebviewPageRoute()),
+            () => autoRouterMock.push<Uri?>(const PaymentWebviewPageRoute()),
           ).called(1);
           verify(
             () => trackMixpanelEvent(
@@ -855,7 +855,7 @@ void main() {
 
       testWidgets('On Tap Pay Now Button But Cannot Get Url', (tester) async {
         when(
-          () => autoRouterMock.push<Uri>(const PaymentWebviewPageRoute()),
+          () => autoRouterMock.push<Uri?>(const PaymentWebviewPageRoute()),
         ).thenAnswer((_) => Future.value());
         when(() => autoRouterMock.popUntil(any()))
             .thenAnswer((_) => Future(() => null));
@@ -865,7 +865,7 @@ void main() {
         final buttonFinder = find.byKey(WidgetKeys.payButton);
         await tester.tap(buttonFinder);
         await tester.pumpAndSettle();
-        verify(() => autoRouterMock.push<Uri>(const PaymentWebviewPageRoute()))
+        verify(() => autoRouterMock.push<Uri?>(const PaymentWebviewPageRoute()))
             .called(1);
         verify(
           () => trackMixpanelEvent(

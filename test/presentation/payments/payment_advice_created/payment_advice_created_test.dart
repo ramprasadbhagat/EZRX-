@@ -316,7 +316,7 @@ void main() {
         ),
       );
       when(
-        () => autoRouterMock.push<Uri>(const PaymentWebviewPageRoute()),
+        () => autoRouterMock.push<Uri?>(const PaymentWebviewPageRoute()),
       ).thenAnswer((_) async => Uri());
       await tester.pumpWidget(getWidget());
       await tester.pump();
@@ -349,7 +349,7 @@ void main() {
       await tester.tap(payButton);
       await tester.pump(const Duration(seconds: 1));
       verify(
-        () => autoRouterMock.push<Uri>(const PaymentWebviewPageRoute()),
+        () => autoRouterMock.push<Uri?>(const PaymentWebviewPageRoute()),
       ).called(1);
       await tester.pump(const Duration(seconds: 1));
     });
@@ -370,7 +370,7 @@ void main() {
         ),
       );
       when(
-        () => autoRouterMock.push<Uri>(const PaymentWebviewPageRoute()),
+        () => autoRouterMock.push<Uri?>(const PaymentWebviewPageRoute()),
       ).thenAnswer((_) async => Uri());
       await tester.pumpWidget(getWidget());
       await tester.pump();
