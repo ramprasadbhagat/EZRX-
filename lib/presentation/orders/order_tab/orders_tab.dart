@@ -39,6 +39,7 @@ class OrdersTab extends StatelessWidget {
           previous.customerBlockOrSuspended != current.customerBlockOrSuspended,
       builder: (context, state) {
         return Scaffold(
+          resizeToAvoidBottomInset: false,
           appBar: CustomAppBar.ordersTabAppBar(
             key: WidgetKeys.ordersTab,
             title: Column(
