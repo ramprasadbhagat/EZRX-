@@ -6,8 +6,8 @@ class UserQueryMutation {
   // For fetching userdata by user ID
   String getUserQuery(bool enableMarketPlace) {
     return '''
-      query userQuery(\$id: Int!, \$ignoreCustomerCode: Boolean) {
-        user(id: \$id, ignoreCustomerCode: \$ignoreCustomerCode) {
+      query userQuery(\$ignoreCustomerCode: Boolean) {
+        user(ignoreCustomerCode: \$ignoreCustomerCode) {
             id
             username
             email

@@ -623,7 +623,6 @@ void setupLocator() {
       localDataSource: locator<UserLocalDataSource>(),
       firebaseAnalyticsService: locator<FirebaseAnalyticsService>(),
       firebaseCrashlyticsService: locator<FirebaseCrashlyticsService>(),
-      tokenStorage: locator<TokenStorage>(),
       mixpanelService: locator<MixpanelService>(),
       datadogService: locator<DatadogService>(),
       languageLocalDataSource: locator<LanguageLocalDataSource>(),

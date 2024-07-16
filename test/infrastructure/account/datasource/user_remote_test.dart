@@ -80,7 +80,6 @@ void main() {
           }),
         );
         final result = await remoteDataSource.getUser(
-          userId: userId,
           market: fakeMarket,
         );
         final resTest = UserDto.fromJson(res['data']['user']).toDomain();
@@ -111,7 +110,6 @@ void main() {
         );
         await remoteDataSource
             .getUser(
-          userId: userId,
           market: fakeMarket,
         )
             .onError((error, _) async {
@@ -142,7 +140,6 @@ void main() {
         );
         await remoteDataSource
             .getUser(
-          userId: userId,
           market: fakeMarket,
         )
             .onError((error, _) async {

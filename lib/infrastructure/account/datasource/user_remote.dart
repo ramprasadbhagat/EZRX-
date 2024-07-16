@@ -28,7 +28,6 @@ class UserRemoteDataSource {
   });
 
   Future<User> getUser({
-    required String userId,
     required String market,
   }) async {
     return await dataSourceExceptionHandler.handle(() async {
@@ -39,7 +38,7 @@ class UserRemoteDataSource {
           'query': userQueryMutation.getUserQuery(
             remoteConfigService.enableMarketPlaceMarkets.contains(market),
           ),
-          'variables': {'id': userId, 'ignoreCustomerCode': true},
+          'variables': {'ignoreCustomerCode': true},
         }),
       );
       dataSourceExceptionHandler.handleExceptionChecker(

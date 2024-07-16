@@ -20,7 +20,6 @@ import 'package:ezrxmobile/infrastructure/core/datadog/datadog_service.dart';
 import 'package:ezrxmobile/infrastructure/core/firebase/analytics.dart';
 import 'package:ezrxmobile/infrastructure/core/firebase/crashlytics.dart';
 import 'package:ezrxmobile/infrastructure/core/local_storage/device_storage.dart';
-import 'package:ezrxmobile/infrastructure/core/local_storage/token_storage.dart';
 import 'package:ezrxmobile/infrastructure/core/mixpanel/mixpanel_service.dart';
 import 'package:flutter/foundation.dart';
 
@@ -30,7 +29,6 @@ class UserRepository implements IUserRepository {
   final UserLocalDataSource localDataSource;
   final FirebaseAnalyticsService firebaseAnalyticsService;
   final FirebaseCrashlyticsService firebaseCrashlyticsService;
-  final TokenStorage tokenStorage;
   final MixpanelService mixpanelService;
   final ClevertapService clevertapService;
   final DatadogService datadogService;
@@ -44,7 +42,6 @@ class UserRepository implements IUserRepository {
     required this.localDataSource,
     required this.firebaseAnalyticsService,
     required this.firebaseCrashlyticsService,
-    required this.tokenStorage,
     required this.mixpanelService,
     required this.clevertapService,
     required this.datadogService,
@@ -65,9 +62,7 @@ class UserRepository implements IUserRepository {
       }
     }
     try {
-      final token = await tokenStorage.get();
       final user = await remoteDataSource.getUser(
-        userId: token.toDomain().userId,
         market: deviceStorage.currentMarket(),
       );
       await firebaseAnalyticsService.analytics.setUserId(id: user.id);
