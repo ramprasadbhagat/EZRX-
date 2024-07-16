@@ -374,7 +374,8 @@ class WidgetKeys {
   static Key returnStatusFilter(String name, bool value) =>
       Key('returnStatusFilter$name$value');
   static const Key outsideReturnPolicyTag = Key('outsideReturnPolicyTag');
-
+  static const Key wareHouseStorageConditionTag =
+      Key('wareHouseStorageConditionTag');
   //============================================================
   //  New Return Request
   //============================================================

@@ -51,6 +51,8 @@ mixin _$ReturnRequestInformation {
   List<PriceOverrideTrail> get priceOverrideTrail =>
       throw _privateConstructorUsedError;
   bool get isMarketPlace => throw _privateConstructorUsedError;
+  StorageCondition get wareHouseStorageCondition =>
+      throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ReturnRequestInformationCopyWith<ReturnRequestInformation> get copyWith =>
@@ -96,7 +98,8 @@ abstract class $ReturnRequestInformationCopyWith<$Res> {
       double overrideValue,
       int initialQuantity,
       List<PriceOverrideTrail> priceOverrideTrail,
-      bool isMarketPlace});
+      bool isMarketPlace,
+      StorageCondition wareHouseStorageCondition});
 }
 
 /// @nodoc
@@ -146,6 +149,7 @@ class _$ReturnRequestInformationCopyWithImpl<$Res,
     Object? initialQuantity = null,
     Object? priceOverrideTrail = null,
     Object? isMarketPlace = null,
+    Object? wareHouseStorageCondition = null,
   }) {
     return _then(_value.copyWith(
       invoiceNo: null == invoiceNo
@@ -280,6 +284,10 @@ class _$ReturnRequestInformationCopyWithImpl<$Res,
           ? _value.isMarketPlace
           : isMarketPlace // ignore: cast_nullable_to_non_nullable
               as bool,
+      wareHouseStorageCondition: null == wareHouseStorageCondition
+          ? _value.wareHouseStorageCondition
+          : wareHouseStorageCondition // ignore: cast_nullable_to_non_nullable
+              as StorageCondition,
     ) as $Val);
   }
 }
@@ -326,7 +334,8 @@ abstract class _$$ReturnRequestInformationImplCopyWith<$Res>
       double overrideValue,
       int initialQuantity,
       List<PriceOverrideTrail> priceOverrideTrail,
-      bool isMarketPlace});
+      bool isMarketPlace,
+      StorageCondition wareHouseStorageCondition});
 }
 
 /// @nodoc
@@ -375,6 +384,7 @@ class __$$ReturnRequestInformationImplCopyWithImpl<$Res>
     Object? initialQuantity = null,
     Object? priceOverrideTrail = null,
     Object? isMarketPlace = null,
+    Object? wareHouseStorageCondition = null,
   }) {
     return _then(_$ReturnRequestInformationImpl(
       invoiceNo: null == invoiceNo
@@ -509,6 +519,10 @@ class __$$ReturnRequestInformationImplCopyWithImpl<$Res>
           ? _value.isMarketPlace
           : isMarketPlace // ignore: cast_nullable_to_non_nullable
               as bool,
+      wareHouseStorageCondition: null == wareHouseStorageCondition
+          ? _value.wareHouseStorageCondition
+          : wareHouseStorageCondition // ignore: cast_nullable_to_non_nullable
+              as StorageCondition,
     ));
   }
 }
@@ -549,7 +563,8 @@ class _$ReturnRequestInformationImpl extends _ReturnRequestInformation {
       required this.overrideValue,
       required this.initialQuantity,
       required final List<PriceOverrideTrail> priceOverrideTrail,
-      required this.isMarketPlace})
+      required this.isMarketPlace,
+      required this.wareHouseStorageCondition})
       : _imageUrl = imageUrl,
         _attachments = attachments,
         _attachmentUrl = attachmentUrl,
@@ -655,10 +670,12 @@ class _$ReturnRequestInformationImpl extends _ReturnRequestInformation {
 
   @override
   final bool isMarketPlace;
+  @override
+  final StorageCondition wareHouseStorageCondition;
 
   @override
   String toString() {
-    return 'ReturnRequestInformation(invoiceNo: $invoiceNo, expiryDate: $expiryDate, comment: $comment, rejectReason: $rejectReason, returnTypeDesc: $returnTypeDesc, returnType: $returnType, returnQuantity: $returnQuantity, unitPrice: $unitPrice, totalPrice: $totalPrice, returnOrderDesc: $returnOrderDesc, materialNumber: $materialNumber, materialDescription: $materialDescription, batch: $batch, materialGroup: $materialGroup, imageUrl: $imageUrl, attachments: $attachments, attachmentUrl: $attachmentUrl, createdDate: $createdDate, principal: $principal, principalName: $principalName, bapiSalesDocNumber: $bapiSalesDocNumber, bapiStatus: $bapiStatus, status: $status, statusReason: $statusReason, outsidePolicy: $outsidePolicy, invoiceDate: $invoiceDate, prsfd: $prsfd, bonusInformation: $bonusInformation, remarks: $remarks, overrideValue: $overrideValue, initialQuantity: $initialQuantity, priceOverrideTrail: $priceOverrideTrail, isMarketPlace: $isMarketPlace)';
+    return 'ReturnRequestInformation(invoiceNo: $invoiceNo, expiryDate: $expiryDate, comment: $comment, rejectReason: $rejectReason, returnTypeDesc: $returnTypeDesc, returnType: $returnType, returnQuantity: $returnQuantity, unitPrice: $unitPrice, totalPrice: $totalPrice, returnOrderDesc: $returnOrderDesc, materialNumber: $materialNumber, materialDescription: $materialDescription, batch: $batch, materialGroup: $materialGroup, imageUrl: $imageUrl, attachments: $attachments, attachmentUrl: $attachmentUrl, createdDate: $createdDate, principal: $principal, principalName: $principalName, bapiSalesDocNumber: $bapiSalesDocNumber, bapiStatus: $bapiStatus, status: $status, statusReason: $statusReason, outsidePolicy: $outsidePolicy, invoiceDate: $invoiceDate, prsfd: $prsfd, bonusInformation: $bonusInformation, remarks: $remarks, overrideValue: $overrideValue, initialQuantity: $initialQuantity, priceOverrideTrail: $priceOverrideTrail, isMarketPlace: $isMarketPlace, wareHouseStorageCondition: $wareHouseStorageCondition)';
   }
 
   @override
@@ -725,7 +742,10 @@ class _$ReturnRequestInformationImpl extends _ReturnRequestInformation {
             const DeepCollectionEquality()
                 .equals(other._priceOverrideTrail, _priceOverrideTrail) &&
             (identical(other.isMarketPlace, isMarketPlace) ||
-                other.isMarketPlace == isMarketPlace));
+                other.isMarketPlace == isMarketPlace) &&
+            (identical(other.wareHouseStorageCondition,
+                    wareHouseStorageCondition) ||
+                other.wareHouseStorageCondition == wareHouseStorageCondition));
   }
 
   @override
@@ -763,7 +783,8 @@ class _$ReturnRequestInformationImpl extends _ReturnRequestInformation {
         overrideValue,
         initialQuantity,
         const DeepCollectionEquality().hash(_priceOverrideTrail),
-        isMarketPlace
+        isMarketPlace,
+        wareHouseStorageCondition
       ]);
 
   @JsonKey(ignore: true)
@@ -776,39 +797,41 @@ class _$ReturnRequestInformationImpl extends _ReturnRequestInformation {
 
 abstract class _ReturnRequestInformation extends ReturnRequestInformation {
   factory _ReturnRequestInformation(
-      {required final String invoiceNo,
-      required final DateTimeStringValue expiryDate,
-      required final StringValue comment,
-      required final String rejectReason,
-      required final String returnTypeDesc,
-      required final ReturnType returnType,
-      required final int returnQuantity,
-      required final double unitPrice,
-      required final double totalPrice,
-      required final String returnOrderDesc,
-      required final MaterialNumber materialNumber,
-      required final String materialDescription,
-      required final String batch,
-      required final String materialGroup,
-      required final List<String> imageUrl,
-      required final List<String> attachments,
-      required final List<PoDocuments> attachmentUrl,
-      required final DateTimeStringValue createdDate,
-      required final String principal,
-      required final PrincipalName principalName,
-      required final String bapiSalesDocNumber,
-      required final StatusType bapiStatus,
-      required final StatusType status,
-      required final StatusReason statusReason,
-      required final bool outsidePolicy,
-      required final DateTimeStringValue invoiceDate,
-      required final Prsfd prsfd,
-      required final List<ReturnRequestInformation> bonusInformation,
-      required final Remarks remarks,
-      required final double overrideValue,
-      required final int initialQuantity,
-      required final List<PriceOverrideTrail> priceOverrideTrail,
-      required final bool isMarketPlace}) = _$ReturnRequestInformationImpl;
+          {required final String invoiceNo,
+          required final DateTimeStringValue expiryDate,
+          required final StringValue comment,
+          required final String rejectReason,
+          required final String returnTypeDesc,
+          required final ReturnType returnType,
+          required final int returnQuantity,
+          required final double unitPrice,
+          required final double totalPrice,
+          required final String returnOrderDesc,
+          required final MaterialNumber materialNumber,
+          required final String materialDescription,
+          required final String batch,
+          required final String materialGroup,
+          required final List<String> imageUrl,
+          required final List<String> attachments,
+          required final List<PoDocuments> attachmentUrl,
+          required final DateTimeStringValue createdDate,
+          required final String principal,
+          required final PrincipalName principalName,
+          required final String bapiSalesDocNumber,
+          required final StatusType bapiStatus,
+          required final StatusType status,
+          required final StatusReason statusReason,
+          required final bool outsidePolicy,
+          required final DateTimeStringValue invoiceDate,
+          required final Prsfd prsfd,
+          required final List<ReturnRequestInformation> bonusInformation,
+          required final Remarks remarks,
+          required final double overrideValue,
+          required final int initialQuantity,
+          required final List<PriceOverrideTrail> priceOverrideTrail,
+          required final bool isMarketPlace,
+          required final StorageCondition wareHouseStorageCondition}) =
+      _$ReturnRequestInformationImpl;
   _ReturnRequestInformation._() : super._();
 
   @override
@@ -877,6 +900,8 @@ abstract class _ReturnRequestInformation extends ReturnRequestInformation {
   List<PriceOverrideTrail> get priceOverrideTrail;
   @override
   bool get isMarketPlace;
+  @override
+  StorageCondition get wareHouseStorageCondition;
   @override
   @JsonKey(ignore: true)
   _$$ReturnRequestInformationImplCopyWith<_$ReturnRequestInformationImpl>

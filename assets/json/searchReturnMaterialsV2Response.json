@@ -33,6 +33,7 @@
             "itemNumber": "20251101",
             "bonusItem": [],
             "outsidePolicy": true,
+            "wareHouseStorageCondition":"AC",
             "isMarketPlace": true
           }
         },
@@ -69,9 +70,11 @@
                 "principalName": "PFIZER 2 (M) SDN BHD  (PCL a/c)",
                 "expiryDate": "20251101",
                 "itemNumber": "20251101",
-                "outsidePolicy": false
+                "outsidePolicy": false,
+                "wareHouseStorageCondition":"AC"
               }
             ],
+            "wareHouseStorageCondition":"AC",
             "outsidePolicy": false
           }
         },
@@ -94,6 +97,7 @@
             "itemNumber": "20251101",
             "bonusItem": [],
             "outsidePolicy": true,
+            "wareHouseStorageCondition":"AC",
             "isMarketPlace": true
           }
         },
@@ -116,6 +120,7 @@
             "itemNumber": "20251101",
             "bonusItem": [],
             "outsidePolicy": true,
+            "wareHouseStorageCondition":"AC",
             "isMarketPlace": true
           }
         },
@@ -152,9 +157,11 @@
                 "principalName": "PFIZER 2 (M) SDN BHD  (PCL a/c)",
                 "expiryDate": "20251101",
                 "itemNumber": "20251101",
+                "wareHouseStorageCondition":"AC",
                 "outsidePolicy": false
               }
             ],
+            "wareHouseStorageCondition":"AC",
             "outsidePolicy": false
           }
         }

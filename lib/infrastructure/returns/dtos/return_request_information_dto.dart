@@ -77,6 +77,8 @@ class ReturnRequestInformationDto with _$ReturnRequestInformationDto {
       readValue: JsonReadValueHelper.mappingIsMarketPlace,
     )
     required bool isMarketPlace,
+    @JsonKey(name: 'wareHouseStorageCondition', defaultValue: '')
+    required String wareHouseStorageCondition,
   }) = _ReturnRequestInformationDto;
 
   ReturnRequestInformation toDomain() {
@@ -114,6 +116,7 @@ class ReturnRequestInformationDto with _$ReturnRequestInformationDto {
       returnTypeDesc: returnTypeDesc,
       priceOverrideTrail: priceOverrideTrail.map((e) => e.toDomain()).toList(),
       isMarketPlace: isMarketPlace,
+      wareHouseStorageCondition: StorageCondition(wareHouseStorageCondition),
     );
   }
 

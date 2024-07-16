@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_item_details.dart';
+import 'package:ezrxmobile/domain/returns/value/value_objects.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -31,6 +32,7 @@ class ReturnMaterial with _$ReturnMaterial {
     required bool outsidePolicy,
     required List<ReturnMaterial> bonusItems,
     required bool isMarketPlace,
+    required StorageCondition wareHouseStorageCondition,
   }) = _ReturnMaterial;
 
   factory ReturnMaterial.empty() => ReturnMaterial(
@@ -52,6 +54,7 @@ class ReturnMaterial with _$ReturnMaterial {
         bonusItems: <ReturnMaterial>[],
         outsidePolicy: false,
         isMarketPlace: false,
+        wareHouseStorageCondition: StorageCondition(''),
       );
 
   String get uuid => '$assignmentNumber$itemNumber';

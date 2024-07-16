@@ -29,6 +29,8 @@ _$ReturnItemDtoImpl _$$ReturnItemDtoImplFromJson(Map<String, dynamic> json) =>
                   as bool? ??
               false,
       lineItemNumber: json['lineItemNumber'] as String? ?? '',
+      wareHouseStorageCondition:
+          json['wareHouseStorageCondition'] as String? ?? '',
     );
 
 Map<String, dynamic> _$$ReturnItemDtoImplToJson(_$ReturnItemDtoImpl instance) =>
@@ -50,4 +52,5 @@ Map<String, dynamic> _$$ReturnItemDtoImplToJson(_$ReturnItemDtoImpl instance) =>
       'prsfd': instance.prsfd,
       'isMarketPlace': instance.isMarketPlace,
       'lineItemNumber': instance.lineItemNumber,
+      'wareHouseStorageCondition': instance.wareHouseStorageCondition,
     };

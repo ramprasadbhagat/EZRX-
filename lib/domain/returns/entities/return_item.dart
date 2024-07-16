@@ -30,6 +30,7 @@ class ReturnItem with _$ReturnItem {
     required Prsfd prsfd,
     required bool isMarketPlace,
     required String lineNumber,
+    required StorageCondition wareHouseStorageCondition,
   }) = _ReturnItem;
 
   factory ReturnItem.empty() => ReturnItem(
@@ -51,6 +52,7 @@ class ReturnItem with _$ReturnItem {
         prsfd: Prsfd(''),
         isMarketPlace: false,
         lineNumber: '',
+        wareHouseStorageCondition: StorageCondition(''),
       );
 
   String get displayBatch => isMarketPlace ? 'NA' : batch;

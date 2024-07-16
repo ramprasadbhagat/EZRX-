@@ -69,6 +69,8 @@ _$ReturnRequestInformationDtoImpl _$$ReturnRequestInformationDtoImplFromJson(
           JsonReadValueHelper.mappingIsMarketPlace(json, 'isMarketPlace')
                   as bool? ??
               false,
+      wareHouseStorageCondition:
+          json['wareHouseStorageCondition'] as String? ?? '',
     );
 
 Map<String, dynamic> _$$ReturnRequestInformationDtoImplToJson(
@@ -111,6 +113,7 @@ Map<String, dynamic> _$$ReturnRequestInformationDtoImplToJson(
       'priceOverrideTrail':
           instance.priceOverrideTrail.map((e) => e.toJson()).toList(),
       'isMarketPlace': instance.isMarketPlace,
+      'wareHouseStorageCondition': instance.wareHouseStorageCondition,
     };
 
 _$PriceOverrideTrailDtoImpl _$$PriceOverrideTrailDtoImplFromJson(

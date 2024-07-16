@@ -141,6 +141,10 @@ class _ReturnBonusItemSection extends StatelessWidget {
                         ],
                       ),
                     ),
+              WareHouseStorageConditionTag(
+                wareHouseStorageCondition:
+                    bonusItem.wareHouseStorageCondition.displayStorageCondition,
+              ),
               Text(
                 context.tr(
                   'Bonus unit price is derived by order subtotal divided by the total item quantity (incl. bonus).',

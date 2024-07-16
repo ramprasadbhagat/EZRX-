@@ -18,6 +18,7 @@ query requestsByItems($request: requestsByItems!) {
         batch
         outsidePolicy
         expiry
+        wareHouseStorageCondition
       }
     }
     totalCount

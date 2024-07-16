@@ -20,6 +20,7 @@ class ReturnRequestQuery {
           itemNumber
           outsidePolicy
           ${enableMarketplace ? 'isMarketPlace' : ''}
+          wareHouseStorageCondition
           bonusItem {
             assignmentNumber
             material
@@ -37,6 +38,7 @@ class ReturnRequestQuery {
             itemNumber
             outsidePolicy
             ${enableMarketplace ? 'isMarketPlace' : ''}
+            wareHouseStorageCondition
           }
         }
       }
@@ -105,6 +107,7 @@ class ReturnRequestQuery {
           balanceQuantity
           balanceValue
           outsidePolicy
+          wareHouseStorageCondition
           bonusItem {
             assignmentNumber
             referenceDocument
@@ -146,6 +149,7 @@ class ReturnRequestQuery {
             balanceQuantity
             balanceValue
             outsidePolicy
+            wareHouseStorageCondition
           }
         }
       }
@@ -172,7 +176,6 @@ class ReturnRequestQuery {
       } 
     ''';
   }
-
 
   String addRequest() {
     return '''

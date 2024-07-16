@@ -125,6 +125,7 @@
                     "ppaHeld": false,
                     "outsidePolicy": false,
                     "invoiceDate": "20230530",
+                    "wareHouseStorageCondition": "AC",
                     "bonusInformation": [
                         {
                             "invoiceNo": "1100001115",
@@ -203,7 +204,8 @@
                                     "overriderRole": "Approver",
                                     "overrideValue": "100"
                                 }
-                            ]
+                            ],
+                            "wareHouseStorageCondition": "AC"
                         }
                     ]
                 }

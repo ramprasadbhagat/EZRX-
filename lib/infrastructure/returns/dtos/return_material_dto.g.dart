@@ -35,6 +35,8 @@ _$ReturnMaterialDtoImpl _$$ReturnMaterialDtoImplFromJson(
           JsonReadValueHelper.mappingIsMarketPlace(json, 'isMarketPlace')
                   as bool? ??
               false,
+      wareHouseStorageCondition:
+          json['wareHouseStorageCondition'] as String? ?? '',
     );
 
 Map<String, dynamic> _$$ReturnMaterialDtoImplToJson(
@@ -58,4 +60,5 @@ Map<String, dynamic> _$$ReturnMaterialDtoImplToJson(
       'outsidePolicy': instance.outsidePolicy,
       'targetQuantity': instance.targetQuantity,
       'isMarketPlace': instance.isMarketPlace,
+      'wareHouseStorageCondition': instance.wareHouseStorageCondition,
     };

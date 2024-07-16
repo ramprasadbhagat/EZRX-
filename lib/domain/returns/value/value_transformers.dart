@@ -69,3 +69,18 @@ String getreturnTypeBottomASheetBodyText(String returnType) => _isReturnType(
         : 'After your request is approved, you will receive a replacement item.';
 
 bool getisCounterOfferElegible(String returnType) => returnType == '500';
+
+String getStorageCondition(String storageCondition) {
+  final storageConditionMap = {
+    'AC': 'Air Conditioned',
+    'AM': 'Ambient',
+    'CO': 'Cold Room',
+    'DF': 'Deep Freezer',
+    'FZ': 'Freezer',
+    'NA': 'Non Aircon',
+    'NT': 'Nitrogen Tank',
+    'SC': 'Semi-Cold Chain',
+  };
+
+  return storageConditionMap[storageCondition] ?? '';
+}

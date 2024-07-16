@@ -5,6 +5,7 @@ import 'package:ezrxmobile/domain/returns/entities/return_material.dart';
 import 'package:ezrxmobile/presentation/core/status_label.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/returns/new_request/widgets/return_item_price.dart';
+import 'package:ezrxmobile/presentation/returns/widgets/ware_house_storage_condition_tag.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -79,6 +80,10 @@ class BonusMaterialInfo extends StatelessWidget {
                 '${context.tr('Qty')}: ${getQuantity(context)} ',
               ),
             ],
+          ),
+          WareHouseStorageConditionTag(
+            wareHouseStorageCondition:
+                data.wareHouseStorageCondition.displayStorageCondition,
           ),
           Text(
             context.tr(

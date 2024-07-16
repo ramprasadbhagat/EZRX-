@@ -94,6 +94,8 @@ mixin _$ReturnRequestInformationDto {
   @JsonKey(
       defaultValue: false, readValue: JsonReadValueHelper.mappingIsMarketPlace)
   bool get isMarketPlace => throw _privateConstructorUsedError;
+  @JsonKey(name: 'wareHouseStorageCondition', defaultValue: '')
+  String get wareHouseStorageCondition => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -160,7 +162,9 @@ abstract class $ReturnRequestInformationDtoCopyWith<$Res> {
       @JsonKey(
           defaultValue: false,
           readValue: JsonReadValueHelper.mappingIsMarketPlace)
-      bool isMarketPlace});
+      bool isMarketPlace,
+      @JsonKey(name: 'wareHouseStorageCondition', defaultValue: '')
+      String wareHouseStorageCondition});
 }
 
 /// @nodoc
@@ -210,6 +214,7 @@ class _$ReturnRequestInformationDtoCopyWithImpl<$Res,
     Object? initialQuantity = null,
     Object? priceOverrideTrail = null,
     Object? isMarketPlace = null,
+    Object? wareHouseStorageCondition = null,
   }) {
     return _then(_value.copyWith(
       invoiceNo: null == invoiceNo
@@ -344,6 +349,10 @@ class _$ReturnRequestInformationDtoCopyWithImpl<$Res,
           ? _value.isMarketPlace
           : isMarketPlace // ignore: cast_nullable_to_non_nullable
               as bool,
+      wareHouseStorageCondition: null == wareHouseStorageCondition
+          ? _value.wareHouseStorageCondition
+          : wareHouseStorageCondition // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
@@ -408,7 +417,9 @@ abstract class _$$ReturnRequestInformationDtoImplCopyWith<$Res>
       @JsonKey(
           defaultValue: false,
           readValue: JsonReadValueHelper.mappingIsMarketPlace)
-      bool isMarketPlace});
+      bool isMarketPlace,
+      @JsonKey(name: 'wareHouseStorageCondition', defaultValue: '')
+      String wareHouseStorageCondition});
 }
 
 /// @nodoc
@@ -457,6 +468,7 @@ class __$$ReturnRequestInformationDtoImplCopyWithImpl<$Res>
     Object? initialQuantity = null,
     Object? priceOverrideTrail = null,
     Object? isMarketPlace = null,
+    Object? wareHouseStorageCondition = null,
   }) {
     return _then(_$ReturnRequestInformationDtoImpl(
       invoiceNo: null == invoiceNo
@@ -591,6 +603,10 @@ class __$$ReturnRequestInformationDtoImplCopyWithImpl<$Res>
           ? _value.isMarketPlace
           : isMarketPlace // ignore: cast_nullable_to_non_nullable
               as bool,
+      wareHouseStorageCondition: null == wareHouseStorageCondition
+          ? _value.wareHouseStorageCondition
+          : wareHouseStorageCondition // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -657,7 +673,9 @@ class _$ReturnRequestInformationDtoImpl extends _ReturnRequestInformationDto {
       @JsonKey(
           defaultValue: false,
           readValue: JsonReadValueHelper.mappingIsMarketPlace)
-      required this.isMarketPlace})
+      required this.isMarketPlace,
+      @JsonKey(name: 'wareHouseStorageCondition', defaultValue: '')
+      required this.wareHouseStorageCondition})
       : _imageUrl = imageUrl,
         _attachments = attachments,
         _attachmentUrl = attachmentUrl,
@@ -804,10 +822,13 @@ class _$ReturnRequestInformationDtoImpl extends _ReturnRequestInformationDto {
   @JsonKey(
       defaultValue: false, readValue: JsonReadValueHelper.mappingIsMarketPlace)
   final bool isMarketPlace;
+  @override
+  @JsonKey(name: 'wareHouseStorageCondition', defaultValue: '')
+  final String wareHouseStorageCondition;
 
   @override
   String toString() {
-    return 'ReturnRequestInformationDto(invoiceNo: $invoiceNo, expiryDate: $expiryDate, comment: $comment, rejectReason: $rejectReason, returnTypeDesc: $returnTypeDesc, returnType: $returnType, returnQuantity: $returnQuantity, unitPrice: $unitPrice, totalPrice: $totalPrice, materialNumber: $materialNumber, materialDescription: $materialDescription, batch: $batch, returnOrderDesc: $returnOrderDesc, materialGroup: $materialGroup, imageUrl: $imageUrl, attachments: $attachments, attachmentUrl: $attachmentUrl, createdDate: $createdDate, principal: $principal, principalName: $principalName, bapiSalesDocNumber: $bapiSalesDocNumber, bapiStatus: $bapiStatus, status: $status, statusReason: $statusReason, outsidePolicy: $outsidePolicy, invoiceDate: $invoiceDate, prsfd: $prsfd, remarks: $remarks, bonusInformation: $bonusInformation, overrideValue: $overrideValue, initialQuantity: $initialQuantity, priceOverrideTrail: $priceOverrideTrail, isMarketPlace: $isMarketPlace)';
+    return 'ReturnRequestInformationDto(invoiceNo: $invoiceNo, expiryDate: $expiryDate, comment: $comment, rejectReason: $rejectReason, returnTypeDesc: $returnTypeDesc, returnType: $returnType, returnQuantity: $returnQuantity, unitPrice: $unitPrice, totalPrice: $totalPrice, materialNumber: $materialNumber, materialDescription: $materialDescription, batch: $batch, returnOrderDesc: $returnOrderDesc, materialGroup: $materialGroup, imageUrl: $imageUrl, attachments: $attachments, attachmentUrl: $attachmentUrl, createdDate: $createdDate, principal: $principal, principalName: $principalName, bapiSalesDocNumber: $bapiSalesDocNumber, bapiStatus: $bapiStatus, status: $status, statusReason: $statusReason, outsidePolicy: $outsidePolicy, invoiceDate: $invoiceDate, prsfd: $prsfd, remarks: $remarks, bonusInformation: $bonusInformation, overrideValue: $overrideValue, initialQuantity: $initialQuantity, priceOverrideTrail: $priceOverrideTrail, isMarketPlace: $isMarketPlace, wareHouseStorageCondition: $wareHouseStorageCondition)';
   }
 
   @override
@@ -874,7 +895,10 @@ class _$ReturnRequestInformationDtoImpl extends _ReturnRequestInformationDto {
             const DeepCollectionEquality()
                 .equals(other._priceOverrideTrail, _priceOverrideTrail) &&
             (identical(other.isMarketPlace, isMarketPlace) ||
-                other.isMarketPlace == isMarketPlace));
+                other.isMarketPlace == isMarketPlace) &&
+            (identical(other.wareHouseStorageCondition,
+                    wareHouseStorageCondition) ||
+                other.wareHouseStorageCondition == wareHouseStorageCondition));
   }
 
   @JsonKey(ignore: true)
@@ -913,7 +937,8 @@ class _$ReturnRequestInformationDtoImpl extends _ReturnRequestInformationDto {
         overrideValue,
         initialQuantity,
         const DeepCollectionEquality().hash(_priceOverrideTrail),
-        isMarketPlace
+        isMarketPlace,
+        wareHouseStorageCondition
       ]);
 
   @JsonKey(ignore: true)
@@ -1001,7 +1026,10 @@ abstract class _ReturnRequestInformationDto
       @JsonKey(
           defaultValue: false,
           readValue: JsonReadValueHelper.mappingIsMarketPlace)
-      required final bool isMarketPlace}) = _$ReturnRequestInformationDtoImpl;
+      required final bool isMarketPlace,
+      @JsonKey(name: 'wareHouseStorageCondition', defaultValue: '')
+      required final String
+          wareHouseStorageCondition}) = _$ReturnRequestInformationDtoImpl;
   _ReturnRequestInformationDto._() : super._();
 
   factory _ReturnRequestInformationDto.fromJson(Map<String, dynamic> json) =
@@ -1110,6 +1138,9 @@ abstract class _ReturnRequestInformationDto
   @JsonKey(
       defaultValue: false, readValue: JsonReadValueHelper.mappingIsMarketPlace)
   bool get isMarketPlace;
+  @override
+  @JsonKey(name: 'wareHouseStorageCondition', defaultValue: '')
+  String get wareHouseStorageCondition;
   @override
   @JsonKey(ignore: true)
   _$$ReturnRequestInformationDtoImplCopyWith<_$ReturnRequestInformationDtoImpl>

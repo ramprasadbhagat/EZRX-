@@ -52,6 +52,7 @@
                         "balanceQuantity": "1",
                         "balanceValue": "540.00",
                         "outsidePolicy": false,
+                        "wareHouseStorageCondition":"AC",
                         "bonusItem": []
                     }
                 },
@@ -92,6 +93,7 @@
                         "balanceQuantity": "1",
                         "balanceValue": "1458.00",
                         "outsidePolicy": false,
+                        "wareHouseStorageCondition":"AC",
                         "bonusItem": []
                     }
                 },
@@ -132,6 +134,7 @@
                         "balanceQuantity": "1",
                         "balanceValue": "12.40",
                         "outsidePolicy": false,
+                        "wareHouseStorageCondition":"AC",
                         "bonusItem": []
                     }
                 },
@@ -172,6 +175,7 @@
                         "balanceQuantity": "1",
                         "balanceValue": "22.80",
                         "outsidePolicy": false,
+                        "wareHouseStorageCondition":"AC",
                         "bonusItem": []
                     }
                 },
@@ -212,6 +216,7 @@
                         "balanceQuantity": "1",
                         "balanceValue": "157.34",
                         "outsidePolicy": false,
+                        "wareHouseStorageCondition":"AC",
                         "bonusItem": []
                     }
                 },
@@ -252,6 +257,7 @@
                         "balanceQuantity": "3",
                         "balanceValue": "277.34",
                         "outsidePolicy": false,
+                        "wareHouseStorageCondition":"AC",
                         "bonusItem": [
                             {
                                 "assignmentNumber": "1100001326",
@@ -288,7 +294,8 @@
                                 "suggestedPriceOverride": "173.34",
                                 "balanceQuantity": "1",
                                 "balanceValue": "346.68",
-                                "outsidePolicy": false
+                                "outsidePolicy": false,
+                                "wareHouseStorageCondition":"AC"
                             }
                         ]
                     }
@@ -330,6 +337,7 @@
                         "balanceQuantity": "1",
                         "balanceValue": "166.68",
                         "outsidePolicy": false,
+                        "wareHouseStorageCondition":"AC",
                         "bonusItem": []
                     }
                 },
@@ -370,6 +378,7 @@
                         "balanceQuantity": "2",
                         "balanceValue": "208.00",
                         "outsidePolicy": false,
+                        "wareHouseStorageCondition":"AC",
                         "bonusItem": []
                     }
                 }

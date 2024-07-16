@@ -57,6 +57,7 @@ class RequestInformationQuery {
       statusReason
       outsidePolicy
       invoiceDate
+      wareHouseStorageCondition
       bonusInformation {
       ${enableMarketplace ? 'isMarketPlace' : ''}
       invoiceNo
@@ -95,6 +96,7 @@ class RequestInformationQuery {
           overriderRole
           overrideValue
       }
+      wareHouseStorageCondition
       }
     }
   }

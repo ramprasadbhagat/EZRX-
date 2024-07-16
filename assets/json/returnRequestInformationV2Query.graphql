@@ -51,6 +51,7 @@ query requestInformationV2($request: requestInformationRequest!) {
         statusReason
         outsidePolicy
         invoiceDate
+        wareHouseStorageCondition
         bonusInformation {
         invoiceNo
         expiryDate
@@ -85,6 +86,7 @@ query requestInformationV2($request: requestInformationRequest!) {
             overriderRole
             overrideValue
         }
+        wareHouseStorageCondition
         }
       }
     }

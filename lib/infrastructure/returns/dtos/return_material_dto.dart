@@ -1,6 +1,7 @@
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_material.dart';
+import 'package:ezrxmobile/domain/returns/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/core/common/json_key_readvalue_helper.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -44,6 +45,8 @@ class ReturnMaterialDto with _$ReturnMaterialDto {
       readValue: JsonReadValueHelper.mappingIsMarketPlace,
     )
     required bool isMarketPlace,
+    @JsonKey(name: 'wareHouseStorageCondition', defaultValue: '')
+    required String wareHouseStorageCondition,
   }) = _ReturnMaterialDto;
 
   factory ReturnMaterialDto.fromDomain(
@@ -70,6 +73,8 @@ class ReturnMaterialDto with _$ReturnMaterialDto {
           .map((item) => ReturnMaterialDto.fromDomain(item))
           .toList(),
       isMarketPlace: data.isMarketPlace,
+      wareHouseStorageCondition:
+          data.wareHouseStorageCondition.getOrDefaultValue(''),
     );
   }
 
@@ -93,6 +98,7 @@ class ReturnMaterialDto with _$ReturnMaterialDto {
       outsidePolicy: outsidePolicy,
       bonusItems: bonusItems.map((item) => item.toDomain()).toList(),
       isMarketPlace: isMarketPlace,
+      wareHouseStorageCondition: StorageCondition(wareHouseStorageCondition),
     );
   }
 

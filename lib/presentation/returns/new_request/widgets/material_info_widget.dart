@@ -3,6 +3,7 @@ import 'package:ezrxmobile/domain/returns/entities/return_material.dart';
 import 'package:ezrxmobile/presentation/core/market_place/market_place_logo.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/returns/new_request/widgets/return_item_price.dart';
+import 'package:ezrxmobile/presentation/returns/widgets/ware_house_storage_condition_tag.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 
@@ -57,6 +58,10 @@ class MaterialInfoWidget extends StatelessWidget {
             key: WidgetKeys.returnBatchAndExpires,
           ),
           ReturnItemPrice(data: data),
+          WareHouseStorageConditionTag(
+            wareHouseStorageCondition:
+                data.wareHouseStorageCondition.displayStorageCondition,
+          ),
         ],
       ),
     );

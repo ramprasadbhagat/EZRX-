@@ -34,6 +34,8 @@ mixin _$ReturnItem {
   Prsfd get prsfd => throw _privateConstructorUsedError;
   bool get isMarketPlace => throw _privateConstructorUsedError;
   String get lineNumber => throw _privateConstructorUsedError;
+  StorageCondition get wareHouseStorageCondition =>
+      throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ReturnItemCopyWith<ReturnItem> get copyWith =>
@@ -64,7 +66,8 @@ abstract class $ReturnItemCopyWith<$Res> {
       ProductImages productImages,
       Prsfd prsfd,
       bool isMarketPlace,
-      String lineNumber});
+      String lineNumber,
+      StorageCondition wareHouseStorageCondition});
 
   $ProductImagesCopyWith<$Res> get productImages;
 }
@@ -100,6 +103,7 @@ class _$ReturnItemCopyWithImpl<$Res, $Val extends ReturnItem>
     Object? prsfd = null,
     Object? isMarketPlace = null,
     Object? lineNumber = null,
+    Object? wareHouseStorageCondition = null,
   }) {
     return _then(_value.copyWith(
       requestId: null == requestId
@@ -174,6 +178,10 @@ class _$ReturnItemCopyWithImpl<$Res, $Val extends ReturnItem>
           ? _value.lineNumber
           : lineNumber // ignore: cast_nullable_to_non_nullable
               as String,
+      wareHouseStorageCondition: null == wareHouseStorageCondition
+          ? _value.wareHouseStorageCondition
+          : wareHouseStorageCondition // ignore: cast_nullable_to_non_nullable
+              as StorageCondition,
     ) as $Val);
   }
 
@@ -212,7 +220,8 @@ abstract class _$$ReturnItemImplCopyWith<$Res>
       ProductImages productImages,
       Prsfd prsfd,
       bool isMarketPlace,
-      String lineNumber});
+      String lineNumber,
+      StorageCondition wareHouseStorageCondition});
 
   @override
   $ProductImagesCopyWith<$Res> get productImages;
@@ -247,6 +256,7 @@ class __$$ReturnItemImplCopyWithImpl<$Res>
     Object? prsfd = null,
     Object? isMarketPlace = null,
     Object? lineNumber = null,
+    Object? wareHouseStorageCondition = null,
   }) {
     return _then(_$ReturnItemImpl(
       requestId: null == requestId
@@ -321,6 +331,10 @@ class __$$ReturnItemImplCopyWithImpl<$Res>
           ? _value.lineNumber
           : lineNumber // ignore: cast_nullable_to_non_nullable
               as String,
+      wareHouseStorageCondition: null == wareHouseStorageCondition
+          ? _value.wareHouseStorageCondition
+          : wareHouseStorageCondition // ignore: cast_nullable_to_non_nullable
+              as StorageCondition,
     ));
   }
 }
@@ -346,7 +360,8 @@ class _$ReturnItemImpl extends _ReturnItem {
       required this.productImages,
       required this.prsfd,
       required this.isMarketPlace,
-      required this.lineNumber})
+      required this.lineNumber,
+      required this.wareHouseStorageCondition})
       : super._();
 
   @override
@@ -385,10 +400,12 @@ class _$ReturnItemImpl extends _ReturnItem {
   final bool isMarketPlace;
   @override
   final String lineNumber;
+  @override
+  final StorageCondition wareHouseStorageCondition;
 
   @override
   String toString() {
-    return 'ReturnItem(requestId: $requestId, requestDate: $requestDate, itemQty: $itemQty, totalPrice: $totalPrice, status: $status, materialNumber: $materialNumber, materialName: $materialName, defaultMaterialDescription: $defaultMaterialDescription, orderNumber: $orderNumber, invoiceID: $invoiceID, customerName: $customerName, batch: $batch, outsidePolicy: $outsidePolicy, expiry: $expiry, productImages: $productImages, prsfd: $prsfd, isMarketPlace: $isMarketPlace, lineNumber: $lineNumber)';
+    return 'ReturnItem(requestId: $requestId, requestDate: $requestDate, itemQty: $itemQty, totalPrice: $totalPrice, status: $status, materialNumber: $materialNumber, materialName: $materialName, defaultMaterialDescription: $defaultMaterialDescription, orderNumber: $orderNumber, invoiceID: $invoiceID, customerName: $customerName, batch: $batch, outsidePolicy: $outsidePolicy, expiry: $expiry, productImages: $productImages, prsfd: $prsfd, isMarketPlace: $isMarketPlace, lineNumber: $lineNumber, wareHouseStorageCondition: $wareHouseStorageCondition)';
   }
 
   @override
@@ -428,30 +445,35 @@ class _$ReturnItemImpl extends _ReturnItem {
             (identical(other.isMarketPlace, isMarketPlace) ||
                 other.isMarketPlace == isMarketPlace) &&
             (identical(other.lineNumber, lineNumber) ||
-                other.lineNumber == lineNumber));
+                other.lineNumber == lineNumber) &&
+            (identical(other.wareHouseStorageCondition,
+                    wareHouseStorageCondition) ||
+                other.wareHouseStorageCondition == wareHouseStorageCondition));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      requestId,
-      requestDate,
-      itemQty,
-      totalPrice,
-      status,
-      materialNumber,
-      materialName,
-      defaultMaterialDescription,
-      orderNumber,
-      invoiceID,
-      customerName,
-      batch,
-      outsidePolicy,
-      expiry,
-      productImages,
-      prsfd,
-      isMarketPlace,
-      lineNumber);
+  int get hashCode => Object.hashAll([
+        runtimeType,
+        requestId,
+        requestDate,
+        itemQty,
+        totalPrice,
+        status,
+        materialNumber,
+        materialName,
+        defaultMaterialDescription,
+        orderNumber,
+        invoiceID,
+        customerName,
+        batch,
+        outsidePolicy,
+        expiry,
+        productImages,
+        prsfd,
+        isMarketPlace,
+        lineNumber,
+        wareHouseStorageCondition
+      ]);
 
   @JsonKey(ignore: true)
   @override
@@ -462,24 +484,26 @@ class _$ReturnItemImpl extends _ReturnItem {
 
 abstract class _ReturnItem extends ReturnItem {
   const factory _ReturnItem(
-      {required final String requestId,
-      required final DateTimeStringValue requestDate,
-      required final ReturnQuantity itemQty,
-      required final double totalPrice,
-      required final StatusType status,
-      required final MaterialNumber materialNumber,
-      required final String materialName,
-      required final String defaultMaterialDescription,
-      required final String orderNumber,
-      required final String invoiceID,
-      required final String customerName,
-      required final String batch,
-      required final bool outsidePolicy,
-      required final DateTimeStringValue expiry,
-      required final ProductImages productImages,
-      required final Prsfd prsfd,
-      required final bool isMarketPlace,
-      required final String lineNumber}) = _$ReturnItemImpl;
+          {required final String requestId,
+          required final DateTimeStringValue requestDate,
+          required final ReturnQuantity itemQty,
+          required final double totalPrice,
+          required final StatusType status,
+          required final MaterialNumber materialNumber,
+          required final String materialName,
+          required final String defaultMaterialDescription,
+          required final String orderNumber,
+          required final String invoiceID,
+          required final String customerName,
+          required final String batch,
+          required final bool outsidePolicy,
+          required final DateTimeStringValue expiry,
+          required final ProductImages productImages,
+          required final Prsfd prsfd,
+          required final bool isMarketPlace,
+          required final String lineNumber,
+          required final StorageCondition wareHouseStorageCondition}) =
+      _$ReturnItemImpl;
   const _ReturnItem._() : super._();
 
   @override
@@ -518,6 +542,8 @@ abstract class _ReturnItem extends ReturnItem {
   bool get isMarketPlace;
   @override
   String get lineNumber;
+  @override
+  StorageCondition get wareHouseStorageCondition;
   @override
   @JsonKey(ignore: true)
   _$$ReturnItemImplCopyWith<_$ReturnItemImpl> get copyWith =>

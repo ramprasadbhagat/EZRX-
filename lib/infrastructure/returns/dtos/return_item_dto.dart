@@ -42,6 +42,8 @@ class ReturnItemDto with _$ReturnItemDto {
     required bool isMarketPlace,
     @JsonKey(name: 'lineItemNumber', defaultValue: '')
     required String lineItemNumber,
+    @JsonKey(name: 'wareHouseStorageCondition', defaultValue: '')
+    required String wareHouseStorageCondition,
   }) = _ReturnItemDto;
 
   factory ReturnItemDto.fromDomain(
@@ -65,6 +67,8 @@ class ReturnItemDto with _$ReturnItemDto {
       prsfd: returnItem.prsfd.getOrDefaultValue(''),
       isMarketPlace: returnItem.isMarketPlace,
       lineItemNumber: returnItem.lineNumber,
+      wareHouseStorageCondition:
+          returnItem.wareHouseStorageCondition.getOrDefaultValue(''),
     );
   }
 
@@ -88,6 +92,7 @@ class ReturnItemDto with _$ReturnItemDto {
       prsfd: Prsfd(prsfd),
       isMarketPlace: isMarketPlace,
       lineNumber: lineItemNumber,
+      wareHouseStorageCondition: StorageCondition(wareHouseStorageCondition),
     );
   }
 

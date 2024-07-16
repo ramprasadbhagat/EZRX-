@@ -40,6 +40,7 @@ fragment MaterialsFields on returnMaterialInformation {
           balanceQuantity
           balanceValue
           outsidePolicy
+          wareHouseStorageCondition
           bonusItem {
             assignmentNumber
             referenceDocument
@@ -80,6 +81,7 @@ fragment MaterialsFields on returnMaterialInformation {
             balanceQuantity
             balanceValue
             outsidePolicy
+            wareHouseStorageCondition
           }
         }
       }

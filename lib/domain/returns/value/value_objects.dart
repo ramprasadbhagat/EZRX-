@@ -118,3 +118,17 @@ class ReturnType extends ValueObject<String> {
 
   const ReturnType._(this.value);
 }
+
+class StorageCondition extends ValueObject<String> {
+  @override
+  final Either<ValueFailure<String>, String> value;
+
+  factory StorageCondition(String input) {
+    return StorageCondition._(validateStringNotEmpty(input.trim()));
+  }
+
+  String get displayStorageCondition =>
+      getStorageCondition(value.getOrElse(() => ''));
+
+  const StorageCondition._(this.value);
+}

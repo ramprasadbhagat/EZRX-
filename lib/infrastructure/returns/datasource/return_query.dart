@@ -23,6 +23,7 @@ class ReturnQuery {
               outsidePolicy
               ${enableMarketplace ? 'isMarketPlace' : ''}
               lineItemNumber
+              wareHouseStorageCondition
             }
           }
           totalCount

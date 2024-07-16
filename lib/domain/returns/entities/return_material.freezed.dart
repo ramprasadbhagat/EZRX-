@@ -34,6 +34,8 @@ mixin _$ReturnMaterial {
   bool get outsidePolicy => throw _privateConstructorUsedError;
   List<ReturnMaterial> get bonusItems => throw _privateConstructorUsedError;
   bool get isMarketPlace => throw _privateConstructorUsedError;
+  StorageCondition get wareHouseStorageCondition =>
+      throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ReturnMaterialCopyWith<ReturnMaterial> get copyWith =>
@@ -64,7 +66,8 @@ abstract class $ReturnMaterialCopyWith<$Res> {
       DateTimeStringValue priceDate,
       bool outsidePolicy,
       List<ReturnMaterial> bonusItems,
-      bool isMarketPlace});
+      bool isMarketPlace,
+      StorageCondition wareHouseStorageCondition});
 }
 
 /// @nodoc
@@ -98,6 +101,7 @@ class _$ReturnMaterialCopyWithImpl<$Res, $Val extends ReturnMaterial>
     Object? outsidePolicy = null,
     Object? bonusItems = null,
     Object? isMarketPlace = null,
+    Object? wareHouseStorageCondition = null,
   }) {
     return _then(_value.copyWith(
       balanceQuantity: null == balanceQuantity
@@ -172,6 +176,10 @@ class _$ReturnMaterialCopyWithImpl<$Res, $Val extends ReturnMaterial>
           ? _value.isMarketPlace
           : isMarketPlace // ignore: cast_nullable_to_non_nullable
               as bool,
+      wareHouseStorageCondition: null == wareHouseStorageCondition
+          ? _value.wareHouseStorageCondition
+          : wareHouseStorageCondition // ignore: cast_nullable_to_non_nullable
+              as StorageCondition,
     ) as $Val);
   }
 }
@@ -202,7 +210,8 @@ abstract class _$$ReturnMaterialImplCopyWith<$Res>
       DateTimeStringValue priceDate,
       bool outsidePolicy,
       List<ReturnMaterial> bonusItems,
-      bool isMarketPlace});
+      bool isMarketPlace,
+      StorageCondition wareHouseStorageCondition});
 }
 
 /// @nodoc
@@ -234,6 +243,7 @@ class __$$ReturnMaterialImplCopyWithImpl<$Res>
     Object? outsidePolicy = null,
     Object? bonusItems = null,
     Object? isMarketPlace = null,
+    Object? wareHouseStorageCondition = null,
   }) {
     return _then(_$ReturnMaterialImpl(
       balanceQuantity: null == balanceQuantity
@@ -308,6 +318,10 @@ class __$$ReturnMaterialImplCopyWithImpl<$Res>
           ? _value.isMarketPlace
           : isMarketPlace // ignore: cast_nullable_to_non_nullable
               as bool,
+      wareHouseStorageCondition: null == wareHouseStorageCondition
+          ? _value.wareHouseStorageCondition
+          : wareHouseStorageCondition // ignore: cast_nullable_to_non_nullable
+              as StorageCondition,
     ));
   }
 }
@@ -333,7 +347,8 @@ class _$ReturnMaterialImpl extends _ReturnMaterial {
       required this.priceDate,
       required this.outsidePolicy,
       required final List<ReturnMaterial> bonusItems,
-      required this.isMarketPlace})
+      required this.isMarketPlace,
+      required this.wareHouseStorageCondition})
       : _bonusItems = bonusItems,
         super._();
 
@@ -379,10 +394,12 @@ class _$ReturnMaterialImpl extends _ReturnMaterial {
 
   @override
   final bool isMarketPlace;
+  @override
+  final StorageCondition wareHouseStorageCondition;
 
   @override
   String toString() {
-    return 'ReturnMaterial(balanceQuantity: $balanceQuantity, targetQuantity: $targetQuantity, unitPrice: $unitPrice, totalPrice: $totalPrice, materialNumber: $materialNumber, materialDescription: $materialDescription, defaultMaterialDescription: $defaultMaterialDescription, itemNumber: $itemNumber, batch: $batch, eligibleForReturn: $eligibleForReturn, assignmentNumber: $assignmentNumber, principalCode: $principalCode, principalName: $principalName, expiryDate: $expiryDate, priceDate: $priceDate, outsidePolicy: $outsidePolicy, bonusItems: $bonusItems, isMarketPlace: $isMarketPlace)';
+    return 'ReturnMaterial(balanceQuantity: $balanceQuantity, targetQuantity: $targetQuantity, unitPrice: $unitPrice, totalPrice: $totalPrice, materialNumber: $materialNumber, materialDescription: $materialDescription, defaultMaterialDescription: $defaultMaterialDescription, itemNumber: $itemNumber, batch: $batch, eligibleForReturn: $eligibleForReturn, assignmentNumber: $assignmentNumber, principalCode: $principalCode, principalName: $principalName, expiryDate: $expiryDate, priceDate: $priceDate, outsidePolicy: $outsidePolicy, bonusItems: $bonusItems, isMarketPlace: $isMarketPlace, wareHouseStorageCondition: $wareHouseStorageCondition)';
   }
 
   @override
@@ -426,30 +443,35 @@ class _$ReturnMaterialImpl extends _ReturnMaterial {
             const DeepCollectionEquality()
                 .equals(other._bonusItems, _bonusItems) &&
             (identical(other.isMarketPlace, isMarketPlace) ||
-                other.isMarketPlace == isMarketPlace));
+                other.isMarketPlace == isMarketPlace) &&
+            (identical(other.wareHouseStorageCondition,
+                    wareHouseStorageCondition) ||
+                other.wareHouseStorageCondition == wareHouseStorageCondition));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      balanceQuantity,
-      targetQuantity,
-      unitPrice,
-      totalPrice,
-      materialNumber,
-      materialDescription,
-      defaultMaterialDescription,
-      itemNumber,
-      batch,
-      eligibleForReturn,
-      assignmentNumber,
-      principalCode,
-      principalName,
-      expiryDate,
-      priceDate,
-      outsidePolicy,
-      const DeepCollectionEquality().hash(_bonusItems),
-      isMarketPlace);
+  int get hashCode => Object.hashAll([
+        runtimeType,
+        balanceQuantity,
+        targetQuantity,
+        unitPrice,
+        totalPrice,
+        materialNumber,
+        materialDescription,
+        defaultMaterialDescription,
+        itemNumber,
+        batch,
+        eligibleForReturn,
+        assignmentNumber,
+        principalCode,
+        principalName,
+        expiryDate,
+        priceDate,
+        outsidePolicy,
+        const DeepCollectionEquality().hash(_bonusItems),
+        isMarketPlace,
+        wareHouseStorageCondition
+      ]);
 
   @JsonKey(ignore: true)
   @override
@@ -461,24 +483,26 @@ class _$ReturnMaterialImpl extends _ReturnMaterial {
 
 abstract class _ReturnMaterial extends ReturnMaterial {
   const factory _ReturnMaterial(
-      {required final IntegerValue balanceQuantity,
-      required final IntegerValue targetQuantity,
-      required final RangeValue unitPrice,
-      required final RangeValue totalPrice,
-      required final MaterialNumber materialNumber,
-      required final String materialDescription,
-      required final String defaultMaterialDescription,
-      required final String itemNumber,
-      required final String batch,
-      required final bool eligibleForReturn,
-      required final String assignmentNumber,
-      required final PrincipalCode principalCode,
-      required final PrincipalName principalName,
-      required final DateTimeStringValue expiryDate,
-      required final DateTimeStringValue priceDate,
-      required final bool outsidePolicy,
-      required final List<ReturnMaterial> bonusItems,
-      required final bool isMarketPlace}) = _$ReturnMaterialImpl;
+          {required final IntegerValue balanceQuantity,
+          required final IntegerValue targetQuantity,
+          required final RangeValue unitPrice,
+          required final RangeValue totalPrice,
+          required final MaterialNumber materialNumber,
+          required final String materialDescription,
+          required final String defaultMaterialDescription,
+          required final String itemNumber,
+          required final String batch,
+          required final bool eligibleForReturn,
+          required final String assignmentNumber,
+          required final PrincipalCode principalCode,
+          required final PrincipalName principalName,
+          required final DateTimeStringValue expiryDate,
+          required final DateTimeStringValue priceDate,
+          required final bool outsidePolicy,
+          required final List<ReturnMaterial> bonusItems,
+          required final bool isMarketPlace,
+          required final StorageCondition wareHouseStorageCondition}) =
+      _$ReturnMaterialImpl;
   const _ReturnMaterial._() : super._();
 
   @override
@@ -517,6 +541,8 @@ abstract class _ReturnMaterial extends ReturnMaterial {
   List<ReturnMaterial> get bonusItems;
   @override
   bool get isMarketPlace;
+  @override
+  StorageCondition get wareHouseStorageCondition;
   @override
   @JsonKey(ignore: true)
   _$$ReturnMaterialImplCopyWith<_$ReturnMaterialImpl> get copyWith =>

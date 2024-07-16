@@ -55,6 +55,8 @@ mixin _$ReturnItemDto {
   bool get isMarketPlace => throw _privateConstructorUsedError;
   @JsonKey(name: 'lineItemNumber', defaultValue: '')
   String get lineItemNumber => throw _privateConstructorUsedError;
+  @JsonKey(name: 'wareHouseStorageCondition', defaultValue: '')
+  String get wareHouseStorageCondition => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -89,8 +91,9 @@ abstract class $ReturnItemDtoCopyWith<$Res> {
           defaultValue: false,
           readValue: JsonReadValueHelper.mappingIsMarketPlace)
       bool isMarketPlace,
-      @JsonKey(name: 'lineItemNumber', defaultValue: '')
-      String lineItemNumber});
+      @JsonKey(name: 'lineItemNumber', defaultValue: '') String lineItemNumber,
+      @JsonKey(name: 'wareHouseStorageCondition', defaultValue: '')
+      String wareHouseStorageCondition});
 }
 
 /// @nodoc
@@ -123,6 +126,7 @@ class _$ReturnItemDtoCopyWithImpl<$Res, $Val extends ReturnItemDto>
     Object? prsfd = null,
     Object? isMarketPlace = null,
     Object? lineItemNumber = null,
+    Object? wareHouseStorageCondition = null,
   }) {
     return _then(_value.copyWith(
       requestId: null == requestId
@@ -193,6 +197,10 @@ class _$ReturnItemDtoCopyWithImpl<$Res, $Val extends ReturnItemDto>
           ? _value.lineItemNumber
           : lineItemNumber // ignore: cast_nullable_to_non_nullable
               as String,
+      wareHouseStorageCondition: null == wareHouseStorageCondition
+          ? _value.wareHouseStorageCondition
+          : wareHouseStorageCondition // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
@@ -226,8 +234,9 @@ abstract class _$$ReturnItemDtoImplCopyWith<$Res>
           defaultValue: false,
           readValue: JsonReadValueHelper.mappingIsMarketPlace)
       bool isMarketPlace,
-      @JsonKey(name: 'lineItemNumber', defaultValue: '')
-      String lineItemNumber});
+      @JsonKey(name: 'lineItemNumber', defaultValue: '') String lineItemNumber,
+      @JsonKey(name: 'wareHouseStorageCondition', defaultValue: '')
+      String wareHouseStorageCondition});
 }
 
 /// @nodoc
@@ -258,6 +267,7 @@ class __$$ReturnItemDtoImplCopyWithImpl<$Res>
     Object? prsfd = null,
     Object? isMarketPlace = null,
     Object? lineItemNumber = null,
+    Object? wareHouseStorageCondition = null,
   }) {
     return _then(_$ReturnItemDtoImpl(
       requestId: null == requestId
@@ -328,6 +338,10 @@ class __$$ReturnItemDtoImplCopyWithImpl<$Res>
           ? _value.lineItemNumber
           : lineItemNumber // ignore: cast_nullable_to_non_nullable
               as String,
+      wareHouseStorageCondition: null == wareHouseStorageCondition
+          ? _value.wareHouseStorageCondition
+          : wareHouseStorageCondition // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -361,7 +375,9 @@ class _$ReturnItemDtoImpl extends _ReturnItemDto {
           readValue: JsonReadValueHelper.mappingIsMarketPlace)
       required this.isMarketPlace,
       @JsonKey(name: 'lineItemNumber', defaultValue: '')
-      required this.lineItemNumber})
+      required this.lineItemNumber,
+      @JsonKey(name: 'wareHouseStorageCondition', defaultValue: '')
+      required this.wareHouseStorageCondition})
       : super._();
 
   factory _$ReturnItemDtoImpl.fromJson(Map<String, dynamic> json) =>
@@ -419,10 +435,13 @@ class _$ReturnItemDtoImpl extends _ReturnItemDto {
   @override
   @JsonKey(name: 'lineItemNumber', defaultValue: '')
   final String lineItemNumber;
+  @override
+  @JsonKey(name: 'wareHouseStorageCondition', defaultValue: '')
+  final String wareHouseStorageCondition;
 
   @override
   String toString() {
-    return 'ReturnItemDto(requestId: $requestId, requestDate: $requestDate, itemQty: $itemQty, totalPrice: $totalPrice, status: $status, materialNumber: $materialNumber, materialName: $materialName, defaultMaterialDescription: $defaultMaterialDescription, orderNumber: $orderNumber, invoiceID: $invoiceID, customerName: $customerName, batch: $batch, outsidePolicy: $outsidePolicy, expiry: $expiry, prsfd: $prsfd, isMarketPlace: $isMarketPlace, lineItemNumber: $lineItemNumber)';
+    return 'ReturnItemDto(requestId: $requestId, requestDate: $requestDate, itemQty: $itemQty, totalPrice: $totalPrice, status: $status, materialNumber: $materialNumber, materialName: $materialName, defaultMaterialDescription: $defaultMaterialDescription, orderNumber: $orderNumber, invoiceID: $invoiceID, customerName: $customerName, batch: $batch, outsidePolicy: $outsidePolicy, expiry: $expiry, prsfd: $prsfd, isMarketPlace: $isMarketPlace, lineItemNumber: $lineItemNumber, wareHouseStorageCondition: $wareHouseStorageCondition)';
   }
 
   @override
@@ -460,7 +479,10 @@ class _$ReturnItemDtoImpl extends _ReturnItemDto {
             (identical(other.isMarketPlace, isMarketPlace) ||
                 other.isMarketPlace == isMarketPlace) &&
             (identical(other.lineItemNumber, lineItemNumber) ||
-                other.lineItemNumber == lineItemNumber));
+                other.lineItemNumber == lineItemNumber) &&
+            (identical(other.wareHouseStorageCondition,
+                    wareHouseStorageCondition) ||
+                other.wareHouseStorageCondition == wareHouseStorageCondition));
   }
 
   @JsonKey(ignore: true)
@@ -483,7 +505,8 @@ class _$ReturnItemDtoImpl extends _ReturnItemDto {
       expiry,
       prsfd,
       isMarketPlace,
-      lineItemNumber);
+      lineItemNumber,
+      wareHouseStorageCondition);
 
   @JsonKey(ignore: true)
   @override
@@ -532,7 +555,9 @@ abstract class _ReturnItemDto extends ReturnItemDto {
           readValue: JsonReadValueHelper.mappingIsMarketPlace)
       required final bool isMarketPlace,
       @JsonKey(name: 'lineItemNumber', defaultValue: '')
-      required final String lineItemNumber}) = _$ReturnItemDtoImpl;
+      required final String lineItemNumber,
+      @JsonKey(name: 'wareHouseStorageCondition', defaultValue: '')
+      required final String wareHouseStorageCondition}) = _$ReturnItemDtoImpl;
   const _ReturnItemDto._() : super._();
 
   factory _ReturnItemDto.fromJson(Map<String, dynamic> json) =
@@ -590,6 +615,9 @@ abstract class _ReturnItemDto extends ReturnItemDto {
   @override
   @JsonKey(name: 'lineItemNumber', defaultValue: '')
   String get lineItemNumber;
+  @override
+  @JsonKey(name: 'wareHouseStorageCondition', defaultValue: '')
+  String get wareHouseStorageCondition;
   @override
   @JsonKey(ignore: true)
   _$$ReturnItemDtoImplCopyWith<_$ReturnItemDtoImpl> get copyWith =>

@@ -15,6 +15,7 @@ fragment MaterialsFields on returnMaterialInformation {
     expiryDate
     itemNumber
     outsidePolicy
+    wareHouseStorageCondition
     bonusItem {
       assignmentNumber
       material
@@ -30,6 +31,7 @@ fragment MaterialsFields on returnMaterialInformation {
       expiryDate
       itemNumber
       outsidePolicy
+      wareHouseStorageCondition
     }
   }
 }

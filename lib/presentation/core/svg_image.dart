@@ -47,4 +47,6 @@ abstract class SvgImage {
       '${_basePath}standard_delivery_icon.svg';
   static const String requestDateDeliveryIcon =
       '${_basePath}request_date_delivery_icon.svg';
+  static const String deviceThermostatIcon =
+      '${_basePath}device_thermostat.svg';
 }

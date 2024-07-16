@@ -42,6 +42,7 @@ class ReturnRequestInformation with _$ReturnRequestInformation {
     required int initialQuantity,
     required List<PriceOverrideTrail> priceOverrideTrail,
     required bool isMarketPlace,
+    required StorageCondition wareHouseStorageCondition,
   }) = _ReturnRequestInformation;
 
   factory ReturnRequestInformation.empty() => ReturnRequestInformation(
@@ -78,6 +79,7 @@ class ReturnRequestInformation with _$ReturnRequestInformation {
         initialQuantity: 0,
         priceOverrideTrail: <PriceOverrideTrail>[],
         isMarketPlace: false,
+        wareHouseStorageCondition: StorageCondition(''),
       );
 
   double get calculatedUnitPrice {
