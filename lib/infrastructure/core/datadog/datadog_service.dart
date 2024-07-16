@@ -51,6 +51,7 @@ class DatadogService {
         apiUrlWithoutHttps: {TracingHeaderType.tracecontext},
         apiUrlWithoutHttps: {TracingHeaderType.datadog},
       },
+      service: config.datadogServiceName,
     );
     configuration.enableHttpTracking();
   }
@@ -61,6 +62,10 @@ class DatadogService {
       name: user.username.getOrDefaultValue(''),
       email: user.email.getOrDefaultValue(''),
     );
+  }
+
+  void addRumAttribute({required String key, required String value}) {
+    DatadogSdk.instance.rum?.addAttribute(key, value);
   }
 
   DatadogLogger? get logs =>

@@ -245,6 +245,7 @@ class Config {
   //============================================================
 
   DatadogSite get datadogSite => DatadogSite.eu1;
+  String get datadogServiceName => 'ezrx_plus_mobile';
 
   bool get enableDatadog => appFlavor == Flavor.prod;
 

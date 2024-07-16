@@ -493,7 +493,9 @@ void setupLocator() {
   );
 
   locator.registerLazySingleton(
-    () => DatadogInterceptor(datadogService: locator<DatadogService>()),
+    () => DatadogInterceptor(
+      datadogService: locator<DatadogService>(),
+    ),
   );
 
   locator.registerLazySingleton(
