@@ -195,6 +195,13 @@ class LoginRobot extends CommonRobot {
     expect(loginWithSSO, isVisible ? findsOneWidget : findsNothing);
   }
 
+  Future<void> findAnnouncementBanner(String market) async {
+    final announcementBanner = find.byKey(WidgetKeys.announcementBanner);
+    await scrollEnsureFinderVisible(announcementBanner.first);
+    expect(announcementBanner, findsAtLeastNWidgets(1));
+    // TODO: handle another market here if needed
+  }
+
   Future<void> tapToCloseAnnouncementBanner() async {
     var closeButtonFinder = find.byKey(WidgetKeys.closeAnnouncementBanner);
 

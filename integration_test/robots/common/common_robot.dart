@@ -325,6 +325,11 @@ class CommonRobot {
   //  Announcement/Alert Banner/dialog
   //============================================================
 
+  Future<void> findAnnouncementAlertDialog(String market) async{
+    final announceAlertDialog = find.byKey(WidgetKeys.announcementBottomSheet);
+    expect(announceAlertDialog, findsOneWidget);
+  }
+
   Future<void> closeAnnouncementAlertDialog() async {
     //close dialog if present
     final closeAlertDialog = find.byKey(WidgetKeys.closeAlertDialog);

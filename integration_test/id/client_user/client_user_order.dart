@@ -89,7 +89,7 @@ void main() {
     smallOrderFeeRobot = SmallOrderFeeRobot(tester);
   }
 
-  const marketMalaysia = 'Indonesia';
+  const marketIndonesia = 'Indonesia';
   const username = 'idclientuser';
   const password = 'St@ysafe01';
   const customerCode = '0000100164';
@@ -148,7 +148,7 @@ void main() {
     initializeRobot(tester);
     await runAppForTesting(tester);
     if (loginRobot.isLoginPage) {
-      await loginRobot.loginToHomeScreen(username, password, marketMalaysia);
+      await loginRobot.loginToHomeScreen(username, password, marketIndonesia);
       await customerSearchRobot.waitForCustomerCodePageToLoad();
       await customerSearchRobot.selectCustomerSearch(shipToCode);
       await commonRobot.dismissSnackbar(dismissAll: true);
@@ -202,6 +202,37 @@ void main() {
       await oosPreOrderRobot.tapContinueButton();
     }
   }
+
+  group('Announcement Banner -', () {
+
+    Future<void> pumpAppInitialState(WidgetTester tester) async {
+      initializeRobot(tester);
+      await runAppForTesting(tester);
+      await loginRobot.tapToCloseAnnouncementBanner();
+    }
+
+    testWidgets('EZRX-T24121 | Integration with CMS- Maintenance Banner | find Banner in login',
+            (tester) async {
+      await pumpAppInitialState(tester);
+
+      //select market
+      await loginRobot.findMarketSelector();
+      await loginRobot.tapToMarketSelector();
+      await loginRobot.selectMarket(marketIndonesia);
+      await loginRobot.findAnnouncementBanner(marketIndonesia);
+    });
+
+    testWidgets('EZRX-T24121 | Integration with CMS- Maintenance Banner | find banner in home',
+            (tester) async {
+      await pumpAppInitialState(tester);
+      await loginRobot.loginToHomeScreen(username, password, marketIndonesia);
+      await customerSearchRobot.waitForCustomerCodePageToLoad();
+      await customerSearchRobot.selectCustomerSearch(shipToCode);
+      await commonRobot.dismissSnackbar(dismissAll: true);
+      await commonRobot.findAnnouncementAlertDialog(marketIndonesia);
+      await commonRobot.closeAnnouncementAlertDialog();
+    });
+  });
 
   group('Home Tab - ', () {
     testWidgets(
