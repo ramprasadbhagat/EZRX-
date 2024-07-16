@@ -7,6 +7,7 @@ import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/order/entities/view_by_order_filter.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/locator.dart';
+import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
@@ -107,17 +108,8 @@ class OrderNumberSection extends StatelessWidget {
                                       .invoiceDetailsOrderNumberButton,
                                   padding: EdgeInsets.zero,
                                   constraints: const BoxConstraints(),
-                                  onPressed: () => context
-                                      .read<ViewByOrderBloc>()
-                                      .add(
-                                        ViewByOrderEvent.fetch(
-                                          filter: ViewByOrdersFilter.empty(),
-                                          searchKey: SearchKey.search(
-                                            orderNumber,
-                                          ),
-                                          isDetailsPage: true,
-                                        ),
-                                      ),
+                                  onPressed: () =>
+                                      _navigateToDetailsPage(context),
                                   icon: const Icon(
                                     Icons.open_in_new,
                                     color: ZPColors.attachmentColor,
@@ -141,5 +133,30 @@ class OrderNumberSection extends StatelessWidget {
               ),
       ],
     );
+  }
+
+  void _navigateToDetailsPage(BuildContext context) {
+    if (context.read<EligibilityBloc>().state.user.userCanAccessOrderHistory) {
+      context.read<ViewByOrderBloc>().add(
+            ViewByOrderEvent.fetch(
+              filter: ViewByOrdersFilter.empty(),
+              searchKey: SearchKey.search(
+                orderNumber,
+              ),
+              isDetailsPage: true,
+            ),
+          );
+    } else {
+      CustomSnackBar(
+        icon: const Icon(
+          Icons.info,
+          color: ZPColors.error,
+        ),
+        backgroundColor: ZPColors.errorSnackBarColor,
+        messageText: context.tr(
+          'You do not have access to view this order',
+        ),
+      ).show(context);
+    }
   }
 }
