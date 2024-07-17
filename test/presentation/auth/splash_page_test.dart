@@ -1629,6 +1629,47 @@ void main() {
           findsOneWidget,
         );
       });
+
+      testWidgets(
+          'Unable to Redirect to Order Details Page, if don\'t have access - success',
+          (tester) async {
+        final link = Uri.parse(
+          'https://uat-mm.ezrx.com/product-listing?manufacturer=Daiichi+Sankyo+%28Thailand%29+Ltd',
+        );
+
+        final expectedDeepLinkStates = [
+          const DeepLinkingState.initial(),
+          DeepLinkingState.linkPending(
+            EzrxLink(link.toString()),
+          ),
+          DeepLinkingState.redirectOrderDetail(
+            OrderNumber('fake-order-number'),
+          ),
+        ];
+        whenListen(
+          deepLinkingBlocMock,
+          Stream.fromIterable(expectedDeepLinkStates),
+        );
+
+        when(() => eligibilityBlocMock.state).thenAnswer(
+          (invocation) => EligibilityState.initial().copyWith(
+            shipToInfo: fakeShipToInfo,
+            customerCodeInfo: fakeCustomerCodeInfo,
+            salesOrganisation: fakeTWSalesOrganisation,
+            user: fakeUser, //internal sales rep
+          ),
+        );
+        await getWidget(tester);
+        await tester.pumpAndSettle();
+
+        expect(
+          find.descendant(
+            of: find.byType(CustomSnackBar),
+            matching: find.text('You do not have access to view this order'),
+          ),
+          findsOneWidget,
+        );
+      });
     });
 
     testWidgets(

@@ -826,11 +826,6 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
         BlocListener<DeepLinkingBloc, DeepLinkingState>(
           listener: (context, state) {
             final eligibilityState = context.read<EligibilityBloc>().state;
-            final noAccessSnackbar = CustomSnackBar(
-              icon: const Icon(Icons.info, color: ZPColors.error),
-              backgroundColor: ZPColors.errorSnackBarColor,
-              messageText: context.tr("You don't have access"),
-            );
 
             state.when(
               initial: () {},
@@ -876,7 +871,7 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                     ),
                   );
                 } else {
-                  noAccessSnackbar.show(context);
+                  _showNoAccessSnackbar();
                 }
               },
               redirectBundleDetail: (materialNumber, banner) {
@@ -892,7 +887,7 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                     ),
                   );
                 } else {
-                  noAccessSnackbar.show(context);
+                  _showNoAccessSnackbar();
                 }
               },
               redirectProductsTab: (searchKey, materialFilter) {
@@ -912,7 +907,7 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
 
                   context.navigateTo(const ProductsTabRoute());
                 } else {
-                  noAccessSnackbar.show(context);
+                  _showNoAccessSnackbar();
                 }
               },
               redirectOrderDetail: (orderNumber) {
@@ -923,7 +918,7 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
 
                   context.router.push(const ViewByOrderDetailsPageRoute());
                 } else {
-                  noAccessSnackbar.show(context);
+                  _showNoAccessSnackbar(isOrder: true);
                 }
               },
               redirectReturnDetail: (returnId) {
@@ -936,7 +931,7 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                   //Navigate to return Detail Page
                   context.router.push(const ReturnRequestDetailsRoute());
                 } else {
-                  noAccessSnackbar.show(context);
+                  _showNoAccessSnackbar();
                 }
               },
               redirectPaymentDetail: (paymentIdentifierInfo, isMarketPlace) {
@@ -956,14 +951,14 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                     ),
                   );
                 } else {
-                  noAccessSnackbar.show(context);
+                  _showNoAccessSnackbar();
                 }
               },
               redirectZPPaymentHome: () {
                 if (eligibilityState.isPaymentEnabled) {
                   context.router.push(PaymentPageRoute(isMarketPlace: false));
                 } else {
-                  noAccessSnackbar.show(context);
+                  _showNoAccessSnackbar();
                 }
               },
               redirectMPPaymentHome: () {
@@ -971,7 +966,7 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                     eligibilityState.marketPlacePaymentEligible) {
                   context.router.push(PaymentPageRoute(isMarketPlace: true));
                 } else {
-                  noAccessSnackbar.show(context);
+                  _showNoAccessSnackbar();
                 }
               },
               redirectInvoiceDetail: (invoiceNumber, isMarketPlace) {
@@ -986,7 +981,7 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                     InvoiceDetailsPageRoute(isMarketPlace: isMarketPlace),
                   );
                 } else {
-                  noAccessSnackbar.show(context);
+                  _showNoAccessSnackbar();
                 }
               },
               redirectFAQ: () {
@@ -1396,6 +1391,18 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
     context.read<AnnouncementBloc>().add(
           const AnnouncementEvent.clearBannerId(),
         );
+  }
+
+  void _showNoAccessSnackbar({bool isOrder = false}) {
+    CustomSnackBar(
+      icon: const Icon(Icons.info, color: ZPColors.error),
+      backgroundColor: ZPColors.errorSnackBarColor,
+      messageText: context.tr(
+        isOrder
+            ? 'You do not have access to view this order'
+            : "You don't have access",
+      ),
+    ).show(context);
   }
 }
 
