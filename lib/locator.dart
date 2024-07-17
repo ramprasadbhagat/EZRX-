@@ -4,6 +4,7 @@ import 'package:ezrxmobile/application/account/customer_code/customer_code_bloc.
 import 'package:ezrxmobile/application/account/customer_license_bloc/customer_license_bloc.dart';
 import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/account/ez_point/ez_point_bloc.dart';
+import 'package:ezrxmobile/application/account/national_privacy_commission/national_privacy_commission_bloc.dart';
 import 'package:ezrxmobile/application/account/notification_settings/notification_settings_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/sales_rep/sales_rep_bloc.dart';
@@ -2895,6 +2896,18 @@ void setupLocator() {
       eZPointRepository: locator<EZPointRepository>(),
     ),
   );
+
+  //============================================================
+  //  National Privacy Commission
+  //
+  //============================================================
+
+  locator.registerFactory(
+    () => NationalPrivacyCommissionBloc(
+      poAttachmentRepository: locator<PoAttachmentRepository>(),
+    ),
+  );
+
   //============================================================
   //  Notification Settings
   //

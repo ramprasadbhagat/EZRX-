@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:ezrxmobile/infrastructure/payments/dtos/e_credit_invoice_dto.dart';
+import 'package:ezrxmobile/presentation/core/png_image.dart';
 import 'package:flutter/services.dart';
 
 import 'package:ezrxmobile/domain/core/attachment_files/entities/attachment_file_buffer.dart';
@@ -37,7 +38,7 @@ class DownloadPaymentAttachmentLocalDataSource {
   }
 
   Future<AttachmentFileBuffer> fileDownload() async {
-    final data = await rootBundle.load('assets/images/splash.png');
+    final data = await rootBundle.load(PngImage.splash);
 
     return AttachmentFileBuffer(
       name: 'paymentAttachments',
@@ -46,7 +47,7 @@ class DownloadPaymentAttachmentLocalDataSource {
   }
 
   Future<AttachmentFileBuffer> soaDownload() async {
-    final data = await rootBundle.load('assets/images/splash.png');
+    final data = await rootBundle.load(PngImage.splash);
 
     return AttachmentFileBuffer(
       name: 'paymentAttachments',
@@ -55,7 +56,7 @@ class DownloadPaymentAttachmentLocalDataSource {
   }
 
   Future<AttachmentFileBuffer> eInvoiceDownload() async {
-    final data = await rootBundle.load('assets/images/splash.png');
+    final data = await rootBundle.load(PngImage.splash);
 
     return AttachmentFileBuffer(
       name: 'paymentAttachments',

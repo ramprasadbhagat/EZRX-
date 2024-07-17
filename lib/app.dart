@@ -3,6 +3,7 @@ import 'package:datadog_flutter_plugin/datadog_flutter_plugin.dart';
 import 'package:ezrxmobile/application/about_us/about_us_bloc.dart';
 import 'package:ezrxmobile/application/account/customer_license_bloc/customer_license_bloc.dart';
 import 'package:ezrxmobile/application/account/ez_point/ez_point_bloc.dart';
+import 'package:ezrxmobile/application/account/national_privacy_commission/national_privacy_commission_bloc.dart';
 import 'package:ezrxmobile/application/account/notification_settings/notification_settings_bloc.dart';
 import 'package:ezrxmobile/application/account/settings/setting_bloc.dart';
 import 'package:ezrxmobile/application/announcement_info/announcement_filter/announcement_filter_bloc.dart';
@@ -525,6 +526,9 @@ class App extends StatelessWidget {
         ),
         BlocProvider<AboutUsBloc>(
           create: (context) => locator<AboutUsBloc>(),
+        ),
+        BlocProvider<NationalPrivacyCommissionBloc>(
+          create: (context) => locator<NationalPrivacyCommissionBloc>(),
         ),
       ],
       child: MaterialApp.router(

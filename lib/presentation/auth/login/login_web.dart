@@ -14,6 +14,7 @@ import 'package:ezrxmobile/presentation/auth/login/common/password_field.dart';
 import 'package:ezrxmobile/presentation/auth/login/common/remember_password.dart';
 import 'package:ezrxmobile/presentation/auth/login/common/username_field.dart';
 import 'package:ezrxmobile/presentation/core/chatbot/chatbot_widget.dart';
+import 'package:ezrxmobile/presentation/core/png_image.dart';
 import 'package:ezrxmobile/presentation/core/responsive.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
@@ -72,7 +73,7 @@ class _LoginBanner extends StatelessWidget {
     return Stack(
       children: [
         Image.asset(
-          'assets/images/login_banner_web.png',
+          PngImage.loginBannerWeb,
           fit: BoxFit.cover,
           width: width,
           height: height,

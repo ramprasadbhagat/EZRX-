@@ -3,6 +3,7 @@ import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/application/account/user/user_bloc.dart';
 import 'package:ezrxmobile/application/intro/intro_bloc.dart';
+import 'package:ezrxmobile/presentation/core/png_image.dart';
 import 'package:ezrxmobile/presentation/intro/intro_object.dart';
 import 'package:ezrxmobile/presentation/intro/intro_step.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
@@ -131,7 +132,7 @@ class _IntroPageState extends State<IntroPage> {
                       decoration: const BoxDecoration(
                         image: DecorationImage(
                           image: AssetImage(
-                            'assets/images/intro_background.png',
+                            PngImage.introBackground,
                           ),
                           fit: BoxFit.cover,
                         ),

@@ -33,4 +33,8 @@ abstract class IpoAttachmentRepository {
   Future<Either<ApiFailure, bool>> deleteFile({
     required String filePath,
   });
+
+  Future<Either<ApiFailure, bool>> saveAssetImagesToGallery({
+    required List<String> fileList,
+  });
 }

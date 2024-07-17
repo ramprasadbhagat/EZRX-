@@ -108,6 +108,7 @@ dependencies:
   ymchat_flutter: ^2.13.0
   dropdown_button2: ^2.3.9
   keyboard_actions: ^4.2.0
+  image_gallery_saver: ^2.0.0
 
 dev_dependencies:
   flutter_test:
@@ -167,6 +168,7 @@ flutter:
     - assets/images/
     - assets/images/data/
     - assets/images/default_banners/
+    - assets/images/seals/
     - assets/json/
     - assets/langs/
     - assets/html/

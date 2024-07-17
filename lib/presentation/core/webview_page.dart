@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
+import 'package:ezrxmobile/presentation/core/png_image.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
@@ -52,7 +53,7 @@ class WebViewPageState extends State<WebViewPage> {
                       MediaQuery.of(context).size.height * 0.1,
                     ),
                     child: Image.asset(
-                      'assets/images/error.png',
+                      PngImage.error,
                     ),
                   ),
                 )

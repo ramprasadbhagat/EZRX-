@@ -94,6 +94,8 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>App wants to access library to save pictures</string>
 	<key>NSCameraUsageDescription</key>
 	<string>App wants to access camera to scan the barcode and take document picture</string>
 	<key>NSFaceIDUsageDescription</key>

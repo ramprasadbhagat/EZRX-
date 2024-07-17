@@ -336,4 +336,30 @@ class PoAttachmentRepository implements IpoAttachmentRepository {
       );
     }
   }
+
+  @override
+  Future<Either<ApiFailure, bool>> saveAssetImagesToGallery({
+    required List<String> fileList,
+  }) async {
+    try {
+      if (defaultTargetPlatform == TargetPlatform.iOS) {
+        final permissionStatus =
+            await permissionService.requestAddPhotoPermission();
+        if (permissionStatus != PermissionStatus.granted &&
+            permissionStatus != PermissionStatus.limited) {
+          return const Left(ApiFailure.photoPermissionFailed());
+        }
+      }
+
+      for (final assetPath in fileList) {
+        await fileSystemHelper.saveAssetImageToGallery(assetPath);
+      }
+
+      return const Right(true);
+    } catch (e) {
+      return Left(
+        FailureHandler.handleFailure(e),
+      );
+    }
+  }
 }

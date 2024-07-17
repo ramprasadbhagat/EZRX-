@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
+import 'package:ezrxmobile/presentation/core/png_image.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_cached_pdfview/flutter_cached_pdfview.dart';
@@ -48,7 +49,7 @@ class PdfViewPage extends StatelessWidget {
                 MediaQuery.of(context).size.height * 0.1,
               ),
               child: Image.asset(
-                'assets/images/error.png',
+                PngImage.error,
               ),
             ),
           ),

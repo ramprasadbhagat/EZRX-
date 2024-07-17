@@ -9,4 +9,7 @@ class PermissionService {
 
   Future<PermissionStatus> requestCameraPermission() async =>
       await Permission.camera.request();
+
+  Future<PermissionStatus> requestAddPhotoPermission() async =>
+      await Permission.photosAddOnly.request();
 }

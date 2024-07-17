@@ -202,6 +202,8 @@ class WidgetKeys {
   static const Key contactUsTile = Key('contactUsTile');
   static const Key acceptableUsePolicy = Key('acceptableUsePolicy');
   static const Key userGuideTile = Key('userGuideTile');
+  static const Key nationalPrivacyCommissionTile =
+      Key('nationalPrivacyCommissionTile');
   static const Key proxyLoginUserNameField = Key('proxyLoginUserNameField');
   static const Key proxyLoginButton = Key('proxyLoginButton');
   static const Key proxyLoginSheet = Key('proxyLoginSheet');
@@ -1650,6 +1652,12 @@ class WidgetKeys {
   //============================================================
   static Key chatBotFloatingActionButton =
       const Key('chatBotFloatingActionButton');
+
+  //============================================================
+  // National Privacy Commission Page
+  //============================================================
+  static Key nationalPrivacyCommissionPage =
+      const Key('nationalPrivacyCommissionPage');
 
   //============================================================
   // Payment advice Page
