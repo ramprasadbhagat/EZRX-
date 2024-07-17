@@ -250,6 +250,15 @@ class ReturnsByItemsRobot extends CommonRobot {
     await tester.pumpAndSettle();
   }
 
+  Future<void> tapFirstReturnBonusItem() async {
+    final firstBonusItem = find.descendant(
+      of: item,
+      matching: find.byKey(WidgetKeys.returnItemTileBonusTag).first,
+    );
+    await tester.tap(firstBonusItem);
+    await tester.pumpAndSettle();
+  }
+
   Future<void> tapReturnWithMaterialNumber(String materialNumber) async {
     final materialNumberLabel = find.byWidgetPredicate(
       (w) =>

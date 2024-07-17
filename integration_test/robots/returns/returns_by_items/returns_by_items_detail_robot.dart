@@ -4,6 +4,7 @@ import 'package:ezrxmobile/presentation/core/market_place/market_place_logo.dart
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/returns/return_summary_by_item_details/return_summary_by_item_details.dart';
 import 'package:ezrxmobile/presentation/returns/widgets/return_item_card.dart';
+import 'package:ezrxmobile/presentation/returns/widgets/return_override_info_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -279,5 +280,47 @@ class ReturnsByItemsDetailRobot extends CommonRobot {
   void verifyCopyTextVisible() {
     final copyButtonText = tester.widget<Text>(copyButton).data;
     expect(copyButtonText, 'Copy'.tr());
+  }
+
+  Future<void> verifyApproverUpdatedTag() async {
+    await scrollEnsureFinderVisible(_approvalUpdateFiner);
+    expect(_approvalUpdateFiner, findsOne);
+  }
+
+  Future<void> tapApproverUpdatedTag() async {
+    await tester.tap(_approvalUpdateFiner);
+    await tester.pump(Durations.long2);
+  }
+
+  void verifyApproverQuantityChangeInfo() {
+    final sheetFinder = find.byKey(WidgetKeys.returnSummaryInfoBottomSheet);
+    expect(
+      find.descendant(
+        of: sheetFinder,
+        matching: find.textContaining('Request Return quantity :'.tr()),
+      ),
+      findsOne,
+    );
+    expect(
+      find.descendant(
+        of: sheetFinder,
+        matching: find.text('Approver updated the QTY'.tr()),
+      ),
+      findsOne,
+    );
+  }
+
+  Future<void> tapApprovalGotItButton() async {
+    await tester.tap(find.text('Got it'.tr()));
+    await tester.pumpAndSettle();
+  }
+
+  Finder get _approvalUpdateFiner {
+    return find
+        .descendant(
+          of: find.byType(ReturnOverrideInfoIcon),
+          matching: find.text('Approver updated'.tr()),
+        )
+        .last;
   }
 }

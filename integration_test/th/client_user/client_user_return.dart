@@ -113,6 +113,8 @@ void main() {
   const materialTitle = 'BENZAC AC 5% GEL 60G';
   const materialUUID = '1310000573000020';
 
+  const otherReturnBonusId = 'EZRE-290224002370';
+
   void initializeRobot(WidgetTester tester) {
     loginRobot = LoginRobot(tester);
     commonRobot = CommonRobot(tester);
@@ -608,6 +610,38 @@ void main() {
       await returnsByItemsDetailRobot.tapShowDetailButton();
       returnsByItemsDetailRobot.verifyMaterialDetailCollapsed(true);
     });
+
+    testWidgets(
+        'EZRX-T2627 | Verify approval updated tag (quantity update) on Return Item detail',
+        (tester) async {
+      final returnBonusFromDate = DateTime(2024, 7, 14);
+      final returnBonusToDate = DateTime(2024, 7, 16);
+      await goToReturns(tester: tester);
+
+      //verify
+      returnsRootRobot.verifyViewByItemsPageVisible();
+      await returnsByItemsRobot.tapFilterButton();
+      await returnsByItemsFilterRobot.tapFromDateField();
+      await commonRobot.setDateRangePickerValue(
+        fromDate: returnBonusFromDate,
+        toDate: returnBonusToDate,
+      );
+      await returnsByItemsFilterRobot.tapApplyButton();
+      await commonRobot.searchWithKeyboardAction(otherReturnBonusId);
+      await returnsByItemsRobot.tapFirstReturnBonusItem();
+      await returnsByItemsDetailRobot.dragToVerifyBonusSectionVisible();
+      await returnsByItemsDetailRobot.tapToShowDetailForBonus();
+      returnsByItemsDetailRobot.verifyBonusDetailCollapsed(false);
+      returnsByItemsDetailRobot.verifyOnlyBonusMaterial(
+        bonusMaterialNumber,
+        bonusMaterialQty,
+        bonusMaterialPrice,
+      );
+      await returnsByItemsDetailRobot.verifyApproverUpdatedTag();
+      await returnsByItemsDetailRobot.tapApproverUpdatedTag();
+      returnsByItemsDetailRobot.verifyApproverQuantityChangeInfo();
+      await returnsByItemsDetailRobot.tapApprovalGotItButton();
+    });
   });
 
   group('Return by Request section - ', () {
@@ -884,6 +918,51 @@ void main() {
         materialIndex,
         false,
       );
+    });
+
+    testWidgets(
+        'EZRX-T2628 | Verify approval updated tag (quantity update) on Return Request detail',
+        (tester) async {
+      final returnBonusFromDate = DateTime(2024, 7, 14);
+      final returnBonusToDate = DateTime(2024, 7, 16);
+      await goToReturns(tester: tester);
+      //verify
+      returnsRootRobot.verifyTabBarVisible();
+      await returnsRootRobot.switchToViewByRequestPage();
+      await returnsByRequestRobot.tapFilterButton();
+      await returnsByRequestFilterRobot.tapToDateField();
+      await commonRobot.setDateRangePickerValue(
+        fromDate: returnBonusFromDate,
+        toDate: returnBonusToDate,
+      );
+      await returnsByRequestFilterRobot.tapApplyButton();
+      await commonRobot.searchWithKeyboardAction(otherReturnBonusId);
+      await returnsByRequestRobot.tapFirstReturnVisible();
+      returnsByRequestDetailRobot.verifyReturnIdVisible(
+        otherReturnBonusId,
+      );
+      await returnsByRequestDetailRobot.verifyMaterialVisible(
+        index: materialIndex,
+        materialNumber: bonusMaterialNumber,
+      );
+      await returnsByRequestDetailRobot.verifyMaterialDetailCollapsed(
+        materialIndex,
+        true,
+      );
+      await returnsByRequestDetailRobot.tapShowDetailButton(materialIndex);
+      await returnsByRequestDetailRobot.verifyMaterialDetailCollapsed(
+        materialIndex,
+        false,
+      );
+      await returnsByRequestDetailRobot.startVerifyMaterial(
+        qty: bonusMaterialQty,
+        price: bonusMaterialPrice,
+        materialNumber: bonusMaterialNumber,
+      );
+      await returnsByRequestDetailRobot.verifyApproverUpdatedTag();
+      await returnsByRequestDetailRobot.tapApproverUpdatedTag();
+      returnsByRequestDetailRobot.verifyApproverQuantityChangeInfo();
+      await returnsByRequestDetailRobot.tapApprovalGotItButton();
     });
   });
 
