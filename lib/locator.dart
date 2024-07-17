@@ -1664,8 +1664,6 @@ void setupLocator() {
   //============================================================
   locator.registerLazySingleton(() => RequestInformationQuery());
 
-  locator.registerLazySingleton(() => RequestInformationQuery());
-
   locator.registerLazySingleton(
     () => ReturnSummaryDetailsRequestInformationLocal(),
   );
