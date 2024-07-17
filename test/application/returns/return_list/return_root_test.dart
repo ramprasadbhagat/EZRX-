@@ -37,6 +37,9 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
 
+import '../../../common_mock_data/customer_code_mock.dart';
+import '../../../common_mock_data/sales_organsiation_mock.dart';
+import '../../../common_mock_data/user_mock.dart';
 import '../../../utils/widget_utils.dart';
 
 class MockUserBloc extends MockBloc<UserEvent, UserState> implements UserBloc {}
@@ -60,6 +63,10 @@ class MockAnnouncementBloc
 
 class EligibilityBlocMock extends MockBloc<EligibilityEvent, EligibilityState>
     implements EligibilityBloc {}
+
+class ProductImageBlocMock
+    extends MockBloc<ProductImageEvent, ProductImageState>
+    implements ProductImageBloc {}
 
 class MockCustomerCodeBloc
     extends MockBloc<CustomerCodeEvent, CustomerCodeState>
@@ -108,7 +115,7 @@ void main() {
   late ViewByRequestReturnFilterBloc mockViewByRequestReturnFilterBloc;
   late AuthBloc mockAuthBloc;
   late ReturnListByRequestBloc mockReturnListByRequestBloc;
-  late EligibilityBloc eligibilityBlocMock;
+  late ProductImageBlocMock productImageBlocMock;
   final viewByItemTab = find.byKey(
     Key(
       StringUtils.changeToCamelCase(sentence: 'View by items'),
@@ -124,29 +131,27 @@ void main() {
     TestWidgetsFlutterBinding.ensureInitialized();
     locator.registerSingleton<Config>(Config()..appFlavor = Flavor.mock);
     locator.registerLazySingleton(() => AppRouter());
-    locator.registerLazySingleton(() => mockSalesOrgBloc);
-    locator.registerLazySingleton(() => mockCustomerCodeBloc);
     locator.registerLazySingleton<MixpanelService>(() => MixpanelServiceMock());
     autoRouterMock = locator<AppRouter>();
-    mockSalesOrgBloc = MockSalesOrgBloc();
-    mockUserBloc = MockUserBloc();
-    mockCustomerCodeBloc = MockCustomerCodeBloc();
-    mockEligibilityBloc = MockEligibilityBloc();
-    mockAuthBloc = MockAuthBloc();
-    mockAnnouncementBloc = MockAnnouncementBloc();
-    mockReturnSummaryDetailsBloc = MockReturnSummaryDetailsBloc();
-    mockProductImageBloc = MockProductImageBloc();
-    mockReturnListByItemBloc = ReturnListByItemBlocMock();
-    mockReturnListByRequestBloc = ReturnListByRequestBlocMock();
-    mockViewByItemReturnFilterBloc = MockViewByItemReturnFilterBloc();
-    mockViewByRequestReturnFilterBloc = MockViewByRequestReturnFilterBloc();
-    eligibilityBlocMock = EligibilityBlocMock();
   });
 
   group(
     'Return Root Page Test',
     () {
       setUp(() {
+        mockSalesOrgBloc = MockSalesOrgBloc();
+        mockUserBloc = MockUserBloc();
+        mockCustomerCodeBloc = MockCustomerCodeBloc();
+        mockEligibilityBloc = MockEligibilityBloc();
+        mockAuthBloc = MockAuthBloc();
+        mockAnnouncementBloc = MockAnnouncementBloc();
+        mockReturnSummaryDetailsBloc = MockReturnSummaryDetailsBloc();
+        mockProductImageBloc = MockProductImageBloc();
+        mockReturnListByItemBloc = ReturnListByItemBlocMock();
+        mockReturnListByRequestBloc = ReturnListByRequestBlocMock();
+        mockViewByItemReturnFilterBloc = MockViewByItemReturnFilterBloc();
+        mockViewByRequestReturnFilterBloc = MockViewByRequestReturnFilterBloc();
+        productImageBlocMock = ProductImageBlocMock();
         when(() => mockSalesOrgBloc.state).thenReturn(SalesOrgState.initial());
         when(() => mockUserBloc.state).thenReturn(UserState.initial());
         when(() => mockAuthBloc.state).thenReturn(const AuthState.initial());
@@ -168,8 +173,8 @@ void main() {
             .thenReturn(ViewByItemReturnFilterState.initial());
         when(() => mockViewByRequestReturnFilterBloc.state)
             .thenReturn(ViewByRequestReturnFilterState.initial());
-        when(() => eligibilityBlocMock.state)
-            .thenReturn(EligibilityState.initial());
+        when(() => productImageBlocMock.state)
+            .thenReturn(ProductImageState.initial());
       });
 
       Widget getWUT() {
@@ -208,8 +213,8 @@ void main() {
             BlocProvider<ViewByRequestReturnFilterBloc>(
               create: (context) => mockViewByRequestReturnFilterBloc,
             ),
-            BlocProvider<EligibilityBloc>(
-              create: (context) => eligibilityBlocMock,
+            BlocProvider<ProductImageBloc>(
+              create: (context) => productImageBlocMock,
             ),
           ],
           child: const ReturnRoot(),
@@ -644,6 +649,39 @@ void main() {
         verify(
           () => mockReturnListByRequestBloc.add(
             const ReturnListByRequestEvent.downloadFile(),
+          ),
+        ).called(1);
+      });
+
+      testWidgets('Checks if events are added in initState', (tester) async {
+        when(() => mockEligibilityBloc.state).thenReturn(
+          EligibilityState.initial().copyWith(
+            user: fakeClientUser,
+            shipToInfo: fakeShipToInfo,
+            customerCodeInfo: fakeCustomerCodeInfo,
+            salesOrganisation: fakeSalesOrganisation,
+          ),
+        );
+        await tester.pumpWidget(getWUT());
+        await tester.pump();
+        verify(
+          () => mockReturnListByItemBloc.add(
+            ReturnListByItemEvent.initialized(
+              salesOrg: fakeSalesOrganisation.salesOrg,
+              user: fakeClientUser,
+              shipInfo: fakeShipToInfo,
+              customerCodeInfo: fakeCustomerCodeInfo,
+            ),
+          ),
+        ).called(1);
+        verify(
+          () => mockReturnListByRequestBloc.add(
+            ReturnListByRequestEvent.initialized(
+              salesOrg: fakeSalesOrganisation.salesOrg,
+              user: fakeClientUser,
+              shipInfo: fakeShipToInfo,
+              customerCodeInfo: fakeCustomerCodeInfo,
+            ),
           ),
         ).called(1);
       });

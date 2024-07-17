@@ -54,20 +54,27 @@ class _ReturnRootState extends State<ReturnRoot> {
   @override
   void initState() {
     super.initState();
-    _fetchData();
+    _initialize();
   }
 
-  void _fetchData() {
+  void _initialize() {
+    final state = context.read<EligibilityBloc>().state;
+
     context.read<ReturnListByItemBloc>().add(
-          ReturnListByItemEvent.fetch(
-            appliedFilter: ReturnFilter.empty(),
-            searchKey: SearchKey.empty(),
+          ReturnListByItemEvent.initialized(
+            salesOrg: state.salesOrganisation.salesOrg,
+            shipInfo: state.shipToInfo,
+            user: state.user,
+            customerCodeInfo: state.customerCodeInfo,
           ),
         );
+
     context.read<ReturnListByRequestBloc>().add(
-          ReturnListByRequestEvent.fetch(
-            appliedFilter: ReturnFilter.empty(),
-            searchKey: SearchKey.empty(),
+          ReturnListByRequestEvent.initialized(
+            salesOrg: state.salesOrganisation.salesOrg,
+            shipInfo: state.shipToInfo,
+            user: state.user,
+            customerCodeInfo: state.customerCodeInfo,
           ),
         );
   }

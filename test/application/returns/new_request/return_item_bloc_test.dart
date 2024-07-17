@@ -52,6 +52,25 @@ void main() {
         newRequestRepository: repositoryMock,
         config: config,
       ),
+      setUp: () {
+        when(
+          () => repositoryMock.searchReturnMaterials(
+            requestParams: ReturnMaterialsParams(
+              salesOrg: initState.salesOrganisation.salesOrg,
+              soldToInfo: initState.customerCodeInfo.customerCodeSoldTo,
+              shipToInfo: initState.shipToInfo.shipToCustomerCode,
+              pageSize: config.pageSize,
+              offset: 0,
+              filter: ReturnItemsFilter.init(),
+              searchKey: SearchKey.empty(),
+              language: initState.user.preferredLanguage.languageCode,
+              user: fakeUserWithLanguageCode,
+            ),
+          ),
+        ).thenAnswer(
+          (invocation) async => Right(fakeReturnMaterialList),
+        );
+      },
       act: (ReturnItemsBloc bloc) => bloc.add(
         ReturnItemsEvent.initialized(
           customerCodeInfo: initState.customerCodeInfo,
@@ -60,7 +79,20 @@ void main() {
           user: initState.user,
         ),
       ),
-      expect: () => [initState],
+      expect: () => [
+        initState,
+        initState.copyWith(
+          isLoading: true,
+          appliedFilter: ReturnItemsFilter.init(),
+          searchKey: SearchKey.empty(),
+        ),
+        initState.copyWith(
+          canLoadMore: false,
+          appliedFilter: ReturnItemsFilter.init(),
+          searchKey: SearchKey.empty(),
+          items: fakeReturnMaterialList.items,
+        ),
+      ],
     );
 
     blocTest<ReturnItemsBloc, ReturnItemsState>(

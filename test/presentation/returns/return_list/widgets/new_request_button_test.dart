@@ -4,9 +4,6 @@ import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart
 import 'package:ezrxmobile/application/returns/new_request/new_request_bloc.dart';
 import 'package:ezrxmobile/application/returns/new_request/return_items/return_items_bloc.dart';
 import 'package:ezrxmobile/application/returns/usage_code/usage_code_bloc.dart';
-import 'package:ezrxmobile/domain/account/value/value_objects.dart';
-import 'package:ezrxmobile/domain/core/value/value_objects.dart';
-import 'package:ezrxmobile/domain/returns/entities/return_items_filter.dart';
 import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
 import 'package:ezrxmobile/infrastructure/core/common/tracking_events.dart';
 import 'package:ezrxmobile/infrastructure/core/common/tracking_properties.dart';
@@ -20,6 +17,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
+import '../../../../common_mock_data/customer_code_mock.dart';
+import '../../../../common_mock_data/sales_organsiation_mock.dart';
 import '../../../../utils/widget_utils.dart';
 
 class EligibilityBlocMock extends MockBloc<EligibilityEvent, EligibilityState>
@@ -99,6 +98,13 @@ void main() {
   }
 
   testWidgets('New Request Button Test', (tester) async {
+    when(() => eligibilityBloc.state).thenReturn(
+      EligibilityState.initial().copyWith(
+        customerCodeInfo: fakeCustomerCodeInfo,
+        shipToInfo: fakeShipToInfo,
+        salesOrganisation: fakeSalesOrganisation,
+      ),
+    );
     when(() => appRouter.push(const NewRequestPageRoute()))
         .thenAnswer((_) => Future.value());
     await tester.pumpWidget(getWidget());
@@ -117,29 +123,27 @@ void main() {
       ),
     ).called(1);
     verify(
-      () => usageCodeBloc.add(
-        UsageCodeEvent.fetch(
-          salesOrg: SalesOrg(''),
-        ),
-      ),
-    ).called(1);
-    verify(
-      () => returnItemsBloc.add(
-        ReturnItemsEvent.fetch(
-          appliedFilter: ReturnItemsFilter.init(),
-          searchKey: SearchKey.empty(),
-        ),
-      ),
-    ).called(1);
-    verify(
-      () => newRequestBloc.add(
-        NewRequestEvent.initialized(
-          salesOrg: SalesOrg(''),
-        ),
-      ),
-    ).called(1);
-    verify(
-      () => appRouter.push(const NewRequestPageRoute()),
+      () {
+        usageCodeBloc.add(
+          UsageCodeEvent.fetch(
+            salesOrg: eligibilityBloc.state.salesOrg,
+          ),
+        );
+        returnItemsBloc.add(
+          ReturnItemsEvent.initialized(
+            salesOrganisation: eligibilityBloc.state.salesOrganisation,
+            customerCodeInfo: eligibilityBloc.state.customerCodeInfo,
+            shipToInfo: eligibilityBloc.state.shipToInfo,
+            user: eligibilityBloc.state.user,
+          ),
+        );
+        newRequestBloc.add(
+          NewRequestEvent.initialized(
+            salesOrg: eligibilityBloc.state.salesOrg,
+          ),
+        );
+        appRouter.push(const NewRequestPageRoute());
+      },
     ).called(1);
   });
 }

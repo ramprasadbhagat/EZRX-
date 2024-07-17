@@ -56,11 +56,7 @@ import 'package:ezrxmobile/application/payments/credit_and_invoice_details/credi
 import 'package:ezrxmobile/application/payments/download_payment_attachments/download_payment_attachments_bloc.dart';
 import 'package:ezrxmobile/application/payments/payment_summary_details/payment_summary_details_bloc.dart';
 import 'package:ezrxmobile/application/product_image/product_image_bloc.dart';
-import 'package:ezrxmobile/application/returns/new_request/return_items/return_items_bloc.dart';
-import 'package:ezrxmobile/application/returns/return_list/view_by_item/return_list_by_item_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_list/view_by_request/details/return_details_by_request_bloc.dart';
-import 'package:ezrxmobile/application/returns/return_list/view_by_request/return_list_by_request_bloc.dart';
-import 'package:ezrxmobile/application/returns/usage_code/usage_code_bloc.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
 import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
@@ -461,26 +457,6 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
             );
           },
         ),
-        BlocListener<ReturnListByItemBloc, ReturnListByItemState>(
-          listenWhen: (previous, current) =>
-              previous.failureOrSuccessOption != current.failureOrSuccessOption,
-          listener: (context, state) => state.failureOrSuccessOption.fold(
-            () {},
-            (either) => either.fold(
-              (failure) {
-                ErrorUtils.handleApiFailure(context, failure);
-              },
-              (_) {
-                if (!state.isFetching) {
-                  _fetchProductImage(
-                    context,
-                    state.returnItemList,
-                  );
-                }
-              },
-            ),
-          ),
-        ),
         BlocListener<ViewByItemDetailsBloc, ViewByItemDetailsState>(
           listenWhen: (previous, current) =>
               previous.failureOrSuccessOption != current.failureOrSuccessOption,
@@ -589,15 +565,6 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                     ),
                   );
 
-              context.read<ReturnListByRequestBloc>().add(
-                    ReturnListByRequestEvent.initialized(
-                      salesOrg: state.salesOrganisation.salesOrg,
-                      shipInfo: state.shipToInfo,
-                      user: state.user,
-                      customerCodeInfo: state.customerCodeInfo,
-                    ),
-                  );
-
               context.read<DownloadPaymentAttachmentsBloc>().add(
                     DownloadPaymentAttachmentEvent.initialized(
                       salesOrganization: state.salesOrganisation,
@@ -655,34 +622,6 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                     ProductSearchEvent.initialized(
                       configs: state.salesOrgConfigs,
                       salesOrganization: state.salesOrganisation,
-                      customerCodeInfo: state.customerCodeInfo,
-                      shipToInfo: state.shipToInfo,
-                      user: state.user,
-                    ),
-                  );
-              if (context.read<EligibilityBloc>().state.isReturnsEnable) {
-                context.read<ReturnListByItemBloc>().add(
-                      ReturnListByItemEvent.initialized(
-                        salesOrg: state.salesOrganisation.salesOrg,
-                        shipInfo: state.shipToInfo,
-                        user: state.user,
-                        customerCodeInfo: state.customerCodeInfo,
-                      ),
-                    );
-              }
-
-              context.read<ReturnListByRequestBloc>().add(
-                    ReturnListByRequestEvent.initialized(
-                      salesOrg: state.salesOrganisation.salesOrg,
-                      shipInfo: state.shipToInfo,
-                      user: state.user,
-                      customerCodeInfo: state.customerCodeInfo,
-                    ),
-                  );
-
-              context.read<ReturnItemsBloc>().add(
-                    ReturnItemsEvent.initialized(
-                      salesOrganisation: state.salesOrganisation,
                       customerCodeInfo: state.customerCodeInfo,
                       shipToInfo: state.shipToInfo,
                       user: state.user,
@@ -783,16 +722,6 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                     CreditAndInvoiceDetailsEvent.initialized(
                       salesOrganisation: state.salesOrganisation,
                       customerCodeInfo: state.customerCodeInfo,
-                    ),
-                  );
-
-              final enableReturn = state.isReturnsEnable;
-
-              if (!enableReturn) return;
-
-              context.read<UsageCodeBloc>().add(
-                    UsageCodeEvent.fetch(
-                      salesOrg: state.salesOrganisation.salesOrg,
                     ),
                   );
 

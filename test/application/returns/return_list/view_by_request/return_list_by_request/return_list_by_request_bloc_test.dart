@@ -50,6 +50,22 @@ void main() {
         returnListRepository: returnListRepositoryMock,
         config: config,
       ),
+      setUp: () {
+        when(
+          () => returnListRepositoryMock.fetchReturnListByRequest(
+            appliedFilter: ReturnFilter.empty(),
+            salesOrg: mockSalesOrg,
+            shipToInfo: mockShipInfo,
+            customerCode: mockCustomerCodeInfo,
+            user: mockUser,
+            searchKey: SearchKey.empty(),
+            offset: 0,
+            pageSize: config.pageSize,
+          ),
+        ).thenAnswer(
+          (invocation) async => Right(mockReturnItemList),
+        );
+      },
       act: (ReturnListByRequestBloc bloc) => bloc.add(
         ReturnListByRequestEvent.initialized(
           salesOrg: mockSalesOrg,
@@ -64,6 +80,24 @@ void main() {
           shipInfo: mockShipInfo,
           customerCodeInfo: mockCustomerCodeInfo,
           user: mockUser,
+        ),
+        ReturnListByRequestState.initial().copyWith(
+          salesOrg: mockSalesOrg,
+          shipInfo: mockShipInfo,
+          customerCodeInfo: mockCustomerCodeInfo,
+          user: mockUser,
+          failureOrSuccessOption: none(),
+          isFetching: true,
+        ),
+        ReturnListByRequestState.initial().copyWith(
+          salesOrg: mockSalesOrg,
+          shipInfo: mockShipInfo,
+          customerCodeInfo: mockCustomerCodeInfo,
+          user: mockUser,
+          failureOrSuccessOption: none(),
+          isFetching: false,
+          returnItemList: mockReturnItemList,
+          canLoadMore: false,
         ),
       ],
     );

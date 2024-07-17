@@ -13,7 +13,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'return_list_by_request_event.dart';
+
 part 'return_list_by_request_state.dart';
+
 part 'return_list_by_request_bloc.freezed.dart';
 
 class ReturnListByRequestBloc
@@ -25,16 +27,22 @@ class ReturnListByRequestBloc
     required this.returnListRepository,
     required this.config,
   }) : super(ReturnListByRequestState.initial()) {
-    on<_Initialized>(
-      (event, emit) => emit(
+    on<_Initialized>((event, emit) {
+      emit(
         ReturnListByRequestState.initial().copyWith(
           salesOrg: event.salesOrg,
           user: event.user,
           customerCodeInfo: event.customerCodeInfo,
           shipInfo: event.shipInfo,
         ),
-      ),
-    );
+      );
+      add(
+        _Fetch(
+          appliedFilter: ReturnFilter.empty(),
+          searchKey: SearchKey.empty(),
+        ),
+      );
+    });
     on<_Fetch>(
       (e, emit) async {
         if (e.searchKey == state.searchKey &&

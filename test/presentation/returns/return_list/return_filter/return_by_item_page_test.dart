@@ -118,6 +118,9 @@ void main() {
             BlocProvider<ReturnSummaryDetailsBloc>(
               create: (context) => mockReturnSummaryDetailsBloc,
             ),
+            BlocProvider<ProductImageBloc>(
+              create: (context) => mockProductImageBloc,
+            ),
           ],
           child: const Scaffold(body: ReturnByItemPage()),
         );

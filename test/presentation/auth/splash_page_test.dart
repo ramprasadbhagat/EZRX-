@@ -50,9 +50,6 @@ import 'package:ezrxmobile/application/payments/new_payment/available_credits/av
 import 'package:ezrxmobile/application/payments/new_payment/outstanding_invoices/outstanding_invoices_bloc.dart';
 import 'package:ezrxmobile/application/payments/payment_summary_details/payment_summary_details_bloc.dart';
 import 'package:ezrxmobile/application/product_image/product_image_bloc.dart';
-import 'package:ezrxmobile/application/returns/new_request/return_items/return_items_bloc.dart';
-import 'package:ezrxmobile/application/returns/return_list/view_by_item/return_list_by_item_bloc.dart';
-import 'package:ezrxmobile/application/returns/return_list/view_by_request/return_list_by_request_bloc.dart';
 import 'package:ezrxmobile/application/returns/usage_code/usage_code_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_config.dart';
 import 'package:ezrxmobile/domain/account/entities/customer_code_info.dart';
@@ -120,7 +117,6 @@ void main() {
   late ScanMaterialInfoBloc scanMaterialInfoMockBloc;
   late SettingBloc settingBlocMock;
   late IntroBloc introBlocMock;
-  late ReturnListByItemBloc returnListByItemBlocMock;
   late ViewByItemDetailsBloc viewByItemDetailsBlocMock;
   late MaterialFilterBloc materialFilterBlocMock;
   late ProductDetailBloc productDetailBloc;
@@ -143,14 +139,12 @@ void main() {
   late CreditAndInvoiceDetailsBloc creditAndInvoiceDetailsBloc;
   late ViewByOrderFilterBloc viewByOrderFilterBlocMock;
   late ProductSearchBloc productSearchBlocMock;
-  late ReturnListByRequestBloc returnListByRequestBlocMock;
   late DownloadPaymentAttachmentsBloc downloadPaymentAttachmentsBlocMock;
   late AdditionalDetailsBloc additionalDetailsBlocMock;
   late ComboDealMaterialDetailBloc comboDealMaterialDetailBlocMock;
   late OrderSummaryBloc orderSummaryBlocMock;
   late AvailableCreditsBloc availableCreditsBlocMock;
   late OutstandingInvoicesBloc outstandingInvoicesBlocMock;
-  late ReturnItemsBloc returnItemsBlocMock;
   late ReOrderPermissionBloc reOrderPermissionBlocMock;
   late ArticlesInfoBloc articlesInfoBlocMock;
   late ArticlesInfoFilterBloc articlesInfoFilterBlocMock;
@@ -244,7 +238,6 @@ void main() {
       settingBlocMock = SettingMockBloc();
       mockMaterialPriceBloc = MaterialPriceBlocMock();
       introBlocMock = IntroBlocMock();
-      returnListByItemBlocMock = ReturnListByItemBlocMock();
       viewByItemDetailsBlocMock = ViewByItemDetailsBlocMock();
       productDetailBloc = ProductDetailBlocMock();
       creditAndInvoiceDetailsBloc = CreditAndInvoiceDetailsBlocMock();
@@ -254,14 +247,12 @@ void main() {
       mockPriceOverrideBloc = PriceOverrideBlocMock();
       viewByOrderFilterBlocMock = ViewByOrderFilterBlocMock();
       productSearchBlocMock = ProductSearchBlocMock();
-      returnListByRequestBlocMock = ReturnListByRequestBlocMock();
       downloadPaymentAttachmentsBlocMock = DownloadPaymentAttachmentsBlocMock();
       additionalDetailsBlocMock = AdditionalDetailsBlocMock();
       comboDealMaterialDetailBlocMock = ComboDealMaterialDetailBlocMock();
       orderSummaryBlocMock = OrderSummaryBlocMock();
       availableCreditsBlocMock = AvailableCreditsBlocMock();
       outstandingInvoicesBlocMock = OutstandingInvoicesBlocMock();
-      returnItemsBlocMock = ReturnItemsBlocMock();
       reOrderPermissionBlocMock = ReOrderPermissionBlocMock();
       articlesInfoBlocMock = ArticlesInfoBlocMock();
       productImageBloc = ProductImageBlocMock();
@@ -317,8 +308,6 @@ void main() {
       when(() => mockMaterialPriceBloc.state)
           .thenReturn(MaterialPriceState.initial());
       when(() => introBlocMock.state).thenReturn(IntroState.initial());
-      when(() => returnListByItemBlocMock.state)
-          .thenReturn(ReturnListByItemState.initial());
       when(() => viewByItemDetailsBlocMock.state)
           .thenReturn(ViewByItemDetailsState.initial());
       when(() => productDetailBloc.state)
@@ -335,8 +324,6 @@ void main() {
           .thenReturn(ViewByOrderFilterState.initial());
       when(() => productSearchBlocMock.state)
           .thenReturn(ProductSearchState.initial());
-      when(() => returnListByRequestBlocMock.state)
-          .thenReturn(ReturnListByRequestState.initial());
       when(() => downloadPaymentAttachmentsBlocMock.state)
           .thenReturn(DownloadPaymentAttachmentsState.initial());
       when(() => additionalDetailsBlocMock.state)
@@ -349,8 +336,6 @@ void main() {
           .thenReturn(AvailableCreditsState.initial());
       when(() => outstandingInvoicesBlocMock.state)
           .thenReturn(OutstandingInvoicesState.initial());
-      when(() => returnItemsBlocMock.state)
-          .thenReturn(ReturnItemsState.initial());
       when(() => reOrderPermissionBlocMock.state)
           .thenReturn(ReOrderPermissionState.initial());
       when(() => articlesInfoBlocMock.state)
@@ -444,9 +429,6 @@ void main() {
               create: (context) => mockMaterialPriceBloc,
             ),
             BlocProvider<IntroBloc>(create: (context) => introBlocMock),
-            BlocProvider<ReturnListByItemBloc>(
-              create: (context) => returnListByItemBlocMock,
-            ),
             BlocProvider<ViewByItemDetailsBloc>(
               create: (context) => viewByItemDetailsBlocMock,
             ),
@@ -472,9 +454,6 @@ void main() {
             BlocProvider<ProductSearchBloc>(
               create: (context) => productSearchBlocMock,
             ),
-            BlocProvider<ReturnListByRequestBloc>(
-              create: (context) => returnListByRequestBlocMock,
-            ),
             BlocProvider<DownloadPaymentAttachmentsBloc>(
               create: (context) => downloadPaymentAttachmentsBlocMock,
             ),
@@ -492,9 +471,6 @@ void main() {
             ),
             BlocProvider<OutstandingInvoicesBloc>(
               create: (context) => outstandingInvoicesBlocMock,
-            ),
-            BlocProvider<ReturnItemsBloc>(
-              create: (context) => returnItemsBlocMock,
             ),
             BlocProvider<ReOrderPermissionBloc>(
               create: (context) => reOrderPermissionBlocMock,

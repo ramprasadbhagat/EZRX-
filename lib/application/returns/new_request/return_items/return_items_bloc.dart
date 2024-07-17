@@ -14,13 +14,17 @@ import 'package:ezrxmobile/domain/returns/repository/i_return_request_repository
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:ezrxmobile/config.dart';
+
 part 'return_items_event.dart';
+
 part 'return_items_state.dart';
+
 part 'return_items_bloc.freezed.dart';
 
 class ReturnItemsBloc extends Bloc<ReturnItemsEvent, ReturnItemsState> {
   final IReturnRequestRepository newRequestRepository;
   final Config config;
+
   ReturnItemsBloc({required this.newRequestRepository, required this.config})
       : super(ReturnItemsState.initial()) {
     on<_Initialized>((event, emit) {
@@ -31,6 +35,12 @@ class ReturnItemsBloc extends Bloc<ReturnItemsEvent, ReturnItemsState> {
           shipToInfo: event.shipToInfo,
           customerCodeInfo: event.customerCodeInfo,
           appliedFilter: ReturnItemsFilter.init(),
+        ),
+      );
+      add(
+        _Fetch(
+          appliedFilter: ReturnItemsFilter.init(),
+          searchKey: SearchKey.empty(),
         ),
       );
     });

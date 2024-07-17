@@ -29,8 +29,11 @@ import 'package:ezrxmobile/presentation/returns/new_request/widgets/material_inf
 import 'package:ezrxmobile/presentation/returns/new_request/widgets/material_quantity_and_price.dart';
 
 part 'widgets/return_material_widget.dart';
+
 part 'widgets/return_material_info.dart';
+
 part 'widgets/bonus_item_section.dart';
+
 part 'widgets/return_items_search_bar.dart';
 
 @RoutePage()

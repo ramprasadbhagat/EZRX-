@@ -4,8 +4,6 @@ import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart
 import 'package:ezrxmobile/application/returns/new_request/new_request_bloc.dart';
 import 'package:ezrxmobile/application/returns/new_request/return_items/return_items_bloc.dart';
 import 'package:ezrxmobile/application/returns/usage_code/usage_code_bloc.dart';
-import 'package:ezrxmobile/domain/core/value/value_objects.dart';
-import 'package:ezrxmobile/domain/returns/entities/return_items_filter.dart';
 import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
 import 'package:ezrxmobile/infrastructure/core/common/tracking_events.dart';
 import 'package:ezrxmobile/infrastructure/core/common/tracking_properties.dart';
@@ -20,6 +18,7 @@ class NewRequestButton extends StatelessWidget {
     super.key,
     required this.controller,
   });
+
   final ScrollController controller;
 
   @override
@@ -32,26 +31,30 @@ class NewRequestButton extends StatelessWidget {
           TrackingEvents.newReturnRequestClicked,
           props: {
             TrackingProps.clickAt:
-                RouterUtils.buildRouteTrackingName(context.routeData.path),
+            RouterUtils.buildRouteTrackingName(context.routeData.path),
           },
         );
-        final eligibilityState = context.read<EligibilityBloc>().state;
+        final eligibilityState = context
+            .read<EligibilityBloc>()
+            .state;
         context.read<UsageCodeBloc>().add(
-              UsageCodeEvent.fetch(
-                salesOrg: eligibilityState.salesOrg,
-              ),
-            );
+          UsageCodeEvent.fetch(
+            salesOrg: eligibilityState.salesOrg,
+          ),
+        );
         context.read<ReturnItemsBloc>().add(
-              ReturnItemsEvent.fetch(
-                appliedFilter: ReturnItemsFilter.init(),
-                searchKey: SearchKey.empty(),
-              ),
-            );
+          ReturnItemsEvent.initialized(
+            salesOrganisation: eligibilityState.salesOrganisation,
+            customerCodeInfo: eligibilityState.customerCodeInfo,
+            shipToInfo: eligibilityState.shipToInfo,
+            user: eligibilityState.user,
+          ),
+        );
         context.read<NewRequestBloc>().add(
-              NewRequestEvent.initialized(
-                salesOrg: eligibilityState.salesOrg,
-              ),
-            );
+          NewRequestEvent.initialized(
+            salesOrg: eligibilityState.salesOrg,
+          ),
+        );
         context.router.push(const NewRequestPageRoute());
       },
       scrollController: controller,

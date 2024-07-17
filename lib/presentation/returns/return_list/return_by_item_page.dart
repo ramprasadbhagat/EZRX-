@@ -1,10 +1,12 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:ezrxmobile/application/product_image/product_image_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_list/view_by_item/return_list_by_item_bloc.dart';
 import 'package:ezrxmobile/application/returns/return_summary_details/return_summary_details_bloc.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_filter.dart';
 import 'package:ezrxmobile/domain/returns/entities/return_item.dart';
+import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/infrastructure/core/common/mixpanel_helper.dart';
 import 'package:ezrxmobile/infrastructure/core/common/tracking_events.dart';
 import 'package:ezrxmobile/infrastructure/core/common/tracking_properties.dart';
@@ -49,7 +51,28 @@ class _ReturnByItemPageState extends State<ReturnByItemPage> {
       key: WidgetKeys.returnByItemPage,
       body: AnnouncementBanner(
         currentPath: context.router.currentPath,
-        child: BlocBuilder<ReturnListByItemBloc, ReturnListByItemState>(
+        child: BlocConsumer<ReturnListByItemBloc, ReturnListByItemState>(
+          listenWhen: (previous, current) =>
+              previous.failureOrSuccessOption !=
+                  current.failureOrSuccessOption &&
+              previous.isDownloadInProgress == current.isDownloadInProgress,
+          listener: (context, state) => state.failureOrSuccessOption.fold(
+            () {},
+            (either) => either.fold(
+              (failure) {
+                ErrorUtils.handleApiFailure(context, failure);
+              },
+              (_) {
+                if (!state.isFetching) {
+                  context.read<ProductImageBloc>().add(
+                        ProductImageEvent.fetch(
+                          list: state.returnItemList,
+                        ),
+                      );
+                }
+              },
+            ),
+          ),
           buildWhen: (previous, current) =>
               previous.isFetching != current.isFetching,
           builder: (context, state) {
@@ -106,6 +129,7 @@ class _ReturnItem extends StatelessWidget {
   final ReturnItem data;
   final bool showDivider;
   final bool showHeader;
+
   const _ReturnItem({
     super.key,
     required this.data,
