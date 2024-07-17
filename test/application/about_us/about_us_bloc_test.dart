@@ -16,10 +16,8 @@ class AboutUsRepositoryRepo extends Mock implements AboutUsRepository {}
 void main() {
   late AboutUsRepositoryRepo repository;
   late AboutUs aboutUs;
-  final aboutUsState = AboutUsState.initial().copyWith(
-    salesOrg: fakeMYSalesOrg,
-  );
   final salesOrg = fakeMYSalesOrg;
+  final aboutUsState = AboutUsState.initial().copyWith(salesOrg: salesOrg);
 
   setUpAll(() async {
     WidgetsFlutterBinding.ensureInitialized();
@@ -31,38 +29,23 @@ void main() {
   group('About Us Bloc', () {
     blocTest(
       'Initialized',
-      build: () => AboutUsBloc(
-        repository: repository,
-      ),
+      build: () => AboutUsBloc(repository: repository),
       act: (AboutUsBloc bloc) =>
-          bloc.add(AboutUsEvent.initialize(salesOrg: fakeMYSalesOrg)),
+          bloc.add(AboutUsEvent.initialize(salesOrg: salesOrg)),
       expect: () => [aboutUsState],
     );
+
     blocTest(
-      'Get about us fail',
-      build: () => AboutUsBloc(
-        repository: repository,
-      ),
+      'Get about us fail + get static about us fail',
+      build: () => AboutUsBloc(repository: repository),
       seed: () => aboutUsState,
       setUp: () {
         when(
-          () => repository.getAboutUsInfo(
-            salesOrg: salesOrg,
-          ),
-        ).thenAnswer(
-          (invocation) async => const Left(
-            ApiFailure.other('fake-error'),
-          ),
-        );
+          () => repository.getAboutUsInfo(salesOrg: salesOrg),
+        ).thenAnswer((_) async => const Left(ApiFailure.other('fake-error')));
         when(
-          () => repository.getAboutUsStaticInfo(
-            salesOrg: salesOrg,
-          ),
-        ).thenAnswer(
-          (invocation) async => const Left(
-            ApiFailure.other('fake-error'),
-          ),
-        );
+          () => repository.getAboutUsStaticInfo(salesOrg: salesOrg),
+        ).thenAnswer((_) async => const Left(ApiFailure.other('fake-error')));
       },
       act: (AboutUsBloc bloc) => bloc
         ..add(
@@ -78,20 +61,37 @@ void main() {
     );
 
     blocTest(
-      'Get about us Success',
-      build: () => AboutUsBloc(
-        repository: repository,
-      ),
+      'Get about us fail + get static about us success',
+      build: () => AboutUsBloc(repository: repository),
+      seed: () => aboutUsState,
       setUp: () {
         when(
-          () => repository.getAboutUsInfo(
-            salesOrg: salesOrg,
-          ),
-        ).thenAnswer(
-          (invocation) async => Right(
-            aboutUs,
-          ),
-        );
+          () => repository.getAboutUsInfo(salesOrg: salesOrg),
+        ).thenAnswer((_) async => const Left(ApiFailure.other('fake-error')));
+        when(
+          () => repository.getAboutUsStaticInfo(salesOrg: salesOrg),
+        ).thenAnswer((_) async => Right(aboutUs));
+      },
+      act: (AboutUsBloc bloc) => bloc
+        ..add(
+          const AboutUsEvent.fetchAboutUsInfo(),
+        ),
+      expect: () => [
+        aboutUsState.copyWith(isFetching: true),
+        aboutUsState.copyWith(
+          apiFailureOrSuccessOption: optionOf(Right(aboutUs)),
+          aboutUsInfo: aboutUs,
+        ),
+      ],
+    );
+
+    blocTest(
+      'Get about us Success',
+      build: () => AboutUsBloc(repository: repository),
+      setUp: () {
+        when(
+          () => repository.getAboutUsInfo(salesOrg: salesOrg),
+        ).thenAnswer((_) async => Right(aboutUs));
       },
       seed: () => aboutUsState,
       act: (AboutUsBloc bloc) => bloc

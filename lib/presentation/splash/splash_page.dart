@@ -1318,7 +1318,8 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
             userInfo: context.read<UserBloc>().state.user,
             selectedSalesOrg:
                 context.read<SalesOrgBloc>().state.salesOrganisation,
-            hideCustomer: context.read<SalesOrgBloc>().state.hideCustomer,
+            hideCustomer:
+                context.read<SalesOrgBloc>().state.configs.hideCustomer,
           ),
         );
   }

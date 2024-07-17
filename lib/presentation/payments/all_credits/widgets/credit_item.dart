@@ -9,7 +9,7 @@ class _CreditsItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isIDMarket = context.read<EligibilityBloc>().state.isIDMarket;
+    final isIDMarket = context.read<EligibilityBloc>().state.salesOrg.isID;
 
     return CustomCard(
       padding: const EdgeInsets.all(16),

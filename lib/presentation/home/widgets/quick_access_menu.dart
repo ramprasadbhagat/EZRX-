@@ -183,7 +183,7 @@ List<_QuickAccessMenuData> _getQuickAccessItems(
       if (eligibilityState.marketPlacePaymentEligible)
         homeQuickAccessMarketPlacePaymentMenu,
     ],
-    if (eligibilityState.isIDMarket) homeQuickAccessEZPointMenu,
+    if (eligibilityState.salesOrg.isID) homeQuickAccessEZPointMenu,
     // homeQuickAccessLoyaltyMenu,
     homeQuickAccessChatSupportMenu,
   ];

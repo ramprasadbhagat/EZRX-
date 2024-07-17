@@ -227,25 +227,12 @@ class EligibilityState with _$EligibilityState {
       isBonusOverrideEnable &&
       !selectedOrderType.documentType.isSpecialOrderType;
 
-  bool get isOrderTypeEligibleAndSpecialOrderType =>
+  bool get _isOrderTypeEligibleAndSpecialOrderType =>
       isOrderTypeEligible && selectedOrderType.documentType.isSpecialOrderType;
 
   bool get isCounterOfferVisible =>
-      !isOrderTypeEligibleAndSpecialOrderType &&
+      !_isOrderTypeEligibleAndSpecialOrderType &&
       (isPriceOverrideEnable || isZDP8Override);
-
-  bool get isOutOfStockMaterialAllowed {
-    if (!salesOrgConfigs.addOosMaterials.isOutOfStockMaterialAllowed) {
-      return false;
-    }
-
-    if (salesOrgConfigs.oosValue.isOosValueZero &&
-        !user.role.type.isSalesRepRole) {
-      return false;
-    }
-
-    return true;
-  }
 
   bool get isMYExternalSalesRepUser =>
       salesOrganisation.salesOrg.isMY && user.role.type.isExternalSalesRep;
@@ -268,8 +255,6 @@ class EligibilityState with _$EligibilityState {
     return true;
   }
 
-  bool get isIDMarket => salesOrg.isID;
-
   bool get isZDP5eligible =>
       salesOrgConfigs.salesOrg.isVN && salesOrgConfigs.enableZDP5;
 
@@ -277,7 +262,9 @@ class EligibilityState with _$EligibilityState {
       user.userCanAccessOrderHistory || isPaymentEnabled || isReturnsEnable;
 
   bool get disableCreateOrder =>
-      !user.userCanCreateOrder || customerBlockOrSuspended || isEDI;
+      !user.userCanCreateOrder ||
+      customerBlockOrSuspended ||
+      customerCodeInfo.status.isEDI;
 
   bool get showMaterialDescInMandarin =>
       salesOrg.isTW && user.preferredLanguage.isMandarin;
@@ -291,12 +278,6 @@ class EligibilityState with _$EligibilityState {
 
   String get displayShipTo =>
       haveCustomerCodeInfo ? shipToInfo.fullDeliveryAddress : 'NA';
-
-  bool get haveCustomerCodeInfos =>
-      haveCustomerCodeInfo && customerCodeInfo.customerCodeSoldTo.isNotEmpty;
-
-  bool get haveShipToInfos =>
-      haveCustomerCodeInfo && customerCodeInfo.shipToInfos.isNotEmpty;
 
   StatusType get outOfStockProductStatus => StatusType(
         validateOutOfStockValue
@@ -352,8 +333,6 @@ class EligibilityState with _$EligibilityState {
 
     return isAccountSuspended || shipToInfo.customerBlock.isCustomerBlocked;
   }
-
-  bool get isEDI => customerCodeInfo.status.isEDI;
 
   // Used in listenWhen for BlocListener for sections in home page to refresh the data
   // when pulling to refresh or selecting a new shipTo

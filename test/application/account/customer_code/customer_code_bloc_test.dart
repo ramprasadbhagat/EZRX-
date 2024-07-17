@@ -656,6 +656,53 @@ void main() {
     );
 
     blocTest(
+      'Customer Code On Load More success',
+      build: () => CustomerCodeBloc(
+        customerCodeRepository: customerCodeMockRepo,
+        config: config,
+      ),
+      seed: () => CustomerCodeState.initial().copyWith(
+        hideCustomer: false,
+        userInfo: fakeUser,
+        selectedSalesOrg: fakeSaleOrg,
+        isFetching: false,
+        customerCodeList: customerMockData.soldToInformation,
+      ),
+      setUp: () {
+        when(
+          () => customerCodeMockRepo.getCustomerCode(
+            salesOrganisation: fakeSaleOrg,
+            searchKey: SearchKey.empty(),
+            hideCustomer: false,
+            offset: 34,
+            user: fakeUser,
+            pageSize: config.pageSize,
+          ),
+        ).thenAnswer((_) async => Right(customerMockData));
+      },
+      act: (bloc) => bloc.add(const CustomerCodeEvent.loadMore()),
+      expect: () => [
+        CustomerCodeState.initial().copyWith(
+          hideCustomer: false,
+          userInfo: fakeUser,
+          selectedSalesOrg: fakeSaleOrg,
+          customerCodeList: customerMockData.soldToInformation,
+        ),
+        CustomerCodeState.initial().copyWith(
+          hideCustomer: false,
+          userInfo: fakeUser,
+          selectedSalesOrg: fakeSaleOrg,
+          isFetching: false,
+          canLoadMore: true,
+          customerCodeList: [
+            ...customerMockData.soldToInformation,
+            ...customerMockData.soldToInformation,
+          ],
+        ),
+      ],
+    );
+
+    blocTest(
       'Customer Code On Load More fail',
       build: () => CustomerCodeBloc(
         customerCodeRepository: customerCodeMockRepo,
@@ -780,116 +827,5 @@ void main() {
         ),
       ],
     );
-
-    //TODO: Fix test loadStoredCustomerCode from eligibilityBloc
-
-    // blocTest(
-    //   'loadStoredCustomerCode - Customer Code Storage returns success and offset is sent as 0 to fetch customerCodeList',
-    //   build: () => CustomerCodeBloc(
-    //     customerCodeRepository: customerCodeMockRepo,
-    //     config: config,
-    //   ),
-    //   setUp: () {
-    //     when(() => customerCodeMockRepo.getCustomerCodeStorage()).thenAnswer(
-    //       (_) async => const Right(
-    //         AccountSelector(
-    //           salesOrg: 'mockSalesOrg',
-    //           customerCode: 'mockCustomerCode',
-    //           shippingAddress: 'mockShippingAddress',
-    //         ),
-    //       ),
-    //     );
-
-    //     when(
-    //       () => customerCodeMockRepo.getCustomerCode(
-    //         salesOrganisation: fakeSaleOrg,
-    //         customerCodes: ['mockShippingAddress'],
-    //         hideCustomer: false,
-    //         offset: 0,
-    //         user: fakeUser,
-    //         pageSize: fakePageSize,
-    //       ),
-    //     ).thenAnswer(
-    //       (invocation) async => Right([customerMockData.first]),
-    //     );
-    //   },
-    //   seed: () => CustomerCodeState.initial().copyWith(
-    //     hideCustomer: false,
-    //     userInfo: fakeUser,
-    //     selectedSalesOrg: fakeSaleOrg,
-    //     customerCodeList: [CustomerCodeInfo.empty()],
-    //   ),
-    //   act: (CustomerCodeBloc bloc) {
-    //     bloc.add(
-    //       const CustomerCodeEvent.loadStoredCustomerCode(),
-    //     );
-    //   },
-    //   expect: () => [
-    //     CustomerCodeState.initial().copyWith(
-    //       hideCustomer: false,
-    //       userInfo: fakeUser,
-    //       selectedSalesOrg: fakeSaleOrg,
-    //
-    //       isFetching: false,
-    //       canLoadMore: false,
-    //       customerCodeList: [customerMockData.first],
-    //       searchKey: SearchKey.search('mockShippingAddress'),
-    //     ),
-    //   ],
-    // );
-
-    //   blocTest(
-    //     'loadStoredCustomerCode - last saved customer code is not at the first index of customerCodeInfoList',
-    //     build: () => CustomerCodeBloc(
-    //       customerCodeRepository: customerCodeMockRepo,
-    //       config: config,
-    //     ),
-    //     setUp: () {
-    //       when(() => customerCodeMockRepo.getCustomerCodeStorage()).thenAnswer(
-    //         (_) async => const Right(
-    //           AccountSelector(
-    //             salesOrg: 'mockSalesOrg',
-    //             customerCode: '0000002011',
-    //             shippingAddress: 'mockShippingAddress',
-    //           ),
-    //         ),
-    //       );
-
-    //       when(
-    //         () => customerCodeMockRepo.getCustomerCode(
-    //           salesOrganisation: fakeSaleOrg,
-    //           customerCodes: ['mockShippingAddress'],
-    //           hideCustomer: false,
-    //           offset: 0,
-    //           user: fakeUser,
-    //           pageSize: fakePageSize,
-    //         ),
-    //       ).thenAnswer(
-    //         (invocation) async => Right(customerMockData),
-    //       );
-    //     },
-    //     seed: () => CustomerCodeState.initial().copyWith(
-    //       hideCustomer: false,
-    //       userInfo: fakeUser,
-    //       selectedSalesOrg: fakeSaleOrg,
-    //       customerCodeList: [CustomerCodeInfo.empty()],
-    //     ),
-    //     act: (CustomerCodeBloc bloc) {
-    //       bloc.add(
-    //         const CustomerCodeEvent.loadStoredCustomerCode(),
-    //       );
-    //     },
-    //     expect: () => [
-    //       CustomerCodeState.initial().copyWith(
-    //         hideCustomer: false,
-    //         userInfo: fakeUser,
-    //         selectedSalesOrg: fakeSaleOrg,
-    //
-    //         isFetching: false,
-    //         customerCodeList: customerMockData,
-    //         searchKey: SearchKey.search('mockShippingAddress'),
-    //       ),
-    //     ],
-    //   );
   });
 }

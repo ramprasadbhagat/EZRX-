@@ -163,7 +163,7 @@ class _QuantityAndPrice extends StatelessWidget {
                   color: ZPColors.neutralsBlack,
                 ),
           ),
-          eligibilityState.isIDMarket
+          eligibilityState.salesOrg.isID
               ? PriceComponent(
                   salesOrgConfig: eligibilityState.salesOrgConfigs,
                   price: '0',

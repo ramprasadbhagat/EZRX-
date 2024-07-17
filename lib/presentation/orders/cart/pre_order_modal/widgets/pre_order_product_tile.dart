@@ -28,7 +28,7 @@ class _PreOrderProductTile extends StatelessWidget {
           if (cartProduct.materialInfo.type.typeDealOrOverrideBonus)
             Align(
               alignment: Alignment.centerRight,
-              child: context.read<EligibilityBloc>().state.isIDMarket
+              child: context.read<EligibilityBloc>().state.salesOrg.isID
                   ? PriceComponent(
                       salesOrgConfig:
                           context.read<EligibilityBloc>().state.salesOrgConfigs,

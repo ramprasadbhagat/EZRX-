@@ -125,7 +125,7 @@ class _ItemSubTotalSection extends StatelessWidget {
       padding: const EdgeInsets.only(right: 8, bottom: 8),
       child: Align(
         alignment: Alignment.centerRight,
-        child: eligibilityState.isIDMarket
+        child: eligibilityState.salesOrg.isID
             ? PriceComponent(
                 salesOrgConfig: eligibilityState.salesOrgConfigs,
                 price: '0',

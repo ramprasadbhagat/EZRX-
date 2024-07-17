@@ -25,8 +25,20 @@ void main() {
   });
 
   group(
-    'Announcement Bloc',
+    'eZPoint Bloc',
     () {
+      blocTest(
+        'Initialize event',
+        build: () => EZPointBloc(eZPointRepository: repository),
+        seed: () => EZPointState.initial().copyWith(
+          ezPointToken: eZPointTokenMock,
+          isFetching: true,
+          eZPointTokenFailureOrSuccessOption: optionOf(const Left(fakeError)),
+        ),
+        act: (bloc) => bloc.add(const EZPointEvent.initialized()),
+        expect: () => [EZPointState.initial()],
+      );
+
       blocTest(
         'Get eZPoint Token Failure',
         build: () => EZPointBloc(eZPointRepository: repository),
@@ -35,24 +47,16 @@ void main() {
             () => repository.getEZPointToken(
               customerCodeInfo: fakeCustomerCodeInfo,
             ),
-          ).thenAnswer(
-            (_) async => const Left(
-              fakeError,
-            ),
-          );
+          ).thenAnswer((_) async => const Left(fakeError));
         },
         act: (EZPointBloc bloc) => bloc.add(
           EZPointEvent.fetch(customerCodeInfo: fakeCustomerCodeInfo),
         ),
         expect: () => [
-          EZPointState.initial().copyWith(
-            isFetching: true,
-          ),
+          EZPointState.initial().copyWith(isFetching: true),
           EZPointState.initial().copyWith(
             eZPointTokenFailureOrSuccessOption: optionOf(
-              const Left(
-                fakeError,
-              ),
+              const Left(fakeError),
             ),
           ),
         ],
@@ -66,22 +70,14 @@ void main() {
             () => repository.getEZPointToken(
               customerCodeInfo: fakeCustomerCodeInfo,
             ),
-          ).thenAnswer(
-            (_) async => Right(
-              eZPointTokenMock,
-            ),
-          );
+          ).thenAnswer((_) async => Right(eZPointTokenMock));
         },
         act: (EZPointBloc bloc) => bloc.add(
           EZPointEvent.fetch(customerCodeInfo: fakeCustomerCodeInfo),
         ),
         expect: () => [
-          EZPointState.initial().copyWith(
-            isFetching: true,
-          ),
-          EZPointState.initial().copyWith(
-            ezPointToken: eZPointTokenMock,
-          ),
+          EZPointState.initial().copyWith(isFetching: true),
+          EZPointState.initial().copyWith(ezPointToken: eZPointTokenMock),
         ],
       );
     },

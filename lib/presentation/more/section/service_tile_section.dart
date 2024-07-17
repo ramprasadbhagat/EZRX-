@@ -75,7 +75,7 @@ class ServiceTile extends StatelessWidget {
         if (state.marketPlacePaymentEligible)
           MoreDetailsTile.marketplacePaymentsTab(context),
       ],
-      if (state.isIDMarket) MoreDetailsTile.eZPointTab(context),
+      if (state.salesOrg.isID) MoreDetailsTile.eZPointTab(context),
     ];
   }
 }

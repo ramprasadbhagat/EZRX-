@@ -47,8 +47,8 @@ class _CarouselBannerState extends State<CarouselBanner> {
                   country: state.salesOrg.country,
                   role: state.user.role.type.getEZReachRoleType,
                   bannerType: 'banner_carousel',
-                  branchCode: state.isIDMarket ? state.shipToInfo.plant : '',
-                  targetCustomerType: state.isIDMarket
+                  branchCode: state.salesOrg.isID ? state.shipToInfo.plant : '',
+                  targetCustomerType: state.salesOrg.isID
                       ? state.shipToInfo.targetCustomerType
                       : '',
                 ),

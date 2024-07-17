@@ -8,7 +8,6 @@ import 'package:ezrxmobile/domain/account/entities/account_selector.dart';
 import 'package:ezrxmobile/application/account/sales_org/sales_org_bloc.dart';
 import 'package:ezrxmobile/infrastructure/account/repository/sales_org_repository.dart';
 
-import '../../../common_mock_data/sales_org_config_mock/fake_id_sales_org_config.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_ph_sales_org_config.dart';
 import '../../../common_mock_data/sales_organsiation_mock.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_my_sales_org_config.dart';
@@ -28,12 +27,14 @@ void main() {
         );
       },
     );
+
     blocTest<SalesOrgBloc, SalesOrgState>(
       'For "initialized" Event',
       build: () => SalesOrgBloc(salesOrgRepository: salesOrgRepositoryMock),
       act: (bloc) => bloc.add(const SalesOrgEvent.initialized()),
       expect: () => [SalesOrgState.initial()],
     );
+
     blocTest<SalesOrgBloc, SalesOrgState>(
       'For "selected" Event with Error',
       build: () => SalesOrgBloc(salesOrgRepository: salesOrgRepositoryMock),
@@ -68,6 +69,7 @@ void main() {
         ),
       ],
     );
+
     blocTest<SalesOrgBloc, SalesOrgState>(
       'For "selected" Event with Data',
       build: () => SalesOrgBloc(salesOrgRepository: salesOrgRepositoryMock),
@@ -187,46 +189,6 @@ void main() {
     );
 
     blocTest<SalesOrgBloc, SalesOrgState>(
-      '=> Test if hideCustomer',
-      build: () => SalesOrgBloc(
-        salesOrgRepository: salesOrgRepositoryMock,
-      ),
-      act: (bloc) {
-        final isHideCustomer = SalesOrgState.initial().hideCustomer;
-        expect(isHideCustomer, false);
-      },
-    );
-
-    blocTest<SalesOrgBloc, SalesOrgState>(
-      '=> Test currency getter',
-      build: () => SalesOrgBloc(
-        salesOrgRepository: salesOrgRepositoryMock,
-      ),
-      act: (bloc) {
-        final currency = SalesOrgState.initial()
-            .copyWith(
-              configs: fakePHSalesOrgConfigs,
-            )
-            .currency;
-        expect(currency.getOrCrash(), 'php');
-      },
-    );
-
-    blocTest<SalesOrgBloc, SalesOrgState>(
-      '=> Test disableBundles getter',
-      build: () => SalesOrgBloc(
-        salesOrgRepository: salesOrgRepositoryMock,
-      ),
-      act: (bloc) {
-        final isDisableBundles = SalesOrgState.initial()
-            .copyWith(
-              configs: fakeIDSalesOrgConfigs,
-            )
-            .disableBundles;
-        expect(isDisableBundles, true);
-      },
-    );
-    blocTest<SalesOrgBloc, SalesOrgState>(
       '=> Test fetch available sales org',
       build: () => SalesOrgBloc(
         salesOrgRepository: salesOrgRepositoryMock,
@@ -238,6 +200,7 @@ void main() {
         SalesOrgState.initial(),
       ],
     );
+
     blocTest<SalesOrgBloc, SalesOrgState>(
       '=> Test search sales org',
       build: () => SalesOrgBloc(
@@ -256,6 +219,7 @@ void main() {
         ),
       ],
     );
+
     blocTest<SalesOrgBloc, SalesOrgState>(
       '=> Test sales org with Philippine market',
       build: () => SalesOrgBloc(salesOrgRepository: salesOrgRepositoryMock),
@@ -371,30 +335,26 @@ void main() {
         ),
       ],
     );
-    // blocTest<SalesOrgBloc, SalesOrgState>(
-    //   'For "Stream Listener"',
-    //   build: () => SalesOrgBloc(
-    //       userBloc: userBlocMock, salesOrgRepository: salesOrgRepositoryMock),
-    //   setUp: () {
-    //     when(() => userBlocMock.stream).thenAnswer((invocation) {
-    //       return Stream.value(UserState.initial().copyWith(
-    //           user: User.empty().copyWith(
-    //               userSalesOrganisations: [SalesOrganisation.empty()])));
-    //     });
-    //     when(() => salesOrgRepositoryMock
-    //             .getSalesOrganisationConfigs(SalesOrganisation.empty()))
-    //         .thenAnswer(
-    //             (invocation) async => Right(SalesOrganisationConfigs.empty()));
-    //   },
-    //   act: (bloc) => bloc.add(
-    //       SalesOrgEvent.selected(salesOrganisation: SalesOrganisation.empty())),
-    //   expect: () => [
-    //     SalesOrgState.initial().copyWith(
-    //       salesOrganisation: SalesOrganisation.empty(),
-    //       configs: SalesOrganisationConfigs.empty(),
-    //       salesOrgFailureOrSuccessOption: none(),
-    //     )
-    //   ],
-    // );
+
+    test('State getters', () {
+      expect(
+        SalesOrgState.initial()
+            .copyWith(salesOrganisation: fakeMYSalesOrganisation)
+            .salesOrg,
+        fakeMYSalesOrg,
+      );
+
+      expect(
+        SalesOrgState.initial()
+            .copyWith(salesOrganisation: fakeMYSalesOrganisation)
+            .haveSelectedSalesOrganisation,
+        true,
+      );
+
+      expect(
+        SalesOrgState.initial().haveSelectedSalesOrganisation,
+        false,
+      );
+    });
   });
 }
