@@ -73,6 +73,17 @@ class OrderNumberSection extends StatelessWidget {
                             context.router.push(
                               const ViewByOrderDetailsPageRoute(),
                             );
+                          } else {
+                            CustomSnackBar(
+                              icon: const Icon(
+                                Icons.info,
+                                color: ZPColors.error,
+                              ),
+                              backgroundColor: ZPColors.errorSnackBarColor,
+                              messageText: context.tr(
+                                'You do not have access to view this order',
+                              ),
+                            ).show(context);
                           }
                         },
                       ),

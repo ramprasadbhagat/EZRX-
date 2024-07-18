@@ -1036,5 +1036,61 @@ void main() {
       );
       expect(msg, findsOneWidget);
     });
+
+    testWidgets(
+        ' => Show error message when tap on the order number and get order header empty from api',
+        (tester) async {
+      when(() => creditAndInvoiceDetailsBlocMock.state).thenReturn(
+        CreditAndInvoiceDetailsState.initial().copyWith(
+          itemsInfo: fakeInvoiceDetail,
+          basicInfo: fakeInvoice,
+        ),
+      );
+      when(() => eligibilityBlocMock.state).thenReturn(
+        EligibilityState.initial().copyWith(
+          user: User.empty().copyWith(
+            accessRight: AccessRight.empty().copyWith(
+              orders: true,
+            ),
+          ),
+        ),
+      );
+
+      whenListen(
+        viewByOrderBlocMock,
+        Stream.fromIterable([
+          ViewByOrderState.initial(),
+          ViewByOrderState.initial().copyWith(
+            failureOrSuccessOption: optionOf(const Right(unit)),
+            viewByOrderList: ViewByOrder.empty().copyWith(
+              orderHeaders: [],
+            ),
+            searchKey: SearchKey.search('test'),
+          ),
+        ]),
+      );
+
+      await getWidget(tester);
+      await tester.pumpAndSettle();
+      expect(find.byKey(WidgetKeys.scrollList), findsOneWidget);
+      expect(find.byType(InvoiceDetailsSection), findsOneWidget);
+      expect(find.byType(OrderNumberSection), findsOneWidget);
+      expect(find.textContaining('Order number'), findsOneWidget);
+      final invoiceDetailsOrderNumberButton =
+          find.byKey(WidgetKeys.invoiceDetailsOrderNumberButton);
+      expect(
+        invoiceDetailsOrderNumberButton,
+        findsOneWidget,
+      );
+      await tester.tap(invoiceDetailsOrderNumberButton);
+      await tester.pumpAndSettle();
+
+      final snackBarFinder = find.byKey(WidgetKeys.customSnackBar);
+      expect(snackBarFinder, findsOneWidget);
+      final msg = find.textContaining(
+        'You do not have access to view this order'.tr(),
+      );
+      expect(msg, findsOneWidget);
+    });
   });
 }
