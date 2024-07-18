@@ -20,6 +20,7 @@ void main() {
   WidgetsFlutterBinding.ensureInitialized();
   late TenderContractRepository tenderContractRepositoryMock;
   late List<TenderContract> tenderContractListMockData;
+  late TenderContract tenderContactMockData;
   final materialNumberMockData = MaterialNumber('fake-material-number');
   const fakeError = ApiFailure.other('fake-error');
 
@@ -27,6 +28,7 @@ void main() {
     tenderContractRepositoryMock = TenderContractRepositoryMock();
     tenderContractListMockData =
         await TenderContractLocalDataSource().getTenderContractDetails();
+    tenderContactMockData = tenderContractListMockData.first;
   });
 
   group('Tender Contract Detail Bloc', () {
@@ -162,6 +164,37 @@ void main() {
       ),
       expect: () => [
         TenderContractDetailState.initial().copyWith(
+          tenderContractEnable: true,
+        ),
+      ],
+    );
+
+    blocTest(
+      'Check updateQty',
+      build: () => TenderContractDetailBloc(
+        tenderContractRepository: tenderContractRepositoryMock,
+      ),
+      act: (TenderContractDetailBloc bloc) => bloc.add(
+        const TenderContractDetailEvent.updateQty(qty: 1),
+      ),
+      expect: () => [
+        TenderContractDetailState.initial().copyWith(inputQty: 1),
+      ],
+    );
+
+    blocTest(
+      'Check set default value for edit',
+      build: () => TenderContractDetailBloc(
+        tenderContractRepository: tenderContractRepositoryMock,
+      ),
+      act: (TenderContractDetailBloc bloc) => bloc.add(
+        TenderContractDetailEvent.setDefaultValueForEdit(
+          tenderContract: tenderContactMockData,
+        ),
+      ),
+      expect: () => [
+        TenderContractDetailState.initial().copyWith(
+          selectedTenderContract: tenderContactMockData,
           tenderContractEnable: true,
         ),
       ],
