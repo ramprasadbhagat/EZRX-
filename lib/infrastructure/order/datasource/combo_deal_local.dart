@@ -7,11 +7,13 @@ import 'package:flutter/services.dart';
 class ComboDealLocalDataSource {
   ComboDealLocalDataSource();
 
-  Future<List<ComboDeal>> getComboDealList() async {
+  Future<List<ComboDeal>> getComboDealList({
+    ComboDealScheme scheme = ComboDealScheme.k1,
+  }) async {
     await Future.delayed(const Duration(seconds: 4));
     final data = json.decode(
       await rootBundle
-          .loadString('assets/json/getComboDealForMaterialResponseK1.json'),
+          .loadString('assets/json/${scheme.comboDealMockResponsePath}'),
     );
     final finalData = data['data']['comboDealForMaterials'];
 
@@ -24,7 +26,7 @@ class ComboDealLocalDataSource {
     await Future.delayed(const Duration(seconds: 4));
     final data = json.decode(
       await rootBundle.loadString(
-        'assets/json/getComboDealForPrincipleResponseK5.json',
+        'assets/json/${ComboDealScheme.k5.comboDealMockResponsePath}',
       ),
     );
     final finalData = data['data']['comboDealForPrincMatGrp'];

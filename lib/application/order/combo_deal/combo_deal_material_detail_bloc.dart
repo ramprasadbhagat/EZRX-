@@ -52,56 +52,6 @@ class ComboDealMaterialDetailBloc
           shipToInfo: e.shipToInfo,
         ),
       ),
-      initFromCartComboDealItems: (e) {
-        final items = {
-          for (final item in e.items)
-            item.getMaterialNumber: item.copyWith(
-              salesOrgConfig: e.salesConfigs,
-            ),
-        };
-
-        final selectedItems = {
-          for (final item in e.items) item.getMaterialNumber: true,
-        };
-
-        final comboDeal = e.items.firstComboDeal;
-        final missingComboItemMaterialNumbers = comboDeal.allMaterialNumbers
-            .where(
-              (materialNumber) =>
-                  !e.items.materialNumbers.contains(materialNumber),
-            )
-            .toList();
-
-        items.addAll(
-          {
-            for (final materialNumber in missingComboItemMaterialNumbers)
-              materialNumber: PriceAggregate.empty()
-                  .copyWith(
-                    salesOrgConfig: e.salesConfigs,
-                    materialInfo: MaterialInfo.empty().copyWith(
-                      materialNumber: materialNumber,
-                    ),
-                  )
-                  .copyWithComboDealMinQty(comboDeal),
-          },
-        );
-
-        selectedItems.addAll(
-          {
-            for (final materialNumber in missingComboItemMaterialNumbers)
-              materialNumber: false,
-          },
-        );
-
-        emit(
-          state.copyWith(
-            items: items,
-            selectedItems: selectedItems,
-            isFetchingComboInfo: false,
-            isFetchingPrice: true,
-          ),
-        );
-      },
       setPriceInfo: (e) {
         final itemsWithPriceInfo =
             Map<MaterialNumber, PriceAggregate>.from(state.items);
@@ -237,7 +187,7 @@ class ComboDealMaterialDetailBloc
           }
         }
 
-        final stockInfoList = await _getStockInfoList(state.allMaterialsInfo);
+        final stockInfoList = await _getStockInfoList(materialsInfo);
         if (stockInfoList.isNotEmpty) {
           for (final materialStockInfo in stockInfoList) {
             final material = items[materialStockInfo.materialNumber];

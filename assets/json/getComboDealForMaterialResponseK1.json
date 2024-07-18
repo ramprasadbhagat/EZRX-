@@ -12,7 +12,7 @@
             "materials": [
               {
                 "minQty": "24.000",
-                "materialNumber": "000000000021130726",
+                "materialNumber": "000000000023344243",
                 "rate": "-8.50",
                 "type": "%",
                 "conditionNumber": "0015958835",
@@ -25,7 +25,7 @@
             "materials": [
               {
                 "minQty": "15.000",
-                "materialNumber": "000000000021130718",
+                "materialNumber": "000000000023344235",
                 "rate": "",
                 "type": "",
                 "conditionNumber": "0015958834",
@@ -38,7 +38,7 @@
             "materials": [
               {
                 "minQty": "20.000",
-                "materialNumber": "000000000021222875",
+                "materialNumber": "000000000023272832",
                 "rate": "8",
                 "type": "USD",
                 "conditionNumber": "0015958836",

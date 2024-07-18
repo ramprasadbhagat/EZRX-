@@ -9,10 +9,6 @@ class ComboDealMaterialDetailEvent with _$ComboDealMaterialDetailEvent {
     required User user,
     required SalesOrganisationConfigs salesConfigs,
   }) = _Initialize;
-  const factory ComboDealMaterialDetailEvent.initFromCartComboDealItems({
-    required List<PriceAggregate> items,
-    required SalesOrganisationConfigs salesConfigs,
-  }) = _InitFromCartComboDealItems;
   const factory ComboDealMaterialDetailEvent.setPriceInfo({
     required Map<MaterialNumber, MaterialPriceDetail> priceMap,
   }) = _SetPriceInfo;
