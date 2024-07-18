@@ -46,6 +46,16 @@ class PermissionServiceMock extends Mock implements PermissionService {}
 
 class TakePictureServiceMock extends Mock implements TakePictureService {}
 
+class TestFile extends FileMock {
+  final String _path;
+  final Uint8List _bytes;
+  TestFile(this._path, this._bytes) {
+    when(lengthSync).thenReturn(10);
+    when(readAsBytesSync).thenReturn(_bytes);
+    when(() => path).thenReturn(_path);
+  }
+}
+
 void main() {
   late PoAttachmentRepository poAttachmentRepository;
   late Config mockConfig;
@@ -72,6 +82,8 @@ void main() {
     path: fakeUrl,
   );
   final fakePODocuments = PoDocuments.empty();
+  const fakeImagePaths = ['fake-path'];
+  final fakeBytes = Uint8List(10);
 
   setUpAll(() {
     mockConfig = MockConfig();
@@ -511,6 +523,44 @@ void main() {
         Left(FailureHandler.handleFailure(fakeException)),
       );
     });
+
+    test('take photo permission granted', () async {
+      when(() => permissionServiceMock.requestCameraPermission())
+          .thenAnswer((invocation) async => PermissionStatus.granted);
+
+      final result = await poAttachmentRepository.getPermission(
+        uploadOptionType: UploadOptionType.takePhoto,
+      );
+      expect(
+        result.isRight(),
+        true,
+      );
+      expect(
+        result.getOrElse(() => PermissionStatus.denied),
+        PermissionStatus.granted,
+      );
+    });
+
+    test('take photo permission denied', () async {
+      when(() => permissionServiceMock.requestCameraPermission())
+          .thenAnswer((invocation) async => PermissionStatus.denied);
+
+      final result = await poAttachmentRepository.getPermission(
+        uploadOptionType: UploadOptionType.takePhoto,
+      );
+      expect(
+        result.isLeft(),
+        true,
+      );
+      expect(
+        result,
+        const Left(
+          ApiFailure.cameraPermissionFailed(
+            false,
+          ),
+        ),
+      );
+    });
   });
 
   group('PoAttachmentRepository pickFiles test  ', () {
@@ -594,6 +644,40 @@ void main() {
           () => [],
         ),
         [fakePlatformFile],
+      );
+    });
+
+    test('pickFiles with UploadOptionType.takePhoto success', () async {
+      await IOOverrides.runZoned(
+        () async {
+          when(
+            () => takePictureServiceMock.takePicture(),
+          ).thenAnswer(
+            (invocation) async => fakeImagePaths,
+          );
+          final result = await poAttachmentRepository.pickFiles(
+            uploadOptionType: UploadOptionType.takePhoto,
+          );
+          final fileList = [
+            PlatformFile(
+              name: fakeImagePaths.first,
+              size: 10,
+              bytes: fakeBytes,
+              path: fakeImagePaths.first,
+            ),
+          ];
+          expect(
+            result.isRight(),
+            true,
+          );
+          expect(
+            result.getOrElse(
+              () => [],
+            ),
+            fileList,
+          );
+        },
+        createFile: (String path) => TestFile(path, fakeBytes),
       );
     });
   });
@@ -856,6 +940,82 @@ void main() {
       final result = await poAttachmentRepository.downloadPermission();
       expect(result.isLeft(), true);
       expect(result, Left(FailureHandler.handleFailure(fakeException)));
+    });
+  });
+
+  group('PoAttachmentRepository saveAssetImagesToGallery test', () {
+    test('saveAssetImagesToGallery ios permission failed', () async {
+      debugDefaultTargetPlatformOverride = TargetPlatform.iOS;
+      when(() => permissionServiceMock.requestAddPhotoPermission()).thenAnswer(
+        (_) async => PermissionStatus.denied,
+      );
+      final result = await poAttachmentRepository.saveAssetImagesToGallery(
+        fileList: fakeImagePaths,
+      );
+      expect(result.isLeft(), true);
+      expect(
+        result,
+        const Left(ApiFailure.photoPermissionFailed()),
+      );
+    });
+
+    test('saveAssetImagesToGallery ios success', () async {
+      debugDefaultTargetPlatformOverride = TargetPlatform.iOS;
+      when(() => permissionServiceMock.requestAddPhotoPermission()).thenAnswer(
+        (_) async => PermissionStatus.granted,
+      );
+      when(
+        () =>
+            fileSystemHelperMock.saveAssetImageToGallery(fakeImagePaths.first),
+      ).thenAnswer(
+        (_) => Future.value(),
+      );
+      final result = await poAttachmentRepository.saveAssetImagesToGallery(
+        fileList: fakeImagePaths,
+      );
+      expect(result.isRight(), true);
+      expect(
+        result,
+        const Right(true),
+      );
+    });
+
+    test('saveAssetImagesToGallery android failed', () async {
+      debugDefaultTargetPlatformOverride = TargetPlatform.android;
+
+      when(
+        () =>
+            fileSystemHelperMock.saveAssetImageToGallery(fakeImagePaths.first),
+      ).thenThrow(
+        fakeException,
+      );
+      final result = await poAttachmentRepository.saveAssetImagesToGallery(
+        fileList: fakeImagePaths,
+      );
+      expect(result.isLeft(), true);
+      expect(
+        result,
+        Left(FailureHandler.handleFailure(fakeException)),
+      );
+    });
+
+    test('saveAssetImagesToGallery android success', () async {
+      debugDefaultTargetPlatformOverride = TargetPlatform.android;
+
+      when(
+        () =>
+            fileSystemHelperMock.saveAssetImageToGallery(fakeImagePaths.first),
+      ).thenAnswer(
+        (_) => Future.value(),
+      );
+      final result = await poAttachmentRepository.saveAssetImagesToGallery(
+        fileList: fakeImagePaths,
+      );
+      expect(result.isRight(), true);
+      expect(
+        result,
+        const Right(true),
+      );
     });
   });
 }

@@ -259,6 +259,26 @@ void main() {
         expect(result, '25256DFD-D111-43F1-B29A-2FABB6B45E42');
       },
     );
+
+    test(
+      'isPDOSealEnabled for non PH market',
+      () {
+        const input = '1900';
+        final salesOrg = SalesOrg(input);
+        final result = salesOrg.isPDOSealEnabled;
+        expect(result, false);
+      },
+    );
+
+    test(
+      'isPDOSealEnabled for PH market',
+      () {
+        const input = '2500';
+        final salesOrg = SalesOrg(input);
+        final result = salesOrg.isPDOSealEnabled;
+        expect(result, true);
+      },
+    );
   });
 
   group('RoleType value object', () {

@@ -32,7 +32,7 @@ class NationalPrivacyCommissionPage extends StatelessWidget {
           children: [
             IconButton(
               key: WidgetKeys.closeButton,
-              onPressed: () => Navigator.pop(context),
+              onPressed: () => context.router.back(),
               iconSize: 24,
               padding: EdgeInsets.zero,
               icon: const Icon(Icons.close),
@@ -86,6 +86,7 @@ class NationalPrivacyCommissionPage extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       ElevatedButton(
+                        key: WidgetKeys.saveSealImages,
                         onPressed: state.isSaving
                             ? null
                             : () {
@@ -115,6 +116,7 @@ class NationalPrivacyCommissionPage extends StatelessWidget {
                   (index) => Padding(
                     padding: const EdgeInsets.only(top: 16),
                     child: Image.asset(
+                      key: WidgetKeys.sealImage(sealList[index]),
                       sealList[index],
                       height: 290,
                     ),

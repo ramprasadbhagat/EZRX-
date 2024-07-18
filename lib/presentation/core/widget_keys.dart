@@ -1659,6 +1659,9 @@ class WidgetKeys {
   static Key nationalPrivacyCommissionPage =
       const Key('nationalPrivacyCommissionPage');
 
+  static Key saveSealImages = const Key('saveSealImages');
+  static Key sealImage(String imagePath) => Key('sealImage$imagePath');
+
   //============================================================
   // Payment advice Page
   //============================================================
