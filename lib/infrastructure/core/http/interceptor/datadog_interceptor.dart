@@ -14,7 +14,8 @@ class DatadogInterceptor extends Interceptor {
     RequestOptions options,
     RequestInterceptorHandler handler,
   ) async {
-    final operationName = _extractOperationNameFromGraphQL(options.data);
+    final operationName =
+        _extractOperationNameFromGraphQL(options.data.toString());
 
     if (operationName.isNotEmpty) {
       datadogService.addRumAttribute(key: 'api_endpoint', value: operationName);
