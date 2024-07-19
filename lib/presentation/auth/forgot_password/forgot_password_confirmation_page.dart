@@ -2,6 +2,7 @@ import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
+import 'package:ezrxmobile/presentation/theme/theme_data.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -56,14 +57,15 @@ class ForgetPasswordConfirmationPage extends StatelessWidget {
                     ),
                     Expanded(
                       child: ListView(
-                        padding: const EdgeInsets.symmetric(horizontal: 12),
+                        padding:
+                            const EdgeInsets.symmetric(horizontal: padding12),
                         children: [
                           const _EmailSendToYou(),
                           SvgPicture.asset(
                             'assets/svg/reset_password_success_banner.svg',
                             height: Responsive.isMobile(context) ? 250 : 400,
                           ),
-                          const SizedBox(height: 15),
+                          const SizedBox(height: padding12),
                           Center(
                             child: RichText(
                               text: TextSpan(
@@ -100,7 +102,7 @@ class ForgetPasswordConfirmationPage extends StatelessWidget {
                               ),
                             ),
                           ),
-                          const SizedBox(height: 20),
+                          const SizedBox(height: padding24),
                           const BackToLogin(),
                         ],
                       ),

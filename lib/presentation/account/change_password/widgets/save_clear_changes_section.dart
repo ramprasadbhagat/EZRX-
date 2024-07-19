@@ -19,12 +19,12 @@ class _SaveClearChangesSection extends StatelessWidget {
                 color: ZPColors.lightGray2,
                 indent: 0,
                 endIndent: 0,
-                height: 40,
+                height: 1,
               ),
               if (state.showNewPasswordPatternMismatchError)
                 const ValidationsFailedWarning(),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 18),
+                padding: const EdgeInsets.all(padding12),
                 child: Row(
                   children: [
                     Expanded(
@@ -42,7 +42,7 @@ class _SaveClearChangesSection extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(
-                      width: 20,
+                      width: padding12,
                     ),
                     Expanded(
                       child: ElevatedButton(

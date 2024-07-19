@@ -6,8 +6,8 @@ class _UserDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomCard(
-      padding: const EdgeInsets.all(16.0),
-      margin: const EdgeInsets.symmetric(vertical: 16),
+      padding: const EdgeInsets.all(padding12),
+      margin: const EdgeInsets.all(padding12),
       child: BlocBuilder<UserBloc, UserState>(
         buildWhen: (previous, current) => previous.user != current.user,
         builder: (context, state) {
@@ -24,10 +24,10 @@ class _UserDetails extends StatelessWidget {
                     ?.copyWith(color: ZPColors.neutralsBlack),
                 valueTextStyle: Theme.of(context)
                     .textTheme
-                    .bodyLarge
+                    .bodyMedium
                     ?.copyWith(color: ZPColors.neutralsBlack),
               ),
-              const SizedBox(height: 20),
+              const SizedBox(height: padding12),
               BalanceTextRow(
                 keyFlex: 3,
                 valueFlex: 5,
@@ -39,10 +39,10 @@ class _UserDetails extends StatelessWidget {
                     ?.copyWith(color: ZPColors.neutralsBlack),
                 valueTextStyle: Theme.of(context)
                     .textTheme
-                    .bodyLarge
+                    .bodyMedium
                     ?.copyWith(color: ZPColors.neutralsBlack),
               ),
-              const SizedBox(height: 20),
+              const SizedBox(height: padding12),
               BalanceTextRow(
                 keyFlex: 3,
                 valueFlex: 5,
@@ -54,10 +54,10 @@ class _UserDetails extends StatelessWidget {
                     ?.copyWith(color: ZPColors.neutralsBlack),
                 valueTextStyle: Theme.of(context)
                     .textTheme
-                    .bodyLarge
+                    .bodyMedium
                     ?.copyWith(color: ZPColors.neutralsBlack),
               ),
-              const SizedBox(height: 20),
+              const SizedBox(height: padding12),
               BalanceTextRow(
                 keyFlex: 3,
                 valueFlex: 5,
@@ -69,10 +69,10 @@ class _UserDetails extends StatelessWidget {
                     ?.copyWith(color: ZPColors.neutralsBlack),
                 valueTextStyle: Theme.of(context)
                     .textTheme
-                    .bodyLarge
+                    .bodyMedium
                     ?.copyWith(color: ZPColors.neutralsBlack),
               ),
-              const SizedBox(height: 20),
+              const SizedBox(height: padding12),
               BalanceTextRow(
                 keyFlex: 3,
                 valueFlex: 5,
@@ -84,10 +84,10 @@ class _UserDetails extends StatelessWidget {
                     ?.copyWith(color: ZPColors.neutralsBlack),
                 valueTextStyle: Theme.of(context)
                     .textTheme
-                    .bodyLarge
+                    .bodyMedium
                     ?.copyWith(color: ZPColors.neutralsBlack),
               ),
-              const SizedBox(height: 20),
+              const SizedBox(height: padding12),
               if (!context
                   .read<EligibilityBloc>()
                   .state
@@ -107,11 +107,12 @@ class _UserDetails extends StatelessWidget {
                       ?.copyWith(color: ZPColors.neutralsBlack),
                   valueTextStyle: Theme.of(context)
                       .textTheme
-                      .bodyLarge
+                      .bodyMedium
                       ?.copyWith(color: ZPColors.neutralsBlack),
                 ),
-              const SizedBox(height: 20),
+              const SizedBox(height: padding12),
               const _LanguageDropDown(),
+              const SizedBox(height: padding12),
             ],
           );
         },

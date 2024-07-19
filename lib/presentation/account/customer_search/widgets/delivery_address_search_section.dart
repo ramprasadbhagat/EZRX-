@@ -8,7 +8,7 @@ class _DeliveryAddressSearchSection extends StatelessWidget {
     final initialSearchKey = context.read<CustomerCodeBloc>().state.searchKey;
 
     return Padding(
-      padding: const EdgeInsets.only(left: 20, right: 20, top: 20),
+      padding: const EdgeInsets.all(padding12),
       child: CustomSearchBar(
         key: WidgetKeys.genericKey(
           key: initialSearchKey.searchValueOrEmpty,

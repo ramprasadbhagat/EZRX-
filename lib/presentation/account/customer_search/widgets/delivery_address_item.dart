@@ -9,7 +9,7 @@ class _DeliveryAddressItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return custom.ExpansionTile(
       initiallyExpanded: true,
-      contentPadding: const EdgeInsets.symmetric(horizontal: 20),
+      contentPadding: const EdgeInsets.symmetric(horizontal: padding12),
       iconColor: ZPColors.textButtonColor,
       title: _TitleSection(
         prefixText: customerCodeInfo.customerCodeSoldTo,

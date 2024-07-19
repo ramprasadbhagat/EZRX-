@@ -20,6 +20,7 @@ import 'package:ezrxmobile/presentation/core/scroll_list.dart';
 import 'package:ezrxmobile/presentation/core/svg_image.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
+import 'package:ezrxmobile/presentation/theme/theme_data.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -127,7 +128,7 @@ class CustomerSearchPage extends StatelessWidget {
                         );
                       },
                       child: Padding(
-                        padding: const EdgeInsets.only(right: 16.0),
+                        padding: const EdgeInsets.only(right: padding12),
                         child: Column(
                           children: [
                             ClipOval(
@@ -141,7 +142,7 @@ class CustomerSearchPage extends StatelessWidget {
                                 ),
                               ),
                             ),
-                            const SizedBox(height: 8),
+                            const SizedBox(height: padding6),
                             Text(
                               '${state.salesOrg.buName} ${state.salesOrg.getOrDefaultValue('')}',
                               style: Theme.of(context).textTheme.bodySmall,

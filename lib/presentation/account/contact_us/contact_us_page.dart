@@ -14,6 +14,7 @@ import 'package:ezrxmobile/presentation/core/svg_image.dart';
 import 'package:ezrxmobile/presentation/core/text_field_with_label.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
+import 'package:ezrxmobile/presentation/theme/theme_data.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_html/flutter_html.dart';
@@ -61,35 +62,17 @@ class ContactUsPage extends StatelessWidget {
           currentPath: context.router.currentPath,
           child: ListView(
             key: WidgetKeys.scrollList,
-            padding: const EdgeInsets.only(
-              left: 20,
-              right: 20,
-            ),
+            padding: const EdgeInsets.all(padding12),
             children: [
-              const SizedBox(
-                height: 20,
-              ),
               SvgPicture.asset(
                 SvgImage.contactUs,
                 height: 120,
                 width: 120,
               ),
-              const SizedBox(
-                height: 20,
-              ),
               const _ContactDetails(
                 key: WidgetKeys.contactDetailsKey,
               ),
-              const SizedBox(
-                height: 20,
-              ),
-              const SizedBox(
-                height: 20,
-              ),
               const _ContactUsForm(),
-              const SizedBox(
-                height: 20,
-              ),
             ],
           ),
         ),

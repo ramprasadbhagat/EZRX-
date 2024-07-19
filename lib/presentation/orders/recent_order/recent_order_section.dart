@@ -11,6 +11,7 @@ import 'package:ezrxmobile/presentation/core/price_component.dart';
 import 'package:ezrxmobile/presentation/core/product_image.dart';
 import 'package:ezrxmobile/presentation/core/section_tile.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
+import 'package:ezrxmobile/presentation/theme/theme_data.dart';
 import 'package:flutter/material.dart';
 
 import 'package:ezrxmobile/presentation/theme/colors.dart';
@@ -76,7 +77,10 @@ class _BodyContent extends StatelessWidget {
             ? Column(
                 children: [
                   Padding(
-                    padding: const EdgeInsets.only(left: 10, top: 5),
+                    padding: const EdgeInsets.only(
+                      left: padding12,
+                      top: padding6,
+                    ),
                     child: SectionTitle(
                       key: WidgetKeys.recentlyOrder,
                       title: 'Recently ordered',
@@ -93,7 +97,7 @@ class _BodyContent extends StatelessWidget {
                           )
                         : ListView(
                             scrollDirection: Axis.horizontal,
-                            padding: EdgeInsets.zero,
+                            padding: const EdgeInsets.only(left: padding6),
                             children: state.orderHistory.orderHistoryItems
                                 .map((e) => _ProductTile(product: e))
                                 .toList(),
@@ -123,23 +127,41 @@ class _ProductTile extends StatelessWidget {
         child: Stack(
           children: [
             CustomCard(
-              margin: const EdgeInsets.all(8.0),
+              margin: const EdgeInsets.all(padding6),
               child: ListTile(
                 key: WidgetKeys.listRecentlyOrdered,
-                contentPadding:
-                    const EdgeInsets.symmetric(horizontal: 8, vertical: 5),
+                contentPadding: const EdgeInsets.all(padding6),
                 title: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    CustomCard(
-                      showBorder: true,
-                      showShadow: false,
-                      child: ProductImage(
-                        materialNumber: product.materialNumber,
-                        fit: BoxFit.fitHeight,
-                        width: 90,
-                        height: 90,
-                      ),
+                    Stack(
+                      children: [
+                        CustomCard(
+                          showBorder: true,
+                          showShadow: false,
+                          child: ProductImage(
+                            materialNumber: product.materialNumber,
+                            fit: BoxFit.fitHeight,
+                            width: 90,
+                            height: 90,
+                          ),
+                        ),
+                        if (product.isOfferItem)
+                          const IconLabel(
+                            key: WidgetKeys.iconLabelOffer,
+                            icon: Icons.local_offer_outlined,
+                            backgroundColor: ZPColors.darkYellow,
+                            iconSize: 20,
+                            margin: EdgeInsets.zero,
+                            padding: EdgeInsets.all(3),
+                            labelText: '',
+                            borderRadius: BorderRadius.only(
+                              topRight: Radius.circular(20.0),
+                              bottomRight: Radius.circular(20.0),
+                              topLeft: Radius.circular(10.0),
+                            ),
+                          ),
+                      ],
                     ),
                     const SizedBox(
                       width: 8,
@@ -203,15 +225,6 @@ class _ProductTile extends StatelessWidget {
                 ),
               ),
             ),
-            if (product.isOfferItem)
-              const IconLabel(
-                key: WidgetKeys.iconLabelOffer,
-                icon: Icons.local_offer_outlined,
-                backgroundColor: ZPColors.darkYellow,
-                iconSize: 23,
-                labelText: '',
-                margin: EdgeInsets.only(left: 10, top: 10),
-              ),
           ],
         ),
       ),

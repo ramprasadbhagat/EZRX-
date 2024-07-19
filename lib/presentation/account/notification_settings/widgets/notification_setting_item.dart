@@ -21,15 +21,12 @@ class _NotificationSettingItem extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const SizedBox(
-          height: 16,
-        ),
         ListTileTheme(
-          horizontalTitleGap: 0.0,
+          horizontalTitleGap: padding6,
           child: CheckboxListTile(
             key: tileKey,
             contentPadding: EdgeInsets.zero,
-            visualDensity: VisualDensity.compact,
+            visualDensity: const VisualDensity(vertical: -2),
             controlAffinity: ListTileControlAffinity.leading,
             dense: true,
             enabled: !context.read<NotificationSettingsBloc>().state.isLoading,
@@ -39,12 +36,12 @@ class _NotificationSettingItem extends StatelessWidget {
               context.tr(
                 title,
               ),
-              style: Theme.of(context).textTheme.labelMedium,
+              style: Theme.of(context).textTheme.labelSmall,
             ),
           ),
         ),
         Padding(
-          padding: const EdgeInsets.only(left: 36),
+          padding: const EdgeInsets.only(left: 38),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [

@@ -129,7 +129,7 @@ class _CustomTabBarState extends State<_CustomTabBar>
   @override
   Widget build(BuildContext context) {
     return Material(
-      color: ZPColors.white,
+      color: Colors.white,
       child: AutoTabsRouter.pageView(
         key: ValueKey(widget.routes.length),
         routes: widget.routes.routeList,
@@ -144,32 +144,44 @@ class _CustomTabBarState extends State<_CustomTabBar>
               SafeArea(
                 bottom: true,
                 top: false,
-                child: TabBar(
-                  controller: tabController,
-                  key: WidgetKeys.homeTabBar,
-                  indicator: _TopIndicator(),
-                  dividerColor: Colors.transparent,
-                  onTap: (index) {
-                    _currentPage = widget.routes.routeList[index];
-                    tabsRouter.setActiveIndex(index);
-                    trackMixpanelEvent(
-                      TrackingEvents.bottomNavBarClicked,
-                      props: {
-                        TrackingProps.navTab: widget.routes[index].label,
-                      },
-                    );
-                  },
-                  labelStyle: Theme.of(context).textTheme.bodySmall,
-                  padding: const EdgeInsets.only(top: 8.0),
-                  labelPadding: EdgeInsets.zero,
-                  tabs: widget.routes
-                      .map(
-                        (item) => Tab(
-                          icon: item.icon,
-                          text: item.label.tr(),
-                        ),
-                      )
-                      .toList(),
+                child: Container(
+                  decoration: const BoxDecoration(
+                    color: Colors.white,
+                    boxShadow: <BoxShadow>[
+                      BoxShadow(
+                        color: ZPColors.extraLightGrey5,
+                        offset: Offset(0, -5),
+                        blurRadius: 2,
+                      ),
+                    ],
+                  ),
+                  child: TabBar(
+                    controller: tabController,
+                    key: WidgetKeys.homeTabBar,
+                    indicator: _TopIndicator(),
+                    dividerColor: Colors.transparent,
+                    onTap: (index) {
+                      _currentPage = widget.routes.routeList[index];
+                      tabsRouter.setActiveIndex(index);
+                      trackMixpanelEvent(
+                        TrackingEvents.bottomNavBarClicked,
+                        props: {
+                          TrackingProps.navTab: widget.routes[index].label,
+                        },
+                      );
+                    },
+                    labelStyle: Theme.of(context).textTheme.bodySmall,
+                    padding: const EdgeInsets.only(top: 8.0),
+                    labelPadding: EdgeInsets.zero,
+                    tabs: widget.routes
+                        .map(
+                          (item) => Tab(
+                            icon: item.icon,
+                            text: item.label.tr(),
+                          ),
+                        )
+                        .toList(),
+                  ),
                 ),
               ),
             ],

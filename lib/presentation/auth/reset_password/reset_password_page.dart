@@ -8,6 +8,7 @@ import 'package:ezrxmobile/presentation/core/password_validation.dart';
 import 'package:ezrxmobile/presentation/core/svg_image.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
+import 'package:ezrxmobile/presentation/theme/theme_data.dart';
 import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -58,7 +59,7 @@ class _ResetPasswordPageBody extends StatelessWidget {
           ),
         ),
         headingWidget: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 24),
+          padding: const EdgeInsets.all(padding12),
           child: Text(
             context.tr('Set a new password'),
             key: WidgetKeys.resetPasswordPageHeadingForFirstTimeLogin,
@@ -96,7 +97,7 @@ class _ResetPasswordPageBody extends StatelessWidget {
           const _InlineErrorMessageSection(),
           formWidget,
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            padding: const EdgeInsets.symmetric(horizontal: padding12),
             child: PasswordValidation(
               user: context
                   .read<ResetPasswordBloc>()
@@ -105,7 +106,7 @@ class _ResetPasswordPageBody extends StatelessWidget {
                   .toUser,
             ),
           ),
-          const SizedBox(height: 20),
+          const SizedBox(height: padding12),
           resetPasswordButton,
         ],
       ),
@@ -125,7 +126,7 @@ class _InlineErrorMessageSection extends StatelessWidget {
       builder: (context, state) {
         return state.showNewPasswordPatternMismatchError
             ? Padding(
-                padding: const EdgeInsets.only(left: 16, bottom: 16, right: 16),
+                padding: const EdgeInsets.all(padding12),
                 child: Text(
                   context.tr(
                     'Please make sure your password follow below rules',

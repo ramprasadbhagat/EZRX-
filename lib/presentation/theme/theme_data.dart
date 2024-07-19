@@ -7,6 +7,13 @@ enum AppTheme {
   dark,
 }
 
+// NOTE: Do not add more values under this.
+// We will only use these 3 padding values across the app
+
+const padding6 = 6.0;
+const padding12 = 12.0;
+const padding24 = 24.0;
+
 final appThemeData = {
   AppTheme.light: ThemeData.light().copyWith(
     //Colors

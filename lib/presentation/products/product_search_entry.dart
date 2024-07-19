@@ -4,6 +4,7 @@ import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/products/widgets/scan_camera_button.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
+import 'package:ezrxmobile/presentation/theme/theme_data.dart';
 import 'package:flutter/material.dart';
 
 class ProductSearchEntry extends StatefulWidget {
@@ -43,6 +44,7 @@ class _ProductSearchEntryState extends State<ProductSearchEntry> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      height: 40,
       decoration: BoxDecoration(
         color: ZPColors.white,
         borderRadius: BorderRadius.circular(8),
@@ -66,6 +68,7 @@ class _ProductSearchEntryState extends State<ProductSearchEntry> {
                 );
               },
               decoration: InputDecoration(
+                contentPadding: const EdgeInsets.all(padding6),
                 hintText: context.tr('Search by product name or code'),
                 enabledBorder: InputBorder.none,
                 fillColor: ZPColors.transparent,

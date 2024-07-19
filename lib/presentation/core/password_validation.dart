@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/application/auth/reset_password/reset_password_bloc.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
+import 'package:ezrxmobile/presentation/theme/theme_data.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -20,7 +21,7 @@ class PasswordValidation extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: const EdgeInsets.only(top: 30, bottom: 10),
+              padding: const EdgeInsets.only(top: padding24, bottom: padding12),
               child: Text(
                 context.tr('Your new password should have :'),
                 style: Theme.of(context).textTheme.labelSmall,
@@ -76,12 +77,12 @@ class _ConditionText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 5, bottom: 4, left: 8, right: 2),
+      padding: const EdgeInsets.symmetric(vertical: padding6),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
-            padding: const EdgeInsets.only(top: 7, right: 8),
+            padding: const EdgeInsets.only(top: padding6, right: padding12),
             child: enableGreenTick
                 ? const Icon(
                     Icons.check,

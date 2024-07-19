@@ -9,6 +9,7 @@ import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dar
 import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
+import 'package:ezrxmobile/presentation/theme/theme_data.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -212,7 +213,7 @@ class NotificationSection extends StatelessWidget {
       children: [
         Text(
           context.tr(title),
-          style: Theme.of(context).textTheme.labelLarge,
+          style: Theme.of(context).textTheme.labelMedium,
         ),
         ...items.map(
           (e) => _NotificationSettingItem(

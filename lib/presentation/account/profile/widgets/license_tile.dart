@@ -11,7 +11,8 @@ class _LicenseTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomCard(
       key: WidgetKeys.profileLicenseTile,
-      padding: const EdgeInsets.all(16.0),
+      padding: const EdgeInsets.all(padding12),
+      margin: const EdgeInsets.all(padding12),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -33,7 +34,6 @@ class _LicenseTile extends StatelessWidget {
               ),
             ],
           ),
-          const SizedBox(height: 5),
           RichText(
             key: WidgetKeys.profileLicenseNo,
             text: TextSpan(
@@ -50,7 +50,7 @@ class _LicenseTile extends StatelessWidget {
               ],
             ),
           ),
-          const SizedBox(height: 20),
+          const SizedBox(height: padding12),
           RichText(
             key: WidgetKeys.profileLicenseDateRange,
             text: TextSpan(
@@ -69,7 +69,6 @@ class _LicenseTile extends StatelessWidget {
               ],
             ),
           ),
-          const SizedBox(height: 5),
           customerLicense.validTo.aWeekDifference
               ? Row(
                   children: [

@@ -1,4 +1,5 @@
 import 'package:ezrxmobile/presentation/core/validation_failed_warning.dart';
+import 'package:ezrxmobile/presentation/theme/theme_data.dart';
 import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -42,14 +43,14 @@ class ChangePasswordPage extends StatelessWidget {
       body: AnnouncementBanner(
         currentPath: context.router.currentPath,
         child: ListView(
-          padding: const EdgeInsets.all(15.0),
+          padding: const EdgeInsets.all(padding12),
           children: <Widget>[
             Text(
               context.tr('Change Password'),
               style: Theme.of(context).textTheme.labelLarge,
             ),
             Padding(
-              padding: const EdgeInsets.only(top: 10, bottom: 20),
+              padding: const EdgeInsets.symmetric(vertical: padding12),
               child: Text(
                 context.tr(
                   'We recommend you to change your password every 3 months',

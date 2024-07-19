@@ -1,6 +1,7 @@
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
+import 'package:ezrxmobile/presentation/theme/theme_data.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:auto_route/auto_route.dart';
@@ -39,7 +40,7 @@ class ForgetPasswordPage extends StatelessWidget {
           ),
           Expanded(
             child: ListView(
-              padding: const EdgeInsets.symmetric(horizontal: 12),
+              padding: const EdgeInsets.symmetric(horizontal: padding12),
               children: [
                 Text(
                   context.tr(
@@ -49,15 +50,15 @@ class ForgetPasswordPage extends StatelessWidget {
                         color: ZPColors.passwordValidationsColor,
                       ),
                 ),
-                const SizedBox(height: 25),
+                const SizedBox(height: padding24),
                 _UsernameField(
                   controller: TextEditingController(),
                 ),
-                const SizedBox(height: 25),
+                const SizedBox(height: padding24),
                 const _ForgotPasswordButton(),
-                const SizedBox(height: 15),
+                const SizedBox(height: padding12),
                 const BackToLogin(),
-                const SizedBox(height: 25),
+                const SizedBox(height: padding24),
               ],
             ),
           ),

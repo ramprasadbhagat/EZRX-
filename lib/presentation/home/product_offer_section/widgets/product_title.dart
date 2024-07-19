@@ -15,23 +15,44 @@ class _ProductTile extends StatelessWidget {
         child: Stack(
           children: [
             CustomCard(
-              margin: const EdgeInsets.all(8.0),
+              margin: const EdgeInsets.all(padding6),
               child: ListTile(
                 key: WidgetKeys.productOnOffer,
-                contentPadding: const EdgeInsets.all(8),
+                contentPadding: const EdgeInsets.all(padding6),
+                minVerticalPadding: 0,
                 title: Row(
                   children: [
-                    CustomCard(
-                      showBorder: true,
-                      showShadow: false,
-                      child: ProductImage(
-                        key: WidgetKeys.materialNumberInfo,
-                        materialNumber: materialInfo.materialNumber,
-                        fit: BoxFit.fitHeight,
-                      ),
+                    Stack(
+                      children: [
+                        CustomCard(
+                          showBorder: true,
+                          showShadow: false,
+                          child: ProductImage(
+                            key: WidgetKeys.materialNumberInfo,
+                            materialNumber: materialInfo.materialNumber,
+                            fit: BoxFit.fitHeight,
+                            height: 100,
+                            width: 100,
+                          ),
+                        ),
+                        const IconLabel(
+                          key: WidgetKeys.iconLabelOffer,
+                          icon: Icons.local_offer_outlined,
+                          backgroundColor: ZPColors.darkYellow,
+                          iconSize: 20,
+                          margin: EdgeInsets.zero,
+                          padding: EdgeInsets.all(3),
+                          labelText: '',
+                          borderRadius: BorderRadius.only(
+                            topRight: Radius.circular(20.0),
+                            bottomRight: Radius.circular(20.0),
+                            topLeft: Radius.circular(10.0),
+                          ),
+                        ),
+                      ],
                     ),
                     const SizedBox(
-                      width: 8,
+                      width: padding6,
                     ),
                     Expanded(
                       child: Column(
@@ -130,14 +151,6 @@ class _ProductTile extends StatelessWidget {
                   ],
                 ),
               ),
-            ),
-            const IconLabel(
-              key: WidgetKeys.iconLabelOffer,
-              icon: Icons.local_offer_outlined,
-              backgroundColor: ZPColors.darkYellow,
-              iconSize: 23,
-              labelText: '',
-              margin: EdgeInsets.only(left: 10, top: 10),
             ),
           ],
         ),

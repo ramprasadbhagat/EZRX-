@@ -29,7 +29,7 @@ class _ResetPasswordForm extends StatelessWidget {
           previous.showErrorMessages != current.showErrorMessages,
       builder: (context, state) {
         return Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          padding: const EdgeInsets.symmetric(horizontal: padding12),
           child: Form(
             key: _formKey,
             autovalidateMode: state.showErrorMessages
@@ -52,7 +52,7 @@ class _ResetPasswordForm extends StatelessWidget {
                     );
                   },
                 ),
-                const SizedBox(height: 15),
+                const SizedBox(height: padding12),
                 BlocBuilder<ResetPasswordBloc, ResetPasswordState>(
                   buildWhen: (previous, current) =>
                       previous.isConfirmPasswordObscure !=

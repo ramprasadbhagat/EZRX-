@@ -11,6 +11,7 @@ import 'package:ezrxmobile/presentation/core/custom_search_bar.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/faq/faq_info.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
+import 'package:ezrxmobile/presentation/theme/theme_data.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 part 'package:ezrxmobile/presentation/faq/widgets/category_chip.dart';
@@ -56,16 +57,16 @@ class FAQPage extends StatelessWidget {
               children: [
                 Padding(
                   padding: const EdgeInsets.fromLTRB(
-                    16.0,
-                    16.0,
-                    0.0,
-                    0.0,
+                    padding12,
+                    padding24,
+                    padding12,
+                    padding12,
                   ),
                   child: Text(
                     context.tr('Have a question? We’re here to help'),
                     style: Theme.of(context)
                         .textTheme
-                        .labelLarge
+                        .labelMedium
                         ?.copyWith(color: ZPColors.primary),
                   ),
                 ),
@@ -85,12 +86,7 @@ class FAQPage extends StatelessWidget {
                       )
                     : const SizedBox.shrink(),
                 const Expanded(
-                  child: Padding(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: 16.0,
-                    ),
-                    child: FaqInfoPage(),
-                  ),
+                  child: FaqInfoPage(),
                 ),
               ],
             );

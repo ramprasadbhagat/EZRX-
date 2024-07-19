@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
+import 'package:ezrxmobile/presentation/theme/theme_data.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ezrxmobile/application/order/material_list/material_list_bloc.dart';
@@ -15,7 +16,10 @@ class ExploreMarketPlaceBanner extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 27),
+      margin: const EdgeInsets.symmetric(
+        horizontal: padding12,
+        vertical: padding24,
+      ),
       padding: const EdgeInsets.all(16),
       width: double.infinity,
       decoration: BoxDecoration(

@@ -3,6 +3,7 @@ import 'package:ezrxmobile/application/banner/banner_bloc.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/responsive.dart';
 import 'package:ezrxmobile/presentation/home/banners/top_advert_box_banner/top_advert_box_banner_tile.dart';
+import 'package:ezrxmobile/presentation/theme/theme_data.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -37,7 +38,9 @@ class TopAdvertBoxBanner extends StatelessWidget {
           buildWhen: (previous, current) => previous.banner != current.banner,
           builder: (context, state) {
             return ListView.builder(
-              padding: const EdgeInsets.symmetric(vertical: 25.0),
+              padding: EdgeInsets.symmetric(
+                vertical: state.banner.isEmpty ? 0 : padding24,
+              ),
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
               itemCount: state.banner.length,

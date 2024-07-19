@@ -18,7 +18,7 @@ class _Footer extends StatelessWidget {
           ],
           color: ZPColors.white,
         ),
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(padding12),
         child: BlocConsumer<UserBloc, UserState>(
           listenWhen: (previous, current) =>
               previous.user.preferredLanguage != current.user.preferredLanguage,
@@ -50,7 +50,7 @@ class _Footer extends StatelessWidget {
                     child: Text('Clear changes'.tr()),
                   ),
                 ),
-                const SizedBox(width: 20),
+                const SizedBox(width: padding12),
                 Expanded(
                   child: ElevatedButton(
                     key: WidgetKeys.profileSaveButton,

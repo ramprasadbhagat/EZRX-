@@ -20,6 +20,7 @@ import 'package:ezrxmobile/presentation/orders/widgets/edi_user_banner.dart';
 import 'package:ezrxmobile/presentation/orders/widgets/stock_info_banner.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
+import 'package:ezrxmobile/presentation/theme/theme_data.dart';
 import 'package:flutter/material.dart';
 import 'package:ezrxmobile/presentation/orders/recent_order/recent_order_section.dart';
 
@@ -128,6 +129,7 @@ class HomeTab extends StatelessWidget {
                         const BrowseProduct(),
                       const TopAdvertBoxBanner(),
                       const AnnouncementSection(),
+                      const SizedBox(height: padding24),
                     ],
                   ),
                 ),

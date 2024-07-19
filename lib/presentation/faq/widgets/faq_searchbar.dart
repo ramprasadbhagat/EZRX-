@@ -8,7 +8,7 @@ class _FAQSearchBar extends StatelessWidget {
     final initialSearchKey = context.read<FaqBloc>().state.searchKey;
 
     return Padding(
-      padding: const EdgeInsets.all(16.0),
+      padding: const EdgeInsets.all(padding12),
       child: CustomSearchBar(
         key: WidgetKeys.genericKey(key: initialSearchKey.searchValueOrEmpty),
         initialValue: initialSearchKey.searchValueOrEmpty,

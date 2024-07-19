@@ -15,7 +15,8 @@ class _ProductOfferBodyContent extends StatelessWidget {
             ? Column(
                 children: [
                   Padding(
-                    padding: const EdgeInsets.only(left: 10, top: 5),
+                    padding:
+                        const EdgeInsets.only(left: padding12, top: padding6),
                     child: SectionTitle(
                       key: WidgetKeys.productsOnOffer,
                       title: 'Products on offer',
@@ -35,6 +36,7 @@ class _ProductOfferBodyContent extends StatelessWidget {
                             key: WidgetKeys.productOfferSectionLoaderImage,
                           )
                         : ListView(
+                            padding: const EdgeInsets.only(left: padding6),
                             scrollDirection: Axis.horizontal,
                             children: state.materialList
                                 .map((e) => _ProductTile(materialInfo: e))

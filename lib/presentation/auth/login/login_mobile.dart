@@ -18,6 +18,7 @@ import 'package:ezrxmobile/presentation/core/or_divider.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
+import 'package:ezrxmobile/presentation/theme/theme_data.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -45,29 +46,29 @@ class LoginMobile extends StatelessWidget {
               Expanded(
                 child: ListView(
                   key: WidgetKeys.scrollList,
-                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                  padding: const EdgeInsets.symmetric(horizontal: padding12),
                   children: [
                     const AnnouncementBannerWidget(),
                     const MarketSelector(),
-                    const SizedBox(height: 15),
+                    const SizedBox(height: padding12),
                     const UsernameField(),
-                    const SizedBox(height: 25),
+                    const SizedBox(height: padding24),
                     const PasswordField(),
                     const RememberPassword(),
-                    const SizedBox(height: 15),
+                    const SizedBox(height: padding12),
                     const LoginButton(),
-                    const SizedBox(height: 25),
+                    const SizedBox(height: padding24),
                     if (!state.currentMarket.isSSOLoginRestricted) ...[
                       const OrDivider(),
-                      const SizedBox(height: 25),
+                      const SizedBox(height: padding24),
                       const _SSOLoginButton(),
                     ],
                     if (!state.currentMarket.isRegistrationRestricted) ...[
-                      const SizedBox(height: 15),
+                      const SizedBox(height: padding12),
                       const _CreateAccount(),
                     ],
                     if (state.currentMarket.isID) ...[
-                      const SizedBox(height: 15),
+                      const SizedBox(height: padding12),
                       const EzrxAplLogo(),
                     ],
                   ],

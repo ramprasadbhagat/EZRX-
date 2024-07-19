@@ -6,20 +6,19 @@ class _CategoryChip extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: MediaQuery.of(context).size.height * 0.07,
-      width: MediaQuery.of(context).size.width,
+      height: 60,
       child: BlocBuilder<FaqBloc, FaqState>(
         buildWhen: (previous, current) => previous != current,
         builder: (context, state) {
           return ListView(
             padding: const EdgeInsets.symmetric(
-              horizontal: 16.0,
+              horizontal: padding12,
             ),
             scrollDirection: Axis.horizontal,
             children: [
               Padding(
                 padding: const EdgeInsets.only(
-                  right: 8.0,
+                  right: padding6,
                 ),
                 child: _CustomChip(
                   title: context.tr('All'),
@@ -33,31 +32,28 @@ class _CategoryChip extends StatelessWidget {
                   },
                 ),
               ),
-              ...state.faqInfo.faqList.getFAQItemList
-                  .map(
-                    (e) => Padding(
-                      padding: const EdgeInsets.only(
-                        right: 8.0,
-                      ),
-                      child: _CustomChip(
-                        key: WidgetKeys.genericKey(
-                          key: 'customChip${e.displayName}',
-                        ),
-                        title: e.displayName,
-                        isSelected:
-                            state.selectedCategory.getOrDefaultValue('') ==
-                                e.displayName,
-                        onChanged: (value) {
-                          context.read<FaqBloc>().add(
-                                FaqEvent.filterByFaqCategory(
-                                  selectedCategory: FAQCategory(e.displayName),
-                                ),
-                              );
-                        },
-                      ),
+              ...state.faqInfo.faqList.getFAQItemList.map(
+                (e) => Padding(
+                  padding: const EdgeInsets.only(
+                    right: padding6,
+                  ),
+                  child: _CustomChip(
+                    key: WidgetKeys.genericKey(
+                      key: 'customChip${e.displayName}',
                     ),
-                  )
-                  ,
+                    title: e.displayName,
+                    isSelected: state.selectedCategory.getOrDefaultValue('') ==
+                        e.displayName,
+                    onChanged: (value) {
+                      context.read<FaqBloc>().add(
+                            FaqEvent.filterByFaqCategory(
+                              selectedCategory: FAQCategory(e.displayName),
+                            ),
+                          );
+                    },
+                  ),
+                ),
+              ),
             ],
           );
         },

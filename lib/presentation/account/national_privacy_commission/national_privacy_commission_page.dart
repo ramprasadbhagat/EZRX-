@@ -8,6 +8,7 @@ import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dar
 import 'package:ezrxmobile/presentation/core/png_image.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
+import 'package:ezrxmobile/presentation/theme/theme_data.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -70,7 +71,7 @@ class NationalPrivacyCommissionPage extends StatelessWidget {
           return SafeArea(
             child: ListView(
               key: WidgetKeys.nationalPrivacyCommissionPage,
-              padding: const EdgeInsets.all(16.0),
+              padding: const EdgeInsets.all(padding12),
               children: [
                 Text(
                   context.tr('Save the images and scan for more details'),

@@ -1,5 +1,6 @@
 import 'package:ezrxmobile/domain/utils/error_utils.dart';
 import 'package:ezrxmobile/presentation/core/bundle_grid_item.dart';
+import 'package:ezrxmobile/presentation/theme/theme_data.dart';
 import 'package:flutter/material.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:auto_route/auto_route.dart';
@@ -72,7 +73,10 @@ class BundleSection extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Padding(
-                        padding: const EdgeInsets.only(left: 10, top: 5),
+                        padding: const EdgeInsets.only(
+                          left: padding12,
+                          top: padding6,
+                        ),
                         child: SectionTitle(
                           key: WidgetKeys.bundles,
                           title: 'Bundles',
@@ -88,6 +92,7 @@ class BundleSection extends StatelessWidget {
                                 key: WidgetKeys.bundleSectionLoaderImage,
                               )
                             : ListView(
+                                padding: const EdgeInsets.only(left: padding6),
                                 key: WidgetKeys.bundlesList,
                                 scrollDirection: Axis.horizontal,
                                 children: state.materialList

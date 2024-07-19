@@ -13,6 +13,7 @@ import 'package:ezrxmobile/presentation/core/responsive.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
+import 'package:ezrxmobile/presentation/theme/theme_data.dart';
 import 'package:ezrxmobile/presentation/utils/router_utils.dart';
 import 'package:flutter/material.dart';
 
@@ -40,10 +41,10 @@ class BundleGridItem extends StatelessWidget {
       child: CustomCard(
         clipBehavior: Clip.hardEdge,
         key: WidgetKeys.materialListBundleCard,
-        margin: const EdgeInsets.all(10),
+        margin: const EdgeInsets.all(padding6),
         padding: const EdgeInsets.all(0),
         width: Responsive.isMobile(context)
-            ? MediaQuery.of(context).size.width * 0.85
+            ? MediaQuery.of(context).size.width * 0.87
             : MediaQuery.of(context).size.width * 0.4,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -56,8 +57,8 @@ class BundleGridItem extends StatelessWidget {
                   ProductTag.bundleOffer(),
                   Padding(
                     padding: const EdgeInsets.symmetric(
-                      horizontal: 10.0,
-                      vertical: 5.0,
+                      vertical: padding6,
+                      horizontal: padding12,
                     ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,

@@ -50,19 +50,19 @@ class _ContactUsForm extends StatelessWidget {
             children: [
               _UsernameTextField(),
               SizedBox(
-                height: 16,
+                height: padding24,
               ),
               _ContactNumberTextField(),
               SizedBox(
-                height: 16,
+                height: padding24,
               ),
               _EmailTextField(),
               SizedBox(
-                height: 16,
+                height: padding24,
               ),
               _MessageTextField(),
               SizedBox(
-                height: 25,
+                height: padding24,
               ),
               _SendMessageButton(),
             ],

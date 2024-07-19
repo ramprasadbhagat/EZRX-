@@ -17,6 +17,7 @@ import 'package:ezrxmobile/presentation/products/widgets/offer_label.dart';
 import 'package:ezrxmobile/presentation/products/widgets/stock_label.dart';
 import 'package:ezrxmobile/presentation/products/widgets/tender_label.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
+import 'package:ezrxmobile/presentation/theme/theme_data.dart';
 import 'package:ezrxmobile/presentation/utils/router_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -40,7 +41,7 @@ class MaterialGridItem extends StatelessWidget {
       child: CustomCard(
         clipBehavior: Clip.antiAlias,
         key: WidgetKeys.materialListMaterialCard,
-        margin: const EdgeInsets.all(8),
+        margin: const EdgeInsets.all(padding6),
         child: Stack(
           children: [
             Column(
@@ -125,8 +126,10 @@ class MaterialGridItem extends StatelessWidget {
                 Expanded(
                   flex: 3,
                   child: Padding(
-                    padding:
-                        const EdgeInsets.symmetric(vertical: 8, horizontal: 10),
+                    padding: const EdgeInsets.symmetric(
+                      vertical: padding6,
+                      horizontal: padding12,
+                    ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -187,7 +190,7 @@ class MaterialGridItem extends StatelessWidget {
                           overflow: TextOverflow.ellipsis,
                           key: WidgetKeys.manufacturerMaterials,
                         ),
-                        const SizedBox(height: 5),
+                        const SizedBox(height: padding6),
                         ProductPriceLabel(materialInfo: materialInfo),
                       ],
                     ),

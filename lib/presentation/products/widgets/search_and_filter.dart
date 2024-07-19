@@ -4,6 +4,7 @@ import 'package:ezrxmobile/presentation/products/product_filter/product_filter_p
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/products/product_search_entry.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
+import 'package:ezrxmobile/presentation/theme/theme_data.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -13,7 +14,7 @@ class SearchAndFilter extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left: 12.0, right: 12.0, top: 12.0),
+      padding: const EdgeInsets.all(padding12),
       child: Row(
         children: [
           Expanded(
@@ -42,9 +43,6 @@ class SearchAndFilter extends StatelessWidget {
                 );
               },
             ),
-          ),
-          const SizedBox(
-            width: 0,
           ),
           BlocBuilder<MaterialListBloc, MaterialListState>(
             buildWhen: (previous, current) =>

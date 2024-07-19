@@ -36,7 +36,7 @@ class CustomCard extends StatelessWidget {
       height: height,
       clipBehavior: clipBehavior,
       decoration: BoxDecoration(
-        borderRadius: const BorderRadius.all(Radius.circular(8)),
+        borderRadius: const BorderRadius.all(Radius.circular(10)),
         border: showBorder ? Border.all(color: borderColor, width: 1.5) : null,
         boxShadow: showShadow
             ? [

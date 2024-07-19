@@ -7,57 +7,49 @@ class _ContactDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      mainAxisAlignment: MainAxisAlignment.start,
-      children: [
-        BlocBuilder<ContactUsDetailsBloc, ContactUsDetailsState>(
-          buildWhen: (previous, current) =>
-              previous.isLoading != current.isLoading,
-          builder: (context, state) {
-            final email =
-                context.read<EligibilityBloc>().state.salesOrg.isValid()
-                    ? state.contactUsDetails.postloginSendToEmail
-                    : state.contactUsDetails.preloginSendToEmail;
+    return BlocBuilder<ContactUsDetailsBloc, ContactUsDetailsState>(
+      buildWhen: (previous, current) => previous.isLoading != current.isLoading,
+      builder: (context, state) {
+        final email = context.read<EligibilityBloc>().state.salesOrg.isValid()
+            ? state.contactUsDetails.postloginSendToEmail
+            : state.contactUsDetails.preloginSendToEmail;
 
-            return state.isLoading
-                ? LoadingShimmer.logo(
-                    key: WidgetKeys.loaderImage,
-                  )
-                : Column(
-                    children: [
-                      Html(
-                        key: WidgetKeys.contactDetailsSectionKey,
-                        style: {
-                          'body': Style(
-                            padding: HtmlPaddings.all(0),
-                            margin: Margins.all(0),
-                          ),
-                        },
-                        data: state.contactUsDetails.content
-                            .appendedImgSrcWithBaseUrlWithMedia,
-                        shrinkWrap: true,
+        return state.isLoading
+            ? LoadingShimmer.logo(
+                key: WidgetKeys.loaderImage,
+              )
+            : Column(
+                children: [
+                  Html(
+                    key: WidgetKeys.contactDetailsSectionKey,
+                    style: {
+                      'body': Style(
+                        padding: HtmlPaddings.all(0),
+                        margin: Margins.all(0),
                       ),
-                      _ContactItem(
-                        key: WidgetKeys.genericKey(
-                          key: email,
-                        ),
-                        label: email,
-                        icon: Icons.mail_outline,
-                        onTap: () => _sendEmail(
-                          email,
-                          context
-                              .read<EligibilityBloc>()
-                              .state
-                              .salesOrg
-                              .contactPersonName,
-                        ),
-                      ),
-                    ],
-                  );
-          },
-        ),
-      ],
+                    },
+                    data: state.contactUsDetails.content
+                        .appendedImgSrcWithBaseUrlWithMedia,
+                    shrinkWrap: true,
+                  ),
+                  _ContactItem(
+                    key: WidgetKeys.genericKey(
+                      key: email,
+                    ),
+                    label: email,
+                    icon: Icons.mail_outline,
+                    onTap: () => _sendEmail(
+                      email,
+                      context
+                          .read<EligibilityBloc>()
+                          .state
+                          .salesOrg
+                          .contactPersonName,
+                    ),
+                  ),
+                ],
+              );
+      },
     );
   }
 
@@ -88,35 +80,20 @@ class _ContactItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(
-        vertical: 8,
-        horizontal: 12,
+    return ListTile(
+      contentPadding: const EdgeInsets.all(padding6),
+      onTap: () => onTap(),
+      leading: Icon(
+        icon,
+        size: 24,
       ),
-      child: GestureDetector(
-        onTap: () => onTap(),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Icon(
-              icon,
-              size: 24,
+      title: Text(
+        label,
+        style: Theme.of(context).textTheme.labelSmall?.copyWith(
+              color: ZPColors.extraDarkGreen,
             ),
-            const SizedBox(
-              width: 10,
-            ),
-            Expanded(
-              child: Text(
-                label,
-                style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                      color: ZPColors.extraDarkGreen,
-                    ),
-                maxLines: 2,
-                overflow: TextOverflow.ellipsis,
-              ),
-            ),
-          ],
-        ),
+        maxLines: 2,
+        overflow: TextOverflow.ellipsis,
       ),
     );
   }

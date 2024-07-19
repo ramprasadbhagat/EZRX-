@@ -4,6 +4,7 @@ import 'package:ezrxmobile/presentation/core/custom_card.dart';
 import 'package:ezrxmobile/presentation/core/scroll_to_top_widget.dart';
 import 'package:ezrxmobile/presentation/home/announcement_section/announcement_articles_tab/announcements/widgets/new_announcement_icon.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
+import 'package:ezrxmobile/presentation/theme/theme_data.dart';
 import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -80,44 +81,39 @@ class _AnnouncementsTabState extends State<AnnouncementsTab> {
                 ? LoadingShimmer.logo(
                     key: WidgetKeys.loaderImage,
                   )
-                : Padding(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 15,
-                      vertical: 10,
+                : ScrollList<AnnouncementArticleItem>(
+                    key: WidgetKeys.announcementListKey,
+                    dismissOnDrag: true,
+                    noRecordFoundWidget: NoRecordFound(
+                      key: WidgetKeys.announcementNotFoundRecordKey,
+                      title: context.tr('No Announcement found'),
                     ),
-                    child: ScrollList<AnnouncementArticleItem>(
-                      key: WidgetKeys.announcementListKey,
-                      dismissOnDrag: true,
-                      noRecordFoundWidget: NoRecordFound(
-                        key: WidgetKeys.announcementNotFoundRecordKey,
-                        title: context.tr('No Announcement found'),
-                      ),
-                      controller: _scrollController,
-                      onRefresh: () => context.read<AnnouncementInfoBloc>().add(
-                            const AnnouncementInfoEvent.fetch(),
-                          ),
-                      onLoadingMore: () =>
-                          context.read<AnnouncementInfoBloc>().add(
-                                const AnnouncementInfoEvent.loadMore(),
+                    controller: _scrollController,
+                    onRefresh: () => context.read<AnnouncementInfoBloc>().add(
+                          const AnnouncementInfoEvent.fetch(),
+                        ),
+                    onLoadingMore: () =>
+                        context.read<AnnouncementInfoBloc>().add(
+                              const AnnouncementInfoEvent.loadMore(),
+                            ),
+                    isLoading: state.isLoading,
+                    itemBuilder: (context, index, item) => GestureDetector(
+                      child: AnnouncementItem(item: item),
+                      onTap: () {
+                        context.read<AnnouncementInfoDetailsBloc>().add(
+                              AnnouncementInfoDetailsEvent.fetch(
+                                itemId: item.id,
+                                salesOrg: context
+                                    .read<EligibilityBloc>()
+                                    .state
+                                    .salesOrg,
                               ),
-                      isLoading: state.isLoading,
-                      itemBuilder: (context, index, item) => GestureDetector(
-                        child: _AnnouncementItem(item: item),
-                        onTap: () {
-                          context.read<AnnouncementInfoDetailsBloc>().add(
-                                AnnouncementInfoDetailsEvent.fetch(
-                                  itemId: item.id,
-                                  salesOrg: context
-                                      .read<EligibilityBloc>()
-                                      .state
-                                      .salesOrg,
-                                ),
-                              );
-                          context.router.push(const AnnouncementInfoDetailsPageRoute());
-                        },
-                      ),
-                      items: state.searchedAnnouncementList,
+                            );
+                        context.router
+                            .push(const AnnouncementInfoDetailsPageRoute());
+                      },
                     ),
+                    items: state.searchedAnnouncementList,
                   );
           },
         ),
@@ -130,9 +126,10 @@ class _AnnouncementsTabState extends State<AnnouncementsTab> {
   }
 }
 
-class _AnnouncementItem extends StatelessWidget {
+class AnnouncementItem extends StatelessWidget {
   final AnnouncementArticleItem item;
-  const _AnnouncementItem({
+  const AnnouncementItem({
+    super.key,
     required this.item,
   });
   @override
@@ -141,6 +138,11 @@ class _AnnouncementItem extends StatelessWidget {
       key: WidgetKeys.genericKey(key: item.id),
       showBorder: false,
       showShadow: true,
+      margin: const EdgeInsets.only(
+        left: padding12,
+        right: padding12,
+        top: padding12,
+      ),
       child: ListTile(
         title: Column(
           mainAxisSize: MainAxisSize.min,

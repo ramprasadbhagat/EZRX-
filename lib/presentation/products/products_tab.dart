@@ -25,10 +25,10 @@ import 'package:ezrxmobile/presentation/products/widgets/material_grid_item.dart
 import 'package:ezrxmobile/presentation/products/widgets/search_and_filter.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
+import 'package:ezrxmobile/presentation/theme/theme_data.dart';
 import 'package:ezrxmobile/presentation/utils/router_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 
 @RoutePage()
 class ProductsTab extends StatelessWidget {
@@ -83,8 +83,9 @@ class ProductsTab extends StatelessWidget {
                             key: WidgetKeys.materialListLoader,
                           )
                         : Padding(
-                            padding:
-                                const EdgeInsets.symmetric(horizontal: 5.0),
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: padding6,
+                            ),
                             child: ScrollableGridView<MaterialInfo>(
                               noRecordFoundWidget: NoRecordFound.productTab(
                                 context,
@@ -207,7 +208,10 @@ class _TotalMaterialCount extends StatelessWidget {
           previous.materialList != current.materialList,
       builder: (context, state) {
         return Padding(
-          padding: const EdgeInsets.all(10.0),
+          padding: const EdgeInsets.symmetric(
+            vertical: padding24,
+            horizontal: padding6,
+          ),
           child: Row(
             key: WidgetKeys.totalMaterialItemCount,
             children: [

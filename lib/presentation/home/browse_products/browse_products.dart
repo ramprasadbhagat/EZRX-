@@ -10,6 +10,7 @@ import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/home/widgets/product_card.dart';
 import 'package:ezrxmobile/presentation/home/widgets/product_loading_shimmer.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
+import 'package:ezrxmobile/presentation/theme/theme_data.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -74,7 +75,8 @@ class BrowseProduct extends StatelessWidget {
           listener: (context, state) => state.apiFailureOrSuccessOption.fold(
             () => {},
             (either) => either.fold(
-              (failure) => ErrorUtils.handleStockInfoApiFailure(context, failure),
+              (failure) =>
+                  ErrorUtils.handleStockInfoApiFailure(context, failure),
               (_) => {},
             ),
           ),
@@ -87,7 +89,10 @@ class BrowseProduct extends StatelessWidget {
                     key: WidgetKeys.browseProduct,
                     children: [
                       Padding(
-                        padding: const EdgeInsets.only(left: 10, top: 5),
+                        padding: const EdgeInsets.only(
+                          left: padding12,
+                          top: padding6,
+                        ),
                         child: SectionTitle(
                           key: WidgetKeys.browseProductIcon,
                           title: 'Browse products',
@@ -104,6 +109,7 @@ class BrowseProduct extends StatelessWidget {
                                 key: WidgetKeys.browseProductLoadingShimmer,
                               )
                             : ListView(
+                                padding: const EdgeInsets.only(left: padding6),
                                 scrollDirection: Axis.horizontal,
                                 children: state.materialList
                                     .map(

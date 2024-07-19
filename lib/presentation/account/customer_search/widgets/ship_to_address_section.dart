@@ -17,7 +17,7 @@ class _ShipToAddressSection extends StatelessWidget {
           key: WidgetKeys.shipToAddressOption(shipToInfo.shipToCustomerCode),
           minLeadingWidth: 0,
           horizontalTitleGap: 9,
-          contentPadding: const EdgeInsets.symmetric(horizontal: 12),
+          contentPadding: const EdgeInsets.symmetric(horizontal: padding12),
           minVerticalPadding: 16,
           leading: const Icon(
             Icons.location_on_sharp,

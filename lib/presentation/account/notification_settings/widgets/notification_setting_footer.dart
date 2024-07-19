@@ -14,7 +14,7 @@ class _NotificationSettingFooter extends StatelessWidget {
         builder: (context, state) {
           return Container(
             height: 80,
-            padding: const EdgeInsets.all(16),
+            padding: const EdgeInsets.all(padding12),
             child: Row(
               children: [
                 Expanded(
@@ -22,7 +22,6 @@ class _NotificationSettingFooter extends StatelessWidget {
                     enabled: state.isLoading,
                     child: SizedBox(
                       width: double.infinity,
-                      height: 48,
                       child: OutlinedButton(
                         key: WidgetKeys.notificationSettingsClearButton,
                         onPressed: () => state.isLoading
@@ -38,14 +37,13 @@ class _NotificationSettingFooter extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(
-                  width: 16,
+                  width: padding12,
                 ),
                 Expanded(
                   child: LoadingShimmer.withChild(
                     enabled: state.isLoading,
                     child: SizedBox(
                       width: double.infinity,
-                      height: 48,
                       child: ElevatedButton(
                         key: WidgetKeys.notificationSettingsSubmitButton,
                         onPressed: (state.enableSubmit && !state.isLoading)

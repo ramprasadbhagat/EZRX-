@@ -15,7 +15,7 @@ class _ResetPasswordButton extends StatelessWidget {
         return Column(
           children: [
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 18),
+              padding: const EdgeInsets.all(padding12),
               child: Column(
                 children: [
                   ElevatedButton(
@@ -38,7 +38,7 @@ class _ResetPasswordButton extends StatelessWidget {
                     ),
                   ),
                   if (!isFirstLogin) ...[
-                    const SizedBox(height: 15),
+                    const SizedBox(height: padding12),
                     SizedBox(
                       width: MediaQuery.of(context).size.width * 0.9,
                       child: const BackToLogin(),

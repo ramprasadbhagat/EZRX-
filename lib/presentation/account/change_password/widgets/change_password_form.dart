@@ -52,7 +52,7 @@ class _ChangePasswordForm extends StatelessWidget {
                   );
                 },
               ),
-              const SizedBox(height: 15),
+              const SizedBox(height: padding24),
               BlocBuilder<ResetPasswordBloc, ResetPasswordState>(
                 buildWhen: (previous, current) =>
                     previous.isNewPasswordObscure !=
@@ -67,7 +67,7 @@ class _ChangePasswordForm extends StatelessWidget {
                   );
                 },
               ),
-              const SizedBox(height: 15),
+              const SizedBox(height: padding24),
               BlocBuilder<ResetPasswordBloc, ResetPasswordState>(
                 buildWhen: (previous, current) =>
                     previous.isConfirmPasswordObscure !=

@@ -1,4 +1,5 @@
 import 'package:ezrxmobile/presentation/core/custom_app_bar.dart';
+import 'package:ezrxmobile/presentation/theme/theme_data.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
@@ -39,47 +40,44 @@ class ProfilePage extends StatelessWidget {
         customerBlockedOrSuspended:
             context.read<EligibilityBloc>().state.customerBlockOrSuspended,
       ),
-      body: Padding(
-        padding: const EdgeInsets.only(left: 12, right: 12, top: 12),
-        child: BlocConsumer<CustomerLicenseBloc, CustomerLicenseState>(
-          buildWhen: (previous, current) =>
-              previous.isFetching != current.isFetching,
-          listenWhen: (previous, current) =>
-              previous.failureOrSuccessOption != current.failureOrSuccessOption,
-          listener: (context, state) {
-            state.failureOrSuccessOption.fold(
-              () {},
-              (either) => either.fold(
-                (failure) {
-                  ErrorUtils.handleApiFailure(context, failure);
-                },
-                (_) {},
-              ),
-            );
-          },
-          builder: (context, state) {
-            return ScrollList<CustomerLicense>(
-              header: const _Header(),
-              noRecordFoundWidget: NoRecordFound(
-                title: context.tr("Looks like you don't have any license here"),
-                subTitle: '',
-                svgImage: SvgImage.emptyBox,
-              ),
-              controller: ScrollController(),
-              onRefresh: () => context.read<CustomerLicenseBloc>().add(
-                    const CustomerLicenseEvent.fetch(),
-                  ),
-              onLoadingMore: () => context.read<CustomerLicenseBloc>().add(
-                    const CustomerLicenseEvent.loadMore(),
-                  ),
-              isLoading: state.isFetching,
-              itemBuilder: (context, index, item) => _LicenseTile(
-                customerLicense: item,
-              ),
-              items: state.customerLicenses,
-            );
-          },
-        ),
+      body: BlocConsumer<CustomerLicenseBloc, CustomerLicenseState>(
+        buildWhen: (previous, current) =>
+            previous.isFetching != current.isFetching,
+        listenWhen: (previous, current) =>
+            previous.failureOrSuccessOption != current.failureOrSuccessOption,
+        listener: (context, state) {
+          state.failureOrSuccessOption.fold(
+            () {},
+            (either) => either.fold(
+              (failure) {
+                ErrorUtils.handleApiFailure(context, failure);
+              },
+              (_) {},
+            ),
+          );
+        },
+        builder: (context, state) {
+          return ScrollList<CustomerLicense>(
+            header: const _Header(),
+            noRecordFoundWidget: NoRecordFound(
+              title: context.tr("Looks like you don't have any license here"),
+              subTitle: '',
+              svgImage: SvgImage.emptyBox,
+            ),
+            controller: ScrollController(),
+            onRefresh: () => context.read<CustomerLicenseBloc>().add(
+                  const CustomerLicenseEvent.fetch(),
+                ),
+            onLoadingMore: () => context.read<CustomerLicenseBloc>().add(
+                  const CustomerLicenseEvent.loadMore(),
+                ),
+            isLoading: state.isFetching,
+            itemBuilder: (context, index, item) => _LicenseTile(
+              customerLicense: item,
+            ),
+            items: state.customerLicenses,
+          );
+        },
       ),
       bottomNavigationBar: const _Footer(),
     );

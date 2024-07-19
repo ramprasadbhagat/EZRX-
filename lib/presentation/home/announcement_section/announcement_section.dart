@@ -1,18 +1,13 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:ezrxmobile/application/account/eligibility/eligibility_bloc.dart';
 import 'package:ezrxmobile/application/announcement_info/announcement_info_bloc.dart';
-import 'package:ezrxmobile/application/announcement_info/announcement_info_details/announcement_info_details_bloc.dart';
-import 'package:ezrxmobile/domain/announcement_info/entities/announcement_article_info.dart';
-import 'package:ezrxmobile/domain/core/value/value_objects.dart';
 import 'package:ezrxmobile/presentation/core/custom_card.dart';
 import 'package:ezrxmobile/presentation/core/loading_shimmer/loading_shimmer.dart';
-import 'package:ezrxmobile/presentation/core/responsive.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
-import 'package:ezrxmobile/presentation/home/announcement_section/announcement_articles_tab/announcements/widgets/new_announcement_icon.dart';
+import 'package:ezrxmobile/presentation/home/announcement_section/announcement_articles_tab/announcements/announcements_tab.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
+import 'package:ezrxmobile/presentation/theme/theme_data.dart';
 import 'package:flutter/material.dart';
 import 'package:ezrxmobile/presentation/core/section_tile.dart';
-import 'package:ezrxmobile/presentation/theme/colors.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AnnouncementSection extends StatelessWidget {
@@ -35,7 +30,10 @@ class AnnouncementSection extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: const EdgeInsets.only(left: 10),
+              padding: const EdgeInsets.only(
+                left: padding12,
+                top: padding12,
+              ),
               child: SectionTitle(
                 key: WidgetKeys.announcementIcon,
                 title: 'Announcements',
@@ -44,97 +42,10 @@ class AnnouncementSection extends StatelessWidget {
               ),
             ),
             ...state.announcementInfo.homePageAnnouncementList
-                .map((e) => _AnnouncementSectionItem(announcementItem: e))
-                ,
+                .map((e) => AnnouncementItem(item: e)),
           ],
         );
       },
-    );
-  }
-}
-
-class _AnnouncementSectionItem extends StatelessWidget {
-  final AnnouncementArticleItem announcementItem;
-
-  const _AnnouncementSectionItem({required this.announcementItem});
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        context.read<AnnouncementInfoDetailsBloc>().add(
-              AnnouncementInfoDetailsEvent.fetch(
-                itemId: announcementItem.id,
-                salesOrg: context.read<EligibilityBloc>().state.salesOrg,
-              ),
-            );
-        context.router.push(const AnnouncementInfoDetailsPageRoute());
-      },
-      child: CustomCard(
-        margin: const EdgeInsets.all(8),
-        clipBehavior: Clip.antiAlias,
-        child: _ItemDescription(
-          title: announcementItem.title,
-          description: announcementItem.summary,
-          publishedDate: announcementItem.releaseDate,
-        ),
-      ),
-    );
-  }
-}
-
-class _ItemDescription extends StatelessWidget {
-  final String title;
-  final String description;
-  final DateTimeStringValue publishedDate;
-
-  const _ItemDescription({
-    required this.title,
-    required this.publishedDate,
-    required this.description,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(12),
-      child: Column(
-        key: WidgetKeys.announcementsList,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            children: [
-              Expanded(
-                child: Text(
-                  publishedDate.dateTimeOrDashString,
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodySmall
-                      ?.copyWith(color: ZPColors.extraLightGrey4, fontSize: 10),
-                ),
-              ),
-              if (publishedDate.aWeekDifference) const NewAnnouncementIcon(),
-            ],
-          ),
-          Text(
-            title,
-            maxLines: Responsive.isMobile(context) ? 2 : 1,
-            overflow: TextOverflow.ellipsis,
-            style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                  color: ZPColors.neutralsBlack,
-                ),
-            key: WidgetKeys.announcementTitle,
-          ),
-          Text(
-            description,
-            maxLines: 3,
-            overflow: TextOverflow.ellipsis,
-            style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                  color: ZPColors.extraLightGrey4,
-                ),
-          ),
-        ],
-      ),
     );
   }
 }

@@ -12,14 +12,13 @@ class _LanguageDropDown extends StatelessWidget {
         Expanded(
           flex: 4,
           child: Text(
-            'Language'.tr(),
+            '${'Language'.tr()}:',
             key: WidgetKeys.profilePageLanguageDropdownLabel,
             style: Theme.of(context).textTheme.labelSmall?.copyWith(
                   color: ZPColors.neutralsBlack,
                 ),
           ),
         ),
-        const Text(':  '),
         Expanded(
           flex: 7,
           child: BlocConsumer<UserBloc, UserState>(
@@ -35,7 +34,8 @@ class _LanguageDropDown extends StatelessWidget {
               return DropdownButtonFormField2<Language>(
                 key: WidgetKeys.profilePageLanguageDropdown,
                 decoration: const InputDecoration(
-                  contentPadding: EdgeInsets.fromLTRB(0, 10, 12, 10),
+                  contentPadding:
+                      EdgeInsets.fromLTRB(0, padding6, padding6, padding6),
                 ),
                 iconStyleData: const IconStyleData(
                   icon: Icon(
