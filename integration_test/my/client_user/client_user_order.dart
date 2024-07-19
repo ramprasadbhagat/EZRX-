@@ -5,6 +5,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 
 import '../../core/common.dart';
+import '../../robots/announcement_article/announcement/announcement_detail_robot.dart';
+import '../../robots/announcement_article/announcement/announcement_robot.dart';
 import '../../robots/announcement_article/announcement_article_root_robot.dart';
 import '../../robots/announcement_article/articles/articles_details_robot.dart';
 import '../../robots/announcement_article/articles/articles_robot.dart';
@@ -60,8 +62,8 @@ void main() {
   late MoreRobot moreRobot;
 
   late AnnouncementArticleRootRobot announcementArticleRootRobot;
-  // late AnnouncementDetailRobot announcementDetailRobot;
-  // late AnnouncementRobot announcementRobot;
+  late AnnouncementDetailRobot announcementDetailRobot;
+  late AnnouncementRobot announcementRobot;
   late ArticleRobot articleRobot;
   late ArticleDetailsRobot articleDetailsRobot;
 
@@ -107,8 +109,8 @@ void main() {
     notificationRobot = NotificationRobot(tester);
 
     announcementArticleRootRobot = AnnouncementArticleRootRobot(tester);
-    // announcementDetailRobot = AnnouncementDetailRobot(tester);
-    // announcementRobot = AnnouncementRobot(tester);
+    announcementDetailRobot = AnnouncementDetailRobot(tester);
+    announcementRobot = AnnouncementRobot(tester);
     articleRobot = ArticleRobot(tester);
     articleDetailsRobot = ArticleDetailsRobot(tester);
 
@@ -904,18 +906,18 @@ void main() {
       productRobot.verifyPageVisible();
     });
 
-    // testWidgets('EZRX-T48 | Verify display Announcements in Homepage',
-    //     (tester) async {
-    //   //init app
-    //   await pumpAppWithHomeScreen(tester);
+    testWidgets('EZRX-T48 | Verify display Announcements in Homepage',
+        (tester) async {
+      //init app
+      await pumpAppWithHomeScreen(tester);
 
-    //   //tap on browse products
-    //   await homeRobot.findAnnouncementsIcon();
-    //   await homeRobot.tapAnnouncementsIcon();
+      //tap on browse products
+      await homeRobot.findAnnouncementsIcon();
+      await homeRobot.tapAnnouncementsIcon();
 
-    //   //verify go to announcements page
-    //   announcementArticleRootRobot.verifyAnnouncementPage();
-    // });
+      //verify go to announcements page
+      announcementArticleRootRobot.verifyAnnouncementPage();
+    });
 
     testWidgets('EZRX-T46 | Verify display Recently ordered in Homepage',
         (tester) async {
@@ -1059,20 +1061,20 @@ void main() {
       productDetailRobot.verifyPage();
     });
 
-    // testWidgets('EZRX-T59 | Verify click on Announcement in Announcements',
-    //     (tester) async {
-    //   //init app
-    //   await pumpAppWithHomeScreen(tester);
+    testWidgets('EZRX-T59 | Verify click on Announcement in Announcements',
+        (tester) async {
+      //init app
+      await pumpAppWithHomeScreen(tester);
 
-    //   //move to Announcements
-    //   await homeRobot.findAnnouncementsIcon();
+      //move to Announcements
+      await homeRobot.findAnnouncementsIcon();
 
-    //   //tap on first product
-    //   await homeRobot.tapOnFirstAnnouncement();
+      //tap on first product
+      await homeRobot.tapOnFirstAnnouncement();
 
-    //   //verify announcement detail page
-    //   announcementDetailRobot.verifyPage();
-    // });
+      //verify announcement detail page
+      announcementDetailRobot.verifyPage();
+    });
   });
 
   group('Product Tab -', () {
@@ -3979,100 +3981,106 @@ void main() {
 
     //TODO: will revisist later, once implementation work done
 
-    // group('Announcement -', () {
-    //   const validSearchKey = 'new';
+    group('Announcement -', () {
+      const validSearchKey = 'new';
 
-    //   testWidgets('EZRX-T170 | Verify announcements page', (tester) async {
-    //     await pumpAppWithHomeScreen(tester);
-    //     await goToAnnouncementArticlePage();
+      testWidgets('EZRX-T170 | Verify announcements page', (tester) async {
+        await pumpAppWithHomeScreen(tester);
+        await goToAnnouncementArticlePage();
 
-    //     announcementArticleRootRobot.verifyTabBar();
-    //     announcementArticleRootRobot.verifyAnnouncementPage();
-    //     // announcementRobot.verifyFilterButton();
-    //     announcementRobot.verifySearchBar();
-    //     announcementRobot.verifySearchBarText('');
-    //   });
+        announcementArticleRootRobot.verifyTabBar();
+        announcementArticleRootRobot.verifyAnnouncementPage();
+        // announcementRobot.verifyFilterButton();
+        announcementRobot.verifySearchBar();
+        announcementRobot.verifySearchBarText('');
+      });
 
-    //   testWidgets('EZRX-T168 | Verify detail announcements', (tester) async {
-    //     await pumpAppWithHomeScreen(tester);
-    //     await goToAnnouncementArticlePage();
+      testWidgets('EZRX-T168 | Verify detail announcements', (tester) async {
+        await pumpAppWithHomeScreen(tester);
+        await goToAnnouncementArticlePage();
 
-    //     await announcementRobot.searchWithKeyboardAction(validSearchKey);
-    //     announcementRobot.verifyItemsWithKeyword(validSearchKey);
-    //     await announcementRobot.tapFirstItem();
-    //     announcementDetailRobot.verifyPage();
-    //     announcementDetailRobot.verifyBackButton();
-    //     announcementDetailRobot.verifyAnnouncementImage();
-    //     announcementDetailRobot.verifyAnnouncementDate();
-    //     announcementDetailRobot.verifyOtherAnnouncementSection();
-    //   });
+        await announcementRobot.searchWithKeyboardAction(validSearchKey);
+        announcementRobot.verifyItemsWithKeyword(validSearchKey);
+        await announcementRobot.tapFirstItem();
+        announcementDetailRobot.verifyPage();
+        announcementDetailRobot.verifyBackButton();
+        announcementDetailRobot.verifyAnnouncementImage();
+        announcementDetailRobot.verifyAnnouncementDate();
+        announcementDetailRobot.verifyOtherAnnouncementSection();
+      });
 
-    //   testWidgets('EZRX-T172 | Verify search announcements invalid data',
-    //       (tester) async {
-    //     await pumpAppWithHomeScreen(tester);
-    //     await goToAnnouncementArticlePage();
+      testWidgets('EZRX-T172 | Verify search announcements invalid data',
+          (tester) async {
+        await pumpAppWithHomeScreen(tester);
+        await goToAnnouncementArticlePage();
 
-    //     announcementRobot.verifyItems();
-    //     await announcementRobot.autoSearch(invalidLengthSearchKey);
-    //     announcementRobot.verifyInvalidLengthSearchMessage(isVisible: false);
-    //     announcementRobot.verifyLoadingImage(isVisible: false);
-    //     await announcementRobot.searchWithSearchIcon(invalidLengthSearchKey);
-    //     announcementRobot.verifyInvalidLengthSearchMessage(isVisible: true);
-    //     await announcementRobot.dismissSnackbar();
-    //     await announcementRobot.autoSearch(invalidSearchKey);
-    //     announcementRobot.verifyNoRecordFound();
-    //     await announcementRobot.tapClearSearch();
-    //     announcementRobot.verifyItems();
-    //   });
+        announcementRobot.verifyItems();
+        await announcementRobot.autoSearch(invalidLengthSearchKey);
+        await announcementRobot
+            .verifyAndDismissInvalidLengthSearchMessageSnackbar(
+          isVisible: false,
+        );
+        announcementRobot.verifyLoadingImage(isVisible: false);
+        await announcementRobot.searchWithSearchIcon(invalidLengthSearchKey);
+        await announcementRobot
+            .verifyAndDismissInvalidLengthSearchMessageSnackbar(
+          isVisible: true,
+        );
+        await announcementRobot.dismissSnackbar();
+        await announcementRobot.autoSearch(invalidSearchKey);
+        announcementRobot.verifyNoRecordFound();
+        await announcementRobot.tapClearSearch();
+        announcementRobot.verifyItems();
+      });
 
-    //   testWidgets(
-    //       'EZRX-T173 | Verify search announcements valid data - on done keyboard button',
-    //       (tester) async {
-    //     await pumpAppWithHomeScreen(tester);
-    //     await goToAnnouncementArticlePage();
+      testWidgets(
+          'EZRX-T173 | Verify search announcements valid data - on done keyboard button',
+          (tester) async {
+        await pumpAppWithHomeScreen(tester);
+        await goToAnnouncementArticlePage();
 
-    //     await announcementRobot.searchWithKeyboardAction(validSearchKey);
-    //     await announcementRobot.waitAutoSearchDuration();
-    //     announcementRobot.verifyLoadingImage(isVisible: false);
-    //     announcementRobot.verifyItemsWithKeyword(validSearchKey);
-    //     await announcementRobot.pullToRefresh();
-    //     announcementRobot.verifySearchBarText('');
-    //   });
+        await announcementRobot.searchWithKeyboardAction(validSearchKey);
+        await announcementRobot.waitAutoSearchDuration();
+        announcementRobot.verifyLoadingImage(isVisible: false);
+        announcementRobot.verifyItemsWithKeyword(validSearchKey);
+        await announcementRobot.pullToRefresh();
+        announcementRobot.verifySearchBarText('');
+      });
 
-    //   testWidgets('EZRX-T174 | Verify Filter Announcements', (tester) async {
-    //     //TODO: Revisit to implement test cases after the filter feature is implemented
-    //   });
+      testWidgets('EZRX-T174 | Verify Filter Announcements', (tester) async {
+        //TODO: Revisit to implement test cases after the filter feature is implemented
+      });
 
-    //   testWidgets(
-    //       'EZRX-T175 | Verify search any one item & Tap & Verify Detail page in details',
-    //       (tester) async {
-    //     await pumpAppWithHomeScreen(tester);
-    //     await goToAnnouncementArticlePage();
+      testWidgets(
+          'EZRX-T175 | Verify search any one item & Tap & Verify Detail page in details',
+          (tester) async {
+        await pumpAppWithHomeScreen(tester);
+        await goToAnnouncementArticlePage();
 
-    //     await announcementRobot.searchWithKeyboardAction(validSearchKey);
-    //     announcementRobot.verifyItemsWithKeyword(validSearchKey);
-    //     await announcementRobot.tapFirstItem();
-    //     announcementArticleRootRobot.verifyAnnouncementPage(isVisible: false);
-    //     announcementDetailRobot.verifyPage(isVisible: true);
-    //     await announcementDetailRobot.tapBackButton();
-    //     announcementDetailRobot.verifyPage(isVisible: false);
-    //     announcementArticleRootRobot.verifyAnnouncementPage(isVisible: true);
-    //   });
+        await announcementRobot.searchWithKeyboardAction(validSearchKey);
+        announcementRobot.verifyItemsWithKeyword(validSearchKey);
+        await announcementRobot.tapFirstItem();
+        announcementArticleRootRobot.verifyAnnouncementPage(isVisible: false);
+        announcementDetailRobot.verifyPage(isVisible: true);
+        await announcementDetailRobot.tapBackButton();
+        announcementDetailRobot.verifyPage(isVisible: false);
+        announcementArticleRootRobot.verifyAnnouncementPage(isVisible: true);
+      });
 
-    //   testWidgets(
-    //       'EZRX-T251 | Verify search announcements valid data - on search button',
-    //       (tester) async {
-    //     await pumpAppWithHomeScreen(tester);
-    //     await goToAnnouncementArticlePage();
+      testWidgets(
+          'EZRX-T251 | Verify search announcements valid data - on search button',
+          (tester) async {
+        await pumpAppWithHomeScreen(tester);
+        await goToAnnouncementArticlePage();
 
-    //     await announcementRobot.searchWithKeyboardAction(validSearchKey);
-    //     await announcementRobot.waitAutoSearchDuration();
-    //     announcementRobot.verifyLoadingImage(isVisible: false);
-    //     announcementRobot.verifyItemsWithKeyword(validSearchKey);
-    //     await announcementRobot.pullToRefresh();
-    //     announcementRobot.verifySearchBarText('');
-    //   });
-    // });
+        await announcementRobot.searchWithKeyboardAction(validSearchKey);
+        await announcementRobot.waitAutoSearchDuration();
+        announcementRobot.verifyLoadingImage(isVisible: false);
+        announcementRobot.verifyItemsWithKeyword(validSearchKey);
+        await announcementRobot.pullToRefresh();
+        announcementRobot.verifySearchBarText('');
+      });
+    });
   });
 
   // tearDown(() async {

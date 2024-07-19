@@ -31,7 +31,6 @@ class AnnouncementRemoteDataSource {
           }),
         );
         exceptionHandler.handleExceptionChecker(res: res);
-        //TODO: Consider to move to custom exception
         if (res.data['data']['getAnnouncements'] == null ||
             res.data['data']['getAnnouncements'].isEmpty) {
           throw OtherException(message: '');

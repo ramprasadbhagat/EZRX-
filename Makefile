@@ -20,8 +20,8 @@ run_analyze:
 	@dcm check-parameters lib --fatal-found
 	@dcm check-code-duplication lib --fatal-found
 	@dcm check-unused-code lib --fatal-unused
-	@dcm check-dependencies lib test integration_test --ignored-packages auto_route_generator,flutter_launcher_icons,flutter_native_splash,json_serializable,hive_generator,scandit_flutter_datacapture_core --fatal-found
-	@dcm check-unused-files lib --fatal-unused
+	@dcm check-dependencies lib test integration_test --ignored-packages flutter_launcher_icons --fatal-found
+	@dcm check-unused-files lib test integration_test --fatal-unused
 	@dcm check-exports-completeness lib test integration_test --fatal-found
 run_test:
 	$(MAKE) run_analyze

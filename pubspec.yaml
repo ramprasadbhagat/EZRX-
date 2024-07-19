@@ -71,6 +71,7 @@ dependencies:
   cached_network_image: ^3.3.1
   flutter_inappwebview: ^6.0.0
   scandit_flutter_datacapture_barcode: ^6.25.0
+  scandit_flutter_datacapture_core: ^6.25.0
   loading_indicator: ^3.1.1
   badges: ^3.1.2
   flutter_slidable: ^3.1.0

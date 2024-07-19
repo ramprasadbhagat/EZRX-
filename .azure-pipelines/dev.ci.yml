@@ -44,18 +44,44 @@ jobs:
       - task: Bash@3
         inputs:
           targetType: 'inline'
+          script: flutter pub get
+        displayName: Flutter Pub Get
+
+      - task: Bash@3
+        inputs:
+          targetType: 'inline'
           script: dcm analyze lib --ci-key=$DCM_CI_KEY --email=$DCM_LICENSE_EMAIL --fatal-style --fatal-performance --fatal-warnings
         displayName: DCM Analyse
 
   - job: DCMCheckParameters
     displayName: 'DCM Check Parameters'
     steps:
-      - bash: dcm check-parameters lib --ci-key=$DCM_CI_KEY --email=$DCM_LICENSE_EMAIL --fatal-found
+      - task: Bash@3
+        inputs:
+          targetType: 'inline'
+          script: flutter pub get
+        displayName: Flutter Pub Get
+
+      - task: Bash@3
+        inputs:
+          targetType: 'inline'
+          script: dcm check-parameters lib --ci-key=$DCM_CI_KEY --email=$DCM_LICENSE_EMAIL --fatal-found
+        displayName: DCM Check Parameters
 
   - job: DCMCheckUnusedFiles
     displayName: 'DCM Check Unused Files'
     steps:
-      - bash: dcm check-unused-files lib --ci-key=$DCM_CI_KEY --email=$DCM_LICENSE_EMAIL --fatal-unused
+      - task: Bash@3
+        inputs:
+          targetType: 'inline'
+          script: flutter pub get
+        displayName: Flutter Pub Get
+
+      - task: Bash@3
+        inputs:
+          targetType: 'inline'
+          script: dcm check-unused-files lib test integration_test --ci-key=$DCM_CI_KEY --email=$DCM_LICENSE_EMAIL --fatal-unused
+        displayName: DCM Check Unused Files
 
   - job: DCMCheckUnusedCode
     displayName: 'DCM Check Unused Code'
@@ -99,7 +125,7 @@ jobs:
       - task: Bash@3
         inputs:
           targetType: 'inline'
-          script: dcm check-dependencies lib test integration_test --ignored-packages auto_route_generator,flutter_launcher_icons,flutter_native_splash,json_serializable,hive_generator,scandit_flutter_datacapture_core --ci-key=$DCM_CI_KEY --email=$DCM_LICENSE_EMAIL --fatal-found
+          script: dcm check-dependencies lib test integration_test --ignored-packages flutter_launcher_icons --ci-key=$DCM_CI_KEY --email=$DCM_LICENSE_EMAIL --fatal-found
         displayName: DCM Check Dependencies
 
   - job: DCMCheckExportCompleteness

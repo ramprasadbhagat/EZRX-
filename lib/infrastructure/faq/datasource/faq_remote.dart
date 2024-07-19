@@ -44,7 +44,6 @@ class FAQInfoRemoteDataSource {
         }),
       );
       exceptionHandler.handleExceptionChecker(res: res);
-      //TODO: Consider to custom exception
       if (res.data['data']['search'] == null ||
           res.data['data']['search'].isEmpty) {
         throw OtherException();

@@ -80,7 +80,6 @@ class PaymentInfoDto with _$PaymentInfoDto {
       paymentID: paymentID,
       accountingDocExternalReference: accountingDocExternalReference,
       zzAdvice: zzAdvice,
-      //TODO(Hob): Not have on query at that time because c4p don't have
       createdDate: DateTimeStringValue(valueDate),
       adviceExpiry: AdviceExpiryValue(adviceExpiry),
     );

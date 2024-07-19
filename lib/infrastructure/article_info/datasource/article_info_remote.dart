@@ -83,7 +83,6 @@ class ArticleInfoRemoteDataSource {
           'variables': variableData,
         }),
       );
-      //TODO: Consider to move to custom exception
       exceptionHandler.handleExceptionChecker(res: res);
       if (res.data['data']['search'] == null ||
           res.data['data']['search'].isEmpty) {

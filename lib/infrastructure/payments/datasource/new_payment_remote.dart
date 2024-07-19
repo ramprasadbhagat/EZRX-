@@ -99,8 +99,7 @@ class NewPaymentRemoteDataSource {
               'transactionCurrency': transactionCurrency,
               'userName': userName,
               if (isMarketPlace) 'isMarketPlace': isMarketPlace,
-              'isV2':
-                  true, //TODO: Remove this field when BE deployed payment to UAT on all market
+              'isV2': true,
             },
           },
         },

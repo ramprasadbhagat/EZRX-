@@ -865,8 +865,6 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                 }
               },
               redirectPaymentDetail: (paymentIdentifierInfo, isMarketPlace) {
-                //TODO: Check
-
                 if (eligibilityState.isPaymentEnabled) {
                   context.read<PaymentSummaryDetailsBloc>().add(
                         PaymentSummaryDetailsEvent
