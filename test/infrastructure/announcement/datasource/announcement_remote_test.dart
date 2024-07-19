@@ -9,6 +9,7 @@ import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
 import 'package:ezrxmobile/infrastructure/announcement/datasource/announcement_query_mutation.dart';
 import 'package:ezrxmobile/infrastructure/announcement/datasource/announcement_remote.dart';
 import 'package:ezrxmobile/infrastructure/announcement/dtos/announcement_dto.dart';
+import 'package:ezrxmobile/infrastructure/announcement/dtos/maintenance_item_dto.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:flutter/material.dart';
@@ -31,6 +32,8 @@ void main() {
   );
   final dioAdapter = DioAdapter(dio: dio, matcher: const UrlRequestMatcher());
   final service = HttpService.mockDio(dio);
+  const fakeItemId = 'fake-item-id';
+  const fakeLang = 'fake-lang';
 
   setUpAll(
     () {
@@ -151,6 +154,43 @@ void main() {
             expect(error, isA<ServerException>());
             return Future.value(AnnouncementMock());
           });
+        },
+      );
+
+      test(
+        'Get Maintenance Banners Success',
+        () async {
+          final res = json.decode(
+            await rootBundle
+                .loadString('assets/json/getMaintenanceBannersResponse.json'),
+          );
+          dioAdapter.onPost(
+            '/api/announcement',
+            (server) => server.reply(
+              200,
+              res,
+              delay: const Duration(seconds: 1),
+            ),
+            headers: {'Content-Type': 'application/json; charset=utf-8'},
+            data: jsonEncode({
+              'query':
+                  remoteDataSource.queryMutation.getMaintenanceBannerQuery(),
+              'variables': {
+                'itemId': fakeItemId,
+                'lang': fakeLang,
+              },
+            }),
+          );
+
+          final result = await remoteDataSource.getMaintenanceBanner(
+            languageCode: fakeLang,
+            pathId: fakeItemId,
+          );
+
+          expect(
+            result,
+            MaintenanceItemDto.fromJson(res['data']['item']).toDomain,
+          );
         },
       );
     },
