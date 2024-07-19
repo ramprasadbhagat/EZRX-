@@ -1449,6 +1449,7 @@ void main() {
         salesOrganisation: fakeSalesOrganisation,
         orderResponse: submitOrderResponseMock,
         shipToInfo: fakeShipToInfo,
+        configs: fakeSalesOrganisationConfigs,
       );
       expect(
         result,
@@ -1469,6 +1470,7 @@ void main() {
         salesOrganisation: fakeSalesOrganisation,
         orderResponse: submitOrderResponseMock,
         shipToInfo: fakeShipToInfo,
+        configs: fakeSalesOrganisationConfigs,
       );
       expect(
         result,
@@ -1520,6 +1522,7 @@ void main() {
         salesOrganisation: fakeSalesOrganisation,
         orderResponse: submitOrderResponseMock,
         shipToInfo: fakeShipToInfo,
+        configs: fakeSalesOrganisationConfigs,
       );
       expect(
         result.getOrElse(() => <OrderHistoryDetails>[]),
@@ -1550,6 +1553,7 @@ void main() {
         salesOrganisation: fakeSalesOrganisation,
         orderResponse: submitOrderResponseMock,
         shipToInfo: fakeShipToInfo,
+        configs: fakeSalesOrganisationConfigs,
       );
       expect(
         result,
@@ -1603,6 +1607,7 @@ void main() {
         salesOrganisation: fakeSalesOrganisation,
         orderResponse: submitOrderResponseMock,
         shipToInfo: fakeShipToInfo,
+        configs: fakeSalesOrganisationConfigs,
       );
       for (final item in orderHistoryList) {
         verify(
@@ -1612,7 +1617,7 @@ void main() {
               if (item.processingStatus.isInQueue)
                 TrackingProps.queueNumber:
                     item.orderNumber.getOrDefaultValue(''),
-              TrackingProps.orderNumber: item.trackingOrderId,
+              TrackingProps.orderNumber: item.orderNumber.getOrDefaultValue(''),
               TrackingProps.grandTotal: item.totalValue,
               TrackingProps.totalQty: item.orderItemsCount,
               TrackingProps.requestDeliveryDate:
@@ -1658,6 +1663,7 @@ void main() {
         salesOrganisation: fakeSalesOrganisation,
         orderResponse: submitOrderResponseMock,
         shipToInfo: fakeShipToInfo,
+        configs: fakeSalesOrganisationConfigs,
       );
       expect(
         result,

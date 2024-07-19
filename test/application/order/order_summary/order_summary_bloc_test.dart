@@ -326,6 +326,7 @@ void main() {
               ),
             ],
             shipToInfo: fakeShipToInfo,
+            configs: seedState.salesOrgConfig,
           ),
         ).thenAnswer(
           (value) async => Right([orderHistoryDetails]),
@@ -394,6 +395,7 @@ void main() {
               ),
             ],
             shipToInfo: fakeShipToInfo,
+            configs: seedState.salesOrgConfig,
           ),
         ).thenAnswer(
           (value) async => const Left(ApiFailure.other('Some Error')),

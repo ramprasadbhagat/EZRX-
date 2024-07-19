@@ -25,6 +25,25 @@ class TrackingProps {
   static String unitPrice = 'unit_price';
   static String paymentMethod = 'payment_method';
   static String cart = 'cart';
+  static String poReference = 'po_reference';
+  static String poDate = 'po_date';
+  static String purchaseOrderType = 'purchase_order_type';
+  static String specialInstruction = 'special_instruction';
+  static String telephone = 'telephone';
+  static String blockOrder = 'block_order';
+  static String companyName = 'company_name';
+  static String customerNumber = 'customer_number';
+  static String customerNumberShipTo = 'customer_number_ship_to';
+  static String division = 'division';
+  static String deliveryFee = 'deliveryFee';
+  static String language = 'language';
+  static String paymentTerm = 'payment_term';
+  static String poDocuments = 'po_documents';
+  static String referenceNote = 'reference_note';
+  static String totalTax = 'total_tax';
+  static String orderType = 'order_type';
+  static String orderReason = 'order_reason';
+  static String collectiveNumber = 'collective_number';
   //===========================================================
   //  Only Mixpanel track properties
   //===========================================================

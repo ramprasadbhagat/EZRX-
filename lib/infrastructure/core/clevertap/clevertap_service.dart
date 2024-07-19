@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:clevertap_plugin/clevertap_plugin.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/infrastructure/core/firebase/push_notification.dart';
@@ -66,9 +68,21 @@ class ClevertapService {
     required String eventName,
     required Map<String, dynamic> properties,
   }) {
-    CleverTapPlugin.recordEvent(
-      eventName,
-      properties,
-    );
+    // we need to convert Map/List value using jsonEncode to jsonString
+    // because cleverTap not accept those data types
+    final convertedProperties = properties.map((key, value) {
+      if (value is List || value is Map) {
+        return MapEntry(key, jsonEncode(value));
+      }
+
+      return MapEntry(key, value);
+    });
+
+    try {
+      CleverTapPlugin.recordEvent(
+        eventName,
+        convertedProperties,
+      );
+    } catch (_) {}
   }
 }

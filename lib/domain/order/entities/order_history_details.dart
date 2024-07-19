@@ -89,6 +89,9 @@ class OrderHistoryDetails with _$OrderHistoryDetails {
 
   bool get poDocumentsAvailable => orderHistoryDetailsPoDocuments.isNotEmpty;
 
+  List<String> get poDocumentsName => orderHistoryDetailsPoDocuments.
+      map((obj) => obj.name).toList();
+
   List<MaterialQueryInfo> get allItemQueryInfo => items
       .map(
         (item) => item.orderItem.queryInfo,
@@ -175,10 +178,6 @@ class OrderHistoryDetails with _$OrderHistoryDetails {
             )
             .toList(),
       );
-
-  String get trackingOrderId => processingStatus.isInQueue
-      ? 'no order number'
-      : orderNumber.getOrDefaultValue('');
 
   bool get isCovidMaterialAvailable =>
       orderHistoryDetailsOrderItem.any((element) => element.isCovid);

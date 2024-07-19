@@ -159,6 +159,7 @@ class OrderRepository implements IOrderRepository {
     required SalesOrganisation salesOrganisation,
     required List<PriceAggregate> cartProducts,
     required ShipToInfo shipToInfo,
+    required SalesOrganisationConfigs configs,
   }) async {
     if (config.appFlavor == Flavor.mock) {
       try {
@@ -189,6 +190,11 @@ class OrderRepository implements IOrderRepository {
         for (final orderHistoryDetails in orderHistoryDetailsList) {
           await _trackOrderSuccess(
             orderHistoryDetails,
+            salesOrganisation,
+            configs,
+            customerCodeInfo,
+            user,
+            deviceStorage.currentMarket(),
           );
         }
         await materialBannerStorage.clear();
@@ -211,6 +217,11 @@ class OrderRepository implements IOrderRepository {
       );
       await _trackOrderSuccess(
         orderHistoryDetails,
+        salesOrganisation,
+        configs,
+        customerCodeInfo,
+        user,
+        deviceStorage.currentMarket(),
       );
       await materialBannerStorage.clear();
 
@@ -230,6 +241,11 @@ class OrderRepository implements IOrderRepository {
 
   Future<void> _trackOrderSuccess(
     OrderHistoryDetails orderDetail,
+    SalesOrganisation salesOrganisation,
+    SalesOrganisationConfigs configs,
+    CustomerCodeInfo customerCodeInfo,
+    User user,
+    String market,
   ) async {
     final orderQueueNumber = orderDetail.orderNumber.getOrDefaultValue('');
 
@@ -238,7 +254,7 @@ class OrderRepository implements IOrderRepository {
       properties: {
         if (orderDetail.processingStatus.isInQueue)
           TrackingProps.queueNumber: orderQueueNumber,
-        TrackingProps.orderNumber: orderDetail.trackingOrderId,
+        TrackingProps.orderNumber: orderQueueNumber,
         TrackingProps.grandTotal: orderDetail.totalValue,
         TrackingProps.totalQty: orderDetail.orderItemsCount,
         TrackingProps.requestDeliveryDate:
@@ -258,10 +274,39 @@ class OrderRepository implements IOrderRepository {
       properties: {
         if (orderDetail.processingStatus.isInQueue)
           TrackingProps.queueNumber: orderQueueNumber,
-        TrackingProps.orderNumber: orderDetail.trackingOrderId,
+        TrackingProps.orderNumber: orderQueueNumber,
         TrackingProps.grandTotal: orderDetail.totalValue,
+        TrackingProps.totalQty: orderDetail.orderItemsCount,
+        TrackingProps.requestDeliveryDate:
+        orderDetail.requestedDeliveryDate.dateOrNaString,
         TrackingProps.lineNumber:
             orderDetail.orderHistoryDetailsOrderItem.length,
+        TrackingProps.market: market,
+        TrackingProps.collectiveNumber: '',
+        TrackingProps.poDate: DateFormat('yyyy-MM-dd').format(DateTime.now()),
+        TrackingProps.poReference:orderDetail.pOReference.displayPOReference,
+        TrackingProps.purchaseOrderType: user.role.type.purchaseOrderType,
+        TrackingProps.orderType: orderDetail.type.documentTypeCode,
+        TrackingProps.specialInstruction: orderDetail.
+        orderHistoryDetailsSpecialInstructions.displaySpecialInstructions,
+        TrackingProps.telephone: orderDetail.telephoneNumber.validPhoneNumber,
+        TrackingProps.blockOrder: configs.enablePrincipalList,
+        TrackingProps.companyName: orderDetail.companyName.name,
+        TrackingProps.customerNumber: orderDetail.soldTo,
+        TrackingProps.customerNumberShipTo: orderDetail.shipTo,
+        TrackingProps.salesOrg: salesOrganisation.salesOrg
+            .getOrDefaultValue(''),
+        TrackingProps.division: customerCodeInfo.division,
+        TrackingProps.deliveryFee: orderDetail.deliveryFee,
+        TrackingProps.language: user.settings.languagePreference.languageCode,
+        TrackingProps.paymentMethod: 'Bank Transfer',
+        TrackingProps.paymentTerm: orderDetail.orderHistoryDetailsPaymentTerm.
+        paymentTermCode.displayPaymentTermCode,
+        TrackingProps.poDocuments: orderDetail.poDocumentsName,
+        TrackingProps.referenceNote: orderDetail.referenceNotes,
+        TrackingProps.totalTax: orderDetail.totalTax,
+        TrackingProps.username: user.username.getOrDefaultValue(''),
+        TrackingProps.orderReason: orderDetail.orderReason,
       },
     );
 

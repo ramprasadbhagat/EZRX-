@@ -37,5 +37,6 @@ abstract class IOrderRepository {
     required SalesOrganisation salesOrganisation,
     required List<PriceAggregate> cartProducts,
     required ShipToInfo shipToInfo,
+    required SalesOrganisationConfigs configs,
   });
 }
