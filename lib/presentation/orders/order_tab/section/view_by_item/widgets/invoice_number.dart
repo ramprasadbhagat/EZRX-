@@ -19,7 +19,7 @@ class _InvoiceNumber extends StatelessWidget {
             enabled: state.isFetchingInvoices,
             child: Text(
               '|  ${context.tr('Invoice')} #${invoiceData.getOrDefaultValue('')}',
-              style: Theme.of(context).textTheme.titleSmall?.copyWith(
+              style: Theme.of(context).textTheme.bodySmall?.copyWith(
                     color: ZPColors.black,
                   ),
             ),

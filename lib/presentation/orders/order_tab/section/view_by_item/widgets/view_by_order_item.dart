@@ -12,7 +12,7 @@ class _ViewByOrderItem extends StatelessWidget {
     final salesOrgConfigs =
         context.read<EligibilityBloc>().state.salesOrgConfigs;
 
-    return GestureDetector(
+    return InkWell(
       onTap: () {
         trackMixpanelEvent(
           TrackingEvents.orderDetailViewed,

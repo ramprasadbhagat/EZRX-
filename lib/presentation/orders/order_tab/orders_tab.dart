@@ -21,6 +21,7 @@ import 'package:ezrxmobile/presentation/orders/order_tab/section/view_by_item_fi
 import 'package:ezrxmobile/presentation/orders/widgets/edi_user_banner.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
+import 'package:ezrxmobile/presentation/theme/theme_data.dart';
 import 'package:ezrxmobile/presentation/utils/router_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -46,7 +47,7 @@ class OrdersTab extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(left: 13),
+                  padding: const EdgeInsets.only(left: padding12),
                   child: Text(
                     context.tr('Orders'),
                     style: Theme.of(context)
@@ -89,7 +90,7 @@ class OrdersTab extends StatelessWidget {
                             .toList(),
                       ),
                       Padding(
-                        padding: const EdgeInsets.fromLTRB(12, 12, 12, 0),
+                        padding: const EdgeInsets.all(padding12),
                         child: Row(
                           children: [
                             _OrdersTabSearchBar(

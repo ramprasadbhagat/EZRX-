@@ -22,7 +22,7 @@ class _ViewByOrderGroup extends StatelessWidget {
             textValue: context
                 .tr('Order history is limited to the last 6 months from today'),
             mainColor: ZPColors.blueAccent,
-            margin: const EdgeInsets.fromLTRB(12, 12, 12, 0),
+            margin: const EdgeInsets.symmetric(horizontal: padding12),
           ),
         if (showDivider)
           const Divider(
@@ -32,12 +32,15 @@ class _ViewByOrderGroup extends StatelessWidget {
             color: ZPColors.lightGray2,
           ),
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 12.0),
+          padding: const EdgeInsets.symmetric(horizontal: padding12),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
-                padding: const EdgeInsets.symmetric(vertical: 12.0),
+                padding: const EdgeInsets.only(
+                  top: padding24,
+                  bottom: padding12,
+                ),
                 child: Text(
                   '${context.tr('Ordered on')} ${viewByOrdersItem.createdDate.dateString}',
                   style: Theme.of(context).textTheme.labelSmall?.copyWith(
