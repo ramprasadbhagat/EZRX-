@@ -2,6 +2,7 @@ import 'package:ezrxmobile/infrastructure/core/package_info/package_info.dart';
 import 'package:ezrxmobile/locator.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
+import 'package:ezrxmobile/presentation/theme/theme_data.dart';
 import 'package:flutter/material.dart';
 
 class VersionDisplay extends StatelessWidget {
@@ -15,13 +16,16 @@ class VersionDisplay extends StatelessWidget {
       child: FutureBuilder<String>(
         future: locator<PackageInfoService>().getString(),
         builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
-          return Padding(
-            padding: const EdgeInsets.only(left: 18.0),
-            child: Text(
+          return ListTile(
+            contentPadding: const EdgeInsets.symmetric(horizontal: padding12),
+            minVerticalPadding: 0,
+            dense: true,
+            title: Text(
               'eZRx+ Ver. ${snapshot.data ?? ''}',
-              style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                    color: ZPColors.neutralsGrey,
-                  ),
+              style: Theme.of(context)
+                  .textTheme
+                  .bodyMedium
+                  ?.copyWith(color: ZPColors.neutralsGrey),
             ),
           );
         },

@@ -8,6 +8,7 @@ import 'package:ezrxmobile/presentation/more/section/login_on_behalf_sheet.dart'
 import 'package:ezrxmobile/presentation/more/section/profile_tile_section.dart';
 import 'package:ezrxmobile/presentation/more/section/version_display.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
+import 'package:ezrxmobile/presentation/theme/theme_data.dart';
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ezrxmobile/presentation/announcement/announcement_widget.dart';
@@ -42,45 +43,52 @@ class MoreTab extends StatelessWidget {
           key: WidgetKeys.scrollList,
           children: [
             const ProfileTile(),
-            const SizedBox(height: 10),
+            const SizedBox(height: padding12),
             const ServiceTile(),
             const Divider(
               color: ZPColors.accentColor,
-              endIndent: 16,
-              indent: 16,
-              height: 40,
+              endIndent: padding12,
+              indent: padding12,
+              height: padding24,
             ),
             const SettingsTile(),
             const SizedBox(
-              height: 15,
+              height: padding12,
             ),
             const HelpAndSupportTile(),
             const NationalPrivacyCommissionSection(),
             const Divider(
               color: ZPColors.accentColor,
-              height: 15,
+              endIndent: padding12,
+              indent: padding12,
+              height: 1,
             ),
             const VersionDisplay(),
             const SizedBox(
-              height: 15,
+              height: padding12,
             ),
             const LoginOnBehalf(),
-            TextButton.icon(
-              style: TextButton.styleFrom(alignment: Alignment.centerLeft),
-              icon: const Padding(
-                padding: EdgeInsets.only(left: 8.0),
-                child: Icon(Icons.logout_outlined, color: ZPColors.red),
+            ListTile(
+              key: WidgetKeys.logOutTile,
+              visualDensity: VisualDensity.compact,
+              contentPadding: const EdgeInsets.symmetric(horizontal: padding12),
+              minVerticalPadding: 0,
+              dense: true,
+              leading: const Icon(
+                Icons.logout_outlined,
+                color: ZPColors.red,
               ),
-              label: Text(
-                context.tr('Log out'),
-                key: WidgetKeys.logOutTile,
+              onTap: () => context.read<AuthBloc>().add(
+                    const AuthEvent.logout(),
+                  ),
+              title: Text(
+                context.tr(
+                  'Log out',
+                ),
                 style: Theme.of(context).textTheme.titleMedium!.copyWith(
                       color: ZPColors.red,
                     ),
               ),
-              onPressed: () => context.read<AuthBloc>().add(
-                    const AuthEvent.logout(),
-                  ),
             ),
           ],
         ),

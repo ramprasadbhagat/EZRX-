@@ -5,6 +5,7 @@ import 'package:ezrxmobile/presentation/core/png_image.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/routes/router.gr.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
+import 'package:ezrxmobile/presentation/theme/theme_data.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -15,6 +16,8 @@ class NationalPrivacyCommissionSection extends StatelessWidget {
   Widget build(BuildContext context) {
     if (context.read<EligibilityBloc>().state.salesOrg.isPDOSealEnabled) {
       return ListTile(
+        contentPadding: const EdgeInsets.all(padding12),
+        minVerticalPadding: 0,
         title: Text(
           context.tr('National Privacy Commission'),
           style: Theme.of(context)
@@ -23,6 +26,7 @@ class NationalPrivacyCommissionSection extends StatelessWidget {
               ?.copyWith(color: ZPColors.changePasswordRecommendationColor),
         ),
         subtitle: ListTile(
+          visualDensity: VisualDensity.compact,
           contentPadding: EdgeInsets.zero,
           dense: true,
           key: WidgetKeys.nationalPrivacyCommissionTile,

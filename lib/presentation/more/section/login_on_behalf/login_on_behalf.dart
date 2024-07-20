@@ -28,30 +28,18 @@ class LoginOnBehalf extends StatelessWidget {
       buildWhen: (previous, current) => previous.user != current.user,
       builder: (context, state) {
         return state.userCanLoginOnBehalf
-            ? TextButton.icon(
+            ? ListTile(
                 key: WidgetKeys.loginOnBehalfButtonKey,
-                icon: const Padding(
-                  padding: EdgeInsets.only(left: 8.0),
-                  child: Icon(
-                    Icons.login_outlined,
-                    color: ZPColors.gradient,
-                  ),
+                visualDensity: VisualDensity.compact,
+                contentPadding:
+                    const EdgeInsets.symmetric(horizontal: padding12),
+                minVerticalPadding: 0,
+                dense: true,
+                leading: const Icon(
+                  Icons.login_outlined,
+                  color: ZPColors.gradient,
                 ),
-                label: Row(
-                  mainAxisAlignment:
-                      MainAxisAlignment.start, // to align the icon to left
-                  children: [
-                    Text(
-                      context.tr(
-                        'Log in on behalf',
-                      ),
-                      style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                            color: ZPColors.gradient,
-                          ),
-                    ),
-                  ],
-                ),
-                onPressed: () {
+                onTap: () {
                   context
                       .read<ProxyLoginFormBloc>()
                       .add(const ProxyLoginFormEvent.initialized());
@@ -64,6 +52,14 @@ class LoginOnBehalf extends StatelessWidget {
                     },
                   );
                 },
+                title: Text(
+                  context.tr(
+                    'Log in on behalf',
+                  ),
+                  style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                        color: ZPColors.gradient,
+                      ),
+                ),
               )
             : const SizedBox.shrink();
       },
