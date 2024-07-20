@@ -7,6 +7,9 @@ class _NotificationList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
+      contentPadding: const EdgeInsets.all(padding12),
+      visualDensity: VisualDensity.compact,
+      dense: true,
       key: WidgetKeys.notificationItem,
       onTap: () {
         context.read<NotificationBloc>().add(
@@ -16,23 +19,12 @@ class _NotificationList extends StatelessWidget {
             );
         _navigateToDetailPage(context);
       },
-      contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-
-      ///TODO: will revisit later
-      trailing: Text(
-        notificationData.createdAt.differenceTime,
-        key: WidgetKeys.notificationItemDifferenceTime,
-      ),
-      leading: Container(
+      leading: CircleAvatar(
         key: WidgetKeys.notificationItemIcon,
-        padding: const EdgeInsets.all(8.0),
-        decoration: BoxDecoration(
-          color: notificationData.title.iconBgColor,
-          shape: BoxShape.circle,
-        ),
+        backgroundColor: notificationData.title.iconBgColor,
         child: Icon(
           notificationData.title.iconData,
-          size: 16,
+          size: padding24,
           color: notificationData.title.iconColor,
         ),
       ),
@@ -53,7 +45,7 @@ class _NotificationList extends StatelessWidget {
                 child: Text(
                   context.tr(notificationData.title.getOrDefaultValue('')),
                   key: WidgetKeys.notificationItemTitle,
-                  style: Theme.of(context).textTheme.labelSmall,
+                  style: Theme.of(context).textTheme.titleSmall,
                   overflow: TextOverflow.visible,
                 ),
               ),
@@ -62,7 +54,7 @@ class _NotificationList extends StatelessWidget {
           Text(
             notificationData.description,
             key: WidgetKeys.notificationItemDescription,
-            style: Theme.of(context).textTheme.titleSmall,
+            style: Theme.of(context).textTheme.bodyMedium,
           ),
 
           ///TODO: will revisit later
@@ -71,8 +63,26 @@ class _NotificationList extends StatelessWidget {
             key: WidgetKeys.notificationItemCreatedAt,
             style: Theme.of(context)
                 .textTheme
-                .titleSmall!
+                .bodySmall!
                 .copyWith(color: ZPColors.lightGray),
+          ),
+        ],
+      ),
+      trailing: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text(
+            notificationData.createdAt.differenceTime,
+            key: WidgetKeys.notificationItemDifferenceTime,
+            style: Theme.of(context)
+                .textTheme
+                .bodySmall!
+                .copyWith(color: ZPColors.darkGray),
+          ),
+          const SizedBox(width: padding6),
+          const Icon(
+            Icons.delete_outline_rounded,
+            color: ZPColors.darkGray,
           ),
         ],
       ),

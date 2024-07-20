@@ -9,7 +9,7 @@ class _AnnouncementList extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       key: WidgetKeys.notificationItem,
-      contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+      contentPadding: const EdgeInsets.all(padding12),
       onTap: () {
         if (notificationData.hyperLink.isInternalLink) {
           context.read<DeepLinkingBloc>().add(
