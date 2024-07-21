@@ -13,6 +13,7 @@ import '../../robots/home/customer_search_robot.dart';
 import '../../robots/home/home_robot.dart';
 import '../../robots/login_robot.dart';
 import '../../robots/more/more_robot.dart';
+import '../../robots/more/national_privacy_commission_robot.dart';
 import '../../robots/returns/new_return/step1/new_return_step1_robot.dart';
 import '../../robots/returns/new_return/step2/new_return_step2_robot.dart';
 import '../../robots/returns/new_return/step3/new_return_step3_robot.dart';
@@ -40,6 +41,7 @@ void main() {
   late NewReturnStep1Robot newReturnRobot;
   late NewReturnStep2Robot newReturnStep2Robot;
   late NewReturnStep3Robot newReturnStep3Robot;
+  late NationalPrivacyCommissionRobot nationalPrivacyCommissionRobot;
 
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
 
@@ -114,6 +116,7 @@ void main() {
     newReturnRobot = NewReturnStep1Robot(tester);
     newReturnStep2Robot = NewReturnStep2Robot(tester);
     newReturnStep3Robot = NewReturnStep3Robot(tester);
+    nationalPrivacyCommissionRobot = NationalPrivacyCommissionRobot(tester);
   }
 
   Future<void> pumpAppWithLogin(
@@ -1152,6 +1155,23 @@ void main() {
       newReturnStep3Robot.collectInfoBeforeSubmit();
       // await newReturnStep3Robot.tapSubmit();
       // newReturnStep3Robot.verifySubmitSuccessFully(shipToAddress);
+    });
+  });
+
+  group('National Privacy Commission -', () {
+    testWidgets('EZRX-T2655 | Verify national privacy commission page',
+        (tester) async {
+      await pumpAppWithLogin(tester);
+      await commonRobot.navigateToScreen(NavigationTab.more);
+      await moreRobot.verifyNationalPrivacyCommissionTile();
+      await moreRobot.tapNationalPrivacyCommissionTile();
+      nationalPrivacyCommissionRobot.verify();
+      nationalPrivacyCommissionRobot.verifyDescriptionText();
+      nationalPrivacyCommissionRobot.verifySaveImagesButton();
+      await nationalPrivacyCommissionRobot.verifyImages();
+      nationalPrivacyCommissionRobot.verifyCloseButton();
+      await nationalPrivacyCommissionRobot.tapCloseButton();
+      moreRobot.verifyMoreScreenVisible();
     });
   });
 

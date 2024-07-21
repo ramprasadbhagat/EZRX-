@@ -20,6 +20,7 @@ import '../../robots/home/home_robot.dart';
 import '../../robots/login_robot.dart';
 import '../../robots/more/contact_us_robot.dart';
 import '../../robots/more/more_robot.dart';
+import '../../robots/more/national_privacy_commission_robot.dart';
 import '../../robots/more/profile_robot.dart';
 import '../../robots/more/security_robot.dart';
 import '../../robots/notification/notification_robot.dart';
@@ -94,7 +95,7 @@ void main() {
   late PaymentHomeRobot paymentHomeRobot;
   late PaymentSummaryDetailRobot paymentDetailRobot;
   late CovidDetailRobot covidDetailRobot;
-  // late AccountInvoiceDetailRobot accountInvoiceDetailRobot;
+  late NationalPrivacyCommissionRobot nationalPrivacyCommissionRobot;
 
   void initializeRobot(WidgetTester tester) {
     commonRobot = CommonRobot(tester);
@@ -141,7 +142,7 @@ void main() {
     paymentHomeRobot = PaymentHomeRobot(tester);
     paymentDetailRobot = PaymentSummaryDetailRobot(tester);
     covidDetailRobot = CovidDetailRobot(tester);
-    // accountInvoiceDetailRobot = AccountInvoiceDetailRobot(tester);
+    nationalPrivacyCommissionRobot = NationalPrivacyCommissionRobot(tester);
   }
 
   const market = 'Philippines';
@@ -3865,6 +3866,23 @@ void main() {
         await articleRobot.tapArticleItem();
         articleDetailsRobot.verifyArticleDetailsPage();
       });
+    });
+  });
+
+  group('National Privacy Commission -', () {
+    testWidgets('EZRX-T2655 | Verify national privacy commission page',
+        (tester) async {
+      await pumpAppWithHomeScreen(tester);
+      await commonRobot.navigateToScreen(NavigationTab.more);
+      await moreRobot.verifyNationalPrivacyCommissionTile();
+      await moreRobot.tapNationalPrivacyCommissionTile();
+      nationalPrivacyCommissionRobot.verify();
+      nationalPrivacyCommissionRobot.verifyDescriptionText();
+      nationalPrivacyCommissionRobot.verifySaveImagesButton();
+      await nationalPrivacyCommissionRobot.verifyImages();
+      nationalPrivacyCommissionRobot.verifyCloseButton();
+      await nationalPrivacyCommissionRobot.tapCloseButton();
+      moreRobot.verifyMoreScreenVisible();
     });
   });
 

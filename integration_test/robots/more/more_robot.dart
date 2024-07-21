@@ -21,6 +21,8 @@ class MoreRobot extends CommonRobot {
   final logout = find.byKey(WidgetKeys.logOutTile);
   final announcementArticleTile =
       find.byKey(WidgetKeys.announcementArticleTile);
+  final nationalPrivacyCommissionTile =
+      find.byKey(WidgetKeys.nationalPrivacyCommissionTile);
 
   void findReturnsTile({bool isVisible = true}) {
     expect(returnsTile, isVisible ? findsOneWidget : findsNothing);
@@ -101,6 +103,14 @@ class MoreRobot extends CommonRobot {
 
   Future<void> verifyAnnouncementArticleTile() =>
       scrollEnsureFinderVisible(announcementArticleTile);
+
+  Future<void> verifyNationalPrivacyCommissionTile() =>
+      scrollEnsureFinderVisible(nationalPrivacyCommissionTile);
+
+  Future<void> tapNationalPrivacyCommissionTile() async {
+    await tester.tap(nationalPrivacyCommissionTile);
+    await tester.pumpAndSettle();
+  }
 
   Future<void> tapAnnouncementArticleTile() async {
     await tester.tap(announcementArticleTile);
