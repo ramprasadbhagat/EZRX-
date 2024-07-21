@@ -49,7 +49,7 @@ abstract class IDeepLinkingRepository {
     required Uri link,
   });
 
-  Either<ApiFailure, MaterialFilter> extractMaterialFilter({
+  MaterialFilter extractMaterialFilter({
     required Uri link,
     required MaterialFilter materialFilter,
   });

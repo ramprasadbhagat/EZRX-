@@ -63,6 +63,16 @@ void main() async {
       ),
       expect: () => [stateAfterUpdateQuantity],
     );
+
+    blocTest(
+      'Validate the quantity',
+      build: () => BundleAddToCartBloc(),
+      seed: () => stateAfterSet,
+      act: (BundleAddToCartBloc bloc) => bloc.add(
+        const BundleAddToCartEvent.validateQuantity(showErrorMessage: true),
+      ),
+      expect: () => [stateAfterSet.copyWith(showErrorMessage: true)],
+    );
   });
   group('Bundle Add To Cart State test', () {
     test('Check bundleMaterialsSelected', () {
@@ -100,6 +110,25 @@ void main() async {
               .first
               .copyWith(quantity: MaterialQty(10)),
         ],
+      );
+    });
+
+    test('Check displayErrorMessage', () {
+      expect(
+        stateAfterSet.copyWith(showErrorMessage: true).displayErrorMessage,
+        true,
+      );
+
+      expect(
+        stateAfterUpdateQuantity.displayErrorMessage,
+        false,
+      );
+
+      expect(
+        stateAfterUpdateQuantity
+            .copyWith(showErrorMessage: true)
+            .displayErrorMessage,
+        false,
       );
     });
   });

@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/config.dart';
+import 'package:ezrxmobile/domain/account/entities/ship_to_info.dart';
 import 'package:ezrxmobile/domain/auth/entities/reset_password_cred.dart';
 import 'package:ezrxmobile/domain/order/entities/material_filter.dart';
 import 'package:ezrxmobile/locator.dart';
@@ -27,7 +28,6 @@ void main() {
   late IDeepLinkingRepository repository;
   late ChatBotService chatBotService;
   late MaterialFilter materialFilter;
-  const fakeStream = Stream<EzrxLink>.empty();
   final fakeCustomerCode = fakeCustomerCodeInfo;
   final fakeShipToCode = fakeShipToInfo;
   const fakeError = ApiFailure.other('fake-error');
@@ -59,7 +59,7 @@ void main() {
   });
 
   blocTest<DeepLinkingBloc, DeepLinkingState>(
-    'Initialize',
+    'Initialize failure',
     build: () => DeepLinkingBloc(
       repository: repository,
       chatBotService: chatBotService,
@@ -69,12 +69,30 @@ void main() {
       when(() => repository.initializeDeepLink())
           .thenAnswer((_) async => const Left(fakeError));
       when(() => repository.watchDeepLinkValue()).thenAnswer(
-        (_) => fakeStream,
+        (_) => const Stream<EzrxLink>.empty(),
       );
     },
     expect: () => [
       const DeepLinkingState.error(fakeError),
     ],
+  );
+
+  blocTest<DeepLinkingBloc, DeepLinkingState>(
+    'Initialize success',
+    build: () => DeepLinkingBloc(
+      repository: repository,
+      chatBotService: chatBotService,
+    ),
+    act: (bloc) => bloc.add(const DeepLinkingEvent.initialize()),
+    setUp: () {
+      when(() => repository.initializeDeepLink())
+          .thenAnswer((_) async => const Right(unit));
+      when(() => repository.watchDeepLinkValue()).thenAnswer(
+        (_) => Stream.fromIterable([EzrxLink(faqLink)]),
+      );
+      when(() => chatBotService.closeChatBot()).thenAnswer((_) async => true);
+    },
+    expect: () => [DeepLinkingState.linkPending(EzrxLink(faqLink))],
   );
 
   blocTest<DeepLinkingBloc, DeepLinkingState>(
@@ -133,6 +151,25 @@ void main() {
       ),
     ),
     expect: () => [const DeepLinkingState.error(fakeLinkInvalid)],
+  );
+
+  blocTest<DeepLinkingBloc, DeepLinkingState>(
+    'Consume an supported link require shipTo when not select shipTo',
+    build: () => DeepLinkingBloc(
+      repository: repository,
+      chatBotService: chatBotService,
+    ),
+    seed: () => DeepLinkingState.linkPending(EzrxLink(productDetailsLink)),
+    act: (bloc) => bloc.add(
+      DeepLinkingEvent.consumePendingLink(
+        selectedCustomerCode: fakeCustomerCodeInfo,
+        selectedShipTo: ShipToInfo.empty(),
+        materialFilter: materialFilter,
+      ),
+    ),
+    expect: () => [
+      const DeepLinkingState.error(ApiFailure.other('Please login to proceed')),
+    ],
   );
 
   blocTest<DeepLinkingBloc, DeepLinkingState>(
@@ -379,7 +416,7 @@ void main() {
             link: Uri(path: productListingLink),
             materialFilter: materialFilter,
           ),
-        ).thenReturn(Right(materialFilter));
+        ).thenReturn(materialFilter);
       },
       seed: () => DeepLinkingState.linkPending(
         EzrxLink(productListingLink),
@@ -512,6 +549,28 @@ void main() {
         const DeepLinkingState.redirectZPPaymentHome(),
       ],
     );
+
+    blocTest<DeepLinkingBloc, DeepLinkingState>(
+      'Consume redirect MP Payment home success',
+      build: () => DeepLinkingBloc(
+        repository: repository,
+        chatBotService: chatBotService,
+      ),
+      seed: () => DeepLinkingState.linkPending(
+        EzrxLink('/my-account/marketplace-payments'),
+      ),
+      act: (bloc) => bloc.add(
+        DeepLinkingEvent.consumePendingLink(
+          selectedCustomerCode: fakeCustomerCode,
+          selectedShipTo: fakeShipToCode,
+          materialFilter: materialFilter,
+        ),
+      ),
+      expect: () => [
+        const DeepLinkingState.redirectMPPaymentHome(),
+      ],
+    );
+
     blocTest<DeepLinkingBloc, DeepLinkingState>(
       'Consume redirect ZP Payment Summary invoice Details success',
       build: () => DeepLinkingBloc(
@@ -730,6 +789,44 @@ void main() {
       ],
     );
   });
+
+  blocTest<DeepLinkingBloc, DeepLinkingState>(
+    'Consume redirect About us success',
+    build: () => DeepLinkingBloc(
+      repository: repository,
+      chatBotService: chatBotService,
+    ),
+    seed: () => DeepLinkingState.linkPending(EzrxLink('/about-us')),
+    act: (bloc) => bloc.add(
+      DeepLinkingEvent.consumePendingLink(
+        selectedCustomerCode: fakeCustomerCode,
+        selectedShipTo: fakeShipToCode,
+        materialFilter: materialFilter,
+      ),
+    ),
+    expect: () => [
+      const DeepLinkingState.redirectAboutUs(),
+    ],
+  );
+
+  blocTest<DeepLinkingBloc, DeepLinkingState>(
+    'Consume redirect User guide success',
+    build: () => DeepLinkingBloc(
+      repository: repository,
+      chatBotService: chatBotService,
+    ),
+    seed: () => DeepLinkingState.linkPending(EzrxLink('/user-guide')),
+    act: (bloc) => bloc.add(
+      DeepLinkingEvent.consumePendingLink(
+        selectedCustomerCode: fakeCustomerCode,
+        selectedShipTo: fakeShipToCode,
+        materialFilter: materialFilter,
+      ),
+    ),
+    expect: () => [
+      const DeepLinkingState.redirectUserGuide(),
+    ],
+  );
 
   group('Redirect To Reset Password', () {
     blocTest<DeepLinkingBloc, DeepLinkingState>(

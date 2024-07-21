@@ -212,5 +212,91 @@ void main() {
         ),
       ],
     );
+
+    group('Faq state -', () {
+      test('showCategoryChip getter', () {
+        expect(
+          FaqState.initial()
+              .copyWith(
+                faqInfo: faqInfo,
+                selectedCategory: FAQCategory('all'),
+              )
+              .showCategoryChip,
+          true,
+        );
+
+        expect(
+          FaqState.initial()
+              .copyWith(searchKey: SearchKey.search('fake-key'))
+              .showCategoryChip,
+          true,
+        );
+
+        expect(
+          FaqState.initial().showCategoryChip,
+          false,
+        );
+      });
+
+      test('selectedFaqItem getter', () {
+        expect(
+          FaqState.initial()
+              .copyWith(
+                faqInfo: faqInfo,
+                selectedCategory: FAQCategory('all'),
+              )
+              .selectedFaqItem,
+          faqInfo.faqList,
+        );
+
+        expect(
+          FaqState.initial()
+              .copyWith(
+                faqInfo: faqInfo,
+                selectedCategory: FAQCategory('General'),
+              )
+              .selectedFaqItem,
+          faqInfo.faqList.take(6).toList(),
+        );
+      });
+
+      test('getSearchedFaqList getter', () {
+        expect(
+          FaqState.initial()
+              .copyWith(
+                faqInfo: faqInfo,
+                selectedCategory: FAQCategory('all'),
+              )
+              .getSearchedFaqList,
+          faqInfo.faqList,
+        );
+
+        expect(
+          FaqState.initial()
+              .copyWith(
+                faqInfo: faqInfo,
+                selectedCategory: FAQCategory('all'),
+                searchKey: SearchKey.search(
+                  'Order and browse from over 500 healthcare manufacturers in Southeast Asia',
+                ),
+              )
+              .getSearchedFaqList,
+          [faqInfo.faqList[2]],
+        );
+
+        expect(
+          FaqState.initial()
+              .copyWith(
+                faqInfo: faqInfo,
+                selectedCategory: FAQCategory('all'),
+                searchKey: SearchKey.search(
+                  'What products can I order?',
+                ),
+              )
+              .getSearchedFaqList,
+          [faqInfo.faqList[2]],
+        );
+      });
+    });
   });
 }

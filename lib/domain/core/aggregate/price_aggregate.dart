@@ -424,7 +424,7 @@ class PriceAggregate with _$PriceAggregate {
   double get discountedListPrice => price.tiers
       .firstWhere(
         (element) => discountedMaterialCount >= element.quantity,
-        orElse: () => price.tiers.last,
+        orElse: () => price.tiers.lastOrNull ?? PriceTierItem.empty(),
       )
       .rate;
 

@@ -151,22 +151,16 @@ class DeepLinkingBloc extends Bloc<DeepLinkingEvent, DeepLinkingState> {
               );
 
               failureOrSuccessSearchKey.fold(
-                (error) => emit(
-                  DeepLinkingState.error(error),
-                ),
+                (error) => emit(DeepLinkingState.error(error)),
                 (searchKey) {
-                  final failureOrSuccessMaterialFilter =
-                      repository.extractMaterialFilter(
+                  final materialFilter = repository.extractMaterialFilter(
                     link: link.uri,
                     materialFilter: event.materialFilter,
                   );
-                  failureOrSuccessMaterialFilter.fold(
-                    (_) {},
-                    (materialFilter) => emit(
-                      DeepLinkingState.redirectProductsTab(
-                        searchKey,
-                        materialFilter,
-                      ),
+                  emit(
+                    DeepLinkingState.redirectProductsTab(
+                      searchKey,
+                      materialFilter,
                     ),
                   );
                 },

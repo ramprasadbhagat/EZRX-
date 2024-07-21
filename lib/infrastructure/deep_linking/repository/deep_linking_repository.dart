@@ -56,7 +56,7 @@ class DeepLinkingRepository implements IDeepLinkingRepository {
   }
 
   @override
-  Either<ApiFailure, MaterialFilter> extractMaterialFilter({
+  MaterialFilter extractMaterialFilter({
     required Uri link,
     required MaterialFilter materialFilter,
   }) {
@@ -70,7 +70,7 @@ class DeepLinkingRepository implements IDeepLinkingRepository {
         )
         .toList();
 
-    final updatedMaterialFilter = MaterialFilter(
+    return MaterialFilter(
       countryMapOptions: materialFilter.countryMapOptions,
       manufactureMapOptions: materialFilter.manufactureMapOptions,
       isFavourite: parameters.isFavorite,
@@ -86,8 +86,6 @@ class DeepLinkingRepository implements IDeepLinkingRepository {
       isCovidSelected: parameters.isCovid,
       brandList: materialFilter.brandList,
     );
-
-    return Right(updatedMaterialFilter);
   }
 
   @override

@@ -1,6 +1,7 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/application/auth/reset_password/reset_password_bloc.dart';
+import 'package:ezrxmobile/domain/account/entities/full_name.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
 import 'package:ezrxmobile/domain/auth/entities/reset_password.dart';
 import 'package:ezrxmobile/domain/auth/entities/reset_password_cred.dart';
@@ -383,6 +384,28 @@ void main() {
         ResetPasswordState.initial(),
       ],
     );
+
+    blocTest(
+      'Change Password For First Time when form is not valid',
+      build: () => ResetPasswordBloc(
+        changePasswordRepository: mockRepository,
+      ),
+      seed: () => ResetPasswordState.initial().copyWith(
+        newPassword: Password.reset(''),
+        confirmPassword: fakePassword,
+      ),
+      act: (ResetPasswordBloc bloc) => bloc.add(
+        const ResetPasswordEvent.changePasswordForFirstTime(),
+      ),
+      expect: () => [
+        ResetPasswordState.initial().copyWith(
+          showErrorMessages: true,
+          newPassword: Password.reset(''),
+          confirmPassword: fakePassword,
+        ),
+      ],
+    );
+
     blocTest(
       'Change Password For First Time Success test',
       build: () => ResetPasswordBloc(
@@ -475,5 +498,50 @@ void main() {
         ),
       ],
     );
+
+    test(
+        'newPasswordMustNotContainTwoConsecutiveCharsOfUserNameOrName function',
+        () {
+      final user = User.empty().copyWith(
+        fullName: const FullName(firstName: 'Tom', lastName: 'Hoang'),
+        username: Username('vmnguyen'),
+      );
+
+      expect(
+        ResetPasswordState.initial()
+            .copyWith(newPassword: Password.reset('123Tomasd#'))
+            .newPasswordMustNotContainTwoConsecutiveCharsOfUserNameOrName(
+              user: user,
+            ),
+        false,
+      );
+
+      expect(
+        ResetPasswordState.initial()
+            .copyWith(newPassword: Password.reset('123Hoangssd#'))
+            .newPasswordMustNotContainTwoConsecutiveCharsOfUserNameOrName(
+              user: user,
+            ),
+        false,
+      );
+
+      expect(
+        ResetPasswordState.initial()
+            .copyWith(newPassword: Password.reset('123VMnguyenssd#'))
+            .newPasswordMustNotContainTwoConsecutiveCharsOfUserNameOrName(
+              user: user,
+            ),
+        false,
+      );
+
+      expect(
+        ResetPasswordState.initial()
+            .copyWith(newPassword: Password.reset('123sssssd#'))
+            .newPasswordMustNotContainTwoConsecutiveCharsOfUserNameOrName(
+              user: user,
+            ),
+        true,
+      );
+    });
   });
 }

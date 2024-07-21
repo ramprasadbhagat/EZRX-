@@ -138,6 +138,32 @@ void main() {
     );
 
     blocTest(
+      'Load last saved cred success and get currentMarket failure',
+      build: () => LoginFormBloc(
+        authRepository: authRepoMock,
+        deviceRepository: deviceRepoMock,
+      ),
+      setUp: () {
+        when(() => deviceRepoMock.getCurrentMarket())
+            .thenAnswer((_) async => const Left(ApiFailure.poorConnection()));
+        when(() => authRepoMock.loadCredential())
+            .thenAnswer((_) async => Right(credMock));
+      },
+      act: (LoginFormBloc bloc) =>
+          bloc.add(LoginFormEvent.loadLastSavedCred(AppMarket.vietnam())),
+      expect: () => [
+        loginFormState.copyWith(
+          isSubmitting: true,
+        ),
+        loginFormState.copyWith(
+          username: credMock.username,
+          password: credMock.password,
+          rememberPassword: true,
+        ),
+      ],
+    );
+
+    blocTest(
       'Create bloc and load last saved cred success',
       build: () => LoginFormBloc(
         authRepository: authRepoMock,
@@ -919,6 +945,29 @@ void main() {
         loginFormState.copyWith(
           currentMarket: AppMarket.vietnam(),
           authFailureOrSuccessOption: optionOf(const Right(unit)),
+        ),
+      ],
+    );
+
+    blocTest(
+      'setCurrentMarket failure test',
+      build: () => LoginFormBloc(
+        authRepository: authRepoMock,
+        deviceRepository: deviceRepoMock,
+      ),
+      setUp: () {
+        when(
+          () => deviceRepoMock.setCurrentMarket(
+            currentMarket: AppMarket.vietnam(),
+          ),
+        ).thenAnswer((_) async => const Left(ApiFailure.poorConnection()));
+      },
+      act: (LoginFormBloc bloc) =>
+          bloc..add(LoginFormEvent.setCurrentMarket(AppMarket.vietnam())),
+      expect: () => [
+        loginFormState.copyWith(
+          authFailureOrSuccessOption:
+              optionOf(const Left(ApiFailure.poorConnection())),
         ),
       ],
     );

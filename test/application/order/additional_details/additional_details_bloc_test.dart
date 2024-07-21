@@ -14,6 +14,7 @@ import 'package:ezrxmobile/application/order/additional_details/additional_detai
 import '../../../common_mock_data/customer_code_mock.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_id_sales_org_config.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_th_sales_org_config.dart';
+import '../../../common_mock_data/sales_org_config_mock/fake_tw_sales_org_config.dart';
 
 class OrderRepositoryMock extends Mock implements OrderRepository {}
 
@@ -264,6 +265,72 @@ void main() {
               paymentTerm: PaymentTerm('0001-TEST'),
               referenceNote: ReferenceNote('Reference Note Test'),
               deliveryInstruction: DeliveryInstruction('Instruction Test'),
+            ),
+          ),
+        ],
+      );
+
+      blocTest<AdditionalDetailsBloc, AdditionalDetailsState>(
+        'Additional Details Validate AdditionalDetails Form failure when payment term is invalid',
+        build: () => AdditionalDetailsBloc(),
+        seed: () => AdditionalDetailsState.initial().copyWith(
+          config: fakeTWSalesOrgConfigs,
+          deliveryInfoData: DeliveryInfoData.empty().copyWith(
+            poReference: PoReference('CO REF'),
+            contactPerson: ContactPerson('PERSON'),
+            mobileNumber: PhoneNumber('123456'),
+            paymentTerm: PaymentTerm(''),
+            referenceNote: ReferenceNote('Reference Note Test'),
+            deliveryInstruction: DeliveryInstruction('Instruction Test'),
+          ),
+        ),
+        act: (AdditionalDetailsBloc bloc) {
+          bloc.add(
+            const AdditionalDetailsEvent.validateForm(),
+          );
+        },
+        expect: () => [
+          AdditionalDetailsState.initial().copyWith(
+            isValidated: false,
+            showErrorMessages: true,
+            config: fakeTWSalesOrgConfigs,
+            focusTo: DeliveryInfoLabel.paymentTerm,
+            deliveryInfoData: DeliveryInfoData.empty().copyWith(
+              poReference: PoReference('CO REF'),
+              contactPerson: ContactPerson('PERSON'),
+              mobileNumber: PhoneNumber('123456'),
+              paymentTerm: PaymentTerm(''),
+              referenceNote: ReferenceNote('Reference Note Test'),
+              deliveryInstruction: DeliveryInstruction('Instruction Test'),
+            ),
+          ),
+        ],
+      );
+
+      blocTest<AdditionalDetailsBloc, AdditionalDetailsState>(
+        'Additional Details Validate AdditionalDetails Form failure when po attachment is invalid',
+        build: () => AdditionalDetailsBloc(),
+        seed: () => AdditionalDetailsState.initial().copyWith(
+          config: fakeIDSalesOrgConfigs,
+          deliveryInfoData: DeliveryInfoData.empty().copyWith(
+            poReference: PoReference('CO REF'),
+            referenceNote: ReferenceNote('Reference Note Test'),
+          ),
+        ),
+        act: (AdditionalDetailsBloc bloc) {
+          bloc.add(
+            const AdditionalDetailsEvent.validateForm(),
+          );
+        },
+        expect: () => [
+          AdditionalDetailsState.initial().copyWith(
+            isValidated: false,
+            showErrorMessages: true,
+            config: fakeIDSalesOrgConfigs,
+            isPoAttachmentValidated: false,
+            deliveryInfoData: DeliveryInfoData.empty().copyWith(
+              poReference: PoReference('CO REF'),
+              referenceNote: ReferenceNote('Reference Note Test'),
             ),
           ),
         ],

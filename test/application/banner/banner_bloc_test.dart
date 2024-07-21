@@ -53,15 +53,6 @@ void main() {
 
   group('Banner Bloc Test Group 1', () {
     blocTest<BannerBloc, BannerState>(
-      'Init Banner Bloc',
-      build: () => BannerBloc(
-        bannerRepository: mockBannerRepository,
-      ),
-      setUp: () {},
-      expect: () => [],
-    );
-
-    blocTest<BannerBloc, BannerState>(
       'Init Banner Bloc and raise event Initialized',
       build: () => BannerBloc(
         bannerRepository: mockBannerRepository,
@@ -206,5 +197,26 @@ void main() {
         ),
       ],
     );
+
+    test('hasMultipleBanners getter', () {
+      expect(
+        BannerState.initial().copyWith(
+          banner: [EZReachBanner.empty(), EZReachBanner.empty()],
+        ).hasMultipleBanners,
+        true,
+      );
+
+      expect(
+        BannerState.initial().copyWith(
+          banner: [EZReachBanner.empty()],
+        ).hasMultipleBanners,
+        false,
+      );
+
+      expect(
+        BannerState.initial().hasMultipleBanners,
+        false,
+      );
+    });
   });
 }

@@ -547,32 +547,52 @@ void main() {
         ),
       ],
     );
-  });
 
-  blocTest(
-    'Reset BonusMaterialBloc if searchKey is Empty',
-    build: () => BonusMaterialBloc(
-      materialListRepository: materialListRepository,
-      cartRepository: cartRepository,
-      config: config,
-      stockInfoRepository: stockInfoRepositoryMock,
-    ),
-    seed: () => BonusMaterialState.initial().copyWith(
-      bonusItemList: fakeMaterialListData.products,
-      searchKey: SearchKey.search('fake-search-key'),
-    ),
-    act: (BonusMaterialBloc bloc) => bloc.add(
-      BonusMaterialEvent.fetch(
-        configs: fakeMYSalesOrgConfigs,
-        customerCodeInfo: fakeCustomerCodeInfo,
-        isGimmickMaterialEnabled: false,
-        principalData: fakePrincipalData,
-        salesOrganisation: fakeMYSalesOrganisation,
-        shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
-        user: fakeRootAdminUser,
-        searchKey: SearchKey.empty(),
+    blocTest(
+      'Reset BonusMaterialBloc if searchKey is Empty',
+      build: () => BonusMaterialBloc(
+        materialListRepository: materialListRepository,
+        cartRepository: cartRepository,
+        config: config,
+        stockInfoRepository: stockInfoRepositoryMock,
       ),
-    ),
-    expect: () => [BonusMaterialState.initial()],
-  );
+      seed: () => BonusMaterialState.initial().copyWith(
+        bonusItemList: fakeMaterialListData.products,
+        searchKey: SearchKey.search('fake-search-key'),
+      ),
+      act: (BonusMaterialBloc bloc) => bloc.add(
+        BonusMaterialEvent.fetch(
+          configs: fakeMYSalesOrgConfigs,
+          customerCodeInfo: fakeCustomerCodeInfo,
+          isGimmickMaterialEnabled: false,
+          principalData: fakePrincipalData,
+          salesOrganisation: fakeMYSalesOrganisation,
+          shipToInfo: fakeCustomerCodeInfo.shipToInfos.first,
+          user: fakeRootAdminUser,
+          searchKey: SearchKey.empty(),
+        ),
+      ),
+      expect: () => [BonusMaterialState.initial()],
+    );
+
+    test('bonusItemID function', () {
+      expect(
+        BonusMaterialState.initial()
+            .copyWith(
+              addedBonusItemsList: fakeSampleBonusItem,
+            )
+            .bonusItemID(fakeMaterialListData.products.first.materialNumber),
+        fakeSampleBonusItem.first.itemId,
+      );
+
+      expect(
+        BonusMaterialState.initial()
+            .copyWith(
+              addedBonusItemsList: fakeSampleBonusItem,
+            )
+            .bonusItemID(MaterialNumber('fake-number')),
+        StringValue(''),
+      );
+    });
+  });
 }
