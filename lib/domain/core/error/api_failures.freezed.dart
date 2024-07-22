@@ -29,9 +29,10 @@ mixin _$ApiFailure {
     required TResult Function() accountExpired,
     required TResult Function() tokenExpired,
     required TResult Function() authenticationFailed,
-    required TResult Function() proxyLoginRolePermissionNotMatch,
-    required TResult Function() proxyLoginZPTargetRoleNotMatch,
-    required TResult Function() proxyLoginZPSalesOrgNotMatch,
+    required TResult Function() cannotProxyLoginWithCurrentRole,
+    required TResult Function() cannotProxyLoginRootAdmin,
+    required TResult Function() cannotProxyLoginZPAdminWhenIsZPAdmin,
+    required TResult Function() cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function() passwordResetFail,
     required TResult Function() deviceNotSupportBiometric,
     required TResult Function() cannotCheckBiometrics,
@@ -82,9 +83,10 @@ mixin _$ApiFailure {
     TResult? Function()? accountExpired,
     TResult? Function()? tokenExpired,
     TResult? Function()? authenticationFailed,
-    TResult? Function()? proxyLoginRolePermissionNotMatch,
-    TResult? Function()? proxyLoginZPTargetRoleNotMatch,
-    TResult? Function()? proxyLoginZPSalesOrgNotMatch,
+    TResult? Function()? cannotProxyLoginWithCurrentRole,
+    TResult? Function()? cannotProxyLoginRootAdmin,
+    TResult? Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult? Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function()? passwordResetFail,
     TResult? Function()? deviceNotSupportBiometric,
     TResult? Function()? cannotCheckBiometrics,
@@ -135,9 +137,10 @@ mixin _$ApiFailure {
     TResult Function()? accountExpired,
     TResult Function()? tokenExpired,
     TResult Function()? authenticationFailed,
-    TResult Function()? proxyLoginRolePermissionNotMatch,
-    TResult Function()? proxyLoginZPTargetRoleNotMatch,
-    TResult Function()? proxyLoginZPSalesOrgNotMatch,
+    TResult Function()? cannotProxyLoginWithCurrentRole,
+    TResult Function()? cannotProxyLoginRootAdmin,
+    TResult Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function()? passwordResetFail,
     TResult Function()? deviceNotSupportBiometric,
     TResult Function()? cannotCheckBiometrics,
@@ -191,12 +194,14 @@ mixin _$ApiFailure {
     required TResult Function(_AccountExpired value) accountExpired,
     required TResult Function(_TokenExpired value) tokenExpired,
     required TResult Function(_AuthenticationFailed value) authenticationFailed,
-    required TResult Function(_ProxyLoginRolePermissionNotMatch value)
-        proxyLoginRolePermissionNotMatch,
-    required TResult Function(_ProxyLoginZPTargetRoleNotMatch value)
-        proxyLoginZPTargetRoleNotMatch,
-    required TResult Function(_ProxyLoginZPSalesOrgNotMatch value)
-        proxyLoginZPSalesOrgNotMatch,
+    required TResult Function(_CannotProxyLoginWithCurrentRole value)
+        cannotProxyLoginWithCurrentRole,
+    required TResult Function(_CannotProxyLoginRootAdmin value)
+        cannotProxyLoginRootAdmin,
+    required TResult Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    required TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)
+        cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function(_PasswordResetFail value) passwordResetFail,
     required TResult Function(_DeviceNotSupportBiometric value)
         deviceNotSupportBiometric,
@@ -269,12 +274,14 @@ mixin _$ApiFailure {
     TResult? Function(_AccountExpired value)? accountExpired,
     TResult? Function(_TokenExpired value)? tokenExpired,
     TResult? Function(_AuthenticationFailed value)? authenticationFailed,
-    TResult? Function(_ProxyLoginRolePermissionNotMatch value)?
-        proxyLoginRolePermissionNotMatch,
-    TResult? Function(_ProxyLoginZPTargetRoleNotMatch value)?
-        proxyLoginZPTargetRoleNotMatch,
-    TResult? Function(_ProxyLoginZPSalesOrgNotMatch value)?
-        proxyLoginZPSalesOrgNotMatch,
+    TResult? Function(_CannotProxyLoginWithCurrentRole value)?
+        cannotProxyLoginWithCurrentRole,
+    TResult? Function(_CannotProxyLoginRootAdmin value)?
+        cannotProxyLoginRootAdmin,
+    TResult? Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)?
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult? Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
+        cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function(_PasswordResetFail value)? passwordResetFail,
     TResult? Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
@@ -333,12 +340,14 @@ mixin _$ApiFailure {
     TResult Function(_AccountExpired value)? accountExpired,
     TResult Function(_TokenExpired value)? tokenExpired,
     TResult Function(_AuthenticationFailed value)? authenticationFailed,
-    TResult Function(_ProxyLoginRolePermissionNotMatch value)?
-        proxyLoginRolePermissionNotMatch,
-    TResult Function(_ProxyLoginZPTargetRoleNotMatch value)?
-        proxyLoginZPTargetRoleNotMatch,
-    TResult Function(_ProxyLoginZPSalesOrgNotMatch value)?
-        proxyLoginZPSalesOrgNotMatch,
+    TResult Function(_CannotProxyLoginWithCurrentRole value)?
+        cannotProxyLoginWithCurrentRole,
+    TResult Function(_CannotProxyLoginRootAdmin value)?
+        cannotProxyLoginRootAdmin,
+    TResult Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)?
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
+        cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function(_PasswordResetFail value)? passwordResetFail,
     TResult Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
@@ -478,9 +487,10 @@ class _$OtherImpl implements _Other {
     required TResult Function() accountExpired,
     required TResult Function() tokenExpired,
     required TResult Function() authenticationFailed,
-    required TResult Function() proxyLoginRolePermissionNotMatch,
-    required TResult Function() proxyLoginZPTargetRoleNotMatch,
-    required TResult Function() proxyLoginZPSalesOrgNotMatch,
+    required TResult Function() cannotProxyLoginWithCurrentRole,
+    required TResult Function() cannotProxyLoginRootAdmin,
+    required TResult Function() cannotProxyLoginZPAdminWhenIsZPAdmin,
+    required TResult Function() cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function() passwordResetFail,
     required TResult Function() deviceNotSupportBiometric,
     required TResult Function() cannotCheckBiometrics,
@@ -534,9 +544,10 @@ class _$OtherImpl implements _Other {
     TResult? Function()? accountExpired,
     TResult? Function()? tokenExpired,
     TResult? Function()? authenticationFailed,
-    TResult? Function()? proxyLoginRolePermissionNotMatch,
-    TResult? Function()? proxyLoginZPTargetRoleNotMatch,
-    TResult? Function()? proxyLoginZPSalesOrgNotMatch,
+    TResult? Function()? cannotProxyLoginWithCurrentRole,
+    TResult? Function()? cannotProxyLoginRootAdmin,
+    TResult? Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult? Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function()? passwordResetFail,
     TResult? Function()? deviceNotSupportBiometric,
     TResult? Function()? cannotCheckBiometrics,
@@ -590,9 +601,10 @@ class _$OtherImpl implements _Other {
     TResult Function()? accountExpired,
     TResult Function()? tokenExpired,
     TResult Function()? authenticationFailed,
-    TResult Function()? proxyLoginRolePermissionNotMatch,
-    TResult Function()? proxyLoginZPTargetRoleNotMatch,
-    TResult Function()? proxyLoginZPSalesOrgNotMatch,
+    TResult Function()? cannotProxyLoginWithCurrentRole,
+    TResult Function()? cannotProxyLoginRootAdmin,
+    TResult Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function()? passwordResetFail,
     TResult Function()? deviceNotSupportBiometric,
     TResult Function()? cannotCheckBiometrics,
@@ -652,12 +664,14 @@ class _$OtherImpl implements _Other {
     required TResult Function(_AccountExpired value) accountExpired,
     required TResult Function(_TokenExpired value) tokenExpired,
     required TResult Function(_AuthenticationFailed value) authenticationFailed,
-    required TResult Function(_ProxyLoginRolePermissionNotMatch value)
-        proxyLoginRolePermissionNotMatch,
-    required TResult Function(_ProxyLoginZPTargetRoleNotMatch value)
-        proxyLoginZPTargetRoleNotMatch,
-    required TResult Function(_ProxyLoginZPSalesOrgNotMatch value)
-        proxyLoginZPSalesOrgNotMatch,
+    required TResult Function(_CannotProxyLoginWithCurrentRole value)
+        cannotProxyLoginWithCurrentRole,
+    required TResult Function(_CannotProxyLoginRootAdmin value)
+        cannotProxyLoginRootAdmin,
+    required TResult Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    required TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)
+        cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function(_PasswordResetFail value) passwordResetFail,
     required TResult Function(_DeviceNotSupportBiometric value)
         deviceNotSupportBiometric,
@@ -733,12 +747,14 @@ class _$OtherImpl implements _Other {
     TResult? Function(_AccountExpired value)? accountExpired,
     TResult? Function(_TokenExpired value)? tokenExpired,
     TResult? Function(_AuthenticationFailed value)? authenticationFailed,
-    TResult? Function(_ProxyLoginRolePermissionNotMatch value)?
-        proxyLoginRolePermissionNotMatch,
-    TResult? Function(_ProxyLoginZPTargetRoleNotMatch value)?
-        proxyLoginZPTargetRoleNotMatch,
-    TResult? Function(_ProxyLoginZPSalesOrgNotMatch value)?
-        proxyLoginZPSalesOrgNotMatch,
+    TResult? Function(_CannotProxyLoginWithCurrentRole value)?
+        cannotProxyLoginWithCurrentRole,
+    TResult? Function(_CannotProxyLoginRootAdmin value)?
+        cannotProxyLoginRootAdmin,
+    TResult? Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)?
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult? Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
+        cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function(_PasswordResetFail value)? passwordResetFail,
     TResult? Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
@@ -800,12 +816,14 @@ class _$OtherImpl implements _Other {
     TResult Function(_AccountExpired value)? accountExpired,
     TResult Function(_TokenExpired value)? tokenExpired,
     TResult Function(_AuthenticationFailed value)? authenticationFailed,
-    TResult Function(_ProxyLoginRolePermissionNotMatch value)?
-        proxyLoginRolePermissionNotMatch,
-    TResult Function(_ProxyLoginZPTargetRoleNotMatch value)?
-        proxyLoginZPTargetRoleNotMatch,
-    TResult Function(_ProxyLoginZPSalesOrgNotMatch value)?
-        proxyLoginZPSalesOrgNotMatch,
+    TResult Function(_CannotProxyLoginWithCurrentRole value)?
+        cannotProxyLoginWithCurrentRole,
+    TResult Function(_CannotProxyLoginRootAdmin value)?
+        cannotProxyLoginRootAdmin,
+    TResult Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)?
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
+        cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function(_PasswordResetFail value)? passwordResetFail,
     TResult Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
@@ -940,9 +958,10 @@ class _$ServerErrorImpl implements _ServerError {
     required TResult Function() accountExpired,
     required TResult Function() tokenExpired,
     required TResult Function() authenticationFailed,
-    required TResult Function() proxyLoginRolePermissionNotMatch,
-    required TResult Function() proxyLoginZPTargetRoleNotMatch,
-    required TResult Function() proxyLoginZPSalesOrgNotMatch,
+    required TResult Function() cannotProxyLoginWithCurrentRole,
+    required TResult Function() cannotProxyLoginRootAdmin,
+    required TResult Function() cannotProxyLoginZPAdminWhenIsZPAdmin,
+    required TResult Function() cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function() passwordResetFail,
     required TResult Function() deviceNotSupportBiometric,
     required TResult Function() cannotCheckBiometrics,
@@ -996,9 +1015,10 @@ class _$ServerErrorImpl implements _ServerError {
     TResult? Function()? accountExpired,
     TResult? Function()? tokenExpired,
     TResult? Function()? authenticationFailed,
-    TResult? Function()? proxyLoginRolePermissionNotMatch,
-    TResult? Function()? proxyLoginZPTargetRoleNotMatch,
-    TResult? Function()? proxyLoginZPSalesOrgNotMatch,
+    TResult? Function()? cannotProxyLoginWithCurrentRole,
+    TResult? Function()? cannotProxyLoginRootAdmin,
+    TResult? Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult? Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function()? passwordResetFail,
     TResult? Function()? deviceNotSupportBiometric,
     TResult? Function()? cannotCheckBiometrics,
@@ -1052,9 +1072,10 @@ class _$ServerErrorImpl implements _ServerError {
     TResult Function()? accountExpired,
     TResult Function()? tokenExpired,
     TResult Function()? authenticationFailed,
-    TResult Function()? proxyLoginRolePermissionNotMatch,
-    TResult Function()? proxyLoginZPTargetRoleNotMatch,
-    TResult Function()? proxyLoginZPSalesOrgNotMatch,
+    TResult Function()? cannotProxyLoginWithCurrentRole,
+    TResult Function()? cannotProxyLoginRootAdmin,
+    TResult Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function()? passwordResetFail,
     TResult Function()? deviceNotSupportBiometric,
     TResult Function()? cannotCheckBiometrics,
@@ -1114,12 +1135,14 @@ class _$ServerErrorImpl implements _ServerError {
     required TResult Function(_AccountExpired value) accountExpired,
     required TResult Function(_TokenExpired value) tokenExpired,
     required TResult Function(_AuthenticationFailed value) authenticationFailed,
-    required TResult Function(_ProxyLoginRolePermissionNotMatch value)
-        proxyLoginRolePermissionNotMatch,
-    required TResult Function(_ProxyLoginZPTargetRoleNotMatch value)
-        proxyLoginZPTargetRoleNotMatch,
-    required TResult Function(_ProxyLoginZPSalesOrgNotMatch value)
-        proxyLoginZPSalesOrgNotMatch,
+    required TResult Function(_CannotProxyLoginWithCurrentRole value)
+        cannotProxyLoginWithCurrentRole,
+    required TResult Function(_CannotProxyLoginRootAdmin value)
+        cannotProxyLoginRootAdmin,
+    required TResult Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    required TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)
+        cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function(_PasswordResetFail value) passwordResetFail,
     required TResult Function(_DeviceNotSupportBiometric value)
         deviceNotSupportBiometric,
@@ -1195,12 +1218,14 @@ class _$ServerErrorImpl implements _ServerError {
     TResult? Function(_AccountExpired value)? accountExpired,
     TResult? Function(_TokenExpired value)? tokenExpired,
     TResult? Function(_AuthenticationFailed value)? authenticationFailed,
-    TResult? Function(_ProxyLoginRolePermissionNotMatch value)?
-        proxyLoginRolePermissionNotMatch,
-    TResult? Function(_ProxyLoginZPTargetRoleNotMatch value)?
-        proxyLoginZPTargetRoleNotMatch,
-    TResult? Function(_ProxyLoginZPSalesOrgNotMatch value)?
-        proxyLoginZPSalesOrgNotMatch,
+    TResult? Function(_CannotProxyLoginWithCurrentRole value)?
+        cannotProxyLoginWithCurrentRole,
+    TResult? Function(_CannotProxyLoginRootAdmin value)?
+        cannotProxyLoginRootAdmin,
+    TResult? Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)?
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult? Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
+        cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function(_PasswordResetFail value)? passwordResetFail,
     TResult? Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
@@ -1262,12 +1287,14 @@ class _$ServerErrorImpl implements _ServerError {
     TResult Function(_AccountExpired value)? accountExpired,
     TResult Function(_TokenExpired value)? tokenExpired,
     TResult Function(_AuthenticationFailed value)? authenticationFailed,
-    TResult Function(_ProxyLoginRolePermissionNotMatch value)?
-        proxyLoginRolePermissionNotMatch,
-    TResult Function(_ProxyLoginZPTargetRoleNotMatch value)?
-        proxyLoginZPTargetRoleNotMatch,
-    TResult Function(_ProxyLoginZPSalesOrgNotMatch value)?
-        proxyLoginZPSalesOrgNotMatch,
+    TResult Function(_CannotProxyLoginWithCurrentRole value)?
+        cannotProxyLoginWithCurrentRole,
+    TResult Function(_CannotProxyLoginRootAdmin value)?
+        cannotProxyLoginRootAdmin,
+    TResult Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)?
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
+        cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function(_PasswordResetFail value)? passwordResetFail,
     TResult Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
@@ -1376,9 +1403,10 @@ class _$PoorConnectionImpl implements _PoorConnection {
     required TResult Function() accountExpired,
     required TResult Function() tokenExpired,
     required TResult Function() authenticationFailed,
-    required TResult Function() proxyLoginRolePermissionNotMatch,
-    required TResult Function() proxyLoginZPTargetRoleNotMatch,
-    required TResult Function() proxyLoginZPSalesOrgNotMatch,
+    required TResult Function() cannotProxyLoginWithCurrentRole,
+    required TResult Function() cannotProxyLoginRootAdmin,
+    required TResult Function() cannotProxyLoginZPAdminWhenIsZPAdmin,
+    required TResult Function() cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function() passwordResetFail,
     required TResult Function() deviceNotSupportBiometric,
     required TResult Function() cannotCheckBiometrics,
@@ -1432,9 +1460,10 @@ class _$PoorConnectionImpl implements _PoorConnection {
     TResult? Function()? accountExpired,
     TResult? Function()? tokenExpired,
     TResult? Function()? authenticationFailed,
-    TResult? Function()? proxyLoginRolePermissionNotMatch,
-    TResult? Function()? proxyLoginZPTargetRoleNotMatch,
-    TResult? Function()? proxyLoginZPSalesOrgNotMatch,
+    TResult? Function()? cannotProxyLoginWithCurrentRole,
+    TResult? Function()? cannotProxyLoginRootAdmin,
+    TResult? Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult? Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function()? passwordResetFail,
     TResult? Function()? deviceNotSupportBiometric,
     TResult? Function()? cannotCheckBiometrics,
@@ -1488,9 +1517,10 @@ class _$PoorConnectionImpl implements _PoorConnection {
     TResult Function()? accountExpired,
     TResult Function()? tokenExpired,
     TResult Function()? authenticationFailed,
-    TResult Function()? proxyLoginRolePermissionNotMatch,
-    TResult Function()? proxyLoginZPTargetRoleNotMatch,
-    TResult Function()? proxyLoginZPSalesOrgNotMatch,
+    TResult Function()? cannotProxyLoginWithCurrentRole,
+    TResult Function()? cannotProxyLoginRootAdmin,
+    TResult Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function()? passwordResetFail,
     TResult Function()? deviceNotSupportBiometric,
     TResult Function()? cannotCheckBiometrics,
@@ -1550,12 +1580,14 @@ class _$PoorConnectionImpl implements _PoorConnection {
     required TResult Function(_AccountExpired value) accountExpired,
     required TResult Function(_TokenExpired value) tokenExpired,
     required TResult Function(_AuthenticationFailed value) authenticationFailed,
-    required TResult Function(_ProxyLoginRolePermissionNotMatch value)
-        proxyLoginRolePermissionNotMatch,
-    required TResult Function(_ProxyLoginZPTargetRoleNotMatch value)
-        proxyLoginZPTargetRoleNotMatch,
-    required TResult Function(_ProxyLoginZPSalesOrgNotMatch value)
-        proxyLoginZPSalesOrgNotMatch,
+    required TResult Function(_CannotProxyLoginWithCurrentRole value)
+        cannotProxyLoginWithCurrentRole,
+    required TResult Function(_CannotProxyLoginRootAdmin value)
+        cannotProxyLoginRootAdmin,
+    required TResult Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    required TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)
+        cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function(_PasswordResetFail value) passwordResetFail,
     required TResult Function(_DeviceNotSupportBiometric value)
         deviceNotSupportBiometric,
@@ -1631,12 +1663,14 @@ class _$PoorConnectionImpl implements _PoorConnection {
     TResult? Function(_AccountExpired value)? accountExpired,
     TResult? Function(_TokenExpired value)? tokenExpired,
     TResult? Function(_AuthenticationFailed value)? authenticationFailed,
-    TResult? Function(_ProxyLoginRolePermissionNotMatch value)?
-        proxyLoginRolePermissionNotMatch,
-    TResult? Function(_ProxyLoginZPTargetRoleNotMatch value)?
-        proxyLoginZPTargetRoleNotMatch,
-    TResult? Function(_ProxyLoginZPSalesOrgNotMatch value)?
-        proxyLoginZPSalesOrgNotMatch,
+    TResult? Function(_CannotProxyLoginWithCurrentRole value)?
+        cannotProxyLoginWithCurrentRole,
+    TResult? Function(_CannotProxyLoginRootAdmin value)?
+        cannotProxyLoginRootAdmin,
+    TResult? Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)?
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult? Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
+        cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function(_PasswordResetFail value)? passwordResetFail,
     TResult? Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
@@ -1698,12 +1732,14 @@ class _$PoorConnectionImpl implements _PoorConnection {
     TResult Function(_AccountExpired value)? accountExpired,
     TResult Function(_TokenExpired value)? tokenExpired,
     TResult Function(_AuthenticationFailed value)? authenticationFailed,
-    TResult Function(_ProxyLoginRolePermissionNotMatch value)?
-        proxyLoginRolePermissionNotMatch,
-    TResult Function(_ProxyLoginZPTargetRoleNotMatch value)?
-        proxyLoginZPTargetRoleNotMatch,
-    TResult Function(_ProxyLoginZPSalesOrgNotMatch value)?
-        proxyLoginZPSalesOrgNotMatch,
+    TResult Function(_CannotProxyLoginWithCurrentRole value)?
+        cannotProxyLoginWithCurrentRole,
+    TResult Function(_CannotProxyLoginRootAdmin value)?
+        cannotProxyLoginRootAdmin,
+    TResult Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)?
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
+        cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function(_PasswordResetFail value)? passwordResetFail,
     TResult Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
@@ -1807,9 +1843,10 @@ class _$ServerTimeoutImpl implements _ServerTimeout {
     required TResult Function() accountExpired,
     required TResult Function() tokenExpired,
     required TResult Function() authenticationFailed,
-    required TResult Function() proxyLoginRolePermissionNotMatch,
-    required TResult Function() proxyLoginZPTargetRoleNotMatch,
-    required TResult Function() proxyLoginZPSalesOrgNotMatch,
+    required TResult Function() cannotProxyLoginWithCurrentRole,
+    required TResult Function() cannotProxyLoginRootAdmin,
+    required TResult Function() cannotProxyLoginZPAdminWhenIsZPAdmin,
+    required TResult Function() cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function() passwordResetFail,
     required TResult Function() deviceNotSupportBiometric,
     required TResult Function() cannotCheckBiometrics,
@@ -1863,9 +1900,10 @@ class _$ServerTimeoutImpl implements _ServerTimeout {
     TResult? Function()? accountExpired,
     TResult? Function()? tokenExpired,
     TResult? Function()? authenticationFailed,
-    TResult? Function()? proxyLoginRolePermissionNotMatch,
-    TResult? Function()? proxyLoginZPTargetRoleNotMatch,
-    TResult? Function()? proxyLoginZPSalesOrgNotMatch,
+    TResult? Function()? cannotProxyLoginWithCurrentRole,
+    TResult? Function()? cannotProxyLoginRootAdmin,
+    TResult? Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult? Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function()? passwordResetFail,
     TResult? Function()? deviceNotSupportBiometric,
     TResult? Function()? cannotCheckBiometrics,
@@ -1919,9 +1957,10 @@ class _$ServerTimeoutImpl implements _ServerTimeout {
     TResult Function()? accountExpired,
     TResult Function()? tokenExpired,
     TResult Function()? authenticationFailed,
-    TResult Function()? proxyLoginRolePermissionNotMatch,
-    TResult Function()? proxyLoginZPTargetRoleNotMatch,
-    TResult Function()? proxyLoginZPSalesOrgNotMatch,
+    TResult Function()? cannotProxyLoginWithCurrentRole,
+    TResult Function()? cannotProxyLoginRootAdmin,
+    TResult Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function()? passwordResetFail,
     TResult Function()? deviceNotSupportBiometric,
     TResult Function()? cannotCheckBiometrics,
@@ -1981,12 +2020,14 @@ class _$ServerTimeoutImpl implements _ServerTimeout {
     required TResult Function(_AccountExpired value) accountExpired,
     required TResult Function(_TokenExpired value) tokenExpired,
     required TResult Function(_AuthenticationFailed value) authenticationFailed,
-    required TResult Function(_ProxyLoginRolePermissionNotMatch value)
-        proxyLoginRolePermissionNotMatch,
-    required TResult Function(_ProxyLoginZPTargetRoleNotMatch value)
-        proxyLoginZPTargetRoleNotMatch,
-    required TResult Function(_ProxyLoginZPSalesOrgNotMatch value)
-        proxyLoginZPSalesOrgNotMatch,
+    required TResult Function(_CannotProxyLoginWithCurrentRole value)
+        cannotProxyLoginWithCurrentRole,
+    required TResult Function(_CannotProxyLoginRootAdmin value)
+        cannotProxyLoginRootAdmin,
+    required TResult Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    required TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)
+        cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function(_PasswordResetFail value) passwordResetFail,
     required TResult Function(_DeviceNotSupportBiometric value)
         deviceNotSupportBiometric,
@@ -2062,12 +2103,14 @@ class _$ServerTimeoutImpl implements _ServerTimeout {
     TResult? Function(_AccountExpired value)? accountExpired,
     TResult? Function(_TokenExpired value)? tokenExpired,
     TResult? Function(_AuthenticationFailed value)? authenticationFailed,
-    TResult? Function(_ProxyLoginRolePermissionNotMatch value)?
-        proxyLoginRolePermissionNotMatch,
-    TResult? Function(_ProxyLoginZPTargetRoleNotMatch value)?
-        proxyLoginZPTargetRoleNotMatch,
-    TResult? Function(_ProxyLoginZPSalesOrgNotMatch value)?
-        proxyLoginZPSalesOrgNotMatch,
+    TResult? Function(_CannotProxyLoginWithCurrentRole value)?
+        cannotProxyLoginWithCurrentRole,
+    TResult? Function(_CannotProxyLoginRootAdmin value)?
+        cannotProxyLoginRootAdmin,
+    TResult? Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)?
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult? Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
+        cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function(_PasswordResetFail value)? passwordResetFail,
     TResult? Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
@@ -2129,12 +2172,14 @@ class _$ServerTimeoutImpl implements _ServerTimeout {
     TResult Function(_AccountExpired value)? accountExpired,
     TResult Function(_TokenExpired value)? tokenExpired,
     TResult Function(_AuthenticationFailed value)? authenticationFailed,
-    TResult Function(_ProxyLoginRolePermissionNotMatch value)?
-        proxyLoginRolePermissionNotMatch,
-    TResult Function(_ProxyLoginZPTargetRoleNotMatch value)?
-        proxyLoginZPTargetRoleNotMatch,
-    TResult Function(_ProxyLoginZPSalesOrgNotMatch value)?
-        proxyLoginZPSalesOrgNotMatch,
+    TResult Function(_CannotProxyLoginWithCurrentRole value)?
+        cannotProxyLoginWithCurrentRole,
+    TResult Function(_CannotProxyLoginRootAdmin value)?
+        cannotProxyLoginRootAdmin,
+    TResult Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)?
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
+        cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function(_PasswordResetFail value)? passwordResetFail,
     TResult Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
@@ -2238,9 +2283,10 @@ class _$UserNotFoundImpl implements _UserNotFound {
     required TResult Function() accountExpired,
     required TResult Function() tokenExpired,
     required TResult Function() authenticationFailed,
-    required TResult Function() proxyLoginRolePermissionNotMatch,
-    required TResult Function() proxyLoginZPTargetRoleNotMatch,
-    required TResult Function() proxyLoginZPSalesOrgNotMatch,
+    required TResult Function() cannotProxyLoginWithCurrentRole,
+    required TResult Function() cannotProxyLoginRootAdmin,
+    required TResult Function() cannotProxyLoginZPAdminWhenIsZPAdmin,
+    required TResult Function() cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function() passwordResetFail,
     required TResult Function() deviceNotSupportBiometric,
     required TResult Function() cannotCheckBiometrics,
@@ -2294,9 +2340,10 @@ class _$UserNotFoundImpl implements _UserNotFound {
     TResult? Function()? accountExpired,
     TResult? Function()? tokenExpired,
     TResult? Function()? authenticationFailed,
-    TResult? Function()? proxyLoginRolePermissionNotMatch,
-    TResult? Function()? proxyLoginZPTargetRoleNotMatch,
-    TResult? Function()? proxyLoginZPSalesOrgNotMatch,
+    TResult? Function()? cannotProxyLoginWithCurrentRole,
+    TResult? Function()? cannotProxyLoginRootAdmin,
+    TResult? Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult? Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function()? passwordResetFail,
     TResult? Function()? deviceNotSupportBiometric,
     TResult? Function()? cannotCheckBiometrics,
@@ -2350,9 +2397,10 @@ class _$UserNotFoundImpl implements _UserNotFound {
     TResult Function()? accountExpired,
     TResult Function()? tokenExpired,
     TResult Function()? authenticationFailed,
-    TResult Function()? proxyLoginRolePermissionNotMatch,
-    TResult Function()? proxyLoginZPTargetRoleNotMatch,
-    TResult Function()? proxyLoginZPSalesOrgNotMatch,
+    TResult Function()? cannotProxyLoginWithCurrentRole,
+    TResult Function()? cannotProxyLoginRootAdmin,
+    TResult Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function()? passwordResetFail,
     TResult Function()? deviceNotSupportBiometric,
     TResult Function()? cannotCheckBiometrics,
@@ -2412,12 +2460,14 @@ class _$UserNotFoundImpl implements _UserNotFound {
     required TResult Function(_AccountExpired value) accountExpired,
     required TResult Function(_TokenExpired value) tokenExpired,
     required TResult Function(_AuthenticationFailed value) authenticationFailed,
-    required TResult Function(_ProxyLoginRolePermissionNotMatch value)
-        proxyLoginRolePermissionNotMatch,
-    required TResult Function(_ProxyLoginZPTargetRoleNotMatch value)
-        proxyLoginZPTargetRoleNotMatch,
-    required TResult Function(_ProxyLoginZPSalesOrgNotMatch value)
-        proxyLoginZPSalesOrgNotMatch,
+    required TResult Function(_CannotProxyLoginWithCurrentRole value)
+        cannotProxyLoginWithCurrentRole,
+    required TResult Function(_CannotProxyLoginRootAdmin value)
+        cannotProxyLoginRootAdmin,
+    required TResult Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    required TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)
+        cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function(_PasswordResetFail value) passwordResetFail,
     required TResult Function(_DeviceNotSupportBiometric value)
         deviceNotSupportBiometric,
@@ -2493,12 +2543,14 @@ class _$UserNotFoundImpl implements _UserNotFound {
     TResult? Function(_AccountExpired value)? accountExpired,
     TResult? Function(_TokenExpired value)? tokenExpired,
     TResult? Function(_AuthenticationFailed value)? authenticationFailed,
-    TResult? Function(_ProxyLoginRolePermissionNotMatch value)?
-        proxyLoginRolePermissionNotMatch,
-    TResult? Function(_ProxyLoginZPTargetRoleNotMatch value)?
-        proxyLoginZPTargetRoleNotMatch,
-    TResult? Function(_ProxyLoginZPSalesOrgNotMatch value)?
-        proxyLoginZPSalesOrgNotMatch,
+    TResult? Function(_CannotProxyLoginWithCurrentRole value)?
+        cannotProxyLoginWithCurrentRole,
+    TResult? Function(_CannotProxyLoginRootAdmin value)?
+        cannotProxyLoginRootAdmin,
+    TResult? Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)?
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult? Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
+        cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function(_PasswordResetFail value)? passwordResetFail,
     TResult? Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
@@ -2560,12 +2612,14 @@ class _$UserNotFoundImpl implements _UserNotFound {
     TResult Function(_AccountExpired value)? accountExpired,
     TResult Function(_TokenExpired value)? tokenExpired,
     TResult Function(_AuthenticationFailed value)? authenticationFailed,
-    TResult Function(_ProxyLoginRolePermissionNotMatch value)?
-        proxyLoginRolePermissionNotMatch,
-    TResult Function(_ProxyLoginZPTargetRoleNotMatch value)?
-        proxyLoginZPTargetRoleNotMatch,
-    TResult Function(_ProxyLoginZPSalesOrgNotMatch value)?
-        proxyLoginZPSalesOrgNotMatch,
+    TResult Function(_CannotProxyLoginWithCurrentRole value)?
+        cannotProxyLoginWithCurrentRole,
+    TResult Function(_CannotProxyLoginRootAdmin value)?
+        cannotProxyLoginRootAdmin,
+    TResult Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)?
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
+        cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function(_PasswordResetFail value)? passwordResetFail,
     TResult Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
@@ -2673,9 +2727,10 @@ class _$MarketPlaceTnCAcceptanceErrorImpl
     required TResult Function() accountExpired,
     required TResult Function() tokenExpired,
     required TResult Function() authenticationFailed,
-    required TResult Function() proxyLoginRolePermissionNotMatch,
-    required TResult Function() proxyLoginZPTargetRoleNotMatch,
-    required TResult Function() proxyLoginZPSalesOrgNotMatch,
+    required TResult Function() cannotProxyLoginWithCurrentRole,
+    required TResult Function() cannotProxyLoginRootAdmin,
+    required TResult Function() cannotProxyLoginZPAdminWhenIsZPAdmin,
+    required TResult Function() cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function() passwordResetFail,
     required TResult Function() deviceNotSupportBiometric,
     required TResult Function() cannotCheckBiometrics,
@@ -2729,9 +2784,10 @@ class _$MarketPlaceTnCAcceptanceErrorImpl
     TResult? Function()? accountExpired,
     TResult? Function()? tokenExpired,
     TResult? Function()? authenticationFailed,
-    TResult? Function()? proxyLoginRolePermissionNotMatch,
-    TResult? Function()? proxyLoginZPTargetRoleNotMatch,
-    TResult? Function()? proxyLoginZPSalesOrgNotMatch,
+    TResult? Function()? cannotProxyLoginWithCurrentRole,
+    TResult? Function()? cannotProxyLoginRootAdmin,
+    TResult? Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult? Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function()? passwordResetFail,
     TResult? Function()? deviceNotSupportBiometric,
     TResult? Function()? cannotCheckBiometrics,
@@ -2785,9 +2841,10 @@ class _$MarketPlaceTnCAcceptanceErrorImpl
     TResult Function()? accountExpired,
     TResult Function()? tokenExpired,
     TResult Function()? authenticationFailed,
-    TResult Function()? proxyLoginRolePermissionNotMatch,
-    TResult Function()? proxyLoginZPTargetRoleNotMatch,
-    TResult Function()? proxyLoginZPSalesOrgNotMatch,
+    TResult Function()? cannotProxyLoginWithCurrentRole,
+    TResult Function()? cannotProxyLoginRootAdmin,
+    TResult Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function()? passwordResetFail,
     TResult Function()? deviceNotSupportBiometric,
     TResult Function()? cannotCheckBiometrics,
@@ -2847,12 +2904,14 @@ class _$MarketPlaceTnCAcceptanceErrorImpl
     required TResult Function(_AccountExpired value) accountExpired,
     required TResult Function(_TokenExpired value) tokenExpired,
     required TResult Function(_AuthenticationFailed value) authenticationFailed,
-    required TResult Function(_ProxyLoginRolePermissionNotMatch value)
-        proxyLoginRolePermissionNotMatch,
-    required TResult Function(_ProxyLoginZPTargetRoleNotMatch value)
-        proxyLoginZPTargetRoleNotMatch,
-    required TResult Function(_ProxyLoginZPSalesOrgNotMatch value)
-        proxyLoginZPSalesOrgNotMatch,
+    required TResult Function(_CannotProxyLoginWithCurrentRole value)
+        cannotProxyLoginWithCurrentRole,
+    required TResult Function(_CannotProxyLoginRootAdmin value)
+        cannotProxyLoginRootAdmin,
+    required TResult Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    required TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)
+        cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function(_PasswordResetFail value) passwordResetFail,
     required TResult Function(_DeviceNotSupportBiometric value)
         deviceNotSupportBiometric,
@@ -2928,12 +2987,14 @@ class _$MarketPlaceTnCAcceptanceErrorImpl
     TResult? Function(_AccountExpired value)? accountExpired,
     TResult? Function(_TokenExpired value)? tokenExpired,
     TResult? Function(_AuthenticationFailed value)? authenticationFailed,
-    TResult? Function(_ProxyLoginRolePermissionNotMatch value)?
-        proxyLoginRolePermissionNotMatch,
-    TResult? Function(_ProxyLoginZPTargetRoleNotMatch value)?
-        proxyLoginZPTargetRoleNotMatch,
-    TResult? Function(_ProxyLoginZPSalesOrgNotMatch value)?
-        proxyLoginZPSalesOrgNotMatch,
+    TResult? Function(_CannotProxyLoginWithCurrentRole value)?
+        cannotProxyLoginWithCurrentRole,
+    TResult? Function(_CannotProxyLoginRootAdmin value)?
+        cannotProxyLoginRootAdmin,
+    TResult? Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)?
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult? Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
+        cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function(_PasswordResetFail value)? passwordResetFail,
     TResult? Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
@@ -2995,12 +3056,14 @@ class _$MarketPlaceTnCAcceptanceErrorImpl
     TResult Function(_AccountExpired value)? accountExpired,
     TResult Function(_TokenExpired value)? tokenExpired,
     TResult Function(_AuthenticationFailed value)? authenticationFailed,
-    TResult Function(_ProxyLoginRolePermissionNotMatch value)?
-        proxyLoginRolePermissionNotMatch,
-    TResult Function(_ProxyLoginZPTargetRoleNotMatch value)?
-        proxyLoginZPTargetRoleNotMatch,
-    TResult Function(_ProxyLoginZPSalesOrgNotMatch value)?
-        proxyLoginZPSalesOrgNotMatch,
+    TResult Function(_CannotProxyLoginWithCurrentRole value)?
+        cannotProxyLoginWithCurrentRole,
+    TResult Function(_CannotProxyLoginRootAdmin value)?
+        cannotProxyLoginRootAdmin,
+    TResult Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)?
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
+        cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function(_PasswordResetFail value)? passwordResetFail,
     TResult Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
@@ -3110,9 +3173,10 @@ class _$InvalidEmailAndPasswordCombinationImpl
     required TResult Function() accountExpired,
     required TResult Function() tokenExpired,
     required TResult Function() authenticationFailed,
-    required TResult Function() proxyLoginRolePermissionNotMatch,
-    required TResult Function() proxyLoginZPTargetRoleNotMatch,
-    required TResult Function() proxyLoginZPSalesOrgNotMatch,
+    required TResult Function() cannotProxyLoginWithCurrentRole,
+    required TResult Function() cannotProxyLoginRootAdmin,
+    required TResult Function() cannotProxyLoginZPAdminWhenIsZPAdmin,
+    required TResult Function() cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function() passwordResetFail,
     required TResult Function() deviceNotSupportBiometric,
     required TResult Function() cannotCheckBiometrics,
@@ -3166,9 +3230,10 @@ class _$InvalidEmailAndPasswordCombinationImpl
     TResult? Function()? accountExpired,
     TResult? Function()? tokenExpired,
     TResult? Function()? authenticationFailed,
-    TResult? Function()? proxyLoginRolePermissionNotMatch,
-    TResult? Function()? proxyLoginZPTargetRoleNotMatch,
-    TResult? Function()? proxyLoginZPSalesOrgNotMatch,
+    TResult? Function()? cannotProxyLoginWithCurrentRole,
+    TResult? Function()? cannotProxyLoginRootAdmin,
+    TResult? Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult? Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function()? passwordResetFail,
     TResult? Function()? deviceNotSupportBiometric,
     TResult? Function()? cannotCheckBiometrics,
@@ -3222,9 +3287,10 @@ class _$InvalidEmailAndPasswordCombinationImpl
     TResult Function()? accountExpired,
     TResult Function()? tokenExpired,
     TResult Function()? authenticationFailed,
-    TResult Function()? proxyLoginRolePermissionNotMatch,
-    TResult Function()? proxyLoginZPTargetRoleNotMatch,
-    TResult Function()? proxyLoginZPSalesOrgNotMatch,
+    TResult Function()? cannotProxyLoginWithCurrentRole,
+    TResult Function()? cannotProxyLoginRootAdmin,
+    TResult Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function()? passwordResetFail,
     TResult Function()? deviceNotSupportBiometric,
     TResult Function()? cannotCheckBiometrics,
@@ -3284,12 +3350,14 @@ class _$InvalidEmailAndPasswordCombinationImpl
     required TResult Function(_AccountExpired value) accountExpired,
     required TResult Function(_TokenExpired value) tokenExpired,
     required TResult Function(_AuthenticationFailed value) authenticationFailed,
-    required TResult Function(_ProxyLoginRolePermissionNotMatch value)
-        proxyLoginRolePermissionNotMatch,
-    required TResult Function(_ProxyLoginZPTargetRoleNotMatch value)
-        proxyLoginZPTargetRoleNotMatch,
-    required TResult Function(_ProxyLoginZPSalesOrgNotMatch value)
-        proxyLoginZPSalesOrgNotMatch,
+    required TResult Function(_CannotProxyLoginWithCurrentRole value)
+        cannotProxyLoginWithCurrentRole,
+    required TResult Function(_CannotProxyLoginRootAdmin value)
+        cannotProxyLoginRootAdmin,
+    required TResult Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    required TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)
+        cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function(_PasswordResetFail value) passwordResetFail,
     required TResult Function(_DeviceNotSupportBiometric value)
         deviceNotSupportBiometric,
@@ -3365,12 +3433,14 @@ class _$InvalidEmailAndPasswordCombinationImpl
     TResult? Function(_AccountExpired value)? accountExpired,
     TResult? Function(_TokenExpired value)? tokenExpired,
     TResult? Function(_AuthenticationFailed value)? authenticationFailed,
-    TResult? Function(_ProxyLoginRolePermissionNotMatch value)?
-        proxyLoginRolePermissionNotMatch,
-    TResult? Function(_ProxyLoginZPTargetRoleNotMatch value)?
-        proxyLoginZPTargetRoleNotMatch,
-    TResult? Function(_ProxyLoginZPSalesOrgNotMatch value)?
-        proxyLoginZPSalesOrgNotMatch,
+    TResult? Function(_CannotProxyLoginWithCurrentRole value)?
+        cannotProxyLoginWithCurrentRole,
+    TResult? Function(_CannotProxyLoginRootAdmin value)?
+        cannotProxyLoginRootAdmin,
+    TResult? Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)?
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult? Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
+        cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function(_PasswordResetFail value)? passwordResetFail,
     TResult? Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
@@ -3432,12 +3502,14 @@ class _$InvalidEmailAndPasswordCombinationImpl
     TResult Function(_AccountExpired value)? accountExpired,
     TResult Function(_TokenExpired value)? tokenExpired,
     TResult Function(_AuthenticationFailed value)? authenticationFailed,
-    TResult Function(_ProxyLoginRolePermissionNotMatch value)?
-        proxyLoginRolePermissionNotMatch,
-    TResult Function(_ProxyLoginZPTargetRoleNotMatch value)?
-        proxyLoginZPTargetRoleNotMatch,
-    TResult Function(_ProxyLoginZPSalesOrgNotMatch value)?
-        proxyLoginZPSalesOrgNotMatch,
+    TResult Function(_CannotProxyLoginWithCurrentRole value)?
+        cannotProxyLoginWithCurrentRole,
+    TResult Function(_CannotProxyLoginRootAdmin value)?
+        cannotProxyLoginRootAdmin,
+    TResult Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)?
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
+        cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function(_PasswordResetFail value)? passwordResetFail,
     TResult Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
@@ -3542,9 +3614,10 @@ class _$AccountLockedImpl implements _AccountLocked {
     required TResult Function() accountExpired,
     required TResult Function() tokenExpired,
     required TResult Function() authenticationFailed,
-    required TResult Function() proxyLoginRolePermissionNotMatch,
-    required TResult Function() proxyLoginZPTargetRoleNotMatch,
-    required TResult Function() proxyLoginZPSalesOrgNotMatch,
+    required TResult Function() cannotProxyLoginWithCurrentRole,
+    required TResult Function() cannotProxyLoginRootAdmin,
+    required TResult Function() cannotProxyLoginZPAdminWhenIsZPAdmin,
+    required TResult Function() cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function() passwordResetFail,
     required TResult Function() deviceNotSupportBiometric,
     required TResult Function() cannotCheckBiometrics,
@@ -3598,9 +3671,10 @@ class _$AccountLockedImpl implements _AccountLocked {
     TResult? Function()? accountExpired,
     TResult? Function()? tokenExpired,
     TResult? Function()? authenticationFailed,
-    TResult? Function()? proxyLoginRolePermissionNotMatch,
-    TResult? Function()? proxyLoginZPTargetRoleNotMatch,
-    TResult? Function()? proxyLoginZPSalesOrgNotMatch,
+    TResult? Function()? cannotProxyLoginWithCurrentRole,
+    TResult? Function()? cannotProxyLoginRootAdmin,
+    TResult? Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult? Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function()? passwordResetFail,
     TResult? Function()? deviceNotSupportBiometric,
     TResult? Function()? cannotCheckBiometrics,
@@ -3654,9 +3728,10 @@ class _$AccountLockedImpl implements _AccountLocked {
     TResult Function()? accountExpired,
     TResult Function()? tokenExpired,
     TResult Function()? authenticationFailed,
-    TResult Function()? proxyLoginRolePermissionNotMatch,
-    TResult Function()? proxyLoginZPTargetRoleNotMatch,
-    TResult Function()? proxyLoginZPSalesOrgNotMatch,
+    TResult Function()? cannotProxyLoginWithCurrentRole,
+    TResult Function()? cannotProxyLoginRootAdmin,
+    TResult Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function()? passwordResetFail,
     TResult Function()? deviceNotSupportBiometric,
     TResult Function()? cannotCheckBiometrics,
@@ -3716,12 +3791,14 @@ class _$AccountLockedImpl implements _AccountLocked {
     required TResult Function(_AccountExpired value) accountExpired,
     required TResult Function(_TokenExpired value) tokenExpired,
     required TResult Function(_AuthenticationFailed value) authenticationFailed,
-    required TResult Function(_ProxyLoginRolePermissionNotMatch value)
-        proxyLoginRolePermissionNotMatch,
-    required TResult Function(_ProxyLoginZPTargetRoleNotMatch value)
-        proxyLoginZPTargetRoleNotMatch,
-    required TResult Function(_ProxyLoginZPSalesOrgNotMatch value)
-        proxyLoginZPSalesOrgNotMatch,
+    required TResult Function(_CannotProxyLoginWithCurrentRole value)
+        cannotProxyLoginWithCurrentRole,
+    required TResult Function(_CannotProxyLoginRootAdmin value)
+        cannotProxyLoginRootAdmin,
+    required TResult Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    required TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)
+        cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function(_PasswordResetFail value) passwordResetFail,
     required TResult Function(_DeviceNotSupportBiometric value)
         deviceNotSupportBiometric,
@@ -3797,12 +3874,14 @@ class _$AccountLockedImpl implements _AccountLocked {
     TResult? Function(_AccountExpired value)? accountExpired,
     TResult? Function(_TokenExpired value)? tokenExpired,
     TResult? Function(_AuthenticationFailed value)? authenticationFailed,
-    TResult? Function(_ProxyLoginRolePermissionNotMatch value)?
-        proxyLoginRolePermissionNotMatch,
-    TResult? Function(_ProxyLoginZPTargetRoleNotMatch value)?
-        proxyLoginZPTargetRoleNotMatch,
-    TResult? Function(_ProxyLoginZPSalesOrgNotMatch value)?
-        proxyLoginZPSalesOrgNotMatch,
+    TResult? Function(_CannotProxyLoginWithCurrentRole value)?
+        cannotProxyLoginWithCurrentRole,
+    TResult? Function(_CannotProxyLoginRootAdmin value)?
+        cannotProxyLoginRootAdmin,
+    TResult? Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)?
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult? Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
+        cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function(_PasswordResetFail value)? passwordResetFail,
     TResult? Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
@@ -3864,12 +3943,14 @@ class _$AccountLockedImpl implements _AccountLocked {
     TResult Function(_AccountExpired value)? accountExpired,
     TResult Function(_TokenExpired value)? tokenExpired,
     TResult Function(_AuthenticationFailed value)? authenticationFailed,
-    TResult Function(_ProxyLoginRolePermissionNotMatch value)?
-        proxyLoginRolePermissionNotMatch,
-    TResult Function(_ProxyLoginZPTargetRoleNotMatch value)?
-        proxyLoginZPTargetRoleNotMatch,
-    TResult Function(_ProxyLoginZPSalesOrgNotMatch value)?
-        proxyLoginZPSalesOrgNotMatch,
+    TResult Function(_CannotProxyLoginWithCurrentRole value)?
+        cannotProxyLoginWithCurrentRole,
+    TResult Function(_CannotProxyLoginRootAdmin value)?
+        cannotProxyLoginRootAdmin,
+    TResult Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)?
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
+        cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function(_PasswordResetFail value)? passwordResetFail,
     TResult Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
@@ -3973,9 +4054,10 @@ class _$AccountExpiredImpl implements _AccountExpired {
     required TResult Function() accountExpired,
     required TResult Function() tokenExpired,
     required TResult Function() authenticationFailed,
-    required TResult Function() proxyLoginRolePermissionNotMatch,
-    required TResult Function() proxyLoginZPTargetRoleNotMatch,
-    required TResult Function() proxyLoginZPSalesOrgNotMatch,
+    required TResult Function() cannotProxyLoginWithCurrentRole,
+    required TResult Function() cannotProxyLoginRootAdmin,
+    required TResult Function() cannotProxyLoginZPAdminWhenIsZPAdmin,
+    required TResult Function() cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function() passwordResetFail,
     required TResult Function() deviceNotSupportBiometric,
     required TResult Function() cannotCheckBiometrics,
@@ -4029,9 +4111,10 @@ class _$AccountExpiredImpl implements _AccountExpired {
     TResult? Function()? accountExpired,
     TResult? Function()? tokenExpired,
     TResult? Function()? authenticationFailed,
-    TResult? Function()? proxyLoginRolePermissionNotMatch,
-    TResult? Function()? proxyLoginZPTargetRoleNotMatch,
-    TResult? Function()? proxyLoginZPSalesOrgNotMatch,
+    TResult? Function()? cannotProxyLoginWithCurrentRole,
+    TResult? Function()? cannotProxyLoginRootAdmin,
+    TResult? Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult? Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function()? passwordResetFail,
     TResult? Function()? deviceNotSupportBiometric,
     TResult? Function()? cannotCheckBiometrics,
@@ -4085,9 +4168,10 @@ class _$AccountExpiredImpl implements _AccountExpired {
     TResult Function()? accountExpired,
     TResult Function()? tokenExpired,
     TResult Function()? authenticationFailed,
-    TResult Function()? proxyLoginRolePermissionNotMatch,
-    TResult Function()? proxyLoginZPTargetRoleNotMatch,
-    TResult Function()? proxyLoginZPSalesOrgNotMatch,
+    TResult Function()? cannotProxyLoginWithCurrentRole,
+    TResult Function()? cannotProxyLoginRootAdmin,
+    TResult Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function()? passwordResetFail,
     TResult Function()? deviceNotSupportBiometric,
     TResult Function()? cannotCheckBiometrics,
@@ -4147,12 +4231,14 @@ class _$AccountExpiredImpl implements _AccountExpired {
     required TResult Function(_AccountExpired value) accountExpired,
     required TResult Function(_TokenExpired value) tokenExpired,
     required TResult Function(_AuthenticationFailed value) authenticationFailed,
-    required TResult Function(_ProxyLoginRolePermissionNotMatch value)
-        proxyLoginRolePermissionNotMatch,
-    required TResult Function(_ProxyLoginZPTargetRoleNotMatch value)
-        proxyLoginZPTargetRoleNotMatch,
-    required TResult Function(_ProxyLoginZPSalesOrgNotMatch value)
-        proxyLoginZPSalesOrgNotMatch,
+    required TResult Function(_CannotProxyLoginWithCurrentRole value)
+        cannotProxyLoginWithCurrentRole,
+    required TResult Function(_CannotProxyLoginRootAdmin value)
+        cannotProxyLoginRootAdmin,
+    required TResult Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    required TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)
+        cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function(_PasswordResetFail value) passwordResetFail,
     required TResult Function(_DeviceNotSupportBiometric value)
         deviceNotSupportBiometric,
@@ -4228,12 +4314,14 @@ class _$AccountExpiredImpl implements _AccountExpired {
     TResult? Function(_AccountExpired value)? accountExpired,
     TResult? Function(_TokenExpired value)? tokenExpired,
     TResult? Function(_AuthenticationFailed value)? authenticationFailed,
-    TResult? Function(_ProxyLoginRolePermissionNotMatch value)?
-        proxyLoginRolePermissionNotMatch,
-    TResult? Function(_ProxyLoginZPTargetRoleNotMatch value)?
-        proxyLoginZPTargetRoleNotMatch,
-    TResult? Function(_ProxyLoginZPSalesOrgNotMatch value)?
-        proxyLoginZPSalesOrgNotMatch,
+    TResult? Function(_CannotProxyLoginWithCurrentRole value)?
+        cannotProxyLoginWithCurrentRole,
+    TResult? Function(_CannotProxyLoginRootAdmin value)?
+        cannotProxyLoginRootAdmin,
+    TResult? Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)?
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult? Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
+        cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function(_PasswordResetFail value)? passwordResetFail,
     TResult? Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
@@ -4295,12 +4383,14 @@ class _$AccountExpiredImpl implements _AccountExpired {
     TResult Function(_AccountExpired value)? accountExpired,
     TResult Function(_TokenExpired value)? tokenExpired,
     TResult Function(_AuthenticationFailed value)? authenticationFailed,
-    TResult Function(_ProxyLoginRolePermissionNotMatch value)?
-        proxyLoginRolePermissionNotMatch,
-    TResult Function(_ProxyLoginZPTargetRoleNotMatch value)?
-        proxyLoginZPTargetRoleNotMatch,
-    TResult Function(_ProxyLoginZPSalesOrgNotMatch value)?
-        proxyLoginZPSalesOrgNotMatch,
+    TResult Function(_CannotProxyLoginWithCurrentRole value)?
+        cannotProxyLoginWithCurrentRole,
+    TResult Function(_CannotProxyLoginRootAdmin value)?
+        cannotProxyLoginRootAdmin,
+    TResult Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)?
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
+        cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function(_PasswordResetFail value)? passwordResetFail,
     TResult Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
@@ -4404,9 +4494,10 @@ class _$TokenExpiredImpl implements _TokenExpired {
     required TResult Function() accountExpired,
     required TResult Function() tokenExpired,
     required TResult Function() authenticationFailed,
-    required TResult Function() proxyLoginRolePermissionNotMatch,
-    required TResult Function() proxyLoginZPTargetRoleNotMatch,
-    required TResult Function() proxyLoginZPSalesOrgNotMatch,
+    required TResult Function() cannotProxyLoginWithCurrentRole,
+    required TResult Function() cannotProxyLoginRootAdmin,
+    required TResult Function() cannotProxyLoginZPAdminWhenIsZPAdmin,
+    required TResult Function() cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function() passwordResetFail,
     required TResult Function() deviceNotSupportBiometric,
     required TResult Function() cannotCheckBiometrics,
@@ -4460,9 +4551,10 @@ class _$TokenExpiredImpl implements _TokenExpired {
     TResult? Function()? accountExpired,
     TResult? Function()? tokenExpired,
     TResult? Function()? authenticationFailed,
-    TResult? Function()? proxyLoginRolePermissionNotMatch,
-    TResult? Function()? proxyLoginZPTargetRoleNotMatch,
-    TResult? Function()? proxyLoginZPSalesOrgNotMatch,
+    TResult? Function()? cannotProxyLoginWithCurrentRole,
+    TResult? Function()? cannotProxyLoginRootAdmin,
+    TResult? Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult? Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function()? passwordResetFail,
     TResult? Function()? deviceNotSupportBiometric,
     TResult? Function()? cannotCheckBiometrics,
@@ -4516,9 +4608,10 @@ class _$TokenExpiredImpl implements _TokenExpired {
     TResult Function()? accountExpired,
     TResult Function()? tokenExpired,
     TResult Function()? authenticationFailed,
-    TResult Function()? proxyLoginRolePermissionNotMatch,
-    TResult Function()? proxyLoginZPTargetRoleNotMatch,
-    TResult Function()? proxyLoginZPSalesOrgNotMatch,
+    TResult Function()? cannotProxyLoginWithCurrentRole,
+    TResult Function()? cannotProxyLoginRootAdmin,
+    TResult Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function()? passwordResetFail,
     TResult Function()? deviceNotSupportBiometric,
     TResult Function()? cannotCheckBiometrics,
@@ -4578,12 +4671,14 @@ class _$TokenExpiredImpl implements _TokenExpired {
     required TResult Function(_AccountExpired value) accountExpired,
     required TResult Function(_TokenExpired value) tokenExpired,
     required TResult Function(_AuthenticationFailed value) authenticationFailed,
-    required TResult Function(_ProxyLoginRolePermissionNotMatch value)
-        proxyLoginRolePermissionNotMatch,
-    required TResult Function(_ProxyLoginZPTargetRoleNotMatch value)
-        proxyLoginZPTargetRoleNotMatch,
-    required TResult Function(_ProxyLoginZPSalesOrgNotMatch value)
-        proxyLoginZPSalesOrgNotMatch,
+    required TResult Function(_CannotProxyLoginWithCurrentRole value)
+        cannotProxyLoginWithCurrentRole,
+    required TResult Function(_CannotProxyLoginRootAdmin value)
+        cannotProxyLoginRootAdmin,
+    required TResult Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    required TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)
+        cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function(_PasswordResetFail value) passwordResetFail,
     required TResult Function(_DeviceNotSupportBiometric value)
         deviceNotSupportBiometric,
@@ -4659,12 +4754,14 @@ class _$TokenExpiredImpl implements _TokenExpired {
     TResult? Function(_AccountExpired value)? accountExpired,
     TResult? Function(_TokenExpired value)? tokenExpired,
     TResult? Function(_AuthenticationFailed value)? authenticationFailed,
-    TResult? Function(_ProxyLoginRolePermissionNotMatch value)?
-        proxyLoginRolePermissionNotMatch,
-    TResult? Function(_ProxyLoginZPTargetRoleNotMatch value)?
-        proxyLoginZPTargetRoleNotMatch,
-    TResult? Function(_ProxyLoginZPSalesOrgNotMatch value)?
-        proxyLoginZPSalesOrgNotMatch,
+    TResult? Function(_CannotProxyLoginWithCurrentRole value)?
+        cannotProxyLoginWithCurrentRole,
+    TResult? Function(_CannotProxyLoginRootAdmin value)?
+        cannotProxyLoginRootAdmin,
+    TResult? Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)?
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult? Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
+        cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function(_PasswordResetFail value)? passwordResetFail,
     TResult? Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
@@ -4726,12 +4823,14 @@ class _$TokenExpiredImpl implements _TokenExpired {
     TResult Function(_AccountExpired value)? accountExpired,
     TResult Function(_TokenExpired value)? tokenExpired,
     TResult Function(_AuthenticationFailed value)? authenticationFailed,
-    TResult Function(_ProxyLoginRolePermissionNotMatch value)?
-        proxyLoginRolePermissionNotMatch,
-    TResult Function(_ProxyLoginZPTargetRoleNotMatch value)?
-        proxyLoginZPTargetRoleNotMatch,
-    TResult Function(_ProxyLoginZPSalesOrgNotMatch value)?
-        proxyLoginZPSalesOrgNotMatch,
+    TResult Function(_CannotProxyLoginWithCurrentRole value)?
+        cannotProxyLoginWithCurrentRole,
+    TResult Function(_CannotProxyLoginRootAdmin value)?
+        cannotProxyLoginRootAdmin,
+    TResult Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)?
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
+        cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function(_PasswordResetFail value)? passwordResetFail,
     TResult Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
@@ -4836,9 +4935,10 @@ class _$AuthenticationFailedImpl implements _AuthenticationFailed {
     required TResult Function() accountExpired,
     required TResult Function() tokenExpired,
     required TResult Function() authenticationFailed,
-    required TResult Function() proxyLoginRolePermissionNotMatch,
-    required TResult Function() proxyLoginZPTargetRoleNotMatch,
-    required TResult Function() proxyLoginZPSalesOrgNotMatch,
+    required TResult Function() cannotProxyLoginWithCurrentRole,
+    required TResult Function() cannotProxyLoginRootAdmin,
+    required TResult Function() cannotProxyLoginZPAdminWhenIsZPAdmin,
+    required TResult Function() cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function() passwordResetFail,
     required TResult Function() deviceNotSupportBiometric,
     required TResult Function() cannotCheckBiometrics,
@@ -4892,9 +4992,10 @@ class _$AuthenticationFailedImpl implements _AuthenticationFailed {
     TResult? Function()? accountExpired,
     TResult? Function()? tokenExpired,
     TResult? Function()? authenticationFailed,
-    TResult? Function()? proxyLoginRolePermissionNotMatch,
-    TResult? Function()? proxyLoginZPTargetRoleNotMatch,
-    TResult? Function()? proxyLoginZPSalesOrgNotMatch,
+    TResult? Function()? cannotProxyLoginWithCurrentRole,
+    TResult? Function()? cannotProxyLoginRootAdmin,
+    TResult? Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult? Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function()? passwordResetFail,
     TResult? Function()? deviceNotSupportBiometric,
     TResult? Function()? cannotCheckBiometrics,
@@ -4948,9 +5049,10 @@ class _$AuthenticationFailedImpl implements _AuthenticationFailed {
     TResult Function()? accountExpired,
     TResult Function()? tokenExpired,
     TResult Function()? authenticationFailed,
-    TResult Function()? proxyLoginRolePermissionNotMatch,
-    TResult Function()? proxyLoginZPTargetRoleNotMatch,
-    TResult Function()? proxyLoginZPSalesOrgNotMatch,
+    TResult Function()? cannotProxyLoginWithCurrentRole,
+    TResult Function()? cannotProxyLoginRootAdmin,
+    TResult Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function()? passwordResetFail,
     TResult Function()? deviceNotSupportBiometric,
     TResult Function()? cannotCheckBiometrics,
@@ -5010,12 +5112,14 @@ class _$AuthenticationFailedImpl implements _AuthenticationFailed {
     required TResult Function(_AccountExpired value) accountExpired,
     required TResult Function(_TokenExpired value) tokenExpired,
     required TResult Function(_AuthenticationFailed value) authenticationFailed,
-    required TResult Function(_ProxyLoginRolePermissionNotMatch value)
-        proxyLoginRolePermissionNotMatch,
-    required TResult Function(_ProxyLoginZPTargetRoleNotMatch value)
-        proxyLoginZPTargetRoleNotMatch,
-    required TResult Function(_ProxyLoginZPSalesOrgNotMatch value)
-        proxyLoginZPSalesOrgNotMatch,
+    required TResult Function(_CannotProxyLoginWithCurrentRole value)
+        cannotProxyLoginWithCurrentRole,
+    required TResult Function(_CannotProxyLoginRootAdmin value)
+        cannotProxyLoginRootAdmin,
+    required TResult Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    required TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)
+        cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function(_PasswordResetFail value) passwordResetFail,
     required TResult Function(_DeviceNotSupportBiometric value)
         deviceNotSupportBiometric,
@@ -5091,12 +5195,14 @@ class _$AuthenticationFailedImpl implements _AuthenticationFailed {
     TResult? Function(_AccountExpired value)? accountExpired,
     TResult? Function(_TokenExpired value)? tokenExpired,
     TResult? Function(_AuthenticationFailed value)? authenticationFailed,
-    TResult? Function(_ProxyLoginRolePermissionNotMatch value)?
-        proxyLoginRolePermissionNotMatch,
-    TResult? Function(_ProxyLoginZPTargetRoleNotMatch value)?
-        proxyLoginZPTargetRoleNotMatch,
-    TResult? Function(_ProxyLoginZPSalesOrgNotMatch value)?
-        proxyLoginZPSalesOrgNotMatch,
+    TResult? Function(_CannotProxyLoginWithCurrentRole value)?
+        cannotProxyLoginWithCurrentRole,
+    TResult? Function(_CannotProxyLoginRootAdmin value)?
+        cannotProxyLoginRootAdmin,
+    TResult? Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)?
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult? Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
+        cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function(_PasswordResetFail value)? passwordResetFail,
     TResult? Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
@@ -5158,12 +5264,14 @@ class _$AuthenticationFailedImpl implements _AuthenticationFailed {
     TResult Function(_AccountExpired value)? accountExpired,
     TResult Function(_TokenExpired value)? tokenExpired,
     TResult Function(_AuthenticationFailed value)? authenticationFailed,
-    TResult Function(_ProxyLoginRolePermissionNotMatch value)?
-        proxyLoginRolePermissionNotMatch,
-    TResult Function(_ProxyLoginZPTargetRoleNotMatch value)?
-        proxyLoginZPTargetRoleNotMatch,
-    TResult Function(_ProxyLoginZPSalesOrgNotMatch value)?
-        proxyLoginZPSalesOrgNotMatch,
+    TResult Function(_CannotProxyLoginWithCurrentRole value)?
+        cannotProxyLoginWithCurrentRole,
+    TResult Function(_CannotProxyLoginRootAdmin value)?
+        cannotProxyLoginRootAdmin,
+    TResult Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)?
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
+        cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function(_PasswordResetFail value)? passwordResetFail,
     TResult Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
@@ -5219,40 +5327,40 @@ abstract class _AuthenticationFailed implements ApiFailure {
 }
 
 /// @nodoc
-abstract class _$$ProxyLoginRolePermissionNotMatchImplCopyWith<$Res> {
-  factory _$$ProxyLoginRolePermissionNotMatchImplCopyWith(
-          _$ProxyLoginRolePermissionNotMatchImpl value,
-          $Res Function(_$ProxyLoginRolePermissionNotMatchImpl) then) =
-      __$$ProxyLoginRolePermissionNotMatchImplCopyWithImpl<$Res>;
+abstract class _$$CannotProxyLoginWithCurrentRoleImplCopyWith<$Res> {
+  factory _$$CannotProxyLoginWithCurrentRoleImplCopyWith(
+          _$CannotProxyLoginWithCurrentRoleImpl value,
+          $Res Function(_$CannotProxyLoginWithCurrentRoleImpl) then) =
+      __$$CannotProxyLoginWithCurrentRoleImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$ProxyLoginRolePermissionNotMatchImplCopyWithImpl<$Res>
+class __$$CannotProxyLoginWithCurrentRoleImplCopyWithImpl<$Res>
     extends _$ApiFailureCopyWithImpl<$Res,
-        _$ProxyLoginRolePermissionNotMatchImpl>
-    implements _$$ProxyLoginRolePermissionNotMatchImplCopyWith<$Res> {
-  __$$ProxyLoginRolePermissionNotMatchImplCopyWithImpl(
-      _$ProxyLoginRolePermissionNotMatchImpl _value,
-      $Res Function(_$ProxyLoginRolePermissionNotMatchImpl) _then)
+        _$CannotProxyLoginWithCurrentRoleImpl>
+    implements _$$CannotProxyLoginWithCurrentRoleImplCopyWith<$Res> {
+  __$$CannotProxyLoginWithCurrentRoleImplCopyWithImpl(
+      _$CannotProxyLoginWithCurrentRoleImpl _value,
+      $Res Function(_$CannotProxyLoginWithCurrentRoleImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$ProxyLoginRolePermissionNotMatchImpl
-    implements _ProxyLoginRolePermissionNotMatch {
-  const _$ProxyLoginRolePermissionNotMatchImpl();
+class _$CannotProxyLoginWithCurrentRoleImpl
+    implements _CannotProxyLoginWithCurrentRole {
+  const _$CannotProxyLoginWithCurrentRoleImpl();
 
   @override
   String toString() {
-    return 'ApiFailure.proxyLoginRolePermissionNotMatch()';
+    return 'ApiFailure.cannotProxyLoginWithCurrentRole()';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$ProxyLoginRolePermissionNotMatchImpl);
+            other is _$CannotProxyLoginWithCurrentRoleImpl);
   }
 
   @override
@@ -5272,9 +5380,10 @@ class _$ProxyLoginRolePermissionNotMatchImpl
     required TResult Function() accountExpired,
     required TResult Function() tokenExpired,
     required TResult Function() authenticationFailed,
-    required TResult Function() proxyLoginRolePermissionNotMatch,
-    required TResult Function() proxyLoginZPTargetRoleNotMatch,
-    required TResult Function() proxyLoginZPSalesOrgNotMatch,
+    required TResult Function() cannotProxyLoginWithCurrentRole,
+    required TResult Function() cannotProxyLoginRootAdmin,
+    required TResult Function() cannotProxyLoginZPAdminWhenIsZPAdmin,
+    required TResult Function() cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function() passwordResetFail,
     required TResult Function() deviceNotSupportBiometric,
     required TResult Function() cannotCheckBiometrics,
@@ -5311,7 +5420,7 @@ class _$ProxyLoginRolePermissionNotMatchImpl
     required TResult Function() stockInfoNotAvailable,
     required TResult Function() accountCreationIncomplete,
   }) {
-    return proxyLoginRolePermissionNotMatch();
+    return cannotProxyLoginWithCurrentRole();
   }
 
   @override
@@ -5328,9 +5437,10 @@ class _$ProxyLoginRolePermissionNotMatchImpl
     TResult? Function()? accountExpired,
     TResult? Function()? tokenExpired,
     TResult? Function()? authenticationFailed,
-    TResult? Function()? proxyLoginRolePermissionNotMatch,
-    TResult? Function()? proxyLoginZPTargetRoleNotMatch,
-    TResult? Function()? proxyLoginZPSalesOrgNotMatch,
+    TResult? Function()? cannotProxyLoginWithCurrentRole,
+    TResult? Function()? cannotProxyLoginRootAdmin,
+    TResult? Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult? Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function()? passwordResetFail,
     TResult? Function()? deviceNotSupportBiometric,
     TResult? Function()? cannotCheckBiometrics,
@@ -5367,7 +5477,7 @@ class _$ProxyLoginRolePermissionNotMatchImpl
     TResult? Function()? stockInfoNotAvailable,
     TResult? Function()? accountCreationIncomplete,
   }) {
-    return proxyLoginRolePermissionNotMatch?.call();
+    return cannotProxyLoginWithCurrentRole?.call();
   }
 
   @override
@@ -5384,9 +5494,10 @@ class _$ProxyLoginRolePermissionNotMatchImpl
     TResult Function()? accountExpired,
     TResult Function()? tokenExpired,
     TResult Function()? authenticationFailed,
-    TResult Function()? proxyLoginRolePermissionNotMatch,
-    TResult Function()? proxyLoginZPTargetRoleNotMatch,
-    TResult Function()? proxyLoginZPSalesOrgNotMatch,
+    TResult Function()? cannotProxyLoginWithCurrentRole,
+    TResult Function()? cannotProxyLoginRootAdmin,
+    TResult Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function()? passwordResetFail,
     TResult Function()? deviceNotSupportBiometric,
     TResult Function()? cannotCheckBiometrics,
@@ -5424,8 +5535,8 @@ class _$ProxyLoginRolePermissionNotMatchImpl
     TResult Function()? accountCreationIncomplete,
     required TResult orElse(),
   }) {
-    if (proxyLoginRolePermissionNotMatch != null) {
-      return proxyLoginRolePermissionNotMatch();
+    if (cannotProxyLoginWithCurrentRole != null) {
+      return cannotProxyLoginWithCurrentRole();
     }
     return orElse();
   }
@@ -5446,12 +5557,14 @@ class _$ProxyLoginRolePermissionNotMatchImpl
     required TResult Function(_AccountExpired value) accountExpired,
     required TResult Function(_TokenExpired value) tokenExpired,
     required TResult Function(_AuthenticationFailed value) authenticationFailed,
-    required TResult Function(_ProxyLoginRolePermissionNotMatch value)
-        proxyLoginRolePermissionNotMatch,
-    required TResult Function(_ProxyLoginZPTargetRoleNotMatch value)
-        proxyLoginZPTargetRoleNotMatch,
-    required TResult Function(_ProxyLoginZPSalesOrgNotMatch value)
-        proxyLoginZPSalesOrgNotMatch,
+    required TResult Function(_CannotProxyLoginWithCurrentRole value)
+        cannotProxyLoginWithCurrentRole,
+    required TResult Function(_CannotProxyLoginRootAdmin value)
+        cannotProxyLoginRootAdmin,
+    required TResult Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    required TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)
+        cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function(_PasswordResetFail value) passwordResetFail,
     required TResult Function(_DeviceNotSupportBiometric value)
         deviceNotSupportBiometric,
@@ -5508,7 +5621,7 @@ class _$ProxyLoginRolePermissionNotMatchImpl
     required TResult Function(_AccountCreationIncomplete value)
         accountCreationIncomplete,
   }) {
-    return proxyLoginRolePermissionNotMatch(this);
+    return cannotProxyLoginWithCurrentRole(this);
   }
 
   @override
@@ -5527,12 +5640,14 @@ class _$ProxyLoginRolePermissionNotMatchImpl
     TResult? Function(_AccountExpired value)? accountExpired,
     TResult? Function(_TokenExpired value)? tokenExpired,
     TResult? Function(_AuthenticationFailed value)? authenticationFailed,
-    TResult? Function(_ProxyLoginRolePermissionNotMatch value)?
-        proxyLoginRolePermissionNotMatch,
-    TResult? Function(_ProxyLoginZPTargetRoleNotMatch value)?
-        proxyLoginZPTargetRoleNotMatch,
-    TResult? Function(_ProxyLoginZPSalesOrgNotMatch value)?
-        proxyLoginZPSalesOrgNotMatch,
+    TResult? Function(_CannotProxyLoginWithCurrentRole value)?
+        cannotProxyLoginWithCurrentRole,
+    TResult? Function(_CannotProxyLoginRootAdmin value)?
+        cannotProxyLoginRootAdmin,
+    TResult? Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)?
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult? Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
+        cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function(_PasswordResetFail value)? passwordResetFail,
     TResult? Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
@@ -5575,7 +5690,7 @@ class _$ProxyLoginRolePermissionNotMatchImpl
     TResult? Function(_AccountCreationIncomplete value)?
         accountCreationIncomplete,
   }) {
-    return proxyLoginRolePermissionNotMatch?.call(this);
+    return cannotProxyLoginWithCurrentRole?.call(this);
   }
 
   @override
@@ -5594,12 +5709,14 @@ class _$ProxyLoginRolePermissionNotMatchImpl
     TResult Function(_AccountExpired value)? accountExpired,
     TResult Function(_TokenExpired value)? tokenExpired,
     TResult Function(_AuthenticationFailed value)? authenticationFailed,
-    TResult Function(_ProxyLoginRolePermissionNotMatch value)?
-        proxyLoginRolePermissionNotMatch,
-    TResult Function(_ProxyLoginZPTargetRoleNotMatch value)?
-        proxyLoginZPTargetRoleNotMatch,
-    TResult Function(_ProxyLoginZPSalesOrgNotMatch value)?
-        proxyLoginZPSalesOrgNotMatch,
+    TResult Function(_CannotProxyLoginWithCurrentRole value)?
+        cannotProxyLoginWithCurrentRole,
+    TResult Function(_CannotProxyLoginRootAdmin value)?
+        cannotProxyLoginRootAdmin,
+    TResult Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)?
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
+        cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function(_PasswordResetFail value)? passwordResetFail,
     TResult Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
@@ -5643,52 +5760,51 @@ class _$ProxyLoginRolePermissionNotMatchImpl
         accountCreationIncomplete,
     required TResult orElse(),
   }) {
-    if (proxyLoginRolePermissionNotMatch != null) {
-      return proxyLoginRolePermissionNotMatch(this);
+    if (cannotProxyLoginWithCurrentRole != null) {
+      return cannotProxyLoginWithCurrentRole(this);
     }
     return orElse();
   }
 }
 
-abstract class _ProxyLoginRolePermissionNotMatch implements ApiFailure {
-  const factory _ProxyLoginRolePermissionNotMatch() =
-      _$ProxyLoginRolePermissionNotMatchImpl;
+abstract class _CannotProxyLoginWithCurrentRole implements ApiFailure {
+  const factory _CannotProxyLoginWithCurrentRole() =
+      _$CannotProxyLoginWithCurrentRoleImpl;
 }
 
 /// @nodoc
-abstract class _$$ProxyLoginZPTargetRoleNotMatchImplCopyWith<$Res> {
-  factory _$$ProxyLoginZPTargetRoleNotMatchImplCopyWith(
-          _$ProxyLoginZPTargetRoleNotMatchImpl value,
-          $Res Function(_$ProxyLoginZPTargetRoleNotMatchImpl) then) =
-      __$$ProxyLoginZPTargetRoleNotMatchImplCopyWithImpl<$Res>;
+abstract class _$$CannotProxyLoginRootAdminImplCopyWith<$Res> {
+  factory _$$CannotProxyLoginRootAdminImplCopyWith(
+          _$CannotProxyLoginRootAdminImpl value,
+          $Res Function(_$CannotProxyLoginRootAdminImpl) then) =
+      __$$CannotProxyLoginRootAdminImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$ProxyLoginZPTargetRoleNotMatchImplCopyWithImpl<$Res>
-    extends _$ApiFailureCopyWithImpl<$Res, _$ProxyLoginZPTargetRoleNotMatchImpl>
-    implements _$$ProxyLoginZPTargetRoleNotMatchImplCopyWith<$Res> {
-  __$$ProxyLoginZPTargetRoleNotMatchImplCopyWithImpl(
-      _$ProxyLoginZPTargetRoleNotMatchImpl _value,
-      $Res Function(_$ProxyLoginZPTargetRoleNotMatchImpl) _then)
+class __$$CannotProxyLoginRootAdminImplCopyWithImpl<$Res>
+    extends _$ApiFailureCopyWithImpl<$Res, _$CannotProxyLoginRootAdminImpl>
+    implements _$$CannotProxyLoginRootAdminImplCopyWith<$Res> {
+  __$$CannotProxyLoginRootAdminImplCopyWithImpl(
+      _$CannotProxyLoginRootAdminImpl _value,
+      $Res Function(_$CannotProxyLoginRootAdminImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$ProxyLoginZPTargetRoleNotMatchImpl
-    implements _ProxyLoginZPTargetRoleNotMatch {
-  const _$ProxyLoginZPTargetRoleNotMatchImpl();
+class _$CannotProxyLoginRootAdminImpl implements _CannotProxyLoginRootAdmin {
+  const _$CannotProxyLoginRootAdminImpl();
 
   @override
   String toString() {
-    return 'ApiFailure.proxyLoginZPTargetRoleNotMatch()';
+    return 'ApiFailure.cannotProxyLoginRootAdmin()';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$ProxyLoginZPTargetRoleNotMatchImpl);
+            other is _$CannotProxyLoginRootAdminImpl);
   }
 
   @override
@@ -5708,9 +5824,10 @@ class _$ProxyLoginZPTargetRoleNotMatchImpl
     required TResult Function() accountExpired,
     required TResult Function() tokenExpired,
     required TResult Function() authenticationFailed,
-    required TResult Function() proxyLoginRolePermissionNotMatch,
-    required TResult Function() proxyLoginZPTargetRoleNotMatch,
-    required TResult Function() proxyLoginZPSalesOrgNotMatch,
+    required TResult Function() cannotProxyLoginWithCurrentRole,
+    required TResult Function() cannotProxyLoginRootAdmin,
+    required TResult Function() cannotProxyLoginZPAdminWhenIsZPAdmin,
+    required TResult Function() cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function() passwordResetFail,
     required TResult Function() deviceNotSupportBiometric,
     required TResult Function() cannotCheckBiometrics,
@@ -5747,7 +5864,7 @@ class _$ProxyLoginZPTargetRoleNotMatchImpl
     required TResult Function() stockInfoNotAvailable,
     required TResult Function() accountCreationIncomplete,
   }) {
-    return proxyLoginZPTargetRoleNotMatch();
+    return cannotProxyLoginRootAdmin();
   }
 
   @override
@@ -5764,9 +5881,10 @@ class _$ProxyLoginZPTargetRoleNotMatchImpl
     TResult? Function()? accountExpired,
     TResult? Function()? tokenExpired,
     TResult? Function()? authenticationFailed,
-    TResult? Function()? proxyLoginRolePermissionNotMatch,
-    TResult? Function()? proxyLoginZPTargetRoleNotMatch,
-    TResult? Function()? proxyLoginZPSalesOrgNotMatch,
+    TResult? Function()? cannotProxyLoginWithCurrentRole,
+    TResult? Function()? cannotProxyLoginRootAdmin,
+    TResult? Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult? Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function()? passwordResetFail,
     TResult? Function()? deviceNotSupportBiometric,
     TResult? Function()? cannotCheckBiometrics,
@@ -5803,7 +5921,7 @@ class _$ProxyLoginZPTargetRoleNotMatchImpl
     TResult? Function()? stockInfoNotAvailable,
     TResult? Function()? accountCreationIncomplete,
   }) {
-    return proxyLoginZPTargetRoleNotMatch?.call();
+    return cannotProxyLoginRootAdmin?.call();
   }
 
   @override
@@ -5820,9 +5938,10 @@ class _$ProxyLoginZPTargetRoleNotMatchImpl
     TResult Function()? accountExpired,
     TResult Function()? tokenExpired,
     TResult Function()? authenticationFailed,
-    TResult Function()? proxyLoginRolePermissionNotMatch,
-    TResult Function()? proxyLoginZPTargetRoleNotMatch,
-    TResult Function()? proxyLoginZPSalesOrgNotMatch,
+    TResult Function()? cannotProxyLoginWithCurrentRole,
+    TResult Function()? cannotProxyLoginRootAdmin,
+    TResult Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function()? passwordResetFail,
     TResult Function()? deviceNotSupportBiometric,
     TResult Function()? cannotCheckBiometrics,
@@ -5860,8 +5979,8 @@ class _$ProxyLoginZPTargetRoleNotMatchImpl
     TResult Function()? accountCreationIncomplete,
     required TResult orElse(),
   }) {
-    if (proxyLoginZPTargetRoleNotMatch != null) {
-      return proxyLoginZPTargetRoleNotMatch();
+    if (cannotProxyLoginRootAdmin != null) {
+      return cannotProxyLoginRootAdmin();
     }
     return orElse();
   }
@@ -5882,12 +6001,14 @@ class _$ProxyLoginZPTargetRoleNotMatchImpl
     required TResult Function(_AccountExpired value) accountExpired,
     required TResult Function(_TokenExpired value) tokenExpired,
     required TResult Function(_AuthenticationFailed value) authenticationFailed,
-    required TResult Function(_ProxyLoginRolePermissionNotMatch value)
-        proxyLoginRolePermissionNotMatch,
-    required TResult Function(_ProxyLoginZPTargetRoleNotMatch value)
-        proxyLoginZPTargetRoleNotMatch,
-    required TResult Function(_ProxyLoginZPSalesOrgNotMatch value)
-        proxyLoginZPSalesOrgNotMatch,
+    required TResult Function(_CannotProxyLoginWithCurrentRole value)
+        cannotProxyLoginWithCurrentRole,
+    required TResult Function(_CannotProxyLoginRootAdmin value)
+        cannotProxyLoginRootAdmin,
+    required TResult Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    required TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)
+        cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function(_PasswordResetFail value) passwordResetFail,
     required TResult Function(_DeviceNotSupportBiometric value)
         deviceNotSupportBiometric,
@@ -5944,7 +6065,7 @@ class _$ProxyLoginZPTargetRoleNotMatchImpl
     required TResult Function(_AccountCreationIncomplete value)
         accountCreationIncomplete,
   }) {
-    return proxyLoginZPTargetRoleNotMatch(this);
+    return cannotProxyLoginRootAdmin(this);
   }
 
   @override
@@ -5963,12 +6084,14 @@ class _$ProxyLoginZPTargetRoleNotMatchImpl
     TResult? Function(_AccountExpired value)? accountExpired,
     TResult? Function(_TokenExpired value)? tokenExpired,
     TResult? Function(_AuthenticationFailed value)? authenticationFailed,
-    TResult? Function(_ProxyLoginRolePermissionNotMatch value)?
-        proxyLoginRolePermissionNotMatch,
-    TResult? Function(_ProxyLoginZPTargetRoleNotMatch value)?
-        proxyLoginZPTargetRoleNotMatch,
-    TResult? Function(_ProxyLoginZPSalesOrgNotMatch value)?
-        proxyLoginZPSalesOrgNotMatch,
+    TResult? Function(_CannotProxyLoginWithCurrentRole value)?
+        cannotProxyLoginWithCurrentRole,
+    TResult? Function(_CannotProxyLoginRootAdmin value)?
+        cannotProxyLoginRootAdmin,
+    TResult? Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)?
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult? Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
+        cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function(_PasswordResetFail value)? passwordResetFail,
     TResult? Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
@@ -6011,7 +6134,7 @@ class _$ProxyLoginZPTargetRoleNotMatchImpl
     TResult? Function(_AccountCreationIncomplete value)?
         accountCreationIncomplete,
   }) {
-    return proxyLoginZPTargetRoleNotMatch?.call(this);
+    return cannotProxyLoginRootAdmin?.call(this);
   }
 
   @override
@@ -6030,12 +6153,14 @@ class _$ProxyLoginZPTargetRoleNotMatchImpl
     TResult Function(_AccountExpired value)? accountExpired,
     TResult Function(_TokenExpired value)? tokenExpired,
     TResult Function(_AuthenticationFailed value)? authenticationFailed,
-    TResult Function(_ProxyLoginRolePermissionNotMatch value)?
-        proxyLoginRolePermissionNotMatch,
-    TResult Function(_ProxyLoginZPTargetRoleNotMatch value)?
-        proxyLoginZPTargetRoleNotMatch,
-    TResult Function(_ProxyLoginZPSalesOrgNotMatch value)?
-        proxyLoginZPSalesOrgNotMatch,
+    TResult Function(_CannotProxyLoginWithCurrentRole value)?
+        cannotProxyLoginWithCurrentRole,
+    TResult Function(_CannotProxyLoginRootAdmin value)?
+        cannotProxyLoginRootAdmin,
+    TResult Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)?
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
+        cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function(_PasswordResetFail value)? passwordResetFail,
     TResult Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
@@ -6079,52 +6204,52 @@ class _$ProxyLoginZPTargetRoleNotMatchImpl
         accountCreationIncomplete,
     required TResult orElse(),
   }) {
-    if (proxyLoginZPTargetRoleNotMatch != null) {
-      return proxyLoginZPTargetRoleNotMatch(this);
+    if (cannotProxyLoginRootAdmin != null) {
+      return cannotProxyLoginRootAdmin(this);
     }
     return orElse();
   }
 }
 
-abstract class _ProxyLoginZPTargetRoleNotMatch implements ApiFailure {
-  const factory _ProxyLoginZPTargetRoleNotMatch() =
-      _$ProxyLoginZPTargetRoleNotMatchImpl;
+abstract class _CannotProxyLoginRootAdmin implements ApiFailure {
+  const factory _CannotProxyLoginRootAdmin() = _$CannotProxyLoginRootAdminImpl;
 }
 
 /// @nodoc
-abstract class _$$ProxyLoginZPSalesOrgNotMatchImplCopyWith<$Res> {
-  factory _$$ProxyLoginZPSalesOrgNotMatchImplCopyWith(
-          _$ProxyLoginZPSalesOrgNotMatchImpl value,
-          $Res Function(_$ProxyLoginZPSalesOrgNotMatchImpl) then) =
-      __$$ProxyLoginZPSalesOrgNotMatchImplCopyWithImpl<$Res>;
+abstract class _$$CannotProxyLoginZPAdminWhenIsZPAdminImplCopyWith<$Res> {
+  factory _$$CannotProxyLoginZPAdminWhenIsZPAdminImplCopyWith(
+          _$CannotProxyLoginZPAdminWhenIsZPAdminImpl value,
+          $Res Function(_$CannotProxyLoginZPAdminWhenIsZPAdminImpl) then) =
+      __$$CannotProxyLoginZPAdminWhenIsZPAdminImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$ProxyLoginZPSalesOrgNotMatchImplCopyWithImpl<$Res>
-    extends _$ApiFailureCopyWithImpl<$Res, _$ProxyLoginZPSalesOrgNotMatchImpl>
-    implements _$$ProxyLoginZPSalesOrgNotMatchImplCopyWith<$Res> {
-  __$$ProxyLoginZPSalesOrgNotMatchImplCopyWithImpl(
-      _$ProxyLoginZPSalesOrgNotMatchImpl _value,
-      $Res Function(_$ProxyLoginZPSalesOrgNotMatchImpl) _then)
+class __$$CannotProxyLoginZPAdminWhenIsZPAdminImplCopyWithImpl<$Res>
+    extends _$ApiFailureCopyWithImpl<$Res,
+        _$CannotProxyLoginZPAdminWhenIsZPAdminImpl>
+    implements _$$CannotProxyLoginZPAdminWhenIsZPAdminImplCopyWith<$Res> {
+  __$$CannotProxyLoginZPAdminWhenIsZPAdminImplCopyWithImpl(
+      _$CannotProxyLoginZPAdminWhenIsZPAdminImpl _value,
+      $Res Function(_$CannotProxyLoginZPAdminWhenIsZPAdminImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$ProxyLoginZPSalesOrgNotMatchImpl
-    implements _ProxyLoginZPSalesOrgNotMatch {
-  const _$ProxyLoginZPSalesOrgNotMatchImpl();
+class _$CannotProxyLoginZPAdminWhenIsZPAdminImpl
+    implements _CannotProxyLoginZPAdminWhenIsZPAdmin {
+  const _$CannotProxyLoginZPAdminWhenIsZPAdminImpl();
 
   @override
   String toString() {
-    return 'ApiFailure.proxyLoginZPSalesOrgNotMatch()';
+    return 'ApiFailure.cannotProxyLoginZPAdminWhenIsZPAdmin()';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$ProxyLoginZPSalesOrgNotMatchImpl);
+            other is _$CannotProxyLoginZPAdminWhenIsZPAdminImpl);
   }
 
   @override
@@ -6144,9 +6269,10 @@ class _$ProxyLoginZPSalesOrgNotMatchImpl
     required TResult Function() accountExpired,
     required TResult Function() tokenExpired,
     required TResult Function() authenticationFailed,
-    required TResult Function() proxyLoginRolePermissionNotMatch,
-    required TResult Function() proxyLoginZPTargetRoleNotMatch,
-    required TResult Function() proxyLoginZPSalesOrgNotMatch,
+    required TResult Function() cannotProxyLoginWithCurrentRole,
+    required TResult Function() cannotProxyLoginRootAdmin,
+    required TResult Function() cannotProxyLoginZPAdminWhenIsZPAdmin,
+    required TResult Function() cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function() passwordResetFail,
     required TResult Function() deviceNotSupportBiometric,
     required TResult Function() cannotCheckBiometrics,
@@ -6183,7 +6309,7 @@ class _$ProxyLoginZPSalesOrgNotMatchImpl
     required TResult Function() stockInfoNotAvailable,
     required TResult Function() accountCreationIncomplete,
   }) {
-    return proxyLoginZPSalesOrgNotMatch();
+    return cannotProxyLoginZPAdminWhenIsZPAdmin();
   }
 
   @override
@@ -6200,9 +6326,10 @@ class _$ProxyLoginZPSalesOrgNotMatchImpl
     TResult? Function()? accountExpired,
     TResult? Function()? tokenExpired,
     TResult? Function()? authenticationFailed,
-    TResult? Function()? proxyLoginRolePermissionNotMatch,
-    TResult? Function()? proxyLoginZPTargetRoleNotMatch,
-    TResult? Function()? proxyLoginZPSalesOrgNotMatch,
+    TResult? Function()? cannotProxyLoginWithCurrentRole,
+    TResult? Function()? cannotProxyLoginRootAdmin,
+    TResult? Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult? Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function()? passwordResetFail,
     TResult? Function()? deviceNotSupportBiometric,
     TResult? Function()? cannotCheckBiometrics,
@@ -6239,7 +6366,7 @@ class _$ProxyLoginZPSalesOrgNotMatchImpl
     TResult? Function()? stockInfoNotAvailable,
     TResult? Function()? accountCreationIncomplete,
   }) {
-    return proxyLoginZPSalesOrgNotMatch?.call();
+    return cannotProxyLoginZPAdminWhenIsZPAdmin?.call();
   }
 
   @override
@@ -6256,9 +6383,10 @@ class _$ProxyLoginZPSalesOrgNotMatchImpl
     TResult Function()? accountExpired,
     TResult Function()? tokenExpired,
     TResult Function()? authenticationFailed,
-    TResult Function()? proxyLoginRolePermissionNotMatch,
-    TResult Function()? proxyLoginZPTargetRoleNotMatch,
-    TResult Function()? proxyLoginZPSalesOrgNotMatch,
+    TResult Function()? cannotProxyLoginWithCurrentRole,
+    TResult Function()? cannotProxyLoginRootAdmin,
+    TResult Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function()? passwordResetFail,
     TResult Function()? deviceNotSupportBiometric,
     TResult Function()? cannotCheckBiometrics,
@@ -6296,8 +6424,8 @@ class _$ProxyLoginZPSalesOrgNotMatchImpl
     TResult Function()? accountCreationIncomplete,
     required TResult orElse(),
   }) {
-    if (proxyLoginZPSalesOrgNotMatch != null) {
-      return proxyLoginZPSalesOrgNotMatch();
+    if (cannotProxyLoginZPAdminWhenIsZPAdmin != null) {
+      return cannotProxyLoginZPAdminWhenIsZPAdmin();
     }
     return orElse();
   }
@@ -6318,12 +6446,14 @@ class _$ProxyLoginZPSalesOrgNotMatchImpl
     required TResult Function(_AccountExpired value) accountExpired,
     required TResult Function(_TokenExpired value) tokenExpired,
     required TResult Function(_AuthenticationFailed value) authenticationFailed,
-    required TResult Function(_ProxyLoginRolePermissionNotMatch value)
-        proxyLoginRolePermissionNotMatch,
-    required TResult Function(_ProxyLoginZPTargetRoleNotMatch value)
-        proxyLoginZPTargetRoleNotMatch,
-    required TResult Function(_ProxyLoginZPSalesOrgNotMatch value)
-        proxyLoginZPSalesOrgNotMatch,
+    required TResult Function(_CannotProxyLoginWithCurrentRole value)
+        cannotProxyLoginWithCurrentRole,
+    required TResult Function(_CannotProxyLoginRootAdmin value)
+        cannotProxyLoginRootAdmin,
+    required TResult Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    required TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)
+        cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function(_PasswordResetFail value) passwordResetFail,
     required TResult Function(_DeviceNotSupportBiometric value)
         deviceNotSupportBiometric,
@@ -6380,7 +6510,7 @@ class _$ProxyLoginZPSalesOrgNotMatchImpl
     required TResult Function(_AccountCreationIncomplete value)
         accountCreationIncomplete,
   }) {
-    return proxyLoginZPSalesOrgNotMatch(this);
+    return cannotProxyLoginZPAdminWhenIsZPAdmin(this);
   }
 
   @override
@@ -6399,12 +6529,14 @@ class _$ProxyLoginZPSalesOrgNotMatchImpl
     TResult? Function(_AccountExpired value)? accountExpired,
     TResult? Function(_TokenExpired value)? tokenExpired,
     TResult? Function(_AuthenticationFailed value)? authenticationFailed,
-    TResult? Function(_ProxyLoginRolePermissionNotMatch value)?
-        proxyLoginRolePermissionNotMatch,
-    TResult? Function(_ProxyLoginZPTargetRoleNotMatch value)?
-        proxyLoginZPTargetRoleNotMatch,
-    TResult? Function(_ProxyLoginZPSalesOrgNotMatch value)?
-        proxyLoginZPSalesOrgNotMatch,
+    TResult? Function(_CannotProxyLoginWithCurrentRole value)?
+        cannotProxyLoginWithCurrentRole,
+    TResult? Function(_CannotProxyLoginRootAdmin value)?
+        cannotProxyLoginRootAdmin,
+    TResult? Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)?
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult? Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
+        cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function(_PasswordResetFail value)? passwordResetFail,
     TResult? Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
@@ -6447,7 +6579,7 @@ class _$ProxyLoginZPSalesOrgNotMatchImpl
     TResult? Function(_AccountCreationIncomplete value)?
         accountCreationIncomplete,
   }) {
-    return proxyLoginZPSalesOrgNotMatch?.call(this);
+    return cannotProxyLoginZPAdminWhenIsZPAdmin?.call(this);
   }
 
   @override
@@ -6466,12 +6598,14 @@ class _$ProxyLoginZPSalesOrgNotMatchImpl
     TResult Function(_AccountExpired value)? accountExpired,
     TResult Function(_TokenExpired value)? tokenExpired,
     TResult Function(_AuthenticationFailed value)? authenticationFailed,
-    TResult Function(_ProxyLoginRolePermissionNotMatch value)?
-        proxyLoginRolePermissionNotMatch,
-    TResult Function(_ProxyLoginZPTargetRoleNotMatch value)?
-        proxyLoginZPTargetRoleNotMatch,
-    TResult Function(_ProxyLoginZPSalesOrgNotMatch value)?
-        proxyLoginZPSalesOrgNotMatch,
+    TResult Function(_CannotProxyLoginWithCurrentRole value)?
+        cannotProxyLoginWithCurrentRole,
+    TResult Function(_CannotProxyLoginRootAdmin value)?
+        cannotProxyLoginRootAdmin,
+    TResult Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)?
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
+        cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function(_PasswordResetFail value)? passwordResetFail,
     TResult Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
@@ -6515,16 +6649,462 @@ class _$ProxyLoginZPSalesOrgNotMatchImpl
         accountCreationIncomplete,
     required TResult orElse(),
   }) {
-    if (proxyLoginZPSalesOrgNotMatch != null) {
-      return proxyLoginZPSalesOrgNotMatch(this);
+    if (cannotProxyLoginZPAdminWhenIsZPAdmin != null) {
+      return cannotProxyLoginZPAdminWhenIsZPAdmin(this);
     }
     return orElse();
   }
 }
 
-abstract class _ProxyLoginZPSalesOrgNotMatch implements ApiFailure {
-  const factory _ProxyLoginZPSalesOrgNotMatch() =
-      _$ProxyLoginZPSalesOrgNotMatchImpl;
+abstract class _CannotProxyLoginZPAdminWhenIsZPAdmin implements ApiFailure {
+  const factory _CannotProxyLoginZPAdminWhenIsZPAdmin() =
+      _$CannotProxyLoginZPAdminWhenIsZPAdminImpl;
+}
+
+/// @nodoc
+abstract class _$$CannotProxyLoginFromDiffferentSalesOrgImplCopyWith<$Res> {
+  factory _$$CannotProxyLoginFromDiffferentSalesOrgImplCopyWith(
+          _$CannotProxyLoginFromDiffferentSalesOrgImpl value,
+          $Res Function(_$CannotProxyLoginFromDiffferentSalesOrgImpl) then) =
+      __$$CannotProxyLoginFromDiffferentSalesOrgImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$CannotProxyLoginFromDiffferentSalesOrgImplCopyWithImpl<$Res>
+    extends _$ApiFailureCopyWithImpl<$Res,
+        _$CannotProxyLoginFromDiffferentSalesOrgImpl>
+    implements _$$CannotProxyLoginFromDiffferentSalesOrgImplCopyWith<$Res> {
+  __$$CannotProxyLoginFromDiffferentSalesOrgImplCopyWithImpl(
+      _$CannotProxyLoginFromDiffferentSalesOrgImpl _value,
+      $Res Function(_$CannotProxyLoginFromDiffferentSalesOrgImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$CannotProxyLoginFromDiffferentSalesOrgImpl
+    implements _CannotProxyLoginFromDiffferentSalesOrg {
+  const _$CannotProxyLoginFromDiffferentSalesOrgImpl();
+
+  @override
+  String toString() {
+    return 'ApiFailure.cannotProxyLoginFromDiffferentSalesOrg()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$CannotProxyLoginFromDiffferentSalesOrgImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String message) other,
+    required TResult Function(String message) serverError,
+    required TResult Function() poorConnection,
+    required TResult Function() serverTimeout,
+    required TResult Function() userNotFound,
+    required TResult Function() marketplaceTnCAcceptanceError,
+    required TResult Function() invalidEmailAndPasswordCombination,
+    required TResult Function() accountLocked,
+    required TResult Function() accountExpired,
+    required TResult Function() tokenExpired,
+    required TResult Function() authenticationFailed,
+    required TResult Function() cannotProxyLoginWithCurrentRole,
+    required TResult Function() cannotProxyLoginRootAdmin,
+    required TResult Function() cannotProxyLoginZPAdminWhenIsZPAdmin,
+    required TResult Function() cannotProxyLoginFromDiffferentSalesOrg,
+    required TResult Function() passwordResetFail,
+    required TResult Function() deviceNotSupportBiometric,
+    required TResult Function() cannotCheckBiometrics,
+    required TResult Function() noSupportedBiometrics,
+    required TResult Function() invalidBiometric,
+    required TResult Function() priceOverrideNotFound,
+    required TResult Function() productOutOfStock,
+    required TResult Function() photoPermissionFailed,
+    required TResult Function() storagePermissionFailed,
+    required TResult Function() invalidFileFormat,
+    required TResult Function() uploadCountExcideLimit,
+    required TResult Function() invalidDomain,
+    required TResult Function() productDetailRoute,
+    required TResult Function() orderDetailRoute,
+    required TResult Function() returnDetailRoute,
+    required TResult Function() paymentDetailRoute,
+    required TResult Function() invoiceDetailRoute,
+    required TResult Function() languageChangeFail,
+    required TResult Function() scannedProductNotFound,
+    required TResult Function(bool permanentlyDenied) cameraPermissionFailed,
+    required TResult Function() userNameNotFound,
+    required TResult Function() accountBlocked,
+    required TResult Function() uploadedFileSizeExceed,
+    required TResult Function(String adviceNumber) paymentAdviceDeleteFailed,
+    required TResult Function() allReorderItemInvalid,
+    required TResult Function(String materialNumber) reorderItemInvalid,
+    required TResult Function(String maximumNumber) maximumCartQuantityExceed,
+    required TResult Function() cartHasDifferentAddress,
+    required TResult Function() articleannuncementTagFetchingError,
+    required TResult Function() attachmentDownloadError,
+    required TResult Function(String message) openDownloadedFileError,
+    required TResult Function() addAnimalHealthWithNormalProductToCart,
+    required TResult Function() missingzzHtmcs,
+    required TResult Function() stockInfoNotAvailable,
+    required TResult Function() accountCreationIncomplete,
+  }) {
+    return cannotProxyLoginFromDiffferentSalesOrg();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String message)? other,
+    TResult? Function(String message)? serverError,
+    TResult? Function()? poorConnection,
+    TResult? Function()? serverTimeout,
+    TResult? Function()? userNotFound,
+    TResult? Function()? marketplaceTnCAcceptanceError,
+    TResult? Function()? invalidEmailAndPasswordCombination,
+    TResult? Function()? accountLocked,
+    TResult? Function()? accountExpired,
+    TResult? Function()? tokenExpired,
+    TResult? Function()? authenticationFailed,
+    TResult? Function()? cannotProxyLoginWithCurrentRole,
+    TResult? Function()? cannotProxyLoginRootAdmin,
+    TResult? Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult? Function()? cannotProxyLoginFromDiffferentSalesOrg,
+    TResult? Function()? passwordResetFail,
+    TResult? Function()? deviceNotSupportBiometric,
+    TResult? Function()? cannotCheckBiometrics,
+    TResult? Function()? noSupportedBiometrics,
+    TResult? Function()? invalidBiometric,
+    TResult? Function()? priceOverrideNotFound,
+    TResult? Function()? productOutOfStock,
+    TResult? Function()? photoPermissionFailed,
+    TResult? Function()? storagePermissionFailed,
+    TResult? Function()? invalidFileFormat,
+    TResult? Function()? uploadCountExcideLimit,
+    TResult? Function()? invalidDomain,
+    TResult? Function()? productDetailRoute,
+    TResult? Function()? orderDetailRoute,
+    TResult? Function()? returnDetailRoute,
+    TResult? Function()? paymentDetailRoute,
+    TResult? Function()? invoiceDetailRoute,
+    TResult? Function()? languageChangeFail,
+    TResult? Function()? scannedProductNotFound,
+    TResult? Function(bool permanentlyDenied)? cameraPermissionFailed,
+    TResult? Function()? userNameNotFound,
+    TResult? Function()? accountBlocked,
+    TResult? Function()? uploadedFileSizeExceed,
+    TResult? Function(String adviceNumber)? paymentAdviceDeleteFailed,
+    TResult? Function()? allReorderItemInvalid,
+    TResult? Function(String materialNumber)? reorderItemInvalid,
+    TResult? Function(String maximumNumber)? maximumCartQuantityExceed,
+    TResult? Function()? cartHasDifferentAddress,
+    TResult? Function()? articleannuncementTagFetchingError,
+    TResult? Function()? attachmentDownloadError,
+    TResult? Function(String message)? openDownloadedFileError,
+    TResult? Function()? addAnimalHealthWithNormalProductToCart,
+    TResult? Function()? missingzzHtmcs,
+    TResult? Function()? stockInfoNotAvailable,
+    TResult? Function()? accountCreationIncomplete,
+  }) {
+    return cannotProxyLoginFromDiffferentSalesOrg?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String message)? other,
+    TResult Function(String message)? serverError,
+    TResult Function()? poorConnection,
+    TResult Function()? serverTimeout,
+    TResult Function()? userNotFound,
+    TResult Function()? marketplaceTnCAcceptanceError,
+    TResult Function()? invalidEmailAndPasswordCombination,
+    TResult Function()? accountLocked,
+    TResult Function()? accountExpired,
+    TResult Function()? tokenExpired,
+    TResult Function()? authenticationFailed,
+    TResult Function()? cannotProxyLoginWithCurrentRole,
+    TResult Function()? cannotProxyLoginRootAdmin,
+    TResult Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult Function()? cannotProxyLoginFromDiffferentSalesOrg,
+    TResult Function()? passwordResetFail,
+    TResult Function()? deviceNotSupportBiometric,
+    TResult Function()? cannotCheckBiometrics,
+    TResult Function()? noSupportedBiometrics,
+    TResult Function()? invalidBiometric,
+    TResult Function()? priceOverrideNotFound,
+    TResult Function()? productOutOfStock,
+    TResult Function()? photoPermissionFailed,
+    TResult Function()? storagePermissionFailed,
+    TResult Function()? invalidFileFormat,
+    TResult Function()? uploadCountExcideLimit,
+    TResult Function()? invalidDomain,
+    TResult Function()? productDetailRoute,
+    TResult Function()? orderDetailRoute,
+    TResult Function()? returnDetailRoute,
+    TResult Function()? paymentDetailRoute,
+    TResult Function()? invoiceDetailRoute,
+    TResult Function()? languageChangeFail,
+    TResult Function()? scannedProductNotFound,
+    TResult Function(bool permanentlyDenied)? cameraPermissionFailed,
+    TResult Function()? userNameNotFound,
+    TResult Function()? accountBlocked,
+    TResult Function()? uploadedFileSizeExceed,
+    TResult Function(String adviceNumber)? paymentAdviceDeleteFailed,
+    TResult Function()? allReorderItemInvalid,
+    TResult Function(String materialNumber)? reorderItemInvalid,
+    TResult Function(String maximumNumber)? maximumCartQuantityExceed,
+    TResult Function()? cartHasDifferentAddress,
+    TResult Function()? articleannuncementTagFetchingError,
+    TResult Function()? attachmentDownloadError,
+    TResult Function(String message)? openDownloadedFileError,
+    TResult Function()? addAnimalHealthWithNormalProductToCart,
+    TResult Function()? missingzzHtmcs,
+    TResult Function()? stockInfoNotAvailable,
+    TResult Function()? accountCreationIncomplete,
+    required TResult orElse(),
+  }) {
+    if (cannotProxyLoginFromDiffferentSalesOrg != null) {
+      return cannotProxyLoginFromDiffferentSalesOrg();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Other value) other,
+    required TResult Function(_ServerError value) serverError,
+    required TResult Function(_PoorConnection value) poorConnection,
+    required TResult Function(_ServerTimeout value) serverTimeout,
+    required TResult Function(_UserNotFound value) userNotFound,
+    required TResult Function(_MarketPlaceTnCAcceptanceError value)
+        marketplaceTnCAcceptanceError,
+    required TResult Function(_InvalidEmailAndPasswordCombination value)
+        invalidEmailAndPasswordCombination,
+    required TResult Function(_AccountLocked value) accountLocked,
+    required TResult Function(_AccountExpired value) accountExpired,
+    required TResult Function(_TokenExpired value) tokenExpired,
+    required TResult Function(_AuthenticationFailed value) authenticationFailed,
+    required TResult Function(_CannotProxyLoginWithCurrentRole value)
+        cannotProxyLoginWithCurrentRole,
+    required TResult Function(_CannotProxyLoginRootAdmin value)
+        cannotProxyLoginRootAdmin,
+    required TResult Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    required TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)
+        cannotProxyLoginFromDiffferentSalesOrg,
+    required TResult Function(_PasswordResetFail value) passwordResetFail,
+    required TResult Function(_DeviceNotSupportBiometric value)
+        deviceNotSupportBiometric,
+    required TResult Function(_CannotCheckBiometrics value)
+        cannotCheckBiometrics,
+    required TResult Function(_NoSupportedBiometrics value)
+        noSupportedBiometrics,
+    required TResult Function(_InvalidBiometric value) invalidBiometric,
+    required TResult Function(_PriceOverrideNotFound value)
+        priceOverrideNotFound,
+    required TResult Function(_ProductOutOfStock value) productOutOfStock,
+    required TResult Function(_PhotoPermissionFailed value)
+        photoPermissionFailed,
+    required TResult Function(_StoragePermissionFailed value)
+        storagePermissionFailed,
+    required TResult Function(_InvalidFileFormat value) invalidFileFormat,
+    required TResult Function(_UploadCountExcideLimit value)
+        uploadCountExcideLimit,
+    required TResult Function(_InvalidDomain value) invalidDomain,
+    required TResult Function(_ProductDetailRoute value) productDetailRoute,
+    required TResult Function(_OrderDetailRoute value) orderDetailRoute,
+    required TResult Function(_ReturnDetailRoute value) returnDetailRoute,
+    required TResult Function(_PaymentDetailRoute value) paymentDetailRoute,
+    required TResult Function(_InvoiceDetailRoute value) invoiceDetailRoute,
+    required TResult Function(_LanguageChangeFail value) languageChangeFail,
+    required TResult Function(_ScannedProductNotFound value)
+        scannedProductNotFound,
+    required TResult Function(_CameraPermissionFailed value)
+        cameraPermissionFailed,
+    required TResult Function(_UserNameNotFound value) userNameNotFound,
+    required TResult Function(_AccountBlocked value) accountBlocked,
+    required TResult Function(_UploadedFileSizeExceed value)
+        uploadedFileSizeExceed,
+    required TResult Function(_PaymentAdviceDeleteFailed value)
+        paymentAdviceDeleteFailed,
+    required TResult Function(_AllReorderItemInvalid value)
+        allReorderItemInvalid,
+    required TResult Function(_ReorderItemInvalid value) reorderItemInvalid,
+    required TResult Function(_MaximumCartQuantityExceed value)
+        maximumCartQuantityExceed,
+    required TResult Function(_CartHasDifferentAddress value)
+        cartHasDifferentAddress,
+    required TResult Function(_ArticleannuncementTagFetchingError value)
+        articleannuncementTagFetchingError,
+    required TResult Function(_AttachmentDownloadError value)
+        attachmentDownloadError,
+    required TResult Function(_OpenDownloadedFileError value)
+        openDownloadedFileError,
+    required TResult Function(_AddAnimalHealthWithNormalProductToCart value)
+        addAnimalHealthWithNormalProductToCart,
+    required TResult Function(_MissingzzHtmcs value) missingzzHtmcs,
+    required TResult Function(_StockInfoNotAvailable value)
+        stockInfoNotAvailable,
+    required TResult Function(_AccountCreationIncomplete value)
+        accountCreationIncomplete,
+  }) {
+    return cannotProxyLoginFromDiffferentSalesOrg(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Other value)? other,
+    TResult? Function(_ServerError value)? serverError,
+    TResult? Function(_PoorConnection value)? poorConnection,
+    TResult? Function(_ServerTimeout value)? serverTimeout,
+    TResult? Function(_UserNotFound value)? userNotFound,
+    TResult? Function(_MarketPlaceTnCAcceptanceError value)?
+        marketplaceTnCAcceptanceError,
+    TResult? Function(_InvalidEmailAndPasswordCombination value)?
+        invalidEmailAndPasswordCombination,
+    TResult? Function(_AccountLocked value)? accountLocked,
+    TResult? Function(_AccountExpired value)? accountExpired,
+    TResult? Function(_TokenExpired value)? tokenExpired,
+    TResult? Function(_AuthenticationFailed value)? authenticationFailed,
+    TResult? Function(_CannotProxyLoginWithCurrentRole value)?
+        cannotProxyLoginWithCurrentRole,
+    TResult? Function(_CannotProxyLoginRootAdmin value)?
+        cannotProxyLoginRootAdmin,
+    TResult? Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)?
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult? Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
+        cannotProxyLoginFromDiffferentSalesOrg,
+    TResult? Function(_PasswordResetFail value)? passwordResetFail,
+    TResult? Function(_DeviceNotSupportBiometric value)?
+        deviceNotSupportBiometric,
+    TResult? Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
+    TResult? Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
+    TResult? Function(_InvalidBiometric value)? invalidBiometric,
+    TResult? Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
+    TResult? Function(_ProductOutOfStock value)? productOutOfStock,
+    TResult? Function(_PhotoPermissionFailed value)? photoPermissionFailed,
+    TResult? Function(_StoragePermissionFailed value)? storagePermissionFailed,
+    TResult? Function(_InvalidFileFormat value)? invalidFileFormat,
+    TResult? Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
+    TResult? Function(_InvalidDomain value)? invalidDomain,
+    TResult? Function(_ProductDetailRoute value)? productDetailRoute,
+    TResult? Function(_OrderDetailRoute value)? orderDetailRoute,
+    TResult? Function(_ReturnDetailRoute value)? returnDetailRoute,
+    TResult? Function(_PaymentDetailRoute value)? paymentDetailRoute,
+    TResult? Function(_InvoiceDetailRoute value)? invoiceDetailRoute,
+    TResult? Function(_LanguageChangeFail value)? languageChangeFail,
+    TResult? Function(_ScannedProductNotFound value)? scannedProductNotFound,
+    TResult? Function(_CameraPermissionFailed value)? cameraPermissionFailed,
+    TResult? Function(_UserNameNotFound value)? userNameNotFound,
+    TResult? Function(_AccountBlocked value)? accountBlocked,
+    TResult? Function(_UploadedFileSizeExceed value)? uploadedFileSizeExceed,
+    TResult? Function(_PaymentAdviceDeleteFailed value)?
+        paymentAdviceDeleteFailed,
+    TResult? Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult? Function(_ReorderItemInvalid value)? reorderItemInvalid,
+    TResult? Function(_MaximumCartQuantityExceed value)?
+        maximumCartQuantityExceed,
+    TResult? Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
+    TResult? Function(_ArticleannuncementTagFetchingError value)?
+        articleannuncementTagFetchingError,
+    TResult? Function(_AttachmentDownloadError value)? attachmentDownloadError,
+    TResult? Function(_OpenDownloadedFileError value)? openDownloadedFileError,
+    TResult? Function(_AddAnimalHealthWithNormalProductToCart value)?
+        addAnimalHealthWithNormalProductToCart,
+    TResult? Function(_MissingzzHtmcs value)? missingzzHtmcs,
+    TResult? Function(_StockInfoNotAvailable value)? stockInfoNotAvailable,
+    TResult? Function(_AccountCreationIncomplete value)?
+        accountCreationIncomplete,
+  }) {
+    return cannotProxyLoginFromDiffferentSalesOrg?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Other value)? other,
+    TResult Function(_ServerError value)? serverError,
+    TResult Function(_PoorConnection value)? poorConnection,
+    TResult Function(_ServerTimeout value)? serverTimeout,
+    TResult Function(_UserNotFound value)? userNotFound,
+    TResult Function(_MarketPlaceTnCAcceptanceError value)?
+        marketplaceTnCAcceptanceError,
+    TResult Function(_InvalidEmailAndPasswordCombination value)?
+        invalidEmailAndPasswordCombination,
+    TResult Function(_AccountLocked value)? accountLocked,
+    TResult Function(_AccountExpired value)? accountExpired,
+    TResult Function(_TokenExpired value)? tokenExpired,
+    TResult Function(_AuthenticationFailed value)? authenticationFailed,
+    TResult Function(_CannotProxyLoginWithCurrentRole value)?
+        cannotProxyLoginWithCurrentRole,
+    TResult Function(_CannotProxyLoginRootAdmin value)?
+        cannotProxyLoginRootAdmin,
+    TResult Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)?
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
+        cannotProxyLoginFromDiffferentSalesOrg,
+    TResult Function(_PasswordResetFail value)? passwordResetFail,
+    TResult Function(_DeviceNotSupportBiometric value)?
+        deviceNotSupportBiometric,
+    TResult Function(_CannotCheckBiometrics value)? cannotCheckBiometrics,
+    TResult Function(_NoSupportedBiometrics value)? noSupportedBiometrics,
+    TResult Function(_InvalidBiometric value)? invalidBiometric,
+    TResult Function(_PriceOverrideNotFound value)? priceOverrideNotFound,
+    TResult Function(_ProductOutOfStock value)? productOutOfStock,
+    TResult Function(_PhotoPermissionFailed value)? photoPermissionFailed,
+    TResult Function(_StoragePermissionFailed value)? storagePermissionFailed,
+    TResult Function(_InvalidFileFormat value)? invalidFileFormat,
+    TResult Function(_UploadCountExcideLimit value)? uploadCountExcideLimit,
+    TResult Function(_InvalidDomain value)? invalidDomain,
+    TResult Function(_ProductDetailRoute value)? productDetailRoute,
+    TResult Function(_OrderDetailRoute value)? orderDetailRoute,
+    TResult Function(_ReturnDetailRoute value)? returnDetailRoute,
+    TResult Function(_PaymentDetailRoute value)? paymentDetailRoute,
+    TResult Function(_InvoiceDetailRoute value)? invoiceDetailRoute,
+    TResult Function(_LanguageChangeFail value)? languageChangeFail,
+    TResult Function(_ScannedProductNotFound value)? scannedProductNotFound,
+    TResult Function(_CameraPermissionFailed value)? cameraPermissionFailed,
+    TResult Function(_UserNameNotFound value)? userNameNotFound,
+    TResult Function(_AccountBlocked value)? accountBlocked,
+    TResult Function(_UploadedFileSizeExceed value)? uploadedFileSizeExceed,
+    TResult Function(_PaymentAdviceDeleteFailed value)?
+        paymentAdviceDeleteFailed,
+    TResult Function(_AllReorderItemInvalid value)? allReorderItemInvalid,
+    TResult Function(_ReorderItemInvalid value)? reorderItemInvalid,
+    TResult Function(_MaximumCartQuantityExceed value)?
+        maximumCartQuantityExceed,
+    TResult Function(_CartHasDifferentAddress value)? cartHasDifferentAddress,
+    TResult Function(_ArticleannuncementTagFetchingError value)?
+        articleannuncementTagFetchingError,
+    TResult Function(_AttachmentDownloadError value)? attachmentDownloadError,
+    TResult Function(_OpenDownloadedFileError value)? openDownloadedFileError,
+    TResult Function(_AddAnimalHealthWithNormalProductToCart value)?
+        addAnimalHealthWithNormalProductToCart,
+    TResult Function(_MissingzzHtmcs value)? missingzzHtmcs,
+    TResult Function(_StockInfoNotAvailable value)? stockInfoNotAvailable,
+    TResult Function(_AccountCreationIncomplete value)?
+        accountCreationIncomplete,
+    required TResult orElse(),
+  }) {
+    if (cannotProxyLoginFromDiffferentSalesOrg != null) {
+      return cannotProxyLoginFromDiffferentSalesOrg(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _CannotProxyLoginFromDiffferentSalesOrg implements ApiFailure {
+  const factory _CannotProxyLoginFromDiffferentSalesOrg() =
+      _$CannotProxyLoginFromDiffferentSalesOrgImpl;
 }
 
 /// @nodoc
@@ -6576,9 +7156,10 @@ class _$PasswordResetFailImpl implements _PasswordResetFail {
     required TResult Function() accountExpired,
     required TResult Function() tokenExpired,
     required TResult Function() authenticationFailed,
-    required TResult Function() proxyLoginRolePermissionNotMatch,
-    required TResult Function() proxyLoginZPTargetRoleNotMatch,
-    required TResult Function() proxyLoginZPSalesOrgNotMatch,
+    required TResult Function() cannotProxyLoginWithCurrentRole,
+    required TResult Function() cannotProxyLoginRootAdmin,
+    required TResult Function() cannotProxyLoginZPAdminWhenIsZPAdmin,
+    required TResult Function() cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function() passwordResetFail,
     required TResult Function() deviceNotSupportBiometric,
     required TResult Function() cannotCheckBiometrics,
@@ -6632,9 +7213,10 @@ class _$PasswordResetFailImpl implements _PasswordResetFail {
     TResult? Function()? accountExpired,
     TResult? Function()? tokenExpired,
     TResult? Function()? authenticationFailed,
-    TResult? Function()? proxyLoginRolePermissionNotMatch,
-    TResult? Function()? proxyLoginZPTargetRoleNotMatch,
-    TResult? Function()? proxyLoginZPSalesOrgNotMatch,
+    TResult? Function()? cannotProxyLoginWithCurrentRole,
+    TResult? Function()? cannotProxyLoginRootAdmin,
+    TResult? Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult? Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function()? passwordResetFail,
     TResult? Function()? deviceNotSupportBiometric,
     TResult? Function()? cannotCheckBiometrics,
@@ -6688,9 +7270,10 @@ class _$PasswordResetFailImpl implements _PasswordResetFail {
     TResult Function()? accountExpired,
     TResult Function()? tokenExpired,
     TResult Function()? authenticationFailed,
-    TResult Function()? proxyLoginRolePermissionNotMatch,
-    TResult Function()? proxyLoginZPTargetRoleNotMatch,
-    TResult Function()? proxyLoginZPSalesOrgNotMatch,
+    TResult Function()? cannotProxyLoginWithCurrentRole,
+    TResult Function()? cannotProxyLoginRootAdmin,
+    TResult Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function()? passwordResetFail,
     TResult Function()? deviceNotSupportBiometric,
     TResult Function()? cannotCheckBiometrics,
@@ -6750,12 +7333,14 @@ class _$PasswordResetFailImpl implements _PasswordResetFail {
     required TResult Function(_AccountExpired value) accountExpired,
     required TResult Function(_TokenExpired value) tokenExpired,
     required TResult Function(_AuthenticationFailed value) authenticationFailed,
-    required TResult Function(_ProxyLoginRolePermissionNotMatch value)
-        proxyLoginRolePermissionNotMatch,
-    required TResult Function(_ProxyLoginZPTargetRoleNotMatch value)
-        proxyLoginZPTargetRoleNotMatch,
-    required TResult Function(_ProxyLoginZPSalesOrgNotMatch value)
-        proxyLoginZPSalesOrgNotMatch,
+    required TResult Function(_CannotProxyLoginWithCurrentRole value)
+        cannotProxyLoginWithCurrentRole,
+    required TResult Function(_CannotProxyLoginRootAdmin value)
+        cannotProxyLoginRootAdmin,
+    required TResult Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    required TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)
+        cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function(_PasswordResetFail value) passwordResetFail,
     required TResult Function(_DeviceNotSupportBiometric value)
         deviceNotSupportBiometric,
@@ -6831,12 +7416,14 @@ class _$PasswordResetFailImpl implements _PasswordResetFail {
     TResult? Function(_AccountExpired value)? accountExpired,
     TResult? Function(_TokenExpired value)? tokenExpired,
     TResult? Function(_AuthenticationFailed value)? authenticationFailed,
-    TResult? Function(_ProxyLoginRolePermissionNotMatch value)?
-        proxyLoginRolePermissionNotMatch,
-    TResult? Function(_ProxyLoginZPTargetRoleNotMatch value)?
-        proxyLoginZPTargetRoleNotMatch,
-    TResult? Function(_ProxyLoginZPSalesOrgNotMatch value)?
-        proxyLoginZPSalesOrgNotMatch,
+    TResult? Function(_CannotProxyLoginWithCurrentRole value)?
+        cannotProxyLoginWithCurrentRole,
+    TResult? Function(_CannotProxyLoginRootAdmin value)?
+        cannotProxyLoginRootAdmin,
+    TResult? Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)?
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult? Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
+        cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function(_PasswordResetFail value)? passwordResetFail,
     TResult? Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
@@ -6898,12 +7485,14 @@ class _$PasswordResetFailImpl implements _PasswordResetFail {
     TResult Function(_AccountExpired value)? accountExpired,
     TResult Function(_TokenExpired value)? tokenExpired,
     TResult Function(_AuthenticationFailed value)? authenticationFailed,
-    TResult Function(_ProxyLoginRolePermissionNotMatch value)?
-        proxyLoginRolePermissionNotMatch,
-    TResult Function(_ProxyLoginZPTargetRoleNotMatch value)?
-        proxyLoginZPTargetRoleNotMatch,
-    TResult Function(_ProxyLoginZPSalesOrgNotMatch value)?
-        proxyLoginZPSalesOrgNotMatch,
+    TResult Function(_CannotProxyLoginWithCurrentRole value)?
+        cannotProxyLoginWithCurrentRole,
+    TResult Function(_CannotProxyLoginRootAdmin value)?
+        cannotProxyLoginRootAdmin,
+    TResult Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)?
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
+        cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function(_PasswordResetFail value)? passwordResetFail,
     TResult Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
@@ -7010,9 +7599,10 @@ class _$DeviceNotSupportBiometricImpl implements _DeviceNotSupportBiometric {
     required TResult Function() accountExpired,
     required TResult Function() tokenExpired,
     required TResult Function() authenticationFailed,
-    required TResult Function() proxyLoginRolePermissionNotMatch,
-    required TResult Function() proxyLoginZPTargetRoleNotMatch,
-    required TResult Function() proxyLoginZPSalesOrgNotMatch,
+    required TResult Function() cannotProxyLoginWithCurrentRole,
+    required TResult Function() cannotProxyLoginRootAdmin,
+    required TResult Function() cannotProxyLoginZPAdminWhenIsZPAdmin,
+    required TResult Function() cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function() passwordResetFail,
     required TResult Function() deviceNotSupportBiometric,
     required TResult Function() cannotCheckBiometrics,
@@ -7066,9 +7656,10 @@ class _$DeviceNotSupportBiometricImpl implements _DeviceNotSupportBiometric {
     TResult? Function()? accountExpired,
     TResult? Function()? tokenExpired,
     TResult? Function()? authenticationFailed,
-    TResult? Function()? proxyLoginRolePermissionNotMatch,
-    TResult? Function()? proxyLoginZPTargetRoleNotMatch,
-    TResult? Function()? proxyLoginZPSalesOrgNotMatch,
+    TResult? Function()? cannotProxyLoginWithCurrentRole,
+    TResult? Function()? cannotProxyLoginRootAdmin,
+    TResult? Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult? Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function()? passwordResetFail,
     TResult? Function()? deviceNotSupportBiometric,
     TResult? Function()? cannotCheckBiometrics,
@@ -7122,9 +7713,10 @@ class _$DeviceNotSupportBiometricImpl implements _DeviceNotSupportBiometric {
     TResult Function()? accountExpired,
     TResult Function()? tokenExpired,
     TResult Function()? authenticationFailed,
-    TResult Function()? proxyLoginRolePermissionNotMatch,
-    TResult Function()? proxyLoginZPTargetRoleNotMatch,
-    TResult Function()? proxyLoginZPSalesOrgNotMatch,
+    TResult Function()? cannotProxyLoginWithCurrentRole,
+    TResult Function()? cannotProxyLoginRootAdmin,
+    TResult Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function()? passwordResetFail,
     TResult Function()? deviceNotSupportBiometric,
     TResult Function()? cannotCheckBiometrics,
@@ -7184,12 +7776,14 @@ class _$DeviceNotSupportBiometricImpl implements _DeviceNotSupportBiometric {
     required TResult Function(_AccountExpired value) accountExpired,
     required TResult Function(_TokenExpired value) tokenExpired,
     required TResult Function(_AuthenticationFailed value) authenticationFailed,
-    required TResult Function(_ProxyLoginRolePermissionNotMatch value)
-        proxyLoginRolePermissionNotMatch,
-    required TResult Function(_ProxyLoginZPTargetRoleNotMatch value)
-        proxyLoginZPTargetRoleNotMatch,
-    required TResult Function(_ProxyLoginZPSalesOrgNotMatch value)
-        proxyLoginZPSalesOrgNotMatch,
+    required TResult Function(_CannotProxyLoginWithCurrentRole value)
+        cannotProxyLoginWithCurrentRole,
+    required TResult Function(_CannotProxyLoginRootAdmin value)
+        cannotProxyLoginRootAdmin,
+    required TResult Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    required TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)
+        cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function(_PasswordResetFail value) passwordResetFail,
     required TResult Function(_DeviceNotSupportBiometric value)
         deviceNotSupportBiometric,
@@ -7265,12 +7859,14 @@ class _$DeviceNotSupportBiometricImpl implements _DeviceNotSupportBiometric {
     TResult? Function(_AccountExpired value)? accountExpired,
     TResult? Function(_TokenExpired value)? tokenExpired,
     TResult? Function(_AuthenticationFailed value)? authenticationFailed,
-    TResult? Function(_ProxyLoginRolePermissionNotMatch value)?
-        proxyLoginRolePermissionNotMatch,
-    TResult? Function(_ProxyLoginZPTargetRoleNotMatch value)?
-        proxyLoginZPTargetRoleNotMatch,
-    TResult? Function(_ProxyLoginZPSalesOrgNotMatch value)?
-        proxyLoginZPSalesOrgNotMatch,
+    TResult? Function(_CannotProxyLoginWithCurrentRole value)?
+        cannotProxyLoginWithCurrentRole,
+    TResult? Function(_CannotProxyLoginRootAdmin value)?
+        cannotProxyLoginRootAdmin,
+    TResult? Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)?
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult? Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
+        cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function(_PasswordResetFail value)? passwordResetFail,
     TResult? Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
@@ -7332,12 +7928,14 @@ class _$DeviceNotSupportBiometricImpl implements _DeviceNotSupportBiometric {
     TResult Function(_AccountExpired value)? accountExpired,
     TResult Function(_TokenExpired value)? tokenExpired,
     TResult Function(_AuthenticationFailed value)? authenticationFailed,
-    TResult Function(_ProxyLoginRolePermissionNotMatch value)?
-        proxyLoginRolePermissionNotMatch,
-    TResult Function(_ProxyLoginZPTargetRoleNotMatch value)?
-        proxyLoginZPTargetRoleNotMatch,
-    TResult Function(_ProxyLoginZPSalesOrgNotMatch value)?
-        proxyLoginZPSalesOrgNotMatch,
+    TResult Function(_CannotProxyLoginWithCurrentRole value)?
+        cannotProxyLoginWithCurrentRole,
+    TResult Function(_CannotProxyLoginRootAdmin value)?
+        cannotProxyLoginRootAdmin,
+    TResult Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)?
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
+        cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function(_PasswordResetFail value)? passwordResetFail,
     TResult Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
@@ -7443,9 +8041,10 @@ class _$CannotCheckBiometricsImpl implements _CannotCheckBiometrics {
     required TResult Function() accountExpired,
     required TResult Function() tokenExpired,
     required TResult Function() authenticationFailed,
-    required TResult Function() proxyLoginRolePermissionNotMatch,
-    required TResult Function() proxyLoginZPTargetRoleNotMatch,
-    required TResult Function() proxyLoginZPSalesOrgNotMatch,
+    required TResult Function() cannotProxyLoginWithCurrentRole,
+    required TResult Function() cannotProxyLoginRootAdmin,
+    required TResult Function() cannotProxyLoginZPAdminWhenIsZPAdmin,
+    required TResult Function() cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function() passwordResetFail,
     required TResult Function() deviceNotSupportBiometric,
     required TResult Function() cannotCheckBiometrics,
@@ -7499,9 +8098,10 @@ class _$CannotCheckBiometricsImpl implements _CannotCheckBiometrics {
     TResult? Function()? accountExpired,
     TResult? Function()? tokenExpired,
     TResult? Function()? authenticationFailed,
-    TResult? Function()? proxyLoginRolePermissionNotMatch,
-    TResult? Function()? proxyLoginZPTargetRoleNotMatch,
-    TResult? Function()? proxyLoginZPSalesOrgNotMatch,
+    TResult? Function()? cannotProxyLoginWithCurrentRole,
+    TResult? Function()? cannotProxyLoginRootAdmin,
+    TResult? Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult? Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function()? passwordResetFail,
     TResult? Function()? deviceNotSupportBiometric,
     TResult? Function()? cannotCheckBiometrics,
@@ -7555,9 +8155,10 @@ class _$CannotCheckBiometricsImpl implements _CannotCheckBiometrics {
     TResult Function()? accountExpired,
     TResult Function()? tokenExpired,
     TResult Function()? authenticationFailed,
-    TResult Function()? proxyLoginRolePermissionNotMatch,
-    TResult Function()? proxyLoginZPTargetRoleNotMatch,
-    TResult Function()? proxyLoginZPSalesOrgNotMatch,
+    TResult Function()? cannotProxyLoginWithCurrentRole,
+    TResult Function()? cannotProxyLoginRootAdmin,
+    TResult Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function()? passwordResetFail,
     TResult Function()? deviceNotSupportBiometric,
     TResult Function()? cannotCheckBiometrics,
@@ -7617,12 +8218,14 @@ class _$CannotCheckBiometricsImpl implements _CannotCheckBiometrics {
     required TResult Function(_AccountExpired value) accountExpired,
     required TResult Function(_TokenExpired value) tokenExpired,
     required TResult Function(_AuthenticationFailed value) authenticationFailed,
-    required TResult Function(_ProxyLoginRolePermissionNotMatch value)
-        proxyLoginRolePermissionNotMatch,
-    required TResult Function(_ProxyLoginZPTargetRoleNotMatch value)
-        proxyLoginZPTargetRoleNotMatch,
-    required TResult Function(_ProxyLoginZPSalesOrgNotMatch value)
-        proxyLoginZPSalesOrgNotMatch,
+    required TResult Function(_CannotProxyLoginWithCurrentRole value)
+        cannotProxyLoginWithCurrentRole,
+    required TResult Function(_CannotProxyLoginRootAdmin value)
+        cannotProxyLoginRootAdmin,
+    required TResult Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    required TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)
+        cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function(_PasswordResetFail value) passwordResetFail,
     required TResult Function(_DeviceNotSupportBiometric value)
         deviceNotSupportBiometric,
@@ -7698,12 +8301,14 @@ class _$CannotCheckBiometricsImpl implements _CannotCheckBiometrics {
     TResult? Function(_AccountExpired value)? accountExpired,
     TResult? Function(_TokenExpired value)? tokenExpired,
     TResult? Function(_AuthenticationFailed value)? authenticationFailed,
-    TResult? Function(_ProxyLoginRolePermissionNotMatch value)?
-        proxyLoginRolePermissionNotMatch,
-    TResult? Function(_ProxyLoginZPTargetRoleNotMatch value)?
-        proxyLoginZPTargetRoleNotMatch,
-    TResult? Function(_ProxyLoginZPSalesOrgNotMatch value)?
-        proxyLoginZPSalesOrgNotMatch,
+    TResult? Function(_CannotProxyLoginWithCurrentRole value)?
+        cannotProxyLoginWithCurrentRole,
+    TResult? Function(_CannotProxyLoginRootAdmin value)?
+        cannotProxyLoginRootAdmin,
+    TResult? Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)?
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult? Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
+        cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function(_PasswordResetFail value)? passwordResetFail,
     TResult? Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
@@ -7765,12 +8370,14 @@ class _$CannotCheckBiometricsImpl implements _CannotCheckBiometrics {
     TResult Function(_AccountExpired value)? accountExpired,
     TResult Function(_TokenExpired value)? tokenExpired,
     TResult Function(_AuthenticationFailed value)? authenticationFailed,
-    TResult Function(_ProxyLoginRolePermissionNotMatch value)?
-        proxyLoginRolePermissionNotMatch,
-    TResult Function(_ProxyLoginZPTargetRoleNotMatch value)?
-        proxyLoginZPTargetRoleNotMatch,
-    TResult Function(_ProxyLoginZPSalesOrgNotMatch value)?
-        proxyLoginZPSalesOrgNotMatch,
+    TResult Function(_CannotProxyLoginWithCurrentRole value)?
+        cannotProxyLoginWithCurrentRole,
+    TResult Function(_CannotProxyLoginRootAdmin value)?
+        cannotProxyLoginRootAdmin,
+    TResult Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)?
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
+        cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function(_PasswordResetFail value)? passwordResetFail,
     TResult Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
@@ -7876,9 +8483,10 @@ class _$NoSupportedBiometricsImpl implements _NoSupportedBiometrics {
     required TResult Function() accountExpired,
     required TResult Function() tokenExpired,
     required TResult Function() authenticationFailed,
-    required TResult Function() proxyLoginRolePermissionNotMatch,
-    required TResult Function() proxyLoginZPTargetRoleNotMatch,
-    required TResult Function() proxyLoginZPSalesOrgNotMatch,
+    required TResult Function() cannotProxyLoginWithCurrentRole,
+    required TResult Function() cannotProxyLoginRootAdmin,
+    required TResult Function() cannotProxyLoginZPAdminWhenIsZPAdmin,
+    required TResult Function() cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function() passwordResetFail,
     required TResult Function() deviceNotSupportBiometric,
     required TResult Function() cannotCheckBiometrics,
@@ -7932,9 +8540,10 @@ class _$NoSupportedBiometricsImpl implements _NoSupportedBiometrics {
     TResult? Function()? accountExpired,
     TResult? Function()? tokenExpired,
     TResult? Function()? authenticationFailed,
-    TResult? Function()? proxyLoginRolePermissionNotMatch,
-    TResult? Function()? proxyLoginZPTargetRoleNotMatch,
-    TResult? Function()? proxyLoginZPSalesOrgNotMatch,
+    TResult? Function()? cannotProxyLoginWithCurrentRole,
+    TResult? Function()? cannotProxyLoginRootAdmin,
+    TResult? Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult? Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function()? passwordResetFail,
     TResult? Function()? deviceNotSupportBiometric,
     TResult? Function()? cannotCheckBiometrics,
@@ -7988,9 +8597,10 @@ class _$NoSupportedBiometricsImpl implements _NoSupportedBiometrics {
     TResult Function()? accountExpired,
     TResult Function()? tokenExpired,
     TResult Function()? authenticationFailed,
-    TResult Function()? proxyLoginRolePermissionNotMatch,
-    TResult Function()? proxyLoginZPTargetRoleNotMatch,
-    TResult Function()? proxyLoginZPSalesOrgNotMatch,
+    TResult Function()? cannotProxyLoginWithCurrentRole,
+    TResult Function()? cannotProxyLoginRootAdmin,
+    TResult Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function()? passwordResetFail,
     TResult Function()? deviceNotSupportBiometric,
     TResult Function()? cannotCheckBiometrics,
@@ -8050,12 +8660,14 @@ class _$NoSupportedBiometricsImpl implements _NoSupportedBiometrics {
     required TResult Function(_AccountExpired value) accountExpired,
     required TResult Function(_TokenExpired value) tokenExpired,
     required TResult Function(_AuthenticationFailed value) authenticationFailed,
-    required TResult Function(_ProxyLoginRolePermissionNotMatch value)
-        proxyLoginRolePermissionNotMatch,
-    required TResult Function(_ProxyLoginZPTargetRoleNotMatch value)
-        proxyLoginZPTargetRoleNotMatch,
-    required TResult Function(_ProxyLoginZPSalesOrgNotMatch value)
-        proxyLoginZPSalesOrgNotMatch,
+    required TResult Function(_CannotProxyLoginWithCurrentRole value)
+        cannotProxyLoginWithCurrentRole,
+    required TResult Function(_CannotProxyLoginRootAdmin value)
+        cannotProxyLoginRootAdmin,
+    required TResult Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    required TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)
+        cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function(_PasswordResetFail value) passwordResetFail,
     required TResult Function(_DeviceNotSupportBiometric value)
         deviceNotSupportBiometric,
@@ -8131,12 +8743,14 @@ class _$NoSupportedBiometricsImpl implements _NoSupportedBiometrics {
     TResult? Function(_AccountExpired value)? accountExpired,
     TResult? Function(_TokenExpired value)? tokenExpired,
     TResult? Function(_AuthenticationFailed value)? authenticationFailed,
-    TResult? Function(_ProxyLoginRolePermissionNotMatch value)?
-        proxyLoginRolePermissionNotMatch,
-    TResult? Function(_ProxyLoginZPTargetRoleNotMatch value)?
-        proxyLoginZPTargetRoleNotMatch,
-    TResult? Function(_ProxyLoginZPSalesOrgNotMatch value)?
-        proxyLoginZPSalesOrgNotMatch,
+    TResult? Function(_CannotProxyLoginWithCurrentRole value)?
+        cannotProxyLoginWithCurrentRole,
+    TResult? Function(_CannotProxyLoginRootAdmin value)?
+        cannotProxyLoginRootAdmin,
+    TResult? Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)?
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult? Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
+        cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function(_PasswordResetFail value)? passwordResetFail,
     TResult? Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
@@ -8198,12 +8812,14 @@ class _$NoSupportedBiometricsImpl implements _NoSupportedBiometrics {
     TResult Function(_AccountExpired value)? accountExpired,
     TResult Function(_TokenExpired value)? tokenExpired,
     TResult Function(_AuthenticationFailed value)? authenticationFailed,
-    TResult Function(_ProxyLoginRolePermissionNotMatch value)?
-        proxyLoginRolePermissionNotMatch,
-    TResult Function(_ProxyLoginZPTargetRoleNotMatch value)?
-        proxyLoginZPTargetRoleNotMatch,
-    TResult Function(_ProxyLoginZPSalesOrgNotMatch value)?
-        proxyLoginZPSalesOrgNotMatch,
+    TResult Function(_CannotProxyLoginWithCurrentRole value)?
+        cannotProxyLoginWithCurrentRole,
+    TResult Function(_CannotProxyLoginRootAdmin value)?
+        cannotProxyLoginRootAdmin,
+    TResult Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)?
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
+        cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function(_PasswordResetFail value)? passwordResetFail,
     TResult Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
@@ -8307,9 +8923,10 @@ class _$InvalidBiometricImpl implements _InvalidBiometric {
     required TResult Function() accountExpired,
     required TResult Function() tokenExpired,
     required TResult Function() authenticationFailed,
-    required TResult Function() proxyLoginRolePermissionNotMatch,
-    required TResult Function() proxyLoginZPTargetRoleNotMatch,
-    required TResult Function() proxyLoginZPSalesOrgNotMatch,
+    required TResult Function() cannotProxyLoginWithCurrentRole,
+    required TResult Function() cannotProxyLoginRootAdmin,
+    required TResult Function() cannotProxyLoginZPAdminWhenIsZPAdmin,
+    required TResult Function() cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function() passwordResetFail,
     required TResult Function() deviceNotSupportBiometric,
     required TResult Function() cannotCheckBiometrics,
@@ -8363,9 +8980,10 @@ class _$InvalidBiometricImpl implements _InvalidBiometric {
     TResult? Function()? accountExpired,
     TResult? Function()? tokenExpired,
     TResult? Function()? authenticationFailed,
-    TResult? Function()? proxyLoginRolePermissionNotMatch,
-    TResult? Function()? proxyLoginZPTargetRoleNotMatch,
-    TResult? Function()? proxyLoginZPSalesOrgNotMatch,
+    TResult? Function()? cannotProxyLoginWithCurrentRole,
+    TResult? Function()? cannotProxyLoginRootAdmin,
+    TResult? Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult? Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function()? passwordResetFail,
     TResult? Function()? deviceNotSupportBiometric,
     TResult? Function()? cannotCheckBiometrics,
@@ -8419,9 +9037,10 @@ class _$InvalidBiometricImpl implements _InvalidBiometric {
     TResult Function()? accountExpired,
     TResult Function()? tokenExpired,
     TResult Function()? authenticationFailed,
-    TResult Function()? proxyLoginRolePermissionNotMatch,
-    TResult Function()? proxyLoginZPTargetRoleNotMatch,
-    TResult Function()? proxyLoginZPSalesOrgNotMatch,
+    TResult Function()? cannotProxyLoginWithCurrentRole,
+    TResult Function()? cannotProxyLoginRootAdmin,
+    TResult Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function()? passwordResetFail,
     TResult Function()? deviceNotSupportBiometric,
     TResult Function()? cannotCheckBiometrics,
@@ -8481,12 +9100,14 @@ class _$InvalidBiometricImpl implements _InvalidBiometric {
     required TResult Function(_AccountExpired value) accountExpired,
     required TResult Function(_TokenExpired value) tokenExpired,
     required TResult Function(_AuthenticationFailed value) authenticationFailed,
-    required TResult Function(_ProxyLoginRolePermissionNotMatch value)
-        proxyLoginRolePermissionNotMatch,
-    required TResult Function(_ProxyLoginZPTargetRoleNotMatch value)
-        proxyLoginZPTargetRoleNotMatch,
-    required TResult Function(_ProxyLoginZPSalesOrgNotMatch value)
-        proxyLoginZPSalesOrgNotMatch,
+    required TResult Function(_CannotProxyLoginWithCurrentRole value)
+        cannotProxyLoginWithCurrentRole,
+    required TResult Function(_CannotProxyLoginRootAdmin value)
+        cannotProxyLoginRootAdmin,
+    required TResult Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    required TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)
+        cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function(_PasswordResetFail value) passwordResetFail,
     required TResult Function(_DeviceNotSupportBiometric value)
         deviceNotSupportBiometric,
@@ -8562,12 +9183,14 @@ class _$InvalidBiometricImpl implements _InvalidBiometric {
     TResult? Function(_AccountExpired value)? accountExpired,
     TResult? Function(_TokenExpired value)? tokenExpired,
     TResult? Function(_AuthenticationFailed value)? authenticationFailed,
-    TResult? Function(_ProxyLoginRolePermissionNotMatch value)?
-        proxyLoginRolePermissionNotMatch,
-    TResult? Function(_ProxyLoginZPTargetRoleNotMatch value)?
-        proxyLoginZPTargetRoleNotMatch,
-    TResult? Function(_ProxyLoginZPSalesOrgNotMatch value)?
-        proxyLoginZPSalesOrgNotMatch,
+    TResult? Function(_CannotProxyLoginWithCurrentRole value)?
+        cannotProxyLoginWithCurrentRole,
+    TResult? Function(_CannotProxyLoginRootAdmin value)?
+        cannotProxyLoginRootAdmin,
+    TResult? Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)?
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult? Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
+        cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function(_PasswordResetFail value)? passwordResetFail,
     TResult? Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
@@ -8629,12 +9252,14 @@ class _$InvalidBiometricImpl implements _InvalidBiometric {
     TResult Function(_AccountExpired value)? accountExpired,
     TResult Function(_TokenExpired value)? tokenExpired,
     TResult Function(_AuthenticationFailed value)? authenticationFailed,
-    TResult Function(_ProxyLoginRolePermissionNotMatch value)?
-        proxyLoginRolePermissionNotMatch,
-    TResult Function(_ProxyLoginZPTargetRoleNotMatch value)?
-        proxyLoginZPTargetRoleNotMatch,
-    TResult Function(_ProxyLoginZPSalesOrgNotMatch value)?
-        proxyLoginZPSalesOrgNotMatch,
+    TResult Function(_CannotProxyLoginWithCurrentRole value)?
+        cannotProxyLoginWithCurrentRole,
+    TResult Function(_CannotProxyLoginRootAdmin value)?
+        cannotProxyLoginRootAdmin,
+    TResult Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)?
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
+        cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function(_PasswordResetFail value)? passwordResetFail,
     TResult Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
@@ -8740,9 +9365,10 @@ class _$PriceOverrideNotFoundImpl implements _PriceOverrideNotFound {
     required TResult Function() accountExpired,
     required TResult Function() tokenExpired,
     required TResult Function() authenticationFailed,
-    required TResult Function() proxyLoginRolePermissionNotMatch,
-    required TResult Function() proxyLoginZPTargetRoleNotMatch,
-    required TResult Function() proxyLoginZPSalesOrgNotMatch,
+    required TResult Function() cannotProxyLoginWithCurrentRole,
+    required TResult Function() cannotProxyLoginRootAdmin,
+    required TResult Function() cannotProxyLoginZPAdminWhenIsZPAdmin,
+    required TResult Function() cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function() passwordResetFail,
     required TResult Function() deviceNotSupportBiometric,
     required TResult Function() cannotCheckBiometrics,
@@ -8796,9 +9422,10 @@ class _$PriceOverrideNotFoundImpl implements _PriceOverrideNotFound {
     TResult? Function()? accountExpired,
     TResult? Function()? tokenExpired,
     TResult? Function()? authenticationFailed,
-    TResult? Function()? proxyLoginRolePermissionNotMatch,
-    TResult? Function()? proxyLoginZPTargetRoleNotMatch,
-    TResult? Function()? proxyLoginZPSalesOrgNotMatch,
+    TResult? Function()? cannotProxyLoginWithCurrentRole,
+    TResult? Function()? cannotProxyLoginRootAdmin,
+    TResult? Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult? Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function()? passwordResetFail,
     TResult? Function()? deviceNotSupportBiometric,
     TResult? Function()? cannotCheckBiometrics,
@@ -8852,9 +9479,10 @@ class _$PriceOverrideNotFoundImpl implements _PriceOverrideNotFound {
     TResult Function()? accountExpired,
     TResult Function()? tokenExpired,
     TResult Function()? authenticationFailed,
-    TResult Function()? proxyLoginRolePermissionNotMatch,
-    TResult Function()? proxyLoginZPTargetRoleNotMatch,
-    TResult Function()? proxyLoginZPSalesOrgNotMatch,
+    TResult Function()? cannotProxyLoginWithCurrentRole,
+    TResult Function()? cannotProxyLoginRootAdmin,
+    TResult Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function()? passwordResetFail,
     TResult Function()? deviceNotSupportBiometric,
     TResult Function()? cannotCheckBiometrics,
@@ -8914,12 +9542,14 @@ class _$PriceOverrideNotFoundImpl implements _PriceOverrideNotFound {
     required TResult Function(_AccountExpired value) accountExpired,
     required TResult Function(_TokenExpired value) tokenExpired,
     required TResult Function(_AuthenticationFailed value) authenticationFailed,
-    required TResult Function(_ProxyLoginRolePermissionNotMatch value)
-        proxyLoginRolePermissionNotMatch,
-    required TResult Function(_ProxyLoginZPTargetRoleNotMatch value)
-        proxyLoginZPTargetRoleNotMatch,
-    required TResult Function(_ProxyLoginZPSalesOrgNotMatch value)
-        proxyLoginZPSalesOrgNotMatch,
+    required TResult Function(_CannotProxyLoginWithCurrentRole value)
+        cannotProxyLoginWithCurrentRole,
+    required TResult Function(_CannotProxyLoginRootAdmin value)
+        cannotProxyLoginRootAdmin,
+    required TResult Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    required TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)
+        cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function(_PasswordResetFail value) passwordResetFail,
     required TResult Function(_DeviceNotSupportBiometric value)
         deviceNotSupportBiometric,
@@ -8995,12 +9625,14 @@ class _$PriceOverrideNotFoundImpl implements _PriceOverrideNotFound {
     TResult? Function(_AccountExpired value)? accountExpired,
     TResult? Function(_TokenExpired value)? tokenExpired,
     TResult? Function(_AuthenticationFailed value)? authenticationFailed,
-    TResult? Function(_ProxyLoginRolePermissionNotMatch value)?
-        proxyLoginRolePermissionNotMatch,
-    TResult? Function(_ProxyLoginZPTargetRoleNotMatch value)?
-        proxyLoginZPTargetRoleNotMatch,
-    TResult? Function(_ProxyLoginZPSalesOrgNotMatch value)?
-        proxyLoginZPSalesOrgNotMatch,
+    TResult? Function(_CannotProxyLoginWithCurrentRole value)?
+        cannotProxyLoginWithCurrentRole,
+    TResult? Function(_CannotProxyLoginRootAdmin value)?
+        cannotProxyLoginRootAdmin,
+    TResult? Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)?
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult? Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
+        cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function(_PasswordResetFail value)? passwordResetFail,
     TResult? Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
@@ -9062,12 +9694,14 @@ class _$PriceOverrideNotFoundImpl implements _PriceOverrideNotFound {
     TResult Function(_AccountExpired value)? accountExpired,
     TResult Function(_TokenExpired value)? tokenExpired,
     TResult Function(_AuthenticationFailed value)? authenticationFailed,
-    TResult Function(_ProxyLoginRolePermissionNotMatch value)?
-        proxyLoginRolePermissionNotMatch,
-    TResult Function(_ProxyLoginZPTargetRoleNotMatch value)?
-        proxyLoginZPTargetRoleNotMatch,
-    TResult Function(_ProxyLoginZPSalesOrgNotMatch value)?
-        proxyLoginZPSalesOrgNotMatch,
+    TResult Function(_CannotProxyLoginWithCurrentRole value)?
+        cannotProxyLoginWithCurrentRole,
+    TResult Function(_CannotProxyLoginRootAdmin value)?
+        cannotProxyLoginRootAdmin,
+    TResult Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)?
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
+        cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function(_PasswordResetFail value)? passwordResetFail,
     TResult Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
@@ -9171,9 +9805,10 @@ class _$ProductOutOfStockImpl implements _ProductOutOfStock {
     required TResult Function() accountExpired,
     required TResult Function() tokenExpired,
     required TResult Function() authenticationFailed,
-    required TResult Function() proxyLoginRolePermissionNotMatch,
-    required TResult Function() proxyLoginZPTargetRoleNotMatch,
-    required TResult Function() proxyLoginZPSalesOrgNotMatch,
+    required TResult Function() cannotProxyLoginWithCurrentRole,
+    required TResult Function() cannotProxyLoginRootAdmin,
+    required TResult Function() cannotProxyLoginZPAdminWhenIsZPAdmin,
+    required TResult Function() cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function() passwordResetFail,
     required TResult Function() deviceNotSupportBiometric,
     required TResult Function() cannotCheckBiometrics,
@@ -9227,9 +9862,10 @@ class _$ProductOutOfStockImpl implements _ProductOutOfStock {
     TResult? Function()? accountExpired,
     TResult? Function()? tokenExpired,
     TResult? Function()? authenticationFailed,
-    TResult? Function()? proxyLoginRolePermissionNotMatch,
-    TResult? Function()? proxyLoginZPTargetRoleNotMatch,
-    TResult? Function()? proxyLoginZPSalesOrgNotMatch,
+    TResult? Function()? cannotProxyLoginWithCurrentRole,
+    TResult? Function()? cannotProxyLoginRootAdmin,
+    TResult? Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult? Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function()? passwordResetFail,
     TResult? Function()? deviceNotSupportBiometric,
     TResult? Function()? cannotCheckBiometrics,
@@ -9283,9 +9919,10 @@ class _$ProductOutOfStockImpl implements _ProductOutOfStock {
     TResult Function()? accountExpired,
     TResult Function()? tokenExpired,
     TResult Function()? authenticationFailed,
-    TResult Function()? proxyLoginRolePermissionNotMatch,
-    TResult Function()? proxyLoginZPTargetRoleNotMatch,
-    TResult Function()? proxyLoginZPSalesOrgNotMatch,
+    TResult Function()? cannotProxyLoginWithCurrentRole,
+    TResult Function()? cannotProxyLoginRootAdmin,
+    TResult Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function()? passwordResetFail,
     TResult Function()? deviceNotSupportBiometric,
     TResult Function()? cannotCheckBiometrics,
@@ -9345,12 +9982,14 @@ class _$ProductOutOfStockImpl implements _ProductOutOfStock {
     required TResult Function(_AccountExpired value) accountExpired,
     required TResult Function(_TokenExpired value) tokenExpired,
     required TResult Function(_AuthenticationFailed value) authenticationFailed,
-    required TResult Function(_ProxyLoginRolePermissionNotMatch value)
-        proxyLoginRolePermissionNotMatch,
-    required TResult Function(_ProxyLoginZPTargetRoleNotMatch value)
-        proxyLoginZPTargetRoleNotMatch,
-    required TResult Function(_ProxyLoginZPSalesOrgNotMatch value)
-        proxyLoginZPSalesOrgNotMatch,
+    required TResult Function(_CannotProxyLoginWithCurrentRole value)
+        cannotProxyLoginWithCurrentRole,
+    required TResult Function(_CannotProxyLoginRootAdmin value)
+        cannotProxyLoginRootAdmin,
+    required TResult Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    required TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)
+        cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function(_PasswordResetFail value) passwordResetFail,
     required TResult Function(_DeviceNotSupportBiometric value)
         deviceNotSupportBiometric,
@@ -9426,12 +10065,14 @@ class _$ProductOutOfStockImpl implements _ProductOutOfStock {
     TResult? Function(_AccountExpired value)? accountExpired,
     TResult? Function(_TokenExpired value)? tokenExpired,
     TResult? Function(_AuthenticationFailed value)? authenticationFailed,
-    TResult? Function(_ProxyLoginRolePermissionNotMatch value)?
-        proxyLoginRolePermissionNotMatch,
-    TResult? Function(_ProxyLoginZPTargetRoleNotMatch value)?
-        proxyLoginZPTargetRoleNotMatch,
-    TResult? Function(_ProxyLoginZPSalesOrgNotMatch value)?
-        proxyLoginZPSalesOrgNotMatch,
+    TResult? Function(_CannotProxyLoginWithCurrentRole value)?
+        cannotProxyLoginWithCurrentRole,
+    TResult? Function(_CannotProxyLoginRootAdmin value)?
+        cannotProxyLoginRootAdmin,
+    TResult? Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)?
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult? Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
+        cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function(_PasswordResetFail value)? passwordResetFail,
     TResult? Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
@@ -9493,12 +10134,14 @@ class _$ProductOutOfStockImpl implements _ProductOutOfStock {
     TResult Function(_AccountExpired value)? accountExpired,
     TResult Function(_TokenExpired value)? tokenExpired,
     TResult Function(_AuthenticationFailed value)? authenticationFailed,
-    TResult Function(_ProxyLoginRolePermissionNotMatch value)?
-        proxyLoginRolePermissionNotMatch,
-    TResult Function(_ProxyLoginZPTargetRoleNotMatch value)?
-        proxyLoginZPTargetRoleNotMatch,
-    TResult Function(_ProxyLoginZPSalesOrgNotMatch value)?
-        proxyLoginZPSalesOrgNotMatch,
+    TResult Function(_CannotProxyLoginWithCurrentRole value)?
+        cannotProxyLoginWithCurrentRole,
+    TResult Function(_CannotProxyLoginRootAdmin value)?
+        cannotProxyLoginRootAdmin,
+    TResult Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)?
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
+        cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function(_PasswordResetFail value)? passwordResetFail,
     TResult Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
@@ -9604,9 +10247,10 @@ class _$PhotoPermissionFailedImpl implements _PhotoPermissionFailed {
     required TResult Function() accountExpired,
     required TResult Function() tokenExpired,
     required TResult Function() authenticationFailed,
-    required TResult Function() proxyLoginRolePermissionNotMatch,
-    required TResult Function() proxyLoginZPTargetRoleNotMatch,
-    required TResult Function() proxyLoginZPSalesOrgNotMatch,
+    required TResult Function() cannotProxyLoginWithCurrentRole,
+    required TResult Function() cannotProxyLoginRootAdmin,
+    required TResult Function() cannotProxyLoginZPAdminWhenIsZPAdmin,
+    required TResult Function() cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function() passwordResetFail,
     required TResult Function() deviceNotSupportBiometric,
     required TResult Function() cannotCheckBiometrics,
@@ -9660,9 +10304,10 @@ class _$PhotoPermissionFailedImpl implements _PhotoPermissionFailed {
     TResult? Function()? accountExpired,
     TResult? Function()? tokenExpired,
     TResult? Function()? authenticationFailed,
-    TResult? Function()? proxyLoginRolePermissionNotMatch,
-    TResult? Function()? proxyLoginZPTargetRoleNotMatch,
-    TResult? Function()? proxyLoginZPSalesOrgNotMatch,
+    TResult? Function()? cannotProxyLoginWithCurrentRole,
+    TResult? Function()? cannotProxyLoginRootAdmin,
+    TResult? Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult? Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function()? passwordResetFail,
     TResult? Function()? deviceNotSupportBiometric,
     TResult? Function()? cannotCheckBiometrics,
@@ -9716,9 +10361,10 @@ class _$PhotoPermissionFailedImpl implements _PhotoPermissionFailed {
     TResult Function()? accountExpired,
     TResult Function()? tokenExpired,
     TResult Function()? authenticationFailed,
-    TResult Function()? proxyLoginRolePermissionNotMatch,
-    TResult Function()? proxyLoginZPTargetRoleNotMatch,
-    TResult Function()? proxyLoginZPSalesOrgNotMatch,
+    TResult Function()? cannotProxyLoginWithCurrentRole,
+    TResult Function()? cannotProxyLoginRootAdmin,
+    TResult Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function()? passwordResetFail,
     TResult Function()? deviceNotSupportBiometric,
     TResult Function()? cannotCheckBiometrics,
@@ -9778,12 +10424,14 @@ class _$PhotoPermissionFailedImpl implements _PhotoPermissionFailed {
     required TResult Function(_AccountExpired value) accountExpired,
     required TResult Function(_TokenExpired value) tokenExpired,
     required TResult Function(_AuthenticationFailed value) authenticationFailed,
-    required TResult Function(_ProxyLoginRolePermissionNotMatch value)
-        proxyLoginRolePermissionNotMatch,
-    required TResult Function(_ProxyLoginZPTargetRoleNotMatch value)
-        proxyLoginZPTargetRoleNotMatch,
-    required TResult Function(_ProxyLoginZPSalesOrgNotMatch value)
-        proxyLoginZPSalesOrgNotMatch,
+    required TResult Function(_CannotProxyLoginWithCurrentRole value)
+        cannotProxyLoginWithCurrentRole,
+    required TResult Function(_CannotProxyLoginRootAdmin value)
+        cannotProxyLoginRootAdmin,
+    required TResult Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    required TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)
+        cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function(_PasswordResetFail value) passwordResetFail,
     required TResult Function(_DeviceNotSupportBiometric value)
         deviceNotSupportBiometric,
@@ -9859,12 +10507,14 @@ class _$PhotoPermissionFailedImpl implements _PhotoPermissionFailed {
     TResult? Function(_AccountExpired value)? accountExpired,
     TResult? Function(_TokenExpired value)? tokenExpired,
     TResult? Function(_AuthenticationFailed value)? authenticationFailed,
-    TResult? Function(_ProxyLoginRolePermissionNotMatch value)?
-        proxyLoginRolePermissionNotMatch,
-    TResult? Function(_ProxyLoginZPTargetRoleNotMatch value)?
-        proxyLoginZPTargetRoleNotMatch,
-    TResult? Function(_ProxyLoginZPSalesOrgNotMatch value)?
-        proxyLoginZPSalesOrgNotMatch,
+    TResult? Function(_CannotProxyLoginWithCurrentRole value)?
+        cannotProxyLoginWithCurrentRole,
+    TResult? Function(_CannotProxyLoginRootAdmin value)?
+        cannotProxyLoginRootAdmin,
+    TResult? Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)?
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult? Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
+        cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function(_PasswordResetFail value)? passwordResetFail,
     TResult? Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
@@ -9926,12 +10576,14 @@ class _$PhotoPermissionFailedImpl implements _PhotoPermissionFailed {
     TResult Function(_AccountExpired value)? accountExpired,
     TResult Function(_TokenExpired value)? tokenExpired,
     TResult Function(_AuthenticationFailed value)? authenticationFailed,
-    TResult Function(_ProxyLoginRolePermissionNotMatch value)?
-        proxyLoginRolePermissionNotMatch,
-    TResult Function(_ProxyLoginZPTargetRoleNotMatch value)?
-        proxyLoginZPTargetRoleNotMatch,
-    TResult Function(_ProxyLoginZPSalesOrgNotMatch value)?
-        proxyLoginZPSalesOrgNotMatch,
+    TResult Function(_CannotProxyLoginWithCurrentRole value)?
+        cannotProxyLoginWithCurrentRole,
+    TResult Function(_CannotProxyLoginRootAdmin value)?
+        cannotProxyLoginRootAdmin,
+    TResult Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)?
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
+        cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function(_PasswordResetFail value)? passwordResetFail,
     TResult Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
@@ -10038,9 +10690,10 @@ class _$StoragePermissionFailedImpl implements _StoragePermissionFailed {
     required TResult Function() accountExpired,
     required TResult Function() tokenExpired,
     required TResult Function() authenticationFailed,
-    required TResult Function() proxyLoginRolePermissionNotMatch,
-    required TResult Function() proxyLoginZPTargetRoleNotMatch,
-    required TResult Function() proxyLoginZPSalesOrgNotMatch,
+    required TResult Function() cannotProxyLoginWithCurrentRole,
+    required TResult Function() cannotProxyLoginRootAdmin,
+    required TResult Function() cannotProxyLoginZPAdminWhenIsZPAdmin,
+    required TResult Function() cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function() passwordResetFail,
     required TResult Function() deviceNotSupportBiometric,
     required TResult Function() cannotCheckBiometrics,
@@ -10094,9 +10747,10 @@ class _$StoragePermissionFailedImpl implements _StoragePermissionFailed {
     TResult? Function()? accountExpired,
     TResult? Function()? tokenExpired,
     TResult? Function()? authenticationFailed,
-    TResult? Function()? proxyLoginRolePermissionNotMatch,
-    TResult? Function()? proxyLoginZPTargetRoleNotMatch,
-    TResult? Function()? proxyLoginZPSalesOrgNotMatch,
+    TResult? Function()? cannotProxyLoginWithCurrentRole,
+    TResult? Function()? cannotProxyLoginRootAdmin,
+    TResult? Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult? Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function()? passwordResetFail,
     TResult? Function()? deviceNotSupportBiometric,
     TResult? Function()? cannotCheckBiometrics,
@@ -10150,9 +10804,10 @@ class _$StoragePermissionFailedImpl implements _StoragePermissionFailed {
     TResult Function()? accountExpired,
     TResult Function()? tokenExpired,
     TResult Function()? authenticationFailed,
-    TResult Function()? proxyLoginRolePermissionNotMatch,
-    TResult Function()? proxyLoginZPTargetRoleNotMatch,
-    TResult Function()? proxyLoginZPSalesOrgNotMatch,
+    TResult Function()? cannotProxyLoginWithCurrentRole,
+    TResult Function()? cannotProxyLoginRootAdmin,
+    TResult Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function()? passwordResetFail,
     TResult Function()? deviceNotSupportBiometric,
     TResult Function()? cannotCheckBiometrics,
@@ -10212,12 +10867,14 @@ class _$StoragePermissionFailedImpl implements _StoragePermissionFailed {
     required TResult Function(_AccountExpired value) accountExpired,
     required TResult Function(_TokenExpired value) tokenExpired,
     required TResult Function(_AuthenticationFailed value) authenticationFailed,
-    required TResult Function(_ProxyLoginRolePermissionNotMatch value)
-        proxyLoginRolePermissionNotMatch,
-    required TResult Function(_ProxyLoginZPTargetRoleNotMatch value)
-        proxyLoginZPTargetRoleNotMatch,
-    required TResult Function(_ProxyLoginZPSalesOrgNotMatch value)
-        proxyLoginZPSalesOrgNotMatch,
+    required TResult Function(_CannotProxyLoginWithCurrentRole value)
+        cannotProxyLoginWithCurrentRole,
+    required TResult Function(_CannotProxyLoginRootAdmin value)
+        cannotProxyLoginRootAdmin,
+    required TResult Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    required TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)
+        cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function(_PasswordResetFail value) passwordResetFail,
     required TResult Function(_DeviceNotSupportBiometric value)
         deviceNotSupportBiometric,
@@ -10293,12 +10950,14 @@ class _$StoragePermissionFailedImpl implements _StoragePermissionFailed {
     TResult? Function(_AccountExpired value)? accountExpired,
     TResult? Function(_TokenExpired value)? tokenExpired,
     TResult? Function(_AuthenticationFailed value)? authenticationFailed,
-    TResult? Function(_ProxyLoginRolePermissionNotMatch value)?
-        proxyLoginRolePermissionNotMatch,
-    TResult? Function(_ProxyLoginZPTargetRoleNotMatch value)?
-        proxyLoginZPTargetRoleNotMatch,
-    TResult? Function(_ProxyLoginZPSalesOrgNotMatch value)?
-        proxyLoginZPSalesOrgNotMatch,
+    TResult? Function(_CannotProxyLoginWithCurrentRole value)?
+        cannotProxyLoginWithCurrentRole,
+    TResult? Function(_CannotProxyLoginRootAdmin value)?
+        cannotProxyLoginRootAdmin,
+    TResult? Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)?
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult? Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
+        cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function(_PasswordResetFail value)? passwordResetFail,
     TResult? Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
@@ -10360,12 +11019,14 @@ class _$StoragePermissionFailedImpl implements _StoragePermissionFailed {
     TResult Function(_AccountExpired value)? accountExpired,
     TResult Function(_TokenExpired value)? tokenExpired,
     TResult Function(_AuthenticationFailed value)? authenticationFailed,
-    TResult Function(_ProxyLoginRolePermissionNotMatch value)?
-        proxyLoginRolePermissionNotMatch,
-    TResult Function(_ProxyLoginZPTargetRoleNotMatch value)?
-        proxyLoginZPTargetRoleNotMatch,
-    TResult Function(_ProxyLoginZPSalesOrgNotMatch value)?
-        proxyLoginZPSalesOrgNotMatch,
+    TResult Function(_CannotProxyLoginWithCurrentRole value)?
+        cannotProxyLoginWithCurrentRole,
+    TResult Function(_CannotProxyLoginRootAdmin value)?
+        cannotProxyLoginRootAdmin,
+    TResult Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)?
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
+        cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function(_PasswordResetFail value)? passwordResetFail,
     TResult Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
@@ -10469,9 +11130,10 @@ class _$InvalidFileFormatImpl implements _InvalidFileFormat {
     required TResult Function() accountExpired,
     required TResult Function() tokenExpired,
     required TResult Function() authenticationFailed,
-    required TResult Function() proxyLoginRolePermissionNotMatch,
-    required TResult Function() proxyLoginZPTargetRoleNotMatch,
-    required TResult Function() proxyLoginZPSalesOrgNotMatch,
+    required TResult Function() cannotProxyLoginWithCurrentRole,
+    required TResult Function() cannotProxyLoginRootAdmin,
+    required TResult Function() cannotProxyLoginZPAdminWhenIsZPAdmin,
+    required TResult Function() cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function() passwordResetFail,
     required TResult Function() deviceNotSupportBiometric,
     required TResult Function() cannotCheckBiometrics,
@@ -10525,9 +11187,10 @@ class _$InvalidFileFormatImpl implements _InvalidFileFormat {
     TResult? Function()? accountExpired,
     TResult? Function()? tokenExpired,
     TResult? Function()? authenticationFailed,
-    TResult? Function()? proxyLoginRolePermissionNotMatch,
-    TResult? Function()? proxyLoginZPTargetRoleNotMatch,
-    TResult? Function()? proxyLoginZPSalesOrgNotMatch,
+    TResult? Function()? cannotProxyLoginWithCurrentRole,
+    TResult? Function()? cannotProxyLoginRootAdmin,
+    TResult? Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult? Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function()? passwordResetFail,
     TResult? Function()? deviceNotSupportBiometric,
     TResult? Function()? cannotCheckBiometrics,
@@ -10581,9 +11244,10 @@ class _$InvalidFileFormatImpl implements _InvalidFileFormat {
     TResult Function()? accountExpired,
     TResult Function()? tokenExpired,
     TResult Function()? authenticationFailed,
-    TResult Function()? proxyLoginRolePermissionNotMatch,
-    TResult Function()? proxyLoginZPTargetRoleNotMatch,
-    TResult Function()? proxyLoginZPSalesOrgNotMatch,
+    TResult Function()? cannotProxyLoginWithCurrentRole,
+    TResult Function()? cannotProxyLoginRootAdmin,
+    TResult Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function()? passwordResetFail,
     TResult Function()? deviceNotSupportBiometric,
     TResult Function()? cannotCheckBiometrics,
@@ -10643,12 +11307,14 @@ class _$InvalidFileFormatImpl implements _InvalidFileFormat {
     required TResult Function(_AccountExpired value) accountExpired,
     required TResult Function(_TokenExpired value) tokenExpired,
     required TResult Function(_AuthenticationFailed value) authenticationFailed,
-    required TResult Function(_ProxyLoginRolePermissionNotMatch value)
-        proxyLoginRolePermissionNotMatch,
-    required TResult Function(_ProxyLoginZPTargetRoleNotMatch value)
-        proxyLoginZPTargetRoleNotMatch,
-    required TResult Function(_ProxyLoginZPSalesOrgNotMatch value)
-        proxyLoginZPSalesOrgNotMatch,
+    required TResult Function(_CannotProxyLoginWithCurrentRole value)
+        cannotProxyLoginWithCurrentRole,
+    required TResult Function(_CannotProxyLoginRootAdmin value)
+        cannotProxyLoginRootAdmin,
+    required TResult Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    required TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)
+        cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function(_PasswordResetFail value) passwordResetFail,
     required TResult Function(_DeviceNotSupportBiometric value)
         deviceNotSupportBiometric,
@@ -10724,12 +11390,14 @@ class _$InvalidFileFormatImpl implements _InvalidFileFormat {
     TResult? Function(_AccountExpired value)? accountExpired,
     TResult? Function(_TokenExpired value)? tokenExpired,
     TResult? Function(_AuthenticationFailed value)? authenticationFailed,
-    TResult? Function(_ProxyLoginRolePermissionNotMatch value)?
-        proxyLoginRolePermissionNotMatch,
-    TResult? Function(_ProxyLoginZPTargetRoleNotMatch value)?
-        proxyLoginZPTargetRoleNotMatch,
-    TResult? Function(_ProxyLoginZPSalesOrgNotMatch value)?
-        proxyLoginZPSalesOrgNotMatch,
+    TResult? Function(_CannotProxyLoginWithCurrentRole value)?
+        cannotProxyLoginWithCurrentRole,
+    TResult? Function(_CannotProxyLoginRootAdmin value)?
+        cannotProxyLoginRootAdmin,
+    TResult? Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)?
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult? Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
+        cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function(_PasswordResetFail value)? passwordResetFail,
     TResult? Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
@@ -10791,12 +11459,14 @@ class _$InvalidFileFormatImpl implements _InvalidFileFormat {
     TResult Function(_AccountExpired value)? accountExpired,
     TResult Function(_TokenExpired value)? tokenExpired,
     TResult Function(_AuthenticationFailed value)? authenticationFailed,
-    TResult Function(_ProxyLoginRolePermissionNotMatch value)?
-        proxyLoginRolePermissionNotMatch,
-    TResult Function(_ProxyLoginZPTargetRoleNotMatch value)?
-        proxyLoginZPTargetRoleNotMatch,
-    TResult Function(_ProxyLoginZPSalesOrgNotMatch value)?
-        proxyLoginZPSalesOrgNotMatch,
+    TResult Function(_CannotProxyLoginWithCurrentRole value)?
+        cannotProxyLoginWithCurrentRole,
+    TResult Function(_CannotProxyLoginRootAdmin value)?
+        cannotProxyLoginRootAdmin,
+    TResult Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)?
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
+        cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function(_PasswordResetFail value)? passwordResetFail,
     TResult Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
@@ -10903,9 +11573,10 @@ class _$UploadCountExcideLimitImpl implements _UploadCountExcideLimit {
     required TResult Function() accountExpired,
     required TResult Function() tokenExpired,
     required TResult Function() authenticationFailed,
-    required TResult Function() proxyLoginRolePermissionNotMatch,
-    required TResult Function() proxyLoginZPTargetRoleNotMatch,
-    required TResult Function() proxyLoginZPSalesOrgNotMatch,
+    required TResult Function() cannotProxyLoginWithCurrentRole,
+    required TResult Function() cannotProxyLoginRootAdmin,
+    required TResult Function() cannotProxyLoginZPAdminWhenIsZPAdmin,
+    required TResult Function() cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function() passwordResetFail,
     required TResult Function() deviceNotSupportBiometric,
     required TResult Function() cannotCheckBiometrics,
@@ -10959,9 +11630,10 @@ class _$UploadCountExcideLimitImpl implements _UploadCountExcideLimit {
     TResult? Function()? accountExpired,
     TResult? Function()? tokenExpired,
     TResult? Function()? authenticationFailed,
-    TResult? Function()? proxyLoginRolePermissionNotMatch,
-    TResult? Function()? proxyLoginZPTargetRoleNotMatch,
-    TResult? Function()? proxyLoginZPSalesOrgNotMatch,
+    TResult? Function()? cannotProxyLoginWithCurrentRole,
+    TResult? Function()? cannotProxyLoginRootAdmin,
+    TResult? Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult? Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function()? passwordResetFail,
     TResult? Function()? deviceNotSupportBiometric,
     TResult? Function()? cannotCheckBiometrics,
@@ -11015,9 +11687,10 @@ class _$UploadCountExcideLimitImpl implements _UploadCountExcideLimit {
     TResult Function()? accountExpired,
     TResult Function()? tokenExpired,
     TResult Function()? authenticationFailed,
-    TResult Function()? proxyLoginRolePermissionNotMatch,
-    TResult Function()? proxyLoginZPTargetRoleNotMatch,
-    TResult Function()? proxyLoginZPSalesOrgNotMatch,
+    TResult Function()? cannotProxyLoginWithCurrentRole,
+    TResult Function()? cannotProxyLoginRootAdmin,
+    TResult Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function()? passwordResetFail,
     TResult Function()? deviceNotSupportBiometric,
     TResult Function()? cannotCheckBiometrics,
@@ -11077,12 +11750,14 @@ class _$UploadCountExcideLimitImpl implements _UploadCountExcideLimit {
     required TResult Function(_AccountExpired value) accountExpired,
     required TResult Function(_TokenExpired value) tokenExpired,
     required TResult Function(_AuthenticationFailed value) authenticationFailed,
-    required TResult Function(_ProxyLoginRolePermissionNotMatch value)
-        proxyLoginRolePermissionNotMatch,
-    required TResult Function(_ProxyLoginZPTargetRoleNotMatch value)
-        proxyLoginZPTargetRoleNotMatch,
-    required TResult Function(_ProxyLoginZPSalesOrgNotMatch value)
-        proxyLoginZPSalesOrgNotMatch,
+    required TResult Function(_CannotProxyLoginWithCurrentRole value)
+        cannotProxyLoginWithCurrentRole,
+    required TResult Function(_CannotProxyLoginRootAdmin value)
+        cannotProxyLoginRootAdmin,
+    required TResult Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    required TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)
+        cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function(_PasswordResetFail value) passwordResetFail,
     required TResult Function(_DeviceNotSupportBiometric value)
         deviceNotSupportBiometric,
@@ -11158,12 +11833,14 @@ class _$UploadCountExcideLimitImpl implements _UploadCountExcideLimit {
     TResult? Function(_AccountExpired value)? accountExpired,
     TResult? Function(_TokenExpired value)? tokenExpired,
     TResult? Function(_AuthenticationFailed value)? authenticationFailed,
-    TResult? Function(_ProxyLoginRolePermissionNotMatch value)?
-        proxyLoginRolePermissionNotMatch,
-    TResult? Function(_ProxyLoginZPTargetRoleNotMatch value)?
-        proxyLoginZPTargetRoleNotMatch,
-    TResult? Function(_ProxyLoginZPSalesOrgNotMatch value)?
-        proxyLoginZPSalesOrgNotMatch,
+    TResult? Function(_CannotProxyLoginWithCurrentRole value)?
+        cannotProxyLoginWithCurrentRole,
+    TResult? Function(_CannotProxyLoginRootAdmin value)?
+        cannotProxyLoginRootAdmin,
+    TResult? Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)?
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult? Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
+        cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function(_PasswordResetFail value)? passwordResetFail,
     TResult? Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
@@ -11225,12 +11902,14 @@ class _$UploadCountExcideLimitImpl implements _UploadCountExcideLimit {
     TResult Function(_AccountExpired value)? accountExpired,
     TResult Function(_TokenExpired value)? tokenExpired,
     TResult Function(_AuthenticationFailed value)? authenticationFailed,
-    TResult Function(_ProxyLoginRolePermissionNotMatch value)?
-        proxyLoginRolePermissionNotMatch,
-    TResult Function(_ProxyLoginZPTargetRoleNotMatch value)?
-        proxyLoginZPTargetRoleNotMatch,
-    TResult Function(_ProxyLoginZPSalesOrgNotMatch value)?
-        proxyLoginZPSalesOrgNotMatch,
+    TResult Function(_CannotProxyLoginWithCurrentRole value)?
+        cannotProxyLoginWithCurrentRole,
+    TResult Function(_CannotProxyLoginRootAdmin value)?
+        cannotProxyLoginRootAdmin,
+    TResult Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)?
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
+        cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function(_PasswordResetFail value)? passwordResetFail,
     TResult Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
@@ -11334,9 +12013,10 @@ class _$InvalidDomainImpl implements _InvalidDomain {
     required TResult Function() accountExpired,
     required TResult Function() tokenExpired,
     required TResult Function() authenticationFailed,
-    required TResult Function() proxyLoginRolePermissionNotMatch,
-    required TResult Function() proxyLoginZPTargetRoleNotMatch,
-    required TResult Function() proxyLoginZPSalesOrgNotMatch,
+    required TResult Function() cannotProxyLoginWithCurrentRole,
+    required TResult Function() cannotProxyLoginRootAdmin,
+    required TResult Function() cannotProxyLoginZPAdminWhenIsZPAdmin,
+    required TResult Function() cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function() passwordResetFail,
     required TResult Function() deviceNotSupportBiometric,
     required TResult Function() cannotCheckBiometrics,
@@ -11390,9 +12070,10 @@ class _$InvalidDomainImpl implements _InvalidDomain {
     TResult? Function()? accountExpired,
     TResult? Function()? tokenExpired,
     TResult? Function()? authenticationFailed,
-    TResult? Function()? proxyLoginRolePermissionNotMatch,
-    TResult? Function()? proxyLoginZPTargetRoleNotMatch,
-    TResult? Function()? proxyLoginZPSalesOrgNotMatch,
+    TResult? Function()? cannotProxyLoginWithCurrentRole,
+    TResult? Function()? cannotProxyLoginRootAdmin,
+    TResult? Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult? Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function()? passwordResetFail,
     TResult? Function()? deviceNotSupportBiometric,
     TResult? Function()? cannotCheckBiometrics,
@@ -11446,9 +12127,10 @@ class _$InvalidDomainImpl implements _InvalidDomain {
     TResult Function()? accountExpired,
     TResult Function()? tokenExpired,
     TResult Function()? authenticationFailed,
-    TResult Function()? proxyLoginRolePermissionNotMatch,
-    TResult Function()? proxyLoginZPTargetRoleNotMatch,
-    TResult Function()? proxyLoginZPSalesOrgNotMatch,
+    TResult Function()? cannotProxyLoginWithCurrentRole,
+    TResult Function()? cannotProxyLoginRootAdmin,
+    TResult Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function()? passwordResetFail,
     TResult Function()? deviceNotSupportBiometric,
     TResult Function()? cannotCheckBiometrics,
@@ -11508,12 +12190,14 @@ class _$InvalidDomainImpl implements _InvalidDomain {
     required TResult Function(_AccountExpired value) accountExpired,
     required TResult Function(_TokenExpired value) tokenExpired,
     required TResult Function(_AuthenticationFailed value) authenticationFailed,
-    required TResult Function(_ProxyLoginRolePermissionNotMatch value)
-        proxyLoginRolePermissionNotMatch,
-    required TResult Function(_ProxyLoginZPTargetRoleNotMatch value)
-        proxyLoginZPTargetRoleNotMatch,
-    required TResult Function(_ProxyLoginZPSalesOrgNotMatch value)
-        proxyLoginZPSalesOrgNotMatch,
+    required TResult Function(_CannotProxyLoginWithCurrentRole value)
+        cannotProxyLoginWithCurrentRole,
+    required TResult Function(_CannotProxyLoginRootAdmin value)
+        cannotProxyLoginRootAdmin,
+    required TResult Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    required TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)
+        cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function(_PasswordResetFail value) passwordResetFail,
     required TResult Function(_DeviceNotSupportBiometric value)
         deviceNotSupportBiometric,
@@ -11589,12 +12273,14 @@ class _$InvalidDomainImpl implements _InvalidDomain {
     TResult? Function(_AccountExpired value)? accountExpired,
     TResult? Function(_TokenExpired value)? tokenExpired,
     TResult? Function(_AuthenticationFailed value)? authenticationFailed,
-    TResult? Function(_ProxyLoginRolePermissionNotMatch value)?
-        proxyLoginRolePermissionNotMatch,
-    TResult? Function(_ProxyLoginZPTargetRoleNotMatch value)?
-        proxyLoginZPTargetRoleNotMatch,
-    TResult? Function(_ProxyLoginZPSalesOrgNotMatch value)?
-        proxyLoginZPSalesOrgNotMatch,
+    TResult? Function(_CannotProxyLoginWithCurrentRole value)?
+        cannotProxyLoginWithCurrentRole,
+    TResult? Function(_CannotProxyLoginRootAdmin value)?
+        cannotProxyLoginRootAdmin,
+    TResult? Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)?
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult? Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
+        cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function(_PasswordResetFail value)? passwordResetFail,
     TResult? Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
@@ -11656,12 +12342,14 @@ class _$InvalidDomainImpl implements _InvalidDomain {
     TResult Function(_AccountExpired value)? accountExpired,
     TResult Function(_TokenExpired value)? tokenExpired,
     TResult Function(_AuthenticationFailed value)? authenticationFailed,
-    TResult Function(_ProxyLoginRolePermissionNotMatch value)?
-        proxyLoginRolePermissionNotMatch,
-    TResult Function(_ProxyLoginZPTargetRoleNotMatch value)?
-        proxyLoginZPTargetRoleNotMatch,
-    TResult Function(_ProxyLoginZPSalesOrgNotMatch value)?
-        proxyLoginZPSalesOrgNotMatch,
+    TResult Function(_CannotProxyLoginWithCurrentRole value)?
+        cannotProxyLoginWithCurrentRole,
+    TResult Function(_CannotProxyLoginRootAdmin value)?
+        cannotProxyLoginRootAdmin,
+    TResult Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)?
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
+        cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function(_PasswordResetFail value)? passwordResetFail,
     TResult Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
@@ -11765,9 +12453,10 @@ class _$ProductDetailRouteImpl implements _ProductDetailRoute {
     required TResult Function() accountExpired,
     required TResult Function() tokenExpired,
     required TResult Function() authenticationFailed,
-    required TResult Function() proxyLoginRolePermissionNotMatch,
-    required TResult Function() proxyLoginZPTargetRoleNotMatch,
-    required TResult Function() proxyLoginZPSalesOrgNotMatch,
+    required TResult Function() cannotProxyLoginWithCurrentRole,
+    required TResult Function() cannotProxyLoginRootAdmin,
+    required TResult Function() cannotProxyLoginZPAdminWhenIsZPAdmin,
+    required TResult Function() cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function() passwordResetFail,
     required TResult Function() deviceNotSupportBiometric,
     required TResult Function() cannotCheckBiometrics,
@@ -11821,9 +12510,10 @@ class _$ProductDetailRouteImpl implements _ProductDetailRoute {
     TResult? Function()? accountExpired,
     TResult? Function()? tokenExpired,
     TResult? Function()? authenticationFailed,
-    TResult? Function()? proxyLoginRolePermissionNotMatch,
-    TResult? Function()? proxyLoginZPTargetRoleNotMatch,
-    TResult? Function()? proxyLoginZPSalesOrgNotMatch,
+    TResult? Function()? cannotProxyLoginWithCurrentRole,
+    TResult? Function()? cannotProxyLoginRootAdmin,
+    TResult? Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult? Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function()? passwordResetFail,
     TResult? Function()? deviceNotSupportBiometric,
     TResult? Function()? cannotCheckBiometrics,
@@ -11877,9 +12567,10 @@ class _$ProductDetailRouteImpl implements _ProductDetailRoute {
     TResult Function()? accountExpired,
     TResult Function()? tokenExpired,
     TResult Function()? authenticationFailed,
-    TResult Function()? proxyLoginRolePermissionNotMatch,
-    TResult Function()? proxyLoginZPTargetRoleNotMatch,
-    TResult Function()? proxyLoginZPSalesOrgNotMatch,
+    TResult Function()? cannotProxyLoginWithCurrentRole,
+    TResult Function()? cannotProxyLoginRootAdmin,
+    TResult Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function()? passwordResetFail,
     TResult Function()? deviceNotSupportBiometric,
     TResult Function()? cannotCheckBiometrics,
@@ -11939,12 +12630,14 @@ class _$ProductDetailRouteImpl implements _ProductDetailRoute {
     required TResult Function(_AccountExpired value) accountExpired,
     required TResult Function(_TokenExpired value) tokenExpired,
     required TResult Function(_AuthenticationFailed value) authenticationFailed,
-    required TResult Function(_ProxyLoginRolePermissionNotMatch value)
-        proxyLoginRolePermissionNotMatch,
-    required TResult Function(_ProxyLoginZPTargetRoleNotMatch value)
-        proxyLoginZPTargetRoleNotMatch,
-    required TResult Function(_ProxyLoginZPSalesOrgNotMatch value)
-        proxyLoginZPSalesOrgNotMatch,
+    required TResult Function(_CannotProxyLoginWithCurrentRole value)
+        cannotProxyLoginWithCurrentRole,
+    required TResult Function(_CannotProxyLoginRootAdmin value)
+        cannotProxyLoginRootAdmin,
+    required TResult Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    required TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)
+        cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function(_PasswordResetFail value) passwordResetFail,
     required TResult Function(_DeviceNotSupportBiometric value)
         deviceNotSupportBiometric,
@@ -12020,12 +12713,14 @@ class _$ProductDetailRouteImpl implements _ProductDetailRoute {
     TResult? Function(_AccountExpired value)? accountExpired,
     TResult? Function(_TokenExpired value)? tokenExpired,
     TResult? Function(_AuthenticationFailed value)? authenticationFailed,
-    TResult? Function(_ProxyLoginRolePermissionNotMatch value)?
-        proxyLoginRolePermissionNotMatch,
-    TResult? Function(_ProxyLoginZPTargetRoleNotMatch value)?
-        proxyLoginZPTargetRoleNotMatch,
-    TResult? Function(_ProxyLoginZPSalesOrgNotMatch value)?
-        proxyLoginZPSalesOrgNotMatch,
+    TResult? Function(_CannotProxyLoginWithCurrentRole value)?
+        cannotProxyLoginWithCurrentRole,
+    TResult? Function(_CannotProxyLoginRootAdmin value)?
+        cannotProxyLoginRootAdmin,
+    TResult? Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)?
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult? Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
+        cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function(_PasswordResetFail value)? passwordResetFail,
     TResult? Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
@@ -12087,12 +12782,14 @@ class _$ProductDetailRouteImpl implements _ProductDetailRoute {
     TResult Function(_AccountExpired value)? accountExpired,
     TResult Function(_TokenExpired value)? tokenExpired,
     TResult Function(_AuthenticationFailed value)? authenticationFailed,
-    TResult Function(_ProxyLoginRolePermissionNotMatch value)?
-        proxyLoginRolePermissionNotMatch,
-    TResult Function(_ProxyLoginZPTargetRoleNotMatch value)?
-        proxyLoginZPTargetRoleNotMatch,
-    TResult Function(_ProxyLoginZPSalesOrgNotMatch value)?
-        proxyLoginZPSalesOrgNotMatch,
+    TResult Function(_CannotProxyLoginWithCurrentRole value)?
+        cannotProxyLoginWithCurrentRole,
+    TResult Function(_CannotProxyLoginRootAdmin value)?
+        cannotProxyLoginRootAdmin,
+    TResult Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)?
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
+        cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function(_PasswordResetFail value)? passwordResetFail,
     TResult Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
@@ -12196,9 +12893,10 @@ class _$OrderDetailRouteImpl implements _OrderDetailRoute {
     required TResult Function() accountExpired,
     required TResult Function() tokenExpired,
     required TResult Function() authenticationFailed,
-    required TResult Function() proxyLoginRolePermissionNotMatch,
-    required TResult Function() proxyLoginZPTargetRoleNotMatch,
-    required TResult Function() proxyLoginZPSalesOrgNotMatch,
+    required TResult Function() cannotProxyLoginWithCurrentRole,
+    required TResult Function() cannotProxyLoginRootAdmin,
+    required TResult Function() cannotProxyLoginZPAdminWhenIsZPAdmin,
+    required TResult Function() cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function() passwordResetFail,
     required TResult Function() deviceNotSupportBiometric,
     required TResult Function() cannotCheckBiometrics,
@@ -12252,9 +12950,10 @@ class _$OrderDetailRouteImpl implements _OrderDetailRoute {
     TResult? Function()? accountExpired,
     TResult? Function()? tokenExpired,
     TResult? Function()? authenticationFailed,
-    TResult? Function()? proxyLoginRolePermissionNotMatch,
-    TResult? Function()? proxyLoginZPTargetRoleNotMatch,
-    TResult? Function()? proxyLoginZPSalesOrgNotMatch,
+    TResult? Function()? cannotProxyLoginWithCurrentRole,
+    TResult? Function()? cannotProxyLoginRootAdmin,
+    TResult? Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult? Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function()? passwordResetFail,
     TResult? Function()? deviceNotSupportBiometric,
     TResult? Function()? cannotCheckBiometrics,
@@ -12308,9 +13007,10 @@ class _$OrderDetailRouteImpl implements _OrderDetailRoute {
     TResult Function()? accountExpired,
     TResult Function()? tokenExpired,
     TResult Function()? authenticationFailed,
-    TResult Function()? proxyLoginRolePermissionNotMatch,
-    TResult Function()? proxyLoginZPTargetRoleNotMatch,
-    TResult Function()? proxyLoginZPSalesOrgNotMatch,
+    TResult Function()? cannotProxyLoginWithCurrentRole,
+    TResult Function()? cannotProxyLoginRootAdmin,
+    TResult Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function()? passwordResetFail,
     TResult Function()? deviceNotSupportBiometric,
     TResult Function()? cannotCheckBiometrics,
@@ -12370,12 +13070,14 @@ class _$OrderDetailRouteImpl implements _OrderDetailRoute {
     required TResult Function(_AccountExpired value) accountExpired,
     required TResult Function(_TokenExpired value) tokenExpired,
     required TResult Function(_AuthenticationFailed value) authenticationFailed,
-    required TResult Function(_ProxyLoginRolePermissionNotMatch value)
-        proxyLoginRolePermissionNotMatch,
-    required TResult Function(_ProxyLoginZPTargetRoleNotMatch value)
-        proxyLoginZPTargetRoleNotMatch,
-    required TResult Function(_ProxyLoginZPSalesOrgNotMatch value)
-        proxyLoginZPSalesOrgNotMatch,
+    required TResult Function(_CannotProxyLoginWithCurrentRole value)
+        cannotProxyLoginWithCurrentRole,
+    required TResult Function(_CannotProxyLoginRootAdmin value)
+        cannotProxyLoginRootAdmin,
+    required TResult Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    required TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)
+        cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function(_PasswordResetFail value) passwordResetFail,
     required TResult Function(_DeviceNotSupportBiometric value)
         deviceNotSupportBiometric,
@@ -12451,12 +13153,14 @@ class _$OrderDetailRouteImpl implements _OrderDetailRoute {
     TResult? Function(_AccountExpired value)? accountExpired,
     TResult? Function(_TokenExpired value)? tokenExpired,
     TResult? Function(_AuthenticationFailed value)? authenticationFailed,
-    TResult? Function(_ProxyLoginRolePermissionNotMatch value)?
-        proxyLoginRolePermissionNotMatch,
-    TResult? Function(_ProxyLoginZPTargetRoleNotMatch value)?
-        proxyLoginZPTargetRoleNotMatch,
-    TResult? Function(_ProxyLoginZPSalesOrgNotMatch value)?
-        proxyLoginZPSalesOrgNotMatch,
+    TResult? Function(_CannotProxyLoginWithCurrentRole value)?
+        cannotProxyLoginWithCurrentRole,
+    TResult? Function(_CannotProxyLoginRootAdmin value)?
+        cannotProxyLoginRootAdmin,
+    TResult? Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)?
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult? Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
+        cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function(_PasswordResetFail value)? passwordResetFail,
     TResult? Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
@@ -12518,12 +13222,14 @@ class _$OrderDetailRouteImpl implements _OrderDetailRoute {
     TResult Function(_AccountExpired value)? accountExpired,
     TResult Function(_TokenExpired value)? tokenExpired,
     TResult Function(_AuthenticationFailed value)? authenticationFailed,
-    TResult Function(_ProxyLoginRolePermissionNotMatch value)?
-        proxyLoginRolePermissionNotMatch,
-    TResult Function(_ProxyLoginZPTargetRoleNotMatch value)?
-        proxyLoginZPTargetRoleNotMatch,
-    TResult Function(_ProxyLoginZPSalesOrgNotMatch value)?
-        proxyLoginZPSalesOrgNotMatch,
+    TResult Function(_CannotProxyLoginWithCurrentRole value)?
+        cannotProxyLoginWithCurrentRole,
+    TResult Function(_CannotProxyLoginRootAdmin value)?
+        cannotProxyLoginRootAdmin,
+    TResult Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)?
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
+        cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function(_PasswordResetFail value)? passwordResetFail,
     TResult Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
@@ -12627,9 +13333,10 @@ class _$ReturnDetailRouteImpl implements _ReturnDetailRoute {
     required TResult Function() accountExpired,
     required TResult Function() tokenExpired,
     required TResult Function() authenticationFailed,
-    required TResult Function() proxyLoginRolePermissionNotMatch,
-    required TResult Function() proxyLoginZPTargetRoleNotMatch,
-    required TResult Function() proxyLoginZPSalesOrgNotMatch,
+    required TResult Function() cannotProxyLoginWithCurrentRole,
+    required TResult Function() cannotProxyLoginRootAdmin,
+    required TResult Function() cannotProxyLoginZPAdminWhenIsZPAdmin,
+    required TResult Function() cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function() passwordResetFail,
     required TResult Function() deviceNotSupportBiometric,
     required TResult Function() cannotCheckBiometrics,
@@ -12683,9 +13390,10 @@ class _$ReturnDetailRouteImpl implements _ReturnDetailRoute {
     TResult? Function()? accountExpired,
     TResult? Function()? tokenExpired,
     TResult? Function()? authenticationFailed,
-    TResult? Function()? proxyLoginRolePermissionNotMatch,
-    TResult? Function()? proxyLoginZPTargetRoleNotMatch,
-    TResult? Function()? proxyLoginZPSalesOrgNotMatch,
+    TResult? Function()? cannotProxyLoginWithCurrentRole,
+    TResult? Function()? cannotProxyLoginRootAdmin,
+    TResult? Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult? Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function()? passwordResetFail,
     TResult? Function()? deviceNotSupportBiometric,
     TResult? Function()? cannotCheckBiometrics,
@@ -12739,9 +13447,10 @@ class _$ReturnDetailRouteImpl implements _ReturnDetailRoute {
     TResult Function()? accountExpired,
     TResult Function()? tokenExpired,
     TResult Function()? authenticationFailed,
-    TResult Function()? proxyLoginRolePermissionNotMatch,
-    TResult Function()? proxyLoginZPTargetRoleNotMatch,
-    TResult Function()? proxyLoginZPSalesOrgNotMatch,
+    TResult Function()? cannotProxyLoginWithCurrentRole,
+    TResult Function()? cannotProxyLoginRootAdmin,
+    TResult Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function()? passwordResetFail,
     TResult Function()? deviceNotSupportBiometric,
     TResult Function()? cannotCheckBiometrics,
@@ -12801,12 +13510,14 @@ class _$ReturnDetailRouteImpl implements _ReturnDetailRoute {
     required TResult Function(_AccountExpired value) accountExpired,
     required TResult Function(_TokenExpired value) tokenExpired,
     required TResult Function(_AuthenticationFailed value) authenticationFailed,
-    required TResult Function(_ProxyLoginRolePermissionNotMatch value)
-        proxyLoginRolePermissionNotMatch,
-    required TResult Function(_ProxyLoginZPTargetRoleNotMatch value)
-        proxyLoginZPTargetRoleNotMatch,
-    required TResult Function(_ProxyLoginZPSalesOrgNotMatch value)
-        proxyLoginZPSalesOrgNotMatch,
+    required TResult Function(_CannotProxyLoginWithCurrentRole value)
+        cannotProxyLoginWithCurrentRole,
+    required TResult Function(_CannotProxyLoginRootAdmin value)
+        cannotProxyLoginRootAdmin,
+    required TResult Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    required TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)
+        cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function(_PasswordResetFail value) passwordResetFail,
     required TResult Function(_DeviceNotSupportBiometric value)
         deviceNotSupportBiometric,
@@ -12882,12 +13593,14 @@ class _$ReturnDetailRouteImpl implements _ReturnDetailRoute {
     TResult? Function(_AccountExpired value)? accountExpired,
     TResult? Function(_TokenExpired value)? tokenExpired,
     TResult? Function(_AuthenticationFailed value)? authenticationFailed,
-    TResult? Function(_ProxyLoginRolePermissionNotMatch value)?
-        proxyLoginRolePermissionNotMatch,
-    TResult? Function(_ProxyLoginZPTargetRoleNotMatch value)?
-        proxyLoginZPTargetRoleNotMatch,
-    TResult? Function(_ProxyLoginZPSalesOrgNotMatch value)?
-        proxyLoginZPSalesOrgNotMatch,
+    TResult? Function(_CannotProxyLoginWithCurrentRole value)?
+        cannotProxyLoginWithCurrentRole,
+    TResult? Function(_CannotProxyLoginRootAdmin value)?
+        cannotProxyLoginRootAdmin,
+    TResult? Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)?
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult? Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
+        cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function(_PasswordResetFail value)? passwordResetFail,
     TResult? Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
@@ -12949,12 +13662,14 @@ class _$ReturnDetailRouteImpl implements _ReturnDetailRoute {
     TResult Function(_AccountExpired value)? accountExpired,
     TResult Function(_TokenExpired value)? tokenExpired,
     TResult Function(_AuthenticationFailed value)? authenticationFailed,
-    TResult Function(_ProxyLoginRolePermissionNotMatch value)?
-        proxyLoginRolePermissionNotMatch,
-    TResult Function(_ProxyLoginZPTargetRoleNotMatch value)?
-        proxyLoginZPTargetRoleNotMatch,
-    TResult Function(_ProxyLoginZPSalesOrgNotMatch value)?
-        proxyLoginZPSalesOrgNotMatch,
+    TResult Function(_CannotProxyLoginWithCurrentRole value)?
+        cannotProxyLoginWithCurrentRole,
+    TResult Function(_CannotProxyLoginRootAdmin value)?
+        cannotProxyLoginRootAdmin,
+    TResult Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)?
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
+        cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function(_PasswordResetFail value)? passwordResetFail,
     TResult Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
@@ -13058,9 +13773,10 @@ class _$PaymentDetailRouteImpl implements _PaymentDetailRoute {
     required TResult Function() accountExpired,
     required TResult Function() tokenExpired,
     required TResult Function() authenticationFailed,
-    required TResult Function() proxyLoginRolePermissionNotMatch,
-    required TResult Function() proxyLoginZPTargetRoleNotMatch,
-    required TResult Function() proxyLoginZPSalesOrgNotMatch,
+    required TResult Function() cannotProxyLoginWithCurrentRole,
+    required TResult Function() cannotProxyLoginRootAdmin,
+    required TResult Function() cannotProxyLoginZPAdminWhenIsZPAdmin,
+    required TResult Function() cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function() passwordResetFail,
     required TResult Function() deviceNotSupportBiometric,
     required TResult Function() cannotCheckBiometrics,
@@ -13114,9 +13830,10 @@ class _$PaymentDetailRouteImpl implements _PaymentDetailRoute {
     TResult? Function()? accountExpired,
     TResult? Function()? tokenExpired,
     TResult? Function()? authenticationFailed,
-    TResult? Function()? proxyLoginRolePermissionNotMatch,
-    TResult? Function()? proxyLoginZPTargetRoleNotMatch,
-    TResult? Function()? proxyLoginZPSalesOrgNotMatch,
+    TResult? Function()? cannotProxyLoginWithCurrentRole,
+    TResult? Function()? cannotProxyLoginRootAdmin,
+    TResult? Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult? Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function()? passwordResetFail,
     TResult? Function()? deviceNotSupportBiometric,
     TResult? Function()? cannotCheckBiometrics,
@@ -13170,9 +13887,10 @@ class _$PaymentDetailRouteImpl implements _PaymentDetailRoute {
     TResult Function()? accountExpired,
     TResult Function()? tokenExpired,
     TResult Function()? authenticationFailed,
-    TResult Function()? proxyLoginRolePermissionNotMatch,
-    TResult Function()? proxyLoginZPTargetRoleNotMatch,
-    TResult Function()? proxyLoginZPSalesOrgNotMatch,
+    TResult Function()? cannotProxyLoginWithCurrentRole,
+    TResult Function()? cannotProxyLoginRootAdmin,
+    TResult Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function()? passwordResetFail,
     TResult Function()? deviceNotSupportBiometric,
     TResult Function()? cannotCheckBiometrics,
@@ -13232,12 +13950,14 @@ class _$PaymentDetailRouteImpl implements _PaymentDetailRoute {
     required TResult Function(_AccountExpired value) accountExpired,
     required TResult Function(_TokenExpired value) tokenExpired,
     required TResult Function(_AuthenticationFailed value) authenticationFailed,
-    required TResult Function(_ProxyLoginRolePermissionNotMatch value)
-        proxyLoginRolePermissionNotMatch,
-    required TResult Function(_ProxyLoginZPTargetRoleNotMatch value)
-        proxyLoginZPTargetRoleNotMatch,
-    required TResult Function(_ProxyLoginZPSalesOrgNotMatch value)
-        proxyLoginZPSalesOrgNotMatch,
+    required TResult Function(_CannotProxyLoginWithCurrentRole value)
+        cannotProxyLoginWithCurrentRole,
+    required TResult Function(_CannotProxyLoginRootAdmin value)
+        cannotProxyLoginRootAdmin,
+    required TResult Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    required TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)
+        cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function(_PasswordResetFail value) passwordResetFail,
     required TResult Function(_DeviceNotSupportBiometric value)
         deviceNotSupportBiometric,
@@ -13313,12 +14033,14 @@ class _$PaymentDetailRouteImpl implements _PaymentDetailRoute {
     TResult? Function(_AccountExpired value)? accountExpired,
     TResult? Function(_TokenExpired value)? tokenExpired,
     TResult? Function(_AuthenticationFailed value)? authenticationFailed,
-    TResult? Function(_ProxyLoginRolePermissionNotMatch value)?
-        proxyLoginRolePermissionNotMatch,
-    TResult? Function(_ProxyLoginZPTargetRoleNotMatch value)?
-        proxyLoginZPTargetRoleNotMatch,
-    TResult? Function(_ProxyLoginZPSalesOrgNotMatch value)?
-        proxyLoginZPSalesOrgNotMatch,
+    TResult? Function(_CannotProxyLoginWithCurrentRole value)?
+        cannotProxyLoginWithCurrentRole,
+    TResult? Function(_CannotProxyLoginRootAdmin value)?
+        cannotProxyLoginRootAdmin,
+    TResult? Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)?
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult? Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
+        cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function(_PasswordResetFail value)? passwordResetFail,
     TResult? Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
@@ -13380,12 +14102,14 @@ class _$PaymentDetailRouteImpl implements _PaymentDetailRoute {
     TResult Function(_AccountExpired value)? accountExpired,
     TResult Function(_TokenExpired value)? tokenExpired,
     TResult Function(_AuthenticationFailed value)? authenticationFailed,
-    TResult Function(_ProxyLoginRolePermissionNotMatch value)?
-        proxyLoginRolePermissionNotMatch,
-    TResult Function(_ProxyLoginZPTargetRoleNotMatch value)?
-        proxyLoginZPTargetRoleNotMatch,
-    TResult Function(_ProxyLoginZPSalesOrgNotMatch value)?
-        proxyLoginZPSalesOrgNotMatch,
+    TResult Function(_CannotProxyLoginWithCurrentRole value)?
+        cannotProxyLoginWithCurrentRole,
+    TResult Function(_CannotProxyLoginRootAdmin value)?
+        cannotProxyLoginRootAdmin,
+    TResult Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)?
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
+        cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function(_PasswordResetFail value)? passwordResetFail,
     TResult Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
@@ -13489,9 +14213,10 @@ class _$InvoiceDetailRouteImpl implements _InvoiceDetailRoute {
     required TResult Function() accountExpired,
     required TResult Function() tokenExpired,
     required TResult Function() authenticationFailed,
-    required TResult Function() proxyLoginRolePermissionNotMatch,
-    required TResult Function() proxyLoginZPTargetRoleNotMatch,
-    required TResult Function() proxyLoginZPSalesOrgNotMatch,
+    required TResult Function() cannotProxyLoginWithCurrentRole,
+    required TResult Function() cannotProxyLoginRootAdmin,
+    required TResult Function() cannotProxyLoginZPAdminWhenIsZPAdmin,
+    required TResult Function() cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function() passwordResetFail,
     required TResult Function() deviceNotSupportBiometric,
     required TResult Function() cannotCheckBiometrics,
@@ -13545,9 +14270,10 @@ class _$InvoiceDetailRouteImpl implements _InvoiceDetailRoute {
     TResult? Function()? accountExpired,
     TResult? Function()? tokenExpired,
     TResult? Function()? authenticationFailed,
-    TResult? Function()? proxyLoginRolePermissionNotMatch,
-    TResult? Function()? proxyLoginZPTargetRoleNotMatch,
-    TResult? Function()? proxyLoginZPSalesOrgNotMatch,
+    TResult? Function()? cannotProxyLoginWithCurrentRole,
+    TResult? Function()? cannotProxyLoginRootAdmin,
+    TResult? Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult? Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function()? passwordResetFail,
     TResult? Function()? deviceNotSupportBiometric,
     TResult? Function()? cannotCheckBiometrics,
@@ -13601,9 +14327,10 @@ class _$InvoiceDetailRouteImpl implements _InvoiceDetailRoute {
     TResult Function()? accountExpired,
     TResult Function()? tokenExpired,
     TResult Function()? authenticationFailed,
-    TResult Function()? proxyLoginRolePermissionNotMatch,
-    TResult Function()? proxyLoginZPTargetRoleNotMatch,
-    TResult Function()? proxyLoginZPSalesOrgNotMatch,
+    TResult Function()? cannotProxyLoginWithCurrentRole,
+    TResult Function()? cannotProxyLoginRootAdmin,
+    TResult Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function()? passwordResetFail,
     TResult Function()? deviceNotSupportBiometric,
     TResult Function()? cannotCheckBiometrics,
@@ -13663,12 +14390,14 @@ class _$InvoiceDetailRouteImpl implements _InvoiceDetailRoute {
     required TResult Function(_AccountExpired value) accountExpired,
     required TResult Function(_TokenExpired value) tokenExpired,
     required TResult Function(_AuthenticationFailed value) authenticationFailed,
-    required TResult Function(_ProxyLoginRolePermissionNotMatch value)
-        proxyLoginRolePermissionNotMatch,
-    required TResult Function(_ProxyLoginZPTargetRoleNotMatch value)
-        proxyLoginZPTargetRoleNotMatch,
-    required TResult Function(_ProxyLoginZPSalesOrgNotMatch value)
-        proxyLoginZPSalesOrgNotMatch,
+    required TResult Function(_CannotProxyLoginWithCurrentRole value)
+        cannotProxyLoginWithCurrentRole,
+    required TResult Function(_CannotProxyLoginRootAdmin value)
+        cannotProxyLoginRootAdmin,
+    required TResult Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    required TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)
+        cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function(_PasswordResetFail value) passwordResetFail,
     required TResult Function(_DeviceNotSupportBiometric value)
         deviceNotSupportBiometric,
@@ -13744,12 +14473,14 @@ class _$InvoiceDetailRouteImpl implements _InvoiceDetailRoute {
     TResult? Function(_AccountExpired value)? accountExpired,
     TResult? Function(_TokenExpired value)? tokenExpired,
     TResult? Function(_AuthenticationFailed value)? authenticationFailed,
-    TResult? Function(_ProxyLoginRolePermissionNotMatch value)?
-        proxyLoginRolePermissionNotMatch,
-    TResult? Function(_ProxyLoginZPTargetRoleNotMatch value)?
-        proxyLoginZPTargetRoleNotMatch,
-    TResult? Function(_ProxyLoginZPSalesOrgNotMatch value)?
-        proxyLoginZPSalesOrgNotMatch,
+    TResult? Function(_CannotProxyLoginWithCurrentRole value)?
+        cannotProxyLoginWithCurrentRole,
+    TResult? Function(_CannotProxyLoginRootAdmin value)?
+        cannotProxyLoginRootAdmin,
+    TResult? Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)?
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult? Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
+        cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function(_PasswordResetFail value)? passwordResetFail,
     TResult? Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
@@ -13811,12 +14542,14 @@ class _$InvoiceDetailRouteImpl implements _InvoiceDetailRoute {
     TResult Function(_AccountExpired value)? accountExpired,
     TResult Function(_TokenExpired value)? tokenExpired,
     TResult Function(_AuthenticationFailed value)? authenticationFailed,
-    TResult Function(_ProxyLoginRolePermissionNotMatch value)?
-        proxyLoginRolePermissionNotMatch,
-    TResult Function(_ProxyLoginZPTargetRoleNotMatch value)?
-        proxyLoginZPTargetRoleNotMatch,
-    TResult Function(_ProxyLoginZPSalesOrgNotMatch value)?
-        proxyLoginZPSalesOrgNotMatch,
+    TResult Function(_CannotProxyLoginWithCurrentRole value)?
+        cannotProxyLoginWithCurrentRole,
+    TResult Function(_CannotProxyLoginRootAdmin value)?
+        cannotProxyLoginRootAdmin,
+    TResult Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)?
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
+        cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function(_PasswordResetFail value)? passwordResetFail,
     TResult Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
@@ -13920,9 +14653,10 @@ class _$LanguageChangeFailImpl implements _LanguageChangeFail {
     required TResult Function() accountExpired,
     required TResult Function() tokenExpired,
     required TResult Function() authenticationFailed,
-    required TResult Function() proxyLoginRolePermissionNotMatch,
-    required TResult Function() proxyLoginZPTargetRoleNotMatch,
-    required TResult Function() proxyLoginZPSalesOrgNotMatch,
+    required TResult Function() cannotProxyLoginWithCurrentRole,
+    required TResult Function() cannotProxyLoginRootAdmin,
+    required TResult Function() cannotProxyLoginZPAdminWhenIsZPAdmin,
+    required TResult Function() cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function() passwordResetFail,
     required TResult Function() deviceNotSupportBiometric,
     required TResult Function() cannotCheckBiometrics,
@@ -13976,9 +14710,10 @@ class _$LanguageChangeFailImpl implements _LanguageChangeFail {
     TResult? Function()? accountExpired,
     TResult? Function()? tokenExpired,
     TResult? Function()? authenticationFailed,
-    TResult? Function()? proxyLoginRolePermissionNotMatch,
-    TResult? Function()? proxyLoginZPTargetRoleNotMatch,
-    TResult? Function()? proxyLoginZPSalesOrgNotMatch,
+    TResult? Function()? cannotProxyLoginWithCurrentRole,
+    TResult? Function()? cannotProxyLoginRootAdmin,
+    TResult? Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult? Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function()? passwordResetFail,
     TResult? Function()? deviceNotSupportBiometric,
     TResult? Function()? cannotCheckBiometrics,
@@ -14032,9 +14767,10 @@ class _$LanguageChangeFailImpl implements _LanguageChangeFail {
     TResult Function()? accountExpired,
     TResult Function()? tokenExpired,
     TResult Function()? authenticationFailed,
-    TResult Function()? proxyLoginRolePermissionNotMatch,
-    TResult Function()? proxyLoginZPTargetRoleNotMatch,
-    TResult Function()? proxyLoginZPSalesOrgNotMatch,
+    TResult Function()? cannotProxyLoginWithCurrentRole,
+    TResult Function()? cannotProxyLoginRootAdmin,
+    TResult Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function()? passwordResetFail,
     TResult Function()? deviceNotSupportBiometric,
     TResult Function()? cannotCheckBiometrics,
@@ -14094,12 +14830,14 @@ class _$LanguageChangeFailImpl implements _LanguageChangeFail {
     required TResult Function(_AccountExpired value) accountExpired,
     required TResult Function(_TokenExpired value) tokenExpired,
     required TResult Function(_AuthenticationFailed value) authenticationFailed,
-    required TResult Function(_ProxyLoginRolePermissionNotMatch value)
-        proxyLoginRolePermissionNotMatch,
-    required TResult Function(_ProxyLoginZPTargetRoleNotMatch value)
-        proxyLoginZPTargetRoleNotMatch,
-    required TResult Function(_ProxyLoginZPSalesOrgNotMatch value)
-        proxyLoginZPSalesOrgNotMatch,
+    required TResult Function(_CannotProxyLoginWithCurrentRole value)
+        cannotProxyLoginWithCurrentRole,
+    required TResult Function(_CannotProxyLoginRootAdmin value)
+        cannotProxyLoginRootAdmin,
+    required TResult Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    required TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)
+        cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function(_PasswordResetFail value) passwordResetFail,
     required TResult Function(_DeviceNotSupportBiometric value)
         deviceNotSupportBiometric,
@@ -14175,12 +14913,14 @@ class _$LanguageChangeFailImpl implements _LanguageChangeFail {
     TResult? Function(_AccountExpired value)? accountExpired,
     TResult? Function(_TokenExpired value)? tokenExpired,
     TResult? Function(_AuthenticationFailed value)? authenticationFailed,
-    TResult? Function(_ProxyLoginRolePermissionNotMatch value)?
-        proxyLoginRolePermissionNotMatch,
-    TResult? Function(_ProxyLoginZPTargetRoleNotMatch value)?
-        proxyLoginZPTargetRoleNotMatch,
-    TResult? Function(_ProxyLoginZPSalesOrgNotMatch value)?
-        proxyLoginZPSalesOrgNotMatch,
+    TResult? Function(_CannotProxyLoginWithCurrentRole value)?
+        cannotProxyLoginWithCurrentRole,
+    TResult? Function(_CannotProxyLoginRootAdmin value)?
+        cannotProxyLoginRootAdmin,
+    TResult? Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)?
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult? Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
+        cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function(_PasswordResetFail value)? passwordResetFail,
     TResult? Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
@@ -14242,12 +14982,14 @@ class _$LanguageChangeFailImpl implements _LanguageChangeFail {
     TResult Function(_AccountExpired value)? accountExpired,
     TResult Function(_TokenExpired value)? tokenExpired,
     TResult Function(_AuthenticationFailed value)? authenticationFailed,
-    TResult Function(_ProxyLoginRolePermissionNotMatch value)?
-        proxyLoginRolePermissionNotMatch,
-    TResult Function(_ProxyLoginZPTargetRoleNotMatch value)?
-        proxyLoginZPTargetRoleNotMatch,
-    TResult Function(_ProxyLoginZPSalesOrgNotMatch value)?
-        proxyLoginZPSalesOrgNotMatch,
+    TResult Function(_CannotProxyLoginWithCurrentRole value)?
+        cannotProxyLoginWithCurrentRole,
+    TResult Function(_CannotProxyLoginRootAdmin value)?
+        cannotProxyLoginRootAdmin,
+    TResult Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)?
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
+        cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function(_PasswordResetFail value)? passwordResetFail,
     TResult Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
@@ -14354,9 +15096,10 @@ class _$ScannedProductNotFoundImpl implements _ScannedProductNotFound {
     required TResult Function() accountExpired,
     required TResult Function() tokenExpired,
     required TResult Function() authenticationFailed,
-    required TResult Function() proxyLoginRolePermissionNotMatch,
-    required TResult Function() proxyLoginZPTargetRoleNotMatch,
-    required TResult Function() proxyLoginZPSalesOrgNotMatch,
+    required TResult Function() cannotProxyLoginWithCurrentRole,
+    required TResult Function() cannotProxyLoginRootAdmin,
+    required TResult Function() cannotProxyLoginZPAdminWhenIsZPAdmin,
+    required TResult Function() cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function() passwordResetFail,
     required TResult Function() deviceNotSupportBiometric,
     required TResult Function() cannotCheckBiometrics,
@@ -14410,9 +15153,10 @@ class _$ScannedProductNotFoundImpl implements _ScannedProductNotFound {
     TResult? Function()? accountExpired,
     TResult? Function()? tokenExpired,
     TResult? Function()? authenticationFailed,
-    TResult? Function()? proxyLoginRolePermissionNotMatch,
-    TResult? Function()? proxyLoginZPTargetRoleNotMatch,
-    TResult? Function()? proxyLoginZPSalesOrgNotMatch,
+    TResult? Function()? cannotProxyLoginWithCurrentRole,
+    TResult? Function()? cannotProxyLoginRootAdmin,
+    TResult? Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult? Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function()? passwordResetFail,
     TResult? Function()? deviceNotSupportBiometric,
     TResult? Function()? cannotCheckBiometrics,
@@ -14466,9 +15210,10 @@ class _$ScannedProductNotFoundImpl implements _ScannedProductNotFound {
     TResult Function()? accountExpired,
     TResult Function()? tokenExpired,
     TResult Function()? authenticationFailed,
-    TResult Function()? proxyLoginRolePermissionNotMatch,
-    TResult Function()? proxyLoginZPTargetRoleNotMatch,
-    TResult Function()? proxyLoginZPSalesOrgNotMatch,
+    TResult Function()? cannotProxyLoginWithCurrentRole,
+    TResult Function()? cannotProxyLoginRootAdmin,
+    TResult Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function()? passwordResetFail,
     TResult Function()? deviceNotSupportBiometric,
     TResult Function()? cannotCheckBiometrics,
@@ -14528,12 +15273,14 @@ class _$ScannedProductNotFoundImpl implements _ScannedProductNotFound {
     required TResult Function(_AccountExpired value) accountExpired,
     required TResult Function(_TokenExpired value) tokenExpired,
     required TResult Function(_AuthenticationFailed value) authenticationFailed,
-    required TResult Function(_ProxyLoginRolePermissionNotMatch value)
-        proxyLoginRolePermissionNotMatch,
-    required TResult Function(_ProxyLoginZPTargetRoleNotMatch value)
-        proxyLoginZPTargetRoleNotMatch,
-    required TResult Function(_ProxyLoginZPSalesOrgNotMatch value)
-        proxyLoginZPSalesOrgNotMatch,
+    required TResult Function(_CannotProxyLoginWithCurrentRole value)
+        cannotProxyLoginWithCurrentRole,
+    required TResult Function(_CannotProxyLoginRootAdmin value)
+        cannotProxyLoginRootAdmin,
+    required TResult Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    required TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)
+        cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function(_PasswordResetFail value) passwordResetFail,
     required TResult Function(_DeviceNotSupportBiometric value)
         deviceNotSupportBiometric,
@@ -14609,12 +15356,14 @@ class _$ScannedProductNotFoundImpl implements _ScannedProductNotFound {
     TResult? Function(_AccountExpired value)? accountExpired,
     TResult? Function(_TokenExpired value)? tokenExpired,
     TResult? Function(_AuthenticationFailed value)? authenticationFailed,
-    TResult? Function(_ProxyLoginRolePermissionNotMatch value)?
-        proxyLoginRolePermissionNotMatch,
-    TResult? Function(_ProxyLoginZPTargetRoleNotMatch value)?
-        proxyLoginZPTargetRoleNotMatch,
-    TResult? Function(_ProxyLoginZPSalesOrgNotMatch value)?
-        proxyLoginZPSalesOrgNotMatch,
+    TResult? Function(_CannotProxyLoginWithCurrentRole value)?
+        cannotProxyLoginWithCurrentRole,
+    TResult? Function(_CannotProxyLoginRootAdmin value)?
+        cannotProxyLoginRootAdmin,
+    TResult? Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)?
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult? Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
+        cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function(_PasswordResetFail value)? passwordResetFail,
     TResult? Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
@@ -14676,12 +15425,14 @@ class _$ScannedProductNotFoundImpl implements _ScannedProductNotFound {
     TResult Function(_AccountExpired value)? accountExpired,
     TResult Function(_TokenExpired value)? tokenExpired,
     TResult Function(_AuthenticationFailed value)? authenticationFailed,
-    TResult Function(_ProxyLoginRolePermissionNotMatch value)?
-        proxyLoginRolePermissionNotMatch,
-    TResult Function(_ProxyLoginZPTargetRoleNotMatch value)?
-        proxyLoginZPTargetRoleNotMatch,
-    TResult Function(_ProxyLoginZPSalesOrgNotMatch value)?
-        proxyLoginZPSalesOrgNotMatch,
+    TResult Function(_CannotProxyLoginWithCurrentRole value)?
+        cannotProxyLoginWithCurrentRole,
+    TResult Function(_CannotProxyLoginRootAdmin value)?
+        cannotProxyLoginRootAdmin,
+    TResult Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)?
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
+        cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function(_PasswordResetFail value)? passwordResetFail,
     TResult Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
@@ -14815,9 +15566,10 @@ class _$CameraPermissionFailedImpl implements _CameraPermissionFailed {
     required TResult Function() accountExpired,
     required TResult Function() tokenExpired,
     required TResult Function() authenticationFailed,
-    required TResult Function() proxyLoginRolePermissionNotMatch,
-    required TResult Function() proxyLoginZPTargetRoleNotMatch,
-    required TResult Function() proxyLoginZPSalesOrgNotMatch,
+    required TResult Function() cannotProxyLoginWithCurrentRole,
+    required TResult Function() cannotProxyLoginRootAdmin,
+    required TResult Function() cannotProxyLoginZPAdminWhenIsZPAdmin,
+    required TResult Function() cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function() passwordResetFail,
     required TResult Function() deviceNotSupportBiometric,
     required TResult Function() cannotCheckBiometrics,
@@ -14871,9 +15623,10 @@ class _$CameraPermissionFailedImpl implements _CameraPermissionFailed {
     TResult? Function()? accountExpired,
     TResult? Function()? tokenExpired,
     TResult? Function()? authenticationFailed,
-    TResult? Function()? proxyLoginRolePermissionNotMatch,
-    TResult? Function()? proxyLoginZPTargetRoleNotMatch,
-    TResult? Function()? proxyLoginZPSalesOrgNotMatch,
+    TResult? Function()? cannotProxyLoginWithCurrentRole,
+    TResult? Function()? cannotProxyLoginRootAdmin,
+    TResult? Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult? Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function()? passwordResetFail,
     TResult? Function()? deviceNotSupportBiometric,
     TResult? Function()? cannotCheckBiometrics,
@@ -14927,9 +15680,10 @@ class _$CameraPermissionFailedImpl implements _CameraPermissionFailed {
     TResult Function()? accountExpired,
     TResult Function()? tokenExpired,
     TResult Function()? authenticationFailed,
-    TResult Function()? proxyLoginRolePermissionNotMatch,
-    TResult Function()? proxyLoginZPTargetRoleNotMatch,
-    TResult Function()? proxyLoginZPSalesOrgNotMatch,
+    TResult Function()? cannotProxyLoginWithCurrentRole,
+    TResult Function()? cannotProxyLoginRootAdmin,
+    TResult Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function()? passwordResetFail,
     TResult Function()? deviceNotSupportBiometric,
     TResult Function()? cannotCheckBiometrics,
@@ -14989,12 +15743,14 @@ class _$CameraPermissionFailedImpl implements _CameraPermissionFailed {
     required TResult Function(_AccountExpired value) accountExpired,
     required TResult Function(_TokenExpired value) tokenExpired,
     required TResult Function(_AuthenticationFailed value) authenticationFailed,
-    required TResult Function(_ProxyLoginRolePermissionNotMatch value)
-        proxyLoginRolePermissionNotMatch,
-    required TResult Function(_ProxyLoginZPTargetRoleNotMatch value)
-        proxyLoginZPTargetRoleNotMatch,
-    required TResult Function(_ProxyLoginZPSalesOrgNotMatch value)
-        proxyLoginZPSalesOrgNotMatch,
+    required TResult Function(_CannotProxyLoginWithCurrentRole value)
+        cannotProxyLoginWithCurrentRole,
+    required TResult Function(_CannotProxyLoginRootAdmin value)
+        cannotProxyLoginRootAdmin,
+    required TResult Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    required TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)
+        cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function(_PasswordResetFail value) passwordResetFail,
     required TResult Function(_DeviceNotSupportBiometric value)
         deviceNotSupportBiometric,
@@ -15070,12 +15826,14 @@ class _$CameraPermissionFailedImpl implements _CameraPermissionFailed {
     TResult? Function(_AccountExpired value)? accountExpired,
     TResult? Function(_TokenExpired value)? tokenExpired,
     TResult? Function(_AuthenticationFailed value)? authenticationFailed,
-    TResult? Function(_ProxyLoginRolePermissionNotMatch value)?
-        proxyLoginRolePermissionNotMatch,
-    TResult? Function(_ProxyLoginZPTargetRoleNotMatch value)?
-        proxyLoginZPTargetRoleNotMatch,
-    TResult? Function(_ProxyLoginZPSalesOrgNotMatch value)?
-        proxyLoginZPSalesOrgNotMatch,
+    TResult? Function(_CannotProxyLoginWithCurrentRole value)?
+        cannotProxyLoginWithCurrentRole,
+    TResult? Function(_CannotProxyLoginRootAdmin value)?
+        cannotProxyLoginRootAdmin,
+    TResult? Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)?
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult? Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
+        cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function(_PasswordResetFail value)? passwordResetFail,
     TResult? Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
@@ -15137,12 +15895,14 @@ class _$CameraPermissionFailedImpl implements _CameraPermissionFailed {
     TResult Function(_AccountExpired value)? accountExpired,
     TResult Function(_TokenExpired value)? tokenExpired,
     TResult Function(_AuthenticationFailed value)? authenticationFailed,
-    TResult Function(_ProxyLoginRolePermissionNotMatch value)?
-        proxyLoginRolePermissionNotMatch,
-    TResult Function(_ProxyLoginZPTargetRoleNotMatch value)?
-        proxyLoginZPTargetRoleNotMatch,
-    TResult Function(_ProxyLoginZPSalesOrgNotMatch value)?
-        proxyLoginZPSalesOrgNotMatch,
+    TResult Function(_CannotProxyLoginWithCurrentRole value)?
+        cannotProxyLoginWithCurrentRole,
+    TResult Function(_CannotProxyLoginRootAdmin value)?
+        cannotProxyLoginRootAdmin,
+    TResult Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)?
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
+        cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function(_PasswordResetFail value)? passwordResetFail,
     TResult Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
@@ -15252,9 +16012,10 @@ class _$UserNameNotFoundImpl implements _UserNameNotFound {
     required TResult Function() accountExpired,
     required TResult Function() tokenExpired,
     required TResult Function() authenticationFailed,
-    required TResult Function() proxyLoginRolePermissionNotMatch,
-    required TResult Function() proxyLoginZPTargetRoleNotMatch,
-    required TResult Function() proxyLoginZPSalesOrgNotMatch,
+    required TResult Function() cannotProxyLoginWithCurrentRole,
+    required TResult Function() cannotProxyLoginRootAdmin,
+    required TResult Function() cannotProxyLoginZPAdminWhenIsZPAdmin,
+    required TResult Function() cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function() passwordResetFail,
     required TResult Function() deviceNotSupportBiometric,
     required TResult Function() cannotCheckBiometrics,
@@ -15308,9 +16069,10 @@ class _$UserNameNotFoundImpl implements _UserNameNotFound {
     TResult? Function()? accountExpired,
     TResult? Function()? tokenExpired,
     TResult? Function()? authenticationFailed,
-    TResult? Function()? proxyLoginRolePermissionNotMatch,
-    TResult? Function()? proxyLoginZPTargetRoleNotMatch,
-    TResult? Function()? proxyLoginZPSalesOrgNotMatch,
+    TResult? Function()? cannotProxyLoginWithCurrentRole,
+    TResult? Function()? cannotProxyLoginRootAdmin,
+    TResult? Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult? Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function()? passwordResetFail,
     TResult? Function()? deviceNotSupportBiometric,
     TResult? Function()? cannotCheckBiometrics,
@@ -15364,9 +16126,10 @@ class _$UserNameNotFoundImpl implements _UserNameNotFound {
     TResult Function()? accountExpired,
     TResult Function()? tokenExpired,
     TResult Function()? authenticationFailed,
-    TResult Function()? proxyLoginRolePermissionNotMatch,
-    TResult Function()? proxyLoginZPTargetRoleNotMatch,
-    TResult Function()? proxyLoginZPSalesOrgNotMatch,
+    TResult Function()? cannotProxyLoginWithCurrentRole,
+    TResult Function()? cannotProxyLoginRootAdmin,
+    TResult Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function()? passwordResetFail,
     TResult Function()? deviceNotSupportBiometric,
     TResult Function()? cannotCheckBiometrics,
@@ -15426,12 +16189,14 @@ class _$UserNameNotFoundImpl implements _UserNameNotFound {
     required TResult Function(_AccountExpired value) accountExpired,
     required TResult Function(_TokenExpired value) tokenExpired,
     required TResult Function(_AuthenticationFailed value) authenticationFailed,
-    required TResult Function(_ProxyLoginRolePermissionNotMatch value)
-        proxyLoginRolePermissionNotMatch,
-    required TResult Function(_ProxyLoginZPTargetRoleNotMatch value)
-        proxyLoginZPTargetRoleNotMatch,
-    required TResult Function(_ProxyLoginZPSalesOrgNotMatch value)
-        proxyLoginZPSalesOrgNotMatch,
+    required TResult Function(_CannotProxyLoginWithCurrentRole value)
+        cannotProxyLoginWithCurrentRole,
+    required TResult Function(_CannotProxyLoginRootAdmin value)
+        cannotProxyLoginRootAdmin,
+    required TResult Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    required TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)
+        cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function(_PasswordResetFail value) passwordResetFail,
     required TResult Function(_DeviceNotSupportBiometric value)
         deviceNotSupportBiometric,
@@ -15507,12 +16272,14 @@ class _$UserNameNotFoundImpl implements _UserNameNotFound {
     TResult? Function(_AccountExpired value)? accountExpired,
     TResult? Function(_TokenExpired value)? tokenExpired,
     TResult? Function(_AuthenticationFailed value)? authenticationFailed,
-    TResult? Function(_ProxyLoginRolePermissionNotMatch value)?
-        proxyLoginRolePermissionNotMatch,
-    TResult? Function(_ProxyLoginZPTargetRoleNotMatch value)?
-        proxyLoginZPTargetRoleNotMatch,
-    TResult? Function(_ProxyLoginZPSalesOrgNotMatch value)?
-        proxyLoginZPSalesOrgNotMatch,
+    TResult? Function(_CannotProxyLoginWithCurrentRole value)?
+        cannotProxyLoginWithCurrentRole,
+    TResult? Function(_CannotProxyLoginRootAdmin value)?
+        cannotProxyLoginRootAdmin,
+    TResult? Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)?
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult? Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
+        cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function(_PasswordResetFail value)? passwordResetFail,
     TResult? Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
@@ -15574,12 +16341,14 @@ class _$UserNameNotFoundImpl implements _UserNameNotFound {
     TResult Function(_AccountExpired value)? accountExpired,
     TResult Function(_TokenExpired value)? tokenExpired,
     TResult Function(_AuthenticationFailed value)? authenticationFailed,
-    TResult Function(_ProxyLoginRolePermissionNotMatch value)?
-        proxyLoginRolePermissionNotMatch,
-    TResult Function(_ProxyLoginZPTargetRoleNotMatch value)?
-        proxyLoginZPTargetRoleNotMatch,
-    TResult Function(_ProxyLoginZPSalesOrgNotMatch value)?
-        proxyLoginZPSalesOrgNotMatch,
+    TResult Function(_CannotProxyLoginWithCurrentRole value)?
+        cannotProxyLoginWithCurrentRole,
+    TResult Function(_CannotProxyLoginRootAdmin value)?
+        cannotProxyLoginRootAdmin,
+    TResult Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)?
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
+        cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function(_PasswordResetFail value)? passwordResetFail,
     TResult Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
@@ -15683,9 +16452,10 @@ class _$AccountBlockedImpl implements _AccountBlocked {
     required TResult Function() accountExpired,
     required TResult Function() tokenExpired,
     required TResult Function() authenticationFailed,
-    required TResult Function() proxyLoginRolePermissionNotMatch,
-    required TResult Function() proxyLoginZPTargetRoleNotMatch,
-    required TResult Function() proxyLoginZPSalesOrgNotMatch,
+    required TResult Function() cannotProxyLoginWithCurrentRole,
+    required TResult Function() cannotProxyLoginRootAdmin,
+    required TResult Function() cannotProxyLoginZPAdminWhenIsZPAdmin,
+    required TResult Function() cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function() passwordResetFail,
     required TResult Function() deviceNotSupportBiometric,
     required TResult Function() cannotCheckBiometrics,
@@ -15739,9 +16509,10 @@ class _$AccountBlockedImpl implements _AccountBlocked {
     TResult? Function()? accountExpired,
     TResult? Function()? tokenExpired,
     TResult? Function()? authenticationFailed,
-    TResult? Function()? proxyLoginRolePermissionNotMatch,
-    TResult? Function()? proxyLoginZPTargetRoleNotMatch,
-    TResult? Function()? proxyLoginZPSalesOrgNotMatch,
+    TResult? Function()? cannotProxyLoginWithCurrentRole,
+    TResult? Function()? cannotProxyLoginRootAdmin,
+    TResult? Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult? Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function()? passwordResetFail,
     TResult? Function()? deviceNotSupportBiometric,
     TResult? Function()? cannotCheckBiometrics,
@@ -15795,9 +16566,10 @@ class _$AccountBlockedImpl implements _AccountBlocked {
     TResult Function()? accountExpired,
     TResult Function()? tokenExpired,
     TResult Function()? authenticationFailed,
-    TResult Function()? proxyLoginRolePermissionNotMatch,
-    TResult Function()? proxyLoginZPTargetRoleNotMatch,
-    TResult Function()? proxyLoginZPSalesOrgNotMatch,
+    TResult Function()? cannotProxyLoginWithCurrentRole,
+    TResult Function()? cannotProxyLoginRootAdmin,
+    TResult Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function()? passwordResetFail,
     TResult Function()? deviceNotSupportBiometric,
     TResult Function()? cannotCheckBiometrics,
@@ -15857,12 +16629,14 @@ class _$AccountBlockedImpl implements _AccountBlocked {
     required TResult Function(_AccountExpired value) accountExpired,
     required TResult Function(_TokenExpired value) tokenExpired,
     required TResult Function(_AuthenticationFailed value) authenticationFailed,
-    required TResult Function(_ProxyLoginRolePermissionNotMatch value)
-        proxyLoginRolePermissionNotMatch,
-    required TResult Function(_ProxyLoginZPTargetRoleNotMatch value)
-        proxyLoginZPTargetRoleNotMatch,
-    required TResult Function(_ProxyLoginZPSalesOrgNotMatch value)
-        proxyLoginZPSalesOrgNotMatch,
+    required TResult Function(_CannotProxyLoginWithCurrentRole value)
+        cannotProxyLoginWithCurrentRole,
+    required TResult Function(_CannotProxyLoginRootAdmin value)
+        cannotProxyLoginRootAdmin,
+    required TResult Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    required TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)
+        cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function(_PasswordResetFail value) passwordResetFail,
     required TResult Function(_DeviceNotSupportBiometric value)
         deviceNotSupportBiometric,
@@ -15938,12 +16712,14 @@ class _$AccountBlockedImpl implements _AccountBlocked {
     TResult? Function(_AccountExpired value)? accountExpired,
     TResult? Function(_TokenExpired value)? tokenExpired,
     TResult? Function(_AuthenticationFailed value)? authenticationFailed,
-    TResult? Function(_ProxyLoginRolePermissionNotMatch value)?
-        proxyLoginRolePermissionNotMatch,
-    TResult? Function(_ProxyLoginZPTargetRoleNotMatch value)?
-        proxyLoginZPTargetRoleNotMatch,
-    TResult? Function(_ProxyLoginZPSalesOrgNotMatch value)?
-        proxyLoginZPSalesOrgNotMatch,
+    TResult? Function(_CannotProxyLoginWithCurrentRole value)?
+        cannotProxyLoginWithCurrentRole,
+    TResult? Function(_CannotProxyLoginRootAdmin value)?
+        cannotProxyLoginRootAdmin,
+    TResult? Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)?
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult? Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
+        cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function(_PasswordResetFail value)? passwordResetFail,
     TResult? Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
@@ -16005,12 +16781,14 @@ class _$AccountBlockedImpl implements _AccountBlocked {
     TResult Function(_AccountExpired value)? accountExpired,
     TResult Function(_TokenExpired value)? tokenExpired,
     TResult Function(_AuthenticationFailed value)? authenticationFailed,
-    TResult Function(_ProxyLoginRolePermissionNotMatch value)?
-        proxyLoginRolePermissionNotMatch,
-    TResult Function(_ProxyLoginZPTargetRoleNotMatch value)?
-        proxyLoginZPTargetRoleNotMatch,
-    TResult Function(_ProxyLoginZPSalesOrgNotMatch value)?
-        proxyLoginZPSalesOrgNotMatch,
+    TResult Function(_CannotProxyLoginWithCurrentRole value)?
+        cannotProxyLoginWithCurrentRole,
+    TResult Function(_CannotProxyLoginRootAdmin value)?
+        cannotProxyLoginRootAdmin,
+    TResult Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)?
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
+        cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function(_PasswordResetFail value)? passwordResetFail,
     TResult Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
@@ -16117,9 +16895,10 @@ class _$UploadedFileSizeExceedImpl implements _UploadedFileSizeExceed {
     required TResult Function() accountExpired,
     required TResult Function() tokenExpired,
     required TResult Function() authenticationFailed,
-    required TResult Function() proxyLoginRolePermissionNotMatch,
-    required TResult Function() proxyLoginZPTargetRoleNotMatch,
-    required TResult Function() proxyLoginZPSalesOrgNotMatch,
+    required TResult Function() cannotProxyLoginWithCurrentRole,
+    required TResult Function() cannotProxyLoginRootAdmin,
+    required TResult Function() cannotProxyLoginZPAdminWhenIsZPAdmin,
+    required TResult Function() cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function() passwordResetFail,
     required TResult Function() deviceNotSupportBiometric,
     required TResult Function() cannotCheckBiometrics,
@@ -16173,9 +16952,10 @@ class _$UploadedFileSizeExceedImpl implements _UploadedFileSizeExceed {
     TResult? Function()? accountExpired,
     TResult? Function()? tokenExpired,
     TResult? Function()? authenticationFailed,
-    TResult? Function()? proxyLoginRolePermissionNotMatch,
-    TResult? Function()? proxyLoginZPTargetRoleNotMatch,
-    TResult? Function()? proxyLoginZPSalesOrgNotMatch,
+    TResult? Function()? cannotProxyLoginWithCurrentRole,
+    TResult? Function()? cannotProxyLoginRootAdmin,
+    TResult? Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult? Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function()? passwordResetFail,
     TResult? Function()? deviceNotSupportBiometric,
     TResult? Function()? cannotCheckBiometrics,
@@ -16229,9 +17009,10 @@ class _$UploadedFileSizeExceedImpl implements _UploadedFileSizeExceed {
     TResult Function()? accountExpired,
     TResult Function()? tokenExpired,
     TResult Function()? authenticationFailed,
-    TResult Function()? proxyLoginRolePermissionNotMatch,
-    TResult Function()? proxyLoginZPTargetRoleNotMatch,
-    TResult Function()? proxyLoginZPSalesOrgNotMatch,
+    TResult Function()? cannotProxyLoginWithCurrentRole,
+    TResult Function()? cannotProxyLoginRootAdmin,
+    TResult Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function()? passwordResetFail,
     TResult Function()? deviceNotSupportBiometric,
     TResult Function()? cannotCheckBiometrics,
@@ -16291,12 +17072,14 @@ class _$UploadedFileSizeExceedImpl implements _UploadedFileSizeExceed {
     required TResult Function(_AccountExpired value) accountExpired,
     required TResult Function(_TokenExpired value) tokenExpired,
     required TResult Function(_AuthenticationFailed value) authenticationFailed,
-    required TResult Function(_ProxyLoginRolePermissionNotMatch value)
-        proxyLoginRolePermissionNotMatch,
-    required TResult Function(_ProxyLoginZPTargetRoleNotMatch value)
-        proxyLoginZPTargetRoleNotMatch,
-    required TResult Function(_ProxyLoginZPSalesOrgNotMatch value)
-        proxyLoginZPSalesOrgNotMatch,
+    required TResult Function(_CannotProxyLoginWithCurrentRole value)
+        cannotProxyLoginWithCurrentRole,
+    required TResult Function(_CannotProxyLoginRootAdmin value)
+        cannotProxyLoginRootAdmin,
+    required TResult Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    required TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)
+        cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function(_PasswordResetFail value) passwordResetFail,
     required TResult Function(_DeviceNotSupportBiometric value)
         deviceNotSupportBiometric,
@@ -16372,12 +17155,14 @@ class _$UploadedFileSizeExceedImpl implements _UploadedFileSizeExceed {
     TResult? Function(_AccountExpired value)? accountExpired,
     TResult? Function(_TokenExpired value)? tokenExpired,
     TResult? Function(_AuthenticationFailed value)? authenticationFailed,
-    TResult? Function(_ProxyLoginRolePermissionNotMatch value)?
-        proxyLoginRolePermissionNotMatch,
-    TResult? Function(_ProxyLoginZPTargetRoleNotMatch value)?
-        proxyLoginZPTargetRoleNotMatch,
-    TResult? Function(_ProxyLoginZPSalesOrgNotMatch value)?
-        proxyLoginZPSalesOrgNotMatch,
+    TResult? Function(_CannotProxyLoginWithCurrentRole value)?
+        cannotProxyLoginWithCurrentRole,
+    TResult? Function(_CannotProxyLoginRootAdmin value)?
+        cannotProxyLoginRootAdmin,
+    TResult? Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)?
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult? Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
+        cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function(_PasswordResetFail value)? passwordResetFail,
     TResult? Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
@@ -16439,12 +17224,14 @@ class _$UploadedFileSizeExceedImpl implements _UploadedFileSizeExceed {
     TResult Function(_AccountExpired value)? accountExpired,
     TResult Function(_TokenExpired value)? tokenExpired,
     TResult Function(_AuthenticationFailed value)? authenticationFailed,
-    TResult Function(_ProxyLoginRolePermissionNotMatch value)?
-        proxyLoginRolePermissionNotMatch,
-    TResult Function(_ProxyLoginZPTargetRoleNotMatch value)?
-        proxyLoginZPTargetRoleNotMatch,
-    TResult Function(_ProxyLoginZPSalesOrgNotMatch value)?
-        proxyLoginZPSalesOrgNotMatch,
+    TResult Function(_CannotProxyLoginWithCurrentRole value)?
+        cannotProxyLoginWithCurrentRole,
+    TResult Function(_CannotProxyLoginRootAdmin value)?
+        cannotProxyLoginRootAdmin,
+    TResult Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)?
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
+        cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function(_PasswordResetFail value)? passwordResetFail,
     TResult Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
@@ -16578,9 +17365,10 @@ class _$PaymentAdviceDeleteFailedImpl implements _PaymentAdviceDeleteFailed {
     required TResult Function() accountExpired,
     required TResult Function() tokenExpired,
     required TResult Function() authenticationFailed,
-    required TResult Function() proxyLoginRolePermissionNotMatch,
-    required TResult Function() proxyLoginZPTargetRoleNotMatch,
-    required TResult Function() proxyLoginZPSalesOrgNotMatch,
+    required TResult Function() cannotProxyLoginWithCurrentRole,
+    required TResult Function() cannotProxyLoginRootAdmin,
+    required TResult Function() cannotProxyLoginZPAdminWhenIsZPAdmin,
+    required TResult Function() cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function() passwordResetFail,
     required TResult Function() deviceNotSupportBiometric,
     required TResult Function() cannotCheckBiometrics,
@@ -16634,9 +17422,10 @@ class _$PaymentAdviceDeleteFailedImpl implements _PaymentAdviceDeleteFailed {
     TResult? Function()? accountExpired,
     TResult? Function()? tokenExpired,
     TResult? Function()? authenticationFailed,
-    TResult? Function()? proxyLoginRolePermissionNotMatch,
-    TResult? Function()? proxyLoginZPTargetRoleNotMatch,
-    TResult? Function()? proxyLoginZPSalesOrgNotMatch,
+    TResult? Function()? cannotProxyLoginWithCurrentRole,
+    TResult? Function()? cannotProxyLoginRootAdmin,
+    TResult? Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult? Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function()? passwordResetFail,
     TResult? Function()? deviceNotSupportBiometric,
     TResult? Function()? cannotCheckBiometrics,
@@ -16690,9 +17479,10 @@ class _$PaymentAdviceDeleteFailedImpl implements _PaymentAdviceDeleteFailed {
     TResult Function()? accountExpired,
     TResult Function()? tokenExpired,
     TResult Function()? authenticationFailed,
-    TResult Function()? proxyLoginRolePermissionNotMatch,
-    TResult Function()? proxyLoginZPTargetRoleNotMatch,
-    TResult Function()? proxyLoginZPSalesOrgNotMatch,
+    TResult Function()? cannotProxyLoginWithCurrentRole,
+    TResult Function()? cannotProxyLoginRootAdmin,
+    TResult Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function()? passwordResetFail,
     TResult Function()? deviceNotSupportBiometric,
     TResult Function()? cannotCheckBiometrics,
@@ -16752,12 +17542,14 @@ class _$PaymentAdviceDeleteFailedImpl implements _PaymentAdviceDeleteFailed {
     required TResult Function(_AccountExpired value) accountExpired,
     required TResult Function(_TokenExpired value) tokenExpired,
     required TResult Function(_AuthenticationFailed value) authenticationFailed,
-    required TResult Function(_ProxyLoginRolePermissionNotMatch value)
-        proxyLoginRolePermissionNotMatch,
-    required TResult Function(_ProxyLoginZPTargetRoleNotMatch value)
-        proxyLoginZPTargetRoleNotMatch,
-    required TResult Function(_ProxyLoginZPSalesOrgNotMatch value)
-        proxyLoginZPSalesOrgNotMatch,
+    required TResult Function(_CannotProxyLoginWithCurrentRole value)
+        cannotProxyLoginWithCurrentRole,
+    required TResult Function(_CannotProxyLoginRootAdmin value)
+        cannotProxyLoginRootAdmin,
+    required TResult Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    required TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)
+        cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function(_PasswordResetFail value) passwordResetFail,
     required TResult Function(_DeviceNotSupportBiometric value)
         deviceNotSupportBiometric,
@@ -16833,12 +17625,14 @@ class _$PaymentAdviceDeleteFailedImpl implements _PaymentAdviceDeleteFailed {
     TResult? Function(_AccountExpired value)? accountExpired,
     TResult? Function(_TokenExpired value)? tokenExpired,
     TResult? Function(_AuthenticationFailed value)? authenticationFailed,
-    TResult? Function(_ProxyLoginRolePermissionNotMatch value)?
-        proxyLoginRolePermissionNotMatch,
-    TResult? Function(_ProxyLoginZPTargetRoleNotMatch value)?
-        proxyLoginZPTargetRoleNotMatch,
-    TResult? Function(_ProxyLoginZPSalesOrgNotMatch value)?
-        proxyLoginZPSalesOrgNotMatch,
+    TResult? Function(_CannotProxyLoginWithCurrentRole value)?
+        cannotProxyLoginWithCurrentRole,
+    TResult? Function(_CannotProxyLoginRootAdmin value)?
+        cannotProxyLoginRootAdmin,
+    TResult? Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)?
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult? Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
+        cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function(_PasswordResetFail value)? passwordResetFail,
     TResult? Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
@@ -16900,12 +17694,14 @@ class _$PaymentAdviceDeleteFailedImpl implements _PaymentAdviceDeleteFailed {
     TResult Function(_AccountExpired value)? accountExpired,
     TResult Function(_TokenExpired value)? tokenExpired,
     TResult Function(_AuthenticationFailed value)? authenticationFailed,
-    TResult Function(_ProxyLoginRolePermissionNotMatch value)?
-        proxyLoginRolePermissionNotMatch,
-    TResult Function(_ProxyLoginZPTargetRoleNotMatch value)?
-        proxyLoginZPTargetRoleNotMatch,
-    TResult Function(_ProxyLoginZPSalesOrgNotMatch value)?
-        proxyLoginZPSalesOrgNotMatch,
+    TResult Function(_CannotProxyLoginWithCurrentRole value)?
+        cannotProxyLoginWithCurrentRole,
+    TResult Function(_CannotProxyLoginRootAdmin value)?
+        cannotProxyLoginRootAdmin,
+    TResult Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)?
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
+        cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function(_PasswordResetFail value)? passwordResetFail,
     TResult Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
@@ -17017,9 +17813,10 @@ class _$AllReorderItemInvalidImpl implements _AllReorderItemInvalid {
     required TResult Function() accountExpired,
     required TResult Function() tokenExpired,
     required TResult Function() authenticationFailed,
-    required TResult Function() proxyLoginRolePermissionNotMatch,
-    required TResult Function() proxyLoginZPTargetRoleNotMatch,
-    required TResult Function() proxyLoginZPSalesOrgNotMatch,
+    required TResult Function() cannotProxyLoginWithCurrentRole,
+    required TResult Function() cannotProxyLoginRootAdmin,
+    required TResult Function() cannotProxyLoginZPAdminWhenIsZPAdmin,
+    required TResult Function() cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function() passwordResetFail,
     required TResult Function() deviceNotSupportBiometric,
     required TResult Function() cannotCheckBiometrics,
@@ -17073,9 +17870,10 @@ class _$AllReorderItemInvalidImpl implements _AllReorderItemInvalid {
     TResult? Function()? accountExpired,
     TResult? Function()? tokenExpired,
     TResult? Function()? authenticationFailed,
-    TResult? Function()? proxyLoginRolePermissionNotMatch,
-    TResult? Function()? proxyLoginZPTargetRoleNotMatch,
-    TResult? Function()? proxyLoginZPSalesOrgNotMatch,
+    TResult? Function()? cannotProxyLoginWithCurrentRole,
+    TResult? Function()? cannotProxyLoginRootAdmin,
+    TResult? Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult? Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function()? passwordResetFail,
     TResult? Function()? deviceNotSupportBiometric,
     TResult? Function()? cannotCheckBiometrics,
@@ -17129,9 +17927,10 @@ class _$AllReorderItemInvalidImpl implements _AllReorderItemInvalid {
     TResult Function()? accountExpired,
     TResult Function()? tokenExpired,
     TResult Function()? authenticationFailed,
-    TResult Function()? proxyLoginRolePermissionNotMatch,
-    TResult Function()? proxyLoginZPTargetRoleNotMatch,
-    TResult Function()? proxyLoginZPSalesOrgNotMatch,
+    TResult Function()? cannotProxyLoginWithCurrentRole,
+    TResult Function()? cannotProxyLoginRootAdmin,
+    TResult Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function()? passwordResetFail,
     TResult Function()? deviceNotSupportBiometric,
     TResult Function()? cannotCheckBiometrics,
@@ -17191,12 +17990,14 @@ class _$AllReorderItemInvalidImpl implements _AllReorderItemInvalid {
     required TResult Function(_AccountExpired value) accountExpired,
     required TResult Function(_TokenExpired value) tokenExpired,
     required TResult Function(_AuthenticationFailed value) authenticationFailed,
-    required TResult Function(_ProxyLoginRolePermissionNotMatch value)
-        proxyLoginRolePermissionNotMatch,
-    required TResult Function(_ProxyLoginZPTargetRoleNotMatch value)
-        proxyLoginZPTargetRoleNotMatch,
-    required TResult Function(_ProxyLoginZPSalesOrgNotMatch value)
-        proxyLoginZPSalesOrgNotMatch,
+    required TResult Function(_CannotProxyLoginWithCurrentRole value)
+        cannotProxyLoginWithCurrentRole,
+    required TResult Function(_CannotProxyLoginRootAdmin value)
+        cannotProxyLoginRootAdmin,
+    required TResult Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    required TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)
+        cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function(_PasswordResetFail value) passwordResetFail,
     required TResult Function(_DeviceNotSupportBiometric value)
         deviceNotSupportBiometric,
@@ -17272,12 +18073,14 @@ class _$AllReorderItemInvalidImpl implements _AllReorderItemInvalid {
     TResult? Function(_AccountExpired value)? accountExpired,
     TResult? Function(_TokenExpired value)? tokenExpired,
     TResult? Function(_AuthenticationFailed value)? authenticationFailed,
-    TResult? Function(_ProxyLoginRolePermissionNotMatch value)?
-        proxyLoginRolePermissionNotMatch,
-    TResult? Function(_ProxyLoginZPTargetRoleNotMatch value)?
-        proxyLoginZPTargetRoleNotMatch,
-    TResult? Function(_ProxyLoginZPSalesOrgNotMatch value)?
-        proxyLoginZPSalesOrgNotMatch,
+    TResult? Function(_CannotProxyLoginWithCurrentRole value)?
+        cannotProxyLoginWithCurrentRole,
+    TResult? Function(_CannotProxyLoginRootAdmin value)?
+        cannotProxyLoginRootAdmin,
+    TResult? Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)?
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult? Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
+        cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function(_PasswordResetFail value)? passwordResetFail,
     TResult? Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
@@ -17339,12 +18142,14 @@ class _$AllReorderItemInvalidImpl implements _AllReorderItemInvalid {
     TResult Function(_AccountExpired value)? accountExpired,
     TResult Function(_TokenExpired value)? tokenExpired,
     TResult Function(_AuthenticationFailed value)? authenticationFailed,
-    TResult Function(_ProxyLoginRolePermissionNotMatch value)?
-        proxyLoginRolePermissionNotMatch,
-    TResult Function(_ProxyLoginZPTargetRoleNotMatch value)?
-        proxyLoginZPTargetRoleNotMatch,
-    TResult Function(_ProxyLoginZPSalesOrgNotMatch value)?
-        proxyLoginZPSalesOrgNotMatch,
+    TResult Function(_CannotProxyLoginWithCurrentRole value)?
+        cannotProxyLoginWithCurrentRole,
+    TResult Function(_CannotProxyLoginRootAdmin value)?
+        cannotProxyLoginRootAdmin,
+    TResult Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)?
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
+        cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function(_PasswordResetFail value)? passwordResetFail,
     TResult Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
@@ -17476,9 +18281,10 @@ class _$ReorderItemInvalidImpl implements _ReorderItemInvalid {
     required TResult Function() accountExpired,
     required TResult Function() tokenExpired,
     required TResult Function() authenticationFailed,
-    required TResult Function() proxyLoginRolePermissionNotMatch,
-    required TResult Function() proxyLoginZPTargetRoleNotMatch,
-    required TResult Function() proxyLoginZPSalesOrgNotMatch,
+    required TResult Function() cannotProxyLoginWithCurrentRole,
+    required TResult Function() cannotProxyLoginRootAdmin,
+    required TResult Function() cannotProxyLoginZPAdminWhenIsZPAdmin,
+    required TResult Function() cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function() passwordResetFail,
     required TResult Function() deviceNotSupportBiometric,
     required TResult Function() cannotCheckBiometrics,
@@ -17532,9 +18338,10 @@ class _$ReorderItemInvalidImpl implements _ReorderItemInvalid {
     TResult? Function()? accountExpired,
     TResult? Function()? tokenExpired,
     TResult? Function()? authenticationFailed,
-    TResult? Function()? proxyLoginRolePermissionNotMatch,
-    TResult? Function()? proxyLoginZPTargetRoleNotMatch,
-    TResult? Function()? proxyLoginZPSalesOrgNotMatch,
+    TResult? Function()? cannotProxyLoginWithCurrentRole,
+    TResult? Function()? cannotProxyLoginRootAdmin,
+    TResult? Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult? Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function()? passwordResetFail,
     TResult? Function()? deviceNotSupportBiometric,
     TResult? Function()? cannotCheckBiometrics,
@@ -17588,9 +18395,10 @@ class _$ReorderItemInvalidImpl implements _ReorderItemInvalid {
     TResult Function()? accountExpired,
     TResult Function()? tokenExpired,
     TResult Function()? authenticationFailed,
-    TResult Function()? proxyLoginRolePermissionNotMatch,
-    TResult Function()? proxyLoginZPTargetRoleNotMatch,
-    TResult Function()? proxyLoginZPSalesOrgNotMatch,
+    TResult Function()? cannotProxyLoginWithCurrentRole,
+    TResult Function()? cannotProxyLoginRootAdmin,
+    TResult Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function()? passwordResetFail,
     TResult Function()? deviceNotSupportBiometric,
     TResult Function()? cannotCheckBiometrics,
@@ -17650,12 +18458,14 @@ class _$ReorderItemInvalidImpl implements _ReorderItemInvalid {
     required TResult Function(_AccountExpired value) accountExpired,
     required TResult Function(_TokenExpired value) tokenExpired,
     required TResult Function(_AuthenticationFailed value) authenticationFailed,
-    required TResult Function(_ProxyLoginRolePermissionNotMatch value)
-        proxyLoginRolePermissionNotMatch,
-    required TResult Function(_ProxyLoginZPTargetRoleNotMatch value)
-        proxyLoginZPTargetRoleNotMatch,
-    required TResult Function(_ProxyLoginZPSalesOrgNotMatch value)
-        proxyLoginZPSalesOrgNotMatch,
+    required TResult Function(_CannotProxyLoginWithCurrentRole value)
+        cannotProxyLoginWithCurrentRole,
+    required TResult Function(_CannotProxyLoginRootAdmin value)
+        cannotProxyLoginRootAdmin,
+    required TResult Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    required TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)
+        cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function(_PasswordResetFail value) passwordResetFail,
     required TResult Function(_DeviceNotSupportBiometric value)
         deviceNotSupportBiometric,
@@ -17731,12 +18541,14 @@ class _$ReorderItemInvalidImpl implements _ReorderItemInvalid {
     TResult? Function(_AccountExpired value)? accountExpired,
     TResult? Function(_TokenExpired value)? tokenExpired,
     TResult? Function(_AuthenticationFailed value)? authenticationFailed,
-    TResult? Function(_ProxyLoginRolePermissionNotMatch value)?
-        proxyLoginRolePermissionNotMatch,
-    TResult? Function(_ProxyLoginZPTargetRoleNotMatch value)?
-        proxyLoginZPTargetRoleNotMatch,
-    TResult? Function(_ProxyLoginZPSalesOrgNotMatch value)?
-        proxyLoginZPSalesOrgNotMatch,
+    TResult? Function(_CannotProxyLoginWithCurrentRole value)?
+        cannotProxyLoginWithCurrentRole,
+    TResult? Function(_CannotProxyLoginRootAdmin value)?
+        cannotProxyLoginRootAdmin,
+    TResult? Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)?
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult? Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
+        cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function(_PasswordResetFail value)? passwordResetFail,
     TResult? Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
@@ -17798,12 +18610,14 @@ class _$ReorderItemInvalidImpl implements _ReorderItemInvalid {
     TResult Function(_AccountExpired value)? accountExpired,
     TResult Function(_TokenExpired value)? tokenExpired,
     TResult Function(_AuthenticationFailed value)? authenticationFailed,
-    TResult Function(_ProxyLoginRolePermissionNotMatch value)?
-        proxyLoginRolePermissionNotMatch,
-    TResult Function(_ProxyLoginZPTargetRoleNotMatch value)?
-        proxyLoginZPTargetRoleNotMatch,
-    TResult Function(_ProxyLoginZPSalesOrgNotMatch value)?
-        proxyLoginZPSalesOrgNotMatch,
+    TResult Function(_CannotProxyLoginWithCurrentRole value)?
+        cannotProxyLoginWithCurrentRole,
+    TResult Function(_CannotProxyLoginRootAdmin value)?
+        cannotProxyLoginRootAdmin,
+    TResult Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)?
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
+        cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function(_PasswordResetFail value)? passwordResetFail,
     TResult Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
@@ -17943,9 +18757,10 @@ class _$MaximumCartQuantityExceedImpl implements _MaximumCartQuantityExceed {
     required TResult Function() accountExpired,
     required TResult Function() tokenExpired,
     required TResult Function() authenticationFailed,
-    required TResult Function() proxyLoginRolePermissionNotMatch,
-    required TResult Function() proxyLoginZPTargetRoleNotMatch,
-    required TResult Function() proxyLoginZPSalesOrgNotMatch,
+    required TResult Function() cannotProxyLoginWithCurrentRole,
+    required TResult Function() cannotProxyLoginRootAdmin,
+    required TResult Function() cannotProxyLoginZPAdminWhenIsZPAdmin,
+    required TResult Function() cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function() passwordResetFail,
     required TResult Function() deviceNotSupportBiometric,
     required TResult Function() cannotCheckBiometrics,
@@ -17999,9 +18814,10 @@ class _$MaximumCartQuantityExceedImpl implements _MaximumCartQuantityExceed {
     TResult? Function()? accountExpired,
     TResult? Function()? tokenExpired,
     TResult? Function()? authenticationFailed,
-    TResult? Function()? proxyLoginRolePermissionNotMatch,
-    TResult? Function()? proxyLoginZPTargetRoleNotMatch,
-    TResult? Function()? proxyLoginZPSalesOrgNotMatch,
+    TResult? Function()? cannotProxyLoginWithCurrentRole,
+    TResult? Function()? cannotProxyLoginRootAdmin,
+    TResult? Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult? Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function()? passwordResetFail,
     TResult? Function()? deviceNotSupportBiometric,
     TResult? Function()? cannotCheckBiometrics,
@@ -18055,9 +18871,10 @@ class _$MaximumCartQuantityExceedImpl implements _MaximumCartQuantityExceed {
     TResult Function()? accountExpired,
     TResult Function()? tokenExpired,
     TResult Function()? authenticationFailed,
-    TResult Function()? proxyLoginRolePermissionNotMatch,
-    TResult Function()? proxyLoginZPTargetRoleNotMatch,
-    TResult Function()? proxyLoginZPSalesOrgNotMatch,
+    TResult Function()? cannotProxyLoginWithCurrentRole,
+    TResult Function()? cannotProxyLoginRootAdmin,
+    TResult Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function()? passwordResetFail,
     TResult Function()? deviceNotSupportBiometric,
     TResult Function()? cannotCheckBiometrics,
@@ -18117,12 +18934,14 @@ class _$MaximumCartQuantityExceedImpl implements _MaximumCartQuantityExceed {
     required TResult Function(_AccountExpired value) accountExpired,
     required TResult Function(_TokenExpired value) tokenExpired,
     required TResult Function(_AuthenticationFailed value) authenticationFailed,
-    required TResult Function(_ProxyLoginRolePermissionNotMatch value)
-        proxyLoginRolePermissionNotMatch,
-    required TResult Function(_ProxyLoginZPTargetRoleNotMatch value)
-        proxyLoginZPTargetRoleNotMatch,
-    required TResult Function(_ProxyLoginZPSalesOrgNotMatch value)
-        proxyLoginZPSalesOrgNotMatch,
+    required TResult Function(_CannotProxyLoginWithCurrentRole value)
+        cannotProxyLoginWithCurrentRole,
+    required TResult Function(_CannotProxyLoginRootAdmin value)
+        cannotProxyLoginRootAdmin,
+    required TResult Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    required TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)
+        cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function(_PasswordResetFail value) passwordResetFail,
     required TResult Function(_DeviceNotSupportBiometric value)
         deviceNotSupportBiometric,
@@ -18198,12 +19017,14 @@ class _$MaximumCartQuantityExceedImpl implements _MaximumCartQuantityExceed {
     TResult? Function(_AccountExpired value)? accountExpired,
     TResult? Function(_TokenExpired value)? tokenExpired,
     TResult? Function(_AuthenticationFailed value)? authenticationFailed,
-    TResult? Function(_ProxyLoginRolePermissionNotMatch value)?
-        proxyLoginRolePermissionNotMatch,
-    TResult? Function(_ProxyLoginZPTargetRoleNotMatch value)?
-        proxyLoginZPTargetRoleNotMatch,
-    TResult? Function(_ProxyLoginZPSalesOrgNotMatch value)?
-        proxyLoginZPSalesOrgNotMatch,
+    TResult? Function(_CannotProxyLoginWithCurrentRole value)?
+        cannotProxyLoginWithCurrentRole,
+    TResult? Function(_CannotProxyLoginRootAdmin value)?
+        cannotProxyLoginRootAdmin,
+    TResult? Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)?
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult? Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
+        cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function(_PasswordResetFail value)? passwordResetFail,
     TResult? Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
@@ -18265,12 +19086,14 @@ class _$MaximumCartQuantityExceedImpl implements _MaximumCartQuantityExceed {
     TResult Function(_AccountExpired value)? accountExpired,
     TResult Function(_TokenExpired value)? tokenExpired,
     TResult Function(_AuthenticationFailed value)? authenticationFailed,
-    TResult Function(_ProxyLoginRolePermissionNotMatch value)?
-        proxyLoginRolePermissionNotMatch,
-    TResult Function(_ProxyLoginZPTargetRoleNotMatch value)?
-        proxyLoginZPTargetRoleNotMatch,
-    TResult Function(_ProxyLoginZPSalesOrgNotMatch value)?
-        proxyLoginZPSalesOrgNotMatch,
+    TResult Function(_CannotProxyLoginWithCurrentRole value)?
+        cannotProxyLoginWithCurrentRole,
+    TResult Function(_CannotProxyLoginRootAdmin value)?
+        cannotProxyLoginRootAdmin,
+    TResult Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)?
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
+        cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function(_PasswordResetFail value)? passwordResetFail,
     TResult Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
@@ -18383,9 +19206,10 @@ class _$CartHasDifferentAddressImpl implements _CartHasDifferentAddress {
     required TResult Function() accountExpired,
     required TResult Function() tokenExpired,
     required TResult Function() authenticationFailed,
-    required TResult Function() proxyLoginRolePermissionNotMatch,
-    required TResult Function() proxyLoginZPTargetRoleNotMatch,
-    required TResult Function() proxyLoginZPSalesOrgNotMatch,
+    required TResult Function() cannotProxyLoginWithCurrentRole,
+    required TResult Function() cannotProxyLoginRootAdmin,
+    required TResult Function() cannotProxyLoginZPAdminWhenIsZPAdmin,
+    required TResult Function() cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function() passwordResetFail,
     required TResult Function() deviceNotSupportBiometric,
     required TResult Function() cannotCheckBiometrics,
@@ -18439,9 +19263,10 @@ class _$CartHasDifferentAddressImpl implements _CartHasDifferentAddress {
     TResult? Function()? accountExpired,
     TResult? Function()? tokenExpired,
     TResult? Function()? authenticationFailed,
-    TResult? Function()? proxyLoginRolePermissionNotMatch,
-    TResult? Function()? proxyLoginZPTargetRoleNotMatch,
-    TResult? Function()? proxyLoginZPSalesOrgNotMatch,
+    TResult? Function()? cannotProxyLoginWithCurrentRole,
+    TResult? Function()? cannotProxyLoginRootAdmin,
+    TResult? Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult? Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function()? passwordResetFail,
     TResult? Function()? deviceNotSupportBiometric,
     TResult? Function()? cannotCheckBiometrics,
@@ -18495,9 +19320,10 @@ class _$CartHasDifferentAddressImpl implements _CartHasDifferentAddress {
     TResult Function()? accountExpired,
     TResult Function()? tokenExpired,
     TResult Function()? authenticationFailed,
-    TResult Function()? proxyLoginRolePermissionNotMatch,
-    TResult Function()? proxyLoginZPTargetRoleNotMatch,
-    TResult Function()? proxyLoginZPSalesOrgNotMatch,
+    TResult Function()? cannotProxyLoginWithCurrentRole,
+    TResult Function()? cannotProxyLoginRootAdmin,
+    TResult Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function()? passwordResetFail,
     TResult Function()? deviceNotSupportBiometric,
     TResult Function()? cannotCheckBiometrics,
@@ -18557,12 +19383,14 @@ class _$CartHasDifferentAddressImpl implements _CartHasDifferentAddress {
     required TResult Function(_AccountExpired value) accountExpired,
     required TResult Function(_TokenExpired value) tokenExpired,
     required TResult Function(_AuthenticationFailed value) authenticationFailed,
-    required TResult Function(_ProxyLoginRolePermissionNotMatch value)
-        proxyLoginRolePermissionNotMatch,
-    required TResult Function(_ProxyLoginZPTargetRoleNotMatch value)
-        proxyLoginZPTargetRoleNotMatch,
-    required TResult Function(_ProxyLoginZPSalesOrgNotMatch value)
-        proxyLoginZPSalesOrgNotMatch,
+    required TResult Function(_CannotProxyLoginWithCurrentRole value)
+        cannotProxyLoginWithCurrentRole,
+    required TResult Function(_CannotProxyLoginRootAdmin value)
+        cannotProxyLoginRootAdmin,
+    required TResult Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    required TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)
+        cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function(_PasswordResetFail value) passwordResetFail,
     required TResult Function(_DeviceNotSupportBiometric value)
         deviceNotSupportBiometric,
@@ -18638,12 +19466,14 @@ class _$CartHasDifferentAddressImpl implements _CartHasDifferentAddress {
     TResult? Function(_AccountExpired value)? accountExpired,
     TResult? Function(_TokenExpired value)? tokenExpired,
     TResult? Function(_AuthenticationFailed value)? authenticationFailed,
-    TResult? Function(_ProxyLoginRolePermissionNotMatch value)?
-        proxyLoginRolePermissionNotMatch,
-    TResult? Function(_ProxyLoginZPTargetRoleNotMatch value)?
-        proxyLoginZPTargetRoleNotMatch,
-    TResult? Function(_ProxyLoginZPSalesOrgNotMatch value)?
-        proxyLoginZPSalesOrgNotMatch,
+    TResult? Function(_CannotProxyLoginWithCurrentRole value)?
+        cannotProxyLoginWithCurrentRole,
+    TResult? Function(_CannotProxyLoginRootAdmin value)?
+        cannotProxyLoginRootAdmin,
+    TResult? Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)?
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult? Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
+        cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function(_PasswordResetFail value)? passwordResetFail,
     TResult? Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
@@ -18705,12 +19535,14 @@ class _$CartHasDifferentAddressImpl implements _CartHasDifferentAddress {
     TResult Function(_AccountExpired value)? accountExpired,
     TResult Function(_TokenExpired value)? tokenExpired,
     TResult Function(_AuthenticationFailed value)? authenticationFailed,
-    TResult Function(_ProxyLoginRolePermissionNotMatch value)?
-        proxyLoginRolePermissionNotMatch,
-    TResult Function(_ProxyLoginZPTargetRoleNotMatch value)?
-        proxyLoginZPTargetRoleNotMatch,
-    TResult Function(_ProxyLoginZPSalesOrgNotMatch value)?
-        proxyLoginZPSalesOrgNotMatch,
+    TResult Function(_CannotProxyLoginWithCurrentRole value)?
+        cannotProxyLoginWithCurrentRole,
+    TResult Function(_CannotProxyLoginRootAdmin value)?
+        cannotProxyLoginRootAdmin,
+    TResult Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)?
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
+        cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function(_PasswordResetFail value)? passwordResetFail,
     TResult Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
@@ -18819,9 +19651,10 @@ class _$ArticleannuncementTagFetchingErrorImpl
     required TResult Function() accountExpired,
     required TResult Function() tokenExpired,
     required TResult Function() authenticationFailed,
-    required TResult Function() proxyLoginRolePermissionNotMatch,
-    required TResult Function() proxyLoginZPTargetRoleNotMatch,
-    required TResult Function() proxyLoginZPSalesOrgNotMatch,
+    required TResult Function() cannotProxyLoginWithCurrentRole,
+    required TResult Function() cannotProxyLoginRootAdmin,
+    required TResult Function() cannotProxyLoginZPAdminWhenIsZPAdmin,
+    required TResult Function() cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function() passwordResetFail,
     required TResult Function() deviceNotSupportBiometric,
     required TResult Function() cannotCheckBiometrics,
@@ -18875,9 +19708,10 @@ class _$ArticleannuncementTagFetchingErrorImpl
     TResult? Function()? accountExpired,
     TResult? Function()? tokenExpired,
     TResult? Function()? authenticationFailed,
-    TResult? Function()? proxyLoginRolePermissionNotMatch,
-    TResult? Function()? proxyLoginZPTargetRoleNotMatch,
-    TResult? Function()? proxyLoginZPSalesOrgNotMatch,
+    TResult? Function()? cannotProxyLoginWithCurrentRole,
+    TResult? Function()? cannotProxyLoginRootAdmin,
+    TResult? Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult? Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function()? passwordResetFail,
     TResult? Function()? deviceNotSupportBiometric,
     TResult? Function()? cannotCheckBiometrics,
@@ -18931,9 +19765,10 @@ class _$ArticleannuncementTagFetchingErrorImpl
     TResult Function()? accountExpired,
     TResult Function()? tokenExpired,
     TResult Function()? authenticationFailed,
-    TResult Function()? proxyLoginRolePermissionNotMatch,
-    TResult Function()? proxyLoginZPTargetRoleNotMatch,
-    TResult Function()? proxyLoginZPSalesOrgNotMatch,
+    TResult Function()? cannotProxyLoginWithCurrentRole,
+    TResult Function()? cannotProxyLoginRootAdmin,
+    TResult Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function()? passwordResetFail,
     TResult Function()? deviceNotSupportBiometric,
     TResult Function()? cannotCheckBiometrics,
@@ -18993,12 +19828,14 @@ class _$ArticleannuncementTagFetchingErrorImpl
     required TResult Function(_AccountExpired value) accountExpired,
     required TResult Function(_TokenExpired value) tokenExpired,
     required TResult Function(_AuthenticationFailed value) authenticationFailed,
-    required TResult Function(_ProxyLoginRolePermissionNotMatch value)
-        proxyLoginRolePermissionNotMatch,
-    required TResult Function(_ProxyLoginZPTargetRoleNotMatch value)
-        proxyLoginZPTargetRoleNotMatch,
-    required TResult Function(_ProxyLoginZPSalesOrgNotMatch value)
-        proxyLoginZPSalesOrgNotMatch,
+    required TResult Function(_CannotProxyLoginWithCurrentRole value)
+        cannotProxyLoginWithCurrentRole,
+    required TResult Function(_CannotProxyLoginRootAdmin value)
+        cannotProxyLoginRootAdmin,
+    required TResult Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    required TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)
+        cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function(_PasswordResetFail value) passwordResetFail,
     required TResult Function(_DeviceNotSupportBiometric value)
         deviceNotSupportBiometric,
@@ -19074,12 +19911,14 @@ class _$ArticleannuncementTagFetchingErrorImpl
     TResult? Function(_AccountExpired value)? accountExpired,
     TResult? Function(_TokenExpired value)? tokenExpired,
     TResult? Function(_AuthenticationFailed value)? authenticationFailed,
-    TResult? Function(_ProxyLoginRolePermissionNotMatch value)?
-        proxyLoginRolePermissionNotMatch,
-    TResult? Function(_ProxyLoginZPTargetRoleNotMatch value)?
-        proxyLoginZPTargetRoleNotMatch,
-    TResult? Function(_ProxyLoginZPSalesOrgNotMatch value)?
-        proxyLoginZPSalesOrgNotMatch,
+    TResult? Function(_CannotProxyLoginWithCurrentRole value)?
+        cannotProxyLoginWithCurrentRole,
+    TResult? Function(_CannotProxyLoginRootAdmin value)?
+        cannotProxyLoginRootAdmin,
+    TResult? Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)?
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult? Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
+        cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function(_PasswordResetFail value)? passwordResetFail,
     TResult? Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
@@ -19141,12 +19980,14 @@ class _$ArticleannuncementTagFetchingErrorImpl
     TResult Function(_AccountExpired value)? accountExpired,
     TResult Function(_TokenExpired value)? tokenExpired,
     TResult Function(_AuthenticationFailed value)? authenticationFailed,
-    TResult Function(_ProxyLoginRolePermissionNotMatch value)?
-        proxyLoginRolePermissionNotMatch,
-    TResult Function(_ProxyLoginZPTargetRoleNotMatch value)?
-        proxyLoginZPTargetRoleNotMatch,
-    TResult Function(_ProxyLoginZPSalesOrgNotMatch value)?
-        proxyLoginZPSalesOrgNotMatch,
+    TResult Function(_CannotProxyLoginWithCurrentRole value)?
+        cannotProxyLoginWithCurrentRole,
+    TResult Function(_CannotProxyLoginRootAdmin value)?
+        cannotProxyLoginRootAdmin,
+    TResult Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)?
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
+        cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function(_PasswordResetFail value)? passwordResetFail,
     TResult Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
@@ -19254,9 +20095,10 @@ class _$AttachmentDownloadErrorImpl implements _AttachmentDownloadError {
     required TResult Function() accountExpired,
     required TResult Function() tokenExpired,
     required TResult Function() authenticationFailed,
-    required TResult Function() proxyLoginRolePermissionNotMatch,
-    required TResult Function() proxyLoginZPTargetRoleNotMatch,
-    required TResult Function() proxyLoginZPSalesOrgNotMatch,
+    required TResult Function() cannotProxyLoginWithCurrentRole,
+    required TResult Function() cannotProxyLoginRootAdmin,
+    required TResult Function() cannotProxyLoginZPAdminWhenIsZPAdmin,
+    required TResult Function() cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function() passwordResetFail,
     required TResult Function() deviceNotSupportBiometric,
     required TResult Function() cannotCheckBiometrics,
@@ -19310,9 +20152,10 @@ class _$AttachmentDownloadErrorImpl implements _AttachmentDownloadError {
     TResult? Function()? accountExpired,
     TResult? Function()? tokenExpired,
     TResult? Function()? authenticationFailed,
-    TResult? Function()? proxyLoginRolePermissionNotMatch,
-    TResult? Function()? proxyLoginZPTargetRoleNotMatch,
-    TResult? Function()? proxyLoginZPSalesOrgNotMatch,
+    TResult? Function()? cannotProxyLoginWithCurrentRole,
+    TResult? Function()? cannotProxyLoginRootAdmin,
+    TResult? Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult? Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function()? passwordResetFail,
     TResult? Function()? deviceNotSupportBiometric,
     TResult? Function()? cannotCheckBiometrics,
@@ -19366,9 +20209,10 @@ class _$AttachmentDownloadErrorImpl implements _AttachmentDownloadError {
     TResult Function()? accountExpired,
     TResult Function()? tokenExpired,
     TResult Function()? authenticationFailed,
-    TResult Function()? proxyLoginRolePermissionNotMatch,
-    TResult Function()? proxyLoginZPTargetRoleNotMatch,
-    TResult Function()? proxyLoginZPSalesOrgNotMatch,
+    TResult Function()? cannotProxyLoginWithCurrentRole,
+    TResult Function()? cannotProxyLoginRootAdmin,
+    TResult Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function()? passwordResetFail,
     TResult Function()? deviceNotSupportBiometric,
     TResult Function()? cannotCheckBiometrics,
@@ -19428,12 +20272,14 @@ class _$AttachmentDownloadErrorImpl implements _AttachmentDownloadError {
     required TResult Function(_AccountExpired value) accountExpired,
     required TResult Function(_TokenExpired value) tokenExpired,
     required TResult Function(_AuthenticationFailed value) authenticationFailed,
-    required TResult Function(_ProxyLoginRolePermissionNotMatch value)
-        proxyLoginRolePermissionNotMatch,
-    required TResult Function(_ProxyLoginZPTargetRoleNotMatch value)
-        proxyLoginZPTargetRoleNotMatch,
-    required TResult Function(_ProxyLoginZPSalesOrgNotMatch value)
-        proxyLoginZPSalesOrgNotMatch,
+    required TResult Function(_CannotProxyLoginWithCurrentRole value)
+        cannotProxyLoginWithCurrentRole,
+    required TResult Function(_CannotProxyLoginRootAdmin value)
+        cannotProxyLoginRootAdmin,
+    required TResult Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    required TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)
+        cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function(_PasswordResetFail value) passwordResetFail,
     required TResult Function(_DeviceNotSupportBiometric value)
         deviceNotSupportBiometric,
@@ -19509,12 +20355,14 @@ class _$AttachmentDownloadErrorImpl implements _AttachmentDownloadError {
     TResult? Function(_AccountExpired value)? accountExpired,
     TResult? Function(_TokenExpired value)? tokenExpired,
     TResult? Function(_AuthenticationFailed value)? authenticationFailed,
-    TResult? Function(_ProxyLoginRolePermissionNotMatch value)?
-        proxyLoginRolePermissionNotMatch,
-    TResult? Function(_ProxyLoginZPTargetRoleNotMatch value)?
-        proxyLoginZPTargetRoleNotMatch,
-    TResult? Function(_ProxyLoginZPSalesOrgNotMatch value)?
-        proxyLoginZPSalesOrgNotMatch,
+    TResult? Function(_CannotProxyLoginWithCurrentRole value)?
+        cannotProxyLoginWithCurrentRole,
+    TResult? Function(_CannotProxyLoginRootAdmin value)?
+        cannotProxyLoginRootAdmin,
+    TResult? Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)?
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult? Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
+        cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function(_PasswordResetFail value)? passwordResetFail,
     TResult? Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
@@ -19576,12 +20424,14 @@ class _$AttachmentDownloadErrorImpl implements _AttachmentDownloadError {
     TResult Function(_AccountExpired value)? accountExpired,
     TResult Function(_TokenExpired value)? tokenExpired,
     TResult Function(_AuthenticationFailed value)? authenticationFailed,
-    TResult Function(_ProxyLoginRolePermissionNotMatch value)?
-        proxyLoginRolePermissionNotMatch,
-    TResult Function(_ProxyLoginZPTargetRoleNotMatch value)?
-        proxyLoginZPTargetRoleNotMatch,
-    TResult Function(_ProxyLoginZPSalesOrgNotMatch value)?
-        proxyLoginZPSalesOrgNotMatch,
+    TResult Function(_CannotProxyLoginWithCurrentRole value)?
+        cannotProxyLoginWithCurrentRole,
+    TResult Function(_CannotProxyLoginRootAdmin value)?
+        cannotProxyLoginRootAdmin,
+    TResult Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)?
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
+        cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function(_PasswordResetFail value)? passwordResetFail,
     TResult Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
@@ -19714,9 +20564,10 @@ class _$OpenDownloadedFileErrorImpl implements _OpenDownloadedFileError {
     required TResult Function() accountExpired,
     required TResult Function() tokenExpired,
     required TResult Function() authenticationFailed,
-    required TResult Function() proxyLoginRolePermissionNotMatch,
-    required TResult Function() proxyLoginZPTargetRoleNotMatch,
-    required TResult Function() proxyLoginZPSalesOrgNotMatch,
+    required TResult Function() cannotProxyLoginWithCurrentRole,
+    required TResult Function() cannotProxyLoginRootAdmin,
+    required TResult Function() cannotProxyLoginZPAdminWhenIsZPAdmin,
+    required TResult Function() cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function() passwordResetFail,
     required TResult Function() deviceNotSupportBiometric,
     required TResult Function() cannotCheckBiometrics,
@@ -19770,9 +20621,10 @@ class _$OpenDownloadedFileErrorImpl implements _OpenDownloadedFileError {
     TResult? Function()? accountExpired,
     TResult? Function()? tokenExpired,
     TResult? Function()? authenticationFailed,
-    TResult? Function()? proxyLoginRolePermissionNotMatch,
-    TResult? Function()? proxyLoginZPTargetRoleNotMatch,
-    TResult? Function()? proxyLoginZPSalesOrgNotMatch,
+    TResult? Function()? cannotProxyLoginWithCurrentRole,
+    TResult? Function()? cannotProxyLoginRootAdmin,
+    TResult? Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult? Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function()? passwordResetFail,
     TResult? Function()? deviceNotSupportBiometric,
     TResult? Function()? cannotCheckBiometrics,
@@ -19826,9 +20678,10 @@ class _$OpenDownloadedFileErrorImpl implements _OpenDownloadedFileError {
     TResult Function()? accountExpired,
     TResult Function()? tokenExpired,
     TResult Function()? authenticationFailed,
-    TResult Function()? proxyLoginRolePermissionNotMatch,
-    TResult Function()? proxyLoginZPTargetRoleNotMatch,
-    TResult Function()? proxyLoginZPSalesOrgNotMatch,
+    TResult Function()? cannotProxyLoginWithCurrentRole,
+    TResult Function()? cannotProxyLoginRootAdmin,
+    TResult Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function()? passwordResetFail,
     TResult Function()? deviceNotSupportBiometric,
     TResult Function()? cannotCheckBiometrics,
@@ -19888,12 +20741,14 @@ class _$OpenDownloadedFileErrorImpl implements _OpenDownloadedFileError {
     required TResult Function(_AccountExpired value) accountExpired,
     required TResult Function(_TokenExpired value) tokenExpired,
     required TResult Function(_AuthenticationFailed value) authenticationFailed,
-    required TResult Function(_ProxyLoginRolePermissionNotMatch value)
-        proxyLoginRolePermissionNotMatch,
-    required TResult Function(_ProxyLoginZPTargetRoleNotMatch value)
-        proxyLoginZPTargetRoleNotMatch,
-    required TResult Function(_ProxyLoginZPSalesOrgNotMatch value)
-        proxyLoginZPSalesOrgNotMatch,
+    required TResult Function(_CannotProxyLoginWithCurrentRole value)
+        cannotProxyLoginWithCurrentRole,
+    required TResult Function(_CannotProxyLoginRootAdmin value)
+        cannotProxyLoginRootAdmin,
+    required TResult Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    required TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)
+        cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function(_PasswordResetFail value) passwordResetFail,
     required TResult Function(_DeviceNotSupportBiometric value)
         deviceNotSupportBiometric,
@@ -19969,12 +20824,14 @@ class _$OpenDownloadedFileErrorImpl implements _OpenDownloadedFileError {
     TResult? Function(_AccountExpired value)? accountExpired,
     TResult? Function(_TokenExpired value)? tokenExpired,
     TResult? Function(_AuthenticationFailed value)? authenticationFailed,
-    TResult? Function(_ProxyLoginRolePermissionNotMatch value)?
-        proxyLoginRolePermissionNotMatch,
-    TResult? Function(_ProxyLoginZPTargetRoleNotMatch value)?
-        proxyLoginZPTargetRoleNotMatch,
-    TResult? Function(_ProxyLoginZPSalesOrgNotMatch value)?
-        proxyLoginZPSalesOrgNotMatch,
+    TResult? Function(_CannotProxyLoginWithCurrentRole value)?
+        cannotProxyLoginWithCurrentRole,
+    TResult? Function(_CannotProxyLoginRootAdmin value)?
+        cannotProxyLoginRootAdmin,
+    TResult? Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)?
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult? Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
+        cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function(_PasswordResetFail value)? passwordResetFail,
     TResult? Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
@@ -20036,12 +20893,14 @@ class _$OpenDownloadedFileErrorImpl implements _OpenDownloadedFileError {
     TResult Function(_AccountExpired value)? accountExpired,
     TResult Function(_TokenExpired value)? tokenExpired,
     TResult Function(_AuthenticationFailed value)? authenticationFailed,
-    TResult Function(_ProxyLoginRolePermissionNotMatch value)?
-        proxyLoginRolePermissionNotMatch,
-    TResult Function(_ProxyLoginZPTargetRoleNotMatch value)?
-        proxyLoginZPTargetRoleNotMatch,
-    TResult Function(_ProxyLoginZPSalesOrgNotMatch value)?
-        proxyLoginZPSalesOrgNotMatch,
+    TResult Function(_CannotProxyLoginWithCurrentRole value)?
+        cannotProxyLoginWithCurrentRole,
+    TResult Function(_CannotProxyLoginRootAdmin value)?
+        cannotProxyLoginRootAdmin,
+    TResult Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)?
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
+        cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function(_PasswordResetFail value)? passwordResetFail,
     TResult Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
@@ -20156,9 +21015,10 @@ class _$AddAnimalHealthWithNormalProductToCartImpl
     required TResult Function() accountExpired,
     required TResult Function() tokenExpired,
     required TResult Function() authenticationFailed,
-    required TResult Function() proxyLoginRolePermissionNotMatch,
-    required TResult Function() proxyLoginZPTargetRoleNotMatch,
-    required TResult Function() proxyLoginZPSalesOrgNotMatch,
+    required TResult Function() cannotProxyLoginWithCurrentRole,
+    required TResult Function() cannotProxyLoginRootAdmin,
+    required TResult Function() cannotProxyLoginZPAdminWhenIsZPAdmin,
+    required TResult Function() cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function() passwordResetFail,
     required TResult Function() deviceNotSupportBiometric,
     required TResult Function() cannotCheckBiometrics,
@@ -20212,9 +21072,10 @@ class _$AddAnimalHealthWithNormalProductToCartImpl
     TResult? Function()? accountExpired,
     TResult? Function()? tokenExpired,
     TResult? Function()? authenticationFailed,
-    TResult? Function()? proxyLoginRolePermissionNotMatch,
-    TResult? Function()? proxyLoginZPTargetRoleNotMatch,
-    TResult? Function()? proxyLoginZPSalesOrgNotMatch,
+    TResult? Function()? cannotProxyLoginWithCurrentRole,
+    TResult? Function()? cannotProxyLoginRootAdmin,
+    TResult? Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult? Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function()? passwordResetFail,
     TResult? Function()? deviceNotSupportBiometric,
     TResult? Function()? cannotCheckBiometrics,
@@ -20268,9 +21129,10 @@ class _$AddAnimalHealthWithNormalProductToCartImpl
     TResult Function()? accountExpired,
     TResult Function()? tokenExpired,
     TResult Function()? authenticationFailed,
-    TResult Function()? proxyLoginRolePermissionNotMatch,
-    TResult Function()? proxyLoginZPTargetRoleNotMatch,
-    TResult Function()? proxyLoginZPSalesOrgNotMatch,
+    TResult Function()? cannotProxyLoginWithCurrentRole,
+    TResult Function()? cannotProxyLoginRootAdmin,
+    TResult Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function()? passwordResetFail,
     TResult Function()? deviceNotSupportBiometric,
     TResult Function()? cannotCheckBiometrics,
@@ -20330,12 +21192,14 @@ class _$AddAnimalHealthWithNormalProductToCartImpl
     required TResult Function(_AccountExpired value) accountExpired,
     required TResult Function(_TokenExpired value) tokenExpired,
     required TResult Function(_AuthenticationFailed value) authenticationFailed,
-    required TResult Function(_ProxyLoginRolePermissionNotMatch value)
-        proxyLoginRolePermissionNotMatch,
-    required TResult Function(_ProxyLoginZPTargetRoleNotMatch value)
-        proxyLoginZPTargetRoleNotMatch,
-    required TResult Function(_ProxyLoginZPSalesOrgNotMatch value)
-        proxyLoginZPSalesOrgNotMatch,
+    required TResult Function(_CannotProxyLoginWithCurrentRole value)
+        cannotProxyLoginWithCurrentRole,
+    required TResult Function(_CannotProxyLoginRootAdmin value)
+        cannotProxyLoginRootAdmin,
+    required TResult Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    required TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)
+        cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function(_PasswordResetFail value) passwordResetFail,
     required TResult Function(_DeviceNotSupportBiometric value)
         deviceNotSupportBiometric,
@@ -20411,12 +21275,14 @@ class _$AddAnimalHealthWithNormalProductToCartImpl
     TResult? Function(_AccountExpired value)? accountExpired,
     TResult? Function(_TokenExpired value)? tokenExpired,
     TResult? Function(_AuthenticationFailed value)? authenticationFailed,
-    TResult? Function(_ProxyLoginRolePermissionNotMatch value)?
-        proxyLoginRolePermissionNotMatch,
-    TResult? Function(_ProxyLoginZPTargetRoleNotMatch value)?
-        proxyLoginZPTargetRoleNotMatch,
-    TResult? Function(_ProxyLoginZPSalesOrgNotMatch value)?
-        proxyLoginZPSalesOrgNotMatch,
+    TResult? Function(_CannotProxyLoginWithCurrentRole value)?
+        cannotProxyLoginWithCurrentRole,
+    TResult? Function(_CannotProxyLoginRootAdmin value)?
+        cannotProxyLoginRootAdmin,
+    TResult? Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)?
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult? Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
+        cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function(_PasswordResetFail value)? passwordResetFail,
     TResult? Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
@@ -20478,12 +21344,14 @@ class _$AddAnimalHealthWithNormalProductToCartImpl
     TResult Function(_AccountExpired value)? accountExpired,
     TResult Function(_TokenExpired value)? tokenExpired,
     TResult Function(_AuthenticationFailed value)? authenticationFailed,
-    TResult Function(_ProxyLoginRolePermissionNotMatch value)?
-        proxyLoginRolePermissionNotMatch,
-    TResult Function(_ProxyLoginZPTargetRoleNotMatch value)?
-        proxyLoginZPTargetRoleNotMatch,
-    TResult Function(_ProxyLoginZPSalesOrgNotMatch value)?
-        proxyLoginZPSalesOrgNotMatch,
+    TResult Function(_CannotProxyLoginWithCurrentRole value)?
+        cannotProxyLoginWithCurrentRole,
+    TResult Function(_CannotProxyLoginRootAdmin value)?
+        cannotProxyLoginRootAdmin,
+    TResult Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)?
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
+        cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function(_PasswordResetFail value)? passwordResetFail,
     TResult Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
@@ -20588,9 +21456,10 @@ class _$MissingzzHtmcsImpl implements _MissingzzHtmcs {
     required TResult Function() accountExpired,
     required TResult Function() tokenExpired,
     required TResult Function() authenticationFailed,
-    required TResult Function() proxyLoginRolePermissionNotMatch,
-    required TResult Function() proxyLoginZPTargetRoleNotMatch,
-    required TResult Function() proxyLoginZPSalesOrgNotMatch,
+    required TResult Function() cannotProxyLoginWithCurrentRole,
+    required TResult Function() cannotProxyLoginRootAdmin,
+    required TResult Function() cannotProxyLoginZPAdminWhenIsZPAdmin,
+    required TResult Function() cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function() passwordResetFail,
     required TResult Function() deviceNotSupportBiometric,
     required TResult Function() cannotCheckBiometrics,
@@ -20644,9 +21513,10 @@ class _$MissingzzHtmcsImpl implements _MissingzzHtmcs {
     TResult? Function()? accountExpired,
     TResult? Function()? tokenExpired,
     TResult? Function()? authenticationFailed,
-    TResult? Function()? proxyLoginRolePermissionNotMatch,
-    TResult? Function()? proxyLoginZPTargetRoleNotMatch,
-    TResult? Function()? proxyLoginZPSalesOrgNotMatch,
+    TResult? Function()? cannotProxyLoginWithCurrentRole,
+    TResult? Function()? cannotProxyLoginRootAdmin,
+    TResult? Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult? Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function()? passwordResetFail,
     TResult? Function()? deviceNotSupportBiometric,
     TResult? Function()? cannotCheckBiometrics,
@@ -20700,9 +21570,10 @@ class _$MissingzzHtmcsImpl implements _MissingzzHtmcs {
     TResult Function()? accountExpired,
     TResult Function()? tokenExpired,
     TResult Function()? authenticationFailed,
-    TResult Function()? proxyLoginRolePermissionNotMatch,
-    TResult Function()? proxyLoginZPTargetRoleNotMatch,
-    TResult Function()? proxyLoginZPSalesOrgNotMatch,
+    TResult Function()? cannotProxyLoginWithCurrentRole,
+    TResult Function()? cannotProxyLoginRootAdmin,
+    TResult Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function()? passwordResetFail,
     TResult Function()? deviceNotSupportBiometric,
     TResult Function()? cannotCheckBiometrics,
@@ -20762,12 +21633,14 @@ class _$MissingzzHtmcsImpl implements _MissingzzHtmcs {
     required TResult Function(_AccountExpired value) accountExpired,
     required TResult Function(_TokenExpired value) tokenExpired,
     required TResult Function(_AuthenticationFailed value) authenticationFailed,
-    required TResult Function(_ProxyLoginRolePermissionNotMatch value)
-        proxyLoginRolePermissionNotMatch,
-    required TResult Function(_ProxyLoginZPTargetRoleNotMatch value)
-        proxyLoginZPTargetRoleNotMatch,
-    required TResult Function(_ProxyLoginZPSalesOrgNotMatch value)
-        proxyLoginZPSalesOrgNotMatch,
+    required TResult Function(_CannotProxyLoginWithCurrentRole value)
+        cannotProxyLoginWithCurrentRole,
+    required TResult Function(_CannotProxyLoginRootAdmin value)
+        cannotProxyLoginRootAdmin,
+    required TResult Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    required TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)
+        cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function(_PasswordResetFail value) passwordResetFail,
     required TResult Function(_DeviceNotSupportBiometric value)
         deviceNotSupportBiometric,
@@ -20843,12 +21716,14 @@ class _$MissingzzHtmcsImpl implements _MissingzzHtmcs {
     TResult? Function(_AccountExpired value)? accountExpired,
     TResult? Function(_TokenExpired value)? tokenExpired,
     TResult? Function(_AuthenticationFailed value)? authenticationFailed,
-    TResult? Function(_ProxyLoginRolePermissionNotMatch value)?
-        proxyLoginRolePermissionNotMatch,
-    TResult? Function(_ProxyLoginZPTargetRoleNotMatch value)?
-        proxyLoginZPTargetRoleNotMatch,
-    TResult? Function(_ProxyLoginZPSalesOrgNotMatch value)?
-        proxyLoginZPSalesOrgNotMatch,
+    TResult? Function(_CannotProxyLoginWithCurrentRole value)?
+        cannotProxyLoginWithCurrentRole,
+    TResult? Function(_CannotProxyLoginRootAdmin value)?
+        cannotProxyLoginRootAdmin,
+    TResult? Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)?
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult? Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
+        cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function(_PasswordResetFail value)? passwordResetFail,
     TResult? Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
@@ -20910,12 +21785,14 @@ class _$MissingzzHtmcsImpl implements _MissingzzHtmcs {
     TResult Function(_AccountExpired value)? accountExpired,
     TResult Function(_TokenExpired value)? tokenExpired,
     TResult Function(_AuthenticationFailed value)? authenticationFailed,
-    TResult Function(_ProxyLoginRolePermissionNotMatch value)?
-        proxyLoginRolePermissionNotMatch,
-    TResult Function(_ProxyLoginZPTargetRoleNotMatch value)?
-        proxyLoginZPTargetRoleNotMatch,
-    TResult Function(_ProxyLoginZPSalesOrgNotMatch value)?
-        proxyLoginZPSalesOrgNotMatch,
+    TResult Function(_CannotProxyLoginWithCurrentRole value)?
+        cannotProxyLoginWithCurrentRole,
+    TResult Function(_CannotProxyLoginRootAdmin value)?
+        cannotProxyLoginRootAdmin,
+    TResult Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)?
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
+        cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function(_PasswordResetFail value)? passwordResetFail,
     TResult Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
@@ -21021,9 +21898,10 @@ class _$StockInfoNotAvailableImpl implements _StockInfoNotAvailable {
     required TResult Function() accountExpired,
     required TResult Function() tokenExpired,
     required TResult Function() authenticationFailed,
-    required TResult Function() proxyLoginRolePermissionNotMatch,
-    required TResult Function() proxyLoginZPTargetRoleNotMatch,
-    required TResult Function() proxyLoginZPSalesOrgNotMatch,
+    required TResult Function() cannotProxyLoginWithCurrentRole,
+    required TResult Function() cannotProxyLoginRootAdmin,
+    required TResult Function() cannotProxyLoginZPAdminWhenIsZPAdmin,
+    required TResult Function() cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function() passwordResetFail,
     required TResult Function() deviceNotSupportBiometric,
     required TResult Function() cannotCheckBiometrics,
@@ -21077,9 +21955,10 @@ class _$StockInfoNotAvailableImpl implements _StockInfoNotAvailable {
     TResult? Function()? accountExpired,
     TResult? Function()? tokenExpired,
     TResult? Function()? authenticationFailed,
-    TResult? Function()? proxyLoginRolePermissionNotMatch,
-    TResult? Function()? proxyLoginZPTargetRoleNotMatch,
-    TResult? Function()? proxyLoginZPSalesOrgNotMatch,
+    TResult? Function()? cannotProxyLoginWithCurrentRole,
+    TResult? Function()? cannotProxyLoginRootAdmin,
+    TResult? Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult? Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function()? passwordResetFail,
     TResult? Function()? deviceNotSupportBiometric,
     TResult? Function()? cannotCheckBiometrics,
@@ -21133,9 +22012,10 @@ class _$StockInfoNotAvailableImpl implements _StockInfoNotAvailable {
     TResult Function()? accountExpired,
     TResult Function()? tokenExpired,
     TResult Function()? authenticationFailed,
-    TResult Function()? proxyLoginRolePermissionNotMatch,
-    TResult Function()? proxyLoginZPTargetRoleNotMatch,
-    TResult Function()? proxyLoginZPSalesOrgNotMatch,
+    TResult Function()? cannotProxyLoginWithCurrentRole,
+    TResult Function()? cannotProxyLoginRootAdmin,
+    TResult Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function()? passwordResetFail,
     TResult Function()? deviceNotSupportBiometric,
     TResult Function()? cannotCheckBiometrics,
@@ -21195,12 +22075,14 @@ class _$StockInfoNotAvailableImpl implements _StockInfoNotAvailable {
     required TResult Function(_AccountExpired value) accountExpired,
     required TResult Function(_TokenExpired value) tokenExpired,
     required TResult Function(_AuthenticationFailed value) authenticationFailed,
-    required TResult Function(_ProxyLoginRolePermissionNotMatch value)
-        proxyLoginRolePermissionNotMatch,
-    required TResult Function(_ProxyLoginZPTargetRoleNotMatch value)
-        proxyLoginZPTargetRoleNotMatch,
-    required TResult Function(_ProxyLoginZPSalesOrgNotMatch value)
-        proxyLoginZPSalesOrgNotMatch,
+    required TResult Function(_CannotProxyLoginWithCurrentRole value)
+        cannotProxyLoginWithCurrentRole,
+    required TResult Function(_CannotProxyLoginRootAdmin value)
+        cannotProxyLoginRootAdmin,
+    required TResult Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    required TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)
+        cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function(_PasswordResetFail value) passwordResetFail,
     required TResult Function(_DeviceNotSupportBiometric value)
         deviceNotSupportBiometric,
@@ -21276,12 +22158,14 @@ class _$StockInfoNotAvailableImpl implements _StockInfoNotAvailable {
     TResult? Function(_AccountExpired value)? accountExpired,
     TResult? Function(_TokenExpired value)? tokenExpired,
     TResult? Function(_AuthenticationFailed value)? authenticationFailed,
-    TResult? Function(_ProxyLoginRolePermissionNotMatch value)?
-        proxyLoginRolePermissionNotMatch,
-    TResult? Function(_ProxyLoginZPTargetRoleNotMatch value)?
-        proxyLoginZPTargetRoleNotMatch,
-    TResult? Function(_ProxyLoginZPSalesOrgNotMatch value)?
-        proxyLoginZPSalesOrgNotMatch,
+    TResult? Function(_CannotProxyLoginWithCurrentRole value)?
+        cannotProxyLoginWithCurrentRole,
+    TResult? Function(_CannotProxyLoginRootAdmin value)?
+        cannotProxyLoginRootAdmin,
+    TResult? Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)?
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult? Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
+        cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function(_PasswordResetFail value)? passwordResetFail,
     TResult? Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
@@ -21343,12 +22227,14 @@ class _$StockInfoNotAvailableImpl implements _StockInfoNotAvailable {
     TResult Function(_AccountExpired value)? accountExpired,
     TResult Function(_TokenExpired value)? tokenExpired,
     TResult Function(_AuthenticationFailed value)? authenticationFailed,
-    TResult Function(_ProxyLoginRolePermissionNotMatch value)?
-        proxyLoginRolePermissionNotMatch,
-    TResult Function(_ProxyLoginZPTargetRoleNotMatch value)?
-        proxyLoginZPTargetRoleNotMatch,
-    TResult Function(_ProxyLoginZPSalesOrgNotMatch value)?
-        proxyLoginZPSalesOrgNotMatch,
+    TResult Function(_CannotProxyLoginWithCurrentRole value)?
+        cannotProxyLoginWithCurrentRole,
+    TResult Function(_CannotProxyLoginRootAdmin value)?
+        cannotProxyLoginRootAdmin,
+    TResult Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)?
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
+        cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function(_PasswordResetFail value)? passwordResetFail,
     TResult Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
@@ -21455,9 +22341,10 @@ class _$AccountCreationIncompleteImpl implements _AccountCreationIncomplete {
     required TResult Function() accountExpired,
     required TResult Function() tokenExpired,
     required TResult Function() authenticationFailed,
-    required TResult Function() proxyLoginRolePermissionNotMatch,
-    required TResult Function() proxyLoginZPTargetRoleNotMatch,
-    required TResult Function() proxyLoginZPSalesOrgNotMatch,
+    required TResult Function() cannotProxyLoginWithCurrentRole,
+    required TResult Function() cannotProxyLoginRootAdmin,
+    required TResult Function() cannotProxyLoginZPAdminWhenIsZPAdmin,
+    required TResult Function() cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function() passwordResetFail,
     required TResult Function() deviceNotSupportBiometric,
     required TResult Function() cannotCheckBiometrics,
@@ -21511,9 +22398,10 @@ class _$AccountCreationIncompleteImpl implements _AccountCreationIncomplete {
     TResult? Function()? accountExpired,
     TResult? Function()? tokenExpired,
     TResult? Function()? authenticationFailed,
-    TResult? Function()? proxyLoginRolePermissionNotMatch,
-    TResult? Function()? proxyLoginZPTargetRoleNotMatch,
-    TResult? Function()? proxyLoginZPSalesOrgNotMatch,
+    TResult? Function()? cannotProxyLoginWithCurrentRole,
+    TResult? Function()? cannotProxyLoginRootAdmin,
+    TResult? Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult? Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function()? passwordResetFail,
     TResult? Function()? deviceNotSupportBiometric,
     TResult? Function()? cannotCheckBiometrics,
@@ -21567,9 +22455,10 @@ class _$AccountCreationIncompleteImpl implements _AccountCreationIncomplete {
     TResult Function()? accountExpired,
     TResult Function()? tokenExpired,
     TResult Function()? authenticationFailed,
-    TResult Function()? proxyLoginRolePermissionNotMatch,
-    TResult Function()? proxyLoginZPTargetRoleNotMatch,
-    TResult Function()? proxyLoginZPSalesOrgNotMatch,
+    TResult Function()? cannotProxyLoginWithCurrentRole,
+    TResult Function()? cannotProxyLoginRootAdmin,
+    TResult Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult Function()? cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function()? passwordResetFail,
     TResult Function()? deviceNotSupportBiometric,
     TResult Function()? cannotCheckBiometrics,
@@ -21629,12 +22518,14 @@ class _$AccountCreationIncompleteImpl implements _AccountCreationIncomplete {
     required TResult Function(_AccountExpired value) accountExpired,
     required TResult Function(_TokenExpired value) tokenExpired,
     required TResult Function(_AuthenticationFailed value) authenticationFailed,
-    required TResult Function(_ProxyLoginRolePermissionNotMatch value)
-        proxyLoginRolePermissionNotMatch,
-    required TResult Function(_ProxyLoginZPTargetRoleNotMatch value)
-        proxyLoginZPTargetRoleNotMatch,
-    required TResult Function(_ProxyLoginZPSalesOrgNotMatch value)
-        proxyLoginZPSalesOrgNotMatch,
+    required TResult Function(_CannotProxyLoginWithCurrentRole value)
+        cannotProxyLoginWithCurrentRole,
+    required TResult Function(_CannotProxyLoginRootAdmin value)
+        cannotProxyLoginRootAdmin,
+    required TResult Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    required TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)
+        cannotProxyLoginFromDiffferentSalesOrg,
     required TResult Function(_PasswordResetFail value) passwordResetFail,
     required TResult Function(_DeviceNotSupportBiometric value)
         deviceNotSupportBiometric,
@@ -21710,12 +22601,14 @@ class _$AccountCreationIncompleteImpl implements _AccountCreationIncomplete {
     TResult? Function(_AccountExpired value)? accountExpired,
     TResult? Function(_TokenExpired value)? tokenExpired,
     TResult? Function(_AuthenticationFailed value)? authenticationFailed,
-    TResult? Function(_ProxyLoginRolePermissionNotMatch value)?
-        proxyLoginRolePermissionNotMatch,
-    TResult? Function(_ProxyLoginZPTargetRoleNotMatch value)?
-        proxyLoginZPTargetRoleNotMatch,
-    TResult? Function(_ProxyLoginZPSalesOrgNotMatch value)?
-        proxyLoginZPSalesOrgNotMatch,
+    TResult? Function(_CannotProxyLoginWithCurrentRole value)?
+        cannotProxyLoginWithCurrentRole,
+    TResult? Function(_CannotProxyLoginRootAdmin value)?
+        cannotProxyLoginRootAdmin,
+    TResult? Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)?
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult? Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
+        cannotProxyLoginFromDiffferentSalesOrg,
     TResult? Function(_PasswordResetFail value)? passwordResetFail,
     TResult? Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,
@@ -21777,12 +22670,14 @@ class _$AccountCreationIncompleteImpl implements _AccountCreationIncomplete {
     TResult Function(_AccountExpired value)? accountExpired,
     TResult Function(_TokenExpired value)? tokenExpired,
     TResult Function(_AuthenticationFailed value)? authenticationFailed,
-    TResult Function(_ProxyLoginRolePermissionNotMatch value)?
-        proxyLoginRolePermissionNotMatch,
-    TResult Function(_ProxyLoginZPTargetRoleNotMatch value)?
-        proxyLoginZPTargetRoleNotMatch,
-    TResult Function(_ProxyLoginZPSalesOrgNotMatch value)?
-        proxyLoginZPSalesOrgNotMatch,
+    TResult Function(_CannotProxyLoginWithCurrentRole value)?
+        cannotProxyLoginWithCurrentRole,
+    TResult Function(_CannotProxyLoginRootAdmin value)?
+        cannotProxyLoginRootAdmin,
+    TResult Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)?
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
+        cannotProxyLoginFromDiffferentSalesOrg,
     TResult Function(_PasswordResetFail value)? passwordResetFail,
     TResult Function(_DeviceNotSupportBiometric value)?
         deviceNotSupportBiometric,

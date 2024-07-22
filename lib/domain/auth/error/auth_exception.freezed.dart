@@ -23,6 +23,10 @@ mixin _$AuthException {
     required TResult Function() accountExpired,
     required TResult Function() invalidUserName,
     required TResult Function() accountBlocked,
+    required TResult Function() cannotProxyLoginWithCurrentRole,
+    required TResult Function() cannotProxyLoginRootAdmin,
+    required TResult Function() cannotProxyLoginZPAdminWhenIsZPAdmin,
+    required TResult Function() cannotProxyLoginFromDiffferentSalesOrg,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -32,6 +36,10 @@ mixin _$AuthException {
     TResult? Function()? accountExpired,
     TResult? Function()? invalidUserName,
     TResult? Function()? accountBlocked,
+    TResult? Function()? cannotProxyLoginWithCurrentRole,
+    TResult? Function()? cannotProxyLoginRootAdmin,
+    TResult? Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult? Function()? cannotProxyLoginFromDiffferentSalesOrg,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -41,6 +49,10 @@ mixin _$AuthException {
     TResult Function()? accountExpired,
     TResult Function()? invalidUserName,
     TResult Function()? accountBlocked,
+    TResult Function()? cannotProxyLoginWithCurrentRole,
+    TResult Function()? cannotProxyLoginRootAdmin,
+    TResult Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult Function()? cannotProxyLoginFromDiffferentSalesOrg,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -52,6 +64,14 @@ mixin _$AuthException {
     required TResult Function(_AccountExpired value) accountExpired,
     required TResult Function(_InvalidUserName value) invalidUserName,
     required TResult Function(_AccountBlocked value) accountBlocked,
+    required TResult Function(_CannotProxyLoginWithCurrentRole value)
+        cannotProxyLoginWithCurrentRole,
+    required TResult Function(_CannotProxyLoginRootAdmin value)
+        cannotProxyLoginRootAdmin,
+    required TResult Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    required TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)
+        cannotProxyLoginFromDiffferentSalesOrg,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -62,6 +82,14 @@ mixin _$AuthException {
     TResult? Function(_AccountExpired value)? accountExpired,
     TResult? Function(_InvalidUserName value)? invalidUserName,
     TResult? Function(_AccountBlocked value)? accountBlocked,
+    TResult? Function(_CannotProxyLoginWithCurrentRole value)?
+        cannotProxyLoginWithCurrentRole,
+    TResult? Function(_CannotProxyLoginRootAdmin value)?
+        cannotProxyLoginRootAdmin,
+    TResult? Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)?
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult? Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
+        cannotProxyLoginFromDiffferentSalesOrg,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -72,6 +100,14 @@ mixin _$AuthException {
     TResult Function(_AccountExpired value)? accountExpired,
     TResult Function(_InvalidUserName value)? invalidUserName,
     TResult Function(_AccountBlocked value)? accountBlocked,
+    TResult Function(_CannotProxyLoginWithCurrentRole value)?
+        cannotProxyLoginWithCurrentRole,
+    TResult Function(_CannotProxyLoginRootAdmin value)?
+        cannotProxyLoginRootAdmin,
+    TResult Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)?
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
+        cannotProxyLoginFromDiffferentSalesOrg,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -143,6 +179,10 @@ class _$InvalidEmailAndPasswordCombinationImpl
     required TResult Function() accountExpired,
     required TResult Function() invalidUserName,
     required TResult Function() accountBlocked,
+    required TResult Function() cannotProxyLoginWithCurrentRole,
+    required TResult Function() cannotProxyLoginRootAdmin,
+    required TResult Function() cannotProxyLoginZPAdminWhenIsZPAdmin,
+    required TResult Function() cannotProxyLoginFromDiffferentSalesOrg,
   }) {
     return invalidEmailAndPasswordCombination();
   }
@@ -155,6 +195,10 @@ class _$InvalidEmailAndPasswordCombinationImpl
     TResult? Function()? accountExpired,
     TResult? Function()? invalidUserName,
     TResult? Function()? accountBlocked,
+    TResult? Function()? cannotProxyLoginWithCurrentRole,
+    TResult? Function()? cannotProxyLoginRootAdmin,
+    TResult? Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult? Function()? cannotProxyLoginFromDiffferentSalesOrg,
   }) {
     return invalidEmailAndPasswordCombination?.call();
   }
@@ -167,6 +211,10 @@ class _$InvalidEmailAndPasswordCombinationImpl
     TResult Function()? accountExpired,
     TResult Function()? invalidUserName,
     TResult Function()? accountBlocked,
+    TResult Function()? cannotProxyLoginWithCurrentRole,
+    TResult Function()? cannotProxyLoginRootAdmin,
+    TResult Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult Function()? cannotProxyLoginFromDiffferentSalesOrg,
     required TResult orElse(),
   }) {
     if (invalidEmailAndPasswordCombination != null) {
@@ -184,6 +232,14 @@ class _$InvalidEmailAndPasswordCombinationImpl
     required TResult Function(_AccountExpired value) accountExpired,
     required TResult Function(_InvalidUserName value) invalidUserName,
     required TResult Function(_AccountBlocked value) accountBlocked,
+    required TResult Function(_CannotProxyLoginWithCurrentRole value)
+        cannotProxyLoginWithCurrentRole,
+    required TResult Function(_CannotProxyLoginRootAdmin value)
+        cannotProxyLoginRootAdmin,
+    required TResult Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    required TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)
+        cannotProxyLoginFromDiffferentSalesOrg,
   }) {
     return invalidEmailAndPasswordCombination(this);
   }
@@ -197,6 +253,14 @@ class _$InvalidEmailAndPasswordCombinationImpl
     TResult? Function(_AccountExpired value)? accountExpired,
     TResult? Function(_InvalidUserName value)? invalidUserName,
     TResult? Function(_AccountBlocked value)? accountBlocked,
+    TResult? Function(_CannotProxyLoginWithCurrentRole value)?
+        cannotProxyLoginWithCurrentRole,
+    TResult? Function(_CannotProxyLoginRootAdmin value)?
+        cannotProxyLoginRootAdmin,
+    TResult? Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)?
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult? Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
+        cannotProxyLoginFromDiffferentSalesOrg,
   }) {
     return invalidEmailAndPasswordCombination?.call(this);
   }
@@ -210,6 +274,14 @@ class _$InvalidEmailAndPasswordCombinationImpl
     TResult Function(_AccountExpired value)? accountExpired,
     TResult Function(_InvalidUserName value)? invalidUserName,
     TResult Function(_AccountBlocked value)? accountBlocked,
+    TResult Function(_CannotProxyLoginWithCurrentRole value)?
+        cannotProxyLoginWithCurrentRole,
+    TResult Function(_CannotProxyLoginRootAdmin value)?
+        cannotProxyLoginRootAdmin,
+    TResult Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)?
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
+        cannotProxyLoginFromDiffferentSalesOrg,
     required TResult orElse(),
   }) {
     if (invalidEmailAndPasswordCombination != null) {
@@ -267,6 +339,10 @@ class _$AccountLockedImpl implements _AccountLocked {
     required TResult Function() accountExpired,
     required TResult Function() invalidUserName,
     required TResult Function() accountBlocked,
+    required TResult Function() cannotProxyLoginWithCurrentRole,
+    required TResult Function() cannotProxyLoginRootAdmin,
+    required TResult Function() cannotProxyLoginZPAdminWhenIsZPAdmin,
+    required TResult Function() cannotProxyLoginFromDiffferentSalesOrg,
   }) {
     return accountLocked();
   }
@@ -279,6 +355,10 @@ class _$AccountLockedImpl implements _AccountLocked {
     TResult? Function()? accountExpired,
     TResult? Function()? invalidUserName,
     TResult? Function()? accountBlocked,
+    TResult? Function()? cannotProxyLoginWithCurrentRole,
+    TResult? Function()? cannotProxyLoginRootAdmin,
+    TResult? Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult? Function()? cannotProxyLoginFromDiffferentSalesOrg,
   }) {
     return accountLocked?.call();
   }
@@ -291,6 +371,10 @@ class _$AccountLockedImpl implements _AccountLocked {
     TResult Function()? accountExpired,
     TResult Function()? invalidUserName,
     TResult Function()? accountBlocked,
+    TResult Function()? cannotProxyLoginWithCurrentRole,
+    TResult Function()? cannotProxyLoginRootAdmin,
+    TResult Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult Function()? cannotProxyLoginFromDiffferentSalesOrg,
     required TResult orElse(),
   }) {
     if (accountLocked != null) {
@@ -308,6 +392,14 @@ class _$AccountLockedImpl implements _AccountLocked {
     required TResult Function(_AccountExpired value) accountExpired,
     required TResult Function(_InvalidUserName value) invalidUserName,
     required TResult Function(_AccountBlocked value) accountBlocked,
+    required TResult Function(_CannotProxyLoginWithCurrentRole value)
+        cannotProxyLoginWithCurrentRole,
+    required TResult Function(_CannotProxyLoginRootAdmin value)
+        cannotProxyLoginRootAdmin,
+    required TResult Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    required TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)
+        cannotProxyLoginFromDiffferentSalesOrg,
   }) {
     return accountLocked(this);
   }
@@ -321,6 +413,14 @@ class _$AccountLockedImpl implements _AccountLocked {
     TResult? Function(_AccountExpired value)? accountExpired,
     TResult? Function(_InvalidUserName value)? invalidUserName,
     TResult? Function(_AccountBlocked value)? accountBlocked,
+    TResult? Function(_CannotProxyLoginWithCurrentRole value)?
+        cannotProxyLoginWithCurrentRole,
+    TResult? Function(_CannotProxyLoginRootAdmin value)?
+        cannotProxyLoginRootAdmin,
+    TResult? Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)?
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult? Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
+        cannotProxyLoginFromDiffferentSalesOrg,
   }) {
     return accountLocked?.call(this);
   }
@@ -334,6 +434,14 @@ class _$AccountLockedImpl implements _AccountLocked {
     TResult Function(_AccountExpired value)? accountExpired,
     TResult Function(_InvalidUserName value)? invalidUserName,
     TResult Function(_AccountBlocked value)? accountBlocked,
+    TResult Function(_CannotProxyLoginWithCurrentRole value)?
+        cannotProxyLoginWithCurrentRole,
+    TResult Function(_CannotProxyLoginRootAdmin value)?
+        cannotProxyLoginRootAdmin,
+    TResult Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)?
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
+        cannotProxyLoginFromDiffferentSalesOrg,
     required TResult orElse(),
   }) {
     if (accountLocked != null) {
@@ -390,6 +498,10 @@ class _$AccountExpiredImpl implements _AccountExpired {
     required TResult Function() accountExpired,
     required TResult Function() invalidUserName,
     required TResult Function() accountBlocked,
+    required TResult Function() cannotProxyLoginWithCurrentRole,
+    required TResult Function() cannotProxyLoginRootAdmin,
+    required TResult Function() cannotProxyLoginZPAdminWhenIsZPAdmin,
+    required TResult Function() cannotProxyLoginFromDiffferentSalesOrg,
   }) {
     return accountExpired();
   }
@@ -402,6 +514,10 @@ class _$AccountExpiredImpl implements _AccountExpired {
     TResult? Function()? accountExpired,
     TResult? Function()? invalidUserName,
     TResult? Function()? accountBlocked,
+    TResult? Function()? cannotProxyLoginWithCurrentRole,
+    TResult? Function()? cannotProxyLoginRootAdmin,
+    TResult? Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult? Function()? cannotProxyLoginFromDiffferentSalesOrg,
   }) {
     return accountExpired?.call();
   }
@@ -414,6 +530,10 @@ class _$AccountExpiredImpl implements _AccountExpired {
     TResult Function()? accountExpired,
     TResult Function()? invalidUserName,
     TResult Function()? accountBlocked,
+    TResult Function()? cannotProxyLoginWithCurrentRole,
+    TResult Function()? cannotProxyLoginRootAdmin,
+    TResult Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult Function()? cannotProxyLoginFromDiffferentSalesOrg,
     required TResult orElse(),
   }) {
     if (accountExpired != null) {
@@ -431,6 +551,14 @@ class _$AccountExpiredImpl implements _AccountExpired {
     required TResult Function(_AccountExpired value) accountExpired,
     required TResult Function(_InvalidUserName value) invalidUserName,
     required TResult Function(_AccountBlocked value) accountBlocked,
+    required TResult Function(_CannotProxyLoginWithCurrentRole value)
+        cannotProxyLoginWithCurrentRole,
+    required TResult Function(_CannotProxyLoginRootAdmin value)
+        cannotProxyLoginRootAdmin,
+    required TResult Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    required TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)
+        cannotProxyLoginFromDiffferentSalesOrg,
   }) {
     return accountExpired(this);
   }
@@ -444,6 +572,14 @@ class _$AccountExpiredImpl implements _AccountExpired {
     TResult? Function(_AccountExpired value)? accountExpired,
     TResult? Function(_InvalidUserName value)? invalidUserName,
     TResult? Function(_AccountBlocked value)? accountBlocked,
+    TResult? Function(_CannotProxyLoginWithCurrentRole value)?
+        cannotProxyLoginWithCurrentRole,
+    TResult? Function(_CannotProxyLoginRootAdmin value)?
+        cannotProxyLoginRootAdmin,
+    TResult? Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)?
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult? Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
+        cannotProxyLoginFromDiffferentSalesOrg,
   }) {
     return accountExpired?.call(this);
   }
@@ -457,6 +593,14 @@ class _$AccountExpiredImpl implements _AccountExpired {
     TResult Function(_AccountExpired value)? accountExpired,
     TResult Function(_InvalidUserName value)? invalidUserName,
     TResult Function(_AccountBlocked value)? accountBlocked,
+    TResult Function(_CannotProxyLoginWithCurrentRole value)?
+        cannotProxyLoginWithCurrentRole,
+    TResult Function(_CannotProxyLoginRootAdmin value)?
+        cannotProxyLoginRootAdmin,
+    TResult Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)?
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
+        cannotProxyLoginFromDiffferentSalesOrg,
     required TResult orElse(),
   }) {
     if (accountExpired != null) {
@@ -513,6 +657,10 @@ class _$InvalidUserNameImpl implements _InvalidUserName {
     required TResult Function() accountExpired,
     required TResult Function() invalidUserName,
     required TResult Function() accountBlocked,
+    required TResult Function() cannotProxyLoginWithCurrentRole,
+    required TResult Function() cannotProxyLoginRootAdmin,
+    required TResult Function() cannotProxyLoginZPAdminWhenIsZPAdmin,
+    required TResult Function() cannotProxyLoginFromDiffferentSalesOrg,
   }) {
     return invalidUserName();
   }
@@ -525,6 +673,10 @@ class _$InvalidUserNameImpl implements _InvalidUserName {
     TResult? Function()? accountExpired,
     TResult? Function()? invalidUserName,
     TResult? Function()? accountBlocked,
+    TResult? Function()? cannotProxyLoginWithCurrentRole,
+    TResult? Function()? cannotProxyLoginRootAdmin,
+    TResult? Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult? Function()? cannotProxyLoginFromDiffferentSalesOrg,
   }) {
     return invalidUserName?.call();
   }
@@ -537,6 +689,10 @@ class _$InvalidUserNameImpl implements _InvalidUserName {
     TResult Function()? accountExpired,
     TResult Function()? invalidUserName,
     TResult Function()? accountBlocked,
+    TResult Function()? cannotProxyLoginWithCurrentRole,
+    TResult Function()? cannotProxyLoginRootAdmin,
+    TResult Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult Function()? cannotProxyLoginFromDiffferentSalesOrg,
     required TResult orElse(),
   }) {
     if (invalidUserName != null) {
@@ -554,6 +710,14 @@ class _$InvalidUserNameImpl implements _InvalidUserName {
     required TResult Function(_AccountExpired value) accountExpired,
     required TResult Function(_InvalidUserName value) invalidUserName,
     required TResult Function(_AccountBlocked value) accountBlocked,
+    required TResult Function(_CannotProxyLoginWithCurrentRole value)
+        cannotProxyLoginWithCurrentRole,
+    required TResult Function(_CannotProxyLoginRootAdmin value)
+        cannotProxyLoginRootAdmin,
+    required TResult Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    required TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)
+        cannotProxyLoginFromDiffferentSalesOrg,
   }) {
     return invalidUserName(this);
   }
@@ -567,6 +731,14 @@ class _$InvalidUserNameImpl implements _InvalidUserName {
     TResult? Function(_AccountExpired value)? accountExpired,
     TResult? Function(_InvalidUserName value)? invalidUserName,
     TResult? Function(_AccountBlocked value)? accountBlocked,
+    TResult? Function(_CannotProxyLoginWithCurrentRole value)?
+        cannotProxyLoginWithCurrentRole,
+    TResult? Function(_CannotProxyLoginRootAdmin value)?
+        cannotProxyLoginRootAdmin,
+    TResult? Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)?
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult? Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
+        cannotProxyLoginFromDiffferentSalesOrg,
   }) {
     return invalidUserName?.call(this);
   }
@@ -580,6 +752,14 @@ class _$InvalidUserNameImpl implements _InvalidUserName {
     TResult Function(_AccountExpired value)? accountExpired,
     TResult Function(_InvalidUserName value)? invalidUserName,
     TResult Function(_AccountBlocked value)? accountBlocked,
+    TResult Function(_CannotProxyLoginWithCurrentRole value)?
+        cannotProxyLoginWithCurrentRole,
+    TResult Function(_CannotProxyLoginRootAdmin value)?
+        cannotProxyLoginRootAdmin,
+    TResult Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)?
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
+        cannotProxyLoginFromDiffferentSalesOrg,
     required TResult orElse(),
   }) {
     if (invalidUserName != null) {
@@ -636,6 +816,10 @@ class _$AccountBlockedImpl implements _AccountBlocked {
     required TResult Function() accountExpired,
     required TResult Function() invalidUserName,
     required TResult Function() accountBlocked,
+    required TResult Function() cannotProxyLoginWithCurrentRole,
+    required TResult Function() cannotProxyLoginRootAdmin,
+    required TResult Function() cannotProxyLoginZPAdminWhenIsZPAdmin,
+    required TResult Function() cannotProxyLoginFromDiffferentSalesOrg,
   }) {
     return accountBlocked();
   }
@@ -648,6 +832,10 @@ class _$AccountBlockedImpl implements _AccountBlocked {
     TResult? Function()? accountExpired,
     TResult? Function()? invalidUserName,
     TResult? Function()? accountBlocked,
+    TResult? Function()? cannotProxyLoginWithCurrentRole,
+    TResult? Function()? cannotProxyLoginRootAdmin,
+    TResult? Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult? Function()? cannotProxyLoginFromDiffferentSalesOrg,
   }) {
     return accountBlocked?.call();
   }
@@ -660,6 +848,10 @@ class _$AccountBlockedImpl implements _AccountBlocked {
     TResult Function()? accountExpired,
     TResult Function()? invalidUserName,
     TResult Function()? accountBlocked,
+    TResult Function()? cannotProxyLoginWithCurrentRole,
+    TResult Function()? cannotProxyLoginRootAdmin,
+    TResult Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult Function()? cannotProxyLoginFromDiffferentSalesOrg,
     required TResult orElse(),
   }) {
     if (accountBlocked != null) {
@@ -677,6 +869,14 @@ class _$AccountBlockedImpl implements _AccountBlocked {
     required TResult Function(_AccountExpired value) accountExpired,
     required TResult Function(_InvalidUserName value) invalidUserName,
     required TResult Function(_AccountBlocked value) accountBlocked,
+    required TResult Function(_CannotProxyLoginWithCurrentRole value)
+        cannotProxyLoginWithCurrentRole,
+    required TResult Function(_CannotProxyLoginRootAdmin value)
+        cannotProxyLoginRootAdmin,
+    required TResult Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    required TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)
+        cannotProxyLoginFromDiffferentSalesOrg,
   }) {
     return accountBlocked(this);
   }
@@ -690,6 +890,14 @@ class _$AccountBlockedImpl implements _AccountBlocked {
     TResult? Function(_AccountExpired value)? accountExpired,
     TResult? Function(_InvalidUserName value)? invalidUserName,
     TResult? Function(_AccountBlocked value)? accountBlocked,
+    TResult? Function(_CannotProxyLoginWithCurrentRole value)?
+        cannotProxyLoginWithCurrentRole,
+    TResult? Function(_CannotProxyLoginRootAdmin value)?
+        cannotProxyLoginRootAdmin,
+    TResult? Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)?
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult? Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
+        cannotProxyLoginFromDiffferentSalesOrg,
   }) {
     return accountBlocked?.call(this);
   }
@@ -703,6 +911,14 @@ class _$AccountBlockedImpl implements _AccountBlocked {
     TResult Function(_AccountExpired value)? accountExpired,
     TResult Function(_InvalidUserName value)? invalidUserName,
     TResult Function(_AccountBlocked value)? accountBlocked,
+    TResult Function(_CannotProxyLoginWithCurrentRole value)?
+        cannotProxyLoginWithCurrentRole,
+    TResult Function(_CannotProxyLoginRootAdmin value)?
+        cannotProxyLoginRootAdmin,
+    TResult Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)?
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
+        cannotProxyLoginFromDiffferentSalesOrg,
     required TResult orElse(),
   }) {
     if (accountBlocked != null) {
@@ -714,4 +930,662 @@ class _$AccountBlockedImpl implements _AccountBlocked {
 
 abstract class _AccountBlocked implements AuthException {
   const factory _AccountBlocked() = _$AccountBlockedImpl;
+}
+
+/// @nodoc
+abstract class _$$CannotProxyLoginWithCurrentRoleImplCopyWith<$Res> {
+  factory _$$CannotProxyLoginWithCurrentRoleImplCopyWith(
+          _$CannotProxyLoginWithCurrentRoleImpl value,
+          $Res Function(_$CannotProxyLoginWithCurrentRoleImpl) then) =
+      __$$CannotProxyLoginWithCurrentRoleImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$CannotProxyLoginWithCurrentRoleImplCopyWithImpl<$Res>
+    extends _$AuthExceptionCopyWithImpl<$Res,
+        _$CannotProxyLoginWithCurrentRoleImpl>
+    implements _$$CannotProxyLoginWithCurrentRoleImplCopyWith<$Res> {
+  __$$CannotProxyLoginWithCurrentRoleImplCopyWithImpl(
+      _$CannotProxyLoginWithCurrentRoleImpl _value,
+      $Res Function(_$CannotProxyLoginWithCurrentRoleImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$CannotProxyLoginWithCurrentRoleImpl
+    implements _CannotProxyLoginWithCurrentRole {
+  const _$CannotProxyLoginWithCurrentRoleImpl();
+
+  @override
+  String toString() {
+    return 'AuthException.cannotProxyLoginWithCurrentRole()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$CannotProxyLoginWithCurrentRoleImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() invalidEmailAndPasswordCombination,
+    required TResult Function() accountLocked,
+    required TResult Function() accountExpired,
+    required TResult Function() invalidUserName,
+    required TResult Function() accountBlocked,
+    required TResult Function() cannotProxyLoginWithCurrentRole,
+    required TResult Function() cannotProxyLoginRootAdmin,
+    required TResult Function() cannotProxyLoginZPAdminWhenIsZPAdmin,
+    required TResult Function() cannotProxyLoginFromDiffferentSalesOrg,
+  }) {
+    return cannotProxyLoginWithCurrentRole();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? invalidEmailAndPasswordCombination,
+    TResult? Function()? accountLocked,
+    TResult? Function()? accountExpired,
+    TResult? Function()? invalidUserName,
+    TResult? Function()? accountBlocked,
+    TResult? Function()? cannotProxyLoginWithCurrentRole,
+    TResult? Function()? cannotProxyLoginRootAdmin,
+    TResult? Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult? Function()? cannotProxyLoginFromDiffferentSalesOrg,
+  }) {
+    return cannotProxyLoginWithCurrentRole?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? invalidEmailAndPasswordCombination,
+    TResult Function()? accountLocked,
+    TResult Function()? accountExpired,
+    TResult Function()? invalidUserName,
+    TResult Function()? accountBlocked,
+    TResult Function()? cannotProxyLoginWithCurrentRole,
+    TResult Function()? cannotProxyLoginRootAdmin,
+    TResult Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult Function()? cannotProxyLoginFromDiffferentSalesOrg,
+    required TResult orElse(),
+  }) {
+    if (cannotProxyLoginWithCurrentRole != null) {
+      return cannotProxyLoginWithCurrentRole();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_InvalidEmailAndPasswordCombination value)
+        invalidEmailAndPasswordCombination,
+    required TResult Function(_AccountLocked value) accountLocked,
+    required TResult Function(_AccountExpired value) accountExpired,
+    required TResult Function(_InvalidUserName value) invalidUserName,
+    required TResult Function(_AccountBlocked value) accountBlocked,
+    required TResult Function(_CannotProxyLoginWithCurrentRole value)
+        cannotProxyLoginWithCurrentRole,
+    required TResult Function(_CannotProxyLoginRootAdmin value)
+        cannotProxyLoginRootAdmin,
+    required TResult Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    required TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)
+        cannotProxyLoginFromDiffferentSalesOrg,
+  }) {
+    return cannotProxyLoginWithCurrentRole(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_InvalidEmailAndPasswordCombination value)?
+        invalidEmailAndPasswordCombination,
+    TResult? Function(_AccountLocked value)? accountLocked,
+    TResult? Function(_AccountExpired value)? accountExpired,
+    TResult? Function(_InvalidUserName value)? invalidUserName,
+    TResult? Function(_AccountBlocked value)? accountBlocked,
+    TResult? Function(_CannotProxyLoginWithCurrentRole value)?
+        cannotProxyLoginWithCurrentRole,
+    TResult? Function(_CannotProxyLoginRootAdmin value)?
+        cannotProxyLoginRootAdmin,
+    TResult? Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)?
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult? Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
+        cannotProxyLoginFromDiffferentSalesOrg,
+  }) {
+    return cannotProxyLoginWithCurrentRole?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_InvalidEmailAndPasswordCombination value)?
+        invalidEmailAndPasswordCombination,
+    TResult Function(_AccountLocked value)? accountLocked,
+    TResult Function(_AccountExpired value)? accountExpired,
+    TResult Function(_InvalidUserName value)? invalidUserName,
+    TResult Function(_AccountBlocked value)? accountBlocked,
+    TResult Function(_CannotProxyLoginWithCurrentRole value)?
+        cannotProxyLoginWithCurrentRole,
+    TResult Function(_CannotProxyLoginRootAdmin value)?
+        cannotProxyLoginRootAdmin,
+    TResult Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)?
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
+        cannotProxyLoginFromDiffferentSalesOrg,
+    required TResult orElse(),
+  }) {
+    if (cannotProxyLoginWithCurrentRole != null) {
+      return cannotProxyLoginWithCurrentRole(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _CannotProxyLoginWithCurrentRole implements AuthException {
+  const factory _CannotProxyLoginWithCurrentRole() =
+      _$CannotProxyLoginWithCurrentRoleImpl;
+}
+
+/// @nodoc
+abstract class _$$CannotProxyLoginRootAdminImplCopyWith<$Res> {
+  factory _$$CannotProxyLoginRootAdminImplCopyWith(
+          _$CannotProxyLoginRootAdminImpl value,
+          $Res Function(_$CannotProxyLoginRootAdminImpl) then) =
+      __$$CannotProxyLoginRootAdminImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$CannotProxyLoginRootAdminImplCopyWithImpl<$Res>
+    extends _$AuthExceptionCopyWithImpl<$Res, _$CannotProxyLoginRootAdminImpl>
+    implements _$$CannotProxyLoginRootAdminImplCopyWith<$Res> {
+  __$$CannotProxyLoginRootAdminImplCopyWithImpl(
+      _$CannotProxyLoginRootAdminImpl _value,
+      $Res Function(_$CannotProxyLoginRootAdminImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$CannotProxyLoginRootAdminImpl implements _CannotProxyLoginRootAdmin {
+  const _$CannotProxyLoginRootAdminImpl();
+
+  @override
+  String toString() {
+    return 'AuthException.cannotProxyLoginRootAdmin()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$CannotProxyLoginRootAdminImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() invalidEmailAndPasswordCombination,
+    required TResult Function() accountLocked,
+    required TResult Function() accountExpired,
+    required TResult Function() invalidUserName,
+    required TResult Function() accountBlocked,
+    required TResult Function() cannotProxyLoginWithCurrentRole,
+    required TResult Function() cannotProxyLoginRootAdmin,
+    required TResult Function() cannotProxyLoginZPAdminWhenIsZPAdmin,
+    required TResult Function() cannotProxyLoginFromDiffferentSalesOrg,
+  }) {
+    return cannotProxyLoginRootAdmin();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? invalidEmailAndPasswordCombination,
+    TResult? Function()? accountLocked,
+    TResult? Function()? accountExpired,
+    TResult? Function()? invalidUserName,
+    TResult? Function()? accountBlocked,
+    TResult? Function()? cannotProxyLoginWithCurrentRole,
+    TResult? Function()? cannotProxyLoginRootAdmin,
+    TResult? Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult? Function()? cannotProxyLoginFromDiffferentSalesOrg,
+  }) {
+    return cannotProxyLoginRootAdmin?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? invalidEmailAndPasswordCombination,
+    TResult Function()? accountLocked,
+    TResult Function()? accountExpired,
+    TResult Function()? invalidUserName,
+    TResult Function()? accountBlocked,
+    TResult Function()? cannotProxyLoginWithCurrentRole,
+    TResult Function()? cannotProxyLoginRootAdmin,
+    TResult Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult Function()? cannotProxyLoginFromDiffferentSalesOrg,
+    required TResult orElse(),
+  }) {
+    if (cannotProxyLoginRootAdmin != null) {
+      return cannotProxyLoginRootAdmin();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_InvalidEmailAndPasswordCombination value)
+        invalidEmailAndPasswordCombination,
+    required TResult Function(_AccountLocked value) accountLocked,
+    required TResult Function(_AccountExpired value) accountExpired,
+    required TResult Function(_InvalidUserName value) invalidUserName,
+    required TResult Function(_AccountBlocked value) accountBlocked,
+    required TResult Function(_CannotProxyLoginWithCurrentRole value)
+        cannotProxyLoginWithCurrentRole,
+    required TResult Function(_CannotProxyLoginRootAdmin value)
+        cannotProxyLoginRootAdmin,
+    required TResult Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    required TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)
+        cannotProxyLoginFromDiffferentSalesOrg,
+  }) {
+    return cannotProxyLoginRootAdmin(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_InvalidEmailAndPasswordCombination value)?
+        invalidEmailAndPasswordCombination,
+    TResult? Function(_AccountLocked value)? accountLocked,
+    TResult? Function(_AccountExpired value)? accountExpired,
+    TResult? Function(_InvalidUserName value)? invalidUserName,
+    TResult? Function(_AccountBlocked value)? accountBlocked,
+    TResult? Function(_CannotProxyLoginWithCurrentRole value)?
+        cannotProxyLoginWithCurrentRole,
+    TResult? Function(_CannotProxyLoginRootAdmin value)?
+        cannotProxyLoginRootAdmin,
+    TResult? Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)?
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult? Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
+        cannotProxyLoginFromDiffferentSalesOrg,
+  }) {
+    return cannotProxyLoginRootAdmin?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_InvalidEmailAndPasswordCombination value)?
+        invalidEmailAndPasswordCombination,
+    TResult Function(_AccountLocked value)? accountLocked,
+    TResult Function(_AccountExpired value)? accountExpired,
+    TResult Function(_InvalidUserName value)? invalidUserName,
+    TResult Function(_AccountBlocked value)? accountBlocked,
+    TResult Function(_CannotProxyLoginWithCurrentRole value)?
+        cannotProxyLoginWithCurrentRole,
+    TResult Function(_CannotProxyLoginRootAdmin value)?
+        cannotProxyLoginRootAdmin,
+    TResult Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)?
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
+        cannotProxyLoginFromDiffferentSalesOrg,
+    required TResult orElse(),
+  }) {
+    if (cannotProxyLoginRootAdmin != null) {
+      return cannotProxyLoginRootAdmin(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _CannotProxyLoginRootAdmin implements AuthException {
+  const factory _CannotProxyLoginRootAdmin() = _$CannotProxyLoginRootAdminImpl;
+}
+
+/// @nodoc
+abstract class _$$CannotProxyLoginZPAdminWhenIsZPAdminImplCopyWith<$Res> {
+  factory _$$CannotProxyLoginZPAdminWhenIsZPAdminImplCopyWith(
+          _$CannotProxyLoginZPAdminWhenIsZPAdminImpl value,
+          $Res Function(_$CannotProxyLoginZPAdminWhenIsZPAdminImpl) then) =
+      __$$CannotProxyLoginZPAdminWhenIsZPAdminImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$CannotProxyLoginZPAdminWhenIsZPAdminImplCopyWithImpl<$Res>
+    extends _$AuthExceptionCopyWithImpl<$Res,
+        _$CannotProxyLoginZPAdminWhenIsZPAdminImpl>
+    implements _$$CannotProxyLoginZPAdminWhenIsZPAdminImplCopyWith<$Res> {
+  __$$CannotProxyLoginZPAdminWhenIsZPAdminImplCopyWithImpl(
+      _$CannotProxyLoginZPAdminWhenIsZPAdminImpl _value,
+      $Res Function(_$CannotProxyLoginZPAdminWhenIsZPAdminImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$CannotProxyLoginZPAdminWhenIsZPAdminImpl
+    implements _CannotProxyLoginZPAdminWhenIsZPAdmin {
+  const _$CannotProxyLoginZPAdminWhenIsZPAdminImpl();
+
+  @override
+  String toString() {
+    return 'AuthException.cannotProxyLoginZPAdminWhenIsZPAdmin()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$CannotProxyLoginZPAdminWhenIsZPAdminImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() invalidEmailAndPasswordCombination,
+    required TResult Function() accountLocked,
+    required TResult Function() accountExpired,
+    required TResult Function() invalidUserName,
+    required TResult Function() accountBlocked,
+    required TResult Function() cannotProxyLoginWithCurrentRole,
+    required TResult Function() cannotProxyLoginRootAdmin,
+    required TResult Function() cannotProxyLoginZPAdminWhenIsZPAdmin,
+    required TResult Function() cannotProxyLoginFromDiffferentSalesOrg,
+  }) {
+    return cannotProxyLoginZPAdminWhenIsZPAdmin();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? invalidEmailAndPasswordCombination,
+    TResult? Function()? accountLocked,
+    TResult? Function()? accountExpired,
+    TResult? Function()? invalidUserName,
+    TResult? Function()? accountBlocked,
+    TResult? Function()? cannotProxyLoginWithCurrentRole,
+    TResult? Function()? cannotProxyLoginRootAdmin,
+    TResult? Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult? Function()? cannotProxyLoginFromDiffferentSalesOrg,
+  }) {
+    return cannotProxyLoginZPAdminWhenIsZPAdmin?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? invalidEmailAndPasswordCombination,
+    TResult Function()? accountLocked,
+    TResult Function()? accountExpired,
+    TResult Function()? invalidUserName,
+    TResult Function()? accountBlocked,
+    TResult Function()? cannotProxyLoginWithCurrentRole,
+    TResult Function()? cannotProxyLoginRootAdmin,
+    TResult Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult Function()? cannotProxyLoginFromDiffferentSalesOrg,
+    required TResult orElse(),
+  }) {
+    if (cannotProxyLoginZPAdminWhenIsZPAdmin != null) {
+      return cannotProxyLoginZPAdminWhenIsZPAdmin();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_InvalidEmailAndPasswordCombination value)
+        invalidEmailAndPasswordCombination,
+    required TResult Function(_AccountLocked value) accountLocked,
+    required TResult Function(_AccountExpired value) accountExpired,
+    required TResult Function(_InvalidUserName value) invalidUserName,
+    required TResult Function(_AccountBlocked value) accountBlocked,
+    required TResult Function(_CannotProxyLoginWithCurrentRole value)
+        cannotProxyLoginWithCurrentRole,
+    required TResult Function(_CannotProxyLoginRootAdmin value)
+        cannotProxyLoginRootAdmin,
+    required TResult Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    required TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)
+        cannotProxyLoginFromDiffferentSalesOrg,
+  }) {
+    return cannotProxyLoginZPAdminWhenIsZPAdmin(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_InvalidEmailAndPasswordCombination value)?
+        invalidEmailAndPasswordCombination,
+    TResult? Function(_AccountLocked value)? accountLocked,
+    TResult? Function(_AccountExpired value)? accountExpired,
+    TResult? Function(_InvalidUserName value)? invalidUserName,
+    TResult? Function(_AccountBlocked value)? accountBlocked,
+    TResult? Function(_CannotProxyLoginWithCurrentRole value)?
+        cannotProxyLoginWithCurrentRole,
+    TResult? Function(_CannotProxyLoginRootAdmin value)?
+        cannotProxyLoginRootAdmin,
+    TResult? Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)?
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult? Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
+        cannotProxyLoginFromDiffferentSalesOrg,
+  }) {
+    return cannotProxyLoginZPAdminWhenIsZPAdmin?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_InvalidEmailAndPasswordCombination value)?
+        invalidEmailAndPasswordCombination,
+    TResult Function(_AccountLocked value)? accountLocked,
+    TResult Function(_AccountExpired value)? accountExpired,
+    TResult Function(_InvalidUserName value)? invalidUserName,
+    TResult Function(_AccountBlocked value)? accountBlocked,
+    TResult Function(_CannotProxyLoginWithCurrentRole value)?
+        cannotProxyLoginWithCurrentRole,
+    TResult Function(_CannotProxyLoginRootAdmin value)?
+        cannotProxyLoginRootAdmin,
+    TResult Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)?
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
+        cannotProxyLoginFromDiffferentSalesOrg,
+    required TResult orElse(),
+  }) {
+    if (cannotProxyLoginZPAdminWhenIsZPAdmin != null) {
+      return cannotProxyLoginZPAdminWhenIsZPAdmin(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _CannotProxyLoginZPAdminWhenIsZPAdmin implements AuthException {
+  const factory _CannotProxyLoginZPAdminWhenIsZPAdmin() =
+      _$CannotProxyLoginZPAdminWhenIsZPAdminImpl;
+}
+
+/// @nodoc
+abstract class _$$CannotProxyLoginFromDiffferentSalesOrgImplCopyWith<$Res> {
+  factory _$$CannotProxyLoginFromDiffferentSalesOrgImplCopyWith(
+          _$CannotProxyLoginFromDiffferentSalesOrgImpl value,
+          $Res Function(_$CannotProxyLoginFromDiffferentSalesOrgImpl) then) =
+      __$$CannotProxyLoginFromDiffferentSalesOrgImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$CannotProxyLoginFromDiffferentSalesOrgImplCopyWithImpl<$Res>
+    extends _$AuthExceptionCopyWithImpl<$Res,
+        _$CannotProxyLoginFromDiffferentSalesOrgImpl>
+    implements _$$CannotProxyLoginFromDiffferentSalesOrgImplCopyWith<$Res> {
+  __$$CannotProxyLoginFromDiffferentSalesOrgImplCopyWithImpl(
+      _$CannotProxyLoginFromDiffferentSalesOrgImpl _value,
+      $Res Function(_$CannotProxyLoginFromDiffferentSalesOrgImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$CannotProxyLoginFromDiffferentSalesOrgImpl
+    implements _CannotProxyLoginFromDiffferentSalesOrg {
+  const _$CannotProxyLoginFromDiffferentSalesOrgImpl();
+
+  @override
+  String toString() {
+    return 'AuthException.cannotProxyLoginFromDiffferentSalesOrg()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$CannotProxyLoginFromDiffferentSalesOrgImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() invalidEmailAndPasswordCombination,
+    required TResult Function() accountLocked,
+    required TResult Function() accountExpired,
+    required TResult Function() invalidUserName,
+    required TResult Function() accountBlocked,
+    required TResult Function() cannotProxyLoginWithCurrentRole,
+    required TResult Function() cannotProxyLoginRootAdmin,
+    required TResult Function() cannotProxyLoginZPAdminWhenIsZPAdmin,
+    required TResult Function() cannotProxyLoginFromDiffferentSalesOrg,
+  }) {
+    return cannotProxyLoginFromDiffferentSalesOrg();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? invalidEmailAndPasswordCombination,
+    TResult? Function()? accountLocked,
+    TResult? Function()? accountExpired,
+    TResult? Function()? invalidUserName,
+    TResult? Function()? accountBlocked,
+    TResult? Function()? cannotProxyLoginWithCurrentRole,
+    TResult? Function()? cannotProxyLoginRootAdmin,
+    TResult? Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult? Function()? cannotProxyLoginFromDiffferentSalesOrg,
+  }) {
+    return cannotProxyLoginFromDiffferentSalesOrg?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? invalidEmailAndPasswordCombination,
+    TResult Function()? accountLocked,
+    TResult Function()? accountExpired,
+    TResult Function()? invalidUserName,
+    TResult Function()? accountBlocked,
+    TResult Function()? cannotProxyLoginWithCurrentRole,
+    TResult Function()? cannotProxyLoginRootAdmin,
+    TResult Function()? cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult Function()? cannotProxyLoginFromDiffferentSalesOrg,
+    required TResult orElse(),
+  }) {
+    if (cannotProxyLoginFromDiffferentSalesOrg != null) {
+      return cannotProxyLoginFromDiffferentSalesOrg();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_InvalidEmailAndPasswordCombination value)
+        invalidEmailAndPasswordCombination,
+    required TResult Function(_AccountLocked value) accountLocked,
+    required TResult Function(_AccountExpired value) accountExpired,
+    required TResult Function(_InvalidUserName value) invalidUserName,
+    required TResult Function(_AccountBlocked value) accountBlocked,
+    required TResult Function(_CannotProxyLoginWithCurrentRole value)
+        cannotProxyLoginWithCurrentRole,
+    required TResult Function(_CannotProxyLoginRootAdmin value)
+        cannotProxyLoginRootAdmin,
+    required TResult Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    required TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)
+        cannotProxyLoginFromDiffferentSalesOrg,
+  }) {
+    return cannotProxyLoginFromDiffferentSalesOrg(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_InvalidEmailAndPasswordCombination value)?
+        invalidEmailAndPasswordCombination,
+    TResult? Function(_AccountLocked value)? accountLocked,
+    TResult? Function(_AccountExpired value)? accountExpired,
+    TResult? Function(_InvalidUserName value)? invalidUserName,
+    TResult? Function(_AccountBlocked value)? accountBlocked,
+    TResult? Function(_CannotProxyLoginWithCurrentRole value)?
+        cannotProxyLoginWithCurrentRole,
+    TResult? Function(_CannotProxyLoginRootAdmin value)?
+        cannotProxyLoginRootAdmin,
+    TResult? Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)?
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult? Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
+        cannotProxyLoginFromDiffferentSalesOrg,
+  }) {
+    return cannotProxyLoginFromDiffferentSalesOrg?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_InvalidEmailAndPasswordCombination value)?
+        invalidEmailAndPasswordCombination,
+    TResult Function(_AccountLocked value)? accountLocked,
+    TResult Function(_AccountExpired value)? accountExpired,
+    TResult Function(_InvalidUserName value)? invalidUserName,
+    TResult Function(_AccountBlocked value)? accountBlocked,
+    TResult Function(_CannotProxyLoginWithCurrentRole value)?
+        cannotProxyLoginWithCurrentRole,
+    TResult Function(_CannotProxyLoginRootAdmin value)?
+        cannotProxyLoginRootAdmin,
+    TResult Function(_CannotProxyLoginZPAdminWhenIsZPAdmin value)?
+        cannotProxyLoginZPAdminWhenIsZPAdmin,
+    TResult Function(_CannotProxyLoginFromDiffferentSalesOrg value)?
+        cannotProxyLoginFromDiffferentSalesOrg,
+    required TResult orElse(),
+  }) {
+    if (cannotProxyLoginFromDiffferentSalesOrg != null) {
+      return cannotProxyLoginFromDiffferentSalesOrg(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _CannotProxyLoginFromDiffferentSalesOrg
+    implements AuthException {
+  const factory _CannotProxyLoginFromDiffferentSalesOrg() =
+      _$CannotProxyLoginFromDiffferentSalesOrgImpl;
 }

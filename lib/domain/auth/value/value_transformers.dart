@@ -1,7 +1,5 @@
 import 'dart:convert';
 
-import 'package:ezrxmobile/domain/account/value/value_objects.dart';
-
 Map<String, dynamic> getJWTPayload(String token) {
   final splitToken = token.split('.'); // Split the token by '.'
   if (splitToken.length != 3) {
@@ -70,13 +68,6 @@ List getJWTSalesOrg(String token) {
   final payload = getJWTPayload(token);
 
   return payload['salesOrgs'];
-}
-
-RoleName getJWTRoleName(String token) {
-  if (token.isEmpty) return RoleName('');
-  final payload = getJWTPayload(token);
-
-  return RoleName(payload['role']);
 }
 
 String maskEmail(String email) {

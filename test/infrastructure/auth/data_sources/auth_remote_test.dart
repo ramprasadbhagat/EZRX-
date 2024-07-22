@@ -62,7 +62,6 @@ void main() {
             (server) => server.reply(
               200,
               res,
-              delay: const Duration(seconds: 1),
             ),
             headers: {'Content-Type': 'application/json; charset=utf-8'},
             data: jsonEncode({
@@ -96,7 +95,6 @@ void main() {
                   {'message': 'fake-error'},
                 ],
               },
-              delay: const Duration(seconds: 1),
             ),
             headers: {'Content-Type': 'application/json; charset=utf-8'},
             data: jsonEncode({
@@ -125,7 +123,6 @@ void main() {
             (server) => server.reply(
               204,
               {'data': []},
-              delay: const Duration(seconds: 1),
             ),
             headers: {'Content-Type': 'application/json; charset=utf-8'},
             data: jsonEncode({
@@ -159,7 +156,6 @@ void main() {
             (server) => server.reply(
               200,
               res,
-              delay: const Duration(seconds: 1),
             ),
             headers: {'Content-Type': 'application/json; charset=utf-8'},
             data: jsonEncode({
@@ -192,7 +188,6 @@ void main() {
             (server) => server.reply(
               200,
               res,
-              delay: const Duration(seconds: 1),
             ),
             headers: {'Content-Type': 'application/json; charset=utf-8'},
             data: jsonEncode({
@@ -225,7 +220,6 @@ void main() {
                   {'message': 'fake-error'},
                 ],
               },
-              delay: const Duration(seconds: 1),
             ),
             headers: {'Content-Type': 'application/json; charset=utf-8'},
             data: jsonEncode({
@@ -245,115 +239,298 @@ void main() {
         },
       );
 
-      test(
-        'Proxy Login With Username success',
-        () async {
-          final res = json.decode(
-            await rootBundle.loadString('assets/json/proxyLoginResponse.json'),
-          );
+      group('Proxy login', () {
+        test(
+          'Proxy Login With Username success',
+          () async {
+            final res = json.decode(
+              await rootBundle
+                  .loadString('assets/json/proxyLoginResponse.json'),
+            );
 
-          dioAdapter.onPost(
-            '/api/license',
-            (server) => server.reply(
-              200,
-              res,
-              delay: const Duration(seconds: 1),
-            ),
-            headers: {'Content-Type': 'application/json; charset=utf-8'},
-            data: jsonEncode({
-              'query': remoteDataSource.authQueryMutation.getProxyLoginQuery(),
-            }),
-          );
+            dioAdapter.onPost(
+              '/api/license',
+              (server) => server.reply(
+                200,
+                res,
+              ),
+              headers: {'Content-Type': 'application/json; charset=utf-8'},
+              data: jsonEncode({
+                'query':
+                    remoteDataSource.authQueryMutation.getProxyLoginQuery(),
+              }),
+            );
 
-          final result = await remoteDataSource.proxyLoginWithUsername(
-            username: 'username',
-          );
+            final result = await remoteDataSource.proxyLoginWithUsername(
+              username: 'username',
+            );
 
-          expect(
-            result,
-            LoginDto.fromJson(res['data']['proxyLoginV3']).toDomain(),
-          );
-        },
-      );
+            expect(
+              result,
+              LoginDto.fromJson(res['data']['proxyLoginV3']).toDomain(),
+            );
+          },
+        );
 
-      test(
-        'Proxy Login With Username error',
-        () async {
-          dioAdapter.onPost(
-            '/api/license',
-            (server) => server.reply(
-              200,
-              {
-                'data': null,
-                'errors': [
-                  {'message': 'fake-error'},
-                ],
-              },
-              delay: const Duration(seconds: 1),
-            ),
-            headers: {'Content-Type': 'application/json; charset=utf-8'},
-            data: jsonEncode({
-              'query': remoteDataSource.authQueryMutation.getProxyLoginQuery(),
-            }),
-          );
+        test(
+          'Proxy Login With Username error',
+          () async {
+            dioAdapter.onPost(
+              '/api/license',
+              (server) => server.reply(
+                200,
+                {
+                  'data': null,
+                  'errors': [
+                    {'message': 'fake-error'},
+                  ],
+                },
+              ),
+              headers: {'Content-Type': 'application/json; charset=utf-8'},
+              data: jsonEncode({
+                'query':
+                    remoteDataSource.authQueryMutation.getProxyLoginQuery(),
+              }),
+            );
 
-          await remoteDataSource
-              .proxyLoginWithUsername(
-            username: 'username',
-          )
-              .onError((error, _) async {
-            expect(error, isA<ServerException>());
-            return Future.value(LoginMock());
-          });
-        },
-      );
+            await remoteDataSource
+                .proxyLoginWithUsername(
+              username: 'username',
+            )
+                .onError((error, _) async {
+              expect(error, isA<ServerException>());
+              return Future.value(LoginMock());
+            });
+          },
+        );
 
-      test(
-        'Proxy Login With Username error when the authenticated is coming as false',
-        () async {
-          dioAdapter.onPost(
-            '/api/license',
-            (server) => server.reply(
-              200,
-              {
-                'data': {
-                  'proxyLoginV3': {
-                    'userID': 7307,
-                    'authenticated': false,
-                    'eZRxJWT':
-                        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJadWVsbGlnIFBoYXJtYSIsInN1YiI6IkFjY2VzcyBUb2tlbiIsImV4cCI6MTY5MDQ2NjgyOCwiaWF0IjoxNjkwNDYzMjI4LCJpZCI6NzMwNywicm9sZSI6IkNsaWVudCBBZG1pbiIsInVzZXJuYW1lIjoidGVzdGNsaWVudGFkbWluIiwicmlnaHRzIjpbeyJ2YWx1ZSI6W3sic2hpcFRvQ29kZSI6WyIwMDcwMTQ5ODYzIiwiMDA3MDE0OTg2NCJdLCJjdXN0b21lckNvZGUiOiIwMDMwMDgyNzA3Iiwic2FsZXNPcmciOiIyMDAxIn1dfV0sInNhbGVzT3JncyI6WyIyMDAxIl19.j39coMdr1V5cUBeCMU6C5ReoiDOdFvRFug_tATv1Jag',
-                    'email': '',
-                    'userMobileToken': {
-                      'firstName': 'testclientadmin',
-                      'lastName': 'testclientadmin',
-                      'mobileTokens': [],
-                      'mobileNotifications': false,
+        test(
+          'Proxy Login With Username error when the authenticated is coming as false',
+          () async {
+            dioAdapter.onPost(
+              '/api/license',
+              (server) => server.reply(
+                200,
+                {
+                  'data': {
+                    'proxyLoginV3': {
+                      'userID': 7307,
+                      'authenticated': false,
+                      'eZRxJWT':
+                          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJadWVsbGlnIFBoYXJtYSIsInN1YiI6IkFjY2VzcyBUb2tlbiIsImV4cCI6MTY5MDQ2NjgyOCwiaWF0IjoxNjkwNDYzMjI4LCJpZCI6NzMwNywicm9sZSI6IkNsaWVudCBBZG1pbiIsInVzZXJuYW1lIjoidGVzdGNsaWVudGFkbWluIiwicmlnaHRzIjpbeyJ2YWx1ZSI6W3sic2hpcFRvQ29kZSI6WyIwMDcwMTQ5ODYzIiwiMDA3MDE0OTg2NCJdLCJjdXN0b21lckNvZGUiOiIwMDMwMDgyNzA3Iiwic2FsZXNPcmciOiIyMDAxIn1dfV0sInNhbGVzT3JncyI6WyIyMDAxIl19.j39coMdr1V5cUBeCMU6C5ReoiDOdFvRFug_tATv1Jag',
+                      'email': '',
+                      'userMobileToken': {
+                        'firstName': 'testclientadmin',
+                        'lastName': 'testclientadmin',
+                        'mobileTokens': [],
+                        'mobileNotifications': false,
+                      },
+                      'passwordLastReset': '',
+                      'passwordExpiry': '',
+                      'isAccountLocked': false,
+                      'isAccountExpired': false,
                     },
-                    'passwordLastReset': '',
-                    'passwordExpiry': '',
-                    'isAccountLocked': false,
-                    'isAccountExpired': false,
                   },
                 },
-              },
-              delay: const Duration(seconds: 1),
-            ),
-            headers: {'Content-Type': 'application/json; charset=utf-8'},
-            data: jsonEncode({
-              'query': remoteDataSource.authQueryMutation.getProxyLoginQuery(),
-            }),
-          );
+              ),
+              headers: {'Content-Type': 'application/json; charset=utf-8'},
+              data: jsonEncode({
+                'query':
+                    remoteDataSource.authQueryMutation.getProxyLoginQuery(),
+              }),
+            );
 
-          await remoteDataSource
-              .proxyLoginWithUsername(
-            username: 'username',
-          )
-              .onError((error, _) async {
-            expect(error, isA<AuthException>());
-            return Future.value(LoginMock());
-          });
-        },
-      );
+            await remoteDataSource
+                .proxyLoginWithUsername(
+              username: 'username',
+            )
+                .onError((error, _) async {
+              expect(error, isA<AuthException>());
+              return Future.value(LoginMock());
+            });
+          },
+        );
+
+        test(
+          '- error when trying login to Rootadmin',
+          () async {
+            dioAdapter.onPost(
+              '/api/license',
+              (server) => server.reply(
+                200,
+                {
+                  'data': null,
+                  'errors': [
+                    {'message': "can't do a proxy login for ROOT user"},
+                  ],
+                },
+              ),
+              headers: {'Content-Type': 'application/json; charset=utf-8'},
+              data: jsonEncode({
+                'query':
+                    remoteDataSource.authQueryMutation.getProxyLoginQuery(),
+              }),
+            );
+
+            await remoteDataSource
+                .proxyLoginWithUsername(
+              username: 'username',
+            )
+                .onError((error, _) async {
+              expect(error, const AuthException.cannotProxyLoginRootAdmin());
+              return Future.value(LoginMock());
+            });
+          },
+        );
+
+        test(
+          '- error when trying login to zp admin when the role is zp admin',
+          () async {
+            dioAdapter.onPost(
+              '/api/license',
+              (server) => server.reply(
+                200,
+                {
+                  'data': null,
+                  'errors': [
+                    {'message': "ZP Admin can't login on behalf of ZP Admin"},
+                  ],
+                },
+              ),
+              headers: {'Content-Type': 'application/json; charset=utf-8'},
+              data: jsonEncode({
+                'query':
+                    remoteDataSource.authQueryMutation.getProxyLoginQuery(),
+              }),
+            );
+
+            await remoteDataSource
+                .proxyLoginWithUsername(
+              username: 'username',
+            )
+                .onError((error, _) async {
+              expect(
+                error,
+                const AuthException.cannotProxyLoginZPAdminWhenIsZPAdmin(),
+              );
+              return Future.value(LoginMock());
+            });
+          },
+        );
+
+        test(
+          '- error when trying login to different sales org user',
+          () async {
+            dioAdapter.onPost(
+              '/api/license',
+              (server) => server.reply(
+                200,
+                {
+                  'data': null,
+                  'errors': [
+                    {
+                      'message':
+                          'ZP Admin can only login on behalf of users from the same Sales Org',
+                    },
+                  ],
+                },
+              ),
+              headers: {'Content-Type': 'application/json; charset=utf-8'},
+              data: jsonEncode({
+                'query':
+                    remoteDataSource.authQueryMutation.getProxyLoginQuery(),
+              }),
+            );
+
+            await remoteDataSource
+                .proxyLoginWithUsername(
+              username: 'username',
+            )
+                .onError((error, _) async {
+              expect(
+                error,
+                const AuthException.cannotProxyLoginFromDiffferentSalesOrg(),
+              );
+              return Future.value(LoginMock());
+            });
+          },
+        );
+
+        test(
+          '- error when role does not have permission',
+          () async {
+            dioAdapter.onPost(
+              '/api/license',
+              (server) => server.reply(
+                200,
+                {
+                  'data': null,
+                  'errors': [
+                    {
+                      'message':
+                          'Log in on behalf failed. You may only log in on behalf of sales reps and customers from the same sales org.',
+                    },
+                  ],
+                },
+              ),
+              headers: {'Content-Type': 'application/json; charset=utf-8'},
+              data: jsonEncode({
+                'query':
+                    remoteDataSource.authQueryMutation.getProxyLoginQuery(),
+              }),
+            );
+
+            await remoteDataSource
+                .proxyLoginWithUsername(
+              username: 'username',
+            )
+                .onError((error, _) async {
+              expect(
+                error,
+                const AuthException.cannotProxyLoginWithCurrentRole(),
+              );
+              return Future.value(LoginMock());
+            });
+          },
+        );
+
+        test(
+          '- error when role value is empty',
+          () async {
+            dioAdapter.onPost(
+              '/api/license',
+              (server) => server.reply(
+                200,
+                {
+                  'data': null,
+                  'errors': [
+                    {
+                      'message': 'invalid user role',
+                    },
+                  ],
+                },
+              ),
+              headers: {'Content-Type': 'application/json; charset=utf-8'},
+              data: jsonEncode({
+                'query':
+                    remoteDataSource.authQueryMutation.getProxyLoginQuery(),
+              }),
+            );
+
+            await remoteDataSource
+                .proxyLoginWithUsername(
+              username: 'username',
+            )
+                .onError((error, _) async {
+              expect(
+                error,
+                const AuthException.cannotProxyLoginWithCurrentRole(),
+              );
+              return Future.value(LoginMock());
+            });
+          },
+        );
+      });
     },
   );
 }

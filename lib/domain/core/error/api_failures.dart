@@ -22,13 +22,14 @@ class ApiFailure with _$ApiFailure {
   const factory ApiFailure.accountExpired() = _AccountExpired;
   const factory ApiFailure.tokenExpired() = _TokenExpired;
   const factory ApiFailure.authenticationFailed() = _AuthenticationFailed;
-
-  const factory ApiFailure.proxyLoginRolePermissionNotMatch() =
-      _ProxyLoginRolePermissionNotMatch;
-  const factory ApiFailure.proxyLoginZPTargetRoleNotMatch() =
-      _ProxyLoginZPTargetRoleNotMatch;
-  const factory ApiFailure.proxyLoginZPSalesOrgNotMatch() =
-      _ProxyLoginZPSalesOrgNotMatch;
+  const factory ApiFailure.cannotProxyLoginWithCurrentRole() =
+      _CannotProxyLoginWithCurrentRole;
+  const factory ApiFailure.cannotProxyLoginRootAdmin() =
+      _CannotProxyLoginRootAdmin;
+  const factory ApiFailure.cannotProxyLoginZPAdminWhenIsZPAdmin() =
+      _CannotProxyLoginZPAdminWhenIsZPAdmin;
+  const factory ApiFailure.cannotProxyLoginFromDiffferentSalesOrg() =
+      _CannotProxyLoginFromDiffferentSalesOrg;
   const factory ApiFailure.passwordResetFail() = _PasswordResetFail;
 
   // Bio failure
@@ -111,14 +112,17 @@ extension ApiFailureExt on ApiFailure {
         invalidBiometric: (_) => const TRObject('Incorrect biometric'),
         priceOverrideNotFound: (_) =>
             const TRObject('Price override not found!'),
-        proxyLoginRolePermissionNotMatch: (_) => const TRObject(
+        cannotProxyLoginWithCurrentRole: (_) => const TRObject(
           'Only Root Admin and ZP Admin can login on behalf',
         ),
-        proxyLoginZPSalesOrgNotMatch: (_) => const TRObject(
-          'ZP Admin can only login on behalf of users from the same Sales Org',
+        cannotProxyLoginRootAdmin: (_) => const TRObject(
+          "Can't do a proxy login for ROOT user",
         ),
-        proxyLoginZPTargetRoleNotMatch: (_) => const TRObject(
-          'ZP Admin can only login on behalf of Sales Rep and Customer users',
+        cannotProxyLoginZPAdminWhenIsZPAdmin: (_) => const TRObject(
+          "ZP Admin can't login on behalf of ZP Admin",
+        ),
+        cannotProxyLoginFromDiffferentSalesOrg: (_) => const TRObject(
+          'ZP Admin can only login on behalf of users from the same Sales Org',
         ),
         productOutOfStock: (_) => const TRObject('Product Not Available'),
         photoPermissionFailed: (_) => const TRObject(

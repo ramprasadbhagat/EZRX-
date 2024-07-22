@@ -210,9 +210,5 @@ class JWT extends ValueObject<String> {
     return getJWTSalesOrg(value.getOrElse(() => ''));
   }
 
-  RoleName get roleName {
-    return getJWTRoleName(value.getOrElse(() => ''));
-  }
-
   const JWT._(this.value);
 }

@@ -159,15 +159,6 @@ void main() {
           ),
         );
 
-        when(
-          () => authRepoMock.isEligibleProxyLogin(
-            user: fakeUser,
-            jwt: fakeJWT,
-          ),
-        ).thenAnswer(
-          (invocation) async => const Right(unit),
-        );
-
         when(() => authRepoMock.logout()).thenAnswer(
           (invocation) async => const Right(unit),
         );
@@ -195,7 +186,15 @@ void main() {
           isSubmitting: false,
           username: fakeUserName,
           showErrorMessages: false,
-          authFailureOrSuccessOption: optionOf(const Right(unit)),
+          authFailureOrSuccessOption: optionOf(
+            Right(
+              Login(
+                access: fakeJWT,
+                refresh: fakeRefresh,
+                user: User.empty(),
+              ),
+            ),
+          ),
         ),
       ],
     );
@@ -215,26 +214,7 @@ void main() {
             username: fakeUserName,
           ),
         ).thenAnswer(
-          (invocation) async => Right(
-            Login(
-              access: fakeJWT,
-              refresh: fakeRefresh,
-              user: User.empty(),
-            ),
-          ),
-        );
-
-        when(
-          () => authRepoMock.isEligibleProxyLogin(
-            user: User.empty().copyWith(
-              username: Username('fake-user'),
-              role: Role.empty().copyWith(type: RoleType('internal_sales_rep')),
-            ),
-            jwt: fakeJWT,
-          ),
-        ).thenAnswer(
-          (invocation) async =>
-              const Left(ApiFailure.proxyLoginRolePermissionNotMatch()),
+          (invocation) async => const Left(ApiFailure.poorConnection()),
         );
       },
       act: (ProxyLoginFormBloc bloc) => bloc
@@ -258,212 +238,7 @@ void main() {
           isSubmitting: false,
           showErrorMessages: true,
           authFailureOrSuccessOption: optionOf(
-            const Left(ApiFailure.proxyLoginRolePermissionNotMatch()),
-          ),
-        ),
-      ],
-    );
-
-    blocTest(
-      'zp admin proxy login for sales rep users and client users with different sales org account',
-      build: () => ProxyLoginFormBloc(authRepository: authRepoMock),
-      setUp: () {
-        when(() => authRepoMock.loadCredential()).thenAnswer(
-          (invocation) async => const Left(
-            ApiFailure.other('fake-error'),
-          ),
-        );
-
-        when(
-          () => authRepoMock.proxyLogin(
-            username: fakeUserName,
-          ),
-        ).thenAnswer(
-          (invocation) async => Right(
-            Login(
-              access: fakeJWT,
-              refresh: fakeRefresh,
-              user: User.empty(),
-            ),
-          ),
-        );
-
-        when(
-          () => authRepoMock.isEligibleProxyLogin(
-            user: fakeUser.copyWith(
-              role: Role.empty().copyWith(type: RoleType('zp_admin')),
-            ),
-            jwt: fakeJWT,
-          ),
-        ).thenAnswer(
-          (invocation) async => const Left(
-            ApiFailure.proxyLoginZPSalesOrgNotMatch(),
-          ),
-        );
-      },
-      act: (ProxyLoginFormBloc bloc) => bloc
-        ..add(const ProxyLoginFormEvent.usernameChanged('fake-proxy_user'))
-        ..add(
-          ProxyLoginFormEvent.loginWithADButtonPressed(
-            user: fakeUser.copyWith(
-              role: Role.empty().copyWith(type: RoleType('zp_admin')),
-            ),
-          ),
-        ),
-      expect: () => [
-        proxyloginFormState =
-            proxyloginFormState.copyWith(username: fakeUserName),
-        proxyloginFormState.copyWith(
-          isSubmitting: true,
-          authFailureOrSuccessOption: none(),
-        ),
-        proxyloginFormState.copyWith(
-          isSubmitting: false,
-          showErrorMessages: true,
-          authFailureOrSuccessOption: optionOf(
-            const Left(
-              ApiFailure.proxyLoginZPSalesOrgNotMatch(),
-            ),
-          ),
-        ),
-      ],
-    );
-
-    blocTest(
-      'zp admin proxy login for sales rep users and client users with  same sales org account',
-      build: () => ProxyLoginFormBloc(authRepository: authRepoMock),
-      setUp: () {
-        when(() => authRepoMock.loadCredential()).thenAnswer(
-          (invocation) async => const Left(
-            ApiFailure.other('fake-error'),
-          ),
-        );
-
-        when(
-          () => authRepoMock.proxyLogin(
-            username: fakeUserName,
-          ),
-        ).thenAnswer(
-          (invocation) async => Right(
-            Login(
-              access: fakeJWT,
-              refresh: fakeRefresh,
-              user: User.empty(),
-            ),
-          ),
-        );
-
-        when(
-          () => authRepoMock.isEligibleProxyLogin(
-            user: fakeUser.copyWith(
-              role: Role.empty().copyWith(type: RoleType('zp_admin')),
-            ),
-            jwt: fakeJWT,
-          ),
-        ).thenAnswer(
-          (invocation) async => const Right(
-            unit,
-          ),
-        );
-
-        when(() => authRepoMock.logout()).thenAnswer(
-          (invocation) async => const Right(unit),
-        );
-
-        when(() => authRepoMock.storeJWT(access: fakeJWT, refresh: fakeRefresh))
-            .thenAnswer(
-          (invocation) async => const Right(unit),
-        );
-      },
-      act: (ProxyLoginFormBloc bloc) => bloc
-        ..add(const ProxyLoginFormEvent.usernameChanged('fake-proxy_user'))
-        ..add(
-          ProxyLoginFormEvent.loginWithADButtonPressed(
-            user: fakeUser.copyWith(
-              role: Role.empty().copyWith(type: RoleType('zp_admin')),
-            ),
-          ),
-        ),
-      expect: () => [
-        proxyloginFormState =
-            proxyloginFormState.copyWith(username: fakeUserName),
-        proxyloginFormState.copyWith(
-          isSubmitting: true,
-          authFailureOrSuccessOption: none(),
-        ),
-        proxyloginFormState.copyWith(
-          isSubmitting: false,
-          username: fakeUserName,
-          showErrorMessages: false,
-          authFailureOrSuccessOption: optionOf(
-            const Right(
-              unit,
-            ),
-          ),
-        ),
-      ],
-    );
-
-    blocTest(
-      'zp admin proxy login with proxy user role mismatch',
-      build: () => ProxyLoginFormBloc(authRepository: authRepoMock),
-      setUp: () {
-        when(() => authRepoMock.loadCredential()).thenAnswer(
-          (invocation) async => const Left(
-            ApiFailure.other('fake-error'),
-          ),
-        );
-
-        when(
-          () => authRepoMock.proxyLogin(
-            username: fakeUserName,
-          ),
-        ).thenAnswer(
-          (invocation) async => Right(
-            Login(
-              access: JWT('fake-JWT-client'),
-              refresh: fakeRefresh,
-              user: User.empty(),
-            ),
-          ),
-        );
-
-        when(
-          () => authRepoMock.isEligibleProxyLogin(
-            user: fakeUser.copyWith(
-              role: Role.empty().copyWith(type: RoleType('zp_admin')),
-            ),
-            jwt: JWT('fake-JWT-client'),
-          ),
-        ).thenAnswer(
-          (invocation) async => const Left(
-            ApiFailure.proxyLoginZPTargetRoleNotMatch(),
-          ),
-        );
-      },
-      act: (ProxyLoginFormBloc bloc) => bloc
-        ..add(const ProxyLoginFormEvent.usernameChanged('fake-proxy_user'))
-        ..add(
-          ProxyLoginFormEvent.loginWithADButtonPressed(
-            user: fakeUser.copyWith(
-              role: Role.empty().copyWith(type: RoleType('zp_admin')),
-            ),
-          ),
-        ),
-      expect: () => [
-        proxyloginFormState =
-            proxyloginFormState.copyWith(username: fakeUserName),
-        proxyloginFormState.copyWith(
-          isSubmitting: true,
-          authFailureOrSuccessOption: none(),
-        ),
-        proxyloginFormState.copyWith(
-          isSubmitting: false,
-          showErrorMessages: true,
-          authFailureOrSuccessOption: optionOf(
-            const Left(
-              ApiFailure.proxyLoginZPTargetRoleNotMatch(),
-            ),
+            const Left(ApiFailure.poorConnection()),
           ),
         ),
       ],

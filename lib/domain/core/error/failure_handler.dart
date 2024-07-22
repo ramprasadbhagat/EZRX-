@@ -21,6 +21,14 @@ class FailureHandler {
         accountExpired: (_) => const ApiFailure.accountExpired(),
         invalidUserName: (_) => const ApiFailure.userNameNotFound(),
         accountBlocked: (_) => const ApiFailure.accountBlocked(),
+        cannotProxyLoginFromDiffferentSalesOrg: (_) =>
+            const ApiFailure.cannotProxyLoginFromDiffferentSalesOrg(),
+        cannotProxyLoginRootAdmin: (_) =>
+            const ApiFailure.cannotProxyLoginRootAdmin(),
+        cannotProxyLoginWithCurrentRole: (_) =>
+            const ApiFailure.cannotProxyLoginWithCurrentRole(),
+        cannotProxyLoginZPAdminWhenIsZPAdmin: (_) =>
+            const ApiFailure.cannotProxyLoginZPAdminWhenIsZPAdmin(),
       );
     } else if (error is UserException) {
       return error.map(

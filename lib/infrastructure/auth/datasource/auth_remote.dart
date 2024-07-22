@@ -5,6 +5,7 @@ import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/auth/entities/login.dart';
 import 'package:ezrxmobile/domain/auth/error/auth_exception.dart';
 import 'package:ezrxmobile/domain/core/error/exception_handler.dart';
+import 'package:ezrxmobile/domain/core/value/value_transformers.dart';
 import 'package:ezrxmobile/infrastructure/auth/datasource/auth_query_mutation.dart';
 import 'package:ezrxmobile/infrastructure/auth/dtos/login_dto.dart';
 import 'package:ezrxmobile/infrastructure/core/http/http.dart';
@@ -171,6 +172,35 @@ class AuthRemoteDataSource {
         throw const AuthException.accountLocked();
       } else if (jsonData['isAccountExpired'] == true) {
         throw const AuthException.accountExpired();
+      }
+    }
+
+    if (isProxyLogin &&
+        res.data['errors']?.isNotEmpty == true &&
+        res.data['errors'][0]['message'] != null) {
+      final message = res.data['errors'][0]['message'];
+
+      if (isEqualsIgnoreCase(
+        message,
+        'ZP Admin can only login on behalf of users from the same Sales Org',
+      )) {
+        throw const AuthException.cannotProxyLoginFromDiffferentSalesOrg();
+      } else if (isEqualsIgnoreCase(
+        message,
+        "can't do a proxy login for ROOT user",
+      )) {
+        throw const AuthException.cannotProxyLoginRootAdmin();
+      } else if (isEqualsIgnoreCase(
+        message,
+        "ZP Admin can't login on behalf of ZP Admin",
+      )) {
+        throw const AuthException.cannotProxyLoginZPAdminWhenIsZPAdmin();
+      } else if (isEqualsIgnoreCase(
+            message,
+            'Log in on behalf failed. You may only log in on behalf of sales reps and customers from the same sales org.',
+          ) ||
+          isEqualsIgnoreCase(message, 'invalid user role')) {
+        throw const AuthException.cannotProxyLoginWithCurrentRole();
       }
     }
   }

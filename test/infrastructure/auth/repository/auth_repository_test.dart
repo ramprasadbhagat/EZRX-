@@ -1,7 +1,5 @@
 import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/config.dart';
-import 'package:ezrxmobile/domain/account/entities/sales_organisation.dart';
-import 'package:ezrxmobile/domain/account/value/value_objects.dart';
 import 'package:ezrxmobile/domain/auth/entities/login.dart';
 import 'package:ezrxmobile/domain/auth/value/value_objects.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
@@ -29,8 +27,6 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:local_auth/local_auth.dart';
 import 'package:mocktail/mocktail.dart';
 import '../../../common_mock_data/mock_other.dart';
-import '../../../common_mock_data/sales_organsiation_mock.dart';
-import '../../../common_mock_data/user_mock.dart';
 import 'package:local_auth_android/local_auth_android.dart';
 import 'package:local_auth_darwin/local_auth_darwin.dart';
 
@@ -65,8 +61,6 @@ class ProductSuggestionHistoryStorageMock extends Mock
 
 class MaterialBannerStorageMock extends Mock implements MaterialBannerStorage {}
 
-class RoleNameMock extends Mock implements RoleName {}
-
 void main() {
   late AuthRemoteDataSource remoteDataSourceMock;
   late AuthLocalDataSource localDataSourceMock;
@@ -90,9 +84,6 @@ void main() {
       'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJBVVRIX1RPS0VOIjoiZXlKaGJHY2lPaUpJVXpJMU5pSXNJblI1Y0NJNklrcFhWQ0o5LmV5SkJWVlJJWDFSUFMwVk9Jam9pZHpsNGNFRmhRa1JaVVNJc0lrTlNSVUZVUlVSZlFWUWlPakUyT0RZeU9UWTRPRFFzSW1WNGNDSTZNVFk0TmpNd01EUTROQ3dpYVdGMElqb3hOamcyTWprMk9EZzBMQ0pwWkNJNk16ZzJNQ3dpY21sbmFIUnpJanBiZXlKMllXeDFaU0k2VzNzaVkzVnpkRzl0WlhKRGIyUmxJam9pWVd4c0lpd2ljMkZzWlhOUGNtY2lPaUl5TURBeElpd2ljMmhwY0ZSdlEyOWtaU0k2V3lKaGJHd2lYWDFkZlYwc0luSnZiR1VpT2lKU1QwOVVJRUZrYldsdUlpd2ljMkZzWlhOUGNtZHpJanBiSWpJd01ERWlYU3dpZFhObGNtNWhiV1VpT2lKeWIyOTBZV1J0YVc0aWZRLmp0ZkxBZjcyaFdkVU1EZ0xEYnJoUXpOQmNhd2hsb19PSHJfTmFFTE5fbGMiLCJleHAiOjE2OTQwNzI4ODQsImlhdCI6MTY4NjI5Njg4NH0.fx4Lnfs1omLm81hBAwTetEnddSQnK2hTS_Kj9O25tYA';
   final fakeJWT = JWT(rootAdminToken);
   final fakeRefreshToken = JWT(refreshToken);
-  final fakeExtSalesrepToken = JWT(
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJadWVsbGlnIFBoYXJtYSIsInN1YiI6IkFjY2VzcyBUb2tlbiIsImV4cCI6MTY5NzQzMTU0MSwiaWF0IjoxNjk3NDI3OTQxLCJpZCI6MzY5Niwicm9sZSI6IkV4dGVybmFsIFNhbGVzIFJlcCIsInVzZXJuYW1lIjoidGVzdGV4dHNhbGVzcmVwIiwicmlnaHRzIjpbeyJ2YWx1ZSI6W3sic2hpcFRvQ29kZSI6WyIwMDcwMTQ5ODYzIiwiMDA3MDE0OTg2NSIsIjAwNzAxNDk4NjciLCIwMDcwMTQ5ODY5IiwiMDA3MDE0OTg3MCIsIjAwNzMzMDU3MDUiXSwiY3VzdG9tZXJDb2RlIjoiMDAzMDA4MjcwNyIsInNhbGVzT3JnIjoiMjAwMSJ9XX1dLCJzYWxlc09yZ3MiOlsiMjAwMSJdfQ.aGaMKeeeVCYkrnQoqNqVYHLBiPtJPyv9htE_kC--HRM',
-  );
   final fakePassword = Password.login('fake-password');
   final fakeUserName = Username('fake-username');
   final fakeError = Exception('fake-error');
@@ -380,71 +371,6 @@ void main() {
             username: fakeUserName,
           );
           expect(result.isLeft(), true);
-        },
-      );
-
-      test(
-        'test isEligibleProxyLogin root admin',
-        () async {
-          final result = await repository.isEligibleProxyLogin(
-            user: fakeRootAdminUser,
-            jwt: fakeJWT,
-          );
-          expect(result.isRight(), true);
-        },
-      );
-
-      test(
-        'test isEligibleProxyLogin is not ZP Admin',
-        () async {
-          final result = await repository.isEligibleProxyLogin(
-            user: fakeInternalSalesRepUser,
-            jwt: fakeJWT,
-          );
-          expect(result.isLeft(), true);
-        },
-      );
-
-      test(
-        'test isEligibleProxyLogin Is Not Eligible Login Role For ZPAdmin',
-        () async {
-          final result = await repository.isEligibleProxyLogin(
-            user: fakeZPAdminUser,
-            jwt: fakeJWT,
-          );
-          expect(result.isLeft(), true);
-        },
-      );
-
-      test(
-        'test isEligibleProxyLogin Sales Org Not Matches',
-        () async {
-          final result = await repository.isEligibleProxyLogin(
-            user: fakeZPAdminUser.copyWith(
-              userSalesOrganisations: [
-                fakeSalesOrganisation,
-              ],
-            ),
-            jwt: fakeExtSalesrepToken,
-          );
-          expect(result.isLeft(), true);
-        },
-      );
-
-      test(
-        'test isEligibleProxyLogin Sales Org Matches',
-        () async {
-          final result = await repository.isEligibleProxyLogin(
-            user: fakeZPAdminUser.copyWith(
-              userSalesOrganisations: [
-                SalesOrganisation.empty().copyWith(
-                  salesOrg: SalesOrg('2001'),
-                ),
-              ],
-            ),
-            jwt: fakeExtSalesrepToken,
-          );
-          expect(result.isRight(), true);
         },
       );
 

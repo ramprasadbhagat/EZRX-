@@ -390,21 +390,6 @@ void main() {
         expect(result, decodedPayload['salesOrgs']);
       },
     );
-
-    test(
-      'should return RoleName if the token is valid for user',
-      () async {
-        const input =
-            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJBVVRIX1RPS0VOIjoidzl4cEFhQkRZUSIsImV4cCI6MTY3MjEyNzk0NywiaWF0IjoxNjcyMDQxNTQ3LCJpZCI6NDc4NTgsInJpZ2h0cyI6W3sidmFsdWUiOlt7ImN1c3RvbWVyQ29kZSI6ImFsbCIsInNhbGVzT3JnIjoiMjAwMSIsInNoaXBUb0NvZGUiOlsiYWxsIl19LHsiY3VzdG9tZXJDb2RlIjoiYWxsIiwic2FsZXNPcmciOiIyODAwIiwic2hpcFRvQ29kZSI6WyJhbGwiXX0seyJjdXN0b21lckNvZGUiOiJhbGwiLCJzYWxlc09yZyI6IjMwNzAiLCJzaGlwVG9Db2RlIjpbImFsbCJdfSx7ImN1c3RvbWVyQ29kZSI6ImFsbCIsInNhbGVzT3JnIjoiMjkwMiIsInNoaXBUb0NvZGUiOlsiYWxsIl19LHsiY3VzdG9tZXJDb2RlIjoiYWxsIiwic2FsZXNPcmciOiIyNjAxIiwic2hpcFRvQ29kZSI6WyJhbGwiXX0seyJjdXN0b21lckNvZGUiOiJhbGwiLCJzYWxlc09yZyI6IjIyMDAiLCJzaGlwVG9Db2RlIjpbImFsbCJdfSx7ImN1c3RvbWVyQ29kZSI6ImFsbCIsInNhbGVzT3JnIjoiMjIwMSIsInNoaXBUb0NvZGUiOlsiYWxsIl19LHsiY3VzdG9tZXJDb2RlIjoiYWxsIiwic2FsZXNPcmciOiIyMjAzIiwic2hpcFRvQ29kZSI6WyJhbGwiXX0seyJjdXN0b21lckNvZGUiOiJhbGwiLCJzYWxlc09yZyI6IjIyNTAiLCJzaGlwVG9Db2RlIjpbImFsbCJdfSx7ImN1c3RvbWVyQ29kZSI6ImFsbCIsInNhbGVzT3JnIjoiMzA1MCIsInNoaXBUb0NvZGUiOlsiYWxsIl19LHsiY3VzdG9tZXJDb2RlIjoiYWxsIiwic2FsZXNPcmciOiIyNTAwIiwic2hpcFRvQ29kZSI6WyJhbGwiXX1dfV0sInJvbGUiOiJST09UIEFkbWluIiwic2FsZXNPcmdzIjpbIjIwMDEiLCIyODAwIiwiMzA3MCIsIjI5MDIiLCIyNjAxIiwiMjIwMCIsIjIyMDEiLCIyMjAzIiwiMjI1MCIsIjMwNTAiLCIyNTAwIl0sInVzZXJuYW1lIjoiaWFsYW0ifQ.fQ595rCWz7jrJN6Nn_gzW5ajsBA5GYLl6KuCfZfgx5M';
-        final jwt = JWT(input);
-        final payloadBase64 = input.split('.')[1];
-        final normalizedPayload = base64.normalize(payloadBase64);
-        final payloadString = utf8.decode(base64.decode(normalizedPayload));
-        final decodedPayload = jsonDecode(payloadString);
-        final result = jwt.roleName;
-        expect(result, RoleName(decodedPayload['role']));
-      },
-    );
   });
 
   group('Password for resetv2 value object', () {

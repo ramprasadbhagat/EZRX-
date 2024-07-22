@@ -59,39 +59,19 @@ class ProxyLoginFormBloc
               );
             },
             (login) async {
-              final isEligibleProxyLoginFailureOrSuccess =
-                  await authRepository.isEligibleProxyLogin(
-                user: e.user,
-                jwt: login.access,
+              await authRepository.logout();
+              await authRepository.storeJWT(
+                access: login.access,
+                refresh: login.refresh,
               );
-
-              await isEligibleProxyLoginFailureOrSuccess.fold(
-                (_) {
-                  emit(
-                    state.copyWith(
-                      isSubmitting: false,
-                      showErrorMessages: true,
-                      authFailureOrSuccessOption:
-                          optionOf(isEligibleProxyLoginFailureOrSuccess),
-                    ),
-                  );
-                },
-                (success) async {
-                  await authRepository.logout();
-                  await authRepository.storeJWT(
-                    access: login.access,
-                    refresh: login.refresh,
-                  );
-                  emit(
-                    state.copyWith(
-                      isSubmitting: false,
-                      showErrorMessages: false,
-                      authFailureOrSuccessOption: optionOf(
-                        isEligibleProxyLoginFailureOrSuccess,
-                      ),
-                    ),
-                  );
-                },
+              emit(
+                state.copyWith(
+                  isSubmitting: false,
+                  showErrorMessages: false,
+                  authFailureOrSuccessOption: optionOf(
+                    proxyLoginFailureOrSuccess,
+                  ),
+                ),
               );
             },
           );

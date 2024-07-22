@@ -347,25 +347,6 @@ class RoleType extends ValueObject<String> {
   const RoleType._(this.value);
 }
 
-class RoleName extends ValueObject<String> {
-  @override
-  final Either<ValueFailure<String>, String> value;
-
-  factory RoleName(String input) {
-    return RoleName._(validateStringNotEmpty(input));
-  }
-
-  String get getRoleType {
-    return roleNameToRoleType(value.getOrElse(() => ''));
-  }
-
-  bool get isEligibleLoginRoleForZPAdmin {
-    return roleCanLoginOnBehalfByZPAdmin(getRoleType);
-  }
-
-  const RoleName._(this.value);
-}
-
 class Currency extends ValueObject<String> {
   @override
   final Either<ValueFailure<String>, String> value;
