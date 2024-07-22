@@ -10,9 +10,11 @@ import 'package:flutter_test/flutter_test.dart';
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   late AllCreditsFilter allCreditsFilter;
+  late AllCreditsFilter fakeCreditsFilter;
   late DateTime fakeToDate;
   late DateTime fakeFromDate;
   late DateTimeRange dateTimeRange;
+  final allCreditsFilterState = AllCreditsFilterState.initial();
 
   setUp(() {
     allCreditsFilter = AllCreditsFilter.defaultFilter();
@@ -31,6 +33,18 @@ void main() {
     dateTimeRange = DateTimeRange(
       start: fakeFromDate,
       end: fakeToDate,
+    );
+
+    fakeCreditsFilter = allCreditsFilter.copyWith(
+      documentDateTo: DateTimeStringValue(
+        getDateStringByDateTime(fakeToDate),
+      ),
+      documentDateFrom: DateTimeStringValue(
+        getDateStringByDateTime(fakeFromDate),
+      ),
+      amountValueFrom: RangeValue('100'),
+      amountValueTo: RangeValue('10'),
+      filterStatuses: ['Cleared'],
     );
   });
 
@@ -59,7 +73,7 @@ void main() {
         );
       },
       expect: () => [
-        AllCreditsFilterState.initial().copyWith(
+        allCreditsFilterState.copyWith(
           filter: AllCreditsFilter.empty().copyWith(
             filterOption: FilterOption.documentDate(),
             documentDateTo: DateTimeStringValue(
@@ -75,13 +89,13 @@ void main() {
     blocTest(
       'AmountValueToChanged',
       build: () => AllCreditsFilterBloc(),
-      seed: () => AllCreditsFilterState.initial().copyWith(
+      seed: () => allCreditsFilterState.copyWith(
         filter: allCreditsFilter,
       ),
       act: (AllCreditsFilterBloc bloc) =>
           bloc.add(const AllCreditsFilterEvent.amountValueToChanged('1000')),
       expect: () => [
-        AllCreditsFilterState.initial().copyWith(
+        allCreditsFilterState.copyWith(
           filter: AllCreditsFilter.empty().copyWith(
             amountValueTo: RangeValue('1000'),
             amountValueFrom: allCreditsFilter.amountValueFrom,
@@ -95,13 +109,13 @@ void main() {
     blocTest(
       'AmountValueFromChanged',
       build: () => AllCreditsFilterBloc(),
-      seed: () => AllCreditsFilterState.initial().copyWith(
+      seed: () => allCreditsFilterState.copyWith(
         filter: allCreditsFilter,
       ),
       act: (AllCreditsFilterBloc bloc) =>
           bloc.add(const AllCreditsFilterEvent.amountValueFromChanged('100')),
       expect: () => [
-        AllCreditsFilterState.initial().copyWith(
+        allCreditsFilterState.copyWith(
           filter: AllCreditsFilter.empty().copyWith(
             amountValueFrom: RangeValue('100'),
             amountValueTo: allCreditsFilter.amountValueTo,
@@ -115,7 +129,7 @@ void main() {
     blocTest(
       'Status Changed',
       build: () => AllCreditsFilterBloc(),
-      seed: () => AllCreditsFilterState.initial().copyWith(
+      seed: () => allCreditsFilterState.copyWith(
         filter: allCreditsFilter.copyWith(
           documentDateTo: DateTimeStringValue(
             getDateStringByDateTime(fakeToDate),
@@ -134,7 +148,7 @@ void main() {
         );
       },
       expect: () => [
-        AllCreditsFilterState.initial().copyWith(
+        allCreditsFilterState.copyWith(
           filter: AllCreditsFilter.empty().copyWith(
             filterOption: FilterOption.status(),
             filterStatuses: ['Cleared'],
@@ -146,7 +160,7 @@ void main() {
     blocTest(
       'validateFilters with all valid filters',
       build: () => AllCreditsFilterBloc(),
-      seed: () => AllCreditsFilterState.initial().copyWith(
+      seed: () => allCreditsFilterState.copyWith(
         filter: allCreditsFilter.copyWith(
           documentDateTo: DateTimeStringValue(
             getDateStringByDateTime(fakeToDate),
@@ -170,7 +184,7 @@ void main() {
     blocTest(
       'validateFilters with invalid filters',
       build: () => AllCreditsFilterBloc(),
-      seed: () => AllCreditsFilterState.initial().copyWith(
+      seed: () => allCreditsFilterState.copyWith(
         filter: allCreditsFilter.copyWith(
           documentDateTo: DateTimeStringValue(
             getDateStringByDateTime(fakeToDate),
@@ -189,21 +203,71 @@ void main() {
         );
       },
       expect: () => [
-        AllCreditsFilterState.initial().copyWith(
+        allCreditsFilterState.copyWith(
           showErrorMessages: true,
-          filter: allCreditsFilter.copyWith(
-            documentDateTo: DateTimeStringValue(
-              getDateStringByDateTime(fakeToDate),
-            ),
-            documentDateFrom: DateTimeStringValue(
-              getDateStringByDateTime(fakeFromDate),
-            ),
-            amountValueFrom: RangeValue('100'),
-            amountValueTo: RangeValue('10'),
-            filterStatuses: ['Cleared'],
-          ),
+          filter: fakeCreditsFilter,
         ),
       ],
+    );
+
+    blocTest(
+      'Test bottomSheet value when showErrorMessages is true',
+      build: () => AllCreditsFilterBloc(),
+      seed: () => allCreditsFilterState.copyWith(
+        showErrorMessages: true,
+      ),
+      act: (AllCreditsFilterBloc bloc) {
+        bloc.add(
+          AllCreditsFilterEvent.openFilterBottomSheet(
+            appliedFilter: fakeCreditsFilter,
+          ),
+        );
+      },
+      expect: () => [
+        allCreditsFilterState.copyWith(
+          showErrorMessages: false,
+          filter: fakeCreditsFilter,
+        ),
+      ],
+    );
+
+    blocTest(
+      'Test bottomSheet value when current filter is different from old filter',
+      build: () => AllCreditsFilterBloc(),
+      seed: () => allCreditsFilterState.copyWith(
+        showErrorMessages: false,
+        filter: fakeCreditsFilter,
+      ),
+      act: (AllCreditsFilterBloc bloc) {
+        bloc.add(
+          AllCreditsFilterEvent.openFilterBottomSheet(
+            appliedFilter: AllCreditsFilter.empty(),
+          ),
+        );
+      },
+      expect: () => [
+        allCreditsFilterState.copyWith(
+          showErrorMessages: false,
+          filter: AllCreditsFilter.empty(),
+        ),
+      ],
+    );
+
+    blocTest(
+      'Test bottomSheet value when current filter is same old filter and showErrorMessages is false',
+      build: () => AllCreditsFilterBloc(),
+      seed: () => allCreditsFilterState.copyWith(
+        showErrorMessages: false,
+        filter: fakeCreditsFilter,
+      ),
+      act: (AllCreditsFilterBloc bloc) {
+        bloc.add(
+          AllCreditsFilterEvent.openFilterBottomSheet(
+            appliedFilter: fakeCreditsFilter,
+          ),
+        );
+      },
+      expect: () => [],
     );
   });
 }

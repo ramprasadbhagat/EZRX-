@@ -13,6 +13,8 @@ void main() {
   late DateTime fakeToDate;
   late DateTime fakeFromDate;
   late DateTimeRange dateTimeRange;
+  final allInvoicesFilterState = AllInvoicesFilterState.initial();
+  late AllInvoicesFilter fakeAppliedFilter;
 
   setUp(() {
     allInvoicesFilter = AllInvoicesFilter.defaultFilter();
@@ -31,6 +33,24 @@ void main() {
     dateTimeRange = DateTimeRange(
       start: fakeFromDate,
       end: fakeToDate,
+    );
+
+    fakeAppliedFilter = allInvoicesFilter.copyWith(
+      dueDateTo: DateTimeStringValue(
+        getDateStringByDateTime(fakeToDate),
+      ),
+      dueDateFrom: DateTimeStringValue(
+        getDateStringByDateTime(fakeFromDate),
+      ),
+      documentDateTo: DateTimeStringValue(
+        getDateStringByDateTime(fakeToDate),
+      ),
+      documentDateFrom: DateTimeStringValue(
+        getDateStringByDateTime(fakeFromDate),
+      ),
+      amountValueFrom: RangeValue('100'),
+      amountValueTo: RangeValue('10'),
+      filterStatuses: ['Cleared'],
     );
   });
 
@@ -59,7 +79,7 @@ void main() {
         );
       },
       expect: () => [
-        AllInvoicesFilterState.initial().copyWith(
+        allInvoicesFilterState.copyWith(
           filter: AllInvoicesFilter.empty().copyWith(
             filterOption: FilterOption.dueDate(),
             dueDateTo: DateTimeStringValue(
@@ -84,7 +104,7 @@ void main() {
         );
       },
       expect: () => [
-        AllInvoicesFilterState.initial().copyWith(
+        allInvoicesFilterState.copyWith(
           filter: AllInvoicesFilter.empty().copyWith(
             filterOption: FilterOption.documentDate(),
             documentDateTo: DateTimeStringValue(
@@ -100,13 +120,13 @@ void main() {
     blocTest(
       'AmountValueToChanged',
       build: () => AllInvoicesFilterBloc(),
-      seed: () => AllInvoicesFilterState.initial().copyWith(
+      seed: () => allInvoicesFilterState.copyWith(
         filter: allInvoicesFilter,
       ),
       act: (AllInvoicesFilterBloc bloc) =>
           bloc.add(const AllInvoicesFilterEvent.amountValueToChanged('1000')),
       expect: () => [
-        AllInvoicesFilterState.initial().copyWith(
+        allInvoicesFilterState.copyWith(
           filter: AllInvoicesFilter.empty().copyWith(
             amountValueTo: RangeValue('1000'),
             amountValueFrom: allInvoicesFilter.amountValueFrom,
@@ -120,13 +140,13 @@ void main() {
     blocTest(
       'AmountValueFromChanged',
       build: () => AllInvoicesFilterBloc(),
-      seed: () => AllInvoicesFilterState.initial().copyWith(
+      seed: () => allInvoicesFilterState.copyWith(
         filter: allInvoicesFilter,
       ),
       act: (AllInvoicesFilterBloc bloc) =>
           bloc.add(const AllInvoicesFilterEvent.amountValueFromChanged('100')),
       expect: () => [
-        AllInvoicesFilterState.initial().copyWith(
+        allInvoicesFilterState.copyWith(
           filter: AllInvoicesFilter.empty().copyWith(
             amountValueFrom: RangeValue('100'),
             amountValueTo: allInvoicesFilter.amountValueTo,
@@ -140,7 +160,7 @@ void main() {
     blocTest(
       'Status Changed',
       build: () => AllInvoicesFilterBloc(),
-      seed: () => AllInvoicesFilterState.initial().copyWith(
+      seed: () => allInvoicesFilterState.copyWith(
         filter: allInvoicesFilter.copyWith(
           dueDateTo: DateTimeStringValue(
             getDateStringByDateTime(fakeToDate),
@@ -159,7 +179,7 @@ void main() {
         );
       },
       expect: () => [
-        AllInvoicesFilterState.initial().copyWith(
+        allInvoicesFilterState.copyWith(
           filter: AllInvoicesFilter.empty().copyWith(
             filterOption: FilterOption.status(),
             filterStatuses: ['Cleared'],
@@ -171,7 +191,7 @@ void main() {
     blocTest(
       'validateFilters with all valid filters',
       build: () => AllInvoicesFilterBloc(),
-      seed: () => AllInvoicesFilterState.initial().copyWith(
+      seed: () => allInvoicesFilterState.copyWith(
         filter: allInvoicesFilter.copyWith(
           dueDateTo: DateTimeStringValue(
             getDateStringByDateTime(fakeToDate),
@@ -201,7 +221,7 @@ void main() {
     blocTest(
       'validateFilters with invalid filters',
       build: () => AllInvoicesFilterBloc(),
-      seed: () => AllInvoicesFilterState.initial().copyWith(
+      seed: () => allInvoicesFilterState.copyWith(
         filter: allInvoicesFilter.copyWith(
           dueDateTo: DateTimeStringValue(
             getDateStringByDateTime(fakeToDate),
@@ -226,7 +246,7 @@ void main() {
         );
       },
       expect: () => [
-        AllInvoicesFilterState.initial().copyWith(
+        allInvoicesFilterState.copyWith(
           showErrorMessages: true,
           filter: allInvoicesFilter.copyWith(
             dueDateTo: DateTimeStringValue(
@@ -247,6 +267,114 @@ void main() {
           ),
         ),
       ],
+    );
+
+    blocTest(
+      'Test bottomSheet value when showErrorMessages is true',
+      build: () => AllInvoicesFilterBloc(),
+      seed: () => allInvoicesFilterState.copyWith(
+        showErrorMessages: true,
+      ),
+      act: (AllInvoicesFilterBloc bloc) {
+        bloc.add(
+          AllInvoicesFilterEvent.openFilterBottomSheet(
+            appliedFilter: fakeAppliedFilter,
+          ),
+        );
+      },
+      expect: () => [
+        allInvoicesFilterState.copyWith(
+          showErrorMessages: false,
+          filter: allInvoicesFilter.copyWith(
+            dueDateTo: DateTimeStringValue(
+              getDateStringByDateTime(fakeToDate),
+            ),
+            dueDateFrom: DateTimeStringValue(
+              getDateStringByDateTime(fakeFromDate),
+            ),
+            documentDateTo: DateTimeStringValue(
+              getDateStringByDateTime(fakeToDate),
+            ),
+            documentDateFrom: DateTimeStringValue(
+              getDateStringByDateTime(fakeFromDate),
+            ),
+            amountValueFrom: RangeValue('100'),
+            amountValueTo: RangeValue('10'),
+            filterStatuses: ['Cleared'],
+          ),
+        ),
+      ],
+    );
+
+    blocTest(
+      'Test bottomSheet value when current filter is different from old filter',
+      build: () => AllInvoicesFilterBloc(),
+      seed: () => allInvoicesFilterState.copyWith(
+        showErrorMessages: false,
+        filter: allInvoicesFilter.copyWith(
+          dueDateTo: DateTimeStringValue(
+            getDateStringByDateTime(fakeToDate),
+          ),
+          dueDateFrom: DateTimeStringValue(
+            getDateStringByDateTime(fakeFromDate),
+          ),
+          documentDateTo: DateTimeStringValue(
+            getDateStringByDateTime(fakeToDate),
+          ),
+          documentDateFrom: DateTimeStringValue(
+            getDateStringByDateTime(fakeFromDate),
+          ),
+          amountValueFrom: RangeValue('100'),
+          amountValueTo: RangeValue('10'),
+          filterStatuses: ['Cleared'],
+        ),
+      ),
+      act: (AllInvoicesFilterBloc bloc) {
+        bloc.add(
+          AllInvoicesFilterEvent.openFilterBottomSheet(
+            appliedFilter: AllInvoicesFilter.empty(),
+          ),
+        );
+      },
+      expect: () => [
+        allInvoicesFilterState.copyWith(
+          showErrorMessages: false,
+          filter: AllInvoicesFilter.empty(),
+        ),
+      ],
+    );
+
+    blocTest(
+      'Test bottomSheet value when current filter is same old filter and showErrorMessages is false',
+      build: () => AllInvoicesFilterBloc(),
+      seed: () => allInvoicesFilterState.copyWith(
+        showErrorMessages: false,
+        filter: allInvoicesFilter.copyWith(
+          dueDateTo: DateTimeStringValue(
+            getDateStringByDateTime(fakeToDate),
+          ),
+          dueDateFrom: DateTimeStringValue(
+            getDateStringByDateTime(fakeFromDate),
+          ),
+          documentDateTo: DateTimeStringValue(
+            getDateStringByDateTime(fakeToDate),
+          ),
+          documentDateFrom: DateTimeStringValue(
+            getDateStringByDateTime(fakeFromDate),
+          ),
+          amountValueFrom: RangeValue('100'),
+          amountValueTo: RangeValue('10'),
+          filterStatuses: ['Cleared'],
+        ),
+      ),
+      act: (AllInvoicesFilterBloc bloc) {
+        bloc.add(
+          AllInvoicesFilterEvent.openFilterBottomSheet(
+            appliedFilter: fakeAppliedFilter,
+          ),
+        );
+      },
+      expect: () => [],
     );
   });
 }

@@ -21,6 +21,8 @@ void main() {
     DateFormat(DateTimeFormatString.apiDateFormat).format(DateTime.now()),
   );
 
+  final viewByItemFilterState = ViewByItemFilterState.initial();
+
   group(
     'Order View By Item Filter Bloc',
     () {
@@ -30,9 +32,7 @@ void main() {
         act: (bloc) => bloc.add(
           const ViewByItemFilterEvent.initialize(),
         ),
-        expect: () => [
-          ViewByItemFilterState.initial(),
-        ],
+        expect: () => [viewByItemFilterState],
       );
 
       blocTest<ViewByItemFilterBloc, ViewByItemFilterState>(
@@ -47,7 +47,7 @@ void main() {
           ),
         ),
         expect: () => [
-          ViewByItemFilterState.initial().copyWith(
+          viewByItemFilterState.copyWith(
             filter: ViewByItemFilter.empty().copyWith(
               orderDateFrom: DateTimeStringValue(
                 getDateStringByDateTime(fakeStartDate),
@@ -78,14 +78,14 @@ void main() {
           );
         },
         expect: () => [
-          ViewByItemFilterState.initial().copyWith(
+          viewByItemFilterState.copyWith(
             filter: ViewByItemFilter.empty().copyWith(
               orderStatusList: <StatusType>[
                 StatusType('Order created'),
               ],
             ),
           ),
-          ViewByItemFilterState.initial().copyWith(
+          viewByItemFilterState.copyWith(
             filter: ViewByItemFilter.empty().copyWith(
               orderStatusList: <StatusType>[
                 StatusType('Order created'),
@@ -99,7 +99,7 @@ void main() {
       blocTest<ViewByItemFilterBloc, ViewByItemFilterState>(
         'Test Set Order history type',
         build: () => ViewByItemFilterBloc(),
-        seed: () => ViewByItemFilterState.initial().copyWith.filter(
+        seed: () => viewByItemFilterState.copyWith.filter(
               orderHistoryType: MaterialOriginFilter.zp(),
             ),
         act: (bloc) => bloc.add(
@@ -108,9 +108,9 @@ void main() {
           ),
         ),
         expect: () => [
-          ViewByItemFilterState.initial().copyWith.filter(
-                orderHistoryType: MaterialOriginFilter.mp(),
-              ),
+          viewByItemFilterState.copyWith.filter(
+            orderHistoryType: MaterialOriginFilter.mp(),
+          ),
         ],
       );
 
@@ -125,7 +125,7 @@ void main() {
             ),
           );
         },
-        seed: () => ViewByItemFilterState.initial().copyWith(
+        seed: () => viewByItemFilterState.copyWith(
           filter: ViewByItemFilter.empty().copyWith(
             orderStatusList: <StatusType>[
               StatusType('Order created'),
@@ -134,7 +134,7 @@ void main() {
           ),
         ),
         expect: () => [
-          ViewByItemFilterState.initial().copyWith(
+          viewByItemFilterState.copyWith(
             filter: ViewByItemFilter.empty().copyWith(
               orderStatusList: <StatusType>[
                 StatusType('Order created'),
@@ -166,7 +166,7 @@ void main() {
           );
         },
         expect: () => [
-          ViewByItemFilterState.initial().copyWith(
+          viewByItemFilterState.copyWith(
             filter: ViewByItemFilter.empty().copyWith(
               orderStatusList: <StatusType>[
                 StatusType('Order created'),
@@ -186,15 +186,20 @@ void main() {
       test(
         'Test emptyViewByItemFilter',
         () {
-          final viewByItemFilterState = ViewByItemFilterState.initial();
-
-          final getemptyViewByItemFilter =
+          final getEmptyViewByItemFilter =
               viewByItemFilterState.emptyViewByItemFilter;
           expect(
-            getemptyViewByItemFilter,
+            getEmptyViewByItemFilter,
             ViewByItemFilter.empty(),
           );
         },
+      );
+
+      blocTest(
+        'Test reset Filter',
+        build: () => ViewByItemFilterBloc(),
+        act: (bloc) => bloc.add(const ViewByItemFilterEvent.resetFilter()),
+        expect: () => [viewByItemFilterState],
       );
     },
   );

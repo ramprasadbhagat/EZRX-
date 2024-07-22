@@ -1,26 +1,27 @@
-import 'package:dartz/dartz.dart';
-import 'package:flutter/material.dart';
-import 'package:mocktail/mocktail.dart';
 import 'package:bloc_test/bloc_test.dart';
-import 'package:flutter_test/flutter_test.dart';
+import 'package:dartz/dartz.dart';
+import 'package:ezrxmobile/application/order/view_by_item_details/view_by_item_details_bloc.dart';
 import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/value/value_objects.dart';
-import 'package:ezrxmobile/domain/order/value/value_objects.dart';
+import 'package:ezrxmobile/domain/order/entities/invoice_data.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history.dart';
+import 'package:ezrxmobile/domain/order/entities/order_history_details_po_documents.dart';
 import 'package:ezrxmobile/domain/order/entities/order_history_item.dart';
 import 'package:ezrxmobile/domain/order/entities/order_status_tracker.dart';
-import 'package:ezrxmobile/infrastructure/order/datasource/view_by_item_local.dart';
-import 'package:ezrxmobile/infrastructure/order/repository/view_by_item_repository.dart';
-import 'package:ezrxmobile/domain/order/entities/order_history_details_po_documents.dart';
-import 'package:ezrxmobile/infrastructure/order/repository/order_status_tracker_repository.dart';
-import 'package:ezrxmobile/application/order/view_by_item_details/view_by_item_details_bloc.dart';
+import 'package:ezrxmobile/domain/order/value/value_objects.dart';
 import 'package:ezrxmobile/infrastructure/order/datasource/order_status_tracker/order_status_tracker_local.dart';
+import 'package:ezrxmobile/infrastructure/order/datasource/view_by_item_local.dart';
+import 'package:ezrxmobile/infrastructure/order/repository/order_status_tracker_repository.dart';
+import 'package:ezrxmobile/infrastructure/order/repository/view_by_item_repository.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_test/flutter_test.dart';
+import 'package:mocktail/mocktail.dart';
 
+import '../../../common_mock_data/customer_code_mock.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_my_sales_org_config.dart';
 import '../../../common_mock_data/sales_org_config_mock/fake_vn_sales_org_config.dart';
-import '../../../common_mock_data/user_mock.dart';
-import '../../../common_mock_data/customer_code_mock.dart';
 import '../../../common_mock_data/sales_organsiation_mock.dart';
+import '../../../common_mock_data/user_mock.dart';
 
 class OrderStatusTrackerRepositoryMock extends Mock
     implements OrderStatusTrackerRepository {}
@@ -41,6 +42,9 @@ void main() {
   late ViewByItemDetailsState seedState;
   const fakeError = ApiFailure.other('fake-error');
   final fakeInvoiceNumber = StringValue('fake-invoice-number');
+
+  final viewByItemDetailsState = ViewByItemDetailsState.initial();
+
   group(
     'ViewByItemDetailsBloc Test => ',
     () {
@@ -75,7 +79,7 @@ void main() {
         fakeOrderHistoryItem = orderHistory.orderHistoryItems.first.copyWith(
           status: fakeOutForDeliveryStatus,
         );
-        seedState = ViewByItemDetailsState.initial().copyWith(
+        seedState = viewByItemDetailsState.copyWith(
           customerCodeInfo: fakeCustomerCodeInfo,
           salesOrgConfig: fakeMYSalesOrgConfigs,
           salesOrganisation: fakeMYSalesOrganisation,
@@ -107,7 +111,7 @@ void main() {
           ),
         ),
         expect: () => [
-          ViewByItemDetailsState.initial().copyWith(
+          viewByItemDetailsState.copyWith(
             customerCodeInfo: fakeCustomerCodeInfo,
             salesOrgConfig: fakeMYSalesOrgConfigs,
             salesOrganisation: fakeMYSalesOrganisation,
@@ -123,7 +127,7 @@ void main() {
           orderStatusTrackerRepository: orderStatusTrackerRepositoryMock,
           viewByItemRepository: viewByItemRepositoryMock,
         ),
-        seed: () => ViewByItemDetailsState.initial().copyWith(
+        seed: () => viewByItemDetailsState.copyWith(
           customerCodeInfo: fakeCustomerCodeInfo,
           salesOrgConfig: fakeMYSalesOrgConfigs,
           salesOrganisation: fakeSalesOrganisation,
@@ -144,14 +148,14 @@ void main() {
           ),
         ),
         expect: () => [
-          ViewByItemDetailsState.initial().copyWith(
+          viewByItemDetailsState.copyWith(
             customerCodeInfo: fakeCustomerCodeInfo,
             salesOrgConfig: fakeMYSalesOrgConfigs,
             salesOrganisation: fakeSalesOrganisation,
             user: fakeRootAdminUser,
             isLoading: true,
           ),
-          ViewByItemDetailsState.initial().copyWith(
+          viewByItemDetailsState.copyWith(
             customerCodeInfo: fakeCustomerCodeInfo,
             salesOrgConfig: fakeMYSalesOrgConfigs,
             salesOrganisation: fakeSalesOrganisation,
@@ -167,7 +171,7 @@ void main() {
           orderStatusTrackerRepository: orderStatusTrackerRepositoryMock,
           viewByItemRepository: viewByItemRepositoryMock,
         ),
-        seed: () => ViewByItemDetailsState.initial().copyWith(
+        seed: () => viewByItemDetailsState.copyWith(
           customerCodeInfo: fakeCustomerCodeInfo,
           salesOrgConfig: fakeMYSalesOrgConfigs,
           salesOrganisation: fakeMYSalesOrganisation,
@@ -188,14 +192,14 @@ void main() {
           ),
         ),
         expect: () => [
-          ViewByItemDetailsState.initial().copyWith(
+          viewByItemDetailsState.copyWith(
             customerCodeInfo: fakeCustomerCodeInfo,
             salesOrgConfig: fakeMYSalesOrgConfigs,
             salesOrganisation: fakeMYSalesOrganisation,
             user: fakeRootAdminUser,
             isLoading: true,
           ),
-          ViewByItemDetailsState.initial().copyWith(
+          viewByItemDetailsState.copyWith(
             customerCodeInfo: fakeCustomerCodeInfo,
             salesOrgConfig: fakeMYSalesOrgConfigs,
             salesOrganisation: fakeMYSalesOrganisation,
@@ -213,7 +217,7 @@ void main() {
           orderStatusTrackerRepository: orderStatusTrackerRepositoryMock,
           viewByItemRepository: viewByItemRepositoryMock,
         ),
-        seed: () => ViewByItemDetailsState.initial().copyWith(
+        seed: () => viewByItemDetailsState.copyWith(
           customerCodeInfo: fakeCustomerCodeInfo,
           salesOrgConfig: fakeMYSalesOrgConfigs,
           salesOrganisation: fakeMYSalesOrganisation,
@@ -223,7 +227,7 @@ void main() {
           const ViewByItemDetailsEvent.updateIsExpanded(isExpanded: true),
         ),
         expect: () => [
-          ViewByItemDetailsState.initial().copyWith(
+          viewByItemDetailsState.copyWith(
             customerCodeInfo: fakeCustomerCodeInfo,
             salesOrgConfig: fakeMYSalesOrgConfigs,
             salesOrganisation: fakeMYSalesOrganisation,
@@ -239,7 +243,7 @@ void main() {
           orderStatusTrackerRepository: orderStatusTrackerRepositoryMock,
           viewByItemRepository: viewByItemRepositoryMock,
         ),
-        seed: () => ViewByItemDetailsState.initial().copyWith(
+        seed: () => viewByItemDetailsState.copyWith(
           customerCodeInfo: fakeCustomerCodeInfo,
           salesOrgConfig: fakeMYSalesOrgConfigs,
           salesOrganisation: fakeMYSalesOrganisation,
@@ -278,14 +282,14 @@ void main() {
         ),
         expect: () {
           return [
-            ViewByItemDetailsState.initial().copyWith(
+            viewByItemDetailsState.copyWith(
               customerCodeInfo: fakeCustomerCodeInfo,
               salesOrgConfig: fakeMYSalesOrgConfigs,
               salesOrganisation: fakeMYSalesOrganisation,
               user: fakeRootAdminUser,
               isDetailsLoading: true,
             ),
-            ViewByItemDetailsState.initial().copyWith(
+            viewByItemDetailsState.copyWith(
               customerCodeInfo: fakeCustomerCodeInfo,
               salesOrgConfig: fakeMYSalesOrgConfigs,
               salesOrganisation: fakeMYSalesOrganisation,
@@ -294,7 +298,7 @@ void main() {
               orderHistoryItem: orderHistory.orderHistoryItems.first,
               failureOrSuccessOption: optionOf(Right(orderHistory)),
             ),
-            ViewByItemDetailsState.initial().copyWith(
+            viewByItemDetailsState.copyWith(
               customerCodeInfo: fakeCustomerCodeInfo,
               salesOrgConfig: fakeMYSalesOrgConfigs,
               salesOrganisation: fakeMYSalesOrganisation,
@@ -303,7 +307,7 @@ void main() {
               orderHistoryItem: orderHistory.orderHistoryItems.first,
               isLoading: true,
             ),
-            ViewByItemDetailsState.initial().copyWith(
+            viewByItemDetailsState.copyWith(
               customerCodeInfo: fakeCustomerCodeInfo,
               salesOrgConfig: fakeMYSalesOrgConfigs,
               salesOrganisation: fakeMYSalesOrganisation,
@@ -322,7 +326,7 @@ void main() {
           orderStatusTrackerRepository: orderStatusTrackerRepositoryMock,
           viewByItemRepository: viewByItemRepositoryMock,
         ),
-        seed: () => ViewByItemDetailsState.initial().copyWith(
+        seed: () => viewByItemDetailsState.copyWith(
           customerCodeInfo: fakeCustomerCodeInfo,
           salesOrgConfig: fakeMYSalesOrgConfigs,
           salesOrganisation: fakeMYSalesOrganisation,
@@ -369,14 +373,14 @@ void main() {
         ),
         expect: () {
           return [
-            ViewByItemDetailsState.initial().copyWith(
+            viewByItemDetailsState.copyWith(
               customerCodeInfo: fakeCustomerCodeInfo,
               salesOrgConfig: fakeMYSalesOrgConfigs,
               salesOrganisation: fakeMYSalesOrganisation,
               user: fakeRootAdminUser,
               isDetailsLoading: true,
             ),
-            ViewByItemDetailsState.initial().copyWith(
+            viewByItemDetailsState.copyWith(
               customerCodeInfo: fakeCustomerCodeInfo,
               salesOrgConfig: fakeMYSalesOrgConfigs,
               salesOrganisation: fakeMYSalesOrganisation,
@@ -387,7 +391,7 @@ void main() {
               failureOrSuccessOption:
                   optionOf(Right(orderHistoryForFetchStatus)),
             ),
-            ViewByItemDetailsState.initial().copyWith(
+            viewByItemDetailsState.copyWith(
               customerCodeInfo: fakeCustomerCodeInfo,
               salesOrgConfig: fakeMYSalesOrgConfigs,
               salesOrganisation: fakeMYSalesOrganisation,
@@ -397,7 +401,7 @@ void main() {
                   orderHistoryForFetchStatus.orderHistoryItems.first,
               isLoading: true,
             ),
-            ViewByItemDetailsState.initial().copyWith(
+            viewByItemDetailsState.copyWith(
               customerCodeInfo: fakeCustomerCodeInfo,
               salesOrgConfig: fakeMYSalesOrgConfigs,
               salesOrganisation: fakeMYSalesOrganisation,
@@ -407,7 +411,7 @@ void main() {
                   orderHistoryForFetchStatus.orderHistoryItems.first,
               failureOrSuccessOption: optionOf(const Left(fakeError)),
             ),
-            ViewByItemDetailsState.initial().copyWith(
+            viewByItemDetailsState.copyWith(
               customerCodeInfo: fakeCustomerCodeInfo,
               salesOrgConfig: fakeMYSalesOrgConfigs,
               salesOrganisation: fakeMYSalesOrganisation,
@@ -418,7 +422,7 @@ void main() {
               isLoading: true,
               failureOrSuccessOption: optionOf(const Left(fakeError)),
             ),
-            ViewByItemDetailsState.initial().copyWith(
+            viewByItemDetailsState.copyWith(
               customerCodeInfo: fakeCustomerCodeInfo,
               salesOrgConfig: fakeMYSalesOrgConfigs,
               salesOrganisation: fakeMYSalesOrganisation,
@@ -478,7 +482,7 @@ void main() {
             viewByItemRepository: viewByItemRepositoryMock,
           );
           orderHistoryBloc.emit(
-            ViewByItemDetailsState.initial().copyWith(
+            viewByItemDetailsState.copyWith(
               orderHistoryItem: OrderHistoryItem.empty().copyWith(
                 orderHistoryItemPoAttachments: <PoDocuments>[],
               ),
@@ -501,7 +505,7 @@ void main() {
             viewByItemRepository: viewByItemRepositoryMock,
           );
           orderHistoryBloc.emit(
-            ViewByItemDetailsState.initial().copyWith(
+            viewByItemDetailsState.copyWith(
               orderHistoryItem: OrderHistoryItem.empty().copyWith(
                 orderHistoryItemPoAttachments: [
                   PoDocuments.empty(),
@@ -528,7 +532,7 @@ void main() {
             viewByItemRepository: viewByItemRepositoryMock,
           );
           orderHistoryBloc.emit(
-            ViewByItemDetailsState.initial().copyWith(
+            viewByItemDetailsState.copyWith(
               orderHistoryItem: OrderHistoryItem.empty().copyWith(
                 orderHistoryItemPoAttachments: <PoDocuments>[],
               ),
@@ -557,7 +561,7 @@ void main() {
           orderStatusTrackerRepository: orderStatusTrackerRepositoryMock,
           viewByItemRepository: viewByItemRepositoryMock,
         ),
-        seed: () => ViewByItemDetailsState.initial().copyWith(
+        seed: () => viewByItemDetailsState.copyWith(
           customerCodeInfo: fakeCustomerCodeInfo,
           salesOrgConfig: fakeVNSalesOrgConfigs,
           salesOrganisation: fakeVNSalesOrganisation,
@@ -605,14 +609,14 @@ void main() {
         ),
         expect: () {
           return [
-            ViewByItemDetailsState.initial().copyWith(
+            viewByItemDetailsState.copyWith(
               customerCodeInfo: fakeCustomerCodeInfo,
               salesOrgConfig: fakeVNSalesOrgConfigs,
               salesOrganisation: fakeVNSalesOrganisation,
               user: fakeRootAdminUser,
               isDetailsLoading: true,
             ),
-            ViewByItemDetailsState.initial().copyWith(
+            viewByItemDetailsState.copyWith(
               customerCodeInfo: fakeCustomerCodeInfo,
               salesOrgConfig: fakeVNSalesOrgConfigs,
               salesOrganisation: fakeVNSalesOrganisation,
@@ -623,7 +627,7 @@ void main() {
               failureOrSuccessOption:
                   optionOf(Right(orderHistoryForFetchStatus)),
             ),
-            ViewByItemDetailsState.initial().copyWith(
+            viewByItemDetailsState.copyWith(
               customerCodeInfo: fakeCustomerCodeInfo,
               salesOrgConfig: fakeVNSalesOrgConfigs,
               salesOrganisation: fakeVNSalesOrganisation,
@@ -633,7 +637,7 @@ void main() {
                   orderHistoryForFetchStatus.orderHistoryItems.first,
               isLoading: true,
             ),
-            ViewByItemDetailsState.initial().copyWith(
+            viewByItemDetailsState.copyWith(
               customerCodeInfo: fakeCustomerCodeInfo,
               salesOrgConfig: fakeVNSalesOrgConfigs,
               salesOrganisation: fakeVNSalesOrganisation,
@@ -643,7 +647,7 @@ void main() {
                   orderHistoryForFetchStatus.orderHistoryItems.first,
               failureOrSuccessOption: optionOf(const Left(fakeError)),
             ),
-            ViewByItemDetailsState.initial().copyWith(
+            viewByItemDetailsState.copyWith(
               customerCodeInfo: fakeCustomerCodeInfo,
               salesOrgConfig: fakeVNSalesOrgConfigs,
               salesOrganisation: fakeVNSalesOrganisation,
@@ -654,7 +658,7 @@ void main() {
               isLoading: true,
               failureOrSuccessOption: optionOf(const Left(fakeError)),
             ),
-            ViewByItemDetailsState.initial().copyWith(
+            viewByItemDetailsState.copyWith(
               customerCodeInfo: fakeCustomerCodeInfo,
               salesOrgConfig: fakeVNSalesOrgConfigs,
               salesOrganisation: fakeVNSalesOrganisation,
@@ -675,7 +679,7 @@ void main() {
           orderStatusTrackerRepository: orderStatusTrackerRepositoryMock,
           viewByItemRepository: viewByItemRepositoryMock,
         ),
-        seed: () => ViewByItemDetailsState.initial().copyWith(
+        seed: () => viewByItemDetailsState.copyWith(
           customerCodeInfo: fakeCustomerCodeInfo,
           salesOrgConfig: fakeVNSalesOrgConfigs,
           salesOrganisation: fakeVNSalesOrganisation,
@@ -716,14 +720,14 @@ void main() {
         ),
         expect: () {
           return [
-            ViewByItemDetailsState.initial().copyWith(
+            viewByItemDetailsState.copyWith(
               customerCodeInfo: fakeCustomerCodeInfo,
               salesOrgConfig: fakeVNSalesOrgConfigs,
               salesOrganisation: fakeVNSalesOrganisation,
               user: fakeRootAdminUser,
               isDetailsLoading: true,
             ),
-            ViewByItemDetailsState.initial().copyWith(
+            viewByItemDetailsState.copyWith(
               customerCodeInfo: fakeCustomerCodeInfo,
               salesOrgConfig: fakeVNSalesOrgConfigs,
               salesOrganisation: fakeVNSalesOrganisation,
@@ -734,7 +738,7 @@ void main() {
               failureOrSuccessOption:
                   optionOf(Right(orderHistoryForEmptyInvoiceNumber)),
             ),
-            ViewByItemDetailsState.initial().copyWith(
+            viewByItemDetailsState.copyWith(
               customerCodeInfo: fakeCustomerCodeInfo,
               salesOrgConfig: fakeVNSalesOrgConfigs,
               salesOrganisation: fakeVNSalesOrganisation,
@@ -744,7 +748,7 @@ void main() {
                   orderHistoryForEmptyInvoiceNumber.orderHistoryItems.first,
               isLoading: true,
             ),
-            ViewByItemDetailsState.initial().copyWith(
+            viewByItemDetailsState.copyWith(
               customerCodeInfo: fakeCustomerCodeInfo,
               salesOrgConfig: fakeVNSalesOrgConfigs,
               salesOrganisation: fakeVNSalesOrganisation,
@@ -752,6 +756,123 @@ void main() {
               orderHistory: orderHistoryForEmptyInvoiceNumber,
               orderHistoryItem:
                   orderHistoryForEmptyInvoiceNumber.orderHistoryItems.first,
+              failureOrSuccessOption: optionOf(const Left(fakeError)),
+            ),
+          ];
+        },
+      );
+
+      blocTest(
+        'For "fetchOrdersInvoiceData" Event success',
+        build: () => ViewByItemDetailsBloc(
+          orderStatusTrackerRepository: orderStatusTrackerRepositoryMock,
+          viewByItemRepository: viewByItemRepositoryMock,
+        ),
+        seed: () => viewByItemDetailsState.copyWith(orderHistory: orderHistory),
+        setUp: () {
+          when(
+            () => (viewByItemRepositoryMock.getOrdersInvoiceData(
+              orderNumbers: orderHistory.orderHistoryItems
+                  .map((e) => e.orderNumber)
+                  .toList(),
+            )),
+          ).thenAnswer(
+            (invocation) async => const Right(<StringValue, InvoiceData>{}),
+          );
+        },
+        act: (bloc) => bloc.add(
+          ViewByItemDetailsEvent.fetchOrdersInvoiceData(
+            orderHistoryItems: orderHistory.orderHistoryItems,
+          ),
+        ),
+        expect: () => [
+          viewByItemDetailsState.copyWith(
+            orderHistory: orderHistory,
+            isLoading: true,
+          ),
+          viewByItemDetailsState.copyWith(
+            orderHistory: orderHistory,
+          ),
+        ],
+      );
+
+      blocTest<ViewByItemDetailsBloc, ViewByItemDetailsState>(
+        'For "fetchOrderHistoryDetails" Event but cant find lineNumber from fetchOrderHistoryDetails event',
+        build: () => ViewByItemDetailsBloc(
+          orderStatusTrackerRepository: orderStatusTrackerRepositoryMock,
+          viewByItemRepository: viewByItemRepositoryMock,
+        ),
+        seed: () => viewByItemDetailsState.copyWith(
+          customerCodeInfo: fakeCustomerCodeInfo,
+          salesOrgConfig: fakeMYSalesOrgConfigs,
+          salesOrganisation: fakeMYSalesOrganisation,
+          user: fakeRootAdminUser,
+        ),
+        setUp: () {
+          when(
+                () => (viewByItemRepositoryMock.getViewByItemDetails(
+              soldTo: fakeCustomerCodeInfo,
+              salesOrgConfig: fakeMYSalesOrgConfigs,
+              salesOrganisation: fakeMYSalesOrganisation,
+              user: fakeRootAdminUser,
+              searchKey: SearchKey.search(
+                fakeOrderHistoryItem.orderNumber.getOrDefaultValue(''),
+              ),
+            )),
+          ).thenAnswer(
+                (invocation) async => Right(orderHistory),
+          );
+
+          when(
+                () => (viewByItemRepositoryMock.getOrdersInvoiceData(
+              orderNumbers: orderHistory.orderHistoryItems
+                  .map((e) => e.orderNumber)
+                  .toList(),
+            )),
+          ).thenAnswer(
+                (invocation) async => const Left(fakeError),
+          );
+        },
+        act: (bloc) => bloc.add(
+          ViewByItemDetailsEvent.fetchOrderHistoryDetails(
+            orderNumber: fakeOrderHistoryItem.orderNumber,
+            lineNumber: LineNumber('fake-data'),
+          ),
+        ),
+        expect: () {
+          return [
+            viewByItemDetailsState.copyWith(
+              customerCodeInfo: fakeCustomerCodeInfo,
+              salesOrgConfig: fakeMYSalesOrgConfigs,
+              salesOrganisation: fakeMYSalesOrganisation,
+              user: fakeRootAdminUser,
+              isDetailsLoading: true,
+            ),
+            viewByItemDetailsState.copyWith(
+              customerCodeInfo: fakeCustomerCodeInfo,
+              salesOrgConfig: fakeMYSalesOrgConfigs,
+              salesOrganisation: fakeMYSalesOrganisation,
+              user: fakeRootAdminUser,
+              orderHistory: orderHistory,
+              orderHistoryItem: orderHistory.orderHistoryItems.first,
+              failureOrSuccessOption: optionOf(Right(orderHistory)),
+            ),
+            viewByItemDetailsState.copyWith(
+              customerCodeInfo: fakeCustomerCodeInfo,
+              salesOrgConfig: fakeMYSalesOrgConfigs,
+              salesOrganisation: fakeMYSalesOrganisation,
+              user: fakeRootAdminUser,
+              orderHistory: orderHistory,
+              orderHistoryItem: orderHistory.orderHistoryItems.first,
+              isLoading: true,
+            ),
+            viewByItemDetailsState.copyWith(
+              customerCodeInfo: fakeCustomerCodeInfo,
+              salesOrgConfig: fakeMYSalesOrgConfigs,
+              salesOrganisation: fakeMYSalesOrganisation,
+              user: fakeRootAdminUser,
+              orderHistory: orderHistory,
+              orderHistoryItem: orderHistory.orderHistoryItems.first,
               failureOrSuccessOption: optionOf(const Left(fakeError)),
             ),
           ];
