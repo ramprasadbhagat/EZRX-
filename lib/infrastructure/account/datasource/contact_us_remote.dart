@@ -44,7 +44,7 @@ class ContactUsRemoteDataSource {
   }
 
   void _contactUsExceptionChecker({required Response<dynamic> res}) {
-    if (res.data == null && res.data.isEmpty) {
+    if (res.data == null || res.data.isEmpty) {
       throw ServerException(message: 'Message not been sent successfully');
     } else if (res.statusCode != 200) {
       throw ServerException(

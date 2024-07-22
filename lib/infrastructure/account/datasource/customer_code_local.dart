@@ -29,7 +29,8 @@ class CustomerCodeLocalDataSource {
         'assets/json/getCustomerInformationResponseForSalesRep.json',
       ),
     );
-    final finalData = data['data']['customerListForSalesRep'];
+    final finalData =
+        data['data']['customerInformationSalesRep']['SoldToInformation'];
 
     return CustomerInformation(
       shipToCount: 0,
