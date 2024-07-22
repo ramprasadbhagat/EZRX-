@@ -530,6 +530,11 @@ void main() {
     testWidgets(
       'Should navigate to payment detail when eligible',
       (tester) async {
+        final currentSalesOrgVariant =
+            salesOrgVariant.currentValue ?? fakeIDSalesOrg;
+        final currentSalesOrganisation = fakeEmptySalesOrganisation.copyWith(
+          salesOrg: currentSalesOrgVariant,
+        );
         final fakeUser =
             User.empty().copyWith.role(type: RoleType('root_admin'));
         final notificationList = notifications.notificationData
@@ -545,7 +550,10 @@ void main() {
         );
 
         when(() => eligibilityBlocMock.state).thenReturn(
-          EligibilityState.initial().copyWith(user: fakeUser),
+          EligibilityState.initial().copyWith(
+            user: fakeUser,
+            salesOrganisation: currentSalesOrganisation,
+          ),
         );
 
         await tester.pumpWidget(getScopedWidget());
@@ -556,20 +564,29 @@ void main() {
 
         expect(itemKey, findsOneWidget);
         await tester.tap(itemKey);
-        await tester.pumpAndSettle();
+        await tester.pump();
         verify(
           () => paymentSummaryDetailsBlockMock.add(
             PaymentSummaryDetailsEvent.fetchPaymentSummaryDetailsInfo(
-              details: PaymentSummaryDetails.empty().copyWith(
-                paymentBatchAdditionalInfo:
-                    notificationList.last.paymentBatchAdditionalInfo,
-                zzAdvice: notificationList.last.paymentNumber,
-              ),
+              details: currentSalesOrgVariant.isID
+                  ? PaymentSummaryDetails.empty().copyWith(
+                      paymentID: notificationList.last.paymentNumber,
+                    )
+                  : PaymentSummaryDetails.empty().copyWith(
+                      paymentBatchAdditionalInfo:
+                          notificationList.last.paymentBatchAdditionalInfo,
+                      zzAdvice: notificationList.last.paymentNumber,
+                    ),
               isMarketPlace: false,
             ),
           ),
         ).called(1);
+        expect(
+          autoRouterMock.current.name,
+          PaymentSummaryDetailsPageRoute(isMarketPlace: false).routeName,
+        );
       },
+      variant: salesOrgVariant,
     );
 
     testWidgets(

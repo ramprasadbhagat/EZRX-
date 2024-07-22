@@ -77,7 +77,8 @@ bool checkOrder(String val) =>
     isEqualsIgnoreCase(val, 'OrderCancelled');
 
 bool checkPayment(String val) =>
-    isEqualsIgnoreCase(val, 'PaymentAdviceCreated');
+    isEqualsIgnoreCase(val, 'PaymentAdviceCreated') ||
+    isEqualsIgnoreCase(val, 'PaymentAdviceConfirmation');
 
 bool checkAnnouncement(String val) =>
     isEqualsIgnoreCase(val, 'AnnouncementBanner');
