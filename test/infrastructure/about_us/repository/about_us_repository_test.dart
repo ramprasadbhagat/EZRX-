@@ -1,7 +1,10 @@
+import 'package:dartz/dartz.dart';
 import 'package:ezrxmobile/config.dart';
 import 'package:ezrxmobile/domain/about_us/entities/about_us.dart';
 import 'package:ezrxmobile/domain/account/entities/user.dart';
+import 'package:ezrxmobile/domain/core/error/api_failures.dart';
 import 'package:ezrxmobile/domain/core/error/exception.dart';
+import 'package:ezrxmobile/domain/core/error/failure_handler.dart';
 import 'package:ezrxmobile/infrastructure/about_us/datasource/about_us_local.dart';
 import 'package:ezrxmobile/infrastructure/about_us/datasource/about_us_remote.dart';
 import 'package:ezrxmobile/infrastructure/about_us/repository/about_us_repository.dart';
@@ -84,6 +87,48 @@ void main() {
         expect(
           result.isRight(),
           true,
+        );
+      },
+    );
+
+    test('get About Us Static Info successfully', () async {
+      when(
+        () => aboutUsLocalDataSource.getAboutUsStaticInfo(fakeSalesOrg.country),
+      ).thenAnswer((invocation) async => AboutUs.empty());
+
+      final result = await aboutUsRepository.getAboutUsStaticInfo(
+        salesOrg: fakeSalesOrg,
+      );
+      expect(
+        result.isRight(),
+        true,
+      );
+      expect(
+        result,
+        Right(AboutUs.empty()),
+      );
+    });
+
+    test(
+      'get About Us Static Info fail',
+      () async {
+        when(
+          () => aboutUsLocalDataSource.getAboutUsStaticInfo(
+            fakeSalesOrg.country,
+          ),
+        ).thenThrow(MockException());
+        final result = await aboutUsRepository.getAboutUsStaticInfo(
+          salesOrg: fakeSalesOrg,
+        );
+        expect(
+          result.isLeft(),
+          true,
+        );
+        expect(
+          result,
+          Left<ApiFailure, AboutUs>(
+            FailureHandler.handleFailure(MockException()),
+          ),
         );
       },
     );
