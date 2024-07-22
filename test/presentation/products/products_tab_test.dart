@@ -76,11 +76,15 @@ void main() {
   late List<PriceAggregate> mockCartItems;
   late List<CustomerLicense> customerLicense;
   late MixpanelService mixpanelServiceMock;
+  late ClevertapService cleverTapService;
   setUpAll(() async {
+    TestWidgetsFlutterBinding.ensureInitialized();
     locator.registerFactory(() => AutoRouteMock());
     locator.registerSingleton<MixpanelService>(MixpanelServiceMock());
     locator.registerSingleton<ClevertapService>(ClevertapServiceMock());
     autoRouterMock = locator<AutoRouteMock>();
+    mixpanelServiceMock = locator<MixpanelService>();
+    cleverTapService = locator<ClevertapService>();
     orderEligibilityBloc = OrderEligibilityBlocMock();
     materialResponseMock = await MaterialListLocalDataSource().getProductList();
     priceList = await MaterialPriceLocalDataSource().getPriceList();
@@ -101,8 +105,7 @@ void main() {
   group(
     'Test "Product Tabs"',
     () {
-      setUp(() async {
-        TestWidgetsFlutterBinding.ensureInitialized();
+      setUp(() {
         materialListBlocMock = MaterialListBlocMock();
         productDetailBlocMock = ProductDetailBlocMock();
         eligibilityBlocMock = EligibilityBlocMock();
@@ -112,7 +115,6 @@ void main() {
         materialFilterBlocMock = MaterialFilterBlocMock();
         productImageBlocMock = ProductImageBlocMock();
         cartBlocMock = CartBlocMock();
-        mixpanelServiceMock = locator<MixpanelService>();
         materialPriceMock = Map.fromEntries(
           priceList.map((price) => MapEntry(price.materialNumber, price)),
         );
@@ -463,15 +465,17 @@ void main() {
       testWidgets(
         '=> Test bundle item',
         (tester) async {
+          final bundleItem = materialResponseMock.products[12];
           when(() => materialListBlocMock.state).thenReturn(
             MaterialListState.initial().copyWith(
-              materialList: [materialResponseMock.products[12]],
+              materialList: [bundleItem],
             ),
           );
+          when(() => autoRouterMock.currentPath).thenReturn('main/products');
           when(
             () => autoRouterMock.push(
               BundleDetailPageRoute(
-                materialInfo: materialResponseMock.products[12],
+                materialInfo: bundleItem,
               ),
             ),
           ).thenAnswer((invocation) async => true);
@@ -481,7 +485,42 @@ void main() {
           final bundleFinder =
               find.byKey(WidgetKeys.materialListBundleCard).first;
           await tester.tap(bundleFinder);
-          await tester.pumpAndSettle();
+          await tester.pump();
+
+          verify(
+            () => mixpanelServiceMock.trackEvent(
+              eventName: TrackingEvents.productItemClicked,
+              properties: {
+                TrackingProps.clickAt:
+                    'Products Page', //use direct value to verify,
+                TrackingProps.isBundle: true,
+                TrackingProps.productName:
+                    bundleItem.defaultMaterialDescription,
+                TrackingProps.productNumber:
+                    bundleItem.materialNumber.displayMatNo,
+                TrackingProps.productManufacturer: bundleItem.getManufactured,
+                TrackingProps.section: 'All product',
+              },
+            ),
+          ).called(1);
+
+          verify(
+            () => cleverTapService.trackEvent(
+              eventName: TrackingEvents.productItemClicked,
+              properties: {
+                TrackingProps.clickAt:
+                    'Products Page', //use direct value to verify,
+                TrackingProps.isBundle: true,
+                TrackingProps.productName:
+                    bundleItem.defaultMaterialDescription,
+                TrackingProps.productNumber: materialResponseMock
+                    .products[12].materialNumber.displayMatNo,
+                TrackingProps.productManufacturer:
+                    materialResponseMock.products[12].getManufactured,
+                TrackingProps.tag: 'bundle',
+              },
+            ),
+          ).called(1);
 
           verify(
             () => autoRouterMock.push(

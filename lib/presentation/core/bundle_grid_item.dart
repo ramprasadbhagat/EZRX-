@@ -169,6 +169,7 @@ class BundleGridItem extends StatelessWidget {
         TrackingProps.productName: materialInfo.defaultMaterialDescription,
         TrackingProps.productNumber: materialInfo.materialNumber.displayMatNo,
         TrackingProps.productManufacturer: materialInfo.getManufactured,
+        TrackingProps.tag: 'bundle',
       },
     );
 
