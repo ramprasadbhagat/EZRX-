@@ -79,7 +79,7 @@ class ComboDealMaterialDetailState with _$ComboDealMaterialDetailState {
         (entry) =>
             entry.value.getMaterialNumber.displayMatNo
                 .contains(searchKey.searchValueOrEmpty) ||
-            entry.value.materialInfo.materialDescription
+            entry.value.materialInfo.displayDescription
                 .toLowerCase()
                 .contains(searchKey.searchValueOrEmpty),
       ),

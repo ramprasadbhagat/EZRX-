@@ -53,7 +53,44 @@ void main() {
       );
       expect(state.searchableList, items);
     });
-    test(' => searchableList when searchKey is not empty', () {
+    test(' => searchableList when searchKey contains material description', () {
+      final fakeMaterial = MaterialNumber('1234567');
+      const fakeMaterialDescription = 'fake-description';
+      final fakeMaterialInfo = MaterialInfo.empty().copyWith(
+        materialNumber: fakeMaterial,
+        data: [
+          MaterialData.empty()
+              .copyWith(defaultMaterialDescription: fakeMaterialDescription),
+        ],
+      );
+      final newItems = {
+        fakeMaterial:
+            PriceAggregate.empty().copyWith(materialInfo: fakeMaterialInfo),
+      };
+      final state = ComboDealMaterialDetailState.initial().copyWith(
+        searchKey: SearchKey.search('description'),
+        items: newItems,
+      );
+      expect(state.searchableList, newItems);
+    });
+
+    test(' => searchableList when searchKey contains material number', () {
+      final fakeMaterial = MaterialNumber('1234567');
+      final fakeMaterialInfo = MaterialInfo.empty().copyWith(
+        materialNumber: fakeMaterial,
+      );
+      final newItems = {
+        fakeMaterial:
+            PriceAggregate.empty().copyWith(materialInfo: fakeMaterialInfo),
+      };
+      final state = ComboDealMaterialDetailState.initial().copyWith(
+        searchKey: SearchKey.search('456'),
+        items: newItems,
+      );
+      expect(state.searchableList, newItems);
+    });
+
+    test(' => searchableList when searchKey is not empty - invalid text', () {
       final state = ComboDealMaterialDetailState.initial().copyWith(
         searchKey: SearchKey.search('*****'),
         items: items,
