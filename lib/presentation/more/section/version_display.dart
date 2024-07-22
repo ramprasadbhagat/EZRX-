@@ -16,16 +16,19 @@ class VersionDisplay extends StatelessWidget {
       child: FutureBuilder<String>(
         future: locator<PackageInfoService>().getString(),
         builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
-          return ListTile(
-            contentPadding: const EdgeInsets.symmetric(horizontal: padding12),
-            minVerticalPadding: 0,
-            dense: true,
-            title: Text(
-              'eZRx+ Ver. ${snapshot.data ?? ''}',
-              style: Theme.of(context)
-                  .textTheme
-                  .bodyMedium
-                  ?.copyWith(color: ZPColors.neutralsGrey),
+          return Material(
+            color: ZPColors.white,
+            child: ListTile(
+              contentPadding: const EdgeInsets.symmetric(horizontal: padding12),
+              minVerticalPadding: 0,
+              dense: true,
+              title: Text(
+                'eZRx+ Ver. ${snapshot.data ?? ''}',
+                style: Theme.of(context)
+                    .textTheme
+                    .bodyMedium
+                    ?.copyWith(color: ZPColors.neutralsGrey),
+              ),
             ),
           );
         },

@@ -34,7 +34,12 @@ class _ViewByOrder extends StatelessWidget {
             );
           }
         },
-        contentPadding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+        contentPadding: const EdgeInsets.symmetric(
+          horizontal: padding12,
+          vertical: padding6,
+        ),
+        dense: true,
+        visualDensity: VisualDensity.compact,
         title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -42,7 +47,7 @@ class _ViewByOrder extends StatelessWidget {
               children: [
                 if (viewByOrderHistoryItem.isMarketPlace)
                   const Padding(
-                    padding: EdgeInsets.only(right: 8),
+                    padding: EdgeInsets.only(right: padding6),
                     child: MarketPlaceLogo(),
                   ),
                 Flexible(
@@ -75,7 +80,7 @@ class _ViewByOrder extends StatelessWidget {
               ],
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(vertical: 10),
+              padding: const EdgeInsets.symmetric(vertical: padding6),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,

@@ -28,37 +28,40 @@ class LoginOnBehalf extends StatelessWidget {
       buildWhen: (previous, current) => previous.user != current.user,
       builder: (context, state) {
         return state.userCanLoginOnBehalf
-            ? ListTile(
-                key: WidgetKeys.loginOnBehalfButtonKey,
-                visualDensity: VisualDensity.compact,
-                contentPadding:
-                    const EdgeInsets.symmetric(horizontal: padding12),
-                minVerticalPadding: 0,
-                dense: true,
-                leading: const Icon(
-                  Icons.login_outlined,
-                  color: ZPColors.gradient,
-                ),
-                onTap: () {
-                  context
-                      .read<ProxyLoginFormBloc>()
-                      .add(const ProxyLoginFormEvent.initialized());
-                  showModalBottomSheet(
-                    isDismissible: false,
-                    isScrollControlled: true,
-                    context: context,
-                    builder: (_) {
-                      return const LoginOnBehalfSheet();
-                    },
-                  );
-                },
-                title: Text(
-                  context.tr(
-                    'Log in on behalf',
+            ? Material(
+                color: ZPColors.white,
+                child: ListTile(
+                  key: WidgetKeys.loginOnBehalfButtonKey,
+                  visualDensity: VisualDensity.compact,
+                  contentPadding:
+                      const EdgeInsets.symmetric(horizontal: padding12),
+                  minVerticalPadding: 0,
+                  dense: true,
+                  leading: const Icon(
+                    Icons.login_outlined,
+                    color: ZPColors.gradient,
                   ),
-                  style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                        color: ZPColors.gradient,
-                      ),
+                  onTap: () {
+                    context
+                        .read<ProxyLoginFormBloc>()
+                        .add(const ProxyLoginFormEvent.initialized());
+                    showModalBottomSheet(
+                      isDismissible: false,
+                      isScrollControlled: true,
+                      context: context,
+                      builder: (_) {
+                        return const LoginOnBehalfSheet();
+                      },
+                    );
+                  },
+                  title: Text(
+                    context.tr(
+                      'Log in on behalf',
+                    ),
+                    style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                          color: ZPColors.gradient,
+                        ),
+                  ),
                 ),
               )
             : const SizedBox.shrink();
