@@ -1557,8 +1557,8 @@ Select delivery date,Select delivery date,เลือกวันที่จ�
 "Saturday, 9AM - 1PM (order before 4PM)","Saturday, 9AM - 1PM (order before 4PM)","เสาร์, 9 โมงเช้า - 1 โมงบ่าย (สั่งซื้อก่อน 4 โมงบ่าย)","星期六，上午9點至下午1點（下午4點前訂購)"," စနေနေ့၊ နံနက် ၉နာရီ - ၁နာရီ (၄နာရီအတွင်း အချိန်မှ မှာယူပါ)","Thứ bảy, từ 9 giờ sáng đến 1 giờ chiều (đặt hàng trước 4 giờ chiều)","ថ្ងៃសៅរ៍, ពេលល្ងាច 9 នាទី - 1 ល្ងាច (ការបញ្ជាទុកមុនពេលល្ងាច 4 ល្ងាច)","Sabtu, 9 pagi - 1 siang (pesan sebelum jam 4 sore)","토요일, 오전 9시 - 오후 1시 (오후 4시 이전 주문)"
 Registration number,Registration number,หมายเลขทะเบียน,註冊號碼,မှတ်ပုံတင်နံပါတ်,Số đăng ký,លេខចុះឈ្មោះ,Nomor Registrasi,등록 번호
 Arrival At Destination,Arrival At Destination,มาถึงสถานที่ลูกค้า,到達客戶地點,သည်သူဌေးကြီးရောက်ရှိ,Đã đến điểm khách hàng,មកដល់កន្លែងរបស់អតិថិជន,Tiba di lokasi pelanggan,고객 현장 도착
-Partial RUD,Partial RUD,การส่งคืนบางส่วน,部分退貨,ပစိတ်တပ်ဆိုင်း,RUD một phần,RUD ផ្នែកមួយ,RUD Sebagian,부분적 RUD
-Full RUD,Full RUD,การส่งคืนทั้งหมด,全數退貨,ပြီးလ पूर्ण,RUD đầy đủ,RUD ពេញមួយ,RUD Lengkap,전체 RUD
+Partial rud,Partial RUD,การส่งคืนบางส่วน,部分退貨,ပစိတ်တပ်ဆိုင်း,RUD một phần,RUD ផ្នែកមួយ,RUD Sebagian,부분적 RUD
+Full rud,Full RUD,การส่งคืนทั้งหมด,全數退貨,ပြီးလ पूर्ण,RUD đầy đủ,RUD ពេញមួយ,RUD Lengkap,전체 RUD
 Redelivery,Redelivery,การส่งคืนใหม่,重新配送,ပুনःပို့ဆောင်ခြင်း,Giao hàng lại,ដឹកជញ្ជូនឡើងវិញ,Pengiriman Ulang,재배송
 POD,POD,หลักฐานการส่ง,收貨單,POD,POD,សំបុត្រទទួលបាន,POD,POD
 Goods Handover,Goods Handover,การโอนมอบสินค้า,貨物交接,စာချုပ်လက်ခံ,Bàn giao hàng hóa,បញ្ជូនទំនិញ,Serah Terima Barang,물품 인수
@@ -1575,16 +1575,16 @@ Redirecting to homepage in {remainingSeconds} seconds,Redirecting to homepage in
 Set a new password,Set a new password,ตั้งรหัสผ่านใหม่,設置新密碼,စကားဝှက်အသစ်ထည့်ပါ,Đặt mật khẩu mới,កំណត់ពាក្យសម្ងាត់ថ្មី,Atur kata sandi baru,새 비밀번호 설정
 This account is blocked,This account is blocked,บัญชีนี้ถูกบล็อก,此帳戶已被封鎖,ဤအကောင့်ကို ပိတ်ထားသည်,Tài khoản này đã bị khóa,គណនីនេះត្រូវបានបិទ,Akun ini diblokir,이 계정은 차단되었습니다
 Arrival at customer site,Arrival at customer site,มาถึงสถานที่ลูกค้า,到達客戶地點,သည်သူဌေးကြီးရောက်ရှိ,Đã đến điểm khách hàng,មកដល់កន្លែងរបស់អតិថិជន,Tiba di lokasi pelanggan,고객 현장 도착
-Arrival at Crossdock,Arrival at Crossdock, มาถึงที่ครอสด็อค, 到達越庫轉運, Crossdock သို့ရောက်ရှိ, Đã đến Crossdock, ការមកដល់នៅ Crossdock, Tiba di Crossdock, 크로스독 도착
+Arrival at crossdock,Arrival at crossdock, มาถึงที่ครอสด็อค, 到達越庫轉運, Crossdock သို့ရောက်ရှိ, Đã đến Crossdock, ការមកដល់នៅ Crossdock, Tiba di Crossdock, 크로스독 도착
 Arrival at pickup location,Arrival at pickup location, มาถึงที่จุดรับ, 到達上車地點, လာယူမည့်နေရာသို့ ရောက်ရှိသည်။, Đã đến điểm lấy hàng, មកដល់ទីតាំងទទួល, Tiba di lokasi penjemputan, 픽업 장소 도착
-Full Delivery,Full Delivery, จัดส่งเต็ม, 全程交付, Delivery အပြည့်, Giao hàng đầy đủ, ការដឹកជញ្ជូនពេញ, Pengiriman Penuh, 전체 배송
+Full delivery,Full delivery, จัดส่งเต็ม, 全程交付, Delivery အပြည့်, Giao hàng đầy đủ, ការដឹកជញ្ជូនពេញ, Pengiriman Penuh, 전체 배송
 No Collection,No Collection, ไม่มีการสะสม, 暫無收藏, စုစည်းမှုမရှိပါ။, Chưa lấy hàng, គ្មានការប្រមូល, Tidak Ada Pengumpulan, 수집 없음
 Out for Collection,Out for Collection, ออกมาเพื่อสะสม, 外出收藏, Collection အတွက် ထွက်, Đang lấy hàng, ចេញសម្រាប់ការប្រមូល, Keluar untuk Pengumpulan, 수집 중
-POD Handover,POD Handover, การส่งมอบ POD, POD 移交, POD လက်ဆင့်ကမ်း, Chuyển giao POD, ការប្រគល់ POD, Serah Terima POD, POD 인계
-Receive at Crossdock/Platforms,Receive at Crossdock/Platforms, รับที่ Crossdock/แพลตฟอร์ม, 在越庫/平台接收, Crossdock/ Platforms တွင် လက်ခံပါ။, Nhận tại Crossdock/Nền tảng, ទទួលនៅ Crossdock/Platforms, Menerima di Crossdock/Platform, 크로스독/플랫폼에서 수령
-Redelivery - 1st Attempt,Redelivery - 1st Attempt, การส่งซ้ำ - ความพยายามครั้งที่ 1, 再次投遞 - 第一次嘗試, ပြန်လည်ပေးပို့ခြင်း - ပထမကြိုးစားမှု, Giao lại - Lần 1, ការដឹកជញ្ជូនឡើងវិញ - ការប៉ុនប៉ងលើកទី 1, Pengiriman ulang - Percobaan pertama, 재배송 - 첫 번째 시도
-Redelivery - 2nd Attempt,Redelivery - 2nd Attempt, การส่งซ้ำ - ความพยายามครั้งที่ 2, 重新投遞 - 第二次嘗試, ပြန်လည်ပေးပို့ခြင်း - ဒုတိယကြိုးစားမှု, Giao lại - Lần 2, ការដឹកជញ្ជូនឡើងវិញ - ការប៉ុនប៉ងទី 2, Pengiriman ulang - Percobaan kedua, 재배송 - 두 번째 시도
-Redelivery - 3rd Attempt,Redelivery - 3rd Attempt, การส่งซ้ำ - ความพยายามครั้งที่ 3, 再次投遞 - 第三次嘗試, ပြန်လည်ပေးပို့ခြင်း - တတိယမြောက် ကြိုးစားမှု, Giao lại - Lần 3, ការដឹកជញ្ជូនឡើងវិញ - ការប៉ុនប៉ងទី 3, Pengiriman ulang - Percobaan ketiga, 재배송 - 세 번째 시도
+Pod handover,POD handover, การส่งมอบ POD, POD 移交, POD လက်ဆင့်ကမ်း, Chuyển giao POD, ការប្រគល់ POD, Serah Terima POD, POD 인계
+Receive At crossdock/platforms,Receive at crossdock/platforms, รับที่ Crossdock/แพลตฟอร์ม, 在越庫/平台接收, Crossdock/ Platforms တွင် လက်ခံပါ။, Nhận tại Crossdock/Nền tảng, ទទួលនៅ Crossdock/Platforms, Menerima di Crossdock/Platform, 크로스독/플랫폼에서 수령
+Redelivery - 1st attempt,Redelivery - 1st attempt, การส่งซ้ำ - ความพยายามครั้งที่ 1, 再次投遞 - 第一次嘗試, ပြန်လည်ပေးပို့ခြင်း - ပထမကြိုးစားမှု, Giao lại - Lần 1, ការដឹកជញ្ជូនឡើងវិញ - ការប៉ុនប៉ងលើកទី 1, Pengiriman ulang - Percobaan pertama, 재배송 - 첫 번째 시도
+Redelivery - 2nd attempt,Redelivery - 2nd attempt, การส่งซ้ำ - ความพยายามครั้งที่ 2, 重新投遞 - 第二次嘗試, ပြန်လည်ပေးပို့ခြင်း - ဒုတိယကြိုးစားမှု, Giao lại - Lần 2, ការដឹកជញ្ជូនឡើងវិញ - ការប៉ុនប៉ងទី 2, Pengiriman ulang - Percobaan kedua, 재배송 - 두 번째 시도
+Redelivery - 3rd attempt,Redelivery - 3rd attempt, การส่งซ้ำ - ความพยายามครั้งที่ 3, 再次投遞 - 第三次嘗試, ပြန်လည်ပေးပို့ခြင်း - တတိယမြောက် ကြိုးစားမှု, Giao lại - Lần 3, ការដឹកជញ្ជូនឡើងវិញ - ការប៉ុនប៉ងទី 3, Pengiriman ulang - Percobaan ketiga, 재배송 - 세 번째 시도
 You do not have access to view this order,You do not have access to view this order,คุณไม่มีสิทธิ์ในการดูคำสั่งซื้อนี้,您無權查看此訂單,သင်ဤအမှာစာကို ကြည့်ရှုရန် ခွင့်ပြုချက်မရှိပါ,Bạn không có quyền truy cập để xem đơn hàng này,អ្នកមិនមានសិទ្ធិមើលការបញ្ជាទិញនេះទេ,Anda tidak memiliki akses untuk melihat pesanan ini,이 주문을 볼 수 있는 권한이 없습니다
 Save to gallery,Save to gallery,บันทึกลงแกลเลอรี,儲存到相冊,မြန်မာစက်မှ သိမ်းမှတ်ရန်,Lưu vào bộ sưu tập,រក្សាទុកទំព័ររូបភាព,Simpan ke galeri,갤러리에 저장
 National Privacy Commission,National Privacy Commission,คณะกรรมการความเป็นส่วนตัวแห่งชาติ,國家隱私委員會,အမျိုးသားပေးခြင်းနှင့် မြန်မာနိုင်ငံတက္ကသိုလ်,Ủy ban Quốc gia về Bảo vệ Quyền riêng tư,គណៈអភិបាលសមាជិកបរិជ្ជារិយោធ,Komisi Privasi Nasional,국가 개인정보 보호 위원회
