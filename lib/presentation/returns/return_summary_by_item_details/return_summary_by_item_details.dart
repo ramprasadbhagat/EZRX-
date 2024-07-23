@@ -10,6 +10,7 @@ import 'package:ezrxmobile/presentation/core/snack_bar/custom_snackbar.dart';
 import 'package:ezrxmobile/presentation/returns/return_summary_by_item_details/widgets/return_summary_details_section.dart';
 import 'package:ezrxmobile/presentation/returns/widgets/return_item_card.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
+import 'package:ezrxmobile/presentation/theme/theme_data.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -37,8 +38,7 @@ class ReturnRequestSummaryByItemDetails extends StatelessWidget {
         listenWhen: (previous, current) =>
             previous.isLoading != current.isLoading ||
             (previous.downloadedAttachment != current.downloadedAttachment &&
-                current.downloadedAttachment !=
-                    PoDocuments.empty()),
+                current.downloadedAttachment != PoDocuments.empty()),
         listener: (context, state) {
           state.failureOrSuccessOption.fold(
             () {},
@@ -84,12 +84,12 @@ class ReturnRequestSummaryByItemDetails extends StatelessWidget {
                       ),
                       const Divider(
                         indent: 0,
-                        height: 20,
+                        height: padding24,
                         endIndent: 0,
                         color: ZPColors.lightGray2,
                       ),
                       Padding(
-                        padding: const EdgeInsets.all(16),
+                        padding: const EdgeInsets.all(padding12),
                         child: ReturnItemCard(
                           returnRequestInformation: state.requestInformation,
                           downloadingAttachments: state.downloadingAttachments,

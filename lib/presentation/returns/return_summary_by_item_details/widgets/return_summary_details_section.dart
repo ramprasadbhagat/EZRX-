@@ -8,6 +8,7 @@ import 'package:ezrxmobile/presentation/core/status_tracker.dart';
 import 'package:ezrxmobile/presentation/core/widget_keys.dart';
 import 'package:ezrxmobile/presentation/returns/return_summary_request_details/widgets/return_status_section.dart';
 import 'package:ezrxmobile/presentation/theme/colors.dart';
+import 'package:ezrxmobile/presentation/theme/theme_data.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -56,12 +57,12 @@ class ReturnSummaryDetailsSection extends StatelessWidget {
         ),
         const Divider(
           indent: 0,
-          height: 20,
+          height: padding24,
           endIndent: 0,
           color: ZPColors.lightGray2,
         ),
         Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding: const EdgeInsets.all(padding12),
           child: AddressInfoSection.returnRequest(),
         ),
       ],
@@ -86,7 +87,7 @@ class _ReturnDetailsSectionState extends State<_ReturnDetailsSection> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 16),
+      padding: const EdgeInsets.all(padding12),
       color: ZPColors.primary,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -103,7 +104,7 @@ class _ReturnDetailsSectionState extends State<_ReturnDetailsSection> {
                       ?.copyWith(color: ZPColors.white),
                 ),
               ),
-              const SizedBox(width: 10),
+              const SizedBox(width: padding12),
               TextButton(
                 onPressed: () async {
                   if (!isCopied) {
@@ -134,7 +135,7 @@ class _ReturnDetailsSectionState extends State<_ReturnDetailsSection> {
           ),
           if (widget.requestInformation.isMarketPlace)
             Padding(
-              padding: const EdgeInsets.only(top: 5, bottom: 13),
+              padding: const EdgeInsets.only(top: padding6, bottom: padding12),
               child: MarketPlaceSellerWithLogo.elevated(
                 widget.requestInformation.principalName.name,
               ),
