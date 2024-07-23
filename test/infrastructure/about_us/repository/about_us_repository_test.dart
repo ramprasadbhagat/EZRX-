@@ -45,7 +45,8 @@ void main() {
   group('AboutUsRepository tests', () {
     test('get AboutUs Info successfully local', () async {
       when(
-        () => aboutUsLocalDataSource.getAboutUsStaticInfo(fakeSalesOrg.country),
+        () => aboutUsLocalDataSource
+            .getAboutUsStaticInfo(fakeSalesOrg.aboutUsMockFile),
       ).thenAnswer((invocation) async => AboutUs.empty());
 
       final result = await aboutUsRepository.getAboutUsInfo(
@@ -58,7 +59,8 @@ void main() {
     });
     test('get AboutUs Info fail local', () async {
       when(
-        () => aboutUsLocalDataSource.getAboutUsStaticInfo(fakeSalesOrg.country),
+        () => aboutUsLocalDataSource
+            .getAboutUsStaticInfo(fakeSalesOrg.aboutUsMockFile),
       ).thenThrow(MockException());
 
       final result = await aboutUsRepository.getAboutUsInfo(
@@ -93,7 +95,8 @@ void main() {
 
     test('get About Us Static Info successfully', () async {
       when(
-        () => aboutUsLocalDataSource.getAboutUsStaticInfo(fakeSalesOrg.country),
+        () => aboutUsLocalDataSource
+            .getAboutUsStaticInfo(fakeSalesOrg.aboutUsMockFile),
       ).thenAnswer((invocation) async => AboutUs.empty());
 
       final result = await aboutUsRepository.getAboutUsStaticInfo(
@@ -114,7 +117,7 @@ void main() {
       () async {
         when(
           () => aboutUsLocalDataSource.getAboutUsStaticInfo(
-            fakeSalesOrg.country,
+            fakeSalesOrg.aboutUsMockFile,
           ),
         ).thenThrow(MockException());
         final result = await aboutUsRepository.getAboutUsStaticInfo(

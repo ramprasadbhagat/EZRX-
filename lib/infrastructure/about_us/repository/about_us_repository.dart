@@ -24,8 +24,8 @@ class AboutUsRepository extends IAboutUsRepository {
   }) async {
     if (config.appFlavor == Flavor.mock) {
       try {
-        final aboutUsInfo =
-            await localDataSource.getAboutUsStaticInfo(salesOrg.country);
+        final aboutUsInfo = await localDataSource
+            .getAboutUsStaticInfo(salesOrg.aboutUsMockFile);
 
         return Right(aboutUsInfo);
       } catch (e) {
@@ -55,7 +55,7 @@ class AboutUsRepository extends IAboutUsRepository {
   }) async {
     try {
       final aboutUsStaticInfo =
-          await localDataSource.getAboutUsStaticInfo(salesOrg.country);
+          await localDataSource.getAboutUsStaticInfo(salesOrg.aboutUsMockFile);
 
       return Right(aboutUsStaticInfo);
     } catch (e) {

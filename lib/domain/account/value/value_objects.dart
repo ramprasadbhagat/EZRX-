@@ -214,6 +214,8 @@ class SalesOrg extends ValueObject<String> {
 
   bool get displayViewByOrderFilterByStatus => isID;
 
+  String get aboutUsMockFile => 'aboutUs${country}marketStaticContent.json';
+
   const SalesOrg._(this.value);
 }
 

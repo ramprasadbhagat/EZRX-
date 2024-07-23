@@ -16,14 +16,14 @@ class AboutUsRepositoryRepo extends Mock implements AboutUsRepository {}
 void main() {
   late AboutUsRepositoryRepo repository;
   late AboutUs aboutUs;
-  final salesOrg = fakeMYSalesOrg;
+  final salesOrg = fakeSGSalesOrg;
   final aboutUsState = AboutUsState.initial().copyWith(salesOrg: salesOrg);
 
   setUpAll(() async {
     WidgetsFlutterBinding.ensureInitialized();
     repository = AboutUsRepositoryRepo();
-    aboutUs =
-        await AboutUsLocalDataSource().getAboutUsStaticInfo(salesOrg.country);
+    aboutUs = await AboutUsLocalDataSource()
+        .getAboutUsStaticInfo(salesOrg.aboutUsMockFile);
   });
 
   group('About Us Bloc', () {

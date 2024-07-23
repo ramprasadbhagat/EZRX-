@@ -49,7 +49,7 @@ void main() {
     eligibilityBloc = EligibilityBlockMock();
     appRouter = locator<AppRouter>();
     aboutUs = (await AboutUsLocalDataSource()
-            .getAboutUsStaticInfo(fakeMYSalesOrg.country))
+            .getAboutUsStaticInfo(fakeSGSalesOrg.aboutUsMockFile))
         .copyWith(
       banner: BannerTemplate.empty(),
       ourPartners: MediaListTemplate.empty(),
