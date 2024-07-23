@@ -3271,6 +3271,31 @@ void main() {
           expect(tenderContracts, findsNothing);
         });
 
+        testWidgets(
+          ' Tender tag should not display outside safe area',
+          (tester) async {
+            when(() => productDetailMockBloc.state).thenReturn(
+              ProductDetailState.initial().copyWith(
+                productDetailAggregate: ProductDetailAggregate.empty().copyWith(
+                  materialInfo: materialInfo.copyWith(
+                    hasValidTenderContract: true,
+                    hasMandatoryTenderContract: false,
+                  ),
+                ),
+              ),
+            );
+
+            await tester.pumpWidget(getScopedWidget());
+            await tester.pumpAndSettle();
+
+            final titleTag = find.text('Tender Available'.tr());
+            expect(titleTag, findsOneWidget);
+
+            final center = tester.getCenter(titleTag);
+            expect(center.dy, greaterThanOrEqualTo(kToolbarHeight));
+          },
+        );
+
         testWidgets('Tender Contract Item', (tester) async {
           when(() => productDetailMockBloc.state).thenReturn(
             ProductDetailState.initial().copyWith(

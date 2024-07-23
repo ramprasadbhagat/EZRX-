@@ -51,24 +51,26 @@ class _ProductImageSection extends StatelessWidget {
                   ),
                 ),
                 Positioned(
-                  top: 0,
+                  top: kToolbarHeight,
                   left: 0,
-                  child: Column(
-                    children: [
-                      if (materialInfo.hasValidTenderContract)
-                        const TenderTag(),
-                      CovidLabel(
-                        materialInfo: materialInfo,
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 16,
-                          vertical: 8,
+                  child: SafeArea(
+                    child: Column(
+                      children: [
+                        if (materialInfo.hasValidTenderContract)
+                          const TenderTag(),
+                        CovidLabel(
+                          materialInfo: materialInfo,
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 16,
+                            vertical: 8,
+                          ),
+                          borderRadius: const BorderRadius.only(
+                            topRight: Radius.circular(20.0),
+                            bottomRight: Radius.circular(20.0),
+                          ),
                         ),
-                        borderRadius: const BorderRadius.only(
-                          topRight: Radius.circular(20.0),
-                          bottomRight: Radius.circular(20.0),
-                        ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               ],
