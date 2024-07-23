@@ -43,7 +43,9 @@ class ViewByOrderDetailsPage extends StatelessWidget {
     final eligibilityState = context.read<EligibilityBloc>().state;
 
     return BlocBuilder<ViewByOrderDetailsBloc, ViewByOrderDetailsState>(
-      buildWhen: (previous, current) => previous.isLoading != current.isLoading,
+      buildWhen: (previous, current) =>
+          previous.isLoading != current.isLoading ||
+          previous.isFetchingInvoices != current.isFetchingInvoices,
       builder: (context, state) {
         return Scaffold(
           appBar: CustomAppBar.commonAppBar(
